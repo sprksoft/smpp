@@ -30,8 +30,18 @@ body{
     color: var(--color-text) !important;
 
 }
+
 .homepage__block{
   border-bottom: var(--homepage-border-size) solid var(--color-base01) !important;
+}
+.homepage__block__content{
+	display: none !important;
+}
+.homepage__block__top{
+	display: none !important;
+}
+.homepage__block{
+	display: none !important;
 }
 
 /*NAV*/
@@ -58,6 +68,10 @@ nav {
 .smsc-topnav .topnav__menu{
   background-color: var(--color-base01) !important;
 }
+.smscButton {
+	background-color: var(--color-base02) !important;
+	color: var(--color-accent) !important;
+}
 
 /*OTHER*/
 
@@ -74,4 +88,8 @@ a:hover {
 }
 a:focus {
     text-decoration: underline;
+}
+::selection {
+    background: #b6b6b6 !important;
+    text-shadow: none;
 }
