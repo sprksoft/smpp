@@ -27,6 +27,10 @@ body{
   border-left: var(--homepage-border-size) solid var(--color-base01);
   border-right: var(--homepage-border-size) solid var(--color-base01);
 }
+.student-support-block__item.icon-label .icon-label__text {
+    color: var(--color-text) !important;
+
+}
 .homepage__block{
   border-bottom: var(--homepage-border-size) solid var(--color-base01) !important;
 }
@@ -41,6 +45,9 @@ nav {
   border-radius: 50px !important;
   background: var(--color-base01) !important;
   padding: 2px 10px 2px 10px !important;
+}
+.smsc-topnav .topnav__menu{
+  background-color: var(--color-base01) !important;
 }
 
 /*OTHER*/
