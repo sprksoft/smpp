@@ -5,9 +5,6 @@
   "name": "sm++",
   "version": "1.0",
   "homepage_url": "https://github.com/Xgames123/smpp",
-  "icons": {
-    "48": "icons/smpp.png"
-  },
 
   "content_scripts": [
     {
