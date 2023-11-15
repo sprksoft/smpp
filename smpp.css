@@ -53,7 +53,10 @@ nav {
   height:auto !important;
   gap: 1rem !important;
   border-bottom: var(--homepage-border-size) solid var(--color-base01);
+  margin-left: 1rem !important;
+  margin-right: 1rem !important;
 }
+
 .topnav__menu-arrow{
   display: none;
 }
