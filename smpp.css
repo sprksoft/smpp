@@ -96,8 +96,31 @@ nav {
 .login-app__school-logo{
   display: none !important;
 }
-.login-app__title--sign-in-with, span{
+.login-app__title--sign-in-with{
   color: var(--color-text) !important;
+}
+
+/*PLANNER*/
+
+.header__day{
+  color: var(--color-text) !important;
+}
+.timegrid__header .header__days-heading .header__day--today {
+  background-color: var(--color-base02) !important;
+}
+.highlight.header__day:not(.header__wholeday-column) {
+  background: var(--color-accent) !important;
+}
+.highlight.header__day:not(.header__wholeday-column) > .day,
+.highlight.header__day:not(.header__wholeday-column) > .day--thin{
+  color: var(--color-base02) !important;
+}
+.highlight{
+  background: var(--color-base01) !important;
+}
+
+.icon-label-btn--linkbutton .icon-label{
+  color: var(--color-accent) !important;
 }
 
 /*OTHER*/
@@ -130,6 +153,7 @@ a:focus {
 	background-color: var(--color-base02) !important;
 	color: var(--color-accent) !important;
 }
+
 
 
 /*CUSTOM HTML*/
