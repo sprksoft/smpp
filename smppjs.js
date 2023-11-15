@@ -35,6 +35,7 @@ function init_dmenu(){
 }
 
 init_dmenu();
+document.getElementsByClassName("js-btn-logout")[0].innerHTML = "Logout -->"
 
 document.addEventListener("keyup", function(e){
   console.log(e);
