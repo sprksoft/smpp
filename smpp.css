@@ -5,8 +5,9 @@ html{
   --color-base00: #191817;
   --color-base01: #232020;
   --color-base02: #3f3c3b;
+  --color-base03: #5b5756;
 
-  --homepage-border-size: 3px;
+  --homepage-border-size: 2px;
 }
 
 body{
@@ -17,9 +18,12 @@ body{
 #rightcontainer, #homepage__block--google{
   display: none;
 }
-
-.js-btn-profile > img, .header__avatar{
-  display: none;
+/*DELETE HEAD*/
+.js-btn-profile > img,
+.header__avatar,
+.topnav__menuitem > img,
+.splitdetail__header__avatar > img{
+  display: none !important;
 }
 
 #centercontainer {
@@ -27,8 +31,7 @@ body{
   border-right: var(--homepage-border-size) solid var(--color-base01);
 }
 .student-support-block__item.icon-label .icon-label__text {
-    color: var(--color-text) !important;
-
+  color: var(--color-text) !important;
 }
 
 .homepage__block{
@@ -48,6 +51,10 @@ body{
 nav {
   background: transparent !important;
   height:auto !important;
+  gap: 1rem !important;
+}
+.topnav__menu-arrow{
+  display: none;
 }
 .topnav__btn{
   border: 2px solid var(--color-base02) !important;
@@ -67,13 +74,30 @@ nav {
 }
 .smsc-topnav .topnav__menu{
   background-color: var(--color-base01) !important;
-}
-.smscButton {
-	background-color: var(--color-base02) !important;
-	color: var(--color-accent) !important;
+  border: 2px solid var(--color-accent) !important;
 }
 .menu-divider::before {
   background-color: var(--color-accent) !important;
+}
+.js-btn-search, .js-btn-manual {
+  display: none !important;
+}
+.js-btn-logout::before {
+  content: "Logout" !important;
+}
+
+/*LOGIN PAGE*/
+.login-app__platform-indicator{
+  background-color: var(--color-accent) !important;
+}
+.login-app__bottom{
+  background-image: none;
+}
+.login-app__school-logo{
+  display: none !important;
+}
+.login-app__title--sign-in-with, span{
+  color: var(--color-text) !important;
 }
 
 /*OTHER*/
@@ -95,4 +119,14 @@ a:focus {
 ::selection {
     background: #b6b6b6 !important;
     text-shadow: none;
+}
+
+.smscButton:hover{
+  border: var(--homepage-border-size) solid var(--color-accent) !important;
+}
+
+.smscButton, .float-label__input {
+  border: var(--homepage-border-size) solid var(--color-base03) !important;
+	background-color: var(--color-base02) !important;
+	color: var(--color-accent) !important;
 }
