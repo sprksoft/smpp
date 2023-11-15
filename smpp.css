@@ -72,6 +72,9 @@ nav {
 	background-color: var(--color-base02) !important;
 	color: var(--color-accent) !important;
 }
+.menu-divider::before {
+  background-color: var(--color-accent) !important;
+}
 
 /*OTHER*/
 
