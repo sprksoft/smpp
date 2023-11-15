@@ -130,3 +130,27 @@ a:focus {
 	background-color: var(--color-base02) !important;
 	color: var(--color-accent) !important;
 }
+
+
+/*CUSTOM HTML*/
+.dmenu{
+  position: absolute;
+  left: 20%;
+  right: 20%;
+  top: 10%;
+  bottom: 10%;
+
+  background-color: var(--color-base01);
+  border: var(--homepage-border-size) solid var(--color-accent);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  overflow:hidden;
+}
+.dmenu > input{
+  background: var(--color-base03);
+  border: 2px solid var(--color-accent);
+}
+.dmenu-hidden{
+  display: none;
+}
