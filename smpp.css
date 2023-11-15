@@ -79,6 +79,7 @@ nav {
 }
 .menu-divider::before {
   background-color: var(--color-accent) !important;
+  height: var(--homepage-border-size) !important;
 }
 .js-btn-search, .js-btn-manual {
   display: none !important;
@@ -91,6 +92,14 @@ nav {
 #folders_parent_td, .toolbar{
   background-color:var(--color-base00);
   border-right: var(--homepage-border-size) solid var(--color-base01);
+}
+.toolbar__line{
+  background: var(--color-accent) !important;
+  width: var(--homepage-border-size) !important;
+}
+.toolbar__line:before, .toolbar__line:after{
+  background: var(--color-accent) !important;
+  height: var(--homepage-border-size) !important;
 }
 
 /*LOGIN PAGE*/
