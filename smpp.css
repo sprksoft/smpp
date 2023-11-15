@@ -52,6 +52,7 @@ nav {
   background: transparent !important;
   height:auto !important;
   gap: 1rem !important;
+  border-bottom: var(--homepage-border-size) solid var(--color-base01);
 }
 .topnav__menu-arrow{
   display: none;
@@ -84,6 +85,12 @@ nav {
 }
 .js-btn-logout::before {
   content: "Logout" !important;
+}
+
+/*MESSAGES*/
+#folders_parent_td, .toolbar{
+  background-color:var(--color-base00);
+  border-right: var(--homepage-border-size) solid var(--color-base01);
 }
 
 /*LOGIN PAGE*/
