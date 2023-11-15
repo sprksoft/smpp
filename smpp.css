@@ -106,7 +106,7 @@ nav {
   background-color: var(--color-accent) !important;
 }
 .login-app__bottom{
-  background-image: none;
+  background-image: none !important;
 }
 .login-app__school-logo{
   display: none !important;
