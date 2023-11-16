@@ -184,7 +184,8 @@ body {
 .ui-widget-content,
 .message-search__wrapper,
 .smsc-select-bubble,
-.smsc_cm_body{
+.smsc_cm_body,
+.course-session-page__container{
   background-color: var(--color-base01) !important;
   border-color: var(--color-base02) !important;
 }
