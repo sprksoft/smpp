@@ -56,7 +56,11 @@ nav {
   margin-left: 1rem !important;
   margin-right: 1rem !important;
 }
-
+.smsc-topnav .topnav__badge{
+  background-color: var(--color-accent) !important;
+  color: var(--color-base03) !important;
+  border: var(--border-size) solid var(--color-base03) !important;
+}
 .topnav__menu-arrow{
   display: none;
 }
@@ -80,6 +84,7 @@ nav {
 .smsc-topnav .topnav__menu{
   background-color: var(--color-base01) !important;
   border: 2px solid var(--color-accent) !important;
+  overflow: hidden !important;
 }
 .menu-divider::before {
   background-color: var(--color-accent) !important;
@@ -167,7 +172,7 @@ a:focus {
   background-color: var(--color-base02)!important;
 }
 
-.smscButton, .float-label__input {
+.smscButton, .float-label__input, .input-search {
   border: var(--border-size) solid var(--color-base03) !important;
 	background-color: var(--color-base02) !important;
 	color: var(--color-accent) !important;
