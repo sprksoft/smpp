@@ -168,7 +168,7 @@ nav {
 }
 
 /*MESSAGES*/
-#folders_parent_td, .toolbar{
+#folders_parent_td, .toolbar,.msgContent,#msgcell{
   background-color:var(--color-base00)!important;
   border-right: var(--border-size) solid var(--color-base01)!important;
 }
