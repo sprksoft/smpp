@@ -172,7 +172,7 @@ a:focus {
   background-color: var(--color-base02)!important;
 }
 
-.smscButton, .float-label__input {
+.smscButton, .float-label__input, .input-search {
   border: var(--border-size) solid var(--color-base03) !important;
 	background-color: var(--color-base02) !important;
 	color: var(--color-accent) !important;
