@@ -53,8 +53,8 @@ async function get_all_scores() {
   json.forEach(async thing => {
     let scores = await get_scores(thing.identifier);
     scores_class.push({
+      scores: scores,
       name: thing.name,
-      scores: scores
     });
   });
   return scores_class;
@@ -68,15 +68,35 @@ async function get_scores(id){
   }
   let scores=[];
   json.details.projectGoals.forEach(goal => {
-    scores.push(goal.graphic.color);
+    scores.push({
+      name: goal.graphic.color,
+      imgurl: "https://static6.smart-school.net/smsc/svg/bullet_square_blue/"+goal.graphic.value+"_24x24.svg",
+    });
   });
   return scores;
 }
+function get_score_from_list(array, name) {
+  console.log(name);
+  console.log(array);
+  console.log(array.length);
+  for (let i = 0; i < array.length; i++) {
+    const element = array[i];
+    if (element.name === name){
+      return element;
+    }
+  }
+  return undefined;
+}
 async function set_scores_on_thingys() {
   let scores = await get_all_scores();
-  document.getElementsByClassName("evaluation-list-item").forEach(element => {
-    element
-  });
-}
-main()
+  let thingys = document.getElementsByClassName("evaluation-list-item");
 
+  for (let i = 0; i < thingys.length; i++){
+    let thingy = thingys[i];
+    let name = thingy.querySelector(".evaluation-list-item__container > *").innerText;
+    let score = get_score_from_list(scores, name)[0];
+    thingy.querySelector(".evaluation-graphic > .graphic--icon").style="background-image: url("+score.imgurl+")!important;";
+  }
+}
+
+set_scores_on_thingys()
