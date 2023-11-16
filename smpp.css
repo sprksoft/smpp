@@ -56,7 +56,11 @@ nav {
   margin-left: 1rem !important;
   margin-right: 1rem !important;
 }
-
+.smsc-topnav .topnav__badge{
+  background-color: var(--color-accent) !important;
+  color: var(--color-base03) !important;
+  border: var(--border-size) solid var(--color-base03) !important;
+}
 .topnav__menu-arrow{
   display: none;
 }
