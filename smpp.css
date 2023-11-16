@@ -11,6 +11,7 @@ html {
   --color-green: #3c9534;
   --color-orange: #ce6c4a;
   --border-size: 2px;
+
 }
 
 body {
@@ -137,7 +138,8 @@ body {
 .evaluation-list-item:hover,
 .dropdown-button:hover,
 .goals-filter__item:hover,
-.selected {
+.selected,
+.smscleftnavcontainer{
   background-color: var(--color-base01) !important;
   color: var(--color-text) !important;
   box-shadow: none !important;
@@ -177,7 +179,12 @@ body {
   display: none!important;
 }
 /*Doelen*/
-.row--course .cell--spacer {
+.row--course .cell--spacer,
+.smsc-contextmenu-bubble,
+.ui-widget-content,
+.message-search__wrapper,
+.smsc-select-bubble,
+.smsc_cm_body{
   background-color: var(--color-base01) !important;
   border-color: var(--color-base02) !important;
 }
@@ -185,6 +192,9 @@ body {
 .cell__content {
   background-color: var(--color-base01) !important;
   padding-left: 20px !important;
+}
+.detail{
+  padding: 10px !important;
 }
 
 .c-steel-combo--100,
@@ -240,7 +250,7 @@ nav {
   border-bottom: 1px solid var(--color-base02) !important;
 }
 
-.notification__title {
+.notification__title{
   color: var(--color-text) !important;
 }
 
@@ -354,9 +364,14 @@ nav {
   width: var(--border-size) !important;
 }
 
-.context-menu {
+.context-menu,
+.message-search__input,
+.smsc-select.disabled{
   background-color: var(--color-base02) !important;
-
+  color: var(--color-text) !important;
+}
+.ui-widget-content {
+  color: var(--color-text) !important;
 }
 
 .toolbar__line:before,
@@ -384,7 +399,8 @@ nav {
   display: none !important;
 }
 
-.login-app__title--sign-in-with {
+.login-app__title--sign-in-with,
+.attachmentList__list .attachment__title__label { 
   color: var(--color-text) !important;
 }
 
