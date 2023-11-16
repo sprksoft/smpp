@@ -36,18 +36,47 @@ function init_dmenu(){
 }
 
 init_dmenu();
-document.getElementsByClassName("js-btn-logout")[0].innerHTML = "Logout -->"
-
 document.addEventListener("keyup", function(e){
   console.log(e);
   if (e.key == ':'){
     dmenu(["unbloat"]);
   }
 });
-async function GetResults(){
-    let results = await fetch("https://takeerbergen.smartschool.be/goal/selector/api/v1/leerplannen/results/2023-11-14")
-    results = results.json()
-console.log(results)
+
+
+document.getElementsByClassName("js-btn-logout")[0].innerHTML = "Logout -->"
+
+async function get_all_scores() {
+  let response = await fetch("https://takeerbergen.smartschool.be/results/api/v1/evaluations/");
+  let json = await response.json();
+  scores_class=[]
+  json.forEach(async thing => {
+    let scores = await get_scores(thing.identifier);
+    scores_class.push({
+      name: thing.name,
+      scores: scores
+    });
+  });
+  return scores_class;
 }
-GetResults()
+
+async function get_scores(id){
+  let responce = await fetch("https://takeerbergen.smartschool.be/results/api/v1/evaluations/"+id)
+  let json = await responce.json();
+  if (json === undefined){
+    return [];
+  }
+  let scores=[];
+  json.details.projectGoals.forEach(goal => {
+    scores.push(goal.graphic.color);
+  });
+  return scores;
+}
+async function set_scores_on_thingys() {
+  let scores = await get_all_scores();
+  document.getElementsByClassName("evaluation-list-item").forEach(element => {
+    element
+  });
+}
+main()
 
