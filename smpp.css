@@ -99,7 +99,9 @@ nav {
 .js-btn-search, .js-btn-manual {
   display: none !important;
 }
-
+.js-course-filters, .course-btnbar{
+  display: none !important;
+}
 
 /*MESSAGES*/
 #folders_parent_td, .toolbar{
