@@ -106,7 +106,7 @@ display: none!important;
 .table-page .table-page__container__wrapper__table .cell {
   border-color: var(--color-base02) !important;
 }
-body, button, input, select, textarea {
+body, button, input, select, textarea,.modern-message__name,.modern-message__subject {
   color: var(--color-accent) !important;
 }
 .row--course:not(:last-child) .cell__course-name {
