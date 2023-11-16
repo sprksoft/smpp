@@ -46,6 +46,12 @@ body{
 .homepage__block{
 	display: none !important;
 }
+/*RESULTS*/
+.evaluation-list-item{
+  background-color: var(--color-base02)!important;
+  color: var(--color-text)!important;
+  border-color: var(--color-accent)!important;
+}
 
 /*NAV*/
 nav {
@@ -64,7 +70,7 @@ nav {
 .topnav__menu-arrow{
   display: none;
 }
-.topnav__btn{
+.topnav__btn,.token{
   border: 2px solid var(--color-base02) !important;
   border-radius: 50px !important;
   background: var(--color-base01) !important;
@@ -169,6 +175,9 @@ a:focus {
 
 .smscButton:hover, .topnav__menuitem:hover{
   border: var(--border-size) solid var(--color-accent) !important;
+  background-color: var(--color-base02)!important;
+}
+.notification__btn:hover{
   background-color: var(--color-base02)!important;
 }
 .topnav__menuitem{
