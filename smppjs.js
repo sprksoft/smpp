@@ -74,7 +74,7 @@ async function get_scores(id){
   });
   return scores;
 }
-function get_score_from_list(array, name) {
+async function get_score_from_list(array, name) {
   console.log(name);
   console.log(array);
   console.log(array.length);
@@ -88,12 +88,13 @@ function get_score_from_list(array, name) {
 }
 async function set_scores_on_thingys() {
   let scores = await get_all_scores();
+  console.log(scores);
   let thingys = document.getElementsByClassName("evaluation-list-item");
 
   for (let i = 0; i < thingys.length; i++){
     let thingy = thingys[i];
     let name = thingy.querySelector(".evaluation-list-item__container > *").innerText;
-    let score = get_score_from_list(scores, name)[0];
+    let score = await get_score_from_list(scores, name)[0];
     thingy.querySelector(".evaluation-graphic > .graphic--icon").style="background-image: url("+score.imgurl+")!important;";
   }
 }
