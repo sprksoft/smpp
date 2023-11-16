@@ -6,7 +6,7 @@ function unbloat() {
   document.body.innerHTML = '';
 }
 
-
+document.getElementsByClassName("login-app__left")[0].innerHTML = '';
 function dmenu(params) {
   let dmenu = document.getElementById("dmenu");
   dmenu.classList.remove("dmenu-hidden");
