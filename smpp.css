@@ -27,10 +27,10 @@ body{
 }
 
 #centercontainer {
-  border-left: var(--border-size) solid var(--color-base01);
-  border-right: var(--border-size) solid var(--color-base01);
+  border-left: var(--border-size) solid var(--color-base01)!important;
+  border-right: var(--border-size) solid var(--color-base01)!important;
 }
-.student-support-block__item.icon-label .icon-label__text {
+.student-support-block__item.icon-label, .icon-label__text,.checkbox--select-all {
   color: var(--color-text) !important;
 }
 
@@ -44,21 +44,98 @@ body{
 .homepage__block{
 	display: none !important;
 }
+/*RESULTS*/
+.wide-toolbar{
+  background-color: var(--color-base00)!important;
+  color: var(--color-text)!important;
+}
+.wide-toolbar__item:after, .wide-toolbar__item:before {
+display: none!important;
+}
+.checkbox{
+  color: var(--color-base01)!important;
+}
+.wide-toolbar__item{
+  background-color: var(--color-base00)!important;
+  color: var(--color-text)!important;
+  border: var(--border-size)solid var(--color-base02) !important;
+  border-radius: 10px !important;
+  margin: auto!important;
+  margin-left: 3px!important;
+  margin-right: 3px!important;
+}
+.wide-toolbar__item:hover{
+
+  border-color: var(--color-accent)!important;
+}
+.title--1,.title--5{
+  color: var(--color-text)!important;
+}
+.title--2{
+  color: var(--color-accent)!important;
+}
+
+
+.js-emptystate,.side-panel__panel{
+  background-color: var(--color-base00) !important;
+  box-shadow: none!important;
+  color: var(--color-text)!important;
+}
+.evaluation-list-item,.dropdown-button,.goals-filter__item,.contentContainer,.content_container,.toolbar,.navigation_container{
+  background-color: var(--color-base01)!important;
+  color: var(--color-text)!important;
+  border-color: var(--color-base02)!important;
+}
+.evaluation-list-item:hover,.dropdown-button:hover,.goals-filter__item:hover,.selected{
+  background-color: var(--color-base01)!important;
+  color: var(--color-text)!important;
+  box-shadow: none!important;
+  border-color: var(--color-accent)!important;
+}
+/*Doelen*/
+.row--course .cell--spacer {
+  background-color: var(--color-base01)!important;
+  border-color: var(--color-base02)!important;
+}
+.cell__content {
+  background-color: var(--color-base01)!important;
+}
+.c-steel-combo--100, .c-steel-combo-hover--100 {
+  background-color: var(--color-base01)!important;
+}
+.table-page .table-page__container__wrapper__table .cell {
+  border-color: var(--color-base02) !important;
+}
+body, button, input, select, textarea {
+  color: var(--color-accent) !important;
+}
+.row--course:not(:last-child) .cell__course-name {
+  border-bottom-color: var(--color-base02) !important;
+}
+
 
 /*NAV*/
 nav {
   background: transparent !important;
   height:auto !important;
   gap: 1rem !important;
-  border-bottom: var(--border-size) solid var(--color-base01);
+  border-bottom: var(--border-size) solid var(--color-base01) !important;
   margin-left: 1rem !important;
   margin-right: 1rem !important;
 }
-
+.smsc-topnav .topnav__badge{
+  background-color: var(--color-accent) !important;
+  color: var(--color-base03) !important;
+  border: var(--border-size) solid var(--color-base03) !important;
+}
 .topnav__menu-arrow{
   display: none;
 }
-.topnav__btn{
+.notifs__hdr button:focus:not(.focus-ring) {
+  border: var(--color-accent)!important;
+  box-shadow: none !important;
+}
+.topnav__btn,.token{
   border: 2px solid var(--color-base02) !important;
   border-radius: 50px !important;
   background: var(--color-base01) !important;
@@ -75,18 +152,20 @@ nav {
   cursor: pointer !important;
   text-decoration: underline !important;
 }
-.smsc-topnav .topnav__menu{
+.smsc-topnav .topnav__menu,.bubble,.notification{
   background-color: var(--color-base01) !important;
   border: 2px solid var(--color-accent) !important;
+  overflow: hidden !important;
+  transition: none !important;
 }
+
 .menu-divider::before {
   background-color: var(--color-accent) !important;
   height: var(--border-size) !important;
 }
-.js-btn-search, .js-btn-manual {
+.js-course-filters, .course-btnbar,.js-btn-search, .js-btn-manual {
   display: none !important;
 }
-
 
 /*MESSAGES*/
 #folders_parent_td, .toolbar{
@@ -104,7 +183,7 @@ nav {
 
 /*LOGIN PAGE*/
 .login-app__platform-indicator{
-  background-color: var(--color-accent) !important;
+  background-color: var(--color-base00) !important;
 }
 .login-app__bottom{
   background-image: none !important;
@@ -114,6 +193,14 @@ nav {
 }
 .login-app__title--sign-in-with{
   color: var(--color-text) !important;
+}
+.login-app__left{
+background-image: url("https://i.redd.it/psn2mwul2c971.jpg")!important;
+background-position: center!important;
+background-size:cover !important;
+}
+.login-app__left > *{
+  display: none!important;
 }
 
 /*PLANNER*/
@@ -177,8 +264,13 @@ a:focus {
   border: var(--border-size) solid var(--color-accent) !important;
   background-color: var(--color-base02)!important;
 }
-
-.smscButton, .float-label__input {
+.notification__btn:hover{
+  background-color: var(--color-base02)!important;
+}
+.topnav__menuitem{
+  border: var(--border-size) solid var(--color-base01) !important;
+}
+.smscButton, .float-label__input, .input-search {
   border: var(--border-size) solid var(--color-base03) !important;
 	background-color: var(--color-base02) !important;
 	color: var(--color-accent) !important;
