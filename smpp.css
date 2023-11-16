@@ -205,6 +205,10 @@ border-bottom: 1px solid var(--color-base02)!important;
   background: var(--color-accent) !important;
   width: var(--border-size) !important;
 }
+.context-menu{
+  background-color: var(--color-base02) !important;
+
+}
 .toolbar__line:before, .toolbar__line:after{
   background: var(--color-accent) !important;
   height: var(--border-size) !important;
