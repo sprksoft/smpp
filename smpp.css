@@ -133,6 +133,10 @@ nav {
 .topnav__menu-arrow{
   display: none;
 }
+.notifs__hdr button:focus:not(.focus-ring) {
+  border: var(--color-accent)!important;
+  box-shadow: none !important;
+}
 .topnav__btn,.token{
   border: 2px solid var(--color-base02) !important;
   border-radius: 50px !important;
@@ -150,11 +154,13 @@ nav {
   cursor: pointer !important;
   text-decoration: underline !important;
 }
-.smsc-topnav .topnav__menu,.bubble{
+.smsc-topnav .topnav__menu,.bubble,.notification{
   background-color: var(--color-base01) !important;
   border: 2px solid var(--color-accent) !important;
   overflow: hidden !important;
+  transition: none !important;
 }
+
 .menu-divider::before {
   background-color: var(--color-accent) !important;
   height: var(--border-size) !important;
@@ -193,7 +199,10 @@ nav {
 .login-app__left{
 background-image: url("https://i.redd.it/psn2mwul2c971.jpg")!important;
 background-position: center!important;
-background-size: contain!important;
+background-size:cover !important;
+}
+.login-app__left > *{
+  display: none!important;
 }
 
 /*PLANNER*/
