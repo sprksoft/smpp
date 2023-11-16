@@ -83,7 +83,7 @@ display: none!important;
   box-shadow: none!important;
   color: var(--color-text)!important;
 }
-.evaluation-list-item,.dropdown-button,.goals-filter__item {
+.evaluation-list-item,.dropdown-button,.goals-filter__item,.contentContainer,.content_container,.toolbar,.navigation_container{
   background-color: var(--color-base01)!important;
   color: var(--color-text)!important;
   border-color: var(--color-base02)!important;
@@ -93,6 +93,26 @@ display: none!important;
   color: var(--color-text)!important;
   box-shadow: none!important;
   border-color: var(--color-accent)!important;
+}
+/*Doelen*/
+.row--course .cell--spacer {
+  background-color: var(--color-base01)!important;
+  border-color: var(--color-base02)!important;
+}
+.cell__content {
+  background-color: var(--color-base01)!important;
+}
+.c-steel-combo--100, .c-steel-combo-hover--100 {
+  background-color: var(--color-base01)!important;
+}
+.table-page .table-page__container__wrapper__table .cell {
+  border-color: var(--color-base02) !important;
+}
+body, button, input, select, textarea {
+  color: var(--color-accent) !important;
+}
+.row--course:not(:last-child) .cell__course-name {
+  border-bottom-color: var(--color-base02) !important;
 }
 
 
@@ -159,7 +179,7 @@ nav {
 
 /*LOGIN PAGE*/
 .login-app__platform-indicator{
-  background-color: var(--color-accent) !important;
+  background-color: var(--color-base00) !important;
 }
 .login-app__bottom{
   background-image: none !important;
