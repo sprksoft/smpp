@@ -1,4 +1,4 @@
-//tjafa scrieptje komt hier je weet wel
+//java script komt hier je weet wel
 //ok - ldev
 //oke logis - andere ldev
 

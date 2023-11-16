@@ -129,11 +129,34 @@ nav {
   border: var(--border-size) solid var(--color-base03) !important;
 }
 .topnav__menu-arrow{
-  display: none;
+  display: none!important;
 }
-.notifs__hdr button:focus:not(.focus-ring) {
-  border: var(--color-accent)!important;
-  box-shadow: none !important;
+.notifs__hdr{
+color: var(--color-text)!important;
+border-bottom: 1px solid var(--color-base02)!important;
+}
+.notification__title{
+  color: var(--color-text)!important;
+}
+.notification__btn--unread .notification__title {
+  color: var(--color-accent)!important;
+}
+.notification__content{
+  color: var(--color-text)!important;
+}
+.notification{
+  border: 2px solid var(--color-base02) !important;
+  border-radius: 10px !important;
+  background: var(--color-base01) !important;
+  padding: 2px 10px 2px 10px !important;
+  height: auto !important;
+  line-height: initial !important;
+  color: var(--color-accent) !important;
+  font-weight: bold !important;
+  text-decoration-color: var(--color-accent) !important;
+  text-decoration-thickness: 2px !important;
+  width: auto !important;
+  margin: 3px !important;
 }
 .topnav__btn,.token{
   border: 2px solid var(--color-base02) !important;
@@ -152,11 +175,17 @@ nav {
   cursor: pointer !important;
   text-decoration: underline !important;
 }
-.smsc-topnav .topnav__menu,.bubble,.notification{
+.smsc-topnav .topnav__menu,.bubble{
   background-color: var(--color-base01) !important;
   border: 2px solid var(--color-accent) !important;
   overflow: hidden !important;
   transition: none !important;
+  text-decoration: none !important;
+}
+.notification:hover{
+  background-color: var(--color-base02)!important;
+  border-color: var(--color-accent)!important;
+  text-decoration: none !important;
 }
 
 .menu-divider::before {
@@ -264,9 +293,7 @@ a:focus {
   border: var(--border-size) solid var(--color-accent) !important;
   background-color: var(--color-base02)!important;
 }
-.notification__btn:hover{
-  background-color: var(--color-base02)!important;
-}
+
 .topnav__menuitem{
   border: var(--border-size) solid var(--color-base01) !important;
 }
