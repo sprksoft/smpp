@@ -1,5 +1,6 @@
 //tjafa scrieptje komt hier je weet wel
 //ok - ldev
+//oke logis - andere ldev
 
 function unbloat() {
   document.body.innerHTML = '';
