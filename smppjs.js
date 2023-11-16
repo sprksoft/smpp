@@ -43,3 +43,10 @@ document.addEventListener("keyup", function(e){
     dmenu(["unbloat"]);
   }
 });
+async function GetResults(){
+    let results = await fetch("https://takeerbergen.smartschool.be/goal/selector/api/v1/leerplannen/results/2023-11-14")
+    results = results.json()
+console.log(results)
+}
+GetResults()
+

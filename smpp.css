@@ -52,7 +52,7 @@ nav {
   background: transparent !important;
   height:auto !important;
   gap: 1rem !important;
-  border-bottom: var(--border-size) solid var(--color-base01);
+  border-bottom: var(--border-size) solid var(--color-base01) !important;
   margin-left: 1rem !important;
   margin-right: 1rem !important;
 }
