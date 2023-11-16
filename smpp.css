@@ -171,7 +171,9 @@ a:focus {
   border: var(--border-size) solid var(--color-accent) !important;
   background-color: var(--color-base02)!important;
 }
-
+.topnav__menuitem{
+  border: var(--border-size) solid var(--color-base01) !important;
+}
 .smscButton, .float-label__input, .input-search {
   border: var(--border-size) solid var(--color-base03) !important;
 	background-color: var(--color-base02) !important;
