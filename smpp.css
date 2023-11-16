@@ -178,7 +178,7 @@ nav {
 
 /*LOGIN PAGE*/
 .login-app__platform-indicator{
-  background-color: var(--color-accent) !important;
+  background-color: var(--color-base00) !important;
 }
 .login-app__bottom{
   background-image: none !important;
