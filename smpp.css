@@ -107,7 +107,7 @@ display: none!important;
   border-color: var(--color-base02) !important;
 }
 body, button, input, select, textarea,.modern-message__name,.modern-message__subject {
-  color: var(--color-accent) !important;
+  color: var(--color-text) !important;
 }
 .row--course:not(:last-child) .cell__course-name {
   border-bottom-color: var(--color-base02) !important;
