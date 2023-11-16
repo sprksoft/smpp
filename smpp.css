@@ -84,6 +84,7 @@ nav {
 .smsc-topnav .topnav__menu{
   background-color: var(--color-base01) !important;
   border: 2px solid var(--color-accent) !important;
+  overflow: hidden !important;
 }
 .menu-divider::before {
   background-color: var(--color-accent) !important;
