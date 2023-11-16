@@ -370,6 +370,7 @@ nav {
 .smsc-select.disabled{
   background-color: var(--color-base02) !important;
   color: var(--color-text) !important;
+  box-shadow: none !important;
 }
 .ui-widget-content {
   color: var(--color-text) !important;
