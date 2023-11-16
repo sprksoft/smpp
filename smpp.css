@@ -52,6 +52,26 @@ body{
   color: var(--color-text)!important;
   border-color: var(--color-accent)!important;
 }
+/*Doelen*/
+.row--course .cell--spacer {
+  background-color: var(--color-base01)!important;
+  border-color: var(--color-base02)!important;
+}
+.cell__content {
+  background-color: var(--color-base01)!important;
+}
+.c-steel-combo--100, .c-steel-combo-hover--100 {
+  background-color: var(--color-base01)!important;
+}
+.table-page .table-page__container__wrapper__table .cell {
+  border-color: var(--color-base02) !important;
+}
+body, button, input, select, textarea {
+  color: var(--color-accent) !important;
+}
+.row--course:not(:last-child) .cell__course-name {
+  border-bottom-color: var(--color-base02) !important;
+}
 
 /*NAV*/
 nav {
