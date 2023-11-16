@@ -75,6 +75,9 @@ async function get_scores(id){
   return scores;
 }
 function get_score_from_list(array, name) {
+  console.log(name);
+  console.log(array);
+  console.log(array.length);
   for (let i = 0; i < array.length; i++) {
     const element = array[i];
     if (element.name === name){
@@ -84,27 +87,15 @@ function get_score_from_list(array, name) {
   return undefined;
 }
 async function set_scores_on_thingys() {
-  try {
-    let scores = await get_all_scores(); // Wait for the scores to be retrieved asynchronously
-    let thingys = document.getElementsByClassName("evaluation-list-item");
-    
-    console.log("Array:", thingys); // Print out the "thingys" array before the loop
-    
-    for (let i = 0; i < thingys.length; i++) {
-      let thingy = thingys[i];
-      let name = thingy.querySelector(".evaluation-list-item__container > *").innerText;
-      
-      let score = get_score_from_list(scores, name);
-      
-      if (score && score.length > 0) { // Check if score is not undefined and has at least one element
-        thingy.querySelector(".evaluation-graphic > .graphic--icon").style="background-image: url("+score[0].imgurl+")!important;";
-      }
-    }
-    
-    console.log("Final array length:", thingys.length);
-  } catch (error) {
-    console.error(error);
+  let scores = await get_all_scores();
+  let thingys = document.getElementsByClassName("evaluation-list-item");
+
+  for (let i = 0; i < thingys.length; i++){
+    let thingy = thingys[i];
+    let name = thingy.querySelector(".evaluation-list-item__container > *").innerText;
+    let score = get_score_from_list(scores, name)[0];
+    thingy.querySelector(".evaluation-graphic > .graphic--icon").style="background-image: url("+score.imgurl+")!important;";
   }
 }
 
-set_scores_on_thingys();
+set_scores_on_thingys()
