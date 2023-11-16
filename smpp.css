@@ -140,9 +140,6 @@ body {
 .table-page .table-page__container__wrapper__table .cell {
   border-color: var(--color-base02) !important;
 }
-<<<<<<< HEAD
-body, button, input, select, textarea,.modern-message__name,.modern-message__subject,.msgHeaderVal {
-=======
 
 body,
 button,
@@ -150,8 +147,8 @@ input,
 select,
 textarea,
 .modern-message__name,
-.modern-message__subject {
->>>>>>> 9ef3b06a957d559ed5b4bd4551e08da4351a1937
+.modern-message__subject,
+.msgHeaderVal {
   color: var(--color-text) !important;
 }
 
