@@ -6,7 +6,11 @@ html {
   --color-base01: #232020;
   --color-base02: #3f3c3b;
   --color-base03: #5b5756;
-
+  --color-blue: #378cd1;
+  --color-red: #cb5144;
+  --color-green: #3c9534;
+  --color-orange: #ce6c4a;
+  
   --border-size: 2px;
 }
 
@@ -72,7 +76,7 @@ body {
   color: var(--color-text) !important;
   border: var(--border-size)solid var(--color-base02) !important;
   border-radius: 10px !important;
-  margin: auto !important;
+  margin: 5px !important;
   margin-left: 3px !important;
   margin-right: 3px !important;
 }
@@ -120,7 +124,25 @@ body {
   box-shadow: none !important;
   border-color: var(--color-accent) !important;
 }
+.c-blue-combo--100, .c-blue-combo-hover--100 {
+  background-color: var(--color-blue)!important;
 
+}
+.c-green-combo--100, .c-blue-combo-hover--100 {
+  background-color: var(--color-green)!important;
+
+}
+.c-orange-combo--100, .c-blue-combo-hover--100 {
+  background-color: var(--color-orange)!important;
+
+}
+.c-red-combo--100, .c-blue-combo-hover--100 {
+  background-color: var(--color-red)!important;
+
+}
+.graphic--icon{
+  display: none!important;
+}
 /*Doelen*/
 .row--course .cell--spacer,
 .smsc-contextmenu-bubble,
