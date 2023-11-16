@@ -80,7 +80,7 @@ display: none!important;
   box-shadow: none!important;
   color: var(--color-text)!important;
 }
-.evaluation-list-item,.dropdown-button,.goals-filter__item {
+.evaluation-list-item,.dropdown-button,.goals-filter__item,.contentContainer,.content_container,.toolbar,.navigation_container{
   background-color: var(--color-base01)!important;
   color: var(--color-text)!important;
   border-color: var(--color-base02)!important;
