@@ -12,6 +12,7 @@ html {
   --color-orange: #ce6c4a;
   
   --border-size: 2px;
+
 }
 
 body {
@@ -118,7 +119,8 @@ body {
 .evaluation-list-item:hover,
 .dropdown-button:hover,
 .goals-filter__item:hover,
-.selected{
+.selected,
+.smscleftnavcontainer{
   background-color: var(--color-base01) !important;
   color: var(--color-text) !important;
   box-shadow: none !important;
@@ -148,7 +150,8 @@ body {
 .smsc-contextmenu-bubble,
 .ui-widget-content,
 .message-search__wrapper,
-.smsc-select-bubble{
+.smsc-select-bubble,
+.smsc_cm_body{
   background-color: var(--color-base01) !important;
   border-color: var(--color-base02) !important;
 }
