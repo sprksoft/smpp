@@ -138,13 +138,23 @@ border-bottom: 1px solid var(--color-base02)!important;
 .notification__title{
   color: var(--color-text)!important;
 }
+
+.smsc-topnav [data-notifs] .notifs__hdr [role=switch] {
+  background-color: var(--color-base01)!important;
+  border: 1px solid var(--color-base02)!important;
+
+}
+
+.smsc-topnav [data-notifs] .notifs__hdr button:focus:not(.focus-ring) {
+  box-shadow: none !important;
+}
 .notification__btn--unread .notification__title {
   color: var(--color-accent)!important;
 }
 .notification__content{
   color: var(--color-text)!important;
 }
-.notification{
+.notification,.modern-message{
   border: 2px solid var(--color-base02) !important;
   border-radius: 10px !important;
   background: var(--color-base01) !important;
@@ -182,7 +192,7 @@ border-bottom: 1px solid var(--color-base02)!important;
   transition: none !important;
   text-decoration: none !important;
 }
-.notification:hover{
+.notification:hover,.modern-message:hover{
   background-color: var(--color-base02)!important;
   border-color: var(--color-accent)!important;
   text-decoration: none !important;
@@ -208,6 +218,11 @@ border-bottom: 1px solid var(--color-base02)!important;
 .toolbar__line:before, .toolbar__line:after{
   background: var(--color-accent) !important;
   height: var(--border-size) !important;
+}
+.messageframe{
+  border: 2px solid var(--color-accent) !important; 
+  border-radius: 10px!important;
+  overflow: hidden!important;
 }
 
 /*LOGIN PAGE*/
@@ -292,6 +307,7 @@ a:focus {
 .smscButton:hover, .topnav__menuitem:hover{
   border: var(--border-size) solid var(--color-accent) !important;
   background-color: var(--color-base02)!important;
+  text-decoration: none;
 }
 
 .topnav__menuitem{
@@ -301,8 +317,12 @@ a:focus {
   border: var(--border-size) solid var(--color-base03) !important;
 	background-color: var(--color-base02) !important;
 	color: var(--color-accent) !important;
-}
 
+}
+::-webkit-scrollbar-thumb {
+    background-color: var(--color-base02)!important;
+
+}
 
 
 /*CUSTOM HTML*/

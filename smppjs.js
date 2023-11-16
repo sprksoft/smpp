@@ -5,7 +5,7 @@
 function unbloat() {
   document.body.innerHTML = '';
 }
-
+document.getElementById("notifsToggleLabel").innerHTML = "Toon pop-ups"
 function dmenu(params) {
   let dmenu = document.getElementById("dmenu");
   dmenu.classList.remove("dmenu-hidden");
