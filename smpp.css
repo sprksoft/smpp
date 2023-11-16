@@ -34,9 +34,7 @@ body{
   color: var(--color-text) !important;
 }
 
-.homepage__block{
-  border-bottom: var(--border-size) solid var(--color-base01) !important;
-}
+
 .homepage__block__content{
 	display: none !important;
 }
@@ -92,8 +90,8 @@ nav {
 
 /*MESSAGES*/
 #folders_parent_td, .toolbar{
-  background-color:var(--color-base00);
-  border-right: var(--border-size) solid var(--color-base01);
+  background-color:var(--color-base00)!important;
+  border-right: var(--border-size) solid var(--color-base01)!important;
 }
 .toolbar__line{
   background: var(--color-accent) !important;
@@ -140,22 +138,35 @@ nav {
 .icon-label-btn--linkbutton .icon-label{
   color: var(--color-accent) !important;
 }
-
+.listview__row{
+  color: var(--color-text)!important;
+}
+.splitdetail__content{
+  background-color: var(--color-base01) !important;
+  color: var(--color-text)!important;
+  border: 2px solid var(--color-accent) !important;
+}
+.form__label{
+  color: var(--color-text)!important;
+}
+.title--2{
+  color: var(--color-text)!important;
+}
 /*OTHER*/
 
 a {
   color: var(--color-accent) !important;
 }
 a:link {
-  text-decoration: none;
+  text-decoration: none!important;
 }
 
 a:hover {
-    cursor: pointer;
-    text-decoration: underline;
+    cursor: pointer!important;
+    text-decoration: underline!important;
 }
 a:focus {
-    text-decoration: underline;
+    text-decoration: underline!important;
 }
 ::selection {
     background: #b6b6b6 !important;

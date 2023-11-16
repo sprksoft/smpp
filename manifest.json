@@ -6,9 +6,11 @@
   "version": "1.0",
   "homepage_url": "https://github.com/Xgames123/smpp",
 
+
   "content_scripts": [
     {
       "matches": ["*://*.smartschool.be/*"],
+      "all_frames": true,
       "css": ["smpp.css"],
       "js": ["smppjs.js"]
     }
