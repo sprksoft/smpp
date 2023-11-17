@@ -15,6 +15,9 @@
       "js": ["smppjs.js", "DMENU/dmenu.js"]
     }
   ],
+  "background": {
+    "scripts": []
+  }, 
   "browser_action": {
     "default_icon": {
       "16": "icon16.png",
@@ -23,6 +26,8 @@
     },
     "default_title": "Click here to open menu",
     "default_popup": "POPUP/popup.html"
-  }
+  },
+
+  "permissions": ["webRequest", "webRequestBlocking", "<all_urls>","activeTab"]
 
 }

@@ -16,9 +16,15 @@ document.addEventListener("keyup", function(e){
 
 try{
   document.getElementsByClassName("js-btn-logout")[0].innerHTML = "Logout -->";
-}catch(e){}
+}catch(e){};
 
-var selectedProfile = localStorage.getItem("selectedProfile");
+window.runtime.onMessage.addListener(function(event) {
+console.log("Content script received message: " + event);
+      console.log("Content script received message: ");
+  }
+);
+
+var selectedProfile = 
 console.log("Chosen profile: " + selectedProfile);
 switch (selectedProfile) {
   
@@ -32,3 +38,6 @@ switch (selectedProfile) {
     // Code to set variables for profile 3
     break;
 }
+console.log("Profile variables set");
+
+console.log("Done");
