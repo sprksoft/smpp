@@ -43,11 +43,42 @@ function dmenu_close() {
   return dmenu.getElementsByTagName("input")[0].value;
 }
 
+function get_match_count(str, match) {
+  let match_count = 0;
+  let largest_match=0;
+  for (let i =0; i < str.length; i++){
+    if (str[i] == match[match_count]){
+      match_count+=1;
+      if (largest_match < match_count){
+        largest_match = match_count;
+      }
+    }else{
+      match_count = 0;
+    }
+  }
+  return largest_match;
+}
+
+
 function dmenu_update_search() {
   let dmenu = document.getElementById("dmenu");
   let input = dmenu.getElementsByTagName("input")[0];
   let autocompletelist = dmenu.getElementsByClassName("autocomplete")[0];
   let command = input.value;
+  
+  let nodes = autocompletelist.childNodes;
+  let largest_match_count = 0;
+  for (let i=0; i < nodes.length; i++){
+    let node = nodes[i];
+    let mcount = get_match_count(node.innerText, command);
+    console.log(mcount);
+    if (largest_match_count < mcount){
+      largest_match_count = mcount;
+      console.log(node);
+      autocompletelist.appendChild(node);
+      //TODO: move the node to the top
+    }
+  }
 
 }
 function dmenu_select_next(prev=false) {
@@ -87,7 +118,6 @@ function init_dmenu(){
   dmenu.getElementsByTagName("input")[0].addEventListener("keydown", function(e)
     {
       let command = e.target.value;
-      console.log(e);
       if (e.key == "Enter"){
         dmenu_close();
         if (end_func != undefined && command !== ""){
