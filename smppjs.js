@@ -18,13 +18,12 @@ try{
   document.getElementsByClassName("js-btn-logout")[0].innerHTML = "Logout -->";
 }catch(e){};
 
-window.runtime.onMessage.addListener(function(event) {
-console.log("Content script received message: " + event);
-      console.log("Content script received message: ");
-  }
-);
 
-var selectedProfile = 
+
+chrome.storage.local.get('key1', function(result) {
+  console.log('Value for key1 is ' + result.key1);
+});
+
 console.log("Chosen profile: " + selectedProfile);
 switch (selectedProfile) {
   

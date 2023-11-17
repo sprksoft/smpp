@@ -28,6 +28,6 @@
     "default_popup": "POPUP/popup.html"
   },
 
-  "permissions": ["webRequest", "webRequestBlocking", "<all_urls>","activeTab"]
+  "permissions": ["webRequest", "webRequestBlocking", "<all_urls>","activeTab","storage"]
 
 }

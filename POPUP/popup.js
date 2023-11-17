@@ -4,9 +4,10 @@ document.addEventListener("DOMContentLoaded", function () {
     var selectedProfile = document.getElementById("profileSelector").value;
     console.log("Chosen profile: " + selectedProfile);
 
-    window.runtime.sendMessage({
-      "action": "init"
-  });
+    chrome.storage.local.set({
+      key1: selectedProfile
+    });
+    
     console.log("Sent message to background script");
   });
 });
