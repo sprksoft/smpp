@@ -33,3 +33,7 @@
   color: var(--color-base00);
   margin: 0px;
 }
+
+#dmenu > .autocomplete > *:nth-child(even){
+  background: var(--color-base01);
+}
