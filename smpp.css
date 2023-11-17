@@ -594,39 +594,3 @@ a:focus {
 }
 
 
-/*CUSTOM HTML*/
-.dmenu {
-  position: absolute;
-  left: 20%;
-  right: 20%;
-  top: 10%;
-  bottom: 10%;
-
-  background-color: var(--color-base01);
-  border: var(--border-size) solid var(--color-accent);
-  /*border-radius: 10px;*/
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-.dmenu-hidden {
-  display: none;
-}
-
-.dmenu>.top {
-  display: flex;
-}
-
-.dmenu-input {
-  background: var(--color-base03);
-  border: 2px solid var(--color-accent);
-  color: var(--color-accent);
-  flex-grow: 1;
-}
-
-.dmenu-label {
-  background-color: var(--color-accent);
-  color: var(--color-base02);
-  margin: 0px;
-}
