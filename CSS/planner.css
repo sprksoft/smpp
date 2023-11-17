@@ -48,3 +48,8 @@
 .newsTitle2 {
   color: var(--color-text) !important;
 }
+.inline-editor__input:hover,
+.inline-editor__input::selection,
+.inline-editor__input::placeholder{
+  background-color: var(--color-base00) !important;
+}
