@@ -11,6 +11,7 @@ try{
   document.getElementsByClassName("js-btn-logout")[0].innerHTML = "Logout -->";
   document.getElementById("notifsToggleLabel").innerHTML = "Toon pop-ups"
 }catch(e){}
+//END Garbage
 
 document.addEventListener("keyup", function(e){
   console.log(e);
