@@ -3,8 +3,9 @@ const dmenu_centerd=true;
 function dmenu(params) {
   let dmenu = document.getElementById("dmenu");
   dmenu.classList.remove("dmenu-hidden");
-  if (dmenu_centerd){
-    dmenu.classList.add("centered");
+
+  if (dmenu_centerd && !dmenu.classList.contains("dmenu-centered")){
+    dmenu.classList.add("dmenu-centered");
   }
   let input = dmenu.getElementsByTagName("input")[0];
   input.focus();
