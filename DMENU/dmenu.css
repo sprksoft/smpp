@@ -1,0 +1,35 @@
+.dmenu-centered{
+  left: 10%;
+  right: 10%;
+  top: 10%;
+  bottom: 10%;
+}
+.dmenu-hidden{
+  display:none !important;
+}
+
+#dmenu{
+  background: var(--color-base00);
+  border: var(--border-size) solid var(--color-accent);
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+}
+
+#dmenu > .top{
+  display: flex;
+  flex-direction: row;
+}
+
+.dmenu-input{
+  border: var(--border-size) solid var(--color-accent);
+  background: var(--color-base01);
+  color: var(--color-base02);
+  flex-grow: 1;
+}
+
+.dmenu-label{
+  background: var(--color-accent);
+  color: var(--color-base00);
+  margin: 0px;
+}
