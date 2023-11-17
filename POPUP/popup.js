@@ -1,13 +1,15 @@
 //popupjs
 document.addEventListener("DOMContentLoaded", function () {
-  document.getElementById("profileSelector").addEventListener("change", function () {
+  let profileSelect=document.getElementById("profileSelector");
+  chrome.storage.local.get("current_profile", function (store) {
+    profileSelect.value=store.current_profile;
+  })
+  profileSelect.addEventListener("change", function () {
     var selectedProfile = document.getElementById("profileSelector").value;
-    console.log("Chosen profile: " + selectedProfile);
 
     chrome.storage.local.set({
-      key1: selectedProfile
+      current_profile: selectedProfile,
     });
     
-    console.log("Sent message to background script");
   });
 });

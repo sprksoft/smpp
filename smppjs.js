@@ -20,23 +20,8 @@ try{
 
 
 
-chrome.storage.local.get('key1', function(result) {
-  console.log('Value for key1 is ' + result.key1);
+chrome.storage.local.get('current_profile', function(store) {
+  console.log("set profile to "+store.current_profile)
 });
-
-console.log("Chosen profile: " + selectedProfile);
-switch (selectedProfile) {
-  
-  case "profile1":
-    // Code to set variables for profile 1
-    break;
-  case "profile2":
-    // Code to set variables for profile 2
-    break;
-  case "profile3":
-    // Code to set variables for profile 3
-    break;
-}
-console.log("Profile variables set");
 
 console.log("Done");
