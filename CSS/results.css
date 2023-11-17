@@ -171,3 +171,7 @@ textarea,
 .js-btn-manual {
   display: none !important;
 }
+.evaluation__content:hover{
+    background-color: var(--color-base02) !important;
+    border: var(--border-size) solid var(--color-accent)!important;
+}
