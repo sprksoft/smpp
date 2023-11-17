@@ -61,6 +61,26 @@ body {
   background-color: var(--color-base00) !important;
   color: var(--color-text) !important;
 }
+input[type="checkbox"]:after {
+  background-color: var(--color-base00) !important;
+  color: var(--color-text) !important;
+}
+input[type="checkbox"]:before {
+  background-color: var(--color-base00) !important;
+  color: var(--color-red) !important;
+}
+/*this is message box but no worky worky
+/* .quickreply__input,
+.tox, .tox-tinymce,.tox-editor-container,.tox-edit-area,.tox-edit-area__iframe, .tox-toolbar__group,.tox-toolbar__primary,.tox-bottom-anchorbar,.tox-editor-header{
+  background-color: var(--color-base00)!important;
+  color: var(--color-text) !important;
+}
+.mce-content-body{
+  color: var(--color-text) !important;
+}
+.tox-icon .tox-tbtn__icon-wrap{
+  background-color: var(--color-text) !important;
+} */
 .smsc-svg--bullet_square_green--24 {
   background-image: none!important;
   background-color: var(--color-green)!important;
@@ -85,10 +105,6 @@ body {
 .wide-toolbar__item:after,
 .wide-toolbar__item:before {
   display: none !important;
-}
-
-.checkbox {
-  color: var(--color-text) !important;
 }
 
 .wide-toolbar__item {
@@ -579,39 +595,3 @@ a:focus {
 }
 
 
-/*CUSTOM HTML*/
-.dmenu {
-  position: absolute;
-  left: 20%;
-  right: 20%;
-  top: 10%;
-  bottom: 10%;
-
-  background-color: var(--color-base01);
-  border: var(--border-size) solid var(--color-accent);
-  /*border-radius: 10px;*/
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-.dmenu-hidden {
-  display: none;
-}
-
-.dmenu>.top {
-  display: flex;
-}
-
-.dmenu-input {
-  background: var(--color-base03);
-  border: 2px solid var(--color-accent);
-  color: var(--color-accent);
-  flex-grow: 1;
-}
-
-.dmenu-label {
-  background-color: var(--color-accent);
-  color: var(--color-base02);
-  margin: 0px;
-}

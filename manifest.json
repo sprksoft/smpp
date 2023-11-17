@@ -11,8 +11,8 @@
     {
       "matches": ["*://*.smartschool.be/*"],
       "all_frames": true,
-      "css": ["smpp.css"],
-      "js": ["smppjs.js", "results.js"]
+      "css": ["smpp.css", "dmenu.css"],
+      "js": ["smppjs.js", "dmenu.js"]
     }
   ],
   "browser_action": {
