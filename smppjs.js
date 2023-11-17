@@ -61,20 +61,20 @@ chrome.storage.local.get('current_profile', function (store) {
       document.documentElement.style.setProperty('--color-base03', '#000');
       break;
       case 'comfy':
-        document.documentElement.style.setProperty('--color-accent', '#000');
-        document.documentElement.style.setProperty('--color-text', '#000');
-        document.documentElement.style.setProperty('--color-base00', '#000');
-        document.documentElement.style.setProperty('--color-base01', '#000');
-        document.documentElement.style.setProperty('--color-base02', '#000');
-        document.documentElement.style.setProperty('--color-base03', '#000');
+        document.documentElement.style.setProperty('--color-accent', '#F2AF5C');
+        document.documentElement.style.setProperty('--color-text', '#C2BAB2');
+        document.documentElement.style.setProperty('--color-base00', '#261D1D');
+        document.documentElement.style.setProperty('--color-base01', '#40312E');
+        document.documentElement.style.setProperty('--color-base02', '#BF5B45');
+        document.documentElement.style.setProperty('--color-base03', '#D9734E');
         break;
         case 'cream':
-          document.documentElement.style.setProperty('--color-accent', '#000');
-          document.documentElement.style.setProperty('--color-text', '#000');
-          document.documentElement.style.setProperty('--color-base00', '#000');
-          document.documentElement.style.setProperty('--color-base01', '#000');
-          document.documentElement.style.setProperty('--color-base02', '#000');
-          document.documentElement.style.setProperty('--color-base03', '#000');
+          document.documentElement.style.setProperty('--color-accent', '#F0F2F0');
+          document.documentElement.style.setProperty('--color-text', '#C2BAB2');
+          document.documentElement.style.setProperty('--color-base00', '#402F2D');
+          document.documentElement.style.setProperty('--color-base01', '#594645');
+          document.documentElement.style.setProperty('--color-base02', '#A68B81');
+          document.documentElement.style.setProperty('--color-base03', '#D9C5B4');
           break;
     // Add more cases for other profiles as needed
     default:
