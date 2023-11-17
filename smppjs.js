@@ -21,7 +21,9 @@ document.addEventListener("keyup", function(e){
         case "unbloat":
           unbloat();
         case "set theme":
-
+          dmenu(theme_names, function (theme) {
+            set_theme(theme)
+          }, "theme:");
 
         default:
           break;
@@ -36,9 +38,13 @@ document.addEventListener("keyup", function(e){
 chrome.storage.local.get('current_profile', function (store) {
   selected_profile = store.current_profile;
   console.log("set profile to " + store.current_profile);
+  set_theme(selected_profile);
+});
 
-  switch (selected_profile) {
-    case 'xgames':
+const theme_names = ["ldev", "birb", "bjarn", "comfy", "cream"];
+function set_theme(name) {
+  switch (name) {
+    case 'ldev':
       document.documentElement.style.setProperty('--color-accent', '#ffd5a0');
       document.documentElement.style.setProperty('--color-text', '#C2BAB2');
       document.documentElement.style.setProperty('--color-base00', '#191817');
@@ -62,26 +68,26 @@ chrome.storage.local.get('current_profile', function (store) {
       document.documentElement.style.setProperty('--color-base02', '#000');
       document.documentElement.style.setProperty('--color-base03', '#000');
       break;
-      case 'comfy':
-        document.documentElement.style.setProperty('--color-accent', '#F2AF5C');
-        document.documentElement.style.setProperty('--color-text', '#C2BAB2');
-        document.documentElement.style.setProperty('--color-base00', '#261D1D');
-        document.documentElement.style.setProperty('--color-base01', '#40312E');
-        document.documentElement.style.setProperty('--color-base02', '#BF5B45');
-        document.documentElement.style.setProperty('--color-base03', '#D9734E');
-        break;
-        case 'cream':
-          document.documentElement.style.setProperty('--color-accent', '#F0F2F0');
-          document.documentElement.style.setProperty('--color-text', '#C2BAB2');
-          document.documentElement.style.setProperty('--color-base00', '#402F2D');
-          document.documentElement.style.setProperty('--color-base01', '#594645');
-          document.documentElement.style.setProperty('--color-base02', '#A68B81');
-          document.documentElement.style.setProperty('--color-base03', '#D9C5B4');
-          break;
-    // Add more cases for other profiles as needed
+    case 'comfy':
+      document.documentElement.style.setProperty('--color-accent', '#F2AF5C');
+      document.documentElement.style.setProperty('--color-text', '#C2BAB2');
+      document.documentElement.style.setProperty('--color-base00', '#261D1D');
+      document.documentElement.style.setProperty('--color-base01', '#40312E');
+      document.documentElement.style.setProperty('--color-base02', '#BF5B45');
+      document.documentElement.style.setProperty('--color-base03', '#D9734E');
+      break;
+    case 'cream':
+      document.documentElement.style.setProperty('--color-accent', '#F0F2F0');
+      document.documentElement.style.setProperty('--color-text', '#C2BAB2');
+      document.documentElement.style.setProperty('--color-base00', '#402F2D');
+      document.documentElement.style.setProperty('--color-base01', '#594645');
+      document.documentElement.style.setProperty('--color-base02', '#A68B81');
+      document.documentElement.style.setProperty('--color-base03', '#D9C5B4');
+      break;
+      // Add more cases for other profiles as needed
     default:
-    // Handle default case or do nothing if no match found
+      // Handle default case or do nothing if no match found
   }
-});
+}
 
 console.log("Done");
