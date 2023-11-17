@@ -16,15 +16,17 @@ try{
 document.addEventListener("keyup", function(e){
   //console.log(e);
   if (e.key == ':'){
-    dmenu(["unbloat"], function (cmd) {
+    dmenu(["unbloat", "didit", "digitale methode", "planner", "set theme"], function (cmd) {
       switch (cmd) {
         case "unbloat":
           unbloat();
+        case "set theme":
+
 
         default:
           break;
       }
-    });
+    }, "quick:");
   }
 });
 
