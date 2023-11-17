@@ -1,0 +1,25 @@
+.dmenu-centerd{
+  left: 10%;
+  right: 10%;
+  top: 10%;
+  bottom: 10%;
+}
+.dmenu-hidden{
+  display:none;
+}
+
+#dmenu{
+  background: var(--color-base01);
+  position: absolute;
+}
+
+.dmenu-input{
+  border: var(--border-size) solid var(--color-accent);
+  background: var(--color-base01);
+  color: var(--color-base02);
+}
+
+.dmenu-label{
+  background: var(--color-accent);
+  color: var(--color-base00);
+}
