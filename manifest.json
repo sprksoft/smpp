@@ -12,7 +12,7 @@
       "matches": ["*://*.smartschool.be/*"],
       "all_frames": true,
       "css": ["smpp.css"],
-      "js": ["smppjs.js"]
+      "js": ["smppjs.js", "results.js"]
     }
   ],
   "browser_action": {
