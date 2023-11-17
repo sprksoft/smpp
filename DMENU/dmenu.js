@@ -19,10 +19,7 @@ function dmenu(params, onselect) {
 function dmenu_close() {
   let dmenu = document.getElementById("dmenu");
   dmenu.classList.add("dmenu-hidden");
-  let command = dmenu.getElementsByTagName("input")[0].value;
-  if (end_func != undefined){
-    end_func(command);
-  }
+  return dmenu.getElementsByTagName("input")[0].value;
 }
 
 function init_dmenu(){
@@ -34,9 +31,12 @@ function init_dmenu(){
   document.body.insertBefore(dmenu, document.body.childNodes[-1]);
   dmenu.getElementsByTagName("input")[0].addEventListener("keydown", function(e)
     {
-      let value = e.value;
+      let command = e.target.value;
       if (e.key == "Enter"){
         dmenu_close();
+        if (end_func != undefined){
+          end_func(command);
+        }
       }else if (e.key == "Escape"){
         dmenu_close();
       }

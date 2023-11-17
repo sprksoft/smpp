@@ -14,9 +14,17 @@ try{
 //END Garbage
 
 document.addEventListener("keyup", function(e){
-  console.log(e);
+  //console.log(e);
   if (e.key == ':'){
-    dmenu(["unbloat"]);
+    dmenu(["unbloat"], function (cmd) {
+      switch (cmd) {
+        case "unbloat":
+          unbloat();
+
+        default:
+          break;
+      }
+    });
   }
 });
 
