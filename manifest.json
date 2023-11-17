@@ -11,8 +11,8 @@
     {
       "matches": ["*://*.smartschool.be/*"],
       "all_frames": true,
-      "css": ["smpp.css", "dmenu.css"],
-      "js": ["smppjs.js", "dmenu.js"]
+      "css": ["CSS/general.css", "DMENU/dmenu.css","CSS/login.css","CSS/messages.css","CSS/navigation.css","CSS/notification.css","CSS/planner.css","CSS/results.css","CSS/startpage.css"],
+      "js": ["smppjs.js", "DMENU/dmenu.js"]
     }
   ],
   "browser_action": {
@@ -22,7 +22,7 @@
       "128": "icon128.png"
     },
     "default_title": "Click here to open menu",
-    "default_popup": "popup.html"
+    "default_popup": "POPUP/popup.html"
   }
 
 }
