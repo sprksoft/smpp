@@ -526,12 +526,26 @@ nav {
   color: var(--color-text) !important;
 }
 
-.title--2 {
+.title--2,
+.newsTitle1,
+.newsTitle2 {
   color: var(--color-text) !important;
 }
 
 /*OTHER*/
 
+.toolbar-bottom,
+.toolbar-top{
+  display: none !important;
+}
+
+.groupContainer,
+.newsTitle,
+.groupTree
+{
+  background-color: var(--color-base01) !important;
+  color: var(--color-text) !important;
+}
 a {
   color: var(--color-accent) !important;
 }
