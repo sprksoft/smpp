@@ -84,6 +84,22 @@ function set_theme(name) {
       document.documentElement.style.setProperty('--color-base02', '#A68B81');
       document.documentElement.style.setProperty('--color-base03', '#D9C5B4');
       break;
+      case 'fall':
+        document.documentElement.style.setProperty('--color-accent', '#F2CDAC');
+        document.documentElement.style.setProperty('--color-text', '#C2BAB2');
+        document.documentElement.style.setProperty('--color-base00', '#0D0D0D');
+        document.documentElement.style.setProperty('--color-base01', '#401303');
+        document.documentElement.style.setProperty('--color-base02', '#732407');
+        document.documentElement.style.setProperty('--color-base03', '#BF3A0A');
+        break;
+        case 'winter':
+          document.documentElement.style.setProperty('--color-accent', '#93B8C2');
+          document.documentElement.style.setProperty('--color-text', '#C2BAB2');
+          document.documentElement.style.setProperty('--color-base00', '#001D29');
+          document.documentElement.style.setProperty('--color-base01', '#013340');
+          document.documentElement.style.setProperty('--color-base02', '#236475');
+          document.documentElement.style.setProperty('--color-base03', '#DCEFF5');
+          break;
       // Add more cases for other profiles as needed
     default:
       // Handle default case or do nothing if no match found
