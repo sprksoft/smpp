@@ -50,6 +50,12 @@
 }
 .inline-editor__input:hover,
 .inline-editor__input::selection,
-.inline-editor__input::placeholder{
+.inline-editor__input::placeholder,
+.planner-header .header__borderdropdowncontainer:hover:after{
   background-color: var(--color-base00) !important;
+}
+.twinbutton__button:hover,
+[inline-editor] .inline-editor:not([readonly]):hover .inline-editor__input,
+[inline-editor] .inline-editor:not([readonly]):hover:after{
+  background-color: var(--color-base02) !important;
 }
