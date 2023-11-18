@@ -61,12 +61,12 @@ function set_theme(name) {
       document.documentElement.style.setProperty('--color-base03', '##7764A4');
       break;                                                                  
     case 'bjarn':
-      document.documentElement.style.setProperty('--color-accent', '#000');
-      document.documentElement.style.setProperty('--color-text', '#000');
-      document.documentElement.style.setProperty('--color-base00', '#000');
-      document.documentElement.style.setProperty('--color-base01', '#000');
-      document.documentElement.style.setProperty('--color-base02', '#000');
-      document.documentElement.style.setProperty('--color-base03', '#000');
+      document.documentElement.style.setProperty('--color-accent', "#95a4ee");
+      document.documentElement.style.setProperty('--color-text', "#80dbbff3");
+      document.documentElement.style.setProperty('--color-base00', "#191817");
+      document.documentElement.style.setProperty('--color-base01', "#1e1e1ec1");
+      document.documentElement.style.setProperty('--color-base02', "#222222");
+      document.documentElement.style.setProperty('--color-base03', "#1b1b1bf3");
       break;
     case 'comfy':
       document.documentElement.style.setProperty('--color-accent', '#F2AF5C');
