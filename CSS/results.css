@@ -124,7 +124,8 @@
 .message-search__wrapper,
 .smsc-select-bubble,
 .smsc_cm_body,
-.course-session-page__container{
+.course-session-page__container,
+input[type=search].input.search-input {
   background-color: var(--color-base01) !important;
   border-color: var(--color-base02) !important;
 }
@@ -138,7 +139,8 @@
 }
 
 .c-steel-combo--100,
-.c-steel-combo-hover--100 {
+.c-steel-combo-hover--100,
+[listview] .listview__row:hover:not(.listview__row--selected) .listview__cell:not(.listview__cell--select-btn):not(.listview__cell--no-hover)  {
   background-color: var(--color-base01) !important;
 }
 
