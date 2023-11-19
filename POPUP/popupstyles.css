@@ -28,3 +28,6 @@ body {
     text-align: center;
     user-select: none;
 }
+input {background-color:#444444;
+color: white;
+margin: 10px;}

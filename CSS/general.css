@@ -13,7 +13,7 @@ html {
   --border-size: 2px;
   --color-popup-border: var(--color-accent);
   --color-hover-border: var(--color-accent);
-
+  --loginpage-image: url("https://i.redd.it/psn2mwul2c971.jpg")
 }
 .js-btn-profile>img,
 .header__avatar,
@@ -104,3 +104,28 @@ a:focus {
   background-color: var(--color-base02) !important;
 
 }
+.smsc-container--grey,.highcharts-background{
+  fill: var(--color-base01) !important;
+  background-color: var(--color-base01) !important;
+}
+.highcharts-container{
+  color: var(--color-text) !important;
+}
+tspan, title, text,.grayed_out{
+  color: var(--color-text) !important;
+  fill: var(--color-text) !important;
+}
+.search_notes_schoolyearrow,.itemSchoolyear {
+  color: var(--color-text) !important;
+}
+.contentFrametitle,.lvs_item_top,.personalSettings_content,.smscBlockContainer_top,.smscBlockContainer_right,.smscBlockContainer_left,.smscFrameTitle,.titleLeft{
+  background: none !important;
+  background-color: var(--color-base02) !important;
+  box-shadow: none !important;
+  color: var(--color-text)!important;
+}
+.ui-widget-header,.tabs,li {
+  background: var(--color-base02) !important;
+  color: var(--color-text)!important;
+}
+

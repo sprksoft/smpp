@@ -16,7 +16,7 @@
 }
 
 .login-app__left {
-  background-image: url("https://i.redd.it/psn2mwul2c971.jpg") !important;
+  background-image: var(--loginpage-image) !important;
   background-position: center !important;
   background-size: cover !important;
 }

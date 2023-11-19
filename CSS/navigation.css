@@ -18,7 +18,7 @@ nav {
 }
 
 .topnav__btn,
-.token {
+.token,.titleRight {
   border: 2px solid var(--color-base02) !important;
   border-radius: 50px !important;
   background: var(--color-base01) !important;

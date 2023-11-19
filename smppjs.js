@@ -72,13 +72,22 @@ chrome.storage.local.get('current_profile', function (store) {
   set_theme(selected_profile);
 });
 
+
 function store_profile(profile){
   chrome.storage.local.set({
-    current_profile: profile,
+    current_profile: profile
   });
 }
-
-const theme_names = ["default", "ldev", "birb", "bjarn", "comfy", "cream"];
+function backgroundfunc(background){
+  let style = document.documentElement.style;
+  style.setProperty('--loginpage-image', background);
+}
+const theme_names = ["default", "ldev", "birb", "bjarn", "comfy", "tan"];
+chrome.storage.local.get('local_background', function (store) {
+  background = store.background;
+  console.log("set background to " + background);
+  backgroundfunc(background);
+});
 function set_theme(name) {
   let style = document.documentElement.style;
   style.setProperty('--color-accent', '#ffd5a0');
@@ -87,6 +96,7 @@ function set_theme(name) {
   style.setProperty('--color-base01', '#232020');
   style.setProperty('--color-base02', '#3f3c3b');
   style.setProperty('--color-base03', '#5b5756');
+
   switch (name) {
     case "default":
       //default changes nothing so keep
@@ -112,14 +122,14 @@ function set_theme(name) {
       style.setProperty('--color-base03', "#1b1b1bf3");
       break;
     case 'comfy':
-      style.setProperty('--color-accent', '#F2AF5C');
-      style.setProperty('--color-text', '#C2BAB2');
-      style.setProperty('--color-base00', '#261D1D');
-      style.setProperty('--color-base01', '#40312E');
-      style.setProperty('--color-base02', '#BF5B45');
-      style.setProperty('--color-base03', '#D9734E');
+      style.setProperty('--color-accent', "#95a4ee");
+      style.setProperty('--color-text', "#80dbbff3");
+      style.setProperty('--color-base00', "#191817");
+      style.setProperty('--color-base01', "#1e1e1ec1");
+      style.setProperty('--color-base02', "#222222");
+      style.setProperty('--color-base03', "#1b1b1bf3");
       break;
-    case 'cream':
+    case 'tan':
       style.setProperty('--color-accent', '#F0F2F0');
       style.setProperty('--color-text', '#C2BAB2');
       style.setProperty('--color-base00', '#402F2D');
@@ -128,12 +138,12 @@ function set_theme(name) {
       style.setProperty('--color-base03', '#D9C5B4');
       break;
     case 'fall':
-      style.setProperty('--color-accent', '#F2CDAC');
+      style.setProperty('--color-accent', '#F2AF5C');
       style.setProperty('--color-text', '#C2BAB2');
-      style.setProperty('--color-base00', '#0D0D0D');
-      style.setProperty('--color-base01', '#401303');
-      style.setProperty('--color-base02', '#732407');
-      style.setProperty('--color-base03', '#BF3A0A');
+      style.setProperty('--color-base00', '#261D1D');
+      style.setProperty('--color-base01', '#40312E');
+      style.setProperty('--color-base02', '#BF5B45');
+      style.setProperty('--color-base03', '#D9734E');
       break;
     case 'winter':
       style.setProperty('--color-accent', '#93B8C2');
@@ -143,6 +153,14 @@ function set_theme(name) {
       style.setProperty('--color-base02', '#236475');
       style.setProperty('--color-base03', '#DCEFF5');
       break;
+      case 'oled':
+        style.setProperty('--color-accent', '#8590aacc');
+        style.setProperty('--color-text', '#626365');
+        style.setProperty('--color-base00', '#000');
+        style.setProperty('--color-base01', '#020205');
+        style.setProperty('--color-base02', '#05080f');
+        style.setProperty('--color-base03', '#0c0e15');
+        break;
       // Add more cases for other profiles as needed
     default:
       // Handle default case or do nothing if no match found
