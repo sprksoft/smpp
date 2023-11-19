@@ -49,6 +49,9 @@ html{
 #dmenu >.autocomplete{
   overflow:scroll;
 }
+#dmenu >.autocomplete > .hidden{
+  visibility: hidden;
+}
 #dmenu > .autocomplete > *{
   margin: var(--dmenu-margin);
 }
