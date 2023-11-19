@@ -1,6 +1,9 @@
-
 .header__day,
-.form__valuem,.form__value__placeholder,.form__value__description,.form__value__element,.form__value--period {
+.form__valuem,
+.form__value__placeholder,
+.form__value__description,
+.form__value__element,
+.form__value--period {
   color: var(--color-text) !important;
 }
 
@@ -18,9 +21,14 @@
 }
 
 .highlight,
-.btn.btn {
+.btn {
   background: var(--color-base01) !important;
   border-color: var(--color-base02) !important;
+
+}
+
+.label__resolvedStatus {
+  color: var(--color-base01) !important;
 }
 
 .icon-label-btn--linkbutton .icon-label {
@@ -28,16 +36,23 @@
 }
 
 .listview__row,
-.planned-element-type-label,.listview__cell, span 
-{
+.planned-element-type-label,
+.listview__cell,
+span,
+.form__row--assignmentType--view {
   color: var(--color-text) !important;
+
 }
-.listview__rows:hover
-{
-  color: var(--color-text) !important;
-  border: none !important;
-  transition: none !important;
+
+.msg--bubble--blue {
+  background-color: var(--color-blue) !important;
 }
+
+.msg--bubble--green {
+  background-color: var(--color-green) !important;
+}
+
+
 .splitdetail__content {
   background-color: var(--color-base01) !important;
   color: var(--color-text) !important;
@@ -48,19 +63,24 @@
   color: var(--color-text) !important;
 }
 
+
 .title--2,
 .newsTitle1,
 .newsTitle2 {
   color: var(--color-text) !important;
 }
+
 .inline-editor__input:hover,
 .inline-editor__input::selection,
 .inline-editor__input::placeholder,
-.planner-header .header__borderdropdowncontainer:hover:after{
+.planner-header .header__borderdropdowncontainer:hover:after {
   background-color: var(--color-base00) !important;
 }
-.twinbutton__button:hover,
-[inline-editor] .inline-editor:not([readonly]):hover .inline-editor__input,
-[inline-editor] .inline-editor:not([readonly]):hover:after{
-  background-color: var(--color-base02) !important;
+
+.goal-list {
+  display: none !important;
+}
+
+.form__label--required::after {
+  color: var(--color-accent) !important;
 }

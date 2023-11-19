@@ -127,6 +127,7 @@
   color: var(--color-accent) !important;
 }
 
-.toolbar,.toolbarright {
+.toolbar,
+.toolbarright {
   background-color: var(--color-base00) !important;
 }

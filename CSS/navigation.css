@@ -1,22 +1,22 @@
 nav {
-    background: transparent !important;
-    height: auto !important;
-    gap: 1rem !important;
-    border-bottom: var(--border-size) solid var(--color-base01) !important;
-    margin-left: 1rem !important;
-    margin-right: 1rem !important;
-  }
-  
-  .smsc-topnav .topnav__badge {
-    background-color: var(--color-accent) !important;
-    color: var(--color-base03) !important;
-    border: var(--border-size) solid var(--color-base03) !important;
-  }
-  
-  .topnav__menu-arrow {
-    display: none !important;
-  }
-  
+  background: transparent !important;
+  height: auto !important;
+  gap: 1rem !important;
+  border-bottom: var(--border-size) solid var(--color-base01) !important;
+  margin-left: 1rem !important;
+  margin-right: 1rem !important;
+}
+
+.smsc-topnav .topnav__badge {
+  background-color: var(--color-accent) !important;
+  color: var(--color-base03) !important;
+  border: var(--border-size) solid var(--color-base03) !important;
+}
+
+.topnav__menu-arrow {
+  display: none !important;
+}
+
 .topnav__btn,
 .token {
   border: 2px solid var(--color-base02) !important;
@@ -50,6 +50,7 @@ nav {
   background-color: var(--color-accent) !important;
   height: var(--border-size) !important;
 }
+
 .smscButton:hover,
 .topnav__menuitem:hover {
   border: var(--border-size) solid var(--color-accent) !important;
