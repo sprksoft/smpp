@@ -9,7 +9,10 @@ html {
   --color-red: #cb5144;
   --color-green: #3c9534;
   --color-orange: #ce6c4a;
+
   --border-size: 2px;
+  --color-popup-border: var(--color-accent);
+  --color-hover-border: var(--color-accent);
 
 }
 .js-btn-profile>img,

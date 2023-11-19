@@ -14,7 +14,7 @@ html{
 
 #dmenu{
   background: var(--color-base00);
-  border: var(--border-size) solid var(--color-base02);
+  border: var(--border-size) solid var(--color-popup-border);
   position: absolute;
   display: flex;
   flex-direction: column;
