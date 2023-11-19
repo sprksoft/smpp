@@ -34,7 +34,11 @@ html{
   flex-grow: 1;
   padding: 0px !important;
   padding: var(--dmenu-margin);
-  font-size: inherit;
+  font-size: inherit !important;
+}
+.dmenu-input:focus{
+  outline-width:0;
+  outline: none;
 }
 
 .dmenu-label{
@@ -54,6 +58,7 @@ html{
 }
 #dmenu > .autocomplete > *{
   margin: var(--dmenu-margin);
+  border: none;
 }
 #dmenu > .autocomplete > *:nth-child(even){
   background: var(--color-base01);

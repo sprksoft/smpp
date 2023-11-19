@@ -13,20 +13,50 @@ try{
 }catch(e){}
 //END Garbage
 
+const goto_items=["didit", "digitale methode", "planner", "resultaten"];
+function get_goto_url(name) {
+  let platform_name = window.location.host.split('.')[0];
+  switch (name) {
+    case "didit":
+      return "https://www.diddit.be/login?smartschoolPlatform="+platform_name;
+    case "digitale methode":
+      return "https://digitalemethode.be/nl-be/sso?subdomain="+platform_name;
+    case "planner":
+      return "/planner";
+      
+    case "resultaten":
+      return "/results";
+    case "results":
+      return "/results";
+
+    default:
+      return null;
+  }
+}
+
 document.addEventListener("keyup", function(e){
-  //console.log(e);
   if (e.key == ':'){
-    dmenu(["unbloat", "didit", "digitale methode", "planner", "set theme"], function (cmd) {
+    let cmd_list = goto_items.concat(["set theme", "lock dmenu", "unbloat"]);
+    dmenu(cmd_list, function (cmd) {
       switch (cmd) {
+        case "lock dmenu":
+          lock_dmenu = !lock_dmenu;
+          return;
         case "unbloat":
           unbloat();
+          return;
         case "set theme":
           dmenu(theme_names, function (theme) {
             set_theme(theme)
           }, "theme:");
-
+          return;
         default:
           break;
+      }
+      let got_url = get_goto_url(cmd);
+      if (got_url !== null){
+        window.location = got_url;
+        return;
       }
     }, "quick:");
   }

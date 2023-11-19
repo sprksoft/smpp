@@ -1,4 +1,8 @@
-const dmenu_centerd=true;
+//CONFIG
+var dmenu_centerd=true;
+var lock_dmenu = false;
+//END CONFIG
+
 var command_list=[];
 var end_func=undefined;
 var open = false;
@@ -17,7 +21,7 @@ function dmenu(params, onselect, name="dmenu:") {
   end_func=onselect;
   user_text="";
   let dmenu = document.getElementById("dmenu");
-  dmenu.getElementsByClassName("dmenu-label").innerText=name;
+  dmenu.getElementsByClassName("dmenu-label")[0].innerText=name;
   dmenu.classList.remove("dmenu-hidden");
 
   if (dmenu_centerd && !dmenu.classList.contains("dmenu-centered")){
@@ -39,6 +43,9 @@ function dmenu(params, onselect, name="dmenu:") {
 
 }
 function dmenu_close() {
+  if (lock_dmenu){
+    return;
+  }
   open = false;
   let dmenu = document.getElementById("dmenu");
   dmenu.classList.add("dmenu-hidden");
@@ -119,10 +126,17 @@ function dmenu_update_search(command) {
 
 }
 function dmenu_select_next(prev=false) {
-  if (prev){
-    select(selected-1);
-  }else{
-    select(selected+1);
+  let dmenu = document.getElementById("dmenu");
+  let autocompletelist = dmenu.getElementsByClassName("autocomplete")[0];
+  
+  let inc=(prev*-2)+1;
+  let nodes = autocompletelist.childNodes;
+  for (let i = selected+inc; i > -2 && i < nodes.length; i+=inc) {
+    const node = nodes[i];
+    if (i == -1 || !node.classList.contains("hidden")){
+      select(i);
+      return;
+    }
   }
 }
 
@@ -134,6 +148,9 @@ function init_dmenu(){
   dmenu.innerHTML="<div class='top'><label class='dmenu-label'>dmenu:</label><input class='dmenu-input' type='text'></div><div class='autocomplete'></div>";
   document.body.insertBefore(dmenu, document.body.childNodes[-1]);
   let input = dmenu.getElementsByTagName("input")[0]
+  input.addEventListener("focusout", function (e) {
+    dmenu_close();
+  });
   input.addEventListener("keydown", function(e)
     {
       if (e.key == ":" && no_type){
@@ -143,6 +160,7 @@ function init_dmenu(){
 
       let command = e.target.value;
       if (e.key == "Enter"){
+        lock_dmenu = false;
         dmenu_close();
         if (end_func != undefined && command !== ""){
           end_func(command);
@@ -164,8 +182,8 @@ function init_dmenu(){
       }
     });
   input.addEventListener("keyup", function (e) {
-    let command = e.target.value;
-    if (e.key != "Shift" || e.key=="Control"){
+    if (e.key != "Shift" && e.key != "Control" && e.key != "Tab"){
+      let command = e.target.value;
       dmenu_update_search(command);
       no_type = false;
     }
