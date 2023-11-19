@@ -4,12 +4,14 @@ var end_func=undefined;
 var open = false;
 var selected=-1;
 var user_text="";
+var no_type=true;
 
 function dmenu(params, onselect, name="dmenu:") {
   if (open){
     return;
   }
   open = true;
+  no_type=true;
   selected=-1;
   command_list = params;
   end_func=onselect;
@@ -59,52 +61,68 @@ function get_match_count(str, match) {
   return largest_match;
 }
 
-
-function dmenu_update_search() {
+function select(index) {
+  if (index < -1){
+    return;
+  }
+  if (selected === index){
+    return;
+  }
   let dmenu = document.getElementById("dmenu");
   let input = dmenu.getElementsByTagName("input")[0];
   let autocompletelist = dmenu.getElementsByClassName("autocomplete")[0];
-  let command = input.value;
+  if (autocompletelist.childNodes.length <= index){
+    return;
+  }
+  let old_sel = autocompletelist.childNodes[selected];
+  if (old_sel != undefined){
+    old_sel.classList.remove("selected");
+  }
+
+  if (index == -1){
+    selected = -1;
+    input.value = user_text;
+    user_text = "";
+    return;
+  }
+  let new_sel = autocompletelist.childNodes[index];
+  new_sel.classList.add("selected");
+  if (user_text == ""){
+    user_text = input.value;
+  }
+  input.value = new_sel.innerText;
+
+  selected=index;
+}
+
+function dmenu_update_search(command) {
+  select(-1);
+  let dmenu = document.getElementById("dmenu");
+  let input = dmenu.getElementsByTagName("input")[0];
+  let autocompletelist = dmenu.getElementsByClassName("autocomplete")[0];
   
   let nodes = autocompletelist.childNodes;
   let largest_match_count = 0;
   for (let i=0; i < nodes.length; i++){
     let node = nodes[i];
     let mcount = get_match_count(node.innerText, command);
-    console.log(mcount);
+    if (mcount == 0 && command != ""){
+      node.classList.add("hidden");
+    }else{
+      node.classList.remove("hidden");
+    }
     if (largest_match_count < mcount){
       largest_match_count = mcount;
-      console.log(node);
-      autocompletelist.appendChild(node);
-      //TODO: move the node to the top
+      autocompletelist.insertBefore(node, nodes[0]);
     }
   }
 
 }
 function dmenu_select_next(prev=false) {
-  let dmenu = document.getElementById("dmenu");
-  let input = dmenu.getElementsByTagName("input")[0];
-  let autocompletelist = dmenu.getElementsByClassName("autocomplete")[0];
-  let old_sel = autocompletelist.childNodes[selected];
-  if (old_sel != undefined){
-    old_sel.classList.remove("selected");
-  }
   if (prev){
-    selected-=1;
+    select(selected-1);
   }else{
-    selected+=1;
-  }
-  let new_sel = autocompletelist.childNodes[selected];
-  if (new_sel == undefined){
-    selected = -1;
-    input.value = user_text;
-    user_text = "";
-  }else{
-    new_sel.classList.add("selected");
-    if (user_text == ""){
-      user_text = input.value;
-    }
-    input.value = new_sel.innerText;
+    select(selected+1);
   }
 }
 
@@ -115,24 +133,43 @@ function init_dmenu(){
   dmenu.classList.add("dmenu-hidden");
   dmenu.innerHTML="<div class='top'><label class='dmenu-label'>dmenu:</label><input class='dmenu-input' type='text'></div><div class='autocomplete'></div>";
   document.body.insertBefore(dmenu, document.body.childNodes[-1]);
-  dmenu.getElementsByTagName("input")[0].addEventListener("keydown", function(e)
+  let input = dmenu.getElementsByTagName("input")[0]
+  input.addEventListener("keydown", function(e)
     {
+      if (e.key == ":" && no_type){
+        e.preventDefault();
+        return;
+      }
+
       let command = e.target.value;
       if (e.key == "Enter"){
         dmenu_close();
         if (end_func != undefined && command !== ""){
           end_func(command);
         }
+        return;
       }else if (e.key == "Escape"){
         dmenu_close();
-      }else if (e.key == "Backspace" && command === ""){
-        dmenu_close();
+        return;
       }else if (e.key == "Tab"){
         dmenu_select_next(e.shiftKey);
         e.preventDefault();
+        return;
+      }else if (e.key == "Backspace"){
+        if (command == "" && no_type){
+          dmenu_close();
+          return;
+        }
+        user_text = e.target.value;
       }
-      dmenu_update_search();
     });
+  input.addEventListener("keyup", function (e) {
+    let command = e.target.value;
+    if (e.key != "Shift" || e.key=="Control"){
+      dmenu_update_search(command);
+      no_type = false;
+    }
+  });
 
 }
 

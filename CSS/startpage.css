@@ -1,25 +1,24 @@
 html {
-    --color-accent: #ffd5a0;
-    --color-text: #C2BAB2;
-    --color-base00: #191817;
-    --color-base01: #232020;
-    --color-base02: #3f3c3b;
-    --color-base03: #5b5756;
-    --color-blue: #378cd1;
-    --color-red: #cb5144;
-    --color-green: #3c9534;
-    --color-orange: #ce6c4a;
-    --border-size: 2px;
-  
-  }
-  
-  body {
-    background-color: var(--color-base00) !important;
-    color: var(--color-text);
-  }
-  
-  #rightcontainer,
-  #homepage__block--google {
-    display: none;
-  }
-  
+  --color-accent: #ffd5a0;
+  --color-text: #C2BAB2;
+  --color-base00: #191817;
+  --color-base01: #232020;
+  --color-base02: #3f3c3b;
+  --color-base03: #5b5756;
+  --color-blue: #378cd1;
+  --color-red: #cb5144;
+  --color-green: #3c9534;
+  --color-orange: #ce6c4a;
+  --border-size: 2px;
+
+}
+
+body {
+  background-color: var(--color-base00) !important;
+  color: var(--color-text);
+}
+
+#rightcontainer,
+#homepage__block--google {
+  display: none;
+}

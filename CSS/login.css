@@ -1,27 +1,26 @@
 .login-app__platform-indicator {
-    background-color: var(--color-base00) !important;
-  }
-  
-  .login-app__bottom {
-    background-image: none !important;
-  }
-  
-  .login-app__school-logo {
-    display: none !important;
-  }
-  
-  .login-app__title--sign-in-with,
-  .attachmentList__list .attachment__title__label { 
-    color: var(--color-text) !important;
-  }
-  
-  .login-app__left {
-    background-image: url("https://i.redd.it/psn2mwul2c971.jpg") !important;
-    background-position: center !important;
-    background-size: cover !important;
-  }
-  
-  .login-app__left>* {
-    display: none !important;
-  }
-  
+  background-color: var(--color-base00) !important;
+}
+
+.login-app__bottom {
+  background-image: none !important;
+}
+
+.login-app__school-logo {
+  display: none !important;
+}
+
+.login-app__title--sign-in-with,
+.attachmentList__list .attachment__title__label {
+  color: var(--color-text) !important;
+}
+
+.login-app__left {
+  background-image: url("https://i.redd.it/psn2mwul2c971.jpg") !important;
+  background-position: center !important;
+  background-size: cover !important;
+}
+
+.login-app__left>* {
+  display: none !important;
+}
