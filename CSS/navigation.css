@@ -40,7 +40,7 @@ nav {
 .smsc-topnav .topnav__menu,
 .bubble {
   background-color: var(--color-base01) !important;
-  border: 2px solid var(--color-accent) !important;
+  border: 2px solid var(--color-popup-border) !important;
   overflow: hidden !important;
   transition: none !important;
   text-decoration: none !important;
@@ -53,7 +53,7 @@ nav {
 
 .smscButton:hover,
 .topnav__menuitem:hover {
-  border: var(--border-size) solid var(--color-accent) !important;
+  border: var(--border-size) solid var(--color-hover-border) !important;
   background-color: var(--color-base02) !important;
   text-decoration: none;
 }

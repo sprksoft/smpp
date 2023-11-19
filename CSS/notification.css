@@ -45,6 +45,6 @@
 .notification:hover,
 .modern-message:hover {
   background-color: var(--color-base02) !important;
-  border-color: var(--color-accent) !important;
+  border: var(--border-size) solid var(--color-hover-border) !important;
   text-decoration: none !important;
 }
