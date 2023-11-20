@@ -78,16 +78,23 @@ function store_profile(profile){
     current_profile: profile
   });
 }
-function backgroundfunc(background){
-  let style = document.documentElement.style;
-  style.setProperty('--loginpage-image', background);
+function store_background(background){
+  chrome.storage.local.set({
+    current_background: background
+  });
 }
-const theme_names = ["default", "ldev", "birb", "bjarn", "comfy", "tan"];
+function set_background(background){
+  let style = document.documentElement.style;
+  style.setProperty('--loginpage-image', "url("+background+")");
+}
+
 chrome.storage.local.get('local_background', function (store) {
-  background = store.background;
+  background = store.local_background;
   console.log("set background to " + background);
-  backgroundfunc(background);
+  set_background(background);
 });
+
+const theme_names = ["default", "ldev", "birb", "bjarn", "comfy", "tan"];
 function set_theme(name) {
   let style = document.documentElement.style;
   style.setProperty('--color-accent', '#ffd5a0');

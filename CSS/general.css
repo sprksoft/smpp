@@ -13,7 +13,7 @@ html {
   --border-size: 2px;
   --color-popup-border: var(--color-accent);
   --color-hover-border: var(--color-accent);
-  --loginpage-image: url("https://i.redd.it/psn2mwul2c971.jpg")
+  
 }
 .js-btn-profile>img,
 .header__avatar,
