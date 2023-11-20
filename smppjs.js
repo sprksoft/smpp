@@ -58,8 +58,8 @@ document.addEventListener("keyup", function(e){
           return;
         case "set background":
           dmenu([], function (url) {
-            backgroundfunc(url); //FIXME: name change when Lukas pushes his code
-            //store_background(url);
+            set_background(url);
+            store_background(url);
           },"bg url:");
           return;
         case "set theme":
@@ -97,7 +97,7 @@ function store_profile(profile){
 }
 function store_background(background){
   chrome.storage.local.set({
-    current_background: background
+    local_background: background
   });
 }
 function set_background(background){
