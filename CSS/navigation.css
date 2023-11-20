@@ -58,6 +58,8 @@ nav {
   text-decoration: none;
 }
 
-.topnav__menuitem {
+.topnav__menuitem{
   border: var(--border-size) solid var(--color-base01) !important;
+  background-color: var(--color-base01) !important;
 }
+
