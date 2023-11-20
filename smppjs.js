@@ -34,16 +34,33 @@ function get_goto_url(name) {
   }
 }
 
+function open_url(url) {
+  let a = document.createElement("a");
+  a.href = url;
+  a.rel = 'noopener noreferrer';
+  a.target= '_blank';
+  a.click();
+}
+
 document.addEventListener("keyup", function(e){
   if (e.key == ':'){
-    let cmd_list = goto_items.concat(["set theme", "lock dmenu", "unbloat"]);
+    let cmd_list = goto_items.concat(["classroom", "set background", "set theme", "lock dmenu", "unbloat"]);
     dmenu(cmd_list, function (cmd) {
       switch (cmd) {
+        case "classroom":
+          open_url("https://classroom.google.com");
+          return;
         case "lock dmenu":
           lock_dmenu = !lock_dmenu;
           return;
         case "unbloat":
           unbloat();
+          return;
+        case "set background":
+          dmenu([], function (url) {
+            backgroundfunc(url); //FIXME: name change when Lukas pushes his code
+            //store_background(url);
+          },"bg url:");
           return;
         case "set theme":
           dmenu(theme_names, function (theme) {
@@ -56,7 +73,7 @@ document.addEventListener("keyup", function(e){
       }
       let got_url = get_goto_url(cmd);
       if (got_url !== null){
-        window.location = got_url;
+        open_url(got_url);
         return;
       }
     }, "quick:");
