@@ -5,6 +5,10 @@ document.addEventListener("DOMContentLoaded", function () {
   chrome.storage.local.get("current_profile", function (store) {
     profileSelect.value=store.current_profile;
   })
+  chrome.storage.local.get("local_background", function (store) {
+    input.value=store.local_background;
+  })
+
   profileSelect.addEventListener("change", function () {
     var selectedProfile = document.getElementById("profileSelector").value;
 
@@ -18,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
   input.addEventListener("change", function () {
     var background = document.getElementById("input").value;
     chrome.storage.local.set({
-      background_local: background
+      local_background: background
     });
     
     console.log("set backround to " + background);
