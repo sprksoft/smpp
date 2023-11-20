@@ -139,7 +139,7 @@ function set_theme(name) {
       break;                                                                  
     case 'bjarn':
       style.setProperty('--color-accent', "#95a4ee");
-      style.setProperty('--color-text', "#fabcc2");
+      style.setProperty('--color-text', "#d2e4e9");
       style.setProperty('--color-base00', "#191817");
       style.setProperty('--color-base01', "#1e1e1e");
       style.setProperty('--color-base02', "#1e1e1ec1");
