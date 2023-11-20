@@ -4,7 +4,7 @@ body {
   color: var(--color-text);
 }
 
-#rightcontainer,
+
 #homepage__block--google {
   display: none;
 }
