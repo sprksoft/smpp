@@ -139,10 +139,10 @@ function set_theme(name) {
       break;                                                                  
     case 'bjarn':
       style.setProperty('--color-accent', "#95a4ee");
-      style.setProperty('--color-text', "#80dbbff3");
+      style.setProperty('--color-text', "#fabcc2");
       style.setProperty('--color-base00', "#191817");
-      style.setProperty('--color-base01', "#1e1e1ec1");
-      style.setProperty('--color-base02', "#222222");
+      style.setProperty('--color-base01', "#1e1e1e");
+      style.setProperty('--color-base02', "#1e1e1ec1");
       style.setProperty('--color-base03', "#1b1b1bf3");
       break;
     case 'comfy':
