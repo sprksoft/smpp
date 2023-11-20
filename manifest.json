@@ -31,3 +31,4 @@
   "permissions": ["webRequest", "webRequestBlocking", "<all_urls>","activeTab","storage"]
 
 }
+

@@ -27,3 +27,6 @@ html{
 .login-app__left>* {
   display: none !important;
 }
+.login-app__right{
+  box-shadow: 0 0 10px 0 var(--color-base00) !important;
+}
