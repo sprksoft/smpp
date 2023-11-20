@@ -39,7 +39,7 @@ nav {
 
 .smsc-topnav .topnav__menu,
 .bubble {
-  background-color: var(--color-base01) !important;
+  background-color: var(--color-base02) !important;
   border: 2px solid var(--color-popup-border) !important;
   overflow: hidden !important;
   transition: none !important;
@@ -59,7 +59,7 @@ nav {
 }
 
 .topnav__menuitem{
-  border: var(--border-size) solid var(--color-base01) !important;
-  background-color: var(--color-base01) !important;
+  border: var(--border-size) solid var(--color-base02) !important;
+  background-color: var(--color-base02) !important;
 }
 
