@@ -21,7 +21,8 @@
 }
 
 .highlight,
-.btn {
+.btn,
+.dialog-content {
   background: var(--color-base01) !important;
   border-color: var(--color-base02) !important;
 

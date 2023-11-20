@@ -16,7 +16,9 @@ nav {
 .topnav__menu-arrow {
   display: none !important;
 }
-
+.smsc-topnav .topnav__menu__title{
+  color: var(--color-text) !important;
+}
 .topnav__btn,
 .token,.titleRight {
   border: 2px solid var(--color-base02) !important;
@@ -39,7 +41,7 @@ nav {
 
 .smsc-topnav .topnav__menu,
 .bubble {
-  background-color: var(--color-base01) !important;
+  background-color: var(--color-base02) !important;
   border: 2px solid var(--color-popup-border) !important;
   overflow: hidden !important;
   transition: none !important;
@@ -58,6 +60,9 @@ nav {
   text-decoration: none;
 }
 
-.topnav__menuitem {
-  border: var(--border-size) solid var(--color-base01) !important;
+.topnav__menuitem{
+  border: var(--border-size) solid var(--color-base02) !important;
+  background-color: var(--color-base02) !important;
 }
+
+
