@@ -41,10 +41,6 @@ html {
   display: none !important;
 }
 
-.homepage__block {
-  display: none !important;
-}
-
 input[type="checkbox"]:after {
   background-color: var(--color-base00) !important;
   color: var(--color-text) !important;
