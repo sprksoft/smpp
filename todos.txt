@@ -4,7 +4,10 @@ planner front page maybe
 
 more colour profiles
 
-
+# dmenu
+* arrow keys
+* oneshape
+* digitale methode
 
 
 
