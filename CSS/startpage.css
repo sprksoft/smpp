@@ -8,3 +8,10 @@ body {
 #homepage__block--google {
   display: none;
 }
+#centercontainer{
+    background-image: var(--loginpage-image) !important;
+    background-position: center !important;
+    background-size: cover !important;
+    border-left: 10px solid var(--color-accent);
+    border-right: 10px solid var(--color-accent);
+}

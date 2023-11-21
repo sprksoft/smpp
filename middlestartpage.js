@@ -1,0 +1,1 @@
+document.getElementById("centercontainer").innerHTML = ` <div class="homepage-middle"> </div>`
