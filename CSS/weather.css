@@ -24,9 +24,7 @@
   }
   
   .weather-main {
-
     font-weight: bold;
-
   }
   
   .weather-description {
@@ -34,17 +32,22 @@
     margin-bottom: 5px;
 
   }
-  
-  .weather-humidity,
-  .weather-wind-speed,
-  .weather-rain-volume {
-    font-size: 14px;
-    margin-bottom: 5px;
+  .weather-humwind{
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
 
+    margin-top: 5x;
   }
-.weather-range{
-    font-size: 16px;
-    margin-bottom: 5px;
+  .col{
+    display: flex;
+    align-items: center !important;
+    text-align: left;
+    font-size: 12px;
     font-weight: bold;
-
-}
+    color: var(--color-accent);
+  }
+  .col img{
+    width: 50px;
+    margin-right: 2px;
+  }

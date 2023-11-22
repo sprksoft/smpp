@@ -7,11 +7,21 @@ body {
 
 #homepage__block--google {
   display: none;
+
 }
-#centercontainer{
+.homepage{
     background-image: var(--loginpage-image) !important;
     background-position: center !important;
     background-size: cover !important;
-    border-left: 10px solid var(--color-accent);
-    border-right: 10px solid var(--color-accent);
+
+}
+#leftcontainer,#rightcontainer{
+  background-color: #0202058f !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+}
+#centercontainer{
+  background-color: #02020559 !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
 }

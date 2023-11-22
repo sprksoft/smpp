@@ -23,8 +23,8 @@ html {
 }
 
 #centercontainer {
-  border-left: var(--border-size) solid var(--color-base01) !important;
-  border-right: var(--border-size) solid var(--color-base01) !important;
+  border-left: 4px solid var(--color-base01) !important;
+  border-right: 4px solid var(--color-base01) !important;
 }
 
 .student-support-block__item.icon-label,

@@ -47,12 +47,10 @@ async function updateWeatherDiv() {
         const description = weather[0].description;
         const rainVolume = rain ? rain['1h'] : 0; // Check if rain data
         const humidity = main.humidity;
-        const minTemp = Math.round(main.temp_min);
-        const maxTemp = Math.round(main.temp_max);
         let windSpeed = Number(wind.speed);
         const mainWeather = weather[0].main;
         windSpeedkmh = Math.round(windSpeed * 3.6); // Convert to km/h
-        let temp_range = "Min "+ String(minTemp) + "°C - Max " + String(maxTemp)+"°C";
+
         
         // Update the content of the div with unique classes
         try {
@@ -63,14 +61,23 @@ async function updateWeatherDiv() {
     <img src="https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/chanceflurries.svg" class="weather-icon">
 </div>
             <p class="weather-temperature">${temperature}°C</p>
+            <div class="weather-humwind">
+            <div class="col"> <img src='https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/humidity.png'><div>
+            <p class="weather-humidity"></p>
+            <p class="weather-humidity">${humidity}%</p>
+            <p class="weather-humidity">Humidity</p></div>
+            </div>
+            <div class="weather-humwind">
+            <div class="col"> <img src='https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/wind.png'><div>
+            <p class="weather-wind"></p>
+            <p class="weather-wind">${windSpeedkmh} km/h</p>
+            <p class="weather-wind">Wind Speed</p></div>
+            </div>
+            </div>
 
-            <p class="weather-description">(${description})</p>
-            <p class="weather-humidity">Humidity: ${humidity}%</p>
-            <p class="weather-temp-range">${temp_range}</p>
-
-            <p class="weather-wind-speed">Wind Speed: ${windSpeedkmh} km/h</p>
-            <p class="weather-rain-volume">Rain (last hour): ${rainVolume} mm</p> <!-- Display rain volume -->
+            </div>
         `;
+
         const weatherIcon = document.querySelector('.weather-icon');
         if(description == "broken clouds"){
             weatherIcon.src = 'https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/mostlycloudy.svg'
@@ -101,9 +108,6 @@ async function updateWeatherDiv() {
         }
         else if (mainWeather == "Thunderstorm"){
             weatherIcon.src = 'https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/tstorms.svg'
-        }
-        else if (mainWeather == "Drizzle"){
-            weatherIcon.src = 'https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/chancerain.svg'
         }
     }
          catch (e) {
