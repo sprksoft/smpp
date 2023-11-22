@@ -20,25 +20,31 @@ function get_books_from_html() {
   return true;
 }
 
-let lesses=null;
-function get_books_from_html() {
-  if (lesses !== null){
-    return true;
+function get_lessen() {
+  lessen = window.localStorage.getItem("lessen");
+  return lessen;
+}
+function store_lessen() {
+  console.log("soring lessen");
+  window.localStorage.setItem("lessen", lessen);
+}
+
+let lesses=get_lessen();
+function get_lessen_from_html() {
+  if (lesses == null){
+    lesses={};
   }
   let lesses_els = document.querySelectorAll(".listItem");
   if (lesses_els.length == 0){
     return false;
   }
-  console.log(lesses_els);
   
-  lesses = {};
   for (let i = 0; i < lesses_els.length; i++) {
     const name = lesses_els[i].querySelector("span > p").innerText.toLowerCase();
     if (name == undefined || name.split(".").length != 3){
       continue; 
     }
-    const func = lesses_els[i].click;
-    lesses[name] = func;
+    lesses[name] = lesses_els[i];
   }
 
   console.log(lesses);
@@ -58,18 +64,20 @@ function book_select_menu(){
 }
 
 function les_select_menu() {
-  if (!get_lessen_from_html()){
+  console.log(lessen);
+  if (lessen == null){
+    reload_lessen();
     return false;
   }
   dmenu(Object.keys(lesses), function(cmd){
-    open_url(lesses[cmd]);
+    lesses[cmd].click();
   }, "les:");
 
   return true;
 }
 
 function quick_menu() {
-  if (window.location.includes("boekentas/")){
+  if (window.location.pathname.includes("boekentas/")){
     return les_select_menu();
   }else{
     return book_select_menu();
@@ -89,6 +97,25 @@ if (query.includes("smpp=true")){
 
 document.addEventListener("keyup", function(e){
   if (e.key == ':'){
-    book_select_menu();
+    quick_menu();
+  }
+  if (e.key == 'r'){
+    reload_lessen();
   }
 });
+
+
+
+function reload_lessen(params) {
+  let interval = setInterval(() => {
+    let button = document.getElementById("student-vt-4_teacher-vt-4");
+    if (button != undefined){
+      button.click();
+      get_lessen_from_html();
+      if (button.disabled){
+        store_lessen();
+        clearInterval(interval);
+      }
+    }
+  }, 500);
+}
