@@ -5,9 +5,11 @@ planner front page maybe
 more colour profiles
 
 # dmenu
-* arrow keys
-* oneshape
-* digitale methode
+[*] arrow keys
+[*] oneshape
+[*] scrollbar
+[ ] digitale methode
+[ ] keybind system
 
 
 

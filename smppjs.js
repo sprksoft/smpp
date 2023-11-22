@@ -13,21 +13,23 @@ try{
 }catch(e){}
 //END Garbage
 
-const goto_items=["didit", "digitale methode", "planner", "resultaten"];
+const goto_items=["didit", "digitale methode", "planner", "resultaten", "classroom", "onshape"];
 function get_goto_url(name) {
   let platform_name = window.location.host.split('.')[0];
   switch (name) {
     case "didit":
       return "https://www.diddit.be/login?smartschoolPlatform="+platform_name;
     case "digitale methode":
-      return "https://digitalemethode.be/nl-be/sso?subdomain="+platform_name;
+      return "https://digitalemethode.be/nl-be/sso?subdomain="+platform_name+"&smpp=true";
     case "planner":
       return "/planner";
       
     case "resultaten":
       return "/results";
-    case "results":
-      return "/results";
+    case "classroom":
+      return "https://classroom.google.com";
+    case "onshape":
+      return "https://onshape.com" ;
 
     default:
       return null;
@@ -44,12 +46,9 @@ function open_url(url) {
 
 document.addEventListener("keyup", function(e){
   if (e.key == ':'){
-    let cmd_list = goto_items.concat(["classroom", "set background", "set theme", "lock dmenu", "unbloat"]);
+    let cmd_list = goto_items.concat(["set background", "set theme", "lock dmenu", "unbloat"]);
     dmenu(cmd_list, function (cmd) {
       switch (cmd) {
-        case "classroom":
-          open_url("https://classroom.google.com");
-          return;
         case "lock dmenu":
           lock_dmenu = !lock_dmenu;
           return;
@@ -111,7 +110,7 @@ chrome.storage.local.get('local_background', function (store) {
   set_background(background);
 });
 
-const theme_names = ["default", "ldev", "birb", "bjarn", "comfy", "tan"];
+const theme_names = ["default", "ldev", "birb", "bjarn", "comfy", "tan", "winter", "fall", "OLED"];
 function set_theme(name) {
   let style = document.documentElement.style;
   style.setProperty('--color-accent', '#ffd5a0');

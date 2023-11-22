@@ -17,7 +17,7 @@ function dmenu(params, onselect, name="dmenu:") {
   open = true;
   no_type=true;
   selected=-1;
-  command_list = params;
+  command_list = [];
   end_func=onselect;
   user_text="";
   let dmenu = document.getElementById("dmenu");
@@ -31,7 +31,8 @@ function dmenu(params, onselect, name="dmenu:") {
   let autocompletelist = dmenu.getElementsByClassName("autocomplete")[0];
   autocompletelist.innerHTML = "";
   for (let i = 0; i < params.length; i++) {
-    const cmd = params[i];
+    const cmd = params[i].toLowerCase();
+    command_list.push(cmd);
     let thing = document.createElement("div");
     thing.innerHTML = cmd;
     autocompletelist.appendChild(thing);
@@ -158,6 +159,8 @@ function init_dmenu(){
         return;
       }
 
+      console.log(e);
+
       let command = e.target.value;
       if (e.key == "Enter"){
         lock_dmenu = false;
@@ -169,11 +172,16 @@ function init_dmenu(){
       }else if (e.key == "Escape"){
         dmenu_close();
         return;
-      }else if (e.key == "Tab"){
-        dmenu_select_next(e.shiftKey);
+      }else if ((e.key == "Tab" && e.shiftKey) || e.key == "ArrowUp"){
+        dmenu_select_next(true);
         e.preventDefault();
         return;
-      }else if (e.key == "Backspace"){
+      }else if ((e.key == "Tab" && !e.shiftKey) || e.key == "ArrowDown"){
+        dmenu_select_next(false);
+        e.preventDefault();
+        return;
+      }
+      else if (e.key == "Backspace"){
         if (command == "" && no_type){
           dmenu_close();
           return;
@@ -182,7 +190,7 @@ function init_dmenu(){
       }
     });
   input.addEventListener("keyup", function (e) {
-    if (e.key != "Shift" && e.key != "Control" && e.key != "Tab"){
+    if (e.key != "Shift" && e.key != "Control" && e.key != "Tab" && e.key != "ArrowUp" && e.key != "ArrowDown"){
       let command = e.target.value;
       dmenu_update_search(command);
       no_type = false;

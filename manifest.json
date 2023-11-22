@@ -9,10 +9,16 @@
 
   "content_scripts": [
     {
+      "matches": ["*://digitalemethode.be/*"],
+      "all_frames": true,
+      "css": ["dpp/dpp.css","DMENU/dmenu.css"],
+      "js": ["utils.js", "DMENU/dmenu.js", "dpp/dpp.js"]
+    },
+    {
       "matches": ["*://*.smartschool.be/*"],
       "all_frames": true,
       "css": ["CSS/general.css","CSS/weather.css", "DMENU/dmenu.css","CSS/login.css","CSS/messages.css","CSS/navigation.css","CSS/notification.css","CSS/planner.css","CSS/results.css","CSS/startpage.css"],
-      "js": ["smppjs.js", "DMENU/dmenu.js","weather.js","middlestartpage.js","delijn.js"]
+      "js": [""utils.js", "smppjs.js", "DMENU/dmenu.js","weather.js","middlestartpage.js","delijn.js"]
     }
   ],
   "background": {

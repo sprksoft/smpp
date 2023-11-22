@@ -1,5 +1,6 @@
 html{
   --dmenu-margin: 1px;
+  --dmenu-font-size: 1.5rem;
 }
 
 .dmenu-centered{
@@ -18,7 +19,7 @@ html{
   position: absolute;
   display: flex;
   flex-direction: column;
-  font-size: 1.5rem;
+  font-size: var(--dmenu-font-size) !important;
   z-index: 999999;
 }
 
@@ -31,11 +32,11 @@ html{
 .dmenu-input{
   border: none !important;
   background: var(--color-base01);
-  color: var(--color-base02);
+  color: var(--color-text) !important;
   flex-grow: 1;
   padding: 0px !important;
   padding: var(--dmenu-margin);
-  font-size: inherit !important;
+  font-size: var(--dmenu-font-size) !important;
 }
 .dmenu-input:focus{
   outline-width:0;
@@ -52,13 +53,14 @@ html{
 }
 
 #dmenu >.autocomplete{
-  overflow:scroll;
+  overflow-y:auto;
 }
 #dmenu >.autocomplete > .hidden{
   visibility: hidden;
 }
 #dmenu > .autocomplete > *{
   margin: var(--dmenu-margin);
+  color: var(--color-text) !important;
   border: none;
 }
 #dmenu > .autocomplete > *:nth-child(even){
