@@ -6,7 +6,7 @@ body {
 
 
 #homepage__block--google {
-  display: none;
+    transition: none;
 
 }
 .homepage{
