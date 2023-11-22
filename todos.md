@@ -1,15 +1,14 @@
-delijn api
-
-planner front page maybe
-
-more colour profiles
+# general
+- [ ] delijn api
+- [ ] planner front page maybe
+- [ ] more colour profiles
 
 # dmenu
-[*] arrow keys
-[*] oneshape
-[*] scrollbar
-[ ] digitale methode
-[ ] keybind system
+- [x] arrow keys
+- [x] oneshape
+- [x] scrollbar
+- [ ] digitale methode
+- [ ] keybind system
 
 
 
@@ -54,6 +53,5 @@ https://github.com/frickingbird8002/smpp-images/main/wind.png
 
 
 
-
-
-sex met hitler giften aan sylwester
+# syl
+- [ ] sex met hitler giften aan sylwester
