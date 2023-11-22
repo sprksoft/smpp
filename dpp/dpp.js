@@ -22,10 +22,11 @@ function get_books_from_html() {
 
 function get_lessen() {
   lessen = window.localStorage.getItem("lessen");
+  console.log("getting lessen: "+lessen);
   return lessen;
 }
 function store_lessen() {
-  console.log("soring lessen");
+  console.log("storing lessen");
   window.localStorage.setItem("lessen", lessen);
 }
 
