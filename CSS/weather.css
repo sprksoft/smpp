@@ -1,6 +1,6 @@
 /* Styles for weather information */
 #homepage__block--datepicker {
-    background-color: var(--color-base01);
+    background-color: var(--color-infostartpagebg);
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);

@@ -144,10 +144,11 @@ function set_theme(name) {
       style.setProperty('--color-accent', "#95a4ee");
       style.setProperty('--color-text', "#d2e4e9");
       style.setProperty('--color-base00', "#191817");
-      style.setProperty('--color-base01', "#1e1e1e81");
+      style.setProperty('--color-base01', "#1e1e1e");
       style.setProperty('--color-base02', "#1e1e1e");
       style.setProperty('--color-base03', "#1b1b1bf3");
-      style.setProperty('--color-startpage-bg','#0202058f');
+      style.setProperty('--color-startpage-bg', "#0202058f");
+      style.setProperty('--color-infostartpagebg', "1e1e1ec1");
       break;
     case 'comfy':
       style.setProperty('--color-accent', "#95a4ee");
