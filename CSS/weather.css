@@ -1,13 +1,13 @@
 /* Styles for weather information */
 #homepage__block--datepicker {
-    background-color: var(--color-base01);
+    background-color: var(--color-infostartpagebg);
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
     max-width: 400px;
     margin: 9px;
-    border: 3px solid var(--color-base03);
+    border: var(--border-size) solid var(--color-base03);
 
   }
   

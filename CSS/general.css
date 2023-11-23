@@ -9,6 +9,9 @@ html {
   --color-red: #cb5144;
   --color-green: #3c9534;
   --color-orange: #ce6c4a;
+  --color-startpage-bg: #0202058f;
+  --color-infostartpagebg: #232020;
+
 
   --border-size: 2px;
   --color-popup-border: var(--color-accent);
