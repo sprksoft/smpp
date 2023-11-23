@@ -1,7 +1,8 @@
 
 async function fetchData() {
   const apiKey = 'ddb68605719d4bb8b6444b6871cefc7a'; // Replace 'YOUR_API_KEY' with your actual API key
-  const apiUrl = 'https://api.delijn.be/DLKernOpenData/api/v1/haltes/0/303095/real-time?maxAantalDoorkomsten=10'; // Replace with your API endpoint
+  const halte = 302549
+  const apiUrl =`https://api.delijn.be/DLKernOpenData/api/v1/haltes/0/${halte}/real-time?maxAantalDoorkomsten=5`; // Replace with your API endpoint
 
   try {
     const response = await fetch(apiUrl, {
@@ -31,6 +32,8 @@ function createApplication(data) {
   const richting = []
   const dienstregelingTijdstip = []
   const real_timeTijdstip = []
+
+
   //let stringToInt = parseInt("06")
   for (let i = 0; i < doorkomstlength; i++) {
     bestemmingen.push(data.halteDoorkomsten[0].doorkomsten[i].bestemming)
@@ -57,7 +60,7 @@ function createApplication(data) {
       if (data.halteDoorkomsten[0].doorkomsten[i]["real-timeTijdstip"] != undefined) {
         real_timeTijdstip.push(data.halteDoorkomsten[0].doorkomsten[i]["real-timeTijdstip"])
       } else {
-        real_timeTijdstip.push("Geen Realtime-tijd voor deze rit")
+        real_timeTijdstip.push("none")
         console.log("geen realtimeregelingtijd")
       }
     }
@@ -67,13 +70,39 @@ function createApplication(data) {
     console.log(dienstregelingTijdstip);
     console.log(real_timeTijdstip);
     leftContainer.innerHTML = ` `;
+
     for (let i = 0; i < doorkomstlength; i++) {
-      div = document.createElement("div");
-      div.innerHTML = `<div class=lijncards><h2>${lijnnummers[i]}</h2><h3>${bestemmingen[i]}</h3><p>
-      ${real_timeTijdstip[i]}
-      </p></div>`
-      leftContainer.appendChild(div);
+      const date = new Date(dienstregelingTijdstip[i]);
+
+      const hour = date.getHours();
+      let minute = date.getMinutes();
+      const totalMinutes = hour * 60 + minute;
+      if (real_timeTijdstip != "none"){
+        const realtimedate = new Date(real_timeTijdstip[i]);
+    
+        const hourrealtime  = realtimedate.getHours();
+        let minuterealtime = realtimedate.getMinutes();
+        const totalMinutesrealtime = hourrealtime * 60 + minuterealtime;
+        const timeDifference = totalMinutesrealtime - totalMinutes;
+        minuterealtime = minuterealtime.toString().padStart(2, '0');
+        div = document.createElement("div");
+        div.innerHTML = `<div class=lijncards><h2 class=lijncardstitle>${lijnnummers[i]}</h2><h3 class=lijncardsdestin>${bestemmingen[i]}</h3><span class="time">
+        ${hourrealtime}:${minuterealtime} ${timeDifference}
+        </span></div>`
+        leftContainer.appendChild(div);
+      }else{
+        const timeDifference = "Vertrokken"
+        minute = minute.toString().padStart(2, '0');
+        div = document.createElement("div");
+        div.innerHTML = `<div class=lijncards><h2 class=lijncardstitle>${lijnnummers[i]}</h2><h3 class=lijncardsdestin>${bestemmingen[i]}</h3><span class="time">
+        ${hour}:${minute} No Realtime
+        </span></div>`
+        leftContainer.appendChild(div);
+      }
     }
+    lastdiv = document.createElement("div");
+    lastdiv.innerHTML = `<div class=lastdiv><a href="https://www.delijn.be/nl/contact/attest-aanvraag/" target="_blank">Te laat?</a></div>`
+    leftContainer.appendChild(lastdiv);
   }
 
 // Call the fetchData function to initiate the API request and populate the application

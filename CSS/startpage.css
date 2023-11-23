@@ -7,7 +7,7 @@ body {
 
 #homepage__block--google {
     transition: none;
-
+    border-bottom: none !important;
 }
 .homepage{
     background-image: var(--loginpage-image) !important;
@@ -24,4 +24,7 @@ body {
   background-color: #02020559 !important;
   backdrop-filter: blur(4px) !important;
   -webkit-backdrop-filter: blur(4px) !important;
+}
+#homepage__block--contact{
+  display: none !important;
 }
