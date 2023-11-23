@@ -1,6 +1,8 @@
 .lijncards{
     background-color: var(--color-base01);
-    border: 5px solid var(--color-base03);
+    border: var(--border-size) solid var(--color-base03);
     align-self: center;
     padding: 10px;
+    margin-bottom : 20px !important;
+    border-radius: 20px !important;
 }

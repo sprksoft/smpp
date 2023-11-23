@@ -16,7 +16,7 @@ body {
 
 }
 #leftcontainer,#rightcontainer{
-  background-color: #0202058f !important;
+  background-color: var(--color-startpage-bg) !important;
   backdrop-filter: blur(8px) !important;
   -webkit-backdrop-filter: blur(8px) !important;
 }
