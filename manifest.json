@@ -17,8 +17,11 @@
     {
       "matches": ["*://*.smartschool.be/*"],
       "all_frames": true,
-      "css": ["CSS/general.css","CSS/weather.css", "DMENU/dmenu.css","CSS/login.css","CSS/messages.css","CSS/navigation.css","CSS/notification.css","CSS/planner.css","CSS/results.css","CSS/startpage.css","CSS/delijn.css"],
-      "js": ["utils.js", "smppjs.js", "DMENU/dmenu.js","weather.js","middlestartpage.js","delijn.js"]
+      "css": ["CSS/general.css","CSS/weather.css", "DMENU/dmenu.css","CSS/login.css",
+      "CSS/messages.css","CSS/navigation.css","CSS/notification.css","CSS/planner.css",
+      "CSS/results.css","CSS/startpage.css","CSS/delijn.css"],
+      "js": ["utils.js", "smppjs.js", "DMENU/dmenu.js",
+      "weather.js","middlestartpage.js","delijn.js"]
     }
   ],
   "background": {
