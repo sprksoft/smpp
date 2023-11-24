@@ -16,14 +16,14 @@ body {
 
 }
 #leftcontainer,#rightcontainer{
-  background-color: var(--color-startpage-bg) !important;
+  background-color: #02020585 !important;
   backdrop-filter: blur(8px) !important;
   -webkit-backdrop-filter: blur(8px) !important;
 }
 #centercontainer{
   background-color: #02020559 !important;
   backdrop-filter: blur(4px) !important;
-  -webkit-backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(2px) !important;
 }
 #homepage__block--contact{
   display: none !important;

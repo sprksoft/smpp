@@ -2,8 +2,8 @@
 document.addEventListener("DOMContentLoaded", function () {
   let profileSelect = document.getElementById("profileSelector");
   let input = document.getElementById("input");
-  let haltes = document.getElementById("halt"); // Fix: Change "haltes" to "halt"
-  let idSelect = document.getElementById("idSelector");
+  let halte = document.getElementById("halt");
+  let button = document.getElementById("button");
 
   chrome.storage.local.get("current_profile", function (store) {
     profileSelect.value = store.current_profile;
@@ -31,30 +31,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
     console.log("set background to " + background);
   });
-
+  halte.addEventListener("change", function () {
+    var halte = document.getElementById("halt").value;
+    chrome.storage.local.set({
+      current_id: halte,
+    });
+    console.log("set halte to " + halte);
+  });
+  button.addEventListener("change", function () {
+    var button = document.getElementById("button").checked;
+    chrome.storage.local.set({
+      buttonstate: button,
+    });
+    console.log("set button to " + button);
+  });
   chrome.storage.local.get("current_id", function (store) {
-    idSelect.value = store.current_id;
+    halte.value = store.current_id;
   });
-
-  chrome.storage.local.get("local_id", function (store) {
-    haltes.value = store.local_id; // Fix: Change "haltes" to "halt"
-  });
-
-  haltes.addEventListener("change", function () {
-    var selectedId = document.getElementById("idSelector").value;
-
-    chrome.storage.local.set({
-      current_id: selectedId,
-    });
-
-    console.log("set bus id to " + selectedId);
-  });
-
-  haltes.addEventListener("change", function () {
-    var halte = document.getElementById("halt").value; // Fix: Change "haltes" to "halt"
-    chrome.storage.local.set({
-      local_id: halte,
-    });
+  chrome.storage.local.get("buttonstate", function (store) {
+    button.checked = store.buttonstate;
   });
 });
-

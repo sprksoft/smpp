@@ -82,12 +82,25 @@ document.addEventListener("keyup", function(e){
 
 
 
+chrome.storage.local.get('local_background', function (store) {
+  background = store.local_background;
+  console.log("set background to " + background);
+
+});
+
 chrome.storage.local.get('current_profile', function (store) {
   selected_profile = store.current_profile;
   console.log("set profile to " + store.current_profile);
   set_theme(selected_profile);
-});
 
+});
+chrome.storage.local.get('buttonstate', function (store) {
+  let button = store.buttonstate;
+  console.log("set buttonstate to " + button);
+  if (button==true){
+    set_background(background);
+  }
+});
 
 function store_profile(profile){
   chrome.storage.local.set({
@@ -99,16 +112,12 @@ function store_background(background){
     local_background: background
   });
 }
+
 function set_background(background){
   let style = document.documentElement.style;
   style.setProperty('--loginpage-image', "url("+background+")");
 }
 
-chrome.storage.local.get('local_background', function (store) {
-  background = store.local_background;
-  console.log("set background to " + background);
-  set_background(background);
-});
 
 const theme_names = ["default", "ldev", "birb", "bjarn", "comfy", "tan", "winter", "fall", "OLED"];
 function set_theme(name) {
@@ -119,10 +128,9 @@ function set_theme(name) {
   style.setProperty('--color-base01', '#232020');
   style.setProperty('--color-base02', '#3f3c3b');
   style.setProperty('--color-base03', '#5b5756');
-  style.setProperty('--color-startpage-bg','#0202058f');
   style.setProperty('--color-popup-border', 'var(--color-accent)');
   style.setProperty('--color-hover-border', 'var(--color-accent)');
-
+  style.setProperty('--loginpage-image', "url(https://wallpapercave.com/wp/wp4254902.jpg)");
 
   switch (name) {
     case "default":
@@ -131,14 +139,16 @@ function set_theme(name) {
     case 'ldev':
       style.setProperty('--color-popup-border', 'var(--color-base02)');
       style.setProperty('--color-hover-border', 'var(--color-base03)')
+      style.setProperty('--loginpage-image', "url(https://i.redd.it/yfssdsfosao11.png)");
       break;
-    case 'birb':
+    case 'purple':
       style.setProperty('--color-accent', '#A58AE3');
       style.setProperty('--color-text', '#cfc8f4');
       style.setProperty('--color-base00', '#3F3557');
       style.setProperty('--color-base01', '#5B4C7D');
       style.setProperty('--color-base02', '#6E5C97');
       style.setProperty('--color-base03', '##7764A4');
+      style.setProperty('--loginpage-image', "url(https://www.hdwallpapers.in/download/macos_monterey_shapes_hd_macos-2560x1440.jpg)");
       break;                                                                  
     case 'bjarn':
       style.setProperty('--color-accent', "#95a4ee");
@@ -147,16 +157,8 @@ function set_theme(name) {
       style.setProperty('--color-base01', "#1e1e1e");
       style.setProperty('--color-base02', "#1e1e1e");
       style.setProperty('--color-base03', "#1b1b1bf3");
-      style.setProperty('--color-startpage-bg', "#0202058f");
-      style.setProperty('--color-infostartpagebg', "1e1e1ec1");
-      break;
-    case 'comfy':
-      style.setProperty('--color-accent', "#95a4ee");
-      style.setProperty('--color-text', "#80dbbff3");
-      style.setProperty('--color-base00', "#191817");
-      style.setProperty('--color-base01', "#1e1e1ec1");
-      style.setProperty('--color-base02', "#222222");
-      style.setProperty('--color-base03', "#1b1b1bf3");
+      style.setProperty('--loginpage-image', "url(https://th.bing.com/th/id/R.f8e9e3ed500e73dd6617c5aea7f75ef3?rik=6fM7LL0jLlhJhA&pid=ImgRaw&r=0)");
+
       break;
     case 'tan':
       style.setProperty('--color-accent', '#F0F2F0');
@@ -165,6 +167,7 @@ function set_theme(name) {
       style.setProperty('--color-base01', '#594645');
       style.setProperty('--color-base02', '#A68B81');
       style.setProperty('--color-base03', '#D9C5B4');
+      style.setProperty('--loginpage-image', "url(https://4kwallpapers.com/images/wallpapers/gargantua-black-3840x2160-9621.jpg)");
       break;
     case 'fall':
       style.setProperty('--color-accent', '#F2AF5C');
@@ -173,6 +176,7 @@ function set_theme(name) {
       style.setProperty('--color-base01', '#40312E');
       style.setProperty('--color-base02', '#BF5B45');
       style.setProperty('--color-base03', '#D9734E');
+      style.setProperty('--loginpage-image', "url(https://wallpapercave.com/wp/wp7464660.jpg)");
       break;
     case 'winter':
       style.setProperty('--color-accent', '#93B8C2');
@@ -181,6 +185,7 @@ function set_theme(name) {
       style.setProperty('--color-base01', '#013340');
       style.setProperty('--color-base02', '#236475');
       style.setProperty('--color-base03', '#DCEFF5');
+      style.setProperty('--loginpage-image', "url(https://hdqwalls.com/download/everest-3840x2160.jpg)");
       break;
       case 'oled':
         style.setProperty('--color-accent', '#8590aacc');
@@ -189,6 +194,7 @@ function set_theme(name) {
         style.setProperty('--color-base01', '#020205');
         style.setProperty('--color-base02', '#05080f');
         style.setProperty('--color-base03', '#0c0e15');
+        style.setProperty('--loginpage-image', "url(https://wallpapercave.com/wp/wp4673203.jpg)");
         break;
       // Add more cases for other profiles as needed
     default:

@@ -1,7 +1,8 @@
 
-async function fetchData() {
+async function fetchData(halte) {
   const apiKey = 'ddb68605719d4bb8b6444b6871cefc7a'; // Replace 'YOUR_API_KEY' with your actual API key
-  const halte = 302558
+
+
   const apiUrl =`https://api.delijn.be/DLKernOpenData/api/v1/haltes/0/${halte}/real-time?maxAantalDoorkomsten=5`; // Replace with your API endpoint
 
   try {
@@ -21,6 +22,7 @@ async function fetchData() {
     createApplication(data); // Call function to create the application using fetched data
   } catch (error) {
     console.error('Error fetching data:', error);
+    alert('Please setup a halte ID in the popup-window'); // Handle error gracefully
   }
 
 }
@@ -74,34 +76,32 @@ function createApplication(data) {
     for (let i = 0; i < doorkomstlength; i++) {
 
       const date = new Date(dienstregelingTijdstip[i]);
-
+      const currentdate = new Date();
+      const currenthour = currentdate.getHours();
+      const currentminute = currentdate.getMinutes();
       const hour = date.getHours();
       let minute = date.getMinutes();
       const totalMinutes = hour * 60 + minute;
+      const totalMinutescurrent = currenthour * 60 + currentminute;
 
 
       if (real_timeTijdstip[i] != "none"){
+
         const realtimedate = new Date(real_timeTijdstip[i]);
     
         const hourrealtime  = realtimedate.getHours();
         let minuterealtime = realtimedate.getMinutes();
         const totalMinutesrealtime = hourrealtime * 60 + minuterealtime;
         let timeDifference = totalMinutesrealtime - totalMinutes;
+        let timetilldep = totalMinutesrealtime - totalMinutescurrent;
         minute = minute.toString().padStart(2, '0');
-        if (timeDifference>0){
-          let timeDifferencestring = timeDifference.toString
-          console.log(timeDifferencestring.length)
-          if(timeDifferencestring.length>2){
-            timeDifference = timeDifference.toString().padStart(2, '+')
-          }else
-          {
-
-            timeDifference = timeDifference.toString().padStart(3, '+')
-          }
-
-        }else if(timeDifference==0){
+if(timeDifference==0){
           timeDifference = "On time"
+        }else if(timeDifference>0){
+          timeDifference = "+"+timeDifference;
         }
+
+        
 
         div = document.createElement("div");
 
@@ -114,11 +114,11 @@ function createApplication(data) {
         </p>
     </div>
         </div>
-    
+
         <div class="times">
         <span class="time">
         ${hour}:${minute} </span>
-        <span class="intime">maybe
+        <span class="intime">${timetilldep} Min.
         </span>
         </div></div>`
         leftContainer.appendChild(div);
@@ -128,17 +128,22 @@ function createApplication(data) {
         div = document.createElement("div");
         div.innerHTML = `<div class=lijncards>
         <div class="top">
-        <h2 class=lijncardstitle>${lijnnummers[i]}</h2><h3 class=lijncardsdestin>${bestemmingen[i]}</h3></div><span class="timedifference">${timeDifference}
-        </span><div class="times"><span class="time">
-        </span><span class="intime">maybe
+        <h2 class=lijncardstitle>${lijnnummers[i]}</h2><h3 class=lijncardsdestin>${bestemmingen[i]}</h3></div><span class="timedifference">
+        </span><div class="times"><span class="time">${timeDifference}
+        </span><span class="intime">Now
         </span></div></div>`
         leftContainer.appendChild(div);
       }
     }
     lastdiv = document.createElement("div");
-    lastdiv.innerHTML = `<div class=lastdiv><a href="https://www.delijn.be/nl/contact/attest-aanvraag/" target="_blank">Te laat?</a></div>`
+    lastdiv.innerHTML = `<div class=lastdiv><a href="https://www.delijn.be/nl/contact/attest-aanvraag/" target="_blank">Late?</a></div>`
     leftContainer.appendChild(lastdiv);
   }
 
 // Call the fetchData function to initiate the API request and populate the application
-fetchData();
+chrome.storage.local.get('current_id', function (store) {
+  const halte = store.current_id;
+  console.log("set halte to " + store.halte);
+  fetchData(halte);
+
+});
