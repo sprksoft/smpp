@@ -89,7 +89,16 @@ function createApplication(data) {
         let timeDifference = totalMinutesrealtime - totalMinutes;
         minute = minute.toString().padStart(2, '0');
         if (timeDifference>0){
-          timeDifference = timeDifference.toString().padStart(2, '+')
+          let timeDifferencestring = timeDifference.toString
+          console.log(timeDifferencestring.length)
+          if(timeDifferencestring.length>2){
+            timeDifference = timeDifference.toString().padStart(2, '+')
+          }else
+          {
+
+            timeDifference = timeDifference.toString().padStart(3, '+')
+          }
+
         }else if(timeDifference==0){
           timeDifference = "On time"
         }
@@ -99,11 +108,13 @@ function createApplication(data) {
         div.innerHTML = `<div class=lijncards>
         <div class="top">
         <h2 class=lijncardstitle>${lijnnummers[i]}</h2>
+    <div class="topright">
         <h3 class=lijncardsdestin>${bestemmingen[i]}</h3>
-
+        <p class="timedifference">${timeDifference}
+        </p>
+    </div>
         </div>
-        <span class="timedifference">${timeDifference}
-        </span>
+    
         <div class="times">
         <span class="time">
         ${hour}:${minute} </span>
