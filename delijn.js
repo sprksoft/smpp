@@ -22,7 +22,6 @@ async function fetchData(halte) {
     createApplication(data); // Call function to create the application using fetched data
   } catch (error) {
     console.error('Error fetching data:', error);
-    alert('Please setup a halte ID in the popup-window'); // Handle error gracefully
   }
 
 }
