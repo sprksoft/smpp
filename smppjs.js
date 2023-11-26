@@ -13,28 +13,10 @@ try{
 }catch(e){}
 //END Garbage
 
-const goto_items=["didit", "digitale methode", "planner", "resultaten", "classroom", "onshape"];
-function get_goto_url(name) {
-  let platform_name = window.location.host.split('.')[0];
-  switch (name) {
-    case "didit":
-      return "https://www.diddit.be/login?smartschoolPlatform="+platform_name;
-    case "digitale methode":
-      return "https://digitalemethode.be/nl-be/sso?subdomain="+platform_name+"&smpp=true";
-    case "planner":
-      return "/planner";
-      
-    case "resultaten":
-      return "/results";
-    case "classroom":
-      return "https://classroom.google.com";
-    case "onshape":
-      return "https://onshape.com" ;
 
-    default:
-      return null;
-  }
-}
+let goto_items=get_data("goto_menu", ".js-shortcuts-container > a", function (el, data) {
+  data[el.innerText.toLowerCase().trim()] = el.href;
+});
 
 function open_url(url) {
   let a = document.createElement("a");
@@ -46,7 +28,7 @@ function open_url(url) {
 
 document.addEventListener("keyup", function(e){
   if (e.key == ':'){
-    let cmd_list = goto_items.concat(["set background", "set theme", "lock dmenu", "unbloat"]);
+    let cmd_list = Object.keys(goto_items).concat(["classroom", "onshape", "set background", "set theme", "lock dmenu", "unbloat"]);
     dmenu(cmd_list, function (cmd) {
       switch (cmd) {
         case "lock dmenu":
@@ -67,10 +49,16 @@ document.addEventListener("keyup", function(e){
             set_theme(theme)
           }, "theme:");
           return;
+        case "classroom":
+          open_url("https://classroom.google.com");
+          return;
+        case "onshape":
+          open_url("https://onshape.com");
+          return;
         default:
           break;
       }
-      let got_url = get_goto_url(cmd);
+      let got_url = goto_items[cmd]
       if (got_url !== null){
         open_url(got_url);
         return;

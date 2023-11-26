@@ -1,24 +1,9 @@
-let books=null;
-function get_books_from_html() {
-  if (books !== null){
-    return true;
-  }
-  let boeken_els = document.querySelectorAll("#student-vt-2 > div > div > * > div > a");
-  if (boeken_els.length == 0){
-    return false;
-  }
-  console.log(boeken_els);
-  
-  books = {};
-  for (let i = 0; i < boeken_els.length; i++) {
-    const name = boeken_els[i].querySelector("h3").innerText.toLowerCase();
-    const url = boeken_els[i].href;
-    books[name] = url;
-  }
 
-  console.log(books);
-  return true;
-}
+const books = get_data("books", "#student-vt-2 > div > div > * > div > a", function (el, data) {
+  const name = el.querySelector("h3").innerText.toLowerCase().trim();
+  data[name] = el.href;
+})
+
 
 function get_lessen() {
   lessen = window.localStorage.getItem("lessen");
@@ -54,9 +39,6 @@ function get_lessen_from_html() {
 
 
 function book_select_menu(){
-  if (!get_books_from_html()){
-    return false;
-  }
   dmenu(Object.keys(books), function(cmd){
     open_url(books[cmd]);
   }, "boek:");

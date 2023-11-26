@@ -37,11 +37,14 @@ async function getWeatherByLocation() {
 // ... (previous code remains unchanged)
 
 async function updateWeatherDiv() {
+    const rightContainer = document.getElementById('homepage__block--datepicker');
+    if (rightContainer == undefined){
+      return;
+    }
     console.log('Updating weather information based on user location...');
     const weatherData = await getWeatherByLocation();
     if (weatherData) {
         console.log('Weather data:', weatherData);
-        const rightContainer = document.getElementById('homepage__block--datepicker');
         const { name, main, weather, rain, wind } = weatherData; // Include rain data
         const temperature = Math.round(main.temp);
         const description = weather[0].description;
