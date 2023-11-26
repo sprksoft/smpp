@@ -34,7 +34,7 @@ function dmenu(params, onselect, name="dmenu:") {
     const cmd = params[i].toLowerCase();
     command_list.push(cmd);
     let thing = document.createElement("div");
-    thing.innerHTML = cmd;
+    thing.innerText = cmd;
     autocompletelist.appendChild(thing);
   }
 
