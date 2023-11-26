@@ -7,11 +7,13 @@ html {
 
 #profileSelector {
     background-color: #444444;
-    color: #ffffff;
     border: 1px solid #ffffff;
+    color: white;
     padding: 5px;
     border-radius: 5px;
     margin: 2px;
+    font-size: large;
+    font:bold;
 }
 
 html {
@@ -96,4 +98,16 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+#profileSelector option{
+  font-size: large;
+  font: bold;
+}
+.sliderblur{
+  margin-bottom: 0px;
+  font: bold;
+}
+p{
+  margin-top: 0px;
+  font-weight: bold;
 }

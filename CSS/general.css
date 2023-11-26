@@ -11,8 +11,8 @@ html {
   --color-orange: #ce6c4a;
   --color-startpage-bg: #0202058f;
   --color-infostartpagebg: #232020;
-
-
+  --blur-value-large: blur(4px);
+  --blur-value-small:blur(2px);
   --border-size: 2px;
   --color-popup-border: var(--color-accent);
   --color-hover-border: var(--color-accent);

@@ -101,7 +101,13 @@ chrome.storage.local.get('buttonstate', function (store) {
     set_background(background);
   }
 });
-
+chrome.storage.local.get('blurvalue', function (store) {
+  let blurvalue = store.blurvalue;
+  console.log("set blurvalue to " + blurvalue);
+  let style = document.documentElement.style;
+  style.setProperty('--blur-value-large', 'blur('+blurvalue*2+'px)');
+  style.setProperty('--blur-value-small', 'blur('+blurvalue+'px)');
+});
 function store_profile(profile){
   chrome.storage.local.set({
     current_profile: profile
@@ -119,10 +125,10 @@ function set_background(background){
 }
 
 
-const theme_names = ["default", "ldev", "birb", "bjarn", "comfy", "tan", "winter", "fall", "OLED"];
+const theme_names = ["default", "ldev", "birb", "bjarn", "tan", "winter", "fall"];
 function set_theme(name) {
   let style = document.documentElement.style;
-  style.setProperty('--color-accent', '#ffd5a0');
+  style.setProperty('--color-accent', '#8f8f95');
   style.setProperty('--color-text', '#C2BAB2');
   style.setProperty('--color-base00', '#191817');
   style.setProperty('--color-base01', '#232020');
@@ -137,6 +143,7 @@ function set_theme(name) {
       //default changes nothing so keep
       break;
     case 'ldev':
+      style.setProperty('--color-accent', '#ffd5a0');
       style.setProperty('--color-popup-border', 'var(--color-base02)');
       style.setProperty('--color-hover-border', 'var(--color-base03)')
       style.setProperty('--loginpage-image', "url(https://i.redd.it/yfssdsfosao11.png)");
@@ -187,13 +194,13 @@ function set_theme(name) {
       style.setProperty('--color-base03', '#DCEFF5');
       style.setProperty('--loginpage-image', "url(https://hdqwalls.com/download/everest-3840x2160.jpg)");
       break;
-      case 'oled':
+      case 'birb':
         style.setProperty('--color-accent', '#8590aacc');
         style.setProperty('--color-text', '#626365');
-        style.setProperty('--color-base00', '#000');
-        style.setProperty('--color-base01', '#020205');
-        style.setProperty('--color-base02', '#05080f');
-        style.setProperty('--color-base03', '#0c0e15');
+        style.setProperty('--color-base00', '#0c0c13');
+        style.setProperty('--color-base01', '#141519');
+        style.setProperty('--color-base02', '#1a1b1f');
+        style.setProperty('--color-base03', '#1f2024');
         style.setProperty('--loginpage-image', "url(https://wallpapercave.com/wp/wp4673203.jpg)");
         break;
       // Add more cases for other profiles as needed

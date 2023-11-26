@@ -17,13 +17,13 @@ body {
 }
 #leftcontainer,#rightcontainer{
   background-color: #02020585 !important;
-  backdrop-filter: blur(8px) !important;
-  -webkit-backdrop-filter: blur(8px) !important;
+  backdrop-filter: var(--blur-value-large) !important;
+  -webkit-backdrop-filter: var(--blur-value-large) !important;
 }
 #centercontainer{
   background-color: #02020559 !important;
-  backdrop-filter: blur(4px) !important;
-  -webkit-backdrop-filter: blur(2px) !important;
+  backdrop-filter: var(--blur-value-small) !important;
+  -webkit-backdrop-filter: var(--blur-value-small) !important;
 }
 #homepage__block--contact{
   display: none !important;

@@ -72,3 +72,23 @@ document.addEventListener("DOMContentLoaded", function () {
     button.checked = store.buttonstate;
   });
 });
+const slider = document.getElementById('mySlider');
+const output = document.getElementById('sliderValue');
+
+// Display the default slider value
+output.textContent = slider.value;
+
+// Update the current slider value when the slider is moved
+slider.addEventListener('input', function() {
+  output.textContent = this.value;
+  blurvalue = this.value;
+  chrome.storage.local.set({
+    blurvalue: blurvalue
+  });
+  console.log("set blurvalue to " + blurvalue);
+});
+chrome.storage.local.get("blurvalue", function (store) {
+  slider.value = store.blurvalue;
+  output.textContent = store.blurvalue;
+  console.log("set blurvalue to " + store.blurvalue);
+});
