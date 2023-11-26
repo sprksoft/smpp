@@ -74,16 +74,20 @@
   width: var(--border-size) !important;
 }
 
-.context-menu,
+
 .message-search__input,
 .smsc-select.disabled {
   background-color: var(--color-base02) !important;
   color: var(--color-text) !important;
   box-shadow: none !important;
 }
-
+.context-menu{
+  background-color: var(--color-base01) !important;
+  color: var(--color-text) !important;
+  box-shadow: none !important;
+}
 .menu-item {
-  border: 1px solid var(--color-base02) !important;
+  border: 1px solid var(--color-base01) !important;
   color: var(--color-text) !important;
 }
 
