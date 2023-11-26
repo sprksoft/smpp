@@ -196,9 +196,7 @@ td:not(.cb-container),.action-button{
 .smsc-templates__separator{
   display: none !important;
 }
-.listview__row:hover{
-  background-color:var(--color-base02) !important;
-}
+
 .listview__row:hover .listview__action-btns .listview__action-btn {
 
   background-color: var(--color-base02) !important;
