@@ -61,12 +61,15 @@ input[type="checkbox"]:before {
 
 .groupContainer,
 .newsTitle,
-.groupTree,
+
 .msg--bubble--steel {
   background-color: var(--color-base01) !important;
   color: var(--color-text) !important;
 }
-
+.groupTree{
+  background-color: var(--color-base00) !important;
+  color: var(--color-text) !important;
+}
 a {
   color: var(--color-accent) !important;
 }
@@ -127,4 +130,76 @@ tspan, title, text,.grayed_out{
   background: var(--color-base02) !important;
   color: var(--color-text)!important;
 }
+td[background],
+td[bgcolor] {
+  background-image: none !important;
+  color: var(--color-text) !important;
+  background-color: var(--color-base00) !important;
+}
+.msgInfoTitle{
+  color: var(--color-accent) !important;
+}
+.toolbar{
+  display: none !important;
+}
+.msgInfoSpacer{
+display: none !important;
+}
+.msgInfoAuthor,.msgInfoMsg{
+  color: var(--color-text) !important;
+}
+.tabsContainer{
+  display: none !important;
+}
+.MsoNormalTable{
+  display: none !important;
+}
+.smsc-dropzone{
+  background-color:  var(--color-base01) !important;
+}
+.smsc-dropzone--ellipsis{
+  color: var(--color-accent) !important;
+}
+tr{
+  background-color: var(--color-base00) !important;
+}
+tr.selected{
+  background-color: var(--color-base01) !important;
+}
+td.selected{
+  background-color: var(--color-base01) !important;
+}
+td:hover{
+  background-color: var(--color-base00) !important;
+}
+td:not(.cb-container),.action-button{
+  background-color: var(--color-base01) !important;
+}
+.smsc-contextmenu__content,.listview-row__item--inline-edit{
+  background-color: var(--color-base01) !important;
+}
+.contextmenu__item--nolink:hover,.listview__action-btns:hover{
+  background-color: var(--color-base02) !important;
+}
+.smsc-rightclick__menu{
+  background-color: var(--color-base02) !important;
+}
+.smsc-rightclick__item:hover{
+  background-color: var(--color-base03) !important;
+}
+.smsc-dialog,.smsc-templates__linkbutton{
+  background-color: var(--color-base01) !important;
+}
+[listview] .listview__row--selected .listview__cell:not(.listview__cell--select-btn) {
+  background-color: var(--color-base02) !important;
+}
+.smsc-templates__separator{
+  display: none !important;
+}
+.listview__row:hover{
+  background-color:var(--color-base02) !important;
+}
+.listview__row:hover .listview__action-btns .listview__action-btn {
 
+  background-color: var(--color-base02) !important;
+}
