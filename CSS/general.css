@@ -139,9 +139,6 @@ td[bgcolor] {
 .msgInfoTitle{
   color: var(--color-accent) !important;
 }
-.toolbar{
-  display: none !important;
-}
 .msgInfoSpacer{
 display: none !important;
 }
@@ -164,10 +161,10 @@ tr{
   background-color: var(--color-base00) !important;
 }
 tr.selected{
-  background-color: var(--color-base01) !important;
+  background-color: var(--color-base00) !important;
 }
 td.selected{
-  background-color: var(--color-base01) !important;
+  background-color: var(--color-base00) !important;
 }
 td:hover{
   background-color: var(--color-base00) !important;
@@ -200,4 +197,7 @@ td:not(.cb-container),.action-button{
 .listview__row:hover .listview__action-btns .listview__action-btn {
 
   background-color: var(--color-base02) !important;
+}
+.sidebar,.sidebar-btn__button,.manual_widgetcontent,.manual_widgettitle{
+  background-color: var(--color-base00) !important;
 }

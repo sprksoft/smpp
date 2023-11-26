@@ -26,7 +26,7 @@ async function fetchData(halte) {
 
 }
 function createApplication(data) {
-  const leftContainer = document.getElementById('homepage__block--google');
+  const leftContainer = document.getElementById('leftcontainer');
   let doorkomstlength = data.halteDoorkomsten[0].doorkomsten.length
   const bestemmingen = []
   const lijnnummers = []
