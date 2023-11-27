@@ -89,7 +89,7 @@ a:focus {
 
 ::selection {
   background: #b6b6b655 !important;
-  text-shadow: none;
+  text-shadow: none !important;
 }
 
 
@@ -206,4 +206,16 @@ td:not(.cb-container),.action-button{
 }
 .lvs-pupilpresences-row{
   background-color: var(--color-base02) !important;
+}
+#smscMainBlockContainer{
+  background-color: var(--color-base01) !important;
+  border: 1px solid var(--color-accent) !important;
+  box-shadow: none;
+}
+.smscAdminNav_body_linkdivTitle:hover{
+  color: var(--color-text) !important;
+}
+.smscAdminNav_body .smscAdminNav_body_link .smscAdminNav_body_linkdivText.disabled .smscAdminNav_body_linkdivTitle,.smscAdminNav_body .smscAdminNav_body_link .smscAdminNav_body_linkdivText.disabled {
+  color: var(--color-base03) !important;
+
 }

@@ -92,3 +92,10 @@ span,
   background-color: var(--color-base02) !important;;
   transition: none !important;
 }
+.icon-label-btn--blob.icon-label-btn {
+  background-color: var(--color-base02) !important;
+}
+.timeinput{
+  background-color: var(--color-base02) !important;
+  border-color: var(--color-accent) !important;
+}
