@@ -1,6 +1,5 @@
 # general
-- [ ] delijn api
-- [ ] planner front page maybe
+- [x] delijn api
 - [ ] more colour profiles
 
 # dmenu
