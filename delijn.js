@@ -70,7 +70,6 @@ function createApplication(data) {
     console.log(richting);
     console.log(dienstregelingTijdstip);
     console.log(real_timeTijdstip);
-    leftContainer.innerHTML = ` `;
     
     for (let i = 0; i < doorkomstlength; i++) {
 
