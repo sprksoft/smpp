@@ -31,3 +31,6 @@ body {
 #leftcontainer{
   padding: 16px 24px !important;
 }
+.toast__content{
+  background-color: var(--color-base01) !important;
+}
