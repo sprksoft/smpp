@@ -8,7 +8,7 @@
 - [x] scrollbar
 - [ ] digitale methode
 - [ ] keybind system
-- [ ] klassen
+- [x] klassen
 
 
 

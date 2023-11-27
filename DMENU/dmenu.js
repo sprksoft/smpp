@@ -172,7 +172,7 @@ function init_dmenu(){
         lock_dmenu = false;
         dmenu_close();
         if (end_func != undefined && command !== ""){
-          end_func(command);
+          end_func(command, e.shiftKey);
         }
         return;
       }else if (e.key == "Escape"){

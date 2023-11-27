@@ -15,21 +15,23 @@ try{
 
 
 let goto_items=get_data("goto_menu", ".js-shortcuts-container > a", function (el, data) {
-  data[el.innerText.toLowerCase().trim()] = el.href;
+  const name = el.innerText.toLowerCase().trim();
+  data[name] = el.href;
 });
 
-function open_url(url) {
-  let a = document.createElement("a");
-  a.href = url;
-  a.rel = 'noopener noreferrer';
-  a.target= '_blank';
-  a.click();
-}
+let vakken = {};
+get_data_bg("vakken", ".course-list > li > a", function (el, data) {
+  const name = el.getElementsByClassName("course-link__name")[0].innerText.toLowerCase().trim();
+  data[name]=el.href;
+}, function (data) {
+  vakken = data;
+});
+
 
 document.addEventListener("keyup", function(e){
   if (e.key == ':'){
-    let cmd_list = Object.keys(goto_items).concat(["classroom", "onshape", "set background", "set theme", "lock dmenu", "unbloat"]);
-    dmenu(cmd_list, function (cmd) {
+    let cmd_list = Object.keys(vakken).concat(Object.keys(goto_items).concat(["classroom", "onshape", "set background", "set theme", "lock dmenu", "unbloat"]));
+    dmenu(cmd_list, function (cmd, shift) {
       switch (cmd) {
         case "lock dmenu":
           lock_dmenu = !lock_dmenu;
@@ -50,17 +52,22 @@ document.addEventListener("keyup", function(e){
           }, "theme:");
           return;
         case "classroom":
-          open_url("https://classroom.google.com");
+          open_url("https://classroom.google.com", shift);
           return;
         case "onshape":
-          open_url("https://onshape.com");
+          open_url("https://onshape.com", shift);
           return;
         default:
           break;
       }
       let got_url = goto_items[cmd]
-      if (got_url !== null){
-        open_url(got_url);
+      if (got_url != null){
+        open_url(got_url, shift);
+        return;
+      }
+      let vakken_url = vakken[cmd];
+      if (vakken_url != null){
+        open_url(vakken_url, shift);
         return;
       }
     }, "quick:");
