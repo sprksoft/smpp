@@ -1,5 +1,5 @@
 html{
-    --loginpage-image: url("https://i.redd.it/psn2mwul2c971.jpg")
+    --loginpage-image: url("")
 }
 .login-app__platform-indicator {
   background-color: var(--color-base00) !important;

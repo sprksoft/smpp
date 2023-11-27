@@ -131,7 +131,7 @@ function set_theme(name) {
   style.setProperty('--color-base03', '#5b5756');
   style.setProperty('--color-popup-border', 'var(--color-accent)');
   style.setProperty('--color-hover-border', 'var(--color-accent)');
-  style.setProperty('--loginpage-image', "url(https://wallpapercave.com/wp/wp4254902.jpg)");
+  style.setProperty('--loginpage-image', "url(https://images.hdqwalls.com/wallpapers/moon-astrophotography-4k-sc.jpg)");
 
   switch (name) {
     case "default":
@@ -144,12 +144,12 @@ function set_theme(name) {
       style.setProperty('--loginpage-image', "url(https://i.redd.it/yfssdsfosao11.png)");
       break;
     case 'purple':
-      style.setProperty('--color-accent', '#A58AE3');
-      style.setProperty('--color-text', '#cfc8f4');
-      style.setProperty('--color-base00', '#3F3557');
-      style.setProperty('--color-base01', '#5B4C7D');
-      style.setProperty('--color-base02', '#6E5C97');
-      style.setProperty('--color-base03', '##7764A4');
+      style.setProperty('--color-accent', '#993691');
+      style.setProperty('--color-text', '#a59dbf');
+      style.setProperty('--color-base00', '#0b021d');
+      style.setProperty('--color-base01', '#130332');
+      style.setProperty('--color-base02', '#250654');
+      style.setProperty('--color-base03', '#3f0a74');
       style.setProperty('--loginpage-image', "url(https://www.hdwallpapers.in/download/macos_monterey_shapes_hd_macos-2560x1440.jpg)");
       break;                                                                  
     case 'bjarn':
@@ -160,14 +160,13 @@ function set_theme(name) {
       style.setProperty('--color-base02', "#1e1e1e");
       style.setProperty('--color-base03', "#1b1b1bf3");
       style.setProperty('--loginpage-image', "url(https://th.bing.com/th/id/R.f8e9e3ed500e73dd6617c5aea7f75ef3?rik=6fM7LL0jLlhJhA&pid=ImgRaw&r=0)");
-
       break;
     case 'tan':
       style.setProperty('--color-accent', '#F0F2F0');
-      style.setProperty('--color-text', '#C2BAB2');
+      style.setProperty('--color-text', '#e0dcd3');
       style.setProperty('--color-base00', '#402F2D');
       style.setProperty('--color-base01', '#594645');
-      style.setProperty('--color-base02', '#A68B81');
+      style.setProperty('--color-base02', '#90756b');
       style.setProperty('--color-base03', '#D9C5B4');
       style.setProperty('--loginpage-image', "url(https://4kwallpapers.com/images/wallpapers/gargantua-black-3840x2160-9621.jpg)");
       break;
@@ -181,12 +180,12 @@ function set_theme(name) {
       style.setProperty('--loginpage-image', "url(https://wallpapercave.com/wp/wp7464660.jpg)");
       break;
     case 'winter':
-      style.setProperty('--color-accent', '#93B8C2');
+      style.setProperty('--color-accent', '#8aadb6');
       style.setProperty('--color-text', '#C2BAB2');
-      style.setProperty('--color-base00', '#001D29');
-      style.setProperty('--color-base01', '#013340');
-      style.setProperty('--color-base02', '#236475');
-      style.setProperty('--color-base03', '#DCEFF5');
+      style.setProperty('--color-base00', '#071b2c');
+      style.setProperty('--color-base01', '#152f47');
+      style.setProperty('--color-base02', '#345f7f');
+      style.setProperty('--color-base03', '#b9d4f4');
       style.setProperty('--loginpage-image', "url(https://hdqwalls.com/download/everest-3840x2160.jpg)");
       break;
       case 'birb':
@@ -198,6 +197,15 @@ function set_theme(name) {
         style.setProperty('--color-base03', '#1f2024');
         style.setProperty('--loginpage-image', "url(https://wallpapercave.com/wp/wp4673203.jpg)");
         break;
+        case 'macha':
+          style.setProperty('--color-accent', '#66ac6d');
+          style.setProperty('--color-text', '#9bd49f');
+          style.setProperty('--color-base00', '#243926');
+          style.setProperty('--color-base01', '#365138');
+          style.setProperty('--color-base02', '#456046');
+          style.setProperty('--color-base03', '#4f7a51');
+          style.setProperty('--loginpage-image', "url(https://wallpapercave.com/wp/wp9313069.jpg)");
+          break;
       // Add more cases for other profiles as needed
     default:
       // Handle default case or do nothing if no match found
