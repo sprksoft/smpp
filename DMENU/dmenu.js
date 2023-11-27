@@ -1,6 +1,7 @@
 //CONFIG
 var dmenu_centerd=true;
 var lock_dmenu = false;
+var flip_shift_key = true;
 //END CONFIG
 
 var command_list=[];
@@ -172,7 +173,11 @@ function init_dmenu(){
         lock_dmenu = false;
         dmenu_close();
         if (end_func != undefined && command !== ""){
-          end_func(command, e.shiftKey);
+          let shift = e.shiftKey;
+          if (flip_shift_key){
+            shift = !shift;
+          }
+          end_func(command, shift);
         }
         return;
       }else if (e.key == "Escape"){
