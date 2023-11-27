@@ -120,7 +120,7 @@ function set_background(background){
 }
 
 
-const theme_names = ["default", "ldev", "birb", "bjarn", "tan", "winter", "fall"];
+const theme_names = ["default", "ldev", "birb", "bjarn", "tan", "winter", "fall","matcha"];
 function set_theme(name) {
   let style = document.documentElement.style;
   style.setProperty('--color-accent', '#8f8f95');
@@ -159,7 +159,7 @@ function set_theme(name) {
       style.setProperty('--color-base01', "#1e1e1e");
       style.setProperty('--color-base02', "#1e1e1e");
       style.setProperty('--color-base03', "#1b1b1bf3");
-      style.setProperty('--loginpage-image', "url(https://th.bing.com/th/id/R.f8e9e3ed500e73dd6617c5aea7f75ef3?rik=6fM7LL0jLlhJhA&pid=ImgRaw&r=0)");
+      style.setProperty('--loginpage-image', "url(https://i.pinimg.com/originals/9d/51/54/9d515479cc7f23abeb34ee0712c2571a.jpg)");
       break;
     case 'tan':
       style.setProperty('--color-accent', '#F0F2F0');
@@ -197,7 +197,7 @@ function set_theme(name) {
         style.setProperty('--color-base03', '#1f2024');
         style.setProperty('--loginpage-image', "url(https://wallpapercave.com/wp/wp4673203.jpg)");
         break;
-        case 'macha':
+        case 'matcha':
           style.setProperty('--color-accent', '#66ac6d');
           style.setProperty('--color-text', '#9bd49f');
           style.setProperty('--color-base00', '#243926');
