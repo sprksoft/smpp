@@ -15,10 +15,10 @@ function scrape_from_html(data, query, func) {
 }
 
 function get_data(name, query, func) {
-  let data = window.localStorage.getItem(name);
+  let data = JSON.parse(window.localStorage.getItem(name));
   if (data == undefined){
     data = scrape_from_html(data, query, func);
   }
-  window.localStorage.setItem(name, data);
+  window.localStorage.setItem(name, JSON.stringify(data));
   return data;
 }
