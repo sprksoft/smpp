@@ -95,6 +95,7 @@ function select(index) {
   }
   let new_sel = autocompletelist.childNodes[index];
   new_sel.classList.add("selected");
+  new_sel.scrollIntoView();
   if (user_text == ""){
     user_text = input.value;
   }
@@ -116,6 +117,7 @@ function dmenu_update_search(command) {
     let mcount = get_match_count(node.innerText, command);
     if (mcount == 0 && command != ""){
       node.classList.add("hidden");
+      autocompletelist.insertBefore(node, nodes[-1]);
     }else{
       node.classList.remove("hidden");
     }
@@ -142,6 +144,10 @@ function dmenu_select_next(prev=false) {
 }
 
 function init_dmenu(){
+  let old_dmenu = document.getElementById("dmenu");
+  if (old_dmenu != undefined){
+    old_dmenu.remove();
+  }
   let dmenu = document.createElement("div");
   dmenu.id="dmenu";
   dmenu.classList.add("dmenu");

@@ -143,6 +143,8 @@ if(timeDifference==0){
 chrome.storage.local.get('current_id', function (store) {
   const halte = store.current_id;
   console.log("set halte to " + store.halte);
-  fetchData(halte);
+  if (halte != undefined){
+    fetchData(halte);
+  }
 
 });
