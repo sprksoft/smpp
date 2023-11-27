@@ -30,6 +30,13 @@ html {
   border-right: 4px solid var(--color-base01) !important;
 }
 
+.toolbar{
+  background-color: var(--color-base00) !important;
+}
+.skip-link{
+  background-color: var(--color-base01) !important;
+}
+
 .student-support-block__item.icon-label,
 .icon-label__text,
 .checkbox--select-all {
