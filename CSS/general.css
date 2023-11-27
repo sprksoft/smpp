@@ -201,3 +201,9 @@ td:not(.cb-container),.action-button{
 .sidebar,.sidebar-btn__button,.manual_widgetcontent,.manual_widgettitle{
   background-color: var(--color-base00) !important;
 }
+.profile_header_pupilinfo_status{
+  color: var(--color-accent) !important;
+}
+.lvs-pupilpresences-row{
+  background-color: var(--color-base02) !important;
+}

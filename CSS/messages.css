@@ -125,6 +125,7 @@
   border: 2px solid var(--color-accent) !important;
   border-radius: 10px !important;
   overflow: hidden !important;
+  background-color: var(--color-base00) !important;
 }
 
 .quickReplyMenu {
@@ -133,5 +134,8 @@
 
 .toolbar,
 .toolbarright {
-  background-color: var(--color-base00) !important;
+  background-color: var(--color-base01) !important;
+}
+.msgcell__parent-td, #msgcell{
+  background-color: var(--color-base01) !important;
 }

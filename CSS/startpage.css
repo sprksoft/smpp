@@ -28,3 +28,6 @@ body {
 #homepage__block--contact{
   display: none !important;
 }
+#leftcontainer{
+  padding: 16px 24px !important;
+}

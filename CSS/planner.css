@@ -85,3 +85,10 @@ span,
 .form__label--required::after {
   color: var(--color-accent) !important;
 }
+.todo-column__row--hovering{
+  background-color: var(--color-base02) !important;
+}
+.todo-column [listview] .todo-column__row:hover .todo-column__actions-cell {
+  background-color: var(--color-base02) !important;;
+  transition: none !important;
+}
