@@ -109,3 +109,11 @@ span,
 .twinbutton__button{
   border-color: var(--color-base01) !important;
 }
+.datepicker .block .dates .date--selected {
+  background-color: var(--color-base02) !important;
+}
+
+.date:hover span{
+
+  background-color: var(--color-base03) !important;
+}
