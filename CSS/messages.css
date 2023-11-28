@@ -13,7 +13,7 @@
 .modern-message {
   border: 2px solid var(--color-base00) !important;
   border-radius: 10px !important;
-  background: var(--color-base00) !important;
+  background: var(--color-base01) !important;
   padding: 2px 10px 2px 10px !important;
   height: auto !important;
   line-height: initial !important;
@@ -99,6 +99,7 @@
 .attachment {
   border: 1px solid var(--color-base00) !important;
   color: var(--color-text) !important;
+  border-radius: 5px !important;
 }
 
 .menu-item:hover,
@@ -128,7 +129,7 @@
   background-color: var(--color-base00) !important;
 }
 
-.quickReplyMenu {
+.quickReplyMenu,.smsc-title--2 {
   color: var(--color-accent) !important;
 }
 
@@ -136,6 +137,12 @@
 .toolbarright {
   background-color: var(--color-base00) !important;
 }
-.msgcell__parent-td, #msgcell{
+.msgcell__parent-td, #msgcell,.smscMain,.tooltip__content{
+  background-color: var(--color-base00) !important;
+}
+#msgdetail,.msgContent,.msgContentVal,.ui-button,.smscTimeInput,.smscTimeOptions{
   background-color: var(--color-base01) !important;
+}
+.smscTimeOption:hover{
+  background-color: var(--color-base02) !important;
 }

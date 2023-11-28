@@ -99,3 +99,13 @@ span,
   background-color: var(--color-base02) !important;
   border-color: var(--color-accent) !important;
 }
+.twinbutton__button:hover,.header__horizdivider{
+  background-color: var(--color-base01) !important;
+  transition: none !important;
+}
+.render-on-mode-change:hover{
+  border-color: transparent !important;
+}
+.twinbutton__button{
+  border-color: var(--color-base01) !important;
+}

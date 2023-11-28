@@ -1,10 +1,10 @@
 html {
-  --color-accent: #ffd5a0;
-  --color-text: #C2BAB2;
+  --color-accent: #191817;
+  --color-text: #191817;
   --color-base00: #191817;
-  --color-base01: #232020;
-  --color-base02: #3f3c3b;
-  --color-base03: #5b5756;
+  --color-base01: #191817;
+  --color-base02: #191817;
+  --color-base03: #191817;
   --color-blue: #378cd1;
   --color-red: #cb5144;
   --color-green: #3c9534;
@@ -177,7 +177,7 @@ td:hover{
   background-color: var(--color-base00) !important;
 }
 td:not(.cb-container),.action-button{
-  background-color: var(--color-base01) !important;
+  background-color: var(--color-base00) !important;
 }
 .smsc-contextmenu__content,.listview-row__item--inline-edit{
   background-color: var(--color-base01) !important;

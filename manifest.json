@@ -21,7 +21,7 @@
       "CSS/messages.css","CSS/navigation.css","CSS/notification.css","CSS/planner.css",
       "CSS/results.css","CSS/startpage.css","CSS/delijn.css"],
       "js": ["scraper.js", "utils.js", "smppjs.js", "DMENU/dmenu.js",
-      "weather.js","middlestartpage.js","delijn.js"]
+      "weather.js","middlestartpage.js","delijn.js","loginpage.js"]
     }
   ],
   "background": {
