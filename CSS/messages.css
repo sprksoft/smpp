@@ -146,3 +146,6 @@
 .smscTimeOption:hover{
   background-color: var(--color-base02) !important;
 }
+img[src="/modules/Messages/themes/default/images/loading_big.gif"] {
+  display: none !important;
+}
