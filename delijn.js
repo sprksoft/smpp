@@ -70,7 +70,7 @@ function createApplication(data) {
     console.log(richting);
     console.log(dienstregelingTijdstip);
     console.log(real_timeTijdstip);
-    
+    leftContainer.innerHTML=" "
     for (let i = 0; i < doorkomstlength; i++) {
 
       const date = new Date(dienstregelingTijdstip[i]);
@@ -100,7 +100,6 @@ if(timeDifference==0){
         }
 
         
-
         div = document.createElement("div");
 
         div.innerHTML = `<div class=lijncards>
