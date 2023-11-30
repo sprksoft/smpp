@@ -6,7 +6,7 @@
 - [x] arrow keys
 - [x] oneshape
 - [x] scrollbar
-- [ ] digitale methode
+- [ ] lernovo
 - [ ] keybind system
 - [x] klassen
 
