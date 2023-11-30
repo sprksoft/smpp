@@ -62,22 +62,22 @@ async function updateWeatherDiv() {
         // Update the content of the div with unique classes
         try {
             weatherdiv.innerHTML = `<div class="weatherdiv">
-            <h2 class="weather-location">${name}</h2>
-            <h2 class="weather-main">${mainWeather}</h2>
+            <h2 class="weather-location"></h2>
+            <h2 class="weather-main"></h2>
             <div class="weather">
     <img src="https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/chanceflurries.svg" class="weather-icon">
 </div>
-            <p class="weather-temperature">${temperature}°C</p>
+            <p class="weather-temperature"></p>
             <div class="weather-humwind">
             <div class="col"> <img src='https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/humidity.png'><div>
             <p class="weather-humidity"></p>
-            <p class="weather-humidity">${humidity}%</p>
+            <p class="weather-humidity"></p>
             <p class="weather-humidity">Humidity</p></div>
             </div>
             <div class="weather-humwind">
             <div class="col"> <img src='https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/wind.png'><div>
             <p class="weather-wind"></p>
-            <p class="weather-wind">${windSpeedkmh} km/h</p>
+            <p class="weather-wind"></p>
             <p class="weather-wind">Wind Speed</p></div>
             </div>
             </div>
@@ -85,8 +85,14 @@ async function updateWeatherDiv() {
             </div>
             </div>
         `;
+            weatherdiv.querySelector(".weather-location").innerText = name;
+            weatherdiv.querySelector(".weather-main").innerText = mainWeather;
+            weatherdiv.querySelector(".weather-temperature").innerText=temperature+"°C";
+            weatherdiv.querySelector(".weather-humidity").innerText=humidity+"%";
+            weatherdiv.querySelector(".weather-wind").innerText=windSpeedkmh+"km/h";
 
-            const weatherIcon = document.querySelector('.weather-icon');
+            const weatherIcon = weatherdiv.querySelector('.weather-icon');
+
             if (description == "broken clouds") {
                 weatherIcon.src = 'https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/mostlycloudy.svg'
             }
