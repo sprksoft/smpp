@@ -127,3 +127,6 @@ span,
 .header__borderdropdowncontainer::after{
   display: none !important;
 }
+[inline-editor] .inline-editor__input:not([readonly]):focus, [inline-editor] .inline-editor__input:not([readonly]):hover {
+  border-color: var(--color-base03) !important;
+}
