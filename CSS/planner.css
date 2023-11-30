@@ -74,7 +74,9 @@ span,
 .inline-editor__input:hover,
 .inline-editor__input::selection,
 .inline-editor__input::placeholder,
-.planner-header .header__borderdropdowncontainer:hover:after {
+.planner-header .header__borderdropdowncontainer:hover:after,
+.inline-editor__input,
+.inline-editor:not([readonly]):hover:after  {
   background-color: var(--color-base00) !important;
 }
 
