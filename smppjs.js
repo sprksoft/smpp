@@ -131,6 +131,7 @@ function set_theme(name) {
   style.setProperty('--color-base03', '#5b5756');
   style.setProperty('--color-popup-border', 'var(--color-accent)');
   style.setProperty('--color-hover-border', 'var(--color-accent)');
+  style.setProperty('--color-homepage-sidebars-bg', "#02020585");
   style.setProperty('--loginpage-image', "url(https://images.hdqwalls.com/wallpapers/moon-astrophotography-4k-sc.jpg)");
 
   switch (name) {
@@ -142,6 +143,7 @@ function set_theme(name) {
       style.setProperty('--color-popup-border', 'var(--color-base02)');
       style.setProperty('--color-hover-border', 'var(--color-base03)')
       style.setProperty('--loginpage-image', "url(https://i.redd.it/yfssdsfosao11.png)");
+      style.setProperty('--color-homepage-sidebars-bg', "var(--color-base00)");
       break;
     case 'purple':
       style.setProperty('--color-accent', '#993691');
