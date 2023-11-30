@@ -45,6 +45,7 @@ html {
   color: var(--color-text) !important;
 }
 
+
 .homepage__block__content {
   display: none !important;
 }
@@ -175,11 +176,11 @@ td[bgcolor] {
 .tabsContainer {
   display: none !important;
 }
-
+/*
 .MsoNormalTable {
   display: none !important;
 }
-
+*/
 .smsc-dropzone {
   background-color: var(--color-base01) !important;
 }
