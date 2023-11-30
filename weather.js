@@ -50,6 +50,7 @@ async function updateWeatherDiv(weatherData) {
   weatherdiv = document.createElement("div");
   const { name, main, weather, rain, wind } = weatherData; // Include rain data
   const temperature = Math.round(main.temp);
+  const feelslike = Math.round(main.feels_like);
   const description = weather[0].description;
   const humidity = main.humidity;
   let windSpeed = Number(wind.speed);
@@ -63,9 +64,10 @@ async function updateWeatherDiv(weatherData) {
             <h2 class="weather-location"></h2>
             <h2 class="weather-main"></h2>
             <div class="weather">
-    <img src="https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/chanceflurries.svg" class="weather-icon">
-</div>
+              <img src="https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/chanceflurries.svg" class="weather-icon">
+            </div>
             <p class="weather-temperature"></p>
+            <p class="weather-feelslike"></p>
             <div class="weather-humwind">
             <div class="col"> <img src='https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/humidity.png'><div>
             <p class="weather-humidity"></p>
@@ -86,6 +88,7 @@ async function updateWeatherDiv(weatherData) {
     weatherdiv.querySelector(".weather-location").innerText = name;
     weatherdiv.querySelector(".weather-main").innerText = mainWeather;
     weatherdiv.querySelector(".weather-temperature").innerText=temperature+"°C";
+    weatherdiv.querySelector(".weather-feelslike").innerText="Feels like "+feelslike+"°C";
     weatherdiv.querySelector(".weather-humidity").innerText=humidity+"%";
     weatherdiv.querySelector(".weather-wind").innerText=windSpeedkmh+"km/h";
 
