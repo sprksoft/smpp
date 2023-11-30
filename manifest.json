@@ -7,18 +7,18 @@
   "content_scripts": [
     {
       "matches": [
-        "*://digitalemethode.be/*"
+        "*://lernova.be/*"
       ],
       "all_frames": true,
       "css": [
-        "dpp/dpp.css",
+        "LERNOVA/lernova.css",
         "DMENU/dmenu.css"
       ],
       "js": [
         "scraper.js",
         "utils.js",
         "DMENU/dmenu.js",
-        "dpp/dpp.js"
+        "LERNOVA/lernova.js"
       ]
     },
     {
