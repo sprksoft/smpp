@@ -12,12 +12,13 @@ html {
   --color-startpage-bg: #0202058f;
   --color-infostartpagebg: #232020;
   --blur-value-large: blur(4px);
-  --blur-value-small:blur(2px);
+  --blur-value-small: blur(2px);
   --border-size: 2px;
   --color-popup-border: var(--color-accent);
   --color-hover-border: var(--color-accent);
-  
+
 }
+
 .js-btn-profile>img,
 .header__avatar,
 .topnav__menuitem>img,
@@ -30,10 +31,11 @@ html {
   border-right: 4px solid var(--color-base01) !important;
 }
 
-.toolbar{
+.toolbar {
   background-color: var(--color-base00) !important;
 }
-.skip-link{
+
+.skip-link {
   background-color: var(--color-base01) !important;
 }
 
@@ -63,10 +65,12 @@ html {
   background-color: var(--color-base01) !important;
   color: var(--color-text) !important;
 }
-.groupTree{
+
+.groupTree {
   background-color: var(--color-base00) !important;
   color: var(--color-text) !important;
 }
+
 a {
   color: var(--color-accent) !important;
 }
@@ -103,91 +107,136 @@ a:focus {
   background-color: var(--color-base02) !important;
 
 }
-.smsc-container--grey,.highcharts-background{
+
+.smsc-container--grey,
+.highcharts-background {
   fill: var(--color-base01) !important;
   background-color: var(--color-base01) !important;
 }
-.highcharts-container{
+
+.highcharts-container {
   color: var(--color-text) !important;
 }
-tspan, title, text,.grayed_out{
+
+tspan,
+title,
+text,
+.grayed_out {
   color: var(--color-text) !important;
   fill: var(--color-text) !important;
 }
-.search_notes_schoolyearrow,.itemSchoolyear {
+
+.search_notes_schoolyearrow,
+.itemSchoolyear {
   color: var(--color-text) !important;
 }
-.contentFrametitle,.lvs_item_top,.personalSettings_content,.smscBlockContainer_top,.smscBlockContainer_right,.smscBlockContainer_left,.smscFrameTitle,.titleLeft{
+
+.contentFrametitle,
+.lvs_item_top,
+.personalSettings_content,
+.smscBlockContainer_top,
+.smscBlockContainer_right,
+.smscBlockContainer_left,
+.smscFrameTitle,
+.titleLeft {
   background: none !important;
   background-color: var(--color-base02) !important;
   box-shadow: none !important;
-  color: var(--color-text)!important;
+  color: var(--color-text) !important;
 }
-.ui-widget-header,.tabs,li {
+
+.ui-widget-header,
+.tabs,
+li {
   background: var(--color-base02) !important;
-  color: var(--color-text)!important;
+  color: var(--color-text) !important;
 }
+
 td[background],
 td[bgcolor] {
   background-image: none !important;
   color: var(--color-text) !important;
   background-color: var(--color-base00) !important;
 }
-.msgInfoTitle{
+
+.msgInfoTitle {
   color: var(--color-accent) !important;
 }
-.msgInfoSpacer{
-display: none !important;
+
+.msgInfoSpacer {
+  display: none !important;
 }
-.msgInfoAuthor,.msgInfoMsg{
+
+.msgInfoAuthor,
+.msgInfoMsg {
   color: var(--color-text) !important;
 }
-.tabsContainer{
+
+.tabsContainer {
   display: none !important;
 }
-.MsoNormalTable{
+
+.MsoNormalTable {
   display: none !important;
 }
-.smsc-dropzone{
-  background-color:  var(--color-base01) !important;
+
+.smsc-dropzone {
+  background-color: var(--color-base01) !important;
 }
-.smsc-dropzone--ellipsis{
+
+.smsc-dropzone--ellipsis {
   color: var(--color-accent) !important;
 }
-tr{
+
+tr {
   background-color: var(--color-base00) !important;
 }
-tr.selected{
+
+tr.selected {
   background-color: var(--color-base00) !important;
 }
-td.selected{
+
+td.selected {
   background-color: var(--color-base00) !important;
 }
-td:hover{
+
+td:hover {
   background-color: var(--color-base00) !important;
 }
-td:not(.cb-container),.action-button{
+
+td:not(.cb-container),
+.action-button {
   background-color: var(--color-base00) !important;
 }
-.smsc-contextmenu__content,.listview-row__item--inline-edit{
+
+.smsc-contextmenu__content,
+.listview-row__item--inline-edit {
   background-color: var(--color-base01) !important;
 }
-.contextmenu__item--nolink:hover,.listview__action-btns:hover{
+
+.contextmenu__item--nolink:hover,
+.listview__action-btns:hover {
   background-color: var(--color-base02) !important;
 }
-.smsc-rightclick__menu{
+
+.smsc-rightclick__menu {
   background-color: var(--color-base02) !important;
 }
-.smsc-rightclick__item:hover{
+
+.smsc-rightclick__item:hover {
   background-color: var(--color-base03) !important;
 }
-.smsc-dialog,.smsc-templates__linkbutton{
+
+.smsc-dialog,
+.smsc-templates__linkbutton {
   background-color: var(--color-base01) !important;
 }
+
 [listview] .listview__row--selected .listview__cell:not(.listview__cell--select-btn) {
   background-color: var(--color-base02) !important;
 }
-.smsc-templates__separator{
+
+.smsc-templates__separator {
   display: none !important;
 }
 
@@ -195,43 +244,57 @@ td:not(.cb-container),.action-button{
 
   background-color: var(--color-base02) !important;
 }
-.sidebar,.sidebar-btn__button,.manual_widgetcontent,.manual_widgettitle{
+
+.sidebar,
+.sidebar-btn__button,
+.manual_widgetcontent,
+.manual_widgettitle {
   background-color: var(--color-base00) !important;
 }
-.profile_header_pupilinfo_status{
+
+.profile_header_pupilinfo_status {
   color: var(--color-accent) !important;
 }
-.lvs-pupilpresences-row{
+
+.lvs-pupilpresences-row {
   background-color: var(--color-base02) !important;
 }
-#smscMainBlockContainer{
+
+#smscMainBlockContainer {
   background-color: var(--color-base01) !important;
   border: 1px solid var(--color-accent) !important;
   box-shadow: none;
 }
-.smscAdminNav_body_linkdivTitle:hover{
+
+.smscAdminNav_body_linkdivTitle:hover {
   color: var(--color-text) !important;
 }
-.smscAdminNav_body .smscAdminNav_body_link .smscAdminNav_body_linkdivText.disabled .smscAdminNav_body_linkdivTitle,.smscAdminNav_body .smscAdminNav_body_link .smscAdminNav_body_linkdivText.disabled {
+
+.smscAdminNav_body .smscAdminNav_body_link .smscAdminNav_body_linkdivText.disabled .smscAdminNav_body_linkdivTitle,
+.smscAdminNav_body .smscAdminNav_body_link .smscAdminNav_body_linkdivText.disabled {
   color: var(--color-base03) !important;
 
 }
+
 div.smscCheckbox input[type=checkbox]:checked+label {
   background-image: url("https://pic.onlinewebfonts.com/thumbnails/icons_263317.svg") !important;
   box-shadow: none !important;
   background-size: 14px !important;
 }
+
 div.smscCheckbox label {
   background-image: url("https://pic.onlinewebfonts.com/thumbnails/icons_263320.svg") !important;
   box-shadow: none !important;
   background-size: 14px !important;
 }
+
 div.smscCheckbox input[type=checkbox]:checked+label::selection {
   background-image: url("https://pic.onlinewebfonts.com/thumbnails/icons_263317.svg") !important;
   box-shadow: none !important;
   background-size: 14px !important;
 
 }
+
 div.smscCheckbox label::selection {
   background-image: url("https://pic.onlinewebfonts.com/thumbnails/icons_263320.svg") !important;
   box-shadow: none !important;

@@ -23,7 +23,8 @@ html {
   color: var(--color-text) !important;
 }
 
-.login-app__container,.login-app {
+.login-app__container,
+.login-app {
 
   background-position: center !important;
   background-size: cover !important;
@@ -34,7 +35,8 @@ html {
   display: none !important;
 }
 
-.login-app__right,.login-app__top {
+.login-app__right,
+.login-app__top {
   box-shadow: none !important;
   width: 400px;
   height: 450px;
@@ -42,22 +44,26 @@ html {
 }
 
 .login-app__top {
-background-color: #e0e0e023  !important;
-backdrop-filter: blur(10px) !important;
-border-radius: 20px !important;
-border: 3px solid #b8b8b8b2 !important;
+  background-color: #e0e0e023 !important;
+  backdrop-filter: blur(10px) !important;
+  border-radius: 20px !important;
+  border: 3px solid #b8b8b8b2 !important;
 }
 
 .login-app__bottom {
   display: none !important;
 }
-.logintitle{
+
+.logintitle {
   font-size: 36px !important;
   color: aliceblue !important;
 }
-.login-app__link, .login-app__link--password{
+
+.login-app__link,
+.login-app__link--password {
   color: aliceblue !important;
 }
+
 a.smscButton[href="/login/sso/init/google"],
 a.smscButton[href="/login/sso/init/office365"],
 a.smscButton[href="/login/sso/init/acm"],
@@ -65,19 +71,21 @@ a.smscButton[href="/login/sso/init/acm"],
 .login-app__title--separator {
   display: none !important;
 }
-.showLeftNav{
+
+.showLeftNav {
   align-items: center !important;
   justify-content: center !important;
   background-image: var(--loginpage-image) !important;
   background-position: center !important;
   background-size: cover !important;
 }
-.float-label__input{
+
+.float-label__input {
   border-radius: 40px !important;
   height: 40px !important;
   font-size: 15px !important;
   margin: 10px !important;
-margin-left: 0px !important;
+  margin-left: 0px !important;
 }
 
 
@@ -86,18 +94,25 @@ margin-left: 0px !important;
   border-radius: 40px !important;
   height: 40px !important;
   color: black !important;
-  border-color:aliceblue !important;;
-  background-color: aliceblue !important;;
+  border-color: aliceblue !important;
+  ;
+  background-color: aliceblue !important;
+  ;
 }
+
 .smscButton.blue:hover {
   margin-top: 40px !important;
   border-radius: 40px !important;
   height: 40px !important;
   color: black !important;
-  border-color:rgb(203, 206, 209) !important;;
-  background-color: rgb(203, 206, 209) !important;;
+  border-color: rgb(203, 206, 209) !important;
+  ;
+  background-color: rgb(203, 206, 209) !important;
+  ;
 }
-.modern-ui .float-label__input:focus+label>span, .modern-ui .float-label__input:valid+label>span {
+
+.modern-ui .float-label__input:focus+label>span,
+.modern-ui .float-label__input:valid+label>span {
   font-size: 18px !important;
   left: 5px !important;
   top: -70px !important;

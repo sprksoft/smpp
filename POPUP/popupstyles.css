@@ -1,40 +1,46 @@
 html {
-    background-color: #2b2b2b;
-    color: #ffffff;
-    width: 160px;
-    height: fit-content;
+  background-color: #2b2b2b;
+  color: #ffffff;
+  width: 160px;
+  height: fit-content;
 }
 
 #profileSelector {
-    background-color: #444444;
-    border: 1px solid #ffffff;
-    color: white;
-    padding: 5px;
-    border-radius: 5px;
-    margin: 2px;
-    font-size: large;
-    font:bold;
+  background-color: #444444;
+  border: 1px solid #ffffff;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  margin: 2px;
+  font-size: large;
+  font: bold;
 }
 
 html {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-h3{
-    margin: 0 10px;
+
+h3 {
+  margin: 0 10px;
 }
+
 body {
-    text-align: center;
-    user-select: none;
+  text-align: center;
+  user-select: none;
 }
-input {background-color:#444444;
+
+input {
+  background-color: #444444;
   border: 1px solid #ffffff;
   text-align: center;
   border-radius: 5px;
   width: 100px;
-color: white;
-margin: 10px;}
+  color: white;
+  margin: 10px;
+}
+
 /* The switch - the box around the slider */
 .switch {
   position: relative;
@@ -77,15 +83,15 @@ margin: 10px;}
   transition: .4s;
 }
 
-input:checked + .slider {
+input:checked+.slider {
   background-color: #999999;
 }
 
-input:focus + .slider {
+input:focus+.slider {
   box-shadow: 0 0 1px #b2c1ce;
 }
 
-input:checked + .slider:before {
+input:checked+.slider:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);
@@ -99,15 +105,18 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
-#profileSelector option{
+
+#profileSelector option {
   font-size: large;
   font: bold;
 }
-.sliderblur{
+
+.sliderblur {
   margin-bottom: 0px;
   font: bold;
 }
-p{
+
+p {
   margin-top: 0px;
   font-weight: bold;
 }

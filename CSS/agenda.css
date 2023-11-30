@@ -1,62 +1,75 @@
-
 .border {
     background-image: none !important;
     background-color: var(--color-base00) !important;
 
 }
-.agenda_grid_main{
-    background-color: var(--color-base01) !important; 
+
+.agenda_grid_main {
+    background-color: var(--color-base01) !important;
     border: 3px solid var(--color-base03) !important;
     border-radius: 10px !important;
 
 }
-#menuContainerContent{
-    background-color: var(--color-base01) !important; 
+
+#menuContainerContent {
+    background-color: var(--color-base01) !important;
     border: 3px solid var(--color-base03) !important;
     border-radius: 10px !important;
     width: 34px !important;
 }
-.color_snow_white{
+
+.color_snow_white {
     background-color: var(--color-base01) !important;
     border: 2px solid var(--color-base03) !important;
     border-radius: 5px !important;
 }
 
-.navNextInput,.navPrevInput,.ui-datepicker-month,.ui-datepicker-year{
+.navNextInput,
+.navPrevInput,
+.ui-datepicker-month,
+.ui-datepicker-year {
     color: var(--color-accent) !important;
-    background-color: var(--color-base01) !important;
-    border: 2px solid var(--color-base03) !important;
-    border-radius: 5px !important;
-}
-.agenda_grid_header_day,.navTitle{
-    color: var(--color-accent) !important;
-}
-.ui-datepicker-header{
     background-color: var(--color-base01) !important;
     border: 2px solid var(--color-base03) !important;
     border-radius: 5px !important;
 }
 
-.ui-state-default{
+.agenda_grid_header_day,
+.navTitle {
+    color: var(--color-accent) !important;
+}
+
+.ui-datepicker-header {
+    background-color: var(--color-base01) !important;
+    border: 2px solid var(--color-base03) !important;
+    border-radius: 5px !important;
+}
+
+.ui-state-default {
     background-color: var(--color-base02) !important;
     border: 1px solid var(--color-base03) !important;
 }
+
 .border.centery.bottomy {
     display: none !important;
-    }
-    .cf .margin-top--milli{
-        border: 0px !important;
-    }
-    .border.centerxy {
+}
 
-        border-right: 1px solid var(--color-base02) !important;
+.cf .margin-top--milli {
+    border: 0px !important;
+}
 
-    }
-    .tasksAndMaterials__label:hover{
-        color: var(--color-accent) !important;
-    }
-    .titleWithLine.grey:after {
-        background: linear-gradient(var(--color-base02),var(--color-base02)) repeat-x !important;
-        background-size: 1px 1px !important;
-        background-position: left center !important;
-    }
+.border.centerxy {
+
+    border-right: 1px solid var(--color-base02) !important;
+
+}
+
+.tasksAndMaterials__label:hover {
+    color: var(--color-accent) !important;
+}
+
+.titleWithLine.grey:after {
+    background: linear-gradient(var(--color-base02), var(--color-base02)) repeat-x !important;
+    background-size: 1px 1px !important;
+    background-position: left center !important;
+}

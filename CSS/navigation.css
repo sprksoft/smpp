@@ -16,11 +16,14 @@
 .topnav__menu-arrow {
   display: none !important;
 }
-.smsc-topnav .topnav__menu__title{
+
+.smsc-topnav .topnav__menu__title {
   color: var(--color-text) !important;
 }
+
 .topnav__btn,
-.token,.titleRight {
+.token,
+.titleRight {
   border: 2px solid var(--color-base02) !important;
   border-radius: 50px !important;
   background: var(--color-base01) !important;
@@ -60,16 +63,17 @@
   text-decoration: none;
 }
 
-.topnav__menuitem{
+.topnav__menuitem {
   border: var(--border-size) solid var(--color-base01) !important;
   background-color: var(--color-base01) !important;
 }
-li{
+
+li {
 
   background: none !important;
 }
-.course-list{
+
+.course-list {
   background: none !important;
   color: var(--color-base02) !important;
 }
- 

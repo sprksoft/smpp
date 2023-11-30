@@ -1,32 +1,60 @@
 {
-
   "description": "An extension to make the smartschool better",
   "manifest_version": 2,
   "name": "sm++",
   "version": "1.0",
   "homepage_url": "https://github.com/Xgames123/smpp",
-
-
   "content_scripts": [
     {
-      "matches": ["*://digitalemethode.be/*"],
+      "matches": [
+        "*://digitalemethode.be/*"
+      ],
       "all_frames": true,
-      "css": ["dpp/dpp.css","DMENU/dmenu.css"],
-      "js": ["scraper.js", "utils.js", "DMENU/dmenu.js", "dpp/dpp.js"]
+      "css": [
+        "dpp/dpp.css",
+        "DMENU/dmenu.css"
+      ],
+      "js": [
+        "scraper.js",
+        "utils.js",
+        "DMENU/dmenu.js",
+        "dpp/dpp.js"
+      ]
     },
     {
-      "matches": ["*://*.smartschool.be/*"],
+      "matches": [
+        "*://*.smartschool.be/*"
+      ],
       "all_frames": true,
-      "css": ["CSS/general.css","CSS/weather.css", "DMENU/dmenu.css","CSS/login.css",
-      "CSS/messages.css","CSS/navigation.css","CSS/notification.css","CSS/planner.css",
-      "CSS/results.css","CSS/startpage.css","CSS/delijn.css","CSS/agenda.css"],
-      "js": ["scraper.js", "utils.js", "smppjs.js", "DMENU/dmenu.js",
-      "weather.js","middlestartpage.js","delijn.js","loginpage.js"]
+      "css": [
+        "CSS/general.css",
+        "CSS/weather.css",
+        "DMENU/dmenu.css",
+        "CSS/login.css",
+        "CSS/messages.css",
+        "CSS/navigation.css",
+        "CSS/notification.css",
+        "CSS/planner.css",
+        "CSS/results.css",
+        "CSS/startpage.css",
+        "CSS/delijn.css",
+        "CSS/agenda.css"
+      ],
+      "js": [
+        "scraper.js",
+        "utils.js",
+        "smppjs.js",
+        "DMENU/dmenu.js",
+        "weather.js",
+        "middlestartpage.js",
+        "delijn.js",
+        "loginpage.js"
+      ]
     }
   ],
   "background": {
     "scripts": []
-  }, 
+  },
   "browser_action": {
     "default_icon": {
       "16": "icon16.png",
@@ -36,8 +64,11 @@
     "default_title": "Click here to open menu",
     "default_popup": "POPUP/popup.html"
   },
-
-  "permissions": ["webRequest", "webRequestBlocking", "<all_urls>","activeTab","storage"]
-
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>",
+    "activeTab",
+    "storage"
+  ]
 }
-

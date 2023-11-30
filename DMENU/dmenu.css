@@ -1,19 +1,20 @@
-html{
+html {
   --dmenu-margin: 1px;
   --dmenu-font-size: 1.5rem;
 }
 
-.dmenu-centered{
+.dmenu-centered {
   left: 10%;
   right: 10%;
   top: 10%;
   bottom: 10%;
 }
-.dmenu-hidden{
-  display:none !important;
+
+.dmenu-hidden {
+  display: none !important;
 }
 
-#dmenu{
+#dmenu {
   background: var(--color-base00);
   border: var(--border-size) solid var(--color-popup-border);
   position: absolute;
@@ -23,13 +24,13 @@ html{
   z-index: 999999;
 }
 
-#dmenu > .top{
+#dmenu>.top {
   display: flex;
   flex-direction: row;
   border-bottom: var(--border-size) solid var(--color-base02);
 }
 
-.dmenu-input{
+.dmenu-input {
   border: none !important;
   background: var(--color-base01);
   color: var(--color-text) !important;
@@ -38,35 +39,40 @@ html{
   padding: var(--dmenu-margin);
   font-size: var(--dmenu-font-size) !important;
 }
-.dmenu-input:focus{
-  outline-width:0;
+
+.dmenu-input:focus {
+  outline-width: 0;
   outline: none;
 }
 
-.dmenu-label{
+.dmenu-label {
   background: var(--color-base01);
   color: var(--color-accent);
   line-height: inherit;
-  margin:0px;
+  margin: 0px;
   padding: var(--dmenu-margin);
   border-right: var(--border-size) solid var(--color-base02);
 }
 
-#dmenu >.autocomplete{
-  overflow-y:auto;
+#dmenu>.autocomplete {
+  overflow-y: auto;
 }
-#dmenu >.autocomplete > .hidden{
+
+#dmenu>.autocomplete>.hidden {
   visibility: hidden;
 }
-#dmenu > .autocomplete > *{
+
+#dmenu>.autocomplete>* {
   margin: var(--dmenu-margin);
   color: var(--color-text) !important;
   border: none;
 }
-#dmenu > .autocomplete > *:nth-child(even){
+
+#dmenu>.autocomplete>*:nth-child(even) {
   background: var(--color-base01);
 }
-#dmenu >.autocomplete > .selected{
+
+#dmenu>.autocomplete>.selected {
   background: var(--color-accent) !important;
   color: var(--color-base01) !important;
 }

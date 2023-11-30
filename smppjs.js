@@ -7,14 +7,14 @@ function unbloat() {
 }
 
 //WARNING: garbage
-try{
+try {
   document.getElementsByClassName("js-btn-logout")[0].innerHTML = "Logout -->";
   document.getElementById("notifsToggleLabel").innerHTML = "Toon pop-ups"
-}catch(e){}
+} catch (e) { }
 //END Garbage
 
 
-let goto_items=get_data("goto_menu", ".js-shortcuts-container > a", function (el, data) {
+let goto_items = get_data("goto_menu", ".js-shortcuts-container > a", function (el, data) {
   const name = el.innerText.toLowerCase().trim();
   data[name] = el.href;
 });
@@ -22,14 +22,14 @@ let goto_items=get_data("goto_menu", ".js-shortcuts-container > a", function (el
 let vakken = {};
 get_data_bg("vakken", ".course-list > li > a", function (el, data) {
   const name = el.getElementsByClassName("course-link__name")[0].innerText.toLowerCase().trim();
-  data[name]=el.href;
+  data[name] = el.href;
 }, function (data) {
   vakken = data;
 });
 
 
-document.addEventListener("keyup", function(e){
-  if (e.key == ':'){
+document.addEventListener("keyup", function (e) {
+  if (e.key == ':') {
     let cmd_list = Object.keys(vakken).concat(Object.keys(goto_items).concat(["classroom", "onshape", "set background", "set theme", "lock dmenu", "unbloat"]));
     dmenu(cmd_list, function (cmd, shift) {
       switch (cmd) {
@@ -43,7 +43,7 @@ document.addEventListener("keyup", function(e){
           dmenu([], function (url) {
             set_background(url);
             store_background(url);
-          },"bg url:");
+          }, "bg url:");
           return;
         case "set theme":
           dmenu(theme_names, function (theme) {
@@ -61,12 +61,12 @@ document.addEventListener("keyup", function(e){
           break;
       }
       let got_url = goto_items[cmd]
-      if (got_url != null){
+      if (got_url != null) {
         open_url(got_url, shift);
         return;
       }
       let vakken_url = vakken[cmd];
-      if (vakken_url != null){
+      if (vakken_url != null) {
         open_url(vakken_url, shift);
         return;
       }
@@ -92,7 +92,7 @@ chrome.storage.local.get('current_profile', function (store) {
 chrome.storage.local.get('buttonstate', function (store) {
   let button = store.buttonstate;
   console.log("set buttonstate to " + button);
-  if (button==true){
+  if (button == true) {
     set_background(background);
   }
 });
@@ -100,27 +100,27 @@ chrome.storage.local.get('blurvalue', function (store) {
   let blurvalue = store.blurvalue;
   console.log("set blurvalue to " + blurvalue);
   let style = document.documentElement.style;
-  style.setProperty('--blur-value-large', 'blur('+blurvalue*2+'px)');
-  style.setProperty('--blur-value-small', 'blur('+blurvalue+'px)');
+  style.setProperty('--blur-value-large', 'blur(' + blurvalue * 2 + 'px)');
+  style.setProperty('--blur-value-small', 'blur(' + blurvalue + 'px)');
 });
-function store_profile(profile){
+function store_profile(profile) {
   chrome.storage.local.set({
     current_profile: profile
   });
 }
-function store_background(background){
+function store_background(background) {
   chrome.storage.local.set({
     local_background: background
   });
 }
 
-function set_background(background){
+function set_background(background) {
   let style = document.documentElement.style;
-  style.setProperty('--loginpage-image', "url("+background+")");
+  style.setProperty('--loginpage-image', "url(" + background + ")");
 }
 
 
-const theme_names = ["default", "ldev", "birb", "bjarn", "tan", "winter", "fall","matcha"];
+const theme_names = ["default", "ldev", "birb", "bjarn", "tan", "winter", "fall", "matcha"];
 function set_theme(name) {
   let style = document.documentElement.style;
   style.setProperty('--color-accent', '#8f8f95');
@@ -151,7 +151,7 @@ function set_theme(name) {
       style.setProperty('--color-base02', '#250654');
       style.setProperty('--color-base03', '#3f0a74');
       style.setProperty('--loginpage-image', "url(https://www.hdwallpapers.in/download/macos_monterey_shapes_hd_macos-2560x1440.jpg)");
-      break;                                                                  
+      break;
     case 'bjarn':
       style.setProperty('--color-accent', "#95a4ee");
       style.setProperty('--color-text', "#d2e4e9");
@@ -188,27 +188,27 @@ function set_theme(name) {
       style.setProperty('--color-base03', '#b9d4f4');
       style.setProperty('--loginpage-image', "url(https://hdqwalls.com/download/everest-3840x2160.jpg)");
       break;
-      case 'birb':
-        style.setProperty('--color-accent', '#8590aacc');
-        style.setProperty('--color-text', '#626365');
-        style.setProperty('--color-base00', '#0c0c13');
-        style.setProperty('--color-base01', '#141519');
-        style.setProperty('--color-base02', '#1a1b1f');
-        style.setProperty('--color-base03', '#1f2024');
-        style.setProperty('--loginpage-image', "url(https://wallpapercave.com/wp/wp4673203.jpg)");
-        break;
-        case 'matcha':
-          style.setProperty('--color-accent', '#66ac6d');
-          style.setProperty('--color-text', '#9bd49f');
-          style.setProperty('--color-base00', '#243926');
-          style.setProperty('--color-base01', '#365138');
-          style.setProperty('--color-base02', '#456046');
-          style.setProperty('--color-base03', '#4f7a51');
-          style.setProperty('--loginpage-image', "url(https://wallpapercave.com/wp/wp9313069.jpg)");
-          break;
-      // Add more cases for other profiles as needed
+    case 'birb':
+      style.setProperty('--color-accent', '#8590aacc');
+      style.setProperty('--color-text', '#626365');
+      style.setProperty('--color-base00', '#0c0c13');
+      style.setProperty('--color-base01', '#141519');
+      style.setProperty('--color-base02', '#1a1b1f');
+      style.setProperty('--color-base03', '#1f2024');
+      style.setProperty('--loginpage-image', "url(https://wallpapercave.com/wp/wp4673203.jpg)");
+      break;
+    case 'matcha':
+      style.setProperty('--color-accent', '#66ac6d');
+      style.setProperty('--color-text', '#9bd49f');
+      style.setProperty('--color-base00', '#243926');
+      style.setProperty('--color-base01', '#365138');
+      style.setProperty('--color-base02', '#456046');
+      style.setProperty('--color-base03', '#4f7a51');
+      style.setProperty('--loginpage-image', "url(https://wallpapercave.com/wp/wp9313069.jpg)");
+      break;
+    // Add more cases for other profiles as needed
     default:
-      // Handle default case or do nothing if no match found
+    // Handle default case or do nothing if no match found
   }
 }
 

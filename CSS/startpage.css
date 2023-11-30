@@ -1,4 +1,3 @@
-
 body {
   background-color: var(--color-base00) !important;
   color: var(--color-text);
@@ -6,31 +5,38 @@ body {
 
 
 #homepage__block--google {
-    transition: none;
-    border-bottom: none !important;
+  transition: none;
+  border-bottom: none !important;
 }
-.homepage{
-    background-image: var(--loginpage-image) !important;
-    background-position: center !important;
-    background-size: cover !important;
+
+.homepage {
+  background-image: var(--loginpage-image) !important;
+  background-position: center !important;
+  background-size: cover !important;
 
 }
-#leftcontainer,#rightcontainer{
+
+#leftcontainer,
+#rightcontainer {
   background-color: #02020585 !important;
   backdrop-filter: var(--blur-value-large) !important;
   -webkit-backdrop-filter: var(--blur-value-large) !important;
 }
-#centercontainer{
+
+#centercontainer {
   background-color: #02020559 !important;
   backdrop-filter: var(--blur-value-small) !important;
   -webkit-backdrop-filter: var(--blur-value-small) !important;
 }
-#homepage__block--contact{
+
+#homepage__block--contact {
   display: none !important;
 }
-#leftcontainer{
+
+#leftcontainer {
   padding: 16px 24px !important;
 }
-.toast__content{
+
+.toast__content {
   background-color: var(--color-base01) !important;
 }

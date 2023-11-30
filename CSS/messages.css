@@ -81,11 +81,13 @@
   color: var(--color-text) !important;
   box-shadow: none !important;
 }
-.context-menu{
+
+.context-menu {
   background-color: var(--color-base01) !important;
   color: var(--color-text) !important;
   box-shadow: none !important;
 }
+
 .menu-item {
   border: 1px solid var(--color-base01) !important;
   color: var(--color-text) !important;
@@ -129,7 +131,8 @@
   background-color: var(--color-base00) !important;
 }
 
-.quickReplyMenu,.smsc-title--2 {
+.quickReplyMenu,
+.smsc-title--2 {
   color: var(--color-accent) !important;
 }
 
@@ -137,15 +140,27 @@
 .toolbarright {
   background-color: var(--color-base00) !important;
 }
-.msgcell__parent-td, #msgcell,.smscMain,.tooltip__content{
+
+.msgcell__parent-td,
+#msgcell,
+.smscMain,
+.tooltip__content {
   background-color: var(--color-base00) !important;
 }
-#msgdetail,.msgContent,.msgContentVal,.ui-button,.smscTimeInput,.smscTimeOptions{
+
+#msgdetail,
+.msgContent,
+.msgContentVal,
+.ui-button,
+.smscTimeInput,
+.smscTimeOptions {
   background-color: var(--color-base01) !important;
 }
-.smscTimeOption:hover{
+
+.smscTimeOption:hover {
   background-color: var(--color-base02) !important;
 }
+
 img[src="/modules/Messages/themes/default/images/loading_big.gif"] {
   display: none !important;
 }

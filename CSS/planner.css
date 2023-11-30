@@ -76,7 +76,7 @@ span,
 .inline-editor__input::placeholder,
 .planner-header .header__borderdropdowncontainer:hover:after,
 .inline-editor__input,
-.inline-editor:not([readonly]):hover:after  {
+.inline-editor:not([readonly]):hover:after {
   background-color: var(--color-base00) !important;
 }
 
@@ -87,46 +87,64 @@ span,
 .form__label--required::after {
   color: var(--color-accent) !important;
 }
-.todo-column__row--hovering{
+
+.todo-column__row--hovering {
   background-color: var(--color-base02) !important;
 }
+
 .todo-column [listview] .todo-column__row:hover .todo-column__actions-cell {
-  background-color: var(--color-base02) !important;;
+  background-color: var(--color-base02) !important;
+  ;
   transition: none !important;
 }
+
 .icon-label-btn--blob.icon-label-btn {
   background-color: var(--color-base02) !important;
 }
-.timeinput{
+
+.timeinput {
   background-color: var(--color-base02) !important;
   border-color: var(--color-accent) !important;
 }
-.twinbutton__button:hover,.header__horizdivider{
+
+.twinbutton__button:hover,
+.header__horizdivider {
   background-color: var(--color-base01) !important;
   transition: none !important;
 }
-.render-on-mode-change:hover{
+
+.render-on-mode-change:hover {
   border-color: transparent !important;
 }
-.twinbutton__button{
+
+.twinbutton__button {
   border-color: var(--color-base01) !important;
 }
+
 .datepicker .block .dates .date--selected {
   background-color: var(--color-base02) !important;
 }
-.header__month{
+
+.header__month {
   background-color: var(--color-base02) !important;
 }
-.date:hover span{
+
+.date:hover span {
 
   background-color: var(--color-base03) !important;
 }
-.header__month:hover,.header__year:hover,.header__year::selection{
+
+.header__month:hover,
+.header__year:hover,
+.header__year::selection {
   border-color: var(--color-accent) !important;
 }
-.header__borderdropdowncontainer::after{
+
+.header__borderdropdowncontainer::after {
   display: none !important;
 }
-[inline-editor] .inline-editor__input:not([readonly]):focus, [inline-editor] .inline-editor__input:not([readonly]):hover {
+
+[inline-editor] .inline-editor__input:not([readonly]):focus,
+[inline-editor] .inline-editor__input:not([readonly]):hover {
   border-color: var(--color-base03) !important;
 }
