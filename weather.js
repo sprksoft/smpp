@@ -42,7 +42,7 @@ async function updateWeatherDiv(weatherData) {
   }
   const rightContainer = document.getElementById('rightcontainer');
 
-  if (rightContainer == undefined) {
+  if (!rightContainer) {
     return;
   }
 
@@ -130,6 +130,10 @@ async function updateWeatherDiv(weatherData) {
 }
 
 async function main() {
+  if (!document.getElementById('rightcontainer')){
+    //Not on home page
+    return;
+  }
   console.log("Loading old data from localstorage")
   let weatherData = JSON.parse(window.localStorage.getItem("weatherdata"));
   updateWeatherDiv(weatherData);
