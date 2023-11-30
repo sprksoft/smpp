@@ -216,3 +216,25 @@ td:not(.cb-container),.action-button{
   color: var(--color-base03) !important;
 
 }
+div.smscCheckbox input[type=checkbox]:checked+label {
+  background-image: url("https://pic.onlinewebfonts.com/thumbnails/icons_263317.svg") !important;
+  box-shadow: none !important;
+  background-size: 14px !important;
+}
+div.smscCheckbox label {
+  background-image: url("https://pic.onlinewebfonts.com/thumbnails/icons_263320.svg") !important;
+  box-shadow: none !important;
+  background-size: 14px !important;
+}
+div.smscCheckbox input[type=checkbox]:checked+label::selection {
+  background-image: url("https://pic.onlinewebfonts.com/thumbnails/icons_263317.svg") !important;
+  box-shadow: none !important;
+  background-size: 14px !important;
+
+}
+div.smscCheckbox label::selection {
+  background-image: url("https://pic.onlinewebfonts.com/thumbnails/icons_263320.svg") !important;
+  box-shadow: none !important;
+  background-size: 14px !important;
+
+}

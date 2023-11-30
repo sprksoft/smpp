@@ -37,10 +37,15 @@ async function getWeatherByLocation() {
 // ... (previous code remains unchanged)
 
 async function updateWeatherDiv() {
-    const rightContainer = document.getElementById('homepage__block--datepicker');
+    const rightContainer = document.getElementById('rightcontainer');
+
+
+
     if (rightContainer == undefined){
       return;
     }
+    rightContainer.innerHTML = ''; 
+    weatherdiv = document.createElement("div");
     console.log('Updating weather information based on user location...');
     const weatherData = await getWeatherByLocation();
     if (weatherData) {
@@ -48,7 +53,6 @@ async function updateWeatherDiv() {
         const { name, main, weather, rain, wind } = weatherData; // Include rain data
         const temperature = Math.round(main.temp);
         const description = weather[0].description;
-        const rainVolume = rain ? rain['1h'] : 0; // Check if rain data
         const humidity = main.humidity;
         let windSpeed = Number(wind.speed);
         const mainWeather = weather[0].main;
@@ -57,7 +61,7 @@ async function updateWeatherDiv() {
         
         // Update the content of the div with unique classes
         try {
-            rightContainer.innerHTML = `
+            weatherdiv.innerHTML = `<div class="weatherdiv">
             <h2 class="weather-location">${name}</h2>
             <h2 class="weather-main">${mainWeather}</h2>
             <div class="weather">
@@ -78,6 +82,7 @@ async function updateWeatherDiv() {
             </div>
             </div>
 
+            </div>
             </div>
         `;
 
@@ -116,7 +121,8 @@ async function updateWeatherDiv() {
          catch (e) {
             console.log(e); 
         }
-        
+        rightContainer.appendChild(weatherdiv);
+        console.log('Weather information updated.');
 }
 }
 // Call the function to update the 'rightcontainer' div based on user's location

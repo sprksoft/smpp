@@ -1,5 +1,5 @@
 /* Styles for weather information */
-#homepage__block--datepicker {
+.weatherdiv {
     background-color: var(--color-base01);
     padding: 20px;
     border-radius: 8px;
@@ -7,7 +7,7 @@
     text-align: center;
     max-width: 400px;
     margin: 9px;
-    border: var(--border-size) solid var(--color-base03);
+    border: 3px solid var(--color-base03);
 
   }
   

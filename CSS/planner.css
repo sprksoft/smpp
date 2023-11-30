@@ -114,8 +114,16 @@ span,
 .datepicker .block .dates .date--selected {
   background-color: var(--color-base02) !important;
 }
-
+.header__month{
+  background-color: var(--color-base02) !important;
+}
 .date:hover span{
 
   background-color: var(--color-base03) !important;
+}
+.header__month:hover,.header__year:hover,.header__year::selection{
+  border-color: var(--color-accent) !important;
+}
+.header__borderdropdowncontainer::after{
+  display: none !important;
 }
