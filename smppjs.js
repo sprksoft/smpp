@@ -30,7 +30,7 @@ get_data_bg("vakken", ".course-list > li > a", function (el, data) {
 
 document.addEventListener("keyup", function (e) {
   if (e.key == ':') {
-    let cmd_list = Object.keys(vakken).concat(Object.keys(goto_items).concat(["classroom", "onshape", "set background", "set theme", "lock dmenu", "unbloat"]));
+    let cmd_list = Object.keys(vakken).concat(Object.keys(goto_items).concat(["classroom", "onshape", "set background", "set theme", "set theme v2", "lock dmenu", "unbloat"]));
     dmenu(cmd_list, function (cmd, shift) {
       switch (cmd) {
         case "lock dmenu":
@@ -49,6 +49,12 @@ document.addEventListener("keyup", function (e) {
           dmenu(theme_names, function (theme) {
             store_profile(theme);
             set_theme(theme)
+          }, "theme:");
+          return;
+        case "set theme v2":
+          dmenu(get_all_themes_v2(), function (theme) {
+            store_profile(theme);
+            set_theme_v2(theme);
           }, "theme:");
           return;
         case "classroom":
@@ -131,6 +137,7 @@ function set_theme(name) {
   style.setProperty('--color-base03', '#5b5756');
   style.setProperty('--color-popup-border', 'var(--color-accent)');
   style.setProperty('--color-hover-border', 'var(--color-accent)');
+  style.setProperty('--color-homepage-sidebars-bg', "#02020585");
   style.setProperty('--loginpage-image', "url(https://images.hdqwalls.com/wallpapers/moon-astrophotography-4k-sc.jpg)");
 
   switch (name) {
@@ -141,6 +148,7 @@ function set_theme(name) {
       style.setProperty('--color-accent', '#ffd5a0');
       style.setProperty('--color-popup-border', 'var(--color-base02)');
       style.setProperty('--color-hover-border', 'var(--color-base03)')
+      style.setProperty('--color-homepage-sidebars-bg', "var(--color-base00)");
       style.setProperty('--loginpage-image', "url(https://i.redd.it/yfssdsfosao11.png)");
       break;
     case 'purple':

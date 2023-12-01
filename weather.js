@@ -36,48 +36,48 @@ async function getWeatherByLocation() {
 
 // ... (previous code remains unchanged)
 
-async function updateWeatherDiv() {
-    const rightContainer = document.getElementById('rightcontainer');
+async function updateWeatherDiv(weatherData) {
+  if (!weatherData){
+    return;
+  }
+  const rightContainer = document.getElementById('rightcontainer');
+
+  if (!rightContainer) {
+    return;
+  }
+
+  rightContainer.innerHTML = '';
+  weatherdiv = document.createElement("div");
+  const { name, main, weather, rain, wind } = weatherData; // Include rain data
+  const temperature = Math.round(main.temp);
+  const feelslike = Math.round(main.feels_like);
+  const description = weather[0].description;
+  const humidity = main.humidity;
+  let windSpeed = Number(wind.speed);
+  const mainWeather = weather[0].main;
+  windSpeedkmh = Math.round(windSpeed * 3.6); // Convert to km/h
 
 
-
-    if (rightContainer == undefined) {
-        return;
-    }
-    rightContainer.innerHTML = '';
-    weatherdiv = document.createElement("div");
-    console.log('Updating weather information based on user location...');
-    const weatherData = await getWeatherByLocation();
-    if (weatherData) {
-        console.log('Weather data:', weatherData);
-        const { name, main, weather, rain, wind } = weatherData; // Include rain data
-        const temperature = Math.round(main.temp);
-        const description = weather[0].description;
-        const humidity = main.humidity;
-        let windSpeed = Number(wind.speed);
-        const mainWeather = weather[0].main;
-        windSpeedkmh = Math.round(windSpeed * 3.6); // Convert to km/h
-
-
-        // Update the content of the div with unique classes
-        try {
-            weatherdiv.innerHTML = `<div class="weatherdiv">
-            <h2 class="weather-location">${name}</h2>
-            <h2 class="weather-main">${mainWeather}</h2>
+  // Update the content of the div with unique classes
+  try {
+    weatherdiv.innerHTML = `<div class="weatherdiv">
+            <h2 class="weather-location"></h2>
+            <h2 class="weather-main"></h2>
             <div class="weather">
-    <img src="https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/chanceflurries.svg" class="weather-icon">
-</div>
-            <p class="weather-temperature">${temperature}°C</p>
+              <img src="https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/chanceflurries.svg" class="weather-icon">
+            </div>
+            <p class="weather-temperature"></p>
+            <p class="weather-feelslike"></p>
             <div class="weather-humwind">
             <div class="col"> <img src='https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/humidity.png'><div>
             <p class="weather-humidity"></p>
-            <p class="weather-humidity">${humidity}%</p>
+            <p class="weather-humidity"></p>
             <p class="weather-humidity">Humidity</p></div>
             </div>
             <div class="weather-humwind">
             <div class="col"> <img src='https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/wind.png'><div>
             <p class="weather-wind"></p>
-            <p class="weather-wind">${windSpeedkmh} km/h</p>
+            <p class="weather-wind"></p>
             <p class="weather-wind">Wind Speed</p></div>
             </div>
             </div>
@@ -85,46 +85,68 @@ async function updateWeatherDiv() {
             </div>
             </div>
         `;
+    weatherdiv.querySelector(".weather-location").innerText = name;
+    weatherdiv.querySelector(".weather-main").innerText = mainWeather;
+    weatherdiv.querySelector(".weather-temperature").innerText=temperature+"°C";
+    weatherdiv.querySelector(".weather-feelslike").innerText="Feels like "+feelslike+"°C";
+    weatherdiv.querySelector(".weather-humidity").innerText=humidity+"%";
+    weatherdiv.querySelector(".weather-wind").innerText=windSpeedkmh+"km/h";
 
-            const weatherIcon = document.querySelector('.weather-icon');
-            if (description == "broken clouds") {
-                weatherIcon.src = 'https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/mostlycloudy.svg'
-            }
-            else if (description == "few clouds" || description == "scattered clouds") {
-                weatherIcon.src = 'https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/mostlysunny.svg'
-            }
-            else if (description == "overcast clouds") {
-                weatherIcon.src = 'https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/cloudy.svg'
-            }
-            else if (mainWeather == "Clouds") {
-                weatherIcon.src = 'https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/cloudy.svg'
-            }
-            else if (mainWeather == "Clear") {
-                weatherIcon.src = 'https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/clear.svg'
-            }
-            else if (mainWeather == "Rain") {
-                weatherIcon.src = 'https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/rain.svg'
-            }
-            else if (mainWeather == "Drizzle") {
-                weatherIcon.src = 'https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/chancerain.svg'
-            }
-            else if (mainWeather == "Mist" || mainWeather == "Fog" || mainWeather == "Squall" || mainWeather == "Smoke" || mainWeather == "Haze") {
-                weatherIcon.src = 'https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/fog.svg'
-            }
-            else if (mainWeather == "Snow") {
-                weatherIcon.src = 'https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/snow.svg'
-            }
-            else if (mainWeather == "Thunderstorm") {
-                weatherIcon.src = 'https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/tstorms.svg'
-            }
-        }
-        catch (e) {
-            console.log(e);
-        }
-        rightContainer.appendChild(weatherdiv);
-        console.log('Weather information updated.');
+    const weatherIcon = weatherdiv.querySelector('.weather-icon');
+
+    if (description == "broken clouds") {
+      weatherIcon.src = 'https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/mostlycloudy.svg'
     }
+    else if (description == "few clouds" || description == "scattered clouds") {
+      weatherIcon.src = 'https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/mostlysunny.svg'
+    }
+    else if (description == "overcast clouds") {
+      weatherIcon.src = 'https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/cloudy.svg'
+    }
+    else if (mainWeather == "Clouds") {
+      weatherIcon.src = 'https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/cloudy.svg'
+    }
+    else if (mainWeather == "Clear") {
+      weatherIcon.src = 'https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/clear.svg'
+    }
+    else if (mainWeather == "Rain") {
+      weatherIcon.src = 'https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/rain.svg'
+    }
+    else if (mainWeather == "Drizzle") {
+      weatherIcon.src = 'https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/chancerain.svg'
+    }
+    else if (mainWeather == "Mist" || mainWeather == "Fog" || mainWeather == "Squall" || mainWeather == "Smoke" || mainWeather == "Haze") {
+      weatherIcon.src = 'https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/fog.svg'
+    }
+    else if (mainWeather == "Snow") {
+      weatherIcon.src = 'https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/snow.svg'
+    }
+    else if (mainWeather == "Thunderstorm") {
+      weatherIcon.src = 'https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/tstorms.svg'
+    }
+  }
+  catch (e) {
+    console.log(e);
+  }
+  rightContainer.appendChild(weatherdiv);
+  console.log('Weather information updated.');
 }
-// Call the function to update the 'rightcontainer' div based on user's location
-updateWeatherDiv();
+
+async function main() {
+  if (!document.getElementById('rightcontainer')){
+    //Not on home page
+    return;
+  }
+  console.log("Loading old data from localstorage")
+  let weatherData = JSON.parse(window.localStorage.getItem("weatherdata"));
+  updateWeatherDiv(weatherData);
+
+  console.log('Updating weather information based on user location...');
+  weatherData = await getWeatherByLocation();
+  console.log('Weather data:', weatherData);
+  updateWeatherDiv(weatherData);
+  console.log("storing new weather data")
+  window.localStorage.setItem("weatherdata", JSON.stringify(weatherData))
+}
+main()
 

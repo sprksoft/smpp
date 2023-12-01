@@ -18,13 +18,13 @@ body {
 
 #leftcontainer,
 #rightcontainer {
-  background-color: #02020585 !important;
+  background-color: var(--color-homepage-sidebars-bg) !important;
   backdrop-filter: var(--blur-value-large) !important;
   -webkit-backdrop-filter: var(--blur-value-large) !important;
 }
 
 #centercontainer {
-  background-color: #02020559 !important;
+  background-color: #00000000 !important;
   backdrop-filter: var(--blur-value-small) !important;
   -webkit-backdrop-filter: var(--blur-value-small) !important;
 }
