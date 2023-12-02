@@ -39,7 +39,7 @@ html {
 .login-app__top {
   box-shadow: none !important;
   width: 400px;
-  height: 450px;
+  height: auto;
 
 }
 
@@ -119,3 +119,8 @@ a.smscButton[href="/login/sso/init/acm"],
   transition: none !important;
   color: aliceblue !important;
 }
+.login-app__form{
+  color: var(--color-text) !important;
+}
+
+
