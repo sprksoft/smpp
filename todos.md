@@ -5,6 +5,7 @@
 - [ ] opening a "agenda" module is horrible
 - [ ] my documents is absolutely fucked 
 - [ ] normal documents also fucked(in "vakken" for example)
+- [ ] uploading a file
 
 # kinda important
 - [ ] portfolio looks shit
@@ -22,6 +23,7 @@
 - [ ] need more "decapitation" in LVS
 - [ ] some boxshadows on input fields
 - [ ] "handleiding"
+- [ ] helpdesk
 
 # unfixable
 - adding nmbs
