@@ -253,7 +253,7 @@ td:not(.cb-container),
   background-color: var(--color-base00) !important;
 }
 
-.profile_header_pupilinfo_status {
+.profile_header_pupilinfo_status,.notifyScreenTitle {
   color: var(--color-accent) !important;
 }
 
@@ -261,7 +261,7 @@ td:not(.cb-container),
   background-color: var(--color-base02) !important;
 }
 
-#smscMainBlockContainer {
+#smscMainBlockContainer,.notifyScreenContainer {
   background-color: var(--color-base01) !important;
   border: 1px solid var(--color-accent) !important;
   box-shadow: none;
@@ -276,7 +276,10 @@ td:not(.cb-container),
   color: var(--color-base03) !important;
 
 }
-
+.notifySceenContainerInfo{
+  color: var(--color-base03) !important;
+}
+/* CODE FOR CHECKBOX BUT ONLY IN NOTIFSETTINGS
 div.smscCheckbox input[type=checkbox]:checked+label {
   background-image: url("https://pic.onlinewebfonts.com/thumbnails/icons_263317.svg") !important;
   box-shadow: none !important;
@@ -301,4 +304,4 @@ div.smscCheckbox label::selection {
   box-shadow: none !important;
   background-size: 14px !important;
 
-}
+}*/
