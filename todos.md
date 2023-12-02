@@ -6,6 +6,7 @@
 - [ ] my documents is absolutely fucked 
 - [ ] normal documents also fucked(in "vakken" for example)
 - [ ] uploading a file
+- [ ] delijn has some issues with special busses but seem unfixable 
 
 # kinda important
 - [ ] portfolio looks shit
@@ -14,6 +15,7 @@
 - [ ] subtext in "enquetes" is gray
 - [ ] very dark boxes "alle informatie" in the LVS
 - [ ] results doesnt look that great with % points
+- [ ] AWFULL TEXT ANIMATION THINGY IN LOGIN PAGE, LIKE WHYYYYY
 
 # not a concern
 - [ ] icons...
