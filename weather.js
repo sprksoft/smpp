@@ -23,6 +23,7 @@ function getUserLocation() {
 // Function to fetch weather data based on user's location
 async function getWeatherByLocation() {
     try {
+        //FIXME: check if location is available
         const { latitude, longitude } = await getUserLocation();
         const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
 
@@ -147,29 +148,29 @@ async function main() {
     return;
   }
   console.log("Loading old data from localstorage")
+  //FIXME: when undefined is in local storage this like errors
   let weatherData = JSON.parse(window.localStorage.getItem("weatherdata"));
   updateWeatherDiv(weatherData);
 
-  console.log('Updating weather information based on user location...');
-  //here u have to code lukas
-  chrome.storage.local.get('buttonstate', async function (store) {
-    let button = store.buttonstate;
-    console.log("set buttonstate to " + button);
-    if (!button){
-    weatherData = await getWeatherByLocation();}
-    else{ 
-      chrome.storage.local.get('location', async function (store) {
-        location = store.location;
-        console.log("set location to " + store.location);
-        weatherData = await getWeatherBySpecificLocation(location);
-      });
+  chrome.storage.local.get('location', async function (store) {
+    let loc = store.location;
+    if (loc == "current"){
+      console.log("Fetching weather for current location");
+      weatherData = await getWeatherByLocation();
+    }else{
+      console.log('Fetching weather information for location: '+loc);
+      weatherData = await getWeatherByCity(loc);
     }
-    console.log('Weather data:', weatherData);
+    if (weatherData != undefined){
+      console.log('Weather data:', weatherData);
+      updateWeatherDiv(weatherData);
+      console.log("storing new weather data")
+      window.localStorage.setItem("weatherdata", JSON.stringify(weatherData))
+    }else{
+      console.error("weather data is undefined.");
+    }
   });
 
-  updateWeatherDiv(weatherData);
-  console.log("storing new weather data")
-  window.localStorage.setItem("weatherdata", JSON.stringify(weatherData))
 }
 main()
 

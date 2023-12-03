@@ -1,4 +1,5 @@
 //popupjs
+
 document.addEventListener("DOMContentLoaded", function () {
   let profileSelect = document.getElementById("profileSelector");
   let background = document.getElementById("background");
