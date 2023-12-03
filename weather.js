@@ -33,7 +33,16 @@ async function getWeatherByLocation() {
         console.log('Error fetching data:', error);
     }
 }
-
+async function getWeatherByCity(city) {
+  try {
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+    return data;
+} catch (error) {
+    console.log('Error fetching data:', error);
+}
+}
 // ... (previous code remains unchanged)
 
 async function updateWeatherDiv(weatherData) {
@@ -142,8 +151,22 @@ async function main() {
   updateWeatherDiv(weatherData);
 
   console.log('Updating weather information based on user location...');
-  weatherData = await getWeatherByLocation();
-  console.log('Weather data:', weatherData);
+  //here u have to code lukas
+  chrome.storage.local.get('buttonstate', async function (store) {
+    let button = store.buttonstate;
+    console.log("set buttonstate to " + button);
+    if (!button){
+    weatherData = await getWeatherByLocation();}
+    else{ 
+      chrome.storage.local.get('location', async function (store) {
+        location = store.location;
+        console.log("set location to " + store.location);
+        weatherData = await getWeatherBySpecificLocation(location);
+      });
+    }
+    console.log('Weather data:', weatherData);
+  });
+
   updateWeatherDiv(weatherData);
   console.log("storing new weather data")
   window.localStorage.setItem("weatherdata", JSON.stringify(weatherData))
