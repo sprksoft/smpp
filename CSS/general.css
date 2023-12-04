@@ -311,12 +311,12 @@ div.smscCheckbox label::selection {
   border: 1px solid var(--color-base03);
   color: var(--color-text);
   padding: 5px;
-  border-radius: 5px;
+  border-radius: 10px;
   margin: 2px;
   font-size: large;
   font: bold;
   box-shadow: none;
-
+  justify-content: center;
 }
 
 .topnav__menu--search {
@@ -329,10 +329,14 @@ div.smscCheckbox label::selection {
   background-color: var(--color-base01)!important;
   border: 1px solid var(--color-base03)!important;
   text-align: center!important;
-  border-radius: 5px!important;
+  border-radius: 10px!important;
   width: 100px!important;
   color: var(--color-text)!important;
   margin: 10px!important;
+}
+#halt,#location{
+  width: 90%!important;
+  height: 35px !important;
 }
 .focus-visible {
   outline: 1px solid var(--color-accent) !important;
@@ -409,43 +413,38 @@ input:checked+.slider:before {
   font: bold;
   text-align: center!important;
 }
-
-.sliderblur {
+.popupinput {
   margin-bottom: 0px;
   font: bold;
-}
-/* Styling the track of the range slider */
-input[type='range'].sliderblur {
-  width: 70%;
-  height: 10px;
-  border-radius: 5px;
-  background: var(--color-base01);
-  outline: none;
-}
-
-/* Styling the thumb of the range slider */
-input[type='range'].sliderblur::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  background: var(--color-base03);
-  cursor: pointer;
-  align-self: center;
 }
 
 .popuptitles{
   margin-bottom: 0px !important;
   text-align: center!important;
+  font-size: 17px !important;
 }
 #searchMenu{
-  left: -27.5px !important;
+  left: -50px !important;
   background-color: var(--color-base02) !important;
   border: 2px solid var(--color-base03) !important;
   border-radius: 10px !important;
+  align-items: center !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
 }
-
+.textandbutton{
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important;
+  margin: 10px !important;
+  margin-bottom: 0px !important
+}
+#background{
+  height: 35px !important;
+  margin-top: 0px !important;
+  margin-left: 0px !important;
+}
 #smscMain {
     background: var(--color-base00)!important;
 }

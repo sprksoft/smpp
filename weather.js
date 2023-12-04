@@ -1,39 +1,6 @@
 // Replace 'YOUR_API_KEY' with your actual OpenWeather API key
 const apiKey = '2b6f9b6dbe5064dd770f29d4b229a22c';
 
-// Function to get user's current location
-function getUserLocation() {
-    return new Promise((resolve, reject) => {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    const { latitude, longitude } = position.coords;
-                    resolve({ latitude, longitude });
-                },
-                (error) => {
-                    reject(error);
-                }
-            );
-        } else {
-            reject('Geolocation is not supported by this browser.');
-        }
-    });
-}
-
-// Function to fetch weather data based on user's location
-async function getWeatherByLocation() {
-    try {
-        //FIXME: check if location is available
-        const { latitude, longitude } = await getUserLocation();
-        const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
-
-        const response = await fetch(apiUrl);
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.log('Error fetching data:', error);
-    }
-}
 async function getWeatherByCity(city) {
   try {
     const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;

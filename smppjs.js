@@ -2,6 +2,7 @@
 //ok - ldev
 //oke logis - andere ldev
 
+let settingsData = JSON.parse(window.localStorage.getItem("settingsdata"));
 function unbloat() {
   document.body.innerHTML = '';
 }
@@ -79,6 +80,51 @@ document.addEventListener("keyup", function (e) {
     }, "quick:");
   }
 });
+function store(){
+const profileSelect = document.getElementById("profileSelector").value;
+const background = document.getElementById("background").value;
+const halte = document.getElementById("halt").value;
+const overwrite_theme = document.getElementById("button").value;
+const loc = document.getElementById("location").value;
+const slider = document.getElementById('mySlider').value;
+const output = document.getElementById('sliderValue').value;
+  console.log("started storing...")
+  console.log("set profile to " + profileSelect);
+  console.log("set busid to " + halte);
+
+  settingsData.profile = profileSelect;
+  settingsData.background = background; 
+  settingsData.halte = halte;
+  settingsData.overwrite_theme = overwrite_theme;
+  settingsData.location = loc;
+  settingsData.slider = slider;  
+  settingsData.output = output;
+}
+function load(){
+const profileSelect = document.getElementById("profileSelector");
+const background = document.getElementById("background");
+const halte = document.getElementById("halt");
+const overwrite_theme = document.getElementById("button");
+const loc = document.getElementById("location");
+const slider = document.getElementById('mySlider');
+const output = document.getElementById('sliderValue');
+  console.log("started loading...")
+  if (settingsData == undefined){
+    console.log("settings data is undefined")
+    return
+  }
+  profileSelect.value = settingsData.profile
+  background.value = settingsData.background
+  halte.value = settingsData.halte
+  overwrite_theme.value = settingsData.overwrite_theme
+  loc.value = settingsData.location
+  slider.value = settingsData.slider
+  output.value = settingsData.output
+  console.log(settingsData)
+}
+popup = document.getElementById("searchMenu");
+popup.addEventListener("change",store)
+console.log(settingsData)
 
 search_button = document.querySelector('.js-btn-search')
 console.log(search_button)
@@ -89,7 +135,6 @@ popup_settings.innerHTML = `<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
 <title>popup</title>
-<link href="popupstyles.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -106,31 +151,28 @@ popup_settings.innerHTML = `<head>
     <option value="purple">Purple</option>
     <option value="matcha">Matcha</option>
 </select>
-<input  class="popupinput" type="range" min="0" max="20" value="0" class="sliderblur" id="mySlider">
-<p class="popuptitles">Blur: <span id="sliderValue">0</span>px</p>
 
 <h3 class="popuptitles">Choose bus halte id:</h3>
 <input class="popupinput" id="halt" type="text"></input>
 <h3 class="popuptitles">Choose location:</h3>
 <input class="popupinput" id="location" type="text"></input>
 
-<h3 class="popuptitles">Overwrite Auto-Location</h3>
-<label class="switch">
-    <input type="checkbox"class="popupinput" id="ovloc">
-    <span class="slider round"></span>
-</label>
 <h3 class="popuptitles">Background Image(optional):</h3>
-<input class="popupinput" id="background" type="text"></input>
+<div class="textandbutton">
+    <input class="popupinput" id="background" type="text"></input>
+    <label class="switch">
+        <input class="popupinput" type="checkbox" id="button">
+        <span class="slider round"></span>
+    </label>
+</div>
 
-<h3 class="popuptitles">Overwrite Theme Image</h3>
-<label class="switch">
-    <input class="popupinput" type="checkbox" id="button">
-    <span class="slider round"></span>
-</label>
+<input type="range" min="0" max="20" value="0" class="sliderblur" id="mySlider">
+<p class="popuptitles">Blur: <span id="sliderValue">0</span>px</p>
 
 <script src="popup.js"></script>
 </body>
 `
+load()
 console.log("popup loaded");
 });
 
