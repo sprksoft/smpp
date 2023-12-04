@@ -94,12 +94,14 @@ function createApplication(data) {
       let timeDifference = totalMinutesrealtime - totalMinutes;
       let timetilldep = totalMinutesrealtime - totalMinutescurrent;
       minute = minute.toString().padStart(2, '0');
+      if (timetilldep < -1000) {
+        timetilldep += 1440
+      }
       if (timeDifference == 0) {
         timeDifference = "On time"
       } else if (timeDifference > 0) {
         timeDifference = "+" + timeDifference;
       }
-
 
       div = document.createElement("div");
 
