@@ -124,13 +124,13 @@ function createApplication(data) {
       const timeDifference = "Vertrokken"
       minute = minute.toString().padStart(2, '0');
       div = document.createElement("div");
-      div.innerHTML = `<div class=lijncards>
+      div.innerHTML = `<div class="lijncards">
         <div class="top">
-        <h2 class=lijncardstitle></h2><h3 class=lijncardsdestin></h3></div><span class="timedifference">
+        <h2 class="lijncardstitle"></h2><h3 class="lijncardsdestin"></h3></div><span class="timedifference">
         </span><div class="times"><span class="time">
         </span><span class="intime">Now
         </span></div></div>`
-      div.querySelector(".lijncardtitle").innerText = lijnnummers[i];
+      div.querySelector(".lijncardstitle").innerText = lijnnummers[i];
       div.querySelector(".lijncardsdestin").innerText = bestemmingen[i];
       div.querySelector(".time").innerText = timeDifference;
       leftContainer.appendChild(div);
