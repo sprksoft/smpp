@@ -80,8 +80,59 @@ document.addEventListener("keyup", function (e) {
   }
 });
 
+search_button = document.querySelector('.js-btn-search')
+console.log(search_button)
+search_button.innerText = "Settings"
+search_button.addEventListener("click", function () {
+const popup_settings = document.getElementById("searchMenu");
+popup_settings.innerHTML = `<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>popup</title>
+<link href="popupstyles.css" rel="stylesheet" type="text/css" />
+</head>
 
+<body>
+<h3 class="popuptitles">Choose color profile:</h3>
 
+<select id="profileSelector">
+    <option value="default">Default</option>
+    <option value="ldev">ldev</option>
+    <option value="birb">Birb</option>
+    <option value="bjarn">Bjarne</option>
+    <option value="tan">Tan</option>
+    <option value="fall">Fall</option>
+    <option value="winter">Winter</option>
+    <option value="purple">Purple</option>
+    <option value="matcha">Matcha</option>
+</select>
+<input  class="popupinput" type="range" min="0" max="20" value="0" class="sliderblur" id="mySlider">
+<p class="popuptitles">Blur: <span id="sliderValue">0</span>px</p>
+
+<h3 class="popuptitles">Choose bus halte id:</h3>
+<input class="popupinput" id="halt" type="text"></input>
+<h3 class="popuptitles">Choose location:</h3>
+<input class="popupinput" id="location" type="text"></input>
+
+<h3 class="popuptitles">Overwrite Auto-Location</h3>
+<label class="switch">
+    <input type="checkbox"class="popupinput" id="ovloc">
+    <span class="slider round"></span>
+</label>
+<h3 class="popuptitles">Background Image(optional):</h3>
+<input class="popupinput" id="background" type="text"></input>
+
+<h3 class="popuptitles">Overwrite Theme Image</h3>
+<label class="switch">
+    <input class="popupinput" type="checkbox" id="button">
+    <span class="slider round"></span>
+</label>
+
+<script src="popup.js"></script>
+</body>
+`
+console.log("popup loaded");
+});
 
 chrome.storage.local.get('local_background', function (store) {
   background = store.local_background;

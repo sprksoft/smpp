@@ -305,3 +305,143 @@ div.smscCheckbox label::selection {
   background-size: 14px !important;
 
 }*/
+
+#profileSelector {
+  background-color: var(--color-base01);
+  border: 1px solid var(--color-base03);
+  color: var(--color-text);
+  padding: 5px;
+  border-radius: 5px;
+  margin: 2px;
+  font-size: large;
+  font: bold;
+  box-shadow: none;
+
+}
+
+.topnav__menu--search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popupinput,#halt,#location,#background {
+  background-color: var(--color-base01)!important;
+  border: 1px solid var(--color-base03)!important;
+  text-align: center!important;
+  border-radius: 5px!important;
+  width: 100px!important;
+  color: var(--color-text)!important;
+  margin: 10px!important;
+}
+.focus-visible {
+  outline: 1px solid var(--color-accent) !important;
+}
+
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  margin-bottom: 10px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--color-base01);
+  -webkit-transition: .2s;
+  transition: .2s;
+
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: var(--color-base02);
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+
+input:checked+.slider {
+  background-color: var(--color-base03);
+}
+
+input:focus+.slider {
+  box-shadow: none;
+}
+
+input:checked+.slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+  align-self: center !important;
+}
+
+#profileSelector option {
+  font-size: large;
+  font: bold;
+  text-align: center!important;
+}
+
+.sliderblur {
+  margin-bottom: 0px;
+  font: bold;
+}
+/* Styling the track of the range slider */
+input[type='range'].sliderblur {
+  width: 70%;
+  height: 10px;
+  border-radius: 5px;
+  background: var(--color-base01);
+  outline: none;
+}
+
+/* Styling the thumb of the range slider */
+input[type='range'].sliderblur::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: var(--color-base03);
+  cursor: pointer;
+  align-self: center;
+}
+
+.popuptitles{
+  margin-bottom: 0px !important;
+  text-align: center!important;
+}
+#searchMenu{
+  left: -27.5px !important;
+  background-color: var(--color-base02) !important;
+  border: 2px solid var(--color-base03) !important;
+  border-radius: 10px !important;
+}
