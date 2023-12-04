@@ -1,6 +1,5 @@
 # important
 - [ ] stupid lines everywhere
-- [ ] live clock on homescreen (12:23)
 - [ ] when you click on a enquete it looks shit
 - [ ] opening a "agenda" module is horrible
 - [ ] my documents is absolutely fucked 
@@ -39,6 +38,8 @@
 # dmenu
 - [ ] lernovo
 - [ ] keybind system
+# boeit niet
+- [ ] live clock on homescreen (12:23)
 
 
 
