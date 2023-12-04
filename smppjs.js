@@ -257,9 +257,9 @@ function set_theme(name) {
       style.setProperty('--color-accent', "#95a4ee");
       style.setProperty('--color-text', "#d2e4e9");
       style.setProperty('--color-base00', "#191817");
-      style.setProperty('--color-base01', "#1e1e1e");
+      style.setProperty('--color-base01', "#232323");
       style.setProperty('--color-base02', "#1e1e1e");
-      style.setProperty('--color-base03', "#1b1b1bf3");
+      style.setProperty('--color-base03', "#2c1019");
       style.setProperty('--loginpage-image', "url(https://th.bing.com/th/id/R.4a459b99bdc535e2fdbb4d38bf96e0fe?rik=%2fA2q0w%2fC%2fBQXcQ&pid=ImgRaw&r=0)");
       break;
     case 'tan':
