@@ -253,7 +253,8 @@ td:not(.cb-container),
   background-color: var(--color-base02) !important;
 }
 
-.smsc-templates__separator {
+.smsc-templates__separator,
+#loading-box {
   display: none !important;
 }
 
@@ -294,6 +295,20 @@ td:not(.cb-container),
 }
 .notifySceenContainerInfo{
   color: var(--color-base03) !important;
+}
+.percent,
+#quick-nav{
+  border-color: var(--color-base03) !important;
+}
+.survey-navigation {
+  border-top: 1px dashed var(--color-base03) !important;
+}
+#quick-nav,
+.start-row {
+    border-color: var(--color-base03) !important;
+  }
+.start{
+  color: var(--color-text) !important;
 }
 /* CODE FOR CHECKBOX BUT ONLY IN NOTIFSETTINGS
 div.smscCheckbox input[type=checkbox]:checked+label {

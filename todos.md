@@ -1,6 +1,6 @@
 # important
 - [x] stupid lines everywhere
-- [ ] when you click on a enquete it looks shit
+- [x] when you click on a enquete it looks shit
 - [x] opening a "agenda" module is horrible
 - [ ] my documents is absolutely fucked 
 - [ ] normal documents also fucked(in "vakken" for example)
@@ -39,7 +39,7 @@
 - [ ] lernovo
 - [ ] keybind system
 # boeit niet
-- [ ] live clock on homescreen (12:23)
+- [ ] live clock on homescreen (12:23) die weg kan
 
 
 
