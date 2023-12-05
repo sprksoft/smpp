@@ -82,13 +82,12 @@
 .wborder.wrightxy,
 .wborder.wcentery.wbottomy,
 .smscButton,
-span,
 .infoContainer{
     color: var(--color-accent) !important;
     background: var(--color-base01) !important;
 
 }
-span,
+
 #infoContainerNote .infoContainerNoteContent,
 .infoContainerBlock {
     background-color: var(--color-base02) !important;
