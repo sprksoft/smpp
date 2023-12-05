@@ -44,12 +44,12 @@
         "scraper.js",
         "utils.js",
         "themes.js",
-        "smppjs.js",
         "DMENU/dmenu.js",
         "weather.js",
         "middlestartpage.js",
         "delijn.js",
-        "loginpage.js"
+        "loginpage.js",
+        "smppjs.js"
       ]
     }
   ],

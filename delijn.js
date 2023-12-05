@@ -143,12 +143,4 @@ function createApplication(data) {
   leftContainer.appendChild(lastdiv);
 }
 
-// Call the fetchData function to initiate the API request and populate the application
-chrome.storage.local.get('current_id', function (store) {
-  const halte = store.current_id;
-  console.log("set halte to " + store.halte);
-  if (halte != undefined) {
-    fetchData(halte);
-  }
 
-});
