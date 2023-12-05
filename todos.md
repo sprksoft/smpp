@@ -1,5 +1,5 @@
 # important
-- [ ] stupid lines everywhere
+- [x] stupid lines everywhere
 - [ ] when you click on a enquete it looks shit
 - [ ] opening a "agenda" module is horrible
 - [ ] my documents is absolutely fucked 

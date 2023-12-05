@@ -148,10 +148,18 @@ text,
 
 .ui-widget-header,
 .tabs,
-li {
+li ,
+.legend2{                                      /* van af hier is vakken css*/
   background: var(--color-base02) !important;
   color: var(--color-text) !important;
 }
+fieldset.fieldset2 {
+  position: relative;
+  border-color: var(--color-base03) !important;
+}
+.tekstvet {
+  display: none;
+}                                         /*  tot hier*/
 
 td[background],
 td[bgcolor] {
@@ -160,6 +168,14 @@ td[bgcolor] {
   background-color: var(--color-base00) !important;
 }
 
+select,
+.fieldset2{
+  background-color: var(--color-base00) !important;
+}
+.category-hdr {
+  border: 1px solid var(--color-base03) !important;
+  text-shadow: 0 1px var(--color-text) !important;
+}
 .msgInfoTitle {
   color: var(--color-accent) !important;
 }
@@ -447,4 +463,11 @@ input:checked+.slider:before {
 }
 #smscMain {
     background: var(--color-base00)!important;
+}
+.smscFrameTitleContainer .smscFrameTitle,
+.uploadzone .files .navigation  {
+  border: 1px solid var(--color-base03) !important;
+}
+.course-session-page__container {
+  box-shadow: -1px -1px 1px var(--color-base03) !important;
 }
