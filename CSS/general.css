@@ -297,7 +297,8 @@ td:not(.cb-container),
   color: var(--color-base03) !important;
 }
 .percent,
-#quick-nav{
+#quick-nav,
+.smsc_cm_body_row{
   border-color: var(--color-base03) !important;
 }
 .survey-navigation {

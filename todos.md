@@ -3,7 +3,7 @@
 - [x] when you click on a enquete it looks shit
 - [x] opening a "agenda" module is horrible
 - [ ] my documents is absolutely fucked 
-- [ ] normal documents also fucked(in "vakken" for example)
+- [x] normal documents also fucked(in "vakken" for example)
 - [ ] uploading a file
 - [ ] delijn has some issues with special busses but seem unfixable 
 
