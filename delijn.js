@@ -71,6 +71,8 @@ function createApplication(data) {
   console.log(richting);
   console.log(dienstregelingTijdstip);
   console.log(real_timeTijdstip);
+  if (leftContainer == null){
+  return}
   leftContainer.innerHTML = " "
   for (let i = 0; i < doorkomstlength; i++) {
 
@@ -122,8 +124,10 @@ function createApplication(data) {
         </span>
         </div></div>`
       leftContainer.appendChild(div);
-    } else {
-      const timeDifference = "Vertrokken"
+    } 
+
+    else if(i==0) {
+      const timeDifference = "Komt aan"
       minute = minute.toString().padStart(2, '0');
       div = document.createElement("div");
       div.innerHTML = `<div class="lijncards">
@@ -136,7 +140,22 @@ function createApplication(data) {
       div.querySelector(".lijncardsdestin").innerText = bestemmingen[i];
       div.querySelector(".time").innerText = timeDifference;
       leftContainer.appendChild(div);
+    }else{
+      const timeDifference = "No data"
+      minute = minute.toString().padStart(2, '0');
+      div = document.createElement("div");
+      div.innerHTML = `<div class="lijncards">
+        <div class="top">
+        <h2 class="lijncardstitle"></h2><h3 class="lijncardsdestin"></h3></div><span class="timedifference">
+        </span><div class="times"><span class="time">
+        </span><span class="intime">/
+        </span></div></div>`
+      div.querySelector(".lijncardstitle").innerText = lijnnummers[i];
+      div.querySelector(".lijncardsdestin").innerText = bestemmingen[i];
+      div.querySelector(".time").innerText = timeDifference;
+      leftContainer.appendChild(div);
     }
+
   }
   lastdiv = document.createElement("div");
   lastdiv.innerHTML = `<div class=lastdiv><a href="https://www.delijn.be/nl/contact/attest-aanvraag/" target="_blank">Late?</a></div>`

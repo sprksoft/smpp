@@ -163,8 +163,10 @@ function load(){
   console.log(settingsData)
 }
 popup = document.getElementById("searchMenu");
-popup.addEventListener("change",store)
-
+console.log(popup)
+if (popup != null){
+  popup.addEventListener("change",store)
+  
 search_button = document.querySelector('.js-btn-search')
 console.log(search_button)
 search_button.innerText = "Settings"
@@ -214,6 +216,9 @@ popup_settings.innerHTML = `<head>
 load()
 console.log("popup loaded");
 });
+
+}
+
 
 function set_background(background) {
   let style = document.documentElement.style;

@@ -464,6 +464,7 @@ input:checked+.slider:before {
   display: flex !important;
   flex-direction: column !important;
   justify-content: center !important;
+  max-width: 240px !important;
 }
 .textandbutton{
   display: flex !important;
@@ -477,9 +478,7 @@ input:checked+.slider:before {
   margin-top: 0px !important;
   margin-left: 0px !important;
 }
-#smscMain {
-    background: var(--color-base00)!important;
-}
+
 .smscFrameTitleContainer .smscFrameTitle,
 .uploadzone .files .navigation  {
   border: 1px solid var(--color-base03) !important;
