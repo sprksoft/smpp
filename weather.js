@@ -25,6 +25,7 @@ async function updateWeatherDiv(weatherData) {
 
   rightContainer.innerHTML = '';
   weatherdiv = document.createElement("div");
+  console.log(weatherData);
   const { name, main, weather, rain, wind } = weatherData; // Include rain data
   const temperature = Math.round(main.temp);
   const feelslike = Math.round(main.feels_like);
@@ -118,26 +119,17 @@ async function main() {
   //FIXME: when undefined is in local storage this like errors
   let weatherData = JSON.parse(window.localStorage.getItem("weatherdata"));
   updateWeatherDiv(weatherData);
-
-  chrome.storage.local.get('location', async function (store) {
-    let loc = store.location;
-    if (loc == "current"){
-      console.log("Fetching weather for current location");
-      weatherData = await getWeatherByLocation();
-    }else{
-      console.log('Fetching weather information for location: '+loc);
-      weatherData = await getWeatherByCity(loc);
-    }
-    if (weatherData != undefined){
-      console.log('Weather data:', weatherData);
-      updateWeatherDiv(weatherData);
-      console.log("storing new weather data")
-      window.localStorage.setItem("weatherdata", JSON.stringify(weatherData))
-    }else{
-      console.error("weather data is undefined.");
-    }
-  });
-
 }
-main()
 
+
+async function set_weather_loc(loc){
+  console.log('Fetching weather information for location: '+loc);
+  let weatherData = await getWeatherByCity(loc);
+  if (weatherData == undefined){
+    return;
+  }
+  console.log('Weather data:', weatherData);
+  updateWeatherDiv(weatherData);
+  console.log("storing new weather data")
+  window.localStorage.setItem("weatherdata", JSON.stringify(weatherData))
+}

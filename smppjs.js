@@ -2,6 +2,14 @@
 //ok - ldev
 //oke logis - andere ldev
 
+const default_settings={
+  profile : "default",
+background : "none",
+halte : 303980,
+overwrite_theme : false,
+location : "keerbergen",
+  slider : "2",
+};
 
 function unbloat() {
   document.body.innerHTML = '';
@@ -80,28 +88,57 @@ document.addEventListener("keyup", function (e) {
     }, "quick:");
   }
 });
+async function apply(){
+  let settingsData = JSON.parse(window.localStorage.getItem("settingsdata"))
+  console.log(settingsData)
+  if (settingsData == null){
+    console.log(default_settings)
+    settingsData = default_settings;
+    window.localStorage.setItem("settingsdata", JSON.stringify(settingsData));
+    console.log(settingsData)
+  }
+  const profileSelect =  settingsData.profile
+  const background = settingsData.background
+  const halte = settingsData.halte
+  const overwrite_theme = settingsData.overwrite_theme;
+  const loc = settingsData.location;
+  const blurvalue = settingsData.slider;
+  console.log(profileSelect)
+    set_theme(profileSelect);
+    if (overwrite_theme == true) {
+      set_background(background);
+    }
+  await set_weather_loc(loc);
+  let style = document.documentElement.style;
+  style.setProperty('--blur-value-large', 'blur(' + blurvalue * 2 + 'px)');
+  style.setProperty('--blur-value-small', 'blur(' + blurvalue + 'px)');
+  if (halte != undefined) {
+    fetchData(halte);
+  }
+}
+
+
 function store(){
   let settingsData = {}
   const profileSelect = document.getElementById("profileSelector").value;
   const background = document.getElementById("background").value;
   const halte = document.getElementById("halt").value;
-  const overwrite_theme = document.getElementById("button").value;
+  const overwrite_theme = document.getElementById("button").checked;
   const loc = document.getElementById("location").value;
   const slider = document.getElementById('mySlider').value;
-  const output = document.getElementById('sliderValue').value;
+
   console.log("started storing...")
   console.log("set profile to " + profileSelect);
   console.log("set busid to " + halte);
-
   settingsData.profile = profileSelect;
   settingsData.background = background; 
   settingsData.halte = halte;
   settingsData.overwrite_theme = overwrite_theme;
   settingsData.location = loc;
   settingsData.slider = slider;  
-  settingsData.output = output;
-
   window.localStorage.setItem("settingsdata", JSON.stringify(settingsData));
+  apply()
+
 }
 function load(){
   let settingsData = JSON.parse(window.localStorage.getItem("settingsdata"));
@@ -111,7 +148,6 @@ function load(){
   const overwrite_theme = document.getElementById("button");
   const loc = document.getElementById("location");
   const slider = document.getElementById('mySlider');
-  const output = document.getElementById('sliderValue');
   console.log("started loading...")
   if (settingsData == undefined){
     //TODO: set params to default
@@ -121,10 +157,9 @@ function load(){
   profileSelect.value = settingsData.profile
   background.value = settingsData.background
   halte.value = settingsData.halte
-  overwrite_theme.value = settingsData.overwrite_theme
+  overwrite_theme.checked = settingsData.overwrite_theme
   loc.value = settingsData.location
   slider.value = settingsData.slider
-  output.value = settingsData.output
   console.log(settingsData)
 }
 popup = document.getElementById("searchMenu");
@@ -169,9 +204,9 @@ popup_settings.innerHTML = `<head>
         <span class="slider round"></span>
     </label>
 </div>
-
+<h3 class="popuptitles">Blur:</h3>
 <input type="range" min="0" max="20" value="0" class="sliderblur" id="mySlider">
-<p class="popuptitles">Blur: <span id="sliderValue">0</span>px</p>
+
 
 <script src="popup.js"></script>
 </body>
@@ -179,43 +214,6 @@ popup_settings.innerHTML = `<head>
 load()
 console.log("popup loaded");
 });
-
-chrome.storage.local.get('local_background', function (store) {
-  background = store.local_background;
-  console.log("set background to " + background);
-
-});
-
-chrome.storage.local.get('current_profile', function (store) {
-  selected_profile = store.current_profile;
-  console.log("set profile to " + store.current_profile);
-  set_theme(selected_profile);
-
-});
-chrome.storage.local.get('buttonstate', function (store) {
-  let button = store.buttonstate;
-  console.log("set buttonstate to " + button);
-  if (button == true) {
-    set_background(background);
-  }
-});
-chrome.storage.local.get('blurvalue', function (store) {
-  let blurvalue = store.blurvalue;
-  console.log("set blurvalue to " + blurvalue);
-  let style = document.documentElement.style;
-  style.setProperty('--blur-value-large', 'blur(' + blurvalue * 2 + 'px)');
-  style.setProperty('--blur-value-small', 'blur(' + blurvalue + 'px)');
-});
-function store_profile(profile) {
-  chrome.storage.local.set({
-    current_profile: profile
-  });
-}
-function store_background(background) {
-  chrome.storage.local.set({
-    local_background: background
-  });
-}
 
 function set_background(background) {
   let style = document.documentElement.style;
@@ -316,5 +314,5 @@ function set_theme(name) {
     // Handle default case or do nothing if no match found
   }
 }
-
+apply()
 console.log("Done");
