@@ -1,7 +1,7 @@
 # important
 - [x] stupid lines everywhere
 - [ ] when you click on a enquete it looks shit
-- [ ] opening a "agenda" module is horrible
+- [x] opening a "agenda" module is horrible
 - [ ] my documents is absolutely fucked 
 - [ ] normal documents also fucked(in "vakken" for example)
 - [ ] uploading a file
