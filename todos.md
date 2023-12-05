@@ -1,9 +1,9 @@
 # important
-- [ ] stupid lines everywhere
-- [ ] when you click on a enquete it looks shit
-- [ ] opening a "agenda" module is horrible
+- [x] stupid lines everywhere
+- [x] when you click on a enquete it looks shit
+- [x] opening a "agenda" module is horrible
 - [ ] my documents is absolutely fucked 
-- [ ] normal documents also fucked(in "vakken" for example)
+- [x] normal documents also fucked(in "vakken" for example)
 - [ ] uploading a file
 - [ ] delijn has some issues with special busses but seem unfixable 
 
@@ -39,7 +39,7 @@
 - [ ] lernovo
 - [ ] keybind system
 # boeit niet
-- [ ] live clock on homescreen (12:23)
+- [ ] live clock on homescreen (12:23) die weg kan
 
 
 

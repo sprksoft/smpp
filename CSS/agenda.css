@@ -4,7 +4,7 @@
 
 }
 
-.agenda_grid_main {
+.agenda_grid_main{
     background-color: var(--color-base01) !important;
     border: 3px solid var(--color-base03) !important;
     border-radius: 10px !important;
@@ -50,7 +50,8 @@
     border: 1px solid var(--color-base03) !important;
 }
 
-.border.centery.bottomy {
+.border.centery.bottomy,
+.smsclayerloading {
     display: none !important;
 }
 
@@ -72,4 +73,38 @@
     background: linear-gradient(var(--color-base02), var(--color-base02)) repeat-x !important;
     background-size: 1px 1px !important;
     background-position: left center !important;
+}
+#infoContainerStudent,
+#infoFormWindow_movableDiv,
+#infoFormWindow_titlebar,
+#infoFormWindow_contentDiv,
+.wborder.wleftxy,
+.wborder.wrightxy,
+.wborder.wcentery.wbottomy,
+.smscButton,
+span,
+.infoContainer{
+    color: var(--color-accent) !important;
+    background: var(--color-base01) !important;
+
+}
+span,
+#infoContainerNote .infoContainerNoteContent,
+.infoContainerBlock {
+    background-color: var(--color-base02) !important;
+}
+.wborder.wbright.wtopr{
+    background: var(--color-base01) !important;
+}
+.wborder.wbright.wbottomr{
+    border-bottom-right-radius: 4px !important;
+    background: var(--color-base01) !important;
+}
+.wborder.wbleft.wtopl{
+    border-top-left-radius: 4px !important;
+    background: var(--color-base01) !important;
+}
+.wborder.wbleft.wbottoml{
+    border-bottom-left-radius: 8px !important;
+    background: var(--color-base01) !important;
 }
