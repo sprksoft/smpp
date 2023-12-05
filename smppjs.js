@@ -2,7 +2,7 @@
 //ok - ldev
 //oke logis - andere ldev
 
-let settingsData = JSON.parse(window.localStorage.getItem("settingsdata"));
+
 function unbloat() {
   document.body.innerHTML = '';
 }
@@ -81,13 +81,14 @@ document.addEventListener("keyup", function (e) {
   }
 });
 function store(){
-const profileSelect = document.getElementById("profileSelector").value;
-const background = document.getElementById("background").value;
-const halte = document.getElementById("halt").value;
-const overwrite_theme = document.getElementById("button").value;
-const loc = document.getElementById("location").value;
-const slider = document.getElementById('mySlider').value;
-const output = document.getElementById('sliderValue').value;
+  let settingsData = {}
+  const profileSelect = document.getElementById("profileSelector").value;
+  const background = document.getElementById("background").value;
+  const halte = document.getElementById("halt").value;
+  const overwrite_theme = document.getElementById("button").value;
+  const loc = document.getElementById("location").value;
+  const slider = document.getElementById('mySlider').value;
+  const output = document.getElementById('sliderValue').value;
   console.log("started storing...")
   console.log("set profile to " + profileSelect);
   console.log("set busid to " + halte);
@@ -99,17 +100,21 @@ const output = document.getElementById('sliderValue').value;
   settingsData.location = loc;
   settingsData.slider = slider;  
   settingsData.output = output;
+
+  window.localStorage.setItem("settingsdata", JSON.stringify(settingsData));
 }
 function load(){
-const profileSelect = document.getElementById("profileSelector");
-const background = document.getElementById("background");
-const halte = document.getElementById("halt");
-const overwrite_theme = document.getElementById("button");
-const loc = document.getElementById("location");
-const slider = document.getElementById('mySlider');
-const output = document.getElementById('sliderValue');
+  let settingsData = JSON.parse(window.localStorage.getItem("settingsdata"));
+  const profileSelect = document.getElementById("profileSelector");
+  const background = document.getElementById("background");
+  const halte = document.getElementById("halt");
+  const overwrite_theme = document.getElementById("button");
+  const loc = document.getElementById("location");
+  const slider = document.getElementById('mySlider');
+  const output = document.getElementById('sliderValue');
   console.log("started loading...")
   if (settingsData == undefined){
+    //TODO: set params to default
     console.log("settings data is undefined")
     return
   }
@@ -124,7 +129,6 @@ const output = document.getElementById('sliderValue');
 }
 popup = document.getElementById("searchMenu");
 popup.addEventListener("change",store)
-console.log(settingsData)
 
 search_button = document.querySelector('.js-btn-search')
 console.log(search_button)
