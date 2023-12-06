@@ -168,7 +168,7 @@ if (popup != null){
 <h3 class="popuptitles">Blur:</h3>
 <input type="range" min="0" max="20" value="0" class="sliderblur" id="mySlider">
 <h3 class="popuptitles">Snow:</h3>
-<input type="range" min="0" max="100" value="0" class="sliderblur" id="snowSlider">
+<input type="range" min="0" max="500" value="0" class="sliderblur" id="snowSlider">
 <script src="popup.js"></script>
 </body>
 `
