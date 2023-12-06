@@ -13,6 +13,7 @@ const default_settings={
   overwrite_theme : false,
   location : "keerbergen",
   blur : "2",
+  snow: "0"
 };
 
 function unbloat() {
@@ -55,6 +56,7 @@ async function apply(){
   const overwrite_theme = settingsData.overwrite_theme;
   const loc = settingsData.location;
   const blurvalue = settingsData.blur;
+  const snow = settingsData.snow;
   console.log(profileSelect)
   set_theme(profileSelect);
   if (overwrite_theme == true) {
@@ -66,7 +68,8 @@ async function apply(){
   style.setProperty('--blur-value-small', 'blur(' + blurvalue + 'px)');
   if (halte != undefined) {
     fetchData(halte);
-  }
+  };
+  set_snow_level(snow);
 }
 
 
@@ -78,7 +81,7 @@ function store(){
   const overwrite_theme = document.getElementById("button").checked;
   const loc = document.getElementById("location").value;
   const slider = document.getElementById('mySlider').value;
-
+  const snowSlider = document.getElementById('snowSlider').value;
   console.log("started storing...")
   console.log("set profile to " + profileSelect);
   console.log("set busid to " + halte);
@@ -88,6 +91,7 @@ function store(){
   settingsData.overwrite_theme = overwrite_theme;
   settingsData.location = loc;
   settingsData.blur = slider;  
+  settingsData.snow = snowSlider;
   window.localStorage.setItem("settingsdata", JSON.stringify(settingsData));
   apply()
 
@@ -100,6 +104,7 @@ function load(){
   const overwrite_theme = document.getElementById("button");
   const loc = document.getElementById("location");
   const blur = document.getElementById('mySlider');
+  const snowSlider = document.getElementById('snowSlider');
   console.log("started loading...")
   if (settingsData == undefined){
     //TODO: set params to default
@@ -112,6 +117,7 @@ function load(){
   overwrite_theme.checked = settingsData.overwrite_theme
   loc.value = settingsData.location
   blur.value = settingsData.blur
+  snowSlider.value = settingsData.snow
   console.log(settingsData)
 }
 popup = document.getElementById("searchMenu");
@@ -162,9 +168,7 @@ if (popup != null){
 <h3 class="popuptitles">Blur:</h3>
 <input type="range" min="0" max="20" value="0" class="sliderblur" id="mySlider">
 <h3 class="popuptitles">Snow:</h3>
-<input class="popupinput" type="checkbox" id="snow">
-<span class="slider round"></span>
-
+<input type="range" min="0" max="100" value="0" class="sliderblur" id="snowSlider">
 <script src="popup.js"></script>
 </body>
 `
@@ -269,6 +273,15 @@ function set_theme(name) {
       style.setProperty('--color-base03', '#4f7a51');
       style.setProperty('--loginpage-image', "url(https://wallpapercave.com/wp/wp9313069.jpg)");
       break;
+      case 'christmas':
+        style.setProperty('--color-accent', '#BFCDD9');
+        style.setProperty('--color-text', '#d2e1ed');
+        style.setProperty('--color-base00', '#59363F');
+        style.setProperty('--color-base01', '#733049');
+        style.setProperty('--color-base02', '#6387A6');
+        style.setProperty('--color-base03', '#9BABBF');
+        style.setProperty('--loginpage-image', "url(https://wallpapercave.com/wp/wp9313069.jpg)");
+        break;
     // Add more cases for other profiles as needed
     default:
     // Handle default case or do nothing if no match found
