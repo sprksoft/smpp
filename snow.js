@@ -7,7 +7,7 @@ function set_snow_multiplier(on) {
 
 
 function set_snow_level(count) {
-  const snow = document.getElementById("snowflakes");
+  let snow = document.getElementById("snowflakes");
   if (count > 3000){
     count = 3000;
   }
