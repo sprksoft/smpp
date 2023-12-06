@@ -276,9 +276,9 @@ function set_theme(name) {
       case 'christmas':
         style.setProperty('--color-accent', '#f4f0bb');
         style.setProperty('--color-text', '#f1eeeb');
-        style.setProperty('--color-base00', '#43291f');
+        style.setProperty('--color-base00', '#291a19');
         style.setProperty('--color-base01', '#226f54');
-        style.setProperty('--color-base02', '#da2c38');
+        style.setProperty('--color-base02', '#260002');
         style.setProperty('--color-base03', '#87c38f');
         style.setProperty('--loginpage-image', "url(https://wallpapercave.com/wp/wp9313069.jpg)");
         break;
