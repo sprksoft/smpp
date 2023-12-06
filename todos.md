@@ -1,6 +1,6 @@
 # important
 - [x] stupid lines everywhere
-- [x] stupid hover everywhere
+- [ ] stupid hover everywhere
 - [x] when you click on a enquete it looks shit
 - [x] opening a "agenda" module is horrible
 - [ ] my documents is absolutely fucked 
