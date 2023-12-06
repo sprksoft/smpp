@@ -91,7 +91,7 @@ function store(){
   settingsData.overwrite_theme = overwrite_theme;
   settingsData.location = loc;
   settingsData.blur = slider;  
-  settingsData.snow = snowSlider;
+  settingsData.snow = parseInt(snowSlider);
   window.localStorage.setItem("settingsdata", JSON.stringify(settingsData));
   apply()
 
