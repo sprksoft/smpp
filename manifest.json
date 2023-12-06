@@ -49,6 +49,7 @@
         "middlestartpage.js",
         "delijn.js",
         "loginpage.js",
+        "DMENU/quick.js",
         "smppjs.js"
       ]
     }

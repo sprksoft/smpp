@@ -486,3 +486,27 @@ input:checked+.slider:before {
 .course-session-page__container {
   box-shadow: -1px -1px 1px var(--color-base03) !important;
 }
+.snowflake {
+	position: fixed;
+	top: -10%;
+	width: 30px;
+	animation: snowflake_fall 6s linear infinite;
+	z-index: 999999;
+	pointer-events: none;
+}
+
+
+@keyframes snowflake_fall{
+
+	0% {
+		top: -10%;
+		transform: translateX(0px);
+	}
+
+
+	100% {
+		top: 100%;
+		transform: translateX(100px);
+	}
+
+}

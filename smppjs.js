@@ -3,12 +3,16 @@
 //oke logis - andere ldev
 
 const default_settings={
+  dmenu:{
+    centerd: true,
+    flip_shift_key: false,
+  },
   profile : "default",
-background : "none",
-halte : 303980,
-overwrite_theme : false,
-location : "keerbergen",
-  slider : "2",
+  background : "none",
+  halte : 303980,
+  overwrite_theme : false,
+  location : "keerbergen",
+  blur : "2",
 };
 
 function unbloat() {
@@ -36,58 +40,6 @@ get_data_bg("vakken", ".course-list > li > a", function (el, data) {
   vakken = data;
 });
 
-
-document.addEventListener("keyup", function (e) {
-  if (e.key == ':') {
-    let cmd_list = Object.keys(vakken).concat(Object.keys(goto_items).concat(["classroom", "onshape", "set background", "set theme", "set theme v2", "lock dmenu", "unbloat"]));
-    dmenu(cmd_list, function (cmd, shift) {
-      switch (cmd) {
-        case "lock dmenu":
-          lock_dmenu = !lock_dmenu;
-          return;
-        case "unbloat":
-          unbloat();
-          return;
-        case "set background":
-          dmenu([], function (url) {
-            set_background(url);
-            store_background(url);
-          }, "bg url:");
-          return;
-        case "set theme":
-          dmenu(theme_names, function (theme) {
-            store_profile(theme);
-            set_theme(theme)
-          }, "theme:");
-          return;
-        case "set theme v2":
-          dmenu(get_all_themes_v2(), function (theme) {
-            store_profile(theme);
-            set_theme_v2(theme);
-          }, "theme:");
-          return;
-        case "classroom":
-          open_url("https://classroom.google.com", shift);
-          return;
-        case "onshape":
-          open_url("https://onshape.com", shift);
-          return;
-        default:
-          break;
-      }
-      let got_url = goto_items[cmd]
-      if (got_url != null) {
-        open_url(got_url, shift);
-        return;
-      }
-      let vakken_url = vakken[cmd];
-      if (vakken_url != null) {
-        open_url(vakken_url, shift);
-        return;
-      }
-    }, "quick:");
-  }
-});
 async function apply(){
   let settingsData = JSON.parse(window.localStorage.getItem("settingsdata"))
   console.log(settingsData)
@@ -102,12 +54,12 @@ async function apply(){
   const halte = settingsData.halte
   const overwrite_theme = settingsData.overwrite_theme;
   const loc = settingsData.location;
-  const blurvalue = settingsData.slider;
+  const blurvalue = settingsData.blur;
   console.log(profileSelect)
-    set_theme(profileSelect);
-    if (overwrite_theme == true) {
-      set_background(background);
-    }
+  set_theme(profileSelect);
+  if (overwrite_theme == true) {
+    set_background(background);
+  }
   await set_weather_loc(loc);
   let style = document.documentElement.style;
   style.setProperty('--blur-value-large', 'blur(' + blurvalue * 2 + 'px)');
@@ -135,7 +87,7 @@ function store(){
   settingsData.halte = halte;
   settingsData.overwrite_theme = overwrite_theme;
   settingsData.location = loc;
-  settingsData.slider = slider;  
+  settingsData.blur = slider;  
   window.localStorage.setItem("settingsdata", JSON.stringify(settingsData));
   apply()
 
@@ -147,7 +99,7 @@ function load(){
   const halte = document.getElementById("halt");
   const overwrite_theme = document.getElementById("button");
   const loc = document.getElementById("location");
-  const slider = document.getElementById('mySlider');
+  const blur = document.getElementById('mySlider');
   console.log("started loading...")
   if (settingsData == undefined){
     //TODO: set params to default
@@ -159,20 +111,20 @@ function load(){
   halte.value = settingsData.halte
   overwrite_theme.checked = settingsData.overwrite_theme
   loc.value = settingsData.location
-  slider.value = settingsData.slider
+  blur.value = settingsData.blur
   console.log(settingsData)
 }
 popup = document.getElementById("searchMenu");
 console.log(popup)
 if (popup != null){
   popup.addEventListener("change",store)
-  
-search_button = document.querySelector('.js-btn-search')
-console.log(search_button)
-search_button.innerText = "Settings"
-search_button.addEventListener("click", function () {
-const popup_settings = document.getElementById("searchMenu");
-popup_settings.innerHTML = `<head>
+
+  search_button = document.querySelector('.js-btn-search')
+  console.log(search_button)
+  search_button.innerText = "Settings"
+  search_button.addEventListener("click", function () {
+    const popup_settings = document.getElementById("searchMenu");
+    popup_settings.innerHTML = `<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
 <title>popup</title>
@@ -204,7 +156,7 @@ popup_settings.innerHTML = `<head>
     <input class="popupinput" id="background" type="text"></input>
     <label class="switch">
         <input class="popupinput" type="checkbox" id="button">
-        <span class="slider round"></span>
+        <span class="blur round"></span>
     </label>
 </div>
 <h3 class="popuptitles">Blur:</h3>
