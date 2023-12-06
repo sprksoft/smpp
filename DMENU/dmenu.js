@@ -1,15 +1,20 @@
-//CONFIG
-var dmenu_centerd = true;
-var lock_dmenu = false;
-var flip_shift_key = true;
-//END CONFIG
+var dmenu_config = {
+  centerd: true,
+  flip_shift_key: true,
+}
 
+var lock_dmenu = false;
 var command_list = [];
 var end_func = undefined;
 var open = false;
 var selected = -1;
 var user_text = "";
 var no_type = true;
+
+
+function dmenu_set_config(config) {
+  dmenu_config = config;
+}
 
 function dmenu(params, onselect, name = "dmenu:") {
   if (open) {
@@ -25,7 +30,7 @@ function dmenu(params, onselect, name = "dmenu:") {
   dmenu.getElementsByClassName("dmenu-label")[0].innerText = name;
   dmenu.classList.remove("dmenu-hidden");
 
-  if (dmenu_centerd && !dmenu.classList.contains("dmenu-centered")) {
+  if (dmenu_config.centerd && !dmenu.classList.contains("dmenu-centered")) {
     dmenu.classList.add("dmenu-centered");
   }
 
@@ -173,7 +178,7 @@ function init_dmenu() {
       dmenu_close();
       if (end_func != undefined && command !== "") {
         let shift = e.shiftKey;
-        if (flip_shift_key) {
+        if (dmenu_config.flip_shift_key) {
           shift = !shift;
         }
         end_func(command, shift);
