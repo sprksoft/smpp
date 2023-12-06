@@ -30,8 +30,7 @@
         "CSS/general.css",
         "CSS/weather.css",
         "DMENU/dmenu.css",
-        "CSS/login.css",
-        "CSS/messages.css",
+        "CSS/login.css", "CSS/messages.css",
         "CSS/navigation.css",
         "CSS/notification.css",
         "CSS/planner.css",
@@ -50,6 +49,7 @@
         "delijn.js",
         "loginpage.js",
         "DMENU/quick.js",
+        "snow.js",
         "smppjs.js"
       ]
     }
