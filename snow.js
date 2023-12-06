@@ -12,7 +12,7 @@ function set_snow_level(count) {
     let flake = document.createElement("img");
     flake.classList="snowflake";
     flake.src="/static/img/christmas/snowflake.svg";
-    flake.style=`animation-delay: ${Math.floor(Math.random()*40)-40}s; animation-duration: ${Math.floor(Math.random()*7)+10}s; left: ${Math.floor(Math.random()*100)}%; transform:rotate(${Math.floor(Math.random()*360)}deg)`;
+    flake.style=`animation-delay: ${Math.floor(Math.random()*40)-40}s; animation-duration: ${Math.floor(Math.random()*7)+10}s; left: ${Math.floor(Math.random()*100)}%; animation: snowflake_fall_${Math.floor(Math.random()*3)} 6s ease-in-out infinite;`;
     snow.appendChild(flake);
   }
 
