@@ -191,6 +191,7 @@ popup_settings.innerHTML = `<head>
     <option value="winter">Winter</option>
     <option value="purple">Purple</option>
     <option value="matcha">Matcha</option>
+    <option value="christmas">Christmas</option>
 </select>
 
 <h3 class="popuptitles">Choose bus halte id:</h3>
@@ -208,7 +209,9 @@ popup_settings.innerHTML = `<head>
 </div>
 <h3 class="popuptitles">Blur:</h3>
 <input type="range" min="0" max="20" value="0" class="sliderblur" id="mySlider">
-
+<h3 class="popuptitles">Snow:</h3>
+<input class="popupinput" type="checkbox" id="snow">
+<span class="slider round"></span>
 
 <script src="popup.js"></script>
 </body>
