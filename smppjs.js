@@ -156,7 +156,7 @@ if (popup != null){
     <input class="popupinput" id="background" type="text"></input>
     <label class="switch">
         <input class="popupinput" type="checkbox" id="button">
-        <span class="blur round"></span>
+        <span class="slider round"></span>
     </label>
 </div>
 <h3 class="popuptitles">Blur:</h3>
