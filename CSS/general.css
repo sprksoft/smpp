@@ -497,12 +497,22 @@ input:checked+.slider:before {
 
 
 @keyframes snowflake_fall{
-
 	0% {
 		top: -10%;
-		transform: translateX(0px);
+		transform: translateX(100px);
 	}
 
+  45%{
+		transform: translateX(0px);
+  }
+
+  50%{
+		transform: translateX(50px);
+  }
+
+  95%{
+		transform: translateX(0px);
+  }
 
 	100% {
 		top: 100%;
