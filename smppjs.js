@@ -274,12 +274,12 @@ function set_theme(name) {
       style.setProperty('--loginpage-image', "url(https://wallpapercave.com/wp/wp9313069.jpg)");
       break;
       case 'christmas':
-        style.setProperty('--color-accent', '#BFCDD9');
-        style.setProperty('--color-text', '#d2e1ed');
-        style.setProperty('--color-base00', '#59363F');
-        style.setProperty('--color-base01', '#733049');
-        style.setProperty('--color-base02', '#6387A6');
-        style.setProperty('--color-base03', '#9BABBF');
+        style.setProperty('--color-accent', '#f4f0bb');
+        style.setProperty('--color-text', '#f1eeeb');
+        style.setProperty('--color-base00', '#43291f');
+        style.setProperty('--color-base01', '#226f54');
+        style.setProperty('--color-base02', '#da2c38');
+        style.setProperty('--color-base03', '#87c38f');
         style.setProperty('--loginpage-image', "url(https://wallpapercave.com/wp/wp9313069.jpg)");
         break;
     // Add more cases for other profiles as needed
