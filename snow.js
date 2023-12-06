@@ -1,8 +1,19 @@
 var snow=undefined;
 
+var enable_snow_mul=false;
+
+function set_snow_multiplier(on) {
+  enable_snow_mul = on;
+}
+
+
 function set_snow_level(count) {
   if (count > 3000){
     count = 3000;
+  }
+  if (enable_snow_mul){
+    count+=20;
+    count*=2;
   }
   if (snow != undefined){
     snow.remove();

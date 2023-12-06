@@ -71,6 +71,7 @@ async function updateWeatherDiv(weatherData) {
     weatherdiv.querySelector(".weather-wind").innerText=windSpeedkmh+"km/h";
 
     const weatherIcon = weatherdiv.querySelector('.weather-icon');
+    set_snow_multiplier(mainWeather == "Snow");
 
     if (description == "broken clouds") {
       weatherIcon.src = 'https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/mostlycloudy.svg'
