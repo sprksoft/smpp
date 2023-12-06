@@ -112,10 +112,10 @@ async function updateWeatherDiv(weatherData) {
 }
 
 async function main() {
-  if (!document.getElementById('rightcontainer')){
+  /* if (!document.getElementById('rightcontainer')){
     //Not on home page
     return;
-  }
+  } */
   console.log("Loading old data from localstorage")
   //FIXME: when undefined is in local storage this like errors
   let weatherData = JSON.parse(window.localStorage.getItem("weatherdata"));

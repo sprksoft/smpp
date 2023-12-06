@@ -1,4 +1,3 @@
-var snow=undefined;
 
 var enable_snow_mul=false;
 
@@ -8,17 +7,19 @@ function set_snow_multiplier(on) {
 
 
 function set_snow_level(count) {
+  const snow = document.getElementById("snowflakes");
   if (count > 3000){
     count = 3000;
   }
   if (enable_snow_mul){
     count+=20;
-    count*=2;
+    count*=5;
   }
   if (snow != undefined){
     snow.remove();
   }
   snow = document.createElement("div");
+  snow.id = "snowflakes"
   snow.classList="snowflakes";
 
   for (let i=0; i < count; i++){
