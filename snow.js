@@ -1,6 +1,9 @@
 var snow=undefined;
 
 function set_snow_level(count) {
+  if (count > 3000){
+    count = 3000;
+  }
   if (snow != undefined){
     snow.remove();
   }
