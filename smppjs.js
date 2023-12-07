@@ -247,12 +247,12 @@ function set_theme(name) {
       style.setProperty('--loginpage-image', "url(https://wallpapercave.com/wp/wp7464660.jpg)");
       break;
     case 'winter':
-      style.setProperty('--color-accent', '#9ca3d6');
-      style.setProperty('--color-text', '#f8f8fa');
-      style.setProperty('--color-base00', '#373972');
-      style.setProperty('--color-base01', '#535aaf');
-      style.setProperty('--color-base02', '#474a8e');
-      style.setProperty('--color-base03', '#8089fc');
+      style.setProperty('--color-accent', '#8aadb6');
+      style.setProperty('--color-text', '#C2BAB2');
+      style.setProperty('--color-base00', '#071b2c');
+      style.setProperty('--color-base01', '#152f47');
+      style.setProperty('--color-base02', '#345f7f');
+      style.setProperty('--color-base03', '#b9d4f4');
       style.setProperty('--loginpage-image', "url(https://media.discordapp.net/attachments/1174690328415051896/1182244401473405048/christmas-tree-night-sky-scenery-4k-wallpaper-uhdpaper.png?ex=6583fde6&is=657188e6&hm=2b2d2b865a35c5cae912474e5bc3d44af52150f02c85244e08df2b774d9c3c67&=&format=webp&quality=lossless&width=1045&height=588)");
       break;
     case 'birb':
