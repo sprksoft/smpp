@@ -124,7 +124,7 @@ function createApplication(data) {
         </span>
         </div></div>`
       leftContainer.appendChild(div);
-    } 
+    }
 
     else if(i==0) {
       const timeDifference = "Komt aan"
