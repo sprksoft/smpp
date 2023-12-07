@@ -19,7 +19,7 @@
 
 # not a concern
 - [ ] icons...
-- [ ] news looks ugly
+- [ ] news looks ugly edit: news IS ugly
 - [ ] weird text in "forum"
 - [ ] foto-album, dont do it tho
 - [ ] need more "decapitation" in LVS
