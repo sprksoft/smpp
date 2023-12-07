@@ -41,7 +41,8 @@ html {
 
 .student-support-block__item.icon-label,
 .icon-label__text,
-.checkbox--select-all {
+.checkbox--select-all,
+.round {
   color: var(--color-text) !important;
 }
 
@@ -55,17 +56,27 @@ html {
 }
 
 .toolbar-bottom,
-.toolbar-top {
+.toolbar-top,
+.seperator {
   display: none !important;
 }
 
 .groupContainer,
 .newsTitle,
 
-.msg--bubble--steel {
+.msg--bubble--steel,
+#goTo{
   background-color: var(--color-base01) !important;
   color: var(--color-text) !important;
 }
+.skin .skinButtonBg{
+  background-image: none !important;
+}
+.detailContainerBlock{
+  background: var(--color-base01) !important;
+  color: var(--color-text) !important;
+}
+
 
 .groupTree {
   background-color: var(--color-base00) !important;

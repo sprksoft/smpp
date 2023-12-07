@@ -149,7 +149,7 @@ if (popup != null){
     <option value="winter">Winter</option>
     <option value="purple">Purple</option>
     <option value="matcha">Matcha</option>
-    <option value="christmas">Christmas</option>
+    <option value="mountain">Mountain</option>
     <option value="vax">vax</option>
 </select>
 
@@ -254,7 +254,7 @@ function set_theme(name) {
       style.setProperty('--color-base01', '#152f47');
       style.setProperty('--color-base02', '#345f7f');
       style.setProperty('--color-base03', '#b9d4f4');
-      style.setProperty('--loginpage-image', "url(https://hdqwalls.com/download/everest-3840x2160.jpg)");
+      style.setProperty('--loginpage-image', "url(https://media.discordapp.net/attachments/1174690328415051896/1182244401473405048/christmas-tree-night-sky-scenery-4k-wallpaper-uhdpaper.png?ex=6583fde6&is=657188e6&hm=2b2d2b865a35c5cae912474e5bc3d44af52150f02c85244e08df2b774d9c3c67&=&format=webp&quality=lossless&width=1045&height=588)");
       break;
     case 'birb':
       style.setProperty('--color-accent', '#8590aacc');
@@ -274,14 +274,14 @@ function set_theme(name) {
       style.setProperty('--color-base03', '#4f7a51');
       style.setProperty('--loginpage-image', "url(https://wallpapercave.com/wp/wp9313069.jpg)");
       break;
-      case 'christmas':
-        style.setProperty('--color-accent', '#f4f0bb');
-        style.setProperty('--color-text', '#f1eeeb');
-        style.setProperty('--color-base00', '#291a19');
-        style.setProperty('--color-base01', '#226f54');
-        style.setProperty('--color-base02', '#260002');
-        style.setProperty('--color-base03', '#87c38f');
-        style.setProperty('--loginpage-image', "url(https://wallpapercave.com/wp/wp9313069.jpg)");
+      case 'mountain':
+        style.setProperty('--color-accent', '#f8f8fa');
+        style.setProperty('--color-text', '#f8f8fa');
+        style.setProperty('--color-base00', '#121c28');
+        style.setProperty('--color-base01', '#23364e');
+        style.setProperty('--color-base02', '#52647c');
+        style.setProperty('--color-base03', '#8294ac');
+        style.setProperty('--loginpage-image', "url(https://hdqwalls.com/download/everest-3840x2160.jpg)");
         break;
       case 'vax':
         style.setProperty('--color-accent', '#66ac6d');

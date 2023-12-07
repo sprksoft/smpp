@@ -9,10 +9,10 @@
 - [ ] delijn has some issues with special busses but seem unfixable 
 
 # kinda important
-- [ ] portfolio looks shit
-- [ ] funky right border exists on "agenda"
-- [ ] border around some headers, ex: "nieuws"
-- [ ] subtext in "enquetes" is gray
+- [x] portfolio looks shit
+- [xavier] funky right border exists on "agenda"
+- [xavier] border around some headers, ex: "nieuws"
+- [x] subtext in "enquetes" is gray
 - [ ] very dark boxes "alle informatie" in the LVS
 - [ ] results doesnt look that great with % points
 - [ ] AWFULL TEXT ANIMATION THINGY IN LOGIN PAGE, LIKE WHYYYYY
