@@ -284,12 +284,12 @@ function set_theme(name) {
         style.setProperty('--loginpage-image', "url(https://hdqwalls.com/download/everest-3840x2160.jpg)");
         break;
       case 'vax':
-        style.setProperty('--color-accent', '#66ac6d');
-        style.setProperty('--color-text', '#9bd49f');
-        style.setProperty('--color-base00', '#243926');
-        style.setProperty('--color-base01', '#365138');
-        style.setProperty('--color-base02', '#456046');
-        style.setProperty('--color-base03', '#4f7a51');
+        style.setProperty('--color-accent', '#492f29');
+        style.setProperty('--color-text', '#492f29');
+        style.setProperty('--color-base00', '#9c6544');
+        style.setProperty('--color-base01', '#9c6544');
+        style.setProperty('--color-base02', '#9c6544');
+        style.setProperty('--color-base03', '#9c6544');
         style.setProperty('--loginpage-image', "url(https://wallpapers.com/images/hd/star-wars-place-ztno3exzqff0m0ci.webp)");
         break;
           // Add more cases for other profiles as needed
