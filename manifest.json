@@ -1,9 +1,9 @@
 {
-  "description": "An extension to make the smartschool better",
   "manifest_version": 2,
   "name": "sm++",
-  "version": "1.0",
-  "homepage_url": "https://github.com/Xgames123/smpp",
+  "version": "0.0.1",
+  "description": "Enhance your smartschool experience with themes and more",
+  "homepage_url": "https://github.com/sprksoft/smpp",
   "content_scripts": [
     {
       "matches": [
@@ -54,23 +54,16 @@
       ]
     }
   ],
-  "background": {
-    "scripts": []
-  },
   "browser_action": {
     "default_icon": {
       "16": "icon16.png",
       "48": "icon48.png",
       "128": "icon128.png"
-    },
-    "default_title": "Click here to open menu",
-    "default_popup": "POPUP/popup.html"
+    }
   },
-  "permissions": [
-    "webRequest",
-    "webRequestBlocking",
-    "<all_urls>",
-    "activeTab",
-    "storage"
-  ]
+	"browser_specific_settings": {
+	  "gecko": {
+		  "id": "smartschoolpp@sparksoft"
+	  }
+	}
 }
