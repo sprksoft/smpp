@@ -11,7 +11,7 @@ function set_config(config) {
 function config_menu() {
   let conf = get_config();
   let cmd_list = Object.keys(conf);
-  dmenu(cmd_list, function(cmd, shift) {
+  dmenu(cmd_list, function (cmd, shift) {
     conf[cmd] = dmenu([], function (val, shift) {
       conf[cmd] = val;
       set_config(conf);

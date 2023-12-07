@@ -2,17 +2,17 @@
 //ok - ldev
 //oke logis - andere ldev
 
-const default_settings={
-  dmenu:{
+const default_settings = {
+  dmenu: {
     centerd: true,
     flip_shift_key: false,
   },
-  profile : "default",
-  background : "none",
-  halte : 303980,
-  overwrite_theme : false,
-  location : "keerbergen",
-  blur : "2",
+  profile: "default",
+  background: "none",
+  halte: 303980,
+  overwrite_theme: false,
+  location: "keerbergen",
+  blur: "2",
   snow: "0"
 };
 
@@ -41,23 +41,20 @@ get_data_bg("vakken", ".course-list > li > a", function (el, data) {
   vakken = data;
 });
 
-async function apply(){
+async function apply() {
   let settingsData = JSON.parse(window.localStorage.getItem("settingsdata"))
-  console.log(settingsData)
-  if (settingsData == null){
-    console.log(default_settings)
+  if (settingsData == null) {
     settingsData = default_settings;
     window.localStorage.setItem("settingsdata", JSON.stringify(settingsData));
-    console.log(settingsData)
   }
-  const profileSelect =  settingsData.profile
+  console.log(settingsData)
+  const profileSelect = settingsData.profile
   const background = settingsData.background
   const halte = settingsData.halte
   const overwrite_theme = settingsData.overwrite_theme;
   const loc = settingsData.location;
   const blurvalue = settingsData.blur;
   const snow = settingsData.snow;
-  console.log(profileSelect)
   set_theme(profileSelect);
   if (overwrite_theme == true) {
     set_background(background);
@@ -73,7 +70,7 @@ async function apply(){
 }
 
 
-function store(){
+function store() {
   let settingsData = {}
   const profileSelect = document.getElementById("profileSelector").value;
   const background = document.getElementById("background").value;
@@ -83,20 +80,18 @@ function store(){
   const slider = document.getElementById('mySlider').value;
   const snowSlider = document.getElementById('snowSlider').value;
   console.log("started storing...")
-  console.log("set profile to " + profileSelect);
-  console.log("set busid to " + halte);
   settingsData.profile = profileSelect;
-  settingsData.background = background; 
+  settingsData.background = background;
   settingsData.halte = halte;
   settingsData.overwrite_theme = overwrite_theme;
   settingsData.location = loc;
-  settingsData.blur = slider;  
+  settingsData.blur = slider;
   settingsData.snow = parseInt(snowSlider);
   window.localStorage.setItem("settingsdata", JSON.stringify(settingsData));
   apply()
-
+  console.log("settings are stored and applied")
 }
-function load(){
+function load() {
   let settingsData = JSON.parse(window.localStorage.getItem("settingsdata"));
   const profileSelect = document.getElementById("profileSelector");
   const background = document.getElementById("background");
@@ -105,8 +100,8 @@ function load(){
   const loc = document.getElementById("location");
   const blur = document.getElementById('mySlider');
   const snowSlider = document.getElementById('snowSlider');
-  console.log("started loading...")
-  if (settingsData == undefined){
+  console.log("started loading settings...")
+  if (settingsData == undefined) {
     //TODO: set params to default
     console.log("settings data is undefined")
     return
@@ -118,15 +113,13 @@ function load(){
   loc.value = settingsData.location
   blur.value = settingsData.blur
   snowSlider.value = settingsData.snow
-  console.log(settingsData)
+  console.log("loaded all settings")
 }
 popup = document.getElementById("searchMenu");
-console.log(popup)
-if (popup != null){
-  popup.addEventListener("change",store)
+if (popup != null) {
+  popup.addEventListener("change", store)
 
   search_button = document.querySelector('.js-btn-search')
-  console.log(search_button)
   search_button.innerText = "Settings"
   search_button.addEventListener("click", function () {
     const popup_settings = document.getElementById("searchMenu");
@@ -173,9 +166,8 @@ if (popup != null){
 <script src="popup.js"></script>
 </body>
 `
-load()
-console.log("popup loaded");
-});
+    load()
+  });
 
 }
 
@@ -254,7 +246,7 @@ function set_theme(name) {
       style.setProperty('--color-base01', '#152f47');
       style.setProperty('--color-base02', '#345f7f');
       style.setProperty('--color-base03', '#b9d4f4');
-      style.setProperty('--loginpage-image', "url(https://media.discordapp.net/attachments/1174690328415051896/1182244401473405048/christmas-tree-night-sky-scenery-4k-wallpaper-uhdpaper.png?ex=6583fde6&is=657188e6&hm=2b2d2b865a35c5cae912474e5bc3d44af52150f02c85244e08df2b774d9c3c67&=&format=webp&quality=lossless&width=1045&height=588)");
+      style.setProperty('--loginpage-image', "url(https://th.bing.com/th/id/R.fd4990dbff7b2d998a61b5a60b6b1949?rik=TkC2r3hdP1Ma9g&pid=ImgRaw&r=0)");
       break;
     case 'birb':
       style.setProperty('--color-accent', '#8590aacc');
@@ -274,28 +266,27 @@ function set_theme(name) {
       style.setProperty('--color-base03', '#4f7a51');
       style.setProperty('--loginpage-image', "url(https://wallpapercave.com/wp/wp9313069.jpg)");
       break;
-      case 'mountain':
-        style.setProperty('--color-accent', '#f8f8fa');
-        style.setProperty('--color-text', '#f8f8fa');
-        style.setProperty('--color-base00', '#121c28');
-        style.setProperty('--color-base01', '#23364e');
-        style.setProperty('--color-base02', '#52647c');
-        style.setProperty('--color-base03', '#8294ac');
-        style.setProperty('--loginpage-image', "url(https://hdqwalls.com/download/everest-3840x2160.jpg)");
-        break;
-      case 'vax':
-        style.setProperty('--color-accent', '#66ac6d');
-        style.setProperty('--color-text', '#9bd49f');
-        style.setProperty('--color-base00', '#243926');
-        style.setProperty('--color-base01', '#365138');
-        style.setProperty('--color-base02', '#456046');
-        style.setProperty('--color-base03', '#4f7a51');
-        style.setProperty('--loginpage-image', "url(https://wallpapers.com/images/hd/star-wars-place-ztno3exzqff0m0ci.webp)");
-        break;
-          // Add more cases for other profiles as needed
+    case 'mountain':
+      style.setProperty('--color-accent', '#f8f8fa');
+      style.setProperty('--color-text', '#f8f8fa');
+      style.setProperty('--color-base00', '#121c28');
+      style.setProperty('--color-base01', '#23364e');
+      style.setProperty('--color-base02', '#52647c');
+      style.setProperty('--color-base03', '#8294ac');
+      style.setProperty('--loginpage-image', "url(https://hdqwalls.com/download/everest-3840x2160.jpg)");
+      break;
+    case 'vax':
+      style.setProperty('--color-accent', '#66ac6d');
+      style.setProperty('--color-text', '#9bd49f');
+      style.setProperty('--color-base00', '#243926');
+      style.setProperty('--color-base01', '#365138');
+      style.setProperty('--color-base02', '#456046');
+      style.setProperty('--color-base03', '#4f7a51');
+      style.setProperty('--loginpage-image', "url(https://wallpapers.com/images/hd/star-wars-place-ztno3exzqff0m0ci.webp)");
+      break;
+    // Add more cases for other profiles as needed
     default:
     // Handle default case or do nothing if no match found
   }
 }
 apply()
-console.log("Done");

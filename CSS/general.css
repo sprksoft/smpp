@@ -65,14 +65,16 @@ html {
 .newsTitle,
 
 .msg--bubble--steel,
-#goTo{
+#goTo {
   background-color: var(--color-base01) !important;
   color: var(--color-text) !important;
 }
-.skin .skinButtonBg{
+
+.skin .skinButtonBg {
   background-image: none !important;
 }
-.detailContainerBlock{
+
+.detailContainerBlock {
   background: var(--color-base01) !important;
   color: var(--color-text) !important;
 }
@@ -159,18 +161,23 @@ text,
 
 .ui-widget-header,
 .tabs,
-li ,
-.legend2{                                      /* van af hier is vakken css*/
+li,
+.legend2 {
+  /* van af hier is vakken css*/
   background: var(--color-base02) !important;
   color: var(--color-text) !important;
 }
+
 fieldset.fieldset2 {
   position: relative;
   border-color: var(--color-base03) !important;
 }
+
 .tekstvet {
   display: none;
-}                                         /*  tot hier*/
+}
+
+/*  tot hier*/
 
 td[background],
 td[bgcolor] {
@@ -180,13 +187,15 @@ td[bgcolor] {
 }
 
 select,
-.fieldset2{
+.fieldset2 {
   background-color: var(--color-base00) !important;
 }
+
 .category-hdr {
   border: 1px solid var(--color-base03) !important;
   text-shadow: 0 1px var(--color-text) !important;
 }
+
 .msgInfoTitle {
   color: var(--color-accent) !important;
 }
@@ -203,6 +212,7 @@ select,
 .tabsContainer {
   display: none !important;
 }
+
 /*
 .MsoNormalTable {
   display: none !important;
@@ -281,7 +291,8 @@ td:not(.cb-container),
   background-color: var(--color-base00) !important;
 }
 
-.profile_header_pupilinfo_status,.notifyScreenTitle {
+.profile_header_pupilinfo_status,
+.notifyScreenTitle {
   color: var(--color-accent) !important;
 }
 
@@ -289,7 +300,8 @@ td:not(.cb-container),
   background-color: var(--color-base02) !important;
 }
 
-#smscMainBlockContainer,.notifyScreenContainer {
+#smscMainBlockContainer,
+.notifyScreenContainer {
   background-color: var(--color-base01) !important;
   border: 1px solid var(--color-accent) !important;
   box-shadow: none;
@@ -304,24 +316,30 @@ td:not(.cb-container),
   color: var(--color-base03) !important;
 
 }
-.notifySceenContainerInfo{
+
+.notifySceenContainerInfo {
   color: var(--color-base03) !important;
 }
+
 .percent,
 #quick-nav,
-.smsc_cm_body_row{
+.smsc_cm_body_row {
   border-color: var(--color-base03) !important;
 }
+
 .survey-navigation {
   border-top: 1px dashed var(--color-base03) !important;
 }
+
 #quick-nav,
 .start-row {
-    border-color: var(--color-base03) !important;
-  }
-.start{
+  border-color: var(--color-base03) !important;
+}
+
+.start {
   color: var(--color-text) !important;
 }
+
 /* CODE FOR CHECKBOX BUT ONLY IN NOTIFSETTINGS
 div.smscCheckbox input[type=checkbox]:checked+label {
   background-image: url("https://pic.onlinewebfonts.com/thumbnails/icons_263317.svg") !important;
@@ -368,19 +386,25 @@ div.smscCheckbox label::selection {
   align-items: center;
 }
 
-.popupinput,#halt,#location,#background {
-  background-color: var(--color-base01)!important;
-  border: 1px solid var(--color-base03)!important;
-  text-align: center!important;
-  border-radius: 10px!important;
-  width: 100px!important;
-  color: var(--color-text)!important;
-  margin: 10px!important;
+.popupinput,
+#halt,
+#location,
+#background {
+  background-color: var(--color-base01) !important;
+  border: 1px solid var(--color-base03) !important;
+  text-align: center !important;
+  border-radius: 10px !important;
+  width: 100px !important;
+  color: var(--color-text) !important;
+  margin: 10px !important;
 }
-#halt,#location{
-  width: 90%!important;
+
+#halt,
+#location {
+  width: 90% !important;
   height: 35px !important;
 }
+
 .focus-visible {
   outline: 1px solid var(--color-accent) !important;
 }
@@ -454,19 +478,21 @@ input:checked+.slider:before {
 #profileSelector option {
   font-size: large;
   font: bold;
-  text-align: center!important;
+  text-align: center !important;
 }
+
 .popupinput {
   margin-bottom: 0px;
   font: bold;
 }
 
-.popuptitles{
+.popuptitles {
   margin-bottom: 0px !important;
-  text-align: center!important;
+  text-align: center !important;
   font-size: 17px !important;
 }
-#searchMenu{
+
+#searchMenu {
   left: -50px !important;
   background-color: var(--color-base02) !important;
   border: 2px solid var(--color-base03) !important;
@@ -477,79 +503,128 @@ input:checked+.slider:before {
   justify-content: center !important;
   max-width: 240px !important;
 }
-.textandbutton{
+
+.textandbutton {
   display: flex !important;
   flex-direction: row !important;
   justify-content: center !important;
   margin: 10px !important;
   margin-bottom: 0px !important
 }
-#background{
+
+#background {
   height: 35px !important;
   margin-top: 0px !important;
   margin-left: 0px !important;
 }
 
 .smscFrameTitleContainer .smscFrameTitle,
-.uploadzone .files .navigation  {
+.uploadzone .files .navigation {
   border: 1px solid var(--color-base03) !important;
 }
+
 .course-session-page__container {
   box-shadow: -1px -1px 1px var(--color-base03) !important;
 }
+
 .snowflake {
-	position: fixed;
-	top: -10%;
-	z-index: 999999;
-	pointer-events: none;
+  position: fixed;
+  top: -10%;
+  z-index: 999999;
+  pointer-events: none;
 }
 
 
-@keyframes snowflake_fall_0{
-	0% {
-		top: -10%;
-		transform: translateX(100px) rotate(50deg);
-	}
-
-  50%{
-		transform: translateX(5px);
+@keyframes snowflake_fall_0 {
+  0% {
+    top: -10%;
+    transform: translateX(100px) rotate(50deg);
   }
 
-	100% {
-		top: 110%;
-		transform: translateX(80px) rotate(170deg);
-	}
+  50% {
+    transform: translateX(5px);
+  }
+
+  100% {
+    top: 110%;
+    transform: translateX(80px) rotate(170deg);
+  }
 
 }
-@keyframes snowflake_fall_1{
-	0% {
-		top: -10%;
-		transform: translateX(50px) rotate(30deg);
-	}
 
-  50%{
-		transform: translateX(100px);
+@keyframes snowflake_fall_1 {
+  0% {
+    top: -10%;
+    transform: translateX(50px) rotate(30deg);
   }
 
-	100% {
-		top: 110%;
-		transform: translateX(20px) rotate(180deg);
-	}
+  50% {
+    transform: translateX(100px);
+  }
+
+  100% {
+    top: 110%;
+    transform: translateX(20px) rotate(180deg);
+  }
 
 }
-@keyframes snowflake_fall_3{
-	0% {
-		top: -10%;
-		transform: translateX(80px) rotate(40deg);
-	}
 
-  50%{
-		transform: translateX(-40px);
+@keyframes snowflake_fall_3 {
+  0% {
+    top: -10%;
+    transform: translateX(80px) rotate(40deg);
   }
 
-	100% {
-		top: 110%;
-		transform: translateX(70px) rotate(200deg);
-	}
+  50% {
+    transform: translateX(-40px);
+  }
 
+  100% {
+    top: 110%;
+    transform: translateX(70px) rotate(200deg);
+  }
+
+}
+
+/*rangeblur*/
+.sliderblur {
+  -webkit-appearance: none;
+  /* Override default CSS styles */
+  appearance: none;
+  height: 15px;
+  border-radius: 5px;
+  background: var(--color-base01);
+  /* Grey background */
+  outline: none;
+  /* Remove outline */
+  opacity: 0.7;
+  /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s;
+  /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+}
+
+.sliderblur::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  /* Override default look */
+  appearance: none;
+  width: 25px;
+  /* Set a specific slider handle width */
+  height: 25px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  /* Green background */
+  cursor: pointer;
+  /* Cursor on hover */
+}
+
+.sliderblur::-moz-range-thumb {
+  width: 25px;
+  /* Set a specific slider handle width */
+  height: 25px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  /* Green background */
+  cursor: pointer;
+  /* Cursor on hover */
 }

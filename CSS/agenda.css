@@ -3,17 +3,17 @@
     background-color: var(--color-base00) !important;
 
 }
-html,body
 
-{
+html,
+body {
     width: 100%;
     height: 100%;
     margin: 0px;
     padding: 0px;
-    overflow-x: hidden; 
+    overflow-x: hidden;
 }
 
-.agenda_grid_main{
+.agenda_grid_main {
     background-color: var(--color-base01) !important;
     border: 3px solid var(--color-base03) !important;
     border-radius: 10px !important;
@@ -83,6 +83,7 @@ html,body
     background-size: 1px 1px !important;
     background-position: left center !important;
 }
+
 #infoContainerStudent,
 #infoFormWindow_movableDiv,
 #infoFormWindow_titlebar,
@@ -91,7 +92,7 @@ html,body
 .wborder.wrightxy,
 .wborder.wcentery.wbottomy,
 .smscButton,
-.infoContainer{
+.infoContainer {
     color: var(--color-accent) !important;
     background: var(--color-base01) !important;
 
@@ -101,18 +102,22 @@ html,body
 .infoContainerBlock {
     background-color: var(--color-base02) !important;
 }
-.wborder.wbright.wtopr{
+
+.wborder.wbright.wtopr {
     background: var(--color-base01) !important;
 }
-.wborder.wbright.wbottomr{
+
+.wborder.wbright.wbottomr {
     border-bottom-right-radius: 4px !important;
     background: var(--color-base01) !important;
 }
-.wborder.wbleft.wtopl{
+
+.wborder.wbleft.wtopl {
     border-top-left-radius: 4px !important;
     background: var(--color-base01) !important;
 }
-.wborder.wbleft.wbottoml{
+
+.wborder.wbleft.wbottoml {
     border-bottom-left-radius: 8px !important;
     background: var(--color-base01) !important;
 }

@@ -120,8 +120,7 @@ a.smscButton[href="/login/sso/init/acm"],
   transition: none !important;
   color: aliceblue !important;
 }
-.login-app__form{
+
+.login-app__form {
   color: var(--color-text) !important;
 }
-
-

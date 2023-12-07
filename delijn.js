@@ -4,7 +4,10 @@ async function fetchData(halte) {
 
 
   const apiUrl = `https://api.delijn.be/DLKernOpenData/api/v1/haltes/0/${halte}/real-time?maxAantalDoorkomsten=5`; // Replace with your API endpoint
-
+  if (!document.getElementById('leftcontainer')) {
+    console.log("Not on home page, no busses needed")
+    return;
+  }
   try {
     const response = await fetch(apiUrl, {
       headers: {
@@ -17,8 +20,7 @@ async function fetchData(halte) {
     }
 
     const data = await response.json();
-    console.log(data)
-    console.log("creating application...")
+    console.log("creating lijn application...")
     createApplication(data); // Call function to create the application using fetched data
   } catch (error) {
     console.error('Error fetching data:', error);
@@ -66,13 +68,9 @@ function createApplication(data) {
       console.log("geen realtimeregelingtijd")
     }
   }
-  console.log(bestemmingen);
-  console.log(lijnnummers);
-  console.log(richting);
-  console.log(dienstregelingTijdstip);
-  console.log(real_timeTijdstip);
-  if (leftContainer == null){
-  return}
+  if (leftContainer == null) {
+    return
+  }
   leftContainer.innerHTML = " "
   for (let i = 0; i < doorkomstlength; i++) {
 
@@ -124,9 +122,9 @@ function createApplication(data) {
         </span>
         </div></div>`
       leftContainer.appendChild(div);
-    } 
+    }
 
-    else if(i==0) {
+    else if (i == 0) {
       const timeDifference = "Komt aan"
       minute = minute.toString().padStart(2, '0');
       div = document.createElement("div");
@@ -140,7 +138,7 @@ function createApplication(data) {
       div.querySelector(".lijncardsdestin").innerText = bestemmingen[i];
       div.querySelector(".time").innerText = timeDifference;
       leftContainer.appendChild(div);
-    }else{
+    } else {
       const timeDifference = "No data"
       minute = minute.toString().padStart(2, '0');
       div = document.createElement("div");

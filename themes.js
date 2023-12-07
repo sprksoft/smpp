@@ -2,8 +2,8 @@
 // Dit is nog niet klaar dus hou oud systeem effen
 
 const themes = {
-  "default":{
-    style:{
+  "default": {
+    style: {
       "--color-accent": "#8f8f95",
       "--color-text": "#C2BAB2",
       "--color-base00": "#191817",
@@ -17,8 +17,8 @@ const themes = {
     }
   },
 
-  "ldev":{
-    style:{
+  "ldev": {
+    style: {
       "--color-accent": "#ffd5a0",
       "--color-popup-border": "var(--color-base02)",
       "--color-hover-border": "var(--color-base03)",
@@ -34,12 +34,12 @@ function get_all_themes_v2() {
 
 function overlayTheme_v2(name) {
   let theme = themes[name];
-  if (!theme){
+  if (!theme) {
     return;
   }
   let style = document.documentElement.style;
   let keys = Object.keys(theme.style);
-  for (let i = 0; i < keys; i++){
+  for (let i = 0; i < keys; i++) {
     style.setProperty(keys[i], theme.style[keys[i]]);
   }
 }

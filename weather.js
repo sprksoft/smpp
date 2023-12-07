@@ -7,14 +7,14 @@ async function getWeatherByCity(city) {
     const response = await fetch(apiUrl);
     const data = await response.json();
     return data;
-} catch (error) {
+  } catch (error) {
     console.log('Error fetching data:', error);
-}
+  }
 }
 // ... (previous code remains unchanged)
 
 async function updateWeatherDiv(weatherData) {
-  if (!weatherData){
+  if (!weatherData) {
     return;
   }
   const rightContainer = document.getElementById('rightcontainer');
@@ -65,10 +65,10 @@ async function updateWeatherDiv(weatherData) {
         `;
     weatherdiv.querySelector(".weather-location").innerText = name;
     weatherdiv.querySelector(".weather-main").innerText = mainWeather;
-    weatherdiv.querySelector(".weather-temperature").innerText=temperature+"°C";
-    weatherdiv.querySelector(".weather-feelslike").innerText="Feels like "+feelslike+"°C";
-    weatherdiv.querySelector(".weather-humidity").innerText=humidity+"%";
-    weatherdiv.querySelector(".weather-wind").innerText=windSpeedkmh+"km/h";
+    weatherdiv.querySelector(".weather-temperature").innerText = temperature + "°C";
+    weatherdiv.querySelector(".weather-feelslike").innerText = "Feels like " + feelslike + "°C";
+    weatherdiv.querySelector(".weather-humidity").innerText = humidity + "%";
+    weatherdiv.querySelector(".weather-wind").innerText = windSpeedkmh + "km/h";
 
     const weatherIcon = weatherdiv.querySelector('.weather-icon');
     set_snow_multiplier(mainWeather == "Snow");
@@ -112,10 +112,10 @@ async function updateWeatherDiv(weatherData) {
 }
 
 async function main() {
-  /* if (!document.getElementById('rightcontainer')){
+  if (!document.getElementById('rightcontainer')) {
     //Not on home page
     return;
-  } */
+  }
   console.log("Loading old data from localstorage")
   //FIXME: when undefined is in local storage this like errors
   let weatherData = JSON.parse(window.localStorage.getItem("weatherdata"));
@@ -123,10 +123,14 @@ async function main() {
 }
 
 
-async function set_weather_loc(loc){
-  console.log('Fetching weather information for location: '+loc);
+async function set_weather_loc(loc) {
+  if (!document.getElementById('rightcontainer')) {
+    console.log("Not on home page, no weather needed")
+    return;
+  }
+  console.log('Fetching weather information for location: ' + loc);
   let weatherData = await getWeatherByCity(loc);
-  if (weatherData == undefined){
+  if (weatherData == undefined) {
     return;
   }
   console.log('Weather data:', weatherData);
