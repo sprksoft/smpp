@@ -150,6 +150,7 @@ if (popup != null){
     <option value="purple">Purple</option>
     <option value="matcha">Matcha</option>
     <option value="christmas">Christmas</option>
+    <option value="vax">vax</option>
 </select>
 
 <h3 class="popuptitles">Choose bus halte id:</h3>
@@ -185,7 +186,7 @@ function set_background(background) {
 }
 
 
-const theme_names = ["default", "ldev", "birb", "bjarn", "tan", "winter", "fall", "matcha"];
+const theme_names = ["default", "ldev", "birb", "bjarn", "tan", "winter", "fall", "matcha", "vax"];
 function set_theme(name) {
   let style = document.documentElement.style;
   style.setProperty('--color-accent', '#8f8f95');
@@ -282,7 +283,16 @@ function set_theme(name) {
         style.setProperty('--color-base03', '#87c38f');
         style.setProperty('--loginpage-image', "url(https://wallpapercave.com/wp/wp9313069.jpg)");
         break;
-    // Add more cases for other profiles as needed
+      case 'vax':
+        style.setProperty('--color-accent', '#66ac6d');
+        style.setProperty('--color-text', '#9bd49f');
+        style.setProperty('--color-base00', '#243926');
+        style.setProperty('--color-base01', '#365138');
+        style.setProperty('--color-base02', '#456046');
+        style.setProperty('--color-base03', '#4f7a51');
+        style.setProperty('--loginpage-image', "url(https://wallpapers.com/images/hd/star-wars-place-ztno3exzqff0m0ci.webp)");
+        break;
+          // Add more cases for other profiles as needed
     default:
     // Handle default case or do nothing if no match found
   }
