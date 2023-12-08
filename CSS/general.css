@@ -18,7 +18,11 @@ html {
   --color-hover-border: var(--color-accent);
 
 }
-
+/* hier is beter smartschool code*/
+#modal-content,
+#content-container{
+  background-color: var(--color-base00) !important;
+}
 .js-btn-profile>img,
 .header__avatar,
 .topnav__menuitem>img,
@@ -34,13 +38,25 @@ html {
   border-right: 4px solid var(--color-base01) !important;
 }
 
-.toolbar {
+.toolbar,
+div.stdReplyWrapper {
   background-color: var(--color-base00) !important;
 }
 
-.skip-link {
+.skip-link,
+#ruleName,
+#ifValueID,
+#stdReplyName,
+#stdReplyTxt,
+#editsubboxinput{
   background-color: var(--color-base01) !important;
 }
+#stdReplyName,
+#stdReplyTxt,
+#editsubboxinput {
+  color: var(--color-text);
+}
+
 
 .student-support-block__item.icon-label,
 .icon-label__text,
@@ -326,7 +342,8 @@ td:not(.cb-container),
 
 .percent,
 #quick-nav,
-.smsc_cm_body_row {
+.smsc_cm_body_row,
+div.stdReplyWrapper {
   border-color: var(--color-base03) !important;
 }
 
