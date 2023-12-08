@@ -69,8 +69,11 @@ async function apply() {
   };
   style.setProperty('--blur-value-large', 'blur(' + bigblurvalue + 'px)');
   style.setProperty('--blur-value-small', 'blur(' + blurvalue + 'px)');
-  if (halte != undefined) {
+haltelenght = halte.length;
+  if (haltelenght == 6) {
     fetchData(halte);
+  }else{
+    document.getElementById("leftcontainer").style.display = "none"
   };
   set_snow_level(snow);
 
@@ -147,7 +150,7 @@ if (popup != null) {
 <body>
 <h3 class="popuptitles">Choose color profile:</h3>
 
-<select id="profileSelector">
+<select id="profileSelector" >
     <option value="default">Default</option>
     <option value="ldev">ldev</option>
     <option value="birb">Birb</option>
@@ -158,15 +161,15 @@ if (popup != null) {
     <option value="purple">Purple</option>
     <option value="matcha">Matcha</option>
     <option value="mountain">Mountain</option>
-    <option value="vax">vax</option>
+
 </select>
 
-<h3 class="popuptitles">Choose bus halte id:</h3>
+<h3 class="popuptitles">Choose bus halte id (optional):</h3>
 <input class="popupinput" id="halt" type="text"></input>
-<h3 class="popuptitles">Choose location:</h3>
+<h3 class="popuptitles">Choose location (weather):</h3>
 <input class="popupinput" id="location" type="text"></input>
 
-<h3 class="popuptitles">Background Image(optional):</h3>
+<h3 class="popuptitles">Background Image (optional):</h3>
 <div class="textandbutton">
     <input class="popupinput" id="background" type="text"></input>
     <label class="switch">
@@ -178,7 +181,7 @@ if (popup != null) {
 <input type="range" min="0" max="20" value="0" class="sliderblur" id="mySlider">
 <h3 class="popuptitles">Snow:</h3>
 <input type="range" min="0" max="500" value="0" class="sliderblur" id="snowSlider">
-<h3 class="popuptitles">Hide News:</h3>
+<h3 class="popuptitles">Hide news:</h3>
 <label class="switch">
 <input class="popupinput" type="checkbox" id="hidenewselement">
 <span class="slider round"></span>
@@ -209,7 +212,7 @@ function set_theme(name) {
   style.setProperty('--color-popup-border', 'var(--color-accent)');
   style.setProperty('--color-hover-border', 'var(--color-accent)');
   style.setProperty('--color-homepage-sidebars-bg', "#02020585");
-  style.setProperty('--loginpage-image', "url(https://images.hdqwalls.com/wallpapers/moon-astrophotography-4k-sc.jpg)");
+  style.setProperty('--loginpage-image', "url(https://4kwallpapers.com/images/wallpapers/desert-doom-sand-dunes-dark-background-monochrome-landscape-2560x1080-6409.jpg)");
 
   switch (name) {
     case "default":

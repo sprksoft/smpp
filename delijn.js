@@ -29,6 +29,9 @@ async function fetchData(halte) {
 }
 function createApplication(data) {
   const leftContainer = document.getElementById('leftcontainer');
+  if (!data.halteDoorkomsten[0]){
+    leftContainer.innerHTML = 'There are no busses for this stop right now.';
+  }
   let doorkomstlength = data.halteDoorkomsten[0].doorkomsten.length
   const bestemmingen = []
   const lijnnummers = []

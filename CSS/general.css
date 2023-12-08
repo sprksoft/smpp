@@ -454,6 +454,7 @@ div.smscCheckbox label::selection {
   width: 60px;
   height: 34px;
   margin-bottom: 10px;
+  margin-top: 1px !important;
 }
 
 /* Hide default HTML checkbox */
@@ -472,8 +473,8 @@ div.smscCheckbox label::selection {
   right: 0;
   bottom: 0;
   background-color: var(--color-base01);
-  -webkit-transition: .2s;
-  transition: .2s;
+  -webkit-transition: transform  .1s;
+  transition: transform .1s;
 
 }
 
@@ -485,8 +486,8 @@ div.smscCheckbox label::selection {
   left: 4px;
   bottom: 4px;
   background-color: var(--color-base02);
-  -webkit-transition: .2s;
-  transition: .2s;
+  -webkit-transition: transform .1s;
+  transition: transform .1s;
 }
 
 input:checked+.slider {
@@ -630,7 +631,7 @@ input:checked+.slider:before {
   /* Override default CSS styles */
   appearance: none;
   height: 15px;
-  border-radius: 5px;
+  border-radius: 10px;
   background: var(--color-base01);
   /* Grey background */
   outline: none;
@@ -640,15 +641,16 @@ input:checked+.slider:before {
   -webkit-transition: .2s;
   /* 0.2 seconds transition on hover */
   transition: opacity .2s;
+  margin: 5px !important;
 }
 
 .sliderblur::-webkit-slider-thumb {
   -webkit-appearance: none;
   /* Override default look */
   appearance: none;
-  width: 25px;
+  width: 15px;
   /* Set a specific slider handle width */
-  height: 25px;
+  height: 15px;
   border-radius: 50%;
   background: var(--color-accent);
   /* Green background */
@@ -657,9 +659,9 @@ input:checked+.slider:before {
 }
 
 .sliderblur::-moz-range-thumb {
-  width: 25px;
+  width: 15px;
   /* Set a specific slider handle width */
-  height: 25px;
+  height: 15px;
   border-radius: 50%;
   background: var(--color-accent);
   /* Green background */
@@ -682,4 +684,15 @@ input:checked+.slider:before {
 }
 .row--course:not(:last-child) .cell__course-name {
   border-bottom: 0px !important
+}
+.smsc-tabs, .smsc-tabslist__item,.smsc-tabslist:before ,.modern-ui .smsc-tabs .smsc-tabslist__item:before{
+  text-shadow: none !important;
+  border-color: var(--color-base02) !important;
+}
+.smsc-container__buttonbar{
+  border-color: var(--color-base02) !important;
+}
+
+option:hover{
+  background-color: var(--color-base01) !important;
 }

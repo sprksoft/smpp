@@ -13,7 +13,7 @@ body {
   background-image: var(--loginpage-image) !important;
   background-position: center !important;
   background-size: cover !important;
-
+  background-attachment: fixed !important;
 }
 
 #leftcontainer,
