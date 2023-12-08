@@ -1,12 +1,12 @@
 # important
 - [x] stupid lines everywhere
-- [ ] stupid hover everywhere
+- [x] stupid hover everywhere
 - [x] when you click on a enquete it looks shit
 - [x] opening a "agenda" module is horrible
 - [ ] my documents is absolutely fucked 
 - [x] normal documents also fucked(in "vakken" for example)
 - [ ] uploading a file
-- [ ] delijn has some issues with special busses but seem unfixable 
+- [x] delijn has some issues with special busses but seem unfixable 
 
 # kinda important
 - [x] portfolio looks shit

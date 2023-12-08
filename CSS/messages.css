@@ -107,7 +107,7 @@
 .menu-item:hover,
 .menu-type:hover,
 .attachment:hover {
-  background-color: var(--color-base03) !important;
+  background-color: var(--color-base02) !important;
   border: 1px solid var(--color-hover-border) !important;
   color: var(--color-accent) !important;
   border-radius: 5px !important;
@@ -163,4 +163,10 @@
 
 img[src="/modules/Messages/themes/default/images/loading_big.gif"] {
   display: none !important;
+}
+.drag-container{
+  border: 2px solid var(--color-accent)!important;
+}
+.smsc-container__title{
+  color: var(--color-accent) !important;
 }
