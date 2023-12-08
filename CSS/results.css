@@ -216,3 +216,11 @@ textarea,
   background-color: var(--color-base00) !important;
 
 }
+.evaluation-graphic--large {
+  border: 8px solid var(--color-base01) !important;
+  box-shadow: none !important;
+}
+.manual_widgettitle {
+  background-color: var(--color-base01) !important;
+  border: 1px solid var(--color-base02) !important
+}
