@@ -23,10 +23,11 @@ body {
   -webkit-backdrop-filter: var(--blur-value-large) !important;
 }
 
-#centercontainer {
-  background-color: #00000000 !important;
+#centercontainer{
+  background-color: #00000020 !important;
   backdrop-filter: var(--blur-value-small) !important;
   -webkit-backdrop-filter: var(--blur-value-small) !important;
+  width: 90% !important;
 }
 
 #homepage__block--contact {

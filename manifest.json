@@ -1,5 +1,5 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "sm++",
   "version": "0.0.1",
   "description": "Enhance your smartschool experience with themes and more",
@@ -55,19 +55,13 @@
       ]
     }
   ],
-  "browser_action": {
-    "default_icon": {
-      "16": "icon16.png",
-      "48": "icon48.png",
-      "128": "icon128.png"
-    },
-    "default_title": "Click here to open menu",
-    "default_popup": "POPUP/popup.html"
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
   },
   "permissions": [
     "webRequest",
-    "webRequestBlocking",
-    "<all_urls>",
     "activeTab",
     "storage"
   ]
