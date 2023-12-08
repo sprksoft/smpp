@@ -9,7 +9,7 @@ const default_settings = {
   },
   profile: "default",
   background: "none",
-  halte: 303980,
+  halte: 302558,
   overwrite_theme: false,
   location: "keerbergen",
   blur: "2",
