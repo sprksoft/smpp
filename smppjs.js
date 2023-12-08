@@ -13,7 +13,8 @@ const default_settings = {
   overwrite_theme: false,
   location: "keerbergen",
   blur: "2",
-  snow: "0"
+  snow: "0",
+  hidenews: false
 };
 
 function unbloat() {
@@ -55,18 +56,28 @@ async function apply() {
   const loc = settingsData.location;
   const blurvalue = settingsData.blur;
   const snow = settingsData.snow;
+  const hidenews = settingsData.hidenews;
   set_theme(profileSelect);
   if (overwrite_theme == true) {
     set_background(background);
   }
   await set_weather_loc(loc);
   let style = document.documentElement.style;
-  style.setProperty('--blur-value-large', 'blur(' + blurvalue * 2 + 'px)');
+  let bigblurvalue = blurvalue * 2;
+  if (blurvalue == 0){
+    bigblurvalue += 2;
+  };
+  style.setProperty('--blur-value-large', 'blur(' + bigblurvalue + 'px)');
   style.setProperty('--blur-value-small', 'blur(' + blurvalue + 'px)');
   if (halte != undefined) {
     fetchData(halte);
   };
   set_snow_level(snow);
+
+  let cc = document.getElementById("centercontainer")
+  if (cc != undefined && hidenews) {
+    cc.innerHTML = ' '
+  }
 }
 
 
@@ -79,6 +90,7 @@ function store() {
   const loc = document.getElementById("location").value;
   const slider = document.getElementById('mySlider').value;
   const snowSlider = document.getElementById('snowSlider').value;
+  const hidenews = document.getElementById("hidenewselement").checked;
   console.log("started storing...")
   settingsData.profile = profileSelect;
   settingsData.background = background;
@@ -87,6 +99,7 @@ function store() {
   settingsData.location = loc;
   settingsData.blur = slider;
   settingsData.snow = parseInt(snowSlider);
+  settingsData.hidenews = hidenews;
   window.localStorage.setItem("settingsdata", JSON.stringify(settingsData));
   apply()
   console.log("settings are stored and applied")
@@ -100,6 +113,7 @@ function load() {
   const loc = document.getElementById("location");
   const blur = document.getElementById('mySlider');
   const snowSlider = document.getElementById('snowSlider');
+  const hidenews = document.getElementById("hidenewselement");
   console.log("started loading settings...")
   if (settingsData == undefined) {
     //TODO: set params to default
@@ -113,6 +127,7 @@ function load() {
   loc.value = settingsData.location
   blur.value = settingsData.blur
   snowSlider.value = settingsData.snow
+  hidenews.checked = settingsData.hidenews
   console.log("loaded all settings")
 }
 popup = document.getElementById("searchMenu");
@@ -163,7 +178,11 @@ if (popup != null) {
 <input type="range" min="0" max="20" value="0" class="sliderblur" id="mySlider">
 <h3 class="popuptitles">Snow:</h3>
 <input type="range" min="0" max="500" value="0" class="sliderblur" id="snowSlider">
-<script src="popup.js"></script>
+<h3 class="popuptitles">Hide News:</h3>
+<label class="switch">
+<input class="popupinput" type="checkbox" id="hidenewselement">
+<span class="slider round"></span>
+</label>
 </body>
 `
     load()
@@ -250,7 +269,7 @@ function set_theme(name) {
       break;
     case 'birb':
       style.setProperty('--color-accent', '#8590aacc');
-      style.setProperty('--color-text', '#626365');
+      style.setProperty('--color-text', '#a8a9ab');
       style.setProperty('--color-base00', '#0c0c13');
       style.setProperty('--color-base01', '#141519');
       style.setProperty('--color-base02', '#1a1b1f');

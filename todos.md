@@ -14,7 +14,7 @@
 - [xavier] border around some headers, ex: "nieuws"
 - [x] subtext in "enquetes" is gray
 - [ ] very dark boxes "alle informatie" in the LVS
-- [ ] results doesnt look that great with % points
+- [x] results doesnt look that great with % points
 - [ ] AWFULL TEXT ANIMATION THINGY IN LOGIN PAGE, LIKE WHYYYYY
 
 # not a concern

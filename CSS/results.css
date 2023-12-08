@@ -96,22 +96,22 @@
 
 .c-blue-combo--100 {
   background-color: var(--color-blue) !important;
-
+  color: var(--color-blue) !important;
 }
 
 .c-green-combo--100 {
   background-color: var(--color-green) !important;
-
+  color: var(--color-green) !important;
 }
 
 .c-orange-combo--100 {
   background-color: var(--color-orange) !important;
-
+  color: var(--color-orange) !important;
 }
 
 .c-red-combo--100 {
   background-color: var(--color-red) !important;
-
+  color: var(--color-red) !important;
 }
 
 .c-blue-combo--200 {
