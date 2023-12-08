@@ -25,7 +25,10 @@ html {
 .splitdetail__header__avatar>img {
   display: none !important;
 }
-
+.smsc-container .smsc-container--left .smsc-container--grey .mydoc__left,
+.smscMain .smscMain--left-tb-main{
+  height: 100%;
+}
 #centercontainer {
   border-left: 4px solid var(--color-base01) !important;
   border-right: 4px solid var(--color-base01) !important;
