@@ -158,7 +158,9 @@
 .smsc-select-bubble,
 .smsc_cm_body,
 .course-session-page__container,
-input[type=search].input.search-input {
+input[type=search].input.search-input,
+.feedback,
+.feedback--silver {
   background-color: var(--color-base01) !important;
   border-color: var(--color-base02) !important;
 }
