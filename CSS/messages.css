@@ -170,3 +170,9 @@ img[src="/modules/Messages/themes/default/images/loading_big.gif"] {
 .smsc-container__title{
   color: var(--color-accent) !important;
 }
+.smsc-table__row:hover,.smsc-table__header{
+  background-color: var(--color-base02) !important;
+}
+.smsc-tabslist{
+  border: 0px !important;
+}
