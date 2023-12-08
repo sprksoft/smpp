@@ -73,7 +73,24 @@
   background: var(--color-accent) !important;
   width: var(--border-size) !important;
 }
-
+.searchInputField,
+#tomain,
+.compose_title,
+.tox-menubar,
+.tox-mbtn__select-label,
+.tox-tbtn__select-label{
+  color: black !important;
+}
+#smscMain{
+  height: 0% !important;
+}
+.smscleftnavcontainer{
+  background-color: var(--color-base01) !important;
+}
+.smsc-column-nav__button:hover{
+  border-color: var(--color-base02) !important ;
+  background-color: var(--color-base02) !important;
+}
 
 .message-search__input,
 .smsc-select.disabled {
