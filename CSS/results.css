@@ -142,7 +142,11 @@
   padding: 10px !important;
 }
 
-.blob-group {
+.blob-group,
+.evaluation-graphic.evaluation-graphic--large.evaluation-graphic--percentage.side-panel__content__score__large-ring.c-olive-combo--100,
+.evaluation-graphic.evaluation-graphic--large.evaluation-graphic--percentage.side-panel__content__score__large-ring.c-yellow-combo--100, 
+.evaluation-graphic.evaluation-graphic--large.evaluation-graphic--percentage.side-panel__content__score__large-ring.c-green-combo--100,
+.evaluation-graphic.evaluation-graphic--large.evaluation-graphic--percentage.side-panel__content__score__large-ring.c-red-combo--100{
   background-color: var(--color-base00) !important;
 }
 
