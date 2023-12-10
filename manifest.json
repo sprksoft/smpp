@@ -64,5 +64,10 @@
     "webRequest",
     "activeTab",
     "storage"
-  ]
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "smpp@sparksoft"
+    }
+  }
 }
