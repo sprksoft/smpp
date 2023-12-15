@@ -3,11 +3,12 @@ async function fetchData(halte) {
   const apiKey = 'ddb68605719d4bb8b6444b6871cefc7a'; // Replace 'YOUR_API_KEY' with your actual API key
 
 
-  const apiUrl = `https://api.delijn.be/DLKernOpenData/api/v1/haltes/0/${halte}/real-time?maxAantalDoorkomsten=5`; // Replace with your API endpoint
+  const apiUrl = `https://api.delijn.be/DLKernOpenData/api/v1/haltes/3/${halte}/real-time?maxAantalDoorkomsten=5`; // Replace with your API endpoint
   if (!document.getElementById('leftcontainer')) {
     console.log("Not on home page, no busses needed")
     return;
   }
+
   try {
     const response = await fetch(apiUrl, {
       headers: {
@@ -24,6 +25,8 @@ async function fetchData(halte) {
     createApplication(data); // Call function to create the application using fetched data
   } catch (error) {
     console.error('Error fetching data:', error);
+    const leftContainer = document.getElementById('leftcontainer');
+    leftContainer.innerHTML = 'Error fetching data. Please try again later.';
   }
 
 }

@@ -1,5 +1,6 @@
 html {
-  --loginpage-image: url("")
+  --loginpage-image: url("");
+  --show-options: none;
 }
 
 .login-app__platform-indicator {
@@ -67,9 +68,11 @@ html {
 a.smscButton[href="/login/sso/init/google"],
 a.smscButton[href="/login/sso/init/office365"],
 a.smscButton[href="/login/sso/init/acm"],
-.login-app__title--sign-in-with,
-.login-app__title--separator {
-  display: none !important;
+.login-app__title--sign-in-with {
+  display: var(--show-options) !important;
+}
+.login-app__title--separator{
+  display: flex !important;
 }
 
 .showLeftNav {
@@ -123,4 +126,8 @@ a.smscButton[href="/login/sso/init/acm"],
 
 .login-app__form {
   color: var(--color-text) !important;
+}
+.white_text_button{
+  color: aliceblue !important;
+  margin: 10px !important;
 }
