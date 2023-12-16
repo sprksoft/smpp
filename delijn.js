@@ -1,9 +1,8 @@
-
-async function fetchData(halte) {
+async function fetchData(halte, entiteit) {
   const apiKey = 'ddb68605719d4bb8b6444b6871cefc7a'; // Replace 'YOUR_API_KEY' with your actual API key
 
 
-  const apiUrl = `https://api.delijn.be/DLKernOpenData/api/v1/haltes/3/${halte}/real-time?maxAantalDoorkomsten=5`; // Replace with your API endpoint
+  const apiUrl = `https://api.delijn.be/DLKernOpenData/api/v1/haltes/${entiteit}/${halte}/real-time?maxAantalDoorkomsten=5`; // Replace with your API endpoint
   if (!document.getElementById('leftcontainer')) {
     console.log("Not on home page, no busses needed")
     return;
@@ -30,6 +29,7 @@ async function fetchData(halte) {
   }
 
 }
+
 function createApplication(data) {
   const leftContainer = document.getElementById('leftcontainer');
   if (!data.halteDoorkomsten[0]){

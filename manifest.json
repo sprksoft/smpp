@@ -42,6 +42,7 @@
       ],
       "js": [
         "scraper.js",
+        "delijndecoder.js",
         "utils.js",
         "themes.js",
         "DMENU/dmenu.js",

@@ -69,14 +69,12 @@ async function apply() {
   };
   style.setProperty('--blur-value-large', 'blur(' + bigblurvalue + 'px)');
   style.setProperty('--blur-value-small', 'blur(' + blurvalue + 'px)');
-haltelenght = halte.length;
-  if (haltelenght == 6) {
-    fetchData(halte);
-  }else{
+  decodehalte(halte)
+  console.log(halte)
+  if (halte == ""){
     document.getElementById("leftcontainer").style.display = "none"
-  };
+  }
   set_snow_level(snow);
-
   let cc = document.getElementById("centercontainer")
   if (cc != undefined && hidenews) {
     cc.innerHTML = ' '
