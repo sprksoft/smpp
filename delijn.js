@@ -32,9 +32,11 @@ async function fetchData(halte, entiteit) {
 
 function createApplication(data) {
   const leftContainer = document.getElementById('leftcontainer');
-  
+
+  const leftContainerbottom = document.createElement('div');
+  leftContainer.appendChild(leftContainerbottom);
   if (!data.halteDoorkomsten[0]){
-    leftContainer.innerHTML = 'There are no busses for this stop right now.';
+    leftContainerbottom.innerHTML = 'There are no busses for this stop right now.';
   }
   let doorkomstlength = data.halteDoorkomsten[0].doorkomsten.length
   const bestemmingen = []
@@ -42,7 +44,7 @@ function createApplication(data) {
   const richting = []
   const dienstregelingTijdstip = []
   const real_timeTijdstip = []
-
+  console.log(data)
 
   //let stringToInt = parseInt("06")
   for (let i = 0; i < doorkomstlength; i++) {
@@ -78,7 +80,7 @@ function createApplication(data) {
   if (leftContainer == null) {
     return
   }
-  leftContainer.innerHTML = " "
+  leftContainerbottom.innerHTML = " "
   for (let i = 0; i < doorkomstlength; i++) {
 
     const date = new Date(dienstregelingTijdstip[i]);
@@ -128,7 +130,7 @@ function createApplication(data) {
         <span class="intime">${timetilldep} Min.
         </span>
         </div></div>`
-      leftContainer.appendChild(div);
+      leftContainerbottom.appendChild(div);
     }
 
     else if (i == 0) {

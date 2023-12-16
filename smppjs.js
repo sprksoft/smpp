@@ -67,12 +67,13 @@ async function apply() {
   if (blurvalue == 0){
     bigblurvalue += 2;
   };
+  decodehalte()
   style.setProperty('--blur-value-large', 'blur(' + bigblurvalue + 'px)');
   style.setProperty('--blur-value-small', 'blur(' + blurvalue + 'px)');
-  decodehalte(halte)
-  console.log(halte)
   if (halte == ""){
     document.getElementById("leftcontainer").style.display = "none"
+  }else{
+    document.getElementById("leftcontainer").style.display = "inline"
   }
   set_snow_level(snow);
   let cc = document.getElementById("centercontainer")
@@ -146,7 +147,7 @@ if (popup != null) {
 </head>
 
 <body>
-<h3 class="popuptitles">Choose color profile:</h3>
+<h3 class="popuptitles">Color profile:</h3>
 
 <select id="profileSelector" >
     <option value="default">Default</option>
@@ -162,16 +163,16 @@ if (popup != null) {
 
 </select>
 
-<h3 class="popuptitles">Choose if you want bus halte(optional):</h3>
+<h3 class="popuptitles">Show Delijn app:</h3>
 <label class="switch">
 <input class="popupinput" type="checkbox" id="halt">
 <span class="slider round"></span>
 </label>
 
-<h3 class="popuptitles">Choose location (weather):</h3>
+<h3 class="popuptitles">Location (weather):</h3>
 <input class="popupinput" id="location" type="text"></input>
 
-<h3 class="popuptitles">Background Image (optional):</h3>
+<h3 class="popuptitles">Custom wallpaper (optional):</h3>
 <div class="textandbutton">
     <input class="popupinput" id="background" type="text"></input>
     <label class="switch">

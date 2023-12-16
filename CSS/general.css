@@ -442,6 +442,11 @@ div.smscCheckbox label::selection {
   width: 90% !important;
   height: 35px !important;
 }
+#haltetext{
+  width: max-content !important;
+  height: 35px !important;
+  margin-top: 0px !important;
+}
 
 .focus-visible {
   outline: 1px solid var(--color-accent) !important;
