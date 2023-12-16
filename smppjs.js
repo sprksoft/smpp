@@ -162,8 +162,12 @@ if (popup != null) {
 
 </select>
 
-<h3 class="popuptitles">Choose bus halte id (optional):</h3>
-<input class="popupinput" id="halt" type="text"></input>
+<h3 class="popuptitles">Choose if you want bus halte(optional):</h3>
+<label class="switch">
+<input class="popupinput" type="checkbox" id="halt">
+<span class="slider round"></span>
+</label>
+
 <h3 class="popuptitles">Choose location (weather):</h3>
 <input class="popupinput" id="location" type="text"></input>
 
