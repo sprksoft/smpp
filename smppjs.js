@@ -86,7 +86,7 @@ function store() {
   let settingsData = {}
   const profileSelect = document.getElementById("profileSelector").value;
   const background = document.getElementById("background").value;
-  const halte = document.getElementById("halt").value;
+  const halte = document.getElementById("halt").checked;
   const overwrite_theme = document.getElementById("button").checked;
   const loc = document.getElementById("location").value;
   const slider = document.getElementById('mySlider').value;
@@ -123,7 +123,7 @@ function load() {
   }
   profileSelect.value = settingsData.profile
   background.value = settingsData.background
-  halte.value = settingsData.halte
+  halte.checked = settingsData.halte
   overwrite_theme.checked = settingsData.overwrite_theme
   loc.value = settingsData.location
   blur.value = settingsData.blur

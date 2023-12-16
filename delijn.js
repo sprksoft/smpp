@@ -32,6 +32,7 @@ async function fetchData(halte, entiteit) {
 
 function createApplication(data) {
   const leftContainer = document.getElementById('leftcontainer');
+  
   if (!data.halteDoorkomsten[0]){
     leftContainer.innerHTML = 'There are no busses for this stop right now.';
   }
