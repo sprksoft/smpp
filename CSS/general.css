@@ -446,6 +446,7 @@ div.smscCheckbox label::selection {
   width: max-content !important;
   height: 35px !important;
   margin-top: 0px !important;
+  font-size: 16px !important;
 }
 
 .focus-visible {

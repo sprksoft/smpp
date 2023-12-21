@@ -1,8 +1,9 @@
-async function fetchData(halte, entiteit) {
+async function fetchData(entiteit, halte) {
   const apiKey = 'ddb68605719d4bb8b6444b6871cefc7a'; // Replace 'YOUR_API_KEY' with your actual API key
 
 
   const apiUrl = `https://api.delijn.be/DLKernOpenData/api/v1/haltes/${entiteit}/${halte}/real-time?maxAantalDoorkomsten=5`; // Replace with your API endpoint
+  console.log(apiUrl)
   if (!document.getElementById('leftcontainer')) {
     console.log("Not on home page, no busses needed")
     return;
@@ -24,17 +25,16 @@ async function fetchData(halte, entiteit) {
     createApplication(data); // Call function to create the application using fetched data
   } catch (error) {
     console.error('Error fetching data:', error);
-    const leftContainer = document.getElementById('leftcontainer');
-    leftContainer.innerHTML = 'Error fetching data. Please try again later.';
+    const leftContainerbottom = document.getElementById('leftContainerbottom');
+    leftContainerbottom.innerHTML = 'Error fetching data. Please try again later.';
   }
 
 }
 
 function createApplication(data) {
-  const leftContainer = document.getElementById('leftcontainer');
-
-  const leftContainerbottom = document.createElement('div');
-  leftContainer.appendChild(leftContainerbottom);
+  const leftContainerbottom = document.getElementById('leftContainerbottom');
+  leftContainerbottom.innerHTML = " "
+  console.log("bottom: ",leftContainerbottom)
   if (!data.halteDoorkomsten[0]){
     leftContainerbottom.innerHTML = 'There are no busses for this stop right now.';
   }
@@ -80,7 +80,7 @@ function createApplication(data) {
   if (leftContainer == null) {
     return
   }
-  leftContainerbottom.innerHTML = " "
+
   for (let i = 0; i < doorkomstlength; i++) {
 
     const date = new Date(dienstregelingTijdstip[i]);
@@ -146,7 +146,7 @@ function createApplication(data) {
       div.querySelector(".lijncardstitle").innerText = lijnnummers[i];
       div.querySelector(".lijncardsdestin").innerText = bestemmingen[i];
       div.querySelector(".time").innerText = timeDifference;
-      leftContainer.appendChild(div);
+      leftContainerbottom.appendChild(div);
     } else {
       const timeDifference = "No data"
       minute = minute.toString().padStart(2, '0');
@@ -160,13 +160,13 @@ function createApplication(data) {
       div.querySelector(".lijncardstitle").innerText = lijnnummers[i];
       div.querySelector(".lijncardsdestin").innerText = bestemmingen[i];
       div.querySelector(".time").innerText = timeDifference;
-      leftContainer.appendChild(div);
+      leftContainerbottom.appendChild(div);
     }
 
   }
   lastdiv = document.createElement("div");
   lastdiv.innerHTML = `<div class=lastdiv><a href="https://www.delijn.be/nl/contact/attest-aanvraag/" target="_blank">Late?</a></div>`
-  leftContainer.appendChild(lastdiv);
+  leftContainerbottom.appendChild(lastdiv);
 }
 
 

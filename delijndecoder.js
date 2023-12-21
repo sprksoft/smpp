@@ -30,9 +30,7 @@ async function createOption(givendata,i){
     optionData = await fetchOptionData(givendata.entiteitnummer, givendata.haltenummer)
     console.log(optionData)
     console.log(givendata)
-    const leftContainer = document.getElementById('leftcontainer');
-    let leftContainerbottom = document.createElement('div')
-    leftContainer.appendChild(leftContainerbottom);
+    const leftContainerbottom = document.getElementById('leftContainerbottom');
     div = document.createElement("div");
     div.innerHTML = `<div class=lijncards id="lijncard${i}">
       <div class="top">
@@ -47,39 +45,66 @@ async function createOption(givendata,i){
       <span class="intime">
       </span>
       </div></div>`
-    leftContainerbottom.innerHTML = `<div id="leftContainerbottom"></div>`
     leftContainerbottom.appendChild(div);
 
 }
 async function showchoices(returned_data){
 
     let mogelijke_haltes = returned_data.haltes
-    document.getElementById('leftcontainer')
+    document.getElementById('leftContainerbottom').innerHTML = ""
     for (let i = 0; i < mogelijke_haltes.length; i++){
         await createOption(returned_data.haltes[i],i)
     }
+    getchoice(returned_data)
+}
+function chosen(choice, data){
+  console.log(choice)
+  console.log(data.haltes[choice])
+  let lijnData = {}
+  lijnData.entiteitnummer = data.haltes[choice].entiteitnummer
+  lijnData.haltenummer = data.haltes[choice].haltenummer
+  window.localStorage.setItem("lijnData", JSON.stringify(lijnData));
+  fetchData(data.haltes[choice].entiteitnummer,data.haltes[choice].haltenummer)
+}
+function getchoice(data){ 
+  let option0 = document.getElementById("lijncard0")
+  let option1 = document.getElementById("lijncard1")
+  let option2 = document.getElementById("lijncard2")
+  option0.addEventListener("click", function(){
+    chosen(0,data)})
+  option1.addEventListener("click", function(){
+    chosen(1,data)})
+  option2.addEventListener("click", function(){
+    chosen(2,data)})
 }
 
-function getchoice(option){ 
-    
-}
 function decodehalte(){
+    console.log("started decoding halte")
     leftContainer = document.getElementById("leftcontainer")
     leftContainer.innerHTML = " "
-    leftContainer.innerHTML = `<h2 class="delijn_app_title">Zoek naar halte:</h2><div class="textandbutton">
+    leftContainer.innerHTML = `<div id="top_lijn_app"><h2 class="delijn_app_title">Zoek naar halte:</h2><div class="textandbutton">
     <input class="popupinput" id="haltetext" type="text"></input><button type="submit" class="searchbutton"id="searchbutton">
     <svg width="20" height="20" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <path d="M16.0073 9.00364C16.0073 12.8716 12.8716 16.0073 9.00364 16.0073C5.13564 16.0073 2 12.8716 2 9.00364C2 
     5.13564 5.13564 2 9.00364 2C12.8716 2 16.0073 5.13564 16.0073 9.00364Z" stroke="#fff" stroke-width="4">
     </path><rect x="16.594" y="12.8062" width="11.8729" height="3.95764" rx="1.97882" transform="rotate(45 16.594 12.8062)" fill="#fff">
-    </rect></svg></button></div>
+    </rect></svg></button></div></div>
     `
     searchbutton = document.getElementById('searchbutton')
+    const leftContainerbottom = document.createElement("div")
+    leftContainerbottom.innerHTML=`<div id="leftContainerbottom"></div>`
+    leftContainer.appendChild(leftContainerbottom)
     searchbutton.addEventListener("click", function(){
-        
         fetchHaltesData(document.getElementById("haltetext").value)
+        if (document.getElementById("lijncard0")){
+          decodehalte()
+        }
     })
-    
+    let lijnData = JSON.parse(window.localStorage.getItem("lijnData"));
+    if (lijnData != undefined){
+
+      fetchData(lijnData.entiteitnummer, lijnData.haltenummer)
+    }
     
 }
 
