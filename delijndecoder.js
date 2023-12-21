@@ -73,14 +73,20 @@ function chosen(choice, data){
 }
 function getchoice(data){ 
   let option0 = document.getElementById("lijncard0")
-  let option1 = document.getElementById("lijncard1")
-  let option2 = document.getElementById("lijncard2")
+  if (document.getElementById("lijncard1")){
+    let option1 = document.getElementById("lijncard1")
+    option1.addEventListener("click", function(){
+      chosen(1,data)})
+  }
+  if (document.getElementById("lijncard2")){
+    let option2 = document.getElementById("lijncard2")
+    option2.addEventListener("click", function(){
+      chosen(2,data)})
+  }
   option0.addEventListener("click", function(){
     chosen(0,data)})
-  option1.addEventListener("click", function(){
-    chosen(1,data)})
-  option2.addEventListener("click", function(){
-    chosen(2,data)})
+
+
 }
 
 function decodehalte(){

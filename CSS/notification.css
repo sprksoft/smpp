@@ -51,3 +51,19 @@
   border: var(--border-size) solid var(--color-hover-border) !important;
   text-decoration: none !important;
 }
+a.js-toast-btn.toast__btn.smscButton.blue{
+  border: 2px solid var(--color-base02) !important;
+  border-radius: 50px !important;
+  background: var(--color-base01) !important;
+  padding: 2px 10px 2px 10px !important;
+  height: auto !important;
+  line-height: initial !important;
+  color: var(--color-accent) !important;
+  font-weight: bold !important;
+  text-decoration-color: var(--color-accent) !important;
+  text-decoration-thickness: 2px !important;
+  width: auto !important;
+}
+li.notifs-toaster__toast.modern-ui{
+  background-color: var(--color-base01) !important;
+}

@@ -131,3 +131,6 @@ a.smscButton[href="/login/sso/init/acm"],
   color: aliceblue !important;
   margin: 10px !important;
 }
+.login-app__infoblock--black{
+  color: aliceblue !important;
+}
