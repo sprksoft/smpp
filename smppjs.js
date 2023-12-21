@@ -202,7 +202,6 @@ function set_background(background) {
   style.setProperty('--loginpage-image', "url(" + background + ")");
 }
 
-
 const theme_names = ["default", "ldev", "birb", "bjarn", "tan", "winter", "fall", "matcha", "vax"];
 function set_theme(name) {
   let style = document.documentElement.style;
