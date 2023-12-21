@@ -78,7 +78,9 @@
 .compose_title,
 .tox-menubar,
 .tox-mbtn__select-label,
-.tox-tbtn__select-label{
+.tox-tbtn__select-label,
+.searchDivHighlight,
+.row_info_1{
   color: black !important;
 }
 #smscMain{
