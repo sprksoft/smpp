@@ -193,3 +193,6 @@ img[src="/modules/Messages/themes/default/images/loading_big.gif"] {
 .smsc-tabslist{
   border: 0px !important;
 }
+#subjectInput,.subjectInput{
+  color: black !important;
+}

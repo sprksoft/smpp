@@ -32,6 +32,11 @@ async function createOption(givendata,i){
     console.log(givendata)
     const leftContainerbottom = document.getElementById('leftContainerbottom');
     div = document.createElement("div");
+    if (optionData.lijnrichtingen[0]){
+      omschrijving = optionData.lijnrichtingen[0].omschrijving
+    }else{
+      omschrijving = "No info"
+    }
     div.innerHTML = `<div class=lijncards id="lijncard${i}">
       <div class="top">
 
@@ -40,7 +45,7 @@ async function createOption(givendata,i){
       </div>
 
       <div class="times">
-      <span class="time">
+      <span class="time">${omschrijving}
       </span>
       <span class="intime">
       </span>
