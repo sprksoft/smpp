@@ -63,7 +63,8 @@
   },
   "browser_specific_settings": {
     "gecko": {
-      "id": "smpp@sparksoft"
+      "id": "smpp@sparksoft",
+      "update_url": "https://ldev.eu.org/firefox/updates.json"
     }
   }
 
