@@ -42,7 +42,9 @@
   width: auto !important;
   margin: 3px !important;
 }
-
+.div{
+  color: var(--color-text) !important;
+}
 
 
 .notification:hover,

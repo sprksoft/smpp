@@ -153,7 +153,7 @@ if (popup != null) {
     <option value="default">Default</option>
     <option value="ldev">ldev</option>
     <option value="birb">Birb</option>
-    <option value="stalker">stalker</option>
+    <option value="bjarn">Bjarne</option>
     <option value="tan">Tan</option>
     <option value="fall">Fall</option>
     <option value="winter">Winter</option>
@@ -202,8 +202,7 @@ function set_background(background) {
   style.setProperty('--loginpage-image', "url(" + background + ")");
 }
 
-
-const theme_names = ["default", "ldev", "birb", "stalker", "tan", "winter", "fall", "matcha", "vax"];
+const theme_names = ["default", "ldev", "birb", "bjarn", "tan", "winter", "fall", "matcha", "vax"];
 function set_theme(name) {
   let style = document.documentElement.style;
   style.setProperty('--color-accent', '#8f8f95');
@@ -237,14 +236,14 @@ function set_theme(name) {
       style.setProperty('--color-base03', '#3f0a74');
       style.setProperty('--loginpage-image', "url(https://www.hdwallpapers.in/download/macos_monterey_shapes_hd_macos-2560x1440.jpg)");
       break;
-    case 'stalker':
-      style.setProperty('--color-accent', "#d1161f");
-      style.setProperty('--color-text', "#f87065");
+    case 'bjarn':
+      style.setProperty('--color-accent', "#95a4ee");
+      style.setProperty('--color-text', "#d2e4e9");
       style.setProperty('--color-base00', "#191817");
-      style.setProperty('--color-base01', "#481b18");
-      style.setProperty('--color-base02', "#940a12");
-      style.setProperty('--color-base03', "#d1161f");
-      style.setProperty('--loginpage-image', "url(https://cdn.wallpapersafari.com/36/24/tdUr7n.jpg)");
+      style.setProperty('--color-base01', "#232323");
+      style.setProperty('--color-base02', "#1e1e1e");
+      style.setProperty('--color-base03', "#4a3449");
+      style.setProperty('--loginpage-image', "url(https://th.bing.com/th/id/R.4a459b99bdc535e2fdbb4d38bf96e0fe?rik=%2fA2q0w%2fC%2fBQXcQ&pid=ImgRaw&r=0)");
       break;
     case 'tan':
       style.setProperty('--color-accent', '#F0F2F0');

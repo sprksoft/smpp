@@ -1,9 +1,9 @@
 {
   "manifest_version": 3,
   "name": "Smartschool++",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Enhance your smartschool experience with themes and more",
-  "homepage_url": "https://github.com/sprksoft/smpp",
+  "homepage_url": "https://chromewebstore.google.com/detail/smartschool++/bdhficnphioomdjhdfbhdepjgggekodf",
   "content_scripts": [
     {
       "matches": [
@@ -63,7 +63,8 @@
   },
   "browser_specific_settings": {
     "gecko": {
-      "id": "smpp@sparksoft"
+      "id": "smpp@sprksoft",
+      "update_url": "https://ldev.eu.org/firefox/updates.json"
     }
   }
 
