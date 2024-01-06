@@ -18,21 +18,25 @@ html {
   --color-hover-border: var(--color-accent);
 
 }
+
 /* hier is beter smartschool code*/
 #modal-content,
-#content-container{
+#content-container {
   background-color: var(--color-base00) !important;
 }
+
 .js-btn-profile>img,
 .header__avatar,
 .topnav__menuitem>img,
 .splitdetail__header__avatar>img {
   display: none !important;
 }
+
 .smsc-container .smsc-container--left .smsc-container--grey .mydoc__left,
-.smscMain .smscMain--left-tb-main{
+.smscMain .smscMain--left-tb-main {
   height: 100%;
 }
+
 #centercontainer {
   border-left: 4px solid var(--color-base01) !important;
   border-right: 4px solid var(--color-base01) !important;
@@ -40,9 +44,10 @@ html {
 
 .toolbar,
 div.stdReplyWrapper,
-button.js-btn-search{
-  color:var(--color-text) !important;
+button.js-btn-search {
+  color: var(--color-text) !important;
 }
+
 .toolbar {
   background-color: var(--color-base00) !important;
 }
@@ -56,9 +61,10 @@ button.js-btn-search{
 .fileinfogrey,
 .fileinfowhite,
 .fileuploadblock,
-#formval_omschrijving{
+#formval_omschrijving {
   background-color: var(--color-base01) !important;
 }
+
 #stdReplyName,
 #stdReplyTxt,
 #editsubboxinput {
@@ -71,20 +77,20 @@ button.js-btn-search{
 .checkbox--select-all,
 .round,
 .uploadtitle,
-.dTreeNode  {
+.dTreeNode {
   color: var(--color-text) !important;
 }
 
 
 .homepage__block__content {
-background-color: #0405072c !important;
-padding: 10px !important;
-border: 1px solid var(--color-base03) !important;
-color: var(--color-text) !important;
-padding: 5px !important;
-border-radius: 10px !important;
-backdrop-filter: var(--blur-value-large) !important;
--webkit-backdrop-filter: var(--blur-value-large) !important;
+  background-color: #0405072c !important;
+  padding: 10px !important;
+  border: 1px solid var(--color-base03) !important;
+  color: var(--color-text) !important;
+  padding: 5px !important;
+  border-radius: 10px !important;
+  backdrop-filter: var(--blur-value-large) !important;
+  -webkit-backdrop-filter: var(--blur-value-large) !important;
 }
 
 body.modern-ui .homepage__block:not(:last-child) {
@@ -442,7 +448,8 @@ div.smscCheckbox label::selection {
   width: 90% !important;
   height: 35px !important;
 }
-#haltetext{
+
+#haltetext {
   width: max-content !important;
   height: 35px !important;
   margin-top: 0px !important;
@@ -479,7 +486,7 @@ div.smscCheckbox label::selection {
   right: 0;
   bottom: 0;
   background-color: var(--color-base01);
-  -webkit-transition: transform  .1s;
+  -webkit-transition: transform .1s;
   transition: transform .1s;
 
 }
@@ -674,31 +681,48 @@ input:checked+.slider:before {
   cursor: pointer;
   /* Cursor on hover */
 }
+
 #modal-background {
   background-color: transparent !important;
 
 }
+
 #modal-content {
   background-color: var(--color-base01) !important;
   box-shadow: none !important;
   -webkit-box-shadow: none !important;
   border: 2px solid var(--color-base03) !important;
 }
+
 .table-page .table-page__container__wrapper__table .cell--fixed {
   border: 2px solid var(--color-base03) !important;
   border-radius: 10px !important;
 }
+
 .row--course:not(:last-child) .cell__course-name {
   border-bottom: 0px !important
 }
-.smsc-tabs, .smsc-tabslist__item,.smsc-tabslist:before ,.modern-ui .smsc-tabs .smsc-tabslist__item:before{
+
+.smsc-tabs,
+.smsc-tabslist__item,
+.smsc-tabslist:before,
+.modern-ui .smsc-tabs .smsc-tabslist__item:before {
   text-shadow: none !important;
   border-color: var(--color-base02) !important;
 }
-.smsc-container__buttonbar{
+
+.smsc-container__buttonbar {
   border-color: var(--color-base02) !important;
 }
 
-option:hover{
+option:hover {
   background-color: var(--color-base01) !important;
+}
+
+.goal-evaluations-details__row__first-container__evaluation-details__title,
+.goal-evaluations-details__row__first-container__evaluation-details__text,.goal-evaluations-details__row__description__text,
+.goal-evaluations-details__row__first-container__evaluation-details__info,.form__value--resolvedStatus,.label__resolvedStatus,
+.js-form-label,
+.form__value--resolvedStatus,label.form__label.js-form-label.label__resolvedStatus.form__label--no-margin-top {
+  color: white !important;
 }

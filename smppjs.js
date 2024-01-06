@@ -70,16 +70,37 @@ async function apply() {
   decodehalte()
   style.setProperty('--blur-value-large', 'blur(' + bigblurvalue + 'px)');
   style.setProperty('--blur-value-small', 'blur(' + blurvalue + 'px)');
-  if (halte == ""){
-    document.getElementById("leftcontainer").style.display = "none"
-  }else{
-    document.getElementById("leftcontainer").style.display = "inline"
-  }
+
   set_snow_level(snow);
   let cc = document.getElementById("centercontainer")
   if (cc != undefined && hidenews) {
     cc.innerHTML = ' '
   }
+  // Find all labels with class 'checkbox'
+const checkboxLabels = document.querySelectorAll('label.checkbox');
+
+// Loop through each label
+checkboxLabels.forEach(label => {
+  // Find the input[type=checkbox] inside each label
+  const checkbox = label.querySelector('input[type="checkbox"]');
+
+  // Check if the checkbox is checked
+  if (checkbox.checked) {
+label.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="3.7042mm" height="3.7042mm" version="1.1" viewBox="0 0 3.7042 3.7042">
+<g transform="translate(19.843 -.45244)">
+ <rect x="-19.219" y="1.0761" width="2.4569" height="2.4569" ry=".24587" fill="transparent" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2473" style="paint-order:stroke fill markers"/>
+</g>
+</svg>`
+  } else {
+    label.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="3.7042mm" height="3.7042mm" version="1.1" viewBox="0 0 3.7042 3.7042">
+    <g transform="translate(19.843 -.45244)" fill="transparent" stroke="#000" stroke-linecap="round" stroke-linejoin="round">
+     <rect x="-19.219" y="1.0761" width="2.4569" height="2.4569" ry=".24587" stroke-width="1.2473" style="paint-order:stroke fill markers"/>
+     <path d="m-17.182 1.6333-0.80865 1.5198-0.85142-0.84857" stroke-width=".582" style="paint-order:normal"/>
+    </g>
+   </svg>`
+  }
+});
+
 }
 
 
