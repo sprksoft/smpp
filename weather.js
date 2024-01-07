@@ -111,11 +111,7 @@ async function updateWeatherDiv(weatherData) {
   console.log('Weather information updated.');
 }
 
-async function main() {
-  if (!document.getElementById('rightcontainer')) {
-    //Not on home page
-    return;
-  }
+async function loadOldData() {
   console.log("Loading old data from localstorage")
   //FIXME: when undefined is in local storage this like errors
   let weatherData = JSON.parse(window.localStorage.getItem("weatherdata"));
@@ -124,17 +120,37 @@ async function main() {
 
 
 async function set_weather_loc(loc) {
+  const currentdate = new Date();
+  console.log(currentdate)
+
   if (!document.getElementById('rightcontainer')) {
     console.log("Not on home page, no weather needed")
     return;
   }
   console.log('Fetching weather information for location: ' + loc);
+  if (window.localStorage.getItem("lastupdate")==undefined){
+    window.localStorage.setItem("lastupdate", currentdate)
+    window.localStorage.setItem("lastlocation", loc)
+  }
+
+let lastupdate_date = new Date(window.localStorage.getItem("lastupdate"));
+console.log(lastupdate_date)
+let difference = Math.abs(lastupdate_date - currentdate) / 1000; // Difference in seconds
+console.log("difference: ",difference)
+if (difference>600 || loc != (window.localStorage.getItem("lastlocation")) || !(window.localStorage.getItem("weatherdata"))){
+  window.localStorage.setItem("lastupdate", currentdate)
+  window.localStorage.setItem("lastlocation", loc)
   let weatherData = await getWeatherByCity(loc);
   if (weatherData == undefined) {
     return;
   }
+
   console.log('Weather data:', weatherData);
   updateWeatherDiv(weatherData);
   console.log("storing new weather data")
   window.localStorage.setItem("weatherdata", JSON.stringify(weatherData))
+}else(
+  loadOldData()
+)
+
 }

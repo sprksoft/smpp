@@ -21,7 +21,7 @@ function config_menu() {
 
 document.addEventListener("keyup", function (e) {
   if (e.key == ':') {
-    let cmd_list = Object.keys(vakken).concat(Object.keys(goto_items).concat(["classroom", "onshape", "config", "set theme v2", "lock dmenu", "unbloat"]));
+    let cmd_list = Object.keys(vakken).concat(Object.keys(goto_items).concat(["classroom", "onshape", "config", "set theme v2", "lock dmenu", "unbloat","clearsettings"]));
     dmenu(cmd_list, function (cmd, shift) {
       switch (cmd) {
         case "lock dmenu":
@@ -44,6 +44,9 @@ document.addEventListener("keyup", function (e) {
           return;
         case "onshape":
           open_url("https://onshape.com", shift);
+          return;
+        case "clearsettings":
+          clearsettings()
           return;
         default:
           break;

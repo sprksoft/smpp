@@ -170,7 +170,6 @@ function init_dmenu() {
       return;
     }
 
-    console.log(e);
 
     let command = e.target.value;
     if (e.key == "Enter") {

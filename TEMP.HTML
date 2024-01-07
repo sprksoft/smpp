@@ -1,10 +1,14 @@
-<ul id="notificationToaster" class="notifs-toaster" style="top: 48px;"><li class="notifs-toaster__toast modern-ui">
-    <div class="js-toast-content toast__content smsc-svg--24 module-messages--24"><span class="toast__title">Bjarne Bond</span><span class="toast__info">test</span><a class="js-toast-btn toast__btn smscButton blue" target="_blank" href="/?module=Messages&amp;msgID=1171832">Ga naar</a></div>
-    <button class="js-toast-close toast__close">
-      Sluiten
-      <svg viewBox="0 0 24 24" class="close-icon">
-        <path d="M7.5 7.5 L17.5 17.5" fill="none"></path>
-        <path d="M7.5 17.5 L17.5 7.5" fill="none"></path>
-      </svg>
-    </button>
-  </li></ul>
+if (checkbox.checked) {
+  label.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="3.7042mm" height="3.7042mm" version="1.1" viewBox="0 0 3.7042 3.7042">
+  <g transform="translate(19.843 -.45244)">
+   <rect x="-19.219" y="1.0761" width="2.4569" height="2.4569" ry=".24587" fill="transparent" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2473" style="paint-order:stroke fill markers"/>
+  </g>
+  </svg>`
+    } else {
+      label.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="3.7042mm" height="3.7042mm" version="1.1" viewBox="0 0 3.7042 3.7042">
+      <g transform="translate(19.843 -.45244)" fill="transparent" stroke="#000" stroke-linecap="round" stroke-linejoin="round">
+       <rect x="-19.219" y="1.0761" width="2.4569" height="2.4569" ry=".24587" stroke-width="1.2473" style="paint-order:stroke fill markers"/>
+       <path d="m-17.182 1.6333-0.80865 1.5198-0.85142-0.84857" stroke-width=".582" style="paint-order:normal"/>
+      </g>
+     </svg>`
+    }

@@ -41,7 +41,10 @@ get_data_bg("vakken", ".course-list > li > a", function (el, data) {
 }, function (data) {
   vakken = data;
 });
-
+function clearsettings(){
+  localStorage.clear();
+  console.log("cleared settings!")
+}
 async function apply() {
   let settingsData = JSON.parse(window.localStorage.getItem("settingsdata"))
   if (settingsData == null) {
@@ -69,8 +72,12 @@ async function apply() {
     bigblurvalue += 2;
   };
   const rightContainer = document.getElementById('rightcontainer');
-
-  if (rightContainer) {
+  if (!halte){
+    document.getElementById("leftcontainer").style.display = "none"
+  }else{
+    document.getElementById("leftcontainer").style.display = "inline"
+  }
+  if (rightContainer && halte) {
     decodehalte()
   }else{
     console.log("Not on home page, no Lijn needed")
@@ -85,33 +92,10 @@ async function apply() {
     cc.innerHTML = ' '
   }
   // Find all labels with class 'checkbox'
-const checkboxLabels = document.querySelectorAll('label.checkbox');
-let foundcheckboxes = 0
-// Loop through each label
-checkboxLabels.forEach(label => {
-  // Find the input[type=checkbox] inside each label
-  const checkbox = label.querySelector('input[type="checkbox"]');
-  console.log('found checkbox')
-  foundcheckboxes =+ 1
-  // Check if the checkbox is checked
-  if (checkbox.checked) {
-label.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="3.7042mm" height="3.7042mm" version="1.1" viewBox="0 0 3.7042 3.7042">
-<g transform="translate(19.843 -.45244)">
- <rect x="-19.219" y="1.0761" width="2.4569" height="2.4569" ry=".24587" fill="transparent" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2473" style="paint-order:stroke fill markers"/>
-</g>
-</svg>`
-  } else {
-    label.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="3.7042mm" height="3.7042mm" version="1.1" viewBox="0 0 3.7042 3.7042">
-    <g transform="translate(19.843 -.45244)" fill="transparent" stroke="#000" stroke-linecap="round" stroke-linejoin="round">
-     <rect x="-19.219" y="1.0761" width="2.4569" height="2.4569" ry=".24587" stroke-width="1.2473" style="paint-order:stroke fill markers"/>
-     <path d="m-17.182 1.6333-0.80865 1.5198-0.85142-0.84857" stroke-width=".582" style="paint-order:normal"/>
-    </g>
-   </svg>`
-  }
-});
-if (foundcheckboxes==0){
-  console.log("no checkboxes found")
-}
+  const checkedCheckboxes = document.querySelectorAll('label.checkbox input[type="checkbox"]:checked');
+
+console.log("checkboxlabels:",checkedCheckboxes)
+
 }
 
 
@@ -195,7 +179,7 @@ if (popup != null) {
 
 </select>
 
-<h3 class="popuptitles">Show Delijn app:</h3>
+<h3 class="popuptitles">Show DeLijn app:</h3>
 <label class="switch">
 <input class="popupinput" type="checkbox" id="halt">
 <span class="slider round"></span>

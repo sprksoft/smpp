@@ -119,7 +119,7 @@ function decodehalte(){
   
         fetchData(lijnData.entiteitnummer, lijnData.haltenummer)
       }
-      if (lijnData == undefined){
+      else{
         leftContainerbottom.innerHTML=`<div id="leftContainerbottom">Zoek naar een halte aub.</div>`
       }
     }
