@@ -41,3 +41,6 @@ body {
 .toast__content {
   background-color: var(--color-base01) !important;
 }
+.modern-ui .float-label__input+label>span {
+  top: -67px !important;
+}
