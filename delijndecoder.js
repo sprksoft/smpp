@@ -91,6 +91,7 @@ function getchoice(data){
 
 function decodehalte(){
     console.log("started decoding halte")
+
     leftContainer = document.getElementById("leftcontainer")
     if (leftContainer){
       
@@ -105,7 +106,7 @@ function decodehalte(){
       `
       searchbutton = document.getElementById('searchbutton')
       const leftContainerbottom = document.createElement("div")
-      leftContainerbottom.innerHTML=`<div id="leftContainerbottom"></div>`
+      leftContainerbottom.innerHTML=`<div id="leftContainerbottom">Loading...</div>`
       leftContainer.appendChild(leftContainerbottom)
       searchbutton.addEventListener("click", function(){
           fetchHaltesData(document.getElementById("haltetext").value)
@@ -118,10 +119,8 @@ function decodehalte(){
   
         fetchData(lijnData.entiteitnummer, lijnData.haltenummer)
       }
-      if (lijnData == ""){
-        document.getElementById("leftcontainer").style.display = "none"
-      }else{
-        document.getElementById("leftcontainer").style.display = "inline"
+      if (lijnData == undefined){
+        leftContainerbottom.innerHTML=`<div id="leftContainerbottom">Zoek naar een halte aub.</div>`
       }
     }
 

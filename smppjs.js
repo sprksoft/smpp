@@ -62,12 +62,20 @@ async function apply() {
     set_background(background);
   }
   await set_weather_loc(loc);
+
   let style = document.documentElement.style;
   let bigblurvalue = blurvalue * 2;
   if (blurvalue == 0){
     bigblurvalue += 2;
   };
-  decodehalte()
+  const rightContainer = document.getElementById('rightcontainer');
+
+  if (rightContainer) {
+    decodehalte()
+  }else{
+    console.log("Not on home page, no Lijn needed")
+  }
+
   style.setProperty('--blur-value-large', 'blur(' + bigblurvalue + 'px)');
   style.setProperty('--blur-value-small', 'blur(' + blurvalue + 'px)');
 
@@ -78,12 +86,13 @@ async function apply() {
   }
   // Find all labels with class 'checkbox'
 const checkboxLabels = document.querySelectorAll('label.checkbox');
-
+let foundcheckboxes = 0
 // Loop through each label
 checkboxLabels.forEach(label => {
   // Find the input[type=checkbox] inside each label
   const checkbox = label.querySelector('input[type="checkbox"]');
-
+  console.log('found checkbox')
+  foundcheckboxes =+ 1
   // Check if the checkbox is checked
   if (checkbox.checked) {
 label.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="3.7042mm" height="3.7042mm" version="1.1" viewBox="0 0 3.7042 3.7042">
@@ -100,7 +109,9 @@ label.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="3.7042mm" heig
    </svg>`
   }
 });
-
+if (foundcheckboxes==0){
+  console.log("no checkboxes found")
+}
 }
 
 
