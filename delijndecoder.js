@@ -118,7 +118,7 @@ function decodehalte(){
   
         fetchData(lijnData.entiteitnummer, lijnData.haltenummer)
       }
-      if (halte == ""){
+      if (lijnData == ""){
         document.getElementById("leftcontainer").style.display = "none"
       }else{
         document.getElementById("leftcontainer").style.display = "inline"
