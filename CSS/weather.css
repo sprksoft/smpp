@@ -58,3 +58,7 @@
 .weather-humidity {
   margin-top: 5px !important;
 }
+.weather-lastupdate{
+  margin-bottom: 0px !important;
+  font-weight: bold !important;
+}

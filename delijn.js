@@ -26,7 +26,10 @@ async function fetchData(entiteit, halte) {
   } catch (error) {
     console.error('Error fetching data:', error);
     const leftContainerbottom = document.getElementById('leftContainerbottom');
-    leftContainerbottom.innerHTML = 'Error fetching data. Please try again later.';
+    if (leftContainerbottom.innerHTML != "There are no busses for this stop now"){
+      leftContainerbottom.innerHTML = 'Could not fetch data, please try again later...';
+    }
+
   }
 
 }
@@ -36,7 +39,8 @@ function createApplication(data) {
   leftContainerbottom.innerHTML = " "
   console.log("bottom: ",leftContainerbottom)
   if (!data.halteDoorkomsten[0]){
-    leftContainerbottom.innerHTML = 'There are no busses for this stop right now.';
+    leftContainerbottom.innerHTML = 'There are no busses for this stop now';
+    console.log("eys")
   }
   let doorkomstlength = data.halteDoorkomsten[0].doorkomsten.length
   const bestemmingen = []

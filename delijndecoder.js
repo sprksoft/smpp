@@ -114,6 +114,16 @@ function decodehalte(){
             decodehalte()
           }
       })
+      var input = document.getElementById("haltetext");
+
+input.addEventListener("keyup", function(event) {
+  if (event.key === "Enter") {
+    fetchHaltesData(document.getElementById("haltetext").value)
+    if (document.getElementById("lijncard0")){
+      decodehalte()
+    }
+  }
+});
       let lijnData = JSON.parse(window.localStorage.getItem("lijnData"));
       if (lijnData != undefined){
   

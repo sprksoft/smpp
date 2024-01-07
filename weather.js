@@ -35,11 +35,15 @@ async function updateWeatherDiv(weatherData) {
   const mainWeather = weather[0].main;
   windSpeedkmh = Math.round(windSpeed * 3.6); // Convert to km/h
 
-
+  let lastupdate_date = new Date(window.localStorage.getItem("lastupdate"));
+  const currentdate = new Date();
+  let difference = Math.abs(lastupdate_date - currentdate) / 1000 / 60
+  difference = Math.round(difference)
   // Update the content of the div with unique classes
   try {
     weatherdiv.innerHTML = `<div class="weatherdiv">
             <h2 class="weather-location"></h2>
+
             <h2 class="weather-main"></h2>
             <div class="weather">
               <img src="https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/chanceflurries.svg" class="weather-icon">
@@ -61,9 +65,11 @@ async function updateWeatherDiv(weatherData) {
             </div>
 
             </div>
+            <p class="weather-lastupdate"></p>
             </div>
         `;
     weatherdiv.querySelector(".weather-location").innerText = name;
+    weatherdiv.querySelector(".weather-lastupdate").innerText = difference + "min ago";
     weatherdiv.querySelector(".weather-main").innerText = mainWeather;
     weatherdiv.querySelector(".weather-temperature").innerText = temperature + "°C";
     weatherdiv.querySelector(".weather-feelslike").innerText = "Feels like " + feelslike + "°C";
@@ -121,7 +127,7 @@ async function loadOldData() {
 
 async function set_weather_loc(loc) {
   const currentdate = new Date();
-  console.log(currentdate)
+
 
   if (!document.getElementById('rightcontainer')) {
     console.log("Not on home page, no weather needed")
@@ -134,9 +140,9 @@ async function set_weather_loc(loc) {
   }
 
 let lastupdate_date = new Date(window.localStorage.getItem("lastupdate"));
-console.log(lastupdate_date)
+
 let difference = Math.abs(lastupdate_date - currentdate) / 1000; // Difference in seconds
-console.log("difference: ",difference)
+
 if (difference>600 || loc != (window.localStorage.getItem("lastlocation")) || !(window.localStorage.getItem("weatherdata"))){
   window.localStorage.setItem("lastupdate", currentdate)
   window.localStorage.setItem("lastlocation", loc)
@@ -152,5 +158,5 @@ if (difference>600 || loc != (window.localStorage.getItem("lastlocation")) || !(
 }else(
   loadOldData()
 )
-
+console.log("seconds since last update: ",difference)
 }
