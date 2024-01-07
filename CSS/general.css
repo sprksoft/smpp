@@ -286,7 +286,9 @@ td:hover {
 }
 
 td:not(.cb-container),
-.action-button {
+.action-button,
+span.smsc-inlineeditor--disabled.smsc-inlineeditor__editor,
+smsc-inlineeditor.smsc-table__cell--inlineeditor {
   background-color: var(--color-base00) !important;
 }
 
