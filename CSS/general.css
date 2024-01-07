@@ -728,3 +728,15 @@ option:hover {
 .form__value--resolvedStatus,label.form__label.js-form-label.label__resolvedStatus.form__label--no-margin-top {
   color: white !important;
 }
+.splashscreen{
+  background: transparent !important;
+}
+.splashscreen__dialog,.oauth__image {
+  background-color: var(--color-base01) !important;
+  border-radius: 10px !important;
+  border-width: 4px !important;
+  border-style: solid !important;
+  border-color: var(--color-base03) !important;
+  box-shadow: 0 0 30px #000000dc !important;
+
+}
