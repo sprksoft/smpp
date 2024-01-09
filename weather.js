@@ -38,6 +38,7 @@ async function updateWeatherDiv(weatherData) {
   let lastupdate_date = new Date(window.localStorage.getItem("lastupdate"));
   const currentdate = new Date();
   let difference = Math.abs(lastupdate_date - currentdate) / 1000 / 60
+
   difference = Math.round(difference)
   // Update the content of the div with unique classes
   try {
@@ -69,13 +70,17 @@ async function updateWeatherDiv(weatherData) {
             </div>
         `;
     weatherdiv.querySelector(".weather-location").innerText = name;
-    weatherdiv.querySelector(".weather-lastupdate").innerText = difference + "min ago";
+
     weatherdiv.querySelector(".weather-main").innerText = mainWeather;
     weatherdiv.querySelector(".weather-temperature").innerText = temperature + "°C";
     weatherdiv.querySelector(".weather-feelslike").innerText = "Feels like " + feelslike + "°C";
     weatherdiv.querySelector(".weather-humidity").innerText = humidity + "%";
     weatherdiv.querySelector(".weather-wind").innerText = windSpeedkmh + "km/h";
-
+    if (difference==0){
+      weatherdiv.querySelector(".weather-lastupdate").innerText = "Now";
+    }else{
+      weatherdiv.querySelector(".weather-lastupdate").innerText = difference + " min ago";
+    }
     const weatherIcon = weatherdiv.querySelector('.weather-icon');
     set_snow_multiplier(mainWeather == "Snow");
 

@@ -45,10 +45,10 @@ html {
 }
 
 .login-app__top {
-  background-color: #e0e0e023 !important;
+  background-color: var(--color-base00) !important;
   backdrop-filter: blur(10px) !important;
   border-radius: 20px !important;
-  border: 3px solid #b8b8b8b2 !important;
+  border: 3px solid var(--color-base01) !important;
 }
 
 .login-app__bottom {
@@ -57,12 +57,12 @@ html {
 
 .logintitle {
   font-size: 36px !important;
-  color: aliceblue !important;
+  color: var(--color-base02) !important;
 }
 
 .login-app__link,
 .login-app__link--password {
-  color: aliceblue !important;
+  color: var(--color-text) !important;
 }
 
 a.smscButton[href="/login/sso/init/google"],
@@ -97,10 +97,10 @@ a.smscButton[href="/login/sso/init/acm"],
   margin-top: 40px !important;
   border-radius: 40px !important;
   height: 40px !important;
-  color: black !important;
-  border-color: aliceblue !important;
+  color: var(--color-text) !important;
+  border-color: var(--color-base02) !important;
   ;
-  background-color: aliceblue !important;
+  background-color: var(--color-base03) !important;
   ;
 }
 
@@ -108,10 +108,8 @@ a.smscButton[href="/login/sso/init/acm"],
   margin-top: 40px !important;
   border-radius: 40px !important;
   height: 40px !important;
-  color: black !important;
-  border-color: rgb(203, 206, 209) !important;
-  ;
-  background-color: rgb(203, 206, 209) !important;
+  filter: brightness(80%) !important;
+
   ;
 }
 
@@ -120,17 +118,24 @@ a.smscButton[href="/login/sso/init/acm"],
   font-size: 18px !important;
   left: 5px !important;
   top: -70px !important;
-  transition: none !important;
-  color: aliceblue !important;
+  color: var(--color-text) !important;
 }
 
 .login-app__form {
   color: var(--color-text) !important;
 }
 .white_text_button{
-  color: aliceblue !important;
+  color: var(--color-base01) !important;
   margin: 10px !important;
 }
 .login-app__infoblock--black{
-  color: aliceblue !important;
+  color: var(--color-base01) !important;
+}
+.login-app__title--separator:after, .login-app__title--separator:before {
+  background: var(--color-text);
+  background-position: 0;
+  background-size: 1px 1px;
+  content: "";
+  display: table-cell;
+  width: 50%;
 }
