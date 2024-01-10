@@ -96,7 +96,6 @@ async function apply() {
 
 console.log("checkboxlabels:",checkedCheckboxes)
 
-}
 
 
 function store() {
