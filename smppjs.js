@@ -230,6 +230,11 @@ function set_theme(name) {
   style.setProperty('--color-base03', '#5b5756');
   style.setProperty('--color-popup-border', 'var(--color-accent)');
   style.setProperty('--color-hover-border', 'var(--color-accent)');
+  style.setProperty('--color-settings-bg', 'var(--color-base02)');
+  style.setProperty('--color-settings-border', 'var(--color-base03)');
+  style.setProperty('--color-settings-ui-bg', 'var(--color-base01)');
+  style.setProperty('--color-settings-ui-border', 'var(--color-base02)');
+  style.setProperty('--color-settings-ui-layer2', 'var(--color-base03)');
   style.setProperty('--color-homepage-sidebars-bg', "#02020585");
   style.setProperty('--loginpage-image', "url(https://4kwallpapers.com/images/wallpapers/desert-doom-sand-dunes-dark-background-monochrome-landscape-2560x1080-6409.jpg)");
 
@@ -242,6 +247,11 @@ function set_theme(name) {
       style.setProperty('--color-popup-border', 'var(--color-base02)');
       style.setProperty('--color-hover-border', 'var(--color-base03)')
       style.setProperty('--color-homepage-sidebars-bg', "var(--color-base00)");
+      /*style.setProperty('--color-settings-bg', 'var(--color-base01)');
+      style.setProperty('--color-settings-border', 'var(--color-base02)');
+      style.setProperty('--color-settings-ui-bg', 'var(--color-base02)');
+      style.setProperty('--color-settings-ui-border', 'var(--color-base03)');
+      style.setProperty('--color-settings-ui-layer2', 'var(--color-base00)'); */
       style.setProperty('--loginpage-image', "url(https://i.redd.it/yfssdsfosao11.png)");
       break;
     case 'purple':

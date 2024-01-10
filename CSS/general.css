@@ -16,6 +16,11 @@ html {
   --border-size: 2px;
   --color-popup-border: var(--color-accent);
   --color-hover-border: var(--color-accent);
+  --color-settings-bg: var(--color-base02);
+  --color-settings-border:var(--color-base03);
+  --color-settings-ui-bg:#000000;
+  --color-settings-ui-border:#000000;
+  --color-settings-ui-layer2:#000000;
 
 }
 
@@ -436,8 +441,8 @@ div.smscCheckbox label::selection {
 #halt,
 #location,
 #background {
-  background-color: var(--color-base01) !important;
-  border: 1px solid var(--color-base03) !important;
+  background-color: var(--color-settings-ui-bg) !important;
+  border: 1px solid var(--color-settings-ui-layer2) !important;
   text-align: center !important;
   border-radius: 10px !important;
   width: 100px !important;
@@ -487,7 +492,7 @@ div.smscCheckbox label::selection {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: var(--color-base01);
+  background-color: var(--color-settings-ui-bg);
   -webkit-transition: transform .1s;
   transition: transform .1s;
 
@@ -500,7 +505,7 @@ div.smscCheckbox label::selection {
   width: 26px;
   left: 4px;
   bottom: 4px;
-  background-color: var(--color-base02);
+  background-color: var(--color-settings-ui-border);
   -webkit-transition: transform .1s;
   transition: transform .1s;
 }
@@ -546,10 +551,11 @@ input:checked+.slider:before {
   font-size: 17px !important;
 }
 
+/*Settings menu*/
 #searchMenu {
   left: -50px !important;
-  background-color: var(--color-base02) !important;
-  border: 2px solid var(--color-base03) !important;
+  background-color: var(--color-settings-bg) !important;
+  border: 2px solid var(--color-settings-border) !important;
   border-radius: 10px !important;
   align-items: center !important;
   display: flex !important;
@@ -647,7 +653,7 @@ input:checked+.slider:before {
   appearance: none;
   height: 15px;
   border-radius: 10px;
-  background: var(--color-base01);
+  background: var(--color-settings-ui-bg);
   /* Grey background */
   outline: none;
   /* Remove outline */
