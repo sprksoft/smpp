@@ -15,7 +15,7 @@
 - [x] subtext in "enquetes" is gray
 - [ ] very dark boxes "alle informatie" in the LVS
 - [x] results doesnt look that great with % points
-- [ ] AWFULL TEXT ANIMATION THINGY IN LOGIN PAGE, LIKE WHYYYYY
+- [X] AWFULL TEXT ANIMATION THINGY IN LOGIN PAGE, LIKE WHYYYYY
 
 # not a concern
 - [ ] icons...
