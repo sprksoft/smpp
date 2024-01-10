@@ -138,6 +138,11 @@ async function set_weather_loc(loc) {
     console.log("Not on home page, no weather needed")
     return;
   }
+  else if (loc==""){
+    document.getElementById('rightcontainer').innerHTML = "";
+    console.log("No location provided, no weather needed")
+    return;
+  }
   console.log('Fetching weather information for location: ' + loc);
   if (window.localStorage.getItem("lastupdate")==undefined){
     window.localStorage.setItem("lastupdate", currentdate)
