@@ -27,24 +27,11 @@ async function fetchOptionData(entiteitnummer, haltenummer){
       return returned_data
 }
 async function createOption(givendata,i){
-
-    const leftContainerbottom = document.getElementById('leftContainerbottom');
-    div = document.createElement("div");
-    leftContainerbottom.appendChild(div);
-    div.innerHTML = `<div class=lijncards id="lijncard${i}">
-    <div class="top">
-
-    <h3 class="no">Loading...</h3>
-    </div>
-    <div class="times">
-    <span class="time">
-    </span>
-    <span class="intime">
-    </span>
-    </div></div>`
     optionData = await fetchOptionData(givendata.entiteitnummer, givendata.haltenummer)
     console.log(optionData)
     console.log(givendata)
+    const leftContainerbottom = document.getElementById('leftContainerbottom');
+    div = document.createElement("div");
     if (optionData.lijnrichtingen[0]){
       omschrijving = optionData.lijnrichtingen[0].omschrijving
     }else{
@@ -54,14 +41,16 @@ async function createOption(givendata,i){
       <div class="top">
 
       <h3 class="no">${givendata.omschrijving}</h3>
+  
       </div>
+
       <div class="times">
       <span class="time">${omschrijving}
       </span>
       <span class="intime">
       </span>
       </div></div>`
-
+    leftContainerbottom.appendChild(div);
 
 }
 async function showchoices(returned_data){
