@@ -72,6 +72,7 @@ async function apply() {
     bigblurvalue += 2;
   };
   const rightContainer = document.getElementById('rightcontainer');
+  const leftcontainer = document.getElementById('leftcontainer');
   if (!halte){
     document.getElementById("leftcontainer").style.display = "none"
   }else{

@@ -27,7 +27,8 @@ body {
     width: 34px !important;
 }
 
-.color_snow_white {
+.color_snow_white,
+.ui-datepicker-header  {
     background-color: var(--color-base01) !important;
     border: 2px solid var(--color-base03) !important;
     border-radius: 5px !important;
@@ -44,14 +45,9 @@ body {
 }
 
 .agenda_grid_header_day,
-.navTitle {
+.navTitle,
+.tasksAndMaterials__label:hover {
     color: var(--color-accent) !important;
-}
-
-.ui-datepicker-header {
-    background-color: var(--color-base01) !important;
-    border: 2px solid var(--color-base03) !important;
-    border-radius: 5px !important;
 }
 
 .ui-state-default {
@@ -69,14 +65,9 @@ body {
 }
 
 .border.centerxy {
-
     border-right: 1px solid var(--color-base02) !important;
-
 }
 
-.tasksAndMaterials__label:hover {
-    color: var(--color-accent) !important;
-}
 
 .titleWithLine.grey:after {
     background: linear-gradient(var(--color-base02), var(--color-base02)) repeat-x !important;
@@ -95,7 +86,6 @@ body {
 .infoContainer {
     color: var(--color-accent) !important;
     background: var(--color-base01) !important;
-
 }
 
 #infoContainerNote .infoContainerNoteContent,
