@@ -26,36 +26,14 @@ html {
 
 /* hier is beter smartschool code*/
 #modal-content,
-#content-container,
-.toolbar,
-select,
-.fieldset2,
-tr,
-tr.selected,
-td.selected,
-td:hover,
-td:not(.cb-container),
-.action-button,
-span.smsc-inlineeditor--disabled.smsc-inlineeditor__editor,
-smsc-inlineeditor.smsc-table__cell--inlineeditor,
-.sidebar,
-.sidebar-btn__button,
-.manual_widgetcontent,
-.manual_widgettitle    {
+#content-container {
   background-color: var(--color-base00) !important;
 }
 
 .js-btn-profile>img,
 .header__avatar,
 .topnav__menuitem>img,
-.splitdetail__header__avatar>img,
-.toolbar-bottom,
-.toolbar-top,
-.seperator,
-.msgInfoSpacer,
-.tabsContainer,
-.smsc-templates__separator,
-#loading-box  {
+.splitdetail__header__avatar>img {
   display: none !important;
 }
 
@@ -71,26 +49,13 @@ smsc-inlineeditor.smsc-table__cell--inlineeditor,
 
 .toolbar,
 div.stdReplyWrapper,
-button.js-btn-search,
-.student-support-block__item.icon-label,
-.icon-label__text,
-.checkbox--select-all,
-.round,
-.uploadtitle,
-.dTreeNode,
-.highcharts-container,
-.search_notes_schoolyearrow,
-.itemSchoolyear,
-.msgInfoAuthor,
-.msgInfoMsg,
-.smscAdminNav_body_linkdivTitle:hover,
-.start,
-#stdReplyName,
-#stdReplyTxt,
-#editsubboxinput {
+button.js-btn-search {
   color: var(--color-text) !important;
 }
 
+.toolbar {
+  background-color: var(--color-base00) !important;
+}
 
 .skip-link,
 #ruleName,
@@ -101,14 +66,24 @@ button.js-btn-search,
 .fileinfogrey,
 .fileinfowhite,
 .fileuploadblock,
-#formval_omschrijving,
-.smsc-contextmenu__content,
-.listview-row__item--inline-edit,
-.smsc-dropzone,
-.smsc-dialog,
-.smsc-templates__linkbutton,
-option:hover {
+#formval_omschrijving {
   background-color: var(--color-base01) !important;
+}
+
+#stdReplyName,
+#stdReplyTxt,
+#editsubboxinput {
+  color: var(--color-text);
+}
+
+
+.student-support-block__item.icon-label,
+.icon-label__text,
+.checkbox--select-all,
+.round,
+.uploadtitle,
+.dTreeNode {
+  color: var(--color-text) !important;
 }
 
 
@@ -127,9 +102,15 @@ body.modern-ui .homepage__block:not(:last-child) {
   border-bottom: 2px solid var(--color-base02) !important;
 }
 
+.toolbar-bottom,
+.toolbar-top,
+.seperator {
+  display: none !important;
+}
 
 .groupContainer,
 .newsTitle,
+
 .msg--bubble--steel,
 #goTo {
   background-color: var(--color-base01) !important;
@@ -151,11 +132,7 @@ body.modern-ui .homepage__block:not(:last-child) {
   color: var(--color-text) !important;
 }
 
-a,
-.smsc-dropzone--ellipsis,
-.msgInfoTitle,
-.profile_header_pupilinfo_status,
-.notifyScreenTitle  {
+a {
   color: var(--color-accent) !important;
 }
 
@@ -185,16 +162,12 @@ button.smscButton.blue.fileupload_submit_button {
   border: var(--border-size) solid var(--color-base03) !important;
   background-color: var(--color-base02) !important;
   color: var(--color-accent) !important;
+
 }
 
-::-webkit-scrollbar-thumb,
-.contextmenu__item--nolink:hover,
-.listview__action-btns:hover, 
-.smsc-rightclick__menu,
-.lvs-pupilpresences-row,
-[listview] .listview__row--selected .listview__cell:not(.listview__cell--select-btn) 
-.listview__row:hover .listview__action-btns .listview__action-btn {
+::-webkit-scrollbar-thumb {
   background-color: var(--color-base02) !important;
+
 }
 
 .smsc-container--grey,
@@ -202,7 +175,10 @@ button.smscButton.blue.fileupload_submit_button {
   fill: var(--color-base01) !important;
   background-color: var(--color-base01) !important;
 }
- 
+
+.highcharts-container {
+  color: var(--color-text) !important;
+}
 
 tspan,
 title,
@@ -213,7 +189,9 @@ text,
 }
 
 .search_notes_schoolyearrow,
-.itemSchoolyear 
+.itemSchoolyear {
+  color: var(--color-text) !important;
+}
 
 .contentFrametitle,
 .lvs_item_top,
@@ -256,21 +234,121 @@ td[bgcolor] {
   background-color: var(--color-base00) !important;
 }
 
+select,
+.fieldset2 {
+  background-color: var(--color-base00) !important;
+}
 
 .category-hdr {
   border: 1px solid var(--color-base03) !important;
   text-shadow: none !important;
 }
 
-.contextmenu__item--nolink:hover,
-.listview__action-btns:hover, 
-.smsc-rightclick__menu 
+.msgInfoTitle {
+  color: var(--color-accent) !important;
+}
 
-.smsc-rightclick__item:hover,
-input:checked+.slider {
+.msgInfoSpacer {
+  display: none !important;
+}
+
+.msgInfoAuthor,
+.msgInfoMsg {
+  color: var(--color-text) !important;
+}
+
+.tabsContainer {
+  display: none !important;
+}
+
+/*
+.MsoNormalTable {
+  display: none !important;
+}
+*/
+.smsc-dropzone {
+  background-color: var(--color-base01) !important;
+}
+
+.smsc-dropzone--ellipsis {
+  color: var(--color-accent) !important;
+}
+
+tr {
+  background-color: var(--color-base00) !important;
+}
+
+tr.selected {
+  background-color: var(--color-base00) !important;
+}
+
+td.selected {
+  background-color: var(--color-base00) !important;
+}
+
+td:hover {
+  background-color: var(--color-base00) !important;
+}
+
+td:not(.cb-container),
+.action-button,
+span.smsc-inlineeditor--disabled.smsc-inlineeditor__editor,
+smsc-inlineeditor.smsc-table__cell--inlineeditor {
+  background-color: var(--color-base00) !important;
+}
+
+.smsc-contextmenu__content,
+.listview-row__item--inline-edit {
+  background-color: var(--color-base01) !important;
+}
+
+.contextmenu__item--nolink:hover,
+.listview__action-btns:hover {
+  background-color: var(--color-base02) !important;
+}
+
+.smsc-rightclick__menu {
+  background-color: var(--color-base02) !important;
+}
+
+.smsc-rightclick__item:hover {
   background-color: var(--color-base03) !important;
 }
- 
+
+.smsc-dialog,
+.smsc-templates__linkbutton {
+  background-color: var(--color-base01) !important;
+}
+
+[listview] .listview__row--selected .listview__cell:not(.listview__cell--select-btn) {
+  background-color: var(--color-base02) !important;
+}
+
+.smsc-templates__separator,
+#loading-box {
+  display: none !important;
+}
+
+.listview__row:hover .listview__action-btns .listview__action-btn {
+
+  background-color: var(--color-base02) !important;
+}
+
+.sidebar,
+.sidebar-btn__button,
+.manual_widgetcontent,
+.manual_widgettitle {
+  background-color: var(--color-base00) !important;
+}
+
+.profile_header_pupilinfo_status,
+.notifyScreenTitle {
+  color: var(--color-accent) !important;
+}
+
+.lvs-pupilpresences-row {
+  background-color: var(--color-base02) !important;
+}
 
 #smscMainBlockContainer,
 .notifyScreenContainer {
@@ -279,9 +357,16 @@ input:checked+.slider {
   box-shadow: none;
 }
 
+.smscAdminNav_body_linkdivTitle:hover {
+  color: var(--color-text) !important;
+}
 
 .smscAdminNav_body .smscAdminNav_body_link .smscAdminNav_body_linkdivText.disabled .smscAdminNav_body_linkdivTitle,
-.smscAdminNav_body .smscAdminNav_body_link .smscAdminNav_body_linkdivText.disabled,
+.smscAdminNav_body .smscAdminNav_body_link .smscAdminNav_body_linkdivText.disabled {
+  color: var(--color-base03) !important;
+
+}
+
 .notifySceenContainerInfo {
   color: var(--color-base03) !important;
 }
@@ -289,9 +374,7 @@ input:checked+.slider {
 .percent,
 #quick-nav,
 .smsc_cm_body_row,
-div.stdReplyWrapper,
-#quick-nav,
-.start-row {
+div.stdReplyWrapper {
   border-color: var(--color-base03) !important;
 }
 
@@ -299,7 +382,41 @@ div.stdReplyWrapper,
   border-top: 1px dashed var(--color-base03) !important;
 }
 
+#quick-nav,
+.start-row {
+  border-color: var(--color-base03) !important;
+}
 
+.start {
+  color: var(--color-text) !important;
+}
+
+/* CODE FOR CHECKBOX BUT ONLY IN NOTIFSETTINGS
+div.smscCheckbox input[type=checkbox]:checked+label {
+  background-image: url("https://pic.onlinewebfonts.com/thumbnails/icons_263317.svg") !important;
+  box-shadow: none !important;
+  background-size: 14px !important;
+}
+
+div.smscCheckbox label {
+  background-image: url("https://pic.onlinewebfonts.com/thumbnails/icons_263320.svg") !important;
+  box-shadow: none !important;
+  background-size: 14px !important;
+}
+
+div.smscCheckbox input[type=checkbox]:checked+label::selection {
+  background-image: url("https://pic.onlinewebfonts.com/thumbnails/icons_263317.svg") !important;
+  box-shadow: none !important;
+  background-size: 14px !important;
+
+}
+
+div.smscCheckbox label::selection {
+  background-image: url("https://pic.onlinewebfonts.com/thumbnails/icons_263320.svg") !important;
+  box-shadow: none !important;
+  background-size: 14px !important;
+
+}*/
 
 #profileSelector {
   background-color: var(--color-base01);
@@ -378,6 +495,7 @@ div.stdReplyWrapper,
   background-color: var(--color-settings-ui-bg);
   -webkit-transition: transform .1s;
   transition: transform .1s;
+
 }
 
 .slider:before {
@@ -392,7 +510,9 @@ div.stdReplyWrapper,
   transition: transform .1s;
 }
 
-
+input:checked+.slider {
+  background-color: var(--color-base03);
+}
 
 input:focus+.slider {
   box-shadow: none;
@@ -529,37 +649,50 @@ input:checked+.slider:before {
 /*rangeblur*/
 .sliderblur {
   -webkit-appearance: none;
+  /* Override default CSS styles */
   appearance: none;
   height: 15px;
   border-radius: 10px;
   background: var(--color-base01);
+  /* Grey background */
   outline: none;
+  /* Remove outline */
   opacity: 0.7;
+  /* Set transparency (for mouse-over effects on hover) */
   -webkit-transition: .2s;
+  /* 0.2 seconds transition on hover */
   transition: opacity .2s;
   margin: 5px !important;
 }
 
 .sliderblur::-webkit-slider-thumb {
   -webkit-appearance: none;
+  /* Override default look */
   appearance: none;
   width: 15px;
+  /* Set a specific slider handle width */
   height: 15px;
   border-radius: 50%;
   background: var(--color-accent);
+  /* Green background */
   cursor: pointer;
+  /* Cursor on hover */
 }
 
 .sliderblur::-moz-range-thumb {
   width: 15px;
+  /* Set a specific slider handle width */
   height: 15px;
   border-radius: 50%;
   background: var(--color-accent);
+  /* Green background */
   cursor: pointer;
+  /* Cursor on hover */
 }
 
 #modal-background {
   background-color: transparent !important;
+
 }
 
 #modal-content {
@@ -590,7 +723,9 @@ input:checked+.slider:before {
   border-color: var(--color-base02) !important;
 }
 
-
+option:hover {
+  background-color: var(--color-base01) !important;
+}
 
 .goal-evaluations-details__row__first-container__evaluation-details__title,
 .goal-evaluations-details__row__first-container__evaluation-details__text,.goal-evaluations-details__row__description__text,
