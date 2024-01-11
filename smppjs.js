@@ -166,16 +166,16 @@ if (popup != null) {
 <h3 class="popuptitles">Color profile:</h3>
 
 <select id="profileSelector" >
-    <option value="default">Default</option>
-    <option value="ldev">ldev</option>
-    <option value="birb">Birb</option>
-    <option value="stalker">stalker</option>
-    <option value="tan">Tan</option>
-    <option value="fall">Fall</option>
-    <option value="winter">Winter</option>
-    <option value="purple">Purple</option>
-    <option value="matcha">Matcha</option>
-    <option value="mountain">Mountain</option>
+    <option value="default">Default Deluxe</option>
+    <option value="ldev">Dark Sands</option>
+    <option value="birb">Midnight Sapphire</option>
+    <option value="stalker">Ruby Eclipse</option>
+    <option value="tan">Soft Sands</option>
+    <option value="fall">Autumn Gloom</option>
+    <option value="winter">Frozen Lands</option>
+    <option value="purple">Amethyst Shadow</option>
+    <option value="matcha">Matcha Green</option>
+    <option value="mountain">Sharp Peaks</option>
 
 </select>
 
