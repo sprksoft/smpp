@@ -745,3 +745,16 @@ option:hover {
   border-color: var(--color-base03) !important;
   box-shadow: 0 0 30px #000000dc !important;
 }
+
+#game-container {
+  width: 200px;
+  height: 200px;
+  border: 1px solid #000;
+  position: relative;
+}
+.snake-segment {
+  width: 20px;
+  height: 20px;
+  background-color: #00f;
+  position: absolute;
+}

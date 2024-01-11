@@ -51,7 +51,8 @@
         "loginpage.js",
         "DMENU/quick.js",
         "snow.js",
-        "smppjs.js"
+        "smppjs.js",
+        "snake.js"
       ]
     }
   ],

@@ -172,5 +172,3 @@ function createApplication(data) {
   lastdiv.innerHTML = `<div class=lastdiv><a href="https://www.delijn.be/nl/contact/attest-aanvraag/" target="_blank">Late?</a></div>`
   leftContainerbottom.appendChild(lastdiv);
 }
-
-
