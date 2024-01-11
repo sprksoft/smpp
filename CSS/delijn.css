@@ -11,6 +11,10 @@
     display: flex;
     flex-direction: column;
 }
+.lijncardshover:hover{
+    filter: brightness(80%) !important;
+    cursor: pointer !important;
+}
 
 .lijncardstitle {
     display: flex;

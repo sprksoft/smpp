@@ -31,7 +31,7 @@ async function createOption(givendata,i){
     const leftContainerbottom = document.getElementById('leftContainerbottom');
     div = document.createElement("div");
     leftContainerbottom.appendChild(div);
-    div.innerHTML = `<div class=lijncards id="lijncard${i}">
+    div.innerHTML = `<div class="lijncards lijncardshover" id="lijncard${i}">
     <div class="top">
 
     <h3 class="no">Loading...</h3>
@@ -50,7 +50,7 @@ async function createOption(givendata,i){
     }else{
       omschrijving = "No info"
     }
-    div.innerHTML = `<div class=lijncards id="lijncard${i}">
+    div.innerHTML = `<div class="lijncards lijncardshover" id="lijncard${i}" >
       <div class="top">
 
       <h3 class="no">${givendata.omschrijving}</h3>
