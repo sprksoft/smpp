@@ -88,9 +88,7 @@ a.smscButton[href="/login/sso/init/acm"],
   height: 40px !important;
   color: var(--color-text) !important;
   border-color: var(--color-base02) !important;
-  ;
   background-color: var(--color-base03) !important;
-  ;
 }
 .smscButton.blue:hover {
   margin-top: 40px !important;
@@ -98,7 +96,6 @@ a.smscButton[href="/login/sso/init/acm"],
   height: 40px !important;
   filter: brightness(80%) !important;
 
-  ;
 }
 
 .modern-ui .float-label__input:focus+label>span,
