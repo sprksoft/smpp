@@ -1,57 +1,91 @@
-let div = document.createElement
+
+function snakeGame(){
+let div = document.createElement("div")
+document.getElementById("rightcontainer").appendChild(document.createElement("div"))
 let rightContainer = document.getElementById("rightcontainer")
+console.log("rightcontainer:",rightContainer)
+div.innerHTML = `<div><canvas id=game-container></canvas></div>`
 rightContainer.appendChild(div)
-div.innerHTML = `<div id= game-container></div>`
-document.addEventListener('DOMContentLoaded', () => {
-    const gameContainer = document.getElementById('game-container');
-    const gridSize = 20;
-    const snake = [{ x: 5, y: 5 }];
-    const direction = { x: 1, y: 0 };
-
-    function update() {
-        const head = { x: snake[0].x + direction.x, y: snake[0].y + direction.y };
-        snake.unshift(head);
-
-        // Check for collision with the boundaries
-        if (head.x < 0 || head.x >= gameContainer.clientWidth / gridSize || head.y < 0 || head.y >= gameContainer.clientHeight / gridSize) {
-            // Game over logic - you might want to display a message or restart the game
-            alert('Game Over!');
-            resetGame();
-            return;
+console.log("div:",div)
+console.log("rightcontainer:",rightContainer)
+// Set up the canvas and context
+    const canvas = document.getElementById('game-container');
+    console.log(canvas)
+    const ctx = canvas.getContext('2d');
+    
+    // Constants
+    const WIDTH = 300;
+    const HEIGHT = 350;
+    const SNAKE_SIZE = 5;
+    const SNAKE_SPEED = 5;
+    const SNAKE_COLOR = 'green';
+    
+    // Set canvas dimensions
+    canvas.width = WIDTH;
+    canvas.height = HEIGHT;
+    
+    // Snake class
+    class Snake {
+      constructor() {
+        this.x = WIDTH / 2;
+        this.y = HEIGHT / 2;
+        this.direction = 'RIGHT';
+        this.length = 1;
+        this.body = [];
+      }
+    
+      move() {
+        if (this.direction === 'UP') {
+          this.y -= 2 * SNAKE_SIZE;
+        } else if (this.direction === 'DOWN') {
+          this.y += 2 * SNAKE_SIZE;
+        } else if (this.direction === 'LEFT') {
+          this.x -= 2 * SNAKE_SIZE;
+        } else if (this.direction === 'RIGHT') {
+          this.x += 2 * SNAKE_SIZE;
         }
-
-        // Render the snake
-        render();
-    }
-
-    function render() {
-        // Clear the previous frame
-        gameContainer.innerHTML = '';
-
-        // Draw the snake
-        snake.forEach(segment => {
-            const segmentElement = document.createElement('div');
-            segmentElement.className = 'snake-segment';
-            segmentElement.style.left = segment.x * gridSize + 'px';
-            segmentElement.style.top = segment.y * gridSize + 'px';
-            gameContainer.appendChild(segmentElement);
+      }
+    
+      draw() {
+        ctx.fillStyle = SNAKE_COLOR;
+        this.body.forEach(part => {
+          ctx.beginPath();
+          ctx.arc(part.x, part.y, SNAKE_SIZE, 0, Math.PI * 2);
+          ctx.fill();
         });
+      }
     }
-
-    function resetGame() {
-        // Reset snake to initial position
-        snake.length = 1;
-        snake[0] = { x: 5, y: 5 };
-        // Reset direction
-        direction.x = 1;
-        direction.y = 0;
-    }
-
+    
+    // Create a new snake
+    const snake = new Snake();
+    
+    // Game loop
     function gameLoop() {
-        update();
-        setTimeout(gameLoop, 100); // Adjust the speed of the game by changing the delay
+      ctx.clearRect(0, 0, WIDTH, HEIGHT); // Clear the canvas
+    
+      // Handle keyboard input
+      document.addEventListener('keydown', event => {
+        if (event.key === 'ArrowLeft' && snake.direction !== 'RIGHT') {
+          snake.direction = 'LEFT';
+        } else if (event.key === 'ArrowRight' && snake.direction !== 'LEFT') {
+          snake.direction = 'RIGHT';
+        } else if (event.key === 'ArrowUp' && snake.direction !== 'DOWN') {
+          snake.direction = 'UP';
+        } else if (event.key === 'ArrowDown' && snake.direction !== 'UP') {
+          snake.direction = 'DOWN';
+        }
+      });
+    
+      // Move and draw the snake
+      snake.move();
+      snake.body.unshift({ x: snake.x, y: snake.y }); // Add new head position to the front of the body array
+      snake.draw();
+    
+      // Set the game speed
+      setTimeout(gameLoop, 1000 / SNAKE_SPEED);
     }
-
+    
     // Start the game loop
     gameLoop();
-});
+    
+}

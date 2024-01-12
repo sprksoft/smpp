@@ -747,8 +747,9 @@ option:hover {
 }
 
 #game-container {
-  width: 200px;
-  height: 200px;
+  width: 300px;
+  height: 325px;
+  background-color: #3c9534;
   border: 1px solid #000;
   position: relative;
 }

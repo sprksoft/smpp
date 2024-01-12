@@ -119,6 +119,7 @@ async function updateWeatherDiv(weatherData) {
     console.log(e);
   }
   rightContainer.appendChild(weatherdiv);
+  snakeGame()
   console.log('Weather information updated.');
 }
 

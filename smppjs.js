@@ -83,7 +83,6 @@ async function apply() {
   }else{
     console.log("Not on home page, no Lijn needed")
   }
-
   style.setProperty('--blur-value-large', 'blur(' + bigblurvalue + 'px)');
   style.setProperty('--blur-value-small', 'blur(' + blurvalue + 'px)');
 
@@ -151,6 +150,7 @@ function load() {
 popup = document.getElementById("searchMenu");
 if (popup != null) {
   popup.addEventListener("change", store)
+
 
   search_button = document.querySelector('.js-btn-search')
   search_button.innerText = "Settings"
