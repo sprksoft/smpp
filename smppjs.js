@@ -273,12 +273,12 @@ function set_theme(name) {
       style.setProperty('--loginpage-image', "url(https://www.hdwallpapers.in/download/macos_monterey_shapes_hd_macos-2560x1440.jpg)");
       break;
     case 'stalker':
-      style.setProperty('--color-accent', "#d1161f");
+      style.setProperty('--color-accent', "#f51a26");
        style.setProperty('--color-text', "#f87065");
       style.setProperty('--color-base00', "#191817");
       style.setProperty('--color-base01', "#481b18");
       style.setProperty('--color-base02', "#940a12");
-      style.setProperty('--color-base03', "#d1161f");
+      style.setProperty('--color-base03', "#680e0f");
       style.setProperty('--loginpage-image', "url(https://cdn.wallpapersafari.com/36/24/tdUr7n.jpg)");
       break;
     case 'tan':
