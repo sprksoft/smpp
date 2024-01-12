@@ -167,7 +167,7 @@ if (popup != null) {
 
 <select id="profileSelector" >
     <option value="default">Default Deluxe</option>
-    <option value="white">white</option>
+    <option value="white">Stupid white</option>
     <option value="ldev">Dark Sands</option>
     <option value="birb">Midnight Sapphire</option>
     <option value="stalker">Ruby Eclipse</option>
@@ -243,12 +243,13 @@ function set_theme(name) {
       //default changes nothing so keep
       break;
     case 'white':
-      style.setProperty('--color-accent', '#993691');
-      style.setProperty('--color-text', '#000000');
-      style.setProperty('--color-base00', '#0b021d');
+      style.setProperty('--color-accent', '#6b7685');
+      style.setProperty('--color-text', '#2e3545'); /*off zwart :)*/
+      style.setProperty('--color-base00', '#fdfdfd');
       style.setProperty('--color-base01', '#fffff5');
-      style.setProperty('--color-base02', '#250654');
-      style.setProperty('--color-base03', '#3f0a74');
+      style.setProperty('--color-base02', '#f5f5f5');
+      style.setProperty('--color-homepage-sidebars-bg', "var(--color-base02)");
+      style.setProperty('--color-base03', '#ae8d99');
       style.setProperty('--loginpage-image', "url()");
       break;
     case 'ldev':
