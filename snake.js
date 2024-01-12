@@ -17,7 +17,7 @@ console.log("rightcontainer:",rightContainer)
     const WIDTH = 300;
     const HEIGHT = 325;
     const SNAKE_SIZE = 5;
-    const SNAKE_SPEED = 500;
+    const SNAKE_SPEED = 400;
     const SNAKE_COLOR = 'green';
     
     // Set canvas dimensions
@@ -43,6 +43,10 @@ console.log("rightcontainer:",rightContainer)
           this.x -= 2 * SNAKE_SIZE;
         } else if (this.direction === 'RIGHT') {
           this.x += 2 * SNAKE_SIZE;
+        }
+        if (this.x < 0 || this.x > WIDTH || this.y < 0 || this.y > HEIGHT) {
+          clearInterval(gameInterval); // Stop the game
+          console.log('Game Over: Boundary hit');
         }
       }
     
