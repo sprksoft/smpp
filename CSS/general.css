@@ -759,3 +759,4 @@ option:hover {
   background-color: #00f;
   position: absolute;
 }
+.st1{fill:var(--color-accent) !important;}
