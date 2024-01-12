@@ -3,12 +3,6 @@ async function fetchData(entiteit, halte) {
 
 
   const apiUrl = `https://api.delijn.be/DLKernOpenData/api/v1/haltes/${entiteit}/${halte}/real-time?maxAantalDoorkomsten=5`; // Replace with your API endpoint
-  console.log(apiUrl)
-  if (!document.getElementById('leftcontainer')) {
-    console.log("Not on home page, no busses needed")
-    return;
-  }
-
   try {
     const response = await fetch(apiUrl, {
       headers: {
@@ -19,12 +13,10 @@ async function fetchData(entiteit, halte) {
     if (!response.ok) {
       throw new Error('Network response was not ok.');
     }
-
     const data = await response.json();
-    console.log("creating lijn application...")
-    createApplication(data); // Call function to create the application using fetched data
+    createApplication(data);
   } catch (error) {
-    console.error('Error fetching data:', error);
+    console.log('Error fetching data:', error);
     const leftContainerbottom = document.getElementById('leftContainerbottom');
     if (leftContainerbottom.innerHTML != "There are no busses for this stop now"){
       leftContainerbottom.innerHTML = 'Could not fetch data, please try again later...';
@@ -37,10 +29,8 @@ async function fetchData(entiteit, halte) {
 function createApplication(data) {
   const leftContainerbottom = document.getElementById('leftContainerbottom');
   leftContainerbottom.innerHTML = " "
-  console.log("bottom: ",leftContainerbottom)
   if (!data.halteDoorkomsten[0]){
     leftContainerbottom.innerHTML = 'There are no busses for this stop now';
-    console.log("eys")
   }
   let doorkomstlength = data.halteDoorkomsten[0].doorkomsten.length
   const bestemmingen = []
@@ -48,7 +38,6 @@ function createApplication(data) {
   const richting = []
   const dienstregelingTijdstip = []
   const real_timeTijdstip = []
-  console.log(data)
 
   //let stringToInt = parseInt("06")
   for (let i = 0; i < doorkomstlength; i++) {
@@ -70,7 +59,6 @@ function createApplication(data) {
       dienstregelingTijdstip.push(data.halteDoorkomsten[0].doorkomsten[i].dienstregelingTijdstip)
     } else {
       dienstregelingTijdstip.push("Geen dienstregelingtijd voor deze rit")
-      console.log("geen dienstregelingtijd")
     }
   }
   for (let i = 0; i < doorkomstlength; i++) {
@@ -78,7 +66,6 @@ function createApplication(data) {
       real_timeTijdstip.push(data.halteDoorkomsten[0].doorkomsten[i]["real-timeTijdstip"])
     } else {
       real_timeTijdstip.push("none")
-      console.log("geen realtimeregelingtijd")
     }
   }
   if (leftContainer == null) {

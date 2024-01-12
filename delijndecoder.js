@@ -1,8 +1,6 @@
 async function fetchHaltesData(query){
     const apiKey = 'ddb68605719d4bb8b6444b6871cefc7a'
     const fetch_url = `https://api.delijn.be/DLZoekOpenData/v1/zoek/haltes/${query}?maxAantalHits=3`
-
-    console.log(query)
     // Add the await keyword before fetch
     const response = await fetch(fetch_url, {
         headers: {
@@ -43,8 +41,6 @@ async function createOption(givendata,i){
     </span>
     </div></div>`
     optionData = await fetchOptionData(givendata.entiteitnummer, givendata.haltenummer)
-    console.log(optionData)
-    console.log(givendata)
     if (optionData.lijnrichtingen[0]){
       omschrijving = optionData.lijnrichtingen[0].omschrijving
     }else{
@@ -74,8 +70,6 @@ async function showchoices(returned_data){
     getchoice(returned_data)
 }
 function chosen(choice, data){
-  console.log(choice)
-  console.log(data.haltes[choice])
   let lijnData = {}
   lijnData.entiteitnummer = data.haltes[choice].entiteitnummer
   lijnData.haltenummer = data.haltes[choice].haltenummer
@@ -101,8 +95,6 @@ function getchoice(data){
 }
 
 function decodehalte(){
-    console.log("started decoding halte")
-
     leftContainer = document.getElementById("leftcontainer")
     if (leftContainer){
       
@@ -144,8 +136,6 @@ input.addEventListener("keyup", function(event) {
         leftContainerbottom.innerHTML=`<div id="leftContainerbottom">Zoek naar een halte aub.</div>`
       }
     }
-
-    
 }
 
 

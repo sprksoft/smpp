@@ -14,7 +14,8 @@ const default_settings = {
   location: "keerbergen",
   blur: "2",
   snow: "0",
-  hidenews: false
+  shownews: true,
+  showsnake: false
 };
 
 function unbloat() {
@@ -60,42 +61,39 @@ async function apply() {
   const loc = settingsData.location;
   const blurvalue = settingsData.blur;
   const snow = settingsData.snow;
-  const hidenews = settingsData.hidenews;
+  const shownews = settingsData.shownews;
+  const showsnake = settingsData.showsnake;
   set_theme(profileSelect);
   if (overwrite_theme == true) {
     set_background(background);
   }
-  await set_weather_loc(loc);
-
   let style = document.documentElement.style;
   let bigblurvalue = blurvalue * 2;
+  const rightContainer = document.getElementById('rightcontainer');
+  const centralContainer = document.getElementById('centercontainer')
   if (blurvalue == 0){
     bigblurvalue += 2;
   };
-  const rightContainer = document.getElementById('rightcontainer');
-  if (document.getElementById("leftcontainer")){
-  if (!halte){
-    document.getElementById("leftcontainer").style.display = "none"
+  //check if on homepage:
+  if(centralContainer){
+    await set_weather_loc(loc);
+    if (halte) {
+      decodehalte()
+      document.getElementById("leftcontainer").style.display = "inline"
+    }else{
+      document.getElementById("leftcontainer").style.display = "none"
+    }
+    if (!shownews) {
+      centralContainer.innerHTML = ' '
+    }
   }else{
-    document.getElementById("leftcontainer").style.display = "inline"
-  }}
-  if (rightContainer && halte) {
-    decodehalte()
-  }else{
-    console.log("Not on home page, no Lijn needed")
+    console.log("Not on home page, no Lijn or weather needed")
   }
+
   style.setProperty('--blur-value-large', 'blur(' + bigblurvalue + 'px)');
   style.setProperty('--blur-value-small', 'blur(' + blurvalue + 'px)');
-
   set_snow_level(snow);
-  let cc = document.getElementById("centercontainer")
-  if (cc != undefined && hidenews) {
-    cc.innerHTML = ' '
-  }
-  // Find all labels with class 'checkbox'
   const checkedCheckboxes = document.querySelectorAll('label.checkbox input[type="checkbox"]:checked');
-
-console.log("checkboxlabels:",checkedCheckboxes)
 }
 
 
@@ -108,8 +106,9 @@ function store() {
   const loc = document.getElementById("location").value;
   const slider = document.getElementById('mySlider').value;
   const snowSlider = document.getElementById('snowSlider').value;
-  const hidenews = document.getElementById("hidenewselement").checked;
-  console.log("started storing...")
+  const shownews = document.getElementById("shownewselement").checked;
+  const showsnake = document.getElementById('showsnakeelement').checked;
+  
   settingsData.profile = profileSelect;
   settingsData.background = background;
   settingsData.halte = halte;
@@ -117,10 +116,10 @@ function store() {
   settingsData.location = loc;
   settingsData.blur = slider;
   settingsData.snow = parseInt(snowSlider);
-  settingsData.hidenews = hidenews;
+  settingsData.shownews = shownews;
+  settingsData.showsnake = showsnake;
   window.localStorage.setItem("settingsdata", JSON.stringify(settingsData));
   apply()
-  console.log("settings are stored and applied")
 }
 function load() {
   let settingsData = JSON.parse(window.localStorage.getItem("settingsdata"));
@@ -131,11 +130,10 @@ function load() {
   const loc = document.getElementById("location");
   const blur = document.getElementById('mySlider');
   const snowSlider = document.getElementById('snowSlider');
-  const hidenews = document.getElementById("hidenewselement");
-  console.log("started loading settings...")
+  const shownews = document.getElementById("shownewselement");
+  const showsnake = document.getElementById("showsnakeelement");
   if (settingsData == undefined) {
-    //TODO: set params to default
-    console.log("settings data is undefined")
+    console.log("settings data is undefined(this cannot happen)")
     return
   }
   profileSelect.value = settingsData.profile
@@ -145,8 +143,8 @@ function load() {
   loc.value = settingsData.location
   blur.value = settingsData.blur
   snowSlider.value = settingsData.snow
-  hidenews.checked = settingsData.hidenews
-  console.log("loaded all settings")
+  shownews.checked = settingsData.shownews
+  showsnake.checked = settingsData.showsnake 
 }
 popup = document.getElementById("searchMenu");
 if (popup != null) {
@@ -158,56 +156,70 @@ if (popup != null) {
   search_button.addEventListener("click", function () {
     const popup_settings = document.getElementById("searchMenu");
     popup_settings.innerHTML = `<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width">
-<title>popup</title>
-</head>
-
-<body>
-<h3 class="popuptitles">Color profile:</h3>
-
-<select id="profileSelector" >
-    <option value="default">Default Deluxe</option>
-    <option value="white">Stupid white</option>
-    <option value="ldev">Dark Sands</option>
-    <option value="birb">Midnight Sapphire</option>
-    <option value="stalker">Ruby Eclipse</option>
-    <option value="tan">Soft Sands</option>
-    <option value="fall">Autumn Gloom</option>
-    <option value="winter">Frozen Lands</option>
-    <option value="purple">Amethyst Shadow</option>
-    <option value="matcha">Matcha Green</option>
-    <option value="mountain">Sharp Peaks</option>
-
-</select>
-
-<h3 class="popuptitles">Show DeLijn app:</h3>
-<label class="switch">
-<input class="popupinput" type="checkbox" id="halt">
-<span class="slider round"></span>
-</label>
-
-<h3 class="popuptitles">Location (weather):</h3>
-<input class="popupinput" id="location" type="text"></input>
-
-<h3 class="popuptitles">Custom wallpaper (optional):</h3>
-<div class="textandbutton">
-    <input class="popupinput" id="background" type="text"></input>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>popup</title>
+    </head>
+    
+    <body>
+    <h3 class="popuptitles">Color profile:</h3>
+    
+    <select id="profileSelector" >
+        <option value="default">Default Deluxe</option>
+        <option value="white">Off White</option>
+        <option value="ldev">Dark Sands</option>
+        <option value="birb">Midnight Sapphire</option>
+        <option value="stalker">Ruby Eclipse</option>
+        <option value="tan">Soft Sands</option>
+        <option value="fall">Autumn Gloom</option>
+        <option value="winter">Frozen Lands</option>
+        <option value="purple">Amethyst Shadow</option>
+        <option value="matcha">Matcha Green</option>
+        <option value="mountain">Sharp Peaks</option>
+    </select>
+    
+    <h3 class="popuptitles">Show DeLijn app:</h3>
     <label class="switch">
-        <input class="popupinput" type="checkbox" id="button">
-        <span class="slider round"></span>
+    <input class="popupinput" type="checkbox" id="halt">
+    <span class="slider round"></span>
     </label>
-</div>
-<h3 class="popuptitles">Blur:</h3>
-<input type="range" min="0" max="20" value="0" class="sliderblur" id="mySlider">
-<h3 class="popuptitles">Snow:</h3>
-<input type="range" min="0" max="500" value="0" class="sliderblur" id="snowSlider">
-<h3 class="popuptitles">Hide news:</h3>
-<label class="switch">
-<input class="popupinput" type="checkbox" id="hidenewselement">
-<span class="slider round"></span>
-</label>
-</body>
+    
+    <h3 class="popuptitles">Location (weather):</h3>
+    <input class="popupinput" id="location" type="text"></input>
+    
+    <h3 class="popuptitles">Custom wallpaper (optional):</h3>
+    <div class="textandbutton">
+        <input class="popupinput" id="background" type="text"></input>
+        <label class="switch">
+            <input class="popupinput" type="checkbox" id="button">
+            <span class="slider round"></span>
+        </label>
+    </div>
+    <h3 class="popuptitles">Blur:</h3>
+    <input type="range" min="0" max="20" value="0" class="sliderblur" id="mySlider">
+    <h3 class="popuptitles">Snow:</h3>
+    <input type="range" min="0" max="500" value="0" class="sliderblur" id="snowSlider">
+  
+    <div class="textandbutton">
+      <div>
+        <h3 class="popuptitles">Snake:</h3>
+        <label class="switch">
+          <input class="popupinput" type="checkbox" id="showsnakeelement">
+          <span class="slider round"></span>
+          </label>
+      </div>
+  <div>
+      <h3 class="popuptitles">News:</h3>
+      <label class="switch">
+        <input class="popupinput" type="checkbox" id="shownewselement">
+        <span class="slider round"></span>
+        </label>
+    </div>
+  
+    </div>
+  
+    </body>
+    
 `
     load()
   });
@@ -244,14 +256,14 @@ function set_theme(name) {
       //default changes nothing so keep
       break;
     case 'white':
-      style.setProperty('--color-accent', '#6b7685');
-      style.setProperty('--color-text', '#2e3545'); /*off zwart :)*/
-      style.setProperty('--color-base00', '#fdfdfd');
-      style.setProperty('--color-base01', '#fffff5');
-      style.setProperty('--color-base02', '#f5f5f5');
-      style.setProperty('--color-homepage-sidebars-bg', "var(--color-base02)");
-      style.setProperty('--color-base03', '#ae8d99');
-      style.setProperty('--loginpage-image', "url()");
+      style.setProperty('--color-accent', '#4b5a6f');
+      style.setProperty('--color-text', '#1e222c'); /*off zwart :)*/
+      style.setProperty('--color-base00', '#f6f6f6');
+      style.setProperty('--color-base01', '#efeeec');
+      style.setProperty('--color-base02', '#e3e2e0');
+      style.setProperty('--color-homepage-sidebars-bg', "#02020540");
+      style.setProperty('--color-base03', '#cdd8ee');
+      style.setProperty('--loginpage-image', "url(https://wallpaperaccess.com/full/1474688.jpg)");
       break;
     case 'ldev':
       style.setProperty('--color-accent', '#ffd5a0');
