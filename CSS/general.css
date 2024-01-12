@@ -748,16 +748,10 @@ option:hover {
 
 #game-container {
   width: 300px;
-  height: 325px;
+  height: 300px;
   background-color: #3c9534;
   border: 1px solid #000;
   position: relative;
-}
-.snake-segment {
-  width: 20px;
-  height: 20px;
-  background-color: #00f;
-  position: absolute;
 }
 .st1,
 .st2 {

@@ -51,6 +51,7 @@ async function apply() {
     settingsData = default_settings;
     window.localStorage.setItem("settingsdata", JSON.stringify(settingsData));
   }
+  
   console.log(settingsData)
   const profileSelect = settingsData.profile
   const background = settingsData.background
