@@ -1,30 +1,74 @@
+function gameOver() {
+  // Display game over message
+  const gameOverMessage = document.createElement('div');
+  gameOverMessage.innerHTML = '<h2>Game Over!</h2><p>Press F5 to restart.</p>';
+  gameOverMessage.style.textAlign = 'center';
+  gameOverMessage.style.position = 'absolute';
+  document.getElementById('rightcontainer').appendChild(gameOverMessage);
 
+  // Stop the game loop
+  clearInterval(gameInterval);
+
+  // Remove keyboard input listener
+  document.removeEventListener('keydown', handleKeyPress);
+}
+
+function handleKeyPress(event) {
+  // Handle keyboard input
+  if (event.key === 'ArrowUp') {
+
+    document.getElementById('rightcontainer').innerHTML = '';
+    snakeGame();
+  }
+}
 function snakeGame(){
 let div = document.createElement("div")
 document.getElementById("rightcontainer").appendChild(document.createElement("div"))
 let rightContainer = document.getElementById("rightcontainer")
 console.log("rightcontainer:",rightContainer)
-div.innerHTML = `<div><canvas id=game-container></canvas></div>`
+div.innerHTML = `<div class=game-div><canvas id=game-container></div>`
 rightContainer.appendChild(div)
 console.log("div:",div)
 console.log("rightcontainer:",rightContainer)
-// Set up the canvas and context
+
     const canvas = document.getElementById('game-container');
     console.log(canvas)
     const ctx = canvas.getContext('2d');
-    
-    // Constants
-    const WIDTH = 300;
-    const HEIGHT = 325;
-    const SNAKE_SIZE = 5;
-    const SNAKE_SPEED = 400;
-    const SNAKE_COLOR = 'green';
-    
-    // Set canvas dimensions
+
+    const SNAKE_SIZE = 10;
+    const numer_of_colums = 21
+    const numer_of_rows = 21
+    const WIDTH = numer_of_colums * SNAKE_SIZE * 2;
+    const HEIGHT = numer_of_rows * SNAKE_SIZE * 2;
+    const SNAKE_SPEED = 100;
+    const SNAKE_COLOR = 'black';
+
     canvas.width = WIDTH;
     canvas.height = HEIGHT;
+    class Food {
+      constructor() {
+        this.x = Math.floor(Math.random() * numer_of_rows) * SNAKE_SIZE*2 + SNAKE_SIZE; // Random x position in multiples of 10
+        this.y = Math.floor(Math.random() * numer_of_colums) * SNAKE_SIZE*2 + SNAKE_SIZE; // Random y position in multiples of 10
+        this.color = 'red';
+      }
     
-    // Snake class
+      draw() {
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, SNAKE_SIZE, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    let food = new Food();
+
+    function checkFood() {
+      if (snake.x === food.x && snake.y === food.y) {
+        snake.length++;
+        food = new Food(); 
+      }
+    }
+
     class Snake {
       constructor() {
         this.x = WIDTH / 2;
@@ -44,9 +88,10 @@ console.log("rightcontainer:",rightContainer)
         } else if (this.direction === 'RIGHT') {
           this.x += 2 * SNAKE_SIZE;
         }
-        if (this.x < 0 || this.x > WIDTH || this.y < 0 || this.y > HEIGHT) {
-          clearInterval(gameInterval); // Stop the game
+        if (this.x < 5 || this.x > WIDTH-5 || this.y < 5 || this.y > HEIGHT-5) {
+          clearInterval(gameInterval); 
           console.log('Game Over: Boundary hit');
+          gameOver()
         }
       }
     
@@ -59,28 +104,37 @@ console.log("rightcontainer:",rightContainer)
         });
       }
     }
-    
-    // Create a new snake
+
     const snake = new Snake();
+    function checkCollision() {
+      for (let i = 1; i < snake.body.length; i++) { 
+
+        if (snake.x === snake.body[i].x && snake.y === snake.body[i].y) {
+          clearInterval(gameInterval); 
+          console.log('Game Over: Self collision');
+          gameOver()
+
+        }
+      }
+    }
+
+    function gameLoop() {
+      ctx.clearRect(0, 0, WIDTH, HEIGHT); 
     
-    // Game loop
-    // Game loop
-function gameLoop() {
-  ctx.clearRect(0, 0, WIDTH, HEIGHT); // Clear the canvas
 
-  // Move and draw the snake
-  snake.move();
-  snake.body.unshift({ x: snake.x, y: snake.y }); // Add new head position to the front of the body array
-  if (snake.body.length > snake.length) {
-    snake.body.pop(); // Remove the last part of the snake's body
-  }
-  snake.draw();
-}
+      snake.move();
+      snake.body.unshift({ x: snake.x, y: snake.y }); 
+      if (snake.body.length > snake.length) {
+        snake.body.pop();
+      }
+      checkCollision()
+      snake.draw();
+      food.draw();
+      checkFood();
+    }
 
-// Start the game loop
 let gameInterval = setInterval(gameLoop, SNAKE_SPEED);
 
-// Handle keyboard input
 document.addEventListener('keydown', event => {
   if (event.key === 'ArrowLeft' && snake.direction !== 'RIGHT') {
     snake.direction = 'LEFT';
@@ -92,5 +146,6 @@ document.addEventListener('keydown', event => {
     snake.direction = 'DOWN';
   }
 });
-
 }
+
+
