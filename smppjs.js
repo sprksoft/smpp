@@ -167,6 +167,7 @@ if (popup != null) {
 
 <select id="profileSelector" >
     <option value="default">Default Deluxe</option>
+    <option value="white">white</option>
     <option value="ldev">Dark Sands</option>
     <option value="birb">Midnight Sapphire</option>
     <option value="stalker">Ruby Eclipse</option>
@@ -218,7 +219,7 @@ function set_background(background) {
   style.setProperty('--loginpage-image', "url(" + background + ")");
 }
 
-const theme_names = ["default", "ldev", "birb", "stalker", "tan", "winter", "fall", "matcha", "vax"];
+const theme_names = ["default","white", "ldev", "birb", "stalker", "tan", "winter", "fall", "matcha", "vax"];
 function set_theme(name) {
   let style = document.documentElement.style;
   style.setProperty('--color-accent', '#8f8f95');
@@ -240,6 +241,15 @@ function set_theme(name) {
   switch (name) {
     case "default":
       //default changes nothing so keep
+      break;
+    case 'white':
+      style.setProperty('--color-accent', '#993691');
+      style.setProperty('--color-text', '#000000');
+      style.setProperty('--color-base00', '#0b021d');
+      style.setProperty('--color-base01', '#fffff5');
+      style.setProperty('--color-base02', '#250654');
+      style.setProperty('--color-base03', '#3f0a74');
+      style.setProperty('--loginpage-image', "url()");
       break;
     case 'ldev':
       style.setProperty('--color-accent', '#ffd5a0');
