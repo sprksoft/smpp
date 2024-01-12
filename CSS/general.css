@@ -754,6 +754,7 @@ option:hover {
   position: relative;
 }
 .st1,
-.st2 {
+.st2,
+.st0 {
   fill:var(--color-accent) !important;
 }
