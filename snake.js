@@ -15,9 +15,9 @@ console.log("rightcontainer:",rightContainer)
     
     // Constants
     const WIDTH = 300;
-    const HEIGHT = 350;
+    const HEIGHT = 325;
     const SNAKE_SIZE = 5;
-    const SNAKE_SPEED = 5;
+    const SNAKE_SPEED = 500;
     const SNAKE_COLOR = 'green';
     
     // Set canvas dimensions
@@ -60,32 +60,33 @@ console.log("rightcontainer:",rightContainer)
     const snake = new Snake();
     
     // Game loop
-    function gameLoop() {
-      ctx.clearRect(0, 0, WIDTH, HEIGHT); // Clear the canvas
-    
-      // Handle keyboard input
-      document.addEventListener('keydown', event => {
-        if (event.key === 'ArrowLeft' && snake.direction !== 'RIGHT') {
-          snake.direction = 'LEFT';
-        } else if (event.key === 'ArrowRight' && snake.direction !== 'LEFT') {
-          snake.direction = 'RIGHT';
-        } else if (event.key === 'ArrowUp' && snake.direction !== 'DOWN') {
-          snake.direction = 'UP';
-        } else if (event.key === 'ArrowDown' && snake.direction !== 'UP') {
-          snake.direction = 'DOWN';
-        }
-      });
-    
-      // Move and draw the snake
-      snake.move();
-      snake.body.unshift({ x: snake.x, y: snake.y }); // Add new head position to the front of the body array
-      snake.draw();
-    
-      // Set the game speed
-      setTimeout(gameLoop, 1000 / SNAKE_SPEED);
-    }
-    
-    // Start the game loop
-    gameLoop();
-    
+    // Game loop
+function gameLoop() {
+  ctx.clearRect(0, 0, WIDTH, HEIGHT); // Clear the canvas
+
+  // Move and draw the snake
+  snake.move();
+  snake.body.unshift({ x: snake.x, y: snake.y }); // Add new head position to the front of the body array
+  if (snake.body.length > snake.length) {
+    snake.body.pop(); // Remove the last part of the snake's body
+  }
+  snake.draw();
+}
+
+// Start the game loop
+let gameInterval = setInterval(gameLoop, SNAKE_SPEED);
+
+// Handle keyboard input
+document.addEventListener('keydown', event => {
+  if (event.key === 'ArrowLeft' && snake.direction !== 'RIGHT') {
+    snake.direction = 'LEFT';
+  } else if (event.key === 'ArrowRight' && snake.direction !== 'LEFT') {
+    snake.direction = 'RIGHT';
+  } else if (event.key === 'ArrowUp' && snake.direction !== 'DOWN') {
+    snake.direction = 'UP';
+  } else if (event.key === 'ArrowDown' && snake.direction !== 'UP') {
+    snake.direction = 'DOWN';
+  }
+});
+
 }
