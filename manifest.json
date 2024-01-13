@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Smartschool++",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Enhance your smartschool experience with themes and more",
   "homepage_url": "https://chromewebstore.google.com/detail/smartschool++/bdhficnphioomdjhdfbhdepjgggekodf",
   "content_scripts": [
@@ -53,7 +53,6 @@
         "DMENU/quick.js",
         "snow.js",
         "smppjs.js"
-
       ]
     }
   ],
@@ -68,5 +67,4 @@
       "update_url": "https://ldev.eu.org/firefox/updates.json"
     }
   }
-
 }

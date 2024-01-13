@@ -17,10 +17,10 @@ html {
   --color-popup-border: var(--color-accent);
   --color-hover-border: var(--color-accent);
   --color-settings-bg: var(--color-base02);
-  --color-settings-border:var(--color-base03);
-  --color-settings-ui-bg:#000000;
-  --color-settings-ui-border:#000000;
-  --color-settings-ui-layer2:#000000;
+  --color-settings-border: var(--color-base03);
+  --color-settings-ui-bg: #000000;
+  --color-settings-ui-border: #000000;
+  --color-settings-ui-layer2: #000000;
 
 }
 
@@ -729,16 +729,23 @@ option:hover {
 }
 
 .goal-evaluations-details__row__first-container__evaluation-details__title,
-.goal-evaluations-details__row__first-container__evaluation-details__text,.goal-evaluations-details__row__description__text,
-.goal-evaluations-details__row__first-container__evaluation-details__info,.form__value--resolvedStatus,.label__resolvedStatus,
+.goal-evaluations-details__row__first-container__evaluation-details__text,
+.goal-evaluations-details__row__description__text,
+.goal-evaluations-details__row__first-container__evaluation-details__info,
+.form__value--resolvedStatus,
+.label__resolvedStatus,
 .js-form-label,
-.form__value--resolvedStatus,label.form__label.js-form-label.label__resolvedStatus.form__label--no-margin-top {
+.form__value--resolvedStatus,
+label.form__label.js-form-label.label__resolvedStatus.form__label--no-margin-top {
   color: white !important;
 }
-.splashscreen{
+
+.splashscreen {
   background: transparent !important;
 }
-.splashscreen__dialog,.oauth__image {
+
+.splashscreen__dialog,
+.oauth__image {
   background-color: var(--color-base01) !important;
   border-radius: 10px !important;
   border-width: 4px !important;
@@ -760,5 +767,5 @@ option:hover {
 .st1,
 .st2,
 .st0 {
-  fill:var(--color-accent) !important;
+  fill: var(--color-accent) !important;
 }

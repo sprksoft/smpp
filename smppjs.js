@@ -42,7 +42,7 @@ get_data_bg("vakken", ".course-list > li > a", function (el, data) {
 }, function (data) {
   vakken = data;
 });
-function clearsettings(){
+function clearsettings() {
   localStorage.clear();
   console.log("cleared settings!")
 }
@@ -52,7 +52,7 @@ async function apply() {
     settingsData = default_settings;
     window.localStorage.setItem("settingsdata", JSON.stringify(settingsData));
   }
-  
+
   console.log(settingsData)
   const profileSelect = settingsData.profile
   const background = settingsData.background
@@ -71,29 +71,29 @@ async function apply() {
   let bigblurvalue = blurvalue * 2;
   const rightContainer = document.getElementById('rightcontainer');
   const centralContainer = document.getElementById('centercontainer')
-  if (blurvalue == 0){
+  if (blurvalue == 0) {
     bigblurvalue += 2;
   };
   //check if on homepage:
-  if(centralContainer){
+  if (centralContainer) {
     rightContainer.innerHTML = ""
-    if(loc != ""){
+    if (loc != "") {
       await set_weather_loc(loc);
     }
-    if(showsnake){
+    if (showsnake) {
       startSnakeGame()
     }
 
     if (halte) {
       decodehalte()
       document.getElementById("leftcontainer").style.display = "inline"
-    }else{
+    } else {
       document.getElementById("leftcontainer").style.display = "none"
     }
     if (!shownews) {
       centralContainer.innerHTML = ' '
     }
-  }else{
+  } else {
     console.log("Not on home page, no Lijn or weather needed")
   }
 
@@ -115,7 +115,7 @@ function store() {
   const snowSlider = document.getElementById('snowSlider').value;
   const shownews = document.getElementById("shownewselement").checked;
   const showsnake = document.getElementById('showsnakeelement').checked;
-  
+
   settingsData.profile = profileSelect;
   settingsData.background = background;
   settingsData.halte = halte;
@@ -151,7 +151,7 @@ function load() {
   blur.value = settingsData.blur
   snowSlider.value = settingsData.snow
   shownews.checked = settingsData.shownews
-  showsnake.checked = settingsData.showsnake 
+  showsnake.checked = settingsData.showsnake
 }
 popup = document.getElementById("searchMenu");
 if (popup != null) {
@@ -239,7 +239,7 @@ function set_background(background) {
   style.setProperty('--loginpage-image', "url(" + background + ")");
 }
 
-const theme_names = ["default","white", "ldev", "birb", "stalker", "tan", "winter", "fall", "matcha", "vax"];
+const theme_names = ["default", "white", "ldev", "birb", "stalker", "tan", "winter", "fall", "matcha", "vax"];
 function set_theme(name) {
   let style = document.documentElement.style;
   style.setProperty('--color-accent', '#8f8f95');
@@ -295,7 +295,7 @@ function set_theme(name) {
       break;
     case 'stalker':
       style.setProperty('--color-accent', "#f51a26");
-       style.setProperty('--color-text', "#f87065");
+      style.setProperty('--color-text', "#f87065");
       style.setProperty('--color-base00', "#191817");
       style.setProperty('--color-base01', "#481b18");
       style.setProperty('--color-base02', "#940a12");
@@ -347,25 +347,25 @@ function set_theme(name) {
       style.setProperty('--color-base03', '#4f7a51');
       style.setProperty('--loginpage-image', "url(https://wallpapercave.com/wp/wp9313069.jpg)");
       break;
-      case 'mountain':
-        style.setProperty('--color-accent', '#f8f8fa');
-        style.setProperty('--color-text', '#f8f8fa');
-        style.setProperty('--color-base00', '#121c28');
-        style.setProperty('--color-base01', '#23364e');
-        style.setProperty('--color-base02', '#52647c');
-        style.setProperty('--color-base03', '#8294ac');
-        style.setProperty('--loginpage-image', "url(https://hdqwalls.com/download/everest-3840x2160.jpg)");
-        break;
-      case 'vax':
-        style.setProperty('--color-accent', '#492f29');
-        style.setProperty('--color-text', '#492f29');
-        style.setProperty('--color-base00', '#9c6544');
-        style.setProperty('--color-base01', '#9c6544');
-        style.setProperty('--color-base02', '#9c6544');
-        style.setProperty('--color-base03', '#9c6544');
-        style.setProperty('--loginpage-image', "url(https://wallpapers.com/images/hd/star-wars-place-ztno3exzqff0m0ci.webp)");
-        break;
-          // Add more cases for other profiles as needed
+    case 'mountain':
+      style.setProperty('--color-accent', '#f8f8fa');
+      style.setProperty('--color-text', '#f8f8fa');
+      style.setProperty('--color-base00', '#121c28');
+      style.setProperty('--color-base01', '#23364e');
+      style.setProperty('--color-base02', '#52647c');
+      style.setProperty('--color-base03', '#8294ac');
+      style.setProperty('--loginpage-image', "url(https://hdqwalls.com/download/everest-3840x2160.jpg)");
+      break;
+    case 'vax':
+      style.setProperty('--color-accent', '#492f29');
+      style.setProperty('--color-text', '#492f29');
+      style.setProperty('--color-base00', '#9c6544');
+      style.setProperty('--color-base01', '#9c6544');
+      style.setProperty('--color-base02', '#9c6544');
+      style.setProperty('--color-base03', '#9c6544');
+      style.setProperty('--loginpage-image', "url(https://wallpapers.com/images/hd/star-wars-place-ztno3exzqff0m0ci.webp)");
+      break;
+    // Add more cases for other profiles as needed
     default:
     // Handle default case or do nothing if no match found
   }

@@ -23,7 +23,7 @@ body {
   -webkit-backdrop-filter: var(--blur-value-large) !important;
 }
 
-#centercontainer{
+#centercontainer {
   background-color: #00000020 !important;
   backdrop-filter: var(--blur-value-small) !important;
   -webkit-backdrop-filter: var(--blur-value-small) !important;
@@ -41,10 +41,12 @@ body {
 .toast__content {
   background-color: var(--color-base01) !important;
 }
+
 .modern-ui .float-label__input+label>span {
   top: -67px !important;
 }
-#game-div{
+
+#game-div {
   background-color: var(--color-base01);
   padding: 0px !important;
   border-radius: 15px;
@@ -55,4 +57,27 @@ body {
   border: 3px solid var(--color-base03);
   height: 282px;
   width: 282px;
+  display: flex;
+  flex-direction: column;
+}
+
+#play_button,
+#tryagain {
+  font-size: 20px !important;
+  width: 168px !important;
+  padding: 4px !important;
+  border-width: 3px !important;
+  border-radius: 10px !important;
+  align-self: center !important;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.gameover {
+  margin-top: 20px !important;
+  font-size: 35px !important;
+}
+
+.score {
+  font-size: 20px !important;
 }

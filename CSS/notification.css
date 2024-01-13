@@ -42,7 +42,8 @@
   width: auto !important;
   margin: 3px !important;
 }
-.div{
+
+.div {
   color: var(--color-text) !important;
 }
 
@@ -53,7 +54,8 @@
   border: var(--border-size) solid var(--color-hover-border) !important;
   text-decoration: none !important;
 }
-a.js-toast-btn.toast__btn.smscButton.blue{
+
+a.js-toast-btn.toast__btn.smscButton.blue {
   border: 2px solid var(--color-base02) !important;
   border-radius: 50px !important;
   background: var(--color-base01) !important;
@@ -66,6 +68,7 @@ a.js-toast-btn.toast__btn.smscButton.blue{
   text-decoration-thickness: 2px !important;
   width: auto !important;
 }
-li.notifs-toaster__toast.modern-ui{
+
+li.notifs-toaster__toast.modern-ui {
   background-color: var(--color-base01) !important;
 }

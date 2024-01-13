@@ -18,8 +18,8 @@ async function fetchData(entiteit, halte) {
   } catch (error) {
     console.log('Error fetching data:', error);
     const leftContainerbottom = document.getElementById('leftContainerbottom');
-    if (leftContainerbottom.innerHTML != "There are no busses for this stop now"){
-      leftContainerbottom.innerHTML = 'Could not fetch data, please try again later...';
+    if (leftContainerbottom.innerText != "There are no busses for this stop at the moment.") {
+      leftContainerbottom.innerHTML = '<p class=lijninfo>Could not fetch data, please try again later...</p>';
     }
 
   }
@@ -28,8 +28,8 @@ async function fetchData(entiteit, halte) {
 
 function createApplication(data) {
 
-  if (!data.halteDoorkomsten[0]){
-    leftContainerbottom.innerHTML = 'There are no busses for this stop now';
+  if (!data.halteDoorkomsten[0]) {
+    leftContainerbottom.innerHTML = '<p class=lijninfo>There are no busses for this stop at the moment.</p>';
   }
   let doorkomstlength = data.halteDoorkomsten[0].doorkomsten.length
   const bestemmingen = []

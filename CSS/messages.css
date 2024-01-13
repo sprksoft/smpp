@@ -73,6 +73,7 @@
   background: var(--color-accent) !important;
   width: var(--border-size) !important;
 }
+
 .searchInputField,
 #tomain,
 .compose_title,
@@ -80,17 +81,20 @@
 .tox-mbtn__select-label,
 .tox-tbtn__select-label,
 .searchDivHighlight,
-.row_info_1{
+.row_info_1 {
   color: black !important;
 }
-#smscMain{
+
+#smscMain {
   height: 0% !important;
 }
-.smscleftnavcontainer{
+
+.smscleftnavcontainer {
   background-color: var(--color-base01) !important;
 }
-.smsc-column-nav__button:hover{
-  border-color: var(--color-base02) !important ;
+
+.smsc-column-nav__button:hover {
+  border-color: var(--color-base02) !important;
   background-color: var(--color-base02) !important;
 }
 
@@ -183,18 +187,25 @@
 img[src="/modules/Messages/themes/default/images/loading_big.gif"] {
   display: none !important;
 }
-.drag-container{
-  border: 2px solid var(--color-accent)!important;
+
+.drag-container {
+  border: 2px solid var(--color-accent) !important;
 }
-.smsc-container__title{
+
+.smsc-container__title {
   color: var(--color-accent) !important;
 }
-.smsc-table__row:hover,.smsc-table__header{
+
+.smsc-table__row:hover,
+.smsc-table__header {
   background-color: var(--color-base02) !important;
 }
-.smsc-tabslist{
+
+.smsc-tabslist {
   border: 0px !important;
 }
-#subjectInput,.subjectInput{
+
+#subjectInput,
+.subjectInput {
   color: black !important;
 }

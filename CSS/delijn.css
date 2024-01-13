@@ -11,7 +11,8 @@
     display: flex;
     flex-direction: column;
 }
-.lijncardshover:hover{
+
+.lijncardshover:hover {
     filter: brightness(80%) !important;
     cursor: pointer !important;
 }
@@ -69,15 +70,23 @@
 .topright {
     width: 160px;
 }
-.delijn_app_title{
+
+.delijn_app_title {
     margin-bottom: 0px !important;
     text-align: center !important;
     font-size: 23px !important;
 }
-.searchbutton{
+
+.searchbutton {
     height: 35px !important;
     width: 35px !important;
     background: var(--color-base01) !important;
     border-radius: 10px !important;
-    border: 1px solid var(--color-base03)!important;
+    border: 1px solid var(--color-base03) !important;
+}
+
+.lijninfo {
+    font-size: 16px !important;
+    font-weight: bold;
+    text-align: center;
 }
