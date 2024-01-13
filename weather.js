@@ -18,12 +18,6 @@ async function updateWeatherDiv(weatherData) {
     return;
   }
   const rightContainer = document.getElementById('rightcontainer');
-
-  if (!rightContainer) {
-    return;
-  }
-
-  rightContainer.innerHTML = '';
   weatherdiv = document.createElement("div");
   const { name, main, weather, wind } = weatherData; // Include rain data
   const temperature = Math.round(main.temp);
@@ -121,7 +115,6 @@ async function updateWeatherDiv(weatherData) {
 }
 
 async function loadOldData() {
-  //FIXME: when undefined is in local storage this like errors
   let weatherData = JSON.parse(window.localStorage.getItem("weatherdata"));
   updateWeatherDiv(weatherData);
 }
@@ -129,11 +122,6 @@ async function loadOldData() {
 
 async function set_weather_loc(loc) {
   const currentdate = new Date();
- if (loc == "") {
-    document.getElementById('rightcontainer').innerHTML = "";
-    console.log("No location provided, no weather needed")
-    return;
-  }
   if (window.localStorage.getItem("lastupdate") == undefined) {
     window.localStorage.setItem("lastupdate", currentdate)
     window.localStorage.setItem("lastlocation", loc)
@@ -141,7 +129,7 @@ async function set_weather_loc(loc) {
 
   let lastupdate_date = new Date(window.localStorage.getItem("lastupdate"));
 
-  let difference = Math.abs(lastupdate_date - currentdate) / 1000; // Difference in seconds
+  let difference = Math.abs(lastupdate_date - currentdate) / 1000;
 
   if (difference > 600 || loc != (window.localStorage.getItem("lastlocation")) || !(window.localStorage.getItem("weatherdata"))) {
     window.localStorage.setItem("lastupdate", currentdate)

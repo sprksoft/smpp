@@ -76,7 +76,14 @@ async function apply() {
   };
   //check if on homepage:
   if(centralContainer){
-    await set_weather_loc(loc);
+    rightContainer.innerHTML = ""
+    if(loc != ""){
+      await set_weather_loc(loc);
+    }
+    if(showsnake){
+      startSnakeGame()
+    }
+
     if (halte) {
       decodehalte()
       document.getElementById("leftcontainer").style.display = "inline"

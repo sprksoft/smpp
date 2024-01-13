@@ -1,47 +1,46 @@
-function gameOver() {
+function startSnakeGame(){
+  let div = document.createElement("div")
+  document.getElementById("rightcontainer").appendChild(document.createElement("div"))
+  let rightContainer = document.getElementById("rightcontainer")
+  rightContainer.appendChild(div)
+  div.innerHTML = `<div id=game-div><h2 id="play_button">Play</h2></div>`
+  document.getElementById('play_button').addEventListener("click",()=>{
+    div.innerHTML = `<div id=game-div><canvas id=game-container></div>`
+    snakeGame()
+  })
+}
+function gameOver(score) {
   // Display game over message
-  const gameOverMessage = document.createElement('div');
-  gameOverMessage.innerHTML = '<h2>Game Over!</h2><p>Press F5 to restart.</p>';
-  gameOverMessage.style.textAlign = 'center';
-  gameOverMessage.style.position = 'absolute';
-  document.getElementById('rightcontainer').appendChild(gameOverMessage);
-
+  const gamediv = document.getElementById("game-div");
+  gamediv.innerHTML = `<h2 class=gameover>Game Over!</h2><p class=score>score: ${score}</p> <h3 id=tryagain>
+  Try Again</h3>`;
   // Stop the game loop
-  clearInterval(gameInterval);
+  document.addEventListener('keydown', event => {
+    if (event.key === "Enter") {
+      gamediv.innerHTML = `<canvas id=game-container>`
+      snakeGame()
+    }
+  });
+document.getElementById("tryagain").addEventListener("click",()=>{
+  gamediv.innerHTML = `<canvas id=game-container>`
+  snakeGame()
+})
 
-  // Remove keyboard input listener
-  document.removeEventListener('keydown', handleKeyPress);
 }
 
-function handleKeyPress(event) {
-  // Handle keyboard input
-  if (event.key === 'ArrowUp') {
-
-    document.getElementById('rightcontainer').innerHTML = '';
-    snakeGame();
-  }
-}
 function snakeGame(){
-let div = document.createElement("div")
-document.getElementById("rightcontainer").appendChild(document.createElement("div"))
-let rightContainer = document.getElementById("rightcontainer")
-console.log("rightcontainer:",rightContainer)
-div.innerHTML = `<div class=game-div><canvas id=game-container></div>`
-rightContainer.appendChild(div)
-console.log("div:",div)
-console.log("rightcontainer:",rightContainer)
-
+    let style = document.documentElement.style;
     const canvas = document.getElementById('game-container');
     console.log(canvas)
     const ctx = canvas.getContext('2d');
-
+    let score = 0
     const SNAKE_SIZE = 10;
     const numer_of_colums = 21
     const numer_of_rows = 21
     const WIDTH = numer_of_colums * SNAKE_SIZE * 2;
     const HEIGHT = numer_of_rows * SNAKE_SIZE * 2;
     const SNAKE_SPEED = 100;
-    const SNAKE_COLOR = 'black';
+    const SNAKE_COLOR = style.getPropertyValue('--color-base03');
 
     canvas.width = WIDTH;
     canvas.height = HEIGHT;
@@ -49,7 +48,7 @@ console.log("rightcontainer:",rightContainer)
       constructor() {
         this.x = Math.floor(Math.random() * numer_of_rows) * SNAKE_SIZE*2 + SNAKE_SIZE; // Random x position in multiples of 10
         this.y = Math.floor(Math.random() * numer_of_colums) * SNAKE_SIZE*2 + SNAKE_SIZE; // Random y position in multiples of 10
-        this.color = 'red';
+        this.color = style.getPropertyValue('--color-accent');
       }
     
       draw() {
@@ -66,6 +65,7 @@ console.log("rightcontainer:",rightContainer)
       if (snake.x === food.x && snake.y === food.y) {
         snake.length++;
         food = new Food(); 
+        score += 1;
       }
     }
 
@@ -91,7 +91,7 @@ console.log("rightcontainer:",rightContainer)
         if (this.x < 5 || this.x > WIDTH-5 || this.y < 5 || this.y > HEIGHT-5) {
           clearInterval(gameInterval); 
           console.log('Game Over: Boundary hit');
-          gameOver()
+          gameOver(score)
         }
       }
     
@@ -112,7 +112,7 @@ console.log("rightcontainer:",rightContainer)
         if (snake.x === snake.body[i].x && snake.y === snake.body[i].y) {
           clearInterval(gameInterval); 
           console.log('Game Over: Self collision');
-          gameOver()
+          gameOver(score)
 
         }
       }

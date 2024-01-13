@@ -27,8 +27,7 @@ async function fetchData(entiteit, halte) {
 }
 
 function createApplication(data) {
-  const leftContainerbottom = document.getElementById('leftContainerbottom');
-  leftContainerbottom.innerHTML = " "
+
   if (!data.halteDoorkomsten[0]){
     leftContainerbottom.innerHTML = 'There are no busses for this stop now';
   }
