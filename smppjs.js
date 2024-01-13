@@ -177,12 +177,14 @@ if (popup != null) {
         <option value="ldev">Dark Sands</option>
         <option value="birb">Midnight Sapphire</option>
         <option value="stalker">Ruby Eclipse</option>
-        <option value="tan">Soft Sands</option>
+        <option value="chocolate">Dark Chocolate</option>
         <option value="fall">Autumn Gloom</option>
         <option value="winter">Frozen Lands</option>
         <option value="purple">Amethyst Shadow</option>
         <option value="matcha">Matcha Green</option>
         <option value="mountain">Sharp Peaks</option>
+        <option value="galaxy">Galaxy</option>
+        <option value="tan">Soft Sands</option>
     </select>
     
     <h3 class="popuptitles">Show DeLijn app:</h3>
@@ -239,7 +241,7 @@ function set_background(background) {
   style.setProperty('--loginpage-image', "url(" + background + ")");
 }
 
-const theme_names = ["default", "white", "ldev", "birb", "stalker", "tan", "winter", "fall", "matcha", "vax"];
+const theme_names = ["default", "white", "ldev", "birb", "stalker", "chocolate", "winter", "fall", "matcha", "vax","galaxy"];
 function set_theme(name) {
   let style = document.documentElement.style;
   style.setProperty('--color-accent', '#8f8f95');
@@ -261,6 +263,15 @@ function set_theme(name) {
   switch (name) {
     case "default":
       //default changes nothing so keep
+      break;
+    case 'galaxy':
+      style.setProperty('--color-accent', '#4b5a6f');
+      style.setProperty('--color-text', '#1e222c');
+      style.setProperty('--color-base00', '#f6f6f6');
+      style.setProperty('--color-base01', '#efeeec');
+      style.setProperty('--color-base02', '#e3e2e0');
+      style.setProperty('--color-base03', '#cdd8ee');
+      style.setProperty('--loginpage-image', "url(https://4kwallpapers.com/images/wallpapers/gargantua-black-3840x2160-9621.jpg)");
       break;
     case 'white':
       style.setProperty('--color-accent', '#4b5a6f');
@@ -302,14 +313,14 @@ function set_theme(name) {
       style.setProperty('--color-base03', "#680e0f");
       style.setProperty('--loginpage-image', "url(https://cdn.wallpapersafari.com/36/24/tdUr7n.jpg)");
       break;
-    case 'tan':
+    case 'chocolate':
       style.setProperty('--color-accent', '#F0F2F0');
-      style.setProperty('--color-text', '#e0dcd3');
-      style.setProperty('--color-base00', '#402F2D');
-      style.setProperty('--color-base01', '#594645');
-      style.setProperty('--color-base02', '#90756b');
-      style.setProperty('--color-base03', '#D9C5B4');
-      style.setProperty('--loginpage-image', "url(https://4kwallpapers.com/images/wallpapers/gargantua-black-3840x2160-9621.jpg)");
+      style.setProperty('--color-text', '#dcdad0');
+      style.setProperty('--color-base00', '#20181c');
+      style.setProperty('--color-base01', '#2c2326');
+      style.setProperty('--color-base02', '#3b2e2e');
+      style.setProperty('--color-base03', '#32241f');
+      style.setProperty('--loginpage-image', "url(https://hdqwalls.com/wallpapers/macos-mojave-dusk-mode-stock-el.jpg)");
       break;
     case 'fall':
       style.setProperty('--color-accent', '#F2AF5C');
