@@ -11,6 +11,9 @@ async function fetchHaltesData(query) {
   returned_data = await response.json()
   await showchoices(returned_data)
 }
+function clearLeftbottom(){
+  document.getElementById('leftContainerbottom').innerHTML = ""
+}
 async function fetchOptionData(entiteitnummer, haltenummer) {
   const apiKey = 'ddb68605719d4bb8b6444b6871cefc7a'
   const fetch_url = `https://api.delijn.be/DLKernOpenData/api/v1/haltes/${entiteitnummer}/${haltenummer}/lijnrichtingen`
@@ -63,7 +66,7 @@ async function createOption(givendata, i) {
 async function showchoices(returned_data) {
 
   let mogelijke_haltes = returned_data.haltes
-  document.getElementById('leftContainerbottom').innerHTML = ""
+  clearLeftbottom()
   for (let i = 0; i < mogelijke_haltes.length; i++) {
     await createOption(returned_data.haltes[i], i)
   }
@@ -74,6 +77,8 @@ function chosen(choice, data) {
   lijnData.entiteitnummer = data.haltes[choice].entiteitnummer
   lijnData.haltenummer = data.haltes[choice].haltenummer
   window.localStorage.setItem("lijnData", JSON.stringify(lijnData));
+  clearLeftbottom()
+  document.getElementById('haltetext').value = ""
   fetchData(data.haltes[choice].entiteitnummer, data.haltes[choice].haltenummer)
 }
 function getchoice(data) {
@@ -132,7 +137,6 @@ function decodehalte() {
     });
     let lijnData = JSON.parse(window.localStorage.getItem("lijnData"));
     if (lijnData != undefined) {
-
       fetchData(lijnData.entiteitnummer, lijnData.haltenummer)
     }
     else {

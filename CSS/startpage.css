@@ -81,3 +81,14 @@ body {
 .score {
   font-size: 20px !important;
 }
+#speedslider{
+  background-color: var(--color-base02) !important;
+  margin-left: 47px !important;
+  margin-right: 5px !important;
+  margin-top: -10px !important;
+}
+.text_next_to_slider{
+  margin-top: -14px !important;
+  margin-right: 47px !important;
+  font-size: 15px !important;
+}

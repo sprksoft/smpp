@@ -67,10 +67,7 @@ function createApplication(data) {
       real_timeTijdstip.push("none")
     }
   }
-  if (leftContainer == null) {
-    return
-  }
-
+  clearLeftbottom()
   for (let i = 0; i < doorkomstlength; i++) {
 
     const date = new Date(dienstregelingTijdstip[i]);
@@ -81,7 +78,6 @@ function createApplication(data) {
     let minute = date.getMinutes();
     const totalMinutes = hour * 60 + minute;
     const totalMinutescurrent = currenthour * 60 + currentminute;
-
 
     if (real_timeTijdstip[i] != "none") {
 
