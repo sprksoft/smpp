@@ -770,3 +770,6 @@ label.form__label.js-form-label.label__resolvedStatus.form__label--no-margin-top
 .st2 {
   fill: var(--color-accent) !important;
 }
+div{
+  color: var(--color-text) !important;
+}

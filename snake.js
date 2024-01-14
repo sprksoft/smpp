@@ -26,7 +26,6 @@ function setSnakeSpeed(){
   speedMultiplier = speedMultiplier.toFixed(1)
   document.getElementById('speedmultiplier').innerText = `${speedMultiplier}x`
   window.localStorage.setItem("snakespeedmultiplier", speedMultiplier)
-  console.log(speedMultiplier)
 }
 function startSnakeGame(){
   let div = document.createElement("div")
@@ -73,7 +72,6 @@ function gameOver(score) {
 function snakeGame() {
   let style = document.documentElement.style;
   const canvas = document.getElementById('game-container');
-  console.log(canvas)
   const ctx = canvas.getContext('2d');
   let score = 0
   const SNAKE_SIZE = 10;
@@ -82,15 +80,9 @@ function snakeGame() {
   const WIDTH = numer_of_colums * SNAKE_SIZE * 2;
   const HEIGHT = numer_of_rows * SNAKE_SIZE * 2;
   const SNAKE_SPEED = 150 / window.localStorage.getItem("snakespeedmultiplier");
-  console.log('set game speed: ',SNAKE_SPEED)
   const SNAKE_COLOR = style.getPropertyValue('--color-text');
-
   canvas.width = WIDTH;
   canvas.height = HEIGHT;
-
-
-
-
   class Snake {
     constructor() {
       this.x = WIDTH / 2;
@@ -112,11 +104,9 @@ function snakeGame() {
       }
       if (this.x < 5 || this.x > WIDTH - 5 || this.y < 5 || this.y > HEIGHT - 5) {
         clearInterval(gameInterval);
-        console.log('Game Over: Boundary hit');
         gameOver(score)
       }
     }
-
     draw() {
       ctx.fillStyle = SNAKE_COLOR;
       this.body.forEach(part => {
@@ -132,7 +122,6 @@ function snakeGame() {
       this.generateNewPosition();
       this.color = style.getPropertyValue('--color-accent');
     }
-
     generateNewPosition() {
       let overlapping = true;
       while (overlapping) {
@@ -141,7 +130,6 @@ function snakeGame() {
         overlapping = snake.body.some(part => part.x === this.x && part.y === this.y);
       }
     }
-
     draw() {
       ctx.fillStyle = this.color;
       ctx.beginPath();
@@ -150,7 +138,6 @@ function snakeGame() {
     }
   }
   let food = new Food();
-
   function checkFood() {
     if (snake.x === food.x && snake.y === food.y) {
       snake.length++;
@@ -158,23 +145,18 @@ function snakeGame() {
       score += 1;
     }
   }
-
   function checkCollision() {
     for (let i = 1; i < snake.body.length; i++) {
 
       if (snake.x === snake.body[i].x && snake.y === snake.body[i].y) {
         clearInterval(gameInterval);
-        console.log('Game Over: Self collision');
         gameOver(score)
 
       }
     }
   }
-
   function gameLoop() {
     ctx.clearRect(0, 0, WIDTH, HEIGHT);
-
-
     snake.move();
     snake.body.unshift({ x: snake.x, y: snake.y });
     if (snake.body.length > snake.length) {
@@ -185,9 +167,7 @@ function snakeGame() {
     food.draw();
     checkFood();
   }
-
   let gameInterval = setInterval(gameLoop, SNAKE_SPEED);
-
   document.addEventListener('keydown', event => {
     if (event.key === 'ArrowLeft' && snake.direction !== 'RIGHT') {
       snake.direction = 'LEFT';
@@ -204,5 +184,3 @@ function snakeGame() {
     }
   });
 }
-
-

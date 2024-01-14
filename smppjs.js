@@ -241,7 +241,7 @@ function set_background(background) {
   style.setProperty('--loginpage-image', "url(" + background + ")");
 }
 
-const theme_names = ["default", "white", "ldev", "birb", "stalker", "chocolate", "winter", "fall", "matcha", "vax","galaxy"];
+const theme_names = ["default", "white", "ldev", "birb", "stalker", "chocolate", "winter", "fall", "matcha", "vax", "galaxy"];
 function set_theme(name) {
   let style = document.documentElement.style;
   style.setProperty('--color-accent', '#8f8f95');
@@ -314,12 +314,12 @@ function set_theme(name) {
       style.setProperty('--loginpage-image', "url(https://cdn.wallpapersafari.com/36/24/tdUr7n.jpg)");
       break;
     case 'chocolate':
-      style.setProperty('--color-accent', '#F0F2F0');
+      style.setProperty('--color-accent', '#cdbcb4');
       style.setProperty('--color-text', '#dcdad0');
       style.setProperty('--color-base00', '#20181c');
       style.setProperty('--color-base01', '#2c2326');
       style.setProperty('--color-base02', '#3b2e2e');
-      style.setProperty('--color-base03', '#32241f');
+      style.setProperty('--color-base03', '#4c3e3e');
       style.setProperty('--loginpage-image', "url(https://hdqwalls.com/wallpapers/macos-mojave-dusk-mode-stock-el.jpg)");
       break;
     case 'fall':
