@@ -13,7 +13,7 @@
 }
 
 .smsc-topnav [data-notifs] .notifs__hdr [role=switch] .switch-values:after {
-  background-color: var(--color-accent) !important;
+  background-color: var(--color-base03) !important;
 }
 
 .smsc-topnav [data-notifs] .notifs__hdr button:focus:not(.focus-ring) {

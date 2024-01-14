@@ -87,6 +87,7 @@
   color: var(--color-accent) !important;
   box-shadow: none !important;
   border-color: var(--color-accent) !important;
+  background-color: var(--color-base01) !important;
 }
 
 .feedback--white {

@@ -296,12 +296,12 @@ function set_theme(name) {
       style.setProperty('--loginpage-image', "url(https://www.hdwallpapers.in/download/macos_monterey_shapes_hd_macos-2560x1440.jpg)");
       break;
     case 'stalker':
-      style.setProperty('--color-accent', "#f51a26");
-      style.setProperty('--color-text', "#f87065");
-      style.setProperty('--color-base00', "#191817");
-      style.setProperty('--color-base01', "#481b18");
-      style.setProperty('--color-base02', "#940a12");
-      style.setProperty('--color-base03', "#680e0f");
+      style.setProperty('--color-accent', "#d6574e");
+      style.setProperty('--color-text', "#d9564b");
+      style.setProperty('--color-base00', "#1a1311");
+      style.setProperty('--color-base01', "#371b19");
+      style.setProperty('--color-base02', "#5c1c1a");
+      style.setProperty('--color-base03', "#823530");
       style.setProperty('--loginpage-image', "url(https://media.timeout.com/images/102945740/image.jpg)");
       break;
     case 'chocolate':
@@ -377,12 +377,12 @@ function set_theme(name) {
       style.setProperty('--loginpage-image', "url(https://hdqwalls.com/wallpapers/macos-mojave-dusk-mode-stock-el.jpg)");
       break;
     case 'galaxy':
-      style.setProperty('--color-accent', '#bd92cd');
+      style.setProperty('--color-accent', '#daa0ef');
       style.setProperty('--color-text', '#f0f0f0');
       style.setProperty('--color-base00', '#1e222c');
       style.setProperty('--color-base01', '#2e3440');
-      style.setProperty('--color-base02', '#3b4252');
-      style.setProperty('--color-base03', '#434c5e');
+      style.setProperty('--color-base02', '#474e5f');
+      style.setProperty('--color-base03', '#5c667d');
       style.setProperty('--loginpage-image', "url(https://i.redd.it/u80014ygsea51.png)");
       break;
 

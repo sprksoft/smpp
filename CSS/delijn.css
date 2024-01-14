@@ -13,7 +13,7 @@
 }
 
 .lijncardshover:hover {
-    filter: brightness(80%) !important;
+    background-color: var(--color-base02) !important;
     cursor: pointer !important;
 }
 

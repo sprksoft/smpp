@@ -134,7 +134,7 @@ body.modern-ui .homepage__block:not(:last-child) {
 }
 
 a {
-  color: var(--color-accent) !important;
+  color: var(--color-text) !important;
 }
 
 a:link {
@@ -554,7 +554,7 @@ input:checked+.slider:before {
 
 /*Settings menu*/
 #searchMenu {
-  left: -50px !important;
+  left: -73px !important;
   background-color: var(--color-settings-bg) !important;
   border: 2px solid var(--color-settings-border) !important;
   border-radius: 10px !important;
@@ -688,9 +688,10 @@ input:checked+.slider:before {
   /* Green background */
   cursor: pointer;
   /* Cursor on hover */
-}.sliderblur::-webkit-slider-thumb:hover,
+}
+.sliderblur::-webkit-slider-thumb:hover,
 .sliderblur::-moz-range-thumb:hover {
-  filter: brightness(70%);
+  background: var(--color-base03) !important;
 }
 
 #modal-background {
@@ -777,5 +778,5 @@ div{
   stroke: var(--color-accent) !important;
 }
 #searchbutton:hover{
-  filter: brightness(75%) !important;
+  background-color: var(--color-base02) !important;
 }

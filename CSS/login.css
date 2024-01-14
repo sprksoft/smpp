@@ -134,7 +134,7 @@ a.smscButton[href="/login/sso/init/acm"],
 }
 
 .white_text_button:hover {
-  filter: brightness(90%) !important;
+  background-color: var(--color-base02) !important;
 }
 
 .login-app__infoblock--black {
