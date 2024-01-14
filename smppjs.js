@@ -184,7 +184,7 @@ if (popup != null) {
         <option value="matcha">Matcha Green</option>
         <option value="mountain">Sharp Peaks</option>
         <option value="galaxy">Galaxy</option>
-        <option value="tan">Soft Sands</option>
+        <option value="sand">Soft Sands</option>
     </select>
     
     <h3 class="popuptitles">Show DeLijn app:</h3>
@@ -241,7 +241,7 @@ function set_background(background) {
   style.setProperty('--loginpage-image', "url(" + background + ")");
 }
 
-const theme_names = ["default", "white", "ldev", "birb", "stalker", "chocolate", "winter", "fall", "matcha", "vax", "galaxy"];
+const theme_names = ["default", "white", "ldev", "birb", "stalker", "chocolate", "winter", "fall", "matcha", "vax", "galaxy", "sand"];
 function set_theme(name) {
   let style = document.documentElement.style;
   style.setProperty('--color-accent', '#8f8f95');
@@ -263,15 +263,6 @@ function set_theme(name) {
   switch (name) {
     case "default":
       //default changes nothing so keep
-      break;
-    case 'galaxy':
-      style.setProperty('--color-accent', '#4b5a6f');
-      style.setProperty('--color-text', '#1e222c');
-      style.setProperty('--color-base00', '#f6f6f6');
-      style.setProperty('--color-base01', '#efeeec');
-      style.setProperty('--color-base02', '#e3e2e0');
-      style.setProperty('--color-base03', '#cdd8ee');
-      style.setProperty('--loginpage-image', "url(https://4kwallpapers.com/images/wallpapers/gargantua-black-3840x2160-9621.jpg)");
       break;
     case 'white':
       style.setProperty('--color-accent', '#4b5a6f');
@@ -320,7 +311,7 @@ function set_theme(name) {
       style.setProperty('--color-base01', '#2c2326');
       style.setProperty('--color-base02', '#3b2e2e');
       style.setProperty('--color-base03', '#4c3e3e');
-      style.setProperty('--loginpage-image', "url(https://hdqwalls.com/wallpapers/macos-mojave-dusk-mode-stock-el.jpg)");
+      style.setProperty('--loginpage-image', "url(https://www.hdwallpapers.in/download/wet_brown_leaves_hd_dark_aesthetic-HD.jpg)");
       break;
     case 'fall':
       style.setProperty('--color-accent', '#F2AF5C');
@@ -376,6 +367,25 @@ function set_theme(name) {
       style.setProperty('--color-base03', '#9c6544');
       style.setProperty('--loginpage-image', "url(https://wallpapers.com/images/hd/star-wars-place-ztno3exzqff0m0ci.webp)");
       break;
+    case 'sand':
+      style.setProperty('--color-accent', '#8097c5');
+      style.setProperty('--color-text', '#c1a49c');
+      style.setProperty('--color-base00', '#2e2526');
+      style.setProperty('--color-base01', '#3d3434');
+      style.setProperty('--color-base02', '#544848');
+      style.setProperty('--color-base03', '#634f4e');
+      style.setProperty('--loginpage-image', "url(https://hdqwalls.com/wallpapers/macos-mojave-dusk-mode-stock-el.jpg)");
+      break;
+      case 'galaxy':
+        style.setProperty('--color-accent', '#bd92cd');
+        style.setProperty('--color-text', '#f0f0f0');
+        style.setProperty('--color-base00', '#1e222c');
+        style.setProperty('--color-base01', '#2e3440');
+        style.setProperty('--color-base02', '#3b4252');
+        style.setProperty('--color-base03', '#434c5e');
+        style.setProperty('--loginpage-image', "url(https://i.redd.it/u80014ygsea51.png)");
+        break;
+      
     // Add more cases for other profiles as needed
     default:
     // Handle default case or do nothing if no match found
