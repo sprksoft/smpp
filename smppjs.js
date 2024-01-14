@@ -120,7 +120,7 @@ function store() {
   settingsData.background = background;
   settingsData.halte = halte;
   settingsData.overwrite_theme = overwrite_theme;
-  settingsData.location = loc;
+  settingsData.location = loc.charAt(0).toUpperCase() + loc.slice(1);
   settingsData.blur = slider;
   settingsData.snow = parseInt(snowSlider);
   settingsData.shownews = shownews;
@@ -177,14 +177,14 @@ if (popup != null) {
         <option value="ldev">Dark Sands</option>
         <option value="birb">Midnight Sapphire</option>
         <option value="stalker">Ruby Eclipse</option>
-        <option value="chocolate">Dark Chocolate</option>
-        <option value="fall">Autumn Gloom</option>
-        <option value="winter">Frozen Lands</option>
-        <option value="purple">Amethyst Shadow</option>
-        <option value="matcha">Matcha Green</option>
+        <option value="chocolate">Dark Mocha</option>
         <option value="mountain">Sharp Peaks</option>
-        <option value="galaxy">Galaxy</option>
-        <option value="sand">Soft Sands</option>
+        <option value="winter">Arctic Azure</option>
+        <option value="galaxy">Fluorescent Galaxy</option>
+        <option value="sand">Sahara Oasis</option>
+        <option value="purple">Neon Violet</option>
+        <option value="fall">Autumn Gloom</option>
+        <option value="matcha">Matcha Green</option>
     </select>
     
     <h3 class="popuptitles">Show DeLijn app:</h3>
@@ -287,8 +287,8 @@ function set_theme(name) {
       style.setProperty('--loginpage-image', "url(https://i.redd.it/yfssdsfosao11.png)");
       break;
     case 'purple':
-      style.setProperty('--color-accent', '#993691');
-      style.setProperty('--color-text', '#a59dbf');
+      style.setProperty('--color-accent', '#bd4fb3');
+      style.setProperty('--color-text', '#d9cdff');
       style.setProperty('--color-base00', '#0b021d');
       style.setProperty('--color-base01', '#130332');
       style.setProperty('--color-base02', '#250654');
@@ -302,7 +302,7 @@ function set_theme(name) {
       style.setProperty('--color-base01', "#481b18");
       style.setProperty('--color-base02', "#940a12");
       style.setProperty('--color-base03', "#680e0f");
-      style.setProperty('--loginpage-image', "url(https://cdn.wallpapersafari.com/36/24/tdUr7n.jpg)");
+      style.setProperty('--loginpage-image', "url(https://media.timeout.com/images/102945740/image.jpg)");
       break;
     case 'chocolate':
       style.setProperty('--color-accent', '#cdbcb4');
@@ -314,12 +314,12 @@ function set_theme(name) {
       style.setProperty('--loginpage-image', "url(https://www.hdwallpapers.in/download/wet_brown_leaves_hd_dark_aesthetic-HD.jpg)");
       break;
     case 'fall':
-      style.setProperty('--color-accent', '#F2AF5C');
-      style.setProperty('--color-text', '#C2BAB2');
-      style.setProperty('--color-base00', '#261D1D');
-      style.setProperty('--color-base01', '#40312E');
-      style.setProperty('--color-base02', '#BF5B45');
-      style.setProperty('--color-base03', '#D9734E');
+      style.setProperty('--color-accent', '#f8c791');
+      style.setProperty('--color-text', '#d3cbc3');
+      style.setProperty('--color-base00', '#231717');
+      style.setProperty('--color-base01', '#3b1c16');
+      style.setProperty('--color-base02', '#7b3f31');
+      style.setProperty('--color-base03', '#bf6f51');
       style.setProperty('--loginpage-image', "url(https://wallpapercave.com/wp/wp7464660.jpg)");
       break;
     case 'winter':
@@ -341,8 +341,8 @@ function set_theme(name) {
       style.setProperty('--loginpage-image', "url(https://wallpapercave.com/wp/wp4673203.jpg)");
       break;
     case 'matcha':
-      style.setProperty('--color-accent', '#66ac6d');
-      style.setProperty('--color-text', '#9bd49f');
+      style.setProperty('--color-accent', '#d1f8e7');
+      style.setProperty('--color-text', '#d1ebd2');
       style.setProperty('--color-base00', '#243926');
       style.setProperty('--color-base01', '#365138');
       style.setProperty('--color-base02', '#456046');
@@ -376,16 +376,16 @@ function set_theme(name) {
       style.setProperty('--color-base03', '#634f4e');
       style.setProperty('--loginpage-image', "url(https://hdqwalls.com/wallpapers/macos-mojave-dusk-mode-stock-el.jpg)");
       break;
-      case 'galaxy':
-        style.setProperty('--color-accent', '#bd92cd');
-        style.setProperty('--color-text', '#f0f0f0');
-        style.setProperty('--color-base00', '#1e222c');
-        style.setProperty('--color-base01', '#2e3440');
-        style.setProperty('--color-base02', '#3b4252');
-        style.setProperty('--color-base03', '#434c5e');
-        style.setProperty('--loginpage-image', "url(https://i.redd.it/u80014ygsea51.png)");
-        break;
-      
+    case 'galaxy':
+      style.setProperty('--color-accent', '#bd92cd');
+      style.setProperty('--color-text', '#f0f0f0');
+      style.setProperty('--color-base00', '#1e222c');
+      style.setProperty('--color-base01', '#2e3440');
+      style.setProperty('--color-base02', '#3b4252');
+      style.setProperty('--color-base03', '#434c5e');
+      style.setProperty('--loginpage-image', "url(https://i.redd.it/u80014ygsea51.png)");
+      break;
+
     // Add more cases for other profiles as needed
     default:
     // Handle default case or do nothing if no match found

@@ -457,7 +457,7 @@ div.smscCheckbox label::selection {
   height: 35px !important;
 }
 
-#haltetext {
+#haltetext,#location {
   width: max-content !important;
   height: 35px !important;
   margin-top: 0px !important;
@@ -772,4 +772,10 @@ label.form__label.js-form-label.label__resolvedStatus.form__label--no-margin-top
 }
 div{
   color: var(--color-text) !important;
+}
+.stroke1{
+  stroke: var(--color-accent) !important;
+}
+#searchbutton:hover{
+  filter: brightness(75%) !important;
 }
