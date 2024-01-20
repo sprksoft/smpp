@@ -1,105 +1,64 @@
-async function fetchHaltesData(query) {
-  const apiKey = 'ddb68605719d4bb8b6444b6871cefc7a'
-  const fetch_url = `https://api.delijn.be/DLZoekOpenData/v1/zoek/haltes/${query}?maxAantalHits=3`
-  // Add the await keyword before fetch
-  const response = await fetch(fetch_url, {
-    headers: {
-      'Ocp-Apim-Subscription-Key': apiKey,
-    }
-  });
-  // Now you can call the json method on the response object
-  returned_data = await response.json()
-  await showchoices(returned_data)
-}
-function clearLeftbottom(){
-  document.getElementById('leftContainerbottom').innerHTML = ""
-}
-async function fetchOptionData(entiteitnummer, haltenummer) {
-  const apiKey = 'ddb68605719d4bb8b6444b6871cefc7a'
-  const fetch_url = `https://api.delijn.be/DLKernOpenData/api/v1/haltes/${entiteitnummer}/${haltenummer}/lijnrichtingen`
-  // Add the await keyword before fetch
-  const response = await fetch(fetch_url, {
-    headers: {
-      'Ocp-Apim-Subscription-Key': apiKey,
-    }
-  });
-  // Now you can call the json method on the response object
-  returned_data = await response.json()
-  return returned_data
-}
-async function createOption(givendata, i) {
+const LijnApiKey = 'ddb68605719d4bb8b6444b6871cefc7a';
 
+async function fetchApiData(url) {
+  const response = await fetch(url, { headers: { 'Ocp-Apim-Subscription-Key': LijnApiKey } });
+  return await response.json();
+}
+
+async function fetchHaltesData(query) {
+  const fetch_url = `https://api.delijn.be/DLZoekOpenData/v1/zoek/haltes/${query}?maxAantalHits=3`;
+  const returnedData = await fetchApiData(fetch_url);
+  clearLeftbottom();
+  await Promise.all(returnedData.haltes.map((halte, i) => createOption(halte, i)));
+  getchoice(returnedData);
+}
+
+async function fetchOptionData(entiteitnummer, haltenummer) {
+  const fetch_url = `https://api.delijn.be/DLKernOpenData/api/v1/haltes/${entiteitnummer}/${haltenummer}/lijnrichtingen`;
+  return await fetchApiData(fetch_url);
+}
+
+async function createOption(givendata, i) {
   const leftContainerbottom = document.getElementById('leftContainerbottom');
-  div = document.createElement("div");
+  const div = document.createElement("div");
   leftContainerbottom.appendChild(div);
+
+  const optionData = await fetchOptionData(givendata.entiteitnummer, givendata.haltenummer);
+  const omschrijving = optionData.lijnrichtingen[0]?.omschrijving || "No info";
+
   div.innerHTML = `<div class="lijncards lijncardshover" id="lijncard${i}">
     <div class="top">
-
-    <h3 class="no">Loading...</h3>
+      <h3 class="no">${givendata.omschrijving}</h3>
     </div>
     <div class="times">
-    <span class="time">
-    </span>
-    <span class="intime">
-    </span>
-    </div></div>`
-  optionData = await fetchOptionData(givendata.entiteitnummer, givendata.haltenummer)
-  if (optionData.lijnrichtingen[0]) {
-    omschrijving = optionData.lijnrichtingen[0].omschrijving
-  } else {
-    omschrijving = "No info"
-  }
-  div.innerHTML = `<div class="lijncards lijncardshover" id="lijncard${i}" >
-      <div class="top">
-
-      <h3 class="no">${givendata.omschrijving}</h3>
-      </div>
-      <div class="times">
-      <span class="time">${omschrijving}
-      </span>
-      <span class="intime">
-      </span>
-      </div></div>`
-
-
+      <span class="time">${omschrijving}</span>
+      <span class="intime"></span>
+    </div>
+  </div>`;
 }
-async function showchoices(returned_data) {
 
-  let mogelijke_haltes = returned_data.haltes
-  clearLeftbottom()
-  for (let i = 0; i < mogelijke_haltes.length; i++) {
-    await createOption(returned_data.haltes[i], i)
-  }
-  getchoice(returned_data)
+function clearLeftbottom() {
+  document.getElementById('leftContainerbottom').innerHTML = "";
 }
+
 function chosen(choice, data) {
-  let lijnData = {}
-  lijnData.entiteitnummer = data.haltes[choice].entiteitnummer
-  lijnData.haltenummer = data.haltes[choice].haltenummer
-  window.localStorage.setItem("lijnData", JSON.stringify(lijnData));
-  clearLeftbottom()
-  document.getElementById('haltetext').value = ""
-  fetchData(data.haltes[choice].entiteitnummer, data.haltes[choice].haltenummer)
+  const lijnData = {
+    entiteitnummer: data.haltes[choice].entiteitnummer,
+    haltenummer: data.haltes[choice].haltenummer
+  };
+  localStorage.setItem("lijnData", JSON.stringify(lijnData));
+  clearLeftbottom();
+  document.getElementById('haltetext').value = "";
+  fetchData(data.haltes[choice].entiteitnummer, data.haltes[choice].haltenummer);
 }
+
 function getchoice(data) {
-  let option0 = document.getElementById("lijncard0")
-  if (document.getElementById("lijncard1")) {
-    let option1 = document.getElementById("lijncard1")
-    option1.addEventListener("click", function () {
-      chosen(1, data)
-    })
+  for (let i = 0; i < 3; i++) {
+    const option = document.getElementById(`lijncard${i}`);
+    if (option) {
+      option.addEventListener("click", () => chosen(i, data));
+    }
   }
-  if (document.getElementById("lijncard2")) {
-    let option2 = document.getElementById("lijncard2")
-    option2.addEventListener("click", function () {
-      chosen(2, data)
-    })
-  }
-  option0.addEventListener("click", function () {
-    chosen(0, data)
-  })
-
-
 }
 
 function decodehalte() {
