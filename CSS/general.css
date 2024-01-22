@@ -33,7 +33,9 @@ html {
 .js-btn-profile>img,
 .header__avatar,
 .topnav__menuitem>img,
-.splitdetail__header__avatar>img {
+.splitdetail__header__avatar>img,
+.smsc-tabslist__item:before,
+.smsc-tabslist__item:after {
   display: none !important;
 }
 
@@ -457,7 +459,8 @@ div.smscCheckbox label::selection {
   height: 35px !important;
 }
 
-#haltetext,#location {
+#haltetext,
+#location {
   width: max-content !important;
   height: 35px !important;
   margin-top: 0px !important;
@@ -679,6 +682,7 @@ input:checked+.slider:before {
   cursor: pointer;
   /* Cursor on hover */
 }
+
 .sliderblur::-moz-range-thumb {
   width: 15px;
   /* Set a specific slider handle width */
@@ -689,6 +693,7 @@ input:checked+.slider:before {
   cursor: pointer;
   /* Cursor on hover */
 }
+
 .sliderblur::-webkit-slider-thumb:hover,
 .sliderblur::-moz-range-thumb:hover {
   background: var(--color-base03) !important;
@@ -771,12 +776,30 @@ label.form__label.js-form-label.label__resolvedStatus.form__label--no-margin-top
 .st2 {
   fill: var(--color-accent) !important;
 }
-div [style*="margin"]{
+
+div [style*="margin"] {
   color: var(--color-text) !important;
 }
-.stroke1{
+
+.stroke1 {
   stroke: var(--color-accent) !important;
 }
-#searchbutton:hover{
+
+#searchbutton:hover {
+  background-color: var(--color-base02) !important;
+}
+
+.discordbutton {
+  display: flex;
+  margin: auto;
+  width: 40px;
+  height: 40px;
+  color: var(--color-text) !important;
+  text-align: center;
+  justify-content: center;
+  margin-top: 3px !important;
+  margin-left: -2px !important;
+}
+.bigdiscordbutton:hover{
   background-color: var(--color-base02) !important;
 }

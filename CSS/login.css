@@ -108,7 +108,6 @@ a.smscButton[href="/login/sso/init/acm"],
   border-radius: 40px !important;
   height: 40px !important;
   filter: brightness(80%) !important;
-
 }
 
 .modern-ui .float-label__input:focus+label>span,
