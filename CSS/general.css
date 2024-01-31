@@ -803,3 +803,16 @@ div [style*="margin"] {
 .bigdiscordbutton:hover{
   background-color: var(--color-base02) !important;
 }
+.color-picker {
+  display: none;
+  position: absolute;
+}
+button.colorpickerbutton {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  margin: 3px;
+  margin-top: 0px;
+}

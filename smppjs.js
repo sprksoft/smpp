@@ -17,6 +17,14 @@ const default_settings = {
   shownews: true,
   showsnake: false
 };
+const default_theme = {
+  base0 : "#000",
+  base1 : "#000",
+  base2 : "#000",
+  base3 : "#000",
+  accent : "#000",
+  text : "#fff"
+}
 
 function unbloat() {
   document.body.innerHTML = '';
@@ -58,13 +66,18 @@ function clearsettings() {
   localStorage.clear();
   console.log("cleared settings!")
 }
-async function apply() {
+async function apply() {     
   let settingsData = JSON.parse(window.localStorage.getItem("settingsdata"))
   if (settingsData == null) {
     settingsData = default_settings;
     window.localStorage.setItem("settingsdata", JSON.stringify(settingsData));
   }
-
+  let themeData = JSON.parse(window.localStorage.getItem("themedata"))
+  if (themeData == null) {
+    themeData = default_theme;
+    window.localStorage.setItem("themedata", JSON.stringify(themeData));
+  }
+  const colorpickers = document.getElementById("colorpickers");
   console.log(settingsData)
   const profileSelect = settingsData.profile
   const background = settingsData.background
@@ -78,6 +91,9 @@ async function apply() {
   set_theme(profileSelect);
   if (overwrite_theme == true) {
     set_background(background);
+  }
+  if (colorpickers != undefined && profileSelect != "custom"){
+    colorpickers.innerHTML = ``
   }
   let style = document.documentElement.style;
   let bigblurvalue = blurvalue * 2;
@@ -116,7 +132,14 @@ async function apply() {
   const checkedCheckboxes = document.querySelectorAll('label.checkbox input[type="checkbox"]:checked');
 }
 
-
+function storeTheme() {
+  const base0 = document.getElementById("base0el").value;
+  const base1 = document.getElementById("base1el").value;
+  const base2 = document.getElementById("base2el").value;
+  const base3 = document.getElementById("base3el").value;
+  const accent = document.getElementById("accentel").value;
+  const text = document.getElementById("textel").value;
+}
 function store() {
   let settingsData = {}
   const profileSelect = document.getElementById("profileSelector").value;
@@ -139,7 +162,42 @@ function store() {
   settingsData.shownews = shownews;
   settingsData.showsnake = showsnake;
   window.localStorage.setItem("settingsdata", JSON.stringify(settingsData));
+  if (profileSelect == "custom"){
+    loadCustomTheme()
+
+  }
   apply()
+}
+function loadCustomTheme() {
+  const colorpickers = document.getElementById("colorpickers");
+    colorpickers.innerHTML =   `<button class="colorpickerbutton"></button>
+    <input type="color" class="color-picker" id="colorPicker1" id="base0el">
+    <button class="colorpickerbutton"></button>
+    <input type="color" class="color-picker" id="colorPicker2" id="base1el">
+    <button class="colorpickerbutton"></button>
+    <input type="color" class="color-picker" id="colorPicker3" id="base2el">
+    <button class="colorpickerbutton"></button>
+    <input type="color" class="color-picker" id="colorPicker4" id="base3el">
+    <button class="colorpickerbutton"></button>
+    <input type="color" class="color-picker" id="colorPicker5" id="accentel">
+    <button class="colorpickerbutton"></button>
+    <input type="color" class="color-picker" id="colorPicker6" id="textel">`
+    const colorBtn = document.querySelectorAll('.colorpickerbutton');
+    const colorPickers = document.querySelectorAll('.color-picker');
+    colorBtn.forEach((button, index) => {
+      button.addEventListener('click', () => {
+        console.log("clicked")
+        colorPickers[index].click();
+      });
+    });
+
+    colorPickers.forEach((picker, index) => {
+      console.log("found picker")
+      picker.addEventListener('input', () => {
+        console.log("test")
+        colorBtn[index].style.backgroundColor = picker.value;
+      });
+    });
 }
 function load() {
   let settingsData = JSON.parse(window.localStorage.getItem("settingsdata"));
@@ -165,6 +223,9 @@ function load() {
   snowSlider.value = settingsData.snow
   shownews.checked = settingsData.shownews
   showsnake.checked = settingsData.showsnake
+  if (profileSelect.value == "custom"){
+    loadCustomTheme()
+  }
 }
 popup = document.getElementById("searchMenu");
 if (popup != null) {
@@ -174,6 +235,7 @@ if (popup != null) {
   search_button = document.querySelector('.js-btn-search')
   search_button.innerText = "Settings"
   search_button.addEventListener("click", function () {
+
     const popup_settings = document.getElementById("searchMenu");
     popup_settings.innerHTML = `<head>
     <meta charset="utf-8">
@@ -198,8 +260,10 @@ if (popup != null) {
         <option value="purple">Neon Violet</option>
         <option value="fall">Autumn Gloom</option>
         <option value="matcha">Matcha Green</option>
+        <option value="custom">Custom</option>
     </select>
-    
+    <div class="textandbutton" id="colorpickers">
+    </div>
     <h3 class="popuptitles">Show DeLijn app:</h3>
     <label class="switch">
     <input class="popupinput" type="checkbox" id="halt">
@@ -254,7 +318,7 @@ function set_background(background) {
   style.setProperty('--loginpage-image', "url(" + background + ")");
 }
 
-const theme_names = ["default", "white", "ldev", "birb", "stalker", "chocolate", "winter", "fall", "matcha", "vax", "galaxy", "sand"];
+const theme_names = ["default", "white", "ldev", "birb", "stalker", "chocolate", "winter", "fall", "matcha", "vax", "galaxy", "sand", "custom"];
 function set_theme(name) {
   let style = document.documentElement.style;
   style.setProperty('--color-accent', '#8f8f95');
@@ -287,6 +351,15 @@ function set_theme(name) {
       style.setProperty('--color-base03', '#cdd8ee');
       style.setProperty('--loginpage-image', "url(https://wallpaperaccess.com/full/1474688.jpg)");
       break;
+      case 'custom':
+        style.setProperty('--color-accent', "#d6574e");
+        style.setProperty('--color-text', "#d9564b");
+        style.setProperty('--color-base00', "#1a1311");
+        style.setProperty('--color-base01', "#371b19");
+        style.setProperty('--color-base02', "#5c1c1a");
+        style.setProperty('--color-base03', "#823530");
+        style.setProperty('--loginpage-image', "url(https://media.timeout.com/images/102945740/image.jpg)");
+        break;
     case 'ldev':
       style.setProperty('--color-accent', '#ffd5a0');
       style.setProperty('--color-popup-border', 'var(--color-base02)');
