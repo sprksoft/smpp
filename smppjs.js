@@ -18,12 +18,12 @@ const default_settings = {
   showsnake: false
 };
 const default_theme = {
-  base0 : "#000",
-  base1 : "#000",
-  base2 : "#000",
-  base3 : "#000",
-  accent : "#000",
-  text : "#fff"
+  base0 : "#ff0000",
+  base1 : "#00ff00",
+  base2 : "#000ff0",
+  base3 : "#ff0000",
+  accent : "#0f00f0",
+  text : "#fff0ff"
 }
 
 function unbloat() {
@@ -71,11 +71,6 @@ async function apply() {
   if (settingsData == null) {
     settingsData = default_settings;
     window.localStorage.setItem("settingsdata", JSON.stringify(settingsData));
-  }
-  let themeData = JSON.parse(window.localStorage.getItem("themedata"))
-  if (themeData == null) {
-    themeData = default_theme;
-    window.localStorage.setItem("themedata", JSON.stringify(themeData));
   }
   const colorpickers = document.getElementById("colorpickers");
   console.log(settingsData)
@@ -133,12 +128,16 @@ async function apply() {
 }
 
 function storeTheme() {
-  const base0 = document.getElementById("base0el").value;
-  const base1 = document.getElementById("base1el").value;
-  const base2 = document.getElementById("base2el").value;
-  const base3 = document.getElementById("base3el").value;
-  const accent = document.getElementById("accentel").value;
-  const text = document.getElementById("textel").value;
+  const base0 = document.getElementById("colorPicker1").value;
+  const base1 = document.getElementById("colorPicker2").value;
+  const base2 = document.getElementById("colorPicker3").value;
+  const base3 = document.getElementById("colorPicker4").value;
+  const accent = document.getElementById("colorPicker5").value;
+  const text = document.getElementById("colorPicker6").value;
+  console.log("stored color data",base0,base1,base2,base3,accent,text)
+  let themeData = {
+
+  }
 }
 function store() {
   let settingsData = {}
@@ -164,26 +163,45 @@ function store() {
   window.localStorage.setItem("settingsdata", JSON.stringify(settingsData));
   if (profileSelect == "custom"){
     loadCustomTheme()
-
+    console.log("started storing themes")
+    storeTheme()
   }
   apply()
 }
 function loadCustomTheme() {
+  let themeData = JSON.parse(window.localStorage.getItem("themedata"))
+  if (themeData == null) {
+    themeData = default_theme;
+    window.localStorage.setItem("themedata", JSON.stringify(themeData));
+  }
   const colorpickers = document.getElementById("colorpickers");
-    colorpickers.innerHTML =   `<button class="colorpickerbutton"></button>
-    <input type="color" class="color-picker" id="colorPicker1" id="base0el">
-    <button class="colorpickerbutton"></button>
-    <input type="color" class="color-picker" id="colorPicker2" id="base1el">
-    <button class="colorpickerbutton"></button>
-    <input type="color" class="color-picker" id="colorPicker3" id="base2el">
-    <button class="colorpickerbutton"></button>
-    <input type="color" class="color-picker" id="colorPicker4" id="base3el">
-    <button class="colorpickerbutton"></button>
-    <input type="color" class="color-picker" id="colorPicker5" id="accentel">
-    <button class="colorpickerbutton"></button>
-    <input type="color" class="color-picker" id="colorPicker6" id="textel">`
+    colorpickers.innerHTML =   `
+    <button class="colorpickerbutton" id="colorPickerButton1"></button>
+    <input type="color" class="color-picker" id="colorPicker1" value="#ffffff">
+    <button class="colorpickerbutton" id="colorPickerButton2"></button>
+    <input type="color" class="color-picker" id="colorPicker2" value="#ffffff">
+    <button class="colorpickerbutton" id="colorPickerButton3"></button>
+    <input type="color" class="color-picker" id="colorPicker3" value="#ffffff">
+    <button class="colorpickerbutton" id="colorPickerButton4"></button>
+    <input type="color" class="color-picker" id="colorPicker4" value="#ffffff">
+    <button class="colorpickerbutton" id="colorPickerButton5"></button>
+    <input type="color" class="color-picker" id="colorPicker5" value="#ffffff">
+    <button class="colorpickerbutton" id="colorPickerButton6"></button>
+    <input type="color" class="color-picker" id="colorPicker6" value="#ffffff">`
     const colorBtn = document.querySelectorAll('.colorpickerbutton');
     const colorPickers = document.querySelectorAll('.color-picker');
+    document.getElementById("colorPicker1").value = themeData.base0
+    document.getElementById("colorPickerButton1").style.backgroundColor = themeData.base0
+    document.getElementById("colorPicker2").value = themeData.base1
+    document.getElementById("colorPickerButton2").style.backgroundColor = themeData.base1
+    document.getElementById("colorPicker3").value = themeData.base2
+    document.getElementById("colorPickerButton3").style.backgroundColor = themeData.base2
+    document.getElementById("colorPicker4").value = themeData.base3
+    document.getElementById("colorPickerButton4").style.backgroundColor = themeData.base3
+    document.getElementById("colorPicker5").value = themeData.accent
+    document.getElementById("colorPickerButton5").style.backgroundColor = themeData.accent
+    document.getElementById("colorPicker6").value = themeData.text
+    document.getElementById("colorPickerButton6").style.backgroundColor = themeData.text
     colorBtn.forEach((button, index) => {
       button.addEventListener('click', () => {
         console.log("clicked")
@@ -352,12 +370,18 @@ function set_theme(name) {
       style.setProperty('--loginpage-image', "url(https://wallpaperaccess.com/full/1474688.jpg)");
       break;
       case 'custom':
-        style.setProperty('--color-accent', "#d6574e");
-        style.setProperty('--color-text', "#d9564b");
-        style.setProperty('--color-base00', "#1a1311");
-        style.setProperty('--color-base01', "#371b19");
-        style.setProperty('--color-base02', "#5c1c1a");
-        style.setProperty('--color-base03', "#823530");
+        console.log("choose customt theme")
+        let themeData = JSON.parse(window.localStorage.getItem("themedata"))
+        if (themeData == null) {
+          themeData = default_theme;
+          window.localStorage.setItem("themedata", JSON.stringify(themeData));
+        }
+        style.setProperty('--color-accent', themeData.accent);
+        style.setProperty('--color-text', themeData.text);
+        style.setProperty('--color-base00', themeData.base0);
+        style.setProperty('--color-base01', themeData.base1);
+        style.setProperty('--color-base02', themeData.base2);
+        style.setProperty('--color-base03', themeData.base3);
         style.setProperty('--loginpage-image', "url(https://media.timeout.com/images/102945740/image.jpg)");
         break;
     case 'ldev':

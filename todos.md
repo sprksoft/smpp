@@ -15,7 +15,7 @@
 - [x] subtext in "enquetes" is gray
 - [ ] very dark boxes "alle informatie" in the LVS
 - [x] results doesnt look that great with % points
-- [ ] AWFULL TEXT ANIMATION THINGY IN LOGIN PAGE, LIKE WHYYYYY
+- [x] AWFULL TEXT ANIMATION THINGY IN LOGIN PAGE, LIKE WHYYYYY
 
 # not a concern
 - [ ] icons...
@@ -33,8 +33,8 @@
 - checkboxes seem unfeasable
 
 # general
-- [ ] more colour profiles
-- [ ] some minor aesthetic changes maybe
+- more colour profiles
+- some minor aesthetic changes maybe
 
 # dmenu
 - [ ] lernovo
