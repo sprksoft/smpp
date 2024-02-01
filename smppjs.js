@@ -202,10 +202,14 @@ function loadCustomTheme() {
     document.getElementById("colorPickerButton5").style.backgroundColor = themeData.accent
     document.getElementById("colorPicker6").value = themeData.text
     document.getElementById("colorPickerButton6").style.backgroundColor = themeData.text
+    console.log(colorPickers)
     colorBtn.forEach((button, index) => {
       button.addEventListener('click', () => {
         console.log("clicked")
-        colorPickers[index].click();
+        console.log(colorPickers)
+        console.log(index)
+        colorPickers[index].focus();
+        
       });
     });
 
@@ -214,6 +218,9 @@ function loadCustomTheme() {
       picker.addEventListener('input', () => {
         console.log("test")
         colorBtn[index].style.backgroundColor = picker.value;
+      });
+      picker.addEventListener('focus', () => {
+        console.log("i got clicked on and should be open now",index)
       });
     });
 }
