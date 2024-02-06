@@ -20,6 +20,9 @@ function config_menu() {
 }
 
 document.addEventListener("keyup", function (e) {
+  if (e.target != undefined && e.target.tagName === "INPUT"){
+    return
+  }
   if (e.key == ':') {
     let cmd_list = Object.keys(vakken).concat(Object.keys(goto_items).concat(["classroom", "onshape", "config", "set theme v2", "lock dmenu", "unbloat", "clearsettings", "discord"]));
     dmenu(cmd_list, function (cmd, shift) {
