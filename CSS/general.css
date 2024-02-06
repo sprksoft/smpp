@@ -696,7 +696,7 @@ input:checked+.slider:before {
 
 .sliderblur::-webkit-slider-thumb:hover,
 .sliderblur::-moz-range-thumb:hover {
-  background: var(--color-base03) !important;
+  background: var(--color-accent) !important;
 }
 
 #modal-background {
@@ -804,8 +804,14 @@ div [style*="margin"] {
   background-color: var(--color-base02) !important;
 }
 .color-picker {
-  display: none;
-  position: absolute;
+  background-color: transparent; /* Example color */
+ width: 25px !important;
+ height: 25px !important;
+ box-shadow: none !important;
+margin-right: 4px;
+margin-left: 4px;
+  border: 2px solid var(--color-base00) !important;
+  border-radius: 5px !important;
 }
 button.colorpickerbutton {
   width: 15px;

@@ -180,6 +180,16 @@ function store() {
   }
   apply()
 }
+function loadCustomThemeData(){
+  let themeData = JSON.parse(window.localStorage.getItem("themedata"))
+  document.getElementById("colorPicker1").value = themeData.base0
+  document.getElementById("colorPicker2").value = themeData.base1
+  document.getElementById("colorPicker3").value = themeData.base2
+  document.getElementById("colorPicker4").value = themeData.base3
+  document.getElementById("colorPicker5").value = themeData.accent
+  document.getElementById("colorPicker6").value = themeData.text
+  
+}
 function loadCustomTheme() {
   let themeData = JSON.parse(window.localStorage.getItem("themedata"))
   if (themeData == null) {
@@ -188,53 +198,14 @@ function loadCustomTheme() {
   }
   const colorpickers = document.getElementById("colorpickers");
     colorpickers.innerHTML =   `
-    <button class="colorpickerbutton" id="colorPickerButton1"></button>
     <input type="color" class="color-picker" id="colorPicker1" value="#ffffff">
-    <button class="colorpickerbutton" id="colorPickerButton2"></button>
     <input type="color" class="color-picker" id="colorPicker2" value="#ffffff">
-    <button class="colorpickerbutton" id="colorPickerButton3"></button>
     <input type="color" class="color-picker" id="colorPicker3" value="#ffffff">
-    <button class="colorpickerbutton" id="colorPickerButton4"></button>
     <input type="color" class="color-picker" id="colorPicker4" value="#ffffff">
-    <button class="colorpickerbutton" id="colorPickerButton5"></button>
     <input type="color" class="color-picker" id="colorPicker5" value="#ffffff">
-    <button class="colorpickerbutton" id="colorPickerButton6"></button>
     <input type="color" class="color-picker" id="colorPicker6" value="#ffffff">`
-    const colorBtn = document.querySelectorAll('.colorpickerbutton');
-    const colorPickers = document.querySelectorAll('.color-picker');
-    document.getElementById("colorPicker1").value = themeData.base0
-    document.getElementById("colorPickerButton1").style.backgroundColor = themeData.base0
-    document.getElementById("colorPicker2").value = themeData.base1
-    document.getElementById("colorPickerButton2").style.backgroundColor = themeData.base1
-    document.getElementById("colorPicker3").value = themeData.base2
-    document.getElementById("colorPickerButton3").style.backgroundColor = themeData.base2
-    document.getElementById("colorPicker4").value = themeData.base3
-    document.getElementById("colorPickerButton4").style.backgroundColor = themeData.base3
-    document.getElementById("colorPicker5").value = themeData.accent
-    document.getElementById("colorPickerButton5").style.backgroundColor = themeData.accent
-    document.getElementById("colorPicker6").value = themeData.text
-    document.getElementById("colorPickerButton6").style.backgroundColor = themeData.text
-    console.log(colorPickers)
-    colorBtn.forEach((button, index) => {
-      button.addEventListener('click', () => {
-        console.log("clicked")
-        console.log(colorPickers)
-        console.log(index)
-        colorPickers[index].focus();
-        
-      });
-    });
+    loadCustomThemeData()
 
-    colorPickers.forEach((picker, index) => {
-      console.log("found picker")
-      picker.addEventListener('input', () => {
-        console.log("test")
-        colorBtn[index].style.backgroundColor = picker.value;
-      });
-      picker.addEventListener('focus', () => {
-        console.log("i got clicked on and should be open now",index)
-      });
-    });
 }
 function load() {
   let settingsData = JSON.parse(window.localStorage.getItem("settingsdata"));
