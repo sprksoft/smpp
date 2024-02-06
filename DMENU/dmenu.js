@@ -11,6 +11,8 @@ var selected = -1;
 var user_text = "";
 var no_type = true;
 
+var dconfig_cache = undefined;
+
 function dconfig_menu() {
   let conf = get_dconfig();
   const template = dmenu_config_template;
@@ -19,15 +21,21 @@ function dconfig_menu() {
     cmd_list[i]+=" ("+conf[cmd_list[i]]+")"
   }
   dmenu(cmd_list, function (cmd, shift) {
-    let type = template[cmd].type;
+    let settingname = cmd.substring(0, cmd.lastIndexOf(" "));
+    console.log(settingname);
+    let type = template[settingname].type;
     let options = [];
     if (type == "bool"){
       options=["true", "false"]
     }
-    template[cmd] = dmenu(options, function (val, shift) {
-      conf[cmd] = val;
+    template[settingname] = dmenu(options, function (val, shift) {
+      if (type == "bool"){
+        conf[settingname] = Boolean(val);
+      }else{
+        conf[settingname] = val;
+      }
       set_dconfig(conf);
-    }, "value("+conf[cmd]+"):")
+    }, "value("+conf[settingname]+"):")
   }, "dconfig: ");
 
 }
@@ -44,7 +52,11 @@ function default_dconfig() {
 
 //TODO: should probably not be in here
 function get_config() {
-  return JSON.parse(window.localStorage.getItem("settingsdata"));
+  let conf = JSON.parse(window.localStorage.getItem("settingsdata"));
+  if (conf == undefined){
+    conf = default_settings;
+  }
+  return conf
 }
 //TODO: should probably not be in here
 function set_config(config) {
@@ -52,20 +64,21 @@ function set_config(config) {
   apply();
 }
 function get_dconfig() {
+  if (dconfig_cache !== undefined){
+    return dconfig_cache;
+  }
   let conf = get_config();
   if (conf == undefined || conf.dmenu == undefined){
     return default_dconfig();
   }
+  dconfig_cache = conf.dmenu;
   return conf.dmenu;
 }
 function set_dconfig(config) {
   let conf = get_config();
   conf.dmenu = config;
   set_config(conf);
-}
-
-function dmenu_set_config(config) {
-  dmenu_config = config;
+  dconfig_cache=config;
 }
 
 function dmenu(params, onselect, name = "dmenu:") {
@@ -83,8 +96,12 @@ function dmenu(params, onselect, name = "dmenu:") {
   dmenu.getElementsByClassName("dmenu-label")[0].innerText = name;
   dmenu.classList.remove("dmenu-hidden");
   
-  if (dconfig.centered && !dmenu.classList.contains("dmenu-centered")) {
-    dmenu.classList.add("dmenu-centered");
+  if (dconfig.centered) {
+    if (!dmenu.classList.contains("dmenu-centered")){
+      dmenu.classList.add("dmenu-centered");
+    }
+  }else{
+    dmenu.classList.remove("dmenu-centered");
   }
 
   let autocompletelist = dmenu.getElementsByClassName("autocomplete")[0];
