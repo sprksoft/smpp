@@ -1,6 +1,6 @@
-var dmenu_config = {
-  centerd: true,
-  flip_shift_key: true,
+const dmenu_config_template={
+  centered: {type: "bool", default_value: true},
+  flip_shift_key: {type: "bool", default_value: false},
 }
 
 var lock_dmenu = false;
@@ -11,6 +11,58 @@ var selected = -1;
 var user_text = "";
 var no_type = true;
 
+function dconfig_menu() {
+  let conf = get_dconfig();
+  const template = dmenu_config_template;
+  let cmd_list = Object.keys(template);
+  for (let i=0; i < cmd_list.length; i++){
+    cmd_list[i]+=" ("+conf[cmd_list[i]]+")"
+  }
+  dmenu(cmd_list, function (cmd, shift) {
+    let type = template[cmd].type;
+    let options = [];
+    if (type == "bool"){
+      options=["true", "false"]
+    }
+    template[cmd] = dmenu(options, function (val, shift) {
+      conf[cmd] = val;
+      set_dconfig(conf);
+    }, "value("+conf[cmd]+"):")
+  }, "dconfig: ");
+
+}
+
+function default_dconfig() {
+  let keys = Object.keys(dmenu_config_template);
+  let config = {}
+  for (let i=0; i < keys.length; i++){
+    config[keys[i]] = dmenu_config_template[keys[i]].default_value;
+  }
+
+  return config;
+}
+
+//TODO: should probably not be in here
+function get_config() {
+  return JSON.parse(window.localStorage.getItem("settingsdata"));
+}
+//TODO: should probably not be in here
+function set_config(config) {
+  window.localStorage.setItem("settingsdata", JSON.stringify(config));
+  apply();
+}
+function get_dconfig() {
+  let conf = get_config();
+  if (conf == undefined || conf.dmenu == undefined){
+    return default_dconfig();
+  }
+  return conf.dmenu;
+}
+function set_dconfig(config) {
+  let conf = get_config();
+  conf.dmenu = config;
+  set_config(conf);
+}
 
 function dmenu_set_config(config) {
   dmenu_config = config;
@@ -26,11 +78,12 @@ function dmenu(params, onselect, name = "dmenu:") {
   command_list = [];
   end_func = onselect;
   user_text = "";
+  let dconfig = get_dconfig();
   let dmenu = document.getElementById("dmenu");
   dmenu.getElementsByClassName("dmenu-label")[0].innerText = name;
   dmenu.classList.remove("dmenu-hidden");
-
-  if (dmenu_config.centerd && !dmenu.classList.contains("dmenu-centered")) {
+  
+  if (dconfig.centered && !dmenu.classList.contains("dmenu-centered")) {
     dmenu.classList.add("dmenu-centered");
   }
 
@@ -150,6 +203,7 @@ function dmenu_select_next(prev = false) {
 }
 
 function init_dmenu() {
+  let dconfig = get_dconfig();
   let old_dmenu = document.getElementById("dmenu");
   if (old_dmenu != undefined) {
     old_dmenu.remove();
@@ -177,7 +231,7 @@ function init_dmenu() {
       dmenu_close();
       if (end_func != undefined && command !== "") {
         let shift = e.shiftKey;
-        if (dmenu_config.flip_shift_key) {
+        if (dconfig.flip_shift_key) {
           shift = !shift;
         }
         end_func(command, shift);
