@@ -209,14 +209,16 @@ img[src="/modules/Messages/themes/default/images/loading_big.gif"] {
 .subjectInput {
   color: black !important;
 }
-button.submit-button.smscButton.blue{
+
+button.submit-button.smscButton.blue {
   border-radius: 40px !important;
   color: var(--color-text) !important;
   border-color: var(--color-base02) !important;
   margin-top: 0px !important;
   background-color: var(--color-base03) !important;
 }
-button.submit-button.smscButton.blue:hover{
+
+button.submit-button.smscButton.blue:hover {
   filter: brightness(100%) !important;
 
 }

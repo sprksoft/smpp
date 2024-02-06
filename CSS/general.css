@@ -800,19 +800,23 @@ div [style*="margin"] {
   margin-top: 3px !important;
   margin-left: -2px !important;
 }
-.bigdiscordbutton:hover{
+
+.bigdiscordbutton:hover {
   background-color: var(--color-base02) !important;
 }
+
 .color-picker {
-  background-color: transparent; /* Example color */
- width: 25px !important;
- height: 25px !important;
- box-shadow: none !important;
-margin-right: 4px;
-margin-left: 4px;
+  background-color: transparent;
+  /* Example color */
+  width: 25px !important;
+  height: 25px !important;
+  box-shadow: none !important;
+  margin-right: 4px;
+  margin-left: 4px;
   border: 2px solid var(--color-base00) !important;
   border-radius: 5px !important;
 }
+
 .color-picker-container {
   position: relative;
   display: inline-block;
@@ -841,6 +845,7 @@ button.colorpickerbutton {
   margin: 3px;
   margin-top: 0px;
 }
-.input-search:focus{
-  box-shadow:  0 1px 3px 0 rgba(0,0,0,.24) !important;
+
+.input-search:focus {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .24) !important;
 }

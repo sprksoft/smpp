@@ -12,7 +12,7 @@ function config_menu() {
 }
 
 document.addEventListener("keyup", function (e) {
-  if (e.target != undefined && e.target.tagName === "INPUT"){
+  if (e.target != undefined && e.target.tagName === "INPUT") {
     return
   }
   if (e.key == ':') {

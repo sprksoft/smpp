@@ -1,6 +1,6 @@
-const dmenu_config_template={
-  centered: {type: "bool", default_value: true},
-  flip_shift_key: {type: "bool", default_value: false},
+const dmenu_config_template = {
+  centered: { type: "bool", default_value: true },
+  flip_shift_key: { type: "bool", default_value: false },
 }
 
 var lock_dmenu = false;
@@ -17,25 +17,25 @@ function dconfig_menu() {
   let conf = get_dconfig();
   const template = dmenu_config_template;
   let cmd_list = Object.keys(template);
-  for (let i=0; i < cmd_list.length; i++){
-    cmd_list[i]+=" ("+conf[cmd_list[i]]+")"
+  for (let i = 0; i < cmd_list.length; i++) {
+    cmd_list[i] += " (" + conf[cmd_list[i]] + ")"
   }
   dmenu(cmd_list, function (cmd, shift) {
     let settingname = cmd.substring(0, cmd.lastIndexOf(" "));
     console.log(settingname);
     let type = template[settingname].type;
     let options = [];
-    if (type == "bool"){
-      options=["true", "false"]
+    if (type == "bool") {
+      options = ["true", "false"]
     }
     template[settingname] = dmenu(options, function (val, shift) {
-      if (type == "bool"){
+      if (type == "bool") {
         conf[settingname] = Boolean(val);
-      }else{
+      } else {
         conf[settingname] = val;
       }
       set_dconfig(conf);
-    }, "value("+conf[settingname]+"):")
+    }, "value(" + conf[settingname] + "):")
   }, "dconfig: ");
 
 }
@@ -43,7 +43,7 @@ function dconfig_menu() {
 function default_dconfig() {
   let keys = Object.keys(dmenu_config_template);
   let config = {}
-  for (let i=0; i < keys.length; i++){
+  for (let i = 0; i < keys.length; i++) {
     config[keys[i]] = dmenu_config_template[keys[i]].default_value;
   }
 
@@ -53,7 +53,7 @@ function default_dconfig() {
 //TODO: should probably not be in here
 function get_config() {
   let conf = JSON.parse(window.localStorage.getItem("settingsdata"));
-  if (conf == undefined){
+  if (conf == undefined) {
     conf = default_settings;
   }
   return conf
@@ -64,11 +64,11 @@ function set_config(config) {
   apply();
 }
 function get_dconfig() {
-  if (dconfig_cache !== undefined){
+  if (dconfig_cache !== undefined) {
     return dconfig_cache;
   }
   let conf = get_config();
-  if (conf == undefined || conf.dmenu == undefined){
+  if (conf == undefined || conf.dmenu == undefined) {
     return default_dconfig();
   }
   dconfig_cache = conf.dmenu;
@@ -78,7 +78,7 @@ function set_dconfig(config) {
   let conf = get_config();
   conf.dmenu = config;
   set_config(conf);
-  dconfig_cache=config;
+  dconfig_cache = config;
 }
 
 function dmenu(params, onselect, name = "dmenu:") {
@@ -95,12 +95,12 @@ function dmenu(params, onselect, name = "dmenu:") {
   let dmenu = document.getElementById("dmenu");
   dmenu.getElementsByClassName("dmenu-label")[0].innerText = name;
   dmenu.classList.remove("dmenu-hidden");
-  
+
   if (dconfig.centered) {
-    if (!dmenu.classList.contains("dmenu-centered")){
+    if (!dmenu.classList.contains("dmenu-centered")) {
       dmenu.classList.add("dmenu-centered");
     }
-  }else{
+  } else {
     dmenu.classList.remove("dmenu-centered");
   }
 

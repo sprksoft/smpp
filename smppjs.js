@@ -14,18 +14,18 @@ const default_settings = {
   showsnake: false
 };
 const default_theme = {
-  base0 : "#ff0000",
-  base1 : "#00ff00",
-  base2 : "#000ff0",
-  base3 : "#ff0000",
-  accent : "#0f00f0",
-  text : "#fff0ff"
+  base0: "#ff0000",
+  base1: "#00ff00",
+  base2: "#000ff0",
+  base3: "#ff0000",
+  accent: "#0f00f0",
+  text: "#fff0ff"
 }
 
 function unbloat() {
   document.body.innerHTML = '';
 }
-function discordpopup(){
+function discordpopup() {
   let discordelement = document.createElement("div")
   discordelement.innerHTML = `<div class="bigdiscordbutton" style="position: fixed; bottom: 0; left: 0; width: 40px; height: 40px; border: 2px solid var(--color-base00); border-radius:10px; background-color: var(--color-base01);">
   <a target="_blank" href="https://discord.gg/qCHZYepDqZ" class="discordbutton"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="30px" height="30px" viewBox="0 -28.5 256 256" version="1.1" preserveAspectRatio="xMidYMid">
@@ -36,7 +36,7 @@ function discordpopup(){
   </g>
 </svg></a>
 </div>`
-document.body.appendChild(discordelement)
+  document.body.appendChild(discordelement)
 }
 //WARNING: garbage
 try {
@@ -62,7 +62,7 @@ function clearsettings() {
   localStorage.clear();
   console.log("cleared settings!")
 }
-async function apply() {     
+async function apply() {
   let settingsData = JSON.parse(window.localStorage.getItem("settingsdata"))
   if (settingsData == null) {
     settingsData = default_settings;
@@ -83,7 +83,7 @@ async function apply() {
   if (overwrite_theme == true) {
     set_background(background);
   }
-    if (colorpickers != undefined && profileSelect != "custom"){
+  if (colorpickers != undefined && profileSelect != "custom") {
     colorpickers.innerHTML = ``
   }
   let style = document.documentElement.style;
@@ -93,17 +93,17 @@ async function apply() {
   if (blurvalue == 0) {
     bigblurvalue += 2;
   };
-let observer = new MutationObserver((mutations) => {
-  let plannericonsactive = document.querySelector('.iconbtn--active');
-  if (plannericonsactive) {
-    plannericonsactive.style.backgroundColor = "var(--color-base02)";
-  }
-});
-let config = { childList: true, subtree: true };
-observer.observe(document.body, config);
+  let observer = new MutationObserver((mutations) => {
+    let plannericonsactive = document.querySelector('.iconbtn--active');
+    if (plannericonsactive) {
+      plannericonsactive.style.backgroundColor = "var(--color-base02)";
+    }
+  });
+  let config = { childList: true, subtree: true };
+  observer.observe(document.body, config);
 
   if (centralContainer) {
-      
+
     discordpopup()
     rightContainer.innerHTML = ""
     if (loc != "") {
@@ -140,19 +140,19 @@ function storeTheme() {
   const accent = document.getElementById("colorPicker5").value;
   const text = document.getElementById("colorPicker6").value;
   let themeData = {
-    base0 : base0,
-    base1 : base1,
-    base2 : base2,
-    base3 : base3,
-    accent : accent,
-    text : text
+    base0: base0,
+    base1: base1,
+    base2: base2,
+    base3: base3,
+    accent: accent,
+    text: text
   }
   window.localStorage.setItem("themedata", JSON.stringify(themeData));
 }
 function store() {
   let previousData = JSON.parse(window.localStorage.getItem("settingsdata"))
   profileSelectPrevious = previousData.profile
-  if (profileSelectPrevious == "custom"){
+  if (profileSelectPrevious == "custom") {
     storeTheme()
   }
   let settingsData = {}
@@ -176,13 +176,13 @@ function store() {
   settingsData.shownews = shownews;
   settingsData.showsnake = showsnake;
   window.localStorage.setItem("settingsdata", JSON.stringify(settingsData));
-  if (profileSelect == "custom"){
-loadCustomTheme()
+  if (profileSelect == "custom") {
+    loadCustomTheme()
   }
   apply()
 }
 
-function loadCustomThemeData(){
+function loadCustomThemeData() {
   let themeData = JSON.parse(window.localStorage.getItem("themedata"))
   document.getElementById("colorPicker1").value = themeData.base0
   document.getElementById("colorPicker2").value = themeData.base1
@@ -190,7 +190,7 @@ function loadCustomThemeData(){
   document.getElementById("colorPicker4").value = themeData.base3
   document.getElementById("colorPicker5").value = themeData.accent
   document.getElementById("colorPicker6").value = themeData.text
-  
+
 }
 function loadCustomTheme() {
   let themeData = JSON.parse(window.localStorage.getItem("themedata"))
@@ -199,7 +199,7 @@ function loadCustomTheme() {
     window.localStorage.setItem("themedata", JSON.stringify(themeData));
   }
   const colorpickers = document.getElementById("colorpickers");
-    colorpickers.innerHTML =   `
+  colorpickers.innerHTML = `
     <div class="color-picker-container">
     <input type="color" class="color-picker" id="colorPicker1">
     <span class="color-label">Base0</span>
@@ -224,7 +224,7 @@ function loadCustomTheme() {
     <input type="color" class="color-picker" id="colorPicker6">
     <span class="color-label">Text</span>
 </div>`
-loadCustomThemeData()
+  loadCustomThemeData()
 }
 function load() {
   let settingsData = JSON.parse(window.localStorage.getItem("settingsdata"));
@@ -246,7 +246,7 @@ function load() {
   snowSlider.value = settingsData.snow
   shownews.checked = settingsData.shownews
   showsnake.checked = settingsData.showsnake
-  if (profileSelect.value == "custom"){
+  if (profileSelect.value == "custom") {
     loadCustomTheme()
   }
 }
@@ -374,20 +374,20 @@ function set_theme(name) {
       style.setProperty('--color-base03', '#cdd8ee');
       style.setProperty('--loginpage-image', "url(https://wallpaperaccess.com/full/1474688.jpg)");
       break;
-      case 'custom':
-        let themeData = JSON.parse(window.localStorage.getItem("themedata"))
-        if (themeData == null) {
-          themeData = default_theme;
-          window.localStorage.setItem("themedata", JSON.stringify(themeData));
-        }
-        style.setProperty('--color-accent', themeData.accent);
-        style.setProperty('--color-text', themeData.text);
-        style.setProperty('--color-base00', themeData.base0);
-        style.setProperty('--color-base01', themeData.base1);
-        style.setProperty('--color-base02', themeData.base2);
-        style.setProperty('--color-base03', themeData.base3);
-        style.setProperty('--loginpage-image', "url(https://github.com/frickingbird8002/smpp-images/blob/main/smppimageineed2-0.png?raw=true)");
-        break;
+    case 'custom':
+      let themeData = JSON.parse(window.localStorage.getItem("themedata"))
+      if (themeData == null) {
+        themeData = default_theme;
+        window.localStorage.setItem("themedata", JSON.stringify(themeData));
+      }
+      style.setProperty('--color-accent', themeData.accent);
+      style.setProperty('--color-text', themeData.text);
+      style.setProperty('--color-base00', themeData.base0);
+      style.setProperty('--color-base01', themeData.base1);
+      style.setProperty('--color-base02', themeData.base2);
+      style.setProperty('--color-base03', themeData.base3);
+      style.setProperty('--loginpage-image', "url(https://github.com/frickingbird8002/smpp-images/blob/main/smppimageineed2-0.png?raw=true)");
+      break;
     case 'ldev':
       style.setProperty('--color-accent', '#ffd5a0');
       style.setProperty('--color-popup-border', 'var(--color-base02)');

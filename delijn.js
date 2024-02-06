@@ -35,7 +35,7 @@ function createApplication(data) {
 
   for (const doorkomst of doorkomsten) {
     console.log(doorkomsten)
-    const { bestemming, lijnnummer, dienstregelingTijdstip} = doorkomst;
+    const { bestemming, lijnnummer, dienstregelingTijdstip } = doorkomst;
     const real_timeTijdstip = doorkomst["real-timeTijdstip"]
     console.log(real_timeTijdstip)
     const date = new Date(dienstregelingTijdstip);

@@ -144,6 +144,7 @@ a.smscButton[href="/login/sso/init/acm"],
 .login-app__title--separator:before {
   display: none !important;
 }
+
 span.login-app__title.login-app__title--sign-in-with {
   display: none !important;
 }
