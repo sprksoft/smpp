@@ -99,6 +99,8 @@ async function apply() {
   };
   //check if on homepage:
   if (centralContainer) {
+      
+    discordpopup()
     rightContainer.innerHTML = ""
     if (loc != "") {
       await set_weather_loc(loc);
@@ -123,7 +125,7 @@ async function apply() {
   style.setProperty('--blur-value-large', 'blur(' + bigblurvalue + 'px)');
   style.setProperty('--blur-value-small', 'blur(' + blurvalue + 'px)');
   set_snow_level(snow);
-  discordpopup()
+
   const checkedCheckboxes = document.querySelectorAll('label.checkbox input[type="checkbox"]:checked');
 }
 
