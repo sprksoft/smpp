@@ -97,6 +97,16 @@ async function apply() {
   if (blurvalue == 0) {
     bigblurvalue += 2;
   };
+let observer = new MutationObserver((mutations) => {
+  let plannericonsactive = document.querySelector('.iconbtn--active');
+  console.log(plannericonsactive);
+  if (plannericonsactive) {
+    plannericonsactive.style.backgroundColor = "var(--color-base02)";
+  }
+});
+let config = { childList: true, subtree: true };
+observer.observe(document.body, config);
+
   //check if on homepage:
   if (centralContainer) {
       

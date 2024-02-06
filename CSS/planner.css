@@ -72,7 +72,6 @@ span,
 }
 
 .inline-editor__input:hover,
-.inline-editor__input::selection,
 .inline-editor__input::placeholder,
 .planner-header .header__borderdropdowncontainer:hover:after,
 .inline-editor__input,
@@ -130,14 +129,15 @@ span,
 }
 
 .date:hover span {
-
   background-color: var(--color-base03) !important;
 }
 
 .header__month:hover,
 .header__year:hover,
-.header__year::selection {
-  border-color: var(--color-accent) !important;
+.header__year::selection,
+.rightblock {
+  border: 2px solid var(--color-accent) !important;
+  box-shadow: none !important;
 }
 
 .header__borderdropdowncontainer::after {
@@ -147,4 +147,5 @@ span,
 [inline-editor] .inline-editor__input:not([readonly]):focus,
 [inline-editor] .inline-editor__input:not([readonly]):hover {
   border-color: var(--color-base03) !important;
+
 }
