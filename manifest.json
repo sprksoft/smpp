@@ -1,70 +1,70 @@
 {
-  "manifest_version": 3,
-  "name": "Smartschool++",
-  "version": "1.3.0",
-  "description": "Enhance your smartschool experience with themes and more",
-  "homepage_url": "https://chromewebstore.google.com/detail/smartschool++/bdhficnphioomdjhdfbhdepjgggekodf",
-  "content_scripts": [
-    {
-      "matches": [
-        "*://lernova.be/*"
-      ],
-      "all_frames": true,
-      "css": [
-        "LERNOVA/lernova.css",
-        "DMENU/dmenu.css"
-      ],
-      "js": [
-        "scraper.js",
-        "utils.js",
-        "DMENU/dmenu.js",
-        "LERNOVA/lernova.js"
-      ]
-    },
-    {
-      "matches": [
-        "*://*.smartschool.be/*"
-      ],
-      "all_frames": true,
-      "css": [
-        "CSS/general.css",
-        "CSS/weather.css",
-        "DMENU/dmenu.css",
-        "CSS/login.css",
-        "CSS/messages.css",
-        "CSS/navigation.css",
-        "CSS/notification.css",
-        "CSS/planner.css",
-        "CSS/results.css",
-        "CSS/startpage.css",
-        "CSS/delijn.css",
-        "CSS/agenda.css"
-      ],
-      "js": [
-        "scraper.js",
-        "snake.js",
-        "delijndecoder.js",
-        "utils.js",
-        "themes.js",
-        "DMENU/dmenu.js",
-        "weather.js",
-        "delijn.js",
-        "loginpage.js",
-        "DMENU/quick.js",
-        "snow.js",
-        "smppjs.js"
-      ]
-    }
-  ],
-  "icons": {
-    "16": "icon16.png",
-    "48": "icon48.png",
-    "128": "icon128.png"
-  },
-  "browser_specific_settings": {
-    "gecko": {
-      "id": "smpp@sprksoft",
-      "update_url": "https://ldev.eu.org/firefox/updates.json"
-    }
-  }
+	"manifest_version": 3,
+	"name": "Smartschool++",
+	"version": "1.3.0",
+	"description": "Enhance your smartschool experience with themes and more",
+	"homepage_url": "https://chromewebstore.google.com/detail/smartschool++/bdhficnphioomdjhdfbhdepjgggekodf",
+	"content_scripts": [
+		{
+			"matches": [
+				"*://lernova.be/*"
+			],
+			"all_frames": true,
+			"css": [
+				"LERNOVA/lernova.css",
+				"DMENU/dmenu.css"
+			],
+			"js": [
+				"scraper.js",
+				"utils.js",
+				"DMENU/dmenu.js",
+				"LERNOVA/lernova.js"
+			]
+		},
+		{
+			"matches": [
+				"*://*.smartschool.be/*"
+			],
+			"all_frames": true,
+			"css": [
+				"CSS/general.css",
+				"CSS/weather.css",
+				"DMENU/dmenu.css",
+				"CSS/login.css",
+				"CSS/messages.css",
+				"CSS/navigation.css",
+				"CSS/notification.css",
+				"CSS/planner.css",
+				"CSS/results.css",
+				"CSS/startpage.css",
+				"CSS/delijn.css",
+				"CSS/agenda.css"
+			],
+			"js": [
+				"scraper.js",
+				"snake.js",
+				"delijndecoder.js",
+				"utils.js",
+				"themes.js",
+				"DMENU/dmenu.js",
+				"weather.js",
+				"delijn.js",
+				"loginpage.js",
+				"DMENU/quick.js",
+				"snow.js",
+				"smppjs.js"
+			]
+		}
+	],
+	"icons": {
+		"16": "icon16.png",
+		"48": "icon48.png",
+		"128": "icon128.png"
+	},
+	"browser_specific_settings": {
+		"gecko": {
+			"id": "smpp@sprksoft",
+			"update_url": "https://ldev.eu.org/firefox/updates.json"
+		}
+	}
 }
