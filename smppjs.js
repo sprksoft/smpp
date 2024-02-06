@@ -87,8 +87,11 @@ async function apply() {
   if (overwrite_theme == true) {
     set_background(background);
   }
-  if (colorpickers != undefined && profileSelect != "custom"){
+    if (colorpickers != undefined && profileSelect != "custom"){
     colorpickers.innerHTML = ``
+    console.log("didnt choose custom theme")
+  } else{
+    console.log("choose custom theme")
   }
   let style = document.documentElement.style;
   let bigblurvalue = blurvalue * 2;
@@ -99,7 +102,6 @@ async function apply() {
   };
 let observer = new MutationObserver((mutations) => {
   let plannericonsactive = document.querySelector('.iconbtn--active');
-  console.log(plannericonsactive);
   if (plannericonsactive) {
     plannericonsactive.style.backgroundColor = "var(--color-base02)";
   }
@@ -107,7 +109,6 @@ let observer = new MutationObserver((mutations) => {
 let config = { childList: true, subtree: true };
 observer.observe(document.body, config);
 
-  //check if on homepage:
   if (centralContainer) {
       
     discordpopup()
@@ -135,7 +136,6 @@ observer.observe(document.body, config);
   style.setProperty('--blur-value-large', 'blur(' + bigblurvalue + 'px)');
   style.setProperty('--blur-value-small', 'blur(' + blurvalue + 'px)');
   set_snow_level(snow);
-
   const checkedCheckboxes = document.querySelectorAll('label.checkbox input[type="checkbox"]:checked');
 }
 
@@ -148,10 +148,21 @@ function storeTheme() {
   const text = document.getElementById("colorPicker6").value;
   console.log("stored color data",base0,base1,base2,base3,accent,text)
   let themeData = {
-
+    base0 : base0,
+    base1 : base1,
+    base2 : base2,
+    base3 : base3,
+    accent : accent,
+    text : text
   }
+  window.localStorage.setItem("themedata", JSON.stringify(themeData));
 }
 function store() {
+  let previousData = JSON.parse(window.localStorage.getItem("settingsdata"))
+  profileSelectPrevious = previousData.profile
+  if (profileSelectPrevious == "custom"){
+    storeTheme()
+  }
   let settingsData = {}
   const profileSelect = document.getElementById("profileSelector").value;
   const background = document.getElementById("background").value;
@@ -174,12 +185,11 @@ function store() {
   settingsData.showsnake = showsnake;
   window.localStorage.setItem("settingsdata", JSON.stringify(settingsData));
   if (profileSelect == "custom"){
-    loadCustomTheme()
-    console.log("started storing themes")
-    storeTheme()
+loadCustomTheme()
   }
   apply()
 }
+
 function loadCustomThemeData(){
   let themeData = JSON.parse(window.localStorage.getItem("themedata"))
   document.getElementById("colorPicker1").value = themeData.base0
@@ -198,14 +208,13 @@ function loadCustomTheme() {
   }
   const colorpickers = document.getElementById("colorpickers");
     colorpickers.innerHTML =   `
-    <input type="color" class="color-picker" id="colorPicker1" value="#ffffff">
-    <input type="color" class="color-picker" id="colorPicker2" value="#ffffff">
-    <input type="color" class="color-picker" id="colorPicker3" value="#ffffff">
-    <input type="color" class="color-picker" id="colorPicker4" value="#ffffff">
-    <input type="color" class="color-picker" id="colorPicker5" value="#ffffff">
-    <input type="color" class="color-picker" id="colorPicker6" value="#ffffff">`
-    loadCustomThemeData()
-
+    <input type="color" class="color-picker" id="colorPicker1" >
+    <input type="color" class="color-picker" id="colorPicker2" >
+    <input type="color" class="color-picker" id="colorPicker3" >
+    <input type="color" class="color-picker" id="colorPicker4" >
+    <input type="color" class="color-picker" id="colorPicker5" >
+    <input type="color" class="color-picker" id="colorPicker6" >`
+loadCustomThemeData()
 }
 function load() {
   let settingsData = JSON.parse(window.localStorage.getItem("settingsdata"));
@@ -372,7 +381,7 @@ function set_theme(name) {
         style.setProperty('--color-base01', themeData.base1);
         style.setProperty('--color-base02', themeData.base2);
         style.setProperty('--color-base03', themeData.base3);
-        style.setProperty('--loginpage-image', "url(https://media.timeout.com/images/102945740/image.jpg)");
+        style.setProperty('--loginpage-image', "url(https://github.com/frickingbird8002/smpp-images/blob/main/smppimageineed2-0.png?raw=true)");
         break;
     case 'ldev':
       style.setProperty('--color-accent', '#ffd5a0');
