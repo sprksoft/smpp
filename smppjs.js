@@ -3,10 +3,6 @@
 //oke logis - andere ldev
 
 const default_settings = {
-  dmenu: {
-    centerd: true,
-    flip_shift_key: false,
-  },
   profile: "default",
   background: "none",
   halte: 302558,

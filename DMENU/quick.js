@@ -1,12 +1,4 @@
 
-function get_config() {
-  return JSON.parse(window.localStorage.getItem("settingsdata"));
-}
-function set_config(config) {
-  window.localStorage.setItem("settingsdata", JSON.stringify(config));
-  apply();
-}
-
 //TODO: make this better
 function config_menu() {
   let conf = get_config();
@@ -24,7 +16,7 @@ document.addEventListener("keyup", function (e) {
     return
   }
   if (e.key == ':') {
-    let cmd_list = Object.keys(vakken).concat(Object.keys(goto_items).concat(["classroom", "onshape", "config", "set theme v2", "lock dmenu", "unbloat", "clearsettings", "discord"]));
+    let cmd_list = Object.keys(vakken).concat(Object.keys(goto_items).concat(["classroom", "onshape", "dmenu config", "config", "set theme v2", "lock dmenu", "unbloat", "clearsettings", "discord"]));
     dmenu(cmd_list, function (cmd, shift) {
       switch (cmd) {
         case "lock dmenu":
@@ -42,6 +34,9 @@ document.addEventListener("keyup", function (e) {
         case "config":
           config_menu();
           return;
+        case "dmenu config":
+          dconfig_menu();
+          return;
         case "classroom":
           open_url("https://classroom.google.com", shift);
           return;
@@ -51,7 +46,7 @@ document.addEventListener("keyup", function (e) {
         case "discord":
           open_url("https://discord.gg/TCBgGxUP", shift);
           return;
-        
+
         case "clearsettings":
           clearsettings()
           return;
