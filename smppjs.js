@@ -208,12 +208,30 @@ function loadCustomTheme() {
   }
   const colorpickers = document.getElementById("colorpickers");
     colorpickers.innerHTML =   `
-    <input type="color" class="color-picker" id="colorPicker1" >
-    <input type="color" class="color-picker" id="colorPicker2" >
-    <input type="color" class="color-picker" id="colorPicker3" >
-    <input type="color" class="color-picker" id="colorPicker4" >
-    <input type="color" class="color-picker" id="colorPicker5" >
-    <input type="color" class="color-picker" id="colorPicker6" >`
+    <div class="color-picker-container">
+    <input type="color" class="color-picker" id="colorPicker1">
+    <span class="color-label">Base0</span>
+</div>
+<div class="color-picker-container">
+    <input type="color" class="color-picker" id="colorPicker2">
+    <span class="color-label">Base1</span>
+</div>
+<div class="color-picker-container">
+    <input type="color" class="color-picker" id="colorPicker3">
+    <span class="color-label">Base2</span>
+</div>
+<div class="color-picker-container">
+    <input type="color" class="color-picker" id="colorPicker4">
+    <span class="color-label">Base3</span>
+</div>
+<div class="color-picker-container">
+    <input type="color" class="color-picker" id="colorPicker5">
+    <span class="color-label">Accent</span>
+</div>
+<div class="color-picker-container">
+    <input type="color" class="color-picker" id="colorPicker6">
+    <span class="color-label">Text</span>
+</div>`
 loadCustomThemeData()
 }
 function load() {

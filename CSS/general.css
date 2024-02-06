@@ -813,6 +813,25 @@ margin-left: 4px;
   border: 2px solid var(--color-base00) !important;
   border-radius: 5px !important;
 }
+.color-picker-container {
+  position: relative;
+  display: inline-block;
+  width: fit-content;
+}
+
+.color-label {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.color-picker-container:hover .color-label {
+  opacity: 1;
+}
+
 button.colorpickerbutton {
   width: 15px;
   height: 15px;
