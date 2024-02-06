@@ -85,9 +85,6 @@ async function apply() {
   }
     if (colorpickers != undefined && profileSelect != "custom"){
     colorpickers.innerHTML = ``
-    console.log("didnt choose custom theme")
-  } else{
-    console.log("choose custom theme")
   }
   let style = document.documentElement.style;
   let bigblurvalue = blurvalue * 2;
@@ -142,7 +139,6 @@ function storeTheme() {
   const base3 = document.getElementById("colorPicker4").value;
   const accent = document.getElementById("colorPicker5").value;
   const text = document.getElementById("colorPicker6").value;
-  console.log("stored color data",base0,base1,base2,base3,accent,text)
   let themeData = {
     base0 : base0,
     base1 : base1,
@@ -241,10 +237,6 @@ function load() {
   const snowSlider = document.getElementById('snowSlider');
   const shownews = document.getElementById("shownewselement");
   const showsnake = document.getElementById("showsnakeelement");
-  if (settingsData == undefined) {
-    console.log("settings data is undefined(this cannot happen)")
-    return
-  }
   profileSelect.value = settingsData.profile
   background.value = settingsData.background
   halte.checked = settingsData.halte
@@ -383,7 +375,6 @@ function set_theme(name) {
       style.setProperty('--loginpage-image', "url(https://wallpaperaccess.com/full/1474688.jpg)");
       break;
       case 'custom':
-        console.log("choose customt theme")
         let themeData = JSON.parse(window.localStorage.getItem("themedata"))
         if (themeData == null) {
           themeData = default_theme;
