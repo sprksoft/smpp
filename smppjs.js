@@ -5,7 +5,7 @@
 const default_settings = {
   profile: "default",
   background: "none",
-  halte: 302558,
+  halte: true,
   overwrite_theme: false,
   location: "keerbergen",
   blur: "2",
@@ -14,12 +14,7 @@ const default_settings = {
   showsnake: false
 };
 const default_theme = {
-  base0: "#ff0000",
-  base1: "#00ff00",
-  base2: "#000ff0",
-  base3: "#ff0000",
-  accent: "#0f00f0",
-  text: "#fff0ff"
+  base0: "#38313a", base1: "#826882", base2: "#ac85b7", base3: "#c78af0", accent: "#a3a2ec", text: "#ede3e3"
 }
 
 function unbloat() {
@@ -201,27 +196,27 @@ function loadCustomTheme() {
   const colorpickers = document.getElementById("colorpickers");
   colorpickers.innerHTML = `
     <div class="color-picker-container">
-    <input type="color" class="color-picker" id="colorPicker1">
+    <input type="color" class="color-pickersmpp" id="colorPicker1">
     <span class="color-label">Base0</span>
 </div>
 <div class="color-picker-container">
-    <input type="color" class="color-picker" id="colorPicker2">
+    <input type="color" class="color-pickersmpp" id="colorPicker2">
     <span class="color-label">Base1</span>
 </div>
 <div class="color-picker-container">
-    <input type="color" class="color-picker" id="colorPicker3">
+    <input type="color" class="color-pickersmpp" id="colorPicker3">
     <span class="color-label">Base2</span>
 </div>
 <div class="color-picker-container">
-    <input type="color" class="color-picker" id="colorPicker4">
+    <input type="color" class="color-pickersmpp" id="colorPicker4">
     <span class="color-label">Base3</span>
 </div>
 <div class="color-picker-container">
-    <input type="color" class="color-picker" id="colorPicker5">
+    <input type="color" class="color-pickersmpp" id="colorPicker5">
     <span class="color-label">Accent</span>
 </div>
 <div class="color-picker-container">
-    <input type="color" class="color-picker" id="colorPicker6">
+    <input type="color" class="color-pickersmpp" id="colorPicker6">
     <span class="color-label">Text</span>
 </div>`
   loadCustomThemeData()
@@ -272,18 +267,19 @@ if (popup != null) {
     <select id="profileSelector" >
         <option value="default">Default Deluxe</option>
         <option value="white">Off White</option>
+        <option value="custom">Custom Theme</option>
         <option value="ldev">Dark Sands</option>
         <option value="birb">Midnight Sapphire</option>
         <option value="stalker">Ruby Eclipse</option>
         <option value="chocolate">Dark Mocha</option>
-        <option value="mountain">Sharp Peaks</option>
+        <option value="mountain">Storm Peaks</option>
         <option value="winter">Arctic Azure</option>
         <option value="galaxy">Fluorescent Galaxy</option>
         <option value="sand">Sahara Oasis</option>
         <option value="purple">Neon Violet</option>
         <option value="fall">Autumn Gloom</option>
         <option value="matcha">Matcha Green</option>
-        <option value="custom">Custom</option>
+
     </select>
     <div class="textandbutton" id="colorpickers">
     </div>
@@ -386,7 +382,7 @@ function set_theme(name) {
       style.setProperty('--color-base01', themeData.base1);
       style.setProperty('--color-base02', themeData.base2);
       style.setProperty('--color-base03', themeData.base3);
-      style.setProperty('--loginpage-image', "url(https://github.com/frickingbird8002/smpp-images/blob/main/smppimageineed2-0.png?raw=true)");
+      style.setProperty('--loginpage-image', "url(https://wallpaperaccess.com/full/23.jpg)");
       break;
     case 'ldev':
       style.setProperty('--color-accent', '#ffd5a0');

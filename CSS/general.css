@@ -805,7 +805,7 @@ div [style*="margin"] {
   background-color: var(--color-base02) !important;
 }
 
-.color-picker {
+.color-pickersmpp {
   background-color: transparent;
   /* Example color */
   width: 25px !important;
@@ -815,6 +815,7 @@ div [style*="margin"] {
   margin-left: 4px;
   border: 2px solid var(--color-base00) !important;
   border-radius: 5px !important;
+  margin-bottom: 10px !important;
 }
 
 .color-picker-container {
@@ -825,7 +826,7 @@ div [style*="margin"] {
 
 .color-label {
   position: absolute;
-  bottom: 20px;
+  bottom: 32px;
   left: 50%;
   transform: translateX(-50%);
   opacity: 0;

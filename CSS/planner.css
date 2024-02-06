@@ -97,8 +97,12 @@ span,
   transition: none !important;
 }
 
-.icon-label-btn--blob.icon-label-btn {
+.icon-label-btn--blob.icon-label-btn,.btn:hover {
   background-color: var(--color-base02) !important;
+  border-color: var(--color-base03) !important;
+}
+.icon-label-btn--blob.icon-label-btn:hover {
+  background-color: var(--color-base03) !important;
 }
 
 .timeinput {
@@ -124,11 +128,11 @@ span,
   background-color: var(--color-base02) !important;
 }
 
-.header__month {
+.header__month,.bubble__menu-btn:hover {
   background-color: var(--color-base02) !important;
 }
 
-.date:hover span {
+.date:hover span,.bubble__menu-btn--active,.selectview__new-detail-ui .c-blue-combo--100 {
   background-color: var(--color-base03) !important;
 }
 
@@ -149,3 +153,13 @@ span,
   border-color: var(--color-base03) !important;
 
 }
+.choose-metadata__options label.checkbox.checked {
+  background-color: var(--color-accent) !important;
+  }
+  .choose-metadata__options label.checkbox{
+    background-color: var(--color-base01) !important;
+  }
+  .example-card{
+    color: var(--color-text) !important;
+    background-color: var(--color-base00) !important;
+  }

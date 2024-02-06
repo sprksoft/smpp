@@ -54,11 +54,17 @@
   box-shadow: none !important;
 }
 
+button.modern-message__action.modern-message__action--quick-reply:hover,
+button.modern-message__action.modern-message__action--archive:hover,
+button.modern-message__action.modern-message__action--delete:hover{
+  background-color: var(--color-base02) !important;
+  border: 1px solid var(--color-base01) !important;
+}
 .modern-message__action--quick-reply,
 .modern-message__action--delete,
 .modern-message__action--archive {
   background-color: var(--color-base03) !important;
-  border-color: var(--color-base03) !important;
+  border-color: transparent !important;
 }
 
 #folders_parent_td,
@@ -221,4 +227,7 @@ button.submit-button.smscButton.blue {
 button.submit-button.smscButton.blue:hover {
   filter: brightness(100%) !important;
 
+}
+.resize-handle{
+  display: none !important;
 }
