@@ -186,3 +186,6 @@ span,
   div.dialog__button-bar > button.btn.js-btn:not(.btn--primary){
     color: var(--color-red) !important;
   }
+  .datepicker .block .header select.header__month{
+    border: 2px solid transparent !important;
+  }

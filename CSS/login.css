@@ -99,15 +99,16 @@ a.smscButton[href="/login/sso/init/acm"],
   border-radius: 40px !important;
   height: 40px !important;
   color: var(--color-text) !important;
-  border-color: var(--color-base02) !important;
-  background-color: var(--color-base03) !important;
+  border-color: var(--color-base01) !important;
+  background-color: var(--color-base02) !important;
 }
 
 .smscButton.blue:hover {
   margin-top: 40px !important;
   border-radius: 40px !important;
   height: 40px !important;
-  filter: brightness(80%) !important;
+  background-color: var(--color-base03) !important;
+  border-color: var(--color-base02) !important;
 }
 
 .modern-ui .float-label__input:focus+label>span,
@@ -134,6 +135,7 @@ a.smscButton[href="/login/sso/init/acm"],
 
 .white_text_button:hover {
   background-color: var(--color-base02) !important;
+  border-color: var(--color-base03) !important;
 }
 
 .login-app__infoblock--black {
