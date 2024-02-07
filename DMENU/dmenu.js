@@ -1,6 +1,6 @@
 const dmenu_config_template = {
   centered: { type: "bool", default_value: true },
-  flip_shift_key: { type: "bool", default_value: false },
+  flip_shift_key: { type: "bool", default_value: true },
 }
 
 var lock_dmenu = false;
@@ -21,15 +21,14 @@ function dconfig_menu() {
   }
   dmenu(cmd_list, function (cmd, shift) {
     let settingname = cmd.substring(0, cmd.lastIndexOf(" "));
-    console.log(settingname);
     let type = template[settingname].type;
     let options = [];
     if (type == "bool") {
       options = ["true", "false"]
     }
-    template[settingname] = dmenu(options, function (val, shift) {
+    dmenu(options, function (val, shift) {
       if (type == "bool") {
-        conf[settingname] = Boolean(val);
+        conf[settingname] = (val == "true");
       } else {
         conf[settingname] = val;
       }
@@ -49,19 +48,6 @@ function default_dconfig() {
   return config;
 }
 
-//TODO: should probably not be in here
-function get_config() {
-  let conf = JSON.parse(window.localStorage.getItem("settingsdata"));
-  if (conf == undefined) {
-    conf = default_settings;
-  }
-  return conf
-}
-//TODO: should probably not be in here
-function set_config(config) {
-  window.localStorage.setItem("settingsdata", JSON.stringify(config));
-  apply();
-}
 function get_dconfig() {
   if (dconfig_cache !== undefined) {
     return dconfig_cache;

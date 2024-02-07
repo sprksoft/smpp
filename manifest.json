@@ -41,6 +41,7 @@
 				"CSS/agenda.css"
 			],
 			"js": [
+        "config.js",
 				"scraper.js",
 				"snake.js",
 				"delijndecoder.js",
