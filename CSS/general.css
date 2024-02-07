@@ -305,8 +305,7 @@ smsc-inlineeditor.smsc-table__cell--inlineeditor {
   background-color: var(--color-base01) !important;
 }
 
-.contextmenu__item--nolink:hover,
-.listview__action-btns:hover {
+.contextmenu__item--nolink:hover{
   background-color: var(--color-base02) !important;
 }
 
@@ -330,11 +329,6 @@ smsc-inlineeditor.smsc-table__cell--inlineeditor {
 .smsc-templates__separator,
 #loading-box {
   display: none !important;
-}
-
-.listview__row:hover .listview__action-btns .listview__action-btn {
-
-  background-color: var(--color-base02) !important;
 }
 
 .sidebar,
@@ -468,7 +462,7 @@ div.smscCheckbox label::selection {
 }
 
 .focus-visible {
-  outline: 1px solid var(--color-accent) !important;
+  outline: 0px !important;
 }
 
 /* The switch - the box around the slider */

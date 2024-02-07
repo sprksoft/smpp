@@ -438,7 +438,7 @@ function set_theme(name) {
       style.setProperty('--color-base00', '#071b2c');
       style.setProperty('--color-base01', '#152f47');
       style.setProperty('--color-base02', '#345f7f');
-      style.setProperty('--color-base03', '#b9d4f4');
+      style.setProperty('--color-base03', '#7c9cc2');
       style.setProperty('--loginpage-image', "url(https://th.bing.com/th/id/R.fd4990dbff7b2d998a61b5a60b6b1949?rik=TkC2r3hdP1Ma9g&pid=ImgRaw&r=0)");
       break;
     case 'birb':

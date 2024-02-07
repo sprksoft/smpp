@@ -56,15 +56,15 @@
 
 button.modern-message__action.modern-message__action--quick-reply:hover,
 button.modern-message__action.modern-message__action--archive:hover,
-button.modern-message__action.modern-message__action--delete:hover{
+button.modern-message__action.modern-message__action--delete:hover,.listview__action-btn:hover{
   background-color: var(--color-base02) !important;
-  border: 1px solid var(--color-base01) !important;
+  border: 2px solid var(--color-accent) !important;
 }
 .modern-message__action--quick-reply,
 .modern-message__action--delete,
-.modern-message__action--archive {
+.modern-message__action--archive,.listview__action-btn {
   background-color: var(--color-base03) !important;
-  border-color: transparent !important;
+  border: 2px solid transparent!important
 }
 
 #folders_parent_td,

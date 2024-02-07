@@ -92,8 +92,7 @@ span,
 }
 
 .todo-column [listview] .todo-column__row:hover .todo-column__actions-cell {
-  background-color: var(--color-base02) !important;
-  ;
+  background-color: var(--color-base03) !important;
   transition: none !important;
 }
 
@@ -162,4 +161,28 @@ span,
   .example-card{
     color: var(--color-text) !important;
     background-color: var(--color-base00) !important;
+  }
+  .splitdetail-right-close-btn,.splitdetail-top-btn{
+    border: 2px solid var(--color-base02) !important;
+    border-radius: 5px !important;
+    margin: 5px !important;
+  }
+  .splitdetail-right-close-btn:hover,.splitdetail-left-close-btn:hover{
+    border-color: var(--color-base03) !important;
+    background-color: var(--color-base02) !important;
+    color: var(--color-red) !important;
+  }
+  .splitdetail-top-btn:hover{
+    border-color: var(--color-base03) !important;
+    background-color: var(--color-base02) !important;
+  }
+  [inline-editor] .inline-editor:not([readonly]):hover:after {
+    border-left: 0px !important;
+    border-color: var(--color-base03) !important;
+  }
+  [inline-editor] .inline-editor:not([readonly]):hover .inline-editor__input{
+    border-color: var(--color-base03) !important;
+  }
+  div.dialog__button-bar > button.btn.js-btn:not(.btn--primary){
+    color: var(--color-red) !important;
   }

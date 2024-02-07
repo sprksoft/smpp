@@ -81,7 +81,7 @@
 
 .evaluation-list-item:hover,
 .dropdown-button:hover,
-.goals-filter__item:hover,
+
 .selected,
 .smscleftnavcontainer {
   color: var(--color-accent) !important;
@@ -89,7 +89,9 @@
   border-color: var(--color-accent) !important;
   background-color: var(--color-base01) !important;
 }
-
+.goals-filter__item:hover:not(.selected){
+  background-color: var(--color-base02) !important
+}
 .feedback--white {
   background-color: var(--color-base00) !important;
   color: var(--color-text) !important;
@@ -244,4 +246,8 @@ textarea,
 
 .rubrics__row--title {
   color: var(--color-text) !important;
+}
+.token:hover{
+  background-color: var(--color-base02) !important;
+  border-color: var(--color-base03) !important;
 }
