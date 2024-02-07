@@ -72,3 +72,6 @@ a.js-toast-btn.toast__btn.smscButton.blue {
 li.notifs-toaster__toast.modern-ui {
   background-color: var(--color-base01) !important;
 }
+button.js-notifs-clearbtn.smscButton.smscButton--fit-text{
+  color: var(--color-red) !important;
+}
