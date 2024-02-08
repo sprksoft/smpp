@@ -57,6 +57,14 @@ function clearsettings() {
   localStorage.clear();
   console.log("cleared settings!")
 }
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result.split(',')[1]);
+    reader.onerror = error => reject(error);
+  });
+}
 async function apply() {
   let settingsData = JSON.parse(window.localStorage.getItem("settingsdata"))
   if (settingsData == null) {
@@ -76,7 +84,7 @@ async function apply() {
   const showsnake = settingsData.showsnake;
   set_theme(profileSelect);
   if (overwrite_theme == true) {
-    set_background(background);
+    set_background(background);    
   }
   if (colorpickers != undefined && profileSelect != "custom") {
     colorpickers.innerHTML = ``
@@ -145,14 +153,15 @@ function storeTheme() {
   window.localStorage.setItem("themedata", JSON.stringify(themeData));
 }
 function store() {
-  let previousData = JSON.parse(window.localStorage.getItem("settingsdata"))
-  profileSelectPrevious = previousData.profile
+  let previousData = JSON.parse(window.localStorage.getItem("settingsdata"));
+  profileSelectPrevious = previousData.profile;
   if (profileSelectPrevious == "custom") {
-    storeTheme()
+    storeTheme();
   }
-  let settingsData = {}
+
+  let settingsData = {};
   const profileSelect = document.getElementById("profileSelector").value;
-  const background = document.getElementById("background").value;
+  const backgroundFile = document.getElementById("background").files[0];
   const halte = document.getElementById("halt").checked;
   const overwrite_theme = document.getElementById("button").checked;
   const loc = document.getElementById("location").value;
@@ -162,7 +171,6 @@ function store() {
   const showsnake = document.getElementById('showsnakeelement').checked;
 
   settingsData.profile = profileSelect;
-  settingsData.background = background;
   settingsData.halte = halte;
   settingsData.overwrite_theme = overwrite_theme;
   settingsData.location = loc.charAt(0).toUpperCase() + loc.slice(1);
@@ -170,11 +178,30 @@ function store() {
   settingsData.snow = parseInt(snowSlider);
   settingsData.shownews = shownews;
   settingsData.showsnake = showsnake;
-  window.localStorage.setItem("settingsdata", JSON.stringify(settingsData));
-  if (profileSelect == "custom") {
-    loadCustomTheme()
+
+  // Check if background file is selected
+  if (backgroundFile) {
+    // Convert file to base64 string and save in local storage
+    fileToBase64(backgroundFile)
+      .then(base64Image => {
+        settingsData.background = base64Image;
+        window.localStorage.setItem("settingsdata", JSON.stringify(settingsData));
+        if (profileSelect == "custom") {
+          loadCustomTheme();
+        }
+        apply();
+      })
+      .catch(error => {
+        console.error('Error converting file to base64:', error);
+      });
+  } else {
+    // If no background file selected, save other settings only
+    window.localStorage.setItem("settingsdata", JSON.stringify(settingsData));
+    if (profileSelect == "custom") {
+      loadCustomTheme();
+    }
+    apply();
   }
-  apply()
 }
 
 function loadCustomThemeData() {
@@ -233,7 +260,6 @@ function load() {
   const shownews = document.getElementById("shownewselement");
   const showsnake = document.getElementById("showsnakeelement");
   profileSelect.value = settingsData.profile
-  background.value = settingsData.background
   halte.checked = settingsData.halte
   overwrite_theme.checked = settingsData.overwrite_theme
   loc.value = settingsData.location
@@ -294,7 +320,7 @@ if (popup != null) {
     
     <h3 class="popuptitles">Custom wallpaper (optional):</h3>
     <div class="textandbutton">
-        <input class="popupinput" id="background" type="text"></input>
+        <input class="popupinput" id="background" type="file"></input>
         <label class="switch">
             <input class="popupinput" type="checkbox" id="button">
             <span class="slider round"></span>
@@ -334,7 +360,7 @@ if (popup != null) {
 
 function set_background(background) {
   let style = document.documentElement.style;
-  style.setProperty('--loginpage-image', "url(" + background + ")");
+  style.setProperty('--loginpage-image', 'url(data:image/png;base64,' + background + ')');
 }
 
 const theme_names = ["default", "white", "ldev", "birb", "stalker", "chocolate", "winter", "fall", "matcha", "vax", "galaxy", "sand", "custom"];
