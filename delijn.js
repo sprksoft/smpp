@@ -19,8 +19,13 @@ async function fetchData(entiteit, halte) {
     handleFetchError();
   }
 }
+async function fetchLijnData(entiteitnummer, lijnnummer) {
+  const fetch_url = `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${entiteitnummer}/${lijnnummer}`;
+  return await fetchApiData(fetch_url);
+}
 
-function createApplication(data) {
+async function createApplication(data) {
+  console.log(data)
   const leftContainerbottom = document.getElementById('leftContainerbottom');
   if (!leftContainerbottom) return;
 
@@ -35,7 +40,12 @@ function createApplication(data) {
 
   for (const doorkomst of doorkomsten) {
     console.log(doorkomsten)
-    const { bestemming, lijnnummer, dienstregelingTijdstip } = doorkomst;
+    var {entiteitnummer, bestemming, lijnnummer, dienstregelingTijdstip } = doorkomst;
+    console.log(lijnnummer)
+    console.log(entiteitnummer)
+
+    perLijnData = await fetchLijnData(entiteitnummer, lijnnummer)
+    lijnnummer = perLijnData.lijnnummerPubliek
     const real_timeTijdstip = doorkomst["real-timeTijdstip"]
     console.log(real_timeTijdstip)
     const date = new Date(dienstregelingTijdstip);
