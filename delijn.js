@@ -21,6 +21,7 @@ async function fetchData(entiteit, halte) {
 }
 
 function createApplication(data) {
+  console.log(data)
   const leftContainerbottom = document.getElementById('leftContainerbottom');
   if (!leftContainerbottom) return;
 
@@ -35,7 +36,10 @@ function createApplication(data) {
 
   for (const doorkomst of doorkomsten) {
     console.log(doorkomsten)
-    const { bestemming, lijnnummer, dienstregelingTijdstip } = doorkomst;
+    const {entiteitnummer, bestemming, lijnnummer, dienstregelingTijdstip } = doorkomst;
+    console.log(lijnnummer)
+    console.log(entiteitnummer)
+    
     const real_timeTijdstip = doorkomst["real-timeTijdstip"]
     console.log(real_timeTijdstip)
     const date = new Date(dienstregelingTijdstip);
