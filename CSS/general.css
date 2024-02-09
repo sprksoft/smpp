@@ -662,7 +662,9 @@ input:checked+.slider:before {
   transition: opacity .2s;
   margin: 5px !important;
 }
-
+#backgroundSlider{
+  width: 50% !important;
+}
 .sliderblur::-webkit-slider-thumb {
   -webkit-appearance: none;
   /* Override default look */
@@ -843,4 +845,7 @@ button.colorpickerbutton {
 
 .input-search:focus {
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .24) !important;
+}
+#errormessagesmpp{
+  color:var(--color-red) !important
 }

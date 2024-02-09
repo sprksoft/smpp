@@ -4,9 +4,10 @@
 
 const default_settings = {
   profile: "default",
-  background: "none",
+  backgroundlink: "none",
+  backgroundfile: "none",
   halte: true,
-  overwrite_theme: false,
+  overwrite_theme: 2,
   location: "keerbergen",
   blur: "2",
   snow: "0",
@@ -74,7 +75,8 @@ async function apply() {
   const colorpickers = document.getElementById("colorpickers");
   console.log(settingsData)
   const profileSelect = settingsData.profile
-  const background = settingsData.background
+  const backgroundFile = settingsData.backgroundfile
+  const backgroundLink = settingsData.backgroundlink
   const halte = settingsData.halte
   const overwrite_theme = settingsData.overwrite_theme;
   const loc = settingsData.location;
@@ -83,8 +85,10 @@ async function apply() {
   const shownews = settingsData.shownews;
   const showsnake = settingsData.showsnake;
   set_theme(profileSelect);
-  if (overwrite_theme == true) {
-    set_background(background);    
+  if (overwrite_theme == 0) {
+    set_background(backgroundFile);    
+  }else if(overwrite_theme == 1){
+    set_backgroundlink(backgroundLink)
   }
   if (colorpickers != undefined && profileSelect != "custom") {
     colorpickers.innerHTML = ``
@@ -161,9 +165,10 @@ function store() {
 
   let settingsData = {};
   const profileSelect = document.getElementById("profileSelector").value;
-  const backgroundFile = document.getElementById("background").files[0];
+  const backgroundFile = document.getElementById("backgroundfile").files[0];
+  const backgroundLink = document.getElementById("backgroundlink").value
   const halte = document.getElementById("halt").checked;
-  const overwrite_theme = document.getElementById("button").checked;
+  const overwrite_theme = document.getElementById("backgroundSlider").value;
   const loc = document.getElementById("location").value;
   const slider = document.getElementById('mySlider').value;
   const snowSlider = document.getElementById('snowSlider').value;
@@ -174,6 +179,8 @@ function store() {
   settingsData.halte = halte;
   settingsData.overwrite_theme = overwrite_theme;
   settingsData.location = loc.charAt(0).toUpperCase() + loc.slice(1);
+  settingsData.backgroundfile = backgroundFile
+  settingsData.backgroundlink = backgroundLink
   settingsData.blur = slider;
   settingsData.snow = parseInt(snowSlider);
   settingsData.shownews = shownews;
@@ -184,15 +191,20 @@ function store() {
     // Convert file to base64 string and save in local storage
     fileToBase64(backgroundFile)
       .then(base64Image => {
-        settingsData.background = base64Image;
+        settingsData.backgroundfile = base64Image;
         window.localStorage.setItem("settingsdata", JSON.stringify(settingsData));
         if (profileSelect == "custom") {
           loadCustomTheme();
         }
         apply();
+        document.getElementById("errormessagesmpp").innerHTML = ``
       })
       .catch(error => {
-        console.error('Error converting file to base64:', error);
+        if (error instanceof DOMException && error.name === 'QuotaExceededError') {
+          handleQuotaExceededError();
+      } else {
+          console.error('An error occurred:', error);
+      }
       });
   } else {
     // If no background file selected, save other settings only
@@ -202,8 +214,12 @@ function store() {
     }
     apply();
   }
-}
-
+};
+function handleQuotaExceededError(){
+  document.getElementById("errormessagesmpp").innerHTML = `
+  <p>File too large must be under 1.4MB</p>
+  `
+};
 function loadCustomThemeData() {
   let themeData = JSON.parse(window.localStorage.getItem("themedata"))
   document.getElementById("colorPicker1").value = themeData.base0
@@ -251,9 +267,9 @@ function loadCustomTheme() {
 function load() {
   let settingsData = JSON.parse(window.localStorage.getItem("settingsdata"));
   const profileSelect = document.getElementById("profileSelector");
-  const background = document.getElementById("background");
+  const backgroundLink = document.getElementById("backgroundlink");
   const halte = document.getElementById("halt");
-  const overwrite_theme = document.getElementById("button");
+  const overwrite_theme = document.getElementById("backgroundSlider");
   const loc = document.getElementById("location");
   const blur = document.getElementById('mySlider');
   const snowSlider = document.getElementById('snowSlider');
@@ -261,7 +277,8 @@ function load() {
   const showsnake = document.getElementById("showsnakeelement");
   profileSelect.value = settingsData.profile
   halte.checked = settingsData.halte
-  overwrite_theme.checked = settingsData.overwrite_theme
+  overwrite_theme.value = settingsData.overwrite_theme
+  backgroundLink.value = settingsData.backgroundlink
   loc.value = settingsData.location
   blur.value = settingsData.blur
   snowSlider.value = settingsData.snow
@@ -320,12 +337,11 @@ if (popup != null) {
     
     <h3 class="popuptitles">Custom wallpaper (optional):</h3>
     <div class="textandbutton">
-        <input class="popupinput" id="background" type="file"></input>
-        <label class="switch">
-            <input class="popupinput" type="checkbox" id="button">
-            <span class="slider round"></span>
-        </label>
+        <input class="popupinput" id="backgroundfile" type="file"></input>
+        <input class="popupinput" id="backgroundlink" type="text"></input>
+        <input type="range" min="0" max="2" value="0" class="sliderblur" id="backgroundSlider">
     </div>
+    <div class="textandbutton" id="errormessagesmpp"></div>
     <h3 class="popuptitles">Blur:</h3>
     <input type="range" min="0" max="20" value="0" class="sliderblur" id="mySlider">
     <h3 class="popuptitles">Snow:</h3>
@@ -361,6 +377,11 @@ if (popup != null) {
 function set_background(background) {
   let style = document.documentElement.style;
   style.setProperty('--loginpage-image', 'url(data:image/png;base64,' + background + ')');
+  console.log("setbackground to file ")
+}
+function set_backgroundlink(background) {
+  let style = document.documentElement.style;
+  style.setProperty('--loginpage-image', 'url(' + background + ')');
 }
 
 const theme_names = ["default", "white", "ldev", "birb", "stalker", "chocolate", "winter", "fall", "matcha", "vax", "galaxy", "sand", "custom"];
