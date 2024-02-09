@@ -116,18 +116,22 @@ function dmenu_close() {
 
 function get_match_count(str, match) {
   let match_count = 0;
-  let largest_match = 0;
+  let matched=false;
+  let start_dist=1;
   for (let i = 0; i < str.length; i++) {
     if (str[i] == match[match_count]) {
-      match_count += 1;
-      if (largest_match < match_count) {
-        largest_match = match_count;
+      start_dist=i+1;
+      matched=true;
+    }
+    if (matched){
+      if (str[i] == match[match_count]) {
+        match_count++;
+      }else{
+        break;
       }
-    } else {
-      match_count = 0;
     }
   }
-  return largest_match;
+  return (match_count*2)-start_dist;
 }
 
 function select(index) {
@@ -173,19 +177,22 @@ function dmenu_update_search(command) {
 
   let nodes = autocompletelist.childNodes;
   let largest_match_count = 0;
-  for (let i = 0; i < nodes.length; i++) {
-    let node = nodes[i];
-    let mcount = get_match_count(node.innerText, command);
-    if (mcount == 0 && command != "") {
-      node.classList.add("hidden");
-      autocompletelist.insertBefore(node, nodes[-1]);
-    } else {
-      node.classList.remove("hidden");
+  for (let i = 0; i < 100; i++){
+    for (let i = 0; i < nodes.length; i++) {
+      let node = nodes[i];
+      let mcount = get_match_count(node.innerText, command);
+      if (mcount == 0 && command != "") {
+        node.classList.add("hidden");
+        autocompletelist.insertBefore(node, nodes[-1]);
+      } else {
+        node.classList.remove("hidden");
+      }
+      if (largest_match_count < mcount) {
+        largest_match_count = mcount;
+        autocompletelist.insertBefore(node, nodes[0]);
+      }
     }
-    if (largest_match_count < mcount) {
-      largest_match_count = mcount;
-      autocompletelist.insertBefore(node, nodes[0]);
-    }
+
   }
 
 }
