@@ -67,11 +67,8 @@ function fileToBase64(file) {
   });
 }
 async function apply() {
-  let settingsData = JSON.parse(window.localStorage.getItem("settingsdata"))
-  if (settingsData == null) {
-    settingsData = default_settings;
-    window.localStorage.setItem("settingsdata", JSON.stringify(settingsData));
-  }
+  let settingsData = get_config();
+
   const colorpickers = document.getElementById("colorpickers");
   console.log(settingsData)
   const profileSelect = settingsData.profile

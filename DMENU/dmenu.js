@@ -1,6 +1,6 @@
 const dmenu_config_template = {
   centered: { type: "bool", default_value: true },
-  flip_shift_key: { type: "bool", default_value: false },
+  flip_shift_key: { type: "bool", default_value: true },
 }
 
 var lock_dmenu = false;
@@ -21,15 +21,14 @@ function dconfig_menu() {
   }
   dmenu(cmd_list, function (cmd, shift) {
     let settingname = cmd.substring(0, cmd.lastIndexOf(" "));
-    console.log(settingname);
     let type = template[settingname].type;
     let options = [];
     if (type == "bool") {
       options = ["true", "false"]
     }
-    template[settingname] = dmenu(options, function (val, shift) {
+    dmenu(options, function (val, shift) {
       if (type == "bool") {
-        conf[settingname] = Boolean(val);
+        conf[settingname] = (val == "true");
       } else {
         conf[settingname] = val;
       }
@@ -49,19 +48,6 @@ function default_dconfig() {
   return config;
 }
 
-//TODO: should probably not be in here
-function get_config() {
-  let conf = JSON.parse(window.localStorage.getItem("settingsdata"));
-  if (conf == undefined) {
-    conf = default_settings;
-  }
-  return conf
-}
-//TODO: should probably not be in here
-function set_config(config) {
-  window.localStorage.setItem("settingsdata", JSON.stringify(config));
-  apply();
-}
 function get_dconfig() {
   if (dconfig_cache !== undefined) {
     return dconfig_cache;
@@ -130,18 +116,22 @@ function dmenu_close() {
 
 function get_match_count(str, match) {
   let match_count = 0;
-  let largest_match = 0;
+  let matched=false;
+  let start_dist=1;
   for (let i = 0; i < str.length; i++) {
     if (str[i] == match[match_count]) {
-      match_count += 1;
-      if (largest_match < match_count) {
-        largest_match = match_count;
+      start_dist=i+1;
+      matched=true;
+    }
+    if (matched){
+      if (str[i] == match[match_count]) {
+        match_count++;
+      }else{
+        break;
       }
-    } else {
-      match_count = 0;
     }
   }
-  return largest_match;
+  return (match_count*2)-start_dist;
 }
 
 function select(index) {
@@ -187,19 +177,22 @@ function dmenu_update_search(command) {
 
   let nodes = autocompletelist.childNodes;
   let largest_match_count = 0;
-  for (let i = 0; i < nodes.length; i++) {
-    let node = nodes[i];
-    let mcount = get_match_count(node.innerText, command);
-    if (mcount == 0 && command != "") {
-      node.classList.add("hidden");
-      autocompletelist.insertBefore(node, nodes[-1]);
-    } else {
-      node.classList.remove("hidden");
+  for (let i = 0; i < 100; i++){
+    for (let i = 0; i < nodes.length; i++) {
+      let node = nodes[i];
+      let mcount = get_match_count(node.innerText, command);
+      if (mcount == 0 && command != "") {
+        node.classList.add("hidden");
+        autocompletelist.insertBefore(node, nodes[-1]);
+      } else {
+        node.classList.remove("hidden");
+      }
+      if (largest_match_count < mcount) {
+        largest_match_count = mcount;
+        autocompletelist.insertBefore(node, nodes[0]);
+      }
     }
-    if (largest_match_count < mcount) {
-      largest_match_count = mcount;
-      autocompletelist.insertBefore(node, nodes[0]);
-    }
+
   }
 
 }
