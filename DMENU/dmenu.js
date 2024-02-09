@@ -5,8 +5,7 @@ const dmenu_config_template = {
 
 var lock_dmenu = false;
 var command_list = [];
-var end_func = undefined;
-var open = false;
+var end_func = undefined; var open = false;
 var selected = -1;
 var user_text = "";
 var no_type = true;
