@@ -85,7 +85,7 @@ async function apply() {
   const shownews = settingsData.shownews;
   const showsnake = settingsData.showsnake;
   set_theme(profileSelect);
-  if (overwrite_theme == 0) {
+  if (overwrite_theme == 2) {
     set_background(backgroundFile);    
   }else if(overwrite_theme == 1){
     set_backgroundlink(backgroundLink)
@@ -322,7 +322,7 @@ if (popup != null) {
         <option value="purple">Neon Violet</option>
         <option value="fall">Autumn Gloom</option>
         <option value="matcha">Matcha Green</option>
-
+  
     </select>
     <div class="textandbutton" id="colorpickers">
     </div>
@@ -337,9 +337,9 @@ if (popup != null) {
     
     <h3 class="popuptitles">Custom wallpaper (optional):</h3>
     <div class="textandbutton">
-        <input class="popupinput" id="backgroundfile" type="file"></input>
-        <input class="popupinput" id="backgroundlink" type="text"></input>
-        <input type="range" min="0" max="2" value="0" class="sliderblur" id="backgroundSlider">
+      <input type="range" min="0" max="2" value="0" class="sliderblur" id="backgroundSlider">
+      <input class="popupinput" id="backgroundlink" type="text"></input>
+      <input class="popupinput" id="backgroundfile" type="file"></input>
     </div>
     <div class="textandbutton" id="errormessagesmpp"></div>
     <h3 class="popuptitles">Blur:</h3>
@@ -366,6 +366,7 @@ if (popup != null) {
     </div>
   
     </body>
+  
     
 `
     load()

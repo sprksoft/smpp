@@ -1,14 +1,68 @@
-<div class="textandbutton" id="colorpickers">
-  <button class="colorpickerbutton"></button>
-  <input type="color" class="color-picker" id="colorPicker1" id="base0el">
-  <button class="colorpickerbutton"></button>
-  <input type="color" class="color-picker" id="colorPicker2" id="base1el">
-  <button class="colorpickerbutton"></button>
-  <input type="color" class="color-picker" id="colorPicker3" id="base2el">
-  <button class="colorpickerbutton"></button>
-  <input type="color" class="color-picker" id="colorPicker4" id="base3el">
-  <button class="colorpickerbutton"></button>
-  <input type="color" class="color-picker" id="colorPicker5" id="accentel">
-  <button class="colorpickerbutton"></button>
-  <input type="color" class="color-picker" id="colorPicker6" id="textel">
-</div>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>popup</title>
+  </head>
+  
+  <body>
+  <h3 class="popuptitles">Color profile:</h3>
+  
+  <select id="profileSelector" >
+      <option value="default">Default Deluxe</option>
+      <option value="white">Off White</option>
+      <option value="custom">Custom Theme</option>
+      <option value="ldev">Dark Sands</option>
+      <option value="birb">Midnight Sapphire</option>
+      <option value="stalker">Ruby Eclipse</option>
+      <option value="chocolate">Dark Mocha</option>
+      <option value="mountain">Storm Peaks</option>
+      <option value="winter">Arctic Azure</option>
+      <option value="galaxy">Fluorescent Galaxy</option>
+      <option value="sand">Sahara Oasis</option>
+      <option value="purple">Neon Violet</option>
+      <option value="fall">Autumn Gloom</option>
+      <option value="matcha">Matcha Green</option>
+
+  </select>
+  <div class="textandbutton" id="colorpickers">
+  </div>
+  <h3 class="popuptitles">Show DeLijn app:</h3>
+  <label class="switch">
+  <input class="popupinput" type="checkbox" id="halt">
+  <span class="slider round"></span>
+  </label>
+  
+  <h3 class="popuptitles">Location (weather):</h3>
+  <input class="popupinput" id="location" type="text"></input>
+  
+  <h3 class="popuptitles">Custom wallpaper (optional):</h3>
+  <div class="textandbutton">
+    <input type="range" min="0" max="2" value="0" class="sliderblur" id="backgroundSlider">
+    <input class="popupinput" id="backgroundlink" type="text"></input>
+    <input class="popupinput" id="backgroundfile" type="file"></input>
+  </div>
+  <div class="textandbutton" id="errormessagesmpp"></div>
+  <h3 class="popuptitles">Blur:</h3>
+  <input type="range" min="0" max="20" value="0" class="sliderblur" id="mySlider">
+  <h3 class="popuptitles">Snow:</h3>
+  <input type="range" min="0" max="500" value="0" class="sliderblur" id="snowSlider">
+
+  <div class="textandbutton">
+    <div>
+      <h3 class="popuptitles">Snake:</h3>
+      <label class="switch">
+        <input class="popupinput" type="checkbox" id="showsnakeelement">
+        <span class="slider round"></span>
+        </label>
+    </div>
+<div>
+    <h3 class="popuptitles">News:</h3>
+    <label class="switch">
+      <input class="popupinput" type="checkbox" id="shownewselement">
+      <span class="slider round"></span>
+      </label>
+  </div>
+
+  </div>
+
+  </body>
