@@ -2,18 +2,6 @@
 //ok - ldev
 //oke logis - andere ldev
 
-const default_settings = {
-  profile: "default",
-  backgroundlink: "none",
-  backgroundfile: "none",
-  halte: true,
-  overwrite_theme: 2,
-  location: "keerbergen",
-  blur: "2",
-  snow: "0",
-  shownews: true,
-  showsnake: false
-};
 const default_theme = {
   base0: "#38313a", base1: "#826882", base2: "#ac85b7", base3: "#c78af0", accent: "#a3a2ec", text: "#ede3e3"
 }
