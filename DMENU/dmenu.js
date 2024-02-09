@@ -177,22 +177,19 @@ function dmenu_update_search(command) {
 
   let nodes = autocompletelist.childNodes;
   let largest_match_count = 0;
-  for (let i = 0; i < 100; i++){
-    for (let i = 0; i < nodes.length; i++) {
-      let node = nodes[i];
-      let mcount = get_match_count(node.innerText, command);
-      if (mcount == 0 && command != "") {
-        node.classList.add("hidden");
-        autocompletelist.insertBefore(node, nodes[-1]);
-      } else {
-        node.classList.remove("hidden");
-      }
-      if (largest_match_count < mcount) {
-        largest_match_count = mcount;
-        autocompletelist.insertBefore(node, nodes[0]);
-      }
+  for (let i = 0; i < nodes.length; i++) {
+    let node = nodes[i];
+    let mcount = get_match_count(node.innerText, command);
+    if (mcount == 0 && command != "") {
+      node.classList.add("hidden");
+      autocompletelist.insertBefore(node, nodes[-1]);
+    } else {
+      node.classList.remove("hidden");
     }
-
+    if (largest_match_count < mcount) {
+      largest_match_count = mcount;
+      autocompletelist.insertBefore(node, nodes[0]);
+    }
   }
 
 }
