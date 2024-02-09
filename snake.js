@@ -52,7 +52,7 @@ function gameOver(score) {
   Try Again (Enter)</button><p class=score>Speed:</p><div class="textandbutton"><input type="range" min="10" max="300" value="100" class="sliderblur" id="speedslider"><p id=speedmultiplier class=text_next_to_slider>1.5x</p></div>`;
   loadSpeed()
   var enterKeyHandler = function (event) {
-    if (event.key === "Enter") {
+    if (event.key === "Enter" || event.key === "e") {
       gamediv.innerHTML = `<canvas id=game-container>`
       snakeGame()
       document.removeEventListener('keydown', enterKeyHandler);
@@ -169,18 +169,18 @@ function snakeGame() {
   }
   let gameInterval = setInterval(gameLoop, SNAKE_SPEED);
   document.addEventListener('keydown', event => {
-    if (event.key === 'ArrowLeft' && snake.direction !== 'RIGHT') {
+    if ((event.key === 'ArrowLeft' || event.key === 'a' || event.key === 'q') && snake.direction !== 'RIGHT') {
       snake.direction = 'LEFT';
       event.preventDefault();
-    } else if (event.key === 'ArrowRight' && snake.direction !== 'LEFT') {
+    } else if ((event.key === 'ArrowRight' || event.key === 'd') && snake.direction !== 'LEFT') {
       snake.direction = 'RIGHT';
       event.preventDefault();
-    } else if (event.key === 'ArrowUp' && snake.direction !== 'DOWN') {
+    } else if ((event.key === 'ArrowUp' || event.key === 'w' || event.key === 'z') && snake.direction !== 'DOWN') {
       snake.direction = 'UP';
       event.preventDefault();
-    } else if (event.key === 'ArrowDown' && snake.direction !== 'UP') {
+    } else if ((event.key === 'ArrowDown' || event.key === 's') && snake.direction !== 'UP') {
       snake.direction = 'DOWN';
       event.preventDefault();
     }
-  });
+  });  
 }
