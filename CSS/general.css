@@ -247,7 +247,11 @@ select,
   text-shadow: none !important;
 }
 
-.msgInfoTitle {
+.msgInfoTitle,
+.sectionedit1,
+.sectionedit2,
+.sectionedit3,
+.sectionedit4 {
   color: var(--color-accent) !important;
 }
 
@@ -256,7 +260,9 @@ select,
 }
 
 .msgInfoAuthor,
-.msgInfoMsg {
+.msgInfoMsg,
+.li,
+.manualmain  {
   color: var(--color-text) !important;
 }
 
@@ -338,7 +344,9 @@ transition-duration: 0.1s !important;
 .sidebar,
 .sidebar-btn__button,
 .manual_widgetcontent,
-.manual_widgettitle {
+.manual_widgettitle,
+.breadcrumb,
+#manual_widgetcontent_3 {
   background-color: var(--color-base00) !important;
 }
 
