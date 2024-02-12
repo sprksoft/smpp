@@ -55,17 +55,20 @@ async function fetchEvaluationDetails(identifier) {
   // Function to observe changes in the DOM
   function observeDOMChanges(colors) {
     const listviewRows = document.querySelector('.listview__rows');
+    const dataRowIds = [];                                                        // je was dit hier vergeten
     if (listviewRows) {
       const elementsWithDataLevelZero = listviewRows.querySelectorAll('[data-level="0"]');
       console.log("it should work also")
       elementsWithDataLevelZero.forEach(element => {
           const dataRowId = element.dataset.rowid;
-          dataRowIds.push(dataRowId);
-  
+          dataRowIds.push(dataRowId); // This should work now
+    
           // Apply inline style to set background color
           element.style.backgroundColor = "green"; // Replace "green" with your dynamically set color
       });
-  }}
+    }
+  }
+  
   
   // Function to extract data-rowids from the DOM
   function extractDataRowIds() {
