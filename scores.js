@@ -58,7 +58,6 @@ async function fetchEvaluationDetails(identifier) {
     return null;
   }
 }
-
 // Function to extract data-rowids from the DOM and assign colors
 function extractDataRowIdsAndAssignColors(colors, dataRowIds) {
   const elementsWithDataLevelZero = document.querySelectorAll('[data-level="0"]');
@@ -68,11 +67,11 @@ function extractDataRowIdsAndAssignColors(colors, dataRowIds) {
     console.log(`Data row ID: ${dataRowId}, Color: ${color}`); // Log the data-rowid and color
     const button = element.querySelector('button'); // Find the button element inside the row
     if (button) {
-      button.style.backgroundColor = color; // Assign color to the button background
+      // Assign color to the button background with !important
+      button.style.setProperty('background-color', color, 'important');
     }
   });
 }
-
 // Function to observe changes in the DOM
 function observeDOMChanges(colors, dataRowIds) {
   const listviewRows = document.querySelector('.listview__rows');
@@ -83,7 +82,6 @@ function observeDOMChanges(colors, dataRowIds) {
         const dataRowId = dataRowIds[index];
 
         // Apply inline style to set background color
-        element.style.backgroundColor = colors[index] || 'default-color'; // Replace "green" with your dynamically set color
     });
 }}
 
@@ -102,7 +100,6 @@ function extractDataRowIds() {
   }
   return dataRowIds;
 }
-// Your existing code...
 
 fetch('https://takeerbergen.smartschool.be/results/api/v1/evaluations/?pageNumber=1&itemsOnPage=100')
     .then(async response => {
