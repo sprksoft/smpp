@@ -1,11 +1,16 @@
 function storeSpeed() {
-  let slider = document.getElementById("speedslider").value
-  window.localStorage.setItem("snakespeed", slider)
-  let speedMultiplier = Math.round(slider / 10)
-  speedMultiplier /= 10
-  speedMultiplier = speedMultiplier.toFixed(1)
-  document.getElementById('speedmultiplier').innerText = `${speedMultiplier}x`
-  window.localStorage.setItem("snakespeedmultiplier", speedMultiplier)
+  let slider = document.getElementById("speedslider").value;
+  if (slider == 10) {
+    document.getElementById('game-div').getElementsByTagName('h2')[0].innerText = "Snale++";
+  } else {
+    document.getElementById('game-div').getElementsByTagName('h2')[0].innerText = "Snake++";
+  }
+  window.localStorage.setItem("snakespeed", slider);
+  let speedMultiplier = Math.round(slider / 10);
+  speedMultiplier /= 10;
+  speedMultiplier = speedMultiplier.toFixed(1);
+  document.getElementById('speedmultiplier').innerText = `${speedMultiplier}x`;
+  window.localStorage.setItem("snakespeedmultiplier", speedMultiplier);
 }
 function loadSpeed() {
   let speed = window.localStorage.getItem("snakespeed")
@@ -16,16 +21,20 @@ function loadSpeed() {
   document.getElementById("speedslider").value = speed
 }
 function setSnakeSpeed() {
-  sliderElement = document.getElementById("speedslider")
-  sliderValue = document.getElementById("speedslider").value
-  let speed = window.localStorage.getItem("snakespeed")
-  document.getElementById('speedslider').addEventListener("input",
-    storeSpeed)
-  let speedMultiplier = Math.round(speed / 10)
-  speedMultiplier /= 10
-  speedMultiplier = speedMultiplier.toFixed(1)
-  document.getElementById('speedmultiplier').innerText = `${speedMultiplier}x`
-  window.localStorage.setItem("snakespeedmultiplier", speedMultiplier)
+  sliderElement = document.getElementById("speedslider");
+  sliderValue = document.getElementById("speedslider").value;
+  let speed = window.localStorage.getItem("snakespeed");
+  document.getElementById('speedslider').addEventListener("input", storeSpeed);
+  let speedMultiplier = Math.round(speed / 10);
+  speedMultiplier /= 10;
+  speedMultiplier = speedMultiplier.toFixed(1);
+  document.getElementById('speedmultiplier').innerText = `${speedMultiplier}x`;
+  window.localStorage.setItem("snakespeedmultiplier", speedMultiplier);
+  if (sliderValue == 10) {
+    document.getElementById('game-div').getElementsByTagName('h2')[0].innerText = "Snale++";
+  } else {
+    document.getElementById('game-div').getElementsByTagName('h2')[0].innerText = "Snake++";
+  }
 }
 function startSnakeGame() {
   let div = document.createElement("div")
