@@ -67,11 +67,28 @@ function extractDataRowIdsAndAssignColors(colors, dataRowIds) {
     console.log(`Data row ID: ${dataRowId}, Color: ${color}`); // Log the data-rowid and color
     const button = element.querySelector('button'); // Find the button element inside the row
     if (button) {
-      // Assign color to the button background with !important
-      button.style.setProperty('background-color', color, 'important');
+      // Assign color to the button background
+      switch (color) {
+        case 'blue':
+          button.style.setProperty('background-color', 'var(--color-blue)', 'important');
+          break;
+        case 'green':
+          button.style.setProperty('background-color', 'var(--color-green)', 'important');
+          break;
+        case 'orange':
+          button.style.setProperty('background-color', 'var(--color-orange)', 'important');
+          break;
+        case 'red':
+          button.style.setProperty('background-color', 'var(--color-red)', 'important');
+          break;
+        default:
+          button.style.backgroundColor = color;
+          break;
+      }
     }
   });
 }
+
 // Function to observe changes in the DOM
 function observeDOMChanges(colors, dataRowIds) {
   const listviewRows = document.querySelector('.listview__rows');
