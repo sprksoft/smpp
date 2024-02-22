@@ -102,6 +102,7 @@ function observeDOMChanges(colors, dataRowIds) {
     });
 }}
 
+
 // Function to extract data-rowids from the DOM
 function extractDataRowIds() {
   console.log("it should work")
