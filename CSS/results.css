@@ -97,44 +97,8 @@
   color: var(--color-text) !important;
 }
 
-.c-blue-combo--100 {
-  background-color: var(--color-blue) !important;
-  color: var(--color-blue) !important;
-}
-
-.c-green-combo--100 {
-  background-color: var(--color-green) !important;
-  color: var(--color-green) !important;
-}
-
-.c-orange-combo--100 {
-  background-color: var(--color-orange) !important;
-  color: var(--color-orange) !important;
-}
-
-.c-red-combo--100 {
-  background-color: var(--color-red) !important;
-  color: var(--color-red) !important;
-}
-
-.c-blue-combo--200 {
-  background-color: var(--color-blue) !important;
-  filter: brightness(85%)
-}
-
-.c-green-combo--200 {
-  background-color: var(--color-green) !important;
-  filter: brightness(85%)
-}
-
-.c-orange-combo--200 {
-  background-color: var(--color-orange) !important;
-  filter: brightness(85%)
-}
-
-.c-red-combo--200 {
-  background-color: var(--color-red) !important;
-  filter: brightness(85%)
+.goals.js-content-upper-part-targets > div{
+  background-color: var(--color-base00) !important;
 }
 
 .goals__goal__content__title {
