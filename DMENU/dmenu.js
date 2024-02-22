@@ -1,6 +1,7 @@
 const dmenu_config_template = {
   centered: { type: "bool", default_value: true },
   flip_shift_key: { type: "bool", default_value: true },
+  item_score: { type:"bool", default_value: false }
 }
 
 var lock_dmenu = false;
@@ -9,6 +10,7 @@ var end_func = undefined; var open = false;
 var selected = -1;
 var user_text = "";
 var no_type = true;
+var view_item_score;
 
 var dconfig_cache = undefined;
 
@@ -77,6 +79,7 @@ function dmenu(params, onselect, name = "dmenu:") {
   end_func = onselect;
   user_text = "";
   let dconfig = get_dconfig();
+  view_item_score=dconfig.item_score;
   let dmenu = document.getElementById("dmenu");
   dmenu.getElementsByClassName("dmenu-label")[0].innerText = name;
   dmenu.classList.remove("dmenu-hidden");
@@ -94,9 +97,14 @@ function dmenu(params, onselect, name = "dmenu:") {
   for (let i = 0; i < params.length; i++) {
     const cmd = params[i].toLowerCase();
     command_list.push(cmd);
-    let thing = document.createElement("div");
-    thing.innerText = cmd;
-    autocompletelist.appendChild(thing);
+    let row = document.createElement("div");
+    if (view_item_score){
+      row.innerHTML='<div class="content"></div><div class="score">0</div>'
+      row.getElementsByClassName("content")[0].innerText = cmd;
+    }else{
+      row.innerText=cmd;
+    }
+    autocompletelist.appendChild(row);
   }
 
   let input = dmenu.getElementsByTagName("input")[0];
@@ -114,24 +122,30 @@ function dmenu_close() {
   return dmenu.getElementsByTagName("input")[0].value;
 }
 
-function get_match_count(str, match) {
-  let match_count = 0;
-  let matched=false;
-  let start_dist=1;
+function match_score(str, match) {
+  let score = 0;
+  let mi=0;
+  let streak=0;
   for (let i = 0; i < str.length; i++) {
-    if (str[i] == match[match_count]) {
-      start_dist=i+1;
-      matched=true;
-    }
-    if (matched){
-      if (str[i] == match[match_count]) {
-        match_count++;
+    if (str[i] == match[mi]) {
+      if (i == mi){
+        score+=(streak+1)*8;
       }else{
-        break;
+        score+=(streak+1)*2;
       }
+      mi+=1;
+      streak+=1;
+    }else{
+      streak=0;
     }
   }
-  return (match_count*2)-start_dist;
+  if (mi < match.length){
+    return 0;
+  }
+  if (score < 0){
+    score=0;
+  }
+  return score;
 }
 
 function select(index) {
@@ -164,7 +178,11 @@ function select(index) {
   if (user_text == "") {
     user_text = input.value;
   }
-  input.value = new_sel.innerText;
+  if (view_item_score){
+    input.value = new_sel.getElementsByClassName("content")[0].innerText;
+  }else{
+    input.value = new_sel.innerText;
+  }
 
   selected = index;
 }
@@ -174,25 +192,58 @@ function dmenu_update_search(command) {
   let dmenu = document.getElementById("dmenu");
   let input = dmenu.getElementsByTagName("input")[0];
   let autocompletelist = dmenu.getElementsByClassName("autocomplete")[0];
+  
+  let i = 0;
+  while(true){
+    if (sort(autocompletelist, command, i) || i > 100){
+      break;
+    }
+    i++;
+  }
+}
 
+function sort(autocompletelist, command, start_index) {
   let nodes = autocompletelist.childNodes;
-  let largest_match_count = 0;
-  for (let i = 0; i < nodes.length; i++) {
+  let lscore = 0;
+  let lscore_node = null;
+  let move_down=[];
+  let is_sorted=true;
+  for (let i = start_index; i < nodes.length; i++) {
     let node = nodes[i];
-    let mcount = get_match_count(node.innerText, command);
-    if (mcount == 0 && command != "") {
+    let text;
+    if(view_item_score){
+      text=node.getElementsByClassName("content")[0].innerText;
+    }else{
+      text=node.innerText;
+    }
+    let score = match_score(text, command);
+    if (view_item_score){
+      node.getElementsByClassName("score")[0].innerText=score;
+    }
+    if (score == 0 && command != "") {
       node.classList.add("hidden");
-      autocompletelist.insertBefore(node, nodes[-1]);
+      move_down.push(nodes[i]);
     } else {
       node.classList.remove("hidden");
+      if (!(lscore < score)){
+        is_sorted=false;
+      }
     }
-    if (largest_match_count < mcount) {
-      largest_match_count = mcount;
-      autocompletelist.insertBefore(node, nodes[0]);
+    if (lscore < score) {
+      lscore = score;
+      lscore_node=nodes[i];
     }
   }
-
+  if (lscore_node !== null){
+    autocompletelist.insertBefore(lscore_node, autocompletelist.childNodes[start_index]);
+  }
+  for (let i=0; i < move_down.length; i++){
+      autocompletelist.insertBefore(move_down[i], autocompletelist.lastChild);
+  }
+  return is_sorted;
 }
+
+
 function dmenu_select_next(prev = false) {
   let dmenu = document.getElementById("dmenu");
   let autocompletelist = dmenu.getElementsByClassName("autocomplete")[0];

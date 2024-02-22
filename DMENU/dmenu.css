@@ -65,7 +65,16 @@ html {
 #dmenu>.autocomplete>* {
   margin: var(--dmenu-margin);
   color: var(--color-text) !important;
+  display:flex;
+  flex-direction: row;
   border: none;
+}
+#dmenu>.autocomplete>*>.content{
+  flex-grow:10;
+}
+#dmenu>.autocomplete>*>.score{
+  margin-right:0.5rem;
+  color: var(--color-accent);
 }
 
 #dmenu>.autocomplete>*:nth-child(even) {
@@ -76,3 +85,4 @@ html {
   background: var(--color-accent) !important;
   color: var(--color-base01) !important;
 }
+
