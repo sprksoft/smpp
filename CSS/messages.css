@@ -231,3 +231,21 @@ button.submit-button.smscButton.blue:hover {
 .resize-handle{
   display: none !important;
 }
+
+.tox :not(svg):not(rect){
+  fill: var(--color-accent) !important;
+}
+
+.tox .tox-edit-area__iframe{
+  background-color: #ffffffdb !important;
+  color: var(--color-text) !important;
+}
+.tox:not([dir=rtl]) .tox-toolbar__group:not(:last-of-type) {
+  border-right: 1px solid var(--color-base03) !important;
+}
+.tox .tox-menubar+.tox-toolbar{
+  border-top: 1px solid var(--color-base03) !important;
+}
+.tox .tox-menubar{
+  background-color: var(--color-base02) !important;
+}
