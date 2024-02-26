@@ -73,6 +73,14 @@ async function apply() {
   const shownews = settingsData.shownews;
   const showsnake = settingsData.showsnake;
   set_theme(profileSelect);
+  var currentUrl = window.location.href;
+
+  var currentUrl = window.location.href;
+  if (currentUrl.includes(backgroundLink) || currentUrl.includes(backgroundFile)) {
+      var newUrl = currentUrl.replace(backgroundLink, "").replace(backgroundFile, "");
+      window.location.href = newUrl;
+  }
+  
   if (overwrite_theme == 2) {
     set_background(backgroundFile);    
   }else if(overwrite_theme == 1){
@@ -386,6 +394,7 @@ function set_background(background) {
 }
 function set_backgroundlink(background) {
   let style = document.documentElement.style;
+
   style.setProperty('--loginpage-image', 'url(' + background + ')');
 }
 
