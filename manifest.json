@@ -23,14 +23,6 @@
 		},
 		{
 			"matches": [
-				"*://*.smartschool.be/results/*"
-			],
-			"js": [
-				"scores.js"
-			]
-		},
-		{
-			"matches": [
 				"*://*.smartschool.be/*"
 			],
 			"all_frames": true,
@@ -61,7 +53,8 @@
 				"loginpage.js",
 				"DMENU/quick.js",
 				"snow.js",
-				"smppjs.js"
+				"smppjs.js",
+				"scores.js"
 			]
 		}
 	],
