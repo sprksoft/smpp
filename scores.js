@@ -70,16 +70,16 @@ function extractDataRowIdsAndAssignColors(colors, dataRowIds) {
       // Assign color to the button background
       switch (color) {
         case 'blue':
-          button.style.setProperty('background-color', 'var(--color-blue)', 'important');
+          button.style.setProperty('background-color', '#1476be', 'important');
           break;
         case 'green':
-          button.style.setProperty('background-color', 'var(--color-green)', 'important');
+          button.style.setProperty('background-color', '#2ca32e', 'important');
           break;
         case 'orange':
-          button.style.setProperty('background-color', 'var(--color-orange)', 'important');
+          button.style.setProperty('background-color', '#cc5a00', 'important');
           break;
         case 'red':
-          button.style.setProperty('background-color', 'var(--color-red)', 'important');
+          button.style.setProperty('background-color', '#ff0000', 'important');
           break;
         default:
           button.style.backgroundColor = color;
