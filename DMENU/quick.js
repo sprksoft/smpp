@@ -36,6 +36,7 @@ document.addEventListener("keyup", function (e) {
           return;
         case "scores":
           show_scores();
+          return;
         case "dmenu config":
           dconfig_menu();
           return;
