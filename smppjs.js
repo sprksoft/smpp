@@ -158,7 +158,7 @@ function storeTheme() {
   window.localStorage.setItem("themedata", JSON.stringify(themeData));
 }
 function store() {
-  let previousData = JSON.parse(window.localStorage.getItem("settingsdata"));
+  let previousData = get_config();
   profileSelectPrevious = previousData.profile;
   if (profileSelectPrevious == "custom") {
     storeTheme();
@@ -188,7 +188,7 @@ function store() {
   settingsData.shownews = shownews;
   settingsData.showsnake = showsnake;
   settingsData.show_scores = previousData.show_scores;
-  
+  console.log(settingsData)
   if (settingsData.show_scores == undefined){
     settingsData.show_scores = false;
   }
