@@ -251,3 +251,17 @@ textarea,
   background-color: var(--color-base02) !important;
   border-color: var(--color-base03) !important;
 }
+.timegrid{
+  background: transparent !important
+
+}
+.planner-planner__main{
+  background-image: var(--loginpage-image) !important;
+  background-position: center !important;
+  background-size: cover !important;
+  background-attachment: fixed !important;
+  background-color: var(--color-homepage-sidebars-bg) !important;
+}
+.content__day-column.js-day-column.highlight{
+  background-color: #ffffff10 !important;
+}

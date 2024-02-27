@@ -58,7 +58,8 @@ button.modern-message__action.modern-message__action--quick-reply:hover,
 button.modern-message__action.modern-message__action--archive:hover,
 button.modern-message__action.modern-message__action--delete:hover,.listview__action-btn:hover{
   background-color: var(--color-base02) !important;
-  border: 2px solid var(--color-accent) !important;
+  border: 2px solid transparent !important;
+  border-radius: 5px !important;
 }
 .modern-message__action--quick-reply,
 .modern-message__action--delete,
