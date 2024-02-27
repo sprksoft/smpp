@@ -1,7 +1,7 @@
 function storeSpeed() {
   let slider = document.getElementById("speedslider").value;
   if (slider == 10) {
-    document.getElementById('game-div').getElementsByTagName('h2')[0].innerText = "Snale++";
+    document.getElementById('game-div').getElementsByTagName('h2')[0].innerText = "Snail++";
   } else {
     document.getElementById('game-div').getElementsByTagName('h2')[0].innerText = "Snake++";
   }
@@ -31,7 +31,7 @@ function setSnakeSpeed() {
   document.getElementById('speedmultiplier').innerText = `${speedMultiplier}x`;
   window.localStorage.setItem("snakespeedmultiplier", speedMultiplier);
   if (sliderValue == 10) {
-    document.getElementById('game-div').getElementsByTagName('h2')[0].innerText = "Snale++";
+    document.getElementById('game-div').getElementsByTagName('h2')[0].innerText = "Snail++";
   } else {
     document.getElementById('game-div').getElementsByTagName('h2')[0].innerText = "Snake++";
   }
