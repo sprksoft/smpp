@@ -189,3 +189,6 @@ span,
   .datepicker .block .header select.header__month{
     border: 2px solid transparent !important;
   }
+  .listview__row.js-listview-row.todo__row.todo-column__row:hover{
+    background-color: red !important;
+  }
