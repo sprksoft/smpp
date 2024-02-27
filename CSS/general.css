@@ -933,3 +933,7 @@ transition-duration: 0.1s !important;
 .correctioninfo{
   background-color: var(--color-base01) !important;
 }
+
+.user-image {
+  display: none;
+}
