@@ -73,7 +73,6 @@ async function apply() {
   const shownews = settingsData.shownews;
   const showsnake = settingsData.showsnake;
   set_theme(profileSelect);
-  var currentUrl = window.location.href;
 
   var currentUrl = window.location.href;
   if (currentUrl.includes(backgroundLink) || currentUrl.includes(backgroundFile)) {
@@ -384,7 +383,7 @@ document.getElementById('backgroundfilebutton').addEventListener("click", openFi
 }
 
 
-function set_background(background) {
+async function set_background(background) {
   let style = document.documentElement.style;
   if (background.length > 1500000){
     if (document.getElementById("errormessagesmpp")){
@@ -392,7 +391,7 @@ function set_background(background) {
   }
   style.setProperty('--loginpage-image', 'url(data:image/png;base64,' + background + ')');
 }
-function set_backgroundlink(background) {
+async function set_backgroundlink(background) {
   let style = document.documentElement.style;
 
   style.setProperty('--loginpage-image', 'url(' + background + ')');
