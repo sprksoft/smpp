@@ -8,7 +8,8 @@ const default_settings = {
   shownews: true,
   showsnake: false,
   backgroundlink: "none",
-  backgroundfile: "none"
+  backgroundfile: "none",
+  show_scores: true
 };
 function get_config() {
   let conf = window.localStorage.getItem("settingsdata");

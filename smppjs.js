@@ -72,6 +72,7 @@ async function apply() {
   const snow = settingsData.snow;
   const shownews = settingsData.shownews;
   const showsnake = settingsData.showsnake;
+  const show_scores = settingsData.show_scores;
   set_theme(profileSelect);
 
   var currentUrl = window.location.href;
@@ -79,7 +80,13 @@ async function apply() {
       var newUrl = currentUrl.replace(backgroundLink, "").replace(backgroundFile, "");
       window.location.href = newUrl;
   }
-  
+
+  if (show_scores == undefined) {
+    show_scores = false;
+  }
+  if (show_scores) {
+    show_scores()
+  }
   if (overwrite_theme == 2) {
     set_background(backgroundFile);    
   }else if(overwrite_theme == 1){
@@ -180,6 +187,11 @@ function store() {
   settingsData.snow = parseInt(snowSlider);
   settingsData.shownews = shownews;
   settingsData.showsnake = showsnake;
+  settingsData.show_scores = previousData.show_scores;
+  
+  if (settingsData.show_scores == undefined){
+    settingsData.show_scores = false;
+  }
   if (shownews && !previousData.shownews){
     window.location.reload();
   }
