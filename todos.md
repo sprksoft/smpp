@@ -2,7 +2,7 @@
 - [ ] splashtext on login page
 - [ ] latte (delijn)
 - [ ] some dmenu funny shortcuts
-- [ ] snail++
+- [x] snail++
 - [ ] more fun ideas
 
 # not a concern

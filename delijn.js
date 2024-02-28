@@ -98,9 +98,12 @@ async function createApplication(data) {
     leftContainerbottom.appendChild(div);
   }
 
-  const lastdiv = document.createElement('div');
-  lastdiv.innerHTML = `<div class=lastdiv><a href="https://www.delijn.be/nl/contact/attest-aanvraag/" target="_blank">Late?</a></div>`;
-  leftContainerbottom.appendChild(lastdiv);
+  const randomValue = Math.random();
+
+if (randomValue < 0.01) {
+  window.location.href = 'https://www.coolblue.be/nl/koffiezetapparaten/koffiezetapparaten-voor-latte-macchiato?utm_source=bing&utm_medium=cpc&utm_content=search&cmt=c_b,cp_554669870,aid_1297424829986242,t_kwd-81089287897708:loc-14,n_o,d_c,lp_611&msclkid=1f7482f3ed5c1b56a37de72c7f194ba4';
+} else {
+  window.location.href = 'https://www.delijn.be/nl/contact/attest-aanvraag/';
 }
 
 function handleFetchError() {
