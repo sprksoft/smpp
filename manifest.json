@@ -22,14 +22,6 @@
 			]
 		},
 		{
-			"matches":[
-				"*://*.smartschool.be/results/*"
-			],
-			"js":[
-				"scores.js"
-			]
-		},
-		{
 			"matches": [
 				"*://*.smartschool.be/*"
 			],
@@ -49,8 +41,9 @@
 				"CSS/agenda.css"
 			],
 			"js": [
-        "config.js",
+        		"config.js",
 				"scraper.js",
+				"scores.js",
 				"snake.js",
 				"delijndecoder.js",
 				"utils.js",
@@ -62,6 +55,7 @@
 				"DMENU/quick.js",
 				"snow.js",
 				"smppjs.js"
+
 			]
 		}
 	],

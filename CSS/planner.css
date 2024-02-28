@@ -79,9 +79,6 @@ span,
   background-color: var(--color-base00) !important;
 }
 
-.goal-list {
-  display: none !important;
-}
 
 .form__label--required::after {
   color: var(--color-accent) !important;
@@ -125,8 +122,11 @@ span,
 
 .datepicker .block .dates .date--selected {
   background-color: var(--color-base02) !important;
+  border-color: var(--color-base03) !important;
 }
-
+.datepicker .block .dates .date--current span{
+  border-color: var(--color-base03) !important;
+}
 .header__month,.bubble__menu-btn:hover {
   background-color: var(--color-base02) !important;
 }
@@ -141,6 +141,7 @@ span,
 .rightblock {
   border: 2px solid var(--color-accent) !important;
   box-shadow: none !important;
+  background-color: var(--color-base02) !important;
 }
 
 .header__borderdropdowncontainer::after {
@@ -162,12 +163,12 @@ span,
     color: var(--color-text) !important;
     background-color: var(--color-base00) !important;
   }
-  .splitdetail-right-close-btn,.splitdetail-top-btn{
+  .splitdetail-right-close-btn,.splitdetail-top-btn,.side-panel__close{
     border: 2px solid var(--color-base02) !important;
     border-radius: 5px !important;
     margin: 5px !important;
   }
-  .splitdetail-right-close-btn:hover,.splitdetail-left-close-btn:hover{
+  .splitdetail-right-close-btn:hover,.splitdetail-left-close-btn:hover,.side-panel__close:hover{
     border-color: var(--color-base03) !important;
     background-color: var(--color-base02) !important;
     color: var(--color-red) !important;
@@ -183,12 +184,94 @@ span,
   [inline-editor] .inline-editor:not([readonly]):hover .inline-editor__input{
     border-color: var(--color-base03) !important;
   }
-  div.dialog__button-bar > button.btn.js-btn:not(.btn--primary){
+  div.dialog__button-bar > button.btn.js-btn:not(.btn--primary),button.btn.close-btn.btn--primary{
     color: var(--color-red) !important;
   }
   .datepicker .block .header select.header__month{
     border: 2px solid transparent !important;
   }
-  .listview__row.js-listview-row.todo__row.todo-column__row:hover{
-    background-color: red !important;
+  .listview__row.js-listview-row.todo__row.todo-column__row:hover,.content__day-column.js-day-column.highlight{
+    background-color: #00000039 !important;
+    border-radius: 10px !important;
+  }
+  
+  .header.js-header.header--single-line,.detail-lint.js-detail-lint,.splitdetail__content__topbtns{
+    background-color: var(--color-base01) !important;
+  }
+  .splitdetail__content__topbtns{
+    border: 2px solid transparent !important;
+    border-radius: 10px !important;
+  }
+  .swoosh-wrapper{
+    display: none !important;
+  }
+  button.icon-btn.js-icon-btn.header__icon.js-header-icon.icon-btn--32{
+    background-color: var(--color-base02);
+  }
+  .btn.btn:not(.send-delayed-button){
+    border: 2px solid var(--color-base02) !important;
+    border-radius: 7px !important;
+  }
+  .btn.btn:hover:not(.send-delayed-button:hover){
+    border: 2px solid var(--color-base03) !important;
+  }
+  button.btn.close-btn.btn--plain{
+    color: var(--color-red) !important;
+  }
+  button.detail-blob:hover{
+    background-color: var(--color-base02) !important;
+  }
+  button.button-close-svg{
+    display: none !important;
+  }
+  [textarea]:not([focus-within]):hover [textarea-tinymceinput],.detail-description__textarea:hover{
+    border: 2px solid var(--color-base02) !important;
+    border-radius: 10px !important;
+  }
+  [textarea]:not([focus-within]),.detail-description__textarea{
+    border: 2px solid transparent!important;
+  }
+  [textarea]:not([focus-within]):hover:before{
+    display: none !important;
+  }
+  [dialog-content] .dialog__button-bar{
+    border-top: 2px solid var(--color-base02) !important;
+  }
+  input.input.bootstrap__input{
+    background-color: var(--color-base02) !important;
+  }
+  .ple.js-ple.ple--brief.ple--past.ple--pending.ple--no-click,
+  .ple-content.ple-content--pending:not(.ple-content--has-problem),div#ple-content--temporaryPlaceholder{
+border-color: var(--color-base02) !important
+  }
+  .js-emptystate.detail-empty-state{
+    background-color: var(--color-base01) !important;
+  }
+  button.detail-todo-icon-and-color__icon.active-icon{
+    border: 2px solid var(--color-base03) !important;
+  }
+  button.detail-todo-icon-and-color__icon:hover:not(.active-icon){
+    border-color: var(--color-base02) !important;
+  }
+  button.detail-todo-icon-and-color__icon{
+    border: 2px solid transparent !important
+  }
+  .listview__cell.js-listview-cell.listview__cell--icon-24.column-icon{
+    background-color: var(--color-base02) !important;
+  }
+  .listview__cell.js-listview-cell.listview__cell--icon-24.column-icon:hover
+{
+    background-color: var(--color-base03) !important;
+  }
+
+  [bubble].bubble--tooltip{
+    color: var(--color-text) !important
+  }
+  .evaluation-list-item.selected{
+    box-shadow: none !important;
+    border-color: var(--color-accent) !important;
+    background-color: var(--color-base01) !important;
+  }
+  .listview__row.js-listview-row.goals__row{
+    display: none !important;
   }

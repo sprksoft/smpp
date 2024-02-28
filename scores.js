@@ -1,4 +1,4 @@
-async function show_scores() {
+async function show_scoresfunc() {
   // Function to detect scrolling within the filterlistview-container div
   function detectScrolling(colors, dataRowIds) {
     const filterlistviewContainer = document.querySelector('.filterlistview-container');
@@ -22,7 +22,9 @@ async function show_scores() {
   }
   async function fetchEvaluationDetails(identifier) {
     try {
-      const response = await fetch(`https://takeerbergen.smartschool.be/results/api/v1/evaluations/${identifier}`);
+      var currentUrl = window.location.href;
+      school_name = currentUrl.split("/")[2]
+      const response = await fetch(`https://${school_name}/results/api/v1/evaluations/${identifier}`);
       if (!response.ok) {
         throw new Error('Failed to fetch');
       }
@@ -46,7 +48,9 @@ async function show_scores() {
 
   // Function to fetch evaluation details for an identifier
   async function fetchEvaluationDetails(identifier) {
-    const url = `https://takeerbergen.smartschool.be/results/api/v1/evaluations/${identifier}`;
+    var currentUrl = window.location.href;
+    school_name = currentUrl.split("/")[2]
+    const url = `https://${school_name}/results/api/v1/evaluations/${identifier}`;
     try {
       const response = await fetch(url);
       if (!response.ok) {
@@ -119,8 +123,9 @@ async function show_scores() {
     }
     return dataRowIds;
   }
-
-  fetch('https://takeerbergen.smartschool.be/results/api/v1/evaluations/?pageNumber=1&itemsOnPage=100')
+  var currentUrl = window.location.href;
+  school_name = currentUrl.split("/")[2]
+  fetch(`https://${school_name}/results/api/v1/evaluations/?pageNumber=1&itemsOnPage=100`)
       .then(async response => {
           if (!response.ok) {
               throw new Error('Failed to fetch HTML content');

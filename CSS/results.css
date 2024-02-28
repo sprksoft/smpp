@@ -68,6 +68,7 @@
   color: var(--color-text) !important;
 }
 
+
 .evaluation-list-item,
 .dropdown-button,
 .goals-filter__item,
@@ -79,14 +80,14 @@
   border-color: var(--color-base02) !important;
 }
 
-.evaluation-list-item:hover,
+.evaluation-list-item:hover:not(.evaluation-list-item.selected),
 .dropdown-button:hover,
 
-.selected,
+
 .smscleftnavcontainer {
   color: var(--color-accent) !important;
   box-shadow: none !important;
-  border-color: var(--color-accent) !important;
+  border-color: var(--color-base02) !important;
   background-color: var(--color-base01) !important;
 }
 .goals-filter__item:hover:not(.selected){
@@ -192,7 +193,7 @@ input[type=search].input.search-input,
 .c-steel-combo--100,
 .c-steel-combo-hover--100,
 [listview] .listview__row:hover:not(.listview__row--selected) .listview__cell:not(.listview__cell--select-btn):not(.listview__cell--no-hover) {
-  background-color: var(--color-base00) !important;
+  background-color: transparent !important;
 }
 
 .table-page .table-page__container__wrapper__table .cell {
@@ -262,6 +263,9 @@ textarea,
   background-attachment: fixed !important;
   background-color: var(--color-homepage-sidebars-bg) !important;
 }
-.content__day-column.js-day-column.highlight{
-  background-color: #ffffff10 !important;
+.bubble__menu-btn:hover{
+  border-radius: 5px !important;
+}
+.separator{
+  background-color: var(--color-base02) !important;
 }

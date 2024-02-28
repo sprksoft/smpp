@@ -50,6 +50,9 @@
   transition: none !important;
   text-decoration: none !important;
 }
+.bubble{
+  border-radius: 9px !important;
+}
 
 .menu-divider::before {
   background-color: var(--color-accent) !important;
