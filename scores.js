@@ -94,7 +94,7 @@ async function show_scoresfunc() {
     });
   }
 
-  function observeDOMChanges(colors, dataRowIds) {
+function observeDOMChanges(colors, dataRowIds) {
     const listviewRows = document.querySelector('.listview__rows');
     if (listviewRows) {
         const observer = new MutationObserver(mutationsList => {
