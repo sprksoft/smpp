@@ -94,7 +94,7 @@ a.smscButton[href="/login/sso/init/acm"],
   margin-left: 0px !important;
 }
 
-.smscButton.blue {
+.smscButton.blue:not(#pushWizardPopupConfirmButton) {
   margin-top: 40px !important;
   border-radius: 40px !important;
   height: 40px !important;
@@ -103,7 +103,7 @@ a.smscButton[href="/login/sso/init/acm"],
   background-color: var(--color-base02) !important;
 }
 
-.smscButton.blue:hover {
+.smscButton.blue:hover:not(#pushWizardPopupConfirmButton:hover) {
   margin-top: 40px !important;
   border-radius: 40px !important;
   height: 40px !important;

@@ -261,7 +261,17 @@ textarea,
   background-position: center !important;
   background-size: cover !important;
   background-attachment: fixed !important;
-  background-color: var(--color-homepage-sidebars-bg) !important;
+
+}
+.planner-planner__main::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.2); 
+  pointer-events: none;
 }
 .bubble__menu-btn:hover{
   border-radius: 5px !important;

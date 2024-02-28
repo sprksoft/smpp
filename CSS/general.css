@@ -51,7 +51,9 @@ html {
 
 .toolbar,
 div.stdReplyWrapper,
-button.js-btn-search {
+button.js-btn-search,.smscDialog .smscDialog_header .smscDialog_header_title,.popupContainer .popupContainerTitle,
+.popupContainer .popupContainerSubtitle
+ {
   color: var(--color-text) !important;
 }
 
@@ -936,4 +938,14 @@ transition-duration: 0.1s !important;
 
 .user-image {
   display: none;
+}
+.personaliaTable>tbody>tr>td>input.readonly,input[name="email"]
+{
+  background-color: var(--color-base01) !important;
+}
+.smscDialog{
+  background-color: var(--color-base01) !important;
+}
+.popupContainer{
+  background-image: none !important;
 }

@@ -86,6 +86,7 @@ span,
 
 .todo-column__row--hovering {
   background-color: var(--color-base02) !important;
+  border-radius: 7px !important;
 }
 
 .todo-column [listview] .todo-column__row:hover .todo-column__actions-cell {
@@ -163,12 +164,12 @@ span,
     color: var(--color-text) !important;
     background-color: var(--color-base00) !important;
   }
-  .splitdetail-right-close-btn,.splitdetail-top-btn,.side-panel__close{
+  .splitdetail-right-close-btn,.splitdetail-top-btn,.side-panel__close,.smscDialog_header_close{
     border: 2px solid var(--color-base02) !important;
     border-radius: 5px !important;
     margin: 5px !important;
   }
-  .splitdetail-right-close-btn:hover,.splitdetail-left-close-btn:hover,.side-panel__close:hover{
+  .splitdetail-right-close-btn:hover,.splitdetail-left-close-btn:hover,.side-panel__close:hover,.smscDialog_header_close{
     border-color: var(--color-base03) !important;
     background-color: var(--color-base02) !important;
     color: var(--color-red) !important;
@@ -274,4 +275,19 @@ border-color: var(--color-base02) !important
   }
   .listview__row.js-listview-row.goals__row{
     display: none !important;
+  }
+  .todo-column__container{
+    background-color: rgba(0, 0, 0, 0.2) !important; 
+    border-radius: 10px !important;
+  }
+  button.icon-label-btn.js-icon-label-btn.icon-label-btn--linkbutton{
+    box-shadow: none !important;
+    border-color: var(--color-accent) !important;
+    background-color: var(--color-base02) !important;
+    padding: 10px !important;
+    border-radius: 7px !important;
+    border: 2px solid var(--color-accent) !important;
+  }
+  button.icon-label-btn.js-icon-label-btn.icon-label-btn--linkbutton:hover{
+    background-color: var(--color-base03) !important;
   }

@@ -406,10 +406,12 @@ async function set_background(background) {
   style.setProperty('--loginpage-image', 'url(data:image/png;base64,' + background + ')');
 }
 async function set_backgroundlink(background) {
-  let style = document.documentElement.style;
-
-  style.setProperty('--loginpage-image', 'url(' + background + ')');
+  document.addEventListener('DOMContentLoaded', function() {
+    let style = document.documentElement.style;
+    style.setProperty('--loginpage-image', 'url(' + background + ')');
+  });
 }
+
 
 const theme_names = ["default", "white", "ldev", "birb", "stalker", "chocolate", "winter", "fall", "matcha", "vax", "galaxy", "sand", "custom"];
 function set_theme(name) {

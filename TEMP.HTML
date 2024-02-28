@@ -1,68 +1,15 @@
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>popup</title>
-  </head>
-  
-  <body>
-  <h3 class="popuptitles">Color profile:</h3>
-  
-  <select id="profileSelector" >
-      <option value="default">Default Deluxe</option>
-      <option value="white">Off White</option>
-      <option value="custom">Custom Theme</option>
-      <option value="ldev">Dark Sands</option>
-      <option value="birb">Midnight Sapphire</option>
-      <option value="stalker">Ruby Eclipse</option>
-      <option value="chocolate">Dark Mocha</option>
-      <option value="mountain">Storm Peaks</option>
-      <option value="winter">Arctic Azure</option>
-      <option value="galaxy">Fluorescent Galaxy</option>
-      <option value="sand">Sahara Oasis</option>
-      <option value="purple">Neon Violet</option>
-      <option value="fall">Autumn Gloom</option>
-      <option value="matcha">Matcha Green</option>
-
-  </select>
-  <div class="textandbutton" id="colorpickers">
-  </div>
-  <h3 class="popuptitles">Show DeLijn app:</h3>
-  <label class="switch">
-  <input class="popupinput" type="checkbox" id="halt">
-  <span class="slider round"></span>
-  </label>
-  
-  <h3 class="popuptitles">Location (weather):</h3>
-  <input class="popupinput" id="location" type="text"></input>
-  
-  <h3 class="popuptitles">Custom wallpaper (optional):</h3>
-  <div class="textandbutton">
-    <input type="range" min="0" max="2" value="0" class="sliderblur" id="backgroundSlider">
-    <input class="popupinput" id="backgroundlink" type="text"></input>
-    <input class="popupinput" id="backgroundfile" type="file"></input>
-  </div>
-  <div class="textandbutton" id="errormessagesmpp"></div>
-  <h3 class="popuptitles">Blur:</h3>
-  <input type="range" min="0" max="20" value="0" class="sliderblur" id="mySlider">
-  <h3 class="popuptitles">Snow:</h3>
-  <input type="range" min="0" max="500" value="0" class="sliderblur" id="snowSlider">
-
-  <div class="textandbutton">
-    <div>
-      <h3 class="popuptitles">Snake:</h3>
-      <label class="switch">
-        <input class="popupinput" type="checkbox" id="showsnakeelement">
-        <span class="slider round"></span>
-        </label>
-    </div>
-<div>
-    <h3 class="popuptitles">News:</h3>
-    <label class="switch">
-      <input class="popupinput" type="checkbox" id="shownewselement">
-      <span class="slider round"></span>
-      </label>
-  </div>
-
-  </div>
-
-  </body>
+<div class="smscDialog fadeIn" style="height: 462px; width: 680px; top: 264px; left: 377.5px;"><div class="smscDialog_header">
+	<div class="smscDialog_header_title move">Berichtgeving</div>
+	
+		<button class="smscDialog_header_close" title="Sluiten" control-id="ControlID-20"></button>
+	
+</div>
+<div class="smscDialog_content"><div class="popupContainer">
+	<div class="popupContainerTitle">Loop geen belangrijke informatie mis</div>
+	<div class="popupContainerSubtitle">Blijf op de hoogte van alle nieuwe zaken in Smartschool via het kanaal dat jij wenst: <br> <span class="highlighter">meldingen in de browser</span>, <span class="highlighter">Smartschool app</span> of rechtstreeks via <span class="highlighter">e-mail</span>.</div>
+</div>
+<div class="cf">
+	<button id="pushWizardPopupCancelButton" class="smscButton popupButton" control-id="ControlID-21">Vraag mij niet opnieuw</button>
+	<button id="pushWizardPopupConfirmButton" class="smscButton blue popupButton right marginLeft" control-id="ControlID-22">Stel dit nu in</button>
+	<button onclick="window.open('/?module=Manual&amp;file=manual&amp;layout=2&amp;id=handleiding%3Aprofiel%3Aberichtgeving', '_blank');" class="smscButton popupButton right" control-id="ControlID-23">Meer informatie</button>
+</div></div></div>
