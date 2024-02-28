@@ -85,9 +85,14 @@ async function apply() {
     show_scores = false;
   }
   if (show_scores) {
-    if (currentUrl.includes("smartschool.be/results/main/results")){
-      await show_scoresfunc();
-    }
+    console.log("trying to show scores")
+
+      if (currentUrl.includes("smartschool.be/results/main/results")) {
+        console.log("Showing scores")
+        await show_scoresfunc();
+      }
+
+    
   }
   if (overwrite_theme == 2) {
     set_background(backgroundFile);    

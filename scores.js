@@ -94,18 +94,32 @@ async function show_scoresfunc() {
     });
   }
 
-  // Function to observe changes in the DOM
   function observeDOMChanges(colors, dataRowIds) {
     const listviewRows = document.querySelector('.listview__rows');
     if (listviewRows) {
-      const elementsWithDataLevelZero = listviewRows.querySelectorAll('[data-level="0"]');
-      console.log("it should work also")
-      elementsWithDataLevelZero.forEach((element, index) => {
-          const dataRowId = dataRowIds[index];
+        const observer = new MutationObserver(mutationsList => {
+            mutationsList.forEach(mutation => {
+                if (mutation.type === 'childList') {
+                    const elementsWithDataLevelZero = listviewRows.querySelectorAll('[data-level="0"]');
+                    console.log("it should work also");
+                    elementsWithDataLevelZero.forEach((element, index) => {
+                        const dataRowId = dataRowIds[index];
+                        // Apply inline style to set background color
+                        if (colors.hasOwnProperty(dataRowId)) {
+                            element.style.backgroundColor = colors[dataRowId];
+                        }
+                    });
+                }
+            });
+        });
 
-          // Apply inline style to set background color
-      });
-  }}
+        // Configuration of the observer:
+        const config = { childList: true, subtree: true };
+
+        // Start observing the target node for configured mutations
+        observer.observe(listviewRows, config);
+    }
+}
 
 
   // Function to extract data-rowids from the DOM
