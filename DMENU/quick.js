@@ -38,8 +38,11 @@ document.addEventListener("keyup", function (e) {
           settingData = get_config()
           if (settingData.show_scores){
             settingData.show_scores = false
+            console.log("Turned show scores off")
           }else{
             settingData.show_scores = true
+            console.log("Turned show scores on")
+
           }
           set_config(settingData)
           return;
