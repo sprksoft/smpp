@@ -269,7 +269,12 @@ function init_dmenu() {
   dmenu.id = "dmenu";
   dmenu.classList.add("dmenu");
   dmenu.classList.add("dmenu-hidden");
-  dmenu.innerHTML = "<div class='top'><label class='dmenu-label'>dmenu:</label><input class='dmenu-input' type='text'></div><div class='autocomplete'></div>";
+  dmenu.innerHTML = `<div class='top'>
+  <label class='dmenu-label'>dmenu:</label>
+  <input class='dmenu-input' type='text'>
+</div>
+<div class='autocomplete'></div>
+`;
   document.body.insertBefore(dmenu, document.body.childNodes[-1]);
   let input = dmenu.getElementsByTagName("input")[0]
   input.addEventListener("focusout", function (e) {

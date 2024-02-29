@@ -48,11 +48,11 @@
 				"delijndecoder.js",
 				"utils.js",
 				"themes.js",
+				"DMENU/quick.js",
 				"DMENU/dmenu.js",
 				"weather.js",
 				"delijn.js",
 				"loginpage.js",
-				"DMENU/quick.js",
 				"snow.js",
 				"smppjs.js"
 

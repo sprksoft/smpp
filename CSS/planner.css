@@ -34,6 +34,7 @@
 
 .icon-label-btn--linkbutton .icon-label {
   color: var(--color-accent) !important;
+  fill: var(--color-accent) !important
 }
 
 .listview__row,
@@ -191,10 +192,14 @@ span,
   .datepicker .block .header select.header__month{
     border: 2px solid transparent !important;
   }
-  .listview__row.js-listview-row.todo__row.todo-column__row:hover,.content__day-column.js-day-column.highlight{
-    background-color: #00000039 !important;
+  .listview__row.js-listview-row.todo-column__row:hover,.content__day-column.js-day-column.highlight,.header__day.header__wholeday-column.js-wholeday-column.highlight {
+    background-color: var(--darken-background) !important;
     border-radius: 10px !important;
   }
+  .header.js-header {
+    width: 90%;
+    border-bottom-right-radius: 15px;
+}
   
   .header.js-header.header--single-line,.detail-lint.js-detail-lint,.splitdetail__content__topbtns{
     background-color: var(--color-base01) !important;
@@ -277,7 +282,7 @@ border-color: var(--color-base02) !important
     display: none !important;
   }
   .todo-column__container{
-    background-color: rgba(0, 0, 0, 0.2) !important; 
+    background-color: var(--darken-background) !important; 
     border-radius: 10px !important;
   }
   button.icon-label-btn.js-icon-label-btn.icon-label-btn--linkbutton{
@@ -289,5 +294,17 @@ border-color: var(--color-base02) !important
     border: 2px solid var(--color-accent) !important;
   }
   button.icon-label-btn.js-icon-label-btn.icon-label-btn--linkbutton:hover{
+    background-color: var(--color-base03) !important;
+  }
+  .search__maincontainer{
+    background-color: var(--color-base01) !important;
+  }
+  .quick-search .search__listitemwrapper:hover{
+    background-color: var(--color-base02) !important;
+  }
+  [drilldown].drilldown .drilldown__row:hover:not(.drilldown__row--selected){
+    background-color: var(--color-base02) !important;
+  }
+  [drilldown].drilldown .drilldown__row--selected{
     background-color: var(--color-base03) !important;
   }

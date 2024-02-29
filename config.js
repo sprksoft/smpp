@@ -9,7 +9,7 @@ const default_settings = {
   showsnake: false,
   backgroundlink: "none",
   backgroundfile: "none",
-  show_scores: true
+  show_scores: false
 };
 function get_config() {
   let conf = window.localStorage.getItem("settingsdata");

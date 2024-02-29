@@ -22,6 +22,7 @@ function discordpopup() {
 </div>`
   document.body.appendChild(discordelement)
 }
+
 //WARNING: garbage
 try {
   document.getElementsByClassName("js-btn-logout")[0].innerHTML = "Logout -->";
@@ -445,14 +446,15 @@ function set_theme(name) {
       //default changes nothing so keep
       break;
     case 'white':
-      style.setProperty('--color-accent', '#4b5a6f');
-      style.setProperty('--color-text', '#1e222c'); /*off zwart :)*/
+      style.setProperty('--color-accent', '#354760');
+      style.setProperty('--color-text', '#222630'); /*off zwart :)*/
       style.setProperty('--color-base00', '#f6f6f6');
       style.setProperty('--color-base01', '#efeeec');
       style.setProperty('--color-base02', '#e3e2e0');
       style.setProperty('--color-homepage-sidebars-bg', "#02020540");
-      style.setProperty('--color-base03', '#cdd8ee');
+      style.setProperty('--color-base03', '#e9ecf4');
       style.setProperty('--loginpage-image', "url(https://wallpaperaccess.com/full/1474688.jpg)");
+      style.setProperty('--darken-background', 'rgba(0,0,0,0.1)');
       break;
     case 'custom':
       let themeData = JSON.parse(window.localStorage.getItem("themedata"))
@@ -479,6 +481,7 @@ function set_theme(name) {
       style.setProperty('--color-settings-ui-border', 'var(--color-base03)');
       style.setProperty('--color-settings-ui-layer2', 'var(--color-base00)'); */
       style.setProperty('--loginpage-image', "url(https://i.redd.it/yfssdsfosao11.png)");
+      style.setProperty('--darken-background', 'rgba(0,0,0,0.25)');
       break;
     case 'purple':
       style.setProperty('--color-accent', '#bd4fb3');
@@ -491,7 +494,7 @@ function set_theme(name) {
       break;
     case 'stalker':
       style.setProperty('--color-accent', "#d6574e");
-      style.setProperty('--color-text', "#d9564b");
+      style.setProperty('--color-text', "#f0d5d1");
       style.setProperty('--color-base00', "#1a1311");
       style.setProperty('--color-base01', "#371b19");
       style.setProperty('--color-base02', "#5c1c1a");
@@ -506,6 +509,7 @@ function set_theme(name) {
       style.setProperty('--color-base02', '#3b2e2e');
       style.setProperty('--color-base03', '#4c3e3e');
       style.setProperty('--loginpage-image', "url(https://www.hdwallpapers.in/download/wet_brown_leaves_hd_dark_aesthetic-HD.jpg)");
+      style.setProperty('--darken-background', 'rgba(0,0,0,0.3)');
       break;
     case 'fall':
       style.setProperty('--color-accent', '#f8c791');
@@ -515,6 +519,7 @@ function set_theme(name) {
       style.setProperty('--color-base02', '#7b3f31');
       style.setProperty('--color-base03', '#bf6f51');
       style.setProperty('--loginpage-image', "url(https://wallpapercave.com/wp/wp7464660.jpg)");
+      style.setProperty('--darken-background', 'rgba(0,0,0,0.3)');
       break;
     case 'winter':
       style.setProperty('--color-accent', '#8aadb6');
@@ -522,7 +527,7 @@ function set_theme(name) {
       style.setProperty('--color-base00', '#071b2c');
       style.setProperty('--color-base01', '#152f47');
       style.setProperty('--color-base02', '#345f7f');
-      style.setProperty('--color-base03', '#7c9cc2');
+      style.setProperty('--color-base03', '#5687b6');
       style.setProperty('--loginpage-image', "url(https://th.bing.com/th/id/R.fd4990dbff7b2d998a61b5a60b6b1949?rik=TkC2r3hdP1Ma9g&pid=ImgRaw&r=0)");
       break;
     case 'birb':
@@ -542,6 +547,7 @@ function set_theme(name) {
       style.setProperty('--color-base02', '#456046');
       style.setProperty('--color-base03', '#4f7a51');
       style.setProperty('--loginpage-image', "url(https://wallpapercave.com/wp/wp9313069.jpg)");
+      style.setProperty('--darken-background', 'rgba(0,0,0,0.15)');
       break;
     case 'mountain':
       style.setProperty('--color-accent', '#f8f8fa');
@@ -551,6 +557,7 @@ function set_theme(name) {
       style.setProperty('--color-base02', '#52647c');
       style.setProperty('--color-base03', '#8294ac');
       style.setProperty('--loginpage-image', "url(https://hdqwalls.com/download/everest-3840x2160.jpg)");
+      style.setProperty('--darken-background', 'rgba(0,0,0,0.15)');
       break;
     case 'vax':
       style.setProperty('--color-accent', '#492f29');
@@ -569,6 +576,7 @@ function set_theme(name) {
       style.setProperty('--color-base02', '#544848');
       style.setProperty('--color-base03', '#634f4e');
       style.setProperty('--loginpage-image', "url(https://hdqwalls.com/wallpapers/macos-mojave-dusk-mode-stock-el.jpg)");
+      style.setProperty('--darken-background', 'rgba(0,0,0,0.15)');
       break;
     case 'galaxy':
       style.setProperty('--color-accent', '#daa0ef');
@@ -578,6 +586,7 @@ function set_theme(name) {
       style.setProperty('--color-base02', '#474e5f');
       style.setProperty('--color-base03', '#5c667d');
       style.setProperty('--loginpage-image', "url(https://i.redd.it/u80014ygsea51.png)");
+      style.setProperty('--darken-background', 'rgba(0,0,0,0.3)');
       break;
 
     // Add more cases for other profiles as needed

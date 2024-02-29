@@ -21,7 +21,8 @@ html {
   display: flex;
   flex-direction: column;
   font-size: var(--dmenu-font-size) !important;
-  z-index: 999999;
+  z-index: 20;
+  box-shadow: 0px 0px 150px black;
 }
 
 #dmenu>.top {
