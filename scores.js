@@ -1,19 +1,14 @@
 async function show_scoresfunc() {
-  // Function to detect scrolling within the filterlistview-container div
   function detectScrolling(colors, dataRowIds) {
     const filterlistviewContainer = document.querySelector('.filterlistview-container');
     if (!filterlistviewContainer) return;
 
     filterlistviewContainer.addEventListener('scroll', function() {
-        // Vertical scrolling
         var isVerticalScrolling = filterlistviewContainer.scrollTop !== 0;
 
-        // Horizontal scrolling
         var isHorizontalScrolling = filterlistviewContainer.scrollLeft !== 0;
 
         if (isVerticalScrolling || isHorizontalScrolling) {
-            console.log('Scrolling detected!');
-            // Update colors
             const validColors = colors.filter(color => color !== null);
             extractDataRowIdsAndAssignColors(validColors, dataRowIds);
             observeDOMChanges(validColors, dataRowIds);
@@ -69,25 +64,25 @@ async function show_scoresfunc() {
     elementsWithDataLevelZero.forEach((element, index) => {
       const dataRowId = dataRowIds[index]; // Retrieve data-rowid from the array
       const color = colors[index] || 'default-color'; // Use default color if not enough colors fetched
-      console.log(`Data row ID: ${dataRowId}, Color: ${color}`); // Log the data-rowid and color
       const button = element.querySelector('button'); // Find the button element inside the row
       if (button) {
         // Assign color to the button background
         switch (color) {
           case 'blue':
-            button.style.setProperty('background-color', '#1476be', 'important');
+            button.style.setProperty('background-color', 'var(--color-blue)', 'important');
             break;
           case 'green':
-            button.style.setProperty('background-color', '#2ca32e', 'important');
+            button.style.setProperty('background-color', 'var(--color-green)', 'important');
             break;
           case 'orange':
-            button.style.setProperty('background-color', '#cc5a00', 'important');
+            button.style.setProperty('background-color', 'var(--color-orange)', 'important');
             break;
           case 'red':
-            button.style.setProperty('background-color', '#ff0000', 'important');
+            button.style.setProperty('background-color', 'var(--color-red)', 'important');
             break;
           default:
-            button.style.backgroundColor = color;
+            console.log(`Invalid color: ${color}`);
+            button.style.setProperty('background-color', color, 'important');
             break;
         }
       }
@@ -101,7 +96,6 @@ function observeDOMChanges(colors, dataRowIds) {
             mutationsList.forEach(mutation => {
                 if (mutation.type === 'childList') {
                     const elementsWithDataLevelZero = listviewRows.querySelectorAll('[data-level="0"]');
-                    console.log("it should work also");
                     elementsWithDataLevelZero.forEach((element, index) => {
                         const dataRowId = dataRowIds[index];
                         // Apply inline style to set background color
@@ -124,12 +118,10 @@ function observeDOMChanges(colors, dataRowIds) {
 
   // Function to extract data-rowids from the DOM
   function extractDataRowIds() {
-    console.log("it should work")
     const listviewRows = document.querySelector('.listview__rows');
     const dataRowIds = [];
     if (listviewRows) {
       const elementsWithDataLevelZero = listviewRows.querySelectorAll('[data-level="0"]');
-      console.log("it should work also")
       elementsWithDataLevelZero.forEach(element => {
         const dataRowId = element.dataset.rowid;
         dataRowIds.push(dataRowId);
@@ -158,7 +150,6 @@ function observeDOMChanges(colors, dataRowIds) {
           extractDataRowIdsAndAssignColors(validColors, dataRowIds);
           observeDOMChanges(validColors, dataRowIds);
           
-          // Call the scrolling detection function
           detectScrolling(validColors, dataRowIds);
       })
       .catch(error => {

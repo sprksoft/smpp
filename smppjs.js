@@ -84,16 +84,19 @@ async function apply() {
   if (show_scores == undefined) {
     show_scores = false;
   }
+
+window.addEventListener('load', async function (){
+
   if (show_scores) {
-    console.log("trying to show scores")
-
-      if (currentUrl.includes("smartschool.be/results/main/results")) {
-        console.log("Showing scores")
-        await show_scoresfunc();
-      }
-
-    
+    console.log("Trying to show scores");
+    console.log(currentUrl)
+    if (currentUrl.includes("smartschool.be/results")) {
+      console.log("Showing scores");
+      await show_scoresfunc();
+    }
   }
+});
+console.log("added event listener");
   if (overwrite_theme == 2) {
     set_background(backgroundFile);    
   }else if(overwrite_theme == 1){
