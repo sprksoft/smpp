@@ -494,7 +494,7 @@ function set_theme(name) {
       break;
     case 'stalker':
       style.setProperty('--color-accent', "#d6574e");
-      style.setProperty('--color-text', "#f0d5d1");
+      style.setProperty('--color-text', "#eda89d");
       style.setProperty('--color-base00', "#1a1311");
       style.setProperty('--color-base01', "#371b19");
       style.setProperty('--color-base02', "#5c1c1a");
