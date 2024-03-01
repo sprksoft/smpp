@@ -308,3 +308,6 @@ border-color: var(--color-base02) !important
   [drilldown].drilldown .drilldown__row--selected{
     background-color: var(--color-base03) !important;
   }
+  [textarea] [textarea-tinymceinput]:empty:not(:focus):before{
+    color: var(--color-text) !important;
+  }
