@@ -11,6 +11,11 @@ const default_settings = {
   backgroundfile: "none",
   show_scores: false
 };
+link_element = document.querySelector('link[rel="icon"]')
+if (link_element) {
+  link_element.href = "https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/icon48.png"; 
+}
+
 function get_config() {
   let conf = window.localStorage.getItem("settingsdata");
   if (conf == null) {
