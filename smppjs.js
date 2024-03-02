@@ -73,7 +73,7 @@ async function apply() {
   const snow = settingsData.snow;
   const shownews = settingsData.shownews;
   const showsnake = settingsData.showsnake;
-  const show_scores = settingsData.show_scores;
+  var show_scores = settingsData.show_scores;
   set_theme(profileSelect);
 
   var currentUrl = window.location.href;
