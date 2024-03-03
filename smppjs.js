@@ -76,12 +76,6 @@ async function apply() {
   var show_scores = settingsData.show_scores;
   set_theme(profileSelect);
 
-  var currentUrl = window.location.href;
-  if (currentUrl.includes(backgroundLink) || currentUrl.includes(backgroundFile)) {
-      var newUrl = currentUrl.replace(backgroundLink, "").replace(backgroundFile, "");
-      window.location.href = newUrl;
-  }
-
   if (show_scores == undefined) {
     show_scores = false;
   }
@@ -415,10 +409,8 @@ async function set_background(background) {
   style.setProperty('--loginpage-image', 'url(data:image/png;base64,' + background + ')');
 }
 async function set_backgroundlink(background) {
-  document.addEventListener('DOMContentLoaded', function() {
     let style = document.documentElement.style;
     style.setProperty('--loginpage-image', 'url(' + background + ')');
-  });
 }
 
 
