@@ -317,3 +317,6 @@ td#msg_bg,.msg_left,.msg_right{
   border: 2px solid var(--color-base01) !important;
   border-radius: 10px !important;
 }
+.modern-ui input[type=text]{
+  background-color: var(--color-base01) !important;
+}

@@ -409,9 +409,22 @@ async function set_background(background) {
   style.setProperty('--loginpage-image', 'url(data:image/png;base64,' + background + ')');
 }
 async function set_backgroundlink(background) {
-    let style = document.documentElement.style;
-    style.setProperty('--loginpage-image', 'url(' + background + ')');
+  let style = document.documentElement.style;
+  if (!background) {
+      console.error("Background URL is empty or undefined.");
+      style.setProperty('--loginpage-image', 'none');
+      return;
+  }
+  try {
+      new URL(background);
+  } catch (error) {
+      console.error("Invalid URL format for background:", background);
+      style.setProperty('--loginpage-image', 'none');
+      return;
+  }
+  style.setProperty('--loginpage-image', 'url(' + background + ')');
 }
+
 
 
 const theme_names = ["default", "white", "ldev", "birb", "stalker", "chocolate", "winter", "fall", "matcha", "vax", "galaxy", "sand", "custom"];

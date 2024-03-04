@@ -965,3 +965,9 @@ transition-duration: 0.1s !important;
 .forum-row{
   border-bottom: 2px solid var(--color-base02)!important;
 }
+.correctionline,.correctioninfocorr{
+  background-color: var(--color-base01) !important;
+}
+.nr_recipients_bubble{
+  display: none !important;
+}
