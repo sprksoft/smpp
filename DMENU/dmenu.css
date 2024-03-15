@@ -87,3 +87,7 @@ html {
   color: var(--color-base01) !important;
 }
 
+#dmenu>.autocomplete>*:hover{
+  background: var(--color-base02);
+}
+

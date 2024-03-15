@@ -112,6 +112,19 @@ function dmenu(params, onselect, name = "dmenu:") {
   input.value = ""
 
 }
+function dmenu_accept(shift=false) {
+  let command = document.querySelector("#dmenu > .top > .dmenu-input").value;
+  lock_dmenu = false;
+  dmenu_close();
+  if (end_func != undefined && command !== "") {
+    let dconfig = get_dconfig();
+    if (dconfig.flip_shift_key) {
+      shift = !shift;
+    }
+    console.log(command);
+    end_func(command, shift);
+  }
+}
 function dmenu_close() {
   if (lock_dmenu) {
     return;
@@ -275,10 +288,26 @@ function init_dmenu() {
 </div>
 <div class='autocomplete'></div>
 `;
+  let autocomplete = dmenu.getElementsByClassName("autocomplete")[0];
   document.body.insertBefore(dmenu, document.body.childNodes[-1]);
   let input = dmenu.getElementsByTagName("input")[0]
   input.addEventListener("focusout", function (e) {
-    dmenu_close();
+    setTimeout(function(){
+      let target = e.explicitOriginalTarget;
+      for (let i = 0; i < autocomplete.childNodes.length; i++) {
+        const child = autocomplete.childNodes[i];
+        if (child.contains(target)){
+          if (child.classList.contains("selected")){
+            dmenu_accept();
+            return true;
+          }
+          select(i);
+          e.target.focus();
+          return false;
+        }
+      }
+      dmenu_close();
+    }, 1);
   });
   input.addEventListener("keydown", function (e) {
     if (e.key == ":" && no_type) {
@@ -289,15 +318,7 @@ function init_dmenu() {
 
     let command = e.target.value;
     if (e.key == "Enter") {
-      lock_dmenu = false;
-      dmenu_close();
-      if (end_func != undefined && command !== "") {
-        let shift = e.shiftKey;
-        if (dconfig.flip_shift_key) {
-          shift = !shift;
-        }
-        end_func(command, shift);
-      }
+      dmenu_accept(e.shiftKey);
       return;
     } else if (e.key == "Escape") {
       dmenu_close();

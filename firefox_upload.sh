@@ -22,4 +22,4 @@ ver=$(ls web-ext-artifacts | rg "smartschool_-([0-9]*.[0-9]*.[0-9]*).zip" -r '$1
 
 echo "version: $ver"
 echo "Uploading..."
-curl --data-binary web-ext-artifacts/smartschool_-$ver.zip -H "Cookie:session=$ses_token" "$domain/firefox/smpp?v=$ver"
+curl --data-binary @web-ext-artifacts/smartschool_-$ver.zip -H "Cookie:session=$ses_token" "$domain/firefox/smpp?v=$ver"
