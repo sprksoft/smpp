@@ -10,12 +10,6 @@ function config_menu() {
     }, "value:")
   }, "config: ");
 }
-function dmenutooltip() {
-  let dmenutooltip = document.createElement("div")
-    dmenutooltip.innerHTML = `<div id="dmenutooltip" class="bigdiscordbutton" style="position: fixed; bottom: 0; right: 0; width: fit-content; height: fit-content; border: 2px solid var(--color-base03); border-radius:10px; padding:5px; background-color: var(--color-base01);"><p style="font-size: 18px;font-weight: bold; margin: 0px !important">Quick-Menu</p>
-    </div>`
-    document.body.appendChild(dmenutooltip)
-  }
 function handleDMenu() {
   let cmd_list = Object.keys(vakken).concat(Object.keys(goto_items).concat(["classroom", "onshape", "dmenu config", "config", "toggle fancy scores", "set theme v2", "lock dmenu", "unbloat", "clearsettings", "discord"]));
   dmenu(cmd_list, function (cmd, shift) {
@@ -86,7 +80,12 @@ function handleDMenu() {
       handleDMenu();
     }
   });
-  dmenutooltip()
-  const dMenuButton = document.getElementById('dmenutooltip');
-  dMenuButton.addEventListener('click', handleDMenu);
+
+  const newElement = '<button id="dmenutooltip" class=topnav__btn>{/}</button>';
+const navElement = document.querySelector('.topnav');
+if (navElement) {
+navElement.insertAdjacentHTML('afterbegin', newElement);
+}
+const dMenuButton = document.getElementById('dmenutooltip');
+dMenuButton.addEventListener('click', handleDMenu);
 

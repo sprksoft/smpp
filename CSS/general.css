@@ -971,3 +971,11 @@ transition-duration: 0.1s !important;
 .nr_recipients_bubble{
   display: none !important;
 }
+
+label.checkbox input[type=checkbox] {
+
+}
+
+label.checkbox input[type=checkbox]:checked {
+  
+}

@@ -79,9 +79,8 @@ async function apply() {
   if (show_scores == undefined) {
     show_scores = false;
   }
-
+  
 window.addEventListener('load', async function (){
-
   if (show_scores) {
     console.log("Trying to show scores");
     console.log(currentUrl)
