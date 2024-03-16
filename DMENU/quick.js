@@ -82,10 +82,11 @@ function handleDMenu() {
   });
 
   const newElement = '<button id="dmenutooltip" class=topnav__btn>{/}</button>';
-const navElement = document.querySelector('.topnav');
-if (navElement) {
-navElement.insertAdjacentHTML('afterbegin', newElement);
+const firstItem = document.querySelector('.topnav > *:first-child');
+if (firstItem){
+firstItem.insertAdjacentHTML('afterend', newElement);
 }
 const dMenuButton = document.getElementById('dmenutooltip');
+if(dMenuButton){
 dMenuButton.addEventListener('click', handleDMenu);
-
+}
