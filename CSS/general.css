@@ -971,3 +971,20 @@ transition-duration: 0.1s !important;
 .nr_recipients_bubble{
   display: none !important;
 }
+
+label.checkbox input[type=checkbox],div.smscCheckbox input[type=checkbox]+label {
+  background-image: url("https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/checkboxunchecked.svg") !important;
+}
+
+label.checkbox input[type=checkbox]:checked,div.smscCheckbox input[type=checkbox]:checked+label {
+  background-image: url("https://raw.githubusercontent.com/frickingbird8002/smpp-images/9d0cc428cc236802f97cfe77094256d0cf5bdcdf/checkedbox.svg") !important
+}
+label.radiobutton input[type=radio]{
+  background-image: url('https://raw.githubusercontent.com/frickingbird8002/smpp-images/7b95e48a890b193f678073bd9d1101e35cd08d4a/radiounchecked.svg') !important;
+}
+label.radiobutton input[type=radio]:checked{
+  background-image: url('https://raw.githubusercontent.com/frickingbird8002/smpp-images/7b95e48a890b193f678073bd9d1101e35cd08d4a/checkedradiox.svg') !important;
+}
+.login-app__infoblock--black{
+  color: red !important
+}

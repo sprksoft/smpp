@@ -135,6 +135,7 @@ span,
 
 .date:hover span,.bubble__menu-btn--active,.selectview__new-detail-ui .c-blue-combo--100 {
   background-color: var(--color-base03) !important;
+  border-radius: 5px !important;
 }
 
 .header__month:hover,
@@ -156,7 +157,7 @@ span,
 
 }
 .choose-metadata__options label.checkbox.checked {
-  background-color: var(--color-accent) !important;
+  background-color: var(--color-base03) !important;
   }
   .choose-metadata__options label.checkbox{
     background-color: var(--color-base01) !important;
@@ -310,4 +311,28 @@ border-color: var(--color-base02) !important
   }
   [textarea] [textarea-tinymceinput]:empty:not(:focus):before{
     color: var(--color-text) !important;
+  }
+  .listview__row.js-listview-row.planner-listview-data-row--selected.js-planner-listview-data-row--selected,
+  .month-view .element.show-more-element:not(:hover):not(.state--hovered--forced).state--hovered .element__label-container {
+  background-color: var(--color-base01) !important;
+  }
+  .month-view .week-day.day--today .day-label{
+    background-color: var(--color-base02) !important;
+  }
+  .month-view .grid-day.state--hovered,.month-view .week-day:not(.day--today).state--hovered .day-label{
+    background-color: var(--darken-background) !important
+  }
+  .month-view .header-row,.month-view .element.show-more-element{
+    background-color: var(--color-base01) !important;
+    border-radius: 10px !important;
+  }
+  .month-view .element.show-more-element:hover .element__label-container{
+    box-shadow: none !important;
+    background-color: var(--color-base02) !important;
+  }
+  .month-view .week-day.state--hovered.day--today .day-label{
+    box-shadow: none !important;
+  }
+  .twinbutton__button{
+    transition: none !important;
   }

@@ -178,16 +178,16 @@ function snakeGame() {
   }
   let gameInterval = setInterval(gameLoop, SNAKE_SPEED);
   document.addEventListener('keydown', event => {
-    if ((event.key === 'ArrowLeft' || event.key === 'a' || event.key === 'q') && snake.direction !== 'RIGHT') {
+    if ((event.key === 'ArrowLeft') && snake.direction !== 'RIGHT') {
       snake.direction = 'LEFT';
       event.preventDefault();
-    } else if ((event.key === 'ArrowRight' || event.key === 'd') && snake.direction !== 'LEFT') {
+    } else if ((event.key === 'ArrowRight') && snake.direction !== 'LEFT') {
       snake.direction = 'RIGHT';
       event.preventDefault();
-    } else if ((event.key === 'ArrowUp' || event.key === 'w' || event.key === 'z') && snake.direction !== 'DOWN') {
+    } else if ((event.key === 'ArrowUp') && snake.direction !== 'DOWN') {
       snake.direction = 'UP';
       event.preventDefault();
-    } else if ((event.key === 'ArrowDown' || event.key === 's') && snake.direction !== 'UP') {
+    } else if ((event.key === 'ArrowDown') && snake.direction !== 'UP') {
       snake.direction = 'DOWN';
       event.preventDefault();
     }

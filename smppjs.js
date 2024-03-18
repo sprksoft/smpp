@@ -81,11 +81,8 @@ async function apply() {
   }
 
 window.addEventListener('load', async function (){
-
   if (show_scores) {
     var currentUrl = window.location.href;
-    console.log("Trying to show scores");
-    console.log(currentUrl)
     if (currentUrl.includes("smartschool.be/results")) {
       console.log("Showing scores");
       await show_scoresfunc();
