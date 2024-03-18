@@ -89,5 +89,6 @@ html {
 
 #dmenu>.autocomplete>*:hover{
   background: var(--color-base02);
+  cursor: pointer;
 }
 

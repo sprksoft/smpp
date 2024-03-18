@@ -1,7 +1,8 @@
 const dmenu_config_template = {
   centered: { type: "bool", default_value: true },
   flip_shift_key: { type: "bool", default_value: true },
-  item_score: { type:"bool", default_value: false }
+  item_score: { type:"bool", default_value: false },
+  exit_on_focusout: {type:"bool", default_value: false}
 }
 
 var lock_dmenu = false;
@@ -104,6 +105,13 @@ function dmenu(params, onselect, name = "dmenu:") {
     }else{
       row.innerText=cmd;
     }
+    row.addEventListener("click", function (e) {
+      if (selected == i){
+        dmenu_accept();
+        return;
+      }
+      select(i);
+    })
     autocompletelist.appendChild(row);
   }
 
@@ -291,23 +299,19 @@ function init_dmenu() {
   let autocomplete = dmenu.getElementsByClassName("autocomplete")[0];
   document.body.insertBefore(dmenu, document.body.childNodes[-1]);
   let input = dmenu.getElementsByTagName("input")[0]
+  document.addEventListener("click", function (e) {
+    if (get_dconfig().exit_on_focusout){
+      return;
+    }
+    if (dmenu.contains(e.target)){
+      return;
+    }
+    dmenu_close();
+  })
   input.addEventListener("focusout", function (e) {
-    setTimeout(function(){
-      let target = e.explicitOriginalTarget;
-      for (let i = 0; i < autocomplete.childNodes.length; i++) {
-        const child = autocomplete.childNodes[i];
-        if (child.contains(target)){
-          if (child.classList.contains("selected")){
-            dmenu_accept();
-            return true;
-          }
-          select(i);
-          e.target.focus();
-          return false;
-        }
-      }
+    if (get_dconfig().exit_on_focusout){
       dmenu_close();
-    }, 1);
+    }
   });
   input.addEventListener("keydown", function (e) {
     if (e.key == ":" && no_type) {
@@ -338,6 +342,7 @@ function init_dmenu() {
         return;
       }
       user_text = e.target.value;
+      select(-1)
     }
   });
   input.addEventListener("keyup", function (e) {
