@@ -985,6 +985,18 @@ label.radiobutton input[type=radio]{
 label.radiobutton input[type=radio]:checked{
   background-image: url('https://raw.githubusercontent.com/frickingbird8002/smpp-images/7b95e48a890b193f678073bd9d1101e35cd08d4a/checkedradiox.svg') !important;
 }
-.login-app__infoblock--black{
-  color: red !important
+.smsc-select{
+  color: var(--color-text) !important;
+}
+input.message-search__input{
+  border-radius: 5px !important;
+}
+.ui-widget.ui-widget-content{
+  border-radius: 15px !important;
+}
+div#smscSearchView{
+  height: fit-content !important;
+}
+button.js-btn-notifs.topnav__btn{
+  padding: 2px 7px !important;
 }
