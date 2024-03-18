@@ -1,3 +1,17 @@
+var quicks=[{name: "onshape", url: "https://onshape.com/"}, {name: "classroom", url: "https://classroom.google.com"}];
+
+function add_quick(name, url) {
+  quicks.push({name: name, url: url});
+}
+function remove_quick(name){
+  for (let i = 0; i < quicks.length; i++) {
+    if (quicks[i].name == name){
+      quicks.removeAt(i);
+      return;
+    }
+  }
+}
+
 
 //TODO: make this better
 function config_menu() {
@@ -11,7 +25,11 @@ function config_menu() {
   }, "config: ");
 }
 function handleDMenu() {
-  let cmd_list = Object.keys(vakken).concat(Object.keys(goto_items).concat(["classroom", "onshape", "dmenu config", "config", "toggle fancy scores", "set theme v2", "lock dmenu", "unbloat", "clearsettings", "discord"]));
+  let cmd_list = Object.keys(vakken).concat(Object.keys(goto_items).concat(["dmenu config", "config", "toggle fancy scores", "set theme v2", "lock dmenu", "unbloat", "clearsettings", "discord"]));
+  for (let i = 0; i < quicks.length; i++) {
+    cmd_list.push({value: quicks[i].name, meta: quicks[i].url});
+  }
+
   dmenu(cmd_list, function (cmd, shift) {
     switch (cmd) {
       case "lock dmenu":
@@ -43,12 +61,6 @@ function handleDMenu() {
       case "dmenu config":
         dconfig_menu();
         return;
-      case "classroom":
-        open_url("https://classroom.google.com", shift);
-        return;
-      case "onshape":
-        open_url("https://onshape.com", shift);
-        return;
       case "discord":
         open_url("https://discord.gg/TCBgGxUP", shift);
         return;
@@ -58,6 +70,14 @@ function handleDMenu() {
       default:
         break;
     }
+    for (let i = 0; i < quicks.length; i++) {
+      const quick = quicks[i];
+      if (quick.name == cmd){
+        open_url(quick.url, shift);
+        return;
+      }
+    }
+
     let got_url = goto_items[cmd]
     if (got_url != null) {
       open_url(got_url, shift);
@@ -68,9 +88,11 @@ function handleDMenu() {
       open_url(vakken_url, shift);
       return;
     }
+
+
+
   }, "quick:");
 }
-
 
   document.addEventListener("keyup", function (e) {
     if (e.target != undefined && e.target.tagName === "INPUT") {

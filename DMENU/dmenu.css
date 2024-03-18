@@ -55,39 +55,47 @@ html {
   border-right: var(--border-size) solid var(--color-base02);
 }
 
-#dmenu>.autocomplete {
+#dmenu .autocomplete {
   overflow-y: auto;
 }
 
-#dmenu>.autocomplete>.hidden {
+#dmenu .hidden {
   visibility: hidden;
 }
 
-#dmenu>.autocomplete>* {
+#dmenu .autocomplete-row {
   margin: var(--dmenu-margin);
   color: var(--color-text) !important;
   display:flex;
   flex-direction: row;
   border: none;
 }
-#dmenu>.autocomplete>*>.content{
-  flex-grow:10;
+#dmenu .content{
+  margin-right: 1em;
 }
-#dmenu>.autocomplete>*>.score{
+#dmenu .meta{
+  flex-grow: 10;
+  color: var(--color-base03);
+}
+#dmenu .score{
   margin-right:0.5rem;
   color: var(--color-accent);
 }
+#dmenu .selected .score{
+  color: var(--color-base01) !important;
+}
 
-#dmenu>.autocomplete>*:nth-child(even) {
+#dmenu .autocomplete-row:nth-child(even) {
   background: var(--color-base01);
 }
 
-#dmenu>.autocomplete>.selected {
+#dmenu .selected {
   background: var(--color-accent) !important;
   color: var(--color-base01) !important;
 }
 
-#dmenu>.autocomplete>*:hover{
+#dmenu .autocomplete-row:hover{
   background: var(--color-base02);
+  cursor: pointer;
 }
 
