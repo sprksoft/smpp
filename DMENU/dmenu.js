@@ -22,7 +22,6 @@ function dconfig_menu() {
   for (let i = 0; i < cmd_list.length; i++) {
     let cmd = cmd_list[i];
     cmd_list[i] = {meta: " (" + conf[cmd_list[i]] + ")", value: cmd}
-    console.log(cmd_list[i])
   }
   dmenu(cmd_list, function (cmd, shift) {
     let type = template[cmd].type;
@@ -141,7 +140,6 @@ function dmenu_accept(shift=false) {
     if (dconfig.flip_shift_key) {
       shift = !shift;
     }
-    console.log(command);
     end_func(command, shift);
   }
 }
