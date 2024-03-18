@@ -20,23 +20,24 @@ function dconfig_menu() {
   const template = dmenu_config_template;
   let cmd_list = Object.keys(template);
   for (let i = 0; i < cmd_list.length; i++) {
-    cmd_list[i] += " (" + conf[cmd_list[i]] + ")"
+    let cmd = cmd_list[i];
+    cmd_list[i] = {meta: " (" + conf[cmd_list[i]] + ")", value: cmd}
+    console.log(cmd_list[i])
   }
   dmenu(cmd_list, function (cmd, shift) {
-    let settingname = cmd.substring(0, cmd.lastIndexOf(" "));
-    let type = template[settingname].type;
+    let type = template[cmd].type;
     let options = [];
     if (type == "bool") {
       options = ["true", "false"]
     }
     dmenu(options, function (val, shift) {
       if (type == "bool") {
-        conf[settingname] = (val == "true");
+        conf[cmd] = (val == "true");
       } else {
-        conf[settingname] = val;
+        conf[cmd] = val;
       }
       set_dconfig(conf);
-    }, "value(" + conf[settingname] + "):")
+    }, "value(" + conf[cmd] + "):")
   }, "dconfig: ");
 
 }
@@ -96,15 +97,26 @@ function dmenu(params, onselect, name = "dmenu:") {
   let autocompletelist = dmenu.getElementsByClassName("autocomplete")[0];
   autocompletelist.innerHTML = "";
   for (let i = 0; i < params.length; i++) {
-    const cmd = params[i].toLowerCase();
+    let cmd;
+    let meta =  undefined;
+    if (typeof params[i] == "string"){
+      cmd = params[i].toLowerCase();
+    }else{
+      cmd = params[i].value;
+      meta = params[i].meta;
+    }
     command_list.push(cmd);
     let row = document.createElement("div");
+    row.classList.add("autocomplete-row");
+    row.innerHTML='<div class="content"></div><div class="meta"></div><div class="score"></div>'
+    row.getElementsByClassName("content")[0].innerText = cmd;
     if (view_item_score){
-      row.innerHTML='<div class="content"></div><div class="score">0</div>'
-      row.getElementsByClassName("content")[0].innerText = cmd;
-    }else{
-      row.innerText=cmd;
+      row.getElementsByClassName("score")[0].innerText = "0";
     }
+    if (meta != undefined){
+      row.getElementsByClassName("meta")[0].innerText = meta;
+    }
+
     row.addEventListener("click", function (e) {
       if (selected == i){
         dmenu_accept();
@@ -199,11 +211,7 @@ function select(index) {
   if (user_text == "") {
     user_text = input.value;
   }
-  if (view_item_score){
-    input.value = new_sel.getElementsByClassName("content")[0].innerText;
-  }else{
-    input.value = new_sel.innerText;
-  }
+  input.value = new_sel.getElementsByClassName("content")[0].innerText;
 
   selected = index;
 }
@@ -232,11 +240,7 @@ function sort(autocompletelist, command, start_index) {
   for (let i = start_index; i < nodes.length; i++) {
     let node = nodes[i];
     let text;
-    if(view_item_score){
-      text=node.getElementsByClassName("content")[0].innerText;
-    }else{
-      text=node.innerText;
-    }
+    text=node.getElementsByClassName("content")[0].innerText;
     let score = match_score(text, command);
     if (view_item_score){
       node.getElementsByClassName("score")[0].innerText=score;
