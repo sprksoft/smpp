@@ -103,7 +103,7 @@ function handleDMenu() {
     }
   });
 
-  const newElement = '<button id="dmenutooltip" class=topnav__btn>{/}</button>';
+const newElement = `<button id="dmenutooltip" class=topnav__btn>(╯°□°)╯︵ ┻━┻</button>`;
 const firstItem = document.querySelector('.topnav > *:first-child');
 if (firstItem){
 firstItem.insertAdjacentHTML('afterend', newElement);
