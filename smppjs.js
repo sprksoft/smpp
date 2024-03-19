@@ -22,14 +22,17 @@ function discordpopup() {
 </div>`
   document.body.appendChild(discordelement)
 }
+function changeLogoutText() {
+  var randomNum = Math.floor(Math.random() * 50) + 1;
+  if (randomNum === 1) {
+      return "Good Bye! -->"
+  }
+  return "Logout -->"
+}
 
-//WARNING: garbage
-try {
-  document.getElementsByClassName("js-btn-logout")[0].innerHTML = "Logout -->";
-  document.getElementById("notifsToggleLabel").innerHTML = "Toon pop-ups"
-} catch (e) { }
-//END Garbage
+  document.getElementsByClassName("js-btn-logout")[0].innerHTML = changeLogoutText();
 
+  document.getElementById("notifsToggleLabel").innerHTML = "Toon pop-ups";
 
 let goto_items = get_data("goto_menu", ".js-shortcuts-container > a", function (el, data) {
   const name = el.innerText.toLowerCase().trim();
