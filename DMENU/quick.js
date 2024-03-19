@@ -1,11 +1,11 @@
-var quicks=[{name: "onshape", url: "https://onshape.com/"}, {name: "classroom", url: "https://classroom.google.com"}];
+var quicks = [{ name: "onshape", url: "https://onshape.com/" }, { name: "classroom", url: "https://classroom.google.com" }];
 
 function add_quick(name, url) {
-  quicks.push({name: name, url: url});
+  quicks.push({ name: name, url: url });
 }
-function remove_quick(name){
+function remove_quick(name) {
   for (let i = 0; i < quicks.length; i++) {
-    if (quicks[i].name == name){
+    if (quicks[i].name == name) {
       quicks.removeAt(i);
       return;
     }
@@ -27,7 +27,7 @@ function config_menu() {
 function handleDMenu() {
   let cmd_list = Object.keys(vakken).concat(Object.keys(goto_items).concat(["dmenu config", "config", "toggle fancy scores", "set theme v2", "lock dmenu", "unbloat", "clearsettings", "discord"]));
   for (let i = 0; i < quicks.length; i++) {
-    cmd_list.push({value: quicks[i].name, meta: quicks[i].url});
+    cmd_list.push({ value: quicks[i].name, meta: quicks[i].url });
   }
 
   dmenu(cmd_list, function (cmd, shift) {
@@ -72,7 +72,7 @@ function handleDMenu() {
     }
     for (let i = 0; i < quicks.length; i++) {
       const quick = quicks[i];
-      if (quick.name == cmd){
+      if (quick.name == cmd) {
         open_url(quick.url, shift);
         return;
       }
@@ -94,20 +94,20 @@ function handleDMenu() {
   }, "quick:");
 }
 
-  document.addEventListener("keyup", function (e) {
-    if (e.target != undefined && e.target.tagName === "INPUT") {
-      return
-    }
-    if (e.key == ':') {
-      handleDMenu();
-    }
-  });
+document.addEventListener("keyup", function (e) {
+  if (e.target != undefined && e.target.tagName === "INPUT") {
+    return
+  }
+  if (e.key == ':') {
+    handleDMenu();
+  }
+});
 
 const firstItem = document.querySelector('.topnav > *:first-child');
-if (firstItem){
-firstItem.insertAdjacentHTML('afterend', `<button id="dmenutooltip" class=topnav__btn>Quick-Menu</button>`);
+if (firstItem) {
+  firstItem.insertAdjacentHTML('afterend', `<button id="dmenutooltip" class=topnav__btn>Quick-Menu</button>`);
 }
 const dMenuButton = document.getElementById('dmenutooltip');
-if(dMenuButton){
-dMenuButton.addEventListener('click', handleDMenu);
+if (dMenuButton) {
+  dMenuButton.addEventListener('click', handleDMenu);
 }

@@ -1,8 +1,8 @@
 const dmenu_config_template = {
   centered: { type: "bool", default_value: true },
   flip_shift_key: { type: "bool", default_value: true },
-  item_score: { type:"bool", default_value: false },
-  exit_on_focusout: {type:"bool", default_value: false}
+  item_score: { type: "bool", default_value: false },
+  exit_on_focusout: { type: "bool", default_value: false }
 }
 
 var lock_dmenu = false;
@@ -21,7 +21,7 @@ function dconfig_menu() {
   let cmd_list = Object.keys(template);
   for (let i = 0; i < cmd_list.length; i++) {
     let cmd = cmd_list[i];
-    cmd_list[i] = {meta: " (" + conf[cmd_list[i]] + ")", value: cmd}
+    cmd_list[i] = { meta: " (" + conf[cmd_list[i]] + ")", value: cmd }
   }
   dmenu(cmd_list, function (cmd, shift) {
     let type = template[cmd].type;
@@ -80,7 +80,7 @@ function dmenu(params, onselect, name = "dmenu:") {
   end_func = onselect;
   user_text = "";
   let dconfig = get_dconfig();
-  view_item_score=dconfig.item_score;
+  view_item_score = dconfig.item_score;
   let dmenu = document.getElementById("dmenu");
   dmenu.getElementsByClassName("dmenu-label")[0].innerText = name;
   dmenu.classList.remove("dmenu-hidden");
@@ -97,27 +97,27 @@ function dmenu(params, onselect, name = "dmenu:") {
   autocompletelist.innerHTML = "";
   for (let i = 0; i < params.length; i++) {
     let cmd;
-    let meta =  undefined;
-    if (typeof params[i] == "string"){
+    let meta = undefined;
+    if (typeof params[i] == "string") {
       cmd = params[i].toLowerCase();
-    }else{
+    } else {
       cmd = params[i].value;
       meta = params[i].meta;
     }
     command_list.push(cmd);
     let row = document.createElement("div");
     row.classList.add("autocomplete-row");
-    row.innerHTML='<div class="content"></div><div class="meta"></div><div class="score"></div>'
+    row.innerHTML = '<div class="content"></div><div class="meta"></div><div class="score"></div>'
     row.getElementsByClassName("content")[0].innerText = cmd;
-    if (view_item_score){
+    if (view_item_score) {
       row.getElementsByClassName("score")[0].innerText = "0";
     }
-    if (meta != undefined){
+    if (meta != undefined) {
       row.getElementsByClassName("meta")[0].innerText = meta;
     }
 
     row.addEventListener("click", function (e) {
-      if (selected == i){
+      if (selected == i) {
         dmenu_accept();
         return;
       }
@@ -131,7 +131,7 @@ function dmenu(params, onselect, name = "dmenu:") {
   input.value = ""
 
 }
-function dmenu_accept(shift=false) {
+function dmenu_accept(shift = false) {
   let command = document.querySelector("#dmenu > .top > .dmenu-input").value;
   lock_dmenu = false;
   dmenu_close();
@@ -155,26 +155,26 @@ function dmenu_close() {
 
 function match_score(str, match) {
   let score = 0;
-  let mi=0;
-  let streak=0;
+  let mi = 0;
+  let streak = 0;
   for (let i = 0; i < str.length; i++) {
     if (str[i] == match[mi]) {
-      if (i == mi){
-        score+=(streak+1)*8;
-      }else{
-        score+=(streak+1)*2;
+      if (i == mi) {
+        score += (streak + 1) * 8;
+      } else {
+        score += (streak + 1) * 2;
       }
-      mi+=1;
-      streak+=1;
-    }else{
-      streak=0;
+      mi += 1;
+      streak += 1;
+    } else {
+      streak = 0;
     }
   }
-  if (mi < match.length){
+  if (mi < match.length) {
     return 0;
   }
-  if (score < 0){
-    score=0;
+  if (score < 0) {
+    score = 0;
   }
   return score;
 }
@@ -219,10 +219,10 @@ function dmenu_update_search(command) {
   let dmenu = document.getElementById("dmenu");
   let input = dmenu.getElementsByTagName("input")[0];
   let autocompletelist = dmenu.getElementsByClassName("autocomplete")[0];
-  
+
   let i = 0;
-  while(true){
-    if (sort(autocompletelist, command, i) || i > 100){
+  while (true) {
+    if (sort(autocompletelist, command, i) || i > 100) {
       break;
     }
     i++;
@@ -233,35 +233,35 @@ function sort(autocompletelist, command, start_index) {
   let nodes = autocompletelist.childNodes;
   let lscore = 0;
   let lscore_node = null;
-  let move_down=[];
-  let is_sorted=true;
+  let move_down = [];
+  let is_sorted = true;
   for (let i = start_index; i < nodes.length; i++) {
     let node = nodes[i];
     let text;
-    text=node.getElementsByClassName("content")[0].innerText;
+    text = node.getElementsByClassName("content")[0].innerText;
     let score = match_score(text, command);
-    if (view_item_score){
-      node.getElementsByClassName("score")[0].innerText=score;
+    if (view_item_score) {
+      node.getElementsByClassName("score")[0].innerText = score;
     }
     if (score == 0 && command != "") {
       node.classList.add("hidden");
       move_down.push(nodes[i]);
     } else {
       node.classList.remove("hidden");
-      if (!(lscore < score)){
-        is_sorted=false;
+      if (!(lscore < score)) {
+        is_sorted = false;
       }
     }
     if (lscore < score) {
       lscore = score;
-      lscore_node=nodes[i];
+      lscore_node = nodes[i];
     }
   }
-  if (lscore_node !== null){
+  if (lscore_node !== null) {
     autocompletelist.insertBefore(lscore_node, autocompletelist.childNodes[start_index]);
   }
-  for (let i=0; i < move_down.length; i++){
-      autocompletelist.insertBefore(move_down[i], autocompletelist.lastChild);
+  for (let i = 0; i < move_down.length; i++) {
+    autocompletelist.insertBefore(move_down[i], autocompletelist.lastChild);
   }
   return is_sorted;
 }
@@ -302,16 +302,16 @@ function init_dmenu() {
   document.body.insertBefore(dmenu, document.body.childNodes[-1]);
   let input = dmenu.getElementsByTagName("input")[0]
   document.addEventListener("click", function (e) {
-    if (get_dconfig().exit_on_focusout){
+    if (get_dconfig().exit_on_focusout) {
       return;
     }
-    if (dmenu.contains(e.target)){
+    if (dmenu.contains(e.target)) {
       return;
     }
     dmenu_close();
   })
   input.addEventListener("focusout", function (e) {
-    if (get_dconfig().exit_on_focusout){
+    if (get_dconfig().exit_on_focusout) {
       dmenu_close();
     }
   });

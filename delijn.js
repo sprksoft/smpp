@@ -40,7 +40,7 @@ async function createApplication(data) {
 
   for (const doorkomst of doorkomsten) {
     console.log(doorkomsten)
-    var {entiteitnummer, bestemming, lijnnummer, dienstregelingTijdstip } = doorkomst;
+    var { entiteitnummer, bestemming, lijnnummer, dienstregelingTijdstip } = doorkomst;
     console.log(lijnnummer)
     console.log(entiteitnummer)
 
@@ -99,11 +99,11 @@ async function createApplication(data) {
   }
 
   const lastdiv = document.createElement('div');
-  if (Math.random()<0.1){
+  if (Math.random() < 0.1) {
     lastdiv.innerHTML = `<div class=lastdiv><a href="https://www.coolblue.be/nl/koffiezetapparaten/koffiezetapparaten-voor-latte-macchiato?utm_source=bing&utm_medium=cpc&utm_content=search&cmt=c_b,cp_554669870,aid_1297424829986242,t_kwd-81089287897708:loc-14,n_o,d_c,lp_611&msclkid=1f7482f3ed5c1b56a37de72c7f194ba4" target="_blank">Latte?</a></div>`;
     console.log("#latte")
-  }else{
-  lastdiv.innerHTML = `<div class=lastdiv><a href="https://www.delijn.be/nl/contact/attest-aanvraag/" target="_blank">Late?</a></div>`;
+  } else {
+    lastdiv.innerHTML = `<div class=lastdiv><a href="https://www.delijn.be/nl/contact/attest-aanvraag/" target="_blank">Late?</a></div>`;
   }
   leftContainerbottom.appendChild(lastdiv);
 }

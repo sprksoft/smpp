@@ -191,5 +191,5 @@ function snakeGame() {
       snake.direction = 'DOWN';
       event.preventDefault();
     }
-  });  
+  });
 }
