@@ -105,8 +105,9 @@ const svgMarkup = `
 `;
 const notifsButton = document.querySelector('.js-btn-notifs');
 if (notifsButton){
-  notifsButton.innerHTML = svgMarkup
-  notifsButton.appendChild(notifsButton.querySelector('span'));
+const textSpan = notifsButton.querySelector('span');
+notifsButton.innerHTML = svgMarkup
+notifsButton.appendChild(textSpan);
 }
 
 window.addEventListener('load', async function (){
