@@ -103,13 +103,11 @@ function handleDMenu() {
     }
   });
 
-const newElement = `<button id="dmenutooltip" class=topnav__btn>Quick-Menu</button>`;
 const firstItem = document.querySelector('.topnav > *:first-child');
 if (firstItem){
-firstItem.insertAdjacentHTML('afterend', newElement);
+firstItem.insertAdjacentHTML('afterend', `<button id="dmenutooltip" class=topnav__btn>Quick-Menu</button>`);
 }
 const dMenuButton = document.getElementById('dmenutooltip');
-console.log(dmenutooltip)
 if(dMenuButton){
 dMenuButton.addEventListener('click', handleDMenu);
 }

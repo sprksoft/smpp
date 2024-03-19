@@ -29,10 +29,14 @@ function changeLogoutText() {
   }
   return "Logout -->"
 }
-
-  document.getElementsByClassName("js-btn-logout")[0].innerHTML = changeLogoutText();
-
-  document.getElementById("notifsToggleLabel").innerHTML = "Toon pop-ups";
+var logoutButton = document.getElementsByClassName("js-btn-logout")[0]
+var notifsText = document.getElementById("notifsToggleLabel")
+  if(logoutButton){
+    logoutButton.innerHTML = changeLogoutText();
+  }
+  if(notifsText){
+    notifsText.innerHTML = "Toon pop-ups";
+  }
 
 let goto_items = get_data("goto_menu", ".js-shortcuts-container > a", function (el, data) {
   const name = el.innerText.toLowerCase().trim();
@@ -82,9 +86,11 @@ async function apply() {
   if (show_scores == undefined) {
     show_scores = false;
   }
-document.querySelector('.topnav').insertBefore(document.querySelector('[data-links]'), document.querySelector('[data-courses]'));
+  topnav = document.querySelector('.topnav')
+  if (topnav){
+    topnav.insertBefore(document.querySelector('[data-links]'), document.querySelector('[data-courses]'));
+  }
 
-// Create the SVG markup
 const svgMarkup = `
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class=st1 height="18px" width="18px" version="1.1" id="Layer_1" viewBox="0 0 459.334 459.334" xml:space="preserve">
 <g>
@@ -97,18 +103,11 @@ const svgMarkup = `
 </g>
 </svg>
 `;
-
-// Get reference to the button element
 const notifsButton = document.querySelector('.js-btn-notifs');
-
-// Get reference to the existing span element
-const textSpan = notifsButton.querySelector('span');
-
-// Replace the button content with the SVG and the existing span
-notifsButton.innerHTML = svgMarkup
-notifsButton.appendChild(textSpan);
-
-
+if (notifsButton){
+  notifsButton.innerHTML = svgMarkup
+  notifsButton.appendChild(notifsButton.querySelector('span'));
+}
 
 window.addEventListener('load', async function (){
   if (show_scores) {
