@@ -103,12 +103,13 @@ function handleDMenu() {
     }
   });
 
-const newElement = `<button id="dmenutooltip" class=topnav__btn>(╯°□°)╯︵ ┻━┻</button>`;
+const newElement = `<button id="dmenutooltip" class=topnav__btn>Quick-Menu</button>`;
 const firstItem = document.querySelector('.topnav > *:first-child');
 if (firstItem){
 firstItem.insertAdjacentHTML('afterend', newElement);
 }
 const dMenuButton = document.getElementById('dmenutooltip');
+console.log(dmenutooltip)
 if(dMenuButton){
 dMenuButton.addEventListener('click', handleDMenu);
 }
