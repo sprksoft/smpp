@@ -450,8 +450,8 @@ async function set_backgroundlink(background) {
   style.setProperty('--loginpage-image', 'url(' + background + ')');
 }
 
-if (document.querySelector('[data-go=""]')) {
-    element.remove();
+if (document.querySelector('[data-go=""]')) 
+{document.querySelector('[data-go=""]').remove();
 }
 
 const theme_names = ["default", "white", "ldev", "birb", "stalker", "chocolate", "winter", "fall", "matcha", "vax", "galaxy", "sand", "custom"];
