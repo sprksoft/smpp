@@ -95,20 +95,19 @@ a.smscButton[href="/login/sso/init/acm"],
 }
 
 .smscButton.blue:not(#pushWizardPopupConfirmButton) {
-  margin-top: 40px !important;
   border-radius: 40px !important;
   height: 40px !important;
   color: var(--color-text) !important;
   border-color: var(--color-base01) !important;
   background-color: var(--color-base02) !important;
+  box-shadow: none !important;
 }
 
 .smscButton.blue:hover:not(#pushWizardPopupConfirmButton:hover) {
-  margin-top: 40px !important;
   border-radius: 40px !important;
-  height: 40px !important;
   background-color: var(--color-base03) !important;
   border-color: var(--color-base02) !important;
+  box-shadow: none !important;
 }
 
 .modern-ui .float-label__input:focus+label>span,

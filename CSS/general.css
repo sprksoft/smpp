@@ -168,7 +168,7 @@ button.smscButton.blue.fileupload_submit_button {
   border: var(--border-size) solid var(--color-base03) !important;
   background-color: var(--color-base02) !important;
   color: var(--color-accent) !important;
-
+  box-shadow: none !important;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -437,33 +437,6 @@ div.stdReplyWrapper {
 .start {
   color: var(--color-text) !important;
 }
-
-/* CODE FOR CHECKBOX BUT ONLY IN NOTIFSETTINGS
-div.smscCheckbox input[type=checkbox]:checked+label {
-  background-image: url("https://pic.onlinewebfonts.com/thumbnails/icons_263317.svg") !important;
-  box-shadow: none !important;
-  background-size: 14px !important;
-}
-
-div.smscCheckbox label {
-  background-image: url("https://pic.onlinewebfonts.com/thumbnails/icons_263320.svg") !important;
-  box-shadow: none !important;
-  background-size: 14px !important;
-}
-
-div.smscCheckbox input[type=checkbox]:checked+label::selection {
-  background-image: url("https://pic.onlinewebfonts.com/thumbnails/icons_263317.svg") !important;
-  box-shadow: none !important;
-  background-size: 14px !important;
-
-}
-
-div.smscCheckbox label::selection {
-  background-image: url("https://pic.onlinewebfonts.com/thumbnails/icons_263320.svg") !important;
-  box-shadow: none !important;
-  background-size: 14px !important;
-
-}*/
 
 #profileSelector {
   background-color: var(--color-base01);
@@ -1048,4 +1021,32 @@ div#smscSearchView {
 
 button.js-btn-notifs.topnav__btn {
   padding: 2px 7px !important;
+}
+div.correctioninfo {
+  border-radius: 10px !important;
+}
+.fileuploadblock{
+  border: 2px solid var(--color-base02) !important;
+  border-radius: 10px !important;
+}
+.drag-container__info-drag{
+  color: var(--color-text) !important
+}
+.smsc-progressbar{
+  background-color: var(--color-base03) !important;
+  border: 1px solid var(--color-accent) !important;
+  box-shadow: none !important;
+}
+.smsc-progressbar__progress{
+  background: var(--color-accent) !important;
+  border: none !important;
+}
+.forum-contentbox{
+  background-color: var(--color-base01) !important;
+}
+hr.topnav__divider {
+background-color: var(--color-accent) !important;
+}
+h1.topnav__title{
+  color: var(--color-text) !important;
 }

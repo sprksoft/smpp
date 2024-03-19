@@ -67,6 +67,7 @@ a.js-toast-btn.toast__btn.smscButton.blue {
   text-decoration-color: var(--color-accent) !important;
   text-decoration-thickness: 2px !important;
   width: auto !important;
+  box-shadow: none !important;
 }
 
 li.notifs-toaster__toast.modern-ui {
