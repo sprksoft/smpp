@@ -103,13 +103,13 @@ function handleDMenu() {
     }
   });
 
-const newElement = `<button id="dmenutooltip" class=topnav__btn>Quick-Menu</button>`;
+const newElement = `<div data-shortcuts="" class="topnav__btn-wrapper"><button id="dmenutooltip" class=topnav__btn>Quick-Menu</button></div>`;
 const firstItem = document.querySelector('.topnav > *:first-child');
 if (firstItem){
 firstItem.insertAdjacentHTML('afterend', newElement);
 }
 const dMenuButton = document.getElementById('dmenutooltip');
-console.log(dmenutooltip)
+console.log(dMenuButton)
 if(dMenuButton){
 dMenuButton.addEventListener('click', handleDMenu);
 }
