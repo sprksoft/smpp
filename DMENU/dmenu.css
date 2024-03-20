@@ -23,6 +23,7 @@ html {
   font-size: var(--dmenu-font-size) !important;
   z-index: 20;
   box-shadow: 0px 0px 150px black;
+  border-radius: 5px !important;
 }
 
 #dmenu>.top {
@@ -66,22 +67,26 @@ html {
 #dmenu .autocomplete-row {
   margin: var(--dmenu-margin);
   color: var(--color-text) !important;
-  display:flex;
+  display: flex;
   flex-direction: row;
   border: none;
 }
-#dmenu .content{
+
+#dmenu .content {
   margin-right: 1em;
 }
-#dmenu .meta{
+
+#dmenu .meta {
   flex-grow: 10;
   color: var(--color-base03);
 }
-#dmenu .score{
-  margin-right:0.5rem;
+
+#dmenu .score {
+  margin-right: 0.5rem;
   color: var(--color-accent);
 }
-#dmenu .selected .score{
+
+#dmenu .selected .score {
   color: var(--color-base01) !important;
 }
 
@@ -94,8 +99,7 @@ html {
   color: var(--color-base01) !important;
 }
 
-#dmenu .autocomplete-row:hover{
+#dmenu .autocomplete-row:hover {
   background: var(--color-base02);
   cursor: pointer;
 }
-

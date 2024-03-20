@@ -13,7 +13,7 @@ const default_settings = {
 };
 link_element = document.querySelector('link[rel="icon"]')
 if (link_element) {
-  link_element.href = "https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/icon128.png"; 
+  link_element.href = "https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/icon128.png";
 }
 
 function get_config() {

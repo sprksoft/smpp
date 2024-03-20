@@ -90,9 +90,11 @@
   border-color: var(--color-base02) !important;
   background-color: var(--color-base01) !important;
 }
-.goals-filter__item:hover:not(.selected){
+
+.goals-filter__item:hover:not(.selected) {
   background-color: var(--color-base02) !important
 }
+
 .feedback--white {
   background-color: var(--color-base00) !important;
   color: var(--color-text) !important;
@@ -248,15 +250,17 @@ textarea,
 .rubrics__row--title {
   color: var(--color-text) !important;
 }
-.token:hover{
+
+.token:hover {
   background-color: var(--color-base02) !important;
   border-color: var(--color-base03) !important;
 }
-.timegrid{
-  background: transparent !important
 
+.timegrid {
+  background: transparent !important
 }
-.planner-planner__main{
+
+.planner-planner__main {
   background-image: var(--loginpage-image) !important;
   background-position: center !important;
   background-size: cover !important;
@@ -264,9 +268,10 @@ textarea,
 
 }
 
-.bubble__menu-btn:hover{
+.bubble__menu-btn:hover {
   border-radius: 5px !important;
 }
-.separator{
+
+.separator {
   background-color: var(--color-base02) !important;
 }

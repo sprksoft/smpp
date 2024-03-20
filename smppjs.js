@@ -25,14 +25,18 @@ function discordpopup() {
 function changeLogoutText() {
   var randomNum = Math.floor(Math.random() * 50) + 1;
   if (randomNum === 1) {
-      return "Good Bye! -->"
+    return "Good Bye! -->"
   }
   return "Logout -->"
 }
-
-  document.getElementsByClassName("js-btn-logout")[0].innerHTML = changeLogoutText();
-
-  document.getElementById("notifsToggleLabel").innerHTML = "Toon pop-ups";
+var logoutButton = document.getElementsByClassName("js-btn-logout")[0]
+var notifsText = document.getElementById("notifsToggleLabel")
+if (logoutButton) {
+  logoutButton.innerHTML = changeLogoutText();
+}
+if (notifsText) {
+  notifsText.innerHTML = "Toon pop-ups";
+}
 
 let goto_items = get_data("goto_menu", ".js-shortcuts-container > a", function (el, data) {
   const name = el.innerText.toLowerCase().trim();
@@ -82,10 +86,12 @@ async function apply() {
   if (show_scores == undefined) {
     show_scores = false;
   }
-document.querySelector('.topnav').insertBefore(document.querySelector('[data-links]'), document.querySelector('[data-courses]'));
+  topnav = document.querySelector('.topnav')
+  if (topnav) {
+    topnav.insertBefore(document.querySelector('[data-links]'), document.querySelector('[data-courses]'));
+  }
 
-// Create the SVG markup
-const svgMarkup = `
+  const svgMarkup = `
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class=st1 height="18px" width="18px" version="1.1" id="Layer_1" viewBox="0 0 459.334 459.334" xml:space="preserve">
 <g>
 	<g>
@@ -97,32 +103,26 @@ const svgMarkup = `
 </g>
 </svg>
 `;
-
-// Get reference to the button element
-const notifsButton = document.querySelector('.js-btn-notifs');
-
-// Get reference to the existing span element
-const textSpan = notifsButton.querySelector('span');
-
-// Replace the button content with the SVG and the existing span
-notifsButton.innerHTML = svgMarkup
-notifsButton.appendChild(textSpan);
-
-
-
-window.addEventListener('load', async function (){
-  if (show_scores) {
-    var currentUrl = window.location.href;
-    if (currentUrl.includes("smartschool.be/results")) {
-      console.log("Showing scores");
-      await show_scoresfunc();
-    }
+  const notifsButton = document.querySelector('.js-btn-notifs');
+  if (notifsButton) {
+    const textSpan = notifsButton.querySelector('span');
+    notifsButton.innerHTML = svgMarkup
+    notifsButton.appendChild(textSpan);
   }
-});
-console.log("added event listener");
+
+  window.addEventListener('load', async function () {
+    if (show_scores) {
+      var currentUrl = window.location.href;
+      if (currentUrl.includes("smartschool.be/results")) {
+        console.log("Showing scores");
+        await show_scoresfunc();
+      }
+    }
+  });
+  console.log("added event listener");
   if (overwrite_theme == 2) {
-    set_background(backgroundFile);    
-  }else if(overwrite_theme == 1){
+    set_background(backgroundFile);
+  } else if (overwrite_theme == 1) {
     set_backgroundlink(backgroundLink)
   }
   if (colorpickers != undefined && profileSelect != "custom") {
@@ -222,10 +222,10 @@ function store() {
   settingsData.showsnake = showsnake;
   settingsData.show_scores = previousData.show_scores;
   console.log(settingsData)
-  if (settingsData.show_scores == undefined){
+  if (settingsData.show_scores == undefined) {
     settingsData.show_scores = false;
   }
-  if (shownews && !previousData.shownews){
+  if (shownews && !previousData.shownews) {
     window.location.reload();
   }
   // Check if background file is selected
@@ -238,22 +238,22 @@ function store() {
         if (profileSelect == "custom") {
           loadCustomTheme();
         }
-        if (base64Image.length < 1500000){
+        if (base64Image.length < 1500000) {
           document.getElementById("errormessagesmpp").innerHTML = ``
-          
+
         }
         apply();
       })
       .catch(error => {
         if (error instanceof DOMException && error.name === 'QuotaExceededError') {
-          handleQuotaExceededError();          
-      } else {
+          handleQuotaExceededError();
+        } else {
           console.error('An error occurred:', error);
-      }      
-      apply()
+        }
+        apply()
       });
   } else {
-      settingsData.backgroundfile = previousData.backgroundfile
+    settingsData.backgroundfile = previousData.backgroundfile
     // If no background file selected, save other settings only
     set_config(settingsData)
     if (profileSelect == "custom") {
@@ -262,7 +262,7 @@ function store() {
     apply();
   }
 };
-function handleQuotaExceededError(){
+function handleQuotaExceededError() {
   document.getElementById("errormessagesmpp").innerHTML = `
   <a href="https://www.freeconvert.com/image-compressor" id="errormessagesmpp" target="_blank">File too large must be +/- 1MB</p>
   `
@@ -421,7 +421,7 @@ if (popup != null) {
   
     
 `
-document.getElementById('backgroundfilebutton').addEventListener("click", openFileSelector)
+    document.getElementById('backgroundfilebutton').addEventListener("click", openFileSelector)
     load()
   });
 
@@ -430,25 +430,26 @@ document.getElementById('backgroundfilebutton').addEventListener("click", openFi
 
 async function set_background(background) {
   let style = document.documentElement.style;
-  if (background.length > 1500000){
-    if (document.getElementById("errormessagesmpp")){
-    handleQuotaExceededError()}
+  if (background.length > 1500000) {
+    if (document.getElementById("errormessagesmpp")) {
+      handleQuotaExceededError()
+    }
   }
   style.setProperty('--loginpage-image', 'url(data:image/png;base64,' + background + ')');
 }
 async function set_backgroundlink(background) {
   let style = document.documentElement.style;
   if (!background) {
-      console.error("Background URL is empty or undefined.");
-      style.setProperty('--loginpage-image', 'none');
-      return;
+    console.error("Background URL is empty or undefined.");
+    style.setProperty('--loginpage-image', 'none');
+    return;
   }
   try {
-      new URL(background);
+    new URL(background);
   } catch (error) {
-      console.error("Invalid URL format for background:", background);
-      style.setProperty('--loginpage-image', 'none');
-      return;
+    console.error("Invalid URL format for background:", background);
+    style.setProperty('--loginpage-image', 'none');
+    return;
   }
   style.setProperty('--loginpage-image', 'url(' + background + ')');
 }

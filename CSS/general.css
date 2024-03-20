@@ -21,7 +21,7 @@ html {
   --color-settings-ui-bg: #000000;
   --color-settings-ui-border: #000000;
   --color-settings-ui-layer2: #000000;
-  --darken-background: rgba(0,0,0,0.2)
+  --darken-background: rgba(0, 0, 0, 0.2)
 }
 
 /* hier is beter smartschool code*/
@@ -51,9 +51,10 @@ html {
 
 .toolbar,
 div.stdReplyWrapper,
-button.js-btn-search,.smscDialog .smscDialog_header .smscDialog_header_title,.popupContainer .popupContainerTitle,
-.popupContainer .popupContainerSubtitle
- {
+button.js-btn-search,
+.smscDialog .smscDialog_header .smscDialog_header_title,
+.popupContainer .popupContainerTitle,
+.popupContainer .popupContainerSubtitle {
   color: var(--color-text) !important;
 }
 
@@ -167,7 +168,7 @@ button.smscButton.blue.fileupload_submit_button {
   border: var(--border-size) solid var(--color-base03) !important;
   background-color: var(--color-base02) !important;
   color: var(--color-accent) !important;
-
+  box-shadow: none !important;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -265,7 +266,7 @@ select,
 .msgInfoAuthor,
 .msgInfoMsg,
 .li,
-.manualmain  {
+.manualmain {
   color: var(--color-text) !important;
 }
 
@@ -314,9 +315,9 @@ smsc-inlineeditor.smsc-table__cell--inlineeditor {
   background-color: var(--color-base01) !important;
 }
 
-.contextmenu__item--nolink:hover{
-  transition:ease-in!important;
-transition-duration: 0.1s !important;
+.contextmenu__item--nolink:hover {
+  transition: ease-in !important;
+  transition-duration: 0.1s !important;
   background-color: var(--color-base02) !important;
 }
 
@@ -325,8 +326,8 @@ transition-duration: 0.1s !important;
 }
 
 .smsc-rightclick__item:hover {
-  transition:ease-in!important;
-transition-duration: 0.1s !important;
+  transition: ease-in !important;
+  transition-duration: 0.1s !important;
   background-color: var(--color-base03) !important;
 }
 
@@ -368,25 +369,42 @@ transition-duration: 0.1s !important;
   border: 0px solid var(--color-accent) !important;
   box-shadow: none;
 }
-.infoBlock_message ,.infoBlock_eval, .infoBlock_planner,.infoBlock_presence,.infoBlock_lvsitem,.infoBlock_report {
+
+.infoBlock_message,
+.infoBlock_eval,
+.infoBlock_planner,
+.infoBlock_presence,
+.infoBlock_lvsitem,
+.infoBlock_report {
   border: 2px solid transparent !important;
   border-radius: 10px !important;
 
 }
-.infoBlock_message:hover ,.infoBlock_eval:hover, .infoBlock_planner:hover,.infoBlock_presence:hover,.infoBlock_lvsitem:hover,.infoBlock_report:hover {
+
+.infoBlock_message:hover,
+.infoBlock_eval:hover,
+.infoBlock_planner:hover,
+.infoBlock_presence:hover,
+.infoBlock_lvsitem:hover,
+.infoBlock_report:hover {
   border-color: var(--color-base03) !important;
   background-color: var(--color-base02) !important;
 }
-.titleLeft{
+
+.titleLeft {
   background-color: var(--color-base01) !important;
 }
-.smscBlockContainer_top, .smscBlockContainer_left,.smscBlockContainer_right{
+
+.smscBlockContainer_top,
+.smscBlockContainer_left,
+.smscBlockContainer_right {
   border: 2px solid var(--color-base02) !important;
   background-color: var(--color-base01) !important;
 }
+
 .smscAdminNav_body_linkdivTitle:hover {
-  transition:ease-in!important;
-transition-duration: 0.1s !important;
+  transition: ease-in !important;
+  transition-duration: 0.1s !important;
   color: var(--color-text) !important;
 }
 
@@ -419,33 +437,6 @@ div.stdReplyWrapper {
 .start {
   color: var(--color-text) !important;
 }
-
-/* CODE FOR CHECKBOX BUT ONLY IN NOTIFSETTINGS
-div.smscCheckbox input[type=checkbox]:checked+label {
-  background-image: url("https://pic.onlinewebfonts.com/thumbnails/icons_263317.svg") !important;
-  box-shadow: none !important;
-  background-size: 14px !important;
-}
-
-div.smscCheckbox label {
-  background-image: url("https://pic.onlinewebfonts.com/thumbnails/icons_263320.svg") !important;
-  box-shadow: none !important;
-  background-size: 14px !important;
-}
-
-div.smscCheckbox input[type=checkbox]:checked+label::selection {
-  background-image: url("https://pic.onlinewebfonts.com/thumbnails/icons_263317.svg") !important;
-  box-shadow: none !important;
-  background-size: 14px !important;
-
-}
-
-div.smscCheckbox label::selection {
-  background-image: url("https://pic.onlinewebfonts.com/thumbnails/icons_263320.svg") !important;
-  box-shadow: none !important;
-  background-size: 14px !important;
-
-}*/
 
 #profileSelector {
   background-color: var(--color-base01);
@@ -602,7 +593,8 @@ input:checked+.slider:before {
   margin: 10px !important;
   margin-bottom: 0px !important
 }
-.textandbuttonnomarg{
+
+.textandbuttonnomarg {
   display: flex !important;
   flex-direction: row !important;
   justify-content: center !important;
@@ -700,12 +692,14 @@ input:checked+.slider:before {
   transition: opacity .2s;
   margin: 5px !important;
 }
-#backgroundSlider{
+
+#backgroundSlider {
   width: 40% !important;
   transform: rotate(90deg) !important;
   margin: 0px !important;
   margin-top: 10px !important;
 }
+
 .sliderblur::-webkit-slider-thumb {
   -webkit-appearance: none;
   /* Override default look */
@@ -733,8 +727,8 @@ input:checked+.slider:before {
 
 .sliderblur::-webkit-slider-thumb:hover,
 .sliderblur::-moz-range-thumb:hover {
-  transition:ease-in!important;
-transition-duration: 0.1s !important;
+  transition: ease-in !important;
+  transition-duration: 0.1s !important;
   background: var(--color-accent) !important;
 }
 
@@ -772,8 +766,8 @@ transition-duration: 0.1s !important;
 }
 
 option:hover {
-  transition:ease-in!important;
-transition-duration: 0.1s !important;
+  transition: ease-in !important;
+  transition-duration: 0.1s !important;
   background-color: var(--color-base01) !important;
 }
 
@@ -817,7 +811,8 @@ label.form__label.js-form-label.label__resolvedStatus.form__label--no-margin-top
 .st2 {
   fill: var(--color-accent) !important;
 }
-.st4{ 
+
+.st4 {
   stroke: var(--color-accent) !important;
 }
 
@@ -830,8 +825,8 @@ div [style*="margin"] {
 }
 
 #searchbutton:hover {
-  transition:ease-in!important;
-transition-duration: 0.1s !important;
+  transition: ease-in !important;
+  transition-duration: 0.1s !important;
   background-color: var(--color-base02) !important;
 }
 
@@ -849,9 +844,9 @@ transition-duration: 0.1s !important;
 
 .bigdiscordbutton:hover {
   background-color: var(--color-base02) !important;
-  transition:ease-in!important;
-transition-duration: 0.1s !important;
-cursor: pointer !important;
+  transition: ease-in !important;
+  transition-duration: 0.1s !important;
+  cursor: pointer !important;
 }
 
 .color-pickersmpp {
@@ -866,6 +861,7 @@ cursor: pointer !important;
   border-radius: 5px !important;
   margin-bottom: 10px !important;
 }
+
 .color-pickersmpp:hover {
   cursor: pointer !important
 }
@@ -893,110 +889,164 @@ cursor: pointer !important;
 .input-search:focus {
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .24) !important;
 }
-#errormessagesmpp{
-  color:var(--color-red) !important;
+
+#errormessagesmpp {
+  color: var(--color-red) !important;
   margin: 0px !important;
   text-align: center !important;
 }
-#backgroundlink,#backgroundfilebutton{
+
+#backgroundlink,
+#backgroundfilebutton {
   margin: 0px !important;
-  height:35px !important;
+  height: 35px !important;
 }
-#backgroundlink{
+
+#backgroundlink {
   margin-left: -5px !important;
 }
-#backgroundfilebutton{
+
+#backgroundfilebutton {
   padding: 1px !important;
   margin-left: 5px !important;
   margin-right: 10px !important;
 }
-#backgroundfilebutton:hover{
-background-color: var(--color-base02) !important;
-border-color: var(--color-base03) !important;
-transition:ease-in!important;
-transition-duration: 0.1s !important;
+
+#backgroundfilebutton:hover {
+  background-color: var(--color-base02) !important;
+  border-color: var(--color-base03) !important;
+  transition: ease-in !important;
+  transition-duration: 0.1s !important;
 }
-.verticaltext{
+
+.verticaltext {
   display: flex !important;
   flex-direction: column !important;
   text-align: right !important;
   font-size: smaller !important;
   margin-right: -10px !important;
 }
-.nobottommargp{
+
+.nobottommargp {
   margin-bottom: 7px !important;
   margin-top: -8px !important;
 }
 
-.link_text{
+.link_text {
   color: var(--color-accent) !important;
 }
-.uploadzone-default-attachment-txt{
+
+.uploadzone-default-attachment-txt {
   color: var(--color-text) !important;
 }
-.correctioninfo{
+
+.correctioninfo {
   background-color: var(--color-base01) !important;
 }
 
 .user-image {
   display: none;
 }
-.personaliaTable>tbody>tr>td>input.readonly,input[name="email"]
-{
+
+.personaliaTable>tbody>tr>td>input.readonly,
+input[name="email"] {
   background-color: var(--color-base01) !important;
 }
-.smscDialog{
+
+.smscDialog {
   background-color: var(--color-base01) !important;
 }
-.popupContainer{
+
+.popupContainer {
   background-image: none !important;
 }
+
 #messageList,
 #groupTree,
 .survey,
-.frameTable
-{
+.frameTable {
   border: 2px solid var(--color-base02) !important;
   border-radius: 10px !important;
   padding: 10px !important;
   background-color: var(--color-base01) !important;
   background-image: none !important;
 }
-.forum-row{
-  border-bottom: 2px solid var(--color-base02)!important;
+
+.forum-row {
+  border-bottom: 2px solid var(--color-base02) !important;
 }
-.correctionline,.correctioninfocorr{
+
+.correctionline,
+.correctioninfocorr {
   background-color: var(--color-base01) !important;
 }
-.nr_recipients_bubble{
+
+.nr_recipients_bubble {
   display: none !important;
 }
 
-label.checkbox input[type=checkbox],div.smscCheckbox input[type=checkbox]+label {
+label.checkbox input[type=checkbox],
+div.smscCheckbox input[type=checkbox]+label {
   background-image: url("https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/checkboxunchecked.svg") !important;
 }
 
-label.checkbox input[type=checkbox]:checked,div.smscCheckbox input[type=checkbox]:checked+label {
+label.checkbox input[type=checkbox]:checked,
+div.smscCheckbox input[type=checkbox]:checked+label {
   background-image: url("https://raw.githubusercontent.com/frickingbird8002/smpp-images/9d0cc428cc236802f97cfe77094256d0cf5bdcdf/checkedbox.svg") !important
 }
-label.radiobutton input[type=radio]{
+
+label.radiobutton input[type=radio] {
   background-image: url('https://raw.githubusercontent.com/frickingbird8002/smpp-images/7b95e48a890b193f678073bd9d1101e35cd08d4a/radiounchecked.svg') !important;
 }
-label.radiobutton input[type=radio]:checked{
+
+label.radiobutton input[type=radio]:checked {
   background-image: url('https://raw.githubusercontent.com/frickingbird8002/smpp-images/7b95e48a890b193f678073bd9d1101e35cd08d4a/checkedradiox.svg') !important;
 }
-.smsc-select{
+
+.smsc-select {
   color: var(--color-text) !important;
 }
-input.message-search__input{
+
+input.message-search__input {
   border-radius: 5px !important;
 }
-.ui-widget.ui-widget-content{
+
+.ui-widget.ui-widget-content {
   border-radius: 15px !important;
 }
-div#smscSearchView{
+
+div#smscSearchView {
   height: fit-content !important;
 }
-button.js-btn-notifs.topnav__btn{
+
+button.js-btn-notifs.topnav__btn {
   padding: 2px 7px !important;
+}
+div.correctioninfo {
+  border-radius: 10px !important;
+}
+.fileuploadblock{
+  border: 2px solid var(--color-base02) !important;
+  border-radius: 10px !important;
+}
+.drag-container__info-drag{
+  color: var(--color-text) !important
+}
+.smsc-progressbar{
+  background-color: var(--color-base03) !important;
+  border: 1px solid var(--color-accent) !important;
+  box-shadow: none !important;
+}
+.smsc-progressbar__progress{
+  background: var(--color-accent) !important;
+  border: none !important;
+}
+.forum-contentbox{
+  background-color: var(--color-base01) !important;
+}
+hr.topnav__divider {
+background-color: var(--color-accent) !important;
+}
+h1.topnav__title{
+  color: var(--color-text) !important;
 }

@@ -41,7 +41,7 @@
 				"CSS/agenda.css"
 			],
 			"js": [
-        		"config.js",
+				"config.js",
 				"scraper.js",
 				"scores.js",
 				"snake.js",
@@ -55,7 +55,6 @@
 				"loginpage.js",
 				"snow.js",
 				"smppjs.js"
-
 			]
 		}
 	],

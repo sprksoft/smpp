@@ -95,10 +95,12 @@ span,
   transition: none !important;
 }
 
-.icon-label-btn--blob.icon-label-btn,.btn:hover {
+.icon-label-btn--blob.icon-label-btn,
+.btn:hover {
   background-color: var(--color-base02) !important;
   border-color: var(--color-base03) !important;
 }
+
 .icon-label-btn--blob.icon-label-btn:hover {
   background-color: var(--color-base03) !important;
 }
@@ -126,14 +128,19 @@ span,
   background-color: var(--color-base02) !important;
   border-color: var(--color-base03) !important;
 }
-.datepicker .block .dates .date--current span{
+
+.datepicker .block .dates .date--current span {
   border-color: var(--color-base03) !important;
 }
-.header__month,.bubble__menu-btn:hover {
+
+.header__month,
+.bubble__menu-btn:hover {
   background-color: var(--color-base02) !important;
 }
 
-.date:hover span,.bubble__menu-btn--active,.selectview__new-detail-ui .c-blue-combo--100 {
+.date:hover span,
+.bubble__menu-btn--active,
+.selectview__new-detail-ui .c-blue-combo--100 {
   background-color: var(--color-base03) !important;
   border-radius: 5px !important;
 }
@@ -156,183 +163,247 @@ span,
   border-color: var(--color-base03) !important;
 
 }
+
 .choose-metadata__options label.checkbox.checked {
   background-color: var(--color-base03) !important;
-  }
-  .choose-metadata__options label.checkbox{
-    background-color: var(--color-base01) !important;
-  }
-  .example-card{
-    color: var(--color-text) !important;
-    background-color: var(--color-base00) !important;
-  }
-  .splitdetail-right-close-btn,.splitdetail-top-btn,.side-panel__close,.smscDialog_header_close{
-    border: 2px solid var(--color-base02) !important;
-    border-radius: 5px !important;
-    margin: 5px !important;
-  }
-  .splitdetail-right-close-btn:hover,.splitdetail-left-close-btn:hover,.side-panel__close:hover,.smscDialog_header_close{
-    border-color: var(--color-base03) !important;
-    background-color: var(--color-base02) !important;
-    color: var(--color-red) !important;
-  }
-  .splitdetail-top-btn:hover{
-    border-color: var(--color-base03) !important;
-    background-color: var(--color-base02) !important;
-  }
-  [inline-editor] .inline-editor:not([readonly]):hover:after {
-    border-left: 0px !important;
-    border-color: var(--color-base03) !important;
-  }
-  [inline-editor] .inline-editor:not([readonly]):hover .inline-editor__input{
-    border-color: var(--color-base03) !important;
-  }
-  div.dialog__button-bar > button.btn.js-btn:not(.btn--primary),button.btn.close-btn.btn--primary{
-    color: var(--color-red) !important;
-  }
-  .datepicker .block .header select.header__month{
-    border: 2px solid transparent !important;
-  }
-  .listview__row.js-listview-row.todo-column__row:hover,.content__day-column.js-day-column.highlight,.header__day.header__wholeday-column.js-wholeday-column.highlight {
-    background-color: var(--darken-background) !important;
-    border-radius: 10px !important;
-  }
-  .header.js-header {
-    width: 90%;
-    border-bottom-right-radius: 15px;
 }
-  
-  .header.js-header.header--single-line,.detail-lint.js-detail-lint,.splitdetail__content__topbtns{
-    background-color: var(--color-base01) !important;
-  }
-  .splitdetail__content__topbtns{
-    border: 2px solid transparent !important;
-    border-radius: 10px !important;
-  }
-  .swoosh-wrapper{
-    display: none !important;
-  }
-  button.icon-btn.js-icon-btn.header__icon.js-header-icon.icon-btn--32{
-    background-color: var(--color-base02);
-  }
-  .btn.btn:not(.send-delayed-button){
-    border: 2px solid var(--color-base02) !important;
-    border-radius: 7px !important;
-  }
-  .btn.btn:hover:not(.send-delayed-button:hover){
-    border: 2px solid var(--color-base03) !important;
-  }
-  button.btn.close-btn.btn--plain{
-    color: var(--color-red) !important;
-  }
-  button.detail-blob:hover{
-    background-color: var(--color-base02) !important;
-  }
-  button.button-close-svg{
-    display: none !important;
-  }
-  [textarea]:not([focus-within]):hover [textarea-tinymceinput],.detail-description__textarea:hover{
-    border: 2px solid var(--color-base02) !important;
-    border-radius: 10px !important;
-  }
-  [textarea]:not([focus-within]),.detail-description__textarea{
-    border: 2px solid transparent!important;
-  }
-  [textarea]:not([focus-within]):hover:before{
-    display: none !important;
-  }
-  [dialog-content] .dialog__button-bar{
-    border-top: 2px solid var(--color-base02) !important;
-  }
-  input.input.bootstrap__input{
-    background-color: var(--color-base02) !important;
-  }
-  .ple.js-ple.ple--brief.ple--past.ple--pending.ple--no-click,
-  .ple-content.ple-content--pending:not(.ple-content--has-problem),div#ple-content--temporaryPlaceholder{
-border-color: var(--color-base02) !important
-  }
-  .js-emptystate.detail-empty-state{
-    background-color: var(--color-base01) !important;
-  }
-  button.detail-todo-icon-and-color__icon.active-icon{
-    border: 2px solid var(--color-base03) !important;
-  }
-  button.detail-todo-icon-and-color__icon:hover:not(.active-icon){
-    border-color: var(--color-base02) !important;
-  }
-  button.detail-todo-icon-and-color__icon{
-    border: 2px solid transparent !important
-  }
-  .listview__cell.js-listview-cell.listview__cell--icon-24.column-icon{
-    background-color: var(--color-base02) !important;
-  }
-  .listview__cell.js-listview-cell.listview__cell--icon-24.column-icon:hover
-{
-    background-color: var(--color-base03) !important;
-  }
 
-  [bubble].bubble--tooltip{
-    color: var(--color-text) !important
-  }
-  .evaluation-list-item.selected{
-    box-shadow: none !important;
-    border-color: var(--color-accent) !important;
-    background-color: var(--color-base01) !important;
-  }
-  .listview__row.js-listview-row.goals__row{
-    display: none !important;
-  }
-  .todo-column__container{
-    background-color: var(--darken-background) !important; 
-    border-radius: 10px !important;
-  }
-  button.icon-label-btn.js-icon-label-btn.icon-label-btn--linkbutton{
-    box-shadow: none !important;
-    border-color: var(--color-accent) !important;
-    background-color: var(--color-base02) !important;
-    padding: 10px !important;
-    border-radius: 7px !important;
-    border: 2px solid var(--color-accent) !important;
-  }
-  button.icon-label-btn.js-icon-label-btn.icon-label-btn--linkbutton:hover{
-    background-color: var(--color-base03) !important;
-  }
-  .search__maincontainer{
-    background-color: var(--color-base01) !important;
-  }
-  .quick-search .search__listitemwrapper:hover{
-    background-color: var(--color-base02) !important;
-  }
-  [drilldown].drilldown .drilldown__row:hover:not(.drilldown__row--selected){
-    background-color: var(--color-base02) !important;
-  }
-  [drilldown].drilldown .drilldown__row--selected{
-    background-color: var(--color-base03) !important;
-  }
-  [textarea] [textarea-tinymceinput]:empty:not(:focus):before{
-    color: var(--color-text) !important;
-  }
-  .listview__row.js-listview-row.planner-listview-data-row--selected.js-planner-listview-data-row--selected,
-  .month-view .element.show-more-element:not(:hover):not(.state--hovered--forced).state--hovered .element__label-container {
+.choose-metadata__options label.checkbox {
   background-color: var(--color-base01) !important;
-  }
-  .month-view .week-day.day--today .day-label{
-    background-color: var(--color-base02) !important;
-  }
-  .month-view .grid-day.state--hovered,.month-view .week-day:not(.day--today).state--hovered .day-label{
-    background-color: var(--darken-background) !important
-  }
-  .month-view .header-row,.month-view .element.show-more-element{
-    background-color: var(--color-base01) !important;
-    border-radius: 10px !important;
-  }
-  .month-view .element.show-more-element:hover .element__label-container{
-    box-shadow: none !important;
-    background-color: var(--color-base02) !important;
-  }
-  .month-view .week-day.state--hovered.day--today .day-label{
-    box-shadow: none !important;
-  }
-  .twinbutton__button{
-    transition: none !important;
-  }
+}
+
+.example-card {
+  color: var(--color-text) !important;
+  background-color: var(--color-base00) !important;
+}
+
+.splitdetail-right-close-btn,
+.splitdetail-top-btn,
+.side-panel__close,
+.smscDialog_header_close {
+  border: 2px solid var(--color-base02) !important;
+  border-radius: 5px !important;
+  margin: 5px !important;
+}
+
+.splitdetail-right-close-btn:hover,
+.splitdetail-left-close-btn:hover,
+.side-panel__close:hover,
+.smscDialog_header_close {
+  border-color: var(--color-base03) !important;
+  background-color: var(--color-base02) !important;
+  color: var(--color-red) !important;
+}
+
+.splitdetail-top-btn:hover {
+  border-color: var(--color-base03) !important;
+  background-color: var(--color-base02) !important;
+}
+
+[inline-editor] .inline-editor:not([readonly]):hover:after {
+  border-left: 0px !important;
+  border-color: var(--color-base03) !important;
+}
+
+[inline-editor] .inline-editor:not([readonly]):hover .inline-editor__input {
+  border-color: var(--color-base03) !important;
+}
+
+div.dialog__button-bar>button.btn.js-btn:not(.btn--primary),
+button.btn.close-btn.btn--primary {
+  color: var(--color-red) !important;
+}
+
+.datepicker .block .header select.header__month {
+  border: 2px solid transparent !important;
+}
+
+.listview__row.js-listview-row.todo-column__row:hover,
+.content__day-column.js-day-column.highlight,
+.header__day.header__wholeday-column.js-wholeday-column.highlight {
+  background-color: var(--darken-background) !important;
+  border-radius: 10px !important;
+}
+
+.header.js-header {
+  width: 90%;
+  border-bottom-right-radius: 15px;
+}
+
+.header.js-header.header--single-line,
+.detail-lint.js-detail-lint,
+.splitdetail__content__topbtns {
+  background-color: var(--color-base01) !important;
+}
+
+.splitdetail__content__topbtns {
+  border: 2px solid transparent !important;
+  border-radius: 10px !important;
+}
+
+.swoosh-wrapper {
+  display: none !important;
+}
+
+button.icon-btn.js-icon-btn.header__icon.js-header-icon.icon-btn--32 {
+  background-color: var(--color-base02);
+}
+
+.btn.btn:not(.send-delayed-button) {
+  border: 2px solid var(--color-base02) !important;
+  border-radius: 7px !important;
+}
+
+.btn.btn:hover:not(.send-delayed-button:hover) {
+  border: 2px solid var(--color-base03) !important;
+}
+
+button.btn.close-btn.btn--plain {
+  color: var(--color-red) !important;
+}
+
+button.detail-blob:hover {
+  background-color: var(--color-base02) !important;
+}
+
+button.button-close-svg {
+  display: none !important;
+}
+
+[textarea]:not([focus-within]):hover [textarea-tinymceinput],
+.detail-description__textarea:hover {
+  border: 2px solid var(--color-base02) !important;
+  border-radius: 10px !important;
+}
+
+[textarea]:not([focus-within]),
+.detail-description__textarea {
+  border: 2px solid transparent !important;
+}
+
+[textarea]:not([focus-within]):hover:before {
+  display: none !important;
+}
+
+[dialog-content] .dialog__button-bar {
+  border-top: 2px solid var(--color-base02) !important;
+}
+
+input.input.bootstrap__input {
+  background-color: var(--color-base02) !important;
+}
+
+.ple.js-ple.ple--brief.ple--past.ple--pending.ple--no-click,
+.ple-content.ple-content--pending:not(.ple-content--has-problem),
+div#ple-content--temporaryPlaceholder {
+  border-color: var(--color-base02) !important
+}
+
+.js-emptystate.detail-empty-state {
+  background-color: var(--color-base01) !important;
+}
+
+button.detail-todo-icon-and-color__icon.active-icon {
+  border: 2px solid var(--color-base03) !important;
+}
+
+button.detail-todo-icon-and-color__icon:hover:not(.active-icon) {
+  border-color: var(--color-base02) !important;
+}
+
+button.detail-todo-icon-and-color__icon {
+  border: 2px solid transparent !important
+}
+
+.listview__cell.js-listview-cell.listview__cell--icon-24.column-icon {
+  background-color: var(--color-base02) !important;
+}
+
+.listview__cell.js-listview-cell.listview__cell--icon-24.column-icon:hover {
+  background-color: var(--color-base03) !important;
+}
+
+[bubble].bubble--tooltip {
+  color: var(--color-text) !important
+}
+
+.evaluation-list-item.selected {
+  box-shadow: none !important;
+  border-color: var(--color-accent) !important;
+  background-color: var(--color-base01) !important;
+}
+
+.listview__row.js-listview-row.goals__row {
+  display: none !important;
+}
+
+.todo-column__container {
+  background-color: var(--darken-background) !important;
+  border-radius: 10px !important;
+}
+
+button.icon-label-btn.js-icon-label-btn.icon-label-btn--linkbutton {
+  box-shadow: none !important;
+  border-color: var(--color-accent) !important;
+  background-color: var(--color-base02) !important;
+  padding: 10px !important;
+  border-radius: 7px !important;
+  border: 2px solid var(--color-accent) !important;
+}
+
+button.icon-label-btn.js-icon-label-btn.icon-label-btn--linkbutton:hover {
+  background-color: var(--color-base03) !important;
+}
+
+.search__maincontainer {
+  background-color: var(--color-base01) !important;
+}
+
+.quick-search .search__listitemwrapper:hover {
+  background-color: var(--color-base02) !important;
+}
+
+[drilldown].drilldown .drilldown__row:hover:not(.drilldown__row--selected) {
+  background-color: var(--color-base02) !important;
+}
+
+[drilldown].drilldown .drilldown__row--selected {
+  background-color: var(--color-base03) !important;
+}
+
+[textarea] [textarea-tinymceinput]:empty:not(:focus):before {
+  color: var(--color-text) !important;
+}
+
+.listview__row.js-listview-row.planner-listview-data-row--selected.js-planner-listview-data-row--selected,
+.month-view .element.show-more-element:not(:hover):not(.state--hovered--forced).state--hovered .element__label-container {
+  background-color: var(--color-base01) !important;
+}
+
+.month-view .week-day.day--today .day-label {
+  background-color: var(--color-base02) !important;
+}
+
+.month-view .grid-day.state--hovered,
+.month-view .week-day:not(.day--today).state--hovered .day-label {
+  background-color: var(--darken-background) !important
+}
+
+.month-view .header-row,
+.month-view .element.show-more-element {
+  background-color: var(--color-base01) !important;
+  border-radius: 10px !important;
+}
+
+.month-view .element.show-more-element:hover .element__label-container {
+  box-shadow: none !important;
+  background-color: var(--color-base02) !important;
+}
+
+.month-view .week-day.state--hovered.day--today .day-label {
+  box-shadow: none !important;
+}
+
+.twinbutton__button {
+  transition: none !important;
+}
