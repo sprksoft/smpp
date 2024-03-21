@@ -42,12 +42,12 @@
 			],
 			"js": [
 				"config.js",
+				"json.js",
 				"scraper.js",
 				"scores.js",
 				"snake.js",
 				"delijndecoder.js",
 				"utils.js",
-				"themes.js",
 				"DMENU/quick.js",
 				"DMENU/dmenu.js",
 				"weather.js",

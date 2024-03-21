@@ -82,6 +82,7 @@ async function apply() {
   const shownews = settingsData.shownews;
   const showsnake = settingsData.showsnake;
   var show_scores = settingsData.show_scores;
+  set_theme("default");
   set_theme(profileSelect);
 
   if (show_scores == undefined) {
@@ -326,29 +327,29 @@ function loadCustomTheme() {
   loadCustomThemeData()
 }
 function load() {
-  let settingsData = JSON.parse(window.localStorage.getItem("settingsdata"));
-  const profileSelect = document.getElementById("profileSelector");
-  const backgroundLink = document.getElementById("backgroundlink");
-  const halte = document.getElementById("halt");
-  const overwrite_theme = document.getElementById("backgroundSlider");
-  const loc = document.getElementById("location");
-  const blur = document.getElementById('mySlider');
-  const snowSlider = document.getElementById('snowSlider');
-  const shownews = document.getElementById("shownewselement");
-  const showsnake = document.getElementById("showsnakeelement");
-  profileSelect.value = settingsData.profile
-  halte.checked = settingsData.halte
-  overwrite_theme.value = settingsData.overwrite_theme
-  backgroundLink.value = settingsData.backgroundlink
-  loc.value = settingsData.location
-  blur.value = settingsData.blur
-  snowSlider.value = settingsData.snow
-  shownews.checked = settingsData.shownews
-  showsnake.checked = settingsData.showsnake
-  if (profileSelect.value == "custom") {
-    loadCustomTheme()
-  }
+  const settingsData = JSON.parse(window.localStorage.getItem("settingsdata"));
+  const elements = {
+    "profileSelector": "profile",
+    "backgroundlink": "backgroundlink",
+    "halt": "halte",
+    "backgroundSlider": "overwrite_theme",
+    "location": "location",
+    "mySlider": "blur",
+    "snowSlider": "snow",
+    "shownewselement": "shownews",
+    "showsnakeelement": "showsnake"
+  };
+  Object.entries(elements).forEach(([elementId, dataKey]) => {
+    const element = document.getElementById(elementId);
+    if (element) {
+      element.value = settingsData[dataKey];
+      if (elementId === "profileSelector" && element.value === "custom") {
+        loadCustomTheme();
+      }
+    }
+  });
 }
+
 popup = document.getElementById("searchMenu");
 if (popup != null) {
   popup.addEventListener("change", store)
@@ -451,6 +452,7 @@ async function set_background(background) {
   }
   style.setProperty('--loginpage-image', 'url(data:image/png;base64,' + background + ')');
 }
+
 async function set_backgroundlink(background) {
   let style = document.documentElement.style;
   if (!background) {
@@ -468,180 +470,15 @@ async function set_backgroundlink(background) {
   style.setProperty('--loginpage-image', 'url(' + background + ')');
 }
 
-if (document.querySelector('[data-go=""]')) {
-  document.querySelector('[data-go=""]').remove();
-}
-
-const theme_names = ["default", "white", "ldev", "birb", "stalker", "chocolate", "winter", "fall", "matcha", "vax", "galaxy", "sand", "custom"];
 function set_theme(name) {
-  let style = document.documentElement.style;
-  style.setProperty('--color-accent', '#8f8f95');
-  style.setProperty('--color-text', '#C2BAB2');
-  style.setProperty('--color-base00', '#191817');
-  style.setProperty('--color-base01', '#232020');
-  style.setProperty('--color-base02', '#3f3c3b');
-  style.setProperty('--color-base03', '#5b5756');
-  style.setProperty('--color-popup-border', 'var(--color-accent)');
-  style.setProperty('--color-hover-border', 'var(--color-accent)');
-  style.setProperty('--color-settings-bg', 'var(--color-base02)');
-  style.setProperty('--color-settings-border', 'var(--color-base03)');
-  style.setProperty('--color-settings-ui-bg', 'var(--color-base01)');
-  style.setProperty('--color-settings-ui-border', 'var(--color-base02)');
-  style.setProperty('--color-settings-ui-layer2', 'var(--color-base03)');
-  style.setProperty('--color-homepage-sidebars-bg', "#02020585");
-  style.setProperty('--loginpage-image', "url(https://4kwallpapers.com/images/wallpapers/desert-doom-sand-dunes-dark-background-monochrome-landscape-2560x1080-6409.jpg)");
-
-  switch (name) {
-    case "default":
-      //default changes nothing so keep
-      break;
-    case 'white':
-      style.setProperty('--color-accent', '#354760');
-      style.setProperty('--color-text', '#222630'); /*off zwart :)*/
-      style.setProperty('--color-base00', '#f6f6f6');
-      style.setProperty('--color-base01', '#efeeec');
-      style.setProperty('--color-base02', '#e3e2e0');
-      style.setProperty('--color-homepage-sidebars-bg', "#02020540");
-      style.setProperty('--color-base03', '#e9ecf4');
-      style.setProperty('--loginpage-image', "url(https://wallpaperaccess.com/full/1474688.jpg)");
-      style.setProperty('--darken-background', 'rgba(0,0,0,0.1)');
-      break;
-    case 'custom':
-      let themeData = JSON.parse(window.localStorage.getItem("themedata"))
-      if (themeData == null) {
-        themeData = default_theme;
-        window.localStorage.setItem("themedata", JSON.stringify(themeData));
-      }
-      style.setProperty('--color-accent', themeData.accent);
-      style.setProperty('--color-text', themeData.text);
-      style.setProperty('--color-base00', themeData.base0);
-      style.setProperty('--color-base01', themeData.base1);
-      style.setProperty('--color-base02', themeData.base2);
-      style.setProperty('--color-base03', themeData.base3);
-      style.setProperty('--loginpage-image', "url(https://wallpaperaccess.com/full/23.jpg)");
-      break;
-    case 'ldev':
-      style.setProperty('--color-accent', '#ffd5a0');
-      style.setProperty('--color-popup-border', 'var(--color-base02)');
-      style.setProperty('--color-hover-border', 'var(--color-base03)')
-      style.setProperty('--color-homepage-sidebars-bg', "var(--color-base00)");
-      /*style.setProperty('--color-settings-bg', 'var(--color-base01)');
-      style.setProperty('--color-settings-border', 'var(--color-base02)');
-      style.setProperty('--color-settings-ui-bg', 'var(--color-base02)');
-      style.setProperty('--color-settings-ui-border', 'var(--color-base03)');
-      style.setProperty('--color-settings-ui-layer2', 'var(--color-base00)'); */
-      style.setProperty('--loginpage-image', "url(https://i.redd.it/yfssdsfosao11.png)");
-      style.setProperty('--darken-background', 'rgba(0,0,0,0.25)');
-      break;
-    case 'purple':
-      style.setProperty('--color-accent', '#bd4fb3');
-      style.setProperty('--color-text', '#d9cdff');
-      style.setProperty('--color-base00', '#0b021d');
-      style.setProperty('--color-base01', '#130332');
-      style.setProperty('--color-base02', '#250654');
-      style.setProperty('--color-base03', '#3f0a74');
-      style.setProperty('--loginpage-image', "url(https://www.hdwallpapers.in/download/macos_monterey_shapes_hd_macos-2560x1440.jpg)");
-      break;
-    case 'stalker':
-      style.setProperty('--color-accent', "#d6574e");
-      style.setProperty('--color-text', "#f8a99c");
-      style.setProperty('--color-base00', "#1a1311");
-      style.setProperty('--color-base01', "#371b19");
-      style.setProperty('--color-base02', "#5c1c1a");
-      style.setProperty('--color-base03', "#823530");
-      style.setProperty('--loginpage-image', "url(https://media.timeout.com/images/102945740/image.jpg)");
-      break;
-    case 'chocolate':
-      style.setProperty('--color-accent', '#cdbcb4');
-      style.setProperty('--color-text', '#dcdad0');
-      style.setProperty('--color-base00', '#20181c');
-      style.setProperty('--color-base01', '#2c2326');
-      style.setProperty('--color-base02', '#3b2e2e');
-      style.setProperty('--color-base03', '#4c3e3e');
-      style.setProperty('--loginpage-image', "url(https://www.hdwallpapers.in/download/wet_brown_leaves_hd_dark_aesthetic-HD.jpg)");
-      style.setProperty('--darken-background', 'rgba(0,0,0,0.3)');
-      break;
-    case 'fall':
-      style.setProperty('--color-accent', '#f8c791');
-      style.setProperty('--color-text', '#d3cbc3');
-      style.setProperty('--color-base00', '#231717');
-      style.setProperty('--color-base01', '#3b1c16');
-      style.setProperty('--color-base02', '#7b3f31');
-      style.setProperty('--color-base03', '#bf6f51');
-      style.setProperty('--loginpage-image', "url(https://wallpapercave.com/wp/wp7464660.jpg)");
-      style.setProperty('--darken-background', 'rgba(0,0,0,0.3)');
-      break;
-    case 'winter':
-      style.setProperty('--color-accent', '#8aadb6');
-      style.setProperty('--color-text', '#C2BAB2');
-      style.setProperty('--color-base00', '#071b2c');
-      style.setProperty('--color-base01', '#152f47');
-      style.setProperty('--color-base02', '#345f7f');
-      style.setProperty('--color-base03', '#5687b6');
-      style.setProperty('--loginpage-image', "url(https://th.bing.com/th/id/R.fd4990dbff7b2d998a61b5a60b6b1949?rik=TkC2r3hdP1Ma9g&pid=ImgRaw&r=0)");
-      break;
-    case 'birb':
-      style.setProperty('--color-accent', '#8590aacc');
-      style.setProperty('--color-text', '#a8a9ab');
-      style.setProperty('--color-base00', '#0c0c13');
-      style.setProperty('--color-base01', '#141519');
-      style.setProperty('--color-base02', '#1a1b1f');
-      style.setProperty('--color-base03', '#1f2024');
-      style.setProperty('--loginpage-image', "url(https://wallpapercave.com/wp/wp4673203.jpg)");
-      break;
-    case 'matcha':
-      style.setProperty('--color-accent', '#d1f8e7');
-      style.setProperty('--color-text', '#d1ebd2');
-      style.setProperty('--color-base00', '#243926');
-      style.setProperty('--color-base01', '#365138');
-      style.setProperty('--color-base02', '#456046');
-      style.setProperty('--color-base03', '#4f7a51');
-      style.setProperty('--loginpage-image', "url(https://wallpapercave.com/wp/wp9313069.jpg)");
-      style.setProperty('--darken-background', 'rgba(0,0,0,0.15)');
-      break;
-    case 'mountain':
-      style.setProperty('--color-accent', '#f8f8fa');
-      style.setProperty('--color-text', '#f8f8fa');
-      style.setProperty('--color-base00', '#121c28');
-      style.setProperty('--color-base01', '#23364e');
-      style.setProperty('--color-base02', '#52647c');
-      style.setProperty('--color-base03', '#8294ac');
-      style.setProperty('--loginpage-image', "url(https://hdqwalls.com/download/everest-3840x2160.jpg)");
-      style.setProperty('--darken-background', 'rgba(0,0,0,0.15)');
-      break;
-    case 'vax':
-      style.setProperty('--color-accent', '#492f29');
-      style.setProperty('--color-text', '#492f29');
-      style.setProperty('--color-base00', '#9c6544');
-      style.setProperty('--color-base01', '#9c6544');
-      style.setProperty('--color-base02', '#9c6544');
-      style.setProperty('--color-base03', '#9c6544');
-      style.setProperty('--loginpage-image', "url(https://wallpapers.com/images/hd/star-wars-place-ztno3exzqff0m0ci.webp)");
-      break;
-    case 'sand':
-      style.setProperty('--color-accent', '#8097c5');
-      style.setProperty('--color-text', '#c1a49c');
-      style.setProperty('--color-base00', '#2e2526');
-      style.setProperty('--color-base01', '#3d3434');
-      style.setProperty('--color-base02', '#544848');
-      style.setProperty('--color-base03', '#634f4e');
-      style.setProperty('--loginpage-image', "url(https://hdqwalls.com/wallpapers/macos-mojave-dusk-mode-stock-el.jpg)");
-      style.setProperty('--darken-background', 'rgba(0,0,0,0.15)');
-      break;
-    case 'galaxy':
-      style.setProperty('--color-accent', '#daa0ef');
-      style.setProperty('--color-text', '#f0f0f0');
-      style.setProperty('--color-base00', '#1e222c');
-      style.setProperty('--color-base01', '#2e3440');
-      style.setProperty('--color-base02', '#474e5f');
-      style.setProperty('--color-base03', '#5c667d');
-      style.setProperty('--loginpage-image', "url(https://i.redd.it/u80014ygsea51.png)");
-      style.setProperty('--darken-background', 'rgba(0,0,0,0.3)');
-      break;
-
-    // Add more cases for other profiles as needed
-    default:
-    // Handle default case or do nothing if no match found
+    let theme = themes[name];
+    if (!theme) {
+      return;
+    }
+    let style = document.documentElement.style;
+    let keys = Object.keys(theme);
+    for (let i = 0; i < keys.length; i++) {
+      style.setProperty(keys[i], theme[keys[i]]);
+    }
   }
-}
 apply()

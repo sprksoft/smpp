@@ -143,7 +143,7 @@ async function handleDMenu() {
         remove_quick_interactive();
         return;
       case "discord":
-        open_url("https://discord.gg/TCBgGxUP", shift);
+        open_url("https://discord.com/invite/qCHZYepDqZ", shift);
         return;
       case "clearsettings":
         clearsettings();

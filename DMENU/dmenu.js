@@ -356,6 +356,4 @@ function init_dmenu() {
   });
 
 }
-
-
 init_dmenu();
