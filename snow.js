@@ -1,11 +1,7 @@
-
 var enable_snow_mul = false;
-
 function set_snow_multiplier(on) {
   enable_snow_mul = on;
 }
-
-
 function set_snow_level(count) {
   let snow = document.getElementById("snowflakes");
   if (count > 3000) {
@@ -29,7 +25,5 @@ function set_snow_level(count) {
     flake.style = ` left: ${Math.floor(Math.random() * 100)}%; animation: snowflake_fall_${Math.floor(Math.random() * 3)} ${Math.floor(Math.random() * 7) + 10}s ease-in-out infinite; animation-delay: ${Math.floor(Math.random() * 40) - 40}s; width: ${Math.floor(Math.random() * 20) + 10}px;`;
     snow.appendChild(flake);
   }
-
   document.documentElement.appendChild(snow);
-
 }

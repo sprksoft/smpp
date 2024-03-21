@@ -1,6 +1,6 @@
 # important (easter eggs because nothing is really "important" anymore)
 - [ ] splashtext on login page
-- [ ] latte (delijn)
+- [x] latte (delijn)
 - [ ] some dmenu funny shortcuts
 - [x] snail++
 - [ ] more fun ideas
@@ -14,8 +14,6 @@
 
 # unfixable
 - adding nmbs
-- scores at first glance
-- checkboxes seem unfeasable
 
 # dmenu
 - [ ] lernovo
