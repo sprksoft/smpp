@@ -19,10 +19,12 @@ function changeLogoutText() {
   }
   return "Logout -->"
 }
-if (document.getElementsByClassName("js-btn-logout")[0]) {
+let logoutButton = document.getElementsByClassName("js-btn-logout")[0]
+let notifsText = document.getElementById("notifsToggleLabel")
+if (logoutButton) {
   logoutButton.innerHTML = changeLogoutText();
 }
-if (document.getElementById("notifsToggleLabel")) {
+if (notifsText) {
   notifsText.innerHTML = "Toon pop-ups";
 }
 function openFileSelector() {
@@ -168,7 +170,6 @@ function store() {
   if (profileSelectPrevious == "custom") {
     storeTheme();
   }
-
 
   let settingsData = {};
   const profileSelect = document.getElementById("profileSelector").value;
@@ -323,14 +324,30 @@ async function set_backgroundlink(background) {
 }
 
 function set_theme(name) {
-  let theme = themes[name];
-  if (!theme) {
-    return;
-  }
   let style = document.documentElement.style;
-  let keys = Object.keys(theme);
-  for (let i = 0; i < keys.length; i++) {
-    style.setProperty(keys[i], theme[keys[i]]);
+  console.log(name)
+  if (name == "custom") {
+    let themeData = JSON.parse(window.localStorage.getItem("themedata"))
+    if (themeData == null) {
+      themeData = default_theme;
+      window.localStorage.setItem("themedata", JSON.stringify(themeData));
+    }
+    style.setProperty('--color-accent', themeData.accent);
+    style.setProperty('--color-text', themeData.text);
+    style.setProperty('--color-base00', themeData.base0);
+    style.setProperty('--color-base01', themeData.base1);
+    style.setProperty('--color-base02', themeData.base2);
+    style.setProperty('--color-base03', themeData.base3);
+    style.setProperty('--loginpage-image', "url(https://wallpaperaccess.com/full/23.jpg)");
+  }else{
+    let theme = themes[name];
+    if (!theme) {
+      return;
+    }
+    let keys = Object.keys(theme);
+    for (let i = 0; i < keys.length; i++) {
+      style.setProperty(keys[i], theme[keys[i]]);
+    }
   }
 }
 apply()

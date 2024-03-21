@@ -17,26 +17,15 @@ const themes = {
       "--loginpage-image": "url(https://4kwallpapers.com/images/wallpapers/desert-doom-sand-dunes-dark-background-monochrome-landscape-2560x1080-6409.jpg)"
     },
     "white": {
-      "--color-accent": "#354760",
-      "--color-text": "#222630",
-      "--color-base00": "#f6f6f6",
-      "--color-base01": "#efeeec",
-      "--color-base02": "#e3e2e0",
-      "--color-base03": "#e9ecf4",
+      "--color-accent": "#3a4f6d",
+      "--color-text": "#1a1e28",
+      "--color-base00": "#eeebec",
+      "--color-base01": "#e0dedf",
+      "--color-base02": "#d2cfd0",
+      "--color-base03": "#7b93b4",
       "--color-homepage-sidebars-bg": "#02020540",
       "--loginpage-image": "url(https://wallpaperaccess.com/full/1474688.jpg)",
       "--darken-background": "rgba(0,0,0,0.1)"
-    },
-    "custom": {
-      "themeData": {
-        "accent": "#8f8f95",
-        "text": "#C2BAB2",
-        "base0": "#191817",
-        "base1": "#232020",
-        "base2": "#3f3c3b",
-        "base3": "#5b5756"
-      },
-      "--loginpage-image": "url(https://wallpaperaccess.com/full/23.jpg)"
     },
     "ldev": {
       "--color-accent": "#ffd5a0",
@@ -96,10 +85,10 @@ const themes = {
     "birb": {
       "--color-accent": "#8590aacc",
       "--color-text": "#a8a9ab",
-      "--color-base00": "#0c0c13",
-      "--color-base01": "#141519",
-      "--color-base02": "#1a1b1f",
-      "--color-base03": "#1f2024",
+      "--color-base00": "#0e0e15",
+      "--color-base01": "#16171b",
+      "--color-base02": "#1c1d21",
+      "--color-base03": "#30323a",
       "--loginpage-image": "url(https://wallpapercave.com/wp/wp4673203.jpg)"
     },
     "matcha": {
