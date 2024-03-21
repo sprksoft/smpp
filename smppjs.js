@@ -1,12 +1,9 @@
 //java script komt hier je weet wel
 //ok - ldev
 //oke logis - andere ldev
-
 const default_theme = {
   base0: "#38313a", base1: "#826882", base2: "#ac85b7", base3: "#c78af0", accent: "#a3a2ec", text: "#ede3e3"
 }
-
-
 function unbloat() {
   document.body.innerHTML = '';
 }
@@ -22,15 +19,12 @@ function changeLogoutText() {
   }
   return "Logout -->"
 }
-var logoutButton = document.getElementsByClassName("js-btn-logout")[0]
-var notifsText = document.getElementById("notifsToggleLabel")
-if (logoutButton) {
+if (document.getElementsByClassName("js-btn-logout")[0]) {
   logoutButton.innerHTML = changeLogoutText();
 }
-if (notifsText) {
+if (document.getElementById("notifsToggleLabel")) {
   notifsText.innerHTML = "Toon pop-ups";
 }
-
 function openFileSelector() {
   document.getElementById('fileInput').click();
 }
@@ -47,6 +41,7 @@ function fileToBase64(file) {
   });
 }
 async function apply() {
+  let style = document.documentElement.style;
   let settingsData = get_config();
 
   const colorpickers = document.getElementById("colorpickers");
@@ -85,7 +80,15 @@ async function apply() {
     messageButton.innerHTML = messageSvg
     messageButton.appendChild(textSpan);
   }
-
+  let login_app_left = document.querySelector('.login-app__left');
+  if (login_app_left != undefined) {
+    login_app_left.innerHTML = ' ';
+    document.getElementsByClassName('login-app__platform-indicator')[0].innerHTML = '<h1 class="logintitle">Smartschool ++</h1>';
+    document.getElementsByClassName('login-app__title--separator')[0].innerHTML = `<h4 class="white_text_button" id="showmore">More</h4>`;
+    document.getElementsByClassName('login-app__title--separator')[0].innerHTML = `<button type="button" class="white_text_button" id="showmore">More</button>`;
+    document.getElementById('showmore').addEventListener('click', showmore)
+    function showmore() { style.setProperty('--show-options', 'flex'); document.getElementById("showmore").style.display = "none" }
+  }
   window.addEventListener('load', async function () {
     if (show_scores) {
       var currentUrl = window.location.href;
@@ -104,7 +107,6 @@ async function apply() {
   if (colorpickers != undefined && profileSelect != "custom") {
     colorpickers.innerHTML = ``
   }
-  let style = document.documentElement.style;
   let bigblurvalue = blurvalue * 2;
   const rightContainer = document.getElementById('rightcontainer');
   const centralContainer = document.getElementById('centercontainer')
@@ -161,35 +163,17 @@ function storeTheme() {
 }
 
 function store() {
-  const previousData = get_config();
-  const profileSelectPrevious = previousData.profile;
-
-  if (profileSelectPrevious === "custom") {
+  let previousData = get_config();
+  profileSelectPrevious = previousData.profile;
+  if (profileSelectPrevious == "custom") {
     storeTheme();
   }
 
-  const settingsData = gatherSettingsData(previousData);
 
-  if (settingsData.shownews && !previousData.shownews) {
-    window.location.reload();
-  }
-
-  if (settingsData.backgroundFile) {
-    handleBackgroundFile(settingsData);
-  } else {
-    settingsData.backgroundfile = previousData.backgroundfile;
-    set_config(settingsData);
-    if (settingsData.profile === "custom") {
-      loadCustomTheme();
-    }
-    apply();
-  }
-}
-
-function gatherSettingsData(previousData) {
+  let settingsData = {};
   const profileSelect = document.getElementById("profileSelector").value;
-  const backgroundFile = document.getElementById("fileInput").files[0];
-  const backgroundLink = document.getElementById("backgroundlink").value;
+  let backgroundFile = document.getElementById("fileInput").files[0];
+  const backgroundLink = document.getElementById("backgroundlink").value
   const halte = document.getElementById("halt").checked;
   const overwrite_theme = document.getElementById("backgroundSlider").value;
   const loc = document.getElementById("location").value;
@@ -197,44 +181,57 @@ function gatherSettingsData(previousData) {
   const snowSlider = document.getElementById('snowSlider').value;
   const shownews = document.getElementById("shownewselement").checked;
   const showsnake = document.getElementById('showsnakeelement').checked;
-  return {
-    profile: profileSelect,
-    halte: halte,
-    overwrite_theme: overwrite_theme,
-    location: loc.charAt(0).toUpperCase() + loc.slice(1),
-    backgroundFile: backgroundFile,
-    backgroundlink: backgroundLink,
-    blur: slider,
-    snow: parseInt(snowSlider),
-    shownews: shownews,
-    showsnake: showsnake,
-    show_scores: previousData.show_scores || false
-  };
-}
 
-function handleBackgroundFile(settingsData) {
-  const backgroundFile = settingsData.backgroundFile;
-  fileToBase64(backgroundFile)
-    .then(base64Image => {
-      settingsData.backgroundfile = base64Image;
-      window.localStorage.setItem("settingsdata", JSON.stringify(settingsData));
-      if (settingsData.profile === "custom") {
-        loadCustomTheme();
-      }
-      if (base64Image.length < 1500000) {
-        document.getElementById("errormessagesmpp").innerHTML = ``;
-      }
-      apply();
-    })
-    .catch(error => {
-      if (error instanceof DOMException && error.name === 'QuotaExceededError') {
-        handleQuotaExceededError();
-      } else {
-        console.error('An error occurred:', error);
-      }
-      apply();
-    });
-}
+  settingsData.profile = profileSelect;
+  settingsData.halte = halte;
+  settingsData.overwrite_theme = overwrite_theme;
+  settingsData.location = loc.charAt(0).toUpperCase() + loc.slice(1);
+  settingsData.backgroundfile = backgroundFile
+  settingsData.backgroundlink = backgroundLink
+  settingsData.blur = slider;
+  settingsData.snow = parseInt(snowSlider);
+  settingsData.shownews = shownews;
+  settingsData.showsnake = showsnake;
+  settingsData.show_scores = previousData.show_scores;
+  console.log(settingsData)
+  if (settingsData.show_scores == undefined) {
+    settingsData.show_scores = false;
+  }
+  if (shownews && !previousData.shownews) {
+    window.location.reload();
+  }
+  if (backgroundFile){
+    fileToBase64(backgroundFile)
+      .then(base64Image => {
+        settingsData.backgroundfile = base64Image;
+        window.localStorage.setItem("settingsdata", JSON.stringify(settingsData));
+        if (profileSelect == "custom") {
+          loadCustomTheme();
+        }
+        if (base64Image.length < 1500000) {
+          document.getElementById("errormessagesmpp").innerHTML = ``
+
+        }
+        apply();
+      })
+      .catch(error => {
+        if (error instanceof DOMException && error.name === 'QuotaExceededError') {
+          handleQuotaExceededError();
+        } else {
+          console.error('An error occurred:', error);
+        }
+        apply()
+      });
+  } else {
+    settingsData.backgroundfile = previousData.backgroundfile
+    set_config(settingsData)
+    if (profileSelect == "custom") {
+      loadCustomTheme();
+    }
+    apply();
+  }
+};
+
 
 function handleQuotaExceededError() {
   document.getElementById("errormessagesmpp").innerHTML = `
@@ -261,16 +258,28 @@ function loadCustomTheme() {
   loadCustomThemeData()
 }
 function load() {
-  const settingsData = JSON.parse(window.localStorage.getItem("settingsdata"));
-  Object.entries(settingsInputElements).forEach(([elementId, dataKey]) => {
-    const element = document.getElementById(elementId);
-    if (element) {
-      element.value = settingsData[dataKey];
-      if (elementId === "profileSelector" && element.value === "custom") {
-        loadCustomTheme();
-      }
-    }
-  });
+  let settingsData = JSON.parse(window.localStorage.getItem("settingsdata"));
+  const profileSelect = document.getElementById("profileSelector");
+  const backgroundLink = document.getElementById("backgroundlink");
+  const halte = document.getElementById("halt");
+  const overwrite_theme = document.getElementById("backgroundSlider");
+  const loc = document.getElementById("location");
+  const blur = document.getElementById('mySlider');
+  const snowSlider = document.getElementById('snowSlider');
+  const shownews = document.getElementById("shownewselement");
+  const showsnake = document.getElementById("showsnakeelement");
+  profileSelect.value = settingsData.profile
+  halte.checked = settingsData.halte
+  overwrite_theme.value = settingsData.overwrite_theme
+  backgroundLink.value = settingsData.backgroundlink
+  loc.value = settingsData.location
+  blur.value = settingsData.blur
+  snowSlider.value = settingsData.snow
+  shownews.checked = settingsData.shownews
+  showsnake.checked = settingsData.showsnake
+  if (profileSelect.value == "custom") {
+    loadCustomTheme()
+  }
 }
 
 popup = document.getElementById("searchMenu");
