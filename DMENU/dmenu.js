@@ -1,6 +1,5 @@
 const dmenu_config_template = {
   centered: { type: "bool", default_value: true },
-  flip_shift_key: { type: "bool", default_value: true },
   item_score: { type: "bool", default_value: false },
   exit_on_focusout: { type: "bool", default_value: false }
 }
@@ -137,9 +136,6 @@ function dmenu_accept(shift = false) {
   dmenu_close();
   if (end_func != undefined && command !== "") {
     let dconfig = get_dconfig();
-    if (dconfig.flip_shift_key) {
-      shift = !shift;
-    }
     end_func(command, shift);
   }
 }
