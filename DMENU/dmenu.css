@@ -55,6 +55,9 @@ html {
   padding: var(--dmenu-margin);
   border-right: var(--border-size) solid var(--color-base02);
 }
+.dmenu-label:hover{
+  cursor: auto !important;
+}
 
 #dmenu .autocomplete {
   overflow-y: auto;
