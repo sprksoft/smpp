@@ -10,7 +10,7 @@ function quick_cmd_list(){
 }
 
 function add_quick(name, url) {
-  let quick = { name: name, url: url };
+  let quick = { name: name.toLowerCase(), url: url };
   for (let i = 0; i < quicks.length; i++) {
     if (quicks[i].name == name){
       quicks[i] = quick
@@ -71,6 +71,19 @@ function remove_quick_interactive() {
   }, "name:")
 }
 
+let goto_items = get_data("goto_menu", ".js-shortcuts-container > a", function (el, data) {
+  const name = el.innerText.toLowerCase().trim();
+  data.push({value: name, meta:"goto", url: el.href})
+});
+
+let vakken = {};
+get_data_bg("vakken", ".course-list > li > a", function (el, data) {
+  const name = el.getElementsByClassName("course-link__name")[0].innerText.toLowerCase().trim();
+  data.push({value: name, meta:"vak", url: el.href})
+}, function (data) {
+  vakken = data;
+});
+
 
 //TODO: make this better
 function config_menu() {
@@ -90,7 +103,7 @@ async function fetch_links() {
   if (responce.ok){
     let response_data = await responce.json();
     for (let i = 0; i < response_data.length; i++) {
-      links.push({value: response_data[i].name.toLowerCase(), meta: "link: "+response_data[i].url});
+      links.push({value: response_data[i].name.toLowerCase(), meta: "link"});
     }
   }else{
     links=undefined;
@@ -100,10 +113,16 @@ async function fetch_links() {
 
 async function handleDMenu() {
   if (links == undefined){
-    await fetch_links();
+    fetch_links();
   }
-
-  let cmd_list =quick_cmd_list().concat(links.concat(Object.keys(vakken).concat(Object.keys(goto_items).concat(["dmenu config", "quick add", "quick remove", "config", "toggle fancy scores", "lock dmenu", "unbloat", "clearsettings", "discord"]))));
+  
+  let cmd_list = quick_cmd_list().concat(links.concat(["dmenu config", "quick add", "quick remove", "config", "toggle fancy scores", "lock dmenu", "unbloat", "clearsettings", "discord"]));
+  if (goto_items != undefined){
+    cmd_list = cmd_list.concat(goto_items);
+  }
+  if (vakken != undefined){
+    cmd_list = cmd_list.concat(vakken);
+  }
 
   dmenu(cmd_list, function (cmd, shift) {
     switch (cmd) {
@@ -154,23 +173,25 @@ async function handleDMenu() {
     for (let i = 0; i < quicks.length; i++) {
       const quick = quicks[i];
       if (quick.name == cmd) {
-        open_url(quick.url, shift);
+        open_url(quick.url, true);
         return;
       }
     }
-
-    let got_url = goto_items[cmd]
-    if (got_url != null) {
-      open_url(got_url, shift);
-      return;
+    for (let i = 0; i < links.length; i++) {
+      if (links[i].value == cmd){
+        open_url(links[i].url, true);
+      }
     }
-    let vakken_url = vakken[cmd];
-    if (vakken_url != null) {
-      open_url(vakken_url, shift);
-      return;
+    for (let i = 0; i < goto_items.length; i++) {
+      if (goto_items[i].value == cmd){
+        open_url(goto_items[i].url, shift);
+      }
     }
-
-
+    for (let i = 0; i < vakken.length; i++) {
+      if (vakken[i].value == cmd){
+        open_url(vakken[i].url, shift);
+      }
+    }
 
   }, "quick:");
 }

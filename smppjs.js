@@ -31,18 +31,6 @@ if (notifsText) {
   notifsText.innerHTML = "Toon pop-ups";
 }
 
-let goto_items = get_data("goto_menu", ".js-shortcuts-container > a", function (el, data) {
-  const name = el.innerText.toLowerCase().trim();
-  data[name] = el.href;
-});
-
-let vakken = {};
-get_data_bg("vakken", ".course-list > li > a", function (el, data) {
-  const name = el.getElementsByClassName("course-link__name")[0].innerText.toLowerCase().trim();
-  data[name] = el.href;
-}, function (data) {
-  vakken = data;
-});
 function openFileSelector() {
   document.getElementById('fileInput').click();
 }
