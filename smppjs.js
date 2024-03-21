@@ -6,6 +6,7 @@ const default_theme = {
   base0: "#38313a", base1: "#826882", base2: "#ac85b7", base3: "#c78af0", accent: "#a3a2ec", text: "#ede3e3"
 }
 
+
 function unbloat() {
   document.body.innerHTML = '';
 }
