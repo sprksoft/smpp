@@ -1,15 +1,74 @@
-var quicks = [{ name: "onshape", url: "https://onshape.com/" }, { name: "classroom", url: "https://classroom.google.com" }];
+let quicks = quick_load();
+let links=undefined;
+
+function quick_cmd_list(){
+  let cmd_list=[]
+  for (let i = 0; i < quicks.length; i++) {
+    cmd_list.push({value: quicks[i].name, meta: "quick: "+quicks[i].url})
+  }
+  return cmd_list;
+}
 
 function add_quick(name, url) {
-  quicks.push({ name: name, url: url });
+  let quick = { name: name, url: url };
+  for (let i = 0; i < quicks.length; i++) {
+    if (quicks[i].name == name){
+      quicks[i] = quick
+      quick_save();
+      return;
+    }
+  }
+  quicks.push(quick);
+  quick_save();
 }
 function remove_quick(name) {
   for (let i = 0; i < quicks.length; i++) {
     if (quicks[i].name == name) {
-      quicks.removeAt(i);
+      quicks.splice(i, 1);
+      quick_save();
       return;
     }
   }
+}
+
+function quick_load(){
+  let quicks = window.localStorage.getItem("quicks");
+  if (quicks == undefined){
+    return []
+  }
+  quicks = JSON.parse(quicks);
+  if (quicks == undefined){
+    return []
+  }
+  return quicks
+}
+
+function quick_save(){
+  window.localStorage.setItem("quicks", JSON.stringify(quicks));
+}
+
+function add_quick_interactive(){
+  let cmd_list = quick_cmd_list();
+  dmenu(cmd_list, function(name, shift){
+    value_list=[]
+    for (let i = 0; i < quicks.length; i++) {
+      if (quicks[i].name == name){
+        value_list = [{value: quicks[i].url}]
+          break;
+      }
+    }
+    dmenu(value_list, function(value, shift){
+      add_quick(name, value);
+    }, "value:")
+  }, "name:");
+
+}
+
+function remove_quick_interactive() {
+  let cmd_list = quick_cmd_list();
+  dmenu(cmd_list, function(name, shift) {
+    remove_quick(name);
+  }, "name:")
 }
 
 
@@ -24,11 +83,27 @@ function config_menu() {
     }, "value:")
   }, "config: ");
 }
-function handleDMenu() {
-  let cmd_list = Object.keys(vakken).concat(Object.keys(goto_items).concat(["dmenu config", "config", "toggle fancy scores", "set theme v2", "lock dmenu", "unbloat", "clearsettings", "discord"]));
-  for (let i = 0; i < quicks.length; i++) {
-    cmd_list.push({ value: quicks[i].name, meta: quicks[i].url });
+
+async function fetch_links() {
+  links = []
+  let responce = await fetch("/links/api/v1/")
+  if (responce.ok){
+    let response_data = await responce.json();
+    for (let i = 0; i < response_data.length; i++) {
+      links.push({value: response_data[i].name.toLowerCase(), meta: "link: "+response_data[i].url});
+    }
+  }else{
+    links=undefined;
   }
+}
+
+
+async function handleDMenu() {
+  if (links == undefined){
+    await fetch_links();
+  }
+
+  let cmd_list =quick_cmd_list().concat(links.concat(Object.keys(vakken).concat(Object.keys(goto_items).concat(["dmenu config", "quick add", "quick remove", "config", "toggle fancy scores", "lock dmenu", "unbloat", "clearsettings", "discord"]))));
 
   dmenu(cmd_list, function (cmd, shift) {
     switch (cmd) {
@@ -60,6 +135,12 @@ function handleDMenu() {
         return;
       case "dmenu config":
         dconfig_menu();
+        return;
+      case "quick add":
+        add_quick_interactive();
+        return;
+      case "quick remove":
+        remove_quick_interactive();
         return;
       case "discord":
         open_url("https://discord.gg/TCBgGxUP", shift);
