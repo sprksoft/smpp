@@ -234,7 +234,13 @@ const popupsettingHTML = `<head>
 <span class="slider round"></span>
 </label>
 <h3 class="popuptitles">Location (weather):</h3>
+<div class="textandbutton">
 <input class="popupinput" id="location" type="text"></input>
+<label class="switch">
+<input class="popupinput" type="checkbox" id="isbig">
+<span class="slider round"></span>
+</label>
+</div>
 <h3 class="popuptitles">Custom wallpaper (optional):</h3>
 <div class="textandbutton">
   <div class="verticaltext"><p class="nobottommargp off_text">Off</p><p class="nobottommargp link_text">Link</p><p class="nobottommargp">File</p></div>

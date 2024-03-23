@@ -9,7 +9,8 @@ const default_settings = {
   showsnake: false,
   backgroundlink: "none",
   backgroundfile: "none",
-  show_scores: false
+  show_scores: false,
+  isbig: true
 };
 link_element = document.querySelector('link[rel="icon"]')
 if (link_element) {

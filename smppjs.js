@@ -59,6 +59,7 @@ async function apply() {
   const shownews = settingsData.shownews;
   const showsnake = settingsData.showsnake;
   var show_scores = settingsData.show_scores;
+  var IsBig = settingsData.isbig;
   set_theme("default");
   set_theme(profileSelect);
 
@@ -128,7 +129,7 @@ async function apply() {
     discordpopup()
     rightContainer.innerHTML = ""
     if (loc != "") {
-      await set_weather_loc(loc);
+      await set_weather_loc(loc, IsBig);
     }
     if (showsnake) {
       startSnakeGame()
@@ -182,7 +183,7 @@ function store() {
   const snowSlider = document.getElementById('snowSlider').value;
   const shownews = document.getElementById("shownewselement").checked;
   const showsnake = document.getElementById('showsnakeelement').checked;
-
+  const isbig = document.getElementById("isbig").checked;
   settingsData.profile = profileSelect;
   settingsData.halte = halte;
   settingsData.overwrite_theme = overwrite_theme;
@@ -194,6 +195,7 @@ function store() {
   settingsData.shownews = shownews;
   settingsData.showsnake = showsnake;
   settingsData.show_scores = previousData.show_scores;
+  settingsData.isbig = isbig;
   console.log(settingsData)
   if (settingsData.show_scores == undefined) {
     settingsData.show_scores = false;
@@ -269,6 +271,7 @@ function load() {
   const snowSlider = document.getElementById('snowSlider');
   const shownews = document.getElementById("shownewselement");
   const showsnake = document.getElementById("showsnakeelement");
+  const isbig = document.getElementById("isbig");
   profileSelect.value = settingsData.profile
   halte.checked = settingsData.halte
   overwrite_theme.value = settingsData.overwrite_theme
@@ -278,6 +281,7 @@ function load() {
   snowSlider.value = settingsData.snow
   shownews.checked = settingsData.shownews
   showsnake.checked = settingsData.showsnake
+  isbig.checked = settingsData.isbig
   if (profileSelect.value == "custom") {
     loadCustomTheme()
   }

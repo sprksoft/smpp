@@ -11,7 +11,7 @@ async function getWeatherByCity(city) {
   }
 }
 
-async function updateWeatherDiv(weatherData) {
+async function updateWeatherDiv(weatherData,IsBig) {
   if (!weatherData) {
     return;
   }
@@ -31,7 +31,12 @@ async function updateWeatherDiv(weatherData) {
 
   difference = Math.round(difference)
     try {
-    weatherdiv.innerHTML = weatherHTMLTiny
+      if (IsBig){
+        weatherdiv.innerHTML = weatherHTML
+      }else(
+        weatherdiv.innerHTML = weatherHTMLTiny
+      )
+
     weatherdiv.querySelector(".weather-location").innerText = name;
     weatherdiv.querySelector(".weather-main").innerText = mainWeather;
     weatherdiv.querySelector(".weather-temperature").innerText = temperature + "°C";
@@ -83,7 +88,7 @@ async function updateWeatherDiv(weatherData) {
   rightContainer.appendChild(weatherdiv);
 }
 
-async function set_weather_loc(loc) {
+async function set_weather_loc(loc,IsBig) {
   const currentdate = new Date();
   if (window.localStorage.getItem("lastupdate") == undefined) {
     window.localStorage.setItem("lastupdate", currentdate)
@@ -98,10 +103,10 @@ async function set_weather_loc(loc) {
     if (weatherData == undefined) {
       return;
     }
-    updateWeatherDiv(weatherData);
+    updateWeatherDiv(weatherData, IsBig);
     window.localStorage.setItem("weatherdata", JSON.stringify(weatherData))
   } else {
     let weatherData = JSON.parse(window.localStorage.getItem("weatherdata"));
-    updateWeatherDiv(weatherData);
+    updateWeatherDiv(weatherData, IsBig);
 }
 }
