@@ -31,7 +31,7 @@ async function updateWeatherDiv(weatherData) {
 
   difference = Math.round(difference)
     try {
-    weatherdiv.innerHTML = weatherHTML
+    weatherdiv.innerHTML = weatherHTMLTiny
     weatherdiv.querySelector(".weather-location").innerText = name;
     weatherdiv.querySelector(".weather-main").innerText = mainWeather;
     weatherdiv.querySelector(".weather-temperature").innerText = temperature + "°C";

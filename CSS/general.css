@@ -573,7 +573,6 @@ input:checked+.slider:before {
   margin-top: 0px !important;
 }
 
-/*Settings menu*/
 #searchMenu {
   left: -73px !important;
   background-color: var(--color-settings-bg) !important;
@@ -584,6 +583,7 @@ input:checked+.slider:before {
   flex-direction: column !important;
   justify-content: center !important;
   max-width: 240px !important;
+  animation: flyInFromTop 0.15s ease forwards;
 }
 
 .textandbutton {
@@ -1056,4 +1056,19 @@ span.js-badge-notifs.topnav__badge,span.js-badge-msg.topnav__badge{
 }
 button.js-btn-notifs.topnav__btn:hover,a.js-btn-messages.topnav__btn:hover{
   text-decoration: none !important;
+}
+
+@keyframes flyInFromTop {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+#shortcutsMenu,#coursesMenu,#linksMenu,#notifsMenu {
+  animation: flyInFromTop 0.15s ease forwards;
 }
