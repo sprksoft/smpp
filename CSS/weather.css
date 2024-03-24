@@ -18,7 +18,7 @@
 
 .weather-temperatureBig {
   font-size: 45px;
-  margin-bottom: 5px;
+  margin-bottom: 0px !important;
   font-weight: lighter;
 }
 
@@ -31,7 +31,9 @@
   margin-bottom: 5px;
 
 }
-
+.weather-feelslikeBig{
+  margin-bottom: 0px !important;
+}
 .weather-humwindBig {
   display: flex !important;
   align-items: center !important;
@@ -48,14 +50,16 @@
   font-weight: bold;
   color: var(--color-accent);
 }
-
+.weather-windBig{
+  margin-bottom: 4px !important;
+}
 .colBig img {
   width: 50px;
   margin-right: 2px;
 }
 
 .weather-humidityBig {
-  margin-top: 5px !important;
+  margin-top: 10px !important;
 }
 
 .weather-lastupdateBig {

@@ -407,3 +407,9 @@ button.icon-label-btn.js-icon-label-btn.icon-label-btn--linkbutton:hover {
 .twinbutton__button {
   transition: none !important;
 }
+.planner-element{
+border: 2px solid var(--color-base02) !important;
+border-radius: 10px !important;
+padding: 10px !important;
+margin-bottom: 15px;
+}

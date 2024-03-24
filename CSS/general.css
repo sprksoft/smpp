@@ -824,10 +824,6 @@ label.form__label.js-form-label.label__resolvedStatus.form__label--no-margin-top
   stroke: var(--color-accent) !important;
 }
 
-div [style*="margin"] {
-  color: var(--color-text) !important;
-}
-
 .stroke1 {
   stroke: var(--color-accent) !important;
 }

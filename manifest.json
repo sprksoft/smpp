@@ -38,7 +38,8 @@
 				"CSS/results.css",
 				"CSS/startpage.css",
 				"CSS/delijn.css",
-				"CSS/agenda.css"
+				"CSS/agenda.css",
+				"CSS/root.css"
 			],
 			"js": [
 				"config.js",
@@ -53,6 +54,7 @@
 				"weather.js",
 				"delijn.js",
 				"snow.js",
+				"planner.js",
 				"smppjs.js"
 			]
 		}

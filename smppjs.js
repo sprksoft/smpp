@@ -137,9 +137,9 @@ async function apply() {
 
     if (halte) {
       decodehalte()
-      document.getElementById("leftcontainer").style.display = "inline"
+      
     } else {
-      document.getElementById("leftcontainer").style.display = "none"
+      ShowPlanner()
     }
     if (!shownews) {
       centralContainer.innerHTML = ' '
