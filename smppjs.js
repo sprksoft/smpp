@@ -153,6 +153,11 @@ async function apply() {
   set_snow_level(snow);
 }
 
+
+if (document.querySelector('[data-go=""]')) {
+  document.querySelector('[data-go=""]').remove();
+}
+
 function storeTheme() {
   const themeData = {
     base0: document.getElementById("colorPicker1").value,
