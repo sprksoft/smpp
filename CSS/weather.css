@@ -35,21 +35,12 @@
   margin-bottom: 0px !important;
 }
 .weather-humwindBig {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-
-  margin-top: 5x;
-}
-
-.colBig {
   display: flex;
-  align-items: center !important;
-  text-align: left;
-  font-size: 12px;
-  font-weight: bold;
-  color: var(--color-accent);
+  justify-content: space-between; /* Verdeel de items gelijkmatig langs de hoofdas */
+  align-items: center; /* Centreer de items verticaal */
+  flex-wrap: wrap; /* Als de items niet op één rij passen, laat ze dan omlaag gaan */
 }
+
 .weather-windBig{
   margin-bottom: 4px !important;
 }
