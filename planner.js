@@ -4,7 +4,7 @@ async function fetchPlannerData(date, user){
         var currentUrl = window.location.href;
         school_name = currentUrl.split("/")[2]
         const url = `https://${school_name}/planner/api/v1/planned-elements/user/${user}?from=${date}&to=${date}`;
-        console.log(`https://${school_name}/planner/api/v1/planned-elements/user/${user}?from=${date}&to=${date}`)
+        console.log(url)
         const response = await fetch(url);
         if (!response.ok) {
             throw new Error(`Failed to fetch planner data`);
@@ -16,35 +16,41 @@ async function fetchPlannerData(date, user){
         return null;
     }
 }
+
 const calculateElementHeight = (startTime, endTime) => {
     const durationInSeconds = (endTime - startTime) / 1000;
     const durationInMinutes = durationInSeconds / 60;
     return durationInMinutes * pixelsPerMinute;
 };
-async function getDateInCorrectFormat() {
+async function getDateInCorrectFormat(isFancyFormat) {
     let currentDate = new Date();
     if (currentDate.getDay() === 5 && currentDate.getHours() >= 18) {
         currentDate.setDate(currentDate.getDate() + 3); // Set date to upcoming Monday
     } else if (currentDate.getDay() === 6 || currentDate.getDay() === 0) {
         currentDate.setDate(currentDate.getDate() + (8 - currentDate.getDay())); // Set date to upcoming Monday
     }
+    if (isFancyFormat) {
     let day = currentDate.getDate().toString().padStart(2, '0');
     let month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
     let year = currentDate.getFullYear();
-
-    return `${day}-${month}-${year}`;
+    return `${year}-${month}-${day}`;
+    }else{
+        currentDate.setHours(7);
+currentDate.setMinutes(30);
+        console.log(currentDate)
+        return currentDate 
+    }
 }
 
 async function ShowPlanner() {
-    const container = document.getElementById('leftcontainer');
+    var container = document.getElementById('leftcontainer');
+    var beginTime = await getDateInCorrectFormat(false)
     container.innerHTML = ''; 
+    container = container.appendChild(document.createElement('div'));
+    container.classList.add('planner-container');
     if (document.getElementById('datePickerMenu')) {
-        // Get the value of the "plannerurl" attribute
         var plannerUrl = document.getElementById('datePickerMenu').getAttribute('plannerurl');
-    
-        // Check if plannerUrl is not null
         if (plannerUrl) {
-            // Output the plannerUrl
             console.log("Planner URL:", plannerUrl);
         } else {
             console.error("Attribute 'plannerurl' not found in the element.");
@@ -53,7 +59,8 @@ async function ShowPlanner() {
         console.error("Element with id 'datePickerMenu' not found.");
     }
     plannerUrl = plannerUrl.split("/")
-    var data = await fetchPlannerData(await getDateInCorrectFormat(),plannerUrl[4]);
+    var data = await fetchPlannerData(await getDateInCorrectFormat(true),plannerUrl[4])
+
     console.log(data)
     if (!data || data.length === 0) {
         document.getElementById('leftcontainer').innerHTML = 'No planner data available.';
@@ -63,7 +70,7 @@ async function ShowPlanner() {
     data.sort((a, b) => {
         return new Date(a.period.dateTimeFrom) - new Date(b.period.dateTimeFrom);
     });
-
+    await getDateInCorrectFormat(false)
     data.forEach((element, index, array) => {
         const plannerElement = document.createElement('div');
         plannerElement.classList.add('planner-element'); 
@@ -85,11 +92,13 @@ async function ShowPlanner() {
         timeElement.textContent = `${dateTimeFrom.toLocaleTimeString()} - ${dateTimeTo.toLocaleTimeString()}`;
         plannerElement.appendChild(timeElement);
 
-        // Calculate height of the planner element
         const height = calculateElementHeight(dateTimeFrom, dateTimeTo);
         plannerElement.style.height = `${height}px`;
+        const top = calculateElementHeight(beginTime,dateTimeFrom);
+        console.log(beginTime)
+        console.log(top)
+        plannerElement.style.top = `${top}px`;
 
-        // Calculate bottom margin for the planner element
         if (index < array.length - 1) {
             const nextStartTime = new Date(array[index + 1].period.dateTimeFrom);
             const marginBottom = (nextStartTime - dateTimeTo) / 60000;
@@ -99,10 +108,7 @@ async function ShowPlanner() {
             }else{
                 plannerElement.style.marginBottom = `${marginBottomPixels}px`;
             }
-
-
         }
-
         container.appendChild(plannerElement);
     });
 }
