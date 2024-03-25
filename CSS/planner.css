@@ -416,8 +416,10 @@ position: absolute;
 overflow: hidden;
 font-size: .833rem;
 min-height: 23px;
+margin: 1px !important;
 }
 .planner-container{
   display: flex !important;
-  max-width: 252px !important;
+  max-width: 280px !important;
+  position: relative !important;
 }

@@ -68,12 +68,16 @@ async function getDateInCorrectFormat(isFancyFormat) {
 }
 
 async function ShowPlanner() {
+    const plannerContainer = document.createElement('div');
+    plannerContainer.classList.add('planner-container');
+    
     const container = document.getElementById('leftcontainer');
     container.innerHTML = ''; 
+    container.appendChild(plannerContainer);
     const plannerUrl = document.getElementById('datePickerMenu').getAttribute('plannerurl');
     const data = await fetchPlannerData(await getDateInCorrectFormat(true), plannerUrl.split("/")[4]);
     if (!data || data.length === 0) {
-        document.getElementById('leftcontainer').innerHTML = 'No planner data available.';
+        plannerContainer.innerHTML = 'No planner data available.';
         return;
     }
 
@@ -146,7 +150,7 @@ async function ShowPlanner() {
             }
 
             plannerElement.style.width = `${elementWidthPercentage}%`;
-            container.appendChild(plannerElement);
+            plannerContainer.appendChild(plannerElement);
         });
     });
 }
