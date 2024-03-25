@@ -307,7 +307,7 @@ const weatherHTML = `<div class="weatherdiv">
 	</svg>
 
 	<div class="weather-humwind weather-humwindBig">
-		<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" height="65px" width="65px" data-name="Laag 2" viewBox="0 0 39.94 24.5">
+		<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" height="80px" width="80px" data-name="Laag 2" viewBox="0 0 39.94 24.5">
 		  <defs>
 			<style>
 			  .cls-1 {
@@ -351,8 +351,8 @@ const weatherHTML = `<div class="weatherdiv">
   <p class="weather-humidity weather-humidityBig"></p>
 
 	<p class="weather-wind weather-windBig"></p>
-
 	<p class="weather-feelslike weather-feelslikeBig"></p>
+
   <p class="weather-lastupdate weather-lastupdateBig"></p>
 	</div>
 	

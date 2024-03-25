@@ -2,11 +2,11 @@
 .weatherdiv {
   background-color: var(--color-base01);
   padding: 20px;
-  border-radius: 15px;
+  border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   text-align: center;
-  max-width: 400px;
-  margin: 9px;
+  max-width: 300px;
+  margin: 2px;
   border: 3px solid var(--color-base03);
 }
 
@@ -20,10 +20,13 @@
   font-size: 45px;
   margin-bottom: 0px !important;
   font-weight: lighter;
+  margin-top: -30px !important;
 }
-
+#weather-icon-clear{
+  margin-top: -40px !important;
+}
 .weather-mainBig {
-  font-weight: bold;
+  margin-top: -20px !important;
 }
 
 .weather-descriptionBig {
@@ -33,6 +36,10 @@
 }
 .weather-feelslikeBig{
   margin-bottom: 0px !important;
+  margin-right: -175px !important;
+}
+.weather-feelslike{
+  margin-top: -34px !important;
 }
 .weather-humwindBig {
   display: flex;
@@ -42,7 +49,7 @@
 }
 
 .weather-windBig{
-  margin-bottom: 4px !important;
+  margin-top: -34px !important;
 }
 .colBig img {
   width: 50px;
@@ -51,11 +58,13 @@
 
 .weather-humidityBig {
   margin-top: 10px !important;
+  margin-right: 175px !important;
 }
 
 .weather-lastupdateBig {
   margin-bottom: 0px !important;
   font-weight: bold !important;
+  margin-top: 5px !important;
 }
 
 .weatherBig {
