@@ -23,15 +23,11 @@ const calculateElementHeight = (startTime, endTime) => {
 };
 async function getDateInCorrectFormat() {
     let currentDate = new Date();
-    
-    // Check if it's after 6pm on Friday or on Saturday/Sunday
     if (currentDate.getDay() === 5 && currentDate.getHours() >= 18) {
         currentDate.setDate(currentDate.getDate() + 3); // Set date to upcoming Monday
     } else if (currentDate.getDay() === 6 || currentDate.getDay() === 0) {
         currentDate.setDate(currentDate.getDate() + (8 - currentDate.getDay())); // Set date to upcoming Monday
     }
-
-    // Format the date as "DD/MM/YYYY"
     let day = currentDate.getDate().toString().padStart(2, '0');
     let month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
     let year = currentDate.getFullYear();
@@ -56,7 +52,8 @@ async function ShowPlanner() {
     } else {
         console.error("Element with id 'datePickerMenu' not found.");
     }
-    var data = await fetchPlannerData(await getDateInCorrectFormat(),"1045_6232_0");
+    plannerUrl = plannerUrl.split("/")
+    var data = await fetchPlannerData(await getDateInCorrectFormat(),plannerUrl[4]);
     console.log(data)
     if (!data || data.length === 0) {
         document.getElementById('leftcontainer').innerHTML = 'No planner data available.';
