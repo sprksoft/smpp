@@ -1,16 +1,16 @@
 const pixelsPerMinute = 1.46;
-async function fetchPlannerData(date, user){
+
+async function fetchPlannerData(date, user) {
     try {
-        var currentUrl = window.location.href;
-        school_name = currentUrl.split("/")[2]
+        const currentUrl = window.location.href;
+        const school_name = currentUrl.split("/")[2];
         const url = `https://${school_name}/planner/api/v1/planned-elements/user/${user}?from=${date}&to=${date}`;
-        console.log(url)
+        console.log(url);
         const response = await fetch(url);
         if (!response.ok) {
             throw new Error(`Failed to fetch planner data`);
         }
-        const data = await response.json();
-        return data
+        return await response.json();
     } catch (error) {
         console.error(`Failed to fetch:`, error);
         return null;
@@ -22,27 +22,25 @@ const calculateElementHeight = (startTime, endTime) => {
     const durationInMinutes = durationInSeconds / 60;
     return durationInMinutes * pixelsPerMinute;
 };
-function fancyfyTime(inputTime){
-    console.log(inputTime)
-     const [startTime, endTime] = inputTime.split(' - ');
-     console.log(startTime,endTime)
-     function convertTo24HourFormat(time) {
-         let [hours, minutes, period] = time.split(':');
-         hours = parseInt(hours);
-         minutes = parseInt(minutes);
- 
-         if (period.toLowerCase() === 'pm' && hours !== 12) {
-             hours += 12;
-         } else if (period.toLowerCase() === 'am' && hours === 12) {
-             hours = 0;
-         }
- 
-         return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
-     }
-     const formattedStartTime = convertTo24HourFormat(startTime);
-     const formattedEndTime = convertTo24HourFormat(endTime);
-     return `${formattedStartTime} - ${formattedEndTime}`;
+
+function fancyfyTime(inputTime) {
+    const [startTime, endTime] = inputTime.split(' - ');
+    function convertTo24HourFormat(time) {
+        let [hours, minutes, period] = time.split(':');
+        hours = parseInt(hours);
+        minutes = parseInt(minutes);
+        if (period.toLowerCase() === 'pm' && hours !== 12) {
+            hours += 12;
+        } else if (period.toLowerCase() === 'am' && hours === 12) {
+            hours = 0;
+        }
+        return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+    }
+    const formattedStartTime = convertTo24HourFormat(startTime);
+    const formattedEndTime = convertTo24HourFormat(endTime);
+    return `${formattedStartTime} - ${formattedEndTime}`;
 }
+
 async function getDateInCorrectFormat(isFancyFormat) {
     let currentDate = new Date();
     if (currentDate.getHours() >= 18) {
@@ -60,24 +58,24 @@ async function getDateInCorrectFormat(isFancyFormat) {
     }
     
     if (isFancyFormat) {
-        let day = currentDate.getDate().toString().padStart(2, '0');
-        let month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
-        let year = currentDate.getFullYear();
+        const day = currentDate.getDate().toString().padStart(2, '0');
+        const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+        const year = currentDate.getFullYear();
         return `${year}-${month}-${day}`;
     } else {
         return currentDate;
     }
 }
 
-
 async function ShowPlanner() {
-    var container = document.getElementById('leftcontainer');
+    const container = document.getElementById('leftcontainer');
     container.innerHTML = ''; 
-    container = container.appendChild(document.createElement('div'));
-    container.classList.add('planner-container');
-
-    var plannerUrl = document.getElementById('datePickerMenu').getAttribute('plannerurl');
-    var data = await fetchPlannerData(await getDateInCorrectFormat(true), plannerUrl.split("/")[4]);
+    const plannerUrl = document.getElementById('datePickerMenu').getAttribute('plannerurl');
+    const data = await fetchPlannerData(await getDateInCorrectFormat(true), plannerUrl.split("/")[4]);
+    if (!data || data.length === 0) {
+        document.getElementById('leftcontainer').innerHTML = 'No planner data available.';
+        return;
+    }
 
     let earliestStartTime = Infinity;
     data.forEach(element => {
@@ -87,18 +85,13 @@ async function ShowPlanner() {
         }
     });
 
-    var beginTime = new Date(earliestStartTime);
+    const beginTime = new Date(earliestStartTime);
 
-    if (!data || data.length === 0) {
-        document.getElementById('leftcontainer').innerHTML = 'No planner data available.';
-        return;
-    }
-
-    let timeSlots = [];
+    const timeSlots = [];
     data.forEach((element, index, array) => {
         const dateTimeFrom = new Date(element.period.dateTimeFrom);
         const dateTimeTo = new Date(element.period.dateTimeTo);
-        let overlappingSlots = timeSlots.filter(slot => {
+        const overlappingSlots = timeSlots.filter(slot => {
             return (slot.from < dateTimeTo && slot.to > dateTimeFrom);
         });
 
@@ -125,18 +118,16 @@ async function ShowPlanner() {
             plannerElement.classList.add('planner-element'); 
             const colorParts = element.color.split('-');
             const cssVariableColor = `c-${colorParts[0]}-combo--${colorParts[1]}`;
-
-            plannerElement.classList.add(cssVariableColor)
+            plannerElement.classList.add(cssVariableColor);
 
             const itemName = element.courses && element.courses.length > 0 ? element.courses[0].name : element.name;
-
             const itemNameElement = document.createElement('h3');
             itemNameElement.textContent = itemName;
             plannerElement.appendChild(itemNameElement);
 
             const timeElement = document.createElement('p');
-            let dateTimeFrom = new Date(element.period.dateTimeFrom);
-            let dateTimeTo = new Date(element.period.dateTimeTo);
+            const dateTimeFrom = new Date(element.period.dateTimeFrom);
+            const dateTimeTo = new Date(element.period.dateTimeTo);
             timeElement.textContent = fancyfyTime(`${dateTimeFrom.toLocaleTimeString()} - ${dateTimeTo.toLocaleTimeString()}`);
             plannerElement.appendChild(timeElement);
 
@@ -155,10 +146,7 @@ async function ShowPlanner() {
             }
 
             plannerElement.style.width = `${elementWidthPercentage}%`;
-
             container.appendChild(plannerElement);
         });
     });
 }
-
-
