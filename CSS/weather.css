@@ -37,6 +37,8 @@
 .weather-feelslikeBig{
   margin-bottom: 0px !important;
   margin-right: -175px !important;
+  font-size: 14px !important;
+  font-weight: bold;
 }
 .weather-feelslike{
   margin-top: -34px !important;
@@ -46,10 +48,13 @@
   justify-content: space-between; /* Verdeel de items gelijkmatig langs de hoofdas */
   align-items: center; /* Centreer de items verticaal */
   flex-wrap: wrap; /* Als de items niet op één rij passen, laat ze dan omlaag gaan */
+  
 }
 
 .weather-windBig{
   margin-top: -34px !important;
+  font-size: 14px !important;
+  font-weight: bold;
 }
 .colBig img {
   width: 50px;
@@ -59,11 +64,12 @@
 .weather-humidityBig {
   margin-top: 10px !important;
   margin-right: 175px !important;
+  font-size: 14px !important;
+  font-weight: bold;
 }
 
 .weather-lastupdateBig {
   margin-bottom: 0px !important;
-  font-weight: bold !important;
   margin-top: 5px !important;
 }
 

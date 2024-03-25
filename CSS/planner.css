@@ -410,11 +410,14 @@ button.icon-label-btn.js-icon-label-btn.icon-label-btn--linkbutton:hover {
 .planner-element{
 border: 2px solid var(--color-base02) !important;
 border-radius: 10px !important;
-padding: 10px !important;
+padding: 4px !important;
 margin-bottom: 15px;
 position: absolute;
-width: auto;
+overflow: hidden;
+font-size: .833rem;
+min-height: 23px;
 }
 .planner-container{
   display: flex !important;
+  max-width: 252px !important;
 }

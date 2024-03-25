@@ -22,93 +22,143 @@ const calculateElementHeight = (startTime, endTime) => {
     const durationInMinutes = durationInSeconds / 60;
     return durationInMinutes * pixelsPerMinute;
 };
+function fancyfyTime(inputTime){
+    console.log(inputTime)
+     const [startTime, endTime] = inputTime.split(' - ');
+     console.log(startTime,endTime)
+     function convertTo24HourFormat(time) {
+         let [hours, minutes, period] = time.split(':');
+         hours = parseInt(hours);
+         minutes = parseInt(minutes);
+ 
+         if (period.toLowerCase() === 'pm' && hours !== 12) {
+             hours += 12;
+         } else if (period.toLowerCase() === 'am' && hours === 12) {
+             hours = 0;
+         }
+ 
+         return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+     }
+     const formattedStartTime = convertTo24HourFormat(startTime);
+     const formattedEndTime = convertTo24HourFormat(endTime);
+     return `${formattedStartTime} - ${formattedEndTime}`;
+}
 async function getDateInCorrectFormat(isFancyFormat) {
     let currentDate = new Date();
-    if (currentDate.getDay() === 5 && currentDate.getHours() >= 18) {
-        currentDate.setDate(currentDate.getDate() + 3); // Set date to upcoming Monday
-    } else if (currentDate.getDay() === 6 || currentDate.getDay() === 0) {
-        currentDate.setDate(currentDate.getDate() + (8 - currentDate.getDay())); // Set date to upcoming Monday
-    }
-    if (isFancyFormat) {
-    let day = currentDate.getDate().toString().padStart(2, '0');
-    let month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
-    let year = currentDate.getFullYear();
-    return `${year}-${month}-${day}`;
-    }else{
+    if (currentDate.getHours() >= 18) {
+        currentDate.setDate(currentDate.getDate() + 1);
         currentDate.setHours(7);
-currentDate.setMinutes(30);
-        console.log(currentDate)
-        return currentDate 
+        currentDate.setMinutes(30);
+    } else if (currentDate.getDay() === 5 && currentDate.getHours() >= 18) {
+        currentDate.setDate(currentDate.getDate() + 3);
+        currentDate.setHours(7);
+        currentDate.setMinutes(30);
+    } else if (currentDate.getDay() === 6 || currentDate.getDay() === 0) {
+        currentDate.setDate(currentDate.getDate() + (8 - currentDate.getDay()));
+        currentDate.setHours(7);
+        currentDate.setMinutes(30);
+    }
+    
+    if (isFancyFormat) {
+        let day = currentDate.getDate().toString().padStart(2, '0');
+        let month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+        let year = currentDate.getFullYear();
+        return `${year}-${month}-${day}`;
+    } else {
+        return currentDate;
     }
 }
 
+
 async function ShowPlanner() {
     var container = document.getElementById('leftcontainer');
-    var beginTime = await getDateInCorrectFormat(false)
     container.innerHTML = ''; 
     container = container.appendChild(document.createElement('div'));
     container.classList.add('planner-container');
-    if (document.getElementById('datePickerMenu')) {
-        var plannerUrl = document.getElementById('datePickerMenu').getAttribute('plannerurl');
-        if (plannerUrl) {
-            console.log("Planner URL:", plannerUrl);
-        } else {
-            console.error("Attribute 'plannerurl' not found in the element.");
-        }
-    } else {
-        console.error("Element with id 'datePickerMenu' not found.");
-    }
-    plannerUrl = plannerUrl.split("/")
-    var data = await fetchPlannerData(await getDateInCorrectFormat(true),plannerUrl[4])
 
-    console.log(data)
+    var plannerUrl = document.getElementById('datePickerMenu').getAttribute('plannerurl');
+    var data = await fetchPlannerData(await getDateInCorrectFormat(true), plannerUrl.split("/")[4]);
+
+    let earliestStartTime = Infinity;
+    data.forEach(element => {
+        const dateTimeFrom = new Date(element.period.dateTimeFrom).getTime();
+        if (dateTimeFrom < earliestStartTime) {
+            earliestStartTime = dateTimeFrom;
+        }
+    });
+
+    var beginTime = new Date(earliestStartTime);
+
     if (!data || data.length === 0) {
         document.getElementById('leftcontainer').innerHTML = 'No planner data available.';
         return;
     }
 
-    data.sort((a, b) => {
-        return new Date(a.period.dateTimeFrom) - new Date(b.period.dateTimeFrom);
-    });
-    await getDateInCorrectFormat(false)
+    let timeSlots = [];
     data.forEach((element, index, array) => {
-        const plannerElement = document.createElement('div');
-        plannerElement.classList.add('planner-element'); 
-        const colorParts = element.color.split('-');
-        const cssVariableColor = `c-${colorParts[0]}-combo--${colorParts[1]}`;
-
-        plannerElement.classList.add(cssVariableColor)
-        
-
-        const itemName = element.courses && element.courses.length > 0 ? element.courses[0].name : element.name;
-
-        const itemNameElement = document.createElement('h3');
-        itemNameElement.textContent = itemName;
-        plannerElement.appendChild(itemNameElement);
-
-        const timeElement = document.createElement('p');
         const dateTimeFrom = new Date(element.period.dateTimeFrom);
         const dateTimeTo = new Date(element.period.dateTimeTo);
-        timeElement.textContent = `${dateTimeFrom.toLocaleTimeString()} - ${dateTimeTo.toLocaleTimeString()}`;
-        plannerElement.appendChild(timeElement);
+        let overlappingSlots = timeSlots.filter(slot => {
+            return (slot.from < dateTimeTo && slot.to > dateTimeFrom);
+        });
 
-        const height = calculateElementHeight(dateTimeFrom, dateTimeTo);
-        plannerElement.style.height = `${height}px`;
-        const top = calculateElementHeight(beginTime,dateTimeFrom);
-        console.log(beginTime)
-        console.log(top)
-        plannerElement.style.top = `${top}px`;
+        if (overlappingSlots.length === 0) {
+            const newSlot = {
+                from: dateTimeFrom,
+                to: dateTimeTo,
+                elements: [element]
+            };
+            timeSlots.push(newSlot);
+        } else {
+            overlappingSlots.forEach(slot => {
+                slot.elements.push(element);
+            });
+        }
+    });
 
-        if (index < array.length - 1) {
-            const nextStartTime = new Date(array[index + 1].period.dateTimeFrom);
-            const marginBottom = (nextStartTime - dateTimeTo) / 60000;
-            const marginBottomPixels = marginBottom * pixelsPerMinute; 
-            if(marginBottomPixels == 0){
-                plannerElement.style.marginBottom = `5px`
-            }else{
+    timeSlots.forEach(slot => {
+        const numElements = slot.elements.length;
+        const elementWidthPercentage = 100 / numElements;
+
+        slot.elements.forEach((element, index) => {
+            const plannerElement = document.createElement('div');
+            plannerElement.classList.add('planner-element'); 
+            const colorParts = element.color.split('-');
+            const cssVariableColor = `c-${colorParts[0]}-combo--${colorParts[1]}`;
+
+            plannerElement.classList.add(cssVariableColor)
+
+            const itemName = element.courses && element.courses.length > 0 ? element.courses[0].name : element.name;
+
+            const itemNameElement = document.createElement('h3');
+            itemNameElement.textContent = itemName;
+            plannerElement.appendChild(itemNameElement);
+
+            const timeElement = document.createElement('p');
+            let dateTimeFrom = new Date(element.period.dateTimeFrom);
+            let dateTimeTo = new Date(element.period.dateTimeTo);
+            timeElement.textContent = fancyfyTime(`${dateTimeFrom.toLocaleTimeString()} - ${dateTimeTo.toLocaleTimeString()}`);
+            plannerElement.appendChild(timeElement);
+
+            const height = calculateElementHeight(dateTimeFrom, dateTimeTo);
+            plannerElement.style.height = `${height}px`;
+            const top = calculateElementHeight(beginTime, dateTimeFrom);
+            plannerElement.style.top = `${top}px`;
+            const left = index * elementWidthPercentage;
+            plannerElement.style.left = `${left}%`;
+
+            if (index < numElements - 1) {
+                const nextStartTime = new Date(slot.elements[index + 1].period.dateTimeFrom);
+                const marginBottom = (nextStartTime - dateTimeTo) / 60000;
+                const marginBottomPixels = marginBottom * pixelsPerMinute;
                 plannerElement.style.marginBottom = `${marginBottomPixels}px`;
             }
-        }
-        container.appendChild(plannerElement);
+
+            plannerElement.style.width = `${elementWidthPercentage}%`;
+
+            container.appendChild(plannerElement);
+        });
     });
 }
+
+
