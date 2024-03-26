@@ -35,7 +35,7 @@ body {
 }
 
 #leftcontainer {
-  padding: 16px !important;
+  padding: 16px 24px !important;
 }
 
 .toast__content {

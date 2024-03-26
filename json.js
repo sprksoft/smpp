@@ -283,7 +283,7 @@ const weatherHTML = `<div class="weatherdiv">
 </div>
 <p class="weather-temperature weather-temperatureBig"></p>
 <div class="weather-humwind weather-humwindBig">
-	<svg xmlns="http://www.w3.org/2000/svg" id="layer1" data-name="Laag 2" height="65px" width="65px" viewBox="0 0 29.83 24.41">
+	<svg xmlns="http://www.w3.org/2000/svg" id="layer1" data-name="Laag 2" height="60px" width="60px" viewBox="0 0 29.83 24.41">
 	  <defs>
 		<style>
 		  .cls-1 {
@@ -307,7 +307,7 @@ const weatherHTML = `<div class="weatherdiv">
 	</svg>
 
 	<div class="weather-humwind weather-humwindBig">
-		<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" height="80px" width="80px" data-name="Laag 2" viewBox="0 0 39.94 24.5">
+		<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" height="75px" width="75px" data-name="Laag 2" viewBox="0 0 39.94 24.5">
 		  <defs>
 			<style>
 			  .cls-1 {
@@ -326,7 +326,7 @@ const weatherHTML = `<div class="weatherdiv">
 		</svg>
 		</div>
 		<div class="weather-humwind weather-humwindBig">
-			<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" height="65px" width="65px" data-name="Laag 2" viewBox="0 0 24.28 25.14">
+			<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" height="60px" width="60px" data-name="Laag 2" viewBox="0 0 24.28 25.14">
 			  <defs>
 				<style>
 				  .cls-1 {
