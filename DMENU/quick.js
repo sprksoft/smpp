@@ -136,7 +136,7 @@ function scrape_goto(){
 }
 
 
-function handleDMenu() {
+function do_qm(open_key="") {
   let cmd_list = quick_cmd_list().concat(goto_items).concat(vakken).concat(links.concat(["dmenu config", "quick add", "quick remove", "config", "toggle fancy scores", "lock dmenu", "unbloat", "clearsettings", "discord"]));
 
   dmenu(cmd_list, function (cmd, shift) {
@@ -208,7 +208,7 @@ function handleDMenu() {
       }
     }
 
-  }, "quick:");
+  }, "quick:", open_key=open_key);
 }
 
 document.addEventListener("keyup", function (e) {
@@ -216,15 +216,18 @@ document.addEventListener("keyup", function (e) {
     return
   }
   if (e.key == ':') {
-    handleDMenu();
+    do_qm(":");
   }
 });
 
-const firstItem = document.querySelector('.topnav > *:first-child');
-if (firstItem) {
-  firstItem.insertAdjacentHTML('afterend', `<button id="dmenutooltip" class=topnav__btn>Quick-Menu</button>`);
-}
-const dMenuButton = document.getElementById('dmenutooltip');
-if (dMenuButton) {
-  dMenuButton.addEventListener('click', handleDMenu);
-}
+const quickButton = document.createElement("button");
+quickButton.id = "dmenutooltip" //TODO: change this to something more meaningful
+quickButton.className="topnav__btn"
+quickButton.innerText="[qm]"
+quickButton.addEventListener("click", function(){
+  do_qm(quickButton);
+})
+
+const topNav = document.querySelector("nav.topnav")
+const secondItem = topNav.childNodes[2];
+topNav.insertBefore(quickButton, secondItem);

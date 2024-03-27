@@ -4,15 +4,17 @@ const dmenu_config_template = {
   exit_on_focusout: { type: "bool", default_value: false }
 }
 
-var lock_dmenu = false;
-var command_list = [];
-var end_func = undefined; var open = false;
-var selected = -1;
-var user_text = "";
-var no_type = true;
-var view_item_score;
+let lock_dmenu = false;
+let command_list = [];
+let end_func = undefined;
+let open = false;
+let open_key=""; //NOTE: this can also be an html element that opened dmenu from a click
+let selected = -1;
+let user_text = "";
+let no_type = true;
+let view_item_score;
 
-var dconfig_cache = undefined;
+let dconfig_cache = undefined;
 
 function dconfig_menu() {
   let conf = get_dconfig();
@@ -68,10 +70,11 @@ function set_dconfig(config) {
   dconfig_cache = config;
 }
 
-function dmenu(params, onselect, name = "dmenu:") {
+function dmenu(params, onselect, name = "dmenu:", open_item="") {
   if (open) {
     return;
   }
+  open_key=open_item;
   open = true;
   no_type = true;
   selected = -1;
@@ -140,7 +143,7 @@ function dmenu_accept(shift = false) {
   }
 }
 function dmenu_close() {
-  if (lock_dmenu) {
+  if (lock_dmenu || !open) {
     return;
   }
   open = false;
@@ -298,10 +301,16 @@ function init_dmenu() {
   document.body.insertBefore(dmenu, document.body.childNodes[-1]);
   let input = dmenu.getElementsByTagName("input")[0]
   document.addEventListener("click", function (e) {
+    if (!open){
+      return
+    }
     if (get_dconfig().exit_on_focusout) {
       return;
     }
     if (dmenu.contains(e.target)) {
+      return;
+    }
+    if (e.target == open_key){
       return;
     }
     dmenu_close();
@@ -312,7 +321,7 @@ function init_dmenu() {
     }
   });
   input.addEventListener("keydown", function (e) {
-    if (e.key == ":" && no_type) {
+    if (e.key == open_key && no_type) {
       e.preventDefault();
       return;
     }
