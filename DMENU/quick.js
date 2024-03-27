@@ -1,5 +1,8 @@
 let quicks = quick_load();
-let links=undefined;
+let links=[];
+let vakken=[]
+fetch_links();
+fetch_vakken();
 
 function quick_cmd_list(){
   let cmd_list=[]
@@ -71,18 +74,23 @@ function remove_quick_interactive() {
   }, "name:")
 }
 
-let goto_items = get_data("goto_menu", ".js-shortcuts-container > a", function (el, data) {
+let goto_items=[]
+scrape("goto_menu", ".js-shortcuts-container > a", function (el, data) {
   const name = el.innerText.toLowerCase().trim();
   data.push({value: name, meta:"goto", url: el.href})
-});
+}, function(data) {
+  goto_items=data
+}, interval_time=0);
 
-let vakken = {};
-get_data_bg("vakken", ".course-list > li > a", function (el, data) {
+
+// wordt nu gedaan door fetch_vakken via de sm api
+/* let vakken = [];
+scrape("vakken", ".course-list > li > a", function (el, data) {
   const name = el.getElementsByClassName("course-link__name")[0].innerText.toLowerCase().trim();
   data.push({value: name, meta:"vak", url: el.href})
 }, function (data) {
   vakken = data;
-});
+}, interval_time=3000); */
 
 
 //TODO: make this better
@@ -99,29 +107,43 @@ function config_menu() {
 
 async function fetch_links() {
   links = []
-  let responce = await fetch("/links/api/v1/")
-  if (responce.ok){
-    let response_data = await responce.json();
+  let response = await fetch("/links/api/v1/")
+  if (response.ok){
+    let response_data = await response.json();
     for (let i = 0; i < response_data.length; i++) {
-      links.push({value: response_data[i].name.toLowerCase(), meta: "link"});
+      links.push({url: response_data[i].url, value: response_data[i].name.toLowerCase(), meta: "link"});
     }
   }else{
-    links=undefined;
+    console.log("Fetching links failed ("+responce.status+" http code)")
+    links=[];
   }
 }
 
-
-async function handleDMenu() {
-  if (links == undefined){
-    fetch_links();
+async function fetch_vakken(){
+  vakken = []
+  let response = await fetch("/Topnav/getCourseConfig")
+  if (response.ok){
+    let response_data = await response.json();
+    for (let i = 0; i < response_data.own.length; i++) {
+      let vak = response_data.own[i]
+      let meta = "vak";
+      if (vak.descr != ""){
+        meta+="  [ "+vak.descr+" ]"
+      }
+      vakken.push({url: vak.url, value: vak.name.toLowerCase(), meta: meta});
+    }
+  }else{
+    console.log("Fetching vakken failed ("+responce.status+" http code)")
+    vakken=[];
   }
-  
-  let cmd_list = quick_cmd_list().concat(links.concat(["dmenu config", "quick add", "quick remove", "config", "toggle fancy scores", "lock dmenu", "unbloat", "clearsettings", "discord"]));
+
+}
+
+
+function handleDMenu() {
+  let cmd_list = quick_cmd_list().concat(vakken).concat(links.concat(["dmenu config", "quick add", "quick remove", "config", "toggle fancy scores", "lock dmenu", "unbloat", "clearsettings", "discord"]));
   if (goto_items != undefined){
     cmd_list = cmd_list.concat(goto_items);
-  }
-  if (vakken != undefined){
-    cmd_list = cmd_list.concat(vakken);
   }
 
   dmenu(cmd_list, function (cmd, shift) {

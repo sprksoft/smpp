@@ -19,10 +19,11 @@ if (link_element) {
 
 function get_config() {
   let conf = window.localStorage.getItem("settingsdata");
-  if (conf == null) {
-    console.log("conf is undefined")
+  if (typeof conf !== "string") {
+    console.log("conf is undefined. setting to default")
     conf = default_settings;
     set_config(conf)
+    return conf
   }
   return JSON.parse(conf)
 }

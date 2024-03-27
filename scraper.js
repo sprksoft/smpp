@@ -1,8 +1,6 @@
 
-function scrape_from_html(data, query, func) {
-  if (data == undefined) {
-    data = []
-  }
+function scrape_from_html(query, func) {
+  data = []
   let scrape_els = document.querySelectorAll(query);
   if (scrape_els.length == 0) {
     return data;
@@ -14,25 +12,40 @@ function scrape_from_html(data, query, func) {
   return data;
 }
 
-
-function get_data(name, query, func) {
-  let data = JSON.parse(window.localStorage.getItem(name));
-  console.log(data)
-  if (data == undefined || data.length == 0 || data.length == undefined) {
-    data = scrape_from_html([], query, func);
-  }
-  window.localStorage.setItem(name, JSON.stringify(data));
-  return data;
+function is_valid_data(data){
+  return ! (data == undefined || data.length == 0 || data.length == undefined)
 }
 
-function get_data_bg(name, query, func, set_func, interval_time = 3000) {
-  data = get_data(name, query, func);
-  set_func(data);
+function scrape_data_if_needed(data, query, func, done_func){
+  if (is_valid_data(data)) {
+    done_func(data)
+    window.localStorage.setItem(name, JSON.stringify(data));
+    return true
+  }
+
+  data = scrape_from_html(query, func);
+  if (is_valid_data(data)) {
+    done_func(data)
+    window.localStorage.setItem(name, JSON.stringify(data));
+    return true
+  }
+
+  return false
+}
+
+function scrape(name, query, func, done_func, interval_time=0) {
+  let data = JSON.parse(window.localStorage.getItem(name));
+  if (scrape_data_if_needed(data, query, func, done_func)){
+    return
+  }
+  if (interval_time == 0){
+    return
+  }
+
   let interval = setInterval(() => {
-    data = get_data(name, query, func);
-    set_func(data);
-    if (data.length != 0) {
-      clearInterval(interval);
+    if (scrape_data_if_needed(data, query, func, done_func)){
+      clearInterval(interval)
     }
   }, interval_time);
 }
+
