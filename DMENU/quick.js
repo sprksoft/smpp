@@ -1,8 +1,13 @@
 let quicks = quick_load();
+
 let links=[];
-let vakken=[]
 fetch_links();
+
+let vakken=[]
 fetch_vakken();
+
+let goto_items=[]
+scrape_goto();
 
 function quick_cmd_list(){
   let cmd_list=[]
@@ -74,24 +79,6 @@ function remove_quick_interactive() {
   }, "name:")
 }
 
-let goto_items=[]
-scrape("goto_menu", ".js-shortcuts-container > a", function (el, data) {
-  const name = el.innerText.toLowerCase().trim();
-  data.push({value: name, meta:"goto", url: el.href})
-}, function(data) {
-  goto_items=data
-}, interval_time=0);
-
-
-// wordt nu gedaan door fetch_vakken via de sm api
-/* let vakken = [];
-scrape("vakken", ".course-list > li > a", function (el, data) {
-  const name = el.getElementsByClassName("course-link__name")[0].innerText.toLowerCase().trim();
-  data.push({value: name, meta:"vak", url: el.href})
-}, function (data) {
-  vakken = data;
-}, interval_time=3000); */
-
 
 //TODO: make this better
 function config_menu() {
@@ -139,12 +126,18 @@ async function fetch_vakken(){
 
 }
 
+function scrape_goto(){
+  goto_items=[]
+  let goto_items_html = document.querySelectorAll(".js-shortcuts-container > a");
+  for (let i = 0; i < goto_items_html.length; i++) {
+    const item = goto_items_html[i];
+    goto_items.push({url: item.href, value: item.innerText.toLowerCase().trim(), meta: "goto" })
+  }
+}
+
 
 function handleDMenu() {
-  let cmd_list = quick_cmd_list().concat(vakken).concat(links.concat(["dmenu config", "quick add", "quick remove", "config", "toggle fancy scores", "lock dmenu", "unbloat", "clearsettings", "discord"]));
-  if (goto_items != undefined){
-    cmd_list = cmd_list.concat(goto_items);
-  }
+  let cmd_list = quick_cmd_list().concat(goto_items).concat(vakken).concat(links.concat(["dmenu config", "quick add", "quick remove", "config", "toggle fancy scores", "lock dmenu", "unbloat", "clearsettings", "discord"]));
 
   dmenu(cmd_list, function (cmd, shift) {
     switch (cmd) {

@@ -1,4 +1,5 @@
 
+
 function scrape_from_html(query, func) {
   data = []
   let scrape_els = document.querySelectorAll(query);
