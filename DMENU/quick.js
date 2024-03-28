@@ -1,13 +1,15 @@
 let quicks = quick_load();
 
 let links=[];
-fetch_links();
-
 let vakken=[]
-fetch_vakken();
-
 let goto_items=[]
-scrape_goto();
+
+if (document.querySelector(".TopNav")){
+  fetch_links();
+  fetch_vakken();
+  scrape_goto();
+}
+
 
 function quick_cmd_list(){
   let cmd_list=[]
@@ -95,13 +97,14 @@ function config_menu() {
 async function fetch_links() {
   links = []
   let response = await fetch("/links/api/v1/")
-  if (response.ok){
+  const contentType = response.headers.get("content-type");
+  if (response.ok && contentType && contentType.includes("application/json")){
     let response_data = await response.json();
     for (let i = 0; i < response_data.length; i++) {
       links.push({url: response_data[i].url, value: response_data[i].name.toLowerCase(), meta: "link"});
     }
   }else{
-    console.log("Fetching links failed ("+responce.status+" http code)")
+    console.log("Fetching links failed ("+response.status+" http code)")
     links=[];
   }
 }
@@ -109,7 +112,8 @@ async function fetch_links() {
 async function fetch_vakken(){
   vakken = []
   let response = await fetch("/Topnav/getCourseConfig")
-  if (response.ok){
+  const contentType = response.headers.get("content-type");
+  if (response.ok && contentType && contentType.includes("application/json")){
     let response_data = await response.json();
     for (let i = 0; i < response_data.own.length; i++) {
       let vak = response_data.own[i]
@@ -120,7 +124,7 @@ async function fetch_vakken(){
       vakken.push({url: vak.url, value: vak.name.toLowerCase(), meta: meta});
     }
   }else{
-    console.log("Fetching vakken failed ("+responce.status+" http code)")
+    console.log("Fetching vakken failed ("+response.status+" http code)")
     vakken=[];
   }
 
@@ -220,14 +224,17 @@ document.addEventListener("keyup", function (e) {
   }
 });
 
-const quickButton = document.createElement("button");
-quickButton.id = "dmenutooltip" //TODO: change this to something more meaningful
-quickButton.className="topnav__btn"
-quickButton.innerText="[qm]"
-quickButton.addEventListener("click", function(){
-  do_qm(quickButton);
-})
-
 const topNav = document.querySelector("nav.topnav")
-const secondItem = topNav.childNodes[2];
-topNav.insertBefore(quickButton, secondItem);
+if (topNav){
+  const quickButton = document.createElement("button");
+  quickButton.id = "dmenutooltip" //TODO: change this to something more meaningful
+  quickButton.className="topnav__btn"
+  quickButton.innerText="[qm]"
+  quickButton.addEventListener("click", function(){
+    do_qm(quickButton);
+  })
+
+  const secondItem = topNav.childNodes[2];
+  topNav.insertBefore(quickButton, secondItem);
+}
+
