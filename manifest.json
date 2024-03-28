@@ -42,6 +42,7 @@
 				"CSS/root.css"
 			],
 			"js": [
+        "titlefix.js",
 				"config.js",
 				"json.js",
 				"scraper.js",

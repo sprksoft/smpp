@@ -1,4 +1,5 @@
 const default_settings = {
+  quicks: [],
   profile: "default",
   halte: true,
   overwrite_theme: 0,

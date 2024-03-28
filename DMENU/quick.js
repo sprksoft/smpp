@@ -4,7 +4,7 @@ let links=[];
 let vakken=[]
 let goto_items=[]
 
-if (document.querySelector(".TopNav")){
+if (document.querySelector(".topnav")){
   fetch_links();
   fetch_vakken();
   scrape_goto();
@@ -42,11 +42,10 @@ function remove_quick(name) {
 }
 
 function quick_load(){
-  let quicks = window.localStorage.getItem("quicks");
+  let quicks = get_config().quicks;
   if (quicks == undefined){
     return []
   }
-  quicks = JSON.parse(quicks);
   if (quicks == undefined){
     return []
   }
@@ -54,7 +53,9 @@ function quick_load(){
 }
 
 function quick_save(){
-  window.localStorage.setItem("quicks", JSON.stringify(quicks));
+  let config = get_config();
+  config.quicks=quicks;
+  set_config(config);
 }
 
 function add_quick_interactive(){
@@ -68,6 +69,9 @@ function add_quick_interactive(){
       }
     }
     dmenu(value_list, function(value, shift){
+      if (!value.startsWith("http")){
+        value="https://"+value;
+      }
       add_quick(name, value);
     }, "value:")
   }, "name:");
@@ -192,6 +196,7 @@ function do_qm(open_key="") {
     for (let i = 0; i < quicks.length; i++) {
       const quick = quicks[i];
       if (quick.name == cmd) {
+        console.log(quick);
         open_url(quick.url, true);
         return;
       }
@@ -225,7 +230,7 @@ document.addEventListener("keyup", function (e) {
 });
 
 const topNav = document.querySelector("nav.topnav")
-if (topNav){
+if (topNav && document.querySelector("#dmenutooltip") == undefined){
   const quickButton = document.createElement("button");
   quickButton.id = "dmenutooltip" //TODO: change this to something more meaningful
   quickButton.className="topnav__btn"

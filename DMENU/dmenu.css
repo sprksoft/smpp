@@ -15,6 +15,7 @@ html {
 }
 
 #dmenu {
+  overflow: clip;
   background: var(--color-base00);
   border: var(--border-size) solid var(--color-popup-border);
   position: absolute;
