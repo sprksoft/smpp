@@ -20,13 +20,13 @@
   font-size: 45px;
   margin-bottom: 0px !important;
   font-weight: lighter;
-  margin-top: -30px !important;
+  margin-top: -10px !important;
 }
 #weather-icon-clear{
-  margin-top: 40px !important;
+  margin-top: 0px !important;
 }
 .weather-mainBig {
-  margin-top: -20px !important;
+  margin-top: -10px !important;
 }
 
 .weather-descriptionBig {
@@ -37,7 +37,7 @@
 .weather-feelslikeBig{
   margin-bottom: 0px !important;
   margin-right: -175px !important;
-  font-size: 14px !important;
+  font-size: 13px !important;
   font-weight: bold;
 }
 .weather-feelslike{
@@ -53,7 +53,7 @@
 
 .weather-windBig{
   margin-top: -34px !important;
-  font-size: 14px !important;
+  font-size: 13px !important;
   font-weight: bold;
 }
 .colBig img {
@@ -64,7 +64,7 @@
 .weather-humidityBig {
   margin-top: 10px !important;
   margin-right: 175px !important;
-  font-size: 14px !important;
+  font-size: 13px !important;
   font-weight: bold;
 }
 
