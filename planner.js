@@ -125,8 +125,12 @@ async function ShowPlanner() {
             plannerElement.classList.add(cssVariableColor);
 
             const itemName = element.courses && element.courses.length > 0 ? element.courses[0].name : element.name;
+            var teachers = []
+            element.organisers.users.forEach((element) => {
+                teachers.push(element.name.startingWithFirstName)
+            })
             const itemNameElement = document.createElement('h3');
-            itemNameElement.textContent = itemName;
+            itemNameElement.textContent = itemName + ' - ' + teachers;
             plannerElement.appendChild(itemNameElement);
 
             const timeElement = document.createElement('p');
@@ -134,7 +138,12 @@ async function ShowPlanner() {
             const dateTimeTo = new Date(element.period.dateTimeTo);
             timeElement.textContent = fancyfyTime(`${dateTimeFrom.toLocaleTimeString()} - ${dateTimeTo.toLocaleTimeString()}`);
             plannerElement.appendChild(timeElement);
-
+            if (element.name){
+                const itemDescription = element.name
+                const itemDescriptionElement = document.createElement('p');
+                itemDescriptionElement.textContent = itemDescription
+                plannerElement.appendChild(itemDescriptionElement);
+            }
             const height = calculateElementHeight(dateTimeFrom, dateTimeTo);
             plannerElement.style.height = `${height}px`;
             const top = calculateElementHeight(beginTime, dateTimeFrom);

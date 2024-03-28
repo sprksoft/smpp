@@ -249,6 +249,7 @@ select,
   border: 1px solid var(--color-base03) !important;
   text-shadow: none !important;
   font-weight: bold !important;
+  background-color: var(--color-base01) !important;
 }
 
 .msgInfoTitle,

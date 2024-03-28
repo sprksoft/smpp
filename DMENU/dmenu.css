@@ -40,6 +40,7 @@ html {
   padding: 0px !important;
   padding: var(--dmenu-margin);
   font-size: var(--dmenu-font-size) !important;
+  border-top-right-radius: 3px !important;
 }
 
 .dmenu-input:focus {
@@ -54,6 +55,7 @@ html {
   margin: 0px;
   padding: var(--dmenu-margin);
   border-right: var(--border-size) solid var(--color-base02);
+  border-top-left-radius: 3px !important;
 }
 .dmenu-label:hover{
   cursor: auto !important;
