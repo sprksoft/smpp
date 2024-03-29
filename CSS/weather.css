@@ -93,14 +93,7 @@
 .weather-locationSmall {
   font-size: 22px;
   color: var(--color-accent);
-  text-align: start !important;
-}
-
-.weather-temperatureSmall {
-  font-size: 12px;
-  margin-bottom: 5px;
-  font-weight: lighter;
-  color: var(--color-text) !important;
+  margin-bottom: 2px !important;
 }
 
 .weather-descriptionSmall {
@@ -129,14 +122,6 @@
   margin-right: 2px;
 }
 
-.weather-humiditySmall {
-  margin-top: 5px !important;
-}
-
-.weather-windSmall {
-  margin-bottom: 0px !important;
-  margin-left: 5px !important;
-}
 
 .weather-lastupdateSmall {
   margin-top: 5px !important;
@@ -144,24 +129,12 @@
   margin-bottom: 0px !important;
 }
 
-
-.weather-iconSmall {
-  width: 100px !important;
-  height: fit-content !important;
-  margin-bottom: -50px !important;
-}
-
-.weather-feelslikeSmall {
-  text-align: start !important;
-}
-
 .weather-humwindSmall {
   display: flex !important;
-  align-items: flex-end !important;
-  justify-content: flex-end !important; 
+  align-items: center !important;
+  justify-content: center !important; 
   flex-direction: column; 
   margin-bottom: 0px !important;
-  margin-right: 5px !important; 
 }
 
 
@@ -171,18 +144,26 @@
   margin-right: auto;
 }
 
-.weather-humwindSmall svg {
-  width: 30px;
-  height: auto; 
-  margin-bottom: 5px; 
-}
 
-.weather-windSmall {
-  margin-bottom: 5px !important; 
+.weather-windSmall, .weather-humiditySmall, .weather-temperatureSmall{
+  margin-bottom: 10px !important; 
+  color: var(--color-text) !important;
+  font-size: 16px !important;
 }
 
 .weather-lastupdateSmall {
   margin-top: 5px !important;
   font-weight: bold !important;
   margin-bottom: 0px !important;
+}
+.veticalstackweather{
+  display: flex !important;
+  flex-direction: column !important;
+  width: max-content !important;
+  justify-content: center !important;
+  text-align: center !important;
+justify-items: center !important;
+}
+.weather-mainSmall{
+color: var(--color-text) !important;
 }
