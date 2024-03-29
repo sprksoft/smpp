@@ -1,116 +1,116 @@
 const themes = {
-    "default": {
-      "--color-accent": "#8f8f95",
-      "--color-text": "#C2BAB2",
-      "--color-base00": "#191817",
-      "--color-base01": "#232020",
-      "--color-base02": "#3f3c3b",
-      "--color-base03": "#5b5756",
-      "--color-popup-border": "var(--color-accent)",
-      "--color-hover-border": "var(--color-accent)",
-      "--color-settings-bg": "var(--color-base02)",
-      "--color-settings-border": "var(--color-base03)",
-      "--color-settings-ui-bg": "var(--color-base01)",
-      "--color-settings-ui-border": "var(--color-base02)",
-      "--color-settings-ui-layer2": "var(--color-base03)",
-      "--color-homepage-sidebars-bg": "#02020585",
-      "--loginpage-image": "url(https://4kwallpapers.com/images/wallpapers/desert-doom-sand-dunes-dark-background-monochrome-landscape-2560x1080-6409.jpg)"
-    },
-    "white": {
-      "--color-accent": "#3a4f6d",
-      "--color-text": "#1a1e28",
-      "--color-base00": "#eeebec",
-      "--color-base01": "#e0dedf",
-      "--color-base02": "#d2cfd0",
-      "--color-base03": "#7b93b4",
-      "--color-homepage-sidebars-bg": "#02020540",
-      "--loginpage-image": "url(https://wallpaperaccess.com/full/1474688.jpg)",
-      "--darken-background": "rgba(0,0,0,0.1)"
-    },
-    "ldev": {
-      "--color-accent": "#ffd5a0",
-      "--color-popup-border": "var(--color-base02)",
-      "--color-hover-border": "var(--color-base03)",
-      "--color-homepage-sidebars-bg": "var(--color-base00)",
-      "--loginpage-image": "url(https://i.redd.it/yfssdsfosao11.png)",
-      "--darken-background": "rgba(0,0,0,0.25)"
-    },
-    "purple": {
-      "--color-accent": "#bd4fb3",
-      "--color-text": "#d9cdff",
-      "--color-base00": "#0b021d",
-      "--color-base01": "#130332",
-      "--color-base02": "#250654",
-      "--color-base03": "#3f0a74",
-      "--loginpage-image": "url(https://www.hdwallpapers.in/download/macos_monterey_shapes_hd_macos-2560x1440.jpg)"
-    },
-    "stalker": {
-      "--color-accent": "#d6574e",
-      "--color-text": "#f8a99c",
-      "--color-base00": "#1a1311",
-      "--color-base01": "#371b19",
-      "--color-base02": "#5c1c1a",
-      "--color-base03": "#823530",
-      "--loginpage-image": "url(https://media.timeout.com/images/102945740/image.jpg)"
-    },
-    "chocolate": {
-      "--color-accent": "#cdbcb4",
-      "--color-text": "#dcdad0",
-      "--color-base00": "#20181c",
-      "--color-base01": "#2c2326",
-      "--color-base02": "#3b2e2e",
-      "--color-base03": "#4c3e3e",
-      "--loginpage-image": "url(https://www.hdwallpapers.in/download/wet_brown_leaves_hd_dark_aesthetic-HD.jpg)",
-      "--darken-background": "rgba(0,0,0,0.3)"
-    },
-    "fall": {
-      "--color-accent": "#f8c791",
-      "--color-text": "#d3cbc3",
-      "--color-base00": "#231717",
-      "--color-base01": "#3b1c16",
-      "--color-base02": "#7b3f31",
-      "--color-base03": "#bf6f51",
-      "--loginpage-image": "url(https://wallpapercave.com/wp/wp7464660.jpg)",
-      "--darken-background": "rgba(0,0,0,0.3)"
-    },
-    "winter": {
-      "--color-accent": "#8aadb6",
-      "--color-text": "#C2BAB2",
-      "--color-base00": "#071b2c",
-      "--color-base01": "#152f47",
-      "--color-base02": "#345f7f",
-      "--color-base03": "#5687b6",
-      "--loginpage-image": "url(https://th.bing.com/th/id/R.fd4990dbff7b2d998a61b5a60b6b1949?rik=TkC2r3hdP1Ma9g&pid=ImgRaw&r=0)"
-    },
-    "birb": {
-      "--color-accent": "#8590aacc",
-      "--color-text": "#a8a9ab",
-      "--color-base00": "#0e0e15",
-      "--color-base01": "#16171b",
-      "--color-base02": "#1c1d21",
-      "--color-base03": "#30323a",
-      "--loginpage-image": "url(https://wallpapercave.com/wp/wp4673203.jpg)"
-    },
-    "matcha": {
-      "--color-accent": "#d1f8e7",
-      "--color-text": "#d1ebd2",
-      "--color-base00": "#243926",
-      "--color-base01": "#365138",
-      "--color-base02": "#456046",
-      "--color-base03": "#4f7a51",
-      "--loginpage-image": "url(https://wallpapercave.com/wp/wp9313069.jpg)",
-      "--darken-background": "rgba(0,0,0,0.15)"
-    },
-    "mountain": {
-      "--color-accent": "#f8f8fa",
-      "--color-text": "#f8f8fa",
-      "--color-base00": "#121c28",
-      "--color-base01": "#23364e",
-      "--color-base02": "#52647c",
-      "--color-base03": "#8294ac",
-      "--loginpage-image": "url(https://hdqwalls.com/download/everest-3840x2160.jpg)",
-      "--darken-background": "rgba(0,0,0,0.15)"
-    },
+  "default": {
+    "--color-accent": "#8f8f95",
+    "--color-text": "#C2BAB2",
+    "--color-base00": "#191817",
+    "--color-base01": "#232020",
+    "--color-base02": "#3f3c3b",
+    "--color-base03": "#5b5756",
+    "--color-popup-border": "var(--color-accent)",
+    "--color-hover-border": "var(--color-accent)",
+    "--color-settings-bg": "var(--color-base02)",
+    "--color-settings-border": "var(--color-base03)",
+    "--color-settings-ui-bg": "var(--color-base01)",
+    "--color-settings-ui-border": "var(--color-base02)",
+    "--color-settings-ui-layer2": "var(--color-base03)",
+    "--color-homepage-sidebars-bg": "#02020585",
+    "--loginpage-image": "url(https://4kwallpapers.com/images/wallpapers/desert-doom-sand-dunes-dark-background-monochrome-landscape-2560x1080-6409.jpg)"
+  },
+  "white": {
+    "--color-accent": "#3a4f6d",
+    "--color-text": "#1a1e28",
+    "--color-base00": "#eeebec",
+    "--color-base01": "#e0dedf",
+    "--color-base02": "#d2cfd0",
+    "--color-base03": "#7b93b4",
+    "--color-homepage-sidebars-bg": "#02020540",
+    "--loginpage-image": "url(https://wallpaperaccess.com/full/1474688.jpg)",
+    "--darken-background": "rgba(0,0,0,0.1)"
+  },
+  "ldev": {
+    "--color-accent": "#ffd5a0",
+    "--color-popup-border": "var(--color-base02)",
+    "--color-hover-border": "var(--color-base03)",
+    "--color-homepage-sidebars-bg": "var(--color-base00)",
+    "--loginpage-image": "url(https://i.redd.it/yfssdsfosao11.png)",
+    "--darken-background": "rgba(0,0,0,0.25)"
+  },
+  "purple": {
+    "--color-accent": "#bd4fb3",
+    "--color-text": "#d9cdff",
+    "--color-base00": "#0b021d",
+    "--color-base01": "#130332",
+    "--color-base02": "#250654",
+    "--color-base03": "#3f0a74",
+    "--loginpage-image": "url(https://www.hdwallpapers.in/download/macos_monterey_shapes_hd_macos-2560x1440.jpg)"
+  },
+  "stalker": {
+    "--color-accent": "#d6574e",
+    "--color-text": "#f8a99c",
+    "--color-base00": "#1a1311",
+    "--color-base01": "#371b19",
+    "--color-base02": "#5c1c1a",
+    "--color-base03": "#823530",
+    "--loginpage-image": "url(https://media.timeout.com/images/102945740/image.jpg)"
+  },
+  "chocolate": {
+    "--color-accent": "#cdbcb4",
+    "--color-text": "#dcdad0",
+    "--color-base00": "#20181c",
+    "--color-base01": "#2c2326",
+    "--color-base02": "#3b2e2e",
+    "--color-base03": "#4c3e3e",
+    "--loginpage-image": "url(https://www.hdwallpapers.in/download/wet_brown_leaves_hd_dark_aesthetic-HD.jpg)",
+    "--darken-background": "rgba(0,0,0,0.3)"
+  },
+  "fall": {
+    "--color-accent": "#f8c791",
+    "--color-text": "#d3cbc3",
+    "--color-base00": "#231717",
+    "--color-base01": "#3b1c16",
+    "--color-base02": "#7b3f31",
+    "--color-base03": "#bf6f51",
+    "--loginpage-image": "url(https://wallpapercave.com/wp/wp7464660.jpg)",
+    "--darken-background": "rgba(0,0,0,0.3)"
+  },
+  "winter": {
+    "--color-accent": "#8aadb6",
+    "--color-text": "#C2BAB2",
+    "--color-base00": "#071b2c",
+    "--color-base01": "#152f47",
+    "--color-base02": "#345f7f",
+    "--color-base03": "#5687b6",
+    "--loginpage-image": "url(https://th.bing.com/th/id/R.fd4990dbff7b2d998a61b5a60b6b1949?rik=TkC2r3hdP1Ma9g&pid=ImgRaw&r=0)"
+  },
+  "birb": {
+    "--color-accent": "#8590aacc",
+    "--color-text": "#a8a9ab",
+    "--color-base00": "#0e0e15",
+    "--color-base01": "#16171b",
+    "--color-base02": "#1c1d21",
+    "--color-base03": "#30323a",
+    "--loginpage-image": "url(https://wallpapercave.com/wp/wp4673203.jpg)"
+  },
+  "matcha": {
+    "--color-accent": "#d1f8e7",
+    "--color-text": "#d1ebd2",
+    "--color-base00": "#243926",
+    "--color-base01": "#365138",
+    "--color-base02": "#456046",
+    "--color-base03": "#4f7a51",
+    "--loginpage-image": "url(https://wallpapercave.com/wp/wp9313069.jpg)",
+    "--darken-background": "rgba(0,0,0,0.15)"
+  },
+  "mountain": {
+    "--color-accent": "#f8f8fa",
+    "--color-text": "#f8f8fa",
+    "--color-base00": "#121c28",
+    "--color-base01": "#23364e",
+    "--color-base02": "#52647c",
+    "--color-base03": "#8294ac",
+    "--loginpage-image": "url(https://hdqwalls.com/download/everest-3840x2160.jpg)",
+    "--darken-background": "rgba(0,0,0,0.15)"
+  },
   "vax": {
     "--color-accent": "#492f29",
     "--color-text": "#492f29",
@@ -162,7 +162,7 @@ const notfisSvg = `
 </g>
 </svg>
 `;
-const messageSvg =  `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class=st2 height="18px" width="18px" version="1.1" id="Capa_1" viewBox="0 0 75.294 75.294" xml:space="preserve">
+const messageSvg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class=st2 height="18px" width="18px" version="1.1" id="Capa_1" viewBox="0 0 75.294 75.294" xml:space="preserve">
 <g>
   <path d="M66.097,12.089h-56.9C4.126,12.089,0,16.215,0,21.286v32.722c0,5.071,4.126,9.197,9.197,9.197h56.9   c5.071,0,9.197-4.126,9.197-9.197V21.287C75.295,16.215,71.169,12.089,66.097,12.089z M61.603,18.089L37.647,33.523L13.691,18.089   H61.603z M66.097,57.206h-56.9C7.434,57.206,6,55.771,6,54.009V21.457l29.796,19.16c0.04,0.025,0.083,0.042,0.124,0.065   c0.043,0.024,0.087,0.047,0.131,0.069c0.231,0.119,0.469,0.215,0.712,0.278c0.025,0.007,0.05,0.01,0.075,0.016   c0.267,0.063,0.537,0.102,0.807,0.102c0.001,0,0.002,0,0.002,0c0.002,0,0.003,0,0.004,0c0.27,0,0.54-0.038,0.807-0.102   c0.025-0.006,0.05-0.009,0.075-0.016c0.243-0.063,0.48-0.159,0.712-0.278c0.044-0.022,0.088-0.045,0.131-0.069   c0.041-0.023,0.084-0.04,0.124-0.065l29.796-19.16v32.551C69.295,55.771,67.86,57.206,66.097,57.206z"/>
 </g>
@@ -192,7 +192,7 @@ const colorpickersHTML = `
 <input type="color" class="color-pickersmpp" id="colorPicker6">
 <span class="color-label">Text</span>
 </div>`
-const settingsInputElements =  {
+const settingsInputElements = {
   "profileSelector": "profile",
   "backgroundlink": "backgroundlink",
   "halt": "halte",

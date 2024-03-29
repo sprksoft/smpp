@@ -1,24 +1,24 @@
 const LijnApiKey = 'ddb68605719d4bb8b6444b6871cefc7a';
 
 async function fetchApiData(url) {
-    const response = await fetch(url, { headers: { 'Ocp-Apim-Subscription-Key': LijnApiKey } });
-    return await response.json();
+  const response = await fetch(url, { headers: { 'Ocp-Apim-Subscription-Key': LijnApiKey } });
+  return await response.json();
 }
 
 async function fetchHaltesData(query) {
   const fetch_url = `https://api.delijn.be/DLZoekOpenData/v1/zoek/haltes/${query}?maxAantalHits=5`;
   const returnedData = await fetchApiData(fetch_url);
   clearLeftbottom();
-  try{
+  try {
     await Promise.all(returnedData.haltes.map((halte, i) => createOption(halte, i)));
   } catch (error) {
     document.getElementById('leftContainerbottom').innerHTML = `<div id="leftContainerbottom"><p class=lijninfo>Geen zoekresultaten</p></div>`
   }
   if (returnedData.haltes.length > 0) {
-  getchoice(returnedData);
-}else{
-  document.getElementById('leftContainerbottom').innerHTML = `<div id="leftContainerbottom"><p class=lijninfo>Geen zoekresultaten</p></div>`
-}
+    getchoice(returnedData);
+  } else {
+    document.getElementById('leftContainerbottom').innerHTML = `<div id="leftContainerbottom"><p class=lijninfo>Geen zoekresultaten</p></div>`
+  }
 }
 
 async function fetchOptionData(entiteitnummer, haltenummer) {

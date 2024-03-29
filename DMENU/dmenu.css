@@ -58,7 +58,8 @@ html {
   border-right: var(--border-size) solid var(--color-base02);
   border-top-left-radius: 3px !important;
 }
-.dmenu-label:hover{
+
+.dmenu-label:hover {
   cursor: auto !important;
 }
 

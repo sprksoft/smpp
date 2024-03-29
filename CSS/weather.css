@@ -22,9 +22,11 @@
   font-weight: lighter;
   margin-top: -10px !important;
 }
-#weather-icon-clear{
+
+#weather-icon-clear {
   margin-top: 0px !important;
 }
+
 .weather-mainBig {
   margin-top: -10px !important;
 }
@@ -34,28 +36,35 @@
   margin-bottom: 5px;
 
 }
-.weather-feelslikeBig{
+
+.weather-feelslikeBig {
   margin-bottom: 0px !important;
   margin-right: -175px !important;
   font-size: 13px !important;
   font-weight: bold;
 }
-.weather-feelslike{
+
+.weather-feelslike {
   margin-top: -34px !important;
 }
+
 .weather-humwindBig {
   display: flex;
-  justify-content: space-between; /* Verdeel de items gelijkmatig langs de hoofdas */
-  align-items: center; /* Centreer de items verticaal */
-  flex-wrap: wrap; /* Als de items niet op één rij passen, laat ze dan omlaag gaan */
-  
+  justify-content: space-between;
+  /* Verdeel de items gelijkmatig langs de hoofdas */
+  align-items: center;
+  /* Centreer de items verticaal */
+  flex-wrap: wrap;
+  /* Als de items niet op één rij passen, laat ze dan omlaag gaan */
+
 }
 
-.weather-windBig{
+.weather-windBig {
   margin-top: -34px !important;
   font-size: 13px !important;
   font-weight: bold;
 }
+
 .colBig img {
   width: 50px;
   margin-right: 2px;
@@ -113,7 +122,8 @@
   margin-bottom: 0px !important;
   margin-left: 5px !important;
 }
-.weatherImg{
+
+.weatherImg {
   display: flex;
   flex-direction: column;
   margin-left: 900px !important;
@@ -135,10 +145,12 @@
 .weather-humiditySmall {
   margin-top: 5px !important;
 }
-.weather-windSmall{
+
+.weather-windSmall {
   margin-bottom: 0px !important;
   margin-left: 5px !important;
 }
+
 .weather-lastupdateSmall {
   margin-top: 5px !important;
   font-weight: bold !important;
@@ -149,11 +161,13 @@
   margin-top: -10px !important;
   margin-bottom: -10px !important;
 }
-.weather-iconSmall{
+
+.weather-iconSmall {
   width: 100px !important;
   height: fit-content !important;
   margin-bottom: -50px !important;
 }
-.weather-feelslikeSmall{
+
+.weather-feelslikeSmall {
   text-align: start !important;
 }

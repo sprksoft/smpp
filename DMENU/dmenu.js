@@ -8,7 +8,7 @@ let lock_dmenu = false;
 let command_list = [];
 let end_func = undefined;
 let open = false;
-let open_key=""; //NOTE: this can also be an html element that opened dmenu from a click
+let open_key = ""; //NOTE: this can also be an html element that opened dmenu from a click
 let selected = -1;
 let user_text = "";
 let no_type = true;
@@ -70,11 +70,11 @@ function set_dconfig(config) {
   dconfig_cache = config;
 }
 
-function dmenu(params, onselect, name = "dmenu:", open_item="") {
+function dmenu(params, onselect, name = "dmenu:", open_item = "") {
   if (open) {
     return;
   }
-  open_key=open_item;
+  open_key = open_item;
   open = true;
   no_type = true;
   selected = -1;
@@ -301,7 +301,7 @@ function init_dmenu() {
   document.body.insertBefore(dmenu, document.body.childNodes[-1]);
   let input = dmenu.getElementsByTagName("input")[0]
   document.addEventListener("click", function (e) {
-    if (!open){
+    if (!open) {
       return
     }
     if (get_dconfig().exit_on_focusout) {
@@ -310,7 +310,7 @@ function init_dmenu() {
     if (dmenu.contains(e.target)) {
       return;
     }
-    if (e.target == open_key){
+    if (e.target == open_key) {
       return;
     }
     dmenu_close();

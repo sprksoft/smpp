@@ -30,7 +30,7 @@ function fancyfyTime(inputTime) {
         hours = parseInt(hours);
         minutes = parseInt(minutes);
         console.log(period)
-        if (period.toLowerCase().includes('pm')  && hours !== 12) {
+        if (period.toLowerCase().includes('pm') && hours !== 12) {
             hours += 12;
         } else if (period.toLowerCase().includes('am') && hours === 12) {
             hours = 0;
@@ -57,7 +57,7 @@ async function getDateInCorrectFormat(isFancyFormat) {
         currentDate.setHours(7);
         currentDate.setMinutes(30);
     }
-    
+
     if (isFancyFormat) {
         const day = currentDate.getDate().toString().padStart(2, '0');
         const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
@@ -71,16 +71,16 @@ async function getDateInCorrectFormat(isFancyFormat) {
 async function ShowPlanner() {
     const plannerContainer = document.createElement('div');
     plannerContainer.classList.add('planner-container');
-    
+
     const container = document.getElementById('plannercontainer');
-    container.innerHTML = ''; 
+    container.innerHTML = '';
     container.appendChild(plannerContainer);
     const plannerUrl = document.getElementById('datePickerMenu').getAttribute('plannerurl');
     const data = await fetchPlannerData(await getDateInCorrectFormat(true), plannerUrl.split("/")[4]);
     if (!data || data.length === 0) {
         plannerContainer.innerHTML = `<h4>No planner data available. Consider turning planner <strong><i>off</i></strong> if your school doesn't use planner yet</h4>
         <a id="turn-off-planner">Click here to turn planner <i>off</i></a>`;
-        document.getElementById("turn-off-planner").addEventListener("click",()=>{
+        document.getElementById("turn-off-planner").addEventListener("click", () => {
             settingsData = get_config()
             settingsData.showplanner = false
             set_config(settingsData)
@@ -130,7 +130,7 @@ async function ShowPlanner() {
 
         slot.elements.forEach((element, index) => {
             const plannerElement = document.createElement('div');
-            plannerElement.classList.add('planner-element'); 
+            plannerElement.classList.add('planner-element');
             const colorParts = element.color.split('-');
             const cssVariableColor = `c-${colorParts[0]}-combo--${colorParts[1]}`;
             plannerElement.classList.add(cssVariableColor);
@@ -151,7 +151,7 @@ async function ShowPlanner() {
             timeElement.textContent = fancyfyTime(`${dateTimeFrom.toLocaleTimeString()} - ${dateTimeTo.toLocaleTimeString()}`);
             timeElement.classList.add("no-bottom-margin")
             plannerElement.appendChild(timeElement);
-            if (element.name){
+            if (element.name) {
                 const itemDescription = element.name
                 const itemDescriptionElement = document.createElement('p');
                 itemDescriptionElement.textContent = itemDescription
@@ -174,13 +174,13 @@ async function ShowPlanner() {
 
             plannerElement.style.width = `${elementWidthPercentage}%`;
             plannerContainer.appendChild(plannerElement);
-            plannerElement.addEventListener('mouseover',()=>{
+            plannerElement.addEventListener('mouseover', () => {
                 plannerElement.style.width = '100%'
                 plannerElement.style.height = '73px'
                 plannerElement.style.left = '0'
                 plannerElement.style.zIndex = "100"
             })
-            plannerElement.addEventListener('mouseout',()=>{
+            plannerElement.addEventListener('mouseout', () => {
                 plannerElement.style.left = `${left}%`;
                 plannerElement.style.top = `${top}px`;
                 plannerElement.style.height = `${height}px`;
@@ -189,5 +189,5 @@ async function ShowPlanner() {
             })
         });
     });
-    
+
 }

@@ -238,10 +238,12 @@ img[src="/modules/Messages/themes/default/images/loading_big.gif"] {
   background-color: var(--color-base01) !important;
   border-color: var(--color-base03) !important;
 }
-.smsc-table__row{
+
+.smsc-table__row {
   border: 2px solid var(--color-base02) !important;
   border-radius: 5px !important;
 }
+
 .smsc-tabslist {
   border: 0px !important;
 }
@@ -343,8 +345,7 @@ td.msg_topright,
 td.msg_bottomleft,
 td.msg_bottomright,
 td.msg_top,
-td.msg_bottom
-{
+td.msg_bottom {
   display: none !important;
 }
 
@@ -378,7 +379,9 @@ td#msg_bg,
 .modern-ui input[type=text] {
   background-color: var(--color-base01) !important;
 }
-button.accswitchco.mbselected,button.accswitchmain.mbselected {
+
+button.accswitchco.mbselected,
+button.accswitchmain.mbselected {
   background: none !important;
   background-color: var(--color-base02) !important;
   border: 2px solid var(--color-accent) !important;
@@ -388,7 +391,9 @@ button.accswitchco.mbselected,button.accswitchmain.mbselected {
   line-height: normal;
   color: var(--color-accent) !important
 }
-button.accswitchco.mbnotselected,button.accswitchmain.mbnotselected{
+
+button.accswitchco.mbnotselected,
+button.accswitchmain.mbnotselected {
   background: none !important;
   background-color: var(--color-base01) !important;
   border: 2px solid var(--color-base02) !important;
@@ -398,67 +403,90 @@ button.accswitchco.mbnotselected,button.accswitchmain.mbnotselected{
   line-height: normal;
   color: var(--color-text) !important
 }
-td#tabmaina{
+
+td#tabmaina {
   border: 2px solid var(--color-base02) !important;
   border-radius: 10px !important;
   padding: 10px !important;
   background-color: var(--color-base01) !important;
 }
-.attachtab{
-  border:none  !important;
+
+.attachtab {
+  border: none !important;
 }
-.smsc-dropzone{
+
+.smsc-dropzone {
   border-color: var(--color-text) !important;
 }
+
 div#submitbtn {
   background: transparent !important;
 }
-#smscMainBlockContainer,.content_container,.navigation_container{
+
+#smscMainBlockContainer,
+.content_container,
+.navigation_container {
   box-shadow: none !important;
   border: 2px solid var(--color-base02) !important;
   border-radius: 10px !important;
 }
-.smscSettings{
+
+.smscSettings {
   border: none !important;
 }
-.pupilInfo_popup,.lvs_item{
+
+.pupilInfo_popup,
+.lvs_item {
   border: 2px solid var(--color-base02) !important;
   border-radius: 10px !important;
   background-color: var(--color-base01) !important;
 }
-.pupilInfo_popup .pip_top,.tabContent{
-border: none !important;
+
+.pupilInfo_popup .pip_top,
+.tabContent {
+  border: none !important;
 }
-.treenav_info,.infoBlock{
+
+.treenav_info,
+.infoBlock {
   border-color: var(--color-base02) !important;
 }
-.toolbar{
+
+.toolbar {
   border-color: var(--color-base02) !important;
   box-shadow: none !important;
 }
-.infoBlock .infoBlock_content .infoBlock_presence .infoBlock_presenceContent .infoBlock_presenceMotivation{
+
+.infoBlock .infoBlock_content .infoBlock_presence .infoBlock_presenceContent .infoBlock_presenceMotivation {
   color: var(--color-text) !important;
 }
-.lvs_item_top,.itemSchoolyear{
+
+.lvs_item_top,
+.itemSchoolyear {
   border: none !important;
   border-radius: 5px !important;
 }
-.lvs_item{
+
+.lvs_item {
   margin-bottom: 10px !important;
 }
-.contentFrametitle{
+
+.contentFrametitle {
   border: 1px solid var(--color-base03) !important;
   border-radius: 5px !important;
 }
-input{
-  border:none !important
+
+input {
+  border: none !important
 }
-.newsTitle{
+
+.newsTitle {
   border-color: var(--color-base02) !important;
   margin-top: 10px !important;
   padding-top: 4px !important;
 }
-.newsTitle.over{
+
+.newsTitle.over {
   color: var(--color-accent) !important;
-  text-decoration:underline !important;
+  text-decoration: underline !important;
 }

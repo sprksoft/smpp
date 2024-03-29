@@ -407,30 +407,34 @@ button.icon-label-btn.js-icon-label-btn.icon-label-btn--linkbutton:hover {
 .twinbutton__button {
   transition: none !important;
 }
-.planner-element{
-border: 2px solid var(--color-base02) !important;
-border-radius: 10px !important;
-padding: 4px !important;
-margin-bottom: 15px;
-position: absolute;
-overflow: hidden;
-font-size: 10px;
-min-height: 23px;
-margin: 1px !important;
-transition: ease-in;
-transition-duration: 100ms;
+
+.planner-element {
+  border: 2px solid var(--color-base02) !important;
+  border-radius: 10px !important;
+  padding: 4px !important;
+  margin-bottom: 15px;
+  position: absolute;
+  overflow: hidden;
+  font-size: 10px;
+  min-height: 23px;
+  margin: 1px !important;
+  transition: ease-in;
+  transition-duration: 100ms;
 }
-.planner-container{
+
+.planner-container {
   display: flex !important;
   max-width: 280px !important;
   position: relative !important;
-margin-top: 20px !important;
-flex-direction: column;
+  margin-top: 20px !important;
+  flex-direction: column;
 }
-.no-bottom-margin{
+
+.no-bottom-margin {
   margin-bottom: 0px !important;
 }
-.planner-title-startpage{
+
+.planner-title-startpage {
   text-align: center !important;
   margin-top: -30px !important;
   margin-bottom: 0px !important;

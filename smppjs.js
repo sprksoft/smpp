@@ -68,14 +68,14 @@ async function apply() {
     show_scores = false;
   }
   console.log(showplanner)
-  if (showplanner == undefined){
+  if (showplanner == undefined) {
     settingsData = get_config()
     settingsData.showplanner = true
     showplanner = true
     set_config(settingsData)
   }
   console.log(IsBig)
-  if (IsBig == undefined){
+  if (IsBig == undefined) {
     console.log("yes")
     settingsData = get_config()
     settingsData.isbig = true
@@ -152,30 +152,30 @@ async function apply() {
     if (showsnake) {
       startSnakeGame()
     }
-    if (leftcontainer){
+    if (leftcontainer) {
       leftcontainer.innerHTML = " "
       leftcontainer.style.display = "none"
     }
-    if (document.getElementById("delijncontainer")){
+    if (document.getElementById("delijncontainer")) {
       document.getElementById("delijncontainer").remove()
     }
-    if (document.getElementById("plannercontainer")){
+    if (document.getElementById("plannercontainer")) {
       document.getElementById("plannercontainer").remove()
     }
     if (halte) {
       var DelijnAppElement = document.createElement("div")
       DelijnAppElement.classList.add("homepage__left")
       DelijnAppElement.classList.add("smsc-container--left")
-      DelijnAppElement.setAttribute("id","delijncontainer")
+      DelijnAppElement.setAttribute("id", "delijncontainer")
       container.prepend(DelijnAppElement)
       decodehalte()
-      
+
     }
-    if (showplanner){
+    if (showplanner) {
       var PlannerAppElement = document.createElement("div")
       PlannerAppElement.classList.add("homepage__left")
       PlannerAppElement.classList.add("smsc-container--left")
-      PlannerAppElement.setAttribute("id","plannercontainer")
+      PlannerAppElement.setAttribute("id", "plannercontainer")
       container.prepend(PlannerAppElement)
       ShowPlanner()
     }
@@ -249,7 +249,7 @@ function store() {
   if (shownews && !previousData.shownews) {
     window.location.reload();
   }
-  if (backgroundFile){
+  if (backgroundFile) {
     fileToBase64(backgroundFile)
       .then(base64Image => {
         settingsData.backgroundfile = base64Image;
@@ -391,7 +391,7 @@ function set_theme(name) {
     style.setProperty('--color-base02', themeData.base2);
     style.setProperty('--color-base03', themeData.base3);
     style.setProperty('--loginpage-image', "url(https://wallpaperaccess.com/full/23.jpg)");
-  }else{
+  } else {
     let theme = themes[name];
     if (!theme) {
       return;

@@ -476,7 +476,8 @@ div.stdReplyWrapper {
   width: 90% !important;
   height: 35px !important;
 }
-#location{
+
+#location {
   background-color: var(--color-settings-ui-bg) !important;
   border: 1px solid var(--color-settings-ui-layer2) !important;
   text-align: center !important;
@@ -488,7 +489,8 @@ div.stdReplyWrapper {
   margin-top: 0px !important;
   font-size: 16px !important;
 }
-#haltetext{
+
+#haltetext {
   width: fit-content !important;
   height: 35px !important;
   margin-top: 0px !important;
@@ -621,10 +623,12 @@ input:checked+.slider:before {
 .uploadzone .files .navigation {
   border: 2px solid var(--color-base03) !important;
 }
-#smscleftnav .smscleftnavcontainer{
+
+#smscleftnav .smscleftnavcontainer {
   border-width: 2px !important;
 }
-.smsc-topnav .topnav__divider{
+
+.smsc-topnav .topnav__divider {
   width: 2px !important;
 }
 
@@ -1035,39 +1039,51 @@ div#smscSearchView {
 button.js-btn-notifs.topnav__btn {
   padding: 2px 7px !important;
 }
+
 div.correctioninfo {
   border-radius: 10px !important;
 }
-.fileuploadblock{
+
+.fileuploadblock {
   border: 2px solid var(--color-base02) !important;
   border-radius: 10px !important;
 }
-.drag-container__info-drag{
+
+.drag-container__info-drag {
   color: var(--color-text) !important
 }
-.smsc-progressbar{
+
+.smsc-progressbar {
   background-color: var(--color-base03) !important;
   border: 1px solid var(--color-accent) !important;
   box-shadow: none !important;
 }
-.smsc-progressbar__progress{
+
+.smsc-progressbar__progress {
   background: var(--color-accent) !important;
   border: none !important;
 }
-.forum-contentbox{
+
+.forum-contentbox {
   background-color: var(--color-base01) !important;
 }
+
 hr.topnav__divider {
-background-color: var(--color-accent) !important;
+  background-color: var(--color-accent) !important;
 }
-h1.topnav__title{
+
+h1.topnav__title {
   color: var(--color-text) !important;
 }
-span.js-badge-notifs.topnav__badge,span.js-badge-msg.topnav__badge{
+
+span.js-badge-notifs.topnav__badge,
+span.js-badge-msg.topnav__badge {
   position: relative !important;
   top: -3px;
 }
-button.js-btn-notifs.topnav__btn:hover,a.js-btn-messages.topnav__btn:hover{
+
+button.js-btn-notifs.topnav__btn:hover,
+a.js-btn-messages.topnav__btn:hover {
   text-decoration: none !important;
 }
 
@@ -1076,18 +1092,24 @@ button.js-btn-notifs.topnav__btn:hover,a.js-btn-messages.topnav__btn:hover{
     transform: translateY(-100%);
     opacity: 0;
   }
+
   to {
     transform: translateY(0);
     opacity: 1;
   }
 }
 
-#shortcutsMenu,#coursesMenu,#linksMenu,#notifsMenu {
+#shortcutsMenu,
+#coursesMenu,
+#linksMenu,
+#notifsMenu {
   animation: flyInFromTop 0.15s ease forwards;
 }
-.homepage__right{
+
+.homepage__right {
   border-left: 4px solid var(--color-base01) !important;
 }
-.homepage__left{
+
+.homepage__left {
   border-right: 4px solid var(--color-base01) !important;
 }

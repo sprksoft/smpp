@@ -90,8 +90,9 @@ li {
   background: none !important;
   color: var(--color-base02) !important;
 }
-.smsc_cm_body{
+
+.smsc_cm_body {
   border: 2px solid var(--color-base02) !important;
-border-radius: 10px !important;
-padding: 10px !important;
+  border-radius: 10px !important;
+  padding: 10px !important;
 }

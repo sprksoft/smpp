@@ -13,11 +13,11 @@ function scrape_from_html(query, func) {
   return data;
 }
 
-function is_valid_data(data){
-  return ! (data == undefined || data.length == 0 || data.length == undefined)
+function is_valid_data(data) {
+  return !(data == undefined || data.length == 0 || data.length == undefined)
 }
 
-function scrape_data_if_needed(data, query, func, done_func){
+function scrape_data_if_needed(data, query, func, done_func) {
   if (is_valid_data(data)) {
     done_func(data)
     window.localStorage.setItem(name, JSON.stringify(data));
@@ -34,17 +34,17 @@ function scrape_data_if_needed(data, query, func, done_func){
   return false
 }
 
-function scrape(name, query, func, done_func, interval_time=0) {
+function scrape(name, query, func, done_func, interval_time = 0) {
   let data = JSON.parse(window.localStorage.getItem(name));
-  if (scrape_data_if_needed(data, query, func, done_func)){
+  if (scrape_data_if_needed(data, query, func, done_func)) {
     return
   }
-  if (interval_time == 0){
+  if (interval_time == 0) {
     return
   }
 
   let interval = setInterval(() => {
-    if (scrape_data_if_needed(data, query, func, done_func)){
+    if (scrape_data_if_needed(data, query, func, done_func)) {
       clearInterval(interval)
     }
   }, interval_time);
