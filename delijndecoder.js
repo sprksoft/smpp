@@ -70,7 +70,7 @@ function getchoice(data) {
 }
 
 function decodehalte() {
-  const leftContainer = document.getElementById("leftcontainer");
+  const leftContainer = document.getElementById("delijncontainer");
   if (!leftContainer) return;
 
   leftContainer.innerHTML = `

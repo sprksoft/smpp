@@ -16,7 +16,7 @@ body {
   background-attachment: fixed !important;
 }
 
-#leftcontainer,
+#leftcontainer,.homepage__left,
 #rightcontainer {
   background-color: var(--color-homepage-sidebars-bg) !important;
   backdrop-filter: var(--blur-value-large) !important;
@@ -34,7 +34,7 @@ body {
   display: none !important;
 }
 
-#leftcontainer {
+#leftcontainer,.homepage__left {
   padding: 16px 24px !important;
 }
 

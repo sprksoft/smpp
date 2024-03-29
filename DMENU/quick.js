@@ -234,7 +234,7 @@ if (topNav && document.querySelector("#dmenutooltip") == undefined){
   const quickButton = document.createElement("button");
   quickButton.id = "dmenutooltip" //TODO: change this to something more meaningful
   quickButton.className="topnav__btn"
-  quickButton.innerText="[qm]"
+  quickButton.innerText="Quick"
   quickButton.addEventListener("click", function(){
     do_qm(quickButton);
   })

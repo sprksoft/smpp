@@ -228,11 +228,22 @@ const popupsettingHTML = `<head>
 </select>
 <div class="textandbutton" id="colorpickers">
 </div>
-<h3 class="popuptitles">Show DeLijn app:</h3>
-<label class="switch">
-<input class="popupinput" type="checkbox" id="halt">
-<span class="slider round"></span>
-</label>
+<div class="textandbutton">
+  <div>
+    <h3 class="popuptitles">Planner:</h3>
+    <label class="switch">
+      <input class="popupinput" type="checkbox" id="showplanner">
+      <span class="slider round"></span>
+      </label>
+  </div>
+<div>
+  <h3 class="popuptitles">Delijn:</h3>
+  <label class="switch">
+    <input class="popupinput" type="checkbox" id="halt">
+    <span class="slider round"></span>
+    </label>
+</div>
+</div>
 <h3 class="popuptitles">Location (weather):</h3>
 <div class="textandbutton">
 <input class="popupinput" id="location" type="text"></input>

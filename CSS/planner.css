@@ -414,12 +414,25 @@ padding: 4px !important;
 margin-bottom: 15px;
 position: absolute;
 overflow: hidden;
-font-size: .833rem;
+font-size: 10px;
 min-height: 23px;
 margin: 1px !important;
+transition: ease-in;
+transition-duration: 100ms;
 }
 .planner-container{
   display: flex !important;
   max-width: 280px !important;
   position: relative !important;
+margin-top: 20px !important;
+}
+.no-bottom-margin{
+  margin-bottom: 0px !important;
+}
+.planner-title-startpage{
+  text-align: center !important;
+  margin-top: -30px !important;
+  margin-bottom: 0px !important;
+  width: 100%;
+
 }

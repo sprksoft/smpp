@@ -45,8 +45,8 @@ html {
 }
 
 #centercontainer {
-  border-left: 4px solid var(--color-base01) !important;
-  border-right: 4px solid var(--color-base01) !important;
+  border-left: 4px solid transparent !important;
+  border-right: 4px solid transparent !important;
 }
 
 .toolbar,
@@ -617,7 +617,13 @@ input:checked+.slider:before {
 
 .smscFrameTitleContainer .smscFrameTitle,
 .uploadzone .files .navigation {
-  border: 1px solid var(--color-base03) !important;
+  border: 2px solid var(--color-base03) !important;
+}
+#smscleftnav .smscleftnavcontainer{
+  border-width: 2px !important;
+}
+.smsc-topnav .topnav__divider{
+  width: 2px !important;
 }
 
 .course-session-page__container {
@@ -1076,4 +1082,10 @@ button.js-btn-notifs.topnav__btn:hover,a.js-btn-messages.topnav__btn:hover{
 
 #shortcutsMenu,#coursesMenu,#linksMenu,#notifsMenu {
   animation: flyInFromTop 0.15s ease forwards;
+}
+.homepage__right{
+  border-left: 4px solid var(--color-base01) !important;
+}
+.homepage__left{
+  border-right: 4px solid var(--color-base01) !important;
 }

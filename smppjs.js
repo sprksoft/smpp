@@ -59,12 +59,28 @@ async function apply() {
   const shownews = settingsData.shownews;
   const showsnake = settingsData.showsnake;
   var show_scores = settingsData.show_scores;
+  var showplanner = settingsData.showplanner;
   var IsBig = settingsData.isbig;
   set_theme("default");
   set_theme(profileSelect);
 
   if (show_scores == undefined) {
     show_scores = false;
+  }
+  console.log(showplanner)
+  if (showplanner == undefined){
+    settingsData = get_config()
+    settingsData.showplanner = true
+    showplanner = true
+    set_config(settingsData)
+  }
+  console.log(IsBig)
+  if (IsBig == undefined){
+    console.log("yes")
+    settingsData = get_config()
+    settingsData.isbig = true
+    IsBig = true
+    set_config(settingsData)
   }
   topnav = document.querySelector('.topnav')
   if (topnav) {
@@ -113,6 +129,8 @@ async function apply() {
   let bigblurvalue = blurvalue * 2;
   const rightContainer = document.getElementById('rightcontainer');
   const centralContainer = document.getElementById('centercontainer')
+  const leftcontainer = document.getElementById('leftcontainer')
+  const container = document.getElementById('container')
   if (blurvalue == 0) {
     bigblurvalue += 2;
   };
@@ -134,13 +152,34 @@ async function apply() {
     if (showsnake) {
       startSnakeGame()
     }
-
+    if (leftcontainer){
+      leftcontainer.innerHTML = " "
+      leftcontainer.style.display = "none"
+    }
+    if (document.getElementById("delijncontainer")){
+      document.getElementById("delijncontainer").remove()
+    }
+    if (document.getElementById("plannercontainer")){
+      document.getElementById("plannercontainer").remove()
+    }
     if (halte) {
+      var DelijnAppElement = document.createElement("div")
+      DelijnAppElement.classList.add("homepage__left")
+      DelijnAppElement.classList.add("smsc-container--left")
+      DelijnAppElement.setAttribute("id","delijncontainer")
+      container.prepend(DelijnAppElement)
       decodehalte()
       
-    } else {
+    }
+    if (showplanner){
+      var PlannerAppElement = document.createElement("div")
+      PlannerAppElement.classList.add("homepage__left")
+      PlannerAppElement.classList.add("smsc-container--left")
+      PlannerAppElement.setAttribute("id","plannercontainer")
+      container.prepend(PlannerAppElement)
       ShowPlanner()
     }
+
     if (!shownews) {
       centralContainer.innerHTML = ' '
     }
@@ -189,6 +228,7 @@ function store() {
   const shownews = document.getElementById("shownewselement").checked;
   const showsnake = document.getElementById('showsnakeelement').checked;
   const isbig = document.getElementById("isbig").checked;
+  const showplanner = document.getElementById("showplanner").checked;
   settingsData.profile = profileSelect;
   settingsData.halte = halte;
   settingsData.overwrite_theme = overwrite_theme;
@@ -201,6 +241,7 @@ function store() {
   settingsData.showsnake = showsnake;
   settingsData.show_scores = previousData.show_scores;
   settingsData.isbig = isbig;
+  settingsData.showplanner = showplanner;
   console.log(settingsData)
   if (settingsData.show_scores == undefined) {
     settingsData.show_scores = false;
@@ -277,6 +318,7 @@ function load() {
   const shownews = document.getElementById("shownewselement");
   const showsnake = document.getElementById("showsnakeelement");
   const isbig = document.getElementById("isbig");
+  const showplanner = document.getElementById("showplanner");
   profileSelect.value = settingsData.profile
   halte.checked = settingsData.halte
   overwrite_theme.value = settingsData.overwrite_theme
@@ -287,6 +329,7 @@ function load() {
   shownews.checked = settingsData.shownews
   showsnake.checked = settingsData.showsnake
   isbig.checked = settingsData.isbig
+  showplanner.checked = settingsData.showplanner
   if (profileSelect.value == "custom") {
     loadCustomTheme()
   }

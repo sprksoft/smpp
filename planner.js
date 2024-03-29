@@ -29,9 +29,10 @@ function fancyfyTime(inputTime) {
         let [hours, minutes, period] = time.split(':');
         hours = parseInt(hours);
         minutes = parseInt(minutes);
-        if (period.toLowerCase() === 'pm' && hours !== 12) {
+        console.log(period)
+        if (period.toLowerCase().includes('pm')  && hours !== 12) {
             hours += 12;
-        } else if (period.toLowerCase() === 'am' && hours === 12) {
+        } else if (period.toLowerCase().includes('am') && hours === 12) {
             hours = 0;
         }
         return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
@@ -71,7 +72,7 @@ async function ShowPlanner() {
     const plannerContainer = document.createElement('div');
     plannerContainer.classList.add('planner-container');
     
-    const container = document.getElementById('leftcontainer');
+    const container = document.getElementById('plannercontainer');
     container.innerHTML = ''; 
     container.appendChild(plannerContainer);
     const plannerUrl = document.getElementById('datePickerMenu').getAttribute('plannerurl');
@@ -88,7 +89,10 @@ async function ShowPlanner() {
             earliestStartTime = dateTimeFrom;
         }
     });
-
+    var Title = document.createElement("h2")
+    Title.innerText = await getDateInCorrectFormat(true)
+    Title.classList.add('planner-title-startpage')
+    plannerContainer.appendChild(Title)
     const beginTime = new Date(earliestStartTime);
 
     const timeSlots = [];
@@ -131,17 +135,20 @@ async function ShowPlanner() {
             })
             const itemNameElement = document.createElement('h3');
             itemNameElement.textContent = itemName + ' - ' + teachers;
+            itemNameElement.classList.add("no-bottom-margin")
             plannerElement.appendChild(itemNameElement);
 
             const timeElement = document.createElement('p');
             const dateTimeFrom = new Date(element.period.dateTimeFrom);
             const dateTimeTo = new Date(element.period.dateTimeTo);
             timeElement.textContent = fancyfyTime(`${dateTimeFrom.toLocaleTimeString()} - ${dateTimeTo.toLocaleTimeString()}`);
+            timeElement.classList.add("no-bottom-margin")
             plannerElement.appendChild(timeElement);
             if (element.name){
                 const itemDescription = element.name
                 const itemDescriptionElement = document.createElement('p');
                 itemDescriptionElement.textContent = itemDescription
+                itemDescriptionElement.classList.add("no-bottom-margin")
                 plannerElement.appendChild(itemDescriptionElement);
             }
             const height = calculateElementHeight(dateTimeFrom, dateTimeTo);
@@ -160,6 +167,20 @@ async function ShowPlanner() {
 
             plannerElement.style.width = `${elementWidthPercentage}%`;
             plannerContainer.appendChild(plannerElement);
+            plannerElement.addEventListener('mouseover',()=>{
+                plannerElement.style.width = '100%'
+                plannerElement.style.height = '73px'
+                plannerElement.style.left = '0'
+                plannerElement.style.zIndex = "100"
+            })
+            plannerElement.addEventListener('mouseout',()=>{
+                plannerElement.style.left = `${left}%`;
+                plannerElement.style.top = `${top}px`;
+                plannerElement.style.height = `${height}px`;
+                plannerElement.style.width = `${elementWidthPercentage}%`;
+                plannerElement.style.zIndex = "99"
+            })
         });
     });
+    
 }
