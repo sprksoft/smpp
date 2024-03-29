@@ -176,7 +176,9 @@ async function ShowPlanner() {
             plannerContainer.appendChild(plannerElement);
             plannerElement.addEventListener('mouseover', () => {
                 plannerElement.style.width = '100%'
-                plannerElement.style.height = '73px'
+                if (height<73){
+                    plannerElement.style.height = '73px'
+                }
                 plannerElement.style.left = '0'
                 plannerElement.style.zIndex = "100"
             })
