@@ -97,17 +97,10 @@
 }
 
 .weather-temperatureSmall {
-  font-size: 45px;
+  font-size: 12px;
   margin-bottom: 5px;
   font-weight: lighter;
   color: var(--color-text) !important;
-}
-
-.weather-mainSmall {
-  font-weight: bold;
-  font-size: 22px;
-  color: var(--color-text) !important;
-  text-align: end !important;
 }
 
 .weather-descriptionSmall {
@@ -115,13 +108,7 @@
   margin-bottom: 5px;
 }
 
-.weather-humwindSmall {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  margin-bottom: 0px !important;
-  margin-left: 5px !important;
-}
+
 
 .weatherImg {
   display: flex;
@@ -157,10 +144,6 @@
   margin-bottom: 0px !important;
 }
 
-.weatherSmall {
-  margin-top: -10px !important;
-  margin-bottom: -10px !important;
-}
 
 .weather-iconSmall {
   width: 100px !important;
@@ -170,4 +153,36 @@
 
 .weather-feelslikeSmall {
   text-align: start !important;
+}
+
+.weather-humwindSmall {
+  display: flex !important;
+  align-items: flex-end !important;
+  justify-content: flex-end !important; 
+  flex-direction: column; 
+  margin-bottom: 0px !important;
+  margin-right: 5px !important; 
+}
+
+
+#weather-icon-mostlysunny{
+  width: 120px; 
+  height: auto; 
+  margin-right: auto;
+}
+
+.weather-humwindSmall svg {
+  width: 30px;
+  height: auto; 
+  margin-bottom: 5px; 
+}
+
+.weather-windSmall {
+  margin-bottom: 5px !important; 
+}
+
+.weather-lastupdateSmall {
+  margin-top: 5px !important;
+  font-weight: bold !important;
+  margin-bottom: 0px !important;
 }
