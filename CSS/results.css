@@ -139,7 +139,24 @@
   background-color: var(--color-red) !important;
   filter: brightness(85%)
 }
+.c-olive-combo--100 {
+  background-color: var(--color-dark-green) !important;
+  color: var(--color-dark-green) !important;
+}
 
+.c-olive-combo--200 {
+  background-color: var(--color-dark-green) !important;
+  filter: brightness(85%)
+}
+.c-yellow-combo--100 {
+  background-color: var(--color-yellow) !important;
+  color: var(--color-dark-green) !important;
+}
+
+.c-yellow-combo--200 {
+  background-color: var(--color-yellow) !important;
+  filter: brightness(85%)
+}
 .goals__goal__content__title {
   background-color: var(--color-base00) !important;
   color: var(--color-text) !important;

@@ -78,7 +78,14 @@ async function ShowPlanner() {
     const plannerUrl = document.getElementById('datePickerMenu').getAttribute('plannerurl');
     const data = await fetchPlannerData(await getDateInCorrectFormat(true), plannerUrl.split("/")[4]);
     if (!data || data.length === 0) {
-        plannerContainer.innerHTML = 'No planner data available.';
+        plannerContainer.innerHTML = `<h4>No planner data available. Consider turning planner <strong><i>off</i></strong> if your school doesn't use planner yet</h4>
+        <a id="turn-off-planner">Click here to turn planner <i>off</i></a>`;
+        document.getElementById("turn-off-planner").addEventListener("click",()=>{
+            settingsData = get_config()
+            settingsData.showplanner = false
+            set_config(settingsData)
+            apply()
+        })
         return;
     }
 

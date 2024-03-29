@@ -425,6 +425,7 @@ transition-duration: 100ms;
   max-width: 280px !important;
   position: relative !important;
 margin-top: 20px !important;
+flex-direction: column;
 }
 .no-bottom-margin{
   margin-bottom: 0px !important;
