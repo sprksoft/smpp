@@ -89,7 +89,10 @@ async function apply() {
     notifsButton.innerHTML = notfisSvg
     notifsButton.appendChild(textSpan);
   }
-
+  const startButton = document.querySelector('.js-btn-home');
+  if (startButton) {
+    startButton.innerHTML = homeiconSvg
+  }
   const messageButton = document.querySelector('.js-btn-messages');
   if (messageButton) {
     const textSpan = messageButton.querySelector('span');

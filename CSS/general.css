@@ -1079,9 +1079,14 @@ h1.topnav__title {
 span.js-badge-notifs.topnav__badge,
 span.js-badge-msg.topnav__badge {
   position: relative !important;
-  top: -3px;
+  top: -4px;
 }
-
+span.js-badge-notifs.topnav__badge{
+  margin-left: -3px !important;
+}
+span.js-badge-msg.topnav__badge{
+  margin-left: 3px !important;
+}
 button.js-btn-notifs.topnav__btn:hover,
 a.js-btn-messages.topnav__btn:hover {
   text-decoration: none !important;
