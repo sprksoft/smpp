@@ -18,6 +18,7 @@ body {
 
 #leftcontainer,
 .homepage__left,
+.homepage__right,
 #rightcontainer {
   background-color: var(--color-homepage-sidebars-bg) !important;
   backdrop-filter: var(--blur-value-large) !important;

@@ -29,7 +29,6 @@ function fancyfyTime(inputTime) {
         let [hours, minutes, period] = time.split(':');
         hours = parseInt(hours);
         minutes = parseInt(minutes);
-        console.log(period)
         if (period.toLowerCase().includes('pm') && hours !== 12) {
             hours += 12;
         } else if (period.toLowerCase().includes('am') && hours === 12) {
@@ -45,7 +44,7 @@ function fancyfyTime(inputTime) {
 async function getDateInCorrectFormat(isFancyFormat) {
     let currentDate = new Date();
     if (currentDate.getHours() >= 18) {
-        currentDate.setDate(currentDate.getDate() + 1);
+        currentDate.setDate(currentDate.getDate() + 3);
         currentDate.setHours(7);
         currentDate.setMinutes(30);
     } else if (currentDate.getDay() === 5 && currentDate.getHours() >= 18) {
@@ -104,6 +103,14 @@ async function ShowPlanner() {
 
     const timeSlots = [];
     data.forEach((element, index, array) => {
+        if (element.period.wholeDay) {
+            const newSlot = {
+                from: beginTime,
+                to: new Date(beginTime),
+                elements: [element]
+            };
+            timeSlots.push(newSlot);
+        } else {
         const dateTimeFrom = new Date(element.period.dateTimeFrom);
         const dateTimeTo = new Date(element.period.dateTimeTo);
         const overlappingSlots = timeSlots.filter(slot => {
@@ -121,7 +128,7 @@ async function ShowPlanner() {
             overlappingSlots.forEach(slot => {
                 slot.elements.push(element);
             });
-        }
+        }}
     });
 
     timeSlots.forEach(slot => {
@@ -137,9 +144,11 @@ async function ShowPlanner() {
 
             const itemName = element.courses && element.courses.length > 0 ? element.courses[0].name : element.name;
             var teachers = []
-            element.organisers.users.forEach((element) => {
-                teachers.push(element.name.startingWithFirstName)
-            })
+            if(element.organisers){
+                element.organisers.users.forEach((element) => {
+                    teachers.push(element.name.startingWithFirstName)
+                })
+            }
             const itemNameElement = document.createElement('h3');
             itemNameElement.textContent = itemName + ' - ' + teachers;
             itemNameElement.classList.add("no-bottom-margin")
@@ -174,21 +183,32 @@ async function ShowPlanner() {
 
             plannerElement.style.width = `${elementWidthPercentage}%`;
             plannerContainer.appendChild(plannerElement);
-            plannerElement.addEventListener('mouseover', () => {
+            function hoverPlannerElement(){
                 plannerElement.style.width = '100%'
                 if (height<73){
                     plannerElement.style.height = '73px'
                 }
                 plannerElement.style.left = '0'
                 plannerElement.style.zIndex = "100"
-            })
-            plannerElement.addEventListener('mouseout', () => {
+            }
+            function noHoverPlannerElement(){
                 plannerElement.style.left = `${left}%`;
                 plannerElement.style.top = `${top}px`;
                 plannerElement.style.height = `${height}px`;
                 plannerElement.style.width = `${elementWidthPercentage}%`;
                 plannerElement.style.zIndex = "99"
-            })
+            }
+            plannerElement.addEventListener('mouseover', hoverPlannerElement)
+            plannerElement.addEventListener('mouseout', noHoverPlannerElement)
+            if(element.period.wholeDay){
+                plannerElement.style.width = '100%'
+                plannerElement.style.height = '24px'
+                plannerElement.style.left = '0'
+                plannerElement.style.top = '0'
+                plannerElement.style.zIndex = "100"
+                plannerElement.removeEventListener('mouseover', hoverPlannerElement)
+                plannerElement.removeEventListener('mouseout', noHoverPlannerElement)
+            }
         });
     });
 

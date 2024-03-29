@@ -15,7 +15,7 @@ async function updateWeatherDiv(weatherData, IsBig) {
   if (!weatherData) {
     return;
   }
-  const rightContainer = document.getElementById('rightcontainer');
+  const rightContainer = document.getElementById('weathercontainer');
   let weatherdiv = document.createElement("div");
   const { name, main, weather, wind } = weatherData;
   const temperature = Math.round(main.temp);

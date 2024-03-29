@@ -67,16 +67,13 @@ async function apply() {
   if (show_scores == undefined) {
     show_scores = false;
   }
-  console.log(showplanner)
   if (showplanner == undefined) {
     settingsData = get_config()
     settingsData.showplanner = true
     showplanner = true
     set_config(settingsData)
   }
-  console.log(IsBig)
   if (IsBig == undefined) {
-    console.log("yes")
     settingsData = get_config()
     settingsData.isbig = true
     IsBig = true
@@ -145,23 +142,22 @@ async function apply() {
   if (centralContainer) {
 
     discordpopup()
-    rightContainer.innerHTML = ""
-    if (loc != "") {
-      await set_weather_loc(loc, IsBig);
+    if(rightContainer){
+      rightContainer.innerHTML = ""
+      rightContainer.style.display = "none"
     }
-    if (showsnake) {
-      startSnakeGame()
-    }
+
+
     if (leftcontainer) {
       leftcontainer.innerHTML = " "
       leftcontainer.style.display = "none"
     }
-    if (document.getElementById("delijncontainer")) {
-      document.getElementById("delijncontainer").remove()
-    }
-    if (document.getElementById("plannercontainer")) {
-      document.getElementById("plannercontainer").remove()
-    }
+document.getElementById("leftcontainer")?document.getElementById("leftcontainer").remove() : "pass"
+document.getElementById("rightcontainer")?document.getElementById("rightcontainer").remove() : "pass"
+document.getElementById("plannercontainer")?document.getElementById("plannercontainer").remove() : "pass"
+document.getElementById("weathercontainer")?document.getElementById("weathercontainer").remove() : "pass"
+document.getElementById("delijncontainer")?document.getElementById("delijncontainer").remove() : "pass"
+
     if (halte) {
       var DelijnAppElement = document.createElement("div")
       DelijnAppElement.classList.add("homepage__left")
@@ -169,7 +165,6 @@ async function apply() {
       DelijnAppElement.setAttribute("id", "delijncontainer")
       container.prepend(DelijnAppElement)
       decodehalte()
-
     }
     if (showplanner) {
       var PlannerAppElement = document.createElement("div")
@@ -179,7 +174,25 @@ async function apply() {
       container.prepend(PlannerAppElement)
       ShowPlanner()
     }
-
+    if (loc != "") {
+      var WeatherAppElement = document.createElement("div")
+      WeatherAppElement.classList.add("homepage__right")
+      WeatherAppElement.classList.add("smsc-container--right")
+      WeatherAppElement.setAttribute("id", "weathercontainer")
+      container.append(WeatherAppElement)
+      await set_weather_loc(loc, IsBig);
+    }
+    if (showsnake) {
+      if(!document.getElementById("weathercontainer")){
+        var WeatherAppElement = document.createElement("div")
+        WeatherAppElement.classList.add("homepage__right")
+        WeatherAppElement.classList.add("smsc-container--right")
+        WeatherAppElement.setAttribute("id", "weathercontainer")
+        container.append(WeatherAppElement)
+      }else{
+        startSnakeGame()
+      }
+    }
     if (!shownews) {
       centralContainer.innerHTML = ' '
     }

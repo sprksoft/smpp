@@ -43,8 +43,8 @@ function startSnakeGame() {
     window.localStorage.setItem("snakehighscore", 0)
     highscore = window.localStorage.getItem("snakehighscore")
   }
-  document.getElementById("rightcontainer").appendChild(document.createElement("div"))
-  let rightContainer = document.getElementById("rightcontainer")
+  document.getElementById("weathercontainer").appendChild(document.createElement("div"))
+  let rightContainer = document.getElementById("weathercontainer")
   rightContainer.appendChild(div)
   div.innerHTML = `<div id=game-div><h2 class=gameover>Snake++</h2><p class=score>High Score: ${highscore}</p><button class="white_text_button" id="play_button">Play</button><p class=score>Speed:</p><div class="textandbutton"><input type="range" min="10" max="300" value="100" class="sliderblur" id="speedslider"><p id=speedmultiplier class=text_next_to_slider>1.5x</p></div></div>`
   loadSpeed()
