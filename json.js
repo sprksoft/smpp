@@ -395,7 +395,6 @@ const weatherHTMLTiny = `<div class="weatherdiv">
   <div src="https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/chanceflurries.svg"
     class="weather-icon"></div>
 </div>
-<p class="weather-temperature weather-temperatureSmall"></p>
 <div class="weather-humwind weather-humwindSmall">
   <svg xmlns="http://www.w3.org/2000/svg" id="layer1" data-name="Laag 2" height="35px" width="35px"
     viewBox="0 0 29.83 24.41">
@@ -425,7 +424,8 @@ const weatherHTMLTiny = `<div class="weatherdiv">
       </g>
     </g>
   </svg>
-
+  <p class="weather-temperature weather-temperatureSmall"></p>
+</div>
   <div class="weather-humwind weather-humwindSmall">
     <svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" height="45px" width="45px" data-name="Laag 2"
       viewBox="0 0 39.94 24.5">
@@ -448,6 +448,7 @@ const weatherHTMLTiny = `<div class="weatherdiv">
         </g>
       </g>
     </svg>
+    <p class="weather-humidity weather-humiditySmall"></p>
   </div>
   <div class="weather-humwind weather-humwindSmall">
     <svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" height="35px" width="35px" data-name="Laag 2" viewBox="0 0 24.28 25.14">
@@ -466,18 +467,15 @@ const weatherHTMLTiny = `<div class="weatherdiv">
         </g>
       </g>
       </svg>
+      <p class="weather-wind weather-windSmall"></p>
   </div>
 
-</div>
-<p class="weather-humidity weather-humiditySmall"></p>
-
-<p class="weather-wind weather-windSmall"></p>
-<p class="weather-feelslike weather-feelslikeSmall"></p>
-
-<p class="weather-lastupdate weather-lastupdateSmall"></p>
+  <p class="weather-lastupdate weather-lastupdateSmall"></p>
 </div>
 
+
 </div>
+
 
 </div>
 `;

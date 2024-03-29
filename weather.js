@@ -39,8 +39,12 @@ async function updateWeatherDiv(weatherData, IsBig) {
 
     weatherdiv.querySelector(".weather-location").innerText = name;
     weatherdiv.querySelector(".weather-main").innerText = mainWeather;
-    weatherdiv.querySelector(".weather-temperature").innerText = temperature + "°C";
-    weatherdiv.querySelector(".weather-feelslike").innerText = "Feels like " + feelslike + "°C";
+    if (weatherdiv.querySelector(".weather-temperature").innerText = temperature + "°C"){
+      weatherdiv.querySelector(".weather-temperature").innerText = temperature + "°C";
+    }
+    if (weatherdiv.querySelector(".weather-feelslike")){
+      weatherdiv.querySelector(".weather-feelslike").innerText = "Feels like " + feelslike + "°C";
+    }
     weatherdiv.querySelector(".weather-humidity").innerText = humidity + "%";
     weatherdiv.querySelector(".weather-wind").innerText = windSpeedkmh + "km/h";
     if (difference == 0) {
