@@ -8,6 +8,7 @@ const default_settings = {
   snow: "0",
   shownews: true,
   showsnake: false,
+  showflappy: false,
   backgroundlink: "none",
   backgroundfile: "none",
   show_scores: false,

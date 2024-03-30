@@ -280,6 +280,13 @@ const popupsettingHTML = `<head>
       <span class="slider round"></span>
       </label>
   </div>
+  <div>
+    <h3 class="popuptitles">Flappy Bird:</h3>
+    <label class="switch">
+      <input class="popupinput" type="checkbox" id="showflappyelement">
+      <span class="slider round"></span>
+      </label>
+  </div>
 <div>
   <h3 class="popuptitles">News:</h3>
   <label class="switch">

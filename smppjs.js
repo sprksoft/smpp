@@ -58,6 +58,7 @@ async function apply() {
   const snow = settingsData.snow;
   const shownews = settingsData.shownews;
   const showsnake = settingsData.showsnake;
+  const showflappy = settingsData.showflappy;
   var show_scores = settingsData.show_scores;
   var showplanner = settingsData.showplanner;
   var IsBig = settingsData.isbig;
@@ -196,6 +197,17 @@ document.getElementById("delijncontainer")?document.getElementById("delijncontai
         startSnakeGame()
       }
     }
+    if (showflappy) {
+      if(!document.getElementById("weathercontainer")){
+        var WeatherAppElement = document.createElement("div")
+        WeatherAppElement.classList.add("homepage__right")
+        WeatherAppElement.classList.add("smsc-container--right")
+        WeatherAppElement.setAttribute("id", "weathercontainer")
+        container.append(WeatherAppElement)
+      }else{
+        startFlappyGame()
+      }
+    }
     if (!shownews) {
       centralContainer.innerHTML = ' '
     }
@@ -243,6 +255,7 @@ function store() {
   const snowSlider = document.getElementById('snowSlider').value;
   const shownews = document.getElementById("shownewselement").checked;
   const showsnake = document.getElementById('showsnakeelement').checked;
+  const showflappy = document.getElementById('showflappyelement').checked;
   const isbig = document.getElementById("isbig").checked;
   const showplanner = document.getElementById("showplanner").checked;
   settingsData.profile = profileSelect;
@@ -255,6 +268,7 @@ function store() {
   settingsData.snow = parseInt(snowSlider);
   settingsData.shownews = shownews;
   settingsData.showsnake = showsnake;
+  settingsData.showflappy = showflappy
   settingsData.show_scores = previousData.show_scores;
   settingsData.isbig = isbig;
   settingsData.showplanner = showplanner;
@@ -333,6 +347,7 @@ function load() {
   const snowSlider = document.getElementById('snowSlider');
   const shownews = document.getElementById("shownewselement");
   const showsnake = document.getElementById("showsnakeelement");
+  const showflappy = document.getElementById("showflappyelement");
   const isbig = document.getElementById("isbig");
   const showplanner = document.getElementById("showplanner");
   profileSelect.value = settingsData.profile
@@ -344,6 +359,7 @@ function load() {
   snowSlider.value = settingsData.snow
   shownews.checked = settingsData.shownews
   showsnake.checked = settingsData.showsnake
+  showflappy.checked = settingsData.showflappy
   isbig.checked = settingsData.isbig
   showplanner.checked = settingsData.showplanner
   if (profileSelect.value == "custom") {

@@ -49,7 +49,7 @@ body {
   top: -67px !important;
 }
 
-#game-div {
+#game-div, #flappy-game-div {
   background-color: var(--color-base01);
   padding: 0px !important;
   border-radius: 15px;
@@ -62,10 +62,13 @@ body {
   width: 282px;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 #play_button,
-#tryagain {
+#tryagain,
+#flappy_play_button,
+#flappytryagain {
   font-size: 20px !important;
   width: 168px !important;
   padding: 4px !important;
