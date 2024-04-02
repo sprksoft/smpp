@@ -13,7 +13,7 @@ function startFlappyGame() {
     if (highscore == 911){
         div.innerHTML = `<div id=game-div><h2 class=gameover>FREE Bird++</h2><p class=score>High Score: ${highscore}</p><button class="white_text_button" id="flappy_play_button">Play</button><p class=score></p></div>`
     }
-    else if (highscore >= 100){
+    if (highscore >= 100 && highscore != 911){
         div.innerHTML = `<div id=game-div><h2 class=gameover>free Bird++</h2><p class=score>High Score: ${highscore}</p><button class="white_text_button" id="flappy_play_button">Play</button><p class=score></p></div>`
     }
     else{
