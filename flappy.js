@@ -13,7 +13,7 @@ function startFlappyGame() {
     if (highscore == 911){
         div.innerHTML = `<div id=game-div><h2 class=gameover>FREE Bird++</h2><p class=score>High Score: ${highscore}</p><button class="white_text_button" id="flappy_play_button">Play</button><p class=score></p></div>`
     }
-    if (highscore >= 100 && highscore != 911){
+    else if (highscore >= 100 && highscore != 911){
         div.innerHTML = `<div id=game-div><h2 class=gameover>free Bird++</h2><p class=score>High Score: ${highscore}</p><button class="white_text_button" id="flappy_play_button">Play</button><p class=score></p></div>`
     }
     else{
@@ -66,7 +66,7 @@ function flappyGame() {
     let birdX = canvas.width / 4;
     let birdY = 110;
     let bgX = 0;
-    let gravity = 0.5;
+    let gravity = 0.7;
     let gravitySpeed = 0.2;
     let score = 0;
     const pipeSpeed = 5;
