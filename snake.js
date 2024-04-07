@@ -46,7 +46,7 @@ function startSnakeGame() {
   document.getElementById("weathercontainer").appendChild(document.createElement("div"))
   let rightContainer = document.getElementById("weathercontainer")
   rightContainer.appendChild(div)
-  div.innerHTML = `<div id=game-div><h2 class=gameover>Snake++</h2><p class=score>High Score: ${highscore}</p><button class="white_text_button" id="play_button">Play</button><p class=score>Speed:</p><div class="textandbutton"><input type="range" min="10" max="300" value="100" class="sliderblur" id="speedslider"><p id=speedmultiplier class=text_next_to_slider>1.5x</p></div></div>`
+  div.innerHTML = `<div id=game-div><h2 class=gameover>Snake++</h2><p class=score>High Score: ${highscore}</p><button class="white_text_button" id="play_button">Play</button><p class=score>Speed:</p><div class="textandbutton"><input type="range" min="10" max="300" value="100" class="sliderblur speedslider" id="speedslider"><p id=speedmultiplier class=text_next_to_slider>1.5x</p></div></div>`
   loadSpeed()
   document.getElementById('play_button').addEventListener("click", () => {
     div.innerHTML = `<div id=game-div><canvas id=game-container></div>`
@@ -58,7 +58,7 @@ function startSnakeGame() {
 function gameOver(score) {
   const gamediv = document.getElementById("game-div");
   gamediv.innerHTML = `<h2 class=gameover>Game Over!</h2><p class=score>Score: ${score}</p> <button class="white_text_button" id=tryagain>
-  Try Again (Enter)</button><p class=score>Speed:</p><div class="textandbutton"><input type="range" min="10" max="300" value="100" class="sliderblur" id="speedslider"><p id=speedmultiplier class=text_next_to_slider>1.5x</p></div>`;
+  Try Again (Enter)</button><p class=score>Speed:</p><div class="textandbutton"><input type="range" min="10" max="300" value="100" class="speedslider sliderblur" id="speedslider"><p id=speedmultiplier class=text_next_to_slider>1.5x</p></div>`;
   loadSpeed()
   var enterKeyHandler = function (event) {
     if (event.key === "Enter" || event.key === "e") {

@@ -70,7 +70,7 @@ body {
 #flappy_play_button,
 #flappytryagain {
   font-size: 20px !important;
-  width: 168px !important;
+  width: 180px !important;
   padding: 4px !important;
   border-width: 3px !important;
   border-radius: 10px !important;
@@ -88,7 +88,7 @@ body {
   font-size: 20px !important;
 }
 
-#speedslider {
+.speedslider {
   background-color: var(--color-base02) !important;
   margin-left: 47px !important;
   margin-right: 5px !important;

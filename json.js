@@ -197,17 +197,6 @@ const colorpickersHTML = `
 <input type="color" class="color-pickersmpp" id="colorPicker6">
 <span class="color-label">Text</span>
 </div>`
-const settingsInputElements = {
-  "profileSelector": "profile",
-  "backgroundlink": "backgroundlink",
-  "halt": "halte",
-  "backgroundSlider": "overwrite_theme",
-  "location": "location",
-  "mySlider": "blur",
-  "snowSlider": "snow",
-  "shownewselement": "shownews",
-  "showsnakeelement": "showsnake"
-}
 const popupsettingHTML = `<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
@@ -281,7 +270,7 @@ const popupsettingHTML = `<head>
       </label>
   </div>
   <div>
-    <h3 class="popuptitles">Flappy Bird:</h3>
+    <h3 class="popuptitles">Flappy:</h3>
     <label class="switch">
       <input class="popupinput" type="checkbox" id="showflappyelement">
       <span class="slider round"></span>
