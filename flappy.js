@@ -1,12 +1,14 @@
 let flappy_running = false;
 function storeFlappySpeed() {
     let slider = document.getElementById("flappyspeedslider").value;
-    if (sliderValue == 300) {
-        document.getElementById('flappy-game-div').getElementsByTagName('h2')[0].innerText = "FREE BIRD++";
+    console.log(slider)
+    if (slider == 300) {
+        document.getElementById('flappytitle').innerText = "Free Bird++";
+        console.log("should be free bird now")
       } else {
-        document.getElementById('flappy-game-div').getElementsByTagName('h2')[0].innerText = "Flappy Bird++";
+        document.getElementById('flappytitle').innerText = "Flappy Bird++";
       }
-    window.localStorage.setItem("snakespeed", slider);
+    window.localStorage.setItem("flappyspeed", slider);
     let speedMultiplier = Math.round(slider / 10);
     speedMultiplier /= 10;
     speedMultiplier = speedMultiplier.toFixed(1);
@@ -32,9 +34,9 @@ function storeFlappySpeed() {
     document.getElementById('flappyspeedmultiplier').innerText = `${speedMultiplier}x`;
     window.localStorage.setItem("flappyspeedmultiplier", speedMultiplier);
     if (sliderValue == 300) {
-      document.getElementById('flappy-game-div').getElementsByTagName('h2')[0].innerText = "FREE BIRD++";
+        document.getElementById('flappytitle').innerText = "Free Bird++";
     } else {
-      document.getElementById('flappy-game-div').getElementsByTagName('h2')[0].innerText = "Flappy Bird++";
+        document.getElementById('flappytitle').innerText = "Flappy Bird++";
     }
   }
 function startFlappyGame() {
@@ -48,7 +50,7 @@ function startFlappyGame() {
     let rightContainer = document.getElementById("weathercontainer")
     rightContainer.appendChild(div)
 
-        div.innerHTML = `<div id=flappy-game-div><h2 class=gameover>Flappy Bird++</h2><p class=score>High Score: ${highscore}</p><button class="white_text_button" id="flappy_play_button">Play</button><p class=score></p><p class=score>Speed:</p><div class="textandbutton"><input type="range" min="10" max="300" value="100" class="sliderblur speedslider" id="flappyspeedslider"><p id=flappyspeedmultiplier class=text_next_to_slider>1.5x</p></div>`
+        div.innerHTML = `<div id=flappy-game-div><h2 class=gameover id=flappytitle>Flappy Bird++</h2><p class=score>High Score: ${highscore}</p><button class="white_text_button" id="flappy_play_button">Play</button><p class=score></p><p class=score>Difficulty:</p><div class="textandbutton"><input type="range" min="10" max="300" value="100" class="sliderblur speedslider" id="flappyspeedslider"><p id=flappyspeedmultiplier class=text_next_to_slider>1.5x</p></div>`
         loadFlappySpeed()
         document.getElementById('flappy_play_button').addEventListener("click", () => {
         console.log(div);
@@ -56,12 +58,13 @@ function startFlappyGame() {
         console.log(div);
         flappyGame()
     });
+    setFlappySpeed()
 }
 
 function flappyGameOver(score = 0) {
     const gamediv = document.getElementById("flappy-game-div");
-    gamediv.innerHTML = `<h2 class=gameover>Game Over!</h2><p class=score>Score: ${score}</p> <button class="white_text_button" id=flappytryagain>
-    Try Again (Space)</button><p class=score></p><p class=score>Speed:</p><div class="textandbutton"><input type="range" min="10" max="300" value="100" class="sliderblur speedslider" id="flappyspeedslider"><p id=flappyspeedmultiplier class=text_next_to_slider>1.5x</p>
+    gamediv.innerHTML = `<h2 class=gameover id=flappytitle>Game Over!</h2><p class=score>Score: ${score}</p> <button class="white_text_button" id=flappytryagain>
+    Try Again (Space)</button><p class=score></p><p class=score>Difficulty:</p><div class="textandbutton"><input type="range" min="10" max="300" value="100" class="sliderblur speedslider" id="flappyspeedslider"><p id=flappyspeedmultiplier class=text_next_to_slider>1.5x</p>
     `;
     loadFlappySpeed()
     var enterKeyHandler = function (event) {
@@ -73,12 +76,14 @@ function flappyGameOver(score = 0) {
     };
     document.getElementById("flappytryagain").addEventListener("click", () => {
         gamediv.innerHTML = `<canvas id="flappy-game-container">`
+        document.removeEventListener('keydown', enterKeyHandler);
         flappyGame()
     });
     if (score > window.localStorage.getItem("flappyhighscore")) {
         window.localStorage.setItem("flappyhighscore", score)
     }
     document.addEventListener('keydown', enterKeyHandler);
+    setFlappySpeed()
 }
 
 function flappyGame() {
@@ -93,17 +98,20 @@ function flappyGame() {
 
     canvas.width = 420;
     canvas.height = 420;
-
+    let flappydifficulty = window.localStorage.getItem("flappyspeed")
     const lineWidth = 6;
     let pipes = [];
     let birdX = canvas.width / 4;
     let birdY = 110;
     let bgX = 0;
-    let gravity = 0.7;
-    let gravitySpeed = 0.1;
+    let gravity = 1;
+
+    let gravitySpeed = (flappydifficulty - 10) * (0.3 - 0.1) / (300 - 10) + 0.1;
+    const pipeGap = 450 - ((flappydifficulty - 10) * (300 - 50) / (300 - 10));
+    console.log(pipeGap)
+    const pipeSpeed = 1;
+
     let score = 0;
-    const pipeSpeed = 2;
-    const pipeGap = 65;
     const pipeWidth = lineWidth * 3;
     const color = document.documentElement.style.getPropertyValue('--color-accent');
     const birdColor = document.documentElement.style.getPropertyValue('--color-text');
@@ -152,7 +160,6 @@ function flappyGame() {
     function tickAndRenderPipes() {
         pipes.forEach((pipe) => {
             pipe.update();
-            console.log(pipe.y)
             pipe.draw();
         });
     }
