@@ -1,11 +1,18 @@
 let flappy_running = false;
+let highscore = window.localStorage.getItem("flappyhighscore")
 function storeFlappySpeed() {
     let slider = document.getElementById("flappyspeedslider").value;
     console.log(slider)
-    if (slider == 300) {
+    if (slider == 300 && highscore == 911){
+        document.getElementById('flappytitle').innerText = "FREE Bird++";
+        console.log("should be fREE bird now")
+    }
+    else if (slider == 300 && highscore != 911) {
         document.getElementById('flappytitle').innerText = "Free Bird++";
         console.log("should be free bird now")
-      } else {
+        }
+      
+    else {
         document.getElementById('flappytitle').innerText = "Flappy Bird++";
       }
     window.localStorage.setItem("flappyspeed", slider);
