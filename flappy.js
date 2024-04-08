@@ -115,7 +115,7 @@ function flappyGame() {
     let gravitySpeed = 0.2
 
     const pipeGap = 65
-    const pipeSpeed = (flappyspeed/100 + 1 ) * 3;
+    const pipeSpeed = (flappyspeed/100) * 3;
 
     let score = 0;
     const pipeWidth = lineWidth * 3;
