@@ -50,7 +50,7 @@ function startFlappyGame() {
     let rightContainer = document.getElementById("weathercontainer")
     rightContainer.appendChild(div)
 
-        div.innerHTML = `<div id=flappy-game-div><h2 class=gameover id=flappytitle>Flappy Bird++</h2><p class=score>High Score: ${highscore}</p><button class="white_text_button" id="flappy_play_button">Play</button><p class=score></p><p class=score>Difficulty:</p><div class="textandbutton"><input type="range" min="10" max="300" value="100" class="sliderblur speedslider" id="flappyspeedslider"><p id=flappyspeedmultiplier class=text_next_to_slider>1.5x</p></div>`
+        div.innerHTML = `<div id=flappy-game-div><h2 class=gameover id=flappytitle>Flappy Bird++</h2><p class=score>High Score: ${highscore}</p><button class="white_text_button" id="flappy_play_button">Play</button><p class=score></p><p class=score>Speed:</p><div class="textandbutton"><input type="range" min="10" max="300" value="100" class="sliderblur speedslider" id="flappyspeedslider"><p id=flappyspeedmultiplier class=text_next_to_slider>1.5x</p></div>`
         loadFlappySpeed()
         document.getElementById('flappy_play_button').addEventListener("click", () => {
         console.log(div);
@@ -64,7 +64,7 @@ function startFlappyGame() {
 function flappyGameOver(score = 0) {
     const gamediv = document.getElementById("flappy-game-div");
     gamediv.innerHTML = `<h2 class=gameover id=flappytitle>Game Over!</h2><p class=score>Score: ${score}</p> <button class="white_text_button" id=flappytryagain>
-    Try Again (Space)</button><p class=score></p><p class=score>Difficulty:</p><div class="textandbutton"><input type="range" min="10" max="300" value="100" class="sliderblur speedslider" id="flappyspeedslider"><p id=flappyspeedmultiplier class=text_next_to_slider>1.5x</p>
+    Try Again (Space)</button><p class=score></p><p class=score>Speed:</p><div class="textandbutton"><input type="range" min="10" max="300" value="100" class="sliderblur speedslider" id="flappyspeedslider"><p id=flappyspeedmultiplier class=text_next_to_slider>1.5x</p>
     `;
     loadFlappySpeed()
     var enterKeyHandler = function (event) {
@@ -98,18 +98,17 @@ function flappyGame() {
 
     canvas.width = 420;
     canvas.height = 420;
-    let flappydifficulty = window.localStorage.getItem("flappyspeed")
+    let flappyspeed = window.localStorage.getItem("flappyspeed")
     const lineWidth = 6;
     let pipes = [];
     let birdX = canvas.width / 4;
     let birdY = 110;
     let bgX = 0;
-    let gravity = 1;
+    let gravity = 0.5;
+    let gravitySpeed = 0.2
 
-    let gravitySpeed = (flappydifficulty - 10) * (0.3 - 0.1) / (300 - 10) + 0.1;
-    const pipeGap = 450 - ((flappydifficulty - 10) * (300 - 50) / (300 - 10));
-    console.log(pipeGap)
-    const pipeSpeed = 1;
+    const pipeGap = 65
+    const pipeSpeed = (flappyspeed/100 + 1 ) * 3;
 
     let score = 0;
     const pipeWidth = lineWidth * 3;
