@@ -228,6 +228,7 @@ function dmenu_update_search(command) {
   }
 }
 
+
 function sort(autocompletelist, command, start_index) {
   let nodes = autocompletelist.childNodes;
   let lscore = 0;
