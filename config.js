@@ -13,7 +13,8 @@ const default_settings = {
   backgroundfile: "none",
   show_scores: false,
   isbig: true,
-  showplanner: true
+  showplanner: true,
+  name_override: null,
 };
 link_element = document.querySelector('link[rel="icon"]')
 if (link_element) {
