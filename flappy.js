@@ -122,6 +122,9 @@ function flappyGame() {
     const color = document.documentElement.style.getPropertyValue('--color-accent');
     const birdColor = document.documentElement.style.getPropertyValue('--color-text');
 
+    let fps_correction = 1;
+    let last_time = performance.now();
+
     class Pipe {
         constructor() {
             this.y = Math.random() * (canvas.height - 90) + 20;
@@ -129,7 +132,7 @@ function flappyGame() {
             this.didScored = false;
         }
         update() {
-            this.x -= pipeSpeed;
+            this.x -= pipeSpeed*fps_correction;
             if (this.x < birdX) {
                 if (!this.didScored) {
                     this.didScored = true;
@@ -156,7 +159,7 @@ function flappyGame() {
 
 
     function tickAndRenderBird() {
-        birdY += gravity;
+        birdY += gravity*fps_correction;
         ctx.fillStyle = birdColor;
         ctx.beginPath();
         ctx.arc(birdX - lineWidth, birdY - lineWidth, lineWidth, 0, 2 * Math.PI);
@@ -207,10 +210,14 @@ function flappyGame() {
     pipes.push(new Pipe());
 
     function tick() {
-        // console.log("tick");
+        const now = performance.now();
+        const delta = now - last_time;
+        fps_correction = (delta / 16.6666666666666666666666666666667);
+        last_time = now;
+
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        gravity += gravitySpeed;
-        bgX = (bgX - 5) % canvas.width;
+        gravity += gravitySpeed*fps_correction;
+        bgX = (bgX - 5*fps_correction) % canvas.width;
         tickAndRenderBird();
         tickAndRenderPipes();
         drawGround();
@@ -232,7 +239,11 @@ function flappyGame() {
     document.addEventListener('keydown', (e) => {
         if (e.code === 'Space' || e.code === 'ArrowUp') {
             e.preventDefault();
-            gravity = -4;
+            gravity = -4*fps_correction;
         }
     });
+    canvas.addEventListener('mousedown', (e) => {
+        e.preventDefault();
+        gravity = -4*fps_correction;
+    })
 }
