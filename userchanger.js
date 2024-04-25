@@ -16,11 +16,12 @@ let full_unheading=true; // Unhead everywhere (also in lvs and profile)
 
 //Returns: original name
 function change_lname(new_name) {
-  if (new_name == null){return;}; // We want to keep old name
   let name_element = document.querySelector(".js-btn-profile .hlp-vert-box span");
   if (name_element !== null){
     let orig_name = name_element.innerText;
-    name_element.innerText=new_name;
+    if (new_name !== null){
+      name_element.innerText=new_name;
+    }
     return orig_name;
   }
   return "Mr. Unknown"
@@ -28,7 +29,6 @@ function change_lname(new_name) {
 }
 
 function try_attach_messages_observer(orig_name, new_name) {
-  if (new_name == null){return}
   let messages_list = document.getElementById("msglist");
   if (messages_list == null){
     return
@@ -36,13 +36,15 @@ function try_attach_messages_observer(orig_name, new_name) {
   const observer = new MutationObserver(function(muts, observer){
     for (const mut of muts){
       for(const msg of mut.addedNodes){
-        if (msg.nodeName == "#text"){continue}; // SmartSchool added a random space character to there code
+        if (msg.nodeName == "#text"){continue}; // SmartSchool added a random space character to their code
 
         let name_el = msg.querySelector(".modern-message__name");
-        if (name_el == null){ continue }; // Name is not present on messages form things like BookWidgets
+        if (name_el == null){ continue }; // Name is not present on messages from things like BookWidgets
 
         if (name_el.innerText.startsWith(orig_name)){
-          name_el.innerText=new_name;
+          if (new_name !== null){
+            name_el.innerText=new_name;
+          }
           msg.querySelector(".modern-message__image img").style="display: none;";
         }
       }
@@ -62,6 +64,7 @@ function unhead_fully(){
 }
 
 let orig_name = change_lname(username_override);
+console.log("oname"+orig_name)
 try_attach_messages_observer(orig_name, username_override)
 
 if (full_unheading){
