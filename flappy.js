@@ -1,5 +1,5 @@
 let flappy_running = false;
-let highscore = window.localStorage.getItem("flappyhighscore")
+let highscore = window.localStorage.getItem("flappyhighscore");
 function storeFlappySpeed() {
     const slider = document.getElementById("flappyspeedslider").value;
     console.log(slider)
@@ -20,12 +20,12 @@ function storeFlappySpeed() {
     window.localStorage.setItem("flappyspeedmultiplier", speedMultiplier);
 }
 function loadFlappySpeed() {
-    let speed = window.localStorage.getItem("flappyspeed")
+    let speed = window.localStorage.getItem("flappyspeed");
     if (speed == undefined) {
-        window.localStorage.setItem("flappyspeed", 100)
-        speed = window.localStorage.getItem("flappyspeed")
+        window.localStorage.setItem("flappyspeed", 100);
+        speed = window.localStorage.getItem("flappyspeed");
     }
-    document.getElementById("flappyspeedslider").value = speed
+    document.getElementById("flappyspeedslider").value = speed;
 }
 function setFlappySpeed() {
     sliderElement = document.getElementById("flappyspeedslider");
@@ -44,23 +44,23 @@ function setFlappySpeed() {
     }
 }
 function startFlappyGame() {
-    let div = document.createElement("div")
-    let highscore = window.localStorage.getItem("flappyhighscore")
+    let div = document.createElement("div");
+    let highscore = window.localStorage.getItem("flappyhighscore");
     if (highscore == undefined) {
-        window.localStorage.setItem("flappyhighscore", 0)
-        highscore = window.localStorage.getItem("flappyhighscore")
+        window.localStorage.setItem("flappyhighscore", 0);
+        highscore = window.localStorage.getItem("flappyhighscore");
     }
-    document.getElementById("weathercontainer").appendChild(document.createElement("div"))
-    let rightContainer = document.getElementById("weathercontainer")
-    rightContainer.appendChild(div)
+    document.getElementById("weathercontainer").appendChild(document.createElement("div"));
+    let rightContainer = document.getElementById("weathercontainer");
+    rightContainer.appendChild(div);
 
-    div.innerHTML = `<div id=flappy-game-div><h2 class=gameover id=flappytitle>Flappy Bird++</h2><p class=score>High Score: ${highscore}</p><button class="white_text_button" id="flappy_play_button">Play</button><p class=score></p><p class=score>Speed:</p><div class="textandbutton"><input type="range" min="10" max="300" value="100" class="sliderblur speedslider" id="flappyspeedslider"><p id=flappyspeedmultiplier class=text_next_to_slider>1.5x</p></div>`
-    loadFlappySpeed()
+    div.innerHTML = `<div id=flappy-game-div><h2 class=gameover id=flappytitle>Flappy Bird++</h2><p class=score>High Score: ${highscore}</p><button class="white_text_button" id="flappy_play_button">Play</button><p class=score></p><p class=score>Speed:</p><div class="textandbutton"><input type="range" min="10" max="300" value="100" class="sliderblur speedslider" id="flappyspeedslider"><p id=flappyspeedmultiplier class=text_next_to_slider>1.5x</p></div>`;
+    loadFlappySpeed();
     document.getElementById('flappy_play_button').addEventListener("click", () => {
         div.innerHTML = '<div id="flappy-game-div"><canvas id="flappy-game-container"></div>';
-        flappyGame()
+        flappyGame();
     });
-    setFlappySpeed()
+    setFlappySpeed();
 }
 
 function flappyGameOver(score = 0) {
@@ -68,24 +68,24 @@ function flappyGameOver(score = 0) {
     gamediv.innerHTML = `<h2 class=gameover id=flappytitle>Game Over!</h2><p class=score>Score: ${score}</p> <button class="white_text_button" id=flappytryagain>
     Try Again (Space)</button><p class=score></p><p class=score>Speed:</p><div class="textandbutton"><input type="range" min="10" max="300" value="100" class="sliderblur speedslider" id="flappyspeedslider"><p id=flappyspeedmultiplier class=text_next_to_slider>1.5x</p>
     `;
-    loadFlappySpeed()
+    loadFlappySpeed();
     var enterKeyHandler = function (event) {
         if (event.code === "Space") {
-            gamediv.innerHTML = `<canvas id="flappy-game-container">`
-            flappyGame()
+            gamediv.innerHTML = `<canvas id="flappy-game-container">`;
+            flappyGame();
             document.removeEventListener('keydown', enterKeyHandler);
         }
     };
     document.getElementById("flappytryagain").addEventListener("click", () => {
-        gamediv.innerHTML = `<canvas id="flappy-game-container">`
+        gamediv.innerHTML = `<canvas id="flappy-game-container">`;
         document.removeEventListener('keydown', enterKeyHandler);
-        flappyGame()
+        flappyGame();
     });
     if (score > window.localStorage.getItem("flappyhighscore")) {
-        window.localStorage.setItem("flappyhighscore", score)
+        window.localStorage.setItem("flappyhighscore", score);
     }
     document.addEventListener('keydown', enterKeyHandler);
-    setFlappySpeed()
+    setFlappySpeed();
 }
 
 function flappyGame() {
@@ -189,13 +189,11 @@ function flappyGame() {
 
     function checkDead() {
         if (birdY - 1 + lineWidth * 2 > 405) {
-            // console.log('BIRD TO LOW!');
             return true;
         }
         for (let i = 0; i < pipes.length; i++) {
             let pipe = pipes[i];
             if (birdX > pipe.x && birdX < pipe.x + pipeWidth && (birdY < pipe.y || birdY > pipe.y + pipeGap)) {
-                // console.log('Poor pipe...');
                 return true;
             }
         };
