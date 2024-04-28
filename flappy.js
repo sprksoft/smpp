@@ -232,11 +232,11 @@ function flappyGame() {
     document.addEventListener('keydown', (e) => {
         if (e.code === 'Space' || e.code === 'ArrowUp') {
             e.preventDefault();
-            gravity = -4 * fps_correction;
+            gravity = -4;
         }
     });
     canvas.addEventListener('mousedown', (e) => {
         e.preventDefault();
-        gravity = -4 * fps_correction;
+        gravity = -4;
     })
 }
