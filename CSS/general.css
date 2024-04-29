@@ -166,7 +166,7 @@ a:focus {
 .smscButton,
 .float-label__input,
 .input-search,
-button.smscButton.blue.fileupload_submit_button {
+button.smscButton.blue.fileupload_submit_button,.wide-colored-btn {
   border: var(--border-size) solid var(--color-base03) !important;
   background-color: var(--color-base02) !important;
   color: var(--color-accent) !important;
@@ -1117,4 +1117,47 @@ a.js-btn-messages.topnav__btn:hover {
 
 .homepage__left {
   border-right: 4px solid var(--color-base01) !important;
+}
+textarea{
+  background-color: var(--color-base00) !important;
+}
+.card{
+  background-color: var(--color-base01) !important;
+  box-shadow: none !important;
+  color: var(--color-text) !important;
+  border: 2px solid var(--color-base02) !important;
+}
+.card:hover{
+background-color: var(--color-base02) !important;
+border: 2px solid var(--color-base03) !important;
+}
+.smsc-container:has(.form-page__header-wrapper){
+  background-color: transparent !important;
+  background-image: var(--loginpage-image) !important;
+  background-position: center !important;
+  background-size: cover !important;
+}
+.header.js-header.form-page__header.header--single-line{
+  border-radius: 15px !important;
+  border: 2px solid var(--color-base03) !important;
+  padding: 10px !important;
+}
+.form-item__content-wrapper{
+  background-color: var(--color-base01) !important;
+  border-radius: 15px !important;
+  border: 2px solid var(--color-base03) !important;
+  padding: 10px !important;
+}
+.form-item.js-form-item{
+  background-color: transparent !important;
+}
+textarea.form-item__input-field.form-item__input-field--textarea{
+border: 1.5px solid var(--color-base03) !important;
+}
+.form-item .form-item__instruction{
+color: var(--color-base03) !important;
+}
+div [style*="color"]
+{
+  color: var(--color-text) !important;
 }
