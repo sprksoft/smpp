@@ -119,11 +119,12 @@ function dmenu(params, onselect, name = "dmenu:", open_item = "") {
     }
 
     row.addEventListener("click", function (e) {
-      if (selected == i) {
+      let index = Array.from(autocompletelist.childNodes).indexOf(row)
+      if (selected == index) {
         dmenu_accept();
         return;
       }
-      select(i);
+      select(index);
     })
     autocompletelist.appendChild(row);
   }

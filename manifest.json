@@ -44,6 +44,7 @@
 			"js": [
 				"titlefix.js",
 				"config.js",
+        "userchanger.js",
 				"json.js",
 				"scraper.js",
 				"scores.js",
