@@ -103,16 +103,18 @@ async function ShowPlanner() {
 
     const timeSlots = [];
     data.forEach((element, index, array) => {
-        if (element.period.wholeDay) {
-            const newSlot = {
-                from: beginTime,
-                to: new Date(beginTime),
-                elements: [element]
-            };
-            timeSlots.push(newSlot);
-        } else {
+
         const dateTimeFrom = new Date(element.period.dateTimeFrom);
         const dateTimeTo = new Date(element.period.dateTimeTo);
+        if (element.period.wholeDay) {
+            dateTimeFrom.setMinutes(30)
+            dateTimeFrom.setHours(7)
+            dateTimeTo.setMinutes(35)
+            dateTimeTo.setHours(7)
+            beginTime.setMinutes(30)
+            beginTime.setHours(7)
+            };
+        
         const overlappingSlots = timeSlots.filter(slot => {
             return (slot.from < dateTimeTo && slot.to > dateTimeFrom);
         });
@@ -128,7 +130,7 @@ async function ShowPlanner() {
             overlappingSlots.forEach(slot => {
                 slot.elements.push(element);
             });
-        }}
+        }
     });
 
     timeSlots.forEach(slot => {
