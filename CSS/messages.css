@@ -259,7 +259,7 @@ button.submit-button.smscButton.blue {
   box-shadow: none !important;
 }
 
-button.submit-button.smscButton.blue:hover {
+button.submit-button.smscButton.blue:hover,.wide-colored-btn:hover {
   filter: brightness(100%) !important;
   box-shadow: none !important;
 }
