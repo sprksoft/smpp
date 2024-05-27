@@ -188,14 +188,14 @@ document.getElementById("delijncontainer")?document.getElementById("delijncontai
     }
     if (showsnake) {
       if(!document.getElementById("weathercontainer")){
+        console.log('no weather')
         var WeatherAppElement = document.createElement("div")
         WeatherAppElement.classList.add("homepage__right")
         WeatherAppElement.classList.add("smsc-container--right")
         WeatherAppElement.setAttribute("id", "weathercontainer")
         container.append(WeatherAppElement)
-      }else{
-        startSnakeGame()
       }
+        startSnakeGame()
     }
     if (showflappy) {
       if(!document.getElementById("weathercontainer")){
@@ -204,9 +204,8 @@ document.getElementById("delijncontainer")?document.getElementById("delijncontai
         WeatherAppElement.classList.add("smsc-container--right")
         WeatherAppElement.setAttribute("id", "weathercontainer")
         container.append(WeatherAppElement)
-      }else{
-        startFlappyGame()
       }
+      startFlappyGame()
     }
     if (!shownews) {
       centralContainer.innerHTML = ' '
