@@ -55,13 +55,14 @@ async function apply() {
   const overwrite_theme = settingsData.overwrite_theme;
   const loc = settingsData.location;
   const blurvalue = settingsData.blur;
-  const snow = settingsData.snow;
+  const weatherAmount = settingsData.weatherAmount;
   const shownews = settingsData.shownews;
   const showsnake = settingsData.showsnake;
   const showflappy = settingsData.showflappy;
   var show_scores = settingsData.show_scores;
   var showplanner = settingsData.showplanner;
   var IsBig = settingsData.isbig;
+  var weatherSelector = settingsData.weatherSelector;
   set_theme("default");
   set_theme(profileSelect);
 
@@ -216,7 +217,16 @@ document.getElementById("delijncontainer")?document.getElementById("delijncontai
 
   style.setProperty('--blur-value-large', 'blur(' + bigblurvalue + 'px)');
   style.setProperty('--blur-value-small', 'blur(' + blurvalue + 'px)');
-  set_snow_level(snow);
+  if (weatherSelector == 0){
+    set_snow_level(weatherAmount);
+  } else if( weatherSelector == 1){
+    set_meteor_level(weatherAmount);
+  }
+  if (weatherSelector == 2){
+    set_rain_level(weatherAmount);
+  } else {
+    console.log("ERROR NO WEATHER SELECTOR")
+  }
 }
 
 
@@ -251,12 +261,13 @@ function store() {
   const overwrite_theme = document.getElementById("backgroundSlider").value;
   const loc = document.getElementById("location").value;
   const slider = document.getElementById('mySlider').value;
-  const snowSlider = document.getElementById('snowSlider').value;
+  const weatherSlider = document.getElementById('weatherSlider').value;
   const shownews = document.getElementById("shownewselement").checked;
   const showsnake = document.getElementById('showsnakeelement').checked;
   const showflappy = document.getElementById('showflappyelement').checked;
   const isbig = document.getElementById("isbig").checked;
   const showplanner = document.getElementById("showplanner").checked;
+  const weatherSelector = document.getElementById("weatherSelector").value;
   settingsData.profile = profileSelect;
   settingsData.halte = halte;
   settingsData.overwrite_theme = overwrite_theme;
@@ -264,13 +275,15 @@ function store() {
   settingsData.backgroundfile = backgroundFile
   settingsData.backgroundlink = backgroundLink
   settingsData.blur = slider;
-  settingsData.snow = parseInt(snowSlider);
+  settingsData.weatherAmount = parseInt(weatherSlider);
   settingsData.shownews = shownews;
   settingsData.showsnake = showsnake;
   settingsData.showflappy = showflappy
   settingsData.show_scores = previousData.show_scores;
   settingsData.isbig = isbig;
   settingsData.showplanner = showplanner;
+  settingsData.weatherSelector = weatherSelector;
+
   console.log(settingsData)
   if (settingsData.show_scores == undefined) {
     settingsData.show_scores = false;
@@ -343,24 +356,26 @@ function load() {
   const overwrite_theme = document.getElementById("backgroundSlider");
   const loc = document.getElementById("location");
   const blur = document.getElementById('mySlider');
-  const snowSlider = document.getElementById('snowSlider');
+  const weatherSlider = document.getElementById('weatherSlider');
   const shownews = document.getElementById("shownewselement");
   const showsnake = document.getElementById("showsnakeelement");
   const showflappy = document.getElementById("showflappyelement");
   const isbig = document.getElementById("isbig");
   const showplanner = document.getElementById("showplanner");
+  const weatherSelector = document.getElementById("weatherSelector");
   profileSelect.value = settingsData.profile
   halte.checked = settingsData.halte
   overwrite_theme.value = settingsData.overwrite_theme
   backgroundLink.value = settingsData.backgroundlink
   loc.value = settingsData.location
   blur.value = settingsData.blur
-  snowSlider.value = settingsData.snow
+  weatherSlider.value = settingsData.weatherAmount
   shownews.checked = settingsData.shownews
   showsnake.checked = settingsData.showsnake
   showflappy.checked = settingsData.showflappy
   isbig.checked = settingsData.isbig
   showplanner.checked = settingsData.showplanner
+  weatherSelector.value = settingsData.weatherSelector
   if (profileSelect.value == "custom") {
     loadCustomTheme()
   }

@@ -259,8 +259,14 @@ const popupsettingHTML = `<head>
 <div class="textandbutton" id="errormessagesmpp"></div>
 <h3 class="popuptitles">Blur:</h3>
 <input type="range" min="0" max="20" value="0" class="sliderblur" id="mySlider">
-<h3 class="popuptitles">Snow:</h3>
-<input type="range" min="0" max="500" value="0" class="sliderblur" id="snowSlider">
+<div class="textandbutton" style="margin-top: 20px !important">
+  <div class="verticaltext"><p class="nobottommargp off_text">Snow</p><p class="nobottommargp link_text">Meteor</p><p class="nobottommargp">Rain</p></div>
+  <input type="range" min="0" max="2" value="0" class="sliderblur" id="weatherSelector">
+  <div class="verticaltext-noright" style="width: 110px; margin-top: -10px; margin-right: 10px !important;">
+  <h4 style="margin-bottom:1px">Amount:</h4>
+  <input style="width: max-content" type="range" min="0" max="500" value="0" class="sliderblur" id="weatherSlider">
+  </div>
+</div>
 <div class="textandbutton">
   <div>
     <h3 class="popuptitles">Snake:</h3>
