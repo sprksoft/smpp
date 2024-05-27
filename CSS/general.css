@@ -949,7 +949,8 @@ label.form__label.js-form-label.label__resolvedStatus.form__label--no-margin-top
   margin-top: -8px !important;
 }
 
-.link_text {
+.link_text,
+span.userNotRead {
   color: var(--color-accent) !important;
 }
 
