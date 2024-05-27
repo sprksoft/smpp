@@ -219,11 +219,17 @@ document.getElementById("delijncontainer")?document.getElementById("delijncontai
   style.setProperty('--blur-value-small', 'blur(' + blurvalue + 'px)');
   if (weatherSelector == 0){
     set_snow_level(weatherAmount);
+    set_meteor_level(0);
+    set_rain_level(0);
   } else if( weatherSelector == 1){
     set_meteor_level(weatherAmount);
+    set_rain_level(0);
+    set_snow_level(0);
   }
   if (weatherSelector == 2){
     set_rain_level(weatherAmount);
+    set_meteor_level(0);
+    set_snow_level(0);
   } else {
     console.log("ERROR NO WEATHER SELECTOR")
   }
