@@ -1157,3 +1157,17 @@ border: 1.5px solid var(--color-base03) !important;
 .form-item .form-item__instruction{
 color: var(--color-base03) !important;
 }
+#cool-modal-content{
+  background-color: var(--color-base01) !important;
+}
+.period_button{
+  background-color: var(--color-base02) !important;
+  color: var(--color-accent) !important;
+}
+.period_button:hover{
+  background-color: var(--color-base03) !important;
+}
+#cool-modal-close{
+  background-color: var(--color-base03) !important;
+  color: var(--color-red) !important;
+}
