@@ -49,7 +49,9 @@ html {
   border-radius: 20px !important;
   border: 3px solid var(--color-base01) !important;
   border: 3px solid var(--color-base03) !important;
-}
+
+transition:all 100ms ease-in 0s !important
+ }
 
 .login-app__bottom {
   display: none !important;

@@ -715,11 +715,11 @@ background-color: var(--color-base01) !important;
   margin: 5px !important;
 }
 
-#backgroundSlider,#weatherSelector {
-  width: 40% !important;
+#backgroundSlider,#weatherSelector,#mySlider {
+  width: 50px !important;
   transform: rotate(90deg) !important;
   margin: 0px !important;
-  margin-top: 10px !important;
+  margin-top: 10px !important
 }
 
 .sliderblur::-webkit-slider-thumb {
@@ -919,7 +919,9 @@ label.form__label.js-form-label.label__resolvedStatus.form__label--no-margin-top
   margin: 0px !important;
   height: 35px !important;
 }
-
+#backgroundlink{
+ width: 70px !important;
+}
 #backgroundlink {
   margin-left: -5px !important;
 }
@@ -928,6 +930,7 @@ label.form__label.js-form-label.label__resolvedStatus.form__label--no-margin-top
   padding: 1px !important;
   margin-left: 5px !important;
   margin-right: 10px !important;
+  width: 45px !important;
 }
 
 #backgroundfilebutton:hover {
@@ -1169,4 +1172,20 @@ display: flex !important;
     align-items: center !important;
     font-size: smaller !important;
     margin-right: -10px !important;
+}
+#mySlider{
+  width: 50px;
+  margin-left: -20px !important;
+  transform: rotate(90deg);
+  margin-right: -14px !important;
+}
+smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right{
+  display: none !important;
+}
+.blob-counters__label{
+color: var(--color-text) !important;
+}
+.smscComposeMessage{
+background-color: var(--color-base00) !important;
+border: 2px solid var(--color-base02) !important;
 }

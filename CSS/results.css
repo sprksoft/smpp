@@ -76,11 +76,18 @@
   background-color: transparent !important;
 }
 
-.results-evaluations.js-evaluations-page.js-routehandler.results-evaluation--wide{
+.smscMain{
 background-image: var(--loginpage-image);
 background-position: center !important;
 background-size: cover !important;
 background-attachment: fixed !important;
+}
+.results-evaluations.js-evaluations-page.js-routehandler.results-evaluation--wide,
+.smsc-container.smsc-container--main.smsc-container--flex.planner-planner__main.js-planner-planner-main,
+intra-list.smsc-container.smsc-container--main.smsc-container--flex,
+.smsc-container.smsc-container--main.overview-page__content{
+  backdrop-filter: var(--blur-value-small) !important;
+  background-color: var(--darken-background) !important;
 }
 .side-panel__panel{
   box-shadow: none !important;
@@ -300,13 +307,7 @@ textarea,
   background: transparent !important
 }
 
-.planner-planner__main {
-  background-image: var(--loginpage-image) !important;
-  background-position: center !important;
-  background-size: cover !important;
-  background-attachment: fixed !important;
 
-}
 
 .bubble__menu-btn:hover {
   border-radius: 5px !important;

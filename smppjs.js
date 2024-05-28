@@ -217,6 +217,7 @@ document.getElementById("delijncontainer")?document.getElementById("delijncontai
 
   style.setProperty('--blur-value-large', 'blur(' + bigblurvalue + 'px)');
   style.setProperty('--blur-value-small', 'blur(' + blurvalue + 'px)');
+  console.log("set blurvalue to: ",blurvalue)
   if (weatherSelector == 0){
     set_snow_level(weatherAmount);
     set_meteor_level(0);

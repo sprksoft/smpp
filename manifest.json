@@ -39,6 +39,7 @@
 				"CSS/startpage.css",
 				"CSS/delijn.css",
 				"CSS/agenda.css",
+				"CSS/plant.css",
 				"CSS/root.css"
 			],
 			"js": [
@@ -59,6 +60,7 @@
 				"planner.js",
 				"flappy.js",
 				"buis-stats.js",
+				"plant.js",
 				"smppjs.js"
 			]
 		}
