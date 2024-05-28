@@ -7,9 +7,7 @@ setTimeout(function() {
     };
 
     const subdomain = getSubdomain();
-    const url = `https://${subdomain}.smartschool.be/results/api/v1/evaluations/?itemsOnPage=500`;
-
-    const textColor = localStorage.getItem('smppCountColor') || 'white';
+    const url = `https://${subdomain}.smartschool.be/results/api/v1/evaluations/?itemsOnPage=1000`;
 
     fetch(url)
       .then(response => response.json())
@@ -22,7 +20,7 @@ setTimeout(function() {
         data.forEach(evaluation => {
           if (evaluation.graphic && evaluation.graphic.value !== undefined) {
             const value = evaluation.graphic.value;
-
+            console.log(value)
             if (value < 50) {
               categories.buis++;
             } else {
@@ -30,26 +28,14 @@ setTimeout(function() {
             }
           }
         });
-
         const total = categories.buis + categories.voldoende;
-        
-        const createParagraph = (id, text, count) => {
-          const paragraph = document.createElement("p");
-          paragraph.innerHTML = `${text} <strong>${count}</strong>`;
-          paragraph.id = id;
-          paragraph.classList.add("customstatistieken");
-          paragraph.style.color = textColor;
-          return paragraph;
-        };
-
-        const buisParagraph = createParagraph("statsBuizen-custom", "Je hebt", categories.buis + " buizen.");
-        const voldoendeParagraph = createParagraph("statsVoldoende-custom", "Je hebt", categories.voldoende + " voldoendes.");
-        const totalParagraph = createParagraph("statsTotal-custom", "Je hebt in totaal", total + " punten.");
-
-        const scoresSummaryContainer = document.getElementById("scores_summary");
-        scoresSummaryContainer.appendChild(buisParagraph);
-        scoresSummaryContainer.appendChild(voldoendeParagraph);
-        scoresSummaryContainer.appendChild(totalParagraph);
+        newElement = document.createElement("div")
+        newElement.id = "buis-stats"
+        document.getElementsByClassName("results-evaluations__filters")[0].appendChild(newElement)
+        newElement.innerHTML = `<div style="display:flex; flex-direction:row;"><div class="buis-stats" id="buis_amount"></div><div class="buis-stats" id="voldoende_amount"></div><div class="buis-stats" id="total_tests_amount"></div></div>`
+        document.getElementById("buis_amount").innerHTML = `<div class="buis-stats-box"><p class="buis-stats-title">Buizen:</p><p class="buis-stats-value">${categories.buis}</p></div>`
+        document.getElementById("voldoende_amount").innerHTML = `<div class="buis-stats-box"><p class="buis-stats-title">Voldoendes:</p><p class="buis-stats-value">${categories.voldoende}</p></div>`
+        document.getElementById("total_tests_amount").innerHTML = `<div class="buis-stats-box"><p class="buis-stats-title">Totaal:</p><p class="buis-stats-value">${total}</p></div>`
 
       })
       .catch(error => console.error('Error fetching:', error));

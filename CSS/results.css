@@ -315,3 +315,23 @@ textarea,
 .separator {
   background-color: var(--color-base02) !important;
 }
+.buis-stats-title{
+background-color: var(--color-base01);
+padding: 5px;
+border: 2px solid var(--color-base02);
+font-weight: bold;
+
+border-radius: 50px;
+margin-bottom: 0px !important;
+}
+.buis-stats-box{
+display: flex;
+flex-direction: row;
+}
+.buis-stats-value{
+padding: 4px;
+font-size: 17px;
+font-weight: bolder;
+margin-bottom: 0px !important;
+}
+

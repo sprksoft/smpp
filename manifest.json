@@ -58,6 +58,7 @@
 				"snow.js",
 				"planner.js",
 				"flappy.js",
+				"buis-stats.js",
 				"smppjs.js"
 			]
 		}
