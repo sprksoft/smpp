@@ -240,7 +240,7 @@ const popupsettingHTML = `<head>
 <div>
   <h3 class="popuptitles">Plant:</h3>
   <label class="switch">
-    <input class="popupinput" type="checkbox" id="plant_button">
+    <input class="popupinput" type="checkbox" id="show_plant">
     <span class="slider round"></span>
     </label>
 </div>

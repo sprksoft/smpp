@@ -63,6 +63,7 @@ async function apply() {
   var showplanner = settingsData.showplanner;
   var IsBig = settingsData.isbig;
   var weatherSelector = settingsData.weatherSelector;
+  var show_plant = settingsData.show_plant
   set_theme("default");
   set_theme(profileSelect);
 
@@ -79,6 +80,18 @@ async function apply() {
     settingsData = get_config()
     settingsData.isbig = true
     IsBig = true
+    set_config(settingsData)
+  }
+  if (show_plant == undefined) {
+    settingsData = get_config()
+    settingsData.show_plant = true
+    show_plant = true
+    set_config(settingsData)
+  }
+  if (weatherSelector == undefined) {
+    settingsData = get_config()
+    settingsData.weatherSelector = 0
+    weatherSelector = 0
     set_config(settingsData)
   }
   topnav = document.querySelector('.topnav')
@@ -189,7 +202,6 @@ document.getElementById("delijncontainer")?document.getElementById("delijncontai
     }
     if (showsnake) {
       if(!document.getElementById("weathercontainer")){
-        console.log('no weather')
         var WeatherAppElement = document.createElement("div")
         WeatherAppElement.classList.add("homepage__right")
         WeatherAppElement.classList.add("smsc-container--right")
@@ -207,6 +219,9 @@ document.getElementById("delijncontainer")?document.getElementById("delijncontai
         container.append(WeatherAppElement)
       }
       startFlappyGame()
+    }
+    if (show_plant){
+      start_plant_window()
     }
     if (!shownews) {
       centralContainer.innerHTML = ' '
@@ -275,6 +290,7 @@ function store() {
   const isbig = document.getElementById("isbig").checked;
   const showplanner = document.getElementById("showplanner").checked;
   const weatherSelector = document.getElementById("weatherSelector").value;
+  const show_plant = document.getElementById("show_plant").checked
   settingsData.profile = profileSelect;
   settingsData.halte = halte;
   settingsData.overwrite_theme = overwrite_theme;
@@ -290,6 +306,7 @@ function store() {
   settingsData.isbig = isbig;
   settingsData.showplanner = showplanner;
   settingsData.weatherSelector = weatherSelector;
+  settingsData.show_plant = show_plant
 
   console.log(settingsData)
   if (settingsData.show_scores == undefined) {
@@ -370,6 +387,7 @@ function load() {
   const isbig = document.getElementById("isbig");
   const showplanner = document.getElementById("showplanner");
   const weatherSelector = document.getElementById("weatherSelector");
+  const show_plant = document.getElementById("show_plant")
   profileSelect.value = settingsData.profile
   halte.checked = settingsData.halte
   overwrite_theme.value = settingsData.overwrite_theme
@@ -383,6 +401,7 @@ function load() {
   isbig.checked = settingsData.isbig
   showplanner.checked = settingsData.showplanner
   weatherSelector.value = settingsData.weatherSelector
+  show_plant.checked = settingsData.show_plant
   if (profileSelect.value == "custom") {
     loadCustomTheme()
   }

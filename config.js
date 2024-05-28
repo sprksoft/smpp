@@ -16,6 +16,7 @@ const default_settings = {
   isbig: true,
   showplanner: true,
   name_override: null,
+  show_plant: true
 };
 link_element = document.querySelector('link[rel="icon"]')
 if (link_element) {
