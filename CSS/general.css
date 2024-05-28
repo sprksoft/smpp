@@ -626,6 +626,7 @@ input:checked+.slider:before {
 
 #smscleftnav .smscleftnavcontainer {
   border-width: 2px !important;
+background-color: var(--color-base01) !important;
 }
 
 .smsc-topnav .topnav__divider {
@@ -714,7 +715,7 @@ input:checked+.slider:before {
   margin: 5px !important;
 }
 
-#backgroundSlider {
+#backgroundSlider,#weatherSelector {
   width: 40% !important;
   transform: rotate(90deg) !important;
   margin: 0px !important;
@@ -949,7 +950,8 @@ label.form__label.js-form-label.label__resolvedStatus.form__label--no-margin-top
   margin-top: -8px !important;
 }
 
-.link_text {
+.link_text,
+span.userNotRead {
   color: var(--color-accent) !important;
 }
 
@@ -1157,7 +1159,17 @@ border: 1.5px solid var(--color-base03) !important;
 .form-item .form-item__instruction{
 color: var(--color-base03) !important;
 }
-#cool-modal-content{
+.smsc-topnav [data-notifs] .notification .notification__btn:focus:not(.focus-ring), .smsc-topnav [data-notifs] .notification .notification__close:focus:not(.focus-ring) {
+    box-shadow: none !important;
+}
+.verticaltext-noright{
+display: flex !important;
+    flex-direction: column !important;
+    text-align: center !important;
+    align-items: center !important;
+    font-size: smaller !important;
+    margin-right: -10px !important;
+}#cool-modal-content{
   background-color: var(--color-base01) !important;
 }
 .period_button{

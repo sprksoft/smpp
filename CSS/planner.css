@@ -330,9 +330,11 @@ button.detail-todo-icon-and-color__icon {
 .evaluation-list-item.selected {
   box-shadow: none !important;
   border-color: var(--color-accent) !important;
+  background-color: var(--color-base02) !important;
+}
+button.evaluation-list-item{
   background-color: var(--color-base01) !important;
 }
-
 .listview__row.js-listview-row.goals__row {
   display: none !important;
 }

@@ -27,3 +27,9 @@ function set_snow_level(count) {
   }
   document.documentElement.appendChild(snow);
 }
+function set_meteor_level(amount){
+  return
+}
+function set_rain_level(amount){
+  return
+}

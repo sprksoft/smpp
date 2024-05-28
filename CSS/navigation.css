@@ -5,6 +5,7 @@
   border-bottom: var(--border-size) solid var(--color-base01) !important;
   margin-left: 1rem !important;
   margin-right: 1rem !important;
+  background-color: var(--color-base00) !important;
 }
 
 .smsc-topnav .topnav__badge {
