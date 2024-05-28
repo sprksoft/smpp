@@ -1172,6 +1172,19 @@ display: flex !important;
     align-items: center !important;
     font-size: smaller !important;
     margin-right: -10px !important;
+}#cool-modal-content{
+  background-color: var(--color-base01) !important;
+}
+.period_button{
+  background-color: var(--color-base02) !important;
+  color: var(--color-accent) !important;
+}
+.period_button:hover{
+  background-color: var(--color-base03) !important;
+}
+#cool-modal-close{
+  background-color: var(--color-base03) !important;
+  color: var(--color-red) !important;
 }
 #mySlider{
   width: 50px;
