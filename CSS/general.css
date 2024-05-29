@@ -1163,10 +1163,14 @@ background-color: var(--color-base02) !important;
 border: 2px solid var(--color-base03) !important;
 }
 .smsc-container:has(.form-page__header-wrapper){
-  background-color: transparent !important;
+  background-color: var(--color-base00) !important;
   background-image: var(--loginpage-image) !important;
   background-position: center !important;
   background-size: cover !important;
+}
+.form-item.js-form-item.form-item--multiple-choice {
+  background: transparent !important;
+  box-shadow: none !important;
 }
 .header.js-header.form-page__header.header--single-line{
   border-radius: 15px !important;

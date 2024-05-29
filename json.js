@@ -86,9 +86,9 @@ const themes = {
     "--color-accent": "#8590aacc",
     "--color-text": "#a8a9ab",
     "--color-base00": "#0e0e15",
-    "--color-base01": "#16171b",
-    "--color-base02": "#1c1d21",
-    "--color-base03": "#30323a",
+    "--color-base01": "#18191d",
+    "--color-base02": "#232428",
+    "--color-base03": "#3a3c44",
     "--loginpage-image": "url(https://wallpapercave.com/wp/wp4673203.jpg)"
   },
   "matcha": {
