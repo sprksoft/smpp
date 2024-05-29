@@ -1,12 +1,15 @@
 // Voeg een nieuw inputveld toe zonder de originele inhoud te verwijderen (   thx voor de geen info lukas >:(   )
 var container = document.getElementById("smscMainBlockContainer");
-container.insertAdjacentHTML('beforeend', '<input type="text" color="red" id="inputVak" placeholder="Voer hier je nieuwe naam in.">');
+container?container.insertAdjacentHTML('beforeend', '<input type="text" color="red" id="inputVak" placeholder="Voer hier je nieuwe naam in.">'): "pass"
 
 
-document.getElementById("inputVak").addEventListener('input', function() {
+document.getElementById("inputVak")?document.getElementById("inputVak").addEventListener('input', function() {
+  let config = get_config()
   var inputValue = document.getElementById("inputVak").value;
   change_lname(inputValue);
-});
+  config.username_override = 
+  set_config(config);
+}): "pass"
 
 let config = get_config();
 if (config.username_override == undefined){

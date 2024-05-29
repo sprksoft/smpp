@@ -15,9 +15,9 @@ function discordpopup() {
 function changeLogoutText() {
   var randomNum = Math.floor(Math.random() * 50) + 1;
   if (randomNum === 1) {
-    return "Good Bye! -->"
+    return "Good Bye! →"
   }
-  return "Logout -->"
+  return "Log out →"
 }
 let logoutButton = document.getElementsByClassName("js-btn-logout")[0]
 let notifsText = document.getElementById("notifsToggleLabel")
@@ -238,7 +238,6 @@ document.getElementById("plantcontainer")?document.getElementById("plantcontaine
 
   style.setProperty('--blur-value-large', 'blur(' + bigblurvalue + 'px)');
   style.setProperty('--blur-value-small', 'blur(' + blurvalue + 'px)');
-  console.log("set blurvalue to: ",blurvalue)
   if (weatherSelector == 0){
     set_snow_level(weatherAmount);
     set_meteor_level(0);
@@ -248,7 +247,7 @@ document.getElementById("plantcontainer")?document.getElementById("plantcontaine
     set_rain_level(0);
     set_snow_level(0);
   }
-  if (weatherSelector == 2){
+  else if (weatherSelector == 2){
     set_rain_level(weatherAmount);
     set_meteor_level(0);
     set_snow_level(0);
@@ -455,7 +454,6 @@ async function set_backgroundlink(background) {
 
 function set_theme(name) {
   let style = document.documentElement.style;
-  console.log(name)
   if (name == "custom") {
     let themeData = JSON.parse(window.localStorage.getItem("themedata"))
     if (themeData == null) {
