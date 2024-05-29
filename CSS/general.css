@@ -890,6 +890,10 @@ label.form__label.js-form-label.label__resolvedStatus.form__label--no-margin-top
   display: inline-block;
   width: fit-content;
 }
+#blurPlaats{
+margin-bottom: 25px;
+margin-right: 20px;
+}
 
 .color-label {
   position: absolute;
