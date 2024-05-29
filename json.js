@@ -272,7 +272,7 @@ const popupsettingHTML = `<head>
   <input type="range" min="0" max="2" value="0" class="sliderblur" id="weatherSelector">
   <div class="verticaltext-noright" style="width: 110px; margin-top: -10px; margin-right: 10px !important;">
   <h4 style="margin-bottom:1px">Amount:</h4>
-  <input style="width: max-content" type="range" min="0" max="500" value="0" class="sliderblur" id="weatherSlider">
+  <input style="width: 100%" type="range" min="0" max="500" value="0" class="sliderblur" id="weatherSlider">
   </div>
 </div>
 <div class="textandbutton">
