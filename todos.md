@@ -1,16 +1,11 @@
-# important (easter eggs because nothing is really "important" anymore)
+# important
 - [ ] splashtext on login page
-- [x] latte (delijn)
 - [ ] some dmenu funny shortcuts
-- [x] snail++
-- [ ] more fun ideas
+- [ ] plant
+- [ ] 
 
 # not a concern
 - [ ] icons...
-- [ ] weird text in "forum"
-- [ ] need more "decapitation" in LVS
-- [ ] "handleiding"
-- [ ] helpdesk
 
 # unfixable
 - adding nmbs
