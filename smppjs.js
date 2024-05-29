@@ -175,6 +175,7 @@ document.getElementById("rightcontainer")?document.getElementById("rightcontaine
 document.getElementById("plannercontainer")?document.getElementById("plannercontainer").remove() : "pass"
 document.getElementById("weathercontainer")?document.getElementById("weathercontainer").remove() : "pass"
 document.getElementById("delijncontainer")?document.getElementById("delijncontainer").remove() : "pass"
+document.getElementById("plantcontainer")?document.getElementById("plantcontainer").remove() : "pass"
 
     if (halte) {
       var DelijnAppElement = document.createElement("div")
@@ -192,6 +193,14 @@ document.getElementById("delijncontainer")?document.getElementById("delijncontai
       container.prepend(PlannerAppElement)
       ShowPlanner()
     }
+    if (show_plant){
+      var PlantAppElement = document.createElement("div")
+      PlantAppElement.classList.add("homepage__right")
+      PlantAppElement.classList.add("smsc-container--right")
+      PlantAppElement.setAttribute("id", "plantcontainer")
+      container.append(PlantAppElement)
+      start_plant_window()
+  }
     if (loc != "") {
       var WeatherAppElement = document.createElement("div")
       WeatherAppElement.classList.add("homepage__right")
@@ -219,9 +228,6 @@ document.getElementById("delijncontainer")?document.getElementById("delijncontai
         container.append(WeatherAppElement)
       }
       startFlappyGame()
-    }
-    if (show_plant){
-      start_plant_window()
     }
     if (!shownews) {
       centralContainer.innerHTML = ' '
