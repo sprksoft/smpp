@@ -1,7 +1,6 @@
 function start_plant_window() {
   add_plant_widget()
   age = fetch_plant_lifespan()
-  has_been_watered = fetch_watered_status()
   add_plant_image_to_container(age)
   document.getElementById("planttheplantbutton") ? planttheplantbutton() : add_buttons()
 }
