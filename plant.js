@@ -16,6 +16,9 @@ function add_plant_widget() {
 function fetch_plant_lifespan() {
   if (localStorage.getItem("plant_age")) {
     return localStorage.getItem("plant_age")
+  }else{
+    localStorage.setItem("age",0)
+    return(0)
   }
 
 }
@@ -54,16 +57,8 @@ function display_plant(age) {
     </svg></div>`
     case (1):
       return `<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 11.84 21.54">
-      <defs>
-        <style>
-          .cls-1 {
-            fill: #9c9081;
-            stroke-width: 0px;
-          }
-        </style>
-      </defs>
       <g id="Laag_1-2" data-name="Laag 1">
-        <path class="cls-1" d="M2.01.08C-.23.84-.06,6.65.07,11.26c.14,4.89.26,7.69,2.43,9.23,2.18,1.55,5.8,1.38,7.78-.49,2.72-2.56,1.24-7.3.49-9.72C9.05,4.83,4.48-.75,2.01.08Z"/>
+        <path style="fill: #9c9081" d="M2.01.08C-.23.84-.06,6.65.07,11.26c.14,4.89.26,7.69,2.43,9.23,2.18,1.55,5.8,1.38,7.78-.49,2.72-2.56,1.24-7.3.49-9.72C9.05,4.83,4.48-.75,2.01.08Z"/>
       </g>
     </svg>`
     case (2):
@@ -71,7 +66,7 @@ function display_plant(age) {
       <defs>
         <style>
           .cls-1 {
-            fill: #548313;
+            fill: #548313 !important;
           }
     
           .cls-1, .cls-2, .cls-3 {
@@ -79,11 +74,11 @@ function display_plant(age) {
           }
     
           .cls-2 {
-            fill: #9c9081;
+            fill: #9c9081 !important;
           }
     
           .cls-3 {
-            fill: #5b4511;
+            fill: #5b4511 !important;
           }
         </style>
       </defs>
@@ -101,7 +96,7 @@ function display_plant(age) {
       <defs>
         <style>
           .cls-1 {
-            fill: #548313;
+            fill: #548313 !important;
           }
     
           .cls-1, .cls-2, .cls-3 {
@@ -109,11 +104,11 @@ function display_plant(age) {
           }
     
           .cls-2 {
-            fill: #9c9081;
+            fill: #9c9081 !important;
           }
     
           .cls-3 {
-            fill: #5b4511;
+            fill: #5b4511 !important;
           }
         </style>
       </defs>
@@ -132,7 +127,7 @@ function display_plant(age) {
       <defs>
         <style>
           .cls-1 {
-            fill: #9c9081;
+            fill: #9c9081 !important;
           }
     
           .cls-1, .cls-2, .cls-3 {
@@ -140,11 +135,11 @@ function display_plant(age) {
           }
     
           .cls-2 {
-            fill: #5b4511;
+            fill: #5b4511 !important;
           }
     
           .cls-3 {
-            fill: #548013;
+            fill: #548013 !important;
           }
         </style>
       </defs>
@@ -170,7 +165,7 @@ function display_plant(age) {
       <defs>
         <style>
           .cls-1 {
-            fill: #9c9081;
+            fill: #9c9081 !important;
           }
     
           .cls-1, .cls-2, .cls-3 {
@@ -178,11 +173,11 @@ function display_plant(age) {
           }
     
           .cls-2 {
-            fill: #5b4511;
+            fill: #5b4511 !important;
           }
     
           .cls-3 {
-            fill: #548013;
+            fill: #548013 !important;
           }
         </style>
       </defs>
@@ -201,7 +196,7 @@ function display_plant(age) {
       <defs>
         <style>
           .cls-1 {
-            fill: #9c9081;
+            fill: #9c9081 !important;
           }
     
           .cls-1, .cls-2, .cls-3 {
@@ -209,11 +204,11 @@ function display_plant(age) {
           }
     
           .cls-2 {
-            fill: #5b4511;
+            fill: #5b4511 !important;
           }
     
           .cls-3 {
-            fill: #548013;
+            fill: #548013 !important;
           }
         </style>
       </defs>
@@ -228,7 +223,7 @@ function display_plant(age) {
       <defs>
         <style>
           .cls-1 {
-            fill: #9c9081;
+            fill: #9c9081 !important;
           }
     
           .cls-1, .cls-2, .cls-3 {
@@ -236,11 +231,11 @@ function display_plant(age) {
           }
     
           .cls-2 {
-            fill: #5b4511;
+            fill: #5b4511 !important;
           }
     
           .cls-3 {
-            fill: #548013;
+            fill: #548013 !important;
           }
         </style>
       </defs>
@@ -255,7 +250,7 @@ function display_plant(age) {
       <defs>
         <style>
           .cls-1 {
-            fill: #e45c00;
+            fill: #e45c00 !important;
           }
     
           .cls-1, .cls-2, .cls-3, .cls-4 {
@@ -263,15 +258,15 @@ function display_plant(age) {
           }
     
           .cls-2 {
-            fill: #9c9081;
+            fill: #9c9081 !important;
           }
     
           .cls-3 {
-            fill: #5b4511;
+            fill: #5b4511 !important;
           }
     
           .cls-4 {
-            fill: #548013;
+            fill: #548013 !important;
           }
         </style>
       </defs>
@@ -309,7 +304,7 @@ function display_plant(age) {
       <defs>
         <style>
           .cls-1 {
-            fill: #9c9081;
+            fill: #9c9081 !important;
           }
     
           .cls-1, .cls-2, .cls-3 {
@@ -317,11 +312,11 @@ function display_plant(age) {
           }
     
           .cls-2 {
-            fill: #546813;
+            fill: #546813 !important;
           }
     
           .cls-3 {
-            fill: #5b4511;
+            fill: #5b4511 !important;
           }
         </style>
       </defs>
@@ -336,7 +331,7 @@ function display_plant(age) {
       <defs>
         <style>
           .cls-1 {
-            fill: #9c9081;
+            fill: #9c9081 !important;
           }
     
           .cls-1, .cls-2 {
@@ -344,7 +339,7 @@ function display_plant(age) {
           }
     
           .cls-2 {
-            fill: #5b4511;
+            fill: #5b4511 !important;
           }
         </style>
       </defs>

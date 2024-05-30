@@ -224,7 +224,15 @@ button.btn.close-btn.btn--primary {
   background-color: var(--darken-background) !important;
   border-radius: 10px !important;
 }
-
+.listview__row.js-listview-row:hover{
+  background-color: transparent !important;
+}
+.listview__cell.js-listview-cell.listview__cell--icon-24.attachments__column.attachments__column--icon{
+  background-color: var(--color-base01);
+}
+.listview__cell.js-listview-cell.listview__cell--icon-24.attachments__column.attachments__column--icon:hover{
+background-color: var(--color-base02);
+}
 .header.js-header {
   width: 90%;
   border-bottom-right-radius: 15px;
