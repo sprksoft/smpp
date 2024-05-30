@@ -56,13 +56,13 @@ function display_plant(age) {
       </g>
     </svg></div>`
     case (1):
-      return `<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 11.84 21.54">
+      return `<svg style="margin:107px" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 11.84 21.54">
       <g id="Laag_1-2" data-name="Laag 1">
         <path style="fill: #9c9081" d="M2.01.08C-.23.84-.06,6.65.07,11.26c.14,4.89.26,7.69,2.43,9.23,2.18,1.55,5.8,1.38,7.78-.49,2.72-2.56,1.24-7.3.49-9.72C9.05,4.83,4.48-.75,2.01.08Z"/>
       </g>
     </svg>`
     case (2):
-      return `<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 38.55 66.25">
+      return `<svg style="margin:91px" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 38.55 66.25">
       <defs>
         <style>
           .cls-1 {
@@ -92,7 +92,7 @@ function display_plant(age) {
       </g>
     </svg>`
     case (3):
-      return `<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 62.54 117.42">
+      return `<svg style="margin:81px" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 62.54 117.42">
       <defs>
         <style>
           .cls-1 {
@@ -123,7 +123,7 @@ function display_plant(age) {
       </g>
     </svg>`
     case (4):
-      return `<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 45.58 126.74">
+      return `<svg style="margin:73px" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 45.58 126.74">
       <defs>
         <style>
           .cls-1 {
@@ -161,7 +161,7 @@ function display_plant(age) {
       </g>
     </svg>`
     case (5):
-      return `<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 59.61 138.61">
+      return `<svg style="margin:61px" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 59.61 138.61">
       <defs>
         <style>
           .cls-1 {
@@ -192,7 +192,7 @@ function display_plant(age) {
       </g>
     </svg>`
     case (6):
-      return `<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 85.57 145.53">
+      return `<svg style="margin:30px" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 85.57 145.53">
       <defs>
         <style>
           .cls-1 {
