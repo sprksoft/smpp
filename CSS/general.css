@@ -304,7 +304,7 @@ select,
 }
 
 tr {
-  background-color: var(--color-base00) !important;
+  background-color: transparent !important;
 }
 
 tr.selected {

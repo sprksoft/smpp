@@ -2,9 +2,11 @@ function start_plant_window() {
   add_plant_widget()
   age = fetch_plant_lifespan()
   has_been_watered = fetch_watered_status()
-  console.log("disp age:", age)
-  document.getElementById("plant_image_container") ? document.getElementById("plant_image_container").innerHTML = display_plant(age) : "none"
+  add_plant_image_to_container(age)
   document.getElementById("planttheplantbutton") ? planttheplantbutton() : add_water_button()
+}
+function add_plant_image_to_container(age){
+  document.getElementById("plant_image_container") ? document.getElementById("plant_image_container").innerHTML = display_plant(age) : "none"
 }
 function add_plant_widget() {
   var container = document.getElementById("plantcontainer")
@@ -20,17 +22,14 @@ function fetch_plant_lifespan() {
     localStorage.setItem("age",0)
     return(0)
   }
-
 }
 function plant_the_plant() {
   if (!localStorage.getItem("plant_age")) {
     localStorage.setItem("plant_age", 1)
   }
   localStorage.getItem("plant_age")
-  if (!localStorage.getItem("last_time_watered")) {
-    localStorage.setItem("last_time_watered", new Date)
-  }
-  localStorage.getItem("last_time_watered")
+  localStorage.setItem("last_time_watered", new Date)
+  document.getElementById("plant_image_container") ? document.getElementById("plant_image_container").innerHTML = display_plant(1) : "none"  
 }
 function fetch_watered_status() {
   var has_been_watered = true
@@ -62,7 +61,7 @@ function display_plant(age) {
       </g>
     </svg>`
     case (2):
-      return `<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 38.55 66.25">
+      return `<svg  xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 38.55 66.25">
       <defs>
         <style>
           .cls-1 {
