@@ -3,21 +3,12 @@ var container = document.getElementById("smscMainBlockContainer");
 container?container.insertAdjacentHTML('beforeend', '<input type="text" color="red" id="inputVak" placeholder="Voer hier je nieuwe naam in.">'): "pass"
 
 
-document.getElementById("inputVak")?document.getElementById("inputVak").addEventListener('input', function() {
-  let config = get_config()
-  var inputValue = document.getElementById("inputVak").value;
-  change_lname(inputValue);
-  config.username_override = 
-  set_config(config);
-}): "pass"
-
 let config = get_config();
 if (config.username_override == undefined){
   config.username_override = null;
   set_config(config);
 }
 let username_override = config.username_override;
-
 if (username_override == "null"){ 
   username_override = null;
 }
@@ -43,16 +34,21 @@ function try_attach_messages_observer(orig_name, new_name) {
     return;
   }
   const observer = new MutationObserver(function(muts, observer){
+    let in_send_messages_page = document.querySelector(".msgcell__head__title").innerText == "Verzonden";
+    console.log("ismp: "+in_send_messages_page);
     for (const mut of muts){
       for(const msg of mut.addedNodes){
         if (msg.nodeName == "#text"){continue;} 
         let name_el = msg.querySelector(".modern-message__name");
         if (name_el == null){ continue; }
-
-        if (name_el.innerText.startsWith(orig_name)){
+    
+        let name_is_user = name_el.innerText.startsWith(orig_name);
+        if (name_is_user){
           if (new_name !== null){
             name_el.innerText = new_name;
           }
+        }
+        if (name_is_user || in_send_messages_page){
           msg.querySelector(".modern-message__image img").style = "display: none;";
         }
       }
@@ -71,10 +67,21 @@ function unhead_fully(){
   document.head.appendChild(style_el);
 }
 
-let orig_name = change_lname(username_override);
+let orig_name = change_lname(username_override, null);
 console.log("oname" + orig_name);
 try_attach_messages_observer(orig_name, username_override);
 
 if (full_unheading){
   unhead_fully();
 }
+
+let input_vak = document.getElementById("inputVak")
+input_vak?.addEventListener('input', function() {
+  var inputValue = input_vak.value;
+  inputValue = inputValue == "" ? null : inputValue;
+  config.username_override = inputValue;
+  set_config(config);
+  if (inputValue == null){inputValue=orig_name}
+  change_lname(inputValue);
+})
+
