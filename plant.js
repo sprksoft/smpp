@@ -1,11 +1,11 @@
 function start_plant_window() {
   add_plant_widget()
-  age = fetch_plant_lifespan()
+  let age = get_current_conditions().age
   add_plant_image_to_container(age)
-  document.getElementById("planttheplantbutton") ? planttheplantbutton() : add_buttons()
+  document.getElementById("planttheplantbutton") ? plant_the_plant_button() : add_buttons()
 }
 function add_plant_image_to_container(age) {
-  document.getElementById("plant_image_container") ? document.getElementById("plant_image_container").innerHTML = display_plant(age) : "none"
+  document.getElementById("plant_image_container") ? document.getElementById("plant_image_container").innerHTML = display_plant(age) : undefined
 }
 function add_plant_widget() {
   var container = document.getElementById("plantcontainer")
@@ -14,18 +14,27 @@ function add_plant_widget() {
   plantdiv.innerHTML = `<div id="plant_image_container"></div>`
   container.appendChild(plantdiv)
 }
-function fetch_plant_lifespan() {
-    return localStorage.getItem("plant_age")
-}
-function fetch_current_conditions(){
-  let age = localStorage.getItem("plant_age")
+
+function get_current_conditions(){
   let current_conditions = JSON.parse(localStorage.getItem("current_plant_conditions"))
-  return{
-    age: age,
-    fertilizer: current_conditions.fertilizer,
-    ph: current_conditions.ph,
-    water: current_conditions.water
+  if (current_conditions){
+    return{
+      age: current_conditions.age,
+      fertilizer: current_conditions.fertilizer,
+      ph: current_conditions.ph,
+      water: current_conditions.water
+    }
+  }else{
+    localStorage.setItem("plant_seed", Math.floor(Math.random() * (1100 - 900 + 1)) + 900);
+    localStorage.setItem("current_plant_conditions",JSON.stringify({
+      age : 0,
+      ph : 7,
+      water: 5,
+      fertilizer: 5
+    }))
+    return get_current_conditions()
   }
+
 }
 function calculate_optimal_conditions(seed,age){
   console.log(age)
@@ -35,81 +44,73 @@ function calculate_optimal_conditions(seed,age){
       return
     case (1):
       return {
-        ph : Math.round(6 * seed/1000),
-        water: Math.round(1.5 * seed/1000),
-        fertilizer: Math.round(0.3 * seed/1000),
+        ph : Math.round(6 * seed/2000)*0.5,
+        water: Math.round(1.5 * seed/1000)*0.5,
+        fertilizer: Math.round(0.3 * seed/1000)*0.5,
       }
     case (2):
       return{
-        ph : Math.round(6 * seed/1200),
-        water: Math.round(2.4 * seed/1200),
-        fertilizer: Math.round(0.5 * seed/1200),
+        ph : Math.round(6 * seed/2400)*0.5,
+        water: Math.round(2.4 * seed/2400)*0.5,
+        fertilizer: Math.round(0.5 * seed/2400)*0.5,
       }
     case (3):
       return {
-        ph : Math.round(6 * seed/900),
-        water: Math.round(4 * seed/900),
-        fertilizer: Math.round(1 * seed/900),
+        ph : Math.round(6 * seed/1800)*0.5,
+        water: Math.round(4 * seed/1800)*0.5,
+        fertilizer: Math.round(1 * seed/1800)*0.5,
       }
     case (4):
       return{
-        ph : Math.round(6.5 * seed/1100),
-        water: Math.round(4.5 * seed/1100),
-        fertilizer: Math.round(2 * seed/1100),
+        ph : Math.round(6.5 * seed/2200)*0.5,
+        water: Math.round(4.5 * seed/2200)*0.5,
+        fertilizer: Math.round(2 * seed/2200)*0.5,
       }
     case (5):
       return {
-        ph : Math.round(6.5 * seed/1000),
-        water: Math.round(5.5 * seed/1000),
-        fertilizer: Math.round(5 * seed/1000),
+        ph : Math.round(6.5 * seed/2000)*0.5,
+        water: Math.round(5.5 * seed/2000)*0.5,
+        fertilizer: Math.round(5 * seed/2000)*0.5,
       }
     case (6):
       return {
-        ph : Math.round(6.5 * seed/900),
-        water: Math.round(6 * seed/900),
-        fertilizer: Math.round(7 * seed/900),
+        ph : Math.round(6.5 * seed/1800)*0.5,
+        water: Math.round(6 * seed/1800)*0.5,
+        fertilizer: Math.round(7 * seed/1800)*0.5,
       }
     case (7):
       return {
-        ph : Math.round(6.5 * seed/1000),
-        water: Math.round(10 * seed/1000),
-        fertilizer: Math.round(9 * seed/1000),
+        ph : Math.round(6.5 * seed/2000)*0.5,
+        water: Math.round(10 * seed/2000)*0.5,
+        fertilizer: Math.round(9 * seed/2000)*0.5,
       } 
     case (8):
       return{
-        ph : Math.round(6.7 * seed/1200),
-        water: Math.round(8  * seed/1200),
-        fertilizer: Math.round(7 * seed/1200),
+        ph : Math.round(6.7 * seed/2400)*0.5,
+        water: Math.round(8  * seed/2400)*0.5,
+        fertilizer: Math.round(7 * seed/2400)*0.5,
       }
     case (9):
       return {
-        ph : Math.round(7 * seed/900),
-        water: Math.round(3 * seed/900), 
-        fertilizer: Math.round(2  * seed/900),
+        ph : Math.round(7 * seed/1800)*0.5,
+        water: Math.round(3 * seed/1800)*0.5, 
+        fertilizer: Math.round(2  * seed/1800)*0.5,
       }
     case (10):
       return
   }
 }
 function plant_the_plant() {
-  if (!localStorage.getItem("plant_age")) {
-    localStorage.setItem("plant_age", 1);
-    localStorage.setItem("plant_seed", Math.floor(Math.random() * (1100 - 900 + 1)) + 900);
-    localStorage.setItem("current_plant_conditions",JSON.stringify({
-      ph : 7,
-      water: 5,
-      fertilizer: 5
-    }))
-  }
   document.getElementById("plant_image_container") ? document.getElementById("plant_image_container").innerHTML = display_plant(1) : "none"
   add_buttons()
 }
-function planttheplantbutton() {
+function plant_the_plant_button() {
   document.getElementById("planttheplantbutton").addEventListener("click", plant_the_plant)
 }
 function add_buttons() {
+  console.log("add buttons called")
   let optimal_contidions = calculate_optimal_conditions(localStorage.getItem("plant_seed"),localStorage.getItem("plant_age"))
-  let current_conditions = fetch_current_conditions()
+  let current_conditions = get_current_conditions()
   console.log(optimal_contidions)
   console.log(current_conditions)
   let buttondiv = document.createElement("div")
