@@ -31,7 +31,7 @@
   background: linear-gradient(to right,#2b251c,#5f584e,#847d72) !important;
 }
 .ph_value_button{
-  background: linear-gradient(to right,#aabf40,#6de567,#2b9428,#3b8765,#248877) !important
+  background: linear-gradient(to right,yellow,lime,green,blue) !important
 }
 .watering_button::-webkit-slider-thumb,
 .fertilizer_button::-webkit-slider-thumb,

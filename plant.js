@@ -1,7 +1,13 @@
 function start_plant_window() {
   add_plant_widget()
-  let age = get_current_conditions().age
-  add_plant_image_to_container(age)
+  if (JSON.parse(localStorage.getItem("current_plant_conditions"))) {
+    let age = get_current_conditions().age
+    add_plant_image_to_container(age)
+  }
+  else {
+    add_plant_image_to_container(0)
+  }
+
   document.getElementById("planttheplantbutton") ? plant_the_plant_button() : add_buttons()
 }
 function add_plant_image_to_container(age) {
@@ -15,28 +21,17 @@ function add_plant_widget() {
   container.appendChild(plantdiv)
 }
 
-function get_current_conditions(){
+function get_current_conditions() {
   let current_conditions = JSON.parse(localStorage.getItem("current_plant_conditions"))
-  if (current_conditions){
-    return{
-      age: current_conditions.age,
-      fertilizer: current_conditions.fertilizer,
-      ph: current_conditions.ph,
-      water: current_conditions.water
-    }
-  }else{
-    localStorage.setItem("plant_seed", Math.floor(Math.random() * (1100 - 900 + 1)) + 900);
-    localStorage.setItem("current_plant_conditions",JSON.stringify({
-      age : 0,
-      ph : 7,
-      water: 5,
-      fertilizer: 5
-    }))
-    return get_current_conditions()
+  return {
+    age: current_conditions.age,
+    fertilizer: current_conditions.fertilizer,
+    ph: current_conditions.ph,
+    water: current_conditions.water
   }
 
 }
-function calculate_optimal_conditions(seed,age){
+function calculate_optimal_conditions(seed, age) {
   console.log(age)
   console.log(seed)
   switch (Number(age)) {
@@ -44,57 +39,57 @@ function calculate_optimal_conditions(seed,age){
       return
     case (1):
       return {
-        ph : Math.round(6 * seed/2000)*0.5,
-        water: Math.round(1.5 * seed/1000)*0.5,
-        fertilizer: Math.round(0.3 * seed/1000)*0.5,
+        ph: Math.round(6 * seed / 2000) * 0.5,
+        water: Math.round(1.5 * seed / 1000) * 0.5,
+        fertilizer: Math.round(0.3 * seed / 1000) * 0.5,
       }
     case (2):
-      return{
-        ph : Math.round(6 * seed/2400)*0.5,
-        water: Math.round(2.4 * seed/2400)*0.5,
-        fertilizer: Math.round(0.5 * seed/2400)*0.5,
+      return {
+        ph: Math.round(6 * seed / 2400) * 0.5,
+        water: Math.round(2.4 * seed / 2400) * 0.5,
+        fertilizer: Math.round(0.5 * seed / 2400) * 0.5,
       }
     case (3):
       return {
-        ph : Math.round(6 * seed/1800)*0.5,
-        water: Math.round(4 * seed/1800)*0.5,
-        fertilizer: Math.round(1 * seed/1800)*0.5,
+        ph: Math.round(6 * seed / 1800) * 0.5,
+        water: Math.round(4 * seed / 1800) * 0.5,
+        fertilizer: Math.round(1 * seed / 1800) * 0.5,
       }
     case (4):
-      return{
-        ph : Math.round(6.5 * seed/2200)*0.5,
-        water: Math.round(4.5 * seed/2200)*0.5,
-        fertilizer: Math.round(2 * seed/2200)*0.5,
+      return {
+        ph: Math.round(6.5 * seed / 2200) * 0.5,
+        water: Math.round(4.5 * seed / 2200) * 0.5,
+        fertilizer: Math.round(2 * seed / 2200) * 0.5,
       }
     case (5):
       return {
-        ph : Math.round(6.5 * seed/2000)*0.5,
-        water: Math.round(5.5 * seed/2000)*0.5,
-        fertilizer: Math.round(5 * seed/2000)*0.5,
+        ph: Math.round(6.5 * seed / 2000) * 0.5,
+        water: Math.round(5.5 * seed / 2000) * 0.5,
+        fertilizer: Math.round(5 * seed / 2000) * 0.5,
       }
     case (6):
       return {
-        ph : Math.round(6.5 * seed/1800)*0.5,
-        water: Math.round(6 * seed/1800)*0.5,
-        fertilizer: Math.round(7 * seed/1800)*0.5,
+        ph: Math.round(6.5 * seed / 1800) * 0.5,
+        water: Math.round(6 * seed / 1800) * 0.5,
+        fertilizer: Math.round(7 * seed / 1800) * 0.5,
       }
     case (7):
       return {
-        ph : Math.round(6.5 * seed/2000)*0.5,
-        water: Math.round(10 * seed/2000)*0.5,
-        fertilizer: Math.round(9 * seed/2000)*0.5,
-      } 
+        ph: Math.round(6.5 * seed / 2000) * 0.5,
+        water: Math.round(10 * seed / 2000) * 0.5,
+        fertilizer: Math.round(9 * seed / 2000) * 0.5,
+      }
     case (8):
-      return{
-        ph : Math.round(6.7 * seed/2400)*0.5,
-        water: Math.round(8  * seed/2400)*0.5,
-        fertilizer: Math.round(7 * seed/2400)*0.5,
+      return {
+        ph: Math.round(6.7 * seed / 2400) * 0.5,
+        water: Math.round(8 * seed / 2400) * 0.5,
+        fertilizer: Math.round(7 * seed / 2400) * 0.5,
       }
     case (9):
       return {
-        ph : Math.round(7 * seed/1800)*0.5,
-        water: Math.round(3 * seed/1800)*0.5, 
-        fertilizer: Math.round(2  * seed/1800)*0.5,
+        ph: Math.round(7 * seed / 1800) * 0.5,
+        water: Math.round(3 * seed / 1800) * 0.5,
+        fertilizer: Math.round(2 * seed / 1800) * 0.5,
       }
     case (10):
       return
@@ -102,6 +97,13 @@ function calculate_optimal_conditions(seed,age){
 }
 function plant_the_plant() {
   document.getElementById("plant_image_container") ? document.getElementById("plant_image_container").innerHTML = display_plant(1) : "none"
+  localStorage.setItem("plant_seed", Math.floor(Math.random() * (1100 - 900 + 1)) + 900);
+  localStorage.setItem("current_plant_conditions", JSON.stringify({
+    age: 1,
+    ph: 7,
+    water: 5,
+    fertilizer: 5
+  }))
   add_buttons()
 }
 function plant_the_plant_button() {
@@ -109,7 +111,7 @@ function plant_the_plant_button() {
 }
 function add_buttons() {
   console.log("add buttons called")
-  let optimal_contidions = calculate_optimal_conditions(localStorage.getItem("plant_seed"),localStorage.getItem("plant_age"))
+  let optimal_contidions = calculate_optimal_conditions(localStorage.getItem("plant_seed"), localStorage.getItem("current_plant_conditions").age)
   let current_conditions = get_current_conditions()
   console.log(optimal_contidions)
   console.log(current_conditions)
@@ -125,7 +127,7 @@ function add_buttons() {
   let ph_value_button = document.createElement("input")
   ph_value_button.classList.add("ph_value_button")
   ph_value_button.type = ("range")
-  buttondiv.append(watering_button,fertilizer_button,ph_value_button)
+  buttondiv.append(watering_button, fertilizer_button, ph_value_button)
 }
 function display_plant(age) {
   age = Number(age)
