@@ -115,12 +115,15 @@ function add_buttons() {
   let buttondiv = document.createElement("div")
   buttondiv.classList.add("buttondivforplant")
   document.getElementById("plantdiv").append(buttondiv)
-  let watering_button = document.createElement("div")
-  watering_button.innerHTML = optimal_contidions.water + "->" + current_conditions.water
-  let fertilizer_button = document.createElement("div")
-  fertilizer_button.innerHTML = optimal_contidions.fertilizer + "->" + current_conditions.fertilizer
-  let ph_value_button = document.createElement("div")
-  ph_value_button.innerHTML = optimal_contidions.ph + "->" + current_conditions.ph
+  let watering_button = document.createElement("input")
+  watering_button.classList.add("watering_button")
+  watering_button.type = ("range")
+  let fertilizer_button = document.createElement("input")
+  fertilizer_button.classList.add("fertilizer_button")
+  fertilizer_button.type = ("range")
+  let ph_value_button = document.createElement("input")
+  ph_value_button.classList.add("ph_value_button")
+  ph_value_button.type = ("range")
   buttondiv.append(watering_button,fertilizer_button,ph_value_button)
 }
 function display_plant(age) {

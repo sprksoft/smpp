@@ -1,15 +1,58 @@
 #plantdiv {
-    background-color: var(--color-base01);
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    max-width: 300px;
-    margin: 9px;
-    border: 3px solid var(--color-base03);
-  }
-  .buttondivforplant{
-    display: flex;
-    flex-direction: row;
-    align-content: center;
-  }
+  background-color: var(--color-base01);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 300px;
+  margin: 9px;
+  border: 3px solid var(--color-base03);
+}
+.buttondivforplant {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+}
+.watering_button,
+.fertilizer_button,
+.ph_value_button {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 31%;
+  background: red;
+  margin-right: 5px;
+  border-radius: 5px;
+  height: 25px;
+}
+.watering_button{
+  background: linear-gradient(to right,#c6bf96,#6ed7f8,#0879b3) !important;
+}
+.fertilizer_button{
+  background: linear-gradient(to right,#2b251c,#5f584e,#847d72) !important;
+}
+.ph_value_button{
+  background: linear-gradient(to right,#aabf40,#6de567,#2b9428,#3b8765,#248877) !important
+}
+.watering_button::-webkit-slider-thumb,
+.fertilizer_button::-webkit-slider-thumb,
+.ph_value_button::-webkit-slider-thumb {
+  width: 5px;
+  -webkit-appearance: none;
+  opacity: 1;
+  appearance: none;
+  background: #1e2128;
+  border-radius: 1px;
+  height: 25px;
+}
+
+.watering_button::-moz-range-thumb,
+.fertilizer_button::-moz-range-thumb,
+.ph_value_button::-moz-range-thumb{
+  width: 5px;
+  -webkit-appearance: none;
+  opacity: 1;
+  appearance: none;
+  background: #1e2128;
+  border-radius: 1px;
+  height: 25px;
+}
