@@ -1,6 +1,6 @@
 const default_settings = {
   quicks: [],
-  profile: "default",
+  profile: "birb",
   halte: true,
   overwrite_theme: 0,
   location: "keerbergen",
