@@ -11,8 +11,8 @@ function start_plant_window() {
 }
 
 function calculate_growth_since_last_update() {
- let last_time_watered = localStorage.getItem("last_time_watered")
- let original_amount_water = get_current_conditions().water
+  let current_conditions = get_current_conditions()
+
 }
 
 
@@ -27,17 +27,13 @@ function add_plant_widget() {
 function plant_the_plant_button() {
   document.getElementById("planttheplantbutton").addEventListener("click", plant_the_plant);
 }
-
 function plant_the_plant() {
   document.getElementById("plant_image_container").innerHTML = display_plant(1);
-  localStorage.setItem("plant_seed", Math.floor(Math.random() * (1100 - 900 + 1)) + 900);
   localStorage.setItem("current_plant_conditions", JSON.stringify({
-    age: 1,
-    water: 0
+
   }));
   add_buttons();
 }
-
 function add_buttons() {
   let current_conditions = get_current_conditions();
   console.log(current_conditions);
@@ -45,25 +41,24 @@ function add_buttons() {
   buttondiv.classList.add("buttondivforplant");
   buttondiv.innerHTML = plant_buttonsHTML
   document.getElementById("plantdiv").append(buttondiv);
-  buttondiv.addEventListener("change", store_current_plant_conditions);
+  buttondiv.addEventListener("change", user_watered_plant);
 }
-
-function store_current_plant_conditions() {
-  let current_conditions = {};
-  current_conditions.age = get_current_conditions().age;
-  current_conditions.water = true;
-  last_time_watered
-  localStorage.setItem("current_plant_conditions", JSON.stringify(current_conditions));
-  localStorage.setItem("last_update_time", new Date().getTime());
+function user_watered_plant(){
+  console.log("user planted the plant")
+  let current_conditions = get_current_conditions()
+  current_conditions.last_time_watered = new Date
+  set_current_conditions(current_conditions)
 }
-
-function get_current_conditions() {
-  return JSON.parse(localStorage.getItem("current_plant_conditions"));
-}
-
-
 function add_plant_image_to_container(age) {
   document.getElementById("plant_image_container").innerHTML = display_plant(age);
+}
+function set_current_conditions(current_conditions) {
+  localStorage.setItem("current_plant_conditions", JSON.stringify(
+current_conditions
+  ));
+}
+function get_current_conditions() {
+  return JSON.parse(localStorage.getItem("current_plant_conditions"));
 }
 function display_plant(age) {
   age = Number(age)

@@ -8,61 +8,22 @@
   margin: 9px;
   border: 3px solid var(--color-base03);
 }
+
 .buttondivforplant {
   display: flex;
   flex-direction: row;
-  align-content: center;
-  gap: 5px !important
-}
-.plant_buttons_div{
-  display: flex;
-  flex-direction: column;
-}
-.watering_button,
-.fertilizer_button,
-.ph_value_button{
-  appearance: none;
-  -webkit-appearance: none;
-  width: 100%;
-  border-radius: 5px;
-  height: 25px;
-}
-.plant_button_display{
-  text-align: left;
-  font-weight: bolder;
-  position: relative;
-  width: 10px;
+  justify-content: center;
 }
 
-.watering_button{
-  background: linear-gradient(to right,#c6bf96,#6ed7f8,#0879b3) !important;
+.watering_button {
+  border: 2px solid var(--color-base03);
+  background-color: var(--color-base02);
+  border-radius: 10px;
+  width: 100px;
+  height: 50px;
 }
-.fertilizer_button{
-  background: linear-gradient(to right,#2b251c,#5f584e,#847d72) !important;
-}
-.ph_value_button{
-  background: linear-gradient(to right,yellow,lime,rgb(0, 113, 128),blue) !important
-}
-.watering_button::-webkit-slider-thumb,
-.fertilizer_button::-webkit-slider-thumb,
-.ph_value_button::-webkit-slider-thumb {
-  width: 5px;
-  -webkit-appearance: none;
-  opacity: 1;
-  appearance: none;
-  background: #1e2128;
-  border-radius: 1px;
-  height: 25px;
-}
-
-.watering_button::-moz-range-thumb,
-.fertilizer_button::-moz-range-thumb,
-.ph_value_button::-moz-range-thumb{
-  width: 5px;
-  -webkit-appearance: none;
-  opacity: 1;
-  appearance: none;
-  background: #1e2128;
-  border-radius: 1px;
-  height: 25px;
+.watering_button:hover {
+  background-color: var(--color-base03);
+  border-color: var(--color-accent);
+  cursor: pointer;
 }
