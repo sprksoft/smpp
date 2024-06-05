@@ -2,20 +2,33 @@
 function start_plant_window() {
   add_plant_widget();
   if (get_current_conditions()) {
-    let age = get_current_conditions().age;
+    let age = calculate_growth_since_last_update();
     add_plant_image_to_container(age);
   } else {
     add_plant_image_to_container(0);
   }
   document.getElementById("planttheplantbutton") ? plant_the_plant_button() : add_buttons();
 }
-
 function calculate_growth_since_last_update() {
-  let current_conditions = get_current_conditions()
+  let current_time = new Date
+  console.log(current_conditions.last_time_watered)
+  console.log(current_time)
+  let time_difference = current_time - current_conditions.last_time_watered
+  let time_difference_minutes = time_difference / (1000/60)
+  console.log(time_difference)
+  console.log(time_difference_minutes)
+  if (time_difference_minutes > 2){
+    for (let i = 0; i < time_difference_minutes-1; i++) {
+      current_conditions.age -= 1
+    }
+  }
+  else if (time_difference_minutes > 1){
+    current_conditions.age +=1
+  }
 
+
+  return current_conditions.age
 }
-
-
 function add_plant_widget() {
   var container = document.getElementById("plantcontainer");
   var plantdiv = document.createElement("div");
@@ -23,15 +36,17 @@ function add_plant_widget() {
   plantdiv.innerHTML = `<div id="plant_image_container"></div>`;
   container.appendChild(plantdiv);
 }
-
 function plant_the_plant_button() {
   document.getElementById("planttheplantbutton").addEventListener("click", plant_the_plant);
 }
 function plant_the_plant() {
   document.getElementById("plant_image_container").innerHTML = display_plant(1);
-  localStorage.setItem("current_plant_conditions", JSON.stringify({
-
-  }));
+  last_time_watered = new Date
+  console.log(last_time_watered)
+  set_current_conditions({
+    age:1,
+    last_time_watered: last_time_watered
+  })
   add_buttons();
 }
 function add_buttons() {
@@ -46,8 +61,10 @@ function add_buttons() {
 function user_watered_plant(){
   console.log("user planted the plant")
   let current_conditions = get_current_conditions()
-  current_conditions.last_time_watered = new Date
-  set_current_conditions(current_conditions)
+  if (!new Date - current_conditions.last_time_watered / (1000/60)<1 ){
+    current_conditions.last_time_watered = new Date
+    set_current_conditions(current_conditions)
+  }
 }
 function add_plant_image_to_container(age) {
   document.getElementById("plant_image_container").innerHTML = display_plant(age);
