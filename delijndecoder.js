@@ -1,4 +1,4 @@
-const LijnApiKey = 'ddb68605719d4bb8b6444b6871cefc7a';
+
 
 async function fetchApiData(url) {
   const response = await fetch(url, { headers: { 'Ocp-Apim-Subscription-Key': LijnApiKey } });
@@ -48,7 +48,7 @@ async function createOption(givendata, i) {
 function clearLeftbottom() {
   document.getElementById('leftContainerbottom').innerHTML = "";
 }
-
+const LijnApiKey = atob('ZGRiNjg2MDU3MTlkNGJiOGI2NDQ0YjY4NzFjZWZjN2E='); // hidden
 function chosen(choice, data) {
   const lijnData = {
     entiteitnummer: data.haltes[choice].entiteitnummer,
