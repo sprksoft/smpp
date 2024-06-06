@@ -10,25 +10,29 @@ function start_plant_window() {
   document.getElementById("planttheplantbutton") ? plant_the_plant_button() : add_buttons();
 }
 function calculate_growth_since_last_update() {
-  let current_time = new Date
-  console.log(current_conditions.last_time_watered)
-  console.log(current_time)
-  let time_difference = current_time - current_conditions.last_time_watered
-  let time_difference_minutes = time_difference / (1000/60)
-  console.log(time_difference)
-  console.log(time_difference_minutes)
-  if (time_difference_minutes > 2){
-    for (let i = 0; i < time_difference_minutes-1; i++) {
-      current_conditions.age -= 1
+  let current_time = new Date().getTime();
+  let current_conditions = get_current_conditions();
+  let last_time_watered = new Date(current_conditions.last_time_watered).getTime();
+  console.log(last_time_watered);
+  console.log(current_time);
+  let time_difference = current_time - last_time_watered;
+  let time_difference_minutes = time_difference / (1000 * 60);
+  console.log(time_difference_minutes);
+  if (time_difference_minutes > 2) {
+    for (let i = 0; i < Math.floor(time_difference_minutes - 1); i++) {
+      if (current_conditions.age == 0) {
+        break;
+      }
+      current_conditions.age -= 1;
     }
+  } else if (time_difference_minutes > 1) {
+    current_conditions.age += 1;
   }
-  else if (time_difference_minutes > 1){
-    current_conditions.age +=1
-  }
-
-
-  return current_conditions.age
+  console.log(current_conditions);
+  set_current_conditions(current_conditions)
+  return current_conditions.age;
 }
+
 function add_plant_widget() {
   var container = document.getElementById("plantcontainer");
   var plantdiv = document.createElement("div");
@@ -44,7 +48,7 @@ function plant_the_plant() {
   last_time_watered = new Date
   console.log(last_time_watered)
   set_current_conditions({
-    age:1,
+    age: 1,
     last_time_watered: last_time_watered
   })
   add_buttons();
@@ -56,13 +60,19 @@ function add_buttons() {
   buttondiv.classList.add("buttondivforplant");
   buttondiv.innerHTML = plant_buttonsHTML
   document.getElementById("plantdiv").append(buttondiv);
-  buttondiv.addEventListener("change", user_watered_plant);
+  document.getElementById("watering_button").addEventListener("click", user_watered_plant);
 }
-function user_watered_plant(){
+function user_watered_plant() {
+  let now = new Date().getTime()
   console.log("user planted the plant")
   let current_conditions = get_current_conditions()
-  if (!new Date - current_conditions.last_time_watered / (1000/60)<1 ){
-    current_conditions.last_time_watered = new Date
+  let last_time_watered = new Date(current_conditions.last_time_watered).getTime()
+  let time_difference = now - last_time_watered
+  let time_difference_minutes = time_difference / (1000 * 60);
+  console.log(time_difference_minutes)
+  if (time_difference_minutes > 1) {
+    current_conditions.last_time_watered = new Date()
+    console.log(current_conditions.last_time_watered)
     set_current_conditions(current_conditions)
   }
 }
@@ -71,7 +81,7 @@ function add_plant_image_to_container(age) {
 }
 function set_current_conditions(current_conditions) {
   localStorage.setItem("current_plant_conditions", JSON.stringify(
-current_conditions
+    current_conditions
   ));
 }
 function get_current_conditions() {
