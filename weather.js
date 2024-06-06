@@ -1,5 +1,3 @@
-const apiKey = '2b6f9b6dbe5064dd770f29d4b229a22c';
-
 async function getWeatherByCity(city) {
   try {
     const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
@@ -91,7 +89,7 @@ async function updateWeatherDiv(weatherData, IsBig) {
   }
   rightContainer.appendChild(weatherdiv);
 }
-
+const apiKey = atob('MmI2ZjliNmRiZTUwNjRkZDc3MGYyOWQ0YjIyOWEyMmMK') // Hide it a bit deeper in the code
 async function set_weather_loc(loc, IsBig) {
   const currentdate = new Date();
   if (window.localStorage.getItem("lastupdate") == undefined) {
