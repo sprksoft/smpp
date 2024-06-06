@@ -1,5 +1,5 @@
 async function fetchData(entiteit, halte) {
-  const apiKey = 'ddb68605719d4bb8b6444b6871cefc7a';
+  const apiKey = atob('ZGRiNjg2MDU3MTlkNGJiOGI2NDQ0YjY4NzFjZWZjN2E='); // no better way to hide this :(
   const apiUrl = `https://api.delijn.be/DLKernOpenData/api/v1/haltes/${entiteit}/${halte}/real-time?maxAantalDoorkomsten=5`;
 
   try {
