@@ -1,46 +1,109 @@
+// Call this function when the plant widget is first started
 function start_plant_window() {
-  add_plant_widget()
-  age = fetch_plant_lifespan()
-  has_been_watered = fetch_watered_status()
-  add_plant_image_to_container(age)
-  document.getElementById("planttheplantbutton") ? planttheplantbutton() : add_water_button()
+  add_plant_widget();
+  if (get_current_conditions()) {
+    let age = calculate_growth_since_last_update();
+    add_plant_image_to_container(age);
+  } else {
+    add_plant_image_to_container(0);
+  }
+  document.getElementById("planttheplantbutton") ? plant_the_plant_button() : add_buttons();
 }
-function add_plant_image_to_container(age){
-  document.getElementById("plant_image_container") ? document.getElementById("plant_image_container").innerHTML = display_plant(age) : "none"
+function calculate_growth_since_last_update() {
+  let current_time = new Date().getTime();
+  let current_conditions = get_current_conditions();
+  
+  let last_time_watered = new Date(current_conditions.last_time_watered).getTime();
+  let last_time_grew = new Date(current_conditions.last_time_grew || current_conditions.last_time_watered).getTime();
+  
+  console.log("Last time watered:", last_time_watered);
+  console.log("Current time:", current_time);
+  
+  let time_difference_watered = current_time - last_time_watered;
+  let time_difference_minutes_watered = time_difference_watered / (1000 * 60);
+  
+  let time_difference_grew = current_time - last_time_grew;
+  let time_difference_minutes_grew = time_difference_grew / (1000 * 60);
+  
+  console.log("Time difference since watered (minutes):", time_difference_minutes_watered);
+  console.log("Time difference since last grew (minutes):", time_difference_minutes_grew);
+
+  // Growth logic
+  if (time_difference_minutes_grew > 1) {
+    current_conditions.age += 1;
+    current_conditions.last_time_grew = current_time;
+      // Decline logic
+  if (time_difference_minutes_watered > 2) {
+    let full_minutes = Math.floor(time_difference_minutes_watered);
+    current_conditions.age -= (full_minutes);
+    if (current_conditions.age < 0) {
+      current_conditions.age = 0;
+    }
+  }
+  }
+
+
+  
+  console.log(current_conditions);
+  set_current_conditions(current_conditions);
+  
+  return current_conditions.age;
 }
 function add_plant_widget() {
-  var container = document.getElementById("plantcontainer")
-  var plantdiv = document.createElement("div")
-  plantdiv.classList.add("plantdiv")
-  plantdiv.innerHTML = `<div id="plant_image_container"></div>`
-  container.appendChild(plantdiv)
+  var container = document.getElementById("plantcontainer");
+  var plantdiv = document.createElement("div");
+  plantdiv.id = "plantdiv";
+  plantdiv.innerHTML = `<div id="plant_image_container"></div>`;
+  container.appendChild(plantdiv);
 }
-function fetch_plant_lifespan() {
-  if (localStorage.getItem("plant_age")) {
-    return localStorage.getItem("plant_age")
-  }else{
-    localStorage.setItem("age",0)
-    return(0)
-  }
+function plant_the_plant_button() {
+  document.getElementById("planttheplantbutton").addEventListener("click", plant_the_plant);
 }
 function plant_the_plant() {
-  if (!localStorage.getItem("plant_age")) {
-    localStorage.setItem("plant_age", 1)
+  document.getElementById("plant_image_container").innerHTML = display_plant(1);
+  last_time_watered = new Date()
+  last_time_grew = new Date()
+  console.log(last_time_watered)
+  set_current_conditions({
+    age: 1,
+    last_time_watered: last_time_watered,
+    last_time_grew: last_time_grew 
+  })
+  add_buttons();
+}
+function add_buttons() {
+  let current_conditions = get_current_conditions();
+  console.log(current_conditions);
+  let buttondiv = document.createElement("div");
+  buttondiv.classList.add("buttondivforplant");
+  buttondiv.innerHTML = plant_buttonsHTML
+  document.getElementById("plantdiv").append(buttondiv);
+  document.getElementById("watering_button").addEventListener("click", user_watered_plant);
+}
+function user_watered_plant() {
+  let now = new Date().getTime()
+  console.log("user planted the plant")
+  let current_conditions = get_current_conditions()
+  let last_time_watered = new Date(current_conditions.last_time_watered).getTime()
+  let time_difference = now - last_time_watered
+  let time_difference_minutes = time_difference / (1000 * 60);
+  console.log(time_difference_minutes)
+  if (time_difference_minutes > 1) {
+    current_conditions.last_time_watered = new Date()
+    console.log(current_conditions.last_time_watered)
+    set_current_conditions(current_conditions)
   }
-  localStorage.getItem("plant_age")
-  localStorage.setItem("last_time_watered", new Date)
-  document.getElementById("plant_image_container") ? document.getElementById("plant_image_container").innerHTML = display_plant(1) : "none"  
 }
-function fetch_watered_status() {
-  var has_been_watered = true
-  return has_been_watered
+function add_plant_image_to_container(age) {
+  document.getElementById("plant_image_container").innerHTML = display_plant(age);
 }
-function planttheplantbutton() {
-  document.getElementById("planttheplantbutton").addEventListener("click", plant_the_plant)
+function set_current_conditions(current_conditions) {
+  localStorage.setItem("current_plant_conditions", JSON.stringify(
+    current_conditions
+  ));
 }
-function add_water_button() {
-  watering_button = document.createElement("div")
-  document.getElementById("plannercontainer") ? document.getElementById("plannercontainer").append(watering_button) : "none"
+function get_current_conditions() {
+  return JSON.parse(localStorage.getItem("current_plant_conditions"));
 }
 function display_plant(age) {
   age = Number(age)
