@@ -389,6 +389,24 @@ const weatherHTML = `<div class="weatherdiv">
 
 </div>
 `;
+
+
+
+
+
+function globalChatTextBalk() {
+
+}
+
+const chatyHTML = `
+  <button class="smscButton lookChat" onclick="globalChatTextBalk()">globle chat</button>
+  <div id="globalChatTextBalk"> </div>
+`;
+
+
+
+
+
 const weatherHTMLTiny = `<div class="weatherdiv">
 <div class="colSmall">
 <div class="veticalstackweather" style="width:70% !important;">

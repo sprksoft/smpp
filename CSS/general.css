@@ -1238,3 +1238,13 @@ border: 2px solid var(--color-base02) !important;
   color: var(--color-text);
   margin-left: 38%;
 }
+
+.lookChat{
+  background-color: var(--color-base02);
+  border: 2px solid var(--color-base03);
+  border-radius: 5px;
+  min-width: 100px !important;
+}
+.lookChat:hover{
+  border-color: var(--color-accent);
+}
