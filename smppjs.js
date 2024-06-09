@@ -386,6 +386,7 @@ if(msghead){
   chaty.classList.add("chatie")
   chaty.innerHTML=chatyHTML
 msghead.insertBefore( chaty, msghead.querySelector(".msgcell__head__sort"))
+document.getElementById("globalChatTextBalk").addEventListener("click",globalChatTextBalk)
 }
 
 function load() {

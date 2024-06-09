@@ -19,8 +19,11 @@
   border: 2px solid var(--color-base03);
   background-color: var(--color-base02);
   border-radius: 10px;
+  padding: 2.5px;
   width: 100px;
   height: 50px;
+  transition: ease-in-out;
+  transition-duration: 0.1s;
 }
 .watering_button:hover {
   background-color: var(--color-base03);
