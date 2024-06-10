@@ -1,6 +1,7 @@
 html {
   --color-accent: #ff1bec;
   --color-text: #bc3db8;
+  --color-text: #f766ff;
   --color-base00: #191817;
   --color-base01: #232020;
   --color-base02: #3f3c3b;
@@ -15,6 +16,17 @@ html {
   --color-hover-border: var(--color-accent);
   --darken-background: #322d2dcd;
   --loginpage-image: url(https://www.hdwallpapers.in/download/macos_monterey_shapes_hd_macos-2560x1440.jpg);
+}
+
+* {
+  border-color: var(--color-text) !important;
+}
+
+.MuiFormControl-root.filter, .MuiFormLabel-root.Mui-focused, #book-filter-label, .MuiSelect-root.MuiSelect-select.MuiSelect-selectMenu, .MuiSelect-root.MuiSelect-select.MuiSelect-selectMenu:focus {
+  border-color: var(--color-text) !important;
+  background-color: var(--darken-background) !important;
+  color: var(--color-text) !important;
+
 }
 
 .MuiPaper-root.rounded , .MuiPaper-root.MuiAppBar-root {
