@@ -1,6 +1,6 @@
 html {
   --color-accent: #ff1bec;
-  --color-text: #C2BAB2;
+  --color-text: #bc3db8;
   --color-base00: #191817;
   --color-base01: #232020;
   --color-base02: #3f3c3b;
@@ -38,4 +38,3 @@ header {
 .jss28.jss29.logged-in {
   background-image: var(--loginpage-image) !important;
 }
-
