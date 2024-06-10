@@ -86,9 +86,9 @@ const themes = {
     "--color-accent": "#8590aacc",
     "--color-text": "#a8a9ab",
     "--color-base00": "#0e0e15",
-    "--color-base01": "#16171b",
-    "--color-base02": "#1c1d21",
-    "--color-base03": "#30323a",
+    "--color-base01": "#18191d",
+    "--color-base02": "#232428",
+    "--color-base03": "#3a3c44",
     "--loginpage-image": "url(https://wallpapercave.com/wp/wp4673203.jpg)"
   },
   "matcha": {
@@ -175,27 +175,27 @@ const messageSvg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://cre
 const colorpickersHTML = `
 <div class="color-picker-container">
 <input type="color" class="color-pickersmpp" id="colorPicker1">
-<span class="color-label">Base0</span>
+<span class="color-label">base0</span>
 </div>
 <div class="color-picker-container">
 <input type="color" class="color-pickersmpp" id="colorPicker2">
-<span class="color-label">Base1</span>
+<span class="color-label">base1</span>
 </div>
 <div class="color-picker-container">
 <input type="color" class="color-pickersmpp" id="colorPicker3">
-<span class="color-label">Base2</span>
+<span class="color-label">base2</span>
 </div>
 <div class="color-picker-container">
 <input type="color" class="color-pickersmpp" id="colorPicker4">
-<span class="color-label">Base3</span>
+<span class="color-label">base3</span>
 </div>
 <div class="color-picker-container">
 <input type="color" class="color-pickersmpp" id="colorPicker5">
-<span class="color-label">Accent</span>
+<span class="color-label">accent</span>
 </div>
 <div class="color-picker-container">
 <input type="color" class="color-pickersmpp" id="colorPicker6">
-<span class="color-label">Text</span>
+<span class="color-label">text</span>
 </div>`
 const popupsettingHTML = `<head>
 <meta charset="utf-8">
@@ -203,7 +203,7 @@ const popupsettingHTML = `<head>
 <title>popup</title>
 </head>
 <body>
-<h3 class="popuptitles">Color profile:</h3>
+<h3 class="popuptitles">Theme:</h3>
 <select id="profileSelector" >
     <option value="default">Default Deluxe</option>
     <option value="white">Off White</option>
@@ -237,8 +237,16 @@ const popupsettingHTML = `<head>
     <span class="slider round"></span>
     </label>
 </div>
+<div>
+  <h3 class="popuptitles">Plant:</h3>
+  <label class="switch">
+    <input class="popupinput" type="checkbox" id="show_plant">
+    <span class="slider round"></span>
+    </label>
 </div>
-<h3 class="popuptitles">Location (weather):</h3>
+
+</div>
+<h3 class="popuptitles">Location (Weather):</h3>
 <div class="textandbutton">
 <input class="popupinput" id="location" type="text"></input>
 <label class="switch">
@@ -246,7 +254,7 @@ const popupsettingHTML = `<head>
 <span class="slider round"></span>
 </label>
 </div>
-<h3 class="popuptitles">Custom wallpaper (optional):</h3>
+<h3 class="popuptitles">Custom wallpaper:</h3>
 <div class="textandbutton">
   <div class="verticaltext"><p class="nobottommargp off_text">Off</p><p class="nobottommargp link_text">Link</p><p class="nobottommargp">File</p></div>
   <input type="range" min="0" max="2" value="0" class="sliderblur" id="backgroundSlider">
@@ -255,16 +263,19 @@ const popupsettingHTML = `<head>
   <button class="popupinput" class="backgroundfile" id="backgroundfilebutton"><svg width="30px" height="30px" viewBox="0 0 24.00 24.00" fill="none" xmlns="http://www.w3.org/2000/svg">
   <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M9 13H15M12.0627 6.06274L11.9373 5.93726C11.5914 5.59135 11.4184 5.4184 11.2166 5.29472C11.0376 5.18506 10.8425 5.10425 10.6385 5.05526C10.4083 5 10.1637 5 9.67452 5H6.2C5.0799 5 4.51984 5 4.09202 5.21799C3.71569 5.40973 3.40973 5.71569 3.21799 6.09202C3 6.51984 3 7.07989 3 8.2V15.8C3 16.9201 3 17.4802 3.21799 17.908C3.40973 18.2843 3.71569 18.5903 4.09202 18.782C4.51984 19 5.07989 19 6.2 19H17.8C18.9201 19 19.4802 19 19.908 18.782C20.2843 18.5903 20.5903 18.2843 20.782 17.908C21 17.4802 21 16.9201 21 15.8V10.2C21 9.0799 21 8.51984 20.782 8.09202C20.5903 7.71569 20.2843 7.40973 19.908 7.21799C19.4802 7 18.9201 7 17.8 7H14.3255C13.8363 7 13.5917 7 13.3615 6.94474C13.1575 6.89575 12.9624 6.81494 12.7834 6.70528C12.5816 6.5816 12.4086 6.40865 12.0627 6.06274Z" class="st4" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path> </g>
   </svg></button>
+  <div class="color-picker-container">
+    <input type="range" min="0" max="10" value="0" class="sliderblur" id="mySlider">
+    <span class="color-label" id="blurPlaats">blur</span>
+  </div>
 </div>
 <div class="textandbutton" id="errormessagesmpp"></div>
-<h3 class="popuptitles">Blur:</h3>
-<input type="range" min="0" max="20" value="0" class="sliderblur" id="mySlider">
+<h3 class="popuptitles">Weather Overlay:</h3>
 <div class="textandbutton" style="margin-top: 20px !important">
   <div class="verticaltext"><p class="nobottommargp off_text">Snow</p><p class="nobottommargp link_text">Meteor</p><p class="nobottommargp">Rain</p></div>
   <input type="range" min="0" max="2" value="0" class="sliderblur" id="weatherSelector">
   <div class="verticaltext-noright" style="width: 110px; margin-top: -10px; margin-right: 10px !important;">
   <h4 style="margin-bottom:1px">Amount:</h4>
-  <input style="width: max-content" type="range" min="0" max="500" value="0" class="sliderblur" id="weatherSlider">
+  <input style="width: 100%" type="range" min="0" max="500" value="0" class="sliderblur" id="weatherSlider">
   </div>
 </div>
 <div class="textandbutton">
@@ -304,26 +315,13 @@ const weatherHTML = `<div class="weatherdiv">
 	<div class="weather-humwind weather-humwindBig">
 		<svg xmlns="http://www.w3.org/2000/svg" id="layer1" data-name="Laag 2" height="55px" width="55px"
 			viewBox="0 0 29.83 24.41">
-			<defs>
-				<style>
-					.cls-1 {
-						fill-rule: evenodd;
-					}
-
-					.cls-1,
-					.cls-2 {
-						fill: #1d1d1b;
-						stroke-width: 0px;
-					}
-				</style>
-			</defs>
 			<g id="Laag_1-2" data-name="Laag 1">
 				<g>
 					<path class="st1"
 						d="M18.99.35c2.5-.54,5.6-.51,9.81.54.73.18,1.17.92.99,1.64s-.92,1.17-1.64.98c-3.92-.98-6.58-.95-8.58-.52-2,.43-3.44,1.29-4.96,2.22l-.11.07c-1.47.9-3.09,1.89-5.24,2.25-2.23.37-4.86.04-8.4-1.37-.7-.28-1.03-1.06-.76-1.76.28-.69,1.07-1.03,1.76-.75,3.24,1.29,5.36,1.47,6.94,1.21,1.61-.27,2.84-1.01,4.39-1.95,1.53-.93,3.31-2.02,5.8-2.56Z" />
 					<path class="st1"
 						d="M28.81,6.3c-4.22-1.05-7.31-1.08-9.81-.54-2.49.54-4.27,1.63-5.8,2.56-1.55.95-2.78,1.69-4.39,1.95-1.59.26-3.7.08-6.94-1.21-.7-.28-1.48.06-1.76.75-.28.69.06,1.48.76,1.76,3.54,1.41,6.17,1.74,8.4,1.37,2.15-.36,3.77-1.35,5.24-2.25l.11-.07c1.52-.93,2.96-1.79,4.96-2.22,1.99-.43,4.66-.46,8.58.52.73.18,1.46-.26,1.64-.98.18-.72-.26-1.46-.99-1.64Z" />
-					<path class="st1 cls-1"
+					<path class="st1" style="fill-rule: evenodd"
 						d="M24.41,9.53c-.47,0-.86.24-1.14.61-.1.13-.32.43-.61.86-.39.57-.92,1.35-1.45,2.23-.53.87-1.07,1.86-1.48,2.83-.4.92-.75,1.93-.75,2.95,0,.29.04.57.08.85.08.47.24,1.12.57,1.78.33.67.86,1.38,1.67,1.92.82.54,1.85.86,3.1.86s2.29-.32,3.1-.86c.81-.54,1.33-1.25,1.67-1.92.33-.66.49-1.31.57-1.78.05-.28.08-.57.08-.86,0-1.02-.35-2.02-.75-2.94-.41-.97-.96-1.95-1.48-2.83-.53-.88-1.05-1.66-1.45-2.23-.3-.43-.52-.73-.61-.86-.27-.37-.67-.61-1.14-.61ZM26.59,17.12c-.35-.81-.82-1.68-1.31-2.5-.3-.5-.6-.97-.87-1.38-.27.41-.57.88-.87,1.38-.49.82-.97,1.69-1.31,2.5l-.02.05c-.24.56-.52,1.22-.51,1.83.02.49.15.99.37,1.42.17.35.41.65.75.87.33.22.82.41,1.6.41s1.27-.19,1.6-.41c.33-.22.57-.53.75-.87.22-.43.35-.94.37-1.42.02-.62-.27-1.27-.51-1.83l-.02-.05Z" />
 					<path class="st1"
 						d="M17.8,11.57c1.03-.33,1.82.74,1.34,1.71-.22.44-.47.82-.97.99-1.32.47-2.42,1.13-3.57,1.83l-.11.07c-1.47.9-3.09,1.89-5.24,2.25-2.23.37-4.86.04-8.4-1.37-.7-.28-1.03-1.06-.76-1.76.28-.69,1.07-1.03,1.76-.75,3.24,1.29,5.36,1.47,6.94,1.21,1.61-.27,2.84-1.01,4.39-1.95,1.48-.9,2.99-1.69,4.61-2.22Z" />
@@ -334,14 +332,6 @@ const weatherHTML = `<div class="weatherdiv">
 		<div class="weather-humwind weather-humwindBig">
 			<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" height="70px" width="70px" data-name="Laag 2"
 				viewBox="0 0 39.94 24.5">
-				<defs>
-					<style>
-						.cls-1 {
-							fill: #000;
-							stroke-width: 0px;
-						}
-					</style>
-				</defs>
 				<g id="Laag_1-2" data-name="Laag 1">
 					<g>
 						<path class="st1"
@@ -357,14 +347,6 @@ const weatherHTML = `<div class="weatherdiv">
 		<div class="weather-humwind weather-humwindBig">
 			<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" height="55px" width="55px" data-name="Laag 2"
 				viewBox="0 0 24.28 25.14">
-				<defs>
-					<style>
-						.cls-1 {
-							fill: #000;
-							stroke-width: 0px;
-						}
-					</style>
-				</defs>
 				<g id="Laag_1-2" data-name="Laag 1">
 					<g>
 						<path class="st1"
@@ -394,6 +376,23 @@ const weatherHTML = `<div class="weatherdiv">
 
 </div>
 `;
+
+
+
+
+
+function globalChatTextBalk() {
+  alert("Coming Soon!")
+}
+
+const chatyHTML = `
+  <button class="smscButton lookChat" id="globalChatTextBalk">global chat</button>
+`;
+
+
+
+
+
 const weatherHTMLTiny = `<div class="weatherdiv">
 <div class="colSmall">
 <div class="veticalstackweather" style="width:70% !important;">
@@ -409,26 +408,13 @@ const weatherHTMLTiny = `<div class="weatherdiv">
 <div class="weather-humwind weather-humwindSmall">
   <svg xmlns="http://www.w3.org/2000/svg" id="layer1" data-name="Laag 2" height="45px" width="45px"
   viewBox="0 0 29.83 24.41">
-  <defs>
-    <style>
-    .cls-1 {
-      fill-rule: evenodd;
-    }
-
-    .cls-1,
-    .cls-2 {
-      fill: #1d1d1b;
-      stroke-width: 0px;
-    }
-    </style>
-  </defs>
   <g id="Laag_1-2" data-name="Laag 1">
     <g>
     <path class="st1"
       d="M18.99.35c2.5-.54,5.6-.51,9.81.54.73.18,1.17.92.99,1.64s-.92,1.17-1.64.98c-3.92-.98-6.58-.95-8.58-.52-2,.43-3.44,1.29-4.96,2.22l-.11.07c-1.47.9-3.09,1.89-5.24,2.25-2.23.37-4.86.04-8.4-1.37-.7-.28-1.03-1.06-.76-1.76.28-.69,1.07-1.03,1.76-.75,3.24,1.29,5.36,1.47,6.94,1.21,1.61-.27,2.84-1.01,4.39-1.95,1.53-.93,3.31-2.02,5.8-2.56Z" />
     <path class="st1"
       d="M28.81,6.3c-4.22-1.05-7.31-1.08-9.81-.54-2.49.54-4.27,1.63-5.8,2.56-1.55.95-2.78,1.69-4.39,1.95-1.59.26-3.7.08-6.94-1.21-.7-.28-1.48.06-1.76.75-.28.69.06,1.48.76,1.76,3.54,1.41,6.17,1.74,8.4,1.37,2.15-.36,3.77-1.35,5.24-2.25l.11-.07c1.52-.93,2.96-1.79,4.96-2.22,1.99-.43,4.66-.46,8.58.52.73.18,1.46-.26,1.64-.98.18-.72-.26-1.46-.99-1.64Z" />
-    <path class="st1 cls-1"
+    <path class="st1" style="fill-rule: evenodd"
       d="M24.41,9.53c-.47,0-.86.24-1.14.61-.1.13-.32.43-.61.86-.39.57-.92,1.35-1.45,2.23-.53.87-1.07,1.86-1.48,2.83-.4.92-.75,1.93-.75,2.95,0,.29.04.57.08.85.08.47.24,1.12.57,1.78.33.67.86,1.38,1.67,1.92.82.54,1.85.86,3.1.86s2.29-.32,3.1-.86c.81-.54,1.33-1.25,1.67-1.92.33-.66.49-1.31.57-1.78.05-.28.08-.57.08-.86,0-1.02-.35-2.02-.75-2.94-.41-.97-.96-1.95-1.48-2.83-.53-.88-1.05-1.66-1.45-2.23-.3-.43-.52-.73-.61-.86-.27-.37-.67-.61-1.14-.61ZM26.59,17.12c-.35-.81-.82-1.68-1.31-2.5-.3-.5-.6-.97-.87-1.38-.27.41-.57.88-.87,1.38-.49.82-.97,1.69-1.31,2.5l-.02.05c-.24.56-.52,1.22-.51,1.83.02.49.15.99.37,1.42.17.35.41.65.75.87.33.22.82.41,1.6.41s1.27-.19,1.6-.41c.33-.22.57-.53.75-.87.22-.43.35-.94.37-1.42.02-.62-.27-1.27-.51-1.83l-.02-.05Z" />
     <path class="st1"
       d="M17.8,11.57c1.03-.33,1.82.74,1.34,1.71-.22.44-.47.82-.97.99-1.32.47-2.42,1.13-3.57,1.83l-.11.07c-1.47.9-3.09,1.89-5.24,2.25-2.23.37-4.86.04-8.4-1.37-.7-.28-1.03-1.06-.76-1.76.28-.69,1.07-1.03,1.76-.75,3.24,1.29,5.36,1.47,6.94,1.21,1.61-.27,2.84-1.01,4.39-1.95,1.48-.9,2.99-1.69,4.61-2.22Z" />
@@ -492,3 +478,10 @@ const weatherHTMLTiny = `<div class="weatherdiv">
 
 </div>
 `;
+const plant_buttonsHTML = `
+    <div id=watering_button class=watering_button> <svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" height=40px viewBox="0 0 34.74 41.95">
+    <g id="Laag_1-2" data-name="Laag 1">
+      <path class="st1" d="M21.83,3.45c-.81,3.5-2.37,6.69-4.13,9.62l-.62-.98c-2.16-3.41-4.6-7.26-5.56-11.35-.08-.36-.36-.63-.71-.71-.52-.12-1.03.2-1.15.71-.95,4.12-3.39,7.96-5.56,11.37-.56.89-1.11,1.77-1.71,2.77C.81,17.52-.2,20.35.03,23.06c.2,2.34,1.3,4.55,3.72,6.42,1.04.8,2.23,1.4,3.5,1.76.6.18,1.23.3,1.85.38,2.22,14.49,25.64,13.73,25.64-2.27,0-6.6-10.3-14.73-12.91-25.91ZM8.94,29.36v.31h0c-.39-.05-.77-.14-1.15-.25-1.03-.3-2-.78-2.85-1.43-1.95-1.5-2.83-3.24-2.99-5.07-.19-2.27.71-4.73,2.08-7.05.46-.77,1.07-1.73,1.71-2.73,1.72-2.72,3.62-5.7,4.88-8.96,1.25,3.24,3.14,6.22,4.87,8.94.39.61.77,1.21,1.11,1.77-3.64,5.66-7.64,10.35-7.64,14.48ZM21.45,37.15c-.37.54-1.07.72-1.65.44-1.82-1.03-3.3-2.56-4.27-4.4-.89-1.78-1.42-3.72-1.56-5.71-.03-.72.53-1.33,1.26-1.37.67-.03,1.26.46,1.35,1.13.11,1.64.54,3.25,1.27,4.73.74,1.41,1.87,2.58,3.26,3.37.6.41.75,1.22.34,1.82Z"/>
+    </g>
+  </svg> </div>
+`

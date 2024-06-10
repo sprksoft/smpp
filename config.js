@@ -1,6 +1,6 @@
 const default_settings = {
   quicks: [],
-  profile: "default",
+  profile: "birb",
   halte: true,
   overwrite_theme: 0,
   location: "keerbergen",
@@ -16,6 +16,7 @@ const default_settings = {
   isbig: true,
   showplanner: true,
   name_override: null,
+  show_plant: true
 };
 link_element = document.querySelector('link[rel="icon"]')
 if (link_element) {

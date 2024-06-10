@@ -51,9 +51,22 @@ html {
   border-right: 4px solid transparent !important;
 }
 
+
+button.js-btn-search{
+  color: var(--color-text) !important;
+}
+
+button.js-btn-search::before {
+  content: "[ ";
+  color: var(--color-base03);
+}
+button.js-btn-search::after {
+  content: " ]";
+  color: var(--color-base03);
+}
+
 .toolbar,
 div.stdReplyWrapper,
-button.js-btn-search,
 .smscDialog .smscDialog_header .smscDialog_header_title,
 .popupContainer .popupContainerTitle,
 .popupContainer .popupContainerSubtitle {
@@ -291,7 +304,7 @@ select,
 }
 
 tr {
-  background-color: var(--color-base00) !important;
+  background-color: transparent !important;
 }
 
 tr.selected {
@@ -639,16 +652,16 @@ background-color: var(--color-base01) !important;
 
 .snowflake {
   position: fixed;
-  top: -10%;
+  top: -10vh;
   z-index: 999999;
   pointer-events: none;
+  will-change: transform;
 }
 
 
 @keyframes snowflake_fall_0 {
   0% {
-    top: -10%;
-    transform: translateX(100px) rotate(50deg);
+    transform: translateY(-10vh) translateX(100px) rotate(50deg);
   }
 
   50% {
@@ -656,16 +669,14 @@ background-color: var(--color-base01) !important;
   }
 
   100% {
-    top: 110%;
-    transform: translateX(80px) rotate(170deg);
+    transform: translateY(110vh) translateX(80px) rotate(170deg);
   }
 
 }
 
 @keyframes snowflake_fall_1 {
   0% {
-    top: -10%;
-    transform: translateX(50px) rotate(30deg);
+    transform: translateY(-10vh) translateX(50px) rotate(30deg);
   }
 
   50% {
@@ -673,16 +684,28 @@ background-color: var(--color-base01) !important;
   }
 
   100% {
-    top: 110%;
-    transform: translateX(20px) rotate(180deg);
+    transform: translateY(110vh) translateX(20px) rotate(180deg);
+  }
+
+}
+@keyframes snowflake_fall_2 {
+  0% {
+    transform: translateY(-10vh) translateX(80px) rotate(40deg);
+  }
+
+  50% {
+    transform: translateX(40px);
+  }
+
+  100% {
+    transform: translateY(110vh) translateX(70px) rotate(200deg);
   }
 
 }
 
 @keyframes snowflake_fall_3 {
   0% {
-    top: -10%;
-    transform: translateX(80px) rotate(40deg);
+    transform: translateY(-10vh) translateX(80px) rotate(40deg);
   }
 
   50% {
@@ -690,8 +713,7 @@ background-color: var(--color-base01) !important;
   }
 
   100% {
-    top: 110%;
-    transform: translateX(70px) rotate(200deg);
+    transform: translateY(110vh) translateX(70px) rotate(200deg);
   }
 
 }
@@ -715,11 +737,11 @@ background-color: var(--color-base01) !important;
   margin: 5px !important;
 }
 
-#backgroundSlider,#weatherSelector {
-  width: 40% !important;
+#backgroundSlider,#weatherSelector,#mySlider {
+  width: 50px !important;
   transform: rotate(90deg) !important;
   margin: 0px !important;
-  margin-top: 10px !important;
+  margin-top: 10px !important
 }
 
 .sliderblur::-webkit-slider-thumb {
@@ -890,6 +912,10 @@ label.form__label.js-form-label.label__resolvedStatus.form__label--no-margin-top
   display: inline-block;
   width: fit-content;
 }
+#blurPlaats{
+margin-bottom: 25px;
+margin-right: 20px;
+}
 
 .color-label {
   position: absolute;
@@ -919,7 +945,9 @@ label.form__label.js-form-label.label__resolvedStatus.form__label--no-margin-top
   margin: 0px !important;
   height: 35px !important;
 }
-
+#backgroundlink{
+ width: 70px !important;
+}
 #backgroundlink {
   margin-left: -5px !important;
 }
@@ -928,6 +956,7 @@ label.form__label.js-form-label.label__resolvedStatus.form__label--no-margin-top
   padding: 1px !important;
   margin-left: 5px !important;
   margin-right: 10px !important;
+  width: 45px !important;
 }
 
 #backgroundfilebutton:hover {
@@ -1134,10 +1163,14 @@ background-color: var(--color-base02) !important;
 border: 2px solid var(--color-base03) !important;
 }
 .smsc-container:has(.form-page__header-wrapper){
-  background-color: transparent !important;
+  background-color: var(--color-base00) !important;
   background-image: var(--loginpage-image) !important;
   background-position: center !important;
   background-size: cover !important;
+}
+.form-item.js-form-item.form-item--multiple-choice {
+  background: transparent !important;
+  box-shadow: none !important;
 }
 .header.js-header.form-page__header.header--single-line{
   border-radius: 15px !important;
@@ -1182,4 +1215,36 @@ display: flex !important;
 #cool-modal-close{
   background-color: var(--color-base03) !important;
   color: var(--color-red) !important;
+}
+#mySlider{
+  width: 50px;
+  margin-left: -20px !important;
+  transform: rotate(90deg);
+  margin-right: -14px !important;
+}
+smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right{
+  display: none !important;
+}
+.blob-counters__label{
+color: var(--color-text) !important;
+}
+.smscComposeMessage{
+background-color: var(--color-base00) !important;
+border: 2px solid var(--color-base02) !important;
+}
+
+#inputVak{
+  background-color: var(--color-base02);
+  color: var(--color-text);
+  margin-left: 38%;
+}
+
+.lookChat{
+  background-color: var(--color-base02);
+  border: 2px solid var(--color-base03);
+  border-radius: 5px;
+  min-width: 100px !important;
+}
+.lookChat:hover{
+  border-color: var(--color-accent);
 }

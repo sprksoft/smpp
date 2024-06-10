@@ -363,7 +363,7 @@ td.msg_bottom {
 td#msg_bg,
 .msg_left,
 .msg_right {
-  background-color: var(--color-base00) !important;
+  background-color: transparent !important;
   background-image: none !important;
 }
 

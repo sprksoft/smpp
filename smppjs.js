@@ -15,9 +15,9 @@ function discordpopup() {
 function changeLogoutText() {
   var randomNum = Math.floor(Math.random() * 50) + 1;
   if (randomNum === 1) {
-    return "Good Bye! -->"
+    return "Good Bye! →"
   }
-  return "Logout -->"
+  return "Log out →"
 }
 let logoutButton = document.getElementsByClassName("js-btn-logout")[0]
 let notifsText = document.getElementById("notifsToggleLabel")
@@ -63,6 +63,7 @@ async function apply() {
   var showplanner = settingsData.showplanner;
   var IsBig = settingsData.isbig;
   var weatherSelector = settingsData.weatherSelector;
+  var show_plant = settingsData.show_plant
   set_theme("default");
   set_theme(profileSelect);
 
@@ -79,6 +80,18 @@ async function apply() {
     settingsData = get_config()
     settingsData.isbig = true
     IsBig = true
+    set_config(settingsData)
+  }
+  if (show_plant == undefined) {
+    settingsData = get_config()
+    settingsData.show_plant = true
+    show_plant = true
+    set_config(settingsData)
+  }
+  if (weatherSelector == undefined) {
+    settingsData = get_config()
+    settingsData.weatherSelector = 0
+    weatherSelector = 0
     set_config(settingsData)
   }
   topnav = document.querySelector('.topnav')
@@ -162,6 +175,7 @@ document.getElementById("rightcontainer")?document.getElementById("rightcontaine
 document.getElementById("plannercontainer")?document.getElementById("plannercontainer").remove() : "pass"
 document.getElementById("weathercontainer")?document.getElementById("weathercontainer").remove() : "pass"
 document.getElementById("delijncontainer")?document.getElementById("delijncontainer").remove() : "pass"
+document.getElementById("plantcontainer")?document.getElementById("plantcontainer").remove() : "pass"
 
     if (halte) {
       var DelijnAppElement = document.createElement("div")
@@ -179,6 +193,14 @@ document.getElementById("delijncontainer")?document.getElementById("delijncontai
       container.prepend(PlannerAppElement)
       ShowPlanner()
     }
+    if (show_plant){
+      var PlantAppElement = document.createElement("div")
+      PlantAppElement.classList.add("homepage__right")
+      PlantAppElement.classList.add("smsc-container--right")
+      PlantAppElement.setAttribute("id", "plantcontainer")
+      container.append(PlantAppElement)
+      start_plant_window()
+  }
     if (loc != "") {
       var WeatherAppElement = document.createElement("div")
       WeatherAppElement.classList.add("homepage__right")
@@ -189,7 +211,6 @@ document.getElementById("delijncontainer")?document.getElementById("delijncontai
     }
     if (showsnake) {
       if(!document.getElementById("weathercontainer")){
-        console.log('no weather')
         var WeatherAppElement = document.createElement("div")
         WeatherAppElement.classList.add("homepage__right")
         WeatherAppElement.classList.add("smsc-container--right")
@@ -226,7 +247,7 @@ document.getElementById("delijncontainer")?document.getElementById("delijncontai
     set_rain_level(0);
     set_snow_level(0);
   }
-  if (weatherSelector == 2){
+  else if (weatherSelector == 2){
     set_rain_level(weatherAmount);
     set_meteor_level(0);
     set_snow_level(0);
@@ -274,6 +295,7 @@ function store() {
   const isbig = document.getElementById("isbig").checked;
   const showplanner = document.getElementById("showplanner").checked;
   const weatherSelector = document.getElementById("weatherSelector").value;
+  const show_plant = document.getElementById("show_plant").checked
   settingsData.profile = profileSelect;
   settingsData.halte = halte;
   settingsData.overwrite_theme = overwrite_theme;
@@ -289,6 +311,7 @@ function store() {
   settingsData.isbig = isbig;
   settingsData.showplanner = showplanner;
   settingsData.weatherSelector = weatherSelector;
+  settingsData.show_plant = show_plant
 
   console.log(settingsData)
   if (settingsData.show_scores == undefined) {
@@ -354,6 +377,18 @@ function loadCustomTheme() {
   colorpickers.innerHTML = colorpickersHTML
   loadCustomThemeData()
 }
+// Select the element
+const msghead = document.querySelector("#msgcell > .msgcell__head");
+console.log(msghead)
+// Insert adjacent HTML (beforebegin, afterbegin, beforeend, afterend)
+if(msghead){
+  let chaty = document.createElement("div")
+  chaty.classList.add("chatie")
+  chaty.innerHTML=chatyHTML
+msghead.insertBefore( chaty, msghead.querySelector(".msgcell__head__sort"))
+document.getElementById("globalChatTextBalk").addEventListener("click",globalChatTextBalk)
+}
+
 function load() {
   let settingsData = JSON.parse(window.localStorage.getItem("settingsdata"));
   const profileSelect = document.getElementById("profileSelector");
@@ -369,6 +404,7 @@ function load() {
   const isbig = document.getElementById("isbig");
   const showplanner = document.getElementById("showplanner");
   const weatherSelector = document.getElementById("weatherSelector");
+  const show_plant = document.getElementById("show_plant")
   profileSelect.value = settingsData.profile
   halte.checked = settingsData.halte
   overwrite_theme.value = settingsData.overwrite_theme
@@ -382,6 +418,7 @@ function load() {
   isbig.checked = settingsData.isbig
   showplanner.checked = settingsData.showplanner
   weatherSelector.value = settingsData.weatherSelector
+  show_plant.checked = settingsData.show_plant
   if (profileSelect.value == "custom") {
     loadCustomTheme()
   }
@@ -429,7 +466,6 @@ async function set_backgroundlink(background) {
 
 function set_theme(name) {
   let style = document.documentElement.style;
-  console.log(name)
   if (name == "custom") {
     let themeData = JSON.parse(window.localStorage.getItem("themedata"))
     if (themeData == null) {
