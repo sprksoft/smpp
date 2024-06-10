@@ -22,6 +22,15 @@ html {
   border-color: var(--color-text) !important;
 }
 
+div.jss93 {
+  border-bottom: none !important;
+}
+
+/*
+img.sc-eqUAAy.clGYyw {
+  content:url("https://media.discordapp.net/attachments/1081294139292913674/1219941911687594075/IMG_2875.png?ex=666819f1&is=6666c871&hm=29be4ea68eb7651bb3ef027b0bcdc4c54d1cf7aaa0258a2fa9bfb940a256a76e&=&format=webp&quality=lossless&width=472&height=662");
+}
+*/
 .MuiFormControl-root.filter, .MuiFormLabel-root.Mui-focused, #book-filter-label, .MuiSelect-root.MuiSelect-select.MuiSelect-selectMenu, .MuiSelect-root.MuiSelect-select.MuiSelect-selectMenu:focus {
   border-color: var(--color-text) !important;
   background-color: var(--darken-background) !important;
