@@ -1,5 +1,5 @@
 html {
-  --color-accent: #ffd5a0;
+  --color-accent: #ff1bec;
   --color-text: #C2BAB2;
   --color-base00: #191817;
   --color-base01: #232020;
@@ -13,4 +13,29 @@ html {
   --border-size: 2px;
   --color-popup-border: var(--color-accent);
   --color-hover-border: var(--color-accent);
+  --darken-background: #322d2dcd;
+  --loginpage-image: url(https://www.hdwallpapers.in/download/macos_monterey_shapes_hd_macos-2560x1440.jpg);
 }
+
+.MuiPaper-root.rounded , .MuiPaper-root.MuiAppBar-root {
+  background-color: var(--darken-background) !important;
+  color: var(--color-text) !important;
+  border-bottom-color: var(--darken-background) !important;
+  border-color: var(--color-accent) !important;
+}
+
+
+.jss61.jss62.jss59.jss60 {
+  border-bottom-color: var(--darken-background) !important;
+}
+
+
+header {
+  border-bottom: 0 !important
+}
+
+
+.jss28.jss29.logged-in {
+  background-image: var(--loginpage-image) !important;
+}
+

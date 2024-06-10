@@ -7,7 +7,7 @@
 	"content_scripts": [
 		{
 			"matches": [
-				"*://lernova.be/*"
+				"*://app.lernova.be/*"
 			],
 			"all_frames": true,
 			"css": [
@@ -18,7 +18,9 @@
 				"scraper.js",
 				"utils.js",
 				"DMENU/dmenu.js",
-				"LERNOVA/lernova.js"
+				"LERNOVA/lernova.js",
+				"json.js",
+				"DMENU/quick.js"
 			]
 		},
 		{
