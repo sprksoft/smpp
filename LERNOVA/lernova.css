@@ -122,9 +122,9 @@ body {
   background-size: cover;
 }
 
-.MuiPaper-root.MuiPaper-elevation0{
+.MuiPaper-root.MuiPaper-elevation0, div.fr-view p{
   background-color: var(--color-base02);
-  color: bisque;
+  color: bisque !important;
 }
 
 .highlight{
