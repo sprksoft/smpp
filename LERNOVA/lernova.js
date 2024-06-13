@@ -5,6 +5,7 @@ const books = get_data("books", "#student-vt-2 > div > div > * > div > a", funct
 })
 
 
+
 function get_lessen() {
   lessen = window.localStorage.getItem("lessen");
   console.log("getting lessen: " + lessen);

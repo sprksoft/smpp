@@ -26,16 +26,28 @@ div.jss93 {
   border-bottom: none !important;
 }
 
-
+div.fr-view p span {
+  color: aliceblue !important;
+}
 
 #private_page_external_wrapper::-webkit-scrollbar {
   display: none;
+}
+div header {
+  background-color: #9a4287ea !important;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+
+.jss88.listItem:nth-of-type(odd) {
+  background-color: #9a4287ea;
 }
 
 #private_page_scroll_container_unused {
   min-height: 100vh;
   margin: 0;
-  --scrollbar-primary-color: #981ead;
+  --scrollbar-primary-color: #9d4091b6;
   --text-color: #3313ce;
   overflow: scroll
 }
