@@ -33,10 +33,9 @@ div.fr-view p span {
 #private_page_external_wrapper::-webkit-scrollbar {
   display: none;
 }
-div header {
+div.MuiPaper-root.MuiPaper-elevation0 > header {
   background-color: #9a4287ea !important;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
+  border-radius: 20px;
 }
 
 
