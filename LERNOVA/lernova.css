@@ -136,3 +136,7 @@ p.definition.yellow.box-content{
   background-color: rgb(206 220 44 / 64%) !important;
   color: #232020;
 }
+
+.MuiPaper-root.MuiDrawer-paper.MuiDrawer-paperAnchorLeft.MuiDrawer-paperAnchorDockedLeft.MuiPaper-elevation0 {
+  background-color: transparent !important;
+}
