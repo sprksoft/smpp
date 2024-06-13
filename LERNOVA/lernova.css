@@ -1,6 +1,6 @@
 html {
   --color-accent: #ff1bec;
-  --color-text: #bc3db8;
+  --color-text-dark: #c01aba;
   --color-text: #f766ff;
   --color-base00: #191817;
   --color-base01: #232020;
@@ -14,7 +14,7 @@ html {
   --border-size: 2px;
   --color-popup-border: var(--color-accent);
   --color-hover-border: var(--color-accent);
-  --darken-background: #322d2dcd;
+  --darken-background: #292323a9;
   --loginpage-image: url(https://www.hdwallpapers.in/download/macos_monterey_shapes_hd_macos-2560x1440.jpg);
 }
 
@@ -24,6 +24,29 @@ html {
 
 div.jss93 {
   border-bottom: none !important;
+}
+
+
+
+#private_page_external_wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+#private_page_scroll_container_unused {
+  min-height: 100vh;
+  margin: 0;
+  --scrollbar-primary-color: #981ead;
+  --text-color: #3313ce;
+  overflow: scroll
+}
+
+#private_page_scroll_container_unused::-webkit-scrollbar {
+  width: .7rem
+}
+
+#private_page_scroll_container_unused::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--scrollbar-primary-color),var(--text-color));
+  border-radius: 4px
 }
 
 /*
@@ -50,12 +73,55 @@ img.sc-eqUAAy.clGYyw {
   border-bottom-color: var(--darken-background) !important;
 }
 
+#trajectory-toolbox-wrapper > div:nth-child(1) {
+  display: flex;
+  flex-direction: column; /* Arrange items in a column */
+  align-items: center; /* Center the items horizontally */
+}
+
+#trajectory-toolbox-wrapper > div:nth-child(1) span {
+  width: 100%; /* Ensure spans take full width */
+  display: flex; /* Make sure spans behave as flex items */
+  justify-content: center; /* Center buttons within spans */
+  margin: 10px 0; /* Optional: Add some margin for spacing */
+}
+
+#trajectory-toolbox-wrapper > div:nth-child(1) span button {
+  border-radius: 50% !important;
+  margin-bottom: 20%;
+}
+
+div#trajectory-toolbox-wrapper {
+  background-color: var(--darken-background) ;
+}
+
+
 
 header {
   border-bottom: 0 !important
 }
 
 
-.jss28.jss29.logged-in {
+.jss28.jss29.logged-in, #private_page_external_wrapper, #trajectory-toolbox-wrapper, #private_page_wrapper div:nth-child(2) {
+  background-color: transparent !important;
+}
+
+body {
   background-image: var(--loginpage-image) !important;
+  background-size: cover;
+}
+
+.MuiPaper-root.MuiPaper-elevation0{
+  background-color: var(--color-base02);
+  color: bisque;
+}
+
+.highlight{
+  color: darkmagenta;
+  font-weight: bold;
+}
+
+p.definition.yellow.box-content{
+  background-color: rgb(206 220 44 / 64%) !important;
+  color: #232020;
 }
