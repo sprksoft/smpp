@@ -22,27 +22,6 @@ html {
   border-color: var(--color-text) !important;
 }
 
-div.jss93 {
-  border-bottom: none !important;
-}
-
-div.fr-view p span {
-  color: aliceblue !important;
-}
-
-#private_page_external_wrapper::-webkit-scrollbar {
-  display: none;
-}
-div.MuiPaper-root.MuiPaper-elevation0 > header {
-  background-color: #9a4287ea !important;
-  border-radius: 20px;
-}
-
-
-.jss88.listItem:nth-of-type(odd) {
-  background-color: #9a4287ea;
-}
-
 #private_page_scroll_container_unused {
   min-height: 100vh;
   margin: 0;
@@ -60,12 +39,37 @@ div.MuiPaper-root.MuiPaper-elevation0 > header {
   border-radius: 4px
 }
 
+div.jss93 {
+  border-bottom: none !important;
+}
+
+div.fr-view p span {
+  color: aliceblue !important;
+}
+
+#private_page_external_wrapper::-webkit-scrollbar {
+  display: none;
+}
+div.MuiPaper-root.MuiPaper-elevation0 > header {
+  background-color: #9a4287ea !important;
+  border-radius: 20px;
+}
+
+#private_page_scroll_container_unused {
+  height:max-content;
+}
+
+.jss88.listItem:nth-of-type(odd) {
+  background-color: #9a4287ea;
+}
+
+
 /*
 img.sc-eqUAAy.clGYyw {
   content:url("https://media.discordapp.net/attachments/1081294139292913674/1219941911687594075/IMG_2875.png?ex=666819f1&is=6666c871&hm=29be4ea68eb7651bb3ef027b0bcdc4c54d1cf7aaa0258a2fa9bfb940a256a76e&=&format=webp&quality=lossless&width=472&height=662");
 }
 */
-.MuiFormControl-root.filter, .MuiFormLabel-root.Mui-focused, #book-filter-label, .MuiSelect-root.MuiSelect-select.MuiSelect-selectMenu, .MuiSelect-root.MuiSelect-select.MuiSelect-selectMenu:focus {
+.MuiFormControl-root.filter {
   border-color: var(--color-text) !important;
   background-color: var(--darken-background) !important;
   color: var(--color-text) !important;
@@ -106,16 +110,21 @@ div#trajectory-toolbox-wrapper {
   background-color: var(--darken-background) ;
 }
 
+#book-filter, span.MuiButton-label div:nth-child(1){
+  color:bisque!important;
+}
 
+.MuiButtonBase-root.MuiButton-root.MuiButton-text:disabled {
+  background-color: #913e8a ;
+}
 
 header {
   border-bottom: 0 !important
 }
-
-
-.jss28.jss29.logged-in, #private_page_external_wrapper, #trajectory-toolbox-wrapper, #private_page_wrapper div:nth-child(2) {
-  background-color: transparent !important;
+#private_page_wrapper :nth-child(2) {
+  height:min-content !important;
 }
+
 
 body {
   background-image: var(--loginpage-image) !important;
@@ -137,6 +146,13 @@ p.definition.yellow.box-content{
   color: #232020;
 }
 
-.MuiPaper-root.MuiDrawer-paper.MuiDrawer-paperAnchorLeft.MuiDrawer-paperAnchorDockedLeft.MuiPaper-elevation0 {
+.MuiPaper-elevation1 {
+  background-color: #221b1bb9 !important;
+  color: bisque !important;
+  border-radius: 20px;
+}
+
+.jss105.jss106, .MuiPaper-root.MuiDrawer-paper.MuiDrawer-paperAnchorLeft.MuiDrawer-paperAnchorDockedLeft.MuiPaper-elevation0, .MuiDrawer-root.MuiDrawer-docked.jss103.jss104.subheader, div#left-sidebar, .jss28.jss29.logged-in, #private_page_external_wrapper, #trajectory-toolbox-wrapper, #private_page_wrapper div:nth-child(2), .MuiSelect-root.MuiSelect-select.MuiSelect-selectMenu:focus {
   background-color: transparent !important;
+  border: none;
 }
