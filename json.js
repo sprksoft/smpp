@@ -112,13 +112,14 @@ const themes = {
     "--darken-background": "rgba(0,0,0,0.15)"
   },
   "vax": {
-    "--color-accent": "#492f29",
-    "--color-text": "#492f29",
-    "--color-base00": "#9c6544",
-    "--color-base01": "#9c6544",
-    "--color-base02": "#9c6544",
-    "--color-base03": "#9c6544",
-    "--loginpage-image": "url(https://wallpapers.com/images/hd/star-wars-place-ztno3exzqff0m0ci.webp)"
+    "--color-accent": "#7a1600",
+    "--color-text": "bisque",
+    "--color-base00": "#411900",
+    "--color-base01": "#724021",
+    "--color-base02": "#b9815d",
+    "--color-base03": "#caa288",
+    "--loginpage-image": "url(https://wallpapers.com/images/hd/star-wars-place-ztno3exzqff0m0ci.webp)",
+    "--darken-background": "rgba(0,0,0,0.15)"
   },
   "sand": {
     "--color-accent": "#8097c5",
@@ -219,6 +220,7 @@ const popupsettingHTML = `<head>
     <option value="purple">Neon Violet</option>
     <option value="fall">Autumn Gloom</option>
     <option value="matcha">Matcha Green</option>
+    <option value="vax">Vax Brown</option>
 </select>
 <div class="textandbutton" id="colorpickers">
 </div>

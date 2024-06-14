@@ -71,7 +71,11 @@ span,
 .newsTitle2 {
   color: var(--color-text) !important;
 }
-
+.content__hourblock.js-hourblock{
+  border-top-width: 1px !important;
+  border-top-color: var(--color-text);
+  border-bottom: none;
+}
 .inline-editor__input:hover,
 .inline-editor__input::placeholder,
 .planner-header .header__borderdropdowncontainer:hover:after,

@@ -473,6 +473,9 @@ div.stdReplyWrapper {
   align-items: center;
 }
 
+nav.topnav {
+  border-bottom: none !important;
+}
 .popupinput,
 #halt,
 #background {
@@ -724,6 +727,8 @@ background-color: var(--color-base01) !important;
   width: 100%;
   height: 110vh;
   overflow: hidden;
+  pointer-events: none;
+
 }
 .meteor {
   position: absolute;
@@ -1246,6 +1251,9 @@ display: flex !important;
 }
 smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right{
   display: none !important;
+}
+.toolbar.js-toolbar {
+  border: none !important;
 }
 .blob-counters__label{
 color: var(--color-text) !important;
