@@ -26,7 +26,7 @@ div.fr-view > p, div.fr-view > p > span{
   color: bisque !important;
 }
 
-p.definition.yellow.box-content {
+p.property.yellow.box-content,  p.definition.yellow.box-content{
   background-color: #cddc2cc9 !important;
 }
 /* Jss105 */
