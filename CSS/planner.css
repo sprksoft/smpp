@@ -72,9 +72,13 @@ span,
   color: var(--color-text) !important;
 }
 .content__hourblock.js-hourblock{
-  border-top-width: 1px !important;
-  border-top-color: var(--color-text);
-  border-bottom: none;
+  border-top: 1px double !important;
+  border-top-color: var(--color-text) !important;
+}
+.content__hourblock.content__hourblock--last.js-hourblock {
+  border-bottom: 1px double !important;
+  border-bottom-color: var(--color-text) !important;
+
 }
 .inline-editor__input:hover,
 .inline-editor__input::placeholder,
