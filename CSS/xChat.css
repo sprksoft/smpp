@@ -1,0 +1,48 @@
+form.loginGlobelChat {
+    border: 3px solid var(--color-accent);
+    border-radius: 15px;
+    width: 500px;
+    margin: auto;
+    margin-top: 20%;
+    background-color: var(--color-base02);
+  }
+  
+  form.loginGlobelChat input[type=text]{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+  }
+  
+  .buttonGlChat {
+    color: var(--color-accent);
+    background: var(--color-base02);
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: 3px solid var(--color-base03);
+    border-radius: 15px;
+    cursor: pointer;
+    width: 100%;
+    filter: brightness(85%);
+  }
+  
+  .buttonGlChat:hover {
+    filter: brightness(100%);
+  }
+  
+  .imgcontainerGlChat {
+    text-align: center;
+    margin: 24px 0 12px 0;
+  }
+  
+  /* image voor miss smpp logo ooit */
+  img.avatarGlChat {
+    width: 40%;
+    border-radius: 50%;
+    color: red;
+  }
+  
+  .containerGlChat {
+    padding: 16px;
+  }
+  

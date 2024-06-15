@@ -383,6 +383,23 @@ const weatherHTML = `<div class="weatherdiv">
 
 function globalChatTextBalk() {
   alert("Coming Soon!")
+  const GlCHatplace = document.getElementById("msgdetail")
+  const GlCHatplaceHTML = `
+  <form action="action_page.php" class="loginGlobelChat" method="post">
+    <div class="imgcontainerGlChat">
+      <img src="img_avatar2.png" alt="Smartschool++" class="avatarGlChat">
+    </div>
+
+    <div class="containerGlChat">
+      <label for="uname"><b>Username</b></label>
+      <input id="inputGlChat" type="text" placeholder="Enter Username" name="uname">
+
+      <button class="buttonGlChat">Login</button>
+    </div>
+
+  </form>
+  `;
+  GlCHatplace.innerHTML = GlCHatplaceHTML
 }
 
 const chatyHTML = `
