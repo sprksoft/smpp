@@ -396,12 +396,34 @@ function globalChatTextBalk() {
       <label for="uname"><b>Username</b></label>
       <input id="inputGlChat" type="text" placeholder="Enter Username" name="uname">
 
-      <button class="buttonGlChat">Login</button>
+      <button id="loginButtonGlChat" class="buttonGlChat">Login</button>
     </div>
 
   </form>
   `;
+
   GlCHatplace.innerHTML = GlCHatplaceHTML
+
+
+// Definieer de variabele met de gewenste placeholder-tekst
+var placeholderTextGlChat = orig_name;
+
+// Haal het input-element op
+var inputElementGlChat = document.getElementById("inputGlChat");
+
+// Stel de placeholder in op de waarde van de variabele
+inputElementGlChat.placeholder = placeholderTextGlChat;
+
+// Definieer de variabele met de gewenste button-tekst
+var buttonTextGlChat = "Inloggen";
+
+// Haal het button-element op
+var buttonElementGlChat = document.getElementById("loginButtonGlChat");
+
+// Stel de button-tekst in op de waarde van de variabele
+buttonElementGlChat.textContent = buttonTextGlChat;
+
+
 }
 
 const chatyHTML = `
