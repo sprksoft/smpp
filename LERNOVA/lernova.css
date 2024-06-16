@@ -19,11 +19,11 @@ html {
 }
 
 #isPasted {
-  color:bisque !important;
+  color:var(--color-text) !important;
   font-weight: 100;
 }  
 div.fr-view > p, div.fr-view > p > span{
-  color: bisque !important;
+  color: var(--color-text) !important;
 }
 
 p.property.yellow.box-content,  p.definition.yellow.box-content{
@@ -31,13 +31,13 @@ p.property.yellow.box-content,  p.definition.yellow.box-content{
 }
 /* Jss105 */
 .MuiDrawer-docked .MuiDrawer-paperAnchorDockedLeft .jss105{
-  background-color:rgba(255,255,255,0);
+  background-color:transparent(255,255,255,0);
 }
 
 /* Body */
 body{
 background-image: var(--loginpage-image);
-background-color:rgba(250,250,250,0.02);
+background-color: var(--darken-background);
 }
 
 /* Logged */
