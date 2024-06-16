@@ -415,7 +415,13 @@ function globalChatTextBalk() {
 
 
 // Definieer de variabele met de gewenste placeholder-tekst
-var placeholderTextGlChat = username_override;
+if (username_override == null){
+  var placeholderTextGlChat = orig_name;
+}
+else {
+  var placeholderTextGlChat = username_override;
+}
+
 
 // Haal het input-element op
 var inputElementGlChat = document.getElementById("inputGlChat");
