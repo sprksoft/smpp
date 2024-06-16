@@ -380,14 +380,22 @@ const weatherHTML = `<div class="weatherdiv">
 `;
 
 
-
+function loginButtonGlChat(){
+  const GlCHatplace = document.getElementById("msgdetail")
+  const GlCHatplaceHTML =`
+  <div class="imgcontainerGlChat">
+      <img src="img_avatar2.png" alt="Smartschool++" class="avatarGlChat">
+    </div>
+  `;
+  GlCHatplace.innerHTML = GlCHatplaceHTML
+}
 
 
 function globalChatTextBalk() {
   alert("Coming Soon!")
   const GlCHatplace = document.getElementById("msgdetail")
   const GlCHatplaceHTML = `
-  <form action="action_page.php" class="loginGlobelChat" method="post">
+  <div class="loginGlobelChat" method="post">
     <div class="imgcontainerGlChat">
       <img src="img_avatar2.png" alt="Smartschool++" class="avatarGlChat">
     </div>
@@ -399,14 +407,15 @@ function globalChatTextBalk() {
       <button id="loginButtonGlChat" class="buttonGlChat">Login</button>
     </div>
 
-  </form>
+  </div>
   `;
 
   GlCHatplace.innerHTML = GlCHatplaceHTML
+  document.getElementById("loginButtonGlChat").addEventListener("click",loginButtonGlChat)
 
 
 // Definieer de variabele met de gewenste placeholder-tekst
-var placeholderTextGlChat = orig_name;
+var placeholderTextGlChat = username_override;
 
 // Haal het input-element op
 var inputElementGlChat = document.getElementById("inputGlChat");
@@ -414,14 +423,7 @@ var inputElementGlChat = document.getElementById("inputGlChat");
 // Stel de placeholder in op de waarde van de variabele
 inputElementGlChat.placeholder = placeholderTextGlChat;
 
-// Definieer de variabele met de gewenste button-tekst
-var buttonTextGlChat = "Inloggen";
 
-// Haal het button-element op
-var buttonElementGlChat = document.getElementById("loginButtonGlChat");
-
-// Stel de button-tekst in op de waarde van de variabele
-buttonElementGlChat.textContent = buttonTextGlChat;
 
 
 }
