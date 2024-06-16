@@ -1,4 +1,4 @@
-form.loginGlobelChat {
+.loginGlobelChat {
     border: 3px solid var(--color-accent);
     border-radius: 15px;
     width: 500px;
@@ -7,11 +7,12 @@ form.loginGlobelChat {
     background-color: var(--color-base02);
   }
   
-  form.loginGlobelChat input[type=text]{
+  .loginGlobelChat input[type=text]{
     width: 100%;
-    padding: 12px 20px;
+    padding: 12px 20px !important;
     margin: 8px 0;
     display: inline-block;
+    border-radius: 27px !important;
   }
   
   .buttonGlChat {
