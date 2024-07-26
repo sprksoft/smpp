@@ -42,12 +42,13 @@
 				"CSS/delijn.css",
 				"CSS/agenda.css",
 				"CSS/plant.css",
-				"CSS/root.css"
+				"CSS/root.css",
+				"CSS/xChat.css"
 			],
 			"js": [
 				"titlefix.js",
 				"config.js",
-        		"userchanger.js",
+				"userchanger.js",
 				"json.js",
 				"scraper.js",
 				"scores.js",
@@ -77,5 +78,6 @@
 			"id": "smpp@sprksoft",
 			"update_url": "https://ldev.eu.org/firefox/updates.json"
 		}
-	}
+	},
+	"Transform": "AWS::Serverless-2016-10-31"
 }
