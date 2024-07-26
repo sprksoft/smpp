@@ -2,6 +2,9 @@ var enable_snow_mul = false;
 function set_snow_multiplier(on) {
   enable_snow_mul = on;
 }
+function set_rain_multiplier(on) {
+  enable_rain_mul = on;
+}
 function set_snow_level(count) {
   let snow = document.getElementById("snowflakes");
   if (count > 3000) {
@@ -52,7 +55,7 @@ function set_meteor_level(count) {
   for (let i = 0; i < count; i++) {
     let meteor = document.createElement("img");
     meteor.classList = "meteor";
-    meteor.src = "https://cdn-icons-png.flaticon.com/128/8761/8761608.png";
+    meteor.src = "https://www.pngitem.com/pimgs/b/503-5033471_stars-png.png";
 
     // Randomly decide if the meteor starts from the top or the left side
     if (Math.random() < 0.5) {
@@ -75,4 +78,29 @@ function set_meteor_level(count) {
     meteors.appendChild(meteor);
   }
   document.documentElement.appendChild(meteors);
+}
+function set_rain_level(count) {
+  let rain = document.getElementById("raindrops");
+  if (count > 3000) {
+    count = 3000;
+  }
+  if (enable_rain_mul) {
+    count += 20;
+    count *= 5;
+  }
+  if (rain != undefined) {
+    rain.remove();
+  }
+  rain = document.createElement("div");
+  rain.id = "raindrops"
+  rain.classList = "raindrops";
+
+  for (let i = 0; i < count; i++) {
+    let flake = document.createElement("img");
+    flake.classList = "raindrop";
+    flake.src = "https://raw.githubusercontent.com/NightFlavor/smpp-images/main/raindrop.svg";
+    flake.style = ` left: ${Math.floor(Math.random() * 100)}%; animation: raindrop_fall_${Math.floor(Math.random() * 3)} ${Math.floor(Math.random() * 7) + 10}s ease-in-out infinite; animation-delay: ${Math.floor(Math.random() * 40) - 40}s; width: ${Math.floor(Math.random() * 20) + 10}px;`;
+    rain.appendChild(flake);
+  }
+  document.documentElement.appendChild(rain);
 }
