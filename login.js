@@ -7,8 +7,8 @@ function add_splash_text(){
     splash_text_element.innerHTML = `<div class='splashtext'>${get_splash_text()}</div>`
 }
 let splashtexts = [
-    `It even works under water!`
-
+    `It even works under water!`,
+    `minor alert`
 ]
 function get_splash_text() {
     return splashtexts[Math.floor(Math.random() * splashtexts.length)]
