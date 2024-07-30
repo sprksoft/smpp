@@ -25,10 +25,13 @@
     cursor: pointer;
     width: 100%;
     filter: brightness(85%);
+
+    transition: filter 0.4s, border-radius 0.4s;
   }
   
   .buttonGlChat:hover {
     filter: brightness(100%);
+    border-radius: 20px;
   }
   
   .imgcontainerGlChat {
