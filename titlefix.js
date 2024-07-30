@@ -111,7 +111,6 @@ function title_prefix() {
     }
   }
 
-
 }
 
 let prepend = title_prefix()
