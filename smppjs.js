@@ -238,19 +238,23 @@ document.getElementById("plantcontainer")?document.getElementById("plantcontaine
 
   style.setProperty('--blur-value-large', 'blur(' + bigblurvalue + 'px)');
   style.setProperty('--blur-value-small', 'blur(' + blurvalue + 'px)');
+  var rain = document.getElementById('raindrops')
+  var snow = document.getElementById('snowflakes')
+  var meteor = document.getElementById('star')
   if (weatherSelector == 0){
     set_snow_level(weatherAmount);
-    set_meteor_level(0);
-    set_rain_level(0);
+    rain != undefined?rain.remove():0
+    meteor != undefined?meteor.remove():0
+
   } else if( weatherSelector == 1){
-    set_meteor_level(weatherAmount);
-    set_rain_level(0);
-    set_snow_level(0);
+    set_star_level(weatherAmount);
+    rain != undefined?rain.remove():0
+    snow != undefined?snow.remove():0
   }
   else if (weatherSelector == 2){
     set_rain_level(weatherAmount);
-    set_meteor_level(0);
-    set_snow_level(0);
+    meteor != undefined?meteor.remove():0
+    snow != undefined?snow.remove():0    
   } else {
     console.log("ERROR NO WEATHER SELECTOR")
   }

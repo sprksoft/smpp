@@ -64,6 +64,7 @@
 				"flappy.js",
 				"buis-stats.js",
 				"plant.js",
+				"login.js",
 				"smppjs.js"
 			]
 		}

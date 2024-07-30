@@ -1,6 +1,6 @@
 const themes = {
   "default": {
-    "--color-accent": "#8f8f95",
+    "--color-accent": "#c9d2e6",
     "--color-text": "#C2BAB2",
     "--color-base00": "#191817",
     "--color-base01": "#232020",
@@ -220,7 +220,6 @@ const popupsettingHTML = `<head>
     <option value="purple">Neon Violet</option>
     <option value="fall">Autumn Gloom</option>
     <option value="matcha">Matcha Green</option>
-    <option value="vax">Vax Brown</option>
 </select>
 <div class="textandbutton" id="colorpickers">
 </div>

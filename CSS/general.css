@@ -720,94 +720,69 @@ background-color: var(--color-base01) !important;
   }
 
 }
+#raindrops {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
 .raindrop {
-  position: fixed;
-  top: -10vh;
+  position: absolute;
   z-index: 999999;
   pointer-events: none;
   will-change: transform;
+  transform: rotate(200deg);
+  opacity: 0;
 }
 
-
-@keyframes raindrop_fall_0 {
+@keyframes raindrop_fall {
   0% {
-    transform: translateY(-10vh) translateX(100px) rotate(50deg);
+    transform: translateY(-10vh); /* Start from slightly above the viewport */
+    opacity: 0; /* Invisible at the start */
   }
-
-  50% {
-    transform: translateX(5px);
+  10% {
+    opacity: 1; /* Become visible after starting to fall */
   }
-
   100% {
-    transform: translateY(110vh) translateX(80px) rotate(170deg);
+    transform: translateY(110vh); /* Fall past the bottom of the viewport */
+    opacity: 1; /* Become visible after starting to fall */
   }
-
 }
 
-@keyframes raindrop_fall_1 {
-  0% {
-    transform: translateY(-10vh) translateX(50px) rotate(30deg);
-  }
-
-  50% {
-    transform: translateX(100px);
-  }
-
-  100% {
-    transform: translateY(110vh) translateX(20px) rotate(180deg);
-  }
-
-}
-@keyframes raindrop_fall_2 {
-  0% {
-    transform: translateY(-10vh) translateX(80px) rotate(40deg);
-  }
-
-  50% {
-    transform: translateX(40px);
-  }
-
-  100% {
-    transform: translateY(110vh) translateX(70px) rotate(200deg);
-  }
-
-}
-
-@keyframes raindrop_fall_3 {
-  0% {
-    transform: translateY(-10vh) translateX(80px) rotate(40deg);
-  }
-
-  50% {
-    transform: translateX(-40px);
-  }
-
-  100% {
-    transform: translateY(110vh) translateX(70px) rotate(200deg);
-  }
-
-}
-.meteors {
-  top: -10vh;
-  position: fixed;
-  width: 100%;
-  height: 110vh;
-  overflow: hidden;
-  pointer-events: none;
-
-}
-.meteor {
+#stars {
   position: absolute;
-  width: 32px; /* Adjust size as needed */
-  height: 32px; /* Adjust size as needed */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
 }
-@keyframes meteor_fall {
+
+.star {
+  position: absolute;
+  z-index: 999999;
+  pointer-events: none;
+  will-change: transform;
+  transform: rotate(45deg); /* Rotate to simulate falling */
+  opacity: 0; /* Initially invisible */
+}
+
+@keyframes star_fall {
   0% {
-    transform: translate(0, 0) rotate(45deg);
+    transform: translateY(-5vh) translateX(0) rotate(45deg); /* Start from slightly above the viewport */
+    opacity: 0; /* Invisible at the start */
+  }
+  10% {
+    opacity: 1; /* Become visible after starting to fall */
   }
   100% {
-    transform: translate(100vw, 100vh) rotate(45deg);
-
+    transform: translateY(100vh) translateX(calc(var(--star-end-x, 0px) - var(--star-start-x, 0px))) rotate(45deg); /* Fall past the bottom of the viewport */
+    opacity: 0; /* Invisible again at the end */
   }
 }
 
