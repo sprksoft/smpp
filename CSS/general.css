@@ -23,7 +23,8 @@ html {
   --color-settings-ui-bg: #000000;
   --color-settings-ui-border: #000000;
   --color-settings-ui-layer2: #000000;
-  --darken-background: rgba(0, 0, 0, 0.2)
+  --darken-background: rgba(0, 0, 0, 0.2);
+  --color-splashtext: #191817;
 }
 
 /* hier is beter smartschool code*/

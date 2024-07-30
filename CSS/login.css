@@ -156,12 +156,12 @@ span.login-app__title.login-app__title--sign-in-with {
   left: 50%; /* Centered horizontally within the container */
   top: 50%;
   transform-origin: left !important;
-  transform: translateX(180px) translateY(-240px)  rotate(40deg)!important; /* Moves right by 200px and rotates */
+  transform: translateX(180px) translateY(-240px)  rotate(30deg)!important; /* Moves right by 200px and rotates */
   text-align: center;
   z-index: 99999;
 }
 .splashtext{
-  color: var(--color-accent) !important;
+  color: var(--color-splashtext) !important;
   font-size: 30px !important;
   left: -50% !important;
   position:  relative !important;
