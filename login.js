@@ -13,7 +13,7 @@ let splashtexts = [
     `Don't Smartschool and drive kids!`,
     `Van vrije-uitloop programeurs!`,
     `Home-made!`,
-    `Pythagoras was used for this`,
+    `Pythagoras was used in this`,
     `Like that smash button!`,
     `What DOES the fox say?`,
     `Supercalifragilisticexpialidocious!`,
@@ -33,13 +33,12 @@ let splashtexts = [
     `Join de discord!`,
     `2 + 2 = 5`,
     `Listen to the Arctic Monkeys!`,
-    `Global chat coming soon!`,
+    `Global chat coming soon...`,
     `Water your plant!`,
     `Check out Snake++!`,
     `Je suis une baguette`,
     `Dikke BMW!`,
     `Mand!`,
-    `Buurman Mol`,
     `Net pindakaas gegeten dus...`,
     `BINGO!`,
     `GEKOLONISEERD!`,
@@ -49,7 +48,15 @@ let splashtexts = [
     `Made by Lukas`,
     `Made by Bjarne`,
     `Made by Sibe`,
-    `Not made in China!`
+    `Not made in China!`,
+    `How did we get here?`,
+    `Aboo?!`,
+    `Check out Insym!`,
+    `Il Mimo...`,
+    `Do your homework!`,
+    `Look mom I'm in the splashtext!`,
+    `[Insert funny splashtext]`,
+    `Totally not ripping off Minecraft!`
 ]
 function get_splash_text() {
     return splashtexts[Math.floor(Math.random() * splashtexts.length)]

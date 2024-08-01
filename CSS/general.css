@@ -1306,10 +1306,24 @@ background-color: var(--color-base00) !important;
 border: 2px solid var(--color-base02) !important;
 }
 
-#inputVak{
+#inputVak {
   background-color: var(--color-base02);
   color: var(--color-text);
-  margin-left: 38%;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 150px;
+  width: 150px;
+  box-sizing: border-box;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+#inputVakContainter{
+  margin: auto !important;
 }
 
 .lookChat{
