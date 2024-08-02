@@ -42,8 +42,7 @@
 				"CSS/delijn.css",
 				"CSS/agenda.css",
 				"CSS/plant.css",
-				"CSS/root.css",
-				"CSS/xChat.css"
+				"CSS/root.css"
 			],
 			"js": [
 				"titlefix.js",

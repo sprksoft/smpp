@@ -392,63 +392,26 @@ const weatherHTML = `<div class="weatherdiv">
 </div>
 `;
 
-
-function loginButtonGlChat(){
-  const GlCHatplace = document.getElementById("msgdetail")
-  const GlCHatplaceHTML =`
-  <div class="imgcontainerGlChat">
-      <img src="img_avatar2.png" alt="Smartschool++" class="avatarGlChat">
-    </div>
-  `;
-  GlCHatplace.innerHTML = GlCHatplaceHTML
-}
-
-
 function globalChatTextBalk() {
-  alert("Coming Soon!")
   const GlCHatplace = document.getElementById("msgdetail")
+  let current_profile = get_config().profile
+  let current_theme = themes[current_profile]
+  let placeholder_color = '#fff'
+  console.log(current_theme["--color-accent"])
+  if (username_override == null){
+    var placeholderTextGlChat = orig_name;
+  }
+  else {
+    var placeholderTextGlChat = username_override;
+  }
   const GlCHatplaceHTML = `
-  <div class="loginGlobelChat" method="post">
-    <div class="imgcontainerGlChat">
-      <img src="img_avatar2.png" alt="Smartschool++" class="avatarGlChat">
-    </div>
-
-    <div class="containerGlChat">
-      <label for="uname"><b>Username</b></label>
-      <input id="inputGlChat" type="text" placeholder="Enter Username" name="uname">
-
-      <button id="loginButtonGlChat" class="buttonGlChat">Login</button>
-    </div>
-
-  </div>
+<iframe style="width:100%; height:100%; border:none "src = 'https://ldev.eu.org/smpp/gc/v1?color_base00=${current_theme["--color-base00"].slice(1)}&color_base01=${current_theme["--color-base01"].slice(1)}&color_base02=${current_theme["--color-base02"].slice(1)}&color_base03=${current_theme["--color-base03"].slice(1)}&color_accent=${current_theme["--color-accent"].slice(1)}&color_text=${current_theme["--color-text"].slice(1)}&placeholder=${placeholderTextGlChat}'></iframe>
   `;
 
   GlCHatplace.innerHTML = GlCHatplaceHTML
-  document.getElementById("loginButtonGlChat").addEventListener("click",loginButtonGlChat)
-
-
-// Definieer de variabele met de gewenste placeholder-tekst
-if (username_override == null){
-  var placeholderTextGlChat = orig_name;
 }
-else {
-  var placeholderTextGlChat = username_override;
-}
-
-
-// Haal het input-element op
-var inputElementGlChat = document.getElementById("inputGlChat");
-
-// Stel de placeholder in op de waarde van de variabele
-inputElementGlChat.placeholder = placeholderTextGlChat;
-
-
-
-
-}
-
 const chatyHTML = `
-  <button class="smscButton lookChat" id="globalChatTextBalk">global chat</button>
+  <button class="smscButton lookChat" id="globalChatTextBalk">Global Chat</button>
 `;
 
 
