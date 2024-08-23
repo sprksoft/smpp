@@ -11,10 +11,6 @@ function set_snow_level(count) {
   if (count > 3000) {
     count = 3000;
   }
-  if (enable_snow_mul) {
-    count += 20;
-    count *= 5;
-  }
   if (snow != undefined) {
     snow.remove();
   }
@@ -36,10 +32,6 @@ function set_rain_level(count) {
   if (count > 3000) {
     count = 3000;
   }
-  if (enable_rain_mul) {
-    count += 20;
-    count *= 5;
-  }
   if (rain != undefined) {
     rain.remove();
   }
@@ -59,42 +51,13 @@ function set_rain_level(count) {
   }
   document.documentElement.appendChild(rain);
 }
-function set_star_level(count) {
-  if (count > 3000) {
-    count = 3000;
+function set_overlay_based_on_conditions(count){
+  console.log("eh??")
+  if (enable_rain_mul){
+    set_rain_level(count)
+    console.log("what??")
+  }else if (enable_snow_mul){
+    set_snow_level(count)
+    console.log("how??")
   }
-  count = Math.floor(count / 500 + 1)
-
-  let starsContainer = document.getElementById("stars");
-
-  if (starsContainer) {
-    starsContainer.remove();
-  }
-  
-  starsContainer = document.createElement("div");
-  starsContainer.id = "stars";
-  starsContainer.className = "raindrops"; // Ensure this matches your CSS if required
-
-  for (let i = 0; i < count; i++) {
-    let star = document.createElement("img");
-    star.classList.add("star");
-    star.src = "https://raw.githubusercontent.com/NightFlavor/smpp-images/main/star.svg"; // Use a star image
-
-    // Random start and end positions for the stars
-    let startX = Math.random() * 100; 
-    let endX = Math.random() * 200 - 100; // More horizontal spread
-
-    star.style.left = `${startX}%`;
-    star.style.setProperty('--star-start-x', `${startX}vw`);
-    star.style.setProperty('--star-end-x', `${endX}vw`);
-    star.style.animation = `star_fall ${Math.random() * 2 + 2}s linear infinite`;
-    star.style.animationDelay = `${Math.random() * 5}s`;
-    star.style.width = `${Math.random() * 7.5 + 7.5}px`;
-
-    starsContainer.appendChild(star);
-  }
-
-  document.body.appendChild(starsContainer);
 }
-
-

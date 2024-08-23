@@ -16,11 +16,11 @@
 }
 
 .watering_button {
-  border: 2px solid var(--color-base03);
+  border: 3px solid var(--color-base03);
   background-color: var(--color-base02);
   border-radius: 10px;
   padding: 2.5px;
-  width: 100px;
+  width: 33%;
   height: 50px;
   transition: ease-in-out;
   transition-duration: 0.1s;
@@ -29,4 +29,32 @@
   background-color: var(--color-base03);
   border-color: var(--color-accent);
   cursor: pointer;
+}
+.time_difference_last_watered{
+  font-weight: bold;
+  font-size: 12px;
+  text-align: center;
+  position: relative;
+  top: 50%;
+  width: 33%;
+  vertical-align: center;
+}
+
+.glass-container {
+  width: 33%;
+  margin-left: 10px;
+  margin-right: 10px;
+  border: 3px solid var(--color-base03);
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.05); /* semi-transparent background */
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-fill {
+  width: 100%;
+  background-color: var(--color-blue); /* blue fill */
+  position: absolute;
+  bottom: 0;
+  transition: height 1.5s ease-in-out; /* smooth transition */
 }

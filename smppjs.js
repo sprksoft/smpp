@@ -247,9 +247,9 @@ document.getElementById("plantcontainer")?document.getElementById("plantcontaine
     meteor != undefined?meteor.remove():0
 
   } else if( weatherSelector == 1){
-    set_star_level(weatherAmount);
     rain != undefined?rain.remove():0
     snow != undefined?snow.remove():0
+    set_overlay_based_on_conditions(weatherAmount)
   }
   else if (weatherSelector == 2){
     set_rain_level(weatherAmount);

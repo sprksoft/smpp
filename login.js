@@ -52,11 +52,11 @@ let splashtexts = [
     `How did we get here?`,
     `Aboo?!`,
     `Check out Insym!`,
-    `Il Mimo...`,
     `Do your homework!`,
     `Look mom I'm in the splashtext!`,
     `[Insert funny splashtext]`,
-    `Totally not ripping off Minecraft!`
+    `Totally not ripping off Minecraft!`,
+    `Yippieeee`
 ]
 function get_splash_text() {
     return splashtexts[Math.floor(Math.random() * splashtexts.length)]
