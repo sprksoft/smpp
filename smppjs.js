@@ -191,7 +191,7 @@ document.getElementById("plantcontainer")?document.getElementById("plantcontaine
       PlannerAppElement.classList.add("smsc-container--left")
       PlannerAppElement.setAttribute("id", "plannercontainer")
       container.prepend(PlannerAppElement)
-      ShowPlanner()
+      ShowPlanner(0)
     }
     if (show_plant){
       var PlantAppElement = document.createElement("div")

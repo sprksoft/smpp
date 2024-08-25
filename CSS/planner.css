@@ -458,9 +458,33 @@ button.icon-label-btn.js-icon-label-btn.icon-label-btn--linkbutton:hover {
 }
 
 .planner-title-startpage {
+  display: flex;
+  flex-direction: row;
   text-align: center !important;
   margin-top: -30px !important;
   margin-bottom: 0px !important;
   width: 100%;
+}
+#back_button_planner{
+background-image: url(https://static6.smart-school.net/smsc/svg/chevron_left/chevron_left_12x12.svg);
+}
+#forward_button_planner{
+background-image: url(https://static6.smart-school.net/smsc/svg/chevron_right/chevron_right_12x12.svg);
+}
+#forward_button_planner,#back_button_planner{
+  background-position: 50%;
+  background-repeat: no-repeat;
+  height: 26px;
+  appearance: none;
+  padding: 4px 12px;
+  border: 2px solid var(--color-base02);
+  border-radius: 8px;
+  background-color: var(--color-base01);
+  transition: ease-in-out;
+  transition-duration: 0.2s;
+}
+#forward_button_planner:hover,#back_button_planner:hover{
+  background-color: var(--color-base02);
+  border-color: var(--color-accent);
 
 }

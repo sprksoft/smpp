@@ -94,7 +94,12 @@ function add_buttons() {
   buttondiv.innerHTML = plant_buttonsHTML;
   document.getElementById("plantdiv").append(buttondiv);
   document.getElementById("watering_button").addEventListener("click", user_watered_plant);
+  if (time_difference_hours<1){
+  document.getElementById('time_difference_last_watered').innerHTML = `Last watered: \n`+Math.floor(time_difference_hours*60)+`min ago`
+  }else{
   document.getElementById('time_difference_last_watered').innerHTML = `Last watered: \n`+Math.floor(time_difference_hours)+`h ago`
+  }
+
   document.getElementById("glass-fill").style.height  = calculatePercentile(time_difference_watered/1000)+`%`;
 }
 
@@ -103,11 +108,7 @@ function user_watered_plant() {
   const current_conditions = get_current_conditions();
   if (!current_conditions) return;
 
-  const last_time_watered = new Date(current_conditions.last_time_watered).getTime();
-  const time_difference = now - last_time_watered;
-  const time_difference_days = time_difference / (1000 * 60 * 60 * 24);
-  const time_difference_hours = time_difference / (1000 * 60 * 60);
-  document.getElementById('time_difference_last_watered').innerHTML = `Last watered: \n`+Math.floor(time_difference_hours)+`h ago`
+  document.getElementById('time_difference_last_watered').innerHTML = `Last watered: \n`+`Now`
   current_conditions.last_time_watered = new Date();
   set_current_conditions(current_conditions);
   document.getElementById("glass-fill").style.height = '100%'

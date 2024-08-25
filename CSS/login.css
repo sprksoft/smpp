@@ -132,6 +132,8 @@ a.smscButton[href="/login/sso/init/acm"],
   border-radius: 5px !important;
   margin: 10px !important;
   font-size: 15px !important;
+  transition: ease-in-out !important;
+  transition-duration: 0.1s !important;
 }
 
 .white_text_button:hover {
