@@ -241,6 +241,7 @@ input[type=search].input.search-input,
 
 .detail {
   padding: 10px !important;
+  overflow: hidden !important;
 }
 
 .c-steel-combo--100,
