@@ -69,14 +69,9 @@
 
 .smscButton:hover,
 .topnav__menuitem:hover {
-  border: var(--border-size) solid var(--color-hover-border) !important;
+  border-color: var(--color-hover-border) !important;
   background-color: var(--color-base02) !important;
   color: var(--color-accent) !important;
-  background-position-x: 8px;
-  border-radius: 8px !important;
-}
-.smscButton:hover{
-font-size: 110% !important;
 }
 .topnav__menuitem {
   border: var(--border-size) solid var(--color-base01) !important;
