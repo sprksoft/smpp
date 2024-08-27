@@ -48,6 +48,7 @@
 				"titlefix.js",
 				"config.js",
 				"userchanger.js",
+        "themes.js",
 				"json.js",
 				"scraper.js",
 				"scores.js",

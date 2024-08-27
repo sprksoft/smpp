@@ -254,7 +254,7 @@ document.getElementById("plantcontainer")?document.getElementById("plantcontaine
   else if (weatherSelector == 2){
     set_rain_level(weatherAmount);
     meteor != undefined?meteor.remove():0
-    snow != undefined?snow.remove():0    
+    snow != undefined?snow.remove():0
   } else {
     console.log("ERROR NO WEATHER SELECTOR")
   }
@@ -484,14 +484,11 @@ function set_theme(name) {
     style.setProperty('--color-base03', themeData.base3);
     style.setProperty('--loginpage-image', "url(https://wallpaperaccess.com/full/23.jpg)");
   } else {
-    let theme = themes[name];
+    let theme = get_theme(name);
     if (!theme) {
       return;
     }
-    let keys = Object.keys(theme);
-    for (let i = 0; i < keys.length; i++) {
-      style.setProperty(keys[i], theme[keys[i]]);
-    }
+    apply_theme(theme, style)
   }
 }
 apply()
