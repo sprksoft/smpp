@@ -245,7 +245,7 @@ img[src="/modules/Messages/themes/default/images/loading_big.gif"] {
 }
 
 .smsc-tabslist {
-  border: 0px !important;
+  border-bottom: 2px solid var(--color-base03)!important;
 }
 
 
@@ -259,7 +259,8 @@ button.submit-button.smscButton.blue {
   box-shadow: none !important;
 }
 
-button.submit-button.smscButton.blue:hover,.wide-colored-btn:hover {
+button.submit-button.smscButton.blue:hover,
+.wide-colored-btn:hover {
   filter: brightness(100%) !important;
   box-shadow: none !important;
 }
@@ -361,8 +362,8 @@ td.msg_bottom {
 }
 
 td#msg_bg,
-.msg_left,
-.msg_right {
+td.msg_left,
+td.msg_right {
   background-color: transparent !important;
   background-image: none !important;
 }
@@ -490,11 +491,46 @@ input {
   color: var(--color-accent) !important;
   text-decoration: underline !important;
 }
-#globalChatTextBalk:hover{
+
+#globalChatTextBalk:hover {
   font-size: 115% !important;
   border-radius: 40px !important;
 }
-#globalChatTextBalk{
+
+#globalChatTextBalk {
   transition-property: all;
   transition-duration: 0.3s;
+}
+
+body.modern-ui #smscMain.smscMain--main {
+  margin-left: 0px !important;
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+}
+
+body.modern-ui #smscMain .smsc-container__content {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+
+upload-app.smsc-container.smsc-container--flex {
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+}
+
+.smsc-table__empty.drag-container,
+smsc-tabs .smsc-tabslist__item,
+.smsc-table__row.smsc-table__row--nohover.smsc-table__row--noborder {
+  background-color: var(--darken-background) !important;
+}
+.smsc-table__row.smsc-table__row--nohover.smsc-table__row--noborder:hover,smsc-tabs .smsc-tabslist__item:hover{
+  background-color: var(--color-base01) !important;
+}
+
+smsc-tabs .smsc-tabslist__item {
+  margin-right: 10px !important;
+  border: 2px solid var(--color-base03) !important
+}
+.compose-options{
+  padding-top: 12px !important;
 }

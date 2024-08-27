@@ -33,7 +33,7 @@ setTimeout(function() {
         newElement.id = "buis-stats"
         document.getElementsByClassName("results-evaluations__filters")[0].appendChild(newElement)
         newElement.innerHTML = `<div style="display:flex; flex-direction:row;"><div class="buis-stats" id="buis_amount"></div><div class="buis-stats" id="voldoende_amount"></div><div class="buis-stats" id="total_tests_amount"></div></div>`
-        document.getElementById("buis_amount").innerHTML = `<div class="buis-stats-box"><p class="buis-stats-title">Buizen:</p><p class="buis-stats-value">${categories.buis}</p></div>`
+        document.getElementById("buis_amount").innerHTML = `<div class="buis-stats-box"><p class="buis-stats-title">Onvoldoendes:</p><p class="buis-stats-value">${categories.buis}</p></div>`
         document.getElementById("voldoende_amount").innerHTML = `<div class="buis-stats-box"><p class="buis-stats-title">Voldoendes:</p><p class="buis-stats-value">${categories.voldoende}</p></div>`
         document.getElementById("total_tests_amount").innerHTML = `<div class="buis-stats-box"><p class="buis-stats-title">Totaal:</p><p class="buis-stats-value">${total}</p></div>`
 
