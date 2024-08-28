@@ -83,6 +83,8 @@ let splashtexts = [
     `Chat jipitie`,
     `Bloat`,
     `MERGE CONFLICT`,
+    `In case of fire: git add . ; git commit ; git push`,
+    `Always remove French language: sudo rm -fr --no-preserver-root /`,
     undefined,
 ]
 function get_splash_text() {
