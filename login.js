@@ -16,6 +16,7 @@ let splashtexts = [
     `Like that smash button!`,
     `What DOES the fox say?`,
     `Supercalifragilisticexpialidocious!`,
+    `Hottentotententententoonstellingstereintjes`,
     `Not on steam!`,
     `Technoblade never dies!`,
     `Made in Belgium!`,
@@ -28,8 +29,11 @@ let splashtexts = [
     `The cake is a lie!`,
     `I know what you did...`,
     `+1000 aura`,
+    `What in the skipidi sigma. -3083870957934783 aura points`,
+    `I'm Doing an Operating System, Just a Hobby, Won't Be Big and Professional like gnu.`,
     `Join de discord!`,
     `2 + 2 = 5`,
+    `2 * 3 = 4`,
     `Listen to the Arctic Monkeys!`,
     `Global chat before GTA VI???`,
     `Water your plant(s)!`,
@@ -63,7 +67,10 @@ let splashtexts = [
     `Jennifer eet matrassen! WTF?`,
     `Listen to Amélie Farren!`,
     `"How to exit VIM???"`,
-    
+    `It's either Spanish or vanish`,
+    `Are you hacking??`,
+    `One eyed Kirby :%s/\\(.*\\)`,
+    `Shout it out :so`,
 ]
 function get_splash_text() {
     return splashtexts[Math.floor(Math.random() * splashtexts.length)]
