@@ -492,16 +492,6 @@ input {
   text-decoration: underline !important;
 }
 
-#globalChatTextBalk:hover {
-  font-size: 115% !important;
-  border-radius: 40px !important;
-}
-
-#globalChatTextBalk {
-  transition-property: all;
-  transition-duration: 0.3s;
-}
-
 body.modern-ui #smscMain.smscMain--main {
   margin-left: 0px !important;
   margin-top: 0px !important;

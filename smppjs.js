@@ -381,17 +381,6 @@ function loadCustomTheme() {
   colorpickers.innerHTML = colorpickersHTML
   loadCustomThemeData()
 }
-// Select the element
-const msghead = document.querySelector("#msgcell > .msgcell__head");
-console.log(msghead)
-// Insert adjacent HTML (beforebegin, afterbegin, beforeend, afterend)
-if(msghead){
-  let chaty = document.createElement("div")
-  chaty.classList.add("chatie")
-  chaty.innerHTML=chatyHTML
-msghead.insertBefore( chaty, msghead.querySelector(".msgcell__head__sort"))
-document.getElementById("globalChatTextBalk").addEventListener("click",globalChatTextBalk)
-}
 
 function load() {
   let settingsData = JSON.parse(window.localStorage.getItem("settingsdata"));

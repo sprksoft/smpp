@@ -234,33 +234,6 @@ const weatherHTML = `<div class="weatherdiv">
 </div>
 `;
 
-function globalChatTextBalk() {
-  const GlCHatplace = document.getElementById("msgdetail")
-  let current_profile = get_config().profile
-  let current_theme = get_theme(current_profile);
-  let placeholder_color = '#fff'
-  if (username_override == null){
-    var placeholderTextGlChat = orig_name;
-  }
-  else {
-    var placeholderTextGlChat = username_override;
-  }
-
-  const query_string=get_theme_as_query_string(current_theme, ["color_base00", "color_base01", "color_base02", "color_base03", "color_accent", "color_text"]);
-  const GlCHatplaceHTML = `
-<iframe style="width:100%; height:100%; border:none "src = 'https://ldev.eu.org/smpp/gc/v1?placeholder=${placeholderTextGlChat}${query_string}'></iframe>
-  `;
-
-  GlCHatplace.innerHTML = GlCHatplaceHTML
-}
-const chatyHTML = `
-  <button class="smscButton lookChat" id="globalChatTextBalk">Global Chat</button>
-`;
-
-
-
-
-
 const weatherHTMLTiny = `<div class="weatherdiv">
 <div class="colSmall">
 <div class="veticalstackweather" style="width:70% !important;">

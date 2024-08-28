@@ -240,10 +240,10 @@ if (topNav && document.querySelector("#dmenutooltip") == undefined) {
   })
 
   const goGlChatButton = document.createElement("button");
-  goGlChatButton.id = "glChaters"   //TODO: change this to something more meaningfu pwease
+  goGlChatButton.id = "global_chat_button"
   goGlChatButton.className = "topnav__btn"
   goGlChatButton.innerText = "GLOBAL CHAT!!!!!"
-
+  goGlChatButton.addEventListener("click",open_global_chat)
   const secondItem = topNav.childNodes[2];
   topNav.insertBefore(quickButton, secondItem);
   topNav.insertBefore(goGlChatButton, secondItem);
