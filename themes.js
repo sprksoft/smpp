@@ -162,15 +162,15 @@ function get_theme(name) {
 }
 
 function get_theme_var(theme, var_name) {
+  console.log('function called!')
   let tvar = theme[var_name];
-  if (tvar == undefined){
+
     tvar = themes["default"][var_name];
     if (tvar == undefined){
       console.error(`Theme var '${var_name}' doesn't exist on a theme and als not on default theme`);
       return undefined;
     }
     return tvar;
-  }
 }
 function apply_theme(theme, style){
     let keys = Object.keys(theme);
@@ -184,5 +184,6 @@ function get_theme_as_query_string(theme, qvars){
     let tvar = get_theme_var(theme, "--"+qvar.replace("_", "-"));
     output+=`&${qvar}=${tvar}`;
   }
+  console.log("output: ",output)
   return output;
 }
