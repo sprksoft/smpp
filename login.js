@@ -71,6 +71,11 @@ let splashtexts = [
     `Are you hacking??`,
     `One eyed Kirby :%s/\\(.*\\)`,
     `Shout it out :so`,
+    `I know what you did last summer`,
+    `Ba ba ba Bye boy`,
+    `Kiss like ketemin`,
+    `Take you out of body with a kiss like ketamine`,
+    `undefined is not a function`,
 ]
 function get_splash_text() {
     return splashtexts[Math.floor(Math.random() * splashtexts.length)]
