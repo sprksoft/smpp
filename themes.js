@@ -162,14 +162,12 @@ function get_theme(name) {
 }
 
 function get_theme_var(theme, var_name) {
-  console.log("theme:",theme)
   let tvar = theme[var_name];
-
-    tvar = themes["default"][var_name];
     if (tvar == undefined){
       console.error(`Theme var '${var_name}' doesn't exist on a theme and als not on default theme`);
       return undefined;
     }
+    console.log(tvar)
     return tvar;
 }
 function apply_theme(theme, style){
@@ -180,7 +178,6 @@ function apply_theme(theme, style){
 }
 function get_theme_as_query_string(theme, qvars){
   let output = "";
-  console.log("theme: ",theme)
   for (qvar of qvars){
     let tvar = get_theme_var(theme, "--"+qvar.replace("_", "-"));
     output+=`&${qvar}=${tvar.split("#")[1]}`;
