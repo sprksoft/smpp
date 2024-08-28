@@ -75,10 +75,9 @@ let splashtexts = [
     `<s>SQL</s> Squil`,
     `I know what you did last summer`,
     `Ba ba ba Bye boy`,
-    `Kiss like ketemin`,
-    `Take you out of body with a kiss like ketamine`,
     `undefined is not a function`,
     '8===============D (tiny)',
+    undefined,
 ]
 function get_splash_text() {
     return splashtexts[Math.floor(Math.random() * splashtexts.length)]
