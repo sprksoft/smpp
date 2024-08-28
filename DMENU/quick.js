@@ -239,7 +239,13 @@ if (topNav && document.querySelector("#dmenutooltip") == undefined) {
     do_qm(quickButton);
   })
 
+  const goGlChatButton = document.createElement("button");
+  goGlChatButton.id = "glChaters"   //TODO: change this to something more meaningfu pwease
+  goGlChatButton.className = "topnav__btn"
+  goGlChatButton.innerText = "GLOBAL CHAT!!!!!"
+
   const secondItem = topNav.childNodes[2];
   topNav.insertBefore(quickButton, secondItem);
+  topNav.insertBefore(goGlChatButton, secondItem);
 }
 
