@@ -73,7 +73,9 @@ let splashtexts = [
     `:3`,
     `Ma aleee ik word gekilled door ne kerstboom!`,
     `<s>SQL</s> Squil`,
-    `undefined is not a function`
+    `undefined is not a function`,
+    undefined,
+
 ]
 function get_splash_text() {
     return splashtexts[Math.floor(Math.random() * splashtexts.length)]
