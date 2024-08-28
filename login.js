@@ -31,7 +31,6 @@ let splashtexts = [
     `+1000 aura`,
     `What in the skibidi sigma.`,
     `-3083870 aura points`,
-    `I'm Doing an Operating System, Just a Hobby, Won't Be Big and Professional like gnu.`,
     `Join de discord!`,
     `2 + 2 = 5`,
     `2 * 3 = 4`,
@@ -74,7 +73,12 @@ let splashtexts = [
     `Shout it out :so`,
     `:3`,
     `Ma aleee ik word gekilled door ne kerstboom!`,
-    `<s>SQL</s> Squil`
+    `<s>SQL</s> Squil`,
+    `I know what you did last summer`,
+    `Ba ba ba Bye boy`,
+    `Kiss like ketemin`,
+    `Take you out of body with a kiss like ketamine`,
+    `undefined is not a function`,
 ]
 function get_splash_text() {
     return splashtexts[Math.floor(Math.random() * splashtexts.length)]
