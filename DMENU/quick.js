@@ -108,7 +108,7 @@ async function fetch_links() {
       links.push({ url: response_data[i].url, value: response_data[i].name.toLowerCase(), meta: "link" });
     }
   } else {
-    console.log("Fetching links failed (" + response.status + " http code)")
+    console.error("Fetching links failed (" + response.status + " http code)")
     links = [];
   }
 }
@@ -128,7 +128,7 @@ async function fetch_vakken() {
       vakken.push({ url: vak.url, value: vak.name.toLowerCase(), meta: meta });
     }
   } else {
-    console.log("Fetching vakken failed (" + response.status + " http code)")
+    console.error("Fetching vakken failed (" + response.status + " http code)")
     vakken = [];
   }
 
@@ -168,10 +168,8 @@ function do_qm(open_key = "") {
         settingData = get_config()
         if (settingData.show_scores) {
           settingData.show_scores = false
-          console.log("Turned show scores off")
         } else {
           settingData.show_scores = true
-          console.log("Turned show scores on")
         }
         set_config(settingData)
         return;
@@ -196,7 +194,6 @@ function do_qm(open_key = "") {
     for (let i = 0; i < quicks.length; i++) {
       const quick = quicks[i];
       if (quick.name == cmd) {
-        console.log(quick);
         open_url(quick.url, true);
         return;
       }

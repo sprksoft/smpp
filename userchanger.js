@@ -34,7 +34,6 @@ function try_attach_messages_observer(orig_name, new_name) {
   }
   const observer = new MutationObserver(function(muts, observer){
     let in_send_messages_page = document.querySelector(".msgcell__head__title").innerText == "Verzonden";
-    console.log("ismp: "+in_send_messages_page);
     for (const mut of muts){
       for(const msg of mut.addedNodes){
         if (msg.nodeName == "#text"){continue;} 
@@ -67,7 +66,6 @@ function unhead_fully(){
 }
 
 let orig_name = change_lname(username_override, null);
-console.log("oname" + orig_name);
 try_attach_messages_observer(orig_name, username_override);
 
 if (full_unheading){

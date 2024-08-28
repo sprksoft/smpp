@@ -25,7 +25,6 @@ async function fetchLijnData(entiteitnummer, lijnnummer) {
 }
 
 async function createApplication(data) {
-  console.log(data)
   const leftContainerbottom = document.getElementById('leftContainerbottom');
   if (!leftContainerbottom) return;
 
@@ -39,15 +38,10 @@ async function createApplication(data) {
   const { doorkomsten } = data.halteDoorkomsten[0];
 
   for (const doorkomst of doorkomsten) {
-    console.log(doorkomsten)
     var { entiteitnummer, bestemming, lijnnummer, dienstregelingTijdstip } = doorkomst;
-    console.log(lijnnummer)
-    console.log(entiteitnummer)
-
     perLijnData = await fetchLijnData(entiteitnummer, lijnnummer)
     lijnnummer = perLijnData.lijnnummerPubliek
     const real_timeTijdstip = doorkomst["real-timeTijdstip"]
-    console.log(real_timeTijdstip)
     const date = new Date(dienstregelingTijdstip);
     const currentdate = new Date();
     const currenthour = currentdate.getHours();
@@ -62,7 +56,7 @@ async function createApplication(data) {
     let timetilldep = totalMinutes - totalMinutescurrent;
 
     if (real_timeTijdstip != undefined) {
-      console.log("real_timeTijdstip is not undefined")
+      console.error("real_timeTijdstip is not undefined")
       const realtimedate = new Date(real_timeTijdstip);
       const hourrealtime = realtimedate.getHours();
       let minuterealtime = realtimedate.getMinutes();
@@ -101,7 +95,6 @@ async function createApplication(data) {
   const lastdiv = document.createElement('div');
   if (Math.random() < 0.1) {
     lastdiv.innerHTML = `<div class=lastdiv><a href="https://www.coolblue.be/nl/koffiezetapparaten/koffiezetapparaten-voor-latte-macchiato?utm_source=bing&utm_medium=cpc&utm_content=search&cmt=c_b,cp_554669870,aid_1297424829986242,t_kwd-81089287897708:loc-14,n_o,d_c,lp_611&msclkid=1f7482f3ed5c1b56a37de72c7f194ba4" target="_blank">Latte?</a></div>`;
-    console.log("#latte")
   } else {
     lastdiv.innerHTML = `<div class=lastdiv><a href="https://www.delijn.be/nl/contact/attest-aanvraag/" target="_blank">Late?</a></div>`;
   }

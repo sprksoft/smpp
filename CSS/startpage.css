@@ -29,7 +29,9 @@ body {
   background-color: #00000020 !important;
   backdrop-filter: var(--blur-value-small) !important;
   -webkit-backdrop-filter: var(--blur-value-small) !important;
-  width: 90% !important;
+}
+body.modern-ui .homepage__center{
+  min-width: 0px !important;
 }
 
 #homepage__block--contact {

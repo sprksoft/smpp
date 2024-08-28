@@ -53,7 +53,7 @@ async function show_scoresfunc() {
                         button.style.setProperty('background-color', 'var(--color-red)', 'important');
                         break;
                     default:
-                        console.log(`Invalid color: ${color}`);
+                        console.error(`Invalid color: ${color}`);
                         button.style.setProperty('background-color', color, 'important');
                         break;
                 }
@@ -68,7 +68,6 @@ async function show_scoresfunc() {
         while ((match = identifierRegex.exec(html)) !== null) {
             identifiers.push(match[1]);
         }
-        console.log(identifiers)
         return identifiers;
     }
 
@@ -98,10 +97,7 @@ async function show_scoresfunc() {
         const projectIdentifiers = identifiers.filter(identifier => identifier.includes('_project_'));
         const fetchPromises = projectIdentifiers.map(identifier => fetchEvaluationDetails(identifier));
         const colors = await Promise.all(fetchPromises);
-
-        console.log('Fetched colors:', colors);
         const validColors = colors.filter(color => color !== null);
-        console.log('Valid colors:', validColors);
         const dataRowIds = extractDataRowIds();
         extractDataRowIdsAndAssignColors(validColors, dataRowIds);
         detectScrolling(validColors, dataRowIds);

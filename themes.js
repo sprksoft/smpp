@@ -162,7 +162,7 @@ function get_theme(name) {
 }
 
 function get_theme_var(theme, var_name) {
-  console.log('function called!')
+  console.log("theme:",theme)
   let tvar = theme[var_name];
 
     tvar = themes["default"][var_name];
@@ -180,10 +180,12 @@ function apply_theme(theme, style){
 }
 function get_theme_as_query_string(theme, qvars){
   let output = "";
+  console.log("theme: ",theme)
   for (qvar of qvars){
     let tvar = get_theme_var(theme, "--"+qvar.replace("_", "-"));
-    output+=`&${qvar}=${tvar}`;
+    output+=`&${qvar}=${tvar.split("#")[1]}`;
+    console.log("output: ",output)
   }
-  console.log("output: ",output)
+  
   return output;
 }

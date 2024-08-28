@@ -1,5 +1,4 @@
 function add_splash_text(){
-    console.log('added splash text')
     var login_app = document.querySelector('.login-app')
     var splash_text_element = document.createElement('div')
     login_app.prepend(splash_text_element) 
@@ -80,7 +79,8 @@ let splashtexts = [
     `MERGE CONFLICT!`,
     `In case of fire: git add .; git commit; git push`,
     `Always remove French: sudo rm -fr`,
-    undefined
+    undefined,
+    `Is tHaT A JOjO ReFEreNce?`
 ]
 function get_splash_text() {
     return splashtexts[Math.floor(Math.random() * splashtexts.length)]

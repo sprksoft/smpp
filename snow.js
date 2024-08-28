@@ -52,12 +52,9 @@ function set_rain_level(count) {
   document.documentElement.appendChild(rain);
 }
 function set_overlay_based_on_conditions(count){
-  console.log("eh??")
   if (enable_rain_mul){
     set_rain_level(count)
-    console.log("what??")
   }else if (enable_snow_mul){
     set_snow_level(count)
-    console.log("how??")
   }
 }

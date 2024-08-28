@@ -7,7 +7,7 @@ async function getWeatherByCity(city) {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.log('Error fetching data:', error);
+    console.error('Error fetching data:', error);
   }
 }
 
@@ -87,7 +87,7 @@ async function updateWeatherDiv(weatherData, IsBig) {
     }
   }
   catch (e) {
-    console.log(e);
+    console.error(e);
   }
   rightContainer.appendChild(weatherdiv);
 }

@@ -20,7 +20,6 @@ setTimeout(function() {
         data.forEach(evaluation => {
           if (evaluation.graphic && evaluation.graphic.value !== undefined) {
             const value = evaluation.graphic.value;
-            console.log(value)
             if (value < 50) {
               categories.buis++;
             } else {

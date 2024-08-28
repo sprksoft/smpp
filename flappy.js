@@ -2,7 +2,6 @@ let flappy_running = false;
 let highscore = window.localStorage.getItem("flappyhighscore");
 function storeFlappySpeed() {
     const slider = document.getElementById("flappyspeedslider").value;
-    console.log(slider)
     if (slider == 300 && highscore == 911) {
         document.getElementById('flappytitle').innerText = "FREE Bird++";
     }

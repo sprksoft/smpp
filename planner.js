@@ -5,7 +5,6 @@ async function fetchPlannerData(date, user) {
         const currentUrl = window.location.href;
         const school_name = currentUrl.split("/")[2];
         const url = `https://${school_name}/planner/api/v1/planned-elements/user/${user}?from=${date}&to=${date}`;
-        console.log(url);
         const response = await fetch(url);
         if (!response.ok) {
             throw new Error(`Failed to fetch planner data`);
@@ -46,7 +45,6 @@ async function getDateInCorrectFormat(isFancyFormat, addend) {
 
     // Calculate the new date by adding the addend to the current date
     currentDate.setDate(currentDate.getDate() + addend);
-    console.log("Modified Date:", currentDate);
     let month_names = ["Jan","Feb","Mar","Apr","May","June","July","Aug","Sept","Oct","Nov"]
     if (isFancyFormat) {
         const day = currentDate.getDate().toString().padStart(2, '0');

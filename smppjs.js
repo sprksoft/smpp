@@ -132,7 +132,6 @@ async function apply() {
       }
     }
   });
-  console.log("added event listener");
   if (overwrite_theme == 2) {
     set_background(backgroundFile);
   } else if (overwrite_theme == 1) {
@@ -256,7 +255,7 @@ document.getElementById("plantcontainer")?document.getElementById("plantcontaine
     meteor != undefined?meteor.remove():0
     snow != undefined?snow.remove():0
   } else {
-    console.log("ERROR NO WEATHER SELECTOR")
+    console.error("NO WEATHER SELECTOR")
   }
 }
 
