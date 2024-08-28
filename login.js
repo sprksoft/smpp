@@ -28,6 +28,7 @@ let splashtexts = [
     `The cake is a lie!`,
     `I know what you did...`,
     `+1000 aura`,
+    `What in the skibidi sigma?!`,
     `Join de discord!`,
     `2 + 2 = 5`,
     `2 * 3 = 4`,
