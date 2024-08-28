@@ -2,8 +2,7 @@ function add_splash_text(){
     console.log('added splash text')
     var login_app = document.querySelector('.login-app')
     var splash_text_element = document.createElement('div')
-    login_app.prepend(splash_text_element)
-    splash_text_element.classList.add('splashtextcontainer')
+    login_app.prepend(splash_text_element) splash_text_element.classList.add('splashtextcontainer')
     splash_text_element.innerHTML = `<div class='splashtext'>${get_splash_text()}</div>`
 }
 let splashtexts = [
@@ -47,6 +46,7 @@ let splashtexts = [
     `Europapa!`,
     `Made by Sprksoft!`,
     `Made by Lukas`,
+    `No animals where harmed during the making of this splash`,
     `Made by Bjarne`,
     `Made by Sibe`,
     `Not made in China!`,
@@ -74,8 +74,16 @@ let splashtexts = [
     `Ma aleee ik word gekilled door ne kerstboom!`,
     `<s>SQL</s> Squil`,
     `undefined is not a function`,
-    undefined
-
+    `:wq`,
+    '8===============D (tiny)',
+    `I'm blue dabadie dabadaa`,
+    `Ripped the zipper of my bag and hide it`,
+    `I met a shooting star`,
+    `In the empty open void`,
+    `Chat jipitie`,
+    `Bloat`,
+    `MERGE CONFLICT`,
+    undefined,
 ]
 function get_splash_text() {
     return splashtexts[Math.floor(Math.random() * splashtexts.length)]
