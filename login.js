@@ -28,7 +28,6 @@ let splashtexts = [
     `I know what you did...`,
     `+1000 aura`,
     `What in the skibidi sigma?!`,
-    `-3083870 aura points`,
     `Join de discord!`,
     `2 + 2 = 5`,
     `2 * 3 = 4`,
