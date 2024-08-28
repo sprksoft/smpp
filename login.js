@@ -18,7 +18,6 @@ let splashtexts = [
     `Supercalifragilisticexpialidocious!`,
     `Hottentotententententoonstellingstereintjes`,
     `Not on steam!`,
-    `Technoblade never dies!`,
     `Made in Belgium!`,
     `De L in frans staat voor leuk!`,
     `Doesn't contain nuts!`,
@@ -79,6 +78,7 @@ let splashtexts = [
     `Kiss like ketemin`,
     `Take you out of body with a kiss like ketamine`,
     `undefined is not a function`,
+    '8===============D (tiny)',
 ]
 function get_splash_text() {
     return splashtexts[Math.floor(Math.random() * splashtexts.length)]
