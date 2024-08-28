@@ -2,7 +2,8 @@ function add_splash_text(){
     console.log('added splash text')
     var login_app = document.querySelector('.login-app')
     var splash_text_element = document.createElement('div')
-    login_app.prepend(splash_text_element) splash_text_element.classList.add('splashtextcontainer')
+    login_app.prepend(splash_text_element) 
+    splash_text_element.classList.add('splashtextcontainer')
     splash_text_element.innerHTML = `<div class='splashtext'>${get_splash_text()}</div>`
 }
 let splashtexts = [
@@ -27,8 +28,6 @@ let splashtexts = [
     `The cake is a lie!`,
     `I know what you did...`,
     `+1000 aura`,
-    `What in the skibidi sigma?!`,
-    `-3083870 aura points`,
     `Join de discord!`,
     `2 + 2 = 5`,
     `2 * 3 = 4`,
@@ -69,22 +68,19 @@ let splashtexts = [
     `It's either Spanish or vanish`,
     `Are you hacking??`,
     `One eyed fighting Kirby :%s/\\(.*\\)`,
-    `Shout it out :so`,
     `:3`,
     `Ma aleee ik word gekilled door ne kerstboom!`,
-    `<s>SQL</s> Squil`,
+    `<s>SQL</s>, Squil ✓`,
     `undefined is not a function`,
     `:wq`,
     `I'm blue dabadie dabadaa`,
-    `Ripped the zipper of my bag and hide it`,
-    `I met a shooting star`,
     `In the empty open void`,
     `Chet jipitie`,
     `Bloat`,
     `MERGE CONFLICT!`,
     `In case of fire: git add .; git commit; git push`,
     `Always remove French: sudo rm -fr`,
-    undefined,
+    undefined
 ]
 function get_splash_text() {
     return splashtexts[Math.floor(Math.random() * splashtexts.length)]
