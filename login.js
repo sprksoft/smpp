@@ -75,6 +75,7 @@ let splashtexts = [
     `<s>SQL</s> Squil`,
     `undefined is not a function`,
     undefined,
+    'ik luister naar hentai ;)',
 
 ]
 function get_splash_text() {
