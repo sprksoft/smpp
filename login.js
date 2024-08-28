@@ -29,7 +29,8 @@ let splashtexts = [
     `The cake is a lie!`,
     `I know what you did...`,
     `+1000 aura`,
-    `What in the skipidi sigma. -3083870957934783 aura points`,
+    `What in the skibidi sigma.`,
+    `-3083870 aura points`,
     `I'm Doing an Operating System, Just a Hobby, Won't Be Big and Professional like gnu.`,
     `Join de discord!`,
     `2 + 2 = 5`,
@@ -69,8 +70,11 @@ let splashtexts = [
     `"How to exit VIM???"`,
     `It's either Spanish or vanish`,
     `Are you hacking??`,
-    `One eyed Kirby :%s/\\(.*\\)`,
+    `One eyed fighting Kirby :%s/\\(.*\\)`,
     `Shout it out :so`,
+    `:3`,
+    `Ma aleee ik word gekilled door ne kerstboom!`,
+    `<s>SQL</s> Squil`
 ]
 function get_splash_text() {
     return splashtexts[Math.floor(Math.random() * splashtexts.length)]
