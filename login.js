@@ -11,7 +11,6 @@ let splashtexts = [
     `Hoelang is een chinees.`,
     `404 Splashtext not found`,
     `Don't Smartschool and drive kids!`,
-    `Van vrije-uitloop programeurs!`,
     `Home-made!`,
     `Pythagoras was used in this`,
     `Like that smash button!`,
@@ -19,7 +18,6 @@ let splashtexts = [
     `Supercalifragilisticexpialidocious!`,
     `Not on steam!`,
     `Technoblade never dies!`,
-    `Lots of bugs! (not the living kind...)`,
     `Made in Belgium!`,
     `De L in frans staat voor leuk!`,
     `Doesn't contain nuts!`,
@@ -33,7 +31,7 @@ let splashtexts = [
     `Join de discord!`,
     `2 + 2 = 5`,
     `Listen to the Arctic Monkeys!`,
-    `Global chat coming soon...`,
+    `Global chat before GTA VI???`,
     `Water your plant(s)!`,
     `Check out Snake++!`,
     `Je suis une baguette`,
@@ -59,11 +57,13 @@ let splashtexts = [
     `Yippieeee`,
     `Chop Suey!`,
     `Bayo Yayo Bayo Yayo!`,
-    `AAAAAAAAA`,
+    `AAAAAAAAA!!!`,
     `Is tHaT a sUpRA?!?!`,
     `English or Spanish?`,
-    `Jennifer eet matrassen! WTF?`
-
+    `Jennifer eet matrassen! WTF?`,
+    `Listen to Amélie Farren!`,
+    `"How to exit VIM???"`,
+    
 ]
 function get_splash_text() {
     return splashtexts[Math.floor(Math.random() * splashtexts.length)]
