@@ -1,7 +1,7 @@
 function add_splash_text(){
     var login_app = document.querySelector('.login-app')
     var splash_text_element = document.createElement('div')
-    login_app.prepend(splash_text_element) 
+    login_app.prepend(splash_text_element)
     splash_text_element.classList.add('splashtextcontainer')
     splash_text_element.innerHTML = `<div class='splashtext'>${get_splash_text()}</div>`
 }
@@ -65,6 +65,7 @@ let splashtexts = [
     `Jennifer eet matrassen! WTF?`,
     `Listen to Amélie Farren!`,
     `"How to exit VIM???"`,
+    `Are ya vimming son?`,
     `It's either Spanish or vanish`,
     `Are you hacking??`,
     `One eyed fighting Kirby :%s/\\(.*\\)`,
@@ -80,7 +81,8 @@ let splashtexts = [
     `In case of fire: git add .; git commit; git push`,
     `Always remove French: sudo rm -fr`,
     undefined,
-    `Is tHaT A JOjO ReFEreNce?`
+    `Is tHaT A JOjO ReFEreNce?`,
+    `https://ldev.eu.org`,
 ]
 function get_splash_text() {
     return splashtexts[Math.floor(Math.random() * splashtexts.length)]
