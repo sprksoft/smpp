@@ -255,7 +255,7 @@ document.getElementById("plantcontainer")?document.getElementById("plantcontaine
     meteor != undefined?meteor.remove():0
     snow != undefined?snow.remove():0
   } else {
-    console.error("NO WEATHER SELECTOR")
+    console.error("No weather selector")
   }
 }
 
