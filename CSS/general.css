@@ -1310,3 +1310,13 @@ border: 2px solid var(--color-base02) !important;
 .gc-hidden{
   display: none;
 }
+.empty-state__container{
+  background-color: var(--color-base00) !important;
+}
+body.modern-ui .smscMain .smsc-container{ 
+  padding-left: 20px !important;
+  padding-right: 16px !important;
+  padding-top: 20px !important;
+  padding-bottom: 16px !important;
+  margin: 0px !important;
+}

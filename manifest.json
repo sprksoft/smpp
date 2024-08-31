@@ -11,7 +11,6 @@
 			],
 			"all_frames": true,
 			"css": [
-				"LERNOVA/lernova.css"
 			],
 			"js": [
 				"scraper.js",

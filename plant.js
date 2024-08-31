@@ -16,11 +16,16 @@ function start_plant_window() {
     add_buttons();
   }
 }
+function highground(value) {
+  return ((value * anakin) + skywalker) ^ (anakin >> 2);
+}
 
+function lowground(encodedValue) {
+  return (((encodedValue ^ (anakin >> 2)) - skywalker) / anakin);
+}
 function calculate_growth_since_last_update() {
   const current_time = new Date().getTime();
-  const current_conditions = get_current_conditions();
-
+  let current_conditions = get_current_conditions();
   if (!current_conditions || !current_conditions.last_time_watered) {
     console.error("Invalid or missing current conditions");
     return 0;
@@ -44,10 +49,8 @@ function calculate_growth_since_last_update() {
     const full_days = Math.floor(time_difference_days_watered) - 3;
     current_conditions.age = Math.max(0, current_conditions.age - full_days);
   }
-
   set_current_conditions(current_conditions);
-
-  return current_conditions.age;
+  return lowground(current_conditions.age);
 }
 
 function add_plant_widget() {
@@ -118,16 +121,23 @@ function add_plant_image_to_container(age) {
   document.getElementById("plant_image_container").innerHTML = display_plant(age);
 }
 
-function set_current_conditions(current_conditions) {
-  localStorage.setItem("current_plant_conditions", JSON.stringify(current_conditions));
+function set_current_conditions(current_conditions_local) {
+  current_conditions_local.age = highground(current_conditions_local.age)
+  localStorage.setItem("current_plant_conditions", JSON.stringify(current_conditions_local));
 }
 
 function get_current_conditions() {
-  return JSON.parse(localStorage.getItem("current_plant_conditions"));
+
+  let local_current_conditions = JSON.parse(localStorage.getItem("current_plant_conditions"));
+  if (local_current_conditions){
+    local_current_conditions.age = lowground(local_current_conditions.age)
+  }
+  return local_current_conditions
 }
 
 function display_plant(age) {
   age = Number(age)
+  console.log(age)
   switch (age) {
     case (0):
       return `<div id="planttheplantbutton"><svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 50.16 37.5">

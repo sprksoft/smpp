@@ -72,11 +72,11 @@ span,
   color: var(--color-text) !important;
 }
 .content__hourblock.js-hourblock{
-  border-top: 1px double !important;
+  border-top: 1px dotted !important;
   border-top-color: var(--color-text) !important;
 }
 .content__hourblock.content__hourblock--last.js-hourblock {
-  border-bottom: 1px double !important;
+  border-bottom: 1px dotted !important;
   border-bottom-color: var(--color-text) !important;
 
 }
@@ -487,4 +487,10 @@ background-image: url(https://static6.smart-school.net/smsc/svg/chevron_right/ch
   background-color: var(--color-base02);
   border-color: var(--color-accent);
 
+}
+.todo-column-container{
+  border-left: 0px !important;
+}
+.btn.btn--dropdown.btn--warning:after{
+  background-image: url(/smsc/svg/driehoek_droplist_open/driehoek_droplist_open_9x9.svg) !important
 }

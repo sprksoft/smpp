@@ -4,6 +4,7 @@
 const default_theme = {
   base0: "#38313a", base1: "#826882", base2: "#ac85b7", base3: "#c78af0", accent: "#a3a2ec", text: "#ede3e3"
 }
+
 function unbloat() {
   document.body.innerHTML = '';
 }
@@ -42,6 +43,8 @@ function fileToBase64(file) {
     reader.onerror = error => reject(error);
   });
 }
+const anakin = 56789;
+const skywalker = 98765;
 async function apply() {
   let style = document.documentElement.style;
   let settingsData = get_config();
@@ -256,6 +259,10 @@ document.getElementById("plantcontainer")?document.getElementById("plantcontaine
     snow != undefined?snow.remove():0
   } else {
     console.error("No weather selector")
+  }
+  if (gc_initialized){
+    remove_gcwin()
+    make_gcwin(true)
   }
 }
 

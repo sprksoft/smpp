@@ -90,7 +90,8 @@ intra-list.smsc-container.smsc-container--main.smsc-container--flex,
 .smsc-container.smsc-container--main.results-goals-overview__content,
 .leerplannen-overview.smsc-container.smsc-container--main,
 .reports-overview.smsc-container.smsc-container--main,
-upload-app.smsc-container.smsc-container--flex
+upload-app.smsc-container.smsc-container--flex,
+.smsc-container.smsc-container--main.smsc-container--flex
 {
   backdrop-filter: var(--blur-value-small) !important;
   background-color: var(--darken-background) !important;
