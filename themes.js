@@ -31,6 +31,11 @@ const themes = {
   },
   "ldev": {
     "--color-accent": "#ffd5a0",
+    "--color-text": "#C2BAB2",
+    "--color-base00": "#191817",
+    "--color-base01": "#232020",
+    "--color-base02": "#3f3c3b",
+    "--color-base03": "#5b5756",
     "--color-popup-border": "var(--color-base02)",
     "--color-hover-border": "var(--color-base03)",
     "--color-homepage-sidebars-bg": "var(--color-base00)",
