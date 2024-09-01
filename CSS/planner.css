@@ -279,7 +279,7 @@ button.btn.close-btn.btn--plain {
 }
 
 button.detail-blob:hover {
-  background-color: var(--color-base02) !important;
+  background-color: var(--color-base03) !important;
 }
 
 button.button-close-svg {
@@ -494,3 +494,6 @@ background-image: url(https://static6.smart-school.net/smsc/svg/chevron_right/ch
 .btn.btn--dropdown.btn--warning:after{
   background-image: url(/smsc/svg/driehoek_droplist_open/driehoek_droplist_open_9x9.svg) !important
 }
+.detail-blob{
+  background-color: var(--color-base02) !important;
+} 
