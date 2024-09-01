@@ -273,12 +273,12 @@ if (document.querySelector('[data-go=""]')) {
 
 function storeTheme() {
   const themeData = {
-    base0: document.getElementById("colorPicker1").value,
-    base1: document.getElementById("colorPicker2").value,
-    base2: document.getElementById("colorPicker3").value,
-    base3: document.getElementById("colorPicker4").value,
-    accent: document.getElementById("colorPicker5").value,
-    text: document.getElementById("colorPicker6").value
+    color_base00: document.getElementById("colorPicker1").value,
+    color_base01: document.getElementById("colorPicker2").value,
+    color_base02: document.getElementById("colorPicker3").value,
+    color_base03: document.getElementById("colorPicker4").value,
+    color_accent: document.getElementById("colorPicker5").value,
+    color_text: document.getElementById("colorPicker6").value
   };
   window.localStorage.setItem("themedata", JSON.stringify(themeData));
 }
@@ -368,14 +368,28 @@ function handleQuotaExceededError() {
   <a href="https://www.freeconvert.com/image-compressor" id="errormessagesmpp" target="_blank">File too large must be +/- 1MB</p>
   `
 };
+function migrate_theme_data(old_themeData){
+  console.log("migrating_data")
+  const themeData = {
+    color_base00: old_themeData.base0,
+    color_base01: old_themeData.base1,
+    color_base02: old_themeData.base2,
+    color_base03: old_themeData.base3,
+    color_accent: old_themeData.accent,
+    color_text: old_themeData.text
+  };
+  window.localStorage.setItem("themedata", JSON.stringify(themeData));
+  return themeData
+}
+
 function loadCustomThemeData() {
   let themeData = JSON.parse(window.localStorage.getItem("themedata"))
-  document.getElementById("colorPicker1").value = themeData.base0
-  document.getElementById("colorPicker2").value = themeData.base1
-  document.getElementById("colorPicker3").value = themeData.base2
-  document.getElementById("colorPicker4").value = themeData.base3
-  document.getElementById("colorPicker5").value = themeData.accent
-  document.getElementById("colorPicker6").value = themeData.text
+  document.getElementById("colorPicker1").value = themeData.color_base00
+  document.getElementById("colorPicker2").value = themeData.color_base01
+  document.getElementById("colorPicker3").value = themeData.color_base02
+  document.getElementById("colorPicker4").value = themeData.color_base03
+  document.getElementById("colorPicker5").value = themeData.color_accent
+  document.getElementById("colorPicker6").value = themeData.color_text
 }
 function loadCustomTheme() {
   let themeData = JSON.parse(window.localStorage.getItem("themedata"))
@@ -471,12 +485,15 @@ function set_theme(name) {
       themeData = default_theme;
       window.localStorage.setItem("themedata", JSON.stringify(themeData));
     }
-    style.setProperty('--color-accent', themeData.accent);
-    style.setProperty('--color-text', themeData.text);
-    style.setProperty('--color-base00', themeData.base0);
-    style.setProperty('--color-base01', themeData.base1);
-    style.setProperty('--color-base02', themeData.base2);
-    style.setProperty('--color-base03', themeData.base3);
+    if (themeData.base0){
+      themeData = migrate_theme_data(themeData)
+    }
+    style.setProperty('--color-accent', themeData.color_accent);
+    style.setProperty('--color-text', themeData.color_text);
+    style.setProperty('--color-base00', themeData.color_base00);
+    style.setProperty('--color-base01', themeData.color_base01);
+    style.setProperty('--color-base02', themeData.color_base02);
+    style.setProperty('--color-base03', themeData.color_base03);
     style.setProperty('--loginpage-image', "url(https://wallpaperaccess.com/full/23.jpg)");
   } else {
     let theme = get_theme(name);

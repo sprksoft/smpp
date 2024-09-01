@@ -159,7 +159,8 @@ const themes = {
     "--loginpage-image": "url(https://i.redd.it/u80014ygsea51.png)",
     "--darken-background": "rgba(0,0,0,0.3)",
     "--color-splashtext": "#e1bbef"
-  }
+  },
+  "custom":{"d":"d"}
 }
 
 function get_theme(name) {
@@ -168,12 +169,13 @@ function get_theme(name) {
 
 function get_theme_var(theme, var_name) {
   console.log(theme)
-  if (theme != "custom"){
+  if (theme.d != "d"){
     let tvar = theme[var_name];
     if (tvar == undefined){
       console.error(`Theme var '${var_name}' doesn't exist`);
       return undefined;
     }
+    console.log(tvar)
     return tvar;
   } else{
     let themeData = JSON.parse(window.localStorage.getItem("themedata"))
@@ -181,7 +183,9 @@ function get_theme_var(theme, var_name) {
       themeData = default_theme;
       window.localStorage.setItem("themedata", JSON.stringify(themeData));
     }
-    console.log(themeData)
+    console.log(var_name.replace("--",""))
+    console.log(themeData[var_name.replace("--","").replace("-","_")])
+    return (themeData[var_name.replace("--","").replace("-","_")])
   }
 }
 function apply_theme(theme, style){
@@ -192,6 +196,7 @@ function apply_theme(theme, style){
 }
 function get_theme_as_query_string(theme, qvars){
   let output = "";
+  
   for (qvar of qvars){
     let tvar = get_theme_var(theme, "--"+qvar.replace("_", "-"));
     output+=`&${qvar}=${tvar.split("#")[1]}`;
