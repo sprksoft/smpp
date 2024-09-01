@@ -167,12 +167,22 @@ function get_theme(name) {
 }
 
 function get_theme_var(theme, var_name) {
-  let tvar = theme[var_name];
+  console.log(theme)
+  if (theme != "custom"){
+    let tvar = theme[var_name];
     if (tvar == undefined){
       console.error(`Theme var '${var_name}' doesn't exist`);
       return undefined;
     }
     return tvar;
+  } else{
+    let themeData = JSON.parse(window.localStorage.getItem("themedata"))
+    if (themeData == null) {
+      themeData = default_theme;
+      window.localStorage.setItem("themedata", JSON.stringify(themeData));
+    }
+    console.log(themeData)
+  }
 }
 function apply_theme(theme, style){
     let keys = Object.keys(theme);

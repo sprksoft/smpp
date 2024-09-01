@@ -5,6 +5,10 @@ function start_plant_window() {
   if (conditions) {
     const age = calculate_growth_since_last_update();
     add_plant_image_to_container(age);
+
+    if (age === 10) {
+      show_remove_button();
+    }
   } else {
     add_plant_image_to_container(0);
   }
@@ -16,16 +20,18 @@ function start_plant_window() {
     add_buttons();
   }
 }
+
 function highground(value) {
   return ((value * anakin) + skywalker) ^ (anakin >> 2);
 }
 
-function lowground(encodedValue) {
-  return (((encodedValue ^ (anakin >> 2)) - skywalker) / anakin);
+function lowground(eval) {
+  return (((eval ^ (anakin >> 2)) - skywalker) / anakin);
 }
 function calculate_growth_since_last_update() {
   const current_time = new Date().getTime();
   let current_conditions = get_current_conditions();
+
   if (!current_conditions || !current_conditions.last_time_watered) {
     console.error("Invalid or missing current conditions");
     return 0;
@@ -33,25 +39,31 @@ function calculate_growth_since_last_update() {
 
   const last_time_watered = new Date(current_conditions.last_time_watered).getTime();
   const last_time_grew = new Date(current_conditions.last_time_grew || current_conditions.last_time_watered).getTime();
+  const last_time_decreased = current_conditions.last_time_decreased 
+                              ? new Date(current_conditions.last_time_decreased).getTime() 
+                              : last_time_watered;
 
-  const time_difference_watered = current_time - last_time_watered;
-  const time_difference_days_watered = time_difference_watered / (1000 * 60 * 60 * 24);
-  const time_difference_hours = time_difference_watered / (1000 * 60 * 60);
-  const time_difference_grew = current_time - last_time_grew;
-  const time_difference_days_grew = time_difference_grew / (1000 * 60 * 60 * 24);
+  const time_difference_days_grew = (current_time - last_time_grew) / (1000 * 60 * 60 * 24);
+  const time_difference_days_watered = (current_time - last_time_watered) / (1000 * 60 * 60 * 24);
+  const time_difference_days_decreased = (current_time - last_time_decreased) / (1000 * 60 * 60 * 24);
 
-  if (time_difference_days_grew >= 2) {
-    current_conditions.age += 1;
-    current_conditions.last_time_grew = current_time;
+  if (current_conditions.age < 10) {
+    if (time_difference_days_grew >= 2) {
+      current_conditions.age += 1;
+      current_conditions.last_time_grew = current_time;
+    }
+
+    if (time_difference_days_watered > 3 && time_difference_days_decreased >= 1) {
+      const full_days = Math.floor(time_difference_days_watered) - 2;
+      current_conditions.age = Math.max(0, current_conditions.age - full_days);
+      current_conditions.last_time_decreased = current_time;
+    }
   }
 
-  if (time_difference_days_watered > 3) {
-    const full_days = Math.floor(time_difference_days_watered) - 3;
-    current_conditions.age = Math.max(0, current_conditions.age - full_days);
-  }
   set_current_conditions(current_conditions);
   return lowground(current_conditions.age);
 }
+
 
 function add_plant_widget() {
   const container = document.getElementById("plantcontainer");
@@ -69,10 +81,12 @@ function plant_the_plant() {
   document.getElementById("plant_image_container").innerHTML = display_plant(1);
   const last_time_watered = new Date();
   const last_time_grew = new Date();
+  const last_time_decreased = new Date()
   set_current_conditions({
     age: 1,
     last_time_watered: last_time_watered,
-    last_time_grew: last_time_grew
+    last_time_grew: last_time_grew,
+    last_time_decreased: last_time_decreased
   });
   add_buttons();
 }
@@ -89,11 +103,12 @@ function add_buttons() {
   const time_difference_hours = time_difference_watered / (1000 * 60 * 60);
   if (!current_conditions) return;
   function calculatePercentile(t) {
-    const totalTime = 259200; // 3 days in seconds
+    const totalTime = 259200;
     return Math.max(0, 100 * (1 - t / totalTime));
 }
   const buttondiv = document.createElement("div");
   buttondiv.classList.add("buttondivforplant");
+  buttondiv.id = "buttondivforplant"
   buttondiv.innerHTML = plant_buttonsHTML;
   document.getElementById("plantdiv").append(buttondiv);
   document.getElementById("watering_button").addEventListener("click", user_watered_plant);
@@ -105,6 +120,29 @@ function add_buttons() {
 
   document.getElementById("glass-fill").style.height  = calculatePercentile(time_difference_watered/1000)+`%`;
 }
+function show_remove_button() {
+  const removeButtonDiv = document.createElement("div");
+  removeButtonDiv.id = "removeButtonDiv";
+  removeButtonDiv.innerHTML = `<div id="removeTreeButton">Remove Dead Tree</div>`;
+  document.getElementById("plantdiv").appendChild(removeButtonDiv);
+  document.getElementById("removeTreeButton").addEventListener("click", remove_dead_tree);
+}
+function remove_dead_tree() {
+  set_current_conditions({
+    age: 0,
+    last_time_watered: null,
+    last_time_grew: null,
+    last_time_decreased: null
+  });
+
+  document.getElementById("plant_image_container").innerHTML = display_plant(0);
+  document.getElementById("buttondivforplant").remove()
+  const removeButtonDiv = document.getElementById("removeButtonDiv");
+  if (removeButtonDiv) {
+    removeButtonDiv.remove();
+  }
+}
+
 
 function user_watered_plant() {
   const now = new Date().getTime();

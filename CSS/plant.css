@@ -58,3 +58,23 @@
   bottom: 0;
   transition: height 1.5s ease-in-out; /* smooth transition */
 }
+#removeTreeButton{
+  border: 3px solid var(--color-base03);
+  background-color: var(--color-base02);
+  border-radius: 10px;
+  padding: 2.5px;
+  width: 80%;
+  position: relative;
+  left: 10%;
+  height: 32px;
+  transition: ease-in-out;
+  transition-duration: 0.1s;
+  font-size: 17px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+#removeTreeButton:hover{
+  background-color: var(--color-base03);
+  border-color: var(--color-accent);
+  cursor: pointer;
+}

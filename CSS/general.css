@@ -1320,3 +1320,6 @@ body.modern-ui .smscMain .smsc-container{
   padding-bottom: 16px !important;
   margin: 0px !important;
 }
+.profileInputTitle{
+  color: var(--color-text) !important
+}
