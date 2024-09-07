@@ -15,8 +15,8 @@
   background: var(--color-accent) !important;
 }
 
-.highlight.header__day:not(.header__wholeday-column)>.day,
-.highlight.header__day:not(.header__wholeday-column)>.day--thin {
+.highlight.header__day:not(.header__wholeday-column) > .day,
+.highlight.header__day:not(.header__wholeday-column) > .day--thin {
   color: var(--color-base02) !important;
 }
 
@@ -25,7 +25,6 @@
 .dialog-content {
   background: var(--color-base01) !important;
   border-color: var(--color-base02) !important;
-
 }
 
 .label__resolvedStatus {
@@ -34,7 +33,7 @@
 
 .icon-label-btn--linkbutton .icon-label {
   color: var(--color-accent) !important;
-  fill: var(--color-accent) !important
+  fill: var(--color-accent) !important;
 }
 
 .listview__row,
@@ -43,7 +42,6 @@
 span,
 .form__row--assignmentType--view {
   color: var(--color-text) !important;
-
 }
 
 .msg--bubble--blue {
@@ -53,7 +51,6 @@ span,
 .msg--bubble--green {
   background-color: var(--color-green) !important;
 }
-
 
 .splitdetail__content {
   background-color: var(--color-base01) !important;
@@ -65,20 +62,18 @@ span,
   color: var(--color-text) !important;
 }
 
-
 .title--2,
 .newsTitle1,
 .newsTitle2 {
   color: var(--color-text) !important;
 }
-.content__hourblock.js-hourblock{
+.content__hourblock.js-hourblock {
   border-top: 1px dotted !important;
   border-top-color: var(--color-text) !important;
 }
 .content__hourblock.content__hourblock--last.js-hourblock {
   border-bottom: 1px dotted !important;
   border-bottom-color: var(--color-text) !important;
-
 }
 .inline-editor__input:hover,
 .inline-editor__input::placeholder,
@@ -87,7 +82,6 @@ span,
 .inline-editor:not([readonly]):hover:after {
   background-color: var(--color-base00) !important;
 }
-
 
 .form__label--required::after {
   color: var(--color-accent) !important;
@@ -98,7 +92,11 @@ span,
   border-radius: 7px !important;
 }
 
-.todo-column [listview] .todo-column__row:hover .todo-column__actions-cell {
+.todo-column [listview] .todo-column__row:hover .todo-column__actions-cell,
+.todo-column
+  [listview]
+  .todo-column__row--resolved:hover
+  .todo-column__actions-cell {
   background-color: var(--color-base03) !important;
   transition: none !important;
 }
@@ -169,7 +167,6 @@ span,
 [inline-editor] .inline-editor__input:not([readonly]):focus,
 [inline-editor] .inline-editor__input:not([readonly]):hover {
   border-color: var(--color-base03) !important;
-
 }
 
 .choose-metadata__options label.checkbox.checked {
@@ -217,7 +214,7 @@ span,
   border-color: var(--color-base03) !important;
 }
 
-div.dialog__button-bar>button.btn.js-btn:not(.btn--primary),
+div.dialog__button-bar > button.btn.js-btn:not(.btn--primary),
 button.btn.close-btn.btn--primary {
   color: var(--color-red) !important;
 }
@@ -232,14 +229,14 @@ button.btn.close-btn.btn--primary {
   background-color: var(--darken-background) !important;
   border-radius: 10px !important;
 }
-.listview__row.js-listview-row:hover{
+.listview__row.js-listview-row:hover {
   background-color: transparent !important;
 }
-.listview__cell.js-listview-cell.listview__cell--icon-24.attachments__column.attachments__column--icon{
+.listview__cell.js-listview-cell.listview__cell--icon-24.attachments__column.attachments__column--icon {
   background-color: var(--color-base01);
 }
-.listview__cell.js-listview-cell.listview__cell--icon-24.attachments__column.attachments__column--icon:hover{
-background-color: var(--color-base02);
+.listview__cell.js-listview-cell.listview__cell--icon-24.attachments__column.attachments__column--icon:hover {
+  background-color: var(--color-base02);
 }
 .header.js-header {
   width: 90%;
@@ -312,7 +309,7 @@ input.input.bootstrap__input {
 .ple.js-ple.ple--brief.ple--past.ple--pending.ple--no-click,
 .ple-content.ple-content--pending:not(.ple-content--has-problem),
 div#ple-content--temporaryPlaceholder {
-  border-color: var(--color-base02) !important
+  border-color: var(--color-base02) !important;
 }
 
 .js-emptystate.detail-empty-state {
@@ -328,7 +325,7 @@ button.detail-todo-icon-and-color__icon:hover:not(.active-icon) {
 }
 
 button.detail-todo-icon-and-color__icon {
-  border: 2px solid transparent !important
+  border: 2px solid transparent !important;
 }
 
 .listview__cell.js-listview-cell.listview__cell--icon-24.column-icon {
@@ -338,14 +335,14 @@ button.detail-todo-icon-and-color__icon {
 .listview__cell.js-listview-cell.listview__cell--icon-24.column-icon:hover {
   background-color: transparent !important;
 }
-.header.js-header.header--single-line{
+.header.js-header.header--single-line {
   border-radius: 15px !important;
   border: 1px solid var(--color-base02) !important;
   padding-right: 10px !important;
   padding-left: 5px !important;
 }
 [bubble].bubble--tooltip {
-  color: var(--color-text) !important
+  color: var(--color-text) !important;
 }
 
 .evaluation-list-item.selected {
@@ -353,7 +350,7 @@ button.detail-todo-icon-and-color__icon {
   border-color: var(--color-accent) !important;
   background-color: var(--color-base02) !important;
 }
-button.evaluation-list-item{
+button.evaluation-list-item {
   background-color: var(--color-base01) !important;
 }
 .listview__row.js-listview-row.goals__row {
@@ -399,7 +396,11 @@ button.icon-label-btn.js-icon-label-btn.icon-label-btn--linkbutton:hover {
 }
 
 .listview__row.js-listview-row.planner-listview-data-row--selected.js-planner-listview-data-row--selected,
-.month-view .element.show-more-element:not(:hover):not(.state--hovered--forced).state--hovered .element__label-container {
+.month-view
+  .element.show-more-element:not(:hover):not(
+    .state--hovered--forced
+  ).state--hovered
+  .element__label-container {
   background-color: var(--color-base01) !important;
 }
 
@@ -409,7 +410,7 @@ button.icon-label-btn.js-icon-label-btn.icon-label-btn--linkbutton:hover {
 
 .month-view .grid-day.state--hovered,
 .month-view .week-day:not(.day--today).state--hovered .day-label {
-  background-color: var(--darken-background) !important
+  background-color: var(--darken-background) !important;
 }
 
 .month-view .header-row,
@@ -465,13 +466,14 @@ button.icon-label-btn.js-icon-label-btn.icon-label-btn--linkbutton:hover {
   margin-bottom: 0px !important;
   width: 100%;
 }
-#back_button_planner{
-background-image: url(https://static6.smart-school.net/smsc/svg/chevron_left/chevron_left_12x12.svg);
+#back_button_planner {
+  background-image: url(https://static6.smart-school.net/smsc/svg/chevron_left/chevron_left_12x12.svg);
 }
-#forward_button_planner{
-background-image: url(https://static6.smart-school.net/smsc/svg/chevron_right/chevron_right_12x12.svg);
+#forward_button_planner {
+  background-image: url(https://static6.smart-school.net/smsc/svg/chevron_right/chevron_right_12x12.svg);
 }
-#forward_button_planner,#back_button_planner{
+#forward_button_planner,
+#back_button_planner {
   background-position: 50%;
   background-repeat: no-repeat;
   height: 26px;
@@ -483,17 +485,17 @@ background-image: url(https://static6.smart-school.net/smsc/svg/chevron_right/ch
   transition: ease-in-out;
   transition-duration: 0.2s;
 }
-#forward_button_planner:hover,#back_button_planner:hover{
+#forward_button_planner:hover,
+#back_button_planner:hover {
   background-color: var(--color-base02);
   border-color: var(--color-accent);
-
 }
-.todo-column-container{
+.todo-column-container {
   border-left: 0px !important;
 }
-.btn.btn--dropdown.btn--warning:after{
-  background-image: url(/smsc/svg/driehoek_droplist_open/driehoek_droplist_open_9x9.svg) !important
+.btn.btn--dropdown.btn--warning:after {
+  background-image: url(/smsc/svg/driehoek_droplist_open/driehoek_droplist_open_9x9.svg) !important;
 }
-.detail-blob{
+.detail-blob {
   background-color: var(--color-base02) !important;
-} 
+}
