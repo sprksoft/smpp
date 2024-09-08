@@ -1,3 +1,5 @@
+/* vim:set shiftwidth=4: */
+
 function add_splash_text(){
     var login_app = document.querySelector('.login-app')
     var splash_text_element = document.createElement('div')
@@ -78,11 +80,15 @@ let splashtexts = [
     `Chet jipitie`,
     `Bloat`,
     `MERGE CONFLICT!`,
-    `In case of fire: git add .; git commit; git push`,
-    `Always remove French: sudo rm -fr`,
+    `In case of fire: git add . ; git commit ; git push`,
+    `Always remove French language pack: sudo rm -fr /`,
     undefined,
     `Is tHaT A JOjO ReFEreNce?`,
     `https://ldev.eu.org`,
+    `weak fingers`,
+    `I love the voice`,
+    `Run TempleOS. It’s incapable of treachery.`,
+    `Beep beep I'm a sheep`,
 ]
 function get_splash_text() {
     return splashtexts[Math.floor(Math.random() * splashtexts.length)]
@@ -90,3 +96,4 @@ function get_splash_text() {
 if (window.location.href.split('/')[3]=="login"){
     add_splash_text()
 }
+
