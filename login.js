@@ -89,6 +89,7 @@ let splashtexts = [
     `I love the voice`,
     `Run TempleOS. It’s incapable of treachery.`,
     `Beep beep I'm a sheep`,
+    `"‘why no work’, bro I haven't hacked your pc to get live feeds yet" - Vaxry`,
 ]
 function get_splash_text() {
     return splashtexts[Math.floor(Math.random() * splashtexts.length)]
