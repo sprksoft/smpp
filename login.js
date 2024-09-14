@@ -66,8 +66,7 @@ let splashtexts = [
     `English or Spanish?`,
     `Jennifer eet matrassen! WTF?`,
     `Listen to Amélie Farren!`,
-    `"How to exit VIM???"`,
-    `Are ya vimming son?`,
+    `"How to exit VIM???"`, `Are ya vimming son?`,
     `It's either Spanish or vanish`,
     `Are you hacking??`,
     `One eyed fighting Kirby :%s/\\(.*\\)`,
@@ -90,6 +89,7 @@ let splashtexts = [
     `Run TempleOS. It’s incapable of treachery.`,
     `Beep beep I'm a sheep`,
     `"‘why no work’, bro I haven't hacked your pc to get live feeds yet" - Vaxry`,
+    `I love yavascript !`,
 ]
 function get_splash_text() {
     return splashtexts[Math.floor(Math.random() * splashtexts.length)]
