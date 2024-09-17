@@ -90,6 +90,7 @@ let splashtexts = [
     `Beep beep I'm a sheep`,
     `"‘why no work’, bro I haven't hacked your pc to get live feeds yet" - Vaxry`,
     `I love yavascript !`,
+    `Always take your maths kids`,
 ]
 function get_splash_text() {
     return splashtexts[Math.floor(Math.random() * splashtexts.length)]
