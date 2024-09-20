@@ -244,9 +244,25 @@ button.btn.close-btn.btn--primary {
 }
 
 .header.js-header.header--single-line,
-.detail-lint.js-detail-lint,
+
 .splitdetail__content__topbtns {
   background-color: var(--color-base01) !important;
+}
+.detail-lint.js-detail-lint{
+  background-color: transparent !important;
+}
+.course-module-planner__timeline .timeline-row.planned-element-row .action-block__buttons{
+  background-color: var(--color-base02) !important;
+  transition: ease-in-out!important;
+  transition-duration: 0.2s !important;
+}
+button.icon-btn.js-icon-btn:hover{
+  border-color: transparent !important;
+  background-color: var(--color-base03) !important;
+}
+button.icon-btn.js-icon-btn{
+  transition: ease-in-out!important;
+transition-duration: 0.2s !important;
 }
 
 .splitdetail__content__topbtns {
@@ -498,4 +514,45 @@ button.icon-label-btn.js-icon-label-btn.icon-label-btn--linkbutton:hover {
 }
 .detail-blob {
   background-color: var(--color-base02) !important;
+}
+.course-page__container,.course-module-planner__timeline{
+  background-color: transparent !important;
+}
+.course-module-planner__header{
+  border: none !important;
+  border: 2px solid var(--color-base01) !important;
+  border-radius: 10px !important;
+}
+.course-page__container{
+box-shadow: none !important;
+border: none !important ;
+}
+.fluid-ui-heading--1,.info-block__daterow,.info-block__timerow{
+  color: var(--color-text) !important;
+}
+.card-block{
+background-color: var(--color-base01) !important;
+border: 2px solid var(--color-base01) !important;
+transition: ease-in-out!important;
+transition-duration: 0.2s !important;
+}
+.card-block:hover{
+  background-color: var(--color-base02) !important;
+  border-color: var(--color-accent) !important;
+  box-shadow: none !important;
+}
+h3.card-block__title.fluid-ui-heading.fluid-ui-heading--3{
+  color: var(--color-accent) !important;
+}
+.month-card-block{
+  border-radius: 5px !important;
+  background-color: transparent !important;
+  border: none !important;
+}
+.month-card-block:hover{
+  background-color: transparent !important;
+}
+.side-panel__panel{
+  border-top-left-radius: 15px !important;
+  border-bottom-left-radius: 15px !important;
 }

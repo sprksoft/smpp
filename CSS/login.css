@@ -80,12 +80,14 @@ a.smscButton[href="/login/sso/init/acm"],
 }
 
 .showLeftNav {
-  align-items: center !important;
-  justify-content: center !important;
   background-color: transparent !important;
   background-image: var(--loginpage-image) !important;
   background-position: center !important;
   background-size: cover !important;
+}
+.showLeftNav:has(.login-app){
+  align-items: center !important;
+  justify-content: center !important;
 }
 
 .float-label__input {

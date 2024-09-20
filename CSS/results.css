@@ -91,7 +91,9 @@ intra-list.smsc-container.smsc-container--main.smsc-container--flex,
 .leerplannen-overview.smsc-container.smsc-container--main,
 .reports-overview.smsc-container.smsc-container--main,
 upload-app.smsc-container.smsc-container--flex,
-.smsc-container.smsc-container--main.smsc-container--flex
+.smsc-container.smsc-container--main.smsc-container--flex,
+.course-module-planner__header,
+.course-module-planner
 {
   backdrop-filter: var(--blur-value-small) !important;
   background-color: var(--darken-background) !important;
@@ -244,7 +246,7 @@ input[type=search].input.search-input,
 
 .detail {
   padding: 10px !important;
-  overflow: hidden !important;
+  overflow: scroll !important;
 }
 
 .c-steel-combo--100,
