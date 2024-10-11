@@ -329,3 +329,12 @@ const plant_buttonsHTML = `
     </g>
   </svg> </div><div id=time_difference_last_watered class=time_difference_last_watered></div>
 `
+const topNavCustomPage = `
+<div>
+<a href="/" class="js-btn-home topnav__btn topnav__btn--push-right">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" class="st1" height="18px" width="18px" viewBox="0 0 256 256" enable-background="new 0 0 256 256" xml:space="preserve">
+<metadata> Svg Vector Icons : http://www.onlinewebfonts.com/icon</metadata>
+<g><g><path d="M241.4,104.9l-96-89.5c-4.9-5.5-11.9-8.7-19.3-8.7c-7.3,0-14.3,3.1-19,8.4l-92.5,89.8c-4.6,4.7-5.9,11.6-3.4,17.7c2.6,6.1,8.5,9.9,15.1,9.9h8.3v91.3c0,14.2,11.3,25.7,25.5,25.7h39.7c5.2,0,9.7-4.2,9.7-9.3v-60.7c0-2.6,1.7-4.9,4.3-4.9h28c2.6,0,4.6,2.3,4.6,4.9V240c0,5.2,4.3,9.3,9.5,9.3h39.7c14.2,0,25.8-11.5,25.8-25.7v-91.3h8.3c6.6,0,12.5-3.8,15.1-9.9C247.3,116.5,246,109.6,241.4,104.9L241.4,104.9z"></path></g></g>
+</svg></a>
+</div>
+`
