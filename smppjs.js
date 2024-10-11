@@ -503,4 +503,12 @@ function set_theme(name) {
     apply_theme(theme, style)
   }
 }
+
+if (window.location.pathname == "/sprksoft-smpp-info"){
+  document.head.innerHTML = '';
+  document.body.insertAdjacentHTML('beforeend', topNavCustomPage);
+  document.querySelector(".container").innerHTML = " ";
+}
+
+
 apply()
