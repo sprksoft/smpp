@@ -57,14 +57,7 @@ button.js-btn-search{
   color: var(--color-text) !important;
 }
 
-button.js-btn-search::before {
-  content: "{ ";
-  color: var(--color-base03);
-}
-button.js-btn-search::after {
-  content: " }  ";
-  color: var(--color-base03);
-}
+
 
 .toolbar,
 div.stdReplyWrapper,
