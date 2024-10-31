@@ -6,7 +6,7 @@ function start_plant_window() {
     const age = calculate_growth_since_last_update();
     add_plant_image_to_container(age);
 
-    if (age === 10) {
+    if (age === 8) {
       show_remove_button();
     }
   } else {
@@ -22,10 +22,12 @@ function start_plant_window() {
 }
 
 function highground(value) {
+  return value
   return ((value * anakin) + skywalker) ^ (anakin >> 2);
 }
 
 function lowground(eval) {
+  return eval
   return (((eval ^ (anakin >> 2)) - skywalker) / anakin);
 }
 function calculate_growth_since_last_update() {
@@ -82,11 +84,15 @@ function plant_the_plant() {
   const last_time_watered = new Date();
   const last_time_grew = new Date();
   const last_time_decreased = new Date()
+  var possible_colors = ["#fcb528","#004881","#f474d8","#c9022b","#ff6000","#ff596e","#8c78dd","#54205f","#dfd172"]
+  var chosen_color =  possible_colors[Math.floor(Math.random()*possible_colors.length)]
+  
   set_current_conditions({
     age: 1,
     last_time_watered: last_time_watered,
     last_time_grew: last_time_grew,
-    last_time_decreased: last_time_decreased
+    last_time_decreased: last_time_decreased,
+    plant_color: chosen_color
   });
   add_buttons();
 }
@@ -120,23 +126,33 @@ function add_buttons() {
 
   document.getElementById("glass-fill").style.height  = calculatePercentile(time_difference_watered/1000)+`%`;
 }
+
 function show_remove_button() {
   const removeButtonDiv = document.createElement("div");
   removeButtonDiv.id = "removeButtonDiv";
-  removeButtonDiv.innerHTML = `<div id="removeTreeButton">Remove Dead Tree</div>`;
+  const removeButtonInfoDiv = document.createElement("div");
+  removeButtonInfoDiv.id = "removeButtonInfoDiv";
+  removeButtonInfoDiv.innerHTML = `<p id="plant_remove_info_text">Tree is fully grown, you can remove it to plant a new one (optional)</p>`
+  removeButtonDiv.innerHTML = `<div style="width:20%"></div> <div id="removeTreeButton">Remove Tree</div> <div style="width:20%"><div id="remove_button_info">?</div></div>`;
+  document.getElementById("plantdiv").appendChild(removeButtonInfoDiv);
   document.getElementById("plantdiv").appendChild(removeButtonDiv);
   document.getElementById("removeTreeButton").addEventListener("click", remove_dead_tree);
+  document.getElementById("remove_button_info").addEventListener("mouseover", function(){
+    document.getElementById("plant_remove_info_text").style.opacity = "1"
+  });
 }
 function remove_dead_tree() {
   set_current_conditions({
     age: 0,
     last_time_watered: null,
     last_time_grew: null,
-    last_time_decreased: null
+    last_time_decreased: null,
+    plant_color: "#fff"
   });
 
   document.getElementById("plant_image_container").innerHTML = display_plant(0);
   document.getElementById("buttondivforplant").remove()
+  document.getElementById("removeButtonInfoDiv").remove()
   const removeButtonDiv = document.getElementById("removeButtonDiv");
   if (removeButtonDiv) {
     removeButtonDiv.remove();
@@ -176,6 +192,8 @@ function get_current_conditions() {
 function display_plant(age) {
   age = Number(age)
   console.log(age)
+  var style = document.documentElement.style
+  style.setProperty("--fruit-color",  get_current_conditions().plant_color)
   switch (age) {
     case (0):
       return `<div id="planttheplantbutton"><svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 50.16 37.5">
@@ -381,7 +399,7 @@ function display_plant(age) {
       <defs>
         <style>
           .cls-1 {
-            fill: #e45c00 !important;
+            fill: var(--fruit-color) !important;
           }
     
           .cls-1, .cls-2, .cls-3, .cls-4 {

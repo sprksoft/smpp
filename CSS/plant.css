@@ -58,14 +58,34 @@
   bottom: 0;
   transition: height 1.5s ease-in-out; /* smooth transition */
 }
+#removeButtonDiv{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+#remove_button_info{
+    border: 3px solid var(--color-base03);
+  background-color: var(--color-base02);
+  border-radius: 50%;
+  padding: 2.5px 5px 2.5px 5px;
+  position: relative;
+  align-self: center;
+  height: 32px;
+  width: 32px;
+  transition: ease-in-out;
+  transition-duration: 0.1s;
+  font-size: 17px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
 #removeTreeButton{
   border: 3px solid var(--color-base03);
   background-color: var(--color-base02);
   border-radius: 10px;
-  padding: 2.5px;
-  width: 80%;
+  padding: 2.5px 5px 2.5px 5px;
   position: relative;
-  left: 10%;
+  align-self: center;
   height: 32px;
   transition: ease-in-out;
   transition-duration: 0.1s;
@@ -77,4 +97,21 @@
   background-color: var(--color-base03);
   border-color: var(--color-accent);
   cursor: pointer;
+}
+#remove_button_info:hover{
+  background-color: var(--color-base03);
+  border-color: var(--color-accent);
+  cursor: pointer;
+}
+#removeButtonInfoDiv{
+  height: 10px;
+}
+#plant_remove_info_text{
+  top: -20px;
+  position: relative;
+  transition-duration: 0.1s;
+  transition-delay: 0.5s;
+  transition-property: all;
+  opacity: 0;
+  text-align: center;
 }
