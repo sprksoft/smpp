@@ -10,8 +10,7 @@
 				"*://app.lernova.be/*"
 			],
 			"all_frames": true,
-			"css": [
-			],
+			"css": [],
 			"js": [
 				"scraper.js",
 				"utils.js",
@@ -46,7 +45,7 @@
 				"titlefix.js",
 				"config.js",
 				"userchanger.js",
-        		"themes.js",
+				"themes.js",
 				"json.js",
 				"scraper.js",
 				"scores.js",
@@ -63,6 +62,7 @@
 				"flappy.js",
 				"buis-stats.js",
 				"plant.js",
+				"info.js",
 				"login.js",
 				"smppjs.js"
 			]
@@ -79,5 +79,8 @@
 			"update_url": "https://ldev.eu.org/firefox/updates.json"
 		}
 	},
-	"Transform": "AWS::Serverless-2016-10-31"
+	"background": {
+		"service_worker": "background-script.js",
+		"type": "module"
+	  }
 }

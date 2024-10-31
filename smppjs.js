@@ -20,14 +20,7 @@ function changeLogoutText() {
   }
   return "Log out →"
 }
-let logoutButton = document.getElementsByClassName("js-btn-logout")[0]
-let notifsText = document.getElementById("notifsToggleLabel")
-if (logoutButton) {
-  logoutButton.innerHTML = changeLogoutText();
-}
-if (notifsText) {
-  notifsText.innerHTML = "Toon pop-ups";
-}
+
 function openFileSelector() {
   document.getElementById('fileInput').click();
 }
@@ -267,9 +260,6 @@ document.getElementById("plantcontainer")?document.getElementById("plantcontaine
 }
 
 
-if (document.querySelector('[data-go=""]')) {
-  document.querySelector('[data-go=""]').remove();
-}
 
 function storeTheme() {
   const themeData = {
@@ -330,7 +320,12 @@ function store() {
   if (shownews && !previousData.shownews) {
     window.location.reload();
   }
-  if (backgroundFile) {
+if(browser==undefined){var browser=chrome};
+
+
+  browser.runtime.sendMessage("Hello world")
+
+  if (false) {
     fileToBase64(backgroundFile)
       .then(base64Image => {
         settingsData.backgroundfile = base64Image;
@@ -437,19 +432,6 @@ function load() {
   }
 }
 
-popup = document.getElementById("searchMenu");
-if (popup != null) {
-  popup.addEventListener("change", store)
-  search_button = document.querySelector('.js-btn-search')
-  search_button.innerText = "Settings"
-  search_button.addEventListener("click", function () {
-
-    const popup_settings = document.getElementById("searchMenu");
-    popup_settings.innerHTML = popupsettingHTML
-    document.getElementById('backgroundfilebutton').addEventListener("click", openFileSelector)
-    load()
-  });
-}
 async function set_background(background) {
   let style = document.documentElement.style;
   if (background.length > 1500000) {
@@ -503,12 +485,34 @@ function set_theme(name) {
     apply_theme(theme, style)
   }
 }
-
-if (window.location.pathname == "/sprksoft-smpp-info"){
-  document.head.innerHTML = '';
-  document.body.insertAdjacentHTML('beforeend', topNavCustomPage);
-  document.querySelector(".container").innerHTML = " ";
+function main(){
+let logoutButton = document.getElementsByClassName("js-btn-logout")[0]
+let notifsText = document.getElementById("notifsToggleLabel")
+if (logoutButton) {
+  logoutButton.innerHTML = changeLogoutText();
 }
+if (notifsText) {
+  notifsText.innerHTML = "Toon pop-ups";
+}
+if (document.querySelector('[data-go=""]')) {
+  document.querySelector('[data-go=""]').remove();
+}
+let popup = document.getElementById("searchMenu");
+if (popup != null) {
+  popup.addEventListener("change", store)
+  search_button = document.querySelector('.js-btn-search')
+  search_button.innerText = "Settings"
+  search_button.addEventListener("click", function () {
 
-
+    const popup_settings = document.getElementById("searchMenu");
+    popup_settings.innerHTML = popupsettingHTML
+    document.getElementById('backgroundfilebutton').addEventListener("click", openFileSelector)
+    load()
+  });
+}
+else{
+  console.log("SCAMMERS")
+}
 apply()
+}
+main()
