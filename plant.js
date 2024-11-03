@@ -1,18 +1,21 @@
 const current_plant_version = 2
+
 function start_plant_window() {
   add_plant_widget();
 
   const conditions = get_current_conditions();
-  if (conditions) {
-    const age = calculate_growth_since_last_update();
-    add_plant_image_to_container(age);
-
-    if (age === 8) {
-      show_remove_button();
-    }
-  } else {
-    add_plant_image_to_container(0);
+  console.log("got these: ", conditions)
+  var age = conditions.age
+  if (age != 0) {
+    age = calculate_growth_since_last_update();
   }
+  add_plant_image_to_container(age);
+
+  if (age == 8) {
+    show_remove_button();
+  }
+
+
   updated = check_update(conditions.plant_version)
   if (!updated) {
     display_update_prompt()
@@ -23,7 +26,7 @@ function start_plant_window() {
   if (plantButton) {
     plant_the_plant_button();
   } else {
-    add_buttons();
+    add_ui();
   }
 }
 
@@ -36,6 +39,7 @@ function lowground(eval) {
   return eval
   return (((eval ^ (anakin >> 2)) - skywalker) / anakin);
 }
+
 function calculate_growth_since_last_update() {
   const current_time = new Date().getTime();
   let current_conditions = get_current_conditions();
@@ -47,20 +51,17 @@ function calculate_growth_since_last_update() {
 
   const last_time_watered = new Date(current_conditions.last_time_watered).getTime();
   const last_time_grew = new Date(current_conditions.last_time_grew || current_conditions.last_time_watered).getTime();
-  const last_time_decreased = current_conditions.last_time_decreased
-    ? new Date(current_conditions.last_time_decreased).getTime()
-    : last_time_watered;
-
-  const time_difference_days_grew = (current_time - last_time_grew) / (1000 * 60 * 60 * 24);
-  const time_difference_days_watered = (current_time - last_time_watered) / (1000 * 60 * 60 * 24);
-  const time_difference_days_decreased = (current_time - last_time_decreased) / (1000 * 60 * 60 * 24);
+  const last_time_decreased = current_conditions.last_time_decreased ? new Date(current_conditions.last_time_decreased).getTime() : last_time_watered;
+  const days_in_ms = (1000 * 60 * 60 * 24)
+  const time_difference_days_grew = (current_time - last_time_grew) / days_in_ms;
+  const time_difference_days_watered = (current_time - last_time_watered) / days_in_ms;
+  const time_difference_days_decreased = (current_time - last_time_decreased) / days_in_ms;
 
   if (current_conditions.age < 10) {
     if (time_difference_days_grew >= 2) {
       current_conditions.age += 1;
       current_conditions.last_time_grew = current_time;
     }
-
     if (time_difference_days_watered > 2 && time_difference_days_decreased >= 1) {
       const full_days = Math.floor(time_difference_days_watered) - 1;
       current_conditions.age = Math.max(0, current_conditions.age - full_days);
@@ -86,13 +87,13 @@ function plant_the_plant_button() {
 }
 
 function plant_the_plant() {
-  add_plant_image_to_container(1)
   const last_time_watered = new Date();
   const last_time_grew = new Date();
   const last_time_decreased = new Date()
   var possible_colors = ["#fcb528", "#00adfe", "#f474d8", "#c9022b", "#ff6000", "#ff596e", "#6024c9", "#de51c1", "#d8d475", "#f5cb04"]
   var chosen_color = possible_colors[Math.floor(Math.random() * possible_colors.length)]
 
+  add_plant_image_to_container(1)
   set_current_conditions({
     age: 1,
     last_time_watered: last_time_watered,
@@ -101,14 +102,14 @@ function plant_the_plant() {
     plant_color: chosen_color,
     plant_version: current_plant_version
   });
-  add_buttons();
+  add_ui();
 }
 function calculatePercentile(t) {
   const totalTime = 172800;
   return Math.max(0, 100 * (1 - t / totalTime));
 }
 
-function add_buttons() {
+function add_ui() {
   const current_time = new Date().getTime();
   const current_conditions = get_current_conditions();
   if (!current_conditions || !current_conditions.last_time_watered) {
@@ -143,7 +144,7 @@ function show_remove_button() {
   removeButtonDiv.innerHTML = `<div style="width:20%"></div> <div id="removeplantButton">Remove plant</div> <div style="width:20%"><div id="remove_button_info">?</div></div>`;
   document.getElementById("plantdiv").appendChild(removeButtonInfoDiv);
   document.getElementById("plantdiv").appendChild(removeButtonDiv);
-  document.getElementById("removeplantButton").addEventListener("click", remove_dead_plant);
+  document.getElementById("removeplantButton").addEventListener("click", initialize_plant);
   document.getElementById("remove_button_info").addEventListener("mouseover", function () {
     document.getElementById("plant_remove_info_text").style.opacity = "1"
   });
@@ -162,9 +163,9 @@ function display_update_prompt() {
   let container = document.getElementById("plant_image_container")
   container.innerHTML = ""
   container.appendChild(update_div);
-  document.getElementById("removeplantButton").addEventListener("click", remove_dead_plant);
+  document.getElementById("removeplantButton").addEventListener("click", initialize_plant);
 }
-function remove_dead_plant() {
+function initialize_plant() {
   set_current_conditions({
     age: 0,
     last_time_watered: null,
@@ -174,20 +175,11 @@ function remove_dead_plant() {
     plant_version: current_plant_version
   });
   add_plant_image_to_container(0)
-  document.getElementById("buttondivforplant")?document.getElementById("buttondivforplant").remove():"pass"
-  document.getElementById("removeButtonInfoDiv")?document.getElementById("removeButtonInfoDiv").remove():"pass"
-  const removeButtonDiv = document.getElementById("removeButtonDiv");
-  if (removeButtonDiv) {
-    removeButtonDiv.remove();
-  }
   plant_the_plant_button()
 }
 
 function user_watered_plant() {
-  const now = new Date().getTime();
   const current_conditions = get_current_conditions();
-  if (!current_conditions) return;
-
   document.getElementById('time_difference_last_watered').innerHTML = `Last watered: \n` + `Now`
   current_conditions.last_time_watered = new Date();
   set_current_conditions(current_conditions);
@@ -204,13 +196,19 @@ function set_current_conditions(current_conditions_local) {
 }
 
 function get_current_conditions() {
-
+  console.log("getting/setting conditions")
   let local_current_conditions = JSON.parse(localStorage.getItem("current_plant_conditions"));
-  if (local_current_conditions) {
+  if (!local_current_conditions) {
+    initialize_plant()
+    get_current_conditions()
+    
+  }else{
     local_current_conditions.age = lowground(local_current_conditions.age)
+    console.log(local_current_conditions)
+    return local_current_conditions
   }
-  return local_current_conditions
 }
+
 function check_update(version_number) {
   if (!version_number || version_number != current_plant_version) {
     return false
@@ -219,9 +217,7 @@ function check_update(version_number) {
 }
 function display_plant(age) {
   age = Number(age)
-  console.log(age)
   var style = document.documentElement.style
-  style.setProperty("--fruit-color", get_current_conditions().plant_color)
   switch (age) {
     case (0):
       return `<div id="planttheplantbutton"><svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 50.16 37.5">
@@ -423,6 +419,7 @@ function display_plant(age) {
       </g>
     </svg>`
     case (8):
+      style.setProperty("--fruit-color", get_current_conditions().plant_color)
       return `<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 132.59 174.07">
       <defs>
         <style>
