@@ -10,6 +10,8 @@ const default_theme = {
   color_text: "#ede3e3"
 }
 
+if (browser == undefined) { var browser = chrome };
+
 function unbloat() {
   document.body.innerHTML = '';
 }
@@ -50,7 +52,6 @@ async function apply() {
   const colorpickers = document.getElementById("colorpickers");
   console.log(settingsData)
   const profileSelect = settingsData.profile
-  const backgroundFile = settingsData.backgroundfile
   const backgroundLink = settingsData.backgroundlink
   const halte = settingsData.halte
   const overwrite_theme = settingsData.overwrite_theme;
@@ -133,11 +134,6 @@ async function apply() {
       }
     }
   });
-  if (overwrite_theme == 2) {
-    set_background(backgroundFile);
-  } else if (overwrite_theme == 1) {
-    set_backgroundlink(backgroundLink)
-  }
   if (colorpickers != undefined && profileSelect != "custom") {
     colorpickers.innerHTML = ``
   }
@@ -160,7 +156,7 @@ async function apply() {
   if (centralContainer) {
 
     discordpopup()
-    if(rightContainer){
+    if (rightContainer) {
       rightContainer.innerHTML = ""
       rightContainer.style.display = "none"
     }
@@ -170,12 +166,12 @@ async function apply() {
       leftcontainer.innerHTML = " "
       leftcontainer.style.display = "none"
     }
-document.getElementById("leftcontainer")?document.getElementById("leftcontainer").remove() : "pass"
-document.getElementById("rightcontainer")?document.getElementById("rightcontainer").remove() : "pass"
-document.getElementById("plannercontainer")?document.getElementById("plannercontainer").remove() : "pass"
-document.getElementById("weathercontainer")?document.getElementById("weathercontainer").remove() : "pass"
-document.getElementById("delijncontainer")?document.getElementById("delijncontainer").remove() : "pass"
-document.getElementById("plantcontainer")?document.getElementById("plantcontainer").remove() : "pass"
+    document.getElementById("leftcontainer") ? document.getElementById("leftcontainer").remove() : "pass"
+    document.getElementById("rightcontainer") ? document.getElementById("rightcontainer").remove() : "pass"
+    document.getElementById("plannercontainer") ? document.getElementById("plannercontainer").remove() : "pass"
+    document.getElementById("weathercontainer") ? document.getElementById("weathercontainer").remove() : "pass"
+    document.getElementById("delijncontainer") ? document.getElementById("delijncontainer").remove() : "pass"
+    document.getElementById("plantcontainer") ? document.getElementById("plantcontainer").remove() : "pass"
 
     if (halte) {
       var DelijnAppElement = document.createElement("div")
@@ -193,14 +189,14 @@ document.getElementById("plantcontainer")?document.getElementById("plantcontaine
       container.prepend(PlannerAppElement)
       ShowPlanner(0)
     }
-    if (show_plant){
+    if (show_plant) {
       var PlantAppElement = document.createElement("div")
       PlantAppElement.classList.add("homepage__right")
       PlantAppElement.classList.add("smsc-container--right")
       PlantAppElement.setAttribute("id", "plantcontainer")
       container.append(PlantAppElement)
       start_plant_window()
-  }
+    }
     if (loc != "") {
       var WeatherAppElement = document.createElement("div")
       WeatherAppElement.classList.add("homepage__right")
@@ -210,17 +206,17 @@ document.getElementById("plantcontainer")?document.getElementById("plantcontaine
       await set_weather_loc(loc, IsBig);
     }
     if (showsnake) {
-      if(!document.getElementById("weathercontainer")){
+      if (!document.getElementById("weathercontainer")) {
         var WeatherAppElement = document.createElement("div")
         WeatherAppElement.classList.add("homepage__right")
         WeatherAppElement.classList.add("smsc-container--right")
         WeatherAppElement.setAttribute("id", "weathercontainer")
         container.append(WeatherAppElement)
       }
-        startSnakeGame()
+      startSnakeGame()
     }
     if (showflappy) {
-      if(!document.getElementById("weathercontainer")){
+      if (!document.getElementById("weathercontainer")) {
         var WeatherAppElement = document.createElement("div")
         WeatherAppElement.classList.add("homepage__right")
         WeatherAppElement.classList.add("smsc-container--right")
@@ -241,26 +237,33 @@ document.getElementById("plantcontainer")?document.getElementById("plantcontaine
   var rain = document.getElementById('raindrops')
   var snow = document.getElementById('snowflakes')
   var meteor = document.getElementById('star')
-  if (weatherSelector == 0){
+  if (weatherSelector == 0) {
     set_snow_level(weatherAmount);
-    rain != undefined?rain.remove():0
-    meteor != undefined?meteor.remove():0
+    rain != undefined ? rain.remove() : 0
+    meteor != undefined ? meteor.remove() : 0
 
-  } else if( weatherSelector == 1){
-    rain != undefined?rain.remove():0
-    snow != undefined?snow.remove():0
+  } else if (weatherSelector == 1) {
+    rain != undefined ? rain.remove() : 0
+    snow != undefined ? snow.remove() : 0
     set_overlay_based_on_conditions(weatherAmount)
   }
-  else if (weatherSelector == 2){
+  else if (weatherSelector == 2) {
     set_rain_level(weatherAmount);
-    meteor != undefined?meteor.remove():0
-    snow != undefined?snow.remove():0
+    meteor != undefined ? meteor.remove() : 0
+    snow != undefined ? snow.remove() : 0
   } else {
     console.error("No weather selector")
   }
-  if (gc_initialized){
+  if (gc_initialized) {
     remove_gcwin()
     make_gcwin(true)
+  }
+  document.getElementById("background_image")?document.getElementById("background_image").style.display = "none":"pass"
+  if (overwrite_theme == 2) {
+    console.log("setting background with file")
+    set_background();
+  } else if (overwrite_theme == 1) {
+    set_backgroundlink(backgroundLink)
   }
 }
 
@@ -305,7 +308,6 @@ function store() {
   settingsData.halte = halte;
   settingsData.overwrite_theme = overwrite_theme;
   settingsData.location = loc.charAt(0).toUpperCase() + loc.slice(1);
-  settingsData.backgroundfile = backgroundFile
   settingsData.backgroundlink = backgroundLink
   settingsData.blur = slider;
   settingsData.weatherAmount = parseInt(weatherSlider);
@@ -325,35 +327,23 @@ function store() {
   if (shownews && !previousData.shownews) {
     window.location.reload();
   }
-if(browser==undefined){var browser=chrome};
 
+  if (backgroundFile) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const imageData = reader.result;
+      browser.runtime.sendMessage({ action: 'saveBackgroundImage', data: imageData });
+      console.log(imageData)
+    };
+    reader.readAsDataURL(backgroundFile); // Convert file to base64 data URL
 
-  browser.runtime.sendMessage("Hello world")
-
-  if (false) {
-    fileToBase64(backgroundFile)
-      .then(base64Image => {
-        settingsData.backgroundfile = base64Image;
-        window.localStorage.setItem("settingsdata", JSON.stringify(settingsData));
-        if (profileSelect == "custom") {
-          loadCustomTheme();
-        }
-        if (base64Image.length < 1500000) {
-          document.getElementById("errormessagesmpp").innerHTML = ``
-
-        }
-        apply();
-      })
-      .catch(error => {
-        if (error instanceof DOMException && error.name === 'QuotaExceededError') {
-          handleQuotaExceededError();
-        } else {
-          console.error('An error occurred:', error);
-        }
-        apply()
-      });
-  } else {
-    settingsData.backgroundfile = previousData.backgroundfile
+    set_config(settingsData)
+    if (profileSelect == "custom") {
+      loadCustomTheme();
+    }
+    apply();
+  }
+  else {
     set_config(settingsData)
     if (profileSelect == "custom") {
       loadCustomTheme();
@@ -362,13 +352,7 @@ if(browser==undefined){var browser=chrome};
   }
 };
 
-
-function handleQuotaExceededError() {
-  document.getElementById("errormessagesmpp").innerHTML = `
-  <a href="https://www.freeconvert.com/image-compressor" id="errormessagesmpp" target="_blank">File too large must be +/- 1MB</p>
-  `
-};
-function migrate_theme_data(old_themeData){
+function migrate_theme_data(old_themeData) {
   console.log("migrating_data")
   const themeData = {
     color_base00: old_themeData.base0,
@@ -437,18 +421,40 @@ function load() {
   }
 }
 
-async function set_background(background) {
+async function set_background() {
   let style = document.documentElement.style;
-  if (background.length > 1500000) {
-    if (document.getElementById("errormessagesmpp")) {
-      handleQuotaExceededError()
+  browser.storage.local.get('backgroundImage', (result) => {
+    style.setProperty('--loginpage-image', `none`);
+    style.setProperty('--background-color', `transparent`);
+    style.setProperty('--background-color', `transparent`);
+    console.log(document.getElementById("background_image"))
+    var img
+    if (document.getElementById("background_image")){
+    img = document.getElementById("background_image")
+    }else{
+    img = document.createElement('img');
+    img.id = "background_image"
     }
-  }
-  style.setProperty('--loginpage-image', 'url(data:image/png;base64,' + background + ')');
+    console.log(result.backgroundImage)
+    img.style.position = 'absolute';
+    img.style.top = '0';
+    img.style.left = '0';
+    img.style.width = '100vw';
+    img.style.height = '100vh';
+    img.style.objectFit = 'cover';
+    img.style.zIndex = -1;
+    img.style.display = "block"
+    img.src = result.backgroundImage;
+    if (!document.getElementById("background_image")){
+      document.body.appendChild(img);
+    }
+  });
 }
 
 async function set_backgroundlink(background) {
+
   let style = document.documentElement.style;
+  style.setProperty('--background-color', `var(--color-base00)`);
   if (!background) {
     console.error("Background URL is empty or undefined.");
     style.setProperty('--loginpage-image', 'none');
@@ -472,7 +478,7 @@ function set_theme(name) {
       themeData = default_theme;
       window.localStorage.setItem("themedata", JSON.stringify(themeData));
     }
-    if (themeData.base0){
+    if (themeData.base0) {
       themeData = migrate_theme_data(themeData)
       loadCustomThemeData()
     }
@@ -491,34 +497,34 @@ function set_theme(name) {
     apply_theme(theme, style)
   }
 }
-function main(){
-let logoutButton = document.getElementsByClassName("js-btn-logout")[0]
-let notifsText = document.getElementById("notifsToggleLabel")
-if (logoutButton) {
-  logoutButton.innerHTML = changeLogoutText();
-}
-if (notifsText) {
-  notifsText.innerHTML = "Toon pop-ups";
-}
-if (document.querySelector('[data-go=""]')) {
-  document.querySelector('[data-go=""]').remove();
-}
-let popup = document.getElementById("searchMenu");
-if (popup != null) {
-  popup.addEventListener("change", store)
-  search_button = document.querySelector('.js-btn-search')
-  search_button.innerText = "Settings"
-  search_button.addEventListener("click", function () {
+function main() {
+  let logoutButton = document.getElementsByClassName("js-btn-logout")[0]
+  let notifsText = document.getElementById("notifsToggleLabel")
+  if (logoutButton) {
+    logoutButton.innerHTML = changeLogoutText();
+  }
+  if (notifsText) {
+    notifsText.innerHTML = "Toon pop-ups";
+  }
+  if (document.querySelector('[data-go=""]')) {
+    document.querySelector('[data-go=""]').remove();
+  }
+  let popup = document.getElementById("searchMenu");
+  if (popup != null) {
+    popup.addEventListener("change", store)
+    search_button = document.querySelector('.js-btn-search')
+    search_button.innerText = "Settings"
+    search_button.addEventListener("click", function () {
 
-    const popup_settings = document.getElementById("searchMenu");
-    popup_settings.innerHTML = popupsettingHTML
-    document.getElementById('backgroundfilebutton').addEventListener("click", openFileSelector)
-    load()
-  });
-}
-else{
-  console.log("SCAMMERS")
-}
-apply()
+      const popup_settings = document.getElementById("searchMenu");
+      popup_settings.innerHTML = popupsettingHTML
+      document.getElementById('backgroundfilebutton').addEventListener("click", openFileSelector)
+      load()
+    });
+  }
+  else {
+    console.log("SCAMMERS")
+  }
+  apply()
 }
 main()

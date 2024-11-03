@@ -5,6 +5,7 @@ html {
   --color-base01: #191817;
   --color-base02: #191817;
   --color-base03: #191817;
+  --background-color: var(--color-base00);
   --color-blue: #378cd1;
   --color-red: #cb5144;
   --color-green: #3c9534;
@@ -31,9 +32,8 @@ html {
 /* hier is beter smartschool code*/
 #modal-content,
 #content-container {
-  background-color: var(--color-base00) !important;
+  background-color: var(--background-color) !important;
 }
-
 .js-btn-profile>img,
 .header__avatar,
 .topnav__menuitem>img,
@@ -144,7 +144,7 @@ body.modern-ui .homepage__block:not(:last-child) {
 
 
 .groupTree {
-  background-color: var(--color-base00) !important;
+  background-color: var(--background-color) !important;
   color: var(--color-text) !important;
 }
 
@@ -312,7 +312,7 @@ td:not(.cb-container,[style="height:20px;"],[colspan='3']),
 .action-button,
 span.smsc-inlineeditor--disabled.smsc-inlineeditor__editor,
 smsc-inlineeditor.smsc-table__cell--inlineeditor {
-  background-color: var(--color-base00) !important;
+  background-color: var(--background-color) !important;
 }
 
 .smsc-contextmenu__content,
@@ -370,7 +370,7 @@ smsc-inlineeditor.smsc-table__cell--inlineeditor {
 
 #smscMainBlockContainer,
 .notifyScreenContainer {
-  background-color: var(--color-base00) !important;
+  background-color: var(--background-color) !important;
   border: 0px solid var(--color-accent) !important;
   box-shadow: none;
 }
@@ -1187,7 +1187,7 @@ background-color: var(--color-base02) !important;
 border: 2px solid var(--color-base03) !important;
 }
 .smsc-container:has(.form-page__header-wrapper){
-  background-color: var(--color-base00) !important;
+  background-color: var(--background-color) !important;
   background-image: var(--loginpage-image) !important;
   background-position: center !important;
   background-size: cover !important;

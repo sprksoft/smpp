@@ -96,7 +96,8 @@ let splashtexts = [
     `Oh No! anyways`,
     `Nobody expects the Spanish Inquisition!`,
     `Beans Beans Beans!`,
-    `Baby Shark, doo-doo, doo-doo, doo-doo`
+    `Baby Shark, doo-doo, doo-doo, doo-doo`,
+    `Brood int frans`
 ]
 function get_splash_text() {
     return splashtexts[Math.floor(Math.random() * splashtexts.length)]
