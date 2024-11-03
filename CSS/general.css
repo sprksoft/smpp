@@ -1317,3 +1317,8 @@ body.modern-ui .smscMain .smsc-container{
 .profileInputTitle{
   color: var(--color-text) !important
 }
+@media (max-height: 700px), screen and (max-width: 1280px) {
+  .twinbutton__button--middle {
+    color: transparent !important;
+  }
+}

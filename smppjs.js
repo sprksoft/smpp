@@ -2,7 +2,12 @@
 //ok - ldev
 //oke logis - andere ldev
 const default_theme = {
-  base0: "#38313a", base1: "#826882", base2: "#ac85b7", base3: "#c78af0", accent: "#a3a2ec", text: "#ede3e3"
+  color_accent: "#a3a2ec",
+  color_base00: "#38313a",
+  color_base01: "#826882",
+  color_base02: "#ac85b7",
+  color_base03: "#c78af0",
+  color_text: "#ede3e3"
 }
 
 function unbloat() {
@@ -469,6 +474,7 @@ function set_theme(name) {
     }
     if (themeData.base0){
       themeData = migrate_theme_data(themeData)
+      loadCustomThemeData()
     }
     style.setProperty('--color-accent', themeData.color_accent);
     style.setProperty('--color-text', themeData.color_text);
