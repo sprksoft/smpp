@@ -79,7 +79,7 @@
   margin-bottom: 10px;
   margin-left: 10px;
 }
-#removeTreeButton{
+#removeplantButton{
   border: 3px solid var(--color-base03);
   background-color: var(--color-base02);
   border-radius: 10px;
@@ -93,7 +93,7 @@
   margin-top: 10px;
   margin-bottom: 10px;
 }
-#removeTreeButton:hover{
+#removeplantButton:hover{
   background-color: var(--color-base03);
   border-color: var(--color-accent);
   cursor: pointer;
@@ -107,11 +107,15 @@
   height: 10px;
 }
 #plant_remove_info_text{
-  top: -20px;
+  top: -35px;
+  background-color: var(--color-base02);
+  border: 2px solid var(--color-base03);
+  padding: 5px;
+  border-radius: 10px;
   position: relative;
-  transition-duration: 0.1s;
-  transition-delay: 0.5s;
-  transition-property: all;
+  transition-duration: 0.2s;
+  transition-delay: 0.2s;
+  transition-timing-function: ease-in-out;
   opacity: 0;
   text-align: center;
 }
