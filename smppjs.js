@@ -329,21 +329,22 @@ function store() {
   }
 
   if (backgroundFile) {
+    console.log("backgroundFile")
     const reader = new FileReader();
     reader.onload = () => {
       const imageData = reader.result;
       browser.runtime.sendMessage({ action: 'saveBackgroundImage', data: imageData });
-      console.log(imageData)
     };
-    reader.readAsDataURL(backgroundFile); // Convert file to base64 data URL
-
+    reader.readAsDataURL(backgroundFile);
+    console.log("making true")
     set_config(settingsData)
     if (profileSelect == "custom") {
       loadCustomTheme();
     }
-    apply();
+    window.location.reload()
   }
   else {
+    console.log("no backgroundFile")
     set_config(settingsData)
     if (profileSelect == "custom") {
       loadCustomTheme();
@@ -421,21 +422,14 @@ function load() {
   }
 }
 
-async function set_background() {
+function set_background() {
   let style = document.documentElement.style;
   browser.storage.local.get('backgroundImage', (result) => {
     style.setProperty('--loginpage-image', `none`);
     style.setProperty('--background-color', `transparent`);
-    style.setProperty('--background-color', `transparent`);
-    console.log(document.getElementById("background_image"))
-    var img
-    if (document.getElementById("background_image")){
-    img = document.getElementById("background_image")
-    }else{
-    img = document.createElement('img');
-    img.id = "background_image"
-    }
-    console.log(result.backgroundImage)
+    let img = document.getElementById("background_image") || document.createElement('img');
+    img.id = "background_image";
+    console.log(result.backgroundImage);
     img.style.position = 'absolute';
     img.style.top = '0';
     img.style.left = '0';
@@ -443,13 +437,14 @@ async function set_background() {
     img.style.height = '100vh';
     img.style.objectFit = 'cover';
     img.style.zIndex = -1;
-    img.style.display = "block"
+    img.style.display = "block";
     img.src = result.backgroundImage;
-    if (!document.getElementById("background_image")){
+    if (!document.getElementById("background_image")) {
       document.body.appendChild(img);
     }
   });
 }
+
 
 async function set_backgroundlink(background) {
 
