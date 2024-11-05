@@ -894,6 +894,10 @@ label.form__label.js-form-label.label__resolvedStatus.form__label--no-margin-top
   background-color: var(--color-base02) !important;
 }
 
+.header.js-header.overview-page__header.header--single-line{
+  flex: auto !important;
+}
+
 .discordbutton {
   display: flex;
   margin: auto;
