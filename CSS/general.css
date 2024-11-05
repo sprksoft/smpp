@@ -133,7 +133,8 @@ body.modern-ui .homepage__block:not(:last-child) {
   color: var(--color-text) !important;
 }
 
-.skin .skinButtonBg {
+.skin .skinButtonBg,
+div#draftSaved{
   background-image: none !important;
 }
 
