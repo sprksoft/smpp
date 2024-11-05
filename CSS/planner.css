@@ -556,3 +556,6 @@ h3.card-block__title.fluid-ui-heading.fluid-ui-heading--3{
   border-top-left-radius: 15px !important;
   border-bottom-left-radius: 15px !important;
 }
+.blob-group__blob.blob{
+  background-color: var(--color-base01) !important;
+}
