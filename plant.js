@@ -9,6 +9,8 @@ function start_plant_window() {
   if (age != 0) {
     age = calculate_growth_since_last_update();
   }
+  const time_since_birthday = (current_time - new Date(current_conditions.birth_day).getTime())/(1000 * 60 * 60 * 24);
+
   add_plant_image_to_container(age);
 
   if (age == 8) {
@@ -90,9 +92,9 @@ function plant_the_plant() {
   const last_time_watered = new Date();
   const last_time_grew = new Date();
   const last_time_decreased = new Date()
+  const birth_day = new Date()
   var possible_colors = ["#fcb528", "#00adfe", "#f474d8", "#c9022b", "#ff6000", "#ff596e", "#6024c9", "#de51c1", "#d8d475", "#f5cb04"]
   var chosen_color = possible_colors[Math.floor(Math.random() * possible_colors.length)]
-
   add_plant_image_to_container(1)
   set_current_conditions({
     age: 1,
@@ -100,7 +102,8 @@ function plant_the_plant() {
     last_time_grew: last_time_grew,
     last_time_decreased: last_time_decreased,
     plant_color: chosen_color,
-    plant_version: current_plant_version
+    plant_version: current_plant_version,
+    birth_day: birth_day
   });
   add_ui();
 }
@@ -119,12 +122,17 @@ function add_ui() {
   const last_time_watered = new Date(current_conditions.last_time_watered).getTime();
   const time_difference_watered = current_time - last_time_watered;
   const time_difference_hours = time_difference_watered / (1000 * 60 * 60);
-  if (!current_conditions) return;
+  const time_since_birthday = Math.round((current_time - new Date(current_conditions.birth_day).getTime())/(1000 * 60 * 60 * 24));
   const buttondiv = document.createElement("div");
   buttondiv.classList.add("buttondivforplant");
   buttondiv.id = "buttondivforplant"
   buttondiv.innerHTML = plant_buttonsHTML;
+  const plant_streak = document.createElement("div")
+  plant_streak.classList.add("plant_streak_div")
+  plant_streak.id = "plant_streak"
+  plant_streak.innerText = `<p id="plant_streak">${time_since_birthday}Days</p>`
   document.getElementById("plantdiv").append(buttondiv);
+  document.getElementById("plantdiv").prepend(plant_streak);
   document.getElementById("watering_button").addEventListener("click", user_watered_plant);
   if (time_difference_hours < 1) {
     document.getElementById('time_difference_last_watered').innerHTML = `Last watered: \n` + Math.floor(time_difference_hours * 60) + `min ago`
@@ -172,7 +180,8 @@ function initialize_plant() {
     last_time_grew: null,
     last_time_decreased: null,
     plant_color: "#fff",
-    plant_version: current_plant_version
+    plant_version: current_plant_version,
+    birth_day: null
   });
   add_plant_image_to_container(0)
   plant_the_plant_button()

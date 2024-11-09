@@ -133,7 +133,8 @@ body.modern-ui .homepage__block:not(:last-child) {
   color: var(--color-text) !important;
 }
 
-.skin .skinButtonBg {
+.skin .skinButtonBg,
+div#draftSaved{
   background-image: none !important;
 }
 
@@ -898,6 +899,7 @@ label.form__label.js-form-label.label__resolvedStatus.form__label--no-margin-top
   flex: auto !important;
 }
 
+
 .discordbutton {
   display: flex;
   margin: auto;
@@ -1177,7 +1179,8 @@ a.js-btn-messages.topnav__btn:hover {
 .homepage__left {
   border-right: 4px solid var(--color-base01) !important;
 }
-textarea{
+textarea,
+td.cb-container{
   background-color: var(--color-base00) !important;
 }
 .card{
@@ -1211,7 +1214,8 @@ border: 2px solid var(--color-base03) !important;
   border: 2px solid var(--color-base03) !important;
   padding: 10px !important;
 }
-.form-item.js-form-item{
+.form-item.js-form-item,
+span.smsc-inlineeditor--disabled.smsc-inlineeditor__editor{
   background-color: transparent !important;
 }
 textarea.form-item__input-field.form-item__input-field--textarea{
