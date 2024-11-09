@@ -105,10 +105,10 @@ function flappyGame() {
     let birdX = canvas.width / 4;
     let birdY = 110;
     let bgX = 0;
-    let gravity = 0.5;
-    let gravitySpeed = 0.2
+    let gravity = (flappyspeed/100)*0.5;
+    let gravitySpeed = (flappyspeed/100)*0.2
 
-    const pipeGap = 65
+    const pipeGap = ((flappyspeed/250)*65)+50
     const pipeSpeed = (flappyspeed / 100) * 3;
 
     let score = 0;
@@ -121,7 +121,7 @@ function flappyGame() {
 
     class Pipe {
         constructor() {
-            this.y = Math.random() * (canvas.height - 90) + 20;
+            this.y = Math.random() * (canvas.height - 90) -10;
             this.x = canvas.width;
             this.didScored = false;
         }
@@ -135,7 +135,7 @@ function flappyGame() {
             }
             if (this.x < -pipeWidth) {
                 this.x = canvas.width;
-                this.y = Math.random() * (canvas.height - 90) + 20;
+                this.y = Math.random() * (canvas.height - 90) - 10;
                 this.didScored = false;
             }
         }
@@ -231,11 +231,12 @@ function flappyGame() {
     document.addEventListener('keydown', (e) => {
         if (e.code === 'Space' || e.code === 'ArrowUp') {
             e.preventDefault();
-            gravity = -4;
+            console.log(gravity)
+            gravity =  (flappyspeed/140)*(-4);
         }
     });
     canvas.addEventListener('mousedown', (e) => {
         e.preventDefault();
-        gravity = -4;
+        gravity = (flappyspeed/140)*(-4);
     })
 }
