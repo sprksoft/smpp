@@ -149,6 +149,15 @@ const themes = {
     "--darken-background": "rgba(0,0,0,0.15)",
     "--color-splashtext": "#e0c7b5"
   },
+  "pizza": {
+    "--color-base00": "#4b2611",
+    "--color-base01": "#7a4e23",
+    "--color-base02": "#9b6e2c",
+    "--color-base03": "#b33232",
+    "--color-accent": "#c3be9d",
+    "--color-text": "#cfc9b8",
+    "--loginpage-image": "url(https://github.com/NightFlavor/smpp-images/blob/main/watjpg.jpg?raw=true)",
+  },
   "galaxy": {
     "--color-accent": "#daa0ef",
     "--color-text": "#f0f0f0",
@@ -160,7 +169,7 @@ const themes = {
     "--darken-background": "rgba(0,0,0,0.3)",
     "--color-splashtext": "#e1bbef"
   },
-  "custom":{"d":"d"}
+  "custom": { "d": "d" }
 }
 
 function get_theme(name) {
@@ -169,38 +178,38 @@ function get_theme(name) {
 
 function get_theme_var(theme, var_name) {
   console.log(theme)
-  if (theme.d != "d"){
+  if (theme.d != "d") {
     let tvar = theme[var_name];
-    if (tvar == undefined){
+    if (tvar == undefined) {
       console.error(`Theme var '${var_name}' doesn't exist`);
       return undefined;
     }
     console.log(tvar)
     return tvar;
-  } else{
+  } else {
     let themeData = JSON.parse(window.localStorage.getItem("themedata"))
     if (themeData == null) {
       themeData = default_theme;
       window.localStorage.setItem("themedata", JSON.stringify(themeData));
     }
-    console.log(var_name.replace("--",""))
-    console.log(themeData[var_name.replace("--","").replace("-","_")])
-    return (themeData[var_name.replace("--","").replace("-","_")])
+    console.log(var_name.replace("--", ""))
+    console.log(themeData[var_name.replace("--", "").replace("-", "_")])
+    return (themeData[var_name.replace("--", "").replace("-", "_")])
   }
 }
-function apply_theme(theme, style){
-    let keys = Object.keys(theme);
-    for (let i = 0; i < keys.length; i++) {
-      style.setProperty(keys[i], theme[keys[i]]);
-    }
+function apply_theme(theme, style) {
+  let keys = Object.keys(theme);
+  for (let i = 0; i < keys.length; i++) {
+    style.setProperty(keys[i], theme[keys[i]]);
+  }
 }
-function get_theme_as_query_string(theme, qvars){
+function get_theme_as_query_string(theme, qvars) {
   let output = "";
-  
-  for (qvar of qvars){
-    let tvar = get_theme_var(theme, "--"+qvar.replace("_", "-"));
-    output+=`&${qvar}=${tvar.split("#")[1]}`;
+
+  for (qvar of qvars) {
+    let tvar = get_theme_var(theme, "--" + qvar.replace("_", "-"));
+    output += `&${qvar}=${tvar.split("#")[1]}`;
   }
-  
+
   return output;
 }

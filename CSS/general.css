@@ -27,6 +27,7 @@ html {
   --color-settings-ui-layer2: #000000;
   --darken-background: rgba(0, 0, 0, 0.2);
   --color-splashtext: #191817;
+  background-color: var(--background-color);
 }
 
 /* hier is beter smartschool code*/
@@ -1329,4 +1330,7 @@ body.modern-ui .smscMain .smsc-container{
   .twinbutton__button--middle {
     color: transparent !important;
   }
+}
+#background_image{
+  background-color: var(--color-base00) !important;
 }

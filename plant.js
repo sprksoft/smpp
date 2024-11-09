@@ -1,6 +1,7 @@
 const current_plant_version = 2
 
 function start_plant_window() {
+  current_time = new Date().getTime()
   add_plant_widget();
 
   const conditions = get_current_conditions();
@@ -9,7 +10,7 @@ function start_plant_window() {
   if (age != 0) {
     age = calculate_growth_since_last_update();
   }
-  const time_since_birthday = (current_time - new Date(current_conditions.birth_day).getTime())/(1000 * 60 * 60 * 24);
+  const time_since_birthday = (current_time - new Date(conditions.birth_day).getTime())/(1000 * 60 * 60 * 24);
 
   add_plant_image_to_container(age);
 
@@ -130,7 +131,7 @@ function add_ui() {
   const plant_streak = document.createElement("div")
   plant_streak.classList.add("plant_streak_div")
   plant_streak.id = "plant_streak"
-  plant_streak.innerText = `<p id="plant_streak">${time_since_birthday}Days</p>`
+  plant_streak.innerHTML = `<p id="plant_streak">${time_since_birthday} Days</p>`
   document.getElementById("plantdiv").append(buttondiv);
   document.getElementById("plantdiv").prepend(plant_streak);
   document.getElementById("watering_button").addEventListener("click", user_watered_plant);

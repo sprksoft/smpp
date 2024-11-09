@@ -119,3 +119,8 @@
   opacity: 0;
   text-align: center;
 }
+#plant_streak{
+  color: var(--color-accent) !important;
+  font-size: 50px !important;
+  font-weight: 800 !important;
+}
