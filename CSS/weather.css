@@ -1,26 +1,25 @@
 /* Styles for weather information */
 .weatherdiv {
   background-color: var(--color-base01);
-  padding: 20px;
+  padding: 7%;
   border-radius: 15px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   text-align: center;
-  max-width: 300px;
-  margin: 9px;
+  max-width: 100%;
+  margin: 2%;
   border: 3px solid var(--color-base03);
 }
 
 .weather-locationBig {
-  font-size: 24px;
-  margin-bottom: 2px;
+  font-size: 200%;
+  margin-bottom: 5% !important;
   color: var(--color-accent);
 }
 
 .weather-temperatureBig {
-  font-size: 45px;
+  font-size: 350%;
   margin-bottom: 0px !important;
   font-weight: lighter;
-  margin-top: -10px !important;
 }
 
 #weather-icon-clear {
@@ -28,40 +27,27 @@
 }
 
 .weather-mainBig {
-  margin-top: -10px !important;
-}
-
-.weather-descriptionBig {
-  font-size: 14px;
-  margin-bottom: 5px;
-
+  font-size: 170%;
+  margin-bottom: 0px !important;
 }
 
 .weather-feelslikeBig {
   margin-bottom: 0px !important;
-  margin-right: -175px !important;
-  font-size: 13px !important;
+  font-size: 90% !important;
   font-weight: bold;
-}
-
-.weather-feelslike {
-  margin-top: -34px !important;
 }
 
 .weather-humwindBig {
   display: flex;
   justify-content: space-between;
-  /* Verdeel de items gelijkmatig langs de hoofdas */
   align-items: center;
-  /* Centreer de items verticaal */
   flex-wrap: wrap;
-  /* Als de items niet op één rij passen, laat ze dan omlaag gaan */
-
+  flex-direction: row;
 }
 
 .weather-windBig {
-  margin-top: -34px !important;
-  font-size: 13px !important;
+  margin-bottom: 0px !important;
+  font-size: 90% !important;
   font-weight: bold;
 }
 
@@ -71,15 +57,13 @@
 }
 
 .weather-humidityBig {
-  margin-top: 10px !important;
-  margin-right: 175px !important;
-  font-size: 13px !important;
+  margin-bottom: 0px !important;
+  font-size: 90% !important;
   font-weight: bold;
 }
 
 .weather-lastupdateBig {
   margin-bottom: 0px !important;
-
   margin-top: 5px !important;
 }
 
@@ -87,6 +71,15 @@
   margin-top: -10px !important;
   margin-bottom: -10px !important;
 }
+
+.small_icon_weather_big {
+  width: 25%;
+}
+
+.big_icon_weather_big {
+  width: 35%;
+}
+
 
 /*this is for the small weather from here: */
 
@@ -132,21 +125,23 @@
 .weather-humwindSmall {
   display: flex !important;
   align-items: center !important;
-  justify-content: center !important; 
-  flex-direction: column; 
+  justify-content: center !important;
+  flex-direction: column;
   margin-bottom: 0px !important;
 }
 
 
-#weather-icon-mostlysunny{
-  width: 80%; 
-  height: auto; 
+#weather-icon-mostlysunny {
+  width: 80%;
+  height: auto;
   margin-right: auto;
 }
 
 
-.weather-windSmall, .weather-humiditySmall, .weather-temperatureSmall{
-  margin-bottom: 10px !important; 
+.weather-windSmall,
+.weather-humiditySmall,
+.weather-temperatureSmall {
+  margin-bottom: 10px !important;
   color: var(--color-text) !important;
   font-size: 16px !important;
 }
@@ -156,14 +151,28 @@
   font-weight: bold !important;
   margin-bottom: 0px !important;
 }
-.veticalstackweather{
+
+.veticalstackweather {
   display: flex !important;
   flex-direction: column !important;
-  width: max-content !important;
+  width: 40% !important;
   justify-content: center !important;
   text-align: center !important;
-justify-items: center !important;
+  justify-items: center !important;
 }
-.weather-mainSmall{
-color: var(--color-text) !important;
+
+.weather-mainSmall {
+  color: var(--color-text) !important;
+}
+
+.small_icon_weather_humid {
+  width: 45%;
+}
+
+.small_icon_weather_temp {
+  width: 27%
+}
+
+.big_icon_weather_small {
+  width: 60%;
 }

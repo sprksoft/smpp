@@ -170,7 +170,8 @@ const weatherHTML = `<div class="weatherdiv">
 	</div>
 	<p class="weather-temperature weather-temperatureBig"></p>
 	<div class="weather-humwind weather-humwindBig">
-		<svg xmlns="http://www.w3.org/2000/svg" id="layer1" data-name="Laag 2" height="55px" width="55px"
+  <div class="small_icon_weather_big">
+		<svg xmlns="http://www.w3.org/2000/svg" id="layer1" data-name="Laag 2" 
 			viewBox="0 0 29.83 24.41">
 			<g id="Laag_1-2" data-name="Laag 1">
 				<g>
@@ -184,10 +185,13 @@ const weatherHTML = `<div class="weatherdiv">
 						d="M17.8,11.57c1.03-.33,1.82.74,1.34,1.71-.22.44-.47.82-.97.99-1.32.47-2.42,1.13-3.57,1.83l-.11.07c-1.47.9-3.09,1.89-5.24,2.25-2.23.37-4.86.04-8.4-1.37-.7-.28-1.03-1.06-.76-1.76.28-.69,1.07-1.03,1.76-.75,3.24,1.29,5.36,1.47,6.94,1.21,1.61-.27,2.84-1.01,4.39-1.95,1.48-.9,2.99-1.69,4.61-2.22Z" />
 				</g>
 			</g>
-		</svg>
 
-		<div class="weather-humwind weather-humwindBig">
-			<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" height="70px" width="70px" data-name="Laag 2"
+
+		</svg>
+    	<p class="weather-humidity weather-humidityBig"></p>
+     </div>
+            <div class="big_icon_weather_big">
+			<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2"
 				viewBox="0 0 39.94 24.5">
 				<g id="Laag_1-2" data-name="Laag 1">
 					<g>
@@ -200,9 +204,10 @@ const weatherHTML = `<div class="weatherdiv">
 					</g>
 				</g>
 			</svg>
-		</div>
-		<div class="weather-humwind weather-humwindBig">
-			<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" height="55px" width="55px" data-name="Laag 2"
+      	<p class="weather-feelslike weather-feelslikeBig"></p>
+       </div>
+              <div class="small_icon_weather_big">
+			<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2"
 				viewBox="0 0 24.28 25.14">
 				<g id="Laag_1-2" data-name="Laag 1">
 					<g>
@@ -217,14 +222,13 @@ const weatherHTML = `<div class="weatherdiv">
 					</g>
 				</g>
 			</svg>
-
-		</div>
-
+      	<p class="weather-wind weather-windBig"></p>
+ </div>
 	</div>
-	<p class="weather-humidity weather-humidityBig"></p>
 
-	<p class="weather-wind weather-windBig"></p>
-	<p class="weather-feelslike weather-feelslikeBig"></p>
+
+
+
 
 	<p class="weather-lastupdate weather-lastupdateBig"></p>
 </div>
@@ -236,7 +240,7 @@ const weatherHTML = `<div class="weatherdiv">
 
 const weatherHTMLTiny = `<div class="weatherdiv">
 <div class="colSmall">
-<div class="veticalstackweather" style="width:70% !important;">
+<div class="veticalstackweather" style="width:60% !important;">
 <h2 class="weather-location weather-locationSmall"></h2>
 
 <h2 class="weather-main weather-mainSmall"></h2>
@@ -247,7 +251,7 @@ const weatherHTMLTiny = `<div class="weatherdiv">
 </div>
 <div class="veticalstackweather">
 <div class="weather-humwind weather-humwindSmall">
-  <svg xmlns="http://www.w3.org/2000/svg" id="layer1" data-name="Laag 2" height="45px" width="45px"
+  <svg xmlns="http://www.w3.org/2000/svg" id="layer1" data-name="Laag 2" class="small_icon_weather_humid"
   viewBox="0 0 29.83 24.41">
   <g id="Laag_1-2" data-name="Laag 1">
     <g>
@@ -266,7 +270,7 @@ const weatherHTMLTiny = `<div class="weatherdiv">
   <p class="weather-humidity weather-humiditySmall"></p>
 </div>
   <div class="weather-humwind weather-humwindSmall">
-  <svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" height="55px" width="55px" data-name="Laag 2"
+  <svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" class="big_icon_weather_small" data-name="Laag 2"
     viewBox="0 0 39.94 24.5">
     <defs>
     <style>
@@ -291,7 +295,7 @@ const weatherHTMLTiny = `<div class="weatherdiv">
   <p class="weather-wind weather-windSmall"></p>
   </div>
   <div class="weather-humwind weather-humwindSmall">
-  <svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" height="45px" width="45px" data-name="Laag 2" viewBox="0 0 13 26">
+  <svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" class="small_icon_weather_temp" data-name="Laag 2" viewBox="0 0 13 26">
   <defs>
     <style>
     .cls-1 {

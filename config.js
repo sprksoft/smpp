@@ -6,7 +6,7 @@ const default_settings = {
   location: "keerbergen",
   weatherSelection: 0,
   blur: "2",
-  weatherAmount: "0",
+  weatherAmount: 0,
   shownews: true,
   showsnake: false,
   showflappy: false,
