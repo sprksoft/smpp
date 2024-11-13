@@ -126,7 +126,7 @@ const popupsettingHTML = `<head>
   </div>
 </div>
 <div class="textandbutton" id="errormessagesmpp"></div>
-<h3 class="popuptitles">Weather Overlay:</h3>
+<h3 class="popuptitles">Weather overlay:</h3>
 <div class="textandbutton" style="margin-top: 20px !important">
   <div class="verticaltext"><p class="nobottommargp off_text">Snow</p><p class="nobottommargp link_text">Realtime</p><p class="nobottommargp">Rain</p></div>
   <input type="range" min="0" max="2" value="0" class="sliderblur" id="weatherSelector">
