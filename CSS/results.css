@@ -24,12 +24,6 @@
   background-color: var(--color-red) !important;
 }
 
-.c-silver-combo--100,
-.c-silver-combo-hover--100 {
-  background-color: var(--color-base01) !important;
-  color: var(--color-text) !important;
-  padding: 3px;
-}
 
 .wide-toolbar__item:after,
 .wide-toolbar__item:before {
@@ -138,63 +132,7 @@ upload-app.smsc-container.smsc-container--flex,
   color: var(--color-text) !important;
 }
 
-.c-blue-combo--100 {
-  background-color: var(--color-blue) !important;
-  color: var(--color-blue) !important;
-}
 
-.c-green-combo--100 {
-  background-color: var(--color-green) !important;
-  color: var(--color-green) !important;
-}
-
-.c-orange-combo--100 {
-  background-color: var(--color-orange) !important;
-  color: var(--color-orange) !important;
-}
-
-.c-red-combo--100 {
-  background-color: var(--color-red) !important;
-  color: var(--color-red) !important;
-}
-
-.c-blue-combo--200 {
-  background-color: var(--color-blue) !important;
-  filter: brightness(85%)
-}
-
-.c-green-combo--200 {
-  background-color: var(--color-green) !important;
-  filter: brightness(85%)
-}
-
-.c-orange-combo--200 {
-  background-color: var(--color-orange) !important;
-  filter: brightness(85%)
-}
-
-.c-red-combo--200 {
-  background-color: var(--color-red) !important;
-  filter: brightness(85%)
-}
-.c-olive-combo--100 {
-  background-color: var(--color-dark-green) !important;
-  color: var(--color-dark-green) !important;
-}
-
-.c-olive-combo--200 {
-  background-color: var(--color-dark-green) !important;
-  filter: brightness(85%)
-}
-.c-yellow-combo--100 {
-  background-color: var(--color-yellow) !important;
-  color: var(--color-dark-green) !important;
-}
-
-.c-yellow-combo--200 {
-  background-color: var(--color-yellow) !important;
-  filter: brightness(85%)
-}
 .goals__goal__content__title {
   background-color: var(--color-base00) !important;
   color: var(--color-text) !important;

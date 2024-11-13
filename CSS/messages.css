@@ -205,7 +205,7 @@ button.modern-message__action.modern-message__action--delete:hover,
 #msgcell,
 .smscMain,
 .tooltip__content {
-  background-color: var(--color-base00) !important;
+  background-color: var(--background-color) !important;
 }
 
 #msgdetail,
@@ -523,4 +523,17 @@ smsc-tabs .smsc-tabslist__item {
 }
 .compose-options{
   padding-top: 12px !important;
+}
+.organisers-participants-view__send-message-btn.icon-btn.icon-btn--16{
+  border: 2px solid var(--color-base03) !important;
+}
+.organisers-participants-view__send-message-btn.icon-btn.icon-btn--16:hover{
+  border-color: var(--color-accent) !important;
+}
+span.planner-list-wrapper__add-btn__text:hover{
+  color: var(--color-accent) !important;
+}
+span.planner-list-wrapper__add-btn__text{
+  transition-duration: 0.1s !important;
+  transition-timing-function: ease-in-out !important;
 }

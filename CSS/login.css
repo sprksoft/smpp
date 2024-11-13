@@ -43,7 +43,7 @@ html {
 }
 
 .login-app__top {
-  background-color: var(--color-base00) !important;
+  background-color: var(--background-color) !important;
   background-color: transparent !important;
   backdrop-filter: blur(10px) !important;
   border-radius: 20px !important;

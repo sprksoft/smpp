@@ -5,12 +5,14 @@ html {
   --color-base01: #191817;
   --color-base02: #191817;
   --color-base03: #191817;
+  --background-color: var(--color-base00);
   --color-blue: #378cd1;
   --color-red: #cb5144;
   --color-green: #3c9534;
   --color-orange: #ce6c4a;
   --color-dark-green: #1f551b;
   --color-yellow: #ffd353;
+  --fruit-color: #fff;
   --color-startpage-bg: #0202058f;
   --color-infostartpagebg: #232020;
   --blur-value-large: blur(4px);
@@ -25,14 +27,14 @@ html {
   --color-settings-ui-layer2: #000000;
   --darken-background: rgba(0, 0, 0, 0.2);
   --color-splashtext: #191817;
+  background-color: var(--background-color);
 }
 
 /* hier is beter smartschool code*/
 #modal-content,
 #content-container {
-  background-color: var(--color-base00) !important;
+  background-color: var(--background-color) !important;
 }
-
 .js-btn-profile>img,
 .header__avatar,
 .topnav__menuitem>img,
@@ -132,7 +134,8 @@ body.modern-ui .homepage__block:not(:last-child) {
   color: var(--color-text) !important;
 }
 
-.skin .skinButtonBg {
+.skin .skinButtonBg,
+div#draftSaved{
   background-image: none !important;
 }
 
@@ -143,7 +146,7 @@ body.modern-ui .homepage__block:not(:last-child) {
 
 
 .groupTree {
-  background-color: var(--color-base00) !important;
+  background-color: var(--background-color) !important;
   color: var(--color-text) !important;
 }
 
@@ -311,7 +314,7 @@ td:not(.cb-container,[style="height:20px;"],[colspan='3']),
 .action-button,
 span.smsc-inlineeditor--disabled.smsc-inlineeditor__editor,
 smsc-inlineeditor.smsc-table__cell--inlineeditor {
-  background-color: var(--color-base00) !important;
+  background-color: var(--background-color) !important;
 }
 
 .smsc-contextmenu__content,
@@ -369,7 +372,7 @@ smsc-inlineeditor.smsc-table__cell--inlineeditor {
 
 #smscMainBlockContainer,
 .notifyScreenContainer {
-  background-color: var(--color-base00) !important;
+  background-color: var(--background-color) !important;
   border: 0px solid var(--color-accent) !important;
   box-shadow: none;
 }
@@ -893,6 +896,11 @@ label.form__label.js-form-label.label__resolvedStatus.form__label--no-margin-top
   background-color: var(--color-base02) !important;
 }
 
+.header.js-header.overview-page__header.header--single-line{
+  flex: auto !important;
+}
+
+
 .discordbutton {
   display: flex;
   margin: auto;
@@ -1172,7 +1180,8 @@ a.js-btn-messages.topnav__btn:hover {
 .homepage__left {
   border-right: 4px solid var(--color-base01) !important;
 }
-textarea{
+textarea,
+td.cb-container{
   background-color: var(--color-base00) !important;
 }
 .card{
@@ -1186,7 +1195,7 @@ background-color: var(--color-base02) !important;
 border: 2px solid var(--color-base03) !important;
 }
 .smsc-container:has(.form-page__header-wrapper){
-  background-color: var(--color-base00) !important;
+  background-color: var(--background-color) !important;
   background-image: var(--loginpage-image) !important;
   background-position: center !important;
   background-size: cover !important;
@@ -1206,7 +1215,8 @@ border: 2px solid var(--color-base03) !important;
   border: 2px solid var(--color-base03) !important;
   padding: 10px !important;
 }
-.form-item.js-form-item{
+.form-item.js-form-item,
+span.smsc-inlineeditor--disabled.smsc-inlineeditor__editor{
   background-color: transparent !important;
 }
 textarea.form-item__input-field.form-item__input-field--textarea{
@@ -1315,4 +1325,12 @@ body.modern-ui .smscMain .smsc-container{
 }
 .profileInputTitle{
   color: var(--color-text) !important
+}
+@media (max-height: 700px), screen and (max-width: 1280px) {
+  .twinbutton__button--middle {
+    color: transparent !important;
+  }
+}
+#background_image{
+  background-color: var(--color-base00) !important;
 }
