@@ -595,6 +595,7 @@ input:checked+.slider:before {
 
 #searchMenu {
   left: -73px !important;
+  transform: translateY(0%) !important;
   background-color: var(--color-settings-bg) !important;
   border: 2px solid var(--color-settings-border) !important;
   border-radius: 10px !important;
@@ -603,7 +604,13 @@ input:checked+.slider:before {
   flex-direction: column !important;
   justify-content: center !important;
   max-width: 240px !important;
-  animation: flyInFromTop 0.15s ease forwards;
+  transition: all 0.10s cubic-bezier(.64,.18,.39,.82) !important;
+}
+
+#searchMenu[hidden]{
+  height: 0% !important;
+  transform: translateY(-100%) !important;
+  transition: all 0s linear !important;
 }
 
 .textandbutton {

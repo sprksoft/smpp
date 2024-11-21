@@ -1,26 +1,26 @@
-const current_plant_version = 2
+const current_plant_version = 4
 
 function start_plant_window() {
   current_time = new Date().getTime()
   add_plant_widget();
 
-  const conditions = get_current_conditions();
-  console.log("got these: ", conditions)
-  var age = conditions.age
-  if (age != 0) {
+  let conditions = get_current_conditions();
+  let age = conditions.age
+  if (age != 0 && conditions.is_alive) {
     age = calculate_growth_since_last_update();
+    conditions = get_current_conditions();
   }
-
-  add_plant_image_to_container(age,conditions.is_alive);
-
-  if (age == 8) {
-    show_remove_button();
-  }
-
   updated = check_update(conditions.plant_version)
   if (!updated) {
     display_update_prompt()
     return
+  }
+
+  add_plant_image_to_container(age,conditions.is_alive);
+  if (!conditions.is_alive){
+    show_remove_button(true)
+  }else if (age == 8) {
+    show_remove_button(false);
   }
 
   const plantButton = document.getElementById("planttheplantbutton");
@@ -55,8 +55,8 @@ function calculate_growth_since_last_update() {
   const days_in_ms = (1000 * 60 * 60 * 24)
   const time_difference_days_grew = (current_time - last_time_grew) / days_in_ms;
   const time_difference_days_watered = (current_time - last_time_watered) / days_in_ms;
-
-    if (time_difference_days_grew >= 2) {
+  current_conditions.time_since_birthday_days = current_conditions.is_alive?Math.round((current_time - new Date(current_conditions.birth_day).getTime())/(1000 * 60 * 60 * 24)):current_conditions.time_since_birthday_days
+  if (time_difference_days_grew >= 2) {
       current_conditions.age += 1;
       current_conditions.last_time_grew = current_time;
     }
@@ -86,6 +86,7 @@ function plant_the_plant() {
   const last_time_grew = new Date();
   const birth_day = new Date()
   const is_alive = true
+  const time_since_birthday_days = 0
   const age = 1
   var possible_colors = ["#fcb528", "#00adfe", "#f474d8", "#c9022b", "#ff6000", "#ff596e", "#6024c9", "#de51c1", "#d8d475", "#f5cb04"]
   var chosen_color = possible_colors[Math.floor(Math.random() * possible_colors.length)]
@@ -97,6 +98,7 @@ function plant_the_plant() {
     plant_color: chosen_color,
     plant_version: current_plant_version,
     birth_day: birth_day,
+    time_since_birthday_days: time_since_birthday_days,
     is_alive: is_alive
   });
   add_ui();
@@ -105,7 +107,6 @@ function calculatePercentile(t) {
   const totalTime = 172800;
   return Math.max(0, 100 * (1 - t / totalTime));
 }
-
 function add_ui() {
   const current_time = new Date().getTime();
   const current_conditions = get_current_conditions();
@@ -116,16 +117,16 @@ function add_ui() {
   const last_time_watered = new Date(current_conditions.last_time_watered).getTime();
   const time_difference_watered = current_time - last_time_watered;
   const time_difference_hours = time_difference_watered / (1000 * 60 * 60);
-  const time_since_birthday = Math.round((current_time - new Date(current_conditions.birth_day).getTime())/(1000 * 60 * 60 * 24));
   const buttondiv = document.createElement("div");
+  const time_since_birthday_days = current_conditions.time_since_birthday_days;
   buttondiv.classList.add("buttondivforplant");
-  buttondiv.id = "buttondivforplant"
+  buttondiv.id = "buttondivforplant";
   buttondiv.innerHTML = plant_buttonsHTML;
   const plant_streak = document.createElement("div")
   plant_streak.classList.add("plant_streak_div")
   plant_streak.id = "plant_streak"
-  var days_text = time_since_birthday == 1?"Day":"Days"
-  plant_streak.innerHTML = `<p id="plant_streak">${time_since_birthday} ${days_text}</p>`
+  var days_text = time_since_birthday_days == 1?"Day":"Days"
+  plant_streak.innerHTML = `<p id="plant_streak">${time_since_birthday_days} ${days_text}</p>`
   document.getElementById("plantdiv").append(buttondiv);
   document.getElementById("plantdiv").prepend(plant_streak);
   document.getElementById("watering_button").addEventListener("click", user_watered_plant);
@@ -144,9 +145,9 @@ function show_remove_button(has_died) {
   const removeButtonInfoDiv = document.createElement("div");
   removeButtonInfoDiv.id = "removeButtonInfoDiv";
   if (has_died){
-    removeButtonInfoDiv.innerHTML = `<p id="plant_remove_info_text">plant , you can remove it to plant a new one (optional)</p>`
+    removeButtonInfoDiv.innerHTML = `<p id="plant_remove_info_text">Your plant has died, remove it to plant a new one (optional)</p>`
   } else {
-    removeButtonInfoDiv.innerHTML = `<p id="plant_remove_info_text">Your plant is fully grown, you can remove it to plant a new one (optional)</p>`
+    removeButtonInfoDiv.innerHTML = `<p id="plant_remove_info_text">Your plant is fully grown, remove it to plant a new one (optional)</p>`
   }
   removeButtonDiv.innerHTML = `<div style="width:20%"></div> <div id="removeplantButton">Remove plant</div> <div style="width:20%"><div id="remove_button_info">?</div></div>`;
   document.getElementById("plantdiv").appendChild(removeButtonInfoDiv);
@@ -160,12 +161,17 @@ function show_remove_button(has_died) {
   });
 }
 function display_update_prompt() {
+  let current_conditions = get_current_conditions()
+  if (!current_conditions.plant_version){
+    current_conditions.plant_version = 1
+  }
   const update_div = document.createElement("div")
   update_div.id = "update_div"
   update_div.innerHTML = `<h1>
     Update Required!
 </h1>
 <p>You must reset to be up to date</p>
+<p>Your version: <b>${current_conditions.plant_version}</b> Newest version: <b>${current_plant_version}</b>
 <div id="removeplantButton">Reset Plant</div>`
   let container = document.getElementById("plant_image_container")
   container.innerHTML = ""
@@ -180,8 +186,10 @@ function initialize_plant() {
     plant_color: "#fff",
     plant_version: current_plant_version,
     birth_day: null,
+    time_since_birthday_days: 0,
     is_alive: true
   });
+  document.getElementById("plantdiv").innerHTML = `<div id="plant_image_container"></div>`;
   add_plant_image_to_container(0,true)
   plant_the_plant_button()
 }
