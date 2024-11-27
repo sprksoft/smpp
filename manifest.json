@@ -24,6 +24,9 @@
 			"matches": [
 				"*://*.smartschool.be/*"
 			],
+			"exclude_matches": [
+				"*://www.smartschool.be/*"
+			],
 			"all_frames": true,
 			"css": [
 				"CSS/general.css",
