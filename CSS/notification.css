@@ -22,6 +22,7 @@
 
 .notification__btn--unread .notification__title {
   color: var(--color-accent) !important;
+  font-weight: 800 !important;
 }
 
 .notification__content {
