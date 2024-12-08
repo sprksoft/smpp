@@ -1,6 +1,7 @@
 //java script komt hier je weet wel
 //ok - ldev
 //oke logis - andere ldev
+//oh ok, ik dacht in general.css - Jdev
 const default_theme = {
   color_accent: "#a3a2ec",
   color_base00: "#38313a",
@@ -43,8 +44,9 @@ function fileToBase64(file) {
     reader.onerror = error => reject(error);
   });
 }
-const anakin = 56789;
-const skywalker = 98765;
+const anakin = 56789;  // ???
+const skywalker = 98765;  // word letterlijk nergens gebruikt
+
 async function apply() {
   let style = document.documentElement.style;
   let settingsData = get_config();
@@ -516,8 +518,7 @@ function main() {
       document.getElementById('backgroundfilebutton').addEventListener("click", openFileSelector)
       load()
     });
-  }
-  else {
+  }else {
     console.log("SCAMMERS")
   }
   apply()

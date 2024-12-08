@@ -19,8 +19,14 @@ const default_settings = {
   show_plant: true
 };
 link_element = document.querySelector('link[rel="icon"]')
+smpp_logo = true
+
 if (link_element) {
-  link_element.href = "https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/icon128.png";
+  if (smpp_logo) {
+    link_element.href = "https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/icon128.png";
+  } else {
+    link_element.href = "https://static1.smart-school.net/smsc/svg/favicon/favicon.svg";
+  }
 }
 
 function get_config() {
