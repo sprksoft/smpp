@@ -16,10 +16,10 @@ const default_settings = {
   isbig: true,
   showplanner: true,
   name_override: null,
-  show_plant: true
+  show_plant: true,
+  smpp_logo: true
 };
 link_element = document.querySelector('link[rel="icon"]')
-smpp_logo = true
 
 if (link_element) {
   if (smpp_logo) {

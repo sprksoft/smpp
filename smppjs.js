@@ -267,6 +267,14 @@ async function apply() {
   } else if (overwrite_theme == 1) {
     set_backgroundlink(backgroundLink)
   }
+  let link_element = document.querySelector('link[rel="icon"]');
+  if (link_element) {
+    if (settingsData.smpp_logo) {
+      link_element.href = "https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/icon128.png";
+    } else {
+      link_element.href = "https://static1.smart-school.net/smsc/svg/favicon/favicon.svg";
+    }
+  }
 }
 
 
@@ -305,7 +313,8 @@ function store() {
   const isbig = document.getElementById("isbig").checked;
   const showplanner = document.getElementById("showplanner").checked;
   const weatherSelector = document.getElementById("weatherSelector").value;
-  const show_plant = document.getElementById("show_plant").checked
+  const show_plant = document.getElementById("show_plant").checked;
+  const smpp_logo = document.getElementById("smpp_logo").checked;
   settingsData.profile = profileSelect;
   settingsData.halte = halte;
   settingsData.overwrite_theme = overwrite_theme;
@@ -320,7 +329,8 @@ function store() {
   settingsData.isbig = isbig;
   settingsData.showplanner = showplanner;
   settingsData.weatherSelector = weatherSelector;
-  settingsData.show_plant = show_plant
+  settingsData.show_plant = show_plant;
+  settingsData.smpp_logo = smpp_logo;
 
   console.log(settingsData)
   if (settingsData.show_scores == undefined) {
@@ -404,7 +414,8 @@ function load() {
   const isbig = document.getElementById("isbig");
   const showplanner = document.getElementById("showplanner");
   const weatherSelector = document.getElementById("weatherSelector");
-  const show_plant = document.getElementById("show_plant")
+  const show_plant = document.getElementById("show_plant");
+  const smpp_logo = document.getElementById("smpp_logo");
   profileSelect.value = settingsData.profile
   halte.checked = settingsData.halte
   overwrite_theme.value = settingsData.overwrite_theme
@@ -418,7 +429,8 @@ function load() {
   isbig.checked = settingsData.isbig
   showplanner.checked = settingsData.showplanner
   weatherSelector.value = settingsData.weatherSelector
-  show_plant.checked = settingsData.show_plant
+  show_plant.checked = settingsData.show_plant;
+  smpp_logo.checked = settingsData.smpp_logo;
   if (profileSelect.value == "custom") {
     loadCustomTheme()
   }

@@ -594,7 +594,9 @@ input:checked+.slider:before {
 }
 
 #searchMenu {
-  left: -73px !important;
+  top: 36px;
+  max-width: 270px !important;
+  margin-left: -5px;
   transform: translateY(0%) !important;
   background-color: var(--color-settings-bg) !important;
   border: 2px solid var(--color-settings-border) !important;
@@ -603,7 +605,6 @@ input:checked+.slider:before {
   display: flex !important;
   flex-direction: column !important;
   justify-content: center !important;
-  max-width: 240px !important;
   transition: all 0.10s cubic-bezier(.64,.18,.39,.82) !important;
 }
 

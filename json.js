@@ -157,6 +157,13 @@ const popupsettingHTML = `<head>
     <span class="slider round"></span>
     </label>
 </div>
+<div>
+  <h3 class="popuptitles">Logo:</h3>
+  <label class="switch">
+    <input class="popupinput" type="checkbox" id="smpp_logo">
+    <span class="slider round"></span>
+  </label>
+</div>
 </div>
 </body>
 `
