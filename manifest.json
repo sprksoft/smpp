@@ -25,7 +25,8 @@
 				"*://*.smartschool.be/*"
 			],
 			"exclude_matches": [
-				"*://www.smartschool.be/*"
+				"*://www.smartschool.be/*",
+				"*://*.smartschool.be/Wopi/init/pdf"
 			],
 			"all_frames": true,
 			"css": [
