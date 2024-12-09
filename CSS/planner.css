@@ -559,3 +559,9 @@ h3.card-block__title.fluid-ui-heading.fluid-ui-heading--3{
 .blob-group__blob.blob{
   background-color: var(--color-base01) !important;
 }
+.mailingListItem__checkbox_EOMal.bp-c-combo-green--100{
+  background-color: var(--color-base02) !important;
+}
+.mailingListItem__checkbox_EOMal.bp-c-combo-steel--100{
+background-color: var(--color-base01) !important;
+}
