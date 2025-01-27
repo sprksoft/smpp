@@ -1,4 +1,4 @@
-const current_plant_version = 4
+const current_plant_version = 2
 
 function start_plant_window() {
   current_time = new Date().getTime()
@@ -60,7 +60,7 @@ function calculate_growth_since_last_update() {
       current_conditions.age += 1;
       current_conditions.last_time_grew = current_time;
     }
-    if (time_difference_days_watered > 2) {
+    if (time_difference_days_watered > 3) {
       current_conditions.is_alive = false
     }
 
@@ -104,9 +104,10 @@ function plant_the_plant() {
   add_ui();
 }
 function calculatePercentile(t) {
-  const totalTime = 172800;
+  const totalTime = 259200; // Total seconds in 3 days
   return Math.max(0, 100 * (1 - t / totalTime));
 }
+
 function add_ui() {
   const current_time = new Date().getTime();
   const current_conditions = get_current_conditions();
