@@ -231,7 +231,6 @@ function flappyGame() {
     document.addEventListener('keydown', (e) => {
         if (e.code === 'Space' || e.code === 'ArrowUp') {
             e.preventDefault();
-            console.log(gravity)
             gravity =  (flappyspeed/140)*(-4);
         }
     });

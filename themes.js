@@ -177,14 +177,12 @@ function get_theme(name) {
 }
 
 function get_theme_var(theme, var_name) {
-  console.log(theme)
   if (theme.d != "d") {
     let tvar = theme[var_name];
     if (tvar == undefined) {
       console.error(`Theme var '${var_name}' doesn't exist`);
       return undefined;
     }
-    console.log(tvar)
     return tvar;
   } else {
     let themeData = JSON.parse(window.localStorage.getItem("themedata"))
@@ -192,8 +190,6 @@ function get_theme_var(theme, var_name) {
       themeData = default_theme;
       window.localStorage.setItem("themedata", JSON.stringify(themeData));
     }
-    console.log(var_name.replace("--", ""))
-    console.log(themeData[var_name.replace("--", "").replace("-", "_")])
     return (themeData[var_name.replace("--", "").replace("-", "_")])
   }
 }

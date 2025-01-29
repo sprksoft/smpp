@@ -131,7 +131,6 @@ async function apply() {
     if (show_scores) {
       var currentUrl = window.location.href;
       if (currentUrl.includes("smartschool.be/results")) {
-        console.log("Showing scores");
         await show_scoresfunc();
       }
     }
@@ -230,8 +229,6 @@ async function apply() {
     if (!shownews) {
       centralContainer.innerHTML = ' '
     }
-  } else {
-    console.log("Not on home page, no Lijn or weather needed")
   }
 
   style.setProperty('--blur-value-large', 'blur(' + bigblurvalue + 'px)');
@@ -262,7 +259,6 @@ async function apply() {
   }
   document.getElementById("background_image")?document.getElementById("background_image").style.display = "none":"pass"
   if (overwrite_theme == 2) {
-    console.log("setting background with file")
     set_background();
   } else if (overwrite_theme == 1) {
     set_backgroundlink(backgroundLink)
@@ -341,7 +337,6 @@ function store() {
   }
 
   if (backgroundFile) {
-    console.log("backgroundFile")
     const reader = new FileReader();
     reader.onload = () => {
       const imageData = reader.result;
@@ -356,7 +351,6 @@ function store() {
     window.location.reload()
   }
   else {
-    console.log("no backgroundFile")
     set_config(settingsData)
     if (profileSelect == "custom") {
       loadCustomTheme();
@@ -529,8 +523,6 @@ function main() {
       document.getElementById('backgroundfilebutton').addEventListener("click", openFileSelector)
       load()
     });
-  }else {
-    console.log("SCAMMERS")
   }
   apply()
 }
