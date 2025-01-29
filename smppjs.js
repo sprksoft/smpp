@@ -348,7 +348,7 @@ function store() {
       browser.runtime.sendMessage({ action: 'saveBackgroundImage', data: imageData });
     };
     reader.readAsDataURL(backgroundFile);
-    console.log("making true")
+    settingsData.overwrite_theme = 2;
     set_config(settingsData)
     if (profileSelect == "custom") {
       loadCustomTheme();
@@ -457,7 +457,6 @@ function set_background() {
     }
   });
 }
-
 
 function set_backgroundlink(background) {
   let style = document.documentElement.style;
