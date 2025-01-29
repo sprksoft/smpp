@@ -1342,3 +1342,21 @@ body.modern-ui .smscMain .smsc-container{
 #background_image{
   background-color: var(--color-base00) !important;
 }
+.mydoc smsc-listview .js-table-container{
+  padding-bottom: 0px !important;
+}
+smsc-listview{
+  border-radius: 10px !important;
+}
+body.modern-ui table{
+  margin-bottom: 0px !important;
+}
+.smsc-table__header.js-table-hdr{
+  padding-top: 5px !important;
+}
+smsc-listview table tr.pointer:hover{
+  background-color: var(--color-base02) !important;
+}
+.mydoc__action-buttons{
+  display: none !important;
+}
