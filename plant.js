@@ -55,15 +55,14 @@ function calculate_growth_since_last_update() {
   const days_in_ms = (1000 * 60 * 60 * 24)
   const time_difference_days_grew = (current_time - last_time_grew) / days_in_ms;
   const time_difference_days_watered = (current_time - last_time_watered) / days_in_ms;
-  current_conditions.time_since_birthday_days = current_conditions.is_alive?Math.round((current_time - new Date(current_conditions.birth_day).getTime())/(1000 * 60 * 60 * 24)):current_conditions.time_since_birthday_days
   if (time_difference_days_grew >= 2) {
       current_conditions.age += 1;
       current_conditions.last_time_grew = current_time;
     }
-    if (time_difference_days_watered > 3) {
+  if (time_difference_days_watered > 3) {
       current_conditions.is_alive = false
     }
-
+  current_conditions.time_since_birthday_days = current_conditions.is_alive?Math.round((current_time - new Date(current_conditions.birth_day).getTime())/(1000 * 60 * 60 * 24)):current_conditions.time_since_birthday_days
   set_current_conditions(current_conditions);
   return lowground(current_conditions.age);
 }
@@ -126,8 +125,7 @@ function add_ui() {
   const plant_streak = document.createElement("div")
   plant_streak.classList.add("plant_streak_div")
   plant_streak.id = "plant_streak"
-  var days_text = time_since_birthday_days == 1?"Day":"Days"
-  plant_streak.innerHTML = `<p id="plant_streak">${time_since_birthday_days} ${days_text}</p>`
+  plant_streak.innerHTML = `<p id="plant_streak">${time_since_birthday_days} ${time_since_birthday_days == 1?"Day":"Days"}</p>`
   document.getElementById("plantdiv").append(buttondiv);
   document.getElementById("plantdiv").prepend(plant_streak);
   document.getElementById("watering_button").addEventListener("click", user_watered_plant);
@@ -136,7 +134,6 @@ function add_ui() {
   } else {
     document.getElementById('time_difference_last_watered').innerHTML = `Last watered: \n` + Math.floor(time_difference_hours) + `h ago`
   }
-
   document.getElementById("glass-fill").style.height = calculatePercentile(time_difference_watered / 1000) + `%`;
 }
 
@@ -204,7 +201,7 @@ function user_watered_plant() {
 }
 
 function add_plant_image_to_container(age,is_alive) {
-  document.getElementById("plant_image_container").innerHTML = display_plant(age,is_alive);
+  document.getElementById("plant_image_container").innerHTML = get_plant_html(age,is_alive);
 }
 
 function set_current_conditions(current_conditions_local) {
@@ -221,7 +218,6 @@ function get_current_conditions() {
     
   }else{
     local_current_conditions.age = lowground(local_current_conditions.age)
-    console.log(local_current_conditions)
     return local_current_conditions
   }
 }
@@ -232,7 +228,7 @@ function check_update(version_number) {
   }
   return true
 }
-function display_plant(age, is_alive) {
+function get_plant_html(age, is_alive) {
   age = Number(age)
   is_alive = Boolean(is_alive)
 
@@ -256,21 +252,7 @@ function display_plant(age, is_alive) {
         <path style="fill: #9c9081" d="M2.01.08C-.23.84-.06,6.65.07,11.26c.14,4.89.26,7.69,2.43,9.23,2.18,1.55,5.8,1.38,7.78-.49,2.72-2.56,1.24-7.3.49-9.72C9.05,4.83,4.48-.75,2.01.08Z"/>
       </g>
     </svg>`}
-    return `<svg style="margin:107px" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 11.84 21.54">
-<g xmlns="http://www.w3.org/2000/svg" id="Laag_1-2" data-name="Laag 1">
-    <path class="cls-2" d="M26.14,66.22l-.43.03c-.92-4.95-3.11-9.79-7.87-11.89-2.81-.97-5.73-4.6-5.08-7.89.43-3.22,2.03-5.7,4.24-7.54l.38.19c-.05,4.87-1.97,9.3,2.24,12.35,4.89,3.08,6.95,9.27,6.51,14.76Z" id="path1"/>
-    <path class="cls-3" d="m 19.81,27.16 c -0.35,0.3 -1.03,0.84 -1.35,1.35 0.97,2.92 1.033125,11.348125 -0.11,10.6 L 15.67,38.7 c -1.539375,0.534375 0.78,-8.38 0.16,-9.49 -0.97,-1.65 -2.562287,-2.171162 -2.592287,-2.171162 L 13.04,26.13 l 0.04453,-0.01416 0.09672,-1.402089 c 0.127188,0.05719 0.507188,-0.280313 0.507188,-0.280313 L 13.71,24.38 c 0.43,0.16 1.84,0.68 3.11,1.84 0.46,-0.51 0.95,-0.92 1.3,-1.19 0.11,-0.08 0.22,-0.16 0.27,-0.22 L 19.397187,24.081563 20.5,24.81 c 0.84,1.11 -0.32,2.03 -0.7,2.35 z" id="path2" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="cccccccccccccccccc"/>
-    <g id="g4"/>
-    <path style="fill:#f4f2ef;fill-opacity:1;stroke:none;stroke-width:1.431;stroke-miterlimit:5.6;paint-order:fill markers stroke" d="m 12.0625,19.6875 c -0.136785,-0.102589 -0.08817,-0.05692 -0.15625,-0.125" id="path5"/>
-    <path style="fill:#f4f2ef;fill-opacity:1;stroke:none;stroke-width:1.431;stroke-miterlimit:5.6;paint-order:fill markers stroke" d="M 11.90625,19.59375 8.65625,18.5" id="path6"/>
-    <path style="fill:#5b4511;fill-opacity:1;stroke:none;stroke-width:7.631;stroke-miterlimit:5.6;stroke-dasharray:none;paint-order:stroke fill markers" d="m 17.169437,26.770621 c -2.559246,4.463369 -17.73916973,-9.930403 -12.0707041,-8.49214 0.9287846,0.235661 5.3973831,3.8628 5.3973831,3.8628 m 11.026447,-2.474874" id="path14" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="csc"/>
-    <path style="fill:#5b4511;fill-opacity:1;stroke:none;stroke-width:7.631;stroke-miterlimit:5.6;stroke-dasharray:none;paint-order:stroke fill markers" d="m 30.328979,19.163999 c 1.224717,-8.441955 -17.326258,9.561684 -11.657792,8.123421 0.928784,-0.235661 7.583457,-5.766323 7.583457,-5.766323" id="path14-1" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="csc"/>
-    <path style="fill:#5b4511;fill-opacity:1;stroke:none;stroke-width:5.16583;stroke-miterlimit:5.6;stroke-dasharray:none;paint-order:stroke fill markers" d="m 7.8841287,23.009148 c 1.6772356,3.121029 11.6255993,-6.943875 7.9106953,-5.938163 -0.608691,0.164787 -3.537246,2.701078 -3.537246,2.701078 M 5.0312501,18.041498" id="path14-2" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="csc"/>
-    <path style="fill:#5b4511;fill-opacity:1;stroke:none;stroke-width:5.16583;stroke-miterlimit:5.6;stroke-dasharray:none;paint-order:stroke fill markers" d="m 25.321629,19.134007 c 1.677235,-3.121029 11.625599,6.943875 7.910695,5.938163 -0.608691,-0.164787 -3.537246,-2.701078 -3.537246,-2.701078 m -7.226328,1.730565" id="path14-2-4" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="csc"/>
-    <path style="fill:#5b4511;fill-opacity:1;stroke:none;stroke-width:5.16583;stroke-miterlimit:5.6;stroke-dasharray:none;paint-order:stroke fill markers" d="m 25.691215,21.767008 c -2.909202,2.022494 -7.218185,-11.457302 -4.362028,-8.877702 0.467985,0.42267 1.9297,4.01051 1.9297,4.01051 m 7.226205,1.731078" id="path14-2-4-7" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="csc"/>
-    <path style="fill:#5b4511;fill-opacity:1;stroke:none;stroke-width:5.16583;stroke-miterlimit:5.6;stroke-dasharray:none;paint-order:stroke fill markers" d="m 14.834057,26.075254 c 0.178028,-3.538679 -13.5413244,-0.06714 -9.8415113,0.992747 0.6062184,0.173662 4.4243081,-0.483146 4.4243081,-0.483146 m 5.2907142,5.217567" id="path14-2-49" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="csc"/>
-  </g>
-    </svg>`
+    return `HOW DID YOU KILL A SEED???`
     case (2):
       if (is_alive){
       return `<svg style="margin:91px" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 38.55 66.25">
@@ -322,18 +304,53 @@ function display_plant(age, is_alive) {
           }
         </style>
       </defs>
-      <g id="Laag_1-2" data-name="Laag 1">
-        <path class="cls-2" d="M26.14,66.22l-.43.03c-.92-4.95-3.11-9.79-7.87-11.89-2.81-.97-5.73-4.6-5.08-7.89.43-3.22,2.03-5.7,4.24-7.54l.38.19c-.05,4.87-1.97,9.3,2.24,12.35,4.89,3.08,6.95,9.27,6.51,14.76Z"/>
-        <path class="cls-3" d="M19.81,27.16c-.35.3-1.03.84-1.35,1.35.97,2.92.08,9.27-.11,10.6l-2.68-.41c.57-3.7.78-8.38.16-9.49-.97-1.65-3-2.27-3.03-2.27l.24-.81-.38.95-.76-7.46c1.76,3.19,1.89,4.54,1.89,4.54l-.08.22c.43.16,1.84.68,3.11,1.84.46-.51.95-.92,1.3-1.19.11-.08.22-.16.27-.22l.89.92,1.22-.92c.84,1.11-.32,2.03-.7,2.35Z"/>
-        <g>
-          <path class="cls-1" d="M13.25,27.05l1.39-2.29S16.08,12.1.22,12.24c0,0-2.99,11.88,13.03,14.81Z"/>
-          <path class="cls-1" d="M18.4,24.81l1.73,2.06S44,17.12,37.4.12c0,0-17.96-3.33-18.99,24.69Z"/>
-        </g>
-      </g>
+  <g xmlns="http://www.w3.org/2000/svg" id="Laag_1-2" data-name="Laag 1">
+    <path class="cls-2" d="M26.14,66.22l-.43.03c-.92-4.95-3.11-9.79-7.87-11.89-2.81-.97-5.73-4.6-5.08-7.89.43-3.22,2.03-5.7,4.24-7.54l.38.19c-.05,4.87-1.97,9.3,2.24,12.35,4.89,3.08,6.95,9.27,6.51,14.76Z" id="path1"/>
+    <path class="cls-3" d="m 19.81,27.16 c -0.35,0.3 -1.03,0.84 -1.35,1.35 0.97,2.92 1.033125,11.348125 -0.11,10.6 L 15.67,38.7 c -1.539375,0.534375 0.78,-8.38 0.16,-9.49 -0.97,-1.65 -2.562287,-2.171162 -2.592287,-2.171162 L 13.04,26.13 l 0.04453,-0.01416 0.09672,-1.402089 c 0.127188,0.05719 0.507188,-0.280313 0.507188,-0.280313 L 13.71,24.38 c 0.43,0.16 1.84,0.68 3.11,1.84 0.46,-0.51 0.95,-0.92 1.3,-1.19 0.11,-0.08 0.22,-0.16 0.27,-0.22 L 19.397187,24.081563 20.5,24.81 c 0.84,1.11 -0.32,2.03 -0.7,2.35 z" id="path2" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="cccccccccccccccccc"/>
+    <g id="g4"/>
+    <path style="fill:#f4f2ef;fill-opacity:1;stroke:none;stroke-width:1.431;stroke-miterlimit:5.6;paint-order:fill markers stroke" d="m 12.0625,19.6875 c -0.136785,-0.102589 -0.08817,-0.05692 -0.15625,-0.125" id="path5"/>
+    <path style="fill:#f4f2ef;fill-opacity:1;stroke:none;stroke-width:1.431;stroke-miterlimit:5.6;paint-order:fill markers stroke" d="M 11.90625,19.59375 8.65625,18.5" id="path6"/>
+    <path style="fill:#5b4511;fill-opacity:1;stroke:none;stroke-width:7.631;stroke-miterlimit:5.6;stroke-dasharray:none;paint-order:stroke fill markers" d="m 17.169437,26.770621 c -2.559246,4.463369 -17.73916973,-9.930403 -12.0707041,-8.49214 0.9287846,0.235661 5.3973831,3.8628 5.3973831,3.8628 m 11.026447,-2.474874" id="path14" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="csc"/>
+    <path style="fill:#5b4511;fill-opacity:1;stroke:none;stroke-width:7.631;stroke-miterlimit:5.6;stroke-dasharray:none;paint-order:stroke fill markers" d="m 30.328979,19.163999 c 1.224717,-8.441955 -17.326258,9.561684 -11.657792,8.123421 0.928784,-0.235661 7.583457,-5.766323 7.583457,-5.766323" id="path14-1" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="csc"/>
+    <path style="fill:#5b4511;fill-opacity:1;stroke:none;stroke-width:5.16583;stroke-miterlimit:5.6;stroke-dasharray:none;paint-order:stroke fill markers" d="m 7.8841287,23.009148 c 1.6772356,3.121029 11.6255993,-6.943875 7.9106953,-5.938163 -0.608691,0.164787 -3.537246,2.701078 -3.537246,2.701078 M 5.0312501,18.041498" id="path14-2" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="csc"/>
+    <path style="fill:#5b4511;fill-opacity:1;stroke:none;stroke-width:5.16583;stroke-miterlimit:5.6;stroke-dasharray:none;paint-order:stroke fill markers" d="m 25.321629,19.134007 c 1.677235,-3.121029 11.625599,6.943875 7.910695,5.938163 -0.608691,-0.164787 -3.537246,-2.701078 -3.537246,-2.701078 m -7.226328,1.730565" id="path14-2-4" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="csc"/>
+    <path style="fill:#5b4511;fill-opacity:1;stroke:none;stroke-width:5.16583;stroke-miterlimit:5.6;stroke-dasharray:none;paint-order:stroke fill markers" d="m 25.691215,21.767008 c -2.909202,2.022494 -7.218185,-11.457302 -4.362028,-8.877702 0.467985,0.42267 1.9297,4.01051 1.9297,4.01051 m 7.226205,1.731078" id="path14-2-4-7" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="csc"/>
+    <path style="fill:#5b4511;fill-opacity:1;stroke:none;stroke-width:5.16583;stroke-miterlimit:5.6;stroke-dasharray:none;paint-order:stroke fill markers" d="m 14.834057,26.075254 c 0.178028,-3.538679 -13.5413244,-0.06714 -9.8415113,0.992747 0.6062184,0.173662 4.4243081,-0.483146 4.4243081,-0.483146 m 5.2907142,5.217567" id="path14-2-49" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="csc"/>
+  </g>
     </svg>`
     case (3):
       if (is_alive){
       return `<svg style="margin:81px" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 62.54 117.42">
+      <defs>
+        <style>
+          .cls-1 {
+            fill: #548313 !important;
+          }
+    
+          .cls-1, .cls-2, .cls-3 {
+            stroke-width: 0px;
+          }
+    
+          .cls-2 {
+            fill: #9c9081 !important;
+          }
+    
+          .cls-3 {
+            fill: #5b4511 !important;
+          }
+        </style>
+      </defs>
+<g xmlns="http://www.w3.org/2000/svg" id="Laag_1-2" data-name="Laag 1">
+    <path class="cls-2" d="M38.14,93.55c-1.81,5.33-3.46,9.27,2.43,12.16,2.19,1.46,4.49,2.51,6.92,3.89,1.38.65,2.22,2.27,1.97,3.81-.11,1.41-.46,2.7-.89,4l-.41-.14c.32-1.78.76-3.92,0-5.57-2.27-2-5.92-2.49-8.65-4.16-2.57-1.16-5.68-3.3-5.81-6.54-.49-4.65,1.7-8.41,1.92-12.62-4.87,4.49-10.38,14.43-17.03,8.22l.24-.32c2.27.87,4.7.7,6.11-1.35,1.92-2.32,3.92-5.68,6.27-8.3h8.43c0,.49-.05,1-.11,1.51,1.95,2,3.19,4.41,4.7,6.6,3.73,1.65,5.68,5.79,7.22,9.38l-.38.22c-2.46-2.59-4.7-5.81-8.3-6.54-2.24-1.16-3.7-2.7-4.57-4.49l-.08.24Z"/>
+    <path class="cls-3" d="M44.81,27.73c-1.32.62-3.57,5.43-5.54,14.89-.27,1.3-.41,2.62-.41,3.95v40.03h-2.7v-29.11c0-2-8.11-10.6-15.6-17.41l1.81-2c2.73,2.49,9.87,9.11,13.79,14.25v-5.76c0-.87.05-1.76.16-2.62l-.16.03c-.78-6.68-1.87-14.19-2.32-15.16l2.35-1.35c.51.89,1.19,4.97,1.76,9.08,1.76-6.54,3.7-10.33,5.76-11.27l1.11,2.46Z"/>
+    <g>
+      <path class="cls-1" d="M22.38,38.09l-1.81,2S.91,40.7,0,16.4c0,0,23.07-.85,22.38,21.69Z"/>
+      <path class="cls-1" d="M36.19,27.46l-2.35,1.35s-12.94-7.68-5.65-21.28c0,0,14.49,7.73,8,19.93Z"/>
+      <path class="cls-1" d="M43.7,25.27S40.82,1.4,58.44,0c0,0,15.46,10.64-13.62,27.73l-1.11-2.46Z"/>
+    </g>
+  </g>
+    </svg>`}
+    return`<svg style="margin:81px" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 62.54 117.42">
       <defs>
         <style>
           .cls-1 {
@@ -377,8 +394,7 @@ function display_plant(age, is_alive) {
     <path style="fill:#5b4511;stroke-width:2.16045;stroke-miterlimit:5.6;paint-order:stroke fill markers" d="m 29.175097,28.091999 c -3.251083,-3.283398 -3.174945,-5.353652 -3.174945,-5.353652 l 0.06852,-0.303287 c 0,0 0.290643,-0.98762 0.913653,0.01319 0.52535,0.843925 0.772258,2.188974 1.804464,3.177907 1.073543,1.028533 1.02499,1.114841 0.936495,1.912017 -0.09746,0.87797 -0.548191,0.553826 -0.548191,0.553826 z" id="path5-7-14-0" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="cccsssc"/>
     <path style="fill:#5b4511;stroke-width:2.16045;stroke-miterlimit:5.6;paint-order:stroke fill markers" d="m 28.496843,19.235747 c 2.659605,3.778457 4.710916,4.068063 4.710916,4.068063 l 0.310612,-0.01405 c 0,0 1.023367,-0.11219 0.147903,-0.901699 -0.738229,-0.665748 -2.018781,-1.14565 -2.810499,-2.335867 -0.82342,-1.237884 -0.916928,-1.205288 -1.717231,-1.258552 -0.881412,-0.05867 -0.641704,0.442102 -0.641704,0.442102 z" id="path5-7-14-23" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="cccsssc"/>
   </g>
-    </svg>`}
-    return`Stage 3 died`
+    </svg>`
     case (4):
       if (is_alive){
       return `<svg style="margin:73px" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 45.58 126.74">
@@ -781,23 +797,20 @@ function display_plant(age, is_alive) {
     return `<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 132.59 174.07">
       <defs>
         <style>
-          .cls-1 {
-            fill: var(--fruit-color) !important;
-          }
     
           .cls-1, .cls-2, .cls-3, .cls-4 {
             stroke-width: 0px;
           }
     
-          .cls-2 {
+          .cls-1 {
             fill: #9c9081 !important;
           }
     
-          .cls-3 {
+          .cls-2 {
             fill: #5b4511 !important;
           }
     
-          .cls-4 {
+          .cls-3 {
             fill: #548013 !important;
           }
         </style>
