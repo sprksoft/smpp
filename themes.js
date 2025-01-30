@@ -96,7 +96,7 @@ const themes = {
     "--color-splashtext": "#7bcfe2"
   },
   "birb": {
-    "--color-accent": "#8590aacc",
+    "--color-accent": "#6e7b9a",
     "--color-text": "#a8a9ab",
     "--color-base00": "#0e0e15",
     "--color-base01": "#18191d",

@@ -124,3 +124,27 @@
   font-size: 50px !important;
   font-weight: 800 !important;
 }
+#plant_the_plant_svg {
+  transition-duration: 0.4s;
+}
+
+/* Rising/draining effect */
+#riseMask {
+  transition: transform 0.4s cubic-bezier(.52,.56,.29,.98) !important; /* Animate transform */
+  transform: translateY(100%); /* Start hidden at the bottom */
+}
+
+#plant_the_plant_svg:hover #riseMask {
+  transform: translateY(0%); /* Rise up on hover */
+}
+
+#hand {
+  fill: var(--color-base02);
+  transition-duration: 0.3s;
+}
+#plant_the_plant_svg:hover #hand {
+  fill: var(--color-base03);
+}
+#plant_the_plant_svg:hover{
+  cursor: pointer !important;
+}
