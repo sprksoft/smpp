@@ -1,16 +1,3 @@
-const apiKey = '2b6f9b6dbe5064dd770f29d4b229a22c';
-
-async function getWeatherByCity(city) {
-  try {
-    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-    const response = await fetch(apiUrl);
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error('Error fetching data:', error);
-  }
-}
-
 async function updateWeatherDiv(weatherData, isBig, timeDifference) {
   const rightContainer = document.getElementById('weathercontainer');
   const weatherDiv = document.createElement("div");
@@ -103,14 +90,14 @@ async function getWeatherBasedOnLocation(location, isBig) {
     await migrateWeaterData();
     wasMigrated = true;
   }
-  
+
   const currentDate = new Date();
   let weatherAppData = await browser.runtime.sendMessage({ action: 'getWeatherAppData', location: location });
   let lastUpdateDate = new Date(weatherAppData.lastUpdateDate);
   let timeDifference = Math.abs(lastUpdateDate - currentDate) / 1000;
   let weatherData;
   if (timeDifference > 600 || location !== weatherAppData.lastLocation || wasMigrated) {
-    weatherData = await getWeatherByCity(location);
+    weatherData = await browser.runtime.sendMessage({ action: 'fetchWeatherData', location: location });;
     await browser.runtime.sendMessage({
       action: 'setWeatherAppData',
       data: {
