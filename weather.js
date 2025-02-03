@@ -11,48 +11,38 @@ async function getWeatherByCity(city) {
   }
 }
 
-async function updateWeatherDiv(weatherData, IsBig) {
-  if (!weatherData) {
-    return;
-  }
+async function updateWeatherDiv(weatherData, isBig, timeDifference) {
   const rightContainer = document.getElementById('weathercontainer');
-  let weatherdiv = document.createElement("div");
+  const weatherDiv = document.createElement("div");
   const { name, main, weather, wind } = weatherData;
   const temperature = Math.round(main.temp);
-  const feelslike = Math.round(main.feels_like);
+  const feelsLike = Math.round(main.feels_like);
   const description = weather[0].description;
   const humidity = main.humidity;
-  let windSpeed = Number(wind.speed);
+  const windSpeed = Number(wind.speed);
   const mainWeather = weather[0].main;
-  let windSpeedkmh = Math.round(windSpeed * 3.6);
-  let lastupdate_date = new Date(window.localStorage.getItem("lastupdate"));
-  const currentdate = new Date();
-  let difference = Math.abs(lastupdate_date - currentdate) / 1000 / 60
+  const windSpeedKMH = Math.round(windSpeed * 3.6);
+  const timeDifferenceMins = Math.round(Math.abs(timeDifference)/ 60)
 
-  difference = Math.round(difference)
   try {
-    if (IsBig) {
-      weatherdiv.innerHTML = weatherHTML
-    } else (
-      weatherdiv.innerHTML = weatherHTMLTiny
-    )
+    weatherDiv.innerHTML = isBig ? weatherHTML : weatherHTMLTiny
 
-    weatherdiv.querySelector(".weather-location").innerText = name;
-    weatherdiv.querySelector(".weather-main").innerText = mainWeather;
-    if (weatherdiv.querySelector(".weather-temperature").innerText = temperature + "°C"){
-      weatherdiv.querySelector(".weather-temperature").innerText = temperature + "°C";
+    weatherDiv.querySelector(".weather-location").innerText = name;
+    weatherDiv.querySelector(".weather-main").innerText = mainWeather;
+    if (weatherDiv.querySelector(".weather-temperature").innerText = temperature + "°C") {
+      weatherDiv.querySelector(".weather-temperature").innerText = temperature + "°C";
     }
-    if (weatherdiv.querySelector(".weather-feelslike")){
-      weatherdiv.querySelector(".weather-feelslike").innerText = "Feels like " + feelslike + "°C";
+    if (weatherDiv.querySelector(".weather-feelslike")) {
+      weatherDiv.querySelector(".weather-feelslike").innerText = "Feels like " + feelsLike + "°C";
     }
-    weatherdiv.querySelector(".weather-humidity").innerText = humidity + "%";
-    weatherdiv.querySelector(".weather-wind").innerText = windSpeedkmh + "km/h";
-    if (difference == 0) {
-      weatherdiv.querySelector(".weather-lastupdate").innerText = "Now";
+    weatherDiv.querySelector(".weather-humidity").innerText = humidity + "%";
+    weatherDiv.querySelector(".weather-wind").innerText = windSpeedKMH + "km/h";
+    if (timeDifference == 0) {
+      weatherDiv.querySelector(".weather-lastupdate").innerText = "Now";
     } else {
-      weatherdiv.querySelector(".weather-lastupdate").innerText = difference + " min ago";
+      weatherDiv.querySelector(".weather-lastupdate").innerText = timeDifferenceMins + " min ago";
     }
-    const weatherIcon = weatherdiv.querySelector('.weather-icon');
+    const weatherIcon = weatherDiv.querySelector('.weather-icon');
     set_snow_multiplier(mainWeather == "Snow");
     set_rain_multiplier(mainWeather == "Rain" || mainWeather == "Drizzle")
     if (description == "broken clouds") {
@@ -89,28 +79,82 @@ async function updateWeatherDiv(weatherData, IsBig) {
   catch (e) {
     console.error(e);
   }
-  rightContainer.appendChild(weatherdiv);
+  rightContainer.appendChild(weatherDiv);
 }
 
-async function set_weather_loc(loc, IsBig) {
-  const currentdate = new Date();
-  if (window.localStorage.getItem("lastupdate") == undefined) {
-    window.localStorage.setItem("lastupdate", currentdate)
-    window.localStorage.setItem("lastlocation", loc)
+async function migrateWeaterData() {
+
+}
+
+async function getWeatherBasedOnLocationV0(location, isBig) {
+  const currentDate = new Date();
+
+  if (window.localStorage.getItem("lastlocation")) {
+    migrateWeaterData()
   }
-  let lastupdate_date = new Date(window.localStorage.getItem("lastupdate"));
-  let difference = Math.abs(lastupdate_date - currentdate) / 1000;
-  if (difference > 600 || loc != (window.localStorage.getItem("lastlocation")) || !(window.localStorage.getItem("weatherdata"))) {
-    window.localStorage.setItem("lastupdate", currentdate)
-    window.localStorage.setItem("lastlocation", loc)
-    let weatherData = await getWeatherByCity(loc);
+  if (window.localStorage.getItem("lastupdate") == undefined) {
+    window.localStorage.setItem("lastupdate", currentDate)
+    window.localStorage.setItem("lastlocation", location)
+  }
+  let lastUpdateDate = new Date(window.localStorage.getItem("lastupdate"));
+  let timeDifference = Math.abs(lastUpdateDate - currentDate) / 1000;
+
+  if (timeDifference > 600 || location != (window.localStorage.getItem("lastlocation")) || !(window.localStorage.getItem("weatherdata"))) {
+    window.localStorage.setItem("lastupdate", currentDate)
+    window.localStorage.setItem("lastlocation", location)
+    let weatherData = await getWeatherByCity(location);
     if (weatherData == undefined) {
       return;
     }
-    updateWeatherDiv(weatherData, IsBig);
+    updateWeatherDiv(weatherData, isBig);
     window.localStorage.setItem("weatherdata", JSON.stringify(weatherData))
   } else {
     let weatherData = JSON.parse(window.localStorage.getItem("weatherdata"));
-    updateWeatherDiv(weatherData, IsBig);
+    if (weatherData == undefined) {
+      return;
+    }
+    updateWeatherDiv(weatherData, isBig);
   }
 }
+
+async function getWeatherBasedOnLocation(location, isBig) {
+  const currentDate = new Date();
+
+  if (window.localStorage.getItem("lastlocation")) {
+      migrateWeaterData();
+  }
+
+  let weatherAppData = await browser.runtime.sendMessage({ action: 'getWeatherAppData', location: location });
+  console.log(weatherAppData.lastLocation);  // Should be 'Keerbergen'
+  console.log(weatherAppData.lastUpdateDate);  // Should be a Date object
+  console.log(weatherAppData.weatherData);  // Should be the weather data object
+  
+  console.log(weatherAppData); 
+
+  let lastUpdateDate = new Date(weatherAppData.lastUpdateDate);
+  let timeDifference = Math.abs(lastUpdateDate - currentDate) / 1000;
+  console.log(timeDifference)
+  console.log(location)
+  console.log(weatherAppData.lastLocation)
+  if (timeDifference > 600 || location !== weatherAppData.lastLocation) {
+      let weatherData = await getWeatherByCity(location);
+      console.log("i got called")
+      console.log(weatherData)
+      await browser.runtime.sendMessage({
+        action: 'setWeatherAppData',  // Use the correct action name
+        data: {
+            weatherData: weatherData,  // Your weather data
+            lastUpdateDate: currentDate.toISOString(),  // Make sure Date is serialized
+            lastLocation: location
+        }
+    });
+    
+
+      updateWeatherDiv(weatherData, isBig, timeDifference);
+  } else {
+      let weatherData = weatherAppData.weatherData
+      updateWeatherDiv(weatherData, isBig, timeDifference);
+  }
+}
+
+

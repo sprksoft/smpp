@@ -79,7 +79,11 @@
 .big_icon_weather_big {
   width: 34%;
 }
-
+.weatherImg {
+  display: flex;
+  flex-direction: column;
+  margin-left: 900px !important;
+}
 
 /*this is for the small weather from here: */
 
@@ -92,14 +96,6 @@
 .weather-descriptionSmall {
   font-size: 16px;
   margin-bottom: 5px;
-}
-
-
-
-.weatherImg {
-  display: flex;
-  flex-direction: column;
-  margin-left: 900px !important;
 }
 
 .colSmall {

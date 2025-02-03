@@ -34,7 +34,7 @@ function openFileSelector() {
 }
 function clearsettings() {
   localStorage.clear();
-  console.log("cleared settings!")
+  console.log("Cleared settings!")
 }
 function fileToBase64(file) {
   return new Promise((resolve, reject) => {
@@ -44,8 +44,8 @@ function fileToBase64(file) {
     reader.onerror = error => reject(error);
   });
 }
-const anakin = 56789;  // ???
-const skywalker = 98765;  // word letterlijk nergens gebruikt
+const anakin = 56789;
+const skywalker = 98765;  
 
 async function apply() {
   let style = document.documentElement.style;
@@ -204,7 +204,7 @@ async function apply() {
       WeatherAppElement.classList.add("smsc-container--right")
       WeatherAppElement.setAttribute("id", "weathercontainer")
       container.append(WeatherAppElement)
-      await set_weather_loc(loc, IsBig);
+      await getWeatherBasedOnLocation(loc, IsBig);
     }
     if (showsnake) {
       if (!document.getElementById("weathercontainer")) {
