@@ -22,7 +22,7 @@ async function updateWeatherDiv(weatherData, isBig, timeDifference) {
   const windSpeed = Number(wind.speed);
   const mainWeather = weather[0].main;
   const windSpeedKMH = Math.round(windSpeed * 3.6);
-  const timeDifferenceMins = Math.round(Math.abs(timeDifference)/ 60)
+  const timeDifferenceMins = Math.round(Math.abs(timeDifference) / 60)
 
   try {
     weatherDiv.innerHTML = isBig ? weatherHTML : weatherHTMLTiny
@@ -37,7 +37,7 @@ async function updateWeatherDiv(weatherData, isBig, timeDifference) {
     }
     weatherDiv.querySelector(".weather-humidity").innerText = humidity + "%";
     weatherDiv.querySelector(".weather-wind").innerText = windSpeedKMH + "km/h";
-    if (timeDifference == 0) {
+    if (timeDifferenceMins == 0) {
       weatherDiv.querySelector(".weather-lastupdate").innerText = "Now";
     } else {
       weatherDiv.querySelector(".weather-lastupdate").innerText = timeDifferenceMins + " min ago";
@@ -83,77 +83,46 @@ async function updateWeatherDiv(weatherData, isBig, timeDifference) {
 }
 
 async function migrateWeaterData() {
-
-}
-
-async function getWeatherBasedOnLocationV0(location, isBig) {
-  const currentDate = new Date();
-
-  if (window.localStorage.getItem("lastlocation")) {
-    migrateWeaterData()
-  }
-  if (window.localStorage.getItem("lastupdate") == undefined) {
-    window.localStorage.setItem("lastupdate", currentDate)
-    window.localStorage.setItem("lastlocation", location)
-  }
-  let lastUpdateDate = new Date(window.localStorage.getItem("lastupdate"));
-  let timeDifference = Math.abs(lastUpdateDate - currentDate) / 1000;
-
-  if (timeDifference > 600 || location != (window.localStorage.getItem("lastlocation")) || !(window.localStorage.getItem("weatherdata"))) {
-    window.localStorage.setItem("lastupdate", currentDate)
-    window.localStorage.setItem("lastlocation", location)
-    let weatherData = await getWeatherByCity(location);
-    if (weatherData == undefined) {
-      return;
+  console.log("migrating")
+  await browser.runtime.sendMessage({
+    action: 'setWeatherAppData',
+    data: {
+      weatherData: localStorage.getItem("weatherdata"),
+      lastUpdateDate: localStorage.getItem("lastupdate"),
+      lastLocation: localStorage.getItem("lastlocation")
     }
-    updateWeatherDiv(weatherData, isBig);
-    window.localStorage.setItem("weatherdata", JSON.stringify(weatherData))
-  } else {
-    let weatherData = JSON.parse(window.localStorage.getItem("weatherdata"));
-    if (weatherData == undefined) {
-      return;
-    }
-    updateWeatherDiv(weatherData, isBig);
-  }
+  });
+  localStorage.removeItem("weatherdata")
+  localStorage.removeItem("lastupdate")
+  localStorage.removeItem("lastlocation")
 }
 
 async function getWeatherBasedOnLocation(location, isBig) {
-  const currentDate = new Date();
-
+  let wasMigrated = false;
   if (window.localStorage.getItem("lastlocation")) {
-      migrateWeaterData();
+    await migrateWeaterData();
+    wasMigrated = true;
   }
-
-  let weatherAppData = await browser.runtime.sendMessage({ action: 'getWeatherAppData', location: location });
-  console.log(weatherAppData.lastLocation);  // Should be 'Keerbergen'
-  console.log(weatherAppData.lastUpdateDate);  // Should be a Date object
-  console.log(weatherAppData.weatherData);  // Should be the weather data object
   
-  console.log(weatherAppData); 
-
+  const currentDate = new Date();
+  let weatherAppData = await browser.runtime.sendMessage({ action: 'getWeatherAppData', location: location });
   let lastUpdateDate = new Date(weatherAppData.lastUpdateDate);
   let timeDifference = Math.abs(lastUpdateDate - currentDate) / 1000;
-  console.log(timeDifference)
-  console.log(location)
-  console.log(weatherAppData.lastLocation)
-  if (timeDifference > 600 || location !== weatherAppData.lastLocation) {
-      let weatherData = await getWeatherByCity(location);
-      console.log("i got called")
-      console.log(weatherData)
-      await browser.runtime.sendMessage({
-        action: 'setWeatherAppData',  // Use the correct action name
-        data: {
-            weatherData: weatherData,  // Your weather data
-            lastUpdateDate: currentDate.toISOString(),  // Make sure Date is serialized
-            lastLocation: location
-        }
+  let weatherData;
+  if (timeDifference > 600 || location !== weatherAppData.lastLocation || wasMigrated) {
+    weatherData = await getWeatherByCity(location);
+    await browser.runtime.sendMessage({
+      action: 'setWeatherAppData',
+      data: {
+        weatherData: weatherData,
+        lastUpdateDate: currentDate.toISOString(),
+        lastLocation: location
+      }
     });
-    
-
-      updateWeatherDiv(weatherData, isBig, timeDifference);
+    updateWeatherDiv(weatherData, isBig, 0);
   } else {
-      let weatherData = weatherAppData.weatherData
-      updateWeatherDiv(weatherData, isBig, timeDifference);
+    weatherData = weatherAppData.weatherData
+    updateWeatherDiv(weatherData, isBig, timeDifference);
   }
 }
 
