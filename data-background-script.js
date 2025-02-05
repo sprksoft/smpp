@@ -24,3 +24,23 @@ export async function getWeatherAppData(location) {
         console.error('Error retrieving weather AppData:', error);
     }
 }
+export async function getDelijnAppData() {
+    try {
+        let data = await browser.storage.local.get("delijnAppData");
+        let delijnAppData = data.delijnAppData || {
+            entiteitnummer: null,
+            haltenummer: null,
+        };
+
+        await browser.storage.local.set({
+            delijnAppData: {
+                entiteitnummer: delijnAppData.entiteitnummer,
+                haltenummer: delijnAppData.entiteitnummer,
+            }
+        });
+        console.log('Retrieved Delijn AppData.');
+        return delijnAppData;
+    } catch (error) {
+        console.error('Error retrieving Delijn AppData:', error);
+    }
+}
