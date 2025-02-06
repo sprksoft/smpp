@@ -187,7 +187,7 @@ function getChoice(data) {
   }
 }
 
-function decodehalte() {
+async function decodehalte() {
   const leftContainer = document.getElementById("delijncontainer");
   if (!leftContainer) return;
 
@@ -233,7 +233,14 @@ function decodehalte() {
 
   const lijnData = JSON.parse(localStorage.getItem("lijnData"));
   if (lijnData) {
-    fetchData(lijnData.entiteitnummer, lijnData.haltenummer);
+    let delijnData = await browser.runtime.sendMessage({
+      action: 'fetchDelijnData', url:
+        `https://api.delijn.be/DLKernOpenData/api/v1/haltes/${data.haltes[choice].entiteitnummer}/${data.haltes[choice].haltenummer}/real-time?maxAantalDoorkomsten=5`
+    });
+    console.log(delijnData)
+    if (delijnData){
+      createApplication(delijnData)
+    }else{handleFetchError()}
   } else {
     leftContainerbottom.innerHTML = `<div id="leftContainerbottom"><p class=lijninfo>Zoek naar een halte aub.</p></div>`;
   }
