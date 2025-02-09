@@ -100,7 +100,7 @@ function plant_the_plant() {
     plant_color: chosen_color,
     plant_version: current_plant_version,
     birth_day: null,
-    time_since_birthday_days: null,
+    time_since_birthday_days: 0,
     is_alive: is_alive
   });
   add_ui();
