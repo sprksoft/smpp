@@ -14,7 +14,7 @@ html {
   display: none !important;
 }
 
-#dmenu {
+.dmenu {
   overflow: clip;
   background: var(--color-base00);
   border: var(--border-size) solid var(--color-popup-border);
@@ -27,7 +27,7 @@ html {
   border-radius: 5px !important;
 }
 
-#dmenu>.top {
+.dmenu-top {
   display: flex;
   flex-direction: row;
   border-bottom: var(--border-size) solid var(--color-base02);
@@ -49,7 +49,7 @@ html {
   outline: none;
 }
 
-.dmenu-label {
+.dmenu-title {
   background: var(--color-base01);
   color: var(--color-accent);
   line-height: inherit;
@@ -59,19 +59,19 @@ html {
   border-top-left-radius: 3px !important;
 }
 
-.dmenu-label:hover {
+.dmenu-title:hover {
   cursor: auto !important;
 }
 
-#dmenu .autocomplete {
+.dmenu-itemlist {
   overflow-y: auto;
 }
 
-#dmenu .hidden {
+.dmenu .hidden {
   visibility: hidden;
 }
 
-#dmenu .autocomplete-row {
+.dmenu-row {
   margin: var(--dmenu-margin);
   color: var(--color-text) !important;
   display: flex;
@@ -79,35 +79,36 @@ html {
   border: none;
 }
 
-#dmenu .content {
+.dmenu-row:hover {
+  background: var(--color-base02);
+  cursor: pointer;
+}
+
+.dmenu .content {
   margin-right: 1em;
   display: inline !important;
 }
 
-#dmenu .meta {
+.dmenu .meta {
   flex-grow: 10;
   color: var(--color-base03);
 }
 
-#dmenu .score {
+.dmenu .score {
   margin-right: 0.5rem;
   color: var(--color-accent);
 }
 
-#dmenu .selected .score {
+.dmenu-selected .score {
   color: var(--color-base01) !important;
 }
 
-#dmenu .autocomplete-row:nth-child(even) {
+.dmenu-itemlist:nth-child(even) {
   background: var(--color-base01);
 }
 
-#dmenu .selected {
+.dmenu-selected {
   background: var(--color-accent) !important;
   color: var(--color-base01) !important;
 }
 
-#dmenu .autocomplete-row:hover {
-  background: var(--color-base02);
-  cursor: pointer;
-}
