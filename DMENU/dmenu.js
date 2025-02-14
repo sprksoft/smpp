@@ -105,7 +105,7 @@ class DMenu {
 
       node.dataset.score = score;
       if (this.showItemScore) {
-        node.getElementsByClassName("score")[0].innerText = score;
+        node.getElementsByClassName("dmenu-score")[0].innerText = score;
       }
     }
 
@@ -177,14 +177,14 @@ class DMenu {
     }
     let row = document.createElement("div");
     row.classList.add("dmenu-row");
-    row.innerHTML = '<div class="content"></div><div class="meta"></div><div class="score"></div>'
-    row.getElementsByClassName("content")[0].innerText = cmd;
+    row.innerHTML = '<div class="dmenu-content"></div><div class="dmenu-meta"></div><div class="dmenu-score"></div>'
+    row.getElementsByClassName("dmenu-content")[0].innerText = cmd;
     row.dataset.content = cmd;
     if (meta != undefined) {
-      row.getElementsByClassName("meta")[0].innerText = meta;
+      row.getElementsByClassName("dmenu-meta")[0].innerText = meta;
     }
     if (this.showItemScore) {
-      row.getElementsByClassName("score")[0].innerText = "0";
+      row.getElementsByClassName("dmenu-score")[0].innerText = "0";
     }
 
     let klass = this;

@@ -73,10 +73,14 @@ html {
 
 .dmenu-row {
   margin: var(--dmenu-margin);
+  background: var(--color-base00);
   color: var(--color-text) !important;
   display: flex;
   flex-direction: row;
   border: none;
+}
+.dmenu-row:nth-child(even) {
+  background: var(--color-base01);
 }
 
 .dmenu-row:hover {
@@ -84,27 +88,23 @@ html {
   cursor: pointer;
 }
 
-.dmenu .content {
+.dmenu-content {
   margin-right: 1em;
   display: inline !important;
 }
 
-.dmenu .meta {
+.dmenu-meta {
   flex-grow: 10;
   color: var(--color-base03);
 }
 
-.dmenu .score {
+.dmenu-score {
   margin-right: 0.5rem;
   color: var(--color-accent);
 }
 
-.dmenu-selected .score {
+.dmenu-selected .dmenu-score {
   color: var(--color-base01) !important;
-}
-
-.dmenu-itemlist:nth-child(even) {
-  background: var(--color-base01);
 }
 
 .dmenu-selected {
