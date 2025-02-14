@@ -232,6 +232,7 @@ document.addEventListener("keyup", function (e) {
 const topNav = document.querySelector("nav.topnav")
 if (topNav && document.querySelector("#dmenutooltip") == undefined) {
   const quickButton = document.createElement("button");
+  quickButton.title="Quick menu (je kan ook : gebruiken om het quick te openen)"
   quickButton.id = "dmenutooltip" //TODO: change this to something more meaningful
   quickButton.className = "topnav__btn"
   quickButton.innerText = "Quick"
@@ -240,6 +241,7 @@ if (topNav && document.querySelector("#dmenutooltip") == undefined) {
   })
 
   const goGlChatButton = document.createElement("button");
+  goGlChatButton.title="Global chat (chat met iedereen die de extensie gebruikt)"
   goGlChatButton.id = "global_chat_button"
   goGlChatButton.className = "topnav__btn"
   goGlChatButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="3009 50 450 450" class="st1">
