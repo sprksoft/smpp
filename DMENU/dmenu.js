@@ -103,10 +103,18 @@ class DMenu {
     for (let node of this.itemListEl.childNodes){
       let score = this.#matchScore(node.dataset.content, searchq);
 
-      node.dataset.score = score;
+      if (score == 0 && searchq != "") {
+        node.dataset.score = -1;
+        node.classList.add("hidden");
+      } else {
+        node.dataset.score = score;
+        node.classList.remove("hidden");
+      }
+
       if (this.showItemScore) {
         node.getElementsByClassName("dmenu-score")[0].innerText = score;
       }
+
     }
 
     let sorted = Array.from(this.itemListEl.childNodes)
@@ -124,12 +132,6 @@ class DMenu {
         node.classList.add("dmenu-selected");
       }else{
         node.classList.remove("dmenu-selected");
-      }
-
-      if (node.dataset.score == 0 && searchq != "") {
-        node.classList.add("hidden");
-      } else {
-        node.classList.remove("hidden");
       }
 
       this.itemListEl.appendChild(sorted[i]);
