@@ -145,9 +145,9 @@ function scrape_goto() {
 
 
 function do_qm(open_key = "") {
-  let cmd_list = quick_cmd_list().concat(goto_items).concat(vakken).concat(links.concat(["dmenu config", "quick add", "quick remove", "config", "toggle fancy scores", "lock dmenu", "unbloat", "clearsettings", "discord"]));
+  let cmd_list = quick_cmd_list().concat(goto_items).concat(vakken).concat(links.concat(["home", "dmenu config", "quick add", "quick remove", "config", "toggle fancy scores", "lock dmenu", "unbloat", "clearsettings", "discord"]));
 
-  dmenu(cmd_list, function (cmd, shift) {
+  dmenu(cmd_list, function (cmd) {
     switch (cmd) {
       case "lock dmenu":
         lock_dmenu = !lock_dmenu;
@@ -183,7 +183,10 @@ function do_qm(open_key = "") {
         remove_quick_interactive();
         return;
       case "discord":
-        open_url("https://discord.com/invite/qCHZYepDqZ", shift);
+        open_url("https://discord.com/invite/qCHZYepDqZ");
+        return;
+      case "home":
+        open_url("/");
         return;
       case "clearsettings":
         clearsettings();
@@ -205,12 +208,12 @@ function do_qm(open_key = "") {
     }
     for (let i = 0; i < goto_items.length; i++) {
       if (goto_items[i].value == cmd) {
-        open_url(goto_items[i].url, shift);
+        open_url(goto_items[i].url);
       }
     }
     for (let i = 0; i < vakken.length; i++) {
       if (vakken[i].value == cmd) {
-        open_url(vakken[i].url, shift);
+        open_url(vakken[i].url);
       }
     }
 
@@ -229,6 +232,7 @@ document.addEventListener("keyup", function (e) {
 const topNav = document.querySelector("nav.topnav")
 if (topNav && document.querySelector("#dmenutooltip") == undefined) {
   const quickButton = document.createElement("button");
+  quickButton.title="Quick menu (je kan ook : gebruiken om het quick te openen)"
   quickButton.id = "dmenutooltip" //TODO: change this to something more meaningful
   quickButton.className = "topnav__btn"
   quickButton.innerText = "Quick"
@@ -237,6 +241,7 @@ if (topNav && document.querySelector("#dmenutooltip") == undefined) {
   })
 
   const goGlChatButton = document.createElement("button");
+  goGlChatButton.title="Global chat (chat met iedereen die de extensie gebruikt)"
   goGlChatButton.id = "global_chat_button"
   goGlChatButton.className = "topnav__btn"
   goGlChatButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="3009 50 450 450" class="st1">
