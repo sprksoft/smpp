@@ -5,6 +5,21 @@ function start_plant_window() {
   add_plant_widget();
 
   let conditions = get_current_conditions();
+  if (!conditions) {
+      conditions = {
+        age: 0,
+        last_time_watered: null,
+        last_time_grew: null,
+        plant_color: "#fff",
+        plant_version: 2, // DEFAULT VERSION?
+        birth_day: null,
+        time_since_birthday_days: 0,
+        is_alive: true
+      }
+      set_current_conditions(conditions); // Save defaults
+  }
+  // Now we can safely access all values.
+  
   let age = conditions.age
   if (age != 0 && conditions.is_alive) {
     age = calculate_growth_since_last_update();
