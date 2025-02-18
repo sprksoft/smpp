@@ -66,7 +66,7 @@ function calculate_growth_since_last_update() {
     current_conditions.birth_day = new Date();
   }
   if (current_conditions.birth_day != null){
-    current_conditions.time_since_birthday_days = current_conditions.is_alive?Math.round((current_time - new Date(current_conditions.birth_day).getTime())/(1000 * 60 * 60 * 24)):current_conditions.time_since_birthday_days
+    current_conditions.time_since_birthday_days = (current_conditions.is_alive?Math.round((current_time - new Date(current_conditions.birth_day).getTime())/(1000 * 60 * 60 * 24)):current_conditions.time_since_birthday_days) + 1
   }
   set_current_conditions(current_conditions);
   return lowground(current_conditions.age);
