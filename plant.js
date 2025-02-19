@@ -16,10 +16,10 @@ function start_plant_window() {
     return
   }
 
-  add_plant_image_to_container(age,conditions.is_alive);
-  if (!conditions.is_alive){
+  add_plant_image_to_container(age, conditions.is_alive);
+  if (!conditions.is_alive) {
     show_remove_button(true)
-  }else if (age == 8) {
+  } else if (age == 8) {
     show_remove_button(false);
   }
 
@@ -56,17 +56,20 @@ function calculate_growth_since_last_update() {
   const time_difference_days_grew = (current_time - last_time_grew) / days_in_ms;
   const time_difference_days_watered = (current_time - last_time_watered) / days_in_ms;
   if (time_difference_days_grew >= 2) {
-      current_conditions.age += 1;
-      current_conditions.last_time_grew = current_time;
-    }
+    current_conditions.age += current_conditions.age < 8 ? 1:0;
+    current_conditions.last_time_grew = current_time;
+  }
+  if (current_conditions.age > 8) {
+    current_conditions.age = 8 //because of a bug
+  }
   if (time_difference_days_watered > 3 && current_conditions.age != 1) {
-      current_conditions.is_alive = false
-    }
-  if (current_conditions.age == 2 && current_conditions.birth_day == null){
+    current_conditions.is_alive = false
+  }
+  if (current_conditions.age == 2 && current_conditions.birth_day == null) {
     current_conditions.birth_day = new Date();
   }
-  if (current_conditions.birth_day != null){
-    current_conditions.time_since_birthday_days = (current_conditions.is_alive?Math.round((current_time - new Date(current_conditions.birth_day).getTime())/(1000 * 60 * 60 * 24)):current_conditions.time_since_birthday_days) + 1
+  if (current_conditions.birth_day != null) {
+    current_conditions.time_since_birthday_days = (current_conditions.is_alive ? Math.round((current_time - new Date(current_conditions.birth_day).getTime()) / (1000 * 60 * 60 * 24)) : current_conditions.time_since_birthday_days) + 1
   }
   set_current_conditions(current_conditions);
   return lowground(current_conditions.age);
@@ -92,7 +95,7 @@ function plant_the_plant() {
   const age = 1
   var possible_colors = ["#fcb528", "#00adfe", "#f474d8", "#c9022b", "#ff6000", "#ff596e", "#6024c9", "#de51c1", "#d8d475", "#f5cb04"]
   var chosen_color = possible_colors[Math.floor(Math.random() * possible_colors.length)]
-  add_plant_image_to_container(1,is_alive)
+  add_plant_image_to_container(1, is_alive)
   set_current_conditions({
     age: age,
     last_time_watered: last_time_watered,
@@ -126,12 +129,12 @@ function add_ui() {
   buttondiv.id = "buttondivforplant";
   buttondiv.innerHTML = plant_buttonsHTML;
   document.getElementById("plantdiv").append(buttondiv);
-  if (current_conditions.birth_day != null){
+  if (current_conditions.birth_day != null) {
     const time_since_birthday_days = current_conditions.time_since_birthday_days;
     const plant_streak = document.createElement("div")
     plant_streak.classList.add("plant_streak_div")
     plant_streak.id = "plant_streak"
-    plant_streak.innerHTML = `<p id="plant_streak">${time_since_birthday_days} ${time_since_birthday_days == 1?"Day":"Days"}</p>`
+    plant_streak.innerHTML = `<p id="plant_streak">${time_since_birthday_days} ${time_since_birthday_days == 1 ? "Day" : "Days"}</p>`
     document.getElementById("plantdiv").prepend(plant_streak);
   }
   document.getElementById("watering_button").addEventListener("click", user_watered_plant);
@@ -148,7 +151,7 @@ function show_remove_button(has_died) {
   removeButtonDiv.id = "removeButtonDiv";
   const removeButtonInfoDiv = document.createElement("div");
   removeButtonInfoDiv.id = "removeButtonInfoDiv";
-  if (has_died){
+  if (has_died) {
     removeButtonInfoDiv.innerHTML = `<p id="plant_remove_info_text">Your plant has died, remove it to plant a new one (optional)</p>`
   } else {
     removeButtonInfoDiv.innerHTML = `<p id="plant_remove_info_text">Your plant is fully grown, remove it to plant a new one (optional)</p>`
@@ -166,7 +169,7 @@ function show_remove_button(has_died) {
 }
 function display_update_prompt() {
   let current_conditions = get_current_conditions()
-  if (!current_conditions.plant_version){
+  if (!current_conditions.plant_version) {
     current_conditions.plant_version = 1
   }
   const update_div = document.createElement("div")
@@ -194,7 +197,7 @@ function initialize_plant() {
     is_alive: true
   });
   document.getElementById("plantdiv").innerHTML = `<div id="plant_image_container"></div>`;
-  add_plant_image_to_container(0,true)
+  add_plant_image_to_container(0, true)
   plant_the_plant_button()
 }
 
@@ -206,8 +209,8 @@ function user_watered_plant() {
   document.getElementById("glass-fill").style.height = '100%'
 }
 
-function add_plant_image_to_container(age,is_alive) {
-  document.getElementById("plant_image_container").innerHTML = get_plant_html(age,is_alive);
+function add_plant_image_to_container(age, is_alive) {
+  document.getElementById("plant_image_container").innerHTML = get_plant_html(age, is_alive);
 }
 
 function set_current_conditions(current_conditions_local) {
@@ -219,9 +222,8 @@ function get_current_conditions() {
   let local_current_conditions = JSON.parse(localStorage.getItem("current_plant_conditions"));
   if (!local_current_conditions) {
     initialize_plant()
-    get_current_conditions()
-    
-  }else{
+    return get_current_conditions()
+  } else {
     local_current_conditions.age = lowground(local_current_conditions.age)
     return local_current_conditions
   }
@@ -240,8 +242,8 @@ function get_plant_html(age, is_alive) {
   var style = document.documentElement.style
   switch (age) {
     case (0):
-      if (is_alive){
-      return `<div id="planttheplantbutton">
+      if (is_alive) {
+        return `<div id="planttheplantbutton">
   <svg xmlns="http://www.w3.org/2000/svg" id="plant_the_plant_svg" data-name="Laag 2" viewBox="0 0 50.16 37.5">
     <defs>
       <!-- Clip-path for the rising effect -->
@@ -278,18 +280,18 @@ function get_plant_html(age, is_alive) {
     </g>
   </svg>
 </div>`}
-    return`Stage 0 died, how? How have you done this? This is the stage before the plant is planted and you've already managed to kill it????`
+      return `Stage 0 died, how? How have you done this? This is the stage before the plant is planted and you've already managed to kill it????`
     case (1):
-      if (is_alive){
-      return `<svg style="margin:107px" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 11.84 21.54">
+      if (is_alive) {
+        return `<svg style="margin:107px" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 11.84 21.54">
       <g id="Laag_1-2" data-name="Laag 1">
         <path style="fill: #9c9081" d="M2.01.08C-.23.84-.06,6.65.07,11.26c.14,4.89.26,7.69,2.43,9.23,2.18,1.55,5.8,1.38,7.78-.49,2.72-2.56,1.24-7.3.49-9.72C9.05,4.83,4.48-.75,2.01.08Z"/>
       </g>
     </svg>`}
-    return `HOW DID YOU KILL A SEED???`
+      return `HOW DID YOU KILL A SEED???`
     case (2):
-      if (is_alive){
-      return `<svg style="margin:91px" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 38.55 66.25">
+      if (is_alive) {
+        return `<svg style="margin:91px" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 38.55 66.25">
       <defs>
         <style>
           .cls-1 {
@@ -318,7 +320,7 @@ function get_plant_html(age, is_alive) {
         </g>
       </g>
     </svg>`}
-    return `<svg style="margin:91px" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 38.55 66.25">
+      return `<svg style="margin:91px" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 38.55 66.25">
       <defs>
         <style>
           .cls-1 {
@@ -353,8 +355,8 @@ function get_plant_html(age, is_alive) {
   </g>
     </svg>`
     case (3):
-      if (is_alive){
-      return `<svg style="margin:81px" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 62.54 117.42">
+      if (is_alive) {
+        return `<svg style="margin:81px" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 62.54 117.42">
       <defs>
         <style>
           .cls-1 {
@@ -384,7 +386,7 @@ function get_plant_html(age, is_alive) {
     </g>
   </g>
     </svg>`}
-    return`<svg style="margin:81px" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 62.54 117.42">
+      return `<svg style="margin:81px" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 62.54 117.42">
       <defs>
         <style>
           .cls-1 {
@@ -417,8 +419,8 @@ function get_plant_html(age, is_alive) {
   </g>
     </svg>`
     case (4):
-      if (is_alive){
-      return `<svg style="margin:73px" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 45.58 126.74">
+      if (is_alive) {
+        return `<svg style="margin:73px" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 45.58 126.74">
       <defs>
         <style>
           .cls-1 {
@@ -455,7 +457,7 @@ function get_plant_html(age, is_alive) {
         </g>
       </g>
     </svg>`}
-    return`<svg style="margin:73px" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 45.58 126.74">
+      return `<svg style="margin:73px" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 45.58 126.74">
       <defs>
         <style>
           .cls-1 {
@@ -505,8 +507,8 @@ function get_plant_html(age, is_alive) {
   </g>
     </svg>`
     case (5):
-      if (is_alive){
-      return `<svg style="margin:61px" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 59.61 138.61">
+      if (is_alive) {
+        return `<svg style="margin:61px" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 59.61 138.61">
       <defs>
         <style>
           .cls-1 {
@@ -536,7 +538,7 @@ function get_plant_html(age, is_alive) {
     <path class="cls-1" d="m 49.814191,104.87397 c 0.88,-0.1 1.28,-0.24 2.08,-0.15 1.35,0.13 2.76,0.47 4.1,0.86 l -0.11,-0.1 0.2,0.13 c 0,0 -0.06,-0.01 -0.09,-0.03 l 2.66,2.29 c 0.92,0.87 2.34,1.03 3.55,1.03 v -0.2 c -0.58,-0.08 -1.17,-0.21 -1.71,-0.42 -0.57,-0.21 -1.01,-0.44 -1.4,-0.93 l -2.44,-2.63 c -1.41,-0.7 -2.96,-1.13 -4.56,-1.49 -1.41,-0.3 -2.82,0.18 -4.1,-0.54 -2.25,-1.25 -4.74,-2.14 -7.33,-2.52 -0.14,-0.11 -0.737897,-0.303856 -0.877897,-0.403856 -2.616658,-1.144232 -4.134205,-0.97523 -4.254205,-1.54523 l -2.272536,0.02775 c -1.04,0.14 -3.930916,0.719337 -4.900916,1.039337 -3.12,1.059999 -6.124446,2.421999 -8.914446,4.101999 -3.25,1.01 -6.87,1.09 -10.2500001,1.6 v 0.19 c 2.3700001,0.11 4.7300001,0.21 7.1000001,0.13 -3.79,2.29 -10.3700002,6.44 -13.7100002,8.66 l 0.1,0.18 15.0000002,-7.83 c 0.99,-0.52 1.99,-1.01 3,-1.5 0.14,0 0.29,0 0.42,0.03 0.03,-0.06 0.05,-0.1 0.05,-0.11 0.03,0.03 0.05,0.1 0.09,0.15 0.1,0.03 0.13,0.09 0.04,0.04 -0.01,-0.01 -0.03,-0.01 -0.04,-0.04 -0.04,-0.01 -0.09,-0.03 -0.14,-0.04 -0.13,0.25 -0.47,0.84 -0.82,1.31 -0.88,1.21 -1.9,2.44 -2.78,3.84 l 0.13,0.15 c 1.93,-0.84 3.69,-2.05 4.97,-3.76 0.72,-1.07 0.69,-2.01 0.24,-2.62 0.81,-0.4 1.6,-0.82 2.37,-1.27 l 3.672223,-1.93155 c 0.53,-0.29 0.521102,-0.33355 1.181102,-0.703555 0.365229,-0.197452 0.983238,0.150325 0.576671,0.525105 v 0 c -2.15,2.33 -4.17,4.73 -6.12,7.21 l 0.08,0.49 c 0.24,1.96 0.67,4.54 -0.1,6.44 -1.33,0.65 -2.57,1.17 -3.94,1.62 -3.39,0.45 -6.41,1.84 -8.84,4.26999 l 0.13,0.15 c 2.14,-1.22999 4.59,-2.39999 7.05,-2.49999 0.35,0.06 0.7,0.09 1.07,0.09 -3.39,2.61999 -5.94,6.60999 -8.26,9.98999 l 0.15,0.11 c 3.28,-3.51 6.49,-7.45 10.67,-9.82999 0.01,0 0.04,-0.01 0.05,-0.01 0.31,-0.08 0.6,-0.18 0.88,-0.3 3.78,-1.55 3.8,-6.31 3.18,-9.97 1.2,-1.56 2.39,-3.11 3.62,-4.63 0.57,-0.68 1.16,-1.41 1.76,-2.11 0.25,-0.03 0.48,-0.08 0.6,-0.04 0.38,0.11 0.768115,0.54356 0.914658,1.0216 0.214178,0.69868 0.875342,1.0184 1.275342,1.0284 0.03,3.05 -1.77,6.13 -3.06,8.78 -0.04,0.14 -0.09,0.26 -0.13,0.4 -1.75,2.37 -3.94,4.58 -6.05,6.71 l 0.13,0.15 c 1.6,-1.18 3.4,-2.44 4.95,-3.8 -0.5,1.69 -0.88,3.41 -0.89,5.20999 0.04,0.35 0.03,0.69 0.3,1.23 -0.53,0.21 -0.99,0.48 -1.45,0.78 -0.42,0.29 -0.86,0.86 -0.99,1.36 -0.67,2.32 -0.31,4.77 0.35,6.92 l 0.19,-0.04 c 0.06,-1.69 0.19,-3.47 0.7,-5.05 0.48,-1.3 1.49,-2.05 2.08,-3.25 0.03,0.03 0.04,0.03 0.05,0.03 0.81,0.28 1.47,1.12 2,1.99 -0.11,3.93 0.87,8.03 -0.11,11.87 -0.37,1.27 -0.97,2.52 -1.72,3.64 l 0.15,0.14 c 4.39,-4.18 3.22,-10.66 3.6,-16.14 -0.68,-1.3 -1.55,-2.68 -3.08,-3.32 v 0.08 c 0,0 -0.08,-0.1 -0.14,-0.13 0,-0.01 -0.01,-0.01 -0.03,-0.03 0.06,0.01 0.11,0.04 0.16,0.08 -0.13,-1.94999 0.72,-4.84999 1.26,-6.85999 0.65,2.34 1.25,4.68 2.4,6.90999 l 0.19,-0.03 c 0.28,-1.71999 0.19,-3.40999 -0.06,-5.07999 -0.16,-0.92 -0.69,-3.28 -1.67,-4.24 1.11,-2.45 2.28,-5.03 2.34,-7.69 1.84,2.2 3.81,4.38 5.05,6.93 0.21,0.79 0.24,1.61 0.19,2.44 -0.62,0.34 -1.2,0.78 -1.74,1.32 -0.64,0.64 -0.86,1.74 -1.02,2.62 -0.15,0.86 -0.43,1.71 -0.29,2.57999 0.19,0.93 0.38,1.86 1.16,2.54 l 0.18,-0.1 c 0.29,-0.83 0.54,-1.64 0.64,-2.44 0.15,-1.19999 -0.23,-2.44999 -0.13,-3.65999 0.05,-0.86 0.57,-1.59 1.15,-2.25 -0.14,1.4 -0.47,2.82 -0.57,4.18 -0.39,3.90999 2.37,7.29999 4.74,10.06999 l 0.14,-0.14 c -1.57,-1.9 -2.98,-4 -3.83,-6.31 -0.77,-1.83 -0.39,-3.68999 0,-5.62999 0.19,0.76 0.58,1.46 0.93,2.14 0.65,1.08 1.33,2.15999 2.27,3.00999 2.27,1.33 4.59,2.67 6.63,4.32 1.52,1.32 1.47,3.57 1.13,5.45 l 0.19,0.06 c 0.63,-1.71 0.94,-3.78 0.04,-5.49 -1.02,-1.55 -2.66,-2.64 -4.03,-3.83 -0.91,-0.73 -1.77,-1.47 -2.73,-2.14 -1.01,-1.16999 -2.28,-2.38999 -3.34,-3.54999 -0.31,-0.37 -0.65,-0.72 -0.87,-1.13 0.03,-0.14 0.05,-0.29 0.08,-0.43 0.2,-1.23 0.39,-2.57 0.04,-3.91 -0.34,-1.31 -1.22,-2.32 -1.95,-3.4 -0.99,-1.4 -2.1,-2.87 -3.22,-4.34 0.13,-0.09 0.339668,-0.74879 0.369668,-0.84879 0.23,-0.63 0.235372,-0.62056 1.075372,-1.20056 0.597255,-0.18359 1.134964,0.20935 1.494964,0.50935 1.56,1.51 3.05,3.64 4.32,5.45 0.52,0.54 1.01,1.11 1.47,1.7 -0.1,0.64 -0.34,1.18 -0.48,1.84 -0.23,0.81 -0.15,1.72 -0.21,2.64 -0.05,0.98 -0.23,2.06 0.25,3 0.53,0.96 1.35,1.55 2.23,1.89 l 0.09,-0.18 c -0.67,-0.57 -1.25,-1.31 -1.38,-2.05 -0.19,-0.79 0.16,-1.59 0.37,-2.38 0.24,-0.86 0.67,-1.71 0.63,-2.69 0.62,0.94 1.18,1.91 1.72,2.91 1.8,2.11 4.58,3.49 6.85,4.52 2.08,1.49999 4.09,3.78999 3.95,6.50999 l 0.2,0.03 c 0.21,-2.11 -0.92,-4.08 -2.32,-5.57999 -0.49,-0.5 -1.01,-0.98 -1.57,-1.41 -2.3,-1.18 -4.82,-2.55 -6.42,-4.58 -1.09,-2.34 -2.91,-5.16 -4.42,-6.75 -0.1,-0.15 -0.2,-0.31 -0.3,-0.47 2.15,1.03 4.73,1.59 6.57,2.89 l 0.09,0.18 c 0.16,-0.13 0.09,-0.25 0.06,-0.33 -0.53,-0.89 -1.51,-1.42 -2.33,-2.04 -2.5,-1.41 -4.42,-3.25 -6.97,-4.41 -0.01,-0.04 -0.05,-0.08 -0.09,-0.11 0.93,0.52 1.86,1.01 2.77,1.52 1.31,0.81 3.01,1.55 4.64,1.35 z m -29.95,-0.02 c 0.03,-0.06 0.05,-0.1 0.05,-0.11 0.03,0.03 0.05,0.1 0.09,0.15 -0.04,-0.01 -0.09,-0.03 -0.14,-0.04 z" id="path1" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="cccccccccccccccccccccccccccccccccccccccccsscccccccccccccccccscccccccccccccccccccccccccccccccccsccccscccccccccccccccccccccccccccccccccccccccccccccccccccccccc" style="fill:#9c9081;stroke-width:0px"/>
   </g>
     </svg>`}
-    return`<svg style="margin:61px" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 59.61 138.61">
+      return `<svg style="margin:61px" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 59.61 138.61">
       <defs>
         <style>
           .cls-1 {
@@ -586,8 +588,8 @@ function get_plant_html(age, is_alive) {
   </g>
     </svg>`
     case (6):
-      if (is_alive){
-      return `<svg style="margin:30px" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 85.57 145.53">
+      if (is_alive) {
+        return `<svg style="margin:30px" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 85.57 145.53">
       <defs>
         <style>
           .cls-1 {
@@ -613,7 +615,7 @@ function get_plant_html(age, is_alive) {
     <path class="cls-3" d="M75.96,47.85c-1.15.2-2.11,1.04-2.38,2.18-.56,2.35-2.46,5.3-8.86-1.02-.02-.02-.05-.05-.07-.07-.01.02-.02.04-.03.05-.69,1.34-5.68.51-5.68.51l-.7-.71s-1.06-.78-1.3-1.73h-.01s-.05-.01-.05-.01c-1,.07-1.75-.5-1.75-.5l-.29-.08c-.99-.27-2.01-.33-3.03-.27-.92.05-2.12-.09-2.8-1.04-.87-1.21-1.81-2-2.27-2.35-.08-.06-.19.02-.16.12.12.48.12,1.31-1.39,1.34l-2.1.05s-.04,0-.06-.02c-.17-.11-1.09-.77-1.28-1.52-.02-.1-.15-.12-.19-.03-.25.48-.7,1.06-1.44,1.06-.32,0-1.61-.42-2.76-.83-.86-.31-1.77,0-2.4.65-.21.22-.46.32-.77.18l-1.86.95s-.05.02-.08,0c-.02,0-.04-.01-.06-.02-1.17-.37-2.4.27-2.73,1.46-.29,1.04-.63,1.78-.97,1.17l-.39.33c-.83.69-1.93.97-2.99.76h0c-.59-.17-1.13.37-1,.96.18.81.2,1.57-.34,1.61-.54,1.28-1.78,2.12-3.16,2.16-.77.02-1.54-.02-1.94-.19-.95-.41-.59,6.45-5.28,3.58-.59-.36-1.29-.49-1.95-.3-2.01.59-6.15,1.35-4.93-2.89.26-.9-.19-1.86-1.03-2.27-1.06-.53-2.12-1.59-1.63-3.73.19-.83-.28-1.7-1.08-2-1.86-.71-4.28-2.52-1.54-6.98.83-1.35.92-3.03.37-4.52-.33-.88-.29-1.86.88-2.53.92-.53,1.3-1.65.84-2.61-1.27-2.68-2.46-7.14,3.56-7.19.92,0,1.65-.8,1.57-1.71-.08-.85.22-1.75,1.61-2.14.75-.21,1.19-.97,1.06-1.73-.55-3.09-.77-9.51,7.77-6.62.93.31,1.88-.3,2.01-1.27.13-1.05.76-1.98,2.73-1.49.91.22,1.81-.35,1.98-1.27.47-2.48,2.01-6.06,7.13-2.51.82.57,1.92.56,2.7-.05.71-.55,1.68-.9,2.68,0,.71.63,1.77.69,2.57.17,1.28-.84,3.1-1.55,4.43-.1.6.65,1.64.65,2.25,0,2.16-2.28,6.44-5.49,9.2,1.04.43,1.01,1.61,1.4,2.61.96.91-.39,1.91-.33,2.38,1.39.27,1.01,1.34,1.59,2.35,1.34,3.18-.77,8.55-1.15,5.48,6.27-.39.94.32,1.99,1.34,1.98,2.16-.02,5,.77,5.09,5.01.03,1.4,1.07,2.58,2.46,2.71,2.27.21,4.65,1.23,1.38,5.15-.73.87-.5,2.2.52,2.71,1.74.88,3.34,2.55.27,5.39-.75.69-.82,1.86-.18,2.65,1.9,2.36,4.28,6.95-4.3,8.41Z" id="path3"/>
   </g>
     </svg>`}
-    return `<svg style="margin:30px" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 85.57 145.53">
+      return `<svg style="margin:30px" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 85.57 145.53">
       <defs>
         <style>
           .cls-1 {
@@ -669,8 +671,8 @@ function get_plant_html(age, is_alive) {
   </g>
     </svg>`
     case (7):
-      if (is_alive){
-      return `<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 132.59 173.99">
+      if (is_alive) {
+        return `<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 132.59 173.99">
       <defs>
         <style>
           .cls-1 {
@@ -698,7 +700,7 @@ function get_plant_html(age, is_alive) {
     <path class="cls-3" d="m 128.97,64.94 c 0,0 -0.14,3.2 -1.4,3.44 0,0 -0.63,7.17 -7.55,2.31 0,0 -2.92,3.88 -8.11,1.67 -2.34372,1.389452 -4.26479,1.828862 -6.3975,1.1825 0,0 -0.5025,-0.1525 -2.3925,-1.4125 0,0 -2.86,3.13 -6.91,3.28 -0.77,0.05 -1.58,-0.03 -2.42,-0.26 -1.81,-0.48 -3.77,-1.65 -5.77,-3.92 0,0 -2.07,3.34 -5.06,3.14 -0.85,-0.06 -1.77,-0.4 -2.74,-1.18 -0.83,-0.66 -1.68,-1.65 -2.56,-3.04 0,0 -2.08,0.72 -4.51,-0.32 -0.71,-0.3 -1.45,-0.75 -2.18,-1.42 -0.68,-0.61 -1.34,-1.41 -1.96,-2.44 0,0 -1.55,4.59 -5.8,0.41 0,0 -1.06,1.42 -2.8,2.78 -0.47,0.38 -0.99,0.74 -1.55,1.08 -1.6,0.96 -3.55,1.65 -5.66,1.4 -1.28,-0.16 -2.64,-0.67 -4,-1.7 -1.08,-0.8 -2.16,-1.92 -3.24,-3.43 0,0 -0.34,2.39 -2.37,4.61 -0.51,0.55 -1.13,1.1 -1.87,1.59 -0.63,0.42 -1.36,0.81 -2.19,1.13 -1,0.39 -2.14,0.68 -3.46,0.85 -0.33,0.04 -0.66,0.1 -0.99,0.17 -0.39,0.08 -0.78,0.19 -1.16,0.3 -0.88,0.26 -2.2,0.48 -3.18,-0.07 -0.79,-0.44 -1.74,-0.26 -2.46,0.29 -0.68,0.53 -1.74,0.76 -3.36,0.05 0,0 -7.23,6.41 -7.37,-2.94 0,0 -3.5,1.17 -3.33,-1.62 0,0 -4.58,4.14 -4.76,-1.35 0,0 -7.15,3.78 -5.48,-3.59 0,0 -3.78,0.63 -1.62,-3.51 0,0 -4.84,-1.35 -0.67,-5.39 0,0 -1.03,-4.3 1.85,-4.79 0.93,-0.15 1.68,-0.85 1.75,-1.79 0.16,-2.25 1.14,-5.76 5.54,-6.18 1.02,-0.1 1.81,-0.92 1.88,-1.94 0.13,-1.81 0.51,-4.29 1.69,-4.67 0,0 -4.65,-3.98 1.08,-5.8 0,0 -2.42,-4.72 2.83,-3.91 0,0 1.05,-3.54 2.71,-4.34 0.83,-0.41 1.42,-1.2 1.53,-2.12 0.16,-1.43 0.86,-2.88 3.18,-2.17 0,0 0.94,-5.73 6.88,-5.39 0,0 0.06,-2.16 3.1,-2.43 0,0 3.1,-4.58 7.14,-1.48 0,0 -0.15,-6.39 3.81,-4.92 1.27,0.47 2.7,0.07 3.45,-1.06 1.94,-2.92 5.77,-6.87 9.87,-1.03 0,0 4.18,-2.3 5.26,-0.54 0,0 7.68,-4.52 10.92,0 0,0 4.24,1.88 3.37,4.31 0,0 5.8,0.54 5.66,2.97 0,0 15.42,-1.89 15.6,3.59 0,0 4.85,-1.61 4.85,2.16 0,0 10.7,1.62 9.53,5.93 0,0 6.02,2.25 2.34,5.76 0,0 6.2,4.76 3.41,8.8 0,0 3.87,1.53 2.16,4.32 0,0 5.93,1.53 3.77,5.21 0,0 3.42,1.86 1.26,5.29 0,0 6.13,3.61 0.86,6.4 0,0 8.14,4.94 0,7.73 z" id="path3" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"/>
   </g>
     </svg>`}
-    return `<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 132.59 173.99">
+      return `<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 132.59 173.99">
       <defs>
         <style>
           .cls-1 {
@@ -763,8 +765,8 @@ function get_plant_html(age, is_alive) {
     </svg>`
     case (8):
       style.setProperty("--fruit-color", get_current_conditions().plant_color)
-      if (is_alive){
-      return `<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 132.59 174.07">
+      if (is_alive) {
+        return `<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 132.59 174.07">
       <defs>
         <style>
           .cls-1 {
@@ -817,7 +819,7 @@ function get_plant_html(age, is_alive) {
     </g>
   </g>
     </svg>`}
-    return `<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 132.59 174.07">
+      return `<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 132.59 174.07">
       <defs>
         <style>
     
