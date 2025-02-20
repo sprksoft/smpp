@@ -86,7 +86,11 @@
 }
 
 li {
-  background: transparent !important;
+  background: transparent; /*Moest wel !important verwijderen anders kon ik geen tree override doen*/
+}
+
+.tree-classic li {
+  background: url(/includes/jQuery/plugins/jsTree/themes/classic/icons.png) -48px -32px no-repeat !important; /*Classic tree zal altijd deze spritesheet hebben*/
 }
 
 .course-list {
