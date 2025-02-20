@@ -1,9 +1,9 @@
-async function displayDataPerHalte(data) {
+async function displayLijnenPerHalte(data) {
   const leftContainerbottom = document.getElementById('leftContainerbottom');
   if (!leftContainerbottom) return;
 
   if (!data.halteDoorkomsten[0]) {
-    leftContainerbottom.innerHTML = '<p class=lijninfo>There are no buses for this stop at the moment.</p>';
+    leftContainerbottom.innerHTML = '<p class=lijninfo>Er zijn momenteel geen bussen beschikbaar voor deze stop.</p>';
     return;
   }
 
@@ -80,20 +80,20 @@ async function displayDataPerHalte(data) {
 function handleFetchError(code) {
   const leftContainerbottom = document.getElementById('leftContainerbottom');
   if (leftContainerbottom) {
-    leftContainerbottom.innerHTML = `<p class=lijninfo>Could not fetch data: Error ${code}, please try again later...</p>`;
+    leftContainerbottom.innerHTML = `<p class=lijninfo>Delijn data kon niet opgehaald worden: Error ${code}, probeer later nog eens...</p>`;
   }
 }
 
-async function fetchHaltes(query) {
+async function createHalteOptions(query) {
   const returnedData = await browser.runtime.sendMessage({
     action: 'fetchDelijnData', url:
       `https://api.delijn.be/DLZoekOpenData/v1/zoek/haltes/${query}?maxAantalHits=5`
   });
   clearLeftbottom();
   try {
-    await Promise.all(returnedData.haltes.map((halte, i) => createOption(halte, i)));
+    await Promise.all(returnedData.haltes.map((halte, i) => createHalteOption(halte, i)));
   } catch (error) {
-    document.getElementById('leftContainerbottom').innerHTML = `<div id="leftContainerbottom"><p class=lijninfo>Geen zoekresultaten</p></div>`
+    document.getElementById('leftContainerbottom').innerHTML = `<div id="leftContainerbottom"><p class=lijninfo>Er liep iets mis: ${error}</p></div>`
   }
   if (returnedData.haltes.length > 0) {
     getChoice(returnedData);
@@ -102,7 +102,7 @@ async function fetchHaltes(query) {
   }
 }
 
-async function createOption(givendata, i) {
+async function createHalteOption(givendata, i) {
   const leftContainerbottom = document.getElementById('leftContainerbottom');
   const div = document.createElement("div");
   leftContainerbottom.appendChild(div);
@@ -127,39 +127,40 @@ function clearLeftbottom() {
   document.getElementById('leftContainerbottom').innerHTML = "";
 }
 
-async function chosen(choice, data) {
-  const delijnAppData = {
-    entiteitnummer: data.haltes[choice].entiteitnummer,
-    haltenummer: data.haltes[choice].haltenummer
-  };
-  await browser.runtime.sendMessage({ action: 'setDelijnAppData', data: delijnAppData });
-  console.log(delijnAppData)
-  clearLeftbottom();
-  document.getElementById('haltetext').value = "";
-  let delijnData = await browser.runtime.sendMessage({
-    action: 'fetchDelijnData', url:
-      `https://api.delijn.be/DLKernOpenData/api/v1/haltes/${data.haltes[choice].entiteitnummer}/${data.haltes[choice].haltenummer}/real-time?maxAantalDoorkomsten=5`
-  });
-  console.log(delijnData)
-  if (!delijnData.code) {
-    displayDataPerHalte(delijnData)
-  } else { handleFetchError(delijnData.code) }
-}
-
 function getChoice(data) {
   for (let i = 0; i < 5; i++) {
     const option = document.getElementById(`lijncard${i}`);
     if (option) {
-      option.addEventListener("click", async () => await chosen(i, data));
+      option.addEventListener("click", async () => {
+        const delijnAppData = {
+          entiteitnummer: data.haltes[i].entiteitnummer,
+          haltenummer: data.haltes[i].haltenummer
+        };
+        await browser.runtime.sendMessage({ action: 'setDelijnAppData', data: delijnAppData });
+        console.log(delijnAppData)
+        clearLeftbottom();
+        document.getElementById('haltetext').value = "";
+        let delijnData = await browser.runtime.sendMessage({
+          action: 'fetchDelijnData', url:
+            `https://api.delijn.be/DLKernOpenData/api/v1/haltes/${data.haltes[i].entiteitnummer}/${data.haltes[i].haltenummer}/real-time?maxAantalDoorkomsten=5`
+        });
+        console.log(delijnData)
+        if (!delijnData.code) {
+          displayLijnenPerHalte(delijnData)
+        } else { handleFetchError(delijnData.code) }
+      });
     }
   }
 }
-
+async function migrateDelijnData() {
+  await browser.runtime.sendMessage({ action: 'setDelijnAppData', data: JSON.parse(localStorage.getItem("lijnData")) });
+  window.localStorage.removeItem("lijnData")
+}
 async function createDelijnApp() {
-  const leftContainer = document.getElementById("delijncontainer");
-  if (!leftContainer) return;
+  const delijnContainer = document.getElementById("delijncontainer");
+  if (!delijnContainer) return;
 
-  leftContainer.innerHTML = `
+  delijnContainer.innerHTML = `
     <div id="top_lijn_app">
       <h2 class="delijn_app_title">Zoek naar halte:</h2>
       <div class="textandbutton">
@@ -178,34 +179,38 @@ async function createDelijnApp() {
   const halteInput = document.getElementById("haltetext");
   const leftContainerbottom = document.createElement("div");
   leftContainerbottom.innerHTML = `<div id="leftContainerbottom"><p class=lijninfo>Loading...</p></div>`;
-  leftContainer.appendChild(leftContainerbottom);
+  delijnContainer.appendChild(leftContainerbottom);
 
   searchbutton.addEventListener("click", function () {
-    fetchHaltes(halteInput.value);
+    createHalteOptions(halteInput.value);
     if (document.getElementById("lijncard0")) {
       createDelijnApp();
     }
   });
   halteInput.addEventListener("keyup", function (event) {
     if (event.key === "Enter") {
-      fetchHaltes(halteInput.value);
+      createHalteOptions(halteInput.value);
       if (document.getElementById("lijncard0")) {
         createDelijnApp();
       }
     }
   });
 
+  if (window.localStorage.getItem("lijnData")) {
+    await migrateDelijnData() // Data migration
+  }
+
   const delijnAppData = await browser.runtime.sendMessage({
     action: 'getDelijnAppData'
   });
-  if (delijnAppData) {
+  if (delijnAppData.entiteitnummer != null) {
     let delijnData = await browser.runtime.sendMessage({
       action: 'fetchDelijnData', url:
         `https://api.delijn.be/DLKernOpenData/api/v1/haltes/${delijnAppData.entiteitnummer}/${delijnAppData.haltenummer}/real-time?maxAantalDoorkomsten=5`
     });
     console.log(delijnData)
     if (!delijnData.code) {
-      displayDataPerHalte(delijnData)
+      displayLijnenPerHalte(delijnData)
     } else { handleFetchError(delijnData.code) }
   } else {
     leftContainerbottom.innerHTML = `<div id="leftContainerbottom"><p class=lijninfo>Zoek naar een halte aub.</p></div>`;
