@@ -179,7 +179,7 @@ async function apply() {
       DelijnAppElement.classList.add("smsc-container--left")
       DelijnAppElement.setAttribute("id", "delijncontainer")
       container.prepend(DelijnAppElement)
-      decodehalte()
+      createDelijnApp()
     }
     if (showplanner) {
       var PlannerAppElement = document.createElement("div")

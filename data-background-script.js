@@ -35,7 +35,7 @@ export async function getDelijnAppData() {
         await browser.storage.local.set({
             delijnAppData: {
                 entiteitnummer: delijnAppData.entiteitnummer,
-                haltenummer: delijnAppData.entiteitnummer,
+                haltenummer: delijnAppData.haltenummer,
             }
         });
         console.log('Retrieved Delijn AppData.');
