@@ -144,7 +144,7 @@ function scrape_goto() {
 }
 
 
-function do_qm(open_key = "") {
+function do_qm(opener = "") {
   let cmd_list = quick_cmd_list().concat(goto_items).concat(vakken).concat(links.concat(["home", "dmenu config", "quick add", "quick remove", "config", "toggle fancy scores", "lock dmenu", "unbloat", "clearsettings", "discord"]));
 
   dmenu(cmd_list, function (cmd) {
@@ -217,7 +217,7 @@ function do_qm(open_key = "") {
       }
     }
 
-  }, "quick:", open_key = open_key);
+  }, "quick:", opener = opener);
 }
 
 document.addEventListener("keyup", function (e) {

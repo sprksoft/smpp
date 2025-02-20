@@ -1,4 +1,5 @@
-let menus = []
+
+let active_dmenu = null;
 
 class DMenu {
   openerEl;
@@ -26,11 +27,15 @@ class DMenu {
     this.#mkDmenu(itemList, title);
     this.inputEl.focus();
   }
+  isOpen(){
+    return this.menuEl != null;
+  }
   close(){
     if (this.lock) {
       return;
     }
     this.menuEl.remove();
+    this.menuEl = null;
   }
 
   #accept(row=undefined){
@@ -243,17 +248,20 @@ class DMenu {
 }
 
 function dmenu(itemList, endFunc=undefined, title="dmenu:", opener=undefined) {
+  if (active_dmenu !== null && active_dmenu.isOpen()){
+    active_dmenu.close();
+  }
   let menu = new DMenu(itemList, endFunc, title, opener);
-  menus.push(menu);
+  active_dmenu = menu;
   return menu;
 }
 
 document.addEventListener("click", function(e){
-  if (menus.length == 0){
+  if (active_dmenu == null){
     return;
   }
-  let menu = menus[menus.length-1];
-  if (!menu.menuEl.contains(e.target) && e.target != menu.openerEl){
-    menu.close();
+  if (!active_dmenu.menuEl.contains(e.target) && e.target != active_dmenu.openerEl){
+    active_dmenu.close();
+    active_dmenu = null;
   }
 });
