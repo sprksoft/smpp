@@ -86,7 +86,7 @@
 }
 
 li {
-  background: transparent; /*Moest wel !important verwijderen anders kon ik geen tree override doen*/
+  background: transparent !important; 
 }
 
 .tree-classic li {
