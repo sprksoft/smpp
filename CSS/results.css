@@ -101,6 +101,18 @@ upload-app.smsc-container.smsc-container--flex,
 .results-evaluations.js-evaluations-page.js-routehandler.results-evaluation--small{
   background-color: var(--color-base00) !important;
 }
+
+.results-evaluations .results-evaluations__filters {
+    flex-wrap: wrap;
+}
+
+#buis-stats {
+    flex-basis: 100%; /*Voor newline*/
+    height: 1px; /*Required, anders is er kapot veel witte plaats na de div*/
+    justify-items: flex-end; /*Shuif ook naar rechts op*/
+    margin-top: 1em; 
+}
+
 .evaluation-list-item,
 .dropdown-button,
 .goals-filter__item,
