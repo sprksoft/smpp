@@ -50,8 +50,8 @@ html {
   border: 3px solid var(--color-base01) !important;
   border: 3px solid var(--color-base03) !important;
 
-transition:all 100ms ease-in 0s !important
- }
+  transition: all 100ms ease-in 0s !important
+}
 
 .login-app__bottom {
   display: none !important;
@@ -85,7 +85,8 @@ a.smscButton[href="/login/sso/init/acm"],
   background-position: center !important;
   background-size: cover !important;
 }
-.showLeftNav:has(.login-app){
+
+.showLeftNav:has(.login-app) {
   align-items: center !important;
   justify-content: center !important;
 }
@@ -155,30 +156,38 @@ a.smscButton[href="/login/sso/init/acm"],
 span.login-app__title.login-app__title--sign-in-with {
   display: none !important;
 }
+
 .splashtextcontainer {
-  position: absolute; /* Changed to absolute for more flexibility */
-  left: 50%; /* Centered horizontally within the container */
+  position: absolute;
+  /* Changed to absolute for more flexibility */
+  left: 50%;
+  /* Centered horizontally within the container */
   top: 50%;
   transform-origin: left !important;
-  transform: translateX(180px) translateY(-240px)  rotate(30deg)!important; /* Moves right by 200px and rotates */
+  transform: translateX(180px) translateY(-240px) rotate(30deg) !important;
+  /* Moves right by 200px and rotates */
   text-align: center;
   z-index: 99999;
 }
-.splashtext{
+
+.splashtext {
   color: var(--color-splashtext) !important;
   font-size: 30px !important;
   left: -50% !important;
-  position:  relative !important;
+  position: relative !important;
   animation: scale_up_and_down 0.58s linear infinite;
-} 
+}
+
 @keyframes scale_up_and_down {
-    0%{
-      transform: scale(100%);
-    }
-    50%{
-      transform: scale(105%);
-    }
-    100%{
-      transform: scale(100%);
-    }
+  0% {
+    transform: scale(100%);
+  }
+
+  50% {
+    transform: scale(105%);
+  }
+
+  100% {
+    transform: scale(100%);
+  }
 }

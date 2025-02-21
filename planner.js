@@ -45,7 +45,7 @@ async function getDateInCorrectFormat(isFancyFormat, addend) {
 
     // Calculate the new date by adding the addend to the current date
     currentDate.setDate(currentDate.getDate() + addend);
-    let month_names = ["Jan","Feb","Mar","Apr","May","June","July","Aug","Sept","Oct","Nov"]
+    let month_names = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov"]
     if (isFancyFormat) {
         const day = currentDate.getDate().toString().padStart(2, '0');
         const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
@@ -56,11 +56,11 @@ async function getDateInCorrectFormat(isFancyFormat, addend) {
     }
 }
 let days_added_on_top = 0
-function next_day_planner(){
+function next_day_planner() {
     days_added_on_top += 1
     ShowPlanner(days_added_on_top)
 }
-function previous_day_planner(){
+function previous_day_planner() {
     days_added_on_top -= 1
     ShowPlanner(days_added_on_top)
 }
@@ -70,13 +70,13 @@ async function ShowPlanner(addend) {
     const container = document.getElementById('plannercontainer');
 
     const plannerUrl = document.getElementById('datePickerMenu').getAttribute('plannerurl');
-    const data = await fetchPlannerData(await getDateInCorrectFormat(true,addend), plannerUrl.split("/")[4]);
+    const data = await fetchPlannerData(await getDateInCorrectFormat(true, addend), plannerUrl.split("/")[4]);
     if (!data || data.length === 0) {
-        plannerContainer.innerHTML = `<p>No planner data available for this date! \n Consider turning planner <strong>off</strong> if your school doesn't use planner yet</p>
-        <a id="turn-off-planner">Click here to turn planner <strong>off</strong></a>`;
+        plannerContainer.innerHTML = `<p style="text-align: center">No planner data available for this date! \n Consider turning planner <strong>off</strong> if your school doesn't use planner yet</p>
+        <a id="turn-off-planner" style="text-align: center">Click here to turn planner <strong>off</strong></a>`;
         var Title = document.createElement("div")
-        let date_text = `${await getDateInCorrectFormat(false,addend)}`.split(' ').slice(0, 4).join(' ')
-        Title.innerHTML = "<button style='width:15%' id=back_button_planner></button><h2 style='width:70%;'>"+date_text+"</h2><button id=forward_button_planner style='width:15%'></button>"
+        let date_text = `${await getDateInCorrectFormat(false, addend)}`.split(' ').slice(0, 4).join(' ')
+        Title.innerHTML = "<button style='width:15%' id=back_button_planner></button><h2 style='width:70%;'>" + date_text + "</h2><button id=forward_button_planner style='width:15%'></button>"
         Title.classList.add('planner-title-startpage')
         plannerContainer.prepend(Title)
         container.innerHTML = '';
@@ -89,8 +89,8 @@ async function ShowPlanner(addend) {
         })
         let forward_button_planner = document.getElementById("forward_button_planner")
         let back_button_planner = document.getElementById("back_button_planner")
-        forward_button_planner.addEventListener("click",next_day_planner)
-        back_button_planner.addEventListener("click",previous_day_planner)
+        forward_button_planner.addEventListener("click", next_day_planner)
+        back_button_planner.addEventListener("click", previous_day_planner)
         return;
     }
 
@@ -102,9 +102,9 @@ async function ShowPlanner(addend) {
         }
     });
     var Title = document.createElement("div")
-    let date_text = `${await getDateInCorrectFormat(false,addend)}`.split(' ').slice(0, 4).join(' ')
+    let date_text = `${await getDateInCorrectFormat(false, addend)}`.split(' ').slice(0, 4).join(' ')
 
-    Title.innerHTML = "<button style='width:15%' id=back_button_planner></button><h2 style='width:70%;'>"+date_text+"</h2><button id=forward_button_planner style='width:15%'></button>"
+    Title.innerHTML = "<button style='width:15%' id=back_button_planner></button><h2 style='width:70%;'>" + date_text + "</h2><button id=forward_button_planner style='width:15%'></button>"
     Title.classList.add('planner-title-startpage')
     plannerContainer.appendChild(Title)
 
@@ -122,8 +122,8 @@ async function ShowPlanner(addend) {
             dateTimeTo.setHours(7)
             beginTime.setMinutes(30)
             beginTime.setHours(7)
-            };
-                   
+        };
+
         const overlappingSlots = timeSlots.filter(slot => {
             return (slot.from < dateTimeTo && slot.to > dateTimeFrom);
         });
@@ -155,7 +155,7 @@ async function ShowPlanner(addend) {
 
             const itemName = element.courses && element.courses.length > 0 ? element.courses[0].name : element.name;
             var teachers = []
-            if(element.organisers){
+            if (element.organisers) {
                 element.organisers.users.forEach((element) => {
                     teachers.push(element.name.startingWithFirstName)
                 })
@@ -194,15 +194,15 @@ async function ShowPlanner(addend) {
 
             plannerElement.style.width = `${elementWidthPercentage}%`;
             plannerContainer.appendChild(plannerElement);
-            function hoverPlannerElement(){
+            function hoverPlannerElement() {
                 plannerElement.style.width = '100%'
-                if (height<73){
+                if (height < 73) {
                     plannerElement.style.height = '73px'
                 }
                 plannerElement.style.left = '0'
                 plannerElement.style.zIndex = "100"
             }
-            function noHoverPlannerElement(){
+            function noHoverPlannerElement() {
                 plannerElement.style.left = `${left}%`;
                 plannerElement.style.top = `${top}px`;
                 plannerElement.style.height = `${height}px`;
@@ -211,7 +211,7 @@ async function ShowPlanner(addend) {
             }
             plannerElement.addEventListener('mouseover', hoverPlannerElement)
             plannerElement.addEventListener('mouseout', noHoverPlannerElement)
-            if(element.period.wholeDay){
+            if (element.period.wholeDay) {
                 plannerElement.style.width = '100%'
                 plannerElement.style.height = '24px'
                 plannerElement.style.left = '0'
@@ -226,6 +226,6 @@ async function ShowPlanner(addend) {
     container.appendChild(plannerContainer);
     let forward_button_planner = document.getElementById("forward_button_planner")
     let back_button_planner = document.getElementById("back_button_planner")
-    forward_button_planner.addEventListener("click",next_day_planner)
-    back_button_planner.addEventListener("click",previous_day_planner)
+    forward_button_planner.addEventListener("click", next_day_planner)
+    back_button_planner.addEventListener("click", previous_day_planner)
 }

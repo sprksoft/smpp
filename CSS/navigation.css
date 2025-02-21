@@ -74,6 +74,7 @@
   background-color: var(--color-base02) !important;
   color: var(--color-accent) !important;
 }
+
 .topnav__menuitem {
   border: var(--border-size) solid var(--color-base01) !important;
   border-radius: 10px !important;
@@ -88,11 +89,12 @@
 }
 
 li {
-  background: transparent !important; 
+  background: transparent !important;
 }
 
 .tree-classic li {
-  background: url(/includes/jQuery/plugins/jsTree/themes/classic/icons.png) -48px -32px no-repeat !important; /*Classic tree zal altijd deze spritesheet hebben*/
+  background: url(/includes/jQuery/plugins/jsTree/themes/classic/icons.png) -48px -32px no-repeat !important;
+  /*Classic tree zal altijd deze spritesheet hebben*/
 }
 
 .course-list {

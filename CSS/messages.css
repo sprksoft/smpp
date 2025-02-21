@@ -88,7 +88,6 @@ button.modern-message__action.modern-message__action--delete:hover,
 .msgContent,
 #msgcell {
   background-color: var(--color-base00) !important;
-  border-right: var(--border-size) solid var(--color-base01) !important;
 }
 
 .toolbar__line {
@@ -185,12 +184,17 @@ button.modern-message__action.modern-message__action--delete:hover,
 }
 
 .messageframe {
-  border: 2px solid var(--color-base01) !important;
+  border: 2px solid var(--color-base02) !important;
   border-radius: 15px !important;
   overflow: hidden !important;
   background-color: var(--color-base00) !important;
   padding: 5px 5px 0px 5px !important;
 }
+
+.messageframe:has(#msgdetail) {
+  background-color: var(--color-base01) !important;
+}
+
 table.messages {
   width: 100% !important;
   table-layout: fixed;
@@ -252,7 +256,7 @@ img[src="/modules/Messages/themes/default/images/loading_big.gif"] {
 }
 
 .smsc-tabslist {
-  border-bottom: 2px solid var(--color-base03)!important;
+  border-bottom: 2px solid var(--color-base03) !important;
 }
 
 
@@ -520,7 +524,9 @@ smsc-tabs .smsc-tabslist__item,
 .smsc-table__row.smsc-table__row--nohover.smsc-table__row--noborder {
   background-color: var(--darken-background) !important;
 }
-.smsc-table__row.smsc-table__row--nohover.smsc-table__row--noborder:hover,smsc-tabs .smsc-tabslist__item:hover{
+
+.smsc-table__row.smsc-table__row--nohover.smsc-table__row--noborder:hover,
+smsc-tabs .smsc-tabslist__item:hover {
   background-color: var(--color-base01) !important;
 }
 
@@ -528,19 +534,34 @@ smsc-tabs .smsc-tabslist__item {
   margin-right: 10px !important;
   border: 2px solid var(--color-base03) !important
 }
-.compose-options{
+
+.compose-options {
   padding-top: 12px !important;
 }
-.organisers-participants-view__send-message-btn.icon-btn.icon-btn--16{
+
+.organisers-participants-view__send-message-btn.icon-btn.icon-btn--16 {
   border: 2px solid var(--color-base03) !important;
 }
-.organisers-participants-view__send-message-btn.icon-btn.icon-btn--16:hover{
+
+.organisers-participants-view__send-message-btn.icon-btn.icon-btn--16:hover {
   border-color: var(--color-accent) !important;
 }
-span.planner-list-wrapper__add-btn__text:hover{
+
+span.planner-list-wrapper__add-btn__text:hover {
   color: var(--color-accent) !important;
 }
-span.planner-list-wrapper__add-btn__text{
+
+span.planner-list-wrapper__add-btn__text {
   transition-duration: 0.1s !important;
   transition-timing-function: ease-in-out !important;
+}
+
+.modern-ui .toolbar::before,
+.modern-ui .toolbar::after {
+  background: linear-gradient(var(--color-base02), var(--color-base02)) repeat-y !important;
+  border-color: var(--color-base02) !important;
+  background-size: 2px 2px !important;
+  background-position: center !important;
+  width: 7px !important;
+  border-width: 2px !important;
 }

@@ -79,6 +79,7 @@
 .big_icon_weather_big {
   width: 34%;
 }
+
 .weatherImg {
   display: flex;
   flex-direction: column;

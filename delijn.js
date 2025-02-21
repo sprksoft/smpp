@@ -85,49 +85,49 @@ function handleFetchError(code) {
 }
 
 async function createHalteOptions(query) {
-  const returnedData = await browser.runtime.sendMessage({
+  const delijnHaltesData = await browser.runtime.sendMessage({
     action: 'fetchDelijnData', url:
       `https://api.delijn.be/DLZoekOpenData/v1/zoek/haltes/${query}?maxAantalHits=5`
   });
   clearLeftbottom();
   try {
-    await Promise.all(returnedData.haltes.map((halte, i) => createHalteOption(halte, i)));
+    await Promise.all(delijnHaltesData.haltes.map((halte, i) => createHalteOption(halte, i)));
   } catch (error) {
     document.getElementById('leftContainerbottom').innerHTML = `<div id="leftContainerbottom"><p class=lijninfo>Er liep iets mis: ${error}</p></div>`
   }
-  if (returnedData.haltes.length > 0) {
-    getChoice(returnedData);
+  if (delijnHaltesData.haltes.length > 0) {
+    getHalteChoice(delijnHaltesData);
   } else {
     document.getElementById('leftContainerbottom').innerHTML = `<div id="leftContainerbottom"><p class=lijninfo>Geen zoekresultaten</p></div>`
   }
 }
 
-async function createHalteOption(givendata, i) {
+async function createHalteOption(delijnHalteData, i) {
   const leftContainerbottom = document.getElementById('leftContainerbottom');
   const div = document.createElement("div");
-  leftContainerbottom.appendChild(div);
   const optionData = await browser.runtime.sendMessage({
     action: 'fetchDelijnData', url:
-      `https://api.delijn.be/DLKernOpenData/api/v1/haltes/${givendata.entiteitnummer}/${givendata.haltenummer}/lijnrichtingen`
+      `https://api.delijn.be/DLKernOpenData/api/v1/haltes/${delijnHalteData.entiteitnummer}/${delijnHalteData.haltenummer}/lijnrichtingen`
   });
   const omschrijving = optionData.lijnrichtingen[0]?.omschrijving || "No info";
 
   div.innerHTML = `<div class="lijncards lijncardshover" id="lijncard${i}">
     <div class="top">
-      <h3 class="no">${givendata.omschrijving}</h3>
+      <h3 class="no">${delijnHalteData.omschrijving}</h3>
     </div>
     <div class="times">
       <span class="time">${omschrijving}</span>
       <span class="intime"></span>
     </div>
   </div>`;
+  leftContainerbottom.appendChild(div);
 }
 
 function clearLeftbottom() {
   document.getElementById('leftContainerbottom').innerHTML = "";
 }
 
-function getChoice(data) {
+function getHalteChoice(data) {
   for (let i = 0; i < 5; i++) {
     const option = document.getElementById(`lijncard${i}`);
     if (option) {
@@ -182,9 +182,9 @@ async function createDelijnApp() {
   delijnContainer.appendChild(leftContainerbottom);
 
   searchbutton.addEventListener("click", function () {
-    if(halteInput.value){
+    if (halteInput.value) {
       createHalteOptions(halteInput.value);
-    }else{
+    } else {
       leftContainerbottom.innerHTML = `<p class=lijninfo>Gelieve een halte te zoeken</p>`
     }
     if (document.getElementById("lijncard0")) {
@@ -193,9 +193,9 @@ async function createDelijnApp() {
   });
   halteInput.addEventListener("keyup", function (event) {
     if (event.key === "Enter") {
-      if(halteInput.value){
+      if (halteInput.value) {
         createHalteOptions(halteInput.value);
-      }else{
+      } else {
         leftContainerbottom.innerHTML = `<p class=lijninfo>Gelieve een halte te zoeken</p>`
       }
       if (document.getElementById("lijncard0")) {

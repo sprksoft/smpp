@@ -1,6 +1,6 @@
 /* vim:set shiftwidth=4: */
 
-function add_splash_text(){
+function add_splash_text() {
     var login_app = document.querySelector('.login-app')
     var splash_text_element = document.createElement('div')
     login_app.prepend(splash_text_element)
@@ -65,7 +65,7 @@ let splashtexts = [
     `English or Spanish?`,
     `Jennifer eet matrassen! WTF?`,
     `Listen to Amélie Farren!`,
-    `"How to exit VIM???"`, 
+    `"How to exit VIM???"`,
     `Are ya vimming son?`,
     `It's either Spanish or vanish`,
     `Are you hacking??`,
@@ -102,7 +102,7 @@ let splashtexts = [
 function get_splash_text() {
     return splashtexts[Math.floor(Math.random() * splashtexts.length)]
 }
-if (window.location.href.split('/')[3]=="login"){
+if (window.location.href.split('/')[3] == "login") {
     add_splash_text()
 }
 

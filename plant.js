@@ -56,7 +56,7 @@ function calculate_growth_since_last_update() {
   const time_difference_days_grew = (current_time - last_time_grew) / days_in_ms;
   const time_difference_days_watered = (current_time - last_time_watered) / days_in_ms;
   if (time_difference_days_grew >= 2) {
-    current_conditions.age += current_conditions.age < 8 ? 1:0;
+    current_conditions.age += current_conditions.age < 8 ? 1 : 0;
     current_conditions.last_time_grew = current_time;
   }
   if (current_conditions.age > 8) {

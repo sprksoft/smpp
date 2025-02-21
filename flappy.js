@@ -42,7 +42,7 @@ function setFlappySpeed() {
         document.getElementById('flappytitle').innerText = "Flappy Bird++";
     }
 }
-function startFlappyGame() {
+function createFlappyApp() {
     let div = document.createElement("div");
     let highscore = window.localStorage.getItem("flappyhighscore");
     if (highscore == undefined) {
@@ -105,10 +105,10 @@ function flappyGame() {
     let birdX = canvas.width / 4;
     let birdY = 110;
     let bgX = 0;
-    let gravity = (flappyspeed/100)*0.5;
-    let gravitySpeed = (flappyspeed/100)*0.2
+    let gravity = (flappyspeed / 100) * 0.5;
+    let gravitySpeed = (flappyspeed / 100) * 0.2
 
-    const pipeGap = ((flappyspeed/250)*65)+50
+    const pipeGap = ((flappyspeed / 250) * 65) + 50
     const pipeSpeed = (flappyspeed / 100) * 3;
 
     let score = 0;
@@ -121,7 +121,7 @@ function flappyGame() {
 
     class Pipe {
         constructor() {
-            this.y = Math.random() * (canvas.height - 90) -10;
+            this.y = Math.random() * (canvas.height - 90) - 10;
             this.x = canvas.width;
             this.didScored = false;
         }
@@ -231,11 +231,11 @@ function flappyGame() {
     document.addEventListener('keydown', (e) => {
         if (e.code === 'Space' || e.code === 'ArrowUp') {
             e.preventDefault();
-            gravity =  (flappyspeed/140)*(-4);
+            gravity = (flappyspeed / 140) * (-4);
         }
     });
     canvas.addEventListener('mousedown', (e) => {
         e.preventDefault();
-        gravity = (flappyspeed/140)*(-4);
+        gravity = (flappyspeed / 140) * (-4);
     })
 }

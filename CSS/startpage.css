@@ -29,7 +29,8 @@ body {
   backdrop-filter: var(--blur-value-small) !important;
   -webkit-backdrop-filter: var(--blur-value-small) !important;
 }
-body.modern-ui .homepage__center{
+
+body.modern-ui .homepage__center {
   min-width: 0px !important;
 }
 
@@ -50,7 +51,8 @@ body.modern-ui .homepage__center{
   top: -67px !important;
 }
 
-#game-div, #flappy-game-div {
+#game-div,
+#flappy-game-div {
   background-color: var(--color-base01);
   padding: 0px !important;
   border-radius: 15px;

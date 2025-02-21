@@ -55,27 +55,29 @@
 }
 
 
-.js-emptystate
-{
+.js-emptystate {
   background-color: var(--color-base00) !important;
   box-shadow: none !important;
   color: var(--color-text) !important;
   padding: 20px !important;
   border-radius: 20px !important;
 }
+
 .results-evaluation--small .side-panel__panel {
   background-color: var(--color-base00) !important;
 }
+
 .results-evaluation--wide .side-panel__panel {
   background-color: transparent !important;
 }
 
-.smscMain{
-background-image: var(--loginpage-image);
-background-position: center !important;
-background-size: cover !important;
-background-attachment: fixed !important;
+.smscMain {
+  background-image: var(--loginpage-image);
+  background-position: center !important;
+  background-size: cover !important;
+  background-attachment: fixed !important;
 }
+
 .results-evaluations.js-evaluations-page.js-routehandler.results-evaluation--wide,
 .smsc-container.smsc-container--main.smsc-container--flex.planner-planner__main.js-planner-planner-main,
 intra-list.smsc-container.smsc-container--main.smsc-container--flex,
@@ -87,30 +89,35 @@ intra-list.smsc-container.smsc-container--main.smsc-container--flex,
 upload-app.smsc-container.smsc-container--flex,
 .smsc-container.smsc-container--main.smsc-container--flex,
 .course-module-planner__header,
-.course-module-planner
-{
+.course-module-planner {
   backdrop-filter: var(--blur-value-small) !important;
   background-color: var(--darken-background) !important;
 }
-.side-panel__panel{
+
+.side-panel__panel {
   box-shadow: none !important;
 }
-.side-panel__panel{
+
+.side-panel__panel {
   background-color: var(--color-base00) !important;
 }
-.results-evaluations.js-evaluations-page.js-routehandler.results-evaluation--small{
+
+.results-evaluations.js-evaluations-page.js-routehandler.results-evaluation--small {
   background-color: var(--color-base00) !important;
 }
 
 .results-evaluations .results-evaluations__filters {
-    flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 
 #buis-stats {
-    flex-basis: 100%; /*Voor newline*/
-    height: 1px; /*Required, anders is er kapot veel witte plaats na de div*/
-    justify-items: flex-end; /*Shuif ook naar rechts op*/
-    margin-top: 1em; 
+  flex-basis: 100%;
+  /*Voor newline*/
+  height: 1px;
+  /*Required, anders is er kapot veel witte plaats na de div*/
+  justify-items: flex-end;
+  /*Shuif ook naar rechts op*/
+  margin-top: 1em;
 }
 
 .evaluation-list-item,
@@ -163,9 +170,11 @@ upload-app.smsc-container.smsc-container--flex,
 .evaluation-graphic.evaluation-graphic--large.evaluation-graphic--image.side-panel__content__score__large-ring.c-red-combo--100 {
   background-color: var(--color-base00) !important;
 }
-.filterlistview.js-filterlistview.evaluations__filterlistview:hover{
+
+.filterlistview.js-filterlistview.evaluations__filterlistview:hover {
   background-color: transparent !important;
 }
+
 .evaluation__content:not(:active):not([active]) {
   background-color: var(--color-base01) !important;
 }
@@ -276,22 +285,25 @@ textarea,
 .separator {
   background-color: var(--color-base02) !important;
 }
-.buis-stats-title{
-background-color: var(--color-base01);
-padding: 5px;
-border: 2px solid var(--color-base02);
-font-weight: bold;
 
-border-radius: 50px;
-margin-bottom: 0px !important;
+.buis-stats-title {
+  background-color: var(--color-base01);
+  padding: 5px;
+  border: 2px solid var(--color-base02);
+  font-weight: bold;
+
+  border-radius: 50px;
+  margin-bottom: 0px !important;
 }
-.buis-stats-box{
-display: flex;
-flex-direction: row;
+
+.buis-stats-box {
+  display: flex;
+  flex-direction: row;
 }
-.buis-stats-value{
-padding: 4px;
-font-size: 17px;
-font-weight: bolder;
-margin-bottom: 0px !important;
+
+.buis-stats-value {
+  padding: 4px;
+  font-size: 17px;
+  font-weight: bolder;
+  margin-bottom: 0px !important;
 }

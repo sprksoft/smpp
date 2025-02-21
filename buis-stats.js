@@ -1,4 +1,4 @@
-setTimeout(function() {
+setTimeout(function () {
   if (window.location.pathname.startsWith('/results/main/results/')) {
     const getSubdomain = () => {
       const host = window.location.hostname;

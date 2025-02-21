@@ -1221,12 +1221,6 @@ td.cb-container {
   background-color: var(--color-base00) !important;
 }
 
-.card {
-  background-color: var(--color-base01) !important;
-  box-shadow: none !important;
-  color: var(--color-text) !important;
-  border: 2px solid var(--color-base02) !important;
-}
 
 .smsc-container:has(.form-page__header-wrapper) {
   background-color: var(--background-color) !important;
@@ -1462,14 +1456,15 @@ button.wopi_files__button {
   transition: all 0.05s ease-in-out !important;
 }
 
-.card__container{
+.card__container {
   background-color: var(--color-base00) !important;
   border-radius: 25px !important;
   transition: all ease-in-out 0.25s;
 }
-.card__container:hover{
+
+.card__container:hover {
   cursor: pointer !important;
-  background-color: var(--color-base01)!important;
+  background-color: var(--color-base01) !important;
   transform: translateY(-10px);
   scale: 1.05;
   box-shadow: 0px 15px 50px var(--darken-background);
@@ -1485,5 +1480,22 @@ button.wopi_files__button {
 
 .card {
   border-radius: 25px !important;
-  background-color: transparent !important;
+  background-color: var(--color-base01) !important;
+  box-shadow: none !important;
+  color: var(--color-text) !important;
+  border: 2px solid var(--color-base02) !important;
+}
+
+.survey .title {
+  color: var(--color-accent) !important;
+}
+
+.anonymous-banner {
+  background-color: var(--color-base01) !important;
+}
+
+.default-dialog {
+  background-color: var(--color-base01) !important;
+  border: 2px solid var(--color-base03) !important;
+  border-radius: 15px !important;
 }

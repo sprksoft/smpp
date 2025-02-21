@@ -25,12 +25,14 @@
   transition: ease-in-out;
   transition-duration: 0.1s;
 }
+
 .watering_button:hover {
   background-color: var(--color-base03);
   border-color: var(--color-accent);
   cursor: pointer;
 }
-.time_difference_last_watered{
+
+.time_difference_last_watered {
   font-weight: bold;
   font-size: 12px;
   text-align: center;
@@ -46,25 +48,30 @@
   margin-right: 10px;
   border: 3px solid var(--color-base03);
   border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.05); /* semi-transparent background */
+  background-color: rgba(255, 255, 255, 0.05);
+  /* semi-transparent background */
   position: relative;
   overflow: hidden;
 }
 
 .glass-fill {
   width: 100%;
-  background-color: var(--color-blue); /* blue fill */
+  background-color: var(--color-blue);
+  /* blue fill */
   position: absolute;
   bottom: 0;
-  transition: height 1.5s ease-in-out; /* smooth transition */
+  transition: height 1.5s ease-in-out;
+  /* smooth transition */
 }
-#removeButtonDiv{
+
+#removeButtonDiv {
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
-#remove_button_info{
-    border: 3px solid var(--color-base03);
+
+#remove_button_info {
+  border: 3px solid var(--color-base03);
   background-color: var(--color-base02);
   border-radius: 50%;
   padding: 2.5px 5px 2.5px 5px;
@@ -79,7 +86,8 @@
   margin-bottom: 10px;
   margin-left: 10px;
 }
-#removeplantButton{
+
+#removeplantButton {
   border: 3px solid var(--color-base03);
   background-color: var(--color-base02);
   border-radius: 10px;
@@ -93,20 +101,24 @@
   margin-top: 10px;
   margin-bottom: 10px;
 }
-#removeplantButton:hover{
+
+#removeplantButton:hover {
   background-color: var(--color-base03);
   border-color: var(--color-accent);
   cursor: pointer;
 }
-#remove_button_info:hover{
+
+#remove_button_info:hover {
   background-color: var(--color-base03);
   border-color: var(--color-accent);
   cursor: pointer;
 }
-#removeButtonInfoDiv{
+
+#removeButtonInfoDiv {
   height: 10px;
 }
-#plant_remove_info_text{
+
+#plant_remove_info_text {
   top: -35px;
   background-color: var(--color-base02);
   border: 2px solid var(--color-base03);
@@ -119,32 +131,39 @@
   opacity: 0;
   text-align: center;
 }
-#plant_streak{
+
+#plant_streak {
   color: var(--color-accent) !important;
   font-size: 50px !important;
   font-weight: 800 !important;
 }
+
 #plant_the_plant_svg {
   transition-duration: 0.4s;
 }
 
 /* Rising/draining effect */
 #riseMask {
-  transition: transform 0.4s cubic-bezier(.52,.56,.29,.98) !important; /* Animate transform */
-  transform: translateY(100%); /* Start hidden at the bottom */
+  transition: transform 0.4s cubic-bezier(.52, .56, .29, .98) !important;
+  /* Animate transform */
+  transform: translateY(100%);
+  /* Start hidden at the bottom */
 }
 
 #plant_the_plant_svg:hover #riseMask {
-  transform: translateY(0%); /* Rise up on hover */
+  transform: translateY(0%);
+  /* Rise up on hover */
 }
 
 #hand {
   fill: var(--color-base02);
   transition-duration: 0.3s;
 }
+
 #plant_the_plant_svg:hover #hand {
   fill: var(--color-base03);
 }
-#plant_the_plant_svg:hover{
+
+#plant_the_plant_svg:hover {
   cursor: pointer !important;
 }

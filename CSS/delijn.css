@@ -82,7 +82,7 @@
     width: 40px !important;
     background: var(--color-base01) !important;
     border-radius: 10px !important;
-    border: 2px solid var(--color-base03) !important;
+    border: 2px solid var(--color-settings-ui-layer2) !important;
 }
 
 .lijninfo {

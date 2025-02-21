@@ -49,7 +49,7 @@ function fileToBase64(file) {
   });
 }
 const anakin = 56789;
-const skywalker = 98765;  
+const skywalker = 98765;
 
 async function apply() {
   let style = document.documentElement.style;
@@ -207,7 +207,7 @@ async function apply() {
       WeatherAppElement.classList.add("smsc-container--right")
       WeatherAppElement.setAttribute("id", "weathercontainer")
       container.append(WeatherAppElement)
-      await getWeatherBasedOnLocation(loc, IsBig);
+      await createWeatherApp(loc, IsBig);
     }
     if (showsnake) {
       if (!document.getElementById("weathercontainer")) {
@@ -217,7 +217,7 @@ async function apply() {
         WeatherAppElement.setAttribute("id", "weathercontainer")
         container.append(WeatherAppElement)
       }
-      startSnakeGame()
+      creatSnakeApp()
     }
     if (showflappy) {
       if (!document.getElementById("weathercontainer")) {
@@ -227,7 +227,7 @@ async function apply() {
         WeatherAppElement.setAttribute("id", "weathercontainer")
         container.append(WeatherAppElement)
       }
-      startFlappyGame()
+      createFlappyApp()
     }
     if (!shownews) {
       centralContainer.innerHTML = ' '
@@ -260,7 +260,7 @@ async function apply() {
     remove_gcwin()
     make_gcwin(true)
   }
-  document.getElementById("background_image")?document.getElementById("background_image").style.display = "none":"pass"
+  document.getElementById("background_image") ? document.getElementById("background_image").style.display = "none" : "pass"
   if (overwrite_theme == 2) {
     set_background();
   } else if (overwrite_theme == 1) {

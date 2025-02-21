@@ -21,7 +21,6 @@ function loadSpeed() {
   document.getElementById("speedslider").value = speed
 }
 function setSnakeSpeed() {
-  sliderElement = document.getElementById("speedslider");
   sliderValue = document.getElementById("speedslider").value;
   let speed = window.localStorage.getItem("snakespeed");
   document.getElementById('speedslider').addEventListener("input", storeSpeed);
@@ -36,7 +35,7 @@ function setSnakeSpeed() {
     document.getElementById('game-div').getElementsByTagName('h2')[0].innerText = "Snake++";
   }
 }
-function startSnakeGame() {
+function creatSnakeApp() {
   let div = document.createElement("div")
   let highscore = window.localStorage.getItem("snakehighscore")
   if (highscore == undefined) {
