@@ -79,7 +79,7 @@ const popupsettingHTML = `<head>
 </select>
 <div class="textandbutton" id="colorpickers">
 </div>
-<div class="textandbutton" style="margin-top:0px !important">
+<div class="textandbuttonnomarg">
   <div>
     <h3 class="popuptitles">Planner:</h3>
     <label class="switch">
@@ -125,7 +125,6 @@ const popupsettingHTML = `<head>
     <span class="color-label" id="blurPlaats">blur</span>
   </div>
 </div>
-<div class="textandbutton" id="errormessagesmpp"></div>
 <h3 class="popuptitles">Weather overlay:</h3>
 <div class="textandbutton" style="margin-top: 20px !important">
   <div class="verticaltext"><p class="nobottommargp off_text">Snow</p><p class="nobottommargp link_text">Realtime</p><p class="nobottommargp">Rain</p></div>
