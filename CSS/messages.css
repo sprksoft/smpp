@@ -185,11 +185,18 @@ button.modern-message__action.modern-message__action--delete:hover,
 }
 
 .messageframe {
-  border: 2px solid var(--color-accent) !important;
-  border-radius: 10px !important;
+  border: 2px solid var(--color-base01) !important;
+  border-radius: 15px !important;
   overflow: hidden !important;
   background-color: var(--color-base00) !important;
+  padding: 5px 5px 0px 5px !important;
 }
+table.messages {
+  width: 100% !important;
+  table-layout: fixed;
+  overflow: hidden;
+}
+
 
 .quickReplyMenu,
 .smsc-title--2 {

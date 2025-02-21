@@ -609,12 +609,12 @@ input:checked+.slider:before {
   transform: translateY(0%) !important;
   background-color: var(--color-settings-bg) !important;
   border: 2px solid var(--color-settings-border) !important;
-  border-radius: 10px !important;
   align-items: center !important;
   display: flex !important;
   flex-direction: column !important;
   justify-content: center !important;
   transition: all 0.10s cubic-bezier(.64, .18, .39, .82) !important;
+  border-radius: 15px !important;
 }
 
 #searchMenu[hidden] {
@@ -919,9 +919,10 @@ label.form__label.js-form-label.label__resolvedStatus.form__label--no-margin-top
 }
 
 #searchbutton:hover {
-  transition: ease-in !important;
+  transition: ease-in-out !important;
   transition-duration: 0.1s !important;
   background-color: var(--color-base02) !important;
+  border-color: var(--color-accent) !important;
 }
 
 .header.js-header.overview-page__header.header--single-line {
