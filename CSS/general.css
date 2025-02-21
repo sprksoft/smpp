@@ -1484,6 +1484,15 @@ button.wopi_files__button {
   box-shadow: none !important;
   color: var(--color-text) !important;
   border: 2px solid var(--color-base02) !important;
+  transition: all 0.1s ease-in-out !important; 
+}
+.card:hover{
+  background-color: var(--color-base02) !important;
+  border-color: var(--color-accent) !important;
+}
+.card__anonymous,.card__status{
+border-color: var(--color-base03) !important;
+  justify-content: center !important;
 }
 
 .survey .title {
@@ -1498,4 +1507,7 @@ button.wopi_files__button {
   background-color: var(--color-base01) !important;
   border: 2px solid var(--color-base03) !important;
   border-radius: 15px !important;
+}
+.smsc-tree__item__title{
+  color: var(--color-text) !important;
 }

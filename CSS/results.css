@@ -133,12 +133,10 @@ upload-app.smsc-container.smsc-container--flex,
 
 .evaluation-list-item:hover:not(.evaluation-list-item.selected),
 .dropdown-button:hover,
-
-
 .smscleftnavcontainer {
   color: var(--color-accent) !important;
   box-shadow: none !important;
-  border-color: var(--color-base02) !important;
+  border-color: var(--color-base03) !important;
   background-color: var(--color-base02) !important;
 }
 
@@ -306,4 +304,7 @@ textarea,
   font-size: 17px;
   font-weight: bolder;
   margin-bottom: 0px !important;
+}
+.blob__text{
+  color: var(--color-text) !important;
 }

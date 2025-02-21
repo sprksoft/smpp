@@ -378,6 +378,7 @@ button.detail-todo-icon-and-color__icon {
 
 button.evaluation-list-item {
   background-color: var(--color-base01) !important;
+  border-radius: 15px !important;
 }
 
 .listview__row.js-listview-row.goals__row {
