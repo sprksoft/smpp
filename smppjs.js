@@ -32,9 +32,13 @@ function changeLogoutText() {
 function openFileSelector() {
   document.getElementById('fileInput').click();
 }
-function clearsettings() {
+async function clearsettings() {
   localStorage.clear();
+  await browser.runtime.sendMessage({
+    action: 'clearLocalStorage'
+  });
   console.log("Cleared settings!")
+
 }
 function fileToBase64(file) {
   return new Promise((resolve, reject) => {

@@ -70,7 +70,7 @@ async function updateWeatherDiv(weatherData, isBig, timeDifference) {
 }
 
 async function migrateWeaterData() {
-  console.log("migrating")
+  console.log("Migrating weather data")
   await browser.runtime.sendMessage({
     action: 'setWeatherAppData',
     data: {
@@ -96,8 +96,9 @@ async function getWeatherBasedOnLocation(location, isBig) {
   let lastUpdateDate = new Date(weatherAppData.lastUpdateDate);
   let timeDifference = Math.abs(lastUpdateDate - currentDate) / 1000;
   let weatherData;
-  if (timeDifference > 600 || location !== weatherAppData.lastLocation || wasMigrated) {
-    weatherData = await browser.runtime.sendMessage({ action: 'fetchWeatherData', location: location });;
+  if (timeDifference > 600 || location !== weatherAppData.lastLocation || wasMigrated || !weatherData) {
+    weatherData = await browser.runtime.sendMessage({ action: 'fetchWeatherData', location: location });
+    console.log(weatherData)
     await browser.runtime.sendMessage({
       action: 'setWeatherAppData',
       data: {
@@ -108,6 +109,7 @@ async function getWeatherBasedOnLocation(location, isBig) {
     });
     updateWeatherDiv(weatherData, isBig, 0);
   } else {
+    console.log(weatherData)
     weatherData = weatherAppData.weatherData
     updateWeatherDiv(weatherData, isBig, timeDifference);
   }
