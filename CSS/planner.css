@@ -383,8 +383,9 @@ button.icon-label-btn.js-icon-label-btn.icon-label-btn--linkbutton {
   border-color: var(--color-accent) !important;
   background-color: var(--color-base02) !important;
   padding: 10px !important;
-  border-radius: 7px !important;
+  border-radius: 15px !important;
   border: 2px solid var(--color-accent) !important;
+  transition: ease-in-out 0.1s all !important
 }
 
 button.icon-label-btn.js-icon-label-btn.icon-label-btn--linkbutton:hover {
@@ -511,6 +512,9 @@ button.icon-label-btn.js-icon-label-btn.icon-label-btn--linkbutton:hover {
 }
 .btn.btn--dropdown.btn--warning:after {
   background-image: url(/smsc/svg/driehoek_droplist_open/driehoek_droplist_open_9x9.svg) !important;
+}
+button.btn.btn--dropdown.js-btn,button.btn.dropdown-button.js-period-dropdown,button.btn.dropdown-button.js-course-dropdown{
+  border-radius: 15px !important;
 }
 .detail-blob {
   background-color: var(--color-base02) !important;
