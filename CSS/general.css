@@ -501,9 +501,10 @@ nav.topnav {
 }
 
 #haltetext {
-  width: fit-content !important;
+  width: max-content !important;
   height: 40px !important;
   margin-top: 0px !important;
+  margin-left: 0px !important;
   font-size: 16px !important;
 }
 
