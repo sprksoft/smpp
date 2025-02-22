@@ -46,8 +46,7 @@ html {
   background-color: var(--background-color) !important;
   background-color: transparent !important;
   backdrop-filter: blur(10px) !important;
-  border-radius: 20px !important;
-  border: 3px solid var(--color-base01) !important;
+  border-radius: 25px !important;
   border: 3px solid var(--color-base03) !important;
 
   transition: all 100ms ease-in 0s !important
@@ -59,7 +58,8 @@ html {
 
 .logintitle {
   font-size: 36px !important;
-  color: var(--color-base02) !important;
+  font-weight: 650 !important;
+  margin-bottom: 0px !important;
   color: var(--color-text) !important;
 }
 
@@ -108,7 +108,7 @@ a.smscButton[href="/login/sso/init/acm"],
   border-color: var(--color-base02) !important;
   background-color: var(--color-base01) !important;
   transition-duration: 0.3s !important;
-  font-weight: 500;
+  font-weight: 450;
   box-shadow: none !important;
   justify-self: center;
 }
@@ -118,8 +118,7 @@ a.smscButton[href="/login/sso/init/acm"],
   border-color: var(--color-base03) !important;
   box-shadow: none !important;
   width: 100% !important;
-  letter-spacing: 2px !important;
-  font-weight: 800 !important;
+  font-weight: 700 !important;
 }
 
 .modern-ui .float-label__input:focus+label>span,
@@ -152,7 +151,7 @@ a.smscButton[href="/login/sso/init/acm"],
 }
 
 .login-app__infoblock--black {
-  color: var(--color-text ) !important;
+  color: var(--color-text) !important;
 }
 
 .login-app__title--separator:after,
@@ -198,7 +197,8 @@ span.login-app__title.login-app__title--sign-in-with {
     transform: scale(100%);
   }
 }
-#showmore{
+
+#showmore {
   width: 80% !important;
   justify-self: center !important;
   border-radius: 10px !important;

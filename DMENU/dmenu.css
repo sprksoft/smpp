@@ -1,5 +1,6 @@
 html {
   --dmenu-margin: 1px;
+  --dmenu-padding: 3px;
   --dmenu-font-size: 1.5rem;
 }
 
@@ -38,8 +39,7 @@ html {
   background: var(--color-base01);
   color: var(--color-text) !important;
   flex-grow: 1;
-  padding: 0px !important;
-  padding: var(--dmenu-margin);
+  padding: var(--dmenu-padding) !important;
   font-size: var(--dmenu-font-size) !important;
   border-top-right-radius: 3px !important;
 }
@@ -53,8 +53,8 @@ html {
   background: var(--color-base01);
   color: var(--color-accent);
   line-height: inherit;
-  margin: 0px;
-  padding: var(--dmenu-margin);
+  padding-left: var(--dmenu-padding);
+  margin-left: 0px !important;
   border-right: var(--border-size) solid var(--color-base02);
   border-top-left-radius: 3px !important;
 }
@@ -72,7 +72,7 @@ html {
 }
 
 .dmenu-row {
-  margin: var(--dmenu-margin);
+  padding: var(--dmenu-padding);
   background: var(--color-base00);
   color: var(--color-text) !important;
   display: flex;

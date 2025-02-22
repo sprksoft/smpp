@@ -139,9 +139,9 @@ function add_ui() {
   }
   document.getElementById("watering_button").addEventListener("click", user_watered_plant);
   if (time_difference_hours < 1) {
-    document.getElementById('time_difference_last_watered').innerHTML = `Last watered: \n` + Math.floor(time_difference_hours * 60) + `min ago`
+    document.getElementById('time_difference_last_watered').innerHTML = `<p id=water_title>Watered: </p><p id=water_time>` + Math.floor(time_difference_hours * 60) + `min ago</p>`
   } else {
-    document.getElementById('time_difference_last_watered').innerHTML = `Last watered: \n` + Math.floor(time_difference_hours) + `h ago`
+    document.getElementById('time_difference_last_watered').innerHTML = `<p id=water_title>Watered: </p><p id=water_time>` + Math.floor(time_difference_hours) + `h ago</p>`
   }
   document.getElementById("glass-fill").style.height = calculatePercentile(time_difference_watered / 1000) + `%`;
 }

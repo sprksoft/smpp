@@ -29,6 +29,7 @@ html {
   --color-splashtext: #191817;
   background-color: var(--background-color);
 }
+
 .modern-ui,
 .modern-ui body,
 .modern-ui button,
@@ -619,7 +620,7 @@ input:checked+.slider:before {
   text-align: center !important;
   font-size: 17px !important;
   margin-top: 0px !important;
-  font-weight: 500 !important;
+  font-weight: 600 !important;
 }
 
 #searchMenu {
@@ -1122,14 +1123,15 @@ div.smscCheckbox input[type=checkbox]+label,
   background-image: url("https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/checkboxunchecked.svg") !important;
 
 }
-.mobile-style input[type=checkbox],.mobile-style input[type=checkbox]:checked {
+
+.mobile-style input[type=checkbox],
+.mobile-style input[type=checkbox]:checked {
   background-repeat: no-repeat !important;
   background-size: cover !important;
 }
 
 label.checkbox input[type=checkbox]:checked,
-div.smscCheckbox input[type=checkbox]:checked+label
-{
+div.smscCheckbox input[type=checkbox]:checked+label {
   background-image: url("https://raw.githubusercontent.com/frickingbird8002/smpp-images/9d0cc428cc236802f97cfe77094256d0cf5bdcdf/checkedbox.svg") !important;
 }
 
@@ -1490,16 +1492,17 @@ button.wopi_files__button {
 
 .card__container {
   background-color: var(--color-base00) !important;
-  border-radius: 25px !important;
+  border-radius: 20px !important;
   transition: all ease-in-out 0.25s;
+  box-shadow: none !important;
 }
 
 .card__container:hover {
   cursor: pointer !important;
   background-color: var(--color-base01) !important;
-  transform: translateY(-10px);
+  transform: translateY(-5px);
   scale: 1.05;
-  box-shadow: 0px 15px 50px var(--darken-background);
+  box-shadow: 0px 15px 50px var(--darken-background) !important;
 }
 
 .card__container__content__title {
@@ -1511,12 +1514,16 @@ button.wopi_files__button {
 }
 
 .card {
-  border-radius: 25px !important;
+  border-radius: 20px !important;
   background-color: var(--color-base01) !important;
   box-shadow: none !important;
   color: var(--color-text) !important;
   border: 2px solid var(--color-base02) !important;
   transition: all 0.1s ease-in-out !important;
+}
+
+body.modern-ui .photos__albums .l-albums__header input.l-albums__header__search-input {
+  margin-left: 10px !important;
 }
 
 .card:hover {
@@ -1547,7 +1554,8 @@ button.wopi_files__button {
 .smsc-tree__item__title {
   color: var(--color-text) !important;
 }
-.smsc-topnav [data-courses] .course-link__descr{
-  color: var(--color-text) !important ;
-font-weight: 250 !important;
+
+.smsc-topnav [data-courses] .course-link__descr {
+  color: var(--color-text) !important;
+  font-weight: 250 !important;
 }

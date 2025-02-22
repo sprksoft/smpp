@@ -34,12 +34,18 @@
 
 .time_difference_last_watered {
   font-weight: bold;
-  font-size: 12px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
   text-align: center;
   position: relative;
   top: 50%;
   width: 33%;
   vertical-align: center;
+  margin-left: 10px;
+  margin-right: 10px;
+  max-height: 50px !important;
 }
 
 .glass-container {
@@ -166,4 +172,15 @@
 
 #plant_the_plant_svg:hover {
   cursor: pointer !important;
+}
+#water_title{
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  margin: 0px !important;
+}
+#water_time{
+  font-size: 17px !important;
+  font-weight: 400 !important;
+  margin: 0px !important;
+  width: 150% !important;
 }
