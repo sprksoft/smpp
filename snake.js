@@ -201,11 +201,14 @@ function snakeGame() {
   let gameInterval = setInterval(gameLoop, SNAKE_SPEED);
   const queue = new Queue();
   document.addEventListener('keydown', event => {
-    if (queue.size() < 3 && queue.peek() != event.key) { //at most we should have three inputs in queue
-      queue.enqueue(event.key)
+    if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
+      if (queue.size() < 3 && queue.peek() != event.key) { 
+        queue.enqueue(event.key);
+      }
+      event.preventDefault();
     }
-    event.preventDefault()   
   });
+  
 }
 
 //code taken from https://www.geeksforgeeks.org/implementation-queue-javascript/
