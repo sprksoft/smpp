@@ -163,19 +163,85 @@ function snakeGame() {
       }
     }
   }
-  function gameLoop() {
+    function gameLoop() {
+    //handle input queue
+    let input = queue.dequeue()
+    switch (input) {
+      case "ArrowUp":
+        if (snake.direction !== 'DOWN') {
+        snake.direction = 'UP';}
+      break;
+      case "ArrowDown": 
+        if (snake.direction !== 'UP') {
+        snake.direction = 'DOWN';}
+      break;
+      case "ArrowLeft": 
+        if (snake.direction !== 'RIGHT') {
+        snake.direction = 'LEFT';}
+      break;
+      case "ArrowRight": 
+        if (snake.direction !== 'LEFT') {
+        snake.direction = 'RIGHT';}
+      break;
+    }
+
     ctx.clearRect(0, 0, WIDTH, HEIGHT);
     snake.move();
     snake.body.unshift({ x: snake.x, y: snake.y });
     if (snake.body.length > snake.length) {
       snake.body.pop();
     }
+
     checkCollision()
     snake.draw();
     food.draw();
     checkFood();
   }
+
   let gameInterval = setInterval(gameLoop, SNAKE_SPEED);
+  const queue = new Queue();
+  document.addEventListener('keydown', event => {
+    if (queue.size() < 3 && queue.peek() != event.key) { //at most we should have three inputs in queue
+      queue.enqueue(event.key)
+    }
+    event.preventDefault()   
+  });
+}
+
+//code taken from https://www.geeksforgeeks.org/implementation-queue-javascript/
+//because I am lazy
+class Queue {
+  constructor() {
+    this.items = [];
+  }
+
+  enqueue(element) {
+    this.items.push(element); 
+  }
+
+  dequeue() {
+    return this.isEmpty() ? "Queue is empty" : this.items.shift();
+  }
+
+  peek() {
+    return this.isEmpty() ? "Queue is empty" : this.items[0];
+  }
+
+  isEmpty() {
+    return this.items.length === 0;
+  }
+
+  size() {
+    return this.items.length;
+  }
+
+  print() {
+    console.log(this.items.join(" -> "));
+  }
+}
+
+/* Old version, didn't support input queue'
+
   document.addEventListener('keydown', event => {
     if ((event.key === 'ArrowLeft') && snake.direction !== 'RIGHT') {
       snake.direction = 'LEFT';
@@ -192,3 +258,4 @@ function snakeGame() {
     }
   });
 }
+*/
