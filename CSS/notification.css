@@ -31,7 +31,7 @@
 
 .notification {
   border: 2px solid var(--color-base02) !important;
-  border-radius: 10px !important;
+  border-radius: 15px !important;
   background: var(--color-base01) !important;
   padding: 2px 10px 2px 10px !important;
   height: auto !important;
@@ -89,4 +89,7 @@ button.tox-tbtn.tox-tbtn--enabled {
 .js-notifs-list::after {
   color: var(--color-text) !important;
   opacity: 0.7 !important;
+}
+.notification__info{
+  font-weight: 300 !important;
 }

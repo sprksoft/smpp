@@ -76,7 +76,8 @@ a.smscButton[href="/login/sso/init/acm"],
 }
 
 .login-app__title--separator {
-  display: flex !important;
+  display: grid !important;
+  margin-bottom: 0px !important;
 }
 
 .showLeftNav {
@@ -100,19 +101,25 @@ a.smscButton[href="/login/sso/init/acm"],
 }
 
 .smscButton.blue:not(#pushWizardPopupConfirmButton) {
-  border-radius: 40px !important;
+  border-radius: 9999px !important;
+  width: 90% !important;
   height: 40px !important;
   color: var(--color-text) !important;
-  border-color: var(--color-base01) !important;
-  background-color: var(--color-base02) !important;
+  border-color: var(--color-base02) !important;
+  background-color: var(--color-base01) !important;
+  transition-duration: 0.3s !important;
+  font-weight: 500;
   box-shadow: none !important;
+  justify-self: center;
 }
 
 .smscButton.blue:hover:not(#pushWizardPopupConfirmButton:hover) {
-  border-radius: 40px !important;
-  background-color: var(--color-base03) !important;
-  border-color: var(--color-base02) !important;
+  background-color: var(--color-base02) !important;
+  border-color: var(--color-base03) !important;
   box-shadow: none !important;
+  width: 100% !important;
+  letter-spacing: 2px !important;
+  font-weight: 800 !important;
 }
 
 .modern-ui .float-label__input:focus+label>span,
@@ -145,7 +152,7 @@ a.smscButton[href="/login/sso/init/acm"],
 }
 
 .login-app__infoblock--black {
-  color: var(--color-base01) !important;
+  color: var(--color-text ) !important;
 }
 
 .login-app__title--separator:after,
@@ -190,4 +197,10 @@ span.login-app__title.login-app__title--sign-in-with {
   100% {
     transform: scale(100%);
   }
+}
+#showmore{
+  width: 80% !important;
+  justify-self: center !important;
+  border-radius: 10px !important;
+  margin: 0px !important;
 }

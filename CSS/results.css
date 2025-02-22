@@ -31,18 +31,27 @@
 }
 
 .wide-toolbar__item {
-  background-color: var(--color-base00) !important;
+  background-color: var(--color-base01) !important;
   color: var(--color-text) !important;
-  border: var(--border-size)solid var(--color-base02) !important;
-  border-radius: 10px !important;
-  margin: 5px !important;
-  margin-left: 3px !important;
-  margin-right: 3px !important;
+  border: var(--border-size) solid var(--color-base02) !important;
+  border-radius: 15px !important;
+  margin: 10px 7px 0px 7px !important;
+}
+
+.wide-toolbar__item--selected {
+  background-color: var(--color-base02) !important;
+  border-color: var(--color-base03) !important;
+  font-weight: 800 !important;
+}
+
+.wide-toolbar__item--selected:hover {
+  background-color: var(--color-base02) !important;
 }
 
 .wide-toolbar__item:hover {
 
   border-color: var(--color-accent) !important;
+  background-color: var(--color-base02) !important;
 }
 
 .title--1,
@@ -134,7 +143,6 @@ upload-app.smsc-container.smsc-container--flex,
 .evaluation-list-item:hover:not(.evaluation-list-item.selected),
 .dropdown-button:hover,
 .smscleftnavcontainer {
-  color: var(--color-accent) !important;
   box-shadow: none !important;
   border-color: var(--color-base03) !important;
   background-color: var(--color-base02) !important;
@@ -142,6 +150,10 @@ upload-app.smsc-container.smsc-container--flex,
 
 .goals-filter__item:hover:not(.selected) {
   background-color: var(--color-base02) !important
+}
+
+.goals-filter__item {
+  border-radius: 15px !important;
 }
 
 .feedback--white {
@@ -305,6 +317,36 @@ textarea,
   font-weight: bolder;
   margin-bottom: 0px !important;
 }
-.blob__text{
+
+.blob__text {
   color: var(--color-text) !important;
+}
+
+.title-and-schoolyear-selector .title-and-schoolyear-selector__period-container:hover:not(:disabled),
+.title-and-schoolyear-selector[aria-expanded=true] .title-and-schoolyear-selector__period-container:not(:disabled) {
+  border-color: var(--color-accent) !important;
+  background-color: var(--darken-background) !important;
+
+}
+
+.title-and-schoolyear-selector .title-and-schoolyear-selector__period-container:not(:disabled) {
+  transition: all 0.1s !important;
+  border-width: 2px !important;
+  border-radius: 15px !important;
+}
+
+.listview__row.js-listview-row.leerplannen-overview__list__listview__row {
+  background-color: var(--color-base01) !important;
+  border: 2px solid var(--color-base02) !important;
+  transition: all 0.1s ease-in-out !important;
+  max-width: 33% !important;
+  margin-bottom: 10px !important;
+  border-radius: 15px !important;
+}
+.listview__row.js-listview-row.leerplannen-overview__list__listview__row:hover {
+  background-color: var(--color-base02) !important;
+  border-color: var(--color-accent) !important;
+}
+.title-and-schoolyear-selector__title{
+  border-right: 1px solid var(--color-accent) !important;
 }

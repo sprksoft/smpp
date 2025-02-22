@@ -51,6 +51,11 @@ function fileToBase64(file) {
 const anakin = 56789;
 const skywalker = 98765;
 
+function changeFont() {
+  let fontLinks = document.createElement("div")
+  fontLinks.innerHTML = `<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">`
+  document.getElementsByTagName("head")[0].appendChild(fontLinks)
+}
 async function apply() {
   let style = document.documentElement.style;
   let settingsData = get_config();
@@ -72,6 +77,7 @@ async function apply() {
   var IsBig = settingsData.isbig;
   var weatherSelector = settingsData.weatherSelector;
   var show_plant = settingsData.show_plant
+  changeFont()
   set_theme("default");
   set_theme(profileSelect);
 

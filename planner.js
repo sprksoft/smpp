@@ -76,7 +76,7 @@ async function ShowPlanner(addend) {
         <a id="turn-off-planner" style="text-align: center">Click here to turn planner <strong>off</strong></a>`;
         var Title = document.createElement("div")
         let date_text = `${await getDateInCorrectFormat(false, addend)}`.split(' ').slice(0, 4).join(' ')
-        Title.innerHTML = "<button style='width:15%' id=back_button_planner></button><h2 style='width:70%;'>" + date_text + "</h2><button id=forward_button_planner style='width:15%'></button>"
+        Title.innerHTML = "<button style='width:15%' title='back' id=back_button_planner></button><h3 style='width:70%; font-weight:500; font-size:20px'>" + date_text + "</h3><button id=forward_button_planner title='forward' style='width:15%'></button>"
         Title.classList.add('planner-title-startpage')
         plannerContainer.prepend(Title)
         container.innerHTML = '';
@@ -104,7 +104,7 @@ async function ShowPlanner(addend) {
     var Title = document.createElement("div")
     let date_text = `${await getDateInCorrectFormat(false, addend)}`.split(' ').slice(0, 4).join(' ')
 
-    Title.innerHTML = "<button style='width:15%' id=back_button_planner></button><h2 style='width:70%;'>" + date_text + "</h2><button id=forward_button_planner style='width:15%'></button>"
+    Title.innerHTML = "<button style='width:15%' title='back' id=back_button_planner></button><h3 style='width:70%; font-weight:500; font-size:20px'>" + date_text + "</h3><button id=forward_button_planner title='forward' style='width:15%'></button>"
     Title.classList.add('planner-title-startpage')
     plannerContainer.appendChild(Title)
 

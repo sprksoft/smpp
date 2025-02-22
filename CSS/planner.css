@@ -139,7 +139,7 @@
 }
 
 .header__month,
-.bubble__menu-btn:hover {
+.bubble__menu-btn:hover:not(.bubble__menu-btn--active) {
   background-color: var(--color-base02) !important;
 }
 

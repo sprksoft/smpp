@@ -19,7 +19,7 @@
 .weather-temperatureBig {
   font-size: 350%;
   margin-bottom: 0px !important;
-  font-weight: lighter;
+  font-weight: 200;
 }
 
 #weather-icon-clear {
