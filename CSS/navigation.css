@@ -73,6 +73,7 @@
   border-color: var(--color-hover-border) !important;
   background-color: var(--color-base02) !important;
   color: var(--color-accent) !important;
+  font-weight: 600 !important;
 }
 
 .topnav__menuitem {

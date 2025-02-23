@@ -1592,3 +1592,6 @@ font-weight: 400 !important;
 span.news__feed__button__content--title{
 font-weight: 550 !important;
 }
+a.disabled{
+  opacity: 0.7 !important;
+}

@@ -173,9 +173,7 @@ span.login-app__title.login-app__title--sign-in-with {
 
 .splashtextcontainer {
   position: absolute;
-  /* Changed to absolute for more flexibility */
   left: 50%;
-  /* Centered horizontally within the container */
   top: 50%;
   transform-origin: left !important;
   transform: translateX(180px) translateY(-240px) rotate(30deg) !important;
