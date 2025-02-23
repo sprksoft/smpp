@@ -250,6 +250,7 @@ class DMenu {
 function dmenu(itemList, endFunc=undefined, title="dmenu:", opener=undefined) {
   if (active_dmenu !== null && active_dmenu.isOpen()){
     active_dmenu.close();
+    active_dmenu = null;
   }
   let menu = new DMenu(itemList, endFunc, title, opener);
   active_dmenu = menu;
@@ -257,11 +258,12 @@ function dmenu(itemList, endFunc=undefined, title="dmenu:", opener=undefined) {
 }
 
 document.addEventListener("click", function(e){
-  if (active_dmenu == null){
+  if (active_dmenu == null || !active_dmenu.isOpen()){
     return;
   }
   if (!active_dmenu.menuEl.contains(e.target) && e.target != active_dmenu.openerEl){
     active_dmenu.close();
     active_dmenu = null;
+    e.preventDefault();
   }
 });
