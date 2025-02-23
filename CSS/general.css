@@ -896,18 +896,6 @@ option:hover {
   background-color: var(--color-base01) !important;
 }
 
-.goal-evaluations-details__row__first-container__evaluation-details__title,
-.goal-evaluations-details__row__first-container__evaluation-details__text,
-.goal-evaluations-details__row__description__text,
-.goal-evaluations-details__row__first-container__evaluation-details__info,
-.form__value--resolvedStatus,
-.label__resolvedStatus,
-.js-form-label,
-.form__value--resolvedStatus,
-label.form__label.js-form-label.label__resolvedStatus.form__label--no-margin-top {
-  color: white !important;
-}
-
 .splashscreen {
   background: transparent !important;
 }
@@ -1563,7 +1551,8 @@ body.modern-ui .photos__albums .l-albums__header input.l-albums__header__search-
 
 .smsc-topnav [data-courses] .course-link__descr {
   color: var(--color-text) !important;
-  font-weight: 250 !important;
+  opacity: 0.8;
+  font-weight: 300 !important;
 }
 
 div.smscCheckbox input[type=checkbox]:not(.loading):focus+label:before {
@@ -1584,9 +1573,14 @@ div.smscCheckbox input[type=checkbox]:not(.loading):focus+label:before {
 .topnav__menuitem--img:hover {
   background-position-x: 8px !important;
 }
-span[style*="color"],div[style*="color"] {
+span[style^="color:"], 
+span[style*="; color:"],
+div[style^="color:"], 
+div[style*="; color:"] {
   color: var(--color-text) !important;
 }
+
+
 span[style*="background"],div[style*="background"] {
   background-color: transparent !important;
 }

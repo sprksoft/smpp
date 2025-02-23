@@ -610,3 +610,7 @@ h3.card-block__title.fluid-ui-heading.fluid-ui-heading--3 {
 .listview__row.js-listview-row:hover {
   cursor: pointer !important;
 }
+.todo-column [listview] .todo-column__details-cell__metadata{
+  color: var(--color-text) !important;
+  opacity: 0.8 !important;
+}
