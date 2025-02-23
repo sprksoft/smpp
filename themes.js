@@ -198,6 +198,10 @@ function apply_theme(theme, style) {
   for (let i = 0; i < keys.length; i++) {
     style.setProperty(keys[i], theme[keys[i]]);
   }
+  if (window.self !== window.top) {
+    style.setProperty('--loginpage-image', "url(https://wallpaperaccess.com/full/23.jpg)");
+  }
+
 }
 function get_theme_as_query_string(theme, qvars) {
   let output = "";

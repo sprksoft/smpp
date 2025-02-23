@@ -27,7 +27,7 @@ html {
   --color-settings-ui-layer2: #000000;
   --darken-background: rgba(0, 0, 0, 0.2);
   --color-splashtext: #191817;
-  --profile-picture: url("")
+  --profile-picture: url("");
 }
 
 body,
@@ -97,11 +97,18 @@ div.stdReplyWrapper,
 #stdReplyName,
 #stdReplyTxt,
 #editsubboxinput,
-.fileinfogrey,
-.fileinfowhite,
 .fileuploadblock,
 #formval_omschrijving {
   background-color: var(--color-base01) !important;
+}
+
+.fileinfogrey {
+  background-color: transparent !important;
+  opacity: 0.7 !important;
+}
+
+.fileinfowhite {
+  background-color: transparent !important;
 }
 
 #stdReplyName,
@@ -201,6 +208,7 @@ button.smscButton.blue.fileupload_submit_button,
   color: var(--color-accent) !important;
   box-shadow: none !important;
   transition: border 0.3s, background-color 0.3s, color 0.3s;
+  border-radius: 10px !important;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -253,6 +261,10 @@ li,
   color: var(--color-text) !important;
 }
 
+.legend2 {
+  border-radius: 5px !important;
+}
+
 fieldset.fieldset2 {
   position: relative;
   border-color: var(--color-base03) !important;
@@ -278,7 +290,7 @@ select,
   border: 1px solid var(--color-base03) !important;
   text-shadow: none !important;
   font-weight: bold !important;
-  background-color: var(--color-base01) !important;
+  background: var(--color-base01) !important;
 }
 
 .msgInfoTitle,
@@ -333,11 +345,10 @@ td:not(.cb-container, [style="height:20px;"], [colspan='3']),
 .action-button,
 span.smsc-inlineeditor--disabled.smsc-inlineeditor__editor,
 smsc-inlineeditor.smsc-table__cell--inlineeditor {
-  background-color: var(--background-color) !important;
+  background-color: transparent !important;
 }
 
-.smsc-contextmenu__content,
-.listview-row__item--inline-edit {
+.smsc-contextmenu__content {
   background-color: var(--color-base01) !important;
 }
 
@@ -490,6 +501,8 @@ div.stdReplyWrapper {
 
 nav.topnav {
   border-bottom: none !important;
+  min-height: fit-content !important;
+  padding: 7px !important;
 }
 
 .popupinput,
@@ -633,7 +646,7 @@ input:checked+.slider:before {
 }
 
 #searchMenu {
-  top: 36px;
+  top: 34px !important;
   max-width: 270px !important;
   margin-left: -5px;
   transform: translateY(0%) !important;
@@ -676,6 +689,12 @@ input:checked+.slider:before {
 .smscFrameTitleContainer .smscFrameTitle,
 .uploadzone .files .navigation {
   border: 2px solid var(--color-base03) !important;
+  background-color: var(--color-base01) !important;
+}
+
+.uploadzone-attachment,
+.uploadzone-default-attachment-txt {
+  background-color: var(--color-base01) !important;
 }
 
 #smscleftnav .smscleftnavcontainer {
@@ -684,11 +703,11 @@ input:checked+.slider:before {
 }
 
 .smsc-topnav .topnav__divider {
-  width: 2px !important;
+  display: none !important;
 }
 
 .course-session-page__container {
-  box-shadow: -1px -1px 1px var(--color-base03) !important;
+  box-shadow: none !important;
 }
 
 .snowflake {
@@ -1069,6 +1088,14 @@ span.userNotRead {
   color: var(--color-text) !important;
 }
 
+#uploadzone {
+  position: relative !important;
+  margin: 0px !important;
+  margin-right: 10px !important;
+  top: 20px !important;
+  width: 97% !important;
+}
+
 .correctioninfo {
   background-color: var(--color-base01) !important;
 }
@@ -1115,7 +1142,7 @@ input[name="email"] {
 }
 
 label.checkbox input[type=checkbox],
-div.smscCheckbox input[type=checkbox]+label,
+div.smscCheckbox input[type=checkbox],
 .mobile-style input[type=checkbox] {
   background-image: url("https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/checkboxunchecked.svg") !important;
 
@@ -1128,7 +1155,8 @@ div.smscCheckbox input[type=checkbox]+label,
 }
 
 label.checkbox input[type=checkbox]:checked,
-div.smscCheckbox input[type=checkbox]:checked+label {
+div.smscCheckbox input[type=checkbox]:checked,
+.mobile-style input[type=checkbox]:checked {
   background-image: url("https://raw.githubusercontent.com/frickingbird8002/smpp-images/9d0cc428cc236802f97cfe77094256d0cf5bdcdf/checkedbox.svg") !important;
 }
 
@@ -1167,6 +1195,11 @@ div.correctioninfo {
 .fileuploadblock {
   border: 2px solid var(--color-base02) !important;
   border-radius: 10px !important;
+  padding-right: 15px !important;
+}
+
+.dialog-content.js-dialog-content.wip_interruptor_dialog {
+  border-radius: 25px !important;
 }
 
 .drag-container__info-drag {
@@ -1235,29 +1268,25 @@ a.js-btn-messages.topnav__btn:hover {
 }
 
 .homepage__right {
-  border-left: 4px solid var(--color-base01) !important;
+  border-left: 2px solid var(--color-base01) !important;
 }
 
 .homepage__left {
-  border-right: 4px solid var(--color-base01) !important;
+  border-right: 2px solid var(--color-base01) !important;
 }
 
 textarea,
 td.cb-container {
-  background-color: var(--color-base00) !important;
+  background-color: transparent !important;
 }
 
 
 .smsc-container:has(.form-page__header-wrapper) {
   background-color: transparent !important;
-  backdrop-filter: var(--blur-value-small) !important;
 }
 
 .form-page {
-  background-color: var(--background-color) !important;
-  background-image: var(--loginpage-image) !important;
-  background-position: center !important;
-  background-size: cover !important;
+  background: transparent !important;
 }
 
 .form-item.js-form-item.form-item--multiple-choice {
@@ -1579,9 +1608,15 @@ div.smscCheckbox input[type=checkbox]:not(.loading):focus+label:before {
 
 span[style^="color:"],
 span[style*="; color:"],
+span[style*=";color:"],
 div[style^="color:"],
-div[style*="; color:"] {
+div[style*="; color:"],
+div[style*=";color:"] {
   color: var(--color-text) !important;
+}
+
+div[style*=";color:#033399;"] {
+  opacity: 0.7 !important;
 }
 
 
@@ -1601,6 +1636,59 @@ span.news__feed__button__content--title {
   font-weight: 550 !important;
 }
 
-a.disabled {
+a.disabled,
+.smsc_cm_body_row_block_mime {
   opacity: 0.7 !important;
+}
+
+label.checkbox.js-checkbox.form-page__receive-copy-by-mail-checkbox {
+  margin-left: 25px !important;
+}
+
+.form-page__footer-btns {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.smscMain.form-completed-page {
+  background-color: transparent !important;
+  background-image: var(--loginpage-image) !important;
+  background-position: center !important;
+  background-size: cover !important;
+
+}
+
+.smsc-container.form-completed-page__content {
+  background-color: var(--darken-background) !important;
+  backdrop-filter: var(--blur-value-small) !important;
+  background-image: none !important;
+}
+
+.confirm-dialog .confirm-dialog__button-bar {
+  border-color: var(--color-base02) !important;
+}
+
+#speedmultiplier,
+#flappyspeedmultiplier {
+  width: 25px !important;
+}
+
+span.uploaddetail {
+  color: var(--color-text) !important;
+  opacity: 0.7 !important;
+}
+
+.toolbar-buttons div {
+  border: none !important;
+}
+
+.smsc_cm_breadcrumb {
+  display: flex !important;
+  flex-direction: row !important;
+}
+
+.smsc_cm_no_items#nownews {
+  background-image: url(https://static6.smart-school.net/smsc/svg/star_yellow/star_yellow_24x24.svg) !important;
+  background-size: 64px !important;
 }

@@ -163,7 +163,7 @@ async function createDelijnApp() {
   delijnContainer.innerHTML = `
     <div id="top_lijn_app">
       <div class="textandbuttonnomarg">
-        <input class="popupinput" id="haltetext" type="text">
+        <input class="popupinput" id="haltetext" spellcheck="false" type="text">
         <button type="submit" class="searchbutton" id="searchbutton">
           <svg width="25" height="25" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <path d="M16.0073 9.00364C16.0073 12.8716 12.8716 16.0073 9.00364 16.0073C5.13564 16.0073 2 12.8716 2 9.00364C2 

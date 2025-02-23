@@ -55,6 +55,7 @@
   background-color: var(--color-base01) !important;
   color: var(--color-text) !important;
   border: 2px solid var(--color-popup-border) !important;
+  border-radius: 25px !important;
 }
 
 .form__label {
@@ -245,9 +246,11 @@ button.btn.close-btn.btn--primary {
   border-bottom-right-radius: 15px;
 }
 
-.header.js-header.header--single-line,
-
 .splitdetail__content__topbtns {
+  background-color: transparent !important;
+}
+
+.header.js-header.header--single-line {
   background-color: var(--color-base01) !important;
 }
 
@@ -610,7 +613,12 @@ h3.card-block__title.fluid-ui-heading.fluid-ui-heading--3 {
 .listview__row.js-listview-row:hover {
   cursor: pointer !important;
 }
-.todo-column [listview] .todo-column__details-cell__metadata{
+
+.todo-column [listview] .todo-column__details-cell__metadata {
   color: var(--color-text) !important;
   opacity: 0.8 !important;
+}
+
+.dialog__view {
+  border-radius: 25px !important;
 }

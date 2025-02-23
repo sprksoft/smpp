@@ -64,7 +64,6 @@ function getPfpLink(username) {
     return `https://userpicture20.smartschool.be/User/Userimage/hashimage/hash/initials_${firstInitial + secondInitial}/plain/1/res/32`;
   }
   return `https://userpicture20.smartschool.be/User/Userimage/hashimage/hash/initials_MU/plain/1/res/32`;
-
 }
 async function apply() {
   let style = document.documentElement.style;
@@ -254,26 +253,7 @@ async function apply() {
   style.setProperty('--profile-picture', 'url(' + getPfpLink(username_override) + ')');
   style.setProperty('--blur-value-large', 'blur(' + bigblurvalue + 'px)');
   style.setProperty('--blur-value-small', 'blur(' + blurvalue + 'px)');
-  var rain = document.getElementById('raindrops')
-  var snow = document.getElementById('snowflakes')
-  var meteor = document.getElementById('star')
-  if (weatherSelector == 0) {
-    set_snow_level(weatherAmount);
-    rain != undefined ? rain.remove() : 0
-    meteor != undefined ? meteor.remove() : 0
-
-  } else if (weatherSelector == 1) {
-    rain != undefined ? rain.remove() : 0
-    snow != undefined ? snow.remove() : 0
-    set_overlay_based_on_conditions(weatherAmount)
-  }
-  else if (weatherSelector == 2) {
-    set_rain_level(weatherAmount);
-    meteor != undefined ? meteor.remove() : 0
-    snow != undefined ? snow.remove() : 0
-  } else {
-    console.error("No weather selector")
-  }
+  applyWeatherEffects(weatherSelector, weatherAmount)
   if (gc_initialized) {
     remove_gcwin()
     make_gcwin(true)
@@ -293,8 +273,6 @@ async function apply() {
     }
   }
 }
-
-
 
 function storeTheme() {
   const themeData = {
@@ -320,16 +298,16 @@ function store() {
   let backgroundFile = document.getElementById("fileInput").files[0];
   const backgroundLink = document.getElementById("backgroundlink").value
   const halte = document.getElementById("halt").checked;
-  const overwrite_theme = document.getElementById("backgroundSlider").value;
+  const overwrite_theme = Number(document.getElementById("backgroundSlider").value);
   const loc = document.getElementById("location").value;
-  const slider = document.getElementById('mySlider').value;
-  const weatherSlider = document.getElementById('weatherSlider').value;
+  const blur = Number(document.getElementById('mySlider').value);
+  const weatherAmount = Number(document.getElementById('weatherSlider').value);
   const shownews = document.getElementById("shownewselement").checked;
   const showsnake = document.getElementById('showsnakeelement').checked;
   const showflappy = document.getElementById('showflappyelement').checked;
   const isbig = document.getElementById("isbig").checked;
   const showplanner = document.getElementById("showplanner").checked;
-  const weatherSelector = document.getElementById("weatherSelector").value;
+  const weatherSelector = Number(document.getElementById("weatherSelector").value);
   const show_plant = document.getElementById("show_plant").checked;
   const smpp_logo = document.getElementById("smpp_logo").checked;
   settingsData.profile = profileSelect;
@@ -337,8 +315,8 @@ function store() {
   settingsData.overwrite_theme = overwrite_theme;
   settingsData.location = loc.charAt(0).toUpperCase() + loc.slice(1);
   settingsData.backgroundlink = backgroundLink
-  settingsData.blur = slider;
-  settingsData.weatherAmount = parseInt(weatherSlider);
+  settingsData.blur = blur;
+  settingsData.weatherAmount = weatherAmount;
   settingsData.shownews = shownews;
   settingsData.showsnake = showsnake;
   settingsData.showflappy = showflappy
@@ -511,7 +489,9 @@ function set_theme(name) {
     style.setProperty('--color-base01', themeData.color_base01);
     style.setProperty('--color-base02', themeData.color_base02);
     style.setProperty('--color-base03', themeData.color_base03);
-    style.setProperty('--loginpage-image', "url(https://wallpaperaccess.com/full/23.jpg)");
+    if (window.self == window.top) {
+      style.setProperty('--loginpage-image', "url(https://wallpaperaccess.com/full/23.jpg)");
+    }
   } else {
     let theme = get_theme(name);
     if (!theme) {

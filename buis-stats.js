@@ -31,8 +31,8 @@ setTimeout(function () {
         newElement.id = "buis-stats"
         document.getElementsByClassName("results-evaluations__filters")[0].appendChild(newElement)
         newElement.innerHTML = `<div class="buis-stats" id="buis_amount"></div><div class="buis-stats" id="voldoende_amount"></div>`
-        document.getElementById("buis_amount").innerHTML = `<div class="buis-stats-box"><p class="buis-stats-title">Onvoldoendes:</p><p class="buis-stats-value">${categories.buis}</p></div>`
-        document.getElementById("voldoende_amount").innerHTML = `<div class="buis-stats-box"><p class="buis-stats-title">Voldoendes:</p><p class="buis-stats-value">${categories.voldoende}</p></div>`
+        document.getElementById("buis_amount").innerHTML = `<div class="buis-stats-box"><span class="buis-stats-title">Onvoldoendes:</span><span class="buis-stats-value">${categories.buis}</span></div>`
+        document.getElementById("voldoende_amount").innerHTML = `<div class="buis-stats-box"><span class="buis-stats-title">Voldoendes:</span><span class="buis-stats-value">${categories.voldoende}</span></div>`
 
       })
       .catch(error => console.error('Error fetching:', error));
