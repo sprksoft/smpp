@@ -163,27 +163,64 @@ function snakeGame() {
       }
     }
   }
-    function gameLoop() {
-    //handle input queue
-    let input = queue.dequeue()
-    switch (input) {
+  function convertToDirection(inputKey) { //converts an input key into its respective direction
+    let direction
+    switch (inputKey) {
       case "ArrowUp":
-        if (snake.direction !== 'DOWN') {
-        snake.direction = 'UP';}
+        direction = 'UP';
       break;
       case "ArrowDown": 
-        if (snake.direction !== 'UP') {
-        snake.direction = 'DOWN';}
+        direction = 'DOWN';
       break;
       case "ArrowLeft": 
-        if (snake.direction !== 'RIGHT') {
-        snake.direction = 'LEFT';}
+        direction = 'LEFT';
       break;
       case "ArrowRight": 
-        if (snake.direction !== 'LEFT') {
-        snake.direction = 'RIGHT';}
+        direction = 'RIGHT';
+      break;
+      default:
+        direction = 'no user input given'
       break;
     }
+    return(direction);
+  }
+  function invertDirection(direction) {
+    let invertedDirection
+    switch (direction) {
+      case "DOWN":
+        invertedDirection = 'UP';
+      break;
+      case "UP": 
+        invertedDirection = 'DOWN';
+      break;
+      case "RIGHT": 
+        invertedDirection = 'LEFT';
+      break;
+      case "LEFT": 
+        invertedDirection = 'RIGHT';
+      break;
+      case "no user input given":
+        invertedDirection = direction
+      break;
+      default:
+        /*These lines should never run,
+          So I left my tag here.
+          Remove it if you must,
+          But I think its neat.*/
+        console.log("something has gone very weird in snake.js")
+        console.log("Kilroy was here")
+      break;
+    }
+    return(invertedDirection)
+}
+
+  function gameLoop() {
+
+    //handle input queue
+    let userInputDirection = convertToDirection(inputQueue.dequeue())
+    if (userInputDirection != 'no user input given' && snake.direction != invertDirection(userInputDirection)) {
+      snake.direction = userInputDirection;
+    } 
 
     ctx.clearRect(0, 0, WIDTH, HEIGHT);
     snake.move();
@@ -199,16 +236,15 @@ function snakeGame() {
   }
 
   let gameInterval = setInterval(gameLoop, SNAKE_SPEED);
-  const queue = new Queue();
+  const inputQueue = new Queue();
   document.addEventListener('keydown', event => {
     if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
-      if (queue.size() < 3 && queue.peek() != event.key) { 
-        queue.enqueue(event.key);
+      if (inputQueue.size() < 3 && inputQueue.peek() != event.key) { 
+        inputQueue.enqueue(event.key);
       }
       event.preventDefault();
     }
   });
-  
 }
 
 //code taken from https://www.geeksforgeeks.org/implementation-queue-javascript/
@@ -242,23 +278,3 @@ class Queue {
     console.log(this.items.join(" -> "));
   }
 }
-
-/* Old version, didn't support input queue'
-
-  document.addEventListener('keydown', event => {
-    if ((event.key === 'ArrowLeft') && snake.direction !== 'RIGHT') {
-      snake.direction = 'LEFT';
-      event.preventDefault();
-    } else if ((event.key === 'ArrowRight') && snake.direction !== 'LEFT') {
-      snake.direction = 'RIGHT';
-      event.preventDefault();
-    } else if ((event.key === 'ArrowUp') && snake.direction !== 'DOWN') {
-      snake.direction = 'UP';
-      event.preventDefault();
-    } else if ((event.key === 'ArrowDown') && snake.direction !== 'UP') {
-      snake.direction = 'DOWN';
-      event.preventDefault();
-    }
-  });
-}
-*/
