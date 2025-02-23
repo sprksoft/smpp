@@ -203,7 +203,8 @@ function initialize_plant() {
 
 function user_watered_plant() {
   const current_conditions = get_current_conditions();
-  document.getElementById('time_difference_last_watered').innerHTML = `Last watered: \n` + `Now`
+  document.getElementById('time_difference_last_watered').innerHTML = `<p id=water_title>Watered: </p><p id=water_time>Now</p>`
+
   current_conditions.last_time_watered = new Date();
   set_current_conditions(current_conditions);
   document.getElementById("glass-fill").style.height = '100%'

@@ -73,6 +73,12 @@ a.smscButton[href="/login/sso/init/office365"],
 a.smscButton[href="/login/sso/init/acm"],
 .login-app__title--sign-in-with {
   display: var(--show-options) !important;
+  border-radius: 10px !important;
+  width: 80% !important;
+  align-self: center !important;
+}
+.login-app__form>form{
+  margin-bottom: 5px !important;
 }
 
 .login-app__title--separator {
@@ -131,6 +137,8 @@ a.smscButton[href="/login/sso/init/acm"],
 
 .login-app__form {
   color: var(--color-text) !important;
+  display: flex !important;
+  flex-direction: column !important;
 }
 
 .white_text_button {

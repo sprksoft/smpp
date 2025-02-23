@@ -565,3 +565,26 @@ span.planner-list-wrapper__add-btn__text {
   width: 7px !important;
   border-width: 2px !important;
 }
+.modern-message__name{
+  font-weight: 700 !important;
+}
+.modern-message--selected .modern-message__name {
+  font-weight: 800 !important;
+  color: var(--color-accent) !important;
+}
+.modern-message--selected{
+  background-color: var(--color-base02) !important;
+  border-color: var(--color-base03) !important;
+  font-weight: 500 !important;
+}
+.modern-message__subject,
+.modern-message__date{
+  font-weight: 500 !important;
+}
+.smsc-contextmenu.position-bottom .smsc-contextmenu-arrow:after,
+.smsc-contextmenu.position-bottom .smsc-contextmenu-arrow:before{
+  display: none !important;
+}
+a.menu-type.menu-linkbutton.smsc-linkbutton{
+  padding: 2.5px 5px 2.5px 20px!important;
+}

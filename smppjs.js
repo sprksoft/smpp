@@ -56,6 +56,12 @@ function changeFont() {
   fontLinks.innerHTML = `<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">`
   document.getElementsByTagName("head")[0].appendChild(fontLinks)
 }
+function getPfpLink(username){
+  const parts = username.trim().split(/\s+/); 
+  const firstInitial = parts[0][0].toUpperCase(); 
+  const secondInitial = parts.length > 1 ? parts[1][0].toUpperCase() : ''; 
+  return `https://userpicture20.smartschool.be/User/Userimage/hashimage/hash/initials_${firstInitial + secondInitial}/plain/1/res/32`; 
+}
 async function apply() {
   let style = document.documentElement.style;
   let settingsData = get_config();
@@ -76,6 +82,7 @@ async function apply() {
   var showplanner = settingsData.showplanner;
   var IsBig = settingsData.isbig;
   var weatherSelector = settingsData.weatherSelector;
+  var username_override = settingsData.username_override
   var show_plant = settingsData.show_plant
   changeFont()
   set_theme("default");
@@ -240,6 +247,7 @@ async function apply() {
     }
   }
 
+  style.setProperty('--profile-picture', 'url(' + getPfpLink(username_override) + ')');
   style.setProperty('--blur-value-large', 'blur(' + bigblurvalue + 'px)');
   style.setProperty('--blur-value-small', 'blur(' + blurvalue + 'px)');
   var rain = document.getElementById('raindrops')

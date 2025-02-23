@@ -27,10 +27,15 @@ html {
   --color-settings-ui-layer2: #000000;
   --darken-background: rgba(0, 0, 0, 0.2);
   --color-splashtext: #191817;
-  background-color: var(--background-color);
+  --profile-picture: url("")
 }
 
-.modern-ui,
+body,
+button,
+input,
+pre,
+select,
+textarea .modern-ui,
 .modern-ui body,
 .modern-ui button,
 .modern-ui div,
@@ -436,7 +441,7 @@ smsc-inlineeditor.smsc-table__cell--inlineeditor {
 }
 
 .notifySceenContainerInfo {
-  color: var(--color-base03) !important;
+  color: var(--color-text) !important;
 }
 
 .percent,
@@ -461,7 +466,8 @@ div.stdReplyWrapper {
 
 #profileSelector {
   background-color: var(--color-base01);
-  border: 1px solid var(--color-base03);
+  border: 2px solid var(--color-base03);
+  border-radius: 15px !important;
   color: var(--color-text);
   padding: 5px;
   border-radius: 10px;
@@ -505,7 +511,7 @@ nav.topnav {
 
 #location {
   background-color: var(--color-settings-ui-bg) !important;
-  border: 1px solid var(--color-settings-ui-layer2) !important;
+  border: 2px solid var(--color-settings-ui-layer2) !important;
   text-align: center !important;
   border-radius: 10px !important;
   width: 135px !important;
@@ -1558,4 +1564,23 @@ body.modern-ui .photos__albums .l-albums__header input.l-albums__header__search-
 .smsc-topnav [data-courses] .course-link__descr {
   color: var(--color-text) !important;
   font-weight: 250 !important;
+}
+
+div.smscCheckbox input[type=checkbox]:not(.loading):focus+label:before {
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.topnav__menuitem--img {
+  background-image: var(--profile-picture) !important;
+  background-position: 0 !important;
+  background-repeat: no-repeat !important;
+  background-size: 24px !important;
+  padding: .57em 8px .57em 40px !important;
+  transition: background-position .15s ease-out, background-color .15s ease-out, margin .15s ease-out !important;
+
+}
+
+.topnav__menuitem--img:hover {
+  background-position-x: 8px !important;
 }

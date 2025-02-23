@@ -7,13 +7,19 @@ if (config.username_override == undefined) {
   config.username_override = null;
   set_config(config);
 }
+function getDefaultUserName(){
+  console.log(document.querySelector(".js-btn-profile .hlp-vert-box span").innerText)
+  return document.querySelector(".js-btn-profile .hlp-vert-box span").innerText
+}
 let username_override = config.username_override;
-if (username_override == "null") {
-  username_override = null;
+console.log(username_override)
+if (username_override == null) {
+  username_override = getDefaultUserName();
+  config.username_override = username_override
+  set_config(config)
 }
 
 let full_unheading = true;
-
 
 function change_lname(new_name) {
   let name_element = document.querySelector(".js-btn-profile .hlp-vert-box span");
@@ -47,7 +53,7 @@ function try_attach_messages_observer(orig_name, new_name) {
           }
         }
         if (name_is_user || in_send_messages_page) {
-          msg.querySelector(".modern-message__image img").style = "display: none;";
+          msg.querySelector(".modern-message__image img").src = getPfpLink(get_config().username_override);
         }
       }
     }
