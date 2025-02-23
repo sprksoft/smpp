@@ -54,6 +54,17 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
       sendResponse(delijnColorData);
       console.log('Delijn color data fetched and sent.');
     }
+
+    // Widgets
+    if (message.action = "getEnabledWidgets"){
+      let data = await browser.storage.local.get("widgets");
+      let enabledWidgets = data.enabledWidgets;
+      if (enabledWidgets == undefined){
+        sendResponse([]);
+      }else{
+        sendResponse(enabledWidgets);
+      }
+    }
   })();
   return true;
 });

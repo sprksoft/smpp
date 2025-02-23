@@ -43,7 +43,8 @@
 				"CSS/delijn.css",
 				"CSS/agenda.css",
 				"CSS/plant.css",
-				"CSS/root.css"
+				"CSS/root.css",
+        "CSS/widget.css"
 			],
 			"js": [
 				"titlefix.js",
@@ -59,6 +60,7 @@
 				"DMENU/dconfig.js",
 				"DMENU/dmenu.js",
 				"DMENU/quick.js",
+        "widget.js",
 				"weather.js",
 				"delijn.js",
 				"weatherEffects.js",
@@ -67,7 +69,8 @@
 				"buis-stats.js",
 				"plant.js",
 				"login.js",
-				"smppjs.js"
+				"smppjs.js",
+        "widgetLate.js"
 			]
 		}
 	],
