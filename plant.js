@@ -122,9 +122,9 @@ function add_ui() {
   }
   const last_time_watered = new Date(current_conditions.last_time_watered).getTime();
   const time_difference_watered = current_time - last_time_watered;
-  const time_difference_hours = time_difference_watered / (1000 * 60 * 60);
+  const time_difference_hours = Math.floor(time_difference_watered / (1000 * 60 * 60));
+  const time_difference_minutes = Math.floor(time_difference_watered / (1000 * 60));
   const buttondiv = document.createElement("div");
-
   buttondiv.classList.add("buttondivforplant");
   buttondiv.id = "buttondivforplant";
   buttondiv.innerHTML = plant_buttonsHTML;
@@ -138,11 +138,17 @@ function add_ui() {
     document.getElementById("plantdiv").prepend(plant_streak);
   }
   document.getElementById("watering_button").addEventListener("click", user_watered_plant);
-  if (time_difference_hours < 1) {
-    document.getElementById('time_difference_last_watered').innerHTML = `<p id=water_title>Watered: </p><p id=water_time>` + Math.floor(time_difference_hours * 60) + `min ago</p>`
-  } else {
-    document.getElementById('time_difference_last_watered').innerHTML = `<p id=water_title>Watered: </p><p id=water_time>` + Math.floor(time_difference_hours) + `h ago</p>`
+
+  let timeString;
+  if (time_difference_minutes == 0) {
+    timeString = `Now`
   }
+  else if (time_difference_hours < 1) {
+    timeString = `${time_difference_minutes}min ago`
+  } else {
+    timeString = `${time_difference_hours}h ago`
+  }
+  document.getElementById('time_difference_last_watered').innerHTML = `<span id=water_title>Watered</span><span id=water_time>${timeString}</span>`
   document.getElementById("glass-fill").style.height = calculatePercentile(time_difference_watered / 1000) + `%`;
 }
 
@@ -203,7 +209,7 @@ function initialize_plant() {
 
 function user_watered_plant() {
   const current_conditions = get_current_conditions();
-  document.getElementById('time_difference_last_watered').innerHTML = `<p id=water_title>Watered: </p><p id=water_time>Now</p>`
+  document.getElementById('time_difference_last_watered').innerHTML = `<p id=water_title>Watered </p><p id=water_time>Now</p>`
 
   current_conditions.last_time_watered = new Date();
   set_current_conditions(current_conditions);

@@ -511,7 +511,6 @@ nav.topnav {
 
 #location {
   background-color: var(--color-settings-ui-bg) !important;
-  border: 2px solid var(--color-settings-ui-layer2) !important;
   text-align: center !important;
   border-radius: 10px !important;
   width: 135px !important;
@@ -619,6 +618,10 @@ input:checked+.slider:before {
 .popupinput {
   margin-bottom: 0px;
   font: bold;
+}
+
+.popupinput:focus-visible {
+  border-color: var(--color-accent) !important;
 }
 
 .popuptitles {
@@ -1320,10 +1323,10 @@ textarea.form-item__input-field.form-item__input-field--textarea {
   color: var(--color-red) !important;
 }
 
-#mySlider {
+input#mySlider {
   width: 50px;
   margin-left: -20px !important;
-  transform: rotate(90deg);
+  transform: rotate(-90deg) !important;
   margin-right: -14px !important;
 }
 
@@ -1573,25 +1576,31 @@ div.smscCheckbox input[type=checkbox]:not(.loading):focus+label:before {
 .topnav__menuitem--img:hover {
   background-position-x: 8px !important;
 }
-span[style^="color:"], 
+
+span[style^="color:"],
 span[style*="; color:"],
-div[style^="color:"], 
+div[style^="color:"],
 div[style*="; color:"] {
   color: var(--color-text) !important;
 }
 
 
-span[style*="background"],div[style*="background"] {
+span[style*="background"],
+div[style*="background"] {
   background-color: transparent !important;
 }
-span.news__feed__button__content--name-date,.icon-label__info{
-color: var(--color-text) !important;
-opacity: 0.5 !important;
-font-weight: 400 !important;
+
+span.news__feed__button__content--name-date,
+.icon-label__info {
+  color: var(--color-text) !important;
+  opacity: 0.5 !important;
+  font-weight: 400 !important;
 }
-span.news__feed__button__content--title{
-font-weight: 550 !important;
+
+span.news__feed__button__content--title {
+  font-weight: 550 !important;
 }
-a.disabled{
+
+a.disabled {
   opacity: 0.7 !important;
 }

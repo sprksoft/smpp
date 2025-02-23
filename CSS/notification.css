@@ -9,7 +9,8 @@
 
 .smsc-topnav [data-notifs] .notifs__hdr [role=switch] {
   background-color: var(--color-base01) !important;
-  border: 1px solid var(--color-base02) !important;
+  border: 2px solid var(--color-base02) !important;
+  border-radius: 5px !important;
 }
 
 .smsc-topnav [data-notifs] .notifs__hdr [role=switch] .switch-values:after {
@@ -92,4 +93,15 @@ button.tox-tbtn.tox-tbtn--enabled {
 }
 .notification__info{
   font-weight: 400 !important;
+}
+.smsc-topnav [data-notifs] .notification__btn{
+  padding: 1rem !important;
+}
+.smsc-topnav [data-notifs] .notifs__hdr [role=switch] .switch-values span{
+color: var(--color-accent) !important;
+}
+
+.smsc-topnav [data-notifs] .notifs__hdr [role=switch][aria-checked=false] :last-child,
+.smsc-topnav [data-notifs] .notifs__hdr [role=switch][aria-checked=true] :first-child{
+  color: var(--color-text) !important;
 }

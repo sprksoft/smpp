@@ -4,7 +4,7 @@ export async function getWeatherAppData(location) {
     try {
         let data = await browser.storage.local.get("weatherAppData");
         let weatherAppData = data.weatherAppData || {
-            weatherData: {},
+            weatherData: null,
             lastUpdateDate: new Date().toISOString(),
             lastLocation: location || ""
         };

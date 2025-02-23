@@ -7,12 +7,11 @@ if (config.username_override == undefined) {
   config.username_override = null;
   set_config(config);
 }
-function getDefaultUserName(){
+function getDefaultUserName() {
   console.log(document.querySelector(".js-btn-profile .hlp-vert-box span").innerText)
   return document.querySelector(".js-btn-profile .hlp-vert-box span").innerText
 }
 let username_override = config.username_override;
-console.log(username_override)
 if (username_override == null) {
   username_override = getDefaultUserName();
   config.username_override = username_override

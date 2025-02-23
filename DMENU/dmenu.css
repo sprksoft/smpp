@@ -54,6 +54,7 @@ html {
   color: var(--color-accent);
   line-height: inherit;
   padding-left: var(--dmenu-padding);
+  padding: 3px !important;
   margin-left: 0px !important;
   border-right: var(--border-size) solid var(--color-base02);
   border-top-left-radius: 3px !important;

@@ -56,11 +56,15 @@ function changeFont() {
   fontLinks.innerHTML = `<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">`
   document.getElementsByTagName("head")[0].appendChild(fontLinks)
 }
-function getPfpLink(username){
-  const parts = username.trim().split(/\s+/); 
-  const firstInitial = parts[0][0].toUpperCase(); 
-  const secondInitial = parts.length > 1 ? parts[1][0].toUpperCase() : ''; 
-  return `https://userpicture20.smartschool.be/User/Userimage/hashimage/hash/initials_${firstInitial + secondInitial}/plain/1/res/32`; 
+function getPfpLink(username) {
+  if (username) {
+    const parts = username.trim().split(/\s+/);
+    const firstInitial = parts[0][0].toUpperCase();
+    const secondInitial = parts.length > 1 ? parts[1][0].toUpperCase() : '';
+    return `https://userpicture20.smartschool.be/User/Userimage/hashimage/hash/initials_${firstInitial + secondInitial}/plain/1/res/32`;
+  }
+  return `https://userpicture20.smartschool.be/User/Userimage/hashimage/hash/initials_MU/plain/1/res/32`;
+
 }
 async function apply() {
   let style = document.documentElement.style;
