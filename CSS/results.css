@@ -72,6 +72,8 @@
   color: var(--color-text) !important;
   padding: 20px !important;
   border-radius: 20px !important;
+  margin-left: 20px !important;
+  margin-right: 20px !important;
 }
 
 .results-evaluation--small .side-panel__panel {
@@ -83,8 +85,6 @@
 }
 
 .results-evaluations.js-evaluations-page.js-routehandler.results-evaluation--wide,
-intra-list.smsc-container.smsc-container--main.smsc-container--flex,
-.smsc-container.smsc-container--main.overview-page__content,
 .table-page__content-container.js-table-page-content-container.smsc-container.smsc-container--main,
 .smsc-container.smsc-container--main.results-goals-overview__content,
 .leerplannen-overview.smsc-container.smsc-container--main,
@@ -94,7 +94,7 @@ upload-app.smsc-container.smsc-container--flex,
 .course-module-planner__header,
 .course-module-planner,
 .showLeftNav:not(:has(.login-app)),
-.smscMain:not(:has(.login-app)):not(:has(.smscMain--tb-main)):not(:has(.homepage)) {
+.smscMain:not(:has(.login-app)):not(:has(.homepage)):not(mydoc-app):not(:has(.session-list)):not(:has(#js-wiki-home)) {
   backdrop-filter: var(--blur-value-small) !important;
   background-color: var(--darken-background) !important;
 }

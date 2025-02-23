@@ -242,8 +242,8 @@ button.btn.close-btn.btn--primary {
 }
 
 .header.js-header {
-  width: 90%;
   border-bottom-right-radius: 15px;
+  border-radius: 15px !important;
 }
 
 .splitdetail__content__topbtns {
@@ -337,10 +337,6 @@ div#ple-content--temporaryPlaceholder {
   border-color: var(--color-base02) !important;
 }
 
-.js-emptystate.detail-empty-state {
-  background-color: var(--color-base01) !important;
-}
-
 button.detail-todo-icon-and-color__icon.active-icon {
   border: 2px solid var(--color-base03) !important;
 }
@@ -366,7 +362,9 @@ button.detail-todo-icon-and-color__icon {
   border: 1px solid var(--color-base02) !important;
   padding-right: 10px !important;
   padding-left: 5px !important;
-}
+  margin-left: 20px !important;
+  margin-right: 20px !important;
+} 
 
 [bubble].bubble--tooltip {
   color: var(--color-text) !important;

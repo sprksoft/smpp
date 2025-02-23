@@ -84,7 +84,13 @@ button.modern-message__action.modern-message__action--delete:hover,
 }
 
 #folders_parent_td {
-  background-color: var(--color-base00) !important;
+  background-color: var(--darken-background) !important;
+  backdrop-filter: var(--blur-value-small) !important;
+  border-right: 3px solid var(--color-base01) !important;
+}
+
+.postbox_line {
+  border-color: var(--color-text) !important;
 }
 
 .toolbar,
