@@ -1584,3 +1584,17 @@ div.smscCheckbox input[type=checkbox]:not(.loading):focus+label:before {
 .topnav__menuitem--img:hover {
   background-position-x: 8px !important;
 }
+span[style*="color"],div[style*="color"] {
+  color: var(--color-text) !important;
+}
+span[style*="background"],div[style*="background"] {
+  background-color: transparent !important;
+}
+span.news__feed__button__content--name-date,.icon-label__info{
+color: var(--color-text) !important;
+opacity: 0.5 !important;
+font-weight: 400 !important;
+}
+span.news__feed__button__content--title{
+font-weight: 550 !important;
+}

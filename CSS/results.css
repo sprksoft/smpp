@@ -59,8 +59,9 @@
   color: var(--color-text) !important;
 }
 
-.title--2 {
+.title--2,.smsc-title--1 {
   color: var(--color-accent) !important;
+  font-weight: 700 !important;
 }
 
 
@@ -120,12 +121,10 @@ upload-app.smsc-container.smsc-container--flex,
 }
 
 #buis-stats {
+  display: flex;
   flex-basis: 100%;
-  /*Voor newline*/
   height: 1px;
-  /*Required, anders is er kapot veel witte plaats na de div*/
-  justify-items: flex-end;
-  /*Shuif ook naar rechts op*/
+  justify-items: flex-end !important;
   margin-top: 1em;
 }
 
@@ -253,11 +252,6 @@ textarea,
   display: none !important;
 }
 
-.evaluation__content:hover {
-  background-color: var(--color-base02) !important;
-  border: var(--border-size) solid var(--color-accent) !important;
-}
-
 .filterlistview:hover {
   background-color: transparent !important;
 
@@ -349,4 +343,23 @@ textarea,
 }
 .title-and-schoolyear-selector__title{
   border-right: 1px solid var(--color-accent) !important;
+}
+.evaluation-list-item__container__title{
+  font-weight: 550 !important;
+}
+.evaluation-list-item__container__subtitle{
+  font-weight: 450 !important;
+}
+.evaluation__content{
+  border-radius: 6px !important;
+}
+td.cell.cell--evaluation.js-cell-evaluation.evaluation:hover{
+  border-color: var(--color-accent) !important;
+}
+.feedback .user-image-label{
+  color: var(--color-text) !important;
+  font-weight: 600 !important;
+}
+.goals__goal__content__title{
+  font-weight: 600 !important;
 }
