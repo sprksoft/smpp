@@ -3,11 +3,9 @@
     border: 3px solid var(--color-base03);
     align-self: center;
     padding: 10px;
-    margin-top: none;
     border-radius: 15px;
     width: 100%;
     height: 100%;
-    margin-bottom: 10px;
     display: flex;
     flex-direction: column;
 }
@@ -23,7 +21,8 @@
     border: 3px solid var(--color-accent);
     align-self: center;
     padding: 10px;
-    margin-top: 10px;
+    margin-top: 0px;
+    margin-bottom: auto !important;
     border-radius: 9px;
     width: fit-content;
     margin: none;
@@ -46,7 +45,6 @@
 
 .time {
     font-size: 20px;
-    flex-direction: column;
 }
 
 .timedifference {
@@ -68,13 +66,7 @@
 }
 
 .topright {
-    width: 168px;
-}
-
-.delijn_app_title {
-    margin-bottom: 0px !important;
-    text-align: center !important;
-    font-size: 23px !important;
+    flex-grow: 1;
 }
 
 .searchbutton {
@@ -83,10 +75,36 @@
     background: var(--color-base01) !important;
     border-radius: 10px !important;
     border: 2px solid var(--color-settings-ui-layer2) !important;
+    flex-grow: 0 !important;
 }
 
 .lijninfo {
     font-size: 16px !important;
     font-weight: bold;
     text-align: center;
+}
+
+#top_lijn_app {
+    display: flex;
+    flex-direction: row;
+    gap: 10px !important;
+}
+
+#haltetext {
+    flex-grow: 1;
+    height: 40px !important;
+    margin: 0px !important;
+    font-size: 16px !important;
+}
+
+#delijncontainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px !important;
+}
+
+#delijnBottomApp {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }

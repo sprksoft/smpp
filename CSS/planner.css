@@ -362,9 +362,7 @@ button.detail-todo-icon-and-color__icon {
   border: 1px solid var(--color-base02) !important;
   padding-right: 10px !important;
   padding-left: 5px !important;
-  margin-left: 20px !important;
-  margin-right: 20px !important;
-} 
+}
 
 [bubble].bubble--tooltip {
   color: var(--color-text) !important;
@@ -524,8 +522,13 @@ button.icon-label-btn.js-icon-label-btn.icon-label-btn--linkbutton:hover {
   border-left: 0px !important;
 }
 
-.btn.btn--dropdown.btn--warning:after {
+.btn.btn--dropdown:after {
   background-image: url(/smsc/svg/driehoek_droplist_open/driehoek_droplist_open_9x9.svg) !important;
+}
+
+.btn.btn.btn--warning {
+  text-decoration: underline !important;
+  text-decoration-color: var(--color-accent) !important;
 }
 
 button.btn.btn--dropdown.js-btn,
@@ -619,4 +622,17 @@ h3.card-block__title.fluid-ui-heading.fluid-ui-heading--3 {
 
 .dialog__view {
   border-radius: 25px !important;
+}
+
+.month-view .element:not(.state--hovered):not(.state--dragging):not(.state--resizing) .element__time-label {
+  color: var(--color-text) !important;
+  opacity: 0.8 !important;
+}
+
+.month-view .header-day .day-label {
+  color: var(--color-text) !important;
+}
+
+.month-view .week-day {
+  border-top: 2px solid var(--color-accent) !important;
 }

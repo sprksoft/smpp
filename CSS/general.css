@@ -439,6 +439,10 @@ smsc-inlineeditor.smsc-table__cell--inlineeditor {
   background-color: var(--color-base01) !important;
 }
 
+.smscBlockContainer_top {
+  margin: 0px !important;
+}
+
 .smscAdminNav_body_linkdivTitle:hover {
   transition: ease-in !important;
   transition-duration: 0.1s !important;
@@ -531,14 +535,6 @@ nav.topnav {
   margin: 10px !important;
   height: 35px !important;
   margin-top: 0px !important;
-  font-size: 16px !important;
-}
-
-#haltetext {
-  width: max-content !important;
-  height: 40px !important;
-  margin-top: 0px !important;
-  margin-left: 0px !important;
   font-size: 16px !important;
 }
 
@@ -1232,15 +1228,11 @@ h1.topnav__title {
 span.js-badge-notifs.topnav__badge,
 span.js-badge-msg.topnav__badge {
   position: relative !important;
-  top: -4px;
 }
 
-span.js-badge-notifs.topnav__badge {
-  margin-left: -3px !important;
-}
-
-span.js-badge-msg.topnav__badge {
-  margin-left: 3px !important;
+.lvs-pupilpresences-wrapper .lvs-pupilpresences .lvs-pupilpresences-row .lvs-pupilpresences-cell.grey {
+  color: var(--color-text) !important;
+  opacity: 0.7 !important;
 }
 
 button.js-btn-notifs.topnav__btn:hover,
@@ -1694,4 +1686,33 @@ span.uploaddetail {
 .smsc_cm_no_items#nownews {
   background-image: url(https://static6.smart-school.net/smsc/svg/star_yellow/star_yellow_24x24.svg) !important;
   background-size: 64px !important;
+}
+
+.topnav-menu-overlay {
+  z-index: 0 !important;
+}
+
+div#folders {
+  border-radius: 15px !important;
+  background-color: var(--darken-background) !important;
+
+}
+
+.uploadzone .folders {
+  width: auto !important;
+  max-width: 400px !important;
+  min-width: 250px !important;
+  transition: all 0.3s !important;
+}
+
+#tree {
+  padding-top: 10px !important;
+}
+
+.uploadzone td {
+  vertical-align: middle !important;
+}
+
+.uploadzone td:has(#toolbar) {
+  vertical-align: top !important;
 }

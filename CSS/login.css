@@ -106,7 +106,7 @@ body {
   margin-left: 0px !important;
 }
 
-.smscButton.blue:not(#pushWizardPopupConfirmButton) {
+.login-app .smscButton.blue:not(#pushWizardPopupConfirmButton) {
   border-radius: 9999px !important;
   width: 90% !important;
   height: 40px !important;
@@ -117,10 +117,9 @@ body {
   font-weight: 450;
   box-shadow: none !important;
   justify-self: center;
-  margin-left: 5% !important;
 }
 
-.smscButton.blue:hover:not(#pushWizardPopupConfirmButton:hover) {
+.login-app .smscButton.blue:hover:not(#pushWizardPopupConfirmButton:hover) {
   background-color: var(--color-base02) !important;
   border-color: var(--color-base03) !important;
   box-shadow: none !important;

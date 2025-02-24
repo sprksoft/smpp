@@ -12,7 +12,9 @@
 .buttondivforplant {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  gap: 15px;
+  justify-content: space-evenly;
+  margin: 0px 5px 0px 5px;
 }
 
 .watering_button {
@@ -20,7 +22,7 @@
   background-color: var(--color-base02);
   border-radius: 10px;
   padding: 2.5px;
-  width: 33%;
+  flex: 1;
   height: 50px;
   transition: ease-in-out;
   transition-duration: 0.1s;
@@ -41,17 +43,13 @@
   text-align: center;
   position: relative;
   top: 50%;
-  width: 33%;
+  flex: 1;
   vertical-align: center;
-  margin-left: 10px;
-  margin-right: 10px;
   max-height: 50px !important;
 }
 
 .glass-container {
-  width: 33%;
-  margin-left: 10px;
-  margin-right: 10px;
+  flex: 1;
   border: 3px solid var(--color-base03);
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.05);
@@ -101,8 +99,7 @@
   position: relative;
   align-self: center;
   height: 32px;
-  transition: ease-in-out;
-  transition-duration: 0.1s;
+  transition: all 0.2s ease-in-out;
   font-size: 17px;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -173,14 +170,21 @@
 #plant_the_plant_svg:hover {
   cursor: pointer !important;
 }
-#water_title{
+
+#water_title {
   font-size: 14px !important;
   font-weight: 600 !important;
   margin: 0px !important;
 }
-#water_time{
+
+#water_time {
   font-size: 15px !important;
   font-weight: 400 !important;
   margin: 0px !important;
   width: 150% !important;
+}
+
+.plantConfirmationButton {
+  border-color: var(--color-red) !important;
+  color: var(--color-red) !important;
 }

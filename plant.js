@@ -152,20 +152,24 @@ function add_ui() {
   document.getElementById("glass-fill").style.height = calculatePercentile(time_difference_watered / 1000) + `%`;
 }
 
+function showPlantConfirmationButton() {
+  let removeplantButton = document.getElementById("removeplantButton")
+  removeplantButton.innerText = "Confirm?"
+  removeplantButton.classList.add("plantConfirmationButton")
+  removeplantButton.addEventListener("click", initialize_plant)
+}
+
 function show_remove_button(has_died) {
   const removeButtonDiv = document.createElement("div");
   removeButtonDiv.id = "removeButtonDiv";
   const removeButtonInfoDiv = document.createElement("div");
   removeButtonInfoDiv.id = "removeButtonInfoDiv";
-  if (has_died) {
-    removeButtonInfoDiv.innerHTML = `<p id="plant_remove_info_text">Your plant has died, remove it to plant a new one (optional)</p>`
-  } else {
-    removeButtonInfoDiv.innerHTML = `<p id="plant_remove_info_text">Your plant is fully grown, remove it to plant a new one (optional)</p>`
-  }
+  removeButtonInfoDiv.innerHTML = has_died ? `<p id="plant_remove_info_text">Your plant has died, remove it to plant a new one (optional)</p>` : `<p id="plant_remove_info_text">Your plant is fully grown, remove it to plant a new one (optional)</p>`
   removeButtonDiv.innerHTML = `<div style="width:20%"></div> <div id="removeplantButton">Remove plant</div> <div style="width:20%"><div id="remove_button_info">?</div></div>`;
   document.getElementById("plantdiv").appendChild(removeButtonInfoDiv);
   document.getElementById("plantdiv").appendChild(removeButtonDiv);
-  document.getElementById("removeplantButton").addEventListener("click", initialize_plant);
+
+  has_died ? document.getElementById("removeplantButton").addEventListener("click", initialize_plant) : document.getElementById("removeplantButton").addEventListener("click", showPlantConfirmationButton);
   document.getElementById("remove_button_info").addEventListener("mouseover", function () {
     document.getElementById("plant_remove_info_text").style.opacity = "1"
   });

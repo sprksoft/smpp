@@ -98,6 +98,19 @@ li {
 
 .tree-classic li.open.root {
   background: none !important;
+  padding: 0px !important;
+}
+
+.pupil_nav_pupilinfo {
+  text-align: center !important;
+}
+
+.pupil_nav_info .pupil_nav_info_pupilData .pupil_nav_pupilinfo .pupil_nav_pupilinfo_item.teachers {
+  max-width: none !important;
+}
+
+#lvs_toolbar {
+  background-color: var(--color-base01) !important;
 }
 
 .tree-classic li.open {

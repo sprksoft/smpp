@@ -90,11 +90,10 @@
 .leerplannen-overview.smsc-container.smsc-container--main,
 .reports-overview.smsc-container.smsc-container--main,
 upload-app.smsc-container.smsc-container--flex,
-.main.smscMain.smscMain--tb-main,
 .course-module-planner__header,
 .course-module-planner,
 .showLeftNav:not(:has(.login-app)),
-.smscMain:not(:has(.login-app)):not(:has(.homepage)):not(mydoc-app):not(:has(.session-list)):not(:has(#js-wiki-home)) {
+.smscMain:not(:has(.login-app)):not(:has(.homepage)):not(mydoc-app):not(:has(.session-list)):not(:has(#js-wiki-home)):not(.smscMain--tb-main) {
   backdrop-filter: var(--blur-value-small) !important;
   background-color: var(--darken-background) !important;
 }

@@ -123,8 +123,55 @@ button.modern-message__action.modern-message__action--delete:hover,
   background-color: var(--color-base01) !important;
 }
 
+#smscTopContainer {
+  position: sticky !important;
+  z-index: 10 !important;
+  top: 0 !important;
+}
+
+intradesk-app#smscMain {
+  flex-direction: row !important;
+}
+
+nav.topnav {
+  position: sticky !important;
+  top: 0 !important;
+}
+
 #smscMain {
+  flex-grow: 1 !important;
+  overflow: scroll !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.smscBlockContainer_mainContentBlock {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 10px !important;
+  justify-content: flex-start;
+  /* Ensures no extra space at the edges */
+}
+
+
+.smscBlockContainer_left {
+  position: relative !important;
+  flex-grow: 0.5 !important;
   height: 100% !important;
+  margin-left: 0px !important;
+
+}
+
+.smscBlockContainer_right {
+  position: relative !important;
+  flex-grow: 0.5 !important;
+  height: 100% !important;
+  margin-right: 0px !important;
+}
+
+
+#smscMain>* {
+  overflow: visible !important;
 }
 
 .smscleftnavcontainer,
@@ -463,6 +510,14 @@ div#submitbtn {
   box-shadow: none !important;
   border: 2px solid var(--color-base02) !important;
   border-radius: 10px !important;
+}
+
+#smscMainBlockContainer {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+  padding: 10px !important;
+  margin: 20px !important;
 }
 
 .smscSettings {

@@ -197,7 +197,10 @@ async function apply() {
       var DelijnAppElement = document.createElement("div")
       DelijnAppElement.classList.add("homepage__left")
       DelijnAppElement.classList.add("smsc-container--left")
-      DelijnAppElement.setAttribute("id", "delijncontainer")
+      DelijnAppElement.id = "leftcontainer"
+      var DelijnApp = document.createElement("div")
+      DelijnApp.setAttribute("id", "delijncontainer")
+      DelijnAppElement.appendChild(DelijnApp)
       container.prepend(DelijnAppElement)
       createDelijnApp()
     }

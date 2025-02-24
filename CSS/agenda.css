@@ -11,6 +11,9 @@ body {
     margin: 0px;
     padding: 0px;
     overflow-x: hidden;
+    overflow-y: hidden;
+    display: flex !important;
+    flex-direction: column !important;
 }
 
 .agenda_grid_main {
