@@ -14,6 +14,7 @@ const themes = {
     "--color-settings-ui-bg": "var(--color-base01)",
     "--color-settings-ui-border": "var(--color-base02)",
     "--color-settings-ui-layer2": "var(--color-base03)",
+    "--darken-background": "rgba(0,0,0,0.2)",
     "--color-homepage-sidebars-bg": "#02020585",
     "--loginpage-image": "url(https://4kwallpapers.com/images/wallpapers/desert-doom-sand-dunes-dark-background-monochrome-landscape-2560x1080-6409.jpg)"
   },
@@ -51,6 +52,7 @@ const themes = {
     "--color-base02": "#250654",
     "--color-base03": "#3f0a74",
     "--loginpage-image": "url(https://www.hdwallpapers.in/download/macos_monterey_shapes_hd_macos-2560x1440.jpg)",
+    "--darken-background": "rgba(0,0,0,0.2)",
     "--color-splashtext": "#dfdeff"
   },
   "stalker": {
@@ -61,6 +63,7 @@ const themes = {
     "--color-base02": "#5c1c1a",
     "--color-base03": "#823530",
     "--loginpage-image": "url(https://media.timeout.com/images/102945740/image.jpg)",
+    "--darken-background": "rgba(0,0,0,0.2)",
     "--color-splashtext": "#efc2c3"
   },
   "chocolate": {
@@ -82,6 +85,7 @@ const themes = {
     "--color-base02": "#7b3f31",
     "--color-base03": "#bf6f51",
     "--loginpage-image": "url(https://wallpapercave.com/wp/wp7464660.jpg)",
+    "--darken-background": "rgba(0,0,0,0.2)",
     "--darken-background": "rgba(0,0,0,0.3)",
     "--color-splashtext": "#ffe5d3"
   },
@@ -93,6 +97,7 @@ const themes = {
     "--color-base02": "#345f7f",
     "--color-base03": "#5687b6",
     "--loginpage-image": "url(https://th.bing.com/th/id/R.fd4990dbff7b2d998a61b5a60b6b1949?rik=TkC2r3hdP1Ma9g&pid=ImgRaw&r=0)",
+    "--darken-background": "rgba(0,0,0,0.2)",
     "--color-splashtext": "#7bcfe2"
   },
   "birb": {
@@ -103,6 +108,7 @@ const themes = {
     "--color-base02": "#232428",
     "--color-base03": "#3a3c44",
     "--loginpage-image": "url(https://wallpapercave.com/wp/wp4673203.jpg)",
+    "--darken-background": "rgba(0,0,0,0.2)",
     "--color-splashtext": "#7089a4"
   },
   "matcha": {
@@ -124,7 +130,7 @@ const themes = {
     "--color-base02": "#52647c",
     "--color-base03": "#8294ac",
     "--loginpage-image": "url(https://hdqwalls.com/download/everest-3840x2160.jpg)",
-    "--darken-background": "rgba(0,0,0,0.15)",
+    "--darken-background": "rgba(0,0,0,0.1)",
     "--color-splashtext": "#030c18"
   },
   "vax": {
@@ -156,7 +162,9 @@ const themes = {
     "--color-base03": "#b33232",
     "--color-accent": "#c3be9d",
     "--color-text": "#cfc9b8",
+    "--darken-background": "rgba(0,0,0,0.2)",
     "--loginpage-image": "url(https://github.com/NightFlavor/smpp-images/blob/main/watjpg.jpg?raw=true)",
+
   },
   "galaxy": {
     "--color-accent": "#daa0ef",
@@ -169,6 +177,19 @@ const themes = {
     "--darken-background": "rgba(0,0,0,0.3)",
     "--color-splashtext": "#e1bbef"
   },
+  "pink": {
+    "--color-accent": "#ba4882",
+    "--color-text": "#26151f",
+    "--color-base00": "#f7ccd5",
+    "--color-base01": "#fbbecc",
+    "--color-base02": "#e7a2ba",
+    "--color-base03": "#e98daf",
+    "--loginpage-image": "url(https://raw.githubusercontent.com/NightFlavor/smpp-images/refs/heads/main/pxfuel.jpg)",
+    "--darken-background": "rgba(241, 203, 218, 0.35)",
+    "--color-homepage-sidebars-bg": "rgba(3, 2, 4, 0.25)",
+    "--color-splashtext": "#ba4882"
+  },
+
   "custom": { "d": "d" }
 }
 

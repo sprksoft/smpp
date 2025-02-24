@@ -62,9 +62,18 @@ textarea .modern-ui,
   display: none !important;
 }
 
-.smsc-container .smsc-container--left .smsc-container--grey .mydoc__left,
-.smscMain .smscMain--left-tb-main {
-  height: 100%;
+.messageframe:has(#msgdetail):has(.msgDetail--empty) {
+  background-color: var(--darken-background) !important;
+}
+
+.smsc-container .smsc-container--left,
+.smscMain .smscMain--left-tb-main,
+intradesk-app#smscMain,
+.smsc-container.smsc-container--left.smsc-container--grey,
+.smsc-container.smsc-container--main.smsc-container--flex,
+div#lvs_wrapper_container {
+  height: 100% !important;
+  width: 100% !important;
 }
 
 #centercontainer {
@@ -127,10 +136,8 @@ div.stdReplyWrapper,
   color: var(--color-text) !important;
 }
 
-
 .homepage__block__content {
-  background-color: transparent !important;
-  backdrop-filter: opacity(50%) !important;
+  background-color: var(--darken-background) !important;
   padding: 10px !important;
   border: 1px solid var(--color-base03) !important;
   color: var(--color-text) !important;
@@ -590,7 +597,8 @@ input:checked+.slider {
 }
 
 input:focus+.slider,
-.todo-column [listview] .todo-column__row:hover .todo-column__actions-cell {
+.todo-column [listview] .todo-column__row:hover .todo-column__actions-cell,
+.todo-column__header {
   box-shadow: none !important;
 }
 
@@ -674,6 +682,7 @@ input:checked+.slider:before {
   display: flex !important;
   flex-direction: row !important;
   justify-content: center !important;
+  margin: initial !important;
 }
 
 #background {
@@ -973,6 +982,17 @@ option:hover {
   justify-content: center;
   margin-top: 3px !important;
   margin-left: -2px !important;
+}
+
+.bigdiscordbutton {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--color-base00);
+  border-radius: 10px;
+  background-color: var(--color-base01);
 }
 
 .bigdiscordbutton:hover {
@@ -1633,6 +1653,7 @@ span.news__feed__button__content--title {
 
 a.disabled,
 .smsc_cm_body_row_block_mime {
+  filter: none !important;
   opacity: 0.7 !important;
 }
 

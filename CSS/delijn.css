@@ -8,6 +8,23 @@
     height: 100%;
     display: flex;
     flex-direction: column;
+    animation: delijnCardAppear 0.3s ease-in-out 0ms 1;
+}
+
+@keyframes delijnCardAppear {
+    0% {
+        transform: translateY(-50%);
+        opacity: 0;
+    }
+
+    50% {
+        transform: translateY(10%);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(0);
+    }
 }
 
 .lijncardshover:hover {
@@ -31,11 +48,9 @@
 }
 
 .lijncardsdestin {
-    height: 25px;
-    padding-top: 12px;
+    margin-bottom: 0px !important;
     font-size: 16px;
     text-align: right;
-    flex-grow: 1;
 }
 
 .times {
@@ -51,11 +66,13 @@
     font-size: 16px;
     color: var(--color-accent);
     text-align: right;
-    flex-direction: column;
+    margin-bottom: 0px !important;
 }
 
 .top {
     display: flex;
+    height: 55px;
+    margin-bottom: 15px !important;
 }
 
 .intime {
@@ -67,6 +84,10 @@
 
 .topright {
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px !important;
+    justify-content: center;
 }
 
 .searchbutton {

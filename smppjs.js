@@ -456,22 +456,7 @@ function set_background() {
 
 function set_backgroundlink(background) {
   let style = document.documentElement.style;
-  style.setProperty('--loginpage-image', `none`);
-  style.setProperty('--background-color', `transparent`);
-  let img = document.getElementById("background_image") || document.createElement('img');
-  img.id = "background_image";
-  img.style.position = 'absolute';
-  img.style.top = '0';
-  img.style.left = '0';
-  img.style.width = '100vw';
-  img.style.height = '100vh';
-  img.style.objectFit = 'cover';
-  img.style.zIndex = -1;
-  img.style.display = "block";
-  img.src = background
-  if (!document.getElementById("background_image")) {
-    document.body.appendChild(img);
-  }
+  style.setProperty('--loginpage-image', `url(${background})`);
 }
 
 function set_theme(name) {

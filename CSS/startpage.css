@@ -25,7 +25,6 @@ body {
 }
 
 #centercontainer {
-  background-color: #00000020 !important;
   backdrop-filter: var(--blur-value-small) !important;
   -webkit-backdrop-filter: var(--blur-value-small) !important;
 }
