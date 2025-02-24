@@ -8,7 +8,8 @@ function createPannelHTML(pannel){
 
   for (let widgetName of pannel.widgets){
     let widget = getWidgetByName(widgetName);
-    widget.move(pannelDiv);
+    widget.createHTML()
+    pannelDiv.appendChild(widget.element);
   }
   return pannelDiv;
 }
