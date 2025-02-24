@@ -116,7 +116,7 @@ function onWidgetDragStart(widget, e){
   document.body.appendChild(widget.element);
 }
 
-document.addEventListener("mouseup", (e) => {
+function dropCurDragWidget() {
   if (curDragInfo) {
     let el = curDragInfo.widget.element;
     el.classList.remove("smpp-widget-dragging");
@@ -131,6 +131,10 @@ document.addEventListener("mouseup", (e) => {
     }
     curDragInfo = null;
   }
+}
+
+document.addEventListener("mouseup", (e) => {
+  dropCurDragWidget();
 });
 
 document.addEventListener("mousemove", (e) => {
@@ -173,6 +177,7 @@ function setEditMode(value) {
   if (value){
     document.body.classList.add("smpp-widget-edit-mode");
   }else{
+    dropCurDragWidget();
     document.body.classList.remove("smpp-widget-edit-mode");
   }
   widgetEditMode = value;
