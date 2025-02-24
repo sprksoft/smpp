@@ -1,10 +1,13 @@
+/* Only use rem's here no em because widgets will be moved to body when they are dragged */
 .smpp-widget {
   background-color: var(--color-base01);
   padding: 20px;
   border-radius: 15px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin: 1em;
+  margin: 1rem;
   border: 3px solid var(--color-base03);
+  box-sizing: border-box; /* Needed to make getClientBounds return the width without the border size*/
+  font-size: 1rem; /* Inherited font-size is not in rem */
 }
 
 .smpp-widgets-container{
@@ -44,5 +47,7 @@
   cursor: move;
 }
 .smpp-widget-dragging {
-  position:absolute;
+  margin: 0px;
+  position:fixed;
+  z-index: 10000000;
 }
