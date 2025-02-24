@@ -1,51 +1,87 @@
-
 let widgetEditMode=false;
-let curDraggingWidgetInfo = null;
+let hoveringBag=false;
+
+function createWidgetBag() {
+  let bag = document.createElement("div");
+  bag.classList.add("smpp-widget-bag");
+  document.body.appendChild(bag);
+  return bag;
+}
+
+let widgetBagElement=createWidgetBag();
+
+function bagHoverEnter() {
+  let bag = widgetBagElement;
+  hoveringBag = true;
+  if(curDragInfo){
+    bag.classList.add("smpp-widget-bag-delete");
+    curDragInfo.widget.element.classList.add("smpp-widget-delete");
+  }else{
+    bag.classList.add("smpp-widget-bag-big");
+  }
+}
+
+function bagHoverExit() {
+  let bag = widgetBagElement;
+  hoveringBag = false;
+  bag.classList.remove("smpp-widget-bag-big");
+  bag.classList.remove("smpp-widget-bag-delete");
+  if (curDragInfo) {
+    curDragInfo.widget.element.classList.remove("smpp-widget-delete");
+  }
+}
+
+// The widget drag info of the widget currently being dragged.
+let curDragInfo = null;
+
+class WidgetDragInfo{
+  offset;
+  widget;
+  sourcePannel;
+
+  constructor(widget, sourcePannel, offset) {
+    this.widget=widget;
+    this.sourcePannel=sourcePannel;
+    this.offset=offset;
+  }
+}
 
 class WidgetBase {
   element;
 
-  constructor(){
+  constructor() {
     this.element = null;
   }
 
-
-  #createWidget(){
+  #createWidget() {
     let widgetDiv = document.createElement("div");
     widgetDiv.addEventListener("mousedown", (e) => { onWidgetDragStart(this, e) });
     widgetDiv.classList.add("smpp-widget");
 
-    this.createContent(widgetDiv);
-
     return widgetDiv;
   }
 
-  // Move this widget to the pannel
-  // pannel: html panel element
-  move(pannel) {
-    if (!this.isShown()){
-      this.element = this.#createWidget();
+  createHTML() {
+    if (this.element != null){
+      return;
     }
-    pannel.appendChild(this.element);
+    this.element = this.#createWidget();
+    this.createContent(this.element);
   }
 
-  hide() {
-    if (!this.isShown()){
+  removeHTML() {
+    if (this.element == null){
       return;
     }
     this.element.remove();
     this.element = null;
   }
 
-  isShown() {
-    return this.element !== null;
-  }
-
   //Override me
   get name() {}
 
-
   // Override me
+  // Gets called when the preview html code needs to be created (append it to the parent given as a parameter)
   createPreview(parent) {
     this.createContent(parent);
   }
@@ -62,7 +98,7 @@ function onWidgetDragStart(widget, e){
   let target = widget.element;
   let rect = target.getBoundingClientRect();
 
-  curDraggingWidgetInfo = { sourcePannel: widget.element.parentElement, widget:widget, offset: {x: e.clientX-rect.left, y:e.clientY-rect.top} };
+  curDragInfo = new WidgetDragInfo(widget, widget.element.parentElement, { x: e.clientX-rect.left, y: e.clientY-rect.top });
   target.style.width=rect.width+"px";
   target.style.height=rect.height+"px";
   target.style.left = rect.left+"px";
@@ -74,22 +110,35 @@ function onWidgetDragStart(widget, e){
 }
 
 document.addEventListener("mouseup", (e) => {
-  if (curDraggingWidgetInfo) {
-    let el = curDraggingWidgetInfo.widget.element;
+  if (curDragInfo) {
+    let el = curDragInfo.widget.element;
     el.classList.remove("smpp-widget-dragging");
     el.style="";
-    curDraggingWidgetInfo.sourcePannel.appendChild(el);
-
-    curDraggingWidgetInfo = null;
+    if (hoveringBag){
+      bagHoverExit();
+      // Delete
+      curDragInfo.widget.removeHTML();
+    } else {
+      // Move
+      curDragInfo.sourcePannel.appendChild(el);
+    }
+    curDragInfo = null;
   }
-})
+});
 
 document.addEventListener("mousemove", (e) => {
-  if (curDraggingWidgetInfo != null) {
-    let el = curDraggingWidgetInfo.widget.element;
-    let offset = curDraggingWidgetInfo.offset;
+  if (curDragInfo != null) {
+    let el = curDragInfo.widget.element;
+    let offset = curDragInfo.offset;
     el.style.left = (e.clientX-offset.x)+"px";
     el.style.top = (e.clientY-offset.y)+"px";
+
+    let bagBounds = widgetBagElement.getBoundingClientRect();
+    if (e.clientY < 0 && e.clientX > bagBounds.left && e.clientX < bagBounds.right) {
+      bagHoverEnter();
+    }else if (hoveringBag){
+      bagHoverExit();
+    }
   }
 
 });

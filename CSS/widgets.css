@@ -32,6 +32,41 @@
 
 /* EDITMODE */
 
+.smpp-widget-bag{
+  animation: smppWidgetBagEnter 1s;
+  opacity: 1;
+  transition: transform 1s, left 1s, right 1s, height 1s, background-color 1s, opacity 0.5s;
+  transform: translateY(-50px);
+  opacity: 0;
+  position: fixed;
+  height: 40px;
+  left: 40%;
+  right: 40%;
+  top: 0px;
+
+  background-color: var(--color-base01);
+  border: 2px solid var(--color-base02);
+  border-radius: 10px;
+
+  z-index: 100;
+}
+.smpp-widget-edit-mode .smpp-widget-bag{
+  transform: translateY(-20px);
+  opacity: 1;
+}
+
+.smpp-widget-bag-big{
+  transform: translateY(0px);
+  height: 90%;
+  left: 5%;
+  right: 5%;
+}
+
+.smpp-widget-bag-delete{
+  height: 45px;
+  background-color: var(--color-red);
+}
+
 .smpp-widget-edit-mode .smpp-widget {
   border-color: transparent;
   outline: 4px dashed var(--color-black);
@@ -50,4 +85,21 @@
   margin: 0px;
   position:fixed;
   z-index: 10000000;
+  pointer-events:none;
+}
+
+.smpp-widget-delete {
+  animation: smppWidgetDelete 1s infinite;
+}
+
+@keyframes smppWidgetDelete{
+  0%{
+    transform: rotate(5deg);
+  }
+  50%{
+    transform: rotate(-5deg);
+  }
+  100%{
+    transform: rotate(5deg);
+  }
 }
