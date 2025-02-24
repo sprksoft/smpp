@@ -59,7 +59,8 @@
   color: var(--color-text) !important;
 }
 
-.title--2,.smsc-title--1 {
+.title--2,
+.smsc-title--1 {
   color: var(--color-accent) !important;
   font-weight: 700 !important;
 }
@@ -71,6 +72,8 @@
   color: var(--color-text) !important;
   padding: 20px !important;
   border-radius: 20px !important;
+  margin-left: 20px !important;
+  margin-right: 20px !important;
 }
 
 .results-evaluation--small .side-panel__panel {
@@ -81,25 +84,17 @@
   background-color: transparent !important;
 }
 
-.smscMain {
-  background-image: var(--loginpage-image);
-  background-position: center !important;
-  background-size: cover !important;
-  background-attachment: fixed !important;
-}
-
 .results-evaluations.js-evaluations-page.js-routehandler.results-evaluation--wide,
-.smsc-container.smsc-container--main.smsc-container--flex.planner-planner__main.js-planner-planner-main,
-intra-list.smsc-container.smsc-container--main.smsc-container--flex,
-.smsc-container.smsc-container--main.overview-page__content,
 .table-page__content-container.js-table-page-content-container.smsc-container.smsc-container--main,
 .smsc-container.smsc-container--main.results-goals-overview__content,
 .leerplannen-overview.smsc-container.smsc-container--main,
 .reports-overview.smsc-container.smsc-container--main,
 upload-app.smsc-container.smsc-container--flex,
-.smsc-container.smsc-container--main.smsc-container--flex,
+.main.smscMain.smscMain--tb-main,
 .course-module-planner__header,
-.course-module-planner {
+.course-module-planner,
+.showLeftNav:not(:has(.login-app)),
+.smscMain:not(:has(.login-app)):not(:has(.homepage)):not(mydoc-app):not(:has(.session-list)):not(:has(#js-wiki-home)) {
   backdrop-filter: var(--blur-value-small) !important;
   background-color: var(--darken-background) !important;
 }
@@ -124,7 +119,7 @@ upload-app.smsc-container.smsc-container--flex,
   display: flex;
   flex-basis: 100%;
   height: 1px;
-  justify-items: flex-end !important;
+  justify-content: flex-end !important;
   margin-top: 1em;
 }
 
@@ -291,25 +286,28 @@ textarea,
 }
 
 .buis-stats-title {
-  background-color: var(--color-base01);
-  padding: 5px;
-  border: 2px solid var(--color-base02);
   font-weight: bold;
-
-  border-radius: 50px;
-  margin-bottom: 0px !important;
 }
 
 .buis-stats-box {
+  margin-right: .667rem;
+  background-color: var(--color-base01);
+  margin-bottom: 0px !important;
+  border-radius: 50px;
+  padding: 4px;
+  border: 2px solid var(--color-base02);
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: row;
 }
 
 .buis-stats-value {
-  padding: 4px;
+  padding: 0px 4px 0px 4px;
   font-size: 17px;
-  font-weight: bolder;
+  font-weight: bold;
   margin-bottom: 0px !important;
+  color: var(--color-accent) !important;
 }
 
 .blob__text {
@@ -337,29 +335,37 @@ textarea,
   margin-bottom: 10px !important;
   border-radius: 15px !important;
 }
+
 .listview__row.js-listview-row.leerplannen-overview__list__listview__row:hover {
   background-color: var(--color-base02) !important;
   border-color: var(--color-accent) !important;
 }
-.title-and-schoolyear-selector__title{
+
+.title-and-schoolyear-selector__title {
   border-right: 1px solid var(--color-accent) !important;
 }
-.evaluation-list-item__container__title{
+
+.evaluation-list-item__container__title {
   font-weight: 550 !important;
 }
-.evaluation-list-item__container__subtitle{
+
+.evaluation-list-item__container__subtitle {
   font-weight: 450 !important;
 }
-.evaluation__content{
+
+.evaluation__content {
   border-radius: 6px !important;
 }
-td.cell.cell--evaluation.js-cell-evaluation.evaluation:hover{
+
+td.cell.cell--evaluation.js-cell-evaluation.evaluation:hover {
   border-color: var(--color-accent) !important;
 }
-.feedback .user-image-label{
+
+.feedback .user-image-label {
   color: var(--color-text) !important;
   font-weight: 600 !important;
 }
-.goals__goal__content__title{
+
+.goals__goal__content__title {
   font-weight: 600 !important;
 }

@@ -46,3 +46,25 @@ function set_overlay_based_on_conditions(count) {
     set_snow_level(count)
   }
 }
+function applyWeatherEffects(weatherSelector, weatherAmount) {
+  let rainDiv = document.getElementById('raindrops');
+  let snowDiv = document.getElementById('snowflakes');
+  switch (weatherSelector) {
+    case 0:
+      set_snow_level(weatherAmount);
+      if (rainDiv) rainDiv.remove();
+      break;
+    case 1:
+      if (rainDiv) rainDiv.remove();
+      if (snowDiv) snowDiv.remove();
+      set_overlay_based_on_conditions(weatherAmount);
+      break;
+    case 2:
+      set_rain_level(weatherAmount);
+      if (snowDiv) snowDiv.remove();
+      break;
+    default:
+      console.error("No weather selector");
+      break;
+  }
+}

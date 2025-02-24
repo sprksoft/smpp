@@ -83,11 +83,20 @@ button.modern-message__action.modern-message__action--delete:hover,
   border: 2px solid transparent !important
 }
 
-#folders_parent_td,
+#folders_parent_td {
+  background-color: var(--darken-background) !important;
+  backdrop-filter: var(--blur-value-small) !important;
+  border-right: 3px solid var(--color-base01) !important;
+}
+
+.postbox_line {
+  border-color: var(--color-text) !important;
+}
+
 .toolbar,
 .msgContent,
 #msgcell {
-  background-color: var(--color-base00) !important;
+  background-color: transparent !important;
 }
 
 .toolbar__line {
@@ -115,7 +124,7 @@ button.modern-message__action.modern-message__action--delete:hover,
 }
 
 #smscMain {
-  height: 0% !important;
+  height: 100% !important;
 }
 
 .smscleftnavcontainer,
@@ -191,6 +200,19 @@ button.modern-message__action.modern-message__action--delete:hover,
   padding: 5px 5px 0px 5px !important;
 }
 
+.detail {
+  width: 100% !important;
+}
+
+.max-width--inherit {
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
+
+.modern-ui .msgcell__parent-td {
+  width: 428px !important;
+}
+
 .messageframe:has(#msgdetail) {
   background-color: var(--color-base01) !important;
 }
@@ -208,14 +230,14 @@ table.messages {
 
 .toolbar,
 .toolbarright {
-  background-color: var(--color-base00) !important;
+  background-color: transparent !important;
 }
 
 .msgcell__parent-td,
 #msgcell,
 .smscMain,
 .tooltip__content {
-  background-color: var(--background-color) !important;
+  background-color: transparent !important;
 }
 
 #msgdetail,
@@ -271,8 +293,9 @@ button.submit-button.smscButton.blue {
 
 button.submit-button.smscButton.blue:hover,
 .wide-colored-btn:hover {
-  filter: brightness(100%) !important;
   box-shadow: none !important;
+  background-color: var(--color-base03) !important;
+  border-color: var(--color-accent) !important;
 }
 
 .resize-handle {
@@ -564,26 +587,36 @@ span.planner-list-wrapper__add-btn__text {
   width: 7px !important;
   border-width: 2px !important;
 }
-.modern-message__name{
+
+.modern-message__name {
   font-weight: 700 !important;
 }
+
 .modern-message--selected .modern-message__name {
   font-weight: 800 !important;
   color: var(--color-accent) !important;
 }
-.modern-message--selected{
+
+.modern-message--selected {
   background-color: var(--color-base02) !important;
   border-color: var(--color-base03) !important;
   font-weight: 500 !important;
 }
+
 .modern-message__subject,
-.modern-message__date{
+.modern-message__date {
   font-weight: 500 !important;
 }
+
 .smsc-contextmenu.position-bottom .smsc-contextmenu-arrow:after,
-.smsc-contextmenu.position-bottom .smsc-contextmenu-arrow:before{
+.smsc-contextmenu.position-bottom .smsc-contextmenu-arrow:before {
   display: none !important;
 }
-a.menu-type.menu-linkbutton.smsc-linkbutton{
-  padding: 2.5px 5px 2.5px 20px!important;
+
+a.menu-type.menu-linkbutton.smsc-linkbutton {
+  padding: 2.5px 5px 2.5px 20px !important;
+}
+
+.topnav__btn.topnav__btn--profile {
+  color: var(--color-text) !important;
 }

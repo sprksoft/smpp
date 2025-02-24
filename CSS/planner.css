@@ -55,6 +55,7 @@
   background-color: var(--color-base01) !important;
   color: var(--color-text) !important;
   border: 2px solid var(--color-popup-border) !important;
+  border-radius: 25px !important;
 }
 
 .form__label {
@@ -241,13 +242,15 @@ button.btn.close-btn.btn--primary {
 }
 
 .header.js-header {
-  width: 90%;
   border-bottom-right-radius: 15px;
+  border-radius: 15px !important;
 }
 
-.header.js-header.header--single-line,
-
 .splitdetail__content__topbtns {
+  background-color: transparent !important;
+}
+
+.header.js-header.header--single-line {
   background-color: var(--color-base01) !important;
 }
 
@@ -334,10 +337,6 @@ div#ple-content--temporaryPlaceholder {
   border-color: var(--color-base02) !important;
 }
 
-.js-emptystate.detail-empty-state {
-  background-color: var(--color-base01) !important;
-}
-
 button.detail-todo-icon-and-color__icon.active-icon {
   border: 2px solid var(--color-base03) !important;
 }
@@ -363,7 +362,9 @@ button.detail-todo-icon-and-color__icon {
   border: 1px solid var(--color-base02) !important;
   padding-right: 10px !important;
   padding-left: 5px !important;
-}
+  margin-left: 20px !important;
+  margin-right: 20px !important;
+} 
 
 [bubble].bubble--tooltip {
   color: var(--color-text) !important;
@@ -610,7 +611,12 @@ h3.card-block__title.fluid-ui-heading.fluid-ui-heading--3 {
 .listview__row.js-listview-row:hover {
   cursor: pointer !important;
 }
-.todo-column [listview] .todo-column__details-cell__metadata{
+
+.todo-column [listview] .todo-column__details-cell__metadata {
   color: var(--color-text) !important;
   opacity: 0.8 !important;
+}
+
+.dialog__view {
+  border-radius: 25px !important;
 }

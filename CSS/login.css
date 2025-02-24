@@ -77,7 +77,8 @@ a.smscButton[href="/login/sso/init/acm"],
   width: 80% !important;
   align-self: center !important;
 }
-.login-app__form>form{
+
+.login-app__form>form {
   margin-bottom: 5px !important;
 }
 
@@ -86,8 +87,7 @@ a.smscButton[href="/login/sso/init/acm"],
   margin-bottom: 0px !important;
 }
 
-.showLeftNav {
-  background-color: transparent !important;
+body {
   background-image: var(--loginpage-image) !important;
   background-position: center !important;
   background-size: cover !important;
@@ -113,10 +113,11 @@ a.smscButton[href="/login/sso/init/acm"],
   color: var(--color-text) !important;
   border-color: var(--color-base02) !important;
   background-color: var(--color-base01) !important;
-  transition-duration: 0.3s !important;
+  transition: all 0.3s !important;
   font-weight: 450;
   box-shadow: none !important;
   justify-self: center;
+  margin-left: 5% !important;
 }
 
 .smscButton.blue:hover:not(#pushWizardPopupConfirmButton:hover) {
@@ -125,6 +126,7 @@ a.smscButton[href="/login/sso/init/acm"],
   box-shadow: none !important;
   width: 100% !important;
   font-weight: 700 !important;
+  margin-left: 0% !important;
 }
 
 .modern-ui .float-label__input:focus+label>span,

@@ -8,7 +8,6 @@ if (config.username_override == undefined) {
   set_config(config);
 }
 function getDefaultUserName() {
-  console.log(document.querySelector(".js-btn-profile .hlp-vert-box span").innerText)
   return document.querySelector(".js-btn-profile .hlp-vert-box span").innerText
 }
 let username_override = config.username_override;
