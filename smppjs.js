@@ -806,7 +806,7 @@ function createSettingsButton() {
 
 function main() {
 
-  //createWidgetSystem();
+  createWidgetSystem();
 
   let logoutButton = document.querySelector(".js-btn-logout");
   if (logoutButton) logoutButton.innerHTML = changeLogoutText();
@@ -825,6 +825,8 @@ function main() {
     document.querySelector('.topnav__btn--icon--search').parentElement?.remove();
     let notifsLabel = document.getElementById("notifsToggleLabel");
     if (notifsLabel) notifsLabel.innerText = "Toon pop-ups"; // Simplify text. (smartschool by default has a very long explanation that doesn't fit on screen)
+    createWidgetEditModeButton();
+    //TODO: fix the other buttons here.
   }
 
   apply()

@@ -1,14 +1,6 @@
 let widgetEditMode=false;
 let hoveringBag=false;
-
-function createWidgetBag() {
-  let bag = document.createElement("div");
-  bag.classList.add("smpp-widget-bag");
-  document.body.appendChild(bag);
-  return bag;
-}
-
-let widgetBagElement=createWidgetBag();
+let widgetBagElement=null;
 
 function bagHoverEnter() {
   let bag = widgetBagElement;
@@ -30,6 +22,21 @@ function bagHoverExit() {
     curDragInfo.widget.element.classList.remove("smpp-widget-delete");
   }
 }
+
+function createWidgetBag() {
+  let bag = document.createElement("div");
+  bag.classList.add("smpp-widget-bag");
+  document.body.appendChild(bag);
+  bag.addEventListener("mouseenter", (e)=>{
+    bagHoverEnter();
+  });
+  bag.addEventListener("mouseleave", (e)=>{
+    bagHoverExit();
+  });
+  return bag;
+}
+
+widgetBagElement = createWidgetBag();
 
 // The widget drag info of the widget currently being dragged.
 let curDragInfo = null;
@@ -134,7 +141,7 @@ document.addEventListener("mousemove", (e) => {
     el.style.top = (e.clientY-offset.y)+"px";
 
     let bagBounds = widgetBagElement.getBoundingClientRect();
-    if (e.clientY < 0 && e.clientX > bagBounds.left && e.clientX < bagBounds.right) {
+    if (e.clientY < bagBounds.bottom && e.clientX > bagBounds.left && e.clientX < bagBounds.right) {
       bagHoverEnter();
     }else if (hoveringBag){
       bagHoverExit();
@@ -173,13 +180,16 @@ function setEditMode(value) {
 
 function createWidgetEditModeButton(){
   let parent = document.querySelector("nav.topnav")
+
   let btn = document.createElement("button");
+  btn.classList.add("topnav__btn");
   btn.addEventListener("click", ()=>{
     setEditMode(!widgetEditMode);
   });
-  btn.innerText="edit mode";
+  btn.innerText="e";
+  btn.title="Ga in/uit edit mode om de locatie van de widgets te veranderen.";
 
-  parent.appendChild(btn);
+  topNav.insertBefore(btn, topNav.querySelector(".topnav__btn--push-right"));
 }
 
 
