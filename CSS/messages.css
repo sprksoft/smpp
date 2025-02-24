@@ -99,6 +99,10 @@ button.modern-message__action.modern-message__action--delete:hover,
   width: var(--border-size) !important;
 }
 
+.smscarrow {
+  display: none !important
+}
+
 .searchInputField,
 #tomain,
 .compose_title,
@@ -143,7 +147,10 @@ body.modern-ui .homepage__block {
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
+}
 
+#smscMain.results {
+  align-items: normal !important;
 }
 
 .smsc-container.smsc-container--main.overview-page__content {
@@ -176,6 +183,7 @@ div#smscMain.results {
   flex-grow: 0.5 !important;
   height: 100% !important;
   margin-right: 0px !important;
+  width: initial !important;
 }
 
 

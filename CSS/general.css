@@ -71,9 +71,34 @@ textarea .modern-ui,
 intradesk-app#smscMain,
 .smsc-container.smsc-container--left.smsc-container--grey,
 .smsc-container.smsc-container--main.smsc-container--flex,
-div#lvs_wrapper_container {
+div#lvs_wrapper_container,
+.online-session__list-page.smscMain--tb--main.smscMain,
+#js-wiki-home.smscMain {
   height: 100% !important;
   width: 100% !important;
+}
+
+.home-main .home-main__scroll-container>* {
+  max-width: none !important;
+}
+
+#smscMain.bp-root {
+  flex-direction: row !important;
+}
+
+#modmessages {
+  margin-top: 10px !important;
+}
+
+.tile {
+  background-color: var(--color-base01) !important;
+  border: 2px solid var(--color-base02) !important;
+  border-radius: 20px !important;
+}
+
+.tile:hover {
+  background-color: var(--color-base02) !important;
+  border: 2px solid var(--color-base03) !important;
 }
 
 #centercontainer {
@@ -600,6 +625,10 @@ input:focus+.slider,
 .todo-column [listview] .todo-column__row:hover .todo-column__actions-cell,
 .todo-column__header {
   box-shadow: none !important;
+}
+
+.todo-column__header {
+  align-items: center !important;
 }
 
 [listview].listview .listview__action-btn {

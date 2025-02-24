@@ -52,16 +52,28 @@
 }
 
 .smsc-topnav .topnav__menu,
-.bubble {
+.bubble,
+.smsctooltip {
   background-color: var(--color-base01) !important;
   border: 2px solid var(--color-popup-border) !important;
   overflow: hidden !important;
   transition: none !important;
   text-decoration: none !important;
   border-radius: 15px !important;
+  color: var(--color-text) !important;
+  align-items: center !important;
 }
 
-.bubble {
+.smsctooltip {
+  line-height: 25px !important;
+}
+
+.todo-column__header__filter {
+  height: 30px !important;
+}
+
+.bubble,
+.smsctooltip {
   border-radius: 9px !important;
 }
 
