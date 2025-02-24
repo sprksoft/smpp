@@ -11,7 +11,6 @@ class DMenu {
   #userText;
   #selectedIndex;
   #showItemScore;
-  #lock;
 
   constructor(itemList, endFunc=undefined, title="dmenu:", openerEl=undefined){
     this.endFunc = endFunc;
@@ -19,7 +18,6 @@ class DMenu {
 
     this.userText="";
     this.selectedIndex = 0;
-    this.lock=false;
 
     let dconfig = get_dconfig();
     this.showItemScore = dconfig.item_score;
@@ -31,7 +29,7 @@ class DMenu {
     return this.menuEl != null;
   }
   close(){
-    if (this.lock) {
+    if (!this.isOpen()){
       return;
     }
     this.menuEl.remove();
@@ -105,41 +103,40 @@ class DMenu {
     let searchq = this.inputEl.value;
 
     // update scores
+    let items = [];
     for (let node of this.itemListEl.childNodes){
       let score = this.#matchScore(node.dataset.content, searchq);
 
       if (score == 0 && searchq != "") {
-        node.dataset.score = -1;
         node.classList.add("hidden");
       } else {
-        node.dataset.score = score;
         node.classList.remove("hidden");
       }
+      items.push({score:score,htmlNode:node});
 
       if (this.showItemScore) {
         node.getElementsByClassName("dmenu-score")[0].innerText = score;
       }
-
     }
 
-    let sorted = Array.from(this.itemListEl.childNodes)
+    let sortedItems = items
       .sort(function(a,b){
-        if (parseInt(a.dataset.score) < parseInt(b.dataset.score))
+        if (a.score < b.score)
           return 1;
-        if (parseInt(a.dataset.score) > parseInt(b.dataset.score))
+        if (a.score > b.score)
           return -1;
         return 0;
     });
 
-    for (let i=0; i < sorted.length; i++) {
-      let node = sorted[i];
+    for (let i=0; i < sortedItems.length; i++) {
+      let item = sortedItems[i];
       if (i == 0){
-        node.classList.add("dmenu-selected");
+        item.htmlNode.classList.add("dmenu-selected");
       }else{
-        node.classList.remove("dmenu-selected");
+        item.htmlNode.classList.remove("dmenu-selected");
       }
 
-      this.itemListEl.appendChild(sorted[i]);
+      this.itemListEl.appendChild(item.htmlNode);
     }
   }
 
@@ -248,22 +245,20 @@ class DMenu {
 }
 
 function dmenu(itemList, endFunc=undefined, title="dmenu:", opener=undefined) {
-  if (active_dmenu !== null && active_dmenu.isOpen()){
+  if (active_dmenu !== null && active_dmenu.isOpen()) {
     active_dmenu.close();
-    active_dmenu = null;
   }
   let menu = new DMenu(itemList, endFunc, title, opener);
   active_dmenu = menu;
   return menu;
 }
 
-document.addEventListener("click", function(e){
-  if (active_dmenu == null || !active_dmenu.isOpen()){
+document.addEventListener("click", function(e) {
+  if (active_dmenu == null || !active_dmenu.isOpen()) {
     return;
   }
-  if (!active_dmenu.menuEl.contains(e.target) && e.target != active_dmenu.openerEl){
+  if (!active_dmenu.menuEl.contains(e.target) && e.target != active_dmenu.openerEl) {
     active_dmenu.close();
-    active_dmenu = null;
     e.preventDefault();
   }
 });
