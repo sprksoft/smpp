@@ -143,15 +143,11 @@ function scrape_goto() {
   }
 }
 
-
 function do_qm(opener = "") {
-  let cmd_list = quick_cmd_list().concat(goto_items).concat(vakken).concat(links.concat(["home", "dmenu config", "quick add", "quick remove", "config", "toggle fancy scores", "lock dmenu", "unbloat", "clearsettings", "discord"]));
+  let cmd_list = quick_cmd_list().concat(goto_items).concat(vakken).concat(links.concat(["home", "dmenu config", "quick add", "quick remove", "config", "toggle fancy scores", "unbloat", "clearsettings", "discord"]));
 
   dmenu(cmd_list, function (cmd) {
     switch (cmd) {
-      case "lock dmenu":
-        lock_dmenu = !lock_dmenu;
-        return;
       case "unbloat":
         unbloat();
         return;

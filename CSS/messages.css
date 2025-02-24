@@ -457,7 +457,7 @@ td.msg_right {
   border-radius: 10px !important;
 }
 
-.modern-ui input[type=text] {
+.modern-ui input[type=text]:not(.smsc-inlineeditor__input) {
   background-color: var(--color-base01) !important;
 }
 
