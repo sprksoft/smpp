@@ -1,7 +1,8 @@
 // Voeg een nieuw inputveld toe zonder de originele inhoud te verwijderen (   thx voor de geen info lukas >:(   )
-var container = document.getElementById("smscMainBlockContainer");
-container?.insertAdjacentHTML('beforeend', '<div id=inputVakContainter><input type="text" color="red" id="inputVak" placeholder="Custom name"></div>')
-
+if (window.location.href.includes("module=Profile")) {
+  var container = document.getElementById("smscMainBlockContainer");
+  container?.insertAdjacentHTML('beforeend', '<div id=inputVakContainter><input type="text" color="red" id="inputVak" placeholder="Custom name"></div>')
+}
 let config = get_config();
 if (config.username_override == undefined) {
   config.username_override = null;
