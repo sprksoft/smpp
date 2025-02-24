@@ -56,26 +56,28 @@ class WidgetBase {
 }
 
 function onWidgetDragStart(widget, e){
+  if (!widgetEditMode){
+    return;
+  }
   let target = widget.element;
+  let rect = target.getBoundingClientRect();
 
-  target.style.width=target.offsetWidth;
-  target.style.height=target.offsetHeight;
-  target.style.left = e.pageX;
-  target.style.top = e.pageY;
+  curDraggingWidgetInfo = { sourcePannel: widget.element.parentElement, widget:widget, offset: {x: e.clientX-rect.left, y:e.clientY-rect.top} };
+  target.style.width=rect.width+"px";
+  target.style.height=rect.height+"px";
+  target.style.left = rect.left+"px";
+  target.style.top = rect.top+"px";
 
   target.classList.add("smpp-widget-dragging");
 
-  curDraggingWidgetInfo = { sourcePannel: widget.element.parentElement, widget:widget, startPos: {x: e.pageX, y:e.pageY} };
-
-  let container = document.getElementById("container");
-  container.appendChild(widget.element);
-
+  document.body.appendChild(widget.element);
 }
 
 document.addEventListener("mouseup", (e) => {
   if (curDraggingWidgetInfo) {
     let el = curDraggingWidgetInfo.widget.element;
     el.classList.remove("smpp-widget-dragging");
+    el.style="";
     curDraggingWidgetInfo.sourcePannel.appendChild(el);
 
     curDraggingWidgetInfo = null;
@@ -85,9 +87,17 @@ document.addEventListener("mouseup", (e) => {
 document.addEventListener("mousemove", (e) => {
   if (curDraggingWidgetInfo != null) {
     let el = curDraggingWidgetInfo.widget.element;
-    let offset = curDraggingWidgetInfo.startPos;
-    el.style.left = e.pageX-offset.x+"px";
-    el.style.top = e.pageY-offset.y+"px";
+    let offset = curDraggingWidgetInfo.offset;
+    el.style.left = (e.clientX-offset.x)+"px";
+    el.style.top = (e.clientY-offset.y)+"px";
+  }
+
+});
+
+document.addEventListener("keyup", (e)=> {
+  if (e.key == "Escape" && widgetEditMode){
+    setEditMode(false);
+    e.preventDefault();
   }
 
 });
