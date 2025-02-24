@@ -1,6 +1,6 @@
 
 let widgetEditMode=false;
-let curDraggingWidget = null;
+let curDraggingWidgetInfo = null;
 
 class WidgetBase {
   element;
@@ -65,17 +65,29 @@ function onWidgetDragStart(widget, e){
 
   target.classList.add("smpp-widget-dragging");
 
+  curDraggingWidgetInfo = { sourcePannel: widget.element.parentElement, widget:widget, startPos: {x: e.pageX, y:e.pageY} };
+
   let container = document.getElementById("container");
   container.appendChild(widget.element);
 
-  curDraggingWidget = widget;
 }
 
-document.addEventListener("mousemove", (e) =>{
-  if (curDraggingWidget != null){
-    let el = curDraggingWidget.element;
-    el.style.left = e.pageX+"px";
-    el.style.top = e.pageY+"px";
+document.addEventListener("mouseup", (e) => {
+  if (curDraggingWidgetInfo) {
+    let el = curDraggingWidgetInfo.widget.element;
+    el.classList.remove("smpp-widget-dragging");
+    curDraggingWidgetInfo.sourcePannel.appendChild(el);
+
+    curDraggingWidgetInfo = null;
+  }
+})
+
+document.addEventListener("mousemove", (e) => {
+  if (curDraggingWidgetInfo != null) {
+    let el = curDraggingWidgetInfo.widget.element;
+    let offset = curDraggingWidgetInfo.startPos;
+    el.style.left = e.pageX-offset.x+"px";
+    el.style.top = e.pageY-offset.y+"px";
   }
 
 });
@@ -91,7 +103,7 @@ function getWidgetByName(name) {
   return null;
 }
 
-function setEditMode(value){
+function setEditMode(value) {
   if (value){
     document.body.classList.add("smpp-widget-edit-mode");
   }else{

@@ -35,6 +35,11 @@
   box-shadow: 0 0 0 4px var(--color-yellow);
 }
 
+.smpp-widget-edit-mode .smpp-widget > *{
+  pointer-events: none;
+  user-select: none;
+}
+
 .smpp-widget-edit-mode .smpp-widget:hover {
   cursor: move;
 }
