@@ -274,25 +274,34 @@ async function apply() {
   }
   if (enableanimations) {
     document.body.classList.add("enableAnimations")
+    document.querySelector("#performanceModeTooltip")?.remove()
   } else {
     document.body.classList.remove("enableAnimations")
-  }
-  document.getElementById("background_image") ? document.getElementById("background_image").style.display = "none" : "pass"
-  if (overwrite_theme == 2) {
-    set_background();
-  } else if (overwrite_theme == 1) {
-    set_backgroundlink(backgroundLink)
-  }
-  let link_element = document.querySelector('link[rel="icon"]');
-  if (link_element) {
-    if (settingsData.smpp_logo) {
-      link_element.href = "https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/icon128.png";
-    } else {
-      link_element.href = "https://static1.smart-school.net/smsc/svg/favicon/favicon.svg";
+    const topNav = document.querySelector("nav.topnav")
+    if (topNav && document.querySelector("#performanceModeTooltip") == undefined) {
+      const performanceModeTooltip = document.createElement("button");
+      performanceModeTooltip.title = "Performance mode is enabled"
+      performanceModeTooltip.id = "performanceModeTooltip"
+      performanceModeTooltip.className = "topnav__btn"
+      performanceModeTooltip.innerHTML = performanceModeSvg
+      topNav.prepend(performanceModeTooltip)
+    }
+    document.getElementById("background_image") ? document.getElementById("background_image").style.display = "none" : "pass"
+    if (overwrite_theme == 2) {
+      set_background();
+    } else if (overwrite_theme == 1) {
+      set_backgroundlink(backgroundLink)
+    }
+    let link_element = document.querySelector('link[rel="icon"]');
+    if (link_element) {
+      if (settingsData.smpp_logo) {
+        link_element.href = "https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/icon128.png";
+      } else {
+        link_element.href = "https://static1.smart-school.net/smsc/svg/favicon/favicon.svg";
+      }
     }
   }
 }
-
 function storeTheme() {
   const themeData = {
     color_base00: document.getElementById("colorPicker1").value,
@@ -312,7 +321,7 @@ function store() {
     storeTheme();
   }
 
-  let settingsData = {};
+  let settingsData = previousData;
   const profileSelect = document.getElementById("profileSelector").value;
   let backgroundFile = document.getElementById("fileInput").files[0];
   const backgroundLink = document.getElementById("backgroundlink").value
@@ -339,7 +348,6 @@ function store() {
   settingsData.shownews = shownews;
   settingsData.showsnake = showsnake;
   settingsData.showflappy = showflappy
-  settingsData.show_scores = previousData.show_scores;
   settingsData.isbig = isbig;
   settingsData.showplanner = showplanner;
   settingsData.weatherSelector = weatherSelector;

@@ -617,11 +617,9 @@ nav.topnav {
   right: 0;
   bottom: 0;
   background-color: var(--color-settings-ui-bg);
-
-
 }
 
-.enableAnimations .slider {
+.enableAnimations .slider.round {
   -webkit-transition: transform .1s;
   transition: transform .1s;
 }
@@ -636,7 +634,7 @@ nav.topnav {
   background-color: var(--color-settings-ui-border);
 }
 
-.enableAnimations .slider:before {
+.enableAnimations .slider.round:before {
   -webkit-transition: transform .1s;
   transition: transform .1s;
 }
