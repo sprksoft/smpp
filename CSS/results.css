@@ -161,6 +161,8 @@ upload-app.smsc-container.smsc-container--flex,
   border: var(--border-size) solid var(--color-base00) !important;
   border-radius: 7px !important;
   padding: 10px !important;
+  font-weight: 600 !important;
+  display: flex !important;
 }
 
 .evaluation-graphic.evaluation-graphic--large.evaluation-graphic--percentage.side-panel__content__score__large-ring.c-olive-combo--100,
@@ -365,9 +367,5 @@ td.cell.cell--evaluation.js-cell-evaluation.evaluation:hover {
 
 .feedback .user-image-label {
   color: var(--color-text) !important;
-  font-weight: 600 !important;
-}
-
-.goals__goal__content__title {
   font-weight: 600 !important;
 }
