@@ -1,6 +1,7 @@
 /* Only use rem's here no em because widgets will be moved to body when they are dragged */
 .smpp-widget {
   transition: transform 0.4s;
+
   transform: scale(1) rotate(0deg);
   background-color: var(--color-base01);
   padding: 20px;
@@ -34,6 +35,10 @@
 
 /* EDITMODE */
 
+.smpp-widget-edit-mode{
+  user-select: none;
+}
+
 .smpp-widget-bag {
   animation: smppWidgetBagEnter 0.5s;
   opacity: 1;
@@ -47,7 +52,6 @@
   top: 0px;
 
   background-color: var(--color-base01);
-  border: 2px solid var(--color-base02);
   border-radius: 10px;
 
   z-index: 100;
@@ -68,7 +72,8 @@
   height: 45px;
 }
 
-.smpp-widget-edit-mode .smpp-widget {
+.smpp-widget-edit-mode .smpp-widget,
+.smpp-widget-bag {
   border-color: transparent;
   outline: 4px dashed var(--color-black);
   box-shadow: 0 0 0 4px var(--color-yellow);
@@ -80,6 +85,7 @@
 }
 
 .smpp-widget-edit-mode .smpp-widget:hover {
+  transform: translateY(-5px);
   cursor: move;
 }
 .smpp-widget-dragging {
