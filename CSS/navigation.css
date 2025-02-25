@@ -39,10 +39,13 @@
   text-decoration-color: var(--color-accent) !important;
   text-decoration-thickness: 2px !important;
   width: auto !important;
+}
+.enableAnimations .topnav__btn,
+.enableAnimations .token,
+.enableAnimations.titleRight {
   transition-duration: 0.1s !important;
   transition: background-color 0.2s, border-color 0.3s, text-decoration 0.1s, width 0.2s !important;
 }
-
 .topnav__btn:hover {
   cursor: pointer !important;
   text-decoration: underline !important;
@@ -57,11 +60,11 @@
   background-color: var(--color-base01) !important;
   border: 2px solid var(--color-popup-border) !important;
   overflow: hidden !important;
-  transition: none !important;
   text-decoration: none !important;
   border-radius: 15px !important;
   color: var(--color-text) !important;
   align-items: center !important;
+  transition: none !important;
 }
 
 .smsctooltip {
@@ -96,6 +99,9 @@
   background-color: var(--color-base01) !important;
   margin-right: 0px !important;
   color: var(--color-text) !important;
+}
+
+.enableAnimations .topnav__menuitem {
   transition: font-size 0.3s, background-position-x 0.3s, border-radius 0.3s;
 }
 
@@ -182,9 +188,11 @@ li {
   border-radius: 10px !important;
   border: 2px solid var(--color-base02) !important;
   background-color: var(--color-base01) !important;
+
+}
+.enableAnimations .treecollapse {
   transition: all 0.1s ease-in-out !important;
 }
-
 .treecollapse a {
   color: var(--color-text) !important;
 }

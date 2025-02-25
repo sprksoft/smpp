@@ -239,8 +239,14 @@ button.smscButton.blue.fileupload_submit_button,
   background-color: var(--color-base02) !important;
   color: var(--color-accent) !important;
   box-shadow: none !important;
-  transition: border 0.3s, background-color 0.3s, color 0.3s;
   border-radius: 10px !important;
+}
+.enableAnimations .smscButton,
+.enableAnimations .float-label__input,
+.enableAnimations .input-search,
+.enableAnimations button.smscButton.blue.fileupload_submit_button,
+.enableAnimations .wide-colored-btn {
+  transition: border 0.3s, background-color 0.3s, color 0.3s;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -385,18 +391,23 @@ smsc-inlineeditor.smsc-table__cell--inlineeditor {
 }
 
 .contextmenu__item--nolink:hover {
+
+  background-color: var(--color-base02) !important;
+}
+.enableAnimations .contextmenu__item--nolink:hover {
   transition: ease-in !important;
   transition-duration: 0.1s !important;
-  background-color: var(--color-base02) !important;
 }
 
 .smsc-rightclick__menu {
   background-color: var(--color-base02) !important;
 }
-
-.smsc-rightclick__item:hover {
+.enableAnimations .smsc-rightclick__item:hover {
   transition: ease-in !important;
   transition-duration: 0.1s !important;
+}
+
+.smsc-rightclick__item:hover {
   background-color: var(--color-base03) !important;
 }
 
@@ -475,9 +486,12 @@ smsc-inlineeditor.smsc-table__cell--inlineeditor {
   margin: 0px !important;
 }
 
-.smscAdminNav_body_linkdivTitle:hover {
+.enableAnimations.smscAdminNav_body_linkdivTitle:hover {
   transition: ease-in !important;
   transition-duration: 0.1s !important;
+}
+
+.smscAdminNav_body_linkdivTitle:hover {
   color: var(--color-text) !important;
 }
 
@@ -600,11 +614,13 @@ nav.topnav {
   right: 0;
   bottom: 0;
   background-color: var(--color-settings-ui-bg);
-  -webkit-transition: transform .1s;
-  transition: transform .1s;
+
 
 }
-
+.enableAnimations .slider {
+  -webkit-transition: transform .1s;
+  transition: transform .1s;
+}
 .slider:before {
   position: absolute;
   content: "";
@@ -613,9 +629,12 @@ nav.topnav {
   left: 4px;
   bottom: 4px;
   background-color: var(--color-settings-ui-border);
+}
+.enableAnimations .slider:before {
   -webkit-transition: transform .1s;
   transition: transform .1s;
 }
+
 
 input:checked+.slider {
   background-color: var(--color-base03);
@@ -631,7 +650,7 @@ input:focus+.slider,
   align-items: center !important;
 }
 
-[listview].listview .listview__action-btn {
+.enableAnimations [listview].listview .listview__action-btn {
   transition: background-color 0.1s ease-in-out !important;
 }
 
@@ -689,16 +708,20 @@ input:checked+.slider:before {
   display: flex !important;
   flex-direction: column !important;
   justify-content: center !important;
-  transition: all 0.10s cubic-bezier(.64, .18, .39, .82) !important;
   border-radius: 15px !important;
+}
+.enableAnimations #searchMenu{
+  transition: all 0.10s cubic-bezier(.64, .18, .39, .82) !important;
 }
 
 #searchMenu[hidden] {
   height: 0% !important;
   transform: translateY(-100%) !important;
-  transition: all 0s linear !important;
 }
 
+.enableAnimations{
+  transition: all 0s linear !important;
+}
 .textandbutton {
   display: flex !important;
   flex-direction: row !important;
@@ -854,7 +877,7 @@ input:checked+.slider:before {
 }
 
 /*rangeblur*/
-.sliderblur {
+.sliderblur { /* wie heef hier chat gpt gebreukt >:( */
   -webkit-appearance: none;
   /* Override default CSS styles */
   appearance: none;
@@ -865,11 +888,12 @@ input:checked+.slider:before {
   outline: none;
   /* Remove outline */
   opacity: 0.7;
-  /* Set transparency (for mouse-over effects on hover) */
-  -webkit-transition: .2s;
-  /* 0.2 seconds transition on hover */
-  transition: opacity .2s;
   margin: 5px !important;
+}
+
+.enableAnimations .sliderblur{
+  -webkit-transition: .2s;
+  transition: opacity .2s;
 }
 
 #backgroundSlider,
@@ -908,9 +932,14 @@ input:checked+.slider:before {
 
 .sliderblur::-webkit-slider-thumb:hover,
 .sliderblur::-moz-range-thumb:hover {
+  background: var(--color-accent) !important;
+}
+
+
+.enableAnimations .sliderblur::-webkit-slider-thumb:hover,
+.enableAnimations .sliderblur::-moz-range-thumb:hover {
   transition: ease-in !important;
   transition-duration: 0.1s !important;
-  background: var(--color-accent) !important;
 }
 
 #modal-background {
@@ -947,9 +976,12 @@ input:checked+.slider:before {
 }
 
 option:hover {
+  background-color: var(--color-base01) !important;
+}
+
+.enableAnimations option:hover {
   transition: ease-in !important;
   transition-duration: 0.1s !important;
-  background-color: var(--color-base01) !important;
 }
 
 .splashscreen {
@@ -990,10 +1022,13 @@ option:hover {
 }
 
 #searchbutton:hover {
-  transition: ease-in-out !important;
-  transition-duration: 0.1s !important;
   background-color: var(--color-base02) !important;
   border-color: var(--color-accent) !important;
+}
+
+.enableAnimations #searchbutton:hover {
+  transition: ease-in-out !important;
+  transition-duration: 0.1s !important;
 }
 
 .header.js-header.overview-page__header.header--single-line {
@@ -1026,9 +1061,12 @@ option:hover {
 
 .bigdiscordbutton:hover {
   background-color: var(--color-base02) !important;
+  cursor: pointer !important;
+}
+
+.enableAnimations .bigdiscordbutton:hover {
   transition: ease-in !important;
   transition-duration: 0.1s !important;
-  cursor: pointer !important;
 }
 
 .color-pickersmpp {
@@ -1066,6 +1104,9 @@ option:hover {
   left: 50%;
   transform: translateX(-50%);
   opacity: 0;
+}
+
+.enableAnimations .color-label {
   transition: opacity 0.1s ease-in;
 }
 
@@ -1107,6 +1148,9 @@ option:hover {
 #backgroundfilebutton:hover {
   background-color: var(--color-base02) !important;
   border-color: var(--color-base03) !important;
+}
+
+.enableAnimations #backgroundfilebutton:hover {
   transition: ease-in !important;
   transition-duration: 0.1s !important;
 }
@@ -1301,12 +1345,13 @@ a.js-btn-messages.topnav__btn:hover {
   }
 }
 
-#shortcutsMenu,
-#coursesMenu,
-#linksMenu,
-#notifsMenu {
+.enableAnimations #shortcutsMenu,
+.enableAnimations #coursesMenu,
+.enableAnimations #linksMenu,
+.enableAnimations #notifsMenu {
   animation: flyInFromTop 0.15s ease forwards;
 }
+
 
 .homepage__right {
   border-left: 2px solid var(--color-base01) !important;
@@ -1440,6 +1485,9 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   border: 2px solid var(--color-base03);
   border-radius: 5px;
   min-width: 100px !important;
+}
+
+.enableAnimations .lookChat {
   transition: border-color 0.3s;
 }
 
@@ -1554,16 +1602,21 @@ button.wopi_files__button:hover {
 button.wopi_files__button {
   margin: 10px !important;
   border-width: 2px !important;
+}
+
+.enableAnimations button.wopi_files__button {
   transition: all 0.05s ease-in-out !important;
 }
 
 .card__container {
   background-color: var(--color-base00) !important;
   border-radius: 20px !important;
-  transition: all ease-in-out 0.25s;
   box-shadow: none !important;
 }
 
+.enableAnimations .card__container {
+  transition: all ease-in-out 0.25s;
+}
 .card__container:hover {
   cursor: pointer !important;
   background-color: var(--color-base01) !important;
@@ -1586,6 +1639,9 @@ button.wopi_files__button {
   box-shadow: none !important;
   color: var(--color-text) !important;
   border: 2px solid var(--color-base02) !important;
+}
+
+.enableAnimations .card{
   transition: all 0.1s ease-in-out !important;
 }
 
@@ -1639,10 +1695,11 @@ div.smscCheckbox input[type=checkbox]:not(.loading):focus+label:before {
   background-repeat: no-repeat !important;
   background-size: 24px !important;
   padding: .57em 8px .57em 40px !important;
-  transition: background-position .15s ease-out, background-color .15s ease-out, margin .15s ease-out !important;
-
 }
 
+.enableAnimations .topnav__menuitem--img {
+  transition: background-position .15s ease-out, background-color .15s ease-out, margin .15s ease-out !important;
+}
 .topnav__menuitem--img:hover {
   background-position-x: 8px !important;
 }
@@ -1752,6 +1809,9 @@ div#folders {
   width: auto !important;
   max-width: 400px !important;
   min-width: 250px !important;
+}
+
+.enableAnimations .uploadzone .folders {
   transition: all 0.3s !important;
 }
 

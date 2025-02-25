@@ -33,8 +33,12 @@
   text-decoration-thickness: 2px !important;
   width: auto !important;
   margin: 3px !important;
+}
+
+.enableAnimations .modern-message {
   transition: all 0.05s ease-in-out !important;
 }
+
 
 .quickReplyMenu quickreply-menu {
   border: 1px solid var(--color-accent) !important;
@@ -644,7 +648,7 @@ span.planner-list-wrapper__add-btn__text:hover {
   color: var(--color-accent) !important;
 }
 
-span.planner-list-wrapper__add-btn__text {
+.enableAnimations span.planner-list-wrapper__add-btn__text {
   transition-duration: 0.1s !important;
   transition-timing-function: ease-in-out !important;
 }

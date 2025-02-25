@@ -4,8 +4,11 @@ body {
 }
 
 #homepage__block--google {
-  transition: none;
   border-bottom: none !important;
+}
+
+.enableAnimations #homepage__block--google {
+  transition: none;
 }
 
 .homepage {

@@ -26,6 +26,8 @@ html {
   z-index: 20;
   box-shadow: 0px 0px 150px black;
   border-radius: 10px !important;
+}
+.enableAnimations.dmenu {
   animation: dmenu 0.5s ease-in 0ms 1 !important;
 }
 

@@ -48,7 +48,9 @@ html {
   backdrop-filter: blur(10px) !important;
   border-radius: 25px !important;
   border: 3px solid var(--color-base03) !important;
+}
 
+.enableAnimations .login-app__top {
   transition: all 100ms ease-in 0s !important
 }
 
@@ -113,10 +115,13 @@ body {
   color: var(--color-text) !important;
   border-color: var(--color-base02) !important;
   background-color: var(--color-base01) !important;
-  transition: all 0.3s !important;
   font-weight: 450;
   box-shadow: none !important;
   justify-self: center;
+}
+
+.enableAnimations .login-app .smscButton.blue:not(#pushWizardPopupConfirmButton) {
+  transition: all 0.3s !important;
 }
 
 .login-app .smscButton.blue:hover:not(#pushWizardPopupConfirmButton:hover) {
@@ -150,6 +155,9 @@ body {
   border-radius: 5px !important;
   margin: 10px !important;
   font-size: 15px !important;
+}
+
+.enableAnimations .white_text_button {
   transition: ease-in-out !important;
   transition-duration: 0.1s !important;
 }
@@ -188,7 +196,9 @@ span.login-app__title.login-app__title--sign-in-with {
   font-size: 30px !important;
   left: -50% !important;
   position: relative !important;
-  animation: scale_up_and_down 0.58s linear infinite;
+}
+.enableAnimations .splashtext {
+animation: scale_up_and_down 0.58s linear infinite;
 }
 
 @keyframes scale_up_and_down {

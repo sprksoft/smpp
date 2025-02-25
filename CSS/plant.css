@@ -24,10 +24,11 @@
   padding: 2.5px;
   flex: 1;
   height: 50px;
+}
+.enableAnimations .watering_button {
   transition: ease-in-out;
   transition-duration: 0.1s;
 }
-
 .watering_button:hover {
   background-color: var(--color-base03);
   border-color: var(--color-accent);
@@ -64,10 +65,12 @@
   /* blue fill */
   position: absolute;
   bottom: 0;
-  transition: height 1.5s ease-in-out;
-  /* smooth transition */
 }
 
+.enableAnimations .glass-fill {
+  transition: height 1.5s ease-in-out;
+  /* smooth transition */ /*lukas wat een stoeffer dat jij bent :/ */
+}
 #removeButtonDiv {
   display: flex;
   flex-direction: row;
@@ -83,14 +86,15 @@
   align-self: center;
   height: 32px;
   width: 32px;
-  transition: ease-in-out;
-  transition-duration: 0.1s;
   font-size: 17px;
   margin-top: 10px;
   margin-bottom: 10px;
   margin-left: 10px;
 }
-
+.enableAnimations #remove_button_info {
+  transition: ease-in-out;
+  transition-duration: 0.1s;
+}
 #removeplantButton {
   border: 3px solid var(--color-base03);
   background-color: var(--color-base02);
@@ -99,12 +103,14 @@
   position: relative;
   align-self: center;
   height: 32px;
-  transition: all 0.2s ease-in-out;
   font-size: 17px;
   margin-top: 10px;
   margin-bottom: 10px;
 }
 
+.enableAnimations #removeplantButton {
+  transition: all 0.2s ease-in-out;
+}
 #removeplantButton:hover {
   background-color: var(--color-base03);
   border-color: var(--color-accent);
@@ -128,38 +134,41 @@
   padding: 5px;
   border-radius: 10px;
   position: relative;
-  transition-duration: 0.2s;
-  transition-delay: 0.2s;
-  transition-timing-function: ease-in-out;
   opacity: 0;
   text-align: center;
 }
 
+.enableAnimations #plant_remove_info_text {
+  transition-duration: 0.2s;
+  transition-delay: 0.2s;
+  transition-timing-function: ease-in-out;
+}
 #plant_streak {
   color: var(--color-accent) !important;
   font-size: 50px !important;
   font-weight: 800 !important;
 }
 
-#plant_the_plant_svg {
+.enableAnimations #plant_the_plant_svg {
   transition-duration: 0.4s;
 }
 
 /* Rising/draining effect */
-#riseMask {
+.enableAnimations #riseMask {
   transition: transform 0.4s cubic-bezier(.52, .56, .29, .98) !important;
   /* Animate transform */
   transform: translateY(100%);
   /* Start hidden at the bottom */
 }
-
-#plant_the_plant_svg:hover #riseMask {
+.enableAnimations #plant_the_plant_svg:hover #riseMask {
   transform: translateY(0%);
   /* Rise up on hover */
 }
 
 #hand {
   fill: var(--color-base02);
+}
+.enableAnimations #hand {
   transition-duration: 0.3s;
 }
 

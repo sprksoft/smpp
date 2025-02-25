@@ -260,6 +260,9 @@ button.btn.close-btn.btn--primary {
 
 .course-module-planner__timeline .timeline-row.planned-element-row .action-block__buttons {
   background-color: var(--color-base02) !important;
+}
+
+.enableAnimations .course-module-planner__timeline .timeline-row.planned-element-row .action-block__buttons {
   transition: ease-in-out !important;
   transition-duration: 0.2s !important;
 }
@@ -269,7 +272,7 @@ button.icon-btn.js-icon-btn:hover {
   background-color: var(--color-base03) !important;
 }
 
-button.icon-btn.js-icon-btn {
+.enableAnimations button.icon-btn.js-icon-btn {
   transition: ease-in-out !important;
   transition-duration: 0.2s !important;
 }
@@ -395,6 +398,9 @@ button.icon-label-btn.js-icon-label-btn.icon-label-btn--linkbutton {
   padding: 10px !important;
   border-radius: 15px !important;
   border: 2px solid var(--color-accent) !important;
+}
+
+.enableAnimations button.icon-label-btn.js-icon-label-btn.icon-label-btn--linkbutton {
   transition: ease-in-out 0.1s all !important
 }
 
@@ -465,6 +471,8 @@ button.icon-label-btn.js-icon-label-btn.icon-label-btn--linkbutton:hover {
   font-size: 10px;
   min-height: 23px;
   margin: 1px !important;
+}
+.enableAnimations .planner-element {
   transition: ease-in;
   transition-duration: 100ms;
 }
@@ -508,6 +516,10 @@ button.icon-label-btn.js-icon-label-btn.icon-label-btn--linkbutton:hover {
   border: 2px solid var(--color-base02);
   border-radius: 8px;
   background-color: var(--color-base01);
+}
+
+.enableAnimations #forward_button_planner,
+.enableAnimations #back_button_planner {
   transition: ease-in-out;
   transition-duration: 0.2s;
 }
@@ -566,10 +578,11 @@ button.btn.dropdown-button.js-course-dropdown {
 .card-block {
   background-color: var(--color-base01) !important;
   border: 2px solid var(--color-base01) !important;
+}
+.enableAnimations .card-block {
   transition: ease-in-out !important;
   transition-duration: 0.2s !important;
 }
-
 .card-block:hover {
   background-color: var(--color-base02) !important;
   border-color: var(--color-accent) !important;

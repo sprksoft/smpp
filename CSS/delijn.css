@@ -8,6 +8,9 @@
     height: 100%;
     display: flex;
     flex-direction: column;
+
+}
+.enableAnimations .lijncards {
     animation: delijnCardAppear 0.3s ease-in-out 0ms 1;
 }
 
