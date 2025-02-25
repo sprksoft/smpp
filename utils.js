@@ -1,4 +1,8 @@
 function open_url(url, new_window = false) {
+  if (!url || url === "undefined"){
+    console.error("tried to open an illegal url");
+    return;
+  }
   if (new_window) {
     let a = document.createElement("a");
     a.href = url;
@@ -9,5 +13,3 @@ function open_url(url, new_window = false) {
   }
   window.location = url;
 }
-
-
