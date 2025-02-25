@@ -26,6 +26,23 @@ html {
   z-index: 20;
   box-shadow: 0px 0px 150px black;
   border-radius: 10px !important;
+  animation: dmenu 0.5s ease-in 0ms 1 !important;
+}
+
+@keyframes dmenu {
+  0% {
+    opacity: 0;
+    transform: translateY(50%)
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateY(-10%)
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
 }
 
 .dmenu-top {
@@ -80,6 +97,7 @@ html {
   flex-direction: row;
   border: none;
 }
+
 .dmenu-row:nth-child(even) {
   background: var(--color-base01);
 }
@@ -112,4 +130,3 @@ html {
   background: var(--color-accent) !important;
   color: var(--color-base01) !important;
 }
-
