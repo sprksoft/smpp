@@ -51,10 +51,10 @@ function showNews(value) {
 }
 
 
-(async () => {
+async function createWidgetSystem() {
   let container = document.getElementById("container");
   if (!container) {
-    return;
+    return false;
   }
   console.log("creating widget system...");
 
@@ -62,7 +62,7 @@ function showNews(value) {
   let news = document.getElementById("centercontainer");
   if (!news){
     console.error("centercontainer doesn't exist. Try reloading the extension");
-    return;
+    return false;
   }
 
   // create widgets container
@@ -71,4 +71,6 @@ function showNews(value) {
 
   container.innerHTML="";
   container.appendChild(widgetsContainer);
-})();
+
+  return true;
+}
