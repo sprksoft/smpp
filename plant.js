@@ -259,7 +259,7 @@ function get_plant_html(age, is_alive) {
     <defs>
       <!-- Clip-path for the rising effect -->
       <clipPath id="riseClip">
-        <rect id="riseMask" x="0" y="-23%" width="100%" height="100%" />
+        <rect id="riseMask" x="0" width="100%" height="100%" />
       </clipPath>
     </defs>
 

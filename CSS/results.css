@@ -326,9 +326,11 @@ textarea,
   border-width: 2px !important;
   border-radius: 15px !important;
 }
-.enableAnimations.title-and-schoolyear-selector .title-and-schoolyear-selector__period-container:not(:disabled) {
+
+.enableAnimations .title-and-schoolyear-selector .title-and-schoolyear-selector__period-container:not(:disabled) {
   transition: all 0.1s !important;
 }
+
 .listview__row.js-listview-row.leerplannen-overview__list__listview__row {
   background-color: var(--color-base01) !important;
   border: 2px solid var(--color-base02) !important;
@@ -340,6 +342,7 @@ textarea,
 .enableAnimations .listview__row.js-listview-row.leerplannen-overview__list__listview__row {
   transition: all 0.1s ease-in-out !important;
 }
+
 .listview__row.js-listview-row.leerplannen-overview__list__listview__row:hover {
   background-color: var(--color-base02) !important;
   border-color: var(--color-accent) !important;

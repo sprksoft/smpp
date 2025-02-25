@@ -38,7 +38,12 @@ async function clearsettings() {
     action: 'clearLocalStorage'
   });
   console.log("Cleared settings!")
-
+}
+function togglePerformanceMode() {
+  let config = get_config();
+  config.enableanimations = !config.enableanimations
+  set_config(config);
+  return config.enableanimations
 }
 function fileToBase64(file) {
   return new Promise((resolve, reject) => {
@@ -85,8 +90,9 @@ async function apply() {
   var showplanner = settingsData.showplanner;
   var IsBig = settingsData.isbig;
   var weatherSelector = settingsData.weatherSelector;
-  var username_override = settingsData.username_override
-  var show_plant = settingsData.show_plant
+  var username_override = settingsData.username_override;
+  var show_plant = settingsData.show_plant;
+  var enableanimations = settingsData.enableanimations;
   changeFont()
   set_theme("default");
   set_theme(profileSelect);
@@ -116,6 +122,11 @@ async function apply() {
     settingsData = get_config()
     settingsData.weatherSelector = 0
     weatherSelector = 0
+    set_config(settingsData)
+  }
+  if (enableanimations == undefined) {
+    settingsData = get_config()
+    settingsData.enableanimations = true
     set_config(settingsData)
   }
   topnav = document.querySelector('.topnav')
@@ -260,6 +271,11 @@ async function apply() {
   if (gc_initialized) {
     remove_gcwin()
     make_gcwin(true)
+  }
+  if (enableanimations) {
+    document.body.classList.add("enableAnimations")
+  } else {
+    document.body.classList.remove("enableAnimations")
   }
   document.getElementById("background_image") ? document.getElementById("background_image").style.display = "none" : "pass"
   if (overwrite_theme == 2) {
@@ -505,13 +521,10 @@ function main() {
     popup.addEventListener("change", store)
     search_button = document.querySelector('.js-btn-search')
     search_button.innerText = "Settings"
-    search_button.addEventListener("click", function () {
-
-      const popup_settings = document.getElementById("searchMenu");
-      popup_settings.innerHTML = popupsettingHTML
-      document.getElementById('backgroundfilebutton').addEventListener("click", openFileSelector)
-      load()
-    });
+    const popup_settings = document.getElementById("searchMenu");
+    popup_settings.innerHTML = popupsettingHTML
+    document.getElementById('backgroundfilebutton').addEventListener("click", openFileSelector)
+    load()
   }
   apply()
 }

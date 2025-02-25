@@ -39,13 +39,16 @@
   text-decoration-color: var(--color-accent) !important;
   text-decoration-thickness: 2px !important;
   width: auto !important;
+  transition: none !important
 }
+
 .enableAnimations .topnav__btn,
 .enableAnimations .token,
-.enableAnimations.titleRight {
+.enableAnimations .titleRight {
   transition-duration: 0.1s !important;
   transition: background-color 0.2s, border-color 0.3s, text-decoration 0.1s, width 0.2s !important;
 }
+
 .topnav__btn:hover {
   cursor: pointer !important;
   text-decoration: underline !important;
@@ -190,9 +193,11 @@ li {
   background-color: var(--color-base01) !important;
 
 }
+
 .enableAnimations .treecollapse {
   transition: all 0.1s ease-in-out !important;
 }
+
 .treecollapse a {
   color: var(--color-text) !important;
 }

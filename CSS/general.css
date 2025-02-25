@@ -241,6 +241,7 @@ button.smscButton.blue.fileupload_submit_button,
   box-shadow: none !important;
   border-radius: 10px !important;
 }
+
 .enableAnimations .smscButton,
 .enableAnimations .float-label__input,
 .enableAnimations .input-search,
@@ -394,6 +395,7 @@ smsc-inlineeditor.smsc-table__cell--inlineeditor {
 
   background-color: var(--color-base02) !important;
 }
+
 .enableAnimations .contextmenu__item--nolink:hover {
   transition: ease-in !important;
   transition-duration: 0.1s !important;
@@ -402,6 +404,7 @@ smsc-inlineeditor.smsc-table__cell--inlineeditor {
 .smsc-rightclick__menu {
   background-color: var(--color-base02) !important;
 }
+
 .enableAnimations .smsc-rightclick__item:hover {
   transition: ease-in !important;
   transition-duration: 0.1s !important;
@@ -486,7 +489,7 @@ smsc-inlineeditor.smsc-table__cell--inlineeditor {
   margin: 0px !important;
 }
 
-.enableAnimations.smscAdminNav_body_linkdivTitle:hover {
+.enableAnimations .smscAdminNav_body_linkdivTitle:hover {
   transition: ease-in !important;
   transition-duration: 0.1s !important;
 }
@@ -617,10 +620,12 @@ nav.topnav {
 
 
 }
+
 .enableAnimations .slider {
   -webkit-transition: transform .1s;
   transition: transform .1s;
 }
+
 .slider:before {
   position: absolute;
   content: "";
@@ -630,6 +635,7 @@ nav.topnav {
   bottom: 4px;
   background-color: var(--color-settings-ui-border);
 }
+
 .enableAnimations .slider:before {
   -webkit-transition: transform .1s;
   transition: transform .1s;
@@ -701,7 +707,6 @@ input:checked+.slider:before {
   top: 34px !important;
   max-width: 270px !important;
   margin-left: -5px;
-  transform: translateY(0%) !important;
   background-color: var(--color-settings-bg) !important;
   border: 2px solid var(--color-settings-border) !important;
   align-items: center !important;
@@ -710,18 +715,11 @@ input:checked+.slider:before {
   justify-content: center !important;
   border-radius: 15px !important;
 }
-.enableAnimations #searchMenu{
-  transition: all 0.10s cubic-bezier(.64, .18, .39, .82) !important;
-}
 
-#searchMenu[hidden] {
-  height: 0% !important;
-  transform: translateY(-100%) !important;
-}
-
-.enableAnimations{
+.enableAnimations {
   transition: all 0s linear !important;
 }
+
 .textandbutton {
   display: flex !important;
   flex-direction: row !important;
@@ -877,7 +875,8 @@ input:checked+.slider:before {
 }
 
 /*rangeblur*/
-.sliderblur { /* wie heef hier chat gpt gebreukt >:( */
+.sliderblur {
+  /* wie heef hier chat gpt gebreukt >:( */
   -webkit-appearance: none;
   /* Override default CSS styles */
   appearance: none;
@@ -891,7 +890,7 @@ input:checked+.slider:before {
   margin: 5px !important;
 }
 
-.enableAnimations .sliderblur{
+.enableAnimations .sliderblur {
   -webkit-transition: .2s;
   transition: opacity .2s;
 }
@@ -1348,7 +1347,8 @@ a.js-btn-messages.topnav__btn:hover {
 .enableAnimations #shortcutsMenu,
 .enableAnimations #coursesMenu,
 .enableAnimations #linksMenu,
-.enableAnimations #notifsMenu {
+.enableAnimations #notifsMenu,
+.enableAnimations #searchMenu {
   animation: flyInFromTop 0.15s ease forwards;
 }
 
@@ -1617,6 +1617,7 @@ button.wopi_files__button {
 .enableAnimations .card__container {
   transition: all ease-in-out 0.25s;
 }
+
 .card__container:hover {
   cursor: pointer !important;
   background-color: var(--color-base01) !important;
@@ -1641,7 +1642,7 @@ button.wopi_files__button {
   border: 2px solid var(--color-base02) !important;
 }
 
-.enableAnimations .card{
+.enableAnimations .card {
   transition: all 0.1s ease-in-out !important;
 }
 
@@ -1700,6 +1701,7 @@ div.smscCheckbox input[type=checkbox]:not(.loading):focus+label:before {
 .enableAnimations .topnav__menuitem--img {
   transition: background-position .15s ease-out, background-color .15s ease-out, margin .15s ease-out !important;
 }
+
 .topnav__menuitem--img:hover {
   background-position-x: 8px !important;
 }

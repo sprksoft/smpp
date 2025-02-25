@@ -17,7 +17,8 @@ const default_settings = {
   showplanner: true,
   name_override: null,
   show_plant: true,
-  smpp_logo: true
+  smpp_logo: true,
+  enableanimations: true
 };
 
 function get_config() {

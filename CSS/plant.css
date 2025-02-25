@@ -25,10 +25,12 @@
   flex: 1;
   height: 50px;
 }
+
 .enableAnimations .watering_button {
   transition: ease-in-out;
   transition-duration: 0.1s;
 }
+
 .watering_button:hover {
   background-color: var(--color-base03);
   border-color: var(--color-accent);
@@ -69,8 +71,10 @@
 
 .enableAnimations .glass-fill {
   transition: height 1.5s ease-in-out;
-  /* smooth transition */ /*lukas wat een stoeffer dat jij bent :/ */
+  /* smooth transition */
+  /*lukas wat een stoeffer dat jij bent :/ */
 }
+
 #removeButtonDiv {
   display: flex;
   flex-direction: row;
@@ -91,10 +95,12 @@
   margin-bottom: 10px;
   margin-left: 10px;
 }
+
 .enableAnimations #remove_button_info {
   transition: ease-in-out;
   transition-duration: 0.1s;
 }
+
 #removeplantButton {
   border: 3px solid var(--color-base03);
   background-color: var(--color-base02);
@@ -111,6 +117,7 @@
 .enableAnimations #removeplantButton {
   transition: all 0.2s ease-in-out;
 }
+
 #removeplantButton:hover {
   background-color: var(--color-base03);
   border-color: var(--color-accent);
@@ -143,6 +150,7 @@
   transition-delay: 0.2s;
   transition-timing-function: ease-in-out;
 }
+
 #plant_streak {
   color: var(--color-accent) !important;
   font-size: 50px !important;
@@ -153,21 +161,27 @@
   transition-duration: 0.4s;
 }
 
+#riseMask {
+  y: 0% !important;
+}
+
 /* Rising/draining effect */
 .enableAnimations #riseMask {
   transition: transform 0.4s cubic-bezier(.52, .56, .29, .98) !important;
+  y: 100% !important;
   /* Animate transform */
-  transform: translateY(100%);
   /* Start hidden at the bottom */
 }
+
 .enableAnimations #plant_the_plant_svg:hover #riseMask {
-  transform: translateY(0%);
+  transform: translateY(-125%);
   /* Rise up on hover */
 }
 
 #hand {
   fill: var(--color-base02);
 }
+
 .enableAnimations #hand {
   transition-duration: 0.3s;
 }

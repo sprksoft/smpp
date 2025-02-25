@@ -144,7 +144,7 @@ function scrape_goto() {
 }
 
 function do_qm(opener = "") {
-  let cmd_list = quick_cmd_list().concat(goto_items).concat(vakken).concat(links.concat(["home", "dmenu config", "quick add", "quick remove", "config", "toggle fancy scores", "unbloat", "clearsettings", "discord"]));
+  let cmd_list = quick_cmd_list().concat(goto_items).concat(vakken).concat(links.concat(["home", "dmenu config", "quick add", "quick remove", "config", "toggle fancy scores", "unbloat", "clearsettings", "discord", "toggle performance mode"]));
 
   dmenu(cmd_list, function (cmd) {
     switch (cmd) {
@@ -187,6 +187,9 @@ function do_qm(opener = "") {
       case "clearsettings":
         clearsettings();
         return;
+      case "toggle performance mode":
+        togglePerformanceMode();
+        return;
       default:
         break;
     }
@@ -228,7 +231,7 @@ document.addEventListener("keyup", function (e) {
 const topNav = document.querySelector("nav.topnav")
 if (topNav && document.querySelector("#dmenutooltip") == undefined) {
   const quickButton = document.createElement("button");
-  quickButton.title="Quick menu (je kan ook : gebruiken om het quick te openen)"
+  quickButton.title = "Quick menu (je kan ook : gebruiken om het quick te openen)"
   quickButton.id = "dmenutooltip" //TODO: change this to something more meaningful
   quickButton.className = "topnav__btn"
   quickButton.innerText = "Quick"
@@ -237,7 +240,7 @@ if (topNav && document.querySelector("#dmenutooltip") == undefined) {
   })
 
   const goGlChatButton = document.createElement("button");
-  goGlChatButton.title="Global chat (chat met iedereen die de extensie gebruikt)"
+  goGlChatButton.title = "Global chat (chat met iedereen die de extensie gebruikt)"
   goGlChatButton.id = "global_chat_button"
   goGlChatButton.className = "topnav__btn"
   goGlChatButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="3009 50 450 450" class="st1">
@@ -250,7 +253,7 @@ if (topNav && document.querySelector("#dmenutooltip") == undefined) {
   </g>
 </svg>
 `
-  goGlChatButton.addEventListener("click",open_global_chat)
+  goGlChatButton.addEventListener("click", open_global_chat)
   const secondItem = topNav.childNodes[2];
   topNav.insertBefore(quickButton, secondItem);
   topNav.insertBefore(goGlChatButton, secondItem);
