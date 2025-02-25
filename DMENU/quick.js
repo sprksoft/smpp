@@ -251,6 +251,6 @@ function createQuickMenuButton() {
     do_qm(quickButton);
   });
 
-  topNav.insertBefore(quickButton, topNav.querySelector(".topnav__btn--push-right"));
+  topNav.insertBefore(quickButton, topNav.childNodes[2]);
 }
 

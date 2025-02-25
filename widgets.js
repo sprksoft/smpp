@@ -194,7 +194,7 @@ function createWidgetEditModeButton(){
   btn.innerText="e";
   btn.title="Ga in/uit edit mode om de locatie van de widgets te veranderen.";
 
-  topNav.insertBefore(btn, topNav.querySelector(".topnav__btn--push-right"));
+  topNav.insertBefore(btn, topNav.childNodes[2]);
 }
 
 

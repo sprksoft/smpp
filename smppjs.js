@@ -1,6 +1,5 @@
 //java script komt hier je weet wel
 //ok - ldev
-//oke logis - andere ldev
 //oh ok, ik dacht in general.css - Jdev
 const default_theme = {
   color_accent: "#a3a2ec",
@@ -445,6 +444,7 @@ function set_theme(name) {
     apply_theme(theme, style)
   }
 }
+<<<<<<< HEAD
 function toggleSettings() {
   let win = document.getElementById("quickSettings");
 
@@ -804,8 +804,24 @@ function createSettingsButton() {
   return true;
 }
 
-function main() {
+function createSettings(){
+  let popup = document.getElementById("searchMenu");
+  if (!popup){
+    return false;
+  }
+  popup.addEventListener("change", store)
 
+  search_button = document.querySelector('.js-btn-search')
+  search_button.innerText = "Settings"
+  const popup_settings = document.getElementById("searchMenu");
+  popup_settings.innerHTML = popupsettingHTML
+  document.getElementById('backgroundfilebutton').addEventListener("click", openFileSelector)
+  load()
+
+  return true;
+}
+
+function main() {
   createWidgetSystem();
 
   let logoutButton = document.querySelector(".js-btn-logout");
@@ -825,10 +841,7 @@ function main() {
     document.querySelector('.topnav__btn--icon--search').parentElement?.remove();
     let notifsLabel = document.getElementById("notifsToggleLabel");
     if (notifsLabel) notifsLabel.innerText = "Toon pop-ups"; // Simplify text. (smartschool by default has a very long explanation that doesn't fit on screen)
-    createWidgetEditModeButton();
-    //TODO: fix the other buttons here.
   }
-
-  apply()
 }
+
 main()
