@@ -371,10 +371,23 @@ button.detail-todo-icon-and-color__icon {
   color: var(--color-text) !important;
 }
 
+.selected .evaluation-list-item__container__title {
+  font-weight: 700 !important;
+}
+
 .evaluation-list-item.selected {
   box-shadow: none !important;
   border-color: var(--color-accent) !important;
   background-color: var(--color-base02) !important;
+  color: var(--color-accent) !important;
+}
+
+.evaluation-list-item {
+  transition: none !important;
+}
+
+.enableAnimations .evaluation-list-item {
+  transition: all 0.1s ease-in-out !important;
 }
 
 button.evaluation-list-item {
@@ -472,6 +485,7 @@ button.icon-label-btn.js-icon-label-btn.icon-label-btn--linkbutton:hover {
   min-height: 23px;
   margin: 1px !important;
 }
+
 .enableAnimations .planner-element {
   transition: ease-in;
   transition-duration: 100ms;
@@ -579,10 +593,12 @@ button.btn.dropdown-button.js-course-dropdown {
   background-color: var(--color-base01) !important;
   border: 2px solid var(--color-base01) !important;
 }
+
 .enableAnimations .card-block {
   transition: ease-in-out !important;
   transition-duration: 0.2s !important;
 }
+
 .card-block:hover {
   background-color: var(--color-base02) !important;
   border-color: var(--color-accent) !important;

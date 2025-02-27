@@ -277,6 +277,7 @@ async function apply() {
     document.querySelector("#performanceModeTooltip")?.remove()
   } else {
     document.body.classList.remove("enableAnimations")
+
     const topNav = document.querySelector("nav.topnav")
     if (topNav && document.querySelector("#performanceModeTooltip") == undefined) {
       const performanceModeTooltip = document.createElement("button");
@@ -286,22 +287,23 @@ async function apply() {
       performanceModeTooltip.innerHTML = performanceModeSvg
       topNav.prepend(performanceModeTooltip)
     }
-    document.getElementById("background_image") ? document.getElementById("background_image").style.display = "none" : "pass"
-    if (overwrite_theme == 2) {
-      set_background();
-    } else if (overwrite_theme == 1) {
-      set_backgroundlink(backgroundLink)
-    }
-    let link_element = document.querySelector('link[rel="icon"]');
-    if (link_element) {
-      if (settingsData.smpp_logo) {
-        link_element.href = "https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/icon128.png";
-      } else {
-        link_element.href = "https://static1.smart-school.net/smsc/svg/favicon/favicon.svg";
-      }
+  }
+  document.getElementById("background_image") ? document.getElementById("background_image").style.display = "none" : "pass"
+  if (overwrite_theme == 2) {
+    set_background();
+  } else if (overwrite_theme == 1) {
+    set_backgroundlink(backgroundLink)
+  }
+  let iconElement = document.querySelector('link[rel="icon"]');
+  if (iconElement) {
+    if (settingsData.smpp_logo) {
+      iconElement.href = "https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/icon128.png";
+    } else {
+      iconElement.href = "https://static1.smart-school.net/smsc/svg/favicon/favicon.svg";
     }
   }
 }
+
 function storeTheme() {
   const themeData = {
     color_base00: document.getElementById("colorPicker1").value,
