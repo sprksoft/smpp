@@ -532,21 +532,16 @@ function createSettings(){
 
 function main() {
 
+  //createWidgetSystem();
+
   let logoutButton = document.querySelector(".js-btn-logout");
   if (logoutButton) logoutButton.innerHTML = changeLogoutText();
-
-  if (notifsText) {
-    notifsText.innerHTML = "Toon pop-ups";
-  }
-  if (document.querySelector('[data-go=""]')) {
-    document.querySelector('[data-go=""]').remove();
-  }
 
   let onHomePage = document.getElementById("container") !== null;
   if (createSettings()) {
 
     if (onHomePage){
-      createWidgetEditModeButton();
+      //createWidgetEditModeButton();
     }
     createGCButton();
     createQuickMenuButton();
