@@ -532,8 +532,6 @@ function createSettings(){
 
 function main() {
 
-  createWidgetSystem();
-
   let logoutButton = document.querySelector(".js-btn-logout");
   if (logoutButton) logoutButton.innerHTML = changeLogoutText();
 
