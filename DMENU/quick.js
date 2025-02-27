@@ -144,7 +144,7 @@ function scrape_goto() {
 }
 
 function do_qm(opener = "") {
-  let cmd_list = quick_cmd_list().concat(goto_items).concat(vakken).concat(links.concat(["home", "dmenu config", "quick add", "quick remove", "config", "toggle fancy scores", "unbloat", "clearsettings", "discord", "toggle performance mode"]));
+  let cmd_list = quick_cmd_list().concat(goto_items).concat(vakken).concat(links.concat(["home", "dmenu config", "quick add", "quick remove", "config", "toggle fancy scores", "unbloat", "clearsettings", "discord", "toggle performance mode", "dizzy"]));
 
   dmenu(cmd_list, function (cmd) {
     switch (cmd) {
@@ -189,6 +189,17 @@ function do_qm(opener = "") {
         return;
       case "toggle performance mode":
         togglePerformanceMode();
+        return;
+      case "dizzy":
+        const styleEl = document.createElement("style");
+        styleEl.innerText = `
+*{
+  transition: transform 10s !important;
+}
+*:hover{
+  transform: rotate(360deg) !important;
+}`;
+        document.body.appendChild(styleEl);
         return;
       default:
         break;
