@@ -514,28 +514,45 @@ function set_theme(name) {
     apply_theme(theme, style)
   }
 }
-function main() {
-  let logoutButton = document.getElementsByClassName("js-btn-logout")[0]
-  let notifsText = document.getElementById("notifsToggleLabel")
-  if (logoutButton) {
-    logoutButton.innerHTML = changeLogoutText();
-  }
-  if (notifsText) {
-    notifsText.innerHTML = "Toon pop-ups";
-  }
-  if (document.querySelector('[data-go=""]')) {
-    document.querySelector('[data-go=""]').remove();
-  }
+
+function createSettings(){
   let popup = document.getElementById("searchMenu");
-  if (popup != null) {
-    popup.addEventListener("change", store)
-    search_button = document.querySelector('.js-btn-search')
-    search_button.innerText = "Settings"
-    const popup_settings = document.getElementById("searchMenu");
-    popup_settings.innerHTML = popupsettingHTML
-    document.getElementById('backgroundfilebutton').addEventListener("click", openFileSelector)
-    load()
+  if (!popup){
+    return false;
   }
+  popup.addEventListener("change", store)
+
+  search_button = document.querySelector('.js-btn-search')
+  search_button.innerText = "Settings"
+  const popup_settings = document.getElementById("searchMenu");
+  popup_settings.innerHTML = popupsettingHTML
+  document.getElementById('backgroundfilebutton').addEventListener("click", openFileSelector)
+  load()
+
+  return true;
+}
+
+function main() {
+
+  //createWidgetSystem();
+
+  let logoutButton = document.querySelector(".js-btn-logout");
+  if (logoutButton) logoutButton.innerHTML = changeLogoutText();
+
+  let onHomePage = document.getElementById("container") !== null;
+  if (createSettings()) {
+
+    if (onHomePage){
+      //createWidgetEditModeButton();
+    }
+    createGCButton();
+    createQuickMenuButton();
+
+    document.querySelector('[data-go=""]')?.remove();
+    let notifsLabel = document.getElementById("notifsToggleLabel");
+    if (notifsLabel) notifsLabel.innerText = "Toon pop-ups"; // Simplify text. (smartschool by default has a very long explanation that doesn't fit on screen)
+  }
+
   apply()
 }
 main()
