@@ -1,8 +1,8 @@
 {
 	"manifest_version": 3,
 	"name": "Smartschool++",
-	"version": "3.1.1",
-	"description": "Enhance your smartschool experience with themes and more",
+	"version": "3.2.0",
+	"description": "Enhance your Smartschool experience with themes and more",
 	"homepage_url": "https://github.com/sprksoft/smpp",
 	"content_scripts": [
 		{
