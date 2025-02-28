@@ -242,8 +242,18 @@ button.btn.close-btn.btn--primary {
 }
 
 .header.js-header {
-  border-bottom-right-radius: 15px;
   border-radius: 15px !important;
+}
+
+.splitdetail__content .header.js-header {
+  border-bottom-right-radius: 0px !important;
+  border-bottom-left-radius: 0px !important;
+  margin-bottom: 5px !important;
+}
+
+.splitdetail-dialog .splitdetail__content__topbtns {
+  top: 5px !important;
+  right: 5px !important;
 }
 
 .splitdetail__content__topbtns {
@@ -669,4 +679,20 @@ h3.card-block__title.fluid-ui-heading.fluid-ui-heading--3 {
 .planned-element-type-label span {
   color: var(--color-text) !important;
   opacity: 0.7 !important;
+}
+
+.todo-column__container .todo-column__pinned .todo-column__pinned__title {
+  color: var(--color-text) !important;
+}
+
+.splitdetail.splitdetail-dialog.js-splitdetail {
+  z-index: 10 !important;
+}
+
+.dialog.js-dialog {
+  z-index: 11 !important;
+}
+
+.splitdetail-dialog .splitdetail__content__topbtns .splitdetail-top-btn {
+  background-color: var(--color-base01) !important;
 }

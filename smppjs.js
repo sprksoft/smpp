@@ -10,6 +10,7 @@ const default_theme = {
   color_base03: "#c78af0",
   color_text: "#ede3e3"
 }
+let settingsWindowIsHidden = true;
 
 if (browser == undefined) { var browser = chrome };
 
@@ -274,19 +275,8 @@ async function apply() {
   }
   if (enableanimations) {
     document.body.classList.add("enableAnimations")
-    document.querySelector("#performanceModeTooltip")?.remove()
   } else {
     document.body.classList.remove("enableAnimations")
-
-    const topNav = document.querySelector("nav.topnav")
-    if (topNav && document.querySelector("#performanceModeTooltip") == undefined) {
-      const performanceModeTooltip = document.createElement("button");
-      performanceModeTooltip.title = "Performance mode is enabled"
-      performanceModeTooltip.id = "performanceModeTooltip"
-      performanceModeTooltip.className = "topnav__btn"
-      performanceModeTooltip.innerHTML = performanceModeSvg
-      topNav.prepend(performanceModeTooltip)
-    }
   }
   document.getElementById("background_image") ? document.getElementById("background_image").style.display = "none" : "pass"
   if (overwrite_theme == 2) {
@@ -340,6 +330,7 @@ function store() {
   const weatherSelector = Number(document.getElementById("weatherSelector").value);
   const show_plant = document.getElementById("show_plant").checked;
   const smpp_logo = document.getElementById("smpp_logo").checked;
+  const enableAnimations = document.getElementById("performanceModeTooltip").checked;
   settingsData.profile = profileSelect;
   settingsData.halte = halte;
   settingsData.overwrite_theme = overwrite_theme;
@@ -355,7 +346,8 @@ function store() {
   settingsData.weatherSelector = weatherSelector;
   settingsData.show_plant = show_plant;
   settingsData.smpp_logo = smpp_logo;
-
+  settingsData.enableanimations = enableAnimations
+  document.getElementById("performanceModeInfo").innerHTML = settingsData.enableanimations ? `Toggle performance mode (disabled)` : `Toggle performance mode (enabled)`
   console.log(settingsData)
   if (settingsData.show_scores == undefined) {
     settingsData.show_scores = false;
@@ -438,6 +430,7 @@ function load() {
   const weatherSelector = document.getElementById("weatherSelector");
   const show_plant = document.getElementById("show_plant");
   const smpp_logo = document.getElementById("smpp_logo");
+  const enableAnimations = document.getElementById("performanceModeTooltip");
   profileSelect.value = settingsData.profile
   halte.checked = settingsData.halte
   overwrite_theme.value = settingsData.overwrite_theme
@@ -453,6 +446,8 @@ function load() {
   weatherSelector.value = settingsData.weatherSelector
   show_plant.checked = settingsData.show_plant;
   smpp_logo.checked = settingsData.smpp_logo;
+  enableAnimations.checked = settingsData.enableanimations;
+  document.getElementById("performanceModeInfo").innerHTML = settingsData.enableanimations ? `Toggle performance mode (disabled)` : `Toggle performance mode (enabled)`
   if (profileSelect.value == "custom") {
     loadCustomTheme()
   }
@@ -514,20 +509,70 @@ function set_theme(name) {
     apply_theme(theme, style)
   }
 }
+function openSettings() {
+  let win = document.getElementById("quickSettings");
 
-function createSettings(){
-  let popup = document.getElementById("searchMenu");
-  if (!popup){
+  if (win) {
+    win.classList.remove("qs-hidden")
+  } else {
+    createSettings();
+  }
+  load()
+  settingsWindowIsHidden = false;
+}
+function closeSettings() {
+  settingsWindowIsHidden = true;
+  let quickSettingsWindow = document.getElementById("quickSettings");
+  quickSettingsWindow.classList.add("qs-hidden");
+}
+function createSettings() {
+  let quickSettingsWindow = document.createElement("div")
+  quickSettingsWindow.id = "quickSettings"
+  quickSettingsWindow.addEventListener("change", store)
+  quickSettingsWindow.innerHTML = popupsettingHTML
+  quickSettingsWindow.style.left = (-270 / 3) + "px"
+  document.getElementById("quickSettingsButton").insertAdjacentElement("afterend", quickSettingsWindow);
+  document.getElementById('backgroundfilebutton').addEventListener("click", openFileSelector)
+  document.getElementById("performanceModeTooltipLabel").addEventListener("mouseover", function () {
+    document.getElementById("performanceModeInfo").style.opacity = "1"
+  });
+  document.getElementById("performanceModeTooltipLabel").addEventListener("mouseout", function () {
+    document.getElementById("performanceModeInfo").style.opacity = "0"
+  });
+
+  document.addEventListener("click", function (e) {
+    if (settingsWindowIsHidden) {
+      return
+    }
+    if (e.target.id == "quickSettings") {
+      return
+    }
+    if (quickSettingsWindow.contains(e.target)) {
+      return
+    }
+    if (e.target.id == "quickSettingsButton") {
+      return
+    }
+    closeSettings()
+  })
+}
+function createSettingsButton() {
+  let quickSettingsButtonWrapper = document.createElement("div")
+  quickSettingsButtonWrapper.id = "quickSettingsButtonWrapper"
+  quickSettingsButtonWrapper.classList.add("topnav__btn-wrapper")
+  let logoutButton = document.querySelector(".js-btn-logout")
+  if (!logoutButton) {
     return false;
   }
-  popup.addEventListener("change", store)
+  let topNav = document.querySelector("nav.topnav")
+  topNav.insertBefore(quickSettingsButtonWrapper, logoutButton);
 
-  search_button = document.querySelector('.js-btn-search')
-  search_button.innerText = "Settings"
-  const popup_settings = document.getElementById("searchMenu");
-  popup_settings.innerHTML = popupsettingHTML
-  document.getElementById('backgroundfilebutton').addEventListener("click", openFileSelector)
-  load()
+  let quickSettingsButton = document.createElement("button")
+  quickSettingsButton.id = "quickSettingsButton"
+  quickSettingsButton.classList.add("topnav__btn")
+  quickSettingsButton.innerText = "Settings"
+  quickSettingsButton.addEventListener("click", openSettings)
+  quickSettingsButtonWrapper.appendChild(quickSettingsButton)
 
   return true;
 }
@@ -540,15 +585,16 @@ function main() {
   if (logoutButton) logoutButton.innerHTML = changeLogoutText();
 
   let onHomePage = document.getElementById("container") !== null;
-  if (createSettings()) {
+  if (createSettingsButton()) {
 
-    if (onHomePage){
+    if (onHomePage) {
       //createWidgetEditModeButton();
     }
     createGCButton();
     createQuickMenuButton();
 
     document.querySelector('[data-go=""]')?.remove();
+    document.querySelector('.topnav__btn--icon--search').parentElement?.remove();
     let notifsLabel = document.getElementById("notifsToggleLabel");
     if (notifsLabel) notifsLabel.innerText = "Toon pop-ups"; // Simplify text. (smartschool by default has a very long explanation that doesn't fit on screen)
   }

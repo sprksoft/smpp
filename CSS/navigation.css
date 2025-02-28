@@ -42,8 +42,29 @@
   transition: none !important
 }
 
-.topnav__btn#performanceModeTooltip {
-  padding: 2px 2px 2px 2px !important;
+.performanceModeTooltipLabel {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  padding: 2px;
+  background-color: var(--color-base01);
+  border-radius: 999px;
+}
+
+.performanceModeTooltipLabel input {
+  opacity: 0;
+  height: 0px;
+  width: 0px;
+}
+
+#performanceModeTooltip:checked+svg {
+  fill: var(--color-base03) !important;
+}
+
+.performanceModeTooltipLabel {
+  fill: var(--color-accent) !important;
 }
 
 .enableAnimations .topnav__btn,
