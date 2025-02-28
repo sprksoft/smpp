@@ -67,7 +67,6 @@ const popupsettingHTML = `
         <option value="white">Off White</option>
         <option value="custom">Custom Theme</option>
         <option value="ldev">Dark Sands</option>
-        <option value="darksands">Darker sands</option>
         <option value="birb">Midnight Sapphire</option>
         <option value="stalker">Ruby Eclipse</option>
         <option value="chocolate">Dark Mocha</option>

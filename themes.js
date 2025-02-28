@@ -43,18 +43,6 @@ const themes = {
     "--darken-background": "rgba(0,0,0,0.25)",
     "--color-splashtext": "#ffd5a0"
   },
-  "darksands": {
-    "--color-accent": "#ffd5a0",
-    "--color-text": "#c2bab2",
-    "--color-base00": "#191817",
-    "--color-base01": "#232020",
-    "--color-base02": "#353232",
-    "--color-base03": "#4a4747",
-    "--color-popup-border": "var(--color-base02)",
-    "--color-hover-border": "var(--color-base03)",
-    "--loginpage-image": "url(https://i.redd.it/yfssdsfosao11.png)",
-    "--darken-background": "rgba(0,0,0,0.25)",
-  },
   "purple": {
     "--color-accent": "#bd4fb3",
     "--color-text": "#d9cdff",
