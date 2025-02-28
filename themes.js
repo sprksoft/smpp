@@ -1,7 +1,7 @@
 const themes = {
   "default": {
     "--color-accent": "#c9d2e6",
-    "--color-splashtext": "#c9d2e6",
+    "--color-splashtext": "var(--color-accent)",
     "--color-text": "#C2BAB2",
     "--color-base00": "#191817",
     "--color-base01": "#232020",
@@ -31,18 +31,29 @@ const themes = {
     "--color-splashtext": "#080a12"
   },
   "ldev": {
-    "--color-accent": "#ffd5a0",
-    "--color-text": "#C2BAB2",
-    "--color-base00": "#191817",
-    "--color-base01": "#232020",
-    "--color-base02": "#3f3c3b",
-    "--color-base03": "#5b5756",
+    "--color-accent": "oklch(90% 0.069 70)",
+    "--color-text": "oklch(80% 0.004 90)",
+    "--color-base00": "oklch(15% 0.020 70)",
+    "--color-base01": "oklch(20% 0.005 70)",
+    "--color-base02": "oklch(24% 0.008 70)",
+    "--color-base03": "oklch(30% 0.010 70)",
     "--color-popup-border": "var(--color-base02)",
     "--color-hover-border": "var(--color-base03)",
-    "--color-homepage-sidebars-bg": "var(--color-base00)",
     "--loginpage-image": "url(https://i.redd.it/yfssdsfosao11.png)",
     "--darken-background": "rgba(0,0,0,0.25)",
     "--color-splashtext": "#ffd5a0"
+  },
+  "darksands": {
+    "--color-accent": "#ffd5a0",
+    "--color-text": "#c2bab2",
+    "--color-base00": "#191817",
+    "--color-base01": "#232020",
+    "--color-base02": "#353232",
+    "--color-base03": "#4a4747",
+    "--color-popup-border": "var(--color-base02)",
+    "--color-hover-border": "var(--color-base03)",
+    "--loginpage-image": "url(https://i.redd.it/yfssdsfosao11.png)",
+    "--darken-background": "rgba(0,0,0,0.25)",
   },
   "purple": {
     "--color-accent": "#bd4fb3",

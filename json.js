@@ -67,6 +67,7 @@ const popupsettingHTML = `
         <option value="white">Off White</option>
         <option value="custom">Custom Theme</option>
         <option value="ldev">Dark Sands</option>
+        <option value="darksands">Darker sands</option>
         <option value="birb">Midnight Sapphire</option>
         <option value="stalker">Ruby Eclipse</option>
         <option value="chocolate">Dark Mocha</option>
@@ -194,7 +195,7 @@ const weatherHTML = `<div class="weatherdiv">
 	<p class="weather-temperature weather-temperatureBig"></p>
 	<div class="weather-humwind weather-humwindBig">
   <div class="big_icon_weather_big">
-		<svg xmlns="http://www.w3.org/2000/svg" id="layer1" style="margin: 0% 11% 0% 11%" data-name="Laag 2" 
+		<svg xmlns="http://www.w3.org/2000/svg" id="layer1" style="margin: 0% 11% 0% 11%" data-name="Laag 2"
 			viewBox="0 0 29.83 24.41">
 			<g id="Laag_1-2" data-name="Laag 1">
 				<g>
