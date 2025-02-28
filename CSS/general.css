@@ -722,6 +722,7 @@ input:checked+.slider:before {
   position: absolute;
   top: 27px;
   padding: 5px !important;
+  box-shadow: 0 0.333rem 1.333rem rgba(0,0,0,0.5); /*This is copied from smartschool hun code van anderen dropdowns don't ask questions*/
 }
 
 .enableAnimations {
