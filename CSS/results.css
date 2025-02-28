@@ -3,28 +3,6 @@
   color: var(--color-text) !important;
 }
 
-
-.smsc-svg--bullet_square_green--24 {
-  background-image: none !important;
-  background-color: var(--color-green) !important;
-}
-
-.smsc-svg--bullet_square_blue--24 {
-  background-image: none !important;
-  background-color: var(--color-blue) !important;
-}
-
-.smsc-svg--bullet_square_orange--24 {
-  background-image: none !important;
-  background-color: var(--color-orange) !important;
-}
-
-.smsc-svg--bullet_square_red--24 {
-  background-image: none !important;
-  background-color: var(--color-red) !important;
-}
-
-
 .wide-toolbar__item:after,
 .wide-toolbar__item:before {
   display: none !important;
@@ -84,11 +62,6 @@
   background-color: transparent !important;
 }
 
-.results-evaluations.js-evaluations-page.js-routehandler.results-evaluation--wide,
-.table-page__content-container.js-table-page-content-container.smsc-container.smsc-container--main,
-.smsc-container.smsc-container--main.results-goals-overview__content,
-.leerplannen-overview.smsc-container.smsc-container--main,
-.reports-overview.smsc-container.smsc-container--main,
 upload-app.smsc-container.smsc-container--flex,
 .course-module-planner__header,
 .course-module-planner,
@@ -131,6 +104,19 @@ upload-app.smsc-container.smsc-container--flex,
   background-color: var(--color-base01) !important;
   color: var(--color-text) !important;
   border-color: var(--color-base02) !important;
+}
+
+button.goals-filter__item.selected {
+  background-color: var(--color-base02) !important;
+}
+
+.todo-column [listview] .todo-column__row.active-row {
+  border-radius: 15px !important;
+  background-color: var(--color-base01) !important;
+}
+
+.todo-column [listview] .todo-column__row.active-row .todo-column__actions-cell {
+  background-color: var(--color-base02) !important;
 }
 
 .evaluation-list-item:hover:not(.evaluation-list-item.selected),

@@ -213,8 +213,7 @@
   border-color: var(--color-base03) !important;
 }
 
-div.dialog__button-bar>button.btn.js-btn:not(.btn--primary),
-button.btn.close-btn.btn--primary {
+.btn--danger {
   color: var(--color-red) !important;
 }
 
@@ -686,11 +685,7 @@ h3.card-block__title.fluid-ui-heading.fluid-ui-heading--3 {
 }
 
 .splitdetail.splitdetail-dialog.js-splitdetail {
-  z-index: 10 !important;
-}
-
-.dialog.js-dialog {
-  z-index: 11 !important;
+  gap: 6px !important;
 }
 
 .splitdetail-dialog .splitdetail__content__topbtns .splitdetail-top-btn {

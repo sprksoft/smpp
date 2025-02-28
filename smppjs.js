@@ -458,17 +458,19 @@ function set_background() {
   browser.storage.local.get('backgroundImage', (result) => {
     style.setProperty('--loginpage-image', `none`);
     style.setProperty('--background-color', `transparent`);
+
     let img = document.getElementById("background_image") || document.createElement('img');
     img.id = "background_image";
+    img.style.backgroundColor = "var(--color-base00)"
     img.style.position = 'absolute';
     img.style.top = '0';
     img.style.left = '0';
-    img.style.width = '100vw';
-    img.style.height = '100vh';
+    img.style.width = '101%';
+    img.style.height = '101%';
     img.style.objectFit = 'cover';
     img.style.zIndex = -1;
     img.style.display = "block";
-    img.src = result.backgroundImage;
+    if (result.backgroundImage) img.src = result.backgroundImage;
     if (!document.getElementById("background_image")) {
       document.body.appendChild(img);
     }
@@ -477,7 +479,20 @@ function set_background() {
 
 function set_backgroundlink(background) {
   let style = document.documentElement.style;
-  style.setProperty('--loginpage-image', `url(${background})`);
+  if (!background) {
+    style.setProperty('--loginpage-image', 'aaaaa');
+    console.log("no background")
+    return;
+  }
+  let img = new Image();
+  img.src = background;
+  img.onload = () => {
+    style.setProperty('--loginpage-image', `url(${background})`);
+    console.log("works")
+  };
+  img.onerror = () => {
+    console.log("error")
+  };
 }
 
 function set_theme(name) {
@@ -509,53 +524,68 @@ function set_theme(name) {
     apply_theme(theme, style)
   }
 }
+function toggleSettings() {
+  let win = document.getElementById("quickSettings");
+
+  if (win && !settingsWindowIsHidden) {
+    closeSettings();
+  } else {
+    openSettings();
+  }
+}
+
 function openSettings() {
+  let win = document.getElementById("quickSettings");
+  if (!win) {
+    createSettings();
+    win = document.getElementById("quickSettings");
+  }
+  win.classList.remove("qs-hidden");
+  load();
+  settingsWindowIsHidden = false;
+}
+
+function closeSettings() {
   let win = document.getElementById("quickSettings");
 
   if (win) {
-    win.classList.remove("qs-hidden")
-  } else {
-    createSettings();
+    win.classList.add("qs-hidden");
   }
-  load()
-  settingsWindowIsHidden = false;
-}
-function closeSettings() {
+
   settingsWindowIsHidden = true;
-  let quickSettingsWindow = document.getElementById("quickSettings");
-  quickSettingsWindow.classList.add("qs-hidden");
 }
+
 function createSettings() {
-  let quickSettingsWindow = document.createElement("div")
-  quickSettingsWindow.id = "quickSettings"
-  quickSettingsWindow.addEventListener("change", store)
-  quickSettingsWindow.innerHTML = popupsettingHTML
-  quickSettingsWindow.style.left = (-270 / 3) + "px"
+  let quickSettingsWindow = document.createElement("div");
+  quickSettingsWindow.id = "quickSettings";
+  quickSettingsWindow.addEventListener("change", store);
+  quickSettingsWindow.innerHTML = popupsettingHTML;
+  quickSettingsWindow.style.left = (-270 / 3) + "px";
   document.getElementById("quickSettingsButton").insertAdjacentElement("afterend", quickSettingsWindow);
-  document.getElementById('backgroundfilebutton').addEventListener("click", openFileSelector)
-  document.getElementById("performanceModeTooltipLabel").addEventListener("mouseover", function () {
-    document.getElementById("performanceModeInfo").style.opacity = "1"
+
+  document.getElementById("backgroundfilebutton").addEventListener("click", openFileSelector);
+  document.getElementById("performanceModeTooltipLabel").addEventListener("mouseover", () => {
+    document.getElementById("performanceModeInfo").style.opacity = "1";
+    document.getElementById("performanceModeInfo").style.zIndex = "2";
   });
-  document.getElementById("performanceModeTooltipLabel").addEventListener("mouseout", function () {
-    document.getElementById("performanceModeInfo").style.opacity = "0"
+  document.getElementById("performanceModeTooltipLabel").addEventListener("mouseout", () => {
+    document.getElementById("performanceModeInfo").style.opacity = "0";
+    document.getElementById("performanceModeInfo").style.zIndex = "-1";
   });
 
-  document.addEventListener("click", function (e) {
-    if (settingsWindowIsHidden) {
-      return
+  document.addEventListener("click", (e) => {
+    if (settingsWindowIsHidden) return;
+    if (
+      e.target.id === "quickSettings" ||
+      quickSettingsWindow.contains(e.target) ||
+      e.target.id === "quickSettingsButton"
+    ) {
+      return;
     }
-    if (e.target.id == "quickSettings") {
-      return
-    }
-    if (quickSettingsWindow.contains(e.target)) {
-      return
-    }
-    if (e.target.id == "quickSettingsButton") {
-      return
-    }
-    closeSettings()
-  })
+    closeSettings();
+  });
 }
+
 function createSettingsButton() {
   let quickSettingsButtonWrapper = document.createElement("div")
   quickSettingsButtonWrapper.id = "quickSettingsButtonWrapper"
@@ -571,9 +601,8 @@ function createSettingsButton() {
   quickSettingsButton.id = "quickSettingsButton"
   quickSettingsButton.classList.add("topnav__btn")
   quickSettingsButton.innerText = "Settings"
-  quickSettingsButton.addEventListener("click", openSettings)
+  quickSettingsButton.addEventListener("click", toggleSettings);
   quickSettingsButtonWrapper.appendChild(quickSettingsButton)
-
   return true;
 }
 

@@ -30,6 +30,10 @@ html {
   --profile-picture: url("");
 }
 
+html {
+  background-color: var(--color-base00) !important;
+}
+
 body,
 button,
 input,
@@ -74,6 +78,7 @@ intradesk-app#smscMain,
 div#lvs_wrapper_container,
 .online-session__list-page.smscMain--tb--main.smscMain,
 #js-wiki-home.smscMain {
+  position: relative !important;
   height: 100% !important;
   width: 100% !important;
 }
@@ -87,7 +92,11 @@ div#lvs_wrapper_container,
 }
 
 #modmessages {
-  margin-top: 10px !important;
+  height: calc(100vh - 27px) !important;
+}
+
+#smscMain:has(#modmessages) {
+  overflow: hidden !important;
 }
 
 .tile {
@@ -718,7 +727,7 @@ input:checked+.slider:before {
   overflow: visible;
   background: var(--color-base00);
   border: var(--border-size) solid var(--color-popup-border);
-  z-index: 21;
+  z-index: 777;
   position: absolute;
   top: 27px;
   padding: 5px !important;
@@ -1419,15 +1428,16 @@ textarea.form-item__input-field.form-item__input-field--textarea {
   background-color: var(--color-base01) !important;
 }
 
-.period_button{
+.period_button {
   background-color: var(--color-base02) !important;
   color: var(--color-accent) !important;
 }
-.period_button:hover{
+
+.period_button:hover {
   background-color: var(--color-base03) !important;
 }
 
-.lvs_btn.small.w50.top.right.green{
+.lvs_btn.small.w50.top.right.green {
   background: var(--color-base02) !important;
   color: var(--color-accent) !important;
   border-color: transparent !important;
@@ -1842,7 +1852,7 @@ div#folders {
 #performanceModeInfo {
   left: 10px;
   max-width: 220px;
-  top: -10px;
+  top: -7px;
   background-color: var(--color-base02);
   border: 2px solid var(--color-accent);
   padding: 5px;
@@ -1850,10 +1860,12 @@ div#folders {
   position: absolute;
   opacity: 0;
   text-align: center;
+  z-index: -1;
 }
 
 .enableAnimations #performanceModeInfo {
-  transition-duration: 0.2s;
-  transition-delay: 0.2s;
+  transition-duration: 0.3s;
+  transition-delay: 0.1s;
   transition-timing-function: ease-in-out;
+  transition-property: all;
 }

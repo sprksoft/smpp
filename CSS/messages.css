@@ -127,8 +127,7 @@ button.modern-message__action.modern-message__action--delete:hover,
 }
 
 #smscTopContainer {
-  position: sticky !important;
-  z-index: 10 !important;
+  z-index: auto !important;
   top: 0 !important;
 }
 
@@ -137,7 +136,6 @@ intradesk-app#smscMain {
 }
 
 nav.topnav {
-  position: sticky !important;
   top: 0 !important;
 }
 
@@ -146,7 +144,9 @@ body.modern-ui .homepage__block {
 }
 
 #smscMain {
-  flex-grow: 1 !important;
+  height: 100% !important;
+  max-height: 100% !important;
+  position: relative !important;
   overflow: auto !important;
   display: flex !important;
   flex-direction: column !important;

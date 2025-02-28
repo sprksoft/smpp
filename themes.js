@@ -178,7 +178,7 @@ const themes = {
     "--color-splashtext": "#e1bbef"
   },
   "pink": {
-    "--color-accent": "#ba4882",
+    "--color-accent": "#bf4183",
     "--color-text": "#26151f",
     "--color-base00": "#f7ccd5",
     "--color-base01": "#fbbecc",
@@ -187,7 +187,8 @@ const themes = {
     "--loginpage-image": "url(https://raw.githubusercontent.com/NightFlavor/smpp-images/refs/heads/main/pxfuel.jpg)",
     "--darken-background": "rgba(241, 203, 218, 0.35)",
     "--color-homepage-sidebars-bg": "rgba(3, 2, 4, 0.25)",
-    "--color-splashtext": "#ba4882"
+    "--color-homepage-sidebars-bg": "oklch(95.58% 0.0337 351.52 / 10%)",
+    "--color-splashtext": "#bf4183"
   },
 
   "custom": { "d": "d" }

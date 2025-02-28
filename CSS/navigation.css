@@ -50,7 +50,12 @@
   top: 5px;
   padding: 2px;
   background-color: var(--color-base01);
+  border: 2px solid transparent;
   border-radius: 999px;
+}
+
+.enableAnimations .performanceModeTooltipLabel {
+  transition: all 0.2s ease-in-out;
 }
 
 .performanceModeTooltipLabel input {
@@ -65,6 +70,10 @@
 
 .performanceModeTooltipLabel {
   fill: var(--color-accent) !important;
+}
+
+.performanceModeTooltipLabel:hover {
+  border-color: var(--color-base03) !important;
 }
 
 .enableAnimations .topnav__btn,

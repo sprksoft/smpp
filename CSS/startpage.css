@@ -1,5 +1,5 @@
 body {
-  background-color: var(--background-color) !important;
+  background-color: var(--base-00) !important;
   color: var(--color-text);
 }
 
