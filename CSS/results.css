@@ -298,9 +298,9 @@ textarea,
 }
 
 .blob__text,
-.feedback__text,
-.evaluation-graphicprogress-ringdescription,
-.evaluation-graphicprogress-ringvalue {
+span.feedback__text,
+span.evaluation-graphic__progress-ring__description,
+span.evaluation-graphic__progress-ring__value {
   color: var(--color-text) !important;
 }
 
