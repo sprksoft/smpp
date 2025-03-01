@@ -297,7 +297,10 @@ textarea,
   color: var(--color-accent) !important;
 }
 
-.blob__text {
+.blob__text,
+.feedback__text,
+.evaluation-graphicprogress-ringdescription,
+.evaluation-graphicprogress-ringvalue {
   color: var(--color-text) !important;
 }
 
