@@ -77,8 +77,7 @@
 	},
 	"browser_specific_settings": {
 		"gecko": {
-			"id": "smpp@sprksoft",
-			"update_url": "https://ldev.eu.org/firefox/updates.json"
+			"id": "smpp@sprksoftteam"
 		}
 	},
 	"background": {
