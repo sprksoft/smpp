@@ -358,3 +358,7 @@ td.cell.cell--evaluation.js-cell-evaluation.evaluation:hover {
   color: var(--color-text) !important;
   font-weight: 600 !important;
 }
+
+.progress-ring__content{
+  color: var(--color-text) !important;
+}
