@@ -228,8 +228,11 @@ function get_theme_as_query_string(theme, qvars) {
   let output = "";
 
   for (qvar of qvars) {
-    let tvar = get_theme_var(theme, "--" + qvar.replace("_", "-"));
-    output += `&${qvar}=${tvar.split("#")[1]}`;
+    let tvar = get_theme_var(theme, "--" + qvar);
+    if (tvar.startsWith("#")){
+      tvar = tvar.substring(1);
+    }
+    output += `&${qvar}=${tvar]}`;
   }
 
   return output;
