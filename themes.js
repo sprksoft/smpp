@@ -31,6 +31,13 @@ const themes = {
     "--color-splashtext": "#080a12"
   },
   "ldev": {
+
+    "--color-accent": "oklch(90% 0.069 70)",
+    "--color-text": "oklch(80% 0.004 90)",
+    "--color-base00": "oklch(15% 0.005 70)",
+    "--color-base01": "oklch(20% 0.005 70)",
+    "--color-base02": "oklch(24% 0.005 70)",
+    "--color-base03": "oklch(30% 0.005 70)"
     "--color-accent": "oklch(90% 0.069 70)",
     "--color-text": "oklch(80% 0.004 90)",
     "--color-base00": "oklch(15% 0.020 70)",
