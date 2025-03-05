@@ -711,7 +711,7 @@ input:checked+.slider:before {
 }
 
 #quickSettingsButton {
-  color: var(--color-text) !important;
+  color: var(--color-accent) !important;
 }
 
 #quickSettings {
@@ -1027,6 +1027,13 @@ option:hover {
 
 .st1,
 .st2 {
+  fill: var(--color-text) !important;
+}
+#dmenutooltip{
+  color: var(--color-accent) !important;
+}
+
+.st5{
   fill: var(--color-accent) !important;
 }
 

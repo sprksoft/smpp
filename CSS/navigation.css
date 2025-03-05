@@ -34,9 +34,9 @@
   padding: 2px 10px 2px 10px !important;
   height: 28px !important;
   line-height: initial !important;
-  color: var(--color-accent) !important;
+  color: var(--color-text) !important;
   font-weight: bold !important;
-  text-decoration-color: var(--color-accent) !important;
+  text-decoration-color: var(--color-text) !important;
   text-decoration-thickness: 2px !important;
   width: auto !important;
   transition: none !important
