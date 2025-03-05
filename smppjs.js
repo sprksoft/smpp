@@ -606,6 +606,24 @@ function createSettingsButton() {
   return true;
 }
 
+function zwieber() {
+  let zwieber = document.createElement("h1");
+  zwieber.innerText = "@@zwieberr gn";
+  zwieber.style = `
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: calc(50% - 100px);
+  font-size: 200px;
+  z-index: 1000;
+  text-align: center;
+  margin: 0px;
+  opacity: 0.05;
+  pointer-events: none;
+  `;
+  document.body.appendChild(zwieber);
+}
+
 function main() {
 
   //createWidgetSystem();
@@ -629,5 +647,7 @@ function main() {
   }
 
   apply()
+
+  zwieber();
 }
 main()
