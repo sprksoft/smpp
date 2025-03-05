@@ -10,7 +10,7 @@ function make_iframe() {
   else {
     var placeholderTextGlChat = username_override;
   }
-  const query_string = get_theme_as_query_string(current_theme, ["color_base00", "color_base01", "color_base02", "color_base03", "color_accent", "color_text"]);
+  const query_string = get_theme_as_query_string(current_theme, ["color-base00", "color-base01", "color-base02", "color-base03", "color-accent", "color-text"]);
   const GlCHatplaceHTML = `
   <iframe style="width:100%; height:100%; border:none "src = 'https://ldev.eu.org/smpp/gc/v1?placeholder=${placeholderTextGlChat}${query_string}'></iframe>
     `;

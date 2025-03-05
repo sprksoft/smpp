@@ -33,10 +33,10 @@ const themes = {
   "ldev": {
     "--color-accent": "oklch(90% 0.069 70)",
     "--color-text": "oklch(80% 0.004 90)",
-    "--color-base00": "oklch(15% 0.020 70)",
+    "--color-base00": "oklch(15% 0.005 70)",
     "--color-base01": "oklch(20% 0.005 70)",
-    "--color-base02": "oklch(24% 0.008 70)",
-    "--color-base03": "oklch(30% 0.010 70)",
+    "--color-base02": "oklch(24% 0.005 70)",
+    "--color-base03": "oklch(30% 0.005 70)",
     "--color-popup-border": "var(--color-base02)",
     "--color-hover-border": "var(--color-base03)",
     "--loginpage-image": "url(https://i.redd.it/yfssdsfosao11.png)",
@@ -228,8 +228,11 @@ function get_theme_as_query_string(theme, qvars) {
   let output = "";
 
   for (qvar of qvars) {
-    let tvar = get_theme_var(theme, "--" + qvar.replace("_", "-"));
-    output += `&${qvar}=${tvar.split("#")[1]}`;
+    let tvar = get_theme_var(theme, "--" + qvar);
+    if (tvar.startsWith("#")){
+      tvar = tvar.substring(1);
+    }
+    output += `&${qvar}=${tvar}`;
   }
 
   return output;
