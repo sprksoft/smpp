@@ -31,19 +31,12 @@ const themes = {
     "--color-splashtext": "#080a12"
   },
   "ldev": {
-
     "--color-accent": "oklch(90% 0.069 70)",
     "--color-text": "oklch(80% 0.004 90)",
     "--color-base00": "oklch(15% 0.005 70)",
     "--color-base01": "oklch(20% 0.005 70)",
     "--color-base02": "oklch(24% 0.005 70)",
-    "--color-base03": "oklch(30% 0.005 70)"
-    "--color-accent": "oklch(90% 0.069 70)",
-    "--color-text": "oklch(80% 0.004 90)",
-    "--color-base00": "oklch(15% 0.020 70)",
-    "--color-base01": "oklch(20% 0.005 70)",
-    "--color-base02": "oklch(24% 0.008 70)",
-    "--color-base03": "oklch(30% 0.010 70)",
+    "--color-base03": "oklch(30% 0.005 70)",
     "--color-popup-border": "var(--color-base02)",
     "--color-hover-border": "var(--color-base03)",
     "--loginpage-image": "url(https://i.redd.it/yfssdsfosao11.png)",
@@ -239,7 +232,7 @@ function get_theme_as_query_string(theme, qvars) {
     if (tvar.startsWith("#")){
       tvar = tvar.substring(1);
     }
-    output += `&${qvar}=${tvar]}`;
+    output += `&${qvar}=${tvar}`;
   }
 
   return output;
