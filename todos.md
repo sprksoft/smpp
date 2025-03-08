@@ -1,7 +1,4 @@
 # important
-- [x] splashtext on login page
-- [ ] some dmenu funny shortcuts
-- [x] plant
 - [ ] 
 
 # not a concern

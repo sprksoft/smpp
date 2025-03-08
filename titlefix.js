@@ -76,22 +76,16 @@ function title_prefix() {
       return "Formulieren"
     case "studentcard":
       return "Mijn leerlingfiche"
-
     case "manual":
       return "Handleiding"
-
     case "timetable":
       return "Lesrooster"
-
     case "intradesk":
       return "Intradesk"
-
     case "online-session":
       return "Online sessies"
-
     case "lvs":
       return "Leerlingvolgsysteem"
-
     case "":
       return "Start - " + subdomain
     default:

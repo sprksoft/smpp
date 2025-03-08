@@ -1,6 +1,15 @@
-.wide-toolbar {
+.wide-toolbar.js-wide-toolbar {
+  justify-content: space-between !important;
   background-color: var(--color-base00) !important;
   color: var(--color-text) !important;
+  padding-top: 0px !important;
+  background: var(--darken-background) !important;
+  height: 90% !important;
+  align-self: center !important;
+  padding: 7px !important;
+  margin-left: 4px !important;
+  border-radius: 22px !important;
+  width: 120px !important;
 }
 
 .wide-toolbar__item:after,
@@ -13,7 +22,17 @@
   color: var(--color-text) !important;
   border: var(--border-size) solid var(--color-base02) !important;
   border-radius: 15px !important;
-  margin: 10px 7px 0px 7px !important;
+  margin: 0px !important;
+  padding: 0 0 !important;
+  height: 106px !important;
+  justify-content: center !important;
+}
+
+.wide-toolbar__item__icon {
+  width: 3.33rem !important;
+  height: 3.33rem !important;
+  background-size: 3.33rem !important;
+  background-repeat: no-repeat !important;
 }
 
 .wide-toolbar__item--selected {
@@ -26,8 +45,11 @@
   background-color: var(--color-base02) !important;
 }
 
-.wide-toolbar__item:hover {
+.wide-toolbar__item__name {
+  font-size: 16px !important;
+}
 
+.wide-toolbar__item:hover {
   border-color: var(--color-accent) !important;
   background-color: var(--color-base02) !important;
 }
@@ -77,10 +99,33 @@ upload-app.smsc-container.smsc-container--flex,
 
 .side-panel__panel {
   background-color: var(--color-base00) !important;
+  width: 100% !important;
 }
 
-.results-evaluations.js-evaluations-page.js-routehandler.results-evaluation--small {
-  background-color: var(--color-base00) !important;
+.results-goals-overview__content {
+  width: 100% !important;
+}
+
+button.reset-filters-btn.reset-filters-btn--hidden {
+  height: 0px !important;
+}
+
+.evaluation__content:active,
+.evaluation__content[active] {
+  border-color: var(--color-accent) !important;
+}
+
+.table-page .table-page__container__wrapper__table .cell {
+  border: 2px solid var(--color-base02) !important;
+}
+
+.reset-filters-btn-container {
+  margin-bottom: 0px !important;
+}
+
+.js-side-panel-next-button,
+.js-side-panel-prev-button {
+  display: none !important;
 }
 
 .results-evaluations .results-evaluations__filters {

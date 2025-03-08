@@ -178,7 +178,7 @@ const themes = {
   },
   "pink": {
     "--color-accent": "#bf4183",
-    "--color-text": "#26151f",
+    "--color-text": "#6c1c48",
     "--color-base00": "#f7ccd5",
     "--color-base01": "#fbbecc",
     "--color-base02": "#e7a2ba",
@@ -229,7 +229,7 @@ function get_theme_as_query_string(theme, qvars) {
 
   for (qvar of qvars) {
     let tvar = get_theme_var(theme, "--" + qvar);
-    if (tvar.startsWith("#")){
+    if (tvar.startsWith("#")) {
       tvar = tvar.substring(1);
     }
     output += `&${qvar}=${tvar}`;
