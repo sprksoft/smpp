@@ -178,11 +178,11 @@ const themes = {
   },
   "pink": {
     "--color-accent": "#bf4183",
-    "--color-text": "#26151f",
+    "--color-text": "#6c1c48",
     "--color-base00": "#f7ccd5",
     "--color-base01": "#fbbecc",
-    "--color-base02": "#e7a2ba",
-    "--color-base03": "#e98daf",
+    "--color-base02": "#f0a8c1",
+    "--color-base03": "#ea8eb0",
     "--loginpage-image": "url(https://raw.githubusercontent.com/NightFlavor/smpp-images/refs/heads/main/pxfuel.jpg)",
     "--darken-background": "rgba(241, 203, 218, 0.35)",
     "--color-homepage-sidebars-bg": "rgba(3, 2, 4, 0.25)",
@@ -229,7 +229,7 @@ function get_theme_as_query_string(theme, qvars) {
 
   for (qvar of qvars) {
     let tvar = get_theme_var(theme, "--" + qvar);
-    if (tvar.startsWith("#")){
+    if (tvar.startsWith("#")) {
       tvar = tvar.substring(1);
     }
     output += `&${qvar}=${tvar}`;

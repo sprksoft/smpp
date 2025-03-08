@@ -6,12 +6,11 @@ html {
   --color-base02: #191817;
   --color-base03: #191817;
   --background-color: var(--color-base00);
-  --color-blue: #378cd1;
-  --color-red: #cb5144;
+  --color-blue: #3892db;
+  --color-red: #cc4849;
   --color-green: #3c9534;
-  --color-orange: #ce6c4a;
-  --color-dark-green: #1f551b;
-  --color-yellow: #ffd353;
+  --color-orange: #d96339;
+  --color-yellow: #f9d46f;
   --fruit-color: #fff;
   --color-startpage-bg: #0202058f;
   --color-infostartpagebg: #232020;
@@ -734,7 +733,8 @@ input:checked+.slider:before {
   position: absolute;
   top: 27px;
   padding: 5px !important;
-  box-shadow: 0 0.333rem 1.333rem rgba(0,0,0,0.5); /*This is copied from smartschool hun code van anderen dropdowns don't ask questions*/
+  box-shadow: 0 0.333rem 1.333rem rgba(0, 0, 0, 0.5);
+  /*This is copied from smartschool hun code van anderen dropdowns don't ask questions*/
 }
 
 .enableAnimations {
@@ -1030,13 +1030,18 @@ option:hover {
 
 .st1,
 .st2 {
+  fill: var(--color-accent) !important;
+}
+
+.text-color-fill {
   fill: var(--color-text) !important;
 }
-#dmenutooltip{
+
+#dmenutooltip {
   color: var(--color-accent) !important;
 }
 
-.st5{
+.st5 {
   fill: var(--color-accent) !important;
 }
 
@@ -1835,7 +1840,8 @@ span.uploaddetail {
 div#folders {
   border-radius: 15px !important;
   background-color: var(--darken-background) !important;
-
+  margin-left: 5px !important;
+  font-weight: 500 !important;
 }
 
 .uploadzone .folders {
@@ -1862,7 +1868,7 @@ div#folders {
 
 #performanceModeInfo {
   left: 10px;
-  max-width: 220px;
+  max-width: 209px;
   top: -7px;
   background-color: var(--color-base02);
   border: 2px solid var(--color-accent);
@@ -1879,4 +1885,12 @@ div#folders {
   transition-delay: 0.1s;
   transition-timing-function: ease-in-out;
   transition-property: all;
+}
+
+mark {
+  color: var(--color-accent) !important;
+}
+
+.smsc-topnav [data-notifs] .notification__close:hover .close-icon path {
+  stroke: var(--color-red) !important;
 }
