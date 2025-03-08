@@ -406,3 +406,7 @@ td.cell.cell--evaluation.js-cell-evaluation.evaluation:hover {
   color: var(--color-text) !important;
   font-weight: 600 !important;
 }
+
+.feedback__text {
+  color: var(--color-text) !important;
+}

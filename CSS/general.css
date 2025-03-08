@@ -1838,6 +1838,7 @@ div#folders {
   border-radius: 15px !important;
   background-color: var(--darken-background) !important;
   margin-left: 5px !important;
+  font-weight: 500 !important;
 }
 
 .uploadzone .folders {
