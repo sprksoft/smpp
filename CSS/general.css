@@ -512,6 +512,9 @@ smsc-inlineeditor.smsc-table__cell--inlineeditor {
   color: var(--color-base03) !important;
 
 }
+.smscAdminNav_body_linkdivText{
+  color: var(--color-text) !important;
+}
 
 .notifySceenContainerInfo {
   color: var(--color-text) !important;

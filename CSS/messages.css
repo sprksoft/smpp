@@ -538,10 +538,12 @@ div#submitbtn {
   gap: 10px !important;
   padding: 10px !important;
   margin: 20px !important;
+  min-height: auto !important;
 }
 
 .smscSettings {
   border: none !important;
+  text-align: center;
 }
 
 .pupilInfo_popup,
