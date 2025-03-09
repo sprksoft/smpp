@@ -20,6 +20,10 @@
   display: none !important;
 }
 
+.smsc-topnav .topnav__menu {
+  overflow: hidden !important;
+}
+
 .smsc-topnav .topnav__menu__title {
   color: var(--color-text) !important;
 }
@@ -98,7 +102,6 @@
 .smsctooltip {
   background-color: var(--color-base01) !important;
   border: 2px solid var(--color-popup-border) !important;
-  overflow: hidden !important;
   text-decoration: none !important;
   border-radius: 15px !important;
   color: var(--color-text) !important;
@@ -106,8 +109,13 @@
   transition: none !important;
 }
 
+.bubble {
+  overflow-y: auto !important;
+}
+
 .smsctooltip {
   line-height: 25px !important;
+  overflow: hidden !important;
 }
 
 .todo-column__header__filter {

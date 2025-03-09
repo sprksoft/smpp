@@ -1,7 +1,7 @@
 // Voeg een nieuw inputveld toe zonder de originele inhoud te verwijderen (   thx voor de geen info lukas >:(   )
 if (window.location.href.includes("module=Profile")) {
   var container = document.getElementById("smscMainBlockContainer");
-  container?.insertAdjacentHTML('beforeend', '<div id=inputVakContainter><input type="text" color="red" id="inputVak" placeholder="Custom name"></div>')
+  container?.insertAdjacentHTML('beforeend', '<div id=custom-name-input-containter><input type="text" color="red" id="custom-name-input" placeholder="Custom name"></div>')
 }
 let config = get_config();
 if (config.username_override == undefined) {
@@ -77,7 +77,7 @@ if (full_unheading) {
   unhead_fully();
 }
 
-let input_vak = document.getElementById("inputVak")
+let input_vak = document.getElementById("custom-name-input")
 input_vak?.addEventListener('input', function () {
   var inputValue = input_vak.value;
   inputValue = inputValue == "" ? null : inputValue;
