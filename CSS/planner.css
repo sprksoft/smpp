@@ -181,7 +181,7 @@
   background-color: var(--color-base00) !important;
 }
 
-.splitdetail-right-close-btn,
+.close-btn,
 .splitdetail-top-btn,
 .side-panel__close,
 .smscDialog_header_close {
@@ -190,8 +190,8 @@
   margin: 5px !important;
 }
 
-.splitdetail-right-close-btn:hover,
-.splitdetail-left-close-btn:hover,
+.close-btn:hover,
+.close-btn:hover,
 .side-panel__close:hover,
 .smscDialog_header_close {
   border-color: var(--color-base03) !important;
@@ -213,7 +213,9 @@
   border-color: var(--color-base03) !important;
 }
 
-.btn--danger {
+.btn--danger,
+.close-btn,
+.splitdetail-right-close-btn {
   color: var(--color-red) !important;
 }
 
@@ -690,4 +692,39 @@ h3.card-block__title.fluid-ui-heading.fluid-ui-heading--3 {
 
 .splitdetail-dialog .splitdetail__content__topbtns .splitdetail-top-btn {
   background-color: var(--color-base01) !important;
+}
+
+.header__tab__wrapper[active-tab]>.header__tab>.header__tab__name,
+.header__tab__wrapper[active-tab]>.header__tab>.header__tab__organisers {
+  color: var(--color) !important;
+}
+
+.header__tab__name {
+  color: var(--color-accent) !important;
+}
+
+.header__tabs-container .header__tab__wrapper:not([active-tab])[tab-hover] {
+  background-color: var(--color-base02) !important;
+  font-weight: 800 !important;
+}
+
+.header__tab__wrapper::before {
+  display: none !important;
+}
+
+.header__tab__wrapper::after {
+  display: none !important;
+}
+
+.header__tab__wrapper:nth-child(1)>.header__tab {
+  border-bottom-left-radius: 0px !important;
+}
+
+.header__tab__wrapper>.header__tab {
+  border-bottom-right-radius: 10px !important;
+  border-bottom-left-radius: 10px !important;
+}
+
+.header__tab__organisers {
+  color: var(--color-text) !important;
 }
