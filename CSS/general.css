@@ -508,10 +508,11 @@ smsc-inlineeditor.smsc-table__cell--inlineeditor {
 
 .smscAdminNav_body .smscAdminNav_body_link .smscAdminNav_body_linkdivText.disabled .smscAdminNav_body_linkdivTitle,
 .smscAdminNav_body .smscAdminNav_body_link .smscAdminNav_body_linkdivText.disabled {
-  color: var(--color-base03) !important;
-
+  opacity: 0.6 !important;
+  color: var(--color-text) !important;
 }
-.smscAdminNav_body_linkdivText{
+
+.smscAdminNav_body_linkdivText {
   color: var(--color-text) !important;
 }
 
@@ -1495,31 +1496,40 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   border: 2px solid var(--color-base02) !important;
 }
 
-#inputVakContainter {
+#custom-name-input-containter {
   display: flex;
   justify-content: center;
 }
 
-#inputVak {
+#custom-name-input {
   background-color: var(--color-base01);
   color: var(--color-text);
   margin: 0;
-  min-width: 150px;
-  width: 150px;
+  font-size: 16px !important;
+  min-width: 170px;
+  width: fit-content;
+  height: 25px !important;
   box-sizing: border-box;
   overflow: hidden;
   white-space: nowrap;
   border: 2px solid var(--color-base02) !important;
-  border-radius: 5px;
+  border-radius: 7px;
+}
+
+#custom-name-input::placeholder {
+  color: var(--color-text) !important;
+  opacity: 0.6 !important;
 }
 
 .sidebar {
   display: none !important;
 }
-.manualmain3col.manualmain{
+
+.manualmain3col.manualmain {
   align-self: center;
 }
-.manualmain__wrapper.modern-ui.modern-ui--larger-font{
+
+.manualmain__wrapper.modern-ui.modern-ui--larger-font {
   flex-direction: row !important;
 }
 
