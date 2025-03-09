@@ -1501,7 +1501,7 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
 }
 
 #inputVak {
-  background-color: var(--color-base02);
+  background-color: var(--color-base01);
   color: var(--color-text);
   margin: 0;
   min-width: 150px;
@@ -1509,6 +1509,18 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   box-sizing: border-box;
   overflow: hidden;
   white-space: nowrap;
+  border: 2px solid var(--color-base02) !important;
+  border-radius: 5px;
+}
+
+.sidebar {
+  display: none !important;
+}
+.manualmain3col.manualmain{
+  align-self: center;
+}
+.manualmain__wrapper.modern-ui.modern-ui--larger-font{
+  flex-direction: row !important;
 }
 
 
@@ -1760,7 +1772,7 @@ div[style*=";color:#033399;"] {
 
 
 span[style*="background"],
-div[style*="background"] {
+div[style*="background"]:not(.manual_widgettitle) {
   background-color: transparent !important;
 }
 

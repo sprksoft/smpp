@@ -259,9 +259,6 @@
   background-color: transparent !important;
 }
 
-.header.js-header.header--single-line {
-  background-color: var(--color-base01) !important;
-}
 
 .detail-lint.js-detail-lint {
   background-color: transparent !important;
@@ -374,6 +371,9 @@ button.detail-todo-icon-and-color__icon {
   border: 1px solid var(--color-base02) !important;
   padding-right: 10px !important;
   padding-left: 5px !important;
+  background-color: var(--color-base01) !important;
+  align-self: center !important;
+  width: 98% !important;
 }
 
 [bubble].bubble--tooltip {

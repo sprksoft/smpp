@@ -119,8 +119,8 @@ button.reset-filters-btn.reset-filters-btn--hidden {
   border: 2px solid var(--color-base02) !important;
 }
 
-.reset-filters-btn-container {
-  margin-bottom: 0px !important;
+.reset-filters-btn-container { /*sowwy lukas  (this is the scoll) */
+  margin-bottom: 41px !important;
 }
 
 .js-side-panel-next-button,
