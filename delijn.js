@@ -83,43 +83,81 @@ function handleFetchError(code) {
     delijnBottomApp.innerHTML = `<p class=lijninfo>Delijn data kon niet opgehaald worden: Error ${code}, probeer later nog eens...</p>`;
   }
 }
-
-async function createHalteOptions(query) {
+async function showMoreHaltes() {
+  document.getElementById("showMoreHaltesButton").remove()
+  let query = document.getElementById("haltetext").value
   const delijnHaltesData = await browser.runtime.sendMessage({
     action: 'fetchDelijnData', url:
-      `https://api.delijn.be/DLZoekOpenData/v1/zoek/haltes/${query}?maxAantalHits=5`
+      `https://api.delijn.be/DLZoekOpenData/v1/zoek/haltes/${query}?maxAantalHits=${100}`
   });
-  clearDelijnBottomApp();
   try {
-    await Promise.all(delijnHaltesData.haltes.map((halte, i) => createHalteOption(halte, i)));
+    await Promise.all(delijnHaltesData.haltes.slice(5).map((halte, i) => createHalteOption(halte, i + 5)));
   } catch (error) {
     document.getElementById('delijnBottomApp').innerHTML = `<p class=lijninfo>Er liep iets mis: ${error}</p>`
   }
-  if (delijnHaltesData.haltes.length > 0) {
+}
+function addShowMoreHaltesButton() {
+  const delijnBottomApp = document.getElementById('delijnBottomApp');
+  const div = document.createElement("div");
+  div.id = "showMoreHaltesButton"
+  div.innerText = "Toon meer"
+  div.addEventListener("click", showMoreHaltes)
+  delijnBottomApp.appendChild(div)
+}
+async function createHalteOptions(query, amount) {
+  const boringDelijnHaltesData = await browser.runtime.sendMessage({
+    action: 'fetchDelijnData', url:
+      `https://api.delijn.be/DLZoekOpenData/v1/zoek/haltes/${query}?maxAantalHits=${amount}`
+  });
+  let halteSleutels = "";
+  boringDelijnHaltesData.haltes.forEach(halte => {
+    halteSleutels = halteSleutels + halte.entiteitnummer + "_" + halte.haltenummer + "_"
+  });
+  const delijnHaltesData = await browser.runtime.sendMessage({
+    action: 'fetchDelijnData', url:
+      `https://api.delijn.be/DLKernOpenData/api/v1/haltes/lijst/${halteSleutels}/lijnrichtingen`
+  });
+
+  console.log("this: " + delijnHaltesData)
+  clearDelijnBottomApp();
+  try {
+    await Promise.all(delijnHaltesData.halteLijnrichtingen.map((halte, i) => createHalteOption(halte, i)));
+  } catch (error) {
+    document.getElementById('delijnBottomApp').innerHTML = `<p class=lijninfo>Er liep iets mis: ${error}</p>`
+    console.error(error)
+  }
+  if (delijnHaltesData.halteLijnrichtingen.length > 0) {
     getHalteChoice(delijnHaltesData);
   } else {
+    document.getElementById('delijnBottomApp').innerHTML = `<p class=lijninfo>Loading...</p>`
+    await delay(250)
     document.getElementById('delijnBottomApp').innerHTML = `<p class=lijninfo>Geen zoekresultaten</p>`
+  }
+  console.log(delijnHaltesData.aantalHits)
+  if (boringDelijnHaltesData.aantalHits > 5) {
+    addShowMoreHaltesButton()
   }
 }
 
 async function createHalteOption(delijnHalteData, i) {
   const delijnBottomApp = document.getElementById('delijnBottomApp');
-  const div = document.createElement("div");
-  const optionData = await browser.runtime.sendMessage({
-    action: 'fetchDelijnData', url:
-      `https://api.delijn.be/DLKernOpenData/api/v1/haltes/${delijnHalteData.entiteitnummer}/${delijnHalteData.haltenummer}/lijnrichtingen`
-  });
-  const omschrijving = optionData.lijnrichtingen[0]?.omschrijving || "No info";
-  div.classList.add("lijncards", "lijncardshover")
+  let div = document.createElement("div");
+  const omschrijving = delijnHalteData.lijnrichtingen[0]?.omschrijving || "No info";
+  div.classList.add("lijncards", "lijncardsHalte")
   div.id = `lijncard${i}`
   div.innerHTML = `
-    <div class="top">
-      <h3 class="no">${delijnHalteData.omschrijving}</h3>
-    </div>
-    <div class="times">
-      <span class="time">${omschrijving}</span>
-      <span class="intime"></span>
-    </div>`;
+    <h3 class="halteTitle">${delijnHalteData.omschrijving}</h3>
+    <div class="halteDirections">${omschrijving}</div>`;
+  let lijnen = document.createElement("div")
+  lijnen.id = "halteLijnen"
+  lijnen.classList.add("halteLijnen")
+  for (let i = 0; i < delijnHalteData.lijnrichtingen.length && i < 5; i++) {
+    lijn = document.createElement("span")
+    lijn.classList.add("lijnNumber")
+    lijn.innerText = delijnHalteData.lijnrichtingen[i].lijnnummer
+    lijnen.appendChild(lijn)
+  }
+  div.append(lijnen)
   delijnBottomApp.appendChild(div);
 }
 
@@ -147,6 +185,7 @@ function getHalteChoice(data) {
         console.log(delijnData)
         if (!delijnData.code) {
           displayLijnenPerHalte(delijnData)
+          console.log("doing this")
         } else { handleFetchError(delijnData.code) }
       });
     }
@@ -156,6 +195,16 @@ async function migrateDelijnData() {
   await browser.runtime.sendMessage({ action: 'setDelijnAppData', data: JSON.parse(localStorage.getItem("lijnData")) });
   window.localStorage.removeItem("lijnData")
 }
+function handleSearch() {
+  const delijnBottomApp = document.getElementById("delijnBottomApp")
+  const halteInput = document.getElementById("haltetext");
+  if (halteInput.value) {
+    delijnBottomApp.innerHTML = `<p class="lijninfo">Loading...</p>`;
+    createHalteOptions(halteInput.value, 5);
+  } else {
+    delijnBottomApp.innerHTML = `<p class="lijninfo">Gelieve een halte te zoeken</p>`;
+  }
+}
 async function createDelijnApp() {
   const delijnContainer = document.getElementById("delijncontainer");
   if (!delijnContainer) return;
@@ -164,41 +213,23 @@ async function createDelijnApp() {
     <div id="top_lijn_app">
         <input class="popupinput" id="haltetext" spellcheck="false" type="text">
         <button type="submit" class="searchbutton" id="searchbutton">
-          <svg width="25" height="25" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <svg class=searchbuttonicon width="25" height="25" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <path d="M16.0073 9.00364C16.0073 12.8716 12.8716 16.0073 9.00364 16.0073C5.13564 16.0073 2 12.8716 2 9.00364C2 
             5.13564 5.13564 2 9.00364 2C12.8716 2 16.0073 5.13564 16.0073 9.00364Z" class="stroke1" stroke-width="4"></path>
             <rect x="16.594" y="12.8062" width="11.8729" height="3.95764" rx="1.97882" transform="rotate(45 16.594 12.8062)" class="st5"></rect>
           </svg>
         </button>
     </div>`;
-
   const searchbutton = document.getElementById('searchbutton');
   const halteInput = document.getElementById("haltetext");
   const delijnBottomApp = document.createElement("div");
   delijnBottomApp.id = "delijnBottomApp"
   delijnBottomApp.innerHTML = `<p class=lijninfo>Loading...</p>`;
   delijnContainer.appendChild(delijnBottomApp);
-
-  searchbutton.addEventListener("click", function () {
-    if (halteInput.value) {
-      createHalteOptions(halteInput.value);
-    } else {
-      delijnBottomApp.innerHTML = `<p class=lijninfo>Gelieve een halte te zoeken</p>`
-    }
-    if (document.getElementById("lijncard0")) {
-      createDelijnApp();
-    }
-  });
+  searchbutton.addEventListener("click", handleSearch);
   halteInput.addEventListener("keyup", function (event) {
     if (event.key === "Enter") {
-      if (halteInput.value) {
-        createHalteOptions(halteInput.value);
-      } else {
-        delijnBottomApp.innerHTML = `<p class=lijninfo>Gelieve een halte te zoeken</p>`
-      }
-      if (document.getElementById("lijncard0")) {
-        createDelijnApp();
-      }
+      handleSearch();
     }
   });
 

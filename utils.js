@@ -9,5 +9,7 @@ function open_url(url, new_window = false) {
   }
   window.location = url;
 }
-
+function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms)); // no hate please 👉👈
+}
 
