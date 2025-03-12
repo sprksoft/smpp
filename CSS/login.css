@@ -185,7 +185,7 @@ span.login-app__title.login-app__title--sign-in-with {
   left: 50%;
   top: 50%;
   transform-origin: left !important;
-  transform: translateX(180px) translateY(-240px) rotate(30deg) !important;
+  transform: translateX(180px) translateY(-240px) rotate(20deg) !important;
   /* Moves right by 200px and rotates */
   text-align: center;
   z-index: 99999;
@@ -194,7 +194,9 @@ span.login-app__title.login-app__title--sign-in-with {
 .splashtext {
   color: var(--color-splashtext) !important;
   font-size: 30px !important;
-  left: -50% !important;
+  left: -20% !important;
+  max-width: 60% !important;
+  word-break: keep-all !important;
   position: relative !important;
 }
 .enableAnimations .splashtext {
