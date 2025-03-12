@@ -37,7 +37,7 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.action === 'setDelijnAppData') {
       await browser.storage.local.set({ delijnAppData: message.data });
       sendResponse({ succes: true });
-      console.log('Delijn data saved.');
+      console.log('Delijn appdata saved.');
     }
     if (message.action === 'getDelijnAppData') {
       const delijnAppData = await getDelijnAppData();
@@ -47,7 +47,7 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.action === 'fetchDelijnData') {
       const delijnData = await fetchDelijnData(message.url);
       sendResponse(delijnData);
-      console.log('Delijn data fetched and sent.');
+      console.log('Delijn appdata fetched and sent.');
     }
   })();
   return true;
