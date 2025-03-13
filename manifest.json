@@ -25,7 +25,9 @@
 				"*://*.smartschool.be/*"
 			],
 			"exclude_matches": [
-				"*://www.smartschool.be/*"
+				"*://www.smartschool.be/*",
+				"*://*.smartschool.be/planner/sync/ics/*",
+				"*://*.smartschool.be/Wopi/init/*"				
 			],
 			"all_frames": true,
 			"css": [
@@ -42,7 +44,8 @@
 				"CSS/delijn.css",
 				"CSS/agenda.css",
 				"CSS/plant.css",
-				"CSS/root.css"
+				"CSS/root.css",
+				"handleiding.css"
 			],
 			"js": [
 				"titlefix.js",

@@ -1,0 +1,11 @@
+#manual_widgetcontent_54{
+    background: none !important;
+}
+
+html body .manual_widgettitle {
+    background-color: var(--color-base01) !important;
+}
+
+html body .manual_widgettitleinner{
+    color: var(--color-text);
+}

@@ -2,7 +2,7 @@
 - [ ] 
 
 # not a concern
-- [ ] icons...
+- [X] icons...
 
 # unfixable
 - adding nmbs
