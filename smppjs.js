@@ -2,6 +2,7 @@
 //ok - ldev
 //oke logis - andere ldev
 //oh ok, ik dacht in general.css - Jdev
+
 const default_theme = {
   color_accent: "#a3a2ec",
   color_base00: "#38313a",
@@ -74,9 +75,10 @@ function getPfpLink(username) {
 async function apply() {
   let style = document.documentElement.style;
   let settingsData = get_config();
-
-  const colorpickers = document.getElementById("colorpickers");
   console.log(settingsData)
+
+  // load settings
+  const colorpickers = document.getElementById("colorpickers");
   const profileSelect = settingsData.profile
   const backgroundLink = settingsData.backgroundlink
   const halte = settingsData.halte
@@ -94,12 +96,17 @@ async function apply() {
   var username_override = settingsData.username_override;
   var show_plant = settingsData.show_plant;
   var enableanimations = settingsData.enableanimations;
+  var enabletaskslist = settingsData.enabletaskslist
+
   changeFont()
   set_theme("default");
   set_theme(profileSelect);
 
-  if (show_scores == undefined) {
-    show_scores = false;
+  // force settings to be on/off
+  if(enabletaskslist == undefined) {
+    settingsData = get_config()
+    settingsData.enabletaskslist = true
+    set_config(settingsData)
   }
   if (showplanner == undefined) {
     settingsData = get_config()
@@ -130,6 +137,11 @@ async function apply() {
     settingsData.enableanimations = true
     set_config(settingsData)
   }
+  if (show_scores == undefined) {
+    show_scores = false
+  }
+
+  // apply settings (verry messy)
   topnav = document.querySelector('.topnav')
   if (topnav) {
     topnav.insertBefore(document.querySelector('[data-links]'), document.querySelector('[data-courses]'));
@@ -201,6 +213,7 @@ async function apply() {
     document.getElementById("leftcontainer") ? document.getElementById("leftcontainer").remove() : "pass"
     document.getElementById("rightcontainer") ? document.getElementById("rightcontainer").remove() : "pass"
     document.getElementById("plannercontainer") ? document.getElementById("plannercontainer").remove() : "pass"
+    document.getElementById("takencontainer") ? document.getElementById("takencontainer").remove() : "pass"
     document.getElementById("weathercontainer") ? document.getElementById("weathercontainer").remove() : "pass"
     document.getElementById("delijncontainer") ? document.getElementById("delijncontainer").remove() : "pass"
     document.getElementById("plantcontainer") ? document.getElementById("plantcontainer").remove() : "pass"
@@ -216,6 +229,7 @@ async function apply() {
       container.prepend(DelijnAppElement)
       createDelijnApp()
     }
+
     if (showplanner) {
       var PlannerAppElement = document.createElement("div")
       PlannerAppElement.classList.add("homepage__left")
@@ -224,6 +238,7 @@ async function apply() {
       container.prepend(PlannerAppElement)
       ShowPlanner(0)
     }
+
     if (show_plant) {
       var PlantAppElement = document.createElement("div")
       PlantAppElement.classList.add("homepage__right")
@@ -232,6 +247,7 @@ async function apply() {
       container.append(PlantAppElement)
       start_plant_window()
     }
+
     if (loc != "") {
       var WeatherAppElement = document.createElement("div")
       WeatherAppElement.classList.add("homepage__right")
@@ -240,6 +256,7 @@ async function apply() {
       container.append(WeatherAppElement)
       await createWeatherApp(loc, IsBig);
     }
+
     if (showsnake) {
       if (!document.getElementById("weathercontainer")) {
         var WeatherAppElement = document.createElement("div")
@@ -250,6 +267,7 @@ async function apply() {
       }
       creatSnakeApp()
     }
+
     if (showflappy) {
       if (!document.getElementById("weathercontainer")) {
         var WeatherAppElement = document.createElement("div")
@@ -260,8 +278,21 @@ async function apply() {
       }
       createFlappyApp()
     }
+
     if (!shownews) {
       centralContainer.innerHTML = ' '
+    }
+
+    if (enabletaskslist) {
+      var TakenAppElement = document.createElement("div")
+      TakenAppElement.classList.add("homepage__left")
+      TakenAppElement.classList.add("smsc-container--left")
+      TakenAppElement.id = "leftcontainer"
+      var TakenApp = document.createElement("div")
+      TakenApp.setAttribute("id", "delijncontainer")
+      TakenAppElement.appendChild(TakenApp)
+      container.prepend(TakenAppElement)
+      createDelijnApp()
     }
   }
 
@@ -273,17 +304,20 @@ async function apply() {
     remove_gcwin()
     make_gcwin(true)
   }
+
   if (enableanimations) {
     document.body.classList.add("enableAnimations")
   } else {
     document.body.classList.remove("enableAnimations")
   }
+
   document.getElementById("background_image") ? document.getElementById("background_image").style.display = "none" : "pass"
   if (overwrite_theme == 2) {
     set_background();
   } else if (overwrite_theme == 1) {
     set_backgroundlink(backgroundLink)
   }
+
   let iconElement = document.querySelector('link[rel="icon"]');
   if (iconElement) {
     if (settingsData.smpp_logo) {
@@ -314,8 +348,8 @@ function store() {
   }
 
   let settingsData = previousData;
-  const profileSelect = document.getElementById("profileSelector").value;
   let backgroundFile = document.getElementById("fileInput").files[0];
+  const profileSelect = document.getElementById("profileSelector").value;
   const backgroundLink = document.getElementById("backgroundlink").value
   const halte = document.getElementById("halt").checked;
   const overwrite_theme = Number(document.getElementById("backgroundSlider").value);
@@ -331,6 +365,8 @@ function store() {
   const show_plant = document.getElementById("show_plant").checked;
   const smpp_logo = document.getElementById("smpp_logo").checked;
   const enableAnimations = document.getElementById("performanceModeTooltip").checked;
+  const enabletaskslist = document.getElementById("enableTasklists").checked;
+
   settingsData.profile = profileSelect;
   settingsData.halte = halte;
   settingsData.overwrite_theme = overwrite_theme;
@@ -347,11 +383,15 @@ function store() {
   settingsData.show_plant = show_plant;
   settingsData.smpp_logo = smpp_logo;
   settingsData.enableanimations = enableAnimations
-  document.getElementById("performanceModeInfo").innerHTML = settingsData.enableanimations ? `Toggle performance mode (disabled)` : `Toggle performance mode (enabled)`
+  settingsData.enabletaskslist = enabletaskslist
   console.log(settingsData)
+
+  document.getElementById("performanceModeInfo").innerHTML = settingsData.enableanimations ? `Toggle performance mode (disabled)` : `Toggle performance mode (enabled)`
+ 
   if (settingsData.show_scores == undefined) {
     settingsData.show_scores = false;
   }
+
   if (shownews && !previousData.shownews) {
     window.location.reload();
   }
@@ -369,8 +409,7 @@ function store() {
       loadCustomTheme();
     }
     window.location.reload()
-  }
-  else {
+  } else {
     set_config(settingsData)
     if (profileSelect == "custom") {
       loadCustomTheme();
@@ -402,6 +441,7 @@ function loadCustomThemeData() {
   document.getElementById("colorPicker5").value = themeData.color_accent
   document.getElementById("colorPicker6").value = themeData.color_text
 }
+
 function loadCustomTheme() {
   let themeData = JSON.parse(window.localStorage.getItem("themedata"))
   if (themeData == null) {
@@ -415,6 +455,7 @@ function loadCustomTheme() {
 
 function load() {
   let settingsData = JSON.parse(window.localStorage.getItem("settingsdata"));
+
   const profileSelect = document.getElementById("profileSelector");
   const backgroundLink = document.getElementById("backgroundlink");
   const halte = document.getElementById("halt");
@@ -431,6 +472,8 @@ function load() {
   const show_plant = document.getElementById("show_plant");
   const smpp_logo = document.getElementById("smpp_logo");
   const enableAnimations = document.getElementById("performanceModeTooltip");
+  const enabletaskslist = document.getElementById("enableTasklists");
+
   profileSelect.value = settingsData.profile
   halte.checked = settingsData.halte
   overwrite_theme.value = settingsData.overwrite_theme
@@ -444,10 +487,13 @@ function load() {
   isbig.checked = settingsData.isbig
   showplanner.checked = settingsData.showplanner
   weatherSelector.value = settingsData.weatherSelector
-  show_plant.checked = settingsData.show_plant;
-  smpp_logo.checked = settingsData.smpp_logo;
-  enableAnimations.checked = settingsData.enableanimations;
+  show_plant.checked = settingsData.show_plant
+  smpp_logo.checked = settingsData.smpp_logo
+  enableAnimations.checked = settingsData.enableanimations
+  enabletaskslist.checked = settingsData.enabletaskslist
+
   document.getElementById("performanceModeInfo").innerHTML = settingsData.enableanimations ? `Toggle performance mode (disabled)` : `Toggle performance mode (enabled)`
+  
   if (profileSelect.value == "custom") {
     loadCustomTheme()
   }
@@ -455,6 +501,7 @@ function load() {
 
 function set_background() {
   let style = document.documentElement.style;
+
   browser.storage.local.get('backgroundImage', (result) => {
     style.setProperty('--loginpage-image', `none`);
     style.setProperty('--background-color', `transparent`);
@@ -470,7 +517,9 @@ function set_background() {
     img.style.objectFit = 'cover';
     img.style.zIndex = -1;
     img.style.display = "block";
+
     if (result.backgroundImage) img.src = result.backgroundImage;
+
     if (!document.getElementById("background_image")) {
       document.body.appendChild(img);
     }
@@ -479,17 +528,21 @@ function set_background() {
 
 function set_backgroundlink(background) {
   let style = document.documentElement.style;
+
   if (!background) {
     style.setProperty('--loginpage-image', 'aaaaa');
     console.log("no background")
     return;
   }
+
   let img = new Image();
   img.src = background;
+
   img.onload = () => {
     style.setProperty('--loginpage-image', `url(${background})`);
     console.log("works")
   };
+
   img.onerror = () => {
     console.log("error")
   };
@@ -497,25 +550,31 @@ function set_backgroundlink(background) {
 
 function set_theme(name) {
   let style = document.documentElement.style;
+
   if (name == "custom") {
     let themeData = JSON.parse(window.localStorage.getItem("themedata"))
+
     if (themeData == null) {
       themeData = default_theme;
       window.localStorage.setItem("themedata", JSON.stringify(themeData));
     }
+
     if (themeData.base0) {
       themeData = migrate_theme_data(themeData)
       loadCustomThemeData()
     }
+
     style.setProperty('--color-accent', themeData.color_accent);
     style.setProperty('--color-text', themeData.color_text);
     style.setProperty('--color-base00', themeData.color_base00);
     style.setProperty('--color-base01', themeData.color_base01);
     style.setProperty('--color-base02', themeData.color_base02);
     style.setProperty('--color-base03', themeData.color_base03);
+
     if (window.self == window.top) {
       style.setProperty('--loginpage-image', "url(https://wallpaperaccess.com/full/23.jpg)");
     }
+
   } else {
     let theme = get_theme(name);
     if (!theme) {
@@ -524,6 +583,7 @@ function set_theme(name) {
     apply_theme(theme, style)
   }
 }
+
 function toggleSettings() {
   let win = document.getElementById("quickSettings");
 
@@ -536,10 +596,12 @@ function toggleSettings() {
 
 function openSettings() {
   let win = document.getElementById("quickSettings");
+
   if (!win) {
     createSettings();
     win = document.getElementById("quickSettings");
   }
+
   win.classList.remove("qs-hidden");
   load();
   settingsWindowIsHidden = false;
@@ -557,12 +619,13 @@ function closeSettings() {
 
 function createSettings() {
   let quickSettingsWindow = document.createElement("div");
+
   quickSettingsWindow.id = "quickSettings";
   quickSettingsWindow.addEventListener("change", store);
   quickSettingsWindow.innerHTML = popupsettingHTML;
   quickSettingsWindow.style.left = (-270 / 3) + "px";
-  document.getElementById("quickSettingsButton").insertAdjacentElement("afterend", quickSettingsWindow);
 
+  document.getElementById("quickSettingsButton").insertAdjacentElement("afterend", quickSettingsWindow);
   document.getElementById("backgroundfilebutton").addEventListener("click", openFileSelector);
   document.getElementById("performanceModeTooltipLabel").addEventListener("mouseover", () => {
     document.getElementById("performanceModeInfo").style.opacity = "1";
@@ -575,6 +638,7 @@ function createSettings() {
 
   document.addEventListener("click", (e) => {
     if (settingsWindowIsHidden) return;
+
     if (
       e.target.id === "quickSettings" ||
       quickSettingsWindow.contains(e.target) ||
@@ -588,8 +652,10 @@ function createSettings() {
 
 function createSettingsButton() {
   let quickSettingsButtonWrapper = document.createElement("div")
+
   quickSettingsButtonWrapper.id = "quickSettingsButtonWrapper"
   quickSettingsButtonWrapper.classList.add("topnav__btn-wrapper")
+
   let logoutButton = document.querySelector(".js-btn-logout")
   if (!logoutButton) {
     return false;
@@ -603,6 +669,7 @@ function createSettingsButton() {
   quickSettingsButton.innerText = "Settings"
   quickSettingsButton.addEventListener("click", toggleSettings);
   quickSettingsButtonWrapper.appendChild(quickSettingsButton)
+  
   return true;
 }
 
