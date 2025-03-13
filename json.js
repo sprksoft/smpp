@@ -181,6 +181,13 @@ const popupsettingHTML = `
                 <span class="slider round"></span>
             </label>
         </div>
+        <div>
+            <h3 class="popuptitles">Taken:</h3>
+            <label class="switch">
+                <input class="popupinput" type="checkbox" id="enableTasklists">
+                <span class="slider round"></span>
+            </label>
+        </div>
     </div>
 `
 const weatherHTML = `<div class="weatherdiv">
