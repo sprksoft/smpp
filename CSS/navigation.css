@@ -55,7 +55,7 @@
   right: 5px;
   top: 5px;
   padding: 2px;
-  background-color: var(--color-base01);
+  background-color: var(--color-base00);
   border: 2px solid transparent;
   border-radius: 999px;
 }
@@ -71,7 +71,7 @@
 }
 
 #performanceModeTooltip:checked+svg {
-  fill: var(--color-base03) !important;
+  fill: var(--color-text) !important;
 }
 
 .performanceModeTooltipLabel {
