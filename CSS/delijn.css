@@ -132,6 +132,8 @@
     background: var(--color-base01) !important;
     border-radius: 10px !important;
     border: 2px solid var(--color-settings-ui-layer2) !important;
+    display: flex !important;
+    align-items: center !important;
     flex-grow: 0 !important;
 }
 

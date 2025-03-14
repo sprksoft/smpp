@@ -83,50 +83,54 @@ function handleFetchError(code) {
     delijnBottomApp.innerHTML = `<p class=lijninfo>Delijn data kon niet opgehaald worden: Error ${code}, probeer later nog eens...</p>`;
   }
 }
-async function showMoreHaltes() {
-  document.getElementById("showMoreHaltesButton").remove()
-  let query = document.getElementById("haltetext").value
-  const delijnHaltesData = await browser.runtime.sendMessage({
-    action: 'fetchDelijnData', url:
-      `https://api.delijn.be/DLZoekOpenData/v1/zoek/haltes/${query}?maxAantalHits=${100}`
-  });
-  try {
-    await Promise.all(delijnHaltesData.haltes.slice(5).map((halte, i) => createHalteOption(halte, i + 5)));
-  } catch (error) {
-    document.getElementById('delijnBottomApp').innerHTML = `<p class=lijninfo>Er liep iets mis: ${error}</p>`
-  }
-}
 function addShowMoreHaltesButton() {
   const delijnBottomApp = document.getElementById('delijnBottomApp');
+  let query = document.getElementById("haltetext").value
+
   const div = document.createElement("div");
   div.id = "showMoreHaltesButton"
   div.innerText = "Toon meer"
-  div.addEventListener("click", showMoreHaltes)
+  div.addEventListener("click", createHalteOptions)
   delijnBottomApp.appendChild(div)
 }
-async function createHalteOptions(query, amount) {
-  const boringDelijnHaltesData = await browser.runtime.sendMessage({
+async function createHalteOptions() {
+  let query = document.getElementById("haltetext").value
+  let amount = document.getElementById("lijncard4") == null ? 5 : 100
+  console.log((document.getElementById("lijncard4")))
+  console.log(amount)
+  const delijnHaltesData = await browser.runtime.sendMessage({
     action: 'fetchDelijnData', url:
       `https://api.delijn.be/DLZoekOpenData/v1/zoek/haltes/${query}?maxAantalHits=${amount}`
   });
   let halteSleutels = "";
-  boringDelijnHaltesData.haltes.forEach(halte => {
+  delijnHaltesData.haltes.forEach(halte => {
     halteSleutels = halteSleutels + halte.entiteitnummer + "_" + halte.haltenummer + "_"
   });
-  const delijnHaltesData = await browser.runtime.sendMessage({
+  console.log(delijnHaltesData)
+  const delijnHaltesAllLijnenData = await browser.runtime.sendMessage({
     action: 'fetchDelijnData', url:
       `https://api.delijn.be/DLKernOpenData/api/v1/haltes/lijst/${halteSleutels}/lijnrichtingen`
   });
-
-  console.log("this: " + delijnHaltesData)
-  clearDelijnBottomApp();
+  if(!document.getElementById("lijncard4")) clearDelijnBottomApp(); else 
+  
+  console.log(delijnHaltesAllLijnenData)
+  console.log(delijnHaltesAllLijnenData.halteLijnrichtingen[0])
+  console.log(delijnHaltesData)
+  console.log(delijnHaltesData.haltes[0].omschrijving)
+  for (let i = 0; i < delijnHaltesAllLijnenData.halteLijnrichtingen.length; i++) {
+    console.log(delijnHaltesAllLijnenData.halteLijnrichtingen[i])
+    delijnHaltesAllLijnenData.halteLijnrichtingen[i].omschrijving = delijnHaltesData.haltes[i].omschrijving
+    delijnHaltesAllLijnenData.halteLijnrichtingen[i].richtingen = "wow"
+  }
+  console.log(delijnHaltesAllLijnenData)
+  delijnHaltesAllLijnenData.halteLijnrichtingen;
   try {
-    await Promise.all(delijnHaltesData.halteLijnrichtingen.map((halte, i) => createHalteOption(halte, i)));
+    await Promise.all(delijnHaltesAllLijnenData.halteLijnrichtingen.map((halte, i) => createHalteOption(halte, i)));
   } catch (error) {
     document.getElementById('delijnBottomApp').innerHTML = `<p class=lijninfo>Er liep iets mis: ${error}</p>`
     console.error(error)
   }
-  if (delijnHaltesData.halteLijnrichtingen.length > 0) {
+  if (delijnHaltesAllLijnenData.halteLijnrichtingen.length > 0) {
     getHalteChoice(delijnHaltesData);
   } else {
     document.getElementById('delijnBottomApp').innerHTML = `<p class=lijninfo>Loading...</p>`
@@ -134,7 +138,7 @@ async function createHalteOptions(query, amount) {
     document.getElementById('delijnBottomApp').innerHTML = `<p class=lijninfo>Geen zoekresultaten</p>`
   }
   console.log(delijnHaltesData.aantalHits)
-  if (boringDelijnHaltesData.aantalHits > 5) {
+  if (delijnHaltesData.aantalHits > 5 || delijnHaltesAllLijnenData.halteLijnrichtingen.length < 6) {
     addShowMoreHaltesButton()
   }
 }
@@ -142,12 +146,12 @@ async function createHalteOptions(query, amount) {
 async function createHalteOption(delijnHalteData, i) {
   const delijnBottomApp = document.getElementById('delijnBottomApp');
   let div = document.createElement("div");
-  const omschrijving = delijnHalteData.lijnrichtingen[0]?.omschrijving || "No info";
+  const richtingen = delijnHalteData.richtingen || "No info";
   div.classList.add("lijncards", "lijncardsHalte")
   div.id = `lijncard${i}`
   div.innerHTML = `
     <h3 class="halteTitle">${delijnHalteData.omschrijving}</h3>
-    <div class="halteDirections">${omschrijving}</div>`;
+    <div class="halteDirections">${richtingen}</div>`;
   let lijnen = document.createElement("div")
   lijnen.id = "halteLijnen"
   lijnen.classList.add("halteLijnen")
@@ -166,7 +170,7 @@ function clearDelijnBottomApp() {
 }
 
 function getHalteChoice(data) {
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < data.haltes.length; i++) {
     const option = document.getElementById(`lijncard${i}`);
     if (option) {
       option.addEventListener("click", async () => {
@@ -200,7 +204,7 @@ function handleSearch() {
   const halteInput = document.getElementById("haltetext");
   if (halteInput.value) {
     delijnBottomApp.innerHTML = `<p class="lijninfo">Loading...</p>`;
-    createHalteOptions(halteInput.value, 5);
+    createHalteOptions();
   } else {
     delijnBottomApp.innerHTML = `<p class="lijninfo">Gelieve een halte te zoeken</p>`;
   }
