@@ -51,7 +51,7 @@ async function displayLijnenBasedOnHalte(data) {
     minute = minute.toString().padStart(2, '0');
 
     const div = document.createElement('div');
-    div.classList.add("lijncards")
+    div.classList.add("lijnCard")
     div.innerHTML = `
       <div class="top">
         <h2 class=lijncardstitle>${lijnnummer}</h2>

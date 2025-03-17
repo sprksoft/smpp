@@ -22,63 +22,123 @@ async function displayLijnenBasedOnHalte(entiteitnummer, haltenummer) {
 }
 
 async function createHalteDoorkomst(doorkomst) {
-    entiteitnummer = doorkomst.entiteitnummer
-    lijnnummer = doorkomst.lijnnummer
-    let individualLijnData = await browser.runtime.sendMessage({
-        action: 'fetchDelijnData', url:
-            `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${entiteitnummer}/${lijnnummer}`
-    });
-    let individualLijnDataColors = await browser.runtime.sendMessage({
-        action: 'fetchDelijnData', url:
-            `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${entiteitnummer}/${lijnnummer}/lijnkleuren`
-      });
-    let backgroundColor = getHexByCode(individualLijnDataColors.achtergrond.code)
-    let borderColor = getHexByCode(individualLijnDataColors.achtergrondRand.code)
-    let color = getHexByCode(individualLijnDataColors.voorgrond.code)
-    console.log(doorkomst)
-    const publicLineNumber = individualLijnData.lijnnummerPubliek
-    const destination = doorkomst.bestemming
+    const entiteitnummer = doorkomst.entiteitnummer;
+    const lijnnummer = doorkomst.lijnnummer;
+    const destination = doorkomst.bestemming;
 
-    const originalETA = new Date(doorkomst.dienstregelingTijdstip)
-    let ETA;
-    if (doorkomst["real-timeTijdstip"]) ETA = new Date(doorkomst["real-timeTijdstip"]);
+    const originalETA = new Date(doorkomst.dienstregelingTijdstip);
+    let ETA = originalETA;
+    let predictionStatuses = doorkomst.predictionStatussen
+    let timeUntilDeparture
+    let arrivalTimeDeviation
 
-    let arrivalTimeDeviation;
-    let timeUntilDeparture;
-    if (ETA) {
+    const lijnCard = document.createElement('div');
+    lijnCard.classList.add("lijnCard");
+
+    if (predictionStatuses.includes("GESCHRAPT")) {
+        lijnCard.classList.add("lijnCardCancelled")
+        timeUntilDeparture = "Cancelled"
+        arrivalTimeDeviation = ""
+    } else if (predictionStatuses.includes("GEENREALTIME")) {
+        lijnCard.classList.add("lijnCardNoData")
         timeUntilDeparture = calculateTimeUntilDeparture(ETA)
-        arrivalTimeDeviation = Math.round((ETA - originalETA) / 1000 / 60)
-      if (arrivalTimeDeviation == 0) { 
-        arrivalTimeDeviation = "On time" 
-      } else if (arrivalTimeDeviation > 0) {
-        arrivalTimeDeviation = "+" + arrivalTimeDeviation
-      }
-    } else {
+        if (timeUntilDeparture < 1) {
+            timeUntilDeparture = "Now";
+        } else {
+            timeUntilDeparture = timeUntilDeparture + " Min.";
+        }
         arrivalTimeDeviation = "No data"
-        timeUntilDeparture = calculateTimeUntilDeparture(originalETA)
-        ETA = originalETA
-    }
-    if (timeUntilDeparture < 1) {
-        timeUntilDeparture == "Now"
-    }
-    lijnCard = document.createElement("div")
-    lijnCard.classList.add("lijncards")
+    } else if (predictionStatuses.includes("REALTIME")) {
+        ETA = new Date(doorkomst["real-timeTijdstip"]);
 
-    lijnCard.innerHTML = `
-        <div class=lijnCardTop>
-          <span class=lijnNumber style="
-          background-color:${backgroundColor};
-          border-color:${borderColor};
-          color:${color}">${publicLineNumber}</span>
-          <span class=lijnDestination>${destination}</span>
-        </div>
-        <span class=arrivalTimeDeviation>${arrivalTimeDeviation}</span>
-        <div class="lijnCardBottom">
-          <span class="time">${ETA.getHours()}:${ETA.getMinutes().toString().padStart(2, '0')}</span>
-          <span class="timeUntilDeparture">${timeUntilDeparture} Min.</span>
-        </div>`
-    document.getElementById("delijnBottomContainer").appendChild(lijnCard)
-    console.log(doorkomst)
+        arrivalTimeDeviation = ETA ? Math.round((ETA - originalETA) / 1000 / 60) : "No data";
+        timeUntilDeparture = calculateTimeUntilDeparture(ETA);
+        if (arrivalTimeDeviation === 0) {
+            arrivalTimeDeviation = "On time";
+        } else if (arrivalTimeDeviation > 0) {
+            arrivalTimeDeviation = "+" + arrivalTimeDeviation;
+        }
+        if (timeUntilDeparture < 1) {
+            timeUntilDeparture = "Now";
+        } else {
+            timeUntilDeparture = timeUntilDeparture + " Min.";
+        }
+    } else {
+        console.error("Unknown predictionStatus")
+    }
+
+    const lijnCardTop = document.createElement('div');
+    lijnCardTop.classList.add('lijnCardTop');
+
+    const lijnNumberElement = document.createElement('span');
+    lijnNumberElement.classList.add('lijnNumber');
+    lijnNumberElement.textContent = lijnnummer;
+
+    const lijnDestinationElement = document.createElement('span');
+    lijnDestinationElement.classList.add('lijnDestination');
+    if (destination.length > 17) {
+        lijnDestinationElement.classList.add('lijnDestinationLongLong');
+    } else if (destination.length > 15) {
+        lijnDestinationElement.classList.add('lijnDestinationLong');
+    }
+    lijnDestinationElement.textContent = destination;
+
+    lijnCardTop.appendChild(lijnNumberElement);
+    lijnCardTop.appendChild(lijnDestinationElement);
+
+    const arrivalTimeDeviationElement = document.createElement('span');
+    arrivalTimeDeviationElement.classList.add('arrivalTimeDeviation');
+    arrivalTimeDeviationElement.textContent = arrivalTimeDeviation;
+
+    const lijnCardBottom = document.createElement('div');
+    lijnCardBottom.classList.add('lijnCardBottom');
+
+    const time = document.createElement('span');
+    time.classList.add('time');
+    time.textContent = `${ETA.getHours()}:${ETA.getMinutes().toString().padStart(2, '0')}`;
+
+    const timeUntilDepartureElement = document.createElement('span');
+    timeUntilDepartureElement.classList.add('timeUntilDeparture');
+    timeUntilDepartureElement.textContent = timeUntilDeparture;
+
+    lijnCardBottom.appendChild(time);
+    lijnCardBottom.appendChild(timeUntilDepartureElement);
+
+    lijnCard.appendChild(lijnCardTop);
+    lijnCard.appendChild(arrivalTimeDeviationElement);
+    lijnCard.appendChild(lijnCardBottom);
+
+    document.getElementById("delijnBottomContainer").appendChild(lijnCard);
+
+    updateLijnCardWithApiData(lijnNumberElement, entiteitnummer, lijnnummer);
+
+    await delay(100);
+}
+
+async function updateLijnCardWithApiData(lijnNumberElement, entiteitnummer, lijnnummer) {
+    try {
+        const individualLijnData = await browser.runtime.sendMessage({
+            action: 'fetchDelijnData',
+            url: `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${entiteitnummer}/${lijnnummer}`
+        });
+        const publicLineNumber = individualLijnData.lijnnummerPubliek;
+        lijnNumberElement.textContent = publicLineNumber;
+
+        const individualLijnDataColors = await browser.runtime.sendMessage({
+            action: 'fetchDelijnData',
+            url: `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${entiteitnummer}/${lijnnummer}/lijnkleuren`
+        });
+
+        const backgroundColor = getHexByCode(individualLijnDataColors.achtergrond.code);
+        const borderColor = getHexByCode(individualLijnDataColors.achtergrondRand.code);
+        const color = getHexByCode(individualLijnDataColors.voorgrond.code);
+
+        lijnNumberElement.style.backgroundColor = backgroundColor;
+        lijnNumberElement.style.borderColor = borderColor;
+        lijnNumberElement.style.color = color;
+    } catch (error) {
+        console.error("Failed to fetch additional data for lijn card:", error);
+    }
 }
 
 function addDelijnAttest() {
@@ -154,18 +214,17 @@ async function showHalteOptions() {
 }
 
 async function createHalteOption(delijnHalteData, i) {
-    console.log(delijnHalteData);
     const delijnBottomContainer = document.getElementById('delijnBottomContainer');
     const halteLijnCard = document.createElement("div");
 
-    const richtingen = "Naar: " + delijnHalteData.lijnrichtingen.slice(0, 4).map(lijn => {
-        const description = lijn.omschrijving.split(" ");
-        return description[description.length - 1];
+    const richtingen = "Naar: " + delijnHalteData.lijnrichtingen.slice(0, 3).map(lijn => {
+        const description = lijn.omschrijving.split("-");
+        return (description[description.length - 1]);
     }).join(", ");
 
     halteLijnCard.setAttribute("entiteitnummer", delijnHalteData.halte.entiteitnummer);
     halteLijnCard.setAttribute("haltenummer", delijnHalteData.halte.haltenummer);
-    halteLijnCard.classList.add("lijncards", "lijncardsHalte");
+    halteLijnCard.classList.add("lijnCard", "lijnCardHalte");
     halteLijnCard.id = `lijncard${i}`;
     halteLijnCard.innerHTML = `
       <h3 class="halteTitle">${delijnHalteData.halte.omschrijving}</h3>
@@ -173,19 +232,19 @@ async function createHalteOption(delijnHalteData, i) {
 
     const lijnen = document.createElement("div");
     lijnen.classList.add("halteLijnen");
-    delijnHalteData.lijnrichtingen.slice(0, 5).forEach(async function(lijnrichting) {
+    delijnHalteData.lijnrichtingen.slice(0, 5).forEach(async function (lijnrichting) {
         const lijn = document.createElement("span");
         lijn.classList.add("lijnNumber", "halteLijnNumber");
         lijn.innerText = lijnrichting.lijnnummer
         lijnen.appendChild(lijn);
         let individualLijnData = await browser.runtime.sendMessage({
-          action: 'fetchDelijnData', url:
-              `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${lijnrichting.entiteitnummer}/${lijnrichting.lijnnummer}`
+            action: 'fetchDelijnData', url:
+                `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${lijnrichting.entiteitnummer}/${lijnrichting.lijnnummer}`
         });
         let individualLijnDataColors = await browser.runtime.sendMessage({
             action: 'fetchDelijnData', url:
                 `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${lijnrichting.entiteitnummer}/${lijnrichting.lijnnummer}/lijnkleuren`
-          });
+        });
         let backgroundColor = getHexByCode(individualLijnDataColors.achtergrond.code)
         let borderColor = getHexByCode(individualLijnDataColors.achtergrondRand.code)
         let color = getHexByCode(individualLijnDataColors.voorgrond.code)
@@ -283,9 +342,8 @@ function calculateTimeUntilDeparture(ETA) {
 }
 
 function getHexByCode(code) {
-    console.log(lijnDataKleuren)
     const color = lijnDataKleuren.kleuren.find(color => color.code === code);
-    return color ? "#"+color.hex : null;
+    return color ? "#" + color.hex : null;
 }
 
 async function migrateDelijnData() {

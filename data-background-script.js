@@ -50,9 +50,9 @@ export async function getDelijnColorData() {
     try {
         let data = await browser.storage.local.get("delijnColorData");
         let delijnColorData;
-        if (data.delijnColorData.kleuren){
+        if (data.delijnColorData?.kleuren != undefined) {
             delijnColorData = data.delijnColorData
-        }else {
+        } else {
             delijnColorData = await fetchDelijnData("https://api.delijn.be/DLKernOpenData/api/v1/kleuren")
         }
 

@@ -1,4 +1,4 @@
-.lijncards {
+.lijnCard {
     background-color: var(--color-base01);
     border: 3px solid var(--color-base03);
     align-self: center;
@@ -10,7 +10,7 @@
     flex-direction: column;
 }
 
-.enableAnimations .lijncards {
+.enableAnimations .lijnCard {
     animation: delijnCardAppear 0.3s ease-in-out 0ms 1;
 }
 
@@ -43,7 +43,7 @@
 }
 
 .lijnNumber {
-    border: 3px solid var(--color-accent);
+    border: 3px solid var(--color-base02);
     font-weight: 700;
     width: 50px;
     text-align: center;
@@ -53,19 +53,37 @@
     background-color: var(--color-base02);
 }
 
+.lijnCard.lijnCardCancelled .lijnCardBottom .timeUntilDeparture {
+    color: var(--color-red);
+}
+
+.lijnCard.lijnCardNoData .arrivalTimeDeviation {
+    color: var(--color-red);
+}
+
+.lijnCard.lijnCardCancelled .lijnCardBottom .time,
+.lijnCard.lijnCardCancelled .lijnCardTop .lijnDestination {
+    text-decoration: line-through;
+    text-decoration-color: var(--color-red);
+    text-decoration-thickness: 3px;
+}
+
 .lijnNumber.halteLijnNumber {
-    border: 3px solid var(--color-base02);
     font-size: 12px;
     width: 35px;
     border-radius: 7.5px;
     border-width: 2px;
 }
 
-.enableAnimations .lijncardsHalte {
+.enableAnimations .lijnNumber {
+    transition: all 0.15s ease-in;
+}
+
+.enableAnimations .lijnCardHalte {
     transition: all 0.2s ease-in-out;
 }
 
-.enableAnimations .lijncardsHalte:hover {
+.enableAnimations .lijnCardHalte:hover {
     transform: scale(1.05);
 }
 
@@ -75,7 +93,7 @@
     margin-bottom: 8px;
 }
 
-.lijncardsHalte:hover {
+.lijnCardHalte:hover {
     background-color: var(--color-base02) !important;
     cursor: pointer !important;
 }
@@ -87,6 +105,15 @@
     align-self: center;
     margin-left: auto;
     font-weight: 700;
+    text-wrap: nowrap;
+}
+
+.lijnDestination.lijnDestinationLong {
+    font-size: 15.5px;
+}
+
+.lijnDestination.lijnDestinationLongLong {
+    font-size: 14px;
 }
 
 .lijnCardBottom {
@@ -102,8 +129,9 @@
     font-size: 14px;
     color: var(--color-accent);
     text-align: right;
-    margin-bottom: 5px !important;
+    margin-bottom: 5px;
     font-weight: 450;
+    height: 19px;
 }
 
 .lijnCardTop {
@@ -111,6 +139,7 @@
     flex-direction: row;
     width: 100%;
     justify-content: space-between;
+    height: 40px;
 }
 
 .timeUntilDeparture {
