@@ -117,7 +117,6 @@ async function showHalteOptions() {
     });
     delijnHaltesLijnrichtingenData.halteLijnrichtingen.forEach((halte, i) => {
         halte.halte.omschrijving = delijnHaltesData.haltes[i].omschrijving;
-        halte.halte.richtingen = "wow";
     });
     try {
 
@@ -139,26 +138,33 @@ async function showHalteOptions() {
 }
 
 async function createHalteOption(delijnHalteData, i) {
+    console.log(delijnHalteData);
     const delijnBottomContainer = document.getElementById('delijnBottomContainer');
-    let halteLijnCard = document.createElement("div");
-    const richtingen = delijnHalteData.halte.richtingen || "No info";
-    halteLijnCard.setAttribute("entiteitnummer", delijnHalteData.halte.entiteitnummer)
-    halteLijnCard.setAttribute("haltenummer", delijnHalteData.halte.haltenummer)
-    halteLijnCard.classList.add("lijncards", "lijncardsHalte")
-    halteLijnCard.id = `lijncard${i}`
+    const halteLijnCard = document.createElement("div");
+
+    const richtingen = "Naar: " + delijnHalteData.lijnrichtingen.slice(0, 4).map(lijn => {
+        const description = lijn.omschrijving.split(" ");
+        return description[description.length - 1];
+    }).join(", ");
+
+    halteLijnCard.setAttribute("entiteitnummer", delijnHalteData.halte.entiteitnummer);
+    halteLijnCard.setAttribute("haltenummer", delijnHalteData.halte.haltenummer);
+    halteLijnCard.classList.add("lijncards", "lijncardsHalte");
+    halteLijnCard.id = `lijncard${i}`;
     halteLijnCard.innerHTML = `
       <h3 class="halteTitle">${delijnHalteData.halte.omschrijving}</h3>
       <div class="halteDirections">${richtingen}</div>`;
-    let lijnen = document.createElement("div")
-    lijnen.classList.add("halteLijnen")
-    delijnHalteData.lijnrichtingen.slice(0, 5).forEach((lijnrichting) => {
+
+    const lijnen = document.createElement("div");
+    lijnen.classList.add("halteLijnen");
+    delijnHalteData.lijnrichtingen.slice(0, 5).forEach(lijnrichting => {
         const lijn = document.createElement("span");
-        lijn.classList.add("lijnNumber");
-        lijn.classList.add("halteLijnNumber")
+        lijn.classList.add("lijnNumber", "halteLijnNumber");
         lijn.innerText = lijnrichting.lijnnummer;
         lijnen.appendChild(lijn);
     });
-    halteLijnCard.append(lijnen)
+
+    halteLijnCard.append(lijnen);
     halteLijnCard.addEventListener("click", async function (e) {
         const delijnAppData = {
             entiteitnummer: this.getAttribute("entiteitnummer"),
@@ -168,7 +174,9 @@ async function createHalteOption(delijnHalteData, i) {
         clearDelijnBottomContainer();
         await displayLijnenBasedOnHalte(this.getAttribute("entiteitnummer"), this.getAttribute("haltenummer"));
     });
+
     delijnBottomContainer.appendChild(halteLijnCard);
+    await delay(50);
 }
 
 function initializeDelijnHTML() {
