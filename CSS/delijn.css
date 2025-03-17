@@ -54,6 +54,7 @@
 }
 
 .lijnNumber.halteLijnNumber {
+    border: 3px solid var(--color-base02);
     font-size: 12px;
     width: 35px;
     border-radius: 7.5px;

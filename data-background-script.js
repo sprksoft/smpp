@@ -1,4 +1,5 @@
 if (typeof browser === 'undefined') { var browser = chrome; }
+import { fetchDelijnData } from './api-background-script.js';
 
 export async function getWeatherAppData(location) {
     try {
@@ -42,5 +43,25 @@ export async function getDelijnAppData() {
         return delijnAppData;
     } catch (error) {
         console.error('Error retrieving Delijn AppData:', error);
+    }
+}
+
+export async function getDelijnColorData() {
+    try {
+        let data = await browser.storage.local.get("delijnColorData");
+        let delijnColorData;
+        if (data.delijnColorData.kleuren){
+            delijnColorData = data.delijnColorData
+        }else {
+            delijnColorData = await fetchDelijnData("https://api.delijn.be/DLKernOpenData/api/v1/kleuren")
+        }
+
+        await browser.storage.local.set({
+            delijnColorData: delijnColorData
+        });
+        console.log('Retrieved Delijn Color Data.');
+        return delijnColorData;
+    } catch (error) {
+        console.error('Error retrieving Delijn Color Data:', error);
     }
 }
