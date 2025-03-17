@@ -3,12 +3,11 @@
     border: 3px solid var(--color-base03);
     align-self: center;
     padding: 10px;
-    border-radius: 15px;
+    border-radius: 20px;
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
-
 }
 
 .enableAnimations .lijncards {
@@ -44,17 +43,29 @@
 }
 
 .lijnNumber {
-    border: 2px solid var(--color-accent);
+    border: 3px solid var(--color-accent);
     font-weight: 700;
-    width: 35px;
+    width: 50px;
     text-align: center;
-    font-size: 12px;
-    border-radius: 7.5px;
+    font-size: 20px;
+    border-radius: 10px;
     padding: 4px;
+    background-color: var(--color-base02);
+}
+
+.lijnNumber.halteLijnNumber {
+    font-size: 12px;
+    width: 35px;
+    border-radius: 7.5px;
+    border-width: 2px;
 }
 
 .enableAnimations .lijncardsHalte {
-    transition: all 0.1s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+.enableAnimations .lijncardsHalte:hover {
+    transform: scale(1.05);
 }
 
 .halteDirections {
@@ -68,28 +79,16 @@
     cursor: pointer !important;
 }
 
-.lijncardstitle {
-    display: flex;
-    background-color: var(--color-base02);
-    border: 3px solid var(--color-accent);
-    align-self: center;
-    padding: 10px;
-    margin-top: 0px;
-    margin-bottom: auto !important;
-    border-radius: 9px;
-    width: fit-content;
-    margin: none;
-    flex-grow: 0;
-    text-align: center;
-}
-
-.lijncardsdestin {
+.lijnDestination {
     margin-bottom: 0px !important;
-    font-size: 16px;
-    text-align: right;
+    font-size: 17px;
+    vertical-align: middle;
+    align-self: center;
+    margin-left: auto;
+    font-weight: 700;
 }
 
-.times {
+.lijnCardBottom {
     display: flex;
     flex-direction: row;
 }
@@ -98,35 +97,30 @@
     font-size: 20px;
 }
 
-.timedifference {
-    font-size: 16px;
+.arrivalTimeDeviation {
+    font-size: 14px;
     color: var(--color-accent);
     text-align: right;
-    margin-bottom: 0px !important;
+    margin-bottom: 5px !important;
+    font-weight: 450;
 }
 
-.top {
+.lijnCardTop {
     display: flex;
-    height: 55px;
-    margin-bottom: 15px !important;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
 }
 
-.intime {
+.timeUntilDeparture {
     font-size: 20px;
+    font-weight: 500;
     color: var(--color-accent);
     text-align: right;
     flex-grow: 1;
 }
 
-.topright {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 5px !important;
-    justify-content: center;
-}
-
-.searchbutton {
+#delijnSearchButton {
     height: 40px !important;
     width: 40px !important;
     background: var(--color-base01) !important;
@@ -137,11 +131,11 @@
     flex-grow: 0 !important;
 }
 
-.enableAnimations .searchbutton {
+.enableAnimations #delijnSearchButton {
     transition: all 0.2s ease-in-out !important;
 }
 
-.enableAnimations .searchbutton:hover>.searchbuttonicon {
+.enableAnimations #delijnSearchButton:hover>.delijnSearchIcon {
     transform-origin: bottom bottom;
     animation: searchIconJiggle 0.5s ease-in-out 0ms 1;
 }
@@ -169,19 +163,20 @@
     border-color: var(--color-accent) !important;
 }
 
-.lijninfo {
+#delijnInfoContainer {
+    justify-content: center;
     font-size: 16px !important;
     font-weight: bold;
     text-align: center;
 }
 
-#top_lijn_app {
+#delijnTopContainer {
     display: flex;
     flex-direction: row;
-    gap: 10px !important;
+    gap: 12.5px !important;
 }
 
-#haltetext {
+#halteInput {
     flex-grow: 1;
     height: 40px !important;
     margin: 0px !important;
@@ -191,13 +186,13 @@
 #delijncontainer {
     display: flex;
     flex-direction: column;
-    gap: 10px !important;
+    gap: 12.5px !important;
 }
 
-#delijnBottomApp {
+#delijnBottomContainer {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12.5px;
 }
 
 #showMoreHaltesButton {
@@ -216,10 +211,20 @@
     background-color: var(--color-base02);
     border-color: var(--color-accent);
     font-weight: 800;
+    letter-spacing: 0.5px;
+    width: 77%;
     cursor: pointer;
 }
 
 .enableAnimations #showMoreHaltesButton {
     animation: delijnCardAppear 0.3s ease-in-out 0ms 1;
     transition: all 0.2s ease-in-out;
+}
+
+.delijnInfoContainerHidden {
+    display: none;
+}
+
+.delijnInfoContainerVisible {
+    display: flex;
 }

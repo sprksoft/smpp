@@ -451,7 +451,7 @@ smsc-inlineeditor.smsc-table__cell--inlineeditor {
 }
 
 
-.lvs-pupilpresences-row{
+.lvs-pupilpresences-row {
   background-color: var(--color-base02) !important;
 }
 
@@ -459,22 +459,27 @@ smsc-inlineeditor.smsc-table__cell--inlineeditor {
   background-color: var(--color-base02) !important;
   border: none !important;
 }
-.google-authenticator-input{
+
+.google-authenticator-input {
   border: .1px solid var(--color-base03) !important;
   border-radius: 8px !important;
 }
-.notifyScreenEventOptionLine:hover{
+
+.notifyScreenEventOptionLine:hover {
   background-color: var(--color-base01) !important;
 }
+
 .notifyScreenContainer .notifyScreenDevice,
 .notifyScreenContainer .notifyScreenGeneralBlock:not(:last-child),
 .notifyScreenContainer #notifyPossibleEvents .notifyScreenEventBlock {
   border-color: var(--color-base02) !important;
 }
+
 .notifyScreenContainer .notifyScreenContainerEmail.disabled,
 .notifySceenContainerInfo.disabled {
   opacity: .6 !important;
 }
+
 #smscMainBlockContainer,
 .notifyScreenContainer {
   background-color: var(--background-color) !important;
@@ -592,7 +597,7 @@ nav.topnav {
 }
 
 .popupinput,
-#halt,
+#halteInput,
 #background {
   background-color: var(--color-settings-ui-bg) !important;
   border: 2px solid var(--color-settings-ui-layer2) !important;
