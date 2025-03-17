@@ -1,6 +1,6 @@
 if (typeof browser === 'undefined') { var browser = chrome; }
 
-import { getWeatherAppData, getDelijnAppData } from './data-background-script.js';
+import { getWeatherAppData, getDelijnAppData, getDelijnColorData } from './data-background-script.js';
 import { fetchWeatherData, fetchDelijnData } from './api-background-script.js';
 
 browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -48,6 +48,11 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
       const delijnData = await fetchDelijnData(message.url);
       sendResponse(delijnData);
       console.log('Delijn appdata fetched and sent.');
+    }
+    if (message.action === 'getDelijnColorData') {
+      let delijnColorData = await getDelijnColorData()
+      sendResponse(delijnColorData);
+      console.log('Delijn color data fetched and sent.');
     }
   })();
   return true;

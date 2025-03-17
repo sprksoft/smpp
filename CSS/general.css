@@ -1790,9 +1790,9 @@ div.smscCheckbox input[type=checkbox]:not(.loading):focus+label:before {
   background-position-x: 8px !important;
 }
 
-span[style^="color:"],
-span[style*="; color:"],
-span[style*=";color:"],
+span[style^="color:"]:not(.lijnNumber),
+span[style*="; color:"]:not(.lijnNumber),
+span[style*=";color:"]:not(.lijnNumber),
 h1[style^="color:"],
 h1[style*="; color:"],
 h1[style*=";color:"],
@@ -1807,7 +1807,7 @@ div[style*=";color:#033399;"] {
 }
 
 
-span[style*="background"],
+span[style*="background"]:not(.lijnNumber),
 div[style*="background"]:not(.manual_widgettitle) {
   background-color: transparent !important;
 }
