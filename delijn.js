@@ -176,7 +176,7 @@ async function createHalteOption(delijnHalteData, i) {
     });
 
     delijnBottomContainer.appendChild(halteLijnCard);
-    await delay(50);
+    if (document.body.classList.contains("enableAnimations")) await delay(50);
 }
 
 function initializeDelijnHTML() {
