@@ -217,13 +217,9 @@ async function createHalteOption(delijnHalteData, i) {
     const delijnBottomContainer = document.getElementById('delijnBottomContainer');
     const halteLijnCard = document.createElement("div");
 
-    const richtingen = "Naar: " + delijnHalteData.lijnrichtingen.slice(0, 3).map(lijn => {
-        const description = lijn.omschrijving.split("-");
-        return (description[description.length - 1]);
-    }).join(", ");
-
-    halteLijnCard.setAttribute("entiteitnummer", delijnHalteData.halte.entiteitnummer);
-    halteLijnCard.setAttribute("haltenummer", delijnHalteData.halte.haltenummer);
+    const richtingen = "Naar: " + gethalteDirections(delijnHalteData.lijnrichtingen) 
+    halteLijnCard.dataset.entiteitnummer = delijnHalteData.halte.entiteitnummer;
+    halteLijnCard.dataset.haltenummer = delijnHalteData.halte.haltenummer;
     halteLijnCard.classList.add("lijnCard", "lijnCardHalte");
     halteLijnCard.id = `lijncard${i}`;
     halteLijnCard.innerHTML = `
@@ -236,6 +232,8 @@ async function createHalteOption(delijnHalteData, i) {
         const lijn = document.createElement("span");
         lijn.classList.add("lijnNumber", "halteLijnNumber");
         lijn.innerText = lijnrichting.lijnnummer
+        lijn.dataset.entiteitnummer = lijnrichting.entiteitnummer
+        lijn.dataset.lijnnummer = lijnrichting.lijnnummer
         lijnen.appendChild(lijn);
         let individualLijnData = await browser.runtime.sendMessage({
             action: 'fetchDelijnData', url:
@@ -257,12 +255,12 @@ async function createHalteOption(delijnHalteData, i) {
     halteLijnCard.append(lijnen);
     halteLijnCard.addEventListener("click", async function (e) {
         const delijnAppData = {
-            entiteitnummer: this.getAttribute("entiteitnummer"),
-            haltenummer: this.getAttribute("haltenummer")
+            entiteitnummer: this.dataset.entiteitnummer,
+            haltenummer: this.dataset.haltenummer
         };
         await browser.runtime.sendMessage({ action: 'setDelijnAppData', data: delijnAppData });
         clearDelijnBottomContainer();
-        await displayLijnenBasedOnHalte(this.getAttribute("entiteitnummer"), this.getAttribute("haltenummer"));
+        await displayLijnenBasedOnHalte(this.dataset.entiteitnummer, this.dataset.haltenummer);
     });
 
     delijnBottomContainer.appendChild(halteLijnCard);
@@ -351,6 +349,20 @@ async function migrateDelijnData() {
     window.localStorage.removeItem("lijnData")
 }
 
+function gethalteDirections(delijnDirectionsData){
+    let delijnDirectionsArray = [];
+    console.log(delijnDirectionsData)
+    delijnDirectionsData.forEach(lijn => {
+        let description = lijn.omschrijving.split("-")
+        let descriptionEndStop = description[description.length - 1]
+        descriptionEndStop = descriptionEndStop.replace(')',"")
+        descriptionEndStop = descriptionEndStop.replace('(',"")
+        if (!delijnDirectionsArray.includes(descriptionEndStop) && delijnDirectionsArray.length<3){
+            delijnDirectionsArray.push(descriptionEndStop)
+        }
+    })
+    return delijnDirectionsArray.join(", ");
+}
 // main func
 async function createDelijnApp() {
     initializeDelijnHTML();
