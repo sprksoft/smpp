@@ -41,7 +41,7 @@ async function createHalteDoorkomst(doorkomst) {
         arrivalTimeDeviation = ""
     } else if (predictionStatuses.includes("GEENREALTIME")) {
         lijnCard.classList.add("lijnCardNoData")
-        timeUntilDeparture = calculateTimeUntilDeparture(ETA)
+        timeUntilDeparture = calculateTimeUntilDepartureInMins(ETA)
         if (timeUntilDeparture < 1) {
             timeUntilDeparture = "Now";
         } else {
@@ -52,7 +52,7 @@ async function createHalteDoorkomst(doorkomst) {
         ETA = new Date(doorkomst["real-timeTijdstip"]);
 
         arrivalTimeDeviation = ETA ? Math.round((ETA - originalETA) / 1000 / 60) : "No data";
-        timeUntilDeparture = calculateTimeUntilDeparture(ETA);
+        timeUntilDeparture = calculateTimeUntilDepartureInMins(ETA);
         if (arrivalTimeDeviation === 0) {
             arrivalTimeDeviation = "On time";
         } else if (arrivalTimeDeviation > 0) {
@@ -228,17 +228,24 @@ async function createHalteOption(delijnHalteData, i) {
 
     const lijnen = document.createElement("div");
     lijnen.classList.add("halteLijnen");
+    let lijnenArray = []
     delijnHalteData.lijnrichtingen.slice(0, 5).forEach(async function (lijnrichting) {
         const lijn = document.createElement("span");
         lijn.classList.add("lijnNumber", "halteLijnNumber");
         lijn.innerText = lijnrichting.lijnnummer
         lijn.dataset.entiteitnummer = lijnrichting.entiteitnummer
         lijn.dataset.lijnnummer = lijnrichting.lijnnummer
-        lijnen.appendChild(lijn);
+        lijnen.append(lijn)
         let individualLijnData = await browser.runtime.sendMessage({
             action: 'fetchDelijnData', url:
                 `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${lijnrichting.entiteitnummer}/${lijnrichting.lijnnummer}`
         });
+        if (lijnenArray.includes(individualLijnData.lijnnummerPubliek)){
+            lijn.remove()
+            return
+        }
+        lijnenArray.push(individualLijnData.lijnnummerPubliek)
+
         let individualLijnDataColors = await browser.runtime.sendMessage({
             action: 'fetchDelijnData', url:
                 `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${lijnrichting.entiteitnummer}/${lijnrichting.lijnnummer}/lijnkleuren`
@@ -335,7 +342,7 @@ function clearDelijnBottomContainer() {
     displayDelijnInfo()
 };
 
-function calculateTimeUntilDeparture(ETA) {
+function calculateTimeUntilDepartureInMins(ETA) {
     currentDate = new Date();
     return Math.round((ETA - currentDate) / 1000 / 60);
 }

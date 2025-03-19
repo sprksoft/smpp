@@ -1,10 +1,10 @@
 let enable_snow_mul = false;
 let enable_rain_mul = false;
-function set_snow_multiplier(on) {
-  enable_snow_mul = on;
+function set_snow_multiplier(value) {
+  enable_snow_mul = value;
 }
-function set_rain_multiplier(on) {
-  enable_rain_mul = on;
+function set_rain_multiplier(value) {
+  enable_rain_mul = value;
 }
 function set_snow_level(count) {
   document.getElementById("snowflakes")?.remove()
