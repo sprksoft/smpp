@@ -186,7 +186,9 @@ async function apply() {
   let config = { childList: true, subtree: true };
   observer.observe(document.body, config);
   if (centralContainer) {
-
+        if (!shownews) {
+      centralContainer.innerHTML = ' '
+    }
     discordpopup()
     if (rightContainer) {
       rightContainer.innerHTML = ""
@@ -259,9 +261,6 @@ async function apply() {
         container.append(WeatherAppElement)
       }
       createFlappyApp()
-    }
-    if (!shownews) {
-      centralContainer.innerHTML = ' '
     }
   }
 

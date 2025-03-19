@@ -274,6 +274,7 @@ function initializeDelijnHTML() {
 
     let delijnSearchField = document.createElement("input")
     delijnSearchField.id = "halteInput"
+    delijnSearchField.classList.add("popupinput")
     delijnSearchField.spellcheck = false
     delijnSearchField.addEventListener("keyup", function (event) {
         if (event.key == "Enter") handleHalteSearch();

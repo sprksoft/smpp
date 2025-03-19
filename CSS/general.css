@@ -596,9 +596,7 @@ nav.topnav {
   padding: 7px !important;
 }
 
-.popupinput,
-#halteInput,
-#background {
+.popupinput {
   background-color: var(--color-settings-ui-bg) !important;
   border: 2px solid var(--color-settings-ui-layer2) !important;
   text-align: center !important;
@@ -606,6 +604,11 @@ nav.topnav {
   width: 100px !important;
   color: var(--color-text) !important;
   margin: 10px !important;
+  transition: none !important;
+}
+
+.enableAnimations .popupinput{
+  transition: all 0.3s !important;
 }
 
 #halt {

@@ -161,6 +161,11 @@
     flex-grow: 0 !important;
 }
 
+#delijnSearchButton:hover {
+    background-color: var(--color-base02) !important;
+    border-color: var(--color-accent) !important;
+}
+
 .enableAnimations #delijnSearchButton {
     transition: all 0.2s ease-in-out !important;
 }
@@ -186,11 +191,6 @@
     100% {
         rotate: 0deg;
     }
-}
-
-.searchbutton:hover {
-    background-color: var(--color-base02) !important;
-    border-color: var(--color-accent) !important;
 }
 
 #delijnInfoContainer {
