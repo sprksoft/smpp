@@ -12,8 +12,6 @@ const default_theme = {
 }
 let settingsWindowIsHidden = true;
 
-if (browser == undefined) { var browser = chrome };
-
 function unbloat() {
   document.body.innerHTML = '';
 }
@@ -186,7 +184,7 @@ async function apply() {
   let config = { childList: true, subtree: true };
   observer.observe(document.body, config);
   if (centralContainer) {
-        if (!shownews) {
+    if (!shownews) {
       centralContainer.innerHTML = ' '
     }
     discordpopup()
@@ -226,7 +224,7 @@ async function apply() {
       container.prepend(PlannerAppElement)
       ShowPlanner(0)
     }
-    if (show_plant) {
+    if (show_plant && !liteMode) {
       var PlantAppElement = document.createElement("div")
       PlantAppElement.classList.add("homepage__right")
       PlantAppElement.classList.add("smsc-container--right")
@@ -242,7 +240,7 @@ async function apply() {
       container.append(WeatherAppElement)
       await createWeatherApp(loc, IsBig);
     }
-    if (showsnake) {
+    if (showsnake && !liteMode) {
       if (!document.getElementById("weathercontainer")) {
         var WeatherAppElement = document.createElement("div")
         WeatherAppElement.classList.add("homepage__right")
@@ -252,7 +250,7 @@ async function apply() {
       }
       creatSnakeApp()
     }
-    if (showflappy) {
+    if (showflappy && !liteMode) {
       if (!document.getElementById("weathercontainer")) {
         var WeatherAppElement = document.createElement("div")
         WeatherAppElement.classList.add("homepage__right")
@@ -267,10 +265,12 @@ async function apply() {
   style.setProperty('--profile-picture', 'url(' + getPfpLink(username_override) + ')');
   style.setProperty('--blur-value-large', 'blur(' + bigblurvalue + 'px)');
   style.setProperty('--blur-value-small', 'blur(' + blurvalue + 'px)');
-  applyWeatherEffects(weatherSelector, weatherAmount)
-  if (gc_initialized) {
-    remove_gcwin()
-    make_gcwin(true)
+  if (!liteMode) applyWeatherEffects(weatherSelector, weatherAmount)
+  if (!liteMode) {
+    if (gc_initialized) {
+      remove_gcwin()
+      make_gcwin(true)
+    }
   }
   if (enableanimations) {
     document.body.classList.add("enableAnimations")
@@ -320,14 +320,9 @@ function store() {
   const overwrite_theme = Number(document.getElementById("backgroundSlider").value);
   const loc = document.getElementById("location").value;
   const blur = Number(document.getElementById('mySlider').value);
-  const weatherAmount = Number(document.getElementById('weatherSlider').value);
   const shownews = document.getElementById("shownewselement").checked;
-  const showsnake = document.getElementById('showsnakeelement').checked;
-  const showflappy = document.getElementById('showflappyelement').checked;
   const isbig = document.getElementById("isbig").checked;
   const showplanner = document.getElementById("showplanner").checked;
-  const weatherSelector = Number(document.getElementById("weatherSelector").value);
-  const show_plant = document.getElementById("show_plant").checked;
   const smpp_logo = document.getElementById("smpp_logo").checked;
   const enableAnimations = document.getElementById("performanceModeTooltip").checked;
   settingsData.profile = profileSelect;
@@ -336,16 +331,23 @@ function store() {
   settingsData.location = loc.charAt(0).toUpperCase() + loc.slice(1);
   settingsData.backgroundlink = backgroundLink
   settingsData.blur = blur;
-  settingsData.weatherAmount = weatherAmount;
   settingsData.shownews = shownews;
-  settingsData.showsnake = showsnake;
-  settingsData.showflappy = showflappy
   settingsData.isbig = isbig;
   settingsData.showplanner = showplanner;
-  settingsData.weatherSelector = weatherSelector;
-  settingsData.show_plant = show_plant;
   settingsData.smpp_logo = smpp_logo;
   settingsData.enableanimations = enableAnimations
+  if (!liteMode) {
+    const weatherAmount = Number(document.getElementById('weatherSlider').value);
+    const showsnake = document.getElementById('showsnakeelement').checked;
+    const showflappy = document.getElementById('showflappyelement').checked;
+    const weatherSelector = Number(document.getElementById("weatherSelector").value);
+    const show_plant = document.getElementById("show_plant").checked;
+    settingsData.weatherAmount = weatherAmount;
+    settingsData.weatherSelector = weatherSelector;
+    settingsData.showsnake = showsnake;
+    settingsData.show_plant = show_plant;
+    settingsData.showflappy = showflappy
+  }
   document.getElementById("performanceModeInfo").innerHTML = settingsData.enableanimations ? `Toggle performance mode (disabled)` : `Toggle performance mode (enabled)`
   console.log(settingsData)
   if (settingsData.show_scores == undefined) {
@@ -436,16 +438,18 @@ function load() {
   backgroundLink.value = settingsData.backgroundlink
   loc.value = settingsData.location
   blur.value = settingsData.blur
-  weatherSlider.value = settingsData.weatherAmount
   shownews.checked = settingsData.shownews
-  showsnake.checked = settingsData.showsnake
-  showflappy.checked = settingsData.showflappy
   isbig.checked = settingsData.isbig
   showplanner.checked = settingsData.showplanner
-  weatherSelector.value = settingsData.weatherSelector
-  show_plant.checked = settingsData.show_plant;
   smpp_logo.checked = settingsData.smpp_logo;
   enableAnimations.checked = settingsData.enableanimations;
+  if (!liteMode) {
+    showsnake.checked = settingsData.showsnake
+    showflappy.checked = settingsData.showflappy
+    weatherSelector.value = settingsData.weatherSelector
+    weatherSlider.value = settingsData.weatherAmount
+    show_plant.checked = settingsData.show_plant;
+  }
   document.getElementById("performanceModeInfo").innerHTML = settingsData.enableanimations ? `Toggle performance mode (disabled)` : `Toggle performance mode (enabled)`
   if (profileSelect.value == "custom") {
     loadCustomTheme()
@@ -554,11 +558,288 @@ function closeSettings() {
   settingsWindowIsHidden = true;
 }
 
+function createSwitch(id, title) {
+  const switchContainer = document.createElement('div');
+  const switchHeading = document.createElement('h3');
+  switchHeading.className = 'popuptitles';
+  switchHeading.textContent = title;
+
+  const switchLabel = document.createElement('label');
+  switchLabel.className = 'switch';
+
+  const switchInput = document.createElement('input');
+  switchInput.className = 'popupinput';
+  switchInput.type = 'checkbox';
+  switchInput.id = id;
+
+  const switchSlider = document.createElement('span');
+  switchSlider.className = 'slider round';
+
+  switchLabel.appendChild(switchInput);
+  switchLabel.appendChild(switchSlider);
+  if (title != null) { switchContainer.appendChild(switchHeading); }
+  switchContainer.appendChild(switchLabel);
+
+  return switchContainer;
+};
+
+function createSettingsHTML(parent) {
+  const performanceModeTooltipLabel = document.createElement('label');
+  performanceModeTooltipLabel.className = 'performanceModeTooltipLabel';
+  performanceModeTooltipLabel.id = 'performanceModeTooltipLabel';
+
+  const performanceModeTooltip = document.createElement('input');
+  performanceModeTooltip.type = 'checkbox';
+  performanceModeTooltip.id = 'performanceModeTooltip';
+
+  performanceModeTooltipLabel.appendChild(performanceModeTooltip);
+  performanceModeTooltipLabel.innerHTML += performanceModeSvg;
+
+  const performanceModeInfo = document.createElement('span');
+  performanceModeInfo.id = 'performanceModeInfo';
+
+  const themeHeading = document.createElement('h3');
+  themeHeading.className = 'popuptitles';
+  themeHeading.textContent = 'Theme:';
+
+  const profileSelector = document.createElement('select');
+  profileSelector.id = 'profileSelector';
+
+  const options = [
+    { value: 'default', text: 'Default Deluxe' },
+    { value: 'white', text: 'Off White' },
+    { value: 'custom', text: 'Custom Theme' },
+    { value: 'ldev', text: 'Dark Sands' },
+    { value: 'birb', text: 'Midnight Sapphire' },
+    { value: 'stalker', text: 'Ruby Eclipse' },
+    { value: 'chocolate', text: 'Dark Mocha' },
+    { value: 'mountain', text: 'Storm Peaks' },
+    { value: 'winter', text: 'Arctic Azure' },
+    { value: 'galaxy', text: 'Fluorescent Galaxy' },
+    { value: 'sand', text: 'Sahara Oasis' },
+    { value: 'purple', text: 'Neon Violet' },
+    { value: 'fall', text: 'Autumn Gloom' },
+    { value: 'matcha', text: 'Matcha Green' },
+    { value: 'pink', text: 'Cherry Haze' }
+  ];
+
+  options.forEach(option => {
+    const optionElement = document.createElement('option');
+    optionElement.value = option.value;
+    optionElement.textContent = option.text;
+    profileSelector.appendChild(optionElement);
+  });
+
+  const colorPickers = document.createElement('div');
+  colorPickers.className = 'textandbutton';
+  colorPickers.id = 'colorpickers';
+
+  const switchesContainer = document.createElement('div');
+  switchesContainer.className = 'textandbuttonnomarg';
+
+  switchesContainer.appendChild(createSwitch('showplanner', 'Planner:'));
+  switchesContainer.appendChild(createSwitch('halt', 'Delijn:'));
+  if (!liteMode) {
+    switchesContainer.appendChild(createSwitch('show_plant', 'Plant:'));
+  } else {
+    switchesContainer.appendChild(createSwitch('shownewselement', 'News:'));
+    switchesContainer.appendChild(createSwitch('smpp_logo', 'Logo:'));
+  }
+
+  const weatherHeading = document.createElement('h3');
+  weatherHeading.className = 'popuptitles';
+  weatherHeading.textContent = 'Location (Weather):';
+
+  const weatherContainer = document.createElement('div');
+  weatherContainer.className = 'textandbutton';
+
+  const locationInput = document.createElement('input');
+  locationInput.className = 'popupinput';
+  locationInput.id = 'location';
+  locationInput.spellcheck = false;
+  locationInput.type = 'text';
+
+  const locationSwitch = createSwitch('isbig', null);
+  weatherContainer.appendChild(locationInput);
+  weatherContainer.appendChild(locationSwitch);
+
+  const wallpaperHeading = document.createElement('h3');
+  wallpaperHeading.className = 'popuptitles';
+  wallpaperHeading.textContent = 'Custom wallpaper:';
+
+  const wallpaperContainer = document.createElement('div');
+  wallpaperContainer.className = 'textandbutton';
+
+  const verticalText = document.createElement('div');
+  verticalText.className = 'verticaltext';
+
+  const offText = document.createElement('span');
+  offText.className = 'nobottommargp';
+  offText.textContent = 'Off';
+
+  const linkText = document.createElement('span');
+  linkText.className = 'nobottommargp link_text';
+  linkText.textContent = 'Link';
+
+  const fileText = document.createElement('span');
+  fileText.className = 'nobottommargp';
+  fileText.textContent = 'File';
+
+  verticalText.appendChild(offText);
+  verticalText.appendChild(linkText);
+  verticalText.appendChild(fileText);
+
+  const backgroundSlider = document.createElement('input');
+  backgroundSlider.type = 'range';
+  backgroundSlider.min = '0';
+  backgroundSlider.max = '2';
+  backgroundSlider.value = '0';
+  backgroundSlider.className = 'sliderblur';
+  backgroundSlider.id = 'backgroundSlider';
+
+  const backgroundLinkInput = document.createElement('input');
+  backgroundLinkInput.className = 'popupinput';
+  backgroundLinkInput.id = 'backgroundlink';
+  backgroundLinkInput.spellcheck = false;
+  backgroundLinkInput.type = 'text';
+
+  const fileInput = document.createElement('input');
+  fileInput.className = 'backgroundfile';
+  fileInput.id = 'fileInput';
+  fileInput.style.display = 'none';
+  fileInput.type = 'file';
+  fileInput.accept = '.png, .jpg, .jpeg';
+
+  const fileInputButton = document.createElement('button');
+  fileInputButton.className = 'popupinput backgroundfile';
+  fileInputButton.id = 'backgroundfilebutton';
+  fileInputButton.innerHTML = fileInputIconSvg;
+
+  const colorPickerContainer = document.createElement('div');
+  colorPickerContainer.className = 'color-picker-container';
+
+  const blurSlider = document.createElement('input');
+  blurSlider.type = 'range';
+  blurSlider.min = '0';
+  blurSlider.max = '10';
+  blurSlider.value = '0';
+  blurSlider.className = 'sliderblur';
+  blurSlider.id = 'mySlider';
+
+  const blurLabel = document.createElement('span');
+  blurLabel.className = 'color-label';
+  blurLabel.id = 'blurPlaats';
+  blurLabel.textContent = 'blur';
+
+  colorPickerContainer.appendChild(blurSlider);
+  colorPickerContainer.appendChild(blurLabel);
+
+  wallpaperContainer.appendChild(verticalText);
+  wallpaperContainer.appendChild(backgroundSlider);
+  wallpaperContainer.appendChild(backgroundLinkInput);
+  wallpaperContainer.appendChild(fileInput);
+  wallpaperContainer.appendChild(fileInputButton);
+  wallpaperContainer.appendChild(colorPickerContainer);
+
+  const weatherOverlayHeading = document.createElement('h3');
+  weatherOverlayHeading.className = 'popuptitles';
+  weatherOverlayHeading.textContent = 'Weather overlay:';
+
+  const weatherOverlayContainer = document.createElement('div');
+  weatherOverlayContainer.className = 'textandbutton';
+  weatherOverlayContainer.style.marginTop = '20px';
+
+  const weatherVerticalText = document.createElement('div');
+  weatherVerticalText.className = 'verticaltext';
+
+  const snowText = document.createElement('p');
+  snowText.className = 'nobottommargp';
+  snowText.textContent = 'Snow';
+
+  const realtimeText = document.createElement('p');
+  realtimeText.className = 'nobottommargp link_text';
+  realtimeText.textContent = 'Realtime';
+
+  const rainText = document.createElement('p');
+  rainText.className = 'nobottommargp';
+  rainText.textContent = 'Rain';
+
+  weatherVerticalText.appendChild(snowText);
+  weatherVerticalText.appendChild(realtimeText);
+  weatherVerticalText.appendChild(rainText);
+
+  const weatherSelector = document.createElement('input');
+  weatherSelector.type = 'range';
+  weatherSelector.min = '0';
+  weatherSelector.max = '2';
+  weatherSelector.value = '0';
+  weatherSelector.className = 'sliderblur';
+  weatherSelector.id = 'weatherSelector';
+
+  const weatherSliderContainer = document.createElement('div');
+  weatherSliderContainer.className = 'verticaltext-noright';
+  weatherSliderContainer.style.width = '110px';
+  weatherSliderContainer.style.marginTop = '-10px';
+  weatherSliderContainer.style.marginRight = '10px';
+
+  const weatherSliderHeading = document.createElement('h4');
+  weatherSliderHeading.style.marginBottom = '1px';
+  weatherSliderHeading.textContent = 'Amount:';
+
+  const weatherSlider = document.createElement('input');
+  weatherSlider.type = 'range';
+  weatherSlider.min = '0';
+  weatherSlider.max = '500';
+  weatherSlider.value = '0';
+  weatherSlider.className = 'sliderblur';
+  weatherSlider.id = 'weatherSlider';
+  weatherSlider.style.width = '100%';
+
+  weatherSliderContainer.appendChild(weatherSliderHeading);
+  weatherSliderContainer.appendChild(weatherSlider);
+
+  weatherOverlayContainer.appendChild(weatherVerticalText);
+  weatherOverlayContainer.appendChild(weatherSelector);
+  weatherOverlayContainer.appendChild(weatherSliderContainer);
+
+  const gameSwitchesContainer = document.createElement('div');
+  gameSwitchesContainer.className = 'textandbutton';
+
+  gameSwitchesContainer.appendChild(createSwitch('showsnakeelement', 'Snake:'));
+  gameSwitchesContainer.appendChild(createSwitch('showflappyelement', 'Flappy:'));
+  gameSwitchesContainer.appendChild(createSwitch('shownewselement', 'News:'));
+  gameSwitchesContainer.appendChild(createSwitch('smpp_logo', 'Logo:'));
+
+  parent.appendChild(performanceModeTooltipLabel);
+  parent.appendChild(performanceModeInfo);
+
+  parent.appendChild(themeHeading);
+  parent.appendChild(profileSelector);
+  parent.appendChild(colorPickers);
+
+  parent.appendChild(switchesContainer);
+
+  parent.appendChild(weatherHeading)
+  parent.appendChild(weatherContainer);
+
+  parent.appendChild(wallpaperHeading)
+  parent.appendChild(wallpaperContainer);
+
+  if (!liteMode) {
+    parent.appendChild(weatherOverlayHeading)
+    parent.appendChild(weatherOverlayContainer);
+    parent.appendChild(gameSwitchesContainer);
+  }
+
+  return parent
+}
+
 function createSettings() {
   let quickSettingsWindow = document.createElement("div");
   quickSettingsWindow.id = "quickSettings";
   quickSettingsWindow.addEventListener("change", store);
-  quickSettingsWindow.innerHTML = popupsettingHTML;
+  quickSettingsWindow = createSettingsHTML(quickSettingsWindow)
+
   quickSettingsWindow.style.left = (-270 / 3) + "px";
   document.getElementById("quickSettingsButton").insertAdjacentElement("afterend", quickSettingsWindow);
 
@@ -618,7 +899,8 @@ function main() {
     if (onHomePage) {
       //createWidgetEditModeButton();
     }
-    createGCButton();
+    if (!liteMode) { createGCButton() };
+
     createQuickMenuButton();
 
     document.querySelector('[data-go=""]')?.remove();
