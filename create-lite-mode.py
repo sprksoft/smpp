@@ -5,7 +5,7 @@ import sys
 import csv
 import time
 
-def create_lite_version(csv_file, original_dir, lite_dir):
+def create_lite_version(csv_file, original_dir, lite_dir, icon_source_dir):
     startTime = time.time()
     extra_files = []
     
@@ -54,6 +54,16 @@ def create_lite_version(csv_file, original_dir, lite_dir):
     with open(manifest_path, 'w') as f:
         json.dump(manifest, f, indent=4)
 
+    print("Updating icons...")
+    
+    if os.path.exists(icon_source_dir):
+        for icon_file in os.listdir(icon_source_dir):
+            src_icon = os.path.join(icon_source_dir, icon_file)
+            dst_icon = os.path.join(lite_dir, icon_file)
+            shutil.copy2(src_icon, dst_icon)
+    else:
+        print(f"Icon source directory {icon_source_dir} does not exist. Skipping icon swap.")
+
     print(f"Lite version created in {lite_dir}, in:", round(time.time() - startTime), "seconds")
 
 if __name__ == "__main__":
@@ -64,5 +74,6 @@ if __name__ == "__main__":
     csv_file = sys.argv[1]
     original_dir = sys.argv[2]
     lite_dir = sys.argv[3]
-
-    create_lite_version(csv_file, original_dir, lite_dir)
+    icon_source_dir = sys.argv[4]
+    
+    create_lite_version(csv_file, original_dir, lite_dir, icon_source_dir)

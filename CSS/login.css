@@ -223,3 +223,7 @@ span.login-app__title.login-app__title--sign-in-with {
   border-radius: 10px !important;
   margin: 0px !important;
 }
+
+.login-app__password .form__eye-icon {
+  top: 1.55rem !important
+}

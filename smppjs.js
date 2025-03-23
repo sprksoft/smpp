@@ -286,7 +286,8 @@ async function apply() {
   let iconElement = document.querySelector('link[rel="icon"]');
   if (iconElement) {
     if (settingsData.smpp_logo) {
-      iconElement.href = "https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/icon128.png";
+      iconElement.href = liteMode ? "https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/smpp_lite_logo128.png" :
+        "https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/icon128.png";
     } else {
       iconElement.href = "https://static1.smart-school.net/smsc/svg/favicon/favicon.svg";
     }

@@ -1,7 +1,6 @@
 if (browser == undefined) { var browser = chrome };
 let manifest = browser.runtime.getManifest()
 const liteMode = manifest.lite_mode
-console.log(manifest.liteMode)
 
 const default_settings = !liteMode ? {
   quicks: [],
@@ -38,8 +37,8 @@ const default_settings = !liteMode ? {
   isbig: true,
   showplanner: true,
   name_override: null,
-  smpp_logo: true,
-  enableanimations: true
+  smpp_logo: false,
+  enableanimations: false
 };
 
 function get_config() {
