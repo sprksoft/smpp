@@ -1610,7 +1610,6 @@ body.modern-ui .smscMain .smsc-container {
   padding-right: 16px !important;
   padding-top: 20px !important;
   padding-bottom: 16px !important;
-  margin: 0px !important;
 }
 
 .profileInputTitle {
@@ -1847,13 +1846,17 @@ label.checkbox.js-checkbox.form-page__receive-copy-by-mail-checkbox {
   background-image: var(--loginpage-image) !important;
   background-position: center !important;
   background-size: cover !important;
-
+  justify-content: center !important;
+  position: relative !important;
+  display: flex;
+  height: 100%;
 }
 
 .smsc-container.form-completed-page__content {
   background-color: var(--darken-background) !important;
   backdrop-filter: var(--blur-value-small) !important;
   background-image: none !important;
+  height: fit-content;
 }
 
 .confirm-dialog .confirm-dialog__button-bar {
