@@ -578,6 +578,7 @@ div.stdReplyWrapper {
   font: bold;
   box-shadow: none;
   justify-content: center;
+  text-align: center;
 }
 
 #profileSelector:hover {
@@ -607,7 +608,7 @@ nav.topnav {
   transition: none !important;
 }
 
-.enableAnimations .popupinput{
+.enableAnimations .popupinput {
   transition: all 0.3s !important;
 }
 
@@ -957,44 +958,25 @@ input:checked+.slider:before {
 
 .sliderblur::-webkit-slider-thumb {
   -webkit-appearance: none;
-  /* Override default look */
   appearance: none;
   width: 15px;
-  /* Set a specific slider handle width */
   height: 15px;
   border-radius: 50%;
   background: var(--color-accent);
-  /* Green background */
   cursor: pointer;
-  /* Cursor on hover */
 }
 
 .sliderblur::-moz-range-thumb {
   width: 15px;
-  /* Set a specific slider handle width */
   height: 15px;
   border-radius: 50%;
   background: var(--color-accent);
-  /* Green background */
+  border-color: transparent;
   cursor: pointer;
-  /* Cursor on hover */
-}
-
-.sliderblur::-webkit-slider-thumb:hover,
-.sliderblur::-moz-range-thumb:hover {
-  background: var(--color-accent) !important;
-}
-
-
-.enableAnimations .sliderblur::-webkit-slider-thumb:hover,
-.enableAnimations .sliderblur::-moz-range-thumb:hover {
-  transition: ease-in !important;
-  transition-duration: 0.1s !important;
 }
 
 #modal-background {
   background-color: transparent !important;
-
 }
 
 #modal-content {

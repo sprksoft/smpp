@@ -20,8 +20,8 @@ async function updateWeatherDiv(weatherData, isBig, timeDifferenceMins) {
     weatherDiv.querySelector(".weather-lastupdate").innerText = timeDifferenceMins == 0 ? "Now" : timeDifferenceMins + " min ago";
     weatherDiv.querySelector(".weather-feelslike") && (weatherDiv.querySelector(".weather-feelslike").innerText = "Feels like " + feelsLikeTemp + "°C");
 
-    set_snow_multiplier(mainWeather == "Snow");
-    set_rain_multiplier(mainWeather == "Rain" || mainWeather == "Drizzle")
+    if (!liteMode) set_snow_multiplier(mainWeather == "Snow");
+    if (!liteMode) set_rain_multiplier(mainWeather == "Rain" || mainWeather == "Drizzle")
 
     const weatherIcon = weatherDiv.querySelector('.weather-icon');
     switch (mainWeather) {

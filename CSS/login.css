@@ -82,6 +82,7 @@ a.smscButton[href="/login/sso/init/acm"],
 
 .login-app__form>form {
   margin-bottom: 5px !important;
+  display: grid !important;
 }
 
 .login-app__title--separator {
@@ -197,8 +198,9 @@ span.login-app__title.login-app__title--sign-in-with {
   left: -50% !important;
   position: relative !important;
 }
+
 .enableAnimations .splashtext {
-animation: scale_up_and_down 0.58s linear infinite;
+  animation: scale_up_and_down 0.58s linear infinite;
 }
 
 @keyframes scale_up_and_down {
@@ -220,4 +222,8 @@ animation: scale_up_and_down 0.58s linear infinite;
   justify-self: center !important;
   border-radius: 10px !important;
   margin: 0px !important;
+}
+
+.login-app__password .form__eye-icon {
+  top: 1.55rem !important
 }
