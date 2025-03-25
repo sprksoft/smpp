@@ -1294,6 +1294,7 @@ label.radiobutton input[type=radio]:checked {
 
 input.message-search__input {
   border-radius: 5px !important;
+  border: 2px solid var(--color-base03) !important;
 }
 
 .ui-widget.ui-widget-content {

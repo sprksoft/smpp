@@ -134,6 +134,14 @@ button.reset-filters-btn.reset-filters-btn--hidden {
   display: none !important;
 }
 
+.goal-evaluations-details__row{
+  background: var(--darken-background) !important;
+}
+
+input.input.bootstrap__input.search-input{
+  border: 2px solid var(--color-base03) !important;
+  border-radius: 7px;
+}
 .results-evaluations .results-evaluations__filters {
   flex-wrap: wrap;
 }
