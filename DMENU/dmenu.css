@@ -152,7 +152,7 @@ html {
 
 .dmenu-input {
   border: none !important;
-  background: var(--color-base01);
+  background: var(--color-base01) !important;
   color: var(--color-text) !important;
   flex-grow: 1;
   padding: var(--dmenu-padding) !important;
