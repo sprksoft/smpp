@@ -1,3 +1,4 @@
 .vs/
 web-ext-artifacts/
-SMPPLITE/smpp-lite-build/
+builds/smpp-lite-build/
+builds/smpp-build
