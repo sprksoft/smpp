@@ -786,13 +786,8 @@ function createSettings() {
 function createSettingsButton() {
   let quickSettingsButtonWrapper = document.createElement("div")
   quickSettingsButtonWrapper.id = "quickSettingsButtonWrapper"
+  quickSettingsButtonWrapper.classList.add("smpp-button")
   quickSettingsButtonWrapper.classList.add("topnav__btn-wrapper")
-  let logoutButton = document.querySelector(".js-btn-logout")
-  if (!logoutButton) {
-    return false;
-  }
-  let topNav = document.querySelector("nav.topnav")
-  topNav.insertBefore(quickSettingsButtonWrapper, logoutButton);
 
   let quickSettingsButton = document.createElement("button")
   quickSettingsButton.id = "quickSettingsButton"
@@ -800,7 +795,7 @@ function createSettingsButton() {
   quickSettingsButton.innerText = "Settings"
   quickSettingsButton.addEventListener("click", toggleSettings);
   quickSettingsButtonWrapper.appendChild(quickSettingsButton)
-  return true;
+  return quickSettingsButtonWrapper;
 }
 
 function createSettings(){
@@ -820,27 +815,41 @@ function createSettings(){
   return true;
 }
 
+function createTopButtons(onHomePage) {
+  let topNav = document.querySelector("nav.topnav");
+  if (topNav == null) {
+    return;
+  }
+
+  let searchBtn = topNav.querySelector(".topnav__btn--icon--search").parentElement;
+  topNav.insertBefore(createSettingsButton(), searchBtn);
+
+  let pushRight = topNav.childNodes[2];
+
+  topNav.insertBefore(createQuickMenuButton(), pushRight);
+  if (!liteMode) { topNav.insertBefore(createGCButton(), pushRight) };
+
+  if (onHomePage) {
+    topNav.insertBefore(createWidgetEditModeButton(), pushRight);
+  }
+}
+
 function main() {
+  apply();
   createWidgetSystem();
 
   let logoutButton = document.querySelector(".js-btn-logout");
   if (logoutButton) logoutButton.innerHTML = changeLogoutText();
 
   let onHomePage = document.getElementById("container") !== null;
-  if (createSettingsButton()) {
+  createTopButtons(onHomePage);
 
-    if (onHomePage) {
-      createWidgetEditModeButton();
-    }
-    if (!liteMode) { createGCButton() };
+  document.querySelector('[data-go=""]')?.remove();
+  let searchBtn = document.querySelector('.topnav__btn--icon--search');
+  if (searchBtn) searchBtn.parentElement.style = "display:none";
+  let notifsLabel = document.getElementById("notifsToggleLabel");
+  if (notifsLabel) notifsLabel.innerText = "Toon pop-ups"; // Simplify text. (smartschool by default has a very long explanation that doesn't fit on screen)
 
-    createQuickMenuButton();
-
-    document.querySelector('[data-go=""]')?.remove();
-    document.querySelector('.topnav__btn--icon--search').parentElement?.remove();
-    let notifsLabel = document.getElementById("notifsToggleLabel");
-    if (notifsLabel) notifsLabel.innerText = "Toon pop-ups"; // Simplify text. (smartschool by default has a very long explanation that doesn't fit on screen)
-  }
 }
 
 main()
