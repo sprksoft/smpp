@@ -184,17 +184,17 @@ function setEditMode(value) {
 }
 
 function createWidgetEditModeButton(){
-  const topNav = document.querySelector("nav.topnav")
 
   let btn = document.createElement("button");
   btn.classList.add("topnav__btn");
+  btn.classList.add("smpp-button");
   btn.addEventListener("click", ()=>{
     setEditMode(!widgetEditMode);
   });
   btn.innerText="e";
   btn.title="Ga in/uit edit mode om de locatie van de widgets te veranderen.";
 
-  topNav.insertBefore(btn, topNav.childNodes[2]);
+  return btn;
 }
 
 
