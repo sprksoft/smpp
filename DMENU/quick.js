@@ -240,7 +240,6 @@ document.addEventListener("keyup", function (e) {
 });
 
 function createQuickMenuButton() {
-  const topNav = document.querySelector("nav.topnav")
 
   const quickButton = document.createElement("button");
   quickButton.title="Quick menu (je kan ook : gebruiken om het quick te openen)"
@@ -251,6 +250,6 @@ function createQuickMenuButton() {
     do_qm(quickButton);
   });
 
-  topNav.insertBefore(quickButton, topNav.childNodes[2]);
+  return quickButton;
 }
 

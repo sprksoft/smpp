@@ -76,5 +76,5 @@ function createGCButton() {
 </svg>
 `
   goGlChatButton.addEventListener("click",open_global_chat)
-  topNav.insertBefore(goGlChatButton, topNav.querySelector(".topnav__btn--push-right"));
+  return goGlChatButton;
 }
