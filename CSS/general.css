@@ -1,10 +1,10 @@
 html {
-  --color-accent: #191817;
-  --color-text: #191817;
+  --color-accent: #00FF00;
+  --color-text: #00FF00;
   --color-base00: #191817;
-  --color-base01: #191817;
-  --color-base02: #191817;
-  --color-base03: #191817;
+  --color-base01: #343230;
+  --color-base02: #484542;
+  --color-base03: #656360;
   --background-color: var(--color-base00);
   --color-blue: #3892db;
   --color-red: #cc4849;
