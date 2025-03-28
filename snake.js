@@ -169,17 +169,17 @@ function snakeGame() {
       case "ArrowUp":
         direction = 'UP';
       break;
-      case "ArrowDown": 
-        direction = 'DOWN';
+      case "ArrowDown":
+        if (snake.direction !== 'UP') {
+        snake.direction = 'DOWN';}
       break;
-      case "ArrowLeft": 
-        direction = 'LEFT';
+      case "ArrowLeft":
+        if (snake.direction !== 'RIGHT') {
+        snake.direction = 'LEFT';}
       break;
-      case "ArrowRight": 
-        direction = 'RIGHT';
-      break;
-      default:
-        direction = 'no user input given'
+      case "ArrowRight":
+        if (snake.direction !== 'LEFT') {
+        snake.direction = 'RIGHT';}
       break;
     }
     return(direction);
@@ -190,13 +190,13 @@ function snakeGame() {
       case "DOWN":
         invertedDirection = 'UP';
       break;
-      case "UP": 
+      case "UP":
         invertedDirection = 'DOWN';
       break;
-      case "RIGHT": 
+      case "RIGHT":
         invertedDirection = 'LEFT';
       break;
-      case "LEFT": 
+      case "LEFT":
         invertedDirection = 'RIGHT';
       break;
       case "no user input given":
@@ -220,7 +220,7 @@ function snakeGame() {
     let userInputDirection = convertToDirection(inputQueue.dequeue())
     if (userInputDirection != 'no user input given' && snake.direction != invertDirection(userInputDirection)) {
       snake.direction = userInputDirection;
-    } 
+    }
 
     ctx.clearRect(0, 0, WIDTH, HEIGHT);
     snake.move();
@@ -239,8 +239,8 @@ function snakeGame() {
   const inputQueue = new Queue();
   document.addEventListener('keydown', event => {
     if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
-      if (inputQueue.size() < 3 && inputQueue.peek() != event.key) { 
-        inputQueue.enqueue(event.key);
+      if (queue.size() < 3 && queue.peek() != event.key) {
+        queue.enqueue(event.key);
       }
       event.preventDefault();
     }
@@ -255,7 +255,7 @@ class Queue {
   }
 
   enqueue(element) {
-    this.items.push(element); 
+    this.items.push(element);
   }
 
   dequeue() {

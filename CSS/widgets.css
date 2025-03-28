@@ -1,0 +1,43 @@
+.smpp-widget {
+  background-color: var(--color-base01);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 1em;
+  border: 3px solid var(--color-base03);
+}
+
+.smpp-widgets-container{
+  display:flex;
+  flex-direction:row;
+  border:none;
+}
+
+.smpp-news-container{
+  flex-shrink: 100;
+}
+.smpp-widget-pannel{
+  background-color: var(--color-homepage-sidebars-bg);
+  backdrop-filter: var(--blur-value-large);
+}
+.smpp-widget-pannel-left{
+  border-right: 2px solid var(--color-base02);
+}
+.smpp-widget-pannel-right{
+  border-left: 2px solid var(--color-base02);
+}
+
+/* EDITMODE */
+
+.smpp-widget-edit-mode .smpp-widget {
+  border-color: transparent;
+  outline: 4px dashed var(--color-black);
+  box-shadow: 0 0 0 4px var(--color-yellow);
+}
+
+.smpp-widget-edit-mode .smpp-widget:hover {
+  cursor: move;
+}
+.smpp-widget-dragging {
+  position:absolute;
+}
