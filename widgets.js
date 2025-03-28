@@ -184,7 +184,7 @@ function setEditMode(value) {
 }
 
 function createWidgetEditModeButton(){
-  let parent = document.querySelector("nav.topnav")
+  const topNav = document.querySelector("nav.topnav")
 
   let btn = document.createElement("button");
   btn.classList.add("topnav__btn");
