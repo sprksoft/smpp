@@ -41,12 +41,23 @@ def build_main(original_dir, build_dir, excluded_files_csv):
         if not os.path.exists(dst_root):
             os.makedirs(dst_root)
 
+        spaces = ""
+        go_up = True
         for file in files:
+            if go_up:
+                spaces += " "
+            else:
+                spaces = spaces [0:len(spaces)-1]
+            if len(spaces)>5:
+                go_up = False
+            elif len(spaces)<1:
+                go_up = True
             if should_skip(file, exclude_files, rel_root):
                 continue
             src_file = os.path.join(root, file)
             dst_file = os.path.join(dst_root, file)
             shutil.copy2(src_file, dst_file)
+            print(f"{spaces}Copying {src_file}...")
 
     print(f"Main build complete: {build_dir}")
 
@@ -92,13 +103,23 @@ def build_lite(excluded_lite_files_csv, original_dir, lite_build_dir, icon_sourc
             print(f"Making {dst_root}...")
             os.makedirs(dst_root)
 
+        spaces = ""
+        go_up = True
         for file in files:
+            if go_up:
+                spaces += " "
+            else:
+                spaces = spaces [0:len(spaces)-1]
+            if len(spaces)>5:
+                go_up = False
+            elif len(spaces)<1:
+                go_up = True
             if should_skip(file, exclude_files, rel_root):
                 continue
             src_file = os.path.join(root, file)
             dst_file = os.path.join(dst_root, file)
 
-            print(f"Copying {src_file}...")
+            print(f"{spaces}Copying {src_file}...")
             shutil.copy2(src_file, dst_file)
 
     print("Updating manifest...")
