@@ -96,6 +96,8 @@ async function apply() {
   set_theme("default");
   set_theme(profileSelect);
 
+  showNews(shownews);
+
   if (show_scores == undefined) {
     show_scores = false;
   }
@@ -168,10 +170,6 @@ async function apply() {
     colorpickers.innerHTML = ``
   }
   let bigblurvalue = blurvalue * 2;
-  const rightContainer = document.getElementById('rightcontainer');
-  const centralContainer = document.getElementById('centercontainer')
-  const leftcontainer = document.getElementById('leftcontainer')
-  const container = document.getElementById('container')
   if (blurvalue == 0) {
     bigblurvalue += 2;
   };
@@ -183,84 +181,6 @@ async function apply() {
   });
   let config = { childList: true, subtree: true };
   observer.observe(document.body, config);
-  if (centralContainer) {
-    if (!shownews) {
-      centralContainer.innerHTML = ' '
-    }
-    discordpopup()
-    if (rightContainer) {
-      rightContainer.innerHTML = ""
-      rightContainer.style.display = "none"
-    }
-
-
-    if (leftcontainer) {
-      leftcontainer.innerHTML = " "
-      leftcontainer.style.display = "none"
-    }
-    document.getElementById("leftcontainer") ? document.getElementById("leftcontainer").remove() : "pass"
-    document.getElementById("rightcontainer") ? document.getElementById("rightcontainer").remove() : "pass"
-    document.getElementById("plannercontainer") ? document.getElementById("plannercontainer").remove() : "pass"
-    document.getElementById("weathercontainer") ? document.getElementById("weathercontainer").remove() : "pass"
-    document.getElementById("delijncontainer") ? document.getElementById("delijncontainer").remove() : "pass"
-    document.getElementById("plantcontainer") ? document.getElementById("plantcontainer").remove() : "pass"
-
-    if (halte) {
-      var DelijnAppElement = document.createElement("div")
-      DelijnAppElement.classList.add("homepage__left")
-      DelijnAppElement.classList.add("smsc-container--left")
-      DelijnAppElement.id = "leftcontainer"
-      var DelijnApp = document.createElement("div")
-      DelijnApp.setAttribute("id", "delijncontainer")
-      DelijnAppElement.appendChild(DelijnApp)
-      container.prepend(DelijnAppElement)
-      createDelijnApp()
-    }
-    if (showplanner) {
-      var PlannerAppElement = document.createElement("div")
-      PlannerAppElement.classList.add("homepage__left")
-      PlannerAppElement.classList.add("smsc-container--left")
-      PlannerAppElement.setAttribute("id", "plannercontainer")
-      container.prepend(PlannerAppElement)
-      ShowPlanner(0)
-    }
-    if (show_plant && !liteMode) {
-      var PlantAppElement = document.createElement("div")
-      PlantAppElement.classList.add("homepage__right")
-      PlantAppElement.classList.add("smsc-container--right")
-      PlantAppElement.setAttribute("id", "plantcontainer")
-      container.append(PlantAppElement)
-      start_plant_window()
-    }
-    if (loc != "") {
-      var WeatherAppElement = document.createElement("div")
-      WeatherAppElement.classList.add("homepage__right")
-      WeatherAppElement.classList.add("smsc-container--right")
-      WeatherAppElement.setAttribute("id", "weathercontainer")
-      container.append(WeatherAppElement)
-      await createWeatherApp(loc, IsBig);
-    }
-    if (showsnake && !liteMode) {
-      if (!document.getElementById("weathercontainer")) {
-        var WeatherAppElement = document.createElement("div")
-        WeatherAppElement.classList.add("homepage__right")
-        WeatherAppElement.classList.add("smsc-container--right")
-        WeatherAppElement.setAttribute("id", "weathercontainer")
-        container.append(WeatherAppElement)
-      }
-      creatSnakeApp()
-    }
-    if (showflappy && !liteMode) {
-      if (!document.getElementById("weathercontainer")) {
-        var WeatherAppElement = document.createElement("div")
-        WeatherAppElement.classList.add("homepage__right")
-        WeatherAppElement.classList.add("smsc-container--right")
-        WeatherAppElement.setAttribute("id", "weathercontainer")
-        container.append(WeatherAppElement)
-      }
-      createFlappyApp()
-    }
-  }
 
   style.setProperty('--profile-picture', 'url(' + getPfpLink(username_override) + ')');
   style.setProperty('--blur-value-large', 'blur(' + bigblurvalue + 'px)');
@@ -353,9 +273,6 @@ function store() {
   console.log(settingsData)
   if (settingsData.show_scores == undefined) {
     settingsData.show_scores = false;
-  }
-  if (shownews && !previousData.shownews) {
-    window.location.reload();
   }
 
   if (backgroundFile) {
@@ -898,7 +815,7 @@ function main() {
   if (createSettingsButton()) {
 
     if (onHomePage) {
-      //createWidgetEditModeButton();
+      createWidgetEditModeButton();
     }
     if (!liteMode) { createGCButton() };
 

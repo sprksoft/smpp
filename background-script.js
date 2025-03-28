@@ -1,6 +1,6 @@
 if (typeof browser === 'undefined') { var browser = chrome; }
 
-import { getWeatherAppData, getDelijnAppData, getDelijnColorData } from './data-background-script.js';
+import { getWeatherAppData, getDelijnAppData, getWidgetData, getDelijnColorData } from './data-background-script.js';
 import { fetchWeatherData, fetchDelijnData } from './api-background-script.js';
 
 browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -56,14 +56,10 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
     }
 
     // Widgets
-    if (message.action = "getEnabledWidgets"){
-      let data = await browser.storage.local.get("widgets");
-      let enabledWidgets = data.enabledWidgets;
-      if (enabledWidgets == undefined){
-        sendResponse([]);
-      }else{
-        sendResponse(enabledWidgets);
-      }
+    if (message.action === "getWidgetData") {
+      console.log("getting widget data");
+      let widgetData = await getWidgetData();
+      sendResponse(widgetData);
     }
   })();
   return true;
