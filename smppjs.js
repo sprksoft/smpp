@@ -444,7 +444,6 @@ function set_theme(name) {
     apply_theme(theme, style)
   }
 }
-<<<<<<< HEAD
 function toggleSettings() {
   let win = document.getElementById("quickSettings");
 
