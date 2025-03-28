@@ -1,6 +1,6 @@
 if (typeof browser === 'undefined') { var browser = chrome; }
 
-import { getWeatherAppData, getDelijnAppData, getWidgetData, getDelijnColorData } from './data-background-script.js';
+import { getSettingsData, getWeatherAppData, getDelijnAppData, getWidgetData, getDelijnColorData} from './data-background-script.js';
 import { fetchWeatherData, fetchDelijnData } from './api-background-script.js';
 
 browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -10,6 +10,17 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
       browser.storage.local.clear()
       sendResponse({ succes: true });
       console.log('Cleared browser storage');
+    }
+    // Settings
+    if (message.action === 'setSettingsData') {
+      await browser.storage.local.set({ settingsData: message.data });
+      sendResponse({ succes: true });
+      console.log('Settings data saved.');
+    }
+    if (message.action === 'getSettingsData') {
+      const settingsData = await getSettingsData();
+      sendResponse(settingsData);
+      console.log('Settings data sent.');
     }
     // Background image
     if (message.action === 'saveBackgroundImage') {
