@@ -5,9 +5,6 @@ import sys
 import csv
 import stat
 
-def remove_readonly(func, path, _):
-    os.chmod(path, stat.S_IWRITE)
-    func(path)
 
 def should_skip(item, exclude_files, root=''):
     full_path = os.path.join(root, item) if root else item
@@ -16,10 +13,10 @@ def should_skip(item, exclude_files, root=''):
 def build_main(original_dir, build_dir, excluded_files_csv):
     original_dir = os.path.abspath(original_dir)
     build_dir = os.path.abspath(build_dir)
-    
+
     print(f"Building main version from: {original_dir}")
     print(f"Output directory: {build_dir}")
-    
+
     exclude_files = set()
     with open(excluded_files_csv, 'r') as f:
         reader = csv.reader(f)
@@ -28,22 +25,22 @@ def build_main(original_dir, build_dir, excluded_files_csv):
 
     if os.path.exists(build_dir):
         print("Cleaning existing build directory...")
-        shutil.rmtree(build_dir, onerror=remove_readonly)
-    
+        shutil.rmtree(build_dir)
+
     os.makedirs(build_dir, exist_ok=True)
-    
+
     print("Copying files...")
     for root, dirs, files in os.walk(original_dir):
         rel_root = os.path.relpath(root, original_dir)
         if rel_root == '.':
             rel_root = ''
-            
+
         dirs[:] = [d for d in dirs if not should_skip(d, exclude_files, rel_root)]
-        
+
         dst_root = os.path.join(build_dir, rel_root)
         if not os.path.exists(dst_root):
             os.makedirs(dst_root)
-        
+
         for file in files:
             if should_skip(file, exclude_files, rel_root):
                 continue
@@ -53,54 +50,57 @@ def build_main(original_dir, build_dir, excluded_files_csv):
 
     print(f"Main build complete: {build_dir}")
 
-def build_lite(excluded_lite_files_csv, original_dir, lite_build_dir, icon_source_dir, excluded_files_csv):    
+def build_lite(excluded_lite_files_csv, original_dir, lite_build_dir, icon_source_dir, excluded_files_csv):
     original_dir = os.path.abspath(original_dir)
     lite_build_dir = os.path.abspath(lite_build_dir)
     icon_source_dir = os.path.abspath(icon_source_dir)
-    
+
     print(f"Building lite version from: {original_dir}")
     print(f"Output directory: {lite_build_dir}")
     print(f"Icon source: {icon_source_dir}")
-    
+
     exclude_files = set()
     with open(excluded_files_csv, 'r') as f:
         reader = csv.reader(f)
         for row in reader:
             exclude_files.update(row)
-    
+
     lite_exclude_files = set()
     with open(excluded_lite_files_csv, 'r') as f:
         reader = csv.reader(f)
         for row in reader:
             lite_exclude_files.update(row)
-    
+
     exclude_files.update(lite_exclude_files)
 
     if os.path.exists(lite_build_dir):
         print("Cleaning existing lite directory...")
-        shutil.rmtree(lite_build_dir, onerror=remove_readonly)
-    
+        shutil.rmtree(lite_build_dir)
+
     os.makedirs(lite_build_dir, exist_ok=True)
-    
+
     print("Copying files...")
     for root, dirs, files in os.walk(original_dir):
         rel_root = os.path.relpath(root, original_dir)
         if rel_root == '.':
             rel_root = ''
-            
+
         dirs[:] = [d for d in dirs if not should_skip(d, exclude_files, rel_root)]
-        
+
         dst_root = os.path.join(lite_build_dir, rel_root)
         if not os.path.exists(dst_root):
+            print(f"Making {dst_root}...")
             os.makedirs(dst_root)
-        
+
         for file in files:
             if should_skip(file, exclude_files, rel_root):
                 continue
             src_file = os.path.join(root, file)
             dst_file = os.path.join(dst_root, file)
+
+            print(f"Copying {src_file}...")
             shutil.copy2(src_file, dst_file)
-    
+
     print("Updating manifest...")
     manifest_path = os.path.join(lite_build_dir, 'manifest.json')
     try:
@@ -113,11 +113,11 @@ def build_lite(excluded_lite_files_csv, original_dir, lite_build_dir, icon_sourc
                     content_script['js'] = [script for script in content_script['js'] if script not in lite_exclude_files]
                 if 'css' in content_script:
                     content_script['css'] = [style for style in content_script['css'] if style not in lite_exclude_files]
-                    
+
         manifest['name'] = 'Smartschool++ Lite'
         manifest['description'] = 'A lite, school friendly version of Smartschool++'
         manifest['lite_mode'] = True
-        
+
         with open(manifest_path, 'w', encoding='utf-8') as f:
             json.dump(manifest, f, indent=4)
     except Exception as e:
@@ -142,15 +142,15 @@ if __name__ == "__main__":
     excluded_lite_files_csv = os.path.join(script_dir, "excluded-from-lite.csv")
     lite_build_dir = os.path.join(script_dir, "smpp-lite-build")
     icon_source_dir = os.path.join(script_dir, "liteicons")
-    
+
     if not os.path.exists(original_dir):
         print(f"Error: Source directory not found at {original_dir}")
         sys.exit(1)
-    
+
     if not os.path.exists(excluded_lite_files_csv):
         print(f"Error: Exclusion file not found at {excluded_lite_files_csv}")
         sys.exit(1)
-    
+
     build_main(original_dir, main_build_dir, excluded_files_csv)
     build_lite(excluded_lite_files_csv, original_dir, lite_build_dir, icon_source_dir, excluded_files_csv)
     print("\nBuild process completed successfully!")
