@@ -23,6 +23,7 @@ const default_settings = !liteMode ? {
   show_plant: true,
   smpp_logo: true,
   enableanimations: true
+  icons: false;
 } : {
   quicks: [],
   profile: "birb",
@@ -38,7 +39,8 @@ const default_settings = !liteMode ? {
   showplanner: true,
   name_override: null,
   smpp_logo: false,
-  enableanimations: false
+  enableanimations: false,
+  icons: true
 };
 
 function get_config() {

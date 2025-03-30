@@ -80,6 +80,7 @@ async function apply() {
   const halte = settingsData.halte
   const overwrite_theme = settingsData.overwrite_theme;
   const loc = settingsData.location;
+  const icons = settingsData.icons;
   const blurvalue = settingsData.blur;
   const weatherAmount = settingsData.weatherAmount;
   const shownews = settingsData.shownews;
@@ -132,22 +133,37 @@ async function apply() {
   if (topnav) {
     topnav.insertBefore(document.querySelector('[data-links]'), document.querySelector('[data-courses]'));
   }
-  const notifsButton = document.querySelector('.js-btn-notifs');
-  if (notifsButton) {
-    const textSpan = notifsButton.querySelector('span');
-    notifsButton.innerHTML = notfisSvg
-    notifsButton.appendChild(textSpan);
+  if (icons) {
+    const notifsButton = document.querySelector('.js-btn-notifs');
+    if (notifsButton) {
+      const textSpan = notifsButton.querySelector('span');
+      notifsButton.innerHTML = notfisSvg
+      notifsButton.appendChild(textSpan);
+    }
+    const startButton = document.querySelector('.js-btn-home');
+    if (startButton) {
+      startButton.innerHTML = homeiconSvg
+    }
+    const gotoButton = document.querySelector('.js-btn-shortcuts');
+    if (gotoButton) {
+      gotoButton.innerHTML = gotoSvg
+    }
+    const linksButton = document.querySelector('.js-btn-links');
+    if (linksButton) {
+      linksButton.innerHTML = linksSvg
+    }
+    const coursesButton = document.querySelector('.js-btn-courses');
+    if (coursesButton) {
+      coursesButton.innerHTML = coursesSvg
+    }
+    const messageButton = document.querySelector('.js-btn-messages');
+    if (messageButton) {
+      const textSpan = messageButton.querySelector('span');
+      messageButton.innerHTML = messageSvg
+      messageButton.appendChild(textSpan);
+    }
   }
-  const startButton = document.querySelector('.js-btn-home');
-  if (startButton) {
-    startButton.innerHTML = homeiconSvg
-  }
-  const messageButton = document.querySelector('.js-btn-messages');
-  if (messageButton) {
-    const textSpan = messageButton.querySelector('span');
-    messageButton.innerHTML = messageSvg
-    messageButton.appendChild(textSpan);
-  }
+
   let login_app_left = document.querySelector('.login-app__left');
   if (login_app_left != undefined) {
     login_app_left.innerHTML = ' ';
@@ -320,6 +336,7 @@ function store() {
   const halte = document.getElementById("halt").checked;
   const overwrite_theme = Number(document.getElementById("backgroundSlider").value);
   const loc = document.getElementById("location").value;
+  const icons = document.getElementById('icons').value;
   const blur = Number(document.getElementById('mySlider').value);
   const shownews = document.getElementById("shownewselement").checked;
   const isbig = document.getElementById("isbig").checked;
@@ -642,6 +659,7 @@ function createSettingsHTML(parent) {
   switchesContainer.appendChild(createSwitch('halt', 'Delijn:'));
   if (!liteMode) {
     switchesContainer.appendChild(createSwitch('show_plant', 'Plant:'));
+    switchesContainer.appendChild(createSwitch('icons', 'Icons:'))
   } else {
     switchesContainer.appendChild(createSwitch('shownewselement', 'News:'));
     switchesContainer.appendChild(createSwitch('smpp_logo', 'Logo:'));
@@ -841,7 +859,7 @@ function createSettings() {
   quickSettingsWindow.addEventListener("change", store);
   quickSettingsWindow = createSettingsHTML(quickSettingsWindow)
 
-  quickSettingsWindow.style.left = (-270 / 3) + "px";
+  quickSettingsWindow.style.left = (-375 / 3) + "px";
   document.getElementById("quickSettingsButton").insertAdjacentElement("afterend", quickSettingsWindow);
 
   document.getElementById("backgroundfilebutton").addEventListener("click", openFileSelector);
