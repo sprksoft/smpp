@@ -146,6 +146,14 @@ function scrape_goto() {
 function do_qm(opener = "") {
   let cmd_list = quick_cmd_list().concat(goto_items).concat(vakken).concat(links.concat(["home", "dmenu config", "quick add", "quick remove", "config", "toggle fancy scores", "unbloat", "clearsettings", "discord", "toggle performance mode", "dizzy"]));
 
+  let role = document.doBlackMagic ? document.doBlackMagic() : "User" //Gebruik black magic om de global chat role te krijgen.
+  switch (role) {
+    case "Admin":
+      cmd_list.push("gc proffilter"); // Fall trough and also add gcadmin
+    case "Mod":
+      cmd_list.push("gcadmin");
+  }
+
   dmenu(cmd_list, function (cmd) {
     switch (cmd) {
       case "unbloat":
@@ -189,6 +197,12 @@ function do_qm(opener = "") {
         return;
       case "toggle performance mode":
         togglePerformanceMode();
+        return;
+      case "gcadmin":
+        open_url("https://ldev.eu.org/smpp/gc/admin");
+        return;
+      case "gc proffilter":
+        open_url("https://ldev.eu.org/smpp/gc/admin/prof");
         return;
       case "dizzy":
         const styleEl = document.createElement("style");
