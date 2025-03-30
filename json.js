@@ -223,15 +223,6 @@ const plant_buttonsHTML = `
     </g>
   </svg> </div><div id=time_difference_last_watered class=time_difference_last_watered></div>
 `
-const topNavCustomPage = `
-<div>
-<a href="/" class="js-btn-home topnav__btn topnav__btn--push-right">
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" class="st1" height="18px" width="18px" viewBox="0 0 256 256" enable-background="new 0 0 256 256" xml:space="preserve">
-<metadata> Svg Vector Icons : http://www.onlinewebfonts.com/icon</metadata>
-<g><g><path d="M241.4,104.9l-96-89.5c-4.9-5.5-11.9-8.7-19.3-8.7c-7.3,0-14.3,3.1-19,8.4l-92.5,89.8c-4.6,4.7-5.9,11.6-3.4,17.7c2.6,6.1,8.5,9.9,15.1,9.9h8.3v91.3c0,14.2,11.3,25.7,25.5,25.7h39.7c5.2,0,9.7-4.2,9.7-9.3v-60.7c0-2.6,1.7-4.9,4.3-4.9h28c2.6,0,4.6,2.3,4.6,4.9V240c0,5.2,4.3,9.3,9.5,9.3h39.7c14.2,0,25.8-11.5,25.8-25.7v-91.3h8.3c6.6,0,12.5-3.8,15.1-9.9C247.3,116.5,246,109.6,241.4,104.9L241.4,104.9z"></path></g></g>
-</svg></a>
-</div>
-`
 const delijnSearchButtonSvg = `<svg class=delijnSearchIcon width="25" height="25" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg"
     aria-hidden="true">
     <path d="M16.0073 9.00364C16.0073 12.8716 12.8716 16.0073 9.00364 16.0073C5.13564 16.0073 2 12.8716 2 9.00364C2 
@@ -248,4 +239,9 @@ const fileInputIconSvg = `<svg width="30px" height="30px" viewBox="0 0 24.00 24.
             d="M9 13H15M12.0627 6.06274L11.9373 5.93726C11.5914 5.59135 11.4184 5.4184 11.2166 5.29472C11.0376 5.18506 10.8425 5.10425 10.6385 5.05526C10.4083 5 10.1637 5 9.67452 5H6.2C5.0799 5 4.51984 5 4.09202 5.21799C3.71569 5.40973 3.40973 5.71569 3.21799 6.09202C3 6.51984 3 7.07989 3 8.2V15.8C3 16.9201 3 17.4802 3.21799 17.908C3.40973 18.2843 3.71569 18.5903 4.09202 18.782C4.51984 19 5.07989 19 6.2 19H17.8C18.9201 19 19.4802 19 19.908 18.782C20.2843 18.5903 20.5903 18.2843 20.782 17.908C21 17.4802 21 16.9201 21 15.8V10.2C21 9.0799 21 8.51984 20.782 8.09202C20.5903 7.71569 20.2843 7.40973 19.908 7.21799C19.4802 7 18.9201 7 17.8 7H14.3255C13.8363 7 13.5917 7 13.3615 6.94474C13.1575 6.89575 12.9624 6.81494 12.7834 6.70528C12.5816 6.5816 12.4086 6.40865 12.0627 6.06274Z"
             class="st4" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
     </g>
+</svg>`
+
+const editIconSvg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px"class=edit_button height="18px" width="18px" viewBox="0 0 24 24"  xml:space="preserve">
+<metadata> Svg Vector Icons : http://www.onlinewebfonts.com/icon</metadata>
+<g><g><path xmlns="http://www.w3.org/2000/svg" class=st1 stroke-linecap:round;stroke-linejoin:round;-inkscape-stroke:none" d="m 19.792969,1.2089844 c -0.773047,0 -1.546203,0.290977 -2.134766,0.8730469 -6.69e-4,6.478e-4 -0.0013,0.0013 -0.002,0.00195 L 8.4119915,11.389897 c -0.5321594,0.536333 -1.9587661,2.040145 -2.9061791,5.334709 -0.1062793,0.369579 -0.1650107,0.570623 -0.2207032,0.85994 -0.046789,0.243065 -0.1295961,0.724628 0.2070338,1.013107 0.3909805,0.335056 1.0440816,0.133455 1.3847656,0.03125 C 7.387553,18.47571 7.9834625,18.287442 8.5897993,18.031247 11.103423,16.969168 12.593117,15.70399 12.985931,15.188066 l 8.93985,-8.8697066 C 23.11495,5.1606353 23.105005,3.2461646 21.927734,2.0820313 21.339171,1.4999614 20.566016,1.2089844 19.792969,1.2089844 Z" id="path5" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="scccssssscccs"/><path xmlns="http://www.w3.org/2000/svg" d="M 10.273212,2.8358152 H 5.5822718 c -1.3827164,0 -2.0740869,0 -2.6022128,0.2661137 C 2.5154954,3.3360099 2.1378007,3.709514 1.9011058,4.1689107 1.6320062,4.6911889 1.6320062,5.3748762 1.6320062,6.7422506 V 18.461557 c 0,1.367374 0,2.051122 0.2690996,2.573363 0.2366949,0.459374 0.6143896,0.832926 1.0789532,1.066946 0.5281259,0.266126 1.2194964,0.266126 2.6022128,0.266126 H 17.433068 c 1.382716,0 2.074137,0 2.602237,-0.266126 0.464527,-0.23402 0.842271,-0.607572 1.078917,-1.066946 0.269112,-0.522241 0.269112,-1.205989 0.269112,-2.573363 v -5.249273"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="stroke-width:3.25435;stroke-dasharray:none" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="csccssccssccsccc"/> </g></g>
 </svg>`

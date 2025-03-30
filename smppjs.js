@@ -798,23 +798,6 @@ function createSettingsButton() {
   return quickSettingsButtonWrapper;
 }
 
-function createSettings(){
-  let popup = document.getElementById("searchMenu");
-  if (!popup){
-    return false;
-  }
-  popup.addEventListener("change", store)
-
-  search_button = document.querySelector('.js-btn-search')
-  search_button.innerText = "Settings"
-  const popup_settings = document.getElementById("searchMenu");
-  popup_settings.innerHTML = popupsettingHTML
-  document.getElementById('backgroundfilebutton').addEventListener("click", openFileSelector)
-  load()
-
-  return true;
-}
-
 function createTopButtons(onHomePage) {
   let topNav = document.querySelector("nav.topnav");
   if (topNav == null) {
