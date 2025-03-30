@@ -9,33 +9,38 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   margin: 1rem;
   border: 3px solid var(--color-base03);
-  box-sizing: border-box; /* Needed to make getClientBounds return the width without the border size*/
-  font-size: 1rem; /* Inherited font-size is not in rem */
+  box-sizing: border-box;
+  /* Needed to make getClientBounds return the width without the border size*/
+  font-size: 1rem;
+  /* Inherited font-size is not in rem */
 }
 
-.smpp-widgets-container{
-  display:flex;
-  flex-direction:row;
-  border:none;
+.smpp-widgets-container {
+  display: flex;
+  flex-direction: row;
+  border: none;
 }
 
-.smpp-news-container{
+.smpp-news-container {
   flex-shrink: 100;
 }
-.smpp-widget-pannel{
+
+.smpp-widget-pannel {
   background-color: var(--color-homepage-sidebars-bg);
   backdrop-filter: var(--blur-value-large);
 }
-.smpp-widget-pannel-left{
+
+.smpp-widget-pannel-left {
   border-right: 2px solid var(--color-base02);
 }
-.smpp-widget-pannel-right{
+
+.smpp-widget-pannel-right {
   border-left: 2px solid var(--color-base02);
 }
 
 /* EDITMODE */
 
-.smpp-widget-edit-mode{
+.smpp-widget-edit-mode {
   user-select: none;
 }
 
@@ -56,7 +61,8 @@
 
   z-index: 100;
 }
-.smpp-widget-edit-mode .smpp-widget-bag{
+
+.smpp-widget-edit-mode .smpp-widget-bag {
   transform: translateY(-20px);
   opacity: 1;
 }
@@ -79,7 +85,7 @@
   box-shadow: 0 0 0 4px var(--color-yellow);
 }
 
-.smpp-widget-edit-mode .smpp-widget > *{
+.smpp-widget-edit-mode .smpp-widget>* {
   pointer-events: none;
   user-select: none;
 }
@@ -88,25 +94,33 @@
   transform: translateY(-5px);
   cursor: move;
 }
+
 .smpp-widget-dragging {
   margin: 0px;
-  position:fixed;
+  position: fixed;
   z-index: 10000000;
-  pointer-events:none;
+  pointer-events: none;
 }
 
 .smpp-widget-delete {
   animation: smppWidgetDelete 1s infinite;
 }
 
-@keyframes smppWidgetDelete{
-  0%{
+@keyframes smppWidgetDelete {
+  0% {
     transform: rotate(5deg);
   }
-  50%{
+
+  50% {
     transform: rotate(-5deg);
   }
-  100%{
+
+  100% {
     transform: rotate(5deg);
   }
+}
+
+.edit_button {
+  fill: none;
+  stroke: var(--color-accent);
 }

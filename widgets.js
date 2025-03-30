@@ -1,14 +1,14 @@
-let widgetEditMode=false;
-let hoveringBag=false;
-let widgetBagElement=null;
+let widgetEditMode = false;
+let hoveringBag = false;
+let widgetBagElement = null;
 
 function bagHoverEnter() {
   let bag = widgetBagElement;
   hoveringBag = true;
-  if(curDragInfo){
+  if (curDragInfo) {
     bag.classList.add("smpp-widget-bag-delete");
     curDragInfo.widget.element.classList.add("smpp-widget-delete");
-  }else{
+  } else {
     bag.classList.add("smpp-widget-bag-big");
   }
 }
@@ -27,10 +27,10 @@ function createWidgetBag() {
   let bag = document.createElement("div");
   bag.classList.add("smpp-widget-bag");
   document.body.appendChild(bag);
-  bag.addEventListener("mouseenter", (e)=>{
+  bag.addEventListener("mouseenter", (e) => {
     bagHoverEnter();
   });
-  bag.addEventListener("mouseleave", (e)=>{
+  bag.addEventListener("mouseleave", (e) => {
     bagHoverExit();
   });
   return bag;
@@ -41,15 +41,15 @@ widgetBagElement = createWidgetBag();
 // The widget drag info of the widget currently being dragged.
 let curDragInfo = null;
 
-class WidgetDragInfo{
+class WidgetDragInfo {
   offset;
   widget;
   sourcePannel;
 
   constructor(widget, sourcePannel, offset) {
-    this.widget=widget;
-    this.sourcePannel=sourcePannel;
-    this.offset=offset;
+    this.widget = widget;
+    this.sourcePannel = sourcePannel;
+    this.offset = offset;
   }
 }
 
@@ -69,7 +69,7 @@ class WidgetBase {
   }
 
   createHTML() {
-    if (this.element != null){
+    if (this.element != null) {
       return;
     }
     this.element = this.#createWidget();
@@ -77,7 +77,7 @@ class WidgetBase {
   }
 
   removeHTML() {
-    if (this.element == null){
+    if (this.element == null) {
       return;
     }
     this.element.remove();
@@ -85,7 +85,7 @@ class WidgetBase {
   }
 
   //Override me
-  get name() {}
+  get name() { }
 
   // Override me
   // Gets called when the preview html code needs to be created (append it to the parent given as a parameter)
@@ -95,21 +95,21 @@ class WidgetBase {
 
   // Override me
   // Gets called when the content html code needs to be created (append it to the parent given as a parameter)
-  createContent(parent) {}
+  createContent(parent) { }
 }
 
-function onWidgetDragStart(widget, e){
-  if (!widgetEditMode){
+function onWidgetDragStart(widget, e) {
+  if (!widgetEditMode) {
     return;
   }
   let target = widget.element;
   let rect = target.getBoundingClientRect();
 
-  curDragInfo = new WidgetDragInfo(widget, widget.element.parentElement, { x: e.clientX-rect.left, y: e.clientY-rect.top });
-  target.style.width=rect.width+"px";
-  target.style.height=rect.height+"px";
-  target.style.left = rect.left+"px";
-  target.style.top = rect.top+"px";
+  curDragInfo = new WidgetDragInfo(widget, widget.element.parentElement, { x: e.clientX - rect.left, y: e.clientY - rect.top });
+  target.style.width = rect.width + "px";
+  target.style.height = rect.height + "px";
+  target.style.left = rect.left + "px";
+  target.style.top = rect.top + "px";
 
   target.classList.add("smpp-widget-dragging");
 
@@ -120,8 +120,8 @@ function dropCurDragWidget() {
   if (curDragInfo) {
     let el = curDragInfo.widget.element;
     el.classList.remove("smpp-widget-dragging");
-    el.style="";
-    if (hoveringBag){
+    el.style = "";
+    if (hoveringBag) {
       bagHoverExit();
       // Delete
       curDragInfo.widget.removeHTML();
@@ -141,21 +141,21 @@ document.addEventListener("mousemove", (e) => {
   if (curDragInfo != null) {
     let el = curDragInfo.widget.element;
     let offset = curDragInfo.offset;
-    el.style.left = (e.clientX-offset.x)+"px";
-    el.style.top = (e.clientY-offset.y)+"px";
+    el.style.left = (e.clientX - offset.x) + "px";
+    el.style.top = (e.clientY - offset.y) + "px";
 
     let bagBounds = widgetBagElement.getBoundingClientRect();
     if (e.clientY < bagBounds.bottom && e.clientX > bagBounds.left && e.clientX < bagBounds.right) {
       bagHoverEnter();
-    }else if (hoveringBag){
+    } else if (hoveringBag) {
       bagHoverExit();
     }
   }
 
 });
 
-document.addEventListener("keyup", (e)=> {
-  if (e.key == "Escape" && widgetEditMode){
+document.addEventListener("keyup", (e) => {
+  if (e.key == "Escape" && widgetEditMode) {
     setEditMode(false);
     e.preventDefault();
   }
@@ -165,8 +165,8 @@ document.addEventListener("keyup", (e)=> {
 let widgets = [];
 
 function getWidgetByName(name) {
-  for (let widget of widgets){
-    if (widget.name == name){
+  for (let widget of widgets) {
+    if (widget.name == name) {
       return widget;
     }
   }
@@ -174,25 +174,25 @@ function getWidgetByName(name) {
 }
 
 function setEditMode(value) {
-  if (value){
+  if (value) {
     document.body.classList.add("smpp-widget-edit-mode");
-  }else{
+  } else {
     dropCurDragWidget();
     document.body.classList.remove("smpp-widget-edit-mode");
   }
   widgetEditMode = value;
 }
 
-function createWidgetEditModeButton(){
+function createWidgetEditModeButton() {
 
   let btn = document.createElement("button");
   btn.classList.add("topnav__btn");
   btn.classList.add("smpp-button");
-  btn.addEventListener("click", ()=>{
+  btn.addEventListener("click", () => {
     setEditMode(!widgetEditMode);
   });
-  btn.innerText="e";
-  btn.title="Ga in/uit edit mode om de locatie van de widgets te veranderen.";
+  btn.innerHTML = editIconSvg
+  btn.title = "Ga in/uit edit mode om de locatie van de widgets te veranderen.";
 
   return btn;
 }
@@ -203,7 +203,7 @@ class TestWidget extends WidgetBase {
     return "TestWidget";
   }
   createContent(parent) {
-    parent.innerHTML="<p>I Am Test Widget </p>";
+    parent.innerHTML = "<p>I Am Test Widget </p>";
   }
 }
 
