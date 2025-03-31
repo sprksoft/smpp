@@ -187,18 +187,28 @@ async function storeQuickSettings() {
   } else {
     document.getElementById('colorpickers').innerHTML = ``
   }
-  if (document.getElementById('background-file-input').files[0]) {
+  let file = document.getElementById('background-file-input').files[0];
+  if (file) {
     const reader = new FileReader();
     reader.onload = () => {
       const imageData = reader.result;
       browser.runtime.sendMessage({ action: 'saveBackgroundImage', data: imageData });
     };
-    reader.readAsDataURL(document.getElementById('background-file-input').files[0]);
-    data.backgroundSelection = 2
-    console.log(data)
+    reader.readAsDataURL(file);
+
+    data.backgroundSelection = 2;
+    data.backgroundLink = "<"+file.name+">";
+    console.log(data);
     browser.runtime.sendMessage({ action: 'setQuickSettingsData', data: data });
+
     window.location.reload()
     return;
+  } else {
+    if (data.backgroundLink == "") {
+      data.backgroundSelection = 0;
+    }else {
+      data.backgroundSelection = 1;
+    }
   }
   console.log(data)
   await browser.runtime.sendMessage({ action: 'setQuickSettingsData', data: data });
@@ -317,7 +327,6 @@ async function loadQuickSettings() {
   });
   console.log(data)
   document.getElementById('theme-selector').value = data.theme
-  document.getElementById('background-selector').value = data.backgroundSelection
   document.getElementById('background-link-input').value = data.backgroundLink
   document.getElementById('background-blur-amount-slider').value = data.backgroundBlurAmount
   document.getElementById('performance-mode-toggle').checked = data.enablePerfomanceMode
@@ -385,6 +394,37 @@ function createSwitch(id, title) {
 
   return switchContainer;
 };
+
+function createBgSelector() {
+  const backgroundSelector = document.createElement('div');
+  backgroundSelector.className = 'smpp-background-selector';
+  backgroundSelector.id = 'background-selector';
+
+  const linkInput = document.createElement('input');
+  linkInput.className = "smpp-background-link";
+  linkInput.id = 'background-link-input';
+  linkInput.spellcheck = false;
+  linkInput.type = 'text';
+
+  const fileBtn = document.createElement('button');
+  fileBtn.className = 'smpp-background-file';
+  fileBtn.id = 'backgroundfilebutton';
+  fileBtn.innerHTML = fileInputIconSvg;
+
+  const backgroundFileInput = document.createElement('input');
+  backgroundFileInput.id = 'background-file-input';
+  backgroundFileInput.style.display = 'none';
+  backgroundFileInput.type = 'file';
+  backgroundFileInput.accept = '.png, .jpg, .jpeg';
+
+
+  backgroundSelector.appendChild(linkInput);
+  backgroundSelector.appendChild(fileBtn);
+  backgroundSelector.appendChild(backgroundFileInput);
+
+  return backgroundSelector;
+
+}
 
 function createQuickSettingsHTML(parent) {
   const performanceModeTooltipLabel = document.createElement('label');
@@ -458,49 +498,6 @@ function createQuickSettingsHTML(parent) {
   const wallpaperContainer = document.createElement('div');
   wallpaperContainer.className = 'wallpaper-quick-settings-container';
 
-  const wallpaperSelectorLabels = document.createElement('div');
-  wallpaperSelectorLabels.className = 'vertical-selector-labels';
-
-  const offText = document.createElement('span');
-  offText.textContent = 'Off';
-
-  const linkText = document.createElement('span');
-  linkText.className = 'accent-text';
-  linkText.textContent = 'Link';
-
-  const fileText = document.createElement('span');
-  fileText.textContent = 'File';
-
-  wallpaperSelectorLabels.appendChild(offText);
-  wallpaperSelectorLabels.appendChild(linkText);
-  wallpaperSelectorLabels.appendChild(fileText);
-
-  const backgroundSelector = document.createElement('input');
-  backgroundSelector.type = 'range';
-  backgroundSelector.min = '0';
-  backgroundSelector.max = '2';
-  backgroundSelector.value = '0';
-  backgroundSelector.className = 'sliderblur';
-  backgroundSelector.id = 'background-selector';
-
-  const backgroundLinkInput = document.createElement('input');
-  backgroundLinkInput.className = 'popupinput';
-  backgroundLinkInput.id = 'background-link-input';
-  backgroundLinkInput.spellcheck = false;
-  backgroundLinkInput.type = 'text';
-
-  const backgroundFileInput = document.createElement('input');
-  backgroundFileInput.className = 'backgroundfile';
-  backgroundFileInput.id = 'background-file-input';
-  backgroundFileInput.style.display = 'none';
-  backgroundFileInput.type = 'file';
-  backgroundFileInput.accept = '.png, .jpg, .jpeg';
-
-  const fileInputButton = document.createElement('button');
-  fileInputButton.className = 'popupinput backgroundfile';
-  fileInputButton.id = 'backgroundfilebutton';
-  fileInputButton.innerHTML = fileInputIconSvg;
-
   const blurSliderContainer = document.createElement('div')
   blurSliderContainer.className = 'blur-slider-container'
 
@@ -520,11 +517,7 @@ function createQuickSettingsHTML(parent) {
   blurSliderContainer.appendChild(backgroundBlurAmountSlider)
   blurSliderContainer.appendChild(backgroundBlurLabel)
 
-  wallpaperContainer.appendChild(wallpaperSelectorLabels);
-  wallpaperContainer.appendChild(backgroundSelector);
-  wallpaperContainer.appendChild(backgroundLinkInput);
-  wallpaperContainer.appendChild(backgroundFileInput);
-  wallpaperContainer.appendChild(fileInputButton);
+  wallpaperContainer.appendChild(createBgSelector());
   wallpaperContainer.appendChild(blurSliderContainer);
 
   wallpaperTopContainer.appendChild(wallpaperHeading)
@@ -616,6 +609,7 @@ function createQuickSettings() {
   document.getElementById("quickSettingsButton").insertAdjacentElement("afterend", quickSettingsWindow);
 
   document.getElementById("backgroundfilebutton").addEventListener("click", openFileSelector);
+
   document.getElementById("performanceModeTooltipLabel").addEventListener("mouseover", () => {
     document.getElementById("performance-mode-info").style.opacity = "1";
     document.getElementById("performance-mode-info").style.zIndex = "2";

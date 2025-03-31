@@ -30,6 +30,7 @@
 			],
 			"all_frames": true,
 			"css": [
+        "CSS/smpp.css",
 				"CSS/general.css",
 				"CSS/weather.css",
 				"DMENU/dmenu.css",
