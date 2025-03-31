@@ -568,7 +568,7 @@ div.stdReplyWrapper {
   color: var(--color-text) !important;
 }
 
-#profileSelector {
+#theme-selector {
   background-color: var(--color-base01);
   border: 2px solid var(--color-base03);
   border-radius: 15px !important;
@@ -580,10 +580,11 @@ div.stdReplyWrapper {
   font: bold;
   box-shadow: none;
   justify-content: center;
+  align-self: center;
   text-align: center;
 }
 
-#profileSelector:hover {
+#theme-selector:hover {
   cursor: pointer !important;
 }
 
@@ -641,8 +642,7 @@ nav.topnav {
   display: inline-block;
   width: 60px;
   height: 34px;
-  margin-bottom: 10px;
-  margin-top: 1px !important;
+  margin: 0px !important;
 }
 
 /* Hide default HTML checkbox */
@@ -718,13 +718,13 @@ input:checked+.slider:before {
   align-self: center !important;
 }
 
-#profileSelector option {
+#theme-selector option {
   font-size: large;
   font: bold;
   text-align: center !important;
 }
 
-#profileSelector option:hover {
+#theme-selector option:hover {
   cursor: pointer !important;
 }
 
@@ -757,17 +757,15 @@ input:checked+.slider:before {
   align-items: center !important;
   display: flex;
   flex-direction: column !important;
+  gap: 10px !important;
   justify-content: center !important;
-  border-radius: 15px !important;
+  border-radius: 17.5px !important;
   overflow: visible;
-  background: var(--color-base00);
-  border: var(--border-size) solid var(--color-popup-border);
+  border: 3px solid var(--color-popup-border);
   z-index: 777;
   position: absolute;
-  top: 27px;
-  padding: 5px !important;
+  padding: 7.5px !important;
   box-shadow: 0 0.333rem 1.333rem rgba(0, 0, 0, 0.5);
-  /*This is copied from smartschool hun code van anderen dropdowns don't ask questions*/
 }
 
 .enableAnimations {
@@ -949,13 +947,14 @@ input:checked+.slider:before {
   transition: opacity .2s;
 }
 
-#backgroundSlider,
-#weatherSelector,
-#mySlider {
+#background-selector,
+#weather-overlay-selector,
+#background-blur-amount-slider {
   width: 50px !important;
   transform: rotate(90deg) !important;
   margin: 0px !important;
-  margin-top: 10px !important
+  margin-top: 20px !important;
+  margin-right: -20px !important;
 }
 
 .sliderblur::-webkit-slider-thumb {
@@ -1105,17 +1104,22 @@ option:hover {
   transition-duration: 0.1s !important;
 }
 
+#colorpickers {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 8px;
+}
+
 .color-pickersmpp {
   background-color: transparent;
-  /* Example color */
-  width: 25px !important;
-  height: 25px !important;
+  width: 30px !important;
+  height: 30px !important;
   box-shadow: none !important;
-  margin-right: 4px;
-  margin-left: 4px;
   border: 2px solid var(--color-base00) !important;
-  border-radius: 5px !important;
+  border-radius: 7.5px !important;
   margin-bottom: 10px !important;
+  margin-top: 5px !important;
 }
 
 .color-pickersmpp:hover {
@@ -1124,6 +1128,12 @@ option:hover {
 
 
 .color-picker-container {
+  position: relative;
+  display: inline-block;
+  width: fit-content;
+}
+
+.blur-slider-container {
   position: relative;
   display: inline-block;
   width: fit-content;
@@ -1140,6 +1150,7 @@ option:hover {
   left: 50%;
   transform: translateX(-50%);
   opacity: 0;
+  font-weight: 600;
 }
 
 .enableAnimations .color-label {
@@ -1147,6 +1158,10 @@ option:hover {
 }
 
 .color-picker-container:hover .color-label {
+  opacity: 1;
+}
+
+.blur-slider-container:hover .color-label {
   opacity: 1;
 }
 
@@ -1176,6 +1191,7 @@ option:hover {
   margin-left: 5px !important;
   margin-right: 10px !important;
   width: 45px !important;
+  align-self: center;
 }
 
 #backgroundfilebutton:hover {
@@ -1188,7 +1204,7 @@ option:hover {
   transition-duration: 0.1s !important;
 }
 
-.verticaltext {
+.vertical-selector-labels {
   display: flex !important;
   flex-direction: column !important;
   text-align: right !important;
@@ -1201,7 +1217,7 @@ option:hover {
   margin-top: -8px !important;
 }
 
-.link_text,
+.accent-text,
 span.userNotRead {
   color: var(--color-accent) !important;
 }
@@ -1485,7 +1501,7 @@ textarea.form-item__input-field.form-item__input-field--textarea {
   color: var(--color-red) !important;
 }
 
-input#mySlider {
+input#background-blur-amount-slider {
   width: 50px;
   margin-left: -20px !important;
   transform: rotate(-90deg) !important;
@@ -1905,7 +1921,7 @@ div#folders {
   vertical-align: top !important;
 }
 
-#performanceModeInfo {
+#performance-mode-info {
   left: 10px;
   max-width: 209px;
   top: -7px;
@@ -1919,11 +1935,17 @@ div#folders {
   z-index: -1;
 }
 
-.enableAnimations #performanceModeInfo {
+.enableAnimations #performance-mode-info {
   transition-duration: 0.3s;
   transition-delay: 0.1s;
   transition-timing-function: ease-in-out;
   transition-property: all;
+}
+
+.theme-container {
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
 }
 
 mark {

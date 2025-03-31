@@ -2,14 +2,16 @@ if (typeof browser === 'undefined') { var browser = chrome; }
 const liteMode = browser.runtime.getManifest().lite_mode
 import { fetchDelijnData } from './api-background-script.js';
 
-function getDefaultSettings(isLite){
-  if (isLite){
+function getDefaultQuickSettings(isLite) {
+  if (isLite) {
     return {
       theme: "ldev",
       enableSMPPLogo: true,
       enablePerfomanceMode: true,
       backgroundSelection: 0,
       backgroundLink: null,
+      backgroundBlurAmount: 0,
+      showNews: true
     }
   }
   return {
@@ -18,14 +20,17 @@ function getDefaultSettings(isLite){
     enablePerfomanceMode: false,
     backgroundSelection: 0,
     backgroundLink: null,
-    weatherOverlaySelector: 1,
-    weatherOverlayAmount:0
+    backgroundBlurAmount: 0,
+    showNews: true,
+    weatherOverlaySelection: 1,
+    weatherOverlayAmount: 0
   }
 }
 
-export async function getSettingsData() {
-  let data = await browser.storage.local.get("weatherAppData");
-  return data.settingsData || getDefaultSettings(liteMode);
+export async function getQuickSettingsData() {
+  let data = await browser.storage.local.get("settingsData");
+  console.log(data)
+  return data.settingsData || getDefaultQuickSettings(liteMode);
 }
 
 export async function getWidgetData() {
@@ -34,7 +39,7 @@ export async function getWidgetData() {
     leftPannels: [],
     rightPannels: [
       {
-        widgets:[ "TestWidget" ]
+        widgets: ["TestWidget"]
       }
     ],
   };

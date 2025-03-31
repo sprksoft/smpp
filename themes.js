@@ -190,7 +190,7 @@ const themes = {
     "--color-splashtext": "#bf4183"
   },
 
-  "custom": { "d": "d" }
+  "custom": { "isCustom": true }
 }
 
 function get_theme(name) {
@@ -198,7 +198,7 @@ function get_theme(name) {
 }
 
 function get_theme_var(theme, var_name) {
-  if (theme.d != "d") {
+  if (theme.isCustom) {
     let tvar = theme[var_name];
     if (tvar == undefined) {
       console.error(`Theme var '${var_name}' doesn't exist`);

@@ -9,7 +9,7 @@ const default_theme = {
   color_base03: "#c78af0",
   color_text: "#ede3e3"
 }
-let settingsWindowIsHidden = true;
+let quickSettingsWindowIsHidden = true;
 
 function unbloat() {
   document.body.innerHTML = '';
@@ -28,7 +28,7 @@ function changeLogoutText() {
 }
 
 function openFileSelector() {
-  document.getElementById('fileInput').click();
+  document.getElementById('background-file-input').click();
 }
 async function clearsettings() {
   localStorage.clear();
@@ -68,71 +68,11 @@ function getPfpLink(username) {
   }
   return `https://userpicture20.smartschool.be/User/Userimage/hashimage/hash/initials_MU/plain/1/res/32`;
 }
-async function apply() {
-  let style = document.documentElement.style;
-  let settingsData = get_config();
-
-  const colorpickers = document.getElementById("colorpickers");
-  console.log(settingsData)
-  const profileSelect = settingsData.profile
-  const backgroundLink = settingsData.backgroundlink
-  const halte = settingsData.halte
-  const overwrite_theme = settingsData.overwrite_theme;
-  const loc = settingsData.location;
-  const blurvalue = settingsData.blur;
-  const weatherAmount = settingsData.weatherAmount;
-  const shownews = settingsData.shownews;
-  const showsnake = settingsData.showsnake;
-  const showflappy = settingsData.showflappy;
-  var show_scores = settingsData.show_scores;
-  var showplanner = settingsData.showplanner;
-  var IsBig = settingsData.isbig;
-  var weatherSelector = settingsData.weatherSelector;
-  var username_override = settingsData.username_override;
-  var show_plant = settingsData.show_plant;
-  var enableanimations = settingsData.enableanimations;
-  changeFont()
-  set_theme("default");
-  set_theme(profileSelect);
-
-  showNews(shownews);
-
-  if (show_scores == undefined) {
-    show_scores = false;
-  }
-  if (showplanner == undefined) {
-    settingsData = get_config()
-    settingsData.showplanner = true
-    showplanner = true
-    set_config(settingsData)
-  }
-  if (IsBig == undefined) {
-    settingsData = get_config()
-    settingsData.isbig = true
-    IsBig = true
-    set_config(settingsData)
-  }
-  if (show_plant == undefined) {
-    settingsData = get_config()
-    settingsData.show_plant = true
-    show_plant = true
-    set_config(settingsData)
-  }
-  if (weatherSelector == undefined) {
-    settingsData = get_config()
-    settingsData.weatherSelector = 0
-    weatherSelector = 0
-    set_config(settingsData)
-  }
-  if (enableanimations == undefined) {
-    settingsData = get_config()
-    settingsData.enableanimations = true
-    set_config(settingsData)
-  }
+function switchCoursesButton() {
   topnav = document.querySelector('.topnav')
-  if (topnav) {
-    topnav.insertBefore(document.querySelector('[data-links]'), document.querySelector('[data-courses]'));
-  }
+  if (topnav) topnav.insertBefore(document.querySelector('[data-links]'), document.querySelector('[data-courses]'));
+}
+function topNavIcons() {
   const notifsButton = document.querySelector('.js-btn-notifs');
   if (notifsButton) {
     const textSpan = notifsButton.querySelector('span');
@@ -149,68 +89,65 @@ async function apply() {
     messageButton.innerHTML = messageSvg
     messageButton.appendChild(textSpan);
   }
-  let login_app_left = document.querySelector('.login-app__left');
-  if (login_app_left != undefined) {
-    login_app_left.innerHTML = ' ';
-    document.getElementsByClassName('login-app__platform-indicator')[0].innerHTML = '<h1 class="logintitle">Smartschool ++</h1>';
-    document.getElementsByClassName('login-app__title--separator')[0].innerHTML = `<button type="button" class="white_text_button" id="showmore">More</button>`;
-    document.getElementById('showmore').addEventListener('click', showmore)
-    function showmore() { style.setProperty('--show-options', 'flex'); document.getElementById("showmore").style.display = "none" }
-  }
-  window.addEventListener('load', async function () {
-    if (show_scores) {
-      var currentUrl = window.location.href;
-      if (currentUrl.includes("smartschool.be/results")) {
-        await show_scoresfunc();
-      }
-    }
-  });
-  if (colorpickers != undefined && profileSelect != "custom") {
-    colorpickers.innerHTML = ``
-  }
-  let bigblurvalue = blurvalue * 2;
-  if (blurvalue == 0) {
-    bigblurvalue += 2;
-  };
-  let observer = new MutationObserver((mutations) => {
-    let plannericonsactive = document.querySelector('.iconbtn--active');
-    if (plannericonsactive) {
-      plannericonsactive.style.backgroundColor = "var(--color-base02)";
-    }
-  });
-  let config = { childList: true, subtree: true };
-  observer.observe(document.body, config);
-
-  style.setProperty('--profile-picture', 'url(' + getPfpLink(username_override) + ')');
+}
+function updateBackgroundBlur() {
   style.setProperty('--blur-value-large', 'blur(' + bigblurvalue + 'px)');
   style.setProperty('--blur-value-small', 'blur(' + blurvalue + 'px)');
-  if (!liteMode) applyWeatherEffects(weatherSelector, weatherAmount)
+}
+function updateSMPPlogo() {
+  let iconElement = document.querySelector('link[rel="icon"]');
+  if (iconElement) {
+    iconElement.href = liteMode ? "https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/smpp_lite_logo128.png" :
+      "https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/icon128.png";
+  }
+}
+function resetSMlogo() {
+  let iconElement = document.querySelector('link[rel="icon"]');
+  if (iconElement) iconElement.href = 'https://static4.smart-school.net/smsc/svg/favicon/favicon.svg';
+}
+function updateLoginPanel() {
+  let login_app_left = document.querySelector('.login-app__left');
+  login_app_left.innerHTML = ' ';
+  document.getElementsByClassName('login-app__platform-indicator')[0].innerHTML = '<h1 class="logintitle">Smartschool ++</h1>';
+  document.getElementsByClassName('login-app__title--separator')[0].innerHTML = `<button type="button" class="white_text_button" id="showmore">More</button>`;
+  document.getElementById('showmore').addEventListener('click', showmore)
+  function showmore() { style.setProperty('--show-options', 'flex'); document.getElementById("showmore").style.display = "none" }
+}
+async function apply() {
+  let style = document.documentElement.style;
+  const data = await browser.runtime.sendMessage({
+    action: 'getQuickSettingsData'
+  });
+  changeFont()
+  set_theme("default");
+  set_theme(data.theme)
+  showNews(data.showNews)
+
+  if (document.querySelector("nav.topnav")) { topNavIcons(); switchCoursesButton(); }
+  if (document.querySelector('.login-app__left')) updateLoginPanel()
+  let defaultBackgroundBlur = data.backgroundBlurAmount * 2;
+  if (data.backgroundBlurAmount == 0) {
+    defaultBackgroundBlur += 2;
+  };
+  style.setProperty('--profile-picture', 'url(' + getPfpLink(username_override) + ')');
   if (!liteMode) {
+    applyWeatherEffects(data.weatherOverlaySelection, data.weatherOverlayAmount)
     if (gc_initialized) {
       remove_gcwin()
       make_gcwin(true)
     }
   }
-  if (enableanimations) {
-    document.body.classList.add("enableAnimations")
-  } else {
-    document.body.classList.remove("enableAnimations")
+  data.enablePerfomanceMode ? document.body.classList.remove("enableAnimations") : document.body.classList.add("enableAnimations")
+  if (document.getElementById("background_image")) document.getElementById("background_image").style.display = "none"
+  switch (data.backgroundSelection) {
+    case 1:
+      set_backgroundlink(data.backgroundLink)
+      break;
+    case 2:
+      set_background();
+      break;
   }
-  document.getElementById("background_image") ? document.getElementById("background_image").style.display = "none" : "pass"
-  if (overwrite_theme == 2) {
-    set_background();
-  } else if (overwrite_theme == 1) {
-    set_backgroundlink(backgroundLink)
-  }
-  let iconElement = document.querySelector('link[rel="icon"]');
-  if (iconElement) {
-    if (settingsData.smpp_logo) {
-      iconElement.href = liteMode ? "https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/smpp_lite_logo128.png" :
-        "https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/icon128.png";
-    } else {
-      iconElement.href = "https://static1.smart-school.net/smsc/svg/favicon/favicon.svg";
-    }
-  }
+  if (data.enableSMPPLogo) { updateSMPPlogo() } else { resetSMlogo() };
 }
 
 function storeTheme() {
@@ -225,152 +162,47 @@ function storeTheme() {
   window.localStorage.setItem("themedata", JSON.stringify(themeData));
 }
 
-function store() {
-  let previousData = get_config();
-  profileSelectPrevious = previousData.profile;
-  if (profileSelectPrevious == "custom") {
+async function storeQuickSettings() {
+  const data = await browser.runtime.sendMessage({
+    action: 'getQuickSettingsData'
+  });
+  if (data.theme == 'custom') {
     storeTheme();
   }
-
-  let settingsData = previousData;
-  const profileSelect = document.getElementById("profileSelector").value;
-  let backgroundFile = document.getElementById("fileInput").files[0];
-  const backgroundLink = document.getElementById("backgroundlink").value
-  const halte = document.getElementById("halt").checked;
-  const overwrite_theme = Number(document.getElementById("backgroundSlider").value);
-  const loc = document.getElementById("location").value;
-  const blur = Number(document.getElementById('mySlider').value);
-  const shownews = document.getElementById("shownewselement").checked;
-  const isbig = document.getElementById("isbig").checked;
-  const showplanner = document.getElementById("showplanner").checked;
-  const smpp_logo = document.getElementById("smpp_logo").checked;
-  const enableAnimations = document.getElementById("performanceModeTooltip").checked;
-  settingsData.profile = profileSelect;
-  settingsData.halte = halte;
-  settingsData.overwrite_theme = overwrite_theme;
-  settingsData.location = loc.charAt(0).toUpperCase() + loc.slice(1);
-  settingsData.backgroundlink = backgroundLink
-  settingsData.blur = blur;
-  settingsData.shownews = shownews;
-  settingsData.isbig = isbig;
-  settingsData.showplanner = showplanner;
-  settingsData.smpp_logo = smpp_logo;
-  settingsData.enableanimations = enableAnimations
+  console.log(data)
+  data.theme = document.getElementById('theme-selector').value
+  data.backgroundSelection = Number(document.getElementById('background-selector').value)
+  data.backgroundLink = document.getElementById('background-link-input').value
+  data.backgroundBlurAmount = Number(document.getElementById('background-blur-amount-slider').value)
+  data.enablePerfomanceMode = document.getElementById('performance-mode-toggle').checked
+  data.enableSMPPLogo = document.getElementById('smpp-logo-toggle').checked
+  data.showNews = document.getElementById('news-toggle').checked
   if (!liteMode) {
-    const weatherAmount = Number(document.getElementById('weatherSlider').value);
-    const showsnake = document.getElementById('showsnakeelement').checked;
-    const showflappy = document.getElementById('showflappyelement').checked;
-    const weatherSelector = Number(document.getElementById("weatherSelector").value);
-    const show_plant = document.getElementById("show_plant").checked;
-    settingsData.weatherAmount = weatherAmount;
-    settingsData.weatherSelector = weatherSelector;
-    settingsData.showsnake = showsnake;
-    settingsData.show_plant = show_plant;
-    settingsData.showflappy = showflappy
+    data.weatherOverlaySelection = Number(document.getElementById('weather-overlay-selector').value)
+    data.weatherOverlayAmount = Number(document.getElementById('weather-overlay-amount-slider').value)
   }
-  document.getElementById("performanceModeInfo").innerHTML = settingsData.enableanimations ? `Toggle performance mode (disabled)` : `Toggle performance mode (enabled)`
-  console.log(settingsData)
-  if (settingsData.show_scores == undefined) {
-    settingsData.show_scores = false;
+  document.getElementById("performance-mode-info").innerText = `Toggle performance mode (${data.enablePerfomanceMode ? 'enabled' : 'disabled'})`
+  if (data.theme == 'custom') {
+    loadCustomTheme();
+  } else {
+    document.getElementById('colorpickers').innerHTML = ``
   }
-
-  if (backgroundFile) {
+  if (document.getElementById('background-file-input').files[0]) {
     const reader = new FileReader();
     reader.onload = () => {
       const imageData = reader.result;
       browser.runtime.sendMessage({ action: 'saveBackgroundImage', data: imageData });
     };
-    reader.readAsDataURL(backgroundFile);
-    settingsData.overwrite_theme = 2;
-    set_config(settingsData)
-    if (profileSelect == "custom") {
-      loadCustomTheme();
-    }
+    reader.readAsDataURL(document.getElementById('background-file-input').files[0]);
+    data.backgroundSelection = 2
+    console.log(data)
+    browser.runtime.sendMessage({ action: 'setQuickSettingsData', data: data });
     window.location.reload()
+    return;
   }
-  else {
-    set_config(settingsData)
-    if (profileSelect == "custom") {
-      loadCustomTheme();
-    }
-    apply();
-  }
-};
-
-function migrate_theme_data(old_themeData) {
-  console.log("migrating_data")
-  const themeData = {
-    color_base00: old_themeData.base0,
-    color_base01: old_themeData.base1,
-    color_base02: old_themeData.base2,
-    color_base03: old_themeData.base3,
-    color_accent: old_themeData.accent,
-    color_text: old_themeData.text
-  };
-  window.localStorage.setItem("themedata", JSON.stringify(themeData));
-  return themeData
-}
-
-function loadCustomThemeData() {
-  let themeData = JSON.parse(window.localStorage.getItem("themedata"))
-  document.getElementById("colorPicker1").value = themeData.color_base00
-  document.getElementById("colorPicker2").value = themeData.color_base01
-  document.getElementById("colorPicker3").value = themeData.color_base02
-  document.getElementById("colorPicker4").value = themeData.color_base03
-  document.getElementById("colorPicker5").value = themeData.color_accent
-  document.getElementById("colorPicker6").value = themeData.color_text
-}
-function loadCustomTheme() {
-  let themeData = JSON.parse(window.localStorage.getItem("themedata"))
-  if (themeData == null) {
-    themeData = default_theme;
-    window.localStorage.setItem("themedata", JSON.stringify(themeData));
-  }
-  const colorpickers = document.getElementById("colorpickers");
-  colorpickers.innerHTML = colorpickersHTML
-  loadCustomThemeData()
-}
-
-function load() {
-  let settingsData = JSON.parse(window.localStorage.getItem("settingsdata"));
-  const profileSelect = document.getElementById("profileSelector");
-  const backgroundLink = document.getElementById("backgroundlink");
-  const halte = document.getElementById("halt");
-  const overwrite_theme = document.getElementById("backgroundSlider");
-  const loc = document.getElementById("location");
-  const blur = document.getElementById('mySlider');
-  const weatherSlider = document.getElementById('weatherSlider');
-  const shownews = document.getElementById("shownewselement");
-  const showsnake = document.getElementById("showsnakeelement");
-  const showflappy = document.getElementById("showflappyelement");
-  const isbig = document.getElementById("isbig");
-  const showplanner = document.getElementById("showplanner");
-  const weatherSelector = document.getElementById("weatherSelector");
-  const show_plant = document.getElementById("show_plant");
-  const smpp_logo = document.getElementById("smpp_logo");
-  const enableAnimations = document.getElementById("performanceModeTooltip");
-  profileSelect.value = settingsData.profile
-  halte.checked = settingsData.halte
-  overwrite_theme.value = settingsData.overwrite_theme
-  backgroundLink.value = settingsData.backgroundlink
-  loc.value = settingsData.location
-  blur.value = settingsData.blur
-  shownews.checked = settingsData.shownews
-  isbig.checked = settingsData.isbig
-  showplanner.checked = settingsData.showplanner
-  smpp_logo.checked = settingsData.smpp_logo;
-  enableAnimations.checked = settingsData.enableanimations;
-  if (!liteMode) {
-    showsnake.checked = settingsData.showsnake
-    showflappy.checked = settingsData.showflappy
-    weatherSelector.value = settingsData.weatherSelector
-    weatherSlider.value = settingsData.weatherAmount
-    show_plant.checked = settingsData.show_plant;
-  }
-  document.getElementById("performanceModeInfo").innerHTML = settingsData.enableanimations ? `Toggle performance mode (disabled)` : `Toggle performance mode (enabled)`
-  if (profileSelect.value == "custom") {
-    loadCustomTheme()
-  }
+  console.log(data)
+  await browser.runtime.sendMessage({ action: 'setQuickSettingsData', data: data });
+  await apply()
 }
 
 function set_background() {
@@ -378,7 +210,6 @@ function set_background() {
   browser.storage.local.get('backgroundImage', (result) => {
     style.setProperty('--loginpage-image', `none`);
     style.setProperty('--background-color', `transparent`);
-
     let img = document.getElementById("background_image") || document.createElement('img');
     img.id = "background_image";
     img.style.backgroundColor = "var(--color-base00)"
@@ -444,35 +275,90 @@ function set_theme(name) {
     apply_theme(theme, style)
   }
 }
-function toggleSettings() {
-  let win = document.getElementById("quickSettings");
 
-  if (win && !settingsWindowIsHidden) {
-    closeSettings();
-  } else {
-    openSettings();
+function migrate_theme_data(old_themeData) {
+  console.log("migrating_data")
+  const themeData = {
+    color_base00: old_themeData.base0,
+    color_base01: old_themeData.base1,
+    color_base02: old_themeData.base2,
+    color_base03: old_themeData.base3,
+    color_accent: old_themeData.accent,
+    color_text: old_themeData.text
+  };
+  window.localStorage.setItem("themedata", JSON.stringify(themeData));
+  return themeData
+}
+
+function loadCustomThemeData() {
+  let themeData = JSON.parse(window.localStorage.getItem("themedata"))
+  document.getElementById("colorPicker1").value = themeData.color_base00
+  document.getElementById("colorPicker2").value = themeData.color_base01
+  document.getElementById("colorPicker3").value = themeData.color_base02
+  document.getElementById("colorPicker4").value = themeData.color_base03
+  document.getElementById("colorPicker5").value = themeData.color_accent
+  document.getElementById("colorPicker6").value = themeData.color_text
+}
+
+function loadCustomTheme() {
+  let themeData = JSON.parse(window.localStorage.getItem("themedata"))
+  if (themeData == null) {
+    themeData = default_theme;
+    window.localStorage.setItem("themedata", JSON.stringify(themeData));
+  }
+  const colorpickers = document.getElementById("colorpickers");
+  colorpickers.innerHTML = colorpickersHTML
+  loadCustomThemeData()
+}
+
+async function loadQuickSettings() {
+  const data = await browser.runtime.sendMessage({
+    action: 'getQuickSettingsData'
+  });
+  console.log(data)
+  document.getElementById('theme-selector').value = data.theme
+  document.getElementById('background-selector').value = data.backgroundSelection
+  document.getElementById('background-link-input').value = data.backgroundLink
+  document.getElementById('background-blur-amount-slider').value = data.backgroundBlurAmount
+  document.getElementById('performance-mode-toggle').checked = data.enablePerfomanceMode
+  document.getElementById('smpp-logo-toggle').checked = data.enableSMPPLogo
+  document.getElementById('news-toggle').checked = data.showNews
+  document.getElementById("performance-mode-info").innerText = `Toggle performance mode (${data.enablePerfomanceMode ? 'enabled' : 'disabled'})`
+  if (!liteMode) {
+    document.getElementById('weather-overlay-selector').value = data.weatherOverlaySelection;
+    document.getElementById('weather-overlay-amount-slider').value = data.weatherOverlayAmount;
+  }
+  if (data.theme == 'custom') {
+    loadCustomTheme()
   }
 }
 
-function openSettings() {
+function toggleQuickSettings() {
+  let win = document.getElementById("quickSettings");
+  if (win && !quickSettingsWindowIsHidden) {
+    closeQuickSettings();
+  } else {
+    openQuickSettings();
+  }
+}
+
+async function openQuickSettings() {
   let win = document.getElementById("quickSettings");
   if (!win) {
-    createSettings();
+    createQuickSettings();
     win = document.getElementById("quickSettings");
   }
   win.classList.remove("qs-hidden");
-  load();
-  settingsWindowIsHidden = false;
+  loadQuickSettings();
+  quickSettingsWindowIsHidden = false;
 }
 
-function closeSettings() {
+function closeQuickSettings() {
   let win = document.getElementById("quickSettings");
-
   if (win) {
     win.classList.add("qs-hidden");
   }
-
-  settingsWindowIsHidden = true;
+  quickSettingsWindowIsHidden = true;
 }
 
 function createSwitch(id, title) {
@@ -500,27 +386,30 @@ function createSwitch(id, title) {
   return switchContainer;
 };
 
-function createSettingsHTML(parent) {
+function createQuickSettingsHTML(parent) {
   const performanceModeTooltipLabel = document.createElement('label');
   performanceModeTooltipLabel.className = 'performanceModeTooltipLabel';
   performanceModeTooltipLabel.id = 'performanceModeTooltipLabel';
 
   const performanceModeTooltip = document.createElement('input');
   performanceModeTooltip.type = 'checkbox';
-  performanceModeTooltip.id = 'performanceModeTooltip';
+  performanceModeTooltip.id = 'performance-mode-toggle';
 
   performanceModeTooltipLabel.appendChild(performanceModeTooltip);
   performanceModeTooltipLabel.innerHTML += performanceModeSvg;
 
   const performanceModeInfo = document.createElement('span');
-  performanceModeInfo.id = 'performanceModeInfo';
+  performanceModeInfo.id = 'performance-mode-info';
+
+  const themeContainer = document.createElement("div")
+  themeContainer.className = 'theme-container'
 
   const themeHeading = document.createElement('h3');
   themeHeading.className = 'popuptitles';
   themeHeading.textContent = 'Theme:';
 
-  const profileSelector = document.createElement('select');
-  profileSelector.id = 'profileSelector';
+  const themeSelector = document.createElement('select');
+  themeSelector.id = 'theme-selector';
 
   const options = [
     { value: 'default', text: 'Default Deluxe' },
@@ -544,141 +433,124 @@ function createSettingsHTML(parent) {
     const optionElement = document.createElement('option');
     optionElement.value = option.value;
     optionElement.textContent = option.text;
-    profileSelector.appendChild(optionElement);
+    themeSelector.appendChild(optionElement);
   });
 
   const colorPickers = document.createElement('div');
-  colorPickers.className = 'textandbutton';
   colorPickers.id = 'colorpickers';
 
+  themeContainer.appendChild(themeHeading);
+  themeContainer.appendChild(themeSelector);
+  themeContainer.appendChild(colorPickers);
+
   const switchesContainer = document.createElement('div');
-  switchesContainer.className = 'textandbuttonnomarg';
+  switchesContainer.className = 'switches-container';
 
-  switchesContainer.appendChild(createSwitch('showplanner', 'Planner:'));
-  switchesContainer.appendChild(createSwitch('halt', 'Delijn:'));
-  if (!liteMode) {
-    switchesContainer.appendChild(createSwitch('show_plant', 'Plant:'));
-  } else {
-    switchesContainer.appendChild(createSwitch('shownewselement', 'News:'));
-    switchesContainer.appendChild(createSwitch('smpp_logo', 'Logo:'));
-  }
+  switchesContainer.appendChild(createSwitch('news-toggle', 'News:'));
+  switchesContainer.appendChild(createSwitch('smpp-logo-toggle', 'Logo:'));
 
-  const weatherHeading = document.createElement('h3');
-  weatherHeading.className = 'popuptitles';
-  weatherHeading.textContent = 'Location (Weather):';
-
-  const weatherContainer = document.createElement('div');
-  weatherContainer.className = 'textandbutton';
-
-  const locationInput = document.createElement('input');
-  locationInput.className = 'popupinput';
-  locationInput.id = 'location';
-  locationInput.spellcheck = false;
-  locationInput.type = 'text';
-
-  const locationSwitch = createSwitch('isbig', null);
-  weatherContainer.appendChild(locationInput);
-  weatherContainer.appendChild(locationSwitch);
+  const wallpaperTopContainer = document.createElement('div')
 
   const wallpaperHeading = document.createElement('h3');
   wallpaperHeading.className = 'popuptitles';
   wallpaperHeading.textContent = 'Custom wallpaper:';
 
   const wallpaperContainer = document.createElement('div');
-  wallpaperContainer.className = 'textandbutton';
+  wallpaperContainer.className = 'wallpaper-quick-settings-container';
 
-  const verticalText = document.createElement('div');
-  verticalText.className = 'verticaltext';
+  const wallpaperSelectorLabels = document.createElement('div');
+  wallpaperSelectorLabels.className = 'vertical-selector-labels';
 
   const offText = document.createElement('span');
-  offText.className = 'nobottommargp';
   offText.textContent = 'Off';
 
   const linkText = document.createElement('span');
-  linkText.className = 'nobottommargp link_text';
+  linkText.className = 'accent-text';
   linkText.textContent = 'Link';
 
   const fileText = document.createElement('span');
-  fileText.className = 'nobottommargp';
   fileText.textContent = 'File';
 
-  verticalText.appendChild(offText);
-  verticalText.appendChild(linkText);
-  verticalText.appendChild(fileText);
+  wallpaperSelectorLabels.appendChild(offText);
+  wallpaperSelectorLabels.appendChild(linkText);
+  wallpaperSelectorLabels.appendChild(fileText);
 
-  const backgroundSlider = document.createElement('input');
-  backgroundSlider.type = 'range';
-  backgroundSlider.min = '0';
-  backgroundSlider.max = '2';
-  backgroundSlider.value = '0';
-  backgroundSlider.className = 'sliderblur';
-  backgroundSlider.id = 'backgroundSlider';
+  const backgroundSelector = document.createElement('input');
+  backgroundSelector.type = 'range';
+  backgroundSelector.min = '0';
+  backgroundSelector.max = '2';
+  backgroundSelector.value = '0';
+  backgroundSelector.className = 'sliderblur';
+  backgroundSelector.id = 'background-selector';
 
   const backgroundLinkInput = document.createElement('input');
   backgroundLinkInput.className = 'popupinput';
-  backgroundLinkInput.id = 'backgroundlink';
+  backgroundLinkInput.id = 'background-link-input';
   backgroundLinkInput.spellcheck = false;
   backgroundLinkInput.type = 'text';
 
-  const fileInput = document.createElement('input');
-  fileInput.className = 'backgroundfile';
-  fileInput.id = 'fileInput';
-  fileInput.style.display = 'none';
-  fileInput.type = 'file';
-  fileInput.accept = '.png, .jpg, .jpeg';
+  const backgroundFileInput = document.createElement('input');
+  backgroundFileInput.className = 'backgroundfile';
+  backgroundFileInput.id = 'background-file-input';
+  backgroundFileInput.style.display = 'none';
+  backgroundFileInput.type = 'file';
+  backgroundFileInput.accept = '.png, .jpg, .jpeg';
 
   const fileInputButton = document.createElement('button');
   fileInputButton.className = 'popupinput backgroundfile';
   fileInputButton.id = 'backgroundfilebutton';
   fileInputButton.innerHTML = fileInputIconSvg;
 
-  const colorPickerContainer = document.createElement('div');
-  colorPickerContainer.className = 'color-picker-container';
+  const blurSliderContainer = document.createElement('div')
+  blurSliderContainer.className = 'blur-slider-container'
 
-  const blurSlider = document.createElement('input');
-  blurSlider.type = 'range';
-  blurSlider.min = '0';
-  blurSlider.max = '10';
-  blurSlider.value = '0';
-  blurSlider.className = 'sliderblur';
-  blurSlider.id = 'mySlider';
+  const backgroundBlurAmountSlider = document.createElement('input');
+  backgroundBlurAmountSlider.type = 'range';
+  backgroundBlurAmountSlider.min = '0';
+  backgroundBlurAmountSlider.max = '10';
+  backgroundBlurAmountSlider.value = '0';
+  backgroundBlurAmountSlider.className = 'sliderblur';
+  backgroundBlurAmountSlider.id = 'background-blur-amount-slider';
 
-  const blurLabel = document.createElement('span');
-  blurLabel.className = 'color-label';
-  blurLabel.id = 'blurPlaats';
-  blurLabel.textContent = 'blur';
+  const backgroundBlurLabel = document.createElement('span');
+  backgroundBlurLabel.className = 'color-label';
+  backgroundBlurLabel.id = 'blurPlaats';
+  backgroundBlurLabel.textContent = 'blur';
 
-  colorPickerContainer.appendChild(blurSlider);
-  colorPickerContainer.appendChild(blurLabel);
+  blurSliderContainer.appendChild(backgroundBlurAmountSlider)
+  blurSliderContainer.appendChild(backgroundBlurLabel)
 
-  wallpaperContainer.appendChild(verticalText);
-  wallpaperContainer.appendChild(backgroundSlider);
+  wallpaperContainer.appendChild(wallpaperSelectorLabels);
+  wallpaperContainer.appendChild(backgroundSelector);
   wallpaperContainer.appendChild(backgroundLinkInput);
-  wallpaperContainer.appendChild(fileInput);
+  wallpaperContainer.appendChild(backgroundFileInput);
   wallpaperContainer.appendChild(fileInputButton);
-  wallpaperContainer.appendChild(colorPickerContainer);
+  wallpaperContainer.appendChild(blurSliderContainer);
+
+  wallpaperTopContainer.appendChild(wallpaperHeading)
+  wallpaperTopContainer.appendChild(wallpaperContainer)
+
+  const weatherOverlayTopContainer = document.createElement("div")
 
   const weatherOverlayHeading = document.createElement('h3');
   weatherOverlayHeading.className = 'popuptitles';
   weatherOverlayHeading.textContent = 'Weather overlay:';
 
   const weatherOverlayContainer = document.createElement('div');
-  weatherOverlayContainer.className = 'textandbutton';
+  weatherOverlayContainer.className = 'weather-overlay-container';
   weatherOverlayContainer.style.marginTop = '20px';
 
   const weatherVerticalText = document.createElement('div');
-  weatherVerticalText.className = 'verticaltext';
+  weatherVerticalText.className = 'vertical-selector-labels';
 
-  const snowText = document.createElement('p');
-  snowText.className = 'nobottommargp';
+  const snowText = document.createElement('span');
   snowText.textContent = 'Snow';
 
-  const realtimeText = document.createElement('p');
-  realtimeText.className = 'nobottommargp link_text';
+  const realtimeText = document.createElement('span');
+  realtimeText.className = 'accent-text';
   realtimeText.textContent = 'Realtime';
 
-  const rainText = document.createElement('p');
-  rainText.className = 'nobottommargp';
+  const rainText = document.createElement('span');
   rainText.textContent = 'Rain';
 
   weatherVerticalText.appendChild(snowText);
@@ -691,16 +563,13 @@ function createSettingsHTML(parent) {
   weatherSelector.max = '2';
   weatherSelector.value = '0';
   weatherSelector.className = 'sliderblur';
-  weatherSelector.id = 'weatherSelector';
+  weatherSelector.id = 'weather-overlay-selector';
 
   const weatherSliderContainer = document.createElement('div');
-  weatherSliderContainer.className = 'verticaltext-noright';
-  weatherSliderContainer.style.width = '110px';
-  weatherSliderContainer.style.marginTop = '-10px';
-  weatherSliderContainer.style.marginRight = '10px';
 
   const weatherSliderHeading = document.createElement('h4');
-  weatherSliderHeading.style.marginBottom = '1px';
+  weatherSliderHeading.style.marginBottom = '0px';
+  weatherSliderHeading.style.textAlign = 'center'
   weatherSliderHeading.textContent = 'Amount:';
 
   const weatherSlider = document.createElement('input');
@@ -709,8 +578,8 @@ function createSettingsHTML(parent) {
   weatherSlider.max = '500';
   weatherSlider.value = '0';
   weatherSlider.className = 'sliderblur';
-  weatherSlider.id = 'weatherSlider';
-  weatherSlider.style.width = '100%';
+  weatherSlider.id = 'weather-overlay-amount-slider';
+  weatherSlider.style.width = '110px';
 
   weatherSliderContainer.appendChild(weatherSliderHeading);
   weatherSliderContainer.appendChild(weatherSlider);
@@ -719,59 +588,45 @@ function createSettingsHTML(parent) {
   weatherOverlayContainer.appendChild(weatherSelector);
   weatherOverlayContainer.appendChild(weatherSliderContainer);
 
-  const gameSwitchesContainer = document.createElement('div');
-  gameSwitchesContainer.className = 'textandbutton';
-
-  gameSwitchesContainer.appendChild(createSwitch('showsnakeelement', 'Snake:'));
-  gameSwitchesContainer.appendChild(createSwitch('showflappyelement', 'Flappy:'));
-  gameSwitchesContainer.appendChild(createSwitch('shownewselement', 'News:'));
-  gameSwitchesContainer.appendChild(createSwitch('smpp_logo', 'Logo:'));
+  weatherOverlayTopContainer.appendChild(weatherOverlayHeading)
+  weatherOverlayTopContainer.appendChild(weatherOverlayContainer)
 
   parent.appendChild(performanceModeTooltipLabel);
   parent.appendChild(performanceModeInfo);
 
-  parent.appendChild(themeHeading);
-  parent.appendChild(profileSelector);
-  parent.appendChild(colorPickers);
+  parent.appendChild(themeContainer)
 
-  parent.appendChild(switchesContainer);
+  parent.appendChild(wallpaperTopContainer);
 
-  parent.appendChild(weatherHeading)
-  parent.appendChild(weatherContainer);
-
-  parent.appendChild(wallpaperHeading)
-  parent.appendChild(wallpaperContainer);
+  parent.appendChild(switchesContainer)
 
   if (!liteMode) {
-    parent.appendChild(weatherOverlayHeading)
-    parent.appendChild(weatherOverlayContainer);
-    parent.appendChild(gameSwitchesContainer);
+    parent.appendChild(weatherOverlayTopContainer);
   }
-
   return parent
 }
 
-function createSettings() {
+function createQuickSettings() {
   let quickSettingsWindow = document.createElement("div");
   quickSettingsWindow.id = "quickSettings";
-  quickSettingsWindow.addEventListener("change", store);
-  quickSettingsWindow = createSettingsHTML(quickSettingsWindow)
+  quickSettingsWindow.addEventListener("change", storeQuickSettings);
+  quickSettingsWindow = createQuickSettingsHTML(quickSettingsWindow)
 
   quickSettingsWindow.style.left = (-270 / 3) + "px";
   document.getElementById("quickSettingsButton").insertAdjacentElement("afterend", quickSettingsWindow);
 
   document.getElementById("backgroundfilebutton").addEventListener("click", openFileSelector);
   document.getElementById("performanceModeTooltipLabel").addEventListener("mouseover", () => {
-    document.getElementById("performanceModeInfo").style.opacity = "1";
-    document.getElementById("performanceModeInfo").style.zIndex = "2";
+    document.getElementById("performance-mode-info").style.opacity = "1";
+    document.getElementById("performance-mode-info").style.zIndex = "2";
   });
   document.getElementById("performanceModeTooltipLabel").addEventListener("mouseout", () => {
-    document.getElementById("performanceModeInfo").style.opacity = "0";
-    document.getElementById("performanceModeInfo").style.zIndex = "-1";
+    document.getElementById("performance-mode-info").style.opacity = "0";
+    document.getElementById("performance-mode-info").style.zIndex = "-1";
   });
 
   document.addEventListener("click", (e) => {
-    if (settingsWindowIsHidden) return;
+    if (quickSettingsWindowIsHidden) return;
     if (
       e.target.id === "quickSettings" ||
       quickSettingsWindow.contains(e.target) ||
@@ -779,11 +634,11 @@ function createSettings() {
     ) {
       return;
     }
-    closeSettings();
+    closeQuickSettings();
   });
 }
 
-function createSettingsButton() {
+function createQuickSettingsButton() {
   let quickSettingsButtonWrapper = document.createElement("div")
   quickSettingsButtonWrapper.id = "quickSettingsButtonWrapper"
   quickSettingsButtonWrapper.classList.add("smpp-button")
@@ -793,7 +648,7 @@ function createSettingsButton() {
   quickSettingsButton.id = "quickSettingsButton"
   quickSettingsButton.classList.add("topnav__btn")
   quickSettingsButton.innerText = "Settings"
-  quickSettingsButton.addEventListener("click", toggleSettings);
+  quickSettingsButton.addEventListener("click", toggleQuickSettings);
   quickSettingsButtonWrapper.appendChild(quickSettingsButton)
   return quickSettingsButtonWrapper;
 }
@@ -805,7 +660,7 @@ function createTopButtons(onHomePage) {
   }
 
   let searchBtn = topNav.querySelector(".topnav__btn--icon--search").parentElement;
-  topNav.insertBefore(createSettingsButton(), searchBtn);
+  topNav.insertBefore(createQuickSettingsButton(), searchBtn);
 
   let pushRight = topNav.childNodes[2];
 
@@ -832,7 +687,6 @@ function main() {
   if (searchBtn) searchBtn.parentElement.style = "display:none";
   let notifsLabel = document.getElementById("notifsToggleLabel");
   if (notifsLabel) notifsLabel.innerText = "Toon pop-ups"; // Simplify text. (smartschool by default has a very long explanation that doesn't fit on screen)
-
 }
 
 main()
