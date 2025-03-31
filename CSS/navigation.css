@@ -47,6 +47,20 @@
   transition: none !important
 }
 
+.switches-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
+}
+
+.wallpaper-quick-settings-container,
+.weather-overlay-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 .performanceModeTooltipLabel {
   display: flex;
   align-items: center;
@@ -69,12 +83,12 @@
   width: 0px;
 }
 
-#performanceModeTooltip:checked+svg {
-  fill: var(--color-text) !important;
+#performance-mode-toggle:checked+svg {
+  fill: var(--color-accent) !important;
 }
 
 .performanceModeTooltipLabel {
-  fill: var(--color-accent) !important;
+  fill: var(--color-text) !important;
 }
 
 .performanceModeTooltipLabel:hover {

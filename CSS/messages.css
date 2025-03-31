@@ -697,6 +697,7 @@ a.menu-type.menu-linkbutton.smsc-linkbutton {
 .topnav__btn.topnav__btn--profile {
   color: var(--color-text) !important;
 }
-.msgContent p{
+
+.msgContent p {
   background-color: var(--color-base01) !important;
 }
