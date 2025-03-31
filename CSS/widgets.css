@@ -26,6 +26,7 @@
 }
 
 .smpp-widget-pannel {
+  width: 200px;
   background-color: var(--color-homepage-sidebars-bg);
   backdrop-filter: var(--blur-value-large);
 }
