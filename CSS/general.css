@@ -947,7 +947,6 @@ input:checked+.slider:before {
   transition: opacity .2s;
 }
 
-#background-selector,
 #weather-overlay-selector,
 #background-blur-amount-slider {
   width: 50px !important;
@@ -1173,35 +1172,6 @@ option:hover {
   color: var(--color-red) !important;
   margin: 0px !important;
   text-align: center !important;
-}
-
-#backgroundlink,
-#backgroundfilebutton {
-  margin: 0px !important;
-  height: 35px !important;
-}
-
-#backgroundlink {
-  margin-left: -5px !important;
-  width: 100px !important;
-}
-
-#backgroundfilebutton {
-  padding: 1px !important;
-  margin-left: 5px !important;
-  margin-right: 10px !important;
-  width: 45px !important;
-  align-self: center;
-}
-
-#backgroundfilebutton:hover {
-  background-color: var(--color-base02) !important;
-  border-color: var(--color-base03) !important;
-}
-
-.enableAnimations #backgroundfilebutton:hover {
-  transition: ease-in !important;
-  transition-duration: 0.1s !important;
 }
 
 .vertical-selector-labels {

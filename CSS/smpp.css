@@ -1,0 +1,33 @@
+/* CSS for things that are smpp specific */
+
+.smpp-background-selector {
+  color: var(--color-text) !important;
+  background-color: var(--color-settings-ui-bg) !important;
+  border: 2px solid var(--color-settings-ui-layer2) !important;
+  border-radius: 10px !important;
+  margin: 5px !important;
+  overflow: hidden !important;
+
+  display: flex;
+  flex-direction: row;
+
+  transition: none !important;
+}
+
+.enableAnimations .smpp-background-selector {
+  transition: all 0.3s !important;
+}
+
+.smpp-background-selector .smpp-background-link {
+  flex-grow: 1;
+  text-align: center !important;
+}
+.smpp-background-file {
+  margin-right: 0px !important;
+  background: none !important;
+  border: none !important;
+  opacity: 0;
+}
+.smpp-background-selector .smpp-background-file:hover {
+  opacity: 1;
+}
