@@ -56,6 +56,25 @@ class WidgetBase {
   createContent(parent) { }
 }
 
+class ErrorWidget extends WidgetBase {
+  origWidgetName
+
+  constructor(origWidgetName) {
+    super();
+    this.origWidgetName = origWidgetName;
+  }
+
+  get name() {
+    return this.origWidgetName;
+  }
+
+  createContent(parent) {
+    parent.classList.add("smpp-error-widget")
+    parent.innerHTML = "<p>Probleem bij het laden van de widget:</p> <code class='widgetName'></code>";
+    parent.querySelector(".widgetName").innerText = this.origWidgetName;
+  }
+}
+
 class SmartschoolWidget extends WidgetBase {
   smContent
 
@@ -98,7 +117,11 @@ function createPannelHTML(pannel) {
 
   for (let widgetName of pannel.widgets){
     let widget = getWidgetByName(widgetName);
-    if (widget && !widget.element) {
+    if (!widget){
+      registerWidget(new ErrorWidget(widgetName));
+      widget = getWidgetByName(widgetName);
+    }
+    if (!widget.element) {
       widget.createHTML()
       pannelDiv.appendChild(widget.element);
     } else {

@@ -92,13 +92,14 @@
   left: 5%;
   right: 5%;
 }
+.smpp-widget-dragging-something .smpp-widget-bag {
+  border-color: var(--color-red);
+  outline: none;
+  box-shadow: none;
+}
 
 .smpp-widget-bag.smpp-widget-bag-delete {
   transform: translateY(-10px);
-
-  outline: none;
-  box-shadow: none;
-  border-color: var(--color-red);
 }
 
 .smpp-widget-edit-mode nav,
@@ -157,4 +158,14 @@
 .edit_button {
   fill: none;
   stroke: var(--color-accent);
+}
+
+/* WIDGET STYLES */
+.smpp-error-widget {
+  color: var(--color-red);
+  font-weight: bold;
+}
+.smpp-error-widget .widgetName {
+  text-align: center;
+  display: block;
 }
