@@ -35,15 +35,7 @@ export async function getQuickSettingsData() {
 
 export async function getWidgetData() {
   let data = await browser.storage.local.get("widgets");
-  return data.widgets || {
-    leftPannels: [],
-    rightPannels: [
-      {
-        widgets: ["TestWidget"]
-      }
-    ],
-  };
-
+  return data.widgets;
 }
 
 export async function getWeatherAppData(location) {

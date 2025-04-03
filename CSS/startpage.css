@@ -36,10 +36,6 @@ body.modern-ui .homepage__center {
   min-width: 0px !important;
 }
 
-#homepage__block--contact {
-  display: none !important;
-}
-
 #leftcontainer,
 .homepage__left {
   padding: 16px 24px !important;
