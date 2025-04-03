@@ -432,3 +432,14 @@ td.cell.cell--evaluation.js-cell-evaluation.evaluation:hover {
 #smscMain.results {
   overflow-x: hidden !important;
 }
+
+
+injected stylesheet
+.listview__row.js-listview-row:hover {
+    background-color: transparent !important;
+}
+
+div.reports-overview__listview__row: {
+    background-color: rgb(0 0 0 / 100%) !important;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
