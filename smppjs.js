@@ -105,21 +105,13 @@ function resetSMlogo() {
   let iconElement = document.querySelector('link[rel="icon"]');
   if (iconElement) iconElement.href = 'https://static4.smart-school.net/smsc/svg/favicon/favicon.svg';
 }
-function updateLoginPanel() {
-  let login_app_left = document.querySelector('.login-app__left');
-  login_app_left.innerHTML = ' ';
-  document.getElementsByClassName('login-app__platform-indicator')[0].innerHTML = '<h1 class="logintitle">Smartschool ++</h1>';
-  document.getElementsByClassName('login-app__title--separator')[0].innerHTML = `<button type="button" class="white_text_button" id="showmore">More</button>`;
-  document.getElementById('showmore').addEventListener('click', showmore)
-  function showmore() { style.setProperty('--show-options', 'flex'); document.getElementById("showmore").style.display = "none" }
-}
+
 async function apply() {
   let style = document.documentElement.style;
   const data = await browser.runtime.sendMessage({
     action: 'getQuickSettingsData'
   });
   changeFont()
-  set_theme("default");
   set_theme(data.theme)
   showNews(data.showNews)
 
@@ -197,7 +189,7 @@ async function storeQuickSettings() {
     reader.readAsDataURL(file);
 
     data.backgroundSelection = 2;
-    data.backgroundLink = "<"+file.name+">";
+    data.backgroundLink = "<" + file.name + ">";
     console.log(data);
     browser.runtime.sendMessage({ action: 'setQuickSettingsData', data: data });
 
@@ -206,7 +198,7 @@ async function storeQuickSettings() {
   } else {
     if (data.backgroundLink == "") {
       data.backgroundSelection = 0;
-    }else {
+    } else {
       data.backgroundSelection = 1;
     }
   }
