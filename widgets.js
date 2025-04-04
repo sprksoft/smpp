@@ -1,13 +1,14 @@
 let widgetEditMode = false;
 let hoveringBag = false;
-let widgetBagElement = createWidgetBag();
 let showNewsState = false; // Used for if the shownews state is changed before it could be created.
 let ghostPannel = null;
-
 // The widget drag info of the widget currently being dragged.
 let curDragInfo = null;
-
 let widgets = [];
+
+let widgetBag;
+let widgetBagFold;
+
 function registerWidget(widget) {
   widgets.push(widget);
 }
@@ -34,6 +35,12 @@ class WidgetBase {
     this.element = this.#createWidget();
     this.createContent(this.element);
   }
+  createPreviewHTML() {
+    let widget = this.#createWidget();
+    widget.classList.add("smpp-widget-preview");
+    this.createPreview(widget);
+    return widget;
+  }
 
   removeHTML() {
     if (this.element == null) {
@@ -44,6 +51,8 @@ class WidgetBase {
   }
 
   get name() { return this.constructor.name; }
+
+  get category() { return "other"; }
 
   // Override me
   // Gets called when the preview html code needs to be created (append it to the parent given as a parameter)
@@ -83,13 +92,21 @@ class SmartschoolWidget extends WidgetBase {
     this.smContent = content;
   }
 
+  get category() {
+    return "smartschool";
+  }
+
   get name() {
     return this.constructor.name+"-"+this.smContent.id;
   }
-
   createContent(parent) {
     parent.style.padding = "0px";
     parent.appendChild(this.smContent);
+  }
+
+  createPreview(parent) {
+    parent.style.padding = "0px";
+    parent.appendChild(this.smContent.cloneNode(true));
   }
 }
 
@@ -215,7 +232,9 @@ async function createWidgetSystem() {
       widgetData.leftPannels[0].widgets.push(wName);
     }
   }
-  console.log(widgets);
+
+  widgetBagFold = createWidgetBagFold();
+  widgetBag = createWidgetBag();
 
   // create widgets container
   let widgetsContainer = createWidgetsContainerHTML(widgetData, news, showNewsState);
@@ -227,7 +246,7 @@ async function createWidgetSystem() {
 }
 
 function bagHoverEnter() {
-  let bag = widgetBagElement;
+  let bag = widgetBagFold;
   hoveringBag = true;
   if (curDragInfo) {
     bag.classList.add("smpp-widget-bag-delete");
@@ -236,7 +255,7 @@ function bagHoverEnter() {
 }
 
 function bagHoverExit() {
-  let bag = widgetBagElement;
+  let bag = widgetBagFold;
   hoveringBag = false;
   bag.classList.remove("smpp-widget-bag-delete");
   if (curDragInfo) {
@@ -244,9 +263,48 @@ function bagHoverExit() {
   }
 }
 
+function createGroup(bag, name, displayName) {
+  let group = document.createElement("div");
+  group.classList.add("smpp-widget-bag-group");
+  for (let widget of widgets) {
+    if (widget.category == name) {
+      group.appendChild(widget.createPreviewHTML());
+    }
+  }
+  let groupTitle = document.createElement("h2");
+  groupTitle.classList.add("smpp-widget-bag-group-title");
+  groupTitle.innerText=displayName;
+  bag.appendChild(groupTitle);
+  bag.appendChild(group);
+}
+
 function createWidgetBag() {
   let bag = document.createElement("div");
   bag.classList.add("smpp-widget-bag");
+
+  createGroup(bag, "smartschool", "Smartschool widgets");
+  createGroup(bag, "other", "Overige widgets");
+
+  document.body.appendChild(bag);
+  return bag;
+}
+function closeBag() {
+  if (widgetBag.classList.contains("smpp-widget-bag-open")) {
+    widgetBag.classList.remove("smpp-widget-bag-open")
+  }
+}
+
+function createWidgetBagFold() {
+  let bag = document.createElement("div");
+  bag.classList.add("smpp-widget-bag-fold");
+  bag.innerHTML=`
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg id="smpp-widget-bag-fold-icon-arrow" version="1.1" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"><g transform="translate(0 -17.198)"><path d="m26.458 288.48 198.44 119.06 198.44-119.06" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="39.511"/>
+</g></svg>
+<svg id="smpp-widget-bag-fold-icon-trash" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>
+`
+
+
   document.body.appendChild(bag);
   bag.addEventListener("mouseenter", (e) => {
     bagHoverEnter();
@@ -254,6 +312,9 @@ function createWidgetBag() {
   bag.addEventListener("mouseleave", (e) => {
     bagHoverExit();
   });
+  bag.addEventListener("click", (e)=> {
+      widgetBag.classList.add("smpp-widget-bag-open")
+  })
   return bag;
 }
 
@@ -276,12 +337,25 @@ function onWidgetDragStart(widget, e) {
   if (!widgetEditMode) {
     return;
   }
+  if (widget.element && e.target.classList.contains("smpp-widget-preview")) {
+    return;
+  }
+
+  let sourcePannel = null;
+  let sourceBeforeElement = null;
+  let rect;
+  if (widget.element == null) {
+    widget.createHTML();
+    rect = e.target.getBoundingClientRect();
+  } else {
+    widget.element.nextElementSibling.remove();
+    sourcePannel = widget.element.parentElement;
+    sourceBeforeElement = widget.element.nextElementSibling;
+    rect = widget.element.getBoundingClientRect();
+  }
   let target = widget.element;
-  let rect = target.getBoundingClientRect();
 
-  target.nextElementSibling.remove();
-
-  curDragInfo = new WidgetDragInfo(widget, widget.element.parentElement, widget.element.nextElementSibling, { x: e.clientX - rect.left, y: e.clientY - rect.top });
+  curDragInfo = new WidgetDragInfo(widget, sourcePannel, sourceBeforeElement, { x: e.clientX - rect.left, y: e.clientY - rect.top });
   document.body.classList.add("smpp-widget-dragging-something");
   target.style.width = rect.width + "px";
   target.style.height = rect.height + "px";
@@ -292,6 +366,7 @@ function onWidgetDragStart(widget, e) {
 
 
   document.body.appendChild(widget.element);
+  closeBag();
 }
 
 function dropCurDragWidget(e) {
@@ -314,16 +389,20 @@ function dropCurDragWidget(e) {
         }
       }
 
-      if (targetPannel == ghostPannel){
+      if (targetPannel && targetPannel == ghostPannel){
         ghostPannel.parentElement.insertBefore(createInsertionPointHTML(true), ghostPannel.nextElementSibling);
         ghostPannel = null;
       }
+      if (targetPannel == null) {
+        curDragInfo.widget.removeHTML();
+      } else {
+        targetPannel.insertBefore(el, targetBefore);
+        targetPannel.insertBefore(createInsertionPointHTML(), targetBefore);
+      }
 
-      targetPannel.insertBefore(el, targetBefore);
-      targetPannel.insertBefore(createInsertionPointHTML(), targetBefore);
     }
 
-    if (curDragInfo.sourcePannel.childNodes.length == 1) { // Check if the pannel is empty (1 is because of the insertion point)
+    if (curDragInfo.sourcePannel && curDragInfo.sourcePannel.childNodes.length == 1) { // Check if the pannel is empty (1 is because of the insertion point)
       curDragInfo.sourcePannel.nextElementSibling.remove();
       curDragInfo.sourcePannel.remove();
     }
@@ -350,7 +429,7 @@ document.addEventListener("mousemove", (e) => {
     el.style.left = (e.clientX - offset.x) + "px";
     el.style.top = (e.clientY - offset.y) + "px";
 
-    let bagBounds = widgetBagElement.getBoundingClientRect();
+    let bagBounds = widgetBagFold.getBoundingClientRect();
     if (e.clientY < bagBounds.bottom && e.clientX > bagBounds.left && e.clientX < bagBounds.right) {
       bagHoverEnter();
     } else if (hoveringBag) {
@@ -360,11 +439,11 @@ document.addEventListener("mousemove", (e) => {
 
 });
 
-document.addEventListener("mousedown", (e) => {
-  if (!e.target.classList.contains("smpp-widget") && e.target.id !== "smpp-widget-edit-mode-btn") {
-    setEditMode(false);
-  }
-})
+// document.addEventListener("mousedown", (e) => {
+//   if (!e.target.classList.contains("smpp-widget") && e.target.id !== "smpp-widget-edit-mode-btn" && !e.target.classList.contains("smpp-widget-bag-fold") && !e.target.classList.contains("smpp-widget-bag")) {
+//     setEditMode(false);
+//   }
+// })
 
 document.addEventListener("keyup", (e) => {
   if (e.key == "Escape" && widgetEditMode) {
@@ -387,9 +466,12 @@ function getWidgetByName(name) {
 function setEditMode(value) {
   if (value) {
     document.body.classList.add("smpp-widget-edit-mode");
+    document.getElementById("smpp-news-content").style.display = "none";
   } else {
+    closeBag();
     dropCurDragWidget();
     document.body.classList.remove("smpp-widget-edit-mode");
+    showNews(showNewsState);
   }
   widgetEditMode = value;
 }

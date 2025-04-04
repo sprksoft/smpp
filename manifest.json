@@ -30,7 +30,7 @@
 			],
 			"all_frames": true,
 			"css": [
-        "CSS/smpp.css",
+        "CSS/SMPP/smpp.css",
 				"CSS/general.css",
 				"CSS/weather.css",
 				"DMENU/dmenu.css",
@@ -45,7 +45,7 @@
 				"CSS/agenda.css",
 				"CSS/plant.css",
 				"CSS/root.css",
-        "CSS/widgets.css"
+        "CSS/SMPP/widgets.css"
 			],
 			"js": [
 				"titlefix.js",

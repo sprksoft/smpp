@@ -1,5 +1,6 @@
 /* Only use rem's here no em because widgets will be moved to body when they are dragged */
 .smpp-widget {
+  height: min-content;
   transition: transform 0.4s;
 
   transform: scale(1) rotate(0deg);
@@ -19,14 +20,17 @@
   display: flex;
   flex-direction: row;
   border: none;
+  height: 100%;
 }
 
 .smpp-news-container {
-  flex-shrink: 100;
+  flex-grow: 1;
+  overflow: scroll;
 }
 
 .smpp-widget-pannel {
-  width: 300px;
+  min-width: 300px;
+  max-width: 300px;
   background-color: var(--color-homepage-sidebars-bg);
   backdrop-filter: var(--blur-value-large);
 }
@@ -43,10 +47,12 @@
   background-color: transparent;
   border-radius: 10000px;
   height: 2rem;
+  min-height: 2rem;
   margin: 0px 1rem 0px 1rem;
 }
 .smpp-widget-insertion-point.smpp-widget-insertion-point-pannel {
   width: 2rem;
+  min-width: 2rem;
   height: unset;
   margin: 1rem 0px 1rem 0px;
 }
@@ -63,59 +69,23 @@
   user-select: none;
 }
 
-.smpp-widget-bag {
-  opacity: 1;
-  transition: transform 1s, left 1s, right 1s, height 0.4s, opacity 0.3s;
-  transform: translateY(-50px);
-  opacity: 0;
-  position: fixed;
-  height: 40px;
-  left: 40%;
-  right: 40%;
-  top: 0px;
-
-  background-color: var(--color-base01);
-  border: solid transparent 4px;
-  border-radius: 10px;
-
-  z-index: 100;
-}
-
-.smpp-widget-edit-mode .smpp-widget-bag {
-  transform: translateY(-20px);
-  opacity: 1;
-}
-
-.smpp-widget-bag-big {
-  transform: translateY(20px) !important;
-  height: calc(100% - 40px);
-  left: 5%;
-  right: 5%;
-}
-.smpp-widget-dragging-something .smpp-widget-bag {
-  border-color: var(--color-red);
-  outline: none;
-  box-shadow: none;
-}
-
-.smpp-widget-bag.smpp-widget-bag-delete {
-  transform: translateY(-10px);
-}
 
 .smpp-widget-edit-mode nav,
-.smpp-widget-edit-mode .smpp-news-container{
+.smpp-widget-edit-mode .smpp-news-container {
   opacity: 0.5;
   filter: saturate(0%);
 }
 
-.smpp-widget-edit-mode .smpp-widget,
-.smpp-widget-bag {
+.smpp-widget-edit-mode .smpp-widget:not(.smpp-widget-preview),
+.smpp-widget-bag,
+.smpp-widget-bag-fold {
   border-color: transparent;
   outline: 4px dashed var(--color-black);
   box-shadow: 0 0 0 4px var(--color-yellow);
 }
 
-.smpp-widget-edit-mode .smpp-widget>* {
+.smpp-widget-edit-mode .smpp-widget > *,
+.smpp-widget-preview > * {
   pointer-events: none;
   user-select: none;
 }
@@ -158,6 +128,92 @@
 .edit_button {
   fill: none;
   stroke: var(--color-accent);
+}
+
+/* BAG */
+.smpp-widget-bag {
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.5s, opacity 0.3s;
+  transform: scale(0.2) translateY(-100%);
+  opacity: 0;
+  position: fixed;
+  left: 3%;
+  right: 3%;
+  top: 3%;
+  bottom: 3%;
+
+  background-color: var(--color-base01);
+  color: var(--color-text);
+  border: solid transparent 4px;
+  border-radius: 10px;
+
+  z-index: 100;
+}
+.smpp-widget-bag-group {
+  margin: 1rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.smpp-widget-bag-group-title {
+  margin: 2rem 1rem 0.5rem 1.5rem !important;
+}
+.smpp-widget-bag.smpp-widget-bag-open {
+  opacity: 1;
+  transform: scale(1) translateY(0px);
+}
+
+
+.smpp-widget-bag-fold {
+  transform: translateY(-50px);
+  opacity: 0;
+  position: fixed;
+  height: 60px;
+  left: 40%;
+  right: 40%;
+  top: 0px;
+
+  background-color: var(--color-base01);
+  color: var(--color-base03);
+  border: solid transparent 4px;
+  border-radius: 10px;
+
+  z-index: 100;
+  transition: transform 0.5s, opacity 0.3s;
+  cursor: pointer;
+}
+#smpp-widget-bag-fold-icon-trash,
+#smpp-widget-bag-fold-icon-arrow {
+  width: 40px;
+  margin: auto;
+  display: block;
+}
+#smpp-widget-bag-fold-icon-trash {
+  display: none;
+}
+
+.smpp-widget-edit-mode .smpp-widget-bag-fold {
+  transform: translateY(-20px);
+  opacity: 1;
+}
+
+.smpp-widget-bag-fold:hover,
+.smpp-widget-bag-fold.smpp-widget-bag-delete {
+  transform: translateY(-10px);
+}
+
+.smpp-widget-dragging-something .smpp-widget-bag-fold {
+  border-color: var(--color-red);
+  color: var(--color-red);
+  outline: none;
+  box-shadow: none;
+}
+.smpp-widget-dragging-something #smpp-widget-bag-fold-icon-arrow {
+  display: none;
+}
+.smpp-widget-dragging-something #smpp-widget-bag-fold-icon-trash {
+  display: block;
 }
 
 /* WIDGET STYLES */
