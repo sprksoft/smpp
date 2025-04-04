@@ -70,9 +70,7 @@ html {
   color: var(--color-text) !important;
 }
 
-a.smscButton[href="/login/sso/init/google"],
-a.smscButton[href="/login/sso/init/office365"],
-a.smscButton[href="/login/sso/init/acm"],
+a.smscButton[href^="/login/sso/init"],
 .login-app__title--sign-in-with {
   display: var(--show-options) !important;
   border-radius: 10px !important;
