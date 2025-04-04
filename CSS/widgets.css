@@ -7,7 +7,7 @@
   padding: 20px;
   border-radius: 15px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin: 1rem;
+  margin: 0rem 1rem 0rem 1rem;
   border: 3px solid var(--color-base03);
   box-sizing: border-box;
   /* Needed to make getClientBounds return the width without the border size*/
@@ -26,7 +26,7 @@
 }
 
 .smpp-widget-pannel {
-  width: 200px;
+  width: 300px;
   background-color: var(--color-homepage-sidebars-bg);
   backdrop-filter: var(--blur-value-large);
 }
@@ -39,6 +39,24 @@
   border-left: 2px solid var(--color-base02);
 }
 
+.smpp-widget-insertion-point {
+  background-color: transparent;
+  border-radius: 10000px;
+  height: 2rem;
+  margin: 0px 1rem 0px 1rem;
+}
+.smpp-widget-insertion-point.smpp-widget-insertion-point-pannel {
+  width: 2rem;
+  height: unset;
+  margin: 1rem 0px 1rem 0px;
+}
+.smpp-widget-edit-mode .smpp-widget-insertion-point {
+  background-color: var(--color-base03);
+}
+.smpp-widget-dragging-something .smpp-widget-insertion-point:hover {
+  background-color: var(--color-accent);
+}
+
 /* EDITMODE */
 
 .smpp-widget-edit-mode {
@@ -46,7 +64,6 @@
 }
 
 .smpp-widget-bag {
-  animation: smppWidgetBagEnter 0.5s;
   opacity: 1;
   transition: transform 1s, left 1s, right 1s, height 0.4s, opacity 0.3s;
   transform: translateY(-50px);
@@ -58,6 +75,7 @@
   top: 0px;
 
   background-color: var(--color-base01);
+  border: solid transparent 4px;
   border-radius: 10px;
 
   z-index: 100;
@@ -74,9 +92,20 @@
   left: 5%;
   right: 5%;
 }
+.smpp-widget-dragging-something .smpp-widget-bag {
+  border-color: var(--color-red);
+  outline: none;
+  box-shadow: none;
+}
 
-.smpp-widget-bag-delete {
-  height: 45px;
+.smpp-widget-bag.smpp-widget-bag-delete {
+  transform: translateY(-10px);
+}
+
+.smpp-widget-edit-mode nav,
+.smpp-widget-edit-mode .smpp-news-container{
+  opacity: 0.5;
+  filter: saturate(0%);
 }
 
 .smpp-widget-edit-mode .smpp-widget,
@@ -96,15 +125,20 @@
   cursor: move;
 }
 
-.smpp-widget-dragging {
+.smpp-widget.smpp-widget-dragging {
   margin: 0px;
   position: fixed;
   z-index: 10000000;
   pointer-events: none;
+
+  outline: none;
+  box-shadow: none;
+  opacity: 0.5;
 }
 
-.smpp-widget-delete {
-  animation: smppWidgetDelete 1s infinite;
+.smpp-widget.smpp-widget-delete {
+  animation: smppWidgetDelete 0.4s infinite;
+  border-color: var(--color-red);
 }
 
 @keyframes smppWidgetDelete {
@@ -124,4 +158,14 @@
 .edit_button {
   fill: none;
   stroke: var(--color-accent);
+}
+
+/* WIDGET STYLES */
+.smpp-error-widget {
+  color: var(--color-red);
+  font-weight: bold;
+}
+.smpp-error-widget .widgetName {
+  text-align: center;
+  display: block;
 }
