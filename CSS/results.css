@@ -447,3 +447,11 @@ div.reports-overview__listview__row {
     transition: background-color 0.3s ease;
 }
 
+
+.evaluation-graphic__progress-ring__value {
+    margin-top: 1rem !important;
+}
+
+.progress-ring__content .evaluation-graphic__progress-ring__description {
+    margin-top: 1.5rem !important;
+}
