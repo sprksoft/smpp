@@ -1931,3 +1931,8 @@ mark {
 .smsc-topnav [data-notifs] .notification__close:hover .close-icon path {
   stroke: var(--color-red) !important;
 }
+
+.smscMainBlockContainer .smscBlockContainer_top{
+    width: 99rem; !important;
+    margin-left: 1rem !important;
+}
