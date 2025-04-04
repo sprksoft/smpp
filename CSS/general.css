@@ -1936,3 +1936,6 @@ mark {
     width: 99rem; !important;
     margin-left: 1rem !important;
 }
+.listview__action-btns .listview__action-btn {
+    margin-right: 1rem;
+}
