@@ -100,12 +100,12 @@ class SmartschoolWidget extends WidgetBase {
     return this.constructor.name+"-"+this.smContent.id;
   }
   createContent(parent) {
-    parent.style.padding = "0px";
+    parent.classList.add("smpp-widget-smartschool");
     parent.appendChild(this.smContent);
   }
 
   createPreview(parent) {
-    parent.style.padding = "0px";
+    parent.classList.add("smpp-widget-smartschool");
     parent.appendChild(this.smContent.cloneNode(true));
   }
 }

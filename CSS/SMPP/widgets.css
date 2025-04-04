@@ -29,8 +29,8 @@
 }
 
 .smpp-widget-pannel {
-  min-width: 300px;
-  max-width: 300px;
+  min-width: calc(300px + (1rem + 3px) * 2); /* panelWidth(300px) + (widgetMargin(1rem) + widgetBorderSize(3px) * 2) // times 2 because left and right border+margin */
+  max-width: calc(300px + (1rem + 3px) * 2);
   background-color: var(--color-homepage-sidebars-bg);
   backdrop-filter: var(--blur-value-large);
 }
@@ -224,4 +224,7 @@
 .smpp-error-widget .widgetName {
   text-align: center;
   display: block;
+}
+.smpp-widget-smartschool {
+  padding: 0px;
 }
