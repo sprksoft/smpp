@@ -156,7 +156,6 @@ function createWidgetsContainerHTML(widgetData, newsContent, showNews){
   widgetsContainer.appendChild(createInsertionPointHTML(true));
   for (let pannel of widgetData.leftPannels) {
     let pannelDiv = createPannelHTML(pannel)
-    pannelDiv.classList.add("smpp-widget-pannel-left");
     widgetsContainer.appendChild(pannelDiv);
     widgetsContainer.appendChild(createInsertionPointHTML(true));
   }
@@ -172,7 +171,6 @@ function createWidgetsContainerHTML(widgetData, newsContent, showNews){
   widgetsContainer.appendChild(createInsertionPointHTML(true));
   for (let pannel of widgetData.rightPannels) {
     let pannelDiv = createPannelHTML(pannel)
-    pannelDiv.classList.add("smpp-widget-pannel-right");
     widgetsContainer.appendChild(pannelDiv);
     widgetsContainer.appendChild(createInsertionPointHTML(true));
   }
