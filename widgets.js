@@ -15,9 +15,11 @@ function registerWidget(widget) {
 
 class WidgetBase {
   element;
+  previewElement;
 
   constructor() {
     this.element = null;
+    this.previewElement = null;
   }
 
   #createWidget() {
@@ -29,25 +31,28 @@ class WidgetBase {
   }
 
   createHTML() {
-    if (this.element != null) {
-      return;
-    }
+    if (this.element) { return; }
     this.element = this.#createWidget();
     this.createContent(this.element);
   }
   createPreviewHTML() {
+    if (this.previewElement) { return; }
     let widget = this.#createWidget();
     widget.classList.add("smpp-widget-preview");
     this.createPreview(widget);
+    this.previewElement = widget;
     return widget;
   }
 
   removeHTML() {
-    if (this.element == null) {
-      return;
-    }
+    if (!this.element) { return; }
     this.element.remove();
     this.element = null;
+  }
+  removePreviewHTML() {
+    if (!this.previewElement) { return; }
+    this.previewElement.remove();
+    this.previewElement = null;
   }
 
   get name() { return this.constructor.name; }
@@ -106,7 +111,7 @@ class SmartschoolWidget extends WidgetBase {
 
   createPreview(parent) {
     parent.classList.add("smpp-widget-smartschool");
-    parent.appendChild(this.smContent.cloneNode(true));
+    parent.appendChild(this.smContent);
   }
 }
 
@@ -307,6 +312,7 @@ function createWidgetBag() {
   document.body.appendChild(bag);
   return bag;
 }
+
 function closeBag() {
   if (widgetBag.classList.contains("smpp-widget-bag-open")) {
     widgetBag.classList.remove("smpp-widget-bag-open")
@@ -380,6 +386,11 @@ function onWidgetDragStart(widget, e) {
 
 
   document.body.appendChild(widget.element);
+
+  if (sourceIp && sourceIp.parentElement.childNodes.length == 1) {
+    sourceIp.parentElement.style.display="none";
+  }
+
   closeBag();
 }
 
@@ -412,6 +423,7 @@ function dropCurDragWidget(cancel=false) {
     curDragInfo.widget.removeHTML();
   } else {
     let targetPannel = targetIp.parentElement;
+    targetPannel.style.display="block";
     targetPannel.insertBefore(createInsertionPointHTML(), targetIp.nextElementSibling);
     targetPannel.insertBefore(el, targetIp.nextElementSibling);
   }

@@ -19,6 +19,9 @@ body {
   font-size: 1rem;
   /* Inherited font-size is not in rem */
 }
+.smpp-widget-preview {
+  margin: 1rem;
+}
 
 .smpp-widgets-container {
   display: flex;
@@ -128,6 +131,7 @@ body {
 
 /* BAG */
 .smpp-widget-bag {
+  overflow: scroll;
   display: flex;
   flex-direction: column;
   transition: transform 0.5s, opacity 0.3s;
