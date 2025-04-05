@@ -110,6 +110,26 @@ class SmartschoolWidget extends WidgetBase {
   }
 }
 
+function onPannelHover(pannel, e) {
+  if (!widgetEditMode || curDragInfo == null) { return; }
+
+  let target = pannel.firstChild;
+  for (let child of pannel.childNodes) {
+    if (!child.classList.contains("smpp-widget")) { continue; }
+    let bounds = child.getBoundingClientRect();
+    let centerY = bounds.top+(bounds.bottom-bounds.top)*0.5;
+    if (e.clientY > centerY) {
+      target = child.nextElementSibling;
+    }
+  }
+
+  if (target !== curDragInfo.targetInsertionPoint) {
+    curDragInfo.targetInsertionPoint?.classList.remove("smpp-widget-insertion-point-targeted");
+    curDragInfo.targetInsertionPoint = target;
+    curDragInfo.targetInsertionPoint.classList.add("smpp-widget-insertion-point-targeted");
+  }
+}
+
 function onPannelInsertionPointHover(e) {
   if (!widgetEditMode || curDragInfo == null) { return; }
   if (!ghostPannel) {
@@ -129,6 +149,7 @@ function createInsertionPointHTML(pannel=false) {
 
 function createPannelHTML(pannel) {
   let pannelDiv = document.createElement("div");
+  pannelDiv.addEventListener("mousemove", (e)=>onPannelHover(pannelDiv, e));
   pannelDiv.classList.add("smpp-widget-pannel");
   pannelDiv.appendChild(createInsertionPointHTML());
 
@@ -297,9 +318,7 @@ function createWidgetBagFold() {
   bag.classList.add("smpp-widget-bag-fold");
   bag.innerHTML=`
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
-<svg id="smpp-widget-bag-fold-icon-arrow" version="1.1" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"><g transform="translate(0 -17.198)"><path d="m26.458 288.48 198.44 119.06 198.44-119.06" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="39.511"/>
-</g></svg>
-<svg id="smpp-widget-bag-fold-icon-trash" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>
+<svg class="smpp-widget-bag-fold-icon" version="1.1" viewBox="0 0 448 448" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-.898 -124.01)"><path d="m26.458 288.48 198.44 119.06 198.44-119.06" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="39.511"/></g></svg>
 `
 
 
@@ -319,13 +338,12 @@ function createWidgetBagFold() {
 class WidgetDragInfo {
   offset;
   widget;
-  sourcePannel;
-  sourceBeforeElement; // The element the widget is after in the source pannel. (used to restore prev position)
+  sourceInsertionPoint;
+  targetInsertionPoint;
 
-  constructor(widget, sourcePannel, sourceBeforeElement, offset) {
+  constructor(widget, sourceInsertionPoint, offset) {
     this.widget = widget;
-    this.sourcePannel = sourcePannel;
-    this.sourceBeforeElement = sourceBeforeElement;
+    this.sourceInsertionPoint=sourceInsertionPoint;
     this.offset = offset;
   }
 }
@@ -339,21 +357,19 @@ function onWidgetDragStart(widget, e) {
     return;
   }
 
-  let sourcePannel = null;
-  let sourceBeforeElement = null;
+  let sourceIp = null;
   let rect;
   if (widget.element == null) {
     widget.createHTML();
     rect = e.target.getBoundingClientRect();
   } else {
     widget.element.nextElementSibling.remove();
-    sourcePannel = widget.element.parentElement;
-    sourceBeforeElement = widget.element.nextElementSibling;
+    sourceIp = widget.element.previousElementSibling;
     rect = widget.element.getBoundingClientRect();
   }
   let target = widget.element;
 
-  curDragInfo = new WidgetDragInfo(widget, sourcePannel, sourceBeforeElement, { x: e.clientX - rect.left, y: e.clientY - rect.top });
+  curDragInfo = new WidgetDragInfo(widget, sourceIp, { x: e.clientX - rect.left, y: e.clientY - rect.top });
   document.body.classList.add("smpp-widget-dragging-something");
   target.style.width = rect.width + "px";
   target.style.height = rect.height + "px";
@@ -367,57 +383,57 @@ function onWidgetDragStart(widget, e) {
   closeBag();
 }
 
-function dropCurDragWidget(e) {
-  if (curDragInfo) {
-    let el = curDragInfo.widget.element;
-    el.classList.remove("smpp-widget-dragging");
-    el.style = "";
-    if (hoveringBag) {
-      bagHoverExit();
-      // Delete
-      curDragInfo.widget.removeHTML();
-    } else {
-      // Move
-      let targetPannel = curDragInfo.sourcePannel;
-      let targetBefore = curDragInfo.sourceBeforeElement;
-      if (e != null && e.target.classList.contains("smpp-widget-insertion-point")) {
-        if (!e.target.classList.contains("smpp-widget-insertion-point-pannel")) {
-          targetBefore = e.target.nextElementSibling;
-          targetPannel = e.target.parentElement;
-        }
-      }
+function dropCurDragWidget(cancel=false) {
+  if (!curDragInfo) { return; }
 
-      if (targetPannel && targetPannel == ghostPannel){
-        ghostPannel.parentElement.insertBefore(createInsertionPointHTML(true), ghostPannel.nextElementSibling);
-        ghostPannel = null;
-      }
-      if (targetPannel == null) {
-        curDragInfo.widget.removeHTML();
-      } else {
-        targetPannel.insertBefore(el, targetBefore);
-        targetPannel.insertBefore(createInsertionPointHTML(), targetBefore);
-      }
+  let el = curDragInfo.widget.element;
+  el.classList.remove("smpp-widget-dragging");
+  el.style = "";
 
-    }
-
-    if (curDragInfo.sourcePannel && curDragInfo.sourcePannel.childNodes.length == 1) { // Check if the pannel is empty (1 is because of the insertion point)
-      curDragInfo.sourcePannel.nextElementSibling.remove();
-      curDragInfo.sourcePannel.remove();
-    }
-
-    if(ghostPannel) {
-      ghostPannel.remove();
-      ghostPannel = null;
-    }
-
-    document.body.classList.remove("smpp-widget-dragging-something");
-    curDragInfo = null;
+  curDragInfo.targetInsertionPoint?.classList.remove("smpp-widget-insertion-point-targeted");
+  let targetIp = curDragInfo.targetInsertionPoint;
+  if (cancel || !targetIp) { // Put back were came from if targetInsertionPoint is null or when we cancel
+    targetIp = curDragInfo.sourceInsertionPoint;
   }
+
+  if(hoveringBag) {
+    bagHoverExit();
+    if (!cancel) {
+      targetIp = null;
+    }
+  }
+
+  if (targetIp && targetIp.parentElement == ghostPannel){
+    ghostPannel.parentElement.insertBefore(createInsertionPointHTML(true), ghostPannel.nextElementSibling);
+    ghostPannel = null;
+  }
+
+  if (targetIp == null) {
+    curDragInfo.widget.removeHTML();
+  } else {
+    let targetPannel = targetIp.parentElement;
+    targetPannel.insertBefore(createInsertionPointHTML(), targetIp.nextElementSibling);
+    targetPannel.insertBefore(el, targetIp.nextElementSibling);
+  }
+
+  let sourcePannel = curDragInfo.sourceInsertionPoint?.parentElement;
+  if (sourcePannel && sourcePannel.childNodes.length == 1) { // Check if the pannel is empty (1 is because of the insertion point)
+    sourcePannel.nextElementSibling.remove();
+    sourcePannel.remove();
+  }
+
+  if(ghostPannel) {
+    ghostPannel.remove();
+    ghostPannel = null;
+  }
+
+  document.body.classList.remove("smpp-widget-dragging-something");
+  curDragInfo = null;
 }
 
 
 document.addEventListener("mouseup", (e) => {
-  dropCurDragWidget(e);
+  dropCurDragWidget(false);
 });
 
 document.addEventListener("mousemove", (e) => {
@@ -467,7 +483,7 @@ function setEditMode(value) {
     document.getElementById("smpp-news-content").style.display = "none";
   } else {
     closeBag();
-    dropCurDragWidget();
+    dropCurDragWidget(true);
     document.body.classList.remove("smpp-widget-edit-mode");
     showNews(showNewsState);
   }
