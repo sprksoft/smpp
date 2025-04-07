@@ -4,9 +4,9 @@
 
 root="https://ldev.eu.org"
 ses_token=$1
-if [ "$1" = "-d" ] | [ "$1" = "--debug" ] ; then
-  echo "debug mode"
-  root="http://localhost:80"
+if [[ "$1" == "-d" ]] || [[ "$1" == "--debug" ]] ; then
+  echo "Debug mode"
+  root="http://localhost:8080"
   ses_token=$2
 fi
 
@@ -26,11 +26,14 @@ fi
 
 echo "Deleting old artifacts..."
 rm -rf web-ext-artifacts/*
-echo "Building..."
-web-ext build
+echo "=== Building Extension ==="
+python build.py
+echo "=== Packing Extension ==="
+web-ext build --source-dir smpp-build
 
 ver=$(ls web-ext-artifacts | rg "smartschool_-([0-9]*.[0-9]*.[0-9]*).zip" -r '$1')
 
+echo "=== Done ==="
 echo "version: $ver"
-echo "Uploading..."
+echo "Uploading to $root..."
 curl --data-binary @web-ext-artifacts/smartschool_-$ver.zip -H "Cookie:session=$ses_token" "$root/firefox/smpp?v=$ver"
