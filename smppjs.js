@@ -105,13 +105,13 @@ function resetSMlogo() {
   let iconElement = document.querySelector('link[rel="icon"]');
   if (iconElement) iconElement.href = 'https://static4.smart-school.net/smsc/svg/favicon/favicon.svg';
 }
-
 async function apply() {
   let style = document.documentElement.style;
   const data = await browser.runtime.sendMessage({
     action: 'getQuickSettingsData'
   });
   changeFont()
+  set_theme("default");
   set_theme(data.theme)
   showNews(data.showNews)
 
@@ -191,7 +191,7 @@ async function storeQuickSettings() {
     reader.readAsDataURL(file);
 
     data.backgroundSelection = 2;
-    data.backgroundLink = "<" + file.name + ">";
+    data.backgroundLink = "<"+file.name+">";
     console.log(data);
     browser.runtime.sendMessage({ action: 'setQuickSettingsData', data: data });
 
@@ -200,7 +200,7 @@ async function storeQuickSettings() {
   } else {
     if (data.backgroundLink == "") {
       data.backgroundSelection = 0;
-    } else {
+    }else {
       data.backgroundSelection = 1;
     }
   }
