@@ -1,45 +1,74 @@
-let gc_is_open = false
-let gc_initialized = false
+let gc_is_open = false;
+let gc_initialized = false;
+
 function make_iframe() {
-  const GlCHatplace = document.getElementById("global_chat_window")
-  let current_profile = get_config().profile
+  const GlCHatplace = document.getElementById("global_chat_window");
+  let current_profile = get_config().profile;
   let current_theme = get_theme(current_profile);
-  if (username_override == null) {
-    var placeholderTextGlChat = orig_name;
-  }
-  else {
-    var placeholderTextGlChat = username_override;
-  }
+  
+  const placeholderTextGlChat = username_override || orig_name;
   const query_string = get_theme_as_query_string(current_theme, ["color-base00", "color-base01", "color-base02", "color-base03", "color-accent", "color-text"]);
+
   const GlCHatplaceHTML = `
-  <iframe style="width:100%; height:100%; border:none "src = 'https://ldev.eu.org/smpp/gc/v1?placeholder=${placeholderTextGlChat}${query_string}'></iframe>
-    `;
-  GlCHatplace.innerHTML = GlCHatplaceHTML
+    <div class="gc-controls">
+      <button class="gc-btn gc-fullscreen" title="Volledig scherm">
+  <svg viewBox="0 0 16 16" class="contract-icon" stroke="currentColor" fill="none" stroke-width="1">
+    <path fill-rule="evenodd" d="M.172 15.828a.5.5 0 0 0 .707 0l4.096-4.096V14.5a.5.5 0 1 0 1 0v-3.975a.5.5 0 0 0-.5-.5H1.5a.5.5 0 0 0 0 1h2.768L.172 15.121a.5.5 0 0 0 0 .707zM15.828.172a.5.5 0 0 0-.707 0l-4.096 4.096V1.5a.5.5 0 1 0-1 0v3.975a.5.5 0 0 0 .5.5H14.5a.5.5 0 0 0 0-1h-2.768L15.828.879a.5.5 0 0 0 0-.707z"/>
+  </svg>
+  <svg viewBox="0 0 24 24" class="expand-icon" stroke="currentColor" fill="none" stroke-width="2.6">
+    <path d="M3,14v6a1,1,0,0,0,1,1h6"/>
+    <line x1="10" y1="14" x2="3.29" y2="20.71"/>
+    <path d="M14,3h6a1,1,0,0,1,1,1v6"/>
+    <line x1="20.71" y1="3.29" x2="14" y2="10"/>
+  </svg>
+</button>
+      <button class="gc-btn gc-close" title="Sluiten">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    <iframe style="width:100%; height:100%; border:none" src='https://ldev.eu.org/smpp/gc/v1?placeholder=${placeholderTextGlChat}${query_string}'></iframe>
+  `;
+  
+  GlCHatplace.innerHTML = GlCHatplaceHTML;
+
+  GlCHatplace.querySelector('.gc-fullscreen').addEventListener('click', toggleFullscreen);
+  GlCHatplace.querySelector('.gc-close').addEventListener('click', remove_gcwin);
 }
+
+function toggleFullscreen() {
+  const chatWindow = document.getElementById("global_chat_window");
+  chatWindow.classList.toggle("gc-fullscreen");
+}
+
 function make_gcwin(is_hidden) {
-  global_chat_window_element = document.createElement("div")
-  global_chat_window_element.id = "global_chat_window"
-  global_chat_window_element.classList.add("global_chat_window");
+  const global_chat_window_element = document.createElement("div");
+  global_chat_window_element.id = "global_chat_window";
+  global_chat_window_element.classList.add("global_chat_window", "lookChat");
+  
   if (is_hidden) {
     global_chat_window_element.classList.add("gc-hidden");
   }
-  document.body.insertBefore(global_chat_window_element, document.body.childNodes[-1]);
+  
+  document.body.appendChild(global_chat_window_element);
   gc_is_open = false;
-  document.addEventListener("click", function (e) {
-    if (!gc_is_open) {
-      return
+
+  document.addEventListener("click", (e) => {
+    if (gc_is_open && !e.target.closest('#global_chat_button, .global_chat_window')) {
+      remove_gcwin();
     }
-    if (e.target.id == "global_chat_button") {
-      return
-    }
-    gc_close()
-  })
-  make_iframe()
+  });
+  
+  make_iframe();
 }
+
 function open_global_chat() {
   let win = document.getElementById("global_chat_window");
   if (win) {
-    win.classList.remove("gc-hidden")
+    win.classList.remove("gc-hidden");
+    win.style.display = 'block';
   } else {
     make_gcwin(false);
   }

@@ -1543,29 +1543,235 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   transition: border-color 0.3s;
 }
 
-.lookChat:hover {
-  border-color: var(--color-accent);
-}
-
 .global_chat_window {
   overflow: clip;
   background: var(--color-base00);
-  border: var(--border-size) solid var(--color-popup-border);
+  border: var(--border-size) solid var(--color-base03);
   position: absolute;
   z-index: 20;
   box-shadow: 0px 0px 150px black;
-  border-radius: 10px !important;
-  position: absolute;
+  border-radius: 10px;
   width: 80%;
   height: 80%;
   left: 10%;
-  top: 10%
+  top: 10%;
+  transform: scale(0);
+  transform-origin: center;
+  animation: popIn 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
 }
 
-.gc-hidden {
+@keyframes popIn {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.gc-controls {
+  position: absolute;
+  right: 0.5%;
+  top: 0.5%;
+  display: flex;
+  gap: 10px;
+  z-index: 25;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.global_chat_window:hover .gc-controls,
+.global_chat_window:focus-within .gc-controls {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.gc-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--color-base01);
+  border: 2px solid var(--color-base02);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.gc-btn:hover {
+  background: rgba(var(--color-base03), 0.1);
+}
+
+.gc-btn svg {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+
+.gc-btn:hover svg {
+  transform: scale(1.15);
+}
+
+.gc-btn:active svg {
+  transform: scale(0.9);
+}
+
+.gc-close svg {
+  width: 22px;
+  height: 22px;
+  color: var(--color-red);
+}
+
+.global_chat_window.gc-fullscreen {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  border-radius: 0;
+  z-index: 1000;
+}
+
+.gc-fullscreen svg {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.2s ease;
+}
+
+.gc-fullscreen .contract-icon {
+  display: block;
+}
+
+.gc-fullscreen .expand-icon {
   display: none;
 }
 
+.global_chat_window.gc-fullscreen .contract-icon {
+  display: none;
+}
+
+.global_chat_window.gc-fullscreen .expand-icon {
+  display: block;
+}.global_chat_window {
+  overflow: clip;
+  background: var(--color-base00);
+  border: var(--border-size) solid var(--color-base03);
+  position: absolute;
+  z-index: 20;
+  box-shadow: 0px 0px 150px black;
+  border-radius: 10px;
+  width: 80%;
+  height: 80%;
+  left: 10%;
+  top: 10%;
+  transform: scale(0);
+  transform-origin: center;
+  animation: popIn 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.gc-controls {
+  position: absolute;
+  right: 0.5%;
+  top: 0.5%;
+  display: flex;
+  gap: 10px;
+  z-index: 25;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.global_chat_window:hover .gc-controls,
+.global_chat_window:focus-within .gc-controls {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.gc-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--color-base01);
+  border: 2px solid var(--color-base02);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.gc-btn:hover {
+  background: rgba(var(--color-base03), 0.1);
+}
+
+.gc-btn svg {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+
+.gc-btn:hover svg {
+  transform: scale(1.15);
+}
+
+.gc-btn:active svg {
+  transform: scale(0.9);
+}
+
+.gc-close svg {
+  width: 22px;
+  height: 22px;
+  color: var(--color-red);
+}
+
+.global_chat_window.gc-fullscreen {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  border-radius: 0;
+  z-index: 1000;
+}
+
+.gc-fullscreen svg {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.2s ease;
+}
+
+.gc-fullscreen .contract-icon {
+  display: block;
+}
+
+.gc-fullscreen .expand-icon {
+  display: none;
+}
+
+.global_chat_window.gc-fullscreen .contract-icon {
+  display: none;
+}
+
+.global_chat_window.gc-fullscreen .expand-icon {
+  display: block;
+}
 .qs-hidden {
   display: none !important;
 }
@@ -1925,7 +2131,7 @@ mark {
 }
 
 .smscMainBlockContainer .smscBlockContainer_top{
-    width: 99rem; !important;
+    width: 99rem !important;
     margin-left: 1rem !important;
 }
 
