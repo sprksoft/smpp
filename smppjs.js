@@ -122,6 +122,8 @@ async function apply() {
     defaultBackgroundBlur += 2;
   };
   style.setProperty('--profile-picture', 'url(' + getPfpLink(username_override) + ')');
+  style.setProperty('--blur-value-large', 'blur(' + defaultBackgroundBlur + 'px)');
+  style.setProperty('--blur-value-small', 'blur(' + data.backgroundBlurAmount + 'px)');
   if (!liteMode) {
     applyWeatherEffects(data.weatherOverlaySelection, data.weatherOverlayAmount)
     if (gc_initialized) {
