@@ -91,6 +91,7 @@ let splashtexts = [
     undefined,
     `Is tHaT A JOjO ReFEreNce?`,
     `https://ldev.eu.org`,
+    `https://smartschoolplusplus.com`
     `weak fingers`,
     `Beep beep I'm a sheep`,
     `I love yavascript !`,

@@ -5,7 +5,7 @@ function make_iframe() {
   const GlCHatplace = document.getElementById("global_chat_window");
   let current_profile = get_config().profile;
   let current_theme = get_theme(current_profile);
-  
+
   const placeholderTextGlChat = username_override || orig_name;
   const query_string = get_theme_as_query_string(current_theme, ["color-base00", "color-base01", "color-base02", "color-base03", "color-accent", "color-text"]);
 
@@ -29,9 +29,9 @@ function make_iframe() {
         </svg>
       </button>
     </div>
-    <iframe style="width:100%; height:100%; border:none" src='https://ldev.eu.org/smpp/gc/v1?placeholder=${placeholderTextGlChat}${query_string}'></iframe>
+    <iframe style="width:100%; height:100%; border:none" src='https://gc.smartschoolplusplus.com/?placeholder=${placeholderTextGlChat}${query_string}'></iframe>
   `;
-  
+
   GlCHatplace.innerHTML = GlCHatplaceHTML;
 
   GlCHatplace.querySelector('.gc-fullscreen').addEventListener('click', toggleFullscreen);
@@ -47,11 +47,11 @@ function make_gcwin(is_hidden) {
   const global_chat_window_element = document.createElement("div");
   global_chat_window_element.id = "global_chat_window";
   global_chat_window_element.classList.add("global_chat_window", "lookChat");
-  
+
   if (is_hidden) {
     global_chat_window_element.classList.add("gc-hidden");
   }
-  
+
   document.body.appendChild(global_chat_window_element);
   gc_is_open = false;
 
@@ -60,7 +60,7 @@ function make_gcwin(is_hidden) {
       remove_gcwin();
     }
   });
-  
+
   make_iframe();
 }
 

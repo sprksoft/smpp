@@ -199,10 +199,10 @@ function do_qm(opener = "") {
         togglePerformanceMode();
         return;
       case "gcadmin":
-        open_url("https://ldev.eu.org/smpp/gc/admin");
+        open_url("https://gc.smartschoolplusplus.com/admin");
         return;
       case "gc proffilter":
-        open_url("https://ldev.eu.org/smpp/gc/admin/prof");
+        open_url("https://gc.smartschoolplusplus.com/admin/prof");
         return;
       case "dizzy":
         const styleEl = document.createElement("style");
