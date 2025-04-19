@@ -1,7 +1,7 @@
 {
 	"manifest_version": 3,
 	"name": "Smartschool++",
-	"version": "3.2.1",
+	"version": "4.0.0",
 	"description": "Enhance your Smartschool experience with themes and more",
 	"homepage_url": "https://github.com/sprksoft/smpp",
 	"lite_mode": false,
@@ -30,7 +30,7 @@
 			],
 			"all_frames": true,
 			"css": [
-        "CSS/SMPP/smpp.css",
+				"CSS/SMPP/smpp.css",
 				"CSS/general.css",
 				"CSS/weather.css",
 				"DMENU/dmenu.css",
@@ -45,7 +45,7 @@
 				"CSS/agenda.css",
 				"CSS/plant.css",
 				"CSS/root.css",
-        "CSS/SMPP/widgets.css"
+				"CSS/SMPP/widgets.css"
 			],
 			"js": [
 				"titlefix.js",
@@ -61,7 +61,7 @@
 				"DMENU/dconfig.js",
 				"DMENU/dmenu.js",
 				"DMENU/quick.js",
-        "widgets.js",
+				"widgets.js",
 				"weather.js",
 				"delijn.js",
 				"weatherEffects.js",
