@@ -23,9 +23,9 @@ let full_unheading = true;
 function change_lname(new_name) {
   let name_element = document.querySelector(".js-btn-profile .hlp-vert-box span");
   if (name_element !== null) {
-    let orig_name = name_element.innerText;
+    let orig_name = name_element.innerHTML;
     if (new_name !== null) {
-      name_element.innerText = new_name;
+      name_element.innerHTML = new_name;
     }
     return orig_name;
   }
@@ -45,10 +45,10 @@ function try_attach_messages_observer(orig_name, new_name) {
         let name_el = msg.querySelector(".modern-message__name");
         if (name_el == null) { continue; }
 
-        let name_is_user = name_el.innerText.startsWith(orig_name);
+        let name_is_user = name_el.innerHTML.startsWith(orig_name);
         if (name_is_user) {
           if (new_name !== null) {
-            name_el.innerText = new_name;
+            name_el.innerHTML = new_name;
           }
         }
         if (name_is_user || in_send_messages_page) {
@@ -62,7 +62,7 @@ function try_attach_messages_observer(orig_name, new_name) {
 
 function unhead_fully() {
   let style_el = document.createElement("style");
-  style_el.innerText = `
+  style_el.innerHTML = `
     .studentPicture, .rounded_profile_photo, .square_photo_64 {
       display: none;
     }
