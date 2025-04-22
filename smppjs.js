@@ -2,6 +2,7 @@
 //ok - ldev
 //oke logis - andere ldev
 //oh ok, ik dacht in general.css - Jdev
+
 const default_theme = {
   color_accent: "#a3a2ec",
   color_base00: "#38313a",
@@ -12,6 +13,7 @@ const default_theme = {
 }
 let settingsWindowIsHidden = true;
 
+// helper functions
 function unbloat() {
   document.body.innerHTML = '';
 }
@@ -69,12 +71,26 @@ function getPfpLink(username) {
   }
   return `https://userpicture20.smartschool.be/User/Userimage/hashimage/hash/initials_MU/plain/1/res/32`;
 }
+
+function storeTheme() {
+  const themeData = {
+    color_base00: document.getElementById("colorPicker1").value,
+    color_base01: document.getElementById("colorPicker2").value,
+    color_base02: document.getElementById("colorPicker3").value,
+    color_base03: document.getElementById("colorPicker4").value,
+    color_accent: document.getElementById("colorPicker5").value,
+    color_text: document.getElementById("colorPicker6").value
+  };
+  window.localStorage.setItem("themedata", JSON.stringify(themeData));
+}
+
+// apply changes to SS based on selected settings
 async function apply() {
   let style = document.documentElement.style;
   let settingsData = get_config();
+  console.log(settingsData)
 
   const colorpickers = document.getElementById("colorpickers");
-  console.log(settingsData)
   const profileSelect = settingsData.profile
   const backgroundLink = settingsData.backgroundlink
   const halte = settingsData.halte
@@ -92,10 +108,12 @@ async function apply() {
   var username_override = settingsData.username_override;
   var show_plant = settingsData.show_plant;
   var enableanimations = settingsData.enableanimations;
+
   changeFont()
   set_theme("default");
   set_theme(profileSelect);
 
+  // if any settings dont exist yet, use defaults
   if (show_scores == undefined) {
     show_scores = false;
   }
@@ -198,13 +216,16 @@ async function apply() {
       leftcontainer.innerHTML = " "
       leftcontainer.style.display = "none"
     }
+    
+    // remove all existing containers
     document.getElementById("leftcontainer") ? document.getElementById("leftcontainer").remove() : "pass"
     document.getElementById("rightcontainer") ? document.getElementById("rightcontainer").remove() : "pass"
     document.getElementById("plannercontainer") ? document.getElementById("plannercontainer").remove() : "pass"
     document.getElementById("weathercontainer") ? document.getElementById("weathercontainer").remove() : "pass"
     document.getElementById("delijncontainer") ? document.getElementById("delijncontainer").remove() : "pass"
     document.getElementById("plantcontainer") ? document.getElementById("plantcontainer").remove() : "pass"
-
+    
+    // create containers for all enabled things
     if (halte) {
       var DelijnAppElement = document.createElement("div")
       DelijnAppElement.classList.add("homepage__left")
@@ -294,17 +315,6 @@ async function apply() {
   }
 }
 
-function storeTheme() {
-  const themeData = {
-    color_base00: document.getElementById("colorPicker1").value,
-    color_base01: document.getElementById("colorPicker2").value,
-    color_base02: document.getElementById("colorPicker3").value,
-    color_base03: document.getElementById("colorPicker4").value,
-    color_accent: document.getElementById("colorPicker5").value,
-    color_text: document.getElementById("colorPicker6").value
-  };
-  window.localStorage.setItem("themedata", JSON.stringify(themeData));
-}
 
 function store() {
   let previousData = get_config();
