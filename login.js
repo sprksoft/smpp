@@ -22,7 +22,7 @@ let splashtexts = [
     `404 Splashtext not found`,
     `Don't Smartschool \n and drive kids!`,
     `Home-made!`,
-    `Pythagoras was used in this`,
+    `Pythagoras was used in this`, // where????
     `Like that smash button!`,
     `What DOES the fox say?`,
     `Supercalifragilisticexpialidocious!`,
@@ -33,7 +33,7 @@ let splashtexts = [
     `Doesn't contain nuts!`,
     `Glutenfree!!!`,
     `Colorblind approved!`,
-    `Not vegan!`,
+    `Not vegan!`, // :O
     `Never gonna give you up ;)`,
     `The cake is a lie!`,
     `I know what you did...`,
@@ -106,7 +106,9 @@ let splashtexts = [
     `Nobody expects the \n Spanish Inquisition!`,
     `Beans Beans Beans!`,
     `Baby Shark, doo-doo, \n doo-doo, doo-doo`,
-    `Brood int frans`
+    `Brood int frans`,
+    `CORS >:(`,
+    `We have a discord!`
 ]
 function get_splash_text() {
     return splashtexts[Math.floor(Math.random() * splashtexts.length)]
