@@ -1757,21 +1757,21 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   transition: transform 0.2s ease;
 }
 
-.gc-fullscreen .contract-icon {
+.gc-fullscreen .expand-icon { /* peil wijst naar buiten */
   display: block;
 }
-
-.gc-fullscreen .expand-icon {
+.gc-fullscreen .contract-icon { /* peil wijst naar binne */
   display: none;
 }
 
+.global_chat_window.gc-fullscreen .expand-icon { /* omgekeerd */
+  display: none;
+}
 .global_chat_window.gc-fullscreen .contract-icon {
-  display: none;
+  display: block;
+  transform: rotate(180deg);
 }
 
-.global_chat_window.gc-fullscreen .expand-icon {
-  display: block;
-}
 .qs-hidden {
   display: none !important;
 }

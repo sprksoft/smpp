@@ -41,6 +41,7 @@ function make_iframe() {
 function toggleFullscreen() {
   const chatWindow = document.getElementById("global_chat_window");
   chatWindow.classList.toggle("gc-fullscreen");
+  void chatWindow.offsetWidth;
 }
 
 function make_gcwin(is_hidden) {
