@@ -17,7 +17,7 @@ Smartschool++ is een Chrome-extensie die het Belgische leerplatform Smartschool 
 - Global Chat: Communiceer met andere gebruikers via de ingebouwde chatfunctie.​
 
 # 🚀 Installatie
-Instaleer de extentie op de [Chrome web store](https://chromewebstore.google.com/detail/bdhficnphioomdjhdfbhdepjgggekodf)
+installeer de extentie op de [Chrome web store](https://chromewebstore.google.com/detail/bdhficnphioomdjhdfbhdepjgggekodf)
 
 Klik op "Toevoegen aan Chrome" en ververs enige smartschool paginas.
 
