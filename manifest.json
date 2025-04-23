@@ -70,6 +70,7 @@
 				"buis-stats.js",
 				"plant.js",
 				"login.js",
+				"assignments.js",
 				"smppjs.js"
 			]
 		}
