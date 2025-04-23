@@ -1,6 +1,6 @@
 if (typeof browser === 'undefined') { var browser = chrome; }
 
-import { getQuickSettingsData, getWeatherAppData, getDelijnAppData, getWidgetData, getDelijnColorData } from './data-background-script.js';
+import { getQuickSettingsData, getWeatherAppData, getDelijnAppData, getWidgetData, getDelijnColorData, getPlantAppData } from './data-background-script.js';
 import { fetchWeatherData, fetchDelijnData } from './api-background-script.js';
 
 browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -65,7 +65,17 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
       sendResponse(delijnColorData);
       console.log('Delijn color data fetched and sent.');
     }
-
+    // Plant
+    if (message.action === 'setPlantAppData') {
+      await browser.storage.local.set({ plantAppData: message.data });
+      sendResponse({ succes: true });
+      console.log('Plant appdata saved.');
+    }
+    if (message.action === 'getPlantAppData') {
+      const plantAppData = await getPlantAppData();
+      sendResponse(plantAppData);
+      console.log('Plant appdata sent.');
+    }
     // Widgets
     if (message.action === "getWidgetData") {
       console.log("getting widget data");

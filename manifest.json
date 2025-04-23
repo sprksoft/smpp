@@ -45,7 +45,8 @@
 				"CSS/agenda.css",
 				"CSS/plant.css",
 				"CSS/root.css",
-				"CSS/SMPP/widgets.css"
+				"CSS/SMPP/widgets.css",
+				"CSS/smartschool-widgets.css"
 			],
 			"js": [
 				"titlefix.js",

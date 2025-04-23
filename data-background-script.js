@@ -1,5 +1,6 @@
 if (typeof browser === 'undefined') { var browser = chrome; }
 const liteMode = browser.runtime.getManifest().lite_mode
+const plantVersion = 3
 import { fetchDelijnData } from './api-background-script.js';
 
 function getDefaultQuickSettings(isLite) {
@@ -87,4 +88,18 @@ export async function getDelijnAppData() {
   };
 
   return delijnAppData;
+}
+export async function getPlantAppData() {
+  let data = await browser.storage.local.get("plantAppData");
+  let plantAppData = data.plantAppData || {
+    age: 0,
+    lastWaterTime: null,
+    lastGrowTime: null,
+    uniqueColor: "#fff",
+    plantVersion: plantVersion,
+    birthday: null,
+    daysSinceBirthday: 0,
+    isAlive: true
+  };
+  return plantAppData;
 }
