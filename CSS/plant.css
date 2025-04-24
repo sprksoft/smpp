@@ -9,7 +9,7 @@
   border: 3px solid var(--color-base03);
 }
 
-.buttondivforplant {
+#buttondivforplant {
   display: flex;
   flex-direction: row;
   gap: 15px;
@@ -17,7 +17,7 @@
   margin: 0px 5px 0px 5px;
 }
 
-.watering_button {
+#watering_button {
   border: 3px solid var(--color-base03);
   background-color: var(--color-base02);
   border-radius: 10px;
@@ -26,18 +26,18 @@
   height: 50px;
 }
 
-.enableAnimations .watering_button {
+.enableAnimations #watering_button {
   transition: ease-in-out;
   transition-duration: 0.1s;
 }
 
-.watering_button:hover {
+#watering_button:hover {
   background-color: var(--color-base03);
   border-color: var(--color-accent);
   cursor: pointer;
 }
 
-.time_difference_last_watered {
+#time_difference_last_watered {
   font-weight: bold;
   display: flex;
   align-items: center;

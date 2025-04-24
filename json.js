@@ -245,16 +245,11 @@ const weatherHTMLTiny = `<div class="weatherdiv">
 
 </div>
 `;
-const plant_buttonsHTML = `
-    <div class="glass-container">
-        <div id=glass-fill class="glass-fill" style="height: 0%;"></div>
-    </div>
-    <div id=watering_button class=watering_button> <svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" height=40px viewBox="0 0 34.74 41.95">
+const waterPlantSvg = `<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" height=40px viewBox="0 0 34.74 41.95">
     <g id="Laag_1-2" data-name="Laag 1">
       <path class="st1" d="M21.83,3.45c-.81,3.5-2.37,6.69-4.13,9.62l-.62-.98c-2.16-3.41-4.6-7.26-5.56-11.35-.08-.36-.36-.63-.71-.71-.52-.12-1.03.2-1.15.71-.95,4.12-3.39,7.96-5.56,11.37-.56.89-1.11,1.77-1.71,2.77C.81,17.52-.2,20.35.03,23.06c.2,2.34,1.3,4.55,3.72,6.42,1.04.8,2.23,1.4,3.5,1.76.6.18,1.23.3,1.85.38,2.22,14.49,25.64,13.73,25.64-2.27,0-6.6-10.3-14.73-12.91-25.91ZM8.94,29.36v.31h0c-.39-.05-.77-.14-1.15-.25-1.03-.3-2-.78-2.85-1.43-1.95-1.5-2.83-3.24-2.99-5.07-.19-2.27.71-4.73,2.08-7.05.46-.77,1.07-1.73,1.71-2.73,1.72-2.72,3.62-5.7,4.88-8.96,1.25,3.24,3.14,6.22,4.87,8.94.39.61.77,1.21,1.11,1.77-3.64,5.66-7.64,10.35-7.64,14.48ZM21.45,37.15c-.37.54-1.07.72-1.65.44-1.82-1.03-3.3-2.56-4.27-4.4-.89-1.78-1.42-3.72-1.56-5.71-.03-.72.53-1.33,1.26-1.37.67-.03,1.26.46,1.35,1.13.11,1.64.54,3.25,1.27,4.73.74,1.41,1.87,2.58,3.26,3.37.6.41.75,1.22.34,1.82Z"/>
     </g>
-  </svg> </div><div id=time_difference_last_watered class=time_difference_last_watered></div>
-`
+  </svg>`
 const delijnSearchButtonSvg = `<svg class=delijnSearchIcon width="25" height="25" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg"
     aria-hidden="true">
     <path d="M16.0073 9.00364C16.0073 12.8716 12.8716 16.0073 9.00364 16.0073C5.13564 16.0073 2 12.8716 2 9.00364C2 
