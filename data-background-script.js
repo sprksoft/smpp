@@ -38,6 +38,9 @@ export async function getWidgetData() {
   let data = await browser.storage.local.get("widgets");
   return data.widgets;
 }
+export async function setWidgetData(widgetData) {
+  await browser.storage.local.set({ widgets: widgetData });
+}
 
 export async function getWeatherAppData(location) {
   let data = await browser.storage.local.get("weatherAppData");

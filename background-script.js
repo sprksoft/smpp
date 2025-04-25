@@ -1,6 +1,6 @@
 if (typeof browser === 'undefined') { var browser = chrome; }
 
-import { getQuickSettingsData, getWeatherAppData, getDelijnAppData, getWidgetData, getDelijnColorData, getPlantAppData } from './data-background-script.js';
+import { getQuickSettingsData, getWeatherAppData, getDelijnAppData, getWidgetData, setWidgetData, getDelijnColorData, getPlantAppData } from './data-background-script.js';
 import { fetchWeatherData, fetchDelijnData } from './api-background-script.js';
 
 browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -81,6 +81,11 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
       console.log("getting widget data");
       let widgetData = await getWidgetData();
       sendResponse(widgetData);
+    }
+    if (message.action === "setWidgetData") {
+      console.log("saving widget data");
+      await setWidgetData(message.widgetData);
+      sendResponse({ succes: true });
     }
   })();
   return true;

@@ -1,11 +1,11 @@
 let widgetEditMode = false;
 let hoveringBag = false;
 let showNewsState = false; // Used for if the shownews state is changed before it could be created.
-let ghostPannel = null;
 // The widget drag info of the widget currently being dragged.
 let curDragInfo = null;
 let widgets = [];
 
+let widgetsContainer;
 let widgetBag;
 let widgetBagFold;
 
@@ -13,65 +13,236 @@ function registerWidget(widget) {
   widgets.push(widget);
 }
 
+function createWidgetErrorContent(name) {
+  let p = document.createElement("p");
+  p.classList.add("smpp-error-widget");
+  p.innerHTML =
+    "<span>Probleem bij het laden van de widget: </span><code class='widgetName'></code>";
+  p.querySelector(".widgetName").innerText = name;
+  return p;
+}
+
+class WidgetDragInfo {
+  offset;
+  widget;
+  sourceInsertionPoint;
+  targetInsertionPoint;
+
+  constructor(widget, sourceInsertionPoint, offset) {
+    this.widget = widget;
+    this.sourceInsertionPoint = sourceInsertionPoint;
+    this.offset = offset;
+  }
+}
+
 class WidgetBase {
-  element;
-  previewElement;
+  #element;
+  #content;
+  #preview;
+  #bagSlot;
+  #aboutToDel;
 
   constructor() {
-    this.element = null;
-    this.previewElement = null;
+    this.#element = this.#createWidgetDiv();
+    this.#content = null;
+    this.#preview = false;
+    this.#aboutToDel = false;
   }
 
-  #createWidget() {
+  #createWidgetDiv() {
     let widgetDiv = document.createElement("div");
-    widgetDiv.addEventListener("mousedown", (e) => { onWidgetDragStart(this, e) });
+    widgetDiv.addEventListener("mousedown", (e) => {
+      this.startDragging(e.clientX, e.clientY);
+    });
     widgetDiv.classList.add("smpp-widget");
 
     return widgetDiv;
   }
 
-  createHTML() {
-    if (this.element) { return; }
-    this.element = this.#createWidget();
-    this.createContent(this.element);
-  }
-  createPreviewHTML() {
-    if (this.previewElement) { return; }
-    let widget = this.#createWidget();
-    widget.classList.add("smpp-widget-preview");
-    this.createPreview(widget);
-    this.previewElement = widget;
-    return widget;
+  async #intoBag() {
+    await this.#setPreview(true);
+    this.#bagSlot.appendChild(this.#element);
   }
 
-  removeHTML() {
-    if (!this.element) { return; }
-    this.element.remove();
-    this.element = null;
+  async #setPreview(preview) {
+    if (this.#preview == preview && this.#content !== null) {
+      return;
+    }
+
+    let newContent;
+    try {
+      if (preview) {
+        this.#element.classList.add("smpp-widget-preview");
+        newContent = await this.createPreview();
+      } else {
+        this.#element.classList.remove("smpp-widget-preview");
+        newContent = await this.createContent();
+      }
+    } catch (e) {
+      console.error("Failed to create widget content");
+      console.error(e);
+      newContent = createWidgetErrorContent(this.name);
+    }
+    if (!newContent) {
+      console.error(
+        "createContent and createPreview method's needs to return an html object. in widget impl",
+      );
+      newContent = createWidgetErrorContent(this.name);
+    }
+    this.#content?.remove();
+    this.#content = newContent;
+    this.#element.dataset.widgetName = this.name;
+    this.#element.appendChild(this.#content);
+    this.#preview = preview;
   }
-  removePreviewHTML() {
-    if (!this.previewElement) { return; }
-    this.previewElement.remove();
-    this.previewElement = null;
+
+  isPreview() {
+    return this.#preview;
   }
 
-  get name() { return this.constructor.name; }
-
-  get category() { return "other"; }
-
-  // Override me
-  // Gets called when the preview html code needs to be created (append it to the parent given as a parameter)
-  createPreview(parent) {
-    this.createContent(parent);
+  async registerBagSlot(slot) {
+    this.#bagSlot = slot;
+    if (!this.#content) {
+      await this.#intoBag();
+    }
   }
 
-  // Override me
-  // Gets called when the content html code needs to be created (append it to the parent given as a parameter)
-  createContent(parent) { }
+  async addToPannel(pannel) {
+    await this.#setPreview(false);
+    pannel.appendChild(this.#element);
+    pannel.appendChild(createInsertionPointHTML(false));
+  }
+
+  aboutToDel(value) {
+    this.#aboutToDel = value;
+    if (value) {
+      this.#element.classList.add("smpp-widget-delete");
+    } else {
+      this.#element.classList.remove("smpp-widget-delete");
+    }
+  }
+
+  dragMove(x, y) {
+    if (!curDragInfo || curDragInfo.widget != this) {
+      return;
+    }
+
+    let el = this.#element;
+    let offset = curDragInfo.offset;
+    el.style.left = x - offset.x + "px";
+    el.style.top = y - offset.y + "px";
+  }
+
+  async drop(cancel = false) {
+    if (!curDragInfo || curDragInfo.widget != this) {
+      return;
+    }
+
+    let el = this.#element;
+    el.classList.remove("smpp-widget-dragging");
+    el.style = "";
+
+    let targetIp = curDragInfo.targetInsertionPoint;
+    targetIp?.classList.remove("smpp-widget-insertion-point-targeted");
+    if (cancel || !targetIp) {
+      // Put back were came from if targetInsertionPoint is null or when we cancel
+      targetIp = curDragInfo.sourceInsertionPoint;
+    }
+
+    if (targetIp.classList.contains("smpp-widget-insertion-point-pannel")) {
+      console.log("Creating new pannel...");
+      let pannelContainer = targetIp.parentElement;
+      let pannel = createPannelHTML({ widgets: [] });
+      pannelContainer.insertBefore(
+        createInsertionPointHTML(true),
+        targetIp.nextElementSibling,
+      );
+      pannelContainer.insertBefore(pannel, targetIp.nextElementSibling);
+      targetIp = pannel.firstChild;
+    }
+
+    if (this.#aboutToDel) {
+      await this.#intoBag();
+    } else {
+      let targetPannel = targetIp.parentElement;
+      targetPannel.style.display = "block";
+      targetPannel.insertBefore(
+        createInsertionPointHTML(),
+        targetIp.nextElementSibling,
+      );
+      targetPannel.insertBefore(el, targetIp.nextElementSibling);
+
+      await this.#setPreview(false);
+    }
+    this.aboutToDel(false);
+
+    let sourcePannel = curDragInfo.sourceInsertionPoint?.parentElement;
+    if (sourcePannel && sourcePannel.childNodes.length == 1) {
+      // Check if the pannel is empty (1 is because of the insertion point)
+      sourcePannel.nextElementSibling.remove();
+      sourcePannel.remove();
+    }
+
+    document.body.classList.remove("smpp-widget-dragging-something");
+    curDragInfo = null;
+
+    await saveWidgets();
+  }
+
+  startDragging(grabX, grabY) {
+    if (!widgetEditMode) {
+      return;
+    }
+    const el = this.#element;
+
+    if (!this.isPreview()) {
+      this.#element.nextElementSibling.remove(); // remove insertion point.
+    }
+    let sourceIp = this.#element.previousElementSibling;
+    let rect = this.#element.getBoundingClientRect();
+
+    curDragInfo = new WidgetDragInfo(this, sourceIp, {
+      x: grabX - rect.left,
+      y: grabY - rect.top,
+    });
+    document.body.classList.add("smpp-widget-dragging-something");
+    el.style.width = rect.width + "px";
+    el.style.height = rect.height + "px";
+    el.style.left = rect.left + "px";
+    el.style.top = rect.top + "px";
+
+    el.classList.add("smpp-widget-dragging");
+
+    document.body.appendChild(el);
+
+    if (sourceIp && sourceIp.parentElement.childNodes.length == 1) {
+      sourceIp.parentElement.style.display = "none";
+    }
+
+    closeBag();
+  }
+
+  // Override us
+  // Name of the widget
+  get name() {
+    return this.constructor.name;
+  }
+
+  // The category the widget is in
+  get category() {
+    return "other";
+  }
+
+  // (Required): Gets called when the content element of the widget needs to be created (return html element)
+  async createContent() {}
+  // Gets called when the preview element needs to be created (return html element) NOTE: preview and content never exist at the same time
+  async createPreview() {
+    return await this.createContent();
+  }
 }
 
 class ErrorWidget extends WidgetBase {
-  origWidgetName
+  origWidgetName;
 
   constructor(origWidgetName) {
     super();
@@ -82,19 +253,18 @@ class ErrorWidget extends WidgetBase {
     return this.origWidgetName;
   }
 
-  createContent(parent) {
-    parent.classList.add("smpp-error-widget")
-    parent.innerHTML = "<p>Probleem bij het laden van de widget:</p> <code class='widgetName'></code>";
-    parent.querySelector(".widgetName").innerText = this.origWidgetName;
+  async createContent() {
+    return createWidgetErrorContent(this.origWidgetName);
   }
 }
 
 class SmartschoolWidget extends WidgetBase {
-  smContent
+  smContent;
 
   constructor(content) {
     super();
     this.smContent = content;
+    this.smContent.classList.add("smpp-widget-smartschool");
   }
 
   get category() {
@@ -102,47 +272,59 @@ class SmartschoolWidget extends WidgetBase {
   }
 
   get name() {
-    return this.constructor.name+"-"+this.smContent.id;
-  }
-  createContent(parent) {
-    parent.classList.add("smpp-widget-smartschool");
-    parent.appendChild(this.smContent);
+    return this.constructor.name + "-" + this.smContent.id;
   }
 
-  createPreview(parent) {
-    parent.classList.add("smpp-widget-smartschool");
-    parent.appendChild(this.smContent);
+  async createContent() {
+    return this.smContent;
+  }
+}
+
+function targetInsertionPoint(target) {
+  if (target !== curDragInfo.targetInsertionPoint) {
+    curDragInfo.targetInsertionPoint?.classList.remove(
+      "smpp-widget-insertion-point-targeted",
+    );
+    curDragInfo.targetInsertionPoint = target;
+    curDragInfo.targetInsertionPoint.classList.add(
+      "smpp-widget-insertion-point-targeted",
+    );
   }
 }
 
 function onPannelHover(pannel, e) {
-  if (!widgetEditMode || curDragInfo == null) { return; }
+  if (!widgetEditMode || curDragInfo == null) {
+    return;
+  }
 
   let target = pannel.firstChild;
   for (let child of pannel.childNodes) {
-    if (!child.classList.contains("smpp-widget")) { continue; }
+    if (!child.classList.contains("smpp-widget")) {
+      continue;
+    }
     let bounds = child.getBoundingClientRect();
-    let centerY = bounds.top+(bounds.bottom-bounds.top)*0.5;
+    let centerY = bounds.top + (bounds.bottom - bounds.top) * 0.5;
     if (e.clientY > centerY) {
       target = child.nextElementSibling;
     }
   }
-
-  if (target !== curDragInfo.targetInsertionPoint) {
-    curDragInfo.targetInsertionPoint?.classList.remove("smpp-widget-insertion-point-targeted");
-    curDragInfo.targetInsertionPoint = target;
-    curDragInfo.targetInsertionPoint.classList.add("smpp-widget-insertion-point-targeted");
-  }
+  targetInsertionPoint(target);
 }
 
 function onPannelInsertionPointHover(e) {
-  if (!widgetEditMode || curDragInfo == null) { return; }
-  if (!ghostPannel) {
-    ghostPannel = createPannelHTML({widgets:[]});
+  if (!widgetEditMode || curDragInfo == null) {
+    return;
   }
-  e.target.parentElement.insertBefore(ghostPannel, e.target.nextElementSibling);
+  targetInsertionPoint(e.target);
+  curDragInfo.targetInsertionPoint.classList.remove(
+    "smpp-widget-insertion-point-targeted",
+  );
+  curDragInfo.targetInsertionPoint = e.target;
+  curDragInfo.targetInsertionPoint.classList.add(
+    "smpp-widget-insertion-point-targeted",
+  );
 }
-function createInsertionPointHTML(pannel=false) {
+function createInsertionPointHTML(pannel = false) {
   let ipoint = document.createElement("div");
   ipoint.classList.add("smpp-widget-insertion-point");
   if (pannel) {
@@ -154,49 +336,44 @@ function createInsertionPointHTML(pannel=false) {
 
 function createPannelHTML(pannel) {
   let pannelDiv = document.createElement("div");
-  pannelDiv.addEventListener("mousemove", (e)=>onPannelHover(pannelDiv, e));
+  pannelDiv.addEventListener("mousemove", (e) => onPannelHover(pannelDiv, e));
   pannelDiv.classList.add("smpp-widget-pannel");
   pannelDiv.appendChild(createInsertionPointHTML());
 
-  for (let widgetName of pannel.widgets){
+  for (let widgetName of pannel.widgets) {
     let widget = getWidgetByName(widgetName);
-    if (!widget){
+    if (!widget) {
+      console.error("Widget " + widgetName + " doesn't exist.");
       registerWidget(new ErrorWidget(widgetName));
       widget = getWidgetByName(widgetName);
     }
-    if (!widget.element) {
-      widget.createHTML()
-      pannelDiv.appendChild(widget.element);
-    } else {
-      continue;
-    }
-    pannelDiv.appendChild(createInsertionPointHTML());
+    widget.addToPannel(pannelDiv);
   }
   return pannelDiv;
 }
 
-function createWidgetsContainerHTML(widgetData, newsContent, showNews){
+function createWidgetsContainerHTML(widgetData, newsContent, showNews) {
   let widgetsContainer = document.createElement("div");
   widgetsContainer.classList.add("smpp-widgets-container");
 
   widgetsContainer.appendChild(createInsertionPointHTML(true));
   for (let pannel of widgetData.leftPannels) {
-    let pannelDiv = createPannelHTML(pannel)
+    let pannelDiv = createPannelHTML(pannel);
     widgetsContainer.appendChild(pannelDiv);
     widgetsContainer.appendChild(createInsertionPointHTML(true));
   }
 
   let newsDiv = document.createElement("div");
   newsDiv.classList.add("smpp-news-container");
-  newsContent.id="smpp-news-content";
-  newsContent.className="";
-  newsContent.style.display = showNews?"block":"none";
+  newsContent.id = "smpp-news-content";
+  newsContent.className = "";
+  newsContent.style.display = showNews ? "block" : "none";
   newsDiv.appendChild(newsContent);
   widgetsContainer.appendChild(newsDiv);
 
   widgetsContainer.appendChild(createInsertionPointHTML(true));
   for (let pannel of widgetData.rightPannels) {
-    let pannelDiv = createPannelHTML(pannel)
+    let pannelDiv = createPannelHTML(pannel);
     widgetsContainer.appendChild(pannelDiv);
     widgetsContainer.appendChild(createInsertionPointHTML(true));
   }
@@ -204,15 +381,13 @@ function createWidgetsContainerHTML(widgetData, newsContent, showNews){
   return widgetsContainer;
 }
 
-
 function showNews(value) {
   showNewsState = value;
   let newsContent = document.getElementById("smpp-news-content");
-  if (newsContent){
-    newsContent.style.display = value?"block":"none";
+  if (newsContent) {
+    newsContent.style.display = value ? "block" : "none";
   }
 }
-
 
 async function createWidgetSystem() {
   let container = document.getElementById("container");
@@ -223,50 +398,86 @@ async function createWidgetSystem() {
 
   // extract dingetjes
   let news = document.getElementById("centercontainer");
-  if (!news){
+  if (!news) {
     console.error("centercontainer doesn't exist. ");
     console.log("reloading web page... because no centercontainer");
     location.reload();
     return false;
   }
 
-  let widgetData = await browser.runtime.sendMessage({ action: 'getWidgetData' });
+  let widgetData = await browser.runtime.sendMessage({
+    action: "getWidgetData",
+  });
   let setDefaults = false;
-  if (widgetData == null) {
+  if (!widgetData) {
     setDefaults = true;
     widgetData = {
-      leftPannels: [{widgets:[]}],
-      rightPannels: [{widgets:[]}],
-    }
+      leftPannels: [{ widgets: [] }],
+      rightPannels: [{ widgets: [] }],
+    };
   }
-  console.log(widgetData);
 
-  // create smartschool default widgets
-  for (let smWidget of document.querySelectorAll("#rightcontainer .homepage__block")) {
-    let wName = "SmartschoolWidget-"+smWidget.id;
+  // Create smartschool default widgets
+  for (let smWidget of document.querySelectorAll(
+    "#rightcontainer .homepage__block",
+  )) {
+    let wName = "SmartschoolWidget-" + smWidget.id;
     registerWidget(new SmartschoolWidget(smWidget));
-    if (setDefaults){
+    if (setDefaults) {
       widgetData.rightPannels[0].widgets.push(wName);
     }
   }
-  for (let smWidget of document.querySelectorAll("#leftcontainer .homepage__block")) {
-    let wName = "SmartschoolWidget-"+smWidget.id;
+  for (let smWidget of document.querySelectorAll(
+    "#leftcontainer .homepage__block",
+  )) {
+    let wName = "SmartschoolWidget-" + smWidget.id;
     registerWidget(new SmartschoolWidget(smWidget));
-    if (setDefaults){
+    if (setDefaults) {
       widgetData.leftPannels[0].widgets.push(wName);
     }
   }
 
-  widgetBagFold = createWidgetBagFold();
-  widgetBag = createWidgetBag();
+  widgetsContainer = createWidgetsContainerHTML(
+    widgetData,
+    news,
+    showNewsState,
+  );
 
-  // create widgets container
-  let widgetsContainer = createWidgetsContainerHTML(widgetData, news, showNewsState);
-
-  container.innerHTML="";
+  container.innerHTML = "";
   container.appendChild(widgetsContainer);
 
   return true;
+}
+
+async function saveWidgets() {
+  let widgetData = { leftPannels: [], rightPannels: [] };
+  let onLeftPannels = true;
+  for (let pan of widgetsContainer.childNodes) {
+    if (pan.classList.contains("smpp-widget-insertion-point")) {
+      continue;
+    }
+    if (pan.classList.contains("smpp-news-container")) {
+      onLeftPannels = false;
+      continue;
+    }
+    let pannelData = { widgets: [] };
+    for (let wid of pan.childNodes) {
+      if (wid.classList.contains("smpp-widget-insertion-point")) {
+        continue;
+      }
+      pannelData.widgets.push(wid.dataset.widgetName);
+    }
+
+    if (onLeftPannels) {
+      widgetData.leftPannels.push(pannelData);
+    } else {
+      widgetData.rightPannels.push(pannelData);
+    }
+  }
+  await browser.runtime.sendMessage({
+    action: "setWidgetData",
+    widgetData: widgetData,
+  });
 }
 
 function bagHoverEnter() {
@@ -274,59 +485,60 @@ function bagHoverEnter() {
   hoveringBag = true;
   if (curDragInfo) {
     bag.classList.add("smpp-widget-bag-delete");
-    curDragInfo.widget.element.classList.add("smpp-widget-delete");
+    curDragInfo.widget.aboutToDel(true);
   }
 }
 
 function bagHoverExit() {
   let bag = widgetBagFold;
   hoveringBag = false;
-  bag.classList.remove("smpp-widget-bag-delete");
   if (curDragInfo) {
-    curDragInfo.widget.element.classList.remove("smpp-widget-delete");
+    bag.classList.remove("smpp-widget-bag-delete");
+    curDragInfo?.widget.aboutToDel(false);
   }
 }
 
-function createGroup(bag, name, displayName) {
+async function createGroup(bag, name, displayName) {
   let group = document.createElement("div");
   group.classList.add("smpp-widget-bag-group");
   for (let widget of widgets) {
     if (widget.category == name) {
-      group.appendChild(widget.createPreviewHTML());
+      let slot = document.createElement("div");
+      await widget.registerBagSlot(slot);
+      group.appendChild(slot);
     }
   }
   let groupTitle = document.createElement("h2");
   groupTitle.classList.add("smpp-widget-bag-group-title");
-  groupTitle.innerText=displayName;
+  groupTitle.innerText = displayName;
   bag.appendChild(groupTitle);
   bag.appendChild(group);
 }
 
-function createWidgetBag() {
+async function createWidgetBag() {
   let bag = document.createElement("div");
   bag.classList.add("smpp-widget-bag");
 
-  createGroup(bag, "smartschool", "Smartschool widgets");
-  createGroup(bag, "other", "Overige widgets");
+  await createGroup(bag, "smartschool", "Smartschool widgets");
+  await createGroup(bag, "other", "Overige widgets");
 
   document.body.appendChild(bag);
   return bag;
 }
 
 function closeBag() {
-  if (widgetBag.classList.contains("smpp-widget-bag-open")) {
-    widgetBag.classList.remove("smpp-widget-bag-open")
+  if (widgetBag && widgetBag.classList.contains("smpp-widget-bag-open")) {
+    widgetBag.classList.remove("smpp-widget-bag-open");
   }
 }
 
 function createWidgetBagFold() {
   let bag = document.createElement("div");
   bag.classList.add("smpp-widget-bag-fold");
-  bag.innerHTML=`
+  bag.innerHTML = `
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 <svg class="smpp-widget-bag-fold-icon" version="1.1" viewBox="0 0 448 448" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-.898 -124.01)"><path d="m26.458 288.48 198.44 119.06 198.44-119.06" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="39.511"/></g></svg>
-`
-
+`;
 
   document.body.appendChild(bag);
   bag.addEventListener("mouseenter", (e) => {
@@ -335,134 +547,33 @@ function createWidgetBagFold() {
   bag.addEventListener("mouseleave", (e) => {
     bagHoverExit();
   });
-  bag.addEventListener("click", (e)=> {
-      widgetBag.classList.add("smpp-widget-bag-open")
-  })
+  bag.addEventListener("click", (e) => {
+    widgetBag.classList.add("smpp-widget-bag-open");
+  });
   return bag;
 }
 
-class WidgetDragInfo {
-  offset;
-  widget;
-  sourceInsertionPoint;
-  targetInsertionPoint;
-
-  constructor(widget, sourceInsertionPoint, offset) {
-    this.widget = widget;
-    this.sourceInsertionPoint=sourceInsertionPoint;
-    this.offset = offset;
-  }
-}
-
-
-function onWidgetDragStart(widget, e) {
-  if (!widgetEditMode) {
-    return;
-  }
-  if (widget.element && e.target.classList.contains("smpp-widget-preview")) {
-    return;
-  }
-
-  let sourceIp = null;
-  let rect;
-  if (widget.element == null) {
-    widget.createHTML();
-    rect = e.target.getBoundingClientRect();
-  } else {
-    widget.element.nextElementSibling.remove();
-    sourceIp = widget.element.previousElementSibling;
-    rect = widget.element.getBoundingClientRect();
-  }
-  let target = widget.element;
-
-  curDragInfo = new WidgetDragInfo(widget, sourceIp, { x: e.clientX - rect.left, y: e.clientY - rect.top });
-  document.body.classList.add("smpp-widget-dragging-something");
-  target.style.width = rect.width + "px";
-  target.style.height = rect.height + "px";
-  target.style.left = rect.left + "px";
-  target.style.top = rect.top + "px";
-
-  target.classList.add("smpp-widget-dragging");
-
-
-  document.body.appendChild(widget.element);
-
-  if (sourceIp && sourceIp.parentElement.childNodes.length == 1) {
-    sourceIp.parentElement.style.display="none";
-  }
-
-  closeBag();
-}
-
-function dropCurDragWidget(cancel=false) {
-  if (!curDragInfo) { return; }
-
-  let el = curDragInfo.widget.element;
-  el.classList.remove("smpp-widget-dragging");
-  el.style = "";
-
-  curDragInfo.targetInsertionPoint?.classList.remove("smpp-widget-insertion-point-targeted");
-  let targetIp = curDragInfo.targetInsertionPoint;
-  if (cancel || !targetIp) { // Put back were came from if targetInsertionPoint is null or when we cancel
-    targetIp = curDragInfo.sourceInsertionPoint;
-  }
-
-  if(hoveringBag) {
-    bagHoverExit();
-    if (!cancel) {
-      targetIp = null;
-    }
-  }
-
-  if (targetIp && targetIp.parentElement == ghostPannel){
-    ghostPannel.parentElement.insertBefore(createInsertionPointHTML(true), ghostPannel.nextElementSibling);
-    ghostPannel = null;
-  }
-
-  if (targetIp == null) {
-    curDragInfo.widget.removeHTML();
-  } else {
-    let targetPannel = targetIp.parentElement;
-    targetPannel.style.display="block";
-    targetPannel.insertBefore(createInsertionPointHTML(), targetIp.nextElementSibling);
-    targetPannel.insertBefore(el, targetIp.nextElementSibling);
-  }
-
-  let sourcePannel = curDragInfo.sourceInsertionPoint?.parentElement;
-  if (sourcePannel && sourcePannel.childNodes.length == 1) { // Check if the pannel is empty (1 is because of the insertion point)
-    sourcePannel.nextElementSibling.remove();
-    sourcePannel.remove();
-  }
-
-  if(ghostPannel) {
-    ghostPannel.remove();
-    ghostPannel = null;
-  }
-
-  document.body.classList.remove("smpp-widget-dragging-something");
-  curDragInfo = null;
-}
-
-
 document.addEventListener("mouseup", (e) => {
-  dropCurDragWidget(false);
+  if (curDragInfo) {
+    curDragInfo.widget.drop(false);
+  }
 });
 
 document.addEventListener("mousemove", (e) => {
-  if (curDragInfo != null) {
-    let el = curDragInfo.widget.element;
-    let offset = curDragInfo.offset;
-    el.style.left = (e.clientX - offset.x) + "px";
-    el.style.top = (e.clientY - offset.y) + "px";
+  if (curDragInfo) {
+    curDragInfo.widget.dragMove(e.clientX, e.clientY);
 
     let bagBounds = widgetBagFold.getBoundingClientRect();
-    if (e.clientY < bagBounds.bottom && e.clientX > bagBounds.left && e.clientX < bagBounds.right) {
+    if (
+      e.clientY < bagBounds.bottom &&
+      e.clientX > bagBounds.left &&
+      e.clientX < bagBounds.right
+    ) {
       bagHoverEnter();
     } else if (hoveringBag) {
       bagHoverExit();
     }
   }
-
 });
 
 // document.addEventListener("mousedown", (e) => {
@@ -476,9 +587,7 @@ document.addEventListener("keyup", (e) => {
     setEditMode(false);
     e.preventDefault();
   }
-
 });
-
 
 function getWidgetByName(name) {
   for (let widget of widgets) {
@@ -489,13 +598,21 @@ function getWidgetByName(name) {
   return null;
 }
 
-function setEditMode(value) {
+async function setEditMode(value) {
   if (value) {
+    if (!widgetBagFold) {
+      widgetBagFold = createWidgetBagFold();
+    }
     document.body.classList.add("smpp-widget-edit-mode");
     document.getElementById("smpp-news-content").style.display = "none";
+    if (!widgetBag) {
+      widgetBag = await createWidgetBag();
+    }
   } else {
     closeBag();
-    dropCurDragWidget(true);
+    if (curDragInfo) {
+      curDragInfo.widget.drop(true);
+    }
     document.body.classList.remove("smpp-widget-edit-mode");
     showNews(showNewsState);
   }
@@ -503,30 +620,33 @@ function setEditMode(value) {
 }
 
 function createWidgetEditModeButton() {
-
   let btn = document.createElement("button");
   btn.classList.add("topnav__btn");
   btn.classList.add("smpp-button");
-  btn.id="smpp-widget-edit-mode-btn";
+  btn.id = "smpp-widget-edit-mode-btn";
   btn.addEventListener("click", () => {
     setEditMode(!widgetEditMode);
   });
-  btn.innerHTML = editIconSvg
+  btn.innerHTML = editIconSvg;
   btn.title = "Ga in/uit edit mode om de locatie van de widgets te veranderen.";
 
   return btn;
 }
 
 class TestWidget extends WidgetBase {
-  createContent(parent) {
-    parent.innerHTML = "<p>I Am Test Widget </p>";
+  async createContent() {
+    let p = document.createElement("p");
+    p.innerText = "I Am Test Widget";
+    return p;
   }
 }
 registerWidget(new TestWidget());
 
 class TestWidget2 extends WidgetBase {
-  createContent(parent) {
-    parent.innerHTML = "<p>I Am also a Test Widget </p>";
+  async createContent() {
+    let p = document.createElement("p");
+    p.innerText = "I Am also a Test Widget";
+    return p;
   }
 }
 registerWidget(new TestWidget2());

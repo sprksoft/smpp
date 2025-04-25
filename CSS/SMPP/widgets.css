@@ -90,7 +90,7 @@ body {
   user-select: none;
 }
 
-.smpp-widget-edit-mode .smpp-widget:hover {
+.smpp-widget-edit-mode:not(.smpp-widget-dragging-something) .smpp-widget:hover {
   transform: translateY(-5px);
   cursor: move;
 }
@@ -230,6 +230,6 @@ body {
   text-align: center;
   display: block;
 }
-.smpp-widget-smartschool {
+.smpp-widget:has(.smpp-widget-smartschool) {
   padding: 0px;
 }
