@@ -7,7 +7,10 @@ function make_iframe() {
   let current_theme = get_theme(current_profile);
 
   const placeholderTextGlChat = username_override || orig_name;
-  const query_string = get_theme_as_query_string(current_theme, ["color-base00", "color-base01", "color-base02", "color-base03", "color-accent", "color-text"]);
+  let query_string = get_theme_as_query_string(current_theme, ["color-base00", "color-base01", "color-base02", "color-base03", "color-accent", "color-text"]);
+  if (query_string.startsWith("&")) {
+    query_string = query_string.substring(1);
+  }
 
   const GlCHatplaceHTML = `
     <div class="gc-controls">
@@ -29,7 +32,7 @@ function make_iframe() {
         </svg>
       </button>
     </div>
-    <iframe style="width:100%; height:100%; border:none" src='https://gc.smartschoolplusplus.com/?placeholder=${placeholderTextGlChat}${query_string}'></iframe>
+    <iframe style="width:100%; height:100%; border:none" src='https://gc.smartschoolplusplus.com/chat?${query_string}'></iframe>
   `;
 
   GlCHatplace.innerHTML = GlCHatplaceHTML;
