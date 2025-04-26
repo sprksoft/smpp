@@ -1,196 +1,285 @@
-const plantVersion = 2
+const plantVersion = 2;
 class PlantWidget extends WidgetBase {
-    async createContent(parent) {
-        let plantDiv = document.createElement("div")
-        plantDiv = await createPlantWidget()
-        parent.appendChild(plantDiv)
-    }
-    async updateContent(parent) {
-
-    }
+  async createContent() {
+    let plantDiv = document.createElement("div");
+    plantDiv.id = "plantWidget";
+    plantDiv = await createPlantWidget(plantDiv);
+    return plantDiv;
+  }
 }
 
 registerWidget(new PlantWidget());
 
-async function getPlantData() {
-    return await browser.runtime.sendMessage({
-        action: 'getPlantAppData',
-    });
-}
-
-async function createPlantWidget() {
-    let plantData = data
-    let outdated = checkIfOutdated(plantData.version)
-    plantDiv.innerHTML = ""
-    if (outdated) {
-        plantDiv.appendChild(createUpdatePrompt(plantData))
-        return plantDiv
-    }
-    if (plantData.age == 0) { // not born yet
-        plantDiv.appendChild(createPlantThePlantVisual())
-        return plantDiv
-    }
-    plantData = calculateGrowth(plantData) // calculate new data
-    if (plantData.birthday != null) plantDiv.appendChild(createPlantStreak(plantData));
-    plantDiv.appendChild(createPlantVisual(plantData))
-    plantDiv.appendChild(createPlantBottomUI(plantData))
-    return plantDiv
+async function createPlantWidget(plantDiv) {
+  let plantData = await browser.runtime.sendMessage({
+    action: "getPlantAppData",
+  });
+  let outdated = checkIfOutdated(plantData.plantVersion);
+  plantDiv.innerHTML = "";
+  if (outdated) {
+    plantDiv.appendChild(createUpdatePrompt(plantData));
+    return plantDiv;
+  }
+  if (plantData.age == 0) {
+    plantDiv.appendChild(createPlantThePlantVisual());
+    return plantDiv;
+  }
+  plantData = calculateGrowth(plantData);
+  if (plantData.birthday != null)
+    plantDiv.appendChild(createPlantStreak(plantData));
+  plantDiv.appendChild(createPlantVisual(plantData));
+  plantDiv.appendChild(await createPlantBottomUI(plantData));
+  return plantDiv;
 }
 
 function createPlantVisual(data) {
-    let plantVisualContainer = document.createElement("div")
-    plantVisualContainer.id = "plant_image_container"
-    plantVisualContainer.innerHTML = getPlantHTML(data.age, data.isAlive)
-    return plantVisualContainer
+  let plantVisualContainer = document.createElement("div");
+  plantVisualContainer.id = "plant_image_container";
+  plantVisualContainer.innerHTML = getPlantHTML(data);
+  return plantVisualContainer;
 }
 
-function createPlantBottomUI(data) {
-    let currentTime = new Date()
-    let timeSinceLastWater = currentTime - data.lastWaterTime
+async function createPlantBottomUI(data) {
+  let currentTime = new Date();
+  let lastWaterTime = new Date(data.lastWaterTime);
+  let timeSinceLastWater = currentTime - lastWaterTime;
+  let bottomUIContainer = document.createElement("div");
+  bottomUIContainer.id = "buttondivforplant";
+  let topUIContainer = document.createElement("div");
+  topUIContainer.id = "top-plant-button-div";
+  let UIContainer = document.createElement("div");
+  UIContainer.id = "fullbuttondivforplant";
 
-    let bottomUIContainer = document.createElement("div")
-    bottomUIContainer.id = "buttondivforplant"
+  let waterAmountContainer = document.createElement("div");
+  waterAmountContainer.id = "glass-container";
 
-    let waterAmountContainer = document.createElement("div")
-    waterAmountContainer.id = "glass-container"
-    let waterAmount = document.createElement("div")
-    waterAmount.id = "glass-fill"
-    waterAmount.style.height = calculatePercentile(timeSinceLastWater / 1000) + `%`
+  let waterAmount = document.createElement("div");
+  waterAmount.id = "glass-fill";
+  waterAmount.style.height =
+    calculatePercentile(timeSinceLastWater / 1000) + `%`;
+  waterAmountContainer.appendChild(waterAmount);
 
-    let waterButton = document.createElement("button")
-    waterButton.id = "watering_button"
-    waterButton.innerHTML = waterPlantSvg
-    waterButton.addEventListener("click", userWateredPlant)
+  let waterButton = document.createElement("button");
+  waterButton.id = "watering_button";
+  waterButton.innerHTML = waterPlantSvg;
+  if (data.isAlive) {
+    waterButton.addEventListener("click", userWateredPlant);
+  } else {
+    waterButton.classList.add("disabled");
+  }
 
-    let lastWaterTimeContainer = document.createElement("div")
-    lastWaterTimeContainer.id = "time_difference_last_watered"
-    let lastWaterTimeTitle = document.createElement("span")
-    lastWaterTimeTitle.id = "water_title"
-    lastWaterTimeTitle.innerText = "Watered"
-    let lastWaterTime = document.createElement("span")
-    lastWaterTime.id = "water_time"
-    lastWaterTime.innertext = `${getTimeInCorrectFormat(timeSinceLastWater)} ago`
-    lastWaterTimeContainer.appendChild(lastWaterTimeTitle)
-    lastWaterTimeContainer.appendChild(lastWaterTime)
+  let lastWaterTimeContainer = document.createElement("div");
+  lastWaterTimeContainer.id = "time_difference_last_watered";
 
-    bottomUIContainer.appendChild(waterAmountContainer)
-    bottomUIContainer.appendChild(waterButton)
-    bottomUIContainer.appendChild(lastWaterTimeContainer)
-    return bottomUIContainer
+  let lastWaterTimeTitle = document.createElement("span");
+  lastWaterTimeTitle.id = "water_title";
+  lastWaterTimeTitle.innerText = "Watered";
+
+  let lastWaterTimeElement = document.createElement("span");
+  lastWaterTimeElement.id = "water_time";
+  lastWaterTimeElement.innerText = getTimeInCorrectFormat(timeSinceLastWater);
+  lastWaterTimeContainer.appendChild(lastWaterTimeTitle);
+  lastWaterTimeContainer.appendChild(lastWaterTimeElement);
+
+  if (!data.isAlive) {
+    let removeButton = createRemoveButton(false);
+    topUIContainer.appendChild(removeButton);
+  } else if (data.age == 8) {
+    let removeButton = createRemoveButton(true);
+    topUIContainer.appendChild(removeButton);
+  }
+
+  bottomUIContainer.appendChild(waterAmountContainer);
+  bottomUIContainer.appendChild(waterButton);
+  bottomUIContainer.appendChild(lastWaterTimeContainer);
+
+  UIContainer.appendChild(topUIContainer);
+  UIContainer.appendChild(bottomUIContainer);
+  return UIContainer;
 }
-function updatePlantBottomUI(data) {
-    let currentTime = new Date()
-    let timeSinceLastWater = currentTime - data.lastWaterTime
-    document.getElementById("glass-fill").style.height = calculatePercentile(timeSinceLastWater / 1000) + `%`
-    document.getElementById("water_time").innertext = `${getTimeInCorrectFormat(timeSinceLastWater)} ago`
+async function updatePlantBottomUI(data) {
+  let currentTime = new Date();
+  let lastWaterTime = new Date(data.lastWaterTime);
+  let timeSinceLastWater = currentTime - lastWaterTime;
+  document.getElementById("glass-fill").style.height =
+    calculatePercentile(timeSinceLastWater / 1000) + `%`;
+  document.getElementById("water_time").innerText =
+    getTimeInCorrectFormat(timeSinceLastWater);
 }
 function createPlantStreak(data) {
-    let plantStreak = document.createElement("h2")
-    plantStreak.id = "plant_streak"
-    plantStreak.innerText = `${data.daysSinceBirthday} ${data.daysSinceBirthday == 1 ? "Day" : "Days"}`
-    return plantStreak
+  let plantStreak = document.createElement("h2");
+  plantStreak.id = "plant_streak";
+  plantStreak.innerText = `${data.daysSinceBirthday} ${
+    data.daysSinceBirthday == 1 ? "Day" : "Days"
+  }`;
+  return plantStreak;
 }
 
 function checkIfOutdated(version) {
-    return Boolean(!version || version != current_plant_version)
+  return Boolean(!version || version != plantVersion);
 }
 
 function createUpdatePrompt(data) {
-    let updatePromptContainer = document.createElement("div")
-    updatePromptContainer.id = "update-prompt-container"
-    let updatePromptTitle = document.createElement("h1")
-    updatePromptTitle.innerText = `Update Required!`
-    let updatePromptDescription = document.createElement("p")
-    updatePromptDescription.innerHTML = `You have to reset to be up to date \nYour version: <b>${data.plantVersion}</b> is not the newest available version`
-    let resetButton = document.createElement("button")
-    resetButton.innerText = "Reset Plant"
-    resetButton.id = "removeplantButton"
-    resetButton.addEventListener("click", resetPlant)
-    updatePromptContainer.appendChild(updatePromptTitle)
-    updatePromptContainer.appendChild(updatePromptDescription)
-    updatePromptContainer.appendChild(resetButton)
-    return updatePromptContainer
+  let updatePromptContainer = document.createElement("div");
+  updatePromptContainer.id = "update-prompt-container";
+  let updatePromptTitle = document.createElement("h1");
+  updatePromptTitle.innerText = `Update Required!`;
+  let updatePromptDescription = document.createElement("p");
+  updatePromptDescription.innerHTML = `You have to reset to be up to date \nYour version: <b>${data.plantVersion}</b> is not the newest available version`;
+  let resetButton = document.createElement("button");
+  resetButton.innerText = "Reset Plant";
+  resetButton.id = "removeplantButton";
+  resetButton.addEventListener("click", resetPlant);
+  updatePromptContainer.appendChild(updatePromptTitle);
+  updatePromptContainer.appendChild(updatePromptDescription);
+  updatePromptContainer.appendChild(resetButton);
+  return updatePromptContainer;
 }
 
-function resetPlant() {
-    browser.runtime.sendMessage({ action: 'setPlantData', data: null });
-    createPlantWidget()
+async function resetPlant() {
+  await browser.runtime.sendMessage({ action: "setPlantAppData", data: null });
+  createPlantWidget(document.getElementById("plantWidget"));
 }
 function calculatePercentile(t) {
-    const totalTime = 259200; // Total seconds in 3 days
-    return Math.max(0, 100 * (1 - t / totalTime));
+  const totalTime = 259200; // Total seconds in 3 days
+  return Math.max(0, 100 * (1 - t / totalTime));
 }
 
 function getTimeInCorrectFormat(t) {
-    if (t / 60 / 1000 < 1) return Math.round(t / 1000) + "s" // check if time is less than 1 minute
-    if (t / 60 / 60 / 1000 < 1) return Math.round(t / 60 / 1000) + "min" // check if time is less than 1 hour
-    return Math.round(t / 60 / 60 / 1000) + "h" // time is more than 1 hour
+  if (t / 60 / 1000 < 1) return "Now"; // check if time is less than 1 minute
+  if (t / 60 / 60 / 1000 < 1) return Math.round(t / 60 / 1000) + "min ago"; // check if time is less than 1 hour
+  if (t / 60 / 60 / 1000 / 24 < 1)
+    return Math.round(t / 60 / 60 / 1000) + "h ago"; // check if time is less than 1 day
+  return Math.round(t / 60 / 60 / 1000 / 24) + "d ago"; // time is more than 1 day
 }
 
 function createRemoveButton(isAlive) {
+  let removeButtonDiv = document.createElement("div");
+  removeButtonDiv.id = "remove-button-div";
 
+  let removeButtonBottomDiv = document.createElement("div");
+  removeButtonBottomDiv.id = "remove-button-bottom-div";
+
+  let removeButtonTopDiv = document.createElement("div");
+  removeButtonTopDiv.id = "remove-button-top-div";
+
+  let removeButton = document.createElement("button");
+  removeButton.id = "removeplantButton";
+  removeButton.innerText = "Remove plant";
+
+  let removeInfoButton = document.createElement("div");
+  removeInfoButton.id = "remove_button_info";
+  removeInfoButton.innerText = "?";
+
+  removeInfoButton.addEventListener("mouseover", function () {
+    removeInfo.style.opacity = "1";
+  });
+  removeInfoButton.addEventListener("mouseout", function () {
+    removeInfo.style.opacity = "0";
+  });
+
+  let removeInfo = document.createElement("div");
+  removeInfo.id = "plant_remove_info_text";
+  if (isAlive) {
+    removeInfo.innerText =
+      "Your plant is fully grown, remove it to plant a new one (optional)";
+    removeButton.addEventListener("click", displayConfirmButton);
+  } else {
+    removeInfo.innerText = "Your plant has died, remove it to plant a new one";
+    removeButton.addEventListener("click", resetPlant);
+  }
+
+  removeButtonTopDiv.appendChild(removeInfo);
+
+  removeButtonBottomDiv.appendChild(removeButton);
+  removeButtonBottomDiv.appendChild(removeInfoButton);
+
+  removeButtonDiv.appendChild(removeButtonTopDiv);
+  removeButtonDiv.appendChild(removeButtonBottomDiv);
+  return removeButtonDiv;
 }
-function createConfirmButton() {
 
+function displayConfirmButton() {
+  let removeplantButton = document.getElementById("removeplantButton");
+  removeplantButton.innerText = "Are you sure?";
+  removeplantButton.classList.add("plantConfirmationButton");
+  removeplantButton.addEventListener("click", resetPlant);
 }
 //plant logic
 
-function userWateredPlant() {
-    getPlantData().then(data => {
-        data.lastWaterTime = new Date();
-        browser.runtime.sendMessage({ action: 'setPlantData', data: data });
-        updatePlantBottomUI(data)
-    })
+async function userWateredPlant() {
+  let data = await browser.runtime.sendMessage({
+    action: "getPlantAppData",
+  });
+  data.lastWaterTime = new Date();
+  await browser.runtime.sendMessage({ action: "setPlantAppData", data: data });
+  updatePlantBottomUI(data);
 }
 
 function calculateGrowth(data) {
-    const currentTime = new Date().getTime();
-    const msIn1Day = (1000 * 60 * 60 * 24)
-    const daysSinceLastGrow = currentTime - data.lastGrowTime / msIn1Day
-    const daysSinceLastWater = currentTime - data.lastWaterTime / msIn1Day
-    if (daysSinceLastGrow >= 2 && data.age != 8) { // check if plant should grow
-        data.age += 1
-        lastGrowTime = currentTime
-    }
-    if (data.age > 8) data.age = 8; // some bug in previous code
-    if (daysSinceLastWater > 3 && data.age != 1) data.isAlive = false // check if plant should die
-    if (data.age == 2 && data.birthday == null) data.birthday = currentTime // check if plant is no longer a seed
-    if (data.birthday != null) { // update birthday
-        data.daysSinceBirthday = (data.isAlive ? Math.round((currentTime - data.birthday) / (1000 * 60 * 60 * 24)) : current_conditions.time_since_birthday_days + 1) + 1
-    }
-    browser.runtime.sendMessage({ action: 'setPlantData', data: data });
-    return data
+  const currentTime = new Date();
+  const lastGrowTime = new Date(data.lastGrowTime);
+  const lastWaterTime = new Date(data.lastWaterTime);
+  const msIn1Day = 1000 * 60 * 60 * 24;
+  const daysSinceLastGrow = (currentTime - lastGrowTime) / msIn1Day;
+  const daysSinceLastWater = (currentTime - lastWaterTime) / msIn1Day;
+  if (daysSinceLastGrow >= 2 && data.age != 8) {
+    // check if plant should grow
+    data.age += 1;
+    data.lastGrowTime = currentTime;
+  }
+  if (data.age > 8) data.age = 8; // some bug in previous code
+  if (daysSinceLastWater > 3 && data.age != 1) data.isAlive = false; // check if plant should die
+  if (data.age > 1 && data.birthday == null) data.birthday = currentTime; // check if plant is no longer a seed
+  if (data.birthday != null && data.isAlive) {
+    data.daysSinceBirthday = Math.round(
+      (currentTime - new Date(data.birthday)) / (1000 * 60 * 60 * 24) + 1
+    );
+  }
+  browser.runtime.sendMessage({ action: "setPlantAppData", data: data });
+  return data;
 }
 function plantThePlant() {
-    const colorArray = ["#fcb528", "#00adfe", "#f474d8", "#c9022b", "#ff6000", "#ff596e", "#6024c9", "#de51c1", "#d8d475", "#f5cb04"]
-    let plantData = {
-        age: 1,
-        lastWaterTime: new Date(),
-        lastGrowTime: new Date(),
-        uniqueColor: colorArray[Math.floor(Math.random() * colorArray.length)],
-        plantVersion: plantVersion,
-        birthday: null,
-        daysSinceBirthday: 0,
-        isAlive: true
-    }
-    browser.runtime.sendMessage({ action: 'setPlantData', data: plantData });
-    createPlantWidget()
+  const colorArray = [
+    "#fcb528",
+    "#00adfe",
+    "#f474d8",
+    "#c9022b",
+    "#ff6000",
+    "#ff596e",
+    "#6024c9",
+    "#de51c1",
+    "#d8d475",
+    "#f5cb04",
+  ];
+  let plantData = {
+    age: 1,
+    lastWaterTime: new Date(),
+    lastGrowTime: new Date(),
+    uniqueColor: colorArray[Math.floor(Math.random() * colorArray.length)],
+    plantVersion: plantVersion,
+    birthday: null,
+    daysSinceBirthday: 0,
+    isAlive: true,
+  };
+  browser.runtime.sendMessage({ action: "setPlantAppData", data: plantData });
+  createPlantWidget(document.getElementById("plantWidget"));
 }
 function createPlantThePlantVisual() {
-    let plantThePlantButton = document.createElement("button")
-    plantThePlantButton.classList.add("planttheplantbutton")
-    plantThePlantButton.addEventListener("click", plantThePlant)
-    plantThePlantButton.innerHTML = plantThePlantSvg
-    return plantThePlantButton
+  let plantThePlantButton = document.createElement("button");
+  plantThePlantButton.classList.add("planttheplantbutton");
+  plantThePlantButton.addEventListener("click", plantThePlant);
+  plantThePlantButton.innerHTML = plantThePlantSvg;
+  return plantThePlantButton;
 }
 function getPlantHTML(data) {
-    let age = Number(data.age)
-    let isAlive = Boolean(data.isAlive)
-    var style = document.documentElement.style
-    switch (age) {
-        case (0):
-            if (isAlive) {
-                return `<div id="planttheplantbutton">
+  let age = Number(data.age);
+  let isAlive = Boolean(data.isAlive);
+  var style = document.documentElement.style;
+  switch (age) {
+    case 0:
+      if (isAlive) {
+        return `<div id="planttheplantbutton">
                 <svg xmlns="http://www.w3.org/2000/svg" id="plant_the_plant_svg" data-name="Laag 2" viewBox="0 0 50.16 37.5">
                     <defs>
                     <!-- Clip-path for the rising effect -->
@@ -226,19 +315,21 @@ function getPlantHTML(data) {
                     </g>
                     </g>
                 </svg>
-                </div>`}
-            return `Stage 0 died, how? How have you done this? This is the stage before the plant is planted and you've already managed to kill it????`
-        case (1):
-            if (isAlive) {
-                return `<svg style="margin:107px" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 11.84 21.54">
+                </div>`;
+      }
+      return `Stage 0 died, how? How have you done this? This is the stage before the plant is planted and you've already managed to kill it????`;
+    case 1:
+      if (isAlive) {
+        return `<svg class="plant1" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 11.84 21.54">
                     <g id="Laag_1-2" data-name="Laag 1">
                         <path style="fill: #9c9081" d="M2.01.08C-.23.84-.06,6.65.07,11.26c.14,4.89.26,7.69,2.43,9.23,2.18,1.55,5.8,1.38,7.78-.49,2.72-2.56,1.24-7.3.49-9.72C9.05,4.83,4.48-.75,2.01.08Z"/>
                     </g>
-                    </svg>`}
-            return `HOW DID YOU KILL A SEED???`
-        case (2):
-            if (isAlive) {
-                return `<svg style="margin:91px" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 38.55 66.25">
+                    </svg>`;
+      }
+      return `HOW DID YOU KILL A SEED???`;
+    case 2:
+      if (isAlive) {
+        return `<svg class="plant2" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 38.55 66.25">
                     <defs>
                         <style>
                         .cls-1 {
@@ -266,8 +357,9 @@ function getPlantHTML(data) {
                         <path class="cls-1" d="M18.4,24.81l1.73,2.06S44,17.12,37.4.12c0,0-17.96-3.33-18.99,24.69Z"/>
                         </g>
                     </g>
-                    </svg>`}
-            return `<svg style="margin:91px" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 38.55 66.25">
+                    </svg>`;
+      }
+      return `<svg class="plant2" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 38.55 66.25">
   <defs>
     <style>
       .cls-1 {
@@ -300,10 +392,10 @@ function getPlantHTML(data) {
 <path style="fill:#5b4511;fill-opacity:1;stroke:none;stroke-width:5.16583;stroke-miterlimit:5.6;stroke-dasharray:none;paint-order:stroke fill markers" d="m 25.691215,21.767008 c -2.909202,2.022494 -7.218185,-11.457302 -4.362028,-8.877702 0.467985,0.42267 1.9297,4.01051 1.9297,4.01051 m 7.226205,1.731078" id="path14-2-4-7" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="csc"/>
 <path style="fill:#5b4511;fill-opacity:1;stroke:none;stroke-width:5.16583;stroke-miterlimit:5.6;stroke-dasharray:none;paint-order:stroke fill markers" d="m 14.834057,26.075254 c 0.178028,-3.538679 -13.5413244,-0.06714 -9.8415113,0.992747 0.6062184,0.173662 4.4243081,-0.483146 4.4243081,-0.483146 m 5.2907142,5.217567" id="path14-2-49" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="csc"/>
 </g>
-</svg>`
-        case (3):
-            if (isAlive) {
-                return `<svg style="margin:81px" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 62.54 117.42">
+</svg>`;
+    case 3:
+      if (isAlive) {
+        return `<svg class="plant3" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 62.54 117.42">
   <defs>
     <style>
       .cls-1 {
@@ -332,8 +424,9 @@ function getPlantHTML(data) {
   <path class="cls-1" d="m 43.7,25.27 c 0,0 -2.88,-23.87 14.74,-25.27 0,0 15.432656,10.643906 -13.647344,27.733906 l -1.090469,-2.424844 z" id="path5" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="ccccc"/>
 </g>
 </g>
-</svg>`}
-            return `<svg style="margin:81px" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 62.54 117.42">
+</svg>`;
+      }
+      return `<svg class="plant3" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 62.54 117.42">
   <defs>
     <style>
       .cls-1 {
@@ -364,10 +457,10 @@ function getPlantHTML(data) {
 <path style="fill:#5b4511;stroke-width:3.2777;stroke-miterlimit:5.6;paint-order:stroke fill markers" d="m 35.251155,26.980539 c 4.544881,-5.492481 3.808783,-8.138153 3.808783,-8.138153 l -0.205029,-0.365525 c 0,0 -0.78201,-1.164337 -1.543979,0.368339 -0.642525,1.292422 -0.666378,3.125278 -2.125059,4.79995 -1.517096,1.741733 -1.409531,1.834582 -1.025835,2.830576 0.422585,1.096937 1.091119,0.50481 1.091119,0.50481 z" id="path5-7-4" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="cccsssc"/>
 <path style="fill:#5b4511;stroke-width:3.36229;stroke-miterlimit:5.6;paint-order:stroke fill markers" d="m 21.296964,38.752476 c 1.955474,-6.855839 0.10686,-9.020797 0.10686,-9.020797 l -0.353972,-0.258926 c 0,0 -1.250515,-0.774676 -1.313236,0.941593 -0.05289,1.447234 0.718576,3.154618 0.05277,5.273339 -0.692532,2.203547 -0.549627,2.247766 0.247978,3.021347 0.878443,0.851982 1.259595,0.04345 1.259595,0.04345 z" id="path5-7-0" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="cccsssc"/>
 </g>
-</svg>`
-        case (4):
-            if (isAlive) {
-                return `<svg style="margin:73px" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 45.58 126.74">
+</svg>`;
+    case 4:
+      if (isAlive) {
+        return `<svg class="plant4" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 45.58 126.74">
   <defs>
     <style>
       .cls-1 {
@@ -403,8 +496,9 @@ function getPlantHTML(data) {
       <path class="cls-3" d="M31.98,38.83s1.84-5.04,6.74-3.4c0,0,.5,4.35-5.94,4.74l-.8-1.33Z"/>
     </g>
   </g>
-</svg>`}
-            return `<svg style="margin:73px" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 45.58 126.74">
+</svg>`;
+      }
+      return `<svg class="plant4" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 45.58 126.74">
   <defs>
     <style>
       .cls-1 {
@@ -452,10 +546,10 @@ function getPlantHTML(data) {
 <path style="fill:#5b4511;stroke-width:1.39203;stroke-miterlimit:5.6;paint-order:stroke fill markers" d="m 35.885009,20.543724 c 3.407365,0.364514 3.892569,-0.434092 3.892569,-0.434092 l 0.02621,-0.14474 c 0,0 0.03251,-0.504003 -0.71824,-0.437111 -0.633059,0.0564 -1.180157,0.431888 -2.247894,0.296458 -1.110495,-0.140854 -1.095225,-0.08561 -1.235763,0.250529 -0.154792,0.370202 0.283123,0.468968 0.283123,0.468968 z" id="path5-7-14-55" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="cccsssc"/>
 <path style="fill:#5b4511;stroke-width:2.16045;stroke-miterlimit:5.6;paint-order:stroke fill markers" d="m 41.759214,11.120231 c -3.891078,2.491939 -5.899553,1.984224 -5.899553,1.984224 L 35.57743,12.97398 c 0,0 -0.904924,-0.490896 0.204108,-0.89066 0.935182,-0.3371 2.302119,-0.297048 3.485173,-1.099432 1.230428,-0.834518 1.304664,-0.768978 2.065667,-0.515609 0.838131,0.279044 0.426836,0.651957 0.426836,0.651957 z" id="path5-7-14-22" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="cccsssc"/>
 </g>
-</svg>`
-        case (5):
-            if (isAlive) {
-                return `<svg style="margin:61px" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 59.61 138.61">
+</svg>`;
+    case 5:
+      if (isAlive) {
+        return `<svg class="plant5" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 59.61 138.61">
   <defs>
     <style>
       .cls-1 {
@@ -484,8 +578,9 @@ function getPlantHTML(data) {
 </g>
 <path class="cls-1" d="m 49.814191,104.87397 c 0.88,-0.1 1.28,-0.24 2.08,-0.15 1.35,0.13 2.76,0.47 4.1,0.86 l -0.11,-0.1 0.2,0.13 c 0,0 -0.06,-0.01 -0.09,-0.03 l 2.66,2.29 c 0.92,0.87 2.34,1.03 3.55,1.03 v -0.2 c -0.58,-0.08 -1.17,-0.21 -1.71,-0.42 -0.57,-0.21 -1.01,-0.44 -1.4,-0.93 l -2.44,-2.63 c -1.41,-0.7 -2.96,-1.13 -4.56,-1.49 -1.41,-0.3 -2.82,0.18 -4.1,-0.54 -2.25,-1.25 -4.74,-2.14 -7.33,-2.52 -0.14,-0.11 -0.737897,-0.303856 -0.877897,-0.403856 -2.616658,-1.144232 -4.134205,-0.97523 -4.254205,-1.54523 l -2.272536,0.02775 c -1.04,0.14 -3.930916,0.719337 -4.900916,1.039337 -3.12,1.059999 -6.124446,2.421999 -8.914446,4.101999 -3.25,1.01 -6.87,1.09 -10.2500001,1.6 v 0.19 c 2.3700001,0.11 4.7300001,0.21 7.1000001,0.13 -3.79,2.29 -10.3700002,6.44 -13.7100002,8.66 l 0.1,0.18 15.0000002,-7.83 c 0.99,-0.52 1.99,-1.01 3,-1.5 0.14,0 0.29,0 0.42,0.03 0.03,-0.06 0.05,-0.1 0.05,-0.11 0.03,0.03 0.05,0.1 0.09,0.15 0.1,0.03 0.13,0.09 0.04,0.04 -0.01,-0.01 -0.03,-0.01 -0.04,-0.04 -0.04,-0.01 -0.09,-0.03 -0.14,-0.04 -0.13,0.25 -0.47,0.84 -0.82,1.31 -0.88,1.21 -1.9,2.44 -2.78,3.84 l 0.13,0.15 c 1.93,-0.84 3.69,-2.05 4.97,-3.76 0.72,-1.07 0.69,-2.01 0.24,-2.62 0.81,-0.4 1.6,-0.82 2.37,-1.27 l 3.672223,-1.93155 c 0.53,-0.29 0.521102,-0.33355 1.181102,-0.703555 0.365229,-0.197452 0.983238,0.150325 0.576671,0.525105 v 0 c -2.15,2.33 -4.17,4.73 -6.12,7.21 l 0.08,0.49 c 0.24,1.96 0.67,4.54 -0.1,6.44 -1.33,0.65 -2.57,1.17 -3.94,1.62 -3.39,0.45 -6.41,1.84 -8.84,4.26999 l 0.13,0.15 c 2.14,-1.22999 4.59,-2.39999 7.05,-2.49999 0.35,0.06 0.7,0.09 1.07,0.09 -3.39,2.61999 -5.94,6.60999 -8.26,9.98999 l 0.15,0.11 c 3.28,-3.51 6.49,-7.45 10.67,-9.82999 0.01,0 0.04,-0.01 0.05,-0.01 0.31,-0.08 0.6,-0.18 0.88,-0.3 3.78,-1.55 3.8,-6.31 3.18,-9.97 1.2,-1.56 2.39,-3.11 3.62,-4.63 0.57,-0.68 1.16,-1.41 1.76,-2.11 0.25,-0.03 0.48,-0.08 0.6,-0.04 0.38,0.11 0.768115,0.54356 0.914658,1.0216 0.214178,0.69868 0.875342,1.0184 1.275342,1.0284 0.03,3.05 -1.77,6.13 -3.06,8.78 -0.04,0.14 -0.09,0.26 -0.13,0.4 -1.75,2.37 -3.94,4.58 -6.05,6.71 l 0.13,0.15 c 1.6,-1.18 3.4,-2.44 4.95,-3.8 -0.5,1.69 -0.88,3.41 -0.89,5.20999 0.04,0.35 0.03,0.69 0.3,1.23 -0.53,0.21 -0.99,0.48 -1.45,0.78 -0.42,0.29 -0.86,0.86 -0.99,1.36 -0.67,2.32 -0.31,4.77 0.35,6.92 l 0.19,-0.04 c 0.06,-1.69 0.19,-3.47 0.7,-5.05 0.48,-1.3 1.49,-2.05 2.08,-3.25 0.03,0.03 0.04,0.03 0.05,0.03 0.81,0.28 1.47,1.12 2,1.99 -0.11,3.93 0.87,8.03 -0.11,11.87 -0.37,1.27 -0.97,2.52 -1.72,3.64 l 0.15,0.14 c 4.39,-4.18 3.22,-10.66 3.6,-16.14 -0.68,-1.3 -1.55,-2.68 -3.08,-3.32 v 0.08 c 0,0 -0.08,-0.1 -0.14,-0.13 0,-0.01 -0.01,-0.01 -0.03,-0.03 0.06,0.01 0.11,0.04 0.16,0.08 -0.13,-1.94999 0.72,-4.84999 1.26,-6.85999 0.65,2.34 1.25,4.68 2.4,6.90999 l 0.19,-0.03 c 0.28,-1.71999 0.19,-3.40999 -0.06,-5.07999 -0.16,-0.92 -0.69,-3.28 -1.67,-4.24 1.11,-2.45 2.28,-5.03 2.34,-7.69 1.84,2.2 3.81,4.38 5.05,6.93 0.21,0.79 0.24,1.61 0.19,2.44 -0.62,0.34 -1.2,0.78 -1.74,1.32 -0.64,0.64 -0.86,1.74 -1.02,2.62 -0.15,0.86 -0.43,1.71 -0.29,2.57999 0.19,0.93 0.38,1.86 1.16,2.54 l 0.18,-0.1 c 0.29,-0.83 0.54,-1.64 0.64,-2.44 0.15,-1.19999 -0.23,-2.44999 -0.13,-3.65999 0.05,-0.86 0.57,-1.59 1.15,-2.25 -0.14,1.4 -0.47,2.82 -0.57,4.18 -0.39,3.90999 2.37,7.29999 4.74,10.06999 l 0.14,-0.14 c -1.57,-1.9 -2.98,-4 -3.83,-6.31 -0.77,-1.83 -0.39,-3.68999 0,-5.62999 0.19,0.76 0.58,1.46 0.93,2.14 0.65,1.08 1.33,2.15999 2.27,3.00999 2.27,1.33 4.59,2.67 6.63,4.32 1.52,1.32 1.47,3.57 1.13,5.45 l 0.19,0.06 c 0.63,-1.71 0.94,-3.78 0.04,-5.49 -1.02,-1.55 -2.66,-2.64 -4.03,-3.83 -0.91,-0.73 -1.77,-1.47 -2.73,-2.14 -1.01,-1.16999 -2.28,-2.38999 -3.34,-3.54999 -0.31,-0.37 -0.65,-0.72 -0.87,-1.13 0.03,-0.14 0.05,-0.29 0.08,-0.43 0.2,-1.23 0.39,-2.57 0.04,-3.91 -0.34,-1.31 -1.22,-2.32 -1.95,-3.4 -0.99,-1.4 -2.1,-2.87 -3.22,-4.34 0.13,-0.09 0.339668,-0.74879 0.369668,-0.84879 0.23,-0.63 0.235372,-0.62056 1.075372,-1.20056 0.597255,-0.18359 1.134964,0.20935 1.494964,0.50935 1.56,1.51 3.05,3.64 4.32,5.45 0.52,0.54 1.01,1.11 1.47,1.7 -0.1,0.64 -0.34,1.18 -0.48,1.84 -0.23,0.81 -0.15,1.72 -0.21,2.64 -0.05,0.98 -0.23,2.06 0.25,3 0.53,0.96 1.35,1.55 2.23,1.89 l 0.09,-0.18 c -0.67,-0.57 -1.25,-1.31 -1.38,-2.05 -0.19,-0.79 0.16,-1.59 0.37,-2.38 0.24,-0.86 0.67,-1.71 0.63,-2.69 0.62,0.94 1.18,1.91 1.72,2.91 1.8,2.11 4.58,3.49 6.85,4.52 2.08,1.49999 4.09,3.78999 3.95,6.50999 l 0.2,0.03 c 0.21,-2.11 -0.92,-4.08 -2.32,-5.57999 -0.49,-0.5 -1.01,-0.98 -1.57,-1.41 -2.3,-1.18 -4.82,-2.55 -6.42,-4.58 -1.09,-2.34 -2.91,-5.16 -4.42,-6.75 -0.1,-0.15 -0.2,-0.31 -0.3,-0.47 2.15,1.03 4.73,1.59 6.57,2.89 l 0.09,0.18 c 0.16,-0.13 0.09,-0.25 0.06,-0.33 -0.53,-0.89 -1.51,-1.42 -2.33,-2.04 -2.5,-1.41 -4.42,-3.25 -6.97,-4.41 -0.01,-0.04 -0.05,-0.08 -0.09,-0.11 0.93,0.52 1.86,1.01 2.77,1.52 1.31,0.81 3.01,1.55 4.64,1.35 z m -29.95,-0.02 c 0.03,-0.06 0.05,-0.1 0.05,-0.11 0.03,0.03 0.05,0.1 0.09,0.15 -0.04,-0.01 -0.09,-0.03 -0.14,-0.04 z" id="path1" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="cccccccccccccccccccccccccccccccccccccccccsscccccccccccccccccscccccccccccccccccccccccccccccccccsccccscccccccccccccccccccccccccccccccccccccccccccccccccccccccc" style="fill:#9c9081;stroke-width:0px"/>
 </g>
-</svg>`}
-            return `<svg style="margin:61px" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 59.61 138.61">
+</svg>`;
+      }
+      return `<svg class="plant5" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 59.61 138.61">
   <defs>
     <style>
       .cls-1 {
@@ -533,10 +628,10 @@ function getPlantHTML(data) {
 <path style="fill:#5b4511;stroke-width:1.88866;stroke-miterlimit:5.6;paint-order:stroke fill markers" d="m 19.457704,35.201636 c 0.353601,-4.102278 -0.798477,-5.82334 -0.798477,-5.82334 l -0.205883,-0.228774 c 0,0 -0.714087,-0.717502 -0.583891,0.383115 0.109786,0.928088 0.666608,2.166922 0.525824,3.424075 -0.146424,1.307494 -0.06904,1.36077 0.412849,1.999394 0.530732,0.703352 0.649576,0.245532 0.649576,0.245532 z" id="path5-7-14-92" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="cccsssc" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" inkscape:transform-center-x="0.083556753" inkscape:transform-center-y="-0.37600539"/>
 <path style="fill:#5b4511;stroke-width:1.97381;stroke-miterlimit:5.6;paint-order:stroke fill markers" d="m 23.62895,21.589911 c 3.754562,4.032177 4.674387,3.468157 4.674387,3.468157 l 0.09569,-0.166448 c 0,0 0.265651,-0.640664 -0.628228,-1.332098 -0.753779,-0.583037 -1.55318,-0.649635 -2.720113,-1.941543 -1.213662,-1.343647 -1.221114,-1.253828 -1.535011,-0.950179 -0.345717,0.334417 0.113301,0.922104 0.113301,0.922104 z" id="path5-7-14-76" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="cccsssc"/>
 </g>
-</svg>`
-        case (6):
-            if (isAlive) {
-                return `<svg style="margin:30px" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 85.57 145.53">
+</svg>`;
+    case 6:
+      if (isAlive) {
+        return `<svg class="plant6" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 85.57 145.53">
   <defs>
     <style>
       .cls-1 {
@@ -561,8 +656,9 @@ function getPlantHTML(data) {
 <path class="cls-2" d="m 58.94,49.49 c -2.16,2.14 -4.878388,5.685981 -7.398388,8.265981 -0.77,1.89 -0.667729,1.811262 -2.437418,4.441436 -0.744932,0.668951 -1.279589,2.221357 -1.432116,5.233767 0,0 0.0051,-0.126174 -0.0021,-0.0012 -0.06845,1.194075 0.81,22.05 0.88,23.06 0.06,1.01 0.44514,10.701076 1.49139,11.794826 l -13.053426,0.23081 c 0,0 2.084536,-10.515636 -0.05796,-33.765636 -0.4,-4.03 -1.295223,-6.254757 -1.295223,-6.254757 0,0 -0.275243,-0.697418 -0.974777,-1.745243 C 29.06,55.61 21.859375,52.483125 21.799375,52.453125 L 23.77,51.03 c 0.24,0.1 4.92,2.1 9.96,6.12 -2,-2.51 -5.131864,-6.345495 -7.531864,-9.195495 L 28.49,47.37 c 5.05,6.03 6.732813,7.8925 8.292813,10.0225 0.452812,0.955625 1.390937,0.944688 1.239687,0.135625 -1.31,-3.42 -3.645083,-8.734339 -5.865083,-13.034339 L 34.19,43.8 c 0.63,1.21 5.06195,8.926669 6.62195,13.356669 0.163125,0.66625 0.843182,0.688353 0.99555,0.698543 0.66838,-0.191391 0.538107,-0.759886 0.614358,-1.350511 0.01,-4.09 0.708142,-8.115109 0.628142,-12.515109 L 45.18,44.26 c 0.08,4.45 0.345728,10.679029 0.315728,14.969029 0.234913,1.483728 1.069029,0.687262 1.68266,0.561612 1.109767,-0.498952 0.98,-0.643301 1.401612,-1.240641 2.59,-5.67 4.46,-12.46 4.49,-12.57 l 2.06,0.56 c -0.08,0.3 -1.06,3.84 -2.59,7.96 2.75,-2.79 5.09,-5.12 5.7,-5.72 z" id="path2" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="ccccscccccccccccccccccccccccccccc"/>
 <path class="cls-3" d="M75.96,47.85c-1.15.2-2.11,1.04-2.38,2.18-.56,2.35-2.46,5.3-8.86-1.02-.02-.02-.05-.05-.07-.07-.01.02-.02.04-.03.05-.69,1.34-5.68.51-5.68.51l-.7-.71s-1.06-.78-1.3-1.73h-.01s-.05-.01-.05-.01c-1,.07-1.75-.5-1.75-.5l-.29-.08c-.99-.27-2.01-.33-3.03-.27-.92.05-2.12-.09-2.8-1.04-.87-1.21-1.81-2-2.27-2.35-.08-.06-.19.02-.16.12.12.48.12,1.31-1.39,1.34l-2.1.05s-.04,0-.06-.02c-.17-.11-1.09-.77-1.28-1.52-.02-.1-.15-.12-.19-.03-.25.48-.7,1.06-1.44,1.06-.32,0-1.61-.42-2.76-.83-.86-.31-1.77,0-2.4.65-.21.22-.46.32-.77.18l-1.86.95s-.05.02-.08,0c-.02,0-.04-.01-.06-.02-1.17-.37-2.4.27-2.73,1.46-.29,1.04-.63,1.78-.97,1.17l-.39.33c-.83.69-1.93.97-2.99.76h0c-.59-.17-1.13.37-1,.96.18.81.2,1.57-.34,1.61-.54,1.28-1.78,2.12-3.16,2.16-.77.02-1.54-.02-1.94-.19-.95-.41-.59,6.45-5.28,3.58-.59-.36-1.29-.49-1.95-.3-2.01.59-6.15,1.35-4.93-2.89.26-.9-.19-1.86-1.03-2.27-1.06-.53-2.12-1.59-1.63-3.73.19-.83-.28-1.7-1.08-2-1.86-.71-4.28-2.52-1.54-6.98.83-1.35.92-3.03.37-4.52-.33-.88-.29-1.86.88-2.53.92-.53,1.3-1.65.84-2.61-1.27-2.68-2.46-7.14,3.56-7.19.92,0,1.65-.8,1.57-1.71-.08-.85.22-1.75,1.61-2.14.75-.21,1.19-.97,1.06-1.73-.55-3.09-.77-9.51,7.77-6.62.93.31,1.88-.3,2.01-1.27.13-1.05.76-1.98,2.73-1.49.91.22,1.81-.35,1.98-1.27.47-2.48,2.01-6.06,7.13-2.51.82.57,1.92.56,2.7-.05.71-.55,1.68-.9,2.68,0,.71.63,1.77.69,2.57.17,1.28-.84,3.1-1.55,4.43-.1.6.65,1.64.65,2.25,0,2.16-2.28,6.44-5.49,9.2,1.04.43,1.01,1.61,1.4,2.61.96.91-.39,1.91-.33,2.38,1.39.27,1.01,1.34,1.59,2.35,1.34,3.18-.77,8.55-1.15,5.48,6.27-.39.94.32,1.99,1.34,1.98,2.16-.02,5,.77,5.09,5.01.03,1.4,1.07,2.58,2.46,2.71,2.27.21,4.65,1.23,1.38,5.15-.73.87-.5,2.2.52,2.71,1.74.88,3.34,2.55.27,5.39-.75.69-.82,1.86-.18,2.65,1.9,2.36,4.28,6.95-4.3,8.41Z" id="path3"/>
 </g>
-</svg>`}
-            return `<svg style="margin:30px" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 85.57 145.53">
+</svg>`;
+      }
+      return `<svg class="plant6" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 85.57 145.53">
   <defs>
     <style>
       .cls-1 {
@@ -616,10 +712,10 @@ function getPlantHTML(data) {
 <path style="fill:#5b4511;stroke-width:2.1644;stroke-miterlimit:5.6;paint-order:stroke fill markers" d="m 44.44825,47.944705 c 3.760823,-5.135805 3.737855,-4.019648 3.776144,-4.037365 0.252346,-0.11679 -0.298304,1.211469 -0.344756,0.977276 0,0 -0.238433,0.108992 -1.510279,1.811768 -0.286108,0.383052 -2.293612,2.769741 -2.293612,2.769741 z" id="path22-8-2-6-1" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="cssscc"/>
 <path style="fill:#5b4511;stroke-width:2.84623;stroke-miterlimit:5.6;paint-order:stroke fill markers" d="m 16.630101,47.946257 c -6.022568,-1.545116 -5.075723,-2.473624 -5.108036,-2.519245 -0.212985,-0.300651 1.15229,-0.572694 0.976988,-0.296271 0,0 0.200102,0.285249 2.208253,0.837235 0.451747,0.124164 3.368928,1.255689 3.368928,1.255689 z" id="path22-8-2-6-3" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="cssscc"/>
 </g>
-</svg>`
-        case (7):
-            if (isAlive) {
-                return `<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 132.59 173.99">
+</svg>`;
+    case 7:
+      if (isAlive) {
+        return `<svg class="plant7" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 132.59 173.99">
   <defs>
     <style>
       .cls-1 {
@@ -646,8 +742,9 @@ function getPlantHTML(data) {
 </a>
 <path class="cls-3" d="m 128.97,64.94 c 0,0 -0.14,3.2 -1.4,3.44 0,0 -0.63,7.17 -7.55,2.31 0,0 -2.92,3.88 -8.11,1.67 -2.34372,1.389452 -4.26479,1.828862 -6.3975,1.1825 0,0 -0.5025,-0.1525 -2.3925,-1.4125 0,0 -2.86,3.13 -6.91,3.28 -0.77,0.05 -1.58,-0.03 -2.42,-0.26 -1.81,-0.48 -3.77,-1.65 -5.77,-3.92 0,0 -2.07,3.34 -5.06,3.14 -0.85,-0.06 -1.77,-0.4 -2.74,-1.18 -0.83,-0.66 -1.68,-1.65 -2.56,-3.04 0,0 -2.08,0.72 -4.51,-0.32 -0.71,-0.3 -1.45,-0.75 -2.18,-1.42 -0.68,-0.61 -1.34,-1.41 -1.96,-2.44 0,0 -1.55,4.59 -5.8,0.41 0,0 -1.06,1.42 -2.8,2.78 -0.47,0.38 -0.99,0.74 -1.55,1.08 -1.6,0.96 -3.55,1.65 -5.66,1.4 -1.28,-0.16 -2.64,-0.67 -4,-1.7 -1.08,-0.8 -2.16,-1.92 -3.24,-3.43 0,0 -0.34,2.39 -2.37,4.61 -0.51,0.55 -1.13,1.1 -1.87,1.59 -0.63,0.42 -1.36,0.81 -2.19,1.13 -1,0.39 -2.14,0.68 -3.46,0.85 -0.33,0.04 -0.66,0.1 -0.99,0.17 -0.39,0.08 -0.78,0.19 -1.16,0.3 -0.88,0.26 -2.2,0.48 -3.18,-0.07 -0.79,-0.44 -1.74,-0.26 -2.46,0.29 -0.68,0.53 -1.74,0.76 -3.36,0.05 0,0 -7.23,6.41 -7.37,-2.94 0,0 -3.5,1.17 -3.33,-1.62 0,0 -4.58,4.14 -4.76,-1.35 0,0 -7.15,3.78 -5.48,-3.59 0,0 -3.78,0.63 -1.62,-3.51 0,0 -4.84,-1.35 -0.67,-5.39 0,0 -1.03,-4.3 1.85,-4.79 0.93,-0.15 1.68,-0.85 1.75,-1.79 0.16,-2.25 1.14,-5.76 5.54,-6.18 1.02,-0.1 1.81,-0.92 1.88,-1.94 0.13,-1.81 0.51,-4.29 1.69,-4.67 0,0 -4.65,-3.98 1.08,-5.8 0,0 -2.42,-4.72 2.83,-3.91 0,0 1.05,-3.54 2.71,-4.34 0.83,-0.41 1.42,-1.2 1.53,-2.12 0.16,-1.43 0.86,-2.88 3.18,-2.17 0,0 0.94,-5.73 6.88,-5.39 0,0 0.06,-2.16 3.1,-2.43 0,0 3.1,-4.58 7.14,-1.48 0,0 -0.15,-6.39 3.81,-4.92 1.27,0.47 2.7,0.07 3.45,-1.06 1.94,-2.92 5.77,-6.87 9.87,-1.03 0,0 4.18,-2.3 5.26,-0.54 0,0 7.68,-4.52 10.92,0 0,0 4.24,1.88 3.37,4.31 0,0 5.8,0.54 5.66,2.97 0,0 15.42,-1.89 15.6,3.59 0,0 4.85,-1.61 4.85,2.16 0,0 10.7,1.62 9.53,5.93 0,0 6.02,2.25 2.34,5.76 0,0 6.2,4.76 3.41,8.8 0,0 3.87,1.53 2.16,4.32 0,0 5.93,1.53 3.77,5.21 0,0 3.42,1.86 1.26,5.29 0,0 6.13,3.61 0.86,6.4 0,0 8.14,4.94 0,7.73 z" id="path3" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"/>
 </g>
-</svg>`}
-            return `<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 132.59 173.99">
+</svg>`;
+      }
+      return `<svg class="plant7" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 132.59 173.99">
   <defs>
     <style>
       .cls-1 {
@@ -709,11 +806,11 @@ function getPlantHTML(data) {
 <path style="fill:#5b4511;stroke-width:1.56275;stroke-miterlimit:5.6;paint-order:stroke fill markers" d="m 94.107664,85.188192 c -3.468342,-0.732445 -6.415386,-1.800479 -6.44794,-1.826894 -0.21456,-0.174099 0.471794,-1.037272 0.490909,-0.865003 0,0 3.200018,0.729891 4.370235,0.996273 0.263243,0.05992 2.093282,0.666009 2.093282,0.666009 z" id="path22-5-8-2-1-11-6-26-5-9" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="cssscc"/>
 <path style="fill:#5b4511;stroke-width:1.56275;stroke-miterlimit:5.6;paint-order:stroke fill markers" d="m 39.908188,50.531635 c -2.134476,-2.830178 -3.655434,-5.571061 -3.662635,-5.61236 -0.04746,-0.272203 1.037011,-0.472366 0.938288,-0.329902 0,0 1.933803,2.652025 2.641328,3.621446 0.159165,0.218076 1.141167,1.87701 1.141167,1.87701 z" id="path22-5-8-2-1-11-6-26-5-2" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="cssscc" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" inkscape:transform-center-x="-0.42749388" inkscape:transform-center-y="0.14249796"/>
 </g>
-</svg>`
-        case (8):
-            style.setProperty("--fruit-color", data.uniqueColor)
-            if (isAlive) {
-                return `<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 132.59 174.07">
+</svg>`;
+    case 8:
+      style.setProperty("--fruit-color", data.uniqueColor);
+      if (isAlive) {
+        return `<svg class="plant8" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 132.59 174.07">
   <defs>
     <style>
       .cls-1 {
@@ -765,8 +862,9 @@ function getPlantHTML(data) {
   </g>
 </g>
 </g>
-</svg>`}
-            return `<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 132.59 174.07">
+</svg>`;
+      }
+      return `<svg class="plant8" xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 132.59 174.07">
   <defs>
     <style>
 
@@ -829,7 +927,6 @@ function getPlantHTML(data) {
 <path style="fill:#5b4511;stroke-width:1.56275;stroke-miterlimit:5.6;paint-order:stroke fill markers" d="m 94.107664,85.188192 c -3.468342,-0.732445 -6.415386,-1.800479 -6.44794,-1.826894 -0.21456,-0.174099 0.471794,-1.037272 0.490909,-0.865003 0,0 3.200018,0.729891 4.370235,0.996273 0.263243,0.05992 2.093282,0.666009 2.093282,0.666009 z" id="path22-5-8-2-1-11-6-26-5-9" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="cssscc"/>
 <path style="fill:#5b4511;stroke-width:1.56275;stroke-miterlimit:5.6;paint-order:stroke fill markers" d="m 39.908188,50.531635 c -2.134476,-2.830178 -3.655434,-5.571061 -3.662635,-5.61236 -0.04746,-0.272203 1.037011,-0.472366 0.938288,-0.329902 0,0 1.933803,2.652025 2.641328,3.621446 0.159165,0.218076 1.141167,1.87701 1.141167,1.87701 z" id="path22-5-8-2-1-11-6-26-5-2" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="cssscc" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" inkscape:transform-center-x="-0.42749388" inkscape:transform-center-y="0.14249796"/>
 </g>
-</svg>`
-    }
-
+</svg>`;
+  }
 }

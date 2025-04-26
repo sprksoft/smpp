@@ -1,7 +1,9 @@
-if (typeof browser === 'undefined') { var browser = chrome; }
-const liteMode = browser.runtime.getManifest().lite_mode
-const plantVersion = 3
-import { fetchDelijnData } from './api-background-script.js';
+if (typeof browser === "undefined") {
+  var browser = chrome;
+}
+const liteMode = browser.runtime.getManifest().lite_mode;
+const plantVersion = 2;
+import { fetchDelijnData } from "./api-background-script.js";
 
 function getDefaultQuickSettings(isLite) {
   if (isLite) {
@@ -12,8 +14,8 @@ function getDefaultQuickSettings(isLite) {
       backgroundSelection: 0,
       backgroundLink: null,
       backgroundBlurAmount: 0,
-      showNews: true
-    }
+      showNews: true,
+    };
   }
   return {
     theme: "ldev",
@@ -24,13 +26,13 @@ function getDefaultQuickSettings(isLite) {
     backgroundBlurAmount: 0,
     showNews: true,
     weatherOverlaySelection: 1,
-    weatherOverlayAmount: 0
-  }
+    weatherOverlayAmount: 0,
+  };
 }
 
 export async function getQuickSettingsData() {
   let data = await browser.storage.local.get("settingsData");
-  console.log(data)
+  console.log(data);
   return data.settingsData || getDefaultQuickSettings(liteMode);
 }
 
@@ -47,17 +49,19 @@ export async function getWeatherAppData(location) {
   let weatherAppData = data.weatherAppData || {
     weatherData: null,
     lastUpdateDate: new Date().toISOString(),
-    lastLocation: location || ""
+    lastLocation: location || "",
   };
 
-  weatherAppData.lastUpdateDate = new Date(weatherAppData.lastUpdateDate).toISOString();
+  weatherAppData.lastUpdateDate = new Date(
+    weatherAppData.lastUpdateDate
+  ).toISOString();
 
   await browser.storage.local.set({
     weatherAppData: {
       weatherData: weatherAppData.weatherData,
       lastUpdateDate: weatherAppData.lastUpdateDate,
-      lastLocation: weatherAppData.lastLocation
-    }
+      lastLocation: weatherAppData.lastLocation,
+    },
   });
 
   return weatherAppData;
@@ -68,18 +72,20 @@ export async function getDelijnColorData() {
     let data = await browser.storage.local.get("delijnColorData");
     let delijnColorData;
     if (data.delijnColorData?.kleuren != undefined) {
-      delijnColorData = data.delijnColorData
+      delijnColorData = data.delijnColorData;
     } else {
-      delijnColorData = await fetchDelijnData("https://api.delijn.be/DLKernOpenData/api/v1/kleuren")
+      delijnColorData = await fetchDelijnData(
+        "https://api.delijn.be/DLKernOpenData/api/v1/kleuren"
+      );
     }
 
     await browser.storage.local.set({
-      delijnColorData: delijnColorData
+      delijnColorData: delijnColorData,
     });
-    console.log('Retrieved Delijn Color Data.');
+    console.log("Retrieved Delijn Color Data.");
     return delijnColorData;
   } catch (error) {
-    console.error('Error retrieving Delijn Color Data:', error);
+    console.error("Error retrieving Delijn Color Data:", error);
   }
 }
 
@@ -102,7 +108,7 @@ export async function getPlantAppData() {
     plantVersion: plantVersion,
     birthday: null,
     daysSinceBirthday: 0,
-    isAlive: true
+    isAlive: true,
   };
   return plantAppData;
 }

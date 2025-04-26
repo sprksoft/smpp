@@ -1,12 +1,8 @@
-#plantdiv {
-  background-color: var(--color-base01);
-  padding: 20px;
-  border-radius: 15px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+#plantWidget {
   text-align: center;
-  max-width: 300px;
-  margin: 2%;
-  border: 3px solid var(--color-base03);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 #buttondivforplant {
@@ -20,18 +16,25 @@
 #watering_button {
   border: 3px solid var(--color-base03);
   background-color: var(--color-base02);
+  fill: var(--color-accent);
   border-radius: 10px;
   padding: 2.5px;
   flex: 1;
   height: 50px;
 }
 
+#watering_button.disabled {
+  fill: var(--color-base03);
+}
+#watering_button.disabled:hover {
+  cursor: not-allowed;
+}
 .enableAnimations #watering_button {
   transition: ease-in-out;
   transition-duration: 0.1s;
 }
 
-#watering_button:hover {
+#watering_button:hover:not(.disabled) {
   background-color: var(--color-base03);
   border-color: var(--color-accent);
   cursor: pointer;
@@ -51,7 +54,7 @@
   max-height: 50px !important;
 }
 
-.glass-container {
+#glass-container {
   flex: 1;
   border: 3px solid var(--color-base03);
   border-radius: 10px;
@@ -61,21 +64,25 @@
   overflow: hidden;
 }
 
-.glass-fill {
+#glass-fill {
   width: 100%;
-  background-color: var(--color-blue);
-  /* blue fill */
+  background: linear-gradient(
+    0deg,
+    rgba(2, 112, 182, 1) 0%,
+    rgba(56, 146, 219, 1) 40%,
+    rgba(77, 166, 240, 1) 100%
+  );
   position: absolute;
   bottom: 0;
 }
 
-.enableAnimations .glass-fill {
+.enableAnimations #glass-fill {
   transition: height 1.5s ease-in-out;
   /* smooth transition */
   /*lukas wat een stoeffer dat jij bent :/ */
 }
 
-#removeButtonDiv {
+#remove-button-bottom-div {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -91,11 +98,16 @@
   height: 32px;
   width: 32px;
   font-size: 17px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  margin-left: 10px;
+  text-align: center;
+  position: absolute;
+  right: 32px;
 }
-
+#remove-button-div {
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  display: flex;
+}
 .enableAnimations #remove_button_info {
   transition: ease-in-out;
   transition-duration: 0.1s;
@@ -112,6 +124,7 @@
   font-size: 17px;
   margin-top: 10px;
   margin-bottom: 10px;
+  font-weight: 600;
 }
 
 .enableAnimations #removeplantButton {
@@ -130,19 +143,18 @@
   cursor: pointer;
 }
 
-#removeButtonInfoDiv {
-  height: 10px;
-}
-
 #plant_remove_info_text {
-  top: -35px;
+  top: -45px;
   background-color: var(--color-base02);
   border: 2px solid var(--color-base03);
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 0.333rem 1.333rem;
   padding: 5px;
   border-radius: 10px;
   position: relative;
   opacity: 0;
   text-align: center;
+  font-size: 13px;
+  font-weight: 400;
 }
 
 .enableAnimations #plant_remove_info_text {
@@ -155,6 +167,7 @@
   color: var(--color-accent) !important;
   font-size: 50px !important;
   font-weight: 800 !important;
+  text-align: center !important;
 }
 
 .enableAnimations #plant_the_plant_svg {
@@ -167,7 +180,7 @@
 
 /* Rising/draining effect */
 .enableAnimations #riseMask {
-  transition: transform 0.4s cubic-bezier(.52, .56, .29, .98) !important;
+  transition: transform 0.4s cubic-bezier(0.52, 0.56, 0.29, 0.98) !important;
   y: 100% !important;
   /* Animate transform */
   /* Start hidden at the bottom */
@@ -210,4 +223,42 @@
 .plantConfirmationButton {
   border-color: var(--color-red) !important;
   color: var(--color-red) !important;
+}
+
+.planttheplantbutton {
+  background-color: transparent !important;
+  border: none !important;
+  width: 100% !important;
+}
+
+#remove-button-top-div {
+  height: 0px;
+  width: 90%;
+}
+
+.plant1,
+.plant2,
+.plant3,
+.plant4,
+.plant5,
+.plant6,
+.plant7,
+.plant8 {
+  aspect-ratio: 1;
+  width: 100%;
+}
+.plant1 {
+  scale: 0.2;
+}
+.plant2 {
+  scale: 0.5;
+}
+.plant3 {
+  scale: 0.6;
+}
+.plant4 {
+  scale: 0.8;
+}
+.plant5 {
+  scale: 0.9;
 }
