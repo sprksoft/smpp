@@ -4,7 +4,19 @@
   flex-direction: column;
   justify-content: center;
 }
-
+#plantPreviewWidget {
+  width: 150px;
+  aspect-ratio: 1;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+#plant-preview-title {
+  font-size: 25px;
+  font-weight: 700;
+}
 #buttondivforplant {
   display: flex;
   flex-direction: row;

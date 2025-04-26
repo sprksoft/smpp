@@ -6,11 +6,50 @@ class PlantWidget extends WidgetBase {
     plantDiv = await createPlantWidget(plantDiv);
     return plantDiv;
   }
+  async createPreview() {
+    let plantPreviewDiv = document.createElement("div");
+    plantPreviewDiv.id = "plantPreviewWidget";
+    let plantData = await browser.runtime.sendMessage({
+      action: "getPlantAppData",
+    });
+    if (plantData.age == null || plantData.age == 0) {
+      plantPreviewDiv.appendChild(createPlantThePlantVisual());
+    } else {
+      plantPreviewDiv.innerHTML = getPlantHTML(plantData);
+    }
+    let plantTitle = document.createElement("div");
+    plantTitle.id = "plant-preview-title";
+    plantTitle.innerText = "Plant";
+    plantPreviewDiv.appendChild(plantTitle);
+    return plantPreviewDiv;
+  }
 }
-
 registerWidget(new PlantWidget());
 
+async function migratePlantData() {
+  let oldData = JSON.parse(
+    window.localStorage.getItem("current_plant_conditions")
+  );
+  await browser.runtime.sendMessage({
+    action: "setPlantAppData",
+    data: {
+      age: oldData.age,
+      lastWaterTime: oldData.last_time_watered,
+      lastGrowTime: oldData.last_time_grew,
+      uniqueColor: oldData.plant_color,
+      plantVersion: oldData.plant_version,
+      birthday: oldData.birth_day,
+      daysSinceBirthday: oldData.time_since_birthday_days,
+      isAlive: oldData.is_alive,
+    },
+  });
+  window.localStorage.removeItem("current_plant_conditions");
+}
+
 async function createPlantWidget(plantDiv) {
+  if (window.localStorage.getItem("current_plant_conditions")) {
+    await migratePlantData();
+  }
   let plantData = await browser.runtime.sendMessage({
     action: "getPlantAppData",
   });
