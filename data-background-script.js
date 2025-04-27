@@ -3,7 +3,7 @@ if (typeof browser === "undefined") {
 }
 const liteMode = browser.runtime.getManifest().lite_mode;
 const plantVersion = 2;
-import { fetchDelijnData } from "./api-background-script.js";
+import { fetchDelijnData, fetchWeatherData } from "./api-background-script.js";
 
 function getDefaultQuickSettings(isLite) {
   if (isLite) {
@@ -47,7 +47,7 @@ export async function setWidgetData(widgetData) {
 export async function getWeatherAppData() {
   let data = await browser.storage.local.get("weatherAppData");
   let weatherAppData = data.weatherAppData || {
-    weatherData: null,
+    weatherData: await fetchWeatherData("Keerbergen"),
     lastUpdateDate: new Date().toISOString(),
     lastLocation: "Keerbergen",
   };

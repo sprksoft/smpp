@@ -1,4 +1,4 @@
-async function updateWeatherDiv(weatherData, isBig, timeDifferenceMins) {
+async function updateWeatherDivs(weatherData, isBig, timeDifferenceMins) {
   const rightContainer = document.getElementById("weathercontainer");
   const weatherDiv = document.createElement("div");
   const { name, main, weather, wind } = weatherData;
@@ -122,8 +122,8 @@ async function createWeatherApp(location, isBig) {
         lastLocation: location,
       },
     });
-    updateWeatherDiv(weatherData, isBig, 0);
+    updateWeatherDivs(weatherData, isBig, 0);
   } else {
-    updateWeatherDiv(weatherData, isBig, timeDifferenceMins);
+    updateWeatherDivs(weatherData, isBig, timeDifferenceMins);
   }
 }

@@ -1,5 +1,8 @@
 class WeatherWidget extends WidgetBase {
   async createContent() {
+    if (window.localStorage.getItem("lastlocation")) {
+      await migrateWeaterData();
+    }
     let weatherAppData = await browser.runtime.sendMessage({
       action: "getWeatherAppData",
     });
@@ -9,7 +12,7 @@ class WeatherWidget extends WidgetBase {
       weatherAppData = await updateWeatherData();
     }
     let weatherDiv = document.createElement("div");
-    weatherDiv.id = "weather-div";
+    weatherDiv.classList.add("weather-div");
     weatherDiv = await createWeatherWidget(weatherDiv, weatherAppData, false);
     return weatherDiv;
   }
@@ -38,7 +41,7 @@ class CompactWeatherWidget extends WidgetBase {
       weatherAppData = await updateWeatherData();
     }
     let compactWeatherDiv = document.createElement("div");
-    compactWeatherDiv.id = "compact-weather-div";
+    compactWeatherDiv.classList.add("weather-div");
     compactWeatherDiv = await createWeatherWidget(
       compactWeatherDiv,
       weatherAppData,
@@ -77,63 +80,81 @@ async function migrateWeaterData() {
 
 async function createWeatherWidget(container, data, isCompact) {
   let weatherData = data.weatherData;
-  console.log(weatherData);
   let widgetTop = document.createElement("div");
-  widgetTop.id = "weather-widget-top";
+  widgetTop.classList.add("weather-widget-top");
   if (isCompact) container.classList.add("compact");
   let widgetBottom = document.createElement("div");
-  widgetBottom.id = "weather-widget-bottom";
+  widgetBottom.classList.add("weather-widget-bottom");
 
   let locationInput = document.createElement("input");
-  locationInput.id = "weather-location-input";
+  locationInput.classList.add("weather-location-input");
   locationInput.value = data.lastLocation;
   locationInput.type = "text";
   locationInput.classList.add("inactive");
   locationInput.addEventListener("focus", editWeatherLocation);
+  locationInput.addEventListener("change", updateWeatherLocation);
+  widgetTop.appendChild(locationInput);
+  if (weatherData.cod != 200) {
+    widgetBottom.appendChild(createNotFoundIcon());
+    container.appendChild(widgetTop);
+    container.appendChild(widgetBottom);
+    return container;
+  }
+  widgetBottom = createWidgetBottomUI(widgetBottom, weatherData, isCompact);
+  container.appendChild(widgetTop);
+  container.appendChild(widgetBottom);
 
+  return container;
+}
+
+function createWidgetBottomUI(widgetBottom, weatherData, isCompact) {
+  widgetBottom.innerHTML = "";
   let description = document.createElement("span");
   description.classList.add("weather-description");
   description.innerText = weatherData.weather[0].main;
 
   let mainIcon = document.createElement("div");
-  mainIcon.id = "weather-icon-container";
+  mainIcon.classList.add("weather-icon-container");
   mainIcon.innerHTML = getWeatherIcon(
     weatherData.weather[0].main,
     weatherData.weather[0].description
   );
 
   let temperature = document.createElement("span");
-  temperature.id = "weather-temperature";
+  temperature.classList.add("weather-temperature");
   temperature.innerText = Math.round(weatherData.main.temp) + "°C";
 
-  let conditionsContainer;
+  let conditionsContainer = document.createElement("div");
 
-  let humidityContainer;
-
+  let humidityContainer = document.createElement("div");
   let humidityIcon = document.createElement("div");
   humidityIcon.innerHTML = humiditySvg;
+  let humidity = document.createElement("span");
+  humidity.classList.add("weather-humidity");
+  humidity.innerText = weatherData.main.humidity + "%";
+  humidityContainer.appendChild(humidityIcon);
+  humidityContainer.appendChild(humidity);
 
-  let humidity;
-
-  let feelsLikeContainer;
-
+  let feelsLikeContainer = document.createElement("div");
   let feelsLikeIcon = document.createElement("div");
-  humidityIcon.innerHTML = feelsLikeSvg;
-
+  feelsLikeIcon.innerHTML = feelsLikeSvg;
   let feelsLike = document.createElement("span");
+  feelsLike.classList.add("weather-feels-like");
   feelsLike.innerText = Math.round(weatherData.main.feels_like) + "°C";
+  feelsLikeContainer.appendChild(feelsLikeIcon);
+  feelsLikeContainer.appendChild(feelsLike);
 
-  let windContainer;
-
+  let windContainer = document.createElement("div");
   let windIcon = document.createElement("div");
   windIcon.innerHTML = windSvg;
-
   let wind = document.createElement("span");
-  wind.innerText =
-    Math.round(Math.round(Number(weatherData.wind.speed) * 3.6)) + "km/h";
-  let timeSinceLastUpdate;
+  wind.classList.add("weather-wind");
+  wind.innerText = Math.round(Number(weatherData.wind.speed) * 3.6) + "km/h";
+  windContainer.appendChild(windIcon);
+  windContainer.appendChild(wind);
 
-  widgetTop.appendChild(locationInput);
+  let timeSinceLastUpdate = document.createElement("span");
+
   widgetBottom.appendChild(description);
   widgetBottom.appendChild(mainIcon);
 
@@ -153,18 +174,37 @@ async function createWeatherWidget(container, data, isCompact) {
     conditionsContainer.appendChild(feelsLikeContainer);
     conditionsContainer.appendChild(windContainer);
   }
-
-  container.appendChild(widgetTop);
-  if (weatherData.cod != 404) {
-    container.appendChild(widgetBottom);
-  } else {
-    console.log(weatherData);
-    container.appendChild(createNotFoundIcon());
-  }
-  return container;
+  widgetBottom.appendChild(conditionsContainer);
+  return widgetBottom;
 }
 
-async function updateWeatherDiv() {}
+async function updateWeatherDivs() {
+  let weatherAppData = await browser.runtime.sendMessage({
+    action: "getWeatherAppData",
+  });
+  let weatherData = weatherAppData.weatherData;
+  if (weatherData.cod != 200) {
+    document.querySelectorAll(".weather-div").forEach((element) => {
+      element.querySelector(".weather-widget-bottom").innerHTML = "";
+      element
+        .querySelector(".weather-widget-bottom")
+        .appendChild(createNotFoundIcon());
+    });
+    return;
+  }
+  document.querySelectorAll(".weather-div").forEach((element) => {
+    const oldWidgetBottom = element.querySelector(".weather-widget-bottom"); // <- capture once
+    if (oldWidgetBottom) {
+      oldWidgetBottom.replaceWith(
+        createWidgetBottomUI(
+          oldWidgetBottom,
+          weatherData,
+          element.classList.contains("compact")
+        )
+      );
+    }
+  });
+}
 
 function createNotFoundIcon() {
   let notFoundIcon = document.createElement("div");
@@ -172,36 +212,32 @@ function createNotFoundIcon() {
   return notFoundIcon;
 }
 
-async function editWeatherLocation() {
-  let locationInput = document.getElementById("weather-location-input");
+async function editWeatherLocation(event) {
+  let locationInput = event.target;
+
   locationInput.classList.add("active");
   locationInput.classList.remove("inactive");
   locationInput.removeEventListener("focus", editWeatherLocation);
   locationInput.addEventListener("focusout", stopWeatherEdit);
 }
 
-async function stopWeatherEdit() {
-  let locationInput = document.getElementById("weather-location-input");
-  if (locationInput.value != "") {
-    updateWeatherLocation();
-    updateWeatherDiv();
-  } else {
-    let weatherData = await browser.runtime.sendMessage({
-      action: "getWeatherAppData",
-    });
-    locationInput.value = weatherData.lastLocation;
-  }
+async function stopWeatherEdit(event) {
+  let locationInput = event.target;
   locationInput.classList.add("inactive");
   locationInput.classList.remove("active");
   locationInput.addEventListener("focus", editWeatherLocation);
   locationInput.removeEventListener("focusout", stopWeatherEdit);
 }
 
-async function updateWeatherLocation() {
-  let location = document.getElementById("weather-location-input").value;
+async function updateWeatherLocation(event) {
+  let location = event.target.value.trim();
   let oldData = await browser.runtime.sendMessage({
     action: "getWeatherAppData",
   });
+  if (location == "") {
+    event.target.value = oldData.lastLocation;
+    return;
+  }
   let updatedData = {
     weatherData: oldData.weatherData,
     lastUpdateDate: oldData.lastUpdateDate,
@@ -211,7 +247,11 @@ async function updateWeatherLocation() {
     action: "setWeatherAppData",
     data: updatedData,
   });
+  document.querySelectorAll(".weather-location-input").forEach((input) => {
+    input.value = location;
+  });
   await updateWeatherData();
+  await updateWeatherDivs();
 }
 
 async function updateWeatherData() {
@@ -231,7 +271,6 @@ async function updateWeatherData() {
     action: "setWeatherAppData",
     data: updatedData,
   });
-  console.log(updatedData);
   return updatedData;
 }
 
