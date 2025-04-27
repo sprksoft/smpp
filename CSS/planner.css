@@ -755,7 +755,9 @@ h3.card-block__title.fluid-ui-heading.fluid-ui-heading--3 {
 }
 .extra-content-container,
 .detail-description__text,
-h3.detail-description__title.title--3 {
+h3.detail-description__title.title--3,
+.rightblock.js-rightblock,
+.label-oD1iW {
   color: var(--color-text) !important;
 }
 .rightblock.rightBlock--color.js-rightBlock--color {
