@@ -1,100 +1,90 @@
 {
-	"manifest_version": 3,
-	"name": "Smartschool++",
-	"version": "4.0.0",
-	"description": "Enhance your Smartschool experience with themes and more",
-	"homepage_url": "https://github.com/sprksoft/smpp",
-	"lite_mode": false,
-	"content_scripts": [
-		{
-			"matches": [
-				"*://app.lernova.be/*"
-			],
-			"all_frames": true,
-			"css": [],
-			"js": [
-				"scraper.js",
-				"utils.js",
-				"DMENU/dmenu.js",
-				"LERNOVA/lernova.js",
-				"json.js",
-				"DMENU/quick.js"
-			]
-		},
-		{
-			"matches": [
-				"*://*.smartschool.be/*"
-			],
-			"exclude_matches": [
-				"*://www.smartschool.be/*"
-			],
-			"all_frames": true,
-			"css": [
-				"CSS/SMPP/smpp.css",
-				"CSS/general.css",
-				"CSS/weather.css",
-				"DMENU/dmenu.css",
-				"CSS/login.css",
-				"CSS/messages.css",
-				"CSS/navigation.css",
-				"CSS/notification.css",
-				"CSS/planner.css",
-				"CSS/results.css",
-				"CSS/startpage.css",
-				"CSS/delijn.css",
-				"CSS/agenda.css",
-				"CSS/plant.css",
-				"CSS/root.css",
-				"CSS/SMPP/widgets.css",
-				"CSS/smartschool-widgets.css"
-			],
-			"js": [
-				"titlefix.js",
-				"config.js",
-				"userchanger.js",
-				"themes.js",
-				"json.js",
-				"scraper.js",
-				"scores.js",
-				"snake.js",
-				"utils.js",
-				"globalchat.js",
-				"DMENU/dconfig.js",
-				"DMENU/dmenu.js",
-				"DMENU/quick.js",
-				"widgets.js",
-				"weather.js",
-				"delijn.js",
-				"weatherEffects.js",
-				"planner.js",
-				"flappy.js",
-				"buis-stats.js",
-				"plant.js",
-				"login.js",
-				"assignments.js",
-				"smppjs.js"
-			]
-		}
-	],
-	"icons": {
-		"16": "icon16.png",
-		"48": "icon48.png",
-		"128": "icon128.png"
-	},
-	"browser_specific_settings": {
-		"gecko": {
-			"id": "smpp@sprksoftteam"
-		}
-	},
-	"background": {
-		"service_worker": "background-script.js",
-		"scripts": [
-			"background-script.js"
-		],
-		"type": "module"
-	},
-	"permissions": [
-		"storage",
-		"unlimitedStorage"
-	]
+  "manifest_version": 3,
+  "name": "Smartschool++",
+  "version": "4.0.0",
+  "description": "Enhance your Smartschool experience with themes and more",
+  "homepage_url": "https://github.com/sprksoft/smpp",
+  "lite_mode": false,
+  "content_scripts": [
+    {
+      "matches": ["*://app.lernova.be/*"],
+      "all_frames": true,
+      "css": [],
+      "js": [
+        "scraper.js",
+        "utils.js",
+        "DMENU/dmenu.js",
+        "LERNOVA/lernova.js",
+        "json.js",
+        "DMENU/quick.js"
+      ]
+    },
+    {
+      "matches": ["*://*.smartschool.be/*"],
+      "exclude_matches": ["*://www.smartschool.be/*"],
+      "all_frames": true,
+      "css": [
+        "CSS/SMPP/smpp.css",
+        "CSS/SMPP/games.css",
+        "CSS/general.css",
+        "CSS/weather.css",
+        "DMENU/dmenu.css",
+        "CSS/login.css",
+        "CSS/messages.css",
+        "CSS/navigation.css",
+        "CSS/notification.css",
+        "CSS/planner.css",
+        "CSS/results.css",
+        "CSS/startpage.css",
+        "CSS/delijn.css",
+        "CSS/agenda.css",
+        "CSS/plant.css",
+        "CSS/root.css",
+        "CSS/SMPP/widgets.css",
+        "CSS/smartschool-widgets.css"
+      ],
+      "js": [
+        "titlefix.js",
+        "config.js",
+        "userchanger.js",
+        "themes.js",
+        "json.js",
+        "scraper.js",
+        "scores.js",
+        "snake.js",
+        "utils.js",
+        "globalchat.js",
+        "DMENU/dconfig.js",
+        "DMENU/dmenu.js",
+        "DMENU/quick.js",
+        "widgets.js",
+        "weather.js",
+        "delijn.js",
+        "weatherEffects.js",
+        "planner.js",
+        "buis-stats.js",
+        "plant.js",
+        "games.js",
+        "login.js",
+        "assignments.js",
+        "smppjs.js"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "smpp@sprksoftteam"
+    }
+  },
+  "background": {
+    "service_worker": "background-script.js",
+    "scripts": ["background-script.js"],
+    "type": "module"
+  },
+  "permissions": ["storage", "unlimitedStorage"]
 }

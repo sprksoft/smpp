@@ -98,6 +98,18 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
       await setWidgetData(message.widgetData);
       sendResponse({ succes: true });
     }
+    // Games
+    if (message.action === "getGameData") {
+      let gd = await browser.storage.local.get("Game." + message.game);
+      sendResponse(gd["Game." + message.game]);
+    }
+    if (message.action === "setGameData") {
+      console.log("saving game data");
+      let gd = {};
+      gd["Game." + message.game] = message.data;
+      await browser.storage.local.set(gd);
+      sendResponse({ success: true });
+    }
   })();
   return true;
 });
