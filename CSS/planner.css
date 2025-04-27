@@ -382,7 +382,6 @@ button.detail-todo-icon-and-color__icon {
   padding-left: 5px !important;
   background-color: var(--color-base01) !important;
   align-self: center !important;
-  width: 98% !important;
 }
 
 [bubble].bubble--tooltip {
@@ -753,4 +752,29 @@ h3.card-block__title.fluid-ui-heading.fluid-ui-heading--3 {
 }
 .course-module-planner__timeline .timeline-row.planned-element-row .card-block {
   box-shadow: none !important;
+}
+.extra-content-container,
+.detail-description__text,
+h3.detail-description__title.title--3 {
+  color: var(--color-text) !important;
+}
+.rightblock.rightBlock--color.js-rightBlock--color {
+  background-color: var(--color-base02) !important;
+  border-color: var(--color-accent) !important;
+}
+.enableAnimations .rightblock.rightBlock--color.js-rightBlock--color {
+  transition: ease-in-out !important;
+  transition-duration: 0.2s !important;
+}
+
+.rightblock.rightBlock--color.js-rightBlock--color:hover,
+.course-link__button:hover {
+  background-color: var(--color-base03) !important;
+}
+.course-module-planner__header {
+  border-radius: 25px !important;
+  padding: 20px !important;
+}
+.course-module-planner {
+  border-radius: 25px !important;
 }
