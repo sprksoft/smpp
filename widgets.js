@@ -350,7 +350,7 @@ function createInsertionPointHTML(pannel = false) {
   return ipoint;
 }
 
-function createPannelHTML(pannel) {
+async function createPannelHTML(pannel) {
   let pannelDiv = document.createElement("div");
   pannelDiv.addEventListener("mousemove", (e) => onPannelHover(pannelDiv, e));
   pannelDiv.classList.add("smpp-widget-pannel");
@@ -363,18 +363,18 @@ function createPannelHTML(pannel) {
       registerWidget(new ErrorWidget(widgetName));
       widget = getWidgetByName(widgetName);
     }
-    widget.addToPannel(pannelDiv);
+    await widget.addToPannel(pannelDiv);
   }
   return pannelDiv;
 }
 
-function createWidgetsContainerHTML(widgetData, newsContent, showNews) {
+async function createWidgetsContainerHTML(widgetData, newsContent, showNews) {
   let widgetsContainer = document.createElement("div");
   widgetsContainer.classList.add("smpp-widgets-container");
 
   widgetsContainer.appendChild(createInsertionPointHTML(true));
   for (let pannel of widgetData.leftPannels) {
-    let pannelDiv = createPannelHTML(pannel);
+    let pannelDiv = await createPannelHTML(pannel);
     widgetsContainer.appendChild(pannelDiv);
     widgetsContainer.appendChild(createInsertionPointHTML(true));
   }
@@ -390,7 +390,7 @@ function createWidgetsContainerHTML(widgetData, newsContent, showNews) {
 
   widgetsContainer.appendChild(createInsertionPointHTML(true));
   for (let pannel of widgetData.rightPannels) {
-    let pannelDiv = createPannelHTML(pannel);
+    let pannelDiv = await createPannelHTML(pannel);
     widgetsContainer.appendChild(pannelDiv);
     widgetsContainer.appendChild(createInsertionPointHTML(true));
   }
@@ -454,7 +454,7 @@ async function createWidgetSystem() {
     }
   }
 
-  widgetsContainer = createWidgetsContainerHTML(
+  widgetsContainer = await createWidgetsContainerHTML(
     widgetData,
     news,
     showNewsState,
@@ -549,6 +549,7 @@ async function createWidgetBag() {
   let content = document.createElement("div");
   content.classList.add("smpp-widget-bag-content");
   await createGroup(content, "smartschool", "Smartschool widgets");
+  await createGroup(content, "games", "Games");
   await createGroup(content, "other", "Overige widgets");
   bag.appendChild(content);
 

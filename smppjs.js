@@ -9,6 +9,7 @@ const default_theme = {
   color_base03: "#c78af0",
   color_text: "#ede3e3"
 }
+let currentThemeVars;
 let quickSettingsWindowIsHidden = true;
 
 function unbloat() {
@@ -251,6 +252,10 @@ function set_backgroundlink(background) {
   };
 }
 
+function getCurThemeVar(name) {
+  return currentThemeVars[name];
+}
+
 function set_theme(name) {
   let style = document.documentElement.style;
   if (name == "custom") {
@@ -263,17 +268,31 @@ function set_theme(name) {
       themeData = migrate_theme_data(themeData)
       loadCustomThemeData()
     }
+    // Idk I found it like this.
     style.setProperty('--color-accent', themeData.color_accent);
+    currentThemeVars["--color-accent"] = themeData.color_accent;
+
     style.setProperty('--color-text', themeData.color_text);
+    currentThemeVars['--color-text'] = themeData.color_text;
+
     style.setProperty('--color-base00', themeData.color_base00);
+    currentThemeVars['--color-base00'] = themeData.color_base00;
+
     style.setProperty('--color-base01', themeData.color_base01);
+    currentThemeVars['--color-base01'] = themeData.color_base01;
+
     style.setProperty('--color-base02', themeData.color_base02);
+    currentThemeVars['--color-base02'] = themeData.color_base02;
+
     style.setProperty('--color-base03', themeData.color_base03);
+    currentThemeVars['--color-base03'] = themeData.color_base03;
+
     if (window.self == window.top) {
       style.setProperty('--loginpage-image', "url(https://wallpaperaccess.com/full/23.jpg)");
     }
   } else {
     let theme = get_theme(name);
+    currentThemeVars = theme;
     if (!theme) {
       return;
     }

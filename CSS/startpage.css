@@ -47,59 +47,6 @@ body.modern-ui .homepage__center {
   background-color: var(--color-base01) !important;
 }
 
-.modern-ui .float-label__input+label>span {
+.modern-ui .float-label__input + label > span {
   top: -67px !important;
-}
-
-#game-div,
-#flappy-game-div {
-  background-color: var(--color-base01);
-  padding: 0px !important;
-  border-radius: 15px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  max-width: 400px;
-  margin: 2%;
-  border: 3px solid var(--color-base03);
-  height: 282px;
-  width: 282px;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-#play_button,
-#tryagain,
-#flappy_play_button,
-#flappytryagain {
-  font-size: 19px !important;
-  width: 180px !important;
-  padding: 4px !important;
-  border-width: 3px !important;
-  border-radius: 10px !important;
-  align-self: center !important;
-  padding-left: 10px;
-  padding-right: 10px;
-}
-
-.gameover {
-  margin-top: 20px !important;
-  font-size: 35px !important;
-}
-
-.score {
-  font-size: 20px !important;
-}
-
-.speedslider {
-  background-color: var(--color-base02) !important;
-  margin-left: 47px !important;
-  margin-right: 5px !important;
-  margin-top: -10px !important;
-}
-
-.text_next_to_slider {
-  margin-top: -14px !important;
-  margin-right: 47px !important;
-  font-size: 15px !important;
 }
