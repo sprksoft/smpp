@@ -149,21 +149,21 @@ class WidgetBase {
       targetIp = curDragInfo.sourceInsertionPoint;
     }
 
-    if (targetIp.classList.contains("smpp-widget-insertion-point-pannel")) {
-      console.log("Creating new pannel...");
-      let pannelContainer = targetIp.parentElement;
-      let pannel = createPannelHTML({ widgets: [] });
-      pannelContainer.insertBefore(
-        createInsertionPointHTML(true),
-        targetIp.nextElementSibling,
-      );
-      pannelContainer.insertBefore(pannel, targetIp.nextElementSibling);
-      targetIp = pannel.firstChild;
-    }
-
-    if (this.#aboutToDel) {
+    if (targetIp == null || this.#aboutToDel) {
       await this.#intoBag();
     } else {
+      if (targetIp.classList.contains("smpp-widget-insertion-point-pannel")) {
+        console.log("Creating new pannel...");
+        let pannelContainer = targetIp.parentElement;
+        let pannel = createPannelHTML({ widgets: [] });
+        pannelContainer.insertBefore(
+          createInsertionPointHTML(true),
+          targetIp.nextElementSibling,
+        );
+        pannelContainer.insertBefore(pannel, targetIp.nextElementSibling);
+        targetIp = pannel.firstChild;
+      }
+
       let targetPannel = targetIp.parentElement;
       targetPannel.style.display = "block";
       targetPannel.insertBefore(
@@ -316,14 +316,20 @@ function onPannelInsertionPointHover(e) {
     return;
   }
   targetInsertionPoint(e.target);
-  curDragInfo.targetInsertionPoint.classList.remove(
-    "smpp-widget-insertion-point-targeted",
-  );
-  curDragInfo.targetInsertionPoint = e.target;
-  curDragInfo.targetInsertionPoint.classList.add(
-    "smpp-widget-insertion-point-targeted",
-  );
 }
+
+function onCenterHover(e) {
+  if (!widgetEditMode || curDragInfo == null) {
+    return;
+  }
+  const bounds = e.target.getBoundingClientRect();
+  if (e.clientX < (bounds.right - bounds.left) / 2 + bounds.left) {
+    targetInsertionPoint(e.target.previousElementSibling);
+  } else {
+    targetInsertionPoint(e.target.nextElementSibling);
+  }
+}
+
 function createInsertionPointHTML(pannel = false) {
   let ipoint = document.createElement("div");
   ipoint.classList.add("smpp-widget-insertion-point");
@@ -365,6 +371,7 @@ function createWidgetsContainerHTML(widgetData, newsContent, showNews) {
 
   let newsDiv = document.createElement("div");
   newsDiv.classList.add("smpp-news-container");
+  newsDiv.addEventListener("mousemove", onCenterHover);
   newsContent.id = "smpp-news-content";
   newsContent.className = "";
   newsContent.style.display = showNews ? "block" : "none";
