@@ -15,8 +15,8 @@
   background: var(--color-accent) !important;
 }
 
-.highlight.header__day:not(.header__wholeday-column)>.day,
-.highlight.header__day:not(.header__wholeday-column)>.day--thin {
+.highlight.header__day:not(.header__wholeday-column) > .day,
+.highlight.header__day:not(.header__wholeday-column) > .day--thin {
   color: var(--color-base02) !important;
 }
 
@@ -95,7 +95,10 @@
 }
 
 .todo-column [listview] .todo-column__row:hover .todo-column__actions-cell,
-.todo-column [listview] .todo-column__row--resolved:hover .todo-column__actions-cell {
+.todo-column
+  [listview]
+  .todo-column__row--resolved:hover
+  .todo-column__actions-cell {
   background-color: var(--color-base03) !important;
   transition: none !important;
 }
@@ -261,16 +264,20 @@
   background-color: transparent !important;
 }
 
-
 .detail-lint.js-detail-lint {
   background-color: transparent !important;
 }
 
-.course-module-planner__timeline .timeline-row.planned-element-row .action-block__buttons {
+.course-module-planner__timeline
+  .timeline-row.planned-element-row
+  .action-block__buttons {
   background-color: var(--color-base02) !important;
 }
 
-.enableAnimations .course-module-planner__timeline .timeline-row.planned-element-row .action-block__buttons {
+.enableAnimations
+  .course-module-planner__timeline
+  .timeline-row.planned-element-row
+  .action-block__buttons {
   transition: ease-in-out !important;
   transition-duration: 0.2s !important;
 }
@@ -424,8 +431,9 @@ button.icon-label-btn.js-icon-label-btn.icon-label-btn--linkbutton {
   border: 2px solid var(--color-accent) !important;
 }
 
-.enableAnimations button.icon-label-btn.js-icon-label-btn.icon-label-btn--linkbutton {
-  transition: ease-in-out 0.1s all !important
+.enableAnimations
+  button.icon-label-btn.js-icon-label-btn.icon-label-btn--linkbutton {
+  transition: ease-in-out 0.1s all !important;
 }
 
 button.icon-label-btn.js-icon-label-btn.icon-label-btn--linkbutton:hover {
@@ -453,7 +461,11 @@ button.icon-label-btn.js-icon-label-btn.icon-label-btn--linkbutton:hover {
 }
 
 .listview__row.js-listview-row.planner-listview-data-row--selected.js-planner-listview-data-row--selected,
-.month-view .element.show-more-element:not(:hover):not(.state--hovered--forced).state--hovered .element__label-container {
+.month-view
+  .element.show-more-element:not(:hover):not(
+    .state--hovered--forced
+  ).state--hovered
+  .element__label-container {
   background-color: var(--color-base01) !important;
 }
 
@@ -664,7 +676,9 @@ h3.card-block__title.fluid-ui-heading.fluid-ui-heading--3 {
   border-radius: 25px !important;
 }
 
-.month-view .element:not(.state--hovered):not(.state--dragging):not(.state--resizing) .element__time-label {
+.month-view
+  .element:not(.state--hovered):not(.state--dragging):not(.state--resizing)
+  .element__time-label {
   color: var(--color-text) !important;
   opacity: 0.8 !important;
 }
@@ -694,8 +708,8 @@ h3.card-block__title.fluid-ui-heading.fluid-ui-heading--3 {
   background-color: var(--color-base01) !important;
 }
 
-.header__tab__wrapper[active-tab]>.header__tab>.header__tab__name,
-.header__tab__wrapper[active-tab]>.header__tab>.header__tab__organisers {
+.header__tab__wrapper[active-tab] > .header__tab > .header__tab__name,
+.header__tab__wrapper[active-tab] > .header__tab > .header__tab__organisers {
   color: var(--color) !important;
 }
 
@@ -716,15 +730,27 @@ h3.card-block__title.fluid-ui-heading.fluid-ui-heading--3 {
   display: none !important;
 }
 
-.header__tab__wrapper:nth-child(1)>.header__tab {
+.header__tab__wrapper:nth-child(1) > .header__tab {
   border-bottom-left-radius: 0px !important;
 }
 
-.header__tab__wrapper>.header__tab {
+.header__tab__wrapper > .header__tab {
   border-bottom-right-radius: 10px !important;
   border-bottom-left-radius: 10px !important;
 }
 
 .header__tab__organisers {
   color: var(--color-text) !important;
+}
+
+.course-module-planner__timeline
+  .timeline-row.planned-element-row:hover
+  .icon-block,
+.course-module-planner__timeline
+  .timeline-row.planned-element-row:hover
+  .card-block {
+  box-shadow: 0 6px 32px rgba(0, 0, 0, 0.5) !important;
+}
+.course-module-planner__timeline .timeline-row.planned-element-row .card-block {
+  box-shadow: none !important;
 }

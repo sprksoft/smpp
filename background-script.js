@@ -45,7 +45,7 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
       console.log("Weather appdata saved.");
     }
     if (message.action === "getWeatherAppData") {
-      const weatherAppData = await getWeatherAppData(message.location);
+      const weatherAppData = await getWeatherAppData();
       sendResponse(weatherAppData);
       console.log("Weather appdata sent.");
     }

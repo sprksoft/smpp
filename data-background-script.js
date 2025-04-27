@@ -44,12 +44,12 @@ export async function setWidgetData(widgetData) {
   await browser.storage.local.set({ widgets: widgetData });
 }
 
-export async function getWeatherAppData(location) {
+export async function getWeatherAppData() {
   let data = await browser.storage.local.get("weatherAppData");
   let weatherAppData = data.weatherAppData || {
     weatherData: null,
     lastUpdateDate: new Date().toISOString(),
-    lastLocation: location || "",
+    lastLocation: "Keerbergen",
   };
 
   weatherAppData.lastUpdateDate = new Date(
@@ -95,7 +95,6 @@ export async function getDelijnAppData() {
     entiteitnummer: null,
     haltenummer: null,
   };
-
   return delijnAppData;
 }
 export async function getPlantAppData() {

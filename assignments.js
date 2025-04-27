@@ -3,9 +3,10 @@
 // THANK YOU LDEVVVV 🫂🫂🫂N
 
 class TakenWidget extends WidgetBase {
-  createContent(parent) {
+  createContent() {
     const DEBUG = false;
     const foresight = 28; // dagen in de toekomst dat het zoekt voor taken
+    let maxAssignments = 5;
     let userId;
 
     // get UID
@@ -138,7 +139,9 @@ class TakenWidget extends WidgetBase {
             new Date(a.period.dateTimeFrom) - new Date(b.period.dateTimeFrom)
         );
         let lastDate = "";
-
+        if (data.length > maxAssignments) {
+          data = data.slice(0, maxAssignments);
+        }
         data.forEach((element) => {
           const taskDate = new Date(element.period.dateTimeFrom);
           const today = new Date();
@@ -244,6 +247,7 @@ class TakenWidget extends WidgetBase {
           rowDiv.append(abbreviationDiv, detailsDiv);
           PlannerContainer.append(rowDiv);
         });
+
         return sendDebug("UI updated successfully.");
       });
       return PlannerContainer;
