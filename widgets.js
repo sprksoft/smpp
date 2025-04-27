@@ -1,3 +1,5 @@
+const PANNELIP_MARGIN_PX = 20;
+
 let widgetEditMode = false;
 let hoveringBag = false;
 let showNewsState = false; // Used for if the shownews state is changed before it could be created.
@@ -60,6 +62,7 @@ class WidgetBase {
   }
 
   async #intoBag() {
+    bagHoverExit();
     await this.#setPreview(true);
     this.#bagSlot.appendChild(this.#element);
   }
@@ -153,7 +156,6 @@ class WidgetBase {
       await this.#intoBag();
     } else {
       if (targetIp.classList.contains("smpp-widget-insertion-point-pannel")) {
-        console.log("Creating new pannel...");
         let pannelContainer = targetIp.parentElement;
         let pannel = createPannelHTML({ widgets: [] });
         pannelContainer.insertBefore(
@@ -214,10 +216,6 @@ class WidgetBase {
     el.classList.add("smpp-widget-dragging");
 
     document.body.appendChild(el);
-
-    if (sourceIp && sourceIp.parentElement.childNodes.length == 1) {
-      sourceIp.parentElement.style.display = "none";
-    }
 
     closeBag();
   }
@@ -297,12 +295,24 @@ function onPannelHover(pannel, e) {
     return;
   }
 
+  const bounds = e.target.getBoundingClientRect();
+
+  if (e.clientX < bounds.left + PANNELIP_MARGIN_PX) {
+    targetInsertionPoint(e.target.previousElementSibling);
+    return;
+  }
+
+  if (e.clientX > bounds.right - PANNELIP_MARGIN_PX) {
+    targetInsertionPoint(e.target.nextElementSibling);
+    return;
+  }
+
   let target = pannel.firstChild;
   for (let child of pannel.childNodes) {
     if (!child.classList.contains("smpp-widget")) {
       continue;
     }
-    let bounds = child.getBoundingClientRect();
+    const bounds = child.getBoundingClientRect();
     let centerY = bounds.top + (bounds.bottom - bounds.top) * 0.5;
     if (e.clientY > centerY) {
       target = child.nextElementSibling;
@@ -525,9 +535,22 @@ async function createGroup(bag, name, displayName) {
 async function createWidgetBag() {
   let bag = document.createElement("div");
   bag.classList.add("smpp-widget-bag");
+  let fold = document.createElement("div");
+  fold.classList.add("smpp-widget-bag-close-fold");
+  fold.addEventListener("click", () => {
+    closeBag();
+  });
+  fold.innerHTML = `
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg class="smpp-widget-bag-fold-icon" version="1.1" viewBox="0 0 448 448" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-.898 -124.01)"><path d="m26.458 288.48 198.44 119.06 198.44-119.06" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="39.511"/></g></svg>
+`;
+  bag.appendChild(fold);
 
-  await createGroup(bag, "smartschool", "Smartschool widgets");
-  await createGroup(bag, "other", "Overige widgets");
+  let content = document.createElement("div");
+  content.classList.add("smpp-widget-bag-content");
+  await createGroup(content, "smartschool", "Smartschool widgets");
+  await createGroup(content, "other", "Overige widgets");
+  bag.appendChild(content);
 
   document.body.appendChild(bag);
   return bag;
@@ -582,12 +605,6 @@ document.addEventListener("mousemove", (e) => {
     }
   }
 });
-
-// document.addEventListener("mousedown", (e) => {
-//   if (!e.target.classList.contains("smpp-widget") && e.target.id !== "smpp-widget-edit-mode-btn" && !e.target.classList.contains("smpp-widget-bag-fold") && !e.target.classList.contains("smpp-widget-bag")) {
-//     setEditMode(false);
-//   }
-// })
 
 document.addEventListener("keyup", (e) => {
   if (e.key == "Escape" && widgetEditMode) {

@@ -106,6 +106,7 @@ function resetSMlogo() {
   if (iconElement) iconElement.href = 'https://static4.smart-school.net/smsc/svg/favicon/favicon.svg';
 }
 async function apply() {
+  setEditMode(false); // Turn off widget edit mode
   let style = document.documentElement.style;
   const data = await browser.runtime.sendMessage({
     action: 'getQuickSettingsData'
