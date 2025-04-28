@@ -125,9 +125,13 @@ function createWidgetBottomUI(widgetBottom, weatherData, isCompact) {
   temperature.innerText = Math.round(weatherData.main.temp) + "°C";
 
   let conditionsContainer = document.createElement("div");
+  conditionsContainer.classList.add("conditions-container");
 
   let humidityContainer = document.createElement("div");
+  humidityContainer.classList.add("humidity-container");
+  humidityContainer.classList.add("condition-container");
   let humidityIcon = document.createElement("div");
+  humidityIcon.classList.add("humidity-icon");
   humidityIcon.innerHTML = humiditySvg;
   let humidity = document.createElement("span");
   humidity.classList.add("weather-humidity");
@@ -136,7 +140,10 @@ function createWidgetBottomUI(widgetBottom, weatherData, isCompact) {
   humidityContainer.appendChild(humidity);
 
   let feelsLikeContainer = document.createElement("div");
+  feelsLikeContainer.classList.add("feels-like-container");
+  feelsLikeContainer.classList.add("condition-container");
   let feelsLikeIcon = document.createElement("div");
+  feelsLikeIcon.classList.add("feels-like-icon");
   feelsLikeIcon.innerHTML = feelsLikeSvg;
   let feelsLike = document.createElement("span");
   feelsLike.classList.add("weather-feels-like");
@@ -145,7 +152,10 @@ function createWidgetBottomUI(widgetBottom, weatherData, isCompact) {
   feelsLikeContainer.appendChild(feelsLike);
 
   let windContainer = document.createElement("div");
+  windContainer.classList.add("wind-container");
+  windContainer.classList.add("condition-container");
   let windIcon = document.createElement("div");
+  windIcon.classList.add("wind-icon");
   windIcon.innerHTML = windSvg;
   let wind = document.createElement("span");
   wind.classList.add("weather-wind");
@@ -160,7 +170,10 @@ function createWidgetBottomUI(widgetBottom, weatherData, isCompact) {
 
   if (isCompact) {
     let temperatureContainer = document.createElement("div");
+    temperatureContainer.classList.add("temperature-container");
+    temperatureContainer.classList.add("condition-container");
     let temperatureIcon = document.createElement("div");
+    temperatureIcon.classList.add("temperature-icon");
     temperatureIcon.innerHTML = temperatureSvg;
     temperatureContainer.appendChild(temperatureIcon);
     temperatureContainer.appendChild(temperature);
