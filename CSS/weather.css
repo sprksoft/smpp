@@ -4,18 +4,47 @@
   align-items: center;
   text-align: center;
 }
+input.weather-location-input.inactive:hover {
+  background-color: var(--color-base02) !important;
+  border-color: var(--color-base03) !important;
+}
+input.weather-location-input.active {
+  color: var(--color-text) !important;
+  border-color: var(--color-accent) !important;
+}
 .weather-location-input {
   text-align: center;
+  color: var(--color-accent) !important;
+  font-size: 2.5rem;
+  font-weight: 600;
+  width: 100%;
+  padding: 0 !important;
+  text-wrap: unset;
+  border: 2px solid transparent !important;
+  border-radius: 1rem;
+}
+.enableAnimations .weather-location-input {
+  transition: all 0.2s ease-in-out !important;
 }
 .weather-icon-container {
   width: 100%;
 }
-.weather-widget-bottom {
+
+.weather-widget-content {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
+.top-weather-content-container,
+.bottom-weather-content-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .conditions-container {
   display: flex;
   flex-direction: row;
@@ -23,9 +52,15 @@
   justify-content: space-between;
   width: 100%;
 }
+
 .condition-container {
   width: 25%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
+
 .wind-container,
 .humidity-container {
   width: 35%;
@@ -33,9 +68,74 @@
 
 .wind-icon,
 .humidity-icon,
-.feels-like-icon {
+.feels-like-icon,
+.temperature-icon {
   height: 6rem;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.feels-like,
+.wind,
+.humidity {
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+.weather-description {
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.temperature {
+  font-size: 4rem;
+  font-weight: 200;
+  margin-bottom: 1rem;
+}
+.not-found-text {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+.compact .conditions-container {
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.compact .wind-container,
+.compact .humidity-container {
+  height: 15%;
+}
+.compact .temperature-container {
+  height: 25%;
+}
+.compact .wind-icon,
+.compact .humidity-icon {
+  width: 6rem;
+  height: 100%;
+}
+.compact .temperature-icon {
+  width: 2.75rem;
+  height: 100%;
+}
+
+.compact .weather-widget-content:not(:has(.not-found-text)) {
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.compact .bottom-weather-content-container {
+  width: 37%;
+}
+
+.compact .temperature,
+.compact .humidity,
+.compact .wind {
+  font-weight: 600;
+  font-size: 1.3rem;
+  margin-bottom: 0;
+}
+
+.compact .weather-location-input {
+  font-size: 2rem;
 }

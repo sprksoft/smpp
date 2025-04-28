@@ -16,7 +16,7 @@
   color: var(--color-accent);
 }
 
-.weather-temperatureBig {
+.temperatureBig {
   font-size: 350%;
   margin-bottom: 0px !important;
   font-weight: 200;
@@ -39,9 +39,9 @@
   flex-direction: row;
 }
 
-.weather-windBig,
+.windBig,
 .weather-feelslikeBig,
-.weather-humidityBig {
+.humidityBig {
   margin-bottom: 0px !important;
   font-size: 13px !important;
   font-weight: bold;
@@ -122,9 +122,9 @@
   margin-right: auto;
 }
 
-.weather-windSmall,
-.weather-humiditySmall,
-.weather-temperatureSmall {
+.windSmall,
+.humiditySmall,
+.temperatureSmall {
   margin-bottom: 10px !important;
   color: var(--color-text) !important;
   font-size: 16px !important;

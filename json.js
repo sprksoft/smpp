@@ -95,7 +95,7 @@ const weatherHTML = `<div class="weatherdiv">
 		<div src="https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/chanceflurries.svg"
 			class="weather-icon"></div>
 	</div>
-	<p class="weather-temperature weather-temperatureBig"></p>
+	<p class="temperature temperatureBig"></p>
 	<div class="weather-humwind weather-humwindBig">
   <div class="big_icon_weather_big">
 		<svg xmlns="http://www.w3.org/2000/svg" id="layer1" style="margin: 0% 11% 0% 11%" data-name="Laag 2"
@@ -115,7 +115,7 @@ const weatherHTML = `<div class="weatherdiv">
 
 
 		</svg>
-    	<p class="weather-humidity weather-humidityBig"></p>
+    	<p class="humidity humidityBig"></p>
      </div>
             <div class="small_icon_weather_big">
 			<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2"
@@ -149,7 +149,7 @@ const weatherHTML = `<div class="weatherdiv">
 					</g>
 				</g>
 			</svg>
-      	<p class="weather-wind weather-windBig"></p>
+      	<p class="wind windBig"></p>
  </div>
 	</div>
 	<p class="weather-lastupdate weather-lastupdateBig"></p>
@@ -189,7 +189,7 @@ const weatherHTMLTiny = `<div class="weatherdiv">
   </g>
   </svg>
 
-  <p class="weather-humidity weather-humiditySmall"></p>
+  <p class="humidity humiditySmall"></p>
 </div>
   <div class="weather-humwind weather-humwindSmall">
   <svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" class="big_icon_weather_small" data-name="Laag 2"
@@ -214,7 +214,7 @@ const weatherHTMLTiny = `<div class="weatherdiv">
     </g>
   </svg>
 
-  <p class="weather-wind weather-windSmall"></p>
+  <p class="wind windSmall"></p>
   </div>
   <div class="weather-humwind weather-humwindSmall">
   <svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" class="small_icon_weather_temp" data-name="Laag 2" viewBox="0 0 13 26">
@@ -233,19 +233,15 @@ const weatherHTMLTiny = `<div class="weatherdiv">
     </g>
   </g>
   </svg>
-  <p class="weather-temperature weather-temperatureSmall"></p>
+  <p class="temperature temperatureSmall"></p>
   </div>
 </div></div>
   <p class="weather-lastupdate weather-lastupdateSmall" style="display:none;"></p>
 </div>
-
-
 </div>
-
-
 </div>
 `;
-const temperatureSvg = `<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" class="small_icon_weather_temp" data-name="Laag 2" viewBox="0 0 13 26">
+const temperatureSvg = `<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" style="height: 100%;" data-name="Laag 2" viewBox="0 0 13 26">
 <g id="Laag_1-2" data-name="Laag 1">
   <g>
   <path class="st1" d="M10.57,14.75V5.29c0-2.44-1.99-4.43-4.43-4.43S1.72,2.85,1.72,5.29v9.46c-1.11,1.15-1.72,2.66-1.72,4.26.01,3.38,2.76,6.13,6.14,6.13,1.62,0,3.15-.62,4.31-1.75,2.4-2.36,2.45-6.22.12-8.64ZM8.91,22.09c-.83.74-1.9,1.12-3,1.05-1.1-.06-2.12-.55-2.85-1.37-.74-.83-1.12-1.89-1.05-2.99.06-1.11.55-2.13,1.37-2.86l.33-.3V5.29c0-1.34,1.09-2.43,2.43-2.44,1.34.01,2.43,1.1,2.43,2.44v10.33l.33.29c.12.11.23.22.33.33.74.83,1.11,1.9,1.05,3-.06,1.11-.55,2.12-1.37,2.85Z"></path>
@@ -309,4 +305,8 @@ const fileInputIconSvg = `<svg width="30px" height="30px" viewBox="0 0 24.00 24.
 const editIconSvg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px"class=edit_button height="18px" width="18px" viewBox="0 0 24 24"  xml:space="preserve">
 <metadata> Svg Vector Icons : http://www.onlinewebfonts.com/icon</metadata>
 <g><g><path xmlns="http://www.w3.org/2000/svg" class=st1 stroke-linecap:round;stroke-linejoin:round;-inkscape-stroke:none" d="m 19.792969,1.2089844 c -0.773047,0 -1.546203,0.290977 -2.134766,0.8730469 -6.69e-4,6.478e-4 -0.0013,0.0013 -0.002,0.00195 L 8.4119915,11.389897 c -0.5321594,0.536333 -1.9587661,2.040145 -2.9061791,5.334709 -0.1062793,0.369579 -0.1650107,0.570623 -0.2207032,0.85994 -0.046789,0.243065 -0.1295961,0.724628 0.2070338,1.013107 0.3909805,0.335056 1.0440816,0.133455 1.3847656,0.03125 C 7.387553,18.47571 7.9834625,18.287442 8.5897993,18.031247 11.103423,16.969168 12.593117,15.70399 12.985931,15.188066 l 8.93985,-8.8697066 C 23.11495,5.1606353 23.105005,3.2461646 21.927734,2.0820313 21.339171,1.4999614 20.566016,1.2089844 19.792969,1.2089844 Z" id="path5" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="scccssssscccs"/><path xmlns="http://www.w3.org/2000/svg" d="M 10.273212,2.8358152 H 5.5822718 c -1.3827164,0 -2.0740869,0 -2.6022128,0.2661137 C 2.5154954,3.3360099 2.1378007,3.709514 1.9011058,4.1689107 1.6320062,4.6911889 1.6320062,5.3748762 1.6320062,6.7422506 V 18.461557 c 0,1.367374 0,2.051122 0.2690996,2.573363 0.2366949,0.459374 0.6143896,0.832926 1.0789532,1.066946 0.5281259,0.266126 1.2194964,0.266126 2.6022128,0.266126 H 17.433068 c 1.382716,0 2.074137,0 2.602237,-0.266126 0.464527,-0.23402 0.842271,-0.607572 1.078917,-1.066946 0.269112,-0.522241 0.269112,-1.205989 0.269112,-2.573363 v -5.249273"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="stroke-width:3.25435;stroke-dasharray:none" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="csccssccssccsccc"/> </g></g>
+</svg>`;
+
+const noLocationSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="var(--color-red)" fill="var(--color-base01)">
+<path d="M10 8L14 12M14 8L10 12M19 10.2C19 14.1764 15.5 17.4 12 21C8.5 17.4 5 14.1764 5 10.2C5 6.22355 8.13401 3 12 3C15.866 3 19 6.22355 19 10.2Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>`;

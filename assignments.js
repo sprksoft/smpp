@@ -4,7 +4,7 @@
 
 class TakenWidget extends WidgetBase {
   createContent() {
-    const DEBUG = false;
+    const DEBUG = true;
     const foresight = 28; // dagen in de toekomst dat het zoekt voor taken
     let maxAssignments = 5;
     let userId;
@@ -139,6 +139,7 @@ class TakenWidget extends WidgetBase {
             new Date(a.period.dateTimeFrom) - new Date(b.period.dateTimeFrom)
         );
         let lastDate = "";
+        data = data.filter((element) => element.resolvedStatus !== "resolved");
         if (data.length > maxAssignments) {
           data = data.slice(0, maxAssignments);
         }
