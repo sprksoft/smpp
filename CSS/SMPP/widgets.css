@@ -3,7 +3,7 @@ html {
   --smpp-widget-bag-fold-radius: 40px;
   --smpp-widget-bag-fold-width: 400px;
   --smpp-widget-bag-widget-margin: 1rem;
-  --smpp-widget-preview-scale: 0.7;
+  --smpp-widget-preview-scale: 0.5;
 
   --pannel-width: calc(
     300px + 1rem * 2
@@ -44,26 +44,12 @@ html {
   overflow: scroll;
 }
 
-.smpp-widget {
-  --scale: 1;
-}
 .smpp-widget-bag-placeholder,
 .smpp-widget-preview {
   min-width: var(--pannel-width);
   max-width: var(--pannel-width);
-  margin: calc(
-    var(--pannel-width) * (var(--smpp-widget-preview-scale) * 0.5 - 0.5) +
-      var(--smpp-widget-bag-widget-margin)
-  ); /* Calc negative margin to offset scale for flex container to be happy. */
-  margin-top: var(--smpp-widget-bag-widget-margin);
-  margin-bottom: calc(
-    var(--pannel-width) * (var(--smpp-widget-preview-scale) - 1) +
-      var(--smpp-widget-bag-widget-margin)
-  );
+  margin: var(--smpp-widget-bag-widget-margin);
 
-  transform-origin: top;
-  transform: scale(var(--scale));
-  --scale: var(--smpp-widget-preview-scale);
 }
 
 .smpp-widget-bag-placeholder {
@@ -126,7 +112,7 @@ html {
 }
 
 .smpp-widget-edit-mode:not(.smpp-widget-dragging-something) .smpp-widget:hover {
-  transform: scale(var(--scale)) translateY(-5px);
+  transform: translateY(-5px);
   cursor: move;
 }
 
@@ -147,15 +133,15 @@ html {
 
 @keyframes smppWidgetDelete {
   0% {
-    transform: scale(var(--scale)) rotate(5deg);
+    transform: rotate(5deg);
   }
 
   50% {
-    transform: scale(var(--scale)) rotate(-5deg);
+    transform: rotate(-5deg);
   }
 
   100% {
-    transform: scale(var(--scale)) rotate(5deg);
+    transform: rotate(5deg);
   }
 }
 
@@ -218,15 +204,17 @@ html {
   margin-top: calc(1rem - 4px);
 }
 .smpp-widget-bag-content {
+  position: absolute;
+  transform: scale(var(--smpp-widget-preview-scale));
+  left: calc( -66.666666666vw * var(--smpp-widget-preview-scale) - 66.666666666vw);
+  right: calc( -66.666666666vw * var(--smpp-widget-preview-scale) - 66.666666666vw);
+
   padding-top: 20px;
   background-color: var(--color-base01);
   color: var(--color-text);
   border: solid var(--color-accent) 4px;
   border-radius: 50px;
 
-  margin-left: 5rem;
-  margin-right: 5rem;
-  margin-bottom: 5rem;
 
   flex-grow: 1;
   display: flex;
@@ -239,9 +227,10 @@ html {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  min-height: calc(var(--pannel-width) * var(--smpp-widget-preview-scale));
+  min-height: var(--pannel-width);
 }
 .smpp-widget-bag-group-title {
+  font-size: calc( 1 / var(--smpp-widget-preview-scale) * 1rem );
   margin: 2rem 1rem 0.5rem 1.5rem !important;
 }
 .smpp-widget-bag.smpp-widget-bag-open {
