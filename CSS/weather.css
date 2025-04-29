@@ -93,8 +93,11 @@ input.weather-location-input.active {
   font-weight: 200;
   margin-bottom: 1rem;
 }
+.no-location-icon {
+  height: 15rem;
+}
 .not-found-text {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-weight: 700;
 }
 .compact .conditions-container {
@@ -105,9 +108,11 @@ input.weather-location-input.active {
 .compact .wind-container,
 .compact .humidity-container {
   height: 15%;
+  width: 100%;
 }
 .compact .temperature-container {
   height: 25%;
+  width: 100%;
 }
 .compact .wind-icon,
 .compact .humidity-icon {
@@ -139,10 +144,18 @@ input.weather-location-input.active {
 .compact .weather-location-input {
   font-size: 2rem;
 }
-
-.preview .conditions-container {
-  height: 2rem;
+.compact .not-found-text {
+  font-size: 1.3rem;
 }
+.compact .no-location-icon {
+  height: 10rem;
+}
+
 .preview.compact .conditions-container {
-  width: 2rem;
+  width: 37%;
+}
+
+.weather-preview-title {
+  font-size: 2.5rem;
+  font-weight: 700;
 }

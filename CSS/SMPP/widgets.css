@@ -11,9 +11,9 @@ html {
 
   transform: scale(1) rotate(0deg);
   background-color: var(--color-base01);
-  padding: 20px;
-  border-radius: 15px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 0 10px var(--darken-background);
   margin: 0rem 1rem 0rem 1rem;
   border: 3px solid var(--color-base03);
   box-sizing: border-box;
@@ -23,6 +23,21 @@ html {
 }
 .smpp-widget-preview {
   margin: 1rem;
+  padding: 0.75rem !important;
+  width: 200px; /* target preview width */
+  overflow: hidden; /* hide everything outside 200px */
+  position: relative;
+}
+.smpp-widget-preview:has(.smpp-widget-smartschool) {
+  padding: 0 !important;
+}
+.smpp-widget-preview > * {
+  transform: scale(0.6667); /* scale down to ~66.7% */
+  transform-origin: top left;
+  width: calc(300px - 3rem);
+}
+.smpp-widget-preview:has(.smpp-widget-smartschool) > * {
+  width: 300px;
 }
 
 .smpp-widgets-container {
@@ -39,9 +54,9 @@ html {
 
 .smpp-widget-pannel {
   min-width: calc(
-    300px + (1rem + 3px) * 2
+    300px + (1rem) * 2
   ); /* panelWidth(300px) + (widgetMargin(1rem) + widgetBorderSize(3px) * 2) // times 2 because left and right border+margin */
-  max-width: calc(300px + (1rem + 3px) * 2);
+  max-width: calc(300px + (1rem) * 2);
   background-color: var(--color-homepage-sidebars-bg);
   backdrop-filter: var(--blur-value-large);
 }
@@ -145,9 +160,7 @@ html {
   z-index: 100;
 }
 .enableAnimations .smpp-widget-bag {
-  transition:
-    transform 0.5s,
-    opacity 0.3s;
+  transition: transform 0.5s, opacity 0.3s;
 }
 .smpp-widget-bag-close-fold {
   border-top-left-radius: var(--smpp-widget-bag-fold-radius);
@@ -170,9 +183,7 @@ html {
   z-index: 100; /* Overlap the border below */
 }
 .enableAnimations .smpp-widget-bag-close-fold {
-  transition:
-    height 0.5s,
-    margin-top 0.5s;
+  transition: height 0.5s, margin-top 0.5s;
 }
 .smpp-widget-bag-close-fold .smpp-widget-bag-fold-icon {
   transform: rotate(180deg);
@@ -234,10 +245,7 @@ html {
   cursor: pointer;
 }
 .enableAnimations .smpp-widget-bag-fold {
-  transition:
-    border-color 0.5s,
-    transform 0.5s,
-    opacity 0.3s;
+  transition: border-color 0.5s, transform 0.5s, opacity 0.3s;
 }
 .smpp-widget-bag-fold-icon {
   width: 50px;
@@ -246,9 +254,7 @@ html {
   display: block;
 }
 .enableAnimations .smpp-widget-bag-fold-icon {
-  transition:
-    color 0.5s,
-    transform 0.5s;
+  transition: color 0.5s, transform 0.5s;
 }
 
 .smpp-widget-edit-mode .smpp-widget-bag-fold {

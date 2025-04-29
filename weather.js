@@ -71,7 +71,7 @@ class CompactWeatherWidget extends WidgetBase {
     });
     let compactWeatherTitle = document.createElement("div");
     compactWeatherTitle.classList.add("weather-preview-title");
-    compactWeatherTitle.innerText = "Weather";
+    compactWeatherTitle.innerText = "Tiny Weather";
     compactWeatherPreviewDiv.appendChild(compactWeatherTitle);
     let compactWeatherPreviewContent = document.createElement("div");
     compactWeatherPreviewContent.classList.add("weather-widget-content");
@@ -318,6 +318,7 @@ function createNotFoundContent(code) {
   notFoundText.classList.add("not-found-text");
   if (code == 404) {
     let notFoundIcon = document.createElement("div");
+    notFoundIcon.classList.add("no-location-icon");
     notFoundIcon.innerHTML = noLocationSvg;
     notFoundContent.appendChild(notFoundIcon);
     notFoundText.innerText = "Location not found";
