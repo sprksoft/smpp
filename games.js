@@ -241,7 +241,7 @@ const BIRD_RADIUS = 5;
 const BIRD_X = 50;
 const FLOOR_H = 15;
 const PIPE_GAP = 50;
-const PIPE_SPEED = 0.001;
+const PIPE_SPEED = 0.2;
 const TERMVEL = 0.3;
 const PIPE_W = 10;
 const GRAVITY = 0.0005;
@@ -280,7 +280,12 @@ class FlappyWidget extends GameBase {
     }
   }
 
+  #calcGap() {
+    return Math.max(PIPE_GAP*this.getOpt("speed")*0.01, (BIRD_RADIUS*2)+5);
+  }
+
   #drawPipe(ctx, pipe) {
+    const gap_size = this.#calcGap();
     ctx.fillStyle = getCurThemeVar("--color-accent");
     ctx.lineCap = "round";
     ctx.beginPath();
@@ -288,12 +293,12 @@ class FlappyWidget extends GameBase {
       pipe.x,
       -PIPE_W,
       PIPE_W,
-      pipe.y + PIPE_W - PIPE_GAP / 2,
+      pipe.y + PIPE_W - gap_size / 2,
       PIPE_W,
     );
     ctx.fill();
     ctx.beginPath();
-    const botStartY = pipe.y + PIPE_GAP / 2;
+    const botStartY = pipe.y + gap_size / 2;
     ctx.roundRect(
       pipe.x,
       botStartY,
@@ -304,14 +309,15 @@ class FlappyWidget extends GameBase {
     ctx.fill();
   }
   #updatePipe(pipe, dt) {
-    pipe.x -= this.getOpt("speed") * dt * PIPE_SPEED;
+    pipe.x -= this.getOpt("speed")*0.01 * dt * PIPE_SPEED;
     if (pipe.x < -PIPE_W) {
       this.#resetPipe(pipe);
     }
   }
   #resetPipe(pipe) {
+    const gap_size = this.#calcGap();
     pipe.x = this.canvas.width + PIPE_W;
-    const MARGIN = PIPE_GAP + 10;
+    const MARGIN = (gap_size*0.5) + FLOOR_H + 10;
     pipe.y = Math.random() * (this.canvas.height - MARGIN * 2) + MARGIN;
   }
 
@@ -335,18 +341,18 @@ class FlappyWidget extends GameBase {
     console.log(dt);
     ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.birdY += this.birdVel * dt;
-    this.birdVel = Math.min(this.birdVel + GRAVITY * dt, TERMVEL);
+    this.birdVel = Math.min(this.birdVel +  GRAVITY * this.getOpt("speed")*0.01 * dt, TERMVEL);
 
     if (this.jump) {
       this.jump = false;
-      this.birdVel = -0.2; //Math.min(this.birdVel-0.2, -0.2);
+      this.birdVel = -0.2*this.getOpt("speed")*0.01; //Math.min(this.birdVel-0.2, -0.2);
     }
     if (this.birdY > this.canvas.height - FLOOR_H - BIRD_RADIUS) {
       this.stopGame(0);
     }
 
     this.bgX =
-      (this.bgX - this.getOpt("speed") * PIPE_SPEED * dt) % this.canvas.width;
+      (this.bgX - this.getOpt("speed") *0.01 * PIPE_SPEED * dt) % this.canvas.width;
     this.#updatePipe(this.pipe, dt);
 
     this.#drawBird(ctx);
