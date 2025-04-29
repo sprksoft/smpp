@@ -3,7 +3,7 @@ html {
   --smpp-widget-bag-fold-radius: 40px;
   --smpp-widget-bag-fold-width: 400px;
   --smpp-widget-bag-widget-margin: 1rem;
-  --smpp-widget-preview-scale: 0.5;
+  --smpp-widget-preview-scale: 0.7;
 
   --pannel-width: calc(
     300px + 1rem * 2
@@ -205,9 +205,9 @@ html {
 }
 .smpp-widget-bag-content {
   position: absolute;
-  transform: scale(var(--smpp-widget-preview-scale));
-  left: calc( -66.666666666vw * var(--smpp-widget-preview-scale) - 66.666666666vw);
-  right: calc( -66.666666666vw * var(--smpp-widget-preview-scale) - 66.666666666vw);
+  transform: translateX(calc( -50% * (1 - var(--smpp-widget-preview-scale)) )) translateY(calc( -50% * (1 - var(--smpp-widget-preview-scale)) )) scale(var(--smpp-widget-preview-scale));
+  width: calc( 100% * 1/var(--smpp-widget-preview-scale));
+  height: calc( 100% * 1/var(--smpp-widget-preview-scale));
 
   padding-top: 20px;
   background-color: var(--color-base01);
@@ -230,7 +230,7 @@ html {
   min-height: var(--pannel-width);
 }
 .smpp-widget-bag-group-title {
-  font-size: calc( 1 / var(--smpp-widget-preview-scale) * 1rem );
+  font-size: calc( 1 / var(--smpp-widget-preview-scale) * 2rem );
   margin: 2rem 1rem 0.5rem 1.5rem !important;
 }
 .smpp-widget-bag.smpp-widget-bag-open {
