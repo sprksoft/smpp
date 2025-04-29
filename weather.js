@@ -19,12 +19,21 @@ class WeatherWidget extends WidgetBase {
 
   async createPreview() {
     let weatherPreviewDiv = document.createElement("div");
-    weatherPreviewDiv.id = "weather-preview-div";
+    weatherPreviewDiv.classList.add("weather-div");
+    weatherPreviewDiv.classList.add("preview");
 
+    let weatherAppData = await browser.runtime.sendMessage({
+      action: "getWeatherAppData",
+    });
     let weatherTitle = document.createElement("div");
-    weatherTitle.id = "weather-preview-title";
+    weatherTitle.classList.add("weather-preview-title");
     weatherTitle.innerText = "Weather";
     weatherPreviewDiv.appendChild(weatherTitle);
+    let weatherPreviewContent = document.createElement("div");
+    weatherPreviewContent.classList.add("weather-widget-content");
+    weatherPreviewDiv.appendChild(
+      createWeatherWidgetPreview(weatherPreviewContent, weatherAppData, false)
+    );
     return weatherPreviewDiv;
   }
 }
@@ -52,31 +61,117 @@ class CompactWeatherWidget extends WidgetBase {
   }
 
   async createPreview() {
-    let compactPreviewDiv = document.createElement("div");
-    compactPreviewDiv.id = "compact-weather-preview-div";
+    let compactWeatherPreviewDiv = document.createElement("div");
+    compactWeatherPreviewDiv.classList.add("weather-div");
+    compactWeatherPreviewDiv.classList.add("compact");
+    compactWeatherPreviewDiv.classList.add("preview");
 
-    let compactTitle = document.createElement("div");
-    compactTitle.id = "compact-weather-preview-title";
-    compactTitle.innerText = "Tiny Weather";
-    compactPreviewDiv.appendChild(compactTitle);
-    return compactPreviewDiv;
+    let weatherAppData = await browser.runtime.sendMessage({
+      action: "getWeatherAppData",
+    });
+    let compactWeatherTitle = document.createElement("div");
+    compactWeatherTitle.classList.add("weather-preview-title");
+    compactWeatherTitle.innerText = "Weather";
+    compactWeatherPreviewDiv.appendChild(compactWeatherTitle);
+    let compactWeatherPreviewContent = document.createElement("div");
+    compactWeatherPreviewContent.classList.add("weather-widget-content");
+    compactWeatherPreviewDiv.appendChild(
+      createWeatherWidgetPreview(
+        compactWeatherPreviewContent,
+        weatherAppData,
+        true
+      )
+    );
+    return compactWeatherPreviewDiv;
   }
 }
 registerWidget(new CompactWeatherWidget());
 
 async function migrateWeaterData() {
   console.log("Migrating weather data");
+  let newWeatherData = localStorage.getItem("weatherdata");
+  if (newWeatherData == null) {
+    newWeatherData = await browser.runtime.sendMessage({
+      action: "fetchWeatherData",
+      location: localStorage.getItem("lastlocation"),
+    });
+  }
   await browser.runtime.sendMessage({
     action: "setWeatherAppData",
     data: {
-      weatherData: localStorage.getItem("weatherdata"),
+      weatherData: newWeatherData,
       lastUpdateDate: localStorage.getItem("lastupdate"),
       lastLocation: localStorage.getItem("lastlocation"),
     },
   });
+
   localStorage.removeItem("weatherdata");
   localStorage.removeItem("lastupdate");
   localStorage.removeItem("lastlocation");
+}
+
+function createWeatherWidgetPreview(container, data, isCompact) {
+  console.log("got called");
+  let weatherData = data.weatherData;
+  let mainIcon = document.createElement("div");
+  mainIcon.classList.add("weather-icon-container");
+
+  if (weatherData.cod == 200) {
+    mainIcon.innerHTML = getWeatherIcon(
+      weatherData.weather[0].main,
+      weatherData.weather[0].description
+    );
+  } else {
+    mainIcon.innerHTML = getWeatherIcon("Rain", "");
+  }
+  let conditionsContainer = document.createElement("div");
+  conditionsContainer.classList.add("conditions-container");
+
+  let humidityContainer = document.createElement("div");
+  humidityContainer.classList.add("humidity-container");
+  humidityContainer.classList.add("condition-container");
+  let humidityIcon = document.createElement("div");
+  humidityIcon.classList.add("humidity-icon");
+  humidityIcon.innerHTML = humiditySvg;
+  humidityContainer.appendChild(humidityIcon);
+
+  let feelsLikeContainer = document.createElement("div");
+  feelsLikeContainer.classList.add("feels-like-container");
+  feelsLikeContainer.classList.add("condition-container");
+  let feelsLikeIcon = document.createElement("div");
+  feelsLikeIcon.classList.add("feels-like-icon");
+  feelsLikeIcon.innerHTML = feelsLikeSvg;
+  feelsLikeContainer.appendChild(feelsLikeIcon);
+
+  let windContainer = document.createElement("div");
+  windContainer.classList.add("wind-container");
+  windContainer.classList.add("condition-container");
+  let windIcon = document.createElement("div");
+  windIcon.classList.add("wind-icon");
+  windIcon.innerHTML = windSvg;
+  windContainer.appendChild(windIcon);
+
+  if (isCompact) {
+    let temperatureContainer = document.createElement("div");
+    temperatureContainer.classList.add("temperature-container");
+    temperatureContainer.classList.add("condition-container");
+    let temperatureIcon = document.createElement("div");
+    temperatureIcon.classList.add("temperature-icon");
+    temperatureIcon.innerHTML = temperatureSvg;
+    temperatureContainer.appendChild(temperatureIcon);
+
+    conditionsContainer.appendChild(humidityContainer);
+    conditionsContainer.appendChild(windContainer);
+    conditionsContainer.appendChild(temperatureContainer);
+  } else {
+    conditionsContainer.appendChild(humidityContainer);
+    conditionsContainer.appendChild(feelsLikeContainer);
+    conditionsContainer.appendChild(windContainer);
+  }
+
+  container.appendChild(mainIcon);
+  container.appendChild(conditionsContainer);
+  return container;
 }
 
 async function createWeatherWidget(container, data, isCompact) {

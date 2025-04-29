@@ -139,3 +139,10 @@ input.weather-location-input.active {
 .compact .weather-location-input {
   font-size: 2rem;
 }
+
+.preview .conditions-container {
+  height: 2rem;
+}
+.preview.compact .conditions-container {
+  width: 2rem;
+}
