@@ -41,7 +41,8 @@ class WidgetBase {
   #element;
   #content;
   #preview;
-  #bagSlot;
+  #bagPlaceHolder;
+  #bagGroup;
   #aboutToDel;
 
   constructor() {
@@ -62,9 +63,13 @@ class WidgetBase {
   }
 
   async #intoBag() {
+    if (this.#element?.parentElement == this.#bagGroup) {
+      return;
+    }
     bagHoverExit();
     await this.#setPreview(true);
-    this.#bagSlot.appendChild(this.#element);
+    this.#bagGroup.insertBefore(this.#element, this.#bagPlaceHolder);
+    this.#bagPlaceHolder.remove();
   }
 
   async #setPreview(preview) {
@@ -93,6 +98,7 @@ class WidgetBase {
       newContent = createWidgetErrorContent(this.name);
     }
     this.#content?.remove();
+    newContent.classList.add("smpp-widget-content");
     this.#content = newContent;
     this.#element.dataset.widgetName = this.name;
     this.#element.appendChild(this.#content);
@@ -103,12 +109,17 @@ class WidgetBase {
     return this.#preview;
   }
 
-  async registerBagSlot(slot) {
-    this.#bagSlot = slot;
+  async createIfNotExist() {
     if (!this.#content) {
       await this.#intoBag();
     }
   }
+
+  async setBagPlaceHolder(group, placeholder) {
+    this.#bagPlaceHolder = placeholder;
+    this.#bagGroup = group;
+  }
+
 
   async addToPannel(pannel) {
     await this.#setPreview(false);
@@ -197,11 +208,16 @@ class WidgetBase {
     }
     const el = this.#element;
 
-    if (!this.isPreview()) {
-      this.#element.nextElementSibling.remove(); // remove insertion point.
-    }
     let sourceIp = this.#element.previousElementSibling;
     let rect = this.#element.getBoundingClientRect();
+
+    if (el.parentElement == this.#bagGroup) {
+      this.#bagGroup.insertBefore(this.#bagPlaceHolder, el);
+      el.remove();
+    } else {
+      el.nextElementSibling.remove(); // remove insertion point.
+    }
+
 
     curDragInfo = new WidgetDragInfo(this, sourceIp, {
       x: grabX - rect.left,
@@ -209,7 +225,6 @@ class WidgetBase {
     });
     document.body.classList.add("smpp-widget-dragging-something");
     el.style.width = rect.width + "px";
-    el.style.height = rect.height + "px";
     el.style.left = rect.left + "px";
     el.style.top = rect.top + "px";
 
@@ -520,9 +535,10 @@ async function createGroup(bag, name, displayName) {
   group.classList.add("smpp-widget-bag-group");
   for (let widget of widgets) {
     if (widget.category == name) {
-      let slot = document.createElement("div");
-      await widget.registerBagSlot(slot);
-      group.appendChild(slot);
+      let pl = document.createElement("div");
+      pl.classList.add("smpp-widget-bag-placeholder");
+      await widget.setBagPlaceHolder(group, pl);
+      group.appendChild(pl);
     }
   }
   let groupTitle = document.createElement("h2");
@@ -552,6 +568,10 @@ async function createWidgetBag() {
   await createGroup(content, "games", "Games");
   await createGroup(content, "other", "Overige widgets");
   bag.appendChild(content);
+
+  for (let widget of widgets) {
+    await widget.createIfNotExist();
+  }
 
   document.body.appendChild(bag);
   return bag;

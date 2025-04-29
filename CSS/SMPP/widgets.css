@@ -2,6 +2,12 @@ html {
   --smpp-widget-insertion-point-size: 4px;
   --smpp-widget-bag-fold-radius: 40px;
   --smpp-widget-bag-fold-width: 400px;
+  --smpp-widget-bag-widget-margin: 1rem;
+  --smpp-widget-preview-scale: 0.7;
+
+  --pannel-width: calc(
+    300px + 1rem * 2
+  ); /*  panelWidth(300px) + widgetMargin(1rem) + widgetBorderSize(3px) * 2  // times 2 because left and right border+margin */
 }
 
 /* Only use rem's here no em because widgets will be moved to body when they are dragged */
@@ -22,22 +28,8 @@ html {
   /* Inherited font-size is not in rem */
 }
 .smpp-widget-preview {
-  margin: 1rem;
-  padding: 0.75rem !important;
-  width: 200px; /* target preview width */
   overflow: hidden; /* hide everything outside 200px */
   position: relative;
-}
-.smpp-widget-preview:has(.smpp-widget-smartschool) {
-  padding: 0 !important;
-}
-.smpp-widget-preview > * {
-  transform: scale(0.6667); /* scale down to ~66.7% */
-  transform-origin: top left;
-  width: calc(300px - 3rem);
-}
-.smpp-widget-preview:has(.smpp-widget-smartschool) > * {
-  width: 300px;
 }
 
 .smpp-widgets-container {
@@ -52,13 +44,41 @@ html {
   overflow: scroll;
 }
 
+.smpp-widget {
+  --scale: 1;
+}
+.smpp-widget-bag-placeholder,
+.smpp-widget-preview {
+  min-width: var(--pannel-width);
+  max-width: var(--pannel-width);
+  margin: calc(
+    var(--pannel-width) * (var(--smpp-widget-preview-scale) * 0.5 - 0.5) +
+      var(--smpp-widget-bag-widget-margin)
+  ); /* Calc negative margin to offset scale for flex container to be happy. */
+  margin-top: var(--smpp-widget-bag-widget-margin);
+  margin-bottom: calc(
+    var(--pannel-width) * (var(--smpp-widget-preview-scale) - 1) +
+      var(--smpp-widget-bag-widget-margin)
+  );
+
+  transform-origin: top;
+  transform: scale(var(--scale));
+  --scale: var(--smpp-widget-preview-scale);
+}
+
+.smpp-widget-bag-placeholder {
+  background: var(--color-base02);
+  border-radius: 1.5rem;
+}
+
 .smpp-widget-pannel {
   min-width: calc(
-    300px + (1rem) * 2
-  ); /* panelWidth(300px) + (widgetMargin(1rem) + widgetBorderSize(3px) * 2) // times 2 because left and right border+margin */
+    300px + 1rem * 2
+  ); /* panelWidth(300px) + widgetMargin(1rem) + widgetBorderSize(3px) * 2  // times 2 because left and right border+margin */
   max-width: calc(300px + (1rem) * 2);
   background-color: var(--color-homepage-sidebars-bg);
   backdrop-filter: var(--blur-value-large);
+  overflow: auto; /* Enable scroll because when there are too many widgets in 1 panel the page scrolls weird*/
 }
 
 .smpp-widget-insertion-point {
@@ -106,7 +126,7 @@ html {
 }
 
 .smpp-widget-edit-mode:not(.smpp-widget-dragging-something) .smpp-widget:hover {
-  transform: translateY(-5px);
+  transform: scale(var(--scale)) translateY(-5px);
   cursor: move;
 }
 
@@ -127,15 +147,15 @@ html {
 
 @keyframes smppWidgetDelete {
   0% {
-    transform: rotate(5deg);
+    transform: scale(var(--scale)) rotate(5deg);
   }
 
   50% {
-    transform: rotate(-5deg);
+    transform: scale(var(--scale)) rotate(-5deg);
   }
 
   100% {
-    transform: rotate(5deg);
+    transform: scale(var(--scale)) rotate(5deg);
   }
 }
 
@@ -160,7 +180,9 @@ html {
   z-index: 100;
 }
 .enableAnimations .smpp-widget-bag {
-  transition: transform 0.5s, opacity 0.3s;
+  transition:
+    transform 0.5s,
+    opacity 0.3s;
 }
 .smpp-widget-bag-close-fold {
   border-top-left-radius: var(--smpp-widget-bag-fold-radius);
@@ -183,7 +205,9 @@ html {
   z-index: 100; /* Overlap the border below */
 }
 .enableAnimations .smpp-widget-bag-close-fold {
-  transition: height 0.5s, margin-top 0.5s;
+  transition:
+    height 0.5s,
+    margin-top 0.5s;
 }
 .smpp-widget-bag-close-fold .smpp-widget-bag-fold-icon {
   transform: rotate(180deg);
@@ -215,6 +239,7 @@ html {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  min-height: calc(var(--pannel-width) * var(--smpp-widget-preview-scale));
 }
 .smpp-widget-bag-group-title {
   margin: 2rem 1rem 0.5rem 1.5rem !important;
@@ -245,7 +270,10 @@ html {
   cursor: pointer;
 }
 .enableAnimations .smpp-widget-bag-fold {
-  transition: border-color 0.5s, transform 0.5s, opacity 0.3s;
+  transition:
+    border-color 0.5s,
+    transform 0.5s,
+    opacity 0.3s;
 }
 .smpp-widget-bag-fold-icon {
   width: 50px;
@@ -254,7 +282,9 @@ html {
   display: block;
 }
 .enableAnimations .smpp-widget-bag-fold-icon {
-  transition: color 0.5s, transform 0.5s;
+  transition:
+    color 0.5s,
+    transform 0.5s;
 }
 
 .smpp-widget-edit-mode .smpp-widget-bag-fold {
@@ -288,5 +318,5 @@ html {
   display: block;
 }
 .smpp-widget:has(.smpp-widget-smartschool) {
-  padding: 0px;
+  padding: 0px !important;
 }
