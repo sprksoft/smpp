@@ -157,7 +157,7 @@ class WidgetBase {
     } else {
       if (targetIp.classList.contains("smpp-widget-insertion-point-pannel")) {
         let pannelContainer = targetIp.parentElement;
-        let pannel = createPannelHTML({ widgets: [] });
+        let pannel = await createPannelHTML({ widgets: [] });
         pannelContainer.insertBefore(
           createInsertionPointHTML(true),
           targetIp.nextElementSibling,
