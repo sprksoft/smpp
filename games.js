@@ -26,6 +26,7 @@ class GameBase extends WidgetBase {
   score;
   playing;
   hasPlayedAtLeastOnce;
+  #hiScore;
   #requestStopGame;
   #options;
   #lastTs;
@@ -43,9 +44,12 @@ class GameBase extends WidgetBase {
     return this.#options[name];
   }
 
-  stopGame(score) {
+  stopGame() {
     this.#requestStopGame = true;
-    this.#updateScore(score);
+    if (this.score > this.#hiScore) {
+      this.#hiScore = this.score;
+    }
+    this.#updateScore();
   }
   // End protected
 
@@ -55,9 +59,8 @@ class GameBase extends WidgetBase {
     this.#options[name] = value * 1;
   }
 
-  #updateScore(score) {
-    this.#scoreEl.innerText = "High Score: " + score;
-    this.score = score;
+  #updateScore() {
+    this.#scoreEl.innerText = "High Score: " + this.#hiScore;
   }
 
   #draw(ts) {
@@ -77,7 +80,7 @@ class GameBase extends WidgetBase {
         this.#buttonEl.innerText = "Try Again (Space)";
         this.hasPlayedAtLeastOnce = true;
         this.lastTs = undefined;
-      }, 1);
+      }, 500);
       return;
     }
 
@@ -95,7 +98,7 @@ class GameBase extends WidgetBase {
       game: this.constructor.name,
       data: {
         options: this.#options,
-        score: this.score,
+        score: this.#hiScore,
       },
     });
   }
@@ -106,6 +109,7 @@ class GameBase extends WidgetBase {
     this.#requestStopGame = false;
     this.#ctx = this.canvas.getContext("2d");
     this.playing = true;
+    this.score = 0;
     await this.onGameStart();
 
     this.#lastTs = undefined;
@@ -155,7 +159,7 @@ class GameBase extends WidgetBase {
 
     this.#scoreEl = document.createElement("span");
     this.#scoreEl.classList.add("game-score");
-    this.#updateScore(gameData.score);
+    this.#hiScore = gameData.score;
     menu.appendChild(this.#scoreEl);
 
     for (let opt of this.options) {
@@ -263,6 +267,7 @@ class FlappyWidget extends GameBase {
     let w = this.canvas.width;
     let h = this.canvas.height;
     ctx.beginPath();
+    ctx.lineWidth = 1;
     ctx.moveTo(0, h - FLOOR_H);
     ctx.lineTo(w, h - FLOOR_H);
     ctx.stroke();
@@ -298,7 +303,7 @@ class FlappyWidget extends GameBase {
     );
     ctx.fill();
     ctx.beginPath();
-    const botStartY = pipe.y + gap_size / 2;
+    const botStartY = pipe.y + gap_size * 0.5;
     ctx.roundRect(
       pipe.x,
       botStartY,
@@ -313,12 +318,25 @@ class FlappyWidget extends GameBase {
     if (pipe.x < -PIPE_W) {
       this.#resetPipe(pipe);
     }
+
+    if (pipe.x < BIRD_X+BIRD_RADIUS && !pipe.checked) {
+      pipe.checked=true;
+      const gap_size = this.#calcGap();
+      const gapTop = pipe.y-gap_size*0.5;
+      const gapBot = pipe.y+gap_size*0.5;
+      if (this.birdY+BIRD_RADIUS >= gapTop && this.birdY+BIRD_RADIUS < gapBot) {
+        this.score++;
+      }else {
+        this.stopGame();
+      }
+    }
   }
   #resetPipe(pipe) {
     const gap_size = this.#calcGap();
     pipe.x = this.canvas.width + PIPE_W;
     const MARGIN = (gap_size*0.5) + FLOOR_H + 10;
     pipe.y = Math.random() * (this.canvas.height - MARGIN * 2) + MARGIN;
+    pipe.checked=false;
   }
 
   #drawBird(ctx) {
@@ -345,14 +363,15 @@ class FlappyWidget extends GameBase {
 
     if (this.jump) {
       this.jump = false;
-      this.birdVel = -0.2*this.getOpt("speed")*0.01; //Math.min(this.birdVel-0.2, -0.2);
+      this.birdVel = -0.2 * this.getOpt("speed")*0.01; //Math.min(this.birdVel-0.2, -0.2);
     }
     if (this.birdY > this.canvas.height - FLOOR_H - BIRD_RADIUS) {
-      this.stopGame(0);
+      this.birdY = this.canvas.height - FLOOR_H - BIRD_RADIUS;
+      this.stopGame();
     }
 
     this.bgX =
-      (this.bgX - this.getOpt("speed") *0.01 * PIPE_SPEED * dt) % this.canvas.width;
+      (this.bgX - this.getOpt("speed") * 0.01 * PIPE_SPEED * dt) % this.canvas.width;
     this.#updatePipe(this.pipe, dt);
 
     this.#drawBird(ctx);
