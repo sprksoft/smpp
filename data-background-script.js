@@ -16,6 +16,7 @@ function getDefaultQuickSettings(isLite) {
       backgroundBlurAmount: 0,
       showNews: true,
       customUserName: null,
+      quicks: [],
     };
   }
   return {
@@ -26,6 +27,7 @@ function getDefaultQuickSettings(isLite) {
     backgroundLink: null,
     backgroundBlurAmount: 0,
     showNews: true,
+    quicks: [],
     weatherOverlaySelection: 1,
     weatherOverlayAmount: 0,
     customUserName: null,

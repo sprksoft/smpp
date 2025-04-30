@@ -27,6 +27,12 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
       sendResponse({ succes: true });
       console.log("Quick settings data saved.");
     }
+    if (message.action === "setQuickSetting") {
+      const settingsData = await getQuickSettingsData();
+      settingsData[message.name] = message.value;
+      await browser.storage.local.set({ settingsData: settingsData });
+      sendResponse({ succes: true });
+    }
     if (message.action === "getQuickSettingsData") {
       const settingsData = await getQuickSettingsData();
       sendResponse(settingsData);
