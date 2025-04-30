@@ -32,6 +32,7 @@ class WidgetDragInfo {
   constructor(widget, sourceInsertionPoint, offset) {
     this.widget = widget;
     this.sourceInsertionPoint = sourceInsertionPoint;
+    this.targetInsertionPoint = null;
     this.offset = offset;
   }
 }
@@ -62,7 +63,7 @@ class WidgetBase {
   }
 
   async #intoBag() {
-    if (this.#element?.parentElement == this.#bagGroup) {
+    if (this.#element.parentElement == this.#bagGroup) {
       return;
     }
     await this.#setPreview(true);
@@ -154,6 +155,7 @@ class WidgetBase {
     el.style = "";
 
     let targetIp = curDragInfo.targetInsertionPoint;
+    console.log("orig targetIp", targetIp);
     targetIp?.classList.remove("smpp-widget-insertion-point-targeted");
     if (cancel || !targetIp) {
       // Put back were came from if targetInsertionPoint is null or when we cancel
@@ -163,6 +165,7 @@ class WidgetBase {
       targetIp = null;
     }
 
+    console.log(targetIp);
     if (targetIp == null) {
       await this.#intoBag();
     } else {
@@ -212,6 +215,7 @@ class WidgetBase {
     let rect = this.#element.getBoundingClientRect();
 
     if (el.parentElement == this.#bagGroup) {
+      sourceIp = null;
       this.#bagGroup.insertBefore(this.#bagPlaceHolder, el);
       el.remove();
     } else {
@@ -642,7 +646,9 @@ document.addEventListener("keyup", async (e) => {
   } else if (e.key == "e") {
     await setEditMode(true);
   } else if (e.key == " ") {
-    toggleBag();
+    if (widgetEditMode) {
+      toggleBag();
+    }
   }
 });
 
