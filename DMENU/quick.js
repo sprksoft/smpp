@@ -40,21 +40,22 @@ function remove_quick(name) {
   }
 }
 
-function quick_load() {
-  let quicks = PLEASE_DELETE_ME_WHEN_FIXED().quicks;
-  if (quicks == undefined) {
+async function quick_load() {
+  let conf = await browser.runtime.sendMessage({
+    action: "getQuickSettingsData",
+  });
+  if (!conf.quicks) {
     return [];
   }
-  if (quicks == undefined) {
-    return [];
-  }
-  return quicks;
+  return conf.quicks;
 }
 
-function quick_save() {
-  let config = PLEASE_DELETE_ME_WHEN_FIXED();
-  config.quicks = quicks;
-  set_config(config);
+async function quick_save() {
+  let quicks = await browser.runtime.sendMessage({
+    action: "setQuickSetting",
+    name: "quicks",
+    values: quicks,
+  });
 }
 
 function add_quick_interactive() {
@@ -77,10 +78,10 @@ function add_quick_interactive() {
           }
           add_quick(name, value);
         },
-        "value:"
+        "value:",
       );
     },
-    "name:"
+    "name:",
   );
 }
 
@@ -91,7 +92,7 @@ function remove_quick_interactive() {
     function (name, shift) {
       remove_quick(name);
     },
-    "name:"
+    "name:",
   );
 }
 
@@ -108,10 +109,10 @@ function config_menu() {
           conf[cmd] = val;
           set_config(conf);
         },
-        "value:"
+        "value:",
       );
     },
-    "config: "
+    "config: ",
   );
 }
 
@@ -157,7 +158,7 @@ async function fetch_vakken() {
 function scrape_goto() {
   goto_items = [];
   let goto_items_html = document.querySelectorAll(
-    ".js-shortcuts-container > a"
+    ".js-shortcuts-container > a",
   );
   for (let i = 0; i < goto_items_html.length; i++) {
     const item = goto_items_html[i];
@@ -186,7 +187,7 @@ function do_qm(opener = "") {
         "discord",
         "toggle performance mode",
         "dizzy",
-      ])
+      ]),
     );
 
   let role = document.doBlackMagic ? document.doBlackMagic() : "User"; //Gebruik black magic om de global chat role te krijgen.
@@ -211,7 +212,7 @@ function do_qm(opener = "") {
               set_background(url);
               store_background(url);
             },
-            "bg url:"
+            "bg url:",
           );
           return;
         case "config":
@@ -291,7 +292,7 @@ function do_qm(opener = "") {
       }
     },
     "quick:",
-    (opener = opener)
+    (opener = opener),
   );
 }
 

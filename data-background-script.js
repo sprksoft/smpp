@@ -15,6 +15,7 @@ function getDefaultQuickSettings(isLite) {
       backgroundLink: null,
       backgroundBlurAmount: 0,
       showNews: true,
+      quicks: [],
     };
   }
   return {
@@ -25,6 +26,7 @@ function getDefaultQuickSettings(isLite) {
     backgroundLink: null,
     backgroundBlurAmount: 0,
     showNews: true,
+    quicks: [],
     weatherOverlaySelection: 1,
     weatherOverlayAmount: 0,
   };
