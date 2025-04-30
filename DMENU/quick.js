@@ -50,8 +50,6 @@ async function quick_load() {
   return conf.quicks;
 }
 
-
-
 async function quick_save() {
   let quicks = await browser.runtime.sendMessage({
     action: "setQuickSetting",
