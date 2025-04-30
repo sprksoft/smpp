@@ -53,7 +53,7 @@ function createFlappyApp() {
     let rightContainer = document.getElementById("weathercontainer");
     rightContainer.appendChild(div);
 
-    div.innerHTML = `<div id=flappy-game-div><h2 class=gameover id=flappytitle>Flappy Bird++</h2><p class=score>High Score: ${highscore}</p><button class="white_text_button" id="flappy_play_button">Play</button><p class=score>Speed:</p><div class="textandbutton"><input type="range" min="10" max="300" value="100" class="sliderblur speedslider" id="flappyspeedslider"><p id=flappyspeedmultiplier class=text_next_to_slider>1.5x</p></div>`;
+    div.innerHTML = `<div id=flappy-game-div><h2 class=gameover id=flappytitle>Flappy Bird++</h2><p class=score>High Score: ${highscore}</p><button class="white_text_button" id="flappy_play_button">Play</button><p class=score>Speed:</p><div class="textandbutton"><input type="range" min="10" max="300" value="100" class="main-slider speedslider" id="flappyspeedslider"><p id=flappyspeedmultiplier class=text_next_to_slider>1.5x</p></div>`;
     loadFlappySpeed();
     document.getElementById('flappy_play_button').addEventListener("click", () => {
         div.innerHTML = '<div id="flappy-game-div"><canvas id="flappy-game-container"></div>';
@@ -65,7 +65,7 @@ function createFlappyApp() {
 function flappyGameOver(score = 0) {
     const gamediv = document.getElementById("flappy-game-div");
     gamediv.innerHTML = `<h2 class=gameover id=flappytitle>Game Over!</h2><p class=score>Score: ${score}</p> <button class="white_text_button" id=flappytryagain>
-    Try Again (Space)</button><p class=score>Speed:</p><div class="textandbutton"><input type="range" min="10" max="300" value="100" class="sliderblur speedslider" id="flappyspeedslider"><p id=flappyspeedmultiplier class=text_next_to_slider>1.5x</p>
+    Try Again (Space)</button><p class=score>Speed:</p><div class="textandbutton"><input type="range" min="10" max="300" value="100" class="main-slider speedslider" id="flappyspeedslider"><p id=flappyspeedmultiplier class=text_next_to_slider>1.5x</p>
     `;
     loadFlappySpeed();
     var enterKeyHandler = function (event) {

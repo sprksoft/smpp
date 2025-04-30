@@ -3,11 +3,18 @@ let gc_initialized = false;
 
 function make_iframe() {
   const GlCHatplace = document.getElementById("global_chat_window");
-  let current_profile = get_config().profile;
+  let current_profile = PLEASE_DELETE_ME_WHEN_FIXED().profile;
   let current_theme = get_theme(current_profile);
 
   const placeholderTextGlChat = username_override || orig_name;
-  let query_string = get_theme_as_query_string(current_theme, ["color-base00", "color-base01", "color-base02", "color-base03", "color-accent", "color-text"]);
+  let query_string = get_theme_as_query_string(current_theme, [
+    "color-base00",
+    "color-base01",
+    "color-base02",
+    "color-base03",
+    "color-accent",
+    "color-text",
+  ]);
   if (query_string.startsWith("&")) {
     query_string = query_string.substring(1);
   }
@@ -37,8 +44,14 @@ function make_iframe() {
 
   GlCHatplace.innerHTML = GlCHatplaceHTML;
 
-  GlCHatplace.querySelector('.gc-fullscreen').addEventListener('click', toggleFullscreen);
-  GlCHatplace.querySelector('.gc-close').addEventListener('click', remove_gcwin);
+  GlCHatplace.querySelector(".gc-fullscreen").addEventListener(
+    "click",
+    toggleFullscreen
+  );
+  GlCHatplace.querySelector(".gc-close").addEventListener(
+    "click",
+    remove_gcwin
+  );
 }
 
 function toggleFullscreen() {
@@ -60,7 +73,10 @@ function make_gcwin(is_hidden) {
   gc_is_open = false;
 
   document.addEventListener("click", (e) => {
-    if (gc_is_open && !e.target.closest('#global_chat_button, .global_chat_window')) {
+    if (
+      gc_is_open &&
+      !e.target.closest("#global_chat_button, .global_chat_window")
+    ) {
       remove_gcwin();
     }
   });
@@ -72,12 +88,12 @@ function open_global_chat() {
   let win = document.getElementById("global_chat_window");
   if (win) {
     win.classList.remove("gc-hidden");
-    win.style.display = 'block';
+    win.style.display = "block";
   } else {
     make_gcwin(false);
   }
-  gc_initialized = true
-  gc_is_open = true
+  gc_initialized = true;
+  gc_is_open = true;
 }
 function gc_close() {
   gc_is_open = false;
@@ -87,17 +103,18 @@ function gc_close() {
 function remove_gcwin() {
   let win = document.getElementById("global_chat_window");
   if (win) {
-    win.remove()
+    win.remove();
   }
 }
 
 function createGCButton() {
-  const topNav = document.querySelector("nav.topnav")
+  const topNav = document.querySelector("nav.topnav");
 
   const goGlChatButton = document.createElement("button");
-  goGlChatButton.title="Global chat (chat met iedereen die de extensie gebruikt)"
-  goGlChatButton.id = "global_chat_button"
-  goGlChatButton.className = "topnav__btn"
+  goGlChatButton.title =
+    "Global chat (chat met iedereen die de extensie gebruikt)";
+  goGlChatButton.id = "global_chat_button";
+  goGlChatButton.className = "topnav__btn";
   goGlChatButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="3009 50 450 450" class="st1">
   <g>
     <g id="Laag_1">
@@ -107,7 +124,7 @@ function createGCButton() {
     </g>
   </g>
 </svg>
-`
-  goGlChatButton.addEventListener("click",open_global_chat)
+`;
+  goGlChatButton.addEventListener("click", open_global_chat);
   return goGlChatButton;
 }

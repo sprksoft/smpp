@@ -44,7 +44,7 @@
   text-decoration-color: var(--color-text) !important;
   text-decoration-thickness: 2px !important;
   width: auto !important;
-  transition: none !important
+  transition: none !important;
 }
 
 .switches-container {
@@ -83,7 +83,7 @@
   width: 0px;
 }
 
-#performance-mode-toggle:checked+svg {
+#performance-mode-toggle:checked + svg {
   fill: var(--color-accent) !important;
 }
 
@@ -99,7 +99,8 @@
 .enableAnimations .token,
 .enableAnimations .titleRight {
   transition-duration: 0.1s !important;
-  transition: background-color 0.2s, border-color 0.3s, text-decoration 0.1s, width 0.2s !important;
+  transition: background-color 0.2s, border-color 0.3s, text-decoration 0.1s,
+    width 0.2s !important;
 }
 
 .topnav__btn:hover {
@@ -165,7 +166,7 @@
   transition: font-size 0.3s, background-position-x 0.3s, border-radius 0.3s;
 }
 
-.topnav__menu--shortcuts>.topnav__menuitem {
+.topnav__menu--shortcuts > .topnav__menuitem {
   margin-right: 7x !important;
 }
 
@@ -182,7 +183,10 @@ li {
   text-align: center !important;
 }
 
-.pupil_nav_info .pupil_nav_info_pupilData .pupil_nav_pupilinfo .pupil_nav_pupilinfo_item.teachers {
+.pupil_nav_info
+  .pupil_nav_info_pupilData
+  .pupil_nav_pupilinfo
+  .pupil_nav_pupilinfo_item.teachers {
   max-width: none !important;
 }
 
@@ -191,11 +195,13 @@ li {
 }
 
 .tree-classic li.open {
-  background: url(/includes/jQuery/plugins/jsTree/themes/classic/icons.png) -32px -48px no-repeat !important;
+  background: url(/includes/jQuery/plugins/jsTree/themes/classic/icons.png) -32px -48px
+    no-repeat !important;
 }
 
 .tree-classic li.closed {
-  background: url(/includes/jQuery/plugins/jsTree/themes/classic/icons.png) -48px -32px no-repeat !important;
+  background: url(/includes/jQuery/plugins/jsTree/themes/classic/icons.png) -48px -32px
+    no-repeat !important;
 }
 
 .tree-classic li {
@@ -223,7 +229,7 @@ li {
 }
 
 .smsc-column-nav__item a.smsc-column-nav__button {
-  font-weight: 400 !important;
+  font-weight: 500 !important;
   color: var(--color-text) !important;
 }
 
@@ -248,7 +254,6 @@ li {
   border-radius: 10px !important;
   border: 2px solid var(--color-base02) !important;
   background-color: var(--color-base01) !important;
-
 }
 
 .enableAnimations .treecollapse {

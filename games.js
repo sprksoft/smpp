@@ -54,7 +54,13 @@ class GameBase extends WidgetBase {
   // End protected
 
   #updateOpt(name, value, displayEl) {
-    displayEl.innerText = value / 100 + "x";
+    let displayValue = Math.round(value / 10);
+    displayValue /= 10;
+    if (displayValue == Math.round(displayValue)) {
+      displayValue += ".0";
+    }
+    displayEl.innerText = displayValue + "x";
+    displayEl.classList.add("game-option-value");
 
     this.#options[name] = value * 1;
   }
@@ -76,7 +82,7 @@ class GameBase extends WidgetBase {
         await this.#saveGameData();
 
         this.canvas.style.display = "none";
-        this.menu.style.display = "block";
+        this.menu.style.display = "flex";
         this.#buttonEl.innerText = "Try Again (Space)";
         this.hasPlayedAtLeastOnce = true;
         this.lastTs = undefined;
@@ -150,23 +156,28 @@ class GameBase extends WidgetBase {
     this.canvas.style.display = "none";
     div.appendChild(this.canvas);
 
+    let menuTop = document.createElement("div");
+    menuTop.classList.add("game-menu-top");
+    let menuBottom = document.createElement("div");
+    menuBottom.classList.add("game-menu-bottom");
     let menu = document.createElement("div");
     menu.classList.add("game-menu");
 
     let title = document.createElement("h2");
+    title.classList.add("game-title");
     title.innerText = this.title;
-    menu.appendChild(title);
+    menuTop.appendChild(title);
 
     this.#scoreEl = document.createElement("span");
     this.#scoreEl.classList.add("game-score");
     this.#hiScore = gameData.score;
-    menu.appendChild(this.#scoreEl);
+    menuTop.appendChild(this.#scoreEl);
 
     for (let opt of this.options) {
       let label = document.createElement("label");
       label.classList.add("game-slider-label");
       label.innerText = opt.title;
-      menu.appendChild(label);
+      menuBottom.appendChild(label);
 
       let value = gameData.options[opt.name];
       if (!value) {
@@ -175,6 +186,7 @@ class GameBase extends WidgetBase {
 
       if (opt.type == GAME_OPTION_TYPE_SLIDER) {
         let sliderCont = document.createElement("div");
+        sliderCont.classList.add("game-slide-container");
         let slider = document.createElement("input");
         slider.type = "range";
         slider.min = opt.min;
@@ -187,12 +199,13 @@ class GameBase extends WidgetBase {
         await this.#updateOpt(opt.name, value, display);
         sliderCont.appendChild(display);
 
-        slider.addEventListener("change", async (e) => {
+        slider.addEventListener("input", async (e) => {
           await this.#updateOpt(opt.name, e.target.value, display);
           await this.#saveGameData();
         });
+        this.#updateScore();
 
-        menu.appendChild(sliderCont);
+        menuBottom.appendChild(sliderCont);
       }
     }
 
@@ -202,8 +215,10 @@ class GameBase extends WidgetBase {
     this.#buttonEl.addEventListener("click", async (e) => {
       await this.#startGame();
     });
-    menu.appendChild(this.#buttonEl);
+    menuBottom.appendChild(this.#buttonEl);
 
+    menu.appendChild(menuTop);
+    menu.appendChild(menuBottom);
     this.menu = menu;
     div.appendChild(menu);
 
@@ -286,7 +301,10 @@ class FlappyWidget extends GameBase {
   }
 
   #calcGap() {
-    return Math.max(PIPE_GAP*this.getOpt("speed")*0.01, (BIRD_RADIUS*2)+5);
+    return Math.max(
+      PIPE_GAP * this.getOpt("speed") * 0.01,
+      BIRD_RADIUS * 2 + 5
+    );
   }
 
   #drawPipe(ctx, pipe) {
@@ -299,7 +317,7 @@ class FlappyWidget extends GameBase {
       -PIPE_W,
       PIPE_W,
       pipe.y + PIPE_W - gap_size / 2,
-      PIPE_W,
+      PIPE_W
     );
     ctx.fill();
     ctx.beginPath();
@@ -309,24 +327,27 @@ class FlappyWidget extends GameBase {
       botStartY,
       PIPE_W,
       this.canvas.height - botStartY + PIPE_W,
-      PIPE_W,
+      PIPE_W
     );
     ctx.fill();
   }
   #updatePipe(pipe, dt) {
-    pipe.x -= this.getOpt("speed")*0.01 * dt * PIPE_SPEED;
+    pipe.x -= this.getOpt("speed") * 0.01 * dt * PIPE_SPEED;
     if (pipe.x < -PIPE_W) {
       this.#resetPipe(pipe);
     }
 
-    if (pipe.x < BIRD_X+BIRD_RADIUS && !pipe.checked) {
-      pipe.checked=true;
+    if (pipe.x < BIRD_X + BIRD_RADIUS && !pipe.checked) {
+      pipe.checked = true;
       const gap_size = this.#calcGap();
-      const gapTop = pipe.y-gap_size*0.5;
-      const gapBot = pipe.y+gap_size*0.5;
-      if (this.birdY+BIRD_RADIUS >= gapTop && this.birdY+BIRD_RADIUS < gapBot) {
+      const gapTop = pipe.y - gap_size * 0.5;
+      const gapBot = pipe.y + gap_size * 0.5;
+      if (
+        this.birdY + BIRD_RADIUS >= gapTop &&
+        this.birdY + BIRD_RADIUS < gapBot
+      ) {
         this.score++;
-      }else {
+      } else {
         this.stopGame();
       }
     }
@@ -334,9 +355,9 @@ class FlappyWidget extends GameBase {
   #resetPipe(pipe) {
     const gap_size = this.#calcGap();
     pipe.x = this.canvas.width + PIPE_W;
-    const MARGIN = (gap_size*0.5) + FLOOR_H + 10;
+    const MARGIN = gap_size * 0.5 + FLOOR_H + 10;
     pipe.y = Math.random() * (this.canvas.height - MARGIN * 2) + MARGIN;
-    pipe.checked=false;
+    pipe.checked = false;
   }
 
   #drawBird(ctx) {
@@ -359,11 +380,14 @@ class FlappyWidget extends GameBase {
     console.log(dt);
     ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.birdY += this.birdVel * dt;
-    this.birdVel = Math.min(this.birdVel +  GRAVITY * this.getOpt("speed")*0.01 * dt, TERMVEL);
+    this.birdVel = Math.min(
+      this.birdVel + GRAVITY * this.getOpt("speed") * 0.01 * dt,
+      TERMVEL
+    );
 
     if (this.jump) {
       this.jump = false;
-      this.birdVel = -0.2 * this.getOpt("speed")*0.01; //Math.min(this.birdVel-0.2, -0.2);
+      this.birdVel = -0.2 * this.getOpt("speed") * 0.01; //Math.min(this.birdVel-0.2, -0.2);
     }
     if (this.birdY > this.canvas.height - FLOOR_H - BIRD_RADIUS) {
       this.birdY = this.canvas.height - FLOOR_H - BIRD_RADIUS;
@@ -371,7 +395,8 @@ class FlappyWidget extends GameBase {
     }
 
     this.bgX =
-      (this.bgX - this.getOpt("speed") * 0.01 * PIPE_SPEED * dt) % this.canvas.width;
+      (this.bgX - this.getOpt("speed") * 0.01 * PIPE_SPEED * dt) %
+      this.canvas.width;
     this.#updatePipe(this.pipe, dt);
 
     this.#drawBird(ctx);

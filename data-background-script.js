@@ -56,6 +56,10 @@ export async function getWeatherAppData() {
     weatherAppData.lastUpdateDate
   ).toISOString();
 
+  if (weatherAppData.weatherData.name) {
+    weatherAppData.lastLocation = weatherAppData.weatherData.name;
+  }
+
   await browser.storage.local.set({
     weatherAppData: {
       weatherData: weatherAppData.weatherData,

@@ -1,27 +1,32 @@
 // Voeg een nieuw inputveld toe zonder de originele inhoud te verwijderen (   thx voor de geen info lukas >:(   )
 if (window.location.href.includes("module=Profile")) {
   var container = document.getElementById("smscMainBlockContainer");
-  container?.insertAdjacentHTML('beforeend', '<div id=custom-name-input-containter><input type="text" color="red" id="custom-name-input" placeholder="Custom name"></div>')
+  container?.insertAdjacentHTML(
+    "beforeend",
+    '<div id=custom-name-input-containter><input type="text" color="red" id="custom-name-input" placeholder="Custom name"></div>'
+  );
 }
-let config = get_config();
+let config = PLEASE_DELETE_ME_WHEN_FIXED();
 if (config.username_override == undefined) {
   config.username_override = null;
   set_config(config);
 }
 function getDefaultUserName() {
-  return document.querySelector(".js-btn-profile .hlp-vert-box span").innerText
+  return document.querySelector(".js-btn-profile .hlp-vert-box span").innerText;
 }
 let username_override = config.username_override;
 if (username_override == null) {
   username_override = getDefaultUserName();
-  config.username_override = username_override
-  set_config(config)
+  config.username_override = username_override;
+  set_config(config);
 }
 
 let full_unheading = true;
 
 function change_lname(new_name) {
-  let name_element = document.querySelector(".js-btn-profile .hlp-vert-box span");
+  let name_element = document.querySelector(
+    ".js-btn-profile .hlp-vert-box span"
+  );
   if (name_element !== null) {
     let orig_name = name_element.innerHTML;
     if (new_name !== null) {
@@ -38,12 +43,17 @@ function try_attach_messages_observer(orig_name, new_name) {
     return;
   }
   const observer = new MutationObserver(function (muts, observer) {
-    let in_send_messages_page = document.querySelector(".msgcell__head__title").innerText == "Verzonden";
+    let in_send_messages_page =
+      document.querySelector(".msgcell__head__title").innerText == "Verzonden";
     for (const mut of muts) {
       for (const msg of mut.addedNodes) {
-        if (msg.nodeName == "#text") { continue; }
+        if (msg.nodeName == "#text") {
+          continue;
+        }
         let name_el = msg.querySelector(".modern-message__name");
-        if (name_el == null) { continue; }
+        if (name_el == null) {
+          continue;
+        }
 
         let name_is_user = name_el.innerHTML.startsWith(orig_name);
         if (name_is_user) {
@@ -52,12 +62,18 @@ function try_attach_messages_observer(orig_name, new_name) {
           }
         }
         if (name_is_user || in_send_messages_page) {
-          msg.querySelector(".modern-message__image img").src = getPfpLink(get_config().username_override);
+          msg.querySelector(".modern-message__image img").src = getPfpLink(
+            PLEASE_DELETE_ME_WHEN_FIXED().username_override
+          );
         }
       }
     }
   });
-  observer.observe(messages_list, { attributes: false, childList: true, subtree: false });
+  observer.observe(messages_list, {
+    attributes: false,
+    childList: true,
+    subtree: false,
+  });
 }
 
 function unhead_fully() {
@@ -77,12 +93,14 @@ if (full_unheading) {
   unhead_fully();
 }
 
-let input_vak = document.getElementById("custom-name-input")
-input_vak?.addEventListener('input', function () {
+let input_vak = document.getElementById("custom-name-input");
+input_vak?.addEventListener("input", function () {
   var inputValue = input_vak.value;
   inputValue = inputValue == "" ? null : inputValue;
   config.username_override = inputValue;
   set_config(config);
-  if (inputValue == null) { inputValue = orig_name }
+  if (inputValue == null) {
+    inputValue = orig_name;
+  }
   change_lname(inputValue);
-})
+});
