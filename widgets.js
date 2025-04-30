@@ -551,16 +551,6 @@ async function createGroup(bag, name, displayName) {
 async function createWidgetBag() {
   let bag = document.createElement("div");
   bag.classList.add("smpp-widget-bag");
-  let fold = document.createElement("div");
-  fold.classList.add("smpp-widget-bag-close-fold");
-  fold.addEventListener("click", () => {
-    closeBag();
-  });
-  fold.innerHTML = `
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-<svg class="smpp-widget-bag-fold-icon" version="1.1" viewBox="0 0 448 448" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-.898 -124.01)"><path d="m26.458 288.48 198.44 119.06 198.44-119.06" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="39.511"/></g></svg>
-`;
-  bag.appendChild(fold);
 
   let content = document.createElement("div");
   content.classList.add("smpp-widget-bag-content");
@@ -568,6 +558,18 @@ async function createWidgetBag() {
   await createGroup(content, "games", "Games");
   await createGroup(content, "other", "Overige widgets");
   bag.appendChild(content);
+
+
+  let handle = document.createElement("div");
+  handle.classList.add("smpp-widget-bag-handle");
+  handle.addEventListener("click", () => {
+    closeBag();
+  });
+  handle.innerHTML = `
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg class="smpp-widget-bag-handle-icon" version="1.1" viewBox="0 0 448 448" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-.898 -124.01)"><path d="m26.458 288.48 198.44 119.06 198.44-119.06" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="39.511"/></g></svg>
+`;
+  bag.appendChild(handle);
 
   for (let widget of widgets) {
     await widget.createIfNotExist();
@@ -585,10 +587,10 @@ function closeBag() {
 
 function createWidgetBagFold() {
   let bag = document.createElement("div");
-  bag.classList.add("smpp-widget-bag-fold");
+  bag.classList.add("smpp-widget-bag-handle");
   bag.innerHTML = `
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
-<svg class="smpp-widget-bag-fold-icon" version="1.1" viewBox="0 0 448 448" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-.898 -124.01)"><path d="m26.458 288.48 198.44 119.06 198.44-119.06" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="39.511"/></g></svg>
+<svg class="smpp-widget-bag-handle-icon" version="1.1" viewBox="0 0 448 448" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-.898 -124.01)"><path d="m26.458 288.48 198.44 119.06 198.44-119.06" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="39.511"/></g></svg>
 `;
 
   document.body.appendChild(bag);
@@ -628,9 +630,14 @@ document.addEventListener("mousemove", (e) => {
 });
 
 document.addEventListener("keyup", (e) => {
+  if (e.target?.tagName === "INPUT") {
+    return;
+  }
   if (e.key == "Escape" && widgetEditMode) {
     setEditMode(false);
     e.preventDefault();
+  } else if (e.key == "e") {
+    setEditMode(true);
   }
 });
 
@@ -645,9 +652,6 @@ function getWidgetByName(name) {
 
 async function setEditMode(value) {
   if (value) {
-    if (!widgetBagFold) {
-      widgetBagFold = createWidgetBagFold();
-    }
     document.body.classList.add("smpp-widget-edit-mode");
     document.getElementById("smpp-news-content").style.display = "none";
     if (!widgetBag) {
