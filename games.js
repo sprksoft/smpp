@@ -196,11 +196,11 @@ class GameBase extends WidgetBase {
         sliderCont.appendChild(slider);
 
         let display = document.createElement("span");
-        await this.#updateOpt(opt.name, value, display);
+        this.#updateOpt(opt.name, value, display);
         sliderCont.appendChild(display);
 
         slider.addEventListener("input", async (e) => {
-          await this.#updateOpt(opt.name, e.target.value, display);
+          this.#updateOpt(opt.name, e.target.value, display);
           await this.#saveGameData();
         });
         this.#updateScore();
@@ -373,18 +373,20 @@ class FlappyWidget extends GameBase {
     this.birdY = this.canvas.height / 2.0;
     this.birdVel = 0;
     this.pipe = { x: 0, y: 0 };
+    this.canvas.addEventListener("click", () => {
+      this.jump = true;
+    });
     this.#resetPipe(this.pipe);
   }
 
   onGameDraw(ctx, dt) {
-    console.log(dt);
     ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.birdY += this.birdVel * dt;
     this.birdVel = Math.min(
       this.birdVel + GRAVITY * this.getOpt("speed") * 0.01 * dt,
       TERMVEL
     );
-
+    ctx;
     if (this.jump) {
       this.jump = false;
       this.birdVel = -0.2 * this.getOpt("speed") * 0.01; //Math.min(this.birdVel-0.2, -0.2);
@@ -415,17 +417,3 @@ class FlappyWidget extends GameBase {
   }
 }
 registerWidget(new FlappyWidget());
-
-class TestGame extends GameBase {
-  get title() {
-    return "Test++";
-  }
-
-  async onGameStart() {
-    console.log("game start");
-    await this.stopGame(10);
-  }
-
-  onGameDraw(ctx, dt) {}
-}
-registerWidget(new TestGame());

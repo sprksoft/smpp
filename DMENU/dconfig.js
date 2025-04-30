@@ -62,6 +62,6 @@ function get_dconfig() {
 function set_dconfig(config) {
   let conf = PLEASE_DELETE_ME_WHEN_FIXED();
   conf.dmenu = config;
-  set_config(conf);
+  DELETE_ME_ASS_WELL_SAVE_FUNCTION(conf);
   dconfig_cache = config;
 }

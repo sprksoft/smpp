@@ -54,7 +54,7 @@ function quick_load() {
 function quick_save() {
   let config = PLEASE_DELETE_ME_WHEN_FIXED();
   config.quicks = quicks;
-  set_config(config);
+  DELETE_ME_ASS_WELL_SAVE_FUNCTION(config);
 }
 
 function add_quick_interactive() {
@@ -106,7 +106,7 @@ function config_menu() {
         [],
         function (val, shift) {
           conf[cmd] = val;
-          set_config(conf);
+          DELETE_ME_ASS_WELL_SAVE_FUNCTION(conf);
         },
         "value:"
       );
@@ -224,7 +224,7 @@ function do_qm(opener = "") {
           } else {
             settingData.show_scores = true;
           }
-          set_config(settingData);
+          DELETE_ME_ASS_WELL_SAVE_FUNCTION(settingData);
           return;
         case "dmenu config":
           dconfig_menu();

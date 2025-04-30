@@ -15,6 +15,7 @@ function getDefaultQuickSettings(isLite) {
       backgroundLink: null,
       backgroundBlurAmount: 0,
       showNews: true,
+      customUserName: null,
     };
   }
   return {
@@ -27,6 +28,7 @@ function getDefaultQuickSettings(isLite) {
     showNews: true,
     weatherOverlaySelection: 1,
     weatherOverlayAmount: 0,
+    customUserName: null,
   };
 }
 
@@ -51,14 +53,6 @@ export async function getWeatherAppData() {
     lastUpdateDate: new Date().toISOString(),
     lastLocation: "Keerbergen",
   };
-
-  weatherAppData.lastUpdateDate = new Date(
-    weatherAppData.lastUpdateDate
-  ).toISOString();
-
-  if (weatherAppData.weatherData.name) {
-    weatherAppData.lastLocation = weatherAppData.weatherData.name;
-  }
 
   await browser.storage.local.set({
     weatherAppData: {

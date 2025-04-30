@@ -111,7 +111,7 @@ async function ShowPlanner(addend) {
       .addEventListener("click", () => {
         settingsData = PLEASE_DELETE_ME_WHEN_FIXED();
         settingsData.showplanner = false;
-        set_config(settingsData);
+        DELETE_ME_ASS_WELL_SAVE_FUNCTION(settingsData);
         apply();
       });
     let forward_button_planner = document.getElementById(

@@ -4,7 +4,7 @@
 
 class TakenWidget extends WidgetBase {
   createContent() {
-    const DEBUG = true;
+    const DEBUG = false;
     const foresight = 28; // dagen in de toekomst dat het zoekt voor taken
     let maxAssignments = 5;
     let userId;

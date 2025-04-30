@@ -62,6 +62,15 @@ function changeFont() {
   fontLinks.innerHTML = `<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">`;
   document.getElementsByTagName("head")[0].appendChild(fontLinks);
 }
+function decapitateಠ_ಠ() {
+  let style_el = document.createElement("style");
+  style_el.innerHTML = `
+    .studentPicture, .rounded_profile_photo, .square_photo_64 {
+      display: none;
+    }
+  `;
+  document.head.appendChild(style_el);
+}
 function getPfpLink(username) {
   if (username) {
     const parts = username.trim().split(/\s+/);
@@ -124,6 +133,9 @@ async function apply() {
     action: "getQuickSettingsData",
   });
   changeFont();
+  userNameChanger(data.customName);
+  decapitateಠ_ಠ();
+
   set_theme("default");
   set_theme(data.theme);
   showNews(data.showNews);
@@ -139,7 +151,7 @@ async function apply() {
   }
   style.setProperty(
     "--profile-picture",
-    "url(" + getPfpLink(username_override) + ")"
+    "url(" + getPfpLink(data.customName || getOriginalName()) + ")"
   );
   style.setProperty(
     "--blur-value-large",
@@ -801,4 +813,7 @@ function PLEASE_DELETE_ME_WHEN_FIXED() {
     enableanimations: true,
     username_override: "Lukas Vanden Berghe",
   };
+}
+function DELETE_ME_ASS_WELL_SAVE_FUNCTION() {
+  return;
 }
