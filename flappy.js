@@ -80,14 +80,14 @@ class FlappyWidget extends GameBase {
       this.#resetPipe(pipe);
     }
 
-    if (pipe.x <= BIRD_X + BIRD_RADIUS && pipe.x + PIPE_W > BIRD_X-BIRD_RADIUS) {
+    if (
+      pipe.x <= BIRD_X + BIRD_RADIUS &&
+      pipe.x + PIPE_W > BIRD_X - BIRD_RADIUS
+    ) {
       const gap_size = this.#calcGap();
       const gapTop = pipe.y - gap_size * 0.5;
       const gapBot = pipe.y + gap_size * 0.5;
-      if (
-        this.birdY >= gapTop &&
-        this.birdY < gapBot
-      ) {
+      if (this.birdY >= gapTop && this.birdY < gapBot) {
         if (!pipe.checked) {
           pipe.checked = true;
           this.score++;
@@ -122,9 +122,6 @@ class FlappyWidget extends GameBase {
     this.birdY = this.canvas.height / 2.0;
     this.birdVel = 0;
     this.pipe = { x: 0, y: 0 };
-    this.canvas.addEventListener("click", () => {
-      this.jump = true;
-    });
     this.#resetPipe(this.pipe);
   }
 
@@ -153,6 +150,10 @@ class FlappyWidget extends GameBase {
     this.#drawBird(ctx);
     this.#drawPipe(ctx, this.pipe);
     this.#drawGround(ctx);
+  }
+
+  async onMouse(e) {
+    this.jump = true;
   }
 
   async onKeyDown(e) {

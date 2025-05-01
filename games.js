@@ -39,6 +39,19 @@ class GameBase extends WidgetBase {
     return "games";
   }
 
+  constructor() {
+    document.addEventListener("keydown", async (e) => {
+      if (this.playing) {
+        await this.onKeyDown(e);
+      } else if (this.hasPlayedAtLeastOnce) {
+        if (e.code === "Space") {
+          await this.#startGame();
+        }
+      }
+    });
+    super();
+  }
+
   // Start Protected (Use these functions in sub classes)
   getOpt(name) {
     return this.#options[name];
@@ -139,21 +152,17 @@ class GameBase extends WidgetBase {
 
     let div = document.createElement("div");
     div.classList.add("game-container");
-    document.addEventListener("keydown", async (e) => {
-      if (this.playing) {
-        await this.onKeyDown(e);
-      } else if (this.hasPlayedAtLeastOnce) {
-        if (e.code === "Space") {
-          await this.#startGame();
-        }
-      }
-    });
 
     this.canvas = document.createElement("canvas");
     this.canvas.width = 300;
     this.canvas.height = 300;
     this.canvas.classList.add("game-canvas");
     this.canvas.style.display = "none";
+    this.canvas.addEventListener("click", async (e) => {
+      if (this.playing) {
+        await this.onMouse(e);
+      }
+    });
     div.appendChild(this.canvas);
 
     let menuTop = document.createElement("div");
@@ -165,7 +174,9 @@ class GameBase extends WidgetBase {
 
     let title = document.createElement("h2");
     title.classList.add("game-title");
-    title.innerText = this.title.endsWith("++") ? this.title : this.title + "++";
+    title.innerText = this.title.endsWith("++")
+      ? this.title
+      : this.title + "++";
     menuTop.appendChild(title);
 
     this.#scoreEl = document.createElement("span");
@@ -236,6 +247,7 @@ class GameBase extends WidgetBase {
   // Called when the game needs to render a new frame (dt is time since last frame)
   onGameDraw(ctx, deltaTime) {}
   async onKeyDown(key) {}
+  async onMouse(e) {}
 
   get tickSpeed() {
     return 60;
