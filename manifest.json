@@ -64,6 +64,7 @@
         "buis-stats.js",
         "plant.js",
         "games.js",
+        "flappy.js",
         "login.js",
         "assignments.js",
         "smppjs.js"

@@ -305,3 +305,16 @@ class Queue {
     console.log(this.items.join(" -> "));
   }
 }
+
+
+
+class SnakeWidget extends GameBase {
+  get title() {
+    return "Snake++";
+  }
+  get options() {
+    return [GameOption.slider("speed", "Speed:", 10, 300, 100)];
+  }
+}
+registerWidget(new SnakeWidget());
+
