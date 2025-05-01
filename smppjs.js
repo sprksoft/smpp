@@ -2,12 +2,6 @@
 //ok - ldev
 //oh ok, ik dacht in general.css - Jdev
 
-if (browser == undefined) {
-  var browser = chrome;
-}
-let manifest = browser.runtime.getManifest();
-const liteMode = manifest.lite_mode;
-
 const default_theme = {
   color_accent: "#a3a2ec",
   color_base00: "#38313a",
