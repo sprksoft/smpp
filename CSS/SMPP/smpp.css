@@ -2,16 +2,18 @@
 
 .smpp-background-selector {
   color: var(--color-text) !important;
-  background-color: var(--color-settings-ui-bg) !important;
-  border: 2px solid var(--color-settings-ui-layer2) !important;
-  border-radius: 10px !important;
-  margin: 5px !important;
   overflow: hidden !important;
-
+  width: 100%;
   display: flex;
   flex-direction: row;
-
+  gap: 0.5rem;
   transition: none !important;
+}
+
+.smpp-background-file,
+.smpp-background-link {
+  border: 2px solid var(--color-settings-ui-layer2) !important;
+  border-radius: 1rem;
 }
 
 .enableAnimations .smpp-background-selector {
@@ -21,12 +23,12 @@
 .smpp-background-selector .smpp-background-link {
   flex-grow: 1;
   text-align: center !important;
+  width: 100%;
 }
 .smpp-background-file {
   margin-right: 0px !important;
   background: none !important;
-  border: none !important;
-  opacity: 0.1;
+  opacity: 0.5;
 }
 .enableAnimations .smpp-background-file {
   transition: opacity 0.3s !important;

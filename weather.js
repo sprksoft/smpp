@@ -71,6 +71,7 @@ class CompactWeatherWidget extends WidgetBase {
     });
     let compactWeatherTitle = document.createElement("div");
     compactWeatherTitle.classList.add("weather-preview-title");
+    compactWeatherTitle.classList.add("compact");
     compactWeatherTitle.innerText = "Tiny Weather";
     compactWeatherPreviewDiv.appendChild(compactWeatherTitle);
     let compactWeatherPreviewContent = document.createElement("div");

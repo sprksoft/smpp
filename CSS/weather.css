@@ -152,10 +152,27 @@ input.weather-location-input.active {
 }
 
 .preview.compact .conditions-container {
-  width: 37%;
+  width: 20%;
 }
-
+.preview.compact .weather-widget-content {
+  gap: 0 !important;
+}
 .weather-preview-title {
   font-size: 2.5rem;
   font-weight: 700;
+}
+
+.compact.weather-preview-title {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.preview.compact .wind-icon,
+.preview.compact .humidity-icon {
+  width: 4rem;
+  height: 100%;
+}
+.preview.compact .temperature-icon {
+  width: 1.75rem;
+  height: 100%;
 }

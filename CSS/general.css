@@ -748,14 +748,14 @@ input:checked + .slider:before {
   align-items: center !important;
   display: flex;
   flex-direction: column !important;
-  gap: 10px !important;
+  gap: 0.5rem !important;
   justify-content: center !important;
   border-radius: 17.5px !important;
   overflow: visible;
   border: 3px solid var(--color-popup-border);
   z-index: 777;
   position: absolute;
-  padding: 7.5px !important;
+  padding: 1rem !important;
   box-shadow: 0 0.333rem 1.333rem rgba(0, 0, 0, 0.5);
 }
 
@@ -919,48 +919,43 @@ ul.smsc-column-nav {
   }
 }
 
-/*rangeblur*/
 .main-slider {
-  /* wie heef hier chat gpt gebreukt >:( */
   -webkit-appearance: none;
-  /* Override default CSS styles */
   appearance: none;
   height: 15px;
   border-radius: 10px;
   background: var(--color-base01);
-  /* Grey background */
   outline: none;
-  /* Remove outline */
-  opacity: 0.7;
-  margin: 5px !important;
+  opacity: 1;
 }
 
 .enableAnimations .main-slider {
-  -webkit-transition: 0.2s;
   transition: opacity 0.2s;
 }
 
 .main-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 15px;
-  height: 15px;
+  width: 1.25rem;
+  height: 1.25rem;
   border-radius: 50%;
-  background: var(--color-accent);
-  cursor: pointer;
-}
-
-.main-slider::-moz-range-thumb {
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  background: var(--color-accent);
+  background: var(--color-accent) !important;
   border-color: transparent;
   cursor: pointer;
+  transition: opacity 0.2s ease-in-out;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.main-slider::-moz-range-thumb {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  background: var(--color-accent) !important;
+  border-color: transparent;
+  cursor: pointer;
+  transition: opacity 0.2s ease-in-out;
+  appearance: none;
 }
 
-#weather-overlay-selector,
-#background-blur-amount-slider {
+#weather-overlay-selector {
   width: 50px !important;
   transform: rotate(90deg) !important;
   margin: 0px !important;
@@ -1130,8 +1125,8 @@ option:hover {
 }
 
 #blurPlaats {
-  margin-bottom: 25px;
-  margin-right: 22px;
+  margin-bottom: 1rem;
+  font-weight: 300;
 }
 
 .color-label {
@@ -1468,10 +1463,19 @@ textarea.form-item__input-field.form-item__input-field--textarea {
 }
 
 input#background-blur-amount-slider {
-  width: 50px;
-  margin-left: -20px !important;
-  transform: rotate(-90deg) !important;
-  margin-right: -14px !important;
+  width: 3.5rem;
+  height: 1rem;
+  transform: rotate(90deg);
+  transform-origin: center;
+  margin: 0 !important;
+}
+
+.blur-slider-container {
+  width: 1rem;
+  margin-left: 0.75rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
@@ -2109,13 +2113,14 @@ div#folders {
 }
 
 #performance-mode-info {
-  left: 10px;
+  left: -12px;
   max-width: 209px;
   top: -7px;
   background-color: var(--color-base02);
   border: 2px solid var(--color-accent);
+  box-shadow: 0 0.333rem 1.333rem rgba(0, 0, 0, 0.5);
   padding: 5px;
-  border-radius: 10px;
+  border-radius: 1rem;
   position: absolute;
   opacity: 0;
   text-align: center;
@@ -2154,4 +2159,20 @@ mark {
 
 body.modern-ui .homepage__block__content {
   overflow: unset !important;
+}
+
+.red-underline {
+  text-decoration: underline;
+  color: color-mix(in srgb, var(--color-red) 50%, var(--color-text) 50%);
+  text-decoration-color: var(--color-red);
+  font-weight: 600;
+  text-decoration-line: 2px;
+}
+
+.green-underline {
+  text-decoration: underline;
+  color: color-mix(in srgb, var(--color-green) 50%, var(--color-text) 50%);
+  text-decoration-color: var(--color-green);
+  font-weight: 600;
+  text-decoration-line: 2px;
 }

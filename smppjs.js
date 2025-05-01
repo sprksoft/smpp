@@ -206,9 +206,6 @@ async function storeQuickSettings() {
   }
   console.log(data);
   data.theme = document.getElementById("theme-selector").value;
-  data.backgroundSelection = Number(
-    document.getElementById("background-selector").value
-  );
   data.backgroundLink = document.getElementById("background-link-input").value;
   data.backgroundBlurAmount = Number(
     document.getElementById("background-blur-amount-slider").value
@@ -228,9 +225,11 @@ async function storeQuickSettings() {
   }
   document.getElementById(
     "performance-mode-info"
-  ).innerText = `Toggle performance mode (${
-    data.enablePerfomanceMode ? "enabled" : "disabled"
-  })`;
+  ).innerHTML = `Toggle performance mode ${
+    data.enablePerfomanceMode
+      ? "<span class='green-underline'>Enabled</span>"
+      : "<span class='red-underline'>Disabled</span>"
+  }`;
   if (data.theme == "custom") {
     loadCustomTheme();
   } else {
@@ -249,19 +248,20 @@ async function storeQuickSettings() {
     reader.readAsDataURL(file);
 
     data.backgroundSelection = 2;
-    data.backgroundLink = "<" + file.name + ">";
+    data.backgroundLink = file.name;
     console.log(data);
     browser.runtime.sendMessage({ action: "setQuickSettingsData", data: data });
 
     window.location.reload();
     return;
   } else {
-    if (data.backgroundLink == "") {
+    if (data.backgroundSelection != 2 && data.backgroundLink == "") {
       data.backgroundSelection = 0;
-    } else {
-      data.backgroundSelection = 1;
+    } else if (data.backgroundLink == "") {
+      1;
     }
   }
+
   console.log(data);
   await browser.runtime.sendMessage({
     action: "setQuickSettingsData",
@@ -414,9 +414,11 @@ async function loadQuickSettings() {
   document.getElementById("news-toggle").checked = data.showNews;
   document.getElementById(
     "performance-mode-info"
-  ).innerText = `Toggle performance mode (${
-    data.enablePerfomanceMode ? "enabled" : "disabled"
-  })`;
+  ).innerHTML = `Toggle performance mode ${
+    data.enablePerfomanceMode
+      ? "<span class='green-underline'>Enabled</span>"
+      : "<span class='red-underline'>Disabled</span>"
+  }`;
   if (!liteMode) {
     document.getElementById("weather-overlay-selector").value =
       data.weatherOverlaySelection;
@@ -486,7 +488,6 @@ function createSwitch(id, title) {
 function createBgSelector() {
   const backgroundSelector = document.createElement("div");
   backgroundSelector.className = "smpp-background-selector";
-  backgroundSelector.id = "background-selector";
 
   const linkInput = document.createElement("input");
   linkInput.className = "smpp-background-link";
@@ -579,7 +580,7 @@ function createQuickSettingsHTML(parent) {
 
   const wallpaperHeading = document.createElement("h3");
   wallpaperHeading.className = "popuptitles";
-  wallpaperHeading.textContent = "Custom wallpaper:";
+  wallpaperHeading.textContent = "Wallpaper:";
 
   const wallpaperContainer = document.createElement("div");
   wallpaperContainer.className = "wallpaper-quick-settings-container";
@@ -617,7 +618,6 @@ function createQuickSettingsHTML(parent) {
 
   const weatherOverlayContainer = document.createElement("div");
   weatherOverlayContainer.className = "weather-overlay-container";
-  weatherOverlayContainer.style.marginTop = "20px";
 
   const weatherVerticalText = document.createElement("div");
   weatherVerticalText.className = "vertical-selector-labels";
@@ -691,7 +691,7 @@ function createQuickSettings() {
   quickSettingsWindow.addEventListener("change", storeQuickSettings);
   quickSettingsWindow = createQuickSettingsHTML(quickSettingsWindow);
 
-  quickSettingsWindow.style.left = -270 / 3 + "px";
+  quickSettingsWindow.style.left = -237 / 3 + "px";
   document
     .getElementById("quickSettingsButton")
     .insertAdjacentElement("afterend", quickSettingsWindow);
