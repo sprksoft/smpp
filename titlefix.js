@@ -1,55 +1,62 @@
+if (browser == undefined) {
+  // Because this is the first file
+  var browser = chrome;
+}
+let manifest = browser.runtime.getManifest();
+const liteMode = manifest.lite_mode;
+
 function vak_prefix(page) {
   switch (page) {
     case "news":
-      return "Vaknieuws"
+      return "Vaknieuws";
 
     case "course":
-      return "Online les"
+      return "Online les";
 
     case "documents":
-      return "Documenten"
+      return "Documenten";
 
     case "uploadzone":
-      return "Uploadzone"
+      return "Uploadzone";
 
     case "exercises":
-      return "Oefeningen"
+      return "Oefeningen";
 
     case "lpaths":
-      return "Leerpaden"
+      return "Leerpaden";
 
     case "weblinks":
-      return "Weblinks"
+      return "Weblinks";
 
     case "tasks":
-      return "Taken"
+      return "Taken";
 
     case "cooperate":
-      return "Samenwerken"
+      return "Samenwerken";
 
     case "classmates":
-      return "Studiegenoten"
+      return "Studiegenoten";
 
     case "forum":
-      return "Forum"
+      return "Forum";
 
     case "survey":
-      return "Enquêtes"
+      return "Enquêtes";
 
     case "wiki":
-      return "Wiki"
+      return "Wiki";
 
     default:
       break;
   }
-
 }
 
-
 function title_prefix() {
-  let subdomain = location.host.split(".")[0].charAt(0).toUpperCase() + location.host.split(".")[0].slice(1)
+  let subdomain =
+    location.host.split(".")[0].charAt(0).toUpperCase() +
+    location.host.split(".")[0].slice(1);
   let url = location.pathname;
-  let qstr = new URLSearchParams(location.search)
+  let qstr = new URLSearchParams(location.search);
   let module = qstr.get("module");
 
   let page = url.split("/")[1].toLowerCase();
@@ -57,37 +64,35 @@ function title_prefix() {
     page = module.toLowerCase();
   }
 
-
   switch (page) {
-
     case "planner":
-      return "Planner"
+      return "Planner";
     case "photos":
-      return "Photos"
+      return "Photos";
     case "agenda":
-      return "Agenda"
+      return "Agenda";
     case "results":
-      return "Resultaten"
+      return "Resultaten";
     case "messages":
-      return "Berichten"
+      return "Berichten";
     case "mydoc":
-      return "Mijn documenten"
+      return "Mijn documenten";
     case "forms":
-      return "Formulieren"
+      return "Formulieren";
     case "studentcard":
-      return "Mijn leerlingfiche"
+      return "Mijn leerlingfiche";
     case "manual":
-      return "Handleiding"
+      return "Handleiding";
     case "timetable":
-      return "Lesrooster"
+      return "Lesrooster";
     case "intradesk":
-      return "Intradesk"
+      return "Intradesk";
     case "online-session":
-      return "Online sessies"
+      return "Online sessies";
     case "lvs":
-      return "Leerlingvolgsysteem"
+      return "Leerlingvolgsysteem";
     case "":
-      return "Start - " + subdomain
+      return "Start - " + subdomain;
     default:
       break;
   }
@@ -104,12 +109,10 @@ function title_prefix() {
       return prefix;
     }
   }
-
 }
 
-let prepend = title_prefix()
+let prepend = title_prefix();
 if (prepend != undefined) {
   let title = document.querySelector("head > title");
-  title.innerText = prepend + " - Smartschool"
+  title.innerText = prepend + " - Smartschool";
 }
-

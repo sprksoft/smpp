@@ -968,7 +968,6 @@ ul.smsc-column-nav {
   margin-right: -20px !important;
 }
 
-
 #modal-background {
   background-color: transparent !important;
 }
@@ -2151,4 +2150,8 @@ mark {
 
 .listview__action-btns .listview__action-btn {
   margin-right: 1rem;
+}
+
+body.modern-ui .homepage__block__content {
+  overflow: unset !important;
 }
