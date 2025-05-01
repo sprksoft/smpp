@@ -67,8 +67,12 @@ class WidgetBase {
       return;
     }
     await this.#setPreview(true);
-    this.#bagGroup.insertBefore(this.#element, this.#bagPlaceHolder);
-    this.#bagPlaceHolder.remove();
+    if (this.#bagPlaceHolder) {
+      this.#bagGroup.insertBefore(this.#element, this.#bagPlaceHolder);
+      this.#bagPlaceHolder.remove();
+    }else {
+      this.#element.remove();
+    }
   }
 
   async #setPreview(preview) {
@@ -155,7 +159,6 @@ class WidgetBase {
     el.style = "";
 
     let targetIp = curDragInfo.targetInsertionPoint;
-    console.log("orig targetIp", targetIp);
     targetIp?.classList.remove("smpp-widget-insertion-point-targeted");
     if (cancel || !targetIp) {
       // Put back were came from if targetInsertionPoint is null or when we cancel
@@ -165,7 +168,6 @@ class WidgetBase {
       targetIp = null;
     }
 
-    console.log(targetIp);
     if (targetIp == null) {
       await this.#intoBag();
     } else {
@@ -263,6 +265,9 @@ class ErrorWidget extends WidgetBase {
   constructor(origWidgetName) {
     super();
     this.origWidgetName = origWidgetName;
+  }
+  get category() {
+    return null;
   }
 
   get name() {

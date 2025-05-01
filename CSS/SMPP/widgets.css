@@ -179,6 +179,9 @@ html {
 }
 .smpp-widget-edit-mode .smpp-widget-bag {
   transform: translateY(calc(var(--bag-close-transformy) - 10px));
+  @starting-style {
+    transform: translateY(-100vh);
+  }
 }
 .smpp-widget-bag.smpp-widget-bag-delete,
 .smpp-widget-bag:hover {

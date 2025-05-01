@@ -1,241 +1,161 @@
-let flappy_running = false;
-let highscore = window.localStorage.getItem("flappyhighscore");
-function storeFlappySpeed() {
-    const slider = document.getElementById("flappyspeedslider").value;
-    if (slider == 300 && highscore == 911) {
-        document.getElementById('flappytitle').innerText = "FREE Bird++";
-    }
-    else if (slider == 300 && highscore != 911) {
-        document.getElementById('flappytitle').innerText = "Free Bird++";
-    }
-    else {
-        document.getElementById('flappytitle').innerText = "Flappy Bird++";
-    }
-    window.localStorage.setItem("flappyspeed", slider);
-    let speedMultiplier = Math.round(slider / 10);
-    speedMultiplier /= 10;
-    speedMultiplier = speedMultiplier.toFixed(1);
-    document.getElementById('flappyspeedmultiplier').innerText = `${speedMultiplier}x`;
-    window.localStorage.setItem("flappyspeedmultiplier", speedMultiplier);
-}
-function loadFlappySpeed() {
-    let speed = window.localStorage.getItem("flappyspeed");
-    if (speed == undefined) {
-        window.localStorage.setItem("flappyspeed", 100);
-        speed = window.localStorage.getItem("flappyspeed");
-    }
-    document.getElementById("flappyspeedslider").value = speed;
-}
-function setFlappySpeed() {
-    sliderElement = document.getElementById("flappyspeedslider");
-    sliderValue = document.getElementById("flappyspeedslider").value;
-    let speed = window.localStorage.getItem("flappyspeed");
-    document.getElementById('flappyspeedslider').addEventListener("input", storeFlappySpeed);
-    let speedMultiplier = Math.round(speed / 10);
-    speedMultiplier /= 10;
-    speedMultiplier = speedMultiplier.toFixed(1);
-    document.getElementById('flappyspeedmultiplier').innerText = `${speedMultiplier}x`;
-    window.localStorage.setItem("flappyspeedmultiplier", speedMultiplier);
-    if (sliderValue == 300) {
-        document.getElementById('flappytitle').innerText = "Free Bird++";
-    } else {
-        document.getElementById('flappytitle').innerText = "Flappy Bird++";
-    }
-}
-function createFlappyApp() {
-    let div = document.createElement("div");
-    let highscore = window.localStorage.getItem("flappyhighscore");
-    if (highscore == undefined) {
-        window.localStorage.setItem("flappyhighscore", 0);
-        highscore = window.localStorage.getItem("flappyhighscore");
-    }
-    document.getElementById("weathercontainer").appendChild(document.createElement("div"));
-    let rightContainer = document.getElementById("weathercontainer");
-    rightContainer.appendChild(div);
+const BIRD_RADIUS = 5;
+const BIRD_X = 50;
+const FLOOR_H = 15;
+const PIPE_GAP = 50;
+const PIPE_SPEED = 0.2;
+const TERMVEL = 0.3;
+const PIPE_W = 10;
+const GRAVITY = 0.0005;
+class FlappyWidget extends GameBase {
+  bgX;
+  birdY;
+  birdVel;
+  jump;
+  pipe;
 
-    div.innerHTML = `<div id=flappy-game-div><h2 class=gameover id=flappytitle>Flappy Bird++</h2><p class=score>High Score: ${highscore}</p><button class="white_text_button" id="flappy_play_button">Play</button><p class=score>Speed:</p><div class="textandbutton"><input type="range" min="10" max="300" value="100" class="main-slider speedslider" id="flappyspeedslider"><p id=flappyspeedmultiplier class=text_next_to_slider>1.5x</p></div>`;
-    loadFlappySpeed();
-    document.getElementById('flappy_play_button').addEventListener("click", () => {
-        div.innerHTML = '<div id="flappy-game-div"><canvas id="flappy-game-container"></div>';
-        flappyGame();
+  get title() {
+    return "Flappy++";
+  }
+  get options() {
+    return [GameOption.slider("speed", "Speed:", 10, 300, 100)];
+  }
+
+  #drawGround(ctx) {
+    let w = this.canvas.width;
+    let h = this.canvas.height;
+    ctx.beginPath();
+    ctx.lineWidth = 1;
+    ctx.moveTo(0, h - FLOOR_H);
+    ctx.lineTo(w, h - FLOOR_H);
+    ctx.stroke();
+
+    ctx.fillStyle = getCurThemeVar("--color-accent");
+    ctx.strokeStyle = getCurThemeVar("--color-base01");
+    ctx.fillRect(0, h - FLOOR_H, w, FLOOR_H);
+    ctx.strokeRect(0, h - FLOOR_H, w, FLOOR_H);
+
+    for (let i = 0; i < (w / 20) * 2; i++) {
+      ctx.beginPath();
+      ctx.moveTo(i * 20 + this.bgX, h - FLOOR_H);
+      ctx.lineTo(i * 20 + this.bgX + FLOOR_H, h);
+      ctx.stroke();
+    }
+  }
+
+  #calcGap() {
+    return Math.max(
+      PIPE_GAP * this.getOpt("speed") * 0.01,
+      BIRD_RADIUS * 2 + 5
+    );
+  }
+
+  #drawPipe(ctx, pipe) {
+    const gap_size = this.#calcGap();
+    ctx.fillStyle = getCurThemeVar("--color-accent");
+    ctx.lineCap = "round";
+    ctx.beginPath();
+    ctx.roundRect(
+      pipe.x,
+      -PIPE_W,
+      PIPE_W,
+      pipe.y + PIPE_W - gap_size / 2,
+      PIPE_W
+    );
+    ctx.fill();
+    ctx.beginPath();
+    const botStartY = pipe.y + gap_size * 0.5;
+    ctx.roundRect(
+      pipe.x,
+      botStartY,
+      PIPE_W,
+      this.canvas.height - botStartY + PIPE_W,
+      PIPE_W
+    );
+    ctx.fill();
+  }
+  #updatePipe(pipe, dt) {
+    pipe.x -= this.getOpt("speed") * 0.01 * dt * PIPE_SPEED;
+    if (pipe.x < -PIPE_W) {
+      this.#resetPipe(pipe);
+    }
+
+    if (pipe.x < BIRD_X + BIRD_RADIUS && !pipe.checked) {
+      pipe.checked = true;
+      const gap_size = this.#calcGap();
+      const gapTop = pipe.y - gap_size * 0.5;
+      const gapBot = pipe.y + gap_size * 0.5;
+      if (
+        this.birdY + BIRD_RADIUS >= gapTop &&
+        this.birdY + BIRD_RADIUS < gapBot
+      ) {
+        this.score++;
+      } else {
+        this.stopGame();
+      }
+    }
+  }
+  #resetPipe(pipe) {
+    const gap_size = this.#calcGap();
+    pipe.x = this.canvas.width + PIPE_W;
+    const MARGIN = gap_size * 0.5 + FLOOR_H + 10;
+    pipe.y = Math.random() * (this.canvas.height - MARGIN * 2) + MARGIN;
+    pipe.checked = false;
+  }
+
+  #drawBird(ctx) {
+    ctx.fillStyle = getCurThemeVar("--color-accent");
+    ctx.beginPath();
+    ctx.arc(BIRD_X, this.birdY, BIRD_RADIUS, 0, 2 * Math.PI);
+    ctx.fill();
+  }
+
+  async onGameStart() {
+    this.bgX = 0;
+    this.jump = false;
+    this.birdY = this.canvas.height / 2.0;
+    this.birdVel = 0;
+    this.pipe = { x: 0, y: 0 };
+    this.canvas.addEventListener("click", () => {
+      this.jump = true;
     });
-    setFlappySpeed();
+    this.#resetPipe(this.pipe);
+  }
+
+  onGameDraw(ctx, dt) {
+    ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.birdY += this.birdVel * dt;
+    this.birdVel = Math.min(
+      this.birdVel + GRAVITY * this.getOpt("speed") * 0.01 * dt,
+      TERMVEL
+    );
+    ctx;
+    if (this.jump) {
+      this.jump = false;
+      this.birdVel = -0.2 * this.getOpt("speed") * 0.01; //Math.min(this.birdVel-0.2, -0.2);
+    }
+    if (this.birdY > this.canvas.height - FLOOR_H - BIRD_RADIUS) {
+      this.birdY = this.canvas.height - FLOOR_H - BIRD_RADIUS;
+      this.stopGame();
+    }
+
+    this.bgX =
+      (this.bgX - this.getOpt("speed") * 0.01 * PIPE_SPEED * dt) %
+      this.canvas.width;
+    this.#updatePipe(this.pipe, dt);
+
+    this.#drawBird(ctx);
+    this.#drawPipe(ctx, this.pipe);
+    this.#drawGround(ctx);
+  }
+
+  async onKeyDown(e) {
+    if (e.repeat) {
+      return;
+    }
+    if (e.code === "Space" || e.code === "ArrowUp") {
+      this.jump = true;
+      e.preventDefault();
+    }
+  }
 }
-
-function flappyGameOver(score = 0) {
-    const gamediv = document.getElementById("flappy-game-div");
-    gamediv.innerHTML = `<h2 class=gameover id=flappytitle>Game Over!</h2><p class=score>Score: ${score}</p> <button class="white_text_button" id=flappytryagain>
-    Try Again (Space)</button><p class=score>Speed:</p><div class="textandbutton"><input type="range" min="10" max="300" value="100" class="main-slider speedslider" id="flappyspeedslider"><p id=flappyspeedmultiplier class=text_next_to_slider>1.5x</p>
-    `;
-    loadFlappySpeed();
-    var enterKeyHandler = function (event) {
-        if (event.code === "Space") {
-            gamediv.innerHTML = `<canvas id="flappy-game-container">`;
-            flappyGame();
-            document.removeEventListener('keydown', enterKeyHandler);
-        }
-    };
-    document.getElementById("flappytryagain").addEventListener("click", () => {
-        gamediv.innerHTML = `<canvas id="flappy-game-container">`;
-        document.removeEventListener('keydown', enterKeyHandler);
-        flappyGame();
-    });
-    if (score > window.localStorage.getItem("flappyhighscore")) {
-        window.localStorage.setItem("flappyhighscore", score);
-    }
-    document.addEventListener('keydown', enterKeyHandler);
-    setFlappySpeed();
-}
-
-function flappyGame() {
-    if (flappy_running) {
-        return
-    }
-
-    flappy_running = true;
-
-    const canvas = document.getElementById('flappy-game-container');
-    const ctx = canvas.getContext('2d');
-
-    canvas.width = 420;
-    canvas.height = 420;
-    let flappyspeed = window.localStorage.getItem("flappyspeed")
-    const lineWidth = 6;
-    let pipes = [];
-    let birdX = canvas.width / 4;
-    let birdY = 110;
-    let bgX = 0;
-    let gravity = (flappyspeed / 100) * 0.5;
-    let gravitySpeed = (flappyspeed / 100) * 0.2
-
-    const pipeGap = ((flappyspeed / 250) * 65) + 50
-    const pipeSpeed = (flappyspeed / 100) * 3;
-
-    let score = 0;
-    const pipeWidth = lineWidth * 3;
-    const color = document.documentElement.style.getPropertyValue('--color-accent');
-    const birdColor = document.documentElement.style.getPropertyValue('--color-text');
-
-    let fps_correction = 1;
-    let last_time = performance.now();
-
-    class Pipe {
-        constructor() {
-            this.y = Math.random() * (canvas.height - 90) - 10;
-            this.x = canvas.width;
-            this.didScored = false;
-        }
-        update() {
-            this.x -= pipeSpeed * fps_correction;
-            if (this.x < birdX) {
-                if (!this.didScored) {
-                    this.didScored = true;
-                    score++;
-                }
-            }
-            if (this.x < -pipeWidth) {
-                this.x = canvas.width;
-                this.y = Math.random() * (canvas.height - 90) - 10;
-                this.didScored = false;
-            }
-        }
-        draw() {
-            ctx.fillStyle = color;
-            ctx.lineCap = "round";
-            ctx.beginPath();
-            ctx.roundRect(this.x, -10, pipeWidth, this.y, 10);
-            ctx.fill();
-            ctx.beginPath();
-            ctx.roundRect(this.x, this.y + pipeGap, pipeWidth, canvas.height - 15 - (this.y + pipeGap), [10, 10, 0, 0]);
-            ctx.fill();
-        }
-    }
-
-
-    function tickAndRenderBird() {
-        birdY += gravity * fps_correction;
-        ctx.fillStyle = birdColor;
-        ctx.beginPath();
-        ctx.arc(birdX - lineWidth, birdY - lineWidth, lineWidth, 0, 2 * Math.PI);
-        ctx.fill();
-    }
-
-    function tickAndRenderPipes() {
-        pipes.forEach((pipe) => {
-            pipe.update();
-            pipe.draw();
-        });
-    }
-
-    function drawGround() {
-        ctx.beginPath();
-        ctx.moveTo(0, canvas.height - 15);
-        ctx.lineTo(canvas.width, canvas.height - 15);
-        ctx.stroke();
-
-        ctx.fillStyle = color;
-        ctx.strokeStyle = document.documentElement.style.getPropertyValue('--color-base01');
-        ctx.fillRect(0, canvas.height - 15, canvas.width, 15);
-        ctx.strokeRect(0, canvas.height - 15, canvas.width, 15);
-
-        for (let i = 0; i < (canvas.width / 20) * 2; i++) {
-            ctx.beginPath();
-            ctx.moveTo(i * 20 + bgX, canvas.height - 15);
-            ctx.lineTo(i * 20 + bgX + 15, canvas.height);
-            ctx.stroke();
-        }
-    }
-
-    function checkDead() {
-        if (birdY - 1 + lineWidth * 2 > 405) {
-            return true;
-        }
-        for (let i = 0; i < pipes.length; i++) {
-            let pipe = pipes[i];
-            if (birdX > pipe.x && birdX < pipe.x + pipeWidth && (birdY < pipe.y || birdY > pipe.y + pipeGap)) {
-                return true;
-            }
-        };
-        return false;
-    }
-
-    pipes.push(new Pipe());
-
-    function tick() {
-        const now = performance.now();
-        const delta = now - last_time;
-        fps_correction = (delta / 16.6666666666666666666666666666667);
-        last_time = now;
-
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        gravity += gravitySpeed * fps_correction;
-        bgX = (bgX - pipeSpeed * fps_correction) % canvas.width;
-        tickAndRenderBird();
-        tickAndRenderPipes();
-        drawGround();
-
-        if (!checkDead()) {
-            requestAnimationFrame(tick);
-        } else {
-            setTimeout(() => {
-                flappyGameOver(score);
-                flappy_running = false;
-                return;
-            }, 500);
-            return;
-        }
-    }
-
-    tick();
-
-    document.addEventListener('keydown', (e) => {
-        if (e.code === 'Space' || e.code === 'ArrowUp') {
-            e.preventDefault();
-            gravity = (flappyspeed / 140) * (-4);
-        }
-    });
-    canvas.addEventListener('mousedown', (e) => {
-        e.preventDefault();
-        gravity = (flappyspeed / 140) * (-4);
-    })
-}
+registerWidget(new FlappyWidget());
