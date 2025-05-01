@@ -70,7 +70,7 @@ class WidgetBase {
     if (this.#bagPlaceHolder) {
       this.#bagGroup.insertBefore(this.#element, this.#bagPlaceHolder);
       this.#bagPlaceHolder.remove();
-    }else {
+    } else {
       this.#element.remove();
     }
   }
@@ -314,7 +314,7 @@ function targetInsertionPoint(target) {
 }
 
 function onPannelHover(pannel, e) {
-  if (!widgetEditMode || curDragInfo == null) {
+  if (!widgetEditMode || curDragInfo == null || hoveringBag) {
     return;
   }
 
@@ -345,14 +345,14 @@ function onPannelHover(pannel, e) {
 }
 
 function onPannelInsertionPointHover(e) {
-  if (!widgetEditMode || curDragInfo == null) {
+  if (!widgetEditMode || curDragInfo == null || hoveringBag) {
     return;
   }
   targetInsertionPoint(e.target);
 }
 
 function onCenterHover(e) {
-  if (!widgetEditMode || curDragInfo == null) {
+  if (!widgetEditMode || curDragInfo == null || hoveringBag) {
     return;
   }
   const bounds = e.target.getBoundingClientRect();
@@ -526,6 +526,7 @@ function bagHoverEnter() {
   }
   hoveringBag = true;
   if (curDragInfo) {
+    targetInsertionPoint(null);
     widgetBag.classList.add("smpp-widget-bag-delete");
     curDragInfo.widget.aboutToDel(true);
   }
@@ -538,7 +539,7 @@ function bagHoverExit() {
   hoveringBag = false;
   if (curDragInfo) {
     widgetBag.classList.remove("smpp-widget-bag-delete");
-    curDragInfo?.widget.aboutToDel(false);
+    curDragInfo.widget.aboutToDel(false);
   }
 }
 
