@@ -149,7 +149,7 @@ function createPlantStreak(data) {
   let plantStreak = document.createElement("h2");
   plantStreak.id = "plant_streak";
   plantStreak.innerText = `${data.daysSinceBirthday} ${
-    data.daysSinceBirthday == 1 ? "Day" : "Days"
+    data.daysSinceBirthday + 1 == 1 ? "Day" : "Days"
   }`;
   return plantStreak;
 }
