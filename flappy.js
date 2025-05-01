@@ -12,6 +12,7 @@ class FlappyWidget extends GameBase {
   birdVel;
   jump;
   pipe;
+  color;
 
   get title() {
     return "Flappy++";
@@ -45,7 +46,7 @@ class FlappyWidget extends GameBase {
   #calcGap() {
     return Math.max(
       PIPE_GAP * this.getOpt("speed") * 0.01,
-      BIRD_RADIUS * 2 + 5
+      BIRD_RADIUS * 2 + 5,
     );
   }
 
@@ -59,7 +60,7 @@ class FlappyWidget extends GameBase {
       -PIPE_W,
       PIPE_W,
       pipe.y + PIPE_W - gap_size / 2,
-      PIPE_W
+      PIPE_W,
     );
     ctx.fill();
     ctx.beginPath();
@@ -69,7 +70,7 @@ class FlappyWidget extends GameBase {
       botStartY,
       PIPE_W,
       this.canvas.height - botStartY + PIPE_W,
-      PIPE_W
+      PIPE_W,
     );
     ctx.fill();
   }
@@ -79,17 +80,23 @@ class FlappyWidget extends GameBase {
       this.#resetPipe(pipe);
     }
 
-    if (pipe.x < BIRD_X + BIRD_RADIUS && !pipe.checked) {
-      pipe.checked = true;
+    if (pipe.x <= BIRD_X + BIRD_RADIUS && pipe.x + PIPE_W > BIRD_X-BIRD_RADIUS) {
       const gap_size = this.#calcGap();
       const gapTop = pipe.y - gap_size * 0.5;
       const gapBot = pipe.y + gap_size * 0.5;
       if (
-        this.birdY + BIRD_RADIUS >= gapTop &&
-        this.birdY + BIRD_RADIUS < gapBot
+        this.birdY >= gapTop &&
+        this.birdY < gapBot
       ) {
-        this.score++;
+        if (!pipe.checked) {
+          pipe.checked = true;
+          this.score++;
+        }
       } else {
+        if (pipe.checked) {
+          this.score--; // undo the point.
+          this.checked = false;
+        }
         this.stopGame();
       }
     }
@@ -126,12 +133,12 @@ class FlappyWidget extends GameBase {
     this.birdY += this.birdVel * dt;
     this.birdVel = Math.min(
       this.birdVel + GRAVITY * this.getOpt("speed") * 0.01 * dt,
-      TERMVEL
+      TERMVEL * this.getOpt("speed") * 0.01,
     );
     ctx;
     if (this.jump) {
       this.jump = false;
-      this.birdVel = -0.2 * this.getOpt("speed") * 0.01; //Math.min(this.birdVel-0.2, -0.2);
+      this.birdVel = -0.4 * this.getOpt("speed") * 0.01 * 0.4; //Math.min(this.birdVel-0.2, -0.2);
     }
     if (this.birdY > this.canvas.height - FLOOR_H - BIRD_RADIUS) {
       this.birdY = this.canvas.height - FLOOR_H - BIRD_RADIUS;

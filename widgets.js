@@ -66,13 +66,13 @@ class WidgetBase {
     if (this.#element.parentElement == this.#bagGroup) {
       return;
     }
-    await this.#setPreview(true);
     if (this.#bagPlaceHolder) {
       this.#bagGroup.insertBefore(this.#element, this.#bagPlaceHolder);
       this.#bagPlaceHolder.remove();
     } else {
       this.#element.remove();
     }
+    await this.#setPreview(true);
   }
 
   async #setPreview(preview) {
@@ -158,16 +158,19 @@ class WidgetBase {
     el.classList.remove("smpp-widget-dragging");
     el.style = "";
 
+    let sourceIp = curDragInfo.sourceInsertionPoint;
     let targetIp = curDragInfo.targetInsertionPoint;
+
     targetIp?.classList.remove("smpp-widget-insertion-point-targeted");
     if (cancel || !targetIp) {
       // Put back were came from if targetInsertionPoint is null or when we cancel
-      targetIp = curDragInfo.sourceInsertionPoint;
+      targetIp = sourceIp;
     }
     if (!cancel && this.#aboutToDel) {
       targetIp = null;
     }
-
+    bagHoverExit();
+    curDragInfo = null;
     if (targetIp == null) {
       await this.#intoBag();
     } else {
@@ -192,9 +195,8 @@ class WidgetBase {
 
       await this.#setPreview(false);
     }
-    bagHoverExit();
 
-    let sourcePannel = curDragInfo.sourceInsertionPoint?.parentElement;
+    let sourcePannel = sourceIp?.parentElement;
     if (sourcePannel && sourcePannel.childNodes.length == 1) {
       // Check if the pannel is empty (1 is because of the insertion point)
       sourcePannel.nextElementSibling.remove();
@@ -202,7 +204,6 @@ class WidgetBase {
     }
 
     document.body.classList.remove("smpp-widget-dragging-something");
-    curDragInfo = null;
 
     await saveWidgets();
   }
@@ -307,7 +308,7 @@ function targetInsertionPoint(target) {
       "smpp-widget-insertion-point-targeted",
     );
     curDragInfo.targetInsertionPoint = target;
-    curDragInfo.targetInsertionPoint.classList.add(
+    curDragInfo.targetInsertionPoint?.classList.add(
       "smpp-widget-insertion-point-targeted",
     );
   }
@@ -616,7 +617,9 @@ function toggleBag(params) {
   if (isBagOpen()) {
     closeBag();
   } else {
-    openBag();
+    if (!curDragInfo) {
+      openBag();
+    }
   }
 }
 

@@ -165,7 +165,7 @@ class GameBase extends WidgetBase {
 
     let title = document.createElement("h2");
     title.classList.add("game-title");
-    title.innerText = this.title;
+    title.innerText = this.title.endsWith("++") ? this.title : this.title + "++";
     menuTop.appendChild(title);
 
     this.#scoreEl = document.createElement("span");
