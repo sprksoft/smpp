@@ -19,8 +19,7 @@ class DMenu {
     this.userText="";
     this.selectedIndex = 0;
 
-    let dconfig = get_dconfig();
-    this.showItemScore = dconfig.item_score;
+    this.showItemScore = dmenu_config.item_score;
 
     this.#mkDmenu(itemList, title);
     this.inputEl.focus();
@@ -200,11 +199,10 @@ class DMenu {
   }
 
   #mkDmenu(itemList, title){
-    let dconfig = get_dconfig();
 
     this.menuEl = document.createElement("div");
     this.menuEl.classList.add("dmenu");
-    if (dconfig.centered) {
+    if (dmenu_config.centered) {
         this.menuEl.classList.add("dmenu-centered");
     }
 
