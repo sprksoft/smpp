@@ -39,11 +39,9 @@
   transition: all 0.05s ease-in-out !important;
 }
 
-
 .quickReplyMenu quickreply-menu {
   border: 1px solid var(--color-accent) !important;
   background-color: var(--color-base01) !important;
-
 }
 
 .quickReplyMenu__arrow {
@@ -56,12 +54,10 @@
 
 .postbox_unread {
   color: var(--color-accent) !important;
-
 }
 
 .smsc-title--1 {
   color: var(--color-text) !important;
-
 }
 
 .modern-ui .modern-message__actions {
@@ -85,7 +81,7 @@ button.modern-message__action.modern-message__action--delete:hover,
 .modern-message__action--archive,
 .listview__action-btn {
   background-color: var(--color-base03) !important;
-  border: 2px solid transparent !important
+  border: 2px solid transparent !important;
 }
 
 .postbox_line {
@@ -104,7 +100,7 @@ button.modern-message__action.modern-message__action--delete:hover,
 }
 
 .smscarrow {
-  display: none !important
+  display: none !important;
 }
 
 .searchInputField,
@@ -173,13 +169,11 @@ div#smscMain.results {
   /* Ensures no extra space at the edges */
 }
 
-
 .smscBlockContainer_left {
   position: relative !important;
   flex-grow: 0.5 !important;
   height: 100% !important;
   margin-left: 0px !important;
-
 }
 
 .smscBlockContainer_right {
@@ -190,8 +184,7 @@ div#smscMain.results {
   width: initial !important;
 }
 
-
-#smscMain>* {
+#smscMain > * {
   overflow: visible !important;
 }
 
@@ -291,7 +284,6 @@ table.messages {
   overflow: hidden;
 }
 
-
 .quickReplyMenu {
   color: var(--color-accent) !important;
 }
@@ -347,8 +339,6 @@ img[src="/modules/Messages/themes/default/images/loading_big.gif"] {
   border-bottom: 2px solid var(--color-base03) !important;
 }
 
-
-
 button.submit-button.smscButton.blue {
   border-radius: 40px !important;
   color: var(--color-text) !important;
@@ -365,10 +355,6 @@ button.submit-button.smscButton.blue:hover,
   border-color: var(--color-accent) !important;
 }
 
-.resize-handle {
-  display: none !important;
-}
-
 .tox :not(svg):not(rect) {
   fill: var(--color-accent) !important;
 }
@@ -378,11 +364,11 @@ button.submit-button.smscButton.blue:hover,
   color: var(--color-text) !important;
 }
 
-.tox:not([dir=rtl]) .tox-toolbar__group:not(:last-of-type) {
+.tox:not([dir="rtl"]) .tox-toolbar__group:not(:last-of-type) {
   border-right: 1px solid var(--color-base03) !important;
 }
 
-.tox .tox-menubar+.tox-toolbar {
+.tox .tox-menubar + .tox-toolbar {
   border-top: 1px solid var(--color-base03) !important;
 }
 
@@ -428,7 +414,7 @@ div.tox-toolbar[role="group"][aria-disabled="false"] {
 }
 
 body#tinymce {
-  color: var(--color-text) !important
+  color: var(--color-text) !important;
 }
 
 button.ui-button.ui-corner-all.ui-widget.ui-button-icon-only.ui-dialog-titlebar-close {
@@ -477,7 +463,7 @@ td.msg_right {
   border-radius: 10px !important;
 }
 
-.modern-ui input[type=text]:not(.smsc-inlineeditor__input) {
+.modern-ui input[type="text"]:not(.smsc-inlineeditor__input) {
   background-color: var(--color-base01) !important;
 }
 
@@ -490,7 +476,7 @@ button.accswitchmain.mbselected {
   padding: 0px !important;
   height: 25px;
   line-height: normal;
-  color: var(--color-accent) !important
+  color: var(--color-accent) !important;
 }
 
 button.accswitchco.mbnotselected,
@@ -502,7 +488,7 @@ button.accswitchmain.mbnotselected {
   padding: 0px !important;
   height: 25px;
   line-height: normal;
-  color: var(--color-text) !important
+  color: var(--color-text) !important;
 }
 
 td#tabmaina {
@@ -568,7 +554,11 @@ div#submitbtn {
   box-shadow: none !important;
 }
 
-.infoBlock .infoBlock_content .infoBlock_presence .infoBlock_presenceContent .infoBlock_presenceMotivation {
+.infoBlock
+  .infoBlock_content
+  .infoBlock_presence
+  .infoBlock_presenceContent
+  .infoBlock_presenceMotivation {
   color: var(--color-text) !important;
 }
 
@@ -588,7 +578,7 @@ div#submitbtn {
 }
 
 input {
-  border: none !important
+  border: none !important;
 }
 
 .newsTitle {
@@ -631,7 +621,7 @@ smsc-tabs .smsc-tabslist__item:hover {
 
 smsc-tabs .smsc-tabslist__item {
   margin-right: 10px !important;
-  border: 2px solid var(--color-base03) !important
+  border: 2px solid var(--color-base03) !important;
 }
 
 .compose-options {

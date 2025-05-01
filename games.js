@@ -235,6 +235,47 @@ class GameBase extends WidgetBase {
 
     return div;
   }
+  async createPreview() {
+    let gameData = await browser.runtime.sendMessage({
+      action: "getGameData",
+      game: this.constructor.name,
+    });
+
+    let div = document.createElement("div");
+    div.classList.add("game-container");
+
+    let menuTop = document.createElement("div");
+    menuTop.classList.add("game-menu-top");
+    let menuBottom = document.createElement("div");
+    menuBottom.classList.add("game-menu-bottom");
+    let menu = document.createElement("div");
+    menu.classList.add("game-menu");
+
+    let title = document.createElement("h2");
+    title.classList.add("game-title");
+    title.innerText = this.title.endsWith("++")
+      ? this.title
+      : this.title + "++";
+    menuTop.appendChild(title);
+
+    let scoreEl = document.createElement("span");
+    scoreEl.classList.add("game-score");
+    scoreEl.innerText = "Highscore: " + gameData.score;
+    menuTop.appendChild(scoreEl);
+
+    let buttonEl = document.createElement("button");
+    buttonEl.classList.add("game-button");
+    buttonEl.innerText = "Play";
+
+    menuBottom.appendChild(buttonEl);
+
+    menu.appendChild(menuTop);
+    menu.appendChild(menuBottom);
+    this.menu = menu;
+    div.appendChild(menu);
+
+    return div;
+  }
 
   // Override us
 

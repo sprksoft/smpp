@@ -11,8 +11,7 @@ html {
 
   --preview-width: calc(var(--pannel-width) * 0.7);
   --bag-close-transformy: calc(
-    -100% - var(--smpp-widget-bag-margin) - 8px +
-      var(--smpp-widget-bag-handle-height)
+    -100% - var(--smpp-widget-bag-margin) - 8px + var(--smpp-widget-bag-handle-height)
   ); /* -8px for 2 times the border size */
 }
 
@@ -219,7 +218,10 @@ html {
   flex-wrap: wrap;
 }
 .smpp-widget-bag-group-title {
-  margin: 2rem 1rem 0.5rem 1.5rem !important;
+  margin: 1rem 1rem 0.5rem 3rem !important;
+  width: fit-content;
+  font-size: 2.5rem;
+  border-bottom: 3px solid var(--color-base02) !important;
 }
 .smpp-widget-bag.smpp-widget-bag-open {
   transform: translateY(0px);
@@ -249,10 +251,7 @@ html {
 
 .enableAnimations .smpp-widget-bag-handle-icon,
 .enableAnimations .smpp-widget-bag-handle {
-  transition:
-    border-color 0.5s,
-    color 0.5s,
-    transform 0.5s;
+  transition: border-color 0.5s, color 0.5s, transform 0.5s;
 }
 .smpp-widget-bag-open .smpp-widget-bag-handle-icon {
   transform: rotate(180deg);

@@ -34,8 +34,9 @@ function make_iframe() {
 </button>
       <button class="gc-btn gc-close" title="Sluiten">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-          <line x1="6" y1="6" x2="18" y2="18"></line>
+          <g xmlns="http://www.w3.org/2000/svg">
+          <path d="M7 7.00006L17 17.0001M7 17.0001L17 7.00006" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
         </svg>
       </button>
     </div>

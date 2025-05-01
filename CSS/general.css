@@ -1018,16 +1018,6 @@ option:hover {
   box-shadow: 0 0 30px #000000dc !important;
 }
 
-#game-container {
-  width: 100%;
-  height: 276px;
-  background-color: var(--color-base01);
-  border: 1px solid transparent;
-  position: relative;
-  padding-bottom: 5px;
-  border-radius: 11px;
-}
-
 .st1,
 .st2 {
   fill: var(--color-accent) !important;
@@ -1465,7 +1455,7 @@ textarea.form-item__input-field.form-item__input-field--textarea {
 input#background-blur-amount-slider {
   width: 3.5rem;
   height: 1rem;
-  transform: rotate(90deg);
+  transform: rotate(-90deg);
   transform-origin: center;
   margin: 0 !important;
 }

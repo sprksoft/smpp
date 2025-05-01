@@ -206,7 +206,17 @@ async function storeQuickSettings() {
   }
   console.log(data);
   data.theme = document.getElementById("theme-selector").value;
+  let oldBackgroundLink = data.backgroundLink;
   data.backgroundLink = document.getElementById("background-link-input").value;
+
+  if (data.backgroundLink) {
+    document.getElementById("smpp-link-clear-button").classList.add("active");
+  } else {
+    document
+      .getElementById("smpp-link-clear-button")
+      .classList.remove("active");
+  }
+
   data.backgroundBlurAmount = Number(
     document.getElementById("background-blur-amount-slider").value
   );
@@ -255,10 +265,10 @@ async function storeQuickSettings() {
     window.location.reload();
     return;
   } else {
-    if (data.backgroundSelection != 2 && data.backgroundLink == "") {
+    if (data.backgroundLink == "") {
       data.backgroundSelection = 0;
-    } else if (data.backgroundLink == "") {
-      1;
+    } else if (data.backgroundLink != oldBackgroundLink) {
+      data.backgroundSelection = 1;
     }
   }
 
@@ -406,6 +416,10 @@ async function loadQuickSettings() {
   console.log(data);
   document.getElementById("theme-selector").value = data.theme;
   document.getElementById("background-link-input").value = data.backgroundLink;
+
+  if (data.backgroundLink) {
+    document.getElementById("smpp-link-clear-button").classList.add("active");
+  }
   document.getElementById("background-blur-amount-slider").value =
     data.backgroundBlurAmount;
   document.getElementById("performance-mode-toggle").checked =
@@ -489,6 +503,30 @@ function createBgSelector() {
   const backgroundSelector = document.createElement("div");
   backgroundSelector.className = "smpp-background-selector";
 
+  const clearButton = document.createElement("button");
+  clearButton.id = "smpp-link-clear-button";
+  clearButton.classList.add("smpp-link-clear-button");
+  clearButton.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+          <g xmlns="http://www.w3.org/2000/svg">
+          <path d="M7 7.00006L17 17.0001M7 17.0001L17 7.00006" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
+        </svg>`;
+
+  clearButton.addEventListener("click", async function (event) {
+    event.target.closest(".smpp-link-clear-button").classList.remove("active");
+    const data = await browser.runtime.sendMessage({
+      action: "getQuickSettingsData",
+    });
+    data.backgroundLink = "";
+    data.backgroundSelection = 0;
+    await browser.runtime.sendMessage({
+      action: "setQuickSettingsData",
+      data: data,
+    });
+    loadQuickSettings();
+    storeQuickSettings();
+  });
+
   const linkInput = document.createElement("input");
   linkInput.className = "smpp-background-link";
   linkInput.id = "background-link-input";
@@ -508,6 +546,7 @@ function createBgSelector() {
 
   backgroundSelector.appendChild(linkInput);
   backgroundSelector.appendChild(fileBtn);
+  backgroundSelector.appendChild(clearButton);
   backgroundSelector.appendChild(backgroundFileInput);
 
   return backgroundSelector;

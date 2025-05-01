@@ -4,6 +4,10 @@
   overflow: hidden;
   width: 100%;
 }
+.smpp-widget-preview .game-container {
+  height: 100% !important;
+  aspect-ratio: 1;
+}
 .game-menu {
   display: flex;
   flex-direction: column;

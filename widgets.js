@@ -96,7 +96,7 @@ class WidgetBase {
     }
     if (!newContent) {
       console.error(
-        "createContent and createPreview method's needs to return an html object. in widget impl",
+        "createContent and createPreview method's needs to return an html object. in widget impl"
       );
       newContent = createWidgetErrorContent(this.name);
     }
@@ -179,7 +179,7 @@ class WidgetBase {
         let pannel = await createPannelHTML({ widgets: [] });
         pannelContainer.insertBefore(
           createInsertionPointHTML(true),
-          targetIp.nextElementSibling,
+          targetIp.nextElementSibling
         );
         pannelContainer.insertBefore(pannel, targetIp.nextElementSibling);
         targetIp = pannel.firstChild;
@@ -189,7 +189,7 @@ class WidgetBase {
       targetPannel.style.display = "block";
       targetPannel.insertBefore(
         createInsertionPointHTML(),
-        targetIp.nextElementSibling,
+        targetIp.nextElementSibling
       );
       targetPannel.insertBefore(el, targetIp.nextElementSibling);
 
@@ -305,11 +305,11 @@ class SmartschoolWidget extends WidgetBase {
 function targetInsertionPoint(target) {
   if (target !== curDragInfo.targetInsertionPoint) {
     curDragInfo.targetInsertionPoint?.classList.remove(
-      "smpp-widget-insertion-point-targeted",
+      "smpp-widget-insertion-point-targeted"
     );
     curDragInfo.targetInsertionPoint = target;
     curDragInfo.targetInsertionPoint?.classList.add(
-      "smpp-widget-insertion-point-targeted",
+      "smpp-widget-insertion-point-targeted"
     );
   }
 }
@@ -460,7 +460,7 @@ async function createWidgetSystem() {
 
   // Create smartschool default widgets
   for (let smWidget of document.querySelectorAll(
-    "#rightcontainer .homepage__block",
+    "#rightcontainer .homepage__block"
   )) {
     let wName = "SmartschoolWidget-" + smWidget.id;
     registerWidget(new SmartschoolWidget(smWidget));
@@ -469,7 +469,7 @@ async function createWidgetSystem() {
     }
   }
   for (let smWidget of document.querySelectorAll(
-    "#leftcontainer .homepage__block",
+    "#leftcontainer .homepage__block"
   )) {
     let wName = "SmartschoolWidget-" + smWidget.id;
     registerWidget(new SmartschoolWidget(smWidget));
@@ -481,7 +481,7 @@ async function createWidgetSystem() {
   widgetsContainer = await createWidgetsContainerHTML(
     widgetData,
     news,
-    showNewsState,
+    showNewsState
   );
 
   container.innerHTML = "";
@@ -568,9 +568,9 @@ async function createWidgetBag() {
 
   let content = document.createElement("div");
   content.classList.add("smpp-widget-bag-content");
-  await createGroup(content, "smartschool", "Smartschool widgets");
+  await createGroup(content, "other", "Widgets");
   await createGroup(content, "games", "Games");
-  await createGroup(content, "other", "Overige widgets");
+  await createGroup(content, "smartschool", "Smartschool Widgets");
   bag.appendChild(content);
 
   let handle = document.createElement("div");
@@ -623,43 +623,45 @@ function toggleBag(params) {
   }
 }
 
-document.addEventListener("mouseup", async (e) => {
-  if (curDragInfo) {
-    await curDragInfo.widget.drop(false);
-  }
-});
-
-document.addEventListener("mousemove", (e) => {
-  if (curDragInfo) {
-    curDragInfo.widget.dragMove(e.clientX, e.clientY);
-
-    let bagBounds = widgetBag.getBoundingClientRect();
-    if (
-      e.clientY < bagBounds.bottom &&
-      e.clientX > bagBounds.left &&
-      e.clientX < bagBounds.right
-    ) {
-      bagHoverEnter();
-    } else if (hoveringBag) {
-      bagHoverExit();
+if (getPageURL().path == "") {
+  document.addEventListener("mouseup", async (e) => {
+    if (curDragInfo) {
+      await curDragInfo.widget.drop(false);
     }
-  }
-});
+  });
 
-document.addEventListener("keyup", async (e) => {
-  if (e.target?.tagName == "INPUT") {
-    return;
-  }
-  if (e.key == "Escape" && widgetEditMode) {
-    await setEditMode(false);
-  } else if (e.key == "e") {
-    await setEditMode(true);
-  } else if (e.key == " ") {
-    if (widgetEditMode) {
-      toggleBag();
+  document.addEventListener("mousemove", (e) => {
+    if (curDragInfo) {
+      curDragInfo.widget.dragMove(e.clientX, e.clientY);
+
+      let bagBounds = widgetBag.getBoundingClientRect();
+      if (
+        e.clientY < bagBounds.bottom &&
+        e.clientX > bagBounds.left &&
+        e.clientX < bagBounds.right
+      ) {
+        bagHoverEnter();
+      } else if (hoveringBag) {
+        bagHoverExit();
+      }
     }
-  }
-});
+  });
+
+  document.addEventListener("keyup", async (e) => {
+    if (e.target?.tagName == "INPUT") {
+      return;
+    }
+    if (e.key == "Escape" && widgetEditMode) {
+      await setEditMode(false);
+    } else if (e.key == "e") {
+      await setEditMode(true);
+    } else if (e.key == " ") {
+      if (widgetEditMode) {
+        toggleBag();
+      }
+    }
+  });
+}
 
 function getWidgetByName(name) {
   for (let widget of widgets) {

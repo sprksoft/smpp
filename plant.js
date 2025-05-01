@@ -12,15 +12,17 @@ class PlantWidget extends WidgetBase {
     let plantData = await browser.runtime.sendMessage({
       action: "getPlantAppData",
     });
-    if (plantData.age == null || plantData.age == 0) {
-      plantPreviewDiv.appendChild(createPlantThePlantVisual());
-    } else {
-      plantPreviewDiv.innerHTML = getPlantHTML(plantData);
-    }
     let plantTitle = document.createElement("div");
     plantTitle.id = "plant-preview-title";
     plantTitle.innerText = "Plant";
     plantPreviewDiv.appendChild(plantTitle);
+    let plantPreviewImg = document.createElement("div");
+    if (plantData.age == null || plantData.age == 0) {
+      plantPreviewImg.appendChild(createPlantThePlantVisual());
+    } else {
+      plantPreviewImg.innerHTML = getPlantHTML(plantData);
+    }
+    plantPreviewDiv.appendChild(plantPreviewImg);
     return plantPreviewDiv;
   }
 }
