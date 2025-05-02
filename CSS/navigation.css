@@ -116,7 +116,7 @@
 .bubble,
 .smsctooltip {
   background-color: var(--color-base01) !important;
-  border: 2px solid var(--color-popup-border) !important;
+  border: 2px solid var(--color-base03) !important;
   text-decoration: none !important;
   border-radius: 15px !important;
   color: var(--color-text) !important;
@@ -149,7 +149,7 @@
 
 .smscButton:hover,
 .topnav__menuitem:hover {
-  border-color: var(--color-hover-border) !important;
+  border-color: var(--color-accent) !important;
   background-color: var(--color-base02) !important;
   color: var(--color-accent) !important;
   font-weight: 600 !important;

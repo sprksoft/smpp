@@ -47,6 +47,7 @@ html {
 .smpp-news-container {
   flex-grow: 1;
   overflow: scroll;
+  backdrop-filter: var(--blur-value-small);
 }
 
 .smpp-widget-preview {

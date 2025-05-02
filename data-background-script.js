@@ -4,6 +4,16 @@ if (typeof browser === "undefined") {
 const liteMode = browser.runtime.getManifest().lite_mode;
 const plantVersion = 2;
 import { fetchDelijnData, fetchWeatherData } from "./api-background-script.js";
+function getDefaultCustomThemeData() {
+  return {
+    color_accent: "#a3a2ec",
+    color_base00: "#38313a",
+    color_base01: "#826882",
+    color_base02: "#ac85b7",
+    color_base03: "#c78af0",
+    color_text: "#ede3e3",
+  };
+}
 
 function getDefaultQuickSettings(isLite) {
   if (isLite) {
@@ -42,7 +52,7 @@ export async function getQuickSettingsData() {
 
 export async function getWidgetData() {
   let data = await browser.storage.local.get("widgets");
-  return data.widgets;
+  return data.widgets; // fix this when making migration func (funky)
 }
 export async function setWidgetData(widgetData) {
   await browser.storage.local.set({ widgets: widgetData });
@@ -110,4 +120,8 @@ export async function getPlantAppData() {
     isAlive: true,
   };
   return plantAppData;
+}
+export async function getCustomThemeData() {
+  let data = await browser.storage.local.get("customThemeData");
+  return data.customThemeData || getDefaultCustomThemeData();
 }

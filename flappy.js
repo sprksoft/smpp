@@ -30,8 +30,8 @@ class FlappyWidget extends GameBase {
     ctx.lineTo(w, h - FLOOR_H);
     ctx.stroke();
 
-    ctx.fillStyle = getCurThemeVar("--color-accent");
-    ctx.strokeStyle = getCurThemeVar("--color-base01");
+    ctx.fillStyle = getThemeVar("--color-accent");
+    ctx.strokeStyle = getThemeVar("--color-base01");
     ctx.fillRect(0, h - FLOOR_H, w, FLOOR_H);
     ctx.strokeRect(0, h - FLOOR_H, w, FLOOR_H);
 
@@ -46,13 +46,13 @@ class FlappyWidget extends GameBase {
   #calcGap() {
     return Math.max(
       PIPE_GAP * this.getOpt("speed") * 0.01,
-      BIRD_RADIUS * 2 + 5,
+      BIRD_RADIUS * 2 + 5
     );
   }
 
   #drawPipe(ctx, pipe) {
     const gap_size = this.#calcGap();
-    ctx.fillStyle = getCurThemeVar("--color-accent");
+    ctx.fillStyle = getThemeVar("--color-accent");
     ctx.lineCap = "round";
     ctx.beginPath();
     ctx.roundRect(
@@ -60,7 +60,7 @@ class FlappyWidget extends GameBase {
       -PIPE_W,
       PIPE_W,
       pipe.y + PIPE_W - gap_size / 2,
-      PIPE_W,
+      PIPE_W
     );
     ctx.fill();
     ctx.beginPath();
@@ -70,7 +70,7 @@ class FlappyWidget extends GameBase {
       botStartY,
       PIPE_W,
       this.canvas.height - botStartY + PIPE_W,
-      PIPE_W,
+      PIPE_W
     );
     ctx.fill();
   }
@@ -110,7 +110,7 @@ class FlappyWidget extends GameBase {
   }
 
   #drawBird(ctx) {
-    ctx.fillStyle = getCurThemeVar("--color-accent");
+    ctx.fillStyle = getThemeVar("--color-accent");
     ctx.beginPath();
     ctx.arc(BIRD_X, this.birdY, BIRD_RADIUS, 0, 2 * Math.PI);
     ctx.fill();
@@ -130,7 +130,7 @@ class FlappyWidget extends GameBase {
     this.birdY += this.birdVel * dt;
     this.birdVel = Math.min(
       this.birdVel + GRAVITY * this.getOpt("speed") * 0.01 * dt,
-      TERMVEL * this.getOpt("speed") * 0.01,
+      TERMVEL * this.getOpt("speed") * 0.01
     );
     ctx;
     if (this.jump) {

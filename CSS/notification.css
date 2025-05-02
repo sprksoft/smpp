@@ -7,13 +7,13 @@
   color: var(--color-text) !important;
 }
 
-.smsc-topnav [data-notifs] .notifs__hdr [role=switch] {
+.smsc-topnav [data-notifs] .notifs__hdr [role="switch"] {
   background-color: var(--color-base01) !important;
   border: 2px solid var(--color-base02) !important;
   border-radius: 5px !important;
 }
 
-.smsc-topnav [data-notifs] .notifs__hdr [role=switch] .switch-values:after {
+.smsc-topnav [data-notifs] .notifs__hdr [role="switch"] .switch-values:after {
   background-color: var(--color-base03) !important;
 }
 
@@ -49,11 +49,10 @@
   color: var(--color-text) !important;
 }
 
-
 .notification:hover,
 .modern-message:hover {
   background-color: var(--color-base02) !important;
-  border: var(--border-size) solid var(--color-hover-border) !important;
+  border: var(--border-size) solid var(--color-accent) !important;
   text-decoration: none !important;
 }
 
@@ -100,12 +99,20 @@ button.tox-tbtn.tox-tbtn--enabled {
   padding: 1rem !important;
 }
 
-.smsc-topnav [data-notifs] .notifs__hdr [role=switch] .switch-values span {
+.smsc-topnav [data-notifs] .notifs__hdr [role="switch"] .switch-values span {
   color: var(--color-accent) !important;
 }
 
-.smsc-topnav [data-notifs] .notifs__hdr [role=switch][aria-checked=false] :last-child,
-.smsc-topnav [data-notifs] .notifs__hdr [role=switch][aria-checked=true] :first-child {
+.smsc-topnav
+  [data-notifs]
+  .notifs__hdr
+  [role="switch"][aria-checked="false"]
+  :last-child,
+.smsc-topnav
+  [data-notifs]
+  .notifs__hdr
+  [role="switch"][aria-checked="true"]
+  :first-child {
   color: var(--color-text) !important;
 }
 

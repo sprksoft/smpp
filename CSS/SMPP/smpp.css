@@ -13,7 +13,7 @@
 
 .smpp-background-file,
 .smpp-background-link {
-  border: 2px solid var(--color-settings-ui-layer2) !important;
+  border: 2px solid var(--color-base03) !important;
   border-radius: 1rem;
 }
 
@@ -31,11 +31,15 @@
   background: none !important;
   opacity: 0.5;
 }
+.active.smpp-background-file {
+  opacity: 1 !important;
+}
 .enableAnimations .smpp-background-file {
-  transition: opacity 0.3s !important;
+  transition: opacity 0.3s, filter 0.3s !important;
 }
 .smpp-background-selector .smpp-background-file:hover {
   opacity: 1;
+  filter: brightness(120%);
 }
 
 .smpp-link-clear-button {

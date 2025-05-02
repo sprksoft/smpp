@@ -54,7 +54,7 @@
 .splitdetail__content {
   background-color: var(--color-base01) !important;
   color: var(--color-text) !important;
-  border: 2px solid var(--color-popup-border) !important;
+  border: 2px solid var(--color-accent) !important;
   border-radius: 25px !important;
 }
 

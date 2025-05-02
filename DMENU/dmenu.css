@@ -18,7 +18,7 @@ html {
 .dmenu {
   overflow: clip;
   background: var(--color-base00);
-  border: var(--border-size) solid var(--color-popup-border);
+  border: var(--border-size) solid var(--color-accent);
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -39,7 +39,7 @@ html {
 @keyframes dmenu {
   0% {
     opacity: 0.1;
-    transform: translateY(25%) scale(0.9)
+    transform: translateY(25%) scale(0.9);
   }
 
   40% {
@@ -48,14 +48,13 @@ html {
   }
 
   60% {
-
     transform: translateY(0px);
   }
 }
 
 @keyframes dmenu_joke {
   0% {
-    transform: translateY(50%) scale(1)
+    transform: translateY(50%) scale(1);
   }
 
   5% {
@@ -63,12 +62,11 @@ html {
   }
 
   10% {
-
     transform: scale(4) rotate3d(90deg, 5deg, 720deg);
   }
 
   15% {
-    transform: scale(1) translateX(-500%)
+    transform: scale(1) translateX(-500%);
   }
 
   20% {
@@ -80,7 +78,7 @@ html {
   }
 
   30% {
-    transform: translateY(50%) scale(2) rotate(1500deg)
+    transform: translateY(50%) scale(2) rotate(1500deg);
   }
 
   35% {
@@ -88,12 +86,11 @@ html {
   }
 
   40% {
-
     transform: translateX(50%) scale(1.1);
   }
 
   45% {
-    transform: rotate(180deg) scale3d(2, -2, -1)
+    transform: rotate(180deg) scale3d(2, -2, -1);
   }
 
   50% {
@@ -101,17 +98,15 @@ html {
   }
 
   55% {
-
     transform: translateY(100%) rotateZ(-10deg);
   }
 
   60% {
-
     transform: translateY(-100%) rotate(15deg) rotateZ(0deg);
   }
 
   65% {
-    transform: translateY(50%) scale(1.1)
+    transform: translateY(50%) scale(1.1);
   }
 
   70% {
@@ -119,7 +114,6 @@ html {
   }
 
   75% {
-
     transform: scale3d(1, 2, 5) translateX(0px);
   }
 
@@ -136,7 +130,7 @@ html {
   }
 
   95% {
-    transform: translateY(500%)
+    transform: translateY(500%);
   }
 
   100% {

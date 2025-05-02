@@ -19,13 +19,12 @@ html {
   --blur-value-large: blur(4px);
   --blur-value-small: blur(2px);
   --border-size: 2px;
-  --color-popup-border: var(--color-accent);
-  --color-hover-border: var(--color-accent);
-  --color-settings-bg: var(--color-base02);
-  --color-settings-border: var(--color-base03);
-  --color-settings-ui-bg: #000000;
-  --color-settings-ui-border: #000000;
-  --color-settings-ui-layer2: #000000;
+  --color-accent: var(--color-accent);
+  --color-accent: var(--color-accent);
+  --color-base02: var(--color-base02);
+  --color-base03: var(--color-base03);
+  --color-base01: #000000;
+  --color-base03: #000000;
   --darken-background: rgba(0, 0, 0, 0.2);
   --color-splashtext: #191817;
   --profile-picture: url("");
@@ -593,8 +592,8 @@ nav.topnav {
 }
 
 .popupinput {
-  background-color: var(--color-settings-ui-bg) !important;
-  border: 2px solid var(--color-settings-ui-layer2) !important;
+  background-color: var(--color-base01) !important;
+  border: 2px solid var(--color-base03) !important;
   text-align: center !important;
   border-radius: 10px !important;
   width: 100px !important;
@@ -613,7 +612,7 @@ nav.topnav {
 }
 
 #location {
-  background-color: var(--color-settings-ui-bg) !important;
+  background-color: var(--color-base01) !important;
   text-align: center !important;
   border-radius: 10px !important;
   width: 135px !important;
@@ -652,7 +651,7 @@ nav.topnav {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: var(--color-settings-ui-bg);
+  background-color: var(--color-base01);
 }
 
 .enableAnimations .slider.round {
@@ -667,7 +666,7 @@ nav.topnav {
   width: 26px;
   left: 4px;
   bottom: 4px;
-  background-color: var(--color-settings-ui-border);
+  background-color: var(--color-base02);
 }
 
 .enableAnimations .slider.round:before {
@@ -743,8 +742,8 @@ input:checked + .slider:before {
 #quickSettings {
   top: 34px !important;
   max-width: 270px !important;
-  background-color: var(--color-settings-bg) !important;
-  border: 2px solid var(--color-settings-border) !important;
+  background-color: var(--color-base02) !important;
+  border: 2px solid var(--color-base03) !important;
   align-items: center !important;
   display: flex;
   flex-direction: column !important;
@@ -752,7 +751,7 @@ input:checked + .slider:before {
   justify-content: center !important;
   border-radius: 17.5px !important;
   overflow: visible;
-  border: 3px solid var(--color-popup-border);
+  border: 3px solid var(--color-accent);
   z-index: 777;
   position: absolute;
   padding: 1rem !important;

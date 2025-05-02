@@ -1,13 +1,14 @@
 let gc_is_open = false;
 let gc_initialized = false;
 
-function make_iframe() {
+async function make_iframe() {
   const GlCHatplace = document.getElementById("global_chat_window");
-  let current_profile = PLEASE_DELETE_ME_WHEN_FIXED().profile;
-  let current_theme = get_theme(current_profile);
+  let quickSettings = await browser.runtime.sendMessage({
+    action: "getQuickSettingsData",
+  });
 
-  const placeholderTextGlChat = username_override || orig_name;
-  let query_string = get_theme_as_query_string(current_theme, [
+  const placeholderTextGlChat = quickSettings.customName || getOriginalName();
+  let query_string = getThemeQueryString([
     "color-base00",
     "color-base01",
     "color-base02",
@@ -61,7 +62,7 @@ function toggleFullscreen() {
   void chatWindow.offsetWidth;
 }
 
-function make_gcwin(is_hidden) {
+async function make_gcwin(is_hidden) {
   const global_chat_window_element = document.createElement("div");
   global_chat_window_element.id = "global_chat_window";
   global_chat_window_element.classList.add("global_chat_window", "lookChat");
@@ -82,16 +83,16 @@ function make_gcwin(is_hidden) {
     }
   });
 
-  make_iframe();
+  await make_iframe();
 }
 
-function open_global_chat() {
+async function open_global_chat() {
   let win = document.getElementById("global_chat_window");
   if (win) {
     win.classList.remove("gc-hidden");
     win.style.display = "block";
   } else {
-    make_gcwin(false);
+    await make_gcwin(false);
   }
   gc_initialized = true;
   gc_is_open = true;
@@ -101,10 +102,11 @@ function gc_close() {
   let global_chat_window = document.getElementById("global_chat_window");
   global_chat_window.classList.add("gc-hidden");
 }
-function remove_gcwin() {
+async function remove_gcwin() {
   let win = document.getElementById("global_chat_window");
   if (win) {
     win.remove();
+    console.log("removed win");
   }
 }
 

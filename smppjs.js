@@ -1,15 +1,6 @@
 //java script komt hier je weet wel
 //ok - ldev
 //oh ok, ik dacht in general.css - Jdev
-
-const default_theme = {
-  color_accent: "#a3a2ec",
-  color_base00: "#38313a",
-  color_base01: "#826882",
-  color_base02: "#ac85b7",
-  color_base03: "#c78af0",
-  color_text: "#ede3e3",
-};
 let currentThemeVars;
 let quickSettingsWindowIsHidden = true;
 
@@ -130,9 +121,18 @@ async function apply() {
   userNameChanger(data.customName);
   decapitateಠ_ಠ();
 
-  set_theme("default");
-  set_theme(data.theme);
+  console.log(data.theme);
+  await setTheme(data.theme);
+  currentTheme = data.theme;
   showNews(data.showNews);
+  getThemeQueryString([
+    "color-base00",
+    "color-base01",
+    "color-base02",
+    "color-base03",
+    "color-accent",
+    "color-text",
+  ]);
 
   if (document.querySelector("nav.topnav")) {
     topNavIcons();
@@ -160,10 +160,6 @@ async function apply() {
       data.weatherOverlaySelection,
       data.weatherOverlayAmount
     );
-    if (gc_initialized) {
-      remove_gcwin();
-      make_gcwin(true);
-    }
   }
   data.enablePerfomanceMode
     ? document.body.classList.remove("enableAnimations")
@@ -185,27 +181,15 @@ async function apply() {
   }
 }
 
-function storeTheme() {
-  const themeData = {
-    color_base00: document.getElementById("colorPicker1").value,
-    color_base01: document.getElementById("colorPicker2").value,
-    color_base02: document.getElementById("colorPicker3").value,
-    color_base03: document.getElementById("colorPicker4").value,
-    color_accent: document.getElementById("colorPicker5").value,
-    color_text: document.getElementById("colorPicker6").value,
-  };
-  window.localStorage.setItem("themedata", JSON.stringify(themeData));
-}
-
 async function storeQuickSettings() {
   const data = await browser.runtime.sendMessage({
     action: "getQuickSettingsData",
   });
   if (data.theme == "custom") {
-    storeTheme();
+    await storeCustomThemeData();
   }
-  console.log(data);
   data.theme = document.getElementById("theme-selector").value;
+  currentTheme = data.theme;
   let oldBackgroundLink = data.backgroundLink;
   data.backgroundLink = document.getElementById("background-link-input").value;
 
@@ -241,7 +225,7 @@ async function storeQuickSettings() {
       : "<span class='red-underline'>Disabled</span>"
   }`;
   if (data.theme == "custom") {
-    loadCustomTheme();
+    await createCustomThemeUI();
   } else {
     document.getElementById("colorpickers").innerHTML = ``;
   }
@@ -271,7 +255,6 @@ async function storeQuickSettings() {
       data.backgroundSelection = 1;
     }
   }
-
   console.log(data);
   await browser.runtime.sendMessage({
     action: "setQuickSettingsData",
@@ -305,72 +288,25 @@ function set_background() {
   });
 }
 
+function isAbsoluteUrl(url) {
+  return /^(https?:\/\/|data:image\/)/i.test(url);
+}
+
 function set_backgroundlink(background) {
   let style = document.documentElement.style;
   if (!background) {
-    style.setProperty("--loginpage-image", "aaaaa");
-    console.log("no background");
+    style.setProperty("--loginpage-image", "");
     return;
   }
   let img = new Image();
-  img.src = background;
-  img.onload = () => {
-    style.setProperty("--loginpage-image", `url(${background})`);
-    console.log("works");
-  };
-  img.onerror = () => {
-    console.log("error");
-  };
-}
-
-function getCurThemeVar(name) {
-  return currentThemeVars[name];
-}
-
-function set_theme(name) {
-  let style = document.documentElement.style;
-  if (name == "custom") {
-    let themeData = JSON.parse(window.localStorage.getItem("themedata"));
-    if (themeData == null) {
-      themeData = default_theme;
-      window.localStorage.setItem("themedata", JSON.stringify(themeData));
-    }
-    if (themeData.base0) {
-      themeData = migrate_theme_data(themeData);
-      loadCustomThemeData();
-    }
-    // Idk I found it like this.
-    style.setProperty("--color-accent", themeData.color_accent);
-    currentThemeVars["--color-accent"] = themeData.color_accent;
-
-    style.setProperty("--color-text", themeData.color_text);
-    currentThemeVars["--color-text"] = themeData.color_text;
-
-    style.setProperty("--color-base00", themeData.color_base00);
-    currentThemeVars["--color-base00"] = themeData.color_base00;
-
-    style.setProperty("--color-base01", themeData.color_base01);
-    currentThemeVars["--color-base01"] = themeData.color_base01;
-
-    style.setProperty("--color-base02", themeData.color_base02);
-    currentThemeVars["--color-base02"] = themeData.color_base02;
-
-    style.setProperty("--color-base03", themeData.color_base03);
-    currentThemeVars["--color-base03"] = themeData.color_base03;
-
-    if (window.self == window.top) {
-      style.setProperty(
-        "--loginpage-image",
-        "url(https://wallpaperaccess.com/full/23.jpg)"
-      );
-    }
-  } else {
-    let theme = get_theme(name);
-    currentThemeVars = theme;
-    if (!theme) {
-      return;
-    }
-    apply_theme(theme, style);
+  if (isAbsoluteUrl(background)) {
+    img.src = background;
+    img.onload = () => {
+      style.setProperty("--loginpage-image", `url(${background})`);
+    };
+    img.onerror = () => {
+      console.log("Image failed to load from link:", background);
+    };
   }
 }
 
@@ -388,8 +324,25 @@ function migrate_theme_data(old_themeData) {
   return themeData;
 }
 
-function loadCustomThemeData() {
-  let themeData = JSON.parse(window.localStorage.getItem("themedata"));
+async function storeCustomThemeData() {
+  await browser.runtime.sendMessage({
+    action: "setCustomThemeData",
+    data: {
+      color_base00: document.getElementById("colorPicker1").value,
+      color_base01: document.getElementById("colorPicker2").value,
+      color_base02: document.getElementById("colorPicker3").value,
+      color_base03: document.getElementById("colorPicker4").value,
+      color_accent: document.getElementById("colorPicker5").value,
+      color_text: document.getElementById("colorPicker6").value,
+    },
+  });
+}
+
+async function loadCustomThemeData() {
+  const themeData = await browser.runtime.sendMessage({
+    action: "getCustomThemeData",
+  });
+  customTheme = themeData;
   document.getElementById("colorPicker1").value = themeData.color_base00;
   document.getElementById("colorPicker2").value = themeData.color_base01;
   document.getElementById("colorPicker3").value = themeData.color_base02;
@@ -398,15 +351,10 @@ function loadCustomThemeData() {
   document.getElementById("colorPicker6").value = themeData.color_text;
 }
 
-function loadCustomTheme() {
-  let themeData = JSON.parse(window.localStorage.getItem("themedata"));
-  if (themeData == null) {
-    themeData = default_theme;
-    window.localStorage.setItem("themedata", JSON.stringify(themeData));
-  }
+async function createCustomThemeUI() {
   const colorpickers = document.getElementById("colorpickers");
   colorpickers.innerHTML = colorpickersHTML;
-  loadCustomThemeData();
+  await loadCustomThemeData();
 }
 
 async function loadQuickSettings() {
@@ -419,6 +367,11 @@ async function loadQuickSettings() {
 
   if (data.backgroundLink) {
     document.getElementById("smpp-link-clear-button").classList.add("active");
+  }
+  if (data.backgroundSelection == 2) {
+    document.getElementById("backgroundfilebutton").classList.add("active");
+  } else {
+    document.getElementById("backgroundfilebutton").classList.remove("active");
   }
   document.getElementById("background-blur-amount-slider").value =
     data.backgroundBlurAmount;
@@ -440,7 +393,7 @@ async function loadQuickSettings() {
       data.weatherOverlayAmount;
   }
   if (data.theme == "custom") {
-    loadCustomTheme();
+    await createCustomThemeUI();
   }
 }
 

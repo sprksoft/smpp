@@ -10,6 +10,7 @@ import {
   setWidgetData,
   getDelijnColorData,
   getPlantAppData,
+  getCustomThemeData,
 } from "./data-background-script.js";
 import { fetchWeatherData, fetchDelijnData } from "./api-background-script.js";
 
@@ -37,6 +38,17 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
       const settingsData = await getQuickSettingsData();
       sendResponse(settingsData);
       console.log("Quick settings data sent.");
+    }
+    // Custom theme
+    if (message.action === "getCustomThemeData") {
+      const customThemeData = await getCustomThemeData();
+      sendResponse(customThemeData);
+      console.log("Custom theme data data sent.");
+    }
+    if (message.action === "setCustomThemeData") {
+      await browser.storage.local.set({ customThemeData: message.data });
+      sendResponse({ succes: true });
+      console.log("Custom theme data saved.");
     }
     // Background image
     if (message.action === "saveBackgroundImage") {
