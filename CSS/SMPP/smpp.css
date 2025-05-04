@@ -30,6 +30,7 @@
   margin-right: 0px !important;
   background: none !important;
   opacity: 0.5;
+  display: flex;
 }
 .active.smpp-background-file {
   opacity: 1 !important;

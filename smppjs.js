@@ -413,7 +413,7 @@ async function openQuickSettings() {
     win = document.getElementById("quickSettings");
   }
   win.classList.remove("qs-hidden");
-  loadQuickSettings();
+  await loadQuickSettings();
   quickSettingsWindowIsHidden = false;
 }
 
@@ -428,7 +428,7 @@ function closeQuickSettings() {
 function createSwitch(id, title) {
   const switchContainer = document.createElement("div");
   const switchHeading = document.createElement("h3");
-  switchHeading.className = "popuptitles";
+  switchHeading.className = "quick-settings-title";
   switchHeading.textContent = title;
 
   const switchLabel = document.createElement("label");
@@ -476,8 +476,8 @@ function createBgSelector() {
       action: "setQuickSettingsData",
       data: data,
     });
-    loadQuickSettings();
-    storeQuickSettings();
+    await loadQuickSettings();
+    await storeQuickSettings();
   });
 
   const linkInput = document.createElement("input");
@@ -524,7 +524,7 @@ function createQuickSettingsHTML(parent) {
   themeContainer.className = "theme-container";
 
   const themeHeading = document.createElement("h3");
-  themeHeading.className = "popuptitles";
+  themeHeading.className = "quick-settings-title";
   themeHeading.textContent = "Theme:";
 
   const themeSelector = document.createElement("select");
@@ -571,7 +571,7 @@ function createQuickSettingsHTML(parent) {
   const wallpaperTopContainer = document.createElement("div");
 
   const wallpaperHeading = document.createElement("h3");
-  wallpaperHeading.className = "popuptitles";
+  wallpaperHeading.className = "quick-settings-title";
   wallpaperHeading.textContent = "Wallpaper:";
 
   const wallpaperContainer = document.createElement("div");
@@ -605,7 +605,7 @@ function createQuickSettingsHTML(parent) {
   const weatherOverlayTopContainer = document.createElement("div");
 
   const weatherOverlayHeading = document.createElement("h3");
-  weatherOverlayHeading.className = "popuptitles";
+  weatherOverlayHeading.className = "quick-settings-title";
   weatherOverlayHeading.textContent = "Weather overlay:";
 
   const weatherOverlayContainer = document.createElement("div");
@@ -628,6 +628,9 @@ function createQuickSettingsHTML(parent) {
   weatherVerticalText.appendChild(realtimeText);
   weatherVerticalText.appendChild(rainText);
 
+  const weatherSelectorContainer = document.createElement("div");
+  weatherSelectorContainer.classList.add("weather-overlay-selector-container");
+
   const weatherSelector = document.createElement("input");
   weatherSelector.type = "range";
   weatherSelector.min = "0";
@@ -636,12 +639,14 @@ function createQuickSettingsHTML(parent) {
   weatherSelector.className = "main-slider";
   weatherSelector.id = "weather-overlay-selector";
 
-  const weatherSliderContainer = document.createElement("div");
+  weatherSelectorContainer.appendChild(weatherSelector);
 
-  const weatherSliderHeading = document.createElement("h4");
-  weatherSliderHeading.style.marginBottom = "0px";
-  weatherSliderHeading.style.textAlign = "center";
-  weatherSliderHeading.textContent = "Amount:";
+  const weatherSliderContainer = document.createElement("div");
+  weatherSliderContainer.classList.add("weather-amount-slider-container");
+
+  const weatherAmountSliderTitle = document.createElement("h4");
+  weatherAmountSliderTitle.classList.add("weather-amount-slider-title")
+  weatherAmountSliderTitle.textContent = "Amount:";
 
   const weatherSlider = document.createElement("input");
   weatherSlider.type = "range";
@@ -650,13 +655,12 @@ function createQuickSettingsHTML(parent) {
   weatherSlider.value = "0";
   weatherSlider.className = "main-slider";
   weatherSlider.id = "weather-overlay-amount-slider";
-  weatherSlider.style.width = "110px";
 
-  weatherSliderContainer.appendChild(weatherSliderHeading);
+  weatherSliderContainer.appendChild(weatherAmountSliderTitle);
   weatherSliderContainer.appendChild(weatherSlider);
 
   weatherOverlayContainer.appendChild(weatherVerticalText);
-  weatherOverlayContainer.appendChild(weatherSelector);
+  weatherOverlayContainer.appendChild(weatherSelectorContainer);
   weatherOverlayContainer.appendChild(weatherSliderContainer);
 
   weatherOverlayTopContainer.appendChild(weatherOverlayHeading);
@@ -746,7 +750,6 @@ function createTopButtons(onHomePage) {
 
   let pushRight = topNav.childNodes[2];
 
-  topNav.insertBefore(createQuickMenuButton(), pushRight);
   if (!liteMode) {
     topNav.insertBefore(createGCButton(), pushRight);
   }

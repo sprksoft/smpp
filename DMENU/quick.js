@@ -78,10 +78,10 @@ function add_quick_interactive() {
           }
           add_quick(name, value);
         },
-        "value:",
+        "value:"
       );
     },
-    "name:",
+    "name:"
   );
 }
 
@@ -92,7 +92,7 @@ function remove_quick_interactive() {
     function (name, shift) {
       remove_quick(name);
     },
-    "name:",
+    "name:"
   );
 }
 
@@ -109,10 +109,10 @@ function config_menu() {
           conf[cmd] = val;
           DELETE_ME_ASS_WELL_SAVE_FUNCTION(conf);
         },
-        "value:",
+        "value:"
       );
     },
-    "config: ",
+    "config: "
   );
 }
 
@@ -158,7 +158,7 @@ async function fetch_vakken() {
 function scrape_goto() {
   goto_items = [];
   let goto_items_html = document.querySelectorAll(
-    ".js-shortcuts-container > a",
+    ".js-shortcuts-container > a"
   );
   for (let i = 0; i < goto_items_html.length; i++) {
     const item = goto_items_html[i];
@@ -187,7 +187,7 @@ function do_qm(opener = "") {
         "discord",
         "toggle performance mode",
         "dizzy",
-      ]),
+      ])
     );
 
   let role = document.doBlackMagic ? document.doBlackMagic() : "User"; //Gebruik black magic om de global chat role te krijgen.
@@ -212,7 +212,7 @@ function do_qm(opener = "") {
               set_background(url);
               store_background(url);
             },
-            "bg url:",
+            "bg url:"
           );
           return;
         case "config":
@@ -292,7 +292,7 @@ function do_qm(opener = "") {
       }
     },
     "quick:",
-    (opener = opener),
+    (opener = opener)
   );
 }
 
@@ -304,17 +304,3 @@ document.addEventListener("keyup", function (e) {
     do_qm(":");
   }
 });
-
-function createQuickMenuButton() {
-  const quickButton = document.createElement("button");
-  quickButton.title =
-    "Quick menu (je kan ook : gebruiken om het quick te openen)";
-  quickButton.id = "dmenutooltip"; //TODO: change this to something more meaningful
-  quickButton.className = "topnav__btn";
-  quickButton.innerText = "Quick";
-  quickButton.addEventListener("click", function () {
-    do_qm(quickButton);
-  });
-
-  return quickButton;
-}

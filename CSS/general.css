@@ -727,7 +727,7 @@ input:checked + .slider:before {
   border-color: var(--color-accent) !important;
 }
 
-.popuptitles {
+.quick-settings-title {
   margin-bottom: 0px !important;
   text-align: center !important;
   font-size: 17px !important;
@@ -954,12 +954,34 @@ ul.smsc-column-nav {
   appearance: none;
 }
 
+.weather-overlay-selector-container {
+  width: 1.15rem;
+  height: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 0.5rem;
+}
+
 #weather-overlay-selector {
-  width: 50px !important;
+  width: 4.5rem;
+  height: 1.15rem;
   transform: rotate(90deg) !important;
+  transform-origin: center center;
   margin: 0px !important;
-  margin-top: 20px !important;
-  margin-right: -20px !important;
+}
+
+#weather-overlay-amount-slider {
+  width: 8rem !important;
+}
+.weather-amount-slider-title {
+  text-align: center;
+  margin-bottom: 0.5rem !important;
+}
+.weather-amount-slider-container {
+  margin-left: 1rem;
+  display: flex;
+  flex-direction: column;
 }
 
 #modal-background {
@@ -1024,10 +1046,6 @@ option:hover {
 
 .text-color-fill {
   fill: var(--color-text) !important;
-}
-
-#dmenutooltip {
-  color: var(--color-accent) !important;
 }
 
 .st5 {
@@ -1154,7 +1172,8 @@ option:hover {
   flex-direction: column !important;
   text-align: right !important;
   font-size: smaller !important;
-  margin-right: -10px !important;
+  height: 5rem !important;
+  gap: 0.1rem;
 }
 
 .nobottommargp {
@@ -1452,7 +1471,7 @@ textarea.form-item__input-field.form-item__input-field--textarea {
 }
 
 input#background-blur-amount-slider {
-  width: 3.5rem;
+  width: 3rem;
   height: 1rem;
   transform: rotate(-90deg);
   transform-origin: center;
@@ -2164,4 +2183,9 @@ body.modern-ui .homepage__block__content {
   text-decoration-color: var(--color-green);
   font-weight: 600;
   text-decoration-line: 2px;
+}
+
+#homeAgenda .datepicker--other-month-day {
+  color: var(--color-text) !important;
+  opacity: 0.7 !important;
 }
