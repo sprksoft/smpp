@@ -57,12 +57,23 @@ function remove_gcwin() {
     win.remove()
   }
 }
-
+function ricky() {
+  const styleEl = document.createElement("style");
+  styleEl.innerText = `
+*{
+  transition: transform 10s !important;
+}
+*:hover{
+  transform: rotate(360deg) !important;
+}`;
+  document.body.appendChild(styleEl);
+  window.open("https://www.youtube.com/watch?v=xvFZjo5PgG0", '_blank').focus();
+}
 function createGCButton() {
   const topNav = document.querySelector("nav.topnav")
 
   const goGlChatButton = document.createElement("button");
-  goGlChatButton.title="Global chat (chat met iedereen die de extensie gebruikt)"
+  goGlChatButton.title = "Global chat (chat met iedereen die de extensie gebruikt)"
   goGlChatButton.id = "global_chat_button"
   goGlChatButton.className = "topnav__btn"
   goGlChatButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="3009 50 450 450" class="st5">
@@ -75,7 +86,14 @@ function createGCButton() {
   </g>
 </svg>
 `
-  goGlChatButton.addEventListener("click",open_global_chat)
+  let currentDate = new Date()
+  console.log(currentDate.getMonth())
+  console.log(currentDate.getDate())
+  if (currentDate.getMonth() == 3 && currentDate.getDate() == 1) {
+    goGlChatButton.addEventListener("click", ricky)
+  } else {
+    goGlChatButton.addEventListener("click", open_global_chat)
+  }
 
   topNav.insertBefore(goGlChatButton, topNav.childNodes[2]);
 }

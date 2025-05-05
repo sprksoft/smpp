@@ -1,26 +1,11 @@
 {
 	"manifest_version": 3,
 	"name": "Smartschool++",
-	"version": "3.2.1",
+	"version": "3.2.2",
 	"description": "Enhance your Smartschool experience with themes and more",
 	"homepage_url": "https://github.com/sprksoft/smpp",
 	"lite_mode": false,
 	"content_scripts": [
-		{
-			"matches": [
-				"*://app.lernova.be/*"
-			],
-			"all_frames": true,
-			"css": [],
-			"js": [
-				"scraper.js",
-				"utils.js",
-				"DMENU/dmenu.js",
-				"LERNOVA/lernova.js",
-				"json.js",
-				"DMENU/quick.js"
-			]
-		},
 		{
 			"matches": [
 				"*://*.smartschool.be/*"
