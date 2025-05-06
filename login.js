@@ -108,7 +108,9 @@ let splashtexts = [
     `Baby Shark, doo-doo, \n doo-doo, doo-doo`,
     `Brood int frans`,
     `CORS >:(`,
-    `We have a discord!`
+    `We have a discord!`,
+    `Le poisson Steve !`,
+    `Il est oraaaange. Il a des bras et des jambes.`
 ]
 function get_splash_text() {
     return splashtexts[Math.floor(Math.random() * splashtexts.length)]
