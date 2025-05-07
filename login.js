@@ -114,7 +114,8 @@ let splashtexts = [
     `Since Nov 14, 2023`,
     `Over 1000+ commits!`,
     `Took at least \n 5 hours to make!`,
-    `Sometimes works!`
+    `Sometimes works!`,
+    `Survive, Adapt, Overcome`
 ]
 function get_splash_text() {
     return splashtexts[Math.floor(Math.random() * splashtexts.length)]
