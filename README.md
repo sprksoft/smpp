@@ -34,18 +34,15 @@ Global Chat: Communiceer met andere gebruikers via de ingebouwde chatfunctie.​
 
 # 🚀 Installatie
 Bezoek de Chrome Web Store.
+
 installeer de extentie op de [Chrome web store](https://chromewebstore.google.com/detail/bdhficnphioomdjhdfbhdepjgggekodf)
 
-Typ in de zoekbalk vanboven: Smartschool++
-
 Klik op "Toevoegen aan Chrome".
-Klik op "Toevoegen aan Chrome" en ververs enige smartschool paginas.
 
 Open Smartschool en klik op "Settings" rechtsboven om de extensie aan te passen.​
 
 # 👥 Community & Ondersteuning
 Voor vragen of feedback, sluit je aan bij onze Discord-servers:​
 
-De link naar de officiële Discord server: https://discord.gg/A77xPC9qdW
 Voor vragen of feedback, sluit je aan bij onze [Discord server](https://discord.gg/A77xPC9qdW
 ).
