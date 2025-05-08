@@ -9,23 +9,23 @@ Ontwikkeld door [drie middelbare scholieren met hulp van vrijwilligers](https://
 
 # 🎯 Belangrijkste functies
 
-Thema’s – Kies uit 15 unieke thema’s om de interface van Smartschool aan te passen.
+✅ Thema’s – Kies uit 15 unieke thema’s om de interface van Smartschool aan te passen.
 
-Weereffecten – Voeg sneeuw- of regenanimaties toe voor een dynamische achtergrond.
+❄️ Weereffecten – Voeg sneeuw- of regenanimaties toe voor een dynamische achtergrond.
 
-Virtuele plant – Zorg voor een digitale plant op je dashboard die dagelijks aandacht nodig heeft.
+🌱 Virtuele plant – Zorg voor een digitale plant op je dashboard die dagelijks aandacht nodig heeft.
 
-Planner-widget – Bekijk je agenda direct op de startpagina.
+🗓️ Planner-widget – Bekijk je agenda direct op de startpagina.
 
-De Lijn-integratie – Ontdek buslijnen en haltes rechtstreeks op je dashboard.
+🚌 De Lijn-integratie – Ontdek buslijnen en haltes rechtstreeks op je dashboard.
 
-Ingebouwde games – Speel klassieke spellen zoals Flappy Bird++ en Snake++.
+🎮 Ingebouwde games – Speel klassieke spellen zoals Flappy Bird++ en Snake++.
 
-Snelmenu – Navigeer efficiënt door Smartschool met het :--toets snelmenu.
+⚡ Snelmenu – Navigeer efficiënt door Smartschool met het : toets snelmenu.
 
-Achtergrondaanpassing – Stel een eigen afbeelding of link in als achtergrond.
+🖼️ Achtergrondaanpassing – Stel een eigen afbeelding of link in als achtergrond.
 
-Global Chat – Communiceer met andere gebruikers via de ingebouwde chatfunctie.
+💬 Global Chat – Communiceer met andere gebruikers via de ingebouwde chatfunctie.
 
 # 🚀 Installatie
 
