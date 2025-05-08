@@ -35,7 +35,7 @@ Global Chat: Communiceer met andere gebruikers via de ingebouwde chatfunctie.​
 # 🚀 Installatie
 Bezoek de Chrome Web Store.
 
-installeer de extentie op de [Chrome web store](https://chromewebstore.google.com/detail/bdhficnphioomdjhdfbhdepjgggekodf)
+Installeer de extentie op de [Chrome web store](https://chromewebstore.google.com/detail/bdhficnphioomdjhdfbhdepjgggekodf)
 
 Klik op "Toevoegen aan Chrome".
 
