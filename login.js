@@ -88,7 +88,7 @@ let splashtexts = [
     `MERGE CONFLICT!`,
     `In case of fire: git add . \n ; git commit ; git push`,
     `Always remove French language \npack: sudo rm -fr /`,
-    undefined,
+    `Undefined`,
     `Is tHaT A JOjO ReFEreNce?`,
     `https://ldev.eu.org`,
     `https://smartschoolplusplus.com`,
@@ -110,7 +110,12 @@ let splashtexts = [
     `CORS >:(`,
     `We have a discord!`,
     `Le poisson Steve !`,
-    `Il est oraaaange. Il a des bras et des jambes.`
+    `Il est oraaaange. Il a des bras et des jambes.`,
+    `Since Nov 14, 2023`,
+    `Over 1000+ commits!`,
+    `Took at least \n 5 hours to make!`,
+    `Sometimes works!`,
+    `Survive, Adapt, Overcome`
 ]
 function get_splash_text() {
     return splashtexts[Math.floor(Math.random() * splashtexts.length)]
