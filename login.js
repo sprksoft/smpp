@@ -115,7 +115,10 @@ let splashtexts = [
     `Over 1000+ commits!`,
     `Took at least \n 5 hours to make!`,
     `Sometimes works!`,
-    `Survive, Adapt, Overcome`
+    `Survive, Adapt, Overcome`,
+    `Rode auto`,
+    `Cookie clicker`,
+    `Are you serious?`
 ]
 function get_splash_text() {
     return splashtexts[Math.floor(Math.random() * splashtexts.length)]
