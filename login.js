@@ -111,6 +111,9 @@ let splashtexts = [
     `We have a discord!`,
     `Le poisson Steve !`,
     `Il est oraaaange. Il a des bras et des jambes.`
+    `Rode auto`,
+    `Cookie clicker`,
+    `Are you serious?`
 ]
 function get_splash_text() {
     return splashtexts[Math.floor(Math.random() * splashtexts.length)]
