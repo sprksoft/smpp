@@ -148,8 +148,8 @@ class GameBase extends WidgetBase {
     div.classList.add("game-container");
 
     this.canvas = document.createElement("canvas");
-    this.canvas.width = 260;
-    this.canvas.height = 260;
+    this.canvas.width = 300;
+    this.canvas.height = 300;
     this.canvas.classList.add("game-canvas");
     this.canvas.style.display = "none";
     this.canvas.addEventListener("click", async (e) => {

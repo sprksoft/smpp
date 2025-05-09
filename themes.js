@@ -227,6 +227,7 @@ async function setTheme(themeName) {
       style.setProperty("--loginpage-image", "url(https://about:blank)");
     }
   }
+  await widgetSystemNotifyThemeChange();
 }
 
 function getThemeVar(varName) {

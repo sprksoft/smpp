@@ -91,19 +91,29 @@ class SnakeWidget extends GameBase {
   }
 
   async onGameStart() {
+    if (!this.#backgroundCanvas) {
+      const bg = document.createElement("canvas");
+      bg.height = this.canvas.width;
+      bg.width = this.canvas.width;
+      this.#backgroundCanvas = bg;
+    }
     // redraw background in case of slider change.
-    const bg = document.createElement("canvas");
-    bg.width = this.canvas.width;
-    bg.height = this.canvas.width;
-    const bgctx = bg.getContext("2d", { alpha: false });
+    const bgctx = this.#backgroundCanvas.getContext("2d", { alpha: false });
     this.#drawBg(bgctx);
-    this.#backgroundCanvas = bg;
 
     this.#counter = 0;
     this.#curDir = DIR_DOWN;
     this.#targetDir = DIR_DOWN;
     this.#snake = [this.#getRandomFieldPos()];
     this.#spawnFood();
+  }
+
+  async onThemeChange() {
+    if (!this.#backgroundCanvas) {
+      return;
+    }
+    const bgctx = this.#backgroundCanvas.getContext("2d", { alpha: false });
+    this.#drawBg(bgctx);
   }
 
   #drawDot(ctx, dot) {
@@ -113,7 +123,7 @@ class SnakeWidget extends GameBase {
     ctx.arc(
       Math.floor(celRad + dot.x * celRad * 2.0),
       Math.floor(celRad + dot.y * celRad * 2.0),
-      celRad,
+      celRad * 0.9,
       0,
       Math.PI * 2,
     );
