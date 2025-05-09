@@ -3,19 +3,28 @@
 function updateLoginPanel() {
     let login_app_left = document.querySelector('.login-app__left');
     login_app_left.innerHTML = ' ';
+    
     document.getElementsByClassName('login-app__platform-indicator')[0].innerHTML = '<h1 class="logintitle">Smartschool ++</h1>';
-    document.getElementsByClassName('login-app__title--separator')[0].innerHTML = `<button type="button" class="white_text_button" id="showmore">More</button>`;
-    document.getElementById('showmore').addEventListener('click', showmore)
-    function showmore() { style.setProperty('--show-options', 'flex'); document.getElementById("showmore").style.display = "none" }
+    
+    document.getElementsByClassName('login-app__title--separator')[0].innerHTML =
+        '<button type="button" class="white_text_button" id="showmore">More</button>';
+
+    document.getElementById('showmore').addEventListener('click', showmore);
+
+    function showmore() {
+        document.documentElement.style.setProperty('--show-options', 'flex');
+        document.getElementById("showmore").style.display = "none";
+    }
 }
 
 function add_splash_text() {
-    var login_app = document.querySelector('.login-app')
-    var splash_text_element = document.createElement('div')
-    login_app.prepend(splash_text_element)
-    splash_text_element.classList.add('splashtextcontainer')
-    splash_text_element.innerHTML = `<div class='splashtext'>${get_splash_text()}</div>`
+    var login_app = document.querySelector('.login-app');
+    var splash_text_element = document.createElement('div');
+    login_app.prepend(splash_text_element);
+    splash_text_element.classList.add('splashtextcontainer');
+    splash_text_element.innerHTML = `<div class='splashtext'>${get_splash_text()}</div>`;
 }
+
 let splashtexts = [
     `It even works under water!`,
     `Hoelang is een chinees.`,
@@ -88,7 +97,7 @@ let splashtexts = [
     `MERGE CONFLICT!`,
     `In case of fire: git add . \n ; git commit ; git push`,
     `Always remove French language \npack: sudo rm -fr /`,
-    undefined,
+    `Undefined`,
     `Is tHaT A JOjO ReFEreNce?`,
     `https://ldev.eu.org`,
     `https://smartschoolplusplus.com`,
@@ -108,7 +117,17 @@ let splashtexts = [
     `Baby Shark, doo-doo, \n doo-doo, doo-doo`,
     `Brood int frans`,
     `CORS >:(`,
-    `We have a discord!`
+    `We have a discord!`,
+    `Le poisson Steve !`,
+    `Il est oraaaange. Il a des bras et des jambes.`,
+    `Since Nov 14, 2023`,
+    `Over 1000+ commits!`,
+    `Took at least \n 5 hours to make!`,
+    `Sometimes works!`,
+    `Survive, Adapt, Overcome`,
+    `Rode auto`,
+    `Cookie clicker`,
+    `Are you serious?`
 ]
 function get_splash_text() {
     return splashtexts[Math.floor(Math.random() * splashtexts.length)]

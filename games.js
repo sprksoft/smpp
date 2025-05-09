@@ -142,12 +142,6 @@ class GameBase extends WidgetBase {
       action: "getGameData",
       game: this.constructor.name,
     });
-    if (!gameData) {
-      gameData = {
-        options: {},
-        score: 0,
-      };
-    }
     this.#options = {};
 
     let div = document.createElement("div");

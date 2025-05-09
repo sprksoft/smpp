@@ -306,14 +306,65 @@ class Queue {
   }
 }
 
+class Point {
+  x;
+  y;
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+  }
 
+  add(other) {
+    return new Point(this.x + other.x, this.y + other.y);
+  }
+}
 
+const DIR_UP = new Point(0, 1);
+const DIR_LEFT = new Point(1, 0);
+const DIR_RIGHT = new Point(-1, 0);
+const DIR_DOWN = new Point(0, -1);
+
+const SNAKE_SIZE = 10;
+const FRAME_TIME = 1000;
 class SnakeWidget extends GameBase {
+  #dir;
+  #counter;
+  #snake;
+
   get title() {
     return "Snake++";
   }
   get options() {
     return [GameOption.slider("speed", "Speed:", 10, 300, 100)];
+  }
+
+  #tick() {
+    let head = this.#snake[this.#snake.length-1];
+    let newHead = head.add(this.#dir);
+    this.#snake.push(newHead);
+    this.#snake.shift();
+  }
+
+  async onGameStart() {
+    this.#counter = 0;
+    this.#snake = [];
+  }
+
+  onGameDraw(ctx, dt) {
+    this.#counter += dt;
+    if (this.#counter >= FRAME_TIME * this.getOpt("speed")) {
+      this.#tick();
+    }
+
+    ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+    ctx.fillStyle = getThemeVar("--color-text");
+    for (let part of this.#snake) {
+      ctx.beginPath();
+      ctx.arc(part.x, part.y, SNAKE_SIZE, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
   }
 }
 registerWidget(new SnakeWidget());

@@ -118,8 +118,16 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
     }
     // Games
     if (message.action === "getGameData") {
-      let gd = await browser.storage.local.get("Game." + message.game);
-      sendResponse(gd["Game." + message.game]);
+      const gd = await browser.storage.local.get("Game." + message.game);
+      const gameData = gd["Game." + message.game];
+      if (!gameData) {
+        sendResponse({
+          options: {},
+          score: 0,
+        });
+      } else {
+        sendResponse(gameData);
+      }
     }
     if (message.action === "setGameData") {
       console.log("saving game data");
