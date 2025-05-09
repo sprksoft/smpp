@@ -1566,6 +1566,10 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   top: 10%;
   transform: scale(0);
   transform-origin: center;
+}
+
+.enableAnimations .global_chat_window {
+  transition: all 0.1s cubic-bezier(0.74, 0.25, 0.62, 0.97);
   animation: popIn 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
 }
 
@@ -1703,7 +1707,7 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   gap: 10px;
   z-index: 25;
   opacity: 0;
-  transform: translateY(10px);
+  transform: translateY(-20px);
   transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 
