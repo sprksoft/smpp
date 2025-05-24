@@ -645,7 +645,7 @@ function createQuickSettingsHTML(parent) {
   weatherSliderContainer.classList.add("weather-amount-slider-container");
 
   const weatherAmountSliderTitle = document.createElement("h4");
-  weatherAmountSliderTitle.classList.add("weather-amount-slider-title")
+  weatherAmountSliderTitle.classList.add("weather-amount-slider-title");
   weatherAmountSliderTitle.textContent = "Amount:";
 
   const weatherSlider = document.createElement("input");
@@ -760,6 +760,7 @@ function createTopButtons(onHomePage) {
 }
 
 function main() {
+  document.body.classList.add("smpp"); // For modding
   apply();
   createWidgetSystem();
 
