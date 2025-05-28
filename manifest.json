@@ -67,7 +67,8 @@
         "flappy.js",
         "login.js",
         "assignments.js",
-        "smppjs.js"
+        "smppjs.js",
+        "breakout.js"
       ]
     }
   ],
