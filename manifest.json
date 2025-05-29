@@ -65,10 +65,10 @@
         "games.js",
         "snake.js",
         "flappy.js",
+        "breakout.js",
         "login.js",
         "assignments.js",
-        "smppjs.js",
-        "breakout.js"
+        "smppjs.js"
       ]
     }
   ],
