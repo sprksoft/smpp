@@ -50,16 +50,6 @@ class BreakoutWidget extends GameBase {
         });
       }
     }
-
-    this._keyDownHandler = this.onKeyDown.bind(this);
-    this._keyUpHandler = this.onKeyUp.bind(this);
-    document.addEventListener("keydown", this._keyDownHandler);
-    document.addEventListener("keyup", this._keyUpHandler);
-  }
-
-  onGameStop() {
-    document.removeEventListener("keydown", this._keyDownHandler);
-    document.removeEventListener("keyup", this._keyUpHandler);
   }
 
   onGameDraw(ctx, dt) {

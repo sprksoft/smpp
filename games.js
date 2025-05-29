@@ -41,12 +41,18 @@ class GameBase extends WidgetBase {
 
   constructor() {
     document.addEventListener("keydown", async (e) => {
+      if(e.repeat) { return; }
       if (this.playing) {
         await this.onKeyDown(e);
       } else if (this.hasPlayedAtLeastOnce) {
         if (e.code === "Space") {
           await this.#startGame();
         }
+      }
+    });
+    document.addEventListener("keyup", async (e) => {
+      if (this.playing) {
+        await this.onKeyUp(e);
       }
     });
     super();
@@ -281,7 +287,8 @@ class GameBase extends WidgetBase {
   onGameTick() {}
   // Called when the game needs to render a new frame (dt is time since last frame)
   onGameDraw(ctx, deltaTime) {}
-  async onKeyDown(key) {}
+  async onKeyDown(e) {}
+  async onKeyUp(e) {}
   async onMouse(e) {}
 
   get tickSpeed() {

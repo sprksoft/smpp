@@ -158,9 +158,6 @@ class FlappyWidget extends GameBase {
   }
 
   async onKeyDown(e) {
-    if (e.repeat) {
-      return;
-    }
     if (e.code === "Space" || e.code === "ArrowUp") {
       this.jump = true;
       e.preventDefault();
