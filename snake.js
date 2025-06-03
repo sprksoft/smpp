@@ -1,9 +1,7 @@
 class Point {
   x;
   y;
-  constructor(x, y) {
-    this.x = x;
-    this.y = y;
+  constructor(x, y) { this.x = x; this.y = y;
   }
 
   add(other) {
@@ -88,6 +86,9 @@ class SnakeWidget extends GameBase {
   }
   #spawnFood() {
     this.#food = this.#getRandomFieldPos();
+    while(this.#snake.find((p) => p.equal(this.#food))) {
+      this.#food = this.#getRandomFieldPos();
+    }
   }
 
   async onGameStart() {
@@ -172,9 +173,6 @@ class SnakeWidget extends GameBase {
     this.#drawDot(ctx, this.#food);
   }
   onKeyDown(e) {
-    if (e.repeat) {
-      return;
-    }
     switch (e.key) {
       case "ArrowUp":
         if (this.#curDir !== DIR_DOWN) {
