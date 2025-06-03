@@ -86,6 +86,9 @@ class SnakeWidget extends GameBase {
   }
   #spawnFood() {
     this.#food = this.#getRandomFieldPos();
+    while(this.#snake.find((p) => p.equal(this.#food))) {
+      this.#food = this.#getRandomFieldPos();
+    }
   }
 
   async onGameStart() {
