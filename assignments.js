@@ -112,13 +112,13 @@ class TakenWidget extends WidgetBase {
     }
 
     function initTaskList() {
-      const PlannerContainer = document.createElement("div");
+      const TasksContainer = document.createElement("div");
       const TitleScreenDiv = document.createElement("div");
       const TitleScreenText = document.createElement("h2");
       TitleScreenText.innerText = "Assignments";
       TitleScreenText.classList.add("assignments-title");
       TitleScreenDiv.append(TitleScreenText);
-      PlannerContainer.append(TitleScreenDiv);
+      TasksContainer.append(TitleScreenDiv);
 
       if (!userId) {
         return sendDebug("User ID not found.");
@@ -126,7 +126,7 @@ class TakenWidget extends WidgetBase {
 
       fetchPlannerData().then((data) => {
         if (!data) {
-          PlannerContainer.innerHTML =
+          TasksContainer.innerHTML =
             "Als je niet in een vakantie bent, is er iets ernstig misgegaan";
           return console.error("No planner data, Did something go wrong?");
         } else if (DEBUG) {
@@ -171,7 +171,7 @@ class TakenWidget extends WidgetBase {
             const dateHeader = document.createElement("h3");
             dateHeader.textContent = dateText;
             dateHeader.classList.add("date-header-assignments");
-            PlannerContainer.appendChild(dateHeader);
+            TasksContainer.appendChild(dateHeader);
             lastDate = dateText;
           }
 
@@ -246,12 +246,12 @@ class TakenWidget extends WidgetBase {
 
           detailsDiv.append(titleSpan, metadataSpan);
           rowDiv.append(abbreviationDiv, detailsDiv);
-          PlannerContainer.append(rowDiv);
+          TasksContainer.append(rowDiv);
         });
 
         return sendDebug("UI updated successfully.");
       });
-      return PlannerContainer;
+      return TasksContainer;
     }
     return initTaskList();
   }
