@@ -181,7 +181,6 @@ function do_qm(opener = "") {
         "quick add",
         "quick remove",
         "config",
-        "toggle fancy scores",
         "unbloat",
         "clearsettings",
         "discord",
@@ -217,15 +216,6 @@ function do_qm(opener = "") {
           return;
         case "config":
           config_menu();
-          return;
-        case "toggle fancy scores":
-          settingData = PLEASE_DELETE_ME_WHEN_FIXED();
-          if (settingData.show_scores) {
-            settingData.show_scores = false;
-          } else {
-            settingData.show_scores = true;
-          }
-          DELETE_ME_ASS_WELL_SAVE_FUNCTION(settingData);
           return;
         case "dmenu config":
           dconfig_menu();
