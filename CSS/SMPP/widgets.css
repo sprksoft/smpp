@@ -32,6 +32,7 @@ html {
   font-size: 1rem;
   /* Inherited font-size is not in rem */
 }
+
 .smpp-widget-preview {
   overflow: hidden; /* hide everything outside 200px */
   position: relative;
@@ -54,6 +55,7 @@ html {
   min-width: var(--preview-width);
   max-width: var(--preview-width);
 }
+
 .smpp-widget-preview:has(.smpp-widget-smartschool) {
   min-width: var(--pannel-width);
   max-width: var(--pannel-width);
@@ -87,6 +89,7 @@ html {
   border-radius: 100000px;
   margin: 0.5rem 1rem;
 }
+
 .enableAnimations .smpp-widget-insertion-point {
   transition: background-color 0.5s;
 }
@@ -99,6 +102,7 @@ html {
   max-height: unset;
   margin: 0px;
 }
+
 .smpp-widget-dragging-something .smpp-widget-insertion-point-targeted {
   background-color: var(--color-accent);
 }
@@ -177,16 +181,19 @@ html {
 
   z-index: 100;
 }
+
 .smpp-widget-edit-mode .smpp-widget-bag {
   transform: translateY(calc(var(--bag-close-transformy) - 10px));
   @starting-style {
     transform: translateY(-100vh);
   }
 }
+
 .smpp-widget-bag.smpp-widget-bag-delete,
 .smpp-widget-bag:hover {
   transform: translateY(var(--bag-close-transformy));
 }
+
 .enableAnimations .smpp-widget-bag {
   transition: transform 0.5s;
 }
@@ -207,6 +214,7 @@ html {
   pointer-events: auto;
   overflow: scroll;
 }
+
 .smpp-widget-bag.smpp-widget-bag-delete .smpp-widget-bag-handle,
 .smpp-widget-bag.smpp-widget-bag-delete .smpp-widget-bag-content {
   border-color: var(--color-red);
@@ -218,12 +226,14 @@ html {
   flex-direction: row;
   flex-wrap: wrap;
 }
+
 .smpp-widget-bag-group-title {
   margin: 1rem 1rem 0.5rem 3rem !important;
   width: fit-content;
   font-size: 2.5rem;
   border-bottom: 3px solid var(--color-base02) !important;
 }
+
 .smpp-widget-bag.smpp-widget-bag-open {
   transform: translateY(0px);
 }
@@ -246,6 +256,7 @@ html {
   pointer-events: auto;
   cursor: pointer;
 }
+
 .smpp-widget-bag.smpp-widget-bag-delete .smpp-widget-bag-handle-icon {
   color: var(--color-red);
 }
@@ -254,9 +265,11 @@ html {
 .enableAnimations .smpp-widget-bag-handle {
   transition: border-color 0.5s, color 0.5s, transform 0.5s;
 }
+
 .smpp-widget-bag-open .smpp-widget-bag-handle-icon {
   transform: rotate(180deg);
 }
+
 .smpp-widget-bag-handle-icon {
   width: 50px;
   display: block;
@@ -278,6 +291,7 @@ html {
   outline: none;
   box-shadow: none;
 }
+
 .smpp-widget-dragging-something .smpp-widget-bag-fold-icon {
   color: var(--color-red);
   transform: rotate(180deg) translateY(5px);
@@ -288,10 +302,22 @@ html {
   color: var(--color-red);
   font-weight: bold;
 }
+
 .smpp-error-widget .widgetName {
   text-align: center;
   display: block;
 }
+
 .smpp-widget:has(.smpp-widget-smartschool) {
   padding: 0px !important;
+}
+
+.smpp-widget-transparent {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.smpp-widget-edit-mode .smpp-widget-transparent {
+  background-color: var(--color-base01);
+  border-color: 3px solid var(--color-base03);
 }
