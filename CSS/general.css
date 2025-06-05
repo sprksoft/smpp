@@ -2193,3 +2193,21 @@ body.modern-ui .homepage__block__content {
   color: var(--color-text) !important;
   opacity: 0.7 !important;
 }
+
+.blue-ghost-96 {
+  background-image: url(https://static2.smart-school.net/smsc/svg/ghost_lightblue/ghost_lightblue_24x24.svg) !important;
+  background-size: 96px 96px;
+  min-height: 96px;
+  min-width: 96px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.planner-icon-128 {
+  background-image: url(https://static4.smart-school.net/smsc/svg/planner/planner_24x24.svg) !important;
+  background-size: 128px 128px;
+  min-height: 128px;
+  min-width: 128px;
+  background-repeat: no-repeat;
+  background-position: center;
+}

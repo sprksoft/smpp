@@ -18,8 +18,7 @@ html {
 /* Only use rem's here no em because widgets will be moved to body when they are dragged */
 .smpp-widget {
   height: min-content;
-  transition: transform 0.4s;
-
+  transition: transform 0.4s, padding 0.25s;
   transform: scale(1) rotate(0deg);
   background-color: var(--color-base01);
   padding: 1.5rem;
@@ -34,7 +33,7 @@ html {
 }
 
 .smpp-widget-preview {
-  overflow: hidden; /* hide everything outside 200px */
+  overflow: visible;
   position: relative;
 }
 
@@ -315,9 +314,12 @@ html {
 .smpp-widget-transparent {
   background-color: transparent;
   border-color: transparent;
+  box-shadow: none;
+  padding: 0rem;
 }
 
 .smpp-widget-edit-mode .smpp-widget-transparent {
   background-color: var(--color-base01);
-  border-color: 3px solid var(--color-base03);
+  border: 3px solid var(--color-base03);
+  padding: 1rem;
 }

@@ -70,13 +70,10 @@ function createTitleElement(dateText) {
 function createEmptyPlannerMessage() {
   const message = document.createElement("div");
   message.innerHTML = `
-      <p style="text-align: center">
-        No planner data available for this date! <br>
-        Consider turning planner <strong>off</strong> if your school doesn't use planner yet
+      <p style="text-align: center; font-size:1.5rem; font-weight:600">
+        No planner data for this day
+        <div class="blue-ghost-96"></div>
       </p>
-      <a id="turn-off-planner" style="text-align: center">
-        Click here to turn planner <strong>off</strong>
-      </a>
     `;
   return message;
 }
@@ -198,6 +195,7 @@ class PlannerWidget extends WidgetBase {
     const data = await fetchPlannerData(date, plannerUrl.split("/")[4]);
 
     this.plannerContainer.innerHTML = "";
+    this.planningContainer.innerHTML = "";
 
     const dateText = `${await getDateInCorrectFormat(false, addend)}`
       .split(" ")
@@ -210,14 +208,7 @@ class PlannerWidget extends WidgetBase {
       const message = createEmptyPlannerMessage();
       this.plannerContainer.appendChild(message);
 
-      document
-        .getElementById("turn-off-planner")
-        .addEventListener("click", () => {
-          settingsData = PLEASE_DELETE_ME_WHEN_FIXED();
-          settingsData.showplanner = false;
-          DELETE_ME_ASS_WELL_SAVE_FUNCTION(settingsData);
-          apply();
-        });
+      this.planningContainer.style.height = "initial";
     } else {
       // Process planner data
       const earliestStartTime = Math.min(
@@ -253,14 +244,15 @@ class PlannerWidget extends WidgetBase {
           });
         }
       });
-
+      let allHeights = [];
       // Create elements for each time slot
+
       timeSlots.forEach((slot) => {
         const numElements = slot.elements.length;
         const elementWidthPercentage = 100 / numElements;
-
+        let plannerElement;
         slot.elements.forEach((element, index) => {
-          const plannerElement = this.createPlannerSubElement(
+          plannerElement = this.createPlannerSubElement(
             element,
             index,
             numElements,
@@ -268,9 +260,18 @@ class PlannerWidget extends WidgetBase {
             beginTime,
             slot
           );
-          this.plannerContainer.appendChild(plannerElement);
+          this.planningContainer.appendChild(plannerElement);
+          allHeights.push(
+            Number(
+              parseInt(plannerElement.style.height) +
+                parseInt(plannerElement.style.top)
+            )
+          );
         });
       });
+      console.log(allHeights);
+      console.log(Math.max(...allHeights));
+      this.planningContainer.style.height = Math.max(...allHeights) + "px";
     }
 
     document
@@ -279,19 +280,35 @@ class PlannerWidget extends WidgetBase {
     document
       .getElementById("back_button_planner")
       .addEventListener("click", () => this.previousDayPlanner());
+    this.plannerContainer.appendChild(this.planningContainer);
   }
 
   async createContent() {
+    this.element.classList.add("smpp-widget-transparent");
     const plannerContainer = document.createElement("div");
-    plannerContainer.classList.add("smpp-widget-transparent");
     plannerContainer.classList.add("planner-container");
+    const planningContainer = document.createElement("div");
+    planningContainer.classList.add("planning-container");
+    this.planningContainer = planningContainer;
     this.plannerContainer = plannerContainer;
     this.updatePlanner(0); // Show current day by default
     return this.plannerContainer;
   }
 
   async createPreview() {
-    return document.createElement("div");
+    let previewElement = document.createElement("div");
+
+    let previewElementTitle = document.createElement("div");
+    previewElementTitle.classList.add("planner-preview-title");
+    previewElementTitle.innerText = "Planner";
+    let previewElementIcon = document.createElement("div");
+    previewElementIcon.classList.add("planner-icon-128");
+    previewElementIcon.style.marginBottom = "2rem";
+
+    previewElement.appendChild(previewElementTitle);
+    previewElement.appendChild(previewElementIcon);
+
+    return previewElement;
   }
 }
 

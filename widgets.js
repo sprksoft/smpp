@@ -38,7 +38,7 @@ class WidgetDragInfo {
 }
 
 class WidgetBase {
-  #element;
+  element;
   #content;
   #preview;
   #bagPlaceHolder;
@@ -46,7 +46,7 @@ class WidgetBase {
   #aboutToDel;
 
   constructor() {
-    this.#element = this.#createWidgetDiv();
+    this.element = this.#createWidgetDiv();
     this.#content = null;
     this.#preview = false;
     this.#aboutToDel = false;
@@ -63,14 +63,14 @@ class WidgetBase {
   }
 
   async #intoBag() {
-    if (this.#element.parentElement == this.#bagGroup) {
+    if (this.element.parentElement == this.#bagGroup) {
       return;
     }
     if (this.#bagPlaceHolder) {
-      this.#bagGroup.insertBefore(this.#element, this.#bagPlaceHolder);
+      this.#bagGroup.insertBefore(this.element, this.#bagPlaceHolder);
       this.#bagPlaceHolder.remove();
     } else {
-      this.#element.remove();
+      this.element.remove();
     }
     await this.#setPreview(true);
   }
@@ -83,10 +83,10 @@ class WidgetBase {
     let newContent;
     try {
       if (preview) {
-        this.#element.classList.add("smpp-widget-preview");
+        this.element.classList.add("smpp-widget-preview");
         newContent = await this.createPreview();
       } else {
-        this.#element.classList.remove("smpp-widget-preview");
+        this.element.classList.remove("smpp-widget-preview");
         newContent = await this.createContent();
       }
     } catch (e) {
@@ -103,8 +103,8 @@ class WidgetBase {
     this.#content?.remove();
     newContent.classList.add("smpp-widget-content");
     this.#content = newContent;
-    this.#element.dataset.widgetName = this.name;
-    this.#element.appendChild(this.#content);
+    this.element.dataset.widgetName = this.name;
+    this.element.appendChild(this.#content);
     this.#preview = preview;
   }
 
@@ -125,16 +125,16 @@ class WidgetBase {
 
   async addToPannel(pannel) {
     await this.#setPreview(false);
-    pannel.appendChild(this.#element);
+    pannel.appendChild(this.element);
     pannel.appendChild(createInsertionPointHTML(false));
   }
 
   aboutToDel(value) {
     this.#aboutToDel = value;
     if (value) {
-      this.#element.classList.add("smpp-widget-delete");
+      this.element.classList.add("smpp-widget-delete");
     } else {
-      this.#element.classList.remove("smpp-widget-delete");
+      this.element.classList.remove("smpp-widget-delete");
     }
   }
 
@@ -143,7 +143,7 @@ class WidgetBase {
       return;
     }
 
-    let el = this.#element;
+    let el = this.element;
     let offset = curDragInfo.offset;
     el.style.left = x - offset.x + "px";
     el.style.top = y - offset.y + "px";
@@ -154,7 +154,7 @@ class WidgetBase {
       return;
     }
 
-    let el = this.#element;
+    let el = this.element;
     el.classList.remove("smpp-widget-dragging");
     el.style = "";
 
@@ -212,10 +212,10 @@ class WidgetBase {
     if (!widgetEditMode) {
       return;
     }
-    const el = this.#element;
+    const el = this.element;
 
-    let sourceIp = this.#element.previousElementSibling;
-    let rect = this.#element.getBoundingClientRect();
+    let sourceIp = this.element.previousElementSibling;
+    let rect = this.element.getBoundingClientRect();
 
     if (el.parentElement == this.#bagGroup) {
       sourceIp = null;
