@@ -131,3 +131,8 @@ function createGCButton() {
   goGlChatButton.addEventListener("click", open_global_chat);
   return goGlChatButton;
 }
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && gc_is_open) {
+    remove_gcwin();
+  }
+});
