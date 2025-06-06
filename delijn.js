@@ -1,6 +1,7 @@
 // Constants and configuration
 let delijnSearchResultLimit = 5;
 let lijnDataKleuren;
+const lijnUpdateControllers = {};
 
 // Utility functions
 function calculateTimeUntilDepartureInMins(ETA) {
@@ -67,6 +68,14 @@ async function createHalteDoorkomst(doorkomst, container) {
   const entiteitnummer = doorkomst.entiteitnummer;
   const lijnnummer = doorkomst.lijnnummer;
   const destination = doorkomst.bestemming;
+  const lijnKey = `${entiteitnummer}_${lijnnummer}`;
+
+  if (lijnUpdateControllers[lijnKey]) {
+    lijnUpdateControllers[lijnKey].abort();
+  }
+  const controller = new AbortController();
+  lijnUpdateControllers[lijnKey] = controller;
+  const signal = controller.signal;
 
   const originalETA = new Date(doorkomst.dienstregelingTijdstip);
   let ETA = originalETA;
@@ -110,9 +119,7 @@ async function createHalteDoorkomst(doorkomst, container) {
 
   const lijnDestinationElement = document.createElement("span");
   lijnDestinationElement.classList.add("lijnDestination");
-  if (destination.length > 17) {
-    lijnDestinationElement.classList.add("lijnDestinationLongLong");
-  } else if (destination.length > 15) {
+  if (destination.length > 15) {
     lijnDestinationElement.classList.add("lijnDestinationLong");
   }
   lijnDestinationElement.textContent = destination;
@@ -146,11 +153,20 @@ async function createHalteDoorkomst(doorkomst, container) {
 
   container.appendChild(lijnCard);
 
-  await updateLijnCardWithApiData(
-    lijnNumberElement,
-    entiteitnummer,
-    lijnnummer
-  );
+  try {
+    await updateLijnCardWithApiData(
+      lijnNumberElement,
+      entiteitnummer,
+      lijnnummer,
+      signal
+    );
+  } catch (err) {
+    if (err.name === "AbortError") {
+      console.log(`Request for lijn ${lijnKey} was aborted`);
+      return;
+    }
+    console.error(err);
+  }
 }
 
 async function updateLijnCardWithApiData(
@@ -305,9 +321,26 @@ class DelijnWidget extends WidgetBase {
   }
 
   async showHalteOptions(searchQuery) {
-    const delijnHaltesData = await fetchDelijnData(
-      `https://api.delijn.be/DLZoekOpenData/v1/zoek/haltes/${searchQuery}?maxAantalHits=${this.searchResultLimit}`
-    );
+    // Abort previous request
+    if (this.currentAbortController) {
+      this.currentAbortController.abort();
+    }
+
+    // Create a new controller for this request
+    this.currentAbortController = new AbortController();
+    const signal = this.currentAbortController.signal;
+
+    let delijnHaltesData;
+    try {
+      delijnHaltesData = await fetchDelijnData(
+        `https://api.delijn.be/DLZoekOpenData/v1/zoek/haltes/${searchQuery}?maxAantalHits=${this.searchResultLimit}`,
+        { signal }
+      );
+    } catch (error) {
+      if (error.name === "AbortError") return; // Silently ignore aborted request
+      this.displayInfo("Er liep iets mis: " + error);
+      return;
+    }
 
     if (delijnHaltesData?.aantalHits === 0) {
       this.displayInfo("Geen zoekresultaten");
@@ -318,11 +351,18 @@ class DelijnWidget extends WidgetBase {
       .map((halte) => `${halte.entiteitnummer}_${halte.haltenummer}`)
       .join("_");
 
-    const delijnHaltesLijnrichtingenData = await fetchDelijnData(
-      `https://api.delijn.be/DLKernOpenData/api/v1/haltes/lijst/${halteSleutels}/lijnrichtingen`
-    );
+    let delijnHaltesLijnrichtingenData;
+    try {
+      delijnHaltesLijnrichtingenData = await fetchDelijnData(
+        `https://api.delijn.be/DLKernOpenData/api/v1/haltes/lijst/${halteSleutels}/lijnrichtingen`,
+        { signal }
+      );
+    } catch (error) {
+      if (error.name === "AbortError") return;
+      this.displayInfo("Er liep iets mis: " + error);
+      return;
+    }
 
-    // Add descriptions to the data
     delijnHaltesLijnrichtingenData.halteLijnrichtingen.forEach((halte, i) => {
       halte.halte.omschrijving = delijnHaltesData.haltes[i].omschrijving;
     });
@@ -331,15 +371,12 @@ class DelijnWidget extends WidgetBase {
       this.hideInfo();
       const startIndex = this.searchResultLimit - 5;
 
-      for (
-        let i = 0;
-        i <
-        delijnHaltesLijnrichtingenData.halteLijnrichtingen.slice(startIndex)
-          .length;
-        i++
-      ) {
-        const halte =
-          delijnHaltesLijnrichtingenData.halteLijnrichtingen[startIndex + i];
+      const results =
+        delijnHaltesLijnrichtingenData.halteLijnrichtingen.slice(startIndex);
+
+      for (let i = 0; i < results.length; i++) {
+        if (signal.aborted) return;
+        const halte = results[i];
         await this.createHalteOption(halte);
       }
 
@@ -347,8 +384,10 @@ class DelijnWidget extends WidgetBase {
         this.addShowMoreHaltesButton();
       }
     } catch (error) {
-      this.displayInfo("Er liep iets mis: " + error);
-      console.error(error);
+      if (error.name !== "AbortError") {
+        this.displayInfo("Er liep iets mis: " + error);
+        console.error(error);
+      }
     }
   }
 

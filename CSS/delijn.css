@@ -105,15 +105,11 @@
   align-self: center;
   margin-left: auto;
   font-weight: 700;
-  text-wrap: nowrap;
+  text-align: right;
 }
 
 .lijnDestination.lijnDestinationLong {
   font-size: 15.5px;
-}
-
-.lijnDestination.lijnDestinationLongLong {
-  font-size: 14px;
 }
 
 .lijnCardBottom {
@@ -193,7 +189,7 @@
   }
 }
 
-#delijnInfoContainer {
+.delijnInfoContainer {
   justify-content: center;
   font-size: 16px !important;
   font-weight: bold;
