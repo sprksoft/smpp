@@ -1,4 +1,5 @@
 pixelsPerMinute = 1.46;
+
 async function fetchPlannerData(date, user) {
   try {
     const currentUrl = window.location.href;
@@ -56,33 +57,14 @@ async function getDateInCorrectFormat(isFancyFormat, addend) {
   return currentDate;
 }
 
-function createTitleElement(dateText) {
-  const title = document.createElement("div");
-  title.innerHTML = `
-      <button style='width:15%' title='back' id='back_button_planner'></button>
-      <h3 style='width:70%; font-weight:500; font-size:20px'>${dateText}</h3>
-      <button id='forward_button_planner' title='forward' style='width:15%'></button>
-    `;
-  title.classList.add("planner-title-startpage");
-  return title;
-}
-
-function createEmptyPlannerMessage() {
-  const message = document.createElement("div");
-  message.innerHTML = `
-      <p style="text-align: center; font-size:1.5rem; font-weight:600">
-        No planner data for this day
-        <div class="blue-ghost-96"></div>
-      </p>
-    `;
-  return message;
-}
-
 class PlannerWidget extends WidgetBase {
   constructor() {
     super();
     this.daysAddedOnTop = 0;
     this.plannerContainer = null;
+    this.planningContainer = null;
+    this.forwardButton = null;
+    this.backButton = null;
   }
 
   nextDayPlanner() {
@@ -93,6 +75,53 @@ class PlannerWidget extends WidgetBase {
   previousDayPlanner() {
     this.daysAddedOnTop -= 1;
     this.updatePlanner(this.daysAddedOnTop);
+  }
+
+  createTitleElement(dateText) {
+    const titleContainer = document.createElement("div");
+    titleContainer.classList.add("planner-title-startpage");
+
+    this.backButton = document.createElement("button");
+    this.backButton.style.width = "15%";
+    this.backButton.title = "back";
+    this.backButton.id = "back_button_planner";
+    this.backButton.addEventListener("click", () => this.previousDayPlanner());
+
+    const title = document.createElement("h3");
+    title.style.width = "70%";
+    title.style.fontWeight = "500";
+    title.style.fontSize = "20px";
+    title.textContent = dateText;
+
+    this.forwardButton = document.createElement("button");
+    this.forwardButton.style.width = "15%";
+    this.forwardButton.title = "forward";
+    this.forwardButton.id = "forward_button_planner";
+    this.forwardButton.addEventListener("click", () => this.nextDayPlanner());
+
+    titleContainer.appendChild(this.backButton);
+    titleContainer.appendChild(title);
+    titleContainer.appendChild(this.forwardButton);
+
+    return titleContainer;
+  }
+
+  createEmptyPlannerMessage() {
+    const messageContainer = document.createElement("div");
+
+    const message = document.createElement("p");
+    message.style.textAlign = "center";
+    message.style.fontSize = "1.5rem";
+    message.style.fontWeight = "600";
+    message.textContent = "No planner data for this day";
+
+    const ghostIcon = document.createElement("div");
+    ghostIcon.classList.add("blue-ghost-96");
+
+    messageContainer.appendChild(message);
+    messageContainer.appendChild(ghostIcon);
+
+    return messageContainer;
   }
 
   createPlannerSubElement(
@@ -152,9 +181,7 @@ class PlannerWidget extends WidgetBase {
         slot.elements[index + 1].period.dateTimeFrom
       );
       const marginBottom = (nextStartTime - dateTimeTo) / 60000;
-      plannerElement.style.marginBottom = `${
-        marginBottom * this.pixelsPerMinute
-      }px`;
+      plannerElement.style.marginBottom = `${marginBottom * pixelsPerMinute}px`;
     }
 
     const hoverPlannerElement = () => {
@@ -201,16 +228,14 @@ class PlannerWidget extends WidgetBase {
       .split(" ")
       .slice(0, 4)
       .join(" ");
-    const title = createTitleElement(dateText);
+    const title = this.createTitleElement(dateText);
     this.plannerContainer.appendChild(title);
 
     if (!data || data.length === 0) {
-      const message = createEmptyPlannerMessage();
+      const message = this.createEmptyPlannerMessage();
       this.plannerContainer.appendChild(message);
-
       this.planningContainer.style.height = "initial";
     } else {
-      // Process planner data
       const earliestStartTime = Math.min(
         ...data.map((element) =>
           new Date(element.period.dateTimeFrom).getTime()
@@ -218,7 +243,6 @@ class PlannerWidget extends WidgetBase {
       );
       const beginTime = new Date(earliestStartTime);
 
-      // Group elements into time slots
       const timeSlots = [];
       data.forEach((element) => {
         const dateTimeFrom = new Date(element.period.dateTimeFrom);
@@ -244,9 +268,8 @@ class PlannerWidget extends WidgetBase {
           });
         }
       });
-      let allHeights = [];
-      // Create elements for each time slot
 
+      let allHeights = [];
       timeSlots.forEach((slot) => {
         const numElements = slot.elements.length;
         const elementWidthPercentage = 100 / numElements;
@@ -272,34 +295,30 @@ class PlannerWidget extends WidgetBase {
       this.planningContainer.style.height = Math.max(...allHeights) + "px";
     }
 
-    document
-      .getElementById("forward_button_planner")
-      .addEventListener("click", () => this.nextDayPlanner());
-    document
-      .getElementById("back_button_planner")
-      .addEventListener("click", () => this.previousDayPlanner());
     this.plannerContainer.appendChild(this.planningContainer);
   }
 
   async createContent() {
     this.element.classList.add("smpp-widget-transparent");
-    const plannerContainer = document.createElement("div");
-    plannerContainer.classList.add("planner-container");
-    const planningContainer = document.createElement("div");
-    planningContainer.classList.add("planning-container");
-    this.planningContainer = planningContainer;
-    this.plannerContainer = plannerContainer;
-    this.updatePlanner(0); // Show current day by default
+
+    this.plannerContainer = document.createElement("div");
+    this.plannerContainer.classList.add("planner-container");
+
+    this.planningContainer = document.createElement("div");
+    this.planningContainer.classList.add("planning-container");
+
+    await this.updatePlanner(0); // Show current day by default
     return this.plannerContainer;
   }
 
   async createPreview() {
-    let previewElement = document.createElement("div");
+    const previewElement = document.createElement("div");
 
-    let previewElementTitle = document.createElement("div");
+    const previewElementTitle = document.createElement("div");
     previewElementTitle.classList.add("planner-preview-title");
     previewElementTitle.innerText = "Planner";
-    let previewElementIcon = document.createElement("div");
+
+    const previewElementIcon = document.createElement("div");
     previewElementIcon.classList.add("planner-icon-128");
     previewElementIcon.style.marginBottom = "2rem";
 
