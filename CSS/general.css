@@ -1245,7 +1245,8 @@ input[name="email"] {
 
 label.checkbox input[type="checkbox"],
 div.smscCheckbox input[type="checkbox"],
-.mobile-style input[type="checkbox"] {
+.mobile-style input[type="checkbox"],
+.uscMain .usersContainerBlock .usersContainerBlockBack {
   background-image: url("https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/checkboxunchecked.svg") !important;
 }
 
@@ -1257,7 +1258,8 @@ div.smscCheckbox input[type="checkbox"],
 
 label.checkbox input[type="checkbox"]:checked,
 div.smscCheckbox input[type="checkbox"]:checked,
-.mobile-style input[type="checkbox"]:checked {
+.mobile-style input[type="checkbox"]:checked,
+.uscMain .usersContainerBlock .usersContainerBlockBack.selected{
   background-image: url("https://raw.githubusercontent.com/frickingbird8002/smpp-images/9d0cc428cc236802f97cfe77094256d0cf5bdcdf/checkedbox.svg") !important;
 }
 

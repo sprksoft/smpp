@@ -498,6 +498,35 @@ td#tabmaina {
   background-color: var(--color-base01) !important;
 }
 
+.uscMain .uscRow#uscContent #uscUsersContainer .uscColumnUsers {
+  border: 2px solid var(--color-base02) !important;
+  border-radius: 10px !important;
+  background-color: var(--color-base01) !important;
+}
+.uscColumnTop{
+  background-color: var(--color-base03) !important;
+}
+
+.uscMain .usersContainerBlock:hover {
+  background-color: var(--color-base03) !important;
+}
+.uscMain .usersContainerBlock,
+.uscMain .uscSgrTitle {
+  border: none !important;
+}
+
+div#searchDiv{
+  background-color: var(--color-base01) !important;
+}
+.searchDiv__title,
+.uscColumnTopTitle{
+  color: var(--color-text) !important;
+}
+input#searchField{
+  background-color: var(--color-base02) !important;
+  color: var(--color-text) !important;
+}
+
 .attachtab {
   border: none !important;
 }
