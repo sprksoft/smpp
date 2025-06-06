@@ -269,8 +269,6 @@ class PlannerWidget extends WidgetBase {
           );
         });
       });
-      console.log(allHeights);
-      console.log(Math.max(...allHeights));
       this.planningContainer.style.height = Math.max(...allHeights) + "px";
     }
 

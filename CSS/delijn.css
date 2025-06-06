@@ -150,7 +150,7 @@
   flex-grow: 1;
 }
 
-#delijnSearchButton {
+.delijnSearchButton {
   height: 40px !important;
   width: 40px !important;
   background: var(--color-base01) !important;
@@ -161,16 +161,16 @@
   flex-grow: 0 !important;
 }
 
-#delijnSearchButton:hover {
+.delijnSearchButton:hover {
   background-color: var(--color-base02) !important;
   border-color: var(--color-accent) !important;
 }
 
-.enableAnimations #delijnSearchButton {
+.enableAnimations .delijnSearchButton {
   transition: all 0.2s ease-in-out !important;
 }
 
-.enableAnimations #delijnSearchButton:hover > .delijnSearchIcon {
+.enableAnimations .delijnSearchButton:hover > .delijnSearchIcon {
   transform-origin: bottom bottom;
   animation: searchIconJiggle 0.5s ease-in-out 0ms 1;
 }
@@ -206,7 +206,7 @@
   gap: 12.5px !important;
 }
 
-#halteInput {
+.halteInput {
   flex-grow: 1;
   height: 40px !important;
   margin: 0px !important;
@@ -225,7 +225,7 @@
   gap: 12.5px;
 }
 
-#showMoreHaltesButton {
+.showMoreHaltesButton {
   align-self: center;
   text-align: center;
   font-weight: 560;
@@ -237,7 +237,7 @@
   font-size: 18px !important;
 }
 
-#showMoreHaltesButton:hover {
+.showMoreHaltesButton:hover {
   background-color: var(--color-base02);
   border-color: var(--color-accent);
   font-weight: 800;
@@ -246,7 +246,7 @@
   cursor: pointer;
 }
 
-.enableAnimations #showMoreHaltesButton {
+.enableAnimations .showMoreHaltesButton {
   animation: delijnCardAppear 0.3s ease-in-out 0ms 1;
   transition: all 0.2s ease-in-out;
 }
