@@ -1,392 +1,513 @@
+// Constants and configuration
 let delijnSearchResultLimit = 5;
 let lijnDataKleuren;
+const lijnUpdateControllers = {};
 
-// main functions
-async function displayLijnenBasedOnHalte(entiteitnummer, haltenummer) {
-    displayDelijnInfo("Loading...");
-    let delijnData = await browser.runtime.sendMessage({
-        action: 'fetchDelijnData',
-        url: `https://api.delijn.be/DLKernOpenData/api/v1/haltes/${entiteitnummer}/${haltenummer}/real-time?maxAantalDoorkomsten=5`
-    });
-    if (!delijnData || !delijnData.halteDoorkomsten || delijnData.halteDoorkomsten.length === 0) {
-        displayDelijnInfo('Er zijn momenteel geen bussen beschikbaar voor deze stop.');
-        return;
-    }
-    const halteDoorkomst = delijnData.halteDoorkomsten[0];
-    const doorkomsten = halteDoorkomst.doorkomsten;
-    hideDelijnInfo()
-    for (const doorkomst of doorkomsten) {
-        await createHalteDoorkomst(doorkomst);
-    }
-    addDelijnAttest()
-}
-
-async function createHalteDoorkomst(doorkomst) {
-    const entiteitnummer = doorkomst.entiteitnummer;
-    const lijnnummer = doorkomst.lijnnummer;
-    const destination = doorkomst.bestemming;
-
-    const originalETA = new Date(doorkomst.dienstregelingTijdstip);
-    let ETA = originalETA;
-    let predictionStatuses = doorkomst.predictionStatussen
-    let timeUntilDeparture
-    let arrivalTimeDeviation
-
-    const lijnCard = document.createElement('div');
-    lijnCard.classList.add("lijnCard");
-
-    if (predictionStatuses.includes("GESCHRAPT")) {
-        lijnCard.classList.add("lijnCardCancelled")
-        timeUntilDeparture = "Cancelled"
-        arrivalTimeDeviation = ""
-    } else if (predictionStatuses.includes("GEENREALTIME")) {
-        lijnCard.classList.add("lijnCardNoData")
-        timeUntilDeparture = calculateTimeUntilDepartureInMins(ETA)
-        if (timeUntilDeparture < 1) {
-            timeUntilDeparture = "Now";
-        } else {
-            timeUntilDeparture = timeUntilDeparture + " Min.";
-        }
-        arrivalTimeDeviation = "No data"
-    } else if (predictionStatuses.includes("REALTIME")) {
-        ETA = new Date(doorkomst["real-timeTijdstip"]);
-
-        arrivalTimeDeviation = ETA ? Math.round((ETA - originalETA) / 1000 / 60) : "No data";
-        timeUntilDeparture = calculateTimeUntilDepartureInMins(ETA);
-        if (arrivalTimeDeviation === 0) {
-            arrivalTimeDeviation = "On time";
-        } else if (arrivalTimeDeviation > 0) {
-            arrivalTimeDeviation = "+" + arrivalTimeDeviation;
-        }
-        if (timeUntilDeparture < 1) {
-            timeUntilDeparture = "Now";
-        } else {
-            timeUntilDeparture = timeUntilDeparture + " Min.";
-        }
-    } else {
-        console.error("Unknown predictionStatus")
-    }
-
-    const lijnCardTop = document.createElement('div');
-    lijnCardTop.classList.add('lijnCardTop');
-
-    const lijnNumberElement = document.createElement('span');
-    lijnNumberElement.classList.add('lijnNumber');
-    lijnNumberElement.textContent = lijnnummer;
-
-    const lijnDestinationElement = document.createElement('span');
-    lijnDestinationElement.classList.add('lijnDestination');
-    if (destination.length > 17) {
-        lijnDestinationElement.classList.add('lijnDestinationLongLong');
-    } else if (destination.length > 15) {
-        lijnDestinationElement.classList.add('lijnDestinationLong');
-    }
-    lijnDestinationElement.textContent = destination;
-
-    lijnCardTop.appendChild(lijnNumberElement);
-    lijnCardTop.appendChild(lijnDestinationElement);
-
-    const arrivalTimeDeviationElement = document.createElement('span');
-    arrivalTimeDeviationElement.classList.add('arrivalTimeDeviation');
-    arrivalTimeDeviationElement.textContent = arrivalTimeDeviation;
-
-    const lijnCardBottom = document.createElement('div');
-    lijnCardBottom.classList.add('lijnCardBottom');
-
-    const time = document.createElement('span');
-    time.classList.add('time');
-    time.textContent = `${ETA.getHours()}:${ETA.getMinutes().toString().padStart(2, '0')}`;
-
-    const timeUntilDepartureElement = document.createElement('span');
-    timeUntilDepartureElement.classList.add('timeUntilDeparture');
-    timeUntilDepartureElement.textContent = timeUntilDeparture;
-
-    lijnCardBottom.appendChild(time);
-    lijnCardBottom.appendChild(timeUntilDepartureElement);
-
-    lijnCard.appendChild(lijnCardTop);
-    lijnCard.appendChild(arrivalTimeDeviationElement);
-    lijnCard.appendChild(lijnCardBottom);
-
-    document.getElementById("delijnBottomContainer").appendChild(lijnCard);
-
-    updateLijnCardWithApiData(lijnNumberElement, entiteitnummer, lijnnummer);
-
-    await delay(100);
-}
-
-async function updateLijnCardWithApiData(lijnNumberElement, entiteitnummer, lijnnummer) {
-    try {
-        const individualLijnData = await browser.runtime.sendMessage({
-            action: 'fetchDelijnData',
-            url: `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${entiteitnummer}/${lijnnummer}`
-        });
-        const publicLineNumber = individualLijnData.lijnnummerPubliek;
-        lijnNumberElement.textContent = publicLineNumber;
-
-        const individualLijnDataColors = await browser.runtime.sendMessage({
-            action: 'fetchDelijnData',
-            url: `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${entiteitnummer}/${lijnnummer}/lijnkleuren`
-        });
-
-        const backgroundColor = getHexByCode(individualLijnDataColors.achtergrond.code);
-        const borderColor = getHexByCode(individualLijnDataColors.achtergrondRand.code);
-        const color = getHexByCode(individualLijnDataColors.voorgrond.code);
-
-        lijnNumberElement.style.backgroundColor = backgroundColor;
-        lijnNumberElement.style.borderColor = borderColor;
-        lijnNumberElement.style.color = color;
-    } catch (error) {
-        console.error("Failed to fetch additional data for lijn card:", error);
-    }
-}
-
-function addDelijnAttest() {
-    const delijnBottomContainer = document.getElementById('delijnBottomContainer');
-    let delijnAttestElement = document.createElement("a")
-    delijnAttestElement.id = "delijnAttest"
-    delijnAttestElement.target = "_blank"
-    if (Math.random() < 0.1) {
-        delijnAttestElement.href = "https://www.coolblue.be/nl/koffiezetapparaten/koffiezetapparaten-voor-latte-macchiato"
-        delijnAttestElement.innerText = "Latte?"
-    } else {
-        delijnAttestElement.href = "https://www.delijn.be/nl/contact/attest-aanvraag/"
-        delijnAttestElement.innerText = "Late?"
-    }
-    delijnBottomContainer.appendChild(delijnAttestElement)
-}
-
-function addShowMoreHaltesButton() {
-    const delijnBottomContainer = document.getElementById('delijnBottomContainer');
-    const showMoreHaltesButton = document.createElement("button");
-    showMoreHaltesButton.id = "showMoreHaltesButton"
-    showMoreHaltesButton.innerText = "Toon meer"
-    showMoreHaltesButton.addEventListener("click", showHalteOptions)
-    delijnSearchResultLimit += 5
-    delijnBottomContainer.appendChild(showMoreHaltesButton)
-}
-
-async function showHalteOptions() {
-    let searchQuery = document.getElementById("halteInput").value
-    document.getElementById("showMoreHaltesButton")?.remove();
-    removeDelijnInfo()
-    displayDelijnInfo("Loading...")
-    if (!searchQuery) {
-        displayDelijnInfo("Gelieve een halte te kiezen.")
-        return;
-    }
-    const delijnHaltesData = await browser.runtime.sendMessage({
-        action: 'fetchDelijnData', url:
-            `https://api.delijn.be/DLZoekOpenData/v1/zoek/haltes/${searchQuery}?maxAantalHits=${delijnSearchResultLimit}`
-    });
-    if (delijnHaltesData?.aantalHits == 0) {
-        displayDelijnInfo("Geen zoekresultaten")
-        return;
-    };
-    let halteSleutels = "";
-    delijnHaltesData.haltes.forEach(halte => {
-        halteSleutels = halteSleutels + halte.entiteitnummer + "_" + halte.haltenummer + "_"
-    });
-    const delijnHaltesLijnrichtingenData = await browser.runtime.sendMessage({
-        action: 'fetchDelijnData', url:
-            `https://api.delijn.be/DLKernOpenData/api/v1/haltes/lijst/${halteSleutels}/lijnrichtingen`
-    });
-    delijnHaltesLijnrichtingenData.halteLijnrichtingen.forEach((halte, i) => {
-        halte.halte.omschrijving = delijnHaltesData.haltes[i].omschrijving;
-    });
-    try {
-
-        removeDelijnInfo()
-        let i = 0
-        for (const halte of delijnHaltesLijnrichtingenData.halteLijnrichtingen.slice(delijnSearchResultLimit - 5)) {
-            await createHalteOption(halte, i + delijnSearchResultLimit - 5);
-            i++;
-        }
-
-    } catch (error) {
-        displayDelijnInfo("Er liep iets mis: ", error)
-        console.error(error)
-    }
-    if (delijnHaltesData.aantalHits > delijnSearchResultLimit) {
-        addShowMoreHaltesButton()
-    }
-    hideDelijnInfo()
-}
-
-async function createHalteOption(delijnHalteData, i) {
-    const delijnBottomContainer = document.getElementById('delijnBottomContainer');
-    const halteLijnCard = document.createElement("div");
-
-    const richtingen = "Naar: " + gethalteDirections(delijnHalteData.lijnrichtingen) 
-    halteLijnCard.dataset.entiteitnummer = delijnHalteData.halte.entiteitnummer;
-    halteLijnCard.dataset.haltenummer = delijnHalteData.halte.haltenummer;
-    halteLijnCard.classList.add("lijnCard", "lijnCardHalte");
-    halteLijnCard.id = `lijncard${i}`;
-    halteLijnCard.innerHTML = `
-      <h3 class="halteTitle">${delijnHalteData.halte.omschrijving}</h3>
-      <div class="halteDirections">${richtingen}</div>`;
-
-    const lijnen = document.createElement("div");
-    lijnen.classList.add("halteLijnen");
-    let lijnenArray = []
-    delijnHalteData.lijnrichtingen.slice(0, 5).forEach(async function (lijnrichting) {
-        const lijn = document.createElement("span");
-        lijn.classList.add("lijnNumber", "halteLijnNumber");
-        lijn.innerText = lijnrichting.lijnnummer
-        lijn.dataset.entiteitnummer = lijnrichting.entiteitnummer
-        lijn.dataset.lijnnummer = lijnrichting.lijnnummer
-        lijnen.append(lijn)
-        let individualLijnData = await browser.runtime.sendMessage({
-            action: 'fetchDelijnData', url:
-                `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${lijnrichting.entiteitnummer}/${lijnrichting.lijnnummer}`
-        });
-        if (lijnenArray.includes(individualLijnData.lijnnummerPubliek)){
-            lijn.remove()
-            return
-        }
-        lijnenArray.push(individualLijnData.lijnnummerPubliek)
-
-        let individualLijnDataColors = await browser.runtime.sendMessage({
-            action: 'fetchDelijnData', url:
-                `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${lijnrichting.entiteitnummer}/${lijnrichting.lijnnummer}/lijnkleuren`
-        });
-        let backgroundColor = getHexByCode(individualLijnDataColors.achtergrond.code)
-        let borderColor = getHexByCode(individualLijnDataColors.achtergrondRand.code)
-        let color = getHexByCode(individualLijnDataColors.voorgrond.code)
-        lijn.innerText = individualLijnData.lijnnummerPubliek;
-        lijn.style.backgroundColor = backgroundColor
-        lijn.style.borderColor = borderColor
-        lijn.style.color = color
-    });
-
-    halteLijnCard.append(lijnen);
-    halteLijnCard.addEventListener("click", async function (e) {
-        const delijnAppData = {
-            entiteitnummer: this.dataset.entiteitnummer,
-            haltenummer: this.dataset.haltenummer
-        };
-        await browser.runtime.sendMessage({ action: 'setDelijnAppData', data: delijnAppData });
-        clearDelijnBottomContainer();
-        await displayLijnenBasedOnHalte(this.dataset.entiteitnummer, this.dataset.haltenummer);
-    });
-
-    delijnBottomContainer.appendChild(halteLijnCard);
-    if (document.body.classList.contains("enableAnimations")) await delay(50);
-}
-
-function initializeDelijnHTML() {
-    const delijnContainer = document.getElementById("delijncontainer");
-    let delijnTopContainer = document.createElement("div")
-    delijnTopContainer.id = "delijnTopContainer"
-
-    let delijnSearchField = document.createElement("input")
-    delijnSearchField.id = "halteInput"
-    delijnSearchField.classList.add("popupinput")
-    delijnSearchField.spellcheck = false
-    delijnSearchField.addEventListener("keyup", function (event) {
-        if (event.key == "Enter") handleHalteSearch();
-    });
-    delijnTopContainer.appendChild(delijnSearchField)
-
-    let delijnSearchButton = document.createElement("button")
-    delijnSearchButton.id = "delijnSearchButton"
-    delijnSearchButton.innerHTML = delijnSearchButtonSvg
-    delijnSearchButton.addEventListener("click", handleHalteSearch);
-    delijnTopContainer.appendChild(delijnSearchButton)
-
-    let delijnBottomContainer = document.createElement("div")
-    delijnBottomContainer.id = "delijnBottomContainer"
-
-    delijnContainer.appendChild(delijnTopContainer)
-    delijnContainer.appendChild(delijnBottomContainer)
-    displayDelijnInfo("Loading...")
-}
-
-function handleHalteSearch() {
-    let searchQuery = document.getElementById("halteInput").value
-    delijnSearchResultLimit = 5
-    clearDelijnBottomContainer()
-    searchQuery ? showHalteOptions() : displayDelijnInfo("Gelieve een halte te kiezen.");
-}
-
-// small utils
-function removeDelijnInfo() {
-    let delijnInfoContainer = document.getElementById("delijnInfoContainer")
-    delijnInfoContainer.remove()
-}
-
-function createDelijnInfo() {
-    let delijnInfoContainer = document.createElement("div")
-    delijnInfoContainer.id = "delijnInfoContainer"
-    delijnInfoContainer.classList.add("delijnInfoContainerVisible")
-    document.getElementById("delijnBottomContainer").appendChild(delijnInfoContainer)
-}
-
-function displayDelijnInfo(info) {
-    let delijnInfoContainer = document.getElementById("delijnInfoContainer")
-    if (!delijnInfoContainer) { createDelijnInfo(); delijnInfoContainer = document.getElementById("delijnInfoContainer") };
-    if (info) delijnInfoContainer.innerText = info;
-    delijnInfoContainer.classList.add("delijnInfoContainerVisible")
-    delijnInfoContainer.classList.remove("delijnInfoContainerHidden")
-}
-
-function hideDelijnInfo() {
-    let delijnInfoContainer = document.getElementById("delijnInfoContainer")
-    if (!delijnInfoContainer) { createDelijnInfo(); delijnInfoContainer = document.getElementById("delijnInfoContainer") };
-    delijnInfoContainer.classList.add("delijnInfoContainerHidden")
-    delijnInfoContainer.classList.remove("delijnInfoContainerVisible")
-}
-
-function clearDelijnBottomContainer() {
-    document.getElementById("delijnBottomContainer").innerHTML = ''
-    displayDelijnInfo()
-};
-
+// Utility functions
 function calculateTimeUntilDepartureInMins(ETA) {
-    currentDate = new Date();
-    return Math.round((ETA - currentDate) / 1000 / 60);
+  const currentDate = new Date();
+  return Math.round((ETA - currentDate) / 1000 / 60);
 }
 
 function getHexByCode(code) {
-    const color = lijnDataKleuren.kleuren.find(color => color.code === code);
-    return color ? "#" + color.hex : null;
+  const color = lijnDataKleuren.kleuren.find((color) => color.code === code);
+  return color ? "#" + color.hex : null;
+}
+
+function getHalteDirections(delijnDirectionsData) {
+  let delijnDirectionsArray = [];
+  delijnDirectionsData.forEach((lijn) => {
+    let description = lijn.omschrijving.split("-");
+    let descriptionEndStop = description[description.length - 1];
+    descriptionEndStop = descriptionEndStop.replace(")", "").replace("(", "");
+    if (
+      !delijnDirectionsArray.includes(descriptionEndStop) &&
+      delijnDirectionsArray.length < 3
+    ) {
+      delijnDirectionsArray.push(descriptionEndStop);
+    }
+  });
+  return delijnDirectionsArray.join(", ");
+}
+
+async function delay(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+// Data fetching functions
+async function fetchDelijnData(url) {
+  return await browser.runtime.sendMessage({
+    action: "fetchDelijnData",
+    url: url,
+  });
+}
+
+async function getDelijnAppData() {
+  return await browser.runtime.sendMessage({
+    action: "getDelijnAppData",
+  });
+}
+
+async function setDelijnAppData(data) {
+  return await browser.runtime.sendMessage({
+    action: "setDelijnAppData",
+    data: data,
+  });
 }
 
 async function migrateDelijnData() {
-    await browser.runtime.sendMessage({ action: 'setDelijnAppData', data: JSON.parse(localStorage.getItem("lijnData")) });
-    window.localStorage.removeItem("lijnData")
+  const lijnData = JSON.parse(localStorage.getItem("lijnData"));
+  if (lijnData) {
+    await setDelijnAppData(lijnData);
+    localStorage.removeItem("lijnData");
+  }
 }
 
-function gethalteDirections(delijnDirectionsData){
-    let delijnDirectionsArray = [];
-    console.log(delijnDirectionsData)
-    delijnDirectionsData.forEach(lijn => {
-        let description = lijn.omschrijving.split("-")
-        let descriptionEndStop = description[description.length - 1]
-        descriptionEndStop = descriptionEndStop.replace(')',"")
-        descriptionEndStop = descriptionEndStop.replace('(',"")
-        if (!delijnDirectionsArray.includes(descriptionEndStop) && delijnDirectionsArray.length<3){
-            delijnDirectionsArray.push(descriptionEndStop)
-        }
-    })
-    return delijnDirectionsArray.join(", ");
+// Display functions
+async function createHalteDoorkomst(doorkomst, container) {
+  const entiteitnummer = doorkomst.entiteitnummer;
+  const lijnnummer = doorkomst.lijnnummer;
+  const destination = doorkomst.bestemming;
+  const lijnKey = `${entiteitnummer}_${lijnnummer}`;
+
+  if (lijnUpdateControllers[lijnKey]) {
+    lijnUpdateControllers[lijnKey].abort();
+  }
+  const controller = new AbortController();
+  lijnUpdateControllers[lijnKey] = controller;
+  const signal = controller.signal;
+
+  const originalETA = new Date(doorkomst.dienstregelingTijdstip);
+  let ETA = originalETA;
+  let predictionStatuses = doorkomst.predictionStatussen;
+  let timeUntilDeparture;
+  let arrivalTimeDeviation;
+
+  const lijnCard = document.createElement("div");
+  lijnCard.classList.add("lijnCard");
+
+  if (predictionStatuses.includes("GESCHRAPT")) {
+    lijnCard.classList.add("lijnCardCancelled");
+    timeUntilDeparture = "Cancelled";
+    arrivalTimeDeviation = "";
+  } else if (predictionStatuses.includes("GEENREALTIME")) {
+    lijnCard.classList.add("lijnCardNoData");
+    timeUntilDeparture = calculateTimeUntilDepartureInMins(ETA);
+    timeUntilDeparture =
+      timeUntilDeparture < 1 ? "Now" : `${timeUntilDeparture} Min.`;
+    arrivalTimeDeviation = "No data";
+  } else if (predictionStatuses.includes("REALTIME")) {
+    ETA = new Date(doorkomst["real-timeTijdstip"]);
+    arrivalTimeDeviation = Math.round((ETA - originalETA) / 1000 / 60);
+    arrivalTimeDeviation =
+      arrivalTimeDeviation === 0
+        ? "On time"
+        : arrivalTimeDeviation > 0
+        ? `+${arrivalTimeDeviation}`
+        : arrivalTimeDeviation;
+    timeUntilDeparture = calculateTimeUntilDepartureInMins(ETA);
+    timeUntilDeparture =
+      timeUntilDeparture < 1 ? "Now" : `${timeUntilDeparture} Min.`;
+  }
+
+  const lijnCardTop = document.createElement("div");
+  lijnCardTop.classList.add("lijnCardTop");
+
+  const lijnNumberElement = document.createElement("span");
+  lijnNumberElement.classList.add("lijnNumber");
+  lijnNumberElement.textContent = lijnnummer;
+
+  const lijnDestinationElement = document.createElement("span");
+  lijnDestinationElement.classList.add("lijnDestination");
+  if (destination.length > 15) {
+    lijnDestinationElement.classList.add("lijnDestinationLong");
+  }
+  lijnDestinationElement.textContent = destination;
+
+  lijnCardTop.appendChild(lijnNumberElement);
+  lijnCardTop.appendChild(lijnDestinationElement);
+
+  const arrivalTimeDeviationElement = document.createElement("span");
+  arrivalTimeDeviationElement.classList.add("arrivalTimeDeviation");
+  arrivalTimeDeviationElement.textContent = arrivalTimeDeviation;
+
+  const lijnCardBottom = document.createElement("div");
+  lijnCardBottom.classList.add("lijnCardBottom");
+
+  const time = document.createElement("span");
+  time.classList.add("time");
+  time.textContent = `${ETA.getHours()}:${ETA.getMinutes()
+    .toString()
+    .padStart(2, "0")}`;
+
+  const timeUntilDepartureElement = document.createElement("span");
+  timeUntilDepartureElement.classList.add("timeUntilDeparture");
+  timeUntilDepartureElement.textContent = timeUntilDeparture;
+
+  lijnCardBottom.appendChild(time);
+  lijnCardBottom.appendChild(timeUntilDepartureElement);
+
+  lijnCard.appendChild(lijnCardTop);
+  lijnCard.appendChild(arrivalTimeDeviationElement);
+  lijnCard.appendChild(lijnCardBottom);
+
+  container.appendChild(lijnCard);
+
+  try {
+    await updateLijnCardWithApiData(
+      lijnNumberElement,
+      entiteitnummer,
+      lijnnummer,
+      signal
+    );
+  } catch (err) {
+    if (err.name === "AbortError") {
+      console.log(`Request for lijn ${lijnKey} was aborted`);
+      return;
+    }
+    console.error(err);
+  }
 }
-// main func
-async function createDelijnApp() {
-    initializeDelijnHTML();
-    if (window.localStorage.getItem("lijnData")) {
-        await migrateDelijnData() // Data migration
+
+async function updateLijnCardWithApiData(
+  lijnNumberElement,
+  entiteitnummer,
+  lijnnummer
+) {
+  try {
+    const individualLijnData = await fetchDelijnData(
+      `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${entiteitnummer}/${lijnnummer}`
+    );
+    const publicLineNumber = individualLijnData.lijnnummerPubliek;
+    lijnNumberElement.textContent = publicLineNumber;
+
+    const individualLijnDataColors = await fetchDelijnData(
+      `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${entiteitnummer}/${lijnnummer}/lijnkleuren`
+    );
+
+    lijnNumberElement.style.backgroundColor = getHexByCode(
+      individualLijnDataColors.achtergrond.code
+    );
+    lijnNumberElement.style.borderColor = getHexByCode(
+      individualLijnDataColors.achtergrondRand.code
+    );
+    lijnNumberElement.style.color = getHexByCode(
+      individualLijnDataColors.voorgrond.code
+    );
+  } catch (error) {
+    console.error("Failed to fetch additional data for lijn card:", error);
+  }
+}
+
+function addDelijnAttest(container) {
+  const delijnAttestElement = document.createElement("a");
+  delijnAttestElement.classList.add("delijnAttest");
+  delijnAttestElement.target = "_blank";
+  delijnAttestElement.href =
+    Math.random() < 0.1
+      ? "https://www.coolblue.be/nl/koffiezetapparaten/koffiezetapparaten-voor-latte-macchiato"
+      : "https://www.delijn.be/nl/contact/attest-aanvraag/";
+  delijnAttestElement.innerText = Math.random() < 0.1 ? "Latte?" : "Late?";
+  container.appendChild(delijnAttestElement);
+}
+
+class DelijnWidget extends WidgetBase {
+  constructor() {
+    super();
+    this.searchResultLimit = 5;
+    this.elements = {
+      topContainer: null,
+      searchInput: null,
+      searchButton: null,
+      bottomContainer: null,
+      infoContainer: null,
+    };
+  }
+
+  async createContent() {
+    this.element.classList.add("smpp-widget-transparent");
+    this.container = document.createElement("div");
+    this.initializeHTML();
+    await this.initializeData();
+    return this.container;
+  }
+
+  initializeHTML() {
+    // Create container structure
+    this.container.id = "delijncontainer";
+
+    this.elements.topContainer = document.createElement("div");
+    this.elements.topContainer.id = "delijnTopContainer";
+
+    this.elements.searchInput = document.createElement("input");
+    this.elements.searchInput.classList.add("popupinput");
+    this.elements.searchInput.classList.add("halteInput");
+    this.elements.searchInput.spellcheck = false;
+    this.elements.searchInput.addEventListener("keyup", (event) => {
+      if (event.key === "Enter") this.handleHalteSearch();
+    });
+
+    this.elements.searchButton = document.createElement("button");
+    this.elements.searchButton.classList.add("delijnSearchButton");
+    this.elements.searchButton.innerHTML = delijnSearchButtonSvg;
+    this.elements.searchButton.addEventListener("click", () =>
+      this.handleHalteSearch()
+    );
+
+    this.elements.bottomContainer = document.createElement("div");
+    this.elements.bottomContainer.id = "delijnBottomContainer";
+
+    this.elements.topContainer.appendChild(this.elements.searchInput);
+    this.elements.topContainer.appendChild(this.elements.searchButton);
+    this.container.appendChild(this.elements.topContainer);
+    this.container.appendChild(this.elements.bottomContainer);
+
+    this.displayInfo("Loading...");
+  }
+
+  async displayLijnenBasedOnHalte(entiteitnummer, haltenummer) {
+    this.displayInfo("Loading...");
+    this.clearBottomContainer();
+
+    const delijnData = await fetchDelijnData(
+      `https://api.delijn.be/DLKernOpenData/api/v1/haltes/${entiteitnummer}/${haltenummer}/real-time?maxAantalDoorkomsten=5`
+    );
+    console.log(delijnData.halteDoorkomsten[0].doorkomsten);
+    if (delijnData.halteDoorkomsten[0].doorkomsten.length < 1) {
+      this.displayInfo(
+        "Er zijn momenteel geen bussen beschikbaar voor deze halte."
+      );
+      return;
     }
 
-    const delijnAppData = await browser.runtime.sendMessage({
-        action: 'getDelijnAppData'
-    });
+    this.hideInfo();
+    for (const doorkomst of delijnData.halteDoorkomsten[0].doorkomsten) {
+      await createHalteDoorkomst(doorkomst, this.elements.bottomContainer);
+    }
+    addDelijnAttest(this.elements.bottomContainer);
+  }
+
+  async initializeData() {
+    if (localStorage.getItem("lijnData")) {
+      await migrateDelijnData();
+    }
+
     lijnDataKleuren = await browser.runtime.sendMessage({
-        action: 'getDelijnColorData',
+      action: "getDelijnColorData",
     });
+
+    const delijnAppData = await getDelijnAppData();
     if (delijnAppData.entiteitnummer == null) {
-        displayDelijnInfo("Zoek naar een halte aub.");
+      this.displayInfo("Zoek naar een halte aub.");
     } else {
-        await displayLijnenBasedOnHalte(delijnAppData.entiteitnummer, delijnAppData.haltenummer)
+      await this.displayLijnenBasedOnHalte(
+        delijnAppData.entiteitnummer,
+        delijnAppData.haltenummer
+      );
     }
+  }
+
+  async handleHalteSearch() {
+    const searchQuery = this.elements.searchInput.value;
+    this.searchResultLimit = 5;
+    this.clearBottomContainer();
+
+    if (!searchQuery) {
+      this.displayInfo("Gelieve een halte te kiezen.");
+      return;
+    }
+
+    await this.showHalteOptions(searchQuery);
+  }
+
+  async showHalteOptions(searchQuery) {
+    // Abort previous request
+    if (this.currentAbortController) {
+      this.currentAbortController.abort();
+    }
+
+    // Create a new controller for this request
+    this.currentAbortController = new AbortController();
+    const signal = this.currentAbortController.signal;
+
+    let delijnHaltesData;
+    try {
+      delijnHaltesData = await fetchDelijnData(
+        `https://api.delijn.be/DLZoekOpenData/v1/zoek/haltes/${searchQuery}?maxAantalHits=${this.searchResultLimit}`,
+        { signal }
+      );
+    } catch (error) {
+      if (error.name === "AbortError") return; // Silently ignore aborted request
+      this.displayInfo("Er liep iets mis: " + error);
+      return;
+    }
+
+    if (delijnHaltesData?.aantalHits === 0) {
+      this.displayInfo("Geen zoekresultaten");
+      return;
+    }
+
+    const halteSleutels = delijnHaltesData.haltes
+      .map((halte) => `${halte.entiteitnummer}_${halte.haltenummer}`)
+      .join("_");
+
+    let delijnHaltesLijnrichtingenData;
+    try {
+      delijnHaltesLijnrichtingenData = await fetchDelijnData(
+        `https://api.delijn.be/DLKernOpenData/api/v1/haltes/lijst/${halteSleutels}/lijnrichtingen`,
+        { signal }
+      );
+    } catch (error) {
+      if (error.name === "AbortError") return;
+      this.displayInfo("Er liep iets mis: " + error);
+      return;
+    }
+
+    delijnHaltesLijnrichtingenData.halteLijnrichtingen.forEach((halte, i) => {
+      halte.halte.omschrijving = delijnHaltesData.haltes[i].omschrijving;
+    });
+
+    try {
+      this.hideInfo();
+      const startIndex = this.searchResultLimit - 5;
+
+      const results =
+        delijnHaltesLijnrichtingenData.halteLijnrichtingen.slice(startIndex);
+
+      for (let i = 0; i < results.length; i++) {
+        if (signal.aborted) return;
+        const halte = results[i];
+        await this.createHalteOption(halte);
+      }
+
+      if (delijnHaltesData.aantalHits > this.searchResultLimit) {
+        this.addShowMoreHaltesButton();
+      }
+    } catch (error) {
+      if (error.name !== "AbortError") {
+        this.displayInfo("Er liep iets mis: " + error);
+        console.error(error);
+      }
+    }
+  }
+
+  async createHalteOption(halte) {
+    const halteLijnCard = document.createElement("div");
+    halteLijnCard.dataset.entiteitnummer = halte.halte.entiteitnummer;
+    halteLijnCard.dataset.haltenummer = halte.halte.haltenummer;
+    halteLijnCard.classList.add("lijnCard", "lijnCardHalte");
+
+    const richtingen = "Naar: " + getHalteDirections(halte.lijnrichtingen);
+    halteLijnCard.innerHTML = `
+    <h3 class="halteTitle">${halte.halte.omschrijving}</h3>
+    <div class="halteDirections">${richtingen}</div>
+    <div class="halteLijnen"></div>`;
+
+    const lijnenContainer = halteLijnCard.querySelector(".halteLijnen");
+    const lijnenArray = [];
+
+    for (const lijnrichting of halte.lijnrichtingen.slice(0, 5)) {
+      const lijn = document.createElement("span");
+      lijn.classList.add("lijnNumber", "halteLijnNumber");
+      lijn.dataset.entiteitnummer = lijnrichting.entiteitnummer;
+      lijn.dataset.lijnnummer = lijnrichting.lijnnummer;
+      lijnenContainer.append(lijn);
+
+      const individualLijnData = await fetchDelijnData(
+        `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${lijnrichting.entiteitnummer}/${lijnrichting.lijnnummer}`
+      );
+
+      if (lijnenArray.includes(individualLijnData.lijnnummerPubliek)) {
+        lijn.remove();
+        continue;
+      }
+
+      lijnenArray.push(individualLijnData.lijnnummerPubliek);
+      lijn.innerText = individualLijnData.lijnnummerPubliek;
+
+      const individualLijnDataColors = await fetchDelijnData(
+        `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${lijnrichting.entiteitnummer}/${lijnrichting.lijnnummer}/lijnkleuren`
+      );
+
+      lijn.style.backgroundColor = getHexByCode(
+        individualLijnDataColors.achtergrond.code
+      );
+      lijn.style.borderColor = getHexByCode(
+        individualLijnDataColors.achtergrondRand.code
+      );
+      lijn.style.color = getHexByCode(individualLijnDataColors.voorgrond.code);
+    }
+
+    halteLijnCard.addEventListener("click", (event) => {
+      this.choseThisHalte(event.currentTarget);
+    });
+    this.elements.bottomContainer.appendChild(halteLijnCard);
+    if (document.body.classList.contains("enableAnimations"));
+  }
+
+  async choseThisHalte(halteElement) {
+    const delijnAppData = {
+      entiteitnummer: halteElement.dataset.entiteitnummer,
+      haltenummer: halteElement.dataset.haltenummer,
+    };
+    await setDelijnAppData(delijnAppData);
+    console.log("clicked there", delijnAppData);
+    await this.displayLijnenBasedOnHalte(
+      delijnAppData.entiteitnummer,
+      delijnAppData.haltenummer
+    );
+  }
+
+  addShowMoreHaltesButton() {
+    const showMoreButton = document.createElement("button");
+    showMoreButton.classList.add("showMoreHaltesButton");
+    showMoreButton.innerText = "Toon meer";
+    showMoreButton.addEventListener("click", () => {
+      this.searchResultLimit += 5;
+      showMoreButton.remove();
+      this.showHalteOptions(this.elements.searchInput.value);
+    });
+    this.elements.bottomContainer.appendChild(showMoreButton);
+  }
+
+  // Info display methods
+  createInfoElement() {
+    if (!this.elements.infoContainer) {
+      this.elements.infoContainer = document.createElement("div");
+      this.elements.infoContainer.classList.add(
+        "delijnInfoContainer",
+        "delijnInfoContainerVisible"
+      );
+      this.elements.bottomContainer.appendChild(this.elements.infoContainer);
+      console.log(this.elements.bottomContainer);
+    }
+    return this.elements.infoContainer;
+  }
+
+  displayInfo(info) {
+    console.log(info);
+    const infoContainer = this.createInfoElement();
+    if (info) infoContainer.innerText = info;
+    infoContainer.classList.add("delijnInfoContainerVisible");
+    infoContainer.classList.remove("delijnInfoContainerHidden");
+  }
+
+  hideInfo() {
+    const infoContainer = this.createInfoElement();
+    infoContainer.classList.add("delijnInfoContainerHidden");
+    infoContainer.classList.remove("delijnInfoContainerVisible");
+  }
+
+  clearBottomContainer() {
+    this.elements.bottomContainer.innerHTML = "";
+    this.elements.bottomContainer.appendChild(this.elements.infoContainer);
+    this.displayInfo("");
+  }
+
+  async createPreview() {
+    // Preview implementation would go here
+    return document.createElement("div");
+  }
 }
+
+registerWidget(new DelijnWidget());

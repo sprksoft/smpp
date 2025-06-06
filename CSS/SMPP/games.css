@@ -29,6 +29,10 @@
   margin-bottom: 0.1rem !important;
 }
 
+.smpp-widget-preview .game-title {
+  font-size: 2.5rem;
+}
+
 .game-score {
   font-size: 1.75rem !important;
   font-weight: 500;

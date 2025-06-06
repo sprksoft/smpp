@@ -1,5 +1,5 @@
 const BALL_RADIUS = 4;
-const PADDLE_WIDTH = 40;
+const PADDLE_WIDTH = 50;
 const PADDLE_HEIGHT = 5;
 const BRICK_ROWS = 4;
 const BRICK_COLS = 8;
@@ -50,6 +50,21 @@ class BreakoutWidget extends GameBase {
         });
       }
     }
+  }
+
+  drawRoundedRect(ctx, x, y, width, height, radius) {
+    ctx.beginPath();
+    ctx.moveTo(x + radius, y);
+    ctx.lineTo(x + width - radius, y);
+    ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+    ctx.lineTo(x + width, y + height - radius);
+    ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+    ctx.lineTo(x + radius, y + height);
+    ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+    ctx.lineTo(x, y + radius);
+    ctx.quadraticCurveTo(x, y, x + radius, y);
+    ctx.closePath();
+    ctx.fill();
   }
 
   onGameDraw(ctx, dt) {
@@ -111,15 +126,24 @@ class BreakoutWidget extends GameBase {
     }
 
     ctx.fillStyle = getThemeVar("--color-accent");
-    ctx.fillRect(this.paddleX, h - PADDLE_HEIGHT, PADDLE_WIDTH, PADDLE_HEIGHT);
+    this.drawRoundedRect(
+      ctx,
+      this.paddleX,
+      h - PADDLE_HEIGHT,
+      PADDLE_WIDTH,
+      PADDLE_HEIGHT,
+      5
+    );
 
+    ctx.fillStyle = getThemeVar("--color-text");
     ctx.beginPath();
     ctx.arc(ball.x, ball.y, BALL_RADIUS, 0, 2 * Math.PI);
     ctx.fill();
 
+    ctx.fillStyle = getThemeVar("--color-accent");
     for (let b of this.bricks) {
       if (b.status === 1) {
-        ctx.fillRect(b.x, b.y, BRICK_WIDTH, BRICK_HEIGHT);
+        this.drawRoundedRect(ctx, b.x, b.y, BRICK_WIDTH, BRICK_HEIGHT, 5); // 5 = corner radius
       }
     }
   }

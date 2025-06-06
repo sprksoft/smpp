@@ -38,7 +38,7 @@ class WidgetDragInfo {
 }
 
 class WidgetBase {
-  #element;
+  element;
   #content;
   #preview;
   #bagPlaceHolder;
@@ -46,7 +46,7 @@ class WidgetBase {
   #aboutToDel;
 
   constructor() {
-    this.#element = this.#createWidgetDiv();
+    this.element = this.#createWidgetDiv();
     this.#content = null;
     this.#preview = false;
     this.#aboutToDel = false;
@@ -63,14 +63,14 @@ class WidgetBase {
   }
 
   async #intoBag() {
-    if (this.#element.parentElement == this.#bagGroup) {
+    if (this.element.parentElement == this.#bagGroup) {
       return;
     }
     if (this.#bagPlaceHolder) {
-      this.#bagGroup.insertBefore(this.#element, this.#bagPlaceHolder);
+      this.#bagGroup.insertBefore(this.element, this.#bagPlaceHolder);
       this.#bagPlaceHolder.remove();
     } else {
-      this.#element.remove();
+      this.element.remove();
     }
     await this.#setPreview(true);
   }
@@ -83,10 +83,10 @@ class WidgetBase {
     let newContent;
     try {
       if (preview) {
-        this.#element.classList.add("smpp-widget-preview");
+        this.element.classList.add("smpp-widget-preview");
         newContent = await this.createPreview();
       } else {
-        this.#element.classList.remove("smpp-widget-preview");
+        this.element.classList.remove("smpp-widget-preview");
         newContent = await this.createContent();
       }
     } catch (e) {
@@ -96,15 +96,15 @@ class WidgetBase {
     }
     if (!newContent) {
       console.error(
-        "createContent and createPreview method's needs to return an html object. in widget impl",
+        "createContent and createPreview method's needs to return an html object. in widget impl"
       );
       newContent = createWidgetErrorContent(this.name);
     }
     this.#content?.remove();
     newContent.classList.add("smpp-widget-content");
     this.#content = newContent;
-    this.#element.dataset.widgetName = this.name;
-    this.#element.appendChild(this.#content);
+    this.element.dataset.widgetName = this.name;
+    this.element.appendChild(this.#content);
     this.#preview = preview;
   }
 
@@ -125,16 +125,16 @@ class WidgetBase {
 
   async addToPannel(pannel) {
     await this.#setPreview(false);
-    pannel.appendChild(this.#element);
+    pannel.appendChild(this.element);
     pannel.appendChild(createInsertionPointHTML(false));
   }
 
   aboutToDel(value) {
     this.#aboutToDel = value;
     if (value) {
-      this.#element.classList.add("smpp-widget-delete");
+      this.element.classList.add("smpp-widget-delete");
     } else {
-      this.#element.classList.remove("smpp-widget-delete");
+      this.element.classList.remove("smpp-widget-delete");
     }
   }
 
@@ -143,7 +143,7 @@ class WidgetBase {
       return;
     }
 
-    let el = this.#element;
+    let el = this.element;
     let offset = curDragInfo.offset;
     el.style.left = x - offset.x + "px";
     el.style.top = y - offset.y + "px";
@@ -154,7 +154,7 @@ class WidgetBase {
       return;
     }
 
-    let el = this.#element;
+    let el = this.element;
     el.classList.remove("smpp-widget-dragging");
     el.style = "";
 
@@ -179,7 +179,7 @@ class WidgetBase {
         let pannel = await createPannelHTML({ widgets: [] });
         pannelContainer.insertBefore(
           createInsertionPointHTML(true),
-          targetIp.nextElementSibling,
+          targetIp.nextElementSibling
         );
         pannelContainer.insertBefore(pannel, targetIp.nextElementSibling);
         targetIp = pannel.firstChild;
@@ -189,7 +189,7 @@ class WidgetBase {
       targetPannel.style.display = "block";
       targetPannel.insertBefore(
         createInsertionPointHTML(),
-        targetIp.nextElementSibling,
+        targetIp.nextElementSibling
       );
       targetPannel.insertBefore(el, targetIp.nextElementSibling);
 
@@ -212,10 +212,10 @@ class WidgetBase {
     if (!widgetEditMode) {
       return;
     }
-    const el = this.#element;
+    const el = this.element;
 
-    let sourceIp = this.#element.previousElementSibling;
-    let rect = this.#element.getBoundingClientRect();
+    let sourceIp = this.element.previousElementSibling;
+    let rect = this.element.getBoundingClientRect();
 
     if (el.parentElement == this.#bagGroup) {
       sourceIp = null;
@@ -307,11 +307,11 @@ class SmartschoolWidget extends WidgetBase {
 function targetInsertionPoint(target) {
   if (target !== curDragInfo.targetInsertionPoint) {
     curDragInfo.targetInsertionPoint?.classList.remove(
-      "smpp-widget-insertion-point-targeted",
+      "smpp-widget-insertion-point-targeted"
     );
     curDragInfo.targetInsertionPoint = target;
     curDragInfo.targetInsertionPoint?.classList.add(
-      "smpp-widget-insertion-point-targeted",
+      "smpp-widget-insertion-point-targeted"
     );
   }
 }
@@ -469,7 +469,7 @@ async function createWidgetSystem() {
 
   // Create smartschool default widgets
   for (let smWidget of document.querySelectorAll(
-    "#rightcontainer .homepage__block",
+    "#rightcontainer .homepage__block"
   )) {
     let wName = "SmartschoolWidget-" + smWidget.id;
     registerWidget(new SmartschoolWidget(smWidget));
@@ -478,7 +478,7 @@ async function createWidgetSystem() {
     }
   }
   for (let smWidget of document.querySelectorAll(
-    "#leftcontainer .homepage__block",
+    "#leftcontainer .homepage__block"
   )) {
     let wName = "SmartschoolWidget-" + smWidget.id;
     registerWidget(new SmartschoolWidget(smWidget));
@@ -490,7 +490,7 @@ async function createWidgetSystem() {
   widgetsContainer = await createWidgetsContainerHTML(
     widgetData,
     news,
-    showNewsState,
+    showNewsState
   );
 
   container.innerHTML = "";
