@@ -68,7 +68,7 @@ class TakenWidget extends WidgetBase {
           throw new Error("School name could not be determined.");
         }
 
-        const url = `https://${schoolName}.smartschool.be/planner/api/v1/planned-elements/user/${userId}?from=${getCurrentDate()}&to=${getFutureDate(foresight)()}&types=planned-assignments,planned-to-dos`;
+        const url = `https://${schoolName}.smartschool.be/planner/api/v1/planned-elements/user/${userId}?from=${getCurrentDate()}&to=${getFutureDate(foresight)}&types=planned-assignments,planned-to-dos`;
         sendDebug("Fetching planner data from:", url);
         const response = await fetch(url);
 
