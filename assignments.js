@@ -1,6 +1,6 @@
 // i'm a true ✨ Vibe Coder ✨ - Jdev
 // code for assignments list 📂
-// THANK YOU LDEVVVV 🫂🫂🫂N
+// THANK YOU LDEVVVV 🫂🫂🫂
 
 class TakenWidget extends WidgetBase {
   createContent() {
