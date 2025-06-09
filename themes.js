@@ -1,5 +1,5 @@
 const themes = {
-  default: {
+  default: { // Default Deluxe
     "--color-accent": "#c9d2e6",
     "--color-splashtext": "var(--color-accent)",
     "--color-text": "#c2bab2",
@@ -12,7 +12,7 @@ const themes = {
     "--loginpage-image":
       "url(https://4kwallpapers.com/images/wallpapers/desert-doom-sand-dunes-dark-background-monochrome-landscape-2560x1080-6409.jpg)",
   },
-  white: {
+  white: { // Off White
     "--color-accent": "#3a4f6d",
     "--color-text": "#1a1e28",
     "--color-base00": "#eeebec",
@@ -24,7 +24,7 @@ const themes = {
     "--darken-background": "rgba(0,0,0,0.1)",
     "--color-splashtext": "#080a12",
   },
-  ldev: {
+  ldev: { // Dark Sands
     "--color-accent": "oklch(90% 0.069 70)",
     "--color-text": "oklch(80% 0.004 90)",
     "--color-base00": "oklch(15% 0.005 70)",
@@ -36,7 +36,7 @@ const themes = {
     "--darken-background": "rgba(0,0,0,0.25)",
     "--color-splashtext": "#ffd5a0",
   },
-  purple: {
+  purple: { // Neon Violet
     "--color-accent": "#bd4fb3",
     "--color-text": "#d9cdff",
     "--color-base00": "#0b021d",
@@ -49,7 +49,7 @@ const themes = {
     "--darken-background": "rgba(0,0,0,0.2)",
     "--color-splashtext": "#dfdeff",
   },
-  stalker: {
+  stalker: { // Ruby Eclipse
     "--color-accent": "#d6574e",
     "--color-text": "#f8a99c",
     "--color-base00": "#1a1311",
@@ -62,7 +62,7 @@ const themes = {
     "--darken-background": "rgba(0,0,0,0.2)",
     "--color-splashtext": "#efc2c3",
   },
-  chocolate: {
+  chocolate: { // Dark Mocha
     "--color-accent": "#cdbcb4",
     "--color-text": "#dcdad0",
     "--color-base00": "#20181c",
@@ -75,7 +75,7 @@ const themes = {
     "--darken-background": "rgba(0,0,0,0.3)",
     "--color-splashtext": "#d3b199",
   },
-  fall: {
+  fall: { // Autumn Gloom
     "--color-accent": "#f8c791",
     "--color-text": "#d3cbc3",
     "--color-base00": "#231717",
@@ -88,7 +88,7 @@ const themes = {
     "--darken-background": "rgba(0,0,0,0.3)",
     "--color-splashtext": "#ffe5d3",
   },
-  winter: {
+  winter: { // Arctic Azure
     "--color-accent": "#8aadb6",
     "--color-text": "#C2BAB2",
     "--color-base00": "#071b2c",
@@ -101,7 +101,7 @@ const themes = {
     "--darken-background": "rgba(0,0,0,0.2)",
     "--color-splashtext": "#7bcfe2",
   },
-  birb: {
+  birb: { // Midnight Sapphire
     "--color-accent": "#6e81b1",
     "--color-text": "#a8a9ab",
     "--color-base00": "#0e0e15",
@@ -113,7 +113,7 @@ const themes = {
     "--darken-background": "rgba(0,0,0,0.2)",
     "--color-splashtext": "#7089a4",
   },
-  matcha: {
+  matcha: { // Matcha Green
     "--color-accent": "#d1f8e7",
     "--color-text": "#d1ebd2",
     "--color-base00": "#243926",
@@ -125,7 +125,7 @@ const themes = {
     "--darken-background": "rgba(0,0,0,0.15)",
     "--color-splashtext": "#8ab4a7",
   },
-  mountain: {
+  mountain: { // Storm Peaks
     "--color-accent": "#f8f8fa",
     "--color-text": "#f8f8fa",
     "--color-base00": "#121c28",
@@ -138,7 +138,7 @@ const themes = {
     "--darken-background": "rgba(0,0,0,0.1)",
     "--color-splashtext": "#030c18",
   },
-  vax: {
+  vax: { // Unused Star Wars
     "--color-accent": "#7a1600",
     "--color-text": "bisque",
     "--color-base00": "#411900",
@@ -151,7 +151,7 @@ const themes = {
     "--darken-background": "rgba(0,0,0,0.15)",
     "--color-splashtext": "#7a1600",
   },
-  sand: {
+  sand: { // Sahara Oasis
     "--color-accent": "#8097c5",
     "--color-text": "#c1a49c",
     "--color-base00": "#2e2526",
@@ -164,7 +164,7 @@ const themes = {
     "--darken-background": "rgba(0,0,0,0.15)",
     "--color-splashtext": "#e0c7b5",
   },
-  pizza: {
+  pizza: { // Unused Pizza
     "--color-base00": "#4b2611",
     "--color-base01": "#7a4e23",
     "--color-base02": "#9b6e2c",
@@ -176,7 +176,7 @@ const themes = {
       "url(https://github.com/NightFlavor/smpp-images/blob/main/watjpg.jpg?raw=true)",
     "--darken-background": "rgba(0,0,0,0.2)",
   },
-  galaxy: {
+  galaxy: { // Fluorescent Galaxy
     "--color-accent": "#daa0ef",
     "--color-text": "#f0f0f0",
     "--color-base00": "#1e222c",
@@ -188,7 +188,7 @@ const themes = {
     "--darken-background": "rgba(0,0,0,0.3)",
     "--color-splashtext": "#e1bbef",
   },
-  pink: {
+  pink: { // Cherry Haze
     "--color-accent": "#bf4183",
     "--color-text": "#6c1c48",
     "--color-base00": "#f7ccd5",
