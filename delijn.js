@@ -505,8 +505,20 @@ class DelijnWidget extends WidgetBase {
   }
 
   async createPreview() {
-    // Preview implementation would go here
-    return document.createElement("div");
+    const previewElement = document.createElement("div");
+
+    const previewElementTitle = document.createElement("div");
+    previewElementTitle.classList.add("delijn-preview-title");
+    previewElementTitle.innerText = "De Lijn";
+
+    const previewElementIcon = document.createElement("div");
+    previewElementIcon.classList.add("delijn-icon-128");
+    previewElementIcon.style.marginBottom = "2rem";
+
+    previewElement.appendChild(previewElementTitle);
+    previewElement.appendChild(previewElementIcon);
+
+    return previewElement;
   }
 }
 
