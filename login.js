@@ -127,7 +127,9 @@ let splashtexts = [
     `Survive, Adapt, Overcome`,
     `Rode auto`,
     `Cookie clicker`,
-    `Are you serious?`
+    `Are you serious?`,
+    `Breakout`,
+    `Examens`,
 ]
 function get_splash_text() {
     return splashtexts[Math.floor(Math.random() * splashtexts.length)]

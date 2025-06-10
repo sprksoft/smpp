@@ -9,6 +9,7 @@ let widgets = [];
 
 let widgetsContainer;
 let widgetBag;
+let widgetBagHandle;
 
 function registerWidget(widget) {
   widgets.push(widget);
@@ -96,7 +97,7 @@ class WidgetBase {
     }
     if (!newContent) {
       console.error(
-        "createContent and createPreview method's needs to return an html object. in widget impl"
+        "createContent and createPreview method's needs to return an html object. in widget impl",
       );
       newContent = createWidgetErrorContent(this.name);
     }
@@ -179,7 +180,7 @@ class WidgetBase {
         let pannel = await createPannelHTML({ widgets: [] });
         pannelContainer.insertBefore(
           createInsertionPointHTML(true),
-          targetIp.nextElementSibling
+          targetIp.nextElementSibling,
         );
         pannelContainer.insertBefore(pannel, targetIp.nextElementSibling);
         targetIp = pannel.firstChild;
@@ -189,7 +190,7 @@ class WidgetBase {
       targetPannel.style.display = "block";
       targetPannel.insertBefore(
         createInsertionPointHTML(),
-        targetIp.nextElementSibling
+        targetIp.nextElementSibling,
       );
       targetPannel.insertBefore(el, targetIp.nextElementSibling);
 
@@ -233,6 +234,8 @@ class WidgetBase {
     el.style.width = rect.width + "px";
     el.style.left = rect.left + "px";
     el.style.top = rect.top + "px";
+    el.style["transform-origin"] =
+      `${curDragInfo.offset.x}px ${curDragInfo.offset.y}px`;
 
     el.classList.add("smpp-widget-dragging");
 
@@ -252,7 +255,7 @@ class WidgetBase {
     return "other";
   }
 
-  // (Required): Gets called when the content element of the widget needs to be created (return html element)
+  // (Required): Gets called when the content element of the widget needs to be created (return html element). (Don't do slow tasks in here)
   async createContent() {}
   // Gets called when the preview element needs to be created (return html element) NOTE: preview and content never exist at the same time
   async createPreview() {
@@ -307,11 +310,11 @@ class SmartschoolWidget extends WidgetBase {
 function targetInsertionPoint(target) {
   if (target !== curDragInfo.targetInsertionPoint) {
     curDragInfo.targetInsertionPoint?.classList.remove(
-      "smpp-widget-insertion-point-targeted"
+      "smpp-widget-insertion-point-targeted",
     );
     curDragInfo.targetInsertionPoint = target;
     curDragInfo.targetInsertionPoint?.classList.add(
-      "smpp-widget-insertion-point-targeted"
+      "smpp-widget-insertion-point-targeted",
     );
   }
 }
@@ -399,10 +402,14 @@ async function createWidgetsContainerHTML(widgetData, newsContent, showNews) {
   widgetsContainer.classList.add("smpp-widgets-container");
 
   widgetsContainer.appendChild(createInsertionPointHTML(true));
-  for (let pannel of widgetData.leftPannels) {
+
+  async function createAppendPannel(pannel) {
     let pannelDiv = await createPannelHTML(pannel);
     widgetsContainer.appendChild(pannelDiv);
     widgetsContainer.appendChild(createInsertionPointHTML(true));
+  }
+  for (let pannel of widgetData.leftPannels) {
+    await createAppendPannel(pannel);
   }
 
   let newsDiv = document.createElement("div");
@@ -416,9 +423,7 @@ async function createWidgetsContainerHTML(widgetData, newsContent, showNews) {
 
   widgetsContainer.appendChild(createInsertionPointHTML(true));
   for (let pannel of widgetData.rightPannels) {
-    let pannelDiv = await createPannelHTML(pannel);
-    widgetsContainer.appendChild(pannelDiv);
-    widgetsContainer.appendChild(createInsertionPointHTML(true));
+    await createAppendPannel(pannel);
   }
 
   return widgetsContainer;
@@ -469,7 +474,7 @@ async function createWidgetSystem() {
 
   // Create smartschool default widgets
   for (let smWidget of document.querySelectorAll(
-    "#rightcontainer .homepage__block"
+    "#rightcontainer .homepage__block",
   )) {
     let wName = "SmartschoolWidget-" + smWidget.id;
     registerWidget(new SmartschoolWidget(smWidget));
@@ -478,7 +483,7 @@ async function createWidgetSystem() {
     }
   }
   for (let smWidget of document.querySelectorAll(
-    "#leftcontainer .homepage__block"
+    "#leftcontainer .homepage__block",
   )) {
     let wName = "SmartschoolWidget-" + smWidget.id;
     registerWidget(new SmartschoolWidget(smWidget));
@@ -490,7 +495,7 @@ async function createWidgetSystem() {
   widgetsContainer = await createWidgetsContainerHTML(
     widgetData,
     news,
-    showNewsState
+    showNewsState,
   );
 
   container.innerHTML = "";
@@ -643,11 +648,11 @@ if (getPageURL().path == "") {
     if (curDragInfo) {
       curDragInfo.widget.dragMove(e.clientX, e.clientY);
 
-      let bagBounds = widgetBag.getBoundingClientRect();
+      let handleBounds = widgetBagHandle.getBoundingClientRect();
       if (
-        e.clientY < bagBounds.bottom &&
-        e.clientX > bagBounds.left &&
-        e.clientX < bagBounds.right
+        e.clientY < handleBounds.bottom &&
+        e.clientX > handleBounds.left &&
+        e.clientX < handleBounds.right
       ) {
         bagHoverEnter();
       } else if (hoveringBag) {
@@ -687,6 +692,7 @@ async function setEditMode(value) {
     document.getElementById("smpp-news-content").style.display = "none";
     if (!widgetBag) {
       widgetBag = await createWidgetBag();
+      widgetBagHandle = widgetBag.querySelector(".smpp-widget-bag-handle");
     }
   } else {
     if (curDragInfo) {

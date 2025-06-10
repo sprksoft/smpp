@@ -188,8 +188,8 @@ html {
   }
 }
 
-.smpp-widget-bag.smpp-widget-bag-delete,
-.smpp-widget-bag:hover {
+.smpp-widget-edit-mode .smpp-widget-bag.smpp-widget-bag-delete,
+.smpp-widget-edit-mode .smpp-widget-bag:not(.smpp-widget-bag-open):hover {
   transform: translateY(var(--bag-close-transformy));
 }
 
@@ -272,28 +272,6 @@ html {
 .smpp-widget-bag-handle-icon {
   width: 50px;
   display: block;
-}
-
-.smpp-widget-edit-mode .smpp-widget-bag-fold {
-  transform: translateY(-50px);
-  opacity: 1;
-}
-
-.smpp-widget-bag-fold:hover,
-.smpp-widget-bag-fold.smpp-widget-bag-delete {
-  transform: translateY(-40px);
-}
-
-.smpp-widget-dragging-something .smpp-widget-bag-fold {
-  border-color: var(--color-red);
-  color: var(--color-red);
-  outline: none;
-  box-shadow: none;
-}
-
-.smpp-widget-dragging-something .smpp-widget-bag-fold-icon {
-  color: var(--color-red);
-  transform: rotate(180deg) translateY(5px);
 }
 
 /* WIDGET STYLES */

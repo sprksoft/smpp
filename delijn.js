@@ -228,7 +228,7 @@ class DelijnWidget extends WidgetBase {
     this.element.classList.add("smpp-widget-transparent");
     this.container = document.createElement("div");
     this.initializeHTML();
-    await this.initializeData();
+    this.initializeData();
     return this.container;
   }
 
