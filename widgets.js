@@ -399,10 +399,14 @@ async function createWidgetsContainerHTML(widgetData, newsContent, showNews) {
   widgetsContainer.classList.add("smpp-widgets-container");
 
   widgetsContainer.appendChild(createInsertionPointHTML(true));
-  for (let pannel of widgetData.leftPannels) {
+
+  async function createAppendPannel(pannel) {
     let pannelDiv = await createPannelHTML(pannel);
     widgetsContainer.appendChild(pannelDiv);
     widgetsContainer.appendChild(createInsertionPointHTML(true));
+  }
+  for (let pannel of widgetData.leftPannels) {
+    await createAppendPannel(pannel);
   }
 
   let newsDiv = document.createElement("div");
@@ -416,9 +420,7 @@ async function createWidgetsContainerHTML(widgetData, newsContent, showNews) {
 
   widgetsContainer.appendChild(createInsertionPointHTML(true));
   for (let pannel of widgetData.rightPannels) {
-    let pannelDiv = await createPannelHTML(pannel);
-    widgetsContainer.appendChild(pannelDiv);
-    widgetsContainer.appendChild(createInsertionPointHTML(true));
+    await createAppendPannel(pannel);
   }
 
   return widgetsContainer;
