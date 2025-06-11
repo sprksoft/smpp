@@ -272,8 +272,7 @@ class DelijnWidget extends WidgetBase {
     const delijnData = await fetchDelijnData(
       `https://api.delijn.be/DLKernOpenData/api/v1/haltes/${entiteitnummer}/${haltenummer}/real-time?maxAantalDoorkomsten=5`
     );
-    console.log(delijnData.halteDoorkomsten[0].doorkomsten);
-    if (delijnData.halteDoorkomsten[0].doorkomsten.length < 1) {
+    if (!delijnData.halteDoorkomsten[0]) {
       this.displayInfo(
         "Er zijn momenteel geen bussen beschikbaar voor deze halte."
       );

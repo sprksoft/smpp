@@ -50,6 +50,10 @@ html {
   backdrop-filter: var(--blur-value-small);
 }
 
+.smpp-widget.smpp-widget-preview {
+  margin: 0;
+}
+
 .smpp-widget-preview {
   min-width: var(--preview-width);
   max-width: var(--preview-width);
@@ -221,6 +225,7 @@ html {
 
 .smpp-widget-bag-group {
   margin: 1rem;
+  gap: 2rem;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -299,5 +304,6 @@ html {
 .smpp-widget-edit-mode .smpp-widget-transparent {
   background-color: var(--color-base01);
   border: 3px solid var(--color-base03);
+  box-shadow: 0 0 10px var(--darken-background);
   padding: 1rem;
 }

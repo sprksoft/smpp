@@ -156,9 +156,9 @@
 }
 
 .topnav__menuitem {
-  border: var(--border-size) solid var(--color-base01) !important;
+  border: var(--border-size) solid transparent !important;
   border-radius: 10px !important;
-  background-color: var(--color-base01) !important;
+  background-color: transparent !important;
   margin-right: 0px !important;
   color: var(--color-text) !important;
 }

@@ -7,19 +7,6 @@
   "lite_mode": false,
   "content_scripts": [
     {
-      "matches": ["*://app.lernova.be/*"],
-      "all_frames": true,
-      "css": [],
-      "js": [
-        "scraper.js",
-        "utils.js",
-        "DMENU/dmenu.js",
-        "LERNOVA/lernova.js",
-        "json.js",
-        "DMENU/quick.js"
-      ]
-    },
-    {
       "matches": ["*://*.smartschool.be/*"],
       "exclude_matches": ["*://www.smartschool.be/*"],
       "all_frames": true,
