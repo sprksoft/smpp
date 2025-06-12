@@ -136,24 +136,26 @@ def build_lite(excluded_lite_files_csv, original_dir, lite_build_dir, icon_sourc
                     content_script['css'] = [style for style in content_script['css'] if style not in lite_exclude_files]
 
         manifest['name'] = 'Smartschool++ Lite'
-        manifest['description'] = 'A lite, school friendly version of Smartschool++'
+        manifest['description'] = 'A lite, school friendlier version of Smartschool++'
         manifest['lite_mode'] = True
 
         with open(manifest_path, 'w', encoding='utf-8') as f:
             json.dump(manifest, f, indent=4)
     except Exception as e:
         print(f"Error updating manifest: {e}")
-
+        
     print("Updating icons...")
+    icons_dir = os.path.join(lite_build_dir, 'icons')
+    os.makedirs(icons_dir, exist_ok=True)
+
     if os.path.exists(icon_source_dir):
         for icon_file in os.listdir(icon_source_dir):
             src_icon = os.path.join(icon_source_dir, icon_file)
-            dst_icon = os.path.join(lite_build_dir, icon_file)
+            dst_icon = os.path.join(icons_dir, icon_file)
             shutil.copy2(src_icon, dst_icon)
     else:
         print(f"Warning: Icon directory not found at {icon_source_dir}")
 
-    print(f"Lite build complete: {lite_build_dir}")
 
 if __name__ == "__main__":
     script_dir = os.path.dirname(os.path.abspath(__file__))
