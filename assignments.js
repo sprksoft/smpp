@@ -1,6 +1,6 @@
 // i'm a true ✨ Vibe Coder ✨ - Jdev
 // code for assignments list 📂
-// THANK YOU LDEVVVV 🫂🫂🫂N
+// THANK YOU LDEVVVV 🫂🫂🫂
 
 class TakenWidget extends WidgetBase {
   createContent() {
@@ -54,37 +54,12 @@ class TakenWidget extends WidgetBase {
       sendDebug("User ID:", userId);
       sendDebug("Current URL:", window.location.href);
       sendDebug("Today's Date:", getCurrentDate());
-      sendDebug("Next Date:", getNextDate());
+      sendDebug("Next Date:", getFutureDate(foresight));
     }
 
-    function sendDebug(...messages) {
-      if (DEBUG) {
-        console.log(...messages);
-      }
-    }
 
-    function getSchoolName() {
-      try {
-        const schoolName = window.location.hostname.split(".")[0];
-        if (!schoolName) {
-          throw new Error("Failed to extract school name");
-        }
-        return schoolName;
-      } catch (error) {
-        console.error(error.message);
-        return null;
-      }
-    }
 
-    function getCurrentDate() {
-      return new Date().toISOString().split("T")[0];
-    }
 
-    function getNextDate() {
-      return new Date(Date.now() + foresight * 86400000)
-        .toISOString()
-        .split("T")[0];
-    }
 
     async function fetchPlannerData() {
       try {
@@ -93,7 +68,7 @@ class TakenWidget extends WidgetBase {
           throw new Error("School name could not be determined.");
         }
 
-        const url = `https://${schoolName}.smartschool.be/planner/api/v1/planned-elements/user/${userId}?from=${getCurrentDate()}&to=${getNextDate()}&types=planned-assignments,planned-to-dos`;
+        const url = `https://${schoolName}.smartschool.be/planner/api/v1/planned-elements/user/${userId}?from=${getCurrentDate()}&to=${getFutureDate(foresight)}&types=planned-assignments,planned-to-dos`;
         sendDebug("Fetching planner data from:", url);
         const response = await fetch(url);
 
@@ -256,4 +231,34 @@ class TakenWidget extends WidgetBase {
     return initTaskList();
   }
 }
+
+function sendDebug(...messages) {
+  if (DEBUG) {
+    console.log(...messages);
+  }
+}
+
+function getSchoolName() {
+  try {
+    const schoolName = window.location.hostname.split(".")[0];
+    if (!schoolName) {
+      throw new Error("Failed to extract school name");
+    }
+    return schoolName;
+  } catch (error) {
+    console.error(error.message);
+    return null;
+  }
+}
+
+function getCurrentDate() {
+  return new Date().toISOString().split("T")[0];
+}
+
+function getFutureDate(days) {
+  return new Date(Date.now() + days * 86400000)
+    .toISOString()
+    .split("T")[0];
+}
+
 registerWidget(new TakenWidget()); // so easy
