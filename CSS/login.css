@@ -31,7 +31,7 @@ html {
   flex-grow: 0 !important;
 }
 
-.login-app__left>* {
+.login-app__left > * {
   display: none !important;
 }
 
@@ -51,7 +51,7 @@ html {
 }
 
 .enableAnimations .login-app__top {
-  transition: all 100ms ease-in 0s !important
+  transition: all 100ms ease-in 0s !important;
 }
 
 .login-app__bottom {
@@ -78,7 +78,7 @@ a.smscButton[href^="/login/sso/init"],
   align-self: center !important;
 }
 
-.login-app__form>form {
+.login-app__form > form {
   margin-bottom: 5px !important;
   display: grid !important;
 }
@@ -97,6 +97,11 @@ body {
 .showLeftNav:has(.login-app) {
   align-items: center !important;
   justify-content: center !important;
+}
+
+#smscMain.showLeftNav {
+  display: flex !important;
+  flex-direction: row !important;
 }
 
 .float-label__input {
@@ -119,7 +124,9 @@ body {
   justify-self: center;
 }
 
-.enableAnimations .login-app .smscButton.blue:not(#pushWizardPopupConfirmButton) {
+.enableAnimations
+  .login-app
+  .smscButton.blue:not(#pushWizardPopupConfirmButton) {
   transition: all 0.3s !important;
 }
 
@@ -132,8 +139,8 @@ body {
   margin-left: 0% !important;
 }
 
-.modern-ui .float-label__input:focus+label>span,
-.modern-ui .float-label__input:valid+label>span {
+.modern-ui .float-label__input:focus + label > span,
+.modern-ui .float-label__input:valid + label > span {
   font-size: 18px !important;
   left: 5px !important;
   top: -70px !important;
@@ -223,5 +230,5 @@ span.login-app__title.login-app__title--sign-in-with {
 }
 
 .login-app__password .form__eye-icon {
-  top: 1.55rem !important
+  top: 1.55rem !important;
 }

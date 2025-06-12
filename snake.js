@@ -1,7 +1,9 @@
 class Point {
   x;
   y;
-  constructor(x, y) { this.x = x; this.y = y;
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
   }
 
   add(other) {
@@ -86,12 +88,13 @@ class SnakeWidget extends GameBase {
   }
   #spawnFood() {
     this.#food = this.#getRandomFieldPos();
-    while(this.#snake.find((p) => p.equal(this.#food))) {
+    while (this.#snake.find((p) => p.equal(this.#food))) {
       this.#food = this.#getRandomFieldPos();
     }
   }
 
   async onGameStart() {
+    const cellCount = CELL_COUNT * this.getOpt("size") * 0.01;
     if (!this.#backgroundCanvas) {
       const bg = document.createElement("canvas");
       bg.height = this.canvas.width;
@@ -105,7 +108,9 @@ class SnakeWidget extends GameBase {
     this.#counter = 0;
     this.#curDir = DIR_DOWN;
     this.#targetDir = DIR_DOWN;
-    this.#snake = [this.#getRandomFieldPos()];
+    this.#snake = [
+      new Point(Math.floor(cellCount / 2), Math.floor(cellCount / 2)),
+    ];
     this.#spawnFood();
   }
 
@@ -140,9 +145,9 @@ class SnakeWidget extends GameBase {
     for (let y = 0; y < cellCount; y++) {
       for (let x = 0; x < cellCount; x++) {
         if ((x + y) % 2 == 0) {
-          ctx.fillStyle = getThemeVar("--color-base03");
+          ctx.fillStyle = `${getThemeVar("--color-base03")}50`;
         } else {
-          ctx.fillStyle = getThemeVar("--color-base02");
+          ctx.fillStyle = `${getThemeVar("--color-base02")}50`;
         }
         ctx.beginPath();
         ctx.arc(
@@ -159,7 +164,7 @@ class SnakeWidget extends GameBase {
 
   onGameDraw(ctx, dt) {
     this.#counter += dt;
-    if (this.#counter * this.getOpt("speed") * 0.01 >= FRAME_TIME) {
+    if (this.#counter * this.getOpt("speed") * 0.02 >= FRAME_TIME) {
       this.#tick();
       this.#counter = 0;
     }

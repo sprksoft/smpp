@@ -310,3 +310,17 @@ const editIconSvg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http:/
 const noLocationSvg = `<svg xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="0 0 24 24" stroke="var(--color-red)" fill="var(--color-base01)">
 <path d="M10 8L14 12M14 8L10 12M19 10.2C19 14.1764 15.5 17.4 12 21C8.5 17.4 5 14.1764 5 10.2C5 6.22355 8.13401 3 12 3C15.866 3 19 6.22355 19 10.2Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>`;
+
+const lijnIconSvg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" class="delijn-icon-128" viewBox="0 0 676 787" fill="none" version="1.1" id="svg10">
+  <defs id="defs10"/>
+  <rect x="444" y="537" width="129" height="250" rx="64.5" fill="#3f3f3f" id="rect2"/>
+  <rect x="116" y="537" width="129" height="250" rx="64.5" fill="#3f3f3f" id="rect3"/>
+  <rect x="48" width="578" height="684" rx="72" fill="#ffd800" id="rect4" y="0"/>
+  <rect y="113" width="221" height="250" rx="43" fill="#999999" id="rect5" x="0"/>
+  <rect x="454" y="113" width="222" height="250" rx="43" fill="#999999" id="rect6"/>
+  <rect x="80" y="28" width="252" height="430" rx="60" fill="#75c9ff" id="rect7"/>
+  <rect x="357" y="28" width="241" height="430" rx="60" fill="#75c9ff" id="rect8"/>
+  <rect x="70" y="478" width="544" height="184" rx="75" fill="#777777" id="rect9"/>
+  <circle cx="181" cy="571" r="65" fill="#e4f5ff" id="circle9"/>
+  <circle cx="509" cy="570" r="65" fill="#e4f5ff" id="circle10"/>
+</svg>`;

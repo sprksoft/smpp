@@ -272,10 +272,14 @@ class DelijnWidget extends WidgetBase {
     const delijnData = await fetchDelijnData(
       `https://api.delijn.be/DLKernOpenData/api/v1/haltes/${entiteitnummer}/${haltenummer}/real-time?maxAantalDoorkomsten=5`
     );
+    console.log(delijnData);
     if (!delijnData.halteDoorkomsten[0]) {
       this.displayInfo(
         "Er zijn momenteel geen bussen beschikbaar voor deze halte."
       );
+      return;
+    } else if (delijnData.halteDoorkomsten[0].doorkomsten.length < 1) {
+      this.displayInfo("Er zijn momenteel geen vertrekkende bussen");
       return;
     }
 
@@ -511,8 +515,8 @@ class DelijnWidget extends WidgetBase {
     previewElementTitle.innerText = "De Lijn";
 
     const previewElementIcon = document.createElement("div");
-    previewElementIcon.classList.add("delijn-icon-128");
-    previewElementIcon.style.marginBottom = "2rem";
+    previewElementIcon.classList.add("delijn-icon-128-container");
+    previewElementIcon.innerHTML = lijnIconSvg;
 
     previewElement.appendChild(previewElementTitle);
     previewElement.appendChild(previewElementIcon);

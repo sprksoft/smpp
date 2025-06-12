@@ -1,10 +1,10 @@
 // i'm a true ✨ Vibe Coder ✨ - Jdev
 // code for assignments list 📂
 // THANK YOU LDEVVVV 🫂🫂🫂
+const DEBUG = false;
 
 class TakenWidget extends WidgetBase {
   createContent() {
-    const DEBUG = false;
     const foresight = 28; // dagen in de toekomst dat het zoekt voor taken
     let maxAssignments = 5;
     let userId;

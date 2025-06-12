@@ -261,12 +261,12 @@
   font-weight: 700;
   margin-bottom: 0.5rem;
 }
+.delijn-icon-128-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 .delijn-icon-128 {
-  background-image: url(https://images.hln.be/MzYxNjQxMDRmZDc4YTU1ZmUyMTEvZGlvLzYxMTcyNTg1L2ZpdC13aWR0aC82OTQ) !important;
-  background-size: 128px 128px;
-  min-height: 128px;
-  min-width: 128px;
-  background-repeat: no-repeat;
-  background-position: center;
+  width: 128px;
 }
