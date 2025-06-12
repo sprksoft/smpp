@@ -121,7 +121,6 @@ async function apply() {
   userNameChanger(data.customName);
   decapitateಠ_ಠ();
 
-  console.log(data.theme);
   await setTheme(data.theme);
   currentTheme = data.theme;
   showNews(data.showNews);
@@ -243,8 +242,10 @@ async function storeQuickSettings() {
 
     data.backgroundSelection = 2;
     data.backgroundLink = file.name;
-    console.log(data);
-    browser.runtime.sendMessage({ action: "setQuickSettingsData", data: data });
+    await browser.runtime.sendMessage({
+      action: "setQuickSettingsData",
+      data: data,
+    });
 
     window.location.reload();
     return;
@@ -255,7 +256,7 @@ async function storeQuickSettings() {
       data.backgroundSelection = 1;
     }
   }
-  console.log(data);
+  console.log("Storing this new data:", data);
   await browser.runtime.sendMessage({
     action: "setQuickSettingsData",
     data: data,
@@ -305,13 +306,13 @@ function set_backgroundlink(background) {
       style.setProperty("--loginpage-image", `url(${background})`);
     };
     img.onerror = () => {
-      console.log("Image failed to load from link:", background);
+      console.error("Image failed to load from link:", background);
     };
   }
 }
 
 function migrate_theme_data(old_themeData) {
-  console.log("migrating_data");
+  console.warn("migrating theme data");
   const themeData = {
     color_base00: old_themeData.base0,
     color_base01: old_themeData.base1,
@@ -361,7 +362,7 @@ async function loadQuickSettings() {
   const data = await browser.runtime.sendMessage({
     action: "getQuickSettingsData",
   });
-  console.log(data);
+  console.log("Loaded this data:", data);
   document.getElementById("theme-selector").value = data.theme;
   document.getElementById("background-link-input").value = data.backgroundLink;
 
@@ -778,32 +779,3 @@ function main() {
 }
 
 main();
-
-function PLEASE_DELETE_ME_WHEN_FIXED() {
-  return {
-    quicks: [],
-    profile: "birb",
-    halte: true,
-    overwrite_theme: 0,
-    location: "keerbergen",
-    weatherSelection: 0,
-    blur: "2",
-    weatherAmount: 0,
-    shownews: true,
-    showsnake: false,
-    showflappy: false,
-    backgroundlink: "none",
-    backgroundfile: "none",
-    show_scores: false,
-    isbig: true,
-    showplanner: true,
-    name_override: null,
-    show_plant: true,
-    smpp_logo: true,
-    enableanimations: true,
-    username_override: "Lukas Vanden Berghe",
-  };
-}
-function DELETE_ME_ASS_WELL_SAVE_FUNCTION() {
-  return;
-}

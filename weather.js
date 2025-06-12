@@ -89,7 +89,7 @@ class CompactWeatherWidget extends WidgetBase {
 registerWidget(new CompactWeatherWidget());
 
 async function migrateWeaterData() {
-  console.log("Migrating weather data");
+  console.warn("Migrating weather data");
   let newWeatherData = localStorage.getItem("weatherdata");
   if (newWeatherData == null) {
     newWeatherData = await browser.runtime.sendMessage({
@@ -112,7 +112,6 @@ async function migrateWeaterData() {
 }
 
 function createWeatherWidgetPreview(container, data, isCompact) {
-  console.log("got called");
   let weatherData = data.weatherData;
   let mainIcon = document.createElement("div");
   mainIcon.classList.add("weather-icon-container");

@@ -1,5 +1,7 @@
-let quicks = quick_load();
-
+let quicks = [];
+async () => {
+  quicks = await quick_load();
+};
 let links = [];
 let vakken = [];
 let goto_items = [];
@@ -51,7 +53,7 @@ async function quick_load() {
 }
 
 async function quick_save() {
-  let quicks = await browser.runtime.sendMessage({
+  await browser.runtime.sendMessage({
     action: "setQuickSetting",
     name: "quicks",
     values: quicks,
@@ -97,17 +99,22 @@ function remove_quick_interactive() {
 }
 
 //TODO: make this better
-function config_menu() {
-  let conf = PLEASE_DELETE_ME_WHEN_FIXED();
+async function config_menu() {
+  const conf = await browser.runtime.sendMessage({
+    action: "getQuickSettingsData",
+  });
   let cmd_list = Object.keys(conf);
   dmenu(
     cmd_list,
     function (cmd, shift) {
       conf[cmd] = dmenu(
         [],
-        function (val, shift) {
+        async function (val, shift) {
           conf[cmd] = val;
-          DELETE_ME_ASS_WELL_SAVE_FUNCTION(conf);
+          await browser.runtime.sendMessage({
+            action: "setQuickSettingsData",
+            data: conf,
+          });
         },
         "value:"
       );

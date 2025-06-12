@@ -106,7 +106,6 @@ async function remove_gcwin() {
   let win = document.getElementById("global_chat_window");
   if (win) {
     win.remove();
-    console.log("removed win");
   }
 }
 

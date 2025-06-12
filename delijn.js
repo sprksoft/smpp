@@ -162,7 +162,7 @@ async function createHalteDoorkomst(doorkomst, container) {
     );
   } catch (err) {
     if (err.name === "AbortError") {
-      console.log(`Request for lijn ${lijnKey} was aborted`);
+      console.error(`Request for lijn ${lijnKey} was aborted`);
       return;
     }
     console.error(err);
@@ -272,7 +272,6 @@ class DelijnWidget extends WidgetBase {
     const delijnData = await fetchDelijnData(
       `https://api.delijn.be/DLKernOpenData/api/v1/haltes/${entiteitnummer}/${haltenummer}/real-time?maxAantalDoorkomsten=5`
     );
-    console.log(delijnData);
     if (!delijnData.halteDoorkomsten[0]) {
       this.displayInfo(
         "Er zijn momenteel geen bussen beschikbaar voor deze halte."
@@ -454,7 +453,6 @@ class DelijnWidget extends WidgetBase {
       haltenummer: halteElement.dataset.haltenummer,
     };
     await setDelijnAppData(delijnAppData);
-    console.log("clicked there", delijnAppData);
     await this.displayLijnenBasedOnHalte(
       delijnAppData.entiteitnummer,
       delijnAppData.haltenummer
@@ -482,13 +480,11 @@ class DelijnWidget extends WidgetBase {
         "delijnInfoContainerVisible"
       );
       this.elements.bottomContainer.appendChild(this.elements.infoContainer);
-      console.log(this.elements.bottomContainer);
     }
     return this.elements.infoContainer;
   }
 
   displayInfo(info) {
-    console.log(info);
     const infoContainer = this.createInfoElement();
     if (info) infoContainer.innerText = info;
     infoContainer.classList.add("delijnInfoContainerVisible");
