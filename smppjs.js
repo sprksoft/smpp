@@ -760,8 +760,144 @@ function createTopButtons(onHomePage) {
   }
 }
 
-function main() {
+async function migrateSettings() {
+  let oldData = JSON.parse(window.localStorage.getItem("settingsdata"));
+  console.log("Old data:", oldData);
+  // Convert to widgets
+  let widgetData = {
+    leftPannels: [],
+    rightPannels: [],
+  };
+  if (!liteMode) {
+    if (oldData.showplanner) {
+      widgetData.leftPannels.push({
+        widgets: ["PlannerWidget"],
+      });
+    }
+
+    if (oldData.halte) {
+      widgetData.leftPannels.push({
+        widgets: ["DelijnWidget"],
+      });
+    }
+
+    let firstRightPanel = {
+      widgets: [],
+    };
+    let secondRightPanel = {
+      widgets: [],
+    };
+
+    if (oldData.show_plant) {
+      firstRightPanel.widgets.push("PlantWidget");
+    }
+
+    if (oldData.location && oldData.location !== "") {
+      let weatherWidget = oldData.isbig
+        ? "WeatherWidget"
+        : "CompactWeatherWidget";
+      secondRightPanel.widgets.push(weatherWidget);
+    }
+
+    if (oldData.showsnake) {
+      secondRightPanel.widgets.push("SnakeWidget");
+    }
+
+    if (oldData.showflappy) {
+      secondRightPanel.widgets.push("FlappyWidget");
+    }
+
+    if (firstRightPanel.widgets.length > 0) {
+      widgetData.rightPannels.push(firstRightPanel);
+    }
+    if (secondRightPanel.widgets.length > 0) {
+      widgetData.rightPannels.push(secondRightPanel);
+    }
+  } else {
+    if (oldData.showplanner) {
+      widgetData.leftPannels.push({
+        widgets: ["PlannerWidget"],
+      });
+    }
+
+    if (oldData.halte) {
+      widgetData.leftPannels.push({
+        widgets: ["DelijnWidget"],
+      });
+    }
+
+    let firstRightPanel = {
+      widgets: [],
+    };
+
+    if (oldData.show_plant) {
+      firstRightPanel.widgets.push("PlantWidget");
+    }
+
+    if (oldData.location && oldData.location !== "") {
+      let weatherWidget = oldData.isbig
+        ? "WeatherWidget"
+        : "CompactWeatherWidget";
+      firstRightPanel.widgets.push(weatherWidget);
+    }
+
+    if (firstRightPanel.widgets.length > 0) {
+      widgetData.rightPannels.push(firstRightPanel);
+    }
+  }
+  // Convert to quickSettings
+  let quickSettings;
+  if (!liteMode) {
+    quickSettings = {
+      theme: oldData.profile,
+      enableSMPPLogo: oldData.smpp_logo,
+      enablePerfomanceMode: !oldData.enableanimations,
+      backgroundSelection: oldData.overwrite_theme,
+      backgroundLink: oldData.backgroundlink,
+      backgroundBlurAmount: oldData.blur,
+      showNews: oldData.shownews,
+      quicks: oldData.quicks,
+      weatherOverlaySelection: oldData.weatherSelection,
+      weatherOverlayAmount: oldData.weatherAmount,
+      customUserName: oldData.name_override,
+    };
+  } else {
+    quickSettings = {
+      theme: oldData.profile,
+      enableSMPPLogo: oldData.smpp_logo,
+      enablePerfomanceMode: !oldData.enableanimations,
+      backgroundSelection: oldData.overwrite_theme,
+      backgroundLink: oldData.backgroundlink,
+      backgroundBlurAmount: oldData.blur,
+      showNews: oldData.shownews,
+      customUserName: oldData.name_override,
+      quicks: oldData.quicks,
+    };
+  }
+
+  // Save new data
+  console.log("new data:", quickSettings, widgetData);
+
+  await browser.runtime.sendMessage({
+    action: "setQuickSettingsData",
+    data: quickSettings,
+  });
+
+  await browser.runtime.sendMessage({
+    action: "setWidgetData",
+    widgetData: widgetData,
+  });
+
+  window.localStorage.removeItem("settingsdata");
+}
+
+async function main() {
   document.body.classList.add("smpp"); // For modding
+
+  if (window.localStorage.getItem("settingsdata")) {
+    await migrateSettings();
+  }
+
   apply();
   createWidgetSystem();
 
