@@ -1,5 +1,5 @@
 export async function fetchWeatherData(location) {
-  const apiKey = atob("MmI2ZjliNmRiZTUwNjRkZDc3MGYyOWQ0YjIyOWEyMmM="); // only realy stops bots but who cares?
+  const apiKey = "2b6f9b6dbe5064dd770f29d4b229a22c";
   try {
     console.log("Fetching Weather data...");
     const response = await fetch(
@@ -16,7 +16,7 @@ export async function fetchWeatherData(location) {
   }
 }
 export async function fetchDelijnData(apiUrl) {
-  const apiKey = atob("ZGRiNjg2MDU3MTlkNGJiOGI2NDQ0YjY4NzFjZWZjN2E=");
+  const apiKey = "ddb68605719d4bb8b6444b6871cefc7a";
   try {
     console.log("Fetching Delijn data...");
     const response = await fetch(apiUrl, {

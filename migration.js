@@ -78,7 +78,7 @@ function migrate_theme_data(old_themeData) {
 
 async function migrateWeaterData() {
   console.warn("Migrating weather data");
-  let newWeatherData = localStorage.getItem("weatherdata");
+  let newWeatherData = JSON.parse(localStorage.getItem("weatherdata"));
   if (newWeatherData == null) {
     newWeatherData = await browser.runtime.sendMessage({
       action: "fetchWeatherData",

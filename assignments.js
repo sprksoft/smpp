@@ -57,10 +57,6 @@ class TakenWidget extends WidgetBase {
       sendDebug("Next Date:", getFutureDate(foresight));
     }
 
-
-
-
-
     async function fetchPlannerData() {
       try {
         const schoolName = getSchoolName();
