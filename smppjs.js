@@ -747,6 +747,10 @@ function createTopButtons(onHomePage) {
 }
 
 async function main() {
+  if (document.body.classList.contains("smpp")) {
+    console.error("smpp is waarschijnlijk 2 keer geladen");
+    alert("smpp is waarschijnlijk 2 keer geladen")
+  }
   document.body.classList.add("smpp"); // For modding
 
   if (window.localStorage.getItem("settingsdata")) {
