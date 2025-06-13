@@ -1,4 +1,5 @@
 let quicks = [];
+
 async () => {
   quicks = await quick_load();
 };

@@ -1,0 +1,6 @@
+.gitignore
+README.md
+todos.md
+build
+.git
+web-ext-artifacts

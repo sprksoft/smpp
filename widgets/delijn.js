@@ -1,5 +1,5 @@
 // Constants and configuration
-let delijnSearchResultLimit = 5;
+
 let lijnDataKleuren;
 const lijnUpdateControllers = {};
 
@@ -315,14 +315,12 @@ class DelijnWidget extends WidgetBase {
   }
 
   async showHalteOptions(searchQuery) {
-    // Abort previous request
-    if (this.currentAbortController) {
-      this.currentAbortController.abort();
+    if (this.currentHalteOptionsAbortController) {
+      this.currentHalteOptionsAbortController.abort();
     }
 
-    // Create a new controller for this request
-    this.currentAbortController = new AbortController();
-    const signal = this.currentAbortController.signal;
+    this.currentHalteOptionsAbortController = new AbortController();
+    const signal = this.currentHalteOptionsAbortController.signal;
 
     let delijnHaltesData;
     try {
@@ -331,7 +329,7 @@ class DelijnWidget extends WidgetBase {
         { signal }
       );
     } catch (error) {
-      if (error.name === "AbortError") return; // Silently ignore aborted request
+      if (error.name === "AbortError") return;
       this.displayInfo("Er liep iets mis: " + error);
       return;
     }
@@ -369,9 +367,10 @@ class DelijnWidget extends WidgetBase {
         delijnHaltesLijnrichtingenData.halteLijnrichtingen.slice(startIndex);
 
       for (let i = 0; i < results.length; i++) {
-        if (signal.aborted) return;
+        if (signal.aborted) return; // <--- Early return before running `createHalteOption`
         const halte = results[i];
-        await this.createHalteOption(halte);
+        await this.createHalteOption(halte, signal); // Pass signal down
+        if (signal.aborted) return; // <--- In case abort happens during async call
       }
 
       if (delijnHaltesData.aantalHits > this.searchResultLimit) {
@@ -385,7 +384,9 @@ class DelijnWidget extends WidgetBase {
     }
   }
 
-  async createHalteOption(halte) {
+  async createHalteOption(halte, signal) {
+    if (signal.aborted) return;
+
     const halteLijnCard = document.createElement("div");
     halteLijnCard.dataset.entiteitnummer = halte.halte.entiteitnummer;
     halteLijnCard.dataset.haltenummer = halte.halte.haltenummer;
@@ -401,15 +402,27 @@ class DelijnWidget extends WidgetBase {
     const lijnenArray = [];
 
     for (const lijnrichting of halte.lijnrichtingen.slice(0, 5)) {
+      if (signal.aborted) return;
+
       const lijn = document.createElement("span");
       lijn.classList.add("lijnNumber", "halteLijnNumber");
       lijn.dataset.entiteitnummer = lijnrichting.entiteitnummer;
       lijn.dataset.lijnnummer = lijnrichting.lijnnummer;
       lijnenContainer.append(lijn);
 
-      const individualLijnData = await fetchDelijnData(
-        `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${lijnrichting.entiteitnummer}/${lijnrichting.lijnnummer}`
-      );
+      let individualLijnData;
+      try {
+        individualLijnData = await fetchDelijnData(
+          `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${lijnrichting.entiteitnummer}/${lijnrichting.lijnnummer}`,
+          { signal }
+        );
+      } catch (error) {
+        if (error.name === "AbortError") return;
+        console.error("Lijn data fetch error:", error);
+        continue;
+      }
+
+      if (signal.aborted) return;
 
       if (lijnenArray.includes(individualLijnData.lijnnummerPubliek)) {
         lijn.remove();
@@ -419,9 +432,19 @@ class DelijnWidget extends WidgetBase {
       lijnenArray.push(individualLijnData.lijnnummerPubliek);
       lijn.innerText = individualLijnData.lijnnummerPubliek;
 
-      const individualLijnDataColors = await fetchDelijnData(
-        `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${lijnrichting.entiteitnummer}/${lijnrichting.lijnnummer}/lijnkleuren`
-      );
+      let individualLijnDataColors;
+      try {
+        individualLijnDataColors = await fetchDelijnData(
+          `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${lijnrichting.entiteitnummer}/${lijnrichting.lijnnummer}/lijnkleuren`,
+          { signal }
+        );
+      } catch (error) {
+        if (error.name === "AbortError") return;
+        console.error("Lijn color fetch error:", error);
+        continue;
+      }
+
+      if (signal.aborted) return;
 
       lijn.style.backgroundColor = getHexByCode(
         individualLijnDataColors.achtergrond.code
@@ -435,11 +458,14 @@ class DelijnWidget extends WidgetBase {
     halteLijnCard.addEventListener("click", (event) => {
       this.choseThisHalte(event.currentTarget);
     });
-    this.elements.bottomContainer.appendChild(halteLijnCard);
-    if (document.body.classList.contains("enableAnimations"));
+
+    if (!signal.aborted) {
+      this.elements.bottomContainer.appendChild(halteLijnCard);
+    }
   }
 
   async choseThisHalte(halteElement) {
+    this.currentHalteOptionsAbortController?.abort();
     const delijnAppData = {
       entiteitnummer: halteElement.dataset.entiteitnummer,
       haltenummer: halteElement.dataset.haltenummer,
@@ -463,7 +489,6 @@ class DelijnWidget extends WidgetBase {
     this.elements.bottomContainer.appendChild(showMoreButton);
   }
 
-  // Info display methods
   createInfoElement() {
     if (!this.elements.infoContainer) {
       this.elements.infoContainer = document.createElement("div");

@@ -4,9 +4,6 @@
 let currentThemeVars;
 let quickSettingsWindowIsHidden = true;
 
-function unbloat() {
-  document.body.innerHTML = "";
-}
 function discordpopup() {
   let discordelement = document.createElement("div");
   discordelement.innerHTML = discordSvg;
@@ -23,24 +20,6 @@ function changeLogoutText() {
 function openFileSelector() {
   document.getElementById("background-file-input").click();
 }
-async function clearsettings() {
-  localStorage.clear();
-  await browser.runtime.sendMessage({
-    action: "clearLocalStorage",
-  });
-  console.log("Cleared settings!");
-}
-
-function fileToBase64(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result.split(",")[1]);
-    reader.onerror = (error) => reject(error);
-  });
-}
-const anakin = 56789;
-const skywalker = 98765;
 
 function changeFont() {
   let fontLinks = document.createElement("div");
@@ -749,7 +728,7 @@ function createTopButtons(onHomePage) {
 async function main() {
   if (document.body.classList.contains("smpp")) {
     console.error("smpp is waarschijnlijk 2 keer geladen");
-    alert("smpp is waarschijnlijk 2 keer geladen")
+    alert("smpp is waarschijnlijk 2 keer geladen");
   }
   document.body.classList.add("smpp"); // For modding
 

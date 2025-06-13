@@ -1,4 +1,4 @@
-pixelsPerMinute = 1.46;
+const pixelsPerMinute = 1.46;
 
 async function fetchPlannerData(date, user) {
   try {
