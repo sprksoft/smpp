@@ -320,7 +320,7 @@ class PlannerWidget extends WidgetBase {
 
     const previewElementIcon = document.createElement("div");
     previewElementIcon.classList.add("planner-icon-128");
-    previewElementIcon.style.marginBottom = "2rem";
+    previewElementIcon.style.marginBottom = "1rem";
 
     previewElement.appendChild(previewElementTitle);
     previewElement.appendChild(previewElementIcon);

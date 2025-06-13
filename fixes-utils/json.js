@@ -324,3 +324,16 @@ const lijnIconSvg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://w
   <circle cx="181" cy="571" r="65" fill="#e4f5ff" id="circle9"/>
   <circle cx="509" cy="570" r="65" fill="#e4f5ff" id="circle10"/>
 </svg>`;
+
+const assignmentsSvg = `<svg class="assignments-icon-160" viewBox="0 0 500 500" style=" mix-blend-mode: normal !important;" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="500" fill="#1E1E1E"/>
+<rect width="500" height="500" rx="54" fill="#ddddea"/>
+<rect x="31" y="265" width="436" height="200" rx="37" fill="#B2B2BE"/>
+<rect x="58" y="297" width="136" height="136" rx="30" fill="#1a96f1"/>
+<rect x="210" y="321" width="230" height="39" rx="19.5" fill="#7C7C87"/>
+<rect x="210" y="380" width="171" height="30" rx="15" fill="#7C7C87"/>
+<rect x="31" y="33" width="436" height="200" rx="37" fill="#B2B2BE"/>
+<rect x="58" y="65" width="136" height="136" rx="30" fill="#ff520e"/>
+<rect x="210" y="89" width="230" height="39" rx="19.5" fill="#7C7C87"/>
+<rect x="210" y="148" width="171" height="30" rx="15" fill="#7C7C87"/>
+</svg>`;

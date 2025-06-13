@@ -530,6 +530,7 @@ class DelijnWidget extends WidgetBase {
     const previewElementIcon = document.createElement("div");
     previewElementIcon.classList.add("delijn-icon-128-container");
     previewElementIcon.innerHTML = lijnIconSvg;
+    previewElementIcon.style.marginBottom = "1rem";
 
     previewElement.appendChild(previewElementTitle);
     previewElement.appendChild(previewElementIcon);

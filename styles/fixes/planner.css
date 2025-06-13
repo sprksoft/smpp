@@ -788,3 +788,20 @@ h3.detail-description__title.title--3,
   font-weight: 700;
   margin-bottom: 0.5rem;
 }
+
+.assignments-icon-160-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.assignments-icon-160 {
+  height: 160px;
+}
+
+.assignments-preview-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}

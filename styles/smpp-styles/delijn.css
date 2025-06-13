@@ -199,10 +199,11 @@
 #delijnTopContainer {
   display: flex;
   flex-direction: row;
-  gap: 12.5px !important;
+  align-items: center;
+  gap: 1rem !important;
 }
 
-.halteInput {
+.popupinput.halteInput {
   flex-grow: 1;
   height: 40px !important;
   margin: 0px !important;

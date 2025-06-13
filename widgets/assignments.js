@@ -228,6 +228,23 @@ class TakenWidget extends WidgetBase {
     }
     return initTaskList();
   }
+  async createPreview() {
+    const previewElement = document.createElement("div");
+
+    const previewElementTitle = document.createElement("div");
+    previewElementTitle.classList.add("assignments-preview-title");
+    previewElementTitle.innerText = "Assignments";
+
+    const previewElementIcon = document.createElement("div");
+    previewElementIcon.classList.add("assignments-icon-160-container");
+    previewElementIcon.style.marginBottom = "1rem";
+    previewElementIcon.innerHTML = assignmentsSvg;
+
+    previewElement.appendChild(previewElementTitle);
+    previewElement.appendChild(previewElementIcon);
+
+    return previewElement;
+  }
 }
 
 function sendDebug(...messages) {

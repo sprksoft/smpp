@@ -26,6 +26,26 @@ function changeFont() {
   fontLinks.innerHTML = `<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">`;
   document.getElementsByTagName("head")[0].appendChild(fontLinks);
 }
+
+function fixCoursesSearch() {
+  document
+    .getElementById("courseSearch")
+    .addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+
+        setTimeout(() => {
+          const firstCourse = document.querySelector(
+            ".course-list.js-courses-list li a"
+          );
+          if (firstCourse) {
+            firstCourse.click();
+          }
+        }, 100);
+      }
+    });
+}
+
 function decapitateಠ_ಠ() {
   let style_el = document.createElement("style");
   style_el.innerHTML = `
@@ -99,6 +119,7 @@ async function apply() {
   changeFont();
   userNameChanger(data.customName);
   decapitateಠ_ಠ();
+  fixCoursesSearch();
 
   await setTheme(data.theme);
   currentTheme = data.theme;
