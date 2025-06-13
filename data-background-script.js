@@ -52,7 +52,7 @@ export async function getQuickSettingsData() {
 
 export async function getWidgetData() {
   let data = await browser.storage.local.get("widgets");
-  return data.widgets; // fix this when making migration func (funky)
+  return data.widgets;
 }
 export async function setWidgetData(widgetData) {
   await browser.storage.local.set({ widgets: widgetData });
@@ -75,28 +75,6 @@ export async function getWeatherAppData() {
   });
 
   return weatherAppData;
-}
-
-export async function getDelijnColorData() {
-  try {
-    let data = await browser.storage.local.get("delijnColorData");
-    let delijnColorData;
-    if (data.delijnColorData?.kleuren != undefined) {
-      delijnColorData = data.delijnColorData;
-    } else {
-      delijnColorData = await fetchDelijnData(
-        "https://api.delijn.be/DLKernOpenData/api/v1/kleuren"
-      );
-    }
-
-    await browser.storage.local.set({
-      delijnColorData: delijnColorData,
-    });
-    console.log("Retrieved Delijn Color Data.");
-    return delijnColorData;
-  } catch (error) {
-    console.error("Error retrieving Delijn Color Data:", error);
-  }
 }
 
 export async function getDelijnAppData() {
@@ -124,4 +102,395 @@ export async function getPlantAppData() {
 export async function getCustomThemeData() {
   let data = await browser.storage.local.get("customThemeData");
   return data.customThemeData || getDefaultCustomThemeData();
+}
+
+export async function getDelijnColorData() {
+  return {
+    kleuren: [
+      {
+        code: "TU",
+        hex: "0099AA",
+        links: [
+          {
+            rel: "detail",
+            url: "https://api.delijn.be/DLKernOpenData/api/v1/kleuren/TU",
+          },
+        ],
+        omschrijving: "Turkoois",
+        rgb: {
+          blauw: 170,
+          groen: 153,
+          rood: 0,
+        },
+      },
+      {
+        code: "RZ",
+        hex: "FF88AA",
+        links: [
+          {
+            rel: "detail",
+            url: "https://api.delijn.be/DLKernOpenData/api/v1/kleuren/RZ",
+          },
+        ],
+        omschrijving: "Roze",
+        rgb: {
+          blauw: 170,
+          groen: 136,
+          rood: 255,
+        },
+      },
+      {
+        code: "OR",
+        hex: "EE8822",
+        links: [
+          {
+            rel: "detail",
+            url: "https://api.delijn.be/DLKernOpenData/api/v1/kleuren/OR",
+          },
+        ],
+        omschrijving: "Oranje",
+        rgb: {
+          blauw: 34,
+          groen: 136,
+          rood: 238,
+        },
+      },
+      {
+        code: "RO",
+        hex: "BB0022",
+        links: [
+          {
+            rel: "detail",
+            url: "https://api.delijn.be/DLKernOpenData/api/v1/kleuren/RO",
+          },
+        ],
+        omschrijving: "Rood",
+        rgb: {
+          blauw: 34,
+          groen: 0,
+          rood: 187,
+        },
+      },
+      {
+        code: "PA",
+        hex: "991199",
+        links: [
+          {
+            rel: "detail",
+            url: "https://api.delijn.be/DLKernOpenData/api/v1/kleuren/PA",
+          },
+        ],
+        omschrijving: "Paars",
+        rgb: {
+          blauw: 153,
+          groen: 17,
+          rood: 153,
+        },
+      },
+      {
+        code: "MA",
+        hex: "DD0077",
+        links: [
+          {
+            rel: "detail",
+            url: "https://api.delijn.be/DLKernOpenData/api/v1/kleuren/MA",
+          },
+        ],
+        omschrijving: "Magenta",
+        rgb: {
+          blauw: 119,
+          groen: 0,
+          rood: 221,
+        },
+      },
+      {
+        code: "LB",
+        hex: "AACCEE",
+        links: [
+          {
+            rel: "detail",
+            url: "https://api.delijn.be/DLKernOpenData/api/v1/kleuren/LB",
+          },
+        ],
+        omschrijving: "Lichtblauw",
+        rgb: {
+          blauw: 238,
+          groen: 204,
+          rood: 170,
+        },
+      },
+      {
+        code: "GE",
+        hex: "FFCC11",
+        links: [
+          {
+            rel: "detail",
+            url: "https://api.delijn.be/DLKernOpenData/api/v1/kleuren/GE",
+          },
+        ],
+        omschrijving: "Geel",
+        rgb: {
+          blauw: 17,
+          groen: 204,
+          rood: 255,
+        },
+      },
+      {
+        code: "GR",
+        hex: "229922",
+        links: [
+          {
+            rel: "detail",
+            url: "https://api.delijn.be/DLKernOpenData/api/v1/kleuren/GR",
+          },
+        ],
+        omschrijving: "Groen",
+        rgb: {
+          blauw: 34,
+          groen: 153,
+          rood: 34,
+        },
+      },
+      {
+        code: "MU",
+        hex: "77CCAA",
+        links: [
+          {
+            rel: "detail",
+            url: "https://api.delijn.be/DLKernOpenData/api/v1/kleuren/MU",
+          },
+        ],
+        omschrijving: "Munt",
+        rgb: {
+          blauw: 170,
+          groen: 204,
+          rood: 119,
+        },
+      },
+      {
+        code: "KA",
+        hex: "995511",
+        links: [
+          {
+            rel: "detail",
+            url: "https://api.delijn.be/DLKernOpenData/api/v1/kleuren/KA",
+          },
+        ],
+        omschrijving: "Kastanje",
+        rgb: {
+          blauw: 17,
+          groen: 85,
+          rood: 153,
+        },
+      },
+      {
+        code: "BL",
+        hex: "1199DD",
+        links: [
+          {
+            rel: "detail",
+            url: "https://api.delijn.be/DLKernOpenData/api/v1/kleuren/BL",
+          },
+        ],
+        omschrijving: "Blauw",
+        rgb: {
+          blauw: 221,
+          groen: 153,
+          rood: 17,
+        },
+      },
+      {
+        code: "ZA",
+        hex: "FFCCAA",
+        links: [
+          {
+            rel: "detail",
+            url: "https://api.delijn.be/DLKernOpenData/api/v1/kleuren/ZA",
+          },
+        ],
+        omschrijving: "Zalm",
+        rgb: {
+          blauw: 170,
+          groen: 204,
+          rood: 255,
+        },
+      },
+      {
+        code: "BO",
+        hex: "771133",
+        links: [
+          {
+            rel: "detail",
+            url: "https://api.delijn.be/DLKernOpenData/api/v1/kleuren/BO",
+          },
+        ],
+        omschrijving: "Bordeaux",
+        rgb: {
+          blauw: 51,
+          groen: 17,
+          rood: 119,
+        },
+      },
+      {
+        code: "KI",
+        hex: "444411",
+        links: [
+          {
+            rel: "detail",
+            url: "https://api.delijn.be/DLKernOpenData/api/v1/kleuren/KI",
+          },
+        ],
+        omschrijving: "Kaki",
+        rgb: {
+          blauw: 17,
+          groen: 68,
+          rood: 68,
+        },
+      },
+      {
+        code: "DB",
+        hex: "0044BB",
+        links: [
+          {
+            rel: "detail",
+            url: "https://api.delijn.be/DLKernOpenData/api/v1/kleuren/DB",
+          },
+        ],
+        omschrijving: "Donkerblauw",
+        rgb: {
+          blauw: 187,
+          groen: 68,
+          rood: 0,
+        },
+      },
+      {
+        code: "LG",
+        hex: "BBDD00",
+        links: [
+          {
+            rel: "detail",
+            url: "https://api.delijn.be/DLKernOpenData/api/v1/kleuren/LG",
+          },
+        ],
+        omschrijving: "Lichtgroen",
+        rgb: {
+          blauw: 0,
+          groen: 221,
+          rood: 187,
+        },
+      },
+      {
+        code: "PE",
+        hex: "005555",
+        links: [
+          {
+            rel: "detail",
+            url: "https://api.delijn.be/DLKernOpenData/api/v1/kleuren/PE",
+          },
+        ],
+        omschrijving: "Petrol",
+        rgb: {
+          blauw: 85,
+          groen: 85,
+          rood: 0,
+        },
+      },
+      {
+        code: "ST",
+        hex: "8899AA",
+        links: [
+          {
+            rel: "detail",
+            url: "https://api.delijn.be/DLKernOpenData/api/v1/kleuren/ST",
+          },
+        ],
+        omschrijving: "Staal",
+        rgb: {
+          blauw: 170,
+          groen: 153,
+          rood: 136,
+        },
+      },
+      {
+        code: "WI",
+        hex: "FFFFFF",
+        links: [
+          {
+            rel: "detail",
+            url: "https://api.delijn.be/DLKernOpenData/api/v1/kleuren/WI",
+          },
+        ],
+        omschrijving: "Wit",
+        rgb: {
+          blauw: 255,
+          groen: 255,
+          rood: 255,
+        },
+      },
+      {
+        code: "GD",
+        hex: "FFDD00",
+        links: [
+          {
+            rel: "detail",
+            url: "https://api.delijn.be/DLKernOpenData/api/v1/kleuren/GD",
+          },
+        ],
+        omschrijving: "GeelDeLijn",
+        rgb: {
+          blauw: 0,
+          groen: 221,
+          rood: 255,
+        },
+      },
+      {
+        code: "ZW",
+        hex: "000000",
+        links: [
+          {
+            rel: "detail",
+            url: "https://api.delijn.be/DLKernOpenData/api/v1/kleuren/ZW",
+          },
+        ],
+        omschrijving: "Zwart",
+        rgb: {
+          blauw: 0,
+          groen: 0,
+          rood: 0,
+        },
+      },
+      {
+        code: "CR",
+        hex: "C5AA77",
+        links: [
+          {
+            rel: "detail",
+            url: "https://api.delijn.be/DLKernOpenData/api/v1/kleuren/CR",
+          },
+        ],
+        omschrijving: "CrÃ¨me",
+        rgb: {
+          blauw: 119,
+          groen: 170,
+          rood: 197,
+        },
+      },
+      {
+        code: "BD",
+        hex: "000099",
+        links: [
+          {
+            rel: "detail",
+            url: "https://api.delijn.be/DLKernOpenData/api/v1/kleuren/BD",
+          },
+        ],
+        omschrijving: "BlauwDeLijn",
+        rgb: {
+          blauw: 153,
+          groen: 0,
+          rood: 0,
+        },
+      },
+    ],
+  };
 }

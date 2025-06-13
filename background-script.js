@@ -118,8 +118,8 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
     }
     // Games
     if (message.action === "getGameData") {
-      const gd = await browser.storage.local.get("Game." + message.game);
-      const gameData = gd["Game." + message.game];
+      let gameData = await browser.storage.local.get("Game." + message.game);
+      gameData = gameData["Game." + message.game];
       if (!gameData) {
         sendResponse({
           options: {},
@@ -131,9 +131,9 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
     }
     if (message.action === "setGameData") {
       console.log("saving game data");
-      let gd = {};
-      gd["Game." + message.game] = message.data;
-      await browser.storage.local.set(gd);
+      let gameData = {};
+      gameData["Game." + message.game] = message.data;
+      await browser.storage.local.set(gameData);
       sendResponse({ success: true });
     }
   })();

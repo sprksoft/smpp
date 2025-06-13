@@ -55,6 +55,7 @@
         "breakout.js",
         "login.js",
         "assignments.js",
+        "migration.js",
         "smppjs.js"
       ]
     }

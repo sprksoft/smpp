@@ -88,29 +88,6 @@ class CompactWeatherWidget extends WidgetBase {
 }
 registerWidget(new CompactWeatherWidget());
 
-async function migrateWeaterData() {
-  console.warn("Migrating weather data");
-  let newWeatherData = localStorage.getItem("weatherdata");
-  if (newWeatherData == null) {
-    newWeatherData = await browser.runtime.sendMessage({
-      action: "fetchWeatherData",
-      location: localStorage.getItem("lastlocation"),
-    });
-  }
-  await browser.runtime.sendMessage({
-    action: "setWeatherAppData",
-    data: {
-      weatherData: newWeatherData,
-      lastUpdateDate: localStorage.getItem("lastupdate"),
-      lastLocation: localStorage.getItem("lastlocation"),
-    },
-  });
-
-  localStorage.removeItem("weatherdata");
-  localStorage.removeItem("lastupdate");
-  localStorage.removeItem("lastlocation");
-}
-
 function createWeatherWidgetPreview(container, data, isCompact) {
   let weatherData = data.weatherData;
   let mainIcon = document.createElement("div");

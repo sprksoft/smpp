@@ -41,7 +41,9 @@ class GameBase extends WidgetBase {
 
   constructor() {
     document.addEventListener("keydown", async (e) => {
-      if(e.repeat) { return; }
+      if (e.repeat) {
+        return;
+      }
       if (this.playing) {
         await this.onKeyDown(e);
       } else if (this.hasPlayedAtLeastOnce) {
@@ -148,6 +150,15 @@ class GameBase extends WidgetBase {
       action: "getGameData",
       game: this.constructor.name,
     });
+    if (this.constructor.name == "SnakeWidget") {
+      if (window.localStorage.getItem("snakehighscore")) {
+        gameData = await migrateSnake();
+      }
+    } else if (this.constructor.name == "FlappyWidget") {
+      if (window.localStorage.getItem("flappyhighscore")) {
+        gameData = await migrateFlappy();
+      }
+    }
     this.#options = {};
 
     let div = document.createElement("div");

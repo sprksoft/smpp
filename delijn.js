@@ -55,14 +55,6 @@ async function setDelijnAppData(data) {
   });
 }
 
-async function migrateDelijnData() {
-  const lijnData = JSON.parse(localStorage.getItem("lijnData"));
-  if (lijnData) {
-    await setDelijnAppData(lijnData);
-    localStorage.removeItem("lijnData");
-  }
-}
-
 // Display functions
 async function createHalteDoorkomst(doorkomst, container) {
   const entiteitnummer = doorkomst.entiteitnummer;

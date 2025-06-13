@@ -28,26 +28,6 @@ class PlantWidget extends WidgetBase {
 }
 registerWidget(new PlantWidget());
 
-async function migratePlantData() {
-  let oldData = JSON.parse(
-    window.localStorage.getItem("current_plant_conditions")
-  );
-  await browser.runtime.sendMessage({
-    action: "setPlantAppData",
-    data: {
-      age: oldData.age,
-      lastWaterTime: oldData.last_time_watered,
-      lastGrowTime: oldData.last_time_grew,
-      uniqueColor: oldData.plant_color,
-      plantVersion: oldData.plant_version,
-      birthday: oldData.birth_day,
-      daysSinceBirthday: oldData.time_since_birthday_days,
-      isAlive: oldData.is_alive,
-    },
-  });
-  window.localStorage.removeItem("current_plant_conditions");
-}
-
 async function createPlantWidget(plantDiv) {
   if (window.localStorage.getItem("current_plant_conditions")) {
     await migratePlantData();
