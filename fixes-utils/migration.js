@@ -108,16 +108,19 @@ async function migrateSettings() {
     rightPannels: [],
   };
   if (!liteMode) {
-    if (oldData.showplanner) {
-      widgetData.leftPannels.push({
-        widgets: ["PlannerWidget"],
-      });
-    }
+    widgetData.leftPannels.push({
+      widgets: ["TutorialWidget"],
+    });
 
-    if (oldData.halte) {
-      widgetData.leftPannels.push({
-        widgets: ["DelijnWidget"],
-      });
+    if (oldData.showplanner) {
+      widgetData.leftPannels[0].widgets.push("PlannerWidget");
+      if (oldData.halte) {
+        widgetData.leftPannels.push({
+          widgets: ["DelijnWidget"],
+        });
+      }
+    } else if (oldData.halte) {
+      widgetData.leftPannels[0].widgets.push("DelijnWidget");
     }
 
     let firstRightPanel = {
@@ -153,16 +156,19 @@ async function migrateSettings() {
       widgetData.rightPannels.push(secondRightPanel);
     }
   } else {
-    if (oldData.showplanner) {
-      widgetData.leftPannels.push({
-        widgets: ["PlannerWidget"],
-      });
-    }
+    widgetData.leftPannels.push({
+      widgets: ["TutorialWidget"],
+    });
 
-    if (oldData.halte) {
-      widgetData.leftPannels.push({
-        widgets: ["DelijnWidget"],
-      });
+    if (oldData.showplanner) {
+      widgetData.leftPannels[0].widgets.push("PlannerWidget");
+      if (oldData.halte) {
+        widgetData.leftPannels.push({
+          widgets: ["DelijnWidget"],
+        });
+      }
+    } else if (oldData.halte) {
+      widgetData.leftPannels[0].widgets.push("DelijnWidget");
     }
 
     let firstRightPanel = {

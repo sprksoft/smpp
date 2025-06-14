@@ -493,7 +493,9 @@ async function createWidgetSystem() {
   }
   if (setDefaults) {
     widgetData.rightPannels[0].widgets.push("CompactWeatherWidget");
-    widgetData.leftPannels.push({ widgets: ["DelijnWidget"] });
+    widgetData.leftPannels.push({
+      widgets: ["TutorialWidget", "DelijnWidget"],
+    });
   }
 
   widgetsContainer = await createWidgetsContainerHTML(
