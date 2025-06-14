@@ -154,6 +154,7 @@
   border: 2px solid var(--color-base03) !important;
   display: flex !important;
   align-items: center !important;
+  justify-content: center;
   flex-grow: 0 !important;
 }
 

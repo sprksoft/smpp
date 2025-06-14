@@ -190,3 +190,8 @@ const exitIconSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="var(--color-re
 <path d="M7 7.00006L17 17.0001M7 17.0001L17 7.00006" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
 </g>
 </svg>`;
+
+const doneSvg = `<svg xmlns="http://www.w3.org/2000/svg" class="done-icon" viewBox="0 0 193 169" fill="none">
+<rect xmlns="http://www.w3.org/2000/svg" x="108.281" y="146.148" width="45" height="116.069" rx="22.5" transform="rotate(131 108.281 146.148)"/>
+<rect xmlns="http://www.w3.org/2000/svg" x="159.568" y="-8" width="45" height="198" rx="22.5" transform="rotate(35 159.568 -8)"/>
+</svg>`;

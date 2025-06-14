@@ -6,10 +6,10 @@ html {
   --color-base02: #191817;
   --color-base03: #191817;
   --background-color: var(--color-base00);
-  --color-blue: #3892db;
-  --color-red: #cc4849;
-  --color-green: #3c9534;
-  --color-orange: #ce6c4a;
+  --color-blue: #2792e3;
+  --color-red: #e14448;
+  --color-green: #5cc951;
+  --color-orange: #f07143;
   --color-dark-green: #1f551b;
   --color-black: #0f0f0f;
   --color-yellow: #ffd353;
@@ -1259,7 +1259,7 @@ div.smscCheckbox input[type="checkbox"],
 label.checkbox input[type="checkbox"]:checked,
 div.smscCheckbox input[type="checkbox"]:checked,
 .mobile-style input[type="checkbox"]:checked,
-.uscMain .usersContainerBlock .usersContainerBlockBack.selected{
+.uscMain .usersContainerBlock .usersContainerBlockBack.selected {
   background-image: url("https://raw.githubusercontent.com/frickingbird8002/smpp-images/9d0cc428cc236802f97cfe77094256d0cf5bdcdf/checkedbox.svg") !important;
 }
 
@@ -1623,8 +1623,8 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
 }
 
 .gc-btn svg {
-  width: 24px;
-  height: 24px;
+  width: 18px;
+  height: 18px;
   transition: transform 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
 }
 
@@ -1653,8 +1653,8 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
 }
 
 .gc-fullscreen svg {
-  width: 24px;
-  height: 24px;
+  width: 18px;
+  height: 18px;
   transition: transform 0.2s ease;
 }
 
@@ -1737,12 +1737,6 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   background: rgba(var(--color-base03), 0.1);
 }
 
-.gc-btn svg {
-  width: 24px;
-  height: 24px;
-  transition: transform 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
-}
-
 .gc-btn:hover svg {
   transform: scale(1.15);
 }
@@ -1765,12 +1759,6 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   top: 0;
   border-radius: 0;
   z-index: 1000;
-}
-
-.gc-fullscreen svg {
-  width: 24px;
-  height: 24px;
-  transition: transform 0.2s ease;
 }
 
 .gc-fullscreen .expand-icon {
