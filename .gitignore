@@ -1,4 +1,4 @@
 .vs/
 web-ext-artifacts/
-builds/smpp-lite-build/
-builds/smpp-build
+build/smpp-lite-build/
+build/smpp-build

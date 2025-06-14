@@ -589,7 +589,7 @@ async function createWidgetBag() {
   let content = document.createElement("div");
   content.classList.add("smpp-widget-bag-content");
   await createGroup(content, "other", "Widgets");
-  await createGroup(content, "games", "Games");
+  if (!liteMode) await createGroup(content, "games", "Games");
   await createGroup(content, "smartschool", "Smartschool Widgets");
   bag.appendChild(content);
 
