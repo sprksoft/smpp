@@ -22,7 +22,7 @@ html {
   transform: scale(1) rotate(0deg);
   background-color: var(--color-base01);
   padding: 1.5rem;
-  border-radius: 1.5rem;
+  border-radius: 1.75rem;
   box-shadow: 0 0 10px var(--darken-background);
   margin: 0rem 1rem 0rem 1rem;
   border: 3px solid var(--color-base03);
@@ -117,7 +117,11 @@ html {
 }
 .smpp-widget-edit-mode .topnav {
   pointer-events: none;
-  filter: saturate(0%);
+  filter: blur(1px) saturate(50%);
+}
+
+.topnav {
+  transition: all 0.3s ease-in-out !important;
 }
 
 .smpp-widget-edit-mode:not(.smpp-widget-dragging-something)
@@ -310,4 +314,43 @@ html {
   border: 3px solid var(--color-base03);
   box-shadow: 0 0 10px var(--darken-background);
   padding: 1rem;
+}
+
+.widgets-exit-button {
+  padding: 0 !important;
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  width: 3rem;
+  height: 3rem;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease-in-out;
+  opacity: 1;
+  border-radius: 50%;
+  border: 2px solid var(--color-base02);
+  background-color: var(--color-base01);
+  box-shadow: 0 0rem 2rem rgba(0, 0, 0, 0.5);
+}
+
+.widgets-exit-button:hover {
+  border-color: var(--color-accent);
+  background-color: var(--color-base02);
+}
+
+.widgets-exit-button.hidden {
+  top: -3rem;
+  display: flex !important;
+  opacity: 0;
+}
+
+.widgets-exit-button > svg {
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: 0;
+}
+
+.smpp-widget-bag-group:last-child {
+  margin-bottom: 1rem;
 }

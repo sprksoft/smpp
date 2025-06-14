@@ -10,6 +10,7 @@ let widgets = [];
 let widgetsContainer;
 let widgetBag;
 let widgetBagHandle;
+let exitEditModeButton;
 
 function registerWidget(widget) {
   widgets.push(widget);
@@ -643,6 +644,28 @@ function toggleBag(params) {
   }
 }
 
+function createExitEditModeButton() {
+  exitEditModeButton = document.createElement("button");
+  exitEditModeButton.innerHTML = exitIconSvg;
+  exitEditModeButton.classList.add("widgets-exit-button");
+  exitEditModeButton.classList.add("hidden");
+  exitEditModeButton.addEventListener("click", function () {
+    setEditMode(false);
+  });
+  document.body.appendChild(exitEditModeButton);
+}
+
+function toggleExitEditModeButton(value) {
+  requestAnimationFrame(() => {
+    if (value) {
+      exitEditModeButton.classList.remove("hidden");
+    } else {
+      exitEditModeButton.classList.add("hidden");
+    }
+  });
+  console.log("toggling");
+}
+
 if (getPageURL().path == "") {
   document.addEventListener("mouseup", async (e) => {
     if (curDragInfo) {
@@ -693,6 +716,9 @@ function getWidgetByName(name) {
 }
 
 async function setEditMode(value) {
+  if (!exitEditModeButton) {
+    createExitEditModeButton();
+  }
   if (value) {
     document.body.classList.add("smpp-widget-edit-mode");
     document.getElementById("smpp-news-content").style.display = "none";
@@ -708,6 +734,7 @@ async function setEditMode(value) {
     document.body.classList.remove("smpp-widget-edit-mode");
     showNews(showNewsState);
   }
+  toggleExitEditModeButton(value);
   widgetEditMode = value;
 }
 
