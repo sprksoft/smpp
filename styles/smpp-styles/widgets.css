@@ -115,6 +115,10 @@ html {
 .smpp-widget-edit-mode {
   user-select: none;
 }
+.smpp-widget-edit-mode .topnav {
+  pointer-events: none;
+  filter: saturate(0%);
+}
 
 .smpp-widget-edit-mode:not(.smpp-widget-dragging-something)
   .smpp-widget:not(.smpp-widget-preview):not(.smpp-widget-dragging) {
