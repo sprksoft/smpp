@@ -475,7 +475,8 @@ smsc-inlineeditor.smsc-table__cell--inlineeditor {
   border: 0px solid var(--color-accent) !important;
   box-shadow: none;
 }
-#smscMainBlockContainer {
+#smscMainBlockContainer,
+.smscFrameTitleContainer.margin-top--milli {
   align-self: center !important;
 }
 
