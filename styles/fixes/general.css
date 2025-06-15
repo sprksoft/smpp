@@ -475,9 +475,9 @@ smsc-inlineeditor.smsc-table__cell--inlineeditor {
   border: 0px solid var(--color-accent) !important;
   box-shadow: none;
 }
-#smscMainBlockContainer,
-.smscFrameTitleContainer.margin-top--milli {
-  align-self: center !important;
+
+#smscMainBlockContainer {
+  height: fit-content !important;
 }
 
 .infoBlock_message,

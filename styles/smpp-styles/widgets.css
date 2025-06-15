@@ -395,6 +395,7 @@ html {
   z-index: 1000;
   height: 4rem;
   font-size: 2rem;
+  box-shadow: 0rem 0rem 2rem 0rem rgba(0, 0, 0, 0.194);
 }
 
 .enableAnimations .widgets-done-button {

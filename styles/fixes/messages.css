@@ -145,8 +145,16 @@ body.modern-ui .homepage__block {
   position: relative !important;
   overflow: auto !important;
   display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important;
+}
+
+#smscMain:has(.studentInfo) {
   flex-direction: column !important;
-  align-items: start !important;
+}
+
+#smscMain:has(.surveys) {
+  align-items: flex-start !important;
 }
 
 #smscMain.results {
@@ -415,6 +423,7 @@ div.tox-toolbar[role="group"][aria-disabled="false"] {
 
 body#tinymce {
   color: var(--color-text) !important;
+  background: var(--color-base00) !important;
 }
 
 button.ui-button.ui-corner-all.ui-widget.ui-button-icon-only.ui-dialog-titlebar-close {
@@ -503,7 +512,7 @@ td#tabmaina {
   border-radius: 10px !important;
   background-color: var(--color-base01) !important;
 }
-.uscColumnTop{
+.uscColumnTop {
   background-color: var(--color-base03) !important;
 }
 
@@ -515,14 +524,14 @@ td#tabmaina {
   border: none !important;
 }
 
-div#searchDiv{
+div#searchDiv {
   background-color: var(--color-base01) !important;
 }
 .searchDiv__title,
-.uscColumnTopTitle{
+.uscColumnTopTitle {
   color: var(--color-text) !important;
 }
-input#searchField{
+input#searchField {
   background-color: var(--color-base02) !important;
   color: var(--color-text) !important;
 }
