@@ -118,17 +118,18 @@ html {
 .smpp-widget-edit-mode .topnav {
   pointer-events: none;
   filter: blur(1px) saturate(50%);
+  opacity: 0.9;
 }
 
 .topnav {
-  transition: all 0.3s ease-in-out !important;
+  transition: opacity 0.3s ease-in-out, filter 0.3s ease-in-out !important;
 }
 
 .smpp-widget-edit-mode:not(.smpp-widget-dragging-something)
   .smpp-widget:not(.smpp-widget-preview):not(.smpp-widget-dragging) {
   border-color: transparent;
   outline: 4px dashed var(--color-black);
-  box-shadow: 0 0 0 4px var(--color-yellow);
+  box-shadow: 0 0 0 3.5px var(--color-yellow);
 }
 
 .smpp-widget-edit-mode .smpp-widget > *,
@@ -210,20 +211,25 @@ html {
 }
 
 .smpp-widget-bag-content {
-  padding-top: 20px;
   width: 100%;
   background-color: var(--color-base01);
   color: var(--color-text);
   border: solid var(--color-accent) 4px;
   border-radius: 50px;
 
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
   box-shadow: 0px 0px 100px #000000aa;
 
   pointer-events: auto;
+  overflow: hidden;
+}
+
+.smpp-widget-bag-inner-content {
+  padding-top: 20px;
   overflow: scroll;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .smpp-widget-bag.smpp-widget-bag-delete .smpp-widget-bag-handle,
@@ -316,39 +322,106 @@ html {
   padding: 1rem;
 }
 
-.widgets-exit-button {
-  padding: 0 !important;
-  position: absolute;
-  right: 1rem;
-  top: 1rem;
-  width: 3rem;
-  height: 3rem;
-  display: flex !important;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease-in-out;
-  opacity: 1;
-  border-radius: 50%;
-  border: 2px solid var(--color-base02);
-  background-color: var(--color-base01);
-  box-shadow: 0 0rem 2rem rgba(0, 0, 0, 0.5);
+@keyframes moveDoneButton {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0;
+    transform: translateY(-30px) translateX(0px);
+    filter: blur(10px);
+  }
+
+  100% {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateY(0px);
+  }
 }
 
-.widgets-exit-button:hover {
-  border-color: var(--color-accent);
+@keyframes moveDoneButtonBack {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0;
+    transform: translateY(-30px) translateX(0px);
+    filter: blur(10px);
+  }
+
+  100% {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateY(0px);
+  }
+}
+
+.widgets-done-button {
+  padding: 0 !important;
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+  height: 3.25rem;
+  display: flex !important;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.7rem;
+  font-weight: 700;
+  opacity: 1;
+  border-radius: 100000px;
+  padding: 0rem 1.5rem !important;
+  border: 3px solid var(--color-base02);
+  background-color: var(--color-base01);
+  box-shadow: 0rem -0.5rem 2rem 1rem rgba(0, 0, 0, 0.5);
+  z-index: 90;
+}
+
+.enableAnimations .widgets-done-button {
+  animation: moveDoneButtonBack 0.5s ease-in-out 0s 1;
+}
+.enableAnimations .widgets-done-button.smpp-widget-bag-open {
+  animation: moveDoneButton 0.5s ease-in-out 0s 1;
+}
+.widgets-done-button.smpp-widget-bag-open {
+  top: 5%;
+  right: 5%;
+  z-index: 1000;
+  height: 4rem;
+  font-size: 2rem;
+}
+
+.enableAnimations .widgets-done-button {
+  transition: opacity 0.2s ease-in, top 0.4s ease-in-out, right 0.4s ease-in-out,
+    font-size 0.4s ease-in-out, height 0.4s ease-in-out;
+}
+
+.enableAnimations .widgets-done-button:hover {
+  transition: all 0.05s ease-out;
+}
+
+.widgets-done-button:hover {
+  border-color: var(--color-base03);
   background-color: var(--color-base02);
 }
 
-.widgets-exit-button.hidden {
-  top: -3rem;
+.widgets-done-button.hidden {
   display: flex !important;
   opacity: 0;
 }
 
-.widgets-exit-button > svg {
-  width: 2.5rem;
-  height: 2.5rem;
+.widgets-done-button:hover > svg {
+  fill: var(--color-green);
+}
+
+.widgets-done-button > svg {
+  width: 1.7rem;
+  overflow: visible;
   margin: 0;
+  transition: all 0.2s ease-in-out;
+  fill: var(--color-text);
 }
 
 .smpp-widget-bag-group:last-child {

@@ -10,7 +10,7 @@ let widgets = [];
 let widgetsContainer;
 let widgetBag;
 let widgetBagHandle;
-let exitEditModeButton;
+let doneButton;
 
 function registerWidget(widget) {
   widgets.push(widget);
@@ -589,9 +589,14 @@ async function createWidgetBag() {
 
   let content = document.createElement("div");
   content.classList.add("smpp-widget-bag-content");
-  await createGroup(content, "other", "Widgets");
-  if (!liteMode) await createGroup(content, "games", "Games");
-  await createGroup(content, "smartschool", "Smartschool Widgets");
+
+  let innerContent = document.createElement("div");
+  innerContent.classList.add("smpp-widget-bag-inner-content");
+
+  await createGroup(innerContent, "other", "Widgets");
+  if (!liteMode) await createGroup(innerContent, "games", "Games");
+  await createGroup(innerContent, "smartschool", "Smartschool Widgets");
+  content.appendChild(innerContent);
   bag.appendChild(content);
 
   let handle = document.createElement("div");
@@ -624,11 +629,19 @@ function closeBag() {
   if (widgetBag) {
     widgetBag.classList.remove("smpp-widget-bag-open");
   }
+  if (doneButton) {
+    changeDoneButtonState("noBag");
+    doneButton.classList.remove("smpp-widget-bag-open");
+  }
   bagHoverExit();
 }
 function openBag() {
   if (widgetBag) {
     widgetBag.classList.add("smpp-widget-bag-open");
+  }
+  if (doneButton) {
+    changeDoneButtonState("inBag");
+    doneButton.classList.add("smpp-widget-bag-open");
   }
   if (curDragInfo) {
     bagHoverEnter();
@@ -644,26 +657,39 @@ function toggleBag(params) {
   }
 }
 
-function createExitEditModeButton() {
-  exitEditModeButton = document.createElement("button");
-  exitEditModeButton.innerHTML = exitIconSvg;
-  exitEditModeButton.classList.add("widgets-exit-button");
-  exitEditModeButton.classList.add("hidden");
-  exitEditModeButton.addEventListener("click", function () {
-    setEditMode(false);
-  });
-  document.body.appendChild(exitEditModeButton);
+const setEditModeFalse = () => setEditMode(false);
+
+function createWidgetsDoneButton() {
+  doneButton = document.createElement("button");
+  doneButton.innerHTML = `Done ${doneSvg}`;
+  doneButton.classList.add("widgets-done-button");
+  doneButton.classList.add("hidden");
+  doneButton.addEventListener("click", setEditModeFalse);
+  document.body.appendChild(doneButton);
 }
 
-function toggleExitEditModeButton(value) {
+function changeDoneButtonState(state) {
+  console.log("Changing done button state to: " + state);
+  doneButton.removeEventListener("click", setEditModeFalse);
+  doneButton.removeEventListener("click", toggleBag);
+  switch (state) {
+    case "noBag":
+      doneButton.addEventListener("click", setEditModeFalse);
+      break;
+    case "inBag":
+      doneButton.addEventListener("click", toggleBag);
+      break;
+  }
+}
+
+function updateDoneButtonState(value) {
   requestAnimationFrame(() => {
     if (value) {
-      exitEditModeButton.classList.remove("hidden");
+      doneButton.classList.remove("hidden");
     } else {
-      exitEditModeButton.classList.add("hidden");
+      doneButton.classList.add("hidden");
     }
   });
-  console.log("toggling");
 }
 
 if (getPageURL().path == "") {
@@ -716,10 +742,11 @@ function getWidgetByName(name) {
 }
 
 async function setEditMode(value) {
-  if (!exitEditModeButton) {
-    createExitEditModeButton();
+  console.log("Setting widget edit mode to: " + value);
+  if (!doneButton) {
+    createWidgetsDoneButton();
   }
-  if (value) {
+  if (value === true) {
     document.body.classList.add("smpp-widget-edit-mode");
     document.getElementById("smpp-news-content").style.display = "none";
     if (!widgetBag) {
@@ -734,7 +761,8 @@ async function setEditMode(value) {
     document.body.classList.remove("smpp-widget-edit-mode");
     showNews(showNewsState);
   }
-  toggleExitEditModeButton(value);
+  updateDoneButtonState(value);
+
   widgetEditMode = value;
 }
 
