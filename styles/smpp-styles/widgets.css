@@ -322,6 +322,42 @@ html {
   padding: 1rem;
 }
 
+@keyframes moveDoneButton {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0;
+    transform: translateY(-30px) translateX(0px);
+    filter: blur(10px);
+  }
+
+  100% {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateY(0px);
+  }
+}
+
+@keyframes moveDoneButtonBack {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0;
+    transform: translateY(-30px) translateX(0px);
+    filter: blur(10px);
+  }
+
+  100% {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateY(0px);
+  }
+}
+
 .widgets-done-button {
   padding: 0 !important;
   position: absolute;
@@ -340,25 +376,30 @@ html {
   border: 3px solid var(--color-base02);
   background-color: var(--color-base01);
   box-shadow: 0rem -0.5rem 2rem 1rem rgba(0, 0, 0, 0.5);
-  z-index: 100;
+  z-index: 90;
 }
 
+.enableAnimations .widgets-done-button {
+  animation: moveDoneButtonBack 0.5s ease-in-out 0s 1;
+}
+.enableAnimations .widgets-done-button.smpp-widget-bag-open {
+  animation: moveDoneButton 0.5s ease-in-out 0s 1;
+}
 .widgets-done-button.smpp-widget-bag-open {
   top: 5%;
   right: 5%;
-
+  z-index: 1000;
   height: 4rem;
   font-size: 2rem;
 }
 
 .enableAnimations .widgets-done-button {
-  transition: opacity 0.2s ease-in, top 0.5s ease-in-out, right 0.5s ease-in-out,
-    font-size 0.5s ease-in-out, height 0.5s ease-in-out;
-  z-index: 1000;
+  transition: opacity 0.2s ease-in, top 0.4s ease-in-out, right 0.4s ease-in-out,
+    font-size 0.4s ease-in-out, height 0.4s ease-in-out;
 }
 
 .enableAnimations .widgets-done-button:hover {
-  transition: all 0.1s ease-out;
+  transition: all 0.05s ease-out;
 }
 
 .widgets-done-button:hover {

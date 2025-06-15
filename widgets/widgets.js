@@ -630,6 +630,7 @@ function closeBag() {
     widgetBag.classList.remove("smpp-widget-bag-open");
   }
   if (doneButton) {
+    changeDoneButtonState("noBag");
     doneButton.classList.remove("smpp-widget-bag-open");
   }
   bagHoverExit();
@@ -639,6 +640,7 @@ function openBag() {
     widgetBag.classList.add("smpp-widget-bag-open");
   }
   if (doneButton) {
+    changeDoneButtonState("inBag");
     doneButton.classList.add("smpp-widget-bag-open");
   }
   if (curDragInfo) {
@@ -655,18 +657,32 @@ function toggleBag(params) {
   }
 }
 
+const setEditModeFalse = () => setEditMode(false);
+
 function createWidgetsDoneButton() {
   doneButton = document.createElement("button");
   doneButton.innerHTML = `Done ${doneSvg}`;
   doneButton.classList.add("widgets-done-button");
   doneButton.classList.add("hidden");
-  doneButton.addEventListener("click", function () {
-    setEditMode(false);
-  });
+  doneButton.addEventListener("click", setEditModeFalse);
   document.body.appendChild(doneButton);
 }
 
-function toggleWidgetsDoneButton(value) {
+function changeDoneButtonState(state) {
+  console.log("Changing done button state to: " + state);
+  doneButton.removeEventListener("click", setEditModeFalse);
+  doneButton.removeEventListener("click", toggleBag);
+  switch (state) {
+    case "noBag":
+      doneButton.addEventListener("click", setEditModeFalse);
+      break;
+    case "inBag":
+      doneButton.addEventListener("click", toggleBag);
+      break;
+  }
+}
+
+function updateDoneButtonState(value) {
   requestAnimationFrame(() => {
     if (value) {
       doneButton.classList.remove("hidden");
@@ -674,7 +690,6 @@ function toggleWidgetsDoneButton(value) {
       doneButton.classList.add("hidden");
     }
   });
-  console.log("toggling");
 }
 
 if (getPageURL().path == "") {
@@ -727,10 +742,11 @@ function getWidgetByName(name) {
 }
 
 async function setEditMode(value) {
+  console.log("Setting widget edit mode to: " + value);
   if (!doneButton) {
     createWidgetsDoneButton();
   }
-  if (value) {
+  if (value === true) {
     document.body.classList.add("smpp-widget-edit-mode");
     document.getElementById("smpp-news-content").style.display = "none";
     if (!widgetBag) {
@@ -745,7 +761,8 @@ async function setEditMode(value) {
     document.body.classList.remove("smpp-widget-edit-mode");
     showNews(showNewsState);
   }
-  toggleWidgetsDoneButton(value);
+  updateDoneButtonState(value);
+
   widgetEditMode = value;
 }
 
