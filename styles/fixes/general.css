@@ -475,6 +475,9 @@ smsc-inlineeditor.smsc-table__cell--inlineeditor {
   border: 0px solid var(--color-accent) !important;
   box-shadow: none;
 }
+#smscMainBlockContainer {
+  align-self: center !important;
+}
 
 .infoBlock_message,
 .infoBlock_eval,
@@ -1259,7 +1262,7 @@ div.smscCheckbox input[type="checkbox"],
 label.checkbox input[type="checkbox"]:checked,
 div.smscCheckbox input[type="checkbox"]:checked,
 .mobile-style input[type="checkbox"]:checked,
-.uscMain .usersContainerBlock .usersContainerBlockBack.selected{
+.uscMain .usersContainerBlock .usersContainerBlockBack.selected {
   background-image: url("https://raw.githubusercontent.com/frickingbird8002/smpp-images/9d0cc428cc236802f97cfe77094256d0cf5bdcdf/checkedbox.svg") !important;
 }
 
