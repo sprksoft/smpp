@@ -105,7 +105,20 @@ class TakenWidget extends WidgetBase {
         } else if (DEBUG) {
           sendDebug("Planner data fetched successfully.");
         }
-
+        if (!Array.isArray(data) || data.length === 0) {
+          let noDataContainer = document.createElement("div");
+          noDataContainer.classList.add("blue-ghost-96");
+          let noDataContainerTextContainer = document.createElement("div");
+          noDataContainerTextContainer.classList.add("no-data-text");
+          noDataContainerTextContainer.innerText =
+            "Er zijn geen opdrachten gepland in de komende 28 dagen.";
+          noDataContainerTextContainer.style.textAlign = "center";
+          noDataContainerTextContainer.style.padding = "1rem";
+          noDataContainerTextContainer.style.fontSize = "1rem";
+          noDataContainerTextContainer.style.fontWeight = "semibold";
+          TasksContainer.appendChild(noDataContainer);
+          TasksContainer.appendChild(noDataContainerTextContainer);
+        }
         // sort based on day
         data.sort(
           (a, b) =>

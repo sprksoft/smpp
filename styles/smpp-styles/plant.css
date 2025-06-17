@@ -201,6 +201,12 @@
   /* Rise up on hover */
 }
 
+.leaves-base {
+  fill: var(--color-base03) !important;
+}
+.leaves {
+  fill: rgb(90, 143, 1);
+}
 #hand {
   fill: var(--color-base02);
 }

@@ -195,11 +195,12 @@ function addDelijnAttest(container) {
   const delijnAttestElement = document.createElement("a");
   delijnAttestElement.classList.add("delijnAttest");
   delijnAttestElement.target = "_blank";
-  delijnAttestElement.href =
-    Math.random() < 0.1
-      ? "https://www.coolblue.be/nl/koffiezetapparaten/koffiezetapparaten-voor-latte-macchiato"
-      : "https://www.delijn.be/nl/contact/attest-aanvraag/";
-  delijnAttestElement.innerText = Math.random() < 0.1 ? "Latte?" : "Late?";
+  specialChance = Math.random() < 0.1;
+  delijnAttestElement.rel = "noopener noreferrer";
+  delijnAttestElement.href = specialChance
+    ? "https://www.coolblue.be/nl/koffiezetapparaten/koffiezetapparaten-voor-latte-macchiato"
+    : "https://www.delijn.be/nl/contact/attest-aanvraag/";
+  delijnAttestElement.innerText = specialChance ? "Latte?" : "Late?";
   container.appendChild(delijnAttestElement);
 }
 
