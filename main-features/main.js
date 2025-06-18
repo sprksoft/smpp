@@ -266,27 +266,29 @@ async function storeQuickSettings() {
 
 function set_background() {
   let style = document.documentElement.style;
-  browser.storage.local.get("backgroundImage", (result) => {
-    style.setProperty("--loginpage-image", `none`);
-    style.setProperty("--background-color", `transparent`);
-    let img =
-      document.getElementById("background_image") ||
-      document.createElement("img");
-    img.id = "background_image";
-    img.style.backgroundColor = "var(--color-base00)";
-    img.style.position = "absolute";
-    img.style.top = "0";
-    img.style.left = "0";
-    img.style.width = "101%";
-    img.style.height = "101%";
-    img.style.objectFit = "cover";
-    img.style.zIndex = -1;
-    img.style.display = "block";
-    if (result.backgroundImage) img.src = result.backgroundImage;
-    if (!document.getElementById("background_image")) {
-      document.body.appendChild(img);
-    }
-  });
+  browser.runtime
+    .sendMessage({ action: "getBackgroundImage" })
+    .then((result) => {
+      style.setProperty("--loginpage-image", `none`);
+      style.setProperty("--background-color", `transparent`);
+      let img =
+        document.getElementById("background_image") ||
+        document.createElement("img");
+      img.id = "background_image";
+      img.style.backgroundColor = "var(--color-base00)";
+      img.style.position = "absolute";
+      img.style.top = "0";
+      img.style.left = "0";
+      img.style.width = "101%";
+      img.style.height = "101%";
+      img.style.objectFit = "cover";
+      img.style.zIndex = -1;
+      img.style.display = "block";
+      if (result && result.backgroundImage) img.src = result.backgroundImage;
+      if (!document.getElementById("background_image")) {
+        document.body.appendChild(img);
+      }
+    });
 }
 
 function isAbsoluteUrl(url) {

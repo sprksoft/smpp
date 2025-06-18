@@ -56,6 +56,26 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
       sendResponse({ succes: true });
       console.log("Background image saved.");
     }
+    if (message.action === "getBackgroundImage") {
+      const backgroundImage = await browser.storage.local.get(
+        "backgroundImage"
+      );
+      sendResponse(backgroundImage || null);
+      console.log("Background image sent.");
+    }
+
+    if (message.action === "savePhotoWidgetImage") {
+      await browser.storage.local.set({ photoWidgetImage: message.data });
+      sendResponse({ succes: true });
+      console.log("Photo widget image saved.");
+    }
+    if (message.action === "getPhotoWidgetImage") {
+      const photoWidgetImage = await browser.storage.local.get(
+        "photoWidgetImage"
+      );
+      sendResponse(photoWidgetImage || null);
+      console.log("Photo widget image sent.");
+    }
     // Weather
     if (message.action === "setWeatherAppData") {
       await browser.storage.local.set({ weatherAppData: message.data });

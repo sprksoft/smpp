@@ -53,6 +53,7 @@
         "widgets/plant.js",
         "widgets/planner.js",
         "widgets/weather.js",
+        "widgets/photo-widget.js",
         "games/games.js",
         "games/breakout.js",
         "games/flappy.js",
