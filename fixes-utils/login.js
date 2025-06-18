@@ -130,6 +130,7 @@ let splashtexts = [
     `Are you serious?`,
     `Breakout`,
     `Examens`,
+    `Ruby chan, haii`
 ]
 function get_splash_text() {
     return splashtexts[Math.floor(Math.random() * splashtexts.length)]
