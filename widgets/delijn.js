@@ -85,11 +85,16 @@ async function createHalteDoorkomst(doorkomst, container) {
   } else if (predictionStatuses.includes("GEENREALTIME")) {
     lijnCard.classList.add("lijnCardNoData");
     timeUntilDeparture = calculateTimeUntilDepartureInMins(ETA);
+    console.log(ETA);
     timeUntilDeparture =
       timeUntilDeparture < 1 ? "Now" : `${timeUntilDeparture} Min.`;
     arrivalTimeDeviation = "No data";
   } else if (predictionStatuses.includes("REALTIME")) {
-    ETA = new Date(doorkomst["real-timeTijdstip"]);
+    console.log(ETA);
+    if (doorkomst["real-timeTijdstip"] != null) {
+      ETA = new Date(doorkomst["real-timeTijdstip"]);
+    }
+    console.log(ETA);
     arrivalTimeDeviation = Math.round((ETA - originalETA) / 1000 / 60);
     arrivalTimeDeviation =
       arrivalTimeDeviation === 0
