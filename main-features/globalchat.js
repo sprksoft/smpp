@@ -41,7 +41,7 @@ async function make_iframe() {
         </svg>
       </button>
     </div>
-    <iframe style="width:100%; height:100%; border:none" src='https://gc.smartschoolplusplus.com/chat?${query_string}'></iframe>
+    <iframe style="width:100%; height:100%; border:none" src='https://gc.smartschoolplusplus.com/v1?${query_string}'></iframe>
   `;
 
   GlCHatplace.innerHTML = GlCHatplaceHTML;

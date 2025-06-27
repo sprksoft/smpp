@@ -1611,6 +1611,7 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
 .gc-btn {
   width: 36px;
   height: 36px;
+  padding: 0px !important;
   border-radius: 50%;
   background: var(--color-base01);
   border: 2px solid var(--color-base02);
@@ -1641,8 +1642,8 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
 }
 
 .gc-close svg {
-  width: 22px;
-  height: 22px;
+  width: 25px;
+  height: 25px;
   color: var(--color-red);
 }
 
@@ -1654,12 +1655,6 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   top: 0;
   border-radius: 0;
   z-index: 1000;
-}
-
-.gc-fullscreen svg {
-  width: 18px;
-  height: 18px;
-  transition: transform 0.2s ease;
 }
 
 .gc-fullscreen .contract-icon {
@@ -1723,20 +1718,6 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   transform: translateY(0);
 }
 
-.gc-btn {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: var(--color-base01);
-  border: 2px solid var(--color-base02);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-}
-
 .gc-btn:hover {
   background: rgba(var(--color-base03), 0.1);
 }
@@ -1747,12 +1728,6 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
 
 .gc-btn:active svg {
   transform: scale(0.9);
-}
-
-.gc-close svg {
-  width: 22px;
-  height: 22px;
-  color: var(--color-red);
 }
 
 .global_chat_window.gc-fullscreen {
