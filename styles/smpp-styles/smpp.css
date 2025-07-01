@@ -14,6 +14,7 @@
 .smpp-background-file,
 .smpp-background-link {
   border: 2px solid var(--color-base03) !important;
+  background-color: var(--color-base01) !important;
   border-radius: 1rem;
 }
 
