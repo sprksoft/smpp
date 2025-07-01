@@ -487,7 +487,9 @@ smsc-inlineeditor.smsc-table__cell--inlineeditor {
 .infoBlock_lvsitem,
 .infoBlock_report {
   border: 2px solid transparent !important;
-  border-radius: 10px !important;
+  border-radius: 8px !important;
+  padding-left: 0.3rem;
+  padding-top: 0.3rem;
 }
 
 .infoBlock_message:hover,
@@ -496,7 +498,6 @@ smsc-inlineeditor.smsc-table__cell--inlineeditor {
 .infoBlock_presence:hover,
 .infoBlock_lvsitem:hover,
 .infoBlock_report:hover {
-  border-color: var(--color-base03) !important;
   background-color: var(--color-base02) !important;
 }
 
@@ -790,7 +791,9 @@ input:checked + .slider:before {
 .smscFrameTitleContainer .smscFrameTitle,
 .uploadzone .files .navigation {
   border: 2px solid var(--color-base03) !important;
-  background-color: var(--color-base01) !important;
+  background-color: var(--color-base02) !important;
+  border-radius: 8px !important;
+  padding: 0.5rem !important;
 }
 
 .uploadzone-attachment,
@@ -1798,6 +1801,7 @@ h3.title.fluid-ui-heading.fluid-ui-heading--3,
 
 smsc-listview {
   border-radius: 10px !important;
+  background-color: var(--darken-background);
 }
 
 body.modern-ui table {
@@ -1806,12 +1810,58 @@ body.modern-ui table {
 
 .smsc-table__header.js-table-hdr {
   padding-top: 5px !important;
+  border: none !important;
+  background-color: var(--color-base00) !important;
 }
 
 smsc-listview table tr.pointer:hover {
   background-color: var(--color-base02) !important;
 }
-
+tr.pointer {
+  background-color: var(--color-base01) !important;
+}
+.smsc-inlineeditor__input__buttons {
+  display: none !important;
+}
+input.smsc-inlineeditor--editable.smsc-inlineeditor__input.js-inlineEditor-input.focus-visible {
+  border: 2px solid var(--color-base02) !important;
+  box-shadow: none !important;
+  background-color: var(--darken-background) !important;
+}
+hr.smsc-dialog__ruler,
+.deliberation-line-picker__button-bar {
+  border-top: 2px solid var(--color-base03) !important;
+}
+.smsc-dialog {
+  border: var(--border-size) solid var(--color-base02) !important;
+  border-radius: 8px !important;
+}
+button.smsc-dialog__top__button.smsc-dialog__icon.smsc-dialog__close-button {
+  border: 1px solid var(--color-base03);
+  border-radius: 4px;
+}
+.smsc-container.smsc-container--left.smsc-container--grey.mydoc__left {
+  background-color: var(--color-base01) !important;
+}
+.js-emptystate.smsc-container__emptyState {
+  background-color: var(--color-base01) !important;
+}
+.blueprint.pupil-deliberation.js-pupil-deliberation {
+  background-color: transparent !important;
+}
+.header--single-line.header.js-header {
+  padding: 0.5rem !important;
+  padding-right: 0.9rem !important;
+}
+.line__container__row:not(.line__container__row--sub) {
+  color: var(--color-accent) !important;
+}
+.line__container__row--sub {
+  color: var(--color-text) !important;
+}
+label.radiobutton.js-radiobutton {
+  cursor: default;
+}
 .mydoc__action-buttons {
   display: none !important;
 }
@@ -2069,8 +2119,12 @@ div#folders {
   background-color: var(--darken-background) !important;
   margin-left: 5px !important;
   font-weight: 500 !important;
+  padding-top: 1rem;
 }
-
+div#smscMainBlockContainer {
+  background: none !important;
+  border: none !important;
+}
 .uploadzone .folders {
   width: auto !important;
   max-width: 400px !important;
