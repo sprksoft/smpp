@@ -158,18 +158,53 @@ const noLocationSvg = `<svg xmlns="http://www.w3.org/2000/svg" height="100%" vie
 <path d="M10 8L14 12M14 8L10 12M19 10.2C19 14.1764 15.5 17.4 12 21C8.5 17.4 5 14.1764 5 10.2C5 6.22355 8.13401 3 12 3C15.866 3 19 6.22355 19 10.2Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>`;
 
-const lijnIconSvg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" class="delijn-icon-128" viewBox="0 0 676 787" fill="none" version="1.1" id="svg10">
-  <defs id="defs10"/>
-  <rect x="444" y="537" width="129" height="250" rx="64.5" fill="#3f3f3f" id="rect2"/>
-  <rect x="116" y="537" width="129" height="250" rx="64.5" fill="#3f3f3f" id="rect3"/>
-  <rect x="48" width="578" height="684" rx="72" fill="#ffd800" id="rect4" y="0"/>
-  <rect y="113" width="221" height="250" rx="43" fill="#999999" id="rect5" x="0"/>
-  <rect x="454" y="113" width="222" height="250" rx="43" fill="#999999" id="rect6"/>
-  <rect x="80" y="28" width="252" height="430" rx="60" fill="#75c9ff" id="rect7"/>
-  <rect x="357" y="28" width="241" height="430" rx="60" fill="#75c9ff" id="rect8"/>
-  <rect x="70" y="478" width="544" height="184" rx="75" fill="#777777" id="rect9"/>
-  <circle cx="181" cy="571" r="65" fill="#e4f5ff" id="circle9"/>
-  <circle cx="509" cy="570" r="65" fill="#e4f5ff" id="circle10"/>
+const lijnIconSvg = `<svg id="Laag_2" data-name="Laag 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 379.84 373.13">
+  <defs>
+<style>
+  .base-gray {
+    fill: #627881; /* likely for base UI surfaces or background */
+  }
+
+  .light-blue {
+    fill: #d0e0e7; /* possibly main body or screen area */
+  }
+
+  .accent-yellow {
+    fill: #e1bf00; /* accent or highlight */
+  }
+
+  .pure-white {
+    fill: #ffffff; /* buttons or indicators */
+  }
+
+  .dark-surface {
+    fill: #3a444f; /* dark screen or panel */
+  }
+
+  .dark-gray {
+    fill: #1c1c1c; /* likely used for a base bar or footer */
+  }
+
+  .black-fill {
+    fill: #0b0b0b; /* possibly button bases */
+  }
+</style>
+
+  </defs>
+  <g id="Laag_1-2" data-name="Laag 1">
+    <path class="accent-yellow" d="M39.83,83v17.9c-4.05-.28-7.87-.03-9.15,4.59-1.23,16.73,1.53,35.46.02,51.93-.51,5.56-2.85,7.79-8.51,8.46-7.96.95-20.59,1.86-21.55-8.44-.98-10.42-1.15-47.59,1.78-56.25,3.05-9.03,14.08-18.19,23.74-18.19h13.67Z"/>
+    <path class="accent-yellow" d="M340.01,83.25v17.9c4.05-.28,7.87-.03,9.15,4.59,1.23,16.73-1.53,35.46-.02,51.93.51,5.56,2.85,7.79,8.51,8.46,7.96.95,20.59,1.86,21.55-8.44.98-10.42,1.15-47.59-1.78-56.25-3.05-9.03-14.08-18.19-23.74-18.19h-13.67Z"/>
+    <path class="base-gray" d="M339.92,295.1v34.75c0,11.04-8.95,20-20,20H59.92c-11.04,0-20-8.96-20-20v-34.75h300Z"/>
+    <path class="light-blue" d="M339.92,40v255.25H39.92V40C39.92,17.91,57.83,0,79.92,0h220c22.09,0,40,17.91,40,40Z"/>
+    <rect class="dark-surface" x="59.92" y="66" width="260" height="175" rx="20" ry="20"/>
+    <rect class="dark-surface" x="59.92" y="20" width="260" height="33" rx="16.5" ry="16.5"/>
+    <path class="black-fill" d="M94.54,350v12.55c0,5.84-4.74,10.58-10.58,10.58h-11.83c-5.85,0-10.59-4.74-10.59-10.58v-12.55h33Z"/>
+    <path class="black-fill" d="M318.82,350v12.48c0,5.84-4.74,10.58-10.58,10.58h-11.83c-5.85,0-10.59-4.74-10.59-10.58v-12.48h33Z"/>
+    <polygon class="accent-yellow" points="254.49 349.85 285.33 240.89 228.85 240.89 198.01 349.85 254.49 349.85"/>
+    <rect class="dark-gray" x="39.92" y="281.58" width="300" height="26"/>
+    <rect class="pure-white" x="61.31" y="286.08" width="55" height="17" rx="5" ry="5"/>
+    <rect class="pure-white" x="264.31" y="286.08" width="55" height="17" rx="5" ry="5"/>
+  </g>
 </svg>`;
 
 const assignmentsSvg = `<svg class="assignments-icon-160" viewBox="0 0 500 500" style=" mix-blend-mode: normal !important;" fill="none" xmlns="http://www.w3.org/2000/svg">
