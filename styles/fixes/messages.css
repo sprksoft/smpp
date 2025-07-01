@@ -34,7 +34,12 @@
   width: auto !important;
   margin: 3px !important;
 }
-
+.modern-message:not(.modern-message--new) {
+  opacity: 0.8 !important;
+}
+.modern-message__read-status {
+  opacity: 0 !important;
+}
 .enableAnimations .modern-message {
   transition: all 0.05s ease-in-out !important;
 }
