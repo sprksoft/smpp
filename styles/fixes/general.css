@@ -1550,18 +1550,18 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   flex-direction: row !important;
 }
 
-.lookChat {
+.base-window {
   background-color: var(--color-base02);
   border: 2px solid var(--color-base03);
   border-radius: 5px;
   min-width: 100px !important;
 }
 
-.enableAnimations .lookChat {
+.enableAnimations .base-window {
   transition: border-color 0.3s;
 }
 
-.global_chat_window {
+#global_chat_window {
   overflow: clip;
   background: var(--color-base00);
   border: var(--border-size) solid var(--color-base03);
@@ -1577,7 +1577,7 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   transform-origin: center;
 }
 
-.enableAnimations .global_chat_window {
+.enableAnimations #global_chat_window {
   transition: all 0.1s cubic-bezier(0.74, 0.25, 0.62, 0.97);
   animation: popIn 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
 }
@@ -1593,7 +1593,7 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   }
 }
 
-.gc-controls {
+.window-controls {
   position: absolute;
   right: 0.5%;
   top: 0.5%;
@@ -1605,13 +1605,13 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 
-.global_chat_window:hover .gc-controls,
-.global_chat_window:focus-within .gc-controls {
+.global_chat_window:hover .window-controls,
+.global_chat_window:focus-within .window-controls {
   opacity: 1;
   transform: translateY(0);
 }
 
-.gc-btn {
+.window-button {
   width: 36px;
   height: 36px;
   padding: 0px !important;
@@ -1626,53 +1626,53 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-.gc-btn:hover {
-  background: rgba(var(--color-base03), 0.1);
+.window-button:hover {
+  background: var(--color-base00);
 }
 
-.gc-btn svg {
+.window-button svg {
   width: 18px;
   height: 18px;
   transition: transform 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
 }
 
-.gc-btn:hover svg {
+.window-button:hover svg {
   transform: scale(1.15);
 }
 
-.gc-btn:active svg {
+.window-button:active svg {
   transform: scale(0.9);
 }
 
-.gc-close svg {
+.window-close svg {
   width: 25px;
   height: 25px;
   color: var(--color-red);
 }
 
-.global_chat_window.gc-fullscreen {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  left: 0;
-  top: 0;
-  border-radius: 0;
-  z-index: 1000;
+.base-window.fullscreen-window {
+  position: fixed !important;
+  width: 100% !important;
+  height: 100% !important;
+  left: 0 !important;
+  top: 0 !important;
+  border-radius: 0 !important;
+  z-index: 1000 !important;
 }
 
-.gc-fullscreen .contract-icon {
+.base-window.fullscreen-window .contract-icon {
   display: block;
 }
 
-.gc-fullscreen .expand-icon {
+.base-window.fullscreen-window .expand-icon {
   display: none;
 }
 
-.global_chat_window.gc-fullscreen .contract-icon {
+.base-window.contract-icon {
   display: none;
 }
 
-.global_chat_window.gc-fullscreen .expand-icon {
+.base-window.expand-icon {
   display: block;
 }
 .global_chat_window {
@@ -1703,7 +1703,7 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   }
 }
 
-.gc-controls {
+.window-controls {
   position: absolute;
   right: 0.5%;
   top: 0.5%;
@@ -1715,25 +1715,17 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 
-.global_chat_window:hover .gc-controls,
-.global_chat_window:focus-within .gc-controls {
+.base-window:hover .window-controls,
+.base-window:focus-within .window-controls {
   opacity: 1;
   transform: translateY(0);
 }
 
-.gc-btn:hover {
-  background: rgba(var(--color-base03), 0.1);
-}
-
-.gc-btn:hover svg {
-  transform: scale(1.15);
-}
-
-.gc-btn:active svg {
+.window-button:active svg {
   transform: scale(0.9);
 }
 
-.global_chat_window.gc-fullscreen {
+.global_chat_window.window-fullscreen {
   position: fixed;
   width: 100%;
   height: 100%;
@@ -1743,20 +1735,20 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   z-index: 1000;
 }
 
-.gc-fullscreen .expand-icon {
+.window-fullscreen .expand-icon {
   /* peil wijst naar buiten */
   display: block;
 }
-.gc-fullscreen .contract-icon {
+.window-fullscreen .contract-icon {
   /* peil wijst naar binne */
   display: none;
 }
 
-.global_chat_window.gc-fullscreen .expand-icon {
+.global_chat_window.window-fullscreen .expand-icon {
   /* omgekeerd */
   display: none;
 }
-.global_chat_window.gc-fullscreen .contract-icon {
+.global_chat_window.window-fullscreen .contract-icon {
   display: block;
   transform: rotate(180deg);
 }
