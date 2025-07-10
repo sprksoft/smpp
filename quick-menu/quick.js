@@ -193,6 +193,7 @@ function do_qm(opener = "") {
         "clearsettings",
         "discord",
         "toggle performance mode",
+        "gcbeta",
         "dizzy",
       ])
     );
@@ -246,11 +247,8 @@ function do_qm(opener = "") {
         case "toggle performance mode":
           togglePerformanceMode();
           return;
-        case "gcadmin":
-          open_url("https://gc.smartschoolplusplus.com/admin");
-          return;
-        case "gc proffilter":
-          open_url("https://gc.smartschoolplusplus.com/admin/prof");
+        case "gcbeta":
+          openGlobalChat(null, true);
           return;
         case "dizzy":
           const styleEl = document.createElement("style");

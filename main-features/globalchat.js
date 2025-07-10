@@ -1,15 +1,20 @@
 class GlobalChatWindow extends BaseWindow {
+  beta;
+  iframe;
   constructor(hidden = false) {
     super("global_chat_window", hidden);
   }
 
   async renderContent() {
-    const quickSettings = await browser.runtime.sendMessage({
-      action: "getQuickSettingsData",
-    });
-    const placeholderText = quickSettings.customName || "Global Chat";
+    let content = document.createElement("div");
+    this.iframe = document.createElement("iframe");
+    this.iframe.style="width:100%; height:100%; border:none";
+    content.appendChild(this.iframe);
 
-    let queryString = getThemeQueryString([
+    return content;
+  }
+  onOpened() {
+    const queryString = getThemeQueryString([
       "color-base00",
       "color-base01",
       "color-base02",
@@ -17,25 +22,19 @@ class GlobalChatWindow extends BaseWindow {
       "color-accent",
       "color-text",
     ]);
-
-    if (queryString.startsWith("&")) {
-      queryString = queryString.substring(1);
-    }
-    let content = document.createElement("div");
-    content.innerHTML = `
-      <iframe style="width:100%; height:100%; border:none" src='https://gc.smartschoolplusplus.com/v1?${queryString}'></iframe>
-    `;
-    return content;
+    const subDomain = this.beta ? "gcbeta" : "gc";
+    this.iframe.src=`https://${subDomain}.smartschoolplusplus.com/v1?${queryString}`;
   }
 }
 
 let gcWindow;
 
-async function openGlobalChat(event) {
+async function openGlobalChat(event, beta=false) {
   if (!gcWindow || !gcWindow.element?.isConnected) {
     gcWindow = new GlobalChatWindow();
     await gcWindow.create();
   }
+  gcWindow.beta = beta;
   gcWindow.show(event);
 }
 

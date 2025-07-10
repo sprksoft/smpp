@@ -44,6 +44,11 @@ class BaseWindow {
     return document.createElement("div");
   }
 
+
+  // Called every time the window is opened
+  // Override this in subclass
+  onOpened() {}
+
   show(triggerEvent = null) {
     if (this.isOpen) return;
 
@@ -66,6 +71,8 @@ class BaseWindow {
     };
 
     document.addEventListener("click", this._outsideClickHandler);
+
+    this.onOpened();
   }
 
   hide() {
