@@ -58,6 +58,7 @@
         "games/breakout.js",
         "games/flappy.js",
         "games/snake.js",
+        "games/pong.js",
         "main-features/main.js"
       ]
     }
