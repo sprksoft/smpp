@@ -746,6 +746,7 @@ function createTopButtons(onHomePage) {
   if (onHomePage) {
     topNav.insertBefore(createWidgetEditModeButton(), pushRight);
   }
+  topNav.insertBefore(createSettingsButton(), pushRight);
 }
 
 async function main() {

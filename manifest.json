@@ -35,6 +35,7 @@
         "fixes-utils/utils.js",
         "widgets/widgets.js",
         "main-features/windows.js",
+        "main-features/main-settings.js",
         "main-features/buis-stats.js",
         "main-features/globalchat.js",
         "fixes-utils/json.js",

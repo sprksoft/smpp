@@ -1561,7 +1561,7 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   transition: border-color 0.3s;
 }
 
-#global_chat_window {
+.base-window {
   overflow: clip;
   background: var(--color-base00);
   border: var(--border-size) solid var(--color-base03);
@@ -1605,8 +1605,8 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 
-.global_chat_window:hover .window-controls,
-.global_chat_window:focus-within .window-controls {
+.base-window:hover .window-controls,
+.base-window:focus-within .window-controls {
   opacity: 1;
   transform: translateY(0);
 }
@@ -1675,7 +1675,7 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
 .base-window.expand-icon {
   display: block;
 }
-.global_chat_window {
+.base-window {
   overflow: clip;
   background: var(--color-base00);
   border: var(--border-size) solid var(--color-base03);
@@ -1725,7 +1725,7 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   transform: scale(0.9);
 }
 
-.global_chat_window.window-fullscreen {
+.base-window.window-fullscreen {
   position: fixed;
   width: 100%;
   height: 100%;
@@ -1744,11 +1744,11 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   display: none;
 }
 
-.global_chat_window.window-fullscreen .expand-icon {
+.base-window.window-fullscreen .expand-icon {
   /* omgekeerd */
   display: none;
 }
-.global_chat_window.window-fullscreen .contract-icon {
+.base-window.window-fullscreen .contract-icon {
   display: block;
   transform: rotate(180deg);
 }
