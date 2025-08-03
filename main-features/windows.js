@@ -44,7 +44,6 @@ class BaseWindow {
     return document.createElement("div");
   }
 
-
   // Called every time the window is opened
   // Override this in subclass
   onOpened() {}

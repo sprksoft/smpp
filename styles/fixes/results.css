@@ -76,7 +76,6 @@
   font-weight: 700 !important;
 }
 
-
 .js-emptystate {
   background-color: var(--color-base00) !important;
   box-shadow: none !important;
@@ -99,7 +98,9 @@ upload-app.smsc-container.smsc-container--flex,
 .course-module-planner__header,
 .course-module-planner,
 .showLeftNav:not(:has(.login-app)),
-.smscMain:not(:has(.login-app)):not(:has(.homepage)):not(mydoc-app):not(:has(.session-list)):not(:has(#js-wiki-home)):not(.smscMain--tb-main) {
+.smscMain:not(:has(.login-app)):not(:has(.homepage)):not(mydoc-app):not(
+    :has(.session-list)
+  ):not(:has(#js-wiki-home)):not(.smscMain--tb-main) {
   backdrop-filter: var(--blur-value-small) !important;
   background-color: var(--darken-background) !important;
 }
@@ -125,7 +126,8 @@ button.reset-filters-btn.reset-filters-btn--hidden {
   border: 2px solid var(--color-base02) !important;
 }
 
-.reset-filters-btn-container { /*sowwy lukas  (this is the scoll) */
+.reset-filters-btn-container {
+  /*sowwy lukas  (this is the scoll) */
   margin-bottom: 41px !important;
 }
 
@@ -134,11 +136,11 @@ button.reset-filters-btn.reset-filters-btn--hidden {
   display: none !important;
 }
 
-.goal-evaluations-details__row{
+.goal-evaluations-details__row {
   background: var(--darken-background) !important;
 }
 
-input.input.bootstrap__input.search-input{
+input.input.bootstrap__input.search-input {
   border: 2px solid var(--color-base03) !important;
   border-radius: 7px;
 }
@@ -174,7 +176,10 @@ button.goals-filter__item.selected {
   background-color: var(--color-base01) !important;
 }
 
-.todo-column [listview] .todo-column__row.active-row .todo-column__actions-cell {
+.todo-column
+  [listview]
+  .todo-column__row.active-row
+  .todo-column__actions-cell {
   background-color: var(--color-base02) !important;
 }
 
@@ -187,7 +192,7 @@ button.goals-filter__item.selected {
 }
 
 .goals-filter__item:hover:not(.selected) {
-  background-color: var(--color-base02) !important
+  background-color: var(--color-base02) !important;
 }
 
 .goals-filter__item {
@@ -198,7 +203,6 @@ button.goals-filter__item.selected {
   background-color: var(--color-base00) !important;
   color: var(--color-text) !important;
 }
-
 
 .goals__goal__content__title {
   background-color: var(--color-base00) !important;
@@ -229,7 +233,10 @@ button.goals-filter__item.selected {
   background-color: var(--color-base01) !important;
 }
 
-.evaluation-graphic .evaluation-graphic--goal .evaluation-graphic--icon .goals__goal__graphic {
+.evaluation-graphic
+  .evaluation-graphic--goal
+  .evaluation-graphic--icon
+  .goals__goal__graphic {
   display: none !important;
 }
 
@@ -241,7 +248,7 @@ button.goals-filter__item.selected {
 .smsc-select-bubble,
 .smsc_cm_body,
 .course-session-page__container,
-input[type=search].input.search-input,
+input[type="search"].input.search-input,
 .feedback,
 .feedback--silver {
   background-color: var(--color-base01) !important;
@@ -260,7 +267,11 @@ input[type=search].input.search-input,
 
 .c-steel-combo--100,
 .c-steel-combo-hover--100,
-[listview] .listview__row:hover:not(.listview__row--selected) .listview__cell:not(.listview__cell--select-btn):not(.listview__cell--no-hover) {
+[listview]
+  .listview__row:hover:not(.listview__row--selected)
+  .listview__cell:not(.listview__cell--select-btn):not(
+    .listview__cell--no-hover
+  ) {
   background-color: transparent !important;
 }
 
@@ -295,7 +306,6 @@ textarea,
 
 .filterlistview:hover {
   background-color: transparent !important;
-
 }
 
 .evaluation-graphic--large {
@@ -305,7 +315,7 @@ textarea,
 
 .manual_widgettitle {
   background-color: var(--color-base01) !important;
-  border: 1px solid var(--color-base02) !important
+  border: 1px solid var(--color-base02) !important;
 }
 
 .rubrics__row--title {
@@ -318,10 +328,8 @@ textarea,
 }
 
 .timegrid {
-  background: transparent !important
+  background: transparent !important;
 }
-
-
 
 .bubble__menu-btn:hover {
   border-radius: 5px !important;
@@ -336,7 +344,7 @@ textarea,
 }
 
 .buis-stats-box {
-  margin-right: .667rem;
+  margin-right: 0.667rem;
   background-color: var(--color-base01);
   margin-bottom: 0px !important;
   border-radius: 50px;
@@ -363,19 +371,23 @@ span.evaluation-graphic__progress-ring__value {
   color: var(--color-text) !important;
 }
 
-.title-and-schoolyear-selector .title-and-schoolyear-selector__period-container:hover:not(:disabled),
-.title-and-schoolyear-selector[aria-expanded=true] .title-and-schoolyear-selector__period-container:not(:disabled) {
+.title-and-schoolyear-selector
+  .title-and-schoolyear-selector__period-container:hover:not(:disabled),
+.title-and-schoolyear-selector[aria-expanded="true"]
+  .title-and-schoolyear-selector__period-container:not(:disabled) {
   border-color: var(--color-accent) !important;
   background-color: var(--darken-background) !important;
-
 }
 
-.title-and-schoolyear-selector .title-and-schoolyear-selector__period-container:not(:disabled) {
+.title-and-schoolyear-selector
+  .title-and-schoolyear-selector__period-container:not(:disabled) {
   border-width: 2px !important;
   border-radius: 15px !important;
 }
 
-.enableAnimations .title-and-schoolyear-selector .title-and-schoolyear-selector__period-container:not(:disabled) {
+.enableAnimations
+  .title-and-schoolyear-selector
+  .title-and-schoolyear-selector__period-container:not(:disabled) {
   transition: all 0.1s !important;
 }
 
@@ -387,7 +399,8 @@ span.evaluation-graphic__progress-ring__value {
   border-radius: 15px !important;
 }
 
-.enableAnimations .listview__row.js-listview-row.leerplannen-overview__list__listview__row {
+.enableAnimations
+  .listview__row.js-listview-row.leerplannen-overview__list__listview__row {
   transition: all 0.1s ease-in-out !important;
 }
 
@@ -431,27 +444,28 @@ td.cell.cell--evaluation.js-cell-evaluation.evaluation:hover {
 
 #smscMain.results {
   overflow-x: hidden !important;
+  align-items: normal !important;
+  flex-direction: row !important;
+  justify-content: start !important;
 }
 
 div.reports-overview__listview__row {
-    background-color: rgb(0 0 0 / 20%) !important;
-    border-radius: 1rem;
-    margin-bottom: 1rem;
+  background-color: rgb(0 0 0 / 20%) !important;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
 }
-
 
 .listview__rows div.reports-overview__listview__row:hover {
-    background-color: rgb(0 0 0 / 50%) !important;
-    border-radius: 1rem;
-    margin-bottom: 1rem;
-    transition: background-color 0.3s ease;
+  background-color: rgb(0 0 0 / 50%) !important;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+  transition: background-color 0.3s ease;
 }
 
-
 .evaluation-graphic__progress-ring__value {
-    margin-top: 1rem !important;
+  margin-top: 1rem !important;
 }
 
 .progress-ring__content .evaluation-graphic__progress-ring__description {
-    margin-top: 1.5rem !important;
+  margin-top: 1.5rem !important;
 }

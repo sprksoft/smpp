@@ -162,16 +162,8 @@ body.modern-ui .homepage__block {
   align-items: flex-start !important;
 }
 
-#smscMain.results {
-  align-items: normal !important;
-}
-
 .smsc-container.smsc-container--main.overview-page__content {
   width: 100% !important;
-}
-
-div#smscMain.results {
-  flex-direction: row !important;
 }
 
 .smscBlockContainer_mainContentBlock {
