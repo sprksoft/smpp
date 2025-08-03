@@ -1,28 +1,22 @@
 #!/bin/bash
+set -e
 # Upload de firefox versie naar ldev.eu.org
-# Usage: firefox_upload.sh <session_token> [-d|--debug]
+# Usage: ff_up.sh <key>
 
 root="https://ldev.eu.org"
-ses_token=$1
+key=$1
 if [[ "$1" == "-d" ]] || [[ "$1" == "--debug" ]] ; then
   echo "Debug mode"
   root="http://localhost:8080"
-  ses_token=$2
+  key=$2
 fi
 
-TOKEN_GET_URL="$root/sestoken"
-
-if [[ -z "$ses_token" ]] ; then
-  echo "Session token required"
-  echo "Go to $TOKEN_GET_URL and copy the token here"
-  xdg-open $TOKEN_GET_URL
-  echo -n "token: "
-  read ses_token
-  if [[ -z "$ses_token" ]] ; then
-    ses_token="$(wl-paste)"
-  fi
+echo "Validating manifest"
+pkg_id=$(cat manifest.json | jq -r .browser_specific_settings.gecko.id)
+if [[ cat manifest.json | jq -r ".browser_specific_settings.gecko.update_url == \"https://ldev.eu.org/firefox/updates.json\"" == "false" ]] ; then
+  printf 'validation failed\n' 1>&2
+  exit 1
 fi
-
 
 echo "Deleting old artifacts..."
 rm -rf web-ext-artifacts/*
@@ -36,4 +30,4 @@ ver=$(ls web-ext-artifacts | rg "smartschool_-([0-9]*.[0-9]*.[0-9]*).zip" -r '$1
 echo "=== Done ==="
 echo "version: $ver"
 echo "Uploading to $root..."
-curl --data-binary @web-ext-artifacts/smartschool_-$ver.zip -H "Cookie:session=$ses_token" "$root/firefox/smpp?v=$ver"
+curl --data-binary @web-ext-artifacts/smartschool_-$ver.zip -H "Cookie:session=$ses_token" "$root/firefox/$pkg_id?v=$ver"
