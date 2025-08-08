@@ -2023,6 +2023,32 @@ span[style*="background"]:not(.lijnNumber),
 div[style*="background"]:not(.manual_widgettitle) {
   background-color: transparent !important;
 }
+/*code hier boven heeft ervoor gezorcht dat dit bij de planner moest ):[ */
+.bubble-s87kI {
+  background-color: var(--color-base01) !important;
+  border: 2px solid var(--color-base02) !important;
+}
+.dropdownMenuItem-Vszox[data-selected="true"] {
+  background-color: var(--color-base03) !important;
+}
+.dropdownMenuItem-Vszox[data-selected="false"] {
+  background-color: var(--color-base01) !important;
+}
+.dropdownMenuItem-Vszox[data-selected="false"]:hover {
+  background-color: var(--color-base02) !important;
+}
+.smsc-svg--earth--16 {
+  border: none !important;
+}
+span.label_tLqW4 {
+  color: var(--color-text) !important;
+}
+.list_mgnC5 {
+  background-color: var(--color-base01) !important;
+  border: 2px solid var(--color-base02) !important;
+  border-radius: 25px !important;
+}
+/*tot hier moest ik planner verandere door dat en ben nog niet klaar :c*/
 
 span.news__feed__button__content--name-date,
 .icon-label__info {
