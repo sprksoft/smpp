@@ -224,7 +224,7 @@ async function migrateSettings() {
   console.log("new data:", quickSettings, widgetData);
 
   await browser.runtime.sendMessage({
-    action: "setQuickSettingsData",
+    action: "setSettingsData",
     data: quickSettings,
   });
 
@@ -234,4 +234,85 @@ async function migrateSettings() {
   });
 
   window.localStorage.removeItem("settingsdata");
+  migrateSettingsV2();
+}
+
+async function migrateSettingsV2() {
+  const data = await browser.runtime.sendMessage({
+    action: "getSettingsData",
+  });
+  let newSettingsData;
+  if (!liteMode) {
+    newSettingsData = {
+      profile: {
+        customUserName: data.customUserName,
+      },
+      appearance: {
+        theme: data.theme,
+        enableSMPPLogo: data.enableSMPPLogo,
+        background: {
+          backgroundSelection: data.backgroundSelection,
+          backgroundLink: data.backgroundLink,
+          backgroundBlurAmount: data.backgroundBlurAmount,
+        },
+        weatherOverlay: {
+          weatherOverlaySelection: data.weatherOverlaySelection,
+          weatherOverlayAmount: data.weatherOverlayAmount,
+        },
+      },
+      topBar: {
+        enableGOButton: false,
+        enableSearchButton: false,
+        enableGCButton: true,
+        enableLogoutButton: true,
+        enableQuickMenuButton: false,
+      },
+      features: {
+        showNews: data.showNews,
+        delijn: {
+          monochrome: false,
+        },
+      },
+      other: {
+        quicks: data.quicks,
+        enablePerfomanceMode: data.enablePerfomanceMode,
+      },
+    };
+  } else {
+    newSettingsData = {
+      profile: {
+        customUserName: data.customUserName,
+      },
+      appearance: {
+        theme: data.theme,
+        enableSMPPLogo: data.enableSMPPLogo,
+        background: {
+          backgroundSelection: data.backgroundSelection,
+          backgroundLink: data.backgroundLink,
+          backgroundBlurAmount: data.backgroundBlurAmount,
+        },
+      },
+      topBar: {
+        enableGOButton: false,
+        enableSearchButton: false,
+        enableLogoutButton: true,
+        enableQuickMenuButton: false,
+      },
+      features: {
+        showNews: data.showNews,
+        delijn: {
+          monochrome: true,
+        },
+      },
+      other: {
+        quicks: data.quicks,
+        enablePerfomanceMode: data.enablePerfomanceMode,
+      },
+    };
+  }
+  await browser.runtime.sendMessage({
+    action: "setSettingsData",
+    data: newSettingsData,
+  });
+  console.log("migrated v2");
 }

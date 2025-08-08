@@ -45,7 +45,7 @@ function remove_quick(name) {
 
 async function quick_load() {
   let conf = await browser.runtime.sendMessage({
-    action: "getQuickSettingsData",
+    action: "getSettingsData",
   });
   if (!conf.quicks) {
     return [];
@@ -55,9 +55,9 @@ async function quick_load() {
 
 async function quick_save() {
   await browser.runtime.sendMessage({
-    action: "setQuickSetting",
-    name: "quicks",
-    values: quicks,
+    action: "setSettingsCategory",
+    category: "quicks",
+    data: quicks,
   });
 }
 
@@ -102,7 +102,7 @@ function remove_quick_interactive() {
 //TODO: make this better
 async function config_menu() {
   const conf = await browser.runtime.sendMessage({
-    action: "getQuickSettingsData",
+    action: "getSettingsData",
   });
   let cmd_list = Object.keys(conf);
   dmenu(
@@ -113,7 +113,7 @@ async function config_menu() {
         async function (val, shift) {
           conf[cmd] = val;
           await browser.runtime.sendMessage({
-            action: "setQuickSettingsData",
+            action: "setSettingsData",
             data: conf,
           });
         },

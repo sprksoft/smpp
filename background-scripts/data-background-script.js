@@ -1,9 +1,11 @@
 if (typeof browser === "undefined") {
   var browser = chrome;
 }
+
 const liteMode = browser.runtime.getManifest().lite_mode;
 const plantVersion = 2;
 import { fetchDelijnData, fetchWeatherData } from "./api-background-script.js";
+
 function getDefaultCustomThemeData() {
   return {
     color_accent: "#a3a2ec",
@@ -15,48 +17,84 @@ function getDefaultCustomThemeData() {
   };
 }
 
-function getDefaultQuickSettings(isLite) {
-  if (isLite) {
+function getDefaultSettings(isLite) {
+  if (!isLite) {
     return {
-      theme: "ldev",
-      enableSMPPLogo: true,
-      enablePerfomanceMode: true,
-      backgroundSelection: 0,
-      backgroundLink: null,
-      backgroundBlurAmount: 0,
-      showNews: true,
-      customUserName: null,
-      quicks: [],
+      profile: {
+        customUserName: null,
+      },
+      appearance: {
+        theme: "ldev",
+        enableSMPPLogo: true,
+        background: {
+          backgroundSelection: 0,
+          backgroundLink: null,
+          backgroundBlurAmount: 0,
+        },
+        weatherOverlay: {
+          weatherOverlaySelection: 1,
+          weatherOverlayAmount: 0,
+        },
+      },
+      topBar: {
+        enableGOButton: false,
+        enableSearchButton: false,
+        enableGCButton: true,
+        enableLogoutButton: true,
+        enableQuickMenuButton: false,
+      },
+      features: {
+        showNews: true,
+        delijn: {
+          monochrome: false,
+        },
+      },
+      other: { quicks: [], enablePerfomanceMode: false },
+    };
+  } else {
+    return {
+      profile: {
+        customUserName: null,
+      },
+      appearance: {
+        theme: "ldev",
+        enableSMPPLogo: false,
+        background: {
+          backgroundSelection: 0,
+          backgroundLink: null,
+          backgroundBlurAmount: 0,
+        },
+      },
+      topBar: {
+        enableGOButton: false,
+        enableSearchButton: false,
+        enableLogoutButton: true,
+        enableQuickMenuButton: false,
+      },
+      features: {
+        showNews: true,
+        delijn: {
+          monochrome: true,
+        },
+      },
+      other: { quicks: [], enablePerfomanceMode: true },
     };
   }
-  return {
-    theme: "ldev",
-    enableSMPPLogo: true,
-    enablePerfomanceMode: false,
-    backgroundSelection: 0,
-    backgroundLink: null,
-    backgroundBlurAmount: 0,
-    showNews: true,
-    quicks: [],
-    weatherOverlaySelection: 1,
-    weatherOverlayAmount: 0,
-    customUserName: null,
-  };
 }
 
-export async function getQuickSettingsData() {
+export async function getSettingsData() {
   let data = await browser.storage.local.get("settingsData");
   console.log(data);
-  return data.settingsData || getDefaultQuickSettings(liteMode);
+  console.log(data.settingsData || getDefaultSettings(liteMode));
+  return data.settingsData || getDefaultSettings(liteMode);
 }
 
 export async function getWidgetData() {
   let data = await browser.storage.local.get("widgets");
   return data.widgets;
 }
-export async function setWidgetData(widgetData) {
-  await browser.storage.local.set({ widgets: widgetData });
-}
+
+export async function setWidgetData(widgetData) {}
 
 export async function getWeatherAppData() {
   let data = await browser.storage.local.get("weatherAppData");
@@ -85,6 +123,7 @@ export async function getDelijnAppData() {
   };
   return delijnAppData;
 }
+
 export async function getPlantAppData() {
   let data = await browser.storage.local.get("plantAppData");
   let plantAppData = data.plantAppData || {
@@ -99,6 +138,7 @@ export async function getPlantAppData() {
   };
   return plantAppData;
 }
+
 export async function getCustomThemeData() {
   let data = await browser.storage.local.get("customThemeData");
   return data.customThemeData || getDefaultCustomThemeData();

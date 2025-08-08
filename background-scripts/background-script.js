@@ -3,11 +3,10 @@ if (typeof browser === "undefined") {
 }
 
 import {
-  getQuickSettingsData,
+  getSettingsData,
   getWeatherAppData,
   getDelijnAppData,
   getWidgetData,
-  setWidgetData,
   getDelijnColorData,
   getPlantAppData,
   getCustomThemeData,
@@ -22,22 +21,48 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
       sendResponse({ succes: true });
       console.log("Cleared browser storage");
     }
-    // Quick settings
-    if (message.action === "setQuickSettingsData") {
+    // Settings
+    if (message.action === "setSettingsData") {
       await browser.storage.local.set({ settingsData: message.data });
       sendResponse({ succes: true });
-      console.log("Quick settings data saved.");
+      console.log("Settings data saved.");
     }
-    if (message.action === "setQuickSetting") {
-      const settingsData = await getQuickSettingsData();
+    /* maybe usefull but just use the categories for now
+    if (message.action === "setSetting") {
+      const settingsData = await getSettingsData();
       settingsData[message.name] = message.value;
       await browser.storage.local.set({ settingsData: settingsData });
       sendResponse({ succes: true });
     }
-    if (message.action === "getQuickSettingsData") {
-      const settingsData = await getQuickSettingsData();
+    if (message.action === "getSetting") {
+      const settingsData = await getSettingsData();
+      settingsData[message.name] = message.value;
+      await browser.storage.local.set({ settingsData: settingsData });
+      sendResponse({ succes: true });
+    }
+    */
+    if (message.action === "setSettingsCategory") {
+      const settingsData = await getSettingsData();
+      settingsData[message.category] = message.data;
+      await browser.storage.local.set({ settingsData: settingsData });
+      sendResponse({ succes: true });
+      console.log(
+        "Settings data saved for this:" + message.category + "category"
+      );
+    }
+
+    if (message.action === "getSettingsCategory") {
+      const settingsData = await getSettingsData();
+      sendResponse(settingsData[message.category]);
+      console.log(
+        "Settings data sent for this:" + message.category + "category"
+      );
+    }
+    if (message.action === "getSettingsData") {
+      const settingsData = await getSettingsData();
+      console.log(settingsData);
       sendResponse(settingsData);
-      console.log("Quick settings data sent.");
+      console.log("Settings data sent.");
     }
     // Custom theme
     if (message.action === "getCustomThemeData") {
@@ -133,7 +158,7 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
     }
     if (message.action === "setWidgetData") {
       console.log("saving widget data");
-      await setWidgetData(message.widgetData);
+      await browser.storage.local.set({ widgets: message.widgetData });
       sendResponse({ succes: true });
     }
     // Games

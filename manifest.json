@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Smartschool++",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "description": "Enhance your Smartschool experience with themes and more",
   "homepage_url": "https://smartschoolplusplus.com",
   "lite_mode": false,
@@ -19,6 +19,7 @@
         "styles/smpp-styles/plant.css",
         "styles/smpp-styles/widgets.css",
         "styles/smpp-styles/tutorial-widget.css",
+        "styles/smpp-styles/settings.css",
         "styles/fixes/general.css",
         "styles/fixes/login.css",
         "styles/fixes/messages.css",
@@ -62,6 +63,12 @@
         "games/pong.js",
         "main-features/main.js"
       ]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["images/*"],
+      "matches": ["*://*.smartschool.be/*"]
     }
   ],
   "icons": {

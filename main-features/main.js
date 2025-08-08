@@ -113,17 +113,21 @@ function resetSMlogo() {
 async function apply() {
   setEditMode(false); // Turn off widget edit mode
   let style = document.documentElement.style;
+
   const data = await browser.runtime.sendMessage({
-    action: "getQuickSettingsData",
+    action: "getSettingsData",
   });
+
   changeFont();
-  userNameChanger(data.customName);
+  userNameChanger(data.profile.customUserName);
   decapitateಠ_ಠ();
   fixCoursesSearch();
 
-  await setTheme(data.theme);
-  currentTheme = data.theme;
-  showNews(data.showNews);
+  await setTheme(data.appearance.theme);
+  currentTheme = data.appearance.theme;
+
+  showNews(data.features.showNews);
+
   getThemeQueryString([
     "color-base00",
     "color-base01",
@@ -138,42 +142,48 @@ async function apply() {
     switchCoursesButton();
   }
   if (document.querySelector(".login-app__left")) updateLoginPanel();
-  let defaultBackgroundBlur = data.backgroundBlurAmount * 2;
-  if (data.backgroundBlurAmount == 0) {
+
+  let defaultBackgroundBlur =
+    data.appearance.background.backgroundBlurAmount * 2;
+  if (data.appearance.background.backgroundBlurAmount == 0) {
     defaultBackgroundBlur += 2;
   }
+
   style.setProperty(
     "--profile-picture",
-    "url(" + getPfpLink(data.customName || getOriginalName()) + ")"
+    "url(" + getPfpLink(data.profile.customUserName || getOriginalName()) + ")"
   );
-  style.setProperty(
-    "--blur-value-large",
-    "blur(" + defaultBackgroundBlur + "px)"
-  );
+  style.setProperty("--blur-value-large", `blur(${defaultBackgroundBlur}px)`);
   style.setProperty(
     "--blur-value-small",
-    "blur(" + data.backgroundBlurAmount + "px)"
+    `blur(${data.appearance.background.backgroundBlurAmount}px)`
   );
+
   if (!liteMode) {
     applyWeatherEffects(
-      data.weatherOverlaySelection,
-      data.weatherOverlayAmount
+      data.appearance.weatherOverlay.weatherOverlaySelection,
+      data.appearance.weatherOverlay.weatherOverlayAmount
     );
   }
-  data.enablePerfomanceMode
+
+  data.other.enablePerfomanceMode
     ? document.body.classList.remove("enableAnimations")
     : document.body.classList.add("enableAnimations");
-  if (document.getElementById("background_image"))
+
+  if (document.getElementById("background_image")) {
     document.getElementById("background_image").style.display = "none";
-  switch (data.backgroundSelection) {
+  }
+
+  switch (data.appearance.background.backgroundSelection) {
     case 1:
-      set_backgroundlink(data.backgroundLink);
+      set_backgroundlink(data.appearance.background.backgroundLink);
       break;
     case 2:
       set_background();
       break;
   }
-  if (data.enableSMPPLogo) {
+
+  if (data.appearance.enableSMPPLogo) {
     updateSMPPlogo();
   } else {
     resetSMlogo();
@@ -181,18 +191,58 @@ async function apply() {
 }
 
 async function storeQuickSettings() {
-  const data = await browser.runtime.sendMessage({
-    action: "getQuickSettingsData",
+  const oldData = await browser.runtime.sendMessage({
+    action: "getSettingsData",
   });
-  if (data.theme == "custom") {
-    await storeCustomThemeData();
-  }
-  data.theme = document.getElementById("theme-selector").value;
-  currentTheme = data.theme;
-  let oldBackgroundLink = data.backgroundLink;
-  data.backgroundLink = document.getElementById("background-link-input").value;
 
-  if (data.backgroundLink) {
+  const data = {
+    profile: {
+      customUserName: null,
+    },
+    appearance: {
+      theme: document.getElementById("theme-selector").value,
+      enableSMPPLogo: document.getElementById("smpp-logo-toggle").checked,
+      background: {
+        backgroundSelection: 0,
+        backgroundLink: document.getElementById("background-link-input").value,
+        backgroundBlurAmount: Number(
+          document.getElementById("background-blur-amount-slider").value
+        ),
+      },
+      weatherOverlay: {
+        weatherOverlaySelection: !liteMode
+          ? Number(document.getElementById("weather-overlay-selector").value)
+          : 1,
+        weatherOverlayAmount: !liteMode
+          ? Number(
+              document.getElementById("weather-overlay-amount-slider").value
+            )
+          : 0,
+      },
+    },
+    topBar: {
+      enableGOButton: false,
+      enableSearchButton: false,
+      enableGCButton: true,
+      enableLogoutButton: true,
+      enableQuickMenuButton: false,
+    },
+    features: {
+      showNews: document.getElementById("news-toggle").checked,
+      delijn: {
+        monochrome: false,
+      },
+    },
+    other: {
+      quicks: [],
+      enablePerfomanceMode: document.getElementById("performance-mode-toggle")
+        .checked,
+    },
+  };
+
+  currentTheme = data.appearance.theme;
+
+  if (data.appearance.background.backgroundLink) {
     document.getElementById("smpp-link-clear-button").classList.add("active");
   } else {
     document
@@ -200,34 +250,24 @@ async function storeQuickSettings() {
       .classList.remove("active");
   }
 
-  data.backgroundBlurAmount = Number(
-    document.getElementById("background-blur-amount-slider").value
-  );
-  data.enablePerfomanceMode = document.getElementById(
-    "performance-mode-toggle"
-  ).checked;
-  data.enableSMPPLogo = document.getElementById("smpp-logo-toggle").checked;
-  data.showNews = document.getElementById("news-toggle").checked;
-  if (!liteMode) {
-    data.weatherOverlaySelection = Number(
-      document.getElementById("weather-overlay-selector").value
-    );
-    data.weatherOverlayAmount = Number(
-      document.getElementById("weather-overlay-amount-slider").value
-    );
-  }
   document.getElementById(
     "performance-mode-info"
   ).innerHTML = `Toggle performance mode ${
-    data.enablePerfomanceMode
+    data.other.enablePerfomanceMode
       ? "<span class='green-underline'>Enabled</span>"
       : "<span class='red-underline'>Disabled</span>"
   }`;
-  if (data.theme == "custom") {
+
+  if (data.appearance.theme == "custom") {
+    if (oldData.theme == "custom") {
+      await storeCustomThemeData();
+    }
     await createCustomThemeUI();
   } else {
     document.getElementById("colorpickers").innerHTML = ``;
   }
+
+  // Handle background file input
   let file = document.getElementById("background-file-input").files[0];
   if (file) {
     const reader = new FileReader();
@@ -240,25 +280,30 @@ async function storeQuickSettings() {
     };
     reader.readAsDataURL(file);
 
-    data.backgroundSelection = 2;
-    data.backgroundLink = file.name;
+    data.appearance.background.backgroundSelection = 2;
+    data.appearance.background.backgroundLink = file.name;
     await browser.runtime.sendMessage({
-      action: "setQuickSettingsData",
+      action: "setSettingsData",
       data: data,
     });
 
     window.location.reload();
     return;
   } else {
-    if (data.backgroundLink == "") {
-      data.backgroundSelection = 0;
-    } else if (data.backgroundLink != oldBackgroundLink) {
-      data.backgroundSelection = 1;
+    // Keep old background selection logic
+    if (data.appearance.background.backgroundLink == "") {
+      data.appearance.background.backgroundSelection = 0;
+    } else if (
+      data.appearance.background.backgroundLink != oldData.backgroundLink
+    ) {
+      data.appearance.background.backgroundSelection = 1;
     }
   }
+
   console.log("Storing this new data:", data);
+
   await browser.runtime.sendMessage({
-    action: "setQuickSettingsData",
+    action: "setSettingsData",
     data: data,
   });
   await apply();
@@ -348,40 +393,42 @@ async function createCustomThemeUI() {
 
 async function loadQuickSettings() {
   const data = await browser.runtime.sendMessage({
-    action: "getQuickSettingsData",
+    action: "getSettingsData",
   });
   console.log("Loaded this data:", data);
-  document.getElementById("theme-selector").value = data.theme;
-  document.getElementById("background-link-input").value = data.backgroundLink;
+  document.getElementById("theme-selector").value = data.appearance.theme;
+  document.getElementById("background-link-input").value =
+    data.appearance.background.backgroundLink;
 
-  if (data.backgroundLink) {
+  if (data.appearance.background.backgroundLink) {
     document.getElementById("smpp-link-clear-button").classList.add("active");
   }
-  if (data.backgroundSelection == 2) {
+  if (data.appearance.background.backgroundSelection == 2) {
     document.getElementById("backgroundfilebutton").classList.add("active");
   } else {
     document.getElementById("backgroundfilebutton").classList.remove("active");
   }
   document.getElementById("background-blur-amount-slider").value =
-    data.backgroundBlurAmount;
+    data.appearance.background.backgroundBlurAmount;
   document.getElementById("performance-mode-toggle").checked =
-    data.enablePerfomanceMode;
-  document.getElementById("smpp-logo-toggle").checked = data.enableSMPPLogo;
-  document.getElementById("news-toggle").checked = data.showNews;
+    data.other.enablePerfomanceMode;
+  document.getElementById("smpp-logo-toggle").checked =
+    data.appearance.enableSMPPLogo;
+  document.getElementById("news-toggle").checked = data.features.showNews;
   document.getElementById(
     "performance-mode-info"
   ).innerHTML = `Toggle performance mode ${
-    data.enablePerfomanceMode
+    data.other.enablePerfomanceMode
       ? "<span class='green-underline'>Enabled</span>"
       : "<span class='red-underline'>Disabled</span>"
   }`;
   if (!liteMode) {
     document.getElementById("weather-overlay-selector").value =
-      data.weatherOverlaySelection;
+      data.appearance.weatherOverlay.weatherOverlaySelection;
     document.getElementById("weather-overlay-amount-slider").value =
-      data.weatherOverlayAmount;
+      data.appearance.weatherOverlay.weatherOverlayAmount;
   }
-  if (data.theme == "custom") {
+  if (data.appearance.theme == "custom") {
     await createCustomThemeUI();
   }
 }
@@ -457,12 +504,12 @@ function createBgSelector() {
   clearButton.addEventListener("click", async function (event) {
     event.target.closest(".smpp-link-clear-button").classList.remove("active");
     const data = await browser.runtime.sendMessage({
-      action: "getQuickSettingsData",
+      action: "getSettingsData",
     });
-    data.backgroundLink = "";
-    data.backgroundSelection = 0;
+    data.appearance.background.backgroundLink = "";
+    data.appearance.background.backgroundSelection = 0;
     await browser.runtime.sendMessage({
-      action: "setQuickSettingsData",
+      action: "setSettingsData",
       data: data,
     });
     await loadQuickSettings();
@@ -760,7 +807,14 @@ async function main() {
     await migrateSettings();
   }
 
-  apply();
+  const settingsData = await browser.runtime.sendMessage({
+    action: "getSettingsData",
+  });
+  if (settingsData.theme != null) {
+    await migrateSettingsV2();
+  }
+
+  await apply();
   createWidgetSystem();
 
   let logoutButton = document.querySelector(".js-btn-logout");

@@ -31,11 +31,11 @@ function createCustomNameInput(customName, originalName) {
 
 async function saveCustomName(customName) {
   const data = await browser.runtime.sendMessage({
-    action: "getQuickSettingsData",
+    action: "getSettingsData",
   });
   data.customName = customName;
   await browser.runtime.sendMessage({
-    action: "setQuickSettingsData",
+    action: "setSettingsData",
     data: data,
   });
 }

@@ -1,28 +1,56 @@
 class SettingsWindow extends BaseWindow {
+  settingsSideBarCategories = {
+    main: { name: "General", icon: "settingsGeneral.png" },
+    test: { name: "test", icon: "settingsGeneral.png" },
+  };
+  currentPage = 0;
+
   constructor(hidden = false) {
-    super("settingsWindow", hidden);
+    super("settings-window", hidden);
   }
+
   async renderContent() {
     let content = document.createElement("div");
     let settingsSideBar = this.createSettingsSideBar();
-    let settingsPage = this.displaySettingsPage(0);
+    let settingsPage = this.displaySettingsPage();
     content.classList.add("settingsWindow");
     content.appendChild(settingsSideBar);
     content.appendChild(settingsPage);
     await this.loadSettings();
     return content;
   }
+
   onOpened() {
-    console.log("yay");
+    this.loadSettings();
   }
   async loadSettings() {}
 
   createSettingsSideBar() {
-    return document.createElement("div");
+    let settingsSideBar = document.createElement("div");
+    settingsSideBar.classList.add("settings-sidebar");
+    Object.keys(this.settingsSideBarCategories).forEach((key) => {
+      settingsSideBar.appendChild(this.createSettingsSideBarCategory(key));
+    });
+    return settingsSideBar;
   }
 
-  displaySettingsPage(page) {
-    return document.createElement("div");
+  createSettingsSideBarCategory(category) {
+    let categoryButton = document.createElement("button");
+    categoryButton.classList.add("settings-category-button");
+    categoryButton.innerText = this.settingsSideBarCategories[category].name;
+    let categoryButtonIcon = document.createElement("img");
+    categoryButtonIcon.classList.add("category-button-icon");
+    categoryButtonIcon.src = getImage(
+      this.settingsSideBarCategories[category].icon
+    );
+    categoryButton.prepend(categoryButtonIcon);
+    return categoryButton;
+  }
+
+  displaySettingsPage() {
+    settingsPage = document.createElement("div");
+
+    return settingsPage;
   }
 }
 

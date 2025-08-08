@@ -37,3 +37,7 @@ async function clearsettings() {
 function unbloat() {
   document.body.innerHTML = "";
 }
+
+function getImage(name) {
+  return chrome.runtime.getURL(`images/${name}`);
+}
