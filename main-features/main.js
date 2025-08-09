@@ -74,19 +74,19 @@ function switchCoursesButton() {
       document.querySelector("[data-courses]")
     );
 }
-function topNavIcons() {
+function topNavIcons(data) {
   const notifsButton = document.querySelector(".js-btn-notifs");
-  if (notifsButton) {
+  if (notifsButton && data.enableNotificationIcon) {
     const textSpan = notifsButton.querySelector("span");
     notifsButton.innerHTML = notfisSvg;
     notifsButton.appendChild(textSpan);
   }
   const startButton = document.querySelector(".js-btn-home");
-  if (startButton) {
+  if (startButton && data.enableHomeIcon) {
     startButton.innerHTML = homeiconSvg;
   }
   const messageButton = document.querySelector(".js-btn-messages");
-  if (messageButton) {
+  if (messageButton && data.enableMailIcon) {
     const textSpan = messageButton.querySelector("span");
     messageButton.innerHTML = messageSvg;
     messageButton.appendChild(textSpan);
@@ -120,7 +120,7 @@ async function apply() {
 
   changeFont();
   userNameChanger(data.profile.customUserName);
-  decapitateಠ_ಠ();
+  if (!data.profile.enableOriginalPFP) decapitateಠ_ಠ();
   fixCoursesSearch();
 
   await setTheme(data.appearance.theme);
@@ -138,9 +138,11 @@ async function apply() {
   ]);
 
   if (document.querySelector("nav.topnav")) {
-    topNavIcons();
-    switchCoursesButton();
+    topNavIcons(data.topNav.icons);
+    if (data.topNav.switchCoursesAndLinks) switchCoursesButton();
   }
+  updateTopButtons(data.topNav);
+
   if (document.querySelector(".login-app__left")) updateLoginPanel();
 
   let defaultBackgroundBlur =
@@ -173,7 +175,7 @@ async function apply() {
   if (document.getElementById("background_image")) {
     document.getElementById("background_image").style.display = "none";
   }
-
+  console.log(data.appearance.background.backgroundSelection);
   switch (data.appearance.background.backgroundSelection) {
     case 1:
       set_backgroundlink(data.appearance.background.backgroundLink);
@@ -194,51 +196,32 @@ async function storeQuickSettings() {
   const oldData = await browser.runtime.sendMessage({
     action: "getSettingsData",
   });
+  // Start from old settings
+  const data = structuredClone(oldData);
+  console.log(oldData.appearance.background.backgroundLink);
+  data.profile.customUserName = null;
+  data.appearance.theme = document.getElementById("theme-selector").value;
+  data.appearance.enableSMPPLogo =
+    document.getElementById("smpp-logo-toggle").checked;
+  data.appearance.background.backgroundLink = document.getElementById(
+    "background-link-input"
+  ).value;
+  console.log(oldData.appearance.background.backgroundLink);
 
-  const data = {
-    profile: {
-      customUserName: null,
-    },
-    appearance: {
-      theme: document.getElementById("theme-selector").value,
-      enableSMPPLogo: document.getElementById("smpp-logo-toggle").checked,
-      background: {
-        backgroundSelection: 0,
-        backgroundLink: document.getElementById("background-link-input").value,
-        backgroundBlurAmount: Number(
-          document.getElementById("background-blur-amount-slider").value
-        ),
-      },
-      weatherOverlay: {
-        weatherOverlaySelection: !liteMode
-          ? Number(document.getElementById("weather-overlay-selector").value)
-          : 1,
-        weatherOverlayAmount: !liteMode
-          ? Number(
-              document.getElementById("weather-overlay-amount-slider").value
-            )
-          : 0,
-      },
-    },
-    topBar: {
-      enableGOButton: false,
-      enableSearchButton: false,
-      enableGCButton: true,
-      enableLogoutButton: true,
-      enableQuickMenuButton: false,
-    },
-    features: {
-      showNews: document.getElementById("news-toggle").checked,
-      delijn: {
-        monochrome: false,
-      },
-    },
-    other: {
-      quicks: [],
-      enablePerfomanceMode: document.getElementById("performance-mode-toggle")
-        .checked,
-    },
-  };
+  data.appearance.background.backgroundBlurAmount = Number(
+    document.getElementById("background-blur-amount-slider").value
+  );
+  data.appearance.weatherOverlay.weatherOverlaySelection = !liteMode
+    ? Number(document.getElementById("weather-overlay-selector").value)
+    : oldData.appearance.weatherOverlay.weatherOverlaySelection;
+  data.appearance.weatherOverlay.weatherOverlayAmount = !liteMode
+    ? Number(document.getElementById("weather-overlay-amount-slider").value)
+    : oldData.appearance.weatherOverlay.weatherOverlayAmount;
+
+  data.features.showNews = document.getElementById("news-toggle").checked;
+  data.other.enablePerfomanceMode = document.getElementById(
+    "performance-mode-toggle"
+  ).checked;
 
   currentTheme = data.appearance.theme;
 
@@ -259,7 +242,7 @@ async function storeQuickSettings() {
   }`;
 
   if (data.appearance.theme == "custom") {
-    if (oldData.theme == "custom") {
+    if (oldData.appearance.theme == "custom") {
       await storeCustomThemeData();
     }
     await createCustomThemeUI();
@@ -282,30 +265,26 @@ async function storeQuickSettings() {
 
     data.appearance.background.backgroundSelection = 2;
     data.appearance.background.backgroundLink = file.name;
-    await browser.runtime.sendMessage({
-      action: "setSettingsData",
-      data: data,
-    });
-
+    await browser.runtime.sendMessage({ action: "setSettingsData", data });
     window.location.reload();
     return;
   } else {
-    // Keep old background selection logic
     if (data.appearance.background.backgroundLink == "") {
       data.appearance.background.backgroundSelection = 0;
     } else if (
-      data.appearance.background.backgroundLink != oldData.backgroundLink
+      data.appearance.background.backgroundLink !=
+      oldData.appearance.background.backgroundLink
     ) {
       data.appearance.background.backgroundSelection = 1;
     }
   }
+  console.log(
+    data.appearance.background.backgroundLink,
+    oldData.appearance.background.backgroundLink
+  );
 
   console.log("Storing this new data:", data);
-
-  await browser.runtime.sendMessage({
-    action: "setSettingsData",
-    data: data,
-  });
+  await browser.runtime.sendMessage({ action: "setSettingsData", data });
   await apply();
 }
 
@@ -773,27 +752,69 @@ function createQuickSettingsButton() {
   return quickSettingsButtonWrapper;
 }
 
-function createTopButtons(onHomePage) {
+function createTopButtons() {
+  const onHomePage = document.getElementById("container") !== null;
   let topNav = document.querySelector("nav.topnav");
   if (topNav == null) {
     return;
   }
 
-  let searchBtn = topNav.querySelector(
-    ".topnav__btn--icon--search"
-  ).parentElement;
-  topNav.insertBefore(createQuickSettingsButton(), searchBtn);
+  let logoutButton = document.querySelector(".js-btn-logout");
+  if (logoutButton) {
+    logoutButton.innerHTML = changeLogoutText();
+  }
+
+  let searchBtn = document.querySelector(".topnav__btn--icon--search");
+
+  topNav.insertBefore(createQuickSettingsButton(), searchBtn.parentElement);
 
   let pushRight = topNav.childNodes[2];
 
   if (!liteMode) {
     topNav.insertBefore(createGCButton(), pushRight);
   }
-
+  let searchButton = document.querySelector(".topnav__btn--icon--search");
+  if (searchButton) {
+    searchButton.innerHTML = searchButtonSvg;
+  }
   if (onHomePage) {
     topNav.insertBefore(createWidgetEditModeButton(), pushRight);
   }
-  topNav.insertBefore(createSettingsButton(), pushRight);
+
+  topNav.insertBefore(createQuickMenuButton(), pushRight);
+
+  topNav.insertBefore(createSettingsButton(), pushRight); //temp
+}
+
+function updateTopButtons(data) {
+  let GOButton = document.querySelector(`[data-go=""]`);
+  console.log(GOButton);
+  if (GOButton) {
+    data.enableGOButton
+      ? (GOButton.style = "display:flex")
+      : (GOButton.style = "display:none");
+  }
+
+  let searchButton = document.querySelector(".topnav__btn--icon--search");
+  if (searchButton) {
+    data.enableSearchButton
+      ? (searchButton.parentElement.style = "display:flex")
+      : (searchButton.parentElement.style = "display:none");
+  }
+
+  let GCButton = document.getElementById("global_chat_button");
+  if (GCButton) {
+    data.enableGCButton
+      ? (GCButton.style = "display:flex !important")
+      : (GCButton.style = "display:none !important");
+  }
+
+  let quickButton = document.getElementById("quick-menu-button");
+  if (quickButton) {
+    data.enableQuickButton
+      ? (quickButton.style = "display:flex !important")
+      : (quickButton.style = "display:none !important");
+  }
 }
 
 async function main() {
@@ -813,19 +834,11 @@ async function main() {
   if (settingsData.theme != null) {
     await migrateSettingsV2();
   }
+  createTopButtons();
 
   await apply();
   createWidgetSystem();
 
-  let logoutButton = document.querySelector(".js-btn-logout");
-  if (logoutButton) logoutButton.innerHTML = changeLogoutText();
-
-  let onHomePage = document.getElementById("container") !== null;
-  createTopButtons(onHomePage);
-
-  document.querySelector('[data-go=""]')?.remove();
-  let searchBtn = document.querySelector(".topnav__btn--icon--search");
-  if (searchBtn) searchBtn.parentElement.style = "display:none";
   let notifsLabel = document.getElementById("notifsToggleLabel");
   if (notifsLabel) notifsLabel.innerText = "Toon pop-ups"; // Simplify text. (smartschool by default has a very long explanation that doesn't fit on screen)
 }

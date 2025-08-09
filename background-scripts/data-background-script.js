@@ -22,6 +22,7 @@ function getDefaultSettings(isLite) {
     return {
       profile: {
         customUserName: null,
+        enableOriginalPFP: false,
       },
       appearance: {
         theme: "ldev",
@@ -36,12 +37,18 @@ function getDefaultSettings(isLite) {
           weatherOverlayAmount: 0,
         },
       },
-      topBar: {
+      topNav: {
         enableGOButton: false,
         enableSearchButton: false,
         enableGCButton: true,
-        enableLogoutButton: true,
         enableQuickMenuButton: false,
+        switchCoursesAndLinks: true,
+        icons: {
+          enableHomeIcon: true,
+          enableMailIcon: true,
+          enableNotificationIcon: true,
+          enableSettingsIcon: false,
+        },
       },
       features: {
         showNews: true,
@@ -55,6 +62,7 @@ function getDefaultSettings(isLite) {
     return {
       profile: {
         customUserName: null,
+        enableOriginalPFP: false,
       },
       appearance: {
         theme: "ldev",
@@ -65,11 +73,17 @@ function getDefaultSettings(isLite) {
           backgroundBlurAmount: 0,
         },
       },
-      topBar: {
+      topNav: {
         enableGOButton: false,
         enableSearchButton: false,
-        enableLogoutButton: true,
         enableQuickMenuButton: false,
+        switchCoursesAndLinks: true,
+        icons: {
+          enableHomeIcon: true,
+          enableMailIcon: true,
+          enableNotificationIcon: true,
+          enableSettingsIcon: false,
+        },
       },
       features: {
         showNews: true,

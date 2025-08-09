@@ -62,6 +62,10 @@
   margin-top: 0.5rem;
 }
 
+.topnav__btn--icon--search > svg {
+  width: 20px;
+}
+
 .performanceModeTooltipLabel {
   display: flex;
   align-items: center;

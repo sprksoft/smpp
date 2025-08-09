@@ -50,7 +50,6 @@
   font-size: 20px;
   border-radius: 10px;
   padding: 4px;
-  background-color: var(--color-base02);
 }
 
 .lijnCard.lijnCardCancelled .lijnCardBottom .timeUntilDeparture {

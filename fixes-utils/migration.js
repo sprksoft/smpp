@@ -246,6 +246,7 @@ async function migrateSettingsV2() {
     newSettingsData = {
       profile: {
         customUserName: data.customUserName,
+        enableOriginalPFP: false,
       },
       appearance: {
         theme: data.theme,
@@ -260,12 +261,18 @@ async function migrateSettingsV2() {
           weatherOverlayAmount: data.weatherOverlayAmount,
         },
       },
-      topBar: {
+      topNav: {
         enableGOButton: false,
         enableSearchButton: false,
         enableGCButton: true,
-        enableLogoutButton: true,
         enableQuickMenuButton: false,
+        switchCoursesAndLinks: true,
+        icons: {
+          enableHomeIcon: true,
+          enableMailIcon: true,
+          enableNotificationIcon: true,
+          enableSettingsIcon: false,
+        },
       },
       features: {
         showNews: data.showNews,
@@ -282,6 +289,7 @@ async function migrateSettingsV2() {
     newSettingsData = {
       profile: {
         customUserName: data.customUserName,
+        enableOriginalPFP: false,
       },
       appearance: {
         theme: data.theme,
@@ -292,11 +300,17 @@ async function migrateSettingsV2() {
           backgroundBlurAmount: data.backgroundBlurAmount,
         },
       },
-      topBar: {
+      topNav: {
         enableGOButton: false,
         enableSearchButton: false,
-        enableLogoutButton: true,
         enableQuickMenuButton: false,
+        switchCoursesAndLinks: true,
+        icons: {
+          enableHomeIcon: true,
+          enableMailIcon: true,
+          enableNotificationIcon: true,
+          enableSettingsIcon: false,
+        },
       },
       features: {
         showNews: data.showNews,

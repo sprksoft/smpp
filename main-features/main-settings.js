@@ -1,7 +1,9 @@
 class SettingsWindow extends BaseWindow {
   settingsSideBarCategories = {
-    main: { name: "General", icon: "settingsGeneral.png" },
-    test: { name: "test", icon: "settingsGeneral.png" },
+    appearance: { name: "Appearance", icon: "settingsAppearance.png" },
+    topNav: { name: "Navigation", icon: "settingsTopNav.png" },
+    features: { name: "Apps", icon: "settingsFeatures.png" },
+    other: { name: "Other", icon: "settingsOther.png" },
   };
   currentPage = 0;
 
@@ -28,10 +30,15 @@ class SettingsWindow extends BaseWindow {
   createSettingsSideBar() {
     let settingsSideBar = document.createElement("div");
     settingsSideBar.classList.add("settings-sidebar");
+    settingsSideBar.appendChild(this.createSettingsSideBarProfileButton());
     Object.keys(this.settingsSideBarCategories).forEach((key) => {
       settingsSideBar.appendChild(this.createSettingsSideBarCategory(key));
     });
     return settingsSideBar;
+  }
+
+  createSettingsSideBarProfileButton() {
+    return document.createElement("div");
   }
 
   createSettingsSideBarCategory(category) {
@@ -48,8 +55,8 @@ class SettingsWindow extends BaseWindow {
   }
 
   displaySettingsPage() {
-    settingsPage = document.createElement("div");
-
+    let settingsPage = document.createElement("div");
+    settingsPage.id = "settings-page";
     return settingsPage;
   }
 }
@@ -69,7 +76,7 @@ function createSettingsButton() {
   const SettingsButton = document.createElement("button");
   SettingsButton.id = "somebutton";
   SettingsButton.className = "topnav__btn";
-  SettingsButton.innerHTML = "gcIconSvg";
+  SettingsButton.innerHTML = "SettingsV2";
   SettingsButton.addEventListener("click", (e) => openSettingsWindow(e));
   return SettingsButton;
 }

@@ -247,7 +247,7 @@ class DelijnWidget extends WidgetBase {
 
     this.elements.searchButton = document.createElement("button");
     this.elements.searchButton.classList.add("delijnSearchButton");
-    this.elements.searchButton.innerHTML = delijnSearchButtonSvg;
+    this.elements.searchButton.innerHTML = searchButtonSvg;
     this.elements.searchButton.addEventListener("click", () =>
       this.handleHalteSearch()
     );
@@ -266,6 +266,17 @@ class DelijnWidget extends WidgetBase {
   async displayLijnenBasedOnHalte(entiteitnummer, haltenummer) {
     this.displayInfo("Loading...");
     this.clearBottomContainer();
+    const data = await browser.runtime.sendMessage({
+      action: "getSettingsData",
+    });
+    if (data.features.delijn.monochrome) {
+      let monochromeStyle = document.createElement("style");
+      monochromeStyle.innerHTML = `.lijnNumber{
+          background-color: var(--color-base02) !important;
+          color: var(--color-text) !important
+      }`;
+      document.head.appendChild(monochromeStyle);
+    }
 
     const delijnData = await fetchDelijnData(
       `https://api.delijn.be/DLKernOpenData/api/v1/haltes/${entiteitnummer}/${haltenummer}/real-time?maxAantalDoorkomsten=5`
