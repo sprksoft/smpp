@@ -264,7 +264,9 @@ function createQuickMenuButton() {
   quickMenuButton.id = "quick-menu-button";
   quickMenuButton.className = "topnav__btn";
   quickMenuButton.innerHTML = "Quick";
-  quickMenuButton.addEventListener("click", idk()); //temp baby
+  quickMenuButton.addEventListener("click", function () {
+    do_qm(quickMenuButton);
+  });
   return quickMenuButton;
 }
 

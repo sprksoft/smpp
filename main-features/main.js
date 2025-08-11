@@ -811,7 +811,7 @@ function updateTopButtons(data) {
 
   let quickButton = document.getElementById("quick-menu-button");
   if (quickButton) {
-    data.enableQuickButton
+    data.enableQuickMenuButton
       ? (quickButton.style = "display:flex !important")
       : (quickButton.style = "display:none !important");
   }

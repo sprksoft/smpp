@@ -46,4 +46,3 @@ async function dconfig_menu() {
     "dconfig: "
   );
 }
-
