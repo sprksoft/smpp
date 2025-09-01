@@ -7,47 +7,8 @@ class TakenWidget extends WidgetBase {
   createContent() {
     const foresight = 28; // dagen in de toekomst dat het zoekt voor taken
     let maxAssignments = 5;
-    let userId;
 
-    // get UID
-    try {
-      // try get it from a magic element
-      sendDebug("Trying to get plannerUrl from DOM...");
-      const plannerUrl = document
-        .getElementById("datePickerMenu")
-        .getAttribute("plannerurl");
-      sendDebug("Found plannerUrl from DOM:", plannerUrl);
-
-      const expirationDate = new Date();
-      expirationDate.setDate(expirationDate.getDate() + 30);
-      document.cookie = `plannerUrl=${plannerUrl};expires=${expirationDate.toUTCString()};path=/`;
-      sendDebug("Stored plannerUrl in cookies with 30 day expiration.");
-
-      userId = plannerUrl.split("/")[4];
-      sendDebug("Extracted userId from plannerUrl:", userId);
-    } catch (e) {
-      // read it from a cookie cuz the magic is unreliable af
-      sendDebug("Failed to get plannerUrl from DOM. Error:", e.message);
-      sendDebug("Trying to get plannerUrl from cookies...");
-
-      const cookies = document.cookie.split(";");
-      const plannerUrlCookie = cookies.find((cookie) =>
-        cookie.trim().startsWith("plannerUrl=")
-      );
-
-      if (plannerUrlCookie) {
-        sendDebug("Retrieved plannerUrl from cookies" + plannerUrlCookie);
-        const plannerUrl = plannerUrlCookie.split("=")[1];
-        sendDebug("Found plannerUrl in cookies:", plannerUrl);
-
-        userId = plannerUrl.split("/")[4];
-        sendDebug("Extracted userId from cookie plannerUrl:", userId);
-      } else {
-        console.error(
-          "taken is fucked, refresh 5 keer en als het dan niet werkt vraag hulp op discord @JJorne"
-        );
-      }
-    }
+    let userId = getUserId();
 
     if (DEBUG) {
       sendDebug("Debug mode enabled ✅");
@@ -64,9 +25,7 @@ class TakenWidget extends WidgetBase {
           throw new Error("School name could not be determined.");
         }
 
-        const url = `https://${schoolName}.smartschool.be/planner/api/v1/planned-elements/user/${userId}?from=${getCurrentDate()}&to=${getFutureDate(
-          foresight
-        )}&types=planned-assignments,planned-to-dos`;
+        const url = `https://${schoolName}.smartschool.be/planner/api/v1/planned-elements/user/${userId}?from=${getCurrentDate()}&to=${getFutureDate(foresight)}&types=planned-assignments,planned-to-dos`;
         sendDebug("Fetching planner data from:", url);
         const response = await fetch(url);
 
@@ -129,9 +88,9 @@ class TakenWidget extends WidgetBase {
         if (data.length > maxAssignments) {
           data = data.slice(0, maxAssignments);
         }
+        const today = new Date();
         data.forEach((element) => {
           const taskDate = new Date(element.period.dateTimeFrom);
-          const today = new Date();
           const tomorrow = new Date(today);
           tomorrow.setDate(today.getDate() + 1);
           const dayAfterTomorrow = new Date(today);
@@ -260,31 +219,6 @@ class TakenWidget extends WidgetBase {
   }
 }
 
-function sendDebug(...messages) {
-  if (DEBUG) {
-    console.log(...messages);
-  }
-}
 
-function getSchoolName() {
-  try {
-    const schoolName = window.location.hostname.split(".")[0];
-    if (!schoolName) {
-      throw new Error("Failed to extract school name");
-    }
-    return schoolName;
-  } catch (error) {
-    console.error(error.message);
-    return null;
-  }
-}
-
-function getCurrentDate() {
-  return new Date().toISOString().split("T")[0];
-}
-
-function getFutureDate(days) {
-  return new Date(Date.now() + days * 86400000).toISOString().split("T")[0];
-}
 
 registerWidget(new TakenWidget()); // so easy
