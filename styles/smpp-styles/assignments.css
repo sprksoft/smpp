@@ -1,7 +1,7 @@
 /* Whaatt Jorne gebruikt classes in assignments??? - you rn */
 
 .assignment__item {
-  transition: all 0.3s ease;
+  transition: all 0.3s ease; /* i refuse to believe anyone uses performance mode */
   position: relative;
   border-radius: 1rem;
   overflow: visible;
@@ -41,4 +41,11 @@
     width: 2.667rem;
     height: 2.667rem;
     border-radius: 4px;
+}
+
+.as_all_done{
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 1.2em;
+  color: var(--color-text);
 }
