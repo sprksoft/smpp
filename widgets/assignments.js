@@ -1,7 +1,6 @@
 // i'm a true ✨ Vibe Coder ✨ - Jdev
 // code for assignments list 📂
 // THANK YOU LDEVVVV 🫂🫂🫂
-const DEBUG = false;
 
 class TakenWidget extends WidgetBase {
   createContent() {
@@ -59,7 +58,7 @@ class TakenWidget extends WidgetBase {
       fetchPlannerData().then((data) => {
         if (!data) {
           TasksContainer.innerHTML =
-            "Als je niet in een vakantie bent, is er iets ernstig misgegaan";
+            "Er is iets ernstig misgegaan :(";
           return console.error("No planner data, Did something go wrong?");
         } else if (DEBUG) {
           sendDebug("Planner data fetched successfully.");
@@ -121,26 +120,19 @@ class TakenWidget extends WidgetBase {
           }
 
           const rowDiv = document.createElement("div");
-          rowDiv.classList.add("listview__row", "todo__row");
+          rowDiv.classList.add("listview__row", "todo__row", "assignment__item");
           rowDiv.setAttribute("data-id", element.id);
-          rowDiv.style.cssText = "display:flex;align-items:stretch;";
-          rowDiv.style.paddingBottom = "5px";
 
           const abbreviationDiv = document.createElement("div");
-          abbreviationDiv.classList.add("listview__cell");
-          abbreviationDiv.style.maxWidth = "fit-content";
-          abbreviationDiv.style.paddingRight = "7.5px";
+          abbreviationDiv.classList.add("listview__cell", "abvr__div");
 
           const wrapperDiv = document.createElement("div");
-          wrapperDiv.classList.add("todo-column__abbreviation-cell__wrapper");
-          wrapperDiv.style.cssText = `display:flex;justify-content:center;align-items:center;width:2.667rem;height:2.667rem;border-radius:4px;`;
-          wrapperDiv.classList.add(
-            `c-${element.color.split("-")[0]}-combo--${
-              element.color.split("-")[1]
-            }`
+          wrapperDiv.classList.add("todo-column__abbreviation-cell__wrapper", "wrapperdiv");
+          wrapperDiv.classList.add(`c-${element.color.split("-")[0]}-combo--${element.color.split("-")[1]}` // LET HIM COOK
           );
+
           // make the litle icon cubes
-          if (element.icon) {
+          if (element.icon) { // dont try to understand, i dont either
             fetch(
               `https://${getSchoolName()}.smartschool.be/smsc/svg/${
                 element.icon
