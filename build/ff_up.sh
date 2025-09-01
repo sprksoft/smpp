@@ -1,16 +1,34 @@
 #!/bin/bash
 set -e
-# Upload de firefox versie naar ldev.eu.org
-# Usage: ff_up.sh <key>
+HELP="Upload de firefox versie naar ldev.eu.org
+Usage: ff_up.sh [--debug|-d] <key>"
 
 cd $(dirname $0)
 
 root="https://ldev.eu.org"
-key=$1
-if [[ "$1" == "-d" ]] || [[ "$1" == "--debug" ]] ; then
+debug=false
+while [[ $# -gt 1 ]] ; do
+  case $1 in
+    -d|--debug)
+      debug=true
+      shift
+      ;;
+    *)
+      echo "$HELP"
+      exit 1
+      ;;
+  esac
+done
+
+if $debug ; then
   echo "Debug mode"
   root="http://localhost:8080"
-  key=$2
+fi
+
+key=$1
+if [[ -z "$key" ]] ; then
+  echo "$HELP"
+  exit 1
 fi
 
 echo "Validating manifest"
