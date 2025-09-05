@@ -1,0 +1,51 @@
+/* Whaatt Jorne gebruikt classes in assignments??? - you rn */
+
+.assignment__item {
+  transition: all 0.3s ease; /* i refuse to believe anyone uses performance mode */
+  position: relative;
+  border-radius: 1rem;
+  overflow: visible;
+  display: flex;
+  align-items: stretch;
+  padding-top: 2.5px;
+  padding-bottom: 2.5px;
+}
+
+.assignment__item:hover::after {
+  /*this code was made while listening to temperature by jean paul, any issues or bugs are entirely his fault*/
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  border-radius: inherit;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: -1;
+  transition: all 0.3s ease;
+}
+
+.assignment__item:hover { 
+  padding-left: 0.5rem;
+}
+
+.abvr__div {
+    max-width: fit-content;
+    padding-right: 7.5px;
+}
+
+.wrapperdiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2.667rem;
+    height: 2.667rem;
+    border-radius: 4px;
+}
+
+.as_all_done{
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 1.2em;
+  color: var(--color-text);
+}
