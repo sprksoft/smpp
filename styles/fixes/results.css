@@ -469,3 +469,25 @@ div.reports-overview__listview__row {
 .progress-ring__content .evaluation-graphic__progress-ring__description {
   margin-top: 1.5rem !important;
 }
+button.button-ZR3rz.bp-c-combo-hover-plain-outline--300,
+.searchInput-eoZIF.textInput-ACLPH{
+  background-color: var(--color-base01) !important;
+  border: 2px solid var(--color-base03) !important;
+}
+.input-arO6v{
+  background-color: var(--color-base01) !important;
+  border-right: 2px solid var(--color-base03) !important;
+  color: var(--color-text) !important;
+}
+.tabs[role=tablist]>[role=presentation]>[role=tab][aria-selected]{
+  box-shadow: none !important;
+  border-bottom: 2px solid var(--color-accent) !important;
+  background-color: var(--color-base02) !important;
+}
+
+.tabs[role=tablist]>[role=presentation]>[role=tab]:hover:not([aria-selected]){
+  border-bottom-color: var(--color-base03) !important;
+}
+.tabs[role=tablist]{
+  border-bottom: none !important;
+}
