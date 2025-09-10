@@ -294,7 +294,7 @@ text,
 .tabs,
 li,
 .legend2 {
-  background: var(--color-base02) !important;
+  background: var(--color-base01) !important;
   color: var(--color-text) !important;
 }
 

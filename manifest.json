@@ -20,6 +20,7 @@
         "styles/smpp-styles/widgets.css",
         "styles/smpp-styles/tutorial-widget.css",
         "styles/smpp-styles/settings.css",
+        "styles/smpp-styles/assignments.css",
         "styles/fixes/general.css",
         "styles/fixes/login.css",
         "styles/fixes/messages.css",
