@@ -1593,24 +1593,6 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   }
 }
 
-.window-controls {
-  position: absolute;
-  right: 0.5%;
-  top: 0.5%;
-  display: flex;
-  gap: 10px;
-  z-index: 25;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-}
-
-.base-window:hover .window-controls,
-.base-window:focus-within .window-controls {
-  opacity: 1;
-  transform: translateY(0);
-}
-
 .window-button {
   width: 36px;
   height: 36px;
@@ -1705,10 +1687,10 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
 
 .window-controls {
   position: absolute;
-  right: 0.5%;
-  top: 0.5%;
+  right: 0.5rem;
+  top: 0.5rem;
   display: flex;
-  gap: 10px;
+  gap: 0.5rem;
   z-index: 25;
   opacity: 0;
   transform: translateY(-20px);

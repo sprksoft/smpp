@@ -9,7 +9,7 @@ class TutorialWidget extends WidgetBase {
 
     let title = document.createElement("h1");
     title.className = "tutorial-widget-title";
-    title.textContent = "Welcome to widgets!";
+    title.textContent = "Widgets Tutorial";
     title.style.textAlign = "center";
     this.container.appendChild(title);
 
