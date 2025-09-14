@@ -15,7 +15,7 @@ class DMenu {
     itemList,
     endFunc = undefined,
     title = "dmenu:",
-    openerEl = undefined
+    openerEl = undefined,
   ) {
     this.endFunc = endFunc;
     this.openerEl = openerEl;
@@ -249,7 +249,7 @@ function dmenu(
   itemList,
   endFunc = undefined,
   title = "dmenu:",
-  opener = undefined
+  opener = undefined,
 ) {
   if (active_dmenu !== null && active_dmenu.isOpen()) {
     active_dmenu.close();

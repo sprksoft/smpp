@@ -46,7 +46,7 @@ class FlappyWidget extends GameBase {
   #calcGap() {
     return Math.max(
       PIPE_GAP * this.getOpt("speed") * 0.01,
-      BIRD_RADIUS * 2 + 5
+      BIRD_RADIUS * 2 + 5,
     );
   }
 
@@ -60,7 +60,7 @@ class FlappyWidget extends GameBase {
       -PIPE_W,
       PIPE_W,
       pipe.y + PIPE_W - gap_size / 2,
-      PIPE_W
+      PIPE_W,
     );
     ctx.fill();
     ctx.beginPath();
@@ -70,7 +70,7 @@ class FlappyWidget extends GameBase {
       botStartY,
       PIPE_W,
       this.canvas.height - botStartY + PIPE_W,
-      PIPE_W
+      PIPE_W,
     );
     ctx.fill();
   }
@@ -131,7 +131,7 @@ class FlappyWidget extends GameBase {
     this.birdY += this.birdVel * dt;
     this.birdVel = Math.min(
       this.birdVel + GRAVITY * this.getOpt("speed") * 0.01 * dt,
-      TERMVEL * this.getOpt("speed") * 0.01
+      TERMVEL * this.getOpt("speed") * 0.01,
     );
     ctx;
     if (this.jump) {

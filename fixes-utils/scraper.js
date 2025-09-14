@@ -1,7 +1,5 @@
-
-
 function scrape_from_html(query, func) {
-  data = []
+  data = [];
   let scrape_els = document.querySelectorAll(query);
   if (scrape_els.length == 0) {
     return data;
@@ -14,39 +12,38 @@ function scrape_from_html(query, func) {
 }
 
 function is_valid_data(data) {
-  return !(data == undefined || data.length == 0 || data.length == undefined)
+  return !(data == undefined || data.length == 0 || data.length == undefined);
 }
 
 function scrape_data_if_needed(data, query, func, done_func) {
   if (is_valid_data(data)) {
-    done_func(data)
+    done_func(data);
     window.localStorage.setItem(name, JSON.stringify(data));
-    return true
+    return true;
   }
 
   data = scrape_from_html(query, func);
   if (is_valid_data(data)) {
-    done_func(data)
+    done_func(data);
     window.localStorage.setItem(name, JSON.stringify(data));
-    return true
+    return true;
   }
 
-  return false
+  return false;
 }
 
 function scrape(name, query, func, done_func, interval_time = 0) {
   let data = JSON.parse(window.localStorage.getItem(name));
   if (scrape_data_if_needed(data, query, func, done_func)) {
-    return
+    return;
   }
   if (interval_time == 0) {
-    return
+    return;
   }
 
   let interval = setInterval(() => {
     if (scrape_data_if_needed(data, query, func, done_func)) {
-      clearInterval(interval)
+      clearInterval(interval);
     }
   }, interval_time);
 }
-

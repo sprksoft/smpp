@@ -32,7 +32,7 @@ class WeatherWidget extends WidgetBase {
     let weatherPreviewContent = document.createElement("div");
     weatherPreviewContent.classList.add("weather-widget-content");
     weatherPreviewDiv.appendChild(
-      createWeatherWidgetPreview(weatherPreviewContent, weatherAppData, false)
+      createWeatherWidgetPreview(weatherPreviewContent, weatherAppData, false),
     );
     return weatherPreviewDiv;
   }
@@ -55,7 +55,7 @@ class CompactWeatherWidget extends WidgetBase {
     compactWeatherDiv = await createWeatherWidget(
       compactWeatherDiv,
       weatherAppData,
-      true
+      true,
     );
     return compactWeatherDiv;
   }
@@ -80,8 +80,8 @@ class CompactWeatherWidget extends WidgetBase {
       createWeatherWidgetPreview(
         compactWeatherPreviewContent,
         weatherAppData,
-        true
-      )
+        true,
+      ),
     );
     return compactWeatherPreviewDiv;
   }
@@ -96,7 +96,7 @@ function createWeatherWidgetPreview(container, data, isCompact) {
   if (weatherData.cod == 200) {
     mainIcon.innerHTML = getWeatherIcon(
       weatherData.weather[0].main,
-      weatherData.weather[0].description
+      weatherData.weather[0].description,
     );
   } else {
     mainIcon.innerHTML = getWeatherIcon("Rain", "");
@@ -199,7 +199,7 @@ function createWidgetContentUI(widgetContent, weatherAppData, isCompact) {
   mainIcon.classList.add("weather-icon-container");
   mainIcon.innerHTML = getWeatherIcon(
     weatherData.weather[0].main,
-    weatherData.weather[0].description
+    weatherData.weather[0].description,
   );
 
   let temperature = document.createElement("span");
@@ -283,8 +283,8 @@ async function updateWeatherDivs() {
       createWidgetContentUI(
         oldWidgetContent,
         weatherAppData,
-        element.classList.contains("compact")
-      )
+        element.classList.contains("compact"),
+      ),
     );
   });
 }

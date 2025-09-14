@@ -42,7 +42,7 @@ async function saveCustomName(customName) {
 function displayCustomName(customName) {
   let style = document.documentElement.style;
   let originalNameElement = document.querySelector(
-    ".js-btn-profile .hlp-vert-box span"
+    ".js-btn-profile .hlp-vert-box span",
   );
   originalNameElement.innerHTML = customName;
   style.setProperty("--profile-picture", "url(" + getPfpLink(customName) + ")");

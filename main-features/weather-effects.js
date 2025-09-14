@@ -21,7 +21,7 @@ function set_snow_level(count) {
         : "https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/snowflakeworking.svg";
 
     flake.style = ` left: ${Math.floor(
-      Math.random() * 100
+      Math.random() * 100,
     )}%; animation: snowflake_fall_${Math.floor(Math.random() * 3)} ${
       Math.floor(Math.random() * 7) + 10
     }s ease-in-out infinite; animation-delay: ${

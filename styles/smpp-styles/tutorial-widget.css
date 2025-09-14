@@ -1,68 +1,68 @@
 .lang-buttons {
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  display: flex;
-  position: relative;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    display: flex;
+    position: relative;
 }
 
 #english-tutorial-lang-icon,
 #dutch-tutorial-lang-icon {
-  border-radius: 10000px;
-  width: 2.4rem;
-  background-position: center;
-  background-size: cover;
+    border-radius: 10000px;
+    width: 2.4rem;
+    background-position: center;
+    background-size: cover;
 }
 
 #english-tutorial-lang-icon {
-  background-image: url("https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Flag_of_the_United_Kingdom.svg/500px-Flag_of_the_United_Kingdom.svg.png");
+    background-image: url("https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Flag_of_the_United_Kingdom.svg/500px-Flag_of_the_United_Kingdom.svg.png");
 }
 #dutch-tutorial-lang-icon {
-  background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Flag_of_Belgium.svg/250px-Flag_of_Belgium.svg.png");
+    background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Flag_of_Belgium.svg/250px-Flag_of_Belgium.svg.png");
 }
 
 #english-tutorial-lang,
 #dutch-tutorial-lang {
-  border-radius: 1000px !important;
-  border: 2px solid var(--color-base03) !important;
-  background-color: var(--color-base02) !important;
-  font-size: 1.2rem !important;
-  font-weight: 600 !important;
-  padding: 0.5rem !important;
-  padding-right: 1rem !important;
-  display: flex;
-  flex-direction: row;
-  gap: 0.5rem;
+    border-radius: 1000px !important;
+    border: 2px solid var(--color-base03) !important;
+    background-color: var(--color-base02) !important;
+    font-size: 1.2rem !important;
+    font-weight: 600 !important;
+    padding: 0.5rem !important;
+    padding-right: 1rem !important;
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
 }
 
 .enableAnimations #english-tutorial-lang,
 .enableAnimations #dutch-tutorial-lang {
-  transition: all 0.2s ease-in-out !important;
+    transition: all 0.2s ease-in-out !important;
 }
 
 #english-tutorial-lang:hover,
 #dutch-tutorial-lang:hover {
-  background-color: var(--color-base03) !important;
-  border-color: var(--color-accent) !important;
+    background-color: var(--color-base03) !important;
+    border-color: var(--color-accent) !important;
 }
 
 .tutorial-widget-title {
-  font-size: 1.6rem !important;
-  margin-bottom: 0.5rem !important;
-  color: var(--color-accent);
-  text-align: left;
+    font-size: 1.6rem !important;
+    margin-bottom: 0.5rem !important;
+    color: var(--color-accent);
+    text-align: left;
 }
 
 .tutorial-lang-title {
-  font-size: 1.2rem;
-  font-weight: 600;
-  text-align: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: center;
 }
 
 .tutorial-widget-description {
-  font-size: 1.1rem;
-  font-weight: 500;
-  text-align: left;
-  margin-bottom: 0 !important;
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-align: left;
+    margin-bottom: 0 !important;
 }
