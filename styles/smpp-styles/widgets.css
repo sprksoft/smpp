@@ -15,6 +15,17 @@ html {
   ); /* -8px for 2 times the border size */
 }
 
+/* Loading spinner animation */
+.loading-spinner {
+  animation: spin 1s linear infinite;
+  transform-origin: center;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
 /* Only use rem's here no em because widgets will be moved to body when they are dragged */
 .smpp-widget {
   height: min-content;
