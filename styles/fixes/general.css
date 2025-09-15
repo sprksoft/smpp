@@ -2184,6 +2184,15 @@ mark {
   color: var(--color-accent) !important;
 }
 
+.forum-contentbox > input.textfield{
+  background-color: var(--color-base03) !important;
+  border: 2px solid var(--color-base02) !important;
+  border-radius: 0.5rem !important ;
+}
+.forum-attachments{
+  border: 2px solid var(--color-base03) !important;
+  border-radius: 0.5rem !important ;
+}
 .smsc-topnav [data-notifs] .notification__close:hover .close-icon path {
   stroke: var(--color-red) !important;
 }
