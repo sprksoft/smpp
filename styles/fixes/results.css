@@ -478,6 +478,7 @@ button.button-ZR3rz.bp-c-combo-hover-plain-outline--300,
   background-color: var(--color-base01) !important;
   border-right: 2px solid var(--color-base03) !important;
   color: var(--color-text) !important;
+  margin-right: 0.6rem !important;
 }
 .tabs[role=tablist]>[role=presentation]>[role=tab][aria-selected]{
   box-shadow: none !important;
@@ -490,4 +491,21 @@ button.button-ZR3rz.bp-c-combo-hover-plain-outline--300,
 }
 .tabs[role=tablist]{
   border-bottom: none !important;
+}
+.bubble-_lWSE{
+  background-color: var(--color-base01) !important;
+  border: transparent !important;
+  border-radius: 2rem !important;
+  box-shadow: none !important;
+  box-shadow: 0px 5px 20px 5px rgba(0, 0, 0, 0.3) !important;
+}
+.reportFilterDropdown-dAkBc > .js-emptystate{
+  background-color: var(--color-base01) !important;
+}
+.textInput-ACLPH:focus-within{
+  outline: none !important;
+
+}
+.graphicRight-r_Pnt.graphic-g55I1.small-Du6aA > svg > path{
+    fill: var(--color-text) !important;
 }
