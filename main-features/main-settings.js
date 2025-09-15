@@ -5,7 +5,7 @@ class SettingsWindow extends BaseWindow {
     features: { name: "Apps", icon: "settingsFeatures.png" },
     other: { name: "Other", icon: "settingsOther.png" },
   };
-  currentPage = 0;
+  currentPage = "profile";
 
   constructor(hidden = false) {
     super("settings-window", hidden);
@@ -16,7 +16,7 @@ class SettingsWindow extends BaseWindow {
     let settingsSideBar = this.createSettingsSideBar();
     let settingsPage = this.displaySettingsPage();
     content.classList.add("settingsWindow");
-    content.appendChild(settingsSideBar);
+    content.appendChild(await settingsSideBar);
     content.appendChild(settingsPage);
     await this.loadSettings();
     return content;
@@ -27,23 +27,56 @@ class SettingsWindow extends BaseWindow {
   }
   async loadSettings() {}
 
-  createSettingsSideBar() {
+  async createSettingsSideBar() {
     let settingsSideBar = document.createElement("div");
     settingsSideBar.classList.add("settings-sidebar");
-    settingsSideBar.appendChild(this.createSettingsSideBarProfileButton());
+    let settingsSideBarProfileButton =
+      await this.createSettingsSideBarProfileButton();
+    settingsSideBar.appendChild(settingsSideBarProfileButton);
     Object.keys(this.settingsSideBarCategories).forEach((key) => {
-      settingsSideBar.appendChild(this.createSettingsSideBarCategory(key));
+      let settingsSideBarButton = this.createSettingsSideBarCategory(key);
+      settingsSideBarButton.addEventListener("click", (event) => {
+        this.currentPage = event.currentTarget.dataset.page;
+        this.displaySettingsPage();
+      });
+
+      settingsSideBar.appendChild(settingsSideBarButton);
     });
     return settingsSideBar;
   }
 
-  createSettingsSideBarProfileButton() {
-    return document.createElement("div");
+  async createSettingsSideBarProfileButton() {
+    let data = await browser.runtime.sendMessage({
+      action: "getSettingsData",
+    });
+    let profileSettingsButton = document.createElement("button");
+    profileSettingsButton.classList.add("profile-settings-button");
+    let profilePicture = document.createElement("div");
+    profilePicture.classList.add("profile-picture-settings");
+    let profileSettingsLabel = document.createElement("div");
+    profileSettingsLabel.classList.add("profile-settings-label");
+    let profileSettingsLabelTitle = document.createElement("h2");
+    profileSettingsLabelTitle.classList.add("profile-settings-label-title");
+    profileSettingsLabelTitle.innerText = String(
+      data.profile.customUserName || getOriginalName()
+    ).split(" ")[0];
+    let profileSettingsLabelDescription = document.createElement("p");
+    profileSettingsLabelDescription.classList.add(
+      "profile-settings-label-description"
+    );
+    profileSettingsLabelDescription.innerText = "view profile";
+    profileSettingsLabel.appendChild(profileSettingsLabelTitle);
+    profileSettingsLabel.appendChild(profileSettingsLabelDescription);
+
+    profileSettingsButton.appendChild(profilePicture);
+    profileSettingsButton.appendChild(profileSettingsLabel);
+    return profileSettingsButton;
   }
 
   createSettingsSideBarCategory(category) {
     let categoryButton = document.createElement("button");
     categoryButton.classList.add("settings-category-button");
+    categoryButton.dataset.page = category;
     categoryButton.innerText = this.settingsSideBarCategories[category].name;
     let categoryButtonIcon = document.createElement("img");
     categoryButtonIcon.classList.add("category-button-icon");
@@ -53,10 +86,41 @@ class SettingsWindow extends BaseWindow {
     categoryButton.prepend(categoryButtonIcon);
     return categoryButton;
   }
-
   displaySettingsPage() {
     let settingsPage = document.createElement("div");
     settingsPage.id = "settings-page";
+
+    
+    function createButton(label, state) {
+      let outerSwitch = document.createElement("label");
+      outerSwitch.classList.add("switch");
+      let innerButton = document.createElement("input");
+      innerButton.classList.add("popupinput");
+      innerButton.type = "checkbox";
+      innerButton.checked = state;
+      let innerSwitch = document.createElement("span");
+      innerSwitch.classList.add("slider", "round");
+      innerButton.appendChild(innerSwitch);
+      outerSwitch.appendChild(innerButton);
+      return outerSwitch;
+    }
+
+    switch (this.currentPage) {
+      case "profile":
+        let button = createButton("AAAA", true);
+        settingsPage.appendChild(button);
+        break;
+      case "appearance":
+        break;
+      case "topNav":
+        break;
+      case "features":
+        break;
+      case "other":
+        break;
+      default:
+        break;
+    }
     return settingsPage;
   }
 }

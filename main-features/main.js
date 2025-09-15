@@ -56,15 +56,20 @@ function decapitateಠ_ಠ() {
   document.head.appendChild(style_el);
 }
 function getPfpLink(username) {
+  let firstInitial;
+  let secondInitial;
   if (username) {
     const parts = username.trim().split(/\s+/);
-    const firstInitial = parts[0][0].toUpperCase();
-    const secondInitial = parts.length > 1 ? parts[1][0].toUpperCase() : "";
-    return `https://userpicture20.smartschool.be/User/Userimage/hashimage/hash/initials_${
-      firstInitial + secondInitial
-    }/plain/1/res/32`;
+    firstInitial = parts[0][0].toUpperCase();
+    secondInitial = parts.length > 1 ? parts[1][0].toUpperCase() : "";
+  } else {
+    // Mr. Unknown
+    firstInitial = "M";
+    secondInitial = "U";
   }
-  return `https://userpicture20.smartschool.be/User/Userimage/hashimage/hash/initials_MU/plain/1/res/32`;
+  return `https://userpicture20.smartschool.be/User/Userimage/hashimage/hash/initials_${
+    firstInitial + secondInitial
+  }/plain/1/res/128`;
 }
 function switchCoursesButton() {
   topnav = document.querySelector(".topnav");
@@ -561,6 +566,7 @@ function createQuickSettingsHTML(parent) {
     { value: "fall", text: "Autumn Gloom" },
     { value: "matcha", text: "Matcha Green" },
     { value: "pink", text: "Cherry Haze" },
+    { value: "fairyblue", text: "Fairy Blue" },
   ];
 
   options.forEach((option) => {
