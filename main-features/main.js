@@ -567,6 +567,7 @@ function createQuickSettingsHTML(parent) {
     { value: "matcha", text: "Matcha Green" },
     { value: "pink", text: "Cherry Haze" },
     { value: "fairyblue", text: "Fairy Blue" },
+    { value: "tech", text: "Tech" },
   ];
 
   options.forEach((option) => {
