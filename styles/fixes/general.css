@@ -443,8 +443,13 @@ smsc-inlineeditor.smsc-table__cell--inlineeditor {
     color: var(--color-accent) !important;
 }
 
-.lvs-pupilpresences-row {
-    background-color: var(--color-base02) !important;
+.lvs-pupilpresences-row,
+.tabContent.personalSettings_content {
+  background-color: var(--color-base01) !important;
+}
+.smscselect_dropdown_item,
+#renderselect{
+  color: #000000 !important;
 }
 
 .google-authenticator-input__label {
@@ -2184,6 +2189,15 @@ mark {
     color: var(--color-accent) !important;
 }
 
+.forum-contentbox > input.textfield{
+  background-color: var(--color-base03) !important;
+  border: 2px solid var(--color-base02) !important;
+  border-radius: 0.5rem !important ;
+}
+.forum-attachments{
+  border: 2px solid var(--color-base03) !important;
+  border-radius: 0.5rem !important ;
+}
 .smsc-topnav [data-notifs] .notification__close:hover .close-icon path {
     stroke: var(--color-red) !important;
 }
@@ -2238,4 +2252,19 @@ body.modern-ui .homepage__block__content {
     min-width: 128px;
     background-repeat: no-repeat;
     background-position: center;
+}
+.infoBlock .infoBlock_content .infoBlock_planner,
+.infoBlock_lvsitem,
+.infoBlock_message,
+.infoBlock .infoBlock_content .infoBlock_eval{
+    height: 45px !important;
+}
+.smscFrameTitle{
+  display: none !important;
+}
+
+#pupilPresencesGraphTotalsByWeekday,
+#pupilPresencesGraphEvolution,
+#pupilPresencesGraphTotalsByCode{
+  border-color: var(--color-base03) !important;
 }
