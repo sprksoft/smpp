@@ -134,6 +134,7 @@ let splashtexts = [
   `Examens`,
   `Ruby chan, haii`,
   `It's so sweet`,
+  `Whopper Whopper!`,
 ];
 function get_splash_text() {
   return splashtexts[Math.floor(Math.random() * splashtexts.length)];
