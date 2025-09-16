@@ -98,7 +98,7 @@ class WidgetBase {
     }
     if (!newContent) {
       console.error(
-        "createContent and createPreview method's needs to return an html object. in widget impl"
+        "createContent and createPreview method's needs to return an html object. in widget impl",
       );
       newContent = createWidgetErrorContent(this.name);
     }
@@ -181,7 +181,7 @@ class WidgetBase {
         let pannel = await createPannelHTML({ widgets: [] });
         pannelContainer.insertBefore(
           createInsertionPointHTML(true),
-          targetIp.nextElementSibling
+          targetIp.nextElementSibling,
         );
         pannelContainer.insertBefore(pannel, targetIp.nextElementSibling);
         targetIp = pannel.firstChild;
@@ -191,7 +191,7 @@ class WidgetBase {
       targetPannel.style.display = "block";
       targetPannel.insertBefore(
         createInsertionPointHTML(),
-        targetIp.nextElementSibling
+        targetIp.nextElementSibling,
       );
       targetPannel.insertBefore(el, targetIp.nextElementSibling);
 
@@ -235,9 +235,8 @@ class WidgetBase {
     el.style.width = rect.width + "px";
     el.style.left = rect.left + "px";
     el.style.top = rect.top + "px";
-    el.style[
-      "transform-origin"
-    ] = `${curDragInfo.offset.x}px ${curDragInfo.offset.y}px`;
+    el.style["transform-origin"] =
+      `${curDragInfo.offset.x}px ${curDragInfo.offset.y}px`;
 
     el.classList.add("smpp-widget-dragging");
 
@@ -312,11 +311,11 @@ class SmartschoolWidget extends WidgetBase {
 function targetInsertionPoint(target) {
   if (target !== curDragInfo.targetInsertionPoint) {
     curDragInfo.targetInsertionPoint?.classList.remove(
-      "smpp-widget-insertion-point-targeted"
+      "smpp-widget-insertion-point-targeted",
     );
     curDragInfo.targetInsertionPoint = target;
     curDragInfo.targetInsertionPoint?.classList.add(
-      "smpp-widget-insertion-point-targeted"
+      "smpp-widget-insertion-point-targeted",
     );
   }
 }
@@ -475,7 +474,7 @@ async function createWidgetSystem() {
 
   // Create smartschool default widgets
   for (let smWidget of document.querySelectorAll(
-    "#rightcontainer .homepage__block"
+    "#rightcontainer .homepage__block",
   )) {
     let wName = "SmartschoolWidget-" + smWidget.id;
     registerWidget(new SmartschoolWidget(smWidget));
@@ -484,7 +483,7 @@ async function createWidgetSystem() {
     }
   }
   for (let smWidget of document.querySelectorAll(
-    "#leftcontainer .homepage__block"
+    "#leftcontainer .homepage__block",
   )) {
     let wName = "SmartschoolWidget-" + smWidget.id;
     registerWidget(new SmartschoolWidget(smWidget));
@@ -502,7 +501,7 @@ async function createWidgetSystem() {
   widgetsContainer = await createWidgetsContainerHTML(
     widgetData,
     news,
-    showNewsState
+    showNewsState,
   );
 
   container.innerHTML = "";

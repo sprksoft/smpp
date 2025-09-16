@@ -98,10 +98,10 @@ function getUserId() {
 
     const cookies = document.cookie.split(";");
     const plannerUrlCookie = cookies.find((cookie) =>
-      cookie.trim().startsWith("plannerUrl=")
+      cookie.trim().startsWith("plannerUrl="),
     );
 
-    if (plannerUrlCookie) { 
+    if (plannerUrlCookie) {
       sendDebug("Retrieved plannerUrl from cookies" + plannerUrlCookie);
       const plannerUrl = plannerUrlCookie.split("=")[1];
       sendDebug("Found plannerUrl in cookies:", plannerUrl);
@@ -110,13 +110,13 @@ function getUserId() {
       sendDebug("Extracted userId from cookie plannerUrl:", userId);
     } else {
       console.error(
-        "UID is fucked, refresh 5 keer en als het dan niet werkt vraag hulp op discord @JJorne"
+        "UID is fucked, refresh 5 keer en als het dan niet werkt vraag hulp op discord @JJorne",
       );
     }
   }
   if (userId) {
     return userId;
   } else {
-    console.error("No userID? womp womp")
+    console.error("No userID? womp womp");
   }
 }

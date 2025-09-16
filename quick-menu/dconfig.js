@@ -40,9 +40,9 @@ async function dconfig_menu() {
             conf[cmd] = val;
           }
         },
-        "value(" + conf[cmd] + "):"
+        "value(" + conf[cmd] + "):",
       );
     },
-    "dconfig: "
+    "dconfig: ",
   );
 }
