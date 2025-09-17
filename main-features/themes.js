@@ -217,6 +217,32 @@ const themes = {
     "--color-homepage-sidebars-bg": "oklch(95.58% 0.0337 351.52 / 10%)",
     "--color-splashtext": "#bf4183",
   },
+  fairyblue: {
+    "--color-accent": "#abb6ff",
+    "--color-text": "#dde2ff",
+    "--color-base00": "#5e529a",
+    "--color-base01": "#7064af",
+    "--color-base02": "#7e72be",
+    "--color-base03": "#9186d4",
+    "--loginpage-image":
+      "url(https://raw.githubusercontent.com/NightFlavor/smpp-images/refs/heads/main/pxfuel.jpg)",
+    "--darken-background": "#5e529a40",
+    "--color-homepage-sidebars-bg": "#5e529a50",
+    "--color-splashtext": "#dde2ff",
+  },
+  tech: {
+    "--color-accent": "#e631ef",
+    "--color-text": "#25d9f3",
+    "--color-base00": "#010003",
+    "--color-base01": "#09040e",
+    "--color-base02": "#201826",
+    "--color-base03": "#3e3545",
+    "--loginpage-image":
+      "#000000",
+    "--darken-background": "#01000340",
+    "--color-homepage-sidebars-bg": "#01000350",
+    "--color-splashtext": "#e631ef",
+  }
 };
 
 let customTheme;

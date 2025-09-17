@@ -1,4 +1,4 @@
-// Powered by Broodje56's magic sauce 
+// Powered by Broodje56's magic sauce
 // This code is brought to you by Broodje56, the ultimate breadboss 🥖👑
 
 const PONG_BALL_RADIUS = 4;
@@ -7,8 +7,8 @@ const PONG_PADDLE_HEIGHT = 40;
 const PONG_PADDLE_SPEED = 0.2;
 const PONG_BALL_SPEED = 0.1;
 
-const SPEEDUP_FACTOR = 1.05; 
-const MAX_SPEED = 0.5; 
+const SPEEDUP_FACTOR = 1.05;
+const MAX_SPEED = 0.5;
 
 class PongWidget extends GameBase {
   ball;
@@ -32,8 +32,13 @@ class PongWidget extends GameBase {
     this.ball = {
       x: w / 2,
       y: h / 2,
-      dx: PONG_BALL_SPEED * this.getOpt("speed") * 0.01 * (Math.random() > 0.5 ? 1 : -1),
-      dy: PONG_BALL_SPEED * this.getOpt("speed") * 0.01 * (Math.random() * 2 - 1),
+      dx:
+        PONG_BALL_SPEED *
+        this.getOpt("speed") *
+        0.01 *
+        (Math.random() > 0.5 ? 1 : -1),
+      dy:
+        PONG_BALL_SPEED * this.getOpt("speed") * 0.01 * (Math.random() * 2 - 1),
     };
 
     this.leftY = (h - PONG_PADDLE_HEIGHT) / 2;
@@ -67,11 +72,9 @@ class PongWidget extends GameBase {
 
     const speed = PONG_PADDLE_SPEED * this.getOpt("speed") * 0.01;
 
-
     if (this.leftUp) this.leftY -= speed * dt;
     if (this.leftDown) this.leftY += speed * dt;
     this.leftY = Math.max(0, Math.min(h - PONG_PADDLE_HEIGHT, this.leftY));
-
 
     const aiCenter = this.rightY + PONG_PADDLE_HEIGHT / 2;
     const diff = this.ball.y - aiCenter;
@@ -82,7 +85,6 @@ class PongWidget extends GameBase {
       this.rightY += diff;
     }
     this.rightY = Math.max(0, Math.min(h - PONG_PADDLE_HEIGHT, this.rightY));
-
 
     let b = this.ball;
     b.x += b.dx * dt;
@@ -100,10 +102,8 @@ class PongWidget extends GameBase {
       b.dx *= -1;
       b.x = PONG_PADDLE_WIDTH + PONG_BALL_RADIUS;
 
-      
       b.dx *= SPEEDUP_FACTOR;
       b.dy *= SPEEDUP_FACTOR;
-
 
       b.dx = Math.sign(b.dx) * Math.min(Math.abs(b.dx), MAX_SPEED);
       b.dy = Math.sign(b.dy) * Math.min(Math.abs(b.dy), MAX_SPEED);
@@ -117,37 +117,44 @@ class PongWidget extends GameBase {
       b.dx *= -1;
       b.x = w - PONG_PADDLE_WIDTH - PONG_BALL_RADIUS;
 
-
       b.dx *= SPEEDUP_FACTOR;
       b.dy *= SPEEDUP_FACTOR;
-
 
       b.dx = Math.sign(b.dx) * Math.min(Math.abs(b.dx), MAX_SPEED);
       b.dy = Math.sign(b.dy) * Math.min(Math.abs(b.dy), MAX_SPEED);
     }
 
-
     if (b.x < 0) {
       this.stopGame();
     }
 
-
     if (b.x > w) {
       this.onGameStart();
     }
-
 
     ctx.fillStyle = getThemeVar("--color-text");
     ctx.beginPath();
     ctx.arc(b.x, b.y, PONG_BALL_RADIUS, 0, Math.PI * 2);
     ctx.fill();
 
-  
     ctx.fillStyle = getThemeVar("--color-accent");
-    this.drawRoundedRect(ctx, 0, this.leftY, PONG_PADDLE_WIDTH, PONG_PADDLE_HEIGHT, 3);
-    this.drawRoundedRect(ctx, w - PONG_PADDLE_WIDTH, this.rightY, PONG_PADDLE_WIDTH, PONG_PADDLE_HEIGHT, 3);
+    this.drawRoundedRect(
+      ctx,
+      0,
+      this.leftY,
+      PONG_PADDLE_WIDTH,
+      PONG_PADDLE_HEIGHT,
+      3,
+    );
+    this.drawRoundedRect(
+      ctx,
+      w - PONG_PADDLE_WIDTH,
+      this.rightY,
+      PONG_PADDLE_WIDTH,
+      PONG_PADDLE_HEIGHT,
+      3,
+    );
 
-  
     ctx.strokeStyle = getThemeVar("--color-text");
     ctx.setLineDash([4, 5]);
     ctx.beginPath();
@@ -169,5 +176,3 @@ class PongWidget extends GameBase {
 }
 
 registerWidget(new PongWidget());
-
-

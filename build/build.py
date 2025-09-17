@@ -143,7 +143,7 @@ def build_lite(excluded_lite_files_csv, original_dir, lite_build_dir, icon_sourc
             json.dump(manifest, f, indent=4)
     except Exception as e:
         print(f"Error updating manifest: {e}")
-        
+
     print("Updating icons...")
     icons_dir = os.path.join(lite_build_dir, 'icons')
     os.makedirs(icons_dir, exist_ok=True)

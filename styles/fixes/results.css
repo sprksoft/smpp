@@ -1,97 +1,97 @@
 .wide-toolbar.js-wide-toolbar {
-  justify-content: space-between !important;
-  background-color: var(--color-base00) !important;
-  color: var(--color-text) !important;
-  padding-top: 0px !important;
-  background: var(--darken-background) !important;
-  height: fit-content !important;
-  padding: 7px !important;
-  margin-left: 4px !important;
-  border-radius: 25px !important;
-  margin-top: 4px !important;
-  gap: 25px !important;
-  width: 120px !important;
+    justify-content: space-between !important;
+    background-color: var(--color-base00) !important;
+    color: var(--color-text) !important;
+    padding-top: 0px !important;
+    background: var(--darken-background) !important;
+    height: fit-content !important;
+    padding: 7px !important;
+    margin-left: 4px !important;
+    border-radius: 25px !important;
+    margin-top: 4px !important;
+    gap: 25px !important;
+    width: 120px !important;
 }
 
 .wide-toolbar__item__icon {
-  height: 3.3rem !important;
-  width: 3.3rem !important;
+    height: 3.3rem !important;
+    width: 3.3rem !important;
 }
 
 .side-panel__panel {
-  max-width: none !important;
-  width: 50vw !important;
+    max-width: none !important;
+    width: 50vw !important;
 }
 
 .wide-toolbar__item:after,
 .wide-toolbar__item:before {
-  display: none !important;
+    display: none !important;
 }
 
 .wide-toolbar__item {
-  background-color: var(--color-base01) !important;
-  color: var(--color-text) !important;
-  border: var(--border-size) solid var(--color-base02) !important;
-  border-radius: 18px !important;
-  margin: 0px !important;
-  width: 100% !important;
-  padding: 0 !important;
-  justify-content: center !important;
-  aspect-ratio: 1/1 !important;
+    background-color: var(--color-base01) !important;
+    color: var(--color-text) !important;
+    border: var(--border-size) solid var(--color-base02) !important;
+    border-radius: 18px !important;
+    margin: 0px !important;
+    width: 100% !important;
+    padding: 0 !important;
+    justify-content: center !important;
+    aspect-ratio: 1/1 !important;
 }
 
 .wide-toolbar__item__icon {
-  z-index: 2 !important;
-  background-size: cover !important;
-  background-repeat: no-repeat !important;
+    z-index: 2 !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
 }
 
 .wide-toolbar__item__name {
-  background-color: transparent !important;
+    background-color: transparent !important;
 }
 
 .wide-toolbar__item--selected {
-  background-color: var(--color-base02) !important;
-  border-color: var(--color-base03) !important;
-  font-weight: 800 !important;
+    background-color: var(--color-base02) !important;
+    border-color: var(--color-base03) !important;
+    font-weight: 800 !important;
 }
 
 .wide-toolbar__item--selected:hover {
-  background-color: var(--color-base02) !important;
+    background-color: var(--color-base02) !important;
 }
 
 .wide-toolbar__item:hover {
-  border-color: var(--color-accent) !important;
-  background-color: var(--color-base02) !important;
+    border-color: var(--color-accent) !important;
+    background-color: var(--color-base02) !important;
 }
 
 .title--1,
 .title--5 {
-  color: var(--color-text) !important;
+    color: var(--color-text) !important;
 }
 
 .title--2,
 .smsc-title--1 {
-  color: var(--color-accent) !important;
-  font-weight: 700 !important;
+    color: var(--color-accent) !important;
+    font-weight: 700 !important;
 }
 
 .js-emptystate {
-  background-color: var(--color-base00) !important;
-  box-shadow: none !important;
-  color: var(--color-text) !important;
-  padding: 20px !important;
-  border-radius: 20px !important;
-  margin-left: 20px !important;
-  margin-right: 20px !important;
+    background-color: var(--color-base00) !important;
+    box-shadow: none !important;
+    color: var(--color-text) !important;
+    padding: 20px !important;
+    border-radius: 20px !important;
+    margin-left: 20px !important;
+    margin-right: 20px !important;
 }
 
 .results-evaluation--small .side-panel__panel {
-  background-color: var(--color-base00) !important;
+    background-color: var(--color-base00) !important;
 }
 
 .results-evaluation--wide .side-panel__panel {
-  background-color: transparent !important;
+    background-color: transparent !important;
 }
 
 upload-app.smsc-container.smsc-container--flex,
@@ -99,61 +99,61 @@ upload-app.smsc-container.smsc-container--flex,
 .course-module-planner,
 .showLeftNav:not(:has(.login-app)),
 .smscMain:not(:has(.login-app)):not(:has(.homepage)):not(mydoc-app):not(
-    :has(.session-list)
-  ):not(:has(#js-wiki-home)):not(.smscMain--tb-main) {
-  backdrop-filter: var(--blur-value-small) !important;
-  background-color: var(--darken-background) !important;
+        :has(.session-list)
+    ):not(:has(#js-wiki-home)):not(.smscMain--tb-main) {
+    backdrop-filter: var(--blur-value-small) !important;
+    background-color: var(--darken-background) !important;
 }
 
 .side-panel__panel {
-  box-shadow: none !important;
+    box-shadow: none !important;
 }
 
 .side-panel__panel {
-  background-color: var(--color-base00) !important;
+    background-color: var(--color-base00) !important;
 }
 
 button.reset-filters-btn.reset-filters-btn--hidden {
-  height: 0px !important;
+    height: 0px !important;
 }
 
 .evaluation__content:active,
 .evaluation__content[active] {
-  border-color: var(--color-accent) !important;
+    border-color: var(--color-accent) !important;
 }
 
 .table-page .table-page__container__wrapper__table .cell {
-  border: 2px solid var(--color-base02) !important;
+    border: 2px solid var(--color-base02) !important;
 }
 
 .reset-filters-btn-container {
-  /*sowwy lukas  (this is the scoll) */
-  margin-bottom: 41px !important;
+    /*sowwy lukas  (this is the scoll) */
+    margin-bottom: 41px !important;
 }
 
 .js-side-panel-next-button,
 .js-side-panel-prev-button {
-  display: none !important;
+    display: none !important;
 }
 
 .goal-evaluations-details__row {
-  background: var(--darken-background) !important;
+    background: var(--darken-background) !important;
 }
 
 input.input.bootstrap__input.search-input {
-  border: 2px solid var(--color-base03) !important;
-  border-radius: 7px;
+    border: 2px solid var(--color-base03) !important;
+    border-radius: 7px;
 }
 .results-evaluations .results-evaluations__filters {
-  flex-wrap: wrap;
+    flex-wrap: wrap;
 }
 
 #buis-stats {
-  display: flex;
-  flex-basis: 100%;
-  height: 1px;
-  justify-content: flex-end !important;
-  margin-top: 1em;
+    display: flex;
+    flex-basis: 100%;
+    height: 1px;
+    justify-content: flex-end !important;
+    margin-top: 1em;
 }
 
 .evaluation-list-item,
@@ -162,56 +162,56 @@ input.input.bootstrap__input.search-input {
 .contentContainer,
 .content_container,
 .navigation_container {
-  background-color: var(--color-base01) !important;
-  color: var(--color-text) !important;
-  border-color: var(--color-base02) !important;
+    background-color: var(--color-base01) !important;
+    color: var(--color-text) !important;
+    border-color: var(--color-base02) !important;
 }
 
 button.goals-filter__item.selected {
-  background-color: var(--color-base02) !important;
+    background-color: var(--color-base02) !important;
 }
 
 .todo-column [listview] .todo-column__row.active-row {
-  border-radius: 15px !important;
-  background-color: var(--color-base01) !important;
+    border-radius: 15px !important;
+    background-color: var(--color-base01) !important;
 }
 
 .todo-column
-  [listview]
-  .todo-column__row.active-row
-  .todo-column__actions-cell {
-  background-color: var(--color-base02) !important;
+    [listview]
+    .todo-column__row.active-row
+    .todo-column__actions-cell {
+    background-color: var(--color-base02) !important;
 }
 
 .evaluation-list-item:hover:not(.evaluation-list-item.selected),
 .dropdown-button:hover,
 .smscleftnavcontainer {
-  box-shadow: none !important;
-  border-color: var(--color-base03) !important;
-  background-color: var(--color-base02) !important;
+    box-shadow: none !important;
+    border-color: var(--color-base03) !important;
+    background-color: var(--color-base02) !important;
 }
 
 .goals-filter__item:hover:not(.selected) {
-  background-color: var(--color-base02) !important;
+    background-color: var(--color-base02) !important;
 }
 
 .goals-filter__item {
-  border-radius: 15px !important;
+    border-radius: 15px !important;
 }
 
 .feedback--white {
-  background-color: var(--color-base00) !important;
-  color: var(--color-text) !important;
+    background-color: var(--color-base00) !important;
+    color: var(--color-text) !important;
 }
 
 .goals__goal__content__title {
-  background-color: var(--color-base00) !important;
-  color: var(--color-text) !important;
-  border: var(--border-size) solid var(--color-base00) !important;
-  border-radius: 7px !important;
-  padding: 10px !important;
-  font-weight: 600 !important;
-  display: flex !important;
+    background-color: var(--color-base00) !important;
+    color: var(--color-text) !important;
+    border: var(--border-size) solid var(--color-base00) !important;
+    border-radius: 7px !important;
+    padding: 10px !important;
+    font-weight: 600 !important;
+    display: flex !important;
 }
 
 .evaluation-graphic.evaluation-graphic--large.evaluation-graphic--percentage.side-panel__content__score__large-ring.c-olive-combo--100,
@@ -222,22 +222,22 @@ button.goals-filter__item.selected {
 .evaluation-graphic.evaluation-graphic--large.evaluation-graphic--image.side-panel__content__score__large-ring.c-orange-combo--100,
 .evaluation-graphic.evaluation-graphic--large.evaluation-graphic--image.side-panel__content__score__large-ring.c-aqua-combo--100,
 .evaluation-graphic.evaluation-graphic--large.evaluation-graphic--image.side-panel__content__score__large-ring.c-red-combo--100 {
-  background-color: var(--color-base00) !important;
+    background-color: var(--color-base00) !important;
 }
 
 .filterlistview.js-filterlistview.evaluations__filterlistview:hover {
-  background-color: transparent !important;
+    background-color: transparent !important;
 }
 
 .evaluation__content:not(:active):not([active]) {
-  background-color: var(--color-base01) !important;
+    background-color: var(--color-base01) !important;
 }
 
 .evaluation-graphic
-  .evaluation-graphic--goal
-  .evaluation-graphic--icon
-  .goals__goal__graphic {
-  display: none !important;
+    .evaluation-graphic--goal
+    .evaluation-graphic--icon
+    .goals__goal__graphic {
+    display: none !important;
 }
 
 /*Doelen*/
@@ -251,32 +251,32 @@ button.goals-filter__item.selected {
 input[type="search"].input.search-input,
 .feedback,
 .feedback--silver {
-  background-color: var(--color-base01) !important;
-  border-color: var(--color-base02) !important;
+    background-color: var(--color-base01) !important;
+    border-color: var(--color-base02) !important;
 }
 
 .cell__content {
-  background-color: var(--color-base01) !important;
-  padding-left: 20px !important;
+    background-color: var(--color-base01) !important;
+    padding-left: 20px !important;
 }
 
 .detail {
-  padding: 10px !important;
-  overflow: scroll !important;
+    padding: 10px !important;
+    overflow: scroll !important;
 }
 
 .c-steel-combo--100,
 .c-steel-combo-hover--100,
 [listview]
-  .listview__row:hover:not(.listview__row--selected)
-  .listview__cell:not(.listview__cell--select-btn):not(
-    .listview__cell--no-hover
-  ) {
-  background-color: transparent !important;
+    .listview__row:hover:not(.listview__row--selected)
+    .listview__cell:not(.listview__cell--select-btn):not(
+        .listview__cell--no-hover
+    ) {
+    background-color: transparent !important;
 }
 
 .table-page .table-page__container__wrapper__table .cell {
-  border-color: var(--color-base02) !important;
+    border-color: var(--color-base02) !important;
 }
 
 body,
@@ -287,207 +287,233 @@ textarea,
 .modern-message__name,
 .modern-message__subject,
 .msgHeaderVal {
-  color: var(--color-text) !important;
+    color: var(--color-text) !important;
 }
 
 .row--course:not(:last-child) .cell__course-name {
-  border-bottom-color: var(--color-base02) !important;
+    border-bottom-color: var(--color-base02) !important;
 }
 
 .cell {
-  margin: 3px !important;
+    margin: 3px !important;
 }
 
 .js-course-filters,
 .course-btnbar,
 .js-btn-manual {
-  display: none !important;
+    display: none !important;
 }
 
 .filterlistview:hover {
-  background-color: transparent !important;
+    background-color: transparent !important;
 }
 
 .evaluation-graphic--large {
-  border: 8px solid var(--color-base01) !important;
-  box-shadow: none !important;
+    border: 8px solid var(--color-base01) !important;
+    box-shadow: none !important;
 }
 
 .manual_widgettitle {
-  background-color: var(--color-base01) !important;
-  border: 1px solid var(--color-base02) !important;
+    background-color: var(--color-base01) !important;
+    border: 1px solid var(--color-base02) !important;
 }
 
 .rubrics__row--title {
-  color: var(--color-text) !important;
+    color: var(--color-text) !important;
 }
 
 .token:hover {
-  background-color: var(--color-base02) !important;
-  border-color: var(--color-base03) !important;
+    background-color: var(--color-base02) !important;
+    border-color: var(--color-base03) !important;
 }
 
 .timegrid {
-  background: transparent !important;
+    background: transparent !important;
 }
 
 .bubble__menu-btn:hover {
-  border-radius: 5px !important;
+    border-radius: 5px !important;
 }
 
 .separator {
-  background-color: var(--color-base02) !important;
+    background-color: var(--color-base02) !important;
 }
 
 .buis-stats-title {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 .buis-stats-box {
-  margin-right: 0.667rem;
-  background-color: var(--color-base01);
-  margin-bottom: 0px !important;
-  border-radius: 50px;
-  padding: 4px;
-  border: 2px solid var(--color-base02);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
+    margin-right: 0.667rem;
+    background-color: var(--color-base01);
+    margin-bottom: 0px !important;
+    border-radius: 50px;
+    padding: 4px;
+    border: 2px solid var(--color-base02);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
 }
 
 .buis-stats-value {
-  padding: 0px 4px 0px 4px;
-  font-size: 17px;
-  font-weight: bold;
-  margin-bottom: 0px !important;
-  color: var(--color-accent) !important;
+    padding: 0px 4px 0px 4px;
+    font-size: 17px;
+    font-weight: bold;
+    margin-bottom: 0px !important;
+    color: var(--color-accent) !important;
 }
 
 .blob__text,
 span.feedback__text,
 span.evaluation-graphic__progress-ring__description,
 span.evaluation-graphic__progress-ring__value {
-  color: var(--color-text) !important;
+    color: var(--color-text) !important;
 }
 
 .title-and-schoolyear-selector
-  .title-and-schoolyear-selector__period-container:hover:not(:disabled),
+    .title-and-schoolyear-selector__period-container:hover:not(:disabled),
 .title-and-schoolyear-selector[aria-expanded="true"]
-  .title-and-schoolyear-selector__period-container:not(:disabled) {
-  border-color: var(--color-accent) !important;
-  background-color: var(--darken-background) !important;
+    .title-and-schoolyear-selector__period-container:not(:disabled) {
+    border-color: var(--color-accent) !important;
+    background-color: var(--darken-background) !important;
 }
 
 .title-and-schoolyear-selector
-  .title-and-schoolyear-selector__period-container:not(:disabled) {
-  border-width: 2px !important;
-  border-radius: 15px !important;
+    .title-and-schoolyear-selector__period-container:not(:disabled) {
+    border-width: 2px !important;
+    border-radius: 15px !important;
 }
 
 .enableAnimations
-  .title-and-schoolyear-selector
-  .title-and-schoolyear-selector__period-container:not(:disabled) {
-  transition: all 0.1s !important;
+    .title-and-schoolyear-selector
+    .title-and-schoolyear-selector__period-container:not(:disabled) {
+    transition: all 0.1s !important;
 }
 
 .listview__row.js-listview-row.leerplannen-overview__list__listview__row {
-  background-color: var(--color-base01) !important;
-  border: 2px solid var(--color-base02) !important;
-  max-width: 33% !important;
-  margin-bottom: 10px !important;
-  border-radius: 15px !important;
+    background-color: var(--color-base01) !important;
+    border: 2px solid var(--color-base02) !important;
+    max-width: 33% !important;
+    margin-bottom: 10px !important;
+    border-radius: 15px !important;
 }
 
 .enableAnimations
-  .listview__row.js-listview-row.leerplannen-overview__list__listview__row {
-  transition: all 0.1s ease-in-out !important;
+    .listview__row.js-listview-row.leerplannen-overview__list__listview__row {
+    transition: all 0.1s ease-in-out !important;
 }
 
 .listview__row.js-listview-row.leerplannen-overview__list__listview__row:hover {
-  background-color: var(--color-base02) !important;
-  border-color: var(--color-accent) !important;
+    background-color: var(--color-base02) !important;
+    border-color: var(--color-accent) !important;
 }
 
 .title-and-schoolyear-selector__title {
-  border-right: 1px solid var(--color-accent) !important;
+    border-right: 1px solid var(--color-accent) !important;
 }
 
 .evaluation-list-item__container__title {
-  font-weight: 550 !important;
+    font-weight: 550 !important;
 }
 
 .evaluation-list-item__container__subtitle {
-  font-weight: 450 !important;
+    font-weight: 450 !important;
 }
 
 .evaluation__content {
-  border-radius: 6px !important;
+    border-radius: 6px !important;
 }
 
 td.cell.cell--evaluation.js-cell-evaluation.evaluation:hover {
-  border-color: var(--color-accent) !important;
+    border-color: var(--color-accent) !important;
 }
 
 .feedback .user-image-label {
-  color: var(--color-text) !important;
-  font-weight: 600 !important;
+    color: var(--color-text) !important;
+    font-weight: 600 !important;
 }
 
 .feedback__text {
-  color: var(--color-text) !important;
+    color: var(--color-text) !important;
 }
 
 .js-routehandler.table-page {
-  width: 89vw !important;
+    width: 89vw !important;
 }
 
 #smscMain.results {
-  overflow-x: hidden !important;
-  align-items: normal !important;
-  flex-direction: row !important;
-  justify-content: start !important;
+    overflow-x: hidden !important;
+    align-items: normal !important;
+    flex-direction: row !important;
+    justify-content: start !important;
 }
 
 div.reports-overview__listview__row {
-  background-color: rgb(0 0 0 / 20%) !important;
-  border-radius: 1rem;
-  margin-bottom: 1rem;
+    background-color: rgb(0 0 0 / 20%) !important;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
 }
 
 .listview__rows div.reports-overview__listview__row:hover {
-  background-color: rgb(0 0 0 / 50%) !important;
-  border-radius: 1rem;
-  margin-bottom: 1rem;
-  transition: background-color 0.3s ease;
+    background-color: rgb(0 0 0 / 50%) !important;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    transition: background-color 0.3s ease;
 }
 
 .evaluation-graphic__progress-ring__value {
-  margin-top: 1rem !important;
+    margin-top: 1rem !important;
 }
 
 .progress-ring__content .evaluation-graphic__progress-ring__description {
-  margin-top: 1.5rem !important;
+    margin-top: 1.5rem !important;
 }
 button.button-ZR3rz.bp-c-combo-hover-plain-outline--300,
-.searchInput-eoZIF.textInput-ACLPH{
-  background-color: var(--color-base01) !important;
-  border: 2px solid var(--color-base03) !important;
+.searchInput-eoZIF.textInput-ACLPH {
+    background-color: var(--color-base01) !important;
+    border: 2px solid var(--color-base03) !important;
 }
+
 .input-arO6v{
   background-color: var(--color-base01) !important;
   border-right: 2px solid var(--color-base03) !important;
   color: var(--color-text) !important;
+  margin-right: 0.6rem !important;
+
 }
-.tabs[role=tablist]>[role=presentation]>[role=tab][aria-selected]{
-  box-shadow: none !important;
-  border-bottom: 2px solid var(--color-accent) !important;
-  background-color: var(--color-base02) !important;
+.tabs[role="tablist"] > [role="presentation"] > [role="tab"][aria-selected] {
+    box-shadow: none !important;
+    border-bottom: 2px solid var(--color-accent) !important;
+    background-color: var(--color-base02) !important;
 }
 
-.tabs[role=tablist]>[role=presentation]>[role=tab]:hover:not([aria-selected]){
-  border-bottom-color: var(--color-base03) !important;
+.tabs[role="tablist"]
+    > [role="presentation"]
+    > [role="tab"]:hover:not([aria-selected]) {
+    border-bottom-color: var(--color-base03) !important;
 }
+.tabs[role="tablist"] {
+    border-bottom: none !important;
+}
+
 .tabs[role=tablist]{
   border-bottom: none !important;
+}
+.bubble-_lWSE{
+  background-color: var(--color-base01) !important;
+  border: transparent !important;
+  border-radius: 2rem !important;
+  box-shadow: none !important;
+  box-shadow: 0px 5px 20px 5px rgba(0, 0, 0, 0.3) !important;
+}
+.reportFilterDropdown-dAkBc > .js-emptystate{
+  background-color: var(--color-base01) !important;
+}
+.textInput-ACLPH:focus-within{
+  outline: none !important;
+
+}
+.graphicRight-r_Pnt.graphic-g55I1.small-Du6aA > svg > path{
+    fill: var(--color-text) !important;
 }

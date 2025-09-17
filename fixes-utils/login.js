@@ -5,7 +5,7 @@ function updateLoginPanel() {
   login_app_left.innerHTML = " ";
 
   document.getElementsByClassName(
-    "login-app__platform-indicator"
+    "login-app__platform-indicator",
   )[0].innerHTML = '<h1 class="logintitle">Smartschool ++</h1>';
 
   document.getElementsByClassName("login-app__title--separator")[0].innerHTML =

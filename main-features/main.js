@@ -36,7 +36,7 @@ function fixCoursesSearch() {
 
         setTimeout(() => {
           const firstCourse = document.querySelector(
-            ".course-list.js-courses-list li a"
+            ".course-list.js-courses-list li a",
           );
           if (firstCourse) {
             firstCourse.click();
@@ -76,7 +76,7 @@ function switchCoursesButton() {
   if (topnav)
     topnav.insertBefore(
       document.querySelector("[data-links]"),
-      document.querySelector("[data-courses]")
+      document.querySelector("[data-courses]"),
     );
 }
 function topNavIcons(data) {
@@ -158,18 +158,18 @@ async function apply() {
 
   style.setProperty(
     "--profile-picture",
-    "url(" + getPfpLink(data.profile.customUserName || getOriginalName()) + ")"
+    "url(" + getPfpLink(data.profile.customUserName || getOriginalName()) + ")",
   );
   style.setProperty("--blur-value-large", `blur(${defaultBackgroundBlur}px)`);
   style.setProperty(
     "--blur-value-small",
-    `blur(${data.appearance.background.backgroundBlurAmount}px)`
+    `blur(${data.appearance.background.backgroundBlurAmount}px)`,
   );
 
   if (!liteMode) {
     applyWeatherEffects(
       data.appearance.weatherOverlay.weatherOverlaySelection,
-      data.appearance.weatherOverlay.weatherOverlayAmount
+      data.appearance.weatherOverlay.weatherOverlayAmount,
     );
   }
 
@@ -209,12 +209,12 @@ async function storeQuickSettings() {
   data.appearance.enableSMPPLogo =
     document.getElementById("smpp-logo-toggle").checked;
   data.appearance.background.backgroundLink = document.getElementById(
-    "background-link-input"
+    "background-link-input",
   ).value;
   console.log(oldData.appearance.background.backgroundLink);
 
   data.appearance.background.backgroundBlurAmount = Number(
-    document.getElementById("background-blur-amount-slider").value
+    document.getElementById("background-blur-amount-slider").value,
   );
   data.appearance.weatherOverlay.weatherOverlaySelection = !liteMode
     ? Number(document.getElementById("weather-overlay-selector").value)
@@ -225,7 +225,7 @@ async function storeQuickSettings() {
 
   data.features.showNews = document.getElementById("news-toggle").checked;
   data.other.enablePerfomanceMode = document.getElementById(
-    "performance-mode-toggle"
+    "performance-mode-toggle",
   ).checked;
 
   currentTheme = data.appearance.theme;
@@ -238,13 +238,12 @@ async function storeQuickSettings() {
       .classList.remove("active");
   }
 
-  document.getElementById(
-    "performance-mode-info"
-  ).innerHTML = `Toggle performance mode ${
-    data.other.enablePerfomanceMode
-      ? "<span class='green-underline'>Enabled</span>"
-      : "<span class='red-underline'>Disabled</span>"
-  }`;
+  document.getElementById("performance-mode-info").innerHTML =
+    `Toggle performance mode ${
+      data.other.enablePerfomanceMode
+        ? "<span class='green-underline'>Enabled</span>"
+        : "<span class='red-underline'>Disabled</span>"
+    }`;
 
   if (data.appearance.theme == "custom") {
     if (oldData.appearance.theme == "custom") {
@@ -285,7 +284,7 @@ async function storeQuickSettings() {
   }
   console.log(
     data.appearance.background.backgroundLink,
-    oldData.appearance.background.backgroundLink
+    oldData.appearance.background.backgroundLink,
   );
 
   console.log("Storing this new data:", data);
@@ -399,13 +398,12 @@ async function loadQuickSettings() {
   document.getElementById("smpp-logo-toggle").checked =
     data.appearance.enableSMPPLogo;
   document.getElementById("news-toggle").checked = data.features.showNews;
-  document.getElementById(
-    "performance-mode-info"
-  ).innerHTML = `Toggle performance mode ${
-    data.other.enablePerfomanceMode
-      ? "<span class='green-underline'>Enabled</span>"
-      : "<span class='red-underline'>Disabled</span>"
-  }`;
+  document.getElementById("performance-mode-info").innerHTML =
+    `Toggle performance mode ${
+      data.other.enablePerfomanceMode
+        ? "<span class='green-underline'>Enabled</span>"
+        : "<span class='red-underline'>Disabled</span>"
+    }`;
   if (!liteMode) {
     document.getElementById("weather-overlay-selector").value =
       data.appearance.weatherOverlay.weatherOverlaySelection;
@@ -566,6 +564,8 @@ function createQuickSettingsHTML(parent) {
     { value: "fall", text: "Autumn Gloom" },
     { value: "matcha", text: "Matcha Green" },
     { value: "pink", text: "Cherry Haze" },
+    { value: "fairyblue", text: "Fairy Blue" },
+    { value: "tech", text: "Tech" },
   ];
 
   options.forEach((option) => {

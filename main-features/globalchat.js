@@ -8,7 +8,7 @@ class GlobalChatWindow extends BaseWindow {
   async renderContent() {
     let content = document.createElement("div");
     this.iframe = document.createElement("iframe");
-    this.iframe.style="width:100%; height:100%; border:none";
+    this.iframe.style = "width:100%; height:100%; border:none";
     content.appendChild(this.iframe);
 
     return content;
@@ -23,13 +23,13 @@ class GlobalChatWindow extends BaseWindow {
       "color-text",
     ]);
     const subDomain = this.beta ? "gcbeta" : "gc";
-    this.iframe.src=`https://${subDomain}.smartschoolplusplus.com/v1?${queryString}`;
+    this.iframe.src = `https://${subDomain}.smartschoolplusplus.com/v1?${queryString}`;
   }
 }
 
 let gcWindow;
 
-async function openGlobalChat(event, beta=false) {
+async function openGlobalChat(event, beta = false) {
   if (!gcWindow || !gcWindow.element?.isConnected) {
     gcWindow = new GlobalChatWindow();
     await gcWindow.create();
