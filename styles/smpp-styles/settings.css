@@ -1,5 +1,5 @@
 #settings-window {
-  border-radius: 3rem;
+  border-radius: 2rem;
   display: flex;
   flex-direction: row;
 }
@@ -86,4 +86,9 @@
 
 .profile-settings-label-description {
   margin: 0;
+}
+
+#settings-window .window-controls {
+  right: 1rem;
+  top: 1rem;
 }

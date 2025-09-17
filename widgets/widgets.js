@@ -692,7 +692,7 @@ function updateDoneButtonState(value) {
   });
 }
 
-if (getPageURL().path == "") {
+if (getPageURL().path == "" && getPageURL().search == "") {
   document.addEventListener("mouseup", async (e) => {
     if (curDragInfo) {
       await curDragInfo.widget.drop(false);

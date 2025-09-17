@@ -15,6 +15,7 @@ function open_url(url, new_window = false) {
 function getPageURL() {
   let url = window.location;
   let urlObject = {};
+  urlObject.search = url.search;
   urlObject.schoolName = url.hostname.split(".")[0];
   urlObject.fullPath = url.pathname.replace("/", "");
   urlObject.path = url.pathname.split("/")[1];
@@ -101,7 +102,7 @@ function getUserId() {
       cookie.trim().startsWith("plannerUrl=")
     );
 
-    if (plannerUrlCookie) { 
+    if (plannerUrlCookie) {
       sendDebug("Retrieved plannerUrl from cookies" + plannerUrlCookie);
       const plannerUrl = plannerUrlCookie.split("=")[1];
       sendDebug("Found plannerUrl in cookies:", plannerUrl);
@@ -117,6 +118,6 @@ function getUserId() {
   if (userId) {
     return userId;
   } else {
-    console.error("No userID? womp womp")
+    console.error("No userID? womp womp");
   }
 }
