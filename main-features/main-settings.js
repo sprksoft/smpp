@@ -58,11 +58,11 @@ class SettingsWindow extends BaseWindow {
     let profileSettingsLabelTitle = document.createElement("h2");
     profileSettingsLabelTitle.classList.add("profile-settings-label-title");
     profileSettingsLabelTitle.innerText = String(
-      data.profile.customUserName || getOriginalName(),
+      data.profile.customUserName || getOriginalName()
     ).split(" ")[0];
     let profileSettingsLabelDescription = document.createElement("p");
     profileSettingsLabelDescription.classList.add(
-      "profile-settings-label-description",
+      "profile-settings-label-description"
     );
     profileSettingsLabelDescription.innerText = "view profile";
     profileSettingsLabel.appendChild(profileSettingsLabelTitle);
@@ -81,7 +81,7 @@ class SettingsWindow extends BaseWindow {
     let categoryButtonIcon = document.createElement("img");
     categoryButtonIcon.classList.add("category-button-icon");
     categoryButtonIcon.src = getImage(
-      this.settingsSideBarCategories[category].icon,
+      this.settingsSideBarCategories[category].icon
     );
     categoryButton.prepend(categoryButtonIcon);
     return categoryButton;
@@ -99,8 +99,8 @@ class SettingsWindow extends BaseWindow {
       innerButton.checked = state;
       let innerSwitch = document.createElement("span");
       innerSwitch.classList.add("slider", "round");
-      innerButton.appendChild(innerSwitch);
       outerSwitch.appendChild(innerButton);
+      outerSwitch.appendChild(innerSwitch);
       return outerSwitch;
     }
 

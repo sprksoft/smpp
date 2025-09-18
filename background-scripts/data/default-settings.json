@@ -1,0 +1,39 @@
+{
+  "profile": {
+    "customUserName": null,
+    "enableOriginalPFP": false
+  },
+  "appearance": {
+    "theme": "ldev",
+    "enableSMPPLogo": true,
+    "background": {
+      "backgroundSelection": 0,
+      "backgroundLink": null,
+      "backgroundBlurAmount": 0
+    },
+    "weatherOverlay": {
+      "weatherOverlaySelection": 1,
+      "weatherOverlayAmount": 0
+    }
+  },
+  "topNav": {
+    "enableGOButton": false,
+    "enableSearchButton": false,
+    "enableGCButton": true,
+    "enableQuickMenuButton": false,
+    "switchCoursesAndLinks": true,
+    "icons": {
+      "enableHomeIcon": true,
+      "enableMailIcon": true,
+      "enableNotificationIcon": true,
+      "enableSettingsIcon": false
+    }
+  },
+  "features": {
+    "showNews": true,
+    "delijn": {
+      "monochrome": false
+    }
+  },
+  "other": { "quicks": [], "enablePerfomanceMode": false }
+}

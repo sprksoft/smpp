@@ -10,6 +10,8 @@ import {
   getDelijnColorData,
   getPlantAppData,
   getCustomThemeData,
+  getAllThemes,
+  getTheme,
 } from "./data-background-script.js";
 import { fetchWeatherData, fetchDelijnData } from "./api-background-script.js";
 
@@ -47,15 +49,14 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
       await browser.storage.local.set({ settingsData: settingsData });
       sendResponse({ succes: true });
       console.log(
-        "Settings data saved for this:" + message.category + "category",
+        "Settings data saved for this:" + message.category + "category"
       );
     }
-
     if (message.action === "getSettingsCategory") {
       const settingsData = await getSettingsData();
       sendResponse(settingsData[message.category]);
       console.log(
-        "Settings data sent for this:" + message.category + "category",
+        "Settings data sent for this:" + message.category + "category"
       );
     }
     if (message.action === "getSettingsData") {
@@ -63,6 +64,24 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
       console.log(settingsData);
       sendResponse(settingsData);
       console.log("Settings data sent.");
+    }
+    // Themes
+    if (message.action === "getAllThemes") {
+      const allThemes = getAllThemes();
+      sendResponse(allThemes);
+      console.log("All themes sent.");
+    }
+    if (message.action === "getTheme") {
+      let theme;
+      try {
+        theme = getTheme(message.theme);
+        sendResponse(theme);
+        console.log(`Theme ${message.theme} sent.`);
+      } catch (error) {
+        theme = getTheme("error");
+        sendResponse(theme);
+        console.error(`Invalid theme requested, sent "error" theme`);
+      }
     }
     // Custom theme
     if (message.action === "getCustomThemeData") {
@@ -82,8 +101,9 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
       console.log("Background image saved.");
     }
     if (message.action === "getBackgroundImage") {
-      const backgroundImage =
-        await browser.storage.local.get("backgroundImage");
+      const backgroundImage = await browser.storage.local.get(
+        "backgroundImage"
+      );
       sendResponse(backgroundImage || null);
       console.log("Background image sent.");
     }
@@ -94,8 +114,9 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
       console.log("Photo widget image saved.");
     }
     if (message.action === "getPhotoWidgetImage") {
-      const photoWidgetImage =
-        await browser.storage.local.get("photoWidgetImage");
+      const photoWidgetImage = await browser.storage.local.get(
+        "photoWidgetImage"
+      );
       sendResponse(photoWidgetImage || null);
       console.log("Photo widget image sent.");
     }

@@ -1,0 +1,10 @@
+{
+  "age": 0,
+  "lastWaterTime": null,
+  "lastGrowTime": null,
+  "uniqueColor": "#fff",
+  "plantVersion": 2,
+  "birthday": null,
+  "daysSinceBirthday": 0,
+  "isAlive": true
+}
