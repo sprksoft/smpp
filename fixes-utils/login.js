@@ -5,7 +5,7 @@ function updateLoginPanel() {
   login_app_left.innerHTML = " ";
 
   document.getElementsByClassName(
-    "login-app__platform-indicator",
+    "login-app__platform-indicator"
   )[0].innerHTML = '<h1 class="logintitle">Smartschool ++</h1>';
 
   document.getElementsByClassName("login-app__title--separator")[0].innerHTML =
@@ -48,8 +48,6 @@ let splashtexts = [
   `Never gonna give you up ;)`,
   `The cake is a lie!`,
   `I know what you did...`,
-  `+1000 aura`,
-  `What in the skibidi sigma?!`,
   `Join de discord!`,
   `2 + 2 = 5`,
   `2 * 3 = 4`,
@@ -89,7 +87,7 @@ let splashtexts = [
   `It's either Spanish or vanish`,
   `Are you hacking??`,
   `:3`,
-  `Ma aleee ik word \ngekilled door ne kerstboom!`,
+  `Ma alleee ik word \ngekilled door ne kerstboom!`,
   `<s>SQL</s>,<i> Squil</i> ✓`,
   `undefined is not a function`,
   `:p`,
@@ -113,15 +111,14 @@ let splashtexts = [
   `It's that <i>me</i> espresso!`,
   `You lied about your age, \ndidn't you?`,
   `Check out Undertale`,
-  `Oh No! anyways`,
   `Nobody expects the \n Spanish Inquisition!`,
   `Beans Beans Beans!`,
   `Baby Shark, doo-doo, \n doo-doo, doo-doo`,
   `Brood int frans`,
   `CORS >:(`,
-  `We have a discord!`,
-  `Le poisson Steve !`,
-  `Il est oraaaange. Il a des bras et des jambes.`,
+  `Join our discord!`,
+  `Le poisson Steve!`,
+  `Il est oraaaange! \n Il a des bras.. et des jambes`,
   `Since Nov 14, 2023`,
   `Over 1000+ commits!`,
   `Took at least \n 5 hours to make!`,
@@ -130,9 +127,8 @@ let splashtexts = [
   `Rode auto`,
   `Cookie clicker`,
   `Are you serious?`,
-  `Breakout`,
-  `Examens`,
-  `Ruby chan, haii`,
+  `Breakout++`,
+  `Ruby chan, haii!!`,
   `It's so sweet`,
 ];
 function get_splash_text() {

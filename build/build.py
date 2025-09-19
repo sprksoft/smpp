@@ -137,7 +137,6 @@ def build_lite(excluded_lite_files_csv, original_dir, lite_build_dir, icon_sourc
 
         manifest['name'] = 'Smartschool++ Lite'
         manifest['description'] = 'A lite, school friendlier version of Smartschool++'
-        manifest['lite_mode'] = True
 
         with open(manifest_path, 'w', encoding='utf-8') as f:
             json.dump(manifest, f, indent=4)

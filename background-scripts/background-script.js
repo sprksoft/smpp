@@ -1,6 +1,7 @@
 if (typeof browser === "undefined") {
   var browser = chrome;
 }
+let globalsInitialized = false;
 
 import {
   getSettingsData,
@@ -15,9 +16,19 @@ import {
   getTheme,
 } from "./data-background-script.js";
 import { fetchWeatherData, fetchDelijnData } from "./api-background-script.js";
+import { initGlobals } from "./json-loader.js";
 
 browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  (async () => {
+  handleMessage(message, sendResponse);
+  return true; // keeps channel open
+});
+
+async function handleMessage(message, sendResponse) {
+  if (!globalsInitialized) {
+    await initGlobals();
+    globalsInitialized = true;
+  }
+  try {
     // General
     if (message.action === "clearLocalStorage") {
       browser.storage.local.clear();
@@ -209,6 +220,8 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
       await browser.storage.local.set(gameData);
       sendResponse({ success: true });
     }
-  })();
-  return true;
-});
+  } catch (err) {
+    console.error("Service worker error:", err);
+    sendResponse({ error: err.message || String(err) });
+  }
+}

@@ -220,7 +220,6 @@ async function migrateSettings() {
     };
   }
 
-  // Save new data
   console.log("new data:", quickSettings, widgetData);
 
   await browser.runtime.sendMessage({

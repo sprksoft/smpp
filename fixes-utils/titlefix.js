@@ -3,7 +3,7 @@ if (browser == undefined) {
   var browser = chrome;
 }
 let manifest = browser.runtime.getManifest();
-const liteMode = manifest.lite_mode;
+const liteMode = chrome.runtime.getManifest().name.includes("Lite");
 
 function vak_prefix(page) {
   switch (page) {

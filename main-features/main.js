@@ -117,10 +117,11 @@ function resetSMlogo() {
 async function apply() {
   setEditMode(false); // Turn off widget edit mode
   let style = document.documentElement.style;
-
+  console.log("waiting for settings data");
   const data = await browser.runtime.sendMessage({
     action: "getSettingsData",
   });
+
   console.log("Settings data: \n", data);
   themes = await browser.runtime.sendMessage({
     action: "getAllThemes",
@@ -221,14 +222,6 @@ async function storeQuickSettings() {
     "performance-mode-toggle"
   ).checked;
 
-  if (data.appearance.background.backgroundLink) {
-    document.getElementById("smpp-link-clear-button").classList.add("active");
-  } else {
-    document
-      .getElementById("smpp-link-clear-button")
-      .classList.remove("active");
-  }
-
   document.getElementById(
     "performance-mode-info"
   ).innerHTML = `Toggle performance mode ${
@@ -250,18 +243,16 @@ async function storeQuickSettings() {
   let file = document.getElementById("background-file-input").files[0];
   if (file) {
     const reader = new FileReader();
-    reader.onload = () => {
-      const imageData = reader.result;
-      browser.runtime.sendMessage({
-        action: "saveBackgroundImage",
-        data: imageData,
-      });
-    };
-    reader.readAsDataURL(file);
-
+    const imageData = await new Promise((resolve) => {
+      reader.onload = () => resolve(reader.result);
+      reader.readAsDataURL(file);
+    });
+    await browser.runtime.sendMessage({
+      action: "saveBackgroundImage",
+      data: imageData,
+    });
     data.appearance.background.backgroundSelection = 2;
     data.appearance.background.backgroundLink = file.name;
-    await browser.runtime.sendMessage({ action: "setSettingsData", data });
   } else {
     if (data.appearance.background.backgroundLink == "") {
       data.appearance.background.backgroundSelection = 0;
@@ -275,6 +266,7 @@ async function storeQuickSettings() {
 
   console.log("Storing this new data:", data);
   await browser.runtime.sendMessage({ action: "setSettingsData", data });
+  await loadQuickSettings();
   await apply();
 }
 
@@ -329,20 +321,17 @@ async function setBackground(data) {
   }
   switch (data.background.backgroundSelection) {
     case 0: // Default
-      console.log("default", data.theme);
       displayBackgroundImage(
         getImage("/theme-backgrounds/" + data.theme + ".jpg")
       );
       break;
     case 1: // Link
-      console.log("link", data);
       displayBackgroundImage(data.background.backgroundLink);
       break;
     case 2: // File
       let thing = await browser.runtime.sendMessage({
         action: "getBackgroundImage",
       });
-      console.log("file", thing.backgroundImage);
       displayBackgroundImage(thing.backgroundImage);
       break;
   }
@@ -420,6 +409,8 @@ async function loadQuickSettings() {
   } else {
     document.getElementById("backgroundfilebutton").classList.remove("active");
   }
+
+  document.getElementById("background-file-input").value = ""; // reset the files
   document.getElementById("background-blur-amount-slider").value =
     data.appearance.background.backgroundBlurAmount;
   document.getElementById("performance-mode-toggle").checked =
@@ -515,16 +506,7 @@ function createBgSelector() {
 
   clearButton.addEventListener("click", async function (event) {
     event.target.closest(".smpp-link-clear-button").classList.remove("active");
-    const data = await browser.runtime.sendMessage({
-      action: "getSettingsData",
-    });
-    data.appearance.background.backgroundLink = "";
-    data.appearance.background.backgroundSelection = 0;
-    await browser.runtime.sendMessage({
-      action: "setSettingsData",
-      data: data,
-    });
-    await loadQuickSettings();
+    document.getElementById("background-link-input").value = "";
     await storeQuickSettings();
   });
 
@@ -857,14 +839,15 @@ async function main() {
     alert("smpp is waarschijnlijk 2 keer geladen");
   }
   document.body.classList.add("smpp"); // For modding
-
+  console.log("waiting for settings data locally 1");
   if (window.localStorage.getItem("settingsdata")) {
     await migrateSettings();
   }
-
+  console.log("waiting for settings data for migartion");
   const settingsData = await browser.runtime.sendMessage({
     action: "getSettingsData",
   });
+  console.log("it doesnt reach here");
   if (settingsData.theme != null) {
     await migrateSettingsV2();
   }
