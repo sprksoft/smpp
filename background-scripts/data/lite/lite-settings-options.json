@@ -10,10 +10,6 @@
       "backgroundSelection": "number",
       "backgroundLink": "string",
       "backgroundBlurAmount": "number"
-    },
-    "weatherOverlay": {
-      "weatherOverlaySelection": "number",
-      "weatherOverlayAmount": "number"
     }
   },
   "topNav": {

@@ -35,6 +35,7 @@ async function createPlantWidget(plantDiv) {
   let plantData = await browser.runtime.sendMessage({
     action: "getPlantAppData",
   });
+  console.log("Plant data: \n", plantData);
   let outdated = checkIfOutdated(plantData.plantVersion);
   plantDiv.innerHTML = "";
   if (outdated) {
@@ -268,7 +269,7 @@ function calculateGrowth(data) {
   // check if plant is no longer a seed
   if (data.birthday != null && data.isAlive) {
     data.daysSinceBirthday = Math.round(
-      (currentTime - new Date(data.birthday)) / (1000 * 60 * 60 * 24) + 1,
+      (currentTime - new Date(data.birthday)) / (1000 * 60 * 60 * 24) + 1
     );
   }
   browser.runtime.sendMessage({

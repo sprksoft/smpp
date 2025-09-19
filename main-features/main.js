@@ -1,7 +1,6 @@
 //java script komt hier je weet wel
 //ok - ldev
 //oh ok, ik dacht in general.css - Jdev
-let currentThemeVars;
 let quickSettingsWindowIsHidden = true;
 
 function discordpopup() {
@@ -122,6 +121,7 @@ async function apply() {
   const data = await browser.runtime.sendMessage({
     action: "getSettingsData",
   });
+  console.log("Settings data: \n", data);
   themes = await browser.runtime.sendMessage({
     action: "getAllThemes",
   });
@@ -132,7 +132,6 @@ async function apply() {
   fixCoursesSearch();
 
   await setTheme(data.appearance.theme);
-  currentTheme = data.appearance.theme;
 
   showNews(data.features.showNews);
 
@@ -183,7 +182,6 @@ async function apply() {
   if (document.getElementById("background_image")) {
     document.getElementById("background_image").style.display = "none";
   }
-  console.log(data.appearance.background.backgroundSelection);
   switch (data.appearance.background.backgroundSelection) {
     case 1:
       set_backgroundlink(data.appearance.background.backgroundLink);
@@ -206,7 +204,6 @@ async function storeQuickSettings() {
   });
   // Start from old settings
   const data = structuredClone(oldData);
-  console.log(oldData.appearance.background.backgroundLink);
   data.profile.customUserName = null;
   data.appearance.theme = document.getElementById("theme-selector").value;
   data.appearance.enableSMPPLogo =
@@ -214,7 +211,6 @@ async function storeQuickSettings() {
   data.appearance.background.backgroundLink = document.getElementById(
     "background-link-input"
   ).value;
-  console.log(oldData.appearance.background.backgroundLink);
 
   data.appearance.background.backgroundBlurAmount = Number(
     document.getElementById("background-blur-amount-slider").value
@@ -230,8 +226,6 @@ async function storeQuickSettings() {
   data.other.enablePerfomanceMode = document.getElementById(
     "performance-mode-toggle"
   ).checked;
-
-  currentTheme = data.appearance.theme;
 
   if (data.appearance.background.backgroundLink) {
     document.getElementById("smpp-link-clear-button").classList.add("active");
@@ -286,10 +280,6 @@ async function storeQuickSettings() {
       data.appearance.background.backgroundSelection = 1;
     }
   }
-  console.log(
-    data.appearance.background.backgroundLink,
-    oldData.appearance.background.backgroundLink
-  );
 
   console.log("Storing this new data:", data);
   await browser.runtime.sendMessage({ action: "setSettingsData", data });
@@ -798,7 +788,6 @@ function createTopButtons() {
 
 function updateTopButtons(data) {
   let GOButton = document.querySelector(`[data-go=""]`);
-  console.log(GOButton);
   if (GOButton) {
     data.enableGOButton
       ? (GOButton.style = "display:flex")

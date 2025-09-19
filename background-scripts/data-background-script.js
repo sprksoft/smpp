@@ -7,10 +7,15 @@ import { fetchDelijnData, fetchWeatherData } from "./api-background-script.js";
 
 import themes from "./data/themes.json" with { type: "json" };
 import settingsOptions from "./data/settings-options.json" with { type: "json" };
+import liteSettingsOptions from "./data/lite/lite-settings-options.json" with { type: "json" };
+
 import defaultSettings from "./data/default-settings.json" with { type: "json" };
 import liteDefaultSettings from "./data/lite/lite-default-settings.json" with { type: "json" };
 import defaultPlantData from "./data/default-plant-data.json" with { type: "json" };
 import fallbackColorData from "./data/delijn-kleuren.json" with { type: "json" };
+
+settingsOptions.appearance.theme = Object.keys(getAllThemes())
+liteSettingsOptions.appearance.theme = Object.keys(getAllThemes())
 
 function getDefaultCustomThemeData() {
   return {
@@ -84,16 +89,22 @@ export async function getCustomThemeData() {
 export function getSettingsOptions(isLite) {
   if (!isLite) {
     return settingsOptions;
+  } else {
+    return liteSettingsOptions;
   }
 }
-console.log(getSettingsOptions(liteMode));
 
 export function getAllThemes() {
   return themes;
 }
 
 export function getTheme(theme) {
-  return themes[theme];
+  console.log(themes[theme])
+  if (themes[theme] != undefined) {
+    return themes[theme];
+  } else {
+     throw new Error("Theme not found")
+  }
 }
 
 export async function getDelijnColorData() {

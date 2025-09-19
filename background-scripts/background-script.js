@@ -4,6 +4,7 @@ if (typeof browser === "undefined") {
 
 import {
   getSettingsData,
+  getSettingsOptions,
   getWeatherAppData,
   getDelijnAppData,
   getWidgetData,
@@ -65,6 +66,13 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
       sendResponse(settingsData);
       console.log("Settings data sent.");
     }
+
+    if (message.action === "getSettingsOptions") {
+      const settingsOptions = await getSettingsOptions();
+      console.log(settingsOptions);
+      sendResponse(settingsOptions);
+      console.log("Settings options sent.");
+    }
     // Themes
     if (message.action === "getAllThemes") {
       const allThemes = getAllThemes();
@@ -78,6 +86,7 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
         sendResponse(theme);
         console.log(`Theme ${message.theme} sent.`);
       } catch (error) {
+        console.error(error);
         theme = getTheme("error");
         sendResponse(theme);
         console.error(`Invalid theme requested, sent "error" theme`);

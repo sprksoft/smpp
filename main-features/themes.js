@@ -1,12 +1,17 @@
-let themes;
+let currentThemeName;
 let currentTheme;
 let customTheme;
 
 async function setTheme(themeName) {
   let style = document.documentElement.style;
+  currentThemeName = themeName;
+  currentTheme = await browser.runtime.sendMessage({
+    action: "getTheme",
+    theme: themeName,
+  });
   if (themeName != "custom") {
-    Object.keys(themes[themeName]).forEach((key) => {
-      style.setProperty(key, themes[themeName][key]);
+    Object.keys(currentTheme).forEach((key) => {
+      style.setProperty(key, currentTheme[key]);
     });
   } else {
     const themeData = await browser.runtime.sendMessage({
@@ -25,10 +30,9 @@ async function setTheme(themeName) {
   }
   await widgetSystemNotifyThemeChange();
 }
-
 function getThemeVar(varName) {
-  if (currentTheme != "custom") {
-    return themes[currentTheme][varName];
+  if (currentThemeName != "custom") {
+    return currentTheme[varName];
   } else {
     return customTheme[varName.replace("--", "").replace("-", "_")];
   }
@@ -36,9 +40,9 @@ function getThemeVar(varName) {
 
 function getThemeQueryString(queryVars = []) {
   let queryString = "";
-  if (currentTheme != "custom") {
+  if (currentThemeName != "custom") {
     queryVars.forEach((queryVar) => {
-      themeVar = themes[currentTheme]["--" + queryVar];
+      themeVar = currentTheme["--" + queryVar];
       queryString += `&${queryVar}=${
         themeVar.startsWith("#") ? themeVar.substring(1) : themeVar
       }`;
