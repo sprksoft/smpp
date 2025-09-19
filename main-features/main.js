@@ -182,14 +182,8 @@ async function apply() {
   if (document.getElementById("background_image")) {
     document.getElementById("background_image").style.display = "none";
   }
-  switch (data.appearance.background.backgroundSelection) {
-    case 1:
-      set_backgroundlink(data.appearance.background.backgroundLink);
-      break;
-    case 2:
-      set_background();
-      break;
-  }
+
+  setBackground(data.appearance);
 
   if (data.appearance.enableSMPPLogo) {
     updateSMPPlogo();
@@ -268,8 +262,6 @@ async function storeQuickSettings() {
     data.appearance.background.backgroundSelection = 2;
     data.appearance.background.backgroundLink = file.name;
     await browser.runtime.sendMessage({ action: "setSettingsData", data });
-    window.location.reload();
-    return;
   } else {
     if (data.appearance.background.backgroundLink == "") {
       data.appearance.background.backgroundSelection = 0;
@@ -286,7 +278,7 @@ async function storeQuickSettings() {
   await apply();
 }
 
-function set_background() {
+function set_backgroundOLD() {
   let style = document.documentElement.style;
   browser.runtime
     .sendMessage({ action: "getBackgroundImage" })
@@ -311,6 +303,49 @@ function set_background() {
         document.body.appendChild(img);
       }
     });
+}
+
+async function setBackground(data) {
+  let style = document.documentElement.style;
+  function displayBackgroundImage(image) {
+    style.setProperty("--background-color", `transparent`);
+    let img =
+      document.getElementById("background_image") ||
+      document.createElement("img");
+    img.id = "background_image";
+    img.style.backgroundColor = "var(--color-base00)";
+    img.style.position = "absolute";
+    img.style.top = "0";
+    img.style.left = "0";
+    img.style.width = "101%";
+    img.style.height = "101%";
+    img.style.objectFit = "cover";
+    img.style.zIndex = -1;
+    img.style.display = "block";
+    if (image) img.src = image;
+    if (!document.getElementById("background_image")) {
+      document.body.appendChild(img);
+    }
+  }
+  switch (data.background.backgroundSelection) {
+    case 0: // Default
+      console.log("default", data.theme);
+      displayBackgroundImage(
+        getImage("/theme-backgrounds/" + data.theme + ".jpg")
+      );
+      break;
+    case 1: // Link
+      console.log("link", data);
+      displayBackgroundImage(data.background.backgroundLink);
+      break;
+    case 2: // File
+      let thing = await browser.runtime.sendMessage({
+        action: "getBackgroundImage",
+      });
+      console.log("file", thing.backgroundImage);
+      displayBackgroundImage(thing.backgroundImage);
+      break;
+  }
 }
 
 function isAbsoluteUrl(url) {

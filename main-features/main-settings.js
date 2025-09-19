@@ -1,6 +1,9 @@
 class SettingsWindow extends BaseWindow {
   settingsSideBarCategories = {
-    appearance: { name: "Appearance", icon: "settingsAppearance.png" },
+    appearance: {
+      name: "Appearance",
+      icon: "/settings-icons/settingsAppearance.png",
+    },
     topNav: { name: "Navigation", icon: "settingsTopNav.png" },
     features: { name: "Apps", icon: "settingsFeatures.png" },
     other: { name: "Other", icon: "settingsOther.png" },

@@ -9,8 +9,7 @@
     "--color-base02": "#3f3c3b",
     "--color-base03": "#5b5756",
     "--darken-background": "rgba(0,0,0,0.2)",
-    "--color-homepage-sidebars-bg": "#02020585",
-    "--loginpage-image": "url(https://4kwallpapers.com/images/wallpapers/desert-doom-sand-dunes-dark-background-monochrome-landscape-2560x1080-6409.jpg)"
+    "--color-homepage-sidebars-bg": "#02020585"
   },
   "white": {
     "display-name": "Off White",
@@ -21,7 +20,6 @@
     "--color-base02": "#d2cfd0",
     "--color-base03": "#7b93b4",
     "--color-homepage-sidebars-bg": "#02020540",
-    "--loginpage-image": "url(https://wallpaperaccess.com/full/1474688.jpg)",
     "--darken-background": "rgba(0,0,0,0.1)",
     "--color-splashtext": "#080a12"
   },
@@ -34,7 +32,6 @@
     "--color-base02": "oklch(24% 0.005 70)",
     "--color-base03": "oklch(30% 0.005 70)",
     "--color-homepage-sidebars-bg": "oklch(15% 0.005 70/ 50%)",
-    "--loginpage-image": "url(https://i.redd.it/yfssdsfosao11.png)",
     "--darken-background": "rgba(0,0,0,0.25)",
     "--color-splashtext": "#ffd5a0"
   },
@@ -47,7 +44,6 @@
     "--color-base02": "#250654",
     "--color-base03": "#3f0a74",
     "--color-homepage-sidebars-bg": "#02020585",
-    "--loginpage-image": "url(https://www.hdwallpapers.in/download/macos_monterey_shapes_hd_macos-2560x1440.jpg)",
     "--darken-background": "rgba(0,0,0,0.2)",
     "--color-splashtext": "#dfdeff"
   },
@@ -60,7 +56,6 @@
     "--color-base02": "#5c1c1a",
     "--color-base03": "#823530",
     "--color-homepage-sidebars-bg": "#02020585",
-    "--loginpage-image": "url(https://media.timeout.com/images/102945740/image.jpg)",
     "--darken-background": "rgba(0,0,0,0.2)",
     "--color-splashtext": "#efc2c3"
   },
@@ -73,7 +68,6 @@
     "--color-base02": "#3b2e2e",
     "--color-base03": "#4c3e3e",
     "--color-homepage-sidebars-bg": "#02020585",
-    "--loginpage-image": "url(https://www.hdwallpapers.in/download/wet_brown_leaves_hd_dark_aesthetic-HD.jpg)",
     "--darken-background": "rgba(0,0,0,0.3)",
     "--color-splashtext": "#d3b199"
   },
@@ -86,7 +80,6 @@
     "--color-base02": "#7b3f31",
     "--color-base03": "#bf6f51",
     "--color-homepage-sidebars-bg": "#02020585",
-    "--loginpage-image": "url(https://wallpapercave.com/wp/wp7464660.jpg)",
     "--darken-background": "rgba(0,0,0,0.3)",
     "--color-splashtext": "#ffe5d3"
   },
@@ -99,7 +92,6 @@
     "--color-base02": "#345f7f",
     "--color-base03": "#5687b6",
     "--color-homepage-sidebars-bg": "#02020585",
-    "--loginpage-image": "url(https://th.bing.com/th/id/R.fd4990dbff7b2d998a61b5a60b6b1949?rik=TkC2r3hdP1Ma9g&pid=ImgRaw&r=0)",
     "--darken-background": "rgba(0,0,0,0.2)",
     "--color-splashtext": "#7bcfe2"
   },
@@ -112,7 +104,6 @@
     "--color-base02": "#232428",
     "--color-base03": "#3a3c44",
     "--color-homepage-sidebars-bg": "#02020585",
-    "--loginpage-image": "url(https://wallpapercave.com/wp/wp4673203.jpg)",
     "--darken-background": "rgba(0,0,0,0.2)",
     "--color-splashtext": "#7089a4"
   },
@@ -125,7 +116,6 @@
     "--color-base02": "#456046",
     "--color-base03": "#4f7a51",
     "--color-homepage-sidebars-bg": "#02020585",
-    "--loginpage-image": "url(https://wallpapercave.com/wp/wp9313069.jpg)",
     "--darken-background": "rgba(0,0,0,0.15)",
     "--color-splashtext": "#8ab4a7"
   },
@@ -138,12 +128,11 @@
     "--color-base02": "#52647c",
     "--color-base03": "#8294ac",
     "--color-homepage-sidebars-bg": "#02020585",
-    "--loginpage-image": "url(https://hdqwalls.com/download/everest-3840x2160.jpg)",
     "--darken-background": "rgba(0,0,0,0.1)",
     "--color-splashtext": "#030c18"
   },
   "vax": {
-    "display-name": "Unused Star Wars",
+    "display-name": "__Star Wars",
     "--color-accent": "#7a1600",
     "--color-text": "bisque",
     "--color-base00": "#411900",
@@ -151,7 +140,6 @@
     "--color-base02": "#b9815d",
     "--color-base03": "#caa288",
     "--color-homepage-sidebars-bg": "#02020585",
-    "--loginpage-image": "url(https://wallpapers.com/images/hd/star-wars-place-ztno3exzqff0m0ci.webp)",
     "--darken-background": "rgba(0,0,0,0.15)",
     "--color-splashtext": "#7a1600"
   },
@@ -164,12 +152,11 @@
     "--color-base02": "#544848",
     "--color-base03": "#634f4e",
     "--color-homepage-sidebars-bg": "#02020585",
-    "--loginpage-image": "url(https://hdqwalls.com/wallpapers/macos-mojave-dusk-mode-stock-el.jpg)",
     "--darken-background": "rgba(0,0,0,0.15)",
     "--color-splashtext": "#e0c7b5"
   },
   "pizza": {
-    "display-name": "Unused Pizza",
+    "display-name": "__Pizza",
     "--color-base00": "#4b2611",
     "--color-base01": "#7a4e23",
     "--color-base02": "#9b6e2c",
@@ -177,7 +164,6 @@
     "--color-accent": "#c3be9d",
     "--color-text": "#cfc9b8",
     "--color-homepage-sidebars-bg": "#02020585",
-    "--loginpage-image": "url(https://github.com/NightFlavor/smpp-images/blob/main/watjpg.jpg?raw=true)",
     "--darken-background": "rgba(0,0,0,0.2)"
   },
   "galaxy": {
@@ -189,7 +175,6 @@
     "--color-base02": "#474e5f",
     "--color-base03": "#5c667d",
     "--color-homepage-sidebars-bg": "#02020585",
-    "--loginpage-image": "url(https://i.redd.it/u80014ygsea51.png)",
     "--darken-background": "rgba(0,0,0,0.3)",
     "--color-splashtext": "#e1bbef"
   },
@@ -201,26 +186,24 @@
     "--color-base01": "#fbbecc",
     "--color-base02": "#f0a8c1",
     "--color-base03": "#ea8eb0",
-    "--loginpage-image": "url(https://raw.githubusercontent.com/NightFlavor/smpp-images/refs/heads/main/pxfuel.jpg)",
     "--darken-background": "rgba(241, 203, 218, 0.35)",
     "--color-homepage-sidebars-bg": "oklch(95.58% 0.0337 351.52 / 10%)",
     "--color-splashtext": "#bf4183"
   },
   "fairyblue": {
-    "display-name": "Fairy Blue",
+    "display-name": "__Fairy Blue",
     "--color-accent": "#abb6ff",
     "--color-text": "#dde2ff",
     "--color-base00": "#5e529a",
     "--color-base01": "#7064af",
     "--color-base02": "#7e72be",
     "--color-base03": "#9186d4",
-    "--loginpage-image": "url(https://raw.githubusercontent.com/NightFlavor/smpp-images/refs/heads/main/pxfuel.jpg)",
     "--darken-background": "#5e529a40",
     "--color-homepage-sidebars-bg": "#5e529a50",
     "--color-splashtext": "#dde2ff"
   },
   "tech": {
-    "display-name": "Tech",
+    "display-name": "__Tech",
     "--color-accent": "#e631ef",
     "--color-text": "#25d9f3",
     "--color-base00": "#010003",
@@ -233,7 +216,7 @@
     "--color-splashtext": "#e631ef"
   },
   "error": {
-    "display-name": "Error",
+    "display-name": "__Error",
     "--color-accent": "#ff0033",
     "--color-text": "#00fff7",
     "--color-base00": "#0a0002",

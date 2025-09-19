@@ -44,7 +44,7 @@ function unbloat() {
 }
 
 function getImage(name) {
-  return chrome.runtime.getURL(`images/${name}`);
+  return chrome.runtime.getURL(`media/${name}`);
 }
 
 function sendDebug(...messages) {
@@ -99,7 +99,7 @@ function getUserId() {
 
     const cookies = document.cookie.split(";");
     const plannerUrlCookie = cookies.find((cookie) =>
-      cookie.trim().startsWith("plannerUrl="),
+      cookie.trim().startsWith("plannerUrl=")
     );
 
     if (plannerUrlCookie) {
@@ -111,7 +111,7 @@ function getUserId() {
       sendDebug("Extracted userId from cookie plannerUrl:", userId);
     } else {
       console.error(
-        "UID is fucked, refresh 5 keer en als het dan niet werkt vraag hulp op discord @JJorne",
+        "UID is fucked, refresh 5 keer en als het dan niet werkt vraag hulp op discord @JJorne"
       );
     }
   }

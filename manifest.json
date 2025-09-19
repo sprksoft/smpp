@@ -68,7 +68,7 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": ["images/*"],
+      "resources": ["media/*"],
       "matches": ["*://*.smartschool.be/*"]
     }
   ],
