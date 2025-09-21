@@ -203,7 +203,7 @@
     "--color-splashtext": "#dde2ff"
   },
   "tech": {
-    "display-name": "__Tech",
+    "display-name": "Tech",
     "--color-accent": "#e631ef",
     "--color-text": "#25d9f3",
     "--color-base00": "#010003",
@@ -211,8 +211,8 @@
     "--color-base02": "#201826",
     "--color-base03": "#3e3545",
     "--loginpage-image": "#000000",
-    "--darken-background": "#01000340",
-    "--color-homepage-sidebars-bg": "#01000350",
+    "--darken-background": "#190b1a90",
+    "--color-homepage-sidebars-bg": "#190b1a90",
     "--color-splashtext": "#e631ef"
   },
   "error": {

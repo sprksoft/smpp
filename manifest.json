@@ -84,6 +84,7 @@
   },
   "background": {
     "service_worker": "background-scripts/background-script.js",
+    "scripts": ["background-scripts/background-script.js"],
     "type": "module"
   },
   "permissions": ["storage", "unlimitedStorage"]
