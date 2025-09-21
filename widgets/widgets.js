@@ -455,7 +455,7 @@ async function createWidgetSystem() {
   // extract dingetjes
   let news = document.getElementById("centercontainer");
   if (!news) {
-    console.error("centercontainer doesn't exist. ");
+    console.error(`"centercontainer" doesn't exist`);
     location.reload();
     return false;
   }
@@ -772,7 +772,7 @@ function createWidgetEditModeButton() {
     await setEditMode(!widgetEditMode);
   });
   btn.innerHTML = editIconSvg;
-  btn.title = "Ga in/uit edit mode om de locatie van de widgets te veranderen.";
+  btn.title = "Ga in/uit edit mode om de positie van je widgets te veranderen.";
 
   return btn;
 }

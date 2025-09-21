@@ -89,23 +89,20 @@ async function createHalteDoorkomst(doorkomst, container) {
   } else if (predictionStatuses.includes("GEENREALTIME")) {
     lijnCard.classList.add("lijnCardNoData");
     timeUntilDeparture = calculateTimeUntilDepartureInMins(ETA);
-    console.log(ETA);
     timeUntilDeparture =
       timeUntilDeparture < 1 ? "Now" : `${timeUntilDeparture} Min.`;
     arrivalTimeDeviation = "No data";
   } else if (predictionStatuses.includes("REALTIME")) {
-    console.log(ETA);
     if (doorkomst["real-timeTijdstip"] != null) {
       ETA = new Date(doorkomst["real-timeTijdstip"]);
     }
-    console.log(ETA);
     arrivalTimeDeviation = Math.round((ETA - originalETA) / 1000 / 60);
     arrivalTimeDeviation =
       arrivalTimeDeviation === 0
         ? "On time"
         : arrivalTimeDeviation > 0
-          ? `+${arrivalTimeDeviation}`
-          : arrivalTimeDeviation;
+        ? `+${arrivalTimeDeviation}`
+        : arrivalTimeDeviation;
     timeUntilDeparture = calculateTimeUntilDepartureInMins(ETA);
     timeUntilDeparture =
       timeUntilDeparture < 1 ? "Now" : `${timeUntilDeparture} Min.`;
@@ -159,7 +156,7 @@ async function createHalteDoorkomst(doorkomst, container) {
       lijnNumberElement,
       entiteitnummer,
       lijnnummer,
-      signal,
+      signal
     );
   } catch (err) {
     if (err.name === "AbortError") {
@@ -173,27 +170,27 @@ async function createHalteDoorkomst(doorkomst, container) {
 async function updateLijnCardWithApiData(
   lijnNumberElement,
   entiteitnummer,
-  lijnnummer,
+  lijnnummer
 ) {
   try {
     const individualLijnData = await fetchDelijnData(
-      `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${entiteitnummer}/${lijnnummer}`,
+      `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${entiteitnummer}/${lijnnummer}`
     );
     const publicLineNumber = individualLijnData.lijnnummerPubliek;
     lijnNumberElement.textContent = publicLineNumber;
 
     const individualLijnDataColors = await fetchDelijnData(
-      `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${entiteitnummer}/${lijnnummer}/lijnkleuren`,
+      `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${entiteitnummer}/${lijnnummer}/lijnkleuren`
     );
 
     lijnNumberElement.style.backgroundColor = getHexByCode(
-      individualLijnDataColors.achtergrond.code,
+      individualLijnDataColors.achtergrond.code
     );
     lijnNumberElement.style.borderColor = getHexByCode(
-      individualLijnDataColors.achtergrondRand.code,
+      individualLijnDataColors.achtergrondRand.code
     );
     lijnNumberElement.style.color = getHexByCode(
-      individualLijnDataColors.voorgrond.code,
+      individualLijnDataColors.voorgrond.code
     );
   } catch (error) {
     console.error("Failed to fetch additional data for lijn card:", error);
@@ -204,9 +201,8 @@ function addDelijnAttest(container) {
   const delijnAttestElement = document.createElement("a");
   delijnAttestElement.classList.add("delijnAttest");
   delijnAttestElement.target = "_blank";
-  specialChance = Math.random() < 0.1;
   delijnAttestElement.rel = "noopener noreferrer";
-  delijnAttestElement.href = specialChance
+  delijnAttestElement.href = randomChance(1 / 12)
     ? "https://www.coolblue.be/nl/koffiezetapparaten/koffiezetapparaten-voor-latte-macchiato"
     : "https://www.delijn.be/nl/contact/attest-aanvraag/";
   delijnAttestElement.innerText = specialChance ? "Latte?" : "Late?";
@@ -253,7 +249,7 @@ class DelijnWidget extends WidgetBase {
     this.elements.searchButton.classList.add("delijnSearchButton");
     this.elements.searchButton.innerHTML = searchButtonSvg;
     this.elements.searchButton.addEventListener("click", () =>
-      this.handleHalteSearch(),
+      this.handleHalteSearch()
     );
 
     this.elements.bottomContainer = document.createElement("div");
@@ -283,11 +279,11 @@ class DelijnWidget extends WidgetBase {
     }
 
     const delijnData = await fetchDelijnData(
-      `https://api.delijn.be/DLKernOpenData/api/v1/haltes/${entiteitnummer}/${haltenummer}/real-time?maxAantalDoorkomsten=5`,
+      `https://api.delijn.be/DLKernOpenData/api/v1/haltes/${entiteitnummer}/${haltenummer}/real-time?maxAantalDoorkomsten=5`
     );
     if (!delijnData.halteDoorkomsten[0]) {
       this.displayInfo(
-        "Er zijn momenteel geen bussen beschikbaar voor deze halte.",
+        "Er zijn momenteel geen bussen beschikbaar voor deze halte."
       );
       return;
     } else if (delijnData.halteDoorkomsten[0].doorkomsten.length < 1) {
@@ -317,7 +313,7 @@ class DelijnWidget extends WidgetBase {
     } else {
       await this.displayLijnenBasedOnHalte(
         delijnAppData.entiteitnummer,
-        delijnAppData.haltenummer,
+        delijnAppData.haltenummer
       );
     }
   }
@@ -361,7 +357,7 @@ class DelijnWidget extends WidgetBase {
     try {
       delijnHaltesData = await fetchDelijnData(
         `https://api.delijn.be/DLZoekOpenData/v1/zoek/haltes/${searchQuery}?maxAantalHits=${this.searchResultLimit}`,
-        { signal },
+        { signal }
       );
     } catch (error) {
       if (error.name === "AbortError") return;
@@ -383,7 +379,7 @@ class DelijnWidget extends WidgetBase {
     try {
       delijnHaltesLijnrichtingenData = await fetchDelijnData(
         `https://api.delijn.be/DLKernOpenData/api/v1/haltes/lijst/${halteSleutels}/lijnrichtingen`,
-        { signal },
+        { signal }
       );
     } catch (error) {
       if (error.name === "AbortError") return;
@@ -451,7 +447,7 @@ class DelijnWidget extends WidgetBase {
       try {
         individualLijnData = await fetchDelijnData(
           `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${lijnrichting.entiteitnummer}/${lijnrichting.lijnnummer}`,
-          { signal },
+          { signal }
         );
       } catch (error) {
         if (error.name === "AbortError") return;
@@ -473,7 +469,7 @@ class DelijnWidget extends WidgetBase {
       try {
         individualLijnDataColors = await fetchDelijnData(
           `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${lijnrichting.entiteitnummer}/${lijnrichting.lijnnummer}/lijnkleuren`,
-          { signal },
+          { signal }
         );
       } catch (error) {
         if (error.name === "AbortError") return;
@@ -484,10 +480,10 @@ class DelijnWidget extends WidgetBase {
       if (signal.aborted) return;
 
       lijn.style.backgroundColor = getHexByCode(
-        individualLijnDataColors.achtergrond.code,
+        individualLijnDataColors.achtergrond.code
       );
       lijn.style.borderColor = getHexByCode(
-        individualLijnDataColors.achtergrondRand.code,
+        individualLijnDataColors.achtergrondRand.code
       );
       lijn.style.color = getHexByCode(individualLijnDataColors.voorgrond.code);
     }
@@ -510,7 +506,7 @@ class DelijnWidget extends WidgetBase {
     await setDelijnAppData(delijnAppData);
     await this.displayLijnenBasedOnHalte(
       delijnAppData.entiteitnummer,
-      delijnAppData.haltenummer,
+      delijnAppData.haltenummer
     );
   }
 
@@ -534,7 +530,7 @@ class DelijnWidget extends WidgetBase {
       this.elements.infoContainer = document.createElement("div");
       this.elements.infoContainer.classList.add(
         "delijnInfoContainer",
-        "delijnInfoContainerVisible",
+        "delijnInfoContainerVisible"
       );
       this.elements.bottomContainer.appendChild(this.elements.infoContainer);
     }

@@ -16,7 +16,7 @@ class BaseWindow {
     controls.classList.add("window-controls");
 
     const fullscreenBtn = document.createElement("button");
-    fullscreenBtn.classList.add("window-button", "window-fullscreen");
+    fullscreenBtn.classList.add("window-button", "window-fullscreen-btn");
     fullscreenBtn.title = "Volledig scherm";
     fullscreenBtn.innerHTML = contractIconSVG + expandIconSVG;
 
@@ -79,7 +79,7 @@ class BaseWindow {
 
     this.isOpen = false;
     this.element.classList.add("hidden");
-
+    this.element.classList.remove("fullscreen-window");
     if (this._outsideClickHandler) {
       document.removeEventListener("click", this._outsideClickHandler);
       this._outsideClickHandler = null;

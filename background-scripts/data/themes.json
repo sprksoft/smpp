@@ -204,8 +204,8 @@
   },
   "tech": {
     "display-name": "Tech",
-    "--color-accent": "#e631ef",
-    "--color-text": "#25d9f3",
+    "--color-accent": "#ff39ff",
+    "--color-text": "#00f0fe",
     "--color-base00": "#010003",
     "--color-base01": "#09040e",
     "--color-base02": "#201826",

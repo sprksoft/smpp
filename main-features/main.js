@@ -9,8 +9,7 @@ function discordpopup() {
   document.body.appendChild(discordelement);
 }
 function changeLogoutText() {
-  var randomNum = Math.floor(Math.random() * 50) + 1;
-  if (randomNum === 1) {
+  if (randomChance(1 / 50)) {
     return "Good Bye! →";
   }
   return "Log out →";
@@ -117,7 +116,6 @@ function resetSMlogo() {
 async function apply() {
   setEditMode(false); // Turn off widget edit mode
   let style = document.documentElement.style;
-  console.log("waiting for settings data");
   const data = await browser.runtime.sendMessage({
     action: "getSettingsData",
   });
@@ -560,31 +558,14 @@ function createQuickSettingsHTML(parent) {
   const themeSelector = document.createElement("select");
   themeSelector.id = "theme-selector";
 
-  const options = [
-    { value: "default", text: "Default Deluxe" },
-    { value: "white", text: "Off White" },
-    { value: "custom", text: "Custom Theme" },
-    { value: "ldev", text: "Dark Sands" },
-    { value: "birb", text: "Midnight Sapphire" },
-    { value: "stalker", text: "Ruby Eclipse" },
-    { value: "chocolate", text: "Dark Mocha" },
-    { value: "mountain", text: "Storm Peaks" },
-    { value: "winter", text: "Arctic Azure" },
-    { value: "galaxy", text: "Fluorescent Galaxy" },
-    { value: "sand", text: "Sahara Oasis" },
-    { value: "purple", text: "Neon Violet" },
-    { value: "fall", text: "Autumn Gloom" },
-    { value: "matcha", text: "Matcha Green" },
-    { value: "pink", text: "Cherry Haze" },
-    { value: "fairyblue", text: "Fairy Blue" },
-    { value: "tech", text: "Tech" },
-  ];
-
-  options.forEach((option) => {
-    const optionElement = document.createElement("option");
-    optionElement.value = option.value;
-    optionElement.textContent = option.text;
-    themeSelector.appendChild(optionElement);
+  Object.keys(themes).forEach((key) => {
+    if (!themes[key]["display-name"].startsWith("__")) {
+      // Don't include hidden themes
+      const optionElement = document.createElement("option");
+      optionElement.value = key;
+      optionElement.textContent = themes[key]["display-name"];
+      themeSelector.appendChild(optionElement);
+    }
   });
 
   const colorPickers = document.createElement("div");
@@ -835,19 +816,16 @@ function updateTopButtons(data) {
 
 async function main() {
   if (document.body.classList.contains("smpp")) {
-    console.error("smpp is waarschijnlijk 2 keer geladen");
-    alert("smpp is waarschijnlijk 2 keer geladen");
+    console.error("SMPP is waarschijnlijk 2 keer geladen");
+    alert("SMPP is 2x geladen waarschijnlijk");
   }
   document.body.classList.add("smpp"); // For modding
-  console.log("waiting for settings data locally 1");
   if (window.localStorage.getItem("settingsdata")) {
     await migrateSettings();
   }
-  console.log("waiting for settings data for migartion");
   const settingsData = await browser.runtime.sendMessage({
     action: "getSettingsData",
   });
-  console.log("it doesnt reach here");
   if (settingsData.theme != null) {
     await migrateSettingsV2();
   }

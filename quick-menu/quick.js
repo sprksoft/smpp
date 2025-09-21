@@ -81,10 +81,10 @@ function add_quick_interactive() {
           }
           add_quick(name, value);
         },
-        "value:",
+        "value:"
       );
     },
-    "name:",
+    "name:"
   );
 }
 
@@ -95,7 +95,7 @@ function remove_quick_interactive() {
     function (name, shift) {
       remove_quick(name);
     },
-    "name:",
+    "name:"
   );
 }
 
@@ -117,10 +117,10 @@ async function config_menu() {
             data: conf,
           });
         },
-        "value:",
+        "value:"
       );
     },
-    "config: ",
+    "config: "
   );
 }
 
@@ -166,7 +166,7 @@ async function fetch_vakken() {
 function scrape_goto() {
   goto_items = [];
   let goto_items_html = document.querySelectorAll(
-    ".js-shortcuts-container > a",
+    ".js-shortcuts-container > a"
   );
   for (let i = 0; i < goto_items_html.length; i++) {
     const item = goto_items_html[i];
@@ -195,7 +195,7 @@ function do_qm(opener = "") {
         "toggle performance mode",
         "gcbeta",
         "dizzy",
-      ]),
+      ])
     );
 
   let role = document.doBlackMagic ? document.doBlackMagic() : "User"; //Gebruik black magic om de global chat role te krijgen.
@@ -220,7 +220,7 @@ function do_qm(opener = "") {
               set_background(url);
               store_background(url);
             },
-            "bg url:",
+            "bg url:"
           );
           return;
         case "config":
@@ -236,10 +236,10 @@ function do_qm(opener = "") {
           remove_quick_interactive();
           return;
         case "discord":
-          open_url("https://discord.com/invite/qCHZYepDqZ");
+          openURL("https://discord.com/invite/qCHZYepDqZ");
           return;
         case "home":
-          open_url("/");
+          openURL("/");
           return;
         case "clearsettings":
           clearsettings();
@@ -267,28 +267,28 @@ function do_qm(opener = "") {
       for (let i = 0; i < quicks.length; i++) {
         const quick = quicks[i];
         if (quick.name == cmd) {
-          open_url(quick.url, true);
+          openURL(quick.url, true);
           return;
         }
       }
       for (let i = 0; i < links.length; i++) {
         if (links[i].value == cmd) {
-          open_url(links[i].url, true);
+          openURL(links[i].url, true);
         }
       }
       for (let i = 0; i < goto_items.length; i++) {
         if (goto_items[i].value == cmd) {
-          open_url(goto_items[i].url);
+          openURL(goto_items[i].url);
         }
       }
       for (let i = 0; i < vakken.length; i++) {
         if (vakken[i].value == cmd) {
-          open_url(vakken[i].url);
+          openURL(vakken[i].url);
         }
       }
     },
     "quick:",
-    (opener = opener),
+    (opener = opener)
   );
 }
 

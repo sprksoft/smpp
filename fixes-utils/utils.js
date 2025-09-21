@@ -1,6 +1,6 @@
 const DEBUG = false;
 
-function open_url(url, new_window = false) {
+function openURL(url, new_window = false) {
   if (new_window) {
     let a = document.createElement("a");
     a.href = url;
@@ -73,6 +73,15 @@ function getCurrentDate() {
 function getFutureDate(days) {
   return new Date(Date.now() + days * 86400000).toISOString().split("T")[0];
 }
+
+function randomChance(probability) {
+  if (probability <= 0) return false;
+  if (probability >= 1) return true;
+  return Math.random() < probability;
+}
+
+
+
 
 function getUserId() {
   let userId;

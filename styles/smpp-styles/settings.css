@@ -97,3 +97,71 @@
   right: 1rem;
   top: 1rem;
 }
+
+.settings-page-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 15px;
+  border-radius: 10px;
+  background: var(--color-base01);
+  outline: none;
+  opacity: 1;
+}
+
+.enableAnimations .settings-page-slider {
+  transition: opacity 0.2s;
+}
+
+.settings-page-slider::-webkit-slider-thumb {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  background: var(--color-accent) !important;
+  border-color: transparent;
+  cursor: pointer;
+  transition: opacity 0.2s ease-in-out;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.settings-page-slider::-moz-range-thumb {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  background: var(--color-accent) !important;
+  border-color: transparent;
+  cursor: pointer;
+  transition: opacity 0.2s ease-in-out;
+  appearance: none;
+}
+
+.settings-page-image {
+  border-radius: 0.5rem !important;
+}
+
+.settings-page-text-input {
+  background-color: var(--color-base01) !important;
+  border-color: var(--color-base02) !important;
+  border-radius: 0.5rem !important;
+}
+.settings-page-image-button-wrapper {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  width: 80px; /* default size, can be overridden inline */
+  height: 80px;
+}
+
+/* Hide the actual checkbox */
+.settings-page-image-button-wrapper input[type="checkbox"] {
+  display: none;
+}
+
+/* The visible image */
+.settings-page-image-wrapper img.settings-page-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px; /* optional rounded corners */
+  transition: transform 0.2s, filter 0.2s, outline 0.2s;
+}
