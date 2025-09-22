@@ -124,6 +124,9 @@ async function apply() {
   themes = await browser.runtime.sendMessage({
     action: "getAllThemes",
   });
+  settingsOptions = await browser.runtime.sendMessage({
+    action: "getAllThemes",
+  });
 
   changeFont();
   userNameChanger(data.profile.customUserName);

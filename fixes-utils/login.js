@@ -130,6 +130,7 @@ let splashtexts = [
   `Breakout++`,
   `Ruby chan, haii!!`,
   `It's so sweet`,
+  `Feeling diskinserted?`,
 ];
 function get_splash_text() {
   return splashtexts[Math.floor(Math.random() * splashtexts.length)];

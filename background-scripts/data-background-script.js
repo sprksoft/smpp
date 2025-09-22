@@ -2,7 +2,6 @@ if (typeof browser === "undefined") {
   var browser = chrome;
 }
 
-const liteMode = chrome.runtime.getManifest().name.includes("Lite");
 import { fetchDelijnData, fetchWeatherData } from "./api-background-script.js";
 
 function getDefaultCustomThemeData() {
@@ -16,19 +15,14 @@ function getDefaultCustomThemeData() {
   };
 }
 
-function getDefaultSettings(isLite) {
-  if (!isLite) {
-    return defaultSettings;
-  } else {
-    return liteDefaultSettings;
-  }
+function getDefaultSettings() {
+  return defaultSettings;
 }
 
 export async function getSettingsData() {
   let data = await browser.storage.local.get("settingsData");
-  console.log(data);
-  console.log(data.settingsData || getDefaultSettings(liteMode));
-  return data.settingsData || getDefaultSettings(liteMode);
+  console.log(data.settingsData || getDefaultSettings());
+  return data.settingsData || getDefaultSettings();
 }
 
 export async function getWidgetData() {
@@ -74,12 +68,8 @@ export async function getCustomThemeData() {
   return data.customThemeData || getDefaultCustomThemeData();
 }
 
-export function getSettingsOptions(isLite) {
-  if (!isLite) {
-    return settingsOptions;
-  } else {
-    return liteSettingsOptions;
-  }
+export function getSettingsOptions() {
+  return settingsOptions;
 }
 
 export function getAllThemes() {
