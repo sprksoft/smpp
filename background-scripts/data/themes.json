@@ -35,17 +35,17 @@
     "--darken-background": "rgba(0,0,0,0.25)",
     "--color-splashtext": "#ffd5a0"
   },
-  "purple": {
-    "display-name": "Neon Violet",
-    "--color-accent": "#bd4fb3",
-    "--color-text": "#d9cdff",
-    "--color-base00": "#0b021d",
-    "--color-base01": "#130332",
-    "--color-base02": "#250654",
-    "--color-base03": "#3f0a74",
+  "birb": {
+    "display-name": "Midnight Sapphire",
+    "--color-accent": "#6e81b1",
+    "--color-text": "#a8a9ab",
+    "--color-base00": "#0e0e15",
+    "--color-base01": "#18191d",
+    "--color-base02": "#232428",
+    "--color-base03": "#3a3c44",
     "--color-homepage-sidebars-bg": "#02020585",
     "--darken-background": "rgba(0,0,0,0.2)",
-    "--color-splashtext": "#dfdeff"
+    "--color-splashtext": "#7089a4"
   },
   "stalker": {
     "display-name": "Ruby Eclipse",
@@ -58,6 +58,18 @@
     "--color-homepage-sidebars-bg": "#02020585",
     "--darken-background": "rgba(0,0,0,0.2)",
     "--color-splashtext": "#efc2c3"
+  },
+  "purple": {
+    "display-name": "Neon Violet",
+    "--color-accent": "#bd4fb3",
+    "--color-text": "#d9cdff",
+    "--color-base00": "#0b021d",
+    "--color-base01": "#130332",
+    "--color-base02": "#250654",
+    "--color-base03": "#3f0a74",
+    "--color-homepage-sidebars-bg": "#02020585",
+    "--darken-background": "rgba(0,0,0,0.2)",
+    "--color-splashtext": "#dfdeff"
   },
   "chocolate": {
     "display-name": "Dark Mocha",
@@ -94,18 +106,6 @@
     "--color-homepage-sidebars-bg": "#02020585",
     "--darken-background": "rgba(0,0,0,0.2)",
     "--color-splashtext": "#7bcfe2"
-  },
-  "birb": {
-    "display-name": "Midnight Sapphire",
-    "--color-accent": "#6e81b1",
-    "--color-text": "#a8a9ab",
-    "--color-base00": "#0e0e15",
-    "--color-base01": "#18191d",
-    "--color-base02": "#232428",
-    "--color-base03": "#3a3c44",
-    "--color-homepage-sidebars-bg": "#02020585",
-    "--darken-background": "rgba(0,0,0,0.2)",
-    "--color-splashtext": "#7089a4"
   },
   "matcha": {
     "display-name": "Matcha Green",

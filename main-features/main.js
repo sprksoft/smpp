@@ -197,7 +197,6 @@ async function storeQuickSettings() {
   });
   // Start from old settings
   const data = structuredClone(oldData);
-  data.profile.customUserName = null;
   data.appearance.theme = document.getElementById("theme-selector").value;
   data.appearance.enableSMPPLogo =
     document.getElementById("smpp-logo-toggle").checked;

@@ -106,6 +106,7 @@ class SettingsWindow extends BaseWindow {
     function createButton(id) {
       let outerSwitch = document.createElement("label");
       outerSwitch.classList.add("switch");
+      outerSwitch.classList.add("settings-page-button");
       let innerButton = document.createElement("input");
       innerButton.classList.add("popupinput");
       innerButton.type = "checkbox";
@@ -130,7 +131,7 @@ class SettingsWindow extends BaseWindow {
       let image = document.createElement("img");
       image.classList.add("settings-page-image");
       image.src = getImage(src);
-      image.width = width
+      image.width = width;
 
       wrapper.appendChild(input);
       wrapper.appendChild(image);

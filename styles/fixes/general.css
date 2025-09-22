@@ -1518,7 +1518,7 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   border: 2px solid var(--color-base02) !important;
 }
 
-#custom-name-input-containter {
+#custom-name-input-container {
   display: flex;
   justify-content: center;
 }
