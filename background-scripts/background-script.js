@@ -18,6 +18,29 @@ import {
 import { fetchWeatherData, fetchDelijnData } from "./api-background-script.js";
 import { initGlobals } from "./json-loader.js";
 
+
+///
+///```js
+/// const ob = { sub1: { sub2: "hello" } };
+/// getByPath(ob, "sub1.sub2") === "hello"
+///```
+function getByPath(object, path) {
+  let ob = object;
+  for (let node of path.split(".")) {
+    ob = ob[node];
+  }
+  return ob;
+}
+
+function setByPath(object, path, value) {
+  let ob = object; 
+  const pathSplit = path.split(".");
+  for (let i=0; i < pathSplit.length-1; i++) {
+    ob = ob[pathSplit[i]];
+  }
+  ob[pathSplit[pathSplit.length-1]] = value;
+}
+
 browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
   handleMessage(message, sendResponse);
   return true; // keeps channel open
@@ -57,7 +80,10 @@ async function handleMessage(message, sendResponse) {
     */
     if (message.action === "setSettingsCategory") {
       const settingsData = await getSettingsData();
-      settingsData[message.category] = message.data;
+      console.log(settingsData);
+      console.log("setting", message.category, "to", message.data);
+      setByPath(settingsData, message.category, message.data);
+      console.log(settingsData);
       await browser.storage.local.set({ settingsData: settingsData });
       sendResponse({ succes: true });
       console.log(
@@ -66,7 +92,7 @@ async function handleMessage(message, sendResponse) {
     }
     if (message.action === "getSettingsCategory") {
       const settingsData = await getSettingsData();
-      sendResponse(settingsData[message.category]);
+      sendResponse(getByPath(settingsData, message.category));
       console.log(
         "Settings data sent for this:" + message.category + "category"
       );

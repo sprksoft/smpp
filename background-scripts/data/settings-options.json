@@ -36,6 +36,11 @@
   },
   "other": {
     "quicks": "array",
-    "enablePerfomanceMode": "boolean"
+    "enablePerfomanceMode": "boolean",
+    "dmenu": {
+      "centered": "boolean",
+      "item_score": "boolean",
+      "toplevelConfig": "boolean"
+    }
   }
 }
