@@ -35,5 +35,13 @@
       "monochrome": false
     }
   },
-  "other": { "quicks": [], "enablePerfomanceMode": false }
+  "other": {
+    "quicks": [],
+    "enablePerfomanceMode": false,
+    "dmenu": {
+      "centered": true,
+      "item_score": true,
+      "toplevelConfig": false
+    }
+  }
 }

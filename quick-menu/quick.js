@@ -1,8 +1,9 @@
 let quicks = [];
 
-async () => {
+(async () => {
   quicks = await quick_load();
-};
+})();
+
 let links = [];
 let vakken = [];
 let goto_items = [];
@@ -44,19 +45,20 @@ function remove_quick(name) {
 }
 
 async function quick_load() {
-  let conf = await browser.runtime.sendMessage({
-    action: "getSettingsData",
+  const quicks = await browser.runtime.sendMessage({
+    action: "getSettingsCategory",
+    category:"other.quicks",
   });
-  if (!conf.quicks) {
+  if (!quicks) {
     return [];
   }
-  return conf.quicks;
+  return quicks;
 }
 
 async function quick_save() {
   await browser.runtime.sendMessage({
     action: "setSettingsCategory",
-    category: "quicks",
+    category: "other.quicks",
     data: quicks,
   });
 }
@@ -81,10 +83,10 @@ function add_quick_interactive() {
           }
           add_quick(name, value);
         },
-        "value:"
+        "value:",
       );
     },
-    "name:"
+    "name:",
   );
 }
 
@@ -95,32 +97,7 @@ function remove_quick_interactive() {
     function (name, shift) {
       remove_quick(name);
     },
-    "name:"
-  );
-}
-
-//TODO: make this better
-async function config_menu() {
-  const conf = await browser.runtime.sendMessage({
-    action: "getSettingsData",
-  });
-  let cmd_list = Object.keys(conf);
-  dmenu(
-    cmd_list,
-    function (cmd, shift) {
-      conf[cmd] = dmenu(
-        [],
-        async function (val, shift) {
-          conf[cmd] = val;
-          await browser.runtime.sendMessage({
-            action: "setSettingsData",
-            data: conf,
-          });
-        },
-        "value:"
-      );
-    },
-    "config: "
+    "name:",
   );
 }
 
@@ -166,7 +143,7 @@ async function fetch_vakken() {
 function scrape_goto() {
   goto_items = [];
   let goto_items_html = document.querySelectorAll(
-    ".js-shortcuts-container > a"
+    ".js-shortcuts-container > a",
   );
   for (let i = 0; i < goto_items_html.length; i++) {
     const item = goto_items_html[i];
@@ -178,37 +155,31 @@ function scrape_goto() {
   }
 }
 
-function do_qm(opener = "") {
+async function do_qm(opener = "") {
   let cmd_list = quick_cmd_list()
     .concat(goto_items)
     .concat(vakken)
-    .concat(
-      links.concat([
-        "home",
-        "dmenu config",
-        "quick add",
-        "quick remove",
-        "config",
-        "unbloat",
-        "clearsettings",
-        "discord",
-        "toggle performance mode",
-        "gcbeta",
-        "dizzy",
-      ])
-    );
+    .concat(links)
+    .concat([
+      "home",
+      "quick add",
+      "quick remove",
+      "unbloat",
+      "config",
+      "clearsettings",
+      "discord",
+      "toggle performance mode",
+      "gcbeta",
+      "dizzy",
+    ])
 
-  let role = document.doBlackMagic ? document.doBlackMagic() : "User"; //Gebruik black magic om de global chat role te krijgen.
-  switch (role) {
-    case "Admin":
-      cmd_list.push("gc proffilter"); // Fall trough and also add gcadmin
-    case "Mod":
-      cmd_list.push("gcadmin");
+  if (dmenuConfig.toplevelConfig) {
+    cmd_list = cmd_list.concat(await getDMenuOptionsForSettings());
   }
 
   dmenu(
     cmd_list,
-    function (cmd) {
+    async function (cmd) {
       switch (cmd) {
         case "unbloat":
           unbloat();
@@ -220,14 +191,13 @@ function do_qm(opener = "") {
               set_background(url);
               store_background(url);
             },
-            "bg url:"
+            "bg url:",
           );
           return;
         case "config":
-          config_menu();
-          return;
-        case "dmenu config":
-          dconfig_menu();
+          dmenu(await getDMenuOptionsForSettings(), function(cmd, shift) {
+            dmenuEditConfig(cmd);
+          }, "config: ");
           return;
         case "quick add":
           add_quick_interactive();
@@ -264,6 +234,10 @@ function do_qm(opener = "") {
         default:
           break;
       }
+      if (cmd.startsWith("config.")) {
+        dmenuEditConfig(cmd);
+      }
+
       for (let i = 0; i < quicks.length; i++) {
         const quick = quicks[i];
         if (quick.name == cmd) {
@@ -288,7 +262,7 @@ function do_qm(opener = "") {
       }
     },
     "quick:",
-    (opener = opener)
+    (opener = opener),
   );
 }
 

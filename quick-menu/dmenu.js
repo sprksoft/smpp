@@ -1,4 +1,11 @@
 let active_dmenu = null;
+let dmenuConfig = {};
+(async () => {
+  dmenuConfig = await browser.runtime.sendMessage({
+    action: "getSettingsCategory",
+    category:"other.dmenu",
+  });
+})();
 
 class DMenu {
   openerEl;
@@ -9,21 +16,21 @@ class DMenu {
   #itemListEl;
   #userText;
   #selectedIndex;
-  #showItemScore;
 
   constructor(
     itemList,
     endFunc = undefined,
     title = "dmenu:",
     openerEl = undefined,
+    config,
   ) {
     this.endFunc = endFunc;
     this.openerEl = openerEl;
 
     this.userText = "";
     this.selectedIndex = 0;
-
-    this.showItemScore = dmenu_config.item_score;
+    
+    this.config = config;
 
     this.#mkDmenu(itemList, title);
     this.inputEl.focus();
@@ -117,7 +124,7 @@ class DMenu {
       }
       items.push({ score: score, htmlNode: node });
 
-      if (this.showItemScore) {
+      if (this.config.item_score) {
         node.getElementsByClassName("dmenu-score")[0].innerText = score;
       }
     }
@@ -187,7 +194,7 @@ class DMenu {
     if (meta != undefined) {
       row.getElementsByClassName("dmenu-meta")[0].innerText = meta;
     }
-    if (this.showItemScore) {
+    if (this.config.item_score) {
       row.getElementsByClassName("dmenu-score")[0].innerText = "0";
     }
 
@@ -202,7 +209,7 @@ class DMenu {
   #mkDmenu(itemList, title) {
     this.menuEl = document.createElement("div");
     this.menuEl.classList.add("dmenu");
-    if (dmenu_config.centered) {
+    if (this.config.centered) {
       this.menuEl.classList.add("dmenu-centered");
     }
 
@@ -254,7 +261,7 @@ function dmenu(
   if (active_dmenu !== null && active_dmenu.isOpen()) {
     active_dmenu.close();
   }
-  let menu = new DMenu(itemList, endFunc, title, opener);
+  let menu = new DMenu(itemList, endFunc, title, opener, dmenuConfig);
   active_dmenu = menu;
   return menu;
 }
