@@ -3,7 +3,9 @@
   display: flex;
   flex-direction: row;
 }
+
 .settings-category-button {
+  border: 2px solid transparent !important;
   width: 100%;
   background-color: var(--color-base01);
   border: none;
@@ -16,14 +18,21 @@
   font-size: 1.6rem;
   gap: 1rem;
 }
-.settings-category-button:hover {
+
+.settings-category-button-js.active {
+  border-color: var(--color-base03) !important;
   background-color: var(--color-base02);
+  color: var(--color-accent) !important;
+  font-weight: 600 !important;
 }
-.settings-category-button.active:hover {
+
+.settings-category-button-js:hover {
   background-color: var(--color-base02);
+  scale: 1.01;
 }
+
 .enableAnimations .settings-category-button {
-  transition: all 0.1s ease-in-out;
+  transition: all 0.15s ease-in-out;
 }
 
 .category-button-icon {
@@ -44,6 +53,7 @@
 }
 
 .profile-settings-button {
+  border: 2px solid transparent !important;
   display: flex;
   flex-direction: row;
   gap: 1rem;
@@ -55,12 +65,11 @@
   text-align: left;
   background-color: var(--color-base01);
 }
-.profile-settings-button:hover {
-  background-color: var(--color-base02);
-}
+
 .enableAnimations .profile-settings-button {
   transition: all 0.1s ease-in-out;
 }
+
 .profile-picture-settings {
   background-image: var(--profile-picture);
   background-size: cover;
@@ -145,12 +154,29 @@
   appearance: none;
 }
 
-.settings-page-label {
+.settings-page-small-title {
   font-size: 1.3rem;
   font-weight: 600;
   margin: 0 !important;
   cursor: default;
 }
+
+.settings-page-section-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 !important;
+  margin-bottom: 1rem !important;
+  cursor: default;
+}
+
+.settings-page-main-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 !important;
+  margin-bottom: 2rem !important;
+  cursor: default;
+}
+
 .enableAnimations .settings-page-image-button-wrapper {
   transition: all 0.1s ease-in-out;
 }
@@ -202,4 +228,41 @@
   object-fit: cover;
   border-radius: 8px; /* optional rounded corners */
   transition: transform 0.2s, filter 0.2s, outline 0.2s;
+}
+
+.settings-page-theme-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.enableAnimations .settings-page-theme-card {
+  transition: all 0.2s ease-in-out;
+}
+
+.settings-page-theme-card {
+  display: flex;
+  flex-direction: column;
+  border: 0.3rem solid transparent;
+  gap: 0.5rem;
+  width: 14rem;
+  padding: 0.2rem;
+  border-radius: 1.5rem;
+  background-color: var(--color-base01);
+}
+.settings-page-theme-card > img {
+  border-radius: 1rem !important;
+}
+
+.settings-page-theme-card:hover {
+  cursor: pointer;
+  border-color: var(--hover-border);
+  background-color: var(--hover-color) !important;
+  color: var(--text-color) !important;
+}
+
+.settings-page-theme-title {
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
 }

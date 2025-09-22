@@ -1,5 +1,6 @@
 class SettingsWindow extends BaseWindow {
   settingsSideBarCategories = {
+    test: { name: "Test", icon: "/settings-icons/settingsAppearance.png" },
     appearance: {
       name: "Appearance",
       icon: "/settings-icons/settingsAppearance.png",
@@ -34,8 +35,15 @@ class SettingsWindow extends BaseWindow {
     settingsSideBar.classList.add("settings-sidebar");
     let settingsSideBarProfileButton =
       await this.createSettingsSideBarProfileButton();
+    settingsSideBarProfileButton.classList.add("active");
     settingsSideBarProfileButton.addEventListener("click", () => {
       this.currentPage = "profile";
+      document
+        .querySelectorAll(".settings-category-button-js")
+        .forEach((el) => {
+          el.classList.remove("active");
+        });
+      settingsSideBarProfileButton.classList.add("active");
       this.displaySettingsPage();
     });
     settingsSideBar.appendChild(settingsSideBarProfileButton);
@@ -44,9 +52,14 @@ class SettingsWindow extends BaseWindow {
       let settingsSideBarButton = this.createSettingsSideBarCategory(key);
       settingsSideBarButton.addEventListener("click", (event) => {
         this.currentPage = event.currentTarget.dataset.page;
+        document
+          .querySelectorAll(".settings-category-button-js")
+          .forEach((el) => {
+            el.classList.remove("active");
+          });
+        event.target.classList.add("active");
         this.displaySettingsPage();
       });
-
       settingsSideBar.appendChild(settingsSideBarButton);
     });
     return settingsSideBar;
@@ -57,7 +70,10 @@ class SettingsWindow extends BaseWindow {
       action: "getSettingsData",
     });
     let profileSettingsButton = document.createElement("button");
-    profileSettingsButton.classList.add("profile-settings-button");
+    profileSettingsButton.classList.add(
+      "profile-settings-button",
+      "settings-category-button-js"
+    );
     let profilePicture = document.createElement("div");
     profilePicture.classList.add("profile-picture-settings");
     let profileSettingsLabel = document.createElement("div");
@@ -82,7 +98,10 @@ class SettingsWindow extends BaseWindow {
 
   createSettingsSideBarCategory(category) {
     let categoryButton = document.createElement("button");
-    categoryButton.classList.add("settings-category-button");
+    categoryButton.classList.add(
+      "settings-category-button",
+      "settings-category-button-js"
+    );
     categoryButton.dataset.page = category;
     categoryButton.innerText = this.settingsSideBarCategories[category].name;
     let categoryButtonIcon = document.createElement("img");
@@ -93,16 +112,35 @@ class SettingsWindow extends BaseWindow {
     categoryButton.prepend(categoryButtonIcon);
     return categoryButton;
   }
+
   clearSettingsPage() {
     this.settingsPage.innerHTML = " ";
   }
+
+  storePage(page) {
+    return 1;
+  }
+
   displaySettingsPage() {
-    function createLabel(text) {
-      let label = document.createElement("label");
-      label.innerText = text;
-      label.classList.add("settings-page-label");
-      return label;
+    function createMainTitle(text) {
+      let title = document.createElement("h1");
+      title.innerText = text;
+      title.classList.add("settings-page-main-title");
+      return title;
     }
+    function createSectionTitle(text) {
+      let title = document.createElement("h2");
+      title.innerText = text;
+      title.classList.add("settings-page-section-title");
+      return title;
+    }
+    function createSmallTitle(text) {
+      let title = document.createElement("h3");
+      title.innerText = text;
+      title.classList.add("settings-page-small-title");
+      return title;
+    }
+
     function createButton(id) {
       let outerSwitch = document.createElement("label");
       outerSwitch.classList.add("switch");
@@ -117,8 +155,8 @@ class SettingsWindow extends BaseWindow {
       outerSwitch.appendChild(innerSwitch);
       return outerSwitch;
     }
+
     function createImageButton(src, width = "80px", height = "80px", id) {
-      // Create the wrapper label
       let wrapper = document.createElement("label");
       wrapper.classList.add("settings-page-image-button-wrapper");
       wrapper.style.width = width;
@@ -148,6 +186,7 @@ class SettingsWindow extends BaseWindow {
       slider.classList.add("settings-page-slider");
       return slider;
     }
+
     function createTextInput(id) {
       let textInput = document.createElement("input");
       textInput.id = id;
@@ -156,6 +195,7 @@ class SettingsWindow extends BaseWindow {
       textInput.classList.add("settings-page-text-input");
       return textInput;
     }
+
     function createImage(src, width, height) {
       let image = document.createElement("img");
       image.classList.add("settings-page-image");
@@ -169,8 +209,9 @@ class SettingsWindow extends BaseWindow {
     this.clearSettingsPage();
     switch (this.currentPage) {
       case "profile":
-        // === PROFILE TESTS ===
-        this.settingsPage.appendChild(createLabel("Profile Label"));
+        break;
+      case "test":
+        this.settingsPage.appendChild(createSmallTitle("Profile Label"));
         this.settingsPage.appendChild(createButton("profile-btn1"));
         this.settingsPage.appendChild(
           createImageButton(
@@ -185,120 +226,103 @@ class SettingsWindow extends BaseWindow {
         this.settingsPage.appendChild(
           createImage("/theme-backgrounds/chocolate.jpg", "100px", "100px")
         );
-        console.log(
-          "Profile tests finished, child count:",
-          this.settingsPage.children.length
-        );
         break;
-
       case "appearance":
-        // === APPEARANCE TESTS ===
-        const sliderApp = createSlider(5, 15, "appearance-slider");
-        this.settingsPage.appendChild(sliderApp);
-        console.assert(
-          sliderApp.min === "5",
-          "Appearance slider min should be 5"
+        this.settingsPage.appendChild(createMainTitle("Appearance"));
+        this.settingsPage.appendChild(createSectionTitle("Theme:"));
+        let themesContainer = document.createElement("div");
+        themesContainer.classList.add("settings-page-theme-container");
+        settingsOptions.appearance.theme.forEach((key) => {
+          if (!themes[key]["display-name"].startsWith("__")) {
+            // Don't include hidden themes
+
+            let themeCard = document.createElement("div");
+            themeCard.classList.add("settings-page-theme-card");
+            themeCard.style.setProperty(
+              "--hover-border",
+              themes[key]["--color-accent"]
+            );
+            themeCard.style.setProperty(
+              "--hover-color",
+              themes[key]["--color-base01"]
+            );
+            themeCard.style.setProperty(
+              "--text-color",
+              themes[key]["--color-text"]
+            );
+            themeCard.dataset.theme = key;
+
+            let themeImage = createImage(
+              "/theme-backgrounds/" + key + ".jpg",
+              "100%",
+              "6rem"
+            );
+
+            let themeTitle = document.createElement("span");
+            themeTitle.classList.add("settings-page-theme-title");
+            themeTitle.innerText = themes[key]["display-name"];
+
+            themeCard.appendChild(themeImage);
+            themeCard.appendChild(themeTitle);
+            themesContainer.appendChild(themeCard);
+          }
+        });
+        this.settingsPage.appendChild(themesContainer);
+
+        this.settingsPage.appendChild(createSectionTitle("Wallpaper:"));
+
+        let backgroundSelectionContainer = document.createElement("div");
+        backgroundSelectionContainer.classList.add(
+          "background-selection-container"
         );
 
-        const txtApp = createTextInput("appearance-txt");
-        this.settingsPage.appendChild(txtApp);
-        console.assert(
-          txtApp.type === "text",
-          "Appearance text input should be text"
-        );
+        const clearButton = document.createElement("button");
+        clearButton.id = "settings-page-link-clear-button";
+        clearButton.classList.add("smpp-link-clear-button");
+        clearButton.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+          <g xmlns="http://www.w3.org/2000/svg">
+          <path d="M7 7.00006L17 17.0001M7 17.0001L17 7.00006" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
+        </svg>`;
 
-        const imgApp = createImage(
-          "/theme-backgrounds/birb.jpg",
-          "200px",
-          "120px"
-        );
-        this.settingsPage.appendChild(imgApp);
-        console.assert(
-          imgApp.src.includes("birb.jpg"),
-          "Appearance image should use birb.jpg"
-        );
+        clearButton.addEventListener("click", async function (event) {
+          event.target
+            .closest(".smpp-link-clear-button")
+            .classList.remove("active");
+          document.getElementById("settings-page-background-link-input").value =
+            "";
+          await storePage(this.currentPage);
+        });
 
-        console.log("Appearance tests passed!");
+        const linkInput = document.createElement("input");
+        linkInput.className = "smpp-background-link";
+        linkInput.id = "settings-page-background-link-input";
+        linkInput.spellcheck = false;
+        linkInput.type = "text";
+
+        const fileBtn = document.createElement("button");
+        fileBtn.className = "smpp-background-file";
+        fileBtn.id = "settings-page-background-file-button";
+        fileBtn.innerHTML = fileInputIconSvg;
+
+        const backgroundFileInput = document.createElement("input");
+        backgroundFileInput.id = "settings-page-background-file-input";
+        backgroundFileInput.style.display = "none";
+        backgroundFileInput.type = "file";
+        backgroundFileInput.accept = ".png, .jpg, .jpeg";
+
+        backgroundSelectionContainer.appendChild(linkInput);
+        backgroundSelectionContainer.appendChild(fileBtn);
+        backgroundSelectionContainer.appendChild(clearButton);
+        backgroundSelectionContainer.appendChild(backgroundFileInput);
+
+        this.settingsPage.appendChild(backgroundSelectionContainer);
         break;
-
       case "topNav":
-        // === TOPNAV TESTS ===
-        const btnTop = createButton("topnav-btn");
-        this.settingsPage.appendChild(btnTop);
-        const cbTop = btnTop.querySelector("input");
-        cbTop.checked = true;
-        console.assert(cbTop.checked === true, "TopNav checkbox should toggle");
-
-        const sliderTop = createSlider(0, 100, "topnav-slider");
-        this.settingsPage.appendChild(sliderTop);
-        sliderTop.value = 42;
-        console.assert(
-          sliderTop.value === "42",
-          "TopNav slider value should be 42"
-        );
-
-        const txtTop = createTextInput("topnav-txt");
-        this.settingsPage.appendChild(txtTop);
-        txtTop.value = "TopNav!";
-        console.assert(
-          txtTop.value === "TopNav!",
-          "TopNav text input should store value"
-        );
-
-        console.log("TopNav interaction tests passed!");
         break;
-
       case "features":
-        // === FEATURES TESTS ===
-        this.settingsPage.appendChild(createLabel("Features Label"));
-        this.settingsPage.appendChild(createButton("features-btn"));
-        this.settingsPage.appendChild(
-          createImageButton(
-            "/theme-backgrounds/chocolate.jpg",
-            "60px",
-            "60px",
-            "features-imgbtn"
-          )
-        );
-        this.settingsPage.appendChild(createSlider(1, 20, "features-slider"));
-        this.settingsPage.appendChild(createTextInput("features-txt"));
-        this.settingsPage.appendChild(
-          createImage("/theme-backgrounds/birb.jpg", "120px", "120px")
-        );
-        console.log(
-          "Features tests finished, child count:",
-          this.settingsPage.children.length
-        );
         break;
-
       case "other":
-        // === OTHER TESTS ===
-        const btnOther = createButton("other-btn");
-        this.settingsPage.appendChild(btnOther);
-        const cbOther = btnOther.querySelector("input");
-        cbOther.checked = false;
-        console.assert(
-          cbOther.checked === false,
-          "Other checkbox should remain unchecked"
-        );
-
-        const sliderOther = createSlider(10, 50, "other-slider");
-        this.settingsPage.appendChild(sliderOther);
-        sliderOther.value = 30;
-        console.assert(
-          sliderOther.value === "30",
-          "Other slider value should be 30"
-        );
-
-        const txtOther = createTextInput("other-txt");
-        this.settingsPage.appendChild(txtOther);
-        txtOther.value = "Other!";
-        console.assert(
-          txtOther.value === "Other!",
-          "Other text input should store value"
-        );
-
-        console.log("Other tests passed!");
         break;
 
       default:

@@ -80,8 +80,9 @@ function randomChance(probability) {
   return Math.random() < probability;
 }
 
-
-
+function isAbsoluteUrl(url) {
+  return /^(https?:\/\/|data:image\/)/i.test(url);
+}
 
 function getUserId() {
   let userId;

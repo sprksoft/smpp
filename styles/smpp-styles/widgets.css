@@ -401,6 +401,10 @@ html {
   z-index: 90;
 }
 
+.widgets-done-button:active {
+  scale: 0.9;
+}
+
 .enableAnimations .widgets-done-button {
   animation: moveDoneButtonBack 0.5s ease-in-out 0s 1;
 }

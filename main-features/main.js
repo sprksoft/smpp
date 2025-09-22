@@ -121,11 +121,13 @@ async function apply() {
   });
 
   console.log("Settings data: \n", data);
+
   themes = await browser.runtime.sendMessage({
     action: "getAllThemes",
   });
+
   settingsOptions = await browser.runtime.sendMessage({
-    action: "getAllThemes",
+    action: "getSettingsOptions",
   });
 
   changeFont();
@@ -335,10 +337,6 @@ async function setBackground(data) {
       displayBackgroundImage(thing.backgroundImage);
       break;
   }
-}
-
-function isAbsoluteUrl(url) {
-  return /^(https?:\/\/|data:image\/)/i.test(url);
 }
 
 function set_backgroundlink(background) {
@@ -560,11 +558,12 @@ function createQuickSettingsHTML(parent) {
   const themeSelector = document.createElement("select");
   themeSelector.id = "theme-selector";
 
-  Object.keys(themes).forEach((key) => {
+  settingsOptions.appearance.theme.forEach((key) => {
     if (!themes[key]["display-name"].startsWith("__")) {
       // Don't include hidden themes
       const optionElement = document.createElement("option");
       optionElement.value = key;
+
       optionElement.textContent = themes[key]["display-name"];
       themeSelector.appendChild(optionElement);
     }

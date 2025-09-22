@@ -82,7 +82,7 @@ class SnakeWidget extends GameBase {
     const cellCount = CELL_COUNT * this.getOpt("size") * 0.01;
     return new Point(
       Math.floor(Math.random() * cellCount),
-      Math.floor(Math.random() * cellCount),
+      Math.floor(Math.random() * cellCount)
     );
   }
   #spawnFood() {
@@ -130,7 +130,7 @@ class SnakeWidget extends GameBase {
       Math.floor(celRad + dot.y * celRad * 2.0),
       celRad * 0.9,
       0,
-      Math.PI * 2,
+      Math.PI * 2
     );
     ctx.fill();
   }
@@ -154,7 +154,7 @@ class SnakeWidget extends GameBase {
           celRad + y * celRad * 2,
           celRad * 0.7,
           0,
-          Math.PI * 2,
+          Math.PI * 2
         );
         ctx.fill();
       }
