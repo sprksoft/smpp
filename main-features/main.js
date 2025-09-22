@@ -114,6 +114,7 @@ function resetSMlogo() {
       "https://static4.smart-school.net/smsc/svg/favicon/favicon.svg";
 }
 async function apply() {
+  await reloadDMenuConfig(); // reload the dmenu config. (er is een object voor async raarheid te vermijden en dat wordt herladen door deze functie)
   setEditMode(false); // Turn off widget edit mode
   let style = document.documentElement.style;
   const data = await browser.runtime.sendMessage({
@@ -192,6 +193,7 @@ async function apply() {
   } else {
     resetSMlogo();
   }
+
 }
 
 async function storeQuickSettings() {

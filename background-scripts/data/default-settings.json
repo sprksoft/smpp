@@ -40,7 +40,7 @@
     "enablePerfomanceMode": false,
     "dmenu": {
       "centered": true,
-      "item_score": true,
+      "item_score": false,
       "toplevelConfig": false
     }
   }

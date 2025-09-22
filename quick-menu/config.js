@@ -2,25 +2,27 @@ function gatherOptions(template, name) {
   let options = [];
   for (let keyName of Object.keys(template)) {
     const key = template[keyName];
+    const newName = (name ? name + "." : "") + keyName
     if (typeof key == "object" && !Array.isArray(key)) {
       options = options.concat(
-        gatherOptions(template[keyName], name + "." + keyName),
+        gatherOptions(template[keyName], newName),
       );
-    } else if (key == "array") { // we don't support arrays yet so just hide array options from the menu
+    } else if (key == "array") {
+      // we don't support arrays yet so just hide array options from the menu
       //TODO: maybe add array support
     } else {
-      options.push({ meta: "config", value: name + "." + keyName });
+      options.push({ meta: "config", value: newName });
     }
   }
   return options;
 }
 
 /// Returns an array with settings for dmenu
-async function getDMenuOptionsForSettings() {
+async function getDMenuOptionsForSettings(toplevel) {
   const template = await browser.runtime.sendMessage({
     action: "getSettingsOptions",
   });
-  return gatherOptions(template, "config");
+  return gatherOptions(template, toplevel ? "config" : null);
 }
 
 function getByPath(object, path) {
@@ -40,16 +42,19 @@ function setByPath(object, path, value) {
 }
 
 async function setSettingByPath(path, value) {
-  console.log("setting "+path+" to "+value);
   await browser.runtime.sendMessage({
     action: "setSettingsCategory",
     category: path,
     data: value,
   });
+  
+  await apply();
 }
 
 async function dmenuEditConfig(configPath) {
-  configPath = configPath.substring("config.".length);
+  if (configPath.startsWith("config.")) {
+    configPath = configPath.substring("config.".length);
+  }
   const templates = await browser.runtime.sendMessage({
     action: "getSettingsOptions",
   });
@@ -59,14 +64,17 @@ async function dmenuEditConfig(configPath) {
     action: "getSettingsCategory",
     category: configPath,
   });
-  console.log(option);
 
   const label = configPath + " (" + option + "): ";
   if (template == "boolean") {
     dmenu(
       ["true", "false"],
       function (cmd, shift) {
-        setSettingByPath(configPath, cmd);
+        if (cmd == "true") {
+          setSettingByPath(configPath, true);
+        } else if (cmd == "false") {
+          setSettingByPath(configPath, false);
+        }
       },
       label,
     );

@@ -174,7 +174,7 @@ async function do_qm(opener = "") {
     ])
 
   if (dmenuConfig.toplevelConfig) {
-    cmd_list = cmd_list.concat(await getDMenuOptionsForSettings());
+    cmd_list = cmd_list.concat(await getDMenuOptionsForSettings(true));
   }
 
   dmenu(
@@ -195,7 +195,7 @@ async function do_qm(opener = "") {
           );
           return;
         case "config":
-          dmenu(await getDMenuOptionsForSettings(), function(cmd, shift) {
+          dmenu(await getDMenuOptionsForSettings(false), function(cmd, shift) {
             dmenuEditConfig(cmd);
           }, "config: ");
           return;
