@@ -132,6 +132,7 @@ let splashtexts = [
   `It's so sweet`,
   `Feeling diskinserted?`,
   `Vamipre in the corner.\nIs it scaring you off?`,
+  `Whopper Whopper`,
 ];
 function get_splash_text() {
   return splashtexts[Math.floor(Math.random() * splashtexts.length)];
