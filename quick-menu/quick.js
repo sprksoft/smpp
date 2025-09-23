@@ -47,7 +47,7 @@ function remove_quick(name) {
 async function quick_load() {
   const quicks = await browser.runtime.sendMessage({
     action: "getSettingsCategory",
-    category:"other.quicks",
+    category: "other.quicks",
   });
   if (!quicks) {
     return [];
@@ -171,7 +171,8 @@ async function do_qm(opener = "") {
       "toggle performance mode",
       "gcbeta",
       "dizzy",
-    ])
+      "breakdmenu",
+    ]);
 
   if (dmenuConfig.toplevelConfig) {
     cmd_list = cmd_list.concat(await getDMenuOptionsForSettings(true));
@@ -184,6 +185,15 @@ async function do_qm(opener = "") {
         case "unbloat":
           unbloat();
           return;
+        case "breakdmenu":
+          await browser.runtime.sendMessage({
+            action: "setSettingsCategory",
+            category: "other.dmenu",
+            data: {
+              item_score: false,
+            }
+          });
+          return;
         case "set background":
           dmenu(
             [],
@@ -195,9 +205,13 @@ async function do_qm(opener = "") {
           );
           return;
         case "config":
-          dmenu(await getDMenuOptionsForSettings(false), function(cmd, shift) {
-            dmenuEditConfig(cmd);
-          }, "config: ");
+          dmenu(
+            await getDMenuOptionsForSettings(false),
+            function (cmd, shift) {
+              dmenuEditConfig(cmd);
+            },
+            "config: ",
+          );
           return;
         case "quick add":
           add_quick_interactive();

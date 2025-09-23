@@ -10,6 +10,7 @@ import {
   getDelijnAppData,
   getWidgetData,
   getDelijnColorData,
+  getDefaultSettings,
   getPlantAppData,
   getCustomThemeData,
   getAllThemes,
@@ -18,13 +19,15 @@ import {
 import { fetchWeatherData, fetchDelijnData } from "./api-background-script.js";
 import { initGlobals } from "./json-loader.js";
 
-
 ///
 ///```js
 /// const ob = { sub1: { sub2: "hello" } };
 /// getByPath(ob, "sub1.sub2") === "hello"
 ///```
 function getByPath(object, path) {
+  if (!path) {
+    return object;
+  }
   let ob = object;
   for (let node of path.split(".")) {
     ob = ob[node];
@@ -33,12 +36,12 @@ function getByPath(object, path) {
 }
 
 function setByPath(object, path, value) {
-  let ob = object; 
+  let ob = object;
   const pathSplit = path.split(".");
-  for (let i=0; i < pathSplit.length-1; i++) {
+  for (let i = 0; i < pathSplit.length - 1; i++) {
     ob = ob[pathSplit[i]];
   }
-  ob[pathSplit[pathSplit.length-1]] = value;
+  ob[pathSplit[pathSplit.length - 1]] = value;
 }
 
 browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -87,14 +90,14 @@ async function handleMessage(message, sendResponse) {
       await browser.storage.local.set({ settingsData: settingsData });
       sendResponse({ succes: true });
       console.log(
-        "Settings data saved for this:" + message.category + "category"
+        "Settings data saved for this:" + message.category + "category",
       );
     }
     if (message.action === "getSettingsCategory") {
       const settingsData = await getSettingsData();
       sendResponse(getByPath(settingsData, message.category));
       console.log(
-        "Settings data sent for this:" + message.category + "category"
+        "Settings data sent for this:" + message.category + "category",
       );
     }
     if (message.action === "getSettingsData") {
@@ -104,11 +107,17 @@ async function handleMessage(message, sendResponse) {
       console.log("Settings data sent.");
     }
 
+    // category is optional
     if (message.action === "getSettingsOptions") {
       const settingsOptions = await getSettingsOptions();
-      console.log(settingsOptions);
-      sendResponse(settingsOptions);
+      sendResponse(getByPath(settingsOptions, message.category));
       console.log("Settings options sent.");
+    }
+
+    // category is optional
+    if (message.action === "getSettingsDefaults") {
+      const defaults = getDefaultSettings();
+      sendResponse(getByPath(defaults, message.category));
     }
     // Themes
     if (message.action === "getAllThemes") {
@@ -147,9 +156,8 @@ async function handleMessage(message, sendResponse) {
       console.log("Background image saved.");
     }
     if (message.action === "getBackgroundImage") {
-      const backgroundImage = await browser.storage.local.get(
-        "backgroundImage"
-      );
+      const backgroundImage =
+        await browser.storage.local.get("backgroundImage");
       sendResponse(backgroundImage || null);
       console.log("Background image sent.");
     }
@@ -160,9 +168,8 @@ async function handleMessage(message, sendResponse) {
       console.log("Photo widget image saved.");
     }
     if (message.action === "getPhotoWidgetImage") {
-      const photoWidgetImage = await browser.storage.local.get(
-        "photoWidgetImage"
-      );
+      const photoWidgetImage =
+        await browser.storage.local.get("photoWidgetImage");
       sendResponse(photoWidgetImage || null);
       console.log("Photo widget image sent.");
     }
