@@ -1646,6 +1646,7 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
 
 .enableAnimations .base-window {
   transition: all 0.2s cubic-bezier(0.16, 1.13, 0.89, 0.96);
+  animation: popIn 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards !important;
 }
 
 .base-window {
@@ -1662,7 +1663,7 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   top: 10%;
   transform: scale(0);
   transform-origin: center;
-  animation: popIn 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+  animation: popIn 0s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
 }
 
 @keyframes popIn {
@@ -1683,13 +1684,17 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   display: flex;
   gap: 0.5rem;
   z-index: 25;
+  opacity: 1;
+  transform: translateY(0);
+}
+.enableAnimations .window-controls {
   opacity: 0;
   transform: translateY(-20px);
   transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 
-.base-window:hover .window-controls,
-.base-window:focus-within .window-controls {
+.enableAnimations .base-window:hover .window-controls,
+.enableAnimations .base-window:focus-within .window-controls {
   opacity: 1;
   transform: translateY(0);
 }

@@ -206,6 +206,13 @@ class SettingsWindow extends BaseWindow {
       return image;
     }
 
+    function createDescription(text) {
+      let description = document.createElement("p");
+      description.innerText = text;
+      description.classList.add("settings-page-description");
+      return description;
+    }
+
     this.clearSettingsPage();
     switch (this.currentPage) {
       case "profile":
@@ -229,11 +236,20 @@ class SettingsWindow extends BaseWindow {
         break;
       case "appearance":
         this.settingsPage.appendChild(createMainTitle("Appearance"));
-        this.settingsPage.appendChild(createSectionTitle("Theme:"));
+        this.settingsPage.appendChild(createSectionTitle("Theme"));
+        this.settingsPage.appendChild(
+          createDescription(
+            "Customize the overall look and feel of the interface with different color styles."
+          )
+        );
+
         let themesContainer = document.createElement("div");
         themesContainer.classList.add("settings-page-theme-container");
         settingsOptions.appearance.theme.forEach((key) => {
-          if (!themes[key]["display-name"].startsWith("__")) {
+          if (
+            !themes[key]["display-name"].startsWith("__") &&
+            key != "custom"
+          ) {
             // Don't include hidden themes
 
             let themeCard = document.createElement("div");
@@ -269,11 +285,14 @@ class SettingsWindow extends BaseWindow {
         });
         this.settingsPage.appendChild(themesContainer);
 
-        this.settingsPage.appendChild(createSectionTitle("Wallpaper:"));
+        this.settingsPage.appendChild(createSectionTitle("Wallpaper"));
+        this.settingsPage.appendChild(
+          createDescription("Personalize your backdrop with a custom image.")
+        );
 
         let backgroundSelectionContainer = document.createElement("div");
         backgroundSelectionContainer.classList.add(
-          "background-selection-container"
+          "settings-page-background-selection-container"
         );
 
         const clearButton = document.createElement("button");
@@ -294,16 +313,9 @@ class SettingsWindow extends BaseWindow {
           await storePage(this.currentPage);
         });
 
-        const linkInput = document.createElement("input");
-        linkInput.className = "smpp-background-link";
-        linkInput.id = "settings-page-background-link-input";
-        linkInput.spellcheck = false;
-        linkInput.type = "text";
-
-        const fileBtn = document.createElement("button");
-        fileBtn.className = "smpp-background-file";
-        fileBtn.id = "settings-page-background-file-button";
-        fileBtn.innerHTML = fileInputIconSvg;
+        const linkInput = createTextInput(
+          "settings-page-background-link-input"
+        );
 
         const backgroundFileInput = document.createElement("input");
         backgroundFileInput.id = "settings-page-background-file-input";
@@ -311,12 +323,82 @@ class SettingsWindow extends BaseWindow {
         backgroundFileInput.type = "file";
         backgroundFileInput.accept = ".png, .jpg, .jpeg";
 
+        const fileBtn = document.createElement("button");
+        fileBtn.className = "smpp-background-file";
+        fileBtn.id = "settings-page-background-file-button";
+        fileBtn.innerHTML = fileInputIconSvg;
+        fileBtn.addEventListener("click", () => {
+          backgroundFileInput.click();
+        });
+
         backgroundSelectionContainer.appendChild(linkInput);
         backgroundSelectionContainer.appendChild(fileBtn);
         backgroundSelectionContainer.appendChild(clearButton);
         backgroundSelectionContainer.appendChild(backgroundFileInput);
 
         this.settingsPage.appendChild(backgroundSelectionContainer);
+
+        this.settingsPage.appendChild(createSectionTitle("Background blur"));
+        this.settingsPage.appendChild(
+          createDescription("Apply a blur to your background.")
+        );
+
+        this.settingsPage.appendChild(
+          createSlider(0, 100, "settings-page-blur-slider") // must be divided by 10 for real value
+        );
+
+        let blurPreviewContainer = document.createElement("div");
+        blurPreviewContainer.classList.add(
+          "settings-page-blur-preview-container"
+        );
+        blurPreviewContainer.appendChild(
+          createImage("/theme-backgrounds/birb.jpg", "6rem", "4rem")
+        );
+
+        let blurredImage = createImage(
+          "/theme-backgrounds/birb.jpg",
+          "100%",
+          "100%"
+        );
+        blurredImage.style.filter = "blur(2px)";
+        let blurredImageContainer = document.createElement("div");
+        blurredImageContainer.classList.add("blurred-image-container");
+        blurredImageContainer.appendChild(blurredImage);
+
+        blurPreviewContainer.appendChild(blurredImageContainer);
+
+        this.settingsPage.appendChild(blurPreviewContainer);
+
+        this.settingsPage.appendChild(createSectionTitle("Weather overlay"));
+        this.settingsPage.appendChild(
+          createDescription("Add dynamic weather visuals.")
+        );
+
+        let iconsContainer = document.createElement("div");
+        iconsContainer.classList.add("settings-page-icons-container");
+
+        this.settingsPage.appendChild(createSectionTitle("Icon"));
+        this.settingsPage.appendChild(
+          createDescription("Choose the icon displayed in your browser tab.")
+        );
+
+        iconsContainer.appendChild(
+          createImageButton(
+            "/icons/sm-icon.svg",
+            "4rem",
+            "4rem",
+            "default-icon-button"
+          )
+        );
+        iconsContainer.appendChild(
+          createImageButton(
+            "/icons/smpp-icon128.png",
+            "4rem",
+            "4rem",
+            "smpp-icon-button"
+          )
+        );
+        this.settingsPage.appendChild(iconsContainer);
         break;
       case "topNav":
         break;
@@ -324,7 +406,6 @@ class SettingsWindow extends BaseWindow {
         break;
       case "other":
         break;
-
       default:
         break;
     }
@@ -334,7 +415,6 @@ class SettingsWindow extends BaseWindow {
 let settingsWindow;
 
 async function openSettingsWindow(event) {
-  console.log("did this");
   if (!settingsWindow || !settingsWindow.element?.isConnected) {
     settingsWindow = new SettingsWindow();
     await settingsWindow.create();

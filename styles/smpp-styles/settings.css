@@ -28,10 +28,12 @@
 
 .settings-category-button-js:hover {
   background-color: var(--color-base02);
-  scale: 1.01;
 }
 
-.enableAnimations .settings-category-button {
+.enableAnimations .settings-category-button-js:hover {
+  scale: 1.01;
+}
+.enableAnimations .settings-category-button-js {
   transition: all 0.15s ease-in-out;
 }
 
@@ -64,10 +66,6 @@
   border: none;
   text-align: left;
   background-color: var(--color-base01);
-}
-
-.enableAnimations .profile-settings-button {
-  transition: all 0.1s ease-in-out;
 }
 
 .profile-picture-settings {
@@ -162,10 +160,10 @@
 }
 
 .settings-page-section-title {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: 600;
   margin: 0 !important;
-  margin-bottom: 1rem !important;
+  margin-bottom: 0.1rem !important;
   cursor: default;
 }
 
@@ -199,6 +197,10 @@
   box-shadow: 0 0 10px var(--darken-background) !important;
 }
 
+.enableAnimations .settings-page-text-input {
+  transition: all 0.2s ease-in-out;
+}
+
 .settings-page-text-input {
   background-color: var(--color-base01) !important;
   border-color: var(--color-base02) !important;
@@ -206,8 +208,12 @@
   padding: 0.6rem 0.8rem !important;
   border: 2px solid var(--color-base02) !important;
   font-size: 1.2rem !important;
-  margin-bottom: 1rem !important;
 }
+
+.settings-page-text-input:focus {
+  border-color: var(--color-base03) !important;
+}
+
 .settings-page-image-button-wrapper {
   display: inline-block;
   position: relative;
@@ -234,6 +240,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+  margin-bottom: 2rem;
 }
 
 .enableAnimations .settings-page-theme-card {
@@ -265,4 +272,43 @@
   font-size: 1rem;
   font-weight: 700;
   text-align: center;
+}
+
+.settings-page-background-selection-container,
+.settings-page-icons-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+.settings-page-icons-container {
+  gap: 1rem;
+}
+
+#settings-page-blur-slider {
+  width: 18rem;
+}
+
+.settings-page-blur-preview-container {
+  width: 18rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.blurred-image-container {
+  overflow: hidden;
+  width: 6rem;
+  height: 4rem;
+  border-radius: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.settings-page-description {
+  opacity: 0.8;
+  font-weight: 300;
+  max-width: 18rem;
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem !important;
 }
