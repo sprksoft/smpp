@@ -21,10 +21,10 @@
 }
 
 .modern-message {
-  border: 2px solid var(--color-base00) !important;
+  border: 2px solid var(--color-base01) !important;
   border-radius: 10px !important;
   background: var(--color-base01) !important;
-  padding: 2px 10px 2px 10px !important;
+  padding: 6px 10px !important;
   height: auto !important;
   line-height: initial !important;
   color: var(--color-text) !important;
@@ -33,13 +33,20 @@
   text-decoration-thickness: 2px !important;
   width: auto !important;
   margin: 3px !important;
+  margin-bottom: 6px !important;
 }
-.modern-message:not(.modern-message--new) {
-  opacity: 0.8 !important;
+
+.modern-message--new .modern-message__read-status {
+  background-color: var(--color-accent);
 }
-.modern-message__read-status {
-  opacity: 0 !important;
+.modern-ui .modern-message__read-status {
+  width: 4px;
+  border-radius: 1rem;
+  margin-right: 5px;
+  height: 34px;
+  flex-shrink: 0;
 }
+
 .enableAnimations .modern-message {
   transition: all 0.05s ease-in-out !important;
 }
@@ -262,7 +269,7 @@ body.modern-ui .homepage__block {
   border: 2px solid var(--color-base02) !important;
   border-radius: 15px !important;
   overflow: hidden !important;
-  background-color: var(--color-base00) !important;
+  background-color: var(--darken-background) !important;
   padding: 5px 5px 0px 5px !important;
 }
 

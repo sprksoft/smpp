@@ -132,7 +132,7 @@ class BreakoutWidget extends GameBase {
       h - PADDLE_HEIGHT,
       PADDLE_WIDTH,
       PADDLE_HEIGHT,
-      5
+      5,
     );
 
     ctx.fillStyle = getThemeVar("--color-text");

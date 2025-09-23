@@ -455,15 +455,14 @@ async function createWidgetSystem() {
   // extract dingetjes
   let news = document.getElementById("centercontainer");
   if (!news) {
-    console.error("centercontainer doesn't exist. ");
+    console.error(`"centercontainer" doesn't exist`);
     location.reload();
     return false;
   }
-  console.log("Creating widget system...");
   let widgetData = await browser.runtime.sendMessage({
     action: "getWidgetData",
   });
-  console.log("Widget data:", widgetData);
+  console.log("Widget data: \n", widgetData);
   let setDefaults = false;
   if (!widgetData) {
     setDefaults = true;
@@ -669,7 +668,6 @@ function createWidgetsDoneButton() {
 }
 
 function changeDoneButtonState(state) {
-  console.log("Changing done button state to: " + state);
   doneButton.removeEventListener("click", setEditModeFalse);
   doneButton.removeEventListener("click", toggleBag);
   switch (state) {
@@ -692,7 +690,7 @@ function updateDoneButtonState(value) {
   });
 }
 
-if (getPageURL().path == "") {
+if (getPageURL().path == "" && getPageURL().search == "") {
   document.addEventListener("mouseup", async (e) => {
     if (curDragInfo) {
       await curDragInfo.widget.drop(false);
@@ -742,7 +740,6 @@ function getWidgetByName(name) {
 }
 
 async function setEditMode(value) {
-  console.log("Setting widget edit mode to: " + value);
   if (!doneButton) {
     createWidgetsDoneButton();
   }
@@ -775,7 +772,7 @@ function createWidgetEditModeButton() {
     await setEditMode(!widgetEditMode);
   });
   btn.innerHTML = editIconSvg;
-  btn.title = "Ga in/uit edit mode om de locatie van de widgets te veranderen.";
+  btn.title = "Ga in/uit edit mode om de positie van je widgets te veranderen.";
 
   return btn;
 }

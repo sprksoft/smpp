@@ -1,20 +1,57 @@
 if (typeof browser === "undefined") {
   var browser = chrome;
 }
+let globalsInitialized = false;
 
 import {
   getSettingsData,
+  getSettingsOptions,
   getWeatherAppData,
   getDelijnAppData,
   getWidgetData,
   getDelijnColorData,
   getPlantAppData,
   getCustomThemeData,
+  getAllThemes,
+  getTheme,
 } from "./data-background-script.js";
 import { fetchWeatherData, fetchDelijnData } from "./api-background-script.js";
+import { initGlobals } from "./json-loader.js";
+
+
+///
+///```js
+/// const ob = { sub1: { sub2: "hello" } };
+/// getByPath(ob, "sub1.sub2") === "hello"
+///```
+function getByPath(object, path) {
+  let ob = object;
+  for (let node of path.split(".")) {
+    ob = ob[node];
+  }
+  return ob;
+}
+
+function setByPath(object, path, value) {
+  let ob = object; 
+  const pathSplit = path.split(".");
+  for (let i=0; i < pathSplit.length-1; i++) {
+    ob = ob[pathSplit[i]];
+  }
+  ob[pathSplit[pathSplit.length-1]] = value;
+}
 
 browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  (async () => {
+  handleMessage(message, sendResponse);
+  return true; // keeps channel open
+});
+
+async function handleMessage(message, sendResponse) {
+  if (!globalsInitialized) {
+    await initGlobals();
+    globalsInitialized = true;
+  }
+  try {
     // General
     if (message.action === "clearLocalStorage") {
       browser.storage.local.clear();
@@ -43,17 +80,19 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
     */
     if (message.action === "setSettingsCategory") {
       const settingsData = await getSettingsData();
-      settingsData[message.category] = message.data;
+      console.log(settingsData);
+      console.log("setting", message.category, "to", message.data);
+      setByPath(settingsData, message.category, message.data);
+      console.log(settingsData);
       await browser.storage.local.set({ settingsData: settingsData });
       sendResponse({ succes: true });
       console.log(
         "Settings data saved for this:" + message.category + "category"
       );
     }
-
     if (message.action === "getSettingsCategory") {
       const settingsData = await getSettingsData();
-      sendResponse(settingsData[message.category]);
+      sendResponse(getByPath(settingsData, message.category));
       console.log(
         "Settings data sent for this:" + message.category + "category"
       );
@@ -63,6 +102,32 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
       console.log(settingsData);
       sendResponse(settingsData);
       console.log("Settings data sent.");
+    }
+
+    if (message.action === "getSettingsOptions") {
+      const settingsOptions = await getSettingsOptions();
+      console.log(settingsOptions);
+      sendResponse(settingsOptions);
+      console.log("Settings options sent.");
+    }
+    // Themes
+    if (message.action === "getAllThemes") {
+      const allThemes = getAllThemes();
+      sendResponse(allThemes);
+      console.log("All themes sent.");
+    }
+    if (message.action === "getTheme") {
+      let theme;
+      try {
+        theme = getTheme(message.theme);
+        sendResponse(theme);
+        console.log(`Theme ${message.theme} sent.`);
+      } catch (error) {
+        console.error(error);
+        theme = getTheme("error");
+        sendResponse(theme);
+        console.error(`Invalid theme requested, sent "error" theme`);
+      }
     }
     // Custom theme
     if (message.action === "getCustomThemeData") {
@@ -181,6 +246,8 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
       await browser.storage.local.set(gameData);
       sendResponse({ success: true });
     }
-  })();
-  return true;
-});
+  } catch (err) {
+    console.error("Service worker error:", err);
+    sendResponse({ error: err.message || String(err) });
+  }
+}

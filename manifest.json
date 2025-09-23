@@ -4,7 +4,6 @@
   "version": "4.1.0",
   "description": "Enhance your Smartschool experience with themes and more",
   "homepage_url": "https://smartschoolplusplus.com",
-  "lite_mode": false,
   "content_scripts": [
     {
       "matches": ["*://*.smartschool.be/*"],
@@ -48,7 +47,7 @@
         "main-features/themes.js",
         "main-features/userchanger.js",
         "main-features/weather-effects.js",
-        "quick-menu/dconfig.js",
+        "quick-menu/config.js",
         "quick-menu/dmenu.js",
         "quick-menu/quick.js",
         "widgets/tutorial-widget.js",
@@ -68,7 +67,7 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": ["images/*"],
+      "resources": ["media/*"],
       "matches": ["*://*.smartschool.be/*"]
     }
   ],

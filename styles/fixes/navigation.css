@@ -1,340 +1,346 @@
 .topnav {
-  background: transparent !important;
-  height: auto !important;
-  gap: 1rem !important;
-  border-bottom: var(--border-size) solid var(--color-base01) !important;
-  padding-left: 1rem !important;
-  padding-right: 1rem !important;
-  background-color: var(--color-base00) !important;
-}
+    background: transparent !important;
+    height: auto !important;
+    gap: 1rem !important;
+    border-bottom: var(--border-size) solid var(--color-base01) !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    background-color: var(--color-base00) !important;
+} 
 
 .smsc-topnav .topnav__badge {
-  background-color: var(--color-text) !important;
-  color: var(--color-base02) !important;
-  border: 2px solid var(--color-base03) !important;
-  max-height: 18.6px !important;
+    background-color: var(--color-text) !important;
+    color: var(--color-base02) !important;
+    border: 2px solid var(--color-base03) !important;
+    max-height: 18.6px !important;
 }
 
 .topnav__menu-arrow {
-  display: none !important;
+    display: none !important;
 }
 
 .smsc-topnav .topnav__menu {
-  overflow: hidden !important;
+    overflow: hidden !important;
 }
 
 .smsc-topnav .topnav__menu__title {
-  color: var(--color-text) !important;
+    color: var(--color-text) !important;
 }
 
 .topnav__btn,
 .token,
 .titleRight {
-  border: 2px solid var(--color-base02) !important;
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  border-radius: 50px !important;
-  background: var(--color-base01) !important;
-  padding: 2px 10px 2px 10px !important;
-  height: 28px !important;
-  line-height: initial !important;
-  color: var(--color-text) !important;
-  font-weight: bold !important;
-  text-decoration-color: var(--color-text) !important;
-  text-decoration-thickness: 2px !important;
-  width: auto !important;
-  transition: none !important;
+    border: 2px solid var(--color-base02) !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    border-radius: 50px !important;
+    background: var(--color-base01) !important;
+    padding: 2px 10px 2px 10px !important;
+    height: 28px !important;
+    line-height: initial !important;
+    color: var(--color-text) !important;
+    font-weight: bold !important;
+    text-decoration-color: var(--color-text) !important;
+    text-decoration-thickness: 2px !important;
+    width: auto !important;
+    transition: none !important;
 }
 
 .switches-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
 }
 
 .wallpaper-quick-settings-container,
 .weather-overlay-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  margin-top: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 0.5rem;
 }
 
 .topnav__btn--icon--search > svg {
-  width: 20px;
+    width: 20px;
 }
 
 .performanceModeTooltipLabel {
-  display: flex;
-  align-items: center;
-  position: absolute;
-  right: 5px;
-  top: 5px;
-  padding: 2px;
-  background-color: var(--color-base00);
-  border: 2px solid transparent;
-  border-radius: 999px;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    padding: 2px;
+    background-color: var(--color-base00);
+    border: 2px solid transparent;
+    border-radius: 999px;
 }
 
 .enableAnimations .performanceModeTooltipLabel {
-  transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
 }
 
 .performanceModeTooltipLabel input {
-  opacity: 0;
-  height: 0px;
-  width: 0px;
+    opacity: 0;
+    height: 0px;
+    width: 0px;
 }
 
 #performance-mode-toggle:checked + svg {
-  fill: var(--color-accent) !important;
+    fill: var(--color-accent) !important;
 }
 
 .performanceModeTooltipLabel {
-  fill: var(--color-text) !important;
+    fill: var(--color-text) !important;
 }
 
 .performanceModeTooltipLabel:hover {
-  border-color: var(--color-base03) !important;
+    border-color: var(--color-base03) !important;
 }
 
 .enableAnimations .topnav__btn,
 .enableAnimations .token,
 .enableAnimations .titleRight {
-  transition-duration: 0.1s !important;
-  transition: background-color 0.2s, border-color 0.3s, text-decoration 0.1s,
-    width 0.2s !important;
+    transition-duration: 0.1s !important;
+    transition:
+        background-color 0.2s,
+        border-color 0.3s,
+        text-decoration 0.1s,
+        width 0.2s !important;
 }
 
 .topnav__btn:hover {
-  cursor: pointer !important;
-  text-decoration: underline !important;
-  background-color: var(--color-base02) !important;
-  border-color: var(--color-base03) !important;
-  border-radius: 20px !important;
+    cursor: pointer !important;
+    text-decoration: underline !important;
+    background-color: var(--color-base02) !important;
+    border-color: var(--color-base03) !important;
+    border-radius: 20px !important;
 }
 
 .smsc-topnav .topnav__menu,
 .bubble,
 .smsctooltip {
-  background-color: var(--color-base01) !important;
-  border: 2px solid var(--color-base03) !important;
-  text-decoration: none !important;
-  border-radius: 15px !important;
-  color: var(--color-text) !important;
-  align-items: center !important;
-  transition: none !important;
+    background-color: var(--color-base01) !important;
+    border: 2px solid var(--color-base03) !important;
+    text-decoration: none !important;
+    border-radius: 15px !important;
+    color: var(--color-text) !important;
+    align-items: center !important;
+    transition: none !important;
 }
 
 .bubble {
-  overflow-y: auto !important;
+    overflow-y: auto !important;
 }
 
 .smsctooltip {
-  line-height: 25px !important;
-  overflow: hidden !important;
+    line-height: 25px !important;
+    overflow: hidden !important;
 }
 
 .todo-column__header__filter {
-  height: 30px !important;
+    height: 30px !important;
 }
 
 .bubble,
 .smsctooltip {
-  border-radius: 9px !important;
+    border-radius: 9px !important;
 }
 
 .menu-divider::before {
-  background-color: var(--color-accent) !important;
-  height: var(--border-size) !important;
+    background-color: var(--color-accent) !important;
+    height: var(--border-size) !important;
 }
 
 .smscButton:hover,
 .topnav__menuitem:hover {
-  border-color: var(--color-accent) !important;
-  background-color: var(--color-base02) !important;
-  color: var(--color-accent) !important;
-  font-weight: 600 !important;
+    border-color: var(--color-accent) !important;
+    background-color: var(--color-base02) !important;
+    color: var(--color-accent) !important;
+    font-weight: 600 !important;
 }
 
 .topnav__menuitem {
-  border: var(--border-size) solid transparent !important;
-  border-radius: 10px !important;
-  background-color: transparent !important;
-  margin-right: 0px !important;
-  color: var(--color-text) !important;
+    border: var(--border-size) solid transparent !important;
+    border-radius: 10px !important;
+    background-color: transparent !important;
+    margin-right: 0px !important;
+    color: var(--color-text) !important;
 }
 
 .enableAnimations .topnav__menuitem {
-  transition: font-size 0.3s, background-position-x 0.3s, border-radius 0.3s;
+    transition:
+        font-size 0.3s,
+        background-position-x 0.3s,
+        border-radius 0.3s;
 }
 
 .topnav__menu--shortcuts > .topnav__menuitem {
-  margin-right: 7x !important;
+    margin-right: 7x !important;
 }
 
 li {
-  background: transparent !important;
+    background: transparent !important;
 }
 
 .tree-classic li.open.root {
-  background: none !important;
-  padding: 0px !important;
+    background: none !important;
+    padding: 0px !important;
 }
 
 .pupil_nav_pupilinfo {
-  text-align: center !important;
+    text-align: center !important;
 }
 
 .pupil_nav_info
-  .pupil_nav_info_pupilData
-  .pupil_nav_pupilinfo
-  .pupil_nav_pupilinfo_item.teachers {
-  max-width: none !important;
+    .pupil_nav_info_pupilData
+    .pupil_nav_pupilinfo
+    .pupil_nav_pupilinfo_item.teachers {
+    max-width: none !important;
 }
 
 #lvs_toolbar {
-  background-color: var(--color-base01) !important;
+    background-color: var(--color-base01) !important;
 }
 
 .tree-classic li.open {
-  background: url(/includes/jQuery/plugins/jsTree/themes/classic/icons.png) -32px -48px
-    no-repeat !important;
+    background: url(/includes/jQuery/plugins/jsTree/themes/classic/icons.png) -32px -48px
+        no-repeat !important;
 }
 
 .tree-classic li.closed {
-  background: url(/includes/jQuery/plugins/jsTree/themes/classic/icons.png) -48px -32px
-    no-repeat !important;
+    background: url(/includes/jQuery/plugins/jsTree/themes/classic/icons.png) -48px -32px
+        no-repeat !important;
 }
 
 .tree-classic li {
-  background-image: none !important;
+    background-image: none !important;
 }
 
 .tree li li {
-  overflow: visible !important;
+    overflow: visible !important;
 }
 
 .tree-classic li:hover,
 .tree-classic li.open:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .course-list {
-  background: none !important;
-  color: var(--color-base02) !important;
+    background: none !important;
+    color: var(--color-base02) !important;
 }
 
 .smsc_cm_body {
-  border: 2px solid var(--color-base02) !important;
-  border-radius: 10px !important;
-  padding: 10px !important;
+    border: 2px solid var(--color-base02) !important;
+    border-radius: 10px !important;
+    padding: 10px !important;
 }
 
 .smsc-column-nav__item a.smsc-column-nav__button {
-  font-weight: 500 !important;
-  color: var(--color-text) !important;
+    font-weight: 500 !important;
+    color: var(--color-text) !important;
 }
 
 .smsc-column-nav__item:hover a.smsc-column-nav__button:hover {
-  font-weight: 600 !important;
-  color: var(--color-accent) !important;
+    font-weight: 600 !important;
+    color: var(--color-accent) !important;
 }
 
 .smsc_cm_breadcrumb {
-  font-weight: 600 !important;
-  font-size: 15px !important;
-  margin-bottom: -20px !important;
+    font-weight: 600 !important;
+    font-size: 15px !important;
+    margin-bottom: -20px !important;
 }
 
 .treecollapse {
-  padding-left: 5px !important;
-  padding-right: 5px !important;
-  padding-bottom: 5px !important;
-  background-image: none !important;
-  width: fit-content !important;
-  height: fit-content !important;
-  border-radius: 10px !important;
-  border: 2px solid var(--color-base02) !important;
-  background-color: var(--color-base01) !important;
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+    padding-bottom: 5px !important;
+    background-image: none !important;
+    width: fit-content !important;
+    height: fit-content !important;
+    border-radius: 10px !important;
+    border: 2px solid var(--color-base02) !important;
+    background-color: var(--color-base01) !important;
 }
 
 .enableAnimations .treecollapse {
-  transition: all 0.1s ease-in-out !important;
+    transition: all 0.1s ease-in-out !important;
 }
 
 .treecollapse a {
-  color: var(--color-text) !important;
+    color: var(--color-text) !important;
 }
 
 .treecollapse:hover a:hover {
-  color: var(--color-text) !important;
+    color: var(--color-text) !important;
 }
 
 .treecollapse:hover {
-  background-color: var(--color-base02) !important;
-  border-color: var(--color-accent) !important;
+    background-color: var(--color-base02) !important;
+    border-color: var(--color-accent) !important;
 }
 
 #navigation {
-  border-radius: 15px !important;
+    border-radius: 15px !important;
 }
 
 #navigation table,
 #navigation td {
-  overflow: hidden !important;
-  background-color: transparent !important;
+    overflow: hidden !important;
+    background-color: transparent !important;
 }
 
 table {
-  background-color: transparent !important;
+    background-color: transparent !important;
 }
 
 td[background*="static6"],
 td[background*="images"] {
-  display: none !important;
+    display: none !important;
 }
 
 td[bgcolor*="#"] {
-  background-color: transparent !important;
+    background-color: transparent !important;
 }
 
 .smsc_cm_body {
-  position: relative !important;
-  top: 0px !important;
-  margin-top: 37px !important;
-  height: 100% !important;
+    position: relative !important;
+    top: 0px !important;
+    margin-top: 37px !important;
+    height: 100% !important;
 }
 
 .margin-top--milli {
-  margin-top: 0px !important;
+    margin-top: 0px !important;
 }
 
 .js-course-session-page__container {
-  margin: 0px !important;
-  margin-right: 10px !important;
-  position: relative !important;
-  top: 20px !important;
-  border: 2px solid var(--color-base02) !important;
-  border-radius: 15px !important;
+    margin: 0px !important;
+    margin-right: 10px !important;
+    position: relative !important;
+    top: 20px !important;
+    border: 2px solid var(--color-base02) !important;
+    border-radius: 15px !important;
 }
 
 .smscleftnav {
-  margin-top: 20px !important;
-  position: relative !important;
-  top: 0px !important;
+    margin-top: 20px !important;
+    position: relative !important;
+    top: 0px !important;
 }
 
 .breadcrumb_url {
-  float: none !important;
-  margin-top: 17px !important;
-  width: fit-content !important;
+    float: none !important;
+    margin-top: 17px !important;
+    width: fit-content !important;
 }
 
 .breadcrumb_spacer {
-  float: none !important;
-  width: 10px !important;
-  margin: 17px 5px 0px 5px !important;
+    float: none !important;
+    width: 10px !important;
+    margin: 17px 5px 0px 5px !important;
 }

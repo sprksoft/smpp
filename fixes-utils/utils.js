@@ -1,6 +1,6 @@
 const DEBUG = false;
 
-function open_url(url, new_window = false) {
+function openURL(url, new_window = false) {
   if (new_window) {
     let a = document.createElement("a");
     a.href = url;
@@ -15,6 +15,7 @@ function open_url(url, new_window = false) {
 function getPageURL() {
   let url = window.location;
   let urlObject = {};
+  urlObject.search = url.search;
   urlObject.schoolName = url.hostname.split(".")[0];
   urlObject.fullPath = url.pathname.replace("/", "");
   urlObject.path = url.pathname.split("/")[1];
@@ -43,7 +44,7 @@ function unbloat() {
 }
 
 function getImage(name) {
-  return chrome.runtime.getURL(`images/${name}`);
+  return chrome.runtime.getURL(`media/${name}`);
 }
 
 function sendDebug(...messages) {
@@ -71,6 +72,16 @@ function getCurrentDate() {
 
 function getFutureDate(days) {
   return new Date(Date.now() + days * 86400000).toISOString().split("T")[0];
+}
+
+function randomChance(probability) {
+  if (probability <= 0) return false;
+  if (probability >= 1) return true;
+  return Math.random() < probability;
+}
+
+function isAbsoluteUrl(url) {
+  return /^(https?:\/\/|data:image\/)/i.test(url);
 }
 
 function getUserId() {
@@ -101,7 +112,7 @@ function getUserId() {
       cookie.trim().startsWith("plannerUrl=")
     );
 
-    if (plannerUrlCookie) { 
+    if (plannerUrlCookie) {
       sendDebug("Retrieved plannerUrl from cookies" + plannerUrlCookie);
       const plannerUrl = plannerUrlCookie.split("=")[1];
       sendDebug("Found plannerUrl in cookies:", plannerUrl);
@@ -117,6 +128,6 @@ function getUserId() {
   if (userId) {
     return userId;
   } else {
-    console.error("No userID? womp womp")
+    console.error("No userID? womp womp");
   }
 }

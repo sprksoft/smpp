@@ -81,7 +81,6 @@ class TutorialWidget extends WidgetBase {
   }
 
   displayWidgetTutorial(stage) {
-    console.log(stage);
     this.container.innerHTML = "";
 
     const title = document.createElement("h1");

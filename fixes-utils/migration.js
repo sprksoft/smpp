@@ -44,7 +44,7 @@ async function migrateDelijnData() {
 
 async function migratePlantData() {
   let oldData = JSON.parse(
-    window.localStorage.getItem("current_plant_conditions")
+    window.localStorage.getItem("current_plant_conditions"),
   );
   await browser.runtime.sendMessage({
     action: "setPlantAppData",
@@ -220,7 +220,6 @@ async function migrateSettings() {
     };
   }
 
-  // Save new data
   console.log("new data:", quickSettings, widgetData);
 
   await browser.runtime.sendMessage({

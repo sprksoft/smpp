@@ -1,9 +1,11 @@
 #settings-window {
-  border-radius: 3rem;
+  border-radius: 2rem;
   display: flex;
   flex-direction: row;
 }
+
 .settings-category-button {
+  border: 2px solid transparent !important;
   width: 100%;
   background-color: var(--color-base01);
   border: none;
@@ -16,14 +18,21 @@
   font-size: 1.6rem;
   gap: 1rem;
 }
-.settings-category-button:hover {
+
+.settings-category-button-js.active {
+  border-color: var(--color-base03) !important;
   background-color: var(--color-base02);
+  color: var(--color-accent) !important;
+  font-weight: 600 !important;
 }
-.settings-category-button.active:hover {
+
+.settings-category-button-js:hover {
   background-color: var(--color-base02);
+  scale: 1.01;
 }
+
 .enableAnimations .settings-category-button {
-  transition: all 0.1s ease-in-out;
+  transition: all 0.15s ease-in-out;
 }
 
 .category-button-icon {
@@ -36,7 +45,7 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  width: 25rem;
+  width: 20rem;
   padding: 1rem;
   height: 100%;
   overflow-y: scroll;
@@ -44,28 +53,29 @@
 }
 
 .profile-settings-button {
+  border: 2px solid transparent !important;
   display: flex;
   flex-direction: row;
   gap: 1rem;
   padding: 1rem;
+  padding-right: 0.5rem;
   border-radius: 1rem;
   width: 100%;
   border: none;
   text-align: left;
   background-color: var(--color-base01);
 }
-.profile-settings-button:hover {
-  background-color: var(--color-base02);
-}
+
 .enableAnimations .profile-settings-button {
   transition: all 0.1s ease-in-out;
 }
+
 .profile-picture-settings {
   background-image: var(--profile-picture);
   background-size: cover;
   background-repeat: no-repeat;
   border-radius: 10000px;
-  height: 4rem;
+  height: 100%;
   aspect-ratio: 1;
 }
 
@@ -73,17 +83,186 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.25rem;
   justify-content: center;
+  overflow: hidden;
 }
 
 .profile-settings-label-title {
-  font-size: 2rem;
-  margin: 0;
-  overflow-y: hidden;
-  text-wrap: nowrap;
+  margin: 0 !important;
+  font-size: 1.5rem;
+  text-wrap: nowrap !important;
 }
 
 .profile-settings-label-description {
-  margin: 0;
+  margin: 0 !important;
+}
+
+#settings-page {
+  width: calc(100% - 20rem);
+  padding: 1rem 1rem 1rem 0rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+#settings-window .window-controls {
+  right: 1rem;
+  top: 1rem;
+}
+
+.switch.settings-page-button {
+  margin-bottom: 1rem !important;
+}
+
+.settings-page-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 1.25rem;
+  border-radius: 1000rem;
+  background: var(--color-base01);
+  outline: none;
+  opacity: 1;
+  margin-bottom: 1rem !important;
+}
+
+.enableAnimations .settings-page-slider {
+  transition: opacity 0.2s;
+}
+
+.settings-page-slider::-webkit-slider-thumb {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  background: var(--color-accent) !important;
+  border-color: transparent;
+  cursor: pointer;
+  transition: opacity 0.2s ease-in-out;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.settings-page-slider::-moz-range-thumb {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  background: var(--color-accent) !important;
+  border-color: transparent;
+  cursor: pointer;
+  transition: opacity 0.2s ease-in-out;
+  appearance: none;
+}
+
+.settings-page-small-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 0 !important;
+  cursor: default;
+}
+
+.settings-page-section-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 !important;
+  margin-bottom: 1rem !important;
+  cursor: default;
+}
+
+.settings-page-main-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 !important;
+  margin-bottom: 2rem !important;
+  cursor: default;
+}
+
+.enableAnimations .settings-page-image-button-wrapper {
+  transition: all 0.1s ease-in-out;
+}
+.settings-page-image-button-wrapper {
+  margin: 0 !important;
+}
+
+.settings-page-image-button-wrapper:active {
+  scale: 0.9;
+}
+
+.settings-page-image-button-wrapper > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.settings-page-image {
+  border-radius: 0.75rem !important;
+  box-shadow: 0 0 10px var(--darken-background) !important;
+}
+
+.settings-page-text-input {
+  background-color: var(--color-base01) !important;
+  border-color: var(--color-base02) !important;
+  border-radius: 1rem !important;
+  padding: 0.6rem 0.8rem !important;
+  border: 2px solid var(--color-base02) !important;
+  font-size: 1.2rem !important;
+  margin-bottom: 1rem !important;
+}
+.settings-page-image-button-wrapper {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  width: 80px; /* default size, can be overridden inline */
+  height: 80px;
+}
+
+/* Hide the actual checkbox */
+.settings-page-image-button-wrapper input[type="checkbox"] {
+  display: none;
+}
+
+/* The visible image */
+.settings-page-image-wrapper img.settings-page-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px; /* optional rounded corners */
+  transition: transform 0.2s, filter 0.2s, outline 0.2s;
+}
+
+.settings-page-theme-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.enableAnimations .settings-page-theme-card {
+  transition: all 0.2s ease-in-out;
+}
+
+.settings-page-theme-card {
+  display: flex;
+  flex-direction: column;
+  border: 0.3rem solid transparent;
+  gap: 0.5rem;
+  width: 14rem;
+  padding: 0.2rem;
+  border-radius: 1.5rem;
+  background-color: var(--color-base01);
+}
+.settings-page-theme-card > img {
+  border-radius: 1rem !important;
+}
+
+.settings-page-theme-card:hover {
+  cursor: pointer;
+  border-color: var(--hover-border);
+  background-color: var(--hover-color) !important;
+  color: var(--text-color) !important;
+}
+
+.settings-page-theme-title {
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
 }

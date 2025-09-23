@@ -15,6 +15,21 @@ html {
   ); /* -8px for 2 times the border size */
 }
 
+/* Loading spinner animation */
+.loading-spinner {
+  animation: spin 1s linear infinite;
+  transform-origin: center;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* Only use rem's here no em because widgets will be moved to body when they are dragged */
 .smpp-widget {
   height: min-content;
@@ -115,13 +130,16 @@ html {
 .smpp-widget-edit-mode {
   user-select: none;
 }
+.enableAnimations .smpp-widget-edit-mode .topnav {
+  filter: blur(1px) saturate(50%);
+}
 .smpp-widget-edit-mode .topnav {
   pointer-events: none;
-  filter: blur(1px) saturate(50%);
+  filter: saturate(50%);
   opacity: 0.9;
 }
 
-.topnav {
+.enableAnimations .topnav {
   transition: opacity 0.3s ease-in-out, filter 0.3s ease-in-out !important;
 }
 
@@ -381,6 +399,10 @@ html {
   background-color: var(--color-base01);
   box-shadow: 0rem -0.5rem 2rem 1rem rgba(0, 0, 0, 0.5);
   z-index: 90;
+}
+
+.widgets-done-button:active {
+  scale: 0.9;
 }
 
 .enableAnimations .widgets-done-button {

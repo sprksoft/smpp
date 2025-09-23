@@ -3,6 +3,10 @@
 let lijnDataKleuren;
 const lijnUpdateControllers = {};
 
+const loadingSpinnerSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="loading-spinner">
+  <path d="M21 12a9 9 0 1 1-6.219-8.56"></path>
+</svg>`;
+
 // Utility functions
 function calculateTimeUntilDepartureInMins(ETA) {
   const currentDate = new Date();
@@ -85,16 +89,13 @@ async function createHalteDoorkomst(doorkomst, container) {
   } else if (predictionStatuses.includes("GEENREALTIME")) {
     lijnCard.classList.add("lijnCardNoData");
     timeUntilDeparture = calculateTimeUntilDepartureInMins(ETA);
-    console.log(ETA);
     timeUntilDeparture =
       timeUntilDeparture < 1 ? "Now" : `${timeUntilDeparture} Min.`;
     arrivalTimeDeviation = "No data";
   } else if (predictionStatuses.includes("REALTIME")) {
-    console.log(ETA);
     if (doorkomst["real-timeTijdstip"] != null) {
       ETA = new Date(doorkomst["real-timeTijdstip"]);
     }
-    console.log(ETA);
     arrivalTimeDeviation = Math.round((ETA - originalETA) / 1000 / 60);
     arrivalTimeDeviation =
       arrivalTimeDeviation === 0
@@ -200,9 +201,8 @@ function addDelijnAttest(container) {
   const delijnAttestElement = document.createElement("a");
   delijnAttestElement.classList.add("delijnAttest");
   delijnAttestElement.target = "_blank";
-  specialChance = Math.random() < 0.1;
   delijnAttestElement.rel = "noopener noreferrer";
-  delijnAttestElement.href = specialChance
+  delijnAttestElement.href = randomChance(1 / 12)
     ? "https://www.coolblue.be/nl/koffiezetapparaten/koffiezetapparaten-voor-latte-macchiato"
     : "https://www.delijn.be/nl/contact/attest-aanvraag/";
   delijnAttestElement.innerText = specialChance ? "Latte?" : "Late?";
@@ -318,6 +318,18 @@ class DelijnWidget extends WidgetBase {
     }
   }
 
+  setLoadingState(isLoading) {
+    if (isLoading) {
+      this.elements.searchButton.innerHTML = loadingSpinnerSvg;
+      this.elements.searchButton.disabled = true;
+      this.elements.searchButton.classList.add("loading");
+    } else {
+      this.elements.searchButton.innerHTML = searchButtonSvg;
+      this.elements.searchButton.disabled = false;
+      this.elements.searchButton.classList.remove("loading");
+    }
+  }
+
   async handleHalteSearch() {
     const searchQuery = this.elements.searchInput.value;
     this.searchResultLimit = 5;
@@ -328,7 +340,9 @@ class DelijnWidget extends WidgetBase {
       return;
     }
 
+    this.setLoadingState(true);
     await this.showHalteOptions(searchQuery);
+    this.setLoadingState(false);
   }
 
   async showHalteOptions(searchQuery) {
@@ -352,6 +366,7 @@ class DelijnWidget extends WidgetBase {
     }
 
     if (delijnHaltesData?.aantalHits === 0) {
+      this.setLoadingState(false);
       this.displayInfo("Geen zoekresultaten");
       return;
     }
@@ -398,6 +413,7 @@ class DelijnWidget extends WidgetBase {
         this.displayInfo("Er liep iets mis: " + error);
         console.error(error);
       }
+      this.setLoadingState(false);
     }
   }
 
@@ -501,7 +517,10 @@ class DelijnWidget extends WidgetBase {
     showMoreButton.addEventListener("click", () => {
       this.searchResultLimit += 5;
       showMoreButton.remove();
-      this.showHalteOptions(this.elements.searchInput.value);
+      this.setLoadingState(true);
+      this.showHalteOptions(this.elements.searchInput.value).finally(() => {
+        this.setLoadingState(false);
+      });
     });
     this.elements.bottomContainer.appendChild(showMoreButton);
   }

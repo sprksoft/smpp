@@ -1,7 +1,6 @@
 //java script komt hier je weet wel
 //ok - ldev
 //oh ok, ik dacht in general.css - Jdev
-let currentThemeVars;
 let quickSettingsWindowIsHidden = true;
 
 function discordpopup() {
@@ -10,8 +9,7 @@ function discordpopup() {
   document.body.appendChild(discordelement);
 }
 function changeLogoutText() {
-  var randomNum = Math.floor(Math.random() * 50) + 1;
-  if (randomNum === 1) {
+  if (randomChance(1 / 50)) {
     return "Good Bye! →";
   }
   return "Log out →";
@@ -116,11 +114,21 @@ function resetSMlogo() {
       "https://static4.smart-school.net/smsc/svg/favicon/favicon.svg";
 }
 async function apply() {
+  await reloadDMenuConfig(); // reload the dmenu config. (er is een object voor async raarheid te vermijden en dat wordt herladen door deze functie)
   setEditMode(false); // Turn off widget edit mode
   let style = document.documentElement.style;
-
   const data = await browser.runtime.sendMessage({
     action: "getSettingsData",
+  });
+
+  console.log("Settings data: \n", data);
+
+  themes = await browser.runtime.sendMessage({
+    action: "getAllThemes",
+  });
+
+  settingsOptions = await browser.runtime.sendMessage({
+    action: "getSettingsOptions",
   });
 
   changeFont();
@@ -129,7 +137,6 @@ async function apply() {
   fixCoursesSearch();
 
   await setTheme(data.appearance.theme);
-  currentTheme = data.appearance.theme;
 
   showNews(data.features.showNews);
 
@@ -180,21 +187,15 @@ async function apply() {
   if (document.getElementById("background_image")) {
     document.getElementById("background_image").style.display = "none";
   }
-  console.log(data.appearance.background.backgroundSelection);
-  switch (data.appearance.background.backgroundSelection) {
-    case 1:
-      set_backgroundlink(data.appearance.background.backgroundLink);
-      break;
-    case 2:
-      set_background();
-      break;
-  }
+
+  setBackground(data.appearance);
 
   if (data.appearance.enableSMPPLogo) {
     updateSMPPlogo();
   } else {
     resetSMlogo();
   }
+
 }
 
 async function storeQuickSettings() {
@@ -203,15 +204,12 @@ async function storeQuickSettings() {
   });
   // Start from old settings
   const data = structuredClone(oldData);
-  console.log(oldData.appearance.background.backgroundLink);
-  data.profile.customUserName = null;
   data.appearance.theme = document.getElementById("theme-selector").value;
   data.appearance.enableSMPPLogo =
     document.getElementById("smpp-logo-toggle").checked;
   data.appearance.background.backgroundLink = document.getElementById(
     "background-link-input"
   ).value;
-  console.log(oldData.appearance.background.backgroundLink);
 
   data.appearance.background.backgroundBlurAmount = Number(
     document.getElementById("background-blur-amount-slider").value
@@ -227,16 +225,6 @@ async function storeQuickSettings() {
   data.other.enablePerfomanceMode = document.getElementById(
     "performance-mode-toggle"
   ).checked;
-
-  currentTheme = data.appearance.theme;
-
-  if (data.appearance.background.backgroundLink) {
-    document.getElementById("smpp-link-clear-button").classList.add("active");
-  } else {
-    document
-      .getElementById("smpp-link-clear-button")
-      .classList.remove("active");
-  }
 
   document.getElementById(
     "performance-mode-info"
@@ -259,20 +247,16 @@ async function storeQuickSettings() {
   let file = document.getElementById("background-file-input").files[0];
   if (file) {
     const reader = new FileReader();
-    reader.onload = () => {
-      const imageData = reader.result;
-      browser.runtime.sendMessage({
-        action: "saveBackgroundImage",
-        data: imageData,
-      });
-    };
-    reader.readAsDataURL(file);
-
+    const imageData = await new Promise((resolve) => {
+      reader.onload = () => resolve(reader.result);
+      reader.readAsDataURL(file);
+    });
+    await browser.runtime.sendMessage({
+      action: "saveBackgroundImage",
+      data: imageData,
+    });
     data.appearance.background.backgroundSelection = 2;
     data.appearance.background.backgroundLink = file.name;
-    await browser.runtime.sendMessage({ action: "setSettingsData", data });
-    window.location.reload();
-    return;
   } else {
     if (data.appearance.background.backgroundLink == "") {
       data.appearance.background.backgroundSelection = 0;
@@ -283,17 +267,14 @@ async function storeQuickSettings() {
       data.appearance.background.backgroundSelection = 1;
     }
   }
-  console.log(
-    data.appearance.background.backgroundLink,
-    oldData.appearance.background.backgroundLink
-  );
 
   console.log("Storing this new data:", data);
   await browser.runtime.sendMessage({ action: "setSettingsData", data });
+  await loadQuickSettings();
   await apply();
 }
 
-function set_background() {
+function set_backgroundOLD() {
   let style = document.documentElement.style;
   browser.runtime
     .sendMessage({ action: "getBackgroundImage" })
@@ -320,8 +301,44 @@ function set_background() {
     });
 }
 
-function isAbsoluteUrl(url) {
-  return /^(https?:\/\/|data:image\/)/i.test(url);
+async function setBackground(data) {
+  let style = document.documentElement.style;
+  function displayBackgroundImage(image) {
+    style.setProperty("--background-color", `transparent`);
+    let img =
+      document.getElementById("background_image") ||
+      document.createElement("img");
+    img.id = "background_image";
+    img.style.backgroundColor = "var(--color-base00)";
+    img.style.position = "absolute";
+    img.style.top = "0";
+    img.style.left = "0";
+    img.style.width = "101%";
+    img.style.height = "101%";
+    img.style.objectFit = "cover";
+    img.style.zIndex = -1;
+    img.style.display = "block";
+    if (image) img.src = image;
+    if (!document.getElementById("background_image")) {
+      document.body.appendChild(img);
+    }
+  }
+  switch (data.background.backgroundSelection) {
+    case 0: // Default
+      displayBackgroundImage(
+        getImage("/theme-backgrounds/" + data.theme + ".jpg")
+      );
+      break;
+    case 1: // Link
+      displayBackgroundImage(data.background.backgroundLink);
+      break;
+    case 2: // File
+      let thing = await browser.runtime.sendMessage({
+        action: "getBackgroundImage",
+      });
+      displayBackgroundImage(thing.backgroundImage);
+      break;
+  }
 }
 
 function set_backgroundlink(background) {
@@ -392,6 +409,8 @@ async function loadQuickSettings() {
   } else {
     document.getElementById("backgroundfilebutton").classList.remove("active");
   }
+
+  document.getElementById("background-file-input").value = ""; // reset the files
   document.getElementById("background-blur-amount-slider").value =
     data.appearance.background.backgroundBlurAmount;
   document.getElementById("performance-mode-toggle").checked =
@@ -487,16 +506,7 @@ function createBgSelector() {
 
   clearButton.addEventListener("click", async function (event) {
     event.target.closest(".smpp-link-clear-button").classList.remove("active");
-    const data = await browser.runtime.sendMessage({
-      action: "getSettingsData",
-    });
-    data.appearance.background.backgroundLink = "";
-    data.appearance.background.backgroundSelection = 0;
-    await browser.runtime.sendMessage({
-      action: "setSettingsData",
-      data: data,
-    });
-    await loadQuickSettings();
+    document.getElementById("background-link-input").value = "";
     await storeQuickSettings();
   });
 
@@ -550,31 +560,15 @@ function createQuickSettingsHTML(parent) {
   const themeSelector = document.createElement("select");
   themeSelector.id = "theme-selector";
 
-  const options = [
-    { value: "default", text: "Default Deluxe" },
-    { value: "white", text: "Off White" },
-    { value: "custom", text: "Custom Theme" },
-    { value: "ldev", text: "Dark Sands" },
-    { value: "birb", text: "Midnight Sapphire" },
-    { value: "stalker", text: "Ruby Eclipse" },
-    { value: "chocolate", text: "Dark Mocha" },
-    { value: "mountain", text: "Storm Peaks" },
-    { value: "winter", text: "Arctic Azure" },
-    { value: "galaxy", text: "Fluorescent Galaxy" },
-    { value: "sand", text: "Sahara Oasis" },
-    { value: "purple", text: "Neon Violet" },
-    { value: "fall", text: "Autumn Gloom" },
-    { value: "matcha", text: "Matcha Green" },
-    { value: "pink", text: "Cherry Haze" },
-    { value: "fairyblue", text: "Fairy Blue" },
-    { value: "tech", text: "Tech" },
-  ];
+  settingsOptions.appearance.theme.forEach((key) => {
+    if (!themes[key]["display-name"].startsWith("__")) {
+      // Don't include hidden themes
+      const optionElement = document.createElement("option");
+      optionElement.value = key;
 
-  options.forEach((option) => {
-    const optionElement = document.createElement("option");
-    optionElement.value = option.value;
-    optionElement.textContent = option.text;
-    themeSelector.appendChild(optionElement);
+      optionElement.textContent = themes[key]["display-name"];
+      themeSelector.appendChild(optionElement);
+    }
   });
 
   const colorPickers = document.createElement("div");
@@ -795,7 +789,6 @@ function createTopButtons() {
 
 function updateTopButtons(data) {
   let GOButton = document.querySelector(`[data-go=""]`);
-  console.log(GOButton);
   if (GOButton) {
     data.enableGOButton
       ? (GOButton.style = "display:flex")
@@ -826,15 +819,13 @@ function updateTopButtons(data) {
 
 async function main() {
   if (document.body.classList.contains("smpp")) {
-    console.error("smpp is waarschijnlijk 2 keer geladen");
-    alert("smpp is waarschijnlijk 2 keer geladen");
+    console.error("SMPP is waarschijnlijk 2 keer geladen");
+    alert("SMPP is 2x geladen waarschijnlijk");
   }
   document.body.classList.add("smpp"); // For modding
-
   if (window.localStorage.getItem("settingsdata")) {
     await migrateSettings();
   }
-
   const settingsData = await browser.runtime.sendMessage({
     action: "getSettingsData",
   });

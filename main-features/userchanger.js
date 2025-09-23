@@ -9,9 +9,14 @@ function getOriginalName() {
 
 function createCustomNameInput(customName, originalName) {
   let parent = document.getElementById("smscMainBlockContainer");
-  let customNameInputContainer = document.createElement("div");
-  customNameInputContainer.id = "custom-name-input-containter";
-  let customNameInput = document.createElement("input");
+  let customNameInputContainer =
+    document.getElementById("custom-name-input-container") ||
+    document.createElement("div");
+  customNameInputContainer.id = "custom-name-input-container";
+
+  let customNameInput =
+    document.getElementById("custom-name-input") ||
+    document.createElement("input");
   customNameInput.type = "text";
   customNameInput.id = "custom-name-input";
   customNameInput.placeholder = "Custom name";
@@ -25,15 +30,17 @@ function createCustomNameInput(customName, originalName) {
       await saveCustomName(null);
     }
   });
-  customNameInputContainer.appendChild(customNameInput);
-  parent.appendChild(customNameInputContainer);
+  if (!document.getElementById("custom-name-input-container")) {
+    customNameInputContainer.appendChild(customNameInput);
+    parent.appendChild(customNameInputContainer);
+  }
 }
 
-async function saveCustomName(customName) {
+async function saveCustomName(name) {
   const data = await browser.runtime.sendMessage({
     action: "getSettingsData",
   });
-  data.customName = customName;
+  data.profile.customUserName = name;
   await browser.runtime.sendMessage({
     action: "setSettingsData",
     data: data,

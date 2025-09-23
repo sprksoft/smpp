@@ -24,7 +24,9 @@ class TakenWidget extends WidgetBase {
           throw new Error("School name could not be determined.");
         }
 
-        const url = `https://${schoolName}.smartschool.be/planner/api/v1/planned-elements/user/${userId}?from=${getCurrentDate()}&to=${getFutureDate(foresight)}&types=planned-assignments,planned-to-dos`;
+        const url = `https://${schoolName}.smartschool.be/planner/api/v1/planned-elements/user/${userId}?from=${getCurrentDate()}&to=${getFutureDate(
+          foresight
+        )}&types=planned-assignments,planned-to-dos`;
         sendDebug("Fetching planner data from:", url);
         const response = await fetch(url);
 
@@ -57,10 +59,9 @@ class TakenWidget extends WidgetBase {
 
       fetchPlannerData().then((data) => {
         data = data.filter((element) => element.resolvedStatus !== "resolved");
-        console.log(data)
+        console.log(data);
         if (!data) {
-          TasksContainer.innerHTML =
-            "Er is iets ernstig misgegaan :(";
+          TasksContainer.innerHTML = "Er is iets ernstig misgegaan :(";
           return console.error("No planner data, Did something go wrong?");
         } else if (DEBUG) {
           sendDebug("Planner data fetched successfully.");
@@ -121,19 +122,30 @@ class TakenWidget extends WidgetBase {
           }
 
           const rowDiv = document.createElement("div");
-          rowDiv.classList.add("listview__row", "todo__row", "assignment__item");
+          rowDiv.classList.add(
+            "listview__row",
+            "todo__row",
+            "assignment__item"
+          );
           rowDiv.setAttribute("data-id", element.id);
 
           const abbreviationDiv = document.createElement("div");
           abbreviationDiv.classList.add("listview__cell", "abvr__div");
 
           const wrapperDiv = document.createElement("div");
-          wrapperDiv.classList.add("todo-column__abbreviation-cell__wrapper", "wrapperdiv");
-          wrapperDiv.classList.add(`c-${element.color.split("-")[0]}-combo--${element.color.split("-")[1]}` // LET HIM COOK
+          wrapperDiv.classList.add(
+            "todo-column__abbreviation-cell__wrapper",
+            "wrapperdiv"
+          );
+          wrapperDiv.classList.add(
+            `c-${element.color.split("-")[0]}-combo--${
+              element.color.split("-")[1]
+            }` // LET HIM COOK
           );
 
           // make the litle icon cubes
-          if (element.icon) { // dont try to understand, i dont either
+          if (element.icon) {
+            // dont try to understand, i dont either
             fetch(
               `https://${getSchoolName()}.smartschool.be/smsc/svg/${
                 element.icon
@@ -185,16 +197,16 @@ class TakenWidget extends WidgetBase {
           detailsDiv.append(titleSpan, metadataSpan);
           rowDiv.append(abbreviationDiv, detailsDiv);
 
-          rowDiv.addEventListener('click', () => {
+          rowDiv.addEventListener("click", () => {
             markAsFinished(element.id);
           });
-          rowDiv.addEventListener('mouseenter', () => {
-            titleSpan.style.textDecoration = 'line-through';
+          rowDiv.addEventListener("mouseenter", () => {
+            titleSpan.style.textDecoration = "line-through";
           });
-          rowDiv.addEventListener('mouseleave', () => {
-            titleSpan.style.textDecoration = 'none';
+          rowDiv.addEventListener("mouseleave", () => {
+            titleSpan.style.textDecoration = "none";
           });
-          
+
           TasksContainer.append(rowDiv);
         });
 
@@ -228,7 +240,9 @@ async function markAsFinished(as_ID) {
   const userId = getUserId();
 
   if (!schoolName || !userId) {
-    console.error("SMPP: Could not retrieve school name or user ID. Cannot mark assignment as finished.");
+    console.error(
+      "SMPP: Could not retrieve school name or user ID. Cannot mark assignment as finished."
+    );
     return false;
   }
 
@@ -238,20 +252,22 @@ async function markAsFinished(as_ID) {
     const response = await fetch(url, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json", 
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({}),
     });
 
     if (!response.ok) {
       const errorData = await response.text();
-      throw new Error(`Failed to mark assignment ${as_ID} as finished: ${response.status} ${response.statusText}. Response: ${errorData}`);
+      throw new Error(
+        `Failed to mark assignment ${as_ID} as finished: ${response.status} ${response.statusText}. Response: ${errorData}`
+      );
     }
 
     sendDebug(`Assignment ${as_ID} marked as finished successfully.`);
 
     // too lazy to code the rest of the cleanup thingy so ill let ai do it, haters gonna hate
-    
+
     const assignmentElement = document.querySelector(`[data-id="${as_ID}"]`);
     if (assignmentElement) {
       // Find the parent container that holds both the date headers and assignment items.
@@ -261,7 +277,11 @@ async function markAsFinished(as_ID) {
       // Find the date header (h3.date-header-assignments) that precedes this assignment.
       // This header marks the start of the day for this assignment.
       let dayHeader = assignmentElement.previousElementSibling;
-      while (dayHeader && (!dayHeader.classList.contains('date-header-assignments') || dayHeader.tagName !== 'H3')) {
+      while (
+        dayHeader &&
+        (!dayHeader.classList.contains("date-header-assignments") ||
+          dayHeader.tagName !== "H3")
+      ) {
         dayHeader = dayHeader.previousElementSibling;
       }
 
@@ -276,13 +296,16 @@ async function markAsFinished(as_ID) {
 
         while (nextSibling) {
           // If we find another assignment item, it means there are still assignments for this day.
-          if (nextSibling.classList.contains('assignment__item')) {
+          if (nextSibling.classList.contains("assignment__item")) {
             hasMoreAssignmentsForThisDay = true;
             break; // Stop checking, we found another assignment.
           }
           // If we encounter another date header, it means we've passed all assignments for the current day
           // without finding any remaining ones.
-          if (nextSibling.classList.contains('date-header-assignments') && nextSibling.tagName === 'H3') {
+          if (
+            nextSibling.classList.contains("date-header-assignments") &&
+            nextSibling.tagName === "H3"
+          ) {
             break; // Stop checking, reached the next day's header.
           }
           nextSibling = nextSibling.nextElementSibling;
@@ -295,12 +318,13 @@ async function markAsFinished(as_ID) {
       }
 
       // Check if this was the last assignment in total
-      const remainingAssignmentsInWidget = parentContainer.querySelectorAll('.assignment__item');
+      const remainingAssignmentsInWidget =
+        parentContainer.querySelectorAll(".assignment__item");
       if (remainingAssignmentsInWidget.length === 0) {
         // If no assignments are left, add the "you're all done" message
-        const doneMessage = document.createElement('p');
-        doneMessage.classList.add('as_all_done'); // Add a class for potential styling
-        if (Math.random() < 0.05) { // 1 in 20 chance
+        const doneMessage = document.createElement("p");
+        doneMessage.classList.add("as_all_done"); // Add a class for potential styling
+        if (randomChance(1 / 20)) {
           doneMessage.innerText = "You're all done! You deserve a break 💜";
         }
         doneMessage.innerText = "You're all done!";
@@ -309,15 +333,22 @@ async function markAsFinished(as_ID) {
         // Ensure all date headers are removed if the widget is completely empty of assignments
         // This handles cases where a header might remain if the last assignment was removed
         // and the header wasn't directly adjacent or the logic missed it.
-        const allDateHeaders = parentContainer.querySelectorAll('.date-header-assignments');
-        allDateHeaders.forEach(header => header.remove());
+        const allDateHeaders = parentContainer.querySelectorAll(
+          ".date-header-assignments"
+        );
+        allDateHeaders.forEach((header) => header.remove());
       }
     } else {
-      console.warn(`SMPP: Assignment element with data-id="${as_ID}" not found :/ this is good?`);
+      console.warn(
+        `SMPP: Assignment element with data-id="${as_ID}" not found :/ this is good?`
+      );
     }
     return true;
   } catch (error) {
-    console.error(`SMPP: Error marking assignment ${as_ID} as finished:`, error);
+    console.error(
+      `SMPP: Error marking assignment ${as_ID} as finished:`,
+      error
+    );
     return false;
   }
 }

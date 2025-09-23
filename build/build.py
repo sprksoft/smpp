@@ -137,13 +137,12 @@ def build_lite(excluded_lite_files_csv, original_dir, lite_build_dir, icon_sourc
 
         manifest['name'] = 'Smartschool++ Lite'
         manifest['description'] = 'A lite, school friendlier version of Smartschool++'
-        manifest['lite_mode'] = True
 
         with open(manifest_path, 'w', encoding='utf-8') as f:
             json.dump(manifest, f, indent=4)
     except Exception as e:
         print(f"Error updating manifest: {e}")
-        
+
     print("Updating icons...")
     icons_dir = os.path.join(lite_build_dir, 'icons')
     os.makedirs(icons_dir, exist_ok=True)

@@ -445,7 +445,7 @@ smsc-inlineeditor.smsc-table__cell--inlineeditor {
   background-color: var(--color-base01) !important;
 }
 .smscselect_dropdown_item,
-#renderselect{
+#renderselect {
   color: #000000 !important;
 }
 
@@ -1518,7 +1518,7 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   border: 2px solid var(--color-base02) !important;
 }
 
-#custom-name-input-containter {
+#custom-name-input-container {
   display: flex;
   justify-content: center;
 }
@@ -1555,36 +1555,8 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   flex-direction: row !important;
 }
 
-.base-window {
-  background-color: var(--color-base02);
-  border: 2px solid var(--color-base03);
-  border-radius: 5px;
-  min-width: 100px !important;
-}
-
 .enableAnimations .base-window {
   transition: border-color 0.3s;
-}
-
-.base-window {
-  overflow: clip;
-  background: var(--color-base00);
-  border: var(--border-size) solid var(--color-base03);
-  position: absolute;
-  z-index: 20;
-  box-shadow: 0px 0px 150px black;
-  border-radius: 10px;
-  width: 80%;
-  height: 80%;
-  left: 10%;
-  top: 10%;
-  transform: scale(0);
-  transform-origin: center;
-}
-
-.enableAnimations #global_chat_window {
-  transition: all 0.1s cubic-bezier(0.74, 0.25, 0.62, 0.97);
-  animation: popIn 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
 }
 
 @keyframes popIn {
@@ -1609,8 +1581,11 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.2s ease;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.enableAnimations .window-button {
+  transition: all 0.2s ease;
 }
 
 .window-button:hover {
@@ -1620,14 +1595,20 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
 .window-button svg {
   width: 18px;
   height: 18px;
+}
+
+.enableAnimations .window-button svg {
   transition: transform 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
 }
 
-.window-button:hover svg {
+.enableAnimations .window-button:hover svg {
   transform: scale(1.15);
 }
+.enableAnimations .window-button:hover svg.contract-icon {
+  transform: scale(0.9);
+}
 
-.window-button:active svg {
+.enableAnimations .window-button:active {
   transform: scale(0.9);
 }
 
@@ -1662,6 +1643,11 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
 .base-window.expand-icon {
   display: block;
 }
+
+.enableAnimations .base-window {
+  transition: all 0.2s cubic-bezier(0.16, 1.13, 0.89, 0.96);
+}
+
 .base-window {
   overflow: clip;
   background: var(--color-base00);
@@ -1708,11 +1694,7 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   transform: translateY(0);
 }
 
-.window-button:active svg {
-  transform: scale(0.9);
-}
-
-.base-window.window-fullscreen {
+.base-window.window-fullscreen-btn {
   position: fixed;
   width: 100%;
   height: 100%;
@@ -1722,20 +1704,20 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   z-index: 1000;
 }
 
-.window-fullscreen .expand-icon {
+.window-fullscreen-btn .expand-icon {
   /* peil wijst naar buiten */
   display: block;
 }
-.window-fullscreen .contract-icon {
+.window-fullscreen-btn .contract-icon {
   /* peil wijst naar binne */
   display: none;
 }
 
-.base-window.window-fullscreen .expand-icon {
+.base-window.window-fullscreen-btn .expand-icon {
   /* omgekeerd */
   display: none;
 }
-.base-window.window-fullscreen .contract-icon {
+.base-window.window-fullscreen-btn .contract-icon {
   display: block;
   transform: rotate(180deg);
 }
@@ -2184,12 +2166,12 @@ mark {
   color: var(--color-accent) !important;
 }
 
-.forum-contentbox > input.textfield{
+.forum-contentbox > input.textfield {
   background-color: var(--color-base03) !important;
   border: 2px solid var(--color-base02) !important;
   border-radius: 0.5rem !important ;
 }
-.forum-attachments{
+.forum-attachments {
   border: 2px solid var(--color-base03) !important;
   border-radius: 0.5rem !important ;
 }
@@ -2251,15 +2233,15 @@ body.modern-ui .homepage__block__content {
 .infoBlock .infoBlock_content .infoBlock_planner,
 .infoBlock_lvsitem,
 .infoBlock_message,
-.infoBlock .infoBlock_content .infoBlock_eval{
-    height: 45px !important;
+.infoBlock .infoBlock_content .infoBlock_eval {
+  height: 45px !important;
 }
-.smscFrameTitle{
+.smscFrameTitle {
   display: none !important;
 }
 
 #pupilPresencesGraphTotalsByWeekday,
 #pupilPresencesGraphEvolution,
-#pupilPresencesGraphTotalsByCode{
+#pupilPresencesGraphTotalsByCode {
   border-color: var(--color-base03) !important;
 }
