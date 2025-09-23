@@ -15,7 +15,7 @@ function getDefaultCustomThemeData() {
   };
 }
 
-function getDefaultSettings() {
+export function getDefaultSettings() {
   return defaultSettings;
 }
 

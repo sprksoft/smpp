@@ -2,11 +2,9 @@ function gatherOptions(template, name) {
   let options = [];
   for (let keyName of Object.keys(template)) {
     const key = template[keyName];
-    const newName = (name ? name + "." : "") + keyName
+    const newName = (name ? name + "." : "") + keyName;
     if (typeof key == "object" && !Array.isArray(key)) {
-      options = options.concat(
-        gatherOptions(template[keyName], newName),
-      );
+      options = options.concat(gatherOptions(template[keyName], newName));
     } else if (key == "array") {
       // we don't support arrays yet so just hide array options from the menu
       //TODO: maybe add array support
@@ -22,7 +20,28 @@ async function getDMenuOptionsForSettings(toplevel) {
   const template = await browser.runtime.sendMessage({
     action: "getSettingsOptions",
   });
-  return gatherOptions(template, toplevel ? "config" : null);
+  let options = [];
+  for (let cat of Object.keys(template)) {
+    options = options.concat(gatherOptions(template[cat], toplevel ? "config" : null));
+  }
+  return options;
+}
+
+/// Get the full option path from a beautified option path.
+// dmenu.item_score => other.dmenu.item_score
+// config.dmenu.item_score => other.dmenu.item_score
+function getFullOptPath(template, optName) {
+  if (optName.startsWith("config.")) {
+    optName = optName.substring("config.".length);
+  }
+  const first = optName.split(".")[0];
+  for (let key of Object.keys(template)) {
+    if (template[key][first] !== undefined) {
+      return key+"."+optName;
+    }
+  }
+  console.error(`Was not able to convert the optName '${optName}' to full because it was not found in the template json (returning an option with no category)`);
+  return optName;
 }
 
 function getByPath(object, path) {
@@ -47,25 +66,22 @@ async function setSettingByPath(path, value) {
     category: path,
     data: value,
   });
-  
   await apply();
 }
 
-async function dmenuEditConfig(configPath) {
-  if (configPath.startsWith("config.")) {
-    configPath = configPath.substring("config.".length);
-  }
+async function dmenuEditConfig(path) {
   const templates = await browser.runtime.sendMessage({
     action: "getSettingsOptions",
   });
+  configPath = getFullOptPath(templates, path);
   const template = getByPath(templates, configPath);
 
-  let option = await browser.runtime.sendMessage({
+  let optionValue = await browser.runtime.sendMessage({
     action: "getSettingsCategory",
     category: configPath,
   });
 
-  const label = configPath + " (" + option + "): ";
+  const label = path + " (" + optionValue + "): ";
   if (template == "boolean") {
     dmenu(
       ["true", "false"],

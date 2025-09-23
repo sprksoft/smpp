@@ -1,13 +1,34 @@
 let active_dmenu = null;
 let dmenuConfig = null;
 
+// Fixes a broken or outdated dmenu config.
+async function fixupBrokenConfig(config, defaults = null) {
+  if (!defaults) {
+    defaults = await browser.runtime.sendMessage({
+      action: "getSettingsDefaults",
+      category: "other.dmenu",
+    });
+  }
+
+  for (let key of Object.keys(defaults)) {
+    if (typeof defaults[key] === "object" && !Array.isArray(defaults[key])) {
+      fixupBrokenConfig(config[key], defaults[key]);
+    } else {
+      if (config[key] === undefined) {
+        config[key] = defaults[key];
+      }
+    }
+  }
+}
+
+// Called by apply
 async function reloadDMenuConfig() {
   dmenuConfig = await browser.runtime.sendMessage({
     action: "getSettingsCategory",
-    category:"other.dmenu",
+    category: "other.dmenu",
   });
+  await fixupBrokenConfig(dmenuConfig);
 }
-reloadDMenuConfig();
 
 class DMenu {
   openerEl;
@@ -148,7 +169,7 @@ class DMenu {
 
   #matchScore(str, match) {
     str = str.toLowerCase();
-    match = match.toLowerCase(); 
+    match = match.toLowerCase();
     let score = 0;
     let mi = 0;
     let i = 0;
@@ -159,7 +180,10 @@ class DMenu {
         break;
       }
       if (str[i] == match[mi]) {
-        score += (streak+1)*(streak + 1) * ((str.length - streakStartI) / str.length);
+        score +=
+          (streak + 1) *
+          (streak + 1) *
+          ((str.length - streakStartI) / str.length);
         mi += 1;
         streak += 1;
       } else {
@@ -195,6 +219,7 @@ class DMenu {
     if (meta != undefined) {
       row.getElementsByClassName("dmenu-meta")[0].innerText = meta;
     }
+
     if (dmenuConfig.item_score) {
       row.getElementsByClassName("dmenu-score")[0].innerText = "0";
     }
