@@ -2,7 +2,7 @@ const PANNELIP_MARGIN_PX = 20;
 
 let widgetEditMode = false;
 let hoveringBag = false;
-let showNewsState = false; // Used for if the shownews state is changed before it could be created.
+let newsState = false; // Used for if the news state is changed before it could be created.
 // The widget drag info of the widget currently being dragged.
 let curDragInfo = null;
 let widgets = [];
@@ -399,7 +399,7 @@ async function createPannelHTML(pannel) {
   return pannelDiv;
 }
 
-async function createWidgetsContainerHTML(widgetData, newsContent, showNews) {
+async function createWidgetsContainerHTML(widgetData, newsContent, news) {
   let widgetsContainer = document.createElement("div");
   widgetsContainer.classList.add("smpp-widgets-container");
 
@@ -419,7 +419,7 @@ async function createWidgetsContainerHTML(widgetData, newsContent, showNews) {
   newsDiv.addEventListener("mousemove", onCenterHover);
   newsContent.id = "smpp-news-content";
   newsContent.className = "";
-  newsContent.style.display = showNews ? "block" : "none";
+  newsContent.style.display = news ? "block" : "none";
   newsDiv.appendChild(newsContent);
   widgetsContainer.appendChild(newsDiv);
 
@@ -431,8 +431,8 @@ async function createWidgetsContainerHTML(widgetData, newsContent, showNews) {
   return widgetsContainer;
 }
 
-function showNews(value) {
-  showNewsState = value;
+function news(value) {
+  newsState = value;
   let newsContent = document.getElementById("smpp-news-content");
   if (newsContent) {
     newsContent.style.display = value ? "block" : "none";
@@ -501,7 +501,7 @@ async function createWidgetSystem() {
   widgetsContainer = await createWidgetsContainerHTML(
     widgetData,
     news,
-    showNewsState
+    newsState
   );
 
   container.innerHTML = "";
@@ -756,7 +756,7 @@ async function setEditMode(value) {
     }
     closeBag();
     document.body.classList.remove("smpp-widget-edit-mode");
-    showNews(showNewsState);
+    news(newsState);
   }
   updateDoneButtonState(value);
 

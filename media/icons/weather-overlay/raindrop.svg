@@ -1,0 +1,13 @@
+<svg xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" width="" height="" viewBox="0 0 210 297" version="1.1" id="svg1" sodipodi:docname="raindrop.svg" inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)">
+  <sodipodi:namedview id="namedview1" pagecolor="#ffffff" bordercolor="#000000" borderopacity="0.25" inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1" inkscape:document-units="mm" inkscape:zoom="0.72426347" inkscape:cx="396.95499" inkscape:cy="565.40198" inkscape:window-width="1920" inkscape:window-height="1009" inkscape:window-x="1912" inkscape:window-y="-8" inkscape:window-maximized="1" inkscape:current-layer="layer1"/>
+  <defs id="defs1">
+    <linearGradient id="linearGradient8" inkscape:collect="always">
+      <stop style="stop-color:#70b8cc;stop-opacity:1;" offset="0" id="stop9"/>
+      <stop style="stop-color:#70b8cc;stop-opacity:0;" offset="1" id="stop10"/>
+    </linearGradient>
+    <radialGradient inkscape:collect="always" xlink:href="#linearGradient8" id="radialGradient10" cx="69.36702" cy="146.8145" fx="69.36702" fy="146.8145" r="16.439116" gradientTransform="matrix(15.064716,0.10557247,-0.13160863,23.461465,-983.47873,-3212.1295)" gradientUnits="userSpaceOnUse"/>
+  </defs>
+  <g inkscape:label="Layer 1" inkscape:groupmode="layer" id="layer1">
+    <rect style="fill:url(#radialGradient10);stroke:none;stroke-width:3.88849;stroke-miterlimit:5.6;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke" id="rect1" width="84.387459" height="295.53873" x="1.9706923e-07" y="0.7306276" rx="42.193729" ry="45.087742"/>
+  </g>
+</svg>

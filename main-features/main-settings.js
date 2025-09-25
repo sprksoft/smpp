@@ -370,6 +370,42 @@ class SettingsWindow extends BaseWindow {
         this.settingsPage.appendChild(
           createDescription("Add dynamic weather visuals.")
         );
+        this.settingsPage.appendChild(createSmallTitle("Type"));
+        let weatherIconsContainer = document.createElement("div");
+        weatherIconsContainer.classList.add(
+          "settings-page-icons-container",
+          "settings-page-weather-overlay-container"
+        );
+        weatherIconsContainer.appendChild(
+          createImageButton(
+            "/icons/weather-overlay/raincloud.svg",
+            "4rem",
+            "4rem",
+            "settings-page-raindrop-button"
+          )
+        );
+        weatherIconsContainer.appendChild(
+          createImageButton(
+            "/icons/weather-overlay/dynamic.svg",
+            "4rem",
+            "4rem",
+            "settings-page-realtime-button"
+          )
+        );
+        weatherIconsContainer.appendChild(
+          createImageButton(
+            "/icons/weather-overlay/snowcloud.svg",
+            "4rem",
+            "4rem",
+            "settings-page-snow-button"
+          )
+        );
+        this.settingsPage.appendChild(weatherIconsContainer);
+
+        this.settingsPage.appendChild(createSmallTitle("Amount"));
+        this.settingsPage.appendChild(
+          createSlider(0, 500, "settings-page-weather-overlay-slider")
+        );
 
         this.settingsPage.appendChild(createSectionTitle("Icon"));
         this.settingsPage.appendChild(
@@ -383,7 +419,7 @@ class SettingsWindow extends BaseWindow {
             "/icons/sm-icon.svg",
             "4rem",
             "4rem",
-            "default-icon-button"
+            "settings-page-default-icon-button"
           )
         );
         iconsContainer.appendChild(
@@ -391,7 +427,7 @@ class SettingsWindow extends BaseWindow {
             "/icons/smpp128.png",
             "4rem",
             "4rem",
-            "smpp-icon-button"
+            "settings-page-smpp-icon-button"
           )
         );
         this.settingsPage.appendChild(iconsContainer);

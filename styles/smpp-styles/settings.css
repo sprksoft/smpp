@@ -123,6 +123,7 @@
   outline: none;
   opacity: 1;
   margin-bottom: 1rem !important;
+  width: 18rem;
 }
 
 .enableAnimations .settings-page-slider {
@@ -156,6 +157,7 @@
   font-size: 1.3rem;
   font-weight: 600;
   margin: 0 !important;
+  margin-bottom: 0.5rem !important;
   cursor: default;
 }
 
@@ -164,6 +166,7 @@
   font-weight: 600;
   margin: 0 !important;
   margin-bottom: 0.1rem !important;
+  margin-top: 2rem !important;
   cursor: default;
 }
 
@@ -171,7 +174,6 @@
   font-size: 2rem;
   font-weight: 700;
   margin: 0 !important;
-  margin-bottom: 2rem !important;
   cursor: default;
 }
 
@@ -194,7 +196,6 @@
 
 .settings-page-image {
   border-radius: 0.75rem !important;
-  box-shadow: 0 0 10px var(--darken-background) !important;
 }
 
 .enableAnimations .settings-page-text-input {
@@ -240,7 +241,6 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-bottom: 2rem;
 }
 
 .enableAnimations .settings-page-theme-card {
@@ -280,8 +280,8 @@
   flex-direction: row;
   justify-content: left;
   gap: 0.5rem;
-  margin-bottom: 2rem;
 }
+
 .settings-page-icons-container {
   gap: 1rem;
 }
@@ -302,7 +302,6 @@
   width: 6rem;
   height: 4rem;
   border-radius: 0.5rem;
-  margin-bottom: 2rem;
 }
 
 .settings-page-description {
@@ -311,4 +310,9 @@
   max-width: 18rem;
   font-size: 0.9rem;
   margin-bottom: 0.75rem !important;
+}
+
+.settings-page-icons-container.settings-page-weather-overlay-container {
+  margin-bottom: 1rem;
+  gap: 1.5rem;
 }

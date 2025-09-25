@@ -200,7 +200,7 @@ async function migrateSettings() {
       selection: oldData.overwrite_theme,
       link: oldData.link,
       blur: oldData.blur,
-      showNews: oldData.shownews,
+      news: oldData.news,
       quicks: oldData.quicks,
       type: oldData.weatherSelection,
       amount: oldData.weatherAmount,
@@ -214,7 +214,7 @@ async function migrateSettings() {
       selection: oldData.overwrite_theme,
       link: oldData.link,
       blur: oldData.blur,
-      showNews: oldData.shownews,
+      news: oldData.news,
       username: oldData.name_override,
       quicks: oldData.quicks,
     };
@@ -267,14 +267,14 @@ async function migrateSettingsV2() {
         enableQuickMenuButton: false,
         switchCoursesAndLinks: true,
         icons: {
-          enableHomeIcon: true,
-          enableMailIcon: true,
-          enableNotificationIcon: true,
-          enableSettingsIcon: false,
+          home: true,
+          mail: true,
+          notification: true,
+          settings: false,
         },
       },
       features: {
-        showNews: data.showNews,
+        news: data.news,
         delijn: {
           monochrome: false,
         },
@@ -305,14 +305,14 @@ async function migrateSettingsV2() {
         enableQuickMenuButton: false,
         switchCoursesAndLinks: true,
         icons: {
-          enableHomeIcon: true,
-          enableMailIcon: true,
-          enableNotificationIcon: true,
-          enableSettingsIcon: false,
+          home: true,
+          mail: true,
+          notification: true,
+          settings: false,
         },
       },
       features: {
-        showNews: data.showNews,
+        news: data.news,
         delijn: {
           monochrome: true,
         },

@@ -22,16 +22,19 @@
     "enableQuickMenuButton": "boolean",
     "switchCoursesAndLinks": "boolean",
     "icons": {
-      "enableHomeIcon": "boolean",
-      "enableMailIcon": "boolean",
-      "enableNotificationIcon": "boolean",
-      "enableSettingsIcon": "boolean"
+      "home": "boolean",
+      "mail": "boolean",
+      "notification": "boolean",
+      "settings": "boolean"
     }
   },
   "features": {
-    "showNews": "boolean",
+    "news": "boolean",
     "delijn": {
       "monochrome": "boolean"
+    },
+    "assignments": {
+      "maxAssignments": "number"
     }
   },
   "other": {

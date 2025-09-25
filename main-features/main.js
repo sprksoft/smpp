@@ -79,17 +79,17 @@ function switchCoursesButton() {
 }
 function topNavIcons(data) {
   const notifsButton = document.querySelector(".js-btn-notifs");
-  if (notifsButton && data.enableNotificationIcon) {
+  if (notifsButton && data.notification) {
     const textSpan = notifsButton.querySelector("span");
     notifsButton.innerHTML = notfisSvg;
     notifsButton.appendChild(textSpan);
   }
   const startButton = document.querySelector(".js-btn-home");
-  if (startButton && data.enableHomeIcon) {
+  if (startButton && data.home) {
     startButton.innerHTML = homeiconSvg;
   }
   const messageButton = document.querySelector(".js-btn-messages");
-  if (messageButton && data.enableMailIcon) {
+  if (messageButton && data.mail) {
     const textSpan = messageButton.querySelector("span");
     messageButton.innerHTML = messageSvg;
     messageButton.appendChild(textSpan);
@@ -138,7 +138,7 @@ async function apply() {
 
   await setTheme(data.appearance.theme);
 
-  showNews(data.features.showNews);
+  news(data.features.news);
 
   getThemeQueryString([
     "color-base00",
@@ -203,7 +203,6 @@ async function storeQuickSettings() {
   // Start from old settings
   const data = structuredClone(oldData);
   data.appearance.theme = document.getElementById("theme-selector").value;
-  data.appearance.tabLogo = document.getElementById("smpp-logo-toggle").checked;
   data.appearance.background.link = document.getElementById(
     "background-link-input"
   ).value;
@@ -211,14 +210,7 @@ async function storeQuickSettings() {
   data.appearance.background.blur = Number(
     document.getElementById("background-blur-amount-slider").value
   );
-  data.appearance.weatherOverlay.type = !liteMode
-    ? Number(document.getElementById("weather-overlay-selector").value)
-    : oldData.appearance.weatherOverlay.type;
-  data.appearance.weatherOverlay.amount = !liteMode
-    ? Number(document.getElementById("weather-overlay-amount-slider").value)
-    : oldData.appearance.weatherOverlay.amount;
 
-  data.features.showNews = document.getElementById("news-toggle").checked;
   data.other.performanceMode = document.getElementById(
     "performance-mode-toggle"
   ).checked;
@@ -252,15 +244,16 @@ async function storeQuickSettings() {
       action: "saveBackgroundImage",
       data: imageData,
     });
-    data.appearance.background.selection = 2;
+
+    data.appearance.background.selection = "file";
     data.appearance.background.link = file.name;
   } else {
     if (data.appearance.background.link == "") {
-      data.appearance.background.selection = 0;
+      data.appearance.background.selection = "default";
     } else if (
       data.appearance.background.link != oldData.appearance.background.link
     ) {
-      data.appearance.background.selection = 1;
+      data.appearance.background.selection = "link";
     }
   }
 
@@ -268,33 +261,6 @@ async function storeQuickSettings() {
   await browser.runtime.sendMessage({ action: "setSettingsData", data });
   await loadQuickSettings();
   await apply();
-}
-
-function set_backgroundOLD() {
-  let style = document.documentElement.style;
-  browser.runtime
-    .sendMessage({ action: "getBackgroundImage" })
-    .then((result) => {
-      style.setProperty("--loginpage-image", `none`);
-      style.setProperty("--background-color", `transparent`);
-      let img =
-        document.getElementById("background_image") ||
-        document.createElement("img");
-      img.id = "background_image";
-      img.style.backgroundColor = "var(--color-base00)";
-      img.style.position = "absolute";
-      img.style.top = "0";
-      img.style.left = "0";
-      img.style.width = "101%";
-      img.style.height = "101%";
-      img.style.objectFit = "cover";
-      img.style.zIndex = -1;
-      img.style.display = "block";
-      if (result && result.backgroundImage) img.src = result.backgroundImage;
-      if (!document.getElementById("background_image")) {
-        document.body.appendChild(img);
-      }
-    });
 }
 
 async function setBackground(data) {
@@ -320,15 +286,15 @@ async function setBackground(data) {
     }
   }
   switch (data.background.selection) {
-    case 0: // Default
+    case "default": // Default 0
       displayBackgroundImage(
         getImage("/theme-backgrounds/" + data.theme + ".jpg")
       );
       break;
-    case 1: // Link
+    case "link": // Link 1
       displayBackgroundImage(data.background.link);
       break;
-    case 2: // File
+    case "file": // File 2
       let thing = await browser.runtime.sendMessage({
         action: "getBackgroundImage",
       });
@@ -400,7 +366,7 @@ async function loadQuickSettings() {
   if (data.appearance.background.link) {
     document.getElementById("smpp-link-clear-button").classList.add("active");
   }
-  if (data.appearance.background.selection == 2) {
+  if (data.appearance.background.selection == "file") {
     document.getElementById("backgroundfilebutton").classList.add("active");
   } else {
     document.getElementById("backgroundfilebutton").classList.remove("active");
@@ -411,8 +377,7 @@ async function loadQuickSettings() {
     data.appearance.background.blur;
   document.getElementById("performance-mode-toggle").checked =
     data.other.performanceMode;
-  document.getElementById("smpp-logo-toggle").checked = data.appearance.tabLogo;
-  document.getElementById("news-toggle").checked = data.features.showNews;
+
   document.getElementById(
     "performance-mode-info"
   ).innerHTML = `Toggle performance mode ${
@@ -420,12 +385,7 @@ async function loadQuickSettings() {
       ? "<span class='green-underline'>Enabled</span>"
       : "<span class='red-underline'>Disabled</span>"
   }`;
-  if (!liteMode) {
-    document.getElementById("weather-overlay-selector").value =
-      data.appearance.weatherOverlay.type;
-    document.getElementById("weather-overlay-amount-slider").value =
-      data.appearance.weatherOverlay.amount;
-  }
+
   if (data.appearance.theme == "custom") {
     await createCustomThemeUI();
   }
@@ -457,33 +417,6 @@ function closeQuickSettings() {
     win.classList.add("qs-hidden");
   }
   quickSettingsWindowIsHidden = true;
-}
-
-function createSwitch(id, title) {
-  const switchContainer = document.createElement("div");
-  const switchHeading = document.createElement("h3");
-  switchHeading.className = "quick-settings-title";
-  switchHeading.textContent = title;
-
-  const switchLabel = document.createElement("label");
-  switchLabel.className = "switch";
-
-  const switchInput = document.createElement("input");
-  switchInput.className = "popupinput";
-  switchInput.type = "checkbox";
-  switchInput.id = id;
-
-  const switchSlider = document.createElement("span");
-  switchSlider.className = "slider round";
-
-  switchLabel.appendChild(switchInput);
-  switchLabel.appendChild(switchSlider);
-  if (title != null) {
-    switchContainer.appendChild(switchHeading);
-  }
-  switchContainer.appendChild(switchLabel);
-
-  return switchContainer;
 }
 
 function createBgSelector() {
@@ -573,12 +506,6 @@ function createQuickSettingsHTML(parent) {
   themeContainer.appendChild(themeSelector);
   themeContainer.appendChild(colorPickers);
 
-  const switchesContainer = document.createElement("div");
-  switchesContainer.className = "switches-container";
-
-  switchesContainer.appendChild(createSwitch("news-toggle", "News:"));
-  switchesContainer.appendChild(createSwitch("smpp-logo-toggle", "Logo:"));
-
   const wallpaperTopContainer = document.createElement("div");
 
   const wallpaperHeading = document.createElement("h3");
@@ -613,82 +540,10 @@ function createQuickSettingsHTML(parent) {
   wallpaperTopContainer.appendChild(wallpaperHeading);
   wallpaperTopContainer.appendChild(wallpaperContainer);
 
-  const weatherOverlayTopContainer = document.createElement("div");
-
-  const weatherOverlayHeading = document.createElement("h3");
-  weatherOverlayHeading.className = "quick-settings-title";
-  weatherOverlayHeading.textContent = "Weather overlay:";
-
-  const weatherOverlayContainer = document.createElement("div");
-  weatherOverlayContainer.className = "weather-overlay-container";
-
-  const weatherVerticalText = document.createElement("div");
-  weatherVerticalText.className = "vertical-selector-labels";
-
-  const snowText = document.createElement("span");
-  snowText.textContent = "Snow";
-
-  const realtimeText = document.createElement("span");
-  realtimeText.className = "accent-text";
-  realtimeText.textContent = "Realtime";
-
-  const rainText = document.createElement("span");
-  rainText.textContent = "Rain";
-
-  weatherVerticalText.appendChild(snowText);
-  weatherVerticalText.appendChild(realtimeText);
-  weatherVerticalText.appendChild(rainText);
-
-  const weatherSelectorContainer = document.createElement("div");
-  weatherSelectorContainer.classList.add("weather-overlay-selector-container");
-
-  const weatherSelector = document.createElement("input");
-  weatherSelector.type = "range";
-  weatherSelector.min = "0";
-  weatherSelector.max = "2";
-  weatherSelector.value = "0";
-  weatherSelector.className = "main-slider";
-  weatherSelector.id = "weather-overlay-selector";
-
-  weatherSelectorContainer.appendChild(weatherSelector);
-
-  const weatherSliderContainer = document.createElement("div");
-  weatherSliderContainer.classList.add("weather-amount-slider-container");
-
-  const weatherAmountSliderTitle = document.createElement("h4");
-  weatherAmountSliderTitle.classList.add("weather-amount-slider-title");
-  weatherAmountSliderTitle.textContent = "Amount:";
-
-  const weatherSlider = document.createElement("input");
-  weatherSlider.type = "range";
-  weatherSlider.min = "0";
-  weatherSlider.max = "500";
-  weatherSlider.value = "0";
-  weatherSlider.className = "main-slider";
-  weatherSlider.id = "weather-overlay-amount-slider";
-
-  weatherSliderContainer.appendChild(weatherAmountSliderTitle);
-  weatherSliderContainer.appendChild(weatherSlider);
-
-  weatherOverlayContainer.appendChild(weatherVerticalText);
-  weatherOverlayContainer.appendChild(weatherSelectorContainer);
-  weatherOverlayContainer.appendChild(weatherSliderContainer);
-
-  weatherOverlayTopContainer.appendChild(weatherOverlayHeading);
-  weatherOverlayTopContainer.appendChild(weatherOverlayContainer);
-
   parent.appendChild(performanceModeTooltipLabel);
-  parent.appendChild(performanceModeInfo);
-
   parent.appendChild(themeContainer);
-
   parent.appendChild(wallpaperTopContainer);
-
-  parent.appendChild(switchesContainer);
-
-  if (!liteMode) {
-    parent.appendChild(weatherOverlayTopContainer);
-  }
+  parent.appendChild(performanceModeInfo);
   return parent;
 }
 

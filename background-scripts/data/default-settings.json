@@ -1,46 +1,49 @@
 {
   "profile": {
-    "username": "string",
-    "profilePicture": "string"
+    "username": null,
+    "profilePicture": null
   },
   "appearance": {
-    "theme": null,
-    "tabLogo": ["sm", "smpp"],
+    "theme": "ldev",
+    "tabLogo": "smpp",
     "background": {
-      "selection": ["default", "file", "link"],
-      "link": "string",
-      "blur": "number"
+      "selection": "default",
+      "link": "",
+      "blur": 2
     },
     "weatherOverlay": {
-      "type": ["realtime", "rain", "snow"],
-      "amount": "number"
+      "type": "realtime",
+      "amount": 0
     }
   },
   "topNav": {
-    "enableGOButton": "boolean",
-    "enableSearchButton": "boolean",
-    "enableQuickMenuButton": "boolean",
-    "switchCoursesAndLinks": "boolean",
+    "enableGOButton": false,
+    "enableSearchButton": false,
+    "enableQuickMenuButton": false,
+    "switchCoursesAndLinks": true,
     "icons": {
-      "home": "boolean",
-      "mail": "boolean",
-      "notification": "boolean",
-      "settings": "boolean"
+      "home": true,
+      "mail": true,
+      "notification": true,
+      "settings": false
     }
   },
   "features": {
-    "news": "boolean",
+    "news": true,
     "delijn": {
-      "monochrome": "boolean"
+      "monochrome": false
+    },
+    "assignments": {
+      "maxAssignments": 5
     }
   },
   "other": {
-    "quicks": "array",
-    "performanceMode": "boolean",
+    "quicks": [],
+    "performanceMode": false,
     "dmenu": {
-      "centered": "boolean",
-      "itemScore": "boolean",
-      "toplevelConfig": "boolean"
+      "centered": true,
+      "itemScore": false,
+      "toplevelConfig": false
     }
   }
 }

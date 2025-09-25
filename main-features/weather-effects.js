@@ -17,11 +17,11 @@ function set_snow_level(count) {
     flake.classList = "snowflake";
     flake.src =
       currentTheme == "pink"
-        ? "https://www.svgrepo.com/show/395999/cherry-blossom.svg"
-        : "https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/snowflakeworking.svg";
+        ? getImage("/icons/weather-overlay/blossom.svg")
+        : getImage("/icons/weather-overlay/snowflake.svg");
 
     flake.style = ` left: ${Math.floor(
-      Math.random() * 100,
+      Math.random() * 100
     )}%; animation: snowflake_fall_${Math.floor(Math.random() * 3)} ${
       Math.floor(Math.random() * 7) + 10
     }s ease-in-out infinite; animation-delay: ${
@@ -40,8 +40,7 @@ function set_rain_level(count) {
   for (let i = 0; i < count; i++) {
     let raindrop = document.createElement("img");
     raindrop.classList.add("raindrop");
-    raindrop.src =
-      "https://raw.githubusercontent.com/NightFlavor/smpp-images/main/raindrop.svg";
+    raindrop.src = getImage("/icons/weather-overlay/raindrop.svg");
     raindrop.style.left = `${Math.random() * 100}%`;
     raindrop.style.animation = `raindrop_fall ${
       Math.random() * 2 + 2
@@ -63,16 +62,16 @@ function applyWeatherEffects(weatherSelector, weatherAmount) {
   let rainDiv = document.getElementById("raindrops");
   let snowDiv = document.getElementById("snowflakes");
   switch (weatherSelector) {
-    case 0:
+    case "snow":
       set_snow_level(weatherAmount);
       if (rainDiv) rainDiv.remove();
       break;
-    case 1:
+    case "realtime":
       if (rainDiv) rainDiv.remove();
       if (snowDiv) snowDiv.remove();
       set_overlay_based_on_conditions(weatherAmount);
       break;
-    case 2:
+    case "rain":
       set_rain_level(weatherAmount);
       if (snowDiv) snowDiv.remove();
       break;
