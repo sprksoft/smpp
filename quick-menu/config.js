@@ -22,14 +22,16 @@ async function getDMenuOptionsForSettings(toplevel) {
   });
   let options = [];
   for (let cat of Object.keys(template)) {
-    options = options.concat(gatherOptions(template[cat], toplevel ? "config" : null));
+    options = options.concat(
+      gatherOptions(template[cat], toplevel ? "config" : null)
+    );
   }
   return options;
 }
 
 /// Get the full option path from a beautified option path.
-// dmenu.item_score => other.dmenu.item_score
-// config.dmenu.item_score => other.dmenu.item_score
+// dmenu.itemScore => other.dmenu.itemScore
+// config.dmenu.itemScore => other.dmenu.itemScore
 function getFullOptPath(template, optName) {
   if (optName.startsWith("config.")) {
     optName = optName.substring("config.".length);
@@ -37,10 +39,12 @@ function getFullOptPath(template, optName) {
   const first = optName.split(".")[0];
   for (let key of Object.keys(template)) {
     if (template[key][first] !== undefined) {
-      return key+"."+optName;
+      return key + "." + optName;
     }
   }
-  console.error(`Was not able to convert the optName '${optName}' to full because it was not found in the template json (returning an option with no category)`);
+  console.error(
+    `Was not able to convert the optName '${optName}' to full because it was not found in the template json (returning an option with no category)`
+  );
   return optName;
 }
 
@@ -92,7 +96,7 @@ async function dmenuEditConfig(path) {
           setSettingByPath(configPath, false);
         }
       },
-      label,
+      label
     );
   } else if (template == "number") {
     dmenu(
@@ -100,7 +104,7 @@ async function dmenuEditConfig(path) {
       function (cmd, shift) {
         setSettingByPath(configPath, new Number(cmd));
       },
-      label,
+      label
     );
   } else if (Array.isArray(template)) {
     dmenu(
@@ -108,20 +112,20 @@ async function dmenuEditConfig(path) {
       function (cmd, shift) {
         setSettingByPath(configPath, cmd);
       },
-      label,
+      label
     );
   } else {
     console.error(
       "Invalid template type: '" +
         template +
-        "' Falling back to 'string' template type",
+        "' Falling back to 'string' template type"
     );
     dmenu(
       [],
       function (cmd, shift) {
         setSettingByPath(configPath, cmd);
       },
-      label,
+      label
     );
   }
 }

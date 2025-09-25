@@ -44,7 +44,7 @@ class DMenu {
     itemList,
     endFunc = undefined,
     title = "dmenu:",
-    openerEl = undefined,
+    openerEl = undefined
   ) {
     this.endFunc = endFunc;
     this.openerEl = openerEl;
@@ -144,7 +144,7 @@ class DMenu {
       }
       items.push({ score: score, htmlNode: node });
 
-      if (dmenuConfig.item_score) {
+      if (dmenuConfig.itemScore) {
         node.getElementsByClassName("dmenu-score")[0].innerText = score;
       }
     }
@@ -220,7 +220,7 @@ class DMenu {
       row.getElementsByClassName("dmenu-meta")[0].innerText = meta;
     }
 
-    if (dmenuConfig.item_score) {
+    if (dmenuConfig.itemScore) {
       row.getElementsByClassName("dmenu-score")[0].innerText = "0";
     }
 
@@ -282,7 +282,7 @@ function dmenu(
   itemList,
   endFunc = undefined,
   title = "dmenu:",
-  opener = undefined,
+  opener = undefined
 ) {
   if (active_dmenu !== null && active_dmenu.isOpen()) {
     active_dmenu.close();

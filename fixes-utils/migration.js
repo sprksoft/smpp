@@ -44,7 +44,7 @@ async function migrateDelijnData() {
 
 async function migratePlantData() {
   let oldData = JSON.parse(
-    window.localStorage.getItem("current_plant_conditions"),
+    window.localStorage.getItem("current_plant_conditions")
   );
   await browser.runtime.sendMessage({
     action: "setPlantAppData",
@@ -195,27 +195,27 @@ async function migrateSettings() {
   if (!liteMode) {
     quickSettings = {
       theme: oldData.profile,
-      enableSMPPLogo: oldData.smpp_logo,
-      enablePerfomanceMode: !oldData.enableanimations,
-      backgroundSelection: oldData.overwrite_theme,
-      backgroundLink: oldData.backgroundlink,
-      backgroundBlurAmount: oldData.blur,
+      tabLogo: oldData.smpp_logo,
+      performanceMode: !oldData.enableanimations,
+      selection: oldData.overwrite_theme,
+      link: oldData.link,
+      blur: oldData.blur,
       showNews: oldData.shownews,
       quicks: oldData.quicks,
-      weatherOverlaySelection: oldData.weatherSelection,
-      weatherOverlayAmount: oldData.weatherAmount,
-      customUserName: oldData.name_override,
+      type: oldData.weatherSelection,
+      amount: oldData.weatherAmount,
+      username: oldData.name_override,
     };
   } else {
     quickSettings = {
       theme: oldData.profile,
-      enableSMPPLogo: oldData.smpp_logo,
-      enablePerfomanceMode: !oldData.enableanimations,
-      backgroundSelection: oldData.overwrite_theme,
-      backgroundLink: oldData.backgroundlink,
-      backgroundBlurAmount: oldData.blur,
+      tabLogo: oldData.smpp_logo,
+      performanceMode: !oldData.enableanimations,
+      selection: oldData.overwrite_theme,
+      link: oldData.link,
+      blur: oldData.blur,
       showNews: oldData.shownews,
-      customUserName: oldData.name_override,
+      username: oldData.name_override,
       quicks: oldData.quicks,
     };
   }
@@ -244,20 +244,20 @@ async function migrateSettingsV2() {
   if (!liteMode) {
     newSettingsData = {
       profile: {
-        customUserName: data.customUserName,
-        enableOriginalPFP: false,
+        username: data.username,
+        profilePicture: false,
       },
       appearance: {
         theme: data.theme,
-        enableSMPPLogo: data.enableSMPPLogo,
+        tabLogo: data.tabLogo,
         background: {
-          backgroundSelection: data.backgroundSelection,
-          backgroundLink: data.backgroundLink,
-          backgroundBlurAmount: data.backgroundBlurAmount,
+          selection: data.selection,
+          link: data.link,
+          blur: data.blur,
         },
         weatherOverlay: {
-          weatherOverlaySelection: data.weatherOverlaySelection,
-          weatherOverlayAmount: data.weatherOverlayAmount,
+          type: data.type,
+          amount: data.amount,
         },
       },
       topNav: {
@@ -281,22 +281,22 @@ async function migrateSettingsV2() {
       },
       other: {
         quicks: data.quicks,
-        enablePerfomanceMode: data.enablePerfomanceMode,
+        performanceMode: data.performanceMode,
       },
     };
   } else {
     newSettingsData = {
       profile: {
-        customUserName: data.customUserName,
-        enableOriginalPFP: false,
+        username: data.username,
+        profilePicture: false,
       },
       appearance: {
         theme: data.theme,
-        enableSMPPLogo: data.enableSMPPLogo,
+        tabLogo: data.tabLogo,
         background: {
-          backgroundSelection: data.backgroundSelection,
-          backgroundLink: data.backgroundLink,
-          backgroundBlurAmount: data.backgroundBlurAmount,
+          selection: data.selection,
+          link: data.link,
+          blur: data.blur,
         },
       },
       topNav: {
@@ -319,7 +319,7 @@ async function migrateSettingsV2() {
       },
       other: {
         quicks: data.quicks,
-        enablePerfomanceMode: data.enablePerfomanceMode,
+        performanceMode: data.performanceMode,
       },
     };
   }

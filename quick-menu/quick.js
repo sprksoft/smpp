@@ -83,10 +83,10 @@ function add_quick_interactive() {
           }
           add_quick(name, value);
         },
-        "value:",
+        "value:"
       );
     },
-    "name:",
+    "name:"
   );
 }
 
@@ -97,7 +97,7 @@ function remove_quick_interactive() {
     function (name, shift) {
       remove_quick(name);
     },
-    "name:",
+    "name:"
   );
 }
 
@@ -143,7 +143,7 @@ async function fetch_vakken() {
 function scrape_goto() {
   goto_items = [];
   let goto_items_html = document.querySelectorAll(
-    ".js-shortcuts-container > a",
+    ".js-shortcuts-container > a"
   );
   for (let i = 0; i < goto_items_html.length; i++) {
     const item = goto_items_html[i];
@@ -190,8 +190,8 @@ async function do_qm(opener = "") {
             action: "setSettingsCategory",
             category: "other.dmenu",
             data: {
-              item_score: false,
-            }
+              itemScore: false,
+            },
           });
           return;
         case "set background":
@@ -201,7 +201,7 @@ async function do_qm(opener = "") {
               set_background(url);
               store_background(url);
             },
-            "bg url:",
+            "bg url:"
           );
           return;
         case "config":
@@ -210,7 +210,7 @@ async function do_qm(opener = "") {
             function (cmd, shift) {
               dmenuEditConfig(cmd);
             },
-            "config: ",
+            "config: "
           );
           return;
         case "quick add":
@@ -276,7 +276,7 @@ async function do_qm(opener = "") {
       }
     },
     "quick:",
-    (opener = opener),
+    (opener = opener)
   );
 }
 

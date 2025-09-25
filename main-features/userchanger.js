@@ -40,7 +40,7 @@ async function saveCustomName(name) {
   const data = await browser.runtime.sendMessage({
     action: "getSettingsData",
   });
-  data.profile.customUserName = name;
+  data.profile.username = name;
   await browser.runtime.sendMessage({
     action: "setSettingsData",
     data: data,

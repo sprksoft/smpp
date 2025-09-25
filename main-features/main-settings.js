@@ -1,13 +1,12 @@
 class SettingsWindow extends BaseWindow {
   settingsSideBarCategories = {
-    test: { name: "Test", icon: "/settings-icons/settingsAppearance.png" },
+    test: { name: "Test" },
     appearance: {
       name: "Appearance",
-      icon: "/settings-icons/settingsAppearance.png",
     },
-    topNav: { name: "Navigation", icon: "settingsTopNav.png" },
-    features: { name: "Apps", icon: "settingsFeatures.png" },
-    other: { name: "Other", icon: "settingsOther.png" },
+    topNav: { name: "Navigation" },
+    features: { name: "Apps" },
+    other: { name: "Other" },
   };
   currentPage = "profile";
 
@@ -81,7 +80,7 @@ class SettingsWindow extends BaseWindow {
     let profileSettingsLabelTitle = document.createElement("h2");
     profileSettingsLabelTitle.classList.add("profile-settings-label-title");
     profileSettingsLabelTitle.innerText = String(
-      data.profile.customUserName || getOriginalName()
+      data.profile.username || getOriginalName()
     ).split(" ")[0];
     let profileSettingsLabelDescription = document.createElement("p");
     profileSettingsLabelDescription.classList.add(
@@ -106,9 +105,7 @@ class SettingsWindow extends BaseWindow {
     categoryButton.innerText = this.settingsSideBarCategories[category].name;
     let categoryButtonIcon = document.createElement("img");
     categoryButtonIcon.classList.add("category-button-icon");
-    categoryButtonIcon.src = getImage(
-      this.settingsSideBarCategories[category].icon
-    );
+    categoryButtonIcon.src = getImage("settings-icons/" + category + ".jpg");
     categoryButton.prepend(categoryButtonIcon);
     return categoryButton;
   }
@@ -290,8 +287,8 @@ class SettingsWindow extends BaseWindow {
           createDescription("Personalize your backdrop with a custom image.")
         );
 
-        let backgroundSelectionContainer = document.createElement("div");
-        backgroundSelectionContainer.classList.add(
+        let selectionContainer = document.createElement("div");
+        selectionContainer.classList.add(
           "settings-page-background-selection-container"
         );
 
@@ -331,12 +328,12 @@ class SettingsWindow extends BaseWindow {
           backgroundFileInput.click();
         });
 
-        backgroundSelectionContainer.appendChild(linkInput);
-        backgroundSelectionContainer.appendChild(fileBtn);
-        backgroundSelectionContainer.appendChild(clearButton);
-        backgroundSelectionContainer.appendChild(backgroundFileInput);
+        selectionContainer.appendChild(linkInput);
+        selectionContainer.appendChild(fileBtn);
+        selectionContainer.appendChild(clearButton);
+        selectionContainer.appendChild(backgroundFileInput);
 
-        this.settingsPage.appendChild(backgroundSelectionContainer);
+        this.settingsPage.appendChild(selectionContainer);
 
         this.settingsPage.appendChild(createSectionTitle("Background blur"));
         this.settingsPage.appendChild(
@@ -374,14 +371,13 @@ class SettingsWindow extends BaseWindow {
           createDescription("Add dynamic weather visuals.")
         );
 
-        let iconsContainer = document.createElement("div");
-        iconsContainer.classList.add("settings-page-icons-container");
-
         this.settingsPage.appendChild(createSectionTitle("Icon"));
         this.settingsPage.appendChild(
           createDescription("Choose the icon displayed in your browser tab.")
         );
 
+        let iconsContainer = document.createElement("div");
+        iconsContainer.classList.add("settings-page-icons-container");
         iconsContainer.appendChild(
           createImageButton(
             "/icons/sm-icon.svg",
@@ -392,7 +388,7 @@ class SettingsWindow extends BaseWindow {
         );
         iconsContainer.appendChild(
           createImageButton(
-            "/icons/smpp-icon128.png",
+            "/icons/smpp128.png",
             "4rem",
             "4rem",
             "smpp-icon-button"

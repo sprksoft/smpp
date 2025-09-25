@@ -24,7 +24,7 @@ async function setTheme(themeName) {
     Object.keys(themeData).forEach((key) => {
       style.setProperty("--" + key.replace("_", "-"), themeData[key]);
     });
-    if (settingsData.backgroundSelection == 0) {
+    if (settingsData.selection == 0) {
       style.setProperty("--loginpage-image", "url(https://about:blank)");
     }
   }

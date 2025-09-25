@@ -72,9 +72,9 @@
     }
   ],
   "icons": {
-    "16": "media/icons/smpp-icon16.png",
-    "48": "media/icons/smpp-icon48.png",
-    "128": "media/icons/smpp-icon128.png"
+    "16": "media/icons/smpp16.png",
+    "48": "media/icons/smpp48.png",
+    "128": "media/icons/smpp128.png"
   },
   "browser_specific_settings": {
     "gecko": {
