@@ -105,7 +105,7 @@ class SettingsWindow extends BaseWindow {
     categoryButton.innerText = this.settingsSideBarCategories[category].name;
     let categoryButtonIcon = document.createElement("img");
     categoryButtonIcon.classList.add("category-button-icon");
-    categoryButtonIcon.src = getImage("settings-icons/" + category + ".jpg");
+    categoryButtonIcon.src = getImage("settings-icons/" + category + ".webp");
     categoryButton.prepend(categoryButtonIcon);
     return categoryButton;
   }
