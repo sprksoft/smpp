@@ -110,10 +110,6 @@
   top: 1rem;
 }
 
-.switch.settings-page-button {
-  margin-bottom: 1rem !important;
-}
-
 .settings-page-slider {
   -webkit-appearance: none;
   appearance: none;
@@ -155,7 +151,7 @@
 
 .settings-page-small-title {
   font-size: 1.3rem;
-  font-weight: 600;
+  font-weight: 500;
   margin: 0 !important;
   margin-bottom: 0.5rem !important;
   cursor: default;
@@ -175,23 +171,6 @@
   font-weight: 700;
   margin: 0 !important;
   cursor: default;
-}
-
-.enableAnimations .settings-page-image-button-wrapper {
-  transition: all 0.1s ease-in-out;
-}
-.settings-page-image-button-wrapper {
-  margin: 0 !important;
-}
-
-.settings-page-image-button-wrapper:active {
-  scale: 0.9;
-}
-
-.settings-page-image-button-wrapper > img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 
 .settings-page-image {
@@ -215,25 +194,46 @@
   border-color: var(--color-base03) !important;
 }
 
+.enableAnimations .settings-page-image-button-wrapper {
+  transition: all 0.1s ease-in-out;
+}
+
+.settings-page-image-button-wrapper:active {
+  scale: 0.9;
+}
+
+.settings-page-image-button-wrapper > img {
+  width: 100%;
+  height: 100%;
+  border-radius: 0px !important;
+  object-fit: cover;
+}
+
 .settings-page-image-button-wrapper {
   display: inline-block;
   position: relative;
   cursor: pointer;
-  width: 80px; /* default size, can be overridden inline */
+  margin: 0 !important;
+  overflow: hidden;
+  width: 80px;
   height: 80px;
+  border-radius: 1.5rem;
+  border: 0.5rem solid transparent;
 }
 
-/* Hide the actual checkbox */
 .settings-page-image-button-wrapper input[type="checkbox"] {
   display: none;
 }
 
-/* The visible image */
+.settings-page-image-button-wrapper:has(input:checked) {
+  border-color: var(--color-accent) !important;
+}
+
 .settings-page-image-wrapper img.settings-page-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 8px; /* optional rounded corners */
+  border-radius: 8px;
   transition: transform 0.2s, filter 0.2s, outline 0.2s;
 }
 
@@ -261,7 +261,8 @@
   border-radius: 1rem !important;
 }
 
-.settings-page-theme-card:hover {
+.settings-page-theme-card:hover,
+.settings-page-theme-card.active {
   cursor: pointer;
   border-color: var(--hover-border);
   background-color: var(--hover-color) !important;
@@ -315,4 +316,37 @@
 .settings-page-icons-container.settings-page-weather-overlay-container {
   margin-bottom: 1rem;
   gap: 1.5rem;
+}
+
+.settings-page-button-label {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  align-items: center;
+}
+
+.settings-page-button-label span {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.settings-page-button-label-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.4rem;
+  font-weight: 400;
+  margin: 0 !important;
+  margin-bottom: 1rem !important;
+  height: fit-content !important;
+  background-color: var(--color-base01) !important;
+  border-radius: 1000px;
+  padding: 0.75rem 0.75rem 0.75rem 1.5rem;
+  max-width: 30rem;
+}
+
+.settings-page-button-label-container:first-of-type {
+  margin-top: 0rem !important;
 }

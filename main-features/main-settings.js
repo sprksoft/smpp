@@ -153,6 +153,20 @@ class SettingsWindow extends BaseWindow {
       return outerSwitch;
     }
 
+    function createButtonWithLabel(id, text) {
+      let container = document.createElement("label");
+      container.classList.add("settings-page-button-label-container");
+      container.for = id;
+
+      let label = document.createElement("span");
+      label.classList.add("settings-page-button-label");
+      label.innerText = text;
+      let button = createButton(id);
+      container.appendChild(label);
+      container.appendChild(button);
+      return container;
+    }
+
     function createImageButton(src, width = "80px", height = "80px", id) {
       let wrapper = document.createElement("label");
       wrapper.classList.add("settings-page-image-button-wrapper");
@@ -161,6 +175,7 @@ class SettingsWindow extends BaseWindow {
 
       let input = document.createElement("input");
       input.type = "checkbox";
+
       if (id) input.id = id;
 
       let image = document.createElement("img");
@@ -174,6 +189,23 @@ class SettingsWindow extends BaseWindow {
       return wrapper;
     }
 
+    function createImageButtonWithLabel(
+      src,
+      text,
+      width = "80px",
+      height = "80px",
+      id
+    ) {
+      let container = document.createElement("label");
+      container.classList.add("settings-page-button-label");
+      container.for = id;
+      let imageButton = createImageButton(src, width, height, id);
+      let imageButtonLabel = document.createElement("span");
+      imageButtonLabel.innerText = text;
+      container.appendChild(imageButton);
+      container.appendChild(imageButtonLabel);
+      return container;
+    }
     function createSlider(min, max, id) {
       let slider = document.createElement("input");
       slider.id = id;
@@ -215,6 +247,15 @@ class SettingsWindow extends BaseWindow {
       case "profile":
         break;
       case "test":
+        this.settingsPage.appendChild(
+          createImageButtonWithLabel(
+            "/theme-backgrounds/birb.jpg",
+            "aaaaa",
+            "50px",
+            "50px",
+            "profile-imgbtnaa"
+          )
+        );
         this.settingsPage.appendChild(createSmallTitle("Profile Label"));
         this.settingsPage.appendChild(createButton("profile-btn1"));
         this.settingsPage.appendChild(
@@ -357,6 +398,7 @@ class SettingsWindow extends BaseWindow {
           "100%",
           "100%"
         );
+
         blurredImage.style.filter = "blur(2px)";
         let blurredImageContainer = document.createElement("div");
         blurredImageContainer.classList.add("blurred-image-container");
@@ -377,26 +419,29 @@ class SettingsWindow extends BaseWindow {
           "settings-page-weather-overlay-container"
         );
         weatherIconsContainer.appendChild(
-          createImageButton(
-            "/icons/weather-overlay/raincloud.svg",
-            "4rem",
-            "4rem",
+          createImageButtonWithLabel(
+            "/icons/weather-overlay/raindropfancy.svg",
+            "Rain",
+            "5rem",
+            "5rem",
             "settings-page-raindrop-button"
           )
         );
         weatherIconsContainer.appendChild(
-          createImageButton(
-            "/icons/weather-overlay/dynamic.svg",
-            "4rem",
-            "4rem",
+          createImageButtonWithLabel(
+            "/icons/weather-overlay/realtimefancy.svg",
+            "Realtime",
+            "5rem",
+            "5rem",
             "settings-page-realtime-button"
           )
         );
         weatherIconsContainer.appendChild(
-          createImageButton(
-            "/icons/weather-overlay/snowcloud.svg",
-            "4rem",
-            "4rem",
+          createImageButtonWithLabel(
+            "/icons/weather-overlay/snowflakefancy.svg",
+            "Snow",
+            "5rem",
+            "5rem",
             "settings-page-snow-button"
           )
         );
@@ -417,22 +462,85 @@ class SettingsWindow extends BaseWindow {
         iconsContainer.appendChild(
           createImageButton(
             "/icons/sm-icon.svg",
-            "4rem",
-            "4rem",
+            "5rem",
+            "5rem",
             "settings-page-default-icon-button"
           )
         );
         iconsContainer.appendChild(
           createImageButton(
             "/icons/smpp128.png",
-            "4rem",
-            "4rem",
+            "5rem",
+            "5rem",
             "settings-page-smpp-icon-button"
           )
         );
         this.settingsPage.appendChild(iconsContainer);
         break;
       case "topNav":
+        this.settingsPage.appendChild(createMainTitle("Navigation"));
+        this.settingsPage.appendChild(createSectionTitle("Buttons"));
+        this.settingsPage.appendChild(
+          createDescription(
+            "Choose which buttons you want to see in the top navigation."
+          )
+        );
+        if (!liteMode) {
+          this.settingsPage.appendChild(
+            createButtonWithLabel(
+              "settings-page-global-chat-button",
+              "Global Chat"
+            )
+          );
+        }
+
+        this.settingsPage.appendChild(
+          createButtonWithLabel("settings-page-search-button", "Search")
+        );
+
+        this.settingsPage.appendChild(
+          createButtonWithLabel("settings-page-quick-menu-button", "Quick Menu")
+        );
+
+        this.settingsPage.appendChild(
+          createButtonWithLabel(
+            "settings-page-swap-courses-button",
+            "Swap courses/links"
+          )
+        );
+
+        if (document.body.classList.contains("go")) {
+          this.settingsPage.appendChild(
+            createButtonWithLabel("settings-page-go-button", "GO")
+          );
+        }
+
+        this.settingsPage.appendChild(createSectionTitle("Icons"));
+        this.settingsPage.appendChild(
+          createDescription(
+            "Choose witch buttons you want to replace with icons."
+          )
+        );
+
+        this.settingsPage.appendChild(
+          createButtonWithLabel("settings-page-home-icon-button", "Home")
+        );
+        this.settingsPage.appendChild(
+          createButtonWithLabel("settings-page-mail-icon-button", "Mail")
+        );
+        this.settingsPage.appendChild(
+          createButtonWithLabel(
+            "settings-page-notifications-icon-button",
+            "Notifications"
+          )
+        );
+        this.settingsPage.appendChild(
+          createButtonWithLabel(
+            "settings-page-settings-icon-button",
+            "Settings"
+          )
+        );
+
         break;
       case "features":
         break;

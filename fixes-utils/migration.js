@@ -269,7 +269,7 @@ async function migrateSettingsV2() {
         icons: {
           home: true,
           mail: true,
-          notification: true,
+          notifications: true,
           settings: false,
         },
       },
@@ -307,7 +307,7 @@ async function migrateSettingsV2() {
         icons: {
           home: true,
           mail: true,
-          notification: true,
+          notifications: true,
           settings: false,
         },
       },

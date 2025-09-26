@@ -18,13 +18,14 @@
   },
   "topNav": {
     "enableGOButton": false,
+    "enableGCButton": true,
     "enableSearchButton": false,
     "enableQuickMenuButton": false,
     "switchCoursesAndLinks": true,
     "icons": {
       "home": true,
       "mail": true,
-      "notification": true,
+      "notifications": true,
       "settings": false
     }
   },

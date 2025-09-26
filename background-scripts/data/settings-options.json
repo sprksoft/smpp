@@ -24,7 +24,7 @@
     "icons": {
       "home": "boolean",
       "mail": "boolean",
-      "notification": "boolean",
+      "notifications": "boolean",
       "settings": "boolean"
     }
   },

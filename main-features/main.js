@@ -79,7 +79,7 @@ function switchCoursesButton() {
 }
 function topNavIcons(data) {
   const notifsButton = document.querySelector(".js-btn-notifs");
-  if (notifsButton && data.notification) {
+  if (notifsButton && data.notifications) {
     const textSpan = notifsButton.querySelector("span");
     notifsButton.innerHTML = notfisSvg;
     notifsButton.appendChild(textSpan);
