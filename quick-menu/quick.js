@@ -173,7 +173,7 @@ async function do_qm(opener = "") {
       "dizzy",
       "breakdmenu",
     ]);
-
+  
   if (dmenuConfig.toplevelConfig) {
     cmd_list = cmd_list.concat(await getDMenuOptionsForSettings(true));
   }

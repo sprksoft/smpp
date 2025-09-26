@@ -9,16 +9,20 @@ async function fixupBrokenConfig(config, defaults = null) {
       category: "other.dmenu",
     });
   }
+  if (!config) {
+    config = {}
+  }
 
   for (let key of Object.keys(defaults)) {
     if (typeof defaults[key] === "object" && !Array.isArray(defaults[key])) {
-      fixupBrokenConfig(config[key], defaults[key]);
+      config[key] = fixupBrokenConfig(config[key], defaults[key]);
     } else {
       if (config[key] === undefined) {
         config[key] = defaults[key];
       }
     }
   }
+  return config;
 }
 
 // Called by apply
@@ -27,7 +31,14 @@ async function reloadDMenuConfig() {
     action: "getSettingsCategory",
     category: "other.dmenu",
   });
-  await fixupBrokenConfig(dmenuConfig);
+  dmenuConfig = await fixupBrokenConfig(dmenuConfig);
+}
+
+// Load the config if it wasn't already loaded
+async function loadDMenuConfig() {
+  if (!dmenuConfig) {
+    await reloadDMenuConfig();
+  }
 }
 
 class DMenu {
