@@ -74,6 +74,7 @@ async function setSettingByPath(path, value) {
 }
 
 async function dmenuEditConfig(path) {
+  console.log("aaaa");
   const templates = await browser.runtime.sendMessage({
     action: "getSettingsOptions",
   });
@@ -102,6 +103,10 @@ async function dmenuEditConfig(path) {
     dmenu(
       [],
       function (cmd, shift) {
+        if (configPath == "appearance.background.blur" && cmd == "song 2") {
+          openURL("https://www.youtube.com/watch?v=Bz4l9_bzfZM", true);
+          return;
+        }
         setSettingByPath(configPath, new Number(cmd));
       },
       label

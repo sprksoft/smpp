@@ -206,6 +206,7 @@ class SettingsWindow extends BaseWindow {
       container.appendChild(imageButtonLabel);
       return container;
     }
+
     function createSlider(min, max, id) {
       let slider = document.createElement("input");
       slider.id = id;
@@ -214,6 +215,30 @@ class SettingsWindow extends BaseWindow {
       slider.max = max;
       slider.classList.add("settings-page-slider");
       return slider;
+    }
+
+    function createLabeledSlider(min, max, id, text, showValue = true) {
+      let container = document.createElement("div");
+      container.classList.add("settings-page-slider-container");
+      let textContainer = document.createElement("span");
+      textContainer.classList.add("settings-page-slider-label");
+      textContainer.innerText = text;
+      let slider = createSlider(min, max, id);
+      slider.classList.add("settings-page-labeled-slider");
+      slider.addEventListener("input", (event) => {
+        document.querySelector(
+          "#" + event.target.id + " ~ .settings-page-live-value"
+        ).innerText = event.target.value;
+      });
+      let currentValue = document.createElement("span");
+      currentValue.classList.add("settings-page-live-value");
+      currentValue.innerText = min;
+
+      container.appendChild(textContainer);
+      container.appendChild(slider);
+      if (showValue) container.appendChild(currentValue);
+
+      return container;
     }
 
     function createTextInput(id) {
@@ -412,7 +437,6 @@ class SettingsWindow extends BaseWindow {
         this.settingsPage.appendChild(
           createDescription("Add dynamic weather visuals.")
         );
-        this.settingsPage.appendChild(createSmallTitle("Type"));
         let weatherIconsContainer = document.createElement("div");
         weatherIconsContainer.classList.add(
           "settings-page-icons-container",
@@ -447,9 +471,14 @@ class SettingsWindow extends BaseWindow {
         );
         this.settingsPage.appendChild(weatherIconsContainer);
 
-        this.settingsPage.appendChild(createSmallTitle("Amount"));
         this.settingsPage.appendChild(
-          createSlider(0, 500, "settings-page-weather-overlay-slider")
+          createLabeledSlider(
+            0,
+            500,
+            "settings-page-weather-overlay-slider",
+            "Amount",
+            false
+          )
         );
 
         this.settingsPage.appendChild(createSectionTitle("Icon"));
@@ -543,8 +572,61 @@ class SettingsWindow extends BaseWindow {
 
         break;
       case "features":
+        this.settingsPage.appendChild(createMainTitle("Apps"));
+        this.settingsPage.appendChild(createSectionTitle("News"));
+        this.settingsPage.appendChild(
+          createDescription("Change the homepage news configuration.")
+        );
+        this.settingsPage.appendChild(
+          createButtonWithLabel("settings-page-shownews-button", "Show news")
+        );
+        this.settingsPage.appendChild(createSectionTitle("De Lijn"));
+        this.settingsPage.appendChild(
+          createDescription("Change the De Lijn app configuration.")
+        );
+        this.settingsPage.appendChild(
+          createButtonWithLabel(
+            "settings-page-delijn-monochrome-button",
+            "Monochrome"
+          )
+        );
+        this.settingsPage.appendChild(
+          createLabeledSlider(
+            1,
+            10,
+            "settings-page-max-buses-slider",
+            "Max buses"
+          )
+        );
+
+        this.settingsPage.appendChild(createSectionTitle("Assignments"));
+        this.settingsPage.appendChild(
+          createDescription("Change the assignments app configuration.")
+        );
+        this.settingsPage.appendChild(
+          createLabeledSlider(
+            1,
+            10,
+            "settings-page-max-assignments-slider",
+            "Max assignments"
+          )
+        );
+
         break;
       case "other":
+        this.settingsPage.appendChild(createMainTitle("Other"));
+        this.settingsPage.appendChild(createSectionTitle("Performance"));
+        this.settingsPage.appendChild(
+          createDescription(
+            "Disables animations for better performance on low end devices."
+          )
+        );
+        this.settingsPage.appendChild(
+          createButtonWithLabel(
+            "settings-page-performance-mode-button",
+            "Performance mode"
+          )
+        );
         break;
       default:
         break;

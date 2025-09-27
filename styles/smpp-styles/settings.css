@@ -113,7 +113,7 @@
 .settings-page-slider {
   -webkit-appearance: none;
   appearance: none;
-  height: 1.25rem;
+  height: 1.5rem;
   border-radius: 1000rem;
   background: var(--color-base01);
   outline: none;
@@ -125,10 +125,16 @@
 .enableAnimations .settings-page-slider {
   transition: opacity 0.2s;
 }
+.settings-page-image-button-wrapper:has(#settings-page-raindrop-button:checked),
+.settings-page-image-button-wrapper:has(#settings-page-realtime-button:checked),
+.settings-page-image-button-wrapper:has(#settings-page-snow-button:checked) {
+  border-color: transparent !important;
+  background-color: var(--color-base02);
+}
 
 .settings-page-slider::-webkit-slider-thumb {
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 1.5rem;
+  height: 1.5rem;
   border-radius: 50%;
   background: var(--color-accent) !important;
   border-color: transparent;
@@ -139,8 +145,8 @@
 }
 
 .settings-page-slider::-moz-range-thumb {
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 1.5rem;
+  height: 1.5rem;
   border-radius: 50%;
   background: var(--color-accent) !important;
   border-color: transparent;
@@ -314,20 +320,28 @@
 }
 
 .settings-page-icons-container.settings-page-weather-overlay-container {
-  margin-bottom: 1rem;
-  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  background-color: var(--color-base01);
+  width: fit-content;
+  width: 20rem;
+  border-radius: 2rem;
+  padding: 0.75rem 1rem;
+  justify-content: space-between;
 }
 
 .settings-page-button-label {
   display: flex;
+  gap: 0.25rem;
   flex-direction: column;
   width: fit-content;
   align-items: center;
 }
 
-.settings-page-button-label span {
-  font-weight: 600;
-  font-size: 1.1rem;
+.settings-page-button-label,
+.settings-page-slider-label {
+  font-size: 1.4rem;
+  font-weight: 400;
+  margin: 0;
 }
 
 .settings-page-button-label-container {
@@ -349,4 +363,55 @@
 
 .settings-page-button-label-container:first-of-type {
   margin-top: 0rem !important;
+}
+
+.settings-page-slider.settings-page-labeled-slider::-webkit-slider-thumb {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+.settings-page-slider.settings-page-labeled-slider::-moz-range-thumb {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+.settings-page-slider-label {
+  flex-grow: 1;
+}
+
+.settings-page-live-value {
+  flex-grow: 0;
+  width: 1.5rem;
+  font-size: 1.4rem;
+  font-weight: 200;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.settings-page-slider.settings-page-labeled-slider {
+  width: 12.5rem;
+  background-color: var(--color-base02);
+  margin: 0 !important;
+  height: 1.75rem;
+}
+
+.settings-page-slider-container {
+  display: flex;
+  flex-direction: row;
+  height: 4rem !important;
+  gap: 0.25rem;
+  padding: 1rem 1.25rem 1rem 1.5rem;
+  background-color: var(--color-base01);
+  max-width: 30rem;
+  align-items: center;
+  margin: 0 !important;
+  margin-bottom: 1rem !important;
+  border-radius: 1000px;
+}
+
+.settings-page-slider-container:has(#settings-page-weather-overlay-slider) {
+  width: 20rem;
+  gap: 1rem;
 }

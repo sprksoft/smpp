@@ -18,6 +18,7 @@
   },
   "topNav": {
     "enableGOButton": "boolean",
+    "enableGCButton": "boolean",
     "enableSearchButton": "boolean",
     "enableQuickMenuButton": "boolean",
     "switchCoursesAndLinks": "boolean",
@@ -31,11 +32,21 @@
   "features": {
     "news": "boolean",
     "delijn": {
-      "monochrome": "boolean"
+      "monochrome": "boolean",
+      "maxBuses": "number"
     },
     "assignments": {
       "maxAssignments": "number"
-    }
+    },
+    "games": {
+      "snake": {
+        "enableGrid": "boolean"
+      }
+    },
+    "weather": {
+      "syncWeather": "boolean"
+    },
+    "splashText": "boolean"
   },
   "other": {
     "quicks": "array",

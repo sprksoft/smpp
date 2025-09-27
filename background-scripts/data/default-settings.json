@@ -32,11 +32,21 @@
   "features": {
     "news": true,
     "delijn": {
-      "monochrome": false
+      "monochrome": false,
+      "maxBuses": 5
     },
     "assignments": {
       "maxAssignments": 5
-    }
+    },
+    "games": {
+      "snake": {
+        "enableGrid": true
+      }
+    },
+    "weather": {
+      "syncWeather": false
+    },
+    "splashText": true
   },
   "other": {
     "quicks": [],
