@@ -246,7 +246,10 @@ button.smscButton.blue.fileupload_submit_button,
 .enableAnimations .input-search,
 .enableAnimations button.smscButton.blue.fileupload_submit_button,
 .enableAnimations .wide-colored-btn {
-  transition: border 0.3s, background-color 0.3s, color 0.3s;
+  transition:
+    border 0.3s,
+    background-color 0.3s,
+    color 0.3s;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -1971,8 +1974,10 @@ div.smscCheckbox input[type="checkbox"]:not(.loading):focus + label:before {
 }
 
 .enableAnimations .topnav__menuitem--img {
-  transition: background-position 0.15s ease-out,
-    background-color 0.15s ease-out, margin 0.15s ease-out !important;
+  transition:
+    background-position 0.15s ease-out,
+    background-color 0.15s ease-out,
+    margin 0.15s ease-out !important;
 }
 
 .topnav__menuitem--img:hover {

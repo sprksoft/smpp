@@ -26,21 +26,39 @@
   font-weight: 600 !important;
 }
 
+.settings-category-button-js:focus-visible {
+  border-color: var(--color-accent) !important;
+}
+
 .settings-category-button-js:hover {
   background-color: var(--color-base02);
 }
 
+.enableAnimations .settings-category-button-js {
+  transition: all 0.15s ease-in-out;
+}
 .enableAnimations .settings-category-button-js:hover {
   scale: 1.01;
 }
-.enableAnimations .settings-category-button-js {
-  transition: all 0.15s ease-in-out;
+
+.enableAnimations .profile-picture-settings,
+.enableAnimations .category-button-icon {
+  transition: scale 0.2s ease-in-out;
+  scale: 1;
+}
+
+.enableAnimations .profile-settings-button:hover .profile-picture-settings,
+.enableAnimations .settings-category-button:hover .category-button-icon {
+  scale: 1.06;
+}
+
+.enableAnimations .settings-category-button.active .category-button-icon {
+  scale: 1.2;
 }
 
 .category-button-icon {
   aspect-ratio: 1;
-  border-radius: 1rem;
-  width: 3rem;
+  width: 3.5rem;
 }
 
 .settings-sidebar {
@@ -240,7 +258,10 @@
   height: 100%;
   object-fit: cover;
   border-radius: 8px;
-  transition: transform 0.2s, filter 0.2s, outline 0.2s;
+  transition:
+    transform 0.2s,
+    filter 0.2s,
+    outline 0.2s;
 }
 
 .settings-page-theme-container {
