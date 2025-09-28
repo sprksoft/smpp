@@ -13,17 +13,15 @@ function openURL(url, new_window = false) {
 }
 
 function getPageURL() {
-  let url = window.location;
+  const url = window.location;
   let urlObject = {};
   urlObject.search = url.search;
   urlObject.schoolName = url.hostname.split(".")[0];
   urlObject.fullPath = url.pathname.replace("/", "");
   urlObject.path = url.pathname.split("/")[1];
-  if (url.pathname.includes("module")) {
-    urlObject.moduleName = url.pathname.split("=")[1].split("&")[0];
-  } else {
-    urlObject.moduleName = null;
-  }
+
+  const query = new URLSearchParams(url.search);
+  urlObject.moduleName = query.get("module");
   return urlObject;
 }
 

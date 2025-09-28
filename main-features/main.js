@@ -629,6 +629,7 @@ function createTopButtons() {
     searchButton.innerHTML = searchButtonSvg;
   }
   if (onHomePage) {
+    initWidgetEditMode();
     topNav.insertBefore(createWidgetEditModeButton(), pushRight);
   }
 

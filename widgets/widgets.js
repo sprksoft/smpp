@@ -1,5 +1,6 @@
 const PANNELIP_MARGIN_PX = 20;
 
+let widgetEditModeInit = false;
 let widgetEditMode = false;
 let hoveringBag = false;
 let newsState = false; // Used for if the news state is changed before it could be created.
@@ -98,7 +99,7 @@ class WidgetBase {
     }
     if (!newContent) {
       console.error(
-        "createContent and createPreview method's needs to return an html object. in widget impl"
+        "createContent and createPreview method's needs to return an html object. in widget impl",
       );
       newContent = createWidgetErrorContent(this.name);
     }
@@ -165,7 +166,8 @@ class WidgetBase {
 
     targetIp?.classList.remove("smpp-widget-insertion-point-targeted");
     if (cancel || !targetIp) {
-      // Put back were came from if targetInsertionPoint is null or when we cancel
+      // Put back were came from if targetInsertionPoint is null or when we
+      // cancel
       targetIp = sourceIp;
     }
     if (!cancel && this.#aboutToDel) {
@@ -181,7 +183,7 @@ class WidgetBase {
         let pannel = await createPannelHTML({ widgets: [] });
         pannelContainer.insertBefore(
           createInsertionPointHTML(true),
-          targetIp.nextElementSibling
+          targetIp.nextElementSibling,
         );
         pannelContainer.insertBefore(pannel, targetIp.nextElementSibling);
         targetIp = pannel.firstChild;
@@ -191,7 +193,7 @@ class WidgetBase {
       targetPannel.style.display = "block";
       targetPannel.insertBefore(
         createInsertionPointHTML(),
-        targetIp.nextElementSibling
+        targetIp.nextElementSibling,
       );
       targetPannel.insertBefore(el, targetIp.nextElementSibling);
 
@@ -235,9 +237,8 @@ class WidgetBase {
     el.style.width = rect.width + "px";
     el.style.left = rect.left + "px";
     el.style.top = rect.top + "px";
-    el.style[
-      "transform-origin"
-    ] = `${curDragInfo.offset.x}px ${curDragInfo.offset.y}px`;
+    el.style["transform-origin"] =
+      `${curDragInfo.offset.x}px ${curDragInfo.offset.y}px`;
 
     el.classList.add("smpp-widget-dragging");
 
@@ -257,9 +258,11 @@ class WidgetBase {
     return "other";
   }
 
-  // (Required): Gets called when the content element of the widget needs to be created (return html element). (Don't do slow tasks in here)
+  // (Required): Gets called when the content element of the widget needs to be
+  // created (return html element). (Don't do slow tasks in here)
   async createContent() {}
-  // Gets called when the preview element needs to be created (return html element) NOTE: preview and content never exist at the same time
+  // Gets called when the preview element needs to be created (return html
+  // element) NOTE: preview and content never exist at the same time
   async createPreview() {
     return await this.createContent();
   }
@@ -312,11 +315,11 @@ class SmartschoolWidget extends WidgetBase {
 function targetInsertionPoint(target) {
   if (target !== curDragInfo.targetInsertionPoint) {
     curDragInfo.targetInsertionPoint?.classList.remove(
-      "smpp-widget-insertion-point-targeted"
+      "smpp-widget-insertion-point-targeted",
     );
     curDragInfo.targetInsertionPoint = target;
     curDragInfo.targetInsertionPoint?.classList.add(
-      "smpp-widget-insertion-point-targeted"
+      "smpp-widget-insertion-point-targeted",
     );
   }
 }
@@ -474,7 +477,7 @@ async function createWidgetSystem() {
 
   // Create smartschool default widgets
   for (let smWidget of document.querySelectorAll(
-    "#rightcontainer .homepage__block"
+    "#rightcontainer .homepage__block",
   )) {
     let wName = "SmartschoolWidget-" + smWidget.id;
     registerWidget(new SmartschoolWidget(smWidget));
@@ -483,7 +486,7 @@ async function createWidgetSystem() {
     }
   }
   for (let smWidget of document.querySelectorAll(
-    "#leftcontainer .homepage__block"
+    "#leftcontainer .homepage__block",
   )) {
     let wName = "SmartschoolWidget-" + smWidget.id;
     registerWidget(new SmartschoolWidget(smWidget));
@@ -501,7 +504,7 @@ async function createWidgetSystem() {
   widgetsContainer = await createWidgetsContainerHTML(
     widgetData,
     news,
-    newsState
+    newsState,
   );
 
   container.innerHTML = "";
@@ -690,8 +693,50 @@ function updateDoneButtonState(value) {
   });
 }
 
-if (getPageURL().path == "" /*&& getPageURL().search == ""*/) {
-  // door dat werkte de widgets niet op edge
+function getWidgetByName(name) {
+  for (let widget of widgets) {
+    if (widget.name == name) {
+      return widget;
+    }
+  }
+  return null;
+}
+
+async function setEditMode(value) {
+  if (value && !widgetEditModeInit) {
+    console.error(
+      "Widget edit mode has not been initalized. setEditMode(true) has been called. (call initWidgetEditMode first) (This is a bug)",
+    );
+  }
+
+  if (!doneButton) {
+    createWidgetsDoneButton();
+  }
+  if (value === true) {
+    document.body.classList.add("smpp-widget-edit-mode");
+    document.getElementById("smpp-news-content").style.display = "none";
+    if (!widgetBag) {
+      widgetBag = await createWidgetBag();
+      widgetBagHandle = widgetBag.querySelector(".smpp-widget-bag-handle");
+    }
+  } else {
+    if (curDragInfo) {
+      await curDragInfo.widget.drop(true);
+    }
+    closeBag();
+    document.body.classList.remove("smpp-widget-edit-mode");
+    news(newsState);
+  }
+  updateDoneButtonState(value);
+
+  widgetEditMode = value;
+}
+
+function initWidgetEditMode() {
+  if (widgetEditModeInit) {
+    return;
+  }
+  widgetEditModeInit = true;
   document.addEventListener("mouseup", async (e) => {
     if (curDragInfo) {
       await curDragInfo.widget.drop(false);
@@ -729,39 +774,6 @@ if (getPageURL().path == "" /*&& getPageURL().search == ""*/) {
       }
     }
   });
-}
-
-function getWidgetByName(name) {
-  for (let widget of widgets) {
-    if (widget.name == name) {
-      return widget;
-    }
-  }
-  return null;
-}
-
-async function setEditMode(value) {
-  if (!doneButton) {
-    createWidgetsDoneButton();
-  }
-  if (value === true) {
-    document.body.classList.add("smpp-widget-edit-mode");
-    document.getElementById("smpp-news-content").style.display = "none";
-    if (!widgetBag) {
-      widgetBag = await createWidgetBag();
-      widgetBagHandle = widgetBag.querySelector(".smpp-widget-bag-handle");
-    }
-  } else {
-    if (curDragInfo) {
-      await curDragInfo.widget.drop(true);
-    }
-    closeBag();
-    document.body.classList.remove("smpp-widget-edit-mode");
-    news(newsState);
-  }
-  updateDoneButtonState(value);
-
-  widgetEditMode = value;
 }
 
 function createWidgetEditModeButton() {

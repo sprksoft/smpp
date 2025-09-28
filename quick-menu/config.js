@@ -23,7 +23,7 @@ async function getDMenuOptionsForSettings(toplevel) {
   let options = [];
   for (let cat of Object.keys(template)) {
     options = options.concat(
-      gatherOptions(template[cat], toplevel ? "config" : null)
+      gatherOptions(template[cat], toplevel ? "config" : null),
     );
   }
   return options;
@@ -43,7 +43,7 @@ function getFullOptPath(template, optName) {
     }
   }
   console.error(
-    `Was not able to convert the optName '${optName}' to full because it was not found in the template json (returning an option with no category)`
+    `Was not able to convert the optName '${optName}' to full because it was not found in the template json (returning an option with no category)`,
   );
   return optName;
 }
@@ -86,7 +86,7 @@ async function dmenuEditConfig(path) {
     category: configPath,
   });
   if (optionValue.error) {
-    console.error("error from service worker: "+optionValue.error);
+    console.error("error from service worker: " + optionValue.error);
     optionValue = "worker error";
   }
 
@@ -101,7 +101,7 @@ async function dmenuEditConfig(path) {
           setSettingByPath(configPath, false);
         }
       },
-      label
+      label,
     );
   } else if (template == "number") {
     dmenu(
@@ -113,7 +113,7 @@ async function dmenuEditConfig(path) {
         }
         setSettingByPath(configPath, new Number(cmd));
       },
-      label
+      label,
     );
   } else if (Array.isArray(template)) {
     dmenu(
@@ -121,20 +121,22 @@ async function dmenuEditConfig(path) {
       function (cmd, shift) {
         setSettingByPath(configPath, cmd);
       },
-      label
+      label,
     );
   } else {
-    console.error(
-      "Invalid template type: '" +
-        template +
-        "' Falling back to 'string' template type"
-    );
+    if (template !== "string") {
+      console.error(
+        "Invalid template type: '" +
+          template +
+          "' Falling back to 'string' template type",
+      );
+    }
     dmenu(
       [],
       function (cmd, shift) {
         setSettingByPath(configPath, cmd);
       },
-      label
+      label,
     );
   }
 }
