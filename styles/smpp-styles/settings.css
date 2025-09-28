@@ -334,9 +334,9 @@
 
 .settings-page-description {
   opacity: 0.8;
-  font-weight: 300;
+  font-weight: normal;
   max-width: 18rem;
-  font-size: 0.9rem;
+  font-size: 1rem;
   margin-bottom: 0.75rem !important;
 }
 
