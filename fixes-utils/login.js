@@ -133,6 +133,7 @@ let splashtexts = [
   `Feeling diskinserted?`,
   `Vamipre in the corner.\nIs it scaring you off?`,
   `Whopper Whopper`,
+  `<s>nginx</s>, <i>Enginks</i>`,
 ];
 function get_splash_text() {
   return splashtexts[Math.floor(Math.random() * splashtexts.length)];
