@@ -31,6 +31,9 @@ function getByPath(object, path) {
   let ob = object;
   for (let node of path.split(".")) {
     ob = ob[node];
+    if (ob === undefined) {
+      throw `getByPath: ${node} did not exist in path ${path}`
+    }
   }
   return ob;
 }
@@ -40,6 +43,9 @@ function setByPath(object, path, value) {
   const pathSplit = path.split(".");
   for (let i = 0; i < pathSplit.length - 1; i++) {
     ob = ob[pathSplit[i]];
+    if (ob === undefined) {
+      throw `getByPath: ${node} did not exist in path ${path}`
+    }
   }
   ob[pathSplit[pathSplit.length - 1]] = value;
 }

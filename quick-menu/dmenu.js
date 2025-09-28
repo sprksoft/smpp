@@ -32,6 +32,13 @@ async function reloadDMenuConfig() {
     category: "other.dmenu",
   });
   dmenuConfig = await fixupBrokenConfig(dmenuConfig);
+
+  // This is required because if the config was broken. It will still requested again in the :config menu.
+  await browser.runtime.sendMessage({
+    action: "setSettingsCategory",
+    category: "other.dmenu",
+    data: dmenuConfig,
+  });
 }
 
 // Load the config if it wasn't already loaded
