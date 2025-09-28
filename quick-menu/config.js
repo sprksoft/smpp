@@ -74,17 +74,21 @@ async function setSettingByPath(path, value) {
 }
 
 async function dmenuEditConfig(path) {
-  console.log("aaaa");
   const templates = await browser.runtime.sendMessage({
     action: "getSettingsOptions",
   });
   configPath = getFullOptPath(templates, path);
   const template = getByPath(templates, configPath);
 
+  console.log(dmenuConfig, configPath);
   let optionValue = await browser.runtime.sendMessage({
     action: "getSettingsCategory",
     category: configPath,
   });
+  if (optionValue.error) {
+    console.error("error from service worker: "+optionValue.error);
+    optionValue = "worker error";
+  }
 
   const label = path + " (" + optionValue + "): ";
   if (template == "boolean") {
