@@ -679,7 +679,7 @@ nav.topnav {
   width: 2rem;
   left: 0.25rem;
   top: 0.25rem;
-  background-color: var(--color-base01);
+  background-color: var(--color-base03);
 }
 
 .enableAnimations .slider.round:before {
@@ -692,7 +692,7 @@ input:checked + .slider {
 }
 
 input:checked + .slider:before {
-  background-color: var(--color-base02);
+  background-color: var(--color-accent);
 }
 
 input:focus + .slider,
