@@ -690,7 +690,8 @@ function updateDoneButtonState(value) {
   });
 }
 
-if (getPageURL().path == "" && getPageURL().search == "") {
+if (getPageURL().path == "" /*&& getPageURL().search == ""*/) {
+  // door dat werkte de widgets niet op edge
   document.addEventListener("mouseup", async (e) => {
     if (curDragInfo) {
       await curDragInfo.widget.drop(false);

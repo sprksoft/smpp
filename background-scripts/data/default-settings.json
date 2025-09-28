@@ -6,6 +6,7 @@
   "appearance": {
     "theme": "ldev",
     "tabLogo": "smpp",
+    "splashText": true,
     "background": {
       "selection": "default",
       "link": "",
@@ -45,8 +46,7 @@
     },
     "weather": {
       "syncWeather": false
-    },
-    "splashText": true
+    }
   },
   "other": {
     "quicks": [],
