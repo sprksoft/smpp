@@ -1,6 +1,5 @@
 class SettingsWindow extends BaseWindow {
   settingsSideBarCategories = {
-    test: { name: "Test" },
     appearance: {
       name: "Appearance",
     },
@@ -483,12 +482,12 @@ class SettingsWindow extends BaseWindow {
 
         this.settingsPage.appendChild(createSectionTitle("Login"));
         this.settingsPage.appendChild(
-          createDescription("Change the weather app configuration.")
+          createDescription("Change the login page configuration.")
         );
         this.settingsPage.appendChild(
           createButtonWithLabel(
             "settings-page-splash-text-button",
-            "Show splash text"
+            "Show splash-text"
           )
         );
 
@@ -563,7 +562,7 @@ class SettingsWindow extends BaseWindow {
         );
 
         this.settingsPage.appendChild(
-          createButtonWithLabel("settings-page-home-icon-button", "Home")
+          createButtonWithLabel("settings-page-home-icon-button", "Start")
         );
         this.settingsPage.appendChild(
           createButtonWithLabel("settings-page-mail-icon-button", "Mail")
@@ -622,22 +621,6 @@ class SettingsWindow extends BaseWindow {
             "Max assignments"
           )
         );
-
-        this.settingsPage.appendChild(createSectionTitle("Games"));
-        /*this.settingsPage.appendChild(
-          createDescription("Change configuration of the games.")
-        );*/
-        this.settingsPage.appendChild(createSmallTitle("Snake"));
-        this.settingsPage.appendChild(
-          createDescription("Change the snake app configuration.")
-        );
-        this.settingsPage.appendChild(
-          createButtonWithLabel(
-            "settings-page-show-grid-snake-button",
-            "Show grid snake"
-          )
-        );
-
         this.settingsPage.appendChild(createSectionTitle("Weather"));
         this.settingsPage.appendChild(
           createDescription("Change the weather app configuration.")
@@ -646,6 +629,18 @@ class SettingsWindow extends BaseWindow {
           createButtonWithLabel(
             "settings-page-sync-weather-button",
             "Sync weather"
+          )
+        );
+
+        this.settingsPage.appendChild(createMainTitle("Games"));
+        this.settingsPage.appendChild(createSectionTitle("Snake"));
+        this.settingsPage.appendChild(
+          createDescription("Change configuration of Snake++")
+        );
+        this.settingsPage.appendChild(
+          createButtonWithLabel(
+            "settings-page-show-grid-snake-button",
+            "Show grid snake"
           )
         );
 
@@ -662,23 +657,6 @@ class SettingsWindow extends BaseWindow {
           createButtonWithLabel(
             "settings-page-performance-mode-button",
             "Performance mode"
-          )
-        );
-
-        this.settingsPage.appendChild(createSectionTitle("DMenu"));
-        this.settingsPage.appendChild(
-          createDescription("Change the Dmenu configuration.")
-        );
-        this.settingsPage.appendChild(
-          createButtonWithLabel(
-            "settings-page-Dmenu-centered-button",
-            "Center DMenu"
-          )
-        );
-        this.settingsPage.appendChild(
-          createButtonWithLabel(
-            "settings-page-top-level-config-button",
-            "Quickly navigable DMenu"
           )
         );
 

@@ -5,7 +5,7 @@ function updateLoginPanel() {
   login_app_left.innerHTML = " ";
 
   document.getElementsByClassName(
-    "login-app__platform-indicator",
+    "login-app__platform-indicator"
   )[0].innerHTML = '<h1 class="logintitle">Smartschool ++</h1>';
 
   document.getElementsByClassName("login-app__title--separator")[0].innerHTML =
@@ -35,7 +35,7 @@ let splashtexts = [
   `Home-made!`,
   `Pythagoras was used in this`, // where????
   `Like that smash button!`,
-  `What DOES the fox say?`,
+  `What <i>DOES</i> the fox say?`,
   `Supercalifragilisticexpialidocious!`,
   `Hottentotententententoonstelling`,
   `Not on steam!`,
@@ -103,7 +103,7 @@ let splashtexts = [
   `https://smartschoolplusplus.com`,
   `weak fingers`,
   `Beep beep I'm a sheep`,
-  `I love yavascript !`,
+  `I love yawascwipt !`,
   `Always take your maths kids`,
   `Gele auto!`,
   `LET ME OUTTT!!!`,
@@ -123,17 +123,17 @@ let splashtexts = [
   `Over 1000+ commits!`,
   `Took at least \n 5 hours to make!`,
   `Sometimes works!`,
-  `Survive, Adapt, Overcome`,
-  `Rode auto`,
+  `Survive, Adapt, Overcome!`,
+  `Rode auto!`,
   `Cookie clicker`,
   `Are you serious?`,
   `Breakout++`,
   `Ruby chan, haii!!`,
   `It's so sweet`,
   `Feeling diskinserted?`,
-  `Vamipre in the corner.\nIs it scaring you off?`,
+  `Vamipre in the corner.\nAm I scaring you off?`, // this is correct Sibe
   `Whopper Whopper`,
-  `<s>nginx</s>, <i>Enginks</i>`,
+  `<s>nginx</s>, <i>Engineks</i>`,
 ];
 function get_splash_text() {
   return splashtexts[Math.floor(Math.random() * splashtexts.length)];

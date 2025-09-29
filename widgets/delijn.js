@@ -202,7 +202,8 @@ function addDelijnAttest(container) {
   delijnAttestElement.classList.add("delijnAttest");
   delijnAttestElement.target = "_blank";
   delijnAttestElement.rel = "noopener noreferrer";
-  delijnAttestElement.href = randomChance(1 / 12)
+  specialChance = randomChance(1 / 12);
+  delijnAttestElement.href = specialChance
     ? "https://www.coolblue.be/nl/koffiezetapparaten/koffiezetapparaten-voor-latte-macchiato"
     : "https://www.delijn.be/nl/contact/attest-aanvraag/";
   delijnAttestElement.innerText = specialChance ? "Latte?" : "Late?";
@@ -281,6 +282,8 @@ class DelijnWidget extends WidgetBase {
     const delijnData = await fetchDelijnData(
       `https://api.delijn.be/DLKernOpenData/api/v1/haltes/${entiteitnummer}/${haltenummer}/real-time?maxAantalDoorkomsten=5`
     );
+    console.log(delijnData);
+
     if (!delijnData.halteDoorkomsten[0]) {
       this.displayInfo(
         "Er zijn momenteel geen bussen beschikbaar voor deze halte."
@@ -292,9 +295,22 @@ class DelijnWidget extends WidgetBase {
     }
 
     this.hideInfo();
-    for (const doorkomst of delijnData.halteDoorkomsten[0].doorkomsten) {
+    let sortedDoorkomsten = delijnData.halteDoorkomsten[0].doorkomsten.sort(
+      (a, b) => {
+        const timeA = new Date(
+          a["real-timeTijdstip"] || a.dienstregelingTijdstip
+        );
+        const timeB = new Date(
+          b["real-timeTijdstip"] || b.dienstregelingTijdstip
+        );
+        return timeA - timeB;
+      }
+    );
+
+    sortedDoorkomsten.forEach(async (doorkomst) => {
       await createHalteDoorkomst(doorkomst, this.elements.bottomContainer);
-    }
+    });
+
     addDelijnAttest(this.elements.bottomContainer);
   }
 
