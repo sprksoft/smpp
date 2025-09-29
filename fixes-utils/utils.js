@@ -12,19 +12,6 @@ function openURL(url, new_window = false) {
   window.location = url;
 }
 
-function getPageURL() {
-  const url = window.location;
-  let urlObject = {};
-  urlObject.search = url.search;
-  urlObject.schoolName = url.hostname.split(".")[0];
-  urlObject.fullPath = url.pathname.replace("/", "");
-  urlObject.path = url.pathname.split("/")[1];
-
-  const query = new URLSearchParams(url.search);
-  urlObject.moduleName = query.get("module");
-  return urlObject;
-}
-
 function delay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms)); // no hate please 👉👈 // GRRRR
 }
@@ -34,7 +21,7 @@ async function clearsettings() {
   await browser.runtime.sendMessage({
     action: "clearLocalStorage",
   });
-  console.log("Cleared settings!");
+  location.reload();
 }
 
 function unbloat() {
