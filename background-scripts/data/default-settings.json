@@ -34,7 +34,7 @@
     "news": true,
     "delijn": {
       "monochrome": false,
-      "maxBuses": 5
+      "maxBusses": 5
     },
     "assignments": {
       "maxAssignments": 5

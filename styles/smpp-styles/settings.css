@@ -191,10 +191,14 @@
 }
 
 .settings-page-main-title {
-  font-size: 2rem;
+  font-size: 2.25rem;
   font-weight: 700;
   margin: 0 !important;
   cursor: default;
+}
+
+.settings-page-main-title:not(:first-of-type) {
+  margin-top: 2rem !important;
 }
 
 .settings-page-image {
@@ -258,10 +262,7 @@
   height: 100%;
   object-fit: cover;
   border-radius: 8px;
-  transition:
-    transform 0.2s,
-    filter 0.2s,
-    outline 0.2s;
+  transition: transform 0.2s, filter 0.2s, outline 0.2s;
 }
 
 .settings-page-theme-container {

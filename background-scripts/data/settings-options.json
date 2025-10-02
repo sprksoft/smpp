@@ -33,7 +33,7 @@
     "news": "boolean",
     "delijn": {
       "monochrome": "boolean",
-      "maxBuses": "number"
+      "maxBusses": "number"
     },
     "assignments": {
       "maxAssignments": "number"

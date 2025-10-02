@@ -260,6 +260,7 @@ async function storeQuickSettings() {
   console.log("Storing this new data:", data);
   await browser.runtime.sendMessage({ action: "setSettingsData", data });
   await loadQuickSettings();
+  await settingsWindow.loadPage();
   await apply();
 }
 

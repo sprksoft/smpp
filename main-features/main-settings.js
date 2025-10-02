@@ -23,10 +23,9 @@ class SettingsWindow extends BaseWindow {
     content.appendChild(await settingsSideBar);
     content.appendChild(this.settingsPage);
     this.displaySettingsPage();
+    await this.loadPage();
     return content;
   }
-
-  onOpened() {}
 
   async createSettingsSideBar() {
     let settingsSideBar = document.createElement("div");
@@ -34,7 +33,7 @@ class SettingsWindow extends BaseWindow {
     let settingsSideBarProfileButton =
       await this.createSettingsSideBarProfileButton();
     settingsSideBarProfileButton.classList.add("active");
-    settingsSideBarProfileButton.addEventListener("click", () => {
+    settingsSideBarProfileButton.addEventListener("click", async () => {
       this.currentPage = "profile";
       document
         .querySelectorAll(".settings-category-button-js")
@@ -43,12 +42,13 @@ class SettingsWindow extends BaseWindow {
         });
       settingsSideBarProfileButton.classList.add("active");
       this.displaySettingsPage();
+      await this.loadPage();
     });
     settingsSideBar.appendChild(settingsSideBarProfileButton);
 
     Object.keys(this.settingsSideBarCategories).forEach((key) => {
       let settingsSideBarButton = this.createSettingsSideBarCategory(key);
-      settingsSideBarButton.addEventListener("click", (event) => {
+      settingsSideBarButton.addEventListener("click", async (event) => {
         this.currentPage = event.currentTarget.dataset.page;
         document
           .querySelectorAll(".settings-category-button-js")
@@ -57,6 +57,7 @@ class SettingsWindow extends BaseWindow {
           });
         event.target.classList.add("active");
         this.displaySettingsPage();
+        await this.loadPage();
       });
       settingsSideBar.appendChild(settingsSideBarButton);
     });
@@ -115,6 +116,158 @@ class SettingsWindow extends BaseWindow {
 
   storePage(page) {
     return 1;
+  }
+
+  async loadPage() {
+    let settings = await browser.runtime.sendMessage({
+      action: "getSettingsData",
+    });
+
+    switch (this.currentPage) {
+      case "profile": {
+        let usernameInput = document.getElementById(
+          "settings-page-username-input"
+        );
+        if (settings.profile.username) {
+          usernameInput.value = settings.profile.username;
+        }
+
+        let profilePic = document.getElementById(
+          "settings-page-profile-picture"
+        );
+        if (settings.profile.profilePicture) {
+          profilePic.src = settings.profile.profilePicture;
+        }
+        break;
+      }
+
+      case "appearance": {
+        // Theme
+        document
+          .querySelectorAll(".settings-page-theme-card")
+          .forEach((card) => {
+            if (card.dataset.theme) {
+              card.classList.toggle(
+                "active",
+                card.dataset.theme === settings.appearance.theme
+              );
+            }
+          });
+
+        // Background link
+        document.getElementById("settings-page-background-link-input").value =
+          settings.appearance.background.link || "";
+
+        // Blur slider
+        document.getElementById("settings-page-blur-slider").value =
+          settings.appearance.background.blur * 10;
+
+        // Blur preview
+        document.querySelector(
+          ".blurred-image-container img"
+        ).style.filter = `blur(${settings.appearance.background.blur}px)`;
+
+        // Weather overlay
+        document
+          .querySelectorAll(".settings-page-weather-overlay-container input")
+          .forEach((input) => {
+            if (input.id) {
+              input.checked = input.id.includes(
+                settings.appearance.weatherOverlay.type
+              );
+            }
+          });
+
+        document.getElementById("settings-page-weather-overlay-slider").value =
+          settings.appearance.weatherOverlay.amount;
+
+        // Tab icon
+        document.getElementById("settings-page-default-icon-button").checked =
+          settings.appearance.tabLogo == "sm";
+        document.getElementById("settings-page-smpp-icon-button").checked =
+          settings.appearance.tabLogo == "smpp";
+
+        break;
+      }
+
+      case "topNav": {
+        // Buttons
+        document.getElementById("settings-page-go-button").checked =
+          settings.topNav.enableGOButton;
+        document.getElementById("settings-page-global-chat-button").checked =
+          settings.topNav.enableGCButton;
+        document.getElementById("settings-page-search-button").checked =
+          settings.topNav.enableSearchButton;
+        document.getElementById("settings-page-quick-menu-button").checked =
+          settings.topNav.enableQuickMenuButton;
+        document.getElementById("settings-page-swap-courses-button").checked =
+          settings.topNav.switchCoursesAndLinks;
+
+        // Icons
+        document.getElementById("settings-page-home-icon-button").checked =
+          settings.topNav.icons.home;
+        document.getElementById("settings-page-mail-icon-button").checked =
+          settings.topNav.icons.mail;
+        document.getElementById(
+          "settings-page-notifications-icon-button"
+        ).checked = settings.topNav.icons.notifications;
+        document.getElementById("settings-page-settings-icon-button").checked =
+          settings.topNav.icons.settings;
+
+        break;
+      }
+
+      case "features": {
+        // News
+        document.getElementById("settings-page-show-news-button").checked =
+          settings.features.news;
+
+        // Splash-text
+        document.getElementById("settings-page-splash-text-button").checked =
+          settings.appearance.splashText;
+
+        // De Lijn
+        document.getElementById(
+          "settings-page-delijn-monochrome-button"
+        ).checked = settings.features.delijn.monochrome;
+
+        document.getElementById("settings-page-max-busses-slider").value =
+          settings.features.delijn.maxBusses;
+        document.querySelector(
+          "#settings-page-max-busses-slider + .settings-page-live-value"
+        ).innerText = settings.features.delijn.maxBusses;
+
+        // Assignments
+        document.getElementById("settings-page-max-assignments-slider").value =
+          settings.features.assignments.maxAssignments;
+        document.querySelector(
+          "#settings-page-max-assignments-slider + .settings-page-live-value"
+        ).innerText = settings.features.assignments.maxAssignments;
+
+        // Weather
+        document.getElementById("settings-page-sync-weather-button").checked =
+          settings.features.weather.syncWeather;
+
+        // Snake
+        document.getElementById(
+          "settings-page-show-snake-grid-button"
+        ).checked = settings.features.games.snake.enableGrid;
+
+        break;
+      }
+
+      case "other": {
+        // Performance mode
+        document.getElementById(
+          "settings-page-performance-mode-button"
+        ).checked = settings.other.performanceMode;
+
+        break;
+      }
+
+      default:
+        break;
+    }
   }
 
   displaySettingsPage() {
@@ -224,11 +377,12 @@ class SettingsWindow extends BaseWindow {
       textContainer.innerText = text;
       let slider = createSlider(min, max, id);
       slider.classList.add("settings-page-labeled-slider");
-      slider.addEventListener("input", (event) => {
-        document.querySelector(
-          "#" + event.target.id + " ~ .settings-page-live-value"
-        ).innerText = event.target.value;
-      });
+      if (showValue)
+        slider.addEventListener("input", (event) => {
+          document.querySelector(
+            "#" + event.target.id + " ~ .settings-page-live-value"
+          ).innerText = event.target.value;
+        });
       let currentValue = document.createElement("span");
       currentValue.classList.add("settings-page-live-value");
       currentValue.innerText = min;
@@ -480,17 +634,6 @@ class SettingsWindow extends BaseWindow {
           )
         );
 
-        this.settingsPage.appendChild(createSectionTitle("Login"));
-        this.settingsPage.appendChild(
-          createDescription("Change the login page configuration.")
-        );
-        this.settingsPage.appendChild(
-          createButtonWithLabel(
-            "settings-page-splash-text-button",
-            "Show splash-text"
-          )
-        );
-
         this.settingsPage.appendChild(createSectionTitle("Icon"));
         this.settingsPage.appendChild(
           createDescription("Choose the icon displayed in your browser tab.")
@@ -582,7 +725,7 @@ class SettingsWindow extends BaseWindow {
 
         break;
       case "features":
-        this.settingsPage.appendChild(createMainTitle("Apps"));
+        this.settingsPage.appendChild(createMainTitle("Features"));
         this.settingsPage.appendChild(createSectionTitle("News"));
         this.settingsPage.appendChild(
           createDescription("Change the homepage news configuration.")
@@ -590,6 +733,20 @@ class SettingsWindow extends BaseWindow {
         this.settingsPage.appendChild(
           createButtonWithLabel("settings-page-show-news-button", "Show news")
         );
+
+        this.settingsPage.appendChild(createSectionTitle("Login"));
+        this.settingsPage.appendChild(
+          createDescription("Change the login page configuration.")
+        );
+        this.settingsPage.appendChild(
+          createButtonWithLabel(
+            "settings-page-splash-text-button",
+            "Splash-text"
+          )
+        );
+
+        this.settingsPage.appendChild(createMainTitle("Widgets"));
+
         this.settingsPage.appendChild(createSectionTitle("De Lijn"));
         this.settingsPage.appendChild(
           createDescription("Change the De Lijn app configuration.")
@@ -604,8 +761,8 @@ class SettingsWindow extends BaseWindow {
           createLabeledSlider(
             1,
             10,
-            "settings-page-max-buses-slider",
-            "Max buses"
+            "settings-page-max-busses-slider",
+            "Max busses"
           )
         );
 
@@ -638,10 +795,7 @@ class SettingsWindow extends BaseWindow {
           createDescription("Change configuration of Snake++")
         );
         this.settingsPage.appendChild(
-          createButtonWithLabel(
-            "settings-page-show-grid-snake-button",
-            "Show grid snake"
-          )
+          createButtonWithLabel("settings-page-show-snake-grid-button", "Grid")
         );
 
         break;
