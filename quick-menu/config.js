@@ -57,7 +57,7 @@ function getByPath(object, path) {
 }
 function setByPath(object, path, value) {
   let ob = object;
-  const pathSplit = path.spli(".");
+  const pathSplit = path.split(".");
   for (let i = 0; i < pathSplit.length - 1; i++) {
     ob = ob[pathSplit[i]];
   }

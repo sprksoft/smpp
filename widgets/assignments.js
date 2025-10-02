@@ -191,7 +191,7 @@ class TakenWidget extends WidgetBase {
           ).toLocaleTimeString("nl-NL", {
             hour: "2-digit",
             minute: "2-digit",
-          })} • ${element.courses?.[0]?.name || "TODO"}`;
+          })} • ${element.courses?.[0]?.name || "Unknown Course"}`;
           metadataSpan.classList.add("task-description");
 
           detailsDiv.append(titleSpan, metadataSpan);
