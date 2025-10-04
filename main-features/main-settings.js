@@ -15,12 +15,13 @@ class SettingsWindow extends BaseWindow {
 
   async renderContent() {
     let content = document.createElement("div");
-    let settingsSideBar = this.createSettingsSideBar();
+    let settingsSideBar = await this.createSettingsSideBar();
     this.settingsPage = document.createElement("div");
     this.settingsPage.id = "settings-page";
+    this.settingsPage.addEventListener("change", (e) => this.storePage(e));
 
     content.classList.add("settingsWindow");
-    content.appendChild(await settingsSideBar);
+    content.appendChild(settingsSideBar);
     content.appendChild(this.settingsPage);
     this.displaySettingsPage();
     await this.loadPage();
@@ -114,10 +115,6 @@ class SettingsWindow extends BaseWindow {
     this.settingsPage.innerHTML = " ";
   }
 
-  storePage(page) {
-    return 1;
-  }
-
   async loadPage() {
     let settings = await browser.runtime.sendMessage({
       action: "getSettingsData",
@@ -144,28 +141,29 @@ class SettingsWindow extends BaseWindow {
       case "appearance": {
         // Theme
         document
-          .querySelectorAll(".settings-page-theme-card")
-          .forEach((card) => {
-            if (card.dataset.theme) {
-              card.classList.toggle(
-                "active",
-                card.dataset.theme === settings.appearance.theme
-              );
+          .querySelectorAll(".settings-page-theme-card input[type='radio']")
+          .forEach((radio) => {
+            if (radio.value === settings.appearance.theme) {
+              radio.checked = true;
             }
           });
 
         // Background link
         document.getElementById("settings-page-background-link-input").value =
           settings.appearance.background.link || "";
+        document
+          .getElementById("settings-page-link-clear-button")
+          .classList.remove("active");
+        if (settings.appearance.background.link != "")
+          document
+            .getElementById("settings-page-link-clear-button")
+            .classList.add("active");
+        document.getElementById("settings-page-background-file-input").value =
+          null;
 
         // Blur slider
         document.getElementById("settings-page-blur-slider").value =
           settings.appearance.background.blur * 10;
-
-        // Blur preview
-        document.querySelector(
-          ".blurred-image-container img"
-        ).style.filter = `blur(${settings.appearance.background.blur}px)`;
 
         // Weather overlay
         document
@@ -186,7 +184,6 @@ class SettingsWindow extends BaseWindow {
           settings.appearance.tabLogo == "sm";
         document.getElementById("settings-page-smpp-icon-button").checked =
           settings.appearance.tabLogo == "smpp";
-
         break;
       }
 
@@ -213,7 +210,6 @@ class SettingsWindow extends BaseWindow {
         ).checked = settings.topNav.icons.notifications;
         document.getElementById("settings-page-settings-icon-button").checked =
           settings.topNav.icons.settings;
-
         break;
       }
 
@@ -224,7 +220,7 @@ class SettingsWindow extends BaseWindow {
 
         // Splash-text
         document.getElementById("settings-page-splash-text-button").checked =
-          settings.appearance.splashText;
+          settings.features.splashText;
 
         // De Lijn
         document.getElementById(
@@ -252,7 +248,6 @@ class SettingsWindow extends BaseWindow {
         document.getElementById(
           "settings-page-show-snake-grid-button"
         ).checked = settings.features.games.snake.enableGrid;
-
         break;
       }
 
@@ -261,13 +256,176 @@ class SettingsWindow extends BaseWindow {
         document.getElementById(
           "settings-page-performance-mode-button"
         ).checked = settings.other.performanceMode;
-
         break;
       }
 
       default:
         break;
     }
+  }
+  async storePage() {
+    const data = await browser.runtime.sendMessage({
+      action: "getSettingsData",
+    });
+    let previousData = structuredClone(data);
+    switch (this.currentPage) {
+      case "profile": {
+        break;
+      }
+
+      case "appearance": {
+        // Theme
+        let selectedTheme = document.querySelector(
+          ".settings-page-theme-card:has(input[type='radio']:checked)"
+        );
+        if (selectedTheme) {
+          data.appearance.theme = selectedTheme.dataset.theme;
+        }
+
+        // Background link
+        data.appearance.background.link = document.getElementById(
+          "settings-page-background-link-input"
+        ).value;
+
+        // File Saving
+        let file = document.getElementById(
+          "settings-page-background-file-input"
+        ).files[0];
+        if (file) {
+          const reader = new FileReader();
+          const imageData = await new Promise((resolve) => {
+            reader.onload = () => resolve(reader.result);
+            reader.readAsDataURL(file);
+          });
+          await browser.runtime.sendMessage({
+            action: "saveBackgroundImage",
+            data: imageData,
+          });
+
+          data.appearance.background.selection = "file";
+          data.appearance.background.link = file.name;
+        } else {
+          if (data.appearance.background.link == "") {
+            data.appearance.background.selection = "default";
+          } else if (
+            data.appearance.background.link !=
+            previousData.appearance.background.link
+          ) {
+            data.appearance.background.selection = "link";
+          }
+        }
+
+        // Blur slider
+        let blurValue = document.getElementById(
+          "settings-page-blur-slider"
+        ).value;
+        data.appearance.background.blur = blurValue / 10;
+
+        // Weather overlay
+        let chosenWeather = document.querySelector(
+          ".settings-page-weather-overlay-container input:checked"
+        );
+        if (chosenWeather) {
+          data.appearance.weatherOverlay.type =
+            chosenWeather.closest("[data-weather]").dataset.weather;
+        }
+
+        data.appearance.weatherOverlay.amount = document.getElementById(
+          "settings-page-weather-overlay-slider"
+        ).value;
+
+        // Tab icon
+        data.appearance.tabLogo = document.getElementById(
+          "settings-page-smpp-icon-button"
+        ).checked
+          ? "smpp"
+          : "sm";
+        break;
+      }
+
+      case "topNav": {
+        data.topNav.enableGOButton = document.getElementById(
+          "settings-page-go-button"
+        ).checked;
+        data.topNav.enableGCButton = document.getElementById(
+          "settings-page-global-chat-button"
+        ).checked;
+        data.topNav.enableSearchButton = document.getElementById(
+          "settings-page-search-button"
+        ).checked;
+        data.topNav.enableQuickMenuButton = document.getElementById(
+          "settings-page-quick-menu-button"
+        ).checked;
+        data.topNav.switchCoursesAndLinks = document.getElementById(
+          "settings-page-swap-courses-button"
+        ).checked;
+
+        // Icons
+        data.topNav.icons.home = document.getElementById(
+          "settings-page-home-icon-button"
+        ).checked;
+        data.topNav.icons.mail = document.getElementById(
+          "settings-page-mail-icon-button"
+        ).checked;
+        data.topNav.icons.notifications = document.getElementById(
+          "settings-page-notifications-icon-button"
+        ).checked;
+        data.topNav.icons.settings = document.getElementById(
+          "settings-page-settings-icon-button"
+        ).checked;
+        break;
+      }
+
+      case "features": {
+        data.features.news = document.getElementById(
+          "settings-page-show-news-button"
+        ).checked;
+
+        data.features.splashText = document.getElementById(
+          "settings-page-splash-text-button"
+        ).checked;
+
+        data.features.delijn.monochrome = document.getElementById(
+          "settings-page-delijn-monochrome-button"
+        ).checked;
+
+        data.features.delijn.maxBusses = parseInt(
+          document.getElementById("settings-page-max-busses-slider").value,
+          10
+        );
+
+        data.features.assignments.maxAssignments = parseInt(
+          document.getElementById("settings-page-max-assignments-slider").value,
+          10
+        );
+
+        data.features.weather.syncWeather = document.getElementById(
+          "settings-page-sync-weather-button"
+        ).checked;
+
+        data.features.games.snake.enableGrid = document.getElementById(
+          "settings-page-show-snake-grid-button"
+        ).checked;
+        break;
+      }
+
+      case "other": {
+        data.other.performanceMode = document.getElementById(
+          "settings-page-performance-mode-button"
+        ).checked;
+        break;
+      }
+
+      default:
+        break;
+    }
+    console.log(data);
+    await browser.runtime.sendMessage({
+      action: "setSettingsData",
+      data: data,
+    });
+    await this.loadPage();
+    await apply();
   }
 
   displaySettingsPage() {
@@ -277,16 +435,11 @@ class SettingsWindow extends BaseWindow {
       title.classList.add("settings-page-main-title");
       return title;
     }
+
     function createSectionTitle(text) {
       let title = document.createElement("h2");
       title.innerText = text;
       title.classList.add("settings-page-section-title");
-      return title;
-    }
-    function createSmallTitle(text) {
-      let title = document.createElement("h3");
-      title.innerText = text;
-      title.classList.add("settings-page-small-title");
       return title;
     }
 
@@ -319,14 +472,15 @@ class SettingsWindow extends BaseWindow {
       return container;
     }
 
-    function createImageButton(src, width = "80px", height = "80px", id) {
+    function createImageButton(src, width = "80px", height = "80px", name, id) {
       let wrapper = document.createElement("label");
       wrapper.classList.add("settings-page-image-button-wrapper");
       wrapper.style.width = width;
       wrapper.style.height = height;
 
       let input = document.createElement("input");
-      input.type = "checkbox";
+      input.type = "radio";
+      input.name = name;
 
       if (id) input.id = id;
 
@@ -346,12 +500,13 @@ class SettingsWindow extends BaseWindow {
       text,
       width = "80px",
       height = "80px",
+      name,
       id
     ) {
       let container = document.createElement("label");
       container.classList.add("settings-page-button-label");
       container.for = id;
-      let imageButton = createImageButton(src, width, height, id);
+      let imageButton = createImageButton(src, width, height, name, id);
       let imageButtonLabel = document.createElement("span");
       imageButtonLabel.innerText = text;
       container.appendChild(imageButton);
@@ -424,32 +579,6 @@ class SettingsWindow extends BaseWindow {
     switch (this.currentPage) {
       case "profile":
         break;
-      case "test":
-        this.settingsPage.appendChild(
-          createImageButtonWithLabel(
-            "/theme-backgrounds/birb.jpg",
-            "aaaaa",
-            "50px",
-            "50px",
-            "profile-imgbtnaa"
-          )
-        );
-        this.settingsPage.appendChild(createSmallTitle("Profile Label"));
-        this.settingsPage.appendChild(createButton("profile-btn1"));
-        this.settingsPage.appendChild(
-          createImageButton(
-            "/theme-backgrounds/birb.jpg",
-            "50px",
-            "50px",
-            "profile-imgbtn"
-          )
-        );
-        this.settingsPage.appendChild(createSlider(0, 10, "profile-slider"));
-        this.settingsPage.appendChild(createTextInput("profile-txt"));
-        this.settingsPage.appendChild(
-          createImage("/theme-backgrounds/chocolate.jpg", "100px", "100px")
-        );
-        break;
       case "appearance":
         this.settingsPage.appendChild(createMainTitle("Appearance"));
         this.settingsPage.appendChild(createSectionTitle("Theme"));
@@ -467,9 +596,9 @@ class SettingsWindow extends BaseWindow {
             key != "custom"
           ) {
             // Don't include hidden themes
-
-            let themeCard = document.createElement("div");
+            let themeCard = document.createElement("label"); // use <label> to make radio clickable
             themeCard.classList.add("settings-page-theme-card");
+
             themeCard.style.setProperty(
               "--hover-border",
               themes[key]["--color-accent"]
@@ -484,6 +613,13 @@ class SettingsWindow extends BaseWindow {
             );
             themeCard.dataset.theme = key;
 
+            // hidden radio
+            let themeRadio = document.createElement("input");
+            themeRadio.type = "radio";
+            themeRadio.name = "theme-choice";
+            themeRadio.value = key;
+            themeRadio.style.display = "none";
+
             let themeImage = createImage(
               "/theme-backgrounds/" + key + ".jpg",
               "100%",
@@ -494,6 +630,8 @@ class SettingsWindow extends BaseWindow {
             themeTitle.classList.add("settings-page-theme-title");
             themeTitle.innerText = themes[key]["display-name"];
 
+            // build card
+            themeCard.appendChild(themeRadio);
             themeCard.appendChild(themeImage);
             themeCard.appendChild(themeTitle);
             themesContainer.appendChild(themeCard);
@@ -520,18 +658,20 @@ class SettingsWindow extends BaseWindow {
           </g>
         </svg>`;
 
-        clearButton.addEventListener("click", async function (event) {
+        clearButton.addEventListener("click", async (event) => {
           event.target
             .closest(".smpp-link-clear-button")
             .classList.remove("active");
           document.getElementById("settings-page-background-link-input").value =
             "";
-          await storePage(this.currentPage);
+
+          await this.storePage();
         });
 
         const linkInput = createTextInput(
           "settings-page-background-link-input"
         );
+        linkInput.placeholder = "Link";
 
         const backgroundFileInput = document.createElement("input");
         backgroundFileInput.id = "settings-page-background-file-input";
@@ -578,6 +718,7 @@ class SettingsWindow extends BaseWindow {
         );
 
         blurredImage.style.filter = "blur(2px)";
+
         let blurredImageContainer = document.createElement("div");
         blurredImageContainer.classList.add("blurred-image-container");
         blurredImageContainer.appendChild(blurredImage);
@@ -595,33 +736,39 @@ class SettingsWindow extends BaseWindow {
           "settings-page-icons-container",
           "settings-page-weather-overlay-container"
         );
-        weatherIconsContainer.appendChild(
-          createImageButtonWithLabel(
-            "/icons/weather-overlay/raindropfancy.svg",
-            "Rain",
-            "5rem",
-            "5rem",
-            "settings-page-raindrop-button"
-          )
+        let rainBtn = createImageButtonWithLabel(
+          "/icons/weather-overlay/raindropfancy.svg",
+          "Rain",
+          "5rem",
+          "5rem",
+          "weather",
+          "settings-page-raindrop-button"
         );
-        weatherIconsContainer.appendChild(
-          createImageButtonWithLabel(
-            "/icons/weather-overlay/realtimefancy.svg",
-            "Realtime",
-            "5rem",
-            "5rem",
-            "settings-page-realtime-button"
-          )
+        rainBtn.dataset.weather = "rain";
+        weatherIconsContainer.appendChild(rainBtn);
+
+        let realtimeBtn = createImageButtonWithLabel(
+          "/icons/weather-overlay/realtimefancy.svg",
+          "Realtime",
+          "5rem",
+          "5rem",
+          "weather",
+          "settings-page-realtime-button"
         );
-        weatherIconsContainer.appendChild(
-          createImageButtonWithLabel(
-            "/icons/weather-overlay/snowflakefancy.svg",
-            "Snow",
-            "5rem",
-            "5rem",
-            "settings-page-snow-button"
-          )
+        realtimeBtn.dataset.weather = "realtime";
+        weatherIconsContainer.appendChild(realtimeBtn);
+
+        let snowBtn = createImageButtonWithLabel(
+          "/icons/weather-overlay/snowflakefancy.svg",
+          "Snow",
+          "5rem",
+          "5rem",
+          "weather",
+          "settings-page-snow-button"
         );
+        snowBtn.dataset.weather = "snow";
+        weatherIconsContainer.appendChild(snowBtn);
+
         this.settingsPage.appendChild(weatherIconsContainer);
 
         this.settingsPage.appendChild(
@@ -646,6 +793,7 @@ class SettingsWindow extends BaseWindow {
             "/icons/sm-icon.svg",
             "5rem",
             "5rem",
+            "logo",
             "settings-page-default-icon-button"
           )
         );
@@ -654,6 +802,7 @@ class SettingsWindow extends BaseWindow {
             "/icons/smpp128.png",
             "5rem",
             "5rem",
+            "logo",
             "settings-page-smpp-icon-button"
           )
         );

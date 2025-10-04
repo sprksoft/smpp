@@ -57,7 +57,10 @@ class TakenWidget extends WidgetBase {
         return sendDebug("User ID not found.");
       }
 
-      fetchPlannerData().then((data) => {
+      fetchPlannerData().then(async (data) => {
+        const settingsData = await browser.runtime.sendMessage({
+          action: "getSettingsData",
+        });
         data = data.filter((element) => element.resolvedStatus !== "resolved");
         console.log(data);
         if (!data) {
@@ -86,8 +89,12 @@ class TakenWidget extends WidgetBase {
             new Date(a.period.dateTimeFrom) - new Date(b.period.dateTimeFrom)
         );
         let lastDate = "";
-        if (data.length > maxAssignments) {
-          data = data.slice(0, maxAssignments);
+
+        if (data.length > settingsData.features.assignments.maxAssignments) {
+          data = data.slice(
+            0,
+            settingsData.features.assignments.maxAssignments
+          );
         }
         const today = new Date();
         data.forEach((element) => {

@@ -27,6 +27,10 @@ function add_splash_text() {
   splash_text_element.innerHTML = `<div class='splashtext'>${get_splash_text()}</div>`;
 }
 
+function removeSplashText() {
+  document.querySelector("splashtextcontainer")?.remove();
+}
+
 let splashtexts = [
   `It even works under water!`,
   `Hoelang is een chinees.`,
@@ -137,7 +141,4 @@ let splashtexts = [
 ];
 function get_splash_text() {
   return splashtexts[Math.floor(Math.random() * splashtexts.length)];
-}
-if (window.location.href.split("/")[3] == "login") {
-  add_splash_text();
 }

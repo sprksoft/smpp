@@ -6,7 +6,6 @@
   "appearance": {
     "theme": "ldev",
     "tabLogo": "smpp",
-    "splashText": true,
     "background": {
       "selection": "default",
       "link": "",
@@ -39,6 +38,7 @@
     "assignments": {
       "maxAssignments": 5
     },
+    "splashText": true,
     "games": {
       "snake": {
         "enableGrid": true

@@ -270,17 +270,9 @@ class DelijnWidget extends WidgetBase {
     const data = await browser.runtime.sendMessage({
       action: "getSettingsData",
     });
-    if (data.features.delijn.monochrome) {
-      let monochromeStyle = document.createElement("style");
-      monochromeStyle.innerHTML = `.lijnNumber{
-          background-color: var(--color-base02) !important;
-          color: var(--color-text) !important
-      }`;
-      document.head.appendChild(monochromeStyle);
-    }
 
     const delijnData = await fetchDelijnData(
-      `https://api.delijn.be/DLKernOpenData/api/v1/haltes/${entiteitnummer}/${haltenummer}/real-time?maxAantalDoorkomsten=5`
+      `https://api.delijn.be/DLKernOpenData/api/v1/haltes/${entiteitnummer}/${haltenummer}/real-time?maxAantalDoorkomsten=${data.features.delijn.maxBusses}`
     );
     console.log(delijnData);
 

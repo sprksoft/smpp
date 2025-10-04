@@ -99,6 +99,24 @@ function updateBackgroundBlur() {
   style.setProperty("--blur-value-large", "blur(" + bigblurvalue + "px)");
   style.setProperty("--blur-value-small", "blur(" + blurvalue + "px)");
 }
+
+function updateTabLogo(logo) {
+  let iconElement = document.querySelector('link[rel="icon"]');
+  switch (logo) {
+    case "sm":
+      iconElement.href =
+        "https://static4.smart-school.net/smsc/svg/favicon/favicon.svg";
+      break;
+    case "smpp":
+      iconElement.href = liteMode
+        ? "https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/smpp_lite_logo128.png"
+        : "https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/icon128.png";
+      break;
+    default:
+      break;
+  }
+}
+
 function updateSMPPlogo() {
   let iconElement = document.querySelector('link[rel="icon"]');
   if (iconElement) {
@@ -187,13 +205,34 @@ async function apply() {
     document.getElementById("background_image").style.display = "none";
   }
 
-  setBackground(data.appearance);
-
-  if (data.appearance.tabLogo) {
-    updateSMPPlogo();
+  if (
+    data.features.splashText &&
+    window.location.href.split("/")[3] == "login"
+  ) {
+    add_splash_text();
   } else {
-    resetSMlogo();
+    removeSplashText();
   }
+
+  if (data.features.delijn.monochrome) {
+    let monochromeStyle =
+      document.getElementById("monochrome-delijn-style") ||
+      document.createElement("style");
+    monochromeStyle.id = "monochrome-delijn-style";
+    monochromeStyle.innerHTML = `.lijnNumber{
+          background-color: var(--color-base02) !important;
+          border-color: var(--color-accent) !important;
+          color: var(--color-text) !important
+      }`;
+    if (!document.getElementById("monochrome-delijn-style"))
+      document.head.appendChild(monochromeStyle);
+  } else {
+    let monochromeStyle = document.getElementById("monochrome-delijn-style");
+    if (monochromeStyle) monochromeStyle.remove();
+  }
+
+  setBackground(data.appearance);
+  updateTabLogo(data.appearance.tabLogo);
 }
 
 async function storeQuickSettings() {
@@ -260,7 +299,9 @@ async function storeQuickSettings() {
   console.log("Storing this new data:", data);
   await browser.runtime.sendMessage({ action: "setSettingsData", data });
   await loadQuickSettings();
-  await settingsWindow.loadPage();
+  if (settingsWindow) {
+    await settingsWindow.loadPage();
+  }
   await apply();
 }
 
@@ -287,15 +328,15 @@ async function setBackground(data) {
     }
   }
   switch (data.background.selection) {
-    case "default": // Default 0
+    case "default":
       displayBackgroundImage(
         getImage("/theme-backgrounds/" + data.theme + ".jpg")
       );
       break;
-    case "link": // Link 1
+    case "link":
       displayBackgroundImage(data.background.link);
       break;
-    case "file": // File 2
+    case "file":
       let thing = await browser.runtime.sendMessage({
         action: "getBackgroundImage",
       });

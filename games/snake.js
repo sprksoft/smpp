@@ -102,7 +102,10 @@ class SnakeWidget extends GameBase {
     }
     // redraw background in case of slider change.
     const bgctx = this.#backgroundCanvas.getContext("2d", { alpha: false });
-    this.#drawBg(bgctx);
+    const settingsData = await browser.runtime.sendMessage({
+      action: "getSettingsData",
+    });
+    this.#drawBg(bgctx, settingsData);
 
     this.#counter = 0;
     this.#curDir = DIR_DOWN;
@@ -114,11 +117,14 @@ class SnakeWidget extends GameBase {
   }
 
   async onThemeChange() {
+    const settingsData = await browser.runtime.sendMessage({
+      action: "getSettingsData",
+    });
     if (!this.#backgroundCanvas) {
       return;
     }
     const bgctx = this.#backgroundCanvas.getContext("2d", { alpha: false });
-    this.#drawBg(bgctx);
+    this.#drawBg(bgctx, settingsData);
   }
 
   #drawDot(ctx, dot) {
@@ -135,28 +141,30 @@ class SnakeWidget extends GameBase {
     ctx.fill();
   }
 
-  #drawBg(ctx) {
+  #drawBg(ctx, settingsData) {
     const cellCount = this.getOpt("size") * 0.01 * CELL_COUNT;
     const celRad = this.#calcCelRad();
     ctx.strokeWidth = 0;
     ctx.fillStyle = getThemeVar("--color-base01");
     ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-    for (let y = 0; y < cellCount; y++) {
-      for (let x = 0; x < cellCount; x++) {
-        if ((x + y) % 2 == 0) {
-          ctx.fillStyle = `${getThemeVar("--color-base03")}50`;
-        } else {
-          ctx.fillStyle = `${getThemeVar("--color-base02")}50`;
+    if (settingsData.features.games.snake.enableGrid) {
+      for (let y = 0; y < cellCount; y++) {
+        for (let x = 0; x < cellCount; x++) {
+          if ((x + y) % 2 == 0) {
+            ctx.fillStyle = `${getThemeVar("--color-base03")}50`;
+          } else {
+            ctx.fillStyle = `${getThemeVar("--color-base02")}50`;
+          }
+          ctx.beginPath();
+          ctx.arc(
+            celRad + x * celRad * 2,
+            celRad + y * celRad * 2,
+            celRad * 0.7,
+            0,
+            Math.PI * 2
+          );
+          ctx.fill();
         }
-        ctx.beginPath();
-        ctx.arc(
-          celRad + x * celRad * 2,
-          celRad + y * celRad * 2,
-          celRad * 0.7,
-          0,
-          Math.PI * 2
-        );
-        ctx.fill();
       }
     }
   }
