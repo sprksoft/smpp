@@ -69,32 +69,43 @@ function getPfpLink(username) {
     firstInitial + secondInitial
   }/plain/1/res/128`;
 }
-function switchCoursesButton() {
-  topnav = document.querySelector(".topnav");
-  if (topnav)
-    topnav.insertBefore(
-      document.querySelector("[data-links]"),
-      document.querySelector("[data-courses]")
-    );
-}
-function topNavIcons(data) {
+
+function updateTopNavIcons(data) {
   const notifsButton = document.querySelector(".js-btn-notifs");
   if (notifsButton && data.notifications) {
     const textSpan = notifsButton.querySelector("span");
     notifsButton.innerHTML = notfisSvg;
     notifsButton.appendChild(textSpan);
+  } else if (notifsButton && !data.notifications) {
+    const textSpan = notifsButton.querySelector("span");
+    notifsButton.innerHTML = "Meldingen";
+    notifsButton.appendChild(textSpan);
   }
   const startButton = document.querySelector(".js-btn-home");
   if (startButton && data.home) {
     startButton.innerHTML = homeiconSvg;
+  } else if (startButton && !data.home) {
+    startButton.innerHTML = "Start";
   }
   const messageButton = document.querySelector(".js-btn-messages");
   if (messageButton && data.mail) {
     const textSpan = messageButton.querySelector("span");
     messageButton.innerHTML = messageSvg;
     messageButton.appendChild(textSpan);
+  } else if (messageButton && !data.mail) {
+    const textSpan = messageButton.querySelector("span");
+    messageButton.innerHTML = "Berichten";
+    messageButton.appendChild(textSpan);
+  }
+
+  const settingButton = document.getElementById("quickSettingsButton");
+  if (settingButton && data.settings) {
+    settingButton.innerHTML = settingsIconSvg;
+  } else if (settingButton && !data.settings) {
+    settingButton.innerHTML = "Settings";
   }
 }
+
 function updateBackgroundBlur() {
   style.setProperty("--blur-value-large", "blur(" + bigblurvalue + "px)");
   style.setProperty("--blur-value-small", "blur(" + blurvalue + "px)");
@@ -117,20 +128,23 @@ function updateTabLogo(logo) {
   }
 }
 
-function updateSMPPlogo() {
-  let iconElement = document.querySelector('link[rel="icon"]');
-  if (iconElement) {
-    iconElement.href = liteMode
-      ? "https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/smpp_lite_logo128.png"
-      : "https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/icon128.png";
+function applyTopNav(data) {
+  updateTopNavIcons(data.icons);
+  updateTopButtons(data.buttons);
+  let topNav = document.querySelector(".topnav");
+  if (data.switchCoursesAndLinks) {
+    topNav.insertBefore(
+      document.querySelector("[data-links]"),
+      document.querySelector("[data-courses]")
+    );
+  } else {
+    topNav.insertBefore(
+      document.querySelector("[data-courses]"),
+      document.querySelector("[data-links]")
+    );
   }
 }
-function resetSMlogo() {
-  let iconElement = document.querySelector('link[rel="icon"]');
-  if (iconElement)
-    iconElement.href =
-      "https://static4.smart-school.net/smsc/svg/favicon/favicon.svg";
-}
+
 async function apply() {
   await reloadDMenuConfig(); // reload the dmenu config. (er is een object voor async raarheid te vermijden en dat wordt herladen door deze functie)
   setEditMode(false); // Turn off widget edit mode
@@ -156,22 +170,9 @@ async function apply() {
 
   await setTheme(data.appearance.theme);
 
-  news(data.features.news);
+  updateNews(data.features.news);
 
-  getThemeQueryString([
-    "color-base00",
-    "color-base01",
-    "color-base02",
-    "color-base03",
-    "color-accent",
-    "color-text",
-  ]);
-
-  if (document.querySelector("nav.topnav")) {
-    topNavIcons(data.topNav.icons);
-    if (data.topNav.switchCoursesAndLinks) switchCoursesButton();
-  }
-  updateTopButtons(data.topNav);
+  applyTopNav(data.topNav);
 
   if (document.querySelector(".login-app__left")) updateLoginPanel();
 
@@ -595,7 +596,6 @@ function createQuickSettings() {
   quickSettingsWindow.addEventListener("change", storeQuickSettings);
   quickSettingsWindow = createQuickSettingsHTML(quickSettingsWindow);
 
-  quickSettingsWindow.style.left = -237 / 3 + "px";
   document
     .getElementById("quickSettingsButton")
     .insertAdjacentElement("afterend", quickSettingsWindow);
@@ -683,28 +683,28 @@ function createTopButtons() {
 function updateTopButtons(data) {
   let GOButton = document.querySelector(`[data-go=""]`);
   if (GOButton) {
-    data.enableGOButton
+    data.GOButton
       ? (GOButton.style = "display:flex")
       : (GOButton.style = "display:none");
   }
 
   let searchButton = document.querySelector(".topnav__btn--icon--search");
   if (searchButton) {
-    data.enableSearchButton
+    data.searchButton
       ? (searchButton.parentElement.style = "display:flex")
       : (searchButton.parentElement.style = "display:none");
   }
 
   let GCButton = document.getElementById("global_chat_button");
   if (GCButton) {
-    data.enableGCButton
+    data.GCButton
       ? (GCButton.style = "display:flex !important")
       : (GCButton.style = "display:none !important");
   }
 
   let quickButton = document.getElementById("quick-menu-button");
   if (quickButton) {
-    data.enableQuickMenuButton
+    data.quickMenuButton
       ? (quickButton.style = "display:flex !important")
       : (quickButton.style = "display:none !important");
   }

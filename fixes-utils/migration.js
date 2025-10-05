@@ -261,10 +261,10 @@ async function migrateSettingsV2() {
         },
       },
       topNav: {
-        enableGOButton: false,
-        enableSearchButton: false,
-        enableGCButton: true,
-        enableQuickMenuButton: false,
+        GOButton: false,
+        searchButton: false,
+        GCButton: true,
+        quickMenuButton: false,
         switchCoursesAndLinks: true,
         icons: {
           home: true,
@@ -300,9 +300,9 @@ async function migrateSettingsV2() {
         },
       },
       topNav: {
-        enableGOButton: false,
-        enableSearchButton: false,
-        enableQuickMenuButton: false,
+        GOButton: false,
+        searchButton: false,
+        quickMenuButton: false,
         switchCoursesAndLinks: true,
         icons: {
           home: true,

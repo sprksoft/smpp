@@ -17,10 +17,12 @@
     }
   },
   "topNav": {
-    "enableGOButton": "boolean",
-    "enableGCButton": "boolean",
-    "enableSearchButton": "boolean",
-    "enableQuickMenuButton": "boolean",
+    "buttons": {
+      "GOButton": false,
+      "GCButton": true,
+      "searchButton": false,
+      "quickMenuButton": false
+    },
     "switchCoursesAndLinks": "boolean",
     "icons": {
       "home": "boolean",

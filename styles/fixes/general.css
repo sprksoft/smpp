@@ -246,10 +246,7 @@ button.smscButton.blue.fileupload_submit_button,
 .enableAnimations .input-search,
 .enableAnimations button.smscButton.blue.fileupload_submit_button,
 .enableAnimations .wide-colored-btn {
-  transition:
-    border 0.3s,
-    background-color 0.3s,
-    color 0.3s;
+  transition: border 0.3s, background-color 0.3s, color 0.3s;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -755,7 +752,9 @@ input:checked + .slider:before {
 }
 
 #quickSettings {
-  top: 34px !important;
+  top: 110%;
+  left: 50%;
+  transform: translateX(-50%) translateY(0px);
   max-width: 270px !important;
   background-color: var(--color-base02) !important;
   border: 2px solid var(--color-base03) !important;
@@ -1066,15 +1065,15 @@ option:hover {
 }
 
 .st5 {
-  fill: var(--color-accent) !important;
+  fill: var(--color-text) !important;
 }
 
 .st4 {
   stroke: var(--color-accent) !important;
 }
 
-.stroke1 {
-  stroke: var(--color-accent) !important;
+.text-stroke {
+  stroke: var(--color-text) !important;
 }
 
 .header.js-header.overview-page__header.header--single-line {
@@ -1305,10 +1304,6 @@ div#smscSearchView {
   height: fit-content !important;
 }
 
-button.js-btn-notifs.topnav__btn {
-  padding: 2px 7px !important;
-}
-
 div.correctioninfo {
   border-radius: 10px !important;
 }
@@ -1363,29 +1358,47 @@ span.js-badge-msg.topnav__badge {
   opacity: 0.7 !important;
 }
 
-button.js-btn-notifs.topnav__btn:hover,
-a.js-btn-messages.topnav__btn:hover {
-  text-decoration: none !important;
+@keyframes flyInFromTop {
+  from {
+    transform: translateX(-50%) translateY(-100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(-50%) translateY(0px);
+    opacity: 1;
+  }
 }
 
-@keyframes flyInFromTop {
+@keyframes flyInFromTopNoTranslateX {
   from {
     transform: translateY(-100%);
     opacity: 0;
   }
 
   to {
-    transform: translateY(0);
+    transform: translateY(0px);
     opacity: 1;
   }
+}
+
+#shortcutsMenu,
+#coursesMenu,
+#linksMenu {
+  top: 110% !important;
+  left: 50% !important;
 }
 
 .enableAnimations #shortcutsMenu,
 .enableAnimations #coursesMenu,
 .enableAnimations #linksMenu,
-.enableAnimations #notifsMenu,
 .enableAnimations #quickSettings {
   animation: flyInFromTop 0.15s ease forwards;
+}
+
+.enableAnimations #searchMenu,
+.enableAnimations #notifsMenu {
+  animation: flyInFromTopNoTranslateX 0.15s ease forwards;
 }
 
 .homepage__right {
@@ -1974,10 +1987,8 @@ div.smscCheckbox input[type="checkbox"]:not(.loading):focus + label:before {
 }
 
 .enableAnimations .topnav__menuitem--img {
-  transition:
-    background-position 0.15s ease-out,
-    background-color 0.15s ease-out,
-    margin 0.15s ease-out !important;
+  transition: background-position 0.15s ease-out,
+    background-color 0.15s ease-out, margin 0.15s ease-out !important;
 }
 
 .topnav__menuitem--img:hover {

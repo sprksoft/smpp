@@ -448,6 +448,6 @@ label.settings-page-image-button-wrapper:has(input:checked) {
 }
 
 .smpp-link-clear-button#settings-page-link-clear-button {
-  right: 4rem;
+  right: 3.6rem;
   z-index: 1000;
 }
