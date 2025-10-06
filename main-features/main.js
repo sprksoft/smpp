@@ -172,7 +172,7 @@ async function apply() {
 
   updateNews(data.features.news);
 
-  applyTopNav(data.topNav);
+  if (document.querySelector(".topnav")) applyTopNav(data.topNav);
 
   if (document.querySelector(".login-app__left")) updateLoginPanel();
 

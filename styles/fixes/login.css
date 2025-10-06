@@ -1,239 +1,237 @@
 html {
-    --loginpage-image: url("");
-    --show-options: none;
+  --loginpage-image: url("");
+  --show-options: none;
 }
 
 .login-app__platform-indicator {
-    background-color: transparent !important;
-    padding: 20px !important;
-    margin: 10px !important;
-    height: 100px !important;
-    text-align: center !important;
+  background-color: transparent !important;
+  padding: 20px !important;
+  margin: 10px !important;
+  height: 100px !important;
+  text-align: center !important;
 }
 
 .login-app__bottom {
-    background-image: none !important;
+  background-image: none !important;
 }
 
 .login-app__school-logo {
-    display: none !important;
+  display: none !important;
 }
 
 .login-app__title--sign-in-with,
 .attachmentList__list .attachment__title__label {
-    color: var(--color-text) !important;
+  color: var(--color-text) !important;
 }
 
 .login-app__container,
 .login-app {
-    background-position: center !important;
-    background-size: cover !important;
-    flex-grow: 0 !important;
+  background-position: center !important;
+  background-size: cover !important;
+  flex-grow: 0 !important;
 }
 
 .login-app__left > * {
-    display: none !important;
+  display: none !important;
 }
 
 .login-app__right,
 .login-app__top {
-    box-shadow: none !important;
-    width: 400px;
-    height: auto;
+  box-shadow: none !important;
+  width: 400px;
+  height: auto;
 }
 
 .login-app__top {
-    background-color: var(--background-color) !important;
-    background-color: transparent !important;
-    backdrop-filter: blur(10px) !important;
-    border-radius: 25px !important;
-    border: 3px solid var(--color-base03) !important;
+  backdrop-filter: blur(10px) !important;
+  border-radius: 2.5rem !important;
+  border: 3px solid var(--color-base03) !important;
 }
 
 .enableAnimations .login-app__top {
-    transition: all 100ms ease-in 0s !important;
+  transition: all 100ms ease-in 0s !important;
 }
 
 .login-app__bottom {
-    display: none !important;
+  display: none !important;
 }
 
 .logintitle {
-    font-size: 36px !important;
-    font-weight: 650 !important;
-    margin-bottom: 0px !important;
-    color: var(--color-text) !important;
+  font-size: 36px !important;
+  font-weight: 650 !important;
+  margin-bottom: 0px !important;
+  color: var(--color-text) !important;
 }
 
 .login-app__link,
 .login-app__link--password {
-    color: var(--color-text) !important;
+  color: var(--color-text) !important;
 }
 
 a.smscButton[href^="/login/sso/init"],
 .login-app__title--sign-in-with {
-    display: var(--show-options) !important;
-    border-radius: 10px !important;
-    width: 80% !important;
-    align-self: center !important;
+  display: var(--show-options) !important;
+  border-radius: 10px !important;
+  width: 80% !important;
+  align-self: center !important;
 }
 
 .login-app__form > form {
-    margin-bottom: 5px !important;
-    display: grid !important;
+  margin-bottom: 5px !important;
+  display: grid !important;
 }
 
 .login-app__title--separator {
-    display: grid !important;
-    margin-bottom: 0px !important;
+  display: grid !important;
+  margin-bottom: 0px !important;
 }
 
 body {
-    background-image: var(--loginpage-image) !important;
-    background-position: center !important;
-    background-size: cover !important;
+  background-image: var(--loginpage-image) !important;
+  background-position: center !important;
+  background-size: cover !important;
 }
 
 .showLeftNav:has(.login-app) {
-    align-items: center !important;
-    justify-content: center !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
 #smscMain.showLeftNav {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: flex-start !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: flex-start !important;
 }
 
 .float-label__input {
-    border-radius: 40px !important;
-    height: 40px !important;
-    font-size: 15px !important;
-    margin: 10px !important;
-    margin-left: 0px !important;
+  border-radius: 40px !important;
+  height: 40px !important;
+  font-size: 15px !important;
+  margin: 10px !important;
+  margin-left: 0px !important;
 }
 
 .login-app .smscButton.blue:not(#pushWizardPopupConfirmButton) {
-    border-radius: 9999px !important;
-    width: 90% !important;
-    height: 40px !important;
-    color: var(--color-text) !important;
-    border-color: var(--color-base02) !important;
-    background-color: var(--color-base01) !important;
-    font-weight: 450;
-    box-shadow: none !important;
-    justify-self: center;
+  border-radius: 9999px !important;
+  width: 90% !important;
+  height: 40px !important;
+  color: var(--color-text) !important;
+  border-color: var(--color-base02) !important;
+  background-color: var(--color-base01) !important;
+  font-weight: 450;
+  box-shadow: none !important;
+  justify-self: center;
 }
 
 .enableAnimations
-    .login-app
-    .smscButton.blue:not(#pushWizardPopupConfirmButton) {
-    transition: all 0.3s !important;
+  .login-app
+  .smscButton.blue:not(#pushWizardPopupConfirmButton) {
+  transition: all 0.3s !important;
 }
 
 .login-app .smscButton.blue:hover:not(#pushWizardPopupConfirmButton:hover) {
-    background-color: var(--color-base02) !important;
-    border-color: var(--color-base03) !important;
-    box-shadow: none !important;
-    width: 100% !important;
-    font-weight: 700 !important;
-    margin-left: 0% !important;
+  background-color: var(--color-base02) !important;
+  border-color: var(--color-base03) !important;
+  box-shadow: none !important;
+  width: 100% !important;
+  font-weight: 700 !important;
+  margin-left: 0% !important;
 }
 
 .modern-ui .float-label__input:focus + label > span,
 .modern-ui .float-label__input:valid + label > span {
-    font-size: 18px !important;
-    left: 5px !important;
-    top: -70px !important;
-    color: var(--color-text) !important;
+  font-size: 18px !important;
+  left: 5px !important;
+  top: -70px !important;
+  color: var(--color-text) !important;
 }
 
 .login-app__form {
-    color: var(--color-text) !important;
-    display: flex !important;
-    flex-direction: column !important;
+  color: var(--color-text) !important;
+  display: flex !important;
+  flex-direction: column !important;
 }
 
 .white_text_button {
-    color: var(--color-base01) !important;
-    background-color: var(--color-base01);
-    color: var(--color-text) !important;
-    border: 2px solid var(--color-base02) !important;
-    border-radius: 5px !important;
-    margin: 10px !important;
-    font-size: 15px !important;
+  color: var(--color-base01) !important;
+  background-color: var(--color-base01);
+  color: var(--color-text) !important;
+  border: 2px solid var(--color-base02) !important;
+  border-radius: 5px !important;
+  margin: 10px !important;
+  font-size: 15px !important;
 }
 
 .enableAnimations .white_text_button {
-    transition: ease-in-out !important;
-    transition-duration: 0.1s !important;
+  transition: ease-in-out !important;
+  transition-duration: 0.1s !important;
 }
 
 .white_text_button:hover {
-    background-color: var(--color-base02) !important;
-    border-color: var(--color-base03) !important;
+  background-color: var(--color-base02) !important;
+  border-color: var(--color-base03) !important;
 }
 
 .login-app__infoblock--black {
-    color: var(--color-text) !important;
+  color: var(--color-text) !important;
 }
 
 .login-app__title--separator:after,
 .login-app__title--separator:before {
-    display: none !important;
+  display: none !important;
 }
 
 span.login-app__title.login-app__title--sign-in-with {
-    display: none !important;
+  display: none !important;
 }
 
 .splashtextcontainer {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform-origin: left !important;
-    transform: translateX(180px) translateY(-240px) rotate(30deg) !important;
-    /* Moves right by 200px and rotates */
-    text-align: center;
-    z-index: 99999;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform-origin: left !important;
+  transform: translateX(180px) translateY(-240px) rotate(30deg) !important;
+  /* Moves right by 200px and rotates */
+  text-align: center;
+  z-index: 99999;
 }
 
 .splashtext {
-    color: var(--color-splashtext) !important;
-    font-size: 30px !important;
-    left: -50% !important;
-    position: relative !important;
+  color: var(--color-splashtext) !important;
+  font-size: 30px !important;
+  left: -50% !important;
+  position: relative !important;
 }
 
 .enableAnimations .splashtext {
-    animation: scale_up_and_down 0.58s linear infinite;
+  animation: scale_up_and_down 0.58s linear infinite;
 }
 
 @keyframes scale_up_and_down {
-    0% {
-        transform: scale(100%);
-    }
+  0% {
+    transform: scale(100%);
+  }
 
-    50% {
-        transform: scale(105%);
-    }
+  50% {
+    transform: scale(105%);
+  }
 
-    100% {
-        transform: scale(100%);
-    }
+  100% {
+    transform: scale(100%);
+  }
 }
 
 #showmore {
-    width: 80% !important;
-    justify-self: center !important;
-    border-radius: 10px !important;
-    margin: 0px !important;
+  width: 80% !important;
+  justify-self: center !important;
+  border-radius: 10px !important;
+  margin: 0px !important;
 }
 
 .login-app__password .form__eye-icon {
-    top: 1.55rem !important;
+  top: 1.55rem !important;
 }
 
 #smscMain.showLeftNav:has(.login-app) {
-    align-items: center !important;
+  align-items: center !important;
 }
