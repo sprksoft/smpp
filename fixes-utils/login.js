@@ -107,7 +107,7 @@ let splashtexts = [
   `https://smartschoolplusplus.com`,
   `weak fingers`,
   `Beep beep I'm a sheep`,
-  `I love yawascwipt !`,
+  `I love yavascript !`,
   `Always take your maths kids`,
   `Gele auto!`,
   `LET ME OUTTT!!!`,
@@ -135,9 +135,10 @@ let splashtexts = [
   `Ruby chan, haii!!`,
   `It's so sweet`,
   `Feeling diskinserted?`,
-  `Vamipre in the corner.\nAm I scaring you off?`, // this is correct Sibe
+  `Vamipre in the corner.\nIs it scaring you off?`,
   `Whopper Whopper`,
-  `<s>nginx</s>, <i>Engineks</i>`,
+  `<s>nginx</s>, <i>Enginks</i>`,
+  `I love ECMAScript`
 ];
 function get_splash_text() {
   return splashtexts[Math.floor(Math.random() * splashtexts.length)];
