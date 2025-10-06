@@ -202,13 +202,13 @@ class SettingsWindow extends BaseWindow {
 
         // Buttons
         document.getElementById("settings-page-go-button").checked =
-          settings.topNav.buttons.GOButton;
+          settings.topNav.buttons.GO;
         document.getElementById("settings-page-global-chat-button").checked =
-          settings.topNav.buttons.GCButton;
+          settings.topNav.buttons.GC;
         document.getElementById("settings-page-search-button").checked =
-          settings.topNav.buttons.searchButton;
+          settings.topNav.buttons.search;
         document.getElementById("settings-page-quick-menu-button").checked =
-          settings.topNav.buttons.quickMenuButton;
+          settings.topNav.buttons.quickMenu;
 
         // Icons
         document.getElementById("settings-page-home-icon-button").checked =
@@ -359,16 +359,16 @@ class SettingsWindow extends BaseWindow {
         ).checked;
 
         // Buttons
-        data.topNav.buttons.GOButton = document.getElementById(
+        data.topNav.buttons.GO = document.getElementById(
           "settings-page-go-button"
         ).checked;
-        data.topNav.buttons.GCButton = document.getElementById(
+        data.topNav.buttons.GC = document.getElementById(
           "settings-page-global-chat-button"
         ).checked;
-        data.topNav.buttons.searchButton = document.getElementById(
+        data.topNav.buttons.search = document.getElementById(
           "settings-page-search-button"
         ).checked;
-        data.topNav.buttons.quickMenuButton = document.getElementById(
+        data.topNav.buttons.quickMenu = document.getElementById(
           "settings-page-quick-menu-button"
         ).checked;
 

@@ -18,10 +18,10 @@
   },
   "topNav": {
     "buttons": {
-      "GOButton": false,
-      "GCButton": true,
-      "searchButton": false,
-      "quickMenuButton": false
+      "GO": false,
+      "GC": true,
+      "search": false,
+      "quickMenu": false
     },
 
     "switchCoursesAndLinks": true,

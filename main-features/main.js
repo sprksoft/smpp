@@ -664,7 +664,7 @@ function createTopButtons() {
   let pushRight = topNav.childNodes[2];
 
   if (!liteMode) {
-    topNav.insertBefore(createGCButton(), pushRight);
+    topNav.insertBefore(createGC(), pushRight);
   }
   let searchButton = document.querySelector(".topnav__btn--icon--search");
   if (searchButton) {
@@ -681,30 +681,28 @@ function createTopButtons() {
 }
 
 function updateTopButtons(data) {
-  let GOButton = document.querySelector(`[data-go=""]`);
-  if (GOButton) {
-    data.GOButton
-      ? (GOButton.style = "display:flex")
-      : (GOButton.style = "display:none");
+  let GO = document.querySelector(`[data-go=""]`);
+  if (GO) {
+    data.GO ? (GO.style = "display:flex") : (GO.style = "display:none");
   }
 
   let searchButton = document.querySelector(".topnav__btn--icon--search");
   if (searchButton) {
-    data.searchButton
+    data.search
       ? (searchButton.parentElement.style = "display:flex")
       : (searchButton.parentElement.style = "display:none");
   }
 
-  let GCButton = document.getElementById("global_chat_button");
-  if (GCButton) {
-    data.GCButton
-      ? (GCButton.style = "display:flex !important")
-      : (GCButton.style = "display:none !important");
+  let GC = document.getElementById("global_chat_button");
+  if (GC) {
+    data.GC
+      ? (GC.style = "display:flex !important")
+      : (GC.style = "display:none !important");
   }
 
   let quickButton = document.getElementById("quick-menu-button");
   if (quickButton) {
-    data.quickMenuButton
+    data.quickMenu
       ? (quickButton.style = "display:flex !important")
       : (quickButton.style = "display:none !important");
   }

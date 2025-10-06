@@ -38,7 +38,7 @@ async function openGlobalChat(event, beta = false) {
   gcWindow.show(event);
 }
 
-function createGCButton() {
+function createGC() {
   const GlobalChatOpenButton = document.createElement("button");
   GlobalChatOpenButton.title =
     "Global chat (chat met iedereen die de extensie gebruikt)";
