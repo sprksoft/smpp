@@ -61,6 +61,7 @@
         "games/flappy.js",
         "games/snake.js",
         "games/pong.js",
+        "games/tetris.js",
         "main-features/main.js"
       ]
     }
