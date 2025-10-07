@@ -44,7 +44,7 @@ function setByPath(object, path, value) {
   for (let i = 0; i < pathSplit.length - 1; i++) {
     ob = ob[pathSplit[i]];
     if (ob === undefined) {
-      throw `getByPath: ${node} did not exist in path ${path}`
+      throw `setByPath: ${pathSplit[i]} did not exist in path ${path}`
     }
   }
   ob[pathSplit[pathSplit.length - 1]] = value;
@@ -64,13 +64,13 @@ async function handleMessage(message, sendResponse) {
     // General
     if (message.action === "clearLocalStorage") {
       browser.storage.local.clear();
-      sendResponse({ succes: true });
+      sendResponse({ success: true });
       console.log("Cleared browser storage");
     }
     // Settings
     if (message.action === "setSettingsData") {
       await browser.storage.local.set({ settingsData: message.data });
-      sendResponse({ succes: true });
+      sendResponse({ success: true });
       console.log("Settings data saved.");
     }
     /* maybe usefull but just use the categories for now
@@ -78,26 +78,20 @@ async function handleMessage(message, sendResponse) {
       const settingsData = await getSettingsData();
       settingsData[message.name] = message.value;
       await browser.storage.local.set({ settingsData: settingsData });
-      sendResponse({ succes: true });
+      sendResponse({ success: true });
     }
     if (message.action === "getSetting") {
       const settingsData = await getSettingsData();
       settingsData[message.name] = message.value;
       await browser.storage.local.set({ settingsData: settingsData });
-      sendResponse({ succes: true });
+      sendResponse({ success: true });
     }
     */
     if (message.action === "setSettingsCategory") {
       const settingsData = await getSettingsData();
-      console.log(settingsData);
-      console.log("setting", message.category, "to", message.data);
       setByPath(settingsData, message.category, message.data);
-      console.log(settingsData);
       await browser.storage.local.set({ settingsData: settingsData });
-      sendResponse({ succes: true });
-      console.log(
-        "Settings data saved for this:" + message.category + "category",
-      );
+      sendResponse({ success: true });
     }
     if (message.action === "getSettingsCategory") {
       const settingsData = await getSettingsData();
@@ -152,13 +146,13 @@ async function handleMessage(message, sendResponse) {
     }
     if (message.action === "setCustomThemeData") {
       await browser.storage.local.set({ customThemeData: message.data });
-      sendResponse({ succes: true });
+      sendResponse({ success: true });
       console.log("Custom theme data saved.");
     }
     // Background image
     if (message.action === "saveBackgroundImage") {
       await browser.storage.local.set({ backgroundImage: message.data });
-      sendResponse({ succes: true });
+      sendResponse({ success: true });
       console.log("Background image saved.");
     }
     if (message.action === "getBackgroundImage") {
@@ -170,7 +164,7 @@ async function handleMessage(message, sendResponse) {
 
     if (message.action === "savePhotoWidgetImage") {
       await browser.storage.local.set({ photoWidgetImage: message.data });
-      sendResponse({ succes: true });
+      sendResponse({ success: true });
       console.log("Photo widget image saved.");
     }
     if (message.action === "getPhotoWidgetImage") {
@@ -182,7 +176,7 @@ async function handleMessage(message, sendResponse) {
     // Weather
     if (message.action === "setWeatherAppData") {
       await browser.storage.local.set({ weatherAppData: message.data });
-      sendResponse({ succes: true });
+      sendResponse({ success: true });
       console.log("Weather appdata saved.");
     }
     if (message.action === "getWeatherAppData") {
@@ -198,7 +192,7 @@ async function handleMessage(message, sendResponse) {
     // Delijn
     if (message.action === "setDelijnAppData") {
       await browser.storage.local.set({ delijnAppData: message.data });
-      sendResponse({ succes: true });
+      sendResponse({ success: true });
       console.log("Delijn appdata saved.");
     }
     if (message.action === "getDelijnAppData") {
@@ -218,10 +212,8 @@ async function handleMessage(message, sendResponse) {
     }
     // Plant
     if (message.action === "setPlantAppData") {
-      console.log(message.data);
       await browser.storage.local.set({ plantAppData: message.data });
-      sendResponse({ succes: true });
-      console.log("Plant appdata saved.");
+      sendResponse({ success: true });
     }
     if (message.action === "getPlantAppData") {
       const plantAppData = await getPlantAppData();
@@ -230,14 +222,12 @@ async function handleMessage(message, sendResponse) {
     }
     // Widgets
     if (message.action === "getWidgetData") {
-      console.log("getting widget data");
       let widgetData = await getWidgetData();
       sendResponse(widgetData);
     }
     if (message.action === "setWidgetData") {
-      console.log("saving widget data");
       await browser.storage.local.set({ widgets: message.widgetData });
-      sendResponse({ succes: true });
+      sendResponse({ success: true });
     }
     // Games
     if (message.action === "getGameData") {
