@@ -91,7 +91,7 @@ let splashtexts = [
   `It's either Spanish or vanish`,
   `Are you hacking??`,
   `:3`,
-  `Ma alleee ik word \ngekilled door ne kerstboom!`,
+  `Ma alleee ik word \n gekilled door ne kerstboom!`,
   `<s>SQL</s>,<i> Squil</i> ✓`,
   `undefined is not a function`,
   `:p`,
