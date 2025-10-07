@@ -62,7 +62,6 @@ class TakenWidget extends WidgetBase {
           action: "getSettingsData",
         });
         data = data.filter((element) => element.resolvedStatus !== "resolved");
-        console.log(data);
         if (!data) {
           TasksContainer.innerHTML = "Er is iets ernstig misgegaan :(";
           return console.error("No planner data, Did something go wrong?");
