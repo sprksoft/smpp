@@ -4,7 +4,7 @@
     "profilePicture": null
   },
   "appearance": {
-    "theme": "ldev",
+    "theme": "birb",
     "tabLogo": "smpp",
     "background": {
       "selection": "default",
@@ -58,6 +58,13 @@
       "centered": true,
       "itemScore": false,
       "toplevelConfig": false
+    },
+    "keybinds": {
+      "dmenu": ":",
+      "widgetEditMode": "e",
+      "widgetBag": " ",
+      "settings": "s",
+      "": ""
     }
   }
 }

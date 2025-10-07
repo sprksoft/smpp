@@ -819,3 +819,16 @@ h3.detail-description__title.title--3,
 .timegrid-plan-bubble {
   border-radius: 2.5rem !important;
 }
+
+.wholedays__expand-button-bottom-filling {
+  display: none;
+}
+
+.timegrid__header .wholedays__expand-button:hover {
+  background-color: var(--color-base02) !important;
+  border-radius: 1rem !important;
+}
+.timegrid__header .wholedays__expand-button-container {
+  background-color: var(--color-base01) !important;
+  border-radius: 1rem !important;
+}

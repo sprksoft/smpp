@@ -91,7 +91,7 @@ let splashtexts = [
   `It's either Spanish or vanish`,
   `Are you hacking??`,
   `:3`,
-  `Ma alleee ik word \ngekilled door ne kerstboom!`,
+  `Ma alleee ik word \n gekilled door ne kerstboom!`,
   `<s>SQL</s>,<i> Squil</i> ✓`,
   `undefined is not a function`,
   `:p`,
@@ -138,6 +138,7 @@ let splashtexts = [
   `Vamipre in the corner.\nAm I scaring you off?`, // this is correct Sibe
   `Whopper Whopper`,
   `<s>nginx</s>, <i>Engineks</i>`,
+  `<s>nginx</s>, <i>Enginks</i>`,
 ];
 function get_splash_text() {
   return splashtexts[Math.floor(Math.random() * splashtexts.length)];
