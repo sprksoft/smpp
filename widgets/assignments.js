@@ -23,7 +23,7 @@ class TakenWidget extends WidgetBase {
         if (!schoolName) {
           throw new Error("School name could not be determined.");
         }
-
+        // planned-to-dos / planned-elements
         const url = `https://${schoolName}.smartschool.be/planner/api/v1/planned-elements/user/${userId}?from=${getCurrentDate()}&to=${getFutureDate(
           foresight
         )}&types=planned-assignments,planned-to-dos`;
@@ -204,7 +204,7 @@ class TakenWidget extends WidgetBase {
           rowDiv.append(abbreviationDiv, detailsDiv);
 
           rowDiv.addEventListener("click", () => {
-            markAsFinished(element.id);
+            markAsFinished(element.id, element.plannedElementType);
           });
           rowDiv.addEventListener("mouseenter", () => {
             titleSpan.style.textDecoration = "line-through";
@@ -241,7 +241,7 @@ class TakenWidget extends WidgetBase {
   }
 }
 
-async function markAsFinished(as_ID) {
+async function markAsFinished(as_ID, as_TYPE) {
   const schoolName = getSchoolName();
   const userId = getUserId();
 
@@ -251,8 +251,8 @@ async function markAsFinished(as_ID) {
     );
     return false;
   }
-
-  const url = `https://${schoolName}.smartschool.be/planner/api/v1/planned-assignments/${userId}/${as_ID}/resolve`;
+  // planned-elements  /  planned-assignments
+  const url = `https://${schoolName}.smartschool.be/planner/api/v1/${as_TYPE}/${userId}/${as_ID}/resolve`;
 
   try {
     const response = await fetch(url, {
