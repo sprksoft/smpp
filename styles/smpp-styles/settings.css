@@ -451,3 +451,93 @@ label.settings-page-image-button-wrapper:has(input:checked) {
   right: 3.6rem;
   z-index: 1000;
 }
+
+.settings-page-reset-button {
+  background-color: var(--color-base01);
+  border: 2px solid var(--color-base02);
+  border-radius: 1rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.4rem;
+  font-weight: 400;
+  cursor: pointer;
+  color: var(--color-text);
+  transition: all 0.2s ease-in-out;
+  margin-bottom: 1rem;
+}
+
+.settings-page-reset-button:hover {
+  background-color: var(--color-base02);
+  border-color: var(--color-base03);
+}
+
+.settings-page-reset-button:active {
+  scale: 0.95;
+}
+
+.reset-confirmation-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+
+.reset-popup-content {
+  background-color: var(--color-base01);
+  border-radius: 1rem;
+  padding: 2rem;
+  max-width: 30rem;
+  text-align: center;
+  border: 2px solid var(--color-base02);
+}
+
+.reset-popup-content h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.8rem;
+  color: var(--color-text);
+}
+
+.reset-popup-content p {
+  margin: 0 0 2rem 0;
+  color: var(--color-text);
+  opacity: 0.8;
+}
+
+.reset-popup-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.reset-popup-cancel,
+.reset-popup-confirm {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.reset-popup-cancel {
+  background-color: var(--color-base02);
+  color: var(--color-text);
+}
+
+.reset-popup-cancel:hover {
+  background-color: var(--color-base03);
+}
+
+.reset-popup-confirm {
+  background-color: var(--color-accent);
+  color: var(--color-base00);
+}
+
+.reset-popup-confirm:hover {
+  opacity: 0.8;
+}
