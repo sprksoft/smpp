@@ -1,6 +1,9 @@
 /* vim:set shiftwidth=4: */
 
 function updateLoginPanel() {
+  if(data.features.autoLogin){
+    openURL(window.location.href + "/sso/innit/google", new_window = false)
+  }
   let login_app_left = document.querySelector(".login-app__left");
   login_app_left.innerHTML = " ";
 
