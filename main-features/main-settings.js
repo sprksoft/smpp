@@ -134,14 +134,14 @@ class SettingsWindow extends BaseWindow {
         let usernameInput = document.getElementById(
           "settings-page-username-input"
         );
-        if (settings.profile.username) {
+        if (usernameInput && settings.profile.username) {
           usernameInput.value = settings.profile.username;
         }
 
         let profilePic = document.getElementById(
           "settings-page-profile-picture"
         );
-        if (settings.profile.profilePicture) {
+        if (profilePic && settings.profile.profilePicture) {
           profilePic.src = settings.profile.profilePicture;
         }
         break;
