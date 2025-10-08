@@ -2268,3 +2268,67 @@ body.modern-ui .homepage__block__content {
 #pupilPresencesGraphTotalsByCode {
   border-color: var(--color-base03) !important;
 }
+
+.widget-content {
+  background-color: var(--color-base01) !important;
+  color: var(--color-text) !important;
+  border: 2px solid var(--color-base02) !important;
+  border-radius: 10px !important;
+  padding: 10px !important;
+}
+
+.profile_gadget_line {
+  background-color: var(--color-base01) !important;
+  color: var(--color-text) !important;
+  border: 1px solid var(--color-base03) !important;
+  border-radius: 5px !important;
+  margin: 5px 0 !important;
+  padding: 5px !important;
+}
+
+.profileInput {
+  color: var(--color-text) !important;
+}
+
+.studentPicture {
+  width: 128px !important;
+  height: 128px !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+
+.rounded_profile_photo {
+  width: 64px !important;
+  height: 64px !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+
+.square_photo_64 {
+  width: 64px !important;
+  height: 64px !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+
+.square_photo_128 {
+  width: 128px !important;
+  height: 128px !important;
+  background-size: cover !important;
+  background-position: center !important;
+  display: block !important;
+}
+
+.profile_header_photo {
+  border-radius: 50% !important;
+}
+
+.pupil_nav_photo {
+  border-radius: 50% !important;
+}
+
+#tabSpan_2 {
+  background-image: none !important;
+}
