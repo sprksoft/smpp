@@ -393,6 +393,10 @@ class SettingsWindow extends BaseWindow {
           "settings-page-show-news-button",
         ).checked;
 
+         data.features.autoLogin = document.getElementById(
+          "settings-page-auto-login-google-button",
+        ).checked;
+
         data.features.splashText = document.getElementById(
           "settings-page-splash-text-button",
         ).checked;
@@ -887,12 +891,12 @@ class SettingsWindow extends BaseWindow {
 
         this.settingsPage.appendChild(createSectionTitle("Login"));
         this.settingsPage.appendChild(
-          createDescription("Change the login page configuration."),
+          createDescription("Automaticly log in using Google."),
         );
         this.settingsPage.appendChild(
           createButtonWithLabel(
-            "settings-page-splash-text-button",
-            "Splash-text",
+            "settings-page-auto-login-google-button",
+            "Autologin with Google",
           ),
         );
 
