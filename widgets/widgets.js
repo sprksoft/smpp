@@ -1,5 +1,6 @@
 const PANNELIP_MARGIN_PX = 20;
 
+let widgetSystemCreated = false;
 let widgetEditModeInit = false;
 let widgetEditMode = false;
 let hoveringBag = false;
@@ -99,7 +100,7 @@ class WidgetBase {
     }
     if (!newContent) {
       console.error(
-        "createContent and createPreview method's needs to return an html object. in widget impl"
+        "createContent and createPreview method's needs to return an html object. in widget impl",
       );
       newContent = createWidgetErrorContent(this.name);
     }
@@ -183,7 +184,7 @@ class WidgetBase {
         let pannel = await createPannelHTML({ widgets: [] });
         pannelContainer.insertBefore(
           createInsertionPointHTML(true),
-          targetIp.nextElementSibling
+          targetIp.nextElementSibling,
         );
         pannelContainer.insertBefore(pannel, targetIp.nextElementSibling);
         targetIp = pannel.firstChild;
@@ -193,7 +194,7 @@ class WidgetBase {
       targetPannel.style.display = "block";
       targetPannel.insertBefore(
         createInsertionPointHTML(),
-        targetIp.nextElementSibling
+        targetIp.nextElementSibling,
       );
       targetPannel.insertBefore(el, targetIp.nextElementSibling);
 
@@ -237,9 +238,8 @@ class WidgetBase {
     el.style.width = rect.width + "px";
     el.style.left = rect.left + "px";
     el.style.top = rect.top + "px";
-    el.style[
-      "transform-origin"
-    ] = `${curDragInfo.offset.x}px ${curDragInfo.offset.y}px`;
+    el.style["transform-origin"] =
+      `${curDragInfo.offset.x}px ${curDragInfo.offset.y}px`;
 
     el.classList.add("smpp-widget-dragging");
 
@@ -316,11 +316,11 @@ class SmartschoolWidget extends WidgetBase {
 function targetInsertionPoint(target) {
   if (target !== curDragInfo.targetInsertionPoint) {
     curDragInfo.targetInsertionPoint?.classList.remove(
-      "smpp-widget-insertion-point-targeted"
+      "smpp-widget-insertion-point-targeted",
     );
     curDragInfo.targetInsertionPoint = target;
     curDragInfo.targetInsertionPoint?.classList.add(
-      "smpp-widget-insertion-point-targeted"
+      "smpp-widget-insertion-point-targeted",
     );
   }
 }
@@ -437,10 +437,49 @@ async function createWidgetsContainerHTML(widgetData, newsContent, news) {
 
 function updateNews(value) {
   newsState = value;
-  let newsContent = document.getElementById("smpp-news-content");
+  const newsContent = document.getElementById("smpp-news-content");
   if (newsContent) {
-    newsContent.style.display = value ? "block" : "none";
+    newsContent.style.display = value ? "" : "none";
   }
+}
+
+function setNewsEditMode(value) {
+  const newsCon = document.querySelector(".smpp-news-container");
+  document.querySelector(".smpp-news-editor").style.display = value
+    ? ""
+    : "none";
+
+  const button = document.getElementById("smpp-widget-news-toggle");
+  button.checked = newsState;
+
+  if (value) {
+    newsCon.classList.add("smpp-news-editmode");
+  } else {
+    newsCon.classList.remove("smpp-news-editmode");
+  }
+}
+function initNewsEditMode() {
+  const div = document.createElement("div");
+  div.classList.add("smpp-news-editor");
+
+  const label = document.createElement("label");
+  label.innerText = "Show News";
+  label.for = "smpp-widget-news-toggle";
+  div.appendChild(label);
+
+  const button = createButton("smpp-widget-news-toggle");
+  button.addEventListener("change", async (e) => {
+    updateNews(e.target.checked);
+    await browser.runtime.sendMessage({
+      action: "setSettingsCategory",
+      category: "features.news",
+      data: e.target.checked,
+    });
+  });
+  div.appendChild(button);
+  document.querySelector(".smpp-news-container").appendChild(div);
+
+  setNewsEditMode(false);
 }
 
 // Notify the widget system about a theme change
@@ -460,7 +499,6 @@ async function createWidgetSystem() {
   let news = document.getElementById("centercontainer");
   if (!news) {
     console.error(`"centercontainer" doesn't exist`);
-    location.reload();
     return false;
   }
   let widgetData = await browser.runtime.sendMessage({
@@ -478,7 +516,7 @@ async function createWidgetSystem() {
 
   // Create smartschool default widgets
   for (let smWidget of document.querySelectorAll(
-    "#rightcontainer .homepage__block"
+    "#rightcontainer .homepage__block",
   )) {
     let wName = "SmartschoolWidget-" + smWidget.id;
     registerWidget(new SmartschoolWidget(smWidget));
@@ -487,7 +525,7 @@ async function createWidgetSystem() {
     }
   }
   for (let smWidget of document.querySelectorAll(
-    "#leftcontainer .homepage__block"
+    "#leftcontainer .homepage__block",
   )) {
     let wName = "SmartschoolWidget-" + smWidget.id;
     registerWidget(new SmartschoolWidget(smWidget));
@@ -505,12 +543,13 @@ async function createWidgetSystem() {
   widgetsContainer = await createWidgetsContainerHTML(
     widgetData,
     news,
-    newsState
+    newsState,
   );
 
   container.innerHTML = "";
   container.appendChild(widgetsContainer);
 
+  widgetSystemCreated = true;
   return true;
 }
 
@@ -706,16 +745,17 @@ function getWidgetByName(name) {
 async function setEditMode(value) {
   if (value && !widgetEditModeInit) {
     console.error(
-      "Widget edit mode has not been initalized. setEditMode(true) has been called. (call initWidgetEditMode first) (This is a bug)"
+      "Widget edit mode has not been initalized. setEditMode(true) has been called. (call initWidgetEditMode first) (This is a bug)",
     );
   }
 
   if (!doneButton) {
     createWidgetsDoneButton();
   }
-  if (value === true) {
+
+  setNewsEditMode(value);
+  if (value) {
     document.body.classList.add("smpp-widget-edit-mode");
-    document.getElementById("smpp-news-content").style.display = "none";
     if (!widgetBag) {
       widgetBag = await createWidgetBag();
       widgetBagHandle = widgetBag.querySelector(".smpp-widget-bag-handle");
@@ -726,10 +766,8 @@ async function setEditMode(value) {
     }
     closeBag();
     document.body.classList.remove("smpp-widget-edit-mode");
-    updateNews(newsState);
   }
   updateDoneButtonState(value);
-
   widgetEditMode = value;
 }
 
@@ -737,7 +775,17 @@ function initWidgetEditMode() {
   if (widgetEditModeInit) {
     return;
   }
+
+  if (!widgetSystemCreated) {
+    console.error(
+      "Widget system has not been created yet. But initWidgetEditMode has been called",
+    );
+    return;
+  }
   widgetEditModeInit = true;
+
+  initNewsEditMode();
+
   document.addEventListener("mouseup", async (e) => {
     if (curDragInfo) {
       await curDragInfo.widget.drop(false);

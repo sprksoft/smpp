@@ -11,7 +11,8 @@ html {
 
   --preview-width: calc(var(--pannel-width) * 0.7);
   --bag-close-transformy: calc(
-    -100% - var(--smpp-widget-bag-margin) - 8px + var(--smpp-widget-bag-handle-height)
+    -100% - var(--smpp-widget-bag-margin) - 8px +
+      var(--smpp-widget-bag-handle-height)
   ); /* -8px for 2 times the border size */
 }
 
@@ -33,7 +34,9 @@ html {
 /* Only use rem's here no em because widgets will be moved to body when they are dragged */
 .smpp-widget {
   height: min-content;
-  transition: transform 0.4s, padding 0.25s;
+  transition:
+    transform 0.4s,
+    padding 0.25s;
   transform: scale(1) rotate(0deg);
   background-color: var(--color-base01);
   padding: 1.5rem;
@@ -59,10 +62,22 @@ html {
   height: 100%;
 }
 
+/* NEWS */
 .smpp-news-container {
   flex-grow: 1;
   overflow: scroll;
   backdrop-filter: var(--blur-value-small);
+}
+.smpp-news-editmode #smpp-news-content {
+  display: none !important;
+}
+.smpp-news-editor {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  margin: 0px;
 }
 
 .smpp-widget.smpp-widget-preview {
@@ -140,7 +155,9 @@ html {
 }
 
 .enableAnimations .topnav {
-  transition: opacity 0.3s ease-in-out, filter 0.3s ease-in-out !important;
+  transition:
+    opacity 0.3s ease-in-out,
+    filter 0.3s ease-in-out !important;
 }
 
 .smpp-widget-edit-mode:not(.smpp-widget-dragging-something)
@@ -303,7 +320,10 @@ html {
 
 .enableAnimations .smpp-widget-bag-handle-icon,
 .enableAnimations .smpp-widget-bag-handle {
-  transition: border-color 0.5s, color 0.5s, transform 0.5s;
+  transition:
+    border-color 0.5s,
+    color 0.5s,
+    transform 0.5s;
 }
 
 .smpp-widget-bag-open .smpp-widget-bag-handle-icon {
@@ -421,8 +441,12 @@ html {
 }
 
 .enableAnimations .widgets-done-button {
-  transition: opacity 0.2s ease-in, top 0.4s ease-in-out, right 0.4s ease-in-out,
-    font-size 0.4s ease-in-out, height 0.4s ease-in-out;
+  transition:
+    opacity 0.2s ease-in,
+    top 0.4s ease-in-out,
+    right 0.4s ease-in-out,
+    font-size 0.4s ease-in-out,
+    height 0.4s ease-in-out;
 }
 
 .enableAnimations .widgets-done-button:hover {
