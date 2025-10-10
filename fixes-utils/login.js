@@ -101,7 +101,7 @@ let splashtexts = [
   `MERGE CONFLICT!`,
   `In case of fire: git add . \n ; git commit ; git push`,
   `Always remove French language \npack: sudo rm -fr /`,
-  `Undefined`,
+  undefined, // never change this losers!!!!
   `Is tHaT A JOjO ReFEreNce?`,
   `https://ldev.eu.org`,
   `https://smartschoolplusplus.com`,
@@ -120,7 +120,6 @@ let splashtexts = [
   `Baby Shark, doo-doo, \n doo-doo, doo-doo`,
   `Brood int frans`,
   `CORS >:(`,
-  `Join our discord!`,
   `Le poisson Steve!`,
   `Il est oraaaange! \n Il a des bras.. et des jambes`,
   `Since Nov 14, 2023`,
@@ -138,7 +137,7 @@ let splashtexts = [
   `Vamipre in the corner.\nIs it scaring you off?`,
   `Whopper Whopper`,
   `<s>nginx</s>, <i>Enginks</i>`,
-  `I love ECMAScript`
+  `I love ECMAScript`,
 ];
 function get_splash_text() {
   return splashtexts[Math.floor(Math.random() * splashtexts.length)];

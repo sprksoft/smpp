@@ -87,6 +87,32 @@ const colorpickersHTML = `
 <input type="color" class="color-pickersmpp" id="colorPicker6">
 <span class="color-label">text</span>
 </div>`;
+// TEMP BEFORE THEME UPDATE!!!!
+const colorpickersHTMLV2 = `
+<div class="color-picker-container">
+<input type="color" class="color-pickersmpp" id="settings-colorPicker1">
+<span class="color-label">base0</span>
+</div>
+<div class="color-picker-container">
+<input type="color" class="color-pickersmpp" id="settings-colorPicker2">
+<span class="color-label">base1</span>
+</div>
+<div class="color-picker-container">
+<input type="color" class="color-pickersmpp" id="settings-colorPicker3">
+<span class="color-label">base2</span>
+</div>
+<div class="color-picker-container">
+<input type="color" class="color-pickersmpp" id="settings-colorPicker4">
+<span class="color-label">base3</span>
+</div>
+<div class="color-picker-container">
+<input type="color" class="color-pickersmpp" id="settings-colorPicker5">
+<span class="color-label">accent</span>
+</div>
+<div class="color-picker-container">
+<input type="color" class="color-pickersmpp" id="settings-colorPicker6">
+<span class="color-label">text</span>
+</div>`;
 
 const temperatureSvg = `<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" style="height: 100%;" data-name="Laag 2" viewBox="0 0 13 26">
 <g id="Laag_1-2" data-name="Laag 1">

@@ -23,7 +23,6 @@
       "search": false,
       "quickMenu": false
     },
-
     "switchCoursesAndLinks": true,
     "icons": {
       "home": true,
@@ -41,7 +40,6 @@
     "assignments": {
       "maxAssignments": 5
     },
-    "splashText": true,
     "games": {
       "snake": {
         "enableGrid": true
@@ -54,6 +52,8 @@
   "other": {
     "quicks": [],
     "performanceMode": false,
+    "splashText": true,
+    "discordButton": true,
     "dmenu": {
       "centered": true,
       "itemScore": false,
@@ -63,8 +63,7 @@
       "dmenu": ":",
       "widgetEditMode": "e",
       "widgetBag": " ",
-      "settings": "s",
-      "": ""
+      "settings": "s"
     }
   }
 }

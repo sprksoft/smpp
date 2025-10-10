@@ -34,7 +34,7 @@ function fixCoursesSearch() {
 
         setTimeout(() => {
           const firstCourse = document.querySelector(
-            ".course-list.js-courses-list li a",
+            ".course-list.js-courses-list li a"
           );
           if (firstCourse) {
             firstCourse.click();
@@ -135,12 +135,12 @@ function applyTopNav(data) {
   if (data.switchCoursesAndLinks) {
     topNav.insertBefore(
       document.querySelector("[data-links]"),
-      document.querySelector("[data-courses]"),
+      document.querySelector("[data-courses]")
     );
   } else {
     topNav.insertBefore(
       document.querySelector("[data-courses]"),
-      document.querySelector("[data-links]"),
+      document.querySelector("[data-links]")
     );
   }
 }
@@ -171,6 +171,7 @@ async function apply() {
   await setTheme(data.appearance.theme);
 
   updateNews(data.features.news);
+  discordpopup();
 
   if (document.querySelector(".topnav")) applyTopNav(data.topNav);
 
@@ -183,18 +184,18 @@ async function apply() {
 
   style.setProperty(
     "--profile-picture",
-    "url(" + getPfpLink(data.profile.username || getOriginalName()) + ")",
+    "url(" + getPfpLink(data.profile.username || getOriginalName()) + ")"
   );
   style.setProperty("--blur-value-large", `blur(${defaultBackgroundBlur}px)`);
   style.setProperty(
     "--blur-value-small",
-    `blur(${data.appearance.background.blur}px)`,
+    `blur(${data.appearance.background.blur}px)`
   );
 
   if (!liteMode) {
     applyWeatherEffects(
       data.appearance.weatherOverlay.type,
-      data.appearance.weatherOverlay.amount,
+      data.appearance.weatherOverlay.amount
     );
   }
 
@@ -244,23 +245,24 @@ async function storeQuickSettings() {
   const data = structuredClone(oldData);
   data.appearance.theme = document.getElementById("theme-selector").value;
   data.appearance.background.link = document.getElementById(
-    "background-link-input",
+    "background-link-input"
   ).value;
 
   data.appearance.background.blur = Number(
-    document.getElementById("background-blur-amount-slider").value,
+    document.getElementById("background-blur-amount-slider").value
   );
 
   data.other.performanceMode = document.getElementById(
-    "performance-mode-toggle",
+    "performance-mode-toggle"
   ).checked;
 
-  document.getElementById("performance-mode-info").innerHTML =
-    `Toggle performance mode ${
-      data.other.performanceMode
-        ? "<span class='green-underline'>Enabled</span>"
-        : "<span class='red-underline'>Disabled</span>"
-    }`;
+  document.getElementById(
+    "performance-mode-info"
+  ).innerHTML = `Toggle performance mode ${
+    data.other.performanceMode
+      ? "<span class='green-underline'>Enabled</span>"
+      : "<span class='red-underline'>Disabled</span>"
+  }`;
 
   if (data.appearance.theme == "custom") {
     if (oldData.appearance.theme == "custom") {
@@ -330,7 +332,7 @@ async function setBackground(data) {
   switch (data.background.selection) {
     case "default":
       displayBackgroundImage(
-        getImage("/theme-backgrounds/" + data.theme + ".jpg"),
+        getImage("/theme-backgrounds/" + data.theme + ".jpg")
       );
       break;
     case "link":
@@ -420,12 +422,13 @@ async function loadQuickSettings() {
   document.getElementById("performance-mode-toggle").checked =
     data.other.performanceMode;
 
-  document.getElementById("performance-mode-info").innerHTML =
-    `Toggle performance mode ${
-      data.other.performanceMode
-        ? "<span class='green-underline'>Enabled</span>"
-        : "<span class='red-underline'>Disabled</span>"
-    }`;
+  document.getElementById(
+    "performance-mode-info"
+  ).innerHTML = `Toggle performance mode ${
+    data.other.performanceMode
+      ? "<span class='green-underline'>Enabled</span>"
+      : "<span class='red-underline'>Disabled</span>"
+  }`;
 
   if (data.appearance.theme == "custom") {
     await createCustomThemeUI();

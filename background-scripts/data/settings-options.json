@@ -47,16 +47,23 @@
     },
     "weather": {
       "syncWeather": "boolean"
-    },
-    "splashText": "boolean"
+    }
   },
   "other": {
     "quicks": "array",
     "performanceMode": "boolean",
+    "splashText": "boolean",
+    "discordButton": "boolean",
     "dmenu": {
       "centered": "boolean",
       "itemScore": "boolean",
       "toplevelConfig": "boolean"
+    },
+    "keybinds": {
+      "dmenu": "keybind",
+      "widgetEditMode": "keybind",
+      "widgetBag": "keybind",
+      "settings": "keybind"
     }
   }
 }

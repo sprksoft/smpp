@@ -1120,6 +1120,17 @@ option:hover {
   gap: 8px;
 }
 
+#colorpickersforsettingspage {
+  display: none;
+  flex-direction: row;
+  justify-content: center;
+  gap: 8px;
+}
+
+#colorpickersforsettingspage.visible {
+  display: flex;
+}
+
 .color-pickersmpp {
   background-color: transparent;
   width: 30px !important;
@@ -1384,7 +1395,8 @@ span.js-badge-msg.topnav__badge {
 
 #shortcutsMenu,
 #coursesMenu,
-#linksMenu {
+#linksMenu,
+#goMenu {
   top: 110% !important;
   left: 50% !important;
 }
@@ -1392,8 +1404,16 @@ span.js-badge-msg.topnav__badge {
 .enableAnimations #shortcutsMenu,
 .enableAnimations #coursesMenu,
 .enableAnimations #linksMenu,
-.enableAnimations #quickSettings {
+.enableAnimations #quickSettings,
+.enableAnimations #goMenu {
   animation: flyInFromTop 0.15s ease forwards;
+}
+#shortcutsMenu,
+#coursesMenu,
+#linksMenu,
+#quickSettings,
+#goMenu {
+  animation: flyInFromTop 0s ease forwards;
 }
 
 .enableAnimations #searchMenu,
