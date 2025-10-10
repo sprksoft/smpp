@@ -170,7 +170,7 @@ async function apply() {
 
   await setTheme(data.appearance.theme);
 
-  updateNews(data.features.news);
+  updateNews(data.appearance.news);
   discordpopup();
 
   if (document.querySelector(".topnav")) applyTopNav(data.topNav);
@@ -207,16 +207,13 @@ async function apply() {
     document.getElementById("background_image").style.display = "none";
   }
 
-  if (
-    data.features.splashText &&
-    window.location.href.split("/")[3] == "login"
-  ) {
+  if (data.other.splashText && window.location.href.split("/")[3] == "login") {
     add_splash_text();
   } else {
     removeSplashText();
   }
 
-  if (data.features.delijn.monochrome) {
+  if (data.widgets.delijn.monochrome) {
     let monochromeStyle =
       document.getElementById("monochrome-delijn-style") ||
       document.createElement("style");

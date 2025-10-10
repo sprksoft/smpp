@@ -89,11 +89,8 @@ class TakenWidget extends WidgetBase {
         );
         let lastDate = "";
 
-        if (data.length > settingsData.features.assignments.maxAssignments) {
-          data = data.slice(
-            0,
-            settingsData.features.assignments.maxAssignments
-          );
+        if (data.length > settingsData.widgets.assignments.maxAssignments) {
+          data = data.slice(0, settingsData.widgets.assignments.maxAssignments);
         }
         const today = new Date();
         data.forEach((element) => {

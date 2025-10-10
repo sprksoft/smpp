@@ -5,7 +5,6 @@
   },
   "appearance": {
     "theme": "birb",
-    "tabLogo": "smpp",
     "background": {
       "selection": "default",
       "link": "",
@@ -14,7 +13,9 @@
     "weatherOverlay": {
       "type": "realtime",
       "amount": 0
-    }
+    },
+    "tabLogo": "smpp",
+    "news": true
   },
   "topNav": {
     "buttons": {
@@ -31,8 +32,7 @@
       "settings": false
     }
   },
-  "features": {
-    "news": true,
+  "widgets": {
     "delijn": {
       "monochrome": false,
       "maxBusses": 5
@@ -40,13 +40,13 @@
     "assignments": {
       "maxAssignments": 5
     },
+    "weather": {
+      "syncWeather": false
+    },
     "games": {
       "snake": {
         "enableGrid": true
       }
-    },
-    "weather": {
-      "syncWeather": false
     }
   },
   "other": {
@@ -61,9 +61,9 @@
     },
     "keybinds": {
       "dmenu": ":",
-      "widgetEditMode": "e",
+      "widgetEditMode": "E",
       "widgetBag": " ",
-      "settings": "s"
+      "settings": "S"
     }
   }
 }

@@ -4,7 +4,7 @@ class SettingsWindow extends BaseWindow {
       name: "Appearance",
     },
     topNav: { name: "Navigation" },
-    features: { name: "Widgets" },
+    widgets: { name: "Widgets" },
     other: { name: "Other" },
   };
   currentPage = "profile";
@@ -204,6 +204,10 @@ class SettingsWindow extends BaseWindow {
           settings.appearance.tabLogo == "sm";
         document.getElementById("settings-page-smpp-icon-button").checked =
           settings.appearance.tabLogo == "smpp";
+
+        // News
+        document.getElementById("settings-page-show-news-button").checked =
+          settings.appearance.news;
         break;
       }
 
@@ -234,41 +238,33 @@ class SettingsWindow extends BaseWindow {
         break;
       }
 
-      case "features": {
-        // News
-        document.getElementById("settings-page-show-news-button").checked =
-          settings.features.news;
-
-        // Splash-text
-        document.getElementById("settings-page-splash-text-button").checked =
-          settings.features.splashText;
-
+      case "widgets": {
         // De Lijn
         document.getElementById(
           "settings-page-delijn-monochrome-button"
-        ).checked = settings.features.delijn.monochrome;
+        ).checked = settings.widgets.delijn.monochrome;
 
         document.getElementById("settings-page-max-busses-slider").value =
-          settings.features.delijn.maxBusses;
+          settings.widgets.delijn.maxBusses;
         document.querySelector(
           "#settings-page-max-busses-slider + .settings-page-live-value"
-        ).innerText = settings.features.delijn.maxBusses;
+        ).innerText = settings.widgets.delijn.maxBusses;
 
         // Assignments
         document.getElementById("settings-page-max-assignments-slider").value =
-          settings.features.assignments.maxAssignments;
+          settings.widgets.assignments.maxAssignments;
         document.querySelector(
           "#settings-page-max-assignments-slider + .settings-page-live-value"
-        ).innerText = settings.features.assignments.maxAssignments;
+        ).innerText = settings.widgets.assignments.maxAssignments;
 
         // Weather
         document.getElementById("settings-page-sync-weather-button").checked =
-          settings.features.weather.syncWeather;
+          settings.widgets.weather.syncWeather;
 
         // Snake
         document.getElementById(
           "settings-page-show-snake-grid-button"
-        ).checked = settings.features.games.snake.enableGrid;
+        ).checked = settings.widgets.games.snake.enableGrid;
         break;
       }
 
@@ -277,6 +273,20 @@ class SettingsWindow extends BaseWindow {
         document.getElementById(
           "settings-page-performance-mode-button"
         ).checked = settings.other.performanceMode;
+
+        // Splash-text
+        document.getElementById("settings-page-splash-text-button").checked =
+          settings.other.splashText;
+
+        // Keybindings
+        document.getElementById("settings-page-quick-menu-keybinding").value =
+          settings.other.keybinds.dmenu;
+        document.getElementById("settings-page-widget-edit-keybinding").value =
+          settings.other.keybinds.widgetEditMode;
+        document.getElementById("settings-widget-bag-keybinding").value =
+          settings.other.keybinds.widgetBag;
+        document.getElementById("settings-page-settings-keybinding").value =
+          settings.other.keybinds.settings;
         break;
       }
 
@@ -285,10 +295,10 @@ class SettingsWindow extends BaseWindow {
     }
   }
   async storePage() {
-    const data = await browser.runtime.sendMessage({
+    const settings = await browser.runtime.sendMessage({
       action: "getSettingsData",
     });
-    let previousData = structuredClone(data);
+    let previousData = structuredClone(settings);
     switch (this.currentPage) {
       case "profile": {
         break;
@@ -300,14 +310,14 @@ class SettingsWindow extends BaseWindow {
           ".settings-page-theme-card:has(input[type='radio']:checked)"
         );
         if (selectedTheme) {
-          data.appearance.theme = selectedTheme.dataset.theme;
+          settings.appearance.theme = selectedTheme.dataset.theme;
         }
         if (previousData.appearance.theme == "custom") {
           await storeCustomThemeDataV2();
         }
 
         // Background link
-        data.appearance.background.link = document.getElementById(
+        settings.appearance.background.link = document.getElementById(
           "settings-page-background-link-input"
         ).value;
 
@@ -326,16 +336,16 @@ class SettingsWindow extends BaseWindow {
             data: imageData,
           });
 
-          data.appearance.background.selection = "file";
-          data.appearance.background.link = file.name;
+          settings.appearance.background.selection = "file";
+          settings.appearance.background.link = file.name;
         } else {
-          if (data.appearance.background.link == "") {
-            data.appearance.background.selection = "default";
+          if (settings.appearance.background.link == "") {
+            settings.appearance.background.selection = "default";
           } else if (
-            data.appearance.background.link !=
+            settings.appearance.background.link !=
             previousData.appearance.background.link
           ) {
-            data.appearance.background.selection = "link";
+            settings.appearance.background.selection = "link";
           }
         }
 
@@ -343,112 +353,127 @@ class SettingsWindow extends BaseWindow {
         let blurValue = document.getElementById(
           "settings-page-blur-slider"
         ).value;
-        data.appearance.background.blur = blurValue / 10;
+        settings.appearance.background.blur = blurValue / 10;
 
         // Weather overlay
         let chosenWeather = document.querySelector(
           ".settings-page-weather-overlay-container input:checked"
         );
         if (chosenWeather) {
-          data.appearance.weatherOverlay.type =
+          settings.appearance.weatherOverlay.type =
             chosenWeather.closest("[data-weather]").dataset.weather;
         }
 
-        data.appearance.weatherOverlay.amount = document.getElementById(
+        settings.appearance.weatherOverlay.amount = document.getElementById(
           "settings-page-weather-overlay-slider"
         ).value;
 
         // Tab icon
-        data.appearance.tabLogo = document.getElementById(
+        settings.appearance.tabLogo = document.getElementById(
           "settings-page-smpp-icon-button"
         ).checked
           ? "smpp"
           : "sm";
+
+        // News
+        settings.appearance.news = document.getElementById(
+          "settings-page-show-news-button"
+        ).checked;
         break;
       }
 
       case "topNav": {
-        data.topNav.switchCoursesAndLinks = document.getElementById(
+        settings.topNav.switchCoursesAndLinks = document.getElementById(
           "settings-page-swap-courses-button"
         ).checked;
 
         // Buttons
-        data.topNav.buttons.GO = document.getElementById(
+        settings.topNav.buttons.GO = document.getElementById(
           "settings-page-go-button"
         ).checked;
-        data.topNav.buttons.GC = document.getElementById(
+        settings.topNav.buttons.GC = document.getElementById(
           "settings-page-global-chat-button"
         ).checked;
-        data.topNav.buttons.search = document.getElementById(
+        settings.topNav.buttons.search = document.getElementById(
           "settings-page-search-button"
         ).checked;
-        data.topNav.buttons.quickMenu = document.getElementById(
+        settings.topNav.buttons.quickMenu = document.getElementById(
           "settings-page-quick-menu-button"
         ).checked;
 
         // Icons
-        data.topNav.icons.home = document.getElementById(
+        settings.topNav.icons.home = document.getElementById(
           "settings-page-home-icon-button"
         ).checked;
-        data.topNav.icons.mail = document.getElementById(
+        settings.topNav.icons.mail = document.getElementById(
           "settings-page-mail-icon-button"
         ).checked;
-        data.topNav.icons.notifications = document.getElementById(
+        settings.topNav.icons.notifications = document.getElementById(
           "settings-page-notifications-icon-button"
         ).checked;
-        data.topNav.icons.settings = document.getElementById(
+        settings.topNav.icons.settings = document.getElementById(
           "settings-page-settings-icon-button"
         ).checked;
         break;
       }
 
-      case "features": {
-        data.features.news = document.getElementById(
-          "settings-page-show-news-button"
-        ).checked;
-
-        data.features.splashText = document.getElementById(
-          "settings-page-splash-text-button"
-        ).checked;
-
-        data.features.delijn.monochrome = document.getElementById(
+      case "widgets": {
+        settings.widgets.delijn.monochrome = document.getElementById(
           "settings-page-delijn-monochrome-button"
         ).checked;
 
-        data.features.delijn.maxBusses = parseInt(
+        settings.widgets.delijn.maxBusses = parseInt(
           document.getElementById("settings-page-max-busses-slider").value,
           10
         );
 
-        data.features.assignments.maxAssignments = parseInt(
+        settings.widgets.assignments.maxAssignments = parseInt(
           document.getElementById("settings-page-max-assignments-slider").value,
           10
         );
 
-        data.features.weather.syncWeather = document.getElementById(
+        settings.widgets.weather.syncWeather = document.getElementById(
           "settings-page-sync-weather-button"
         ).checked;
 
-        data.features.games.snake.enableGrid = document.getElementById(
+        settings.widgets.games.snake.enableGrid = document.getElementById(
           "settings-page-show-snake-grid-button"
         ).checked;
         break;
       }
 
       case "other": {
-        data.other.performanceMode = document.getElementById(
+        settings.other.performanceMode = document.getElementById(
           "settings-page-performance-mode-button"
         ).checked;
+
+        settings.other.splashText = document.getElementById(
+          "settings-page-splash-text-button"
+        ).checked;
+
+        // Keybindings
+        settings.other.keybinds.dmenu = document.getElementById(
+          "settings-page-quick-menu-keybinding"
+        ).value;
+        settings.other.keybinds.widgetEditMode = document.getElementById(
+          "settings-page-widget-edit-keybinding"
+        ).value;
+        settings.other.keybinds.widgetBag = document.getElementById(
+          "settings-widget-bag-keybinding"
+        ).value;
+        settings.other.keybinds.settings = document.getElementById(
+          "settings-page-settings-keybinding"
+        ).value;
         break;
       }
 
       default:
         break;
     }
-    console.log(data);
+    console.log(settings);
     await browser.runtime.sendMessage({
       action: "setSettingsData",
-      data: data,
+      data: settings,
     });
     await this.loadPage();
     await apply();
@@ -468,6 +493,56 @@ class SettingsWindow extends BaseWindow {
       title.classList.add("settings-page-section-title");
       return title;
     }
+
+    const createKeybindInput = (id, text) => {
+      const container = document.createElement("div");
+      container.classList.add("settings-page-key-bind-container");
+
+      let label = document.createElement("span");
+      label.classList.add("settings-page-button-label");
+      label.innerText = text;
+
+      let button = createButton(id);
+      button.classList.add("settings-page-button");
+
+      const input = document.createElement("input");
+      input.id = id;
+      input.type = "text";
+      input.readOnly = true; // prevent manual typing
+      input.spellcheck = false;
+      input.classList.add("settings-page-keybinding-input");
+      input.value = "None";
+
+      let listening = false;
+
+      input.addEventListener("click", () => {
+        if (listening) return;
+        listening = true;
+        input.value = "Press any key...";
+        input.classList.add("listening");
+
+        const keyListener = async (e) => {
+          e.preventDefault();
+          listening = false;
+          input.classList.remove("listening");
+
+          // handle special keys (like " " → "Space")
+          let keyName = e.key.length === 1 ? e.key.toUpperCase() : e.key;
+          if (keyName === " ") keyName = "Space";
+          if (keyName === "Escape") keyName = "None";
+
+          input.value = keyName;
+          document.removeEventListener("keydown", keyListener);
+          await this.storePage();
+        };
+
+        document.addEventListener("keydown", keyListener);
+      });
+      container.appendChild(label);
+      container.appendChild(input);
+
+      return container;
+    };
 
     function createButtonWithLabel(id, text) {
       let container = document.createElement("label");
@@ -824,6 +899,15 @@ class SettingsWindow extends BaseWindow {
           )
         );
         this.settingsPage.appendChild(iconsContainer);
+
+        this.settingsPage.appendChild(createSectionTitle("News"));
+        this.settingsPage.appendChild(
+          createDescription("Change the homepage news configuration.")
+        );
+        this.settingsPage.appendChild(
+          createButtonWithLabel("settings-page-show-news-button", "Show news")
+        );
+
         break;
       case "topNav":
         this.settingsPage.appendChild(createMainTitle("Navigation"));
@@ -890,27 +974,7 @@ class SettingsWindow extends BaseWindow {
         );
 
         break;
-      case "features":
-        this.settingsPage.appendChild(createMainTitle("Features"));
-        this.settingsPage.appendChild(createSectionTitle("News"));
-        this.settingsPage.appendChild(
-          createDescription("Change the homepage news configuration.")
-        );
-        this.settingsPage.appendChild(
-          createButtonWithLabel("settings-page-show-news-button", "Show news")
-        );
-
-        this.settingsPage.appendChild(createSectionTitle("Login"));
-        this.settingsPage.appendChild(
-          createDescription("Change the login page configuration.")
-        );
-        this.settingsPage.appendChild(
-          createButtonWithLabel(
-            "settings-page-splash-text-button",
-            "Splash-text"
-          )
-        );
-
+      case "widgets":
         this.settingsPage.appendChild(createMainTitle("Widgets"));
 
         this.settingsPage.appendChild(createSectionTitle("De Lijn"));
@@ -973,6 +1037,7 @@ class SettingsWindow extends BaseWindow {
             "Disables animations for better performance on low end devices."
           )
         );
+
         this.settingsPage.appendChild(
           createButtonWithLabel(
             "settings-page-performance-mode-button",
@@ -980,6 +1045,40 @@ class SettingsWindow extends BaseWindow {
           )
         );
 
+        this.settingsPage.appendChild(createSectionTitle("Login"));
+        this.settingsPage.appendChild(
+          createDescription("Change the login page configuration.")
+        );
+        this.settingsPage.appendChild(
+          createButtonWithLabel(
+            "settings-page-splash-text-button",
+            "Splash-text"
+          )
+        );
+
+        this.settingsPage.appendChild(createSectionTitle("Keybindings"));
+        this.settingsPage.appendChild(
+          createDescription("Customize your keybindings")
+        );
+
+        this.settingsPage.appendChild(
+          createKeybindInput(
+            "settings-page-quick-menu-keybinding",
+            "Quick Menu"
+          )
+        );
+        this.settingsPage.appendChild(
+          createKeybindInput(
+            "settings-page-widget-edit-keybinding",
+            "Widget editing"
+          )
+        );
+        this.settingsPage.appendChild(
+          createKeybindInput("settings-widget-bag-keybinding", "Widget bag")
+        );
+        this.settingsPage.appendChild(
+          createKeybindInput("settings-page-settings-keybinding", "Settings")
+        );
         break;
       default:
         break;

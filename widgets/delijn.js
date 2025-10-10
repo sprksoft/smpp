@@ -272,7 +272,7 @@ class DelijnWidget extends WidgetBase {
     });
 
     const delijnData = await fetchDelijnData(
-      `https://api.delijn.be/DLKernOpenData/api/v1/haltes/${entiteitnummer}/${haltenummer}/real-time?maxAantalDoorkomsten=${data.features.delijn.maxBusses}`
+      `https://api.delijn.be/DLKernOpenData/api/v1/haltes/${entiteitnummer}/${haltenummer}/real-time?maxAantalDoorkomsten=${data.widgets.delijn.maxBusses}`
     );
     console.log(delijnData);
 

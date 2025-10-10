@@ -375,7 +375,8 @@ label.settings-page-image-button-wrapper:has(input:checked) {
   margin: 0;
 }
 
-.settings-page-button-label-container {
+.settings-page-button-label-container,
+.settings-page-key-bind-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -390,6 +391,10 @@ label.settings-page-image-button-wrapper:has(input:checked) {
   border-radius: 1000px;
   padding: 0.75rem 0.75rem 0.75rem 1.5rem;
   max-width: 30rem;
+}
+
+.settings-page-key-bind-container {
+  border: 2px solid var(--color-base01) !important;
 }
 
 .settings-page-button-label-container:first-of-type {
@@ -450,4 +455,44 @@ label.settings-page-image-button-wrapper:has(input:checked) {
 .smpp-link-clear-button#settings-page-link-clear-button {
   right: 3.6rem;
   z-index: 1000;
+}
+
+.enableAnimations
+  input.settings-page-keybinding-input[type="text"]:not(.aaaaaa):read-only {
+  transition: opacity 0.1s ease-in-out !important;
+}
+
+input.settings-page-keybinding-input[type="text"]:not(.aaaaaa):read-only {
+  padding: 0.25rem 0.5rem !important;
+  font-size: 1.6rem !important;
+  color: var(--color-accent) !important;
+  border-radius: 10000px !important;
+
+  width: fit-content !important;
+  max-width: 14rem !important;
+  font-weight: 700;
+  transform-origin: 100%;
+  text-align: right;
+  opacity: 0.6;
+}
+
+input.settings-page-keybinding-input[type="text"]:not(
+    .aaaaaa
+  ):read-only:hover:not(.listening) {
+  cursor: pointer;
+  opacity: 1;
+}
+
+.settings-page-key-bind-container:has(
+    input.settings-page-keybinding-input.listening
+  ) {
+  border-color: var(--color-base02) !important;
+}
+
+input.settings-page-keybinding-input[type="text"]:not(
+    .aaaaaa
+  ):read-only.listening {
+  font-weight: 500;
+  color: var(--color-text) !important;
+  opacity: 1;
 }

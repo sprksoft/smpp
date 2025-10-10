@@ -147,7 +147,7 @@ class SnakeWidget extends GameBase {
     ctx.strokeWidth = 0;
     ctx.fillStyle = getThemeVar("--color-base01");
     ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-    if (settingsData.features.games.snake.enableGrid) {
+    if (settingsData.widgets.games.snake.enableGrid) {
       for (let y = 0; y < cellCount; y++) {
         for (let x = 0; x < cellCount; x++) {
           if ((x + y) % 2 == 0) {

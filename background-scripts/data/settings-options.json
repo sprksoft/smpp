@@ -5,7 +5,6 @@
   },
   "appearance": {
     "theme": null,
-    "tabLogo": ["sm", "smpp"],
     "background": {
       "selection": ["default", "file", "link"],
       "link": "string",
@@ -14,14 +13,16 @@
     "weatherOverlay": {
       "type": ["realtime", "rain", "snow"],
       "amount": "number"
-    }
+    },
+    "tabLogo": ["sm", "smpp"],
+    "news": "boolean"
   },
   "topNav": {
     "buttons": {
-      "GO": false,
-      "GC": true,
-      "search": false,
-      "quickMenu": false
+      "GO": "boolean",
+      "GC": "boolean",
+      "search": "boolean",
+      "quickMenu": "boolean"
     },
     "switchCoursesAndLinks": "boolean",
     "icons": {
@@ -31,8 +32,7 @@
       "settings": "boolean"
     }
   },
-  "features": {
-    "news": "boolean",
+  "widgets": {
     "delijn": {
       "monochrome": "boolean",
       "maxBusses": "number"
@@ -40,13 +40,13 @@
     "assignments": {
       "maxAssignments": "number"
     },
+    "weather": {
+      "syncWeather": "boolean"
+    },
     "games": {
       "snake": {
         "enableGrid": "boolean"
       }
-    },
-    "weather": {
-      "syncWeather": "boolean"
     }
   },
   "other": {

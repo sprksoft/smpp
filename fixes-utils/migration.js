@@ -273,7 +273,7 @@ async function migrateSettingsV2() {
           settings: false,
         },
       },
-      features: {
+      widgets: {
         news: data.news,
         delijn: {
           monochrome: false,
@@ -311,7 +311,7 @@ async function migrateSettingsV2() {
           settings: false,
         },
       },
-      features: {
+      widgets: {
         news: data.news,
         delijn: {
           monochrome: true,
