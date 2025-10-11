@@ -54,7 +54,15 @@ class BaseWindow {
     this.isOpen = true;
     this.element.classList.remove("hidden");
 
-    const openEventTarget = triggerEvent?.target;
+    const isKeyboardEvent =
+      triggerEvent &&
+      (typeof KeyboardEvent !== "undefined"
+        ? triggerEvent instanceof KeyboardEvent
+        : String(triggerEvent.type).startsWith("key"));
+
+    const openEventTarget = isKeyboardEvent
+      ? null
+      : triggerEvent?.target ?? null;
 
     this._outsideClickHandler = (e) => {
       if (
@@ -64,12 +72,14 @@ class BaseWindow {
         return;
       }
 
-      if (!e.target.closest(`#${this.id}`)) {
+      if (!this.element.contains(e.target)) {
         this.hide();
       }
     };
 
-    document.addEventListener("click", this._outsideClickHandler);
+    document.addEventListener("click", this._outsideClickHandler, {
+      capture: true,
+    });
 
     this.onOpened();
   }
@@ -79,11 +89,14 @@ class BaseWindow {
 
     this.isOpen = false;
     this.element.classList.add("hidden");
-    this.element.classList.remove("fullscreen-window");
     if (this._outsideClickHandler) {
-      document.removeEventListener("click", this._outsideClickHandler);
+      document.removeEventListener("click", this._outsideClickHandler, {
+        capture: true,
+      });
       this._outsideClickHandler = null;
     }
+
+    this.onClosed?.();
   }
 
   remove() {

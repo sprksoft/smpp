@@ -63,7 +63,8 @@
       "dmenu": "keybind",
       "widgetEditMode": "keybind",
       "widgetBag": "keybind",
-      "settings": "keybind"
+      "settings": "keybind",
+      "gc": "keybind"
     }
   }
 }

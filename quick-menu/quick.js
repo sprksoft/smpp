@@ -173,7 +173,7 @@ async function do_qm(opener = "") {
       "dizzy",
       "breakdmenu",
     ]);
-  
+
   if (dmenuConfig.toplevelConfig) {
     cmd_list = cmd_list.concat(await getDMenuOptionsForSettings(true));
   }
@@ -279,12 +279,3 @@ async function do_qm(opener = "") {
     (opener = opener)
   );
 }
-
-document.addEventListener("keyup", function (e) {
-  if (e.target != undefined && e.target.tagName === "INPUT") {
-    return;
-  }
-  if (e.key == ":") {
-    do_qm(":");
-  }
-});

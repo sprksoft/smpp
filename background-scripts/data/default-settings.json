@@ -62,8 +62,9 @@
     "keybinds": {
       "dmenu": ":",
       "widgetEditMode": "E",
-      "widgetBag": " ",
-      "settings": "S"
+      "widgetBag": "Space",
+      "settings": "S",
+      "gc": "G"
     }
   }
 }

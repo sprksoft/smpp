@@ -809,21 +809,6 @@ function initWidgetEditMode() {
       }
     }
   });
-
-  document.addEventListener("keyup", async (e) => {
-    if (e.target?.tagName == "INPUT") {
-      return;
-    }
-    if (e.key == "Escape" && widgetEditMode) {
-      await setEditMode(false);
-    } else if (e.key == "e") {
-      await setEditMode(true);
-    } else if (e.key == " ") {
-      if (widgetEditMode) {
-        toggleBag();
-      }
-    }
-  });
 }
 
 function createWidgetEditModeButton() {

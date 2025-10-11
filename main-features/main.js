@@ -163,6 +163,8 @@ async function apply() {
     action: "getSettingsOptions",
   });
 
+  keybinds = data.other.keybinds;
+
   changeFont();
   userNameChanger(data.profile.username);
   if (!data.profile.profilePicture) decapitateಠ_ಠ();

@@ -287,6 +287,8 @@ class SettingsWindow extends BaseWindow {
           settings.other.keybinds.widgetBag;
         document.getElementById("settings-page-settings-keybinding").value =
           settings.other.keybinds.settings;
+        document.getElementById("settings-page-gc-keybinding").value =
+          settings.other.keybinds.gc;
         break;
       }
 
@@ -463,6 +465,9 @@ class SettingsWindow extends BaseWindow {
         ).value;
         settings.other.keybinds.settings = document.getElementById(
           "settings-page-settings-keybinding"
+        ).value;
+        settings.other.keybinds.gc = document.getElementById(
+          "settings-page-gc-keybinding"
         ).value;
         break;
       }
@@ -1078,6 +1083,9 @@ class SettingsWindow extends BaseWindow {
         );
         this.settingsPage.appendChild(
           createKeybindInput("settings-page-settings-keybinding", "Settings")
+        );
+        this.settingsPage.appendChild(
+          createKeybindInput("settings-page-gc-keybinding", "Global Chat")
         );
         break;
       default:
