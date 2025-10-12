@@ -667,6 +667,54 @@ class SettingsWindow extends BaseWindow {
       return description;
     }
 
+    const createImageInput = (buttonId, textInputId, fileInputId) => {
+      let inputContainer = document.createElement("div");
+      inputContainer.classList.add(
+        "settings-page-background-selection-container"
+      );
+
+      const clearButton = document.createElement("button");
+      clearButton.id = "settings-page-link-clear-button";
+      clearButton.classList.add("smpp-link-clear-button");
+      clearButton.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+          <g xmlns="http://www.w3.org/2000/svg">
+          <path d="M7 7.00006L17 17.0001M7 17.0001L17 7.00006" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
+        </svg>`;
+
+      clearButton.addEventListener("click", async (event) => {
+        event.target
+          .closest(".smpp-link-clear-button")
+          .classList.remove("active");
+        document.getElementById(textInputId).value = "";
+
+        await this.storePage();
+      });
+
+      const linkInput = createTextInput(textInputId);
+      linkInput.placeholder = "Link";
+
+      const backgroundFileInput = document.createElement("input");
+      backgroundFileInput.id = fileInputId;
+      backgroundFileInput.style.display = "none";
+      backgroundFileInput.type = "file";
+      backgroundFileInput.accept = ".png, .jpg, .jpeg";
+
+      const fileBtn = document.createElement("button");
+      fileBtn.className = "smpp-background-file";
+      fileBtn.id = buttonId;
+      fileBtn.innerHTML = fileInputIconSvg;
+      fileBtn.addEventListener("click", () => {
+        backgroundFileInput.click();
+      });
+
+      inputContainer.appendChild(linkInput);
+      inputContainer.appendChild(fileBtn);
+      inputContainer.appendChild(clearButton);
+      inputContainer.appendChild(backgroundFileInput);
+      return inputContainer;
+    };
+
     this.clearSettingsPage();
     switch (this.currentPage) {
       case "profile":
@@ -675,6 +723,12 @@ class SettingsWindow extends BaseWindow {
         this.settingsPage.appendChild(
           createDescription("Upload your own custom profile picture")
         );
+        let pfpInputContainer = createImageInput(
+          "settings-page-pfp-file-button",
+          "settings-page-pfp-link-input",
+          "settings-page-pfp-file-input"
+        );
+        this.settingsPage.appendChild(pfpInputContainer);
 
         break;
       case "appearance":
@@ -739,56 +793,12 @@ class SettingsWindow extends BaseWindow {
         this.settingsPage.appendChild(
           createDescription("Personalize your backdrop with a custom image.")
         );
-
-        let selectionContainer = document.createElement("div");
-        selectionContainer.classList.add(
-          "settings-page-background-selection-container"
+        let backgroundInputContainer = createImageInput(
+          "settings-page-background-file-button",
+          "settings-page-background-link-input",
+          "settings-page-background-file-input"
         );
-
-        const clearButton = document.createElement("button");
-        clearButton.id = "settings-page-link-clear-button";
-        clearButton.classList.add("smpp-link-clear-button");
-        clearButton.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-          <g xmlns="http://www.w3.org/2000/svg">
-          <path d="M7 7.00006L17 17.0001M7 17.0001L17 7.00006" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </g>
-        </svg>`;
-
-        clearButton.addEventListener("click", async (event) => {
-          event.target
-            .closest(".smpp-link-clear-button")
-            .classList.remove("active");
-          document.getElementById("settings-page-background-link-input").value =
-            "";
-
-          await this.storePage();
-        });
-
-        const linkInput = createTextInput(
-          "settings-page-background-link-input"
-        );
-        linkInput.placeholder = "Link";
-
-        const backgroundFileInput = document.createElement("input");
-        backgroundFileInput.id = "settings-page-background-file-input";
-        backgroundFileInput.style.display = "none";
-        backgroundFileInput.type = "file";
-        backgroundFileInput.accept = ".png, .jpg, .jpeg";
-
-        const fileBtn = document.createElement("button");
-        fileBtn.className = "smpp-background-file";
-        fileBtn.id = "settings-page-background-file-button";
-        fileBtn.innerHTML = fileInputIconSvg;
-        fileBtn.addEventListener("click", () => {
-          backgroundFileInput.click();
-        });
-
-        selectionContainer.appendChild(linkInput);
-        selectionContainer.appendChild(fileBtn);
-        selectionContainer.appendChild(clearButton);
-        selectionContainer.appendChild(backgroundFileInput);
-
-        this.settingsPage.appendChild(selectionContainer);
+        this.settingsPage.appendChild(backgroundInputContainer);
 
         this.settingsPage.appendChild(createSectionTitle("Background blur"));
         this.settingsPage.appendChild(
