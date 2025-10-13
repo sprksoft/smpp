@@ -113,6 +113,7 @@ function updateBackgroundBlur() {
 
 function updateTabLogo(logo) {
   let iconElement = document.querySelector('link[rel="icon"]');
+  if (!iconElement) return;
   switch (logo) {
     case "sm":
       iconElement.href =
@@ -145,10 +146,16 @@ function applyTopNav(data) {
   }
 }
 
+function fixMessageBox() {
+  if (document.getElementById("tinymce")) {
+    document.getElementById("background_image").remove();
+  }
+  console.log(document.getElementById("tinymce"));
+}
+
 async function apply() {
   await reloadDMenuConfig(); // reload the dmenu config. (er is een object voor async raarheid te vermijden en dat wordt herladen door deze functie)
   if (onHomePage) {
-    console.log("aaaa");
     discordpopup();
     setEditMode(false);
   } else {
@@ -239,6 +246,7 @@ async function apply() {
 
   setBackground(data.appearance);
   updateTabLogo(data.appearance.tabLogo);
+  fixMessageBox();
 }
 
 async function storeQuickSettings() {
