@@ -100,7 +100,7 @@ class WidgetBase {
     }
     if (!newContent) {
       console.error(
-        "createContent and createPreview method's needs to return an html object. in widget impl"
+        "createContent and createPreview method's needs to return an html object. in widget impl",
       );
       newContent = createWidgetErrorContent(this.name);
     }
@@ -184,7 +184,7 @@ class WidgetBase {
         let pannel = await createPannelHTML({ widgets: [] });
         pannelContainer.insertBefore(
           createInsertionPointHTML(true),
-          targetIp.nextElementSibling
+          targetIp.nextElementSibling,
         );
         pannelContainer.insertBefore(pannel, targetIp.nextElementSibling);
         targetIp = pannel.firstChild;
@@ -194,7 +194,7 @@ class WidgetBase {
       targetPannel.style.display = "block";
       targetPannel.insertBefore(
         createInsertionPointHTML(),
-        targetIp.nextElementSibling
+        targetIp.nextElementSibling,
       );
       targetPannel.insertBefore(el, targetIp.nextElementSibling);
 
@@ -238,9 +238,8 @@ class WidgetBase {
     el.style.width = rect.width + "px";
     el.style.left = rect.left + "px";
     el.style.top = rect.top + "px";
-    el.style[
-      "transform-origin"
-    ] = `${curDragInfo.offset.x}px ${curDragInfo.offset.y}px`;
+    el.style["transform-origin"] =
+      `${curDragInfo.offset.x}px ${curDragInfo.offset.y}px`;
 
     el.classList.add("smpp-widget-dragging");
 
@@ -317,11 +316,11 @@ class SmartschoolWidget extends WidgetBase {
 function targetInsertionPoint(target) {
   if (target !== curDragInfo.targetInsertionPoint) {
     curDragInfo.targetInsertionPoint?.classList.remove(
-      "smpp-widget-insertion-point-targeted"
+      "smpp-widget-insertion-point-targeted",
     );
     curDragInfo.targetInsertionPoint = target;
     curDragInfo.targetInsertionPoint?.classList.add(
-      "smpp-widget-insertion-point-targeted"
+      "smpp-widget-insertion-point-targeted",
     );
   }
 }
@@ -364,15 +363,15 @@ function onPannelInsertionPointHover(e) {
   targetInsertionPoint(e.target);
 }
 
-function onCenterHover(e) {
+function onCenterHover(div, e) {
   if (!widgetEditMode || curDragInfo == null || hoveringBag) {
     return;
   }
-  const bounds = e.target.getBoundingClientRect();
+  const bounds = div.getBoundingClientRect();
   if (e.clientX < (bounds.right - bounds.left) / 2 + bounds.left) {
-    targetInsertionPoint(e.target.previousElementSibling);
+    targetInsertionPoint(div.previousElementSibling);
   } else {
-    targetInsertionPoint(e.target.nextElementSibling);
+    targetInsertionPoint(div.nextElementSibling);
   }
 }
 
@@ -421,7 +420,7 @@ async function createWidgetsContainerHTML(widgetData, newsContent, news) {
 
   let newsDiv = document.createElement("div");
   newsDiv.classList.add("smpp-news-container");
-  newsDiv.addEventListener("mousemove", onCenterHover);
+  newsDiv.addEventListener("mousemove", (e) => onCenterHover(newsDiv, e));
   newsContent.id = "smpp-news-content";
   newsContent.className = "";
   newsContent.style.display = news ? "block" : "none";
@@ -517,7 +516,7 @@ async function createWidgetSystem() {
 
   // Create smartschool default widgets
   for (let smWidget of document.querySelectorAll(
-    "#rightcontainer .homepage__block"
+    "#rightcontainer .homepage__block",
   )) {
     let wName = "SmartschoolWidget-" + smWidget.id;
     registerWidget(new SmartschoolWidget(smWidget));
@@ -526,7 +525,7 @@ async function createWidgetSystem() {
     }
   }
   for (let smWidget of document.querySelectorAll(
-    "#leftcontainer .homepage__block"
+    "#leftcontainer .homepage__block",
   )) {
     let wName = "SmartschoolWidget-" + smWidget.id;
     registerWidget(new SmartschoolWidget(smWidget));
@@ -544,7 +543,7 @@ async function createWidgetSystem() {
   widgetsContainer = await createWidgetsContainerHTML(
     widgetData,
     news,
-    newsState
+    newsState,
   );
 
   container.innerHTML = "";
@@ -746,7 +745,7 @@ function getWidgetByName(name) {
 async function setEditMode(value) {
   if (value && !widgetEditModeInit) {
     console.error(
-      "Widget edit mode has not been initalized. setEditMode(true) has been called. (call initWidgetEditMode first) (This is a bug)"
+      "Widget edit mode has not been initalized. setEditMode(true) has been called. (call initWidgetEditMode first) (This is a bug)",
     );
   }
 
@@ -779,7 +778,7 @@ function initWidgetEditMode() {
 
   if (!widgetSystemCreated) {
     console.error(
-      "Widget system has not been created yet. But initWidgetEditMode has been called"
+      "Widget system has not been created yet. But initWidgetEditMode has been called",
     );
     return;
   }
