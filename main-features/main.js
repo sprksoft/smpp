@@ -3,11 +3,25 @@
 //oh ok, ik dacht in general.css - Jdev
 let quickSettingsWindowIsHidden = true;
 
-function discordpopup() {
-  let discordelement = document.createElement("div");
-  discordelement.innerHTML = discordSvg;
-  document.body.appendChild(discordelement);
+function addDiscordPopup() {
+  let discordButtonContainer = document.createElement("div");
+  discordButtonContainer.id = "discord-link-container";
+  discordButtonContainer.innerHTML = discordSvg;
+  document.body.appendChild(discordButtonContainer);
 }
+
+function removeDiscordPopup() {
+  document.getElementById("discord-link-container")?.remove();
+}
+
+function updateDiscordPopup(discordButtonEnabled) {
+  if (discordButtonEnabled) {
+    addDiscordPopup();
+  } else {
+    removeDiscordPopup();
+  }
+}
+
 function changeLogoutText() {
   if (randomChance(1 / 50)) {
     return "Good Bye! →";
@@ -53,6 +67,7 @@ function decapitateಠ_ಠ() {
   `;
   document.head.appendChild(style_el);
 }
+
 function getPfpLink(username) {
   let firstInitial;
   let secondInitial;
@@ -133,6 +148,7 @@ function applyTopNav(data) {
   updateTopNavIcons(data.icons);
   updateTopButtons(data.buttons);
   let topNav = document.querySelector(".topnav");
+  if (!topNav) return;
   if (data.switchCoursesAndLinks) {
     topNav.insertBefore(
       document.querySelector("[data-links]"),
@@ -148,26 +164,11 @@ function applyTopNav(data) {
 
 function fixMessageBox() {
   if (document.getElementById("tinymce")) {
-    document.getElementById("background_image").remove();
+    document.getElementById("background_image")?.remove();
   }
-  console.log(document.getElementById("tinymce"));
 }
 
-async function apply() {
-  await reloadDMenuConfig(); // reload the dmenu config. (er is een object voor async raarheid te vermijden en dat wordt herladen door deze functie)
-  if (onHomePage) {
-    discordpopup();
-    setEditMode(false);
-  } else {
-    console.log("b");
-  } // Turn off widget edit mode
-  let style = document.documentElement.style;
-  const data = await browser.runtime.sendMessage({
-    action: "getSettingsData",
-  });
-
-  console.log("Settings data: \n", data);
-
+async function createStaticGlobals() {
   themes = await browser.runtime.sendMessage({
     action: "getAllThemes",
   });
@@ -175,77 +176,105 @@ async function apply() {
   settingsOptions = await browser.runtime.sendMessage({
     action: "getSettingsOptions",
   });
+}
 
-  keybinds = data.other.keybinds;
+async function applyAppearance(appearance) {
+  let style = document.documentElement.style;
 
-  changeFont();
-  userNameChanger(data.profile.username);
-  if (!data.profile.profilePicture) decapitateಠ_ಠ();
-  fixCoursesSearch();
+  await setTheme(appearance.theme);
+  setBackground(appearance);
+  updateNews(appearance.news);
+  updateTabLogo(appearance.tabLogo);
 
-  await setTheme(data.appearance.theme);
-
-  updateNews(data.appearance.news);
-
-  if (document.querySelector(".topnav")) applyTopNav(data.topNav);
-
-  if (document.querySelector(".login-app__left")) updateLoginPanel();
-
-  let defaultBackgroundBlur = data.appearance.background.blur * 2;
-  if (data.appearance.background.blur == 0) {
-    defaultBackgroundBlur += 2;
-  }
-
-  style.setProperty(
-    "--profile-picture",
-    "url(" + getPfpLink(data.profile.username || getOriginalName()) + ")"
-  );
+  let defaultBackgroundBlur = appearance.background.blur * 2;
+  if (appearance.background.blur == 0) defaultBackgroundBlur += 2;
   style.setProperty("--blur-value-large", `blur(${defaultBackgroundBlur}px)`);
   style.setProperty(
     "--blur-value-small",
-    `blur(${data.appearance.background.blur}px)`
+    `blur(${appearance.background.blur}px)`
   );
 
   if (!liteMode) {
     applyWeatherEffects(
-      data.appearance.weatherOverlay.type,
-      data.appearance.weatherOverlay.amount
+      appearance.weatherOverlay.type,
+      appearance.weatherOverlay.amount
     );
   }
+}
 
-  data.other.performanceMode
+function applyWidgets(widgets) {
+  const monochromeDelijnStyleId = "monochrome-delijn-style";
+  const monochromeDelijnStyle = document.getElementById(
+    monochromeDelijnStyleId
+  );
+
+  if (widgets.delijn.monochrome) {
+    if (!monochromeDelijnStyle) {
+      const style = document.createElement("style");
+      style.id = monochromeDelijnStyleId;
+      style.textContent = `
+      .lijnNumber {
+        background-color: var(--color-base02) !important;
+        border-color: var(--color-accent) !important;
+        color: var(--color-text) !important;
+      }
+    `;
+      document.head.appendChild(style);
+    }
+  } else {
+    monochromeDelijnStyle?.remove();
+  }
+}
+
+function applyOther(other) {
+  if (window.location.href.split("/")[3] == "login")
+    updateSplashText(other.splashText);
+  keybinds = other.keybinds;
+
+  other.performanceMode
     ? document.body.classList.remove("enableAnimations")
     : document.body.classList.add("enableAnimations");
 
-  if (document.getElementById("background_image")) {
+  if (onHomePage) updateDiscordPopup(other.discordButton);
+}
+
+function applyProfile(profile) {
+  let style = document.documentElement.style;
+  style.setProperty(
+    "--profile-picture",
+    "url(" + getPfpLink(profile.username || getOriginalName()) + ")"
+  );
+  userNameChanger(profile.username);
+  if (!profile.profilePicture) decapitateಠ_ಠ();
+}
+
+function applyFixes() {
+  changeFont();
+  fixCoursesSearch();
+
+  if (document.getElementById("background_image") && false) {
     document.getElementById("background_image").style.display = "none";
   }
 
-  if (data.other.splashText && window.location.href.split("/")[3] == "login") {
-    add_splash_text();
-  } else {
-    removeSplashText();
-  }
+  let notifsToggleLabel = document.getElementById("notifsToggleLabel");
+  if (notifsToggleLabel) notifsToggleLabel.innerText = "Toon pop-ups";
+  if (document.querySelector(".login-app__left")) updateLoginPanel();
+}
 
-  if (data.widgets.delijn.monochrome) {
-    let monochromeStyle =
-      document.getElementById("monochrome-delijn-style") ||
-      document.createElement("style");
-    monochromeStyle.id = "monochrome-delijn-style";
-    monochromeStyle.innerHTML = `.lijnNumber{
-          background-color: var(--color-base02) !important;
-          border-color: var(--color-accent) !important;
-          color: var(--color-text) !important
-      }`;
-    if (!document.getElementById("monochrome-delijn-style"))
-      document.head.appendChild(monochromeStyle);
-  } else {
-    let monochromeStyle = document.getElementById("monochrome-delijn-style");
-    if (monochromeStyle) monochromeStyle.remove();
-  }
+async function apply() {
+  await reloadDMenuConfig(); // reload the dmenu config. (er is een object voor async raarheid te vermijden en dat wordt herladen door deze functie)
+  if (onHomePage) setEditMode(false);
 
-  setBackground(data.appearance);
-  updateTabLogo(data.appearance.tabLogo);
+  const data = await browser.runtime.sendMessage({
+    action: "getSettingsData",
+  });
+  console.log("Settings data: \n", data);
+
+  await applyAppearance(data.appearance);
+  applyProfile(data.profile);
+  applyTopNav(data.topNav);
+  applyWidgets(data.widgets);
+  applyOther(data.other);
   fixMessageBox();
 }
 
@@ -737,13 +766,14 @@ async function main() {
   if (settingsData.theme != null) {
     await migrateSettingsV2();
   }
+
+  applyFixes();
+  createStaticGlobals();
+
   await createWidgetSystem();
   createTopButtons();
 
   await apply();
-
-  let notifsLabel = document.getElementById("notifsToggleLabel");
-  if (notifsLabel) notifsLabel.innerText = "Toon pop-ups"; // Simplify text. (smartschool by default has a very long explanation that doesn't fit on screen)
 }
 
 main();

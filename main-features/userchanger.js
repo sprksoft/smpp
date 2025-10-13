@@ -51,7 +51,7 @@ function displayCustomName(customName) {
   let originalNameElement = document.querySelector(
     ".js-btn-profile .hlp-vert-box span"
   );
-  originalNameElement.innerHTML = customName;
+  if (originalNameElement) originalNameElement.innerHTML = customName;
   style.setProperty("--profile-picture", "url(" + getPfpLink(customName) + ")");
 }
 

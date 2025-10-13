@@ -19,16 +19,24 @@ function updateLoginPanel() {
   }
 }
 
-function add_splash_text() {
-  var login_app = document.querySelector(".login-app");
-  var splash_text_element = document.createElement("div");
-  login_app.prepend(splash_text_element);
-  splash_text_element.classList.add("splashtextcontainer");
-  splash_text_element.innerHTML = `<div class='splashtext'>${get_splash_text()}</div>`;
+function addSplashText() {
+  var loginApp = document.querySelector(".login-app");
+  var splashTextContainer = document.createElement("div");
+  loginApp.prepend(splashTextContainer);
+  splashTextContainer.classList.add("splashtextcontainer");
+  splashTextContainer.innerHTML = `<div class='splashtext'>${getSplashText()}</div>`;
 }
 
 function removeSplashText() {
   document.querySelector("splashtextcontainer")?.remove();
+}
+
+function updateSplashText(splashTextEnabled) {
+  if (splashTextEnabled) {
+    addSplashText();
+  } else {
+    removeSplashText();
+  }
 }
 
 let splashtexts = [
@@ -139,6 +147,7 @@ let splashtexts = [
   `<s>nginx</s>, <i>Enginks</i>`,
   `I love ECMAScript`,
 ];
-function get_splash_text() {
+
+function getSplashText() {
   return splashtexts[Math.floor(Math.random() * splashtexts.length)];
 }

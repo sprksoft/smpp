@@ -24,7 +24,6 @@ class SettingsWindow extends BaseWindow {
     content.appendChild(settingsSideBar);
     content.appendChild(this.settingsPage);
     this.displaySettingsPage();
-    await this.loadPage();
     return content;
   }
 
@@ -72,20 +71,20 @@ class SettingsWindow extends BaseWindow {
     let profileSettingsButton = document.createElement("button");
     profileSettingsButton.classList.add(
       "profile-settings-button",
-      "settings-category-button-js",
+      "settings-category-button-js"
     );
     let profilePicture = document.createElement("div");
     profilePicture.classList.add("profile-picture-settings");
     let profileSettingsLabel = document.createElement("div");
     profileSettingsLabel.classList.add("profile-settings-label");
     let profileSettingsLabelTitle = document.createElement("h2");
-    profileSettingsLabelTitle.classList.add("profile-settings-label-title");
+    profileSettingsLabelTitle.id = "profile-settings-label-title";
     profileSettingsLabelTitle.innerText = String(
-      data.profile.username || getOriginalName(),
+      data.profile.username || getOriginalName()
     ).split(" ")[0];
     let profileSettingsLabelDescription = document.createElement("p");
     profileSettingsLabelDescription.classList.add(
-      "profile-settings-label-description",
+      "profile-settings-label-description"
     );
     profileSettingsLabelDescription.innerText = "view profile";
     profileSettingsLabel.appendChild(profileSettingsLabelTitle);
@@ -104,7 +103,7 @@ class SettingsWindow extends BaseWindow {
     let categoryButton = document.createElement("button");
     categoryButton.classList.add(
       "settings-category-button",
-      "settings-category-button-js",
+      "settings-category-button-js"
     );
     categoryButton.dataset.page = category;
     categoryButton.innerText = this.settingsSideBarCategories[category].name;
@@ -129,17 +128,19 @@ class SettingsWindow extends BaseWindow {
       action: "getSettingsData",
     });
 
+    document.getElementById("profile-settings-label-title").innerText = String(
+      settings.profile.username || getOriginalName()
+    ).split(" ")[0];
+
     switch (this.currentPage) {
       case "profile": {
-        let usernameInput = document.getElementById(
-          "settings-page-username-input",
-        );
         if (settings.profile.username) {
-          usernameInput.value = settings.profile.username;
+          document.getElementById("settings-page-username-input").value =
+            settings.profile.username;
         }
 
         let profilePic = document.getElementById(
-          "settings-page-profile-picture",
+          "settings-page-profile-picture"
         );
         if (settings.profile.profilePicture) {
           profilePic.src = settings.profile.profilePicture;
@@ -191,7 +192,7 @@ class SettingsWindow extends BaseWindow {
           .forEach((input) => {
             if (input.id) {
               input.checked = input.id.includes(
-                settings.appearance.weatherOverlay.type,
+                settings.appearance.weatherOverlay.type
               );
             }
           });
@@ -231,7 +232,7 @@ class SettingsWindow extends BaseWindow {
         document.getElementById("settings-page-mail-icon-button").checked =
           settings.topNav.icons.mail;
         document.getElementById(
-          "settings-page-notifications-icon-button",
+          "settings-page-notifications-icon-button"
         ).checked = settings.topNav.icons.notifications;
         document.getElementById("settings-page-settings-icon-button").checked =
           settings.topNav.icons.settings;
@@ -241,20 +242,20 @@ class SettingsWindow extends BaseWindow {
       case "widgets": {
         // De Lijn
         document.getElementById(
-          "settings-page-delijn-monochrome-button",
+          "settings-page-delijn-monochrome-button"
         ).checked = settings.widgets.delijn.monochrome;
 
         document.getElementById("settings-page-max-busses-slider").value =
           settings.widgets.delijn.maxBusses;
         document.querySelector(
-          "#settings-page-max-busses-slider + .settings-page-live-value",
+          "#settings-page-max-busses-slider + .settings-page-live-value"
         ).innerText = settings.widgets.delijn.maxBusses;
 
         // Assignments
         document.getElementById("settings-page-max-assignments-slider").value =
           settings.widgets.assignments.maxAssignments;
         document.querySelector(
-          "#settings-page-max-assignments-slider + .settings-page-live-value",
+          "#settings-page-max-assignments-slider + .settings-page-live-value"
         ).innerText = settings.widgets.assignments.maxAssignments;
 
         // Weather
@@ -263,7 +264,7 @@ class SettingsWindow extends BaseWindow {
 
         // Snake
         document.getElementById(
-          "settings-page-show-snake-grid-button",
+          "settings-page-show-snake-grid-button"
         ).checked = settings.widgets.games.snake.enableGrid;
         break;
       }
@@ -271,7 +272,7 @@ class SettingsWindow extends BaseWindow {
       case "other": {
         // Performance mode
         document.getElementById(
-          "settings-page-performance-mode-button",
+          "settings-page-performance-mode-button"
         ).checked = settings.other.performanceMode;
 
         // Splash-text
@@ -303,13 +304,16 @@ class SettingsWindow extends BaseWindow {
     let previousData = structuredClone(settings);
     switch (this.currentPage) {
       case "profile": {
+        settings.profile.username = document.getElementById(
+          "settings-page-username-input"
+        ).value;
         break;
       }
 
       case "appearance": {
         // Theme
         let selectedTheme = document.querySelector(
-          ".settings-page-theme-card:has(input[type='radio']:checked)",
+          ".settings-page-theme-card:has(input[type='radio']:checked)"
         );
         if (selectedTheme) {
           settings.appearance.theme = selectedTheme.dataset.theme;
@@ -320,12 +324,12 @@ class SettingsWindow extends BaseWindow {
 
         // Background link
         settings.appearance.background.link = document.getElementById(
-          "settings-page-background-link-input",
+          "settings-page-background-link-input"
         ).value;
 
         // File Saving
         let file = document.getElementById(
-          "settings-page-background-file-input",
+          "settings-page-background-file-input"
         ).files[0];
         if (file) {
           const reader = new FileReader();
@@ -353,13 +357,13 @@ class SettingsWindow extends BaseWindow {
 
         // Blur slider
         let blurValue = document.getElementById(
-          "settings-page-blur-slider",
+          "settings-page-blur-slider"
         ).value;
         settings.appearance.background.blur = blurValue / 10;
 
         // Weather overlay
         let chosenWeather = document.querySelector(
-          ".settings-page-weather-overlay-container input:checked",
+          ".settings-page-weather-overlay-container input:checked"
         );
         if (chosenWeather) {
           settings.appearance.weatherOverlay.type =
@@ -367,107 +371,107 @@ class SettingsWindow extends BaseWindow {
         }
 
         settings.appearance.weatherOverlay.amount = document.getElementById(
-          "settings-page-weather-overlay-slider",
+          "settings-page-weather-overlay-slider"
         ).value;
 
         // Tab icon
         settings.appearance.tabLogo = document.getElementById(
-          "settings-page-smpp-icon-button",
+          "settings-page-smpp-icon-button"
         ).checked
           ? "smpp"
           : "sm";
 
         // News
         settings.appearance.news = document.getElementById(
-          "settings-page-show-news-button",
+          "settings-page-show-news-button"
         ).checked;
         break;
       }
 
       case "topNav": {
         settings.topNav.switchCoursesAndLinks = document.getElementById(
-          "settings-page-swap-courses-button",
+          "settings-page-swap-courses-button"
         ).checked;
 
         // Buttons
         settings.topNav.buttons.GO = document.getElementById(
-          "settings-page-go-button",
+          "settings-page-go-button"
         ).checked;
         settings.topNav.buttons.GC = document.getElementById(
-          "settings-page-global-chat-button",
+          "settings-page-global-chat-button"
         ).checked;
         settings.topNav.buttons.search = document.getElementById(
-          "settings-page-search-button",
+          "settings-page-search-button"
         ).checked;
         settings.topNav.buttons.quickMenu = document.getElementById(
-          "settings-page-quick-menu-button",
+          "settings-page-quick-menu-button"
         ).checked;
 
         // Icons
         settings.topNav.icons.home = document.getElementById(
-          "settings-page-home-icon-button",
+          "settings-page-home-icon-button"
         ).checked;
         settings.topNav.icons.mail = document.getElementById(
-          "settings-page-mail-icon-button",
+          "settings-page-mail-icon-button"
         ).checked;
         settings.topNav.icons.notifications = document.getElementById(
-          "settings-page-notifications-icon-button",
+          "settings-page-notifications-icon-button"
         ).checked;
         settings.topNav.icons.settings = document.getElementById(
-          "settings-page-settings-icon-button",
+          "settings-page-settings-icon-button"
         ).checked;
         break;
       }
 
       case "widgets": {
         settings.widgets.delijn.monochrome = document.getElementById(
-          "settings-page-delijn-monochrome-button",
+          "settings-page-delijn-monochrome-button"
         ).checked;
 
         settings.widgets.delijn.maxBusses = parseInt(
           document.getElementById("settings-page-max-busses-slider").value,
-          10,
+          10
         );
 
         settings.widgets.assignments.maxAssignments = parseInt(
           document.getElementById("settings-page-max-assignments-slider").value,
-          10,
+          10
         );
 
         settings.widgets.weather.syncWeather = document.getElementById(
-          "settings-page-sync-weather-button",
+          "settings-page-sync-weather-button"
         ).checked;
 
         settings.widgets.games.snake.enableGrid = document.getElementById(
-          "settings-page-show-snake-grid-button",
+          "settings-page-show-snake-grid-button"
         ).checked;
         break;
       }
 
       case "other": {
         settings.other.performanceMode = document.getElementById(
-          "settings-page-performance-mode-button",
+          "settings-page-performance-mode-button"
         ).checked;
 
         settings.other.splashText = document.getElementById(
-          "settings-page-splash-text-button",
+          "settings-page-splash-text-button"
         ).checked;
 
         // Keybindings
         settings.other.keybinds.dmenu = document.getElementById(
-          "settings-page-quick-menu-keybinding",
+          "settings-page-quick-menu-keybinding"
         ).value;
         settings.other.keybinds.widgetEditMode = document.getElementById(
-          "settings-page-widget-edit-keybinding",
+          "settings-page-widget-edit-keybinding"
         ).value;
         settings.other.keybinds.widgetBag = document.getElementById(
-          "settings-widget-bag-keybinding",
+          "settings-widget-bag-keybinding"
         ).value;
         settings.other.keybinds.settings = document.getElementById(
-          "settings-page-settings-keybinding",
+          "settings-page-settings-keybinding"
         ).value;
         settings.other.keybinds.gc = document.getElementById(
-          "settings-page-gc-keybinding",
+          "settings-page-gc-keybinding"
         ).value;
         break;
       }
@@ -594,7 +598,7 @@ class SettingsWindow extends BaseWindow {
       width = "80px",
       height = "80px",
       name,
-      id,
+      id
     ) {
       let container = document.createElement("label");
       container.classList.add("settings-page-button-label");
@@ -628,7 +632,7 @@ class SettingsWindow extends BaseWindow {
       if (showValue)
         slider.addEventListener("input", (event) => {
           document.querySelector(
-            "#" + event.target.id + " ~ .settings-page-live-value",
+            "#" + event.target.id + " ~ .settings-page-live-value"
           ).innerText = event.target.value;
         });
       let currentValue = document.createElement("span");
@@ -671,7 +675,7 @@ class SettingsWindow extends BaseWindow {
     const createImageInput = (buttonId, textInputId, fileInputId) => {
       let inputContainer = document.createElement("div");
       inputContainer.classList.add(
-        "settings-page-background-selection-container",
+        "settings-page-background-selection-container"
       );
 
       const clearButton = document.createElement("button");
@@ -720,14 +724,21 @@ class SettingsWindow extends BaseWindow {
     switch (this.currentPage) {
       case "profile":
         this.settingsPage.appendChild(createMainTitle("Profile"));
+        this.settingsPage.appendChild(createSectionTitle("Custom name"));
+        this.settingsPage.appendChild(
+          createDescription("Edit your username, displayed at the top left")
+        );
+        this.settingsPage.appendChild(
+          createTextInput("settings-page-username-input")
+        );
         this.settingsPage.appendChild(createSectionTitle("Profile Picture"));
         this.settingsPage.appendChild(
-          createDescription("Upload your own custom profile picture"),
+          createDescription("Upload your own custom profile picture")
         );
         let pfpInputContainer = createImageInput(
           "settings-page-pfp-file-button",
           "settings-page-pfp-link-input",
-          "settings-page-pfp-file-input",
+          "settings-page-pfp-file-input"
         );
         this.settingsPage.appendChild(pfpInputContainer);
 
@@ -737,8 +748,8 @@ class SettingsWindow extends BaseWindow {
         this.settingsPage.appendChild(createSectionTitle("Theme"));
         this.settingsPage.appendChild(
           createDescription(
-            "Customize the overall look and feel of the interface with different color styles.",
-          ),
+            "Customize the overall look and feel of the interface with different color styles."
+          )
         );
 
         let themesContainer = document.createElement("div");
@@ -751,15 +762,15 @@ class SettingsWindow extends BaseWindow {
 
             themeCard.style.setProperty(
               "--hover-border",
-              themes[key]["--color-accent"],
+              themes[key]["--color-accent"]
             );
             themeCard.style.setProperty(
               "--hover-color",
-              themes[key]["--color-base01"],
+              themes[key]["--color-base01"]
             );
             themeCard.style.setProperty(
               "--text-color",
-              themes[key]["--color-text"],
+              themes[key]["--color-text"]
             );
             themeCard.dataset.theme = key;
 
@@ -773,7 +784,7 @@ class SettingsWindow extends BaseWindow {
             let themeImage = createImage(
               "/theme-backgrounds/" + key + ".jpg",
               "100%",
-              "6rem",
+              "6rem"
             );
 
             let themeTitle = document.createElement("span");
@@ -792,37 +803,37 @@ class SettingsWindow extends BaseWindow {
         this.settingsPage.appendChild(createCustomThemeUIV2());
         this.settingsPage.appendChild(createSectionTitle("Wallpaper"));
         this.settingsPage.appendChild(
-          createDescription("Personalize your backdrop with a custom image."),
+          createDescription("Personalize your backdrop with a custom image.")
         );
         let backgroundInputContainer = createImageInput(
           "settings-page-background-file-button",
           "settings-page-background-link-input",
-          "settings-page-background-file-input",
+          "settings-page-background-file-input"
         );
         this.settingsPage.appendChild(backgroundInputContainer);
 
         this.settingsPage.appendChild(createSectionTitle("Background blur"));
         this.settingsPage.appendChild(
-          createDescription("Apply a blur to your background."),
+          createDescription("Apply a blur to your background.")
         );
 
         this.settingsPage.appendChild(
-          createSlider(0, 100, "settings-page-blur-slider"), // must be divided by 10
+          createSlider(0, 100, "settings-page-blur-slider") // must be divided by 10
           // for real value
         );
 
         let blurPreviewContainer = document.createElement("div");
         blurPreviewContainer.classList.add(
-          "settings-page-blur-preview-container",
+          "settings-page-blur-preview-container"
         );
         blurPreviewContainer.appendChild(
-          createImage("/theme-backgrounds/birb.jpg", "6rem", "4rem"),
+          createImage("/theme-backgrounds/birb.jpg", "6rem", "4rem")
         );
 
         let blurredImage = createImage(
           "/theme-backgrounds/birb.jpg",
           "100%",
-          "100%",
+          "100%"
         );
 
         blurredImage.style.filter = "blur(2px)";
@@ -837,12 +848,12 @@ class SettingsWindow extends BaseWindow {
 
         this.settingsPage.appendChild(createSectionTitle("Weather overlay"));
         this.settingsPage.appendChild(
-          createDescription("Add dynamic weather visuals."),
+          createDescription("Add dynamic weather visuals.")
         );
         let weatherIconsContainer = document.createElement("div");
         weatherIconsContainer.classList.add(
           "settings-page-icons-container",
-          "settings-page-weather-overlay-container",
+          "settings-page-weather-overlay-container"
         );
         let rainBtn = createImageButtonWithLabel(
           "/icons/weather-overlay/raindropfancy.svg",
@@ -850,7 +861,7 @@ class SettingsWindow extends BaseWindow {
           "5rem",
           "5rem",
           "weather",
-          "settings-page-raindrop-button",
+          "settings-page-raindrop-button"
         );
         rainBtn.dataset.weather = "rain";
         weatherIconsContainer.appendChild(rainBtn);
@@ -861,7 +872,7 @@ class SettingsWindow extends BaseWindow {
           "5rem",
           "5rem",
           "weather",
-          "settings-page-realtime-button",
+          "settings-page-realtime-button"
         );
         realtimeBtn.dataset.weather = "realtime";
         weatherIconsContainer.appendChild(realtimeBtn);
@@ -872,7 +883,7 @@ class SettingsWindow extends BaseWindow {
           "5rem",
           "5rem",
           "weather",
-          "settings-page-snow-button",
+          "settings-page-snow-button"
         );
         snowBtn.dataset.weather = "snow";
         weatherIconsContainer.appendChild(snowBtn);
@@ -885,13 +896,13 @@ class SettingsWindow extends BaseWindow {
             500,
             "settings-page-weather-overlay-slider",
             "Amount",
-            false,
-          ),
+            false
+          )
         );
 
         this.settingsPage.appendChild(createSectionTitle("Icon"));
         this.settingsPage.appendChild(
-          createDescription("Choose the icon displayed in your browser tab."),
+          createDescription("Choose the icon displayed in your browser tab.")
         );
 
         let iconsContainer = document.createElement("div");
@@ -902,8 +913,8 @@ class SettingsWindow extends BaseWindow {
             "5rem",
             "5rem",
             "logo",
-            "settings-page-default-icon-button",
-          ),
+            "settings-page-default-icon-button"
+          )
         );
         iconsContainer.appendChild(
           createImageButton(
@@ -911,17 +922,17 @@ class SettingsWindow extends BaseWindow {
             "5rem",
             "5rem",
             "logo",
-            "settings-page-smpp-icon-button",
-          ),
+            "settings-page-smpp-icon-button"
+          )
         );
         this.settingsPage.appendChild(iconsContainer);
 
         this.settingsPage.appendChild(createSectionTitle("News"));
         this.settingsPage.appendChild(
-          createDescription("Change the homepage news configuration."),
+          createDescription("Change the homepage news configuration.")
         );
         this.settingsPage.appendChild(
-          createButtonWithLabel("settings-page-show-news-button", "Show news"),
+          createButtonWithLabel("settings-page-show-news-button", "Show news")
         );
 
         break;
@@ -930,66 +941,63 @@ class SettingsWindow extends BaseWindow {
         this.settingsPage.appendChild(createSectionTitle("Buttons"));
         this.settingsPage.appendChild(
           createDescription(
-            "Choose which buttons you want to see in the top navigation.",
-          ),
+            "Choose which buttons you want to see in the top navigation."
+          )
         );
         if (!liteMode) {
           this.settingsPage.appendChild(
             createButtonWithLabel(
               "settings-page-global-chat-button",
-              "Global Chat",
-            ),
+              "Global Chat"
+            )
           );
         }
 
         this.settingsPage.appendChild(
-          createButtonWithLabel("settings-page-search-button", "Search"),
+          createButtonWithLabel("settings-page-search-button", "Search")
         );
 
         this.settingsPage.appendChild(
-          createButtonWithLabel(
-            "settings-page-quick-menu-button",
-            "Quick Menu",
-          ),
+          createButtonWithLabel("settings-page-quick-menu-button", "Quick Menu")
         );
 
         this.settingsPage.appendChild(
           createButtonWithLabel(
             "settings-page-swap-courses-button",
-            "Swap courses/links",
-          ),
+            "Swap courses/links"
+          )
         );
 
         if (document.body.classList.contains("go")) {
           this.settingsPage.appendChild(
-            createButtonWithLabel("settings-page-go-button", "GO"),
+            createButtonWithLabel("settings-page-go-button", "GO")
           );
         }
 
         this.settingsPage.appendChild(createSectionTitle("Icons"));
         this.settingsPage.appendChild(
           createDescription(
-            "Choose witch buttons you want to replace with icons.",
-          ),
+            "Choose witch buttons you want to replace with icons."
+          )
         );
 
         this.settingsPage.appendChild(
-          createButtonWithLabel("settings-page-home-icon-button", "Start"),
+          createButtonWithLabel("settings-page-home-icon-button", "Start")
         );
         this.settingsPage.appendChild(
-          createButtonWithLabel("settings-page-mail-icon-button", "Mail"),
+          createButtonWithLabel("settings-page-mail-icon-button", "Mail")
         );
         this.settingsPage.appendChild(
           createButtonWithLabel(
             "settings-page-notifications-icon-button",
-            "Notifications",
-          ),
+            "Notifications"
+          )
         );
         this.settingsPage.appendChild(
           createButtonWithLabel(
             "settings-page-settings-icon-button",
-            "Settings",
-          ),
+            "Settings"
+          )
         );
 
         break;
@@ -998,53 +1006,53 @@ class SettingsWindow extends BaseWindow {
 
         this.settingsPage.appendChild(createSectionTitle("De Lijn"));
         this.settingsPage.appendChild(
-          createDescription("Change the De Lijn app configuration."),
+          createDescription("Change the De Lijn app configuration.")
         );
         this.settingsPage.appendChild(
           createButtonWithLabel(
             "settings-page-delijn-monochrome-button",
-            "Monochrome",
-          ),
+            "Monochrome"
+          )
         );
         this.settingsPage.appendChild(
           createLabeledSlider(
             1,
             10,
             "settings-page-max-busses-slider",
-            "Max busses",
-          ),
+            "Max busses"
+          )
         );
 
         this.settingsPage.appendChild(createSectionTitle("Assignments"));
         this.settingsPage.appendChild(
-          createDescription("Change the assignments app configuration."),
+          createDescription("Change the assignments app configuration.")
         );
         this.settingsPage.appendChild(
           createLabeledSlider(
             1,
             10,
             "settings-page-max-assignments-slider",
-            "Max assignments",
-          ),
+            "Max assignments"
+          )
         );
         this.settingsPage.appendChild(createSectionTitle("Weather"));
         this.settingsPage.appendChild(
-          createDescription("Change the weather app configuration."),
+          createDescription("Change the weather app configuration.")
         );
         this.settingsPage.appendChild(
           createButtonWithLabel(
             "settings-page-sync-weather-button",
-            "Sync weather",
-          ),
+            "Sync weather"
+          )
         );
 
         this.settingsPage.appendChild(createMainTitle("Games"));
         this.settingsPage.appendChild(createSectionTitle("Snake"));
         this.settingsPage.appendChild(
-          createDescription("Change configuration of Snake++"),
+          createDescription("Change configuration of Snake++")
         );
         this.settingsPage.appendChild(
-          createButtonWithLabel("settings-page-show-snake-grid-button", "Grid"),
+          createButtonWithLabel("settings-page-show-snake-grid-button", "Grid")
         );
 
         break;
@@ -1053,53 +1061,64 @@ class SettingsWindow extends BaseWindow {
         this.settingsPage.appendChild(createSectionTitle("Performance"));
         this.settingsPage.appendChild(
           createDescription(
-            "Disables animations for better performance on low end devices.",
-          ),
+            "Disables animations for better performance on low end devices."
+          )
         );
 
         this.settingsPage.appendChild(
           createButtonWithLabel(
             "settings-page-performance-mode-button",
-            "Performance mode",
-          ),
+            "Performance mode"
+          )
         );
 
         this.settingsPage.appendChild(createSectionTitle("Login"));
         this.settingsPage.appendChild(
-          createDescription("Change the login page configuration."),
+          createDescription("Change the login page configuration.")
         );
         this.settingsPage.appendChild(
           createButtonWithLabel(
             "settings-page-splash-text-button",
-            "Splash-text",
-          ),
+            "Splash-text"
+          )
+        );
+
+        this.settingsPage.appendChild(createSectionTitle("Homepage"));
+        this.settingsPage.appendChild(
+          createDescription("Change the home page configuration.")
+        );
+        this.settingsPage.appendChild(
+          createButtonWithLabel(
+            "settings-page-discord-button",
+            "Discord button"
+          )
         );
 
         this.settingsPage.appendChild(createSectionTitle("Keybindings"));
         this.settingsPage.appendChild(
-          createDescription("Customize your keybindings"),
+          createDescription("Customize your keybindings")
         );
 
         this.settingsPage.appendChild(
           createKeybindInput(
             "settings-page-quick-menu-keybinding",
-            "Quick Menu",
-          ),
+            "Quick Menu"
+          )
         );
         this.settingsPage.appendChild(
           createKeybindInput(
             "settings-page-widget-edit-keybinding",
-            "Widget editing",
-          ),
+            "Widget editing"
+          )
         );
         this.settingsPage.appendChild(
-          createKeybindInput("settings-widget-bag-keybinding", "Widget bag"),
+          createKeybindInput("settings-widget-bag-keybinding", "Widget bag")
         );
         this.settingsPage.appendChild(
-          createKeybindInput("settings-page-settings-keybinding", "Settings"),
+          createKeybindInput("settings-page-settings-keybinding", "Settings")
         );
         this.settingsPage.appendChild(
-          createKeybindInput("settings-page-gc-keybinding", "Global Chat"),
+          createKeybindInput("settings-page-gc-keybinding", "Global Chat")
         );
         break;
       default:
@@ -1114,6 +1133,7 @@ async function openSettingsWindow(event) {
   if (!settingsWindow || !settingsWindow.element?.isConnected) {
     settingsWindow = new SettingsWindow();
     await settingsWindow.create();
+    await settingsWindow.loadPage();
   }
   settingsWindow.show(event);
 }
@@ -1142,7 +1162,7 @@ async function loadCustomThemeDataV2() {
   });
   customTheme = themeData;
   themeCard = document.querySelector(
-    `.settings-page-theme-card[data-theme="custom"]`,
+    `.settings-page-theme-card[data-theme="custom"]`
   );
   themeCard.style.setProperty("--hover-border", themeData.color_accent);
   themeCard.style.setProperty("--hover-color", themeData.color_base01);
