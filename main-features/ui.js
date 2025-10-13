@@ -11,3 +11,16 @@ function createButton(id) {
   outerSwitch.appendChild(innerSwitch);
   return outerSwitch;
 }
+
+function createButtonWithLabel(id, text) {
+  let container = document.createElement("label");
+  container.classList.add("smpp-button-with-label");
+  container.for = id;
+
+  let label = document.createElement("span");
+  label.innerText = text;
+  let button = createButton(id);
+  container.appendChild(label);
+  container.appendChild(button);
+  return container;
+}

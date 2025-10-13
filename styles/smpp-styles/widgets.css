@@ -68,16 +68,30 @@ html {
   overflow: scroll;
   backdrop-filter: var(--blur-value-small);
 }
-.smpp-news-editmode #smpp-news-content {
+
+#smpp-news-content {
   display: none !important;
 }
+.smpp-news-container.show-news:not(.smpp-news-editmode) #smpp-news-content {
+  display: block !important;
+}
+
 .smpp-news-editor {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   height: 100%;
-  margin: 0px;
+
+  margin: 3rem;
+  background-color: transparent;
+  border-radius: 4rem;
+}
+.enableAnimations .smpp-news-editor {
+  transition: background-color 0.3s;
+}
+.smpp-news-container.show-news .smpp-news-editor {
+  background-color: var(--darken-background);
 }
 
 .smpp-widget.smpp-widget-preview {

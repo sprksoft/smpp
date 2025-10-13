@@ -13,6 +13,7 @@
       "css": [
         "quick-menu/dmenu.css",
         "styles/smpp-styles/smpp.css",
+        "styles/smpp-styles/ui.css",
         "styles/smpp-styles/games.css",
         "styles/smpp-styles/weather.css",
         "styles/smpp-styles/delijn.css",
