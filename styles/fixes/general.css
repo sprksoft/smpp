@@ -2027,6 +2027,9 @@ div[style*=";color:"] {
   color: var(--color-text) !important;
 }
 
+.tox-toolbar__group:has(.tox-split-button) {
+  display: none !important;
+}
 div[style*=";color:#033399;"] {
   opacity: 0.7 !important;
 }

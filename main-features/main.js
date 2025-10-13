@@ -147,7 +147,13 @@ function applyTopNav(data) {
 
 async function apply() {
   await reloadDMenuConfig(); // reload the dmenu config. (er is een object voor async raarheid te vermijden en dat wordt herladen door deze functie)
-  setEditMode(false); // Turn off widget edit mode
+  if (onHomePage) {
+    console.log("aaaa");
+    discordpopup();
+    setEditMode(false);
+  } else {
+    console.log("b");
+  } // Turn off widget edit mode
   let style = document.documentElement.style;
   const data = await browser.runtime.sendMessage({
     action: "getSettingsData",
@@ -173,7 +179,6 @@ async function apply() {
   await setTheme(data.appearance.theme);
 
   updateNews(data.appearance.news);
-  discordpopup();
 
   if (document.querySelector(".topnav")) applyTopNav(data.topNav);
 
@@ -646,7 +651,8 @@ function createQuickSettingsButton() {
 }
 
 function createTopButtons() {
-  const onHomePage = document.getElementById("container") !== null;
+  onHomePage = document.getElementById("container") != null;
+  console.log(document.getElementById("container"));
   let topNav = document.querySelector("nav.topnav");
   if (topNav == null) {
     return;

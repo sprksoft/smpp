@@ -9,6 +9,7 @@
       "matches": ["*://*.smartschool.be/*"],
       "exclude_matches": ["*://www.smartschool.be/*"],
       "all_frames": true,
+      "match_about_blank": true,
       "css": [
         "quick-menu/dmenu.css",
         "styles/smpp-styles/smpp.css",
