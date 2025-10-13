@@ -1,0 +1,24 @@
+/* For UI Elements created by ui.js */
+
+.smpp-button-with-label {
+  border-radius: 999999999px;
+
+  min-width: 20rem;
+
+  background-color: var(--color-base01);
+  padding: 0.75rem 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: start;
+  font-size: 1.6rem !important;
+  gap: 1rem;
+}
+
+.smpp-button-with-label > span {
+  margin-left: 1rem;
+}
+
+.smpp-button-with-label > .switch {
+  margin-left: auto !important;
+}

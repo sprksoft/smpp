@@ -423,7 +423,10 @@ async function createWidgetsContainerHTML(widgetData, newsContent, news) {
   newsDiv.addEventListener("mousemove", (e) => onCenterHover(newsDiv, e));
   newsContent.id = "smpp-news-content";
   newsContent.className = "";
-  newsContent.style.display = news ? "block" : "none";
+
+  if (news) {
+    newsDiv.classList.add("show-news");
+  }
   newsDiv.appendChild(newsContent);
   widgetsContainer.appendChild(newsDiv);
 
@@ -437,9 +440,11 @@ async function createWidgetsContainerHTML(widgetData, newsContent, news) {
 
 function updateNews(value) {
   newsState = value;
-  const newsContent = document.getElementById("smpp-news-content");
-  if (newsContent) {
-    newsContent.style.display = value ? "" : "none";
+  const newsCon = document.querySelector(".smpp-news-container");
+  if (newsCon) {
+    value
+      ? newsCon.classList.add("show-news")
+      : newsCon.classList.remove("show-news");
   }
 }
 
@@ -462,12 +467,7 @@ function initNewsEditMode() {
   const div = document.createElement("div");
   div.classList.add("smpp-news-editor");
 
-  const label = document.createElement("label");
-  label.innerText = "Show News";
-  label.for = "smpp-widget-news-toggle";
-  div.appendChild(label);
-
-  const button = createButton("smpp-widget-news-toggle");
+  const button = createButtonWithLabel("smpp-widget-news-toggle", "Show News");
   button.addEventListener("change", async (e) => {
     updateNews(e.target.checked);
     await browser.runtime.sendMessage({
