@@ -7,7 +7,10 @@
   "content_scripts": [
     {
       "matches": ["*://*.smartschool.be/*"],
-      "exclude_matches": ["*://www.smartschool.be/*"],
+      "exclude_matches": [
+        "*://www.smartschool.be/*",
+        "*://status.smartschool.be/*"
+      ],
       "all_frames": true,
       "match_about_blank": true,
       "css": [

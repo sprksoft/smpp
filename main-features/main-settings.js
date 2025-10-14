@@ -80,7 +80,7 @@ class SettingsWindow extends BaseWindow {
     let profileSettingsLabelTitle = document.createElement("h2");
     profileSettingsLabelTitle.id = "profile-settings-label-title";
     profileSettingsLabelTitle.innerText = String(
-      data.profile.username || getOriginalName()
+      data.profile.username || originalUsername
     ).split(" ")[0];
     let profileSettingsLabelDescription = document.createElement("p");
     profileSettingsLabelDescription.classList.add(
@@ -123,13 +123,30 @@ class SettingsWindow extends BaseWindow {
     this.settingsPage.innerHTML = " ";
   }
 
+  addDisclaimer(element) {
+    if (
+      element.nextElementSibling?.classList.contains("settings-page-disclaimer")
+    ) {
+      return;
+    }
+
+    const disclaimer = document.createElement("span");
+    disclaimer.classList.add("settings-page-disclaimer");
+    disclaimer.innerHTML = `
+    * Changes will only apply after 
+    <a class="settings-page-disclaimer-button" href="#" onclick="window.location.href = window.location.href; return false;">reload</a>
+  `;
+
+    element.insertAdjacentElement("afterend", disclaimer);
+  }
+
   async loadPage() {
     let settings = await browser.runtime.sendMessage({
       action: "getSettingsData",
     });
 
     document.getElementById("profile-settings-label-title").innerText = String(
-      settings.profile.username || getOriginalName()
+      settings.profile.username || originalUsername
     ).split(" ")[0];
 
     switch (this.currentPage) {
@@ -279,6 +296,10 @@ class SettingsWindow extends BaseWindow {
         document.getElementById("settings-page-splash-text-button").checked =
           settings.other.splashText;
 
+        // Discord button
+        document.getElementById("settings-page-discord-button").checked =
+          settings.other.discordButton;
+
         // Keybindings
         document.getElementById("settings-page-quick-menu-keybinding").value =
           settings.other.keybinds.dmenu;
@@ -307,6 +328,8 @@ class SettingsWindow extends BaseWindow {
         settings.profile.username = document.getElementById(
           "settings-page-username-input"
         ).value;
+
+        applyProfile(settings.profile);
         break;
       }
 
@@ -338,7 +361,8 @@ class SettingsWindow extends BaseWindow {
             reader.readAsDataURL(file);
           });
           await browser.runtime.sendMessage({
-            action: "saveBackgroundImage",
+            action: "setImage",
+            id: "backgroundImage",
             data: imageData,
           });
 
@@ -385,6 +409,8 @@ class SettingsWindow extends BaseWindow {
         settings.appearance.news = document.getElementById(
           "settings-page-show-news-button"
         ).checked;
+
+        applyAppearance(settings.appearance);
         break;
       }
 
@@ -420,6 +446,8 @@ class SettingsWindow extends BaseWindow {
         settings.topNav.icons.settings = document.getElementById(
           "settings-page-settings-icon-button"
         ).checked;
+
+        applyTopNav(settings.topNav);
         break;
       }
 
@@ -433,18 +461,55 @@ class SettingsWindow extends BaseWindow {
           10
         );
 
+        if (
+          settings.widgets.delijn.maxBusses !=
+          previousData.widgets.delijn.maxBusses
+        ) {
+          this.addDisclaimer(
+            document.querySelector(
+              ".settings-page-slider-container:has(#settings-page-max-busses-slider)"
+            )
+          );
+        }
+
         settings.widgets.assignments.maxAssignments = parseInt(
           document.getElementById("settings-page-max-assignments-slider").value,
           10
         );
 
+        if (
+          settings.widgets.assignments.maxAssignments !=
+          previousData.widgets.assignments.maxAssignments
+        ) {
+          this.addDisclaimer(
+            document.querySelector(
+              ".settings-page-slider-container:has(#settings-page-max-assignments-slider)"
+            )
+          );
+        }
+
         settings.widgets.weather.syncWeather = document.getElementById(
           "settings-page-sync-weather-button"
         ).checked;
 
+        if (
+          settings.widgets.weather.syncWeather !=
+          previousData.widgets.weather.syncWeather
+        ) {
+          this.addDisclaimer(
+            document.querySelector(
+              ".settings-page-button-label-container:has(#settings-page-sync-weather-button)"
+            )
+          );
+        }
+
         settings.widgets.games.snake.enableGrid = document.getElementById(
           "settings-page-show-snake-grid-button"
         ).checked;
+
+        //TODO: ADD RELOAD DISCLAIMER
+
+        applyWidgets(settings.widgets);
         break;
       }
 
@@ -455,6 +520,10 @@ class SettingsWindow extends BaseWindow {
 
         settings.other.splashText = document.getElementById(
           "settings-page-splash-text-button"
+        ).checked;
+
+        settings.other.discordButton = document.getElementById(
+          "settings-page-discord-button"
         ).checked;
 
         // Keybindings
@@ -473,19 +542,20 @@ class SettingsWindow extends BaseWindow {
         settings.other.keybinds.gc = document.getElementById(
           "settings-page-gc-keybinding"
         ).value;
+
+        applyOther(settings.other);
         break;
       }
 
       default:
         break;
     }
-    console.log(settings);
+    console.log("Storing settings: ", settings);
     await browser.runtime.sendMessage({
       action: "setSettingsData",
       data: settings,
     });
     await this.loadPage();
-    await apply();
   }
 
   displaySettingsPage() {
@@ -646,10 +716,11 @@ class SettingsWindow extends BaseWindow {
       return container;
     }
 
-    function createTextInput(id) {
+    function createTextInput(id, placeholder = "") {
       let textInput = document.createElement("input");
       textInput.id = id;
       textInput.type = "text";
+      textInput.placeholder = placeholder;
       textInput.spellcheck = false;
       textInput.classList.add("settings-page-text-input");
       return textInput;
@@ -696,8 +767,7 @@ class SettingsWindow extends BaseWindow {
         await this.storePage();
       });
 
-      const linkInput = createTextInput(textInputId);
-      linkInput.placeholder = "Link";
+      const linkInput = createTextInput(textInputId, "Link");
 
       const backgroundFileInput = document.createElement("input");
       backgroundFileInput.id = fileInputId;
@@ -729,7 +799,7 @@ class SettingsWindow extends BaseWindow {
           createDescription("Edit your username, displayed at the top left")
         );
         this.settingsPage.appendChild(
-          createTextInput("settings-page-username-input")
+          createTextInput("settings-page-username-input", "Username")
         );
         this.settingsPage.appendChild(createSectionTitle("Profile Picture"));
         this.settingsPage.appendChild(
@@ -767,6 +837,10 @@ class SettingsWindow extends BaseWindow {
             themeCard.style.setProperty(
               "--hover-color",
               themes[key]["--color-base01"]
+            );
+            themeCard.style.setProperty(
+              "--background-placeholder-color",
+              themes[key]["--color-base02"]
             );
             themeCard.style.setProperty(
               "--text-color",
@@ -1167,6 +1241,10 @@ async function loadCustomThemeDataV2() {
   themeCard.style.setProperty("--hover-border", themeData.color_accent);
   themeCard.style.setProperty("--hover-color", themeData.color_base01);
   themeCard.style.setProperty("--text-color", themeData.color_text);
+  themeCard.style.setProperty(
+    "--background-placeholder-color",
+    themeData.color_base02
+  );
   document.getElementById("settings-colorPicker1").value =
     themeData.color_base00;
   document.getElementById("settings-colorPicker2").value =

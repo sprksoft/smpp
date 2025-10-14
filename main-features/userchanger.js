@@ -7,7 +7,7 @@ function getOriginalName() {
   );
 }
 
-function createCustomNameInput(customName, originalName) {
+function createCustomNameInput(customName) {
   let parent = document.getElementById("smscMainBlockContainer");
   let customNameInputContainer =
     document.getElementById("custom-name-input-container") ||
@@ -23,10 +23,10 @@ function createCustomNameInput(customName, originalName) {
   customNameInput.value = customName == null ? "" : customName;
   customNameInput.addEventListener("input", async function (event) {
     if (event.target.value.trim() != "") {
-      displayCustomName(event.target.value);
+      displayUsernameTopNav(event.target.value);
       await saveCustomName(event.target.value);
     } else {
-      displayCustomName(originalName);
+      displayUsernameTopNav(originalUsername);
       await saveCustomName(null);
     }
   });
@@ -46,16 +46,16 @@ async function saveCustomName(name) {
     data: data,
   });
 }
-function displayCustomName(customName) {
+function displayUsernameTopNav(name) {
   let style = document.documentElement.style;
   let originalNameElement = document.querySelector(
     ".js-btn-profile .hlp-vert-box span"
   );
-  if (originalNameElement) originalNameElement.innerHTML = customName;
-  style.setProperty("--profile-picture", "url(" + getPfpLink(customName) + ")");
+  if (originalNameElement) originalNameElement.innerHTML = name;
+  style.setProperty("--profile-picture", "url(" + getPfpLink(name) + ")");
 }
 
-function attachMessagesObserver(originalName, customName) {
+function attachMessagesObserver(customName) {
   const messagesList = document.getElementById("msglist");
   if (!messagesList) return;
 
@@ -70,12 +70,13 @@ function attachMessagesObserver(originalName, customName) {
         const nameElement = node.querySelector(".modern-message__name");
         if (!nameElement) continue;
 
-        const isUserMessage = nameElement.innerHTML.startsWith(originalName);
+        const isUserMessage =
+          nameElement.innerHTML.startsWith(originalUsername);
 
         if (isUserMessage || isSentMessagesPage) {
           const image = node.querySelector(".modern-message__image img");
           if (image) {
-            image.src = getPfpLink(customName || originalName);
+            image.src = getPfpLink(customName || originalUsername);
           }
         }
       }
@@ -89,11 +90,12 @@ function attachMessagesObserver(originalName, customName) {
 }
 
 async function userNameChanger(customName) {
-  let originalName = getOriginalName();
   if (window.location.href.includes("module=Profile"))
-    createCustomNameInput(customName, originalName);
+    createCustomNameInput(customName);
   if (customName) {
-    displayCustomName(customName);
+    displayUsernameTopNav(customName);
+  } else {
+    displayUsernameTopNav(originalUsername);
   }
-  attachMessagesObserver(originalName, customName);
+  attachMessagesObserver(customName);
 }

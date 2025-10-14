@@ -15,6 +15,8 @@ import {
   getCustomThemeData,
   getAllThemes,
   getTheme,
+  setImage,
+  getImage,
 } from "./data-background-script.js";
 import { fetchWeatherData, fetchDelijnData } from "./api-background-script.js";
 import { initGlobals } from "./json-loader.js";
@@ -32,7 +34,7 @@ function getByPath(object, path) {
   for (let node of path.split(".")) {
     ob = ob[node];
     if (ob === undefined) {
-      throw `getByPath: ${node} did not exist in path ${path}`
+      throw `getByPath: ${node} did not exist in path ${path}`;
     }
   }
   return ob;
@@ -44,7 +46,7 @@ function setByPath(object, path, value) {
   for (let i = 0; i < pathSplit.length - 1; i++) {
     ob = ob[pathSplit[i]];
     if (ob === undefined) {
-      throw `setByPath: ${pathSplit[i]} did not exist in path ${path}`
+      throw `setByPath: ${pathSplit[i]} did not exist in path ${path}`;
     }
   }
   ob[pathSplit[pathSplit.length - 1]] = value;
@@ -97,7 +99,7 @@ async function handleMessage(message, sendResponse) {
       const settingsData = await getSettingsData();
       sendResponse(getByPath(settingsData, message.category));
       console.log(
-        "Settings data sent for this:" + message.category + "category",
+        "Settings data sent for this:" + message.category + "category"
       );
     }
     if (message.action === "getSettingsData") {
@@ -149,30 +151,28 @@ async function handleMessage(message, sendResponse) {
       sendResponse({ success: true });
       console.log("Custom theme data saved.");
     }
-    // Background image
-    if (message.action === "saveBackgroundImage") {
-      await browser.storage.local.set({ backgroundImage: message.data });
+    // Images
+    if (message.action === "setImage") {
+      await setImage(message.id, message.data);
       sendResponse({ success: true });
-      console.log("Background image saved.");
+      console.log(`Image with id:${message.id} saved.`);
     }
+    if (message.action === "getImage") {
+      const image = await getImage(message.id);
+      sendResponse(image || null);
+      console.log(`Image with id:${message.id} sent.`);
+    }
+
+    // for migration, NEVER use this!!!
     if (message.action === "getBackgroundImage") {
-      const backgroundImage =
-        await browser.storage.local.get("backgroundImage");
+      const backgroundImage = await browser.storage.local.get(
+        "backgroundImage"
+      );
+      await browser.storage.local.remove("backgroundImage");
       sendResponse(backgroundImage || null);
       console.log("Background image sent.");
     }
 
-    if (message.action === "savePhotoWidgetImage") {
-      await browser.storage.local.set({ photoWidgetImage: message.data });
-      sendResponse({ success: true });
-      console.log("Photo widget image saved.");
-    }
-    if (message.action === "getPhotoWidgetImage") {
-      const photoWidgetImage =
-        await browser.storage.local.get("photoWidgetImage");
-      sendResponse(photoWidgetImage || null);
-      console.log("Photo widget image sent.");
-    }
     // Weather
     if (message.action === "setWeatherAppData") {
       await browser.storage.local.set({ weatherAppData: message.data });

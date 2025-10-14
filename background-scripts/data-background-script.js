@@ -107,3 +107,14 @@ export async function getDelijnColorData() {
     return fallbackColorData;
   }
 }
+
+export async function setImage(id, data) {
+  const images = (await browser.storage.local.get("images")).images || {};
+  images[id] = data;
+  await browser.storage.local.set({ images });
+}
+
+export async function getImage(id) {
+  const images = (await browser.storage.local.get("images")).images || {};
+  return images[id];
+}

@@ -3,22 +3,16 @@
 //oh ok, ik dacht in general.css - Jdev
 let quickSettingsWindowIsHidden = true;
 
-function addDiscordPopup() {
-  let discordButtonContainer = document.createElement("div");
-  discordButtonContainer.id = "discord-link-container";
-  discordButtonContainer.innerHTML = discordSvg;
-  document.body.appendChild(discordButtonContainer);
-}
-
-function removeDiscordPopup() {
-  document.getElementById("discord-link-container")?.remove();
-}
-
 function updateDiscordPopup(discordButtonEnabled) {
   if (discordButtonEnabled) {
-    addDiscordPopup();
+    let discordButtonContainer =
+      document.getElementById("discord-link-container") ||
+      document.createElement("div");
+    discordButtonContainer.id = "discord-link-container";
+    discordButtonContainer.innerHTML = discordSvg;
+    document.body.appendChild(discordButtonContainer);
   } else {
-    removeDiscordPopup();
+    document.getElementById("discord-link-container").remove();
   }
 }
 
@@ -176,6 +170,9 @@ async function createStaticGlobals() {
   settingsOptions = await browser.runtime.sendMessage({
     action: "getSettingsOptions",
   });
+  originalUsername =
+    document.querySelector(".js-btn-profile .hlp-vert-box span")?.innerText ||
+    "Mr Unknown";
 }
 
 async function applyAppearance(appearance) {
@@ -229,6 +226,7 @@ function applyWidgets(widgets) {
 function applyOther(other) {
   if (window.location.href.split("/")[3] == "login")
     updateSplashText(other.splashText);
+
   keybinds = other.keybinds;
 
   other.performanceMode
@@ -242,7 +240,7 @@ function applyProfile(profile) {
   let style = document.documentElement.style;
   style.setProperty(
     "--profile-picture",
-    "url(" + getPfpLink(profile.username || getOriginalName()) + ")"
+    "url(" + getPfpLink(profile.username || originalUsername) + ")"
   );
   userNameChanger(profile.username);
   if (!profile.profilePicture) decapitateಠ_ಠ();
@@ -252,7 +250,7 @@ function applyFixes() {
   changeFont();
   fixCoursesSearch();
 
-  if (document.getElementById("background_image") && false) {
+  if (document.getElementById("background_image")) {
     document.getElementById("background_image").style.display = "none";
   }
 
@@ -262,14 +260,13 @@ function applyFixes() {
 }
 
 async function apply() {
-  await reloadDMenuConfig(); // reload the dmenu config. (er is een object voor async raarheid te vermijden en dat wordt herladen door deze functie)
-  if (onHomePage) setEditMode(false);
-
   const data = await browser.runtime.sendMessage({
     action: "getSettingsData",
   });
   console.log("Settings data: \n", data);
 
+  await reloadDMenuConfig(); // reload the dmenu config. (er is een object voor async raarheid te vermijden en dat wordt herladen door deze functie)
+  if (onHomePage) setEditMode(false);
   await applyAppearance(data.appearance);
   applyProfile(data.profile);
   applyTopNav(data.topNav);
@@ -323,7 +320,8 @@ async function storeQuickSettings() {
       reader.readAsDataURL(file);
     });
     await browser.runtime.sendMessage({
-      action: "saveBackgroundImage",
+      action: "setImage",
+      id: "backgroundImage",
       data: imageData,
     });
 
@@ -380,10 +378,11 @@ async function setBackground(data) {
       displayBackgroundImage(data.background.link);
       break;
     case "file":
-      let thing = await browser.runtime.sendMessage({
-        action: "getBackgroundImage",
+      let backgroundImage = await browser.runtime.sendMessage({
+        action: "getImage",
+        id: "backgroundImage",
       });
-      displayBackgroundImage(thing.backgroundImage);
+      displayBackgroundImage(backgroundImage);
       break;
   }
 }
@@ -689,7 +688,6 @@ function createQuickSettingsButton() {
 
 function createTopButtons() {
   onHomePage = document.getElementById("container") != null;
-  console.log(document.getElementById("container"));
   let topNav = document.querySelector("nav.topnav");
   if (topNav == null) {
     return;
@@ -763,8 +761,19 @@ async function main() {
   const settingsData = await browser.runtime.sendMessage({
     action: "getSettingsData",
   });
+  const backgroundImage = await browser.runtime.sendMessage({
+    action: "getBackgroundImage",
+  });
   if (settingsData.theme != null) {
     await migrateSettingsV2();
+  }
+  console.log(backgroundImage);
+  if (backgroundImage["backgroundImage"]) {
+    await browser.runtime.sendMessage({
+      action: "setImage",
+      id: "backgroundImage",
+      data: backgroundImage["backgroundImage"],
+    });
   }
 
   applyFixes();

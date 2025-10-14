@@ -219,6 +219,7 @@
   padding: 0.6rem 0.8rem !important;
   border: 2px solid var(--color-base02) !important;
   font-size: 1.2rem !important;
+  width: 20rem !important;
 }
 
 .settings-page-text-input:focus {
@@ -298,6 +299,55 @@ label.settings-page-image-button-wrapper:has(input:checked) {
 
 .settings-page-theme-card > img {
   border-radius: 1rem !important;
+  background-color: var(--background-placeholder-color) !important;
+  background: linear-gradient(
+    40deg,
+    color-mix(in srgb, var(--hover-color) 70%, var(--hover-border) 30%) 0%,
+    color-mix(in srgb, var(--hover-color) 65%, var(--hover-border) 35%) 15%,
+    color-mix(
+        in srgb,
+        var(--background-placeholder-color) 70%,
+        var(--hover-border) 30%
+      )
+      45%,
+    color-mix(
+        in srgb,
+        var(--background-placeholder-color) 73%,
+        var(--hover-border) 27%
+      )
+      55%,
+    color-mix(
+        in srgb,
+        var(--background-placeholder-color) 95%,
+        var(--hover-border) 5%
+      )
+      100%
+  );
+}
+
+.settings-page-theme-card[data-theme="custom"] {
+  background-color: var(--color-base01) !important;
+}
+
+.settings-page-theme-card[data-theme="custom"] > img {
+  background: linear-gradient(
+    40deg,
+    color-mix(in srgb, var(--color-base01) 70%, var(--color-accent) 30%) 0%,
+    color-mix(in srgb, var(--color-base01) 65%, var(--color-accent) 35%) 15%,
+    color-mix(in srgb, var(--color-base02) 70%, var(--color-accent) 30%) 45%,
+    color-mix(in srgb, var(--color-base02) 73%, var(--color-accent) 27%) 55%,
+    color-mix(in srgb, var(--color-base02) 95%, var(--color-accent) 5%) 100%
+  );
+}
+
+.settings-page-theme-card[data-theme="custom"]:hover > img {
+  background-color: var(--color-base03) !important;
+}
+
+.settings-page-theme-card[data-theme="custom"]:hover {
+  border-color: var(--color-accent);
+  background-color: var(--color-base02) !important;
+  color: var(--color-text) !important;
 }
 
 .settings-page-theme-card:hover {
@@ -351,7 +401,7 @@ label.settings-page-image-button-wrapper:has(input:checked) {
 
 .settings-page-description {
   opacity: 0.8;
-  font-weight: normal;
+  font-weight: 400;
   max-width: 18rem;
   font-size: 1rem;
   margin-bottom: 0.75rem !important;
@@ -507,4 +557,34 @@ input.settings-page-keybinding-input[type="text"]:not(
 .settings-page-keybinding-input {
   background-color: transparent !important;
   caret-color: transparent !important;
+}
+
+.settings-page-disclaimer-button {
+  font-weight: 600;
+}
+
+.enableAnimations .settings-page-disclaimer {
+  animation: disclaimerAnimation 0.15s ease-in-out 0ms 1 forwards;
+}
+
+.settings-page-disclaimer {
+  font-weight: 400;
+  font-size: 1rem;
+  height: 1.5rem;
+  opacity: 1;
+  margin-left: 1rem;
+}
+
+@keyframes disclaimerAnimation {
+  0% {
+    height: 0px;
+    opacity: 0;
+    filter: blur(2px);
+  }
+
+  100% {
+    height: 1.5rem;
+    filter: blur(0px);
+    opacity: 1;
+  }
 }
