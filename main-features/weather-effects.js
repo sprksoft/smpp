@@ -1,43 +1,49 @@
 let enable_snow_mul = false;
 let enable_rain_mul = false;
+
 function set_snow_multiplier(value) {
   enable_snow_mul = value;
 }
+
 function set_rain_multiplier(value) {
   enable_rain_mul = value;
 }
-function set_snow_level(count) {
+
+function set_snow_level(amount, opacity) {
   document.getElementById("snowflakes")?.remove();
-  count = count > 3000 ? 3000 : count;
+  amount = amount > 3000 ? 3000 : amount;
   let snowDiv = document.createElement("div");
   snowDiv.id = "snowflakes";
 
-  for (let i = 0; i < count; i++) {
+  for (let i = 0; i < amount; i++) {
     let flake = document.createElement("img");
     flake.classList = "snowflake";
+    console.log(currentThemeName);
     flake.src =
-      currentTheme == "pink"
+      currentThemeName == "pink"
         ? getImage("/icons/weather-overlay/blossom.svg")
         : getImage("/icons/weather-overlay/snowflake.svg");
 
-    flake.style = ` left: ${Math.floor(
-      Math.random() * 100
-    )}%; animation: snowflake_fall_${Math.floor(Math.random() * 3)} ${
+    flake.style.left = `${Math.floor(Math.random() * 100)}%`;
+    flake.style.animation = `snowflake_fall_${Math.floor(Math.random() * 3)} ${
       Math.floor(Math.random() * 7) + 10
-    }s ease-in-out infinite; animation-delay: ${
-      Math.floor(Math.random() * 40) - 40
-    }s; width: ${Math.floor(Math.random() * 20) + 10}px;`;
+    }s ease-in-out infinite`;
+    flake.style.animationDelay = `${Math.floor(Math.random() * 40) - 40}s`;
+    flake.style.width = `${Math.floor(Math.random() * 20) + 10}px`;
+    flake.style.opacity = opacity;
     snowDiv.appendChild(flake);
   }
   document.documentElement.appendChild(snowDiv);
 }
-function set_rain_level(count) {
+
+function set_rain_level(amount, opacity) {
+  console.log(opacity);
   document.getElementById("raindrops")?.remove();
-  count = count > 3000 ? 3000 : count;
+  amount = amount > 3000 ? 3000 : amount;
   let rainDiv = document.createElement("div");
   rainDiv.id = "raindrops";
 
-  for (let i = 0; i < count; i++) {
+  for (let i = 0; i < amount; i++) {
     let raindrop = document.createElement("img");
     raindrop.classList.add("raindrop");
     raindrop.src = getImage("/icons/weather-overlay/raindrop.svg");
@@ -45,34 +51,40 @@ function set_rain_level(count) {
     raindrop.style.animation = `raindrop_fall ${
       Math.random() * 2 + 2
     }s linear infinite`;
-    raindrop.style.animationDelay = `${Math.random() * 5}s`;
+    raindrop.style.animationDelay = `${Math.random() * 5 - 5}s`;
     raindrop.style.width = `${Math.random() * 7.5 + 7.5}px`;
+    raindrop.style.opacity = opacity;
     rainDiv.appendChild(raindrop);
   }
   document.documentElement.appendChild(rainDiv);
 }
-function set_overlay_based_on_conditions(count) {
+
+function set_overlay_based_on_conditions(count, opacity) {
   if (enable_rain_mul) {
-    set_rain_level(count);
+    set_rain_level(count, opacity);
   } else if (enable_snow_mul) {
-    set_snow_level(count);
+    set_snow_level(count, opacity);
   }
 }
-function applyWeatherEffects(weatherSelector, weatherAmount) {
+
+function applyWeatherEffects(weatherOverlay) {
   let rainDiv = document.getElementById("raindrops");
   let snowDiv = document.getElementById("snowflakes");
-  switch (weatherSelector) {
+  switch (weatherOverlay.type) {
     case "snow":
-      set_snow_level(weatherAmount);
+      set_snow_level(weatherOverlay.amount, weatherOverlay.opacity);
       if (rainDiv) rainDiv.remove();
       break;
     case "realtime":
       if (rainDiv) rainDiv.remove();
       if (snowDiv) snowDiv.remove();
-      set_overlay_based_on_conditions(weatherAmount);
+      set_overlay_based_on_conditions(
+        weatherOverlay.amount,
+        weatherOverlay.opacity
+      );
       break;
     case "rain":
-      set_rain_level(weatherAmount);
+      set_rain_level(weatherOverlay.amount, weatherOverlay.opacity);
       if (snowDiv) snowDiv.remove();
       break;
     default:

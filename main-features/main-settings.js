@@ -217,6 +217,10 @@ class SettingsWindow extends BaseWindow {
         document.getElementById("settings-page-weather-overlay-slider").value =
           settings.appearance.weatherOverlay.amount;
 
+        document.getElementById(
+          "settings-page-weather-overlay-opacity-slider"
+        ).value = settings.appearance.weatherOverlay.opacity * 100;
+
         // Tab icon
         document.getElementById("settings-page-default-icon-button").checked =
           settings.appearance.tabLogo == "sm";
@@ -322,7 +326,7 @@ class SettingsWindow extends BaseWindow {
     const settings = await browser.runtime.sendMessage({
       action: "getSettingsData",
     });
-    let previousData = structuredClone(settings);
+    let previousSettings = structuredClone(settings);
     switch (this.currentPage) {
       case "profile": {
         settings.profile.username = document.getElementById(
@@ -341,7 +345,7 @@ class SettingsWindow extends BaseWindow {
         if (selectedTheme) {
           settings.appearance.theme = selectedTheme.dataset.theme;
         }
-        if (previousData.appearance.theme == "custom") {
+        if (previousSettings.appearance.theme == "custom") {
           await storeCustomThemeDataV2();
         }
 
@@ -373,7 +377,7 @@ class SettingsWindow extends BaseWindow {
             settings.appearance.background.selection = "default";
           } else if (
             settings.appearance.background.link !=
-            previousData.appearance.background.link
+            previousSettings.appearance.background.link
           ) {
             settings.appearance.background.selection = "link";
           }
@@ -398,6 +402,11 @@ class SettingsWindow extends BaseWindow {
           "settings-page-weather-overlay-slider"
         ).value;
 
+        settings.appearance.weatherOverlay.opacity =
+          document.getElementById(
+            "settings-page-weather-overlay-opacity-slider"
+          ).value / 100;
+
         // Tab icon
         settings.appearance.tabLogo = document.getElementById(
           "settings-page-smpp-icon-button"
@@ -411,6 +420,13 @@ class SettingsWindow extends BaseWindow {
         ).checked;
 
         applyAppearance(settings.appearance);
+        if (
+          JSON.stringify(settings.appearance.weatherOverlay) !=
+            JSON.stringify(previousSettings.appearance.weatherOverlay) &&
+          !liteMode
+        ) {
+          applyWeatherEffects(settings.appearance.weatherOverlay);
+        }
         break;
       }
 
@@ -463,7 +479,7 @@ class SettingsWindow extends BaseWindow {
 
         if (
           settings.widgets.delijn.maxBusses !=
-          previousData.widgets.delijn.maxBusses
+          previousSettings.widgets.delijn.maxBusses
         ) {
           this.addDisclaimer(
             document.querySelector(
@@ -479,7 +495,7 @@ class SettingsWindow extends BaseWindow {
 
         if (
           settings.widgets.assignments.maxAssignments !=
-          previousData.widgets.assignments.maxAssignments
+          previousSettings.widgets.assignments.maxAssignments
         ) {
           this.addDisclaimer(
             document.querySelector(
@@ -494,7 +510,7 @@ class SettingsWindow extends BaseWindow {
 
         if (
           settings.widgets.weather.syncWeather !=
-          previousData.widgets.weather.syncWeather
+          previousSettings.widgets.weather.syncWeather
         ) {
           this.addDisclaimer(
             document.querySelector(
@@ -973,7 +989,15 @@ class SettingsWindow extends BaseWindow {
             false
           )
         );
-
+        this.settingsPage.appendChild(
+          createLabeledSlider(
+            0,
+            100,
+            "settings-page-weather-overlay-opacity-slider",
+            "Opacity",
+            false
+          )
+        );
         this.settingsPage.appendChild(createSectionTitle("Icon"));
         this.settingsPage.appendChild(
           createDescription("Choose the icon displayed in your browser tab.")

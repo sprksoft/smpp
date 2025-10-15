@@ -909,28 +909,23 @@ ul.smsc-column-nav {
   z-index: 999999;
   pointer-events: none;
   will-change: transform;
-  transform: rotate(200deg);
-  opacity: 0;
+
+  transform: rotate(200deg) translateY(100vh);
 }
 
 @keyframes raindrop_fall {
   0% {
     transform: translateY(-10vh);
     /* Start from slightly above the viewport */
-    opacity: 0;
     /* Invisible at the start */
   }
 
   10% {
-    opacity: 1;
-    /* Become visible after starting to fall */
   }
 
   100% {
-    transform: translateY(110vh);
+    transform: translateY(111vh);
     /* Fall past the bottom of the viewport */
-    opacity: 1;
-    /* Become visible after starting to fall */
   }
 }
 

@@ -504,7 +504,10 @@ label.settings-page-image-button-wrapper:has(input:checked) {
   border-radius: 1000px;
 }
 
-.settings-page-slider-container:has(#settings-page-weather-overlay-slider) {
+.settings-page-slider-container:has(#settings-page-weather-overlay-slider),
+.settings-page-slider-container:has(
+    #settings-page-weather-overlay-opacity-slider
+  ) {
   width: 20rem;
   gap: 1rem;
 }

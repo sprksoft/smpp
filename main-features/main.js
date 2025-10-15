@@ -190,13 +190,6 @@ async function applyAppearance(appearance) {
     "--blur-value-small",
     `blur(${appearance.background.blur}px)`
   );
-
-  if (!liteMode) {
-    applyWeatherEffects(
-      appearance.weatherOverlay.type,
-      appearance.weatherOverlay.amount
-    );
-  }
 }
 
 function applyWidgets(widgets) {
@@ -268,6 +261,7 @@ async function apply() {
   await reloadDMenuConfig(); // reload the dmenu config. (er is een object voor async raarheid te vermijden en dat wordt herladen door deze functie)
   if (onHomePage) setEditMode(false);
   await applyAppearance(data.appearance);
+  if (!liteMode) applyWeatherEffects(data.appearance.weatherOverlay);
   applyProfile(data.profile);
   applyTopNav(data.topNav);
   applyWidgets(data.widgets);

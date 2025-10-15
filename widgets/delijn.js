@@ -317,7 +317,7 @@ class DelijnWidget extends WidgetBase {
 
     const delijnAppData = await getDelijnAppData();
     if (delijnAppData.entiteitnummer == null) {
-      this.displayInfo("Zoek naar een halte aub.");
+      this.displayInfo("Zoek een halte");
     } else {
       await this.displayLijnenBasedOnHalte(
         delijnAppData.entiteitnummer,

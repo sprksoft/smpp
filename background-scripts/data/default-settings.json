@@ -12,7 +12,8 @@
     },
     "weatherOverlay": {
       "type": "realtime",
-      "amount": 0
+      "amount": 0,
+      "opacity": 1
     },
     "tabLogo": "smpp",
     "news": true
@@ -63,7 +64,7 @@
       "dmenu": ":",
       "widgetEditMode": "E",
       "widgetBag": "Space",
-      "settings": "S",
+      "settings": ",",
       "gc": "G"
     }
   }

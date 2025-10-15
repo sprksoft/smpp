@@ -12,7 +12,8 @@
     },
     "weatherOverlay": {
       "type": ["realtime", "rain", "snow"],
-      "amount": "number"
+      "amount": "number",
+      "opacity": "number"
     },
     "tabLogo": ["sm", "smpp"],
     "news": "boolean"
