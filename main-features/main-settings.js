@@ -1075,7 +1075,7 @@ class SettingsWindow extends BaseWindow {
         this.settingsPage.appendChild(createSectionTitle("Icons"));
         this.settingsPage.appendChild(
           createDescription(
-            "Choose witch buttons you want to replace with icons."
+            "Choose which buttons you want to replace with icons."
           )
         );
 
