@@ -139,10 +139,10 @@ function updateTabLogo(logo) {
 }
 
 function applyTopNav(data) {
-  updateTopNavIcons(data.icons);
-  updateTopButtons(data.buttons);
   let topNav = document.querySelector(".topnav");
   if (!topNav) return;
+  updateTopNavIcons(data.icons);
+  updateTopButtons(data.buttons);
   if (data.switchCoursesAndLinks) {
     topNav.insertBefore(
       document.querySelector("[data-links]"),
@@ -718,9 +718,11 @@ function createTopButtons() {
 }
 
 function updateTopButtons(data) {
-  let GO = document.querySelector(`[data-go=""]`);
-  if (GO) {
-    data.GO ? (GO.style = "display:flex") : (GO.style = "display:none");
+  let GOButton = document.querySelector(`[data-go=""]`);
+  if (GOButton) {
+    data.GO
+      ? (GOButton.style = "display:flex")
+      : (GOButton.style = "display:none");
   }
 
   let searchButton = document.querySelector(".topnav__btn--icon--search");
