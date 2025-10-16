@@ -238,8 +238,10 @@ class SettingsWindow extends BaseWindow {
           settings.topNav.switchCoursesAndLinks;
 
         // Buttons
-        document.getElementById("settings-page-go-button").checked =
-          settings.topNav.buttons.GO;
+        if (isGOSchool)
+          document.getElementById("settings-page-go-button").checked =
+            settings.topNav.buttons.GO;
+
         document.getElementById("settings-page-global-chat-button").checked =
           settings.topNav.buttons.GC;
         document.getElementById("settings-page-search-button").checked =
@@ -436,9 +438,10 @@ class SettingsWindow extends BaseWindow {
         ).checked;
 
         // Buttons
-        settings.topNav.buttons.GO = document.getElementById(
-          "settings-page-go-button"
-        ).checked;
+        if (isGOSchool)
+          settings.topNav.buttons.GO = document.getElementById(
+            "settings-page-go-button"
+          ).checked;
         settings.topNav.buttons.GC = document.getElementById(
           "settings-page-global-chat-button"
         ).checked;
@@ -1066,11 +1069,10 @@ class SettingsWindow extends BaseWindow {
           )
         );
 
-        if (document.body.classList.contains("go")) {
+        if (isGOSchool)
           this.settingsPage.appendChild(
             createButtonWithLabel("settings-page-go-button", "GO")
           );
-        }
 
         this.settingsPage.appendChild(createSectionTitle("Icons"));
         this.settingsPage.appendChild(
