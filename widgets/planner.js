@@ -215,11 +215,8 @@ class PlannerWidget extends WidgetBase {
   }
 
   async updatePlanner(addend) {
-    const plannerUrl = document
-      .getElementById("datePickerMenu")
-      .getAttribute("plannerurl");
     const date = await getDateInCorrectFormat(true, addend);
-    const data = await fetchPlannerData(date, plannerUrl.split("/")[4]);
+    const data = await fetchPlannerData(date, window.SMPP_SC.vars.ssID);
 
     this.plannerContainer.innerHTML = "";
     this.planningContainer.innerHTML = "";
