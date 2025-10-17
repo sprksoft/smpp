@@ -1,0 +1,109 @@
+/* Shared styles */
+.clock-widget,
+.clock-widget-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: transparent;
+  padding: 0;
+}
+
+.clock-container,
+.clock-widget-preview .clock-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.clock-face,
+.clock-widget-preview .clock-face {
+  border-radius: 50%;
+  aspect-ratio: 1;
+  background-color: transparent;
+  position: relative;
+  margin: 0 auto;
+}
+
+.clock-hand,
+.clock-widget-preview .clock-hand {
+  position: absolute;
+  transform-origin: bottom center;
+  left: calc(-0.5rem + 50%);
+  top: calc(-0.5rem + 50%);
+  width: 1rem;
+  transform: rotate(0deg);
+  border-radius: 0.5rem;
+  box-shadow: 0 0 30px 1px rgba(12, 12, 12, 0.709);
+}
+
+.clock-widget-preview .clock-hand,
+.clock-hand {
+  background-color: var(--color-text);
+  transition: transform 0.75s cubic-bezier(0.58, 0.14, 0.44, 1.2);
+}
+
+.clock-widget-preview .second-hand,
+.second-hand {
+  background-color: var(--color-accent);
+}
+
+.clock-bottom,
+.clock-widget-preview .clock-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.digital-time,
+.clock-widget-preview .digital-time {
+  font-weight: 800;
+  text-align: center;
+}
+
+/* Widget-specific differences */
+
+.clock-widget-preview .clock-face,
+.clock-face {
+  width: 50%;
+  margin: 0px 25%;
+  background-color: var(--darken-background);
+  backdrop-filter: blur(4px);
+  aspect-ratio: 1;
+  position: relative;
+}
+
+/* put pivot at the center, then move the element so its bottom is exactly there */
+.clock-hand {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform-origin: 50% 100%; /* bottom center */
+  transform: translate(-50%, -100%) rotate(0deg);
+  width: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 30px 1px rgba(12, 12, 12, 0.709);
+  transition: transform 0.75s cubic-bezier(0.58, 0.14, 0.44, 1.2);
+}
+
+/* lengths expressed as percentage of the face's size */
+.hour-hand {
+  height: 25%;
+} /* shorter */
+.minute-hand {
+  height: 40%;
+}
+.second-hand {
+  height: 45%;
+  width: 0.5rem; /* thinner */
+  transform-origin: 50% 100%; /* still bottom center */
+}
+
+/* rotate in JS by setting style.transform = `translate(-50%, -100%) rotate(${deg}deg)` */
+
+.digital-time {
+  font-size: 18px;
+  letter-spacing: 0.5rem;
+}

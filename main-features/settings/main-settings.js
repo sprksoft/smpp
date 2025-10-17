@@ -140,6 +140,54 @@ class SettingsWindow extends BaseWindow {
     element.insertAdjacentElement("afterend", disclaimer);
   }
 
+  async resetSettings() {
+    // Create confirmation popup
+    const popup = document.createElement("div");
+    popup.classList.add("reset-confirmation-popup");
+    popup.innerHTML = `
+      <div class="reset-popup-content">
+        <h3>Reset Settings</h3>
+        <p>Are you sure you want to reset all settings to defaults? This will delete all your customizations and cannot be undone.</p>
+        <div class="reset-popup-buttons">
+          <button class="reset-popup-cancel">Cancel</button>
+          <button class="reset-popup-confirm">Reset</button>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(popup);
+
+    return new Promise((resolve) => {
+      popup
+        .querySelector(".reset-popup-cancel")
+        .addEventListener("click", () => {
+          popup.remove();
+          resolve(false);
+        });
+
+      popup
+        .querySelector(".reset-popup-confirm")
+        .addEventListener("click", async () => {
+          popup.remove();
+          const defaults = await browser.runtime.sendMessage({
+            action: "getSettingsDefaults",
+          });
+          await browser.runtime.sendMessage({
+            action: "setSettingsData",
+            data: defaults,
+          });
+          await browser.runtime.sendMessage({
+            action: "setWidgetData",
+            widgetData: null,
+          });
+          await apply();
+          // Refresh the page to apply all changes
+          window.location.reload();
+          resolve(true);
+        });
+    });
+  }
+
   async loadPage() {
     let settings = await browser.runtime.sendMessage({
       action: "getSettingsData",
@@ -1220,6 +1268,18 @@ class SettingsWindow extends BaseWindow {
         this.settingsPage.appendChild(
           createKeybindInput("settings-page-gc-keybinding", "Global Chat")
         );
+
+        this.settingsPage.appendChild(createSectionTitle("Reset"));
+        this.settingsPage.appendChild(
+          createDescription(
+            "Reset all settings and widgets to their default values."
+          )
+        );
+        let resetButton = document.createElement("button");
+        resetButton.innerText = "Reset to Defaults";
+        resetButton.classList.add("settings-page-reset-button");
+        resetButton.addEventListener("click", () => this.resetSettings());
+        this.settingsPage.appendChild(resetButton);
         break;
       default:
         break;
