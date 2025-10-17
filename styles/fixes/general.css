@@ -2141,7 +2141,9 @@ span.uploaddetail {
 .topnav-menu-overlay {
   z-index: 0 !important;
 }
-
+span.smsc-treeitem__label{
+  color: var(--color-text) !important;
+}
 div#folders {
   border-radius: 15px !important;
   background-color: var(--darken-background) !important;
