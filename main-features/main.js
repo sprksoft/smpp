@@ -175,6 +175,18 @@ async function createStaticGlobals() {
     "Mr Unknown";
   isGOSchool = document.body.classList.contains("go");
 
+    // We be injecting a file cuz cors and scopes are the bane of my existance.
+  const script = document.createElement("script");
+  script.src = chrome.runtime.getURL("/fixes-utils/smsc.js");
+  (document.head || document.documentElement).appendChild(script);
+  script.onload = () => script.remove();
+
+  let SMPP_SC = null;
+
+  window.addEventListener("message", e => {
+    if (e.source !== window || e.data.type !== "SMPP_SC") return;
+    SMPP_SC = e.data.value;
+  });
 }
 
 async function applyAppearance(appearance) {

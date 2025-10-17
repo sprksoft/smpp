@@ -70,6 +70,7 @@ function isAbsoluteUrl(url) {
 }
 
 function getUserId() {
+  console.log(SMPP_SC.vars)
   let userId;
   // get UID
   try {
