@@ -3,8 +3,6 @@
 let lijnDataKleuren;
 const lijnUpdateControllers = {};
 
-
-
 // Utility functions
 function calculateTimeUntilDepartureInMins(ETA) {
   const currentDate = new Date();
