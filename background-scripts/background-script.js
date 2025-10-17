@@ -1,7 +1,8 @@
 if (typeof browser === "undefined") {
   var browser = chrome;
 }
-let globalsInitialized = false;
+
+globalsInitialized = false;
 
 import {
   getSettingsData,

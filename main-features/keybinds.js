@@ -1,11 +1,21 @@
 document.addEventListener("keyup", async (e) => {
   if (e.target?.tagName === "INPUT") return;
+  if (document.getElementById("tinymce")) return;
 
   const key =
     e.key === " " ? "Space" : e.key.length === 1 ? e.key.toUpperCase() : e.key; // this is so readable i love it
-  console.log(key);
 
-  // Global
+  if (
+    (typeof keybinds === "undefined" ||
+      !keybinds ||
+      Object.keys(keybinds).length === 0) &&
+    key === ":"
+  ) {
+    do_qm("dmenu");
+    return;
+  }
+
+  // General
   switch (key) {
     case keybinds.dmenu:
       do_qm(keybinds.dmenu);
@@ -15,6 +25,7 @@ document.addEventListener("keyup", async (e) => {
       break;
     case keybinds.gc:
       openGlobalChat(e);
+      break;
   }
 
   // Widget

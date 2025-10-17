@@ -451,7 +451,7 @@ html {
 }
 
 .enableAnimations .widgets-done-button:hover {
-  transition: all 0.05s ease-out;
+  transition: all 0.1s ease-out;
 }
 
 .widgets-done-button:hover {

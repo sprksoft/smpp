@@ -40,6 +40,7 @@
       "js": [
         "fixes-utils/utils.js",
         "widgets/widgets.js",
+        "main-features/modules/windows.js",
         "main-features/globalchat.js",
         "fixes-utils/json.js",
         "fixes-utils/login.js",
@@ -48,7 +49,6 @@
         "fixes-utils/titlefix.js",
         "fixes-utils/results.js",
         "main-features/userchanger.js",
-
         "widgets/tutorial-widget.js",
         "widgets/assignments.js",
         "widgets/delijn.js",
@@ -68,7 +68,6 @@
         "main-features/appearance/ui.js",
         "main-features/appearance/weather-effects.js",
         "main-features/modules/image-storage.js",
-        "main-features/modules/windows.js",
         "main-features/settings/quick-settings.js",
         "main-features/settings/main-settings.js",
         "main-features/quick-menu/dmenu.js",

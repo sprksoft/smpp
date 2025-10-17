@@ -51,6 +51,20 @@
   padding: 0rem 0.85rem !important;
 }
 
+.modern-ui ::placeholder {
+  opacity: 0.7 !important;
+  color: var(--color-text) !important;
+}
+
+.topnav__menu.topnav__menu--courses {
+  max-height: 50rem !important;
+}
+
+#topnavCoursesTitle {
+  font-size: 1.6rem !important;
+  font-weight: 600 !important;
+}
+
 .topnav__btn:hover {
   cursor: pointer !important;
   text-decoration: underline !important;

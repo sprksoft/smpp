@@ -236,7 +236,7 @@ button.smscButton.blue.fileupload_submit_button,
 .wide-colored-btn {
   border: var(--border-size) solid var(--color-base03) !important;
   background-color: var(--color-base02) !important;
-  color: var(--color-accent) !important;
+  color: var(--color-text) !important;
   box-shadow: none !important;
   border-radius: 10px !important;
 }
@@ -1365,24 +1365,36 @@ span.js-badge-msg.topnav__badge {
 }
 
 @keyframes flyInFromTop {
-  from {
+  0% {
     transform: translateX(-50%) translateY(-100%);
+    filter: blur(7px);
     opacity: 0;
   }
 
-  to {
+  60% {
+    transform: translateX(-50%) translateY(5px);
+    filter: blur(0px);
+  }
+
+  100% {
     transform: translateX(-50%) translateY(0px);
     opacity: 1;
   }
 }
 
 @keyframes flyInFromTopNoTranslateX {
-  from {
+  0% {
     transform: translateY(-100%);
+    filter: blur(7px);
     opacity: 0;
   }
 
-  to {
+  60% {
+    transform: translateY(5px);
+    filter: blur(0px);
+  }
+
+  100% {
     transform: translateY(0px);
     opacity: 1;
   }
@@ -1401,8 +1413,9 @@ span.js-badge-msg.topnav__badge {
 .enableAnimations #linksMenu,
 .enableAnimations #quickSettings,
 .enableAnimations #goMenu {
-  animation: flyInFromTop 0.15s ease forwards;
+  animation: flyInFromTop 0.25s ease forwards;
 }
+
 #shortcutsMenu,
 #coursesMenu,
 #linksMenu,
@@ -1413,7 +1426,7 @@ span.js-badge-msg.topnav__badge {
 
 .enableAnimations #searchMenu,
 .enableAnimations #notifsMenu {
-  animation: flyInFromTopNoTranslateX 0.15s ease forwards;
+  animation: flyInFromTopNoTranslateX 0.25s ease forwards;
 }
 
 .homepage__right {

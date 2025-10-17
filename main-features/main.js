@@ -174,7 +174,7 @@ async function createStaticGlobals() {
     document.querySelector(".js-btn-profile .hlp-vert-box span")?.innerText ||
     "Mr Unknown";
   isGOSchool = document.body.classList.contains("go");
-  console.log("go school:", isGOSchool);
+
 }
 
 async function applyAppearance(appearance) {
