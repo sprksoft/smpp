@@ -78,7 +78,7 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": ["media/*", "icons/*"],
+      "resources": ["media/*", "icons/*", "fixes-utils/smsc.js"],
       "matches": ["*://*.smartschool.be/*"]
     }
   ],
