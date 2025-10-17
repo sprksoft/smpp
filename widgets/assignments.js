@@ -7,7 +7,7 @@ class TakenWidget extends WidgetBase {
     const foresight = 28; // dagen in de toekomst dat het zoekt voor taken
     let maxAssignments = 5;
 
-    let userId = getUserId();
+    let userId = window.SMPP_SC.vars.ssID
 
     if (DEBUG) {
       sendDebug("Debug mode enabled ✅");
@@ -240,7 +240,7 @@ class TakenWidget extends WidgetBase {
 
 async function markAsFinished(as_ID) {
   const schoolName = getSchoolName();
-  const userId = getUserId();
+  const userId = window.SMPP_SC.vars.ssID
 
   if (!schoolName || !userId) {
     console.error(
