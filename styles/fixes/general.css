@@ -747,6 +747,11 @@ input:checked + .slider:before {
   font-weight: 600 !important;
 }
 
+.glass #quickSettings {
+  background-color: var(--darken-background) !important;
+  backdrop-filter: blur(10px);
+}
+
 #quickSettingsButton {
   color: var(--color-accent) !important;
 }
@@ -763,7 +768,7 @@ input:checked + .slider:before {
   flex-direction: column !important;
   gap: 0.5rem !important;
   justify-content: center !important;
-  border-radius: 17.5px !important;
+  border-radius: 2rem !important;
   overflow: visible;
   border: 3px solid var(--color-accent);
   z-index: 777;
@@ -1366,7 +1371,7 @@ span.js-badge-msg.topnav__badge {
 
 @keyframes flyInFromTop {
   0% {
-    transform: translateX(-50%) translateY(-100%);
+    transform: translateX(-50%) translateY(-150%);
     filter: blur(7px);
     opacity: 0;
   }
@@ -1374,17 +1379,19 @@ span.js-badge-msg.topnav__badge {
   60% {
     transform: translateX(-50%) translateY(5px);
     filter: blur(0px);
+    opacity: 0.9;
   }
 
   100% {
     transform: translateX(-50%) translateY(0px);
+
     opacity: 1;
   }
 }
 
 @keyframes flyInFromTopNoTranslateX {
   0% {
-    transform: translateY(-100%);
+    transform: translateY(-150%);
     filter: blur(7px);
     opacity: 0;
   }
@@ -1392,10 +1399,12 @@ span.js-badge-msg.topnav__badge {
   60% {
     transform: translateY(5px);
     filter: blur(0px);
+    opacity: 0.9;
   }
 
   100% {
     transform: translateY(0px);
+
     opacity: 1;
   }
 }
@@ -1413,7 +1422,8 @@ span.js-badge-msg.topnav__badge {
 .enableAnimations #linksMenu,
 .enableAnimations #quickSettings,
 .enableAnimations #goMenu {
-  animation: flyInFromTop 0.25s ease forwards;
+  transform-origin: center;
+  animation: flyInFromTop 0.3s ease forwards;
 }
 
 #shortcutsMenu,
@@ -1421,12 +1431,13 @@ span.js-badge-msg.topnav__badge {
 #linksMenu,
 #quickSettings,
 #goMenu {
+  transform-origin: center;
   animation: flyInFromTop 0s ease forwards;
 }
 
 .enableAnimations #searchMenu,
 .enableAnimations #notifsMenu {
-  animation: flyInFromTopNoTranslateX 0.25s ease forwards;
+  animation: flyInFromTopNoTranslateX 0.3s ease forwards;
 }
 
 .homepage__right {
@@ -1694,7 +1705,10 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   transition: all 0.2s cubic-bezier(0.16, 1.13, 0.89, 0.96);
   animation: popIn 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards !important;
 }
-
+.glass .base-window {
+  background: var(--darken-background);
+  backdrop-filter: blur(20px);
+}
 .base-window {
   overflow: clip;
   background: var(--color-base00);

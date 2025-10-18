@@ -6,6 +6,7 @@
 
 .settings-category-button {
   border: 2px solid transparent !important;
+  box-shadow: 0px 5px 10px 0px var(--darken-background);
   width: 100%;
   background-color: var(--color-base01);
   border: none;
@@ -432,9 +433,20 @@ label.settings-page-image-button-wrapper:has(input:checked) {
   margin: 0;
 }
 
+.smpp-background-file,
+.settings-page-image-button-wrapper:has(#settings-page-realtime-button:checked),
+.settings-page-text-input,
+.settings-page-slider,
+.settings-page-slider-container,
+.settings-page-button-label-container,
+.settings-page-theme-card,
+.settings-page-icons-container.settings-page-weather-overlay-container {
+  box-shadow: 0px 2px 10px 0px var(--darken-background);
+}
 .settings-page-button-label-container,
 .settings-page-key-bind-container {
   display: flex;
+
   flex-direction: row;
   justify-content: space-between;
   align-items: center;

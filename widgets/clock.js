@@ -49,7 +49,8 @@ class ClockWidget extends WidgetBase {
       const hours = now.getHours();
       const minutes = now.getMinutes();
       const seconds = now.getSeconds();
-
+      const milliseconds = now.getMilliseconds();
+      console.log(milliseconds);
       timeEl.innerText =
         (hours < 10 ? "0" : "") +
         hours +
@@ -57,7 +58,8 @@ class ClockWidget extends WidgetBase {
         (minutes < 10 ? "0" : "") +
         minutes;
 
-      const totalSeconds = hours * 3600 + minutes * 60 + seconds;
+      const totalSeconds =
+        hours * 3600 + minutes * 60 + seconds + milliseconds / 1000;
       const totalMinutes = hours * 60 + minutes;
       const totalHours = hours + minutes / 60;
 
@@ -69,13 +71,13 @@ class ClockWidget extends WidgetBase {
       if (minutesAngle > 270) minutesAngle -= 360;
       if (hoursAngle > 270) hoursAngle -= 360;
 
-      secondHand.style.transform = `rotate(${secondsAngle}deg)`;
-      minuteHand.style.transform = `rotate(${minutesAngle}deg)`;
-      hourHand.style.transform = `rotate(${hoursAngle}deg)`;
+      secondHand.style.transform = `translate(-50%, -100%) rotate(${secondsAngle}deg)`;
+      minuteHand.style.transform = `translate(-50%, -100%) rotate(${minutesAngle}deg)`;
+      hourHand.style.transform = `translate(-50%, -100%) rotate(${hoursAngle}deg)`;
     };
 
     update();
-    this.#interval = setInterval(update, 1000);
+    this.#interval = setInterval(update, 100);
 
     return clockContainer;
   }
@@ -112,34 +114,13 @@ class ClockWidget extends WidgetBase {
     secondHand.style.transform = "rotate(0deg)";
     clockFace.appendChild(secondHand);
 
-    let bottomContainer = document.createElement("div");
-    bottomContainer.classList.add("clock-bottom");
-    container.appendChild(bottomContainer);
+    let secondsAngle = 50;
+    let minutesAngle = 120;
+    let hoursAngle = 240;
 
-    const update = () => {
-      const now = new Date();
-      const hours = now.getHours();
-      const minutes = now.getMinutes();
-      const seconds = now.getSeconds();
-
-      const totalSeconds = hours * 3600 + minutes * 60 + seconds;
-      const totalMinutes = hours * 60 + minutes;
-      const totalHours = hours + minutes / 60;
-
-      let secondsAngle = totalSeconds * 6;
-      let minutesAngle = totalMinutes * 6;
-      let hoursAngle = totalHours * 30;
-
-      if (secondsAngle > 270) secondsAngle -= 360;
-      if (minutesAngle > 270) minutesAngle -= 360;
-      if (hoursAngle > 270) hoursAngle -= 360;
-
-      secondHand.style.transform = `rotate(${secondsAngle}deg)`;
-      minuteHand.style.transform = `rotate(${minutesAngle}deg)`;
-      hourHand.style.transform = `rotate(${hoursAngle}deg)`;
-    };
-
-    update();
+    secondHand.style.transform = `translate(-50%, -100%) rotate(${secondsAngle}deg)`;
+    minuteHand.style.transform = `translate(-50%, -100%) rotate(${minutesAngle}deg)`;
+    hourHand.style.transform = `translate(-50%, -100%) rotate(${hoursAngle}deg)`;
 
     return div;
   }

@@ -172,6 +172,7 @@ async function do_qm(opener = "") {
       "gcbeta",
       "dizzy",
       "breakdmenu",
+      "glass",
     ]);
 
   if (dmenuConfig.toplevelConfig) {
@@ -228,6 +229,8 @@ async function do_qm(opener = "") {
         case "clearsettings":
           clearsettings();
           return;
+        case "glass":
+          document.body.classList.add("glass");
         case "toggle performance mode":
           togglePerformanceMode();
           return;

@@ -139,10 +139,25 @@
   background-color: var(--color-base01) !important;
   border: 2px solid var(--color-base03) !important;
   text-decoration: none !important;
-  border-radius: 15px !important;
+  border-radius: 2rem !important;
   color: var(--color-text) !important;
   align-items: center !important;
   transition: none !important;
+}
+
+.glass .smsc-topnav .topnav__menu,
+.glass .bubble,
+.glass .smsctooltip {
+  background-color: var(--darken-background) !important;
+}
+
+.glass .topnav__menu-wrapper {
+  backdrop-filter: blur(10px);
+}
+
+.topnav__menu-wrapper {
+  padding: 0 !important;
+  border-radius: 2rem !important;
 }
 
 .bubble {
