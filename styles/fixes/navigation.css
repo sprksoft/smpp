@@ -72,6 +72,10 @@
   border-color: var(--color-base03) !important;
 }
 
+.topnav__btn:active {
+  scale: 0.95;
+}
+
 .switches-container {
   display: flex;
   flex-direction: row;
