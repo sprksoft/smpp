@@ -517,3 +517,26 @@ button.button-ZR3rz.bp-c-combo-hover-plain-outline--300,
 .graphicRight-r_Pnt.graphic-g55I1.small-Du6aA > svg > path {
   fill: var(--color-text) !important;
 }
+.schoolyearLabel-MtXJE {
+  color: var(--color-text) !important;
+  background: none !important;
+}
+.feedbackSubItem-uK8I1 {
+  background-color: var(--color-base01) !important;
+  color: var(--color-text) !important;
+}
+.evaluationName-bJYm6 {
+  font-weight: 999 !important;
+}
+.token-EsU0c {
+  border: var(--border-size) solid var(--color-base03) !important;
+  background-color: var(--color-base02) !important;
+  color: var(--color-text) !important;
+  box-shadow: none !important;
+}
+button.button-ZR3rz.bp-c-combo-hover-plain-outline--300 {
+  border-color: var(--color-base02) !important;
+}
+.groupTitle-r2b_L {
+  color: var(--color-accent) !important;
+}
