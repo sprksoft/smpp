@@ -6,8 +6,6 @@
   "appearance": {
     "theme": "ldev",
     "background": {
-      "selection": "default",
-      "link": "",
       "blur": 2
     },
     "weatherOverlay": {

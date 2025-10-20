@@ -174,10 +174,10 @@ async function createStaticGlobals() {
     document.querySelector(".js-btn-profile .hlp-vert-box span")?.innerText ||
     "Mr Unknown";
   isGOSchool = document.body.classList.contains("go");
-
 }
 
 async function applyAppearance(appearance) {
+  console.log("i got called");
   let style = document.documentElement.style;
 
   await setTheme(appearance.theme);
@@ -342,7 +342,7 @@ async function storeQuickSettings() {
   await apply();
 }
 
-async function setBackground(data) {
+async function setBackground(appearance) {
   let style = document.documentElement.style;
   function displayBackgroundImage(image) {
     style.setProperty("--background-color", `transparent`);
@@ -364,40 +364,21 @@ async function setBackground(data) {
       document.body.appendChild(img);
     }
   }
-  switch (data.background.selection) {
-    case "default":
+  let backgroundImageData = await browser.runtime.sendMessage({
+    action: "getImage",
+    id: "backgroundImage",
+  });
+
+  switch (backgroundImageData.type) {
+    case "link":
+    case "file":
+      displayBackgroundImage(backgroundImageData.imageData);
+      break;
+    default:
       displayBackgroundImage(
-        getImage("/theme-backgrounds/" + data.theme + ".jpg")
+        getImage("/theme-backgrounds/" + appearance.theme + ".jpg")
       );
       break;
-    case "link":
-      displayBackgroundImage(data.background.link);
-      break;
-    case "file":
-      let backgroundImage = await browser.runtime.sendMessage({
-        action: "getImage",
-        id: "backgroundImage",
-      });
-      displayBackgroundImage(backgroundImage);
-      break;
-  }
-}
-
-function set_link(background) {
-  let style = document.documentElement.style;
-  if (!background) {
-    style.setProperty("--loginpage-image", "");
-    return;
-  }
-  let img = new Image();
-  if (isAbsoluteUrl(background)) {
-    img.src = background;
-    img.onload = () => {
-      style.setProperty("--loginpage-image", `url(${background})`);
-    };
-    img.onerror = () => {
-      console.error("Image failed to load from link:", background);
-    };
   }
 }
 
@@ -752,25 +733,32 @@ async function main() {
     console.error("SMPP is waarschijnlijk 2 keer geladen");
     alert("SMPP is 2x geladen waarschijnlijk");
   }
+
   document.body.classList.add("smpp"); // For modding
   if (window.localStorage.getItem("settingsdata")) {
     await migrateSettings();
   }
-  const settingsData = await browser.runtime.sendMessage({
+
+  let settingsData = await browser.runtime.sendMessage({
     action: "getSettingsData",
   });
+
+  if (settingsData.theme != null) {
+    await migrateSettingsV2();
+    settingsData = await browser.runtime.sendMessage({
+      action: "getSettingsData",
+    });
+  }
+
   const backgroundImage = await browser.runtime.sendMessage({
     action: "getBackgroundImage",
   });
-  if (settingsData.theme != null) {
-    await migrateSettingsV2();
-  }
-  console.log(backgroundImage);
   if (backgroundImage["backgroundImage"]) {
     await browser.runtime.sendMessage({
       action: "setImage",
       id: "backgroundImage",
-      data: backgroundImage["backgroundImage"],
+      imageData: backgroundImage["backgroundImage"],
+      type: settingsData.appearance.background.backgroundSelector,
     });
   }
 

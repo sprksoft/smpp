@@ -1,4 +1,4 @@
-function createButton(id) {
+function createButton(id = "") {
   let outerSwitch = document.createElement("label");
   outerSwitch.classList.add("switch");
   let innerButton = document.createElement("input");
@@ -12,7 +12,7 @@ function createButton(id) {
   return outerSwitch;
 }
 
-function createButtonWithLabel(id, text) {
+function createButtonWithLabel(id = "", text) {
   let container = document.createElement("label");
   container.classList.add("smpp-button-with-label");
   container.for = id;
@@ -23,4 +23,14 @@ function createButtonWithLabel(id, text) {
   container.appendChild(label);
   container.appendChild(button);
   return container;
+}
+
+function createTextInput(id = "", placeholder = "") {
+  let textInput = document.createElement("input");
+  textInput.id = id;
+  textInput.type = "text";
+  textInput.placeholder = placeholder;
+  textInput.spellcheck = false;
+  textInput.classList.add("smpp-text-input");
+  return textInput;
 }

@@ -6,8 +6,6 @@
   "appearance": {
     "theme": null,
     "background": {
-      "selection": ["default", "file", "link"],
-      "link": "string",
       "blur": "number"
     },
     "weatherOverlay": {

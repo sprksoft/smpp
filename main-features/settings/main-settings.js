@@ -234,18 +234,8 @@ class SettingsWindow extends BaseWindow {
             .classList.remove("visible");
         }
 
-        // Background link
-        document.getElementById("settings-page-background-link-input").value =
-          settings.appearance.background.link || "";
-        document
-          .getElementById("settings-page-link-clear-button")
-          .classList.remove("active");
-        if (settings.appearance.background.link != "")
-          document
-            .getElementById("settings-page-link-clear-button")
-            .classList.add("active");
-        document.getElementById("settings-page-background-file-input").value =
-          null;
+        // Background
+        this.backgroundImageSelector.loadImage();
 
         // Blur slider
         document.getElementById("settings-page-blur-slider").value =
@@ -399,40 +389,6 @@ class SettingsWindow extends BaseWindow {
           await storeCustomThemeDataV2();
         }
 
-        // Background link
-        settings.appearance.background.link = document.getElementById(
-          "settings-page-background-link-input"
-        ).value;
-
-        // File Saving
-        let file = document.getElementById(
-          "settings-page-background-file-input"
-        ).files[0];
-        if (file) {
-          const reader = new FileReader();
-          const imageData = await new Promise((resolve) => {
-            reader.onload = () => resolve(reader.result);
-            reader.readAsDataURL(file);
-          });
-          await browser.runtime.sendMessage({
-            action: "setImage",
-            id: "backgroundImage",
-            data: imageData,
-          });
-
-          settings.appearance.background.selection = "file";
-          settings.appearance.background.link = file.name;
-        } else {
-          if (settings.appearance.background.link == "") {
-            settings.appearance.background.selection = "default";
-          } else if (
-            settings.appearance.background.link !=
-            previousSettings.appearance.background.link
-          ) {
-            settings.appearance.background.selection = "link";
-          }
-        }
-
         // Blur slider
         let blurValue = document.getElementById(
           "settings-page-blur-slider"
@@ -574,8 +530,6 @@ class SettingsWindow extends BaseWindow {
           "settings-page-show-snake-grid-button"
         ).checked;
 
-        //TODO: ADD RELOAD DISCLAIMER
-
         applyWidgets(settings.widgets);
         break;
       }
@@ -691,18 +645,9 @@ class SettingsWindow extends BaseWindow {
     };
 
     //TODO: use function in ui.js (classes need to be added and or css needs to be changed)
-    function createButtonWithLabel(id, text) {
-      let container = document.createElement("label");
+    function createSettingsButtonWithLabel(id, text) {
+      let container = createButtonWithLabel(id, text);
       container.classList.add("settings-page-button-label-container");
-      container.for = id;
-
-      let label = document.createElement("span");
-      label.classList.add("settings-page-button-label");
-      label.innerText = text;
-      let button = createButton(id);
-      button.classList.add("settings-page-button");
-      container.appendChild(label);
-      container.appendChild(button);
       return container;
     }
 
@@ -738,7 +683,7 @@ class SettingsWindow extends BaseWindow {
       id
     ) {
       let container = document.createElement("label");
-      container.classList.add("settings-page-button-label");
+      container.classList.add("settings-page-image-button-label");
       container.for = id;
       let imageButton = createImageButton(src, width, height, name, id);
       let imageButtonLabel = document.createElement("span");
@@ -946,12 +891,13 @@ class SettingsWindow extends BaseWindow {
         this.settingsPage.appendChild(
           createDescription("Personalize your backdrop with a custom image.")
         );
-        let backgroundInputContainer = createImageInput(
-          "settings-page-background-file-button",
-          "settings-page-background-link-input",
-          "settings-page-background-file-input"
+
+        this.backgroundImageSelector = new FileSelector("backgroundImage");
+        this.backgroundImageSelector.loadImage();
+
+        this.settingsPage.appendChild(
+          this.backgroundImageSelector.createFullFileInput()
         );
-        this.settingsPage.appendChild(backgroundInputContainer);
 
         this.settingsPage.appendChild(createSectionTitle("Background blur"));
         this.settingsPage.appendChild(
@@ -1081,7 +1027,10 @@ class SettingsWindow extends BaseWindow {
           createDescription("Change the homepage news configuration.")
         );
         this.settingsPage.appendChild(
-          createButtonWithLabel("settings-page-show-news-button", "Show news")
+          createSettingsButtonWithLabel(
+            "settings-page-show-news-button",
+            "Show news"
+          )
         );
 
         break;
@@ -1095,7 +1044,7 @@ class SettingsWindow extends BaseWindow {
         );
         if (!liteMode) {
           this.settingsPage.appendChild(
-            createButtonWithLabel(
+            createSettingsButtonWithLabel(
               "settings-page-global-chat-button",
               "Global Chat"
             )
@@ -1103,15 +1052,18 @@ class SettingsWindow extends BaseWindow {
         }
 
         this.settingsPage.appendChild(
-          createButtonWithLabel("settings-page-search-button", "Search")
+          createSettingsButtonWithLabel("settings-page-search-button", "Search")
         );
 
         this.settingsPage.appendChild(
-          createButtonWithLabel("settings-page-quick-menu-button", "Quick Menu")
+          createSettingsButtonWithLabel(
+            "settings-page-quick-menu-button",
+            "Quick Menu"
+          )
         );
 
         this.settingsPage.appendChild(
-          createButtonWithLabel(
+          createSettingsButtonWithLabel(
             "settings-page-swap-courses-button",
             "Swap courses/links"
           )
@@ -1119,7 +1071,7 @@ class SettingsWindow extends BaseWindow {
 
         if (isGOSchool)
           this.settingsPage.appendChild(
-            createButtonWithLabel("settings-page-go-button", "GO")
+            createSettingsButtonWithLabel("settings-page-go-button", "GO")
           );
 
         this.settingsPage.appendChild(createSectionTitle("Icons"));
@@ -1130,19 +1082,25 @@ class SettingsWindow extends BaseWindow {
         );
 
         this.settingsPage.appendChild(
-          createButtonWithLabel("settings-page-home-icon-button", "Start")
+          createSettingsButtonWithLabel(
+            "settings-page-home-icon-button",
+            "Start"
+          )
         );
         this.settingsPage.appendChild(
-          createButtonWithLabel("settings-page-mail-icon-button", "Mail")
+          createSettingsButtonWithLabel(
+            "settings-page-mail-icon-button",
+            "Mail"
+          )
         );
         this.settingsPage.appendChild(
-          createButtonWithLabel(
+          createSettingsButtonWithLabel(
             "settings-page-notifications-icon-button",
             "Notifications"
           )
         );
         this.settingsPage.appendChild(
-          createButtonWithLabel(
+          createSettingsButtonWithLabel(
             "settings-page-settings-icon-button",
             "Settings"
           )
@@ -1157,7 +1115,7 @@ class SettingsWindow extends BaseWindow {
           createDescription("Change the De Lijn app configuration.")
         );
         this.settingsPage.appendChild(
-          createButtonWithLabel(
+          createSettingsButtonWithLabel(
             "settings-page-delijn-monochrome-button",
             "Monochrome"
           )
@@ -1188,7 +1146,7 @@ class SettingsWindow extends BaseWindow {
           createDescription("Change the weather app configuration.")
         );
         this.settingsPage.appendChild(
-          createButtonWithLabel(
+          createSettingsButtonWithLabel(
             "settings-page-sync-weather-button",
             "Sync weather"
           )
@@ -1200,7 +1158,10 @@ class SettingsWindow extends BaseWindow {
           createDescription("Change configuration of Snake++")
         );
         this.settingsPage.appendChild(
-          createButtonWithLabel("settings-page-show-snake-grid-button", "Grid")
+          createSettingsButtonWithLabel(
+            "settings-page-show-snake-grid-button",
+            "Grid"
+          )
         );
 
         break;
@@ -1214,7 +1175,7 @@ class SettingsWindow extends BaseWindow {
         );
 
         this.settingsPage.appendChild(
-          createButtonWithLabel(
+          createSettingsButtonWithLabel(
             "settings-page-performance-mode-button",
             "Performance mode"
           )
@@ -1225,7 +1186,7 @@ class SettingsWindow extends BaseWindow {
           createDescription("Change the login page configuration.")
         );
         this.settingsPage.appendChild(
-          createButtonWithLabel(
+          createSettingsButtonWithLabel(
             "settings-page-splash-text-button",
             "Splash-text"
           )
@@ -1236,7 +1197,7 @@ class SettingsWindow extends BaseWindow {
           createDescription("Change the home page configuration.")
         );
         this.settingsPage.appendChild(
-          createButtonWithLabel(
+          createSettingsButtonWithLabel(
             "settings-page-discord-button",
             "Discord button"
           )

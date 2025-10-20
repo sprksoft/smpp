@@ -114,6 +114,7 @@ export async function setImage(id, data) {
   await browser.storage.local.set({ images });
 }
 
+// returns an object with "imageData" "link" & "type" (link, none, file...)
 export async function getImage(id) {
   const images = (await browser.storage.local.get("images")).images || {};
   return images[id];

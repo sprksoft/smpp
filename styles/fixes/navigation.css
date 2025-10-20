@@ -141,7 +141,7 @@
   background-color: var(--color-base01) !important;
   border: 2px solid var(--color-base03) !important;
   text-decoration: none !important;
-  border-radius: 1rem !important;
+  border-radius: 2rem !important;
   color: var(--color-text) !important;
   align-items: center !important;
   transition: none !important;
