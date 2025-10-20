@@ -584,7 +584,7 @@ button.btn.btn--dropdown.js-btn,
 button.btn.dropdown-button.js-period-dropdown,
 button.btn.dropdown-button.js-course-dropdown,
 .token-EsU0c /* for dropdown buttons in resultaten -> feedback*/ {
-  border-radius: 5px !important; /*lukas ik weet dat jij mij hier voor gaat haten maar ik heb 2 goeie redenen waarom   1. het is gwn consistent   2. het is beter voor de algemene persoon die net smpp heeft  3.😝*/
+  border-radius: 0.75rem !important; /*lukas ik weet dat jij mij hier voor gaat haten maar ik heb 2 goeie redenen waarom   1. het is gwn consistent   2. het is beter voor de algemene persoon die net smpp heeft  3.😝*/
 }
 
 .detail-blob {
