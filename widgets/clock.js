@@ -50,7 +50,6 @@ class ClockWidget extends WidgetBase {
       const minutes = now.getMinutes();
       const seconds = now.getSeconds();
       const milliseconds = now.getMilliseconds();
-      console.log(milliseconds);
       timeEl.innerText =
         (hours < 10 ? "0" : "") +
         hours +

@@ -1,127 +1,128 @@
 .game-container {
-    padding: 0px !important;
-    height: 260px;
-    overflow: hidden;
-    width: 100%;
+  padding: 0px !important;
+  height: 260px;
+  overflow: hidden;
+  width: 100%;
 }
 .smpp-widget-preview .game-container {
-    height: 100% !important;
-    aspect-ratio: 1;
+  height: 100% !important;
+  aspect-ratio: 1;
 }
 .game-menu {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    justify-content: space-between;
-    height: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: space-between;
+  height: 100%;
 }
 .game-menu-top,
 .game-menu-bottom {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
 }
 .game-title {
-    font-size: 3rem;
-    font-weight: 800;
-    margin-bottom: 0.1rem !important;
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 0.1rem !important;
 }
 
 .smpp-widget-preview .game-title {
-    font-size: 2.5rem;
+  font-size: 2.5rem;
 }
 
 .game-score {
-    font-size: 1.75rem !important;
-    font-weight: 500;
+  font-size: 1.75rem !important;
+  font-weight: 500;
 }
 
 .game-canvas {
-    width: 260px;
-    height: 260px;
+  width: 260px;
+  height: 260px;
 }
 
 .game-button {
-    font-size: 1.7rem !important;
-    font-weight: 500;
-    width: 80% !important;
+  font-size: 1.7rem !important;
+  font-weight: 500;
+  width: 80% !important;
 
-    margin-top: 1rem;
-    padding: 0.5rem 0rem !important;
-    align-self: center !important;
-    background: color-mix(in srgb, color percentage, color percentage);
-    background: linear-gradient(
-        100deg,
-        color-mix(in srgb, var(--color-base01) 30%, var(--color-base02) 70%),
-        var(--color-base02),
-        var(--color-base02),
-        color-mix(in srgb, var(--color-base01) 30%, var(--color-base02) 70%)
-    );
-    border: 3px solid var(--color-base03);
-    border-radius: 1000px !important;
-    margin-bottom: 1.8rem;
+  margin-top: 1rem;
+  padding: 0.5rem 0rem !important;
+  align-self: center !important;
+  background: color-mix(in srgb, color percentage, color percentage);
+  background: linear-gradient(
+    100deg,
+    color-mix(in srgb, var(--color-base01) 30%, var(--color-base02) 70%),
+    var(--color-base02),
+    var(--color-base02),
+    color-mix(in srgb, var(--color-base01) 30%, var(--color-base02) 70%)
+  );
+  border: 3px solid var(--color-base03);
+  border-radius: 1000px !important;
+  margin-bottom: 1.8rem;
 }
 .game-button:hover {
-    filter: brightness(120%);
-    font-weight: 500;
+  filter: brightness(120%);
+  font-weight: 500;
 }
 .enableAnimations .game-button {
-    transition: all 0.2s ease-in-out;
+  transition-property: filter, font-weight;
+  transition: 0.2s ease-in-out;
 }
 
 .game-slide-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 70%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 70%;
 }
 
 .game-slider-label {
-    margin: 0 !important;
-    margin-bottom: 1rem !important;
-    font-size: 1.6rem;
-    font-weight: 400;
-    cursor: text !important;
+  margin: 0 !important;
+  margin-bottom: 1rem !important;
+  font-size: 1.6rem;
+  font-weight: 400;
+  cursor: text !important;
 }
 .game-option-value {
-    font-size: 1.2rem;
+  font-size: 1.2rem;
 }
 .game-slider {
-    -webkit-appearance: none;
-    appearance: none;
-    height: 15px;
-    border-radius: 10px;
-    background: var(--color-base02);
-    outline: none;
-    opacity: 1;
-    width: 80%;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 15px;
+  border-radius: 10px;
+  background: var(--color-base02);
+  outline: none;
+  opacity: 1;
+  width: 80%;
 }
 
 .enableAnimations .game-slider {
-    transition: opacity 0.2s;
+  transition: opacity 0.2s;
 }
 
 .game-slider::-webkit-slider-thumb {
-    width: 1.5rem;
-    height: 1.5rem;
-    border-radius: 50%;
-    background: var(--color-accent) !important;
-    border-color: transparent;
-    cursor: pointer;
-    transition: opacity 0.2s ease-in-out;
-    -webkit-appearance: none;
-    appearance: none;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: var(--color-accent) !important;
+  border-color: transparent;
+  cursor: pointer;
+  transition: opacity 0.2s ease-in-out;
+  -webkit-appearance: none;
+  appearance: none;
 }
 .game-slider::-moz-range-thumb {
-    width: 1.5rem;
-    height: 1.5rem;
-    border-radius: 50%;
-    background: var(--color-accent) !important;
-    border-color: transparent;
-    cursor: pointer;
-    transition: opacity 0.2s ease-in-out;
-    appearance: none;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: var(--color-accent) !important;
+  border-color: transparent;
+  cursor: pointer;
+  transition: opacity 0.2s ease-in-out;
+  appearance: none;
 }

@@ -613,7 +613,7 @@ nav.topnav {
 }
 
 .enableAnimations .popupinput {
-  transition: all 0.3s !important;
+  transition: border-color 0.3s !important;
 }
 
 #halt {
@@ -775,10 +775,6 @@ input:checked + .slider:before {
   position: absolute;
   padding: 1rem !important;
   box-shadow: 0 0.333rem 1.333rem rgba(0, 0, 0, 0.5);
-}
-
-.enableAnimations {
-  transition: all 0s linear !important;
 }
 
 .textandbutton {
@@ -1641,10 +1637,6 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-.enableAnimations .window-button {
-  transition: all 0.2s ease;
-}
-
 .window-button:hover {
   background: var(--color-base00);
 }
@@ -1702,7 +1694,8 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
 }
 
 .enableAnimations .base-window {
-  transition: all 0.2s cubic-bezier(0.16, 1.13, 0.89, 0.96);
+  transition-property: width, height, left, top, border-radius;
+  transition: 0.2s cubic-bezier(0.16, 1.13, 0.89, 0.96);
   animation: popIn 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards !important;
 }
 .glass .base-window {
@@ -1750,7 +1743,8 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
 .enableAnimations .window-controls {
   opacity: 0;
   transform: translateY(-20px);
-  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  transition-property: opacity, transform;
+  transition: 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 
 .enableAnimations .base-window:hover .window-controls,
@@ -1932,7 +1926,8 @@ button.wopi_files__button {
 }
 
 .enableAnimations button.wopi_files__button {
-  transition: all 0.05s ease-in-out !important;
+  transition-property: background-color, border-color, border-radius;
+  transition: 0.05s ease-in-out !important;
 }
 
 .card__container {
@@ -1940,9 +1935,9 @@ button.wopi_files__button {
   border-radius: 20px !important;
   box-shadow: none !important;
 }
-
 .enableAnimations .card__container {
-  transition: all ease-in-out 0.25s;
+  transition-property: background-color, transform, box-shadow, scale, cursor;
+  transition: ease-in-out 0.25s;
 }
 
 .card__container:hover {
@@ -1970,7 +1965,8 @@ button.wopi_files__button {
 }
 
 .enableAnimations .card {
-  transition: all 0.1s ease-in-out !important;
+  transition-property: background-color, border-color;
+  transition: 0.1s ease-in-out !important;
 }
 
 body.modern-ui
@@ -2186,10 +2182,6 @@ div#smscMainBlockContainer {
   width: auto !important;
   max-width: 400px !important;
   min-width: 250px !important;
-}
-
-.enableAnimations .uploadzone .folders {
-  transition: all 0.3s !important;
 }
 
 #tree {

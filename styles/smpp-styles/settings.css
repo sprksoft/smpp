@@ -43,7 +43,8 @@
 }
 
 .enableAnimations .settings-category-button-js {
-  transition: all 0.15s ease-in-out;
+  transition-property: background-color, border-color, transform, font-weight;
+  transition: 0.15s ease-in-out;
 }
 .enableAnimations .settings-category-button-js:hover {
   scale: 1.01;
@@ -214,7 +215,8 @@
 }
 
 .enableAnimations .settings-page-text-input {
-  transition: all 0.2s ease-in-out;
+  transition-property: border-color;
+  transition: 0.2s ease-in-out;
 }
 
 .settings-page-text-input {
@@ -232,7 +234,8 @@
 }
 
 .enableAnimations .settings-page-image-button-wrapper {
-  transition: all 0.1s ease-in-out;
+  transition-property: transform, box-shadow, border-color;
+  transition: 0.1s ease-in-out;
 }
 
 .settings-page-image-button-wrapper:active {
@@ -287,7 +290,8 @@ label.settings-page-image-button-wrapper:has(input:checked) {
 }
 
 .enableAnimations .settings-page-theme-card {
-  transition: all 0.15s ease-in-out;
+  transition-property: background-color, border-color, color, transform;
+  transition: 0.15s ease-in-out;
 }
 
 .settings-page-theme-card {
@@ -617,10 +621,12 @@ input.settings-page-keybinding-input[type="text"]:not(
   font-weight: 400;
   cursor: pointer;
   color: var(--color-text);
-  transition: all 0.2s ease-in-out;
   margin-bottom: 1rem;
 }
-
+.enableAnimations .settings-page-reset-button {
+  transition-property: border-color, background-color, transform;
+  transition: 0.2s ease-in-out;
+}
 .settings-page-reset-button:hover {
   background-color: var(--color-base02);
   border-color: var(--color-base03);
@@ -677,9 +683,12 @@ input.settings-page-keybinding-input[type="text"]:not(
   border-radius: 0.5rem;
   font-size: 1.4rem;
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
 }
-
+.enableAnimations .reset-popup-cancel,
+.enableAnimations .reset-popup-confirm {
+  transition-property: color, background-color, transform;
+  transition: 0.2s ease-in-out;
+}
 .reset-popup-cancel {
   background-color: var(--color-base02);
   color: var(--color-text);

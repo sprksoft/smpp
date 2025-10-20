@@ -48,7 +48,8 @@
 }
 
 .enableAnimations .modern-message {
-  transition: all 0.05s ease-in-out !important;
+  transition-property: background-color, border-color, text-decoration;
+  transition: 0.05s ease-in-out !important;
 }
 
 .quickReplyMenu quickreply-menu {

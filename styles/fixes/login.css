@@ -48,10 +48,6 @@ html {
   border: 3px solid var(--color-base03) !important;
 }
 
-.enableAnimations .login-app__top {
-  transition: all 100ms ease-in 0s !important;
-}
-
 .login-app__bottom {
   display: none !important;
 }
@@ -126,7 +122,9 @@ body {
 .enableAnimations
   .login-app
   .smscButton.blue:not(#pushWizardPopupConfirmButton) {
-  transition: all 0.3s !important;
+  transition-property: background-color, border-color, box-shadow, width,
+    font-weigt, margin-left;
+  transition: 0.3s !important;
 }
 
 .login-app .smscButton.blue:hover:not(#pushWizardPopupConfirmButton:hover) {

@@ -105,10 +105,12 @@
   background-color: var(--color-base00);
   border: 2px solid transparent;
   border-radius: 999px;
+  fill: var(--color-text) !important;
 }
 
 .enableAnimations .performanceModeTooltipLabel {
-  transition: all 0.2s ease-in-out;
+  transition-property: border-color, opacity, height, width;
+  transition: 0.2s ease-in-out;
 }
 
 .performanceModeTooltipLabel input {
@@ -119,10 +121,6 @@
 
 #performance-mode-toggle:checked + svg {
   fill: var(--color-accent) !important;
-}
-
-.performanceModeTooltipLabel {
-  fill: var(--color-text) !important;
 }
 
 .performanceModeTooltipLabel:hover {
@@ -298,13 +296,11 @@ li {
 }
 
 .enableAnimations .treecollapse {
-  transition: all 0.1s ease-in-out !important;
+  transition-property: border-color, background-color, color;
+  transition: 0.1s ease-in-out !important;
 }
 
-.treecollapse a {
-  color: var(--color-text) !important;
-}
-
+.treecollapse a,
 .treecollapse:hover a:hover {
   color: var(--color-text) !important;
 }

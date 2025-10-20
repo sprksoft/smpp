@@ -450,10 +450,14 @@ html {
     font-size 0.4s ease-in-out, height 0.4s ease-in-out;
 }
 
-.enableAnimations .widgets-done-button:hover {
-  transition: all 0.1s ease-out;
+.enableAnimations .widgets-done-button {
+  transition-property: border-color, background-color;
+  transition: 0.1s ease-out;
 }
-
+.enableAnimations .widgets-done-button > svg {
+  transition-property: border-color, background-color, fill;
+  transition: 0.1s ease-out;
+}
 .widgets-done-button:hover {
   border-color: var(--color-base03);
   background-color: var(--color-base02);
@@ -472,7 +476,6 @@ html {
   width: 1.7rem;
   overflow: visible;
   margin: 0;
-  transition: all 0.2s ease-in-out;
   fill: var(--color-text);
 }
 

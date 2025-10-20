@@ -390,7 +390,8 @@ span.evaluation-graphic__progress-ring__value {
 .enableAnimations
   .title-and-schoolyear-selector
   .title-and-schoolyear-selector__period-container:not(:disabled) {
-  transition: all 0.1s !important;
+  transition-property: border-color, background-color;
+  transition: 0.1s !important;
 }
 
 .listview__row.js-listview-row.leerplannen-overview__list__listview__row {
@@ -403,7 +404,8 @@ span.evaluation-graphic__progress-ring__value {
 
 .enableAnimations
   .listview__row.js-listview-row.leerplannen-overview__list__listview__row {
-  transition: all 0.1s ease-in-out !important;
+  transition-property: border-color, background-color;
+  transition: 0.1s ease-in-out !important;
 }
 
 .listview__row.js-listview-row.leerplannen-overview__list__listview__row:hover {

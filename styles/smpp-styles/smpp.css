@@ -19,7 +19,8 @@
 }
 
 .enableAnimations .smpp-background-selector {
-  transition: all 0.3s !important;
+  transition-property: opacity, filter;
+  transition: 0.3s !important;
 }
 
 .smpp-background-selector .smpp-background-link {
