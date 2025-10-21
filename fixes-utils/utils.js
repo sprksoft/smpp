@@ -69,6 +69,23 @@ function isAbsoluteUrl(url) {
   return /^(https?:\/\/|data:image\/)/i.test(url);
 }
 
+function getPfpLink(username) {
+  let firstInitial;
+  let secondInitial;
+  if (username) {
+    const parts = username.trim().split(/\s+/);
+    firstInitial = parts[0][0].toUpperCase();
+    secondInitial = parts.length > 1 ? parts[1][0].toUpperCase() : "";
+  } else {
+    // Mr. Unknown
+    firstInitial = "M";
+    secondInitial = "U";
+  }
+  return `https://userpicture20.smartschool.be/User/Userimage/hashimage/hash/initials_${
+    firstInitial + secondInitial
+  }/plain/1/res/128`;
+}
+
 function getUserId() {
   let userId;
   // get UID

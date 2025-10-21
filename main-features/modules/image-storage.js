@@ -10,7 +10,7 @@ class FileSelector {
     this.fileInputButton = null;
     this.fileInputContainer = this.createImageFileInputContainer();
 
-    this.container = this.createFullFileInput();
+    this.fullContainer = this.createFullFileInput();
     this._bindEvents();
   }
 
@@ -26,6 +26,8 @@ class FileSelector {
     });
   }
 
+  onStore() {}
+
   createImageFileInputContainer() {
     const fileInputContainer = document.createElement("div");
     fileInputContainer.classList.add("file-input-container");
@@ -37,7 +39,7 @@ class FileSelector {
 
     this.fileInputButton = document.createElement("button");
     this.fileInputButton.type = "button";
-    this.fileInputButton.classList.add("smpp-background-file");
+    this.fileInputButton.classList.add("smpp-file-input-button");
     this.fileInputButton.setAttribute("aria-label", "Choose image file");
     this.fileInputButton.innerHTML = fileInputIconSvg;
 
@@ -90,12 +92,13 @@ class FileSelector {
       await this.storeImage();
     });
 
-    this.linkInput.addEventListener("input", () => {
+    this.linkInput.addEventListener("change", async () => {
       if ((this.linkInput.value || "").trim() !== "") {
         this.clearButton.classList.add("active");
       } else {
         this.clearButton.classList.remove("active");
       }
+      await this.storeImage();
     });
 
     this.clearButton.addEventListener("click", async (e) => {
@@ -108,7 +111,6 @@ class FileSelector {
   }
 
   async storeImage() {
-    console.log("storing image...");
     let data = await browser.runtime.sendMessage({
       action: "getImage",
       id: this.name,
@@ -132,22 +134,27 @@ class FileSelector {
         data.link = "";
         data.imageData = null;
       } else {
-        data.type = "link";
         data.link = linkValue;
-        data.imageData = null;
+        if (isAbsoluteUrl(linkValue)) {
+          data.type = "link";
+          data.imageData = linkValue;
+        } else {
+          data.type = "default";
+          data.imageData = null;
+        }
       }
     }
 
-    console.log("storing:", data);
     await browser.runtime.sendMessage({
       action: "setImage",
       id: this.name,
       data,
     });
+    this.loadImage();
+    this.onStore();
   }
 
   async loadImage() {
-    console.log("loading image...");
     let data = await browser.runtime.sendMessage({
       action: "getImage",
       id: this.name,

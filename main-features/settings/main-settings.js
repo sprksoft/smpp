@@ -204,12 +204,8 @@ class SettingsWindow extends BaseWindow {
             settings.profile.username;
         }
 
-        let profilePic = document.getElementById(
-          "settings-page-profile-picture"
-        );
-        if (settings.profile.profilePicture) {
-          profilePic.src = settings.profile.profilePicture;
-        }
+        // Profile Picture
+        this.profilePictureInputContainer.loadImage();
         break;
       }
 
@@ -728,16 +724,6 @@ class SettingsWindow extends BaseWindow {
       return container;
     }
 
-    function createTextInput(id, placeholder = "") {
-      let textInput = document.createElement("input");
-      textInput.id = id;
-      textInput.type = "text";
-      textInput.placeholder = placeholder;
-      textInput.spellcheck = false;
-      textInput.classList.add("settings-page-text-input");
-      return textInput;
-    }
-
     function createImage(src, width, height) {
       let image = document.createElement("img");
       image.classList.add("settings-page-image");
@@ -755,53 +741,6 @@ class SettingsWindow extends BaseWindow {
       return description;
     }
 
-    const createImageInput = (buttonId, textInputId, fileInputId) => {
-      let inputContainer = document.createElement("div");
-      inputContainer.classList.add(
-        "settings-page-background-selection-container"
-      );
-
-      const clearButton = document.createElement("button");
-      clearButton.id = "settings-page-link-clear-button";
-      clearButton.classList.add("smpp-link-clear-button");
-      clearButton.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-          <g xmlns="http://www.w3.org/2000/svg">
-          <path d="M7 7.00006L17 17.0001M7 17.0001L17 7.00006" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </g>
-        </svg>`;
-
-      clearButton.addEventListener("click", async (event) => {
-        event.target
-          .closest(".smpp-link-clear-button")
-          .classList.remove("active");
-        document.getElementById(textInputId).value = "";
-
-        await this.storePage();
-      });
-
-      const linkInput = createTextInput(textInputId, "Link");
-
-      const backgroundFileInput = document.createElement("input");
-      backgroundFileInput.id = fileInputId;
-      backgroundFileInput.style.display = "none";
-      backgroundFileInput.type = "file";
-      backgroundFileInput.accept = ".png, .jpg, .jpeg";
-
-      const fileBtn = document.createElement("button");
-      fileBtn.className = "smpp-background-file";
-      fileBtn.id = buttonId;
-      fileBtn.innerHTML = fileInputIconSvg;
-      fileBtn.addEventListener("click", () => {
-        backgroundFileInput.click();
-      });
-
-      inputContainer.appendChild(linkInput);
-      inputContainer.appendChild(fileBtn);
-      inputContainer.appendChild(clearButton);
-      inputContainer.appendChild(backgroundFileInput);
-      return inputContainer;
-    };
-
     this.clearSettingsPage();
     switch (this.currentPage) {
       case "profile":
@@ -817,12 +756,15 @@ class SettingsWindow extends BaseWindow {
         this.settingsPage.appendChild(
           createDescription("Upload your own custom profile picture")
         );
-        let pfpInputContainer = createImageInput(
-          "settings-page-pfp-file-button",
-          "settings-page-pfp-link-input",
-          "settings-page-pfp-file-input"
+        this.profilePictureInputContainer = new FileSelector("profilePicture");
+        this.profilePictureInputContainer.loadImage();
+        this.profilePictureInputContainer.onStore = () => {
+          this.storePage();
+        };
+
+        this.settingsPage.appendChild(
+          this.profilePictureInputContainer.createFullFileInput()
         );
-        this.settingsPage.appendChild(pfpInputContainer);
 
         break;
       case "appearance":
@@ -894,6 +836,9 @@ class SettingsWindow extends BaseWindow {
 
         this.backgroundImageSelector = new FileSelector("backgroundImage");
         this.backgroundImageSelector.loadImage();
+        this.backgroundImageSelector.onStore = () => {
+          this.storePage();
+        };
 
         this.settingsPage.appendChild(
           this.backgroundImageSelector.createFullFileInput()
@@ -1257,6 +1202,7 @@ async function openSettingsWindow(event) {
     await settingsWindow.loadPage();
   }
   settingsWindow.show(event);
+  settingsWindow.loadPage();
 }
 
 function createSettingsButton() {

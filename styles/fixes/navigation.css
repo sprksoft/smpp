@@ -83,12 +83,13 @@
   gap: 10px;
 }
 
-.wallpaper-quick-settings-container,
-.weather-overlay-container {
+.wallpaper-quick-settings-container {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  margin-top: 0.5rem;
+  align-items: stretch; /* make children take full width */
+  width: fit-content; /* shrink to content size */
+  max-width: 100%; /* avoid overflowing parent */
+  gap: 6px;
 }
 
 .topnav__btn--icon--search > svg {

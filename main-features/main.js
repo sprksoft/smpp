@@ -1,7 +1,6 @@
 //java script komt hier je weet wel
 //ok - ldev
 //oh ok, ik dacht in general.css - Jdev
-let quickSettingsWindowIsHidden = true;
 
 function updateDiscordPopup(discordButtonEnabled) {
   if (discordButtonEnabled) {
@@ -21,10 +20,6 @@ function changeLogoutText() {
     return "Good Bye! →";
   }
   return "Log out →";
-}
-
-function openFileSelector() {
-  document.getElementById("background-file-input").click();
 }
 
 function changeFont() {
@@ -60,23 +55,6 @@ function decapitateಠ_ಠ() {
     }
   `;
   document.head.appendChild(style_el);
-}
-
-function getPfpLink(username) {
-  let firstInitial;
-  let secondInitial;
-  if (username) {
-    const parts = username.trim().split(/\s+/);
-    firstInitial = parts[0][0].toUpperCase();
-    secondInitial = parts.length > 1 ? parts[1][0].toUpperCase() : "";
-  } else {
-    // Mr. Unknown
-    firstInitial = "M";
-    secondInitial = "U";
-  }
-  return `https://userpicture20.smartschool.be/User/Userimage/hashimage/hash/initials_${
-    firstInitial + secondInitial
-  }/plain/1/res/128`;
 }
 
 function updateTopNavIcons(data) {
@@ -177,7 +155,6 @@ async function createStaticGlobals() {
 }
 
 async function applyAppearance(appearance) {
-  console.log("i got called");
   let style = document.documentElement.style;
 
   await setTheme(appearance.theme);
@@ -271,77 +248,6 @@ async function apply() {
   fixMessageBox();
 }
 
-async function storeQuickSettings() {
-  const oldData = await browser.runtime.sendMessage({
-    action: "getSettingsData",
-  });
-  // Start from old settings
-  const data = structuredClone(oldData);
-  data.appearance.theme = document.getElementById("theme-selector").value;
-  data.appearance.background.link = document.getElementById(
-    "background-link-input"
-  ).value;
-
-  data.appearance.background.blur = Number(
-    document.getElementById("background-blur-amount-slider").value
-  );
-
-  data.other.performanceMode = document.getElementById(
-    "performance-mode-toggle"
-  ).checked;
-
-  document.getElementById(
-    "performance-mode-info"
-  ).innerHTML = `Toggle performance mode ${
-    data.other.performanceMode
-      ? "<span class='green-underline'>Enabled</span>"
-      : "<span class='red-underline'>Disabled</span>"
-  }`;
-
-  if (data.appearance.theme == "custom") {
-    if (oldData.appearance.theme == "custom") {
-      await storeCustomThemeData();
-    }
-    await createCustomThemeUI();
-  } else {
-    document.getElementById("colorpickers").innerHTML = ``;
-  }
-
-  // Handle background file input
-  let file = document.getElementById("background-file-input").files[0];
-  if (file) {
-    const reader = new FileReader();
-    const imageData = await new Promise((resolve) => {
-      reader.onload = () => resolve(reader.result);
-      reader.readAsDataURL(file);
-    });
-    await browser.runtime.sendMessage({
-      action: "setImage",
-      id: "backgroundImage",
-      data: imageData,
-    });
-
-    data.appearance.background.selection = "file";
-    data.appearance.background.link = file.name;
-  } else {
-    if (data.appearance.background.link == "") {
-      data.appearance.background.selection = "default";
-    } else if (
-      data.appearance.background.link != oldData.appearance.background.link
-    ) {
-      data.appearance.background.selection = "link";
-    }
-  }
-
-  console.log("Storing this new data:", data);
-  await browser.runtime.sendMessage({ action: "setSettingsData", data });
-  await loadQuickSettings();
-  if (settingsWindow) {
-    await settingsWindow.loadPage();
-  }
-  await apply();
-}
-
 async function setBackground(appearance) {
   let style = document.documentElement.style;
   function displayBackgroundImage(image) {
@@ -413,254 +319,6 @@ async function createCustomThemeUI() {
   const colorpickers = document.getElementById("colorpickers");
   colorpickers.innerHTML = colorpickersHTML;
   await loadCustomThemeData();
-}
-
-async function loadQuickSettings() {
-  const data = await browser.runtime.sendMessage({
-    action: "getSettingsData",
-  });
-  console.log("Loaded this data:", data);
-  document.getElementById("theme-selector").value = data.appearance.theme;
-  document.getElementById("background-link-input").value =
-    data.appearance.background.link;
-
-  if (data.appearance.background.link) {
-    document.getElementById("smpp-link-clear-button").classList.add("active");
-  }
-  if (data.appearance.background.selection == "file") {
-    document.getElementById("backgroundfilebutton").classList.add("active");
-  } else {
-    document.getElementById("backgroundfilebutton").classList.remove("active");
-  }
-
-  document.getElementById("background-file-input").value = ""; // reset the files
-  document.getElementById("background-blur-amount-slider").value =
-    data.appearance.background.blur;
-  document.getElementById("performance-mode-toggle").checked =
-    data.other.performanceMode;
-
-  document.getElementById(
-    "performance-mode-info"
-  ).innerHTML = `Toggle performance mode ${
-    data.other.performanceMode
-      ? "<span class='green-underline'>Enabled</span>"
-      : "<span class='red-underline'>Disabled</span>"
-  }`;
-
-  if (data.appearance.theme == "custom") {
-    await createCustomThemeUI();
-  }
-}
-
-function toggleQuickSettings() {
-  let win = document.getElementById("quickSettings");
-  if (win && !quickSettingsWindowIsHidden) {
-    closeQuickSettings();
-  } else {
-    openQuickSettings();
-  }
-}
-
-async function openQuickSettings() {
-  let win = document.getElementById("quickSettings");
-  if (!win) {
-    createQuickSettings();
-    win = document.getElementById("quickSettings");
-  }
-  win.classList.remove("qs-hidden");
-  await loadQuickSettings();
-  quickSettingsWindowIsHidden = false;
-}
-
-function closeQuickSettings() {
-  let win = document.getElementById("quickSettings");
-  if (win) {
-    win.classList.add("qs-hidden");
-  }
-  quickSettingsWindowIsHidden = true;
-}
-
-function createBgSelector() {
-  const backgroundSelector = document.createElement("div");
-  backgroundSelector.className = "smpp-background-selector";
-
-  const clearButton = document.createElement("button");
-  clearButton.id = "smpp-link-clear-button";
-  clearButton.classList.add("smpp-link-clear-button");
-  clearButton.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-          <g xmlns="http://www.w3.org/2000/svg">
-          <path d="M7 7.00006L17 17.0001M7 17.0001L17 7.00006" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </g>
-        </svg>`;
-
-  clearButton.addEventListener("click", async function (event) {
-    event.target.closest(".smpp-link-clear-button").classList.remove("active");
-    document.getElementById("background-link-input").value = "";
-    await storeQuickSettings();
-  });
-
-  const linkInput = document.createElement("input");
-  linkInput.className = "smpp-background-link";
-  linkInput.id = "background-link-input";
-  linkInput.spellcheck = false;
-  linkInput.type = "text";
-
-  const fileBtn = document.createElement("button");
-  fileBtn.className = "smpp-background-file";
-  fileBtn.id = "backgroundfilebutton";
-  fileBtn.innerHTML = fileInputIconSvg;
-
-  const backgroundFileInput = document.createElement("input");
-  backgroundFileInput.id = "background-file-input";
-  backgroundFileInput.style.display = "none";
-  backgroundFileInput.type = "file";
-  backgroundFileInput.accept = ".png, .jpg, .jpeg";
-
-  backgroundSelector.appendChild(linkInput);
-  backgroundSelector.appendChild(fileBtn);
-  backgroundSelector.appendChild(clearButton);
-  backgroundSelector.appendChild(backgroundFileInput);
-
-  return backgroundSelector;
-}
-
-function createQuickSettingsHTML(parent) {
-  const performanceModeTooltipLabel = document.createElement("label");
-  performanceModeTooltipLabel.className = "performanceModeTooltipLabel";
-  performanceModeTooltipLabel.id = "performanceModeTooltipLabel";
-
-  const performanceModeTooltip = document.createElement("input");
-  performanceModeTooltip.type = "checkbox";
-  performanceModeTooltip.id = "performance-mode-toggle";
-
-  performanceModeTooltipLabel.appendChild(performanceModeTooltip);
-  performanceModeTooltipLabel.innerHTML += performanceModeSvg;
-
-  const performanceModeInfo = document.createElement("span");
-  performanceModeInfo.id = "performance-mode-info";
-
-  const themeContainer = document.createElement("div");
-  themeContainer.className = "theme-container";
-
-  const themeHeading = document.createElement("h3");
-  themeHeading.className = "quick-settings-title";
-  themeHeading.textContent = "Theme:";
-
-  const themeSelector = document.createElement("select");
-  themeSelector.id = "theme-selector";
-
-  settingsOptions.appearance.theme.forEach((key) => {
-    if (!themes[key]["display-name"].startsWith("__")) {
-      // Don't include hidden themes
-      const optionElement = document.createElement("option");
-      optionElement.value = key;
-
-      optionElement.textContent = themes[key]["display-name"];
-      themeSelector.appendChild(optionElement);
-    }
-  });
-
-  const colorPickers = document.createElement("div");
-  colorPickers.id = "colorpickers";
-
-  themeContainer.appendChild(themeHeading);
-  themeContainer.appendChild(themeSelector);
-  themeContainer.appendChild(colorPickers);
-
-  const wallpaperTopContainer = document.createElement("div");
-
-  const wallpaperHeading = document.createElement("h3");
-  wallpaperHeading.className = "quick-settings-title";
-  wallpaperHeading.textContent = "Wallpaper:";
-
-  const wallpaperContainer = document.createElement("div");
-  wallpaperContainer.className = "wallpaper-quick-settings-container";
-
-  const blurSliderContainer = document.createElement("div");
-  blurSliderContainer.className = "blur-slider-container";
-
-  const blurSlider = document.createElement("input");
-  blurSlider.type = "range";
-  blurSlider.min = "0";
-  blurSlider.max = "10";
-  blurSlider.value = "0";
-  blurSlider.className = "main-slider";
-  blurSlider.id = "background-blur-amount-slider";
-
-  const backgroundBlurLabel = document.createElement("span");
-  backgroundBlurLabel.className = "color-label";
-  backgroundBlurLabel.id = "blurPlaats";
-  backgroundBlurLabel.textContent = "blur";
-
-  blurSliderContainer.appendChild(blurSlider);
-  blurSliderContainer.appendChild(backgroundBlurLabel);
-
-  wallpaperContainer.appendChild(createBgSelector());
-  wallpaperContainer.appendChild(blurSliderContainer);
-
-  wallpaperTopContainer.appendChild(wallpaperHeading);
-  wallpaperTopContainer.appendChild(wallpaperContainer);
-
-  parent.appendChild(performanceModeTooltipLabel);
-  parent.appendChild(themeContainer);
-  parent.appendChild(wallpaperTopContainer);
-  parent.appendChild(performanceModeInfo);
-  return parent;
-}
-
-function createQuickSettings() {
-  let quickSettingsWindow = document.createElement("div");
-  quickSettingsWindow.id = "quickSettings";
-  quickSettingsWindow.addEventListener("change", storeQuickSettings);
-  quickSettingsWindow = createQuickSettingsHTML(quickSettingsWindow);
-
-  document
-    .getElementById("quickSettingsButton")
-    .insertAdjacentElement("afterend", quickSettingsWindow);
-
-  document
-    .getElementById("backgroundfilebutton")
-    .addEventListener("click", openFileSelector);
-
-  document
-    .getElementById("performanceModeTooltipLabel")
-    .addEventListener("mouseover", () => {
-      document.getElementById("performance-mode-info").style.opacity = "1";
-      document.getElementById("performance-mode-info").style.zIndex = "2";
-    });
-  document
-    .getElementById("performanceModeTooltipLabel")
-    .addEventListener("mouseout", () => {
-      document.getElementById("performance-mode-info").style.opacity = "0";
-      document.getElementById("performance-mode-info").style.zIndex = "-1";
-    });
-
-  document.addEventListener("click", (e) => {
-    if (quickSettingsWindowIsHidden) return;
-    if (
-      e.target.id === "quickSettings" ||
-      quickSettingsWindow.contains(e.target) ||
-      e.target.id === "quickSettingsButton"
-    ) {
-      return;
-    }
-    closeQuickSettings();
-  });
-}
-
-function createQuickSettingsButton() {
-  let quickSettingsButtonWrapper = document.createElement("div");
-  quickSettingsButtonWrapper.id = "quickSettingsButtonWrapper";
-  quickSettingsButtonWrapper.classList.add("smpp-button");
-  quickSettingsButtonWrapper.classList.add("topnav__btn-wrapper");
-
-  let quickSettingsButton = document.createElement("button");
-  quickSettingsButton.id = "quickSettingsButton";
-  quickSettingsButton.classList.add("topnav__btn");
-  quickSettingsButton.innerText = "Settings";
-  quickSettingsButton.addEventListener("click", toggleQuickSettings);
-  quickSettingsButtonWrapper.appendChild(quickSettingsButton);
-  return quickSettingsButtonWrapper;
 }
 
 function createTopButtons() {

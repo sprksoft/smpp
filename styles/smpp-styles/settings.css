@@ -213,12 +213,12 @@
   border-radius: 0.75rem !important;
 }
 
-.enableAnimations .settings-page-text-input {
+.enableAnimations #settings-page .smpp-text-input {
   transition-property: border-color;
   transition: 0.2s ease-in-out;
 }
 
-.settings-page-text-input {
+#settings-page .smpp-text-input {
   background-color: var(--color-base01) !important;
   border-color: var(--color-base02) !important;
   border-radius: 1rem !important;
@@ -228,7 +228,17 @@
   width: 20rem !important;
 }
 
-.settings-page-text-input:focus {
+#settings-page .full-file-input-container .smpp-text-input {
+  display: flex;
+  flex-grow: 1 !important;
+  width: unset !important;
+}
+
+#settings-page .full-file-input-container {
+  width: 20rem !important;
+}
+
+#settings-page .smpp-text-input:focus {
   border-color: var(--color-base03) !important;
 }
 
@@ -375,7 +385,6 @@ label.settings-page-image-button-wrapper:has(input:checked) {
   color: var(--text-color) !important;
 }
 
-.settings-page-background-selection-container,
 .settings-page-icons-container {
   position: relative;
   width: fit-content;
@@ -443,11 +452,11 @@ label.settings-page-image-button-wrapper:has(input:checked) {
   margin: 0;
 }
 
-.smpp-background-file,
+#settings-page .smpp-file-input-button,
 .settings-page-image-button-wrapper:has(
     .settings-page-image-button-wrapper:checked
   ),
-.settings-page-text-input,
+#settings-page .smpp-text-input,
 .settings-page-slider,
 .settings-page-slider-container,
 .settings-page-button-label-container,
