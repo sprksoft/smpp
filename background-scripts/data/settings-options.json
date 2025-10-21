@@ -1,7 +1,6 @@
 {
   "profile": {
-    "username": "string",
-    "profilePicture": "string"
+    "username": "string"
   },
   "appearance": {
     "theme": null,
