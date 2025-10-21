@@ -7,6 +7,16 @@
   padding: 0;
 }
 
+.clock-center {
+  position: absolute;
+  left: calc(50% - 0.6rem);
+  top: calc(50% - 0.6rem);
+  width: 1.2rem;
+  height: 1.2rem;
+  background-color: var(--color-accent);
+  border-radius: 100000px;
+}
+
 .clock-preview-title {
   font-size: 2.5rem;
   font-weight: 700;
@@ -32,7 +42,8 @@
 .clock-widget-preview .clock-hand,
 .clock-hand {
   background-color: var(--color-text);
-  transition: transform 0.75s cubic-bezier(0.58, 0.14, 0.44, 1.2);
+  /* No transition because hands are updated every frame and transitions cause hands to spin when tab is unloaded*/
+  transition: none;
 }
 
 .clock-widget-preview .second-hand,
@@ -76,13 +87,15 @@
   width: 1rem;
   border-radius: 0.5rem;
   box-shadow: 0 0 30px 4px var(--darken-background);
-  transition: transform 0.75s cubic-bezier(0.58, 0.14, 0.44, 1.2);
+
+  /* No transition because hands are updated every frame and transitions cause hands to spin when tab is unloaded*/
+  transition: none;
 }
 
 /* lengths expressed as percentage of the face's size */
 .hour-hand {
   height: 30%;
-  opacity: 0.8;
+  /*opacity: 0.8;*/
   z-index: -3;
 } /* shorter */
 

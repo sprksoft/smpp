@@ -35,6 +35,10 @@ class ClockWidget extends WidgetBase {
     secondHand.classList.add("clock-hand", "second-hand");
     clockFace.appendChild(secondHand);
 
+    const centerCircle = document.createElement("div");
+    centerCircle.classList.add("clock-center");
+    clockFace.appendChild(centerCircle);
+
     let bottomContainer = document.createElement("div");
     bottomContainer.classList.add("clock-bottom");
     container.appendChild(bottomContainer);
@@ -50,12 +54,17 @@ class ClockWidget extends WidgetBase {
       const minutes = now.getMinutes();
       const seconds = now.getSeconds();
       const milliseconds = now.getMilliseconds();
-      timeEl.innerText =
+
+      const timeText =
         (hours < 10 ? "0" : "") +
         hours +
         ":" +
         (minutes < 10 ? "0" : "") +
         minutes;
+      if (timeEl.innerText != timeText) {
+        // only update the time if it has changed. This allows the time text to be selected and has possibly better performance
+        timeEl.innerText = timeText;
+      }
 
       const totalSeconds =
         hours * 3600 + minutes * 60 + seconds + milliseconds / 1000;
@@ -73,10 +82,11 @@ class ClockWidget extends WidgetBase {
       secondHand.style.transform = `translate(-50%, -100%) rotate(${secondsAngle}deg)`;
       minuteHand.style.transform = `translate(-50%, -100%) rotate(${minutesAngle}deg)`;
       hourHand.style.transform = `translate(-50%, -100%) rotate(${hoursAngle}deg)`;
+
+      requestAnimationFrame(update);
     };
 
-    update();
-    this.#interval = setInterval(update, 100);
+    requestAnimationFrame(update);
 
     return clockContainer;
   }
