@@ -141,50 +141,39 @@ class SettingsWindow extends BaseWindow {
   }
 
   async resetSettings() {
-    // Create confirmation popup
     const popup = document.createElement("div");
     popup.classList.add("reset-confirmation-popup");
-    popup.innerHTML = `
-      <div class="reset-popup-content">
-        <h3>Reset Settings</h3>
-        <p>Are you sure you want to reset all settings to defaults? This will delete all your customizations and cannot be undone.</p>
-        <div class="reset-popup-buttons">
-          <button class="reset-popup-cancel">Cancel</button>
-          <button class="reset-popup-confirm">Reset</button>
-        </div>
-      </div>
-    `;
 
-    document.body.appendChild(popup);
+    const popupContent = document.createElement("div");
+    popupContent.classList.add("reset-popup-content");
 
-    return new Promise((resolve) => {
-      popup
-        .querySelector(".reset-popup-cancel")
-        .addEventListener("click", () => {
-          popup.remove();
-          resolve(false);
-        });
+    const title = document.createElement("h3");
+    title.textContent = "Reset Settings";
 
-      popup
-        .querySelector(".reset-popup-confirm")
-        .addEventListener("click", async () => {
-          popup.remove();
-          const defaults = await browser.runtime.sendMessage({
-            action: "getSettingsDefaults",
-          });
-          await browser.runtime.sendMessage({
-            action: "setSettingsData",
-            data: defaults,
-          });
-          await browser.runtime.sendMessage({
-            action: "setWidgetData",
-            widgetData: null,
-          });
-          await apply();
-          // Refresh the page to apply all changes
-          window.location.reload();
-          resolve(true);
-        });
+    const description = document.createElement("p");
+    description.textContent =
+      "Are you sure you want to reset all settings to defaults? This will delete all your customizations and cannot be undone.";
+
+    const buttonContainer = document.createElement("div");
+    buttonContainer.classList.add("reset-popup-buttons");
+
+    const cancelButton = document.createElement("button");
+    cancelButton.classList.add("reset-popup-cancel");
+    cancelButton.textContent = "Cancel";
+
+    const confirmButton = document.createElement("button");
+    confirmButton.classList.add("reset-popup-confirm");
+    confirmButton.textContent = "Reset";
+
+    buttonContainer.append(cancelButton, confirmButton);
+    popupContent.append(title, description, buttonContainer);
+    popup.appendChild(popupContent);
+    this.element.appendChild(popup);
+
+    cancelButton.addEventListener("click", () => popup.remove());
+    confirmButton.addEventListener("click", async () => {
+      popup.remove();
+      await clearsettings();
     });
   }
 

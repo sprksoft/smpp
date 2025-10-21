@@ -46,7 +46,15 @@ textarea .modern-ui,
 .modern-ui input,
 .modern-ui pre,
 .modern-ui select,
-.modern-ui textarea {
+.modern-ui textarea,
+.blueprint,
+.blueprint body,
+.blueprint button,
+.blueprint input,
+.blueprint pre,
+.blueprint select,
+.blueprint textarea,
+.blueprint div {
   font-family: "Montserrat", "Trebuchet MS", sans-serif !important;
 }
 

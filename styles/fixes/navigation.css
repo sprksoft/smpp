@@ -51,7 +51,7 @@
   padding: 0rem 0.85rem !important;
 }
 
-.modern-ui ::placeholder {
+input::placeholder {
   opacity: 0.7 !important;
   color: var(--color-text) !important;
 }

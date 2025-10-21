@@ -231,8 +231,6 @@ async function do_qm(opener = "") {
           return;
         case "glass":
           document.body.classList.add("glass");
-        case "toggle performance mode":
-          togglePerformanceMode();
           return;
         case "gcbeta":
           openGlobalChat(null, true);
