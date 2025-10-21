@@ -68,8 +68,8 @@ class ClockWidget extends WidgetBase {
 
       const totalSeconds =
         hours * 3600 + minutes * 60 + seconds + milliseconds / 1000;
-      const totalMinutes = hours * 60 + minutes;
-      const totalHours = hours + minutes / 60;
+      const totalMinutes = hours * 60 + minutes + milliseconds / (1000 * 60);
+      const totalHours = hours + minutes / 60 + milliseconds / (1000 * 60 * 60);
 
       let secondsAngle = totalSeconds * 6;
       let minutesAngle = totalMinutes * 6;
