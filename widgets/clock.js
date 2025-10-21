@@ -123,6 +123,10 @@ class ClockWidget extends WidgetBase {
     secondHand.style.transform = "rotate(0deg)";
     clockFace.appendChild(secondHand);
 
+    const centerCircle = document.createElement("div");
+    centerCircle.classList.add("clock-center");
+    clockFace.appendChild(centerCircle);
+
     let secondsAngle = 50;
     let minutesAngle = 120;
     let hoursAngle = 240;
