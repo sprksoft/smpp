@@ -25,6 +25,10 @@
   transition: 0.3s !important;
 }
 
+#quickSettings .full-file-input-container .smpp-text-input {
+  border-color: var(--color-base03) !important;
+}
+
 .smpp-file-input-button {
   margin-right: 0px !important;
   background: none !important;
@@ -40,21 +44,13 @@
   transition: opacity 0.3s, filter 0.3s !important;
 }
 
-#quickSettings .full-file-input-container .smpp-file-input-button:hover {
-  opacity: 1;
-  filter: brightness(120%);
-}
-
 .smpp-link-clear-button {
   opacity: 0;
-  position: absolute;
   border-radius: 50%;
   background-color: var(--color-base02);
   border: 2px solid var(--color-base03);
-  right: 25%;
   height: 2rem;
   aspect-ratio: 1;
-  top: -0.35rem;
   padding: 0 !important;
   z-index: -10;
   pointer-events: none;
@@ -73,4 +69,57 @@
 .smpp-link-clear-button:hover {
   filter: brightness(125%);
   stroke: var(--color-red);
+}
+
+.full-file-input-container {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.link-input-container {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex: 1 1 auto;
+  position: relative;
+  min-width: 0;
+}
+
+.smp-text-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* clear button stays its intrinsic size */
+.smpp-link-clear-button {
+  position: absolute;
+  flex: 0 0 auto;
+  right: -0.25rem;
+  top: -0.25rem;
+  white-space: nowrap;
+}
+
+/* right side: hidden file input + visible button */
+.file-input-container {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto; /* keep it only as wide as it needs to be */
+}
+
+/* visible "choose file" button */
+.smpp-file-input-button {
+  white-space: nowrap; /* avoid wrapping and weird width jumps */
+  flex: 0 0 auto;
+}
+
+/* if you want the slider below and matching width of this container */
+.slider-container {
+  width: 100%;
+  max-width: 420px; /* match the same max-width as above */
+  box-sizing: border-box;
 }

@@ -150,7 +150,6 @@
 }
 
 .glass .smsc-topnav .topnav__menu,
-.glass .bubble,
 .glass .smsctooltip {
   background-color: var(--darken-background) !important;
 }

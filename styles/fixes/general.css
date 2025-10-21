@@ -576,7 +576,7 @@ div.stdReplyWrapper {
   color: var(--color-text);
   padding: 5px;
   border-radius: 10px;
-  margin: 2px;
+  margin: 0 !important;
   font-size: large;
   font: bold;
   box-shadow: none;
@@ -740,7 +740,7 @@ input:checked + .slider:before {
 }
 
 .quick-settings-title {
-  margin-bottom: 0px !important;
+  margin-bottom: 0.25rem !important;
   text-align: center !important;
   font-size: 17px !important;
   margin-top: 0px !important;

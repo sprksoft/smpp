@@ -7,6 +7,8 @@ async function storeQuickSettings() {
   // Start from old settings
   const data = structuredClone(oldData);
 
+  data.appearance.theme = document.getElementById("theme-selector").value;
+
   data.appearance.background.blur = Number(
     document.getElementById("background-blur-amount-slider").value
   );

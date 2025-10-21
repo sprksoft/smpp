@@ -228,14 +228,12 @@
   width: 20rem !important;
 }
 
-#settings-page .full-file-input-container .smpp-text-input {
-  display: flex;
-  flex-grow: 1 !important;
-  width: unset !important;
-}
-
 #settings-page .full-file-input-container {
   width: 20rem !important;
+}
+
+#settings-page .full-file-input-container .smpp-text-input {
+  width: 100% !important;
 }
 
 #settings-page .smpp-text-input:focus {
@@ -399,11 +397,11 @@ label.settings-page-image-button-wrapper:has(input:checked) {
 }
 
 #settings-page-blur-slider {
-  width: 18rem;
+  width: 20rem;
 }
 
 .settings-page-blur-preview-container {
-  width: 18rem;
+  width: 20rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -453,9 +451,7 @@ label.settings-page-image-button-wrapper:has(input:checked) {
 }
 
 #settings-page .smpp-file-input-button,
-.settings-page-image-button-wrapper:has(
-    .settings-page-image-button-wrapper:checked
-  ),
+.settings-page-image-button-wrapper:has(input:checked),
 #settings-page .smpp-text-input,
 .settings-page-slider,
 .settings-page-slider-container,
