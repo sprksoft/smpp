@@ -49,7 +49,7 @@
         "fixes-utils/scraper.js",
         "fixes-utils/titlefix.js",
         "fixes-utils/results.js",
-        "main-features/userchanger.js",
+        "main-features/profile.js",
         "widgets/tutorial-widget.js",
         "widgets/assignments.js",
         "widgets/delijn.js",
@@ -85,9 +85,9 @@
     }
   ],
   "icons": {
-    "16": "media/icons/smpp16.png",
-    "48": "media/icons/smpp48.png",
-    "128": "media/icons/smpp128.png"
+    "16": "media/icons/smpp/16.png",
+    "48": "media/icons/smpp/48.png",
+    "128": "media/icons/smpp/128.png"
   },
   "browser_specific_settings": {
     "gecko": {

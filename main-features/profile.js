@@ -1,12 +1,5 @@
 // Voeg een nieuw inputveld toe zonder de originele inhoud te verwijderen (   thx voor de geen info lukas >:(   )
 
-function getOriginalName() {
-  return (
-    document.querySelector(".js-btn-profile .hlp-vert-box span")?.innerText ||
-    "Mr Unknown"
-  );
-}
-
 function createCustomNameInput(customName) {
   let parent = document.getElementById("smscMainBlockContainer");
   let customNameInputContainer =

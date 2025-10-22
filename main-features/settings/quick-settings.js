@@ -187,7 +187,7 @@ function createQuickSettings() {
   let quickSettingsWindow = document.createElement("div");
   quickSettingsWindow.id = "quickSettings";
   quickSettingsWindow.addEventListener("change", storeQuickSettings);
-  quickSettingsBackgroundImageSelector = new FileSelector("backgroundImage");
+  quickSettingsBackgroundImageSelector = new ImageSelector("backgroundImage");
   quickSettingsBackgroundImageSelector.onStore = () => {
     storeQuickSettings();
   };

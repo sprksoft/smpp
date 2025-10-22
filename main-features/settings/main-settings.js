@@ -745,7 +745,7 @@ class SettingsWindow extends BaseWindow {
         this.settingsPage.appendChild(
           createDescription("Upload your own custom profile picture")
         );
-        this.profilePictureInputContainer = new FileSelector("profilePicture");
+        this.profilePictureInputContainer = new ImageSelector("profilePicture");
         this.profilePictureInputContainer.loadImage();
         this.profilePictureInputContainer.onStore = () => {
           this.storePage();
@@ -823,7 +823,7 @@ class SettingsWindow extends BaseWindow {
           createDescription("Personalize your backdrop with a custom image.")
         );
 
-        this.backgroundImageSelector = new FileSelector("backgroundImage");
+        this.backgroundImageSelector = new ImageSelector("backgroundImage");
         this.backgroundImageSelector.loadImage();
         this.backgroundImageSelector.onStore = () => {
           this.storePage();
@@ -947,7 +947,7 @@ class SettingsWindow extends BaseWindow {
         );
         iconsContainer.appendChild(
           createImageButton(
-            "/icons/smpp128.png",
+            "/icons/smpp/128.png",
             "5rem",
             "5rem",
             "logo",

@@ -1,4 +1,4 @@
-class FileSelector {
+class ImageSelector {
   constructor(name) {
     this.name = name;
 
