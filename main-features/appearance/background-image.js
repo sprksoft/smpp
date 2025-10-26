@@ -12,8 +12,8 @@ async function setBackground(appearance) {
     img.style.position = "absolute";
     img.style.top = "0";
     img.style.left = "0";
-    img.style.width = "101%";
-    img.style.height = "101%";
+    img.style.width = "100%";
+    img.style.height = "100%";
     img.style.objectFit = "cover";
     img.style.zIndex = -1;
     img.style.display = "block";
