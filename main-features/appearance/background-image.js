@@ -22,20 +22,17 @@ async function setBackground(appearance) {
       document.body.appendChild(img);
     }
   }
-  let backgroundImageData = await browser.runtime.sendMessage({
-    action: "getImage",
+
+  let result = await browser.runtime.sendMessage({
+    action: "getImageURL",
     id: "backgroundImage",
   });
+  console.log(result);
 
-  switch (backgroundImageData.type) {
-    case "link":
-    case "file":
-      displayBackgroundImage(backgroundImageData.imageData);
-      break;
-    default:
-      displayBackgroundImage(
-        getImage("/theme-backgrounds/" + appearance.theme + ".jpg")
-      );
-      break;
+  if (result.isDefault) {
+    result.url = await getExtensionImage(
+      "/theme-backgrounds/" + appearance.theme + ".jpg"
+    );
   }
+  displayBackgroundImage(result.url);
 }

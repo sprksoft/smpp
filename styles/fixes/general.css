@@ -27,7 +27,6 @@ html {
   --color-base03: #000000;
   --darken-background: rgba(0, 0, 0, 0.2);
   --color-splashtext: #191817;
-  --profile-picture: url("");
 }
 
 html {
@@ -595,18 +594,6 @@ div.stdReplyWrapper {
 
 #theme-selector:hover {
   cursor: pointer !important;
-}
-
-.topnav__menu--search {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-nav.topnav {
-  border-bottom: none !important;
-  min-height: fit-content !important;
-  padding: 7px !important;
 }
 
 .popupinput {
@@ -1440,7 +1427,8 @@ span.js-badge-msg.topnav__badge {
 }
 
 .enableAnimations #searchMenu,
-.enableAnimations #notifsMenu {
+.enableAnimations #notifsMenu,
+.enableAnimations #profileMenu {
   animation: flyInFromTopNoTranslateX 0.3s ease forwards;
 }
 
@@ -2382,4 +2370,16 @@ body.modern-ui .homepage__block__content {
 
 #tabSpan_2 {
   background-image: none !important;
+}
+
+.smscTopNavMessage.blue {
+  background-color: var(--color-base03) !important;
+  color: var(--color-text) !important;
+  border-width: 0px !important;
+}
+
+#smscMainBlockContainer:has(.smscAdminNav_body) {
+  border: 2px solid var(--color-base02) !important;
+  border-radius: 2rem !important;
+  background: var(--color-base01) !important;
 }

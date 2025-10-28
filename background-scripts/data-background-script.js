@@ -119,3 +119,57 @@ export async function getImage(id) {
   if (!images[id]) return { type: "default", link: null, imageData: null };
   return images[id];
 }
+
+// Returns { url: string|null, revoke: () => void }
+export async function getImageURL(id) {
+  console.log(`[getImageURL] Fetching image URL with id: ${id}`);
+
+  let image;
+  try {
+    image = await getImage(id);
+  } catch (err) {
+    return { url: null, isDefault: true };
+  }
+
+  // Default
+  if (!image || image.type === "default") {
+    return { url: null, isDefault: true };
+  }
+
+  // Link
+  if (image.type === "link" && image.imageData) {
+    return { url: image.imageData, isDefault: false };
+  }
+
+  // File (base64)
+  try {
+    const res = await fetch(image.imageData);
+    console.log(res);
+    console.log("b");
+    let obj = { url: objectURL, isDefault: false };
+    console.log(obj);
+    console.log("cx");
+    const blob = await res.blob();
+    console.log({ url: objectURL, revoke: revokeAndCleanup, isDefault: false });
+    const objectURL = URL.createObjectURL(blob);
+    console.log({ url: objectURL, revoke: revokeAndCleanup, isDefault: false });
+    window.addEventListener("beforeunload", onUnload, { once: true });
+    let revoked = false;
+    const revoke = () => {
+      if (!revoked) {
+        URL.revokeObjectURL(objectURL);
+        revoked = true;
+      }
+    };
+    const revokeAndCleanup = () => {
+      revoke();
+      try {
+        window.removeEventListener("beforeunload", onUnload);
+      } catch (e) {}
+    };
+    console.log({ url: objectURL, revoke: revokeAndCleanup, isDefault: false });
+    return { url: objectURL, revoke: revokeAndCleanup, isDefault: false };
+  } catch (err) {
+    return { url: null, isDefault: false };
+  }
+}

@@ -144,9 +144,7 @@ intradesk-app#smscMain {
   flex-direction: row !important;
 }
 
-nav.topnav {
-  top: 0 !important;
-}
+
 
 body.modern-ui .homepage__block {
   padding: 5px !important;

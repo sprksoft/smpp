@@ -49,7 +49,7 @@ async function loadQuickSettings() {
   console.log("Loaded this data:", data);
   document.getElementById("theme-selector").value = data.appearance.theme;
 
-  quickSettingsBackgroundImageSelector.loadImage();
+  quickSettingsBackgroundImageSelector.loadImageData();
 
   document.getElementById("background-blur-amount-slider").value =
     data.appearance.background.blur;
@@ -191,7 +191,7 @@ function createQuickSettings() {
   quickSettingsBackgroundImageSelector.onStore = () => {
     storeQuickSettings();
   };
-  quickSettingsBackgroundImageSelector.loadImage();
+  quickSettingsBackgroundImageSelector.loadImageData();
   quickSettingsWindow = createQuickSettingsHTML(quickSettingsWindow);
 
   document

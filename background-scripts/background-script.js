@@ -18,6 +18,7 @@ import {
   getTheme,
   setImage,
   getImage,
+  getImageURL,
 } from "./data-background-script.js";
 import { fetchWeatherData, fetchDelijnData } from "./api-background-script.js";
 import { initGlobals } from "./json-loader.js";
@@ -162,6 +163,11 @@ async function handleMessage(message, sendResponse) {
       const image = await getImage(message.id);
       sendResponse(image || null);
       console.log(`Image with id:${message.id} sent.`);
+    }
+    if (message.action === "getImageURL") {
+      const image = await getImageURL(message.id);
+      sendResponse(image);
+      console.log(`Image URL with id:${message.id} sent.`);
     }
 
     // for migration, NEVER use this!!!

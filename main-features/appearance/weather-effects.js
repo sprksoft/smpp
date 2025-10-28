@@ -21,8 +21,8 @@ function set_snow_level(amount, opacity) {
     console.log(currentThemeName);
     flake.src =
       currentThemeName == "pink"
-        ? getImage("/icons/weather-overlay/blossom.svg")
-        : getImage("/icons/weather-overlay/snowflake.svg");
+        ? getExtensionImage("/icons/weather-overlay/blossom.svg")
+        : getExtensionImage("/icons/weather-overlay/snowflake.svg");
 
     flake.style.left = `${Math.floor(Math.random() * 100)}%`;
     flake.style.animation = `snowflake_fall_${Math.floor(Math.random() * 3)} ${
@@ -46,7 +46,7 @@ function set_rain_level(amount, opacity) {
   for (let i = 0; i < amount; i++) {
     let raindrop = document.createElement("img");
     raindrop.classList.add("raindrop");
-    raindrop.src = getImage("/icons/weather-overlay/raindrop.svg");
+    raindrop.src = getExtensionImage("/icons/weather-overlay/raindrop.svg");
     raindrop.style.left = `${Math.random() * 100}%`;
     raindrop.style.animation = `raindrop_fall ${
       Math.random() * 2 + 2

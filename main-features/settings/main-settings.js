@@ -114,7 +114,9 @@ class SettingsWindow extends BaseWindow {
     if (category === "appearance" && this.isPastaTime()) {
       imageFileName = "pasta.webp";
     }
-    categoryButtonIcon.src = getImage("settings-icons/" + imageFileName);
+    categoryButtonIcon.src = getExtensionImage(
+      "settings-icons/" + imageFileName
+    );
     categoryButton.prepend(categoryButtonIcon);
     return categoryButton;
   }
@@ -194,7 +196,7 @@ class SettingsWindow extends BaseWindow {
         }
 
         // Profile Picture
-        this.profilePictureInputContainer.loadImage();
+        this.profilePictureInputContainer.loadImageData();
         break;
       }
 
@@ -220,7 +222,7 @@ class SettingsWindow extends BaseWindow {
         }
 
         // Background
-        this.backgroundImageSelector.loadImage();
+        this.backgroundImageSelector.loadImageData();
 
         // Blur slider
         document.getElementById("settings-page-blur-slider").value =
@@ -650,7 +652,7 @@ class SettingsWindow extends BaseWindow {
 
       let image = document.createElement("img");
       image.classList.add("settings-page-image");
-      image.src = getImage(src);
+      image.src = getExtensionImage(src);
       image.width = width;
 
       wrapper.appendChild(input);
@@ -716,7 +718,7 @@ class SettingsWindow extends BaseWindow {
     function createImage(src, width, height) {
       let image = document.createElement("img");
       image.classList.add("settings-page-image");
-      image.src = getImage(src);
+      image.src = getExtensionImage(src);
       image.style.width = width;
       image.style.height = height;
       image.style.objectFit = "cover";
@@ -746,7 +748,7 @@ class SettingsWindow extends BaseWindow {
           createDescription("Upload your own custom profile picture")
         );
         this.profilePictureInputContainer = new ImageSelector("profilePicture");
-        this.profilePictureInputContainer.loadImage();
+        this.profilePictureInputContainer.loadImageData();
         this.profilePictureInputContainer.onStore = () => {
           this.storePage();
         };
@@ -824,7 +826,7 @@ class SettingsWindow extends BaseWindow {
         );
 
         this.backgroundImageSelector = new ImageSelector("backgroundImage");
-        this.backgroundImageSelector.loadImage();
+        this.backgroundImageSelector.loadImageData();
         this.backgroundImageSelector.onStore = () => {
           this.storePage();
         };

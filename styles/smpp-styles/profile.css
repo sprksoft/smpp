@@ -1,0 +1,19 @@
+.message-from-user .modern-message__image {
+  position: relative;
+}
+
+.message-from-user .modern-message__image img {
+  visibility: hidden; /* hides the original image */
+}
+
+.message-from-user .modern-message__image::after,
+.rounded_profile_photo {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--profile-picture);
+  background-size: cover;
+  background-position: center;
+  border-radius: 100000px;
+  aspect-ratio: 1;
+}

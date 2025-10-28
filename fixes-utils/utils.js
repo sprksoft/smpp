@@ -28,7 +28,7 @@ function unbloat() {
   document.body.innerHTML = "";
 }
 
-function getImage(name) {
+function getExtensionImage(name) {
   return chrome.runtime.getURL(`media/${name}`);
 }
 

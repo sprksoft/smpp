@@ -1,76 +1,47 @@
-// Voeg een nieuw inputveld toe zonder de originele inhoud te verwijderen (   thx voor de geen info lukas >:(   )
-
-function createCustomNameInput(customName) {
-  let parent = document.getElementById("smscMainBlockContainer");
-  let customNameInputContainer =
-    document.getElementById("custom-name-input-container") ||
-    document.createElement("div");
-  customNameInputContainer.id = "custom-name-input-container";
-
-  let customNameInput =
-    document.getElementById("custom-name-input") ||
-    document.createElement("input");
-  customNameInput.type = "text";
-  customNameInput.id = "custom-name-input";
-  customNameInput.placeholder = "Custom name";
-  customNameInput.value = customName == null ? "" : customName;
-  customNameInput.addEventListener("input", async function (event) {
-    if (event.target.value.trim() != "") {
-      displayUsernameTopNav(event.target.value);
-      await saveCustomName(event.target.value);
-    } else {
-      displayUsernameTopNav(originalUsername);
-      await saveCustomName(null);
-    }
-  });
-  if (!document.getElementById("custom-name-input-container")) {
-    customNameInputContainer.appendChild(customNameInput);
-    parent.appendChild(customNameInputContainer);
-  }
-}
-
-async function saveCustomName(name) {
-  const data = await browser.runtime.sendMessage({
-    action: "getSettingsData",
-  });
-  data.profile.username = name;
-  await browser.runtime.sendMessage({
-    action: "setSettingsData",
-    data: data,
-  });
-}
-function displayUsernameTopNav(name) {
+async function displayUsernameTopNav(name) {
   let style = document.documentElement.style;
   let originalNameElement = document.querySelector(
     ".js-btn-profile .hlp-vert-box span"
   );
   if (originalNameElement) originalNameElement.innerHTML = name;
-  style.setProperty("--profile-picture", "url(" + getPfpLink(name) + ")");
+
+  let result = await browser.runtime.sendMessage({
+    action: "getImageURL",
+    id: "profilePicture",
+  });
+
+  const profileImageURL = result.url;
+
+  if (result.isDefault) {
+    profileImageURL = getPfpLink(name || originalUsername);
+  }
+  style.setProperty("--profile-picture", "url(" + profileImageURL + ")");
 }
 
-function attachMessagesObserver(customName) {
+async function attachMessagesObserver() {
   const messagesList = document.getElementById("msglist");
   if (!messagesList) return;
 
   const observer = new MutationObserver((mutations) => {
+    // Check if we are on the "Sent messages" page
     const isSentMessagesPage =
       document.querySelector(".msgcell__head__title")?.innerText ===
       "Verzonden";
+
     for (const mutation of mutations) {
       for (const node of mutation.addedNodes) {
         if (node.nodeType === Node.TEXT_NODE) continue;
 
-        const nameElement = node.querySelector(".modern-message__name");
+        const nameElement = node.querySelector?.(".modern-message__name");
         if (!nameElement) continue;
 
+        // Check if this message is from the user
         const isUserMessage =
           nameElement.innerHTML.startsWith(originalUsername);
 
         if (isUserMessage || isSentMessagesPage) {
-          const image = node.querySelector(".modern-message__image img");
-          if (image) {
-            image.src = getPfpLink(customName || originalUsername);
-          }
+          // Add a class instead of changing the image
+          node.classList.add("message-from-user");
         }
       }
     }
@@ -83,12 +54,11 @@ function attachMessagesObserver(customName) {
 }
 
 async function userNameChanger(customName) {
-  if (window.location.href.includes("module=Profile"))
-    createCustomNameInput(customName);
   if (customName) {
     displayUsernameTopNav(customName);
   } else {
     displayUsernameTopNav(originalUsername);
   }
-  attachMessagesObserver(customName);
+
+  attachMessagesObserver();
 }

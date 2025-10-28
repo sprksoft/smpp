@@ -26,6 +26,7 @@
         "styles/smpp-styles/tutorial-widget.css",
         "styles/smpp-styles/settings.css",
         "styles/smpp-styles/assignments.css",
+        "styles/smpp-styles/profile.css",
         "styles/fixes/general.css",
         "styles/fixes/login.css",
         "styles/fixes/messages.css",
@@ -64,17 +65,17 @@
         "games/pong.js",
         "games/tetris.js",
         "main-features/keybinds.js",
-        "main-features/main.js",
         "main-features/appearance/background-image.js",
         "main-features/appearance/themes.js",
         "main-features/appearance/ui.js",
         "main-features/appearance/weather-effects.js",
-        "main-features/modules/image-storage.js",
+        "main-features/modules/images.js",
         "main-features/settings/quick-settings.js",
         "main-features/settings/main-settings.js",
         "main-features/quick-menu/dmenu.js",
         "main-features/quick-menu/config.js",
-        "main-features/quick-menu/quick.js"
+        "main-features/quick-menu/quick.js",
+        "main-features/main.js"
       ]
     }
   ],

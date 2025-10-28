@@ -711,6 +711,7 @@ input.settings-page-keybinding-input[type="text"]:not(
   border-radius: 0.75rem;
   border: 2px solid var(--color-base02);
   font-size: 1.4rem;
+  font-weight: 500;
   cursor: pointer;
 }
 
@@ -732,7 +733,6 @@ input.settings-page-keybinding-input[type="text"]:not(
 
 .reset-popup-cancel:hover {
   background-color: var(--color-base02);
-  font-weight: 600;
   border-color: var(--color-base03);
 }
 
@@ -745,6 +745,5 @@ input.settings-page-keybinding-input[type="text"]:not(
 .reset-popup-confirm:hover {
   background-color: var(--color-base03);
   border-color: var(--color-red);
-  font-weight: 700;
   color: var(--color-red) !important;
 }

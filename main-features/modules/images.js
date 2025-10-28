@@ -150,11 +150,11 @@ class ImageSelector {
       id: this.name,
       data,
     });
-    this.loadImage();
+    this.loadImageData();
     this.onStore();
   }
 
-  async loadImage() {
+  async loadImageData() {
     let data = await browser.runtime.sendMessage({
       action: "getImage",
       id: this.name,
