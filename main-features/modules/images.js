@@ -177,3 +177,68 @@ class ImageSelector {
     }
   }
 }
+
+// Returns { url: string|null, revoke: () => void }
+async function getImageURL(id, ifDefault) {
+  console.log(`[getImageURL] Fetching image with id: ${id}`);
+
+  let image;
+  try {
+    image = await browser.runtime.sendMessage({ action: "getImage", id });
+    console.log("[getImageURL] Received image object:", image);
+  } catch (err) {
+    console.warn("[getImageURL] Failed to get image from background:", err);
+    return { url: ifDefault ? ifDefault() : null, revoke: () => {} };
+  }
+
+  // Default
+  if (!image || image.type === "default") {
+    console.log("[getImageURL] Using default image");
+    return { url: ifDefault ? ifDefault() : null, revoke: () => {} };
+  }
+
+  // Link
+  if (image.type === "link" && image.imageData) {
+    console.log("[getImageURL] Using direct link:", image.imageData);
+    return { url: image.imageData, revoke: () => {} };
+  }
+
+  // File (base64)
+  console.log("[getImageURL] Detected base64 image, converting to Blob...");
+  try {
+    const res = await fetch(image.imageData);
+    const blob = await res.blob();
+    console.log("[getImageURL] Blob created:", blob);
+
+    const objectURL = URL.createObjectURL(blob);
+    console.log("[getImageURL] Object URL created:", objectURL);
+
+    let revoked = false;
+    const revoke = () => {
+      if (!revoked) {
+        URL.revokeObjectURL(objectURL);
+        revoked = true;
+        console.log("[getImageURL] Object URL revoked:", objectURL);
+      }
+    };
+
+    const onUnload = () => revoke();
+    window.addEventListener("beforeunload", onUnload, { once: true });
+
+    const revokeAndCleanup = () => {
+      revoke();
+      try {
+        window.removeEventListener("beforeunload", onUnload);
+        console.log("[getImageURL] Cleanup complete for:", objectURL);
+      } catch (e) {
+        console.warn("[getImageURL] Cleanup error:", e);
+      }
+    };
+
+    console.log("[getImageURL] Returning object URL");
+    return { url: objectURL, revoke: revokeAndCleanup };
+  } catch (err) {
+    console.warn("[getImageURL] Failed to create Blob URL:", err);
+    return { url: null, revoke: () => {} };
+  }
+}

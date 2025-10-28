@@ -152,6 +152,10 @@ async function createStaticGlobals() {
     document.querySelector(".js-btn-profile .hlp-vert-box span")?.innerText ||
     "Mr Unknown";
   isGOSchool = document.body.classList.contains("go");
+  isFirefox =
+    typeof navigator.userAgent === "string" &&
+    /firefox/i.test(navigator.userAgent);
+  originalPfpUrl = document.querySelector('img[alt="Profiel afbeelding"]').src;
 }
 
 async function applyAppearance(appearance) {
@@ -215,6 +219,7 @@ function applyProfile(profile) {
     "url(" + getPfpLink(profile.username || originalUsername) + ")"
   );
   userNameChanger(profile.username);
+  applyProfilePicture();
   if (!profile.profilePicture) decapitateಠ_ಠ();
 }
 

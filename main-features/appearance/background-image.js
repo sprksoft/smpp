@@ -22,17 +22,15 @@ async function setBackground(appearance) {
       document.body.appendChild(img);
     }
   }
-
   let result = await browser.runtime.sendMessage({
-    action: "getImageURL",
+    action: "getImage",
     id: "backgroundImage",
   });
-  console.log(result);
 
-  if (result.isDefault) {
-    result.url = await getExtensionImage(
+  if (result.type == "default") {
+    result.imageData = await getExtensionImage(
       "/theme-backgrounds/" + appearance.theme + ".jpg"
     );
   }
-  displayBackgroundImage(result.url);
+  displayBackgroundImage(result.imageData);
 }
