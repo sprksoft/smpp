@@ -751,6 +751,7 @@ class SettingsWindow extends BaseWindow {
         this.profilePictureInputContainer.loadImageData();
         this.profilePictureInputContainer.onStore = () => {
           this.storePage();
+          applyProfilePicture();
         };
 
         this.settingsPage.appendChild(

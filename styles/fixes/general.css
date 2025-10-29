@@ -2359,9 +2359,11 @@ body.modern-ui .homepage__block__content {
   background-position: center !important;
   display: block !important;
 }
-
+.pupil_nav_photo,
 .profile_header_photo {
   border-radius: 50% !important;
+  background-image: var(--profile-picture) !important;
+  background-size: cover !important;
 }
 
 .pupil_nav_photo {

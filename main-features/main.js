@@ -156,6 +156,7 @@ async function createStaticGlobals() {
     typeof navigator.userAgent === "string" &&
     /firefox/i.test(navigator.userAgent);
   originalPfpUrl = document.querySelector('img[alt="Profiel afbeelding"]').src;
+  profilePictureObserver = null;
 }
 
 async function applyAppearance(appearance) {
@@ -218,8 +219,8 @@ function applyProfile(profile) {
     "--profile-picture",
     "url(" + getPfpLink(profile.username || originalUsername) + ")"
   );
-  userNameChanger(profile.username);
-  applyProfilePicture();
+  applyUsername(profile.username);
+  applyProfilePicture(profile.username);
   if (!profile.profilePicture) decapitateಠ_ಠ();
 }
 
