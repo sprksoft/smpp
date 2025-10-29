@@ -48,3 +48,21 @@ function createGC() {
   GlobalChatOpenButton.addEventListener("click", (e) => openGlobalChat(e));
   return GlobalChatOpenButton;
 }
+
+const GC_URLS = [
+  "https://gc.smartschoolplusplus.com",
+  "https://gcbeta.smartschoolplusplus.com",
+];
+
+window.addEventListener("message", (e) => {
+  if (!GC_URLS.includes(e.origin)) {
+    return;
+  }
+
+  switch (e.data.action) {
+    case "getPlantData.v1":
+      //TODO: get the plant data
+      e.source.postMessage({});
+      break;
+  }
+});
