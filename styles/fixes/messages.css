@@ -264,7 +264,7 @@ body.modern-ui .homepage__block {
 
 .messageframe {
   border: 2px solid var(--color-base02) !important;
-  border-radius: 15px !important;
+  border-radius: 1.5rem !important;
   overflow: hidden !important;
   background-color: var(--darken-background) !important;
   backdrop-filter: blur(5px) !important;
