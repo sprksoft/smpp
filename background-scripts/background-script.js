@@ -9,7 +9,6 @@ import {
   getSettingsOptions,
   getWeatherAppData,
   getDelijnAppData,
-  getWidgetData,
   getDelijnColorData,
   getDefaultSettings,
   getPlantAppData,
@@ -100,7 +99,7 @@ async function handleMessage(message, sendResponse) {
       const settingsData = await getSettingsData();
       sendResponse(getByPath(settingsData, message.category));
       console.log(
-        "Settings data sent for this:" + message.category + "category"
+        "Settings data sent for this:" + message.category + "category",
       );
     }
     if (message.action === "getSettingsData") {
@@ -165,9 +164,8 @@ async function handleMessage(message, sendResponse) {
     }
     // for migration, NEVER use this!!!
     if (message.action === "getBackgroundImage") {
-      const backgroundImage = await browser.storage.local.get(
-        "backgroundImage"
-      );
+      const backgroundImage =
+        await browser.storage.local.get("backgroundImage");
       await browser.storage.local.remove("backgroundImage");
       sendResponse(backgroundImage || null);
       console.log("Background image sent.");
@@ -221,32 +219,28 @@ async function handleMessage(message, sendResponse) {
       console.log("Plant appdata sent.");
     }
     // Widgets
-    if (message.action === "getWidgetData") {
-      let widgetData = await getWidgetData();
-      sendResponse(widgetData);
+    if (message.action === "getWidgetLayout") {
+      console.log("loading widget layout");
+      const data = await browser.storage.local.get("widgets");
+      sendResponse(data.widgets);
     }
-    if (message.action === "setWidgetData") {
-      await browser.storage.local.set({ widgets: message.widgetData });
+    if (message.action === "setWidgetLayout") {
+      console.log("saving widget layout");
+      await browser.storage.local.set({ widgets: message.layout });
       sendResponse({ success: true });
     }
-    // Games
-    if (message.action === "getGameData") {
-      let gameData = await browser.storage.local.get("Game." + message.game);
-      gameData = gameData["Game." + message.game];
-      if (!gameData) {
-        sendResponse({
-          options: {},
-          score: 0,
-        });
-      } else {
-        sendResponse(gameData);
-      }
+    if (message.action === "getWidgetData") {
+      console.log("loading widget data");
+      const widgetId = "Game." + message.widget;
+      let data = await browser.storage.local.get(widgetId);
+      data = data[widgetId];
+      sendResponse(data);
     }
-    if (message.action === "setGameData") {
-      console.log("saving game data");
-      let gameData = {};
-      gameData["Game." + message.game] = message.data;
-      await browser.storage.local.set(gameData);
+    if (message.action === "setWidgetData") {
+      console.log("saving widget data");
+      let data = {};
+      data["Game." + message.widget] = message.data;
+      await browser.storage.local.set(data);
       sendResponse({ success: true });
     }
   } catch (err) {

@@ -48,22 +48,6 @@ function getFullOptPath(template, optName) {
   return optName;
 }
 
-function getByPath(object, path) {
-  let ob = object;
-  for (let node of path.split(".")) {
-    ob = ob[node];
-  }
-  return ob;
-}
-function setByPath(object, path, value) {
-  let ob = object;
-  const pathSplit = path.split(".");
-  for (let i = 0; i < pathSplit.length - 1; i++) {
-    ob = ob[pathSplit[i]];
-  }
-  ob[pathSplit[pathSplit.length - 1]] = value;
-}
-
 async function setSettingByPath(path, value) {
   await browser.runtime.sendMessage({
     action: "setSettingsCategory",

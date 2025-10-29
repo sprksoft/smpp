@@ -28,7 +28,8 @@ class GameBase extends WidgetBase {
   hasPlayedAtLeastOnce;
   #hiScore;
   #requestStopGame;
-  #options;
+  #optionValues;
+  #optionElements = {};
   #lastTs;
   #ctx;
 
@@ -62,7 +63,7 @@ class GameBase extends WidgetBase {
 
   // Start Protected (Use these functions in sub classes)
   getOpt(name) {
-    return this.#options[name];
+    return this.#optionValues[name];
   }
 
   stopGame() {
@@ -70,11 +71,14 @@ class GameBase extends WidgetBase {
     if (this.score > this.#hiScore) {
       this.#hiScore = this.score;
     }
-    this.#updateScore();
   }
   // End protected
 
-  #updateOpt(name, value, displayEl) {
+  #updateOpt(name, value) {
+    const displayEl = this.#optionElements[name].display;
+    const inputEl = this.#optionElements[name].input;
+    inputEl.value = value;
+
     let displayValue = Math.round(value / 10);
     displayValue /= 10;
     if (displayValue == Math.round(displayValue)) {
@@ -83,7 +87,7 @@ class GameBase extends WidgetBase {
     displayEl.innerText = displayValue + "x";
     displayEl.classList.add("game-option-value");
 
-    this.#options[name] = value * 1;
+    this.#optionValues[name] = value * 1;
   }
 
   #updateScore() {
@@ -100,7 +104,7 @@ class GameBase extends WidgetBase {
     if (this.#requestStopGame) {
       setTimeout(async () => {
         this.playing = false;
-        await this.#saveGameData();
+        this.setSetting("score", this.#hiScore);
 
         this.canvas.style.display = "none";
         this.menu.style.display = "flex";
@@ -119,17 +123,6 @@ class GameBase extends WidgetBase {
   }
   #tick() {}
 
-  async #saveGameData() {
-    await browser.runtime.sendMessage({
-      action: "setGameData",
-      game: this.constructor.name,
-      data: {
-        options: this.#options,
-        score: this.#hiScore,
-      },
-    });
-  }
-
   async #startGame() {
     this.canvas.style.display = "block";
     this.menu.style.display = "none";
@@ -145,21 +138,12 @@ class GameBase extends WidgetBase {
     });
   }
 
+  defaultSettings() {
+    return { score: 0, options: [] };
+  }
+
   async createContent() {
-    let gameData = await browser.runtime.sendMessage({
-      action: "getGameData",
-      game: this.constructor.name,
-    });
-    if (this.constructor.name == "SnakeWidget") {
-      if (window.localStorage.getItem("snakehighscore")) {
-        gameData = await migrateSnake();
-      }
-    } else if (this.constructor.name == "FlappyWidget") {
-      if (window.localStorage.getItem("flappyhighscore")) {
-        gameData = await migrateFlappy();
-      }
-    }
-    this.#options = {};
+    this.#optionValues = {};
 
     let div = document.createElement("div");
     div.classList.add("game-container");
@@ -192,7 +176,6 @@ class GameBase extends WidgetBase {
 
     this.#scoreEl = document.createElement("span");
     this.#scoreEl.classList.add("game-score");
-    this.#hiScore = gameData.score;
     menuTop.appendChild(this.#scoreEl);
 
     for (let opt of this.options) {
@@ -201,11 +184,6 @@ class GameBase extends WidgetBase {
       label.innerText = opt.title;
       menuBottom.appendChild(label);
 
-      let value = gameData.options[opt.name];
-      if (!value) {
-        value = opt.def;
-      }
-
       if (opt.type == GAME_OPTION_TYPE_SLIDER) {
         let sliderCont = document.createElement("div");
         sliderCont.classList.add("game-slide-container");
@@ -213,19 +191,20 @@ class GameBase extends WidgetBase {
         slider.type = "range";
         slider.min = opt.min;
         slider.max = opt.max;
-        slider.value = value;
+        slider.value = 0;
         slider.classList.add("game-slider");
         sliderCont.appendChild(slider);
 
         let display = document.createElement("span");
-        this.#updateOpt(opt.name, value, display);
         sliderCont.appendChild(display);
+        this.#optionElements[opt.name] = { display: display, input: slider };
 
-        slider.addEventListener("input", async (e) => {
-          this.#updateOpt(opt.name, e.target.value, display);
-          await this.#saveGameData();
+        slider.addEventListener("input", (e) => {
+          this.#updateOpt(opt.name, e.target.value);
         });
-        this.#updateScore();
+        slider.addEventListener("change", async (e) => {
+          await this.setSetting("options", this.#optionValues);
+        });
 
         menuBottom.appendChild(sliderCont);
       }
@@ -246,12 +225,28 @@ class GameBase extends WidgetBase {
 
     return div;
   }
-  async createPreview() {
-    let gameData = await browser.runtime.sendMessage({
-      action: "getGameData",
-      game: this.constructor.name,
-    });
+  async onSettingsChange(settings) {
+    if (this.constructor.name == "SnakeWidget") {
+      if (window.localStorage.getItem("snakehighscore")) {
+        settings = await migrateSnake();
+      }
+    } else if (this.constructor.name == "FlappyWidget") {
+      if (window.localStorage.getItem("flappyhighscore")) {
+        settings = await migrateFlappy();
+      }
+    }
+    for (let opt of this.options) {
+      let value = settings.options[opt.name];
+      if (!value) {
+        value = opt.def;
+      }
+      this.#updateOpt(opt.name, value);
+    }
 
+    this.#hiScore = settings.score;
+    this.#updateScore();
+  }
+  async createPreview() {
     let div = document.createElement("div");
     div.classList.add("game-container");
 
@@ -268,11 +263,6 @@ class GameBase extends WidgetBase {
       ? this.title
       : this.title + "++";
     menuTop.appendChild(title);
-
-    let scoreEl = document.createElement("span");
-    scoreEl.classList.add("game-score");
-    scoreEl.innerText = "Highscore: " + gameData.score;
-    menuTop.appendChild(scoreEl);
 
     let buttonEl = document.createElement("button");
     buttonEl.classList.add("game-button");
@@ -296,7 +286,8 @@ class GameBase extends WidgetBase {
   async onGameStart() {}
   // Called when the game to update (same on all devices)
   onGameTick() {}
-  // Called when the game needs to render a new frame (dt is time since last frame)
+  // Called when the game needs to render a new frame (dt is time since last
+  // frame)
   onGameDraw(ctx, deltaTime) {}
   async onKeyDown(e) {}
   async onKeyUp(e) {}
