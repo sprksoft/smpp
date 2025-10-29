@@ -48,7 +48,7 @@ class WidgetBase {
   #bagPlaceHolder;
   #bagGroup;
   #aboutToDel;
-  #settings;
+  settings;
 
   constructor() {
     this.element = this.#createWidgetDiv();
@@ -93,18 +93,19 @@ class WidgetBase {
       } else {
         this.element.classList.remove("smpp-widget-preview");
 
-        newContent = await this.createContent();
-
         const settings = await browser.runtime.sendMessage({
           action: "getWidgetData",
           widget: this.constructor.name,
         });
 
-        this.#settings = fillObjectWithDefaults(
+        this.settings = fillObjectWithDefaults(
           settings,
           this.defaultSettings(),
         );
-        await this.onSettingsChange(this.#settings);
+
+        newContent = await this.createContent();
+
+        await this.onSettingsChange();
       }
     } catch (e) {
       console.error("Failed to create widget content");
@@ -266,13 +267,13 @@ class WidgetBase {
 
   // modifies a setting
   async setSetting(path, value) {
-    setByPath(this.#settings, path, value);
+    setByPath(this.settings, path, value);
     await browser.runtime.sendMessage({
       action: "setWidgetData",
       widget: this.constructor.name,
-      data: this.#settings,
+      data: this.settings,
     });
-    await this.onSettingsChange(this.#settings);
+    await this.onSettingsChange();
   }
   // end Protected
 
@@ -303,7 +304,7 @@ class WidgetBase {
 
   // Gets called when the settings of the widget change.
   // Use this to update the widget content based on the new settings. (settings object is always valid based on the value returned by defaultSettings())
-  async onSettingsChange(settings) {}
+  async onSettingsChange() {}
 
   async onThemeChange() {}
 }

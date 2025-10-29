@@ -225,25 +225,25 @@ class GameBase extends WidgetBase {
 
     return div;
   }
-  async onSettingsChange(settings) {
+  async onSettingsChange() {
     if (this.constructor.name == "SnakeWidget") {
       if (window.localStorage.getItem("snakehighscore")) {
-        settings = await migrateSnake();
+        this.settings = await migrateSnake();
       }
     } else if (this.constructor.name == "FlappyWidget") {
       if (window.localStorage.getItem("flappyhighscore")) {
-        settings = await migrateFlappy();
+        this.settings = await migrateFlappy();
       }
     }
     for (let opt of this.options) {
-      let value = settings.options[opt.name];
+      let value = this.settings.options[opt.name];
       if (!value) {
         value = opt.def;
       }
       this.#updateOpt(opt.name, value);
     }
 
-    this.#hiScore = settings.score;
+    this.#hiScore = this.settings.score;
     this.#updateScore();
   }
   async createPreview() {
