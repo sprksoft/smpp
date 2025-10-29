@@ -1,37 +1,17 @@
 let active_dmenu = null;
 let dmenuConfig = null;
 
-// Fixes a broken or outdated dmenu config.
-async function fixupBrokenConfig(config, defaults = null) {
-  if (!defaults) {
-    defaults = await browser.runtime.sendMessage({
-      action: "getSettingsDefaults",
-      category: "other.dmenu",
-    });
-  }
-  if (!config) {
-    config = {}
-  }
-
-  for (let key of Object.keys(defaults)) {
-    if (typeof defaults[key] === "object" && !Array.isArray(defaults[key])) {
-      config[key] = fixupBrokenConfig(config[key], defaults[key]);
-    } else {
-      if (config[key] === undefined) {
-        config[key] = defaults[key];
-      }
-    }
-  }
-  return config;
-}
-
 // Called by apply
 async function reloadDMenuConfig() {
   dmenuConfig = await browser.runtime.sendMessage({
     action: "getSettingsCategory",
     category: "other.dmenu",
   });
-  dmenuConfig = await fixupBrokenConfig(dmenuConfig);
+  const defaults = await browser.runtime.sendMessage({
+    action: "getSettingsDefaults",
+    category: "other.dmenu",
+  });
+  dmenuConfig = fillObjectWithDefaults(dmenuConfig, defaults);
 
   // This is required because if the config was broken. It will still requested again in the :config menu.
   await browser.runtime.sendMessage({
@@ -62,7 +42,7 @@ class DMenu {
     itemList,
     endFunc = undefined,
     title = "dmenu:",
-    openerEl = undefined
+    openerEl = undefined,
   ) {
     this.endFunc = endFunc;
     this.openerEl = openerEl;
@@ -300,7 +280,7 @@ function dmenu(
   itemList,
   endFunc = undefined,
   title = "dmenu:",
-  opener = undefined
+  opener = undefined,
 ) {
   if (active_dmenu !== null && active_dmenu.isOpen()) {
     active_dmenu.close();

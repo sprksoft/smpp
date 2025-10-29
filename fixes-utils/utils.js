@@ -1,5 +1,56 @@
 const DEBUG = false;
 
+/// Get a value inside an object by path
+//
+///```js
+/// const ob = { sub1: { sub2: "hello" } };
+/// getByPath(ob, "sub1.sub2") === "hello"
+///```
+function getByPath(object, path) {
+  if (!path) {
+    return object;
+  }
+  let ob = object;
+  for (let node of path.split(".")) {
+    ob = ob[node];
+    if (ob === undefined) {
+      throw `getByPath: ${node} did not exist in path ${path}`;
+    }
+  }
+  return ob;
+}
+
+/// set a value inside an object by path
+function setByPath(object, path, value) {
+  let ob = object;
+  const pathSplit = path.split(".");
+  for (let i = 0; i < pathSplit.length - 1; i++) {
+    ob = ob[pathSplit[i]];
+    if (ob === undefined) {
+      throw `setByPath: ${pathSplit[i]} did not exist in path ${path}`;
+    }
+  }
+  ob[pathSplit[pathSplit.length - 1]] = value;
+}
+
+/// Fills missing fields in an object with values from a default object.
+function fillObjectWithDefaults(config, defaults) {
+  if (!config) {
+    config = {};
+  }
+
+  for (let key of Object.keys(defaults)) {
+    if (typeof defaults[key] === "object" && !Array.isArray(defaults[key])) {
+      config[key] = fillObjectWithDefaults(config[key], defaults[key]);
+    } else {
+      if (config[key] === undefined) {
+        config[key] = defaults[key];
+      }
+    }
+  }
+  return config;
+}
+
 function openURL(url, new_window = false) {
   if (new_window) {
     let a = document.createElement("a");
@@ -111,7 +162,7 @@ function getUserId() {
 
     const cookies = document.cookie.split(";");
     const plannerUrlCookie = cookies.find((cookie) =>
-      cookie.trim().startsWith("plannerUrl=")
+      cookie.trim().startsWith("plannerUrl="),
     );
 
     if (plannerUrlCookie) {
@@ -123,7 +174,7 @@ function getUserId() {
       sendDebug("Extracted userId from cookie plannerUrl:", userId);
     } else {
       console.error(
-        "UID is fucked, refresh 5 keer en als het dan niet werkt vraag hulp op discord @JJorne"
+        "UID is fucked, refresh 5 keer en als het dan niet werkt vraag hulp op discord @JJorne",
       );
     }
   }

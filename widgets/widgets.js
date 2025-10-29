@@ -48,6 +48,7 @@ class WidgetBase {
   #bagPlaceHolder;
   #bagGroup;
   #aboutToDel;
+  #settings;
 
   constructor() {
     this.element = this.#createWidgetDiv();
@@ -91,7 +92,19 @@ class WidgetBase {
         newContent = await this.createPreview();
       } else {
         this.element.classList.remove("smpp-widget-preview");
+
         newContent = await this.createContent();
+
+        const settings = await browser.runtime.sendMessage({
+          action: "getWidgetData",
+          widget: this.constructor.name,
+        });
+
+        this.#settings = fillObjectWithDefaults(
+          settings,
+          this.defaultSettings(),
+        );
+        await this.onSettingsChange(this.#settings);
       }
     } catch (e) {
       console.error("Failed to create widget content");
@@ -100,7 +113,7 @@ class WidgetBase {
     }
     if (!newContent) {
       console.error(
-        "createContent and createPreview method's needs to return an html object. in widget impl"
+        "createContent and createPreview method's needs to return an html object. in widget impl",
       );
       newContent = createWidgetErrorContent(this.name);
     }
@@ -184,7 +197,7 @@ class WidgetBase {
         let pannel = await createPannelHTML({ widgets: [] });
         pannelContainer.insertBefore(
           createInsertionPointHTML(true),
-          targetIp.nextElementSibling
+          targetIp.nextElementSibling,
         );
         pannelContainer.insertBefore(pannel, targetIp.nextElementSibling);
         targetIp = pannel.firstChild;
@@ -194,7 +207,7 @@ class WidgetBase {
       targetPannel.style.display = "block";
       targetPannel.insertBefore(
         createInsertionPointHTML(),
-        targetIp.nextElementSibling
+        targetIp.nextElementSibling,
       );
       targetPannel.insertBefore(el, targetIp.nextElementSibling);
 
@@ -214,6 +227,7 @@ class WidgetBase {
   }
 
   startDragging(grabX, grabY) {
+    console.log("start dragging: " + this.constructor.name);
     if (!widgetEditMode) {
       return;
     }
@@ -238,9 +252,8 @@ class WidgetBase {
     el.style.width = rect.width + "px";
     el.style.left = rect.left + "px";
     el.style.top = rect.top + "px";
-    el.style[
-      "transform-origin"
-    ] = `${curDragInfo.offset.x}px ${curDragInfo.offset.y}px`;
+    el.style["transform-origin"] =
+      `${curDragInfo.offset.x}px ${curDragInfo.offset.y}px`;
 
     el.classList.add("smpp-widget-dragging");
 
@@ -248,6 +261,20 @@ class WidgetBase {
 
     closeBag();
   }
+
+  // Protected (use inside of child classes)
+
+  // modifies a setting
+  async setSetting(path, value) {
+    setByPath(this.#settings, path, value);
+    await browser.runtime.sendMessage({
+      action: "setWidgetData",
+      widget: this.constructor.name,
+      data: this.#settings,
+    });
+    await this.onSettingsChange(this.#settings);
+  }
+  // end Protected
 
   // Override us
   // Name of the widget
@@ -260,6 +287,11 @@ class WidgetBase {
     return "other";
   }
 
+  // Returns the default settings. (will be filled in so that you always get a valid settings object inside onSettingsChange )
+  defaultSettings() {
+    return {};
+  }
+
   // (Required): Gets called when the content element of the widget needs to be
   // created (return html element). (Don't do slow tasks in here)
   async createContent() {}
@@ -268,6 +300,10 @@ class WidgetBase {
   async createPreview() {
     return await this.createContent();
   }
+
+  // Gets called when the settings of the widget change.
+  // Use this to update the widget content based on the new settings. (settings object is always valid based on the value returned by defaultSettings())
+  async onSettingsChange(settings) {}
 
   async onThemeChange() {}
 }
@@ -317,11 +353,11 @@ class SmartschoolWidget extends WidgetBase {
 function targetInsertionPoint(target) {
   if (target !== curDragInfo.targetInsertionPoint) {
     curDragInfo.targetInsertionPoint?.classList.remove(
-      "smpp-widget-insertion-point-targeted"
+      "smpp-widget-insertion-point-targeted",
     );
     curDragInfo.targetInsertionPoint = target;
     curDragInfo.targetInsertionPoint?.classList.add(
-      "smpp-widget-insertion-point-targeted"
+      "smpp-widget-insertion-point-targeted",
     );
   }
 }
@@ -503,7 +539,7 @@ async function createWidgetSystem() {
     return false;
   }
   let widgetData = await browser.runtime.sendMessage({
-    action: "getWidgetData",
+    action: "getWidgetLayout",
   });
   console.log("Widget data: \n", widgetData);
   let setDefaults = false;
@@ -517,7 +553,7 @@ async function createWidgetSystem() {
 
   // Create smartschool default widgets
   for (let smWidget of document.querySelectorAll(
-    "#rightcontainer .homepage__block"
+    "#rightcontainer .homepage__block",
   )) {
     let wName = "SmartschoolWidget-" + smWidget.id;
     registerWidget(new SmartschoolWidget(smWidget));
@@ -526,7 +562,7 @@ async function createWidgetSystem() {
     }
   }
   for (let smWidget of document.querySelectorAll(
-    "#leftcontainer .homepage__block"
+    "#leftcontainer .homepage__block",
   )) {
     let wName = "SmartschoolWidget-" + smWidget.id;
     registerWidget(new SmartschoolWidget(smWidget));
@@ -541,7 +577,7 @@ async function createWidgetSystem() {
   widgetsContainer = await createWidgetsContainerHTML(
     widgetData,
     news,
-    newsState
+    newsState,
   );
 
   container.innerHTML = "";
@@ -577,8 +613,8 @@ async function saveWidgets() {
     }
   }
   await browser.runtime.sendMessage({
-    action: "setWidgetData",
-    widgetData: widgetData,
+    action: "setWidgetLayout",
+    layout: widgetData,
   });
 }
 
@@ -743,7 +779,7 @@ function getWidgetByName(name) {
 async function setEditMode(value) {
   if (value && !widgetEditModeInit) {
     console.error(
-      "Widget edit mode has not been initalized. setEditMode(true) has been called. (call initWidgetEditMode first) (This is a bug)"
+      "Widget edit mode has not been initalized. setEditMode(true) has been called. (call initWidgetEditMode first) (This is a bug)",
     );
   }
 
@@ -776,7 +812,7 @@ function initWidgetEditMode() {
 
   if (!widgetSystemCreated) {
     console.error(
-      "Widget system has not been created yet. But initWidgetEditMode has been called"
+      "Widget system has not been created yet. But initWidgetEditMode has been called",
     );
     return;
   }

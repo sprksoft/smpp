@@ -94,6 +94,7 @@ class PongWidget extends GameBase {
       b.dy *= -1;
     }
 
+    // Ball Hit by left paddle
     if (
       b.x < PONG_PADDLE_WIDTH + PONG_BALL_RADIUS &&
       b.y > this.leftY &&
@@ -107,8 +108,11 @@ class PongWidget extends GameBase {
 
       b.dx = Math.sign(b.dx) * Math.min(Math.abs(b.dx), MAX_SPEED);
       b.dy = Math.sign(b.dy) * Math.min(Math.abs(b.dy), MAX_SPEED);
+
+      this.score++;
     }
 
+    // Ball Hit by right paddle
     if (
       b.x > w - PONG_PADDLE_WIDTH - PONG_BALL_RADIUS &&
       b.y > this.rightY &&

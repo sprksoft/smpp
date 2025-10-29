@@ -25,11 +25,6 @@ export async function getSettingsData() {
   return data.settingsData || getDefaultSettings();
 }
 
-export async function getWidgetData() {
-  let data = await browser.storage.local.get("widgets");
-  return data.widgets;
-}
-
 export async function getWeatherAppData() {
   let data = await browser.storage.local.get("weatherAppData");
   let weatherAppData = data.weatherAppData || {
@@ -93,7 +88,7 @@ export async function getDelijnColorData() {
       delijnColorData = data.delijnColorData;
     } else {
       delijnColorData = await fetchDelijnData(
-        "https://api.delijn.be/DLKernOpenData/api/v1/kleuren"
+        "https://api.delijn.be/DLKernOpenData/api/v1/kleuren",
       );
     }
 
