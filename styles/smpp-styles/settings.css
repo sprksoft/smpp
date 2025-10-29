@@ -99,6 +99,7 @@
   background-image: var(--profile-picture);
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
   border-radius: 10000px;
   height: 100%;
   aspect-ratio: 1;
@@ -622,27 +623,26 @@ input.settings-page-keybinding-input[type="text"]:not(
 }
 
 .settings-page-reset-button {
-  background-color: var(--color-base01);
-  border: 2px solid var(--color-base02);
-  border-radius: 1000rem;
-  padding: 1rem 1.5rem;
-  font-size: 1.4rem;
-  font-weight: 500;
-  width: 16.5rem;
-  cursor: pointer;
-  color: var(--color-text);
-  margin-bottom: 1rem;
+  background-color: var(--color-base01) !important;
+  border: 2px solid var(--color-base02) !important;
+  border-radius: 1000rem !important;
+  padding: 1rem 1.5rem !important;
+  font-size: 1.4rem !important;
+  font-weight: 500 !important;
+  width: 16.5rem !important ;
+  cursor: pointer !important;
+  color: var(--color-text) !important;
+  margin-bottom: 1rem !important;
 }
 
 .enableAnimations .settings-page-reset-button {
   transition-property: border-color, background-color, transform;
-  transition: 0.2s ease-in-out;
+  transition: 0.15s ease-in-out;
 }
 
 .settings-page-reset-button:hover {
-  background-color: var(--color-base02);
-  border-color: var(--color-base03);
-  font-weight: 700;
+  background-color: var(--color-base02) !important;
+  border-color: var(--color-base03) !important;
 }
 
 .settings-page-reset-button:active {
@@ -710,8 +710,8 @@ input.settings-page-keybinding-input[type="text"]:not(
   border: none;
   border-radius: 0.75rem;
   border: 2px solid var(--color-base02);
-  font-size: 1.4rem;
-  font-weight: 500;
+  font-size: 1.4rem !important;
+  font-weight: 500 !important;
   cursor: pointer;
 }
 
@@ -746,4 +746,8 @@ input.settings-page-keybinding-input[type="text"]:not(
   background-color: var(--color-base03);
   border-color: var(--color-red);
   color: var(--color-red) !important;
+}
+
+#profile-picture-input-container {
+  margin-bottom: 1rem !important;
 }

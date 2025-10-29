@@ -65,7 +65,6 @@ textarea .modern-ui,
 
 .js-btn-profile > img,
 .header__avatar,
-.topnav__menuitem > img,
 .splitdetail__header__avatar > img,
 .smsc-tabslist__item:before,
 .smsc-tabslist__item:after {
@@ -74,6 +73,7 @@ textarea .modern-ui,
 
 .messageframe:has(#msgdetail):has(.msgDetail--empty) {
   background-color: var(--darken-background) !important;
+  backdrop-filter: blur(5px) !important;
 }
 
 .smsc-container .smsc-container--left,
@@ -1567,7 +1567,7 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
 
 .smscComposeMessage {
   background-color: var(--darken-background) !important;
-  backdrop-filter: var(--blur-value-small) !important;
+  backdrop-filter: blur(5px) !important;
   border: 2px solid var(--color-base02) !important;
 }
 
@@ -1807,6 +1807,7 @@ body.modern-ui .smscMain .smsc-container {
 }
 
 #background_image {
+  filter: var(--blur-value-small) !important;
   background-color: var(--color-base00) !important;
 }
 
@@ -1822,6 +1823,7 @@ h3.title.fluid-ui-heading.fluid-ui-heading--3,
 smsc-listview {
   border-radius: 10px !important;
   background-color: var(--darken-background);
+  backdrop-filter: blur(5px) !important;
 }
 
 body.modern-ui table {
@@ -1847,6 +1849,7 @@ input.smsc-inlineeditor--editable.smsc-inlineeditor__input.js-inlineEditor-input
   border: 2px solid var(--color-base02) !important;
   box-shadow: none !important;
   background-color: var(--darken-background) !important;
+  backdrop-filter: blur(5px) !important;
 }
 hr.smsc-dialog__ruler,
 .deliberation-line-picker__button-bar {
@@ -2016,23 +2019,6 @@ div.smscCheckbox input[type="checkbox"]:not(.loading):focus + label:before {
   border: none !important;
 }
 
-.topnav__menuitem--img {
-  background-image: var(--profile-picture) !important;
-  background-position: 0 !important;
-  background-repeat: no-repeat !important;
-  background-size: 24px !important;
-  padding: 0.57em 8px 0.57em 40px !important;
-}
-
-.enableAnimations .topnav__menuitem--img {
-  transition: background-position 0.15s ease-out,
-    background-color 0.15s ease-out, margin 0.15s ease-out !important;
-}
-
-.topnav__menuitem--img:hover {
-  background-position-x: 8px !important;
-}
-
 span[style^="color:"]:not(.lijnNumber),
 span[style*="; color:"]:not(.lijnNumber),
 span[style*=";color:"]:not(.lijnNumber),
@@ -2056,7 +2042,7 @@ span[style*="background"]:not(.lijnNumber),
 div[style*="background"]:not(.manual_widgettitle) {
   background-color: transparent !important;
 }
-/*code hier boven heeft ervoor gezorcht dat dit bij de planner moest ):[ */
+/*code hier boven heeft ervoor gezorgt dat dit bij de planner moest ):[ */
 .bubble-s87kI {
   background-color: var(--color-base01) !important;
   border: 2px solid var(--color-base02) !important;
@@ -2128,7 +2114,7 @@ label.checkbox.js-checkbox.form-page__receive-copy-by-mail-checkbox {
 
 .smsc-container.form-completed-page__content {
   background-color: var(--darken-background) !important;
-  backdrop-filter: var(--blur-value-small) !important;
+  backdrop-filter: blur(5px) !important;
   background-image: none !important;
   height: fit-content;
 }
@@ -2170,6 +2156,7 @@ span.smsc-treeitem__label {
 div#folders {
   border-radius: 15px !important;
   background-color: var(--darken-background) !important;
+  backdrop-filter: blur(5px) !important;
   margin-left: 5px !important;
   font-weight: 500 !important;
   padding-top: 1rem;
@@ -2338,8 +2325,7 @@ body.modern-ui .homepage__block__content {
 }
 
 .rounded_profile_photo {
-  width: 64px !important;
-  height: 64px !important;
+  aspect-ratio: 1;
   border-radius: 50% !important;
   object-fit: cover !important;
   display: block !important;

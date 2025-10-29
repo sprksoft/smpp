@@ -6,7 +6,6 @@ async function displayUsernameTopNav(name) {
 }
 
 async function attachProfilePictureObserver(url) {
-  console.log("ADDING THE OBSERVER AGAIN FOR URL:", url);
   // helper to process a single <img> element
   function processImg(img) {
     try {

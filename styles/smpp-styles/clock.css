@@ -73,6 +73,7 @@
   width: 50%;
   margin: 0px 25%;
   background-color: var(--darken-background);
+  backdrop-filter: blur(5px) !important;
   aspect-ratio: 1;
   position: relative;
 }

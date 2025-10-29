@@ -158,6 +158,7 @@ input::placeholder {
 .glass .smsc-topnav .topnav__menu,
 .glass .smsctooltip {
   background-color: var(--darken-background) !important;
+  backdrop-filter: blur(5px) !important;
 }
 
 .glass .topnav__menu-wrapper {

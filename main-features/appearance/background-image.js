@@ -18,7 +18,10 @@ async function setBackground(appearance) {
     img.style.zIndex = -1;
     img.style.display = "block";
     if (image) img.src = image;
-    if (!document.getElementById("background_image")) {
+    if (
+      !document.getElementById("background_image") &&
+      !document.getElementById("tinymce") // check for message writing box
+    ) {
       document.body.appendChild(img);
     }
   }

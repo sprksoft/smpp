@@ -4,6 +4,7 @@
   color: var(--color-text) !important;
   padding-top: 0px !important;
   background: var(--darken-background) !important;
+  backdrop-filter: blur(5px) !important;
   height: fit-content !important;
   padding: 7px !important;
   margin-left: 4px !important;
@@ -94,19 +95,6 @@
   background-color: transparent !important;
 }
 
-upload-app.smsc-container.smsc-container--flex,
-.course-module-planner__header,
-.course-module-planner,
-.showLeftNav:not(:has(.login-app)),
-#smscMain:not(:has(.login-app)):not(:has(.homepage)):not(mydoc-app):not(
-    :has(.session-list)
-  ):not(:has(#js-wiki-home)):not(.smscMain--tb-main),
-.timetable,
-.online-session-page {
-  backdrop-filter: var(--blur-value-small) !important;
-  background-color: var(--darken-background) !important;
-}
-
 .side-panel__panel {
   box-shadow: none !important;
 }
@@ -140,6 +128,7 @@ button.reset-filters-btn.reset-filters-btn--hidden {
 
 .goal-evaluations-details__row {
   background: var(--darken-background) !important;
+  backdrop-filter: blur(5px) !important;
 }
 
 input.input.bootstrap__input.search-input {
@@ -158,15 +147,19 @@ input.input.bootstrap__input.search-input {
   margin-top: 1em;
 }
 
+.contentContainer {
+  background-color: transparent !important;
+}
+
 .evaluation-list-item,
 .dropdown-button,
 .goals-filter__item,
-.contentContainer,
 .content_container,
 .navigation_container {
-  background-color: var(--color-base01) !important;
+  background-color: var(--darken-background) !important;
+  backdrop-filter: blur(5px) !important;
   color: var(--color-text) !important;
-  border-color: var(--color-base02) !important;
+  border-color: var(--color-base01) !important;
 }
 
 button.goals-filter__item.selected {
@@ -379,6 +372,7 @@ span.evaluation-graphic__progress-ring__value {
   .title-and-schoolyear-selector__period-container:not(:disabled) {
   border-color: var(--color-accent) !important;
   background-color: var(--darken-background) !important;
+  backdrop-filter: blur(5px) !important;
 }
 
 .title-and-schoolyear-selector

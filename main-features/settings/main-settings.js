@@ -125,7 +125,13 @@ class SettingsWindow extends BaseWindow {
     this.settingsPage.innerHTML = " ";
   }
 
-  addDisclaimer(element) {
+  addDisclaimer(
+    element,
+    disclaimerHTML = `
+    * Changes will only apply after 
+    <a class="settings-page-disclaimer-button" href="#" onclick="window.location.href = window.location.href; return false;">reload</a>
+  `
+  ) {
     if (
       element.nextElementSibling?.classList.contains("settings-page-disclaimer")
     ) {
@@ -134,10 +140,7 @@ class SettingsWindow extends BaseWindow {
 
     const disclaimer = document.createElement("span");
     disclaimer.classList.add("settings-page-disclaimer");
-    disclaimer.innerHTML = `
-    * Changes will only apply after 
-    <a class="settings-page-disclaimer-button" href="#" onclick="window.location.href = window.location.href; return false;">reload</a>
-  `;
+    disclaimer.innerHTML = disclaimerHTML;
 
     element.insertAdjacentElement("afterend", disclaimer);
   }
@@ -175,7 +178,7 @@ class SettingsWindow extends BaseWindow {
     cancelButton.addEventListener("click", () => popup.remove());
     confirmButton.addEventListener("click", async () => {
       popup.remove();
-      await clearsettings();
+      await clearAllData();
     });
   }
 
@@ -196,7 +199,7 @@ class SettingsWindow extends BaseWindow {
         }
 
         // Profile Picture
-        this.profilePictureInputContainer.loadImageData();
+        this.profilePictureInput.loadImageData();
         break;
       }
 
@@ -745,18 +748,29 @@ class SettingsWindow extends BaseWindow {
         );
         this.settingsPage.appendChild(createSectionTitle("Profile Picture"));
         this.settingsPage.appendChild(
-          createDescription("Upload your own custom profile picture")
+          createDescription(
+            isFirefox
+              ? "Upload your own profile picture, large files not recommended on Firefox"
+              : "Upload your own profile picture"
+          )
         );
-        this.profilePictureInputContainer = new ImageSelector("profilePicture");
-        this.profilePictureInputContainer.loadImageData();
-        this.profilePictureInputContainer.onStore = () => {
+        this.profilePictureInput = new ImageSelector("profilePicture");
+        this.profilePictureInput.loadImageData();
+        this.profilePictureInput.onStore = () => {
           this.storePage();
           applyProfilePicture();
+          this.addDisclaimer(
+            document.getElementById("profile-picture-input-container"),
+            `
+              * Some changes will only apply after 
+              <a class="settings-page-disclaimer-button" href="#" onclick="window.location.href = window.location.href; return false;">reload</a>
+            `
+          );
         };
-
-        this.settingsPage.appendChild(
-          this.profilePictureInputContainer.createFullFileInput()
-        );
+        let profilePictureInputContainer =
+          this.profilePictureInput.createFullFileInput();
+        profilePictureInputContainer.id = "profile-picture-input-container";
+        this.settingsPage.appendChild(profilePictureInputContainer);
 
         break;
       case "appearance":

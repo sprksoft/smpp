@@ -99,7 +99,7 @@ async function migrateWeaterData() {
   localStorage.removeItem("lastlocation");
 }
 
-async function migrateSettings() {
+async function migrateSettingsV1() {
   let oldData = JSON.parse(window.localStorage.getItem("settingsdata"));
   console.log("Old data:", oldData);
   // Convert to widgets
@@ -236,6 +236,12 @@ async function migrateSettings() {
   migrateSettingsV2();
 }
 
+async function migrateV2() {
+  migrateSettingsV2();
+  migrateWidgetSettingsData();
+  migrate;
+}
+
 async function migrateSettingsV2() {
   const data = await browser.runtime.sendMessage({
     action: "getSettingsData",
@@ -328,4 +334,25 @@ async function migrateSettingsV2() {
     data: newSettingsData,
   });
   console.log("migrated v2");
+}
+
+async function migrate() {
+  await removeLegacyData(); // will reload the page if legacy data is present
+
+  let settingsData = await browser.runtime.sendMessage({
+    action: "getSettingsData",
+  });
+
+  if (settingsData.theme != null) {
+    await migrateSettingsV2();
+    settingsData = await browser.runtime.sendMessage({
+      action: "getSettingsData",
+    });
+  }
+}
+
+async function removeLegacyData() {
+  if (window.localStorage.getItem("settingsdata")) {
+    await clearAllData();
+  }
 }

@@ -16,7 +16,7 @@ function delay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms)); // no hate please 👉👈 // GRRRR
 }
 
-async function clearsettings() {
+async function clearAllData() {
   localStorage.clear();
   await browser.runtime.sendMessage({
     action: "clearLocalStorage",

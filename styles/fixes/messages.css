@@ -144,8 +144,6 @@ intradesk-app#smscMain {
   flex-direction: row !important;
 }
 
-
-
 body.modern-ui .homepage__block {
   padding: 5px !important;
 }
@@ -269,6 +267,7 @@ body.modern-ui .homepage__block {
   border-radius: 15px !important;
   overflow: hidden !important;
   background-color: var(--darken-background) !important;
+  backdrop-filter: blur(5px) !important;
   padding: 5px 5px 0px 5px !important;
 }
 
@@ -532,6 +531,7 @@ button.accswitchmain.mbnotselected {
 
 .tox .tox-dialog-wrap__backdrop {
   background-color: var(--darken-background) !important;
+  backdrop-filter: blur(5px) !important;
 }
 
 td#tabmaina {
@@ -684,6 +684,7 @@ upload-app.smsc-container.smsc-container--flex {
 smsc-tabs .smsc-tabslist__item,
 .smsc-table__row.smsc-table__row--nohover.smsc-table__row--noborder {
   background-color: var(--darken-background) !important;
+  backdrop-filter: blur(5px) !important;
 }
 
 .smsc-table__row.smsc-table__row--nohover.smsc-table__row--noborder:hover,

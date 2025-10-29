@@ -1,9 +1,6 @@
 if (browser == undefined) {
-  // Because this is the first file
   var browser = chrome;
 }
-let manifest = browser.runtime.getManifest();
-const liteMode = chrome.runtime.getManifest().name.includes("Lite");
 
 function vak_prefix(page) {
   switch (page) {

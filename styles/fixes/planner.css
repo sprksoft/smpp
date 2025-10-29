@@ -230,6 +230,7 @@
 .content__day-column.js-day-column.highlight,
 .header__day.header__wholeday-column.js-wholeday-column.highlight {
   background-color: var(--darken-background) !important;
+  backdrop-filter: blur(5px) !important;
   border-radius: 10px !important;
 }
 
@@ -419,6 +420,7 @@ button.evaluation-list-item {
 
 .todo-column__container {
   background-color: var(--darken-background) !important;
+  backdrop-filter: blur(5px) !important;
   border-radius: 10px !important;
 }
 
@@ -476,6 +478,7 @@ button.icon-label-btn.js-icon-label-btn.icon-label-btn--linkbutton:hover {
 .month-view .grid-day.state--hovered,
 .month-view .week-day:not(.day--today).state--hovered .day-label {
   background-color: var(--darken-background) !important;
+  backdrop-filter: blur(5px) !important;
 }
 
 .month-view .header-row,

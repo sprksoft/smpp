@@ -1,9 +1,5 @@
 let quicks = [];
 
-(async () => {
-  quicks = await quick_load();
-})();
-
 let links = [];
 let vakken = [];
 let goto_items = [];
@@ -227,7 +223,7 @@ async function do_qm(opener = "") {
           openURL("/");
           return;
         case "clearsettings":
-          clearsettings();
+          clearAllData();
           return;
         case "glass":
           document.body.classList.add("glass");

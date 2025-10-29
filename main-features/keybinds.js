@@ -1,5 +1,6 @@
 document.addEventListener("keyup", async (e) => {
   if (e.target?.tagName === "INPUT") return;
+  if (e.target?.tagName === "TEXTAREA") return;
   if (document.getElementById("tinymce")) return;
 
   const key =

@@ -134,12 +134,6 @@ function applyTopNav(data) {
   }
 }
 
-function fixMessageBox() {
-  if (document.getElementById("tinymce")) {
-    document.getElementById("background_image")?.remove();
-  }
-}
-
 async function createStaticGlobals() {
   themes = await browser.runtime.sendMessage({
     action: "getAllThemes",
@@ -157,6 +151,10 @@ async function createStaticGlobals() {
     /firefox/i.test(navigator.userAgent);
   originalPfpUrl = document.querySelector('img[alt="Profiel afbeelding"]').src;
   profilePictureObserver = null;
+
+  quicks = await quick_load();
+  liteMode = browser.runtime.getManifest().name.includes("Lite");
+  console.log(liteMode);
 }
 
 async function applyAppearance(appearance) {
@@ -251,7 +249,6 @@ async function apply() {
   applyTopNav(data.topNav);
   applyWidgets(data.widgets);
   applyOther(data.other);
-  fixMessageBox();
 }
 
 async function storeCustomThemeData() {
@@ -354,40 +351,16 @@ function updateTopButtons(data) {
 
 async function main() {
   if (document.body.classList.contains("smpp")) {
-    console.error("SMPP is waarschijnlijk 2 keer geladen");
-    alert("SMPP is 2x geladen waarschijnlijk");
+    console.error("SMPP is 2x geladen");
+    alert("SMPP is 2x geladen");
   }
 
   document.body.classList.add("smpp"); // For modding
-  if (window.localStorage.getItem("settingsdata")) {
-    await migrateSettings();
-  }
 
-  let settingsData = await browser.runtime.sendMessage({
-    action: "getSettingsData",
-  });
-
-  if (settingsData.theme != null) {
-    await migrateSettingsV2();
-    settingsData = await browser.runtime.sendMessage({
-      action: "getSettingsData",
-    });
-  }
-
-  const backgroundImage = await browser.runtime.sendMessage({
-    action: "getBackgroundImage",
-  });
-  if (backgroundImage["backgroundImage"]) {
-    await browser.runtime.sendMessage({
-      action: "setImage",
-      id: "backgroundImage",
-      imageData: backgroundImage["backgroundImage"],
-      type: settingsData.appearance.background.backgroundSelector,
-    });
-  }
+  await migrate();
 
   applyFixes();
-  createStaticGlobals();
+  await createStaticGlobals();
 
   await createWidgetSystem();
   createTopButtons();
