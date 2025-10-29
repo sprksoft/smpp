@@ -143,7 +143,6 @@ input::placeholder {
 }
 
 .smsc-topnav .topnav__menu,
-.bubble,
 .smsctooltip {
   background-color: var(--color-base01) !important;
   border: 2px solid var(--color-base03) !important;
@@ -172,6 +171,24 @@ input::placeholder {
 
 .bubble {
   overflow-y: auto !important;
+  border-radius: 1rem !important;
+  padding: 0.5rem !important;
+  background-color: var(--color-base01) !important;
+  border-color: var(--color-base02) !important;
+  text-decoration: none !important;
+}
+
+
+
+.class {
+  background-color: var(--color-base01) !important;
+  border: 2px solid var(--color-base03) !important;
+
+  border-radius: 2rem !important;
+  color: var(--color-text) !important;
+  align-items: center !important;
+  transition: none !important;
+  overflow-y: hidden !important;
 }
 
 .smsctooltip {

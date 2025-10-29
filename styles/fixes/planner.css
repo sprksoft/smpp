@@ -821,6 +821,19 @@ h3.detail-description__title.title--3,
   padding: 1rem !important;
 }
 
+.bubble-s87kI {
+  border-radius: 2rem !important;
+  padding: 1.5rem !important;
+}
+
+.arrow-U4LFP {
+  display: none !important;
+}
+
+.calendar-filter {
+  padding: 0px !important;
+}
+
 .timegrid-plan-bubble {
   border-radius: 2.5rem !important;
 }

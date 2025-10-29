@@ -149,12 +149,18 @@ async function createStaticGlobals() {
   isFirefox =
     typeof navigator.userAgent === "string" &&
     /firefox/i.test(navigator.userAgent);
-  originalPfpUrl = document.querySelector('img[alt="Profiel afbeelding"]').src;
+  if (document.querySelector('img[alt="Profiel afbeelding"]')) {
+    originalPfpUrl = document.querySelector(
+      'img[alt="Profiel afbeelding"]'
+    ).src;
+  } else {
+    originalPfpUrl = getPfpLink(originalUsername);
+  }
+
   profilePictureObserver = null;
 
   quicks = await quick_load();
   liteMode = browser.runtime.getManifest().name.includes("Lite");
-  console.log(liteMode);
 }
 
 async function applyAppearance(appearance) {

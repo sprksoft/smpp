@@ -1407,6 +1407,11 @@ span.js-badge-msg.topnav__badge {
   top: 110% !important;
   left: 50% !important;
 }
+#searchMenu,
+#profileMenu,
+#notifsMenu {
+  top: 110% !important;
+}
 
 .enableAnimations #shortcutsMenu,
 .enableAnimations #coursesMenu,
@@ -1673,7 +1678,7 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   height: 100% !important;
   left: 0 !important;
   top: 0 !important;
-  border-radius: 0 !important;
+  border-radius: 2px !important;
   z-index: 1000 !important;
 }
 
