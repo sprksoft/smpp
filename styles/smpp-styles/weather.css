@@ -4,11 +4,11 @@
   align-items: center;
   text-align: center;
 }
-input.weather-location-input.inactive:hover {
+.weather-location-input:hover {
   background-color: var(--color-base02) !important;
   border-color: var(--color-base03) !important;
 }
-input.weather-location-input.active {
+input.weather-location-input:focus {
   color: var(--color-text) !important;
   border-color: var(--color-accent) !important;
 }
