@@ -2,19 +2,18 @@ class WeatherWidgetBase extends WidgetBase {
   isCompact = null;
 
   async createContent() {
-    this.updateCache();
     return this.createHTML(await this.getWeatherData());
   }
   currentLocation = "Keerbergen";
   async getWeatherData() {
     console.log(this.settings);
     if (this.settings.cache.lastLocation != this.currentLocation) {
-      this.updateCache();
+      await this.updateCache();
     } else if (
       (new Date() - new Date(this.settings.cache.lastUpdateDate)) / 1000 / 60 >
       10
     ) {
-      this.updateCache();
+      await this.updateCache();
     }
     return this.settings.cache.weatherData;
   }
@@ -24,11 +23,11 @@ class WeatherWidgetBase extends WidgetBase {
       action: "fetchWeatherData",
       location: this.currentLocation,
     });
-    this.settings.cache = {
+    this.setSetting("cache", {
       weatherData: newWeatherData,
       lastUpdateDate: new Date(),
       lastLocation: this.currentLocation,
-    };
+    });
   }
 
   defaultSettings() {
@@ -77,7 +76,10 @@ class WeatherWidgetBase extends WidgetBase {
     locationInput.type = "text";
     locationInput.spellcheck = false;
     locationInput.classList.add("inactive");
-    locationInput.addEventListener("change", this.updateWeatherLocation);
+    locationInput.addEventListener(
+      "change",
+      this.updateWeatherLocation.bind(this)
+    );
 
     topContentContainer.appendChild(locationInput);
     if (weatherData.cod != 200) {
