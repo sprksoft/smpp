@@ -14,6 +14,8 @@ class WeatherWidgetBase extends WidgetBase {
       10
     ) {
       await this.updateCache();
+    } else if (this.settings.cache.weatherData == {}) {
+      await this.updateCache();
     }
     return this.settings.cache.weatherData;
   }
@@ -23,20 +25,19 @@ class WeatherWidgetBase extends WidgetBase {
       action: "fetchWeatherData",
       location: this.currentLocation,
     });
-    this.setSetting("cache", {
+    let newCache = {
       weatherData: newWeatherData,
       lastUpdateDate: new Date(),
       lastLocation: this.currentLocation,
-    });
+    };
+    this.setSetting("cache", newCache);
+    return newCache;
   }
 
   defaultSettings() {
+    let cache = this.updateCache();
     return {
-      cache: {
-        weatherData: {},
-        lastUpdateDate: new Date(null),
-        lastLocation: "Keerbergen",
-      },
+      cache: cache,
     };
   }
 
@@ -55,6 +56,7 @@ class WeatherWidgetBase extends WidgetBase {
   }
 
   async updateHTML() {
+    console.log("got called");
     this.element.innerHTML = "";
     this.element.appendChild(this.createHTML(await this.getWeatherData()));
   }
@@ -203,8 +205,16 @@ registerWidget(new CompactWeatherWidget());
 registerWidget(new WeatherWidget());
 
 function createWeatherPreview(isCompact) {
+  console.log(isCompact);
   let container = document.createElement("div");
   container.classList.add("weather-div");
+  let weatherTitle = document.createElement("div");
+  weatherTitle.classList.add("weather-preview-title");
+  weatherTitle.classList.add("compact");
+  weatherTitle.innerText = isCompact ? "Tiny Weather" : "Weather";
+  container.appendChild(weatherTitle);
+
+  if (isCompact) container.classList.add("compact");
   let mainIcon = document.createElement("div");
   mainIcon.classList.add("weather-icon-container");
 

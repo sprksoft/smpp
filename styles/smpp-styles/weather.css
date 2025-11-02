@@ -125,7 +125,7 @@ input.weather-location-input:focus {
   height: 100%;
 }
 
-.compact .weather-widget-content:not(:has(.not-found-text)) {
+.compact.weather-div:not(:has(.not-found-text)) {
   flex-direction: row;
   gap: 0.5rem;
 }
