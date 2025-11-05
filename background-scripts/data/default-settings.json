@@ -38,9 +38,6 @@
     "assignments": {
       "maxAssignments": 5
     },
-    "weather": {
-      "syncWeather": true
-    },
     "games": {
       "snake": {
         "enableGrid": true

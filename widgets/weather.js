@@ -2,29 +2,47 @@ class WeatherWidgetBase extends WidgetBase {
   isCompact = null;
 
   async createContent() {
-    return this.createHTML(await this.getWeatherData());
+    this.currentLocation = this.settings.cache.lastLocation;
+    console.log(this.currentLocation);
+    let newWeatherData = await this.getWeatherData();
+    console.log("AAA", newWeatherData);
+    return this.createHTML(newWeatherData);
   }
-  currentLocation = "Keerbergen";
+
   async getWeatherData() {
     console.log(this.settings);
+    console.log(this.settings.cache);
     if (this.settings.cache.lastLocation != this.currentLocation) {
+      console.log(this.settings.cache.lastLocation != this.currentLocation);
       await this.updateCache();
+      console.log(
+        "Last location wasn't good",
+        this.settings.cache.lastLocation,
+        this.currentLocation
+      );
     } else if (
       (new Date() - new Date(this.settings.cache.lastUpdateDate)) / 1000 / 60 >
       10
     ) {
       await this.updateCache();
+      console.log("Time wasn't good");
     } else if (this.settings.cache.weatherData == {}) {
       await this.updateCache();
+      console.log("Data didnt exist");
     }
+    console.log("Settings ", this.settings.cache.weatherData);
     return this.settings.cache.weatherData;
   }
 
   async updateCache() {
+    console.log(this.currentLocation);
     let newWeatherData = await browser.runtime.sendMessage({
       action: "fetchWeatherData",
       location: this.currentLocation,
     });
+    if (newWeatherData.name) {
+      this.currentLocation = newWeatherData.name;
+    }
     let newCache = {
       weatherData: newWeatherData,
       lastUpdateDate: new Date(),
@@ -35,7 +53,10 @@ class WeatherWidgetBase extends WidgetBase {
   }
 
   defaultSettings() {
+    this.currentLocation = "Keerbergen";
     let cache = this.updateCache();
+    console.log("why");
+    cache.lastLocation = this.currentLocation;
     return {
       cache: cache,
     };
@@ -56,7 +77,6 @@ class WeatherWidgetBase extends WidgetBase {
   }
 
   async updateHTML() {
-    console.log("got called");
     this.element.innerHTML = "";
     this.element.appendChild(this.createHTML(await this.getWeatherData()));
   }
@@ -74,7 +94,7 @@ class WeatherWidgetBase extends WidgetBase {
 
     let locationInput = document.createElement("input");
     locationInput.classList.add("weather-location-input");
-    locationInput.value = weatherData.name;
+    locationInput.value = this.currentLocation;
     locationInput.type = "text";
     locationInput.spellcheck = false;
     locationInput.classList.add("inactive");
@@ -85,7 +105,6 @@ class WeatherWidgetBase extends WidgetBase {
 
     topContentContainer.appendChild(locationInput);
     if (weatherData.cod != 200) {
-      locationInput.value = weatherData.name;
       container.appendChild(topContentContainer);
       container.appendChild(this.createNotFoundContent(weatherData.cod));
       return container;
@@ -208,13 +227,13 @@ function createWeatherPreview(isCompact) {
   console.log(isCompact);
   let container = document.createElement("div");
   container.classList.add("weather-div");
+  container.classList.add("preview");
+  if (isCompact) container.classList.add("compact");
   let weatherTitle = document.createElement("div");
   weatherTitle.classList.add("weather-preview-title");
-  weatherTitle.classList.add("compact");
   weatherTitle.innerText = isCompact ? "Tiny Weather" : "Weather";
   container.appendChild(weatherTitle);
 
-  if (isCompact) container.classList.add("compact");
   let mainIcon = document.createElement("div");
   mainIcon.classList.add("weather-icon-container");
 
@@ -263,9 +282,13 @@ function createWeatherPreview(isCompact) {
     conditionsContainer.appendChild(feelsLikeContainer);
     conditionsContainer.appendChild(windContainer);
   }
+  let bottomContentContainer = document.createElement("div");
+  bottomContentContainer.classList.add("weather-widget-content");
 
-  container.appendChild(mainIcon);
-  container.appendChild(conditionsContainer);
+  bottomContentContainer.appendChild(mainIcon);
+  bottomContentContainer.appendChild(conditionsContainer);
+  container.appendChild(bottomContentContainer);
+
   return container;
 }
 

@@ -130,6 +130,14 @@ input.weather-location-input:focus {
   gap: 0.5rem;
 }
 
+.preview.compact.weather-div {
+  flex-direction: column;
+}
+
+.preview.compact .weather-widget-content {
+  flex-direction: row;
+}
+
 .compact .bottom-weather-content-container {
   width: 37%;
 }
@@ -163,7 +171,7 @@ input.weather-location-input:focus {
   font-weight: 700;
 }
 
-.compact.weather-preview-title {
+.compact .weather-preview-title {
   font-size: 2rem;
   margin-bottom: 0.5rem;
 }

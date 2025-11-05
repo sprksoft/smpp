@@ -309,10 +309,6 @@ class SettingsWindow extends BaseWindow {
           "#settings-page-max-assignments-slider + .settings-page-live-value"
         ).innerText = settings.widgets.assignments.maxAssignments;
 
-        // Weather
-        document.getElementById("settings-page-sync-weather-button").checked =
-          settings.widgets.weather.syncWeather;
-
         // Snake
         document.getElementById(
           "settings-page-show-snake-grid-button"
@@ -497,21 +493,6 @@ class SettingsWindow extends BaseWindow {
           this.addDisclaimer(
             document.querySelector(
               ".settings-page-slider-container:has(#settings-page-max-assignments-slider)"
-            )
-          );
-        }
-
-        settings.widgets.weather.syncWeather = document.getElementById(
-          "settings-page-sync-weather-button"
-        ).checked;
-
-        if (
-          settings.widgets.weather.syncWeather !=
-          previousSettings.widgets.weather.syncWeather
-        ) {
-          this.addDisclaimer(
-            document.querySelector(
-              ".settings-page-button-label-container:has(#settings-page-sync-weather-button)"
             )
           );
         }
@@ -1090,16 +1071,6 @@ class SettingsWindow extends BaseWindow {
             10,
             "settings-page-max-assignments-slider",
             "Max assignments"
-          )
-        );
-        this.settingsPage.appendChild(createSectionTitle("Weather"));
-        this.settingsPage.appendChild(
-          createDescription("Change the weather app configuration.")
-        );
-        this.settingsPage.appendChild(
-          createSettingsButtonWithLabel(
-            "settings-page-sync-weather-button",
-            "Sync weather"
           )
         );
 

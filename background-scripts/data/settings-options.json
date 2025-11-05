@@ -38,9 +38,6 @@
     "assignments": {
       "maxAssignments": "number"
     },
-    "weather": {
-      "syncWeather": "boolean"
-    },
     "games": {
       "snake": {
         "enableGrid": "boolean"
