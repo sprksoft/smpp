@@ -240,7 +240,8 @@ a:focus {
 .float-label__input,
 .input-search,
 button.smscButton.blue.fileupload_submit_button,
-.wide-colored-btn {
+.wide-colored-btn,
+.topnav-scope button.medium-button.medium-button {
   border: var(--border-size) solid var(--color-base03) !important;
   background-color: var(--color-base02) !important;
   color: var(--color-text) !important;
@@ -252,7 +253,8 @@ button.smscButton.blue.fileupload_submit_button,
 .enableAnimations .float-label__input,
 .enableAnimations .input-search,
 .enableAnimations button.smscButton.blue.fileupload_submit_button,
-.enableAnimations .wide-colored-btn {
+.enableAnimations .wide-colored-btn,
+.enableAnimations .topnav-scope button.medium-button.medium-button {
   transition: border 0.3s, background-color 0.3s, color 0.3s;
 }
 
@@ -2375,5 +2377,9 @@ body.modern-ui .homepage__block__content {
 #smscMainBlockContainer:has(.smscAdminNav_body) {
   border: 2px solid var(--color-base02) !important;
   border-radius: 2rem !important;
+  background: var(--color-base01) !important;
+}
+
+.campaign-dialog-content__button-bar {
   background: var(--color-base01) !important;
 }

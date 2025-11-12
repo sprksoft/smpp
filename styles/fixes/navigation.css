@@ -178,8 +178,6 @@ input::placeholder {
   text-decoration: none !important;
 }
 
-
-
 .class {
   background-color: var(--color-base01) !important;
   border: 2px solid var(--color-base03) !important;
@@ -205,12 +203,29 @@ input::placeholder {
   height: var(--border-size) !important;
 }
 
+.topnav-scope button.medium-button.medium-button:hover,
 .smscButton:hover,
 .topnav__menuitem:hover {
   border-color: var(--color-accent) !important;
   background-color: var(--color-base02) !important;
   color: var(--color-accent) !important;
   font-weight: 600 !important;
+}
+
+.campaign-dialog {
+  box-shadow: 0 1rem 2.667rem 2px var(--darken-background);
+}
+
+.campaign-close-button {
+  background: var(--color-base01) !important;
+}
+
+.campaign-close-button > svg {
+  fill: var(--color-text) !important;
+}
+
+.campaign-close-button:hover > svg {
+  fill: var(--color-red) !important;
 }
 
 .topnav__menuitem {
