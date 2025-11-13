@@ -1,64 +1,47 @@
 class WeatherWidgetBase extends WidgetBase {
-  isCompact = null;
+  isCompact = false;
 
   async createContent() {
-    this.currentLocation = this.settings.cache.lastLocation;
-    console.log(this.currentLocation);
     let newWeatherData = await this.getWeatherData();
-    console.log("AAA", newWeatherData);
+
     return this.createHTML(newWeatherData);
   }
 
   async getWeatherData() {
-    console.log(this.settings);
-    console.log(this.settings.cache);
-    if (this.settings.cache.lastLocation != this.currentLocation) {
-      console.log(this.settings.cache.lastLocation != this.currentLocation);
-      await this.updateCache();
-      console.log(
-        "Last location wasn't good",
-        this.settings.cache.lastLocation,
-        this.currentLocation
-      );
-    } else if (
+    if (
       (new Date() - new Date(this.settings.cache.lastUpdateDate)) / 1000 / 60 >
       10
     ) {
       await this.updateCache();
-      console.log("Time wasn't good");
-    } else if (this.settings.cache.weatherData == {}) {
+    } else if (this.settings.cache.weatherData == null) {
       await this.updateCache();
-      console.log("Data didnt exist");
     }
-    console.log("Settings ", this.settings.cache.weatherData);
     return this.settings.cache.weatherData;
   }
 
   async updateCache() {
-    console.log(this.currentLocation);
     let newWeatherData = await browser.runtime.sendMessage({
       action: "fetchWeatherData",
-      location: this.currentLocation,
+      location: this.settings.currentLocation,
     });
+
     if (newWeatherData.name) {
-      this.currentLocation = newWeatherData.name;
+      this.setSetting("currentLocation", newWeatherData.name);
     }
-    let newCache = {
+
+    this.setSetting("cache", {
       weatherData: newWeatherData,
       lastUpdateDate: new Date(),
-      lastLocation: this.currentLocation,
-    };
-    this.setSetting("cache", newCache);
-    return newCache;
+    });
   }
 
   defaultSettings() {
-    this.currentLocation = "Keerbergen";
-    let cache = this.updateCache();
-    console.log("why");
-    cache.lastLocation = this.currentLocation;
     return {
-      cache: cache,
+      currentLocation: "Keerbergen",
+      cache: {
+        weatherData: null,
+        lastUpdateDate: new Date(),
+      },
     };
   }
 
@@ -72,8 +55,9 @@ class WeatherWidgetBase extends WidgetBase {
       event.target.value = this.settings.cache.lastLocation;
       return;
     }
-    this.currentLocation = newLocation;
-    this.updateHTML();
+    this.setSetting("currentLocation", newLocation);
+    await this.updateCache();
+    await this.updateHTML();
   }
 
   async updateHTML() {
@@ -82,7 +66,6 @@ class WeatherWidgetBase extends WidgetBase {
   }
 
   createHTML(weatherData) {
-    console.log(weatherData);
     let container = document.createElement("div");
     container.classList.add("weather-div");
     if (this.isCompact) container.classList.add("compact");
@@ -94,7 +77,7 @@ class WeatherWidgetBase extends WidgetBase {
 
     let locationInput = document.createElement("input");
     locationInput.classList.add("weather-location-input");
-    locationInput.value = this.currentLocation;
+    locationInput.value = this.settings.currentLocation;
     locationInput.type = "text";
     locationInput.spellcheck = false;
     locationInput.classList.add("inactive");
@@ -106,7 +89,7 @@ class WeatherWidgetBase extends WidgetBase {
     topContentContainer.appendChild(locationInput);
     if (weatherData.cod != 200) {
       container.appendChild(topContentContainer);
-      container.appendChild(this.createNotFoundContent(weatherData.cod));
+      container.appendChild(createNotFoundContent(weatherData.cod));
       return container;
     }
 
@@ -191,25 +174,6 @@ class WeatherWidgetBase extends WidgetBase {
     container.appendChild(bottomContentContainer);
     return container;
   }
-
-  createNotFoundContent(code) {
-    let notFoundContent = document.createElement("div");
-    let notFoundText = document.createElement("span");
-    notFoundText.classList.add("not-found-text");
-    if (code == 404) {
-      let notFoundIcon = document.createElement("div");
-      notFoundIcon.classList.add("no-location-icon");
-      notFoundIcon.innerHTML = noLocationSvg;
-      notFoundContent.appendChild(notFoundIcon);
-      notFoundText.innerText = "Location not found";
-    } else if (code == 69) {
-      notFoundText.innerText = `Unexpected error:\nUnable to fetch`;
-    } else {
-      notFoundText.innerText = `Unexpected error:\n${code}`;
-    }
-    notFoundContent.appendChild(notFoundText);
-    return notFoundContent;
-  }
 }
 
 class WeatherWidget extends WeatherWidgetBase {
@@ -224,7 +188,6 @@ registerWidget(new CompactWeatherWidget());
 registerWidget(new WeatherWidget());
 
 function createWeatherPreview(isCompact) {
-  console.log(isCompact);
   let container = document.createElement("div");
   container.classList.add("weather-div");
   container.classList.add("preview");
@@ -290,6 +253,25 @@ function createWeatherPreview(isCompact) {
   container.appendChild(bottomContentContainer);
 
   return container;
+}
+
+function createNotFoundContent(code) {
+  let notFoundContent = document.createElement("div");
+  let notFoundText = document.createElement("span");
+  notFoundText.classList.add("not-found-text");
+  if (code == 404) {
+    let notFoundIcon = document.createElement("div");
+    notFoundIcon.classList.add("no-location-icon");
+    notFoundIcon.innerHTML = noLocationSvg;
+    notFoundContent.appendChild(notFoundIcon);
+    notFoundText.innerText = "Location not found";
+  } else if (code == 69) {
+    notFoundText.innerText = `Unexpected error:\nUnable to fetch`;
+  } else {
+    notFoundText.innerText = `Unexpected error:\n${code}`;
+  }
+  notFoundContent.appendChild(notFoundText);
+  return notFoundContent;
 }
 
 function getWeatherIcon(description, cloudDescription) {

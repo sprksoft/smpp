@@ -233,3 +233,7 @@ span.login-app__title.login-app__title--sign-in-with {
 #smscMain.showLeftNav:has(.login-app) {
   align-items: center !important;
 }
+
+.showLeftNav {
+  background-color: transparent !important;
+}

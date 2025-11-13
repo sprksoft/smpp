@@ -34,21 +34,22 @@ function setByPath(object, path, value) {
 }
 
 /// Fills missing fields in an object with values from a default object.
-function fillObjectWithDefaults(config, defaults) {
-  if (!config) {
-    config = {};
+function fillObjectWithDefaults(object, defaults) {
+  if (!object) {
+    object = {};
   }
 
-  for (let key of Object.keys(defaults)) {
-    if (typeof defaults[key] === "object" && !Array.isArray(defaults[key])) {
-      config[key] = fillObjectWithDefaults(config[key], defaults[key]);
-    } else {
-      if (config[key] === undefined) {
-        config[key] = defaults[key];
-      }
+  for (const key of Object.keys(defaults)) {
+    if (typeof defaults[key] === "object" && defaults[key] !== null) {
+      object[key] = fillObjectWithDefaults(object[key], defaults[key]);
+    }
+
+    if (object[key] === undefined) {
+      object[key] = defaults[key];
     }
   }
-  return config;
+
+  return object;
 }
 
 function openURL(url, new_window = false) {
@@ -162,7 +163,7 @@ function getUserId() {
 
     const cookies = document.cookie.split(";");
     const plannerUrlCookie = cookies.find((cookie) =>
-      cookie.trim().startsWith("plannerUrl="),
+      cookie.trim().startsWith("plannerUrl=")
     );
 
     if (plannerUrlCookie) {
@@ -174,7 +175,7 @@ function getUserId() {
       sendDebug("Extracted userId from cookie plannerUrl:", userId);
     } else {
       console.error(
-        "UID is fucked, refresh 5 keer en als het dan niet werkt vraag hulp op discord @JJorne",
+        "UID is fucked, refresh 5 keer en als het dan niet werkt vraag hulp op discord @JJorne"
       );
     }
   }
