@@ -31,10 +31,6 @@
     }
   },
   "widgets": {
-    "delijn": {
-      "monochrome": false,
-      "maxBusses": 5
-    },
     "assignments": {
       "maxAssignments": 5
     },

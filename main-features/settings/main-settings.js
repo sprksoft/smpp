@@ -501,7 +501,6 @@ class SettingsWindow extends BaseWindow {
           "settings-page-show-snake-grid-button"
         ).checked;
 
-        applyWidgets(settings.widgets);
         break;
       }
 

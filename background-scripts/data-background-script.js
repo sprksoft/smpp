@@ -2,7 +2,7 @@ if (typeof browser === "undefined") {
   var browser = chrome;
 }
 
-import { fetchDelijnData, fetchWeatherData } from "./api-background-script.js";
+import { fetchDelijnData } from "./api-background-script.js";
 
 function getDefaultCustomThemeData() {
   return {
@@ -23,33 +23,6 @@ export async function getSettingsData() {
   let data = await browser.storage.local.get("settingsData");
   console.log(data.settingsData || getDefaultSettings());
   return data.settingsData || getDefaultSettings();
-}
-
-export async function getWeatherAppData() {
-  let data = await browser.storage.local.get("weatherAppData");
-  let weatherAppData = data.weatherAppData || {
-    weatherData: await fetchWeatherData("Keerbergen"),
-    lastUpdateDate: new Date().toISOString(),
-    lastLocation: "Keerbergen",
-  };
-
-  await browser.storage.local.set({
-    weatherAppData: {
-      weatherData: weatherAppData.weatherData,
-      lastUpdateDate: weatherAppData.lastUpdateDate,
-      lastLocation: weatherAppData.lastLocation,
-    },
-  });
-  return weatherAppData;
-}
-
-export async function getDelijnAppData() {
-  let data = await browser.storage.local.get("delijnAppData");
-  let delijnAppData = data.delijnAppData || {
-    entiteitnummer: null,
-    haltenummer: null,
-  };
-  return delijnAppData;
 }
 
 export async function getPlantAppData() {
@@ -88,7 +61,7 @@ export async function getDelijnColorData() {
       delijnColorData = data.delijnColorData;
     } else {
       delijnColorData = await fetchDelijnData(
-        "https://api.delijn.be/DLKernOpenData/api/v1/kleuren",
+        "https://api.delijn.be/DLKernOpenData/api/v1/kleuren"
       );
     }
 

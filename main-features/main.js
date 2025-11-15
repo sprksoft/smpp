@@ -180,30 +180,6 @@ async function applyAppearance(appearance) {
   );
 }
 
-function applyWidgets(widgets) {
-  const monochromeDelijnStyleId = "monochrome-delijn-style";
-  const monochromeDelijnStyle = document.getElementById(
-    monochromeDelijnStyleId
-  );
-
-  if (widgets.delijn.monochrome) {
-    if (!monochromeDelijnStyle) {
-      const style = document.createElement("style");
-      style.id = monochromeDelijnStyleId;
-      style.textContent = `
-      .lijnNumber {
-        background-color: var(--color-base02) !important;
-        border-color: var(--color-accent) !important;
-        color: var(--color-text) !important;
-      }
-    `;
-      document.head.appendChild(style);
-    }
-  } else {
-    monochromeDelijnStyle?.remove();
-  }
-}
-
 function applyOther(other) {
   if (window.location.href.split("/")[3] == "login")
     updateSplashText(other.splashText);
@@ -253,7 +229,6 @@ async function apply() {
   if (!liteMode) applyWeatherEffects(data.appearance.weatherOverlay);
   applyProfile(data.profile);
   applyTopNav(data.topNav);
-  applyWidgets(data.widgets);
   applyOther(data.other);
 }
 

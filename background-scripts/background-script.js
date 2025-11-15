@@ -7,8 +7,6 @@ let globalsInitialized = false;
 import {
   getSettingsData,
   getSettingsOptions,
-  getWeatherAppData,
-  getDelijnAppData,
   getDelijnColorData,
   getDefaultSettings,
   getPlantAppData,
@@ -99,7 +97,7 @@ async function handleMessage(message, sendResponse) {
       const settingsData = await getSettingsData();
       sendResponse(getByPath(settingsData, message.category));
       console.log(
-        "Settings data sent for this:" + message.category + "category",
+        "Settings data sent for this:" + message.category + "category"
       );
     }
     if (message.action === "getSettingsData") {
@@ -164,40 +162,21 @@ async function handleMessage(message, sendResponse) {
     }
     // for migration, NEVER use this!!!
     if (message.action === "getBackgroundImage") {
-      const backgroundImage =
-        await browser.storage.local.get("backgroundImage");
+      const backgroundImage = await browser.storage.local.get(
+        "backgroundImage"
+      );
       await browser.storage.local.remove("backgroundImage");
       sendResponse(backgroundImage || null);
       console.log("Background image sent.");
     }
 
     // Weather
-    if (message.action === "setWeatherAppData") {
-      await browser.storage.local.set({ weatherAppData: message.data });
-      sendResponse({ success: true });
-      console.log("Weather appdata saved.");
-    }
-    if (message.action === "getWeatherAppData") {
-      const weatherAppData = await getWeatherAppData();
-      sendResponse(weatherAppData);
-      console.log("Weather appdata sent.");
-    }
     if (message.action === "fetchWeatherData") {
       const weatherData = await fetchWeatherData(message.location);
       sendResponse(weatherData);
       console.log("Weather data fetched and sent.");
     }
     // Delijn
-    if (message.action === "setDelijnAppData") {
-      await browser.storage.local.set({ delijnAppData: message.data });
-      sendResponse({ success: true });
-      console.log("Delijn appdata saved.");
-    }
-    if (message.action === "getDelijnAppData") {
-      const delijnAppData = await getDelijnAppData();
-      sendResponse(delijnAppData);
-      console.log("Delijn appdata sent.");
-    }
     if (message.action === "fetchDelijnData") {
       const delijnData = await fetchDelijnData(message.url);
       sendResponse(delijnData);
