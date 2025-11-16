@@ -105,7 +105,7 @@ class WidgetBase {
 
         newContent = await this.createContent();
 
-        await this.onSettingsChange();
+        // WHY WAS THIS HERE??? await this.onSettingsChange();
       }
     } catch (e) {
       console.error("Failed to create widget content");

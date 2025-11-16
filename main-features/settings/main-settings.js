@@ -145,6 +145,11 @@ class SettingsWindow extends BaseWindow {
     element.insertAdjacentElement("afterend", disclaimer);
   }
 
+  saveWidgetSetting(widgetName, settingName, value) {
+    console.log("in the save");
+    getWidgetByName(widgetName).setSetting(settingName, value);
+  }
+
   async resetSettings() {
     const popup = document.createElement("div");
     popup.classList.add("reset-confirmation-popup");
@@ -294,20 +299,20 @@ class SettingsWindow extends BaseWindow {
         // De Lijn
         document.getElementById(
           "settings-page-delijn-monochrome-button"
-        ).checked = settings.widgets.delijn.monochrome;
+        ).checked = getWidgetByName("DelijnWidget").settings.monochrome;
 
         document.getElementById("settings-page-max-busses-slider").value =
-          settings.widgets.delijn.maxBusses;
+          getWidgetByName("DelijnWidget").settings.maxBusses;
         document.querySelector(
           "#settings-page-max-busses-slider + .settings-page-live-value"
-        ).innerText = settings.widgets.delijn.maxBusses;
+        ).innerText = getWidgetByName("DelijnWidget").settings.maxBusses;
 
         // Assignments
         document.getElementById("settings-page-max-assignments-slider").value =
-          settings.widgets.assignments.maxAssignments;
+          getWidgetByName("TakenWidget").settings.maxAssignments;
         document.querySelector(
           "#settings-page-max-assignments-slider + .settings-page-live-value"
-        ).innerText = settings.widgets.assignments.maxAssignments;
+        ).innerText = getWidgetByName("TakenWidget").settings.maxAssignments;
 
         // Snake
         document.getElementById(
@@ -461,41 +466,52 @@ class SettingsWindow extends BaseWindow {
       }
 
       case "widgets": {
-        settings.widgets.delijn.monochrome = document.getElementById(
-          "settings-page-delijn-monochrome-button"
-        ).checked;
-
-        settings.widgets.delijn.maxBusses = parseInt(
-          document.getElementById("settings-page-max-busses-slider").value,
-          10
-        );
-
+        // Delijn
         if (
-          settings.widgets.delijn.maxBusses !=
-          previousSettings.widgets.delijn.maxBusses
+          document.getElementById("settings-page-delijn-monochrome-button")
+            .checked != getWidgetByName("DelijnWidget").settings.monochrome
         ) {
-          this.addDisclaimer(
-            document.querySelector(
-              ".settings-page-slider-container:has(#settings-page-max-busses-slider)"
-            )
+          this.saveWidgetSetting(
+            "DelijnWidget",
+            "monochrome",
+            document.getElementById("settings-page-delijn-monochrome-button")
+              .checked
           );
         }
 
-        settings.widgets.assignments.maxAssignments = parseInt(
-          document.getElementById("settings-page-max-assignments-slider").value,
-          10
-        );
-
         if (
-          settings.widgets.assignments.maxAssignments !=
-          previousSettings.widgets.assignments.maxAssignments
+          parseInt(
+            document.getElementById("settings-page-max-busses-slider").value,
+            10
+          ) != getWidgetByName("DelijnWidget").settings.maxBusses
         ) {
-          this.addDisclaimer(
-            document.querySelector(
-              ".settings-page-slider-container:has(#settings-page-max-assignments-slider)"
+          this.saveWidgetSetting(
+            "DelijnWidget",
+            "maxBusses",
+            parseInt(
+              document.getElementById("settings-page-max-busses-slider").value,
+              10
             )
           );
         }
+        // Assignments
+
+        if (
+          parseInt(
+            document.getElementById("settings-page-max-assignments-slider")
+              .value,
+            10
+          ) != getWidgetByName("TakenWidget").settings.maxAssignments
+        )
+          this.saveWidgetSetting(
+            "TakenWidget",
+            "maxAssignments",
+            parseInt(
+              document.getElementById("settings-page-max-assignments-slider")
+                .value,
+              10
+            )
+          );
 
         settings.widgets.games.snake.enableGrid = document.getElementById(
           "settings-page-show-snake-grid-button"

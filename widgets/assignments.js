@@ -3,10 +3,17 @@
 // THANK YOU LDEVVVV 🫂🫂🫂
 
 class TakenWidget extends WidgetBase {
+  defaultSettings() {
+    return {
+      maxAssignments: 5,
+    };
+  }
+  onSettingsChange() {
+    this.element.appendChild(this.createContent());
+    console.log("called in settings change");
+  }
   createContent() {
     const foresight = 28; // dagen in de toekomst dat het zoekt voor taken
-    let maxAssignments = 5;
-
     let userId = getUserId();
 
     if (DEBUG) {
@@ -16,7 +23,8 @@ class TakenWidget extends WidgetBase {
       sendDebug("Today's Date:", getCurrentDate());
       sendDebug("Next Date:", getFutureDate(foresight));
     }
-
+    this.clearContent();
+    console.log("just cleared");
     async function fetchPlannerData() {
       try {
         const schoolName = getSchoolName();
@@ -44,7 +52,7 @@ class TakenWidget extends WidgetBase {
       }
     }
 
-    function initTaskList() {
+    let initTaskList = () => {
       const TasksContainer = document.createElement("div");
       const TitleScreenDiv = document.createElement("div");
       const TitleScreenText = document.createElement("h2");
@@ -58,9 +66,6 @@ class TakenWidget extends WidgetBase {
       }
 
       fetchPlannerData().then(async (data) => {
-        const settingsData = await browser.runtime.sendMessage({
-          action: "getSettingsData",
-        });
         data = data.filter((element) => element.resolvedStatus !== "resolved");
         if (!data) {
           TasksContainer.innerHTML = "Er is iets ernstig misgegaan :(";
@@ -88,9 +93,9 @@ class TakenWidget extends WidgetBase {
             new Date(a.period.dateTimeFrom) - new Date(b.period.dateTimeFrom)
         );
         let lastDate = "";
-
-        if (data.length > settingsData.widgets.assignments.maxAssignments) {
-          data = data.slice(0, settingsData.widgets.assignments.maxAssignments);
+        console.log(this.settings);
+        if (data.length > this.settings.maxAssignments) {
+          data = data.slice(0, this.settings.maxAssignments);
         }
         const today = new Date();
         data.forEach((element) => {
@@ -216,7 +221,7 @@ class TakenWidget extends WidgetBase {
         return sendDebug("UI updated successfully.");
       });
       return TasksContainer;
-    }
+    };
     return initTaskList();
   }
   async createPreview() {
@@ -235,6 +240,10 @@ class TakenWidget extends WidgetBase {
     previewElement.appendChild(previewElementIcon);
 
     return previewElement;
+  }
+  clearContent() {
+    console.log(this.element);
+    this.element.innerHTML = "";
   }
 }
 

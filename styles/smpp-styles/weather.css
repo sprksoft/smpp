@@ -185,3 +185,15 @@ input.weather-location-input:focus {
   width: 1.75rem;
   height: 100%;
 }
+
+.light-blue-weather-fill {
+  fill: #72b8d4;
+}
+
+.orange-weather-fill {
+  fill: #f4a71d;
+}
+
+.blue-weather-fill {
+  fill: #2885c7;
+}

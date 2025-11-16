@@ -220,6 +220,7 @@ class DelijnWidget extends WidgetBase {
   async createContent() {
     this.element.classList.add("smpp-widget-transparent");
     this.container = document.createElement("div");
+    this.initializeData();
     this.initializeHTML();
     return this.container;
   }
@@ -262,7 +263,6 @@ class DelijnWidget extends WidgetBase {
   }
 
   async displayLijnenBasedOnHalte() {
-    console.log("doing that");
     this.displayInfo("Loading...");
     this.clearBottomContainer();
     // const data = await browser.runtime.sendMessage({
@@ -309,16 +309,13 @@ class DelijnWidget extends WidgetBase {
   }
 
   async initializeData() {
-    if (localStorage.getItem("lijnData")) {
-      await migrateDelijnData();
-    }
-
     lijnDataKleuren = await browser.runtime.sendMessage({
       action: "getDelijnColorData",
     });
 
     if (this.settings.halte.nummer == null) {
       this.displayInfo("Zoek een halte");
+      console.log("trying that");
     } else {
       await this.displayLijnenBasedOnHalte();
     }
@@ -508,7 +505,6 @@ class DelijnWidget extends WidgetBase {
   }
 
   async choseThisHalte(halteElement) {
-    console.log(halteElement);
     this.currentHalteOptionsAbortController?.abort();
     this.setSetting("halte", {
       entiteit: halteElement.dataset.entiteitnummer,
