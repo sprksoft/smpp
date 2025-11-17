@@ -1,14 +1,13 @@
 #smscMain div.wide-toolbar.js-wide-toolbar {
   justify-content: space-between !important;
   max-height: 95%;
-  overflow: scroll !important;
+  overflow: auto !important;
   background-color: var(--color-base00) !important;
   color: var(--color-text) !important;
   background: var(--darken-background) !important;
   backdrop-filter: blur(5px) !important;
   height: fit-content !important;
-  padding: 1rem !important;
-  padding-bottom: 0rem !important;
+  padding: 0.75rem !important;
   margin-left: 4px !important;
   border-radius: 25px !important;
   margin-top: 4px !important;
@@ -19,6 +18,11 @@
 .wide-toolbar__item__icon {
   height: 3.3rem !important;
   width: 3.3rem !important;
+}
+
+.results-evaluations__content.smsc-container.smsc-container--main
+  .listview__rows {
+  padding-left: 1.5rem !important;
 }
 
 [dialog-content] {
@@ -88,7 +92,6 @@
 }
 
 .js-emptystate {
-  background-color: var(--color-base00) !important;
   box-shadow: none !important;
   color: var(--color-text) !important;
   padding: 20px !important;
@@ -162,7 +165,6 @@ input.input.bootstrap__input.search-input {
 }
 
 .evaluation-list-item,
-.dropdown-button,
 .goals-filter__item,
 .content_container,
 .navigation_container {
@@ -170,6 +172,11 @@ input.input.bootstrap__input.search-input {
   backdrop-filter: blur(5px) !important;
   color: var(--color-text) !important;
   border-color: var(--color-base01) !important;
+}
+.dropdown-button {
+  background: var(--color-base01) !important;
+  color: var(--color-text) !important;
+  border-color: var(--color-base02) !important;
 }
 
 button.goals-filter__item.selected {

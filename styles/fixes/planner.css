@@ -99,8 +99,117 @@
   [listview]
   .todo-column__row--resolved:hover
   .todo-column__actions-cell {
-  background-color: var(--color-base03) !important;
+  background-color: var(--color-base02) !important;
   transition: none !important;
+  display: flex !important;
+  flex-direction: row !important;
+  height: 2.5rem !important;
+  top: 0.5rem !important;
+  right: 0.5rem !important;
+  border-radius: 1rem !important;
+  padding: 0.25rem !important;
+  box-shadow: 0px 2px 10px 0px var(--darken-background) !important;
+}
+
+[listview] .listview__action-btn {
+  height: 100% !important;
+}
+
+.todo-column
+  [listview]
+  .todo-column__row:hover
+  .todo-column__date-cell
+  + .todo-column__actions-cell {
+  top: 0.25rem !important;
+  right: 0.25rem !important;
+  border-radius: 1rem !important;
+  height: calc(100% - 0.5rem) !important;
+}
+
+.listview__action-btns .listview__action-btn {
+  border: none !important;
+  border-radius: 0.75rem !important;
+}
+.listview__action-btn:hover {
+  background-color: var(--color-base03) !important;
+}
+.bubble-s87kI.tooltip-uUxmN {
+  border-radius: 1rem !important;
+  padding: 0.75rem !important;
+  color: var(--color-text) !important;
+  box-shadow: 0px 2px 10px 0px var(--darken-background) !important;
+}
+
+.todo-column__container {
+  background-color: var(--darken-background) !important;
+  backdrop-filter: blur(5px) !important;
+  border-radius: 2rem !important;
+  padding: 1rem !important;
+}
+.listview__rows > * {
+  margin-left: 0 !important;
+}
+
+.listview__row.js-listview-row.todo__row.todo-column__row {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 1rem !important;
+  padding: 0.75rem !important;
+  border-radius: 1.25rem !important;
+}
+
+.listview__row.js-listview-row.todo__row.todo-column__row > * {
+  padding: 0 !important;
+}
+
+.todo-column [listview] .todo-column__icon-cell__wrapper,
+.todo-column [listview] .todo-column__abbreviation-cell__wrapper {
+  border-radius: 0.5rem !important;
+}
+
+.listview__row.js-listview-row.todo-column__row:hover,
+.content__day-column.js-day-column.highlight,
+.header__day.header__wholeday-column.js-wholeday-column.highlight {
+  background-color: var(--darken-background) !important;
+  backdrop-filter: blur(5px) !important;
+  border-radius: 1.25rem !important;
+}
+
+.todo-column [listview] .todo-column__date-cell {
+  padding: 0.75rem !important;
+}
+
+.listview__row.js-listview-row.todo-column__row:has(
+    .todo-column__date-cell
+  ):not(:first-of-type) {
+  margin-top: 1rem !important;
+}
+
+.todo-column__container .todo-column__pinned > * {
+  margin-left: 0 !important;
+}
+
+.todo-column__container .todo-column__pinned span.todo-column__pinned__title {
+  margin-left: 0.75rem !important;
+  color: var(--color-accent) !important;
+}
+
+hr.separator.todo-column__pinned__seperator {
+  display: none !important;
+}
+
+.selectview__hotkey-M span:after,
+.selectview__hotkey-W span:after,
+.selectview__hotkey-L span:after,
+.selectview__hotkey-T:after,
+.selectview__hotkey-O span:after {
+  color: var(--color-text) !important;
+  opacity: 0.7 !important;
+}
+
+.lessonClusterListViewWrapper-ekr0X {
+  background-color: var(--color-base00) !important;
+  box-shadow: none !important;
 }
 
 .icon-label-btn--blob.icon-label-btn,
@@ -224,14 +333,6 @@
 
 .datepicker .block .header select.header__month {
   border: 2px solid transparent !important;
-}
-
-.listview__row.js-listview-row.todo-column__row:hover,
-.content__day-column.js-day-column.highlight,
-.header__day.header__wholeday-column.js-wholeday-column.highlight {
-  background-color: var(--darken-background) !important;
-  backdrop-filter: blur(5px) !important;
-  border-radius: 10px !important;
 }
 
 .listview__row.js-listview-row:hover {
@@ -416,12 +517,6 @@ button.evaluation-list-item {
 
 .listview__row.js-listview-row.goals__row {
   display: none !important;
-}
-
-.todo-column__container {
-  background-color: var(--darken-background) !important;
-  backdrop-filter: blur(5px) !important;
-  border-radius: 10px !important;
 }
 
 button.icon-label-btn.js-icon-label-btn.icon-label-btn--linkbutton {

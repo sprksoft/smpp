@@ -22,7 +22,7 @@
 
 .modern-message {
   border: 2px solid var(--color-base01) !important;
-  border-radius: 10px !important;
+  border-radius: 1.25rem !important;
   background: var(--color-base01) !important;
   padding: 6px 10px !important;
   height: auto !important;
@@ -34,6 +34,16 @@
   width: auto !important;
   margin: 3px !important;
   margin-bottom: 6px !important;
+}
+
+.bubble.filter-todo-bubble
+  div.filter-todo-form
+  div.checkbox-group
+  label.checkbox
+  div.checkbox-todo-label
+  span.abbreviation {
+  color: var(--color-text) !important;
+  opacity: 0.7 !important;
 }
 
 .modern-message--new .modern-message__read-status {
@@ -74,18 +84,21 @@
 }
 
 .modern-ui .modern-message__actions {
-  background-color: var(--color-base03) !important;
-  box-shadow: none !important;
+  background-color: var(--color-base01) !important;
+  box-shadow: 0px 2px 5px 0px var(--darken-background) !important;
+  backdrop-filter: blur(5px) !important;
+  border-radius: 1rem !important;
+  top: 0.25rem !important;
+  right: 0.25rem !important;
 }
 
 button.modern-message__action.modern-message__action--quick-reply:hover,
 .modern-message__action--continue-draft:hover,
 button.modern-message__action.modern-message__action--archive:hover,
-button.modern-message__action.modern-message__action--delete:hover,
-.listview__action-btn:hover {
+button.modern-message__action.modern-message__action--delete:hover {
   background-color: var(--color-base02) !important;
-  border: 2px solid transparent !important;
-  border-radius: 5px !important;
+  border: none !important;
+  border-radius: 0.75rem !important;
 }
 
 .modern-message__action--quick-reply,
@@ -93,8 +106,12 @@ button.modern-message__action.modern-message__action--delete:hover,
 .modern-message__action--continue-draft,
 .modern-message__action--archive,
 .listview__action-btn {
-  background-color: var(--color-base03) !important;
-  border: 2px solid transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+}
+
+quick-reply {
+  height: 24px !important;
 }
 
 .postbox_line {

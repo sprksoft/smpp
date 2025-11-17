@@ -2241,10 +2241,6 @@ mark {
   margin-left: 1rem !important;
 }
 
-.listview__action-btns .listview__action-btn {
-  margin-right: 1rem;
-}
-
 body.modern-ui .homepage__block__content {
   overflow: unset !important;
 }
