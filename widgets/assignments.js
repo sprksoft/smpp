@@ -10,7 +10,6 @@ class TakenWidget extends WidgetBase {
   }
   onSettingsChange() {
     this.element.appendChild(this.createContent());
-    console.log("called in settings change");
   }
   createContent() {
     const foresight = 28; // dagen in de toekomst dat het zoekt voor taken
@@ -24,7 +23,6 @@ class TakenWidget extends WidgetBase {
       sendDebug("Next Date:", getFutureDate(foresight));
     }
     this.clearContent();
-    console.log("just cleared");
     async function fetchPlannerData() {
       try {
         const schoolName = getSchoolName();
@@ -93,7 +91,6 @@ class TakenWidget extends WidgetBase {
             new Date(a.period.dateTimeFrom) - new Date(b.period.dateTimeFrom)
         );
         let lastDate = "";
-        console.log(this.settings);
         if (data.length > this.settings.maxAssignments) {
           data = data.slice(0, this.settings.maxAssignments);
         }
@@ -242,7 +239,6 @@ class TakenWidget extends WidgetBase {
     return previewElement;
   }
   clearContent() {
-    console.log(this.element);
     this.element.innerHTML = "";
   }
 }

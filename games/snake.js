@@ -92,6 +92,10 @@ class SnakeWidget extends GameBase {
     }
   }
 
+  defaultSettings() {
+    return { score: 0, options: [], enableGrid: true };
+  }
+
   async onGameStart() {
     const cellCount = CELL_COUNT * this.getOpt("size") * 0.01;
     if (!this.#backgroundCanvas) {
@@ -102,10 +106,8 @@ class SnakeWidget extends GameBase {
     }
     // redraw background in case of slider change.
     const bgctx = this.#backgroundCanvas.getContext("2d", { alpha: false });
-    const settingsData = await browser.runtime.sendMessage({
-      action: "getSettingsData",
-    });
-    this.#drawBg(bgctx, settingsData);
+
+    this.#drawBg(bgctx);
 
     this.#counter = 0;
     this.#curDir = DIR_DOWN;
@@ -117,14 +119,11 @@ class SnakeWidget extends GameBase {
   }
 
   async onThemeChange() {
-    const settingsData = await browser.runtime.sendMessage({
-      action: "getSettingsData",
-    });
     if (!this.#backgroundCanvas) {
       return;
     }
     const bgctx = this.#backgroundCanvas.getContext("2d", { alpha: false });
-    this.#drawBg(bgctx, settingsData);
+    this.#drawBg(bgctx);
   }
 
   #drawDot(ctx, dot) {
@@ -141,13 +140,13 @@ class SnakeWidget extends GameBase {
     ctx.fill();
   }
 
-  #drawBg(ctx, settingsData) {
+  #drawBg(ctx) {
     const cellCount = this.getOpt("size") * 0.01 * CELL_COUNT;
     const celRad = this.#calcCelRad();
     ctx.strokeWidth = 0;
     ctx.fillStyle = getThemeVar("--color-base01");
     ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-    if (settingsData.widgets.games.snake.enableGrid) {
+    if (this.settings.enableGrid) {
       for (let y = 0; y < cellCount; y++) {
         for (let x = 0; x < cellCount; x++) {
           if ((x + y) % 2 == 0) {

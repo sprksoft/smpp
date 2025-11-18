@@ -43,7 +43,9 @@ async function fetchDelijnData(url) {
 }
 
 // Display functions
-async function createHalteDoorkomst(doorkomst, container, monochrome) {
+async function createHalteDoorkomst(doorkomst, container, monochrome, signal) {
+  if (signal?.aborted) return;
+
   const entiteitnummer = doorkomst.entiteitnummer;
   const lijnnummer = doorkomst.lijnnummer;
   const destination = doorkomst.bestemming;
@@ -54,7 +56,7 @@ async function createHalteDoorkomst(doorkomst, container, monochrome) {
   }
   const controller = new AbortController();
   lijnUpdateControllers[lijnKey] = controller;
-  const signal = controller.signal;
+  const cardSignal = controller.signal;
 
   const originalETA = new Date(doorkomst.dienstregelingTijdstip);
   let ETA = originalETA;
@@ -132,6 +134,8 @@ async function createHalteDoorkomst(doorkomst, container, monochrome) {
   lijnCard.appendChild(arrivalTimeDeviationElement);
   lijnCard.appendChild(lijnCardBottom);
 
+  if (signal?.aborted) return;
+
   container.appendChild(lijnCard);
 
   try {
@@ -139,11 +143,12 @@ async function createHalteDoorkomst(doorkomst, container, monochrome) {
       lijnNumberElement,
       entiteitnummer,
       lijnnummer,
-      monochrome
+      monochrome,
+      cardSignal
     );
   } catch (err) {
     if (err.name === "AbortError") {
-      console.error(`Request for lijn ${lijnKey} was aborted`);
+      console.log(`Request for lijn ${lijnKey} was aborted`);
       return;
     }
     console.error(err);
@@ -154,18 +159,28 @@ async function updateLijnCardWithApiData(
   lijnNumberElement,
   entiteitnummer,
   lijnnummer,
-  monochrome
+  monochrome,
+  signal
 ) {
+  if (signal?.aborted) return;
+
   try {
     const individualLijnData = await fetchDelijnData(
-      `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${entiteitnummer}/${lijnnummer}`
+      `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${entiteitnummer}/${lijnnummer}`,
+      { signal }
     );
+
+    if (signal?.aborted) return;
+
     const publicLineNumber = individualLijnData.lijnnummerPubliek;
     lijnNumberElement.textContent = publicLineNumber;
 
     const individualLijnDataColors = await fetchDelijnData(
-      `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${entiteitnummer}/${lijnnummer}/lijnkleuren`
+      `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${entiteitnummer}/${lijnnummer}/lijnkleuren`,
+      { signal }
     );
+
+    if (signal?.aborted) return;
 
     if (!monochrome) {
       lijnNumberElement.style.backgroundColor = getHexByCode(
@@ -179,6 +194,10 @@ async function updateLijnCardWithApiData(
       );
     }
   } catch (error) {
+    if (error.name === "AbortError") {
+      console.log("Lijn card update was aborted");
+      return;
+    }
     console.error("Failed to fetch additional data for lijn card:", error);
   }
 }
@@ -200,6 +219,8 @@ class DelijnWidget extends WidgetBase {
   constructor() {
     super();
     this.searchResultLimit = 5;
+    this.currentHalteOptionsAbortController = null;
+    this.currentDoorkomstenAbortController = null;
     this.elements = {
       topContainer: null,
       searchInput: null,
@@ -226,6 +247,9 @@ class DelijnWidget extends WidgetBase {
   }
 
   async onSettingsChange() {
+    if (this.currentDoorkomstenAbortController) {
+      this.currentDoorkomstenAbortController.abort();
+    }
     this.initializeData();
   }
 
@@ -263,15 +287,36 @@ class DelijnWidget extends WidgetBase {
   }
 
   async displayLijnenBasedOnHalte() {
+    // Abort previous request if any
+    if (this.currentDoorkomstenAbortController) {
+      this.currentDoorkomstenAbortController.abort();
+    }
+
+    // Create new abort controller for this request
+    this.currentDoorkomstenAbortController = new AbortController();
+    const signal = this.currentDoorkomstenAbortController.signal;
+
     this.displayInfo("Loading...");
     this.clearBottomContainer();
-    // const data = await browser.runtime.sendMessage({
-    //   action: "getSettingsData",
-    // });
 
-    const delijnData = await fetchDelijnData(
-      `https://api.delijn.be/DLKernOpenData/api/v1/haltes/${this.settings.halte.entiteit}/${this.settings.halte.nummer}/real-time?maxAantalDoorkomsten=${this.settings.maxBusses}`
-    );
+    let delijnData;
+    try {
+      delijnData = await fetchDelijnData(
+        `https://api.delijn.be/DLKernOpenData/api/v1/haltes/${this.settings.halte.entiteit}/${this.settings.halte.nummer}/real-time?maxAantalDoorkomsten=${this.settings.maxBusses}`,
+        { signal }
+      );
+    } catch (error) {
+      if (error.name === "AbortError") {
+        console.log("Doorkomsten request was aborted");
+        return;
+      }
+      this.displayInfo("Er liep iets mis: " + error);
+      console.error(error);
+      return;
+    }
+
+    if (signal.aborted) return;
+
     console.log(delijnData);
 
     if (!delijnData.halteDoorkomsten[0]) {
@@ -298,24 +343,29 @@ class DelijnWidget extends WidgetBase {
     );
 
     for (const doorkomst of sortedDoorkomsten) {
+      if (signal.aborted) return; // Check before each card creation
+
       await createHalteDoorkomst(
         doorkomst,
         this.elements.bottomContainer,
-        this.settings.monochrome
+        this.settings.monochrome,
+        signal // Pass signal to createHalteDoorkomst
       );
+
+      if (signal.aborted) return; // Check after each card creation
     }
 
-    addDelijnAttest(this.elements.bottomContainer);
+    if (!signal.aborted) {
+      addDelijnAttest(this.elements.bottomContainer);
+    }
   }
 
   async initializeData() {
     lijnDataKleuren = await browser.runtime.sendMessage({
       action: "getDelijnColorData",
     });
-
     if (this.settings.halte.nummer == null) {
       this.displayInfo("Zoek een halte");
-      console.log("trying that");
     } else {
       await this.displayLijnenBasedOnHalte();
     }

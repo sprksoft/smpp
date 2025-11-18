@@ -96,8 +96,6 @@ class WidgetBase {
         await this.#loadSettings();
 
         newContent = await this.createContent();
-
-        // WHY WAS THIS HERE??? await this.onSettingsChange();
       }
     } catch (e) {
       console.error("Failed to create widget content");
@@ -118,10 +116,9 @@ class WidgetBase {
     this.#preview = preview;
   }
 
-  isPreview() {
-    return this.#preview;
+  isActive() {
+    return this.#content != null;
   }
-
 
   async createIfNotExist() {
     if (!this.#content) {
@@ -256,19 +253,17 @@ class WidgetBase {
     closeBag();
   }
 
-
   /// Loads widget settings if needed.
   async #loadSettings() {
-    if (this.#settings !== undefined) { return; }
+    if (this.#settings !== undefined) {
+      return;
+    }
     const settings = await browser.runtime.sendMessage({
       action: "getWidgetData",
       widget: this.constructor.name,
     });
 
-    this.#settings = fillObjectWithDefaults(
-      settings,
-      this.defaultSettings()
-    );
+    this.#settings = fillObjectWithDefaults(settings, this.defaultSettings());
   }
 
   // modifies a setting
@@ -281,19 +276,21 @@ class WidgetBase {
       data: this.#settings,
     });
 
-    if (!this.isPreview()) {
+    if (this.isActive()) {
       await this.onSettingsChange();
     }
   }
 
   async getSetting(path) {
     await this.#loadSettings();
-    return getByPath(this.#settings, path)
+    return getByPath(this.#settings, path);
   }
 
   get settings() {
     if (this.#settings === undefined) {
-      console.error("Settings were not loaded before access. Don't use .settings outside of the widget. Call await widget.getSetting(path)");
+      console.error(
+        "Settings were not loaded before access. Don't use .settings outside of the widget. Call await widget.getSetting(path)"
+      );
     }
     return this.#settings;
   }
@@ -316,7 +313,7 @@ class WidgetBase {
 
   // (Required): Gets called when the content element of the widget needs to be
   // created (return html element). (Don't do slow tasks in here)
-  async createContent() { }
+  async createContent() {}
   // Gets called when the preview element needs to be created (return html
   // element) NOTE: preview and content never exist at the same time
   async createPreview() {
@@ -325,9 +322,9 @@ class WidgetBase {
 
   // Gets called when the settings of the widget change.
   // Use this to update the widget content based on the new settings. (settings object is always valid based on the value returned by defaultSettings())
-  async onSettingsChange() { }
+  async onSettingsChange() {}
 
-  async onThemeChange() { }
+  async onThemeChange() {}
 }
 
 class ErrorWidget extends WidgetBase {
@@ -793,7 +790,7 @@ function splitWidgetNameAndSettingPath(path) {
   const index = path.indexOf(".");
   const widgetName = path.slice(0, index);
   const settingPath = path.slice(index + 1);
-  return [widgetName, settingPath]
+  return [widgetName, settingPath];
 }
 
 // Gets a widget by its name.
@@ -806,7 +803,6 @@ function getWidgetByName(name) {
   }
   return null;
 }
-
 
 // Get the value of a widget setting.
 // path is: WidgetName.SettingsPath

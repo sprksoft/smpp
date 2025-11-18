@@ -222,9 +222,10 @@ class GameBase extends WidgetBase {
     menu.appendChild(menuBottom);
     this.menu = menu;
     div.appendChild(menu);
-
+    this.onSettingsChange();
     return div;
   }
+
   async onSettingsChange() {
     if (this.constructor.name == "SnakeWidget") {
       if (window.localStorage.getItem("snakehighscore")) {
