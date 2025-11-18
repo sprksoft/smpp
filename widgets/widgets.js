@@ -48,7 +48,7 @@ class WidgetBase {
   #bagPlaceHolder;
   #bagGroup;
   #aboutToDel;
-  settings;
+  #settings;
 
   constructor() {
     this.element = this.#createWidgetDiv();
@@ -93,15 +93,7 @@ class WidgetBase {
       } else {
         this.element.classList.remove("smpp-widget-preview");
 
-        const settings = await browser.runtime.sendMessage({
-          action: "getWidgetData",
-          widget: this.constructor.name,
-        });
-
-        this.settings = fillObjectWithDefaults(
-          settings,
-          this.defaultSettings()
-        );
+        await this.#loadSettings();
 
         newContent = await this.createContent();
 
@@ -129,6 +121,7 @@ class WidgetBase {
   isPreview() {
     return this.#preview;
   }
+
 
   async createIfNotExist() {
     if (!this.#content) {
@@ -263,19 +256,47 @@ class WidgetBase {
     closeBag();
   }
 
-  // Protected (use inside of child classes)
+
+  /// Loads widget settings if needed.
+  async #loadSettings() {
+    if (this.#settings !== undefined) { return; }
+    const settings = await browser.runtime.sendMessage({
+      action: "getWidgetData",
+      widget: this.constructor.name,
+    });
+
+    this.#settings = fillObjectWithDefaults(
+      settings,
+      this.defaultSettings()
+    );
+  }
 
   // modifies a setting
   async setSetting(path, value) {
-    setByPath(this.settings, path, value);
+    await this.#loadSettings();
+    setByPath(this.#settings, path, value);
     await browser.runtime.sendMessage({
       action: "setWidgetData",
       widget: this.constructor.name,
-      data: this.settings,
+      data: this.#settings,
     });
-    await this.onSettingsChange();
+
+    if (!this.isPreview()) {
+      await this.onSettingsChange();
+    }
   }
-  // end Protected
+
+  async getSetting(path) {
+    await this.#loadSettings();
+    return getByPath(this.#settings, path)
+  }
+
+  get settings() {
+    if (this.#settings === undefined) {
+      console.error("Settings were not loaded before access. Don't use .settings outside of the widget. Call await widget.getSetting(path)");
+    }
+    return this.#settings;
+  }
 
   // Override us
   // Name of the widget
@@ -295,7 +316,7 @@ class WidgetBase {
 
   // (Required): Gets called when the content element of the widget needs to be
   // created (return html element). (Don't do slow tasks in here)
-  async createContent() {}
+  async createContent() { }
   // Gets called when the preview element needs to be created (return html
   // element) NOTE: preview and content never exist at the same time
   async createPreview() {
@@ -304,9 +325,9 @@ class WidgetBase {
 
   // Gets called when the settings of the widget change.
   // Use this to update the widget content based on the new settings. (settings object is always valid based on the value returned by defaultSettings())
-  async onSettingsChange() {}
+  async onSettingsChange() { }
 
-  async onThemeChange() {}
+  async onThemeChange() { }
 }
 
 class ErrorWidget extends WidgetBase {
@@ -768,6 +789,15 @@ function updateDoneButtonState(value) {
   });
 }
 
+function splitWidgetNameAndSettingPath(path) {
+  const index = path.indexOf(".");
+  const widgetName = path.slice(0, index);
+  const settingPath = path.slice(index + 1);
+  return [widgetName, settingPath]
+}
+
+// Gets a widget by its name.
+// Use shorthands: setWidgetSetting/getWidgetSetting to set and get settings of a widget
 function getWidgetByName(name) {
   for (let widget of widgets) {
     if (widget.name == name) {
@@ -775,6 +805,24 @@ function getWidgetByName(name) {
     }
   }
   return null;
+}
+
+
+// Get the value of a widget setting.
+// path is: WidgetName.SettingsPath
+async function getWidgetSetting(path) {
+  const [widgetName, settingPath] = splitWidgetNameAndSettingPath(path);
+  const widget = getWidgetByName(widgetName);
+  return await widget.getSetting(settingPath);
+}
+
+// Set the value of a widget setting.
+// path is: WidgetName.SettingsPath
+async function setWidgetSetting(path, value) {
+  const [widgetName, settingPath] = splitWidgetNameAndSettingPath(path);
+
+  const widget = getWidgetByName(widgetName);
+  await widget.setSetting(settingPath, value);
 }
 
 async function setEditMode(value) {
