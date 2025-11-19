@@ -2375,3 +2375,12 @@ body.modern-ui .homepage__block__content {
 .campaign-dialog-content__button-bar {
   background: var(--color-base01) !important;
 }
+
+.smsc-topnav [data-courses] .course-list li .favourite-button:hover {
+  border: none !important;
+  background-color: var(--color-base02) !important;
+}
+
+hr {
+  border-top: 1px solid var(--color-base03) !important;
+}
