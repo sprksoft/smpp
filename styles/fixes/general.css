@@ -1222,10 +1222,6 @@ span.userNotRead {
   background-color: var(--color-base01) !important;
 }
 
-.user-image {
-  display: none;
-}
-
 .personaliaTable > tbody > tr > td > input.readonly,
 input[name="email"] {
   background-color: var(--color-base01) !important;

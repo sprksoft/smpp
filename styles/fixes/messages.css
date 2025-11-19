@@ -145,7 +145,8 @@ quick-reply {
 }
 
 .searchDivResult .userSearchDivFull .user_row .user_row_info .row_info_2 {
-  color: var(--color-base03) !important;
+  color: var(--color-text) !important;
+  opacity: 0.5 !important;
 }
 
 .searchInputField {
@@ -219,10 +220,8 @@ body.modern-ui .homepage__block {
   background-color: var(--color-base01) !important;
 }
 
-.composeUsers,
-.compose_subject {
-  border-radius: 5px !important;
-  border: 2px solid var(--color-base02) !important;
+.composeUsers {
+  padding-top: 4px !important;
 }
 
 .smsc-column-nav__button:hover {
@@ -468,6 +467,11 @@ div.tox-toolbar[role="group"][aria-disabled="false"] {
   background: none !important;
 }
 
+.tox-mbtn:hover,
+.tox-btn:hover {
+  cursor: pointer;
+}
+
 body#tinymce {
   color: var(--color-text) !important;
   background: var(--color-base00) !important;
@@ -496,11 +500,52 @@ td.msg_bottom {
   background-color: var(--color-base02) !important;
 }
 
+.searchDivResult:not(:last-child) {
+  border-bottom: 1px solid var(--color-base02) !important;
+}
+.searchDivResult {
+  border-radius: 100rem !important;
+}
+
+.composeUsers,
 .searchDivContent,
-.compose_subject,
-.subjectInput {
+.compose_subject {
   background-color: var(--color-base01) !important;
   color: var(--color-text) !important;
+  border-radius: 1rem !important;
+  border: 2px solid var(--color-base02) !important;
+  width: 40rem !important;
+  margin-right: 0 !important;
+  min-height: 3rem !important;
+  padding-top: 1px;
+}
+
+#subjectInput.subjectInput {
+  background-color: transparent !important;
+  border: none !important;
+}
+
+.compose_title {
+  width: 100px !important;
+}
+
+.accswitch--top {
+  position: absolute !important;
+  left: 250px !important;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.searchDivContent {
+  margin: -16px 0 0 -3px !important;
+  padding-top: 1rem !important;
+  border-top: 0px !important;
+  border-bottom-right-radius: 1rem !important;
+  border-bottom-left-radius: 1rem !important;
+  box-shadow: 0px 35px 50px 0px var(--darken-background) !important;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
 }
 
 td#msg_bg,
@@ -539,12 +584,12 @@ button.accswitchco.mbselected,
 button.accswitchmain.mbselected {
   background: none !important;
   background-color: var(--color-base02) !important;
-  border: 2px solid var(--color-accent) !important;
-  border-radius: 5px !important;
+  border: 2px solid var(--color-base03) !important;
+  border-radius: 1rem !important;
   padding: 0px !important;
   height: 25px;
   line-height: normal;
-  color: var(--color-accent) !important;
+  color: var(--color-text) !important;
 }
 
 button.accswitchco.mbnotselected,
@@ -552,7 +597,7 @@ button.accswitchmain.mbnotselected {
   background: none !important;
   background-color: var(--color-base01) !important;
   border: 2px solid var(--color-base02) !important;
-  border-radius: 5px !important;
+  border-radius: 1rem !important;
   padding: 0px !important;
   height: 25px;
   line-height: normal;
@@ -793,4 +838,53 @@ a.menu-type.menu-linkbutton.smsc-linkbutton {
 
 .msgContent p {
   background-color: var(--color-base01) !important;
+}
+
+.blob-group__blob.blob {
+  background-color: var(--color-base01) !important;
+  border-radius: 1000px !important;
+  margin: 0 !important;
+}
+
+.send-delayed-button {
+  display: flex !important;
+  gap: 0.5rem !important;
+  flex-wrap: nowrap !important;
+}
+
+.blob-counters__container {
+  width: 800px !important;
+}
+
+.js-btn.btn.js-split-button-button:has(.send-delayed-button__send) {
+  border-radius: 1rem !important;
+  border-color: var(--color-base03) !important;
+  background-color: var(--color-base02) !important;
+  height: 3rem !important;
+  width: 6rem !important;
+  justify-content: center !important;
+}
+
+button.split-button__dropdown.js-split-button-dropdown.btn.btn--dropdown.js-btn.btn--primary {
+  aspect-ratio: 1 !important;
+  width: 3rem !important;
+}
+
+.btn--primary.js-btn.btn.js-split-button-button:has(
+    .send-delayed-button__send
+  ):hover {
+  background-color: var(--color-base03) !important;
+  border-color: var(--color-accent) !important;
+}
+
+.send-delayed-button__send {
+  color: var(--color-accent) !important;
+  background-color: transparent !important;
+}
+
+.js-split-button-dropdown {
+  border-radius: 1rem !important;
+}
+.btn.btn--dropdown:after {
+  right: unset !important;
 }

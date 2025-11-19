@@ -747,10 +747,6 @@ h3.card-block__title.fluid-ui-heading.fluid-ui-heading--3 {
   border-bottom-left-radius: 15px !important;
 }
 
-.blob-group__blob.blob {
-  background-color: var(--color-base01) !important;
-}
-
 .mailingListItem__checkbox_EOMal.bp-c-combo-green--100 {
   background-color: var(--color-base02) !important;
 }
@@ -944,4 +940,20 @@ h3.detail-description__title.title--3,
 .timegrid__header .wholedays__expand-button-container {
   background-color: var(--color-base01) !important;
   border-radius: 1rem !important;
+}
+
+.splitdetail-dialog .birthday-dialog .birthday-dialog__entry:hover {
+  background-color: transparent !important;
+}
+
+.birthday-dialog__header-title {
+  background-color: transparent !important;
+}
+
+.birthday-dialog__header-curve.curve {
+  display: none !important;
+}
+
+.mainPage-Zrcmt.active-view--week .todoColumnContainer-KCyuk {
+  border-left: none !important;
 }

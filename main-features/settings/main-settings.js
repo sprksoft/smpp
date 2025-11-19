@@ -34,7 +34,7 @@ class SettingsWindow extends BaseWindow {
       await this.createSettingsSideBarProfileButton();
     settingsSideBarProfileButton.classList.add("active");
     settingsSideBarProfileButton.addEventListener("click", async () => {
-      this.currentPage = "profile";
+      this.currentPage = "appearance";
       document
         .querySelectorAll(".settings-category-button-js")
         .forEach((el) => {
