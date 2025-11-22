@@ -878,6 +878,7 @@ button.split-button__dropdown.js-split-button-dropdown.btn.btn--dropdown.js-btn.
 }
 
 .send-delayed-button__send {
+  font-size: 1.3rem !important;
   color: var(--color-accent) !important;
   background-color: transparent !important;
 }

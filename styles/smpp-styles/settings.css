@@ -22,14 +22,16 @@
 
 .settings-category-button-js {
   box-shadow: 0px 5px 10px 0px var(--darken-background);
+  margin: 0;
 }
 
-.settings-category-button-js.active {
+.settings-radio:checked + label {
   border-color: var(--color-base03) !important;
   background-color: var(--color-base02);
   color: var(--color-accent) !important;
   font-weight: 600 !important;
 }
+
 .settings-category-button-js:active {
   scale: 0.95 !important;
 }
@@ -40,6 +42,7 @@
 
 .settings-category-button-js:hover {
   background-color: var(--color-base02);
+  cursor: pointer;
 }
 
 .enableAnimations .settings-category-button-js {
@@ -88,6 +91,7 @@
   gap: 1rem;
   padding: 1rem;
   padding-right: 0.5rem;
+  justify-content: start;
   border-radius: 1rem;
   width: 100%;
   border: none;
@@ -101,12 +105,12 @@
   background-repeat: no-repeat;
   background-position: center;
   border-radius: 10000px;
-  height: 100%;
+  width: 3.5rem;
   aspect-ratio: 1;
 }
 
 .profile-settings-label {
-  width: 100%;
+  width: fit-content;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
@@ -750,4 +754,8 @@ input.settings-page-keybinding-input[type="text"]:not(
 
 #profile-picture-input-container {
   margin-bottom: 1rem !important;
+}
+
+.settings-radio {
+  display: none !important;
 }

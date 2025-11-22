@@ -7,7 +7,7 @@ class SettingsWindow extends BaseWindow {
     widgets: { name: "Widgets" },
     other: { name: "Other" },
   };
-  currentPage = "profile";
+  currentPage = "appearance";
 
   constructor(hidden = false) {
     super("settings-window", hidden);
@@ -30,69 +30,80 @@ class SettingsWindow extends BaseWindow {
   async createSettingsSideBar() {
     let settingsSideBar = document.createElement("div");
     settingsSideBar.classList.add("settings-sidebar");
+
     let settingsSideBarProfileButton =
       await this.createSettingsSideBarProfileButton();
-    settingsSideBarProfileButton.classList.add("active");
-    settingsSideBarProfileButton.addEventListener("click", async () => {
-      this.currentPage = "appearance";
-      document
-        .querySelectorAll(".settings-category-button-js")
-        .forEach((el) => {
-          el.classList.remove("active");
-        });
-      settingsSideBarProfileButton.classList.add("active");
-      this.displaySettingsPage();
-      await this.loadPage();
-    });
     settingsSideBar.appendChild(settingsSideBarProfileButton);
 
     Object.keys(this.settingsSideBarCategories).forEach((key) => {
       let settingsSideBarButton = this.createSettingsSideBarCategory(key);
-      settingsSideBarButton.addEventListener("click", async (event) => {
-        this.currentPage = event.currentTarget.dataset.page;
-        document
-          .querySelectorAll(".settings-category-button-js")
-          .forEach((el) => {
-            el.classList.remove("active");
-          });
-        event.target.classList.add("active");
-        this.displaySettingsPage();
-        await this.loadPage();
-      });
       settingsSideBar.appendChild(settingsSideBarButton);
     });
+
+    settingsSideBar.addEventListener("change", this.updateSideBar);
+
+    let currentRadio = settingsSideBar.querySelector(
+      `input[value="${this.currentPage}"]`
+    );
+    if (currentRadio) currentRadio.checked = true;
     return settingsSideBar;
   }
+
+  updateSideBar = async (event) => {
+    if (event.target.type === "radio") {
+      this.currentPage = event.target.value;
+      this.displaySettingsPage();
+      await this.loadPage();
+    }
+  };
 
   async createSettingsSideBarProfileButton() {
     let data = await browser.runtime.sendMessage({
       action: "getSettingsData",
     });
-    let profileSettingsButton = document.createElement("button");
-    profileSettingsButton.classList.add(
+
+    let radioInput = document.createElement("input");
+    radioInput.type = "radio";
+    radioInput.name = "settings-page";
+    radioInput.value = "profile";
+    radioInput.id = "settings-profile";
+    radioInput.classList.add("settings-radio");
+
+    let profileSettingsLabel = document.createElement("label");
+    profileSettingsLabel.htmlFor = "settings-profile";
+    profileSettingsLabel.classList.add(
       "profile-settings-button",
       "settings-category-button-js"
     );
+
     let profilePicture = document.createElement("div");
     profilePicture.classList.add("profile-picture-settings");
-    let profileSettingsLabel = document.createElement("div");
-    profileSettingsLabel.classList.add("profile-settings-label");
+
+    let profileTextContainer = document.createElement("div");
+    profileTextContainer.classList.add("profile-settings-label");
+
     let profileSettingsLabelTitle = document.createElement("h2");
     profileSettingsLabelTitle.id = "profile-settings-label-title";
     profileSettingsLabelTitle.innerText = String(
       data.profile.username || originalUsername
     ).split(" ")[0];
+
     let profileSettingsLabelDescription = document.createElement("p");
     profileSettingsLabelDescription.classList.add(
       "profile-settings-label-description"
     );
     profileSettingsLabelDescription.innerText = "view profile";
-    profileSettingsLabel.appendChild(profileSettingsLabelTitle);
-    profileSettingsLabel.appendChild(profileSettingsLabelDescription);
 
-    profileSettingsButton.appendChild(profilePicture);
-    profileSettingsButton.appendChild(profileSettingsLabel);
-    return profileSettingsButton;
+    profileTextContainer.appendChild(profileSettingsLabelTitle);
+    profileTextContainer.appendChild(profileSettingsLabelDescription);
+    profileSettingsLabel.appendChild(profilePicture);
+    profileSettingsLabel.appendChild(profileTextContainer);
+
+    let container = document.createElement("div");
+    container.appendChild(radioInput);
+    container.appendChild(profileSettingsLabel);
+
+    return container;
   }
 
   isPastaTime() {
@@ -100,16 +111,22 @@ class SettingsWindow extends BaseWindow {
   }
 
   createSettingsSideBarCategory(category) {
-    let categoryButton = document.createElement("button");
-    categoryButton.classList.add(
+    let radioInput = document.createElement("input");
+    radioInput.type = "radio";
+    radioInput.name = "settings-page";
+    radioInput.value = category;
+    radioInput.id = `settings-${category}`;
+    radioInput.classList.add("settings-radio");
+
+    let categoryLabel = document.createElement("label");
+    categoryLabel.htmlFor = `settings-${category}`;
+    categoryLabel.classList.add(
       "settings-category-button",
       "settings-category-button-js"
     );
-    categoryButton.dataset.page = category;
-    categoryButton.innerText = this.settingsSideBarCategories[category].name;
+
     let categoryButtonIcon = document.createElement("img");
     categoryButtonIcon.classList.add("category-button-icon");
-
     let imageFileName = category + ".webp";
     if (category === "appearance" && this.isPastaTime()) {
       imageFileName = "pasta.webp";
@@ -117,12 +134,21 @@ class SettingsWindow extends BaseWindow {
     categoryButtonIcon.src = getExtensionImage(
       "settings-icons/" + imageFileName
     );
-    categoryButton.prepend(categoryButtonIcon);
-    return categoryButton;
+
+    categoryLabel.appendChild(categoryButtonIcon);
+    categoryLabel.appendChild(
+      document.createTextNode(this.settingsSideBarCategories[category].name)
+    );
+
+    let container = document.createElement("div");
+    container.appendChild(radioInput);
+    container.appendChild(categoryLabel);
+
+    return container;
   }
 
   clearSettingsPage() {
-    this.settingsPage.innerHTML = " ";
+    this.settingsPage.innerHTML = "";
   }
 
   addDisclaimer(
@@ -599,10 +625,26 @@ class SettingsWindow extends BaseWindow {
       const input = document.createElement("input");
       input.id = id;
       input.type = "text";
-      input.readOnly = true; // prevent manual typing
+      input.readOnly = true;
       input.spellcheck = false;
       input.classList.add("settings-page-keybinding-input");
       input.value = "None";
+
+      // Create unbind button
+      const unbindButton = document.createElement("button");
+      unbindButton.classList.add("keybind-unbind-button");
+      unbindButton.innerHTML = closeIconSVG; // Replace with your SVG
+      unbindButton.title = "Clear keybind";
+      unbindButton.setAttribute("aria-label", "Clear keybind");
+      unbindButton.style.display = "none"; // Hidden by default
+
+      // Unbind click handler
+      unbindButton.addEventListener("click", async (e) => {
+        e.stopPropagation(); // Prevent triggering input click
+        input.value = "None";
+        unbindButton.style.display = "none"; // Hide after unbinding
+        await this.storePage();
+      });
 
       let listening = false;
 
@@ -611,11 +653,13 @@ class SettingsWindow extends BaseWindow {
         listening = true;
         input.value = "Press any key...";
         input.classList.add("listening");
+        unbindButton.style.display = "block"; // Show X when listening
 
         const keyListener = async (e) => {
           e.preventDefault();
           listening = false;
           input.classList.remove("listening");
+          unbindButton.style.display = "none"; // Hide X after key pressed
 
           // handle special keys (like " " → "Space")
           let keyName = e.key.length === 1 ? e.key.toUpperCase() : e.key;
@@ -629,8 +673,15 @@ class SettingsWindow extends BaseWindow {
 
         document.addEventListener("keydown", keyListener);
       });
+
+      // Create input wrapper for positioning
+      const inputWrapper = document.createElement("div");
+      inputWrapper.classList.add("keybind-input-wrapper");
+      inputWrapper.appendChild(input);
+      inputWrapper.appendChild(unbindButton);
+
       container.appendChild(label);
-      container.appendChild(input);
+      container.appendChild(inputWrapper);
 
       return container;
     };
