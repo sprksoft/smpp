@@ -178,7 +178,7 @@ input::placeholder {
   text-decoration: none !important;
 }
 
-.class {
+.class:not(.profile_header_pupilinfo_item) {
   background-color: var(--color-base01) !important;
   border: 2px solid var(--color-base03) !important;
 

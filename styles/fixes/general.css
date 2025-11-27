@@ -529,6 +529,9 @@ smsc-inlineeditor.smsc-table__cell--inlineeditor {
 .smscBlockContainer_top {
   margin: 0px !important;
 }
+.smscBlockContainer_top:has(.cf, .smscBlockContainer_mainContentBlock){
+  margin-top: 5rem !important
+}
 
 .enableAnimations .smscAdminNav_body_linkdivTitle:hover {
   transition: ease-in !important;
