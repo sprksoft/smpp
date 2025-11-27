@@ -1,15 +1,4 @@
-let enable_snow_mul = false;
-let enable_rain_mul = false;
-
-function set_snow_multiplier(value) {
-  enable_snow_mul = value;
-}
-
-function set_rain_multiplier(value) {
-  enable_rain_mul = value;
-}
-
-function set_snow_level(amount, opacity) {
+function setSnowLevel(amount, opacity) {
   document.getElementById("snowflakes")?.remove();
   amount = amount > 3000 ? 3000 : amount;
   let snowDiv = document.createElement("div");
@@ -18,7 +7,6 @@ function set_snow_level(amount, opacity) {
   for (let i = 0; i < amount; i++) {
     let flake = document.createElement("img");
     flake.classList = "snowflake";
-    console.log(currentThemeName);
     flake.src =
       currentThemeName == "pink"
         ? getExtensionImage("/icons/weather-overlay/blossom.svg")
@@ -36,8 +24,7 @@ function set_snow_level(amount, opacity) {
   document.documentElement.appendChild(snowDiv);
 }
 
-function set_rain_level(amount, opacity) {
-  console.log(opacity);
+function setRainLevel(amount, opacity) {
   document.getElementById("raindrops")?.remove();
   amount = amount > 3000 ? 3000 : amount;
   let rainDiv = document.createElement("div");
@@ -59,11 +46,28 @@ function set_rain_level(amount, opacity) {
   document.documentElement.appendChild(rainDiv);
 }
 
-function set_overlay_based_on_conditions(count, opacity) {
-  if (enable_rain_mul) {
-    set_rain_level(count, opacity);
-  } else if (enable_snow_mul) {
-    set_snow_level(count, opacity);
+async function setOverlayBasedOnConditions(amount, opacity) {
+  async function getWeatherDescription(widget) {
+    const weatherData = await getWidgetSetting(widget + ".cache.weatherData");
+    if (weatherData == null) return null;
+    if (weatherData.cod != 200) return null;
+    return weatherData.weather[0].main;
+  }
+
+  let weatherWidgets = widgets.filter((item) =>
+    item.name.toLowerCase().includes("weather")
+  );
+  let weathers = await Promise.all(
+    weatherWidgets.map(async (widget) => {
+      return await getWeatherDescription(widget.name);
+    })
+  );
+  weathers = weathers.filter((description) => description != null);
+  if (weathers.includes("Rain") || weathers.includes("Drizzle")) {
+    setRainLevel(amount, opacity);
+  }
+  if (weathers.includes("Snow")) {
+    setSnowLevel(amount, opacity);
   }
 }
 
@@ -72,20 +76,20 @@ function applyWeatherEffects(weatherOverlay) {
   let snowDiv = document.getElementById("snowflakes");
   switch (weatherOverlay.type) {
     case "snow":
-      set_snow_level(weatherOverlay.amount, weatherOverlay.opacity);
       if (rainDiv) rainDiv.remove();
+      setSnowLevel(weatherOverlay.amount, weatherOverlay.opacity);
       break;
     case "realtime":
       if (rainDiv) rainDiv.remove();
       if (snowDiv) snowDiv.remove();
-      set_overlay_based_on_conditions(
+      setOverlayBasedOnConditions(
         weatherOverlay.amount,
         weatherOverlay.opacity
       );
       break;
     case "rain":
-      set_rain_level(weatherOverlay.amount, weatherOverlay.opacity);
       if (snowDiv) snowDiv.remove();
+      setRainLevel(weatherOverlay.amount, weatherOverlay.opacity);
       break;
     default:
       console.error("No weather selector");

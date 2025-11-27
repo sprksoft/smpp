@@ -19,17 +19,23 @@ class WeatherWidgetBase extends WidgetBase {
     return this.settings.cache.weatherData;
   }
 
-  async updateCache() {
-    let newWeatherData = await browser.runtime.sendMessage({
+  async fetchWeatherData(location) {
+    return await browser.runtime.sendMessage({
       action: "fetchWeatherData",
-      location: this.settings.currentLocation,
+      location: location,
     });
+  }
+
+  async updateCache() {
+    let newWeatherData = await this.fetchWeatherData(
+      this.settings.currentLocation
+    );
 
     if (newWeatherData.name) {
-      this.setSetting("currentLocation", newWeatherData.name);
+      await this.setSetting("currentLocation", newWeatherData.name);
     }
 
-    this.setSetting("cache", {
+    await this.setSetting("cache", {
       weatherData: newWeatherData,
       lastUpdateDate: new Date(),
     });
@@ -37,7 +43,7 @@ class WeatherWidgetBase extends WidgetBase {
 
   defaultSettings() {
     return {
-      currentLocation: "Keerbergen",
+      currentLocation: "Tremelo",
       cache: {
         weatherData: null,
         lastUpdateDate: new Date(),
@@ -55,14 +61,22 @@ class WeatherWidgetBase extends WidgetBase {
       event.target.value = this.settings.cache.lastLocation;
       return;
     }
-    this.setSetting("currentLocation", newLocation);
+    await this.setSetting("currentLocation", newLocation);
     await this.updateCache();
     await this.updateHTML();
   }
 
   async updateHTML() {
+    this.updateWeatherEffect();
     this.element.innerHTML = "";
     this.element.appendChild(this.createHTML(await this.getWeatherData()));
+  }
+
+  async updateWeatherEffect() {
+    const settings = await browser.runtime.sendMessage({
+      action: "getSettingsData",
+    });
+    applyWeatherEffects(settings.appearance.weatherOverlay);
   }
 
   createHTML(weatherData) {
