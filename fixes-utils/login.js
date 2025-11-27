@@ -109,7 +109,7 @@ let splashtexts = [
   `MERGE CONFLICT!`,
   `In case of fire: git add . \n ; git commit ; git push`,
   `Always remove French language \npack: sudo rm -fr /`,
-  undefined, // never change this losers!!!!
+  undefined, // never change this losers!!!!  // rude
   `Is tHaT A JOjO ReFEreNce?`,
   `https://ldev.eu.org`,
   `https://smartschoolplusplus.com`,
@@ -146,6 +146,11 @@ let splashtexts = [
   `Whopper Whopper`,
   `<s>nginx</s>, <i>Enginks</i>`,
   `I love ECMAScript`,
+  `bAcK iN My DaY!`,
+  `I forgot 💀`,
+  `Error 418 \n I'm a tea pot...`,
+  `Met 100+ splash texts!`,
+  `Do it`,
 ];
 
 function getSplashText() {
