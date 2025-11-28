@@ -255,7 +255,7 @@ async function markAsFinished(as_ID, name) {
   }
 
   const type = name ? "assignment" : "to-do"; // im using ternary u proud of me siebe? 🥺 o((>ω< ))o
-  const url = `https://${schoolName}.smartschool.be/planner/api/v1/planned-${}s/${userId}/${as_ID}/resolve`;
+  const url = `https://${schoolName}.smartschool.be/planner/api/v1/planned-${name}s/${userId}/${as_ID}/resolve`;
   
   try {
     const response = await fetch(url, {
