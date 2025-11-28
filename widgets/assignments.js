@@ -203,7 +203,7 @@ class TakenWidget extends WidgetBase {
           rowDiv.append(abbreviationDiv, detailsDiv);
 
           rowDiv.addEventListener("click", () => {
-            markAsFinished(element.id);
+            markAsFinished(element.id, element.courses?.[0]?.name);
           });
           rowDiv.addEventListener("mouseenter", () => {
             titleSpan.style.textDecoration = "line-through";
@@ -243,7 +243,7 @@ class TakenWidget extends WidgetBase {
   }
 }
 
-async function markAsFinished(as_ID) {
+async function markAsFinished(as_ID, name) {
   const schoolName = getSchoolName();
   const userId = getUserId();
 
@@ -254,8 +254,9 @@ async function markAsFinished(as_ID) {
     return false;
   }
 
-  const url = `https://${schoolName}.smartschool.be/planner/api/v1/planned-assignments/${userId}/${as_ID}/resolve`;
-
+  const type = name ? "assignment" : "to-do"; // im using ternary u proud of me siebe? 🥺 o((>ω< ))o
+  const url = `https://${schoolName}.smartschool.be/planner/api/v1/planned-${}s/${userId}/${as_ID}/resolve`;
+  
   try {
     const response = await fetch(url, {
       method: "POST",
@@ -332,10 +333,11 @@ async function markAsFinished(as_ID) {
         // If no assignments are left, add the "you're all done" message
         const doneMessage = document.createElement("p");
         doneMessage.classList.add("as_all_done"); // Add a class for potential styling
-        if (randomChance(1 / 20)) {
+        if (randomChance(1 / 5)) {
           doneMessage.innerText = "You're all done! You deserve a break 💜";
+        } else {
+          doneMessage.innerText = "You're all done!";
         }
-        doneMessage.innerText = "You're all done!";
         parentContainer.appendChild(doneMessage);
 
         // Ensure all date headers are removed if the widget is completely empty of assignments
