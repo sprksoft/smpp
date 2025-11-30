@@ -43,6 +43,7 @@ class WidgetDragInfo {
 
 class WidgetBase {
   element;
+  isActive;
   #content;
   #preview;
   #bagPlaceHolder;
@@ -52,6 +53,7 @@ class WidgetBase {
 
   constructor() {
     this.element = this.#createWidgetDiv();
+    this.isActive = false;
     this.#content = null;
     this.#preview = false;
     this.#aboutToDel = false;
@@ -71,6 +73,7 @@ class WidgetBase {
     if (this.element.parentElement == this.#bagGroup) {
       return;
     }
+
     if (this.#bagPlaceHolder) {
       this.#bagGroup.insertBefore(this.element, this.#bagPlaceHolder);
       this.#bagPlaceHolder.remove();
@@ -96,6 +99,7 @@ class WidgetBase {
         await this.#loadSettings();
 
         newContent = await this.createContent();
+        this.isActive = true;
       }
     } catch (e) {
       console.error("Failed to create widget content");
@@ -114,10 +118,6 @@ class WidgetBase {
     this.element.dataset.widgetName = this.name;
     this.element.appendChild(this.#content);
     this.#preview = preview;
-  }
-
-  isActive() {
-    return this.#content != null;
   }
 
   async createIfNotExist() {
@@ -181,6 +181,8 @@ class WidgetBase {
     bagHoverExit();
     curDragInfo = null;
     if (targetIp == null) {
+      this.onRemove();
+      this.isActive = false;
       await this.#intoBag();
     } else {
       if (targetIp.classList.contains("smpp-widget-insertion-point-pannel")) {
@@ -276,7 +278,7 @@ class WidgetBase {
       data: this.#settings,
     });
 
-    if (this.isActive()) {
+    if (this.isActive) {
       await this.onSettingsChange();
     }
   }
@@ -325,6 +327,8 @@ class WidgetBase {
   async onSettingsChange() {}
 
   async onThemeChange() {}
+
+  async onRemove() {}
 }
 
 class ErrorWidget extends WidgetBase {

@@ -54,15 +54,17 @@ async function setOverlayBasedOnConditions(amount, opacity) {
     return weatherData.weather[0].main;
   }
 
-  let weatherWidgets = widgets.filter((item) =>
-    item.name.toLowerCase().includes("weather")
+  let weatherWidgets = widgets.filter(
+    (item) => item.name.toLowerCase().includes("weather") && item.isActive
   );
+  console.log(weatherWidgets);
   let weathers = await Promise.all(
     weatherWidgets.map(async (widget) => {
       return await getWeatherDescription(widget.name);
     })
   );
   weathers = weathers.filter((description) => description != null);
+
   if (weathers.includes("Rain") || weathers.includes("Drizzle")) {
     setRainLevel(amount, opacity);
   }

@@ -67,7 +67,6 @@ class WeatherWidgetBase extends WidgetBase {
   }
 
   async updateHTML() {
-    this.updateWeatherEffect();
     this.element.innerHTML = "";
     this.element.appendChild(this.createHTML(await this.getWeatherData()));
   }
@@ -79,7 +78,12 @@ class WeatherWidgetBase extends WidgetBase {
     applyWeatherEffects(settings.appearance.weatherOverlay);
   }
 
+  onRemove() {
+    this.updateWeatherEffect();
+  }
+
   createHTML(weatherData) {
+    this.updateWeatherEffect();
     let container = document.createElement("div");
     container.classList.add("weather-div");
     if (this.isCompact) container.classList.add("compact");
