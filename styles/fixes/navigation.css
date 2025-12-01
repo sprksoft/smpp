@@ -405,3 +405,7 @@ td[bgcolor*="#"] {
   width: 10px !important;
   margin: 17px 5px 0px 5px !important;
 }
+
+.smsc-topnav [data-shortcuts] .topnav__menu--shortcuts hr.menu-divider {
+  border-top: none !important;
+}

@@ -272,11 +272,6 @@ input[type="search"].input.search-input,
   padding-left: 20px !important;
 }
 
-.detail {
-  padding: 10px !important;
-  overflow: scroll !important;
-}
-
 .c-steel-combo--100,
 .c-steel-combo-hover--100,
 [listview]

@@ -100,7 +100,11 @@ function updateBackgroundBlur() {
 
 function updateTabLogo(logo) {
   let iconElement = document.querySelector('link[rel="icon"]');
-  if (!iconElement) return;
+  if (!iconElement) {
+    iconElement = document.createElement("link");
+    document.head.appendChild(iconElement);
+    iconElement.rel = "icon";
+  }
   switch (logo) {
     case "sm":
       iconElement.href =
@@ -207,6 +211,7 @@ function applyProfile(profile) {
 function applyFixes() {
   changeFont();
   fixCoursesSearch();
+  titleFix();
 
   if (document.getElementById("background_image")) {
     document.getElementById("background_image").style.display = "none";

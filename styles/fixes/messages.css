@@ -287,10 +287,6 @@ body.modern-ui .homepage__block {
   padding: 5px 5px 0px 5px !important;
 }
 
-.detail {
-  width: 100% !important;
-}
-
 .max-width--inherit {
   margin-left: 0px !important;
   margin-right: 0px !important;
@@ -302,6 +298,7 @@ body.modern-ui .homepage__block {
 
 .messageframe:has(#msgdetail) {
   background-color: var(--color-base01) !important;
+  padding: 0.75rem !important;
 }
 
 table.messages {

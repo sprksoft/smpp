@@ -55,7 +55,7 @@ function title_prefix() {
   let url = location.pathname;
   let qstr = new URLSearchParams(location.search);
   let module = qstr.get("module");
-
+  if (!url.split("/")[1]) return;
   let page = url.split("/")[1].toLowerCase();
   if (module !== null) {
     page = module.toLowerCase();
@@ -108,8 +108,10 @@ function title_prefix() {
   }
 }
 
-let prepend = title_prefix();
-if (prepend != undefined) {
-  let title = document.querySelector("head > title");
-  title.innerText = prepend + " - Smartschool";
+function titleFix() {
+  let prepend = title_prefix();
+  if (prepend != undefined) {
+    let title = document.querySelector("head > title");
+    title.innerText = prepend + " - Smartschool";
+  }
 }

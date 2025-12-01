@@ -57,7 +57,6 @@ async function setOverlayBasedOnConditions(amount, opacity) {
   let weatherWidgets = widgets.filter(
     (item) => item.name.toLowerCase().includes("weather") && item.isActive
   );
-  console.log(weatherWidgets);
   let weathers = await Promise.all(
     weatherWidgets.map(async (widget) => {
       return await getWeatherDescription(widget.name);

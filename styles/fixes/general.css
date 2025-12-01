@@ -259,7 +259,28 @@ button.smscButton.blue.fileupload_submit_button,
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--color-base02) !important;
+  background: var(--color-base02) !important;
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  transition: background-color 1s ease-in-out !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  cursor: pointer;
+}
+
+::-webkit-scrollbar-thumb:active {
+  scale: 0.9 !important;
+}
+
+[toolbar] .toolbar__line--top:not(.toolbar__line--no-buttons):after {
+  display: inline-block !important;
+  content: "" !important;
+  height: max-content !important;
+  position: absolute !important;
+  width: 20px !important;
+  height: var(--border-size) !important;
+  margin-left: -9px !important;
 }
 
 .smsc-container--grey,
@@ -414,9 +435,12 @@ smsc-inlineeditor.smsc-table__cell--inlineeditor {
   transition: ease-in !important;
   transition-duration: 0.1s !important;
 }
+.smsc-rightclick__item {
+  border-radius: 0.5rem !important;
+}
 
 .smsc-rightclick__item:hover {
-  background-color: var(--color-base03) !important;
+  background-color: var(--color-base02) !important;
 }
 
 .smsc-dialog,
@@ -529,8 +553,8 @@ smsc-inlineeditor.smsc-table__cell--inlineeditor {
 .smscBlockContainer_top {
   margin: 0px !important;
 }
-.smscBlockContainer_top:has(.cf, .smscBlockContainer_mainContentBlock){
-  margin-top: 5rem !important
+.smscBlockContainer_top:has(.cf, .smscBlockContainer_mainContentBlock) {
+  margin-top: 5rem !important;
 }
 
 .enableAnimations .smscAdminNav_body_linkdivTitle:hover {
@@ -1827,9 +1851,15 @@ h3.title.fluid-ui-heading.fluid-ui-heading--3,
 }
 
 smsc-listview {
-  border-radius: 10px !important;
+  border-radius: 1rem !important;
+  overflow: hidden !important;
   background-color: var(--darken-background);
   backdrop-filter: blur(5px) !important;
+}
+
+smsc-listview table tr .listview-row__row-actions .action-button:hover {
+  background-color: var(--color-base03) !important;
+  border-radius: 0.5rem !important;
 }
 
 body.modern-ui table {
@@ -2161,10 +2191,11 @@ span.smsc-treeitem__label {
 }
 div#folders {
   border-radius: 1.5rem !important;
+  margin-left: 25px !important;
+  padding-left: 1rem !important;
   background-color: var(--darken-background) !important;
   backdrop-filter: blur(5px) !important;
   border: 2px solid var(--color-base02) !important;
-  margin-left: 5px !important;
   font-weight: 500 !important;
   padding-top: 1rem;
 }
@@ -2349,7 +2380,9 @@ body.modern-ui .homepage__block__content {
   display: block !important;
 }
 .pupil_nav_photo,
-.profile_header_photo {
+.profile_header_photo,
+.square_photo_128,
+.rounded_profile_photo {
   border-radius: 50% !important;
   background-image: var(--profile-picture) !important;
   background-size: cover !important;
@@ -2386,4 +2419,16 @@ body.modern-ui .homepage__block__content {
 
 hr {
   border-top: 1px solid var(--color-base03) !important;
+}
+
+smsc-rightclick .smsc-rightclick__menu {
+  border: 2px solid var(--color-base02) !important;
+  border-radius: 1rem !important;
+  background-color: var(--color-base01) !important;
+  padding: 0.5rem !important;
+}
+
+smsc-rightclick .smsc-rightclick__link {
+  color: var(--color-text) !important;
+  font-size: 1.1rem !important;
 }
