@@ -9,7 +9,8 @@
       "matches": ["*://*.smartschool.be/*"],
       "exclude_matches": [
         "*://www.smartschool.be/*",
-        "*://status.smartschool.be/*"
+        "*://status.smartschool.be/*",
+        "*://smartschool.be/bb/*"
       ],
       "all_frames": true,
       "match_about_blank": true,
