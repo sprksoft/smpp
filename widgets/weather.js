@@ -52,6 +52,7 @@ class WeatherWidgetBase extends WidgetBase {
   }
 
   async createPreview() {
+    this.element.innerHTML = "";
     return createWeatherPreview(this.isCompact);
   }
 
