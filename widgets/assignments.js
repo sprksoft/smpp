@@ -77,7 +77,7 @@ class TakenWidget extends WidgetBase {
           let noDataContainerTextContainer = document.createElement("div");
           noDataContainerTextContainer.classList.add("no-data-text");
           noDataContainerTextContainer.innerText =
-            "Er zijn geen opdrachten gepland in de komende 28 dagen.";
+            "Er zijn geen opdrachten gepland in de komende ${foresight} dagen.";
           noDataContainerTextContainer.style.textAlign = "center";
           noDataContainerTextContainer.style.padding = "1rem";
           noDataContainerTextContainer.style.fontSize = "1rem";
