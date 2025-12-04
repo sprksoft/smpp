@@ -1253,15 +1253,6 @@ async function openSettingsWindow(event) {
   settingsWindow.loadPage();
 }
 
-function createSettingsButton() {
-  const SettingsButton = document.createElement("button");
-  SettingsButton.id = "somebutton";
-  SettingsButton.className = "topnav__btn";
-  SettingsButton.innerHTML = "SettingsV2";
-  SettingsButton.addEventListener("click", (e) => openSettingsWindow(e));
-  return SettingsButton;
-}
-
 //TEMP BEFORE THEME UPDATE!!!!
 
 function createCustomThemeUIV2() {

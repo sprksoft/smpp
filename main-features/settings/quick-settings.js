@@ -176,10 +176,17 @@ function createQuickSettingsHTML(parent) {
   wallpaperTopContainer.appendChild(wallpaperHeading);
   wallpaperTopContainer.appendChild(wallpaperContainer);
 
+  const extraSettingsButton = document.createElement("button");
+  extraSettingsButton.id = "extraSettingsButton";
+  extraSettingsButton.innerHTML += "More Settings";
+  extraSettingsButton.innerHTML += settingsIconSvg;
+  extraSettingsButton.addEventListener("click", (e) => openSettingsWindow(e));
+
   parent.appendChild(performanceModeTooltipLabel);
   parent.appendChild(themeContainer);
   parent.appendChild(wallpaperTopContainer);
   parent.appendChild(performanceModeInfo);
+  parent.appendChild(extraSettingsButton);
   return parent;
 }
 
@@ -213,6 +220,9 @@ function createQuickSettings() {
 
   document.addEventListener("click", (e) => {
     if (quickSettingsWindowIsHidden) return;
+    if (e.target.id === "extraSettingsButton") {
+      closeQuickSettings();
+    }
     if (
       e.target.id === "quickSettings" ||
       quickSettingsWindow.contains(e.target) ||

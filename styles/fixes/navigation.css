@@ -95,28 +95,32 @@ input::placeholder {
   align-items: stretch; /* make children take full width */
   width: fit-content; /* shrink to content size */
   max-width: 100%; /* avoid overflowing parent */
-  gap: 6px;
 }
 
 .topnav__btn--icon--search > svg {
   width: 20px;
 }
 
+.performanceModeTooltipLabel:active {
+  scale: 0.95;
+}
+
 .performanceModeTooltipLabel {
   display: flex;
   align-items: center;
   position: absolute;
-  right: 5px;
-  top: 5px;
+  right: 0.5rem;
+  top: 0.5rem;
   padding: 2px;
-  background-color: var(--color-base00);
+  background-color: var(--color-base01);
   border: 2px solid transparent;
   border-radius: 999px;
   fill: var(--color-text) !important;
+  box-shadow: 0px 2px 10px 0px var(--darken-background);
 }
 
 .enableAnimations .performanceModeTooltipLabel {
-  transition-property: border-color, opacity, height, width;
+  transition-property: border-color, opacity, height, width, scale;
   transition: 0.2s ease-in-out;
 }
 
@@ -132,6 +136,7 @@ input::placeholder {
 
 .performanceModeTooltipLabel:hover {
   border-color: var(--color-base03) !important;
+  background-color: var(--color-base02) !important;
 }
 
 .enableAnimations .topnav__btn,

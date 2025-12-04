@@ -605,10 +605,14 @@ div.stdReplyWrapper {
   color: var(--color-text) !important;
 }
 
+.enableAnimations #theme-selector {
+  transition: border-color 0.2s ease-in-out !important;
+}
+
 #theme-selector {
-  background-color: var(--color-base01);
+  background-color: var(--color-base01) !important;
   border: 2px solid var(--color-base03);
-  border-radius: 15px !important;
+  border-radius: 1.25rem !important;
   color: var(--color-text);
   padding: 5px;
   border-radius: 10px;
@@ -619,10 +623,12 @@ div.stdReplyWrapper {
   justify-content: center;
   align-self: center;
   text-align: center;
+  box-shadow: 0px 2px 10px 0px var(--darken-background);
 }
 
 #theme-selector:hover {
   cursor: pointer !important;
+  border-color: var(--color-accent) !important;
 }
 
 .popupinput {
@@ -638,23 +644,6 @@ div.stdReplyWrapper {
 
 .enableAnimations .popupinput {
   transition: border-color 0.3s !important;
-}
-
-#halt {
-  width: 90% !important;
-  height: 35px !important;
-}
-
-#location {
-  background-color: var(--color-base01) !important;
-  text-align: center !important;
-  border-radius: 10px !important;
-  width: 135px !important;
-  color: var(--color-text) !important;
-  margin: 10px !important;
-  height: 35px !important;
-  margin-top: 0px !important;
-  font-size: 16px !important;
 }
 
 .focus-visible {
@@ -785,19 +774,19 @@ input:checked + .slider:before {
   left: 50%;
   transform: translateX(-50%) translateY(0px);
   max-width: 270px !important;
-  background-color: var(--color-base02) !important;
-  border: 2px solid var(--color-base03) !important;
+  background-color: var(--color-base00) !important;
+  border: 2px solid var(--color-base02) !important;
   align-items: center !important;
   display: flex;
   flex-direction: column !important;
-  gap: 0.5rem !important;
+  gap: 0.75rem !important;
   justify-content: center !important;
   border-radius: 2rem !important;
   overflow: visible;
   border: 3px solid var(--color-accent);
   z-index: 777;
   position: absolute;
-  padding: 1rem !important;
+  padding: 1.2rem !important;
   box-shadow: 0 0.333rem 1.333rem rgba(0, 0, 0, 0.5);
 }
 
@@ -1572,7 +1561,9 @@ input#background-blur-amount-slider {
   height: 1rem;
   transform: rotate(-90deg);
   transform-origin: center;
+  box-shadow: 0px 2px 10px 0px var(--darken-background);
   margin: 0 !important;
+  background: var(--color-base02) !important;
 }
 
 .blur-slider-container {

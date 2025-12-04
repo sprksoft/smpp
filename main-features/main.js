@@ -301,8 +301,6 @@ function createTopButtons() {
   }
 
   topNav.insertBefore(createQuickMenuButton(), pushRight);
-
-  topNav.insertBefore(createSettingsButton(), pushRight); //temp
 }
 
 function updateTopButtons(data) {

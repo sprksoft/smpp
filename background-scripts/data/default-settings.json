@@ -27,7 +27,7 @@
       "home": true,
       "mail": true,
       "notifications": true,
-      "settings": false
+      "settings": true
     }
   },
   "widgets": {
