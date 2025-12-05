@@ -10,7 +10,9 @@
       "exclude_matches": [
         "*://www.smartschool.be/*",
         "*://status.smartschool.be/*",
-        "*://smartschool.be/bb/*"
+        "*://smartschool.be/bb/*",
+        "*://*.smartschool.be/online-session/meeting/redirect/*",
+        "*://*.smartschool.be/html5client/*"
       ],
       "all_frames": true,
       "match_about_blank": true,

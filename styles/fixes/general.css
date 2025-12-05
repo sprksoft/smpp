@@ -2423,3 +2423,53 @@ smsc-rightclick .smsc-rightclick__link {
   color: var(--color-text) !important;
   font-size: 1.1rem !important;
 }
+
+.live-session .live__quick-nav{
+  align-self: flex-end !important;
+}
+
+div#smscMain:has(.live__quick-nav){
+  flex-direction: column !important;
+  justify-content: stretch !important;
+  background: var(--color-base01) !important;
+}
+.live__quick-nav{
+  border-bottom: none !important;
+}
+#videoConference{
+  width: 100% !important;
+}
+
+.online-session__list-page .listview__hdr{
+  margin-bottom: 0.6rem !important;
+  border-bottom: 1px solid var(--color-accent) !important;
+}
+.online-session__list-page  .listview__rows{
+  gap: 1rem;
+}
+
+.online-session__list-page  .listview__row{
+background-color: var(--color-base01) !important;
+margin-left: 1.5rem !important; 
+margin-right: 1.5rem !important;
+border: 2px solid transparent !important;
+border-radius: 1.5rem !important;
+padding:0.6rem  1.5rem  !important;
+}
+
+.online-session__list-page  .listview__row a{
+  background-color: var(--color-base02) !important;
+  padding: 0.75rem 1.5rem !important;
+  border: 2px solid var(--color-base03) !important;
+  border-radius: 1rem;
+}
+.enableAnimations .online-session__list-page  .listview__row a:hover{
+  transition: border 0.3s, background 0.3s;
+}
+.online-session__list-page  .listview__row a:hover{
+  background-color: var(--color-base03) !important;
+  border-color: var(--color-accent) !important;
+}
+#smscMain .online-session__list-page  .listview__row:hover{
+background-color: var(--color-base01) !important;
+}
