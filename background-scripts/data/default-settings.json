@@ -3,7 +3,7 @@
     "username": null
   },
   "appearance": {
-    "theme": "ldev",
+    "theme": "birb",
     "background": {
       "blur": 2
     },
@@ -12,8 +12,8 @@
       "amount": 0,
       "opacity": 1
     },
-    "tabLogo": "smpp",
-    "news": true
+    "tabLogo": "sm",
+    "news": false
   },
   "topNav": {
     "buttons": {
@@ -28,16 +28,6 @@
       "mail": true,
       "notifications": true,
       "settings": true
-    }
-  },
-  "widgets": {
-    "assignments": {
-      "maxAssignments": 5
-    },
-    "games": {
-      "snake": {
-        "enableGrid": true
-      }
     }
   },
   "other": {

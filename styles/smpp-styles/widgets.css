@@ -382,9 +382,13 @@ html {
     filter: blur(10px);
   }
 
-  100% {
+  70% {
     opacity: 1;
     filter: blur(0px);
+    transform: translateY(10px);
+  }
+
+  100% {
     transform: translateY(0px);
   }
 }
@@ -400,9 +404,13 @@ html {
     filter: blur(10px);
   }
 
-  100% {
+  90% {
     opacity: 1;
     filter: blur(0px);
+    transform: translateY(2px);
+  }
+
+  100% {
     transform: translateY(0px);
   }
 }

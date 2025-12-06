@@ -30,16 +30,6 @@
       "settings": "boolean"
     }
   },
-  "widgets": {
-    "assignments": {
-      "maxAssignments": "number"
-    },
-    "games": {
-      "snake": {
-        "enableGrid": "boolean"
-      }
-    }
-  },
   "other": {
     "quicks": "array",
     "performanceMode": "boolean",
