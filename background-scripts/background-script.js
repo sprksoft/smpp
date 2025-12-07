@@ -160,16 +160,6 @@ async function handleMessage(message, sendResponse) {
       sendResponse(image || null);
       console.log(`Image with id:${message.id} sent.`);
     }
-    // for migration, NEVER use this!!!
-    if (message.action === "getBackgroundImage") {
-      const backgroundImage = await browser.storage.local.get(
-        "backgroundImage"
-      );
-      await browser.storage.local.remove("backgroundImage");
-      sendResponse(backgroundImage || null);
-      console.log("Background image sent.");
-    }
-
     // Weather
     if (message.action === "fetchWeatherData") {
       const weatherData = await fetchWeatherData(message.location);
@@ -221,6 +211,30 @@ async function handleMessage(message, sendResponse) {
       data["Game." + message.widget] = message.data;
       await browser.storage.local.set(data);
       sendResponse({ success: true });
+    }
+    // Migration
+    if (message.action === "getDelijnAppData") {
+      // for migration, NEVER use this!!!
+      const delijnAppData = await browser.storage.local.get("delijnAppData");
+      // await browser.storage.local.remove("delijnAppData");
+      sendResponse(delijnAppData);
+      console.log("delijnAppData sent.");
+    }
+    if (message.action === "getWeatherAppData") {
+      // for migration, NEVER use this!!!
+      const weatherAppData = await browser.storage.local.get("weatherAppData");
+      // await browser.storage.local.remove("weatherAppData");
+      sendResponse(weatherAppData);
+      console.log("weatherAppData sent.");
+    }
+    if (message.action === "getBackgroundImage") {
+      // for migration, NEVER use this!!!
+      const backgroundImage = await browser.storage.local.get(
+        "backgroundImage"
+      );
+      // await browser.storage.local.remove("backgroundImage");
+      sendResponse(backgroundImage);
+      console.log("Background image sent.");
     }
   } catch (err) {
     console.error("Service worker error:", err);

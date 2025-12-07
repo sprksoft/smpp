@@ -8,15 +8,14 @@ class WeatherWidgetBase extends WidgetBase {
   }
 
   async getWeatherData() {
-    if (
+    if (this.settings.cache.weatherData == null) {
+      await this.updateCache();
+    } else if (
       (new Date() - new Date(this.settings.cache.lastUpdateDate)) / 1000 / 60 >
       10
     ) {
       await this.updateCache();
-    } else if (this.settings.cache.weatherData == null) {
-      await this.updateCache();
-    }
-    return this.settings.cache.weatherData;
+    } else return this.settings.cache.weatherData;
   }
 
   async fetchWeatherData(location) {
@@ -30,6 +29,9 @@ class WeatherWidgetBase extends WidgetBase {
     let newWeatherData = await this.fetchWeatherData(
       this.settings.currentLocation
     );
+
+    console.log(newWeatherData);
+    console.log(this.settings.currentLocation);
 
     if (newWeatherData.name) {
       await this.setSetting("currentLocation", newWeatherData.name);

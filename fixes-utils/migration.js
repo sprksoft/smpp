@@ -5,10 +5,37 @@ async function migrateV5() {
   console.log("Started migration V5 with", settingsData);
   await migrateSettingsV5(settingsData);
   await migrateImageV5(settingsData);
-  await migrateWidgetSettingsData(settingsData);
+  await migrateWidgetSettingsData();
 }
 
-async function migrateWidgetSettingsData(oldData) {}
+async function migrateWidgetSettingsData() {
+  let delijnAppData = await browser.runtime.sendMessage({
+    action: "getDelijnAppData",
+  });
+  console.log(delijnAppData);
+  let weatherAppData = await browser.runtime.sendMessage({
+    action: "getWeatherAppData",
+  });
+
+  if (Object.keys(delijnAppData).length !== 0) {
+    await setWidgetSetting("DelijnWidget.halte", {
+      entiteit: delijnAppData.delijnAppData.entiteitnummer,
+      nummer: delijnAppData.delijnAppData.haltenummer,
+    });
+  }
+  if (Object.keys(weatherAppData).length !== 0) {
+    let weatherWidgets = widgets.filter((item) =>
+      item.name.toLowerCase().includes("weather")
+    );
+    weatherWidgets.forEach(async (widget) => {
+      await widget.setSetting(
+        "currentLocation",
+        weatherAppData.weatherAppData.lastLocation
+      );
+      console.log(widget);
+    });
+  }
+}
 
 async function migrateImageV5(oldData) {
   let data;
@@ -28,10 +55,11 @@ async function migrateImageV5(oldData) {
       };
       break;
     case 2: //file
+      let imageData = await browser.runtime.sendMessage({
+        action: "getBackgroundImage",
+      });
       data = {
-        imageData: await browser.runtime.sendMessage({
-          action: "getBackgroundImage",
-        }),
+        imageData: imageData.backgroundImage,
         link: oldData.backgroundLink,
         type: "file",
       };
@@ -49,30 +77,35 @@ async function migrateImageV5(oldData) {
 
 async function migrateSettingsV5(oldData) {
   let newWeatherOverlayType;
-  switch (oldData.type) {
-    case 1:
+  switch (oldData.weatherOverlaySelection) {
+    case 0:
+      newWeatherOverlayType = "snow";
       break;
 
-    default:
+    case 1:
+      newWeatherOverlayType = "realtime";
+      break;
+    case 2:
+      newWeatherOverlayType = "snow";
       break;
   }
   console.log(oldData);
   let newSettingsData = {
     profile: {
-      username: oldData.username,
+      username: oldData.customUserName,
     },
     appearance: {
       theme: oldData.theme,
       background: {
-        blur: oldData.blur,
+        blur: oldData.backgroundBlurAmount,
       },
       weatherOverlay: {
         type: newWeatherOverlayType,
-        amount: oldData.amount,
+        amount: oldData.weatherOverlayAmount,
         opacity: 1,
       },
-      tabLogo: oldData.tabLogo ? "smpp" : "sm",
-      news: oldData.news,
+      tabLogo: oldData.enableSMPPLogo ? "smpp" : "sm",
+      news: oldData.showNews,
     },
     topNav: {
       buttons: {
@@ -91,7 +124,7 @@ async function migrateSettingsV5(oldData) {
     },
     other: {
       quicks: oldData.quicks,
-      performanceMode: oldData.performanceMode,
+      performanceMode: oldData.enablePerfomanceMode,
       splashText: true,
       discordButton: true,
       dmenu: {

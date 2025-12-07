@@ -169,6 +169,7 @@ async function do_qm(opener = "") {
       "dizzy",
       "breakdmenu",
       "glass",
+      "ridge",
     ]);
 
   if (dmenuConfig.toplevelConfig) {
@@ -227,6 +228,9 @@ async function do_qm(opener = "") {
           return;
         case "glass":
           document.body.classList.add("glass");
+          return;
+        case "ridge":
+          document.body.classList.add("ridge");
           return;
         case "gcbeta":
           openGlobalChat(null, true);

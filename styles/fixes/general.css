@@ -609,6 +609,10 @@ div.stdReplyWrapper {
   transition: border-color 0.2s ease-in-out !important;
 }
 
+.ridge #theme-selector {
+  border: none !important;
+}
+
 #theme-selector {
   background-color: var(--color-base01) !important;
   border: 2px solid var(--color-base03);
@@ -624,6 +628,7 @@ div.stdReplyWrapper {
   align-self: center;
   text-align: center;
   box-shadow: 0px 2px 10px 0px var(--darken-background);
+  font-size: 1.5rem !important;
 }
 
 #theme-selector:hover {
@@ -734,7 +739,7 @@ input:checked + .slider:before {
 }
 
 #theme-selector option {
-  font-size: large;
+  font-size: 1.5rem;
   font: bold;
   text-align: center !important;
 }
@@ -755,7 +760,7 @@ input:checked + .slider:before {
 .quick-settings-title {
   margin-bottom: 0.25rem !important;
   text-align: center !important;
-  font-size: 17px !important;
+  font-size: 1.4rem !important;
   margin-top: 0px !important;
   font-weight: 600 !important;
 }
@@ -763,6 +768,10 @@ input:checked + .slider:before {
 .glass #quickSettings {
   background-color: var(--darken-background) !important;
   backdrop-filter: blur(10px);
+}
+
+.ridge #quickSettings {
+  border: none !important;
 }
 
 #quickSettingsButton {
@@ -774,7 +783,11 @@ input:checked + .slider:before {
   left: 50%;
   transform: translateX(-50%) translateY(0px);
   max-width: 270px !important;
-  background-color: var(--color-base00) !important;
+  background-color: color-mix(
+    in srgb,
+    var(--color-base00) 40%,
+    var(--color-base01) 60%
+  ) !important;
   border: 2px solid var(--color-base02) !important;
   align-items: center !important;
   display: flex;
@@ -787,7 +800,7 @@ input:checked + .slider:before {
   z-index: 777;
   position: absolute;
   padding: 1.2rem !important;
-  box-shadow: 0 0.333rem 1.333rem rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0.2rem 3rem 0.2rem rgba(0, 0, 0, 0.5);
 }
 
 .textandbutton {
@@ -2424,52 +2437,52 @@ smsc-rightclick .smsc-rightclick__link {
   font-size: 1.1rem !important;
 }
 
-.live-session .live__quick-nav{
+.live-session .live__quick-nav {
   align-self: flex-end !important;
 }
 
-div#smscMain:has(.live__quick-nav){
+div#smscMain:has(.live__quick-nav) {
   flex-direction: column !important;
   justify-content: stretch !important;
   background: var(--color-base01) !important;
 }
-.live__quick-nav{
+.live__quick-nav {
   border-bottom: none !important;
 }
-#videoConference{
+#videoConference {
   width: 100% !important;
 }
 
-.online-session__list-page .listview__hdr{
+.online-session__list-page .listview__hdr {
   margin-bottom: 0.6rem !important;
   border-bottom: 1px solid var(--color-accent) !important;
 }
-.online-session__list-page  .listview__rows{
+.online-session__list-page .listview__rows {
   gap: 1rem;
 }
 
-.online-session__list-page  .listview__row{
-background-color: var(--color-base01) !important;
-margin-left: 1.5rem !important; 
-margin-right: 1.5rem !important;
-border: 2px solid transparent !important;
-border-radius: 1.5rem !important;
-padding:0.6rem  1.5rem  !important;
+.online-session__list-page .listview__row {
+  background-color: var(--color-base01) !important;
+  margin-left: 1.5rem !important;
+  margin-right: 1.5rem !important;
+  border: 2px solid transparent !important;
+  border-radius: 1.5rem !important;
+  padding: 0.6rem 1.5rem !important;
 }
 
-.online-session__list-page  .listview__row a{
+.online-session__list-page .listview__row a {
   background-color: var(--color-base02) !important;
   padding: 0.75rem 1.5rem !important;
   border: 2px solid var(--color-base03) !important;
   border-radius: 1rem;
 }
-.enableAnimations .online-session__list-page  .listview__row a:hover{
+.enableAnimations .online-session__list-page .listview__row a:hover {
   transition: border 0.3s, background 0.3s;
 }
-.online-session__list-page  .listview__row a:hover{
+.online-session__list-page .listview__row a:hover {
   background-color: var(--color-base03) !important;
   border-color: var(--color-accent) !important;
 }
-#smscMain .online-session__list-page  .listview__row:hover{
-background-color: var(--color-base01) !important;
+#smscMain .online-session__list-page .listview__row:hover {
+  background-color: var(--color-base01) !important;
 }
