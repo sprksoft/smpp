@@ -15,7 +15,8 @@ class WeatherWidgetBase extends WidgetBase {
       10
     ) {
       await this.updateCache();
-    } else return this.settings.cache.weatherData;
+    }
+    return this.settings.cache.weatherData;
   }
 
   async fetchWeatherData(location) {

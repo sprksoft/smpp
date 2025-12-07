@@ -631,7 +631,8 @@ div.stdReplyWrapper {
   font-size: 1.5rem !important;
 }
 
-#theme-selector:hover {
+#theme-selector:hover,
+#theme-selector:focus-visible {
   cursor: pointer !important;
   border-color: var(--color-accent) !important;
 }
@@ -962,12 +963,17 @@ ul.smsc-column-nav {
   height: 1.5rem;
   border-radius: 10px;
   background: var(--color-base01);
+  border: 2px solid transparent !important;
   outline: none;
   opacity: 1;
 }
 
+.main-slider:focus-visible {
+  border-color: var(--color-base03) !important;
+}
+
 .enableAnimations .main-slider {
-  transition: opacity 0.2s;
+  transition: opacity 0.2s, border-color 0.2s !important;
 }
 
 .main-slider::-webkit-slider-thumb {
@@ -2419,6 +2425,24 @@ body.modern-ui .homepage__block__content {
 .smsc-topnav [data-courses] .course-list li .favourite-button:hover {
   border: none !important;
   background-color: var(--color-base02) !important;
+}
+
+.smsc-topnav [data-courses] .course-list {
+  overflow: scroll !important;
+}
+
+#courseSearch {
+  padding: 0.5rem !important;
+  font-size: 1.1rem !important;
+  border-radius: 1rem !important;
+}
+
+#courseSearch:focus-visible {
+  border-color: var(--color-accent) !important;
+}
+
+.modern-ui input[type="search"].input-search:not(.loading):not([loading]) {
+  background-image: none !important;
 }
 
 hr {

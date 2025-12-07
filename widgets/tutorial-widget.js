@@ -13,11 +13,6 @@ class TutorialWidget extends WidgetBase {
     title.style.textAlign = "center";
     this.container.appendChild(title);
 
-    let intro = document.createElement("p");
-    intro.style.textAlign = "center";
-    intro.textContent = "This widget will guide your experience!";
-    this.container.appendChild(intro);
-
     let langTitle = document.createElement("p");
     langTitle.className = "tutorial-lang-title";
     langTitle.textContent = "Choose a language / Kies je taal";
@@ -132,6 +127,7 @@ class TutorialWidget extends WidgetBase {
           this.lang === "dutch"
             ? `3. Widgets toevoegen <svg class="smpp-widget-bag-handle-icon" style="pointer-events: none; height: 1em; width: 1.2em; display:inline" version="1.1" viewBox="0 0 448 448" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-.898 -124.01)"><path d="m26.458 288.48 198.44 119.06 198.44-119.06" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="100px"></path></g></svg>`
             : `3. Add widgets <svg class="smpp-widget-bag-handle-icon" style="pointer-events: none; height: 1em; width: 1.2em; display:inline" version="1.1" viewBox="0 0 448 448" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-.898 -124.01)"><path d="m26.458 288.48 198.44 119.06 198.44-119.06" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="100px"></path></g></svg>`;
+        title.style = "font-size: 1.6rem !important;";
         description.innerHTML =
           this.lang === "dutch"
             ? "Klik bovenaan op de <strong><i>balk met het pijltje</i></strong> om widgets te kiezen en toe te voegen. "

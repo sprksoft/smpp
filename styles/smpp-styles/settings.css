@@ -32,6 +32,10 @@
   font-weight: 600 !important;
 }
 
+.settings-radio:checked + label:focus-visible {
+  border-color: var(--color-accent) !important;
+}
+
 .settings-category-button-js:active {
   scale: 0.95 !important;
 }
@@ -152,10 +156,15 @@
   opacity: 1;
   margin-bottom: 1rem !important;
   width: 18rem;
+  border: 2px solid transparent !important;
+}
+
+.settings-page-slider:focus-visible {
+  border-color: var(--color-base03) !important;
 }
 
 .enableAnimations .settings-page-slider {
-  transition: opacity 0.2s;
+  transition: opacity 0.2s, border-color 0.2s ease-in-out;
 }
 .settings-page-weather-overlay-container
   .settings-page-image-button-wrapper:has(input:checked) {
@@ -241,13 +250,17 @@
   width: 100% !important;
 }
 
-#settings-page .smpp-text-input:focus {
+#settings-page .smpp-text-input:focus-visible {
   border-color: var(--color-base03) !important;
 }
 
 .enableAnimations .settings-page-image-button-wrapper {
-  transition-property: transform, box-shadow, border-color;
-  transition: 0.1s ease-in-out;
+  transition-property: transform, box-shadow, border-color, outline;
+  transition: 0.2s ease-in-out;
+}
+
+.settings-page-image-button-wrapper:focus-visible {
+  outline: 2px solid var(--color-base03) !important;
 }
 
 .settings-page-image-button-wrapper:active {
@@ -271,6 +284,7 @@
   height: 80px;
   border-radius: 1.5rem;
   border: 0.5rem solid transparent;
+  outline: 2px solid transparent !important;
 }
 
 .settings-page-image-button-wrapper input[type="radio"] {
@@ -278,7 +292,7 @@
 }
 
 label.settings-page-image-button-wrapper:has(input:checked) {
-  border-color: var(--color-accent);
+  border-color: var(--color-accent) !important;
 }
 
 .settings-page-image-wrapper img.settings-page-image {
@@ -302,11 +316,12 @@ label.settings-page-image-button-wrapper:has(input:checked) {
 }
 
 .enableAnimations .settings-page-theme-card {
-  transition-property: background-color, border-color, color, transform;
+  transition-property: background-color, border-color, color, transform, outline;
   transition: 0.15s ease-in-out;
 }
 
 .settings-page-theme-card {
+  outline: 2px solid transparent !important;
   display: flex;
   flex-direction: column;
   border: 0.3rem solid transparent;
@@ -381,6 +396,10 @@ label.settings-page-image-button-wrapper:has(input:checked) {
   scale: 0.95;
 }
 
+.settings-page-theme-card:focus-visible {
+  outline: 2px solid var(--color-base03) !important;
+}
+
 /* Highlight chosen card */
 .settings-page-theme-card:has(input:checked) {
   border-color: var(--hover-border);
@@ -389,6 +408,7 @@ label.settings-page-image-button-wrapper:has(input:checked) {
 }
 
 .settings-page-icons-container {
+  margin: 2px;
   position: relative;
   width: fit-content;
   display: flex;
@@ -428,7 +448,7 @@ label.settings-page-image-button-wrapper:has(input:checked) {
 }
 
 .settings-page-icons-container.settings-page-weather-overlay-container {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.5rem !important;
   background-color: var(--color-base01);
   width: fit-content;
   width: 20rem;
@@ -482,6 +502,16 @@ label.settings-page-image-button-wrapper:has(input:checked) {
   border-radius: 1000px;
   padding: 0.75rem 0.75rem 0.75rem 1.5rem;
   max-width: 30rem;
+  border: 2px transparent solid !important;
+}
+
+.enableAnimations .settings-page-button-label-container {
+  transition: 0.2s ease-in-out border-color;
+}
+
+.settings-page-button-label-container:focus,
+.settings-page-key-bind-container:focus {
+  border-color: var(--color-base03) !important;
 }
 
 .settings-page-key-bind-container {
@@ -787,6 +817,10 @@ input.settings-page-keybinding-input[type="text"]:not(
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
+}
+
+#quickSettings #extraSettingsButton:focus-visible {
+  border-color: var(--color-accent) !important;
 }
 
 #quickSettings #extraSettingsButton > svg {

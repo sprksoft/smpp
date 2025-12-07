@@ -3,6 +3,7 @@ function createButton(id = "") {
   outerSwitch.classList.add("switch");
   let innerButton = document.createElement("input");
   innerButton.classList.add("popupinput");
+  innerButton.tabIndex = "-1";
   innerButton.type = "checkbox";
   innerButton.id = id;
   let innerSwitch = document.createElement("span");
@@ -15,11 +16,22 @@ function createButton(id = "") {
 function createButtonWithLabel(id = "", text) {
   let container = document.createElement("label");
   container.classList.add("smpp-button-with-label");
-  container.for = id;
+  container.htmlFor = id;
+  container.dataset.for = id;
 
   let label = document.createElement("span");
   label.innerText = text;
   let button = createButton(id);
+
+  // Add keyboard support
+  container.addEventListener("keydown", (e) => {
+    if (e.key === " " || e.key === "Enter") {
+      e.preventDefault(); // Prevent page scroll on Space
+      button.click(); // Trigger the checkbox
+      container.focus();
+    }
+  });
+
   container.appendChild(label);
   container.appendChild(button);
   return container;

@@ -50,20 +50,16 @@ class BaseWindow {
 
   show(triggerEvent = null) {
     if (this.isOpen) return;
-
     this.isOpen = true;
     this.element.classList.remove("hidden");
-
     const isKeyboardEvent =
       triggerEvent &&
       (typeof KeyboardEvent !== "undefined"
         ? triggerEvent instanceof KeyboardEvent
         : String(triggerEvent.type).startsWith("key"));
-
     const openEventTarget = isKeyboardEvent
       ? null
       : triggerEvent?.target ?? null;
-
     this._outsideClickHandler = (e) => {
       if (
         openEventTarget &&
@@ -71,15 +67,24 @@ class BaseWindow {
       ) {
         return;
       }
-
       if (!this.element.contains(e.target)) {
         this.hide();
       }
     };
-
     document.addEventListener("click", this._outsideClickHandler, {
       capture: true,
     });
+
+    // Focus the first focusable element inside the window
+    if (isKeyboardEvent) {
+      requestAnimationFrame(() => {
+        const focusableElements = this.element.querySelectorAll("label");
+        console.log(focusableElements);
+        if (focusableElements.length > 0) {
+          focusableElements[0].focus();
+        }
+      });
+    }
 
     this.onOpened();
   }

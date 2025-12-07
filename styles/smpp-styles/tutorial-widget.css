@@ -49,7 +49,7 @@
 }
 
 .tutorial-widget-title {
-  font-size: 1.6rem !important;
+  font-size: 2rem !important;
   margin-bottom: 0.5rem !important;
   color: var(--color-accent);
   text-align: left;
@@ -66,4 +66,13 @@
   font-weight: 500;
   text-align: left;
   margin-bottom: 0 !important;
+}
+
+.smpp-widget:has(#tutorial-widget) {
+  background: linear-gradient(
+    60deg,
+    var(--color-base01),
+    var(--color-base02)
+  ) !important;
+  border-color: var(--color-accent) !important;
 }

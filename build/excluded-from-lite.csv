@@ -1,8 +1,11 @@
 widgets/plant.js
 styles/smpp-styles/plant.css
-main/globalchat.js
-main/weatherEffects.js
+main-features/globalchat.js
+main-features/appearance/weatherEffects.js
 games/snake.js
 games/flappy.js
 games/breakout.js
+games/tetris.js
+games/pong.js
+games/games.js
 .git

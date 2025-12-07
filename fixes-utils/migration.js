@@ -12,7 +12,6 @@ async function migrateWidgetSettingsData() {
   let delijnAppData = await browser.runtime.sendMessage({
     action: "getDelijnAppData",
   });
-  console.log(delijnAppData);
   let weatherAppData = await browser.runtime.sendMessage({
     action: "getWeatherAppData",
   });
@@ -32,7 +31,6 @@ async function migrateWidgetSettingsData() {
         "currentLocation",
         weatherAppData.weatherAppData.lastLocation
       );
-      console.log(widget);
     });
   }
 }

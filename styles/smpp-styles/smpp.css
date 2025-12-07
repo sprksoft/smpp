@@ -22,7 +22,7 @@
 }
 
 #quickSettings .full-file-input-container .smpp-text-input:hover,
-#quickSettings .full-file-input-container .smpp-text-input:focus {
+#quickSettings .full-file-input-container .smpp-text-input:focus-visible {
   border-color: var(--color-accent) !important;
 }
 
@@ -46,8 +46,13 @@
   transition: opacity 0.3s, filter 0.3s, border-color ease-in-out 0.3s !important;
 }
 
-.smpp-file-input-button:hover {
+.smpp-file-input-button:hover,
+.smpp-file-input-button:focus-visible {
   border-color: var(--color-accent) !important;
+}
+
+.smpp-link-clear-button:active {
+  scale: 0.9 !important;
 }
 
 .smpp-link-clear-button {
@@ -69,7 +74,8 @@
   z-index: auto;
 }
 .enableAnimations .smpp-link-clear-button {
-  transition: filter 0.2s ease-in-out, stroke 0.2s ease-in-out;
+  transition: filter 0.2s ease-in-out, stroke 0.2s ease-in-out,
+    scale 0.2s ease-in-out;
 }
 
 .smpp-link-clear-button:hover {

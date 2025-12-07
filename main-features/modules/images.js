@@ -34,6 +34,7 @@ class ImageSelector {
 
     this.fileInput = document.createElement("input");
     this.fileInput.style.display = "none";
+    this.fileInput.tabindex = "-1";
     this.fileInput.type = "file";
     this.fileInput.accept = "image/*";
 
@@ -59,6 +60,7 @@ class ImageSelector {
 
     this.clearButton = document.createElement("button");
     this.clearButton.type = "button";
+    this.clearButton.tabIndex = "-1";
     this.clearButton.classList.add("smpp-link-clear-button");
     this.clearButton.setAttribute("aria-label", "Clear link");
     this.clearButton.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke-width="2">

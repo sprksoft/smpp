@@ -71,10 +71,18 @@ class SettingsWindow extends BaseWindow {
 
     let profileSettingsLabel = document.createElement("label");
     profileSettingsLabel.htmlFor = "settings-profile";
+    profileSettingsLabel.tabIndex = "0";
     profileSettingsLabel.classList.add(
       "profile-settings-button",
       "settings-category-button-js"
     );
+
+    profileSettingsLabel.addEventListener("keydown", (e) => {
+      if (e.key === " " || e.key === "Enter") {
+        e.preventDefault(); // Prevent page scroll on Space
+        radioInput.click(); // Select the radio button
+      }
+    });
 
     let profilePicture = document.createElement("div");
     profilePicture.classList.add("profile-picture-settings");
@@ -120,10 +128,18 @@ class SettingsWindow extends BaseWindow {
 
     let categoryLabel = document.createElement("label");
     categoryLabel.htmlFor = `settings-${category}`;
+    categoryLabel.tabIndex = "0";
     categoryLabel.classList.add(
       "settings-category-button",
       "settings-category-button-js"
     );
+
+    categoryLabel.addEventListener("keydown", (e) => {
+      if (e.key === " " || e.key === "Enter") {
+        e.preventDefault(); // Prevent page scroll on Space
+        radioInput.click(); // Select the radio button
+      }
+    });
 
     let categoryButtonIcon = document.createElement("img");
     categoryButtonIcon.classList.add("category-button-icon");
@@ -616,6 +632,8 @@ class SettingsWindow extends BaseWindow {
       container.classList.add("settings-page-key-bind-container");
 
       let label = document.createElement("span");
+      label.for = id;
+      label.tabIndex = "0";
       label.classList.add("settings-page-button-label");
       label.innerText = text;
 
@@ -689,6 +707,7 @@ class SettingsWindow extends BaseWindow {
     //TODO: use function in ui.js (classes need to be added and or css needs to be changed)
     function createSettingsButtonWithLabel(id, text) {
       let container = createButtonWithLabel(id, text);
+      container.tabIndex = "0";
       container.classList.add("settings-page-button-label-container");
       return container;
     }
@@ -696,13 +715,13 @@ class SettingsWindow extends BaseWindow {
     function createImageButton(src, width = "80px", height = "80px", name, id) {
       let wrapper = document.createElement("label");
       wrapper.classList.add("settings-page-image-button-wrapper");
+      wrapper.tabIndex = "0";
       wrapper.style.width = width;
       wrapper.style.height = height;
 
       let input = document.createElement("input");
       input.type = "radio";
       input.name = name;
-
       if (id) input.id = id;
 
       let image = document.createElement("img");
@@ -710,9 +729,16 @@ class SettingsWindow extends BaseWindow {
       image.src = getExtensionImage(src);
       image.width = width;
 
+      // Add keyboard support
+      wrapper.addEventListener("keydown", (e) => {
+        if (e.key === " " || e.key === "Enter") {
+          e.preventDefault(); // Prevent page scroll on Space
+          input.click(); // Select the radio button
+        }
+      });
+
       wrapper.appendChild(input);
       wrapper.appendChild(image);
-
       return wrapper;
     }
 
@@ -726,7 +752,6 @@ class SettingsWindow extends BaseWindow {
     ) {
       let container = document.createElement("label");
       container.classList.add("settings-page-image-button-label");
-      container.for = id;
       let imageButton = createImageButton(src, width, height, name, id);
       let imageButtonLabel = document.createElement("span");
       imageButtonLabel.innerText = text;
@@ -830,7 +855,7 @@ class SettingsWindow extends BaseWindow {
         this.settingsPage.appendChild(createSectionTitle("Theme"));
         this.settingsPage.appendChild(
           createDescription(
-            "Customize the overall look and feel of the interface with different color styles."
+            "Customize the overall look of the interface with different color styles."
           )
         );
 
@@ -840,8 +865,8 @@ class SettingsWindow extends BaseWindow {
           if (!themes[key]["display-name"].startsWith("__")) {
             // Don't include hidden themes
             let themeCard = document.createElement("label"); // use <label> to make radio clickable
+            themeCard.tabIndex = "0";
             themeCard.classList.add("settings-page-theme-card");
-
             themeCard.style.setProperty(
               "--hover-border",
               themes[key]["--color-accent"]
@@ -872,10 +897,17 @@ class SettingsWindow extends BaseWindow {
               "100%",
               "6rem"
             );
-
             let themeTitle = document.createElement("span");
             themeTitle.classList.add("settings-page-theme-title");
             themeTitle.innerText = themes[key]["display-name"];
+
+            // Add keyboard support
+            themeCard.addEventListener("keydown", (e) => {
+              if (e.key === " " || e.key === "Enter") {
+                e.preventDefault(); // Prevent page scroll on Space
+                themeRadio.click(); // Select the radio button
+              }
+            });
 
             // build card
             themeCard.appendChild(themeRadio);
