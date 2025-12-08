@@ -76,8 +76,7 @@ class TakenWidget extends WidgetBase {
           noDataContainer.classList.add("blue-ghost-96");
           let noDataContainerTextContainer = document.createElement("div");
           noDataContainerTextContainer.classList.add("no-data-text");
-          noDataContainerTextContainer.innerText =
-            "Er zijn geen opdrachten gepland in de komende ${foresight} dagen.";
+          noDataContainerTextContainer.innerText = `Er zijn geen opdrachten gepland in de komende ${foresight} dagen.`;
           noDataContainerTextContainer.style.textAlign = "center";
           noDataContainerTextContainer.style.padding = "1rem";
           noDataContainerTextContainer.style.fontSize = "1rem";
@@ -253,12 +252,12 @@ async function markAsFinished(as_ID, name) {
     );
     return false;
   }
-console.log(name)
+  console.log(name);
   let as_type = name ? "assignment" : "to-do"; // im using ternary u proud of me siebe? 🥺 o((>ω< ))o
-console.log(as_type)
+  console.log(as_type);
   const url = `https://${schoolName}.smartschool.be/planner/api/v1/planned-${as_type}s/${userId}/${as_ID}/resolve`;
-  console.log(url)
-  
+  console.log(url);
+
   try {
     const response = await fetch(url, {
       method: "POST",
