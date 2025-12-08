@@ -125,7 +125,7 @@ quick-reply {
 }
 
 .toolbar__line {
-  background: var(--color-accent) !important;
+  background: var(--color-base03) !important;
   width: var(--border-size) !important;
 }
 
@@ -274,7 +274,7 @@ body.modern-ui .homepage__block {
 
 .toolbar__line:before,
 .toolbar__line:after {
-  background: var(--color-accent) !important;
+  background: var(--color-base03) !important;
   height: var(--border-size) !important;
 }
 
@@ -835,6 +835,10 @@ a.menu-type.menu-linkbutton.smsc-linkbutton {
 
 .msgContent p {
   background-color: var(--color-base01) !important;
+}
+
+.blob-group {
+  gap: 0.5rem !important;
 }
 
 .blob-group__blob.blob {

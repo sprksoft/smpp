@@ -977,8 +977,8 @@ ul.smsc-column-nav {
 }
 
 .main-slider::-webkit-slider-thumb {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.6rem;
+  height: 1.6rem;
   border-radius: 50%;
   background: var(--color-accent) !important;
   border-color: transparent;
@@ -988,8 +988,8 @@ ul.smsc-column-nav {
   appearance: none;
 }
 .main-slider::-moz-range-thumb {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.6rem;
+  height: 1.6rem;
   border-radius: 50%;
   background: var(--color-accent) !important;
   border-color: transparent;
@@ -1297,7 +1297,9 @@ input[name="email"] {
 label.checkbox input[type="checkbox"],
 div.smscCheckbox input[type="checkbox"],
 .mobile-style input[type="checkbox"],
-.uscMain .usersContainerBlock .usersContainerBlockBack {
+.uscMain .usersContainerBlock .usersContainerBlockBack,
+[listview] .listview__select-btn,
+smsc-listview .checkbox-button {
   appearance: none !important;
   background: var(--color-base02) !important;
   border: 2px solid var(--color-base03) !important;
@@ -1306,7 +1308,10 @@ div.smscCheckbox input[type="checkbox"],
   flex: 0 0 1.3rem !important;
   width: 1.3rem !important;
   height: 1.3rem !important;
+}
 
+.smsc-topnav input[type="search"].input-search {
+  background-image: none !important;
 }
 
 .mobile-style input[type="checkbox"],
@@ -1318,8 +1323,25 @@ div.smscCheckbox input[type="checkbox"],
 label.checkbox input[type="checkbox"]:checked,
 div.smscCheckbox input[type="checkbox"]:checked,
 .mobile-style input[type="checkbox"]:checked,
-.uscMain .usersContainerBlock .usersContainerBlockBack.selected {
+.uscMain .usersContainerBlock .usersContainerBlockBack.selected,
+[listview] .listview__select-btn[aria-checked="true"],
+smsc-listview .checkbox-button--checked,
+smsc-listview .checkbox-button[aria-checked="true"] {
   background: var(--color-accent) !important;
+}
+
+.listview__cell.js-listview-cell.listview__cell--icon-24.column--icon {
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+}
+
+.listview__cell.js-listview-cell.column--date {
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+}
+
+[listview] .listview__rows {
+  gap: 0.5rem !important;
 }
 
 label.radiobutton input[type="radio"] {
@@ -1334,7 +1356,6 @@ label.radiobutton input[type="radio"] {
 
 label.radiobutton input[type="radio"]:checked {
   background: var(--color-accent) !important;
-
 }
 
 .smsc-select {

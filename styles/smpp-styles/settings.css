@@ -173,8 +173,8 @@
 }
 
 .settings-page-slider::-webkit-slider-thumb {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.4rem;
+  height: 1.4rem;
   border-radius: 50%;
   background: var(--color-accent) !important;
   border-color: transparent;
@@ -185,8 +185,8 @@
 }
 
 .settings-page-slider::-moz-range-thumb {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.4rem;
+  height: 1.4rem;
   border-radius: 50%;
   background: var(--color-accent) !important;
   border-color: transparent;
