@@ -301,12 +301,6 @@ li {
   color: var(--color-base02) !important;
 }
 
-.smsc_cm_body {
-  border: 2px solid var(--color-base02) !important;
-  border-radius: 10px !important;
-  padding: 10px !important;
-}
-
 .smsc-column-nav__item a.smsc-column-nav__button {
   font-weight: 500 !important;
   color: var(--color-text) !important;
@@ -378,6 +372,10 @@ td[bgcolor*="#"] {
   top: 0px !important;
   margin-top: 37px !important;
   height: 100% !important;
+
+  border: 2px solid var(--color-base02) !important;
+  border-radius: 1.5rem !important;
+  padding: 1rem !important;
 }
 
 .margin-top--milli {

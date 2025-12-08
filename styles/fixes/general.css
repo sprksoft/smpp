@@ -1298,7 +1298,15 @@ label.checkbox input[type="checkbox"],
 div.smscCheckbox input[type="checkbox"],
 .mobile-style input[type="checkbox"],
 .uscMain .usersContainerBlock .usersContainerBlockBack {
-  background-image: url("https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/checkboxunchecked.svg") !important;
+  appearance: none !important;
+  background: var(--color-base02) !important;
+  border: 2px solid var(--color-base03) !important;
+  border-radius: 0.4rem !important;
+
+  flex: 0 0 1.3rem !important;
+  width: 1.3rem !important;
+  height: 1.3rem !important;
+
 }
 
 .mobile-style input[type="checkbox"],
@@ -1311,15 +1319,22 @@ label.checkbox input[type="checkbox"]:checked,
 div.smscCheckbox input[type="checkbox"]:checked,
 .mobile-style input[type="checkbox"]:checked,
 .uscMain .usersContainerBlock .usersContainerBlockBack.selected {
-  background-image: url("https://raw.githubusercontent.com/frickingbird8002/smpp-images/9d0cc428cc236802f97cfe77094256d0cf5bdcdf/checkedbox.svg") !important;
+  background: var(--color-accent) !important;
 }
 
 label.radiobutton input[type="radio"] {
-  background-image: url("https://raw.githubusercontent.com/frickingbird8002/smpp-images/7b95e48a890b193f678073bd9d1101e35cd08d4a/radiounchecked.svg") !important;
+  appearance: none !important;
+  background: var(--color-base02) !important;
+  border: 2px solid var(--color-base03) !important;
+  border-radius: 10000px !important;
+  flex: 0 0 1.3rem !important;
+  width: 1.3rem !important;
+  height: 1.3rem !important;
 }
 
 label.radiobutton input[type="radio"]:checked {
-  background-image: url("https://raw.githubusercontent.com/frickingbird8002/smpp-images/7b95e48a890b193f678073bd9d1101e35cd08d4a/checkedradiox.svg") !important;
+  background: var(--color-accent) !important;
+
 }
 
 .smsc-select {
@@ -1929,7 +1944,7 @@ button.smsc-dialog__top__button.smsc-dialog__icon.smsc-dialog__close-button {
   color: var(--color-text) !important;
 }
 label.radiobutton.js-radiobutton {
-  cursor: default;
+  cursor: pointer !important;
 }
 .mydoc__action-buttons {
   display: none !important;
@@ -2209,9 +2224,13 @@ div#folders {
   font-weight: 500 !important;
   padding-top: 1rem;
 }
-div#smscMainBlockContainer {
-  background: none !important;
+.smsc_cm_breadcrumb.subline {
   border: none !important;
+}
+div#smscMainBlockContainer {
+  background: var(--color-base00) !important;
+  border-radius: 2rem !important;
+  border: 2px solid var(--color-base02) !important;
 }
 .uploadzone .folders {
   width: auto !important;
@@ -2410,12 +2429,6 @@ body.modern-ui .homepage__block__content {
   background-color: var(--color-base03) !important;
   color: var(--color-text) !important;
   border-width: 0px !important;
-}
-
-#smscMainBlockContainer:has(.smscAdminNav_body) {
-  border: 2px solid var(--color-base02) !important;
-  border-radius: 2rem !important;
-  background: var(--color-base01) !important;
 }
 
 .campaign-dialog-content__button-bar {

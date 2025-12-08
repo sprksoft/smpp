@@ -883,6 +883,3 @@ button.split-button__dropdown.js-split-button-dropdown.btn.btn--dropdown.js-btn.
 .js-split-button-dropdown {
   border-radius: 1rem !important;
 }
-.btn.btn--dropdown:after {
-  right: unset !important;
-}
