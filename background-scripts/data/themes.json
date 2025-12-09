@@ -30,13 +30,13 @@
     "display-name": "Dark Sands",
     "--color-accent": "oklch(90% 0.069 70)",
     "--color-text": "oklch(80% 0.004 90)",
-    "--color-base00": "oklch(17% 0.005 70)",
-    "--color-base01": "oklch(20% 0.005 70)",
-    "--color-base02": "oklch(24% 0.005 70)",
-    "--color-base03": "oklch(30% 0.005 70)",
-    "--color-homepage-sidebars-bg": "oklch(15% 0.005 70/ 50%)",
+    "--color-base00": "oklch(0% 0.005 70)",
+    "--color-base01": "oklch(23% 0.005 70)",
+    "--color-base02": "oklch(27% 0.005 70)",
+    "--color-base03": "oklch(33% 0.005 70)",
+    "--color-homepage-sidebars-bg": "oklch(0% 0.005 70/ 50%)",
     "--darken-background": "rgba(0,0,0,0.25)",
-    "--color-splashtext": "#ffd5a0"
+    "--color-splashtext": "oklch(90% 0.069 70)"
   },
   "birb": {
     "display-name": "Midnight Sapphire",
