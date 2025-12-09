@@ -148,7 +148,6 @@ async function createHalteDoorkomst(doorkomst, container, monochrome, signal) {
     );
   } catch (err) {
     if (err.name === "AbortError") {
-      console.log(`Request for lijn ${lijnKey} was aborted`);
       return;
     }
     console.error(err);
@@ -195,7 +194,6 @@ async function updateLijnCardWithApiData(
     }
   } catch (error) {
     if (error.name === "AbortError") {
-      console.log("Lijn card update was aborted");
       return;
     }
     console.error("Failed to fetch additional data for lijn card:", error);
@@ -307,7 +305,6 @@ class DelijnWidget extends WidgetBase {
       );
     } catch (error) {
       if (error.name === "AbortError") {
-        console.log("Doorkomsten request was aborted");
         return;
       }
       this.displayInfo("Er liep iets mis: " + error);
@@ -316,8 +313,6 @@ class DelijnWidget extends WidgetBase {
     }
 
     if (signal.aborted) return;
-
-    console.log(delijnData);
 
     if (!delijnData.halteDoorkomsten[0]) {
       this.displayInfo(

@@ -2,7 +2,7 @@ async function migrateV5() {
   const settingsData = await browser.runtime.sendMessage({
     action: "getSettingsData",
   });
-  console.log("Started migration V5 with", settingsData);
+  console.log("MIG V:\n Started migration with", settingsData);
   await migrateSettingsV5(settingsData);
   await migrateImageV5(settingsData);
   await migrateWidgetSettingsData();
@@ -61,16 +61,21 @@ async function migrateImageV5(oldData) {
         link: oldData.backgroundLink,
         type: "file",
       };
-      console.log(data);
       break;
     default:
       break;
   }
+
   await browser.runtime.sendMessage({
     action: "setImage",
     id: "backgroundImage",
     data: data,
   });
+
+  console.log(
+    "MIG V: \n Successfully migrated background image  with data:",
+    data
+  );
 }
 
 async function migrateSettingsV5(oldData) {
@@ -87,7 +92,6 @@ async function migrateSettingsV5(oldData) {
       newWeatherOverlayType = "snow";
       break;
   }
-  console.log(oldData);
   let newSettingsData = {
     profile: {
       username: oldData.customUserName,
@@ -144,7 +148,10 @@ async function migrateSettingsV5(oldData) {
     action: "setSettingsData",
     data: newSettingsData,
   });
-  console.log("migrated settings V5");
+  console.log(
+    "MIG V: \n Succesfully migrated settings data to:",
+    newSettingsData
+  );
 }
 
 async function migrate() {

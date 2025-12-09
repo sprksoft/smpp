@@ -35,7 +35,6 @@ async function createPlantWidget(plantDiv) {
   let plantData = await browser.runtime.sendMessage({
     action: "getPlantAppData",
   });
-  console.log("Plant data: \n", plantData);
   let outdated = checkIfOutdated(plantData.plantVersion);
   plantDiv.innerHTML = "";
   if (outdated) {

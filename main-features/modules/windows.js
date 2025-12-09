@@ -88,7 +88,6 @@ class BaseWindow {
     if (isKeyboardEvent) {
       requestAnimationFrame(() => {
         const focusableElements = this.element.querySelectorAll("label");
-        console.log(focusableElements);
         if (focusableElements.length > 0) {
           focusableElements[0].focus();
         }

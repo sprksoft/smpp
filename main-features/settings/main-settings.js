@@ -604,11 +604,13 @@ class SettingsWindow extends BaseWindow {
       default:
         break;
     }
-    console.log("Storing settings: ", settings);
+
     await browser.runtime.sendMessage({
       action: "setSettingsData",
       data: settings,
     });
+
+    console.log("Successfully stored main settings: \n", settings);
     await this.loadPage();
   }
 

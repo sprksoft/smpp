@@ -39,6 +39,7 @@ async function storeQuickSettings() {
   if (settingsWindow) {
     await settingsWindow.loadPage();
   }
+  console.log("Successfull stored quick settings:\n", data);
   await apply();
 }
 
@@ -46,7 +47,6 @@ async function loadQuickSettings() {
   const data = await browser.runtime.sendMessage({
     action: "getSettingsData",
   });
-  console.log("Loaded this data:", data);
   document.getElementById("theme-selector").value = data.appearance.theme;
 
   quickSettingsBackgroundImageSelector.loadImageData();

@@ -18,15 +18,6 @@ function registerWidget(widget) {
   widgets.push(widget);
 }
 
-function createWidgetErrorContent(name) {
-  let p = document.createElement("p");
-  p.classList.add("smpp-error-widget");
-  p.innerHTML =
-    "<span>Probleem bij het laden van de widget: </span><code class='widgetName'></code>";
-  p.querySelector(".widgetName").innerText = name;
-  return p;
-}
-
 class WidgetDragInfo {
   offset;
   widget;
@@ -57,6 +48,30 @@ class WidgetBase {
     this.#content = null;
     this.#preview = false;
     this.#aboutToDel = false;
+  }
+
+  createWidgetErrorContent(name) {
+    let p = document.createElement("p");
+    p.classList.add("smpp-error-widget");
+    p.innerHTML =
+      "<span>Probleem bij het laden van de widget: </span><code class='widgetName'></code><button>Clear widget</button>";
+    p.querySelector(".widgetName").innerText = name;
+    p.querySelector("button").addEventListener("click", async () => {
+      this.clearWidgetSettings();
+    });
+    return p;
+  }
+
+  async clearWidgetSettings() {
+    await browser.runtime.sendMessage({
+      action: "setWidgetData",
+      widget: this.constructor.name,
+      data: this.defaultSettings(),
+    });
+    this.#settings = this.defaultSettings();
+    console.log("Clearing", this.name, "'s settings");
+    this.#content = null;
+    this.#setPreview(false);
   }
 
   #createWidgetDiv() {
@@ -104,18 +119,19 @@ class WidgetBase {
     } catch (e) {
       console.error("Failed to create widget content");
       console.error(e);
-      newContent = createWidgetErrorContent(this.name);
+      newContent = this.createWidgetErrorContent(this.name);
     }
     if (!newContent) {
       console.error(
         "createContent and createPreview method's needs to return an html object. in widget impl"
       );
-      newContent = createWidgetErrorContent(this.name);
+      newContent = this.createWidgetErrorContent(this.name);
     }
     this.#content?.remove();
     newContent.classList.add("smpp-widget-content");
     this.#content = newContent;
     this.element.dataset.widgetName = this.name;
+    this.element.innerHTML = "";
     this.element.appendChild(this.#content);
     this.#preview = preview;
   }
@@ -347,7 +363,7 @@ class ErrorWidget extends WidgetBase {
   }
 
   async createContent() {
-    return createWidgetErrorContent(this.origWidgetName);
+    return this.createWidgetErrorContent(this.origWidgetName);
   }
 }
 
@@ -564,7 +580,7 @@ async function createWidgetSystem() {
   let widgetData = await browser.runtime.sendMessage({
     action: "getWidgetLayout",
   });
-  console.log("Widget data: \n", widgetData);
+  console.log("Applying widgte with data: \n", widgetData);
   let setDefaults = false;
   if (!widgetData) {
     setDefaults = true;
@@ -573,6 +589,7 @@ async function createWidgetSystem() {
       rightPannels: [{ widgets: [] }],
     };
   }
+  
 
   // Create smartschool default widgets
   for (let smWidget of document.querySelectorAll(

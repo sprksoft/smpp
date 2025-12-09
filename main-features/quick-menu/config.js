@@ -64,7 +64,6 @@ async function dmenuEditConfig(path) {
   configPath = getFullOptPath(templates, path);
   const template = getByPath(templates, configPath);
 
-  console.log(dmenuConfig, configPath);
   let optionValue = await browser.runtime.sendMessage({
     action: "getSettingsCategory",
     category: configPath,

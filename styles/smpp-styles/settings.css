@@ -105,6 +105,7 @@
 
 .profile-picture-settings {
   background-image: var(--profile-picture);
+  image-rendering: smooth !important;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;

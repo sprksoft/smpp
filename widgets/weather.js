@@ -31,9 +31,6 @@ class WeatherWidgetBase extends WidgetBase {
       this.settings.currentLocation
     );
 
-    console.log(newWeatherData);
-    console.log(this.settings.currentLocation);
-
     if (newWeatherData.name) {
       await this.setSetting("currentLocation", newWeatherData.name);
     }

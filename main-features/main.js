@@ -226,7 +226,7 @@ async function apply() {
   const data = await browser.runtime.sendMessage({
     action: "getSettingsData",
   });
-  console.log("Settings data: \n", data);
+  console.log("Applying with settings data: \n", data);
 
   await reloadDMenuConfig(); // reload the dmenu config. (er is een object voor async raarheid te vermijden en dat wordt herladen door deze functie)
   if (onHomePage) setEditMode(false);

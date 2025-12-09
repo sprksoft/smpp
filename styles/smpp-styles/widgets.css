@@ -345,12 +345,48 @@ html {
 /* WIDGET STYLES */
 .smpp-error-widget {
   color: var(--color-red);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   font-weight: bold;
+}
+
+p.smpp-error-widget {
+  margin-bottom: 0 !important;
 }
 
 .smpp-error-widget .widgetName {
   text-align: center;
   display: block;
+}
+
+.enableAnimations .smpp-error-widget button {
+  transition: scale 0.1s ease-in-out, border-color 0.2s ease-in-out,
+    background 0.2s ease-in-out;
+}
+
+.smpp-error-widget button {
+  margin-top: 0.5rem;
+  appearance: none;
+  cursor: pointer;
+  box-shadow: 0px 2px 10px 0px var(--darken-background);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-accent) !important;
+  font-size: 1.4rem !important;
+  font-weight: 700 !important;
+  padding: 0.5rem 1.5rem 0.6rem;
+  background: var(--color-base01);
+  border-radius: 1.25rem;
+  border: 2px solid var(--color-base03);
+  gap: 0.5rem;
+}
+
+.smpp-error-widget button:hover {
+  border-color: var(--color-accent);
+  background: var(--color-base02);
 }
 
 .smpp-widget:has(.smpp-widget-smartschool) {

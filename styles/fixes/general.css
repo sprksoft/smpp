@@ -2435,6 +2435,7 @@ body.modern-ui .homepage__block__content {
 .rounded_profile_photo {
   border-radius: 50% !important;
   background-image: var(--profile-picture) !important;
+  image-rendering: smooth;
   background-size: cover !important;
 }
 

@@ -252,11 +252,8 @@ async function markAsFinished(as_ID, name) {
     );
     return false;
   }
-  console.log(name);
   let as_type = name ? "assignment" : "to-do"; // im using ternary u proud of me siebe? 🥺 o((>ω< ))o
-  console.log(as_type);
   const url = `https://${schoolName}.smartschool.be/planner/api/v1/planned-${as_type}s/${userId}/${as_ID}/resolve`;
-  console.log(url);
 
   try {
     const response = await fetch(url, {

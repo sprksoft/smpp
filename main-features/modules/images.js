@@ -130,7 +130,6 @@ class ImageSelector {
       this.fileInput.value = "";
     } else {
       const linkValue = (this.linkInput.value || "").trim();
-      console.log(linkValue);
       if (linkValue === "") {
         data.type = "default";
         data.link = "";
