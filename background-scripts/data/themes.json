@@ -230,5 +230,14 @@
     "--darken-background": "#0a000240",
     "--color-homepage-sidebars-bg": "#0a000250",
     "--color-splashtext": "#ff0033"
+  },
+  "smkerst": {
+    "display-name": "__Smartschool Kerst",
+    "--color-accent": "#f6ed4f",
+    "--color-base00": "#051e45",
+    "--color-base01": "#124f96",
+    "--color-base02": "#3071c9",
+    "--color-base03": "#4b47c0",
+    "--color-text": "#dff1e1"
   }
 }
