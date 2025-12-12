@@ -1714,7 +1714,13 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
 }
 
 .window-button:hover {
-  background: var(--color-base00);
+  background: var(--color-base02);
+  border-color: var(--color-base03);
+}
+
+.window-button:focus-visible {
+  background: var(--color-base02);
+  border-color: var(--color-accent);
 }
 
 .window-button svg {
@@ -1723,7 +1729,8 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
 }
 
 .enableAnimations .window-button svg {
-  transition: transform 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  transition-property: background, transform, border-color;
+  transition: 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
 }
 
 .enableAnimations .window-button:hover svg {

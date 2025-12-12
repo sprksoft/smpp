@@ -840,3 +840,45 @@ input.settings-page-keybinding-input[type="text"]:not(
 #quickSettings #extraSettingsButton:active {
   scale: 0.95;
 }
+
+.enableAnimations .keybind-unbind-button {
+  transition: scale 0.1s ease-in-out, border-color 0.2s ease-in-out,
+    background 0.2s ease-in-out, opacity 0.1s ease-out;
+}
+
+.keybind-unbind-button {
+  display: block;
+  background: var(--color-base01) !important;
+  border-radius: 10000px;
+  width: 2.25rem !important;
+  height: 2.25rem !important;
+  border: 2px solid var(--color-base02) !important;
+  position: absolute !important;
+  right: -1.2rem;
+  top: -1.2rem;
+  padding: 0.2rem !important;
+  opacity: 0;
+  pointer-events: none !important;
+}
+
+.listening + .keybind-unbind-button {
+  opacity: 1;
+  pointer-events: all !important;
+}
+
+.keybind-unbind-button svg {
+  stroke: var(--color-red) !important;
+}
+
+.keybind-unbind-button:hover {
+  background: var(--color-base02) !important;
+  border-color: var(--color-red) !important;
+}
+
+.keybind-unbind-button:active {
+  scale: 0.95;
+}
+
+.keybind-input-wrapper {
+  position: relative;
+}

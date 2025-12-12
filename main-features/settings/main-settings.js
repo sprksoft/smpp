@@ -653,18 +653,9 @@ class SettingsWindow extends BaseWindow {
       // Create unbind button
       const unbindButton = document.createElement("button");
       unbindButton.classList.add("keybind-unbind-button");
-      unbindButton.innerHTML = closeIconSVG; // Replace with your SVG
+      unbindButton.innerHTML = trashSvg; // Replace with your SVG
       unbindButton.title = "Clear keybind";
       unbindButton.setAttribute("aria-label", "Clear keybind");
-      unbindButton.style.display = "none"; // Hidden by default
-
-      // Unbind click handler
-      unbindButton.addEventListener("click", async (e) => {
-        e.stopPropagation(); // Prevent triggering input click
-        input.value = "None";
-        unbindButton.style.display = "none"; // Hide after unbinding
-        await this.storePage();
-      });
 
       let listening = false;
 
@@ -673,15 +664,14 @@ class SettingsWindow extends BaseWindow {
         listening = true;
         input.value = "Press any key...";
         input.classList.add("listening");
-        unbindButton.style.display = "block"; // Show X when listening
 
         const keyListener = async (e) => {
-          e.preventDefault();
           listening = false;
-          input.classList.remove("listening");
-          unbindButton.style.display = "none"; // Hide X after key pressed
 
-          // handle special keys (like " " → "Space")
+          input.classList.remove("listening");
+          e.preventDefault();
+          e.stopPropagation();
+
           let keyName = e.key.length === 1 ? e.key.toUpperCase() : e.key;
           if (keyName === " ") keyName = "Space";
           if (keyName === "Escape") keyName = "None";
@@ -690,6 +680,21 @@ class SettingsWindow extends BaseWindow {
           document.removeEventListener("keydown", keyListener);
           await this.storePage();
         };
+
+        const buttonListener = async (e) => {
+          listening = false;
+
+          input.classList.remove("listening");
+          e.stopPropagation();
+          e.preventDefault();
+          input.value = "None";
+
+          document.removeEventListener("keydown", keyListener);
+          await this.storePage();
+        };
+
+        // Unbind click handler
+        unbindButton.addEventListener("click", buttonListener);
 
         document.addEventListener("keydown", keyListener);
       });
@@ -1194,6 +1199,7 @@ class SettingsWindow extends BaseWindow {
         break;
       case "other":
         this.settingsPage.appendChild(createMainTitle("Other"));
+
         this.settingsPage.appendChild(createSectionTitle("Performance"));
         this.settingsPage.appendChild(
           createDescription(
@@ -1241,18 +1247,22 @@ class SettingsWindow extends BaseWindow {
             "Quick Menu"
           )
         );
+
         this.settingsPage.appendChild(
           createKeybindInput(
             "settings-page-widget-edit-keybinding",
             "Widget editing"
           )
         );
+
         this.settingsPage.appendChild(
           createKeybindInput("settings-widget-bag-keybinding", "Widget bag")
         );
+
         this.settingsPage.appendChild(
           createKeybindInput("settings-page-settings-keybinding", "Settings")
         );
+
         this.settingsPage.appendChild(
           createKeybindInput("settings-page-gc-keybinding", "Global Chat")
         );
@@ -1263,6 +1273,7 @@ class SettingsWindow extends BaseWindow {
             "Reset all settings and widgets to their default values."
           )
         );
+
         let resetButton = document.createElement("button");
         resetButton.innerText = "Reset to Defaults";
         resetButton.classList.add("settings-page-reset-button");
