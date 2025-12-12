@@ -1,13 +1,6 @@
-setTimeout(function () {
-  if (window.location.pathname.startsWith("/results/main/results/")) {
-    const getSubdomain = () => {
-      const host = window.location.hostname;
-      const subdomain = host.split(".")[0];
-      return subdomain;
-    };
-
-    const subdomain = getSubdomain();
-    const url = `https://${subdomain}.smartschool.be/results/api/v1/evaluations/?itemsOnPage=1000`;
+function buisStats() {
+  setTimeout(function () {
+    const url = `https://${getSchoolName()}.smartschool.be/results/api/v1/evaluations/?itemsOnPage=1000`;
 
     fetch(url)
       .then((response) => response.json())
@@ -41,5 +34,5 @@ setTimeout(function () {
         ).innerHTML = `<div class="buis-stats-box"><span class="buis-stats-title">Voldoendes:</span><span class="buis-stats-value">${categories.voldoende}</span></div>`;
       })
       .catch((error) => console.error("Error fetching:", error));
-  }
-}, 1500);
+  }, 1000);
+}

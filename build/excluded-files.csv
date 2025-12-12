@@ -5,3 +5,5 @@ build
 .git
 web-ext-artifacts
 widgets/photo-widget.js
+media/theme-backgrounds/compressJPG's.bat
+media/theme-backgrounds/compressJPG's.sh

@@ -11,7 +11,7 @@ function updateDiscordPopup(discordButtonEnabled) {
     discordButtonContainer.innerHTML = discordSvg;
     document.body.appendChild(discordButtonContainer);
   } else {
-    document.getElementById("discord-link-container").remove();
+    document.getElementById("discord-link-container")?.remove();
   }
 }
 
@@ -219,6 +219,10 @@ function applyFixes() {
 
   let notifsToggleLabel = document.getElementById("notifsToggleLabel");
   if (notifsToggleLabel) notifsToggleLabel.innerText = "Toon pop-ups";
+
+  if (window.location.pathname.startsWith("/results/main/results/")) {
+    buisStats();
+  }
   if (document.querySelector(".login-app__left")) updateLoginPanel();
 }
 

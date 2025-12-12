@@ -26,7 +26,7 @@ html {
   --color-base01: #000000;
   --color-base03: #000000;
   --darken-background: rgba(0, 0, 0, 0.2);
-  --color-splashtext: #191817;
+  --color-splashtext: var(--color-accent);
 }
 
 html {

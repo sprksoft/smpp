@@ -686,6 +686,10 @@ button.btn.dropdown-button.js-course-dropdown,
   border-radius: 0.75rem !important; /*lukas ik weet dat jij mij hier voor gaat haten maar ik heb 2 goeie redenen waarom   1. het is gwn consistent   2. het is beter voor de algemene persoon die net smpp heeft  3.😝*/
 }
 
+button.btn.dropdown-button.js-course-dropdown {
+  max-width: 20rem;
+}
+
 .detail-blob {
   background-color: var(--color-base02) !important;
 }
@@ -698,16 +702,20 @@ button.btn.dropdown-button.js-course-dropdown,
 .course-module-planner__header {
   border: none !important;
   border: 2px solid var(--color-base01) !important;
-  border-radius: 10px !important;
+  border-radius: 1rem !important;
 }
-.course-module-planner__header { /* lukas wil je nu 10 of 25 px???*/
-  border-radius: 25px !important;
-  padding: 20px !important;
+
+.course-module-planner__header {
+  /* lukas wil je nu 10 of 25 px???*/
+  border-radius: 2rem !important;
+  padding: 1.5rem !important;
 }
-.course-module-planner__header:has(.button-container){
+
+.course-module-planner__header:has(.button-container) {
   background-color: var(--color-base01) !important;
 }
-.course-module-planner__header__separator{
+
+.course-module-planner__header__separator {
   border-color: var(--color-accent) !important;
 }
 .course-page__container {
