@@ -289,6 +289,7 @@ function createTopButtons() {
   let searchBtn = document.querySelector(".topnav__btn--icon--search");
 
   topNav.insertBefore(createQuickSettingsButton(), searchBtn.parentElement);
+  createQuickSettings();
 
   let pushRight = topNav.childNodes[2];
 
@@ -351,6 +352,8 @@ async function main() {
   await createStaticGlobals();
 
   await createWidgetSystem();
+
+  await createSettingsWindow();
   createTopButtons();
 
   await apply();

@@ -1,18 +1,16 @@
 class GlobalChatWindow extends BaseWindow {
   beta;
   iframe;
-  constructor(hidden = false) {
+  gcContent;
+  constructor(hidden = true) {
     super("global_chat_window", hidden);
   }
 
   async renderContent() {
-    let content = document.createElement("div");
-    this.iframe = document.createElement("iframe");
-    this.iframe.style = "width:100%; height:100%; border:none";
-    content.appendChild(this.iframe);
-
-    return content;
+    this.gcContent = document.createElement("div");
+    return this.gcContent;
   }
+
   onOpened() {
     const queryString = getThemeQueryString([
       "color-base00",
@@ -23,7 +21,10 @@ class GlobalChatWindow extends BaseWindow {
       "color-text",
     ]);
     const subDomain = this.beta ? "gcbeta" : "gc";
+    this.iframe = document.createElement("iframe");
+    this.iframe.style = "width:100%; height:100%; border:none";
     this.iframe.src = `https://${subDomain}.smartschoolplusplus.com/v1?${queryString}`;
+    this.gcContent.appendChild(this.iframe);
   }
 }
 

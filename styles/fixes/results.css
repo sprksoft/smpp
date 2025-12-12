@@ -29,8 +29,13 @@
   background-color: var(--color-base01) !important;
   border: solid 2px var(--color-base02) !important;
   border-radius: 1rem !important;
-  box-shadow: 0 4px 16px var(--darken-background) !important;
+  box-shadow: 0 4px 16px var(--color-shadow) !important;
   padding: 1.5rem;
+}
+
+.glass [dialog-content] {
+  background-color: var(--darken-background) !important;
+  backdrop-filter: blur(30px) !important;
 }
 
 .side-panel__panel {
@@ -98,6 +103,10 @@
   border-radius: 20px !important;
   margin-left: 20px !important;
   margin-right: 20px !important;
+}
+.glass .results-evaluation--small .side-panel__panel {
+  background: var(--darken-background) !important;
+  backdrop-filter: blur(30px) !important;
 }
 
 .results-evaluation--small .side-panel__panel {
@@ -378,12 +387,16 @@ span.evaluation-graphic__progress-ring__value {
   color: var(--color-text) !important;
 }
 
-.title-and-schoolyear-selector
-  .title-and-schoolyear-selector__period-container:hover:not(:disabled),
 .title-and-schoolyear-selector[aria-expanded="true"]
   .title-and-schoolyear-selector__period-container:not(:disabled) {
   border-color: var(--color-accent) !important;
   background-color: var(--darken-background) !important;
+  backdrop-filter: blur(5px) !important;
+}
+
+.title-and-schoolyear-selector
+  .title-and-schoolyear-selector__period-container:hover:not(:disabled) {
+  border-color: var(--color-accent) !important;
   backdrop-filter: blur(5px) !important;
 }
 
@@ -549,4 +562,26 @@ button.button-ZR3rz.bp-c-combo-hover-plain-outline--300 {
 }
 .groupTitle-r2b_L {
   color: var(--color-accent) !important;
+}
+
+.results-evaluations.js-evaluations-page.js-routehandler.results-evaluation--wide {
+  width: 10% !important;
+}
+
+.title-and-schoolyear-selector.js-title-and-schoolyear-selector {
+  background: var(--darken-background) !important;
+  backdrop-filter: blur(10px) !important;
+  border-radius: 1.5rem !important;
+  padding: 0.5rem 1rem !important;
+  width: fit-content !important;
+  max-width: 100% !important;
+}
+
+.glass .bubble {
+  background-color: var(--darken-background) !important;
+  backdrop-filter: blur(5px) !important;
+}
+
+.bubble.js-bubble.schoolyear-dropdown-bubble.js-schoolyear-dropdown-bubble {
+  padding: 1.5rem !important;
 }

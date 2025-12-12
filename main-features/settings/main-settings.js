@@ -9,8 +9,8 @@ class SettingsWindow extends BaseWindow {
   };
   currentPage = "appearance";
 
-  constructor(hidden = false) {
-    super("settings-window", hidden);
+  constructor() {
+    super("settings-window");
   }
 
   async renderContent() {
@@ -258,6 +258,8 @@ class SettingsWindow extends BaseWindow {
           .forEach((radio) => {
             if (radio.value === settings.appearance.theme) {
               radio.checked = true;
+            } else {
+              radio.checked = false;
             }
           });
 
@@ -611,6 +613,7 @@ class SettingsWindow extends BaseWindow {
     });
 
     console.log("Successfully stored main settings: \n", settings);
+    loadQuickSettings();
     await this.loadPage();
   }
 
@@ -662,6 +665,7 @@ class SettingsWindow extends BaseWindow {
       input.addEventListener("click", () => {
         if (listening) return;
         listening = true;
+        let oldKeybind = input.value;
         input.value = "Press any key...";
         input.classList.add("listening");
 
@@ -674,7 +678,8 @@ class SettingsWindow extends BaseWindow {
 
           let keyName = e.key.length === 1 ? e.key.toUpperCase() : e.key;
           if (keyName === " ") keyName = "Space";
-          if (keyName === "Escape") keyName = "None";
+          if (keyName === "Backspace") keyName = "None";
+          if (keyName === "Escape") keyName = oldKeybind;
 
           input.value = keyName;
           document.removeEventListener("keydown", keyListener);
@@ -1288,12 +1293,14 @@ class SettingsWindow extends BaseWindow {
 
 let settingsWindow;
 
+async function createSettingsWindow() {
+  settingsWindow = new SettingsWindow();
+  await settingsWindow.create();
+  await settingsWindow.loadPage();
+  settingsWindow.hide();
+}
+
 async function openSettingsWindow(event) {
-  if (!settingsWindow || !settingsWindow.element?.isConnected) {
-    settingsWindow = new SettingsWindow();
-    await settingsWindow.create();
-    await settingsWindow.loadPage();
-  }
   settingsWindow.show(event);
   settingsWindow.loadPage();
 }

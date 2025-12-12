@@ -1,6 +1,6 @@
 class BaseWindow {
-  #keydownHandler
-  constructor(id, hidden = false) {
+  #keydownHandler;
+  constructor(id, hidden = true) {
     this.id = id;
     this.hidden = hidden;
     this.element = null;
@@ -47,11 +47,12 @@ class BaseWindow {
 
   // Called every time the window is opened
   // Override this in subclass
-  onOpened() { }
+  onOpened() {}
 
   show(triggerEvent = null) {
-    if (this.isOpen) return;
-    this.isOpen = true;
+    if (!this.hidden) return;
+    this.hidden = false;
+
     this.element.classList.remove("hidden");
     const isKeyboardEvent =
       triggerEvent &&
@@ -78,10 +79,10 @@ class BaseWindow {
     if (!this.#keydownHandler) {
       this.#keydownHandler = (e) => {
         if (e.key === "Escape") {
-          this.hide()
+          this.hide();
         }
-      }
-      document.addEventListener("keydown", this.#keydownHandler)
+      };
+      document.addEventListener("keydown", this.#keydownHandler);
     }
 
     // Focus the first focusable element inside the window
@@ -94,14 +95,13 @@ class BaseWindow {
       });
     }
 
-
     this.onOpened();
   }
 
   hide() {
-    if (!this.isOpen) return;
+    if (this.hidden) return;
 
-    this.isOpen = false;
+    this.hidden = true;
     this.element.classList.add("hidden");
     if (this._outsideClickHandler) {
       document.removeEventListener("click", this._outsideClickHandler, {
@@ -110,8 +110,8 @@ class BaseWindow {
       this._outsideClickHandler = null;
     }
     if (this.#keydownHandler) {
-      document.removeEventListener("keydown", this.#keydownHandler)
-      this.#keydownHandler = null
+      document.removeEventListener("keydown", this.#keydownHandler);
+      this.#keydownHandler = null;
     }
 
     this.onClosed?.();

@@ -15,6 +15,11 @@
   align-items: center;
 }
 
+.glass nav.topnav {
+  background: var(--darken-background) !important;
+  border-bottom: 2px solid var(--color-base00) !important;
+}
+
 nav.topnav {
   border-bottom: none !important;
   min-height: fit-content !important;
@@ -22,7 +27,7 @@ nav.topnav {
   top: 0 !important;
   background: var(--color-base00) !important;
   height: auto !important;
-  gap: 0.75rem !important;
+  gap: 0.5rem !important;
 }
 
 .smsc-topnav .topnav__menu {
@@ -116,7 +121,7 @@ input::placeholder {
   border: 2px solid transparent;
   border-radius: 999px;
   fill: var(--color-text) !important;
-  box-shadow: 0px 2px 10px 0px var(--darken-background);
+  box-shadow: 0px 2px 10px 0px var(--color-shadow);
 }
 
 .enableAnimations .performanceModeTooltipLabel {
@@ -218,7 +223,7 @@ input::placeholder {
 }
 
 .campaign-dialog {
-  box-shadow: 0 1rem 2.667rem 2px var(--darken-background);
+  box-shadow: 0 1rem 2.667rem 2px var(--color-shadow);
 }
 
 .campaign-close-button {

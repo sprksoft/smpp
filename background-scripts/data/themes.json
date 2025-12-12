@@ -1,13 +1,13 @@
 {
   "default": {
     "display-name": "Default Deluxe",
-    "--color-accent": "#c9d2e6",
+    "--color-accent": "#e8e8e8",
     "--color-splashtext": "var(--color-accent)",
-    "--color-text": "#c2bab2",
-    "--color-base00": "#191817",
-    "--color-base01": "#232020",
-    "--color-base02": "#3f3c3b",
-    "--color-base03": "#5b5756",
+    "--color-text": "#bababa",
+    "--color-base00": "#141414",
+    "--color-base01": "#1d1d1d",
+    "--color-base02": "#272727",
+    "--color-base03": "#303030",
     "--darken-background": "rgba(0,0,0,0.2)",
     "--color-homepage-sidebars-bg": "#02020585"
   },
@@ -30,8 +30,8 @@
     "display-name": "Dark Sands",
     "--color-accent": "oklch(90% 0.069 70)",
     "--color-text": "oklch(80% 0.004 90)",
-    "--color-base00": "oklch(0% 0.004 35)",
-    "--color-base01": "oklch(24% 0.004 35)",
+    "--color-base00": "oklch(15% 0.004 35)",
+    "--color-base01": "oklch(22% 0.004 35)",
     "--color-base02": "oklch(29% 0.004 35)",
     "--color-base03": "oklch(34% 0.004 35)",
     "--color-homepage-sidebars-bg": "oklch(0% 0.004 35/ 50%)",
@@ -189,7 +189,7 @@
     "--color-base01": "#fbbecc",
     "--color-base02": "#f0a8c1",
     "--color-base03": "#ea8eb0",
-    "--darken-background": "rgba(241, 203, 218, 0.35)",
+    "--darken-background": "rgba(241, 203, 218, 0.61)",
     "--color-homepage-sidebars-bg": "oklch(95.58% 0.0337 351.52 / 10%)",
     "--color-splashtext": "#bf4183"
   },
@@ -238,6 +238,21 @@
     "--color-base01": "#124f96",
     "--color-base02": "#3071c9",
     "--color-base03": "#4b47c0",
-    "--color-text": "#dff1e1"
+    "--color-text": "#dff1e1",
+    "--darken-background": "#0a000240",
+    "--color-homepage-sidebars-bg": "#0a000250",
+    "--color-splashtext": "#dff1e1"
+  },
+  "japan": {
+    "display-name": "__Pink Japan",
+    "--color-accent": "#8d4373",
+    "--color-base00": "#f0c5dd",
+    "--color-base01": "#efb6d7",
+    "--color-base02": "#dba7c5",
+    "--color-base03": "#ed9acd",
+    "--color-text": "#493340",
+    "--darken-background": "rgba(255, 213, 230, 0.60)",
+    "--color-homepage-sidebars-bg": "oklch(95.58% 0.0337 351.52 / 10%)",
+    "--color-splashtext": "#ed9acd"
   }
 }

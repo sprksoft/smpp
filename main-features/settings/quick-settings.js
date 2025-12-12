@@ -4,10 +4,14 @@ async function storeQuickSettings() {
   const oldData = await browser.runtime.sendMessage({
     action: "getSettingsData",
   });
-  // Start from old settings
-  const data = structuredClone(oldData);
 
-  data.appearance.theme = document.getElementById("theme-selector").value;
+  const data = structuredClone(oldData);
+  if (
+    document.getElementById("theme-selector").value != data.appearance.theme &&
+    document.getElementById("theme-selector").value != ""
+  ) {
+    data.appearance.theme = document.getElementById("theme-selector").value;
+  }
 
   data.appearance.background.blur = Number(
     document.getElementById("background-blur-amount-slider").value
@@ -47,7 +51,21 @@ async function loadQuickSettings() {
   const data = await browser.runtime.sendMessage({
     action: "getSettingsData",
   });
-  document.getElementById("theme-selector").value = data.appearance.theme;
+
+  let hiddenThemes = getHiddenThemes();
+  if (hiddenThemes[data.appearance.theme] == undefined) {
+    document.getElementById("theme-selector").value = data.appearance.theme;
+  } else if (
+    document.getElementById("theme-selector").value != data.appearance.theme
+  ) {
+    const optionElement = document.createElement("option");
+    optionElement.value = data.appearance.theme;
+
+    optionElement.textContent =
+      themes[data.appearance.theme]["display-name"].slice(2);
+    document.getElementById("theme-selector").appendChild(optionElement);
+    document.getElementById("theme-selector").value = data.appearance.theme;
+  }
 
   quickSettingsBackgroundImageSelector.loadImageData();
 
@@ -80,10 +98,9 @@ function toggleQuickSettings() {
 
 async function openQuickSettings() {
   let win = document.getElementById("quickSettings");
-  if (!win) {
-    createQuickSettings();
-    win = document.getElementById("quickSettings");
-  }
+
+  win = document.getElementById("quickSettings");
+
   win.classList.remove("qs-hidden");
   await loadQuickSettings();
   quickSettingsWindowIsHidden = false;
@@ -232,6 +249,7 @@ function createQuickSettings() {
     }
     closeQuickSettings();
   });
+  closeQuickSettings();
 }
 
 function createQuickSettingsButton() {

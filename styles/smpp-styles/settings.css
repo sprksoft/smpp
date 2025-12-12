@@ -21,7 +21,7 @@
 }
 
 .settings-category-button-js {
-  box-shadow: 0px 5px 10px 0px var(--darken-background);
+  box-shadow: 0px 5px 10px 0px var(--color-shadow);
   margin: 0;
 }
 
@@ -484,7 +484,7 @@ label.settings-page-image-button-wrapper:has(input:checked) {
 .settings-page-button-label-container,
 .settings-page-theme-card,
 .settings-page-icons-container.settings-page-weather-overlay-container {
-  box-shadow: 0px 2px 10px 0px var(--darken-background);
+  box-shadow: 0px 2px 10px 0px var(--color-shadow);
 }
 .settings-page-button-label-container,
 .settings-page-key-bind-container {
@@ -712,7 +712,7 @@ input.settings-page-keybinding-input[type="text"]:not(
 
 .reset-popup-content {
   background-color: var(--color-base01);
-  box-shadow: 0px 10px 20px 10px var(--darken-background);
+  box-shadow: 0px 10px 20px 10px var(--color-shadow);
   border-radius: 2rem;
   padding: 2rem;
   max-width: 30rem;
@@ -781,7 +781,6 @@ input.settings-page-keybinding-input[type="text"]:not(
 .reset-popup-confirm:hover {
   background-color: var(--color-base03);
   border-color: var(--color-red);
-  color: var(--color-red) !important;
 }
 
 #profile-picture-input-container {
@@ -812,7 +811,7 @@ input.settings-page-keybinding-input[type="text"]:not(
   font-weight: 700 !important;
   cursor: pointer;
   width: 100%;
-  box-shadow: 0px 2px 10px 0px var(--darken-background);
+  box-shadow: 0px 2px 10px 0px var(--color-shadow);
   display: flex;
   flex-direction: row;
   justify-content: center;

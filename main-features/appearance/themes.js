@@ -58,3 +58,13 @@ function getThemeQueryString(queryVars = []) {
   queryString = queryString.substring(1);
   return queryString;
 }
+
+function getHiddenThemes() {
+  let hiddenThemes = {};
+  settingsOptions.appearance.theme.forEach((key) => {
+    if (themes[key]["display-name"].startsWith("__")) {
+      hiddenThemes[key] = themes[key];
+    }
+  });
+  return hiddenThemes;
+}

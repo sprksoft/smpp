@@ -86,7 +86,7 @@
   transform: translate(-50%, -100%) rotate(0deg);
   width: 1rem;
   border-radius: 0.5rem;
-  box-shadow: 0 0 30px 4px var(--darken-background);
+  box-shadow: 0 0 30px 4px var(--color-shadow);
 
   /* No transition because hands are updated every frame and transitions cause hands to spin when tab is unloaded*/
   transition: none;

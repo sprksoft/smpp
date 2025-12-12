@@ -27,6 +27,7 @@ html {
   --color-base03: #000000;
   --darken-background: rgba(0, 0, 0, 0.2);
   --color-splashtext: var(--color-accent);
+  --color-shadow: rgba(0, 0, 0, 0.2);
 }
 
 html {
@@ -63,12 +64,20 @@ textarea .modern-ui,
   background-color: var(--background-color) !important;
 }
 
-.js-btn-profile > img,
+.smsc-topnav .topnav__btn--profile img {
+  height: 23.2px !important;
+  width: 23.2px !important;
+  margin-right: 0.5rem !important;
+}
+.smsc-topnav .topnav__btn--profile {
+  padding-left: 0.15rem !important;
+}
+
 .header__avatar,
 .splitdetail__header__avatar > img,
 .smsc-tabslist__item:before,
 .smsc-tabslist__item:after {
-  display: none !important;
+  opacity: 1;
 }
 
 .messageframe:has(#msgdetail):has(.msgDetail--empty) {
@@ -627,7 +636,7 @@ div.stdReplyWrapper {
   justify-content: center;
   align-self: center;
   text-align: center;
-  box-shadow: 0px 2px 10px 0px var(--darken-background);
+  box-shadow: 0px 2px 10px 0px var(--color-shadow);
   font-size: 1.5rem !important;
 }
 
@@ -1616,7 +1625,7 @@ input#background-blur-amount-slider {
   height: 1rem;
   transform: rotate(-90deg);
   transform-origin: center;
-  box-shadow: 0px 2px 10px 0px var(--darken-background);
+  box-shadow: 0px 2px 10px 0px var(--color-shadow);
   margin: 0 !important;
   background: var(--color-base02) !important;
 }
@@ -2037,7 +2046,7 @@ button.wopi_files__button {
   background-color: var(--color-base01) !important;
   transform: translateY(-5px);
   scale: 1.05;
-  box-shadow: 0px 15px 50px var(--darken-background) !important;
+  box-shadow: 0px 15px 50px var(--color-shadow) !important;
 }
 
 .card__container__content__title {
@@ -2136,6 +2145,12 @@ div[style*="background"]:not(.manual_widgettitle) {
   background-color: var(--color-base01) !important;
   border: 2px solid var(--color-base02) !important;
 }
+
+.glass .bubble-s87kI {
+  background-color: var(--darken-background) !important;
+  backdrop-filter: blur(5px) !important;
+}
+
 .dropdownMenuItem-Vszox[data-selected="true"] {
   background-color: var(--color-base03) !important;
 }

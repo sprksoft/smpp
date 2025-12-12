@@ -108,7 +108,7 @@
   right: 0.5rem !important;
   border-radius: 1rem !important;
   padding: 0.25rem !important;
-  box-shadow: 0px 2px 10px 0px var(--darken-background) !important;
+  box-shadow: 0px 2px 10px 0px var(--color-shadow) !important;
 }
 
 [listview] .listview__action-btn {
@@ -137,7 +137,7 @@
   border-radius: 1rem !important;
   padding: 0.75rem !important;
   color: var(--color-text) !important;
-  box-shadow: 0px 2px 10px 0px var(--darken-background) !important;
+  box-shadow: 0px 2px 10px 0px var(--color-shadow) !important;
 }
 
 .todo-column__container {
@@ -150,7 +150,8 @@
   margin-left: 0 !important;
 }
 
-.listview__row.js-listview-row.todo__row.todo-column__row {
+.listview__row.js-listview-row.todo__row.todo-column__row,
+.listview__row.js-listview-row.todo__row.todo-column__row--resolved {
   display: flex !important;
   flex-direction: row !important;
   gap: 1rem !important;
@@ -168,6 +169,7 @@
 }
 
 .listview__row.js-listview-row.todo-column__row:hover,
+.listview__row.js-listview-row.todo-column__row--resolved:hover,
 .content__day-column.js-day-column.highlight,
 .header__day.header__wholeday-column.js-wholeday-column.highlight {
   background-color: var(--darken-background) !important;
@@ -819,6 +821,7 @@ h3.card-block__title.fluid-ui-heading.fluid-ui-heading--3 {
 
 .splitdetail-dialog .splitdetail__content__topbtns .splitdetail-top-btn {
   background-color: var(--color-base01) !important;
+  border-radius: 0.75rem !important;
 }
 
 .header__tab__wrapper[active-tab] > .header__tab > .header__tab__name,
@@ -923,7 +926,7 @@ h3.detail-description__title.title--3,
 }
 
 .bubble.timegrid-plan-bubble .plan-tile-wrapper {
-  padding: 1rem !important;
+  padding: 0 !important;
 }
 
 .bubble-s87kI {

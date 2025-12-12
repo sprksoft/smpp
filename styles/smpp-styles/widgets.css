@@ -38,7 +38,7 @@ html {
   background-color: var(--color-base01);
   padding: 1.5rem;
   border-radius: 1.75rem;
-  box-shadow: 0 0 10px var(--darken-background);
+  box-shadow: 0 0 10px var(--color-shadow);
   margin: 0rem 1rem 0rem 1rem;
   border: 3px solid var(--color-base03);
   box-sizing: border-box;
@@ -255,6 +255,11 @@ html {
   transition: transform 0.5s;
 }
 
+.glass .smpp-widget-bag-content {
+  background: var(--darken-background);
+  backdrop-filter: blur(30px);
+}
+
 .smpp-widget-bag-content {
   width: 100%;
   background-color: var(--color-base01);
@@ -369,7 +374,7 @@ p.smpp-error-widget {
   margin-top: 0.5rem;
   appearance: none;
   cursor: pointer;
-  box-shadow: 0px 2px 10px 0px var(--darken-background);
+  box-shadow: 0px 2px 10px 0px var(--color-shadow);
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -403,7 +408,7 @@ p.smpp-error-widget {
 .smpp-widget-edit-mode .smpp-widget-transparent {
   background-color: var(--color-base01);
   border: 3px solid var(--color-base03);
-  box-shadow: 0 0 10px var(--darken-background);
+  box-shadow: 0 0 10px var(--color-shadow);
   padding: 1rem;
 }
 
