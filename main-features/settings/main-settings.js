@@ -825,6 +825,7 @@ class SettingsWindow extends BaseWindow {
     }
 
     this.clearSettingsPage();
+    this.settingsPage.scrollTo(0, 0);
     switch (this.currentPage) {
       case "profile":
         this.settingsPage.appendChild(createMainTitle("Profile"));

@@ -306,6 +306,35 @@ function createTopButtons() {
   }
 
   topNav.insertBefore(createQuickMenuButton(), pushRight);
+
+  document
+    .getElementById("profileMenu")
+    .querySelector(".topnav__menu")
+    .appendChild(createProfileSettingButton());
+}
+
+function createProfileSettingButton() {
+  let button = document.createElement("a");
+  button.addEventListener("click", (e) => {
+    openSettingsWindow(e);
+    document.getElementById("profileMenu").hidden = true;
+  });
+  document.querySelector(".profile-settings-button").click();
+
+  button.classList.add("topnav__menuitem");
+  button.classList.add("topnav__menuitem--img");
+
+  let textContent = document.createElement("span");
+  textContent.textContent = "Smartschool++ Profile";
+
+  let image = document.createElement("img");
+  image.src = getExtensionImage("icons/smpp/" + "128.png");
+  image.style.borderRadius = "0.5rem";
+
+  button.appendChild(image);
+  button.appendChild(textContent);
+
+  return button;
 }
 
 function updateTopButtons(data) {
