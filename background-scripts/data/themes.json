@@ -30,7 +30,7 @@
     "display-name": "Dark Sands",
     "--color-accent": "oklch(90% 0.069 70)",
     "--color-text": "oklch(80% 0.004 90)",
-    "--color-base00": "oklch(15% 0.004 35)",
+    "--color-base00": "oklch(0% 0.004 35)",
     "--color-base01": "oklch(22% 0.004 35)",
     "--color-base02": "oklch(29% 0.004 35)",
     "--color-base03": "oklch(34% 0.004 35)",
