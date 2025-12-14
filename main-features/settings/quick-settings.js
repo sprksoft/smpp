@@ -34,8 +34,6 @@ async function storeQuickSettings() {
       await storeCustomThemeData();
     }
     await createCustomThemeUI();
-  } else {
-    document.getElementById("colorpickers").innerHTML = ``;
   }
 
   await browser.runtime.sendMessage({ action: "setSettingsData", data });
@@ -84,6 +82,8 @@ async function loadQuickSettings() {
 
   if (data.appearance.theme == "custom") {
     await createCustomThemeUI();
+  } else {
+    document.getElementById("colorpickers").innerHTML = ``;
   }
 }
 

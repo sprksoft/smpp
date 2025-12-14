@@ -3,25 +3,25 @@
     "display-name": "Default Deluxe",
     "--color-accent": "#e8e8e8",
     "--color-splashtext": "var(--color-accent)",
-    "--color-text": "#bababa",
+    "--color-text": "#adadad",
     "--color-base00": "#141414",
-    "--color-base01": "#1d1d1d",
-    "--color-base02": "#272727",
-    "--color-base03": "#303030",
+    "--color-base01": "#1f1f1f",
+    "--color-base02": "#2c2c2c",
+    "--color-base03": "#383838",
     "--darken-background": "rgba(0,0,0,0.2)",
     "--color-homepage-sidebars-bg": "#02020585"
   },
   "white": {
     "display-name": "Off White",
-    "--color-accent": "#3a4f6d",
-    "--color-text": "#1a1e28",
-    "--color-base00": "#eeebec",
-    "--color-base01": "#e0dedf",
-    "--color-base02": "#d2cfd0",
-    "--color-base03": "#7b93b4",
-    "--color-homepage-sidebars-bg": "#02020540",
-    "--darken-background": "rgba(0,0,0,0.1)",
-    "--color-splashtext": "#080a12"
+    "--color-accent": "#4d5da2",
+    "--color-text": "#1c1916",
+    "--color-base00": "#f5fefe",
+    "--color-base01": "#eef7f7",
+    "--color-base02": "#dde6e6",
+    "--color-base03": "#cfd7d7",
+    "--color-homepage-sidebars-bg": "rgba(100, 100, 100, 0.2)",
+    "--darken-background": "rgba(215, 215, 215, 0.40)",
+    "--color-splashtext": "#120500"
   },
   "custom": {
     "display-name": "Custom Theme"

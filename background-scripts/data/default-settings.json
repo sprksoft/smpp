@@ -3,9 +3,9 @@
     "username": null
   },
   "appearance": {
-    "theme": "birb",
+    "theme": "default",
     "background": {
-      "blur": 2
+      "blur": 0
     },
     "weatherOverlay": {
       "type": "realtime",

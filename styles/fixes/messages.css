@@ -253,19 +253,23 @@ body.modern-ui .homepage__block {
 }
 
 .attachment {
-  border: 1px solid var(--color-base00) !important;
+  background-color: var(--color-base02) !important;
+  border: 2px solid transparent !important;
   color: var(--color-text) !important;
-  border-radius: 5px !important;
+  border-radius: 0.75rem !important;
 }
 
 .menu-item:hover,
 .menu-type:hover,
 .attachment:hover {
-  background-color: var(--color-base02) !important;
-  border: 1px solid transparent !important;
   color: var(--color-accent) !important;
-  border-radius: 5px !important;
+  border-color: var(--color-base03) !important;
   box-shadow: none !important;
+}
+
+.attachmentList__list .attachment__title:hover,
+.action__label:hover {
+  text-decoration: underline !important;
 }
 
 .ui-widget-content {

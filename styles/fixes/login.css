@@ -44,6 +44,7 @@ html {
 
 .login-app__top {
   backdrop-filter: blur(10px) !important;
+  background: var(--darken-background) !important;
   border-radius: 2.5rem !important;
   border: 3px solid var(--color-base03) !important;
 }

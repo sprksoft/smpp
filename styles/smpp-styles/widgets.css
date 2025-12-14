@@ -62,14 +62,17 @@ html {
 /* NEWS */
 .smpp-news-container {
   flex-grow: 1;
-  overflow: scroll;
+  overflow: auto;
+  overflow-x: hidden;
 }
+
 .smpp-news-container.show-news {
-  backdrop-filter: var(--blur-value-large);
+  backdrop-filter: blur(2px);
 }
 
 #smpp-news-content {
   display: none !important;
+  background: var(--darken-background) !important;
 }
 .smpp-news-container.show-news:not(.smpp-news-editmode) #smpp-news-content {
   display: block !important;
@@ -121,7 +124,7 @@ html {
   ); /* panelWidth(300px) + widgetMargin(1rem) + widgetBorderSize(3px) * 2  // times 2 because left and right border+margin */
   max-width: calc(300px + (1rem) * 2);
   background-color: var(--color-homepage-sidebars-bg);
-  backdrop-filter: var(--blur-value-large);
+  backdrop-filter: blur(4px);
   overflow: auto; /* Enable scroll because when there are too many widgets in 1 panel the page scrolls weird*/
 }
 

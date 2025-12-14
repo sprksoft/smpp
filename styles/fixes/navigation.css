@@ -15,11 +15,6 @@
   align-items: center;
 }
 
-.glass nav.topnav {
-  background: var(--darken-background) !important;
-  border-bottom: 2px solid var(--color-base00) !important;
-}
-
 nav.topnav {
   border-bottom: none !important;
   min-height: fit-content !important;
@@ -149,7 +144,7 @@ input::placeholder {
 .enableAnimations .titleRight {
   transition-duration: 0.1s !important;
   transition: background-color 0.2s, border-color 0.3s, text-decoration 0.1s,
-    width 0.2s !important;
+    width 0.2s, scale 0.2s !important ;
 }
 
 .smsc-topnav .topnav__menu,

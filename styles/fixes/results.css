@@ -188,10 +188,6 @@ input.input.bootstrap__input.search-input {
   border-color: var(--color-base02) !important;
 }
 
-button.goals-filter__item.selected {
-  background-color: var(--color-base02) !important;
-}
-
 .todo-column [listview] .todo-column__row.active-row {
   border-radius: 15px !important;
   background-color: var(--color-base01) !important;
@@ -212,8 +208,30 @@ button.goals-filter__item.selected {
   background-color: var(--color-base02) !important;
 }
 
+button.goals-filter__item.selected {
+  border-color: var(--color-accent) !important;
+}
+
 .goals-filter__item:hover:not(.selected) {
-  background-color: var(--color-base02) !important;
+  border-color: var(--color-base03) !important;
+}
+
+.enableAnimations .goals-filter__item {
+  transition: border-color 0.2s ease-in-out !important;
+}
+
+.side-panel__content .side-panel__content__title__name {
+  background: var(--darken-background) !important;
+  backdrop-filter: blur(5px) !important;
+  width: fit-content !important;
+  padding: 0rem 1rem !important;
+  max-width: 100% !important;
+  flex: unset !important;
+  border-radius: 1.5rem !important;
+}
+
+.goals-filter__item {
+  border: 2px solid transparent !important;
 }
 
 .goals-filter__item {

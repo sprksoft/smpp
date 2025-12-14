@@ -26,7 +26,6 @@ class SettingsWindow extends BaseWindow {
     this.displaySettingsPage();
     return content;
   }
-
   async createSettingsSideBar() {
     let settingsSideBar = document.createElement("div");
     settingsSideBar.classList.add("settings-sidebar");
@@ -40,12 +39,12 @@ class SettingsWindow extends BaseWindow {
       settingsSideBar.appendChild(settingsSideBarButton);
     });
 
-    settingsSideBar.addEventListener("change", this.updateSideBar);
-
     let currentRadio = settingsSideBar.querySelector(
       `input[value="${this.currentPage}"]`
     );
     if (currentRadio) currentRadio.checked = true;
+    settingsSideBar.addEventListener("change", this.updateSideBar);
+
     return settingsSideBar;
   }
 

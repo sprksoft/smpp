@@ -43,7 +43,7 @@ class WeatherWidgetBase extends WidgetBase {
 
   defaultSettings() {
     return {
-      currentLocation: "Tremelo",
+      currentLocation: "Locatie",
       cache: {
         weatherData: null,
         lastUpdateDate: new Date(),
@@ -98,6 +98,7 @@ class WeatherWidgetBase extends WidgetBase {
     locationInput.classList.add("weather-location-input");
     locationInput.value = this.settings.currentLocation;
     locationInput.type = "text";
+    locationInput.placeholder = "Locatie";
     locationInput.spellcheck = false;
     locationInput.classList.add("inactive");
     locationInput.addEventListener(
@@ -106,8 +107,31 @@ class WeatherWidgetBase extends WidgetBase {
     );
 
     topContentContainer.appendChild(locationInput);
+    container.appendChild(topContentContainer);
+
+    if (this.settings.currentLocation == "Locatie") {
+      locationInput.classList.add("not-initialized");
+      locationInput.value = "";
+
+      locationInput.addEventListener("focusin", (e) => {
+        e.target.placeholder = "";
+      });
+      locationInput.addEventListener("focusout", (e) => {
+        e.target.placeholder = "Locatie";
+      });
+
+      let mainIcon = document.createElement("div");
+      mainIcon.classList.add("weather-icon-container");
+      mainIcon.innerHTML = getWeatherIcon(null, "broken clouds");
+
+      container.appendChild(mainIcon);
+
+      return container;
+    }
+
     if (weatherData.cod != 200) {
-      container.appendChild(topContentContainer);
+      console.log(weatherData.cod);
+
       container.appendChild(createNotFoundContent(weatherData.cod));
       return container;
     }

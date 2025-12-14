@@ -93,11 +93,6 @@ function updateTopNavIcons(data) {
   }
 }
 
-function updateBackgroundBlur() {
-  style.setProperty("--blur-value-large", "blur(" + bigblurvalue + "px)");
-  style.setProperty("--blur-value-small", "blur(" + blurvalue + "px)");
-}
-
 function updateTabLogo(logo) {
   let iconElement = document.querySelector('link[rel="icon"]');
   if (!iconElement) {
@@ -162,6 +157,9 @@ async function createStaticGlobals() {
   }
 
   profilePictureObserver = null;
+  onHomePage = document.getElementById("container") != null;
+
+  onLoginPage = document.querySelector(".login-app") != null;
 
   quicks = await quick_load();
   liteMode = browser.runtime.getManifest().name.includes("Lite");
@@ -175,13 +173,14 @@ async function applyAppearance(appearance) {
   updateNews(appearance.news);
   updateTabLogo(appearance.tabLogo);
 
-  let defaultBackgroundBlur = appearance.background.blur * 2;
-  if (appearance.background.blur == 0) defaultBackgroundBlur += 2;
-  style.setProperty("--blur-value-large", `blur(${defaultBackgroundBlur}px)`);
-  style.setProperty(
-    "--blur-value-small",
-    `blur(${appearance.background.blur}px)`
-  );
+  if (onLoginPage) {
+    style.setProperty("--background-blur", `blur(${0}px)`);
+  } else {
+    style.setProperty(
+      "--background-blur",
+      `blur(${appearance.background.blur}px)`
+    );
+  }
 }
 
 function applyOther(other) {
@@ -275,7 +274,6 @@ async function createCustomThemeUI() {
 }
 
 function createTopButtons() {
-  onHomePage = document.getElementById("container") != null;
   let topNav = document.querySelector("nav.topnav");
   if (topNav == null) {
     return;
@@ -318,8 +316,8 @@ function createProfileSettingButton() {
   button.addEventListener("click", (e) => {
     openSettingsWindow(e);
     document.getElementById("profileMenu").hidden = true;
+    document.querySelector(".profile-settings-button").click();
   });
-  document.querySelector(".profile-settings-button").click();
 
   button.classList.add("topnav__menuitem");
   button.classList.add("topnav__menuitem--img");

@@ -20,15 +20,6 @@ body {
   height: 100% !important;
 }
 
-#leftcontainer,
-.homepage__left,
-.homepage__right,
-#rightcontainer {
-  background-color: var(--color-homepage-sidebars-bg) !important;
-  backdrop-filter: var(--blur-value-large) !important;
-  -webkit-backdrop-filter: var(--blur-value-large) !important;
-}
-
 body.modern-ui .homepage__center {
   min-width: 0px !important;
 }

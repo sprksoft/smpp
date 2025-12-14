@@ -16,8 +16,7 @@ html {
   --fruit-color: #fff;
   --color-startpage-bg: #0202058f;
   --color-infostartpagebg: #232020;
-  --blur-value-large: blur(4px);
-  --blur-value-small: blur(2px);
+  --background-blur: blur(2px);
   --border-size: 2px;
   --color-accent: var(--color-accent);
   --color-accent: var(--color-accent);
@@ -107,7 +106,8 @@ div#lvs_wrapper_container,
 }
 
 #modmessages {
-  height: calc(100vh - 27px) !important;
+  height: calc(100vh - 27px - 1rem) !important;
+  margin-top: 1rem !important;
 }
 
 #smscMain:has(#modmessages) {
@@ -983,6 +983,16 @@ ul.smsc-column-nav {
 
 .enableAnimations .main-slider {
   transition: opacity 0.2s, border-color 0.2s !important;
+}
+
+#quickSettings .main-slider::-webkit-slider-thumb {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+#quickSettings .main-slider::-moz-slider-thumb {
+  width: 1.2rem;
+  height: 1.2rem;
 }
 
 .main-slider::-webkit-slider-thumb {
@@ -1899,7 +1909,7 @@ body.modern-ui .smscMain .smsc-container {
 }
 
 #background_image {
-  filter: var(--blur-value-small) !important;
+  filter: var(--background-blur) !important;
   background-color: var(--color-base00) !important;
 }
 
@@ -2270,6 +2280,12 @@ div#folders {
 .smsc_cm_breadcrumb.subline {
   border: none !important;
 }
+
+.glass div#smscMainBlockContainer {
+  background: var(--darken-background) !important;
+  backdrop-filter: blur(30px) !important;
+}
+
 div#smscMainBlockContainer {
   background: var(--color-base00) !important;
   border-radius: 2rem !important;

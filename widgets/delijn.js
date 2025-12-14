@@ -298,9 +298,14 @@ class DelijnWidget extends WidgetBase {
     this.clearBottomContainer();
 
     let delijnData;
+    // +1 because De Lijn API is stupid or something
     try {
       delijnData = await fetchDelijnData(
-        `https://api.delijn.be/DLKernOpenData/api/v1/haltes/${this.settings.halte.entiteit}/${this.settings.halte.nummer}/real-time?maxAantalDoorkomsten=${this.settings.maxBusses}`,
+        `https://api.delijn.be/DLKernOpenData/api/v1/haltes/${
+          this.settings.halte.entiteit
+        }/${this.settings.halte.nummer}/real-time?maxAantalDoorkomsten=${
+          this.settings.maxBusses + 1
+        }`,
         { signal }
       );
     } catch (error) {
