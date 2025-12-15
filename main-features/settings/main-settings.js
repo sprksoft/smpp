@@ -905,7 +905,7 @@ class SettingsWindow extends BaseWindow {
             themeRadio.style.display = "none";
 
             let themeImage = createImage(
-              "/theme-backgrounds/" + key + ".jpg",
+              "theme-backgrounds/" + key + ".jpg",
               "100%",
               "6rem"
             );
@@ -961,11 +961,11 @@ class SettingsWindow extends BaseWindow {
           "settings-page-blur-preview-container"
         );
         blurPreviewContainer.appendChild(
-          createImage("/theme-backgrounds/birb.jpg", "6rem", "4rem")
+          createImage("theme-backgrounds/birb.jpg", "6rem", "4rem")
         );
 
         let blurredImage = createImage(
-          "/theme-backgrounds/birb.jpg",
+          "theme-backgrounds/birb.jpg",
           "100%",
           "100%"
         );
@@ -990,7 +990,7 @@ class SettingsWindow extends BaseWindow {
           "settings-page-weather-overlay-container"
         );
         let rainBtn = createImageButtonWithLabel(
-          "/icons/weather-overlay/raindropfancy.svg",
+          "icons/weather-overlay/raindropfancy.svg",
           "Rain",
           "5rem",
           "5rem",
@@ -1001,7 +1001,7 @@ class SettingsWindow extends BaseWindow {
         weatherIconsContainer.appendChild(rainBtn);
 
         let realtimeBtn = createImageButtonWithLabel(
-          "/icons/weather-overlay/realtimefancy.svg",
+          "icons/weather-overlay/realtimefancy.svg",
           "Realtime",
           "5rem",
           "5rem",
@@ -1012,7 +1012,7 @@ class SettingsWindow extends BaseWindow {
         weatherIconsContainer.appendChild(realtimeBtn);
 
         let snowBtn = createImageButtonWithLabel(
-          "/icons/weather-overlay/snowflakefancy.svg",
+          "icons/weather-overlay/snowflakefancy.svg",
           "Snow",
           "5rem",
           "5rem",
