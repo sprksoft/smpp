@@ -275,9 +275,6 @@ async function createCustomThemeUI() {
 
 function createTopButtons() {
   let topNav = document.querySelector("nav.topnav");
-  if (topNav == null) {
-    return;
-  }
 
   let logoutButton = document.querySelector(".js-btn-logout");
   if (logoutButton) {
@@ -380,8 +377,10 @@ async function main() {
 
   await createWidgetSystem();
 
-  await createSettingsWindow();
-  createTopButtons();
+  if (document.querySelector("nav.topnav")) {
+    await createSettingsWindow();
+    createTopButtons();
+  }
 
   await apply();
 }

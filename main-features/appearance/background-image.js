@@ -32,7 +32,7 @@ async function setBackground(appearance) {
 
   if (result.type == "default") {
     result.imageData = await getExtensionImage(
-      "/theme-backgrounds/" + appearance.theme + ".jpg"
+      "theme-backgrounds/" + appearance.theme + ".jpg"
     );
   }
   displayBackgroundImage(result.imageData);

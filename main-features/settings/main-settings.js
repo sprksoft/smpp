@@ -1051,7 +1051,7 @@ class SettingsWindow extends BaseWindow {
         iconsContainer.classList.add("settings-page-icons-container");
         iconsContainer.appendChild(
           createImageButton(
-            "/icons/sm-icon.svg",
+            "icons/sm-icon.svg",
             "5rem",
             "5rem",
             "logo",
@@ -1060,7 +1060,7 @@ class SettingsWindow extends BaseWindow {
         );
         iconsContainer.appendChild(
           createImageButton(
-            "/icons/smpp/128.png",
+            "icons/smpp/128.png",
             "5rem",
             "5rem",
             "logo",
