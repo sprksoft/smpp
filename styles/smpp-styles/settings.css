@@ -784,7 +784,7 @@ input.settings-page-keybinding-input[type="text"]:not(
 }
 
 #profile-picture-input-container {
-  margin-bottom: 1rem !important;
+  margin-bottom: 1.5rem !important;
 }
 
 .settings-radio {

@@ -245,8 +245,11 @@ class SettingsWindow extends BaseWindow {
             settings.profile.username;
         }
 
-        // Profile Picture
+        // Profile picture
         this.profilePictureInput.loadImageData();
+
+        document.getElementById("settings-page-default-sm-pfp-button").checked =
+          settings.profile.useSMpfp;
         break;
       }
 
@@ -406,6 +409,10 @@ class SettingsWindow extends BaseWindow {
         settings.profile.username = document.getElementById(
           "settings-page-username-input"
         ).value;
+
+        settings.profile.useSMpfp = document.getElementById(
+          "settings-page-default-sm-pfp-button"
+        ).checked;
 
         applyProfile(settings.profile);
         break;
@@ -835,7 +842,7 @@ class SettingsWindow extends BaseWindow {
         this.settingsPage.appendChild(
           createTextInput("settings-page-username-input", "Username")
         );
-        this.settingsPage.appendChild(createSectionTitle("Profile Picture"));
+        this.settingsPage.appendChild(createSectionTitle("Profile picture"));
         this.settingsPage.appendChild(
           createDescription(
             isFirefox
@@ -845,21 +852,24 @@ class SettingsWindow extends BaseWindow {
         );
         this.profilePictureInput = new ImageSelector("profilePicture");
         this.profilePictureInput.loadImageData();
-        this.profilePictureInput.onStore = () => {
+        this.profilePictureInput.onStore = async () => {
           this.storePage();
-          applyProfilePicture();
-          this.addDisclaimer(
-            document.getElementById("profile-picture-input-container"),
-            `
-              * Some changes will only apply after 
-              <a class="settings-page-disclaimer-button" href="#" onclick="window.location.href = window.location.href; return false;">reload</a>
-            `
-          );
+          const data = await browser.runtime.sendMessage({
+            action: "getSettingsData",
+          });
+          applyProfilePicture(data.profile);
         };
         let profilePictureInputContainer =
           this.profilePictureInput.createFullFileInput();
         profilePictureInputContainer.id = "profile-picture-input-container";
         this.settingsPage.appendChild(profilePictureInputContainer);
+
+        this.settingsPage.appendChild(
+          createSettingsButtonWithLabel(
+            "settings-page-default-sm-pfp-button",
+            "Original profile picture"
+          )
+        );
 
         break;
       case "appearance":

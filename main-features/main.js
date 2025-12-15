@@ -47,16 +47,6 @@ function fixCoursesSearch() {
     });
 }
 
-function decapitateಠ_ಠ() {
-  let style_el = document.createElement("style");
-  style_el.innerHTML = `
-    .studentPicture, .rounded_profile_photo, .square_photo_64 {
-      display: none;
-    }
-  `;
-  document.head.appendChild(style_el);
-}
-
 function updateTopNavIcons(data) {
   const notifsButton = document.querySelector(".js-btn-notifs");
   if (notifsButton && data.notifications) {
@@ -144,6 +134,7 @@ async function createStaticGlobals() {
   originalUsername =
     document.querySelector(".js-btn-profile .hlp-vert-box span")?.innerText ||
     "Mr Unknown";
+
   isGOSchool = document.body.classList.contains("go");
   isFirefox =
     typeof navigator.userAgent === "string" &&
@@ -203,8 +194,7 @@ function applyProfile(profile) {
     "url(" + getPfpLink(profile.username || originalUsername) + ")"
   );
   applyUsername(profile.username);
-  applyProfilePicture(profile.username);
-  if (!profile.profilePicture) decapitateಠ_ಠ();
+  applyProfilePicture(profile);
 }
 
 function applyFixes() {

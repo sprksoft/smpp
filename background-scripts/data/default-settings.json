@@ -1,6 +1,7 @@
 {
   "profile": {
-    "username": null
+    "username": null,
+    "useSMpfp": false
   },
   "appearance": {
     "theme": "default",

@@ -1,6 +1,7 @@
 {
   "profile": {
-    "username": "string"
+    "username": "string",
+    "useSMpfp": "boolean"
   },
   "appearance": {
     "theme": null,

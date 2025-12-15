@@ -84,7 +84,6 @@ async function migrateSettingsV5(oldData) {
     case 0:
       newWeatherOverlayType = "snow";
       break;
-
     case 1:
       newWeatherOverlayType = "realtime";
       break;
@@ -95,6 +94,7 @@ async function migrateSettingsV5(oldData) {
   let newSettingsData = {
     profile: {
       username: oldData.customUserName,
+      useSMpfp: false,
     },
     appearance: {
       theme: oldData.theme,

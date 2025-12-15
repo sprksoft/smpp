@@ -9,9 +9,17 @@ async function attachProfilePictureObserver(url) {
   // helper to process a single <img> element
   function processImg(img) {
     try {
-      // ignore if not an element or no src
+      // ignore if:
+      // not an img or no src
       if (!(img instanceof HTMLImageElement) || !img.src) return;
-      if (!isOriginalPfpUrl(img.src)) return;
+      // img src was already changed
+      if (img.src == url) return;
+      // not the original pfp and doesn't already have the class (I know it's confusing... and I made it, so)
+      if (
+        !isOriginalPfpUrl(img.src) &&
+        !img.classList.contains("personal-profile-picture")
+      )
+        return;
 
       img.src = url;
       img.classList.add("personal-profile-picture");
@@ -70,30 +78,38 @@ async function applyUsername(customName) {
   }
 }
 
-async function applyProfilePicture(username = null) {
+async function applyProfilePicture(profile) {
+  console.log("applying pfp");
   let style = document.documentElement.style;
-  // if (isFirefox) return;
-  if (username === null) {
-    let profileSettings = await browser.runtime.sendMessage({
-      action: "getSettingsCategory",
-      category: "profile",
-    });
-    username = profileSettings.username;
-  }
-  const onDefault = () => {
-    return getPfpLink(username || originalUsername);
+  const setPFPstyle = (url) => {
+    style.setProperty("--profile-picture", "url(" + url + ")");
   };
-  let result = await getImageURL("profilePicture", onDefault);
-  const profileImageURL = result.url;
-  if (isFirefox) {
-  }
-  style.setProperty("--profile-picture", "url(" + profileImageURL + ")");
+  const fixObserver = async (url) => {
+    if (profilePictureObserver != null) {
+      profilePictureObserver.disconnect();
+    }
 
-  if (profilePictureObserver != null) {
-    profilePictureObserver.disconnect();
+    profilePictureObserver = await attachProfilePictureObserver(url);
+  };
+
+  let profileImageURL;
+  console.log(profile);
+  switch (profile.useSMpfp) {
+    case true:
+      profileImageURL = originalPfpUrl;
+      break;
+    case false:
+      const onDefault = () => {
+        return getPfpLink(profile.username || originalUsername);
+      };
+      let result = await getImageURL("profilePicture", onDefault);
+
+      profileImageURL = result.url;
+      break;
   }
 
-  profilePictureObserver = await attachProfilePictureObserver(profileImageURL);
+  setPFPstyle(profileImageURL);
+  fixObserver(profileImageURL);
 }
 
 function isOriginalPfpUrl(url) {
