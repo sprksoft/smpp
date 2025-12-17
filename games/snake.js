@@ -75,11 +75,14 @@ class SnakeWidget extends GameBase {
   }
 
   #calcCelRad() {
-    return this.canvas.width / (CELL_COUNT * this.getOpt("size") * 0.01 * 2);
+    return (
+      this.canvas.width /
+      (CELL_COUNT * Math.sqrt(this.getOpt("size") * 0.01) * 2)
+    );
   }
 
   #getRandomFieldPos() {
-    const cellCount = CELL_COUNT * this.getOpt("size") * 0.01;
+    const cellCount = CELL_COUNT * Math.sqrt(this.getOpt("size") * 0.01);
     return new Point(
       Math.floor(Math.random() * cellCount),
       Math.floor(Math.random() * cellCount)
@@ -97,7 +100,7 @@ class SnakeWidget extends GameBase {
   }
 
   async onGameStart() {
-    const cellCount = CELL_COUNT * this.getOpt("size") * 0.01;
+    const cellCount = CELL_COUNT * Math.sqrt(this.getOpt("size") * 0.01);
     if (!this.#backgroundCanvas) {
       const bg = document.createElement("canvas");
       bg.height = this.canvas.width;
@@ -141,7 +144,7 @@ class SnakeWidget extends GameBase {
   }
 
   #drawBg(ctx) {
-    const cellCount = this.getOpt("size") * 0.01 * CELL_COUNT;
+    const cellCount = Math.sqrt(this.getOpt("size") * 0.01) * CELL_COUNT;
     const celRad = this.#calcCelRad();
     ctx.strokeWidth = 0;
     ctx.fillStyle = getThemeVar("--color-base01");

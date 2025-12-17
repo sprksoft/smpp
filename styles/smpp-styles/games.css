@@ -51,7 +51,6 @@
   margin-top: 1rem;
   padding: 0.5rem 0rem !important;
   align-self: center !important;
-  background: color-mix(in srgb, color percentage, color percentage);
   background: linear-gradient(
     100deg,
     color-mix(in srgb, var(--color-base01) 30%, var(--color-base02) 70%),
@@ -63,12 +62,14 @@
   border-radius: 1000px !important;
   margin-bottom: 1.8rem;
 }
+
 .game-button:hover {
-  filter: brightness(120%);
-  font-weight: 500;
+  border-color: var(--color-accent) !important;
+  font-weight: 600;
 }
+
 .enableAnimations .game-button {
-  transition-property: filter, font-weight;
+  transition-property: border, font-weight !important;
   transition: 0.2s ease-in-out;
 }
 

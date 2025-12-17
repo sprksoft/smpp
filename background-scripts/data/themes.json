@@ -257,15 +257,16 @@
   },
   "summer": {
     "display-name": "__Summer",
-    "--color-accent": "#ffdd87",
+    "--color-accent": "#268e99",
     "--color-text": "#5b3d1b",
-    "--color-base00": "#fff8e7",
-    "--color-base01": "#fff1c8",
-    "--color-base02": "#ffe7a8",
-    "--color-base03": "#ffd978",
+    "--color-base00": "#efe9d3",
+    "--color-base01": "#f2e8ca",
+    "--color-base02": "#e2d4ac",
+    "--color-base03": "#c4c8c7",
     "--color-homepage-sidebars-bg": "rgba(100, 100, 100, 0.2)",
     "--darken-background": "rgba(255, 240, 200, 0.40)",
-    "--color-splashtext": "#ffdd87"
+    "--color-splashtext": "#5b3d1b",
+    "--shadow-color": "rgba(0, 0, 0, 0.1)"
   },
   "ocean": {
     "display-name": "__Ocean",
