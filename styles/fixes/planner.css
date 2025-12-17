@@ -249,7 +249,7 @@ hr.separator.todo-column__pinned__seperator {
 }
 
 .datepicker .block .dates .date--current span {
-  border-color: var(--color-base03) !important;
+  border-color: var(--color-accent) !important;
 }
 
 .header__month,
@@ -266,11 +266,23 @@ hr.separator.todo-column__pinned__seperator {
 
 .header__month:hover,
 .header__year:hover,
-.header__year::selection,
-.rightblock {
-  border: 2px solid var(--color-accent) !important;
+.header__year::selection {
+  border: 1px solid var(--color-accent) !important;
   box-shadow: none !important;
   background-color: var(--color-base02) !important;
+  border-radius: 0.5rem !important;
+}
+
+.rightblock {
+  border: 2px solid var(--color-base03) !important;
+  box-shadow: none !important;
+  background-color: var(--color-base02) !important;
+  border-radius: 1rem !important;
+}
+
+.header__month,
+.header__year {
+  border: 1px solid transparent;
 }
 
 .header__borderdropdowncontainer::after {
@@ -349,10 +361,6 @@ hr.separator.todo-column__pinned__seperator {
   background-color: var(--color-base02);
 }
 
-.header.js-header {
-  border-radius: 15px !important;
-}
-
 .splitdetail__content .header.js-header {
   border-bottom-right-radius: 0px !important;
   border-bottom-left-radius: 0px !important;
@@ -409,12 +417,12 @@ button.icon-btn.js-icon-btn.header__icon.js-header-icon.icon-btn--32 {
   background-color: var(--color-base02);
 }
 
-.btn.btn:not(.send-delayed-button) {
+.btn {
   border: 2px solid var(--color-base02) !important;
-  border-radius: 7px !important;
+  border-radius: 0.75rem !important;
 }
 
-.btn.btn:hover:not(.send-delayed-button:hover) {
+.btn:hover {
   border: 2px solid var(--color-base03) !important;
 }
 
@@ -430,15 +438,19 @@ button.button-close-svg {
   display: none !important;
 }
 
-[textarea]:not([focus-within]):hover [textarea-tinymceinput],
-.detail-description__textarea:hover {
-  border: 2px solid var(--color-base02) !important;
-  border-radius: 10px !important;
-}
-
 [textarea]:not([focus-within]),
 .detail-description__textarea {
   border: 2px solid transparent !important;
+  border-radius: 10px !important;
+}
+
+[textarea]:not([focus-within]):hover [textarea-tinymceinput],
+.detail-description__textarea:hover {
+  border-color: var(--color-base02) !important;
+}
+
+.header.js-header {
+  border-radius: 0px !important;
 }
 
 [textarea]:not([focus-within]):hover:before {
@@ -931,7 +943,19 @@ h3.detail-description__title.title--3,
 
 .bubble-s87kI {
   border-radius: 2rem !important;
+}
+
+.bubble-s87kI.calendar-filter-bubble,
+.bubble-s87kI.bubble.filter-todo-bubble {
   padding: 1.5rem !important;
+}
+
+.bubble.timegrid-plan-bubble {
+  padding: 1rem !important;
+}
+
+.checkbox-group label.checkbox:last-of-type {
+  margin-bottom: 0 !important;
 }
 
 .arrow-U4LFP {

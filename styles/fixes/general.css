@@ -251,11 +251,11 @@ a:focus {
 button.smscButton.blue.fileupload_submit_button,
 .wide-colored-btn,
 .topnav-scope button.medium-button.medium-button {
-  border: var(--border-size) solid var(--color-base03) !important;
-  background-color: var(--color-base02) !important;
+  border: var(--border-size) solid var(--color-base02) !important;
+  background-color: var(--color-base01) !important;
   color: var(--color-text) !important;
   box-shadow: none !important;
-  border-radius: 10px !important;
+  border-radius: 1rem !important;
 }
 
 .enableAnimations .smscButton,
@@ -1339,6 +1339,7 @@ smsc-listview .checkbox-button {
   background-size: cover !important;
 }
 
+.moveToPostbox__item__icon,
 label.checkbox input[type="checkbox"]:checked,
 div.smscCheckbox input[type="checkbox"]:checked,
 .mobile-style input[type="checkbox"]:checked,
@@ -1363,6 +1364,7 @@ smsc-listview .checkbox-button[aria-checked="true"] {
   gap: 0.5rem !important;
 }
 
+.moveToPostbox__item__icon,
 label.radiobutton input[type="radio"] {
   appearance: none !important;
   background: var(--color-base02) !important;
@@ -2156,6 +2158,10 @@ div[style*="background"]:not(.manual_widgettitle) {
   border: 2px solid var(--color-base02) !important;
 }
 
+.bubble-s87kI.header__datepickerbutton {
+  padding: 0 !important;
+}
+
 .glass .bubble-s87kI {
   background-color: var(--darken-background) !important;
   backdrop-filter: blur(5px) !important;
@@ -2164,12 +2170,24 @@ div[style*="background"]:not(.manual_widgettitle) {
 .dropdownMenuItem-Vszox[data-selected="true"] {
   background-color: var(--color-base03) !important;
 }
+
 .dropdownMenuItem-Vszox[data-selected="false"] {
   background-color: var(--color-base01) !important;
+  border-radius: 0.75rem !important;
 }
+
 .dropdownMenuItem-Vszox[data-selected="false"]:hover {
   background-color: var(--color-base02) !important;
 }
+
+div:has(.dropdownMenu-NRL0x) {
+  top: 10px !important;
+}
+
+.dropdownMenu-NRL0x {
+  padding: 1rem !important;
+}
+
 .smsc-svg--earth--16 {
   border: none !important;
 }
@@ -2269,13 +2287,11 @@ span.smsc-treeitem__label {
 }
 div#folders {
   border-radius: 1.5rem !important;
-  margin-left: 25px !important;
-  padding-left: 1rem !important;
+
   background-color: var(--darken-background) !important;
   backdrop-filter: blur(5px) !important;
   border: 2px solid var(--color-base02) !important;
   font-weight: 500 !important;
-  padding-top: 1rem;
 }
 .smsc_cm_breadcrumb.subline {
   border: none !important;
@@ -2298,7 +2314,8 @@ div#smscMainBlockContainer {
 }
 
 #tree {
-  padding-top: 10px !important;
+  padding-top: 1rem !important;
+  padding-left: 0.5rem !important;
 }
 
 .uploadzone td {

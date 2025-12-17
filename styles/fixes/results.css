@@ -603,3 +603,7 @@ button.button-ZR3rz.bp-c-combo-hover-plain-outline--300 {
 .bubble.js-bubble.schoolyear-dropdown-bubble.js-schoolyear-dropdown-bubble {
   padding: 1.5rem !important;
 }
+
+.table-page .table-page__header {
+  gap: 0.5rem;
+}

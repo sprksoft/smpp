@@ -1,53 +1,48 @@
 #homeAgenda
-    .datepicker__cell.datepicker--current-day
-    .datepicker__cell__content {
-    border: 2px solid var(--color-accent) !important;
-    z-index: 10 !important;
+  .datepicker__cell.datepicker--current-day
+  .datepicker__cell__content {
+  border: 2px solid var(--color-accent) !important;
+  z-index: 10 !important;
 }
 
 #homeAgenda .datepicker__cell__content:not(.datepicker--bold):hover {
-    background-color: var(--color-base02) !important;
+  background-color: var(--color-base02) !important;
 }
 
 #homeAgenda .datepicker__cell__content {
-    aspect-ratio: 1 !important;
-}
-
-a.menu-type.menu-linkbutton.smsc-linkbutton.smsc-svg--planner--24 {
-    padding-left: 30px !important;
-    width: 100% !important;
+  aspect-ratio: 1 !important;
 }
 
 input#googleQuery {
-    background-color: var(--color-base02) !important;
-    border-radius: 10px !important;
-    margin-right: 10px !important;
+  background-color: var(--color-base02) !important;
+  border-radius: 10px !important;
+  margin-right: 10px !important;
 }
 
 .date-header-assignments {
-    padding-top: 1rem;
-    padding-bottom: 0.3rem;
-    border-bottom: 3px solid var(--color-base02);
-    font-size: 1.5rem;
-    text-align: center;
-    font-weight: 600;
+  padding-top: 1rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 3px solid var(--color-base02);
+  font-size: 1.5rem;
+  text-align: center;
+  font-weight: 600;
 }
 
 h2.assignments-title {
-    margin-bottom: 0.5rem !important;
-    margin-top: 0 !important;
-    text-align: center;
-    font-size: 2rem;
-    font-weight: 800;
+  margin-bottom: 0.5rem !important;
+  margin-top: 0 !important;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 800;
 }
 
 .date-header-assignments::first-letter {
-    text-transform: capitalize !important;
+  text-transform: capitalize !important;
 }
 
 .task-description {
-    width: fit-content;
-    font-weight: 400;
-    padding-left: 0.3rem;
-    display: block;
+  width: fit-content;
+  font-weight: 400;
+  padding-left: 0.3rem;
+  display: block;
 }

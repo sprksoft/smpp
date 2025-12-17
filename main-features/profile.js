@@ -79,7 +79,6 @@ async function applyUsername(customName) {
 }
 
 async function applyProfilePicture(profile) {
-  console.log("applying pfp");
   let style = document.documentElement.style;
   const setPFPstyle = (url) => {
     style.setProperty("--profile-picture", "url(" + url + ")");
@@ -93,7 +92,6 @@ async function applyProfilePicture(profile) {
   };
 
   let profileImageURL;
-  console.log(profile);
   switch (profile.useSMpfp) {
     case true:
       profileImageURL = originalPfpUrl;

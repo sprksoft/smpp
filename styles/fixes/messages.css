@@ -238,8 +238,56 @@ body.modern-ui .homepage__block {
 
 .context-menu {
   background-color: var(--color-base01) !important;
+  border: 2px solid var(--color-base02) !important;
   color: var(--color-text) !important;
-  box-shadow: none !important;
+  box-shadow: 0px 3px 13px 7px var(--color-shadow) !important;
+  border-radius: 1.25rem !important;
+}
+
+.modern-ui .msgHeader {
+  border-color: var(--color-base03) !important;
+  border-width: 1px !important;
+  padding-bottom: 0.25rem !important;
+  margin-bottom: 3rem !important;
+}
+
+/* Risky business */
+p:not(:last-of-type) {
+  margin-bottom: 0 !important;
+}
+p:not(:first-of-type) {
+  margin-top: 1rem !important;
+}
+
+.modern-ui .smscButton.red:hover:not([disabled]) {
+  background-color: var(--color-base03) !important;
+}
+
+.modern-ui .smscButton.red {
+  color: var(--color-red) !important;
+}
+
+.modern-ui .context-menu {
+  padding: 0.5rem !important;
+}
+
+.modern-ui .context-menu .menu-item {
+  background-position-x: 0.5rem !important;
+  background-position-y: 0.37rem !important;
+  border-radius: 0.75rem !important;
+}
+
+.modern-ui .context-menu .menu-item:not(:last-child) {
+  margin-bottom: 0.3rem !important;
+}
+
+.modern-ui .context-menu .menu-item:hover {
+  background-color: var(--color-base02) !important;
+  border-color: transparent !important;
+}
+
+.modern-ui .context-menu .menu-spacer {
+  border-color: var(--color-base03) !important;
 }
 
 .menu-item {
@@ -372,9 +420,9 @@ button.submit-button.smscButton.blue {
   padding: 0.5rem 1rem !important;
   font-weight: 600 !important;
   color: var(--color-text) !important;
-  border-color: var(--color-base02) !important;
+  border-color: var(--color-accent) !important;
   margin-top: 0px !important;
-  background-color: var(--color-base03) !important;
+  background-color: var(--color-base02) !important;
   box-shadow: none !important;
 }
 
@@ -586,7 +634,7 @@ button.accswitchmain.mbselected {
   background: none !important;
   background-color: var(--color-base02) !important;
   border: 2px solid var(--color-base03) !important;
-  border-radius: 0.4rem !important;
+  border-radius: 0.75rem !important;
   padding: 0px !important;
   height: 25px;
   line-height: normal;
@@ -598,7 +646,7 @@ button.accswitchmain.mbnotselected {
   background: none !important;
   background-color: var(--color-base01) !important;
   border: 2px solid var(--color-base02) !important;
-  border-radius: 0.4rem !important;
+  border-radius: 0.75rem !important;
   padding: 0px !important;
   height: 25px;
   line-height: normal;
@@ -829,8 +877,48 @@ span.planner-list-wrapper__add-btn__text:hover {
   display: none !important;
 }
 
+a.menu-type.menu-linkbutton.smsc-linkbutton.smsc-svg--planner--24 {
+  padding-left: 30px !important;
+  width: 100% !important;
+}
+
 a.menu-type.menu-linkbutton.smsc-linkbutton {
-  padding: 2.5px 5px 2.5px 20px !important;
+  padding: 0.5rem 0.25rem 0.5rem 2.5rem !important;
+  background-position-x: 0.5rem !important;
+  border-radius: 0.75rem !important;
+  padding-left: 2.5rem !important;
+  border: none !important;
+  margin-bottom: 0 !important;
+}
+
+.menu-linkbutton.smsc-linkbutton:hover {
+  background-color: var(--color-base02) !important;
+  text-decoration: none !important;
+}
+.menu-linkbutton.smsc-linkbutton:focus {
+  text-decoration: none !important      ;
+}
+
+.enableAnimations .ui-widget-overlay {
+  transition-duration: 0.5s;
+}
+
+.ui-widget-overlay {
+  animation: reset-confirmation-background 0s ease-out 0ms 1 forwards;
+  background: none !important;
+}
+
+.enableAnimations button {
+  transition: scale 0.2s ease-in-out !important;
+}
+
+button:active {
+  scale: 0.97 !important;
+}
+
+.smsc-contextmenu .smsc-contextmenu-bubble {
+  border-radius: 1.5rem !important;
+  padding: 0.75rem !important;
 }
 
 .topnav__btn.topnav__btn--profile {
@@ -851,10 +939,11 @@ a.menu-type.menu-linkbutton.smsc-linkbutton {
   margin: 0 !important;
 }
 
-.send-delayed-button {
+.js-send-delayed-button.btn.send-delayed-button {
   display: flex !important;
   gap: 0.5rem !important;
   flex-wrap: nowrap !important;
+  border: none !important;
 }
 
 .blob-counters__container {
@@ -863,7 +952,7 @@ a.menu-type.menu-linkbutton.smsc-linkbutton {
 
 .js-btn.btn.js-split-button-button:has(.send-delayed-button__send) {
   border-radius: 1rem !important;
-  border-color: var(--color-base03) !important;
+  border-color: var(--color-accent) !important;
   background-color: var(--color-base02) !important;
   height: 3rem !important;
   width: 6rem !important;
@@ -873,18 +962,33 @@ a.menu-type.menu-linkbutton.smsc-linkbutton {
 button.split-button__dropdown.js-split-button-dropdown.btn.btn--dropdown.js-btn.btn--primary {
   aspect-ratio: 1 !important;
   width: 3rem !important;
+  border-color: var(--color-base02) !important;
+  background-color: var(--color-base01) !important;
+  position: relative !important;
 }
 
-.btn--primary.js-btn.btn.js-split-button-button:has(
-    .send-delayed-button__send
-  ):hover {
+button.split-button__dropdown.js-split-button-dropdown.btn.btn--dropdown.js-btn.btn--primary:hover {
+  background-color: var(--color-base02) !important;
+  border-color: var(--color-base03) !important;
+}
+
+.js-btn.btn.js-split-button-button:has(.send-delayed-button__send):hover {
   background-color: var(--color-base03) !important;
-  border-color: var(--color-accent) !important;
+}
+
+.moveToPostbox__tree {
+  border-bottom: 1px solid var(--color-base02) !important;
+}
+
+button.split-button__dropdown.js-split-button-dropdown.btn.btn--dropdown.js-btn.btn--primary::after {
+  background-position-x: center !important;
+  width: 100% !important;
+  right: 0 !important;
 }
 
 .send-delayed-button__send {
   font-size: 1.3rem !important;
-  color: var(--color-accent) !important;
+  color: var(--color-text) !important;
   background-color: transparent !important;
 }
 

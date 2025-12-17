@@ -211,10 +211,19 @@ input::placeholder {
 .topnav-scope button.medium-button.medium-button:hover,
 .smscButton:hover,
 .topnav__menuitem:hover {
+  border-color: var(--color-base03) !important;
+  background-color: var(--color-base02) !important;
+  font-weight: 600 !important;
+}
+
+.btn.btn--primary {
   border-color: var(--color-accent) !important;
   background-color: var(--color-base02) !important;
-  color: var(--color-accent) !important;
-  font-weight: 600 !important;
+}
+
+.btn.btn--primary:hover {
+  border-color: var(--color-accent) !important;
+  background-color: var(--color-base03) !important;
 }
 
 .campaign-dialog {
