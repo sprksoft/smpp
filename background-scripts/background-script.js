@@ -50,6 +50,7 @@ function setByPath(object, path, value) {
   ob[pathSplit[pathSplit.length - 1]] = value;
 }
 
+
 browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
   handleMessage(message, sendResponse);
   return true; // keeps channel open
@@ -66,58 +67,6 @@ async function handleMessage(message, sendResponse) {
       browser.storage.local.clear();
       sendResponse({ success: true });
       console.log("Cleared browser storage");
-    }
-    // Settings
-    if (message.action === "setSettingsData") {
-      await browser.storage.local.set({ settingsData: message.data });
-      sendResponse({ success: true });
-      console.log("Settings data saved.");
-    }
-    /* maybe usefull but just use the categories for now
-    if (message.action === "setSetting") {
-      const settingsData = await getSettingsData();
-      settingsData[message.name] = message.value;
-      await browser.storage.local.set({ settingsData: settingsData });
-      sendResponse({ success: true });
-    }
-    if (message.action === "getSetting") {
-      const settingsData = await getSettingsData();
-      settingsData[message.name] = message.value;
-      await browser.storage.local.set({ settingsData: settingsData });
-      sendResponse({ success: true });
-    }
-    */
-    if (message.action === "setSettingsCategory") {
-      const settingsData = await getSettingsData();
-      setByPath(settingsData, message.category, message.data);
-      await browser.storage.local.set({ settingsData: settingsData });
-      sendResponse({ success: true });
-    }
-    if (message.action === "getSettingsCategory") {
-      const settingsData = await getSettingsData();
-      sendResponse(getByPath(settingsData, message.category));
-      console.log(
-        "Settings data sent for this:" + message.category + "category"
-      );
-    }
-    if (message.action === "getSettingsData") {
-      const settingsData = await getSettingsData();
-      console.log(settingsData);
-      sendResponse(settingsData);
-      console.log("Settings data sent.");
-    }
-
-    // category is optional
-    if (message.action === "getSettingsOptions") {
-      const settingsOptions = await getSettingsOptions();
-      sendResponse(getByPath(settingsOptions, message.category));
-      console.log("Settings options sent.");
-    }
-
-    // category is optional
-    if (message.action === "getSettingsDefaults") {
-      const defaults = getDefaultSettings();
-      sendResponse(getByPath(defaults, message.category));
     }
     // Themes
     if (message.action === "getAllThemes") {
@@ -187,6 +136,38 @@ async function handleMessage(message, sendResponse) {
       sendResponse(plantAppData);
       console.log("Plant appdata sent.");
     }
+
+    // Settings
+    if (message.action === "setSetting") {
+      const settingsData = await getSettingsData();
+      setByPath(settingsData, message.name, message.data);
+      await browser.storage.local.set({ settingsData: settingsData });
+      sendResponse({ success: true });
+    }
+    if (message.action === "getSetting") {
+      const settingsData = await getSettingsData();
+      sendResponse(getByPath(settingsData, message.name));
+      console.log(
+        "Setting " + message.name + "sent"
+      );
+    }
+    if (message.action === "setSettingsData") {
+      await browser.storage.local.set({ settingsData: message.data });
+      sendResponse({ success: true });
+      console.log("Settings data saved.");
+    }
+    if (message.action === "getSettingsData") {
+      let settingsData = await getSettingsData();
+      console.log(settingsData);
+      sendResponse(settingsData);
+      console.log("Settings data sent.");
+    }
+    if (message.action === "getSettingsTemplate") {
+      const settingsOptions = await getSettingsOptions();
+      sendResponse(getByPath(settingsOptions, message.name));
+      console.log("Settings options sent.");
+    }
+
     // Widgets
     if (message.action === "getWidgetLayout") {
       console.log("loading widget layout");

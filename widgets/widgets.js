@@ -331,7 +331,7 @@ class WidgetBase {
 
   // (Required): Gets called when the content element of the widget needs to be
   // created (return html element). (Don't do slow tasks in here)
-  async createContent() {}
+  async createContent() { }
   // Gets called when the preview element needs to be created (return html
   // element) NOTE: preview and content never exist at the same time
   async createPreview() {
@@ -340,11 +340,11 @@ class WidgetBase {
 
   // Gets called when the settings of the widget change.
   // Use this to update the widget content based on the new settings. (settings object is always valid based on the value returned by defaultSettings())
-  async onSettingsChange() {}
+  async onSettingsChange() { }
 
-  async onThemeChange() {}
+  async onThemeChange() { }
 
-  async onRemove() {}
+  async onRemove() { }
 }
 
 class ErrorWidget extends WidgetBase {
@@ -547,8 +547,8 @@ function initNewsEditMode() {
   button.addEventListener("change", async (e) => {
     updateNews(e.target.checked);
     await browser.runtime.sendMessage({
-      action: "setSettingsCategory",
-      category: "appearance.news",
+      action: "setSetting",
+      name: "appearance.news",
       data: e.target.checked,
     });
   });
@@ -589,7 +589,7 @@ async function createWidgetSystem() {
       rightPannels: [{ widgets: [] }],
     };
   }
-  
+
 
   // Create smartschool default widgets
   for (let smWidget of document.querySelectorAll(

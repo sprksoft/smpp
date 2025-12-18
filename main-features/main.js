@@ -31,7 +31,7 @@ function changeFont() {
 function fixCoursesSearch() {
   document
     .getElementById("courseSearch")
-    ?.addEventListener("keydown", function (event) {
+    ?.addEventListener("keydown", function(event) {
       if (event.key === "Enter") {
         event.preventDefault();
 
@@ -129,7 +129,7 @@ async function createStaticGlobals() {
   });
 
   settingsOptions = await browser.runtime.sendMessage({
-    action: "getSettingsOptions",
+    action: "getSettingsTemplate",
   });
   originalUsername =
     document.querySelector(".js-btn-profile .hlp-vert-box span")?.innerText ||

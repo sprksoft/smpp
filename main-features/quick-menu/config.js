@@ -18,7 +18,7 @@ function gatherOptions(template, name) {
 /// Returns an array with settings for dmenu
 async function getDMenuOptionsForSettings(toplevel) {
   const template = await browser.runtime.sendMessage({
-    action: "getSettingsOptions",
+    action: "getSettingsTemplate",
   });
   let options = [];
   for (let cat of Object.keys(template)) {
@@ -50,8 +50,8 @@ function getFullOptPath(template, optName) {
 
 async function setSettingByPath(path, value) {
   await browser.runtime.sendMessage({
-    action: "setSettingsCategory",
-    category: path,
+    action: "setSettings",
+    name: path,
     data: value,
   });
   await apply();
@@ -59,14 +59,14 @@ async function setSettingByPath(path, value) {
 
 async function dmenuEditConfig(path) {
   const templates = await browser.runtime.sendMessage({
-    action: "getSettingsOptions",
+    action: "getSettingsTemplate",
   });
   configPath = getFullOptPath(templates, path);
   const template = getByPath(templates, configPath);
 
   let optionValue = await browser.runtime.sendMessage({
-    action: "getSettingsCategory",
-    category: configPath,
+    action: "getSetting",
+    name: configPath,
   });
   if (optionValue.error) {
     console.error("error from service worker: " + optionValue.error);
@@ -77,7 +77,7 @@ async function dmenuEditConfig(path) {
   if (template == "boolean") {
     dmenu(
       ["true", "false"],
-      function (cmd, shift) {
+      function(cmd, shift) {
         if (cmd == "true") {
           setSettingByPath(configPath, true);
         } else if (cmd == "false") {
@@ -89,7 +89,7 @@ async function dmenuEditConfig(path) {
   } else if (template == "number") {
     dmenu(
       [],
-      function (cmd, shift) {
+      function(cmd, shift) {
         if (configPath == "appearance.background.blur" && cmd == "song 2") {
           openURL("https://www.youtube.com/watch?v=Bz4l9_bzfZM", true);
           return;
@@ -101,7 +101,7 @@ async function dmenuEditConfig(path) {
   } else if (Array.isArray(template)) {
     dmenu(
       template,
-      function (cmd, shift) {
+      function(cmd, shift) {
         setSettingByPath(configPath, cmd);
       },
       label,
@@ -110,13 +110,13 @@ async function dmenuEditConfig(path) {
     if (template !== "string") {
       console.error(
         "Invalid template type: '" +
-          template +
-          "' Falling back to 'string' template type",
+        template +
+        "' Falling back to 'string' template type",
       );
     }
     dmenu(
       [],
-      function (cmd, shift) {
+      function(cmd, shift) {
         setSettingByPath(configPath, cmd);
       },
       label,

@@ -42,8 +42,8 @@ function remove_quick(name) {
 
 async function quick_load() {
   const quicks = await browser.runtime.sendMessage({
-    action: "getSettingsCategory",
-    category: "other.quicks",
+    action: "getSetting",
+    name: "other.quicks",
   });
   if (!quicks) {
     return [];
@@ -53,8 +53,8 @@ async function quick_load() {
 
 async function quick_save() {
   await browser.runtime.sendMessage({
-    action: "setSettingsCategory",
-    category: "other.quicks",
+    action: "setSetting",
+    name: "other.quicks",
     data: quicks,
   });
 }
@@ -186,8 +186,8 @@ async function do_qm(opener = "") {
           return;
         case "breakdmenu":
           await browser.runtime.sendMessage({
-            action: "setSettingsCategory",
-            category: "other.dmenu",
+            action: "setSetting",
+            name: "other.dmenu",
             data: {
               itemScore: false,
             },
