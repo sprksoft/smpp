@@ -50,10 +50,12 @@ class SnakeWidget extends GameBase {
     const newHead = head.add(this.#curDir);
 
     // bounds check
-    const cellRad = this.#calcCelRad();
-    const x = cellRad + newHead.x * cellRad * 2.0;
-    const y = cellRad + newHead.y * cellRad * 2.0;
-    if (x < 0 || y < 0 || x > this.canvas.width || y > this.canvas.height) {
+    if (
+      newHead.x < 0 ||
+      newHead.y < 0 ||
+      newHead.x >= this.#getCellCount() ||
+      newHead.y >= this.#getCellCount()
+    ) {
       this.stopGame();
       return;
     }
@@ -75,19 +77,17 @@ class SnakeWidget extends GameBase {
   }
 
   #calcCelRad() {
-    return (
-      this.canvas.width /
-      (CELL_COUNT * Math.sqrt(this.getOpt("size") * 0.01) * 2)
-    );
+    return this.canvas.width / (this.#getCellCount() * 2);
   }
 
   #getRandomFieldPos() {
-    const cellCount = CELL_COUNT * Math.sqrt(this.getOpt("size") * 0.01);
+    const cellCount = this.#getCellCount();
     return new Point(
       Math.floor(Math.random() * cellCount),
       Math.floor(Math.random() * cellCount)
     );
   }
+
   #spawnFood() {
     this.#food = this.#getRandomFieldPos();
     while (this.#snake.find((p) => p.equal(this.#food))) {
@@ -100,7 +100,7 @@ class SnakeWidget extends GameBase {
   }
 
   async onGameStart() {
-    const cellCount = CELL_COUNT * Math.sqrt(this.getOpt("size") * 0.01);
+    const cellCount = this.#getCellCount();
     if (!this.#backgroundCanvas) {
       const bg = document.createElement("canvas");
       bg.height = this.canvas.width;
@@ -143,8 +143,12 @@ class SnakeWidget extends GameBase {
     ctx.fill();
   }
 
+  #getCellCount() {
+    return Math.round(CELL_COUNT * Math.sqrt(this.getOpt("size") * 0.01));
+  }
+
   #drawBg(ctx) {
-    const cellCount = Math.sqrt(this.getOpt("size") * 0.01) * CELL_COUNT;
+    const cellCount = this.#getCellCount();
     const celRad = this.#calcCelRad();
     ctx.strokeWidth = 0;
     ctx.fillStyle = getThemeVar("--color-base01");
