@@ -469,7 +469,7 @@ class SettingsWindow extends BaseWindow {
         applyAppearance(settings.appearance);
         if (
           JSON.stringify(settings.appearance.weatherOverlay) !=
-            JSON.stringify(previousSettings.appearance.weatherOverlay) &&
+          JSON.stringify(previousSettings.appearance.weatherOverlay) &&
           !liteMode
         ) {
           applyWeatherEffects(settings.appearance.weatherOverlay);
@@ -641,6 +641,7 @@ class SettingsWindow extends BaseWindow {
     const createKeybindInput = (id, text) => {
       const container = document.createElement("div");
       container.classList.add("settings-page-key-bind-container");
+      container.classList.add("smpp-input-with-label");
 
       let label = document.createElement("span");
       label.for = id;
@@ -791,6 +792,7 @@ class SettingsWindow extends BaseWindow {
     function createLabeledSlider(min, max, id, text, showValue = true) {
       let container = document.createElement("div");
       container.classList.add("settings-page-slider-container");
+      container.classList.add("smpp-input-with-label");
       let textContainer = document.createElement("span");
       textContainer.classList.add("settings-page-slider-label");
       textContainer.innerText = text;

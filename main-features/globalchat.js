@@ -1,3 +1,8 @@
+const GC_DOMAINS = {
+  main: "https://gc.smartschoolplusplus.com",
+  beta: "https://gcbeta.smartschoolplusplus.com",
+};
+
 class GlobalChatWindow extends BaseWindow {
   beta;
   iframe;
@@ -20,10 +25,9 @@ class GlobalChatWindow extends BaseWindow {
       "color-accent",
       "color-text",
     ]);
-    const subDomain = this.beta ? "gcbeta" : "gc";
     this.iframe = document.createElement("iframe");
     this.iframe.style = "width:100%; height:100%; border:none";
-    this.iframe.src = `https://${subDomain}.smartschoolplusplus.com/v1?${queryString}`;
+    this.iframe.src = GC_DOMAINS[this.beta ? "beta" : "main"] + "/v1?" + queryString;
     this.gcContent.appendChild(this.iframe);
   }
 }
@@ -50,20 +54,58 @@ function createGC() {
   return GlobalChatOpenButton;
 }
 
-const GC_URLS = [
-  "https://gc.smartschoolplusplus.com",
-  "https://gcbeta.smartschoolplusplus.com",
-];
 
-window.addEventListener("message", (e) => {
-  if (!GC_URLS.includes(e.origin)) {
+// public smpp api
+// Versions will change when a breaking change is required (Adding fields is not a breaking change)
+window.addEventListener("message", async (e) => {
+  if (!Object.values(GC_DOMAINS).includes(e.origin)) {
+    console.warn("Got a message but it was not from one of the global chat domains.")
     return;
   }
-
+  let response = { error: "not found" };
   switch (e.data.action) {
-    case "getPlantData.v1":
-      //TODO: get the plant data
-      e.source.postMessage({});
+    // Get the current plant.
+    case "plantapi.v1.get_current":
+      response = await getPlantV1();
+      break;
+    case "plantapi.v1.get_stage_svg":
+      response = {
+        svg: getPlantSvg(stageDataToInternalPlantData(e.data.stageData)),
+      };
       break;
   }
+  response.callId = e.data.callId;
+  e.source.postMessage(response, e.origin);
 });
+
+function stageDataToInternalPlantData(stageData) {
+  return {
+    uniqueColor: stageData.color,
+    isAlive: stageData.isAlive,
+    age: stageData.stage,
+  };
+}
+
+async function getPlantV1() {
+  let data = await browser.runtime.sendMessage({
+    action: "getPlantAppData",
+  });
+  if (!data) {
+    return {
+      stageData: {
+        color: "#fff",
+        isAlive: true,
+        stage: 0,
+      },
+      age: 0,
+    }
+  }
+  return {
+    stageData: {
+      color: data.uniqueColor,
+      isAlive: data.isAlive,
+      stage: data.age,
+    },
+    age: data.daysSinceBirthday,
+  };
+}

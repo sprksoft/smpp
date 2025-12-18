@@ -165,7 +165,9 @@
 }
 
 .enableAnimations .settings-page-slider {
-  transition: opacity 0.2s, border-color 0.2s ease-in-out;
+  transition:
+    opacity 0.2s,
+    border-color 0.2s ease-in-out;
 }
 .settings-page-weather-overlay-container
   .settings-page-image-button-wrapper:has(input:checked) {
@@ -301,7 +303,10 @@ label.settings-page-image-button-wrapper:has(input:checked) {
   height: 100%;
   object-fit: cover;
   border-radius: 8px;
-  transition: transform 0.2s, filter 0.2s, outline 0.2s;
+  transition:
+    transform 0.2s,
+    filter 0.2s,
+    outline 0.2s;
 }
 
 .settings-page-theme-title {
@@ -317,7 +322,8 @@ label.settings-page-image-button-wrapper:has(input:checked) {
 }
 
 .enableAnimations .settings-page-theme-card {
-  transition-property: background-color, border-color, color, transform, outline;
+  transition-property:
+    background-color, border-color, color, transform, outline;
   transition: 0.15s ease-in-out;
 }
 
@@ -458,9 +464,8 @@ label.settings-page-image-button-wrapper:has(input:checked) {
   justify-content: space-between;
 }
 
-.settings-page-image-button-label,
-.settings-page-button-label-container > span,
-.settings-page-key-bind-container > span {
+.settings-page-key-bind-container > span,
+.settings-page-image-button-label {
   display: flex;
   gap: 0.25rem;
   flex-direction: column;
@@ -468,12 +473,10 @@ label.settings-page-image-button-wrapper:has(input:checked) {
   align-items: center;
 }
 .settings-page-image-button-label,
-.settings-page-button-label-container > span,
-.settings-page-key-bind-container > span,
 .settings-page-slider-label {
   font-size: 1.4rem;
   font-weight: 400;
-  margin: 0;
+  margin: 0rem !important;
 }
 
 #settings-page .smpp-file-input-button,
@@ -500,23 +503,11 @@ label.settings-page-image-button-wrapper:has(input:checked) {
   margin-bottom: 1rem !important;
   height: fit-content !important;
   background-color: var(--color-base01) !important;
-  border-radius: 1000px;
-  padding: 0.75rem 0.75rem 0.75rem 1.5rem;
   max-width: 30rem;
-  border: 2px transparent solid !important;
 }
 
 .enableAnimations .settings-page-button-label-container {
   transition: 0.2s ease-in-out border-color;
-}
-
-.settings-page-button-label-container:focus,
-.settings-page-key-bind-container:focus {
-  border-color: var(--color-base03) !important;
-}
-
-.settings-page-key-bind-container {
-  border: 2px solid var(--color-base01) !important;
 }
 
 .settings-page-button-label-container:first-of-type > span {
@@ -549,7 +540,7 @@ label.settings-page-image-button-wrapper:has(input:checked) {
 }
 
 .settings-page-slider.settings-page-labeled-slider {
-  width: 10.5rem;
+  width: 9rem;
   background-color: var(--color-base02);
   margin: 0 !important;
   height: 1.75rem;
@@ -560,7 +551,6 @@ label.settings-page-image-button-wrapper:has(input:checked) {
   flex-direction: row;
   height: 4rem !important;
   gap: 0.25rem;
-  padding: 1rem 1.25rem 1rem 1.5rem;
   background-color: var(--color-base01);
   max-width: 30rem;
   align-items: center;
@@ -571,8 +561,8 @@ label.settings-page-image-button-wrapper:has(input:checked) {
 
 .settings-page-slider-container:has(#settings-page-weather-overlay-slider),
 .settings-page-slider-container:has(
-    #settings-page-weather-overlay-opacity-slider
-  ) {
+  #settings-page-weather-overlay-opacity-slider
+) {
   width: 20rem;
   gap: 1rem;
 }
@@ -609,8 +599,8 @@ input.settings-page-keybinding-input[type="text"]:not(
 }
 
 .settings-page-key-bind-container:has(
-    input.settings-page-keybinding-input.listening
-  ) {
+  input.settings-page-keybinding-input.listening
+) {
   border-color: var(--color-base02) !important;
 }
 
@@ -791,7 +781,9 @@ input.settings-page-keybinding-input[type="text"]:not(
   display: none !important;
 }
 .enableAnimations #quickSettings #extraSettingsButton {
-  transition: scale 0.1s ease-in-out, border-color 0.2s ease-in-out,
+  transition:
+    scale 0.1s ease-in-out,
+    border-color 0.2s ease-in-out,
     background 0.2s ease-in-out !important;
 }
 
@@ -841,8 +833,11 @@ input.settings-page-keybinding-input[type="text"]:not(
 }
 
 .enableAnimations .keybind-unbind-button {
-  transition: scale 0.1s ease-in-out, border-color 0.2s ease-in-out,
-    background 0.2s ease-in-out, opacity 0.1s ease-out;
+  transition:
+    scale 0.1s ease-in-out,
+    border-color 0.2s ease-in-out,
+    background 0.2s ease-in-out,
+    opacity 0.1s ease-out;
 }
 
 .keybind-unbind-button {

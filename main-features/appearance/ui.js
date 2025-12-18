@@ -15,7 +15,7 @@ function createButton(id = "") {
 
 function createButtonWithLabel(id = "", text) {
   let container = document.createElement("label");
-  container.classList.add("smpp-button-with-label");
+  container.classList.add("smpp-input-with-label");
   container.htmlFor = id;
   container.dataset.for = id;
 

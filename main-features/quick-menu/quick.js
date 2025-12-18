@@ -63,7 +63,7 @@ function add_quick_interactive() {
   let cmd_list = quick_cmd_list();
   dmenu(
     cmd_list,
-    function (name, shift) {
+    function(name, shift) {
       value_list = [];
       for (let i = 0; i < quicks.length; i++) {
         if (quicks[i].name == name) {
@@ -73,7 +73,7 @@ function add_quick_interactive() {
       }
       dmenu(
         value_list,
-        function (value, shift) {
+        function(value, shift) {
           if (!value.startsWith("http")) {
             value = "https://" + value;
           }
@@ -90,7 +90,7 @@ function remove_quick_interactive() {
   let cmd_list = quick_cmd_list();
   dmenu(
     cmd_list,
-    function (name, shift) {
+    function(name, shift) {
       remove_quick(name);
     },
     "name:"
@@ -170,6 +170,7 @@ async function do_qm(opener = "") {
       "breakdmenu",
       "glass",
       "ridge",
+      "reset plant",
     ]);
 
   if (dmenuConfig.toplevelConfig) {
@@ -178,7 +179,7 @@ async function do_qm(opener = "") {
 
   dmenu(
     cmd_list,
-    async function (cmd) {
+    async function(cmd) {
       switch (cmd) {
         case "unbloat":
           unbloat();
@@ -195,7 +196,7 @@ async function do_qm(opener = "") {
         case "set background":
           dmenu(
             [],
-            function (url) {
+            function(url) {
               set_background(url);
               store_background(url);
             },
@@ -205,7 +206,7 @@ async function do_qm(opener = "") {
         case "config":
           dmenu(
             await getDMenuOptionsForSettings(false),
-            function (cmd, shift) {
+            function(cmd, shift) {
               dmenuEditConfig(cmd);
             },
             "config: "
@@ -246,6 +247,13 @@ async function do_qm(opener = "") {
 }`;
           document.body.appendChild(styleEl);
           return;
+        case "reset plant":
+          resetPlant()
+          return;
+        case "plant data":
+          console.log(await browser.runtime.sendMessage({
+            action: "getPlantAppData",
+          }));
         default:
           break;
       }

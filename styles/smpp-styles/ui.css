@@ -1,11 +1,12 @@
 /* For UI Elements created by ui.js */
 
-.smpp-button-with-label {
+.smpp-input-with-label {
   border-radius: 999999999px;
 
   min-width: 20rem;
 
   background-color: var(--color-base01);
+  border: 2px solid var(--color-base02);
   padding: 0.75rem 1rem;
   display: flex;
   flex-direction: row;
@@ -15,12 +16,19 @@
   gap: 1rem;
 }
 
-.smpp-button-with-label > span {
-  margin-left: 1rem;
+.smpp-input-with-label > span:first-child {
 }
 
-.smpp-button-with-label > .switch {
+.smpp-input-with-label > .switch {
   margin-left: auto !important;
+}
+
+.smpp-input-with-label > input {
+  margin-left: auto !important;
+}
+
+.smpp-input-with-label:focus-visible {
+  border-color: var(--color-base03) !important;
 }
 
 .full-file-input-container {
