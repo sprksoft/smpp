@@ -43,9 +43,10 @@ rm -rf web-ext-artifacts/*
 echo "=== Building Extension ==="
 python build.py
 echo "=== Packing Extension ==="
-web-ext build --source-dir smpp-build
-
-ver=$(ls web-ext-artifacts | rg "smartschool_-([0-9]*.[0-9]*.[0-9]*).zip" -r '$1')
+cd smpp-build
+zip -r smpp.xpi .
+ver=$(cat manifest.json | rg '\s*"version":\s?"([0-9]\.[0-9]\.[0-9])",?\s*' -r '$1')
+cd ..
 
 echo "=== Done ==="
 echo "version: $ver"
