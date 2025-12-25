@@ -3,7 +3,9 @@ if (typeof browser === "undefined") {
 }
 
 import { fetchDelijnData } from "./api-background-script.js";
-import { fillObjectWithDefaults } from "./utils.js";
+import { loadJSON } from "./json-loader.js";
+
+const themes = await loadJSON("background-scripts/data/themes.json");
 
 function getDefaultCustomThemeData() {
   return {
@@ -16,19 +18,6 @@ function getDefaultCustomThemeData() {
   };
 }
 
-export function getDefaultSettings() {
-  return defaultSettings;
-}
-
-export async function getSettingsData() {
-  let data = (await browser.storage.local.get("settingsData")).settingsData;
-  console.log("set before filled: ");
-  console.log(data);
-  data = fillObjectWithDefaults(data, getDefaultSettings());
-  console.log("set after filled: ");
-  console.log(data);
-  return data;
-}
 
 export async function getPlantAppData() {
   let data = await browser.storage.local.get("plantAppData");
@@ -41,9 +30,6 @@ export async function getCustomThemeData() {
   return data.customThemeData || getDefaultCustomThemeData();
 }
 
-export function getSettingsOptions() {
-  return settingsOptions;
-}
 
 export function getAllThemes() {
   return themes;

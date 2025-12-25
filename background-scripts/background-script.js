@@ -5,10 +5,7 @@ if (typeof browser === "undefined") {
 let globalsInitialized = false;
 
 import {
-  getSettingsData,
-  getSettingsOptions,
   getDelijnColorData,
-  getDefaultSettings,
   getPlantAppData,
   getCustomThemeData,
   getAllThemes,
@@ -16,6 +13,8 @@ import {
   setImage,
   getImage,
 } from "./data-background-script.js";
+import { setSettingsData, getSettingsData, getSettingsTemplate } from "./settings.js";
+
 import { fetchWeatherData, fetchDelijnData } from "./api-background-script.js";
 import { initGlobals } from "./json-loader.js";
 
@@ -141,7 +140,8 @@ async function handleMessage(message, sendResponse) {
     if (message.action === "setSetting") {
       const settingsData = await getSettingsData();
       setByPath(settingsData, message.name, message.data);
-      await browser.storage.local.set({ settingsData: settingsData });
+      await setSettingsData(settingsData);
+      console.log(settingsData);
       sendResponse({ success: true });
     }
     if (message.action === "getSetting") {
@@ -152,7 +152,7 @@ async function handleMessage(message, sendResponse) {
       );
     }
     if (message.action === "setSettingsData") {
-      await browser.storage.local.set({ settingsData: message.data });
+      await setSettingsData(message.data);
       sendResponse({ success: true });
       console.log("Settings data saved.");
     }
@@ -163,7 +163,7 @@ async function handleMessage(message, sendResponse) {
       console.log("Settings data sent.");
     }
     if (message.action === "getSettingsTemplate") {
-      const settingsOptions = await getSettingsOptions();
+      const settingsOptions = await getSettingsTemplate();
       sendResponse(getByPath(settingsOptions, message.name));
       console.log("Settings options sent.");
     }

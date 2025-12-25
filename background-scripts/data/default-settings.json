@@ -1,52 +1,44 @@
 {
-  "profile": {
-    "username": null,
-    "useSMpfp": false
+  "username": null,
+  "useSMpfp": false,
+  "theme": "default",
+  "background": {
+    "blur": 0
   },
-  "appearance": {
-    "theme": "default",
-    "background": {
-      "blur": 0
-    },
-    "weatherOverlay": {
-      "type": "realtime",
-      "amount": 0,
-      "opacity": 1
-    },
-    "tabLogo": "sm",
-    "news": true
+  "weatherOverlay": {
+    "type": "realtime",
+    "amount": 0,
+    "opacity": 1
   },
-  "topNav": {
-    "buttons": {
-      "GO": false,
-      "GC": true,
-      "search": false,
-      "quickMenu": false
-    },
-    "switchCoursesAndLinks": true,
-    "icons": {
-      "home": true,
-      "mail": true,
-      "notifications": true,
-      "settings": true
-    }
+  "tabLogo": "sm",
+  "news": true,
+  "buttons": {
+    "GO": false,
+    "GC": true,
+    "search": false,
+    "quickMenu": false
   },
-  "other": {
-    "quicks": [],
-    "performanceMode": false,
-    "splashText": true,
-    "discordButton": true,
-    "dmenu": {
-      "centered": true,
-      "itemScore": false,
-      "toplevelConfig": false
-    },
-    "keybinds": {
-      "dmenu": ":",
-      "widgetEditMode": "E",
-      "widgetBag": "Space",
-      "settings": ",",
-      "gc": "G"
-    }
+  "switchCoursesAndLinks": true,
+  "icons": {
+    "home": true,
+    "mail": true,
+    "notifications": true,
+    "settings": true
+  },
+  "quicks": [],
+  "performanceMode": false,
+  "splashText": true,
+  "discordButton": true,
+  "dmenu": {
+    "centered": true,
+    "itemScore": false,
+    "toplevelConfig": false
+  },
+  "keybinds": {
+    "dmenu": ":",
+    "widgetEditMode": "E",
+    "widgetBag": "Space",
+    "settings": ",",
+    "gc": "G"
   }
 }

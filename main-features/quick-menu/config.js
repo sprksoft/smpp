@@ -50,7 +50,7 @@ function getFullOptPath(template, optName) {
 
 async function setSettingByPath(path, value) {
   await browser.runtime.sendMessage({
-    action: "setSettings",
+    action: "setSetting",
     name: path,
     data: value,
   });
