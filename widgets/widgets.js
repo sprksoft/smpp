@@ -580,7 +580,7 @@ async function createWidgetSystem() {
   let widgetData = await browser.runtime.sendMessage({
     action: "getWidgetLayout",
   });
-  console.log("Applying widgte with data: \n", widgetData);
+  console.log("Applying widgets with data: \n", widgetData);
   let setDefaults = false;
   if (!widgetData) {
     setDefaults = true;

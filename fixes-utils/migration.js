@@ -1,7 +1,4 @@
-async function migrateV5() {
-  const settingsData = await browser.runtime.sendMessage({
-    action: "getSettingsData",
-  });
+async function migrateV5(settingsData) {
   console.log("MIG V:\n Started migration with", settingsData);
   await migrateSettingsV5(settingsData);
   await migrateImageV5(settingsData);
@@ -92,55 +89,47 @@ async function migrateSettingsV5(oldData) {
       break;
   }
   let newSettingsData = {
-    profile: {
-      username: oldData.customUserName,
-      useSMpfp: false,
+    username: oldData.customUserName,
+    useSMpfp: false,
+    theme: oldData.theme,
+    background: {
+      blur: oldData.backgroundBlurAmount,
     },
-    appearance: {
-      theme: oldData.theme,
-      background: {
-        blur: oldData.backgroundBlurAmount,
-      },
-      weatherOverlay: {
-        type: newWeatherOverlayType,
-        amount: oldData.weatherOverlayAmount,
-        opacity: 1,
-      },
-      tabLogo: oldData.enableSMPPLogo ? "smpp" : "sm",
-      news: oldData.showNews,
+    weatherOverlay: {
+      type: newWeatherOverlayType,
+      amount: oldData.weatherOverlayAmount,
+      opacity: 1,
     },
-    topNav: {
-      buttons: {
-        GO: false,
-        GC: true,
-        search: false,
-        quickMenu: false,
-      },
-      switchCoursesAndLinks: true,
-      icons: {
-        home: true,
-        mail: true,
-        notifications: true,
-        settings: false,
-      },
+    tabLogo: oldData.enableSMPPLogo ? "smpp" : "sm",
+    news: oldData.showNews,
+    buttons: {
+      GO: false,
+      GC: true,
+      search: false,
+      quickMenu: false,
     },
-    other: {
-      quicks: oldData.quicks,
-      performanceMode: oldData.enablePerfomanceMode,
-      splashText: true,
-      discordButton: true,
-      dmenu: {
-        centered: true,
-        itemScore: false,
-        toplevelConfig: false,
-      },
-      keybinds: {
-        dmenu: ":",
-        widgetEditMode: "E",
-        widgetBag: "Space",
-        settings: ",",
-        gc: "G",
-      },
+    switchCoursesAndLinks: true,
+    icons: {
+      home: true,
+      mail: true,
+      notifications: true,
+      settings: false,
+    },
+    quicks: oldData.quicks,
+    performanceMode: oldData.enablePerfomanceMode,
+    splashText: true,
+    discordButton: true,
+    dmenu: {
+      centered: true,
+      itemScore: false,
+      toplevelConfig: false,
+    },
+    keybinds: {
+      dmenu: ":",
+      widgetEditMode: "E",
+      widgetBag: "Space",
+      settings: ",",
+      gc: "G",
     },
   };
 
@@ -162,7 +151,7 @@ async function migrate() {
   });
 
   if (settingsData.theme != null) {
-    await migrateV5();
+    await migrateV5(settingsData);
   }
 }
 
