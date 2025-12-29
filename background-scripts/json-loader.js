@@ -1,6 +1,6 @@
-export async function loadJSON(path) {
+export function loadJSON(path) {
   const url = chrome.runtime.getURL(path);
-  const response = await fetch(url);
+  const response = fetch(url);
   if (!response.ok) {
     throw new Error(`Failed to load JSON: ${path}`);
   }
@@ -8,14 +8,8 @@ export async function loadJSON(path) {
 }
 
 export async function initGlobals() {
-  const [
-    defaultPlantData,
-    fallbackColorData,
-  ] = await Promise.all([
-    loadJSON("background-scripts/data/default-plant-data.json"),
-    loadJSON("background-scripts/data/delijn-kleuren.json"),
-  ]);
-
+  const defaultPlantData = loadJSON("background-scripts/data/default-plant-data.json");
+  const fallbackColorData = loadJSON("background-scripts/data/delijn-kleuren.json");
 
   // Attach to globalThis so they're everywhere
   Object.assign(globalThis, {

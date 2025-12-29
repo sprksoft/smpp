@@ -2,10 +2,10 @@ import { fillObjectWithDefaults } from "./utils.js";
 import { loadJSON } from "./json-loader.js"
 import { getAllThemes } from "./data-background-script.js";
 
-let settingsTemplate = await loadJSON("background-scripts/data/settings-template.json");
+let settingsTemplate = loadJSON("background-scripts/data/settings-template.json");
 settingsTemplate.appearance.theme = Object.keys(getAllThemes());
 
-let defaultSettings = await loadJSON("background-scripts/data/default-settings.json");
+let defaultSettings = loadJSON("background-scripts/data/default-settings.json");
 
 export function getSettingsTemplate() {
   return settingsTemplate;
