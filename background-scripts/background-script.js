@@ -69,7 +69,7 @@ async function handleMessage(message, sendResponse) {
     }
     // Themes
     if (message.action === "getAllThemes") {
-      const allThemes = getAllThemes();
+      const allThemes = await getAllThemes();
       sendResponse(allThemes);
       console.log("All themes sent.");
     }

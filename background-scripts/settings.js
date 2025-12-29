@@ -1,28 +1,37 @@
+if (typeof browser === "undefined") {
+  var browser = chrome;
+}
+
 import { fillObjectWithDefaults } from "./utils.js";
 import { loadJSON } from "./json-loader.js";
 import { getAllThemes } from "./data-background-script.js";
 
-let settingsTemplate = loadJSON(
-  "background-scripts/data/settings-template.json"
-);
-settingsTemplate.appearance.theme = Object.keys(getAllThemes());
+let settingsTemplate;
+let defaultSettings;
 
-let defaultSettings = loadJSON("background-scripts/data/default-settings.json");
-
-export function getSettingsTemplate() {
+export async function getSettingsTemplate() {
+  if (!settingsTemplate) {
+    settingsTemplate = await loadJSON(
+      "background-scripts/data/settings-template.json"
+    );
+    settingsTemplate.appearance.theme = Object.keys((await getAllThemes()))
+  }
   return settingsTemplate;
 }
 
-export function getDefaultSettings() {
+export async function getDefaultSettings() {
+  if (!defaultSettings) {
+    defaultSettings = await loadJSON("background-scripts/data/default-settings.json");
+  }
   return defaultSettings;
 }
 
 export async function getSettingsData() {
   let data = (await browser.storage.local.get("settingsData")).settingsData;
-  data = fillObjectWithDefaults(data, getDefaultSettings());
+  data = fillObjectWithDefaults(data, await getDefaultSettings());
 
   let categorized = {};
-  const template = getSettingsTemplate();
+  const template = await getSettingsTemplate();
   for (const cat of Object.keys(template)) {
     for (const fieldName of Object.keys(template[cat])) {
       if (!categorized[cat]) {
