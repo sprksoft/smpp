@@ -5,7 +5,7 @@ if (typeof browser === "undefined") {
 import { fetchDelijnData } from "./api-background-script.js";
 import { loadJSON } from "./json-loader.js";
 
-const themes = await loadJSON("background-scripts/data/themes.json");
+const themes = loadJSON("background-scripts/data/themes.json");
 
 function getDefaultCustomThemeData() {
   return {

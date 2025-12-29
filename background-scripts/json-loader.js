@@ -1,10 +1,12 @@
 export function loadJSON(path) {
-  const url = chrome.runtime.getURL(path);
-  const response = fetch(url);
-  if (!response.ok) {
-    throw new Error(`Failed to load JSON: ${path}`);
-  }
-  return response.json();
+  (async () => {
+    const url = chrome.runtime.getURL(path);
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Failed to load JSON: ${path}`);
+    }
+    return await response.json();
+  })()
 }
 
 export async function initGlobals() {
