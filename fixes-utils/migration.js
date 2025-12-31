@@ -1,3 +1,16 @@
+async function migrate() {
+  await removeLegacyData(); // will reload the page if legacy data is present
+
+  let settingsData = await browser.runtime.sendMessage({
+    action: "getRawSettingsData",
+  });
+  if (settingsData.backgroundBlurAmount !== undefined) {
+    await migrateV5(settingsData);
+  } else {
+    console.log(settingsData.backgroundBlurAmount);
+  }
+}
+
 async function migrateV5(settingsData) {
   console.log("MIG V:\n Started migration with", settingsData);
   await migrateSettingsV5(settingsData);
@@ -88,9 +101,10 @@ async function migrateSettingsV5(oldData) {
       newWeatherOverlayType = "snow";
       break;
   }
+  console.log(oldData);
+  console.log(oldData.customName);
   let newSettingsData = {
-    username: oldData.customUserName,
-    useSMpfp: false,
+    username: oldData.customName,
     theme: oldData.theme,
     background: {
       blur: oldData.backgroundBlurAmount,
@@ -98,61 +112,31 @@ async function migrateSettingsV5(oldData) {
     weatherOverlay: {
       type: newWeatherOverlayType,
       amount: oldData.weatherOverlayAmount,
-      opacity: 1,
     },
     tabLogo: oldData.enableSMPPLogo ? "smpp" : "sm",
     news: oldData.showNews,
-    buttons: {
-      GO: false,
-      GC: true,
-      search: false,
-      quickMenu: false,
-    },
-    switchCoursesAndLinks: true,
-    icons: {
-      home: true,
-      mail: true,
-      notifications: true,
-      settings: false,
-    },
     quicks: oldData.quicks,
     performanceMode: oldData.enablePerfomanceMode,
-    splashText: true,
-    discordButton: true,
-    dmenu: {
-      centered: true,
-      itemScore: false,
-      toplevelConfig: false,
-    },
-    keybinds: {
-      dmenu: ":",
-      widgetEditMode: "E",
-      widgetBag: "Space",
-      settings: ",",
-      gc: "G",
-    },
   };
 
   await browser.runtime.sendMessage({
-    action: "setSettingsData",
+    action: "setRawSettingsData",
     data: newSettingsData,
   });
+
+  // Don't mind this, we don't talk about this, and we never remove it
+  const settings = await browser.runtime.sendMessage({
+    action: "getSettingsData",
+  });
+  await browser.runtime.sendMessage({
+    action: "setSettingsData",
+    data: settings,
+  });
+
   console.log(
     "MIG V: \n Succesfully migrated settings data to:",
     newSettingsData
   );
-}
-
-async function migrate() {
-  await removeLegacyData(); // will reload the page if legacy data is present
-
-  let settingsData = await browser.runtime.sendMessage({
-    action: "getSettingsData",
-  });
-
-  if (settingsData.theme != null) {
-    await migrateV5(settingsData);
-  }
 }
 
 async function removeLegacyData() {

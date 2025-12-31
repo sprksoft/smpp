@@ -13,7 +13,11 @@ import {
   setImage,
   getImage,
 } from "./data-background-script.js";
-import { setSettingsData, getSettingsData, getSettingsTemplate } from "./settings.js";
+import {
+  setSettingsData,
+  getSettingsData,
+  getSettingsTemplate,
+} from "./settings.js";
 
 import { fetchWeatherData, fetchDelijnData } from "./api-background-script.js";
 import { initGlobals } from "./json-loader.js";
@@ -48,7 +52,6 @@ function setByPath(object, path, value) {
   }
   ob[pathSplit[pathSplit.length - 1]] = value;
 }
-
 
 browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
   handleMessage(message, sendResponse);
@@ -147,9 +150,7 @@ async function handleMessage(message, sendResponse) {
     if (message.action === "getSetting") {
       const settingsData = await getSettingsData();
       sendResponse(getByPath(settingsData, message.name));
-      console.log(
-        "Setting " + message.name + "sent"
-      );
+      console.log("Setting " + message.name + "sent");
     }
     if (message.action === "setSettingsData") {
       await setSettingsData(message.data);
@@ -170,24 +171,24 @@ async function handleMessage(message, sendResponse) {
 
     // Widgets
     if (message.action === "getWidgetLayout") {
-      console.log("loading widget layout");
+      console.log("Loading widget layout...");
       const data = await browser.storage.local.get("widgets");
       sendResponse(data.widgets);
     }
     if (message.action === "setWidgetLayout") {
-      console.log("saving widget layout");
+      console.log("Saving widget layout...");
       await browser.storage.local.set({ widgets: message.layout });
       sendResponse({ success: true });
     }
     if (message.action === "getWidgetData") {
-      console.log("loading widget data");
+      console.log("Loading widget data...");
       const widgetId = "Game." + message.widget;
       let data = await browser.storage.local.get(widgetId);
       data = data[widgetId];
       sendResponse(data);
     }
     if (message.action === "setWidgetData") {
-      console.log("saving widget data");
+      console.log("Saving widget data...");
       let data = {};
       data["Game." + message.widget] = message.data;
       await browser.storage.local.set(data);
@@ -216,6 +217,20 @@ async function handleMessage(message, sendResponse) {
       // await browser.storage.local.remove("backgroundImage");
       sendResponse(backgroundImage);
       console.log("Background image sent.");
+    }
+    if (message.action === "getRawSettingsData") {
+      // for migration, probably shouldn't use this...
+      let rawSettingsData = (await browser.storage.local.get("settingsData"))
+        .settingsData;
+      sendResponse(rawSettingsData);
+      console.log("Raw settings data sent.");
+    }
+    if (message.action === "setRawSettingsData") {
+      // for migration, NEVER use this!!!
+      console.log("Saving raw settings data...");
+      console.log(message.data);
+      await browser.storage.local.set({ settingsData: message.data });
+      sendResponse({ success: true });
     }
   } catch (err) {
     console.error("Service worker error:", err);
