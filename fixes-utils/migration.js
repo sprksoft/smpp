@@ -4,9 +4,9 @@ async function migrate() {
   let settingsData = await browser.runtime.sendMessage({
     action: "getRawSettingsData",
   });
-  if (settingsData.backgroundBlurAmount !== undefined) {
-    await migrateV5(settingsData);
-  }
+  if (settingsData == undefined) return;
+  if (settingsData.backgroundBlurAmount == undefined) return;
+  await migrateV5(settingsData);
 }
 
 async function migrateV5(settingsData) {

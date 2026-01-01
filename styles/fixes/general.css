@@ -258,6 +258,10 @@ button.smscButton.blue.fileupload_submit_button,
   border-radius: 1rem !important;
 }
 
+.smscButton {
+  background: transparent !important;
+}
+
 .enableAnimations .smscButton,
 .enableAnimations .float-label__input,
 .enableAnimations .input-search,
@@ -655,6 +659,24 @@ div.stdReplyWrapper {
   color: var(--color-text) !important;
   margin: 10px !important;
   transition: none !important;
+}
+
+.cancel-button {
+  background: var(--color-base01) !important;
+  color: var(--color-red) !important;
+}
+
+/* What the fuck was this.... */
+.period__column
+  .period-input
+  .period-input__editable-period
+  .period-input__whole-day-checkbox
+  input[type="checkbox"] {
+  flex: 0 0 14px !important;
+  width: 14px !important;
+  height: 14px !important;
+  margin-right: 5px !important;
+  margin-left: -20px !important;
 }
 
 .enableAnimations .popupinput {
@@ -1813,7 +1835,7 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   position: absolute;
   z-index: 20;
   box-shadow: 0px 0px 150px black;
-  border-radius: 10px;
+  border-radius: 2rem;
   width: 80%;
   height: 80%;
   left: 10%;

@@ -229,18 +229,59 @@ hr.separator.todo-column__pinned__seperator {
   border-color: var(--color-accent) !important;
 }
 
-.twinbutton__button:hover,
 .header__horizdivider {
   background-color: var(--color-base01) !important;
-  transition: none !important;
+}
+
+.twinbutton__button:hover {
+  border-color: var(--color-accent) !important;
+}
+
+.twinbutton__button:hover {
+  background-color: var(--darken-background) !important;
+}
+
+.planner-header .header__borderdropdowncontainer {
+  background: var(--darken-background) !important;
+  backdrop-filter: blur(5px) !important;
+  border-radius: 1rem !important;
+  border: 2px solid transparent !important;
+}
+
+.planner-header .header__borderdropdowncontainer:hover {
+  border-color: var(--color-accent) !important;
 }
 
 .render-on-mode-change:hover {
   border-color: transparent !important;
 }
 
+.twinbutton {
+  background-color: var(--darken-background) !important;
+  backdrop-filter: blur(5px) !important;
+  border-radius: 1rem !important;
+}
+
 .twinbutton__button {
-  border-color: var(--color-base01) !important;
+  border-radius: 1rem !important;
+  border-color: transparent !important;
+  border-width: 2px !important;
+  margin: 0 !important;
+  font-size: 1.2rem !important;
+}
+
+.toggleCollapseBtn-edz3i {
+  border-radius: 1rem !important;
+}
+
+.toggleCollapseBtn-edz3i:hover,
+.toggleCollapseBtn-edz3i:focus {
+  background: var(--darken-background) !important;
+  backdrop-filter: blur(5px) !important;
+}
+
+.bubble.sidebar-plan-bubble .plan-tile-wrapper {
+  padding: 0 !important;
 }
 
 .datepicker .block .dates .date--selected {
@@ -368,8 +409,13 @@ hr.separator.todo-column__pinned__seperator {
 }
 
 .splitdetail-dialog .splitdetail__content__topbtns {
-  top: 5px !important;
-  right: 5px !important;
+  top: 0.5rem !important;
+  right: 0.5rem !important;
+  gap: 0.5rem !important;
+}
+
+.splitdetail-top-btn {
+  margin: 0 !important;
 }
 
 .splitdetail__content__topbtns {
@@ -605,10 +651,6 @@ button.icon-label-btn.js-icon-label-btn.icon-label-btn--linkbutton:hover {
   box-shadow: none !important;
 }
 
-.twinbutton__button {
-  transition: none !important;
-}
-
 .planner-element {
   border: 1px solid var(--color-base00) !important;
   border-radius: 10px !important;
@@ -831,9 +873,14 @@ h3.card-block__title.fluid-ui-heading.fluid-ui-heading--3 {
   gap: 6px !important;
 }
 
-.splitdetail-dialog .splitdetail__content__topbtns .splitdetail-top-btn {
+.splitdetail-top-btn {
   background-color: var(--color-base01) !important;
   border-radius: 0.75rem !important;
+}
+
+.splitdetail-top-btn > svg {
+  width: 1.2rem !important;
+  height: 1.2rem !important;
 }
 
 .header__tab__wrapper[active-tab] > .header__tab > .header__tab__name,
@@ -997,4 +1044,66 @@ h3.detail-description__title.title--3,
 
 .mainPage-Zrcmt.active-view--week .todoColumnContainer-KCyuk {
   border-left: none !important;
+}
+
+.sidebar-PJxvI {
+  background: transparent !important;
+}
+
+.button-mJfIq {
+  border-radius: 1rem !important;
+}
+
+.itemsWrapper-TTIS7 {
+  gap: 0.2rem !important;
+  padding-left: 0.2rem !important;
+  padding-top: 0.2rem !important;
+}
+
+.button-mJfIq:hover {
+  border-color: transparent !important;
+  background: var(--darken-background) !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+.spacer-w0RDl:before,
+.spacer-w0RDl:after {
+  background: transparent !important;
+}
+
+.optionWrapper-IEDUX {
+  border-width: 2px !important;
+}
+
+.optionWrapper-IEDUX[data-selected="false"] .button-mJfIq:focus {
+  border-color: transparent !important;
+  background: transparent !important;
+}
+.optionWrapper-IEDUX[data-selected="false"] .button-mJfIq:focus-visible {
+  border-color: var(--color-accent) !important;
+  background: var(--darken-background) !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+.optionWrapper-IEDUX[data-selected="false"] .button-mJfIq:active {
+  box-shadow: none !important;
+  background: var(--darken-background) !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+.detailLint-hCvSX {
+  background-color: transparent !important;
+  padding-top: 1rem !important;
+}
+
+.lintActionButton-xJeoX {
+  background-color: var(--color-base02) !important;
+}
+
+.lintActionButton-xJeoX:hover {
+  background-color: var(--color-base03) !important;
+}
+
+.js-splitdetail-timegrid-container .personal-profile-picture {
+  width: 4rem !important;
 }
