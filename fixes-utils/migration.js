@@ -6,8 +6,6 @@ async function migrate() {
   });
   if (settingsData.backgroundBlurAmount !== undefined) {
     await migrateV5(settingsData);
-  } else {
-    console.log(settingsData.backgroundBlurAmount);
   }
 }
 
