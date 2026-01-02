@@ -55,7 +55,7 @@ function setByPath(object, path, value) {
 
 browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
   handleMessage(message, sendResponse);
-  return true; // keeps channel open
+  return true;
 });
 
 async function handleMessage(message, sendResponse) {

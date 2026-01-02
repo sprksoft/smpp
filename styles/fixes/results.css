@@ -13,6 +13,7 @@
   margin-top: 4px !important;
   gap: 2rem !important;
   width: 120px !important;
+  min-width: 100px !important;
 }
 
 .wide-toolbar__item__icon {
@@ -439,6 +440,30 @@ span.evaluation-graphic__progress-ring__value {
   border-radius: 15px !important;
 }
 
+.results-goals-overview__content .listview__row.js-listview-row {
+  border-radius: 2rem !important;
+  backdrop-filter: blur(10px) !important;
+  background-color: var(--darken-background) !important;
+  margin-bottom: 1rem !important;
+}
+
+.goal-evaluations-details__row:not(:last-child) {
+  border-color: transparent !important;
+}
+
+.results-goals-overview__content .listview__row.js-listview-row:hover {
+  background-color: var(--darken-background) !important;
+}
+
+.filterlistview.leerplan [listview].listview .cell--prefix {
+  min-width: 12rem !important;
+}
+.goal-evaluations-details {
+  margin-bottom: 1rem;
+  margin-right: 1rem;
+  border-radius: 1rem;
+}
+
 .enableAnimations
   .listview__row.js-listview-row.leerplannen-overview__list__listview__row {
   transition-property: border-color, background-color;
@@ -606,4 +631,7 @@ button.button-ZR3rz.bp-c-combo-hover-plain-outline--300 {
 
 .table-page .table-page__header {
   gap: 0.5rem;
+}
+.filterlistview.leerplan [listview].listview .cell {
+  border-color: transparent !important;
 }

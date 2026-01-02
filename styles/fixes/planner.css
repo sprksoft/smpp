@@ -1048,10 +1048,13 @@ h3.detail-description__title.title--3,
 
 .sidebar-PJxvI {
   background: transparent !important;
+  border-color: transparent !important;
+  transition-property: width, background, border-color;
 }
 
 .button-mJfIq {
   border-radius: 1rem !important;
+  border-width: 2px !important;
 }
 
 .itemsWrapper-TTIS7 {
@@ -1061,9 +1064,15 @@ h3.detail-description__title.title--3,
 }
 
 .button-mJfIq:hover {
-  border-color: transparent !important;
+  border-color: var(--color-accent) !important;
   background: var(--darken-background) !important;
   backdrop-filter: blur(10px) !important;
+}
+
+.sidebar-PJxvI[data-collapsed="false"] {
+  border-right: 2px solid var(--color-base01) !important;
+  backdrop-filter: blur(10px) !important;
+  background: var(--darken-background) !important;
 }
 
 .spacer-w0RDl:before,

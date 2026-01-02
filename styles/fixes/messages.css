@@ -36,6 +36,16 @@
   margin-bottom: 6px !important;
 }
 
+#folders_parent_td #folders {
+  width: 250px !important;
+  margin-left: 20px;
+  padding-left: 10px;
+}
+
+.helper--height--mega {
+  height: 0.5rem !important;
+}
+
 .bubble.filter-todo-bubble
   div.filter-todo-form
   div.checkbox-group

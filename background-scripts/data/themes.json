@@ -131,7 +131,7 @@
     "--color-base02": "#2c3e55",
     "--color-base03": "#556880",
     "--color-homepage-sidebars-bg": "#02020585",
-    "--darken-background": "rgba(0,0,0,0.1)",
+    "--darken-background": "rgba(0, 19, 49, 0.4)",
     "--color-splashtext": "#030c18"
   },
   "vax": {

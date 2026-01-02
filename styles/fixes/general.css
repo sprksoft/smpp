@@ -1007,16 +1007,6 @@ ul.smsc-column-nav {
   transition: opacity 0.2s, border-color 0.2s !important;
 }
 
-#quickSettings .main-slider::-webkit-slider-thumb {
-  width: 1.2rem;
-  height: 1.2rem;
-}
-
-#quickSettings .main-slider::-moz-slider-thumb {
-  width: 1.2rem;
-  height: 1.2rem;
-}
-
 .main-slider::-webkit-slider-thumb {
   width: 1.6rem;
   height: 1.6rem;
@@ -1037,6 +1027,16 @@ ul.smsc-column-nav {
   cursor: pointer;
   transition: opacity 0.2s ease-in-out;
   appearance: none;
+}
+
+#quickSettings .main-slider::-webkit-slider-thumb {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+#quickSettings .main-slider::-moz-range-thumb {
+  width: 1.2rem;
+  height: 1.2rem;
 }
 
 .weather-overlay-selector-container {
