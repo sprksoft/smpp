@@ -8,8 +8,12 @@ export async function loadJSON(path) {
 }
 
 export async function initGlobals() {
-  const defaultPlantData = loadJSON("background-scripts/data/default-plant-data.json");
-  const fallbackColorData = loadJSON("background-scripts/data/delijn-kleuren.json");
+  const defaultPlantData = await loadJSON(
+    "background-scripts/data/default-plant-data.json"
+  );
+  const fallbackColorData = await loadJSON(
+    "background-scripts/data/delijn-kleuren.json"
+  );
 
   // Attach to globalThis so they're everywhere
   Object.assign(globalThis, {

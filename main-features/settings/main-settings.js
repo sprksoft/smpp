@@ -469,7 +469,7 @@ class SettingsWindow extends BaseWindow {
         applyAppearance(settings.appearance);
         if (
           JSON.stringify(settings.appearance.weatherOverlay) !=
-          JSON.stringify(previousSettings.appearance.weatherOverlay) &&
+            JSON.stringify(previousSettings.appearance.weatherOverlay) &&
           !liteMode
         ) {
           applyWeatherEffects(settings.appearance.weatherOverlay);
@@ -885,7 +885,7 @@ class SettingsWindow extends BaseWindow {
 
         let themesContainer = document.createElement("div");
         themesContainer.classList.add("settings-page-theme-container");
-        settingsOptions.appearance.theme.forEach((key) => {
+        settingsTemplate.appearance.theme.forEach((key) => {
           if (!themes[key]["display-name"].startsWith("__")) {
             // Don't include hidden themes
             let themeCard = document.createElement("label"); // use <label> to make radio clickable

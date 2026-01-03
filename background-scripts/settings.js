@@ -14,14 +14,16 @@ export async function getSettingsTemplate() {
     settingsTemplate = await loadJSON(
       "background-scripts/data/settings-template.json"
     );
-    settingsTemplate.appearance.theme = Object.keys((await getAllThemes()))
+    settingsTemplate.appearance.theme = Object.keys(await getAllThemes());
   }
   return settingsTemplate;
 }
 
 export async function getDefaultSettings() {
   if (!defaultSettings) {
-    defaultSettings = await loadJSON("background-scripts/data/default-settings.json");
+    defaultSettings = await loadJSON(
+      "background-scripts/data/default-settings.json"
+    );
   }
   return defaultSettings;
 }

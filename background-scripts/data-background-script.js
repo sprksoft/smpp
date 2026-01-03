@@ -18,7 +18,6 @@ function getDefaultCustomThemeData() {
   };
 }
 
-
 export async function getPlantAppData() {
   let data = await browser.storage.local.get("plantAppData");
   let plantAppData = data.plantAppData || defaultPlantData;
@@ -29,7 +28,6 @@ export async function getCustomThemeData() {
   let data = await browser.storage.local.get("customThemeData");
   return data.customThemeData || getDefaultCustomThemeData();
 }
-
 
 export async function getAllThemes() {
   if (!themes) {

@@ -61,7 +61,7 @@ function getThemeQueryString(queryVars = []) {
 
 function getHiddenThemes() {
   let hiddenThemes = {};
-  settingsOptions.appearance.theme.forEach((key) => {
+  settingsTemplate.appearance.theme.forEach((key) => {
     if (themes[key]["display-name"].startsWith("__")) {
       hiddenThemes[key] = themes[key];
     }

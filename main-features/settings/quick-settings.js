@@ -139,7 +139,7 @@ function createQuickSettingsHTML(parent) {
   const themeSelector = document.createElement("select");
   themeSelector.id = "theme-selector";
 
-  settingsOptions.appearance.theme.forEach((key) => {
+  settingsTemplate.appearance.theme.forEach((key) => {
     if (!themes[key]["display-name"].startsWith("__")) {
       // Don't include hidden themes
       const optionElement = document.createElement("option");

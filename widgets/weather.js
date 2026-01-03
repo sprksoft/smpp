@@ -59,7 +59,7 @@ class WeatherWidgetBase extends WidgetBase {
   async updateWeatherLocation(event) {
     let newLocation = event.target.value.trim();
     if (newLocation == "") {
-      event.target.value = this.settings.cache.lastLocation;
+      event.target.value = this.settings.currentLocation;
       return;
     }
     await this.setSetting("currentLocation", newLocation);

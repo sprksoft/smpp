@@ -70,6 +70,7 @@ async function handleMessage(message, sendResponse) {
       sendResponse({ success: true });
       console.log("Cleared browser storage");
     }
+
     // Themes
     if (message.action === "getAllThemes") {
       const allThemes = await getAllThemes();
@@ -89,6 +90,7 @@ async function handleMessage(message, sendResponse) {
         console.error(`Invalid theme requested, sent "error" theme`);
       }
     }
+
     // Custom theme
     if (message.action === "getCustomThemeData") {
       const customThemeData = await getCustomThemeData();
@@ -100,6 +102,7 @@ async function handleMessage(message, sendResponse) {
       sendResponse({ success: true });
       console.log("Custom theme data saved.");
     }
+
     // Images
     if (message.action === "setImage") {
       await setImage(message.id, message.data);
@@ -111,12 +114,14 @@ async function handleMessage(message, sendResponse) {
       sendResponse(image || null);
       console.log(`Image with id:${message.id} sent.`);
     }
+
     // Weather
     if (message.action === "fetchWeatherData") {
       const weatherData = await fetchWeatherData(message.location);
       sendResponse(weatherData);
       console.log("Weather data fetched and sent.");
     }
+
     // Delijn
     if (message.action === "fetchDelijnData") {
       const delijnData = await fetchDelijnData(message.url);
@@ -128,6 +133,7 @@ async function handleMessage(message, sendResponse) {
       sendResponse(delijnColorData);
       console.log("Delijn color data fetched and sent.");
     }
+
     // Plant
     if (message.action === "setPlantAppData") {
       await browser.storage.local.set({ plantAppData: message.data });
@@ -164,8 +170,8 @@ async function handleMessage(message, sendResponse) {
       console.log("Settings data sent.");
     }
     if (message.action === "getSettingsTemplate") {
-      const settingsOptions = await getSettingsTemplate();
-      sendResponse(getByPath(settingsOptions, message.name));
+      const settingsTemplate = await getSettingsTemplate();
+      sendResponse(getByPath(settingsTemplate, message.name));
       console.log("Settings options sent.");
     }
 
@@ -194,18 +200,19 @@ async function handleMessage(message, sendResponse) {
       await browser.storage.local.set(data);
       sendResponse({ success: true });
     }
+
     // Migration
     if (message.action === "getDelijnAppData") {
       // for migration, NEVER use this!!!
       const delijnAppData = await browser.storage.local.get("delijnAppData");
-      // await browser.storage.local.remove("delijnAppData");
+      await browser.storage.local.remove("delijnAppData");
       sendResponse(delijnAppData);
       console.log("delijnAppData sent.");
     }
     if (message.action === "getWeatherAppData") {
       // for migration, NEVER use this!!!
       const weatherAppData = await browser.storage.local.get("weatherAppData");
-      // await browser.storage.local.remove("weatherAppData");
+      await browser.storage.local.remove("weatherAppData");
       sendResponse(weatherAppData);
       console.log("weatherAppData sent.");
     }
@@ -214,7 +221,7 @@ async function handleMessage(message, sendResponse) {
       const backgroundImage = await browser.storage.local.get(
         "backgroundImage"
       );
-      // await browser.storage.local.remove("backgroundImage");
+      await browser.storage.local.remove("backgroundImage");
       sendResponse(backgroundImage);
       console.log("Background image sent.");
     }
