@@ -119,7 +119,7 @@
 }
 
 .side-panel__panel {
-  box-shadow: none !important;
+  box-shadow: -10px 0px 20px -10px var(--color-shadow);
 }
 
 .side-panel__panel {
@@ -152,6 +152,10 @@ button.reset-filters-btn.reset-filters-btn--hidden {
 .goal-evaluations-details__row {
   background: var(--darken-background) !important;
   backdrop-filter: blur(5px) !important;
+}
+
+button.goal-evaluations-details__row:active {
+  scale: 1 !important;
 }
 
 input.input.bootstrap__input.search-input {

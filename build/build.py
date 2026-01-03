@@ -144,7 +144,7 @@ def build_lite(excluded_lite_files_csv, original_dir, lite_build_dir, icon_sourc
         print(f"Error updating manifest: {e}")
 
     print("Updating icons...")
-    icons_dir = os.path.join(lite_build_dir, 'media/icons')
+    icons_dir = os.path.join(lite_build_dir, 'media/icons/smpp')
     os.makedirs(icons_dir, exist_ok=True)
 
     if os.path.exists(icon_source_dir):

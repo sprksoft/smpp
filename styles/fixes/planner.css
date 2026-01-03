@@ -816,8 +816,8 @@ h3.card-block__title.fluid-ui-heading.fluid-ui-heading--3 {
 }
 
 .side-panel__panel {
-  border-top-left-radius: 15px !important;
-  border-bottom-left-radius: 15px !important;
+  border-top-left-radius: 1rem !important;
+  border-bottom-left-radius: 1rem !important;
 }
 
 .mailingListItem__checkbox_EOMal.bp-c-combo-green--100 {

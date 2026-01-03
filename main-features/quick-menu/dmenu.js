@@ -30,7 +30,7 @@ class DMenu {
     itemList,
     endFunc = undefined,
     title = "dmenu:",
-    openerEl = undefined,
+    openerEl = undefined
   ) {
     this.endFunc = endFunc;
     this.openerEl = openerEl;
@@ -135,7 +135,7 @@ class DMenu {
       }
     }
 
-    let sortedItems = items.sort(function(a, b) {
+    let sortedItems = items.sort(function (a, b) {
       if (a.score < b.score) return 1;
       if (a.score > b.score) return -1;
       return 0;
@@ -211,7 +211,7 @@ class DMenu {
     }
 
     let klass = this;
-    row.addEventListener("click", function(e) {
+    row.addEventListener("click", function (e) {
       klass.#accept(row);
     });
     parent.appendChild(row);
@@ -221,6 +221,7 @@ class DMenu {
   #mkDmenu(itemList, title) {
     this.menuEl = document.createElement("div");
     this.menuEl.classList.add("dmenu");
+    if (randomChance(1 / 100)) this.menuEl.classList.add("jokeDmenu");
     if (dmenuConfig.centered) {
       this.menuEl.classList.add("dmenu-centered");
     }
@@ -268,7 +269,7 @@ function dmenu(
   itemList,
   endFunc = undefined,
   title = "dmenu:",
-  opener = undefined,
+  opener = undefined
 ) {
   if (active_dmenu !== null && active_dmenu.isOpen()) {
     active_dmenu.close();
@@ -283,13 +284,13 @@ function createQuickMenuButton() {
   quickMenuButton.id = "quick-menu-button";
   quickMenuButton.className = "topnav__btn";
   quickMenuButton.innerHTML = "Quick";
-  quickMenuButton.addEventListener("click", function() {
+  quickMenuButton.addEventListener("click", function () {
     do_qm(quickMenuButton);
   });
   return quickMenuButton;
 }
 
-document.addEventListener("click", function(e) {
+document.addEventListener("click", function (e) {
   if (active_dmenu == null || !active_dmenu.isOpen()) {
     return;
   }

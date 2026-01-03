@@ -154,7 +154,6 @@ async function createStaticGlobals() {
 
   quicks = await quick_load();
   liteMode = browser.runtime.getManifest().name.includes("Lite");
-  console.log("Static globals created");
 }
 
 async function applyAppearance(appearance) {

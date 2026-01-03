@@ -318,12 +318,16 @@ class SettingsWindow extends BaseWindow {
           settings.topNav.switchCoursesAndLinks;
 
         // Buttons
-        if (isGOSchool)
+        if (isGOSchool) {
           document.getElementById("settings-page-go-button").checked =
             settings.topNav.buttons.GO;
+        }
 
-        document.getElementById("settings-page-global-chat-button").checked =
-          settings.topNav.buttons.GC;
+        if (!liteMode) {
+          document.getElementById("settings-page-global-chat-button").checked =
+            settings.topNav.buttons.GC;
+        }
+
         document.getElementById("settings-page-search-button").checked =
           settings.topNav.buttons.search;
         document.getElementById("settings-page-quick-menu-button").checked =
@@ -361,9 +365,13 @@ class SettingsWindow extends BaseWindow {
         );
 
         // Snake
-        document.getElementById(
-          "settings-page-show-snake-grid-button"
-        ).checked = await getWidgetSetting("SnakeWidget.enableGrid");
+
+        if (!liteMode) {
+          document.getElementById(
+            "settings-page-show-snake-grid-button"
+          ).checked = await getWidgetSetting("SnakeWidget.enableGrid");
+        }
+
         break;
       }
 
@@ -390,8 +398,12 @@ class SettingsWindow extends BaseWindow {
           settings.other.keybinds.widgetBag;
         document.getElementById("settings-page-settings-keybinding").value =
           settings.other.keybinds.settings;
-        document.getElementById("settings-page-gc-keybinding").value =
-          settings.other.keybinds.gc;
+
+        if (!liteMode) {
+          document.getElementById("settings-page-gc-keybinding").value =
+            settings.other.keybinds.gc;
+        }
+
         break;
       }
 
@@ -487,9 +499,13 @@ class SettingsWindow extends BaseWindow {
           settings.topNav.buttons.GO = document.getElementById(
             "settings-page-go-button"
           ).checked;
-        settings.topNav.buttons.GC = document.getElementById(
-          "settings-page-global-chat-button"
-        ).checked;
+
+        if (!liteMode) {
+          settings.topNav.buttons.GC = document.getElementById(
+            "settings-page-global-chat-button"
+          ).checked;
+        }
+
         settings.topNav.buttons.search = document.getElementById(
           "settings-page-search-button"
         ).checked;
@@ -560,16 +576,17 @@ class SettingsWindow extends BaseWindow {
             )
           );
         }
-
-        if (
-          document.getElementById("settings-page-show-snake-grid-button")
-            .checked != (await getWidgetSetting("SnakeWidget.enableGrid"))
-        ) {
-          await setWidgetSetting(
-            "SnakeWidget.enableGrid",
+        if (!liteMode) {
+          if (
             document.getElementById("settings-page-show-snake-grid-button")
-              .checked
-          );
+              .checked != (await getWidgetSetting("SnakeWidget.enableGrid"))
+          ) {
+            await setWidgetSetting(
+              "SnakeWidget.enableGrid",
+              document.getElementById("settings-page-show-snake-grid-button")
+                .checked
+            );
+          }
         }
 
         break;
@@ -601,9 +618,12 @@ class SettingsWindow extends BaseWindow {
         settings.other.keybinds.settings = document.getElementById(
           "settings-page-settings-keybinding"
         ).value;
-        settings.other.keybinds.gc = document.getElementById(
-          "settings-page-gc-keybinding"
-        ).value;
+
+        if (!liteMode) {
+          settings.other.keybinds.gc = document.getElementById(
+            "settings-page-gc-keybinding"
+          ).value;
+        }
 
         applyOther(settings.other);
         break;
@@ -1201,17 +1221,19 @@ class SettingsWindow extends BaseWindow {
           )
         );
 
-        this.settingsPage.appendChild(createMainTitle("Games"));
-        this.settingsPage.appendChild(createSectionTitle("Snake"));
-        this.settingsPage.appendChild(
-          createDescription("Change configuration of Snake++")
-        );
-        this.settingsPage.appendChild(
-          createSettingsButtonWithLabel(
-            "settings-page-show-snake-grid-button",
-            "Grid"
-          )
-        );
+        if (!liteMode) {
+          this.settingsPage.appendChild(createMainTitle("Games"));
+          this.settingsPage.appendChild(createSectionTitle("Snake"));
+          this.settingsPage.appendChild(
+            createDescription("Change configuration of Snake++")
+          );
+          this.settingsPage.appendChild(
+            createSettingsButtonWithLabel(
+              "settings-page-show-snake-grid-button",
+              "Grid"
+            )
+          );
+        }
 
         break;
       case "other":
@@ -1280,9 +1302,11 @@ class SettingsWindow extends BaseWindow {
           createKeybindInput("settings-page-settings-keybinding", "Settings")
         );
 
-        this.settingsPage.appendChild(
-          createKeybindInput("settings-page-gc-keybinding", "Global Chat")
-        );
+        if (!liteMode) {
+          this.settingsPage.appendChild(
+            createKeybindInput("settings-page-gc-keybinding", "Global Chat")
+          );
+        }
 
         this.settingsPage.appendChild(createSectionTitle("Reset"));
         this.settingsPage.appendChild(

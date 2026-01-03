@@ -1,225 +1,225 @@
 html {
-    --dmenu-margin: 1px;
-    --dmenu-padding: 3px;
-    --dmenu-font-size: 1.5rem;
+  --dmenu-margin: 1px;
+  --dmenu-padding: 3px;
+  --dmenu-font-size: 1.5rem;
 }
 
 .dmenu-centered {
-    left: 10%;
-    right: 10%;
-    top: 10%;
-    bottom: 10%;
+  left: 10%;
+  right: 10%;
+  top: 10%;
+  bottom: 10%;
 }
 
 .dmenu-hidden {
-    display: none !important;
+  display: none !important;
 }
 
 .dmenu {
-    overflow: clip;
-    background: var(--color-base00);
-    border: var(--border-size) solid var(--color-accent);
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    font-size: var(--dmenu-font-size) !important;
-    z-index: 20;
-    box-shadow: 0px 0px 150px black;
-    border-radius: 10px !important;
+  overflow: clip;
+  background: var(--color-base00);
+  border: var(--border-size) solid var(--color-accent);
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  font-size: var(--dmenu-font-size) !important;
+  z-index: 20;
+  box-shadow: 0px 0px 150px black;
+  border-radius: 10px !important;
 }
 
 .enableAnimations .dmenu {
-    animation: dmenu 0.2s linear 0ms 1 !important;
+  animation: dmenu 0.2s linear 0ms 1 !important;
 }
 
-.enableAnimations .jokeDmenu .dmenu {
-    animation: dmenu_joke 30s linear 0ms 1 !important;
+.enableAnimations .jokeDmenu.dmenu {
+  animation: dmenu_joke 30s linear 0ms 1 !important;
 }
 
 @keyframes dmenu {
-    0% {
-        opacity: 0.1;
-        transform: translateY(25%) scale(0.9);
-    }
+  0% {
+    opacity: 0.1;
+    transform: translateY(25%) scale(0.9);
+  }
 
-    40% {
-        transform: translateY(-2%) scale(1);
-        opacity: 1;
-    }
+  40% {
+    transform: translateY(-2%) scale(1);
+    opacity: 1;
+  }
 
-    60% {
-        transform: translateY(0px);
-    }
+  60% {
+    transform: translateY(0px);
+  }
 }
 
 @keyframes dmenu_joke {
-    0% {
-        transform: translateY(50%) scale(1);
-    }
+  0% {
+    transform: translateY(50%) scale(1);
+  }
 
-    5% {
-        transform: translateY(-50%) scale(1);
-    }
+  5% {
+    transform: translateY(-50%) scale(1);
+  }
 
-    10% {
-        transform: scale(4) rotate3d(90deg, 5deg, 720deg);
-    }
+  10% {
+    transform: scale(4) rotate3d(90deg, 5deg, 720deg);
+  }
 
-    15% {
-        transform: scale(1) translateX(-500%);
-    }
+  15% {
+    transform: scale(1) translateX(-500%);
+  }
 
-    20% {
-        transform: translateX(500%);
-    }
+  20% {
+    transform: translateX(500%);
+  }
 
-    25% {
-        transform: translateY(0px);
-    }
+  25% {
+    transform: translateY(0px);
+  }
 
-    30% {
-        transform: translateY(50%) scale(2) rotate(1500deg);
-    }
+  30% {
+    transform: translateY(50%) scale(2) rotate(1500deg);
+  }
 
-    35% {
-        transform: translateY(-100%) scale(0.5);
-    }
+  35% {
+    transform: translateY(-100%) scale(0.5);
+  }
 
-    40% {
-        transform: translateX(50%) scale(1.1);
-    }
+  40% {
+    transform: translateX(50%) scale(1.1);
+  }
 
-    45% {
-        transform: rotate(180deg) scale3d(2, -2, -1);
-    }
+  45% {
+    transform: rotate(180deg) scale3d(2, -2, -1);
+  }
 
-    50% {
-        transform: rotateZ(10deg) translateY(-2%) scale(1) scale3d(1, 1, 1);
-    }
+  50% {
+    transform: rotateZ(10deg) translateY(-2%) scale(1) scale3d(1, 1, 1);
+  }
 
-    55% {
-        transform: translateY(100%) rotateZ(-10deg);
-    }
+  55% {
+    transform: translateY(100%) rotateZ(-10deg);
+  }
 
-    60% {
-        transform: translateY(-100%) rotate(15deg) rotateZ(0deg);
-    }
+  60% {
+    transform: translateY(-100%) rotate(15deg) rotateZ(0deg);
+  }
 
-    65% {
-        transform: translateY(50%) scale(1.1);
-    }
+  65% {
+    transform: translateY(50%) scale(1.1);
+  }
 
-    70% {
-        transform: translateX(-100%) scale(0.5);
-    }
+  70% {
+    transform: translateX(-100%) scale(0.5);
+  }
 
-    75% {
-        transform: scale3d(1, 2, 5) translateX(0px);
-    }
+  75% {
+    transform: scale3d(1, 2, 5) translateX(0px);
+  }
 
-    80% {
-        transform: translateY(50%) scale3d(1, 1, 1);
-    }
+  80% {
+    transform: translateY(50%) scale3d(1, 1, 1);
+  }
 
-    85% {
-        transform: translateY(0%) scale(10);
-    }
+  85% {
+    transform: translateY(0%) scale(10);
+  }
 
-    90% {
-        transform: translateY(-500%);
-    }
+  90% {
+    transform: translateY(-500%);
+  }
 
-    95% {
-        transform: translateY(500%);
-    }
+  95% {
+    transform: translateY(500%);
+  }
 
-    100% {
-        transform: translateY(0%);
-    }
+  100% {
+    transform: translateY(0%);
+  }
 }
 
 .dmenu-top {
-    display: flex;
-    flex-direction: row;
-    border-bottom: var(--border-size) solid var(--color-base02);
+  display: flex;
+  flex-direction: row;
+  border-bottom: var(--border-size) solid var(--color-base02);
 }
 
 .dmenu-input {
-    border: none !important;
-    background: var(--color-base01) !important;
-    color: var(--color-text) !important;
-    flex-grow: 1;
-    padding: var(--dmenu-padding) !important;
-    font-size: var(--dmenu-font-size) !important;
-    border-top-right-radius: 3px !important;
+  border: none !important;
+  background: var(--color-base01) !important;
+  color: var(--color-text) !important;
+  flex-grow: 1;
+  padding: var(--dmenu-padding) !important;
+  font-size: var(--dmenu-font-size) !important;
+  border-top-right-radius: 3px !important;
 }
 
 .dmenu-input:focus {
-    outline-width: 0;
-    outline: none;
+  outline-width: 0;
+  outline: none;
 }
 
 .dmenu-title {
-    background: var(--color-base01);
-    color: var(--color-accent);
-    line-height: inherit;
-    padding-left: var(--dmenu-padding);
-    padding: 3px !important;
-    margin-left: 0px !important;
-    border-right: var(--border-size) solid var(--color-base02);
-    border-top-left-radius: 3px !important;
+  background: var(--color-base01);
+  color: var(--color-accent);
+  line-height: inherit;
+  padding-left: var(--dmenu-padding);
+  padding: 3px !important;
+  margin-left: 0px !important;
+  border-right: var(--border-size) solid var(--color-base02);
+  border-top-left-radius: 3px !important;
 }
 
 .dmenu-title:hover {
-    cursor: auto !important;
+  cursor: auto !important;
 }
 
 .dmenu-itemlist {
-    overflow-y: auto;
+  overflow-y: auto;
 }
 
 .dmenu .hidden {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 .dmenu-row {
-    padding: var(--dmenu-padding);
-    background: var(--color-base00);
-    color: var(--color-text) !important;
-    display: flex;
-    flex-direction: row;
-    border: none;
+  padding: var(--dmenu-padding);
+  background: var(--color-base00);
+  color: var(--color-text) !important;
+  display: flex;
+  flex-direction: row;
+  border: none;
 }
 
 .dmenu-row:nth-child(even) {
-    background: var(--color-base01);
+  background: var(--color-base01);
 }
 
 .dmenu-row:hover {
-    background: var(--color-base02);
-    cursor: pointer;
+  background: var(--color-base02);
+  cursor: pointer;
 }
 
 .dmenu-content {
-    margin-right: 1em;
-    display: inline !important;
+  margin-right: 1em;
+  display: inline !important;
 }
 
 .dmenu-meta {
-    flex-grow: 10;
-    color: var(--color-base03);
+  flex-grow: 10;
+  color: var(--color-base03);
 }
 
 .dmenu-score {
-    margin-right: 0.5rem;
-    color: var(--color-accent);
+  margin-right: 0.5rem;
+  color: var(--color-accent);
 }
 
 .dmenu-selected .dmenu-score {
-    color: var(--color-base01) !important;
+  color: var(--color-base01) !important;
 }
 
 .dmenu-selected {
-    background: var(--color-accent) !important;
-    color: var(--color-base01) !important;
+  background: var(--color-accent) !important;
+  color: var(--color-base01) !important;
 }
