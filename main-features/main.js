@@ -356,7 +356,7 @@ function setExtensionDetectionCookie() {
   // zet cookies zodat andere extensions kunnen zien dat smpp actief is (e.g. smartschool tweaks - https://chromewebstore.google.com/detail/smartschool-tweaks/nkapofkpgbkekifieeadkdnfnkbjpkpk)
   const version = browser.runtime.getManifest().version;
   const expires = new Date();
-  expires.setDate(expires.getDate() + 365); // cookie gaat Weg na 1 jaar
+  expires.setDate(expires.getDate() + 365); // cookie gaat weg na 1 jaar
   
   const expireString = expires.toUTCString();
   // ik weet dat direct toegang tot document.cookie niet goed is maar, ik weet niet hoe anders ik dit moet doen, shit code
