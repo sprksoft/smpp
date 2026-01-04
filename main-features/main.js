@@ -352,6 +352,20 @@ function updateTopButtons(data) {
   }
 }
 
+function setExtensionDetectionCookie() {
+  // zet cookies zodat andere extensions kunnen zien dat smpp actief is (e.g. smartschool tweaks - https://chromewebstore.google.com/detail/smartschool-tweaks/nkapofkpgbkekifieeadkdnfnkbjpkpk)
+  const version = browser.runtime.getManifest().version;
+  const expires = new Date();
+  expires.setDate(expires.getDate() + 365); // cookie gaat Weg na 1 jaar
+  
+  const expireString = expires.toUTCString();
+  // ik weet dat direct toegang tot document.cookie niet goed is maar, ik weet niet hoe anders ik dit moet doen, shit code
+  document.cookie = `smpp_extension_active=true;expires=${expireString};path=/;SameSite=Lax`;
+  document.cookie = `smpp_version=${version};expires=${expireString};path=/;SameSite=Lax`;
+  
+  console.log(`SMPP cookies gezet (v${version})`);
+}
+
 async function main() {
   if (document.body.classList.contains("smpp")) {
     console.error("SMPP is 2x geladen");
@@ -359,6 +373,7 @@ async function main() {
   }
 
   document.body.classList.add("smpp"); // For modding
+  setExtensionDetectionCookie(); // andere extensions kunnen nu checken of smpp actief is (zodat ze niet met smpp modding conflict hebben)
 
   await migrate();
 
