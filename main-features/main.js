@@ -359,7 +359,7 @@ function setExtensionDetectionCookie() {
   expires.setDate(expires.getDate() + 365); // cookie gaat weg na 1 jaar
   
   const expireString = expires.toUTCString();
-  // ik weet dat direct toegang tot document.cookie niet goed is maar, ik weet niet hoe anders ik dit moet doen, shit code
+  // ik weet dat direct toegang tot document.cookie niet goed is, maar ik weet niet hoe anders ik dit moet doen, shit code
   document.cookie = `smpp_extension_active=true;expires=${expireString};path=/;SameSite=Lax`;
   document.cookie = `smpp_version=${version};expires=${expireString};path=/;SameSite=Lax`;
   
