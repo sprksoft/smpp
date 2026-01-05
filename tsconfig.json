@@ -28,17 +28,17 @@
     // "noImplicitOverride": true,
     // "noUnusedLocals": true,
     // "noUnusedParameters": true,
-    // "noFallthroughCasesInSwitch": true,
-    // "noPropertyAccessFromIndexSignature": true,
+    "noFallthroughCasesInSwitch": true,
+    "noPropertyAccessFromIndexSignature": true,
 
     // Recommended Options
     "strict": true,
     "jsx": "react-jsx",
     "verbatimModuleSyntax": true,
-    "isolatedModules": true,
-    "noUncheckedSideEffectImports": true,
+    "isolatedModules": false,
+    "noUncheckedSideEffectImports": false,
     "moduleDetection": "force",
-    "skipLibCheck": true,
+    "skipLibCheck": false,
     "noEmit": true
   }
 }

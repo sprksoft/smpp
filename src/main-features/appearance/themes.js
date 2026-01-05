@@ -1,3 +1,5 @@
+import { settingsTemplate } from "../main.js"
+
 let currentThemeName;
 let currentTheme;
 let customTheme;
@@ -43,16 +45,14 @@ function getThemeQueryString(queryVars = []) {
   if (currentThemeName != "custom") {
     queryVars.forEach((queryVar) => {
       themeVar = currentTheme["--" + queryVar];
-      queryString += `&${queryVar}=${
-        themeVar.startsWith("#") ? themeVar.substring(1) : themeVar
-      }`;
+      queryString += `&${queryVar}=${themeVar.startsWith("#") ? themeVar.substring(1) : themeVar
+        }`;
     });
   } else {
     queryVars.forEach((queryVar) => {
       themeVar = customTheme[queryVar.replace("-", "_")];
-      queryString += `&${queryVar}=${
-        themeVar.startsWith("#") ? themeVar.substring(1) : themeVar
-      }`;
+      queryString += `&${queryVar}=${themeVar.startsWith("#") ? themeVar.substring(1) : themeVar
+        }`;
     });
   }
   queryString = queryString.substring(1);

@@ -1,8 +1,10 @@
+import { randomChance } from "../../fixes-utils/utils";
+
 let active_dmenu = null;
 let dmenuConfig = null;
 
 // Called by apply
-async function reloadDMenuConfig() {
+export async function reloadDMenuConfig() {
   dmenuConfig = await browser.runtime.sendMessage({
     action: "getSetting",
     name: "other.dmenu",
@@ -10,7 +12,7 @@ async function reloadDMenuConfig() {
 }
 
 // Load the config if it wasn't already loaded
-async function loadDMenuConfig() {
+export async function loadDMenuConfig() {
   if (!dmenuConfig) {
     await reloadDMenuConfig();
   }
@@ -135,7 +137,7 @@ class DMenu {
       }
     }
 
-    let sortedItems = items.sort(function (a, b) {
+    let sortedItems = items.sort(function(a, b) {
       if (a.score < b.score) return 1;
       if (a.score > b.score) return -1;
       return 0;
@@ -211,7 +213,7 @@ class DMenu {
     }
 
     let klass = this;
-    row.addEventListener("click", function (e) {
+    row.addEventListener("click", function(e) {
       klass.#accept(row);
     });
     parent.appendChild(row);
@@ -284,13 +286,13 @@ function createQuickMenuButton() {
   quickMenuButton.id = "quick-menu-button";
   quickMenuButton.className = "topnav__btn";
   quickMenuButton.innerHTML = "Quick";
-  quickMenuButton.addEventListener("click", function () {
+  quickMenuButton.addEventListener("click", function() {
     do_qm(quickMenuButton);
   });
   return quickMenuButton;
 }
 
-document.addEventListener("click", function (e) {
+document.addEventListener("click", function(e) {
   if (active_dmenu == null || !active_dmenu.isOpen()) {
     return;
   }

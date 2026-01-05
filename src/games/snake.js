@@ -1,3 +1,6 @@
+import { GameBase } from "./games.js"
+import { registerWidget } from "../widgets/widgets.js"
+
 class Point {
   x;
   y;

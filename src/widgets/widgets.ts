@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 const PANNELIP_MARGIN_PX = 20;
 
 let widgetSystemCreated = false;
@@ -14,7 +16,7 @@ let widgetBag;
 let widgetBagHandle;
 let doneButton;
 
-function registerWidget(widget) {
+export function registerWidget(widget) {
   widgets.push(widget);
 }
 
@@ -32,7 +34,7 @@ class WidgetDragInfo {
   }
 }
 
-class WidgetBase {
+export class WidgetBase {
   element;
   isActive;
   #content;
@@ -331,7 +333,7 @@ class WidgetBase {
 
   // (Required): Gets called when the content element of the widget needs to be
   // created (return html element). (Don't do slow tasks in here)
-  async createContent() {}
+  async createContent() { }
   // Gets called when the preview element needs to be created (return html
   // element) NOTE: preview and content never exist at the same time
   async createPreview() {
@@ -340,11 +342,11 @@ class WidgetBase {
 
   // Gets called when the settings of the widget change.
   // Use this to update the widget content based on the new settings. (settings object is always valid based on the value returned by defaultSettings())
-  async onSettingsChange() {}
+  async onSettingsChange() { }
 
-  async onThemeChange() {}
+  async onThemeChange() { }
 
-  async onRemove() {}
+  async onRemove() { }
 }
 
 class ErrorWidget extends WidgetBase {
@@ -565,7 +567,7 @@ async function widgetSystemNotifyThemeChange() {
   }
 }
 
-async function createWidgetSystem() {
+export async function createWidgetSystem() {
   let container = document.getElementById("container");
   if (!container) {
     return false;
@@ -909,7 +911,7 @@ function initWidgetEditMode() {
   });
 }
 
-function createWidgetEditModeButton() {
+export function createWidgetEditModeButton() {
   let btn = document.createElement("button");
   btn.classList.add("topnav__btn");
   btn.classList.add("smpp-button");
@@ -922,3 +924,5 @@ function createWidgetEditModeButton() {
 
   return btn;
 }
+
+

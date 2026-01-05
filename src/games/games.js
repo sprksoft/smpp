@@ -1,3 +1,5 @@
+import { WidgetBase } from "../widgets/widgets.js"
+
 const GAME_OPTION_TYPE_SLIDER = 0;
 
 class GameOption {
@@ -20,7 +22,7 @@ class GameOption {
   }
 }
 
-class GameBase extends WidgetBase {
+export class GameBase extends WidgetBase {
   canvas;
   menu;
   score;

@@ -1,4 +1,4 @@
-async function migrate() {
+export async function migrate() {
   await removeLegacyData(); // will reload the page if legacy data is present
 
   let settingsData = await browser.runtime.sendMessage({

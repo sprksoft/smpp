@@ -40,7 +40,7 @@ function remove_quick(name) {
   }
 }
 
-async function quick_load() {
+export async function quickLoad() {
   const quicks = await browser.runtime.sendMessage({
     action: "getSetting",
     name: "other.quicks",

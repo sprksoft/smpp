@@ -1,3 +1,5 @@
+import { originalUsername } from './main.js'
+
 async function displayUsernameTopNav(name) {
   let originalNameElement = document.querySelector(
     ".js-btn-profile .hlp-vert-box span"

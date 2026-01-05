@@ -1,4 +1,4 @@
-const discordSvg = `<div class="bigdiscordbutton">
+export const discordSvg = `<div class="bigdiscordbutton">
 <a target="_blank" href="https://discord.gg/qCHZYepDqZ" class="discordbutton"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="30px" height="30px" viewBox="0 -28.5 256 256" version="1.1" preserveAspectRatio="xMidYMid">
 <g>
     <path d="M216.856339,16.5966031 C200.285002,8.84328665 182.566144,3.2084988 164.041564,0 C161.766523,4.11318106 159.108624,9.64549908 157.276099,14.0464379 C137.583995,11.0849896 118.072967,11.0849896 98.7430163,14.0464379 C96.9108417,9.64549908 94.1925838,4.11318106 91.8971895,0 C73.3526068,3.2084988 55.6133949,8.86399117 39.0420583,16.6376612 C5.61752293,67.146514 -3.4433191,116.400813 1.08711069,164.955721 C23.2560196,181.510915 44.7403634,191.567697 65.8621325,198.148576 C71.0772151,190.971126 75.7283628,183.341335 79.7352139,175.300261 C72.104019,172.400575 64.7949724,168.822202 57.8887866,164.667963 C59.7209612,163.310589 61.5131304,161.891452 63.2445898,160.431257 C105.36741,180.133187 151.134928,180.133187 192.754523,160.431257 C194.506336,161.891452 196.298154,163.310589 198.110326,164.667963 C191.183787,168.842556 183.854737,172.420929 176.223542,175.320965 C180.230393,183.341335 184.861538,190.991831 190.096624,198.16893 C211.238746,191.588051 232.743023,181.531619 254.911949,164.955721 C260.227747,108.668201 245.831087,59.8662432 216.856339,16.5966031 Z M85.4738752,135.09489 C72.8290281,135.09489 62.4592217,123.290155 62.4592217,108.914901 C62.4592217,94.5396472 72.607595,82.7145587 85.4738752,82.7145587 C98.3405064,82.7145587 108.709962,94.5189427 108.488529,108.914901 C108.508531,123.290155 98.3405064,135.09489 85.4738752,135.09489 Z M170.525237,135.09489 C157.88039,135.09489 147.510584,123.290155 147.510584,108.914901 C147.510584,94.5396472 157.658606,82.7145587 170.525237,82.7145587 C183.391518,82.7145587 193.761324,94.5189427 193.539891,108.914901 C193.539891,123.290155 183.391518,135.09489 170.525237,135.09489 Z" class="st1" fill-rule="nonzero">
@@ -7,18 +7,18 @@ const discordSvg = `<div class="bigdiscordbutton">
 </g>
 </svg></a>
 </div>`;
-const homeiconSvg = `
+export const homeiconSvg = `
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px"class=text-color-fill height="18px" width="18px" viewBox="0 0 256 256" enable-background="new 0 0 256 256" xml:space="preserve">
 <metadata> Svg Vector Icons : http://www.onlinewebfonts.com/icon</metadata>
 <g><g><path  d="M241.4,104.9l-96-89.5c-4.9-5.5-11.9-8.7-19.3-8.7c-7.3,0-14.3,3.1-19,8.4l-92.5,89.8c-4.6,4.7-5.9,11.6-3.4,17.7c2.6,6.1,8.5,9.9,15.1,9.9h8.3v91.3c0,14.2,11.3,25.7,25.5,25.7h39.7c5.2,0,9.7-4.2,9.7-9.3v-60.7c0-2.6,1.7-4.9,4.3-4.9h28c2.6,0,4.6,2.3,4.6,4.9V240c0,5.2,4.3,9.3,9.5,9.3h39.7c14.2,0,25.8-11.5,25.8-25.7v-91.3h8.3c6.6,0,12.5-3.8,15.1-9.9C247.3,116.5,246,109.6,241.4,104.9L241.4,104.9z"/></g></g>
 </svg>`;
-const notfisSvg = `
+export const notfisSvg = `
 <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24" class=text-color-fill>span.js-badge-msg.topnav__badge
 <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C9.9695 2 8.34903 2.72578 7.24822 3.98079C6.16397 5.21692 5.66667 6.87057 5.66667 8.6V10.3333C5.66667 10.5774 5.55716 10.8709 5.27166 11.2498C4.99798 11.6129 4.6427 11.9534 4.25022 12.3296L4.18372 12.3934C3.49997 13.0494 3 13.9996 3 15.1333C3 16.67 4.19824 18 5.77778 18H18.2222C19.8018 18 21 16.67 21 15.1333C21 13.9996 20.5 13.0494 19.8163 12.3934L19.7498 12.3296L19.7497 12.3296C19.3573 11.9534 19.002 11.6129 18.7283 11.2498C18.4428 10.8709 18.3333 10.5774 18.3333 10.3333V8.6C18.3333 6.87057 17.836 5.21692 16.7518 3.98079C15.651 2.72578 14.0305 2 12 2Z"/>
 <path fill-rule="evenodd" clip-rule="evenodd" d="M9.44303 19.1694C9.90172 18.8618 10.5229 18.9843 10.8305 19.443C10.9299 19.5912 11.0843 19.731 11.2919 19.8345C11.4998 19.938 11.7444 19.9964 12 19.9964C12.2556 19.9964 12.5002 19.938 12.7081 19.8345C12.9157 19.731 13.0701 19.5912 13.1695 19.443C13.4771 18.9843 14.0983 18.8618 14.557 19.1694C15.0157 19.4771 15.1381 20.0983 14.8305 20.557C14.5234 21.0149 14.0944 21.3783 13.6 21.6246C13.1058 21.8708 12.5546 21.9964 12 21.9964C11.4454 21.9964 10.8942 21.8708 10.4 21.6246C9.90564 21.3783 9.47658 21.0149 9.16946 20.557C8.86186 20.0983 8.98434 19.4771 9.44303 19.1694Z"/>
 </svg>
 `;
-const messageSvg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:svg="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 6.3500002 6.3500002" class=text-color-fill id="svg1976" version="1.1">
+export const messageSvg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:svg="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 6.3500002 6.3500002" class=text-color-fill id="svg1976" version="1.1">
 
 <defs id="defs1970"/>
 
@@ -29,7 +29,7 @@ const messageSvg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://cre
 </g>
 
 </svg>`;
-const plantThePlantSvg = `<svg xmlns="http://www.w3.org/2000/svg" id="plant_the_plant_svg" viewBox="0 0 50.16 37.5">
+export const plantThePlantSvg = `<svg xmlns="http://www.w3.org/2000/svg" id="plant_the_plant_svg" viewBox="0 0 50.16 37.5">
         <defs>
           <!-- Clip-path for the rising effect -->
           <clipPath id="riseClip">
@@ -61,8 +61,8 @@ const plantThePlantSvg = `<svg xmlns="http://www.w3.org/2000/svg" id="plant_the_
           </g>
         </g>
       </svg>`;
-const performanceModeSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24" id="lightning" class="icon glyph"><path d="M18,11.74a1,1,0,0,0-.52-.63L14.09,9.43,15,3.14a1,1,0,0,0-1.78-.75l-7,9a1,1,0,0,0-.17.87,1,1,0,0,0,.59.67l4.27,1.71L10,20.86a1,1,0,0,0,.63,1.07A.92.92,0,0,0,11,22a1,1,0,0,0,.83-.45l6-9A1,1,0,0,0,18,11.74Z"/></svg>`;
-const colorpickersHTML = `
+export const performanceModeSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24" id="lightning" class="icon glyph"><path d="M18,11.74a1,1,0,0,0-.52-.63L14.09,9.43,15,3.14a1,1,0,0,0-1.78-.75l-7,9a1,1,0,0,0-.17.87,1,1,0,0,0,.59.67l4.27,1.71L10,20.86a1,1,0,0,0,.63,1.07A.92.92,0,0,0,11,22a1,1,0,0,0,.83-.45l6-9A1,1,0,0,0,18,11.74Z"/></svg>`;
+export const colorpickersHTML = `
 <div class="color-picker-container">
 <input type="color" class="color-pickersmpp" id="colorPicker1">
 <span class="color-label">base0</span>
@@ -88,7 +88,7 @@ const colorpickersHTML = `
 <span class="color-label">text</span>
 </div>`;
 // TEMP BEFORE THEME UPDATE!!!!
-const colorpickersHTMLV2 = `
+export const colorpickersHTMLV2 = `
 <div class="color-picker-container">
 <input type="color" class="color-pickersmpp" id="settings-colorPicker1">
 <span class="color-label">base0</span>
@@ -114,7 +114,7 @@ const colorpickersHTMLV2 = `
 <span class="color-label">text</span>
 </div>`;
 
-const temperatureSvg = `<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" style="height: 100%;" data-name="Laag 2" viewBox="0 0 13 26">
+export const temperatureSvg = `<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" style="height: 100%;" data-name="Laag 2" viewBox="0 0 13 26">
 <g id="Laag_1-2" data-name="Laag 1">
   <g>
   <path class="st1" d="M10.57,14.75V5.29c0-2.44-1.99-4.43-4.43-4.43S1.72,2.85,1.72,5.29v9.46c-1.11,1.15-1.72,2.66-1.72,4.26.01,3.38,2.76,6.13,6.14,6.13,1.62,0,3.15-.62,4.31-1.75,2.4-2.36,2.45-6.22.12-8.64ZM8.91,22.09c-.83.74-1.9,1.12-3,1.05-1.1-.06-2.12-.55-2.85-1.37-.74-.83-1.12-1.89-1.05-2.99.06-1.11.55-2.13,1.37-2.86l.33-.3V5.29c0-1.34,1.09-2.43,2.43-2.44,1.34.01,2.43,1.1,2.43,2.44v10.33l.33.29c.12.11.23.22.33.33.74.83,1.11,1.9,1.05,3-.06,1.11-.55,2.12-1.37,2.85Z"></path>
@@ -122,7 +122,7 @@ const temperatureSvg = `<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" styl
   </g>
 </g>
 </svg>`;
-const feelsLikeSvg = `<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 24.28 25.14">
+export const feelsLikeSvg = `<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 24.28 25.14">
 <g id="Laag_1-2" data-name="Laag 1">
   <g>
     <path class="st1" d="M21.57,7.72h-5.24c-1.47.02-2.64,1.24-2.61,2.71v5.14c0,.97.76,1.78,1.71,1.85v5.87c0,1.02.84,1.85,1.86,1.85h3.43c1.02,0,1.85-.83,1.85-1.86v-5.86c.96-.07,1.71-.88,1.71-1.85v-5.24c-.02-1.47-1.25-2.64-2.71-2.61ZM15.71,15.43v-5.09c.01-.18.09-.34.23-.46.13-.12.3-.18.48-.17h5.24c.18.01.34.09.46.23.12.13.18.3.17.49v5h-1.72v7.71h-3.14v-7.71h-1.72Z"></path>
@@ -132,7 +132,7 @@ const feelsLikeSvg = `<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-n
   </g>
 </g>
 </svg>`;
-const humiditySvg = `<svg xmlns="http://www.w3.org/2000/svg" id="layer1" style="margin: 0% 11% 0% 11%" data-name="Laag 2" viewBox="0 0 29.83 24.41">
+export const humiditySvg = `<svg xmlns="http://www.w3.org/2000/svg" id="layer1" style="margin: 0% 11% 0% 11%" data-name="Laag 2" viewBox="0 0 29.83 24.41">
 <g id="Laag_1-2" data-name="Laag 1">
   <g>
     <path class="st1" d="M18.99.35c2.5-.54,5.6-.51,9.81.54.73.18,1.17.92.99,1.64s-.92,1.17-1.64.98c-3.92-.98-6.58-.95-8.58-.52-2,.43-3.44,1.29-4.96,2.22l-.11.07c-1.47.9-3.09,1.89-5.24,2.25-2.23.37-4.86.04-8.4-1.37-.7-.28-1.03-1.06-.76-1.76.28-.69,1.07-1.03,1.76-.75,3.24,1.29,5.36,1.47,6.94,1.21,1.61-.27,2.84-1.01,4.39-1.95,1.53-.93,3.31-2.02,5.8-2.56Z"></path>
@@ -143,7 +143,7 @@ const humiditySvg = `<svg xmlns="http://www.w3.org/2000/svg" id="layer1" style="
 </g>
 </svg>
 `;
-const windSvg = `<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 39.94 24.5">
+export const windSvg = `<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 39.94 24.5">
 				<g id="Laag_1-2" data-name="Laag 1">
 					<g>
 						<path class="st1" d="M38.09,12.21c-.96.78-2.07,1.18-3.33,1.18-1.29-.01-2.57-.01-3.86-.01h-14.61c-.54,0-.97-.29-1.13-.78-.17-.51.01-1.07.43-1.33.21-.13.49-.21.74-.21,4.41-.01,8.83-.01,13.24-.01h5.15c1.44,0,2.56-.91,2.85-2.32.27-1.38-.75-2.89-2.15-3.18-.2-.04-.4-.06-.6-.06-1.51,0-2.73,1.21-2.77,2.76-.02.71-.49,1.18-1.17,1.18h-.14c-.57-.06-1.01-.53-1.02-1.1-.03-1.26.37-2.39,1.17-3.34.99-1.16,2.42-1.83,3.93-1.83,1.95,0,3.72,1.09,4.6,2.86,1.05,2.09.49,4.7-1.33,6.19Z"></path>
@@ -152,12 +152,12 @@ const windSvg = `<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="
 					</g>
 				</g>
 			</svg>`;
-const waterPlantSvg = `<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" height=40px viewBox="0 0 34.74 41.95">
+export const waterPlantSvg = `<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" height=40px viewBox="0 0 34.74 41.95">
     <g id="Laag_1-2" data-name="Laag 1">
       <path d="M21.83,3.45c-.81,3.5-2.37,6.69-4.13,9.62l-.62-.98c-2.16-3.41-4.6-7.26-5.56-11.35-.08-.36-.36-.63-.71-.71-.52-.12-1.03.2-1.15.71-.95,4.12-3.39,7.96-5.56,11.37-.56.89-1.11,1.77-1.71,2.77C.81,17.52-.2,20.35.03,23.06c.2,2.34,1.3,4.55,3.72,6.42,1.04.8,2.23,1.4,3.5,1.76.6.18,1.23.3,1.85.38,2.22,14.49,25.64,13.73,25.64-2.27,0-6.6-10.3-14.73-12.91-25.91ZM8.94,29.36v.31h0c-.39-.05-.77-.14-1.15-.25-1.03-.3-2-.78-2.85-1.43-1.95-1.5-2.83-3.24-2.99-5.07-.19-2.27.71-4.73,2.08-7.05.46-.77,1.07-1.73,1.71-2.73,1.72-2.72,3.62-5.7,4.88-8.96,1.25,3.24,3.14,6.22,4.87,8.94.39.61.77,1.21,1.11,1.77-3.64,5.66-7.64,10.35-7.64,14.48ZM21.45,37.15c-.37.54-1.07.72-1.65.44-1.82-1.03-3.3-2.56-4.27-4.4-.89-1.78-1.42-3.72-1.56-5.71-.03-.72.53-1.33,1.26-1.37.67-.03,1.26.46,1.35,1.13.11,1.64.54,3.25,1.27,4.73.74,1.41,1.87,2.58,3.26,3.37.6.41.75,1.22.34,1.82Z"/>
     </g>
   </svg>`;
-const searchButtonSvg = `<svg class=delijnSearchIcon width="25" height="25" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+export const searchButtonSvg = `<svg class=delijnSearchIcon width="25" height="25" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg"
     aria-hidden="true">
     <path d="M16.0073 9.00364C16.0073 12.8716 12.8716 16.0073 9.00364 16.0073C5.13564 16.0073 2 12.8716 2 9.00364C2
     5.13564 5.13564 2 9.00364 2C12.8716 2 16.0073 5.13564 16.0073 9.00364Z" class="text-stroke" stroke-width="4"></path>
@@ -165,7 +165,7 @@ const searchButtonSvg = `<svg class=delijnSearchIcon width="25" height="25" view
         class="st5"></rect>
 </svg>`;
 
-const fileInputIconSvg = `<svg width="30px" height="30px" viewBox="0 0 24.00 24.00" fill="none" xmlns="http://www.w3.org/2000/svg">
+export const fileInputIconSvg = `<svg width="30px" height="30px" viewBox="0 0 24.00 24.00" fill="none" xmlns="http://www.w3.org/2000/svg">
     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
     <g id="SVGRepo_iconCarrier">
@@ -175,16 +175,16 @@ const fileInputIconSvg = `<svg width="30px" height="30px" viewBox="0 0 24.00 24.
     </g>
 </svg>`;
 
-const editIconSvg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px"class=edit_button height="18px" width="18px" viewBox="0 0 24 24"  xml:space="preserve">
+export const editIconSvg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px"class=edit_button height="18px" width="18px" viewBox="0 0 24 24"  xml:space="preserve">
 <metadata> Svg Vector Icons : http://www.onlinewebfonts.com/icon</metadata>
 <g><g><path xmlns="http://www.w3.org/2000/svg" class=st1 stroke-linecap:round;stroke-linejoin:round;-inkscape-stroke:none" d="m 19.792969,1.2089844 c -0.773047,0 -1.546203,0.290977 -2.134766,0.8730469 -6.69e-4,6.478e-4 -0.0013,0.0013 -0.002,0.00195 L 8.4119915,11.389897 c -0.5321594,0.536333 -1.9587661,2.040145 -2.9061791,5.334709 -0.1062793,0.369579 -0.1650107,0.570623 -0.2207032,0.85994 -0.046789,0.243065 -0.1295961,0.724628 0.2070338,1.013107 0.3909805,0.335056 1.0440816,0.133455 1.3847656,0.03125 C 7.387553,18.47571 7.9834625,18.287442 8.5897993,18.031247 11.103423,16.969168 12.593117,15.70399 12.985931,15.188066 l 8.93985,-8.8697066 C 23.11495,5.1606353 23.105005,3.2461646 21.927734,2.0820313 21.339171,1.4999614 20.566016,1.2089844 19.792969,1.2089844 Z" id="path5" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="scccssssscccs"/><path xmlns="http://www.w3.org/2000/svg" d="M 10.273212,2.8358152 H 5.5822718 c -1.3827164,0 -2.0740869,0 -2.6022128,0.2661137 C 2.5154954,3.3360099 2.1378007,3.709514 1.9011058,4.1689107 1.6320062,4.6911889 1.6320062,5.3748762 1.6320062,6.7422506 V 18.461557 c 0,1.367374 0,2.051122 0.2690996,2.573363 0.2366949,0.459374 0.6143896,0.832926 1.0789532,1.066946 0.5281259,0.266126 1.2194964,0.266126 2.6022128,0.266126 H 17.433068 c 1.382716,0 2.074137,0 2.602237,-0.266126 0.464527,-0.23402 0.842271,-0.607572 1.078917,-1.066946 0.269112,-0.522241 0.269112,-1.205989 0.269112,-2.573363 v -5.249273"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="stroke-width:3.25435;stroke-dasharray:none" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="csccssccssccsccc"/> </g></g>
 </svg>`;
 
-const noLocationSvg = `<svg xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="0 0 24 24" stroke="var(--color-red)" fill="var(--color-base01)">
+export const noLocationSvg = `<svg xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="0 0 24 24" stroke="var(--color-red)" fill="var(--color-base01)">
 <path d="M10 8L14 12M14 8L10 12M19 10.2C19 14.1764 15.5 17.4 12 21C8.5 17.4 5 14.1764 5 10.2C5 6.22355 8.13401 3 12 3C15.866 3 19 6.22355 19 10.2Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>`;
 
-const lijnIconSvg = `<svg id="Laag_2" data-name="Laag 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 379.84 373.13">
+export const lijnIconSvg = `<svg id="Laag_2" data-name="Laag 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 379.84 373.13">
   <defs>
 <style>
   .base-gray {
@@ -233,7 +233,7 @@ const lijnIconSvg = `<svg id="Laag_2" data-name="Laag 2" xmlns="http://www.w3.or
   </g>
 </svg>`;
 
-const assignmentsSvg = `<svg class="assignments-icon-160" viewBox="0 0 500 500" style=" mix-blend-mode: normal !important;" fill="none" xmlns="http://www.w3.org/2000/svg">
+export const assignmentsSvg = `<svg class="assignments-icon-160" viewBox="0 0 500 500" style=" mix-blend-mode: normal !important;" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect width="500" fill="#1E1E1E"/>
 <rect width="500" height="500" rx="54" fill="#ddddea"/>
 <rect x="31" y="265" width="436" height="200" rx="37" fill="#B2B2BE"/>
@@ -246,23 +246,23 @@ const assignmentsSvg = `<svg class="assignments-icon-160" viewBox="0 0 500 500" 
 <rect x="210" y="148" width="171" height="30" rx="15" fill="#7C7C87"/>
 </svg>`;
 
-const exitIconSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="var(--color-red)" stroke-width="2">
+export const exitIconSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="var(--color-red)" stroke-width="2">
 <g xmlns="http://www.w3.org/2000/svg">
 <path d="M7 7.00006L17 17.0001M7 17.0001L17 7.00006" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
 </g>
 </svg>`;
 
-const doneSvg = `<svg xmlns="http://www.w3.org/2000/svg" class="done-icon" viewBox="0 0 193 169" fill="none">
+export const doneSvg = `<svg xmlns="http://www.w3.org/2000/svg" class="done-icon" viewBox="0 0 193 169" fill="none">
 <rect xmlns="http://www.w3.org/2000/svg" x="108.281" y="146.148" width="45" height="116.069" rx="22.5" transform="rotate(131 108.281 146.148)"/>
 <rect xmlns="http://www.w3.org/2000/svg" x="159.568" y="-8" width="45" height="198" rx="22.5" transform="rotate(35 159.568 -8)"/>
 </svg>`;
 
-const contractIconSVG = `
+export const contractIconSVG = `
     <svg viewBox="0 0 16 16" class="contract-icon" stroke="currentColor" fill="none" stroke-width="1">
       <path fill-rule="evenodd" d="M.172 15.828a.5.5 0 0 0 .707 0l4.096-4.096V14.5a.5.5 0 1 0 1 0v-3.975a.5.5 0 0 0-.5-.5H1.5a.5.5 0 0 0 0 1h2.768L.172 15.121a.5.5 0 0 0 0 .707zM15.828.172a.5.5 0 0 0-.707 0l-4.096 4.096V1.5a.5.5 0 1 0-1 0v3.975a.5.5 0 0 0 .5.5H14.5a.5.5 0 0 0 0-1h-2.768L15.828.879a.5.5 0 0 0 0-.707z"/>
     </svg>`;
 
-const expandIconSVG = `
+export const expandIconSVG = `
     <svg viewBox="0 0 24 24" class="expand-icon" stroke="currentColor" fill="none" stroke-width="2.6">
       <path d="M3,14v6a1,1,0,0,0,1,1h6"/>
       <line x1="10" y1="14" x2="3.29" y2="20.71"/>
@@ -270,11 +270,11 @@ const expandIconSVG = `
       <line x1="20.71" y1="3.29" x2="14" y2="10"/>
     </svg>`;
 
-const closeIconSVG = `
+export const closeIconSVG = `
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
       <path d="M7 7L17 17M7 17L17 7" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>`;
-const gcIconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="3009 50 450 450" class="st1">
+export const gcIconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="3009 50 450 450" class="st1">
   <g>
     <g id="Laag_1">
       <path d="M3436.9,158.5c0-3.6-.4-7-.9-10.8-2.6-20.6-12.9-39.8-29-53.9-16.3-14.2-37-22.1-58.4-22.1h-.3c-56,.2-112.9.2-168,.1-29.2,0-58.3,0-87.5,0-3.9,0-8.1.3-12.9.9-20.5,2.7-39.5,12.9-53.6,28.9-14.2,16.1-22,36.6-21.9,57.6,0,31.4,0,63.4,0,94.3,0,26.1,0,52.2,0,78.3,0,3.8.3,7.6.9,11.5,5.4,33.9,24.4,57.5,56.3,70,6.6,2.6,13.5,3.9,20.7,5.3,2.3.5,4.7.9,7.1,1.4v1.7c0,5.2,0,10.3,0,15.5,0,13.6-.1,27.8.3,41.6.2,5.9,2.4,12.3,5.8,16.7,4.2,5.5,10.2,8.8,16.7,9.2.5,0,1,0,1.5,0,6.7,0,13.2-2.9,18.6-8.3,26.5-26.4,50.9-50.9,74.5-74.7,1.9-1.9,3.5-2.5,6.2-2.5h0c51.1.1,93.2.1,132.5,0,6.7,0,13.5-.7,20.4-2,40.4-7.5,70.9-44.1,71-85.1,0-59.1,0-119.9,0-173.5h0ZM3203.6,344.5c-16.5,14.1-40.7,21.6-70,21.6s-51.3-6.3-66.1-15.2l-2.8-1.7,12.1-43,4.7,2.7c11.8,6.8,32.5,14,54.8,14s38.4-10.1,38.4-27-10.1-23.9-38.8-34c-44.9-15.6-66.8-38.7-66.8-70.6s8.6-37.8,24.1-50.4c15.9-12.9,37.9-19.8,63.7-19.8s34.1,2.6,48.1,7.7c1.2.4,2.4.9,3.9,1.5h.1c0,0,3.5,1.6,3.5,1.6l30.3,13.2,18.8-43.2,39.7,17.2-18.8,43.2,41.4,18-17.2,39.7-41.4-18-18.8,43.2-39.7-17.2,18.8-43.2-19.7-8.6v.5c-.1,0-4.8-2.3-4.8-2.3-9.4-4.8-24.9-10.4-45.3-10.4s-34.5,12.5-34.5,23.3,9.1,21.2,42.3,33.7c43.7,16,63.2,38.2,63.2,71.9s-8.3,38.7-23.4,51.6h0ZM3375.4,308.6c-3.8,11.3-8.8,22.3-14.8,32.6l-2,3.4-2-.9-34.7-15.1-19,43.7-40-17.4,19-43.7-41.9-18.2,17.4-40,41.9,18.2,19-43.7,40,17.4-19,43.7,37.4,16.2-1.3,3.7h0Z"/>
@@ -283,15 +283,15 @@ const gcIconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="18px" height="
     </g>
   </g>
 </svg>`;
-const settingsIconSvg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="st1" width="20px" height="20px" viewBox="0 0 32 32" enable-background="new 0 0 32 32" id="Glyph" version="1.1" xml:space="preserve"><path d="M27.526,18.036L27,17.732c-0.626-0.361-1-1.009-1-1.732s0.374-1.371,1-1.732l0.526-0.304  c1.436-0.83,1.927-2.662,1.098-4.098l-1-1.732c-0.827-1.433-2.666-1.925-4.098-1.098L23,7.339c-0.626,0.362-1.375,0.362-2,0  c-0.626-0.362-1-1.009-1-1.732V5c0-1.654-1.346-3-3-3h-2c-1.654,0-3,1.346-3,3v0.608c0,0.723-0.374,1.37-1,1.732  c-0.626,0.361-1.374,0.362-2,0L8.474,7.036C7.042,6.209,5.203,6.701,4.375,8.134l-1,1.732c-0.829,1.436-0.338,3.269,1.098,4.098  L5,14.268C5.626,14.629,6,15.277,6,16s-0.374,1.371-1,1.732l-0.526,0.304c-1.436,0.829-1.927,2.662-1.098,4.098l1,1.732  c0.828,1.433,2.667,1.925,4.098,1.098L9,24.661c0.626-0.363,1.374-0.361,2,0c0.626,0.362,1,1.009,1,1.732V27c0,1.654,1.346,3,3,3h2  c1.654,0,3-1.346,3-3v-0.608c0-0.723,0.374-1.37,1-1.732c0.625-0.361,1.374-0.362,2,0l0.526,0.304  c1.432,0.826,3.271,0.334,4.098-1.098l1-1.732C29.453,20.698,28.962,18.865,27.526,18.036z M16,21c-2.757,0-5-2.243-5-5s2.243-5,5-5  s5,2.243,5,5S18.757,21,16,21z" /></svg>`;
-const loadingSpinnerSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="loading-spinner">
+export const settingsIconSvg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="st1" width="20px" height="20px" viewBox="0 0 32 32" enable-background="new 0 0 32 32" id="Glyph" version="1.1" xml:space="preserve"><path d="M27.526,18.036L27,17.732c-0.626-0.361-1-1.009-1-1.732s0.374-1.371,1-1.732l0.526-0.304  c1.436-0.83,1.927-2.662,1.098-4.098l-1-1.732c-0.827-1.433-2.666-1.925-4.098-1.098L23,7.339c-0.626,0.362-1.375,0.362-2,0  c-0.626-0.362-1-1.009-1-1.732V5c0-1.654-1.346-3-3-3h-2c-1.654,0-3,1.346-3,3v0.608c0,0.723-0.374,1.37-1,1.732  c-0.626,0.361-1.374,0.362-2,0L8.474,7.036C7.042,6.209,5.203,6.701,4.375,8.134l-1,1.732c-0.829,1.436-0.338,3.269,1.098,4.098  L5,14.268C5.626,14.629,6,15.277,6,16s-0.374,1.371-1,1.732l-0.526,0.304c-1.436,0.829-1.927,2.662-1.098,4.098l1,1.732  c0.828,1.433,2.667,1.925,4.098,1.098L9,24.661c0.626-0.363,1.374-0.361,2,0c0.626,0.362,1,1.009,1,1.732V27c0,1.654,1.346,3,3,3h2  c1.654,0,3-1.346,3-3v-0.608c0-0.723,0.374-1.37,1-1.732c0.625-0.361,1.374-0.362,2,0l0.526,0.304  c1.432,0.826,3.271,0.334,4.098-1.098l1-1.732C29.453,20.698,28.962,18.865,27.526,18.036z M16,21c-2.757,0-5-2.243-5-5s2.243-5,5-5  s5,2.243,5,5S18.757,21,16,21z" /></svg>`;
+export const loadingSpinnerSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="loading-spinner">
   <path d="M21 12a9 9 0 1 1-6.219-8.56"></path>
 </svg>`;
-const threeDotsSvg = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+export const threeDotsSvg = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M4 9.5C5.38071 9.5 6.5 10.6193 6.5 12C6.5 13.3807 5.38071 14.5 4 14.5C2.61929 14.5 1.5 13.3807 1.5 12C1.5 10.6193 2.61929 9.5 4 9.5Z" />
 <path d="M12 9.5C13.3807 9.5 14.5 10.6193 14.5 12C14.5 13.3807 13.3807 14.5 12 14.5C10.6193 14.5 9.5 13.3807 9.5 12C9.5 10.6193 10.6193 9.5 12 9.5Z" />
 <path d="M22.5 12C22.5 10.6193 21.3807 9.5 20 9.5C18.6193 9.5 17.5 10.6193 17.5 12C17.5 13.3807 18.6193 14.5 20 14.5C21.3807 14.5 22.5 13.3807 22.5 12Z" />
 </svg>`;
-const trashSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+export const trashSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
 <path d="M18 6L17.1991 18.0129C17.129 19.065 17.0939 19.5911 16.8667 19.99C16.6666 20.3412 16.3648 20.6235 16.0011 20.7998C15.588 21 15.0607 21 14.0062 21H9.99377C8.93927 21 8.41202 21 7.99889 20.7998C7.63517 20.6235 7.33339 20.3412 7.13332 19.99C6.90607 19.5911 6.871 19.065 6.80086 18.0129L6 6M4 6H20M16 6L15.7294 5.18807C15.4671 4.40125 15.3359 4.00784 15.0927 3.71698C14.8779 3.46013 14.6021 3.26132 14.2905 3.13878C13.9376 3 13.523 3 12.6936 3H11.3064C10.477 3 10.0624 3 9.70951 3.13878C9.39792 3.26132 9.12208 3.46013 8.90729 3.71698C8.66405 4.00784 8.53292 4.40125 8.27064 5.18807L8 6M14 10V17M10 10V17" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>`;

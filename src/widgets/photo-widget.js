@@ -1,3 +1,5 @@
+import { WidgetBase, registerWidget } from './widgets.js';
+
 class PhotoWidget extends WidgetBase {
   constructor() {
     super();

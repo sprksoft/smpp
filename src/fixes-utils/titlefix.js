@@ -108,7 +108,7 @@ function title_prefix() {
   }
 }
 
-function titleFix() {
+export function titleFix() {
   let prepend = title_prefix();
   if (prepend != undefined) {
     let title = document.querySelector("head > title");

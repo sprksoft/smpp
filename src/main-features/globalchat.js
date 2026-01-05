@@ -1,3 +1,5 @@
+import { BaseWindow } from "./modules/windows.js"
+
 const GC_DOMAINS = {
   main: "https://gc.smartschoolplusplus.com",
   beta: "https://gcbeta.smartschoolplusplus.com",
@@ -43,7 +45,7 @@ async function openGlobalChat(event, beta = false) {
   gcWindow.show(event);
 }
 
-function createGC() {
+export function createGC() {
   const GlobalChatOpenButton = document.createElement("button");
   GlobalChatOpenButton.title =
     "Global chat (chat met iedereen die de extensie gebruikt)";

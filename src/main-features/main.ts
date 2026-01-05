@@ -1,3 +1,47 @@
+// @ts-nocheck
+import { getExtensionImage, randomChance } from "../fixes-utils/utils.js";
+import "../fixes-utils/json.js";
+import "../fixes-utils/login.js";
+import { migrate } from "../fixes-utils/migration.js";
+import "../fixes-utils/scraper.js";
+import { titleFix } from "../fixes-utils/titlefix.js";
+import "../fixes-utils/results.js";
+import { createWidgetSystem, createWidgetEditModeButton } from "../widgets/widgets.js"
+import "../main-features/modules/windows.js";
+import "../main-features/modules/images.js";
+import { createGC } from "../main-features/globalchat.js";
+import "../main-features/profile.js";
+import "../main-features/keybinds.js";
+import "../main-features/appearance/background-image.js";
+import "../main-features/appearance/themes.js";
+import "../main-features/appearance/ui.js";
+import "../main-features/appearance/weather-effects.js";
+import { createQuickSettingsButton, createQuickSettings } from "../main-features/settings/quick-settings.js";
+import { createSettingsWindow } from "../main-features/settings/main-settings.js";
+import "../main-features/quick-menu/dmenu.js";
+import "../main-features/quick-menu/config.js";
+import { quickLoad } from "../main-features/quick-menu/quick.js";
+import "../games/games.js";
+import "../games/breakout.js";
+import "../games/flappy.js";
+import "../games/snake.js";
+import "../games/pong.js";
+import "../games/tetris.js";
+import "../main-features/main.js";
+
+// Widgets
+import "../widgets/tutorial-widget.js";
+import "../widgets/assignments.js";
+import "../widgets/delijn.js";
+import "../widgets/plant.js";
+import "../widgets/planner.js";
+import "../widgets/weather.js";
+import "../widgets/clock.js";
+
+export var originalUsername: string;
+export var settingsTemplate;
+export var themes;
+
 //java script komt hier je weet wel
 //ok - ldev
 //oh ok, ik dacht in general.css - Jdev
@@ -31,7 +75,7 @@ function changeFont() {
 function fixCoursesSearch() {
   document
     .getElementById("courseSearch")
-    ?.addEventListener("keydown", function (event) {
+    ?.addEventListener("keydown", function(event) {
       if (event.key === "Enter") {
         event.preventDefault();
 
@@ -135,25 +179,25 @@ async function createStaticGlobals() {
     document.querySelector(".js-btn-profile .hlp-vert-box span")?.innerText ||
     "Mr Unknown";
 
-  isGOSchool = document.body.classList.contains("go");
-  isFirefox =
+  var isGOSchool = document.body.classList.contains("go");
+  var isFirefox =
     typeof navigator.userAgent === "string" &&
     /firefox/i.test(navigator.userAgent);
   if (document.querySelector('img[alt="Profiel afbeelding"]')) {
-    originalPfpUrl = document.querySelector(
+    var originalPfpUrl = document.querySelector(
       'img[alt="Profiel afbeelding"]'
     ).src;
   } else {
-    originalPfpUrl = getPfpLink(originalUsername);
+    var originalPfpUrl = getPfpLink(originalUsername);
   }
 
-  profilePictureObserver = null;
-  onHomePage = document.getElementById("container") != null;
+  var profilePictureObserver = null;
+  var onHomePage = document.getElementById("container") != null;
 
-  onLoginPage = document.querySelector(".login-app") != null;
+  var onLoginPage = document.querySelector(".login-app") != null;
 
-  quicks = await quick_load();
-  liteMode = browser.runtime.getManifest().name.includes("Lite");
+  var quicks = await quickLoad();
+  var liteMode = browser.runtime.getManifest().name.includes("Lite");
 }
 
 async function applyAppearance(appearance) {

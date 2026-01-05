@@ -1,3 +1,6 @@
+import { GameBase } from "./games.js"
+import { registerWidget } from "../widgets/widgets.js"
+
 const BALL_RADIUS = 4;
 const PADDLE_WIDTH = 50;
 const PADDLE_HEIGHT = 5;

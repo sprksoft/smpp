@@ -1,3 +1,5 @@
+import { WidgetBase, registerWidget } from './widgets.js';
+
 const pixelsPerMinute = 1.46;
 
 async function fetchPlannerData(date, user) {

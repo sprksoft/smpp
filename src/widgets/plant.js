@@ -1,3 +1,5 @@
+import { WidgetBase, registerWidget } from './widgets.js';
+
 const plantVersion = 2;
 class PlantWidget extends WidgetBase {
   async createContent() {

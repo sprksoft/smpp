@@ -1,4 +1,6 @@
-class BaseWindow {
+import { contractIconSVG, expandIconSVG, closeIconSVG } from "../../fixes-utils/json"
+
+export class BaseWindow {
   #keydownHandler;
   constructor(id, hidden = true) {
     this.id = id;
@@ -47,7 +49,7 @@ class BaseWindow {
 
   // Called every time the window is opened
   // Override this in subclass
-  onOpened() {}
+  onOpened() { }
 
   show(triggerEvent = null) {
     if (!this.hidden) return;

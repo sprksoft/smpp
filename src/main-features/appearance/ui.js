@@ -1,4 +1,4 @@
-function createButton(id = "") {
+export function createButton(id = "") {
   let outerSwitch = document.createElement("label");
   outerSwitch.classList.add("switch");
   let innerButton = document.createElement("input");
@@ -13,7 +13,7 @@ function createButton(id = "") {
   return outerSwitch;
 }
 
-function createButtonWithLabel(id = "", text) {
+export function createButtonWithLabel(id = "", text) {
   let container = document.createElement("label");
   container.classList.add("smpp-input-with-label");
   container.htmlFor = id;
@@ -37,7 +37,7 @@ function createButtonWithLabel(id = "", text) {
   return container;
 }
 
-function createTextInput(id = "", placeholder = "") {
+export function createTextInput(id = "", placeholder = "") {
   let textInput = document.createElement("input");
   textInput.id = id;
   textInput.type = "text";

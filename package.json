@@ -12,10 +12,10 @@
   },
   "license": "ISC",
   "author": "",
-  "type": "commonjs",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "build": "esbuild src/index.ts --bundle --sourcemap=inline --minify --external:*.png --external:*.svg --external:\"\"  --outfile=./extension/index.js"
+    "build": "esbuild src/index.ts --bundle --sourcemap=inline --external:*.png --external:*.svg --external:\"\"  --outfile=./extension/index.js && tsc"
   },
   "devDependencies": {
     "esbuild": "^0.27.2",

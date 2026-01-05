@@ -1,4 +1,10 @@
+import { themes, settingsTemplate } from "../main.js"
+import { ImageSelector } from "../modules/images.js";
+import { performanceModeSvg } from "../../fixes-utils/json.js"
+
 let quickSettingsWindowIsHidden = true;
+
+var quickSettingsBackgroundImageSelector;
 
 async function storeQuickSettings() {
   const oldData = await browser.runtime.sendMessage({
@@ -23,10 +29,9 @@ async function storeQuickSettings() {
 
   document.getElementById(
     "performance-mode-info"
-  ).innerHTML = `Toggle performance mode ${
-    data.other.performanceMode
-      ? "<span class='green-underline'>Enabled</span>"
-      : "<span class='red-underline'>Disabled</span>"
+  ).innerHTML = `Toggle performance mode ${data.other.performanceMode
+    ? "<span class='green-underline'>Enabled</span>"
+    : "<span class='red-underline'>Disabled</span>"
   }`;
 
   if (data.appearance.theme == "custom") {
@@ -74,10 +79,9 @@ async function loadQuickSettings() {
 
   document.getElementById(
     "performance-mode-info"
-  ).innerHTML = `Toggle performance mode ${
-    data.other.performanceMode
-      ? "<span class='green-underline'>Enabled</span>"
-      : "<span class='red-underline'>Disabled</span>"
+  ).innerHTML = `Toggle performance mode ${data.other.performanceMode
+    ? "<span class='green-underline'>Enabled</span>"
+    : "<span class='red-underline'>Disabled</span>"
   }`;
 
   if (data.appearance.theme == "custom") {
@@ -207,7 +211,7 @@ function createQuickSettingsHTML(parent) {
   return parent;
 }
 
-function createQuickSettings() {
+export function createQuickSettings() {
   let quickSettingsWindow = document.createElement("div");
   quickSettingsWindow.id = "quickSettings";
   quickSettingsWindow.addEventListener("change", storeQuickSettings);
@@ -252,7 +256,7 @@ function createQuickSettings() {
   closeQuickSettings();
 }
 
-function createQuickSettingsButton() {
+export function createQuickSettingsButton() {
   let quickSettingsButtonWrapper = document.createElement("div");
   quickSettingsButtonWrapper.id = "quickSettingsButtonWrapper";
   quickSettingsButtonWrapper.classList.add("smpp-button");

@@ -1,4 +1,6 @@
+//@ts-nocheck
 const DEBUG = false;
+
 
 /// Get a value inside an object by path
 //
@@ -6,7 +8,7 @@ const DEBUG = false;
 /// const ob = { sub1: { sub2: "hello" } };
 /// getByPath(ob, "sub1.sub2") === "hello"
 ///```
-function getByPath(object, path) {
+export function getByPath(object, path) {
   if (!path) {
     return object;
   }
@@ -21,7 +23,7 @@ function getByPath(object, path) {
 }
 
 /// set a value inside an object by path
-function setByPath(object, path, value) {
+export function setByPath(object, path, value) {
   let ob = object;
   const pathSplit = path.split(".");
   for (let i = 0; i < pathSplit.length - 1; i++) {
@@ -34,7 +36,7 @@ function setByPath(object, path, value) {
 }
 
 /// Fills missing fields in an object with values from a default object.
-function fillObjectWithDefaults(object, defaults) {
+export function fillObjectWithDefaults(object, defaults) {
   if (!object) {
     object = {};
   }
@@ -52,7 +54,7 @@ function fillObjectWithDefaults(object, defaults) {
   return object;
 }
 
-function openURL(url, new_window = false) {
+export function openURL(url, new_window = false) {
   if (new_window) {
     let a = document.createElement("a");
     a.href = url;
@@ -64,11 +66,11 @@ function openURL(url, new_window = false) {
   window.location = url;
 }
 
-function delay(ms) {
+export function delay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms)); // no hate please 👉👈 // GRRRR
 }
 
-async function clearAllData() {
+export async function clearAllData() {
   localStorage.clear();
   await browser.runtime.sendMessage({
     action: "clearLocalStorage",
@@ -76,21 +78,21 @@ async function clearAllData() {
   location.reload();
 }
 
-function unbloat() {
+export function unbloat() {
   document.body.innerHTML = "";
 }
 
-function getExtensionImage(name) {
+export function getExtensionImage(name) {
   return chrome.runtime.getURL(`media/${name}`);
 }
 
-function sendDebug(...messages) {
+export function sendDebug(...messages) {
   if (DEBUG) {
     console.log(...messages);
   }
 }
 
-function getSchoolName() {
+export function getSchoolName() {
   try {
     const schoolName = window.location.hostname.split(".")[0];
     if (!schoolName) {
@@ -103,25 +105,25 @@ function getSchoolName() {
   }
 }
 
-function getCurrentDate() {
+export function getCurrentDate() {
   return new Date().toISOString().split("T")[0];
 }
 
-function getFutureDate(days) {
+export function getFutureDate(days) {
   return new Date(Date.now() + days * 86400000).toISOString().split("T")[0];
 }
 
-function randomChance(probability) {
+export function randomChance(probability) {
   if (probability <= 0) return false;
   if (probability >= 1) return true;
   return Math.random() < probability;
 }
 
-function isAbsoluteUrl(url) {
+export function isAbsoluteUrl(url) {
   return /^(https?:\/\/|data:image\/)/i.test(url);
 }
 
-function getPfpLink(username) {
+export function getPfpLink(username) {
   let firstInitial;
   let secondInitial;
   if (username) {
@@ -133,12 +135,11 @@ function getPfpLink(username) {
     firstInitial = "M";
     secondInitial = "U";
   }
-  return `https://userpicture20.smartschool.be/User/Userimage/hashimage/hash/initials_${
-    firstInitial + secondInitial
-  }/plain/1/res/128`;
+  return `https://userpicture20.smartschool.be/User/Userimage/hashimage/hash/initials_${firstInitial + secondInitial
+    }/plain/1/res/128`;
 }
 
-function getUserId() {
+export function getUserId() {
   let userId;
   // get UID
   try {

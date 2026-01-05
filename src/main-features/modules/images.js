@@ -1,4 +1,7 @@
-class ImageSelector {
+import { createTextInput } from "../appearance/ui";
+import { fileInputIconSvg } from "../../fixes-utils/json"
+
+export class ImageSelector {
   constructor(name) {
     this.name = name;
 
@@ -26,7 +29,7 @@ class ImageSelector {
     });
   }
 
-  onStore() {}
+  onStore() { }
 
   createImageFileInputContainer() {
     const fileInputContainer = document.createElement("div");

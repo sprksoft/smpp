@@ -1,3 +1,6 @@
+import { GameBase } from "./games.js"
+import { registerWidget } from "../widgets/widgets.js"
+
 const BIRD_RADIUS = 5;
 const BIRD_X = 50;
 const FLOOR_H = 15;

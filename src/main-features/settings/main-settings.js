@@ -1,3 +1,12 @@
+import { BaseWindow } from "../modules/windows.js"
+import { originalUsername } from "../main.js"
+import { getExtensionImage } from "../../fixes-utils/utils.js";
+import { settingsTemplate, themes } from "../main.js"
+import { colorpickersHTMLV2 } from "../../fixes-utils/json.js"
+import { ImageSelector } from "../modules/images.js";
+import { createButtonWithLabel } from "../appearance/ui";
+
+
 class SettingsWindow extends BaseWindow {
   settingsSideBarCategories = {
     appearance: {
@@ -481,7 +490,7 @@ class SettingsWindow extends BaseWindow {
         applyAppearance(settings.appearance);
         if (
           JSON.stringify(settings.appearance.weatherOverlay) !=
-            JSON.stringify(previousSettings.appearance.weatherOverlay) &&
+          JSON.stringify(previousSettings.appearance.weatherOverlay) &&
           !liteMode
         ) {
           applyWeatherEffects(settings.appearance.weatherOverlay);
@@ -1329,7 +1338,7 @@ class SettingsWindow extends BaseWindow {
 
 let settingsWindow;
 
-async function createSettingsWindow() {
+export async function createSettingsWindow() {
   settingsWindow = new SettingsWindow();
   await settingsWindow.create();
   await settingsWindow.loadPage();

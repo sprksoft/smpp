@@ -1,3 +1,6 @@
+import { WidgetBase, registerWidget } from './widgets.js';
+import { randomChance } from '../fixes-utils/utils.js';
+
 // i'm a true ✨ Vibe Coder ✨ - Jdev
 // code for assignments list 📂
 // THANK YOU LDEVVVV 🫂🫂🫂
@@ -142,8 +145,7 @@ class TakenWidget extends WidgetBase {
             "wrapperdiv"
           );
           wrapperDiv.classList.add(
-            `c-${element.color.split("-")[0]}-combo--${
-              element.color.split("-")[1]
+            `c-${element.color.split("-")[0]}-combo--${element.color.split("-")[1]
             }` // LET HIM COOK
           );
 
@@ -151,8 +153,7 @@ class TakenWidget extends WidgetBase {
           if (element.icon) {
             // dont try to understand, i dont either
             fetch(
-              `https://${getSchoolName()}.smartschool.be/smsc/svg/${
-                element.icon
+              `https://${getSchoolName()}.smartschool.be/smsc/svg/${element.icon
               }/${element.icon}_16x16.svg`
             )
               .then((response) => response.blob())

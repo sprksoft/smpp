@@ -1,3 +1,5 @@
+import { WidgetBase, registerWidget } from './widgets.js';
+
 class WeatherWidgetBase extends WidgetBase {
   isCompact = false;
 

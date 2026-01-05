@@ -1,3 +1,6 @@
+import { WidgetBase, registerWidget } from './widgets.js';
+import { randomChance } from "../fixes-utils/utils"
+
 // Constants and configuration
 
 let lijnDataKleuren;
@@ -86,8 +89,8 @@ async function createHalteDoorkomst(doorkomst, container, monochrome, signal) {
       arrivalTimeDeviation === 0
         ? "On time"
         : arrivalTimeDeviation > 0
-        ? `+${arrivalTimeDeviation}`
-        : arrivalTimeDeviation;
+          ? `+${arrivalTimeDeviation}`
+          : arrivalTimeDeviation;
     timeUntilDeparture = calculateTimeUntilDepartureInMins(ETA);
     timeUntilDeparture =
       timeUntilDeparture < 1 ? "Now" : `${timeUntilDeparture} Min.`;

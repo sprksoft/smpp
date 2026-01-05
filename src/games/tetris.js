@@ -1,3 +1,6 @@
+import { GameBase } from "./games.js"
+import { registerWidget } from "../widgets/widgets.js"
+
 const BOARD_WIDTH = 10;
 const BOARD_HEIGHT = 12;
 const CELL_SIZE = 25;

@@ -1,3 +1,6 @@
+import { GameBase } from "./games.js"
+import { registerWidget } from "../widgets/widgets.js"
+
 // Powered by Broodje56's magic sauce
 // This code is brought to you by Broodje56, the ultimate breadboss 🥖👑
 
