@@ -16,33 +16,8 @@
       ],
       "all_frames": true,
       "match_about_blank": true,
-      "css": [
-        "styles/smpp-styles/dmenu.css",
-        "styles/smpp-styles/smpp.css",
-        "styles/smpp-styles/ui.css",
-        "styles/smpp-styles/games.css",
-        "styles/smpp-styles/weather.css",
-        "styles/smpp-styles/delijn.css",
-        "styles/smpp-styles/plant.css",
-        "styles/smpp-styles/clock.css",
-        "styles/smpp-styles/widgets.css",
-        "styles/smpp-styles/tutorial-widget.css",
-        "styles/smpp-styles/settings.css",
-        "styles/smpp-styles/assignments.css",
-        "styles/smpp-styles/profile.css",
-        "styles/fixes/general.css",
-        "styles/fixes/login.css",
-        "styles/fixes/messages.css",
-        "styles/fixes/navigation.css",
-        "styles/fixes/notification.css",
-        "styles/fixes/planner.css",
-        "styles/fixes/results.css",
-        "styles/fixes/startpage.css",
-        "styles/fixes/agenda.css",
-        "styles/fixes/root.css",
-        "styles/fixes/smartschool-widgets.css"
-      ],
-      "js": ["index.ts"]
+      "css": ["index.css"],
+      "js": ["index.js"]
     }
   ],
   "web_accessible_resources": [

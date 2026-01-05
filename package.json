@@ -15,9 +15,10 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "esbuild src/index.ts --bundle --sourcemap=inline --minify --external:*.png --external:*.svg --external:\"\"  --outfile=./extension/index.js"
   },
   "devDependencies": {
+    "esbuild": "^0.27.2",
     "typescript": "^5.9.3"
   }
 }

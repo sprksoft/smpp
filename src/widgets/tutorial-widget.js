@@ -1,3 +1,5 @@
+import "./widgets.js";
+
 class TutorialWidget extends WidgetBase {
   constructor() {
     super();
