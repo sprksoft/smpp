@@ -2,3 +2,4 @@
 web-ext-artifacts/
 build/smpp-lite-build/
 build/smpp-build
+node_modules/

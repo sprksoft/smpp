@@ -1,0 +1,23 @@
+{
+  "name": "smpp",
+  "version": "1.0.0",
+  "description": "Verbeter en personaliseer je Smartschool-ervaring met thema's, widgets, games en meer.",
+  "homepage": "https://github.com/sprksoft/smpp#readme",
+  "bugs": {
+    "url": "https://github.com/sprksoft/smpp/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sprksoft/smpp.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}
