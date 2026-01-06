@@ -1,40 +1,39 @@
 // @ts-nocheck
-import "../fixes-utils/svgs.js";
-import "../fixes-utils/login.js";
-import "../fixes-utils/scraper.js";
-import "../fixes-utils/results.js";
-import "../main-features/modules/windows.js";
-import "../main-features/modules/images.js";
-import "./profile.js";
-import "../main-features/keybinds.js";
-import "../main-features/appearance/background-image.js";
-import "../main-features/appearance/themes.js";
-import "../main-features/appearance/ui.js";
-import "../main-features/appearance/weather-effects.js";
-import "../games/games.js";
-import "../games/breakout.js";
-import "../games/flappy.js";
-import "../games/snake.js";
-import "../games/pong.js";
-import "../games/tetris.js";
-import "../main-features/main.js";
+import "../fixes-utils/svgs.ts";
+import "../fixes-utils/login.ts";
+import "../fixes-utils/scraper.ts";
+import "../fixes-utils/results.ts";
+import "./modules/windows.ts";
+import "./modules/images.ts";
+import "./profile.ts";
+import "../main-features/keybinds.ts";
+import "./appearance/background-image.ts";
+import "./appearance/themes.ts";
+import "./appearance/weather-effects.ts";
+// Games
+import "../games/games.ts";
+import "../games/breakout.ts";
+import "../games/flappy.ts";
+import "../games/snake.ts";
+import "../games/pong.ts";
+import "../games/tetris.ts";
 // Widgets
-import "../widgets/tutorial-widget.js";
-import "../widgets/assignments.js";
-import "../widgets/delijn.js";
-import "../widgets/plant.js";
-import "../widgets/planner.js";
-import "../widgets/weather.js";
-import "../widgets/clock.js";
+import "../widgets/tutorial-widget.ts";
+import "../widgets/assignments.ts";
+import "../widgets/delijn.ts";
+import "../widgets/plant.ts";
+import "../widgets/planner.ts";
+import "../widgets/weather.ts";
+import "../widgets/clock.ts";
 
-import { getExtensionImage, randomChance, getPfpLink } from "../fixes-utils/utils.js";
-import { migrate } from "../fixes-utils/migration.js";
-import { titleFix } from "../fixes-utils/titlefix.js";
-import { createWidgetSystem, createWidgetEditModeButton } from "../widgets/widgets.js"
-import { createGC } from "../main-features/globalchat.js";
-import { createQuickSettingsButton, createQuickSettings } from "../main-features/settings/quick-settings.js";
-import { createSettingsWindow } from "./settings/main-settings.js";
-import { quickLoad } from "../main-features/quick-menu/quick.js";
+import { getExtensionImage, randomChance, getPfpLink } from "../fixes-utils/utils.ts";
+import { migrate } from "../fixes-utils/migration.ts";
+import { titleFix } from "../fixes-utils/titlefix.ts";
+import { createWidgetSystem, createWidgetEditModeButton } from "../widgets/widgets.ts"
+import { createGC } from "./globalchat.ts";
+import { createQuickSettingsButton, createQuickSettings } from "./settings/quick-settings.ts";
+import { createSettingsWindow } from "./settings/main-settings.ts";
+import { quickLoad } from "./quick-menu/quick.ts";
 
 export var originalUsername: string;
 export var settingsTemplate: any;
@@ -56,21 +55,21 @@ import {
   notfisSvg,
   searchButtonSvg,
   settingsIconSvg,
-} from "../fixes-utils/svgs.js";
+} from "../fixes-utils/svgs.ts";
 
-import { setEditMode } from "../widgets/widgets.js";
-import { initWidgetEditMode } from "../widgets/widgets.js";
-import { applyUsername, applyProfilePicture } from "./profile.js";
-import { updateLoginPanel } from "../fixes-utils/login.js";
-import { buisStats } from "../fixes-utils/results.js";
-import { setTheme } from "../main-features/appearance/themes.js";
-import { setBackground } from "../main-features/appearance/background-image.js";
+import { setEditMode } from "../widgets/widgets.ts";
+import { initWidgetEditMode } from "../widgets/widgets.ts";
+import { applyUsername, applyProfilePicture } from "./profile.ts";
+import { updateLoginPanel } from "../fixes-utils/login.ts";
+import { buisStats } from "../fixes-utils/results.ts";
+import { setTheme } from "./appearance/themes.ts";
+import { setBackground } from "./appearance/background-image.ts";
 import { updateNews } from "../widgets/widgets.ts";
-import { updateSplashText } from "../fixes-utils/login.js";
-import { applyWeatherEffects } from "../main-features/appearance/weather-effects.js";
-import { openSettingsWindow } from "./settings/main-settings.js";
-import { reloadDMenuConfig, createQuickMenuButton } from "../main-features/quick-menu/dmenu.js";
-import { colorpickersHTML } from "../fixes-utils/svgs.js";
+import { updateSplashText } from "../fixes-utils/login.ts";
+import { applyWeatherEffects } from "./appearance/weather-effects.ts";
+import { openSettingsWindow } from "./settings/main-settings.ts";
+import { reloadDMenuConfig, createQuickMenuButton } from "../main-features/quick-menu/dmenu.ts";
+import { colorpickersHTML } from "../fixes-utils/svgs.ts";
 
 if (browser == undefined) {
   browser = chrome;
@@ -212,6 +211,7 @@ async function createStaticGlobals() {
   originalUsername =
     document.querySelector(".js-btn-profile .hlp-vert-box span")?.innerText ||
     "Mr Unknown";
+  console.log(document.querySelector(".js-btn-profile .hlp-vert-box span"))
 
   isGOSchool = document.body.classList.contains("go");
   isFirefox =
