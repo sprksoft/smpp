@@ -1,24 +1,16 @@
 // @ts-nocheck
-import { getExtensionImage, randomChance, getPfpLink } from "../fixes-utils/utils.js";
 import "../fixes-utils/svgs.js";
 import "../fixes-utils/login.js";
-import { migrate } from "../fixes-utils/migration.js";
 import "../fixes-utils/scraper.js";
-import { titleFix } from "../fixes-utils/titlefix.js";
 import "../fixes-utils/results.js";
-import { createWidgetSystem, createWidgetEditModeButton } from "../widgets/widgets.js"
 import "../main-features/modules/windows.js";
 import "../main-features/modules/images.js";
-import { createGC } from "../main-features/globalchat.js";
 import "./profile.js";
 import "../main-features/keybinds.js";
 import "../main-features/appearance/background-image.js";
 import "../main-features/appearance/themes.js";
 import "../main-features/appearance/ui.js";
 import "../main-features/appearance/weather-effects.js";
-import { createQuickSettingsButton, createQuickSettings } from "../main-features/settings/quick-settings.js";
-import { createSettingsWindow } from "./settings/main-settings.js";
-import { quickLoad } from "../main-features/quick-menu/quick.js";
 import "../games/games.js";
 import "../games/breakout.js";
 import "../games/flappy.js";
@@ -26,7 +18,6 @@ import "../games/snake.js";
 import "../games/pong.js";
 import "../games/tetris.js";
 import "../main-features/main.js";
-
 // Widgets
 import "../widgets/tutorial-widget.js";
 import "../widgets/assignments.js";
@@ -35,6 +26,15 @@ import "../widgets/plant.js";
 import "../widgets/planner.js";
 import "../widgets/weather.js";
 import "../widgets/clock.js";
+
+import { getExtensionImage, randomChance, getPfpLink } from "../fixes-utils/utils.js";
+import { migrate } from "../fixes-utils/migration.js";
+import { titleFix } from "../fixes-utils/titlefix.js";
+import { createWidgetSystem, createWidgetEditModeButton } from "../widgets/widgets.js"
+import { createGC } from "../main-features/globalchat.js";
+import { createQuickSettingsButton, createQuickSettings } from "../main-features/settings/quick-settings.js";
+import { createSettingsWindow } from "./settings/main-settings.js";
+import { quickLoad } from "../main-features/quick-menu/quick.js";
 
 export var originalUsername: string;
 export var settingsTemplate: any;

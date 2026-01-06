@@ -116,10 +116,11 @@
 
 .results-evaluation--wide .side-panel__panel {
   background-color: transparent !important;
+  box-shadow: none !important;
 }
 
 .side-panel__panel {
-  box-shadow: -10px 0px 20px -10px var(--color-shadow);
+  box-shadow: -10px 0px 20px -10px var(--color-shadow) !important;
 }
 
 .side-panel__panel {

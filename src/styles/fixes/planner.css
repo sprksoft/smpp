@@ -1063,7 +1063,8 @@ h3.detail-description__title.title--3,
   padding-top: 0.2rem !important;
 }
 
-.button-mJfIq:hover {
+.button-mJfIq:hover,
+.optionWrapper-IEDUX[data-selected="true"] .button-mJfIq:hover {
   border-color: var(--color-accent) !important;
   background: var(--darken-background) !important;
   backdrop-filter: blur(10px) !important;
@@ -1084,6 +1085,16 @@ h3.detail-description__title.title--3,
   border-width: 2px !important;
 }
 
+.optionWrapper-IEDUX[data-selected="true"] {
+  background: transparent !important;
+  border-color: transparent !important;
+}
+
+.optionWrapper-IEDUX[data-selected="true"]:after,
+.optionWrapper-IEDUX[data-selected="true"]:before {
+  display: none !important;
+}
+
 .optionWrapper-IEDUX[data-selected="false"] .button-mJfIq:focus {
   border-color: transparent !important;
   background: transparent !important;
@@ -1092,6 +1103,11 @@ h3.detail-description__title.title--3,
   border-color: var(--color-accent) !important;
   background: var(--darken-background) !important;
   backdrop-filter: blur(10px) !important;
+}
+
+.optionWrapper-IEDUX[data-selected="true"] .button-mJfIq {
+  background-color: var(--darken-background) !important;
+  border-color: var(--color-base02) !important;
 }
 
 .optionWrapper-IEDUX[data-selected="false"] .button-mJfIq:active {

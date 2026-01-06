@@ -1,4 +1,5 @@
-function buisStats() {
+import { getSchoolName } from "./utils";
+export function buisStats() {
   setTimeout(function () {
     const url = `https://${getSchoolName()}.smartschool.be/results/api/v1/evaluations/?itemsOnPage=1000`;
 
@@ -20,7 +21,7 @@ function buisStats() {
             }
           }
         });
-        newElement = document.createElement("div");
+        let newElement = document.createElement("div");
         newElement.id = "buis-stats";
         document
           .getElementsByClassName("results-evaluations__filters")[0]
