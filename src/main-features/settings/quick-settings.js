@@ -1,6 +1,18 @@
-import { themes, settingsTemplate } from "../main.js"
+import { themes, settingsTemplate } from "../main.js";
 import { ImageSelector } from "../modules/images.js";
-import { performanceModeSvg } from "../../fixes-utils/json.js"
+import { performanceModeSvg } from "../../fixes-utils/svgs.ts";
+import { settingsIconSvg } from "../../fixes-utils/svgs.ts";
+import {
+  openSettingsWindow,
+  settingsWindow,
+} from "../../main-features/settings/main-settings.js";
+import { apply } from "../../main-features/main.ts";
+import {
+  createCustomThemeUI,
+  storeCustomThemeData,
+} from "../../main-features/main.ts";
+import { getHiddenThemes } from "../../main-features/appearance/themes.js";
+import { browser } from "../../main-features/main.ts";
 
 let quickSettingsWindowIsHidden = true;
 
@@ -29,9 +41,10 @@ async function storeQuickSettings() {
 
   document.getElementById(
     "performance-mode-info"
-  ).innerHTML = `Toggle performance mode ${data.other.performanceMode
-    ? "<span class='green-underline'>Enabled</span>"
-    : "<span class='red-underline'>Disabled</span>"
+  ).innerHTML = `Toggle performance mode ${
+    data.other.performanceMode
+      ? "<span class='green-underline'>Enabled</span>"
+      : "<span class='red-underline'>Disabled</span>"
   }`;
 
   if (data.appearance.theme == "custom") {
@@ -50,7 +63,7 @@ async function storeQuickSettings() {
   await apply();
 }
 
-async function loadQuickSettings() {
+export async function loadQuickSettings() {
   const data = await browser.runtime.sendMessage({
     action: "getSettingsData",
   });
@@ -79,9 +92,10 @@ async function loadQuickSettings() {
 
   document.getElementById(
     "performance-mode-info"
-  ).innerHTML = `Toggle performance mode ${data.other.performanceMode
-    ? "<span class='green-underline'>Enabled</span>"
-    : "<span class='red-underline'>Disabled</span>"
+  ).innerHTML = `Toggle performance mode ${
+    data.other.performanceMode
+      ? "<span class='green-underline'>Enabled</span>"
+      : "<span class='red-underline'>Disabled</span>"
   }`;
 
   if (data.appearance.theme == "custom") {

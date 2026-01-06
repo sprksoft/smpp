@@ -1,4 +1,8 @@
-import { contractIconSVG, expandIconSVG, closeIconSVG } from "../../fixes-utils/json"
+import {
+  contractIconSVG,
+  expandIconSVG,
+  closeIconSVG,
+} from "../../fixes-utils/svgs.js";
 
 export class BaseWindow {
   #keydownHandler;
@@ -49,7 +53,7 @@ export class BaseWindow {
 
   // Called every time the window is opened
   // Override this in subclass
-  onOpened() { }
+  onOpened() {}
 
   show(triggerEvent = null) {
     if (!this.hidden) return;

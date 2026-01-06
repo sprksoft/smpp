@@ -1,4 +1,8 @@
-import { BaseWindow } from "./modules/windows.js"
+import { BaseWindow } from "./modules/windows.js";
+import { getThemeQueryString } from "../main-features/appearance/themes.js";
+import { gcIconSvg } from "../fixes-utils/svgs.js";
+import { browser } from "./main.ts";
+import { getPlantSvg } from "../widgets/plant.js";
 
 const GC_DOMAINS = {
   main: "https://gc.smartschoolplusplus.com",
@@ -29,14 +33,15 @@ class GlobalChatWindow extends BaseWindow {
     ]);
     this.iframe = document.createElement("iframe");
     this.iframe.style = "width:100%; height:100%; border:none";
-    this.iframe.src = GC_DOMAINS[this.beta ? "beta" : "main"] + "/v1?" + queryString;
+    this.iframe.src =
+      GC_DOMAINS[this.beta ? "beta" : "main"] + "/v1?" + queryString;
     this.gcContent.appendChild(this.iframe);
   }
 }
 
 let gcWindow;
 
-async function openGlobalChat(event, beta = false) {
+export async function openGlobalChat(event, beta = false) {
   if (!gcWindow || !gcWindow.element?.isConnected) {
     gcWindow = new GlobalChatWindow();
     await gcWindow.create();
@@ -56,12 +61,13 @@ export function createGC() {
   return GlobalChatOpenButton;
 }
 
-
 // public smpp api
 // Versions will change when a breaking change is required (Adding fields is not a breaking change)
 window.addEventListener("message", async (e) => {
   if (!Object.values(GC_DOMAINS).includes(e.origin)) {
-    console.warn("Got a message but it was not from one of the global chat domains.")
+    console.warn(
+      "Got a message but it was not from one of the global chat domains."
+    );
     return;
   }
   let response = { error: "not found" };
@@ -100,7 +106,7 @@ async function getPlantV1() {
         stage: 0,
       },
       age: 0,
-    }
+    };
   }
   return {
     stageData: {

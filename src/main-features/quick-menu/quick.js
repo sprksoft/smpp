@@ -1,5 +1,16 @@
-let quicks = [];
+import { dmenu, dmenuConfig } from "../../main-features/quick-menu/dmenu.js";
 
+import {
+  getDMenuOptionsForSettings,
+  dmenuEditConfig,
+} from "../../main-features/quick-menu/config.js";
+import { openURL, unbloat, clearAllData } from "../../fixes-utils/utils.js";
+
+import { openGlobalChat } from "../../main-features/globalchat.js";
+import { resetPlant } from "../../widgets/plant.js";
+import { browser } from "../../main-features/main.ts";
+
+let quicks = [];
 let links = [];
 let vakken = [];
 let goto_items = [];
@@ -63,7 +74,7 @@ function add_quick_interactive() {
   let cmd_list = quick_cmd_list();
   dmenu(
     cmd_list,
-    function(name, shift) {
+    function (name, shift) {
       value_list = [];
       for (let i = 0; i < quicks.length; i++) {
         if (quicks[i].name == name) {
@@ -73,7 +84,7 @@ function add_quick_interactive() {
       }
       dmenu(
         value_list,
-        function(value, shift) {
+        function (value, shift) {
           if (!value.startsWith("http")) {
             value = "https://" + value;
           }
@@ -90,7 +101,7 @@ function remove_quick_interactive() {
   let cmd_list = quick_cmd_list();
   dmenu(
     cmd_list,
-    function(name, shift) {
+    function (name, shift) {
       remove_quick(name);
     },
     "name:"
@@ -151,7 +162,7 @@ function scrape_goto() {
   }
 }
 
-async function do_qm(opener = "") {
+export async function do_qm(opener = "") {
   let cmd_list = quick_cmd_list()
     .concat(goto_items)
     .concat(vakken)
@@ -179,7 +190,7 @@ async function do_qm(opener = "") {
 
   dmenu(
     cmd_list,
-    async function(cmd) {
+    async function (cmd) {
       switch (cmd) {
         case "unbloat":
           unbloat();
@@ -193,20 +204,10 @@ async function do_qm(opener = "") {
             },
           });
           return;
-        case "set background":
-          dmenu(
-            [],
-            function(url) {
-              set_background(url);
-              store_background(url);
-            },
-            "bg url:"
-          );
-          return;
         case "config":
           dmenu(
             await getDMenuOptionsForSettings(false),
-            function(cmd, shift) {
+            function (cmd, shift) {
               dmenuEditConfig(cmd);
             },
             "config: "
@@ -248,12 +249,14 @@ async function do_qm(opener = "") {
           document.body.appendChild(styleEl);
           return;
         case "reset plant":
-          resetPlant()
+          resetPlant();
           return;
         case "plant data":
-          console.log(await browser.runtime.sendMessage({
-            action: "getPlantAppData",
-          }));
+          console.log(
+            await browser.runtime.sendMessage({
+              action: "getPlantAppData",
+            })
+          );
         default:
           break;
       }

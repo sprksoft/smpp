@@ -1,5 +1,9 @@
-import { originalUsername } from './main.js'
+import { originalUsername } from "./main.js";
+import { getPfpLink } from "../fixes-utils/utils.js";
+import { getImageURL } from "../main-features/modules/images.js";
+import { originalPfpUrl } from "./main.js";
 
+var profilePictureObserver;
 async function displayUsernameTopNav(name) {
   let originalNameElement = document.querySelector(
     ".js-btn-profile .hlp-vert-box span"
@@ -35,21 +39,21 @@ async function attachProfilePictureObserver(url) {
 
   const observer = new MutationObserver((mutations) => {
     for (const mutation of mutations) {
-      for (const node of mutation.addedNodes) {
-        if (node.nodeType !== Node.ELEMENT_NODE) continue;
+      for (const htmlNode of mutation.addedNodes) {
+        if (htmlNode.nodeType !== Node.ELEMENT_NODE) continue;
 
-        if (node instanceof HTMLImageElement) {
-          processImg(node);
+        if (htmlNode instanceof HTMLImageElement) {
+          processImg(htmlNode);
           continue;
         }
 
         try {
-          const imgs = node.querySelectorAll?.("img");
+          const imgs = htmlNode.querySelectorAll?.("img");
           if (imgs && imgs.length) {
             for (const img of imgs) processImg(img);
           }
         } catch (e) {
-          console.error("Error querying imgs inside node:", e, node);
+          console.error("Error querying imgs inside node:", e, htmlNode);
         }
       }
 
@@ -72,7 +76,7 @@ async function attachProfilePictureObserver(url) {
   return observer;
 }
 
-async function applyUsername(customName) {
+export async function applyUsername(customName) {
   if (customName) {
     displayUsernameTopNav(customName);
   } else {
@@ -80,7 +84,7 @@ async function applyUsername(customName) {
   }
 }
 
-async function applyProfilePicture(profile) {
+export async function applyProfilePicture(profile) {
   let style = document.documentElement.style;
   const setPFPstyle = (url) => {
     style.setProperty("--profile-picture", "url(" + url + ")");

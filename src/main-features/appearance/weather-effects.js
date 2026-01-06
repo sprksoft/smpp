@@ -1,4 +1,7 @@
-import { getExtensionImage } from "../../fixes-utils/utils.js"
+import { getExtensionImage } from "../../fixes-utils/utils.js";
+import { getWidgetSetting } from "../../widgets/widgets.ts";
+import { widgets } from "../../widgets/widgets.ts";
+import { currentThemeName } from "../appearance/themes.js";
 
 function setSnowLevel(amount, opacity) {
   document.getElementById("snowflakes")?.remove();
@@ -15,8 +18,9 @@ function setSnowLevel(amount, opacity) {
         : getExtensionImage("icons/weather-overlay/snowflake.svg");
 
     flake.style.left = `${Math.floor(Math.random() * 100)}%`;
-    flake.style.animation = `snowflake_fall_${Math.floor(Math.random() * 3)} ${Math.floor(Math.random() * 7) + 10
-      }s ease-in-out infinite`;
+    flake.style.animation = `snowflake_fall_${Math.floor(Math.random() * 3)} ${
+      Math.floor(Math.random() * 7) + 10
+    }s ease-in-out infinite`;
     flake.style.animationDelay = `${Math.floor(Math.random() * 40) - 40}s`;
     flake.style.width = `${Math.floor(Math.random() * 20) + 10}px`;
     flake.style.opacity = opacity;
@@ -36,8 +40,9 @@ function setRainLevel(amount, opacity) {
     raindrop.classList.add("raindrop");
     raindrop.src = getExtensionImage("icons/weather-overlay/raindrop.svg");
     raindrop.style.left = `${Math.random() * 100}%`;
-    raindrop.style.animation = `raindrop_fall ${Math.random() * 2 + 2
-      }s linear infinite`;
+    raindrop.style.animation = `raindrop_fall ${
+      Math.random() * 2 + 2
+    }s linear infinite`;
     raindrop.style.animationDelay = `${Math.random() * 5 - 5}s`;
     raindrop.style.width = `${Math.random() * 7.5 + 7.5}px`;
     raindrop.style.opacity = opacity;
@@ -72,7 +77,7 @@ async function setOverlayBasedOnConditions(amount, opacity) {
   }
 }
 
-function applyWeatherEffects(weatherOverlay) {
+export function applyWeatherEffects(weatherOverlay) {
   let rainDiv = document.getElementById("raindrops");
   let snowDiv = document.getElementById("snowflakes");
   switch (weatherOverlay.type) {

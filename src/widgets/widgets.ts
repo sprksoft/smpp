@@ -1,15 +1,22 @@
 // @ts-nocheck
-
+import { browser } from "../main-features/main.ts";
+import { fillObjectWithDefaults, getByPath,setByPath } from "../fixes-utils/utils.js";
+import {createButtonWithLabel} from "../main-features/appearance/ui.js"; 
+import {liteMode} from "../main-features/main.ts";
+import { doneSvg,editIconSvg } from "../fixes-utils/svgs.js";
 const PANNELIP_MARGIN_PX = 20;
 
 let widgetSystemCreated = false;
-let widgetEditModeInit = false;
-let widgetEditMode = false;
+
+export let widgetEditModeInit = false;
+export let widgetEditMode = false;
+export let widgets = [];
+
 let hoveringBag = false;
 let newsState = false; // Used for if the news state is changed before it could be created.
 // The widget drag info of the widget currently being dragged.
 let curDragInfo = null;
-let widgets = [];
+
 
 let widgetsContainer;
 let widgetBag;
@@ -516,7 +523,7 @@ async function createWidgetsContainerHTML(widgetData, newsContent, news) {
   return widgetsContainer;
 }
 
-function updateNews(value) {
+export function updateNews(value) {
   newsState = value;
   const newsCon = document.querySelector(".smpp-news-container");
   if (newsCon) {
@@ -561,7 +568,7 @@ function initNewsEditMode() {
 }
 
 // Notify the widget system about a theme change
-async function widgetSystemNotifyThemeChange() {
+export async function widgetSystemNotifyThemeChange() {
   for (let widget of widgets) {
     await widget.onThemeChange();
   }
@@ -764,7 +771,7 @@ function openBag() {
     bagHoverEnter();
   }
 }
-function toggleBag(params) {
+export function toggleBag(params) {
   if (isBagOpen()) {
     closeBag();
   } else {
@@ -828,7 +835,7 @@ function getWidgetByName(name) {
 
 // Get the value of a widget setting.
 // path is: WidgetName.SettingsPath
-async function getWidgetSetting(path) {
+export async function getWidgetSetting(path) {
   const [widgetName, settingPath] = splitWidgetNameAndSettingPath(path);
   const widget = getWidgetByName(widgetName);
   return await widget.getSetting(settingPath);
@@ -836,14 +843,14 @@ async function getWidgetSetting(path) {
 
 // Set the value of a widget setting.
 // path is: WidgetName.SettingsPath
-async function setWidgetSetting(path, value) {
+export async function setWidgetSetting(path, value) {
   const [widgetName, settingPath] = splitWidgetNameAndSettingPath(path);
 
   const widget = getWidgetByName(widgetName);
   await widget.setSetting(settingPath, value);
 }
 
-async function setEditMode(value) {
+export async function setEditMode(value) {
   if (value && !widgetEditModeInit) {
     console.error(
       "Widget edit mode has not been initalized. setEditMode(true) has been called. (call initWidgetEditMode first) (This is a bug)"
@@ -872,7 +879,7 @@ async function setEditMode(value) {
   widgetEditMode = value;
 }
 
-function initWidgetEditMode() {
+export function initWidgetEditMode() {
   if (widgetEditModeInit) {
     return;
   }

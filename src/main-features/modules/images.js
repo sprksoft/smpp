@@ -1,5 +1,7 @@
-import { createTextInput } from "../appearance/ui";
-import { fileInputIconSvg } from "../../fixes-utils/json"
+import { createTextInput } from "../appearance/ui.js";
+import { fileInputIconSvg } from "../../fixes-utils/svgs.ts";
+import { isAbsoluteUrl } from "../../fixes-utils/utils.js";
+import { browser, isFirefox } from "../../main-features/main.ts";
 
 export class ImageSelector {
   constructor(name) {
@@ -29,7 +31,7 @@ export class ImageSelector {
     });
   }
 
-  onStore() { }
+  onStore() {}
 
   createImageFileInputContainer() {
     const fileInputContainer = document.createElement("div");
@@ -183,7 +185,7 @@ export class ImageSelector {
 }
 
 // Returns { url: string|null, type: file, link, default }
-async function getImageURL(id, onDefault) {
+export async function getImageURL(id, onDefault) {
   let image;
   try {
     image = await browser.runtime.sendMessage({ action: "getImage", id });

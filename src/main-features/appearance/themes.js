@@ -1,10 +1,13 @@
-import { settingsTemplate } from "../main.js"
+import { settingsTemplate } from "../main.js";
+import { browser } from "../../main-features/main.ts";
+import { widgetSystemNotifyThemeChange } from "../../widgets/widgets.js";
+import { themes } from "../main.js";
 
-let currentThemeName;
-let currentTheme;
-let customTheme;
+export let currentThemeName;
+export let currentTheme;
+export let customTheme;
 
-async function setTheme(themeName) {
+export async function setTheme(themeName) {
   let style = document.documentElement.style;
   currentThemeName = themeName;
   currentTheme = await browser.runtime.sendMessage({
@@ -32,7 +35,7 @@ async function setTheme(themeName) {
   }
   await widgetSystemNotifyThemeChange();
 }
-function getThemeVar(varName) {
+export function getThemeVar(varName) {
   if (currentThemeName != "custom") {
     return currentTheme[varName];
   } else {
@@ -40,26 +43,28 @@ function getThemeVar(varName) {
   }
 }
 
-function getThemeQueryString(queryVars = []) {
+export function getThemeQueryString(queryVars = []) {
   let queryString = "";
   if (currentThemeName != "custom") {
     queryVars.forEach((queryVar) => {
       themeVar = currentTheme["--" + queryVar];
-      queryString += `&${queryVar}=${themeVar.startsWith("#") ? themeVar.substring(1) : themeVar
-        }`;
+      queryString += `&${queryVar}=${
+        themeVar.startsWith("#") ? themeVar.substring(1) : themeVar
+      }`;
     });
   } else {
     queryVars.forEach((queryVar) => {
       themeVar = customTheme[queryVar.replace("-", "_")];
-      queryString += `&${queryVar}=${themeVar.startsWith("#") ? themeVar.substring(1) : themeVar
-        }`;
+      queryString += `&${queryVar}=${
+        themeVar.startsWith("#") ? themeVar.substring(1) : themeVar
+      }`;
     });
   }
   queryString = queryString.substring(1);
   return queryString;
 }
 
-function getHiddenThemes() {
+export function getHiddenThemes() {
   let hiddenThemes = {};
   settingsTemplate.appearance.theme.forEach((key) => {
     if (themes[key]["display-name"].startsWith("__")) {

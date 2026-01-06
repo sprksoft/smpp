@@ -1,6 +1,6 @@
 //@ts-nocheck
 const DEBUG = false;
-
+import { browser } from "../main-features/main.js";
 
 /// Get a value inside an object by path
 //

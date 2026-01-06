@@ -1,7 +1,3 @@
-if (browser == undefined) {
-  var browser = chrome;
-}
-
 function vak_prefix(page) {
   switch (page) {
     case "news":

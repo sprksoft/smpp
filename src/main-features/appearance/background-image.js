@@ -1,4 +1,6 @@
-async function setBackground(appearance) {
+import { getExtensionImage } from "../../fixes-utils/utils.ts";
+import { browser } from "../../main-features/main.ts";
+export async function setBackground(appearance) {
   function displayBackgroundImage(image) {
     document.documentElement.style.setProperty(
       "--background-color",

@@ -1,6 +1,6 @@
 // @ts-nocheck
-import { getExtensionImage, randomChance } from "../fixes-utils/utils.js";
-import "../fixes-utils/json.js";
+import { getExtensionImage, randomChance, getPfpLink } from "../fixes-utils/utils.js";
+import "../fixes-utils/svgs.js";
 import "../fixes-utils/login.js";
 import { migrate } from "../fixes-utils/migration.js";
 import "../fixes-utils/scraper.js";
@@ -10,16 +10,14 @@ import { createWidgetSystem, createWidgetEditModeButton } from "../widgets/widge
 import "../main-features/modules/windows.js";
 import "../main-features/modules/images.js";
 import { createGC } from "../main-features/globalchat.js";
-import "../main-features/profile.js";
+import "./profile.js";
 import "../main-features/keybinds.js";
 import "../main-features/appearance/background-image.js";
 import "../main-features/appearance/themes.js";
 import "../main-features/appearance/ui.js";
 import "../main-features/appearance/weather-effects.js";
 import { createQuickSettingsButton, createQuickSettings } from "../main-features/settings/quick-settings.js";
-import { createSettingsWindow } from "../main-features/settings/main-settings.js";
-import "../main-features/quick-menu/dmenu.js";
-import "../main-features/quick-menu/config.js";
+import { createSettingsWindow } from "./settings/main-settings.js";
 import { quickLoad } from "../main-features/quick-menu/quick.js";
 import "../games/games.js";
 import "../games/breakout.js";
@@ -39,8 +37,44 @@ import "../widgets/weather.js";
 import "../widgets/clock.js";
 
 export var originalUsername: string;
-export var settingsTemplate;
-export var themes;
+export var settingsTemplate: any;
+export var themes: any;
+export var browser : any;
+export var onHomePage: boolean;
+export var onLoginPage: boolean;
+export var isGOSchool: boolean;
+export var isFirefox: boolean;
+export var originalPfpUrl: string;
+export var keybinds: any;
+export var liteMode: boolean;
+export var customTheme: any;
+
+import {
+  discordSvg,
+  homeiconSvg,
+  messageSvg,
+  notfisSvg,
+  searchButtonSvg,
+  settingsIconSvg,
+} from "../fixes-utils/svgs.js";
+
+import { setEditMode } from "../widgets/widgets.js";
+import { initWidgetEditMode } from "../widgets/widgets.js";
+import { applyUsername, applyProfilePicture } from "./profile.js";
+import { updateLoginPanel } from "../fixes-utils/login.js";
+import { buisStats } from "../fixes-utils/results.js";
+import { setTheme } from "../main-features/appearance/themes.js";
+import { setBackground } from "../main-features/appearance/background-image.js";
+import { updateNews } from "../widgets/widgets.ts";
+import { updateSplashText } from "../fixes-utils/login.js";
+import { applyWeatherEffects } from "../main-features/appearance/weather-effects.js";
+import { openSettingsWindow } from "./settings/main-settings.js";
+import { reloadDMenuConfig, createQuickMenuButton } from "../main-features/quick-menu/dmenu.js";
+import { colorpickersHTML } from "../fixes-utils/svgs.js";
+
+if (browser == undefined) {
+  browser = chrome;
+}
 
 //java script komt hier je weet wel
 //ok - ldev
@@ -149,7 +183,7 @@ function updateTabLogo(logo) {
   }
 }
 
-function applyTopNav(data) {
+export function applyTopNav(data) {
   let topNav = document.querySelector(".topnav");
   if (!topNav) return;
   updateTopNavIcons(data.icons);
@@ -179,28 +213,27 @@ async function createStaticGlobals() {
     document.querySelector(".js-btn-profile .hlp-vert-box span")?.innerText ||
     "Mr Unknown";
 
-  var isGOSchool = document.body.classList.contains("go");
-  var isFirefox =
+  isGOSchool = document.body.classList.contains("go");
+  isFirefox =
     typeof navigator.userAgent === "string" &&
     /firefox/i.test(navigator.userAgent);
   if (document.querySelector('img[alt="Profiel afbeelding"]')) {
-    var originalPfpUrl = document.querySelector(
+    originalPfpUrl = document.querySelector(
       'img[alt="Profiel afbeelding"]'
     ).src;
   } else {
-    var originalPfpUrl = getPfpLink(originalUsername);
+    originalPfpUrl = getPfpLink(originalUsername);
   }
 
-  var profilePictureObserver = null;
-  var onHomePage = document.getElementById("container") != null;
+  onHomePage = document.getElementById("container") != null;
 
-  var onLoginPage = document.querySelector(".login-app") != null;
+  onLoginPage = document.querySelector(".login-app") != null;
 
   var quicks = await quickLoad();
-  var liteMode = browser.runtime.getManifest().name.includes("Lite");
+  liteMode = browser.runtime.getManifest().name.includes("Lite");
 }
 
-async function applyAppearance(appearance) {
+export async function applyAppearance(appearance) {
   let style = document.documentElement.style;
 
   await setTheme(appearance.theme);
@@ -218,7 +251,7 @@ async function applyAppearance(appearance) {
   }
 }
 
-function applyOther(other) {
+export function applyOther(other) {
   if (window.location.href.split("/")[3] == "login")
     updateSplashText(other.splashText);
 
@@ -231,7 +264,7 @@ function applyOther(other) {
   if (onHomePage) updateDiscordPopup(other.discordButton);
 }
 
-function applyProfile(profile) {
+export function applyProfile(profile) {
   let style = document.documentElement.style;
   style.setProperty(
     "--profile-picture",
@@ -259,7 +292,7 @@ function applyFixes() {
   if (document.querySelector(".login-app__left")) updateLoginPanel();
 }
 
-async function apply() {
+export async function apply() {
   const data = await browser.runtime.sendMessage({
     action: "getSettingsData",
   });
@@ -274,7 +307,7 @@ async function apply() {
   applyOther(data.other);
 }
 
-async function storeCustomThemeData() {
+export async function storeCustomThemeData() {
   await browser.runtime.sendMessage({
     action: "setCustomThemeData",
     data: {
@@ -301,7 +334,7 @@ async function loadCustomThemeData() {
   document.getElementById("colorPicker6").value = themeData.color_text;
 }
 
-async function createCustomThemeUI() {
+export async function createCustomThemeUI() {
   const colorpickers = document.getElementById("colorpickers");
   colorpickers.innerHTML = colorpickersHTML;
   await loadCustomThemeData();

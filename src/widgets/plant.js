@@ -1,4 +1,4 @@
-import { WidgetBase, registerWidget } from './widgets.js';
+import { WidgetBase, registerWidget } from "./widgets.js";
 
 const plantVersion = 2;
 class PlantWidget extends WidgetBase {
@@ -159,7 +159,7 @@ function createUpdatePrompt(data) {
   return updatePromptContainer;
 }
 
-async function resetPlant() {
+export async function resetPlant() {
   await browser.runtime.sendMessage({
     action: "setPlantAppData",
     data: null,
@@ -361,7 +361,7 @@ function getPlantHTML(data) {
   return getPlantSvg(data);
 }
 
-function getPlantSvg(data) {
+export function getPlantSvg(data) {
   let age = Number(data.age);
   let isAlive = Boolean(data.isAlive);
 

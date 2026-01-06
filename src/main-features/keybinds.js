@@ -1,3 +1,14 @@
+import { keybinds } from "./main.js";
+import { do_qm } from "../main-features/quick-menu/quick.js";
+import { openSettingsWindow } from "../main-features/settings/main-settings.js";
+import { openGlobalChat } from "../main-features/globalchat.js";
+import {
+  widgetEditMode,
+  widgetEditModeInit,
+  setEditMode,
+  toggleBag,
+} from "../widgets/widgets.js";
+
 document.addEventListener("keyup", async (e) => {
   if (e.target?.tagName === "INPUT") return;
   if (e.target?.tagName === "TEXTAREA") return;

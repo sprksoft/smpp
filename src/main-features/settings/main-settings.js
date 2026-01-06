@@ -1,13 +1,27 @@
-import { BaseWindow } from "../modules/windows.js"
-import { originalUsername } from "../main.js"
+import { BaseWindow } from "../modules/windows.js";
+import { originalUsername } from "../main.js";
 import { getExtensionImage } from "../../fixes-utils/utils.js";
-import { settingsTemplate, themes } from "../main.js"
-import { colorpickersHTMLV2 } from "../../fixes-utils/json.js"
+import { settingsTemplate, themes } from "../main.js";
+import { colorpickersHTMLV2 } from "../../fixes-utils/svgs.js";
 import { ImageSelector } from "../modules/images.js";
-import { createButtonWithLabel } from "../appearance/ui";
+import { createButtonWithLabel } from "../appearance/ui.js";
+import { trashSvg } from "../../fixes-utils/svgs.js";
+import { browser } from "../main.js";
+import {
+  applyProfile,
+  applyTopNav,
+  applyAppearance,
+  applyOther,
+  liteMode,
+  isGOSchool,
+  isFirefox,
+} from "../main.js";
+import { setWidgetSetting, getWidgetSetting } from "../../widgets/widgets.ts";
+import { applyWeatherEffects } from "../appearance/weather-effects.js";
+import { clearAllData } from "../../fixes-utils/utils.js";
+import { loadQuickSettings } from "./quick-settings.js";
 
-
-class SettingsWindow extends BaseWindow {
+export class SettingsWindow extends BaseWindow {
   settingsSideBarCategories = {
     appearance: {
       name: "Appearance",
@@ -327,6 +341,7 @@ class SettingsWindow extends BaseWindow {
           settings.topNav.switchCoursesAndLinks;
 
         // Buttons
+        console.log(isGOSchool);
         if (isGOSchool) {
           document.getElementById("settings-page-go-button").checked =
             settings.topNav.buttons.GO;
@@ -487,10 +502,10 @@ class SettingsWindow extends BaseWindow {
           "settings-page-show-news-button"
         ).checked;
 
-        applyAppearance(settings.appearance);
+        await applyAppearance(settings.appearance);
         if (
           JSON.stringify(settings.appearance.weatherOverlay) !=
-          JSON.stringify(previousSettings.appearance.weatherOverlay) &&
+            JSON.stringify(previousSettings.appearance.weatherOverlay) &&
           !liteMode
         ) {
           applyWeatherEffects(settings.appearance.weatherOverlay);
@@ -1336,7 +1351,7 @@ class SettingsWindow extends BaseWindow {
   }
 }
 
-let settingsWindow;
+export let settingsWindow;
 
 export async function createSettingsWindow() {
   settingsWindow = new SettingsWindow();
@@ -1345,7 +1360,7 @@ export async function createSettingsWindow() {
   settingsWindow.hide();
 }
 
-async function openSettingsWindow(event) {
+export async function openSettingsWindow(event) {
   settingsWindow.show(event);
   settingsWindow.loadPage();
 }
