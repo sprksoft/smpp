@@ -1,4 +1,12 @@
-import { WidgetBase, registerWidget } from './widgets.js';
+import { WidgetBase, registerWidget } from "./widgets.js";
+import { browser } from "../main-features/main.js";
+import { applyWeatherEffects } from "../main-features/appearance/weather-effects.js";
+import {
+  humiditySvg,
+  feelsLikeSvg,
+  windSvg,
+  temperatureSvg,
+} from "../fixes-utils/svgs.js";
 
 class WeatherWidgetBase extends WidgetBase {
   isCompact = false;

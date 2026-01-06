@@ -1,5 +1,7 @@
-import { GameBase } from "./games.js"
-import { registerWidget } from "../widgets/widgets.js"
+import { GameBase } from "./games.js";
+import { registerWidget } from "../widgets/widgets.js";
+import { getThemeVar } from "../main-features/appearance/themes.js";
+import { GameOption } from "./games.js";
 
 class Point {
   x;

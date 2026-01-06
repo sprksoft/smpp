@@ -1,5 +1,7 @@
-import { GameBase } from "./games.js"
-import { registerWidget } from "../widgets/widgets.js"
+import { GameBase } from "./games.js";
+import { registerWidget } from "../widgets/widgets.js";
+import { getThemeVar } from "../main-features/appearance/themes.js";
+import { GameOption } from "./games.js";
 
 // Powered by Broodje56's magic sauce
 // This code is brought to you by Broodje56, the ultimate breadboss 🥖👑
@@ -151,7 +153,7 @@ class PongWidget extends GameBase {
       this.leftY,
       PONG_PADDLE_WIDTH,
       PONG_PADDLE_HEIGHT,
-      3,
+      3
     );
     this.drawRoundedRect(
       ctx,
@@ -159,7 +161,7 @@ class PongWidget extends GameBase {
       this.rightY,
       PONG_PADDLE_WIDTH,
       PONG_PADDLE_HEIGHT,
-      3,
+      3
     );
 
     ctx.strokeStyle = getThemeVar("--color-text");

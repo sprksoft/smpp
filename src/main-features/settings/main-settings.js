@@ -20,6 +20,7 @@ import { setWidgetSetting, getWidgetSetting } from "../../widgets/widgets.ts";
 import { applyWeatherEffects } from "../appearance/weather-effects.js";
 import { clearAllData } from "../../fixes-utils/utils.js";
 import { loadQuickSettings } from "./quick-settings.js";
+import { createTextInput, createButton } from "../appearance/ui.js";
 
 export class SettingsWindow extends BaseWindow {
   settingsSideBarCategories = {

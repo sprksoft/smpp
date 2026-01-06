@@ -1,6 +1,6 @@
 /* vim:set shiftwidth=4: */
 // @ts-nocheck
-function updateLoginPanel() {
+export function updateLoginPanel() {
   let login_app_left = document.querySelector(".login-app__left");
   login_app_left.innerHTML = " ";
 
@@ -31,7 +31,7 @@ function removeSplashText() {
   document.querySelector("splashtextcontainer")?.remove();
 }
 
-function updateSplashText(splashTextEnabled) {
+export function updateSplashText(splashTextEnabled) {
   if (splashTextEnabled) {
     addSplashText();
   } else {

@@ -1,6 +1,11 @@
 import { WidgetBase, registerWidget } from "./widgets.js";
 import { randomChance } from "../fixes-utils/utils";
 import { browser } from "../main-features/main.js";
+import {
+  lijnIconSvg,
+  loadingSpinnerSvg,
+  searchButtonSvg,
+} from "../fixes-utils/svgs.ts";
 
 // Constants and configuration
 
@@ -209,7 +214,7 @@ function addDelijnAttest(container) {
   delijnAttestElement.classList.add("delijnAttest");
   delijnAttestElement.target = "_blank";
   delijnAttestElement.rel = "noopener noreferrer";
-  specialChance = randomChance(1 / 12);
+  let specialChance = randomChance(1 / 12);
   delijnAttestElement.href = specialChance
     ? "https://www.coolblue.be/nl/koffiezetapparaten/koffiezetapparaten-voor-latte-macchiato"
     : "https://www.delijn.be/nl/contact/attest-aanvraag/";

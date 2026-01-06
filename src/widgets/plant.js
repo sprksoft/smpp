@@ -1,5 +1,6 @@
 import { WidgetBase, registerWidget } from "./widgets.js";
-
+import { browser } from "../main-features/main.js";
+import { plantThePlantSvg, waterPlantSvg } from "../fixes-utils/svgs.ts";
 const plantVersion = 2;
 class PlantWidget extends WidgetBase {
   async createContent() {

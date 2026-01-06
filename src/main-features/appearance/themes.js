@@ -6,6 +6,7 @@ import { themes } from "../main.js";
 export let currentThemeName;
 export let currentTheme;
 export let customTheme;
+export let themeVar;
 
 export async function setTheme(themeName) {
   let style = document.documentElement.style;

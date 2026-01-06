@@ -1,8 +1,8 @@
-import { WidgetBase } from "../widgets/widgets.js"
+import { WidgetBase } from "../widgets/widgets.js";
 
 const GAME_OPTION_TYPE_SLIDER = 0;
 
-class GameOption {
+export class GameOption {
   name;
   title;
   type;

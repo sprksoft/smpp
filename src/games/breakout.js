@@ -1,6 +1,7 @@
-import { GameBase } from "./games.js"
-import { registerWidget } from "../widgets/widgets.js"
-
+import { GameBase } from "./games.js";
+import { registerWidget } from "../widgets/widgets.js";
+import { getThemeVar } from "../main-features/appearance/themes.js";
+import { GameOption } from "./games.js";
 const BALL_RADIUS = 4;
 const PADDLE_WIDTH = 50;
 const PADDLE_HEIGHT = 5;
@@ -135,7 +136,7 @@ class BreakoutWidget extends GameBase {
       h - PADDLE_HEIGHT,
       PADDLE_WIDTH,
       PADDLE_HEIGHT,
-      5,
+      5
     );
 
     ctx.fillStyle = getThemeVar("--color-text");

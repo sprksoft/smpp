@@ -258,10 +258,6 @@ button.smscButton.blue.fileupload_submit_button,
   border-radius: 1rem !important;
 }
 
-.smscButton {
-  background: transparent !important;
-}
-
 .enableAnimations .smscButton,
 .enableAnimations .float-label__input,
 .enableAnimations .input-search,

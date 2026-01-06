@@ -1,5 +1,7 @@
-import { GameBase } from "./games.js"
-import { registerWidget } from "../widgets/widgets.js"
+import { GameBase } from "./games.js";
+import { registerWidget } from "../widgets/widgets.js";
+import { getThemeVar } from "../main-features/appearance/themes.js";
+import { GameOption } from "./games.js";
 
 const BOARD_WIDTH = 10;
 const BOARD_HEIGHT = 12;
@@ -76,7 +78,7 @@ const PIECES = Object.fromEntries(
   Object.entries(BASE_PIECES).map(([name, base]) => [
     name,
     generateRotations(base),
-  ]),
+  ])
 );
 
 const PIECE_TYPES = Object.keys(PIECES);
@@ -284,7 +286,7 @@ class TetrisWidget extends GameBase {
   #placePiece() {
     const shape = this.#getPieceShape(
       this.#currentPiece,
-      this.#currentRotation,
+      this.#currentRotation
     );
     for (let py = 0; py < 4; py++) {
       for (let px = 0; px < 4; px++) {
@@ -321,7 +323,7 @@ class TetrisWidget extends GameBase {
         this.#currentPiece,
         this.#currentRotation,
         this.#pieceX,
-        this.#pieceY,
+        this.#pieceY
       )
     )
       this.stopGame();
@@ -329,7 +331,7 @@ class TetrisWidget extends GameBase {
 
   async onGameStart() {
     this.#board = Array.from({ length: BOARD_HEIGHT }, () =>
-      new Array(BOARD_WIDTH).fill(0),
+      new Array(BOARD_WIDTH).fill(0)
     );
     this.#dropTime = 0;
     this.#dropInterval = 1000 / (this.getOpt("speed") / 10);
@@ -378,7 +380,7 @@ class TetrisWidget extends GameBase {
             y * CELL_SIZE,
             CELL_SIZE,
             CELL_SIZE,
-            radius,
+            radius
           );
           ctx.fill();
           ctx.strokeStyle = getThemeVar("--color-base03");
@@ -389,7 +391,7 @@ class TetrisWidget extends GameBase {
 
     const shape = this.#getPieceShape(
       this.#currentPiece,
-      this.#currentRotation,
+      this.#currentRotation
     );
     ctx.fillStyle = this.#getColor(this.#currentPiece);
     for (let py = 0; py < 4; py++) {
@@ -427,7 +429,7 @@ class TetrisWidget extends GameBase {
         this.#currentPiece,
         this.#currentRotation,
         this.#pieceX,
-        this.#pieceY,
+        this.#pieceY
       )
     ) {
       this.#pieceX -= dx;
