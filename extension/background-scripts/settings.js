@@ -4,7 +4,7 @@ if (typeof browser === "undefined") {
 
 import { fillObjectWithDefaults } from "./utils.js";
 import { loadJSON } from "./json-loader.js";
-import { getAllThemes } from "./data-background-script.js";
+import { getThemes } from "./themes.js";
 
 let settingsTemplate;
 let defaultSettings;
@@ -14,7 +14,7 @@ export async function getSettingsTemplate() {
     settingsTemplate = await loadJSON(
       "background-scripts/data/settings-template.json"
     );
-    settingsTemplate.appearance.theme = Object.keys(await getAllThemes());
+    settingsTemplate.appearance.theme = Object.keys(await getThemes());
   }
   return settingsTemplate;
 }
@@ -42,7 +42,6 @@ export async function getSettingsData() {
       Object.assign(categorized[cat], { [fieldName]: data[fieldName] });
     }
   }
-  console.log(categorized);
   return categorized;
 }
 

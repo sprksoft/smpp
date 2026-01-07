@@ -25,6 +25,7 @@ export async function setTheme(themeName: string) {
   const style = document.documentElement.style;
   currentThemeName = themeName;
   currentTheme = await getTheme(themeName);
+  console.log(currentTheme);
   Object.entries(currentTheme.cssProperties).forEach(([key, value]) => {
     style.setProperty(key, value);
   });

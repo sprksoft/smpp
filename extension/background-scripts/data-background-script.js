@@ -3,9 +3,6 @@ if (typeof browser === "undefined") {
 }
 
 import { fetchDelijnData } from "./api-background-script.js";
-import { loadJSON } from "./json-loader.js";
-
-let themes;
 
 function getDefaultCustomThemeData() {
   return {
@@ -27,22 +24,6 @@ export async function getPlantAppData() {
 export async function getCustomThemeData() {
   let data = await browser.storage.local.get("customThemeData");
   return data.customThemeData || getDefaultCustomThemeData();
-}
-
-export async function getAllThemes() {
-  if (!themes) {
-    themes = await loadJSON("background-scripts/data/themes.json");
-  }
-  return themes;
-}
-
-export function getTheme(theme) {
-  console.log(themes[theme]);
-  if (themes[theme] != undefined) {
-    return themes[theme];
-  } else {
-    throw new Error("Theme not found");
-  }
 }
 
 export async function getDelijnColorData() {

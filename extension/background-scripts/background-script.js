@@ -8,8 +8,6 @@ import {
   getDelijnColorData,
   getPlantAppData,
   getCustomThemeData,
-  getAllThemes,
-  getTheme,
   setImage,
   getImage,
 } from "./data-background-script.js";
@@ -21,37 +19,9 @@ import {
 
 import { fetchWeatherData, fetchDelijnData } from "./api-background-script.js";
 import { initGlobals } from "./json-loader.js";
+import { getTheme, getThemes } from "./themes.js";
 
-///
-///```js
-/// const ob = { sub1: { sub2: "hello" } };
-/// getByPath(ob, "sub1.sub2") === "hello"
-///```
-function getByPath(object, path) {
-  if (!path) {
-    return object;
-  }
-  let ob = object;
-  for (let node of path.split(".")) {
-    ob = ob[node];
-    if (ob === undefined) {
-      throw `getByPath: ${node} did not exist in path ${path}`;
-    }
-  }
-  return ob;
-}
-
-function setByPath(object, path, value) {
-  let ob = object;
-  const pathSplit = path.split(".");
-  for (let i = 0; i < pathSplit.length - 1; i++) {
-    ob = ob[pathSplit[i]];
-    if (ob === undefined) {
-      throw `setByPath: ${pathSplit[i]} did not exist in path ${path}`;
-    }
-  }
-  ob[pathSplit[pathSplit.length - 1]] = value;
-}
+import { getByPath, setByPath } from "./utils.js";
 
 browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
   handleMessage(message, sendResponse);
@@ -72,23 +42,21 @@ async function handleMessage(message, sendResponse) {
     }
 
     // Themes
-    if (message.action === "getAllThemes") {
-      const allThemes = await getAllThemes();
-      sendResponse(allThemes);
-      console.log("All themes sent.");
+    if (message.action === "getThemes") {
+      let themes = await getThemes(
+        message.categories,
+        message.includeHidden,
+        message.mustMatchAllCategories
+      );
+      sendResponse(themes);
+      console.log(
+        `Themes for categor(y)/(ies): ${message.categories} sent, including hidden themes: ${message.includeHidden}`
+      );
     }
     if (message.action === "getTheme") {
-      let theme;
-      try {
-        theme = getTheme(message.theme);
-        sendResponse(theme);
-        console.log(`Theme ${message.theme} sent.`);
-      } catch (error) {
-        console.error(error);
-        theme = getTheme("error");
-        sendResponse(theme);
-        console.error(`Invalid theme requested, sent "error" theme`);
-      }
+      let theme = await getTheme(message.theme);
+      sendResponse(theme);
+      console.log(`Theme ${message.theme} sent.`);
     }
 
     // Custom theme

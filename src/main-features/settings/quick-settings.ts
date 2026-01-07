@@ -109,31 +109,6 @@ function createQuickSettingsHTML(parent) {
   const performanceModeInfo = document.createElement("span");
   performanceModeInfo.id = "performance-mode-info";
 
-  const themeContainer = document.createElement("div");
-  themeContainer.className = "theme-container";
-
-  const themeHeading = document.createElement("h3");
-  themeHeading.className = "quick-settings-title";
-  themeHeading.textContent = "Theme:";
-
-  const themeSelector = document.createElement("select");
-  themeSelector.id = "theme-selector";
-
-  settingsTemplate.appearance.theme.forEach((key) => {
-    const optionElement = document.createElement("option");
-    optionElement.value = key;
-
-    optionElement.textContent = themes[key]["display-name"];
-    themeSelector.appendChild(optionElement);
-  });
-
-  const colorPickers = document.createElement("div");
-  colorPickers.id = "colorpickers";
-
-  themeContainer.appendChild(themeHeading);
-  themeContainer.appendChild(themeSelector);
-  themeContainer.appendChild(colorPickers);
-
   const wallpaperTopContainer = document.createElement("div");
 
   const wallpaperHeading = document.createElement("h3");
@@ -177,7 +152,6 @@ function createQuickSettingsHTML(parent) {
   extraSettingsButton.addEventListener("click", (e) => openSettingsWindow(e));
 
   parent.appendChild(performanceModeTooltipLabel);
-  parent.appendChild(themeContainer);
   parent.appendChild(wallpaperTopContainer);
   parent.appendChild(performanceModeInfo);
   parent.appendChild(extraSettingsButton);

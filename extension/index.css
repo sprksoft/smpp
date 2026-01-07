@@ -4466,10 +4466,6 @@ label.checkbox.js-checkbox.form-page__receive-copy-by-mail-checkbox {
   flex-direction: row;
 }
 .smscMain.form-completed-page {
-  background-color: transparent !important;
-  background-image: var(--loginpage-image) !important;
-  background-position: center !important;
-  background-size: cover !important;
   justify-content: center !important;
   position: relative !important;
   display: flex;
@@ -7723,10 +7719,6 @@ body {
   transition: none;
 }
 .homepage {
-  background-image: var(--loginpage-image) !important;
-  background-position: center !important;
-  background-size: cover !important;
-  background-attachment: fixed !important;
   display: block !important;
   height: 100% !important;
 }

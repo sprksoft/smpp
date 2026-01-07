@@ -214,7 +214,7 @@ export function applyTopNav(data) {
 
 async function createStaticGlobals() {
   themes = await browser.runtime.sendMessage({
-    action: "getAllThemes",
+    action: "getThemes",
   });
 
   settingsTemplate = await browser.runtime.sendMessage({

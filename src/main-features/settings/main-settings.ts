@@ -929,65 +929,6 @@ export class SettingsWindow extends BaseWindow {
           )
         );
 
-        let themesContainer = document.createElement("div");
-        themesContainer.classList.add("settings-page-theme-container");
-        settingsTemplate.appearance.theme.forEach((key) => {
-          if (!themes[key]["display-name"].startsWith("__")) {
-            // Don't include hidden themes
-            let themeCard = document.createElement("label"); // use <label> to make radio clickable
-            themeCard.tabIndex = "0";
-            themeCard.classList.add("settings-page-theme-card");
-            themeCard.style.setProperty(
-              "--hover-border",
-              themes[key]["--color-accent"]
-            );
-            themeCard.style.setProperty(
-              "--hover-color",
-              themes[key]["--color-base01"]
-            );
-            themeCard.style.setProperty(
-              "--background-placeholder-color",
-              themes[key]["--color-base02"]
-            );
-            themeCard.style.setProperty(
-              "--text-color",
-              themes[key]["--color-text"]
-            );
-            themeCard.dataset.theme = key;
-
-            // hidden radio
-            let themeRadio = document.createElement("input");
-            themeRadio.type = "radio";
-            themeRadio.name = "theme-choice";
-            themeRadio.value = key;
-            themeRadio.style.display = "none";
-
-            let themeImage = createImage(
-              "theme-backgrounds/" + key + ".jpg",
-              "100%",
-              "6rem"
-            );
-            let themeTitle = document.createElement("span");
-            themeTitle.classList.add("settings-page-theme-title");
-            themeTitle.innerText = themes[key]["display-name"];
-
-            // Add keyboard support
-            themeCard.addEventListener("keydown", (e) => {
-              if (e.key === " " || e.key === "Enter") {
-                e.preventDefault(); // Prevent page scroll on Space
-                themeRadio.click(); // Select the radio button
-              }
-            });
-
-            // build card
-            themeCard.appendChild(themeRadio);
-            themeCard.appendChild(themeImage);
-            themeCard.appendChild(themeTitle);
-            themesContainer.appendChild(themeCard);
-          }
-        });
-        this.settingsPage.appendChild(themesContainer);
-
         this.settingsPage.appendChild(createCustomThemeUIV2());
         this.settingsPage.appendChild(createSectionTitle("Wallpaper"));
         this.settingsPage.appendChild(

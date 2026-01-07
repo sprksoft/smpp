@@ -2163,6 +2163,7 @@ Is it scaring you off?`,
     const style = document.documentElement.style;
     currentThemeName = themeName;
     currentTheme = await getTheme(themeName);
+    console.log(currentTheme);
     Object.entries(currentTheme.cssProperties).forEach(([key, value]) => {
       style.setProperty(key, value);
     });
@@ -3617,26 +3618,6 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     performanceModeTooltipLabel.innerHTML += performanceModeSvg;
     const performanceModeInfo = document.createElement("span");
     performanceModeInfo.id = "performance-mode-info";
-    const themeContainer = document.createElement("div");
-    themeContainer.className = "theme-container";
-    const themeHeading = document.createElement("h3");
-    themeHeading.className = "quick-settings-title";
-    themeHeading.textContent = "Theme:";
-    const themeSelector = document.createElement("select");
-    themeSelector.id = "theme-selector";
-    settingsTemplate.appearance.theme.forEach((key) => {
-      if (!themes[key]["display-name"].startsWith("__")) {
-        const optionElement = document.createElement("option");
-        optionElement.value = key;
-        optionElement.textContent = themes[key]["display-name"];
-        themeSelector.appendChild(optionElement);
-      }
-    });
-    const colorPickers = document.createElement("div");
-    colorPickers.id = "colorpickers";
-    themeContainer.appendChild(themeHeading);
-    themeContainer.appendChild(themeSelector);
-    themeContainer.appendChild(colorPickers);
     const wallpaperTopContainer = document.createElement("div");
     const wallpaperHeading = document.createElement("h3");
     wallpaperHeading.className = "quick-settings-title";
@@ -3670,7 +3651,6 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     extraSettingsButton.innerHTML += settingsIconSvg;
     extraSettingsButton.addEventListener("click", (e) => openSettingsWindow(e));
     parent.appendChild(performanceModeTooltipLabel);
-    parent.appendChild(themeContainer);
     parent.appendChild(wallpaperTopContainer);
     parent.appendChild(performanceModeInfo);
     parent.appendChild(extraSettingsButton);
@@ -4386,56 +4366,6 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
               "Customize the overall look of the interface with different color styles."
             )
           );
-          let themesContainer = document.createElement("div");
-          themesContainer.classList.add("settings-page-theme-container");
-          settingsTemplate.appearance.theme.forEach((key) => {
-            if (!themes[key]["display-name"].startsWith("__")) {
-              let themeCard2 = document.createElement("label");
-              themeCard2.tabIndex = "0";
-              themeCard2.classList.add("settings-page-theme-card");
-              themeCard2.style.setProperty(
-                "--hover-border",
-                themes[key]["--color-accent"]
-              );
-              themeCard2.style.setProperty(
-                "--hover-color",
-                themes[key]["--color-base01"]
-              );
-              themeCard2.style.setProperty(
-                "--background-placeholder-color",
-                themes[key]["--color-base02"]
-              );
-              themeCard2.style.setProperty(
-                "--text-color",
-                themes[key]["--color-text"]
-              );
-              themeCard2.dataset.theme = key;
-              let themeRadio = document.createElement("input");
-              themeRadio.type = "radio";
-              themeRadio.name = "theme-choice";
-              themeRadio.value = key;
-              themeRadio.style.display = "none";
-              let themeImage = createImage(
-                "theme-backgrounds/" + key + ".jpg",
-                "100%",
-                "6rem"
-              );
-              let themeTitle = document.createElement("span");
-              themeTitle.classList.add("settings-page-theme-title");
-              themeTitle.innerText = themes[key]["display-name"];
-              themeCard2.addEventListener("keydown", (e) => {
-                if (e.key === " " || e.key === "Enter") {
-                  e.preventDefault();
-                  themeRadio.click();
-                }
-              });
-              themeCard2.appendChild(themeRadio);
-              themeCard2.appendChild(themeImage);
-              themeCard2.appendChild(themeTitle);
-              themesContainer.appendChild(themeCard2);
-            }
-          });
-          this.settingsPage.appendChild(themesContainer);
           this.settingsPage.appendChild(createCustomThemeUIV2());
           this.settingsPage.appendChild(createSectionTitle("Wallpaper"));
           this.settingsPage.appendChild(
@@ -8061,8 +7991,8 @@ ${code}`;
 
   // src/main-features/main.ts
   var originalUsername;
-  var settingsTemplate;
-  var themes;
+  var settingsTemplate3;
+  var themes3;
   var browser2;
   var onHomePage;
   var onLoginPage;
@@ -8180,10 +8110,10 @@ ${code}`;
     }
   }
   async function createStaticGlobals() {
-    themes = await browser2.runtime.sendMessage({
-      action: "getAllThemes"
+    themes3 = await browser2.runtime.sendMessage({
+      action: "getThemes"
     });
-    settingsTemplate = await browser2.runtime.sendMessage({
+    settingsTemplate3 = await browser2.runtime.sendMessage({
       action: "getSettingsTemplate"
     });
     originalUsername = document.querySelector(".js-btn-profile .hlp-vert-box span")?.innerText || "Mr Unknown";
