@@ -8,7 +8,6 @@ import "./modules/images.ts";
 import "./profile.ts";
 import "../main-features/keybinds.ts";
 import "./appearance/background-image.ts";
-import "./appearance/themes.ts";
 import "./appearance/weather-effects.ts";
 // Games
 import "../games/games.ts";
@@ -26,19 +25,29 @@ import "../widgets/planner.ts";
 import "../widgets/weather.ts";
 import "../widgets/clock.ts";
 
-import { getExtensionImage, randomChance, getPfpLink } from "../fixes-utils/utils.ts";
+import {
+  getExtensionImage,
+  randomChance,
+  getPfpLink,
+} from "../fixes-utils/utils.ts";
 import { migrate } from "../fixes-utils/migration.ts";
 import { titleFix } from "../fixes-utils/titlefix.ts";
-import { createWidgetSystem, createWidgetEditModeButton } from "../widgets/widgets.ts"
+import {
+  createWidgetSystem,
+  createWidgetEditModeButton,
+} from "../widgets/widgets.ts";
 import { createGC } from "./globalchat.ts";
-import { createQuickSettingsButton, createQuickSettings } from "./settings/quick-settings.ts";
+import {
+  createQuickSettingsButton,
+  createQuickSettings,
+} from "./settings/quick-settings.ts";
 import { createSettingsWindow } from "./settings/main-settings.ts";
 import { quickLoad } from "./quick-menu/quick.ts";
 
 export var originalUsername: string;
 export var settingsTemplate: any;
 export var themes: any;
-export var browser : any;
+export var browser: any;
 export var onHomePage: boolean;
 export var onLoginPage: boolean;
 export var isGOSchool: boolean;
@@ -68,7 +77,10 @@ import { updateNews } from "../widgets/widgets.ts";
 import { updateSplashText } from "../fixes-utils/login.ts";
 import { applyWeatherEffects } from "./appearance/weather-effects.ts";
 import { openSettingsWindow } from "./settings/main-settings.ts";
-import { reloadDMenuConfig, createQuickMenuButton } from "../main-features/quick-menu/dmenu.ts";
+import {
+  reloadDMenuConfig,
+  createQuickMenuButton,
+} from "../main-features/quick-menu/dmenu.ts";
 import { colorpickersHTML } from "../fixes-utils/svgs.ts";
 
 if (browser == undefined) {
@@ -108,7 +120,7 @@ function changeFont() {
 function fixCoursesSearch() {
   document
     .getElementById("courseSearch")
-    ?.addEventListener("keydown", function(event) {
+    ?.addEventListener("keydown", function (event) {
       if (event.key === "Enter") {
         event.preventDefault();
 
@@ -211,7 +223,6 @@ async function createStaticGlobals() {
   originalUsername =
     document.querySelector(".js-btn-profile .hlp-vert-box span")?.innerText ||
     "Mr Unknown";
-  console.log(document.querySelector(".js-btn-profile .hlp-vert-box span"))
 
   isGOSchool = document.body.classList.contains("go");
   isFirefox =

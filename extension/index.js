@@ -65,31 +65,6 @@
         </g>
       </svg>`;
   var performanceModeSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24" id="lightning" class="icon glyph"><path d="M18,11.74a1,1,0,0,0-.52-.63L14.09,9.43,15,3.14a1,1,0,0,0-1.78-.75l-7,9a1,1,0,0,0-.17.87,1,1,0,0,0,.59.67l4.27,1.71L10,20.86a1,1,0,0,0,.63,1.07A.92.92,0,0,0,11,22a1,1,0,0,0,.83-.45l6-9A1,1,0,0,0,18,11.74Z"/></svg>`;
-  var colorpickersHTML = `
-<div class="color-picker-container">
-<input type="color" class="color-pickersmpp" id="colorPicker1">
-<span class="color-label">base0</span>
-</div>
-<div class="color-picker-container">
-<input type="color" class="color-pickersmpp" id="colorPicker2">
-<span class="color-label">base1</span>
-</div>
-<div class="color-picker-container">
-<input type="color" class="color-pickersmpp" id="colorPicker3">
-<span class="color-label">base2</span>
-</div>
-<div class="color-picker-container">
-<input type="color" class="color-pickersmpp" id="colorPicker4">
-<span class="color-label">base3</span>
-</div>
-<div class="color-picker-container">
-<input type="color" class="color-pickersmpp" id="colorPicker5">
-<span class="color-label">accent</span>
-</div>
-<div class="color-picker-container">
-<input type="color" class="color-pickersmpp" id="colorPicker6">
-<span class="color-label">text</span>
-</div>`;
   var colorpickersHTMLV2 = `
 <div class="color-picker-container">
 <input type="color" class="color-pickersmpp" id="settings-colorPicker1">
@@ -2177,67 +2152,31 @@ Is it scaring you off?`,
   // src/main-features/appearance/themes.ts
   var currentThemeName;
   var currentTheme;
-  var customTheme2;
-  var themeVar;
-  async function setTheme(themeName) {
-    let style = document.documentElement.style;
-    currentThemeName = themeName;
-    currentTheme = await browser2.runtime.sendMessage({
+  async function getTheme(themeName) {
+    let theme = await browser2.runtime.sendMessage({
       action: "getTheme",
       theme: themeName
     });
-    if (themeName != "custom") {
-      Object.keys(currentTheme).forEach((key) => {
-        style.setProperty(key, currentTheme[key]);
-      });
-    } else {
-      const themeData = await browser2.runtime.sendMessage({
-        action: "getCustomThemeData"
-      });
-      customTheme2 = themeData;
-      const settingsData = await browser2.runtime.sendMessage({
-        action: "getSettingsData"
-      });
-      Object.keys(themeData).forEach((key) => {
-        style.setProperty("--" + key.replace("_", "-"), themeData[key]);
-      });
-      if (settingsData.selection == 0) {
-        style.setProperty("--loginpage-image", "url(https://about:blank)");
-      }
-    }
+    return theme;
+  }
+  async function setTheme(themeName) {
+    const style = document.documentElement.style;
+    currentThemeName = themeName;
+    currentTheme = await getTheme(themeName);
+    Object.entries(currentTheme.cssProperties).forEach(([key, value]) => {
+      style.setProperty(key, value);
+    });
     await widgetSystemNotifyThemeChange();
   }
-  function getThemeVar(varName) {
-    if (currentThemeName != "custom") {
-      return currentTheme[varName];
-    } else {
-      return customTheme2[varName.replace("--", "").replace("-", "_")];
-    }
-  }
-  function getThemeQueryString(queryVars = []) {
-    let queryString = "";
-    if (currentThemeName != "custom") {
-      queryVars.forEach((queryVar) => {
-        themeVar = currentTheme["--" + queryVar];
-        queryString += `&${queryVar}=${themeVar.startsWith("#") ? themeVar.substring(1) : themeVar}`;
-      });
-    } else {
-      queryVars.forEach((queryVar) => {
-        themeVar = customTheme2[queryVar.replace("-", "_")];
-        queryString += `&${queryVar}=${themeVar.startsWith("#") ? themeVar.substring(1) : themeVar}`;
-      });
-    }
-    queryString = queryString.substring(1);
-    return queryString;
-  }
-  function getHiddenThemes() {
-    let hiddenThemes = {};
-    settingsTemplate.appearance.theme.forEach((key) => {
-      if (themes[key]["display-name"].startsWith("__")) {
-        hiddenThemes[key] = themes[key];
-      }
+  function getThemeQueryString(theme) {
+    let query = "";
+    Object.entries(theme.cssProperties).forEach(([key, value]) => {
+      query += `&${key}=${value.startsWith("#") ? value.substring(1) : value}`;
     });
-    return hiddenThemes;
+    return query;
+  }
+  function getThemeVar(varName) {
+    return currentTheme.cssProperties[varName];
   }
 
   // src/widgets/plant.ts
@@ -3626,12 +3565,6 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     document.getElementById(
       "performance-mode-info"
     ).innerHTML = `Toggle performance mode ${data2.other.performanceMode ? "<span class='green-underline'>Enabled</span>" : "<span class='red-underline'>Disabled</span>"}`;
-    if (data2.appearance.theme == "custom") {
-      if (oldData.appearance.theme == "custom") {
-        await storeCustomThemeData();
-      }
-      await createCustomThemeUI();
-    }
     await browser2.runtime.sendMessage({ action: "setSettingsData", data: data2 });
     await loadQuickSettings();
     if (settingsWindow) {
@@ -3644,27 +3577,12 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     const data2 = await browser2.runtime.sendMessage({
       action: "getSettingsData"
     });
-    let hiddenThemes = getHiddenThemes();
-    if (hiddenThemes[data2.appearance.theme] == void 0) {
-      document.getElementById("theme-selector").value = data2.appearance.theme;
-    } else if (document.getElementById("theme-selector").value != data2.appearance.theme) {
-      const optionElement = document.createElement("option");
-      optionElement.value = data2.appearance.theme;
-      optionElement.textContent = themes[data2.appearance.theme]["display-name"].slice(2);
-      document.getElementById("theme-selector").appendChild(optionElement);
-      document.getElementById("theme-selector").value = data2.appearance.theme;
-    }
     quickSettingsBackgroundImageSelector.loadImageData();
     document.getElementById("background-blur-amount-slider").value = data2.appearance.background.blur;
     document.getElementById("performance-mode-toggle").checked = data2.other.performanceMode;
     document.getElementById(
       "performance-mode-info"
     ).innerHTML = `Toggle performance mode ${data2.other.performanceMode ? "<span class='green-underline'>Enabled</span>" : "<span class='red-underline'>Disabled</span>"}`;
-    if (data2.appearance.theme == "custom") {
-      await createCustomThemeUI();
-    } else {
-      document.getElementById("colorpickers").innerHTML = ``;
-    }
   }
   function toggleQuickSettings() {
     let win = document.getElementById("quickSettings");
@@ -8153,7 +8071,6 @@ ${code}`;
   var originalPfpUrl;
   var keybinds;
   var liteMode;
-  var customTheme3;
   if (browser2 == void 0) {
     browser2 = chrome;
   }
@@ -8270,7 +8187,6 @@ ${code}`;
       action: "getSettingsTemplate"
     });
     originalUsername = document.querySelector(".js-btn-profile .hlp-vert-box span")?.innerText || "Mr Unknown";
-    console.log(document.querySelector(".js-btn-profile .hlp-vert-box span"));
     isGOSchool = document.body.classList.contains("go");
     isFirefox = typeof navigator.userAgent === "string" && /firefox/i.test(navigator.userAgent);
     if (document.querySelector('img[alt="Profiel afbeelding"]')) {
@@ -8342,36 +8258,6 @@ ${code}`;
     applyProfile(data2.profile);
     applyTopNav(data2.topNav);
     applyOther(data2.other);
-  }
-  async function storeCustomThemeData() {
-    await browser2.runtime.sendMessage({
-      action: "setCustomThemeData",
-      data: {
-        color_base00: document.getElementById("colorPicker1").value,
-        color_base01: document.getElementById("colorPicker2").value,
-        color_base02: document.getElementById("colorPicker3").value,
-        color_base03: document.getElementById("colorPicker4").value,
-        color_accent: document.getElementById("colorPicker5").value,
-        color_text: document.getElementById("colorPicker6").value
-      }
-    });
-  }
-  async function loadCustomThemeData() {
-    const themeData = await browser2.runtime.sendMessage({
-      action: "getCustomThemeData"
-    });
-    customTheme3 = themeData;
-    document.getElementById("colorPicker1").value = themeData.color_base00;
-    document.getElementById("colorPicker2").value = themeData.color_base01;
-    document.getElementById("colorPicker3").value = themeData.color_base02;
-    document.getElementById("colorPicker4").value = themeData.color_base03;
-    document.getElementById("colorPicker5").value = themeData.color_accent;
-    document.getElementById("colorPicker6").value = themeData.color_text;
-  }
-  async function createCustomThemeUI() {
-    const colorpickers = document.getElementById("colorpickers");
-    colorpickers.innerHTML = colorpickersHTML;
-    await loadCustomThemeData();
   }
   function createTopButtons() {
     let topNav = document.querySelector("nav.topnav");

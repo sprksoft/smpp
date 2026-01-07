@@ -1,19 +1,8 @@
 // @ts-nocheck
-import { themes, settingsTemplate } from "../main.js";
+import { themes, settingsTemplate, apply, browser } from "../main.js";
 import { ImageSelector } from "../modules/images.js";
-import { performanceModeSvg } from "../../fixes-utils/svgs.js";
-import { settingsIconSvg } from "../../fixes-utils/svgs.js";
-import {
-  openSettingsWindow,
-  settingsWindow,
-} from "./main-settings.js";
-import { apply } from "../main.js";
-import {
-  createCustomThemeUI,
-  storeCustomThemeData,
-} from "../main.js";
-import { getHiddenThemes } from "../appearance/themes.js";
-import { browser } from "../main.js";
+import { performanceModeSvg, settingsIconSvg } from "../../fixes-utils/svgs.js";
+import { openSettingsWindow, settingsWindow } from "./main-settings.js";
 
 let quickSettingsWindowIsHidden = true;
 
@@ -48,13 +37,6 @@ async function storeQuickSettings() {
       : "<span class='red-underline'>Disabled</span>"
   }`;
 
-  if (data.appearance.theme == "custom") {
-    if (oldData.appearance.theme == "custom") {
-      await storeCustomThemeData();
-    }
-    await createCustomThemeUI();
-  }
-
   await browser.runtime.sendMessage({ action: "setSettingsData", data });
   await loadQuickSettings();
   if (settingsWindow) {
@@ -68,21 +50,6 @@ export async function loadQuickSettings() {
   const data = await browser.runtime.sendMessage({
     action: "getSettingsData",
   });
-
-  let hiddenThemes = getHiddenThemes();
-  if (hiddenThemes[data.appearance.theme] == undefined) {
-    document.getElementById("theme-selector").value = data.appearance.theme;
-  } else if (
-    document.getElementById("theme-selector").value != data.appearance.theme
-  ) {
-    const optionElement = document.createElement("option");
-    optionElement.value = data.appearance.theme;
-
-    optionElement.textContent =
-      themes[data.appearance.theme]["display-name"].slice(2);
-    document.getElementById("theme-selector").appendChild(optionElement);
-    document.getElementById("theme-selector").value = data.appearance.theme;
-  }
 
   quickSettingsBackgroundImageSelector.loadImageData();
 
@@ -98,12 +65,6 @@ export async function loadQuickSettings() {
       ? "<span class='green-underline'>Enabled</span>"
       : "<span class='red-underline'>Disabled</span>"
   }`;
-
-  if (data.appearance.theme == "custom") {
-    await createCustomThemeUI();
-  } else {
-    document.getElementById("colorpickers").innerHTML = ``;
-  }
 }
 
 function toggleQuickSettings() {
@@ -159,14 +120,11 @@ function createQuickSettingsHTML(parent) {
   themeSelector.id = "theme-selector";
 
   settingsTemplate.appearance.theme.forEach((key) => {
-    if (!themes[key]["display-name"].startsWith("__")) {
-      // Don't include hidden themes
-      const optionElement = document.createElement("option");
-      optionElement.value = key;
+    const optionElement = document.createElement("option");
+    optionElement.value = key;
 
-      optionElement.textContent = themes[key]["display-name"];
-      themeSelector.appendChild(optionElement);
-    }
+    optionElement.textContent = themes[key]["display-name"];
+    themeSelector.appendChild(optionElement);
   });
 
   const colorPickers = document.createElement("div");

@@ -1,5 +1,4 @@
 html {
-  --loginpage-image: url("");
   --show-options: none;
 }
 
@@ -81,12 +80,6 @@ a.smscButton[href^="/login/sso/init"],
 .login-app__title--separator {
   display: grid !important;
   margin-bottom: 0px !important;
-}
-
-body {
-  background-image: var(--loginpage-image) !important;
-  background-position: center !important;
-  background-size: cover !important;
 }
 
 .showLeftNav:has(.login-app) {

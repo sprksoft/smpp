@@ -1,283 +1,324 @@
 {
   "default": {
-    "display-name": "Default Deluxe",
-    "--color-accent": "#e8e8e8",
-    "--color-splashtext": "var(--color-accent)",
-    "--color-text": "#adadad",
-    "--color-base00": "#141414",
-    "--color-base01": "#1f1f1f",
-    "--color-base02": "#2c2c2c",
-    "--color-base03": "#383838",
-    "--darken-background": "rgba(0,0,0,0.2)",
-    "--color-homepage-sidebars-bg": "#02020585"
+    "displayName": "Default Deluxe",
+    "cssProperties": {
+      "--color-accent": "#e8e8e8",
+      "--color-splashtext": "var(--color-accent)",
+      "--color-text": "#adadad",
+      "--color-base00": "#141414",
+      "--color-base01": "#1f1f1f",
+      "--color-base02": "#2c2c2c",
+      "--color-base03": "#383838",
+      "--darken-background": "rgba(0,0,0,0.2)",
+      "--color-homepage-sidebars-bg": "#02020585"
+    }
   },
   "white": {
-    "display-name": "Off White",
-    "--color-accent": "#4d5da2",
-    "--color-text": "#1c1916",
-    "--color-base00": "#f5fefe",
-    "--color-base01": "#eef7f7",
-    "--color-base02": "#dde6e6",
-    "--color-base03": "#cfd7d7",
-    "--color-homepage-sidebars-bg": "rgba(100, 100, 100, 0.2)",
-    "--darken-background": "rgba(215, 215, 215, 0.40)",
-    "--color-splashtext": "#120500"
-  },
-  "custom": {
-    "display-name": "Custom Theme"
+    "displayName": "Off White",
+    "cssProperties": {
+      "--color-accent": "#4d5da2",
+      "--color-text": "#1c1916",
+      "--color-base00": "#f5fefe",
+      "--color-base01": "#eef7f7",
+      "--color-base02": "#dde6e6",
+      "--color-base03": "#cfd7d7",
+      "--color-homepage-sidebars-bg": "rgba(100, 100, 100, 0.2)",
+      "--darken-background": "rgba(215, 215, 215, 0.40)",
+      "--color-splashtext": "#120500"
+    }
   },
   "ldev": {
-    "display-name": "Dark Sands",
-    "--color-accent": "oklch(90% 0.069 70)",
-    "--color-text": "oklch(80% 0.004 90)",
-    "--color-base00": "oklch(0% 0.004 35)",
-    "--color-base01": "oklch(22% 0.004 35)",
-    "--color-base02": "oklch(29% 0.004 35)",
-    "--color-base03": "oklch(34% 0.004 35)",
-    "--color-homepage-sidebars-bg": "oklch(0% 0.004 35/ 50%)",
-    "--darken-background": "rgba(0,0,0,0.25)",
-    "--color-splashtext": "oklch(90% 0.069 70)"
+    "displayName": "Dark Sands",
+    "cssProperties": {
+      "--color-accent": "oklch(90% 0.069 70)",
+      "--color-text": "oklch(80% 0.004 90)",
+      "--color-base00": "oklch(0% 0.004 35)",
+      "--color-base01": "oklch(22% 0.004 35)",
+      "--color-base02": "oklch(29% 0.004 35)",
+      "--color-base03": "oklch(34% 0.004 35)",
+      "--color-homepage-sidebars-bg": "oklch(0% 0.004 35/ 50%)",
+      "--darken-background": "rgba(0,0,0,0.25)",
+      "--color-splashtext": "oklch(90% 0.069 70)"
+    }
   },
   "birb": {
-    "display-name": "Midnight Sapphire",
-    "--color-accent": "#6e81b1",
-    "--color-text": "#a8a9ab",
-    "--color-base00": "#111117",
-    "--color-base01": "#18191d",
-    "--color-base02": "#232428",
-    "--color-base03": "#3a3c44",
-    "--color-homepage-sidebars-bg": "#02020585",
-    "--darken-background": "rgba(0,0,0,0.2)",
-    "--color-splashtext": "#7089a4"
+    "displayName": "Midnight Sapphire",
+    "cssProperties": {
+      "--color-accent": "#6e81b1",
+      "--color-text": "#a8a9ab",
+      "--color-base00": "#111117",
+      "--color-base01": "#18191d",
+      "--color-base02": "#232428",
+      "--color-base03": "#3a3c44",
+      "--color-homepage-sidebars-bg": "#02020585",
+      "--darken-background": "rgba(0,0,0,0.2)",
+      "--color-splashtext": "#7089a4"
+    }
   },
   "stalker": {
-    "display-name": "Ruby Eclipse",
-    "--color-accent": "#d6574e",
-    "--color-text": "#f8a99c",
-    "--color-base00": "#1a1311",
-    "--color-base01": "#371b19",
-    "--color-base02": "#5c1c1a",
-    "--color-base03": "#823530",
-    "--color-homepage-sidebars-bg": "#02020585",
-    "--darken-background": "rgba(0,0,0,0.2)",
-    "--color-splashtext": "#efc2c3"
+    "displayName": "Ruby Eclipse",
+    "cssProperties": {
+      "--color-accent": "#d6574e",
+      "--color-text": "#f8a99c",
+      "--color-base00": "#1a1311",
+      "--color-base01": "#371b19",
+      "--color-base02": "#5c1c1a",
+      "--color-base03": "#823530",
+      "--color-homepage-sidebars-bg": "#02020585",
+      "--darken-background": "rgba(0,0,0,0.2)",
+      "--color-splashtext": "#efc2c3"
+    }
   },
   "purple": {
-    "display-name": "Neon Violet",
-    "--color-accent": "#bd4fb3",
-    "--color-text": "#d9cdff",
-    "--color-base00": "#0b021d",
-    "--color-base01": "#130332",
-    "--color-base02": "#250654",
-    "--color-base03": "#3f0a74",
-    "--color-homepage-sidebars-bg": "#02020585",
-    "--darken-background": "rgba(0,0,0,0.2)",
-    "--color-splashtext": "#dfdeff"
+    "displayName": "Neon Violet",
+    "cssProperties": {
+      "--color-accent": "#bd4fb3",
+      "--color-text": "#d9cdff",
+      "--color-base00": "#0b021d",
+      "--color-base01": "#130332",
+      "--color-base02": "#250654",
+      "--color-base03": "#3f0a74",
+      "--color-homepage-sidebars-bg": "#02020585",
+      "--darken-background": "rgba(0,0,0,0.2)",
+      "--color-splashtext": "#dfdeff"
+    }
   },
   "chocolate": {
-    "display-name": "Dark Mocha",
-    "--color-accent": "#cdbcb4",
-    "--color-text": "#dcdad0",
-    "--color-base00": "#20181c",
-    "--color-base01": "#2c2326",
-    "--color-base02": "#3b2e2e",
-    "--color-base03": "#4c3e3e",
-    "--color-homepage-sidebars-bg": "#02020585",
-    "--darken-background": "rgba(0,0,0,0.3)",
-    "--color-splashtext": "#d3b199"
+    "displayName": "Dark Mocha",
+    "cssProperties": {
+      "--color-accent": "#cdbcb4",
+      "--color-text": "#dcdad0",
+      "--color-base00": "#20181c",
+      "--color-base01": "#2c2326",
+      "--color-base02": "#3b2e2e",
+      "--color-base03": "#4c3e3e",
+      "--color-homepage-sidebars-bg": "#02020585",
+      "--darken-background": "rgba(0,0,0,0.3)",
+      "--color-splashtext": "#d3b199"
+    }
   },
   "fall": {
-    "display-name": "Autumn Gloom",
-    "--color-accent": "#f8c791",
-    "--color-text": "#d3cbc3",
-    "--color-base00": "#231717",
-    "--color-base01": "#3b1c16",
-    "--color-base02": "#7b3f31",
-    "--color-base03": "#bf6f51",
-    "--color-homepage-sidebars-bg": "#02020585",
-    "--darken-background": "rgba(0,0,0,0.3)",
-    "--color-splashtext": "#ffe5d3"
+    "displayName": "Autumn Gloom",
+    "cssProperties": {
+      "--color-accent": "#f8c791",
+      "--color-text": "#d3cbc3",
+      "--color-base00": "#231717",
+      "--color-base01": "#3b1c16",
+      "--color-base02": "#7b3f31",
+      "--color-base03": "#bf6f51",
+      "--color-homepage-sidebars-bg": "#02020585",
+      "--darken-background": "rgba(0,0,0,0.3)",
+      "--color-splashtext": "#ffe5d3"
+    }
   },
   "winter": {
-    "display-name": "Arctic Azure",
-    "--color-accent": "#8aadb6",
-    "--color-text": "#C2BAB2",
-    "--color-base00": "#071b2c",
-    "--color-base01": "#152f47",
-    "--color-base02": "#345f7f",
-    "--color-base03": "#5687b6",
-    "--color-homepage-sidebars-bg": "#02020585",
-    "--darken-background": "rgba(0,0,0,0.2)",
-    "--color-splashtext": "#7bcfe2"
+    "displayName": "Arctic Azure",
+    "cssProperties": {
+      "--color-accent": "#8aadb6",
+      "--color-text": "#C2BAB2",
+      "--color-base00": "#071b2c",
+      "--color-base01": "#152f47",
+      "--color-base02": "#345f7f",
+      "--color-base03": "#5687b6",
+      "--color-homepage-sidebars-bg": "#02020585",
+      "--darken-background": "rgba(0,0,0,0.2)",
+      "--color-splashtext": "#7bcfe2"
+    }
   },
   "matcha": {
-    "display-name": "Matcha Green",
-    "--color-accent": "#d1f8e7",
-    "--color-text": "#d1ebd2",
-    "--color-base00": "#243926",
-    "--color-base01": "#365138",
-    "--color-base02": "#456046",
-    "--color-base03": "#4f7a51",
-    "--color-homepage-sidebars-bg": "#02020585",
-    "--darken-background": "rgba(0,0,0,0.15)",
-    "--color-splashtext": "#8ab4a7"
+    "displayName": "Matcha Green",
+    "cssProperties": {
+      "--color-accent": "#d1f8e7",
+      "--color-text": "#d1ebd2",
+      "--color-base00": "#243926",
+      "--color-base01": "#365138",
+      "--color-base02": "#456046",
+      "--color-base03": "#4f7a51",
+      "--color-homepage-sidebars-bg": "#02020585",
+      "--darken-background": "rgba(0,0,0,0.15)",
+      "--color-splashtext": "#8ab4a7"
+    }
   },
   "mountain": {
-    "display-name": "Stormy Peaks",
-    "--color-accent": "#fdfcfe",
-    "--color-text": "#d8dde4",
-    "--color-base00": "#0d1520",
-    "--color-base01": "#203349",
-    "--color-base02": "#2c3e55",
-    "--color-base03": "#556880",
-    "--color-homepage-sidebars-bg": "#02020585",
-    "--darken-background": "rgba(0, 19, 49, 0.4)",
-    "--color-splashtext": "#030c18"
+    "displayName": "Stormy Peaks",
+    "cssProperties": {
+      "--color-accent": "#fdfcfe",
+      "--color-text": "#d8dde4",
+      "--color-base00": "#0d1520",
+      "--color-base01": "#203349",
+      "--color-base02": "#2c3e55",
+      "--color-base03": "#556880",
+      "--color-homepage-sidebars-bg": "#02020585",
+      "--darken-background": "rgba(0, 19, 49, 0.4)",
+      "--color-splashtext": "#030c18"
+    }
   },
   "vax": {
-    "display-name": "__Star Wars",
-    "--color-accent": "#7a1600",
-    "--color-text": "bisque",
-    "--color-base00": "#411900",
-    "--color-base01": "#724021",
-    "--color-base02": "#b9815d",
-    "--color-base03": "#caa288",
-    "--color-homepage-sidebars-bg": "#02020585",
-    "--darken-background": "rgba(0,0,0,0.15)",
-    "--color-splashtext": "#7a1600"
+    "displayName": "Star Wars",
+    "cssProperties": {
+      "--color-accent": "#7a1600",
+      "--color-text": "bisque",
+      "--color-base00": "#411900",
+      "--color-base01": "#724021",
+      "--color-base02": "#b9815d",
+      "--color-base03": "#caa288",
+      "--color-homepage-sidebars-bg": "#02020585",
+      "--darken-background": "rgba(0,0,0,0.15)",
+      "--color-splashtext": "#7a1600"
+    }
   },
   "sand": {
-    "display-name": "Sahara Oasis",
-    "--color-accent": "#8097c5",
-    "--color-text": "#c1a49c",
-    "--color-base00": "#2e2526",
-    "--color-base01": "#3d3434",
-    "--color-base02": "#544848",
-    "--color-base03": "#634f4e",
-    "--color-homepage-sidebars-bg": "#02020585",
-    "--darken-background": "rgba(0,0,0,0.15)",
-    "--color-splashtext": "#e0c7b5"
+    "displayName": "Sahara Oasis",
+    "cssProperties": {
+      "--color-accent": "#8097c5",
+      "--color-text": "#c1a49c",
+      "--color-base00": "#2e2526",
+      "--color-base01": "#3d3434",
+      "--color-base02": "#544848",
+      "--color-base03": "#634f4e",
+      "--color-homepage-sidebars-bg": "#02020585",
+      "--darken-background": "rgba(0,0,0,0.15)",
+      "--color-splashtext": "#e0c7b5"
+    }
   },
   "pizza": {
-    "display-name": "__Pizza",
-    "--color-base00": "#4b2611",
-    "--color-base01": "#7a4e23",
-    "--color-base02": "#9b6e2c",
-    "--color-base03": "#b33232",
-    "--color-accent": "#c3be9d",
-    "--color-text": "#cfc9b8",
-    "--color-homepage-sidebars-bg": "#02020585",
-    "--darken-background": "rgba(0,0,0,0.2)"
+    "displayName": "Pizza",
+    "cssProperties": {
+      "--color-base00": "#4b2611",
+      "--color-base01": "#7a4e23",
+      "--color-base02": "#9b6e2c",
+      "--color-base03": "#b33232",
+      "--color-accent": "#c3be9d",
+      "--color-text": "#cfc9b8",
+      "--color-homepage-sidebars-bg": "#02020585",
+      "--darken-background": "rgba(0,0,0,0.2)"
+    }
   },
   "galaxy": {
-    "display-name": "Fluorescent Galaxy",
-    "--color-accent": "#daa0ef",
-    "--color-text": "#f0f0f0",
-    "--color-base00": "#1e222c",
-    "--color-base01": "#2e3440",
-    "--color-base02": "#474e5f",
-    "--color-base03": "#5c667d",
-    "--color-homepage-sidebars-bg": "#02020585",
-    "--darken-background": "rgba(0,0,0,0.3)",
-    "--color-splashtext": "#e1bbef"
+    "displayName": "Fluorescent Galaxy",
+    "cssProperties": {
+      "--color-accent": "#daa0ef",
+      "--color-text": "#f0f0f0",
+      "--color-base00": "#1e222c",
+      "--color-base01": "#2e3440",
+      "--color-base02": "#474e5f",
+      "--color-base03": "#5c667d",
+      "--color-homepage-sidebars-bg": "#02020585",
+      "--darken-background": "rgba(0,0,0,0.3)",
+      "--color-splashtext": "#e1bbef"
+    }
   },
   "pink": {
-    "display-name": "Cherry Haze",
-    "--color-accent": "#bf4183",
-    "--color-text": "#6c1c48",
-    "--color-base00": "#f7ccd5",
-    "--color-base01": "#fbbecc",
-    "--color-base02": "#f0a8c1",
-    "--color-base03": "#ea8eb0",
-    "--darken-background": "rgba(241, 203, 218, 0.61)",
-    "--color-homepage-sidebars-bg": "oklch(95.58% 0.0337 351.52 / 10%)",
-    "--color-splashtext": "#bf4183"
+    "displayName": "Cherry Haze",
+    "cssProperties": {
+      "--color-accent": "#bf4183",
+      "--color-text": "#6c1c48",
+      "--color-base00": "#f7ccd5",
+      "--color-base01": "#fbbecc",
+      "--color-base02": "#f0a8c1",
+      "--color-base03": "#ea8eb0",
+      "--darken-background": "rgba(241, 203, 218, 0.61)",
+      "--color-homepage-sidebars-bg": "oklch(95.58% 0.0337 351.52 / 10%)",
+      "--color-splashtext": "#bf4183"
+    }
   },
   "fairyblue": {
-    "display-name": "__Fairy Blue",
-    "--color-accent": "#abb6ff",
-    "--color-text": "#dde2ff",
-    "--color-base00": "#5e529a",
-    "--color-base01": "#7064af",
-    "--color-base02": "#7e72be",
-    "--color-base03": "#9186d4",
-    "--darken-background": "#5e529a40",
-    "--color-homepage-sidebars-bg": "#5e529a50",
-    "--color-splashtext": "#dde2ff"
+    "displayName": "Fairy Blue",
+    "cssProperties": {
+      "--color-accent": "#abb6ff",
+      "--color-text": "#dde2ff",
+      "--color-base00": "#5e529a",
+      "--color-base01": "#7064af",
+      "--color-base02": "#7e72be",
+      "--color-base03": "#9186d4",
+      "--darken-background": "#5e529a40",
+      "--color-homepage-sidebars-bg": "#5e529a50",
+      "--color-splashtext": "#dde2ff"
+    }
   },
   "tech": {
-    "display-name": "Tech",
-    "--color-accent": "#ff39ff",
-    "--color-text": "#00f0fe",
-    "--color-base00": "#010003",
-    "--color-base01": "#19121f",
-    "--color-base02": "#201826",
-    "--color-base03": "#3e3545",
-    "--loginpage-image": "#000000",
-    "--darken-background": "#190b1a90",
-    "--color-homepage-sidebars-bg": "#190b1a90",
-    "--color-splashtext": "#e631ef"
+    "displayName": "Tech",
+    "cssProperties": {
+      "--color-accent": "#ff39ff",
+      "--color-text": "#00f0fe",
+      "--color-base00": "#010003",
+      "--color-base01": "#19121f",
+      "--color-base02": "#201826",
+      "--color-base03": "#3e3545",
+      "--darken-background": "#190b1a90",
+      "--color-homepage-sidebars-bg": "#190b1a90",
+      "--color-splashtext": "#e631ef"
+    }
   },
   "error": {
-    "display-name": "__Error",
-    "--color-accent": "#ff0033",
-    "--color-text": "#00fff7",
-    "--color-base00": "#0a0002",
-    "--color-base01": "#150008",
-    "--color-base02": "#2a0a15",
-    "--color-base03": "#471a28",
-    "--loginpage-image": "#000000",
-    "--darken-background": "#0a000240",
-    "--color-homepage-sidebars-bg": "#0a000250",
-    "--color-splashtext": "#ff0033"
+    "displayName": "Error",
+    "cssProperties": {
+      "--color-accent": "#ff0033",
+      "--color-text": "#00fff7",
+      "--color-base00": "#0a0002",
+      "--color-base01": "#150008",
+      "--color-base02": "#2a0a15",
+      "--color-base03": "#471a28",
+      "--darken-background": "#0a000240",
+      "--color-homepage-sidebars-bg": "#0a000250",
+      "--color-splashtext": "#ff0033"
+    }
   },
   "smkerst": {
-    "display-name": "__Smartschool Kerst",
-    "--color-accent": "#f6ed4f",
-    "--color-base00": "#051e45",
-    "--color-base01": "#124f96",
-    "--color-base02": "#3071c9",
-    "--color-base03": "#4b47c0",
-    "--color-text": "#dff1e1",
-    "--darken-background": "#0a000240",
-    "--color-homepage-sidebars-bg": "#0a000250",
-    "--color-splashtext": "#dff1e1"
+    "displayName": "Smartschool Kerst",
+    "cssProperties": {
+      "--color-accent": "#f6ed4f",
+      "--color-base00": "#051e45",
+      "--color-base01": "#124f96",
+      "--color-base02": "#3071c9",
+      "--color-base03": "#4b47c0",
+      "--color-text": "#dff1e1",
+      "--darken-background": "#0a000240",
+      "--color-homepage-sidebars-bg": "#0a000250",
+      "--color-splashtext": "#dff1e1"
+    }
   },
   "japan": {
-    "display-name": "__Pink Japan",
-    "--color-accent": "#8d4373",
-    "--color-base00": "#f0c5dd",
-    "--color-base01": "#efb6d7",
-    "--color-base02": "#dba7c5",
-    "--color-base03": "#ed9acd",
-    "--color-text": "#493340",
-    "--darken-background": "rgba(255, 213, 230, 0.60)",
-    "--color-homepage-sidebars-bg": "oklch(95.58% 0.0337 351.52 / 10%)",
-    "--color-splashtext": "#ed9acd"
+    "displayName": "Pink Japan",
+    "cssProperties": {
+      "--color-accent": "#8d4373",
+      "--color-base00": "#f0c5dd",
+      "--color-base01": "#efb6d7",
+      "--color-base02": "#dba7c5",
+      "--color-base03": "#ed9acd",
+      "--color-text": "#493340",
+      "--darken-background": "rgba(255, 213, 230, 0.60)",
+      "--color-homepage-sidebars-bg": "oklch(95.58% 0.0337 351.52 / 10%)",
+      "--color-splashtext": "#ed9acd"
+    }
   },
   "summer": {
-    "display-name": "__Summer",
-    "--color-accent": "#268e99",
-    "--color-text": "#5b3d1b",
-    "--color-base00": "#efe9d3",
-    "--color-base01": "#f2e8ca",
-    "--color-base02": "#e2d4ac",
-    "--color-base03": "#c4c8c7",
-    "--color-homepage-sidebars-bg": "rgba(100, 100, 100, 0.2)",
-    "--darken-background": "rgba(255, 240, 200, 0.40)",
-    "--color-splashtext": "#5b3d1b",
-    "--shadow-color": "rgba(0, 0, 0, 0.1)"
+    "displayName": "Summer",
+    "cssProperties": {
+      "--color-accent": "#268e99",
+      "--color-text": "#5b3d1b",
+      "--color-base00": "#efe9d3",
+      "--color-base01": "#f2e8ca",
+      "--color-base02": "#e2d4ac",
+      "--color-base03": "#c4c8c7",
+      "--color-homepage-sidebars-bg": "rgba(100, 100, 100, 0.2)",
+      "--darken-background": "rgba(255, 240, 200, 0.40)",
+      "--color-splashtext": "#5b3d1b",
+      "--shadow-color": "rgba(0, 0, 0, 0.1)"
+    }
   },
   "ocean": {
-    "display-name": "__Ocean",
-    "--color-accent": "#679bb5",
-    "--color-text": "#b8c8d5",
-    "--color-base00": "#08171e",
-    "--color-base01": "#122839",
-    "--color-base02": "#17384f",
-    "--color-base03": "#3f6981",
-    "--color-homepage-sidebars-bg": "#02020585",
-    "--darken-background": "rgba(0,0,0,0.2)",
-    "--color-splashtext": "#6ee0f1"
+    "displayName": "Ocean",
+    "cssProperties": {
+      "--color-accent": "#679bb5",
+      "--color-text": "#b8c8d5",
+      "--color-base00": "#08171e",
+      "--color-base01": "#122839",
+      "--color-base02": "#17384f",
+      "--color-base03": "#3f6981",
+      "--color-homepage-sidebars-bg": "#02020585",
+      "--darken-background": "rgba(0,0,0,0.2)",
+      "--color-splashtext": "#6ee0f1"
+    }
   }
 }

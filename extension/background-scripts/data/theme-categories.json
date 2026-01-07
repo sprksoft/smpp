@@ -1,0 +1,35 @@
+{
+  "hidden": [
+    "vax",
+    "pizza",
+    "fairyblue",
+    "error",
+    "smkerst",
+    "japan",
+    "summer",
+    "ocean"
+  ],
+  "light": ["pink", "white", "summer"],
+  "dark": [
+    "birb",
+    "ldev",
+    "default",
+    "tech",
+    "stalker",
+    "mountain",
+    "purple",
+    "chocolate",
+    "fall",
+    "winter",
+    "matcha",
+    "vax",
+    "sand",
+    "ocean",
+    "fairyblue",
+    "pizza",
+    "galaxy",
+    "error",
+    "smkerst",
+    "japan"
+  ]
+}

@@ -4784,7 +4784,6 @@ div#smscMain:has(.live__quick-nav) {
 
 /* src/styles/fixes/login.css */
 html {
-  --loginpage-image: url();
   --show-options: none;
 }
 .login-app__platform-indicator {
@@ -4852,11 +4851,6 @@ a.smscButton[href^="/login/sso/init"],
 .login-app__title--separator {
   display: grid !important;
   margin-bottom: 0px !important;
-}
-body {
-  background-image: var(--loginpage-image) !important;
-  background-position: center !important;
-  background-size: cover !important;
 }
 .showLeftNav:has(.login-app) {
   align-items: center !important;
