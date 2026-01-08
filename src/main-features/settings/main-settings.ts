@@ -22,6 +22,7 @@ import { applyWeatherEffects } from "../appearance/weather-effects.js";
 import { clearAllData } from "../../fixes-utils/utils.js";
 import { loadQuickSettings } from "./quick-settings.js";
 import { createTextInput, createButton } from "../appearance/ui.js";
+import { applyProfilePicture } from "../profile.js";
 
 export class SettingsWindow extends BaseWindow {
   settingsSideBarCategories = {
@@ -302,6 +303,7 @@ export class SettingsWindow extends BaseWindow {
         }
 
         // Background
+        this.backgroundImageSelector.id = settings.appearance.theme;
         this.backgroundImageSelector.loadImageData();
 
         // Blur slider
@@ -899,6 +901,7 @@ export class SettingsWindow extends BaseWindow {
           )
         );
         this.profilePictureInput = new ImageSelector("profilePicture");
+        this.profilePictureInput.id = "profilePicture";
         this.profilePictureInput.loadImageData();
         this.profilePictureInput.onStore = async () => {
           this.storePage();
@@ -936,7 +939,6 @@ export class SettingsWindow extends BaseWindow {
         );
 
         this.backgroundImageSelector = new ImageSelector("backgroundImage");
-        this.backgroundImageSelector.loadImageData();
         this.backgroundImageSelector.onStore = () => {
           this.storePage();
         };

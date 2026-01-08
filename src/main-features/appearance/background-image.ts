@@ -30,10 +30,11 @@ export async function setBackground(appearance) {
   }
   let result = await browser.runtime.sendMessage({
     action: "getImage",
-    id: "backgroundImage",
+    id: appearance.theme,
   });
 
   if (result.type == "default") {
+    // TODO: Add error catching for custom themes
     result.imageData = await getExtensionImage(
       "theme-backgrounds/" + appearance.theme + ".jpg"
     );

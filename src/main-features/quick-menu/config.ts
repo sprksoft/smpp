@@ -1,4 +1,9 @@
 // @ts-nocheck
+import { browser } from "../main.js";
+import { getByPath } from "../../fixes-utils/utils.js";
+import { dmenu } from "./dmenu.js";
+import { apply } from "../main.js";
+
 function gatherOptions(template, name) {
   let options = [];
   for (let keyName of Object.keys(template)) {
@@ -62,7 +67,7 @@ export async function dmenuEditConfig(path) {
   const templates = await browser.runtime.sendMessage({
     action: "getSettingsTemplate",
   });
-  configPath = getFullOptPath(templates, path);
+  let configPath = getFullOptPath(templates, path);
   const template = getByPath(templates, configPath);
 
   let optionValue = await browser.runtime.sendMessage({

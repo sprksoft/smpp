@@ -7,6 +7,7 @@ import { browser, isFirefox } from "../main.js";
 export class ImageSelector {
   constructor(name) {
     this.name = name;
+    this.id = null;
 
     this.clearButton = null;
     this.linkInput = null;
@@ -154,7 +155,7 @@ export class ImageSelector {
 
     await browser.runtime.sendMessage({
       action: "setImage",
-      id: this.name,
+      id: this.id,
       data,
     });
     this.loadImageData();
@@ -164,7 +165,7 @@ export class ImageSelector {
   async loadImageData() {
     let data = await browser.runtime.sendMessage({
       action: "getImage",
-      id: this.name,
+      id: this.id,
     });
 
     if (!data) data = { link: "", type: "default" };

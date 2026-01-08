@@ -416,7 +416,7 @@ Is it scaring you off?`,
 
   // src/fixes-utils/utils.ts
   var DEBUG = false;
-  function getByPath2(object, path) {
+  function getByPath(object, path) {
     if (!path) {
       return object;
     }
@@ -467,7 +467,7 @@ Is it scaring you off?`,
   }
   async function clearAllData() {
     localStorage.clear();
-    await browser2.runtime.sendMessage({
+    await browser.runtime.sendMessage({
       action: "clearLocalStorage"
     });
     location.reload();
@@ -738,6 +738,7 @@ Is it scaring you off?`,
   var ImageSelector = class {
     constructor(name2) {
       this.name = name2;
+      this.id = null;
       this.clearButton = null;
       this.linkInput = null;
       this.linkInputContainer = this.createLinkImageInputContainer();
@@ -832,7 +833,7 @@ Is it scaring you off?`,
       });
     }
     async storeImage() {
-      let data2 = await browser2.runtime.sendMessage({
+      let data2 = await browser.runtime.sendMessage({
         action: "getImage",
         id: this.name
       });
@@ -861,18 +862,18 @@ Is it scaring you off?`,
           }
         }
       }
-      await browser2.runtime.sendMessage({
+      await browser.runtime.sendMessage({
         action: "setImage",
-        id: this.name,
+        id: this.id,
         data: data2
       });
       this.loadImageData();
       this.onStore();
     }
     async loadImageData() {
-      let data2 = await browser2.runtime.sendMessage({
+      let data2 = await browser.runtime.sendMessage({
         action: "getImage",
-        id: this.name
+        id: this.id
       });
       if (!data2) data2 = { link: "", type: "default" };
       this.linkInput.value = data2.link || "";
@@ -891,7 +892,7 @@ Is it scaring you off?`,
   async function getImageURL(id, onDefault) {
     let image;
     try {
-      image = await browser2.runtime.sendMessage({ action: "getImage", id });
+      image = await browser.runtime.sendMessage({ action: "getImage", id });
     } catch (err) {
       console.warn("[getImageURL] Failed to get image from background:", err);
       return { url: onDefault(), type: null };
@@ -976,7 +977,7 @@ Is it scaring you off?`,
       displayUsernameTopNav(originalUsername);
     }
   }
-  async function applyProfilePicture2(profile) {
+  async function applyProfilePicture(profile) {
     let style = document.documentElement.style;
     const setPFPstyle = (url) => {
       style.setProperty("--profile-picture", "url(" + url + ")");
@@ -1016,7 +1017,7 @@ Is it scaring you off?`,
   var active_dmenu = null;
   var dmenuConfig = null;
   async function reloadDMenuConfig() {
-    dmenuConfig = await browser2.runtime.sendMessage({
+    dmenuConfig = await browser.runtime.sendMessage({
       action: "getSetting",
       name: "other.dmenu"
     });
@@ -1228,7 +1229,7 @@ Is it scaring you off?`,
       document.body.appendChild(this.menuEl);
     }
   };
-  function dmenu2(itemList, endFunc = void 0, title = "dmenu:", opener = void 0) {
+  function dmenu(itemList, endFunc = void 0, title = "dmenu:", opener = void 0) {
     if (active_dmenu !== null && active_dmenu.isOpen()) {
       active_dmenu.close();
     }
@@ -1310,7 +1311,7 @@ Is it scaring you off?`,
     const templates = await browser.runtime.sendMessage({
       action: "getSettingsTemplate"
     });
-    configPath = getFullOptPath(templates, path);
+    let configPath = getFullOptPath(templates, path);
     const template = getByPath(templates, configPath);
     let optionValue = await browser.runtime.sendMessage({
       action: "getSetting",
@@ -1424,7 +1425,7 @@ Is it scaring you off?`,
       return p;
     }
     async clearWidgetSettings() {
-      await browser2.runtime.sendMessage({
+      await browser.runtime.sendMessage({
         action: "setWidgetData",
         widget: this.constructor.name,
         data: this.defaultSettings()
@@ -1601,7 +1602,7 @@ Is it scaring you off?`,
       if (this.#settings !== void 0) {
         return;
       }
-      const settings = await browser2.runtime.sendMessage({
+      const settings = await browser.runtime.sendMessage({
         action: "getWidgetData",
         widget: this.constructor.name
       });
@@ -1611,7 +1612,7 @@ Is it scaring you off?`,
     async setSetting(path, value) {
       await this.#loadSettings();
       setByPath(this.#settings, path, value);
-      await browser2.runtime.sendMessage({
+      await browser.runtime.sendMessage({
         action: "setWidgetData",
         widget: this.constructor.name,
         data: this.#settings
@@ -1622,7 +1623,7 @@ Is it scaring you off?`,
     }
     async getSetting(path) {
       await this.#loadSettings();
-      return getByPath2(this.#settings, path);
+      return getByPath(this.#settings, path);
     }
     get settings() {
       if (this.#settings === void 0) {
@@ -1827,7 +1828,7 @@ Is it scaring you off?`,
     const button = createButtonWithLabel("smpp-widget-news-toggle", "Show News");
     button.addEventListener("change", async (e) => {
       updateNews(e.target.checked);
-      await browser2.runtime.sendMessage({
+      await browser.runtime.sendMessage({
         action: "setSetting",
         name: "appearance.news",
         data: e.target.checked
@@ -1852,7 +1853,7 @@ Is it scaring you off?`,
       console.error(`"centercontainer" doesn't exist`);
       return false;
     }
-    let widgetData = await browser2.runtime.sendMessage({
+    let widgetData = await browser.runtime.sendMessage({
       action: "getWidgetLayout"
     });
     console.log("Applying widgets with data: \n", widgetData);
@@ -1919,7 +1920,7 @@ Is it scaring you off?`,
         widgetData.rightPannels.push(pannelData);
       }
     }
-    await browser2.runtime.sendMessage({
+    await browser.runtime.sendMessage({
       action: "setWidgetLayout",
       layout: widgetData
     });
@@ -2152,10 +2153,10 @@ Is it scaring you off?`,
   // src/main-features/appearance/themes.ts
   var currentThemeName;
   var currentTheme;
-  async function getTheme(themeName) {
-    let theme = await browser2.runtime.sendMessage({
+  async function getTheme(name2) {
+    let theme = await browser.runtime.sendMessage({
       action: "getTheme",
-      theme: themeName
+      name: name2
     });
     return theme;
   }
@@ -2179,6 +2180,35 @@ Is it scaring you off?`,
   function getThemeVar(varName) {
     return currentTheme.cssProperties[varName];
   }
+  async function saveCustomTheme() {
+    let testCustomTheme = {
+      displayName: "testTheme",
+      cssProperties: {
+        "--color-accent": "#4d5da2",
+        "--color-text": "#1c1916",
+        "--color-base00": "#f5fefe",
+        "--color-base01": "#eef7f7",
+        "--color-base02": "#dde6e6",
+        "--color-base03": "#cfd7d7",
+        "--color-homepage-sidebars-bg": "rgba(100, 100, 100, 0.2)",
+        "--darken-background": "rgba(215, 215, 215, 0.40)",
+        "--color-splashtext": "#120500"
+      }
+    };
+    let id = await browser.runtime.sendMessage({
+      action: "saveCustomTheme",
+      data: testCustomTheme
+    });
+    let data2 = await browser.runtime.sendMessage({
+      action: "getSettingsData"
+    });
+    data2.appearance.theme = id;
+    await browser.runtime.sendMessage({
+      action: "setSettingsData",
+      data: data2
+    });
+    console.log(await getTheme("default"));
+  }
 
   // src/widgets/plant.ts
   var plantVersion = 2;
@@ -2192,7 +2222,7 @@ Is it scaring you off?`,
     async createPreview() {
       let plantPreviewDiv = document.createElement("div");
       plantPreviewDiv.id = "plantPreviewWidget";
-      let plantData = await browser2.runtime.sendMessage({
+      let plantData = await browser.runtime.sendMessage({
         action: "getPlantAppData"
       });
       let plantTitle = document.createElement("div");
@@ -2214,7 +2244,7 @@ Is it scaring you off?`,
     if (window.localStorage.getItem("current_plant_conditions")) {
       await migratePlantData();
     }
-    let plantData = await browser2.runtime.sendMessage({
+    let plantData = await browser.runtime.sendMessage({
       action: "getPlantAppData"
     });
     let outdated = checkIfOutdated(plantData.plantVersion);
@@ -2322,7 +2352,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     return updatePromptContainer;
   }
   async function resetPlant() {
-    await browser2.runtime.sendMessage({
+    await browser.runtime.sendMessage({
       action: "setPlantAppData",
       data: null
     });
@@ -2381,11 +2411,11 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     removeplantButton.addEventListener("click", resetPlant);
   }
   async function userWateredPlant() {
-    let data2 = await browser2.runtime.sendMessage({
+    let data2 = await browser.runtime.sendMessage({
       action: "getPlantAppData"
     });
     data2.lastWaterTime = /* @__PURE__ */ new Date();
-    await browser2.runtime.sendMessage({
+    await browser.runtime.sendMessage({
       action: "setPlantAppData",
       data: data2
     });
@@ -2410,7 +2440,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         (currentTime - new Date(data2.birthday)) / (1e3 * 60 * 60 * 24) + 1
       );
     }
-    browser2.runtime.sendMessage({
+    browser.runtime.sendMessage({
       action: "setPlantAppData",
       data: data2
     });
@@ -2439,7 +2469,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       daysSinceBirthday: 0,
       isAlive: true
     };
-    browser2.runtime.sendMessage({
+    browser.runtime.sendMessage({
       action: "setPlantAppData",
       data: plantData
     });
@@ -3172,7 +3202,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     };
   }
   async function getPlantV1() {
-    let data2 = await browser2.runtime.sendMessage({
+    let data2 = await browser.runtime.sendMessage({
       action: "getPlantAppData"
     });
     if (!data2) {
@@ -3234,7 +3264,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     }
   }
   async function quickLoad() {
-    const quicks2 = await browser2.runtime.sendMessage({
+    const quicks2 = await browser.runtime.sendMessage({
       action: "getSetting",
       name: "other.quicks"
     });
@@ -3244,7 +3274,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     return quicks2;
   }
   async function quick_save() {
-    await browser2.runtime.sendMessage({
+    await browser.runtime.sendMessage({
       action: "setSetting",
       name: "other.quicks",
       data: quicks
@@ -3252,7 +3282,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   }
   function add_quick_interactive() {
     let cmd_list = quick_cmd_list();
-    dmenu2(
+    dmenu(
       cmd_list,
       function(name2, shift) {
         value_list = [];
@@ -3262,7 +3292,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             break;
           }
         }
-        dmenu2(
+        dmenu(
           value_list,
           function(value, shift2) {
             if (!value.startsWith("http")) {
@@ -3278,7 +3308,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   }
   function remove_quick_interactive() {
     let cmd_list = quick_cmd_list();
-    dmenu2(
+    dmenu(
       cmd_list,
       function(name2, shift) {
         remove_quick(name2);
@@ -3352,12 +3382,14 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       "breakdmenu",
       "glass",
       "ridge",
-      "reset plant"
+      "reset plant",
+      "save theme",
+      "remove current theme"
     ]);
     if (dmenuConfig.toplevelConfig) {
       cmd_list = cmd_list.concat(await getDMenuOptionsForSettings(true));
     }
-    dmenu2(
+    dmenu(
       cmd_list,
       async function(cmd) {
         switch (cmd) {
@@ -3365,7 +3397,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             unbloat();
             return;
           case "breakdmenu":
-            await browser2.runtime.sendMessage({
+            await browser.runtime.sendMessage({
               action: "setSetting",
               name: "other.dmenu",
               data: {
@@ -3374,7 +3406,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             });
             return;
           case "config":
-            dmenu2(
+            dmenu(
               await getDMenuOptionsForSettings(false),
               function(cmd2, shift) {
                 dmenuEditConfig(cmd2);
@@ -3422,10 +3454,28 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             return;
           case "plant data":
             console.log(
-              await browser2.runtime.sendMessage({
+              await browser.runtime.sendMessage({
                 action: "getPlantAppData"
               })
             );
+          case "save theme":
+            await saveCustomTheme();
+            break;
+          case "remove current theme":
+            let data2 = await browser.runtime.sendMessage({
+              action: "getSettingsData"
+            });
+            await browser.runtime.sendMessage({
+              action: "removeCustomTheme",
+              id: data2.appearance.theme
+            });
+            break;
+          case "test cats":
+            let themes4 = await browser.runtime.sendMessage({
+              action: "getThemes",
+              categories: ["light", "custom"]
+            });
+            console.log(themes4);
           default:
             break;
         }
@@ -3550,13 +3600,10 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   var quickSettingsWindowIsHidden = true;
   var quickSettingsBackgroundImageSelector;
   async function storeQuickSettings() {
-    const oldData = await browser2.runtime.sendMessage({
+    const oldData = await browser.runtime.sendMessage({
       action: "getSettingsData"
     });
     const data2 = structuredClone(oldData);
-    if (document.getElementById("theme-selector").value != data2.appearance.theme && document.getElementById("theme-selector").value != "") {
-      data2.appearance.theme = document.getElementById("theme-selector").value;
-    }
     data2.appearance.background.blur = Number(
       document.getElementById("background-blur-amount-slider").value
     );
@@ -3566,18 +3613,19 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     document.getElementById(
       "performance-mode-info"
     ).innerHTML = `Toggle performance mode ${data2.other.performanceMode ? "<span class='green-underline'>Enabled</span>" : "<span class='red-underline'>Disabled</span>"}`;
-    await browser2.runtime.sendMessage({ action: "setSettingsData", data: data2 });
+    await browser.runtime.sendMessage({ action: "setSettingsData", data: data2 });
     await loadQuickSettings();
     if (settingsWindow) {
       await settingsWindow.loadPage();
     }
     console.log("Successfull stored quick settings:\n", data2);
-    await apply2();
+    await apply();
   }
   async function loadQuickSettings() {
-    const data2 = await browser2.runtime.sendMessage({
+    const data2 = await browser.runtime.sendMessage({
       action: "getSettingsData"
     });
+    quickSettingsBackgroundImageSelector.id = data2.appearance.theme;
     quickSettingsBackgroundImageSelector.loadImageData();
     document.getElementById("background-blur-amount-slider").value = data2.appearance.background.blur;
     document.getElementById("performance-mode-toggle").checked = data2.other.performanceMode;
@@ -3664,7 +3712,6 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     quickSettingsBackgroundImageSelector.onStore = () => {
       storeQuickSettings();
     };
-    quickSettingsBackgroundImageSelector.loadImageData();
     quickSettingsWindow = createQuickSettingsHTML(quickSettingsWindow);
     document.getElementById("quickSettingsButton").insertAdjacentElement("afterend", quickSettingsWindow);
     document.getElementById("performanceModeTooltipLabel").addEventListener("mouseover", () => {
@@ -3751,7 +3798,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       }
     };
     async createSettingsSideBarProfileButton() {
-      let data2 = await browser2.runtime.sendMessage({
+      let data2 = await browser.runtime.sendMessage({
         action: "getSettingsData"
       });
       let radioInput = document.createElement("input");
@@ -3880,7 +3927,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       });
     }
     async loadPage() {
-      let settings = await browser2.runtime.sendMessage({
+      let settings = await browser.runtime.sendMessage({
         action: "getSettingsData"
       });
       async function loadWidgetSettingSlider(id, setting) {
@@ -3913,6 +3960,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           } else {
             document.getElementById("colorpickersforsettingspage").classList.remove("visible");
           }
+          this.backgroundImageSelector.id = settings.appearance.theme;
           this.backgroundImageSelector.loadImageData();
           document.getElementById("settings-page-blur-slider").value = settings.appearance.background.blur * 10;
           document.querySelectorAll(".settings-page-weather-overlay-container input").forEach((input) => {
@@ -3989,7 +4037,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       }
     }
     async storePage() {
-      const settings = await browser2.runtime.sendMessage({
+      const settings = await browser.runtime.sendMessage({
         action: "getSettingsData"
       });
       let previousSettings = structuredClone(settings);
@@ -4150,7 +4198,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         default:
           break;
       }
-      await browser2.runtime.sendMessage({
+      await browser.runtime.sendMessage({
         action: "setSettingsData",
         data: settings
       });
@@ -4340,10 +4388,11 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             )
           );
           this.profilePictureInput = new ImageSelector("profilePicture");
+          this.profilePictureInput.id = "profilePicture";
           this.profilePictureInput.loadImageData();
           this.profilePictureInput.onStore = async () => {
             this.storePage();
-            const data2 = await browser2.runtime.sendMessage({
+            const data2 = await browser.runtime.sendMessage({
               action: "getSettingsData"
             });
             applyProfilePicture(data2.profile);
@@ -4372,7 +4421,6 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             createDescription("Personalize your backdrop with a custom image.")
           );
           this.backgroundImageSelector = new ImageSelector("backgroundImage");
-          this.backgroundImageSelector.loadImageData();
           this.backgroundImageSelector.onStore = () => {
             this.storePage();
           };
@@ -4708,7 +4756,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     return colorpickers;
   }
   async function loadCustomThemeDataV2() {
-    const themeData = await browser2.runtime.sendMessage({
+    const themeData = await browser.runtime.sendMessage({
       action: "getCustomThemeData"
     });
     customTheme = themeData;
@@ -4730,7 +4778,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     document.getElementById("settings-colorPicker6").value = themeData.color_text;
   }
   async function storeCustomThemeDataV2() {
-    await browser2.runtime.sendMessage({
+    await browser.runtime.sendMessage({
       action: "setCustomThemeData",
       data: {
         color_base00: document.getElementById("settings-colorPicker1").value,
@@ -4802,9 +4850,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         document.body.appendChild(img);
       }
     }
-    let result = await browser2.runtime.sendMessage({
+    let result = await browser.runtime.sendMessage({
       action: "getImage",
-      id: "backgroundImage"
+      id: appearance.theme
     });
     if (result.type == "default") {
       result.imageData = await getExtensionImage(
@@ -6613,7 +6661,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     return delijnDirectionsArray.join(", ");
   }
   async function fetchDelijnData(url) {
-    return await browser2.runtime.sendMessage({
+    return await browser.runtime.sendMessage({
       action: "fetchDelijnData",
       url
     });
@@ -6864,7 +6912,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       }
     }
     async initializeData() {
-      lijnDataKleuren = await browser2.runtime.sendMessage({
+      lijnDataKleuren = await browser.runtime.sendMessage({
         action: "getDelijnColorData"
       });
       if (this.settings.halte.nummer == null) {
@@ -7365,7 +7413,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       return this.settings.cache.weatherData;
     }
     async fetchWeatherData(location2) {
-      return await browser2.runtime.sendMessage({
+      return await browser.runtime.sendMessage({
         action: "fetchWeatherData",
         location: location2
       });
@@ -7410,7 +7458,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       this.element.appendChild(this.createHTML(await this.getWeatherData()));
     }
     async updateWeatherEffect() {
-      const settings = await browser2.runtime.sendMessage({
+      const settings = await browser.runtime.sendMessage({
         action: "getSettingsData"
       });
       applyWeatherEffects(settings.appearance.weatherOverlay);
@@ -7763,7 +7811,7 @@ ${code}`;
   // src/fixes-utils/migration.ts
   async function migrate() {
     await removeLegacyData();
-    let settingsData = await browser2.runtime.sendMessage({
+    let settingsData = await browser.runtime.sendMessage({
       action: "getRawSettingsData"
     });
     if (settingsData == void 0) return;
@@ -7777,10 +7825,10 @@ ${code}`;
     await migrateWidgetSettingsData();
   }
   async function migrateWidgetSettingsData() {
-    let delijnAppData = await browser2.runtime.sendMessage({
+    let delijnAppData = await browser.runtime.sendMessage({
       action: "getDelijnAppData"
     });
-    let weatherAppData = await browser2.runtime.sendMessage({
+    let weatherAppData = await browser.runtime.sendMessage({
       action: "getWeatherAppData"
     });
     if (Object.keys(delijnAppData).length !== 0) {
@@ -7819,7 +7867,7 @@ ${code}`;
         };
         break;
       case 2:
-        let imageData = await browser2.runtime.sendMessage({
+        let imageData = await browser.runtime.sendMessage({
           action: "getBackgroundImage"
         });
         data2 = {
@@ -7831,7 +7879,7 @@ ${code}`;
       default:
         break;
     }
-    await browser2.runtime.sendMessage({
+    await browser.runtime.sendMessage({
       action: "setImage",
       id: "backgroundImage",
       data: data2
@@ -7871,14 +7919,14 @@ ${code}`;
       quicks: oldData.quicks,
       performanceMode: oldData.enablePerfomanceMode
     };
-    await browser2.runtime.sendMessage({
+    await browser.runtime.sendMessage({
       action: "setRawSettingsData",
       data: newSettingsData
     });
-    const settings = await browser2.runtime.sendMessage({
+    const settings = await browser.runtime.sendMessage({
       action: "getSettingsData"
     });
-    await browser2.runtime.sendMessage({
+    await browser.runtime.sendMessage({
       action: "setSettingsData",
       data: settings
     });
@@ -7993,7 +8041,7 @@ ${code}`;
   var originalUsername;
   var settingsTemplate3;
   var themes3;
-  var browser2;
+  var browser;
   var onHomePage;
   var onLoginPage;
   var isGOSchool;
@@ -8001,8 +8049,8 @@ ${code}`;
   var originalPfpUrl;
   var keybinds;
   var liteMode;
-  if (browser2 == void 0) {
-    browser2 = chrome;
+  if (browser == void 0) {
+    browser = chrome;
   }
   function updateDiscordPopup(discordButtonEnabled) {
     if (discordButtonEnabled) {
@@ -8110,10 +8158,10 @@ ${code}`;
     }
   }
   async function createStaticGlobals() {
-    themes3 = await browser2.runtime.sendMessage({
+    themes3 = await browser.runtime.sendMessage({
       action: "getThemes"
     });
-    settingsTemplate3 = await browser2.runtime.sendMessage({
+    settingsTemplate3 = await browser.runtime.sendMessage({
       action: "getSettingsTemplate"
     });
     originalUsername = document.querySelector(".js-btn-profile .hlp-vert-box span")?.innerText || "Mr Unknown";
@@ -8129,7 +8177,7 @@ ${code}`;
     onHomePage = document.getElementById("container") != null;
     onLoginPage = document.querySelector(".login-app") != null;
     var quicks2 = await quickLoad();
-    liteMode = browser2.runtime.getManifest().name.includes("Lite");
+    liteMode = browser.runtime.getManifest().name.includes("Lite");
   }
   async function applyAppearance(appearance) {
     let style = document.documentElement.style;
@@ -8160,7 +8208,7 @@ ${code}`;
       "url(" + getPfpLink(profile.username || originalUsername) + ")"
     );
     applyUsername(profile.username);
-    applyProfilePicture2(profile);
+    applyProfilePicture(profile);
   }
   function applyFixes() {
     changeFont();
@@ -8176,8 +8224,8 @@ ${code}`;
     }
     if (document.querySelector(".login-app__left")) updateLoginPanel();
   }
-  async function apply2() {
-    const data2 = await browser2.runtime.sendMessage({
+  async function apply() {
+    const data2 = await browser.runtime.sendMessage({
       action: "getSettingsData"
     });
     console.log("Applying with settings data: \n", data2);
@@ -8263,7 +8311,7 @@ ${code}`;
       await createSettingsWindow();
       createTopButtons();
     }
-    await apply2();
+    await apply();
   }
   main();
 })();

@@ -1,26 +1,35 @@
 import { loadJSON } from "./json-loader.js";
+import { browser } from "./background-script.js";
+import { removeImage } from "./data-background-script.js";
 
-let themes;
+let nativeThemes;
 let categories;
 
 async function getAllThemes() {
-  if (!themes) {
-    themes = await loadJSON("background-scripts/data/themes.json");
+  if (!nativeThemes) {
+    nativeThemes = await loadJSON("background-scripts/data/themes.json");
   }
+  let customThemes = await getAllCustomThemes();
+  let themes = { ...nativeThemes, ...customThemes };
+  console.log("All custom themes:", customThemes);
+  console.log("All themes:", themes);
   return themes;
 }
 
-async function getAllThemeCategories() {
+export async function getAllThemeCategories() {
   if (!categories) {
     categories = await loadJSON(
       "background-scripts/data/theme-categories.json"
     );
   }
+  categories.custom = getCustomCategory();
   return categories;
 }
 
 async function getThemeCategory(category) {
+  console.log("Getting theme category:", category);
   let categories = await getAllThemeCategories();
+  console.log("Gave:", categories);
   return categories[category];
 }
 
@@ -68,4 +77,33 @@ export async function getTheme(name) {
     console.error(`Invalid theme requested:"${name}", sent "error" theme`);
     return allThemes["error"];
   }
+}
+
+async function getAllCustomThemes() {
+  const result = await browser.storage.local.get("customThemes");
+  return result.customThemes || {};
+}
+
+async function getCustomCategory() {
+  const customThemes = await getAllCustomThemes();
+  let customCategory = Object.keys(customThemes);
+  console.log(customCategory);
+  return customCategory;
+}
+
+export async function saveCustomTheme(data, id = undefined) {
+  if (id === undefined) {
+    id = crypto.randomUUID();
+  }
+  const customThemes = await getAllCustomThemes();
+  customThemes[id] = data;
+  await browser.storage.local.set({ customThemes });
+  return id;
+}
+
+export async function removeCustomTheme(id) {
+  const customThemes = await getAllCustomThemes();
+  delete customThemes[id];
+  await removeImage(id);
+  await browser.storage.local.set({ customThemes });
 }

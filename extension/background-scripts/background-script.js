@@ -1,5 +1,6 @@
+export var browser;
 if (typeof browser === "undefined") {
-  var browser = chrome;
+  browser = chrome;
 }
 
 let globalsInitialized = false;
@@ -19,7 +20,13 @@ import {
 
 import { fetchWeatherData, fetchDelijnData } from "./api-background-script.js";
 import { initGlobals } from "./json-loader.js";
-import { getTheme, getThemes } from "./themes.js";
+import {
+  getTheme,
+  getThemes,
+  getAllThemeCategories,
+  saveCustomTheme,
+  removeCustomTheme,
+} from "./themes.js";
 
 import { getByPath, setByPath } from "./utils.js";
 
@@ -54,12 +61,29 @@ async function handleMessage(message, sendResponse) {
       );
     }
     if (message.action === "getTheme") {
-      let theme = await getTheme(message.theme);
+      let theme = await getTheme(message.name);
       sendResponse(theme);
-      console.log(`Theme ${message.theme} sent.`);
+      console.log(`Theme ${message.name} sent.`);
+    }
+    if (message.action == "getAllThemeCategories") {
+      let categories = await getAllThemeCategories();
+      sendResponse(categories);
+      console.log(`Theme categories sent: ${categories}`);
+    }
+    if (message.action === "saveCustomTheme") {
+      let id = await saveCustomTheme(message.data, message.id);
+      sendResponse(id);
+
+      console.log(`Custom theme ${message.id} saved as:`);
+      console.log(message.data);
+    }
+    if (message.action === "removeCustomTheme") {
+      await removeCustomTheme(message.id);
+      sendResponse({ success: true });
+      console.log(`Theme ${message.id} removed.`);
     }
 
-    // Custom theme
+    // Custom theme OLD
     if (message.action === "getCustomThemeData") {
       const customThemeData = await getCustomThemeData();
       sendResponse(customThemeData);

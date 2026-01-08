@@ -14,12 +14,6 @@ async function storeQuickSettings() {
   });
 
   const data = structuredClone(oldData);
-  if (
-    document.getElementById("theme-selector").value != data.appearance.theme &&
-    document.getElementById("theme-selector").value != ""
-  ) {
-    data.appearance.theme = document.getElementById("theme-selector").value;
-  }
 
   data.appearance.background.blur = Number(
     document.getElementById("background-blur-amount-slider").value
@@ -51,6 +45,7 @@ export async function loadQuickSettings() {
     action: "getSettingsData",
   });
 
+  quickSettingsBackgroundImageSelector.id = data.appearance.theme;
   quickSettingsBackgroundImageSelector.loadImageData();
 
   document.getElementById("background-blur-amount-slider").value =
@@ -166,7 +161,6 @@ export function createQuickSettings() {
   quickSettingsBackgroundImageSelector.onStore = () => {
     storeQuickSettings();
   };
-  quickSettingsBackgroundImageSelector.loadImageData();
   quickSettingsWindow = createQuickSettingsHTML(quickSettingsWindow);
 
   document

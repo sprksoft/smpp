@@ -60,3 +60,9 @@ export async function getImage(id) {
   if (!images[id]) return { type: "default", link: null, imageData: null };
   return images[id];
 }
+
+export async function removeImage(id) {
+  const images = (await browser.storage.local.get("images")).images || {};
+  delete images[id];
+  await browser.storage.local.set({ images });
+}

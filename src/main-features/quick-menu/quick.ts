@@ -1,11 +1,7 @@
 // @ts-nocheck
 import { dmenu, dmenuConfig } from "./dmenu.js";
-import {
-  getDMenuOptionsForSettings,
-  dmenuEditConfig,
-} from "./config.js";
+import { getDMenuOptionsForSettings, dmenuEditConfig } from "./config.js";
 import { openURL, unbloat, clearAllData } from "../../fixes-utils/utils.js";
-
 import { openGlobalChat } from "../globalchat.js";
 import { resetPlant } from "../../widgets/plant.js";
 import { browser } from "../main.js";
@@ -240,12 +236,12 @@ export async function do_qm(opener = "") {
         case "dizzy":
           const styleEl = document.createElement("style");
           styleEl.innerText = `
-*{
-  transition: transform 10s !important;
-}
-*:hover{
-  transform: rotate(360deg) !important;
-}`;
+                              *{
+                                transition: transform 10s !important;
+                              }
+                              *:hover{
+                                transform: rotate(360deg) !important;
+                              }`;
           document.body.appendChild(styleEl);
           return;
         case "reset plant":

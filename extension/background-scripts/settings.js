@@ -14,8 +14,9 @@ export async function getSettingsTemplate() {
     settingsTemplate = await loadJSON(
       "background-scripts/data/settings-template.json"
     );
-    settingsTemplate.appearance.theme = Object.keys(await getThemes());
   }
+  settingsTemplate.appearance.theme = Object.keys(await getThemes());
+
   return settingsTemplate;
 }
 
