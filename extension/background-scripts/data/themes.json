@@ -225,15 +225,15 @@
   "fairyblue": {
     "displayName": "Fairy Blue",
     "cssProperties": {
-      "--color-accent": "#abb6ff",
-      "--color-text": "#dde2ff",
-      "--color-base00": "#5e529a",
-      "--color-base01": "#7064af",
-      "--color-base02": "#7e72be",
-      "--color-base03": "#9186d4",
-      "--darken-background": "#5e529a40",
-      "--color-homepage-sidebars-bg": "#5e529a50",
-      "--color-splashtext": "#dde2ff"
+      "--color-accent": "oklch(0.9 0.09 250)",
+      "--color-text": "oklch(1.0 0.09 250)",
+      "--color-base00": "oklch(0.65 0.09 250)",
+      "--color-base01": "oklch(0.70 0.09 250)",
+      "--color-base02": "oklch(0.75 0.09 250)",
+      "--color-base03": "oklch(0.80 0.09 250)",
+      "--darken-background": "#ffffff20",
+      "--color-homepage-sidebars-bg": "#ffffff00",
+      "--color-splashtext": "#7ac5ff"
     }
   },
   "tech": {
