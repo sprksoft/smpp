@@ -2180,35 +2180,6 @@ Is it scaring you off?`,
   function getThemeVar(varName) {
     return currentTheme.cssProperties[varName];
   }
-  async function saveCustomTheme() {
-    let testCustomTheme = {
-      displayName: "testTheme",
-      cssProperties: {
-        "--color-accent": "#4d5da2",
-        "--color-text": "#1c1916",
-        "--color-base00": "#f5fefe",
-        "--color-base01": "#eef7f7",
-        "--color-base02": "#dde6e6",
-        "--color-base03": "#cfd7d7",
-        "--color-homepage-sidebars-bg": "rgba(100, 100, 100, 0.2)",
-        "--darken-background": "rgba(215, 215, 215, 0.40)",
-        "--color-splashtext": "#120500"
-      }
-    };
-    let id = await browser.runtime.sendMessage({
-      action: "saveCustomTheme",
-      data: testCustomTheme
-    });
-    let data2 = await browser.runtime.sendMessage({
-      action: "getSettingsData"
-    });
-    data2.appearance.theme = id;
-    await browser.runtime.sendMessage({
-      action: "setSettingsData",
-      data: data2
-    });
-    console.log(await getTheme("default"));
-  }
 
   // src/widgets/plant.ts
   var plantVersion = 2;
@@ -3383,8 +3354,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       "glass",
       "ridge",
       "reset plant",
-      "save theme",
-      "remove current theme"
+      "remove current theme",
+      "test cats"
     ]);
     if (dmenuConfig.toplevelConfig) {
       cmd_list = cmd_list.concat(await getDMenuOptionsForSettings(true));
@@ -3441,12 +3412,12 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           case "dizzy":
             const styleEl = document.createElement("style");
             styleEl.innerText = `
-*{
-  transition: transform 10s !important;
-}
-*:hover{
-  transform: rotate(360deg) !important;
-}`;
+                              *{
+                                transition: transform 10s !important;
+                              }
+                              *:hover{
+                                transform: rotate(360deg) !important;
+                              }`;
             document.body.appendChild(styleEl);
             return;
           case "reset plant":
@@ -3458,9 +3429,6 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
                 action: "getPlantAppData"
               })
             );
-          case "save theme":
-            await saveCustomTheme();
-            break;
           case "remove current theme":
             let data2 = await browser.runtime.sendMessage({
               action: "getSettingsData"
@@ -3473,7 +3441,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           case "test cats":
             let themes4 = await browser.runtime.sendMessage({
               action: "getThemes",
-              categories: ["light", "custom"]
+              categories: ["quickSettings"],
+              includeHidden: true
             });
             console.log(themes4);
           default:

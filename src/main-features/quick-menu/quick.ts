@@ -178,6 +178,8 @@ export async function do_qm(opener = "") {
       "glass",
       "ridge",
       "reset plant",
+      "remove current theme",
+      "test cats",
     ]);
 
   if (dmenuConfig.toplevelConfig) {
@@ -253,6 +255,22 @@ export async function do_qm(opener = "") {
               action: "getPlantAppData",
             })
           );
+        case "remove current theme":
+          let data = await browser.runtime.sendMessage({
+            action: "getSettingsData",
+          });
+          await browser.runtime.sendMessage({
+            action: "removeCustomTheme",
+            id: data.appearance.theme,
+          });
+          break;
+        case "test cats":
+          let themes = await browser.runtime.sendMessage({
+            action: "getThemes",
+            categories: ["quickSettings"],
+            includeHidden: true,
+          });
+          console.log(themes);
         default:
           break;
       }

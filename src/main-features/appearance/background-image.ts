@@ -1,14 +1,15 @@
 // @ts-nocheck
 import { getExtensionImage } from "../../fixes-utils/utils.js";
 import { browser } from "../main.js";
-export async function setBackground(appearance) {
-  function displayBackgroundImage(image) {
+
+export async function setBackground(appearance: Object) {
+  function displayBackgroundImage(imageSrc: string) {
     document.documentElement.style.setProperty(
       "--background-color",
       `transparent`
     );
     let img =
-      document.getElementById("background_image") ||
+      (document.getElementById("background_image") as HTMLImageElement) ||
       document.createElement("img");
     img.id = "background_image";
     img.style.backgroundColor = "var(--color-base00)";
@@ -18,9 +19,9 @@ export async function setBackground(appearance) {
     img.style.width = "100%";
     img.style.height = "100%";
     img.style.objectFit = "cover";
-    img.style.zIndex = -1;
+    img.style.zIndex = "-1";
     img.style.display = "block";
-    if (image) img.src = image;
+    if (imageSrc) img.src = imageSrc;
     if (
       !document.getElementById("background_image") &&
       !document.getElementById("tinymce") // check for message writing box
@@ -28,16 +29,16 @@ export async function setBackground(appearance) {
       document.body.appendChild(img);
     }
   }
-  let result = await browser.runtime.sendMessage({
+  let result = (await browser.runtime.sendMessage({
     action: "getImage",
     id: appearance.theme,
-  });
+  })) as Image;
 
   if (result.type == "default") {
-    // TODO: Add error catching for custom themes
-    result.imageData = await getExtensionImage(
-      "theme-backgrounds/" + appearance.theme + ".jpg"
-    );
+    if ((Object.keys(), appearance.theme))
+      result.imageData = await getExtensionImage(
+        "theme-backgrounds/" + appearance.theme + ".jpg"
+      );
   }
   displayBackgroundImage(result.imageData);
 }

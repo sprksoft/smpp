@@ -57,7 +57,11 @@ async function handleMessage(message, sendResponse) {
       );
       sendResponse(themes);
       console.log(
-        `Themes for categor(y)/(ies): ${message.categories} sent, including hidden themes: ${message.includeHidden}`
+        `Themes for categories: ${
+          message.categories
+        } sent, including hidden themes: ${
+          message.includeHidden ? true : false
+        }`
       );
     }
     if (message.action === "getTheme") {

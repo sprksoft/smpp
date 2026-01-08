@@ -2,6 +2,23 @@
   "username": null,
   "useSMpfp": false,
   "theme": "default",
+  "quickSettingsThemes": [
+    "default",
+    "white",
+    "ldev",
+    "birb",
+    "stalker",
+    "purple",
+    "chocolate",
+    "fall",
+    "winter",
+    "matcha",
+    "mountain",
+    "sand",
+    "galaxy",
+    "pink",
+    "tech"
+  ],
   "background": {
     "blur": 0
   },

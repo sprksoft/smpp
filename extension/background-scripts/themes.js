@@ -1,6 +1,7 @@
 import { loadJSON } from "./json-loader.js";
 import { browser } from "./background-script.js";
 import { removeImage } from "./data-background-script.js";
+import { getSettingsData } from "./settings.js";
 
 let nativeThemes;
 let categories;
@@ -11,8 +12,6 @@ async function getAllThemes() {
   }
   let customThemes = await getAllCustomThemes();
   let themes = { ...nativeThemes, ...customThemes };
-  console.log("All custom themes:", customThemes);
-  console.log("All themes:", themes);
   return themes;
 }
 
@@ -22,14 +21,20 @@ export async function getAllThemeCategories() {
       "background-scripts/data/theme-categories.json"
     );
   }
-  categories.custom = getCustomCategory();
+  categories.custom = await getCustomCategory();
+  categories.quickSettings = await getQuickSettingsThemes();
+  console.log(categories);
   return categories;
 }
 
+async function getQuickSettingsThemes() {
+  let data = await getSettingsData();
+  // Object.values wordt momenteel gebruikt tot een fix van sibe voor settings (zie issue#103)
+  return Object.values(data.appearance.quickSettingsThemes);
+}
+
 async function getThemeCategory(category) {
-  console.log("Getting theme category:", category);
   let categories = await getAllThemeCategories();
-  console.log("Gave:", categories);
   return categories[category];
 }
 
@@ -44,9 +49,7 @@ export async function getThemes(
   let allowedThemeKeys = await Promise.all(
     categories.map((category) => getThemeCategory(category))
   );
-
   if (mustMatchAllCategories) {
-    // don't even ask me whats happening here
     allowedThemeKeys = allowedThemeKeys[0].filter((themeKey) =>
       allowedThemeKeys.every((arr) => arr.includes(themeKey))
     );
@@ -60,11 +63,9 @@ export async function getThemes(
       (themeKey) => !hiddenThemeKeys.includes(themeKey)
     );
   }
-
   const filteredThemes = Object.fromEntries(
     Object.entries(themes).filter(([key]) => allowedThemeKeys.includes(key))
   );
-
   return filteredThemes;
 }
 
@@ -87,14 +88,12 @@ async function getAllCustomThemes() {
 async function getCustomCategory() {
   const customThemes = await getAllCustomThemes();
   let customCategory = Object.keys(customThemes);
-  console.log(customCategory);
   return customCategory;
 }
 
 export async function saveCustomTheme(data, id = undefined) {
-  if (id === undefined) {
-    id = crypto.randomUUID();
-  }
+  if (id === undefined) id = crypto.randomUUID();
+
   const customThemes = await getAllCustomThemes();
   customThemes[id] = data;
   await browser.storage.local.set({ customThemes });

@@ -4,6 +4,12 @@ import { fileInputIconSvg } from "../../fixes-utils/svgs.js";
 import { isAbsoluteUrl } from "../../fixes-utils/utils.js";
 import { browser, isFirefox } from "../main.js";
 
+export type Image = {
+  type: string;
+  link: string;
+  imageData: string | Base64URLString;
+};
+
 export class ImageSelector {
   constructor(name) {
     this.name = name;
@@ -120,10 +126,10 @@ export class ImageSelector {
   }
 
   async storeImage() {
-    let data = await browser.runtime.sendMessage({
+    let data = (await browser.runtime.sendMessage({
       action: "getImage",
       id: this.name,
-    });
+    })) as Image;
 
     if (!data) data = { imageData: null, link: "", type: "default" };
 
