@@ -30,11 +30,12 @@ export async function getAllThemeCategories() {
 async function getQuickSettingsThemes() {
   let data = await getSettingsData();
   // Object.values wordt momenteel gebruikt tot een fix van sibe voor settings (zie issue#103)
-  return Object.values(data.appearance.quickSettingsThemes);
+  return data.appearance.quickSettingsThemes;
 }
 
 async function getThemeCategory(category) {
   let categories = await getAllThemeCategories();
+  console.log("all categories:", categories);
   return categories[category];
 }
 
@@ -49,6 +50,7 @@ export async function getThemes(
   let allowedThemeKeys = await Promise.all(
     categories.map((category) => getThemeCategory(category))
   );
+  console.log(allowedThemeKeys);
   if (mustMatchAllCategories) {
     allowedThemeKeys = allowedThemeKeys[0].filter((themeKey) =>
       allowedThemeKeys.every((arr) => arr.includes(themeKey))

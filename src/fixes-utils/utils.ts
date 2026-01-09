@@ -42,7 +42,11 @@ export function fillObjectWithDefaults(object, defaults) {
   }
 
   for (const key of Object.keys(defaults)) {
-    if (typeof defaults[key] === "object" && defaults[key] !== null) {
+    if (
+      typeof defaults[key] === "object" &&
+      !Array.isArray(defaults[key]) &&
+      defaults[key] !== null
+    ) {
       object[key] = fillObjectWithDefaults(object[key], defaults[key]);
     }
 

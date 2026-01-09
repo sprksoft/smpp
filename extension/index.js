@@ -4798,7 +4798,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
 
   // src/main-features/appearance/background-image.ts
   async function setBackground(appearance) {
-    function displayBackgroundImage(image) {
+    function displayBackgroundImage(imageSrc) {
       document.documentElement.style.setProperty(
         "--background-color",
         `transparent`
@@ -4812,9 +4812,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       img.style.width = "100%";
       img.style.height = "100%";
       img.style.objectFit = "cover";
-      img.style.zIndex = -1;
+      img.style.zIndex = "-1";
       img.style.display = "block";
-      if (image) img.src = image;
+      if (imageSrc) img.src = imageSrc;
       if (!document.getElementById("background_image") && !document.getElementById("tinymce")) {
         document.body.appendChild(img);
       }

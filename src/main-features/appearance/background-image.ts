@@ -35,10 +35,9 @@ export async function setBackground(appearance: Object) {
   })) as Image;
 
   if (result.type == "default") {
-    if ((Object.keys(), appearance.theme))
-      result.imageData = await getExtensionImage(
-        "theme-backgrounds/" + appearance.theme + ".jpg"
-      );
+    result.imageData = await getExtensionImage(
+      "theme-backgrounds/" + appearance.theme + ".jpg"
+    );
   }
   displayBackgroundImage(result.imageData);
 }
