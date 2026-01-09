@@ -3,6 +3,9 @@ import { browser, getByPath } from "../../common/utils.js";
 import { dmenu } from "./dmenu.js";
 import { apply } from "../main.js";
 
+export type Quick = { name: string; url: URL };
+export type Quicks = Quick[];
+
 function gatherOptions(template, name) {
   let options = [];
   for (let keyName of Object.keys(template)) {

@@ -1,4 +1,3 @@
-// @ts-nocheck
 import "../fixes-utils/svgs.ts";
 import "../fixes-utils/login.ts";
 import "../fixes-utils/scraper.ts";
@@ -25,26 +24,28 @@ import "../widgets/planner.ts";
 import "../widgets/weather.ts";
 import "../widgets/clock.ts";
 
-import {
-  getPfpLink,
-} from "../fixes-utils/utils.ts";
 import { browser, getExtensionImage, randomChance } from "../common/utils.js";
-import { migrate } from "../fixes-utils/migration.ts";
-import { titleFix } from "../fixes-utils/titlefix.ts";
+import { getPfpLink } from "../fixes-utils/utils.js";
+
+import { migrate } from "../fixes-utils/migration.js";
+import { titleFix } from "../fixes-utils/titlefix.js";
 import {
   createWidgetSystem,
   createWidgetEditModeButton,
-} from "../widgets/widgets.ts";
-import { createGC } from "./globalchat.ts";
+} from "../widgets/widgets.js";
+import { createGC } from "./globalchat.js";
 import {
   createQuickSettingsButton,
   createQuickSettings,
-} from "./settings/quick-settings.ts";
-import { createSettingsWindow } from "./settings/main-settings.ts";
-import { quickLoad } from "./quick-menu/quick.ts";
+} from "./settings/quick-settings.js";
+import {
+  createSettingsWindow,
+  type Settings,
+  type SettingsCategory,
+} from "./settings/main-settings.js";
+import { quickLoad } from "./quick-menu/quick.js";
 
 export var originalUsername: string;
-export var settingsTemplate: any;
 export var themes: any;
 export var onHomePage: boolean;
 export var onLoginPage: boolean;
@@ -62,30 +63,29 @@ import {
   notfisSvg,
   searchButtonSvg,
   settingsIconSvg,
-} from "../fixes-utils/svgs.ts";
+} from "../fixes-utils/svgs.js";
 
-import { setEditMode } from "../widgets/widgets.ts";
-import { initWidgetEditMode } from "../widgets/widgets.ts";
-import { applyUsername, applyProfilePicture } from "./profile.ts";
-import { updateLoginPanel } from "../fixes-utils/login.ts";
-import { buisStats } from "../fixes-utils/results.ts";
-import { setTheme } from "./appearance/themes.ts";
-import { setBackground } from "./appearance/background-image.ts";
-import { updateNews } from "../widgets/widgets.ts";
-import { updateSplashText } from "../fixes-utils/login.ts";
-import { applyWeatherEffects } from "./appearance/weather-effects.ts";
-import { openSettingsWindow } from "./settings/main-settings.ts";
+import { setEditMode } from "../widgets/widgets.js";
+import { initWidgetEditMode } from "../widgets/widgets.js";
+import { applyUsername, applyProfilePicture } from "./profile.js";
+import { updateLoginPanel } from "../fixes-utils/login.js";
+import { buisStats } from "../fixes-utils/results.js";
+import { setTheme } from "./appearance/themes.js";
+import { setBackground } from "./appearance/background-image.js";
+import { updateNews } from "../widgets/widgets.js";
+import { updateSplashText } from "../fixes-utils/login.js";
+import { applyWeatherEffects } from "./appearance/weather-effects.js";
+import { openSettingsWindow } from "./settings/main-settings.js";
 import {
   reloadDMenuConfig,
   createQuickMenuButton,
-} from "../main-features/quick-menu/dmenu.ts";
-import { colorpickersHTML } from "../fixes-utils/svgs.ts";
+} from "../main-features/quick-menu/dmenu.js";
 
 //java script komt hier je weet wel
 //ok - ldev
 //oh ok, ik dacht in general.css - Jdev
 
-function updateDiscordPopup(discordButtonEnabled) {
+function updateDiscordPopup(discordButtonEnabled: boolean) {
   if (discordButtonEnabled) {
     let discordButtonContainer =
       document.getElementById("discord-link-container") ||
@@ -108,20 +108,20 @@ function changeLogoutText() {
 function changeFont() {
   let fontLinks = document.createElement("div");
   fontLinks.innerHTML = `<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">`;
-  document.getElementsByTagName("head")[0].appendChild(fontLinks);
+  document.getElementsByTagName("head")[0]?.appendChild(fontLinks);
 }
 
 function fixCoursesSearch() {
   document
     .getElementById("courseSearch")
-    ?.addEventListener("keydown", function(event) {
+    ?.addEventListener("keydown", function (event) {
       if (event.key === "Enter") {
         event.preventDefault();
 
         setTimeout(() => {
           const firstCourse = document.querySelector(
-            ".course-list.js-courses-list li a",
-          );
+            ".course-list.js-courses-list li a"
+          ) as HTMLElement;
           if (firstCourse) {
             firstCourse.click();
           }
@@ -130,32 +130,36 @@ function fixCoursesSearch() {
     });
 }
 
-function updateTopNavIcons(data) {
-  const notifsButton = document.querySelector(".js-btn-notifs");
+function updateTopNavIcons(data: Settings["topNav"]["icons"]) {
+  const notifsButton = document.querySelector(
+    ".js-btn-notifs"
+  ) as HTMLButtonElement;
   if (notifsButton && data.notifications) {
     const textSpan = notifsButton.querySelector("span");
     notifsButton.innerHTML = notfisSvg;
-    notifsButton.appendChild(textSpan);
+    if (textSpan) notifsButton.appendChild(textSpan);
   } else if (notifsButton && !data.notifications) {
     const textSpan = notifsButton.querySelector("span");
     notifsButton.innerHTML = "Meldingen";
-    notifsButton.appendChild(textSpan);
+    if (textSpan) notifsButton.appendChild(textSpan);
   }
+
   const startButton = document.querySelector(".js-btn-home");
   if (startButton && data.home) {
     startButton.innerHTML = homeiconSvg;
   } else if (startButton && !data.home) {
     startButton.innerHTML = "Start";
   }
+
   const messageButton = document.querySelector(".js-btn-messages");
   if (messageButton && data.mail) {
     const textSpan = messageButton.querySelector("span");
     messageButton.innerHTML = messageSvg;
-    messageButton.appendChild(textSpan);
+    if (textSpan) messageButton.appendChild(textSpan);
   } else if (messageButton && !data.mail) {
     const textSpan = messageButton.querySelector("span");
     messageButton.innerHTML = "Berichten";
-    messageButton.appendChild(textSpan);
+    if (textSpan) messageButton.appendChild(textSpan);
   }
 
   const settingButton = document.getElementById("quickSettingsButton");
@@ -166,8 +170,10 @@ function updateTopNavIcons(data) {
   }
 }
 
-function updateTabLogo(logo) {
-  let iconElement = document.querySelector('link[rel="icon"]');
+function updateTabLogo(logo: Settings["appearance"]["tabLogo"]) {
+  let iconElement = document.querySelector(
+    'link[rel="icon"]'
+  ) as HTMLLinkElement;
   if (!iconElement) {
     iconElement = document.createElement("link");
     document.head.appendChild(iconElement);
@@ -188,21 +194,21 @@ function updateTabLogo(logo) {
   }
 }
 
-export function applyTopNav(data) {
-  let topNav = document.querySelector(".topnav");
+export function applyTopNav(data: Settings["topNav"]) {
+  let topNav = document.querySelector(".topnav") as HTMLElement;
   if (!topNav) return;
+
   updateTopNavIcons(data.icons);
   updateTopButtons(data.buttons);
-  if (data.switchCoursesAndLinks) {
-    topNav.insertBefore(
-      document.querySelector("[data-links]"),
-      document.querySelector("[data-courses]"),
-    );
-  } else {
-    topNav.insertBefore(
-      document.querySelector("[data-courses]"),
-      document.querySelector("[data-links]"),
-    );
+
+  let linksButton = document.querySelector("[data-links]") as HTMLButtonElement;
+  let coursesButton = document.querySelector(
+    "[data-courses]"
+  ) as HTMLButtonElement;
+  if (linksButton && coursesButton) {
+    data.switchCoursesAndLinks
+      ? topNav.insertBefore(linksButton, coursesButton)
+      : topNav.insertBefore(coursesButton, linksButton);
   }
 }
 
@@ -211,21 +217,20 @@ async function createStaticGlobals() {
     action: "getThemes",
   });
 
-  settingsTemplate = await browser.runtime.sendMessage({
-    action: "getSettingsTemplate",
-  });
-  originalUsername =
-    document.querySelector(".js-btn-profile .hlp-vert-box span")?.innerText ||
-    "Mr Unknown";
+  let originalUsernameElement = document.querySelector(
+    ".js-btn-profile .hlp-vert-box span"
+  ) as HTMLSpanElement;
+  originalUsername = originalUsernameElement?.innerText || "Mr Unknown";
 
   isGOSchool = document.body.classList.contains("go");
   isFirefox =
     typeof navigator.userAgent === "string" &&
     /firefox/i.test(navigator.userAgent);
   if (document.querySelector('img[alt="Profiel afbeelding"]')) {
-    originalPfpUrl = document.querySelector(
-      'img[alt="Profiel afbeelding"]',
-    ).src;
+    let originalPfp = document.querySelector(
+      'img[alt="Profiel afbeelding"]'
+    ) as HTMLImageElement;
+    originalPfpUrl = originalPfp?.src;
   } else {
     originalPfpUrl = getPfpLink(originalUsername);
   }
@@ -238,7 +243,7 @@ async function createStaticGlobals() {
   liteMode = browser.runtime.getManifest().name.includes("Lite");
 }
 
-export async function applyAppearance(appearance) {
+export async function applyAppearance(appearance: Settings["appearance"]) {
   let style = document.documentElement.style;
 
   await setTheme(appearance.theme);
@@ -251,12 +256,12 @@ export async function applyAppearance(appearance) {
   } else {
     style.setProperty(
       "--background-blur",
-      `blur(${appearance.background.blur}px)`,
+      `blur(${appearance.background.blur}px)`
     );
   }
 }
 
-export function applyOther(other) {
+export function applyOther(other: Settings["other"]) {
   if (window.location.href.split("/")[3] == "login")
     updateSplashText(other.splashText);
 
@@ -269,11 +274,11 @@ export function applyOther(other) {
   if (onHomePage) updateDiscordPopup(other.discordButton);
 }
 
-export function applyProfile(profile) {
+export function applyProfile(profile: Settings["profile"]) {
   let style = document.documentElement.style;
   style.setProperty(
     "--profile-picture",
-    "url(" + getPfpLink(profile.username || originalUsername) + ")",
+    "url(" + getPfpLink(profile.username || originalUsername) + ")"
   );
   applyUsername(profile.username);
   applyProfilePicture(profile);
@@ -284,11 +289,9 @@ function applyFixes() {
   fixCoursesSearch();
   titleFix();
 
-  if (document.getElementById("background_image")) {
-    document.getElementById("background_image").style.display = "none";
-  }
-
-  let notifsToggleLabel = document.getElementById("notifsToggleLabel");
+  let notifsToggleLabel = document.getElementById(
+    "notifsToggleLabel"
+  ) as HTMLLabelElement;
   if (notifsToggleLabel) notifsToggleLabel.innerText = "Toon pop-ups";
 
   if (window.location.pathname.startsWith("/results/main/results/")) {
@@ -298,9 +301,9 @@ function applyFixes() {
 }
 
 export async function apply() {
-  const data = await browser.runtime.sendMessage({
+  const data = (await browser.runtime.sendMessage({
     action: "getSettingsData",
-  });
+  })) as Settings;
   console.log("Applying with settings data: \n", data);
 
   await reloadDMenuConfig(); // reload the dmenu config. (er is een object voor async raarheid te vermijden en dat wordt herladen door deze functie)
@@ -312,60 +315,30 @@ export async function apply() {
   applyOther(data.other);
 }
 
-export async function storeCustomThemeData() {
-  await browser.runtime.sendMessage({
-    action: "setCustomThemeData",
-    data: {
-      color_base00: document.getElementById("colorPicker1").value,
-      color_base01: document.getElementById("colorPicker2").value,
-      color_base02: document.getElementById("colorPicker3").value,
-      color_base03: document.getElementById("colorPicker4").value,
-      color_accent: document.getElementById("colorPicker5").value,
-      color_text: document.getElementById("colorPicker6").value,
-    },
-  });
-}
-
-async function loadCustomThemeData() {
-  const themeData = await browser.runtime.sendMessage({
-    action: "getCustomThemeData",
-  });
-  customTheme = themeData;
-  document.getElementById("colorPicker1").value = themeData.color_base00;
-  document.getElementById("colorPicker2").value = themeData.color_base01;
-  document.getElementById("colorPicker3").value = themeData.color_base02;
-  document.getElementById("colorPicker4").value = themeData.color_base03;
-  document.getElementById("colorPicker5").value = themeData.color_accent;
-  document.getElementById("colorPicker6").value = themeData.color_text;
-}
-
-export async function createCustomThemeUI() {
-  const colorpickers = document.getElementById("colorpickers");
-  colorpickers.innerHTML = colorpickersHTML;
-  await loadCustomThemeData();
-}
-
 function createTopButtons() {
-  let topNav = document.querySelector("nav.topnav");
+  let topNav = document.querySelector("nav.topnav") as HTMLElement;
+  if (!topNav) return;
 
   let logoutButton = document.querySelector(".js-btn-logout");
   if (logoutButton) {
     logoutButton.innerHTML = changeLogoutText();
   }
 
-  let searchBtn = document.querySelector(".topnav__btn--icon--search");
-
-  topNav.insertBefore(createQuickSettingsButton(), searchBtn.parentElement);
+  let searchButton = document.querySelector(".topnav__btn--icon--search");
+  if (searchButton) {
+    topNav.insertBefore(
+      createQuickSettingsButton(),
+      searchButton.parentElement
+    );
+    searchButton.innerHTML = searchButtonSvg;
+  }
   createQuickSettings();
 
   let pushRight = topNav.childNodes[2];
+  if (!pushRight) return;
 
   if (!liteMode) {
     topNav.insertBefore(createGC(), pushRight);
-  }
-  let searchButton = document.querySelector(".topnav__btn--icon--search");
-  if (searchButton) {
-    searchButton.innerHTML = searchButtonSvg;
   }
   if (onHomePage) {
     initWidgetEditMode();
@@ -376,16 +349,21 @@ function createTopButtons() {
 
   document
     .getElementById("profileMenu")
-    .querySelector(".topnav__menu")
-    .appendChild(createProfileSettingButton());
+    ?.querySelector(".topnav__menu")
+    ?.appendChild(createProfileSettingButton());
 }
 
 function createProfileSettingButton() {
   let button = document.createElement("a");
   button.addEventListener("click", (e) => {
     openSettingsWindow(e);
-    document.getElementById("profileMenu").hidden = true;
-    document.querySelector(".profile-settings-button").click();
+    let topNavProfileMenu = document.getElementById("profileMenu");
+    let settingsPageProfileButton = document.querySelector(
+      ".profile-settings-button"
+    ) as HTMLButtonElement;
+    if (!topNavProfileMenu || !settingsPageProfileButton) return;
+    topNavProfileMenu.hidden = true;
+    settingsPageProfileButton.click();
   });
 
   button.classList.add("topnav__menuitem");
@@ -404,8 +382,8 @@ function createProfileSettingButton() {
   return button;
 }
 
-function updateTopButtons(data) {
-  let GOButton = document.querySelector(`[data-go=""]`);
+function updateTopButtons(data: Settings["topNav"]["buttons"]) {
+  let GOButton = document.querySelector(`[data-go=""]`) as HTMLElement;
   if (GOButton) {
     data.GO
       ? (GOButton.style = "display:flex")
@@ -413,7 +391,7 @@ function updateTopButtons(data) {
   }
 
   let searchButton = document.querySelector(".topnav__btn--icon--search");
-  if (searchButton) {
+  if (searchButton?.parentElement) {
     data.search
       ? (searchButton.parentElement.style = "display:flex")
       : (searchButton.parentElement.style = "display:none");

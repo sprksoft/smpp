@@ -1,7 +1,5 @@
-// @ts-nocheck
 import { BaseWindow } from "../modules/windows.js";
 import { originalUsername } from "../main.js";
-import { settingsTemplate, themes } from "../main.js";
 import { colorpickersHTMLV2 } from "../../fixes-utils/svgs.js";
 import { ImageSelector } from "../modules/images.js";
 import { createButtonWithLabel } from "../appearance/ui.js";
@@ -22,6 +20,62 @@ import { clearAllData } from "../../fixes-utils/utils.js";
 import { loadQuickSettings } from "./quick-settings.js";
 import { createTextInput, createButton } from "../appearance/ui.js";
 import { applyProfilePicture } from "../profile.js";
+import type { Quicks } from "../quick-menu/config.js";
+import type { Keybind } from "../keybinds.js";
+
+export type Settings = {
+  profile: {
+    username: string | null;
+    useSMpfp: boolean;
+  };
+  appearance: {
+    theme: string;
+    quickSettingsThemes: string[];
+    background: { blur: number };
+    weatherOverlay: {
+      type: "realtime" | "rain" | "snow";
+      amount: number;
+      opacity: number;
+    };
+    news: boolean;
+    tabLogo: "sm" | "smpp";
+  };
+  topNav: {
+    buttons: {
+      GO: boolean;
+      GC: boolean;
+      search: boolean;
+      quickMenu: boolean;
+    };
+    switchCoursesAndLinks: boolean;
+    icons: {
+      home: boolean;
+      mail: boolean;
+      notifications: boolean;
+      settings: boolean;
+    };
+  };
+  other: {
+    quicks: Quicks;
+    performanceMode: boolean;
+    splashText: boolean;
+    discordButton: boolean;
+    dmenu: {
+      centered: boolean;
+      itemScore: boolean;
+      toplevelConfig: boolean;
+    };
+    keybinds: {
+      dmenu: Keybind;
+      widgetEditMode: Keybind;
+      widgetBag: Keybind;
+      settings: Keybind;
+      gc: Keybind;
+    };
+  };
+};
+
+export type SettingsCategory = keyof Settings;
 
 export class SettingsWindow extends BaseWindow {
   settingsSideBarCategories = {

@@ -85,7 +85,7 @@ export async function applyUsername(customName) {
   }
 }
 
-export async function applyProfilePicture(profile) {
+export async function applyProfilePicture(profile: Settings["profile"]) {
   let style = document.documentElement.style;
   const setPFPstyle = (url) => {
     style.setProperty("--profile-picture", "url(" + url + ")");

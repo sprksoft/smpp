@@ -16,7 +16,6 @@ let newsState = false; // Used for if the news state is changed before it could 
 // The widget drag info of the widget currently being dragged.
 let curDragInfo = null;
 
-
 let widgetsContainer;
 let widgetBag;
 let widgetBagHandle;
@@ -339,7 +338,7 @@ export class WidgetBase {
 
   // (Required): Gets called when the content element of the widget needs to be
   // created (return html element). (Don't do slow tasks in here)
-  async createContent() { }
+  async createContent() {}
   // Gets called when the preview element needs to be created (return html
   // element) NOTE: preview and content never exist at the same time
   async createPreview() {
@@ -348,11 +347,11 @@ export class WidgetBase {
 
   // Gets called when the settings of the widget change.
   // Use this to update the widget content based on the new settings. (settings object is always valid based on the value returned by defaultSettings())
-  async onSettingsChange() { }
+  async onSettingsChange() {}
 
-  async onThemeChange() { }
+  async onThemeChange() {}
 
-  async onRemove() { }
+  async onRemove() {}
 }
 
 class ErrorWidget extends WidgetBase {
@@ -522,7 +521,7 @@ async function createWidgetsContainerHTML(widgetData, newsContent, news) {
   return widgetsContainer;
 }
 
-export function updateNews(value) {
+export function updateNews(value: boolean) {
   newsState = value;
   const newsCon = document.querySelector(".smpp-news-container");
   if (newsCon) {
@@ -930,5 +929,3 @@ export function createWidgetEditModeButton() {
 
   return btn;
 }
-
-
