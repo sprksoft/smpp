@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { WidgetBase, registerWidget } from './widgets.js';
+import { WidgetBase, registerWidget } from "./widgets.js";
 
 const pixelsPerMinute = 1.46;
 
@@ -133,7 +133,7 @@ class PlannerWidget extends WidgetBase {
     numElements,
     elementWidthPercentage,
     beginTime,
-    slot,
+    slot
   ) {
     const plannerElement = document.createElement("div");
     plannerElement.classList.add("planner-element");
@@ -145,7 +145,7 @@ class PlannerWidget extends WidgetBase {
     const itemName = element.courses?.[0]?.name || element.name;
     const teachers =
       element.organisers?.users.map(
-        (user) => user.name.startingWithFirstName,
+        (user) => user.name.startingWithFirstName
       ) || [];
 
     const itemNameElement = document.createElement("h3");
@@ -158,7 +158,7 @@ class PlannerWidget extends WidgetBase {
 
     const timeElement = document.createElement("p");
     timeElement.textContent = fancyfyTime(
-      `${dateTimeFrom.toLocaleTimeString()} - ${dateTimeTo.toLocaleTimeString()}`,
+      `${dateTimeFrom.toLocaleTimeString()} - ${dateTimeTo.toLocaleTimeString()}`
     );
     timeElement.classList.add("no-bottom-margin");
     plannerElement.appendChild(timeElement);
@@ -181,7 +181,7 @@ class PlannerWidget extends WidgetBase {
 
     if (index < numElements - 1) {
       const nextStartTime = new Date(
-        slot.elements[index + 1].period.dateTimeFrom,
+        slot.elements[index + 1].period.dateTimeFrom
       );
       const marginBottom = (nextStartTime - dateTimeTo) / 60000;
       plannerElement.style.marginBottom = `${marginBottom * pixelsPerMinute}px`;
@@ -241,8 +241,8 @@ class PlannerWidget extends WidgetBase {
     } else {
       const earliestStartTime = Math.min(
         ...data.map((element) =>
-          new Date(element.period.dateTimeFrom).getTime(),
-        ),
+          new Date(element.period.dateTimeFrom).getTime()
+        )
       );
       const beginTime = new Date(earliestStartTime);
 
@@ -258,7 +258,7 @@ class PlannerWidget extends WidgetBase {
         }
 
         const overlappingSlot = timeSlots.find(
-          (slot) => slot.from < dateTimeTo && slot.to > dateTimeFrom,
+          (slot) => slot.from < dateTimeTo && slot.to > dateTimeFrom
         );
 
         if (overlappingSlot) {
@@ -284,14 +284,14 @@ class PlannerWidget extends WidgetBase {
             numElements,
             elementWidthPercentage,
             beginTime,
-            slot,
+            slot
           );
           this.planningContainer.appendChild(plannerElement);
           allHeights.push(
             Number(
               parseInt(plannerElement.style.height) +
-                parseInt(plannerElement.style.top),
-            ),
+                parseInt(plannerElement.style.top)
+            )
           );
         });
       });

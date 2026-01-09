@@ -70,7 +70,7 @@ function add_quick_interactive() {
   let cmd_list = quick_cmd_list();
   dmenu(
     cmd_list,
-    function(name, shift) {
+    function (name, shift) {
       value_list = [];
       for (let i = 0; i < quicks.length; i++) {
         if (quicks[i].name == name) {
@@ -80,7 +80,7 @@ function add_quick_interactive() {
       }
       dmenu(
         value_list,
-        function(value, shift) {
+        function (value, shift) {
           if (!value.startsWith("http")) {
             value = "https://" + value;
           }
@@ -97,7 +97,7 @@ function remove_quick_interactive() {
   let cmd_list = quick_cmd_list();
   dmenu(
     cmd_list,
-    function(name, shift) {
+    function (name, shift) {
       remove_quick(name);
     },
     "name:"
@@ -162,7 +162,6 @@ function unbloat() {
   document.body.innerHTML = "";
 }
 
-
 export async function do_qm(opener = "") {
   let cmd_list = quick_cmd_list()
     .concat(goto_items)
@@ -193,7 +192,7 @@ export async function do_qm(opener = "") {
 
   dmenu(
     cmd_list,
-    async function(cmd) {
+    async function (cmd) {
       switch (cmd) {
         case "unbloat":
           unbloat();
@@ -210,7 +209,7 @@ export async function do_qm(opener = "") {
         case "config":
           dmenu(
             await getDMenuOptionsForSettings(false),
-            function(cmd, shift) {
+            function (cmd, shift) {
               dmenuEditConfig(cmd);
             },
             "config: "

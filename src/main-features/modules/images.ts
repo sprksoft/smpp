@@ -39,7 +39,7 @@ export class ImageSelector {
     });
   }
 
-  onStore() { }
+  onStore() {}
 
   createImageFileInputContainer() {
     const fileInputContainer = document.createElement("div");

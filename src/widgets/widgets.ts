@@ -1,5 +1,10 @@
 // @ts-nocheck
-import { browser, fillObjectWithDefaults, getByPath, setByPath } from "../common/utils.js";
+import {
+  browser,
+  fillObjectWithDefaults,
+  getByPath,
+  setByPath,
+} from "../common/utils.js";
 import { createButtonWithLabel } from "../main-features/appearance/ui.js";
 import { liteMode } from "../main-features/main.ts";
 import { doneSvg, editIconSvg } from "../fixes-utils/svgs.js";

@@ -3,7 +3,7 @@ export async function fetchWeatherData(location) {
   try {
     console.log("Fetching Weather data...");
     const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}&units=metric`,
+      `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}&units=metric`
     );
     const data = await response.json();
     return data;

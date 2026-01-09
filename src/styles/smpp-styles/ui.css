@@ -16,9 +16,6 @@
   gap: 1rem;
 }
 
-.smpp-input-with-label > span:first-child {
-}
-
 .smpp-input-with-label > .switch {
   margin-left: auto !important;
 }

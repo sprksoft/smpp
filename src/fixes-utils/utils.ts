@@ -12,8 +12,9 @@ export function getPfpLink(username) {
     firstInitial = "M";
     secondInitial = "U";
   }
-  return `https://userpicture20.smartschool.be/User/Userimage/hashimage/hash/initials_${firstInitial + secondInitial
-    }/plain/1/res/128`;
+  return `https://userpicture20.smartschool.be/User/Userimage/hashimage/hash/initials_${
+    firstInitial + secondInitial
+  }/plain/1/res/128`;
 }
 
 export function getUserId() {
@@ -84,4 +85,3 @@ export async function clearAllData() {
   });
   location.reload();
 }
-

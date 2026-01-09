@@ -38,7 +38,9 @@ export async function getCustomThemeData() {
 let fallBackColorData;
 async function getFallbackColorData() {
   if (!fallBackColorData) {
-    fallBackColorData = await loadJSON("background-scripts/data/delijn-kleuren.json")
+    fallBackColorData = await loadJSON(
+      "background-scripts/data/delijn-kleuren.json"
+    );
   }
 }
 

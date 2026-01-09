@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { WidgetBase, registerWidget } from './widgets.js';
+import { WidgetBase, registerWidget } from "./widgets.js";
 
 // gemaakt door Lou (Flying_dinonugget) analog clock gestolen van Lukaz.vb
 class ClockWidget extends WidgetBase {
@@ -146,7 +146,7 @@ class ClockWidget extends WidgetBase {
     return div;
   }
 
-  async onThemeChange() { }
+  async onThemeChange() {}
 }
 
 registerWidget(new ClockWidget());

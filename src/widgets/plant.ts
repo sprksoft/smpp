@@ -135,8 +135,9 @@ async function updatePlantBottomUI(data) {
 function createPlantStreak(data) {
   let plantStreak = document.createElement("h2");
   plantStreak.id = "plant_streak";
-  plantStreak.innerText = `${data.daysSinceBirthday} ${data.daysSinceBirthday == 1 ? "Day" : "Days"
-    }`;
+  plantStreak.innerText = `${data.daysSinceBirthday} ${
+    data.daysSinceBirthday == 1 ? "Day" : "Days"
+  }`;
   return plantStreak;
 }
 
@@ -204,10 +205,10 @@ function createRemoveButton(isAlive) {
   removeInfoButton.id = "remove_button_info";
   removeInfoButton.innerText = "?";
 
-  removeInfoButton.addEventListener("mouseover", function() {
+  removeInfoButton.addEventListener("mouseover", function () {
     removeInfo.style.opacity = "1";
   });
-  removeInfoButton.addEventListener("mouseout", function() {
+  removeInfoButton.addEventListener("mouseout", function () {
     removeInfo.style.opacity = "0";
   });
 

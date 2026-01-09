@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { WidgetBase, registerWidget } from './widgets.js';
+import { WidgetBase, registerWidget } from "./widgets.js";
 
 class TutorialWidget extends WidgetBase {
   constructor() {

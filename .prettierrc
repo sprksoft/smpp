@@ -19,6 +19,5 @@
   "useTabs": false,
   "embeddedLanguageFormatting": "auto",
   "vueIndentScriptAndStyle": false,
-  "experimentalTernaries": false,
-  "parser": "json-stringify"
+  "experimentalTernaries": false
 }
