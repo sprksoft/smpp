@@ -1,5 +1,5 @@
-import { browser } from "../main.js";
 import { widgetSystemNotifyThemeChange } from "../../widgets/widgets.js";
+import { browser } from "../../common/utils.js";
 
 export let currentThemeName: string;
 export let currentTheme: Theme;

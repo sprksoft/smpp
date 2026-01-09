@@ -1,13 +1,12 @@
 // @ts-nocheck
 import { BaseWindow } from "../modules/windows.js";
 import { originalUsername } from "../main.js";
-import { getExtensionImage } from "../../fixes-utils/utils.js";
 import { settingsTemplate, themes } from "../main.js";
 import { colorpickersHTMLV2 } from "../../fixes-utils/svgs.js";
 import { ImageSelector } from "../modules/images.js";
 import { createButtonWithLabel } from "../appearance/ui.js";
 import { trashSvg } from "../../fixes-utils/svgs.js";
-import { browser } from "../main.js";
+import { browser, getExtensionImage } from "../../common/utils.js";
 import {
   applyProfile,
   applyTopNav,
@@ -509,7 +508,7 @@ export class SettingsWindow extends BaseWindow {
         await applyAppearance(settings.appearance);
         if (
           JSON.stringify(settings.appearance.weatherOverlay) !=
-            JSON.stringify(previousSettings.appearance.weatherOverlay) &&
+          JSON.stringify(previousSettings.appearance.weatherOverlay) &&
           !liteMode
         ) {
           applyWeatherEffects(settings.appearance.weatherOverlay);

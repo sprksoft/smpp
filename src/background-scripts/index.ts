@@ -1,10 +1,5 @@
-export var browser;
-if (typeof browser === "undefined") {
-  browser = chrome;
-}
-
-let globalsInitialized = false;
-
+//@ts-nocheck
+import { browser, getByPath, setByPath } from "../common/utils.js";
 import {
   getDelijnColorData,
   getPlantAppData,
@@ -17,7 +12,6 @@ import {
   getSettingsData,
   getSettingsTemplate,
 } from "./settings.js";
-
 import { fetchWeatherData, fetchDelijnData } from "./api-background-script.js";
 import { initGlobals } from "./json-loader.js";
 import {
@@ -28,18 +22,12 @@ import {
   removeCustomTheme,
 } from "./themes.js";
 
-import { getByPath, setByPath } from "./utils.js";
-
 browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
   handleMessage(message, sendResponse);
   return true;
 });
 
 async function handleMessage(message, sendResponse) {
-  if (!globalsInitialized) {
-    await initGlobals();
-    globalsInitialized = true;
-  }
   try {
     // General
     if (message.action === "clearLocalStorage") {
@@ -57,10 +45,8 @@ async function handleMessage(message, sendResponse) {
       );
       sendResponse(themes);
       console.log(
-        `Themes for categories: ${
-          message.categories
-        } sent, including hidden themes: ${
-          message.includeHidden ? true : false
+        `Themes for categories: ${message.categories
+        } sent, including hidden themes: ${message.includeHidden ? true : false
         }`
       );
     }

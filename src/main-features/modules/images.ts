@@ -1,8 +1,8 @@
 // @ts-nocheck
 import { createTextInput } from "../appearance/ui.js";
 import { fileInputIconSvg } from "../../fixes-utils/svgs.js";
-import { isAbsoluteUrl } from "../../fixes-utils/utils.js";
-import { browser, isFirefox } from "../main.js";
+import { isAbsoluteUrl, browser } from "../../common/utils.js";
+import { isFirefox } from "../main.js";
 
 export type Image = {
   type: string;
@@ -39,7 +39,7 @@ export class ImageSelector {
     });
   }
 
-  onStore() {}
+  onStore() { }
 
   createImageFileInputContainer() {
     const fileInputContainer = document.createElement("div");

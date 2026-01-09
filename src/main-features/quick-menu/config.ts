@@ -1,6 +1,5 @@
 // @ts-nocheck
-import { browser } from "../main.js";
-import { getByPath } from "../../fixes-utils/utils.js";
+import { browser, getByPath } from "../../common/utils.js";
 import { dmenu } from "./dmenu.js";
 import { apply } from "../main.js";
 
@@ -83,7 +82,7 @@ export async function dmenuEditConfig(path) {
   if (template == "boolean") {
     dmenu(
       ["true", "false"],
-      function (cmd, shift) {
+      function(cmd, shift) {
         if (cmd == "true") {
           setSettingByPath(configPath, true);
         } else if (cmd == "false") {
@@ -95,7 +94,7 @@ export async function dmenuEditConfig(path) {
   } else if (template == "number") {
     dmenu(
       [],
-      function (cmd, shift) {
+      function(cmd, shift) {
         if (configPath == "appearance.background.blur" && cmd == "song 2") {
           openURL("https://www.youtube.com/watch?v=Bz4l9_bzfZM", true);
           return;
@@ -107,7 +106,7 @@ export async function dmenuEditConfig(path) {
   } else if (Array.isArray(template)) {
     dmenu(
       template,
-      function (cmd, shift) {
+      function(cmd, shift) {
         setSettingByPath(configPath, cmd);
       },
       label
@@ -116,13 +115,13 @@ export async function dmenuEditConfig(path) {
     if (template !== "string") {
       console.error(
         "Invalid template type: '" +
-          template +
-          "' Falling back to 'string' template type"
+        template +
+        "' Falling back to 'string' template type"
       );
     }
     dmenu(
       [],
-      function (cmd, shift) {
+      function(cmd, shift) {
         setSettingByPath(configPath, cmd);
       },
       label

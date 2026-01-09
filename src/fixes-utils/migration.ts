@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { clearAllData } from "./utils.js";
 import { setWidgetSetting, widgets } from "../widgets/widgets.js";
-import { browser } from "../main-features/main.js";
+import { browser } from "../common/utils.ts";
 
 export async function migrate() {
   await removeLegacyData(); // will reload the page if legacy data is present

@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { WidgetBase, registerWidget } from "./widgets.js";
-import { browser } from "../main-features/main.js";
+import { browser } from "../common/utils.js";
 import { applyWeatherEffects } from "../main-features/appearance/weather-effects.js";
 import {
   humiditySvg,

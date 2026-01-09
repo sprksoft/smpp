@@ -1,8 +1,9 @@
 // @ts-nocheck
-import { themes, settingsTemplate, apply, browser } from "../main.js";
+import { themes, settingsTemplate, apply } from "../main.js";
 import { ImageSelector } from "../modules/images.js";
 import { performanceModeSvg, settingsIconSvg } from "../../fixes-utils/svgs.js";
 import { openSettingsWindow, settingsWindow } from "./main-settings.js";
+import { browser } from "../../common/utils.js";
 
 let quickSettingsWindowIsHidden = true;
 
@@ -25,10 +26,9 @@ async function storeQuickSettings() {
 
   document.getElementById(
     "performance-mode-info"
-  ).innerHTML = `Toggle performance mode ${
-    data.other.performanceMode
-      ? "<span class='green-underline'>Enabled</span>"
-      : "<span class='red-underline'>Disabled</span>"
+  ).innerHTML = `Toggle performance mode ${data.other.performanceMode
+    ? "<span class='green-underline'>Enabled</span>"
+    : "<span class='red-underline'>Disabled</span>"
   }`;
 
   await browser.runtime.sendMessage({ action: "setSettingsData", data });
@@ -55,10 +55,9 @@ export async function loadQuickSettings() {
 
   document.getElementById(
     "performance-mode-info"
-  ).innerHTML = `Toggle performance mode ${
-    data.other.performanceMode
-      ? "<span class='green-underline'>Enabled</span>"
-      : "<span class='red-underline'>Disabled</span>"
+  ).innerHTML = `Toggle performance mode ${data.other.performanceMode
+    ? "<span class='green-underline'>Enabled</span>"
+    : "<span class='red-underline'>Disabled</span>"
   }`;
 }
 

@@ -1,5 +1,6 @@
+//@ts-nocheck
 import { loadJSON } from "./json-loader.js";
-import { browser } from "./background-script.js";
+import { browser } from "../common/utils.js";
 import { removeImage } from "./data-background-script.js";
 import { getSettingsData } from "./settings.js";
 
@@ -40,7 +41,7 @@ async function getThemeCategory(category) {
 }
 
 export async function getThemes(
-  categories = ["all"],
+  categories: string[] = ["all"],
   includeHidden = false,
   mustMatchAllCategories = false
 ) {

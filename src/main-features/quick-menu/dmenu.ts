@@ -1,7 +1,6 @@
 // @ts-nocheck
-import { randomChance } from "../../fixes-utils/utils";
+import { randomChance, browser } from "../../common/utils.js";
 import { do_qm } from "./quick.js";
-import { browser } from "../../main-features/main.js";
 
 let active_dmenu = null;
 export let dmenuConfig = null;
@@ -140,7 +139,7 @@ class DMenu {
       }
     }
 
-    let sortedItems = items.sort(function (a, b) {
+    let sortedItems = items.sort(function(a, b) {
       if (a.score < b.score) return 1;
       if (a.score > b.score) return -1;
       return 0;
@@ -216,7 +215,7 @@ class DMenu {
     }
 
     let klass = this;
-    row.addEventListener("click", function (e) {
+    row.addEventListener("click", function(e) {
       klass.#accept(row);
     });
     parent.appendChild(row);
@@ -289,13 +288,13 @@ export function createQuickMenuButton() {
   quickMenuButton.id = "quick-menu-button";
   quickMenuButton.className = "topnav__btn";
   quickMenuButton.innerHTML = "Quick";
-  quickMenuButton.addEventListener("click", function () {
+  quickMenuButton.addEventListener("click", function() {
     do_qm(quickMenuButton);
   });
   return quickMenuButton;
 }
 
-document.addEventListener("click", function (e) {
+document.addEventListener("click", function(e) {
   if (active_dmenu == null || !active_dmenu.isOpen()) {
     return;
   }

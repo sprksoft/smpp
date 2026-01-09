@@ -1,8 +1,7 @@
-if (typeof browser === "undefined") {
-  var browser = chrome;
-}
+import { browser } from "../common/utils.js";
 
 import { fetchDelijnData } from "./api-background-script.js";
+import { loadJSON } from "./json-loader.js";
 
 function getDefaultCustomThemeData() {
   return {
@@ -15,15 +14,32 @@ function getDefaultCustomThemeData() {
   };
 }
 
+let defaultPlantData;
+async function getDefaultPlantData() {
+  if (!defaultPlantData) {
+    defaultPlantData = await loadJSON(
+      "background-scripts/data/default-plant-data.json"
+    );
+  }
+  return defaultPlantData;
+}
+
 export async function getPlantAppData() {
   let data = await browser.storage.local.get("plantAppData");
-  let plantAppData = data.plantAppData || defaultPlantData;
+  let plantAppData = data.plantAppData || getDefaultPlantData();
   return plantAppData;
 }
 
 export async function getCustomThemeData() {
   let data = await browser.storage.local.get("customThemeData");
   return data.customThemeData || getDefaultCustomThemeData();
+}
+
+let fallBackColorData;
+async function getFallbackColorData() {
+  if (!fallBackColorData) {
+    fallBackColorData = await loadJSON("background-scripts/data/delijn-kleuren.json")
+  }
 }
 
 export async function getDelijnColorData() {
@@ -45,7 +61,7 @@ export async function getDelijnColorData() {
     return delijnColorData;
   } catch (error) {
     console.error("Error retrieving Delijn Color Data:", error);
-    return fallbackColorData;
+    return getFallbackColorData;
   }
 }
 

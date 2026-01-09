@@ -2,7 +2,7 @@
 import { BaseWindow } from "./modules/windows.js";
 import { getThemeQueryString } from "./appearance/themes.js";
 import { gcIconSvg } from "../fixes-utils/svgs.js";
-import { browser } from "./main.js";
+import { browser } from "../common/utils.ts";
 import { getPlantSvg } from "../widgets/plant.js";
 
 const GC_DOMAINS = {

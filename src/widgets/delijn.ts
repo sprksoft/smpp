@@ -1,7 +1,6 @@
 // @ts-nocheck
 import { WidgetBase, registerWidget } from "./widgets.js";
-import { randomChance } from "../fixes-utils/utils.js";
-import { browser } from "../main-features/main.js";
+import { randomChance, browser } from "../common/utils.ts";
 import {
   lijnIconSvg,
   loadingSpinnerSvg,
@@ -96,8 +95,8 @@ async function createHalteDoorkomst(doorkomst, container, monochrome, signal) {
       arrivalTimeDeviation === 0
         ? "On time"
         : arrivalTimeDeviation > 0
-        ? `+${arrivalTimeDeviation}`
-        : arrivalTimeDeviation;
+          ? `+${arrivalTimeDeviation}`
+          : arrivalTimeDeviation;
     timeUntilDeparture = calculateTimeUntilDepartureInMins(ETA);
     timeUntilDeparture =
       timeUntilDeparture < 1 ? "Now" : `${timeUntilDeparture} Min.`;

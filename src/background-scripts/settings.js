@@ -1,8 +1,4 @@
-if (typeof browser === "undefined") {
-  var browser = chrome;
-}
-
-import { fillObjectWithDefaults } from "./utils.js";
+import { browser, fillObjectWithDefaults } from "../common/utils.js";
 import { loadJSON } from "./json-loader.js";
 import { getThemes } from "./themes.js";
 

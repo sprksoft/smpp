@@ -1,10 +1,10 @@
 // @ts-nocheck
 import { dmenu, dmenuConfig } from "./dmenu.js";
 import { getDMenuOptionsForSettings, dmenuEditConfig } from "./config.js";
-import { openURL, unbloat, clearAllData } from "../../fixes-utils/utils.js";
+import { clearAllData } from "../../fixes-utils/utils.js";
 import { openGlobalChat } from "../globalchat.js";
 import { resetPlant } from "../../widgets/plant.js";
-import { browser } from "../main.js";
+import { openURL, browser } from "../../common/utils.ts";
 
 let quicks = [];
 let links = [];
@@ -70,7 +70,7 @@ function add_quick_interactive() {
   let cmd_list = quick_cmd_list();
   dmenu(
     cmd_list,
-    function (name, shift) {
+    function(name, shift) {
       value_list = [];
       for (let i = 0; i < quicks.length; i++) {
         if (quicks[i].name == name) {
@@ -80,7 +80,7 @@ function add_quick_interactive() {
       }
       dmenu(
         value_list,
-        function (value, shift) {
+        function(value, shift) {
           if (!value.startsWith("http")) {
             value = "https://" + value;
           }
@@ -97,7 +97,7 @@ function remove_quick_interactive() {
   let cmd_list = quick_cmd_list();
   dmenu(
     cmd_list,
-    function (name, shift) {
+    function(name, shift) {
       remove_quick(name);
     },
     "name:"
@@ -158,6 +158,11 @@ function scrape_goto() {
   }
 }
 
+function unbloat() {
+  document.body.innerHTML = "";
+}
+
+
 export async function do_qm(opener = "") {
   let cmd_list = quick_cmd_list()
     .concat(goto_items)
@@ -188,7 +193,7 @@ export async function do_qm(opener = "") {
 
   dmenu(
     cmd_list,
-    async function (cmd) {
+    async function(cmd) {
       switch (cmd) {
         case "unbloat":
           unbloat();
@@ -205,7 +210,7 @@ export async function do_qm(opener = "") {
         case "config":
           dmenu(
             await getDMenuOptionsForSettings(false),
-            function (cmd, shift) {
+            function(cmd, shift) {
               dmenuEditConfig(cmd);
             },
             "config: "

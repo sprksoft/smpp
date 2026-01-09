@@ -26,10 +26,9 @@ import "../widgets/weather.ts";
 import "../widgets/clock.ts";
 
 import {
-  getExtensionImage,
-  randomChance,
   getPfpLink,
 } from "../fixes-utils/utils.ts";
+import { browser, getExtensionImage, randomChance } from "../common/utils.js";
 import { migrate } from "../fixes-utils/migration.ts";
 import { titleFix } from "../fixes-utils/titlefix.ts";
 import {
@@ -47,7 +46,6 @@ import { quickLoad } from "./quick-menu/quick.ts";
 export var originalUsername: string;
 export var settingsTemplate: any;
 export var themes: any;
-export var browser: any;
 export var onHomePage: boolean;
 export var onLoginPage: boolean;
 export var isGOSchool: boolean;
@@ -83,10 +81,6 @@ import {
 } from "../main-features/quick-menu/dmenu.ts";
 import { colorpickersHTML } from "../fixes-utils/svgs.ts";
 
-if (browser == undefined) {
-  browser = chrome;
-}
-
 //java script komt hier je weet wel
 //ok - ldev
 //oh ok, ik dacht in general.css - Jdev
@@ -120,13 +114,13 @@ function changeFont() {
 function fixCoursesSearch() {
   document
     .getElementById("courseSearch")
-    ?.addEventListener("keydown", function (event) {
+    ?.addEventListener("keydown", function(event) {
       if (event.key === "Enter") {
         event.preventDefault();
 
         setTimeout(() => {
           const firstCourse = document.querySelector(
-            ".course-list.js-courses-list li a"
+            ".course-list.js-courses-list li a",
           );
           if (firstCourse) {
             firstCourse.click();
@@ -202,12 +196,12 @@ export function applyTopNav(data) {
   if (data.switchCoursesAndLinks) {
     topNav.insertBefore(
       document.querySelector("[data-links]"),
-      document.querySelector("[data-courses]")
+      document.querySelector("[data-courses]"),
     );
   } else {
     topNav.insertBefore(
       document.querySelector("[data-courses]"),
-      document.querySelector("[data-links]")
+      document.querySelector("[data-links]"),
     );
   }
 }
@@ -230,7 +224,7 @@ async function createStaticGlobals() {
     /firefox/i.test(navigator.userAgent);
   if (document.querySelector('img[alt="Profiel afbeelding"]')) {
     originalPfpUrl = document.querySelector(
-      'img[alt="Profiel afbeelding"]'
+      'img[alt="Profiel afbeelding"]',
     ).src;
   } else {
     originalPfpUrl = getPfpLink(originalUsername);
@@ -257,7 +251,7 @@ export async function applyAppearance(appearance) {
   } else {
     style.setProperty(
       "--background-blur",
-      `blur(${appearance.background.blur}px)`
+      `blur(${appearance.background.blur}px)`,
     );
   }
 }
@@ -279,7 +273,7 @@ export function applyProfile(profile) {
   let style = document.documentElement.style;
   style.setProperty(
     "--profile-picture",
-    "url(" + getPfpLink(profile.username || originalUsername) + ")"
+    "url(" + getPfpLink(profile.username || originalUsername) + ")",
   );
   applyUsername(profile.username);
   applyProfilePicture(profile);

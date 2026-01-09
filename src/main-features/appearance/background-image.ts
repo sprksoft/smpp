@@ -1,6 +1,5 @@
 // @ts-nocheck
-import { getExtensionImage } from "../../fixes-utils/utils.js";
-import { browser } from "../main.js";
+import { browser, getExtensionImage } from "../../common/utils.js";
 
 export async function setBackground(appearance: Object) {
   function displayBackgroundImage(imageSrc: string) {
