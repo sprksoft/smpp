@@ -3445,12 +3445,12 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             });
             break;
           case "test cats":
-            let themes4 = await browser2.runtime.sendMessage({
+            let themes3 = await browser2.runtime.sendMessage({
               action: "getThemes",
               categories: ["quickSettings"],
               includeHidden: true
             });
-            console.log(themes4);
+            console.log(themes3);
           default:
             break;
         }
@@ -8014,8 +8014,7 @@ ${code}`;
 
   // src/main-features/main.ts
   var originalUsername;
-  var settingsTemplate3;
-  var themes3;
+  var themes2;
   var onHomePage;
   var onLoginPage;
   var isGOSchool;
@@ -8042,7 +8041,7 @@ ${code}`;
   function changeFont() {
     let fontLinks = document.createElement("div");
     fontLinks.innerHTML = `<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">`;
-    document.getElementsByTagName("head")[0].appendChild(fontLinks);
+    document.getElementsByTagName("head")[0]?.appendChild(fontLinks);
   }
   function fixCoursesSearch() {
     document.getElementById("courseSearch")?.addEventListener("keydown", function(event) {
@@ -8060,15 +8059,17 @@ ${code}`;
     });
   }
   function updateTopNavIcons(data2) {
-    const notifsButton = document.querySelector(".js-btn-notifs");
+    const notifsButton = document.querySelector(
+      ".js-btn-notifs"
+    );
     if (notifsButton && data2.notifications) {
       const textSpan = notifsButton.querySelector("span");
       notifsButton.innerHTML = notfisSvg;
-      notifsButton.appendChild(textSpan);
+      if (textSpan) notifsButton.appendChild(textSpan);
     } else if (notifsButton && !data2.notifications) {
       const textSpan = notifsButton.querySelector("span");
       notifsButton.innerHTML = "Meldingen";
-      notifsButton.appendChild(textSpan);
+      if (textSpan) notifsButton.appendChild(textSpan);
     }
     const startButton = document.querySelector(".js-btn-home");
     if (startButton && data2.home) {
@@ -8080,11 +8081,11 @@ ${code}`;
     if (messageButton && data2.mail) {
       const textSpan = messageButton.querySelector("span");
       messageButton.innerHTML = messageSvg;
-      messageButton.appendChild(textSpan);
+      if (textSpan) messageButton.appendChild(textSpan);
     } else if (messageButton && !data2.mail) {
       const textSpan = messageButton.querySelector("span");
       messageButton.innerHTML = "Berichten";
-      messageButton.appendChild(textSpan);
+      if (textSpan) messageButton.appendChild(textSpan);
     }
     const settingButton = document.getElementById("quickSettingsButton");
     if (settingButton && data2.settings) {
@@ -8094,7 +8095,9 @@ ${code}`;
     }
   }
   function updateTabLogo(logo) {
-    let iconElement = document.querySelector('link[rel="icon"]');
+    let iconElement = document.querySelector(
+      'link[rel="icon"]'
+    );
     if (!iconElement) {
       iconElement = document.createElement("link");
       document.head.appendChild(iconElement);
@@ -8116,32 +8119,29 @@ ${code}`;
     if (!topNav) return;
     updateTopNavIcons(data2.icons);
     updateTopButtons(data2.buttons);
-    if (data2.switchCoursesAndLinks) {
-      topNav.insertBefore(
-        document.querySelector("[data-links]"),
-        document.querySelector("[data-courses]")
-      );
-    } else {
-      topNav.insertBefore(
-        document.querySelector("[data-courses]"),
-        document.querySelector("[data-links]")
-      );
+    let linksButton = document.querySelector("[data-links]");
+    let coursesButton = document.querySelector(
+      "[data-courses]"
+    );
+    if (linksButton && coursesButton) {
+      data2.switchCoursesAndLinks ? topNav.insertBefore(linksButton, coursesButton) : topNav.insertBefore(coursesButton, linksButton);
     }
   }
   async function createStaticGlobals() {
-    themes3 = await browser2.runtime.sendMessage({
+    themes2 = await browser2.runtime.sendMessage({
       action: "getThemes"
     });
-    settingsTemplate3 = await browser2.runtime.sendMessage({
-      action: "getSettingsTemplate"
-    });
-    originalUsername = document.querySelector(".js-btn-profile .hlp-vert-box span")?.innerText || "Mr Unknown";
+    let originalUsernameElement = document.querySelector(
+      ".js-btn-profile .hlp-vert-box span"
+    );
+    originalUsername = originalUsernameElement?.innerText || "Mr Unknown";
     isGOSchool = document.body.classList.contains("go");
     isFirefox = typeof navigator.userAgent === "string" && /firefox/i.test(navigator.userAgent);
     if (document.querySelector('img[alt="Profiel afbeelding"]')) {
-      originalPfpUrl = document.querySelector(
+      let originalPfp = document.querySelector(
         'img[alt="Profiel afbeelding"]'
-      ).src;
+      );
+      originalPfpUrl = originalPfp?.src;
     } else {
       originalPfpUrl = getPfpLink(originalUsername);
     }
@@ -8185,10 +8185,9 @@ ${code}`;
     changeFont();
     fixCoursesSearch();
     titleFix();
-    if (document.getElementById("background_image")) {
-      document.getElementById("background_image").style.display = "none";
-    }
-    let notifsToggleLabel = document.getElementById("notifsToggleLabel");
+    let notifsToggleLabel = document.getElementById(
+      "notifsToggleLabel"
+    );
     if (notifsToggleLabel) notifsToggleLabel.innerText = "Toon pop-ups";
     if (window.location.pathname.startsWith("/results/main/results/")) {
       buisStats();
@@ -8210,34 +8209,43 @@ ${code}`;
   }
   function createTopButtons() {
     let topNav = document.querySelector("nav.topnav");
+    if (!topNav) return;
     let logoutButton = document.querySelector(".js-btn-logout");
     if (logoutButton) {
       logoutButton.innerHTML = changeLogoutText();
     }
-    let searchBtn = document.querySelector(".topnav__btn--icon--search");
-    topNav.insertBefore(createQuickSettingsButton(), searchBtn.parentElement);
-    createQuickSettings();
-    let pushRight = topNav.childNodes[2];
-    if (!liteMode) {
-      topNav.insertBefore(createGC(), pushRight);
-    }
     let searchButton = document.querySelector(".topnav__btn--icon--search");
     if (searchButton) {
+      topNav.insertBefore(
+        createQuickSettingsButton(),
+        searchButton.parentElement
+      );
       searchButton.innerHTML = searchButtonSvg;
+    }
+    createQuickSettings();
+    let pushRight = topNav.childNodes[2];
+    if (!pushRight) return;
+    if (!liteMode) {
+      topNav.insertBefore(createGC(), pushRight);
     }
     if (onHomePage) {
       initWidgetEditMode();
       topNav.insertBefore(createWidgetEditModeButton(), pushRight);
     }
     topNav.insertBefore(createQuickMenuButton(), pushRight);
-    document.getElementById("profileMenu").querySelector(".topnav__menu").appendChild(createProfileSettingButton());
+    document.getElementById("profileMenu")?.querySelector(".topnav__menu")?.appendChild(createProfileSettingButton());
   }
   function createProfileSettingButton() {
     let button = document.createElement("a");
     button.addEventListener("click", (e) => {
       openSettingsWindow(e);
-      document.getElementById("profileMenu").hidden = true;
-      document.querySelector(".profile-settings-button").click();
+      let topNavProfileMenu = document.getElementById("profileMenu");
+      let settingsPageProfileButton = document.querySelector(
+        ".profile-settings-button"
+      );
+      if (!topNavProfileMenu || !settingsPageProfileButton) return;
+      topNavProfileMenu.hidden = true;
+      settingsPageProfileButton.click();
     });
     button.classList.add("topnav__menuitem");
     button.classList.add("topnav__menuitem--img");
@@ -8256,7 +8264,7 @@ ${code}`;
       data2.GO ? GOButton.style = "display:flex" : GOButton.style = "display:none";
     }
     let searchButton = document.querySelector(".topnav__btn--icon--search");
-    if (searchButton) {
+    if (searchButton?.parentElement) {
       data2.search ? searchButton.parentElement.style = "display:flex" : searchButton.parentElement.style = "display:none";
     }
     let GC = document.getElementById("global_chat_button");

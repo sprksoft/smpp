@@ -1132,3 +1132,13 @@ h3.detail-description__title.title--3,
 .js-splitdetail-timegrid-container .personal-profile-picture {
   width: 4rem !important;
 }
+
+.tileItem-ap6ee:hover {
+  background-color: var(--color-base03) !important;
+  border-color: var(--color-accent) !important;
+}
+
+.tileItem-ap6ee {
+  background-color: var(--color-base02) !important;
+  border: 2px solid var(--color-base03) !important;
+}

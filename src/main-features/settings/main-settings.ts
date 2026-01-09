@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { BaseWindow } from "../modules/windows.js";
 import { originalUsername } from "../main.js";
 import { colorpickersHTMLV2 } from "../../fixes-utils/svgs.js";
@@ -562,7 +563,7 @@ export class SettingsWindow extends BaseWindow {
         await applyAppearance(settings.appearance);
         if (
           JSON.stringify(settings.appearance.weatherOverlay) !=
-          JSON.stringify(previousSettings.appearance.weatherOverlay) &&
+            JSON.stringify(previousSettings.appearance.weatherOverlay) &&
           !liteMode
         ) {
           applyWeatherEffects(settings.appearance.weatherOverlay);
