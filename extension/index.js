@@ -65,31 +65,6 @@
         </g>
       </svg>`;
   var performanceModeSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24" id="lightning" class="icon glyph"><path d="M18,11.74a1,1,0,0,0-.52-.63L14.09,9.43,15,3.14a1,1,0,0,0-1.78-.75l-7,9a1,1,0,0,0-.17.87,1,1,0,0,0,.59.67l4.27,1.71L10,20.86a1,1,0,0,0,.63,1.07A.92.92,0,0,0,11,22a1,1,0,0,0,.83-.45l6-9A1,1,0,0,0,18,11.74Z"/></svg>`;
-  var colorpickersHTMLV2 = `
-<div class="color-picker-container">
-<input type="color" class="color-pickersmpp" id="settings-colorPicker1">
-<span class="color-label">base0</span>
-</div>
-<div class="color-picker-container">
-<input type="color" class="color-pickersmpp" id="settings-colorPicker2">
-<span class="color-label">base1</span>
-</div>
-<div class="color-picker-container">
-<input type="color" class="color-pickersmpp" id="settings-colorPicker3">
-<span class="color-label">base2</span>
-</div>
-<div class="color-picker-container">
-<input type="color" class="color-pickersmpp" id="settings-colorPicker4">
-<span class="color-label">base3</span>
-</div>
-<div class="color-picker-container">
-<input type="color" class="color-pickersmpp" id="settings-colorPicker5">
-<span class="color-label">accent</span>
-</div>
-<div class="color-picker-container">
-<input type="color" class="color-pickersmpp" id="settings-colorPicker6">
-<span class="color-label">text</span>
-</div>`;
   var temperatureSvg = `<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" style="height: 100%;" data-name="Laag 2" viewBox="0 0 13 26">
 <g id="Laag_1-2" data-name="Laag 1">
   <g>
@@ -520,11 +495,15 @@ Is it scaring you off?`,
 
   // src/main-features/modules/windows.ts
   var BaseWindow = class {
-    #keydownHandler;
+    id;
+    hidden;
+    element;
+    _outsideClickHandler = null;
+    _keydownHandler = null;
     constructor(id, hidden = true) {
       this.id = id;
       this.hidden = hidden;
-      this.element = null;
+      this.element = document.createElement("div");
     }
     async create() {
       this.element = await this.renderContent();
@@ -551,6 +530,7 @@ Is it scaring you off?`,
       });
       closeBtn.addEventListener("click", () => this.hide());
     }
+    // Override this in subclass
     async renderContent() {
       return document.createElement("div");
     }
@@ -565,29 +545,29 @@ Is it scaring you off?`,
       const isKeyboardEvent = triggerEvent && (typeof KeyboardEvent !== "undefined" ? triggerEvent instanceof KeyboardEvent : String(triggerEvent.type).startsWith("key"));
       const openEventTarget = isKeyboardEvent ? null : triggerEvent?.target ?? null;
       this._outsideClickHandler = (e) => {
-        if (openEventTarget && (e.target === openEventTarget || openEventTarget.contains(e.target))) {
+        if (openEventTarget && e.target instanceof Node && (e.target === openEventTarget || openEventTarget instanceof Node && openEventTarget.contains(e.target))) {
           return;
         }
-        if (!this.element.contains(e.target)) {
+        if (e.target instanceof Node && !this.element.contains(e.target)) {
           this.hide();
         }
       };
       document.addEventListener("click", this._outsideClickHandler, {
         capture: true
       });
-      if (!this.#keydownHandler) {
-        this.#keydownHandler = (e) => {
+      if (!this._keydownHandler) {
+        this._keydownHandler = (e) => {
           if (e.key === "Escape") {
             this.hide();
           }
         };
-        document.addEventListener("keydown", this.#keydownHandler);
+        document.addEventListener("keydown", this._keydownHandler);
       }
       if (isKeyboardEvent) {
         requestAnimationFrame(() => {
           const focusableElements = this.element.querySelectorAll("label");
           if (focusableElements.length > 0) {
-            focusableElements[0].focus();
+            focusableElements[0]?.focus();
           }
         });
       }
@@ -603,15 +583,15 @@ Is it scaring you off?`,
         });
         this._outsideClickHandler = null;
       }
-      if (this.#keydownHandler) {
-        document.removeEventListener("keydown", this.#keydownHandler);
-        this.#keydownHandler = null;
+      if (this._keydownHandler) {
+        document.removeEventListener("keydown", this._keydownHandler);
+        this._keydownHandler = null;
       }
       this.onClosed?.();
     }
     remove() {
       this.element?.remove();
-      this.isOpen = false;
+      this.hidden = true;
     }
   };
 
@@ -741,16 +721,16 @@ Is it scaring you off?`,
   var ImageSelector = class {
     constructor(name2) {
       this.name = name2;
-      this.id = null;
-      this.clearButton = null;
-      this.linkInput = null;
       this.linkInputContainer = this.createLinkImageInputContainer();
-      this.fileInput = null;
-      this.fileInputButton = null;
       this.fileInputContainer = this.createImageFileInputContainer();
       this.fullContainer = this.createFullFileInput();
       this._bindEvents();
     }
+    id = null;
+    clearButton = null;
+    linkInput = null;
+    fileInput = null;
+    fileInputButton = null;
     readFileAsDataURL(file) {
       return new Promise((resolve, reject) => {
         const reader = new FileReader();
@@ -3725,24 +3705,24 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
 
   // src/main-features/settings/main-settings.ts
   var SettingsWindow = class extends BaseWindow {
-    settingsSideBarCategories = {
-      appearance: {
-        name: "Appearance"
-      },
-      topNav: { name: "Navigation" },
-      widgets: { name: "Widgets" },
-      other: { name: "Other" }
-    };
+    settingsSideBarCategories = [
+      { name: "Appearance", id: "appearance" },
+      { name: "Navigation", id: "topNav" },
+      { name: "Widgets", id: "widgets" },
+      { name: "Other", id: "other" }
+    ];
     currentPage = "appearance";
+    settingsPage = document.createElement("div");
+    backgroundImageSelector = new ImageSelector("backgroundImage");
+    profilePictureInput = new ImageSelector("profilePicture");
     constructor() {
       super("settings-window");
     }
     async renderContent() {
       let content = document.createElement("div");
       let settingsSideBar = await this.createSettingsSideBar();
-      this.settingsPage = document.createElement("div");
       this.settingsPage.id = "settings-page";
-      this.settingsPage.addEventListener("change", (e) => this.storePage(e));
+      this.settingsPage.addEventListener("change", (e) => this.storePage());
       content.classList.add("settingsWindow");
       content.appendChild(settingsSideBar);
       content.appendChild(this.settingsPage);
@@ -3754,9 +3734,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       settingsSideBar.classList.add("settings-sidebar");
       let settingsSideBarProfileButton = await this.createSettingsSideBarProfileButton();
       settingsSideBar.appendChild(settingsSideBarProfileButton);
-      Object.keys(this.settingsSideBarCategories).forEach((key) => {
-        let settingsSideBarButton = this.createSettingsSideBarCategory(key);
-        settingsSideBar.appendChild(settingsSideBarButton);
+      this.settingsSideBarCategories.forEach((category) => {
+        settingsSideBar.appendChild(this.createSettingsSideBarCategory(category));
       });
       let currentRadio = settingsSideBar.querySelector(
         `input[value="${this.currentPage}"]`
@@ -3766,10 +3745,12 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       return settingsSideBar;
     }
     updateSideBar = async (event) => {
-      if (event.target.type === "radio") {
-        this.currentPage = event.target.value;
-        this.displaySettingsPage();
-        await this.loadPage();
+      if (event.target instanceof HTMLInputElement) {
+        if (event.target.type === "radio") {
+          this.currentPage = event.target.value;
+          this.displaySettingsPage();
+          await this.loadPage();
+        }
       }
     };
     async createSettingsSideBarProfileButton() {
@@ -3784,7 +3765,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       radioInput.classList.add("settings-radio");
       let profileSettingsLabel = document.createElement("label");
       profileSettingsLabel.htmlFor = "settings-profile";
-      profileSettingsLabel.tabIndex = "0";
+      profileSettingsLabel.tabIndex = 0;
       profileSettingsLabel.classList.add(
         "profile-settings-button",
         "settings-category-button-js"
@@ -3801,9 +3782,10 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       profileTextContainer.classList.add("profile-settings-label");
       let profileSettingsLabelTitle = document.createElement("h2");
       profileSettingsLabelTitle.id = "profile-settings-label-title";
-      profileSettingsLabelTitle.innerText = String(
-        data2.profile.username || originalUsername
-      ).split(" ")[0];
+      let firstName = String(data2.profile.username || originalUsername).split(
+        " "
+      )[0];
+      if (firstName) profileSettingsLabelTitle.innerText = firstName;
       let profileSettingsLabelDescription = document.createElement("p");
       profileSettingsLabelDescription.classList.add(
         "profile-settings-label-description"
@@ -3825,12 +3807,12 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       let radioInput = document.createElement("input");
       radioInput.type = "radio";
       radioInput.name = "settings-page";
-      radioInput.value = category;
-      radioInput.id = `settings-${category}`;
+      radioInput.value = category.id;
+      radioInput.id = `settings-${category.id}`;
       radioInput.classList.add("settings-radio");
       let categoryLabel = document.createElement("label");
-      categoryLabel.htmlFor = `settings-${category}`;
-      categoryLabel.tabIndex = "0";
+      categoryLabel.htmlFor = `settings-${category.id}`;
+      categoryLabel.tabIndex = 0;
       categoryLabel.classList.add(
         "settings-category-button",
         "settings-category-button-js"
@@ -3843,17 +3825,15 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       });
       let categoryButtonIcon = document.createElement("img");
       categoryButtonIcon.classList.add("category-button-icon");
-      let imageFileName = category + ".webp";
-      if (category === "appearance" && this.isPastaTime()) {
+      let imageFileName = category.id + ".webp";
+      if (category.id === "appearance" && this.isPastaTime()) {
         imageFileName = "pasta.webp";
       }
       categoryButtonIcon.src = getExtensionImage(
         "settings-icons/" + imageFileName
       );
       categoryLabel.appendChild(categoryButtonIcon);
-      categoryLabel.appendChild(
-        document.createTextNode(this.settingsSideBarCategories[category].name)
-      );
+      categoryLabel.appendChild(document.createTextNode(category.name));
       let container = document.createElement("div");
       container.appendChild(radioInput);
       container.appendChild(categoryLabel);
@@ -3902,81 +3882,172 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       });
     }
     async loadPage() {
-      let settings = await browser2.runtime.sendMessage({
+      const settings = await browser2.runtime.sendMessage({
         action: "getSettingsData"
       });
       async function loadWidgetSettingSlider(id, setting) {
-        document.getElementById(id).value = await getWidgetSetting(setting);
-        document.querySelector(`#${id} + .settings-page-live-value`).innerText = await getWidgetSetting(setting);
+        const element = document.getElementById(id);
+        const valueDisplay = document.querySelector(
+          `#${id} + .settings-page-live-value`
+        );
+        if (!element || !valueDisplay) return;
+        const value = await getWidgetSetting(setting);
+        element.value = value;
+        valueDisplay.textContent = String(value);
       }
-      document.getElementById("profile-settings-label-title").innerText = String(
-        settings.profile.username || originalUsername
-      ).split(" ")[0];
+      const profileTitleElement = document.getElementById(
+        "profile-settings-label-title"
+      );
+      if (profileTitleElement) {
+        let firstName = String(
+          settings.profile.username || originalUsername
+        ).split(" ")[0];
+        if (firstName) profileTitleElement.textContent = firstName;
+      }
       switch (this.currentPage) {
         case "profile": {
-          if (settings.profile.username) {
-            document.getElementById("settings-page-username-input").value = settings.profile.username;
+          const usernameInput = document.getElementById(
+            "settings-page-username-input"
+          );
+          if (settings.profile.username && usernameInput) {
+            usernameInput.value = settings.profile.username;
           }
           this.profilePictureInput.loadImageData();
-          document.getElementById("settings-page-default-sm-pfp-button").checked = settings.profile.useSMpfp;
+          const defaultPfpButton = document.getElementById(
+            "settings-page-default-sm-pfp-button"
+          );
+          if (defaultPfpButton) {
+            defaultPfpButton.checked = settings.profile.useSMpfp;
+          }
           break;
         }
         case "appearance": {
           document.querySelectorAll(".settings-page-theme-card input[type='radio']").forEach((radio) => {
-            if (radio.value === settings.appearance.theme) {
-              radio.checked = true;
+            const input = radio;
+            if (input.value === settings.appearance.theme) {
+              input.checked = true;
             } else {
-              radio.checked = false;
+              input.checked = false;
             }
           });
-          if (settings.appearance.theme == "custom") {
-            document.getElementById("colorpickersforsettingspage").classList.add("visible");
-            await loadCustomThemeDataV2();
-          } else {
-            document.getElementById("colorpickersforsettingspage").classList.remove("visible");
-          }
           this.backgroundImageSelector.id = settings.appearance.theme;
           this.backgroundImageSelector.loadImageData();
-          document.getElementById("settings-page-blur-slider").value = settings.appearance.background.blur * 10;
+          const blurSlider = document.getElementById("settings-page-blur-slider");
+          if (blurSlider) {
+            blurSlider.value = String(
+              settings.appearance.background.blur * 10
+            );
+          }
           document.querySelectorAll(".settings-page-weather-overlay-container input").forEach((input) => {
-            if (input.id) {
-              input.checked = input.id.includes(
+            const inputElement = input;
+            if (inputElement.id) {
+              inputElement.checked = inputElement.id.includes(
                 settings.appearance.weatherOverlay.type
               );
             }
           });
-          document.getElementById("settings-page-weather-overlay-slider").value = settings.appearance.weatherOverlay.amount;
-          document.getElementById(
+          const weatherOverlaySlider = document.getElementById(
+            "settings-page-weather-overlay-slider"
+          );
+          if (weatherOverlaySlider) {
+            weatherOverlaySlider.value = String(
+              settings.appearance.weatherOverlay.amount
+            );
+          }
+          const weatherOpacitySlider = document.getElementById(
             "settings-page-weather-overlay-opacity-slider"
-          ).value = settings.appearance.weatherOverlay.opacity * 100;
-          document.getElementById("settings-page-default-icon-button").checked = settings.appearance.tabLogo == "sm";
-          document.getElementById("settings-page-smpp-icon-button").checked = settings.appearance.tabLogo == "smpp";
-          document.getElementById("settings-page-show-news-button").checked = settings.appearance.news;
+          );
+          if (weatherOpacitySlider) {
+            weatherOpacitySlider.value = String(
+              settings.appearance.weatherOverlay.opacity * 100
+            );
+          }
+          const defaultIconButton = document.getElementById(
+            "settings-page-default-icon-button"
+          );
+          if (defaultIconButton) {
+            defaultIconButton.checked = settings.appearance.tabLogo === "sm";
+          }
+          const smppIconButton = document.getElementById(
+            "settings-page-smpp-icon-button"
+          );
+          if (smppIconButton) {
+            smppIconButton.checked = settings.appearance.tabLogo === "smpp";
+          }
+          const showNewsButton = document.getElementById(
+            "settings-page-show-news-button"
+          );
+          if (showNewsButton) {
+            showNewsButton.checked = settings.appearance.news;
+          }
           break;
         }
         case "topNav": {
-          document.getElementById("settings-page-swap-courses-button").checked = settings.topNav.switchCoursesAndLinks;
-          console.log(isGOSchool);
+          const swapCoursesButton = document.getElementById(
+            "settings-page-swap-courses-button"
+          );
+          if (swapCoursesButton) {
+            swapCoursesButton.checked = settings.topNav.switchCoursesAndLinks;
+          }
           if (isGOSchool) {
-            document.getElementById("settings-page-go-button").checked = settings.topNav.buttons.GO;
+            const goButton = document.getElementById("settings-page-go-button");
+            if (goButton) {
+              goButton.checked = settings.topNav.buttons.GO;
+            }
           }
           if (!liteMode) {
-            document.getElementById("settings-page-global-chat-button").checked = settings.topNav.buttons.GC;
+            const globalChatButton = document.getElementById(
+              "settings-page-global-chat-button"
+            );
+            if (globalChatButton) {
+              globalChatButton.checked = settings.topNav.buttons.GC;
+            }
           }
-          document.getElementById("settings-page-search-button").checked = settings.topNav.buttons.search;
-          document.getElementById("settings-page-quick-menu-button").checked = settings.topNav.buttons.quickMenu;
-          document.getElementById("settings-page-home-icon-button").checked = settings.topNav.icons.home;
-          document.getElementById("settings-page-mail-icon-button").checked = settings.topNav.icons.mail;
-          document.getElementById(
+          const searchButton = document.getElementById(
+            "settings-page-search-button"
+          );
+          if (searchButton) {
+            searchButton.checked = settings.topNav.buttons.search;
+          }
+          const quickMenuButton = document.getElementById(
+            "settings-page-quick-menu-button"
+          );
+          if (quickMenuButton) {
+            quickMenuButton.checked = settings.topNav.buttons.quickMenu;
+          }
+          const homeIconButton = document.getElementById(
+            "settings-page-home-icon-button"
+          );
+          if (homeIconButton) {
+            homeIconButton.checked = settings.topNav.icons.home;
+          }
+          const mailIconButton = document.getElementById(
+            "settings-page-mail-icon-button"
+          );
+          if (mailIconButton) {
+            mailIconButton.checked = settings.topNav.icons.mail;
+          }
+          const notificationsIconButton = document.getElementById(
             "settings-page-notifications-icon-button"
-          ).checked = settings.topNav.icons.notifications;
-          document.getElementById("settings-page-settings-icon-button").checked = settings.topNav.icons.settings;
+          );
+          if (notificationsIconButton) {
+            notificationsIconButton.checked = settings.topNav.icons.notifications;
+          }
+          const settingsIconButton = document.getElementById(
+            "settings-page-settings-icon-button"
+          );
+          if (settingsIconButton) {
+            settingsIconButton.checked = settings.topNav.icons.settings;
+          }
           break;
         }
         case "widgets": {
-          document.getElementById(
+          const delijnMonochromeButton = document.getElementById(
             "settings-page-delijn-monochrome-button"
-          ).checked = await getWidgetSetting("DelijnWidget.monochrome");
+          );
+          if (delijnMonochromeButton) {
+            delijnMonochromeButton.checked = await getWidgetSetting("DelijnWidget.monochrome");
+          }
           await loadWidgetSettingSlider(
             "settings-page-max-busses-slider",
             "DelijnWidget.maxBusses"
@@ -3986,25 +4057,61 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             "TakenWidget.maxAssignments"
           );
           if (!liteMode) {
-            document.getElementById(
+            const showSnakeGridButton = document.getElementById(
               "settings-page-show-snake-grid-button"
-            ).checked = await getWidgetSetting("SnakeWidget.enableGrid");
+            );
+            if (showSnakeGridButton) {
+              showSnakeGridButton.checked = await getWidgetSetting("SnakeWidget.enableGrid");
+            }
           }
           break;
         }
         case "other": {
-          document.getElementById(
+          let loadKeybind2 = function(id, key) {
+            let keybindInput = document.getElementById(id);
+            if (!keybindInput) return;
+            keybindInput.value = key;
+          };
+          var loadKeybind = loadKeybind2;
+          const performanceModeButton = document.getElementById(
             "settings-page-performance-mode-button"
-          ).checked = settings.other.performanceMode;
-          document.getElementById("settings-page-splash-text-button").checked = settings.other.splashText;
-          document.getElementById("settings-page-discord-button").checked = settings.other.discordButton;
-          document.getElementById("settings-page-quick-menu-keybinding").value = settings.other.keybinds.dmenu;
-          document.getElementById("settings-page-widget-edit-keybinding").value = settings.other.keybinds.widgetEditMode;
-          document.getElementById("settings-widget-bag-keybinding").value = settings.other.keybinds.widgetBag;
-          document.getElementById("settings-page-settings-keybinding").value = settings.other.keybinds.settings;
-          if (!liteMode) {
-            document.getElementById("settings-page-gc-keybinding").value = settings.other.keybinds.gc;
+          );
+          if (performanceModeButton) {
+            performanceModeButton.checked = settings.other.performanceMode;
           }
+          const splashTextButton = document.getElementById(
+            "settings-page-splash-text-button"
+          );
+          if (splashTextButton) {
+            splashTextButton.checked = settings.other.splashText;
+          }
+          const discordButton = document.getElementById(
+            "settings-page-discord-button"
+          );
+          if (discordButton) {
+            discordButton.checked = settings.other.discordButton;
+          }
+          loadKeybind2(
+            "settings-page-quick-menu-keybinding",
+            settings.other.keybinds.dmenu
+          );
+          loadKeybind2(
+            "settings-page-widget-edit-keybinding",
+            settings.other.keybinds.widgetEditMode
+          );
+          loadKeybind2(
+            "settings-widget-bag-keybinding",
+            settings.other.keybinds.widgetBag
+          );
+          loadKeybind2(
+            "settings-page-settings-keybinding",
+            settings.other.keybinds.settings
+          );
+          if (!liteMode)
+            loadKeybind2(
+              "settings-page-gc-keybinding",
+              settings.other.keybinds.gc
+            );
           break;
         }
         default:
@@ -4015,157 +4122,169 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       const settings = await browser2.runtime.sendMessage({
         action: "getSettingsData"
       });
-      let previousSettings = structuredClone(settings);
+      const previousSettings = structuredClone(settings);
+      const getCheckboxValue = (id) => {
+        const element = document.getElementById(id);
+        return element?.checked || false;
+      };
+      const getSliderValue = (id) => {
+        const element = document.getElementById(id);
+        return element?.value ? parseFloat(element.value) : 0;
+      };
+      const saveKeybind = (id) => {
+        const element = document.getElementById(id);
+        return element?.value || "None";
+      };
       switch (this.currentPage) {
         case "profile": {
-          settings.profile.username = document.getElementById(
+          const usernameInput = document.getElementById(
             "settings-page-username-input"
-          ).value;
-          settings.profile.useSMpfp = document.getElementById(
+          );
+          if (usernameInput) {
+            settings.profile.username = usernameInput.value || null;
+          }
+          settings.profile.useSMpfp = getCheckboxValue(
             "settings-page-default-sm-pfp-button"
-          ).checked;
+          );
           applyProfile(settings.profile);
           break;
         }
         case "appearance": {
-          let selectedTheme = document.querySelector(
+          const selectedTheme = document.querySelector(
             ".settings-page-theme-card:has(input[type='radio']:checked)"
           );
-          if (selectedTheme) {
-            settings.appearance.theme = selectedTheme.dataset.theme;
+          if (selectedTheme && selectedTheme.dataset["theme"]) {
+            settings.appearance.theme = selectedTheme.dataset["theme"];
           }
-          if (previousSettings.appearance.theme == "custom") {
-            await storeCustomThemeDataV2();
-          }
-          let blurValue = document.getElementById(
-            "settings-page-blur-slider"
-          ).value;
-          settings.appearance.background.blur = blurValue / 10;
-          let chosenWeather = document.querySelector(
+          settings.appearance.background.blur = getSliderValue("settings-page-blur-slider") / 10;
+          const chosenWeather = document.querySelector(
             ".settings-page-weather-overlay-container input:checked"
           );
           if (chosenWeather) {
-            settings.appearance.weatherOverlay.type = chosenWeather.closest("[data-weather]").dataset.weather;
+            const weatherContainer = chosenWeather.closest(
+              "[data-weather]"
+            );
+            if (weatherContainer?.dataset["weather"]) {
+              const weatherType = weatherContainer.dataset["weather"];
+              if (weatherType === "realtime" || weatherType === "rain" || weatherType === "snow") {
+                settings.appearance.weatherOverlay.type = weatherType;
+              }
+            }
           }
-          settings.appearance.weatherOverlay.amount = document.getElementById(
+          settings.appearance.weatherOverlay.amount = getSliderValue(
             "settings-page-weather-overlay-slider"
-          ).value;
-          settings.appearance.weatherOverlay.opacity = document.getElementById(
-            "settings-page-weather-overlay-opacity-slider"
-          ).value / 100;
-          settings.appearance.tabLogo = document.getElementById(
+          );
+          settings.appearance.weatherOverlay.opacity = getSliderValue("settings-page-weather-overlay-opacity-slider") / 100;
+          const smppIconChecked = getCheckboxValue(
             "settings-page-smpp-icon-button"
-          ).checked ? "smpp" : "sm";
-          settings.appearance.news = document.getElementById(
+          );
+          settings.appearance.tabLogo = smppIconChecked ? "smpp" : "sm";
+          settings.appearance.news = getCheckboxValue(
             "settings-page-show-news-button"
-          ).checked;
+          );
           await applyAppearance(settings.appearance);
-          if (JSON.stringify(settings.appearance.weatherOverlay) != JSON.stringify(previousSettings.appearance.weatherOverlay) && !liteMode) {
+          if (JSON.stringify(settings.appearance.weatherOverlay) !== JSON.stringify(previousSettings.appearance.weatherOverlay) && !liteMode) {
             applyWeatherEffects(settings.appearance.weatherOverlay);
           }
           break;
         }
         case "topNav": {
-          settings.topNav.switchCoursesAndLinks = document.getElementById(
+          settings.topNav.switchCoursesAndLinks = getCheckboxValue(
             "settings-page-swap-courses-button"
-          ).checked;
-          if (isGOSchool)
-            settings.topNav.buttons.GO = document.getElementById(
+          );
+          if (isGOSchool) {
+            settings.topNav.buttons.GO = getCheckboxValue(
               "settings-page-go-button"
-            ).checked;
-          if (!liteMode) {
-            settings.topNav.buttons.GC = document.getElementById(
-              "settings-page-global-chat-button"
-            ).checked;
+            );
           }
-          settings.topNav.buttons.search = document.getElementById(
+          if (!liteMode) {
+            settings.topNav.buttons.GC = getCheckboxValue(
+              "settings-page-global-chat-button"
+            );
+          }
+          settings.topNav.buttons.search = getCheckboxValue(
             "settings-page-search-button"
-          ).checked;
-          settings.topNav.buttons.quickMenu = document.getElementById(
+          );
+          settings.topNav.buttons.quickMenu = getCheckboxValue(
             "settings-page-quick-menu-button"
-          ).checked;
-          settings.topNav.icons.home = document.getElementById(
+          );
+          settings.topNav.icons.home = getCheckboxValue(
             "settings-page-home-icon-button"
-          ).checked;
-          settings.topNav.icons.mail = document.getElementById(
+          );
+          settings.topNav.icons.mail = getCheckboxValue(
             "settings-page-mail-icon-button"
-          ).checked;
-          settings.topNav.icons.notifications = document.getElementById(
+          );
+          settings.topNav.icons.notifications = getCheckboxValue(
             "settings-page-notifications-icon-button"
-          ).checked;
-          settings.topNav.icons.settings = document.getElementById(
+          );
+          settings.topNav.icons.settings = getCheckboxValue(
             "settings-page-settings-icon-button"
-          ).checked;
+          );
           applyTopNav(settings.topNav);
           break;
         }
         case "widgets": {
-          if (document.getElementById("settings-page-delijn-monochrome-button").checked != await getWidgetSetting("DelijnWidget.monochrome")) {
-            await setWidgetSetting(
-              "DelijnWidget.monochrome",
-              document.getElementById("settings-page-delijn-monochrome-button").checked
+          const updateWidgetSetting = async (id, settingName, parseFunc = (val) => val) => {
+            const element = document.getElementById(
+              id
             );
-          }
-          if (parseInt(
-            document.getElementById("settings-page-max-busses-slider").value,
-            10
-          ) != await getWidgetSetting("DelijnWidget.maxBusses")) {
-            await setWidgetSetting(
-              "DelijnWidget.maxBusses",
-              parseInt(
-                document.getElementById("settings-page-max-busses-slider").value,
-                10
-              )
-            );
-          }
-          if (parseInt(
-            document.getElementById("settings-page-max-assignments-slider").value,
-            10
-          ) != await getWidgetSetting("TakenWidget.maxAssignments")) {
-            await setWidgetSetting(
-              "TakenWidget.maxAssignments",
-              parseInt(
-                document.getElementById("settings-page-max-assignments-slider").value,
-                10
-              )
-            );
-          }
-          if (!liteMode) {
-            if (document.getElementById("settings-page-show-snake-grid-button").checked != await getWidgetSetting("SnakeWidget.enableGrid")) {
-              await setWidgetSetting(
-                "SnakeWidget.enableGrid",
-                document.getElementById("settings-page-show-snake-grid-button").checked
-              );
+            if (!element) return;
+            const currentValue = parseFunc(element.value);
+            const storedValue = await getWidgetSetting(settingName);
+            if (JSON.stringify(currentValue) !== JSON.stringify(storedValue)) {
+              await setWidgetSetting(settingName, currentValue);
             }
+          };
+          await updateWidgetSetting(
+            "settings-page-delijn-monochrome-button",
+            "DelijnWidget.monochrome",
+            (val) => val === "true" || val === "on"
+          );
+          await updateWidgetSetting(
+            "settings-page-max-busses-slider",
+            "DelijnWidget.maxBusses",
+            (val) => parseInt(val, 10)
+          );
+          await updateWidgetSetting(
+            "settings-page-max-assignments-slider",
+            "TakenWidget.maxAssignments",
+            (val) => parseInt(val, 10)
+          );
+          if (!liteMode) {
+            await updateWidgetSetting(
+              "settings-page-show-snake-grid-button",
+              "SnakeWidget.enableGrid",
+              (val) => val === "true" || val === "on"
+            );
           }
           break;
         }
         case "other": {
-          settings.other.performanceMode = document.getElementById(
+          settings.other.performanceMode = getCheckboxValue(
             "settings-page-performance-mode-button"
-          ).checked;
-          settings.other.splashText = document.getElementById(
+          );
+          settings.other.splashText = getCheckboxValue(
             "settings-page-splash-text-button"
-          ).checked;
-          settings.other.discordButton = document.getElementById(
+          );
+          settings.other.discordButton = getCheckboxValue(
             "settings-page-discord-button"
-          ).checked;
-          settings.other.keybinds.dmenu = document.getElementById(
+          );
+          settings.other.keybinds.dmenu = saveKeybind(
             "settings-page-quick-menu-keybinding"
-          ).value;
-          settings.other.keybinds.widgetEditMode = document.getElementById(
+          );
+          settings.other.keybinds.widgetEditMode = saveKeybind(
             "settings-page-widget-edit-keybinding"
-          ).value;
-          settings.other.keybinds.widgetBag = document.getElementById(
+          );
+          settings.other.keybinds.widgetBag = saveKeybind(
             "settings-widget-bag-keybinding"
-          ).value;
-          settings.other.keybinds.settings = document.getElementById(
+          );
+          settings.other.keybinds.settings = saveKeybind(
             "settings-page-settings-keybinding"
-          ).value;
+          );
           if (!liteMode) {
-            settings.other.keybinds.gc = document.getElementById(
+            settings.other.keybinds.gc = saveKeybind(
               "settings-page-gc-keybinding"
-            ).value;
+            );
           }
           applyOther(settings.other);
           break;
@@ -4199,8 +4318,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         container.classList.add("settings-page-key-bind-container");
         container.classList.add("smpp-input-with-label");
         let label = document.createElement("span");
-        label.for = id;
-        label.tabIndex = "0";
+        label.tabIndex = 0;
         label.classList.add("settings-page-button-label");
         label.innerText = text;
         let button = createButton(id);
@@ -4259,14 +4377,14 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       };
       function createSettingsButtonWithLabel(id, text) {
         let container = createButtonWithLabel(id, text);
-        container.tabIndex = "0";
+        container.tabIndex = 0;
         container.classList.add("settings-page-button-label-container");
         return container;
       }
-      function createImageButton(src, width = "80px", height = "80px", name2, id) {
+      function createImageButton(src, width, height, name2, id) {
         let wrapper = document.createElement("label");
         wrapper.classList.add("settings-page-image-button-wrapper");
-        wrapper.tabIndex = "0";
+        wrapper.tabIndex = 0;
         wrapper.style.width = width;
         wrapper.style.height = height;
         let input = document.createElement("input");
@@ -4276,7 +4394,6 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         let image = document.createElement("img");
         image.classList.add("settings-page-image");
         image.src = getExtensionImage(src);
-        image.width = width;
         wrapper.addEventListener("keydown", (e) => {
           if (e.key === " " || e.key === "Enter") {
             e.preventDefault();
@@ -4317,9 +4434,10 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         slider.classList.add("settings-page-labeled-slider");
         if (showValue)
           slider.addEventListener("input", (event) => {
-            document.querySelector(
-              "#" + event.target.id + " ~ .settings-page-live-value"
-            ).innerText = event.target.value;
+            let liveValueElement = document.querySelector(
+              "#" + id + " ~ .settings-page-live-value"
+            );
+            if (liveValueElement) liveValueElement.innerText = slider.value;
           });
         let currentValue = document.createElement("span");
         currentValue.classList.add("settings-page-live-value");
@@ -4362,7 +4480,6 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
               isFirefox ? "Upload your own profile picture, large files not recommended on Firefox" : "Upload your own profile picture"
             )
           );
-          this.profilePictureInput = new ImageSelector("profilePicture");
           this.profilePictureInput.id = "profilePicture";
           this.profilePictureInput.loadImageData();
           this.profilePictureInput.onStore = async () => {
@@ -4390,12 +4507,10 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
               "Customize the overall look of the interface with different color styles."
             )
           );
-          this.settingsPage.appendChild(createCustomThemeUIV2());
           this.settingsPage.appendChild(createSectionTitle("Wallpaper"));
           this.settingsPage.appendChild(
             createDescription("Personalize your backdrop with a custom image.")
           );
-          this.backgroundImageSelector = new ImageSelector("backgroundImage");
           this.backgroundImageSelector.onStore = () => {
             this.storePage();
           };
@@ -4407,7 +4522,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             createDescription("Apply a blur to your background.")
           );
           this.settingsPage.appendChild(
-            createSlider(0, 100, "settings-page-blur-slider")
+            createSlider("0", "100", "settings-page-blur-slider")
             // must be divided by 10
             // for real value
           );
@@ -4446,7 +4561,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             "weather",
             "settings-page-raindrop-button"
           );
-          rainBtn.dataset.weather = "rain";
+          rainBtn.dataset["weather"] = "rain";
           weatherIconsContainer.appendChild(rainBtn);
           let realtimeBtn = createImageButtonWithLabel(
             "icons/weather-overlay/realtimefancy.svg",
@@ -4456,7 +4571,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             "weather",
             "settings-page-realtime-button"
           );
-          realtimeBtn.dataset.weather = "realtime";
+          realtimeBtn.dataset["weather"] = "realtime";
           weatherIconsContainer.appendChild(realtimeBtn);
           let snowBtn = createImageButtonWithLabel(
             "icons/weather-overlay/snowflakefancy.svg",
@@ -4466,13 +4581,13 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             "weather",
             "settings-page-snow-button"
           );
-          snowBtn.dataset.weather = "snow";
+          snowBtn.dataset["weather"] = "snow";
           weatherIconsContainer.appendChild(snowBtn);
           this.settingsPage.appendChild(weatherIconsContainer);
           this.settingsPage.appendChild(
             createLabeledSlider(
-              0,
-              500,
+              "0",
+              "500",
               "settings-page-weather-overlay-slider",
               "Amount",
               false
@@ -4480,8 +4595,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           );
           this.settingsPage.appendChild(
             createLabeledSlider(
-              0,
-              100,
+              "0",
+              "100",
               "settings-page-weather-overlay-opacity-slider",
               "Opacity",
               false
@@ -4603,8 +4718,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           );
           this.settingsPage.appendChild(
             createLabeledSlider(
-              1,
-              10,
+              "1",
+              "10",
               "settings-page-max-busses-slider",
               "Max busses"
             )
@@ -4615,8 +4730,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           );
           this.settingsPage.appendChild(
             createLabeledSlider(
-              1,
-              10,
+              "1",
+              "10",
               "settings-page-max-assignments-slider",
               "Max assignments"
             )
@@ -4723,47 +4838,6 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   async function openSettingsWindow(event) {
     settingsWindow.show(event);
     settingsWindow.loadPage();
-  }
-  function createCustomThemeUIV2() {
-    const colorpickers = document.createElement("div");
-    colorpickers.id = "colorpickersforsettingspage";
-    colorpickers.innerHTML = colorpickersHTMLV2;
-    return colorpickers;
-  }
-  async function loadCustomThemeDataV2() {
-    const themeData = await browser2.runtime.sendMessage({
-      action: "getCustomThemeData"
-    });
-    customTheme = themeData;
-    themeCard = document.querySelector(
-      `.settings-page-theme-card[data-theme="custom"]`
-    );
-    themeCard.style.setProperty("--hover-border", themeData.color_accent);
-    themeCard.style.setProperty("--hover-color", themeData.color_base01);
-    themeCard.style.setProperty("--text-color", themeData.color_text);
-    themeCard.style.setProperty(
-      "--background-placeholder-color",
-      themeData.color_base02
-    );
-    document.getElementById("settings-colorPicker1").value = themeData.color_base00;
-    document.getElementById("settings-colorPicker2").value = themeData.color_base01;
-    document.getElementById("settings-colorPicker3").value = themeData.color_base02;
-    document.getElementById("settings-colorPicker4").value = themeData.color_base03;
-    document.getElementById("settings-colorPicker5").value = themeData.color_accent;
-    document.getElementById("settings-colorPicker6").value = themeData.color_text;
-  }
-  async function storeCustomThemeDataV2() {
-    await browser2.runtime.sendMessage({
-      action: "setCustomThemeData",
-      data: {
-        color_base00: document.getElementById("settings-colorPicker1").value,
-        color_base01: document.getElementById("settings-colorPicker2").value,
-        color_base02: document.getElementById("settings-colorPicker3").value,
-        color_base03: document.getElementById("settings-colorPicker4").value,
-        color_accent: document.getElementById("settings-colorPicker5").value,
-        color_text: document.getElementById("settings-colorPicker6").value
-      }
-    });
   }
 
   // src/main-features/keybinds.ts

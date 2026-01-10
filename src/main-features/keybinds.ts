@@ -10,7 +10,7 @@ import {
   toggleBag,
 } from "../widgets/widgets.js";
 
-export type Keybind = Uppercase<string> | "Space" | symbol;
+export type Keybind = Uppercase<string> | symbol | "None" | "Space";
 
 document.addEventListener("keyup", async (e) => {
   if (e.target?.tagName === "INPUT") return;

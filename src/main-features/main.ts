@@ -41,7 +41,6 @@ import {
 import {
   createSettingsWindow,
   type Settings,
-  type SettingsCategory,
 } from "./settings/main-settings.js";
 import { quickLoad } from "./quick-menu/quick.js";
 

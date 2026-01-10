@@ -118,7 +118,9 @@
   var fallBackColorData;
   async function getFallbackColorData() {
     if (!fallBackColorData) {
-      fallBackColorData = await loadJSON("background-scripts/data/delijn-kleuren.json");
+      fallBackColorData = await loadJSON(
+        "background-scripts/data/delijn-kleuren.json"
+      );
     }
   }
   async function getDelijnColorData() {
@@ -443,7 +445,9 @@
         console.log("weatherAppData sent.");
       }
       if (message.action === "getBackgroundImage") {
-        const backgroundImage = await browser.storage.local.get("backgroundImage");
+        const backgroundImage = await browser.storage.local.get(
+          "backgroundImage"
+        );
         await browser.storage.local.remove("backgroundImage");
         sendResponse(backgroundImage);
         console.log("Background image sent.");

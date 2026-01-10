@@ -13,19 +13,19 @@ export type Image = {
 export class ImageSelector {
   constructor(name) {
     this.name = name;
-    this.id = null;
 
-    this.clearButton = null;
-    this.linkInput = null;
     this.linkInputContainer = this.createLinkImageInputContainer();
-
-    this.fileInput = null;
-    this.fileInputButton = null;
     this.fileInputContainer = this.createImageFileInputContainer();
 
     this.fullContainer = this.createFullFileInput();
     this._bindEvents();
   }
+
+  id: string | null = null;
+  clearButton = null;
+  linkInput = null;
+  fileInput = null;
+  fileInputButton = null;
 
   readFileAsDataURL(file) {
     return new Promise((resolve, reject) => {

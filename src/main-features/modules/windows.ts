@@ -1,4 +1,3 @@
-// @ts-nocheck
 import {
   contractIconSVG,
   expandIconSVG,
@@ -6,14 +5,19 @@ import {
 } from "../../fixes-utils/svgs.js";
 
 export class BaseWindow {
-  #keydownHandler;
-  constructor(id, hidden = true) {
+  id: string;
+  hidden: boolean;
+  element: HTMLDivElement;
+  private _outsideClickHandler: ((e: MouseEvent) => void) | null = null;
+  private _keydownHandler: ((e: KeyboardEvent) => void) | null = null;
+
+  constructor(id: string, hidden = true) {
     this.id = id;
     this.hidden = hidden;
-    this.element = null;
+    this.element = document.createElement("div");
   }
 
-  async create() {
+  async create(): Promise<void> {
     this.element = await this.renderContent();
     this.element.id = this.id;
     this.element.classList.add("base-window");
@@ -47,16 +51,19 @@ export class BaseWindow {
     closeBtn.addEventListener("click", () => this.hide());
   }
 
-  async renderContent() {
-    // Override this in subclass
+  // Override this in subclass
+  async renderContent(): Promise<HTMLDivElement> {
     return document.createElement("div");
   }
 
   // Called every time the window is opened
   // Override this in subclass
-  onOpened() {}
+  onOpened(): void {}
 
-  show(triggerEvent = null) {
+  // Called when window is closed
+  onClosed?(): void;
+
+  show(triggerEvent: MouseEvent | KeyboardEvent | null = null): void {
     if (!this.hidden) return;
     this.hidden = false;
 
@@ -68,36 +75,42 @@ export class BaseWindow {
         : String(triggerEvent.type).startsWith("key"));
     const openEventTarget = isKeyboardEvent
       ? null
-      : triggerEvent?.target ?? null;
-    this._outsideClickHandler = (e) => {
+      : (triggerEvent as MouseEvent | null)?.target ?? null;
+
+    this._outsideClickHandler = (e: MouseEvent) => {
       if (
         openEventTarget &&
-        (e.target === openEventTarget || openEventTarget.contains(e.target))
+        e.target instanceof Node &&
+        (e.target === openEventTarget ||
+          (openEventTarget instanceof Node &&
+            openEventTarget.contains(e.target)))
       ) {
         return;
       }
-      if (!this.element.contains(e.target)) {
+      if (e.target instanceof Node && !this.element.contains(e.target)) {
         this.hide();
       }
     };
     document.addEventListener("click", this._outsideClickHandler, {
       capture: true,
     });
-    if (!this.#keydownHandler) {
-      this.#keydownHandler = (e) => {
+
+    if (!this._keydownHandler) {
+      this._keydownHandler = (e: KeyboardEvent) => {
         if (e.key === "Escape") {
           this.hide();
         }
       };
-      document.addEventListener("keydown", this.#keydownHandler);
+      document.addEventListener("keydown", this._keydownHandler);
     }
 
     // Focus the first focusable element inside the window
     if (isKeyboardEvent) {
       requestAnimationFrame(() => {
-        const focusableElements = this.element.querySelectorAll("label");
+        const focusableElements =
+          this.element.querySelectorAll<HTMLLabelElement>("label");
         if (focusableElements.length > 0) {
-          focusableElements[0].focus();
+          focusableElements[0]?.focus();
         }
       });
     }
@@ -105,7 +118,7 @@ export class BaseWindow {
     this.onOpened();
   }
 
-  hide() {
+  hide(): void {
     if (this.hidden) return;
 
     this.hidden = true;
@@ -116,16 +129,16 @@ export class BaseWindow {
       });
       this._outsideClickHandler = null;
     }
-    if (this.#keydownHandler) {
-      document.removeEventListener("keydown", this.#keydownHandler);
-      this.#keydownHandler = null;
+    if (this._keydownHandler) {
+      document.removeEventListener("keydown", this._keydownHandler);
+      this._keydownHandler = null;
     }
 
     this.onClosed?.();
   }
 
-  remove() {
+  remove(): void {
     this.element?.remove();
-    this.isOpen = false;
+    this.hidden = true;
   }
 }
