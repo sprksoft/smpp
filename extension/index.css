@@ -2532,6 +2532,16 @@ input.settings-page-keybinding-input[type=text]:not(.aaaaaa):read-only.listening
 .keybind-input-wrapper {
   position: relative;
 }
+.smpp-color-picker-field {
+  width: 100%;
+  aspect-ratio: 16/9;
+  position: relative;
+}
+.smpp-color-picker-field > div {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
 
 /* src/styles/smpp-styles/assignments.css */
 .assignment__item {

@@ -415,8 +415,8 @@ Is it scaring you off?`,
       sendDebug("Stored plannerUrl in cookies with 30 day expiration.");
       userId = plannerUrl.split("/")[4];
       sendDebug("Extracted userId from plannerUrl:", userId);
-    } catch (e) {
-      sendDebug("Failed to get plannerUrl from DOM. Error:", e.message);
+    } catch (e2) {
+      sendDebug("Failed to get plannerUrl from DOM. Error:", e2.message);
       sendDebug("Trying to get plannerUrl from cookies...");
       const cookies = document.cookie.split(";");
       const plannerUrlCookie = cookies.find(
@@ -544,11 +544,11 @@ Is it scaring you off?`,
       this.element.classList.remove("hidden");
       const isKeyboardEvent = triggerEvent && (typeof KeyboardEvent !== "undefined" ? triggerEvent instanceof KeyboardEvent : String(triggerEvent.type).startsWith("key"));
       const openEventTarget = isKeyboardEvent ? null : triggerEvent?.target ?? null;
-      this._outsideClickHandler = (e) => {
-        if (openEventTarget && e.target instanceof Node && (e.target === openEventTarget || openEventTarget instanceof Node && openEventTarget.contains(e.target))) {
+      this._outsideClickHandler = (e2) => {
+        if (openEventTarget && e2.target instanceof Node && (e2.target === openEventTarget || openEventTarget instanceof Node && openEventTarget.contains(e2.target))) {
           return;
         }
-        if (e.target instanceof Node && !this.element.contains(e.target)) {
+        if (e2.target instanceof Node && !this.element.contains(e2.target)) {
           this.hide();
         }
       };
@@ -556,8 +556,8 @@ Is it scaring you off?`,
         capture: true
       });
       if (!this._keydownHandler) {
-        this._keydownHandler = (e) => {
-          if (e.key === "Escape") {
+        this._keydownHandler = (e2) => {
+          if (e2.key === "Escape") {
             this.hide();
           }
         };
@@ -618,9 +618,9 @@ Is it scaring you off?`,
     let label = document.createElement("span");
     label.innerText = text;
     let button = createButton(id);
-    container.addEventListener("keydown", (e) => {
-      if (e.key === " " || e.key === "Enter") {
-        e.preventDefault();
+    container.addEventListener("keydown", (e2) => {
+      if (e2.key === " " || e2.key === "Enter") {
+        e2.preventDefault();
         button.click();
         container.focus();
       }
@@ -661,10 +661,10 @@ Is it scaring you off?`,
   function setByPath(object, path, value) {
     let ob = object;
     const pathSplit = path.split(".");
-    for (let i = 0; i < pathSplit.length - 1; i++) {
-      ob = ob[pathSplit[i]];
+    for (let i2 = 0; i2 < pathSplit.length - 1; i2++) {
+      ob = ob[pathSplit[i2]];
       if (ob === void 0) {
-        throw `setByPath: ${pathSplit[i]} did not exist in path ${path}`;
+        throw `setByPath: ${pathSplit[i2]} did not exist in path ${path}`;
       }
     }
     ob[pathSplit[pathSplit.length - 1]] = value;
@@ -685,11 +685,11 @@ Is it scaring you off?`,
   }
   function openURL2(url, new_window = false) {
     if (new_window) {
-      let a = document.createElement("a");
-      a.href = url;
-      a.rel = "noopener noreferrer";
-      a.target = "_blank";
-      a.click();
+      let a2 = document.createElement("a");
+      a2.href = url;
+      a2.rel = "noopener noreferrer";
+      a2.target = "_blank";
+      a2.click();
       return;
     }
     window.location.href = url;
@@ -757,8 +757,8 @@ Is it scaring you off?`,
       this.fileInputButton.classList.add("smpp-file-input-button");
       this.fileInputButton.setAttribute("aria-label", "Choose image file");
       this.fileInputButton.innerHTML = fileInputIconSvg;
-      this.fileInputButton.addEventListener("click", (e) => {
-        e.preventDefault();
+      this.fileInputButton.addEventListener("click", (e2) => {
+        e2.preventDefault();
         this.fileInput.click();
       });
       fileInputContainer.appendChild(this.fileInput);
@@ -807,8 +807,8 @@ Is it scaring you off?`,
         }
         await this.storeImage();
       });
-      this.clearButton.addEventListener("click", async (e) => {
-        e.preventDefault();
+      this.clearButton.addEventListener("click", async (e2) => {
+        e2.preventDefault();
         this.linkInput.value = "";
         this.clearButton.classList.remove("active");
         this.fileInputButton.classList.remove("active");
@@ -917,8 +917,8 @@ Is it scaring you off?`,
           return;
         img.src = url;
         img.classList.add("personal-profile-picture");
-      } catch (e) {
-        console.error("Error processing img:", e, img);
+      } catch (e2) {
+        console.error("Error processing img:", e2, img);
       }
     }
     const existingImgs = Array.from(document.getElementsByTagName("img"));
@@ -936,8 +936,8 @@ Is it scaring you off?`,
             if (imgs && imgs.length) {
               for (const img of imgs) processImg(img);
             }
-          } catch (e) {
-            console.error("Error querying imgs inside node:", e, htmlNode);
+          } catch (e2) {
+            console.error("Error querying imgs inside node:", e2, htmlNode);
           }
         }
         if (mutation.type === "attributes" && mutation.target instanceof HTMLImageElement) {
@@ -1044,19 +1044,19 @@ Is it scaring you off?`,
       }
       this.close();
     }
-    #onKeydown(e) {
-      if (e.key == "Enter") {
+    #onKeydown(e2) {
+      if (e2.key == "Enter") {
         this.#accept();
-      } else if (e.key == "Escape") {
+      } else if (e2.key == "Escape") {
         this.close();
-      } else if (e.key == "Tab" && e.shiftKey || e.key == "ArrowUp") {
+      } else if (e2.key == "Tab" && e2.shiftKey || e2.key == "ArrowUp") {
         this.#selPrev();
-      } else if (e.key == "Tab" && !e.shiftKey || e.key == "ArrowDown") {
+      } else if (e2.key == "Tab" && !e2.shiftKey || e2.key == "ArrowDown") {
         this.#selNext();
       } else {
         return;
       }
-      e.preventDefault();
+      e2.preventDefault();
     }
     #oninput() {
       this.#sort();
@@ -1101,14 +1101,14 @@ Is it scaring you off?`,
           node.getElementsByClassName("dmenu-score")[0].innerText = score;
         }
       }
-      let sortedItems = items.sort(function(a, b) {
-        if (a.score < b.score) return 1;
-        if (a.score > b.score) return -1;
+      let sortedItems = items.sort(function(a2, b2) {
+        if (a2.score < b2.score) return 1;
+        if (a2.score > b2.score) return -1;
         return 0;
       });
-      for (let i = 0; i < sortedItems.length; i++) {
-        let item = sortedItems[i];
-        if (i == 0) {
+      for (let i2 = 0; i2 < sortedItems.length; i2++) {
+        let item = sortedItems[i2];
+        if (i2 == 0) {
           item.htmlNode.classList.add("dmenu-selected");
         } else {
           item.htmlNode.classList.remove("dmenu-selected");
@@ -1121,22 +1121,22 @@ Is it scaring you off?`,
       match = match.toLowerCase();
       let score = 0;
       let mi = 0;
-      let i = 0;
+      let i2 = 0;
       let streak = 0;
       let streakStartI = 0;
       while (true) {
-        if (i >= str.length || mi >= match.length) {
+        if (i2 >= str.length || mi >= match.length) {
           break;
         }
-        if (str[i] == match[mi]) {
+        if (str[i2] == match[mi]) {
           score += (streak + 1) * (streak + 1) * ((str.length - streakStartI) / str.length);
           mi += 1;
           streak += 1;
         } else {
-          streakStartI = i;
+          streakStartI = i2;
           streak = 0;
         }
-        i++;
+        i2++;
       }
       if (mi < match.length) {
         return 0;
@@ -1167,7 +1167,7 @@ Is it scaring you off?`,
         row.getElementsByClassName("dmenu-score")[0].innerText = "0";
       }
       let klass = this;
-      row.addEventListener("click", function(e) {
+      row.addEventListener("click", function(e2) {
         klass.#accept(row);
       });
       parent.appendChild(row);
@@ -1190,10 +1190,10 @@ Is it scaring you off?`,
       this.inputEl.type = "text";
       this.inputEl.classList.add("dmenu-input");
       let klass = this;
-      this.inputEl.addEventListener("keydown", (e) => {
-        klass.#onKeydown(e);
+      this.inputEl.addEventListener("keydown", (e2) => {
+        klass.#onKeydown(e2);
       });
-      this.inputEl.addEventListener("input", (e) => {
+      this.inputEl.addEventListener("input", (e2) => {
         klass.#oninput();
       });
       top.appendChild(this.inputEl);
@@ -1230,13 +1230,13 @@ Is it scaring you off?`,
     });
     return quickMenuButton;
   }
-  document.addEventListener("click", function(e) {
+  document.addEventListener("click", function(e2) {
     if (active_dmenu == null || !active_dmenu.isOpen()) {
       return;
     }
-    if (!active_dmenu.menuEl.contains(e.target) && e.target != active_dmenu.openerEl) {
+    if (!active_dmenu.menuEl.contains(e2.target) && e2.target != active_dmenu.openerEl) {
       active_dmenu.close();
-      e.preventDefault();
+      e2.preventDefault();
     }
   });
 
@@ -1398,14 +1398,14 @@ Is it scaring you off?`,
       this.#aboutToDel = false;
     }
     createWidgetErrorContent(name2) {
-      let p = document.createElement("p");
-      p.classList.add("smpp-error-widget");
-      p.innerHTML = "<span>Probleem bij het laden van de widget: </span><code class='widgetName'></code><button>Reset widget</button>";
-      p.querySelector(".widgetName").innerText = name2;
-      p.querySelector("button").addEventListener("click", async () => {
+      let p2 = document.createElement("p");
+      p2.classList.add("smpp-error-widget");
+      p2.innerHTML = "<span>Probleem bij het laden van de widget: </span><code class='widgetName'></code><button>Reset widget</button>";
+      p2.querySelector(".widgetName").innerText = name2;
+      p2.querySelector("button").addEventListener("click", async () => {
         this.clearWidgetSettings();
       });
-      return p;
+      return p2;
     }
     async clearWidgetSettings() {
       await browser2.runtime.sendMessage({
@@ -1420,8 +1420,8 @@ Is it scaring you off?`,
     }
     #createWidgetDiv() {
       let widgetDiv = document.createElement("div");
-      widgetDiv.addEventListener("mousedown", (e) => {
-        this.startDragging(e.clientX, e.clientY);
+      widgetDiv.addEventListener("mousedown", (e2) => {
+        this.startDragging(e2.clientX, e2.clientY);
       });
       widgetDiv.classList.add("smpp-widget");
       return widgetDiv;
@@ -1453,9 +1453,9 @@ Is it scaring you off?`,
           newContent = await this.createContent();
           this.isActive = true;
         }
-      } catch (e) {
+      } catch (e2) {
         console.error("Failed to create widget content");
-        console.error(e);
+        console.error(e2);
         newContent = this.createWidgetErrorContent(this.name);
       }
       if (!newContent) {
@@ -1494,14 +1494,14 @@ Is it scaring you off?`,
         this.element.classList.remove("smpp-widget-delete");
       }
     }
-    dragMove(x, y) {
+    dragMove(x2, y2) {
       if (!curDragInfo || curDragInfo.widget != this) {
         return;
       }
       let el = this.element;
       let offset = curDragInfo.offset;
-      el.style.left = x - offset.x + "px";
-      el.style.top = y - offset.y + "px";
+      el.style.left = x2 - offset.x + "px";
+      el.style.top = y2 - offset.y + "px";
     }
     async drop(cancel = false) {
       if (!curDragInfo || curDragInfo.widget != this) {
@@ -1691,17 +1691,17 @@ Is it scaring you off?`,
       );
     }
   }
-  function onPannelHover(pannel, e) {
+  function onPannelHover(pannel, e2) {
     if (!widgetEditMode || curDragInfo == null || hoveringBag) {
       return;
     }
-    const bounds = e.target.getBoundingClientRect();
-    if (e.clientX < bounds.left + PANNELIP_MARGIN_PX) {
-      targetInsertionPoint(e.target.previousElementSibling);
+    const bounds = e2.target.getBoundingClientRect();
+    if (e2.clientX < bounds.left + PANNELIP_MARGIN_PX) {
+      targetInsertionPoint(e2.target.previousElementSibling);
       return;
     }
-    if (e.clientX > bounds.right - PANNELIP_MARGIN_PX) {
-      targetInsertionPoint(e.target.nextElementSibling);
+    if (e2.clientX > bounds.right - PANNELIP_MARGIN_PX) {
+      targetInsertionPoint(e2.target.nextElementSibling);
       return;
     }
     let target = pannel.firstChild;
@@ -1711,24 +1711,24 @@ Is it scaring you off?`,
       }
       const bounds2 = child.getBoundingClientRect();
       let centerY = bounds2.top + (bounds2.bottom - bounds2.top) * 0.5;
-      if (e.clientY > centerY) {
+      if (e2.clientY > centerY) {
         target = child.nextElementSibling;
       }
     }
     targetInsertionPoint(target);
   }
-  function onPannelInsertionPointHover(e) {
+  function onPannelInsertionPointHover(e2) {
     if (!widgetEditMode || curDragInfo == null || hoveringBag) {
       return;
     }
-    targetInsertionPoint(e.target);
+    targetInsertionPoint(e2.target);
   }
-  function onCenterHover(div, e) {
+  function onCenterHover(div, e2) {
     if (!widgetEditMode || curDragInfo == null || hoveringBag) {
       return;
     }
     const bounds = div.getBoundingClientRect();
-    if (e.clientX < (bounds.right - bounds.left) / 2 + bounds.left) {
+    if (e2.clientX < (bounds.right - bounds.left) / 2 + bounds.left) {
       targetInsertionPoint(div.previousElementSibling);
     } else {
       targetInsertionPoint(div.nextElementSibling);
@@ -1745,7 +1745,7 @@ Is it scaring you off?`,
   }
   async function createPannelHTML(pannel) {
     let pannelDiv = document.createElement("div");
-    pannelDiv.addEventListener("mousemove", (e) => onPannelHover(pannelDiv, e));
+    pannelDiv.addEventListener("mousemove", (e2) => onPannelHover(pannelDiv, e2));
     pannelDiv.classList.add("smpp-widget-pannel");
     pannelDiv.appendChild(createInsertionPointHTML());
     for (let widgetName of pannel.widgets) {
@@ -1773,7 +1773,7 @@ Is it scaring you off?`,
     }
     let newsDiv = document.createElement("div");
     newsDiv.classList.add("smpp-news-container");
-    newsDiv.addEventListener("mousemove", (e) => onCenterHover(newsDiv, e));
+    newsDiv.addEventListener("mousemove", (e2) => onCenterHover(newsDiv, e2));
     newsContent.id = "smpp-news-content";
     newsContent.className = "";
     if (news) {
@@ -1809,12 +1809,12 @@ Is it scaring you off?`,
     const div = document.createElement("div");
     div.classList.add("smpp-news-editor");
     const button = createButtonWithLabel("smpp-widget-news-toggle", "Show News");
-    button.addEventListener("change", async (e) => {
-      updateNews(e.target.checked);
+    button.addEventListener("change", async (e2) => {
+      updateNews(e2.target.checked);
       await browser2.runtime.sendMessage({
         action: "setSetting",
         name: "appearance.news",
-        data: e.target.checked
+        data: e2.target.checked
       });
     });
     div.appendChild(button);
@@ -2103,16 +2103,16 @@ Is it scaring you off?`,
     }
     widgetEditModeInit = true;
     initNewsEditMode();
-    document.addEventListener("mouseup", async (e) => {
+    document.addEventListener("mouseup", async (e2) => {
       if (curDragInfo) {
         await curDragInfo.widget.drop(false);
       }
     });
-    document.addEventListener("mousemove", (e) => {
+    document.addEventListener("mousemove", (e2) => {
       if (curDragInfo) {
-        curDragInfo.widget.dragMove(e.clientX, e.clientY);
+        curDragInfo.widget.dragMove(e2.clientX, e2.clientY);
         let handleBounds = widgetBagHandle.getBoundingClientRect();
-        if (e.clientY < handleBounds.bottom && e.clientX > handleBounds.left && e.clientX < handleBounds.right) {
+        if (e2.clientY < handleBounds.bottom && e2.clientX > handleBounds.left && e2.clientX < handleBounds.right) {
           bagHoverEnter();
         } else if (hoveringBag) {
           bagHoverExit();
@@ -2132,6 +2132,164 @@ Is it scaring you off?`,
     btn.title = "Ga in/uit edit mode om de positie van je widgets te veranderen.";
     return btn;
   }
+
+  // node_modules/colord/index.mjs
+  var r = { grad: 0.9, turn: 360, rad: 360 / (2 * Math.PI) };
+  var t = function(r2) {
+    return "string" == typeof r2 ? r2.length > 0 : "number" == typeof r2;
+  };
+  var n = function(r2, t2, n2) {
+    return void 0 === t2 && (t2 = 0), void 0 === n2 && (n2 = Math.pow(10, t2)), Math.round(n2 * r2) / n2 + 0;
+  };
+  var e = function(r2, t2, n2) {
+    return void 0 === t2 && (t2 = 0), void 0 === n2 && (n2 = 1), r2 > n2 ? n2 : r2 > t2 ? r2 : t2;
+  };
+  var u = function(r2) {
+    return (r2 = isFinite(r2) ? r2 % 360 : 0) > 0 ? r2 : r2 + 360;
+  };
+  var a = function(r2) {
+    return { r: e(r2.r, 0, 255), g: e(r2.g, 0, 255), b: e(r2.b, 0, 255), a: e(r2.a) };
+  };
+  var o = function(r2) {
+    return { r: n(r2.r), g: n(r2.g), b: n(r2.b), a: n(r2.a, 3) };
+  };
+  var i = /^#([0-9a-f]{3,8})$/i;
+  var s = function(r2) {
+    var t2 = r2.toString(16);
+    return t2.length < 2 ? "0" + t2 : t2;
+  };
+  var h = function(r2) {
+    var t2 = r2.r, n2 = r2.g, e2 = r2.b, u2 = r2.a, a2 = Math.max(t2, n2, e2), o2 = a2 - Math.min(t2, n2, e2), i2 = o2 ? a2 === t2 ? (n2 - e2) / o2 : a2 === n2 ? 2 + (e2 - t2) / o2 : 4 + (t2 - n2) / o2 : 0;
+    return { h: 60 * (i2 < 0 ? i2 + 6 : i2), s: a2 ? o2 / a2 * 100 : 0, v: a2 / 255 * 100, a: u2 };
+  };
+  var b = function(r2) {
+    var t2 = r2.h, n2 = r2.s, e2 = r2.v, u2 = r2.a;
+    t2 = t2 / 360 * 6, n2 /= 100, e2 /= 100;
+    var a2 = Math.floor(t2), o2 = e2 * (1 - n2), i2 = e2 * (1 - (t2 - a2) * n2), s2 = e2 * (1 - (1 - t2 + a2) * n2), h2 = a2 % 6;
+    return { r: 255 * [e2, i2, o2, o2, s2, e2][h2], g: 255 * [s2, e2, e2, i2, o2, o2][h2], b: 255 * [o2, o2, s2, e2, e2, i2][h2], a: u2 };
+  };
+  var g = function(r2) {
+    return { h: u(r2.h), s: e(r2.s, 0, 100), l: e(r2.l, 0, 100), a: e(r2.a) };
+  };
+  var d = function(r2) {
+    return { h: n(r2.h), s: n(r2.s), l: n(r2.l), a: n(r2.a, 3) };
+  };
+  var f = function(r2) {
+    return b((n2 = (t2 = r2).s, { h: t2.h, s: (n2 *= ((e2 = t2.l) < 50 ? e2 : 100 - e2) / 100) > 0 ? 2 * n2 / (e2 + n2) * 100 : 0, v: e2 + n2, a: t2.a }));
+    var t2, n2, e2;
+  };
+  var c = function(r2) {
+    return { h: (t2 = h(r2)).h, s: (u2 = (200 - (n2 = t2.s)) * (e2 = t2.v) / 100) > 0 && u2 < 200 ? n2 * e2 / 100 / (u2 <= 100 ? u2 : 200 - u2) * 100 : 0, l: u2 / 2, a: t2.a };
+    var t2, n2, e2, u2;
+  };
+  var l = /^hsla?\(\s*([+-]?\d*\.?\d+)(deg|rad|grad|turn)?\s*,\s*([+-]?\d*\.?\d+)%\s*,\s*([+-]?\d*\.?\d+)%\s*(?:,\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
+  var p = /^hsla?\(\s*([+-]?\d*\.?\d+)(deg|rad|grad|turn)?\s+([+-]?\d*\.?\d+)%\s+([+-]?\d*\.?\d+)%\s*(?:\/\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
+  var v = /^rgba?\(\s*([+-]?\d*\.?\d+)(%)?\s*,\s*([+-]?\d*\.?\d+)(%)?\s*,\s*([+-]?\d*\.?\d+)(%)?\s*(?:,\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
+  var m = /^rgba?\(\s*([+-]?\d*\.?\d+)(%)?\s+([+-]?\d*\.?\d+)(%)?\s+([+-]?\d*\.?\d+)(%)?\s*(?:\/\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
+  var y = { string: [[function(r2) {
+    var t2 = i.exec(r2);
+    return t2 ? (r2 = t2[1]).length <= 4 ? { r: parseInt(r2[0] + r2[0], 16), g: parseInt(r2[1] + r2[1], 16), b: parseInt(r2[2] + r2[2], 16), a: 4 === r2.length ? n(parseInt(r2[3] + r2[3], 16) / 255, 2) : 1 } : 6 === r2.length || 8 === r2.length ? { r: parseInt(r2.substr(0, 2), 16), g: parseInt(r2.substr(2, 2), 16), b: parseInt(r2.substr(4, 2), 16), a: 8 === r2.length ? n(parseInt(r2.substr(6, 2), 16) / 255, 2) : 1 } : null : null;
+  }, "hex"], [function(r2) {
+    var t2 = v.exec(r2) || m.exec(r2);
+    return t2 ? t2[2] !== t2[4] || t2[4] !== t2[6] ? null : a({ r: Number(t2[1]) / (t2[2] ? 100 / 255 : 1), g: Number(t2[3]) / (t2[4] ? 100 / 255 : 1), b: Number(t2[5]) / (t2[6] ? 100 / 255 : 1), a: void 0 === t2[7] ? 1 : Number(t2[7]) / (t2[8] ? 100 : 1) }) : null;
+  }, "rgb"], [function(t2) {
+    var n2 = l.exec(t2) || p.exec(t2);
+    if (!n2) return null;
+    var e2, u2, a2 = g({ h: (e2 = n2[1], u2 = n2[2], void 0 === u2 && (u2 = "deg"), Number(e2) * (r[u2] || 1)), s: Number(n2[3]), l: Number(n2[4]), a: void 0 === n2[5] ? 1 : Number(n2[5]) / (n2[6] ? 100 : 1) });
+    return f(a2);
+  }, "hsl"]], object: [[function(r2) {
+    var n2 = r2.r, e2 = r2.g, u2 = r2.b, o2 = r2.a, i2 = void 0 === o2 ? 1 : o2;
+    return t(n2) && t(e2) && t(u2) ? a({ r: Number(n2), g: Number(e2), b: Number(u2), a: Number(i2) }) : null;
+  }, "rgb"], [function(r2) {
+    var n2 = r2.h, e2 = r2.s, u2 = r2.l, a2 = r2.a, o2 = void 0 === a2 ? 1 : a2;
+    if (!t(n2) || !t(e2) || !t(u2)) return null;
+    var i2 = g({ h: Number(n2), s: Number(e2), l: Number(u2), a: Number(o2) });
+    return f(i2);
+  }, "hsl"], [function(r2) {
+    var n2 = r2.h, a2 = r2.s, o2 = r2.v, i2 = r2.a, s2 = void 0 === i2 ? 1 : i2;
+    if (!t(n2) || !t(a2) || !t(o2)) return null;
+    var h2 = (function(r3) {
+      return { h: u(r3.h), s: e(r3.s, 0, 100), v: e(r3.v, 0, 100), a: e(r3.a) };
+    })({ h: Number(n2), s: Number(a2), v: Number(o2), a: Number(s2) });
+    return b(h2);
+  }, "hsv"]] };
+  var N = function(r2, t2) {
+    for (var n2 = 0; n2 < t2.length; n2++) {
+      var e2 = t2[n2][0](r2);
+      if (e2) return [e2, t2[n2][1]];
+    }
+    return [null, void 0];
+  };
+  var x = function(r2) {
+    return "string" == typeof r2 ? N(r2.trim(), y.string) : "object" == typeof r2 && null !== r2 ? N(r2, y.object) : [null, void 0];
+  };
+  var M = function(r2, t2) {
+    var n2 = c(r2);
+    return { h: n2.h, s: e(n2.s + 100 * t2, 0, 100), l: n2.l, a: n2.a };
+  };
+  var H = function(r2) {
+    return (299 * r2.r + 587 * r2.g + 114 * r2.b) / 1e3 / 255;
+  };
+  var $ = function(r2, t2) {
+    var n2 = c(r2);
+    return { h: n2.h, s: n2.s, l: e(n2.l + 100 * t2, 0, 100), a: n2.a };
+  };
+  var j = (function() {
+    function r2(r3) {
+      this.parsed = x(r3)[0], this.rgba = this.parsed || { r: 0, g: 0, b: 0, a: 1 };
+    }
+    return r2.prototype.isValid = function() {
+      return null !== this.parsed;
+    }, r2.prototype.brightness = function() {
+      return n(H(this.rgba), 2);
+    }, r2.prototype.isDark = function() {
+      return H(this.rgba) < 0.5;
+    }, r2.prototype.isLight = function() {
+      return H(this.rgba) >= 0.5;
+    }, r2.prototype.toHex = function() {
+      return r3 = o(this.rgba), t2 = r3.r, e2 = r3.g, u2 = r3.b, i2 = (a2 = r3.a) < 1 ? s(n(255 * a2)) : "", "#" + s(t2) + s(e2) + s(u2) + i2;
+      var r3, t2, e2, u2, a2, i2;
+    }, r2.prototype.toRgb = function() {
+      return o(this.rgba);
+    }, r2.prototype.toRgbString = function() {
+      return r3 = o(this.rgba), t2 = r3.r, n2 = r3.g, e2 = r3.b, (u2 = r3.a) < 1 ? "rgba(" + t2 + ", " + n2 + ", " + e2 + ", " + u2 + ")" : "rgb(" + t2 + ", " + n2 + ", " + e2 + ")";
+      var r3, t2, n2, e2, u2;
+    }, r2.prototype.toHsl = function() {
+      return d(c(this.rgba));
+    }, r2.prototype.toHslString = function() {
+      return r3 = d(c(this.rgba)), t2 = r3.h, n2 = r3.s, e2 = r3.l, (u2 = r3.a) < 1 ? "hsla(" + t2 + ", " + n2 + "%, " + e2 + "%, " + u2 + ")" : "hsl(" + t2 + ", " + n2 + "%, " + e2 + "%)";
+      var r3, t2, n2, e2, u2;
+    }, r2.prototype.toHsv = function() {
+      return r3 = h(this.rgba), { h: n(r3.h), s: n(r3.s), v: n(r3.v), a: n(r3.a, 3) };
+      var r3;
+    }, r2.prototype.invert = function() {
+      return w({ r: 255 - (r3 = this.rgba).r, g: 255 - r3.g, b: 255 - r3.b, a: r3.a });
+      var r3;
+    }, r2.prototype.saturate = function(r3) {
+      return void 0 === r3 && (r3 = 0.1), w(M(this.rgba, r3));
+    }, r2.prototype.desaturate = function(r3) {
+      return void 0 === r3 && (r3 = 0.1), w(M(this.rgba, -r3));
+    }, r2.prototype.grayscale = function() {
+      return w(M(this.rgba, -1));
+    }, r2.prototype.lighten = function(r3) {
+      return void 0 === r3 && (r3 = 0.1), w($(this.rgba, r3));
+    }, r2.prototype.darken = function(r3) {
+      return void 0 === r3 && (r3 = 0.1), w($(this.rgba, -r3));
+    }, r2.prototype.rotate = function(r3) {
+      return void 0 === r3 && (r3 = 15), this.hue(this.hue() + r3);
+    }, r2.prototype.alpha = function(r3) {
+      return "number" == typeof r3 ? w({ r: (t2 = this.rgba).r, g: t2.g, b: t2.b, a: r3 }) : n(this.rgba.a, 3);
+      var t2;
+    }, r2.prototype.hue = function(r3) {
+      var t2 = c(this.rgba);
+      return "number" == typeof r3 ? w({ h: r3, s: t2.s, l: t2.l, a: t2.a }) : n(t2.h);
+    }, r2.prototype.isEqual = function(r3) {
+      return this.toHex() === w(r3).toHex();
+    }, r2;
+  })();
+  var w = function(r2) {
+    return r2 instanceof j ? r2 : new j(r2);
+  };
 
   // src/main-features/appearance/themes.ts
   var currentThemeName;
@@ -2163,6 +2321,27 @@ Is it scaring you off?`,
   function getThemeVar(varName) {
     return currentTheme.cssProperties[varName];
   }
+  var colorPicker = class {
+    currentColor = w("#72b6c0ff");
+    width = "20rem";
+    fieldContainer = document.createElement("div");
+    render() {
+      this.fieldContainer.classList.add("smpp-color-picker-field");
+      this.fieldContainer.style.width = this.width;
+      this.updateField();
+      let horizontalContainer = document.createElement("div");
+      horizontalContainer.style.background = `linear-gradient(to right, var(--max-sat) 0%, rgba(255, 255, 255, 1) 100%)`;
+      let verticalContainer = document.createElement("div");
+      verticalContainer.style.background = "linear-gradient(to top, black, transparent)";
+      this.fieldContainer.appendChild(horizontalContainer);
+      this.fieldContainer.append(verticalContainer);
+      return this.fieldContainer;
+    }
+    updateField() {
+      let maxSatColor = this.currentColor.saturate(100);
+      this.fieldContainer.style.setProperty("--max-sat", maxSatColor.toHex());
+    }
+  };
 
   // src/widgets/plant.ts
   var plantVersion = 2;
@@ -2312,16 +2491,16 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     });
     createPlantWidget(document.getElementById("plantWidget"));
   }
-  function calculatePercentile(t) {
+  function calculatePercentile(t2) {
     const totalTime = 259200;
-    return Math.max(0, 100 * (1 - t / totalTime));
+    return Math.max(0, 100 * (1 - t2 / totalTime));
   }
-  function getTimeInCorrectFormat(t) {
-    if (t / 60 / 1e3 < 1) return "Now";
-    if (t / 60 / 60 / 1e3 < 1) return Math.round(t / 60 / 1e3) + "min ago";
-    if (t / 60 / 60 / 1e3 / 24 < 1)
-      return Math.round(t / 60 / 60 / 1e3) + "h ago";
-    return Math.round(t / 60 / 60 / 1e3 / 24) + "d ago";
+  function getTimeInCorrectFormat(t2) {
+    if (t2 / 60 / 1e3 < 1) return "Now";
+    if (t2 / 60 / 60 / 1e3 < 1) return Math.round(t2 / 60 / 1e3) + "min ago";
+    if (t2 / 60 / 60 / 1e3 / 24 < 1)
+      return Math.round(t2 / 60 / 60 / 1e3) + "h ago";
+    return Math.round(t2 / 60 / 60 / 1e3 / 24) + "d ago";
   }
   function createRemoveButton(isAlive) {
     let removeButtonDiv = document.createElement("div");
@@ -3123,30 +3302,30 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     GlobalChatOpenButton.id = "global_chat_button";
     GlobalChatOpenButton.className = "topnav__btn";
     GlobalChatOpenButton.innerHTML = gcIconSvg;
-    GlobalChatOpenButton.addEventListener("click", (e) => openGlobalChat(e));
+    GlobalChatOpenButton.addEventListener("click", (e2) => openGlobalChat(e2));
     return GlobalChatOpenButton;
   }
-  window.addEventListener("message", async (e) => {
-    if (!Object.values(GC_DOMAINS).includes(e.origin)) {
+  window.addEventListener("message", async (e2) => {
+    if (!Object.values(GC_DOMAINS).includes(e2.origin)) {
       console.warn(
         "Got a message but it was not from one of the global chat domains."
       );
       return;
     }
     let response = { error: "not found" };
-    switch (e.data.action) {
+    switch (e2.data.action) {
       // Get the current plant.
       case "plantapi.v1.get_current":
         response = await getPlantV1();
         break;
       case "plantapi.v1.get_stage_svg":
         response = {
-          svg: getPlantSvg(stageDataToInternalPlantData(e.data.stageData))
+          svg: getPlantSvg(stageDataToInternalPlantData(e2.data.stageData))
         };
         break;
     }
-    response.callId = e.data.callId;
-    e.source.postMessage(response, e.origin);
+    response.callId = e2.data.callId;
+    e2.source.postMessage(response, e2.origin);
   });
   function stageDataToInternalPlantData(stageData) {
     return {
@@ -3191,16 +3370,16 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   }
   function quick_cmd_list() {
     let cmd_list = [];
-    for (let i = 0; i < quicks.length; i++) {
-      cmd_list.push({ value: quicks[i].name, meta: "quick: " + quicks[i].url });
+    for (let i2 = 0; i2 < quicks.length; i2++) {
+      cmd_list.push({ value: quicks[i2].name, meta: "quick: " + quicks[i2].url });
     }
     return cmd_list;
   }
   function add_quick(name2, url) {
     let quick = { name: name2.toLowerCase(), url };
-    for (let i = 0; i < quicks.length; i++) {
-      if (quicks[i].name == name2) {
-        quicks[i] = quick;
+    for (let i2 = 0; i2 < quicks.length; i2++) {
+      if (quicks[i2].name == name2) {
+        quicks[i2] = quick;
         quick_save();
         return;
       }
@@ -3209,9 +3388,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     quick_save();
   }
   function remove_quick(name2) {
-    for (let i = 0; i < quicks.length; i++) {
-      if (quicks[i].name == name2) {
-        quicks.splice(i, 1);
+    for (let i2 = 0; i2 < quicks.length; i2++) {
+      if (quicks[i2].name == name2) {
+        quicks.splice(i2, 1);
         quick_save();
         return;
       }
@@ -3240,9 +3419,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       cmd_list,
       function(name2, shift) {
         value_list = [];
-        for (let i = 0; i < quicks.length; i++) {
-          if (quicks[i].name == name2) {
-            value_list = [{ value: quicks[i].url }];
+        for (let i2 = 0; i2 < quicks.length; i2++) {
+          if (quicks[i2].name == name2) {
+            value_list = [{ value: quicks[i2].url }];
             break;
           }
         }
@@ -3276,10 +3455,10 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     const contentType = response.headers.get("content-type");
     if (response.ok && contentType && contentType.includes("application/json")) {
       let response_data = await response.json();
-      for (let i = 0; i < response_data.length; i++) {
+      for (let i2 = 0; i2 < response_data.length; i2++) {
         links.push({
-          url: response_data[i].url,
-          value: response_data[i].name.toLowerCase(),
+          url: response_data[i2].url,
+          value: response_data[i2].name.toLowerCase(),
           meta: "link"
         });
       }
@@ -3294,8 +3473,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     const contentType = response.headers.get("content-type");
     if (response.ok && contentType && contentType.includes("application/json")) {
       let response_data = await response.json();
-      for (let i = 0; i < response_data.own.length; i++) {
-        let vak = response_data.own[i];
+      for (let i2 = 0; i2 < response_data.own.length; i2++) {
+        let vak = response_data.own[i2];
         let meta = "vak";
         if (vak.descr != "") {
           meta += "  [ " + vak.descr + " ]";
@@ -3312,8 +3491,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     let goto_items_html = document.querySelectorAll(
       ".js-shortcuts-container > a"
     );
-    for (let i = 0; i < goto_items_html.length; i++) {
-      const item = goto_items_html[i];
+    for (let i2 = 0; i2 < goto_items_html.length; i2++) {
+      const item = goto_items_html[i2];
       goto_items.push({
         url: item.href,
         value: item.innerText.toLowerCase().trim(),
@@ -3437,26 +3616,26 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         if (cmd.startsWith("config.")) {
           dmenuEditConfig(cmd);
         }
-        for (let i = 0; i < quicks.length; i++) {
-          const quick = quicks[i];
+        for (let i2 = 0; i2 < quicks.length; i2++) {
+          const quick = quicks[i2];
           if (quick.name == cmd) {
             openURL2(quick.url, true);
             return;
           }
         }
-        for (let i = 0; i < links.length; i++) {
-          if (links[i].value == cmd) {
-            openURL2(links[i].url, true);
+        for (let i2 = 0; i2 < links.length; i2++) {
+          if (links[i2].value == cmd) {
+            openURL2(links[i2].url, true);
           }
         }
-        for (let i = 0; i < goto_items.length; i++) {
-          if (goto_items[i].value == cmd) {
-            openURL2(goto_items[i].url);
+        for (let i2 = 0; i2 < goto_items.length; i2++) {
+          if (goto_items[i2].value == cmd) {
+            openURL2(goto_items[i2].url);
           }
         }
-        for (let i = 0; i < vakken.length; i++) {
-          if (vakken[i].value == cmd) {
-            openURL2(vakken[i].url);
+        for (let i2 = 0; i2 < vakken.length; i2++) {
+          if (vakken[i2].value == cmd) {
+            openURL2(vakken[i2].url);
           }
         }
       },
@@ -3471,7 +3650,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     amount = amount > 3e3 ? 3e3 : amount;
     let snowDiv = document.createElement("div");
     snowDiv.id = "snowflakes";
-    for (let i = 0; i < amount; i++) {
+    for (let i2 = 0; i2 < amount; i2++) {
       let flake = document.createElement("img");
       flake.classList = "snowflake";
       flake.src = currentThemeName == "pink" ? getExtensionImage("icons/weather-overlay/blossom.svg") : getExtensionImage("icons/weather-overlay/snowflake.svg");
@@ -3489,7 +3668,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     amount = amount > 3e3 ? 3e3 : amount;
     let rainDiv = document.createElement("div");
     rainDiv.id = "raindrops";
-    for (let i = 0; i < amount; i++) {
+    for (let i2 = 0; i2 < amount; i2++) {
       let raindrop = document.createElement("img");
       raindrop.classList.add("raindrop");
       raindrop.src = getExtensionImage("icons/weather-overlay/raindrop.svg");
@@ -3652,7 +3831,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     extraSettingsButton.id = "extraSettingsButton";
     extraSettingsButton.innerHTML += "More Settings";
     extraSettingsButton.innerHTML += settingsIconSvg;
-    extraSettingsButton.addEventListener("click", (e) => openSettingsWindow(e));
+    extraSettingsButton.addEventListener("click", (e2) => openSettingsWindow(e2));
     parent.appendChild(performanceModeTooltipLabel);
     parent.appendChild(wallpaperTopContainer);
     parent.appendChild(performanceModeInfo);
@@ -3677,12 +3856,12 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       document.getElementById("performance-mode-info").style.opacity = "0";
       document.getElementById("performance-mode-info").style.zIndex = "-1";
     });
-    document.addEventListener("click", (e) => {
+    document.addEventListener("click", (e2) => {
       if (quickSettingsWindowIsHidden) return;
-      if (e.target.id === "extraSettingsButton") {
+      if (e2.target.id === "extraSettingsButton") {
         closeQuickSettings();
       }
-      if (e.target.id === "quickSettings" || quickSettingsWindow.contains(e.target) || e.target.id === "quickSettingsButton") {
+      if (e2.target.id === "quickSettings" || quickSettingsWindow.contains(e2.target) || e2.target.id === "quickSettingsButton") {
         return;
       }
       closeQuickSettings();
@@ -3722,7 +3901,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       let content = document.createElement("div");
       let settingsSideBar = await this.createSettingsSideBar();
       this.settingsPage.id = "settings-page";
-      this.settingsPage.addEventListener("change", (e) => this.storePage());
+      this.settingsPage.addEventListener("change", (e2) => this.storePage());
       content.classList.add("settingsWindow");
       content.appendChild(settingsSideBar);
       content.appendChild(this.settingsPage);
@@ -3770,9 +3949,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         "profile-settings-button",
         "settings-category-button-js"
       );
-      profileSettingsLabel.addEventListener("keydown", (e) => {
-        if (e.key === " " || e.key === "Enter") {
-          e.preventDefault();
+      profileSettingsLabel.addEventListener("keydown", (e2) => {
+        if (e2.key === " " || e2.key === "Enter") {
+          e2.preventDefault();
           radioInput.click();
         }
       });
@@ -3817,9 +3996,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         "settings-category-button",
         "settings-category-button-js"
       );
-      categoryLabel.addEventListener("keydown", (e) => {
-        if (e.key === " " || e.key === "Enter") {
-          e.preventDefault();
+      categoryLabel.addEventListener("keydown", (e2) => {
+        if (e2.key === " " || e2.key === "Enter") {
+          e2.preventDefault();
           radioInput.click();
         }
       });
@@ -4342,12 +4521,12 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           let oldKeybind = input.value;
           input.value = "Press any key...";
           input.classList.add("listening");
-          const keyListener = async (e) => {
+          const keyListener = async (e2) => {
             listening = false;
             input.classList.remove("listening");
-            e.preventDefault();
-            e.stopPropagation();
-            let keyName = e.key.length === 1 ? e.key.toUpperCase() : e.key;
+            e2.preventDefault();
+            e2.stopPropagation();
+            let keyName = e2.key.length === 1 ? e2.key.toUpperCase() : e2.key;
             if (keyName === " ") keyName = "Space";
             if (keyName === "Backspace") keyName = "None";
             if (keyName === "Escape") keyName = oldKeybind;
@@ -4355,11 +4534,11 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             document.removeEventListener("keydown", keyListener);
             await this.storePage();
           };
-          const buttonListener = async (e) => {
+          const buttonListener = async (e2) => {
             listening = false;
             input.classList.remove("listening");
-            e.stopPropagation();
-            e.preventDefault();
+            e2.stopPropagation();
+            e2.preventDefault();
             input.value = "None";
             document.removeEventListener("keydown", keyListener);
             await this.storePage();
@@ -4394,9 +4573,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         let image = document.createElement("img");
         image.classList.add("settings-page-image");
         image.src = getExtensionImage(src);
-        wrapper.addEventListener("keydown", (e) => {
-          if (e.key === " " || e.key === "Enter") {
-            e.preventDefault();
+        wrapper.addEventListener("keydown", (e2) => {
+          if (e2.key === " " || e2.key === "Enter") {
+            e2.preventDefault();
             input.click();
           }
         });
@@ -4507,6 +4686,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
               "Customize the overall look of the interface with different color styles."
             )
           );
+          let colorPickerHTML = new colorPicker();
+          this.settingsPage.appendChild(colorPickerHTML.render());
           this.settingsPage.appendChild(createSectionTitle("Wallpaper"));
           this.settingsPage.appendChild(
             createDescription("Personalize your backdrop with a custom image.")
@@ -4841,11 +5022,11 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   }
 
   // src/main-features/keybinds.ts
-  document.addEventListener("keyup", async (e) => {
-    if (e.target?.tagName === "INPUT") return;
-    if (e.target?.tagName === "TEXTAREA") return;
+  document.addEventListener("keyup", async (e2) => {
+    if (e2.target?.tagName === "INPUT") return;
+    if (e2.target?.tagName === "TEXTAREA") return;
     if (document.getElementById("tinymce")) return;
-    const key = e.key === " " ? "Space" : e.key.length === 1 ? e.key.toUpperCase() : e.key;
+    const key = e2.key === " " ? "Space" : e2.key.length === 1 ? e2.key.toUpperCase() : e2.key;
     if ((typeof keybinds === "undefined" || !keybinds || Object.keys(keybinds).length === 0) && key === ":") {
       do_qm("dmenu");
       return;
@@ -4855,10 +5036,10 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         do_qm(keybinds.dmenu);
         break;
       case keybinds.settings:
-        openSettingsWindow(e);
+        openSettingsWindow(e2);
         break;
       case keybinds.gc:
-        openGlobalChat(e);
+        openGlobalChat(e2);
         break;
     }
     if (!widgetEditModeInit) return;
@@ -4949,21 +5130,21 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       return "games";
     }
     constructor() {
-      document.addEventListener("keydown", async (e) => {
-        if (e.repeat) {
+      document.addEventListener("keydown", async (e2) => {
+        if (e2.repeat) {
           return;
         }
         if (this.playing) {
-          await this.onKeyDown(e);
+          await this.onKeyDown(e2);
         } else if (this.hasPlayedAtLeastOnce) {
-          if (e.code === "Space") {
+          if (e2.code === "Space") {
             await this.#startGame();
           }
         }
       });
-      document.addEventListener("keyup", async (e) => {
+      document.addEventListener("keyup", async (e2) => {
         if (this.playing) {
-          await this.onKeyUp(e);
+          await this.onKeyUp(e2);
         }
       });
       super();
@@ -5047,9 +5228,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       this.canvas.height = 300;
       this.canvas.classList.add("game-canvas");
       this.canvas.style.display = "none";
-      this.canvas.addEventListener("click", async (e) => {
+      this.canvas.addEventListener("click", async (e2) => {
         if (this.playing) {
-          await this.onMouse(e);
+          await this.onMouse(e2);
         }
       });
       div.appendChild(this.canvas);
@@ -5084,10 +5265,10 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           let display = document.createElement("span");
           sliderCont.appendChild(display);
           this.#optionElements[opt.name] = { display, input: slider };
-          slider.addEventListener("input", (e) => {
-            this.#updateOpt(opt.name, e.target.value);
+          slider.addEventListener("input", (e2) => {
+            this.#updateOpt(opt.name, e2.target.value);
           });
-          slider.addEventListener("change", async (e) => {
+          slider.addEventListener("change", async (e2) => {
             await this.setSetting("options", this.#optionValues);
           });
           menuBottom.appendChild(sliderCont);
@@ -5096,7 +5277,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       this.#buttonEl = document.createElement("button");
       this.#buttonEl.classList.add("game-button");
       this.#buttonEl.innerText = "Play";
-      this.#buttonEl.addEventListener("click", async (e) => {
+      this.#buttonEl.addEventListener("click", async (e2) => {
         await this.#startGame();
       });
       menuBottom.appendChild(this.#buttonEl);
@@ -5163,11 +5344,11 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     // frame)
     onGameDraw(ctx, deltaTime) {
     }
-    async onKeyDown(e) {
+    async onKeyDown(e2) {
     }
-    async onKeyUp(e) {
+    async onKeyUp(e2) {
     }
-    async onMouse(e) {
+    async onMouse(e2) {
     }
     get tickSpeed() {
       return 60;
@@ -5202,52 +5383,52 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       return [GameOption.slider("speed", "Speed:", 10, 300, 100)];
     }
     async onGameStart() {
-      const w = this.canvas.width;
-      const h = this.canvas.height;
+      const w2 = this.canvas.width;
+      const h2 = this.canvas.height;
       this.ball = {
-        x: w / 2,
-        y: h / 2,
+        x: w2 / 2,
+        y: h2 / 2,
         dx: BALL_SPEED * this.getOpt("speed") * 0.01,
         dy: -BALL_SPEED * this.getOpt("speed") * 0.01
       };
-      this.paddleX = (w - PADDLE_WIDTH) / 2;
+      this.paddleX = (w2 - PADDLE_WIDTH) / 2;
       this.leftPressed = false;
       this.rightPressed = false;
       this.score = 0;
       this.bricks = [];
-      for (let c = 0; c < BRICK_COLS; c++) {
-        for (let r = 0; r < BRICK_ROWS; r++) {
+      for (let c2 = 0; c2 < BRICK_COLS; c2++) {
+        for (let r2 = 0; r2 < BRICK_ROWS; r2++) {
           this.bricks.push({
-            x: c * (BRICK_WIDTH + BRICK_PADDING) + 10,
-            y: r * (BRICK_HEIGHT + BRICK_PADDING) + 10,
+            x: c2 * (BRICK_WIDTH + BRICK_PADDING) + 10,
+            y: r2 * (BRICK_HEIGHT + BRICK_PADDING) + 10,
             status: 1
           });
         }
       }
     }
-    drawRoundedRect(ctx, x, y, width, height, radius) {
+    drawRoundedRect(ctx, x2, y2, width, height, radius) {
       ctx.beginPath();
-      ctx.moveTo(x + radius, y);
-      ctx.lineTo(x + width - radius, y);
-      ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
-      ctx.lineTo(x + width, y + height - radius);
-      ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
-      ctx.lineTo(x + radius, y + height);
-      ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
-      ctx.lineTo(x, y + radius);
-      ctx.quadraticCurveTo(x, y, x + radius, y);
+      ctx.moveTo(x2 + radius, y2);
+      ctx.lineTo(x2 + width - radius, y2);
+      ctx.quadraticCurveTo(x2 + width, y2, x2 + width, y2 + radius);
+      ctx.lineTo(x2 + width, y2 + height - radius);
+      ctx.quadraticCurveTo(x2 + width, y2 + height, x2 + width - radius, y2 + height);
+      ctx.lineTo(x2 + radius, y2 + height);
+      ctx.quadraticCurveTo(x2, y2 + height, x2, y2 + height - radius);
+      ctx.lineTo(x2, y2 + radius);
+      ctx.quadraticCurveTo(x2, y2, x2 + radius, y2);
       ctx.closePath();
       ctx.fill();
     }
     onGameDraw(ctx, dt) {
-      const w = this.canvas.width;
-      const h = this.canvas.height;
+      const w2 = this.canvas.width;
+      const h2 = this.canvas.height;
       ctx.fillStyle = getThemeVar("--color-base01");
-      ctx.fillRect(0, 0, w, h);
+      ctx.fillRect(0, 0, w2, h2);
       const speed = PADDLE_SPEED * this.getOpt("speed") * 0.01;
       if (this.leftPressed) this.paddleX -= speed * dt;
       if (this.rightPressed) this.paddleX += speed * dt;
-      this.paddleX = Math.max(0, Math.min(w - PADDLE_WIDTH, this.paddleX));
+      this.paddleX = Math.max(0, Math.min(w2 - PADDLE_WIDTH, this.paddleX));
       let ball = this.ball;
       ball.x += ball.dx * dt;
       ball.y += ball.dy * dt;
@@ -5255,25 +5436,25 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         ball.x = BALL_RADIUS;
         ball.dx *= -1;
       }
-      if (ball.x > w - BALL_RADIUS) {
-        ball.x = w - BALL_RADIUS;
+      if (ball.x > w2 - BALL_RADIUS) {
+        ball.x = w2 - BALL_RADIUS;
         ball.dx *= -1;
       }
       if (ball.y < BALL_RADIUS) {
         ball.y = BALL_RADIUS;
         ball.dy *= -1;
       }
-      if (ball.y > h - PADDLE_HEIGHT - BALL_RADIUS && ball.x > this.paddleX && ball.x < this.paddleX + PADDLE_WIDTH) {
+      if (ball.y > h2 - PADDLE_HEIGHT - BALL_RADIUS && ball.x > this.paddleX && ball.x < this.paddleX + PADDLE_WIDTH) {
         ball.dy *= -1;
-        ball.y = h - PADDLE_HEIGHT - BALL_RADIUS;
+        ball.y = h2 - PADDLE_HEIGHT - BALL_RADIUS;
       }
-      if (ball.y > h + BALL_RADIUS) {
+      if (ball.y > h2 + BALL_RADIUS) {
         this.stopGame();
       }
-      for (let b of this.bricks) {
-        if (b.status === 1) {
-          if (ball.x > b.x && ball.x < b.x + BRICK_WIDTH && ball.y > b.y && ball.y < b.y + BRICK_HEIGHT) {
-            b.status = 0;
+      for (let b2 of this.bricks) {
+        if (b2.status === 1) {
+          if (ball.x > b2.x && ball.x < b2.x + BRICK_WIDTH && ball.y > b2.y && ball.y < b2.y + BRICK_HEIGHT) {
+            b2.status = 0;
             ball.dy *= -1;
             this.score++;
             break;
@@ -5284,7 +5465,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       this.drawRoundedRect(
         ctx,
         this.paddleX,
-        h - PADDLE_HEIGHT,
+        h2 - PADDLE_HEIGHT,
         PADDLE_WIDTH,
         PADDLE_HEIGHT,
         5
@@ -5294,19 +5475,19 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       ctx.arc(ball.x, ball.y, BALL_RADIUS, 0, 2 * Math.PI);
       ctx.fill();
       ctx.fillStyle = getThemeVar("--color-accent");
-      for (let b of this.bricks) {
-        if (b.status === 1) {
-          this.drawRoundedRect(ctx, b.x, b.y, BRICK_WIDTH, BRICK_HEIGHT, 5);
+      for (let b2 of this.bricks) {
+        if (b2.status === 1) {
+          this.drawRoundedRect(ctx, b2.x, b2.y, BRICK_WIDTH, BRICK_HEIGHT, 5);
         }
       }
     }
-    onKeyDown(e) {
-      if (e.code === "ArrowLeft") this.leftPressed = true;
-      else if (e.code === "ArrowRight") this.rightPressed = true;
+    onKeyDown(e2) {
+      if (e2.code === "ArrowLeft") this.leftPressed = true;
+      else if (e2.code === "ArrowRight") this.rightPressed = true;
     }
-    onKeyUp(e) {
-      if (e.code === "ArrowLeft") this.leftPressed = false;
-      else if (e.code === "ArrowRight") this.rightPressed = false;
+    onKeyUp(e2) {
+      if (e2.code === "ArrowLeft") this.leftPressed = false;
+      else if (e2.code === "ArrowRight") this.rightPressed = false;
     }
   };
   registerWidget(new BreakoutWidget());
@@ -5334,21 +5515,21 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       return [GameOption.slider("speed", "Speed:", 10, 300, 100)];
     }
     #drawGround(ctx) {
-      let w = this.canvas.width;
-      let h = this.canvas.height;
+      let w2 = this.canvas.width;
+      let h2 = this.canvas.height;
       ctx.beginPath();
       ctx.lineWidth = 1;
-      ctx.moveTo(0, h - FLOOR_H);
-      ctx.lineTo(w, h - FLOOR_H);
+      ctx.moveTo(0, h2 - FLOOR_H);
+      ctx.lineTo(w2, h2 - FLOOR_H);
       ctx.stroke();
       ctx.fillStyle = getThemeVar("--color-accent");
       ctx.strokeStyle = getThemeVar("--color-base01");
-      ctx.fillRect(0, h - FLOOR_H, w, FLOOR_H);
-      ctx.strokeRect(0, h - FLOOR_H, w, FLOOR_H);
-      for (let i = 0; i < w / 20 * 2; i++) {
+      ctx.fillRect(0, h2 - FLOOR_H, w2, FLOOR_H);
+      ctx.strokeRect(0, h2 - FLOOR_H, w2, FLOOR_H);
+      for (let i2 = 0; i2 < w2 / 20 * 2; i2++) {
         ctx.beginPath();
-        ctx.moveTo(i * 20 + this.bgX, h - FLOOR_H);
-        ctx.lineTo(i * 20 + this.bgX + FLOOR_H, h);
+        ctx.moveTo(i2 * 20 + this.bgX, h2 - FLOOR_H);
+        ctx.lineTo(i2 * 20 + this.bgX + FLOOR_H, h2);
         ctx.stroke();
       }
     }
@@ -5449,13 +5630,13 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       this.#drawPipe(ctx, this.pipe);
       this.#drawGround(ctx);
     }
-    async onMouse(e) {
+    async onMouse(e2) {
       this.jump = true;
     }
-    async onKeyDown(e) {
-      if (e.code === "Space" || e.code === "ArrowUp") {
+    async onKeyDown(e2) {
+      if (e2.code === "Space" || e2.code === "ArrowUp") {
         this.jump = true;
-        e.preventDefault();
+        e2.preventDefault();
       }
     }
   };
@@ -5465,9 +5646,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   var Point = class _Point {
     x;
     y;
-    constructor(x, y) {
-      this.x = x;
-      this.y = y;
+    constructor(x2, y2) {
+      this.x = x2;
+      this.y = y2;
     }
     add(other) {
       return new _Point(this.x + other.x, this.y + other.y);
@@ -5509,7 +5690,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         this.stopGame();
         return;
       }
-      if (this.#snake.find((p) => p.equal(newHead))) {
+      if (this.#snake.find((p2) => p2.equal(newHead))) {
         this.stopGame();
         return;
       }
@@ -5533,7 +5714,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     }
     #spawnFood() {
       this.#food = this.#getRandomFieldPos();
-      while (this.#snake.find((p) => p.equal(this.#food))) {
+      while (this.#snake.find((p2) => p2.equal(this.#food))) {
         this.#food = this.#getRandomFieldPos();
       }
     }
@@ -5588,17 +5769,17 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       ctx.fillStyle = getThemeVar("--color-base01");
       ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
       if (this.settings.enableGrid) {
-        for (let y = 0; y < cellCount; y++) {
-          for (let x = 0; x < cellCount; x++) {
-            if ((x + y) % 2 == 0) {
+        for (let y2 = 0; y2 < cellCount; y2++) {
+          for (let x2 = 0; x2 < cellCount; x2++) {
+            if ((x2 + y2) % 2 == 0) {
               ctx.fillStyle = `${getThemeVar("--color-base03")}50`;
             } else {
               ctx.fillStyle = `${getThemeVar("--color-base02")}50`;
             }
             ctx.beginPath();
             ctx.arc(
-              celRad + x * celRad * 2,
-              celRad + y * celRad * 2,
+              celRad + x2 * celRad * 2,
+              celRad + y2 * celRad * 2,
               celRad * 0.7,
               0,
               Math.PI * 2
@@ -5622,8 +5803,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       ctx.fillStyle = getThemeVar("--color-accent");
       this.#drawDot(ctx, this.#food);
     }
-    onKeyDown(e) {
-      switch (e.key) {
+    onKeyDown(e2) {
+      switch (e2.key) {
         case "ArrowUp":
           if (this.#curDir !== DIR_DOWN) {
             this.#targetDir = DIR_UP;
@@ -5670,42 +5851,42 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       return [GameOption.slider("speed", "Speed:", 10, 300, 100)];
     }
     async onGameStart() {
-      const w = this.canvas.width;
-      const h = this.canvas.height;
+      const w2 = this.canvas.width;
+      const h2 = this.canvas.height;
       this.ball = {
-        x: w / 2,
-        y: h / 2,
+        x: w2 / 2,
+        y: h2 / 2,
         dx: PONG_BALL_SPEED * this.getOpt("speed") * 0.01 * (Math.random() > 0.5 ? 1 : -1),
         dy: PONG_BALL_SPEED * this.getOpt("speed") * 0.01 * (Math.random() * 2 - 1)
       };
-      this.leftY = (h - PONG_PADDLE_HEIGHT) / 2;
-      this.rightY = (h - PONG_PADDLE_HEIGHT) / 2;
+      this.leftY = (h2 - PONG_PADDLE_HEIGHT) / 2;
+      this.rightY = (h2 - PONG_PADDLE_HEIGHT) / 2;
       this.leftUp = false;
       this.leftDown = false;
     }
-    drawRoundedRect(ctx, x, y, width, height, radius) {
+    drawRoundedRect(ctx, x2, y2, width, height, radius) {
       ctx.beginPath();
-      ctx.moveTo(x + radius, y);
-      ctx.lineTo(x + width - radius, y);
-      ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
-      ctx.lineTo(x + width, y + height - radius);
-      ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
-      ctx.lineTo(x + radius, y + height);
-      ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
-      ctx.lineTo(x, y + radius);
-      ctx.quadraticCurveTo(x, y, x + radius, y);
+      ctx.moveTo(x2 + radius, y2);
+      ctx.lineTo(x2 + width - radius, y2);
+      ctx.quadraticCurveTo(x2 + width, y2, x2 + width, y2 + radius);
+      ctx.lineTo(x2 + width, y2 + height - radius);
+      ctx.quadraticCurveTo(x2 + width, y2 + height, x2 + width - radius, y2 + height);
+      ctx.lineTo(x2 + radius, y2 + height);
+      ctx.quadraticCurveTo(x2, y2 + height, x2, y2 + height - radius);
+      ctx.lineTo(x2, y2 + radius);
+      ctx.quadraticCurveTo(x2, y2, x2 + radius, y2);
       ctx.closePath();
       ctx.fill();
     }
     onGameDraw(ctx, dt) {
-      const w = this.canvas.width;
-      const h = this.canvas.height;
+      const w2 = this.canvas.width;
+      const h2 = this.canvas.height;
       ctx.fillStyle = getThemeVar("--color-base01");
-      ctx.fillRect(0, 0, w, h);
+      ctx.fillRect(0, 0, w2, h2);
       const speed = PONG_PADDLE_SPEED * this.getOpt("speed") * 0.01;
       if (this.leftUp) this.leftY -= speed * dt;
       if (this.leftDown) this.leftY += speed * dt;
-      this.leftY = Math.max(0, Math.min(h - PONG_PADDLE_HEIGHT, this.leftY));
+      this.leftY = Math.max(0, Math.min(h2 - PONG_PADDLE_HEIGHT, this.leftY));
       const aiCenter = this.rightY + PONG_PADDLE_HEIGHT / 2;
       const diff = this.ball.y - aiCenter;
       const maxMove = speed * dt * 0.8;
@@ -5714,39 +5895,39 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       } else {
         this.rightY += diff;
       }
-      this.rightY = Math.max(0, Math.min(h - PONG_PADDLE_HEIGHT, this.rightY));
-      let b = this.ball;
-      b.x += b.dx * dt;
-      b.y += b.dy * dt;
-      if (b.y < PONG_BALL_RADIUS || b.y > h - PONG_BALL_RADIUS) {
-        b.dy *= -1;
+      this.rightY = Math.max(0, Math.min(h2 - PONG_PADDLE_HEIGHT, this.rightY));
+      let b2 = this.ball;
+      b2.x += b2.dx * dt;
+      b2.y += b2.dy * dt;
+      if (b2.y < PONG_BALL_RADIUS || b2.y > h2 - PONG_BALL_RADIUS) {
+        b2.dy *= -1;
       }
-      if (b.x < PONG_PADDLE_WIDTH + PONG_BALL_RADIUS && b.y > this.leftY && b.y < this.leftY + PONG_PADDLE_HEIGHT) {
-        b.dx *= -1;
-        b.x = PONG_PADDLE_WIDTH + PONG_BALL_RADIUS;
-        b.dx *= SPEEDUP_FACTOR;
-        b.dy *= SPEEDUP_FACTOR;
-        b.dx = Math.sign(b.dx) * Math.min(Math.abs(b.dx), MAX_SPEED);
-        b.dy = Math.sign(b.dy) * Math.min(Math.abs(b.dy), MAX_SPEED);
+      if (b2.x < PONG_PADDLE_WIDTH + PONG_BALL_RADIUS && b2.y > this.leftY && b2.y < this.leftY + PONG_PADDLE_HEIGHT) {
+        b2.dx *= -1;
+        b2.x = PONG_PADDLE_WIDTH + PONG_BALL_RADIUS;
+        b2.dx *= SPEEDUP_FACTOR;
+        b2.dy *= SPEEDUP_FACTOR;
+        b2.dx = Math.sign(b2.dx) * Math.min(Math.abs(b2.dx), MAX_SPEED);
+        b2.dy = Math.sign(b2.dy) * Math.min(Math.abs(b2.dy), MAX_SPEED);
         this.score++;
       }
-      if (b.x > w - PONG_PADDLE_WIDTH - PONG_BALL_RADIUS && b.y > this.rightY && b.y < this.rightY + PONG_PADDLE_HEIGHT) {
-        b.dx *= -1;
-        b.x = w - PONG_PADDLE_WIDTH - PONG_BALL_RADIUS;
-        b.dx *= SPEEDUP_FACTOR;
-        b.dy *= SPEEDUP_FACTOR;
-        b.dx = Math.sign(b.dx) * Math.min(Math.abs(b.dx), MAX_SPEED);
-        b.dy = Math.sign(b.dy) * Math.min(Math.abs(b.dy), MAX_SPEED);
+      if (b2.x > w2 - PONG_PADDLE_WIDTH - PONG_BALL_RADIUS && b2.y > this.rightY && b2.y < this.rightY + PONG_PADDLE_HEIGHT) {
+        b2.dx *= -1;
+        b2.x = w2 - PONG_PADDLE_WIDTH - PONG_BALL_RADIUS;
+        b2.dx *= SPEEDUP_FACTOR;
+        b2.dy *= SPEEDUP_FACTOR;
+        b2.dx = Math.sign(b2.dx) * Math.min(Math.abs(b2.dx), MAX_SPEED);
+        b2.dy = Math.sign(b2.dy) * Math.min(Math.abs(b2.dy), MAX_SPEED);
       }
-      if (b.x < 0) {
+      if (b2.x < 0) {
         this.stopGame();
       }
-      if (b.x > w) {
+      if (b2.x > w2) {
         this.onGameStart();
       }
       ctx.fillStyle = getThemeVar("--color-text");
       ctx.beginPath();
-      ctx.arc(b.x, b.y, PONG_BALL_RADIUS, 0, Math.PI * 2);
+      ctx.arc(b2.x, b2.y, PONG_BALL_RADIUS, 0, Math.PI * 2);
       ctx.fill();
       ctx.fillStyle = getThemeVar("--color-accent");
       this.drawRoundedRect(
@@ -5759,7 +5940,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       );
       this.drawRoundedRect(
         ctx,
-        w - PONG_PADDLE_WIDTH,
+        w2 - PONG_PADDLE_WIDTH,
         this.rightY,
         PONG_PADDLE_WIDTH,
         PONG_PADDLE_HEIGHT,
@@ -5768,18 +5949,18 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       ctx.strokeStyle = getThemeVar("--color-text");
       ctx.setLineDash([4, 5]);
       ctx.beginPath();
-      ctx.moveTo(w / 2, 0);
-      ctx.lineTo(w / 2, h);
+      ctx.moveTo(w2 / 2, 0);
+      ctx.lineTo(w2 / 2, h2);
       ctx.stroke();
       ctx.setLineDash([]);
     }
-    onKeyDown(e) {
-      if (e.code === "ArrowUp") this.leftUp = true;
-      if (e.code === "ArrowDown") this.leftDown = true;
+    onKeyDown(e2) {
+      if (e2.code === "ArrowUp") this.leftUp = true;
+      if (e2.code === "ArrowDown") this.leftDown = true;
     }
-    onKeyUp(e) {
-      if (e.code === "ArrowUp") this.leftUp = false;
-      if (e.code === "ArrowDown") this.leftDown = false;
+    onKeyUp(e2) {
+      if (e2.code === "ArrowUp") this.leftUp = false;
+      if (e2.code === "ArrowDown") this.leftDown = false;
     }
   };
   registerWidget(new PongWidget());
@@ -5835,18 +6016,18 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   function rotate(matrix) {
     const size = matrix.length;
     const result = Array.from({ length: size }, () => Array(size).fill(0));
-    for (let y = 0; y < size; y++) {
-      for (let x = 0; x < size; x++) {
-        result[x][size - 1 - y] = matrix[y][x];
+    for (let y2 = 0; y2 < size; y2++) {
+      for (let x2 = 0; x2 < size; x2++) {
+        result[x2][size - 1 - y2] = matrix[y2][x2];
       }
     }
     return result;
   }
   function generateRotations(base) {
     const rotations = [base];
-    for (let i = 1; i < 4; i++) {
-      const next = rotate(rotations[i - 1]);
-      if (!rotations.some((r) => JSON.stringify(r) === JSON.stringify(next))) {
+    for (let i2 = 1; i2 < 4; i2++) {
+      const next = rotate(rotations[i2 - 1]);
+      if (!rotations.some((r2) => JSON.stringify(r2) === JSON.stringify(next))) {
         rotations.push(next);
       }
     }
@@ -5988,17 +6169,17 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       "0>3": [[0, 0]]
     }
   };
-  function drawRoundedRect(ctx, x, y, width, height, radius) {
+  function drawRoundedRect(ctx, x2, y2, width, height, radius) {
     ctx.beginPath();
-    ctx.moveTo(x + radius, y);
-    ctx.lineTo(x + width - radius, y);
-    ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
-    ctx.lineTo(x + width, y + height - radius);
-    ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
-    ctx.lineTo(x + radius, y + height);
-    ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
-    ctx.lineTo(x, y + radius);
-    ctx.quadraticCurveTo(x, y, x + radius, y);
+    ctx.moveTo(x2 + radius, y2);
+    ctx.lineTo(x2 + width - radius, y2);
+    ctx.quadraticCurveTo(x2 + width, y2, x2 + width, y2 + radius);
+    ctx.lineTo(x2 + width, y2 + height - radius);
+    ctx.quadraticCurveTo(x2 + width, y2 + height, x2 + width - radius, y2 + height);
+    ctx.lineTo(x2 + radius, y2 + height);
+    ctx.quadraticCurveTo(x2, y2 + height, x2, y2 + height - radius);
+    ctx.lineTo(x2, y2 + radius);
+    ctx.quadraticCurveTo(x2, y2, x2 + radius, y2);
     ctx.closePath();
   }
   var TetrisWidget = class extends GameBase {
@@ -6034,13 +6215,13 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     #getPieceShape(type, rotation) {
       return PIECES[type][rotation % 4];
     }
-    #collision(pieceType, rotation, x, y) {
+    #collision(pieceType, rotation, x2, y2) {
       const shape = this.#getPieceShape(pieceType, rotation);
       for (let py = 0; py < 4; py++) {
         for (let px = 0; px < 4; px++) {
           if (shape[py][px]) {
-            const bx = x + px;
-            const by = y + py;
+            const bx = x2 + px;
+            const by = y2 + py;
             if (bx < 0 || bx >= BOARD_WIDTH || by >= BOARD_HEIGHT || by >= 0 && this.#board[by][bx])
               return true;
           }
@@ -6065,12 +6246,12 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     }
     #clearLines() {
       let linesCleared = 0;
-      for (let y = BOARD_HEIGHT - 1; y >= 0; y--) {
-        if (this.#board[y].every((c) => c !== 0)) {
-          this.#board.splice(y, 1);
+      for (let y2 = BOARD_HEIGHT - 1; y2 >= 0; y2--) {
+        if (this.#board[y2].every((c2) => c2 !== 0)) {
+          this.#board.splice(y2, 1);
           this.#board.unshift(new Array(BOARD_WIDTH).fill(0));
           linesCleared++;
-          y++;
+          y2++;
         }
       }
       this.score += linesCleared;
@@ -6112,27 +6293,27 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       const offsetX = (this.canvas.width - BOARD_WIDTH * CELL_SIZE) / 2;
       ctx.strokeStyle = getThemeVar("--color-base03");
       ctx.lineWidth = 1;
-      for (let x = 0; x <= BOARD_WIDTH; x++) {
+      for (let x2 = 0; x2 <= BOARD_WIDTH; x2++) {
         ctx.beginPath();
-        ctx.moveTo(offsetX + x * CELL_SIZE, 0);
-        ctx.lineTo(offsetX + x * CELL_SIZE, BOARD_HEIGHT * CELL_SIZE);
+        ctx.moveTo(offsetX + x2 * CELL_SIZE, 0);
+        ctx.lineTo(offsetX + x2 * CELL_SIZE, BOARD_HEIGHT * CELL_SIZE);
         ctx.stroke();
       }
-      for (let y = 0; y <= BOARD_HEIGHT; y++) {
+      for (let y2 = 0; y2 <= BOARD_HEIGHT; y2++) {
         ctx.beginPath();
-        ctx.moveTo(offsetX, y * CELL_SIZE);
-        ctx.lineTo(offsetX + BOARD_WIDTH * CELL_SIZE, y * CELL_SIZE);
+        ctx.moveTo(offsetX, y2 * CELL_SIZE);
+        ctx.lineTo(offsetX + BOARD_WIDTH * CELL_SIZE, y2 * CELL_SIZE);
         ctx.stroke();
       }
       const radius = 5;
-      for (let y = 0; y < BOARD_HEIGHT; y++) {
-        for (let x = 0; x < BOARD_WIDTH; x++) {
-          if (this.#board[y][x]) {
-            ctx.fillStyle = this.#getColor(this.#board[y][x]);
+      for (let y2 = 0; y2 < BOARD_HEIGHT; y2++) {
+        for (let x2 = 0; x2 < BOARD_WIDTH; x2++) {
+          if (this.#board[y2][x2]) {
+            ctx.fillStyle = this.#getColor(this.#board[y2][x2]);
             drawRoundedRect(
               ctx,
-              offsetX + x * CELL_SIZE,
-              y * CELL_SIZE,
+              offsetX + x2 * CELL_SIZE,
+              y2 * CELL_SIZE,
               CELL_SIZE,
               CELL_SIZE,
               radius
@@ -6151,9 +6332,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       for (let py = 0; py < 4; py++) {
         for (let px = 0; px < 4; px++) {
           if (shape[py][px]) {
-            const x = offsetX + (this.#pieceX + px) * CELL_SIZE;
-            const y = (this.#pieceY + py) * CELL_SIZE;
-            drawRoundedRect(ctx, x, y, CELL_SIZE, CELL_SIZE, radius);
+            const x2 = offsetX + (this.#pieceX + px) * CELL_SIZE;
+            const y2 = (this.#pieceY + py) * CELL_SIZE;
+            drawRoundedRect(ctx, x2, y2, CELL_SIZE, CELL_SIZE, radius);
             ctx.fill();
             ctx.strokeStyle = getThemeVar("--color-base03");
             ctx.stroke();
@@ -6245,8 +6426,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         clearInterval(this.#downTimer);
       }
     }
-    onKeyDown(e) {
-      switch (e.key) {
+    onKeyDown(e2) {
+      switch (e2.key) {
         case "ArrowLeft":
           this.#startMoveLeft();
           break;
@@ -6258,13 +6439,13 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           break;
         case "ArrowUp":
         case " ":
-          e.preventDefault();
+          e2.preventDefault();
           this.#rotate();
           break;
       }
     }
-    onKeyUp(e) {
-      switch (e.key) {
+    onKeyUp(e2) {
+      switch (e2.key) {
         case "ArrowLeft":
           this.#stopMoveLeft();
           break;
@@ -6314,7 +6495,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       dutchButton.appendChild(document.createTextNode("Nederlands"));
       langButtons.appendChild(dutchButton);
       this.container.appendChild(langButtons);
-      dutchButton.addEventListener("click", (e) => {
+      dutchButton.addEventListener("click", (e2) => {
         this.lang = "dutch";
         this.displayWidgetTutorial(1);
       });
@@ -6478,7 +6659,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             TasksContainer.appendChild(noDataContainerTextContainer);
           }
           data2.sort(
-            (a, b) => new Date(a.period.dateTimeFrom) - new Date(b.period.dateTimeFrom)
+            (a2, b2) => new Date(a2.period.dateTimeFrom) - new Date(b2.period.dateTimeFrom)
           );
           let lastDate = "";
           if (data2.length > this.settings.maxAssignments) {
@@ -6539,8 +6720,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
                 iconSvg.setAttribute("width", "16px");
                 iconSvg.setAttribute("height", "16px");
                 const reader = new FileReader();
-                reader.onload = (e) => {
-                  iconSvg.innerHTML = e.target.result;
+                reader.onload = (e2) => {
+                  iconSvg.innerHTML = e2.target.result;
                 };
                 reader.readAsText(blob);
                 wrapperDiv.appendChild(iconSvg);
@@ -6935,12 +7116,12 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       }
       this.hideInfo();
       let sortedDoorkomsten = delijnData.halteDoorkomsten[0].doorkomsten.sort(
-        (a, b) => {
+        (a2, b2) => {
           const timeA = new Date(
-            a["real-timeTijdstip"] || a.dienstregelingTijdstip
+            a2["real-timeTijdstip"] || a2.dienstregelingTijdstip
           );
           const timeB = new Date(
-            b["real-timeTijdstip"] || b.dienstregelingTijdstip
+            b2["real-timeTijdstip"] || b2.dienstregelingTijdstip
           );
           return timeA - timeB;
         }
@@ -7027,16 +7208,16 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         this.displayInfo("Er liep iets mis: " + error);
         return;
       }
-      delijnHaltesLijnrichtingenData.halteLijnrichtingen.forEach((halte, i) => {
-        halte.halte.omschrijving = delijnHaltesData.haltes[i].omschrijving;
+      delijnHaltesLijnrichtingenData.halteLijnrichtingen.forEach((halte, i2) => {
+        halte.halte.omschrijving = delijnHaltesData.haltes[i2].omschrijving;
       });
       try {
         this.hideInfo();
         const startIndex = this.searchResultLimit - 5;
         const results = delijnHaltesLijnrichtingenData.halteLijnrichtingen.slice(startIndex);
-        for (let i = 0; i < results.length; i++) {
+        for (let i2 = 0; i2 < results.length; i2++) {
           if (signal.aborted) return;
-          const halte = results[i];
+          const halte = results[i2];
           await this.createHalteOption(halte, signal);
           if (signal.aborted) return;
         }
@@ -7540,11 +7721,11 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       if (this.settings.currentLocation == "Locatie") {
         locationInput.classList.add("not-initialized");
         locationInput.value = "";
-        locationInput.addEventListener("focusin", (e) => {
-          e.target.placeholder = "";
+        locationInput.addEventListener("focusin", (e2) => {
+          e2.target.placeholder = "";
         });
-        locationInput.addEventListener("focusout", (e) => {
-          e.target.placeholder = "Locatie";
+        locationInput.addEventListener("focusout", (e2) => {
+          e2.target.placeholder = "Locatie";
         });
         let mainIcon2 = document.createElement("div");
         mainIcon2.classList.add("weather-icon-container");
@@ -8311,8 +8492,8 @@ ${code}`;
   }
   function createProfileSettingButton() {
     let button = document.createElement("a");
-    button.addEventListener("click", (e) => {
-      openSettingsWindow(e);
+    button.addEventListener("click", (e2) => {
+      openSettingsWindow(e2);
       let topNavProfileMenu = document.getElementById("profileMenu");
       let settingsPageProfileButton = document.querySelector(
         ".profile-settings-button"

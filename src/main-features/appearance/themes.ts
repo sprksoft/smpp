@@ -1,5 +1,6 @@
 import { widgetSystemNotifyThemeChange } from "../../widgets/widgets.js";
 import { browser } from "../../common/utils.js";
+import { colord } from "colord";
 
 export let currentThemeName: string;
 export let currentTheme: Theme;
@@ -74,4 +75,39 @@ export async function exampleSaveCustomTheme() {
     data: data,
   });
   console.log(await getTheme("default"));
+}
+
+export class colorPicker {
+  currentColor = colord("#72b6c0ff");
+  width = "20rem";
+  element = document.createElement("div");
+  hueSlider = document.createElement("div");
+  fieldContainer = document.createElement("div");
+
+  createHueSlider() {
+    return this.hueSlider;
+  }
+
+  render() {
+    this.fieldContainer.classList.add("smpp-color-picker-field");
+    this.fieldContainer.style.width = this.width;
+    this.updateField();
+    let horizontalContainer = document.createElement("div");
+    horizontalContainer.style.background = `linear-gradient(to right, var(--max-sat) 0%, rgba(255, 255, 255, 1) 100%)`;
+    let verticalContainer = document.createElement("div");
+    verticalContainer.style.background =
+      "linear-gradient(to top, black, transparent)";
+    this.fieldContainer.appendChild(horizontalContainer);
+    this.fieldContainer.append(verticalContainer);
+
+    this.element.appendChild(this.createHueSlider());
+    this.element.appendChild(this.fieldContainer);
+
+    return this.element;
+  }
+
+  updateField() {
+    let maxSatColor = this.currentColor.saturate(100);
+    this.fieldContainer.style.setProperty("--max-sat", maxSatColor.toHex());
+  }
 }

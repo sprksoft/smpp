@@ -1,6 +1,5 @@
 import { BaseWindow } from "../modules/windows.js";
 import { originalUsername } from "../main.js";
-import { colorpickersHTMLV2 } from "../../fixes-utils/svgs.js";
 import { ImageSelector } from "../modules/images.js";
 import { createButtonWithLabel } from "../appearance/ui.js";
 import { trashSvg } from "../../fixes-utils/svgs.js";
@@ -20,6 +19,7 @@ import { clearAllData } from "../../fixes-utils/utils.js";
 import { loadQuickSettings } from "./quick-settings.js";
 import { createTextInput, createButton } from "../appearance/ui.js";
 import { applyProfilePicture } from "../profile.js";
+import { colorPicker } from "../appearance/themes.js";
 import type { Quicks } from "../quick-menu/config.js";
 import type { Keybind } from "../keybinds.js";
 
@@ -1141,6 +1141,9 @@ export class SettingsWindow extends BaseWindow {
             "Customize the overall look of the interface with different color styles."
           )
         );
+
+        let colorPickerHTML = new colorPicker();
+        this.settingsPage.appendChild(colorPickerHTML.render());
 
         this.settingsPage.appendChild(createSectionTitle("Wallpaper"));
         this.settingsPage.appendChild(
