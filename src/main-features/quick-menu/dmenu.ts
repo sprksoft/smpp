@@ -120,7 +120,7 @@ class DMenu {
 
   #sort() {
     this.selectedIndex = 0;
-    let searchq = this.inputEl.value;
+    let searchq = this.inputEl.value.trim();
 
     // update scores
     let items = [];

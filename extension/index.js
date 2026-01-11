@@ -1087,7 +1087,7 @@ Is it scaring you off?`,
     }
     #sort() {
       this.selectedIndex = 0;
-      let searchq = this.inputEl.value;
+      let searchq = this.inputEl.value.trim();
       let items = [];
       for (let node of this.itemListEl.childNodes) {
         let score = this.#matchScore(node.dataset.content, searchq);
@@ -8588,8 +8588,13 @@ ${code}`;
   }
   function createProfileSettingButton() {
     let button = document.createElement("a");
+<<<<<<< HEAD
     button.addEventListener("click", (e2) => {
       openSettingsWindow(e2);
+=======
+    button.addEventListener("click", (e) => {
+      openSettingsWindow(e);
+>>>>>>> 6e0741c (trimmy boy)
       let topNavProfileMenu = document.getElementById("profileMenu");
       let settingsPageProfileButton = document.querySelector(
         ".profile-settings-button"
