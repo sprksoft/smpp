@@ -389,6 +389,84 @@ Is it scaring you off?`,
     return splashtexts[Math.floor(Math.random() * splashtexts.length)];
   }
 
+  // src/common/utils.ts
+  var DEBUG = false;
+  var browser2;
+  if (browser2 == void 0) {
+    browser2 = chrome;
+  }
+  function getByPath(object, path) {
+    if (!path) {
+      return object;
+    }
+    let ob = object;
+    for (let node of path.split(".")) {
+      ob = ob[node];
+      if (ob === void 0) {
+        throw `getByPath: ${node} did not exist in path ${path}`;
+      }
+    }
+    return ob;
+  }
+  function setByPath(object, path, value) {
+    let ob = object;
+    const pathSplit = path.split(".");
+    for (let i2 = 0; i2 < pathSplit.length - 1; i2++) {
+      ob = ob[pathSplit[i2]];
+      if (ob === void 0) {
+        throw `setByPath: ${pathSplit[i2]} did not exist in path ${path}`;
+      }
+    }
+    ob[pathSplit[pathSplit.length - 1]] = value;
+  }
+  function fillObjectWithDefaults(object, defaults) {
+    if (!object) {
+      object = {};
+    }
+    for (const key of Object.keys(defaults)) {
+      if (typeof defaults[key] === "object" && !Array.isArray(defaults[key]) && defaults[key] !== null) {
+        object[key] = fillObjectWithDefaults(object[key], defaults[key]);
+      }
+      if (object[key] === void 0) {
+        object[key] = defaults[key];
+      }
+    }
+    return object;
+  }
+  function openURL2(url, new_window = false) {
+    if (new_window) {
+      let a2 = document.createElement("a");
+      a2.href = url;
+      a2.rel = "noopener noreferrer";
+      a2.target = "_blank";
+      a2.click();
+      return;
+    }
+    window.location.href = url;
+  }
+  function getExtensionImage(name2) {
+    return browser2.runtime.getURL(`media/${name2}`);
+  }
+  function sendDebug(...messages) {
+    if (DEBUG) {
+      console.log(...messages);
+    }
+  }
+  function getCurrentDate() {
+    return (/* @__PURE__ */ new Date()).toISOString().split("T")[0];
+  }
+  function getFutureDate(days) {
+    return new Date(Date.now() + days * 864e5).toISOString().split("T")[0];
+  }
+  function randomChance(probability) {
+    if (probability <= 0) return false;
+    if (probability >= 1) return true;
+    return Math.random() < probability;
+  }
+  function isAbsoluteUrl(url) {
+    return /^(https?:\/\/|data:image\/)/i.test(url);
+  }
+
   // src/fixes-utils/utils.ts
   function getPfpLink(username) {
     let firstInitial;
@@ -637,84 +715,6 @@ Is it scaring you off?`,
     textInput.spellcheck = false;
     textInput.classList.add("smpp-text-input");
     return textInput;
-  }
-
-  // src/common/utils.ts
-  var DEBUG = false;
-  var browser2;
-  if (browser2 == void 0) {
-    browser2 = chrome;
-  }
-  function getByPath(object, path) {
-    if (!path) {
-      return object;
-    }
-    let ob = object;
-    for (let node of path.split(".")) {
-      ob = ob[node];
-      if (ob === void 0) {
-        throw `getByPath: ${node} did not exist in path ${path}`;
-      }
-    }
-    return ob;
-  }
-  function setByPath(object, path, value) {
-    let ob = object;
-    const pathSplit = path.split(".");
-    for (let i2 = 0; i2 < pathSplit.length - 1; i2++) {
-      ob = ob[pathSplit[i2]];
-      if (ob === void 0) {
-        throw `setByPath: ${pathSplit[i2]} did not exist in path ${path}`;
-      }
-    }
-    ob[pathSplit[pathSplit.length - 1]] = value;
-  }
-  function fillObjectWithDefaults(object, defaults) {
-    if (!object) {
-      object = {};
-    }
-    for (const key of Object.keys(defaults)) {
-      if (typeof defaults[key] === "object" && !Array.isArray(defaults[key]) && defaults[key] !== null) {
-        object[key] = fillObjectWithDefaults(object[key], defaults[key]);
-      }
-      if (object[key] === void 0) {
-        object[key] = defaults[key];
-      }
-    }
-    return object;
-  }
-  function openURL2(url, new_window = false) {
-    if (new_window) {
-      let a2 = document.createElement("a");
-      a2.href = url;
-      a2.rel = "noopener noreferrer";
-      a2.target = "_blank";
-      a2.click();
-      return;
-    }
-    window.location.href = url;
-  }
-  function getExtensionImage(name2) {
-    return browser2.runtime.getURL(`media/${name2}`);
-  }
-  function sendDebug2(...messages) {
-    if (DEBUG) {
-      console.log(...messages);
-    }
-  }
-  function getCurrentDate() {
-    return (/* @__PURE__ */ new Date()).toISOString().split("T")[0];
-  }
-  function getFutureDate(days) {
-    return new Date(Date.now() + days * 864e5).toISOString().split("T")[0];
-  }
-  function randomChance(probability) {
-    if (probability <= 0) return false;
-    if (probability >= 1) return true;
-    return Math.random() < probability;
-  }
-  function isAbsoluteUrl(url) {
-    return /^(https?:\/\/|data:image\/)/i.test(url);
   }
 
   // src/main-features/modules/images.ts
@@ -2321,25 +2321,121 @@ Is it scaring you off?`,
   function getThemeVar(varName) {
     return currentTheme.cssProperties[varName];
   }
-  var colorPicker = class {
+  var ColorCursor = class {
+    element = document.createElement("div");
+    visibleElement = document.createElement("div");
+    xPos = 50;
+    yPos = 50;
+    enableX;
+    enableY;
+    parentContainer;
+    constructor(parentContainer, enableX = true, enableY = true) {
+      this.parentContainer = parentContainer;
+      this.enableX = enableX;
+      this.enableY = enableY;
+      this.element.appendChild(this.visibleElement);
+      let isDragging = false;
+      this.parentContainer.addEventListener("mousedown", (e2) => {
+        isDragging = true;
+        this.handlePointerEvent(e2);
+      });
+      document.addEventListener("mouseup", () => {
+        isDragging = false;
+      });
+      document.addEventListener("mousemove", (e2) => {
+        if (isDragging) {
+          this.handlePointerEvent(e2);
+        }
+      });
+      this.updateCursorPosition(this.xPos, this.yPos);
+    }
+    handlePointerEvent(e2) {
+      const rect = this.parentContainer.getBoundingClientRect();
+      const x2 = e2.clientX - rect.left;
+      const y2 = e2.clientY - rect.top;
+      const xPercent = x2 / rect.width * 100;
+      const yPercent = y2 / rect.height * 100;
+      if (this.enableX) this.xPos = Math.max(0, Math.min(100, xPercent));
+      if (this.enableY) this.yPos = Math.max(0, Math.min(100, yPercent));
+      this.updateCursorPosition(this.xPos, this.yPos);
+      this.onDrag();
+    }
+    // Overwrite this if needed
+    onDrag() {
+    }
+    updateCursorPosition(x2, y2) {
+      this.element.style.left = `${x2}%`;
+      this.element.style.top = `${y2}%`;
+    }
+  };
+  var ColorPicker = class {
     currentColor = w("#72b6c0ff");
     width = "20rem";
+    element = document.createElement("div");
+    hueContainer = document.createElement("div");
     fieldContainer = document.createElement("div");
-    render() {
-      this.fieldContainer.classList.add("smpp-color-picker-field");
-      this.fieldContainer.style.width = this.width;
-      this.updateField();
+    hueCursor;
+    fieldCursor;
+    constructor() {
+      this.hueCursor = this.createHueCursor();
+      this.hueCursor.onDrag = () => {
+        this.readColor();
+      };
+      this.fieldCursor = this.createFieldCursor();
+      this.fieldCursor.onDrag = () => {
+        this.readColor();
+      };
+    }
+    createFieldCursor() {
+      let fieldCursor = new ColorCursor(this.fieldContainer);
+      fieldCursor.element.classList.add("color-cursor-wrapper");
+      fieldCursor.visibleElement.classList.add("color-cursor");
+      return fieldCursor;
+    }
+    createHueCursor() {
+      let hueCursor = new ColorCursor(this.hueContainer, true, false);
+      hueCursor.element.classList.add("color-cursor-wrapper");
+      hueCursor.visibleElement.classList.add("color-cursor");
+      return hueCursor;
+    }
+    createHueContainer() {
+      this.hueContainer.classList.add("hue-picker");
+      this.hueContainer.appendChild(this.hueCursor.element);
+      return this.hueContainer;
+    }
+    createFieldContainer() {
+      this.fieldContainer.classList.add("color-picker-field");
       let horizontalContainer = document.createElement("div");
-      horizontalContainer.style.background = `linear-gradient(to right, var(--max-sat) 0%, rgba(255, 255, 255, 1) 100%)`;
+      horizontalContainer.style.background = `linear-gradient(to left, var(--max-sat) 0%, rgba(255, 255, 255, 1) 100%)`;
       let verticalContainer = document.createElement("div");
       verticalContainer.style.background = "linear-gradient(to top, black, transparent)";
       this.fieldContainer.appendChild(horizontalContainer);
       this.fieldContainer.append(verticalContainer);
+      this.fieldContainer.appendChild(this.fieldCursor.element);
       return this.fieldContainer;
     }
-    updateField() {
-      let maxSatColor = this.currentColor.saturate(100);
-      this.fieldContainer.style.setProperty("--max-sat", maxSatColor.toHex());
+    render() {
+      this.element.classList.add("smpp-color-picker");
+      this.element.style.width = this.width;
+      this.element.appendChild(this.createFieldContainer());
+      this.element.appendChild(this.createHueContainer());
+      this.updateColorPicker();
+      return this.element;
+    }
+    readColor() {
+      let hue = this.hueCursor.xPos * 3.6;
+      let saturation = this.fieldCursor.xPos;
+      let value = 100 - this.fieldCursor.yPos;
+      this.currentColor = w({ h: hue, s: saturation, v: value });
+      this.updateColorPicker();
+    }
+    updateColorPicker() {
+      let maxSatColor = w({ h: this.hueCursor.xPos * 3.6, s: 100, v: 100 });
+      this.element.style.setProperty("--max-sat", maxSatColor.toHex());
+      this.element.style.setProperty(
+        "--current-color",
+        this.currentColor.toHex()
+      );
     }
   };
 
@@ -4686,7 +4782,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
               "Customize the overall look of the interface with different color styles."
             )
           );
-          let colorPickerHTML = new colorPicker();
+          let colorPickerHTML = new ColorPicker();
           this.settingsPage.appendChild(colorPickerHTML.render());
           this.settingsPage.appendChild(createSectionTitle("Wallpaper"));
           this.settingsPage.appendChild(
@@ -6595,11 +6691,11 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       const foresight = 28;
       let userId = getUserId();
       if (DEBUG) {
-        sendDebug2("Debug mode enabled \u2705");
-        sendDebug2("User ID:", userId);
-        sendDebug2("Current URL:", window.location.href);
-        sendDebug2("Today's Date:", getCurrentDate());
-        sendDebug2("Next Date:", getFutureDate(foresight));
+        sendDebug("Debug mode enabled \u2705");
+        sendDebug("User ID:", userId);
+        sendDebug("Current URL:", window.location.href);
+        sendDebug("Today's Date:", getCurrentDate());
+        sendDebug("Next Date:", getFutureDate(foresight));
       }
       this.clearContent();
       async function fetchPlannerData2() {
@@ -6611,7 +6707,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           const url = `https://${schoolName}.smartschool.be/planner/api/v1/planned-elements/user/${userId}?from=${getCurrentDate()}&to=${getFutureDate(
             foresight
           )}&types=planned-assignments,planned-to-dos`;
-          sendDebug2("Fetching planner data from:", url);
+          sendDebug("Fetching planner data from:", url);
           const response = await fetch(url);
           if (!response.ok) {
             throw new Error(
@@ -6619,7 +6715,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             );
           }
           const data2 = await response.json();
-          sendDebug2("Planner data:", data2);
+          sendDebug("Planner data:", data2);
           return data2;
         } catch (error) {
           console.error("Fetch error:", error);
@@ -6635,7 +6731,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         TitleScreenDiv.append(TitleScreenText);
         TasksContainer.append(TitleScreenDiv);
         if (!userId) {
-          return sendDebug2("User ID not found.");
+          return sendDebug("User ID not found.");
         }
         fetchPlannerData2().then(async (data2) => {
           data2 = data2.filter((element) => element.resolvedStatus !== "resolved");
@@ -6643,7 +6739,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             TasksContainer.innerHTML = "Er is iets ernstig misgegaan :(";
             return console.error("No planner data, Did something go wrong?");
           } else if (DEBUG) {
-            sendDebug2("Planner data fetched successfully.");
+            sendDebug("Planner data fetched successfully.");
           }
           if (!Array.isArray(data2) || data2.length === 0) {
             let noDataContainer = document.createElement("div");
@@ -6762,7 +6858,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             });
             TasksContainer.append(rowDiv);
           });
-          return sendDebug2("UI updated successfully.");
+          return sendDebug("UI updated successfully.");
         });
         return TasksContainer;
       };
@@ -6810,7 +6906,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           `Failed to mark assignment ${as_ID} as finished: ${response.status} ${response.statusText}. Response: ${errorData}`
         );
       }
-      sendDebug2(`Assignment ${as_ID} marked as finished successfully.`);
+      sendDebug(`Assignment ${as_ID} marked as finished successfully.`);
       const assignmentElement = document.querySelector(`[data-id="${as_ID}"]`);
       if (assignmentElement) {
         const parentContainer = assignmentElement.parentElement;

@@ -1860,9 +1860,8 @@ p.smpp-error-widget {
   gap: 1rem;
   width: 20rem;
   padding: 1rem;
+  padding-right: 0;
   height: 100%;
-  overflow-y: scroll;
-  overflow-x: hidden;
 }
 .profile-settings-button {
   border: 2px solid transparent !important;
@@ -1906,9 +1905,9 @@ p.smpp-error-widget {
 }
 #settings-page {
   width: calc(100% - 20rem);
-  padding: 1rem 1rem 1rem 0rem;
+  padding: 1rem;
+  padding-left: 1.5rem;
   overflow-y: scroll;
-  overflow-x: hidden;
   display: flex;
   flex-direction: column;
 }
@@ -2532,15 +2531,76 @@ input.settings-page-keybinding-input[type=text]:not(.aaaaaa):read-only.listening
 .keybind-input-wrapper {
   position: relative;
 }
-.smpp-color-picker-field {
+.smpp-color-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem !important;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.color-picker-field {
   width: 100%;
   aspect-ratio: 16/9;
   position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
 }
-.smpp-color-picker-field > div {
+.color-picker-field .color-cursor-wrapper .color-cursor {
+  border-radius: 100000px;
+  border: 3px solid white;
+  box-shadow: 0px 0px 4px -2px black, inset 0px 0px 4px -2px black;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  background-color: var(--current-color) !important;
+}
+.color-picker-field .color-cursor-wrapper {
+  pointer-events: none;
+  position: absolute;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.color-picker-field:hover {
+  cursor: crosshair;
+}
+.color-picker-field:hover:active {
+  cursor: default;
+}
+.color-picker-field > div {
   position: absolute;
   width: 100%;
   height: 100%;
+}
+.smpp-color-picker .hue-picker {
+  width: 100%;
+  background:
+    linear-gradient(
+      to right,
+      #f00 0%,
+      #ff0 17%,
+      #0f0 33%,
+      #0ff 50%,
+      #00f 67%,
+      #f0f 83%,
+      #f00 100%);
+  height: 1.5rem;
+  border-radius: 10000rem;
+  position: relative;
+}
+.hue-picker .color-cursor-wrapper .color-cursor {
+  border-radius: 100000px;
+  border: 3px solid white;
+  box-shadow: 0px 0px 4px -2px black, inset 0px 0px 4px -2px black;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  background-color: var(--max-sat) !important;
+}
+.hue-picker .color-cursor-wrapper {
+  pointer-events: none;
+  position: absolute;
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 /* src/styles/smpp-styles/assignments.css */

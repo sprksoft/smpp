@@ -19,7 +19,7 @@ import { clearAllData } from "../../fixes-utils/utils.js";
 import { loadQuickSettings } from "./quick-settings.js";
 import { createTextInput, createButton } from "../appearance/ui.js";
 import { applyProfilePicture } from "../profile.js";
-import { colorPicker } from "../appearance/themes.js";
+import { ColorPicker } from "../appearance/themes.js";
 import type { Quicks } from "../quick-menu/config.js";
 import type { Keybind } from "../keybinds.js";
 
@@ -1142,7 +1142,7 @@ export class SettingsWindow extends BaseWindow {
           )
         );
 
-        let colorPickerHTML = new colorPicker();
+        let colorPickerHTML = new ColorPicker();
         this.settingsPage.appendChild(colorPickerHTML.render());
 
         this.settingsPage.appendChild(createSectionTitle("Wallpaper"));

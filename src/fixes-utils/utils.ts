@@ -1,4 +1,5 @@
 //@ts-nocheck
+import { DEBUG, sendDebug } from "../common/utils.js";
 
 export function getPfpLink(username) {
   let firstInitial;

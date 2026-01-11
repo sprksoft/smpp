@@ -77,37 +77,150 @@ export async function exampleSaveCustomTheme() {
   console.log(await getTheme("default"));
 }
 
-export class colorPicker {
+class ColorCursor {
+  element: HTMLElement = document.createElement("div");
+  visibleElement: HTMLElement = document.createElement("div");
+  xPos = 50;
+  yPos = 50;
+  enableX: boolean;
+  enableY: boolean;
+  parentContainer: HTMLElement;
+
+  constructor(
+    parentContainer: HTMLElement,
+    enableX: boolean = true,
+    enableY: boolean = true
+  ) {
+    this.parentContainer = parentContainer;
+    this.enableX = enableX;
+    this.enableY = enableY;
+    this.element.appendChild(this.visibleElement);
+
+    let isDragging = false;
+    this.parentContainer.addEventListener("mousedown", (e) => {
+      isDragging = true;
+      this.handlePointerEvent(e);
+    });
+
+    document.addEventListener("mouseup", () => {
+      isDragging = false;
+    });
+
+    document.addEventListener("mousemove", (e) => {
+      if (isDragging) {
+        this.handlePointerEvent(e);
+      }
+    });
+    this.updateCursorPosition(this.xPos, this.yPos);
+  }
+
+  handlePointerEvent(e: MouseEvent) {
+    const rect = this.parentContainer.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const xPercent = (x / rect.width) * 100;
+    const yPercent = (y / rect.height) * 100;
+
+    if (this.enableX) this.xPos = Math.max(0, Math.min(100, xPercent));
+    if (this.enableY) this.yPos = Math.max(0, Math.min(100, yPercent));
+
+    this.updateCursorPosition(this.xPos, this.yPos);
+    this.onDrag();
+  }
+
+  // Overwrite this if needed
+  onDrag() {}
+
+  updateCursorPosition(x: number, y: number) {
+    this.element.style.left = `${x}%`;
+    this.element.style.top = `${y}%`;
+  }
+}
+
+export class ColorPicker {
   currentColor = colord("#72b6c0ff");
   width = "20rem";
   element = document.createElement("div");
-  hueSlider = document.createElement("div");
+  hueContainer = document.createElement("div");
   fieldContainer = document.createElement("div");
 
-  createHueSlider() {
-    return this.hueSlider;
+  hueCursor: ColorCursor;
+  fieldCursor: ColorCursor;
+
+  constructor() {
+    this.hueCursor = this.createHueCursor();
+    this.hueCursor.onDrag = () => {
+      this.readColor();
+    };
+    this.fieldCursor = this.createFieldCursor();
+    this.fieldCursor.onDrag = () => {
+      this.readColor();
+    };
   }
 
-  render() {
-    this.fieldContainer.classList.add("smpp-color-picker-field");
-    this.fieldContainer.style.width = this.width;
-    this.updateField();
+  createFieldCursor() {
+    let fieldCursor = new ColorCursor(this.fieldContainer);
+    fieldCursor.element.classList.add("color-cursor-wrapper");
+    fieldCursor.visibleElement.classList.add("color-cursor");
+    return fieldCursor;
+  }
+
+  createHueCursor() {
+    let hueCursor = new ColorCursor(this.hueContainer, true, false);
+    hueCursor.element.classList.add("color-cursor-wrapper");
+    hueCursor.visibleElement.classList.add("color-cursor");
+    return hueCursor;
+  }
+
+  createHueContainer() {
+    this.hueContainer.classList.add("hue-picker");
+    this.hueContainer.appendChild(this.hueCursor.element);
+    return this.hueContainer;
+  }
+
+  createFieldContainer() {
+    this.fieldContainer.classList.add("color-picker-field");
     let horizontalContainer = document.createElement("div");
-    horizontalContainer.style.background = `linear-gradient(to right, var(--max-sat) 0%, rgba(255, 255, 255, 1) 100%)`;
+    horizontalContainer.style.background = `linear-gradient(to left, var(--max-sat) 0%, rgba(255, 255, 255, 1) 100%)`;
+
     let verticalContainer = document.createElement("div");
     verticalContainer.style.background =
       "linear-gradient(to top, black, transparent)";
+
     this.fieldContainer.appendChild(horizontalContainer);
     this.fieldContainer.append(verticalContainer);
 
-    this.element.appendChild(this.createHueSlider());
-    this.element.appendChild(this.fieldContainer);
+    this.fieldContainer.appendChild(this.fieldCursor.element);
+    return this.fieldContainer;
+  }
 
+  render() {
+    this.element.classList.add("smpp-color-picker");
+
+    this.element.style.width = this.width;
+    this.element.appendChild(this.createFieldContainer());
+    this.element.appendChild(this.createHueContainer());
+
+    this.updateColorPicker();
     return this.element;
   }
 
-  updateField() {
-    let maxSatColor = this.currentColor.saturate(100);
-    this.fieldContainer.style.setProperty("--max-sat", maxSatColor.toHex());
+  readColor() {
+    let hue = this.hueCursor.xPos * 3.6;
+    let saturation = this.fieldCursor.xPos;
+    let value = 100 - this.fieldCursor.yPos;
+
+    this.currentColor = colord({ h: hue, s: saturation, v: value });
+    this.updateColorPicker();
+  }
+
+  updateColorPicker() {
+    let maxSatColor = colord({ h: this.hueCursor.xPos * 3.6, s: 100, v: 100 });
+    this.element.style.setProperty("--max-sat", maxSatColor.toHex());
+    this.element.style.setProperty(
+      "--current-color",
+      this.currentColor.toHex()
+    );
   }
 }

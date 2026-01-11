@@ -158,7 +158,7 @@ function scrape_goto() {
   }
 }
 
-function unbloat() {
+export function unbloat() {
   document.body.innerHTML = "";
 }
 
