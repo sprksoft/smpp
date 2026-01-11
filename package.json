@@ -22,6 +22,7 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "colord": "^2.9.3"
+    "colord": "^2.9.3",
+    "node-vibrant": "^4.0.3"
   }
 }

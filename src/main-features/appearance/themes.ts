@@ -1,6 +1,8 @@
 import { widgetSystemNotifyThemeChange } from "../../widgets/widgets.js";
-import { browser } from "../../common/utils.js";
+import { browser, isValidHexColor } from "../../common/utils.js";
 import { colord } from "colord";
+import { createButton } from "./ui.js";
+import { copySvg, doneSvg } from "../../fixes-utils/svgs.js";
 
 export let currentThemeName: string;
 export let currentTheme: Theme;
@@ -26,7 +28,6 @@ export async function setTheme(themeName: string) {
   const style = document.documentElement.style;
   currentThemeName = themeName;
   currentTheme = await getTheme(themeName);
-  console.log(currentTheme);
   Object.entries(currentTheme.cssProperties).forEach(([key, value]) => {
     style.setProperty(key, value);
   });
@@ -74,7 +75,6 @@ export async function exampleSaveCustomTheme() {
     action: "setSettingsData",
     data: data,
   });
-  console.log(await getTheme("default"));
 }
 
 class ColorCursor {
@@ -111,7 +111,7 @@ class ColorCursor {
         this.handlePointerEvent(e);
       }
     });
-    this.updateCursorPosition(this.xPos, this.yPos);
+    this.updateCursorPosition();
   }
 
   handlePointerEvent(e: MouseEvent) {
@@ -125,22 +125,22 @@ class ColorCursor {
     if (this.enableX) this.xPos = Math.max(0, Math.min(100, xPercent));
     if (this.enableY) this.yPos = Math.max(0, Math.min(100, yPercent));
 
-    this.updateCursorPosition(this.xPos, this.yPos);
+    this.updateCursorPosition();
     this.onDrag();
   }
 
   // Overwrite this if needed
   onDrag() {}
 
-  updateCursorPosition(x: number, y: number) {
-    this.element.style.left = `${x}%`;
-    this.element.style.top = `${y}%`;
+  updateCursorPosition() {
+    this.element.style.left = `${this.xPos}%`;
+    this.element.style.top = `${this.yPos}%`;
   }
 }
 
 export class ColorPicker {
   currentColor = colord("#72b6c0ff");
-  width = "20rem";
+  width: string;
   element = document.createElement("div");
   hueContainer = document.createElement("div");
   fieldContainer = document.createElement("div");
@@ -148,7 +148,8 @@ export class ColorPicker {
   hueCursor: ColorCursor;
   fieldCursor: ColorCursor;
 
-  constructor() {
+  constructor(width = "20rem") {
+    this.width = width;
     this.hueCursor = this.createHueCursor();
     this.hueCursor.onDrag = () => {
       this.readColor();
@@ -195,15 +196,84 @@ export class ColorPicker {
     return this.fieldContainer;
   }
 
+  copyHexToClipBoard() {
+    navigator.clipboard.writeText(this.currentColor.toHex());
+  }
+
+  createBottomContainer() {
+    let createCopyButton = () => {
+      let button = document.createElement("button");
+      button.innerHTML = copySvg;
+      button.classList.add("copy-hex-button");
+      button.addEventListener("click", () => {
+        this.copyHexToClipBoard();
+        let svg = button.querySelector("svg");
+        if (!svg) return;
+        svg.style.fill = "var(--color-text)";
+        button.innerHTML = doneSvg;
+
+        setTimeout(() => {
+          svg.style.fill = "none";
+          button.innerHTML = copySvg;
+        }, 1000);
+      });
+      return button;
+    };
+
+    let createHexInput = () => {
+      let hexInput = document.createElement("input");
+      hexInput.classList.add("smpp-text-input");
+      hexInput.addEventListener("change", () => {
+        this.readColorInput();
+      });
+      hexInput.type = "text";
+      hexInput.value = this.currentColor.toHex();
+      return hexInput;
+    };
+
+    function createColorPreview() {
+      let colorPreview = document.createElement("div");
+      colorPreview.classList.add("color-preview");
+      return colorPreview;
+    }
+
+    let bottomContainer = document.createElement("div");
+    bottomContainer.classList.add("smpp-color-picker-bottom-container");
+    bottomContainer.appendChild(createColorPreview());
+    bottomContainer.appendChild(createHexInput());
+    bottomContainer.appendChild(createCopyButton());
+
+    return bottomContainer;
+  }
+
   render() {
     this.element.classList.add("smpp-color-picker");
 
     this.element.style.width = this.width;
     this.element.appendChild(this.createFieldContainer());
     this.element.appendChild(this.createHueContainer());
+    this.element.appendChild(this.createBottomContainer());
 
     this.updateColorPicker();
     return this.element;
+  }
+
+  readColorInput() {
+    let hexInput = this.element.querySelector("input");
+    if (hexInput) {
+      if (isValidHexColor(hexInput.value)) {
+        this.currentColor = colord(hexInput.value);
+      } else {
+        hexInput.value = this.currentColor.toHex();
+      }
+    }
+
+    this.hueCursor.xPos = this.currentColor.hue() / 3.6;
+    this.fieldCursor.xPos = this.currentColor.toHsv().s;
+    this.fieldCursor.yPos = 100 - this.currentColor.toHsv().v;
+    this.hueCursor.updateCursorPosition();
+    this.fieldCursor.updateCursorPosition();
+    this.updateColorPicker();
   }
 
   readColor() {
@@ -222,5 +292,12 @@ export class ColorPicker {
       "--current-color",
       this.currentColor.toHex()
     );
+    let hexInput = this.element.querySelector("input");
+    if (hexInput) {
+      hexInput.value = this.currentColor.toHex();
+    }
+    this.onChange();
   }
+
+  onChange() {}
 }

@@ -92,6 +92,10 @@ export function sendDebug(...messages: any[]) {
   }
 }
 
+export function isValidHexColor(color: string) {
+  return /^#[0-9a-f]{3}(?:[0-9a-f]{3})?(?:[0-9a-f]{2})?$/i.test(color);
+}
+
 export function getCurrentDate() {
   return new Date().toISOString().split("T")[0];
 }

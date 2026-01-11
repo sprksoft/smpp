@@ -15,7 +15,7 @@
 
 .smpp-file-input-button,
 #quickSettings .full-file-input-container .smpp-text-input {
-  border: 2px solid var(--color-base03) !important;
+  border: 2px solid var(--color-base02) !important;
   background-color: var(--color-base01) !important;
   border-radius: 1rem;
   box-shadow: 0px 2px 10px 0px var(--color-shadow);
@@ -23,7 +23,7 @@
 
 #quickSettings .full-file-input-container .smpp-text-input:hover,
 #quickSettings .full-file-input-container .smpp-text-input:focus-visible {
-  border-color: var(--color-accent) !important;
+  border-color: var(--color-base03) !important;
 }
 
 .enableAnimations #quickSettings .full-file-input-container {
@@ -33,13 +33,9 @@
 
 .smpp-file-input-button {
   margin-right: 0px !important;
-  background: none !important;
-  opacity: 0.5;
+  background: var(--color-base01) !important;
+  opacity: 1;
   display: flex;
-}
-
-.active.smpp-file-input-button {
-  opacity: 1 !important;
 }
 
 .enableAnimations .smpp-file-input-button {
@@ -48,7 +44,11 @@
 
 .smpp-file-input-button:hover,
 .smpp-file-input-button:focus-visible {
-  border-color: var(--color-accent) !important;
+  border-color: var(--color-base03) !important;
+}
+
+.smpp-file-input-button > svg {
+  stroke: var(--color-text) !important;
 }
 
 .smpp-link-clear-button:active {

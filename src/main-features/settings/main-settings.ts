@@ -771,14 +771,15 @@ export class SettingsWindow extends BaseWindow {
         const updateWidgetSetting = async (
           id: string,
           settingName: string,
-          parseFunc: (value: string) => any = (val) => val
+          type: string
         ) => {
           const element = document.getElementById(
             id
           ) as HTMLInputElement | null;
           if (!element) return;
 
-          const currentValue = parseFunc(element.value);
+          const currentValue =
+            type == "boolean" ? element.checked : parseInt(element.value, 10);
           const storedValue = await getWidgetSetting(settingName);
 
           if (JSON.stringify(currentValue) !== JSON.stringify(storedValue)) {
@@ -790,20 +791,20 @@ export class SettingsWindow extends BaseWindow {
         await updateWidgetSetting(
           "settings-page-delijn-monochrome-button",
           "DelijnWidget.monochrome",
-          (val) => val === "true" || val === "on"
+          "boolean"
         );
 
         await updateWidgetSetting(
           "settings-page-max-busses-slider",
           "DelijnWidget.maxBusses",
-          (val) => parseInt(val, 10)
+          "number"
         );
 
         // Assignments
         await updateWidgetSetting(
           "settings-page-max-assignments-slider",
           "TakenWidget.maxAssignments",
-          (val) => parseInt(val, 10)
+          "number"
         );
 
         // Snake
@@ -811,7 +812,7 @@ export class SettingsWindow extends BaseWindow {
           await updateWidgetSetting(
             "settings-page-show-snake-grid-button",
             "SnakeWidget.enableGrid",
-            (val) => val === "true" || val === "on"
+            "boolean"
           );
         }
 
@@ -1142,7 +1143,7 @@ export class SettingsWindow extends BaseWindow {
           )
         );
 
-        let colorPickerHTML = new ColorPicker();
+        let colorPickerHTML = new ColorPicker("20rem");
         this.settingsPage.appendChild(colorPickerHTML.render());
 
         this.settingsPage.appendChild(createSectionTitle("Wallpaper"));

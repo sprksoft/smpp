@@ -62,57 +62,6 @@ export const plantThePlantSvg = `<svg xmlns="http://www.w3.org/2000/svg" id="pla
         </g>
       </svg>`;
 export const performanceModeSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24" id="lightning" class="icon glyph"><path d="M18,11.74a1,1,0,0,0-.52-.63L14.09,9.43,15,3.14a1,1,0,0,0-1.78-.75l-7,9a1,1,0,0,0-.17.87,1,1,0,0,0,.59.67l4.27,1.71L10,20.86a1,1,0,0,0,.63,1.07A.92.92,0,0,0,11,22a1,1,0,0,0,.83-.45l6-9A1,1,0,0,0,18,11.74Z"/></svg>`;
-export const colorpickersHTML = `
-<div class="color-picker-container">
-<input type="color" class="color-pickersmpp" id="colorPicker1">
-<span class="color-label">base0</span>
-</div>
-<div class="color-picker-container">
-<input type="color" class="color-pickersmpp" id="colorPicker2">
-<span class="color-label">base1</span>
-</div>
-<div class="color-picker-container">
-<input type="color" class="color-pickersmpp" id="colorPicker3">
-<span class="color-label">base2</span>
-</div>
-<div class="color-picker-container">
-<input type="color" class="color-pickersmpp" id="colorPicker4">
-<span class="color-label">base3</span>
-</div>
-<div class="color-picker-container">
-<input type="color" class="color-pickersmpp" id="colorPicker5">
-<span class="color-label">accent</span>
-</div>
-<div class="color-picker-container">
-<input type="color" class="color-pickersmpp" id="colorPicker6">
-<span class="color-label">text</span>
-</div>`;
-// TEMP BEFORE THEME UPDATE!!!!
-export const colorpickersHTMLV2 = `
-<div class="color-picker-container">
-<input type="color" class="color-pickersmpp" id="settings-colorPicker1">
-<span class="color-label">base0</span>
-</div>
-<div class="color-picker-container">
-<input type="color" class="color-pickersmpp" id="settings-colorPicker2">
-<span class="color-label">base1</span>
-</div>
-<div class="color-picker-container">
-<input type="color" class="color-pickersmpp" id="settings-colorPicker3">
-<span class="color-label">base2</span>
-</div>
-<div class="color-picker-container">
-<input type="color" class="color-pickersmpp" id="settings-colorPicker4">
-<span class="color-label">base3</span>
-</div>
-<div class="color-picker-container">
-<input type="color" class="color-pickersmpp" id="settings-colorPicker5">
-<span class="color-label">accent</span>
-</div>
-<div class="color-picker-container">
-<input type="color" class="color-pickersmpp" id="settings-colorPicker6">
-<span class="color-label">text</span>
-</div>`;
 
 export const temperatureSvg = `<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" style="height: 100%;" data-name="Laag 2" viewBox="0 0 13 26">
 <g id="Laag_1-2" data-name="Laag 1">
@@ -166,14 +115,7 @@ export const searchButtonSvg = `<svg class=delijnSearchIcon width="25" height="2
 </svg>`;
 
 export const fileInputIconSvg = `<svg width="30px" height="30px" viewBox="0 0 24.00 24.00" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-    <g id="SVGRepo_iconCarrier">
-        <path
-            d="M9 13H15M12.0627 6.06274L11.9373 5.93726C11.5914 5.59135 11.4184 5.4184 11.2166 5.29472C11.0376 5.18506 10.8425 5.10425 10.6385 5.05526C10.4083 5 10.1637 5 9.67452 5H6.2C5.0799 5 4.51984 5 4.09202 5.21799C3.71569 5.40973 3.40973 5.71569 3.21799 6.09202C3 6.51984 3 7.07989 3 8.2V15.8C3 16.9201 3 17.4802 3.21799 17.908C3.40973 18.2843 3.71569 18.5903 4.09202 18.782C4.51984 19 5.07989 19 6.2 19H17.8C18.9201 19 19.4802 19 19.908 18.782C20.2843 18.5903 20.5903 18.2843 20.782 17.908C21 17.4802 21 16.9201 21 15.8V10.2C21 9.0799 21 8.51984 20.782 8.09202C20.5903 7.71569 20.2843 7.40973 19.908 7.21799C19.4802 7 18.9201 7 17.8 7H14.3255C13.8363 7 13.5917 7 13.3615 6.94474C13.1575 6.89575 12.9624 6.81494 12.7834 6.70528C12.5816 6.5816 12.4086 6.40865 12.0627 6.06274Z"
-            class="st4" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
-    </g>
-</svg>`;
+<path xmlns="http://www.w3.org/2000/svg" d="M14.2647 15.9377L12.5473 14.2346C11.758 13.4519 11.3633 13.0605 10.9089 12.9137C10.5092 12.7845 10.079 12.7845 9.67922 12.9137C9.22485 13.0605 8.83017 13.4519 8.04082 14.2346L4.04193 18.2622M14.2647 15.9377L14.606 15.5991C15.412 14.7999 15.8149 14.4003 16.2773 14.2545C16.6839 14.1262 17.1208 14.1312 17.5244 14.2688C17.9832 14.4253 18.3769 14.834 19.1642 15.6515L20 16.5001M14.2647 15.9377L18.22 19.9628M18.22 19.9628C17.8703 20 17.4213 20 16.8 20H7.2C6.07989 20 5.51984 20 5.09202 19.782C4.7157 19.5903 4.40973 19.2843 4.21799 18.908C4.12583 18.7271 4.07264 18.5226 4.04193 18.2622M18.22 19.9628C18.5007 19.9329 18.7175 19.8791 18.908 19.782C19.2843 19.5903 19.5903 19.2843 19.782 18.908C20 18.4802 20 17.9201 20 16.8V13M11 4H7.2C6.07989 4 5.51984 4 5.09202 4.21799C4.7157 4.40973 4.40973 4.71569 4.21799 5.09202C4 5.51984 4 6.0799 4 7.2V16.8C4 17.4466 4 17.9066 4.04193 18.2622M18 9V6M18 6V3M18 6H21M18 6H15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
 export const editIconSvg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px"class=edit_button height="18px" width="18px" viewBox="0 0 24 24"  xml:space="preserve">
 <metadata> Svg Vector Icons : http://www.onlinewebfonts.com/icon</metadata>
@@ -252,7 +194,7 @@ export const exitIconSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="var(--c
 </g>
 </svg>`;
 
-export const doneSvg = `<svg xmlns="http://www.w3.org/2000/svg" class="done-icon" viewBox="0 0 193 169" fill="none">
+export const doneSvg = `<svg xmlns="http://www.w3.org/2000/svg" class="done-icon" viewBox="0 0 193 180" fill="none">
 <rect xmlns="http://www.w3.org/2000/svg" x="108.281" y="146.148" width="45" height="116.069" rx="22.5" transform="rotate(131 108.281 146.148)"/>
 <rect xmlns="http://www.w3.org/2000/svg" x="159.568" y="-8" width="45" height="198" rx="22.5" transform="rotate(35 159.568 -8)"/>
 </svg>`;
@@ -295,3 +237,5 @@ export const threeDotsSvg = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://
 export const trashSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
 <path d="M18 6L17.1991 18.0129C17.129 19.065 17.0939 19.5911 16.8667 19.99C16.6666 20.3412 16.3648 20.6235 16.0011 20.7998C15.588 21 15.0607 21 14.0062 21H9.99377C8.93927 21 8.41202 21 7.99889 20.7998C7.63517 20.6235 7.33339 20.3412 7.13332 19.99C6.90607 19.5911 6.871 19.065 6.80086 18.0129L6 6M4 6H20M16 6L15.7294 5.18807C15.4671 4.40125 15.3359 4.00784 15.0927 3.71698C14.8779 3.46013 14.6021 3.26132 14.2905 3.13878C13.9376 3 13.523 3 12.6936 3H11.3064C10.477 3 10.0624 3 9.70951 3.13878C9.39792 3.26132 9.12208 3.46013 8.90729 3.71698C8.66405 4.00784 8.53292 4.40125 8.27064 5.18807L8 6M14 10V17M10 10V17" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>`;
+export const copySvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path xmlns="http://www.w3.org/2000/svg" d="M8 8H7.2C6.0799 8 5.51984 8 5.09202 8.21799C4.71569 8.40973 4.40973 8.71569 4.21799 9.09202C4 9.51984 4 10.0799 4 11.2V16.8C4 17.9201 4 18.4802 4.21799 18.908C4.40973 19.2843 4.71569 19.5903 5.09202 19.782C5.51984 20 6.0799 20 7.2 20H12.8C13.9201 20 14.4802 20 14.908 19.782C15.2843 19.5903 15.5903 19.2843 15.782 18.908C16 18.4802 16 17.9201 16 16.8V16M11.2 16H16.8C17.9201 16 18.4802 16 18.908 15.782C19.2843 15.5903 19.5903 15.2843 19.782 14.908C20 14.4802 20 13.9201 20 12.8V7.2C20 6.0799 20 5.51984 19.782 5.09202C19.5903 4.71569 19.2843 4.40973 18.908 4.21799C18.4802 4 17.9201 4 16.8 4H11.2C10.0799 4 9.51984 4 9.09202 4.21799C8.71569 4.40973 8.40973 4.71569 8.21799 5.09202C8 5.51984 8 6.07989 8 7.2V12.8C8 13.9201 8 14.4802 8.21799 14.908C8.40973 15.2843 8.71569 15.5903 9.09202 15.782C9.51984 16 10.0799 16 11.2 16Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;

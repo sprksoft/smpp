@@ -913,6 +913,27 @@ input.settings-page-keybinding-input[type="text"]:not(
   height: 100%;
 }
 
+.smpp-color-picker-bottom-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  height: 3rem;
+}
+
+.smpp-color-picker-bottom-container .color-preview {
+  width: 25%;
+  border-radius: 1rem;
+  background-color: var(--current-color) !important;
+  height: 100%;
+  border: 2px solid var(--color-base02) !important;
+}
+
+#settings-page .smpp-color-picker-bottom-container .smpp-text-input {
+  width: 65% !important;
+  height: 100%;
+}
+
 .smpp-color-picker .hue-picker {
   width: 100%;
   background: linear-gradient(
@@ -945,4 +966,42 @@ input.settings-page-keybinding-input[type="text"]:not(
   position: absolute;
   width: 1.5rem;
   height: 1.5rem;
+}
+
+.copy-hex-button {
+  background-color: var(--color-base01) !important;
+  border: 2px solid var(--color-base02) !important;
+  border-radius: 1rem !important;
+  padding: 0 !important;
+  font-size: 1.4rem !important;
+  font-weight: 500 !important;
+  width: 20% !important ;
+  cursor: pointer !important;
+  color: var(--color-text) !important;
+  padding: 0.1rem 0.4rem !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.copy-hex-button > svg {
+  width: 100%;
+  height: 100%;
+  stroke: var(--color-text) !important;
+}
+
+.copy-hex-button > .done-icon {
+  width: 90%;
+  height: 70%;
+  fill: var(--color-green) !important;
+}
+
+.enableAnimations .copy-hex-button {
+  transition-property: border-color, background-color, transform;
+  transition: 0.15s ease-in-out;
+}
+
+.copy-hex-button:hover {
+  background-color: var(--color-base02) !important;
+  border-color: var(--color-base03) !important;
 }
