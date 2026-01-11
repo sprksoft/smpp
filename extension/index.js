@@ -2503,6 +2503,44 @@ Is it scaring you off?`,
     onChange() {
     }
   };
+  var ThemeTile = class {
+    name;
+    element = document.createElement("div");
+    constructor(name2) {
+      this.name = name2;
+    }
+    async getBackgroundImage() {
+      let image = document.createElement("img");
+      image.classList.add("theme-tile-image");
+      let result = await browser2.runtime.sendMessage({
+        action: "getImage",
+        id: this.name
+      });
+      if (result.type == "default") {
+        result.imageData = await getExtensionImage(
+          "theme-backgrounds/" + this.name + ".jpg"
+        );
+      }
+      image.src = result.imageData;
+      return image;
+    }
+    getBottomContainer() {
+      let bottomContainer = document.createElement("div");
+      return bottomContainer;
+    }
+    async render() {
+      this.element.classList.add("theme-tile");
+      this.element.appendChild(await this.getBackgroundImage());
+      let theme = await getTheme(this.name);
+      Object.keys(theme.cssProperties).forEach((key) => {
+        this.element.style.setProperty(
+          `${key}-local`,
+          theme.cssProperties[key]
+        );
+      });
+      return this.element;
+    }
+  };
 
   // src/widgets/plant.ts
   var plantVersion = 2;
@@ -4640,7 +4678,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       loadQuickSettings();
       await this.loadPage();
     }
-    displaySettingsPage() {
+    async displaySettingsPage() {
       function createMainTitle(text) {
         let title = document.createElement("h1");
         title.innerText = text;
@@ -4824,10 +4862,10 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           this.profilePictureInput.loadImageData();
           this.profilePictureInput.onStore = async () => {
             this.storePage();
-            const data2 = await browser2.runtime.sendMessage({
+            const data3 = await browser2.runtime.sendMessage({
               action: "getSettingsData"
             });
-            applyProfilePicture(data2.profile);
+            applyProfilePicture(data3.profile);
           };
           let profilePictureInputContainer = this.profilePictureInput.createFullFileInput();
           profilePictureInputContainer.id = "profile-picture-input-container";
@@ -4849,6 +4887,11 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           );
           let colorPickerHTML = new ColorPicker("20rem");
           this.settingsPage.appendChild(colorPickerHTML.render());
+          let data2 = await browser2.runtime.sendMessage({
+            action: "getSettingsData"
+          });
+          let themeTile = new ThemeTile(data2.appearance.theme);
+          this.settingsPage.appendChild(await themeTile.render());
           this.settingsPage.appendChild(createSectionTitle("Wallpaper"));
           this.settingsPage.appendChild(
             createDescription("Personalize your backdrop with a custom image.")

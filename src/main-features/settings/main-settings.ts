@@ -19,7 +19,7 @@ import { clearAllData } from "../../fixes-utils/utils.js";
 import { loadQuickSettings } from "./quick-settings.js";
 import { createTextInput, createButton } from "../appearance/ui.js";
 import { applyProfilePicture } from "../profile.js";
-import { ColorPicker } from "../appearance/themes.js";
+import { ColorPicker, ThemeTile } from "../appearance/themes.js";
 import type { Quicks } from "../quick-menu/config.js";
 import type { Keybind } from "../keybinds.js";
 
@@ -871,7 +871,7 @@ export class SettingsWindow extends BaseWindow {
     await this.loadPage();
   }
 
-  displaySettingsPage() {
+  async displaySettingsPage() {
     function createMainTitle(text: string) {
       let title = document.createElement("h1");
       title.innerText = text;
@@ -1146,6 +1146,11 @@ export class SettingsWindow extends BaseWindow {
         let colorPickerHTML = new ColorPicker("20rem");
         this.settingsPage.appendChild(colorPickerHTML.render());
 
+        let data = (await browser.runtime.sendMessage({
+          action: "getSettingsData",
+        })) as Settings;
+        let themeTile = new ThemeTile(data.appearance.theme);
+        this.settingsPage.appendChild(await themeTile.render());
         this.settingsPage.appendChild(createSectionTitle("Wallpaper"));
         this.settingsPage.appendChild(
           createDescription("Personalize your backdrop with a custom image.")

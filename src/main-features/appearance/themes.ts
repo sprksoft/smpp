@@ -1,8 +1,14 @@
 import { widgetSystemNotifyThemeChange } from "../../widgets/widgets.js";
-import { browser, isValidHexColor } from "../../common/utils.js";
+import {
+  browser,
+  getExtensionImage,
+  isValidHexColor,
+} from "../../common/utils.js";
 import { colord } from "colord";
 import { createButton } from "./ui.js";
 import { copySvg, doneSvg } from "../../fixes-utils/svgs.js";
+import type { Image } from "../modules/images.js";
+import { BaseWindow } from "../modules/windows.js";
 
 export let currentThemeName: string;
 export let currentTheme: Theme;
@@ -301,3 +307,52 @@ export class ColorPicker {
 
   onChange() {}
 }
+
+export class CustomThemeCreator extends BaseWindow {}
+
+export class ThemeTile {
+  name: string;
+  element = document.createElement("div");
+
+  constructor(name: string) {
+    this.name = name;
+  }
+
+  async getBackgroundImage() {
+    let image = document.createElement("img");
+    image.classList.add("theme-tile-image");
+    let result = (await browser.runtime.sendMessage({
+      action: "getImage",
+      id: this.name,
+    })) as Image;
+
+    if (result.type == "default") {
+      result.imageData = await getExtensionImage(
+        "theme-backgrounds/" + this.name + ".jpg"
+      );
+    }
+    image.src = result.imageData;
+    return image;
+  }
+
+  getBottomContainer() {
+    let bottomContainer = document.createElement("div");
+    return bottomContainer;
+  }
+
+  async render() {
+    this.element.classList.add("theme-tile");
+    this.element.appendChild(await this.getBackgroundImage());
+    let theme = await getTheme(this.name);
+    Object.keys(theme.cssProperties).forEach((key) => {
+      this.element.style.setProperty(
+        `${key}-local`,
+        theme.cssProperties[key] as string
+      );
+    });
+
+    return this.element;
+  }
+}
+
+export class ThemeSelector {}
