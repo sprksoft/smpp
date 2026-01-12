@@ -236,6 +236,20 @@
       "--color-splashtext": "#7ac5ff"
     }
   },
+  "boringwhite": {
+    "displayName": "Boring white",
+    "cssProperties": {
+      "--color-accent": "#9a9996",
+      "--color-text": "#000000",
+      "--color-base00": "#ffffff",
+      "--color-base01": "#f6f5f4",
+      "--color-base02": "#deddda",
+      "--color-base03": "#c0bfbc",
+      "--darken-background": "#ffffff20",
+      "--color-homepage-sidebars-bg": "#ffffff00",
+      "--color-splashtext": "#9a9996"
+    }
+  },
   "tech": {
     "displayName": "Tech",
     "cssProperties": {
