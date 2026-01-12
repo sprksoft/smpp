@@ -2503,11 +2503,30 @@ Is it scaring you off?`,
     onChange() {
     }
   };
-  var ThemeTile = class {
-    name;
+  var Tile = class {
     element = document.createElement("div");
-    constructor(name2) {
+    // Overide in de implementation
+    async onClick() {
+    }
+    async render() {
+      this.element.classList.add("theme-tile");
+      this.element.addEventListener("click", async () => {
+        await this.onClick();
+      });
+      await this.createContent();
+      return this.element;
+    }
+    // Overide this in the implementation
+    async createContent() {
+    }
+  };
+  var ThemeTile = class extends Tile {
+    name;
+    isCustom;
+    constructor(name2, isCustom = false) {
+      super();
       this.name = name2;
+      this.isCustom = isCustom;
     }
     async getBackgroundImage() {
       let image = document.createElement("img");
@@ -2524,12 +2543,32 @@ Is it scaring you off?`,
       image.src = result.imageData;
       return image;
     }
-    getBottomContainer() {
+    getBottomContainer(theme) {
       let bottomContainer = document.createElement("div");
+      bottomContainer.classList.add("theme-tile-bottom");
+      let title = document.createElement("span");
+      title.innerText = theme.displayName;
+      title.classList.add("theme-tile-title");
+      bottomContainer.appendChild(title);
+      let duplicateButton = document.createElement("button");
+      duplicateButton.classList.add("bottom-container-button");
+      duplicateButton.innerHTML = copySvg;
+      duplicateButton.addEventListener("click", async () => {
+        await this.onDuplicate();
+      });
+      bottomContainer.appendChild(duplicateButton);
+      if (this.isCustom) {
+        let editButton = document.createElement("button");
+        editButton.classList.add("bottom-container-button");
+        editButton.innerHTML = editIconSvg;
+        editButton.addEventListener("click", async () => {
+          await this.onEdit();
+        });
+        bottomContainer.appendChild(editButton);
+      }
       return bottomContainer;
     }
-    async render() {
-      this.element.classList.add("theme-tile");
+    async createContent() {
       this.element.appendChild(await this.getBackgroundImage());
       let theme = await getTheme(this.name);
       Object.keys(theme.cssProperties).forEach((key) => {
@@ -2538,7 +2577,21 @@ Is it scaring you off?`,
           theme.cssProperties[key]
         );
       });
-      return this.element;
+      this.element.appendChild(this.getBottomContainer(theme));
+    }
+    async onClick() {
+      await browser2.runtime.sendMessage({
+        action: "setSetting",
+        name: "appearance.theme",
+        data: this.name
+      });
+      setTheme(this.name);
+    }
+    // Overide in de implementation
+    async onEdit() {
+    }
+    // Overide in de implementation
+    async onDuplicate() {
     }
   };
 

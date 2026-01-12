@@ -5,8 +5,7 @@ import {
   isValidHexColor,
 } from "../../common/utils.js";
 import { colord } from "colord";
-import { createButton } from "./ui.js";
-import { copySvg, doneSvg } from "../../fixes-utils/svgs.js";
+import { copySvg, doneSvg, editIconSvg } from "../../fixes-utils/svgs.js";
 import type { Image } from "../modules/images.js";
 import { BaseWindow } from "../modules/windows.js";
 
@@ -310,12 +309,33 @@ export class ColorPicker {
 
 export class CustomThemeCreator extends BaseWindow {}
 
-export class ThemeTile {
-  name: string;
+export class Tile {
   element = document.createElement("div");
 
-  constructor(name: string) {
+  // Overide in de implementation
+  async onClick() {}
+
+  async render() {
+    this.element.classList.add("theme-tile");
+    this.element.addEventListener("click", async () => {
+      await this.onClick();
+    });
+    await this.createContent();
+    return this.element;
+  }
+
+  // Overide this in the implementation
+  async createContent() {}
+}
+
+export class ThemeTile extends Tile {
+  name: string;
+  isCustom: boolean;
+
+  constructor(name: string, isCustom = false) {
+    super();
     this.name = name;
+    this.isCustom = isCustom;
   }
 
   async getBackgroundImage() {
@@ -335,13 +355,37 @@ export class ThemeTile {
     return image;
   }
 
-  getBottomContainer() {
+  getBottomContainer(theme: Theme) {
     let bottomContainer = document.createElement("div");
+    bottomContainer.classList.add("theme-tile-bottom");
+
+    let title = document.createElement("span");
+    title.innerText = theme.displayName;
+    title.classList.add("theme-tile-title");
+    bottomContainer.appendChild(title);
+
+    let duplicateButton = document.createElement("button");
+    duplicateButton.classList.add("bottom-container-button");
+    duplicateButton.innerHTML = copySvg;
+    duplicateButton.addEventListener("click", async () => {
+      await this.onDuplicate();
+    });
+    bottomContainer.appendChild(duplicateButton);
+
+    if (this.isCustom) {
+      let editButton = document.createElement("button");
+      editButton.classList.add("bottom-container-button");
+      editButton.innerHTML = editIconSvg;
+      editButton.addEventListener("click", async () => {
+        await this.onEdit();
+      });
+      bottomContainer.appendChild(editButton);
+    }
+
     return bottomContainer;
   }
 
-  async render() {
-    this.element.classList.add("theme-tile");
+  async createContent() {
     this.element.appendChild(await this.getBackgroundImage());
     let theme = await getTheme(this.name);
     Object.keys(theme.cssProperties).forEach((key) => {
@@ -350,9 +394,95 @@ export class ThemeTile {
         theme.cssProperties[key] as string
       );
     });
+    this.element.appendChild(this.getBottomContainer(theme));
+  }
 
-    return this.element;
+  async onClick() {
+    await browser.runtime.sendMessage({
+      action: "setSetting",
+      name: "appearance.theme",
+      data: this.name,
+    });
+    setTheme(this.name);
+  }
+
+  // Overide in de implementation
+  async onEdit() {}
+
+  // Overide in de implementation
+  async onDuplicate() {}
+}
+
+export class ThemeFolder extends Tile {
+  category: string;
+  constructor(category: string) {
+    super();
+    this.category = category;
+  }
+
+  getBottomContainer() {
+    let bottomContainer = document.createElement("div");
+    bottomContainer.classList.add("theme-tile-bottom");
+
+    let title = document.createElement("span");
+    title.innerText = this.category;
+    title.classList.add("theme-tile-title");
+    bottomContainer.appendChild(title);
+
+    return bottomContainer;
+  }
+
+  async createContent() {
+    let themes = (await browser.runtime.sendMessage({
+      action: "getThemes",
+      categories: [this.category],
+      includeHidden: true,
+    })) as {
+      [key: string]: Theme;
+    } | null;
+
+    if (!themes) return;
+    let theme = themes[0];
+    if (!theme) return;
+
+    Object.keys(theme.cssProperties).forEach((key) => {
+      this.element.style.setProperty(
+        `${key}-local`,
+        theme.cssProperties[key] as string
+      );
+    });
+    this.element.appendChild(this.getBottomContainer());
   }
 }
 
-export class ThemeSelector {}
+type Tiles = Tile[];
+
+export class ThemeSelector {
+  element = document.createElement("div");
+
+  render() {
+    return this.element;
+  }
+
+  renderTiles(tiles: Tiles) {
+    let content = document.createElement("div");
+    tiles.forEach(async (tile) => {
+      content.appendChild(await tile.render());
+    });
+  }
+
+  async openFolder(category: string) {
+    let themes = (await browser.runtime.sendMessage({
+      action: "getThemes",
+      categories: [category],
+      includeHidden: true,
+    })) as {
+      [key: string]: Theme;
+    };
+    if (!themes) return;
+    // TIME TO MAP TIME TO MAP!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    Object.keys(themes).forEach(async (name: string) => {
+      let tile = new ThemeTile(name);
+    });
+  }
+}
