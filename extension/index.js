@@ -3765,7 +3765,6 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       "clearsettings",
       "discord",
       "toggle performance mode",
-      "gcbeta",
       "dizzy",
       "breakdmenu",
       "glass",
