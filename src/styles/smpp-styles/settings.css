@@ -1069,11 +1069,11 @@ input.settings-page-keybinding-input[type="text"]:not(
   cursor: pointer;
 }
 
-.theme-tile > img {
+.theme-tile .image-container {
   border-radius: 1rem !important;
   aspect-ratio: 16/9 !important;
-  object-fit: cover !important; /* This is what you need */
-  object-position: center !important; /* Optional: control positioning */
+  background-size: cover !important;
+  background-position: center !important;
   background-color: var(--background-placeholder-color) !important;
   background: linear-gradient(
     40deg,
@@ -1098,6 +1098,7 @@ input.settings-page-keybinding-input[type="text"]:not(
       )
       100%
   );
+  background-image: var(--background-image-local);
 }
 
 .theme-tile:hover {

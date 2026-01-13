@@ -2720,11 +2720,11 @@ input.settings-page-keybinding-input[type=text]:not(.aaaaaa):read-only.listening
   background-color: var(--color-base02) !important;
   cursor: pointer;
 }
-.theme-tile > img {
+.theme-tile .image-container {
   border-radius: 1rem !important;
   aspect-ratio: 16/9 !important;
-  object-fit: cover !important;
-  object-position: center !important;
+  background-size: cover !important;
+  background-position: center !important;
   background-color: var(--background-placeholder-color) !important;
   background:
     linear-gradient(
@@ -2734,6 +2734,7 @@ input.settings-page-keybinding-input[type=text]:not(.aaaaaa):read-only.listening
       color-mix(in srgb, var(--background-placeholder-color) 70%, var(--hover-border) 30%) 45%,
       color-mix(in srgb, var(--background-placeholder-color) 73%, var(--hover-border) 27%) 55%,
       color-mix(in srgb, var(--background-placeholder-color) 95%, var(--hover-border) 5%) 100%);
+  background-image: var(--background-image-local);
 }
 .theme-tile:hover {
   border-color: var(--hover-border);

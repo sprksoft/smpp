@@ -2587,7 +2587,7 @@ Is it scaring you off?`,
           break;
         }
         case "appearance": {
-          await this.themeSelector.update();
+          this.themeSelector.updateImages();
           console.log("Updating.....");
           this.backgroundImageSelector.id = settings.appearance.theme;
           this.backgroundImageSelector.loadImageData();
@@ -3542,6 +3542,8 @@ Is it scaring you off?`,
       await this.createContent();
       return this.element;
     }
+    async updateImage() {
+    }
     // Overide this in the implementation
     async createContent() {
     }
@@ -3553,21 +3555,6 @@ Is it scaring you off?`,
       super();
       this.name = name2;
       this.isCustom = isCustom;
-    }
-    async getBackgroundImage() {
-      let image = document.createElement("img");
-      image.classList.add("theme-tile-image");
-      let result = await browser.runtime.sendMessage({
-        action: "getImage",
-        id: this.name
-      });
-      if (result.type == "default") {
-        result.imageData = await getExtensionImage(
-          "theme-backgrounds/" + this.name + ".jpg"
-        );
-      }
-      image.src = result.imageData;
-      return image;
     }
     getBottomContainer(theme) {
       let bottomContainer = document.createElement("div");
@@ -3594,8 +3581,12 @@ Is it scaring you off?`,
       }
       return bottomContainer;
     }
+    createImageContainer() {
+      let imageContainer = document.createElement("div");
+      imageContainer.classList.add("image-container");
+      return imageContainer;
+    }
     async createContent() {
-      this.element.appendChild(await this.getBackgroundImage());
       let theme = await getTheme(this.name);
       Object.keys(theme.cssProperties).forEach((key) => {
         this.element.style.setProperty(
@@ -3603,7 +3594,26 @@ Is it scaring you off?`,
           theme.cssProperties[key]
         );
       });
+      this.element.appendChild(this.createImageContainer());
       this.element.appendChild(this.getBottomContainer(theme));
+    }
+    async imageIsOutdated() {
+    }
+    async updateImage() {
+      let data2 = await browser.runtime.sendMessage({
+        action: "getSettingsData"
+      });
+      if (this.name == data2.appearance.theme) {
+        let imageURL = await getImageURL(this.name, async () => {
+          return await getExtensionImage(
+            "theme-backgrounds/" + this.name + ".jpg"
+          );
+        });
+        this.element.style.setProperty(
+          "--background-image-local",
+          `url(${await imageURL.url})`
+        );
+      }
     }
     async onClick() {
       await browser.runtime.sendMessage({
@@ -3663,7 +3673,6 @@ Is it scaring you off?`,
     content = document.createElement("div");
     topContainer = document.createElement("div");
     currentCategory = "all";
-    // Store current tiles to properly clean them up
     currentTiles = [];
     createTopContainer() {
       const newTopContainer = document.createElement("div");
@@ -3687,10 +3696,15 @@ Is it scaring you off?`,
       this.element.appendChild(this.topContainer);
       this.element.appendChild(this.content);
       this.content.classList.add("theme-tiles");
+      this.update();
       return this.element;
     }
+    updateImages() {
+      this.currentTiles.forEach(async (tile) => {
+        await tile.updateImage();
+      });
+    }
     async update() {
-      this.currentTiles = [];
       this.topContainer.remove();
       this.element.innerHTML = "";
       let newContent = this.createContentContainer();
@@ -3704,12 +3718,12 @@ Is it scaring you off?`,
       } else {
         await this.renderFolderContent();
       }
+      this.updateImages();
     }
     async renderTiles(tiles) {
       const renderedElements = await Promise.all(
         tiles.map((tile) => tile.render())
       );
-      this.currentTiles = tiles;
       const fragment = document.createDocumentFragment();
       renderedElements.forEach((element) => {
         fragment.appendChild(element);
@@ -3734,6 +3748,7 @@ Is it scaring you off?`,
         };
         return tile;
       });
+      this.currentTiles = tiles;
       await this.renderTiles(tiles);
     }
     async renderFolderContent() {
@@ -3747,6 +3762,7 @@ Is it scaring you off?`,
         let tile = new ThemeTile2(name2);
         return tile;
       });
+      this.currentTiles = tiles;
       await this.renderTiles(tiles);
     }
     async changeCategory(category) {

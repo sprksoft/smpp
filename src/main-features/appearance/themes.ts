@@ -6,7 +6,7 @@ import {
 } from "../../common/utils.js";
 import { colord } from "colord";
 import { copySvg, doneSvg, editIconSvg } from "../../fixes-utils/svgs.js";
-import type { Image } from "../modules/images.js";
+import { getImageURL, type Image } from "../modules/images.js";
 import { BaseWindow } from "../modules/windows.js";
 import { settingsWindow, type Settings } from "../settings/main-settings.js";
 import { loadQuickSettings } from "../settings/quick-settings.js";
@@ -327,6 +327,8 @@ export class Tile {
     return this.element;
   }
 
+  async updateImage() {}
+
   // Overide this in the implementation
   async createContent() {}
 }
@@ -339,23 +341,6 @@ export class ThemeTile extends Tile {
     super();
     this.name = name;
     this.isCustom = isCustom;
-  }
-
-  async getBackgroundImage() {
-    let image = document.createElement("img");
-    image.classList.add("theme-tile-image");
-    let result = (await browser.runtime.sendMessage({
-      action: "getImage",
-      id: this.name,
-    })) as Image;
-
-    if (result.type == "default") {
-      result.imageData = await getExtensionImage(
-        "theme-backgrounds/" + this.name + ".jpg"
-      );
-    }
-    image.src = result.imageData;
-    return image;
   }
 
   getBottomContainer(theme: Theme) {
@@ -388,8 +373,13 @@ export class ThemeTile extends Tile {
     return bottomContainer;
   }
 
+  createImageContainer() {
+    let imageContainer = document.createElement("div");
+    imageContainer.classList.add("image-container");
+    return imageContainer;
+  }
+
   async createContent() {
-    this.element.appendChild(await this.getBackgroundImage());
     let theme = await getTheme(this.name);
     Object.keys(theme.cssProperties).forEach((key) => {
       this.element.style.setProperty(
@@ -397,7 +387,28 @@ export class ThemeTile extends Tile {
         theme.cssProperties[key] as string
       );
     });
+    this.element.appendChild(this.createImageContainer());
     this.element.appendChild(this.getBottomContainer(theme));
+  }
+
+  async imageIsOutdated() {}
+
+  async updateImage() {
+    let data = (await browser.runtime.sendMessage({
+      action: "getSettingsData",
+    })) as Settings;
+    if (this.name == data.appearance.theme) {
+      let imageURL = await getImageURL(this.name, async () => {
+        return await getExtensionImage(
+          "theme-backgrounds/" + this.name + ".jpg"
+        );
+      });
+
+      this.element.style.setProperty(
+        "--background-image-local",
+        `url(${await imageURL.url})`
+      );
+    }
   }
 
   async onClick() {
@@ -470,9 +481,7 @@ export class ThemeSelector {
   content = document.createElement("div");
   topContainer = document.createElement("div");
   currentCategory: string = "all";
-
-  // Store current tiles to properly clean them up
-  private currentTiles: Tiles = [];
+  currentTiles: Tiles = [];
 
   createTopContainer() {
     const newTopContainer = document.createElement("div");
@@ -501,13 +510,18 @@ export class ThemeSelector {
     this.element.appendChild(this.topContainer);
     this.element.appendChild(this.content);
     this.content.classList.add("theme-tiles");
-
+    this.update();
     return this.element;
+  }
+
+  updateImages() {
+    this.currentTiles.forEach(async (tile: Tile) => {
+      await tile.updateImage();
+    });
   }
 
   async update() {
     // TO DO: make this smooth
-    this.currentTiles = [];
 
     this.topContainer.remove();
 
@@ -528,14 +542,13 @@ export class ThemeSelector {
     } else {
       await this.renderFolderContent();
     }
+    this.updateImages();
   }
 
   async renderTiles(tiles: Tiles) {
     const renderedElements = await Promise.all(
       tiles.map((tile) => tile.render())
     );
-
-    this.currentTiles = tiles;
 
     const fragment = document.createDocumentFragment();
     renderedElements.forEach((element) => {
@@ -567,6 +580,7 @@ export class ThemeSelector {
       };
       return tile;
     }) as Tiles;
+    this.currentTiles = tiles;
 
     await this.renderTiles(tiles);
   }
@@ -586,6 +600,7 @@ export class ThemeSelector {
       let tile = new ThemeTile(name);
       return tile;
     }) as Tiles;
+    this.currentTiles = tiles;
 
     await this.renderTiles(tiles);
   }

@@ -358,7 +358,7 @@ export class SettingsWindow extends BaseWindow {
 
       case "appearance": {
         // Theme
-        await this.themeSelector.update();
+        this.themeSelector.updateImages();
         console.log("Updating.....");
 
         // Background
