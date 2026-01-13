@@ -19,7 +19,7 @@ import { clearAllData } from "../../fixes-utils/utils.js";
 import { loadQuickSettings } from "./quick-settings.js";
 import { createTextInput, createButton } from "../appearance/ui.js";
 import { applyProfilePicture } from "../profile.js";
-import { ColorPicker, ThemeTile } from "../appearance/themes.js";
+import { ColorPicker, ThemeSelector, ThemeTile } from "../appearance/themes.js";
 import type { Quicks } from "../quick-menu/config.js";
 import type { Keybind } from "../keybinds.js";
 
@@ -89,6 +89,7 @@ export class SettingsWindow extends BaseWindow {
   currentPage = "appearance";
   settingsPage: HTMLDivElement = document.createElement("div");
   backgroundImageSelector = new ImageSelector("backgroundImage");
+  themeSelector = new ThemeSelector();
   profilePictureInput = new ImageSelector("profilePicture");
 
   constructor() {
@@ -305,6 +306,7 @@ export class SettingsWindow extends BaseWindow {
   }
 
   async loadPage() {
+    console.log("loading page...");
     const settings: Settings = await browser.runtime.sendMessage({
       action: "getSettingsData",
     });
@@ -356,16 +358,8 @@ export class SettingsWindow extends BaseWindow {
 
       case "appearance": {
         // Theme
-        document
-          .querySelectorAll(".settings-page-theme-card input[type='radio']")
-          .forEach((radio) => {
-            const input = radio as HTMLInputElement;
-            if (input.value === settings.appearance.theme) {
-              input.checked = true;
-            } else {
-              input.checked = false;
-            }
-          });
+        await this.themeSelector.update();
+        console.log("Updating.....");
 
         // Background
         this.backgroundImageSelector.id = settings.appearance.theme;
@@ -1143,14 +1137,7 @@ export class SettingsWindow extends BaseWindow {
           )
         );
 
-        let colorPickerHTML = new ColorPicker("20rem");
-        this.settingsPage.appendChild(colorPickerHTML.render());
-
-        let data = (await browser.runtime.sendMessage({
-          action: "getSettingsData",
-        })) as Settings;
-        let themeTile = new ThemeTile(data.appearance.theme);
-        this.settingsPage.appendChild(await themeTile.render());
+        this.settingsPage.appendChild(this.themeSelector.render());
         this.settingsPage.appendChild(createSectionTitle("Wallpaper"));
         this.settingsPage.appendChild(
           createDescription("Personalize your backdrop with a custom image.")

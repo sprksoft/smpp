@@ -386,9 +386,9 @@ Is it scaring you off?`,
 
   // src/common/utils.ts
   var DEBUG = false;
-  var browser2;
-  if (browser2 == void 0) {
-    browser2 = chrome;
+  var browser;
+  if (browser == void 0) {
+    browser = chrome;
   }
   function getByPath(object, path) {
     if (!path) {
@@ -406,10 +406,10 @@ Is it scaring you off?`,
   function setByPath(object, path, value) {
     let ob = object;
     const pathSplit = path.split(".");
-    for (let i2 = 0; i2 < pathSplit.length - 1; i2++) {
-      ob = ob[pathSplit[i2]];
+    for (let i = 0; i < pathSplit.length - 1; i++) {
+      ob = ob[pathSplit[i]];
       if (ob === void 0) {
-        throw `setByPath: ${pathSplit[i2]} did not exist in path ${path}`;
+        throw `setByPath: ${pathSplit[i]} did not exist in path ${path}`;
       }
     }
     ob[pathSplit[pathSplit.length - 1]] = value;
@@ -430,25 +430,22 @@ Is it scaring you off?`,
   }
   function openURL2(url, new_window = false) {
     if (new_window) {
-      let a2 = document.createElement("a");
-      a2.href = url;
-      a2.rel = "noopener noreferrer";
-      a2.target = "_blank";
-      a2.click();
+      let a = document.createElement("a");
+      a.href = url;
+      a.rel = "noopener noreferrer";
+      a.target = "_blank";
+      a.click();
       return;
     }
     window.location.href = url;
   }
   function getExtensionImage(name2) {
-    return browser2.runtime.getURL(`media/${name2}`);
+    return browser.runtime.getURL(`media/${name2}`);
   }
   function sendDebug(...messages) {
     if (DEBUG) {
       console.log(...messages);
     }
-  }
-  function isValidHexColor(color) {
-    return /^#[0-9a-f]{3}(?:[0-9a-f]{3})?(?:[0-9a-f]{2})?$/i.test(color);
   }
   function getCurrentDate() {
     return (/* @__PURE__ */ new Date()).toISOString().split("T")[0];
@@ -491,8 +488,8 @@ Is it scaring you off?`,
       sendDebug("Stored plannerUrl in cookies with 30 day expiration.");
       userId = plannerUrl.split("/")[4];
       sendDebug("Extracted userId from plannerUrl:", userId);
-    } catch (e2) {
-      sendDebug("Failed to get plannerUrl from DOM. Error:", e2.message);
+    } catch (e) {
+      sendDebug("Failed to get plannerUrl from DOM. Error:", e.message);
       sendDebug("Trying to get plannerUrl from cookies...");
       const cookies = document.cookie.split(";");
       const plannerUrlCookie = cookies.find(
@@ -620,11 +617,11 @@ Is it scaring you off?`,
       this.element.classList.remove("hidden");
       const isKeyboardEvent = triggerEvent && (typeof KeyboardEvent !== "undefined" ? triggerEvent instanceof KeyboardEvent : String(triggerEvent.type).startsWith("key"));
       const openEventTarget = isKeyboardEvent ? null : triggerEvent?.target ?? null;
-      this._outsideClickHandler = (e2) => {
-        if (openEventTarget && e2.target instanceof Node && (e2.target === openEventTarget || openEventTarget instanceof Node && openEventTarget.contains(e2.target))) {
+      this._outsideClickHandler = (e) => {
+        if (openEventTarget && e.target instanceof Node && (e.target === openEventTarget || openEventTarget instanceof Node && openEventTarget.contains(e.target))) {
           return;
         }
-        if (e2.target instanceof Node && !this.element.contains(e2.target)) {
+        if (e.target instanceof Node && !this.element.contains(e.target)) {
           this.hide();
         }
       };
@@ -632,8 +629,8 @@ Is it scaring you off?`,
         capture: true
       });
       if (!this._keydownHandler) {
-        this._keydownHandler = (e2) => {
-          if (e2.key === "Escape") {
+        this._keydownHandler = (e) => {
+          if (e.key === "Escape") {
             this.hide();
           }
         };
@@ -694,9 +691,9 @@ Is it scaring you off?`,
     let label = document.createElement("span");
     label.innerText = text;
     let button = createButton(id);
-    container.addEventListener("keydown", (e2) => {
-      if (e2.key === " " || e2.key === "Enter") {
-        e2.preventDefault();
+    container.addEventListener("keydown", (e) => {
+      if (e.key === " " || e.key === "Enter") {
+        e.preventDefault();
         button.click();
         container.focus();
       }
@@ -755,8 +752,8 @@ Is it scaring you off?`,
       this.fileInputButton.classList.add("smpp-file-input-button");
       this.fileInputButton.setAttribute("aria-label", "Choose image file");
       this.fileInputButton.innerHTML = fileInputIconSvg;
-      this.fileInputButton.addEventListener("click", (e2) => {
-        e2.preventDefault();
+      this.fileInputButton.addEventListener("click", (e) => {
+        e.preventDefault();
         this.fileInput.click();
       });
       fileInputContainer.appendChild(this.fileInput);
@@ -805,8 +802,8 @@ Is it scaring you off?`,
         }
         await this.storeImage();
       });
-      this.clearButton.addEventListener("click", async (e2) => {
-        e2.preventDefault();
+      this.clearButton.addEventListener("click", async (e) => {
+        e.preventDefault();
         this.linkInput.value = "";
         this.clearButton.classList.remove("active");
         this.fileInputButton.classList.remove("active");
@@ -814,7 +811,7 @@ Is it scaring you off?`,
       });
     }
     async storeImage() {
-      let data2 = await browser2.runtime.sendMessage({
+      let data2 = await browser.runtime.sendMessage({
         action: "getImage",
         id: this.name
       });
@@ -843,7 +840,7 @@ Is it scaring you off?`,
           }
         }
       }
-      await browser2.runtime.sendMessage({
+      await browser.runtime.sendMessage({
         action: "setImage",
         id: this.id,
         data: data2
@@ -852,7 +849,7 @@ Is it scaring you off?`,
       this.onStore();
     }
     async loadImageData() {
-      let data2 = await browser2.runtime.sendMessage({
+      let data2 = await browser.runtime.sendMessage({
         action: "getImage",
         id: this.id
       });
@@ -873,7 +870,7 @@ Is it scaring you off?`,
   async function getImageURL(id, onDefault) {
     let image;
     try {
-      image = await browser2.runtime.sendMessage({ action: "getImage", id });
+      image = await browser.runtime.sendMessage({ action: "getImage", id });
     } catch (err) {
       console.warn("[getImageURL] Failed to get image from background:", err);
       return { url: onDefault(), type: null };
@@ -915,8 +912,8 @@ Is it scaring you off?`,
           return;
         img.src = url;
         img.classList.add("personal-profile-picture");
-      } catch (e2) {
-        console.error("Error processing img:", e2, img);
+      } catch (e) {
+        console.error("Error processing img:", e, img);
       }
     }
     const existingImgs = Array.from(document.getElementsByTagName("img"));
@@ -934,8 +931,8 @@ Is it scaring you off?`,
             if (imgs && imgs.length) {
               for (const img of imgs) processImg(img);
             }
-          } catch (e2) {
-            console.error("Error querying imgs inside node:", e2, htmlNode);
+          } catch (e) {
+            console.error("Error querying imgs inside node:", e, htmlNode);
           }
         }
         if (mutation.type === "attributes" && mutation.target instanceof HTMLImageElement) {
@@ -998,7 +995,7 @@ Is it scaring you off?`,
   var active_dmenu = null;
   var dmenuConfig = null;
   async function reloadDMenuConfig() {
-    dmenuConfig = await browser2.runtime.sendMessage({
+    dmenuConfig = await browser.runtime.sendMessage({
       action: "getSetting",
       name: "other.dmenu"
     });
@@ -1042,19 +1039,19 @@ Is it scaring you off?`,
       }
       this.close();
     }
-    #onKeydown(e2) {
-      if (e2.key == "Enter") {
+    #onKeydown(e) {
+      if (e.key == "Enter") {
         this.#accept();
-      } else if (e2.key == "Escape") {
+      } else if (e.key == "Escape") {
         this.close();
-      } else if (e2.key == "Tab" && e2.shiftKey || e2.key == "ArrowUp") {
+      } else if (e.key == "Tab" && e.shiftKey || e.key == "ArrowUp") {
         this.#selPrev();
-      } else if (e2.key == "Tab" && !e2.shiftKey || e2.key == "ArrowDown") {
+      } else if (e.key == "Tab" && !e.shiftKey || e.key == "ArrowDown") {
         this.#selNext();
       } else {
         return;
       }
-      e2.preventDefault();
+      e.preventDefault();
     }
     #oninput() {
       this.#sort();
@@ -1099,14 +1096,14 @@ Is it scaring you off?`,
           node.getElementsByClassName("dmenu-score")[0].innerText = score;
         }
       }
-      let sortedItems = items.sort(function(a2, b2) {
-        if (a2.score < b2.score) return 1;
-        if (a2.score > b2.score) return -1;
+      let sortedItems = items.sort(function(a, b) {
+        if (a.score < b.score) return 1;
+        if (a.score > b.score) return -1;
         return 0;
       });
-      for (let i2 = 0; i2 < sortedItems.length; i2++) {
-        let item = sortedItems[i2];
-        if (i2 == 0) {
+      for (let i = 0; i < sortedItems.length; i++) {
+        let item = sortedItems[i];
+        if (i == 0) {
           item.htmlNode.classList.add("dmenu-selected");
         } else {
           item.htmlNode.classList.remove("dmenu-selected");
@@ -1119,22 +1116,22 @@ Is it scaring you off?`,
       match = match.toLowerCase();
       let score = 0;
       let mi = 0;
-      let i2 = 0;
+      let i = 0;
       let streak = 0;
       let streakStartI = 0;
       while (true) {
-        if (i2 >= str.length || mi >= match.length) {
+        if (i >= str.length || mi >= match.length) {
           break;
         }
-        if (str[i2] == match[mi]) {
+        if (str[i] == match[mi]) {
           score += (streak + 1) * (streak + 1) * ((str.length - streakStartI) / str.length);
           mi += 1;
           streak += 1;
         } else {
-          streakStartI = i2;
+          streakStartI = i;
           streak = 0;
         }
-        i2++;
+        i++;
       }
       if (mi < match.length) {
         return 0;
@@ -1165,7 +1162,7 @@ Is it scaring you off?`,
         row.getElementsByClassName("dmenu-score")[0].innerText = "0";
       }
       let klass = this;
-      row.addEventListener("click", function(e2) {
+      row.addEventListener("click", function(e) {
         klass.#accept(row);
       });
       parent.appendChild(row);
@@ -1188,10 +1185,10 @@ Is it scaring you off?`,
       this.inputEl.type = "text";
       this.inputEl.classList.add("dmenu-input");
       let klass = this;
-      this.inputEl.addEventListener("keydown", (e2) => {
-        klass.#onKeydown(e2);
+      this.inputEl.addEventListener("keydown", (e) => {
+        klass.#onKeydown(e);
       });
-      this.inputEl.addEventListener("input", (e2) => {
+      this.inputEl.addEventListener("input", (e) => {
         klass.#oninput();
       });
       top.appendChild(this.inputEl);
@@ -1228,13 +1225,13 @@ Is it scaring you off?`,
     });
     return quickMenuButton;
   }
-  document.addEventListener("click", function(e2) {
+  document.addEventListener("click", function(e) {
     if (active_dmenu == null || !active_dmenu.isOpen()) {
       return;
     }
-    if (!active_dmenu.menuEl.contains(e2.target) && e2.target != active_dmenu.openerEl) {
+    if (!active_dmenu.menuEl.contains(e.target) && e.target != active_dmenu.openerEl) {
       active_dmenu.close();
-      e2.preventDefault();
+      e.preventDefault();
     }
   });
 
@@ -1254,7 +1251,7 @@ Is it scaring you off?`,
     return options;
   }
   async function getDMenuOptionsForSettings(toplevel) {
-    const template = await browser2.runtime.sendMessage({
+    const template = await browser.runtime.sendMessage({
       action: "getSettingsTemplate"
     });
     let options = [];
@@ -1281,7 +1278,7 @@ Is it scaring you off?`,
     return optName;
   }
   async function setSettingByPath(path, value) {
-    await browser2.runtime.sendMessage({
+    await browser.runtime.sendMessage({
       action: "setSetting",
       name: path,
       data: value
@@ -1289,12 +1286,12 @@ Is it scaring you off?`,
     await apply();
   }
   async function dmenuEditConfig(path) {
-    const templates = await browser2.runtime.sendMessage({
+    const templates = await browser.runtime.sendMessage({
       action: "getSettingsTemplate"
     });
     let configPath = getFullOptPath(templates, path);
     const template = getByPath(templates, configPath);
-    let optionValue = await browser2.runtime.sendMessage({
+    let optionValue = await browser.runtime.sendMessage({
       action: "getSetting",
       name: configPath
     });
@@ -1396,17 +1393,17 @@ Is it scaring you off?`,
       this.#aboutToDel = false;
     }
     createWidgetErrorContent(name2) {
-      let p2 = document.createElement("p");
-      p2.classList.add("smpp-error-widget");
-      p2.innerHTML = "<span>Probleem bij het laden van de widget: </span><code class='widgetName'></code><button>Reset widget</button>";
-      p2.querySelector(".widgetName").innerText = name2;
-      p2.querySelector("button").addEventListener("click", async () => {
+      let p = document.createElement("p");
+      p.classList.add("smpp-error-widget");
+      p.innerHTML = "<span>Probleem bij het laden van de widget: </span><code class='widgetName'></code><button>Reset widget</button>";
+      p.querySelector(".widgetName").innerText = name2;
+      p.querySelector("button").addEventListener("click", async () => {
         this.clearWidgetSettings();
       });
-      return p2;
+      return p;
     }
     async clearWidgetSettings() {
-      await browser2.runtime.sendMessage({
+      await browser.runtime.sendMessage({
         action: "setWidgetData",
         widget: this.constructor.name,
         data: this.defaultSettings()
@@ -1418,8 +1415,8 @@ Is it scaring you off?`,
     }
     #createWidgetDiv() {
       let widgetDiv = document.createElement("div");
-      widgetDiv.addEventListener("mousedown", (e2) => {
-        this.startDragging(e2.clientX, e2.clientY);
+      widgetDiv.addEventListener("mousedown", (e) => {
+        this.startDragging(e.clientX, e.clientY);
       });
       widgetDiv.classList.add("smpp-widget");
       return widgetDiv;
@@ -1451,9 +1448,9 @@ Is it scaring you off?`,
           newContent = await this.createContent();
           this.isActive = true;
         }
-      } catch (e2) {
+      } catch (e) {
         console.error("Failed to create widget content");
-        console.error(e2);
+        console.error(e);
         newContent = this.createWidgetErrorContent(this.name);
       }
       if (!newContent) {
@@ -1492,14 +1489,14 @@ Is it scaring you off?`,
         this.element.classList.remove("smpp-widget-delete");
       }
     }
-    dragMove(x2, y2) {
+    dragMove(x, y) {
       if (!curDragInfo || curDragInfo.widget != this) {
         return;
       }
       let el = this.element;
       let offset = curDragInfo.offset;
-      el.style.left = x2 - offset.x + "px";
-      el.style.top = y2 - offset.y + "px";
+      el.style.left = x - offset.x + "px";
+      el.style.top = y - offset.y + "px";
     }
     async drop(cancel = false) {
       if (!curDragInfo || curDragInfo.widget != this) {
@@ -1583,7 +1580,7 @@ Is it scaring you off?`,
       if (this.#settings !== void 0) {
         return;
       }
-      const settings = await browser2.runtime.sendMessage({
+      const settings = await browser.runtime.sendMessage({
         action: "getWidgetData",
         widget: this.constructor.name
       });
@@ -1593,7 +1590,7 @@ Is it scaring you off?`,
     async setSetting(path, value) {
       await this.#loadSettings();
       setByPath(this.#settings, path, value);
-      await browser2.runtime.sendMessage({
+      await browser.runtime.sendMessage({
         action: "setWidgetData",
         widget: this.constructor.name,
         data: this.#settings
@@ -1689,17 +1686,17 @@ Is it scaring you off?`,
       );
     }
   }
-  function onPannelHover(pannel, e2) {
+  function onPannelHover(pannel, e) {
     if (!widgetEditMode || curDragInfo == null || hoveringBag) {
       return;
     }
-    const bounds = e2.target.getBoundingClientRect();
-    if (e2.clientX < bounds.left + PANNELIP_MARGIN_PX) {
-      targetInsertionPoint(e2.target.previousElementSibling);
+    const bounds = e.target.getBoundingClientRect();
+    if (e.clientX < bounds.left + PANNELIP_MARGIN_PX) {
+      targetInsertionPoint(e.target.previousElementSibling);
       return;
     }
-    if (e2.clientX > bounds.right - PANNELIP_MARGIN_PX) {
-      targetInsertionPoint(e2.target.nextElementSibling);
+    if (e.clientX > bounds.right - PANNELIP_MARGIN_PX) {
+      targetInsertionPoint(e.target.nextElementSibling);
       return;
     }
     let target = pannel.firstChild;
@@ -1709,24 +1706,24 @@ Is it scaring you off?`,
       }
       const bounds2 = child.getBoundingClientRect();
       let centerY = bounds2.top + (bounds2.bottom - bounds2.top) * 0.5;
-      if (e2.clientY > centerY) {
+      if (e.clientY > centerY) {
         target = child.nextElementSibling;
       }
     }
     targetInsertionPoint(target);
   }
-  function onPannelInsertionPointHover(e2) {
+  function onPannelInsertionPointHover(e) {
     if (!widgetEditMode || curDragInfo == null || hoveringBag) {
       return;
     }
-    targetInsertionPoint(e2.target);
+    targetInsertionPoint(e.target);
   }
-  function onCenterHover(div, e2) {
+  function onCenterHover(div, e) {
     if (!widgetEditMode || curDragInfo == null || hoveringBag) {
       return;
     }
     const bounds = div.getBoundingClientRect();
-    if (e2.clientX < (bounds.right - bounds.left) / 2 + bounds.left) {
+    if (e.clientX < (bounds.right - bounds.left) / 2 + bounds.left) {
       targetInsertionPoint(div.previousElementSibling);
     } else {
       targetInsertionPoint(div.nextElementSibling);
@@ -1743,7 +1740,7 @@ Is it scaring you off?`,
   }
   async function createPannelHTML(pannel) {
     let pannelDiv = document.createElement("div");
-    pannelDiv.addEventListener("mousemove", (e2) => onPannelHover(pannelDiv, e2));
+    pannelDiv.addEventListener("mousemove", (e) => onPannelHover(pannelDiv, e));
     pannelDiv.classList.add("smpp-widget-pannel");
     pannelDiv.appendChild(createInsertionPointHTML());
     for (let widgetName of pannel.widgets) {
@@ -1771,7 +1768,7 @@ Is it scaring you off?`,
     }
     let newsDiv = document.createElement("div");
     newsDiv.classList.add("smpp-news-container");
-    newsDiv.addEventListener("mousemove", (e2) => onCenterHover(newsDiv, e2));
+    newsDiv.addEventListener("mousemove", (e) => onCenterHover(newsDiv, e));
     newsContent.id = "smpp-news-content";
     newsContent.className = "";
     if (news) {
@@ -1807,12 +1804,12 @@ Is it scaring you off?`,
     const div = document.createElement("div");
     div.classList.add("smpp-news-editor");
     const button = createButtonWithLabel("smpp-widget-news-toggle", "Show News");
-    button.addEventListener("change", async (e2) => {
-      updateNews(e2.target.checked);
-      await browser2.runtime.sendMessage({
+    button.addEventListener("change", async (e) => {
+      updateNews(e.target.checked);
+      await browser.runtime.sendMessage({
         action: "setSetting",
         name: "appearance.news",
-        data: e2.target.checked
+        data: e.target.checked
       });
     });
     div.appendChild(button);
@@ -1834,7 +1831,7 @@ Is it scaring you off?`,
       console.error(`"centercontainer" doesn't exist`);
       return false;
     }
-    let widgetData = await browser2.runtime.sendMessage({
+    let widgetData = await browser.runtime.sendMessage({
       action: "getWidgetLayout"
     });
     console.log("Applying widgets with data: \n", widgetData);
@@ -1901,7 +1898,7 @@ Is it scaring you off?`,
         widgetData.rightPannels.push(pannelData);
       }
     }
-    await browser2.runtime.sendMessage({
+    await browser.runtime.sendMessage({
       action: "setWidgetLayout",
       layout: widgetData
     });
@@ -2101,16 +2098,16 @@ Is it scaring you off?`,
     }
     widgetEditModeInit = true;
     initNewsEditMode();
-    document.addEventListener("mouseup", async (e2) => {
+    document.addEventListener("mouseup", async (e) => {
       if (curDragInfo) {
         await curDragInfo.widget.drop(false);
       }
     });
-    document.addEventListener("mousemove", (e2) => {
+    document.addEventListener("mousemove", (e) => {
       if (curDragInfo) {
-        curDragInfo.widget.dragMove(e2.clientX, e2.clientY);
+        curDragInfo.widget.dragMove(e.clientX, e.clientY);
         let handleBounds = widgetBagHandle.getBoundingClientRect();
-        if (e2.clientY < handleBounds.bottom && e2.clientX > handleBounds.left && e2.clientX < handleBounds.right) {
+        if (e.clientY < handleBounds.bottom && e.clientX > handleBounds.left && e.clientX < handleBounds.right) {
           bagHoverEnter();
         } else if (hoveringBag) {
           bagHoverExit();
@@ -2131,169 +2128,1383 @@ Is it scaring you off?`,
     return btn;
   }
 
-  // node_modules/colord/index.mjs
-  var r = { grad: 0.9, turn: 360, rad: 360 / (2 * Math.PI) };
-  var t = function(r2) {
-    return "string" == typeof r2 ? r2.length > 0 : "number" == typeof r2;
-  };
-  var n = function(r2, t2, n2) {
-    return void 0 === t2 && (t2 = 0), void 0 === n2 && (n2 = Math.pow(10, t2)), Math.round(n2 * r2) / n2 + 0;
-  };
-  var e = function(r2, t2, n2) {
-    return void 0 === t2 && (t2 = 0), void 0 === n2 && (n2 = 1), r2 > n2 ? n2 : r2 > t2 ? r2 : t2;
-  };
-  var u = function(r2) {
-    return (r2 = isFinite(r2) ? r2 % 360 : 0) > 0 ? r2 : r2 + 360;
-  };
-  var a = function(r2) {
-    return { r: e(r2.r, 0, 255), g: e(r2.g, 0, 255), b: e(r2.b, 0, 255), a: e(r2.a) };
-  };
-  var o = function(r2) {
-    return { r: n(r2.r), g: n(r2.g), b: n(r2.b), a: n(r2.a, 3) };
-  };
-  var i = /^#([0-9a-f]{3,8})$/i;
-  var s = function(r2) {
-    var t2 = r2.toString(16);
-    return t2.length < 2 ? "0" + t2 : t2;
-  };
-  var h = function(r2) {
-    var t2 = r2.r, n2 = r2.g, e2 = r2.b, u2 = r2.a, a2 = Math.max(t2, n2, e2), o2 = a2 - Math.min(t2, n2, e2), i2 = o2 ? a2 === t2 ? (n2 - e2) / o2 : a2 === n2 ? 2 + (e2 - t2) / o2 : 4 + (t2 - n2) / o2 : 0;
-    return { h: 60 * (i2 < 0 ? i2 + 6 : i2), s: a2 ? o2 / a2 * 100 : 0, v: a2 / 255 * 100, a: u2 };
-  };
-  var b = function(r2) {
-    var t2 = r2.h, n2 = r2.s, e2 = r2.v, u2 = r2.a;
-    t2 = t2 / 360 * 6, n2 /= 100, e2 /= 100;
-    var a2 = Math.floor(t2), o2 = e2 * (1 - n2), i2 = e2 * (1 - (t2 - a2) * n2), s2 = e2 * (1 - (1 - t2 + a2) * n2), h2 = a2 % 6;
-    return { r: 255 * [e2, i2, o2, o2, s2, e2][h2], g: 255 * [s2, e2, e2, i2, o2, o2][h2], b: 255 * [o2, o2, s2, e2, e2, i2][h2], a: u2 };
-  };
-  var g = function(r2) {
-    return { h: u(r2.h), s: e(r2.s, 0, 100), l: e(r2.l, 0, 100), a: e(r2.a) };
-  };
-  var d = function(r2) {
-    return { h: n(r2.h), s: n(r2.s), l: n(r2.l), a: n(r2.a, 3) };
-  };
-  var f = function(r2) {
-    return b((n2 = (t2 = r2).s, { h: t2.h, s: (n2 *= ((e2 = t2.l) < 50 ? e2 : 100 - e2) / 100) > 0 ? 2 * n2 / (e2 + n2) * 100 : 0, v: e2 + n2, a: t2.a }));
-    var t2, n2, e2;
-  };
-  var c = function(r2) {
-    return { h: (t2 = h(r2)).h, s: (u2 = (200 - (n2 = t2.s)) * (e2 = t2.v) / 100) > 0 && u2 < 200 ? n2 * e2 / 100 / (u2 <= 100 ? u2 : 200 - u2) * 100 : 0, l: u2 / 2, a: t2.a };
-    var t2, n2, e2, u2;
-  };
-  var l = /^hsla?\(\s*([+-]?\d*\.?\d+)(deg|rad|grad|turn)?\s*,\s*([+-]?\d*\.?\d+)%\s*,\s*([+-]?\d*\.?\d+)%\s*(?:,\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
-  var p = /^hsla?\(\s*([+-]?\d*\.?\d+)(deg|rad|grad|turn)?\s+([+-]?\d*\.?\d+)%\s+([+-]?\d*\.?\d+)%\s*(?:\/\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
-  var v = /^rgba?\(\s*([+-]?\d*\.?\d+)(%)?\s*,\s*([+-]?\d*\.?\d+)(%)?\s*,\s*([+-]?\d*\.?\d+)(%)?\s*(?:,\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
-  var m = /^rgba?\(\s*([+-]?\d*\.?\d+)(%)?\s+([+-]?\d*\.?\d+)(%)?\s+([+-]?\d*\.?\d+)(%)?\s*(?:\/\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
-  var y = { string: [[function(r2) {
-    var t2 = i.exec(r2);
-    return t2 ? (r2 = t2[1]).length <= 4 ? { r: parseInt(r2[0] + r2[0], 16), g: parseInt(r2[1] + r2[1], 16), b: parseInt(r2[2] + r2[2], 16), a: 4 === r2.length ? n(parseInt(r2[3] + r2[3], 16) / 255, 2) : 1 } : 6 === r2.length || 8 === r2.length ? { r: parseInt(r2.substr(0, 2), 16), g: parseInt(r2.substr(2, 2), 16), b: parseInt(r2.substr(4, 2), 16), a: 8 === r2.length ? n(parseInt(r2.substr(6, 2), 16) / 255, 2) : 1 } : null : null;
-  }, "hex"], [function(r2) {
-    var t2 = v.exec(r2) || m.exec(r2);
-    return t2 ? t2[2] !== t2[4] || t2[4] !== t2[6] ? null : a({ r: Number(t2[1]) / (t2[2] ? 100 / 255 : 1), g: Number(t2[3]) / (t2[4] ? 100 / 255 : 1), b: Number(t2[5]) / (t2[6] ? 100 / 255 : 1), a: void 0 === t2[7] ? 1 : Number(t2[7]) / (t2[8] ? 100 : 1) }) : null;
-  }, "rgb"], [function(t2) {
-    var n2 = l.exec(t2) || p.exec(t2);
-    if (!n2) return null;
-    var e2, u2, a2 = g({ h: (e2 = n2[1], u2 = n2[2], void 0 === u2 && (u2 = "deg"), Number(e2) * (r[u2] || 1)), s: Number(n2[3]), l: Number(n2[4]), a: void 0 === n2[5] ? 1 : Number(n2[5]) / (n2[6] ? 100 : 1) });
-    return f(a2);
-  }, "hsl"]], object: [[function(r2) {
-    var n2 = r2.r, e2 = r2.g, u2 = r2.b, o2 = r2.a, i2 = void 0 === o2 ? 1 : o2;
-    return t(n2) && t(e2) && t(u2) ? a({ r: Number(n2), g: Number(e2), b: Number(u2), a: Number(i2) }) : null;
-  }, "rgb"], [function(r2) {
-    var n2 = r2.h, e2 = r2.s, u2 = r2.l, a2 = r2.a, o2 = void 0 === a2 ? 1 : a2;
-    if (!t(n2) || !t(e2) || !t(u2)) return null;
-    var i2 = g({ h: Number(n2), s: Number(e2), l: Number(u2), a: Number(o2) });
-    return f(i2);
-  }, "hsl"], [function(r2) {
-    var n2 = r2.h, a2 = r2.s, o2 = r2.v, i2 = r2.a, s2 = void 0 === i2 ? 1 : i2;
-    if (!t(n2) || !t(a2) || !t(o2)) return null;
-    var h2 = (function(r3) {
-      return { h: u(r3.h), s: e(r3.s, 0, 100), v: e(r3.v, 0, 100), a: e(r3.a) };
-    })({ h: Number(n2), s: Number(a2), v: Number(o2), a: Number(s2) });
-    return b(h2);
-  }, "hsv"]] };
-  var N = function(r2, t2) {
-    for (var n2 = 0; n2 < t2.length; n2++) {
-      var e2 = t2[n2][0](r2);
-      if (e2) return [e2, t2[n2][1]];
+  // src/main-features/appearance/weather-effects.ts
+  function setSnowLevel(amount, opacity) {
+    document.getElementById("snowflakes")?.remove();
+    amount = amount > 3e3 ? 3e3 : amount;
+    let snowDiv = document.createElement("div");
+    snowDiv.id = "snowflakes";
+    for (let i = 0; i < amount; i++) {
+      let flake = document.createElement("img");
+      flake.classList = "snowflake";
+      flake.src = currentThemeName == "pink" ? getExtensionImage("icons/weather-overlay/blossom.svg") : getExtensionImage("icons/weather-overlay/snowflake.svg");
+      flake.style.left = `${Math.floor(Math.random() * 100)}%`;
+      flake.style.animation = `snowflake_fall_${Math.floor(Math.random() * 3)} ${Math.floor(Math.random() * 7) + 10}s ease-in-out infinite`;
+      flake.style.animationDelay = `${Math.floor(Math.random() * 40) - 40}s`;
+      flake.style.width = `${Math.floor(Math.random() * 20) + 10}px`;
+      flake.style.opacity = opacity;
+      snowDiv.appendChild(flake);
     }
-    return [null, void 0];
-  };
-  var x = function(r2) {
-    return "string" == typeof r2 ? N(r2.trim(), y.string) : "object" == typeof r2 && null !== r2 ? N(r2, y.object) : [null, void 0];
-  };
-  var M = function(r2, t2) {
-    var n2 = c(r2);
-    return { h: n2.h, s: e(n2.s + 100 * t2, 0, 100), l: n2.l, a: n2.a };
-  };
-  var H = function(r2) {
-    return (299 * r2.r + 587 * r2.g + 114 * r2.b) / 1e3 / 255;
-  };
-  var $ = function(r2, t2) {
-    var n2 = c(r2);
-    return { h: n2.h, s: n2.s, l: e(n2.l + 100 * t2, 0, 100), a: n2.a };
-  };
-  var j = (function() {
-    function r2(r3) {
-      this.parsed = x(r3)[0], this.rgba = this.parsed || { r: 0, g: 0, b: 0, a: 1 };
+    document.documentElement.appendChild(snowDiv);
+  }
+  function setRainLevel(amount, opacity) {
+    document.getElementById("raindrops")?.remove();
+    amount = amount > 3e3 ? 3e3 : amount;
+    let rainDiv = document.createElement("div");
+    rainDiv.id = "raindrops";
+    for (let i = 0; i < amount; i++) {
+      let raindrop = document.createElement("img");
+      raindrop.classList.add("raindrop");
+      raindrop.src = getExtensionImage("icons/weather-overlay/raindrop.svg");
+      raindrop.style.left = `${Math.random() * 100}%`;
+      raindrop.style.animation = `raindrop_fall ${Math.random() * 2 + 2}s linear infinite`;
+      raindrop.style.animationDelay = `${Math.random() * 5 - 5}s`;
+      raindrop.style.width = `${Math.random() * 7.5 + 7.5}px`;
+      raindrop.style.opacity = opacity;
+      rainDiv.appendChild(raindrop);
     }
-    return r2.prototype.isValid = function() {
-      return null !== this.parsed;
-    }, r2.prototype.brightness = function() {
-      return n(H(this.rgba), 2);
-    }, r2.prototype.isDark = function() {
-      return H(this.rgba) < 0.5;
-    }, r2.prototype.isLight = function() {
-      return H(this.rgba) >= 0.5;
-    }, r2.prototype.toHex = function() {
-      return r3 = o(this.rgba), t2 = r3.r, e2 = r3.g, u2 = r3.b, i2 = (a2 = r3.a) < 1 ? s(n(255 * a2)) : "", "#" + s(t2) + s(e2) + s(u2) + i2;
-      var r3, t2, e2, u2, a2, i2;
-    }, r2.prototype.toRgb = function() {
-      return o(this.rgba);
-    }, r2.prototype.toRgbString = function() {
-      return r3 = o(this.rgba), t2 = r3.r, n2 = r3.g, e2 = r3.b, (u2 = r3.a) < 1 ? "rgba(" + t2 + ", " + n2 + ", " + e2 + ", " + u2 + ")" : "rgb(" + t2 + ", " + n2 + ", " + e2 + ")";
-      var r3, t2, n2, e2, u2;
-    }, r2.prototype.toHsl = function() {
-      return d(c(this.rgba));
-    }, r2.prototype.toHslString = function() {
-      return r3 = d(c(this.rgba)), t2 = r3.h, n2 = r3.s, e2 = r3.l, (u2 = r3.a) < 1 ? "hsla(" + t2 + ", " + n2 + "%, " + e2 + "%, " + u2 + ")" : "hsl(" + t2 + ", " + n2 + "%, " + e2 + "%)";
-      var r3, t2, n2, e2, u2;
-    }, r2.prototype.toHsv = function() {
-      return r3 = h(this.rgba), { h: n(r3.h), s: n(r3.s), v: n(r3.v), a: n(r3.a, 3) };
-      var r3;
-    }, r2.prototype.invert = function() {
-      return w({ r: 255 - (r3 = this.rgba).r, g: 255 - r3.g, b: 255 - r3.b, a: r3.a });
-      var r3;
-    }, r2.prototype.saturate = function(r3) {
-      return void 0 === r3 && (r3 = 0.1), w(M(this.rgba, r3));
-    }, r2.prototype.desaturate = function(r3) {
-      return void 0 === r3 && (r3 = 0.1), w(M(this.rgba, -r3));
-    }, r2.prototype.grayscale = function() {
-      return w(M(this.rgba, -1));
-    }, r2.prototype.lighten = function(r3) {
-      return void 0 === r3 && (r3 = 0.1), w($(this.rgba, r3));
-    }, r2.prototype.darken = function(r3) {
-      return void 0 === r3 && (r3 = 0.1), w($(this.rgba, -r3));
-    }, r2.prototype.rotate = function(r3) {
-      return void 0 === r3 && (r3 = 15), this.hue(this.hue() + r3);
-    }, r2.prototype.alpha = function(r3) {
-      return "number" == typeof r3 ? w({ r: (t2 = this.rgba).r, g: t2.g, b: t2.b, a: r3 }) : n(this.rgba.a, 3);
-      var t2;
-    }, r2.prototype.hue = function(r3) {
-      var t2 = c(this.rgba);
-      return "number" == typeof r3 ? w({ h: r3, s: t2.s, l: t2.l, a: t2.a }) : n(t2.h);
-    }, r2.prototype.isEqual = function(r3) {
-      return this.toHex() === w(r3).toHex();
-    }, r2;
-  })();
-  var w = function(r2) {
-    return r2 instanceof j ? r2 : new j(r2);
+    document.documentElement.appendChild(rainDiv);
+  }
+  async function setOverlayBasedOnConditions(amount, opacity) {
+    async function getWeatherDescription(widget) {
+      const weatherData = await getWidgetSetting(widget + ".cache.weatherData");
+      if (weatherData == null) return null;
+      if (weatherData.cod != 200) return null;
+      return weatherData.weather[0].main;
+    }
+    let weatherWidgets = widgets.filter(
+      (item) => item.name.toLowerCase().includes("weather") && item.isActive
+    );
+    let weathers = await Promise.all(
+      weatherWidgets.map(async (widget) => {
+        return await getWeatherDescription(widget.name);
+      })
+    );
+    weathers = weathers.filter((description) => description != null);
+    if (weathers.includes("Rain") || weathers.includes("Drizzle")) {
+      setRainLevel(amount, opacity);
+    }
+    if (weathers.includes("Snow")) {
+      setSnowLevel(amount, opacity);
+    }
+  }
+  function applyWeatherEffects(weatherOverlay) {
+    let rainDiv = document.getElementById("raindrops");
+    let snowDiv = document.getElementById("snowflakes");
+    switch (weatherOverlay.type) {
+      case "snow":
+        if (rainDiv) rainDiv.remove();
+        setSnowLevel(weatherOverlay.amount, weatherOverlay.opacity);
+        break;
+      case "realtime":
+        if (rainDiv) rainDiv.remove();
+        if (snowDiv) snowDiv.remove();
+        setOverlayBasedOnConditions(
+          weatherOverlay.amount,
+          weatherOverlay.opacity
+        );
+        break;
+      case "rain":
+        if (snowDiv) snowDiv.remove();
+        setRainLevel(weatherOverlay.amount, weatherOverlay.opacity);
+        break;
+      default:
+        console.error("No weather selector");
+        break;
+    }
+  }
+
+  // src/main-features/settings/quick-settings.ts
+  var quickSettingsWindowIsHidden = true;
+  var quickSettingsBackgroundImageSelector;
+  async function storeQuickSettings() {
+    const oldData = await browser.runtime.sendMessage({
+      action: "getSettingsData"
+    });
+    const data2 = structuredClone(oldData);
+    data2.appearance.background.blur = Number(
+      document.getElementById("background-blur-amount-slider").value
+    );
+    data2.other.performanceMode = document.getElementById(
+      "performance-mode-toggle"
+    ).checked;
+    document.getElementById(
+      "performance-mode-info"
+    ).innerHTML = `Toggle performance mode ${data2.other.performanceMode ? "<span class='green-underline'>Enabled</span>" : "<span class='red-underline'>Disabled</span>"}`;
+    await browser.runtime.sendMessage({ action: "setSettingsData", data: data2 });
+    await loadQuickSettings();
+    if (settingsWindow) {
+      await settingsWindow.loadPage();
+    }
+    console.log("Successfull stored quick settings:\n", data2);
+    await apply();
+  }
+  async function loadQuickSettings() {
+    const data2 = await browser.runtime.sendMessage({
+      action: "getSettingsData"
+    });
+    quickSettingsBackgroundImageSelector.id = data2.appearance.theme;
+    quickSettingsBackgroundImageSelector.loadImageData();
+    document.getElementById("background-blur-amount-slider").value = data2.appearance.background.blur;
+    document.getElementById("performance-mode-toggle").checked = data2.other.performanceMode;
+    document.getElementById(
+      "performance-mode-info"
+    ).innerHTML = `Toggle performance mode ${data2.other.performanceMode ? "<span class='green-underline'>Enabled</span>" : "<span class='red-underline'>Disabled</span>"}`;
+  }
+  function toggleQuickSettings() {
+    let win = document.getElementById("quickSettings");
+    if (win && !quickSettingsWindowIsHidden) {
+      closeQuickSettings();
+    } else {
+      openQuickSettings();
+    }
+  }
+  async function openQuickSettings() {
+    let win = document.getElementById("quickSettings");
+    win = document.getElementById("quickSettings");
+    win.classList.remove("qs-hidden");
+    await loadQuickSettings();
+    quickSettingsWindowIsHidden = false;
+  }
+  function closeQuickSettings() {
+    let win = document.getElementById("quickSettings");
+    if (win) {
+      win.classList.add("qs-hidden");
+    }
+    quickSettingsWindowIsHidden = true;
+  }
+  function createQuickSettingsHTML(parent) {
+    const performanceModeTooltipLabel = document.createElement("label");
+    performanceModeTooltipLabel.className = "performanceModeTooltipLabel";
+    performanceModeTooltipLabel.id = "performanceModeTooltipLabel";
+    const performanceModeTooltip = document.createElement("input");
+    performanceModeTooltip.type = "checkbox";
+    performanceModeTooltip.id = "performance-mode-toggle";
+    performanceModeTooltipLabel.appendChild(performanceModeTooltip);
+    performanceModeTooltipLabel.innerHTML += performanceModeSvg;
+    const performanceModeInfo = document.createElement("span");
+    performanceModeInfo.id = "performance-mode-info";
+    const wallpaperTopContainer = document.createElement("div");
+    const wallpaperHeading = document.createElement("h3");
+    wallpaperHeading.className = "quick-settings-title";
+    wallpaperHeading.textContent = "Wallpaper:";
+    const wallpaperContainer = document.createElement("div");
+    wallpaperContainer.className = "wallpaper-quick-settings-container";
+    const blurSliderContainer = document.createElement("div");
+    blurSliderContainer.className = "blur-slider-container";
+    const blurSlider = document.createElement("input");
+    blurSlider.type = "range";
+    blurSlider.min = "0";
+    blurSlider.max = "10";
+    blurSlider.value = "0";
+    blurSlider.className = "main-slider";
+    blurSlider.id = "background-blur-amount-slider";
+    const backgroundBlurLabel = document.createElement("span");
+    backgroundBlurLabel.className = "color-label";
+    backgroundBlurLabel.id = "blurPlaats";
+    backgroundBlurLabel.textContent = "blur";
+    blurSliderContainer.appendChild(blurSlider);
+    blurSliderContainer.appendChild(backgroundBlurLabel);
+    wallpaperContainer.appendChild(
+      quickSettingsBackgroundImageSelector.fullContainer
+    );
+    wallpaperContainer.appendChild(blurSliderContainer);
+    wallpaperTopContainer.appendChild(wallpaperHeading);
+    wallpaperTopContainer.appendChild(wallpaperContainer);
+    const extraSettingsButton = document.createElement("button");
+    extraSettingsButton.id = "extraSettingsButton";
+    extraSettingsButton.innerHTML += "More Settings";
+    extraSettingsButton.innerHTML += settingsIconSvg;
+    extraSettingsButton.addEventListener("click", (e) => openSettingsWindow(e));
+    parent.appendChild(performanceModeTooltipLabel);
+    parent.appendChild(wallpaperTopContainer);
+    parent.appendChild(performanceModeInfo);
+    parent.appendChild(extraSettingsButton);
+    return parent;
+  }
+  function createQuickSettings() {
+    let quickSettingsWindow = document.createElement("div");
+    quickSettingsWindow.id = "quickSettings";
+    quickSettingsWindow.addEventListener("change", storeQuickSettings);
+    quickSettingsBackgroundImageSelector = new ImageSelector("backgroundImage");
+    quickSettingsBackgroundImageSelector.onStore = () => {
+      storeQuickSettings();
+    };
+    quickSettingsWindow = createQuickSettingsHTML(quickSettingsWindow);
+    document.getElementById("quickSettingsButton").insertAdjacentElement("afterend", quickSettingsWindow);
+    document.getElementById("performanceModeTooltipLabel").addEventListener("mouseover", () => {
+      document.getElementById("performance-mode-info").style.opacity = "1";
+      document.getElementById("performance-mode-info").style.zIndex = "2";
+    });
+    document.getElementById("performanceModeTooltipLabel").addEventListener("mouseout", () => {
+      document.getElementById("performance-mode-info").style.opacity = "0";
+      document.getElementById("performance-mode-info").style.zIndex = "-1";
+    });
+    document.addEventListener("click", (e) => {
+      if (quickSettingsWindowIsHidden) return;
+      if (e.target.id === "extraSettingsButton") {
+        closeQuickSettings();
+      }
+      if (e.target.id === "quickSettings" || quickSettingsWindow.contains(e.target) || e.target.id === "quickSettingsButton") {
+        return;
+      }
+      closeQuickSettings();
+    });
+    closeQuickSettings();
+  }
+  function createQuickSettingsButton() {
+    let quickSettingsButtonWrapper = document.createElement("div");
+    quickSettingsButtonWrapper.id = "quickSettingsButtonWrapper";
+    quickSettingsButtonWrapper.classList.add("smpp-button");
+    quickSettingsButtonWrapper.classList.add("topnav__btn-wrapper");
+    let quickSettingsButton = document.createElement("button");
+    quickSettingsButton.id = "quickSettingsButton";
+    quickSettingsButton.classList.add("topnav__btn");
+    quickSettingsButton.innerText = "Settings";
+    quickSettingsButton.addEventListener("click", toggleQuickSettings);
+    quickSettingsButtonWrapper.appendChild(quickSettingsButton);
+    return quickSettingsButtonWrapper;
+  }
+
+  // src/main-features/settings/main-settings.ts
+  var SettingsWindow = class extends BaseWindow {
+    settingsSideBarCategories = [
+      { name: "Appearance", id: "appearance" },
+      { name: "Navigation", id: "topNav" },
+      { name: "Widgets", id: "widgets" },
+      { name: "Other", id: "other" }
+    ];
+    currentPage = "appearance";
+    settingsPage = document.createElement("div");
+    backgroundImageSelector = new ImageSelector("backgroundImage");
+    themeSelector = new ThemeSelector();
+    profilePictureInput = new ImageSelector("profilePicture");
+    constructor() {
+      super("settings-window");
+    }
+    async renderContent() {
+      let content = document.createElement("div");
+      let settingsSideBar = await this.createSettingsSideBar();
+      this.settingsPage.id = "settings-page";
+      this.settingsPage.addEventListener("change", (e) => this.storePage());
+      content.classList.add("settingsWindow");
+      content.appendChild(settingsSideBar);
+      content.appendChild(this.settingsPage);
+      this.displaySettingsPage();
+      return content;
+    }
+    async createSettingsSideBar() {
+      let settingsSideBar = document.createElement("div");
+      settingsSideBar.classList.add("settings-sidebar");
+      let settingsSideBarProfileButton = await this.createSettingsSideBarProfileButton();
+      settingsSideBar.appendChild(settingsSideBarProfileButton);
+      this.settingsSideBarCategories.forEach((category) => {
+        settingsSideBar.appendChild(this.createSettingsSideBarCategory(category));
+      });
+      let currentRadio = settingsSideBar.querySelector(
+        `input[value="${this.currentPage}"]`
+      );
+      if (currentRadio) currentRadio.checked = true;
+      settingsSideBar.addEventListener("change", this.updateSideBar);
+      return settingsSideBar;
+    }
+    updateSideBar = async (event) => {
+      if (event.target instanceof HTMLInputElement) {
+        if (event.target.type === "radio") {
+          this.currentPage = event.target.value;
+          this.displaySettingsPage();
+          await this.loadPage();
+        }
+      }
+    };
+    async createSettingsSideBarProfileButton() {
+      let data2 = await browser.runtime.sendMessage({
+        action: "getSettingsData"
+      });
+      let radioInput = document.createElement("input");
+      radioInput.type = "radio";
+      radioInput.name = "settings-page";
+      radioInput.value = "profile";
+      radioInput.id = "settings-profile";
+      radioInput.classList.add("settings-radio");
+      let profileSettingsLabel = document.createElement("label");
+      profileSettingsLabel.htmlFor = "settings-profile";
+      profileSettingsLabel.tabIndex = 0;
+      profileSettingsLabel.classList.add(
+        "profile-settings-button",
+        "settings-category-button-js"
+      );
+      profileSettingsLabel.addEventListener("keydown", (e) => {
+        if (e.key === " " || e.key === "Enter") {
+          e.preventDefault();
+          radioInput.click();
+        }
+      });
+      let profilePicture = document.createElement("div");
+      profilePicture.classList.add("profile-picture-settings");
+      let profileTextContainer = document.createElement("div");
+      profileTextContainer.classList.add("profile-settings-label");
+      let profileSettingsLabelTitle = document.createElement("h2");
+      profileSettingsLabelTitle.id = "profile-settings-label-title";
+      let firstName = String(data2.profile.username || originalUsername).split(
+        " "
+      )[0];
+      if (firstName) profileSettingsLabelTitle.innerText = firstName;
+      let profileSettingsLabelDescription = document.createElement("p");
+      profileSettingsLabelDescription.classList.add(
+        "profile-settings-label-description"
+      );
+      profileSettingsLabelDescription.innerText = "view profile";
+      profileTextContainer.appendChild(profileSettingsLabelTitle);
+      profileTextContainer.appendChild(profileSettingsLabelDescription);
+      profileSettingsLabel.appendChild(profilePicture);
+      profileSettingsLabel.appendChild(profileTextContainer);
+      let container = document.createElement("div");
+      container.appendChild(radioInput);
+      container.appendChild(profileSettingsLabel);
+      return container;
+    }
+    isPastaTime() {
+      return (/* @__PURE__ */ new Date()).getHours() === 12;
+    }
+    createSettingsSideBarCategory(category) {
+      let radioInput = document.createElement("input");
+      radioInput.type = "radio";
+      radioInput.name = "settings-page";
+      radioInput.value = category.id;
+      radioInput.id = `settings-${category.id}`;
+      radioInput.classList.add("settings-radio");
+      let categoryLabel = document.createElement("label");
+      categoryLabel.htmlFor = `settings-${category.id}`;
+      categoryLabel.tabIndex = 0;
+      categoryLabel.classList.add(
+        "settings-category-button",
+        "settings-category-button-js"
+      );
+      categoryLabel.addEventListener("keydown", (e) => {
+        if (e.key === " " || e.key === "Enter") {
+          e.preventDefault();
+          radioInput.click();
+        }
+      });
+      let categoryButtonIcon = document.createElement("img");
+      categoryButtonIcon.classList.add("category-button-icon");
+      let imageFileName = category.id + ".webp";
+      if (category.id === "appearance" && this.isPastaTime()) {
+        imageFileName = "pasta.webp";
+      }
+      categoryButtonIcon.src = getExtensionImage(
+        "settings-icons/" + imageFileName
+      );
+      categoryLabel.appendChild(categoryButtonIcon);
+      categoryLabel.appendChild(document.createTextNode(category.name));
+      let container = document.createElement("div");
+      container.appendChild(radioInput);
+      container.appendChild(categoryLabel);
+      return container;
+    }
+    clearSettingsPage() {
+      this.settingsPage.innerHTML = "";
+    }
+    addDisclaimer(element, disclaimerHTML = `
+    * Changes will only apply after 
+    <a class="settings-page-disclaimer-button" href="#" onclick="window.location.href = window.location.href; return false;">reload</a>
+  `) {
+      if (element.nextElementSibling?.classList.contains("settings-page-disclaimer")) {
+        return;
+      }
+      const disclaimer = document.createElement("span");
+      disclaimer.classList.add("settings-page-disclaimer");
+      disclaimer.innerHTML = disclaimerHTML;
+      element.insertAdjacentElement("afterend", disclaimer);
+    }
+    async resetSettings() {
+      const popup = document.createElement("div");
+      popup.classList.add("reset-confirmation-popup");
+      const popupContent = document.createElement("div");
+      popupContent.classList.add("reset-popup-content");
+      const title = document.createElement("h3");
+      title.textContent = "Reset Settings";
+      const description = document.createElement("p");
+      description.textContent = "Are you sure you want to reset all settings to defaults? This will delete all your customizations and cannot be undone.";
+      const buttonContainer = document.createElement("div");
+      buttonContainer.classList.add("reset-popup-buttons");
+      const cancelButton = document.createElement("button");
+      cancelButton.classList.add("reset-popup-cancel");
+      cancelButton.textContent = "Cancel";
+      const confirmButton = document.createElement("button");
+      confirmButton.classList.add("reset-popup-confirm");
+      confirmButton.textContent = "Reset";
+      buttonContainer.append(cancelButton, confirmButton);
+      popupContent.append(title, description, buttonContainer);
+      popup.appendChild(popupContent);
+      this.element.appendChild(popup);
+      cancelButton.addEventListener("click", () => popup.remove());
+      confirmButton.addEventListener("click", async () => {
+        popup.remove();
+        await clearAllData();
+      });
+    }
+    async loadPage() {
+      console.log("loading page...");
+      const settings = await browser.runtime.sendMessage({
+        action: "getSettingsData"
+      });
+      async function loadWidgetSettingSlider(id, setting) {
+        const element = document.getElementById(id);
+        const valueDisplay = document.querySelector(
+          `#${id} + .settings-page-live-value`
+        );
+        if (!element || !valueDisplay) return;
+        const value = await getWidgetSetting(setting);
+        element.value = value;
+        valueDisplay.textContent = String(value);
+      }
+      const profileTitleElement = document.getElementById(
+        "profile-settings-label-title"
+      );
+      if (profileTitleElement) {
+        let firstName = String(
+          settings.profile.username || originalUsername
+        ).split(" ")[0];
+        if (firstName) profileTitleElement.textContent = firstName;
+      }
+      switch (this.currentPage) {
+        case "profile": {
+          const usernameInput = document.getElementById(
+            "settings-page-username-input"
+          );
+          if (settings.profile.username && usernameInput) {
+            usernameInput.value = settings.profile.username;
+          }
+          this.profilePictureInput.loadImageData();
+          const defaultPfpButton = document.getElementById(
+            "settings-page-default-sm-pfp-button"
+          );
+          if (defaultPfpButton) {
+            defaultPfpButton.checked = settings.profile.useSMpfp;
+          }
+          break;
+        }
+        case "appearance": {
+          await this.themeSelector.update();
+          console.log("Updating.....");
+          this.backgroundImageSelector.id = settings.appearance.theme;
+          this.backgroundImageSelector.loadImageData();
+          const blurSlider = document.getElementById("settings-page-blur-slider");
+          if (blurSlider) {
+            blurSlider.value = String(
+              settings.appearance.background.blur * 10
+            );
+          }
+          document.querySelectorAll(".settings-page-weather-overlay-container input").forEach((input) => {
+            const inputElement = input;
+            if (inputElement.id) {
+              inputElement.checked = inputElement.id.includes(
+                settings.appearance.weatherOverlay.type
+              );
+            }
+          });
+          const weatherOverlaySlider = document.getElementById(
+            "settings-page-weather-overlay-slider"
+          );
+          if (weatherOverlaySlider) {
+            weatherOverlaySlider.value = String(
+              settings.appearance.weatherOverlay.amount
+            );
+          }
+          const weatherOpacitySlider = document.getElementById(
+            "settings-page-weather-overlay-opacity-slider"
+          );
+          if (weatherOpacitySlider) {
+            weatherOpacitySlider.value = String(
+              settings.appearance.weatherOverlay.opacity * 100
+            );
+          }
+          const defaultIconButton = document.getElementById(
+            "settings-page-default-icon-button"
+          );
+          if (defaultIconButton) {
+            defaultIconButton.checked = settings.appearance.tabLogo === "sm";
+          }
+          const smppIconButton = document.getElementById(
+            "settings-page-smpp-icon-button"
+          );
+          if (smppIconButton) {
+            smppIconButton.checked = settings.appearance.tabLogo === "smpp";
+          }
+          const showNewsButton = document.getElementById(
+            "settings-page-show-news-button"
+          );
+          if (showNewsButton) {
+            showNewsButton.checked = settings.appearance.news;
+          }
+          break;
+        }
+        case "topNav": {
+          const swapCoursesButton = document.getElementById(
+            "settings-page-swap-courses-button"
+          );
+          if (swapCoursesButton) {
+            swapCoursesButton.checked = settings.topNav.switchCoursesAndLinks;
+          }
+          if (isGOSchool) {
+            const goButton = document.getElementById("settings-page-go-button");
+            if (goButton) {
+              goButton.checked = settings.topNav.buttons.GO;
+            }
+          }
+          if (!liteMode) {
+            const globalChatButton = document.getElementById(
+              "settings-page-global-chat-button"
+            );
+            if (globalChatButton) {
+              globalChatButton.checked = settings.topNav.buttons.GC;
+            }
+          }
+          const searchButton = document.getElementById(
+            "settings-page-search-button"
+          );
+          if (searchButton) {
+            searchButton.checked = settings.topNav.buttons.search;
+          }
+          const quickMenuButton = document.getElementById(
+            "settings-page-quick-menu-button"
+          );
+          if (quickMenuButton) {
+            quickMenuButton.checked = settings.topNav.buttons.quickMenu;
+          }
+          const homeIconButton = document.getElementById(
+            "settings-page-home-icon-button"
+          );
+          if (homeIconButton) {
+            homeIconButton.checked = settings.topNav.icons.home;
+          }
+          const mailIconButton = document.getElementById(
+            "settings-page-mail-icon-button"
+          );
+          if (mailIconButton) {
+            mailIconButton.checked = settings.topNav.icons.mail;
+          }
+          const notificationsIconButton = document.getElementById(
+            "settings-page-notifications-icon-button"
+          );
+          if (notificationsIconButton) {
+            notificationsIconButton.checked = settings.topNav.icons.notifications;
+          }
+          const settingsIconButton = document.getElementById(
+            "settings-page-settings-icon-button"
+          );
+          if (settingsIconButton) {
+            settingsIconButton.checked = settings.topNav.icons.settings;
+          }
+          break;
+        }
+        case "widgets": {
+          const delijnMonochromeButton = document.getElementById(
+            "settings-page-delijn-monochrome-button"
+          );
+          if (delijnMonochromeButton) {
+            delijnMonochromeButton.checked = await getWidgetSetting("DelijnWidget.monochrome");
+          }
+          await loadWidgetSettingSlider(
+            "settings-page-max-busses-slider",
+            "DelijnWidget.maxBusses"
+          );
+          await loadWidgetSettingSlider(
+            "settings-page-max-assignments-slider",
+            "TakenWidget.maxAssignments"
+          );
+          if (!liteMode) {
+            const showSnakeGridButton = document.getElementById(
+              "settings-page-show-snake-grid-button"
+            );
+            if (showSnakeGridButton) {
+              showSnakeGridButton.checked = await getWidgetSetting("SnakeWidget.enableGrid");
+            }
+          }
+          break;
+        }
+        case "other": {
+          let loadKeybind2 = function(id, key) {
+            let keybindInput = document.getElementById(id);
+            if (!keybindInput) return;
+            keybindInput.value = key;
+          };
+          var loadKeybind = loadKeybind2;
+          const performanceModeButton = document.getElementById(
+            "settings-page-performance-mode-button"
+          );
+          if (performanceModeButton) {
+            performanceModeButton.checked = settings.other.performanceMode;
+          }
+          const splashTextButton = document.getElementById(
+            "settings-page-splash-text-button"
+          );
+          if (splashTextButton) {
+            splashTextButton.checked = settings.other.splashText;
+          }
+          const discordButton = document.getElementById(
+            "settings-page-discord-button"
+          );
+          if (discordButton) {
+            discordButton.checked = settings.other.discordButton;
+          }
+          loadKeybind2(
+            "settings-page-quick-menu-keybinding",
+            settings.other.keybinds.dmenu
+          );
+          loadKeybind2(
+            "settings-page-widget-edit-keybinding",
+            settings.other.keybinds.widgetEditMode
+          );
+          loadKeybind2(
+            "settings-widget-bag-keybinding",
+            settings.other.keybinds.widgetBag
+          );
+          loadKeybind2(
+            "settings-page-settings-keybinding",
+            settings.other.keybinds.settings
+          );
+          if (!liteMode)
+            loadKeybind2(
+              "settings-page-gc-keybinding",
+              settings.other.keybinds.gc
+            );
+          break;
+        }
+        default:
+          break;
+      }
+    }
+    async storePage() {
+      const settings = await browser.runtime.sendMessage({
+        action: "getSettingsData"
+      });
+      const previousSettings = structuredClone(settings);
+      const getCheckboxValue = (id) => {
+        const element = document.getElementById(id);
+        return element?.checked || false;
+      };
+      const getSliderValue = (id) => {
+        const element = document.getElementById(id);
+        return element?.value ? parseFloat(element.value) : 0;
+      };
+      const saveKeybind = (id) => {
+        const element = document.getElementById(id);
+        return element?.value || "None";
+      };
+      switch (this.currentPage) {
+        case "profile": {
+          const usernameInput = document.getElementById(
+            "settings-page-username-input"
+          );
+          if (usernameInput) {
+            settings.profile.username = usernameInput.value || null;
+          }
+          settings.profile.useSMpfp = getCheckboxValue(
+            "settings-page-default-sm-pfp-button"
+          );
+          applyProfile(settings.profile);
+          break;
+        }
+        case "appearance": {
+          const selectedTheme = document.querySelector(
+            ".settings-page-theme-card:has(input[type='radio']:checked)"
+          );
+          if (selectedTheme && selectedTheme.dataset["theme"]) {
+            settings.appearance.theme = selectedTheme.dataset["theme"];
+          }
+          settings.appearance.background.blur = getSliderValue("settings-page-blur-slider") / 10;
+          const chosenWeather = document.querySelector(
+            ".settings-page-weather-overlay-container input:checked"
+          );
+          if (chosenWeather) {
+            const weatherContainer = chosenWeather.closest(
+              "[data-weather]"
+            );
+            if (weatherContainer?.dataset["weather"]) {
+              const weatherType = weatherContainer.dataset["weather"];
+              if (weatherType === "realtime" || weatherType === "rain" || weatherType === "snow") {
+                settings.appearance.weatherOverlay.type = weatherType;
+              }
+            }
+          }
+          settings.appearance.weatherOverlay.amount = getSliderValue(
+            "settings-page-weather-overlay-slider"
+          );
+          settings.appearance.weatherOverlay.opacity = getSliderValue("settings-page-weather-overlay-opacity-slider") / 100;
+          const smppIconChecked = getCheckboxValue(
+            "settings-page-smpp-icon-button"
+          );
+          settings.appearance.tabLogo = smppIconChecked ? "smpp" : "sm";
+          settings.appearance.news = getCheckboxValue(
+            "settings-page-show-news-button"
+          );
+          await applyAppearance(settings.appearance);
+          if (JSON.stringify(settings.appearance.weatherOverlay) !== JSON.stringify(previousSettings.appearance.weatherOverlay) && !liteMode) {
+            applyWeatherEffects(settings.appearance.weatherOverlay);
+          }
+          break;
+        }
+        case "topNav": {
+          settings.topNav.switchCoursesAndLinks = getCheckboxValue(
+            "settings-page-swap-courses-button"
+          );
+          if (isGOSchool) {
+            settings.topNav.buttons.GO = getCheckboxValue(
+              "settings-page-go-button"
+            );
+          }
+          if (!liteMode) {
+            settings.topNav.buttons.GC = getCheckboxValue(
+              "settings-page-global-chat-button"
+            );
+          }
+          settings.topNav.buttons.search = getCheckboxValue(
+            "settings-page-search-button"
+          );
+          settings.topNav.buttons.quickMenu = getCheckboxValue(
+            "settings-page-quick-menu-button"
+          );
+          settings.topNav.icons.home = getCheckboxValue(
+            "settings-page-home-icon-button"
+          );
+          settings.topNav.icons.mail = getCheckboxValue(
+            "settings-page-mail-icon-button"
+          );
+          settings.topNav.icons.notifications = getCheckboxValue(
+            "settings-page-notifications-icon-button"
+          );
+          settings.topNav.icons.settings = getCheckboxValue(
+            "settings-page-settings-icon-button"
+          );
+          applyTopNav(settings.topNav);
+          break;
+        }
+        case "widgets": {
+          const updateWidgetSetting = async (id, settingName, type) => {
+            const element = document.getElementById(
+              id
+            );
+            if (!element) return;
+            const currentValue = type == "boolean" ? element.checked : parseInt(element.value, 10);
+            const storedValue = await getWidgetSetting(settingName);
+            if (JSON.stringify(currentValue) !== JSON.stringify(storedValue)) {
+              await setWidgetSetting(settingName, currentValue);
+            }
+          };
+          await updateWidgetSetting(
+            "settings-page-delijn-monochrome-button",
+            "DelijnWidget.monochrome",
+            "boolean"
+          );
+          await updateWidgetSetting(
+            "settings-page-max-busses-slider",
+            "DelijnWidget.maxBusses",
+            "number"
+          );
+          await updateWidgetSetting(
+            "settings-page-max-assignments-slider",
+            "TakenWidget.maxAssignments",
+            "number"
+          );
+          if (!liteMode) {
+            await updateWidgetSetting(
+              "settings-page-show-snake-grid-button",
+              "SnakeWidget.enableGrid",
+              "boolean"
+            );
+          }
+          break;
+        }
+        case "other": {
+          settings.other.performanceMode = getCheckboxValue(
+            "settings-page-performance-mode-button"
+          );
+          settings.other.splashText = getCheckboxValue(
+            "settings-page-splash-text-button"
+          );
+          settings.other.discordButton = getCheckboxValue(
+            "settings-page-discord-button"
+          );
+          settings.other.keybinds.dmenu = saveKeybind(
+            "settings-page-quick-menu-keybinding"
+          );
+          settings.other.keybinds.widgetEditMode = saveKeybind(
+            "settings-page-widget-edit-keybinding"
+          );
+          settings.other.keybinds.widgetBag = saveKeybind(
+            "settings-widget-bag-keybinding"
+          );
+          settings.other.keybinds.settings = saveKeybind(
+            "settings-page-settings-keybinding"
+          );
+          if (!liteMode) {
+            settings.other.keybinds.gc = saveKeybind(
+              "settings-page-gc-keybinding"
+            );
+          }
+          applyOther(settings.other);
+          break;
+        }
+        default:
+          break;
+      }
+      await browser.runtime.sendMessage({
+        action: "setSettingsData",
+        data: settings
+      });
+      console.log("Successfully stored main settings: \n", settings);
+      loadQuickSettings();
+      await this.loadPage();
+    }
+    async displaySettingsPage() {
+      function createMainTitle(text) {
+        let title = document.createElement("h1");
+        title.innerText = text;
+        title.classList.add("settings-page-main-title");
+        return title;
+      }
+      function createSectionTitle(text) {
+        let title = document.createElement("h2");
+        title.innerText = text;
+        title.classList.add("settings-page-section-title");
+        return title;
+      }
+      const createKeybindInput = (id, text) => {
+        const container = document.createElement("div");
+        container.classList.add("settings-page-key-bind-container");
+        container.classList.add("smpp-input-with-label");
+        let label = document.createElement("span");
+        label.tabIndex = 0;
+        label.classList.add("settings-page-button-label");
+        label.innerText = text;
+        let button = createButton(id);
+        button.classList.add("settings-page-button");
+        const input = document.createElement("input");
+        input.id = id;
+        input.type = "text";
+        input.readOnly = true;
+        input.spellcheck = false;
+        input.classList.add("settings-page-keybinding-input");
+        input.value = "None";
+        const unbindButton = document.createElement("button");
+        unbindButton.classList.add("keybind-unbind-button");
+        unbindButton.innerHTML = trashSvg;
+        unbindButton.title = "Clear keybind";
+        unbindButton.setAttribute("aria-label", "Clear keybind");
+        let listening = false;
+        input.addEventListener("click", () => {
+          if (listening) return;
+          listening = true;
+          let oldKeybind = input.value;
+          input.value = "Press any key...";
+          input.classList.add("listening");
+          const keyListener = async (e) => {
+            listening = false;
+            input.classList.remove("listening");
+            e.preventDefault();
+            e.stopPropagation();
+            let keyName = e.key.length === 1 ? e.key.toUpperCase() : e.key;
+            if (keyName === " ") keyName = "Space";
+            if (keyName === "Backspace") keyName = "None";
+            if (keyName === "Escape") keyName = oldKeybind;
+            input.value = keyName;
+            document.removeEventListener("keydown", keyListener);
+            await this.storePage();
+          };
+          const buttonListener = async (e) => {
+            listening = false;
+            input.classList.remove("listening");
+            e.stopPropagation();
+            e.preventDefault();
+            input.value = "None";
+            document.removeEventListener("keydown", keyListener);
+            await this.storePage();
+          };
+          unbindButton.addEventListener("click", buttonListener);
+          document.addEventListener("keydown", keyListener);
+        });
+        const inputWrapper = document.createElement("div");
+        inputWrapper.classList.add("keybind-input-wrapper");
+        inputWrapper.appendChild(input);
+        inputWrapper.appendChild(unbindButton);
+        container.appendChild(label);
+        container.appendChild(inputWrapper);
+        return container;
+      };
+      function createSettingsButtonWithLabel(id, text) {
+        let container = createButtonWithLabel(id, text);
+        container.tabIndex = 0;
+        container.classList.add("settings-page-button-label-container");
+        return container;
+      }
+      function createImageButton(src, width, height, name2, id) {
+        let wrapper = document.createElement("label");
+        wrapper.classList.add("settings-page-image-button-wrapper");
+        wrapper.tabIndex = 0;
+        wrapper.style.width = width;
+        wrapper.style.height = height;
+        let input = document.createElement("input");
+        input.type = "radio";
+        input.name = name2;
+        if (id) input.id = id;
+        let image = document.createElement("img");
+        image.classList.add("settings-page-image");
+        image.src = getExtensionImage(src);
+        wrapper.addEventListener("keydown", (e) => {
+          if (e.key === " " || e.key === "Enter") {
+            e.preventDefault();
+            input.click();
+          }
+        });
+        wrapper.appendChild(input);
+        wrapper.appendChild(image);
+        return wrapper;
+      }
+      function createImageButtonWithLabel(src, text, width = "80px", height = "80px", name2, id) {
+        let container = document.createElement("label");
+        container.classList.add("settings-page-image-button-label");
+        let imageButton = createImageButton(src, width, height, name2, id);
+        let imageButtonLabel = document.createElement("span");
+        imageButtonLabel.innerText = text;
+        container.appendChild(imageButton);
+        container.appendChild(imageButtonLabel);
+        return container;
+      }
+      function createSlider(min, max, id) {
+        let slider = document.createElement("input");
+        slider.id = id;
+        slider.type = "range";
+        slider.min = min;
+        slider.max = max;
+        slider.classList.add("settings-page-slider");
+        return slider;
+      }
+      function createLabeledSlider(min, max, id, text, showValue = true) {
+        let container = document.createElement("div");
+        container.classList.add("settings-page-slider-container");
+        container.classList.add("smpp-input-with-label");
+        let textContainer = document.createElement("span");
+        textContainer.classList.add("settings-page-slider-label");
+        textContainer.innerText = text;
+        let slider = createSlider(min, max, id);
+        slider.classList.add("settings-page-labeled-slider");
+        if (showValue)
+          slider.addEventListener("input", (event) => {
+            let liveValueElement = document.querySelector(
+              "#" + id + " ~ .settings-page-live-value"
+            );
+            if (liveValueElement) liveValueElement.innerText = slider.value;
+          });
+        let currentValue = document.createElement("span");
+        currentValue.classList.add("settings-page-live-value");
+        currentValue.innerText = min;
+        container.appendChild(textContainer);
+        container.appendChild(slider);
+        if (showValue) container.appendChild(currentValue);
+        return container;
+      }
+      function createImage(src, width, height) {
+        let image = document.createElement("img");
+        image.classList.add("settings-page-image");
+        image.src = getExtensionImage(src);
+        image.style.width = width;
+        image.style.height = height;
+        image.style.objectFit = "cover";
+        return image;
+      }
+      function createDescription(text) {
+        let description = document.createElement("p");
+        description.innerText = text;
+        description.classList.add("settings-page-description");
+        return description;
+      }
+      this.clearSettingsPage();
+      this.settingsPage.scrollTo(0, 0);
+      switch (this.currentPage) {
+        case "profile":
+          this.settingsPage.appendChild(createMainTitle("Profile"));
+          this.settingsPage.appendChild(createSectionTitle("Custom name"));
+          this.settingsPage.appendChild(
+            createDescription("Edit your username, displayed at the top left")
+          );
+          this.settingsPage.appendChild(
+            createTextInput("settings-page-username-input", "Username")
+          );
+          this.settingsPage.appendChild(createSectionTitle("Profile picture"));
+          this.settingsPage.appendChild(
+            createDescription(
+              isFirefox ? "Upload your own profile picture, large files not recommended on Firefox" : "Upload your own profile picture"
+            )
+          );
+          this.profilePictureInput.id = "profilePicture";
+          this.profilePictureInput.loadImageData();
+          this.profilePictureInput.onStore = async () => {
+            this.storePage();
+            const data2 = await browser.runtime.sendMessage({
+              action: "getSettingsData"
+            });
+            applyProfilePicture(data2.profile);
+          };
+          let profilePictureInputContainer = this.profilePictureInput.createFullFileInput();
+          profilePictureInputContainer.id = "profile-picture-input-container";
+          this.settingsPage.appendChild(profilePictureInputContainer);
+          this.settingsPage.appendChild(
+            createSettingsButtonWithLabel(
+              "settings-page-default-sm-pfp-button",
+              "Original profile picture"
+            )
+          );
+          break;
+        case "appearance":
+          this.settingsPage.appendChild(createMainTitle("Appearance"));
+          this.settingsPage.appendChild(createSectionTitle("Theme"));
+          this.settingsPage.appendChild(
+            createDescription(
+              "Customize the overall look of the interface with different color styles."
+            )
+          );
+          this.settingsPage.appendChild(this.themeSelector.render());
+          this.settingsPage.appendChild(createSectionTitle("Wallpaper"));
+          this.settingsPage.appendChild(
+            createDescription("Personalize your backdrop with a custom image.")
+          );
+          this.backgroundImageSelector.onStore = () => {
+            this.storePage();
+          };
+          this.settingsPage.appendChild(
+            this.backgroundImageSelector.createFullFileInput()
+          );
+          this.settingsPage.appendChild(createSectionTitle("Background blur"));
+          this.settingsPage.appendChild(
+            createDescription("Apply a blur to your background.")
+          );
+          this.settingsPage.appendChild(
+            createSlider("0", "100", "settings-page-blur-slider")
+            // must be divided by 10
+            // for real value
+          );
+          let blurPreviewContainer = document.createElement("div");
+          blurPreviewContainer.classList.add(
+            "settings-page-blur-preview-container"
+          );
+          blurPreviewContainer.appendChild(
+            createImage("theme-backgrounds/birb.jpg", "6rem", "4rem")
+          );
+          let blurredImage = createImage(
+            "theme-backgrounds/birb.jpg",
+            "100%",
+            "100%"
+          );
+          blurredImage.style.filter = "blur(2px)";
+          let blurredImageContainer = document.createElement("div");
+          blurredImageContainer.classList.add("blurred-image-container");
+          blurredImageContainer.appendChild(blurredImage);
+          blurPreviewContainer.appendChild(blurredImageContainer);
+          this.settingsPage.appendChild(blurPreviewContainer);
+          this.settingsPage.appendChild(createSectionTitle("Weather overlay"));
+          this.settingsPage.appendChild(
+            createDescription("Add dynamic weather visuals.")
+          );
+          let weatherIconsContainer = document.createElement("div");
+          weatherIconsContainer.classList.add(
+            "settings-page-icons-container",
+            "settings-page-weather-overlay-container"
+          );
+          let rainBtn = createImageButtonWithLabel(
+            "icons/weather-overlay/raindropfancy.svg",
+            "Rain",
+            "5rem",
+            "5rem",
+            "weather",
+            "settings-page-raindrop-button"
+          );
+          rainBtn.dataset["weather"] = "rain";
+          weatherIconsContainer.appendChild(rainBtn);
+          let realtimeBtn = createImageButtonWithLabel(
+            "icons/weather-overlay/realtimefancy.svg",
+            "Realtime",
+            "5rem",
+            "5rem",
+            "weather",
+            "settings-page-realtime-button"
+          );
+          realtimeBtn.dataset["weather"] = "realtime";
+          weatherIconsContainer.appendChild(realtimeBtn);
+          let snowBtn = createImageButtonWithLabel(
+            "icons/weather-overlay/snowflakefancy.svg",
+            "Snow",
+            "5rem",
+            "5rem",
+            "weather",
+            "settings-page-snow-button"
+          );
+          snowBtn.dataset["weather"] = "snow";
+          weatherIconsContainer.appendChild(snowBtn);
+          this.settingsPage.appendChild(weatherIconsContainer);
+          this.settingsPage.appendChild(
+            createLabeledSlider(
+              "0",
+              "500",
+              "settings-page-weather-overlay-slider",
+              "Amount",
+              false
+            )
+          );
+          this.settingsPage.appendChild(
+            createLabeledSlider(
+              "0",
+              "100",
+              "settings-page-weather-overlay-opacity-slider",
+              "Opacity",
+              false
+            )
+          );
+          this.settingsPage.appendChild(createSectionTitle("Icon"));
+          this.settingsPage.appendChild(
+            createDescription("Choose the icon displayed in your browser tab.")
+          );
+          let iconsContainer = document.createElement("div");
+          iconsContainer.classList.add("settings-page-icons-container");
+          iconsContainer.appendChild(
+            createImageButton(
+              "icons/sm-icon.svg",
+              "5rem",
+              "5rem",
+              "logo",
+              "settings-page-default-icon-button"
+            )
+          );
+          iconsContainer.appendChild(
+            createImageButton(
+              "icons/smpp/128.png",
+              "5rem",
+              "5rem",
+              "logo",
+              "settings-page-smpp-icon-button"
+            )
+          );
+          this.settingsPage.appendChild(iconsContainer);
+          this.settingsPage.appendChild(createSectionTitle("News"));
+          this.settingsPage.appendChild(
+            createDescription("Change the homepage news configuration.")
+          );
+          this.settingsPage.appendChild(
+            createSettingsButtonWithLabel(
+              "settings-page-show-news-button",
+              "Show news"
+            )
+          );
+          break;
+        case "topNav":
+          this.settingsPage.appendChild(createMainTitle("Navigation"));
+          this.settingsPage.appendChild(createSectionTitle("Buttons"));
+          this.settingsPage.appendChild(
+            createDescription(
+              "Choose which buttons you want to see in the top navigation."
+            )
+          );
+          if (!liteMode) {
+            this.settingsPage.appendChild(
+              createSettingsButtonWithLabel(
+                "settings-page-global-chat-button",
+                "Global Chat"
+              )
+            );
+          }
+          this.settingsPage.appendChild(
+            createSettingsButtonWithLabel("settings-page-search-button", "Search")
+          );
+          this.settingsPage.appendChild(
+            createSettingsButtonWithLabel(
+              "settings-page-quick-menu-button",
+              "Quick Menu"
+            )
+          );
+          this.settingsPage.appendChild(
+            createSettingsButtonWithLabel(
+              "settings-page-swap-courses-button",
+              "Swap courses/links"
+            )
+          );
+          if (isGOSchool)
+            this.settingsPage.appendChild(
+              createSettingsButtonWithLabel("settings-page-go-button", "GO")
+            );
+          this.settingsPage.appendChild(createSectionTitle("Icons"));
+          this.settingsPage.appendChild(
+            createDescription(
+              "Choose which buttons you want to replace with icons."
+            )
+          );
+          this.settingsPage.appendChild(
+            createSettingsButtonWithLabel(
+              "settings-page-home-icon-button",
+              "Start"
+            )
+          );
+          this.settingsPage.appendChild(
+            createSettingsButtonWithLabel(
+              "settings-page-mail-icon-button",
+              "Mail"
+            )
+          );
+          this.settingsPage.appendChild(
+            createSettingsButtonWithLabel(
+              "settings-page-notifications-icon-button",
+              "Notifications"
+            )
+          );
+          this.settingsPage.appendChild(
+            createSettingsButtonWithLabel(
+              "settings-page-settings-icon-button",
+              "Settings"
+            )
+          );
+          break;
+        case "widgets":
+          this.settingsPage.appendChild(createMainTitle("Widgets"));
+          this.settingsPage.appendChild(createSectionTitle("De Lijn"));
+          this.settingsPage.appendChild(
+            createDescription("Change the De Lijn app configuration.")
+          );
+          this.settingsPage.appendChild(
+            createSettingsButtonWithLabel(
+              "settings-page-delijn-monochrome-button",
+              "Monochrome"
+            )
+          );
+          this.settingsPage.appendChild(
+            createLabeledSlider(
+              "1",
+              "10",
+              "settings-page-max-busses-slider",
+              "Max busses"
+            )
+          );
+          this.settingsPage.appendChild(createSectionTitle("Assignments"));
+          this.settingsPage.appendChild(
+            createDescription("Change the assignments app configuration.")
+          );
+          this.settingsPage.appendChild(
+            createLabeledSlider(
+              "1",
+              "10",
+              "settings-page-max-assignments-slider",
+              "Max assignments"
+            )
+          );
+          if (!liteMode) {
+            this.settingsPage.appendChild(createMainTitle("Games"));
+            this.settingsPage.appendChild(createSectionTitle("Snake"));
+            this.settingsPage.appendChild(
+              createDescription("Change configuration of Snake++")
+            );
+            this.settingsPage.appendChild(
+              createSettingsButtonWithLabel(
+                "settings-page-show-snake-grid-button",
+                "Grid"
+              )
+            );
+          }
+          break;
+        case "other":
+          this.settingsPage.appendChild(createMainTitle("Other"));
+          this.settingsPage.appendChild(createSectionTitle("Performance"));
+          this.settingsPage.appendChild(
+            createDescription(
+              "Disables animations for better performance on low end devices."
+            )
+          );
+          this.settingsPage.appendChild(
+            createSettingsButtonWithLabel(
+              "settings-page-performance-mode-button",
+              "Performance mode"
+            )
+          );
+          this.settingsPage.appendChild(createSectionTitle("Login"));
+          this.settingsPage.appendChild(
+            createDescription("Change the login page configuration.")
+          );
+          this.settingsPage.appendChild(
+            createSettingsButtonWithLabel(
+              "settings-page-splash-text-button",
+              "Splash-text"
+            )
+          );
+          this.settingsPage.appendChild(createSectionTitle("Homepage"));
+          this.settingsPage.appendChild(
+            createDescription("Change the home page configuration.")
+          );
+          this.settingsPage.appendChild(
+            createSettingsButtonWithLabel(
+              "settings-page-discord-button",
+              "Discord button"
+            )
+          );
+          this.settingsPage.appendChild(createSectionTitle("Keybindings"));
+          this.settingsPage.appendChild(
+            createDescription("Customize your keybindings")
+          );
+          this.settingsPage.appendChild(
+            createKeybindInput(
+              "settings-page-quick-menu-keybinding",
+              "Quick Menu"
+            )
+          );
+          this.settingsPage.appendChild(
+            createKeybindInput(
+              "settings-page-widget-edit-keybinding",
+              "Widget editing"
+            )
+          );
+          this.settingsPage.appendChild(
+            createKeybindInput("settings-widget-bag-keybinding", "Widget bag")
+          );
+          this.settingsPage.appendChild(
+            createKeybindInput("settings-page-settings-keybinding", "Settings")
+          );
+          if (!liteMode) {
+            this.settingsPage.appendChild(
+              createKeybindInput("settings-page-gc-keybinding", "Global Chat")
+            );
+          }
+          this.settingsPage.appendChild(createSectionTitle("Reset"));
+          this.settingsPage.appendChild(
+            createDescription(
+              "Reset all settings and widgets to their default values."
+            )
+          );
+          let resetButton = document.createElement("button");
+          resetButton.innerText = "Reset to Defaults";
+          resetButton.classList.add("settings-page-reset-button");
+          resetButton.addEventListener("click", () => this.resetSettings());
+          this.settingsPage.appendChild(resetButton);
+          break;
+        default:
+          break;
+      }
+    }
   };
+  var settingsWindow;
+  async function createSettingsWindow() {
+    settingsWindow = new SettingsWindow();
+    await settingsWindow.create();
+    await settingsWindow.loadPage();
+    settingsWindow.hide();
+  }
+  async function openSettingsWindow(event) {
+    settingsWindow.show(event);
+    settingsWindow.loadPage();
+  }
 
   // src/main-features/appearance/themes.ts
   var currentThemeName;
   var currentTheme;
   async function getTheme(name2) {
-    let theme = await browser2.runtime.sendMessage({
+    let theme = await browser.runtime.sendMessage({
       action: "getTheme",
       name: name2
     });
@@ -2318,191 +3529,6 @@ Is it scaring you off?`,
   function getThemeVar(varName) {
     return currentTheme.cssProperties[varName];
   }
-  var ColorCursor = class {
-    element = document.createElement("div");
-    visibleElement = document.createElement("div");
-    xPos = 50;
-    yPos = 50;
-    enableX;
-    enableY;
-    parentContainer;
-    constructor(parentContainer, enableX = true, enableY = true) {
-      this.parentContainer = parentContainer;
-      this.enableX = enableX;
-      this.enableY = enableY;
-      this.element.appendChild(this.visibleElement);
-      let isDragging = false;
-      this.parentContainer.addEventListener("mousedown", (e2) => {
-        isDragging = true;
-        this.handlePointerEvent(e2);
-      });
-      document.addEventListener("mouseup", () => {
-        isDragging = false;
-      });
-      document.addEventListener("mousemove", (e2) => {
-        if (isDragging) {
-          this.handlePointerEvent(e2);
-        }
-      });
-      this.updateCursorPosition();
-    }
-    handlePointerEvent(e2) {
-      const rect = this.parentContainer.getBoundingClientRect();
-      const x2 = e2.clientX - rect.left;
-      const y2 = e2.clientY - rect.top;
-      const xPercent = x2 / rect.width * 100;
-      const yPercent = y2 / rect.height * 100;
-      if (this.enableX) this.xPos = Math.max(0, Math.min(100, xPercent));
-      if (this.enableY) this.yPos = Math.max(0, Math.min(100, yPercent));
-      this.updateCursorPosition();
-      this.onDrag();
-    }
-    // Overwrite this if needed
-    onDrag() {
-    }
-    updateCursorPosition() {
-      this.element.style.left = `${this.xPos}%`;
-      this.element.style.top = `${this.yPos}%`;
-    }
-  };
-  var ColorPicker = class {
-    currentColor = w("#72b6c0ff");
-    width;
-    element = document.createElement("div");
-    hueContainer = document.createElement("div");
-    fieldContainer = document.createElement("div");
-    hueCursor;
-    fieldCursor;
-    constructor(width = "20rem") {
-      this.width = width;
-      this.hueCursor = this.createHueCursor();
-      this.hueCursor.onDrag = () => {
-        this.readColor();
-      };
-      this.fieldCursor = this.createFieldCursor();
-      this.fieldCursor.onDrag = () => {
-        this.readColor();
-      };
-    }
-    createFieldCursor() {
-      let fieldCursor = new ColorCursor(this.fieldContainer);
-      fieldCursor.element.classList.add("color-cursor-wrapper");
-      fieldCursor.visibleElement.classList.add("color-cursor");
-      return fieldCursor;
-    }
-    createHueCursor() {
-      let hueCursor = new ColorCursor(this.hueContainer, true, false);
-      hueCursor.element.classList.add("color-cursor-wrapper");
-      hueCursor.visibleElement.classList.add("color-cursor");
-      return hueCursor;
-    }
-    createHueContainer() {
-      this.hueContainer.classList.add("hue-picker");
-      this.hueContainer.appendChild(this.hueCursor.element);
-      return this.hueContainer;
-    }
-    createFieldContainer() {
-      this.fieldContainer.classList.add("color-picker-field");
-      let horizontalContainer = document.createElement("div");
-      horizontalContainer.style.background = `linear-gradient(to left, var(--max-sat) 0%, rgba(255, 255, 255, 1) 100%)`;
-      let verticalContainer = document.createElement("div");
-      verticalContainer.style.background = "linear-gradient(to top, black, transparent)";
-      this.fieldContainer.appendChild(horizontalContainer);
-      this.fieldContainer.append(verticalContainer);
-      this.fieldContainer.appendChild(this.fieldCursor.element);
-      return this.fieldContainer;
-    }
-    copyHexToClipBoard() {
-      navigator.clipboard.writeText(this.currentColor.toHex());
-    }
-    createBottomContainer() {
-      let createCopyButton = () => {
-        let button = document.createElement("button");
-        button.innerHTML = copySvg;
-        button.classList.add("copy-hex-button");
-        button.addEventListener("click", () => {
-          this.copyHexToClipBoard();
-          let svg = button.querySelector("svg");
-          if (!svg) return;
-          svg.style.fill = "var(--color-text)";
-          button.innerHTML = doneSvg;
-          setTimeout(() => {
-            svg.style.fill = "none";
-            button.innerHTML = copySvg;
-          }, 1e3);
-        });
-        return button;
-      };
-      let createHexInput = () => {
-        let hexInput = document.createElement("input");
-        hexInput.classList.add("smpp-text-input");
-        hexInput.addEventListener("change", () => {
-          this.readColorInput();
-        });
-        hexInput.type = "text";
-        hexInput.value = this.currentColor.toHex();
-        return hexInput;
-      };
-      function createColorPreview() {
-        let colorPreview = document.createElement("div");
-        colorPreview.classList.add("color-preview");
-        return colorPreview;
-      }
-      let bottomContainer = document.createElement("div");
-      bottomContainer.classList.add("smpp-color-picker-bottom-container");
-      bottomContainer.appendChild(createColorPreview());
-      bottomContainer.appendChild(createHexInput());
-      bottomContainer.appendChild(createCopyButton());
-      return bottomContainer;
-    }
-    render() {
-      this.element.classList.add("smpp-color-picker");
-      this.element.style.width = this.width;
-      this.element.appendChild(this.createFieldContainer());
-      this.element.appendChild(this.createHueContainer());
-      this.element.appendChild(this.createBottomContainer());
-      this.updateColorPicker();
-      return this.element;
-    }
-    readColorInput() {
-      let hexInput = this.element.querySelector("input");
-      if (hexInput) {
-        if (isValidHexColor(hexInput.value)) {
-          this.currentColor = w(hexInput.value);
-        } else {
-          hexInput.value = this.currentColor.toHex();
-        }
-      }
-      this.hueCursor.xPos = this.currentColor.hue() / 3.6;
-      this.fieldCursor.xPos = this.currentColor.toHsv().s;
-      this.fieldCursor.yPos = 100 - this.currentColor.toHsv().v;
-      this.hueCursor.updateCursorPosition();
-      this.fieldCursor.updateCursorPosition();
-      this.updateColorPicker();
-    }
-    readColor() {
-      let hue = this.hueCursor.xPos * 3.6;
-      let saturation = this.fieldCursor.xPos;
-      let value = 100 - this.fieldCursor.yPos;
-      this.currentColor = w({ h: hue, s: saturation, v: value });
-      this.updateColorPicker();
-    }
-    updateColorPicker() {
-      let maxSatColor = w({ h: this.hueCursor.xPos * 3.6, s: 100, v: 100 });
-      this.element.style.setProperty("--max-sat", maxSatColor.toHex());
-      this.element.style.setProperty(
-        "--current-color",
-        this.currentColor.toHex()
-      );
-      let hexInput = this.element.querySelector("input");
-      if (hexInput) {
-        hexInput.value = this.currentColor.toHex();
-      }
-      this.onChange();
-    }
-    onChange() {
-    }
-  };
   var Tile = class {
     element = document.createElement("div");
     // Overide in de implementation
@@ -2520,7 +3546,7 @@ Is it scaring you off?`,
     async createContent() {
     }
   };
-  var ThemeTile = class extends Tile {
+  var ThemeTile2 = class extends Tile {
     name;
     isCustom;
     constructor(name2, isCustom = false) {
@@ -2531,7 +3557,7 @@ Is it scaring you off?`,
     async getBackgroundImage() {
       let image = document.createElement("img");
       image.classList.add("theme-tile-image");
-      let result = await browser2.runtime.sendMessage({
+      let result = await browser.runtime.sendMessage({
         action: "getImage",
         id: this.name
       });
@@ -2580,18 +3606,152 @@ Is it scaring you off?`,
       this.element.appendChild(this.getBottomContainer(theme));
     }
     async onClick() {
-      await browser2.runtime.sendMessage({
+      await browser.runtime.sendMessage({
         action: "setSetting",
         name: "appearance.theme",
         data: this.name
       });
-      setTheme(this.name);
+      await settingsWindow.loadPage();
+      await loadQuickSettings();
+      let data2 = await browser.runtime.sendMessage({
+        action: "getSettingsData"
+      });
+      applyAppearance(data2.appearance);
     }
     // Overide in de implementation
     async onEdit() {
     }
     // Overide in de implementation
     async onDuplicate() {
+    }
+  };
+  var ThemeFolder = class extends Tile {
+    category;
+    constructor(category) {
+      super();
+      this.category = category;
+    }
+    getBottomContainer() {
+      let bottomContainer = document.createElement("div");
+      bottomContainer.classList.add("theme-tile-bottom");
+      let title = document.createElement("span");
+      title.innerText = this.category;
+      title.classList.add("theme-tile-title");
+      bottomContainer.appendChild(title);
+      return bottomContainer;
+    }
+    async createContent() {
+      let themes3 = await browser.runtime.sendMessage({
+        action: "getThemes",
+        categories: [this.category],
+        includeHidden: true
+      });
+      if (!themes3) return;
+      let theme = Object.values(themes3)[0];
+      if (!theme) return;
+      Object.keys(theme.cssProperties).forEach((key) => {
+        this.element.style.setProperty(
+          `${key}-local`,
+          theme.cssProperties[key]
+        );
+      });
+      this.element.appendChild(this.getBottomContainer());
+    }
+  };
+  var ThemeSelector = class {
+    element = document.createElement("div");
+    content = document.createElement("div");
+    topContainer = document.createElement("div");
+    currentCategory = "all";
+    // Store current tiles to properly clean them up
+    currentTiles = [];
+    createTopContainer() {
+      const newTopContainer = document.createElement("div");
+      let title = document.createElement("h2");
+      title.classList.add("current-category");
+      if (this.currentCategory != "all") {
+        let backButton = document.createElement("button");
+        backButton.innerText = "<";
+        backButton.addEventListener("click", async () => {
+          this.currentCategory = "all";
+          await this.update();
+        });
+        newTopContainer.appendChild(backButton);
+      }
+      title.innerText = this.currentCategory;
+      newTopContainer.appendChild(title);
+      return newTopContainer;
+    }
+    render() {
+      this.topContainer = this.createTopContainer();
+      this.element.appendChild(this.topContainer);
+      this.element.appendChild(this.content);
+      this.content.classList.add("theme-tiles");
+      return this.element;
+    }
+    async update() {
+      this.currentTiles = [];
+      this.topContainer.remove();
+      this.element.innerHTML = "";
+      let newContent = this.createContentContainer();
+      this.content.remove();
+      this.content = newContent;
+      this.topContainer = this.createTopContainer();
+      this.element.appendChild(this.topContainer);
+      this.element.appendChild(this.content);
+      if (this.currentCategory == "all") {
+        await this.renderFolders();
+      } else {
+        await this.renderFolderContent();
+      }
+    }
+    async renderTiles(tiles) {
+      const renderedElements = await Promise.all(
+        tiles.map((tile) => tile.render())
+      );
+      this.currentTiles = tiles;
+      const fragment = document.createDocumentFragment();
+      renderedElements.forEach((element) => {
+        fragment.appendChild(element);
+      });
+      this.content.appendChild(fragment);
+    }
+    createContentContainer() {
+      this.content = document.createElement("div");
+      this.content.classList.add("theme-tiles");
+      return this.content;
+    }
+    async renderFolders() {
+      let categories = await browser.runtime.sendMessage({
+        action: "getThemeCategories",
+        includeEmpty: false,
+        includeHidden: true
+      });
+      let tiles = Object.keys(categories).map((category) => {
+        let tile = new ThemeFolder(category);
+        tile.onClick = async () => {
+          this.changeCategory(category);
+        };
+        return tile;
+      });
+      await this.renderTiles(tiles);
+    }
+    async renderFolderContent() {
+      let themes3 = await browser.runtime.sendMessage({
+        action: "getThemes",
+        categories: [this.currentCategory],
+        includeHidden: true
+      });
+      if (!themes3) return;
+      let tiles = Object.keys(themes3).map((name2) => {
+        let tile = new ThemeTile2(name2);
+        return tile;
+      });
+      await this.renderTiles(tiles);
+    }
+    async changeCategory(category) {
+      this.currentCategory = category;
+      await this.update();
     }
   };
 
@@ -2607,7 +3767,7 @@ Is it scaring you off?`,
     async createPreview() {
       let plantPreviewDiv = document.createElement("div");
       plantPreviewDiv.id = "plantPreviewWidget";
-      let plantData = await browser2.runtime.sendMessage({
+      let plantData = await browser.runtime.sendMessage({
         action: "getPlantAppData"
       });
       let plantTitle = document.createElement("div");
@@ -2629,7 +3789,7 @@ Is it scaring you off?`,
     if (window.localStorage.getItem("current_plant_conditions")) {
       await migratePlantData();
     }
-    let plantData = await browser2.runtime.sendMessage({
+    let plantData = await browser.runtime.sendMessage({
       action: "getPlantAppData"
     });
     let outdated = checkIfOutdated(plantData.plantVersion);
@@ -2737,22 +3897,22 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     return updatePromptContainer;
   }
   async function resetPlant() {
-    await browser2.runtime.sendMessage({
+    await browser.runtime.sendMessage({
       action: "setPlantAppData",
       data: null
     });
     createPlantWidget(document.getElementById("plantWidget"));
   }
-  function calculatePercentile(t2) {
+  function calculatePercentile(t) {
     const totalTime = 259200;
-    return Math.max(0, 100 * (1 - t2 / totalTime));
+    return Math.max(0, 100 * (1 - t / totalTime));
   }
-  function getTimeInCorrectFormat(t2) {
-    if (t2 / 60 / 1e3 < 1) return "Now";
-    if (t2 / 60 / 60 / 1e3 < 1) return Math.round(t2 / 60 / 1e3) + "min ago";
-    if (t2 / 60 / 60 / 1e3 / 24 < 1)
-      return Math.round(t2 / 60 / 60 / 1e3) + "h ago";
-    return Math.round(t2 / 60 / 60 / 1e3 / 24) + "d ago";
+  function getTimeInCorrectFormat(t) {
+    if (t / 60 / 1e3 < 1) return "Now";
+    if (t / 60 / 60 / 1e3 < 1) return Math.round(t / 60 / 1e3) + "min ago";
+    if (t / 60 / 60 / 1e3 / 24 < 1)
+      return Math.round(t / 60 / 60 / 1e3) + "h ago";
+    return Math.round(t / 60 / 60 / 1e3 / 24) + "d ago";
   }
   function createRemoveButton(isAlive) {
     let removeButtonDiv = document.createElement("div");
@@ -2796,11 +3956,11 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     removeplantButton.addEventListener("click", resetPlant);
   }
   async function userWateredPlant() {
-    let data2 = await browser2.runtime.sendMessage({
+    let data2 = await browser.runtime.sendMessage({
       action: "getPlantAppData"
     });
     data2.lastWaterTime = /* @__PURE__ */ new Date();
-    await browser2.runtime.sendMessage({
+    await browser.runtime.sendMessage({
       action: "setPlantAppData",
       data: data2
     });
@@ -2825,7 +3985,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         (currentTime - new Date(data2.birthday)) / (1e3 * 60 * 60 * 24) + 1
       );
     }
-    browser2.runtime.sendMessage({
+    browser.runtime.sendMessage({
       action: "setPlantAppData",
       data: data2
     });
@@ -2854,7 +4014,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       daysSinceBirthday: 0,
       isAlive: true
     };
-    browser2.runtime.sendMessage({
+    browser.runtime.sendMessage({
       action: "setPlantAppData",
       data: plantData
     });
@@ -3554,30 +4714,30 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     GlobalChatOpenButton.id = "global_chat_button";
     GlobalChatOpenButton.className = "topnav__btn";
     GlobalChatOpenButton.innerHTML = gcIconSvg;
-    GlobalChatOpenButton.addEventListener("click", (e2) => openGlobalChat(e2));
+    GlobalChatOpenButton.addEventListener("click", (e) => openGlobalChat(e));
     return GlobalChatOpenButton;
   }
-  window.addEventListener("message", async (e2) => {
-    if (!Object.values(GC_DOMAINS).includes(e2.origin)) {
+  window.addEventListener("message", async (e) => {
+    if (!Object.values(GC_DOMAINS).includes(e.origin)) {
       console.warn(
         "Got a message but it was not from one of the global chat domains."
       );
       return;
     }
     let response = { error: "not found" };
-    switch (e2.data.action) {
+    switch (e.data.action) {
       // Get the current plant.
       case "plantapi.v1.get_current":
         response = await getPlantV1();
         break;
       case "plantapi.v1.get_stage_svg":
         response = {
-          svg: getPlantSvg(stageDataToInternalPlantData(e2.data.stageData))
+          svg: getPlantSvg(stageDataToInternalPlantData(e.data.stageData))
         };
         break;
     }
-    response.callId = e2.data.callId;
-    e2.source.postMessage(response, e2.origin);
+    response.callId = e.data.callId;
+    e.source.postMessage(response, e.origin);
   });
   function stageDataToInternalPlantData(stageData) {
     return {
@@ -3587,7 +4747,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     };
   }
   async function getPlantV1() {
-    let data2 = await browser2.runtime.sendMessage({
+    let data2 = await browser.runtime.sendMessage({
       action: "getPlantAppData"
     });
     if (!data2) {
@@ -3622,16 +4782,16 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   }
   function quick_cmd_list() {
     let cmd_list = [];
-    for (let i2 = 0; i2 < quicks.length; i2++) {
-      cmd_list.push({ value: quicks[i2].name, meta: "quick: " + quicks[i2].url });
+    for (let i = 0; i < quicks.length; i++) {
+      cmd_list.push({ value: quicks[i].name, meta: "quick: " + quicks[i].url });
     }
     return cmd_list;
   }
   function add_quick(name2, url) {
     let quick = { name: name2.toLowerCase(), url };
-    for (let i2 = 0; i2 < quicks.length; i2++) {
-      if (quicks[i2].name == name2) {
-        quicks[i2] = quick;
+    for (let i = 0; i < quicks.length; i++) {
+      if (quicks[i].name == name2) {
+        quicks[i] = quick;
         quick_save();
         return;
       }
@@ -3640,16 +4800,16 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     quick_save();
   }
   function remove_quick(name2) {
-    for (let i2 = 0; i2 < quicks.length; i2++) {
-      if (quicks[i2].name == name2) {
-        quicks.splice(i2, 1);
+    for (let i = 0; i < quicks.length; i++) {
+      if (quicks[i].name == name2) {
+        quicks.splice(i, 1);
         quick_save();
         return;
       }
     }
   }
   async function quickLoad() {
-    const quicks2 = await browser2.runtime.sendMessage({
+    const quicks2 = await browser.runtime.sendMessage({
       action: "getSetting",
       name: "other.quicks"
     });
@@ -3659,7 +4819,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     return quicks2;
   }
   async function quick_save() {
-    await browser2.runtime.sendMessage({
+    await browser.runtime.sendMessage({
       action: "setSetting",
       name: "other.quicks",
       data: quicks
@@ -3671,9 +4831,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       cmd_list,
       function(name2, shift) {
         value_list = [];
-        for (let i2 = 0; i2 < quicks.length; i2++) {
-          if (quicks[i2].name == name2) {
-            value_list = [{ value: quicks[i2].url }];
+        for (let i = 0; i < quicks.length; i++) {
+          if (quicks[i].name == name2) {
+            value_list = [{ value: quicks[i].url }];
             break;
           }
         }
@@ -3707,10 +4867,10 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     const contentType = response.headers.get("content-type");
     if (response.ok && contentType && contentType.includes("application/json")) {
       let response_data = await response.json();
-      for (let i2 = 0; i2 < response_data.length; i2++) {
+      for (let i = 0; i < response_data.length; i++) {
         links.push({
-          url: response_data[i2].url,
-          value: response_data[i2].name.toLowerCase(),
+          url: response_data[i].url,
+          value: response_data[i].name.toLowerCase(),
           meta: "link"
         });
       }
@@ -3725,8 +4885,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     const contentType = response.headers.get("content-type");
     if (response.ok && contentType && contentType.includes("application/json")) {
       let response_data = await response.json();
-      for (let i2 = 0; i2 < response_data.own.length; i2++) {
-        let vak = response_data.own[i2];
+      for (let i = 0; i < response_data.own.length; i++) {
+        let vak = response_data.own[i];
         let meta = "vak";
         if (vak.descr != "") {
           meta += "  [ " + vak.descr + " ]";
@@ -3743,8 +4903,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     let goto_items_html = document.querySelectorAll(
       ".js-shortcuts-container > a"
     );
-    for (let i2 = 0; i2 < goto_items_html.length; i2++) {
-      const item = goto_items_html[i2];
+    for (let i = 0; i < goto_items_html.length; i++) {
+      const item = goto_items_html[i];
       goto_items.push({
         url: item.href,
         value: item.innerText.toLowerCase().trim(),
@@ -3784,7 +4944,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             unbloat();
             return;
           case "breakdmenu":
-            await browser2.runtime.sendMessage({
+            await browser.runtime.sendMessage({
               action: "setSetting",
               name: "other.dmenu",
               data: {
@@ -3841,21 +5001,21 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             return;
           case "plant data":
             console.log(
-              await browser2.runtime.sendMessage({
+              await browser.runtime.sendMessage({
                 action: "getPlantAppData"
               })
             );
           case "remove current theme":
-            let data2 = await browser2.runtime.sendMessage({
+            let data2 = await browser.runtime.sendMessage({
               action: "getSettingsData"
             });
-            await browser2.runtime.sendMessage({
+            await browser.runtime.sendMessage({
               action: "removeCustomTheme",
               id: data2.appearance.theme
             });
             break;
           case "test cats":
-            let themes3 = await browser2.runtime.sendMessage({
+            let themes3 = await browser.runtime.sendMessage({
               action: "getThemes",
               categories: ["quickSettings"],
               includeHidden: true
@@ -3867,26 +5027,26 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         if (cmd.startsWith("config.")) {
           dmenuEditConfig(cmd);
         }
-        for (let i2 = 0; i2 < quicks.length; i2++) {
-          const quick = quicks[i2];
+        for (let i = 0; i < quicks.length; i++) {
+          const quick = quicks[i];
           if (quick.name == cmd) {
             openURL2(quick.url, true);
             return;
           }
         }
-        for (let i2 = 0; i2 < links.length; i2++) {
-          if (links[i2].value == cmd) {
-            openURL2(links[i2].url, true);
+        for (let i = 0; i < links.length; i++) {
+          if (links[i].value == cmd) {
+            openURL2(links[i].url, true);
           }
         }
-        for (let i2 = 0; i2 < goto_items.length; i2++) {
-          if (goto_items[i2].value == cmd) {
-            openURL2(goto_items[i2].url);
+        for (let i = 0; i < goto_items.length; i++) {
+          if (goto_items[i].value == cmd) {
+            openURL2(goto_items[i].url);
           }
         }
-        for (let i2 = 0; i2 < vakken.length; i2++) {
-          if (vakken[i2].value == cmd) {
-            openURL2(vakken[i2].url);
+        for (let i = 0; i < vakken.length; i++) {
+          if (vakken[i].value == cmd) {
+            openURL2(vakken[i].url);
           }
         }
       },
@@ -3895,1394 +5055,12 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     );
   }
 
-  // src/main-features/appearance/weather-effects.ts
-  function setSnowLevel(amount, opacity) {
-    document.getElementById("snowflakes")?.remove();
-    amount = amount > 3e3 ? 3e3 : amount;
-    let snowDiv = document.createElement("div");
-    snowDiv.id = "snowflakes";
-    for (let i2 = 0; i2 < amount; i2++) {
-      let flake = document.createElement("img");
-      flake.classList = "snowflake";
-      flake.src = currentThemeName == "pink" ? getExtensionImage("icons/weather-overlay/blossom.svg") : getExtensionImage("icons/weather-overlay/snowflake.svg");
-      flake.style.left = `${Math.floor(Math.random() * 100)}%`;
-      flake.style.animation = `snowflake_fall_${Math.floor(Math.random() * 3)} ${Math.floor(Math.random() * 7) + 10}s ease-in-out infinite`;
-      flake.style.animationDelay = `${Math.floor(Math.random() * 40) - 40}s`;
-      flake.style.width = `${Math.floor(Math.random() * 20) + 10}px`;
-      flake.style.opacity = opacity;
-      snowDiv.appendChild(flake);
-    }
-    document.documentElement.appendChild(snowDiv);
-  }
-  function setRainLevel(amount, opacity) {
-    document.getElementById("raindrops")?.remove();
-    amount = amount > 3e3 ? 3e3 : amount;
-    let rainDiv = document.createElement("div");
-    rainDiv.id = "raindrops";
-    for (let i2 = 0; i2 < amount; i2++) {
-      let raindrop = document.createElement("img");
-      raindrop.classList.add("raindrop");
-      raindrop.src = getExtensionImage("icons/weather-overlay/raindrop.svg");
-      raindrop.style.left = `${Math.random() * 100}%`;
-      raindrop.style.animation = `raindrop_fall ${Math.random() * 2 + 2}s linear infinite`;
-      raindrop.style.animationDelay = `${Math.random() * 5 - 5}s`;
-      raindrop.style.width = `${Math.random() * 7.5 + 7.5}px`;
-      raindrop.style.opacity = opacity;
-      rainDiv.appendChild(raindrop);
-    }
-    document.documentElement.appendChild(rainDiv);
-  }
-  async function setOverlayBasedOnConditions(amount, opacity) {
-    async function getWeatherDescription(widget) {
-      const weatherData = await getWidgetSetting(widget + ".cache.weatherData");
-      if (weatherData == null) return null;
-      if (weatherData.cod != 200) return null;
-      return weatherData.weather[0].main;
-    }
-    let weatherWidgets = widgets.filter(
-      (item) => item.name.toLowerCase().includes("weather") && item.isActive
-    );
-    let weathers = await Promise.all(
-      weatherWidgets.map(async (widget) => {
-        return await getWeatherDescription(widget.name);
-      })
-    );
-    weathers = weathers.filter((description) => description != null);
-    if (weathers.includes("Rain") || weathers.includes("Drizzle")) {
-      setRainLevel(amount, opacity);
-    }
-    if (weathers.includes("Snow")) {
-      setSnowLevel(amount, opacity);
-    }
-  }
-  function applyWeatherEffects(weatherOverlay) {
-    let rainDiv = document.getElementById("raindrops");
-    let snowDiv = document.getElementById("snowflakes");
-    switch (weatherOverlay.type) {
-      case "snow":
-        if (rainDiv) rainDiv.remove();
-        setSnowLevel(weatherOverlay.amount, weatherOverlay.opacity);
-        break;
-      case "realtime":
-        if (rainDiv) rainDiv.remove();
-        if (snowDiv) snowDiv.remove();
-        setOverlayBasedOnConditions(
-          weatherOverlay.amount,
-          weatherOverlay.opacity
-        );
-        break;
-      case "rain":
-        if (snowDiv) snowDiv.remove();
-        setRainLevel(weatherOverlay.amount, weatherOverlay.opacity);
-        break;
-      default:
-        console.error("No weather selector");
-        break;
-    }
-  }
-
-  // src/main-features/settings/quick-settings.ts
-  var quickSettingsWindowIsHidden = true;
-  var quickSettingsBackgroundImageSelector;
-  async function storeQuickSettings() {
-    const oldData = await browser2.runtime.sendMessage({
-      action: "getSettingsData"
-    });
-    const data2 = structuredClone(oldData);
-    data2.appearance.background.blur = Number(
-      document.getElementById("background-blur-amount-slider").value
-    );
-    data2.other.performanceMode = document.getElementById(
-      "performance-mode-toggle"
-    ).checked;
-    document.getElementById(
-      "performance-mode-info"
-    ).innerHTML = `Toggle performance mode ${data2.other.performanceMode ? "<span class='green-underline'>Enabled</span>" : "<span class='red-underline'>Disabled</span>"}`;
-    await browser2.runtime.sendMessage({ action: "setSettingsData", data: data2 });
-    await loadQuickSettings();
-    if (settingsWindow) {
-      await settingsWindow.loadPage();
-    }
-    console.log("Successfull stored quick settings:\n", data2);
-    await apply();
-  }
-  async function loadQuickSettings() {
-    const data2 = await browser2.runtime.sendMessage({
-      action: "getSettingsData"
-    });
-    quickSettingsBackgroundImageSelector.id = data2.appearance.theme;
-    quickSettingsBackgroundImageSelector.loadImageData();
-    document.getElementById("background-blur-amount-slider").value = data2.appearance.background.blur;
-    document.getElementById("performance-mode-toggle").checked = data2.other.performanceMode;
-    document.getElementById(
-      "performance-mode-info"
-    ).innerHTML = `Toggle performance mode ${data2.other.performanceMode ? "<span class='green-underline'>Enabled</span>" : "<span class='red-underline'>Disabled</span>"}`;
-  }
-  function toggleQuickSettings() {
-    let win = document.getElementById("quickSettings");
-    if (win && !quickSettingsWindowIsHidden) {
-      closeQuickSettings();
-    } else {
-      openQuickSettings();
-    }
-  }
-  async function openQuickSettings() {
-    let win = document.getElementById("quickSettings");
-    win = document.getElementById("quickSettings");
-    win.classList.remove("qs-hidden");
-    await loadQuickSettings();
-    quickSettingsWindowIsHidden = false;
-  }
-  function closeQuickSettings() {
-    let win = document.getElementById("quickSettings");
-    if (win) {
-      win.classList.add("qs-hidden");
-    }
-    quickSettingsWindowIsHidden = true;
-  }
-  function createQuickSettingsHTML(parent) {
-    const performanceModeTooltipLabel = document.createElement("label");
-    performanceModeTooltipLabel.className = "performanceModeTooltipLabel";
-    performanceModeTooltipLabel.id = "performanceModeTooltipLabel";
-    const performanceModeTooltip = document.createElement("input");
-    performanceModeTooltip.type = "checkbox";
-    performanceModeTooltip.id = "performance-mode-toggle";
-    performanceModeTooltipLabel.appendChild(performanceModeTooltip);
-    performanceModeTooltipLabel.innerHTML += performanceModeSvg;
-    const performanceModeInfo = document.createElement("span");
-    performanceModeInfo.id = "performance-mode-info";
-    const wallpaperTopContainer = document.createElement("div");
-    const wallpaperHeading = document.createElement("h3");
-    wallpaperHeading.className = "quick-settings-title";
-    wallpaperHeading.textContent = "Wallpaper:";
-    const wallpaperContainer = document.createElement("div");
-    wallpaperContainer.className = "wallpaper-quick-settings-container";
-    const blurSliderContainer = document.createElement("div");
-    blurSliderContainer.className = "blur-slider-container";
-    const blurSlider = document.createElement("input");
-    blurSlider.type = "range";
-    blurSlider.min = "0";
-    blurSlider.max = "10";
-    blurSlider.value = "0";
-    blurSlider.className = "main-slider";
-    blurSlider.id = "background-blur-amount-slider";
-    const backgroundBlurLabel = document.createElement("span");
-    backgroundBlurLabel.className = "color-label";
-    backgroundBlurLabel.id = "blurPlaats";
-    backgroundBlurLabel.textContent = "blur";
-    blurSliderContainer.appendChild(blurSlider);
-    blurSliderContainer.appendChild(backgroundBlurLabel);
-    wallpaperContainer.appendChild(
-      quickSettingsBackgroundImageSelector.fullContainer
-    );
-    wallpaperContainer.appendChild(blurSliderContainer);
-    wallpaperTopContainer.appendChild(wallpaperHeading);
-    wallpaperTopContainer.appendChild(wallpaperContainer);
-    const extraSettingsButton = document.createElement("button");
-    extraSettingsButton.id = "extraSettingsButton";
-    extraSettingsButton.innerHTML += "More Settings";
-    extraSettingsButton.innerHTML += settingsIconSvg;
-    extraSettingsButton.addEventListener("click", (e2) => openSettingsWindow(e2));
-    parent.appendChild(performanceModeTooltipLabel);
-    parent.appendChild(wallpaperTopContainer);
-    parent.appendChild(performanceModeInfo);
-    parent.appendChild(extraSettingsButton);
-    return parent;
-  }
-  function createQuickSettings() {
-    let quickSettingsWindow = document.createElement("div");
-    quickSettingsWindow.id = "quickSettings";
-    quickSettingsWindow.addEventListener("change", storeQuickSettings);
-    quickSettingsBackgroundImageSelector = new ImageSelector("backgroundImage");
-    quickSettingsBackgroundImageSelector.onStore = () => {
-      storeQuickSettings();
-    };
-    quickSettingsWindow = createQuickSettingsHTML(quickSettingsWindow);
-    document.getElementById("quickSettingsButton").insertAdjacentElement("afterend", quickSettingsWindow);
-    document.getElementById("performanceModeTooltipLabel").addEventListener("mouseover", () => {
-      document.getElementById("performance-mode-info").style.opacity = "1";
-      document.getElementById("performance-mode-info").style.zIndex = "2";
-    });
-    document.getElementById("performanceModeTooltipLabel").addEventListener("mouseout", () => {
-      document.getElementById("performance-mode-info").style.opacity = "0";
-      document.getElementById("performance-mode-info").style.zIndex = "-1";
-    });
-    document.addEventListener("click", (e2) => {
-      if (quickSettingsWindowIsHidden) return;
-      if (e2.target.id === "extraSettingsButton") {
-        closeQuickSettings();
-      }
-      if (e2.target.id === "quickSettings" || quickSettingsWindow.contains(e2.target) || e2.target.id === "quickSettingsButton") {
-        return;
-      }
-      closeQuickSettings();
-    });
-    closeQuickSettings();
-  }
-  function createQuickSettingsButton() {
-    let quickSettingsButtonWrapper = document.createElement("div");
-    quickSettingsButtonWrapper.id = "quickSettingsButtonWrapper";
-    quickSettingsButtonWrapper.classList.add("smpp-button");
-    quickSettingsButtonWrapper.classList.add("topnav__btn-wrapper");
-    let quickSettingsButton = document.createElement("button");
-    quickSettingsButton.id = "quickSettingsButton";
-    quickSettingsButton.classList.add("topnav__btn");
-    quickSettingsButton.innerText = "Settings";
-    quickSettingsButton.addEventListener("click", toggleQuickSettings);
-    quickSettingsButtonWrapper.appendChild(quickSettingsButton);
-    return quickSettingsButtonWrapper;
-  }
-
-  // src/main-features/settings/main-settings.ts
-  var SettingsWindow = class extends BaseWindow {
-    settingsSideBarCategories = [
-      { name: "Appearance", id: "appearance" },
-      { name: "Navigation", id: "topNav" },
-      { name: "Widgets", id: "widgets" },
-      { name: "Other", id: "other" }
-    ];
-    currentPage = "appearance";
-    settingsPage = document.createElement("div");
-    backgroundImageSelector = new ImageSelector("backgroundImage");
-    profilePictureInput = new ImageSelector("profilePicture");
-    constructor() {
-      super("settings-window");
-    }
-    async renderContent() {
-      let content = document.createElement("div");
-      let settingsSideBar = await this.createSettingsSideBar();
-      this.settingsPage.id = "settings-page";
-      this.settingsPage.addEventListener("change", (e2) => this.storePage());
-      content.classList.add("settingsWindow");
-      content.appendChild(settingsSideBar);
-      content.appendChild(this.settingsPage);
-      this.displaySettingsPage();
-      return content;
-    }
-    async createSettingsSideBar() {
-      let settingsSideBar = document.createElement("div");
-      settingsSideBar.classList.add("settings-sidebar");
-      let settingsSideBarProfileButton = await this.createSettingsSideBarProfileButton();
-      settingsSideBar.appendChild(settingsSideBarProfileButton);
-      this.settingsSideBarCategories.forEach((category) => {
-        settingsSideBar.appendChild(this.createSettingsSideBarCategory(category));
-      });
-      let currentRadio = settingsSideBar.querySelector(
-        `input[value="${this.currentPage}"]`
-      );
-      if (currentRadio) currentRadio.checked = true;
-      settingsSideBar.addEventListener("change", this.updateSideBar);
-      return settingsSideBar;
-    }
-    updateSideBar = async (event) => {
-      if (event.target instanceof HTMLInputElement) {
-        if (event.target.type === "radio") {
-          this.currentPage = event.target.value;
-          this.displaySettingsPage();
-          await this.loadPage();
-        }
-      }
-    };
-    async createSettingsSideBarProfileButton() {
-      let data2 = await browser2.runtime.sendMessage({
-        action: "getSettingsData"
-      });
-      let radioInput = document.createElement("input");
-      radioInput.type = "radio";
-      radioInput.name = "settings-page";
-      radioInput.value = "profile";
-      radioInput.id = "settings-profile";
-      radioInput.classList.add("settings-radio");
-      let profileSettingsLabel = document.createElement("label");
-      profileSettingsLabel.htmlFor = "settings-profile";
-      profileSettingsLabel.tabIndex = 0;
-      profileSettingsLabel.classList.add(
-        "profile-settings-button",
-        "settings-category-button-js"
-      );
-      profileSettingsLabel.addEventListener("keydown", (e2) => {
-        if (e2.key === " " || e2.key === "Enter") {
-          e2.preventDefault();
-          radioInput.click();
-        }
-      });
-      let profilePicture = document.createElement("div");
-      profilePicture.classList.add("profile-picture-settings");
-      let profileTextContainer = document.createElement("div");
-      profileTextContainer.classList.add("profile-settings-label");
-      let profileSettingsLabelTitle = document.createElement("h2");
-      profileSettingsLabelTitle.id = "profile-settings-label-title";
-      let firstName = String(data2.profile.username || originalUsername).split(
-        " "
-      )[0];
-      if (firstName) profileSettingsLabelTitle.innerText = firstName;
-      let profileSettingsLabelDescription = document.createElement("p");
-      profileSettingsLabelDescription.classList.add(
-        "profile-settings-label-description"
-      );
-      profileSettingsLabelDescription.innerText = "view profile";
-      profileTextContainer.appendChild(profileSettingsLabelTitle);
-      profileTextContainer.appendChild(profileSettingsLabelDescription);
-      profileSettingsLabel.appendChild(profilePicture);
-      profileSettingsLabel.appendChild(profileTextContainer);
-      let container = document.createElement("div");
-      container.appendChild(radioInput);
-      container.appendChild(profileSettingsLabel);
-      return container;
-    }
-    isPastaTime() {
-      return (/* @__PURE__ */ new Date()).getHours() === 12;
-    }
-    createSettingsSideBarCategory(category) {
-      let radioInput = document.createElement("input");
-      radioInput.type = "radio";
-      radioInput.name = "settings-page";
-      radioInput.value = category.id;
-      radioInput.id = `settings-${category.id}`;
-      radioInput.classList.add("settings-radio");
-      let categoryLabel = document.createElement("label");
-      categoryLabel.htmlFor = `settings-${category.id}`;
-      categoryLabel.tabIndex = 0;
-      categoryLabel.classList.add(
-        "settings-category-button",
-        "settings-category-button-js"
-      );
-      categoryLabel.addEventListener("keydown", (e2) => {
-        if (e2.key === " " || e2.key === "Enter") {
-          e2.preventDefault();
-          radioInput.click();
-        }
-      });
-      let categoryButtonIcon = document.createElement("img");
-      categoryButtonIcon.classList.add("category-button-icon");
-      let imageFileName = category.id + ".webp";
-      if (category.id === "appearance" && this.isPastaTime()) {
-        imageFileName = "pasta.webp";
-      }
-      categoryButtonIcon.src = getExtensionImage(
-        "settings-icons/" + imageFileName
-      );
-      categoryLabel.appendChild(categoryButtonIcon);
-      categoryLabel.appendChild(document.createTextNode(category.name));
-      let container = document.createElement("div");
-      container.appendChild(radioInput);
-      container.appendChild(categoryLabel);
-      return container;
-    }
-    clearSettingsPage() {
-      this.settingsPage.innerHTML = "";
-    }
-    addDisclaimer(element, disclaimerHTML = `
-    * Changes will only apply after 
-    <a class="settings-page-disclaimer-button" href="#" onclick="window.location.href = window.location.href; return false;">reload</a>
-  `) {
-      if (element.nextElementSibling?.classList.contains("settings-page-disclaimer")) {
-        return;
-      }
-      const disclaimer = document.createElement("span");
-      disclaimer.classList.add("settings-page-disclaimer");
-      disclaimer.innerHTML = disclaimerHTML;
-      element.insertAdjacentElement("afterend", disclaimer);
-    }
-    async resetSettings() {
-      const popup = document.createElement("div");
-      popup.classList.add("reset-confirmation-popup");
-      const popupContent = document.createElement("div");
-      popupContent.classList.add("reset-popup-content");
-      const title = document.createElement("h3");
-      title.textContent = "Reset Settings";
-      const description = document.createElement("p");
-      description.textContent = "Are you sure you want to reset all settings to defaults? This will delete all your customizations and cannot be undone.";
-      const buttonContainer = document.createElement("div");
-      buttonContainer.classList.add("reset-popup-buttons");
-      const cancelButton = document.createElement("button");
-      cancelButton.classList.add("reset-popup-cancel");
-      cancelButton.textContent = "Cancel";
-      const confirmButton = document.createElement("button");
-      confirmButton.classList.add("reset-popup-confirm");
-      confirmButton.textContent = "Reset";
-      buttonContainer.append(cancelButton, confirmButton);
-      popupContent.append(title, description, buttonContainer);
-      popup.appendChild(popupContent);
-      this.element.appendChild(popup);
-      cancelButton.addEventListener("click", () => popup.remove());
-      confirmButton.addEventListener("click", async () => {
-        popup.remove();
-        await clearAllData();
-      });
-    }
-    async loadPage() {
-      const settings = await browser2.runtime.sendMessage({
-        action: "getSettingsData"
-      });
-      async function loadWidgetSettingSlider(id, setting) {
-        const element = document.getElementById(id);
-        const valueDisplay = document.querySelector(
-          `#${id} + .settings-page-live-value`
-        );
-        if (!element || !valueDisplay) return;
-        const value = await getWidgetSetting(setting);
-        element.value = value;
-        valueDisplay.textContent = String(value);
-      }
-      const profileTitleElement = document.getElementById(
-        "profile-settings-label-title"
-      );
-      if (profileTitleElement) {
-        let firstName = String(
-          settings.profile.username || originalUsername
-        ).split(" ")[0];
-        if (firstName) profileTitleElement.textContent = firstName;
-      }
-      switch (this.currentPage) {
-        case "profile": {
-          const usernameInput = document.getElementById(
-            "settings-page-username-input"
-          );
-          if (settings.profile.username && usernameInput) {
-            usernameInput.value = settings.profile.username;
-          }
-          this.profilePictureInput.loadImageData();
-          const defaultPfpButton = document.getElementById(
-            "settings-page-default-sm-pfp-button"
-          );
-          if (defaultPfpButton) {
-            defaultPfpButton.checked = settings.profile.useSMpfp;
-          }
-          break;
-        }
-        case "appearance": {
-          document.querySelectorAll(".settings-page-theme-card input[type='radio']").forEach((radio) => {
-            const input = radio;
-            if (input.value === settings.appearance.theme) {
-              input.checked = true;
-            } else {
-              input.checked = false;
-            }
-          });
-          this.backgroundImageSelector.id = settings.appearance.theme;
-          this.backgroundImageSelector.loadImageData();
-          const blurSlider = document.getElementById("settings-page-blur-slider");
-          if (blurSlider) {
-            blurSlider.value = String(
-              settings.appearance.background.blur * 10
-            );
-          }
-          document.querySelectorAll(".settings-page-weather-overlay-container input").forEach((input) => {
-            const inputElement = input;
-            if (inputElement.id) {
-              inputElement.checked = inputElement.id.includes(
-                settings.appearance.weatherOverlay.type
-              );
-            }
-          });
-          const weatherOverlaySlider = document.getElementById(
-            "settings-page-weather-overlay-slider"
-          );
-          if (weatherOverlaySlider) {
-            weatherOverlaySlider.value = String(
-              settings.appearance.weatherOverlay.amount
-            );
-          }
-          const weatherOpacitySlider = document.getElementById(
-            "settings-page-weather-overlay-opacity-slider"
-          );
-          if (weatherOpacitySlider) {
-            weatherOpacitySlider.value = String(
-              settings.appearance.weatherOverlay.opacity * 100
-            );
-          }
-          const defaultIconButton = document.getElementById(
-            "settings-page-default-icon-button"
-          );
-          if (defaultIconButton) {
-            defaultIconButton.checked = settings.appearance.tabLogo === "sm";
-          }
-          const smppIconButton = document.getElementById(
-            "settings-page-smpp-icon-button"
-          );
-          if (smppIconButton) {
-            smppIconButton.checked = settings.appearance.tabLogo === "smpp";
-          }
-          const showNewsButton = document.getElementById(
-            "settings-page-show-news-button"
-          );
-          if (showNewsButton) {
-            showNewsButton.checked = settings.appearance.news;
-          }
-          break;
-        }
-        case "topNav": {
-          const swapCoursesButton = document.getElementById(
-            "settings-page-swap-courses-button"
-          );
-          if (swapCoursesButton) {
-            swapCoursesButton.checked = settings.topNav.switchCoursesAndLinks;
-          }
-          if (isGOSchool) {
-            const goButton = document.getElementById("settings-page-go-button");
-            if (goButton) {
-              goButton.checked = settings.topNav.buttons.GO;
-            }
-          }
-          if (!liteMode) {
-            const globalChatButton = document.getElementById(
-              "settings-page-global-chat-button"
-            );
-            if (globalChatButton) {
-              globalChatButton.checked = settings.topNav.buttons.GC;
-            }
-          }
-          const searchButton = document.getElementById(
-            "settings-page-search-button"
-          );
-          if (searchButton) {
-            searchButton.checked = settings.topNav.buttons.search;
-          }
-          const quickMenuButton = document.getElementById(
-            "settings-page-quick-menu-button"
-          );
-          if (quickMenuButton) {
-            quickMenuButton.checked = settings.topNav.buttons.quickMenu;
-          }
-          const homeIconButton = document.getElementById(
-            "settings-page-home-icon-button"
-          );
-          if (homeIconButton) {
-            homeIconButton.checked = settings.topNav.icons.home;
-          }
-          const mailIconButton = document.getElementById(
-            "settings-page-mail-icon-button"
-          );
-          if (mailIconButton) {
-            mailIconButton.checked = settings.topNav.icons.mail;
-          }
-          const notificationsIconButton = document.getElementById(
-            "settings-page-notifications-icon-button"
-          );
-          if (notificationsIconButton) {
-            notificationsIconButton.checked = settings.topNav.icons.notifications;
-          }
-          const settingsIconButton = document.getElementById(
-            "settings-page-settings-icon-button"
-          );
-          if (settingsIconButton) {
-            settingsIconButton.checked = settings.topNav.icons.settings;
-          }
-          break;
-        }
-        case "widgets": {
-          const delijnMonochromeButton = document.getElementById(
-            "settings-page-delijn-monochrome-button"
-          );
-          if (delijnMonochromeButton) {
-            delijnMonochromeButton.checked = await getWidgetSetting("DelijnWidget.monochrome");
-          }
-          await loadWidgetSettingSlider(
-            "settings-page-max-busses-slider",
-            "DelijnWidget.maxBusses"
-          );
-          await loadWidgetSettingSlider(
-            "settings-page-max-assignments-slider",
-            "TakenWidget.maxAssignments"
-          );
-          if (!liteMode) {
-            const showSnakeGridButton = document.getElementById(
-              "settings-page-show-snake-grid-button"
-            );
-            if (showSnakeGridButton) {
-              showSnakeGridButton.checked = await getWidgetSetting("SnakeWidget.enableGrid");
-            }
-          }
-          break;
-        }
-        case "other": {
-          let loadKeybind2 = function(id, key) {
-            let keybindInput = document.getElementById(id);
-            if (!keybindInput) return;
-            keybindInput.value = key;
-          };
-          var loadKeybind = loadKeybind2;
-          const performanceModeButton = document.getElementById(
-            "settings-page-performance-mode-button"
-          );
-          if (performanceModeButton) {
-            performanceModeButton.checked = settings.other.performanceMode;
-          }
-          const splashTextButton = document.getElementById(
-            "settings-page-splash-text-button"
-          );
-          if (splashTextButton) {
-            splashTextButton.checked = settings.other.splashText;
-          }
-          const discordButton = document.getElementById(
-            "settings-page-discord-button"
-          );
-          if (discordButton) {
-            discordButton.checked = settings.other.discordButton;
-          }
-          loadKeybind2(
-            "settings-page-quick-menu-keybinding",
-            settings.other.keybinds.dmenu
-          );
-          loadKeybind2(
-            "settings-page-widget-edit-keybinding",
-            settings.other.keybinds.widgetEditMode
-          );
-          loadKeybind2(
-            "settings-widget-bag-keybinding",
-            settings.other.keybinds.widgetBag
-          );
-          loadKeybind2(
-            "settings-page-settings-keybinding",
-            settings.other.keybinds.settings
-          );
-          if (!liteMode)
-            loadKeybind2(
-              "settings-page-gc-keybinding",
-              settings.other.keybinds.gc
-            );
-          break;
-        }
-        default:
-          break;
-      }
-    }
-    async storePage() {
-      const settings = await browser2.runtime.sendMessage({
-        action: "getSettingsData"
-      });
-      const previousSettings = structuredClone(settings);
-      const getCheckboxValue = (id) => {
-        const element = document.getElementById(id);
-        return element?.checked || false;
-      };
-      const getSliderValue = (id) => {
-        const element = document.getElementById(id);
-        return element?.value ? parseFloat(element.value) : 0;
-      };
-      const saveKeybind = (id) => {
-        const element = document.getElementById(id);
-        return element?.value || "None";
-      };
-      switch (this.currentPage) {
-        case "profile": {
-          const usernameInput = document.getElementById(
-            "settings-page-username-input"
-          );
-          if (usernameInput) {
-            settings.profile.username = usernameInput.value || null;
-          }
-          settings.profile.useSMpfp = getCheckboxValue(
-            "settings-page-default-sm-pfp-button"
-          );
-          applyProfile(settings.profile);
-          break;
-        }
-        case "appearance": {
-          const selectedTheme = document.querySelector(
-            ".settings-page-theme-card:has(input[type='radio']:checked)"
-          );
-          if (selectedTheme && selectedTheme.dataset["theme"]) {
-            settings.appearance.theme = selectedTheme.dataset["theme"];
-          }
-          settings.appearance.background.blur = getSliderValue("settings-page-blur-slider") / 10;
-          const chosenWeather = document.querySelector(
-            ".settings-page-weather-overlay-container input:checked"
-          );
-          if (chosenWeather) {
-            const weatherContainer = chosenWeather.closest(
-              "[data-weather]"
-            );
-            if (weatherContainer?.dataset["weather"]) {
-              const weatherType = weatherContainer.dataset["weather"];
-              if (weatherType === "realtime" || weatherType === "rain" || weatherType === "snow") {
-                settings.appearance.weatherOverlay.type = weatherType;
-              }
-            }
-          }
-          settings.appearance.weatherOverlay.amount = getSliderValue(
-            "settings-page-weather-overlay-slider"
-          );
-          settings.appearance.weatherOverlay.opacity = getSliderValue("settings-page-weather-overlay-opacity-slider") / 100;
-          const smppIconChecked = getCheckboxValue(
-            "settings-page-smpp-icon-button"
-          );
-          settings.appearance.tabLogo = smppIconChecked ? "smpp" : "sm";
-          settings.appearance.news = getCheckboxValue(
-            "settings-page-show-news-button"
-          );
-          await applyAppearance(settings.appearance);
-          if (JSON.stringify(settings.appearance.weatherOverlay) !== JSON.stringify(previousSettings.appearance.weatherOverlay) && !liteMode) {
-            applyWeatherEffects(settings.appearance.weatherOverlay);
-          }
-          break;
-        }
-        case "topNav": {
-          settings.topNav.switchCoursesAndLinks = getCheckboxValue(
-            "settings-page-swap-courses-button"
-          );
-          if (isGOSchool) {
-            settings.topNav.buttons.GO = getCheckboxValue(
-              "settings-page-go-button"
-            );
-          }
-          if (!liteMode) {
-            settings.topNav.buttons.GC = getCheckboxValue(
-              "settings-page-global-chat-button"
-            );
-          }
-          settings.topNav.buttons.search = getCheckboxValue(
-            "settings-page-search-button"
-          );
-          settings.topNav.buttons.quickMenu = getCheckboxValue(
-            "settings-page-quick-menu-button"
-          );
-          settings.topNav.icons.home = getCheckboxValue(
-            "settings-page-home-icon-button"
-          );
-          settings.topNav.icons.mail = getCheckboxValue(
-            "settings-page-mail-icon-button"
-          );
-          settings.topNav.icons.notifications = getCheckboxValue(
-            "settings-page-notifications-icon-button"
-          );
-          settings.topNav.icons.settings = getCheckboxValue(
-            "settings-page-settings-icon-button"
-          );
-          applyTopNav(settings.topNav);
-          break;
-        }
-        case "widgets": {
-          const updateWidgetSetting = async (id, settingName, type) => {
-            const element = document.getElementById(
-              id
-            );
-            if (!element) return;
-            const currentValue = type == "boolean" ? element.checked : parseInt(element.value, 10);
-            const storedValue = await getWidgetSetting(settingName);
-            if (JSON.stringify(currentValue) !== JSON.stringify(storedValue)) {
-              await setWidgetSetting(settingName, currentValue);
-            }
-          };
-          await updateWidgetSetting(
-            "settings-page-delijn-monochrome-button",
-            "DelijnWidget.monochrome",
-            "boolean"
-          );
-          await updateWidgetSetting(
-            "settings-page-max-busses-slider",
-            "DelijnWidget.maxBusses",
-            "number"
-          );
-          await updateWidgetSetting(
-            "settings-page-max-assignments-slider",
-            "TakenWidget.maxAssignments",
-            "number"
-          );
-          if (!liteMode) {
-            await updateWidgetSetting(
-              "settings-page-show-snake-grid-button",
-              "SnakeWidget.enableGrid",
-              "boolean"
-            );
-          }
-          break;
-        }
-        case "other": {
-          settings.other.performanceMode = getCheckboxValue(
-            "settings-page-performance-mode-button"
-          );
-          settings.other.splashText = getCheckboxValue(
-            "settings-page-splash-text-button"
-          );
-          settings.other.discordButton = getCheckboxValue(
-            "settings-page-discord-button"
-          );
-          settings.other.keybinds.dmenu = saveKeybind(
-            "settings-page-quick-menu-keybinding"
-          );
-          settings.other.keybinds.widgetEditMode = saveKeybind(
-            "settings-page-widget-edit-keybinding"
-          );
-          settings.other.keybinds.widgetBag = saveKeybind(
-            "settings-widget-bag-keybinding"
-          );
-          settings.other.keybinds.settings = saveKeybind(
-            "settings-page-settings-keybinding"
-          );
-          if (!liteMode) {
-            settings.other.keybinds.gc = saveKeybind(
-              "settings-page-gc-keybinding"
-            );
-          }
-          applyOther(settings.other);
-          break;
-        }
-        default:
-          break;
-      }
-      await browser2.runtime.sendMessage({
-        action: "setSettingsData",
-        data: settings
-      });
-      console.log("Successfully stored main settings: \n", settings);
-      loadQuickSettings();
-      await this.loadPage();
-    }
-    async displaySettingsPage() {
-      function createMainTitle(text) {
-        let title = document.createElement("h1");
-        title.innerText = text;
-        title.classList.add("settings-page-main-title");
-        return title;
-      }
-      function createSectionTitle(text) {
-        let title = document.createElement("h2");
-        title.innerText = text;
-        title.classList.add("settings-page-section-title");
-        return title;
-      }
-      const createKeybindInput = (id, text) => {
-        const container = document.createElement("div");
-        container.classList.add("settings-page-key-bind-container");
-        container.classList.add("smpp-input-with-label");
-        let label = document.createElement("span");
-        label.tabIndex = 0;
-        label.classList.add("settings-page-button-label");
-        label.innerText = text;
-        let button = createButton(id);
-        button.classList.add("settings-page-button");
-        const input = document.createElement("input");
-        input.id = id;
-        input.type = "text";
-        input.readOnly = true;
-        input.spellcheck = false;
-        input.classList.add("settings-page-keybinding-input");
-        input.value = "None";
-        const unbindButton = document.createElement("button");
-        unbindButton.classList.add("keybind-unbind-button");
-        unbindButton.innerHTML = trashSvg;
-        unbindButton.title = "Clear keybind";
-        unbindButton.setAttribute("aria-label", "Clear keybind");
-        let listening = false;
-        input.addEventListener("click", () => {
-          if (listening) return;
-          listening = true;
-          let oldKeybind = input.value;
-          input.value = "Press any key...";
-          input.classList.add("listening");
-          const keyListener = async (e2) => {
-            listening = false;
-            input.classList.remove("listening");
-            e2.preventDefault();
-            e2.stopPropagation();
-            let keyName = e2.key.length === 1 ? e2.key.toUpperCase() : e2.key;
-            if (keyName === " ") keyName = "Space";
-            if (keyName === "Backspace") keyName = "None";
-            if (keyName === "Escape") keyName = oldKeybind;
-            input.value = keyName;
-            document.removeEventListener("keydown", keyListener);
-            await this.storePage();
-          };
-          const buttonListener = async (e2) => {
-            listening = false;
-            input.classList.remove("listening");
-            e2.stopPropagation();
-            e2.preventDefault();
-            input.value = "None";
-            document.removeEventListener("keydown", keyListener);
-            await this.storePage();
-          };
-          unbindButton.addEventListener("click", buttonListener);
-          document.addEventListener("keydown", keyListener);
-        });
-        const inputWrapper = document.createElement("div");
-        inputWrapper.classList.add("keybind-input-wrapper");
-        inputWrapper.appendChild(input);
-        inputWrapper.appendChild(unbindButton);
-        container.appendChild(label);
-        container.appendChild(inputWrapper);
-        return container;
-      };
-      function createSettingsButtonWithLabel(id, text) {
-        let container = createButtonWithLabel(id, text);
-        container.tabIndex = 0;
-        container.classList.add("settings-page-button-label-container");
-        return container;
-      }
-      function createImageButton(src, width, height, name2, id) {
-        let wrapper = document.createElement("label");
-        wrapper.classList.add("settings-page-image-button-wrapper");
-        wrapper.tabIndex = 0;
-        wrapper.style.width = width;
-        wrapper.style.height = height;
-        let input = document.createElement("input");
-        input.type = "radio";
-        input.name = name2;
-        if (id) input.id = id;
-        let image = document.createElement("img");
-        image.classList.add("settings-page-image");
-        image.src = getExtensionImage(src);
-        wrapper.addEventListener("keydown", (e2) => {
-          if (e2.key === " " || e2.key === "Enter") {
-            e2.preventDefault();
-            input.click();
-          }
-        });
-        wrapper.appendChild(input);
-        wrapper.appendChild(image);
-        return wrapper;
-      }
-      function createImageButtonWithLabel(src, text, width = "80px", height = "80px", name2, id) {
-        let container = document.createElement("label");
-        container.classList.add("settings-page-image-button-label");
-        let imageButton = createImageButton(src, width, height, name2, id);
-        let imageButtonLabel = document.createElement("span");
-        imageButtonLabel.innerText = text;
-        container.appendChild(imageButton);
-        container.appendChild(imageButtonLabel);
-        return container;
-      }
-      function createSlider(min, max, id) {
-        let slider = document.createElement("input");
-        slider.id = id;
-        slider.type = "range";
-        slider.min = min;
-        slider.max = max;
-        slider.classList.add("settings-page-slider");
-        return slider;
-      }
-      function createLabeledSlider(min, max, id, text, showValue = true) {
-        let container = document.createElement("div");
-        container.classList.add("settings-page-slider-container");
-        container.classList.add("smpp-input-with-label");
-        let textContainer = document.createElement("span");
-        textContainer.classList.add("settings-page-slider-label");
-        textContainer.innerText = text;
-        let slider = createSlider(min, max, id);
-        slider.classList.add("settings-page-labeled-slider");
-        if (showValue)
-          slider.addEventListener("input", (event) => {
-            let liveValueElement = document.querySelector(
-              "#" + id + " ~ .settings-page-live-value"
-            );
-            if (liveValueElement) liveValueElement.innerText = slider.value;
-          });
-        let currentValue = document.createElement("span");
-        currentValue.classList.add("settings-page-live-value");
-        currentValue.innerText = min;
-        container.appendChild(textContainer);
-        container.appendChild(slider);
-        if (showValue) container.appendChild(currentValue);
-        return container;
-      }
-      function createImage(src, width, height) {
-        let image = document.createElement("img");
-        image.classList.add("settings-page-image");
-        image.src = getExtensionImage(src);
-        image.style.width = width;
-        image.style.height = height;
-        image.style.objectFit = "cover";
-        return image;
-      }
-      function createDescription(text) {
-        let description = document.createElement("p");
-        description.innerText = text;
-        description.classList.add("settings-page-description");
-        return description;
-      }
-      this.clearSettingsPage();
-      this.settingsPage.scrollTo(0, 0);
-      switch (this.currentPage) {
-        case "profile":
-          this.settingsPage.appendChild(createMainTitle("Profile"));
-          this.settingsPage.appendChild(createSectionTitle("Custom name"));
-          this.settingsPage.appendChild(
-            createDescription("Edit your username, displayed at the top left")
-          );
-          this.settingsPage.appendChild(
-            createTextInput("settings-page-username-input", "Username")
-          );
-          this.settingsPage.appendChild(createSectionTitle("Profile picture"));
-          this.settingsPage.appendChild(
-            createDescription(
-              isFirefox ? "Upload your own profile picture, large files not recommended on Firefox" : "Upload your own profile picture"
-            )
-          );
-          this.profilePictureInput.id = "profilePicture";
-          this.profilePictureInput.loadImageData();
-          this.profilePictureInput.onStore = async () => {
-            this.storePage();
-            const data3 = await browser2.runtime.sendMessage({
-              action: "getSettingsData"
-            });
-            applyProfilePicture(data3.profile);
-          };
-          let profilePictureInputContainer = this.profilePictureInput.createFullFileInput();
-          profilePictureInputContainer.id = "profile-picture-input-container";
-          this.settingsPage.appendChild(profilePictureInputContainer);
-          this.settingsPage.appendChild(
-            createSettingsButtonWithLabel(
-              "settings-page-default-sm-pfp-button",
-              "Original profile picture"
-            )
-          );
-          break;
-        case "appearance":
-          this.settingsPage.appendChild(createMainTitle("Appearance"));
-          this.settingsPage.appendChild(createSectionTitle("Theme"));
-          this.settingsPage.appendChild(
-            createDescription(
-              "Customize the overall look of the interface with different color styles."
-            )
-          );
-          let colorPickerHTML = new ColorPicker("20rem");
-          this.settingsPage.appendChild(colorPickerHTML.render());
-          let data2 = await browser2.runtime.sendMessage({
-            action: "getSettingsData"
-          });
-          let themeTile = new ThemeTile(data2.appearance.theme);
-          this.settingsPage.appendChild(await themeTile.render());
-          this.settingsPage.appendChild(createSectionTitle("Wallpaper"));
-          this.settingsPage.appendChild(
-            createDescription("Personalize your backdrop with a custom image.")
-          );
-          this.backgroundImageSelector.onStore = () => {
-            this.storePage();
-          };
-          this.settingsPage.appendChild(
-            this.backgroundImageSelector.createFullFileInput()
-          );
-          this.settingsPage.appendChild(createSectionTitle("Background blur"));
-          this.settingsPage.appendChild(
-            createDescription("Apply a blur to your background.")
-          );
-          this.settingsPage.appendChild(
-            createSlider("0", "100", "settings-page-blur-slider")
-            // must be divided by 10
-            // for real value
-          );
-          let blurPreviewContainer = document.createElement("div");
-          blurPreviewContainer.classList.add(
-            "settings-page-blur-preview-container"
-          );
-          blurPreviewContainer.appendChild(
-            createImage("theme-backgrounds/birb.jpg", "6rem", "4rem")
-          );
-          let blurredImage = createImage(
-            "theme-backgrounds/birb.jpg",
-            "100%",
-            "100%"
-          );
-          blurredImage.style.filter = "blur(2px)";
-          let blurredImageContainer = document.createElement("div");
-          blurredImageContainer.classList.add("blurred-image-container");
-          blurredImageContainer.appendChild(blurredImage);
-          blurPreviewContainer.appendChild(blurredImageContainer);
-          this.settingsPage.appendChild(blurPreviewContainer);
-          this.settingsPage.appendChild(createSectionTitle("Weather overlay"));
-          this.settingsPage.appendChild(
-            createDescription("Add dynamic weather visuals.")
-          );
-          let weatherIconsContainer = document.createElement("div");
-          weatherIconsContainer.classList.add(
-            "settings-page-icons-container",
-            "settings-page-weather-overlay-container"
-          );
-          let rainBtn = createImageButtonWithLabel(
-            "icons/weather-overlay/raindropfancy.svg",
-            "Rain",
-            "5rem",
-            "5rem",
-            "weather",
-            "settings-page-raindrop-button"
-          );
-          rainBtn.dataset["weather"] = "rain";
-          weatherIconsContainer.appendChild(rainBtn);
-          let realtimeBtn = createImageButtonWithLabel(
-            "icons/weather-overlay/realtimefancy.svg",
-            "Realtime",
-            "5rem",
-            "5rem",
-            "weather",
-            "settings-page-realtime-button"
-          );
-          realtimeBtn.dataset["weather"] = "realtime";
-          weatherIconsContainer.appendChild(realtimeBtn);
-          let snowBtn = createImageButtonWithLabel(
-            "icons/weather-overlay/snowflakefancy.svg",
-            "Snow",
-            "5rem",
-            "5rem",
-            "weather",
-            "settings-page-snow-button"
-          );
-          snowBtn.dataset["weather"] = "snow";
-          weatherIconsContainer.appendChild(snowBtn);
-          this.settingsPage.appendChild(weatherIconsContainer);
-          this.settingsPage.appendChild(
-            createLabeledSlider(
-              "0",
-              "500",
-              "settings-page-weather-overlay-slider",
-              "Amount",
-              false
-            )
-          );
-          this.settingsPage.appendChild(
-            createLabeledSlider(
-              "0",
-              "100",
-              "settings-page-weather-overlay-opacity-slider",
-              "Opacity",
-              false
-            )
-          );
-          this.settingsPage.appendChild(createSectionTitle("Icon"));
-          this.settingsPage.appendChild(
-            createDescription("Choose the icon displayed in your browser tab.")
-          );
-          let iconsContainer = document.createElement("div");
-          iconsContainer.classList.add("settings-page-icons-container");
-          iconsContainer.appendChild(
-            createImageButton(
-              "icons/sm-icon.svg",
-              "5rem",
-              "5rem",
-              "logo",
-              "settings-page-default-icon-button"
-            )
-          );
-          iconsContainer.appendChild(
-            createImageButton(
-              "icons/smpp/128.png",
-              "5rem",
-              "5rem",
-              "logo",
-              "settings-page-smpp-icon-button"
-            )
-          );
-          this.settingsPage.appendChild(iconsContainer);
-          this.settingsPage.appendChild(createSectionTitle("News"));
-          this.settingsPage.appendChild(
-            createDescription("Change the homepage news configuration.")
-          );
-          this.settingsPage.appendChild(
-            createSettingsButtonWithLabel(
-              "settings-page-show-news-button",
-              "Show news"
-            )
-          );
-          break;
-        case "topNav":
-          this.settingsPage.appendChild(createMainTitle("Navigation"));
-          this.settingsPage.appendChild(createSectionTitle("Buttons"));
-          this.settingsPage.appendChild(
-            createDescription(
-              "Choose which buttons you want to see in the top navigation."
-            )
-          );
-          if (!liteMode) {
-            this.settingsPage.appendChild(
-              createSettingsButtonWithLabel(
-                "settings-page-global-chat-button",
-                "Global Chat"
-              )
-            );
-          }
-          this.settingsPage.appendChild(
-            createSettingsButtonWithLabel("settings-page-search-button", "Search")
-          );
-          this.settingsPage.appendChild(
-            createSettingsButtonWithLabel(
-              "settings-page-quick-menu-button",
-              "Quick Menu"
-            )
-          );
-          this.settingsPage.appendChild(
-            createSettingsButtonWithLabel(
-              "settings-page-swap-courses-button",
-              "Swap courses/links"
-            )
-          );
-          if (isGOSchool)
-            this.settingsPage.appendChild(
-              createSettingsButtonWithLabel("settings-page-go-button", "GO")
-            );
-          this.settingsPage.appendChild(createSectionTitle("Icons"));
-          this.settingsPage.appendChild(
-            createDescription(
-              "Choose which buttons you want to replace with icons."
-            )
-          );
-          this.settingsPage.appendChild(
-            createSettingsButtonWithLabel(
-              "settings-page-home-icon-button",
-              "Start"
-            )
-          );
-          this.settingsPage.appendChild(
-            createSettingsButtonWithLabel(
-              "settings-page-mail-icon-button",
-              "Mail"
-            )
-          );
-          this.settingsPage.appendChild(
-            createSettingsButtonWithLabel(
-              "settings-page-notifications-icon-button",
-              "Notifications"
-            )
-          );
-          this.settingsPage.appendChild(
-            createSettingsButtonWithLabel(
-              "settings-page-settings-icon-button",
-              "Settings"
-            )
-          );
-          break;
-        case "widgets":
-          this.settingsPage.appendChild(createMainTitle("Widgets"));
-          this.settingsPage.appendChild(createSectionTitle("De Lijn"));
-          this.settingsPage.appendChild(
-            createDescription("Change the De Lijn app configuration.")
-          );
-          this.settingsPage.appendChild(
-            createSettingsButtonWithLabel(
-              "settings-page-delijn-monochrome-button",
-              "Monochrome"
-            )
-          );
-          this.settingsPage.appendChild(
-            createLabeledSlider(
-              "1",
-              "10",
-              "settings-page-max-busses-slider",
-              "Max busses"
-            )
-          );
-          this.settingsPage.appendChild(createSectionTitle("Assignments"));
-          this.settingsPage.appendChild(
-            createDescription("Change the assignments app configuration.")
-          );
-          this.settingsPage.appendChild(
-            createLabeledSlider(
-              "1",
-              "10",
-              "settings-page-max-assignments-slider",
-              "Max assignments"
-            )
-          );
-          if (!liteMode) {
-            this.settingsPage.appendChild(createMainTitle("Games"));
-            this.settingsPage.appendChild(createSectionTitle("Snake"));
-            this.settingsPage.appendChild(
-              createDescription("Change configuration of Snake++")
-            );
-            this.settingsPage.appendChild(
-              createSettingsButtonWithLabel(
-                "settings-page-show-snake-grid-button",
-                "Grid"
-              )
-            );
-          }
-          break;
-        case "other":
-          this.settingsPage.appendChild(createMainTitle("Other"));
-          this.settingsPage.appendChild(createSectionTitle("Performance"));
-          this.settingsPage.appendChild(
-            createDescription(
-              "Disables animations for better performance on low end devices."
-            )
-          );
-          this.settingsPage.appendChild(
-            createSettingsButtonWithLabel(
-              "settings-page-performance-mode-button",
-              "Performance mode"
-            )
-          );
-          this.settingsPage.appendChild(createSectionTitle("Login"));
-          this.settingsPage.appendChild(
-            createDescription("Change the login page configuration.")
-          );
-          this.settingsPage.appendChild(
-            createSettingsButtonWithLabel(
-              "settings-page-splash-text-button",
-              "Splash-text"
-            )
-          );
-          this.settingsPage.appendChild(createSectionTitle("Homepage"));
-          this.settingsPage.appendChild(
-            createDescription("Change the home page configuration.")
-          );
-          this.settingsPage.appendChild(
-            createSettingsButtonWithLabel(
-              "settings-page-discord-button",
-              "Discord button"
-            )
-          );
-          this.settingsPage.appendChild(createSectionTitle("Keybindings"));
-          this.settingsPage.appendChild(
-            createDescription("Customize your keybindings")
-          );
-          this.settingsPage.appendChild(
-            createKeybindInput(
-              "settings-page-quick-menu-keybinding",
-              "Quick Menu"
-            )
-          );
-          this.settingsPage.appendChild(
-            createKeybindInput(
-              "settings-page-widget-edit-keybinding",
-              "Widget editing"
-            )
-          );
-          this.settingsPage.appendChild(
-            createKeybindInput("settings-widget-bag-keybinding", "Widget bag")
-          );
-          this.settingsPage.appendChild(
-            createKeybindInput("settings-page-settings-keybinding", "Settings")
-          );
-          if (!liteMode) {
-            this.settingsPage.appendChild(
-              createKeybindInput("settings-page-gc-keybinding", "Global Chat")
-            );
-          }
-          this.settingsPage.appendChild(createSectionTitle("Reset"));
-          this.settingsPage.appendChild(
-            createDescription(
-              "Reset all settings and widgets to their default values."
-            )
-          );
-          let resetButton = document.createElement("button");
-          resetButton.innerText = "Reset to Defaults";
-          resetButton.classList.add("settings-page-reset-button");
-          resetButton.addEventListener("click", () => this.resetSettings());
-          this.settingsPage.appendChild(resetButton);
-          break;
-        default:
-          break;
-      }
-    }
-  };
-  var settingsWindow;
-  async function createSettingsWindow() {
-    settingsWindow = new SettingsWindow();
-    await settingsWindow.create();
-    await settingsWindow.loadPage();
-    settingsWindow.hide();
-  }
-  async function openSettingsWindow(event) {
-    settingsWindow.show(event);
-    settingsWindow.loadPage();
-  }
-
   // src/main-features/keybinds.ts
-  document.addEventListener("keyup", async (e2) => {
-    if (e2.target?.tagName === "INPUT") return;
-    if (e2.target?.tagName === "TEXTAREA") return;
+  document.addEventListener("keyup", async (e) => {
+    if (e.target?.tagName === "INPUT") return;
+    if (e.target?.tagName === "TEXTAREA") return;
     if (document.getElementById("tinymce")) return;
-    const key = e2.key === " " ? "Space" : e2.key.length === 1 ? e2.key.toUpperCase() : e2.key;
+    const key = e.key === " " ? "Space" : e.key.length === 1 ? e.key.toUpperCase() : e.key;
     if ((typeof keybinds === "undefined" || !keybinds || Object.keys(keybinds).length === 0) && key === ":") {
       do_qm("dmenu");
       return;
@@ -5292,10 +5070,10 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         do_qm(keybinds.dmenu);
         break;
       case keybinds.settings:
-        openSettingsWindow(e2);
+        openSettingsWindow(e);
         break;
       case keybinds.gc:
-        openGlobalChat(e2);
+        openGlobalChat(e);
         break;
     }
     if (!widgetEditModeInit) return;
@@ -5336,7 +5114,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         document.body.appendChild(img);
       }
     }
-    let result = await browser2.runtime.sendMessage({
+    let result = await browser.runtime.sendMessage({
       action: "getImage",
       id: appearance.theme
     });
@@ -5386,21 +5164,21 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       return "games";
     }
     constructor() {
-      document.addEventListener("keydown", async (e2) => {
-        if (e2.repeat) {
+      document.addEventListener("keydown", async (e) => {
+        if (e.repeat) {
           return;
         }
         if (this.playing) {
-          await this.onKeyDown(e2);
+          await this.onKeyDown(e);
         } else if (this.hasPlayedAtLeastOnce) {
-          if (e2.code === "Space") {
+          if (e.code === "Space") {
             await this.#startGame();
           }
         }
       });
-      document.addEventListener("keyup", async (e2) => {
+      document.addEventListener("keyup", async (e) => {
         if (this.playing) {
-          await this.onKeyUp(e2);
+          await this.onKeyUp(e);
         }
       });
       super();
@@ -5484,9 +5262,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       this.canvas.height = 300;
       this.canvas.classList.add("game-canvas");
       this.canvas.style.display = "none";
-      this.canvas.addEventListener("click", async (e2) => {
+      this.canvas.addEventListener("click", async (e) => {
         if (this.playing) {
-          await this.onMouse(e2);
+          await this.onMouse(e);
         }
       });
       div.appendChild(this.canvas);
@@ -5521,10 +5299,10 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           let display = document.createElement("span");
           sliderCont.appendChild(display);
           this.#optionElements[opt.name] = { display, input: slider };
-          slider.addEventListener("input", (e2) => {
-            this.#updateOpt(opt.name, e2.target.value);
+          slider.addEventListener("input", (e) => {
+            this.#updateOpt(opt.name, e.target.value);
           });
-          slider.addEventListener("change", async (e2) => {
+          slider.addEventListener("change", async (e) => {
             await this.setSetting("options", this.#optionValues);
           });
           menuBottom.appendChild(sliderCont);
@@ -5533,7 +5311,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       this.#buttonEl = document.createElement("button");
       this.#buttonEl.classList.add("game-button");
       this.#buttonEl.innerText = "Play";
-      this.#buttonEl.addEventListener("click", async (e2) => {
+      this.#buttonEl.addEventListener("click", async (e) => {
         await this.#startGame();
       });
       menuBottom.appendChild(this.#buttonEl);
@@ -5600,11 +5378,11 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     // frame)
     onGameDraw(ctx, deltaTime) {
     }
-    async onKeyDown(e2) {
+    async onKeyDown(e) {
     }
-    async onKeyUp(e2) {
+    async onKeyUp(e) {
     }
-    async onMouse(e2) {
+    async onMouse(e) {
     }
     get tickSpeed() {
       return 60;
@@ -5639,52 +5417,52 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       return [GameOption.slider("speed", "Speed:", 10, 300, 100)];
     }
     async onGameStart() {
-      const w2 = this.canvas.width;
-      const h2 = this.canvas.height;
+      const w = this.canvas.width;
+      const h = this.canvas.height;
       this.ball = {
-        x: w2 / 2,
-        y: h2 / 2,
+        x: w / 2,
+        y: h / 2,
         dx: BALL_SPEED * this.getOpt("speed") * 0.01,
         dy: -BALL_SPEED * this.getOpt("speed") * 0.01
       };
-      this.paddleX = (w2 - PADDLE_WIDTH) / 2;
+      this.paddleX = (w - PADDLE_WIDTH) / 2;
       this.leftPressed = false;
       this.rightPressed = false;
       this.score = 0;
       this.bricks = [];
-      for (let c2 = 0; c2 < BRICK_COLS; c2++) {
-        for (let r2 = 0; r2 < BRICK_ROWS; r2++) {
+      for (let c = 0; c < BRICK_COLS; c++) {
+        for (let r = 0; r < BRICK_ROWS; r++) {
           this.bricks.push({
-            x: c2 * (BRICK_WIDTH + BRICK_PADDING) + 10,
-            y: r2 * (BRICK_HEIGHT + BRICK_PADDING) + 10,
+            x: c * (BRICK_WIDTH + BRICK_PADDING) + 10,
+            y: r * (BRICK_HEIGHT + BRICK_PADDING) + 10,
             status: 1
           });
         }
       }
     }
-    drawRoundedRect(ctx, x2, y2, width, height, radius) {
+    drawRoundedRect(ctx, x, y, width, height, radius) {
       ctx.beginPath();
-      ctx.moveTo(x2 + radius, y2);
-      ctx.lineTo(x2 + width - radius, y2);
-      ctx.quadraticCurveTo(x2 + width, y2, x2 + width, y2 + radius);
-      ctx.lineTo(x2 + width, y2 + height - radius);
-      ctx.quadraticCurveTo(x2 + width, y2 + height, x2 + width - radius, y2 + height);
-      ctx.lineTo(x2 + radius, y2 + height);
-      ctx.quadraticCurveTo(x2, y2 + height, x2, y2 + height - radius);
-      ctx.lineTo(x2, y2 + radius);
-      ctx.quadraticCurveTo(x2, y2, x2 + radius, y2);
+      ctx.moveTo(x + radius, y);
+      ctx.lineTo(x + width - radius, y);
+      ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+      ctx.lineTo(x + width, y + height - radius);
+      ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+      ctx.lineTo(x + radius, y + height);
+      ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+      ctx.lineTo(x, y + radius);
+      ctx.quadraticCurveTo(x, y, x + radius, y);
       ctx.closePath();
       ctx.fill();
     }
     onGameDraw(ctx, dt) {
-      const w2 = this.canvas.width;
-      const h2 = this.canvas.height;
+      const w = this.canvas.width;
+      const h = this.canvas.height;
       ctx.fillStyle = getThemeVar("--color-base01");
-      ctx.fillRect(0, 0, w2, h2);
+      ctx.fillRect(0, 0, w, h);
       const speed = PADDLE_SPEED * this.getOpt("speed") * 0.01;
       if (this.leftPressed) this.paddleX -= speed * dt;
       if (this.rightPressed) this.paddleX += speed * dt;
-      this.paddleX = Math.max(0, Math.min(w2 - PADDLE_WIDTH, this.paddleX));
+      this.paddleX = Math.max(0, Math.min(w - PADDLE_WIDTH, this.paddleX));
       let ball = this.ball;
       ball.x += ball.dx * dt;
       ball.y += ball.dy * dt;
@@ -5692,25 +5470,25 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         ball.x = BALL_RADIUS;
         ball.dx *= -1;
       }
-      if (ball.x > w2 - BALL_RADIUS) {
-        ball.x = w2 - BALL_RADIUS;
+      if (ball.x > w - BALL_RADIUS) {
+        ball.x = w - BALL_RADIUS;
         ball.dx *= -1;
       }
       if (ball.y < BALL_RADIUS) {
         ball.y = BALL_RADIUS;
         ball.dy *= -1;
       }
-      if (ball.y > h2 - PADDLE_HEIGHT - BALL_RADIUS && ball.x > this.paddleX && ball.x < this.paddleX + PADDLE_WIDTH) {
+      if (ball.y > h - PADDLE_HEIGHT - BALL_RADIUS && ball.x > this.paddleX && ball.x < this.paddleX + PADDLE_WIDTH) {
         ball.dy *= -1;
-        ball.y = h2 - PADDLE_HEIGHT - BALL_RADIUS;
+        ball.y = h - PADDLE_HEIGHT - BALL_RADIUS;
       }
-      if (ball.y > h2 + BALL_RADIUS) {
+      if (ball.y > h + BALL_RADIUS) {
         this.stopGame();
       }
-      for (let b2 of this.bricks) {
-        if (b2.status === 1) {
-          if (ball.x > b2.x && ball.x < b2.x + BRICK_WIDTH && ball.y > b2.y && ball.y < b2.y + BRICK_HEIGHT) {
-            b2.status = 0;
+      for (let b of this.bricks) {
+        if (b.status === 1) {
+          if (ball.x > b.x && ball.x < b.x + BRICK_WIDTH && ball.y > b.y && ball.y < b.y + BRICK_HEIGHT) {
+            b.status = 0;
             ball.dy *= -1;
             this.score++;
             break;
@@ -5721,7 +5499,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       this.drawRoundedRect(
         ctx,
         this.paddleX,
-        h2 - PADDLE_HEIGHT,
+        h - PADDLE_HEIGHT,
         PADDLE_WIDTH,
         PADDLE_HEIGHT,
         5
@@ -5731,19 +5509,19 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       ctx.arc(ball.x, ball.y, BALL_RADIUS, 0, 2 * Math.PI);
       ctx.fill();
       ctx.fillStyle = getThemeVar("--color-accent");
-      for (let b2 of this.bricks) {
-        if (b2.status === 1) {
-          this.drawRoundedRect(ctx, b2.x, b2.y, BRICK_WIDTH, BRICK_HEIGHT, 5);
+      for (let b of this.bricks) {
+        if (b.status === 1) {
+          this.drawRoundedRect(ctx, b.x, b.y, BRICK_WIDTH, BRICK_HEIGHT, 5);
         }
       }
     }
-    onKeyDown(e2) {
-      if (e2.code === "ArrowLeft") this.leftPressed = true;
-      else if (e2.code === "ArrowRight") this.rightPressed = true;
+    onKeyDown(e) {
+      if (e.code === "ArrowLeft") this.leftPressed = true;
+      else if (e.code === "ArrowRight") this.rightPressed = true;
     }
-    onKeyUp(e2) {
-      if (e2.code === "ArrowLeft") this.leftPressed = false;
-      else if (e2.code === "ArrowRight") this.rightPressed = false;
+    onKeyUp(e) {
+      if (e.code === "ArrowLeft") this.leftPressed = false;
+      else if (e.code === "ArrowRight") this.rightPressed = false;
     }
   };
   registerWidget(new BreakoutWidget());
@@ -5771,21 +5549,21 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       return [GameOption.slider("speed", "Speed:", 10, 300, 100)];
     }
     #drawGround(ctx) {
-      let w2 = this.canvas.width;
-      let h2 = this.canvas.height;
+      let w = this.canvas.width;
+      let h = this.canvas.height;
       ctx.beginPath();
       ctx.lineWidth = 1;
-      ctx.moveTo(0, h2 - FLOOR_H);
-      ctx.lineTo(w2, h2 - FLOOR_H);
+      ctx.moveTo(0, h - FLOOR_H);
+      ctx.lineTo(w, h - FLOOR_H);
       ctx.stroke();
       ctx.fillStyle = getThemeVar("--color-accent");
       ctx.strokeStyle = getThemeVar("--color-base01");
-      ctx.fillRect(0, h2 - FLOOR_H, w2, FLOOR_H);
-      ctx.strokeRect(0, h2 - FLOOR_H, w2, FLOOR_H);
-      for (let i2 = 0; i2 < w2 / 20 * 2; i2++) {
+      ctx.fillRect(0, h - FLOOR_H, w, FLOOR_H);
+      ctx.strokeRect(0, h - FLOOR_H, w, FLOOR_H);
+      for (let i = 0; i < w / 20 * 2; i++) {
         ctx.beginPath();
-        ctx.moveTo(i2 * 20 + this.bgX, h2 - FLOOR_H);
-        ctx.lineTo(i2 * 20 + this.bgX + FLOOR_H, h2);
+        ctx.moveTo(i * 20 + this.bgX, h - FLOOR_H);
+        ctx.lineTo(i * 20 + this.bgX + FLOOR_H, h);
         ctx.stroke();
       }
     }
@@ -5886,13 +5664,13 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       this.#drawPipe(ctx, this.pipe);
       this.#drawGround(ctx);
     }
-    async onMouse(e2) {
+    async onMouse(e) {
       this.jump = true;
     }
-    async onKeyDown(e2) {
-      if (e2.code === "Space" || e2.code === "ArrowUp") {
+    async onKeyDown(e) {
+      if (e.code === "Space" || e.code === "ArrowUp") {
         this.jump = true;
-        e2.preventDefault();
+        e.preventDefault();
       }
     }
   };
@@ -5902,9 +5680,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   var Point = class _Point {
     x;
     y;
-    constructor(x2, y2) {
-      this.x = x2;
-      this.y = y2;
+    constructor(x, y) {
+      this.x = x;
+      this.y = y;
     }
     add(other) {
       return new _Point(this.x + other.x, this.y + other.y);
@@ -5946,7 +5724,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         this.stopGame();
         return;
       }
-      if (this.#snake.find((p2) => p2.equal(newHead))) {
+      if (this.#snake.find((p) => p.equal(newHead))) {
         this.stopGame();
         return;
       }
@@ -5970,7 +5748,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     }
     #spawnFood() {
       this.#food = this.#getRandomFieldPos();
-      while (this.#snake.find((p2) => p2.equal(this.#food))) {
+      while (this.#snake.find((p) => p.equal(this.#food))) {
         this.#food = this.#getRandomFieldPos();
       }
     }
@@ -6025,17 +5803,17 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       ctx.fillStyle = getThemeVar("--color-base01");
       ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
       if (this.settings.enableGrid) {
-        for (let y2 = 0; y2 < cellCount; y2++) {
-          for (let x2 = 0; x2 < cellCount; x2++) {
-            if ((x2 + y2) % 2 == 0) {
+        for (let y = 0; y < cellCount; y++) {
+          for (let x = 0; x < cellCount; x++) {
+            if ((x + y) % 2 == 0) {
               ctx.fillStyle = `${getThemeVar("--color-base03")}50`;
             } else {
               ctx.fillStyle = `${getThemeVar("--color-base02")}50`;
             }
             ctx.beginPath();
             ctx.arc(
-              celRad + x2 * celRad * 2,
-              celRad + y2 * celRad * 2,
+              celRad + x * celRad * 2,
+              celRad + y * celRad * 2,
               celRad * 0.7,
               0,
               Math.PI * 2
@@ -6059,8 +5837,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       ctx.fillStyle = getThemeVar("--color-accent");
       this.#drawDot(ctx, this.#food);
     }
-    onKeyDown(e2) {
-      switch (e2.key) {
+    onKeyDown(e) {
+      switch (e.key) {
         case "ArrowUp":
           if (this.#curDir !== DIR_DOWN) {
             this.#targetDir = DIR_UP;
@@ -6107,42 +5885,42 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       return [GameOption.slider("speed", "Speed:", 10, 300, 100)];
     }
     async onGameStart() {
-      const w2 = this.canvas.width;
-      const h2 = this.canvas.height;
+      const w = this.canvas.width;
+      const h = this.canvas.height;
       this.ball = {
-        x: w2 / 2,
-        y: h2 / 2,
+        x: w / 2,
+        y: h / 2,
         dx: PONG_BALL_SPEED * this.getOpt("speed") * 0.01 * (Math.random() > 0.5 ? 1 : -1),
         dy: PONG_BALL_SPEED * this.getOpt("speed") * 0.01 * (Math.random() * 2 - 1)
       };
-      this.leftY = (h2 - PONG_PADDLE_HEIGHT) / 2;
-      this.rightY = (h2 - PONG_PADDLE_HEIGHT) / 2;
+      this.leftY = (h - PONG_PADDLE_HEIGHT) / 2;
+      this.rightY = (h - PONG_PADDLE_HEIGHT) / 2;
       this.leftUp = false;
       this.leftDown = false;
     }
-    drawRoundedRect(ctx, x2, y2, width, height, radius) {
+    drawRoundedRect(ctx, x, y, width, height, radius) {
       ctx.beginPath();
-      ctx.moveTo(x2 + radius, y2);
-      ctx.lineTo(x2 + width - radius, y2);
-      ctx.quadraticCurveTo(x2 + width, y2, x2 + width, y2 + radius);
-      ctx.lineTo(x2 + width, y2 + height - radius);
-      ctx.quadraticCurveTo(x2 + width, y2 + height, x2 + width - radius, y2 + height);
-      ctx.lineTo(x2 + radius, y2 + height);
-      ctx.quadraticCurveTo(x2, y2 + height, x2, y2 + height - radius);
-      ctx.lineTo(x2, y2 + radius);
-      ctx.quadraticCurveTo(x2, y2, x2 + radius, y2);
+      ctx.moveTo(x + radius, y);
+      ctx.lineTo(x + width - radius, y);
+      ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+      ctx.lineTo(x + width, y + height - radius);
+      ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+      ctx.lineTo(x + radius, y + height);
+      ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+      ctx.lineTo(x, y + radius);
+      ctx.quadraticCurveTo(x, y, x + radius, y);
       ctx.closePath();
       ctx.fill();
     }
     onGameDraw(ctx, dt) {
-      const w2 = this.canvas.width;
-      const h2 = this.canvas.height;
+      const w = this.canvas.width;
+      const h = this.canvas.height;
       ctx.fillStyle = getThemeVar("--color-base01");
-      ctx.fillRect(0, 0, w2, h2);
+      ctx.fillRect(0, 0, w, h);
       const speed = PONG_PADDLE_SPEED * this.getOpt("speed") * 0.01;
       if (this.leftUp) this.leftY -= speed * dt;
       if (this.leftDown) this.leftY += speed * dt;
-      this.leftY = Math.max(0, Math.min(h2 - PONG_PADDLE_HEIGHT, this.leftY));
+      this.leftY = Math.max(0, Math.min(h - PONG_PADDLE_HEIGHT, this.leftY));
       const aiCenter = this.rightY + PONG_PADDLE_HEIGHT / 2;
       const diff = this.ball.y - aiCenter;
       const maxMove = speed * dt * 0.8;
@@ -6151,39 +5929,39 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       } else {
         this.rightY += diff;
       }
-      this.rightY = Math.max(0, Math.min(h2 - PONG_PADDLE_HEIGHT, this.rightY));
-      let b2 = this.ball;
-      b2.x += b2.dx * dt;
-      b2.y += b2.dy * dt;
-      if (b2.y < PONG_BALL_RADIUS || b2.y > h2 - PONG_BALL_RADIUS) {
-        b2.dy *= -1;
+      this.rightY = Math.max(0, Math.min(h - PONG_PADDLE_HEIGHT, this.rightY));
+      let b = this.ball;
+      b.x += b.dx * dt;
+      b.y += b.dy * dt;
+      if (b.y < PONG_BALL_RADIUS || b.y > h - PONG_BALL_RADIUS) {
+        b.dy *= -1;
       }
-      if (b2.x < PONG_PADDLE_WIDTH + PONG_BALL_RADIUS && b2.y > this.leftY && b2.y < this.leftY + PONG_PADDLE_HEIGHT) {
-        b2.dx *= -1;
-        b2.x = PONG_PADDLE_WIDTH + PONG_BALL_RADIUS;
-        b2.dx *= SPEEDUP_FACTOR;
-        b2.dy *= SPEEDUP_FACTOR;
-        b2.dx = Math.sign(b2.dx) * Math.min(Math.abs(b2.dx), MAX_SPEED);
-        b2.dy = Math.sign(b2.dy) * Math.min(Math.abs(b2.dy), MAX_SPEED);
+      if (b.x < PONG_PADDLE_WIDTH + PONG_BALL_RADIUS && b.y > this.leftY && b.y < this.leftY + PONG_PADDLE_HEIGHT) {
+        b.dx *= -1;
+        b.x = PONG_PADDLE_WIDTH + PONG_BALL_RADIUS;
+        b.dx *= SPEEDUP_FACTOR;
+        b.dy *= SPEEDUP_FACTOR;
+        b.dx = Math.sign(b.dx) * Math.min(Math.abs(b.dx), MAX_SPEED);
+        b.dy = Math.sign(b.dy) * Math.min(Math.abs(b.dy), MAX_SPEED);
         this.score++;
       }
-      if (b2.x > w2 - PONG_PADDLE_WIDTH - PONG_BALL_RADIUS && b2.y > this.rightY && b2.y < this.rightY + PONG_PADDLE_HEIGHT) {
-        b2.dx *= -1;
-        b2.x = w2 - PONG_PADDLE_WIDTH - PONG_BALL_RADIUS;
-        b2.dx *= SPEEDUP_FACTOR;
-        b2.dy *= SPEEDUP_FACTOR;
-        b2.dx = Math.sign(b2.dx) * Math.min(Math.abs(b2.dx), MAX_SPEED);
-        b2.dy = Math.sign(b2.dy) * Math.min(Math.abs(b2.dy), MAX_SPEED);
+      if (b.x > w - PONG_PADDLE_WIDTH - PONG_BALL_RADIUS && b.y > this.rightY && b.y < this.rightY + PONG_PADDLE_HEIGHT) {
+        b.dx *= -1;
+        b.x = w - PONG_PADDLE_WIDTH - PONG_BALL_RADIUS;
+        b.dx *= SPEEDUP_FACTOR;
+        b.dy *= SPEEDUP_FACTOR;
+        b.dx = Math.sign(b.dx) * Math.min(Math.abs(b.dx), MAX_SPEED);
+        b.dy = Math.sign(b.dy) * Math.min(Math.abs(b.dy), MAX_SPEED);
       }
-      if (b2.x < 0) {
+      if (b.x < 0) {
         this.stopGame();
       }
-      if (b2.x > w2) {
+      if (b.x > w) {
         this.onGameStart();
       }
       ctx.fillStyle = getThemeVar("--color-text");
       ctx.beginPath();
-      ctx.arc(b2.x, b2.y, PONG_BALL_RADIUS, 0, Math.PI * 2);
+      ctx.arc(b.x, b.y, PONG_BALL_RADIUS, 0, Math.PI * 2);
       ctx.fill();
       ctx.fillStyle = getThemeVar("--color-accent");
       this.drawRoundedRect(
@@ -6196,7 +5974,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       );
       this.drawRoundedRect(
         ctx,
-        w2 - PONG_PADDLE_WIDTH,
+        w - PONG_PADDLE_WIDTH,
         this.rightY,
         PONG_PADDLE_WIDTH,
         PONG_PADDLE_HEIGHT,
@@ -6205,18 +5983,18 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       ctx.strokeStyle = getThemeVar("--color-text");
       ctx.setLineDash([4, 5]);
       ctx.beginPath();
-      ctx.moveTo(w2 / 2, 0);
-      ctx.lineTo(w2 / 2, h2);
+      ctx.moveTo(w / 2, 0);
+      ctx.lineTo(w / 2, h);
       ctx.stroke();
       ctx.setLineDash([]);
     }
-    onKeyDown(e2) {
-      if (e2.code === "ArrowUp") this.leftUp = true;
-      if (e2.code === "ArrowDown") this.leftDown = true;
+    onKeyDown(e) {
+      if (e.code === "ArrowUp") this.leftUp = true;
+      if (e.code === "ArrowDown") this.leftDown = true;
     }
-    onKeyUp(e2) {
-      if (e2.code === "ArrowUp") this.leftUp = false;
-      if (e2.code === "ArrowDown") this.leftDown = false;
+    onKeyUp(e) {
+      if (e.code === "ArrowUp") this.leftUp = false;
+      if (e.code === "ArrowDown") this.leftDown = false;
     }
   };
   registerWidget(new PongWidget());
@@ -6272,18 +6050,18 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   function rotate(matrix) {
     const size = matrix.length;
     const result = Array.from({ length: size }, () => Array(size).fill(0));
-    for (let y2 = 0; y2 < size; y2++) {
-      for (let x2 = 0; x2 < size; x2++) {
-        result[x2][size - 1 - y2] = matrix[y2][x2];
+    for (let y = 0; y < size; y++) {
+      for (let x = 0; x < size; x++) {
+        result[x][size - 1 - y] = matrix[y][x];
       }
     }
     return result;
   }
   function generateRotations(base) {
     const rotations = [base];
-    for (let i2 = 1; i2 < 4; i2++) {
-      const next = rotate(rotations[i2 - 1]);
-      if (!rotations.some((r2) => JSON.stringify(r2) === JSON.stringify(next))) {
+    for (let i = 1; i < 4; i++) {
+      const next = rotate(rotations[i - 1]);
+      if (!rotations.some((r) => JSON.stringify(r) === JSON.stringify(next))) {
         rotations.push(next);
       }
     }
@@ -6425,17 +6203,17 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       "0>3": [[0, 0]]
     }
   };
-  function drawRoundedRect(ctx, x2, y2, width, height, radius) {
+  function drawRoundedRect(ctx, x, y, width, height, radius) {
     ctx.beginPath();
-    ctx.moveTo(x2 + radius, y2);
-    ctx.lineTo(x2 + width - radius, y2);
-    ctx.quadraticCurveTo(x2 + width, y2, x2 + width, y2 + radius);
-    ctx.lineTo(x2 + width, y2 + height - radius);
-    ctx.quadraticCurveTo(x2 + width, y2 + height, x2 + width - radius, y2 + height);
-    ctx.lineTo(x2 + radius, y2 + height);
-    ctx.quadraticCurveTo(x2, y2 + height, x2, y2 + height - radius);
-    ctx.lineTo(x2, y2 + radius);
-    ctx.quadraticCurveTo(x2, y2, x2 + radius, y2);
+    ctx.moveTo(x + radius, y);
+    ctx.lineTo(x + width - radius, y);
+    ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+    ctx.lineTo(x + width, y + height - radius);
+    ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+    ctx.lineTo(x + radius, y + height);
+    ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+    ctx.lineTo(x, y + radius);
+    ctx.quadraticCurveTo(x, y, x + radius, y);
     ctx.closePath();
   }
   var TetrisWidget = class extends GameBase {
@@ -6471,13 +6249,13 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     #getPieceShape(type, rotation) {
       return PIECES[type][rotation % 4];
     }
-    #collision(pieceType, rotation, x2, y2) {
+    #collision(pieceType, rotation, x, y) {
       const shape = this.#getPieceShape(pieceType, rotation);
       for (let py = 0; py < 4; py++) {
         for (let px = 0; px < 4; px++) {
           if (shape[py][px]) {
-            const bx = x2 + px;
-            const by = y2 + py;
+            const bx = x + px;
+            const by = y + py;
             if (bx < 0 || bx >= BOARD_WIDTH || by >= BOARD_HEIGHT || by >= 0 && this.#board[by][bx])
               return true;
           }
@@ -6502,12 +6280,12 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     }
     #clearLines() {
       let linesCleared = 0;
-      for (let y2 = BOARD_HEIGHT - 1; y2 >= 0; y2--) {
-        if (this.#board[y2].every((c2) => c2 !== 0)) {
-          this.#board.splice(y2, 1);
+      for (let y = BOARD_HEIGHT - 1; y >= 0; y--) {
+        if (this.#board[y].every((c) => c !== 0)) {
+          this.#board.splice(y, 1);
           this.#board.unshift(new Array(BOARD_WIDTH).fill(0));
           linesCleared++;
-          y2++;
+          y++;
         }
       }
       this.score += linesCleared;
@@ -6549,27 +6327,27 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       const offsetX = (this.canvas.width - BOARD_WIDTH * CELL_SIZE) / 2;
       ctx.strokeStyle = getThemeVar("--color-base03");
       ctx.lineWidth = 1;
-      for (let x2 = 0; x2 <= BOARD_WIDTH; x2++) {
+      for (let x = 0; x <= BOARD_WIDTH; x++) {
         ctx.beginPath();
-        ctx.moveTo(offsetX + x2 * CELL_SIZE, 0);
-        ctx.lineTo(offsetX + x2 * CELL_SIZE, BOARD_HEIGHT * CELL_SIZE);
+        ctx.moveTo(offsetX + x * CELL_SIZE, 0);
+        ctx.lineTo(offsetX + x * CELL_SIZE, BOARD_HEIGHT * CELL_SIZE);
         ctx.stroke();
       }
-      for (let y2 = 0; y2 <= BOARD_HEIGHT; y2++) {
+      for (let y = 0; y <= BOARD_HEIGHT; y++) {
         ctx.beginPath();
-        ctx.moveTo(offsetX, y2 * CELL_SIZE);
-        ctx.lineTo(offsetX + BOARD_WIDTH * CELL_SIZE, y2 * CELL_SIZE);
+        ctx.moveTo(offsetX, y * CELL_SIZE);
+        ctx.lineTo(offsetX + BOARD_WIDTH * CELL_SIZE, y * CELL_SIZE);
         ctx.stroke();
       }
       const radius = 5;
-      for (let y2 = 0; y2 < BOARD_HEIGHT; y2++) {
-        for (let x2 = 0; x2 < BOARD_WIDTH; x2++) {
-          if (this.#board[y2][x2]) {
-            ctx.fillStyle = this.#getColor(this.#board[y2][x2]);
+      for (let y = 0; y < BOARD_HEIGHT; y++) {
+        for (let x = 0; x < BOARD_WIDTH; x++) {
+          if (this.#board[y][x]) {
+            ctx.fillStyle = this.#getColor(this.#board[y][x]);
             drawRoundedRect(
               ctx,
-              offsetX + x2 * CELL_SIZE,
-              y2 * CELL_SIZE,
+              offsetX + x * CELL_SIZE,
+              y * CELL_SIZE,
               CELL_SIZE,
               CELL_SIZE,
               radius
@@ -6588,9 +6366,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       for (let py = 0; py < 4; py++) {
         for (let px = 0; px < 4; px++) {
           if (shape[py][px]) {
-            const x2 = offsetX + (this.#pieceX + px) * CELL_SIZE;
-            const y2 = (this.#pieceY + py) * CELL_SIZE;
-            drawRoundedRect(ctx, x2, y2, CELL_SIZE, CELL_SIZE, radius);
+            const x = offsetX + (this.#pieceX + px) * CELL_SIZE;
+            const y = (this.#pieceY + py) * CELL_SIZE;
+            drawRoundedRect(ctx, x, y, CELL_SIZE, CELL_SIZE, radius);
             ctx.fill();
             ctx.strokeStyle = getThemeVar("--color-base03");
             ctx.stroke();
@@ -6682,8 +6460,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         clearInterval(this.#downTimer);
       }
     }
-    onKeyDown(e2) {
-      switch (e2.key) {
+    onKeyDown(e) {
+      switch (e.key) {
         case "ArrowLeft":
           this.#startMoveLeft();
           break;
@@ -6695,13 +6473,13 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           break;
         case "ArrowUp":
         case " ":
-          e2.preventDefault();
+          e.preventDefault();
           this.#rotate();
           break;
       }
     }
-    onKeyUp(e2) {
-      switch (e2.key) {
+    onKeyUp(e) {
+      switch (e.key) {
         case "ArrowLeft":
           this.#stopMoveLeft();
           break;
@@ -6751,7 +6529,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       dutchButton.appendChild(document.createTextNode("Nederlands"));
       langButtons.appendChild(dutchButton);
       this.container.appendChild(langButtons);
-      dutchButton.addEventListener("click", (e2) => {
+      dutchButton.addEventListener("click", (e) => {
         this.lang = "dutch";
         this.displayWidgetTutorial(1);
       });
@@ -6915,7 +6693,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             TasksContainer.appendChild(noDataContainerTextContainer);
           }
           data2.sort(
-            (a2, b2) => new Date(a2.period.dateTimeFrom) - new Date(b2.period.dateTimeFrom)
+            (a, b) => new Date(a.period.dateTimeFrom) - new Date(b.period.dateTimeFrom)
           );
           let lastDate = "";
           if (data2.length > this.settings.maxAssignments) {
@@ -6976,8 +6754,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
                 iconSvg.setAttribute("width", "16px");
                 iconSvg.setAttribute("height", "16px");
                 const reader = new FileReader();
-                reader.onload = (e2) => {
-                  iconSvg.innerHTML = e2.target.result;
+                reader.onload = (e) => {
+                  iconSvg.innerHTML = e.target.result;
                 };
                 reader.readAsText(blob);
                 wrapperDiv.appendChild(iconSvg);
@@ -7147,7 +6925,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     return delijnDirectionsArray.join(", ");
   }
   async function fetchDelijnData(url) {
-    return await browser2.runtime.sendMessage({
+    return await browser.runtime.sendMessage({
       action: "fetchDelijnData",
       url
     });
@@ -7372,12 +7150,12 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       }
       this.hideInfo();
       let sortedDoorkomsten = delijnData.halteDoorkomsten[0].doorkomsten.sort(
-        (a2, b2) => {
+        (a, b) => {
           const timeA = new Date(
-            a2["real-timeTijdstip"] || a2.dienstregelingTijdstip
+            a["real-timeTijdstip"] || a.dienstregelingTijdstip
           );
           const timeB = new Date(
-            b2["real-timeTijdstip"] || b2.dienstregelingTijdstip
+            b["real-timeTijdstip"] || b.dienstregelingTijdstip
           );
           return timeA - timeB;
         }
@@ -7398,7 +7176,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       }
     }
     async initializeData() {
-      lijnDataKleuren = await browser2.runtime.sendMessage({
+      lijnDataKleuren = await browser.runtime.sendMessage({
         action: "getDelijnColorData"
       });
       if (this.settings.halte.nummer == null) {
@@ -7464,16 +7242,16 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         this.displayInfo("Er liep iets mis: " + error);
         return;
       }
-      delijnHaltesLijnrichtingenData.halteLijnrichtingen.forEach((halte, i2) => {
-        halte.halte.omschrijving = delijnHaltesData.haltes[i2].omschrijving;
+      delijnHaltesLijnrichtingenData.halteLijnrichtingen.forEach((halte, i) => {
+        halte.halte.omschrijving = delijnHaltesData.haltes[i].omschrijving;
       });
       try {
         this.hideInfo();
         const startIndex = this.searchResultLimit - 5;
         const results = delijnHaltesLijnrichtingenData.halteLijnrichtingen.slice(startIndex);
-        for (let i2 = 0; i2 < results.length; i2++) {
+        for (let i = 0; i < results.length; i++) {
           if (signal.aborted) return;
-          const halte = results[i2];
+          const halte = results[i];
           await this.createHalteOption(halte, signal);
           if (signal.aborted) return;
         }
@@ -7899,7 +7677,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       return this.settings.cache.weatherData;
     }
     async fetchWeatherData(location2) {
-      return await browser2.runtime.sendMessage({
+      return await browser.runtime.sendMessage({
         action: "fetchWeatherData",
         location: location2
       });
@@ -7944,7 +7722,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       this.element.appendChild(this.createHTML(await this.getWeatherData()));
     }
     async updateWeatherEffect() {
-      const settings = await browser2.runtime.sendMessage({
+      const settings = await browser.runtime.sendMessage({
         action: "getSettingsData"
       });
       applyWeatherEffects(settings.appearance.weatherOverlay);
@@ -7977,11 +7755,11 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       if (this.settings.currentLocation == "Locatie") {
         locationInput.classList.add("not-initialized");
         locationInput.value = "";
-        locationInput.addEventListener("focusin", (e2) => {
-          e2.target.placeholder = "";
+        locationInput.addEventListener("focusin", (e) => {
+          e.target.placeholder = "";
         });
-        locationInput.addEventListener("focusout", (e2) => {
-          e2.target.placeholder = "Locatie";
+        locationInput.addEventListener("focusout", (e) => {
+          e.target.placeholder = "Locatie";
         });
         let mainIcon2 = document.createElement("div");
         mainIcon2.classList.add("weather-icon-container");
@@ -8297,7 +8075,7 @@ ${code}`;
   // src/fixes-utils/migration.ts
   async function migrate() {
     await removeLegacyData();
-    let settingsData = await browser2.runtime.sendMessage({
+    let settingsData = await browser.runtime.sendMessage({
       action: "getRawSettingsData"
     });
     if (settingsData == void 0) return;
@@ -8311,10 +8089,10 @@ ${code}`;
     await migrateWidgetSettingsData();
   }
   async function migrateWidgetSettingsData() {
-    let delijnAppData = await browser2.runtime.sendMessage({
+    let delijnAppData = await browser.runtime.sendMessage({
       action: "getDelijnAppData"
     });
-    let weatherAppData = await browser2.runtime.sendMessage({
+    let weatherAppData = await browser.runtime.sendMessage({
       action: "getWeatherAppData"
     });
     if (Object.keys(delijnAppData).length !== 0) {
@@ -8353,7 +8131,7 @@ ${code}`;
         };
         break;
       case 2:
-        let imageData = await browser2.runtime.sendMessage({
+        let imageData = await browser.runtime.sendMessage({
           action: "getBackgroundImage"
         });
         data2 = {
@@ -8365,7 +8143,7 @@ ${code}`;
       default:
         break;
     }
-    await browser2.runtime.sendMessage({
+    await browser.runtime.sendMessage({
       action: "setImage",
       id: "backgroundImage",
       data: data2
@@ -8405,14 +8183,14 @@ ${code}`;
       quicks: oldData.quicks,
       performanceMode: oldData.enablePerfomanceMode
     };
-    await browser2.runtime.sendMessage({
+    await browser.runtime.sendMessage({
       action: "setRawSettingsData",
       data: newSettingsData
     });
-    const settings = await browser2.runtime.sendMessage({
+    const settings = await browser.runtime.sendMessage({
       action: "getSettingsData"
     });
-    await browser2.runtime.sendMessage({
+    await browser.runtime.sendMessage({
       action: "setSettingsData",
       data: settings
     });
@@ -8639,7 +8417,7 @@ ${code}`;
     }
   }
   async function createStaticGlobals() {
-    themes2 = await browser2.runtime.sendMessage({
+    themes2 = await browser.runtime.sendMessage({
       action: "getThemes"
     });
     let originalUsernameElement = document.querySelector(
@@ -8659,7 +8437,7 @@ ${code}`;
     onHomePage = document.getElementById("container") != null;
     onLoginPage = document.querySelector(".login-app") != null;
     var quicks2 = await quickLoad();
-    liteMode = browser2.runtime.getManifest().name.includes("Lite");
+    liteMode = browser.runtime.getManifest().name.includes("Lite");
   }
   async function applyAppearance(appearance) {
     let style = document.documentElement.style;
@@ -8706,7 +8484,7 @@ ${code}`;
     if (document.querySelector(".login-app__left")) updateLoginPanel();
   }
   async function apply() {
-    const data2 = await browser2.runtime.sendMessage({
+    const data2 = await browser.runtime.sendMessage({
       action: "getSettingsData"
     });
     console.log("Applying with settings data: \n", data2);
@@ -8748,8 +8526,8 @@ ${code}`;
   }
   function createProfileSettingButton() {
     let button = document.createElement("a");
-    button.addEventListener("click", (e2) => {
-      openSettingsWindow(e2);
+    button.addEventListener("click", (e) => {
+      openSettingsWindow(e);
       let topNavProfileMenu = document.getElementById("profileMenu");
       let settingsPageProfileButton = document.querySelector(
         ".profile-settings-button"

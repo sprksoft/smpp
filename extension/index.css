@@ -2059,11 +2059,6 @@ label.settings-page-image-button-wrapper:has(input:checked) {
   font-weight: 700;
   text-align: center;
 }
-.settings-page-theme-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
 .enableAnimations .settings-page-theme-card {
   transition-property:
     background-color,
@@ -2727,6 +2722,9 @@ input.settings-page-keybinding-input[type=text]:not(.aaaaaa):read-only.listening
 }
 .theme-tile > img {
   border-radius: 1rem !important;
+  aspect-ratio: 16/9 !important;
+  object-fit: cover !important;
+  object-position: center !important;
   background-color: var(--background-placeholder-color) !important;
   background:
     linear-gradient(
@@ -2752,6 +2750,11 @@ input.settings-page-keybinding-input[type=text]:not(.aaaaaa):read-only.listening
   border-color: var(--hover-border);
   background-color: var(--hover-color) !important;
   color: var(--text-color) !important;
+}
+.theme-tiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 /* src/styles/smpp-styles/assignments.css */

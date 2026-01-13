@@ -17,7 +17,7 @@ import { initGlobals } from "./json-loader.js";
 import {
   getTheme,
   getThemes,
-  getAllThemeCategories,
+  getThemeCategories,
   saveCustomTheme,
   removeCustomTheme,
 } from "./themes.js";
@@ -57,8 +57,11 @@ async function handleMessage(message, sendResponse) {
       sendResponse(theme);
       console.log(`Theme ${message.name} sent.`);
     }
-    if (message.action == "getAllThemeCategories") {
-      let categories = await getAllThemeCategories();
+    if (message.action == "getThemeCategories") {
+      let categories = await getThemeCategories(
+        message.includeEmpty,
+        message.includeHidden
+      );
       sendResponse(categories);
       console.log(`Theme categories sent: ${categories}`);
     }

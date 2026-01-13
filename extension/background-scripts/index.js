@@ -171,6 +171,26 @@
     let themes = { ...nativeThemes, ...customThemes };
     return themes;
   }
+  async function getThemeCategories(includeEmpty = false, includeHidden = false) {
+    let allCategories = await getAllThemeCategories();
+    console.log(allCategories);
+    if (!includeHidden) {
+      let hiddenThemeKeys = await getThemeCategory("hidden");
+      Object.keys(categories).forEach((category) => {
+        console.log(categories[category]);
+        categories[category].forEach((theme) => {
+          if (hiddenThemeKeys.includes(theme)) delete categories[category][theme];
+        });
+      });
+    }
+    if (!includeEmpty) {
+      Object.keys(categories).forEach((category) => {
+        if (!categories[category] || !categories[category][0])
+          delete categories[category];
+      });
+    }
+    return allCategories;
+  }
   async function getAllThemeCategories() {
     if (!categories) {
       categories = await loadJSON(
@@ -179,7 +199,6 @@
     }
     categories.custom = await getCustomCategory();
     categories.quickSettings = await getQuickSettingsThemes();
-    console.log(categories);
     return categories;
   }
   async function getQuickSettingsThemes() {
@@ -188,7 +207,6 @@
   }
   async function getThemeCategory(category) {
     let categories2 = await getAllThemeCategories();
-    console.log("all categories:", categories2);
     return categories2[category];
   }
   async function getThemes(categories2 = ["all"], includeHidden = false, mustMatchAllCategories = false) {
@@ -320,8 +338,11 @@
         sendResponse(theme);
         console.log(`Theme ${message.name} sent.`);
       }
-      if (message.action == "getAllThemeCategories") {
-        let categories2 = await getAllThemeCategories();
+      if (message.action == "getThemeCategories") {
+        let categories2 = await getThemeCategories(
+          message.includeEmpty,
+          message.includeHidden
+        );
         sendResponse(categories2);
         console.log(`Theme categories sent: ${categories2}`);
       }

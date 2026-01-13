@@ -16,6 +16,30 @@ async function getAllThemes() {
   return themes;
 }
 
+export async function getThemeCategories(
+  includeEmpty = false,
+  includeHidden = false
+) {
+  let allCategories = await getAllThemeCategories();
+  console.log(allCategories);
+  if (!includeHidden) {
+    let hiddenThemeKeys = await getThemeCategory("hidden");
+    Object.keys(categories).forEach((category) => {
+      console.log(categories[category]);
+      categories[category].forEach((theme) => {
+        if (hiddenThemeKeys.includes(theme)) delete categories[category][theme];
+      });
+    });
+  }
+  if (!includeEmpty) {
+    Object.keys(categories).forEach((category) => {
+      if (!categories[category] || !categories[category][0])
+        delete categories[category];
+    });
+  }
+  return allCategories;
+}
+
 export async function getAllThemeCategories() {
   if (!categories) {
     categories = await loadJSON(
@@ -24,19 +48,16 @@ export async function getAllThemeCategories() {
   }
   categories.custom = await getCustomCategory();
   categories.quickSettings = await getQuickSettingsThemes();
-  console.log(categories);
   return categories;
 }
 
 async function getQuickSettingsThemes() {
   let data = await getSettingsData();
-  // Object.values wordt momenteel gebruikt tot een fix van sibe voor settings (zie issue#103)
   return data.appearance.quickSettingsThemes;
 }
 
 async function getThemeCategory(category) {
   let categories = await getAllThemeCategories();
-  console.log("all categories:", categories);
   return categories[category];
 }
 

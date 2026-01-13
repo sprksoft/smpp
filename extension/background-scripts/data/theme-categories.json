@@ -9,7 +9,7 @@
     "summer",
     "ocean"
   ],
-  "light": ["pink", "white", "summer"],
+  "light": ["pink", "white", "summer", "japan", "fairyblue"],
   "dark": [
     "birb",
     "ldev",
@@ -25,11 +25,9 @@
     "vax",
     "sand",
     "ocean",
-    "fairyblue",
     "pizza",
     "galaxy",
     "error",
-    "smkerst",
-    "japan"
+    "smkerst"
   ]
 }

@@ -8,6 +8,9 @@ import { colord } from "colord";
 import { copySvg, doneSvg, editIconSvg } from "../../fixes-utils/svgs.js";
 import type { Image } from "../modules/images.js";
 import { BaseWindow } from "../modules/windows.js";
+import { settingsWindow, type Settings } from "../settings/main-settings.js";
+import { loadQuickSettings } from "../settings/quick-settings.js";
+import { applyAppearance } from "../main.js";
 
 export let currentThemeName: string;
 export let currentTheme: Theme;
@@ -403,7 +406,12 @@ export class ThemeTile extends Tile {
       name: "appearance.theme",
       data: this.name,
     });
-    setTheme(this.name);
+    await settingsWindow.loadPage();
+    await loadQuickSettings();
+    let data = (await browser.runtime.sendMessage({
+      action: "getSettingsData",
+    })) as Settings;
+    applyAppearance(data.appearance);
   }
 
   // Overide in de implementation
@@ -442,7 +450,7 @@ export class ThemeFolder extends Tile {
     } | null;
 
     if (!themes) return;
-    let theme = themes[0];
+    let theme = Object.values(themes)[0];
     if (!theme) return;
 
     Object.keys(theme.cssProperties).forEach((key) => {
@@ -455,34 +463,135 @@ export class ThemeFolder extends Tile {
   }
 }
 
-type Tiles = Tile[];
+type Tiles = Tile[] | ThemeTile[] | ThemeFolder[];
 
 export class ThemeSelector {
   element = document.createElement("div");
+  content = document.createElement("div");
+  topContainer = document.createElement("div");
+  currentCategory: string = "all";
+
+  // Store current tiles to properly clean them up
+  private currentTiles: Tiles = [];
+
+  createTopContainer() {
+    const newTopContainer = document.createElement("div");
+
+    let title = document.createElement("h2");
+    title.classList.add("current-category");
+
+    if (this.currentCategory != "all") {
+      let backButton = document.createElement("button");
+      backButton.innerText = "<";
+      backButton.addEventListener("click", async () => {
+        this.currentCategory = "all";
+        await this.update();
+      });
+      newTopContainer.appendChild(backButton);
+    }
+
+    title.innerText = this.currentCategory;
+    newTopContainer.appendChild(title);
+
+    return newTopContainer;
+  }
 
   render() {
+    this.topContainer = this.createTopContainer();
+    this.element.appendChild(this.topContainer);
+    this.element.appendChild(this.content);
+    this.content.classList.add("theme-tiles");
+
     return this.element;
   }
 
-  renderTiles(tiles: Tiles) {
-    let content = document.createElement("div");
-    tiles.forEach(async (tile) => {
-      content.appendChild(await tile.render());
-    });
+  async update() {
+    // TO DO: make this smooth
+    this.currentTiles = [];
+
+    this.topContainer.remove();
+
+    this.element.innerHTML = "";
+
+    let newContent = this.createContentContainer();
+
+    this.content.remove();
+    this.content = newContent;
+
+    this.topContainer = this.createTopContainer();
+
+    this.element.appendChild(this.topContainer);
+    this.element.appendChild(this.content);
+
+    if (this.currentCategory == "all") {
+      await this.renderFolders();
+    } else {
+      await this.renderFolderContent();
+    }
   }
 
-  async openFolder(category: string) {
+  async renderTiles(tiles: Tiles) {
+    const renderedElements = await Promise.all(
+      tiles.map((tile) => tile.render())
+    );
+
+    this.currentTiles = tiles;
+
+    const fragment = document.createDocumentFragment();
+    renderedElements.forEach((element) => {
+      fragment.appendChild(element);
+    });
+
+    this.content.appendChild(fragment);
+  }
+
+  createContentContainer() {
+    this.content = document.createElement("div");
+    this.content.classList.add("theme-tiles");
+    return this.content;
+  }
+
+  async renderFolders() {
+    let categories = (await browser.runtime.sendMessage({
+      action: "getThemeCategories",
+      includeEmpty: false,
+      includeHidden: true,
+    })) as {
+      [key: string]: string[];
+    };
+
+    let tiles = Object.keys(categories).map((category) => {
+      let tile = new ThemeFolder(category);
+      tile.onClick = async () => {
+        this.changeCategory(category);
+      };
+      return tile;
+    }) as Tiles;
+
+    await this.renderTiles(tiles);
+  }
+
+  async renderFolderContent() {
     let themes = (await browser.runtime.sendMessage({
       action: "getThemes",
-      categories: [category],
+      categories: [this.currentCategory],
       includeHidden: true,
     })) as {
       [key: string]: Theme;
     };
+
     if (!themes) return;
-    // TIME TO MAP TIME TO MAP!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    Object.keys(themes).forEach(async (name: string) => {
+
+    let tiles = Object.keys(themes).map((name: string) => {
       let tile = new ThemeTile(name);
-    });
+      return tile;
+    }) as Tiles;
+
+    await this.renderTiles(tiles);
+  }
+
+  async changeCategory(category: string) {
+    this.currentCategory = category;
+    await this.update();
   }
 }
