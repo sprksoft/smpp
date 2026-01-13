@@ -14,10 +14,6 @@ export class ImageSelector {
   constructor(name) {
     this.name = name;
 
-    this.linkInputContainer = this.createLinkImageInputContainer();
-    this.fileInputContainer = this.createImageFileInputContainer();
-
-    this.fullContainer = this.createFullFileInput();
     this._bindEvents();
   }
 
@@ -26,6 +22,9 @@ export class ImageSelector {
   linkInput = null;
   fileInput = null;
   fileInputButton = null;
+  linkInputContainer = this.createLinkImageInputContainer();
+  fileInputContainer = this.createImageFileInputContainer();
+  fullContainer = this.createFullFileInput();
 
   readFileAsDataURL(file) {
     return new Promise((resolve, reject) => {

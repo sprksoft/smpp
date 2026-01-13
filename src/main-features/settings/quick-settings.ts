@@ -1,35 +1,34 @@
-// @ts-nocheck
-import { themes, settingsTemplate, apply } from "../main.js";
+import { apply } from "../main.js";
 import { ImageSelector } from "../modules/images.js";
 import { performanceModeSvg, settingsIconSvg } from "../../fixes-utils/svgs.js";
-import { openSettingsWindow, settingsWindow } from "./main-settings.js";
+import {
+  openSettingsWindow,
+  settingsWindow,
+  type Settings,
+} from "./main-settings.js";
 import { browser } from "../../common/utils.js";
 
 let quickSettingsWindowIsHidden = true;
-
-var quickSettingsBackgroundImageSelector;
+let quickSettingsBackgroundImageSelector = new ImageSelector("backgroundImage");
 
 async function storeQuickSettings() {
-  const oldData = await browser.runtime.sendMessage({
+  const oldData = (await browser.runtime.sendMessage({
     action: "getSettingsData",
-  });
+  })) as Settings;
 
   const data = structuredClone(oldData);
-
-  data.appearance.background.blur = Number(
-    document.getElementById("background-blur-amount-slider").value
-  );
-
-  data.other.performanceMode = document.getElementById(
+  const backgroundBlurAmountSlider = document.getElementById(
+    "background-blur-amount-slider"
+  ) as HTMLInputElement;
+  if (backgroundBlurAmountSlider) {
+    data.appearance.background.blur = Number(backgroundBlurAmountSlider.value);
+  }
+  const performanceModeToggle = document.getElementById(
     "performance-mode-toggle"
-  ).checked;
-
-  document.getElementById(
-    "performance-mode-info"
-  ).innerHTML = `Toggle performance mode ${data.other.performanceMode
-    ? "<span class='green-underline'>Enabled</span>"
-    : "<span class='red-underline'>Disabled</span>"
-  }`;
+  ) as HTMLInputElement;
+  if (performanceModeToggle) {
+    data.other.performanceMode = performanceModeToggle.checked;
+  }
 
   await browser.runtime.sendMessage({ action: "setSettingsData", data });
   await loadQuickSettings();
@@ -47,18 +46,27 @@ export async function loadQuickSettings() {
 
   quickSettingsBackgroundImageSelector.id = data.appearance.theme;
   quickSettingsBackgroundImageSelector.loadImageData();
+  const backgroundBlurAmountSlider = document.getElementById(
+    "background-blur-amount-slider"
+  ) as HTMLInputElement;
+  if (backgroundBlurAmountSlider) {
+    backgroundBlurAmountSlider.value = data.appearance.background.blur;
+  }
+  const performanceModeToggle = document.getElementById(
+    "performance-mode-toggle"
+  ) as HTMLInputElement;
+  if (performanceModeToggle) {
+    performanceModeToggle.checked = data.other.performanceMode;
+  }
 
-  document.getElementById("background-blur-amount-slider").value =
-    data.appearance.background.blur;
-  document.getElementById("performance-mode-toggle").checked =
-    data.other.performanceMode;
-
-  document.getElementById(
-    "performance-mode-info"
-  ).innerHTML = `Toggle performance mode ${data.other.performanceMode
-    ? "<span class='green-underline'>Enabled</span>"
-    : "<span class='red-underline'>Disabled</span>"
-  }`;
+  const performanceModeInfo = document.getElementById("performance-mode-info");
+  if (performanceModeInfo) {
+    performanceModeInfo.innerHTML = `Toggle performance mode ${
+      data.other.performanceMode
+        ? "<span class='green-underline'>Enabled</span>"
+        : "<span class='red-underline'>Disabled</span>"
+    }`;
+  }
 }
 
 function toggleQuickSettings() {
@@ -72,9 +80,7 @@ function toggleQuickSettings() {
 
 async function openQuickSettings() {
   let win = document.getElementById("quickSettings");
-
-  win = document.getElementById("quickSettings");
-
+  if (!win) return;
   win.classList.remove("qs-hidden");
   await loadQuickSettings();
   quickSettingsWindowIsHidden = false;
@@ -88,7 +94,7 @@ function closeQuickSettings() {
   quickSettingsWindowIsHidden = true;
 }
 
-function createQuickSettingsHTML(parent) {
+function createQuickSettingsHTML(parent: HTMLDivElement): HTMLDivElement {
   const performanceModeTooltipLabel = document.createElement("label");
   performanceModeTooltipLabel.className = "performanceModeTooltipLabel";
   performanceModeTooltipLabel.id = "performanceModeTooltipLabel";
@@ -156,43 +162,55 @@ export function createQuickSettings() {
   let quickSettingsWindow = document.createElement("div");
   quickSettingsWindow.id = "quickSettings";
   quickSettingsWindow.addEventListener("change", storeQuickSettings);
-  quickSettingsBackgroundImageSelector = new ImageSelector("backgroundImage");
+
   quickSettingsBackgroundImageSelector.onStore = () => {
     storeQuickSettings();
   };
+
   quickSettingsWindow = createQuickSettingsHTML(quickSettingsWindow);
 
-  document
-    .getElementById("quickSettingsButton")
-    .insertAdjacentElement("afterend", quickSettingsWindow);
+  const quickSettingsButton = document.getElementById("quickSettingsButton");
+  if (quickSettingsButton) {
+    quickSettingsButton.insertAdjacentElement("afterend", quickSettingsWindow);
+  }
 
-  document
-    .getElementById("performanceModeTooltipLabel")
-    .addEventListener("mouseover", () => {
-      document.getElementById("performance-mode-info").style.opacity = "1";
-      document.getElementById("performance-mode-info").style.zIndex = "2";
-    });
-  document
-    .getElementById("performanceModeTooltipLabel")
-    .addEventListener("mouseout", () => {
-      document.getElementById("performance-mode-info").style.opacity = "0";
-      document.getElementById("performance-mode-info").style.zIndex = "-1";
+  const tooltipLabel = document.getElementById("performanceModeTooltipLabel");
+  const tooltipInfo = document.getElementById("performance-mode-info");
+
+  if (tooltipLabel && tooltipInfo) {
+    tooltipLabel.addEventListener("mouseover", () => {
+      tooltipInfo.style.opacity = "1";
+      tooltipInfo.style.zIndex = "2";
     });
 
-  document.addEventListener("click", (e) => {
+    tooltipLabel.addEventListener("mouseout", () => {
+      tooltipInfo.style.opacity = "0";
+      tooltipInfo.style.zIndex = "-1";
+    });
+  }
+
+  document.addEventListener("click", (e: MouseEvent) => {
     if (quickSettingsWindowIsHidden) return;
-    if (e.target.id === "extraSettingsButton") {
+
+    const target = e.target as HTMLElement | null;
+    if (!target) return;
+
+    if (target.id === "extraSettingsButton") {
       closeQuickSettings();
+      return;
     }
+
     if (
-      e.target.id === "quickSettings" ||
-      quickSettingsWindow.contains(e.target) ||
-      e.target.id === "quickSettingsButton"
+      target.id === "quickSettings" ||
+      quickSettingsWindow.contains(target) ||
+      target.id === "quickSettingsButton"
     ) {
       return;
     }
+
     closeQuickSettings();
   });
+
   closeQuickSettings();
 }
 

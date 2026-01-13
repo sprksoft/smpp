@@ -716,9 +716,6 @@ Is it scaring you off?`,
   var ImageSelector = class {
     constructor(name2) {
       this.name = name2;
-      this.linkInputContainer = this.createLinkImageInputContainer();
-      this.fileInputContainer = this.createImageFileInputContainer();
-      this.fullContainer = this.createFullFileInput();
       this._bindEvents();
     }
     id = null;
@@ -726,6 +723,9 @@ Is it scaring you off?`,
     linkInput = null;
     fileInput = null;
     fileInputButton = null;
+    linkInputContainer = this.createLinkImageInputContainer();
+    fileInputContainer = this.createImageFileInputContainer();
+    fullContainer = this.createFullFileInput();
     readFileAsDataURL(file) {
       return new Promise((resolve, reject) => {
         const reader = new FileReader();
@@ -2216,21 +2216,24 @@ Is it scaring you off?`,
 
   // src/main-features/settings/quick-settings.ts
   var quickSettingsWindowIsHidden = true;
-  var quickSettingsBackgroundImageSelector;
+  var quickSettingsBackgroundImageSelector = new ImageSelector("backgroundImage");
   async function storeQuickSettings() {
     const oldData = await browser.runtime.sendMessage({
       action: "getSettingsData"
     });
     const data2 = structuredClone(oldData);
-    data2.appearance.background.blur = Number(
-      document.getElementById("background-blur-amount-slider").value
+    const backgroundBlurAmountSlider = document.getElementById(
+      "background-blur-amount-slider"
     );
-    data2.other.performanceMode = document.getElementById(
+    if (backgroundBlurAmountSlider) {
+      data2.appearance.background.blur = Number(backgroundBlurAmountSlider.value);
+    }
+    const performanceModeToggle = document.getElementById(
       "performance-mode-toggle"
-    ).checked;
-    document.getElementById(
-      "performance-mode-info"
-    ).innerHTML = `Toggle performance mode ${data2.other.performanceMode ? "<span class='green-underline'>Enabled</span>" : "<span class='red-underline'>Disabled</span>"}`;
+    );
+    if (performanceModeToggle) {
+      data2.other.performanceMode = performanceModeToggle.checked;
+    }
     await browser.runtime.sendMessage({ action: "setSettingsData", data: data2 });
     await loadQuickSettings();
     if (settingsWindow) {
@@ -2245,11 +2248,22 @@ Is it scaring you off?`,
     });
     quickSettingsBackgroundImageSelector.id = data2.appearance.theme;
     quickSettingsBackgroundImageSelector.loadImageData();
-    document.getElementById("background-blur-amount-slider").value = data2.appearance.background.blur;
-    document.getElementById("performance-mode-toggle").checked = data2.other.performanceMode;
-    document.getElementById(
-      "performance-mode-info"
-    ).innerHTML = `Toggle performance mode ${data2.other.performanceMode ? "<span class='green-underline'>Enabled</span>" : "<span class='red-underline'>Disabled</span>"}`;
+    const backgroundBlurAmountSlider = document.getElementById(
+      "background-blur-amount-slider"
+    );
+    if (backgroundBlurAmountSlider) {
+      backgroundBlurAmountSlider.value = data2.appearance.background.blur;
+    }
+    const performanceModeToggle = document.getElementById(
+      "performance-mode-toggle"
+    );
+    if (performanceModeToggle) {
+      performanceModeToggle.checked = data2.other.performanceMode;
+    }
+    const performanceModeInfo = document.getElementById("performance-mode-info");
+    if (performanceModeInfo) {
+      performanceModeInfo.innerHTML = `Toggle performance mode ${data2.other.performanceMode ? "<span class='green-underline'>Enabled</span>" : "<span class='red-underline'>Disabled</span>"}`;
+    }
   }
   function toggleQuickSettings() {
     let win = document.getElementById("quickSettings");
@@ -2261,7 +2275,7 @@ Is it scaring you off?`,
   }
   async function openQuickSettings() {
     let win = document.getElementById("quickSettings");
-    win = document.getElementById("quickSettings");
+    if (!win) return;
     win.classList.remove("qs-hidden");
     await loadQuickSettings();
     quickSettingsWindowIsHidden = false;
@@ -2326,26 +2340,35 @@ Is it scaring you off?`,
     let quickSettingsWindow = document.createElement("div");
     quickSettingsWindow.id = "quickSettings";
     quickSettingsWindow.addEventListener("change", storeQuickSettings);
-    quickSettingsBackgroundImageSelector = new ImageSelector("backgroundImage");
     quickSettingsBackgroundImageSelector.onStore = () => {
       storeQuickSettings();
     };
     quickSettingsWindow = createQuickSettingsHTML(quickSettingsWindow);
-    document.getElementById("quickSettingsButton").insertAdjacentElement("afterend", quickSettingsWindow);
-    document.getElementById("performanceModeTooltipLabel").addEventListener("mouseover", () => {
-      document.getElementById("performance-mode-info").style.opacity = "1";
-      document.getElementById("performance-mode-info").style.zIndex = "2";
-    });
-    document.getElementById("performanceModeTooltipLabel").addEventListener("mouseout", () => {
-      document.getElementById("performance-mode-info").style.opacity = "0";
-      document.getElementById("performance-mode-info").style.zIndex = "-1";
-    });
+    const quickSettingsButton = document.getElementById("quickSettingsButton");
+    if (quickSettingsButton) {
+      quickSettingsButton.insertAdjacentElement("afterend", quickSettingsWindow);
+    }
+    const tooltipLabel = document.getElementById("performanceModeTooltipLabel");
+    const tooltipInfo = document.getElementById("performance-mode-info");
+    if (tooltipLabel && tooltipInfo) {
+      tooltipLabel.addEventListener("mouseover", () => {
+        tooltipInfo.style.opacity = "1";
+        tooltipInfo.style.zIndex = "2";
+      });
+      tooltipLabel.addEventListener("mouseout", () => {
+        tooltipInfo.style.opacity = "0";
+        tooltipInfo.style.zIndex = "-1";
+      });
+    }
     document.addEventListener("click", (e) => {
       if (quickSettingsWindowIsHidden) return;
-      if (e.target.id === "extraSettingsButton") {
+      const target = e.target;
+      if (!target) return;
+      if (target.id === "extraSettingsButton") {
         closeQuickSettings();
+        return;
       }
-      if (e.target.id === "quickSettings" || quickSettingsWindow.contains(e.target) || e.target.id === "quickSettingsButton") {
+      if (target.id === "quickSettings" || quickSettingsWindow.contains(target) || target.id === "quickSettingsButton") {
         return;
       }
       closeQuickSettings();
@@ -3651,13 +3674,13 @@ Is it scaring you off?`,
       return bottomContainer;
     }
     async createContent() {
-      let themes3 = await browser.runtime.sendMessage({
+      let themes2 = await browser.runtime.sendMessage({
         action: "getThemes",
         categories: [this.category],
         includeHidden: true
       });
-      if (!themes3) return;
-      let theme = Object.values(themes3)[0];
+      if (!themes2) return;
+      let theme = Object.values(themes2)[0];
       if (!theme) return;
       Object.keys(theme.cssProperties).forEach((key) => {
         this.element.style.setProperty(
@@ -3754,13 +3777,13 @@ Is it scaring you off?`,
       this.updateImages(true);
     }
     async renderFolderContent() {
-      let themes3 = await browser.runtime.sendMessage({
+      let themes2 = await browser.runtime.sendMessage({
         action: "getThemes",
         categories: [this.currentCategory],
         includeHidden: true
       });
-      if (!themes3) return;
-      let tiles = Object.keys(themes3).map((name2) => {
+      if (!themes2) return;
+      let tiles = Object.keys(themes2).map((name2) => {
         let tile = new ThemeTile2(name2);
         return tile;
       });
@@ -5034,12 +5057,12 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             });
             break;
           case "test cats":
-            let themes3 = await browser.runtime.sendMessage({
+            let themes2 = await browser.runtime.sendMessage({
               action: "getThemes",
               categories: ["quickSettings"],
               includeHidden: true
             });
-            console.log(themes3);
+            console.log(themes2);
           default:
             break;
         }
@@ -8322,7 +8345,7 @@ ${code}`;
 
   // src/main-features/main.ts
   var originalUsername;
-  var themes2;
+  var themes;
   var onHomePage;
   var onLoginPage;
   var isGOSchool;
@@ -8436,7 +8459,7 @@ ${code}`;
     }
   }
   async function createStaticGlobals() {
-    themes2 = await browser.runtime.sendMessage({
+    themes = await browser.runtime.sendMessage({
       action: "getThemes"
     });
     let originalUsernameElement = document.querySelector(
