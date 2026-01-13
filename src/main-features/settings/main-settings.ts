@@ -305,8 +305,8 @@ export class SettingsWindow extends BaseWindow {
     });
   }
 
-  async loadPage() {
-    console.log("loading page...");
+  async loadPage(shouldReloadTheme = true) {
+    console.log(shouldReloadTheme);
     const settings: Settings = await browser.runtime.sendMessage({
       action: "getSettingsData",
     });
@@ -358,8 +358,9 @@ export class SettingsWindow extends BaseWindow {
 
       case "appearance": {
         // Theme
-        this.themeSelector.updateImages();
-        console.log("Updating.....");
+        if (shouldReloadTheme) {
+          await this.themeSelector.updateImages(false);
+        }
 
         // Background
         this.backgroundImageSelector.id = settings.appearance.theme;
@@ -1511,5 +1512,4 @@ export async function createSettingsWindow() {
 
 export async function openSettingsWindow(event: MouseEvent | KeyboardEvent) {
   settingsWindow.show(event);
-  settingsWindow.loadPage();
 }

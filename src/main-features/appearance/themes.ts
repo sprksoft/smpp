@@ -5,7 +5,18 @@ import {
   isValidHexColor,
 } from "../../common/utils.js";
 import { colord } from "colord";
-import { copySvg, doneSvg, editIconSvg } from "../../fixes-utils/svgs.js";
+import {
+  chevronLeftSvg,
+  contractIconSVG,
+  copySvg,
+  doneSvg,
+  editIconSvg,
+  favoriteFolderSvg,
+  folderSvg,
+  moonSvg,
+  pineSvg,
+  sunSvg,
+} from "../../fixes-utils/svgs.js";
 import { getImageURL, type Image } from "../modules/images.js";
 import { BaseWindow } from "../modules/windows.js";
 import { settingsWindow, type Settings } from "../settings/main-settings.js";
@@ -327,7 +338,7 @@ export class Tile {
     return this.element;
   }
 
-  async updateImage(forceReload = false) {}
+  async updateImage(currentTheme: string, forceReload = false) {}
 
   // Overide this in the implementation
   async createContent() {}
@@ -393,11 +404,8 @@ export class ThemeTile extends Tile {
 
   async imageIsOutdated() {}
 
-  async updateImage(forceReload = false) {
-    let data = (await browser.runtime.sendMessage({
-      action: "getSettingsData",
-    })) as Settings;
-    if (this.name == data.appearance.theme || forceReload) {
+  async updateImage(currentTheme: string, forceReload = false) {
+    if (this.name == currentTheme || forceReload) {
       let imageURL = await getImageURL(this.name, async () => {
         return await getExtensionImage(
           "theme-backgrounds/" + this.name + ".jpg"
@@ -417,7 +425,7 @@ export class ThemeTile extends Tile {
       name: "appearance.theme",
       data: this.name,
     });
-    await settingsWindow.loadPage();
+    await settingsWindow.loadPage(false);
     await loadQuickSettings();
     let data = (await browser.runtime.sendMessage({
       action: "getSettingsData",
@@ -451,18 +459,44 @@ export class ThemeFolder extends Tile {
     return bottomContainer;
   }
 
-  async createContent() {
-    let themes = (await browser.runtime.sendMessage({
-      action: "getThemes",
-      categories: [this.category],
-      includeHidden: true,
-    })) as {
-      [key: string]: Theme;
-    } | null;
+  createImageContainer() {
+    let imageContainer = document.createElement("div");
+    let svg: string;
 
-    if (!themes) return;
-    let theme = Object.values(themes)[0];
-    if (!theme) return;
+    switch (this.category) {
+      case "quickSettings":
+        svg = favoriteFolderSvg;
+        break;
+      case "light":
+        svg = sunSvg;
+        break;
+      case "dark":
+        svg = moonSvg;
+        break;
+      case "seasonal":
+        svg = pineSvg;
+        break;
+      default:
+        svg = folderSvg;
+        break;
+    }
+    imageContainer.innerHTML = svg;
+    imageContainer.classList.add("image-container");
+    return imageContainer;
+  }
+
+  async createContent() {
+    let firstThemeInCategory = (await browser.runtime.sendMessage({
+      action: "getFirstThemeInCategory",
+      category: this.category,
+      includeHidden: true,
+    })) as string;
+
+    if (!firstThemeInCategory) return;
+    let theme = (await browser.runtime.sendMessage({
+      action: "getTheme",
+      name: firstThemeInCategory,
+    })) as Theme;
 
     Object.keys(theme.cssProperties).forEach((key) => {
       this.element.style.setProperty(
@@ -470,6 +504,9 @@ export class ThemeFolder extends Tile {
         theme.cssProperties[key] as string
       );
     });
+
+    this.element.style.setProperty("--background-image-local", `url()`);
+    this.element.appendChild(this.createImageContainer());
     this.element.appendChild(this.getBottomContainer());
   }
 }
@@ -478,6 +515,9 @@ type Tiles = Tile[] | ThemeTile[] | ThemeFolder[];
 
 function getFancyCategoryName(name: string) {
   let fancyName = name.charAt(0).toUpperCase() + name.slice(1);
+  if (name == "quickSettings") {
+    fancyName = "Favorite";
+  }
   return fancyName;
 }
 
@@ -497,7 +537,7 @@ export class ThemeSelector {
 
     if (this.currentCategory != "all") {
       let backButton = document.createElement("button");
-      backButton.innerText = "<";
+      backButton.innerHTML = chevronLeftSvg;
       backButton.addEventListener("click", async () => {
         this.currentCategory = "all";
         await this.update();
@@ -520,15 +560,16 @@ export class ThemeSelector {
     return this.element;
   }
 
-  updateImages(forceReload = false) {
+  async updateImages(forceReload = false) {
+    let data = (await browser.runtime.sendMessage({
+      action: "getSettingsData",
+    })) as Settings;
     this.currentTiles.forEach(async (tile: Tile) => {
-      await tile.updateImage(forceReload);
+      await tile.updateImage(data.appearance.theme, forceReload);
     });
   }
 
   async update() {
-    // TO DO: make this smooth
-
     this.topContainer.remove();
 
     this.element.innerHTML = "";
@@ -548,7 +589,6 @@ export class ThemeSelector {
     } else {
       await this.renderFolderContent();
     }
-    this.updateImages();
   }
 
   async renderTiles(tiles: Tiles) {
@@ -589,7 +629,7 @@ export class ThemeSelector {
     this.currentTiles = tiles;
 
     await this.renderTiles(tiles);
-    this.updateImages(true);
+    await this.updateImages(true);
   }
 
   async renderFolderContent() {
@@ -602,6 +642,7 @@ export class ThemeSelector {
     };
 
     if (!themes) return;
+    console.log(themes);
 
     let tiles = Object.keys(themes).map((name: string) => {
       let tile = new ThemeTile(name);
@@ -610,7 +651,7 @@ export class ThemeSelector {
     this.currentTiles = tiles;
 
     await this.renderTiles(tiles);
-    this.updateImages(true);
+    await this.updateImages(true);
   }
 
   async changeCategory(category: string) {

@@ -201,6 +201,12 @@
     categories.quickSettings = await getQuickSettingsThemes();
     return categories;
   }
+  async function getFirstThemeInCategory(category, includeHidden) {
+    let themeNames = await getThemeCategory(category);
+    console.log(category, themeNames);
+    if (!themeNames[0]) return "error";
+    return themeNames[0];
+  }
   async function getQuickSettingsThemes() {
     let data = await getSettingsData();
     return data.appearance.quickSettingsThemes;
@@ -332,6 +338,7 @@
         console.log(
           `Themes for categories: ${message.categories} sent, including hidden themes: ${message.includeHidden ? true : false}`
         );
+        console.log(themes);
       }
       if (message.action === "getTheme") {
         let theme = await getTheme(message.name);
@@ -341,6 +348,14 @@
       if (message.action == "getThemeCategories") {
         let categories2 = await getThemeCategories(
           message.includeEmpty,
+          message.includeHidden
+        );
+        sendResponse(categories2);
+        console.log(`Theme categories sent: ${categories2}`);
+      }
+      if (message.action == "getFirstThemeInCategory") {
+        let categories2 = await getFirstThemeInCategory(
+          message.category,
           message.includeHidden
         );
         sendResponse(categories2);

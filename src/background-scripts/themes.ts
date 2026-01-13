@@ -51,6 +51,13 @@ export async function getAllThemeCategories() {
   return categories;
 }
 
+export async function getFirstThemeInCategory(category, includeHidden) {
+  let themeNames = await getThemeCategory(category);
+  console.log(category, themeNames);
+  if (!themeNames[0]) return "error";
+  return themeNames[0];
+}
+
 async function getQuickSettingsThemes() {
   let data = await getSettingsData();
   return data.appearance.quickSettingsThemes;

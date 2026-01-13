@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { createTextInput } from "../appearance/ui.js";
-import { fileInputIconSvg } from "../../fixes-utils/svgs.js";
+import { imageInputSvg } from "../../fixes-utils/svgs.js";
 import { isAbsoluteUrl, browser } from "../../common/utils.js";
 import { isFirefox } from "../main.js";
 
@@ -54,7 +54,7 @@ export class ImageSelector {
     this.fileInputButton.type = "button";
     this.fileInputButton.classList.add("smpp-file-input-button");
     this.fileInputButton.setAttribute("aria-label", "Choose image file");
-    this.fileInputButton.innerHTML = fileInputIconSvg;
+    this.fileInputButton.innerHTML = imageInputSvg;
 
     this.fileInputButton.addEventListener("click", (e) => {
       e.preventDefault();

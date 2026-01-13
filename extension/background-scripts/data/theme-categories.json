@@ -1,9 +1,8 @@
 {
-  "light": ["pink", "white", "summer", "japan", "fairyblue", "boringwhite"],
   "dark": [
+    "default",
     "birb",
     "ldev",
-    "default",
     "tech",
     "stalker",
     "mountain",
@@ -20,10 +19,13 @@
     "error",
     "smkerst"
   ],
+  "light": ["white", "summer", "pink", "japan", "fairyblue", "boringwhite"],
+  "blue": ["winter", "birb", "mountain", "smkerst", "ocean"],
+  "seasonal": ["fall", "smkerst", "winter", "summer", "matcha"],
   "hidden": [
+    "fairyblue",
     "vax",
     "pizza",
-    "fairyblue",
     "error",
     "smkerst",
     "japan",

@@ -2781,7 +2781,7 @@ input.settings-page-keybinding-input[type=text]:not(.aaaaaa):read-only.listening
   aspect-ratio: 1;
   cursor: pointer !important;
   color: var(--color-text) !important;
-  padding: 0.1rem 0.4rem !important;
+  padding: 0.2rem !important;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -2805,6 +2805,13 @@ input.settings-page-keybinding-input[type=text]:not(.aaaaaa):read-only.listening
 }
 .theme-top-container button:hover > svg {
   stroke: var(--color-accent) !important;
+}
+.theme-tile .image-container > svg {
+  box-sizing: border-box;
+  width: 100%;
+  height: calc(100% - 1rem);
+  stroke: var(--color-accent-local) !important;
+  margin: 0.5rem 0rem;
 }
 .current-category {
   margin-bottom: 0 !important;

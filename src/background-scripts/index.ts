@@ -20,6 +20,7 @@ import {
   getThemeCategories,
   saveCustomTheme,
   removeCustomTheme,
+  getFirstThemeInCategory,
 } from "./themes.js";
 
 browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -51,6 +52,7 @@ async function handleMessage(message, sendResponse) {
           message.includeHidden ? true : false
         }`
       );
+      console.log(themes);
     }
     if (message.action === "getTheme") {
       let theme = await getTheme(message.name);
@@ -65,6 +67,15 @@ async function handleMessage(message, sendResponse) {
       sendResponse(categories);
       console.log(`Theme categories sent: ${categories}`);
     }
+    if (message.action == "getFirstThemeInCategory") {
+      let categories = await getFirstThemeInCategory(
+        message.category,
+        message.includeHidden
+      );
+      sendResponse(categories);
+      console.log(`Theme categories sent: ${categories}`);
+    }
+
     if (message.action === "saveCustomTheme") {
       let id = await saveCustomTheme(message.data, message.id);
       sendResponse(id);
