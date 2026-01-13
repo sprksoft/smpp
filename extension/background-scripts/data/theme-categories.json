@@ -7,9 +7,10 @@
     "smkerst",
     "japan",
     "summer",
-    "ocean"
+    "ocean",
+    "boringwhite"
   ],
-  "light": ["pink", "white", "summer", "japan", "fairyblue"],
+  "light": ["pink", "white", "summer", "japan", "fairyblue", "boringwhite"],
   "dark": [
     "birb",
     "ldev",
