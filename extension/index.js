@@ -2391,11 +2391,44 @@ Is it scaring you off?`,
     return quickSettingsButtonWrapper;
   }
   var ThemeOptiony = class {
+    element = document.createElement("div");
     name;
     constructor(name2) {
       this.name = name2;
     }
-    render() {
+    createImageContainer() {
+      let imageContainer = document.createElement("div");
+      imageContainer.classList.add("image-container");
+      return imageContainer;
+    }
+    async imageIsOutdated() {
+    }
+    async updateImage(forceReload = false) {
+      let data2 = await browser.runtime.sendMessage({
+        action: "getSettingsData"
+      });
+      if (this.name == data2.appearance.theme || forceReload) {
+        let imageURL = await getImageURL(this.name, async () => {
+          return await getExtensionImage(
+            "theme-backgrounds/" + this.name + ".jpg"
+          );
+        });
+        this.element.style.setProperty(
+          "--background-image-local",
+          `url(${await imageURL.url})`
+        );
+      }
+    }
+    async render() {
+      this.element.classList.add("lethal-compact-theme-option");
+      let theme = await getTheme(this.name);
+      Object.keys(theme.cssProperties).forEach((key) => {
+        this.element.style.setProperty(
+          `${key}-local`,
+          theme.cssProperties[key]
+        );
+      });
+      return this.element;
     }
   };
   var CompyThemeSelector = class {
@@ -3686,7 +3719,7 @@ Is it scaring you off?`,
       let bottomContainer = document.createElement("div");
       bottomContainer.classList.add("theme-tile-bottom");
       let title = document.createElement("span");
-      title.innerText = this.category;
+      title.innerText = getFancyCategoryName(this.category);
       title.classList.add("theme-tile-title");
       bottomContainer.appendChild(title);
       return bottomContainer;
@@ -3709,6 +3742,10 @@ Is it scaring you off?`,
       this.element.appendChild(this.getBottomContainer());
     }
   };
+  function getFancyCategoryName(name2) {
+    let fancyName = name2.charAt(0).toUpperCase() + name2.slice(1);
+    return fancyName;
+  }
   var ThemeSelector = class {
     element = document.createElement("div");
     content = document.createElement("div");
@@ -3717,6 +3754,7 @@ Is it scaring you off?`,
     currentTiles = [];
     createTopContainer() {
       const newTopContainer = document.createElement("div");
+      newTopContainer.classList.add("theme-top-container");
       let title = document.createElement("h2");
       title.classList.add("current-category");
       if (this.currentCategory != "all") {
@@ -3728,7 +3766,7 @@ Is it scaring you off?`,
         });
         newTopContainer.appendChild(backButton);
       }
-      title.innerText = this.currentCategory;
+      title.innerText = getFancyCategoryName(this.currentCategory) + " themes";
       newTopContainer.appendChild(title);
       return newTopContainer;
     }
@@ -3741,7 +3779,6 @@ Is it scaring you off?`,
       return this.element;
     }
     updateImages(forceReload = false) {
-      console.log("updateing imagaes...");
       this.currentTiles.forEach(async (tile) => {
         await tile.updateImage(forceReload);
       });

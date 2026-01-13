@@ -444,7 +444,7 @@ export class ThemeFolder extends Tile {
     bottomContainer.classList.add("theme-tile-bottom");
 
     let title = document.createElement("span");
-    title.innerText = this.category;
+    title.innerText = getFancyCategoryName(this.category);
     title.classList.add("theme-tile-title");
     bottomContainer.appendChild(title);
 
@@ -476,6 +476,11 @@ export class ThemeFolder extends Tile {
 
 type Tiles = Tile[] | ThemeTile[] | ThemeFolder[];
 
+function getFancyCategoryName(name: string) {
+  let fancyName = name.charAt(0).toUpperCase() + name.slice(1);
+  return fancyName;
+}
+
 export class ThemeSelector {
   element = document.createElement("div");
   content = document.createElement("div");
@@ -485,6 +490,7 @@ export class ThemeSelector {
 
   createTopContainer() {
     const newTopContainer = document.createElement("div");
+    newTopContainer.classList.add("theme-top-container");
 
     let title = document.createElement("h2");
     title.classList.add("current-category");
@@ -499,7 +505,7 @@ export class ThemeSelector {
       newTopContainer.appendChild(backButton);
     }
 
-    title.innerText = this.currentCategory;
+    title.innerText = getFancyCategoryName(this.currentCategory) + " themes";
     newTopContainer.appendChild(title);
 
     return newTopContainer;
@@ -515,7 +521,6 @@ export class ThemeSelector {
   }
 
   updateImages(forceReload = false) {
-    console.log("updateing imagaes...");
     this.currentTiles.forEach(async (tile: Tile) => {
       await tile.updateImage(forceReload);
     });

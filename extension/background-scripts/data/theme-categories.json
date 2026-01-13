@@ -1,15 +1,4 @@
 {
-  "hidden": [
-    "vax",
-    "pizza",
-    "fairyblue",
-    "error",
-    "smkerst",
-    "japan",
-    "summer",
-    "ocean",
-    "boringwhite"
-  ],
   "light": ["pink", "white", "summer", "japan", "fairyblue", "boringwhite"],
   "dark": [
     "birb",
@@ -30,5 +19,16 @@
     "galaxy",
     "error",
     "smkerst"
+  ],
+  "hidden": [
+    "vax",
+    "pizza",
+    "fairyblue",
+    "error",
+    "smkerst",
+    "japan",
+    "summer",
+    "ocean",
+    "boringwhite"
   ]
 }
