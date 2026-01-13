@@ -327,7 +327,7 @@ export class Tile {
     return this.element;
   }
 
-  async updateImage() {}
+  async updateImage(forceReload = false) {}
 
   // Overide this in the implementation
   async createContent() {}
@@ -393,11 +393,11 @@ export class ThemeTile extends Tile {
 
   async imageIsOutdated() {}
 
-  async updateImage() {
+  async updateImage(forceReload = false) {
     let data = (await browser.runtime.sendMessage({
       action: "getSettingsData",
     })) as Settings;
-    if (this.name == data.appearance.theme) {
+    if (this.name == data.appearance.theme || forceReload) {
       let imageURL = await getImageURL(this.name, async () => {
         return await getExtensionImage(
           "theme-backgrounds/" + this.name + ".jpg"
@@ -514,9 +514,10 @@ export class ThemeSelector {
     return this.element;
   }
 
-  updateImages() {
+  updateImages(forceReload = false) {
+    console.log("updateing imagaes...");
     this.currentTiles.forEach(async (tile: Tile) => {
-      await tile.updateImage();
+      await tile.updateImage(forceReload);
     });
   }
 
@@ -583,6 +584,7 @@ export class ThemeSelector {
     this.currentTiles = tiles;
 
     await this.renderTiles(tiles);
+    this.updateImages(true);
   }
 
   async renderFolderContent() {
@@ -603,6 +605,7 @@ export class ThemeSelector {
     this.currentTiles = tiles;
 
     await this.renderTiles(tiles);
+    this.updateImages(true);
   }
 
   async changeCategory(category: string) {

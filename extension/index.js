@@ -3542,7 +3542,7 @@ Is it scaring you off?`,
       await this.createContent();
       return this.element;
     }
-    async updateImage() {
+    async updateImage(forceReload = false) {
     }
     // Overide this in the implementation
     async createContent() {
@@ -3599,11 +3599,11 @@ Is it scaring you off?`,
     }
     async imageIsOutdated() {
     }
-    async updateImage() {
+    async updateImage(forceReload = false) {
       let data2 = await browser.runtime.sendMessage({
         action: "getSettingsData"
       });
-      if (this.name == data2.appearance.theme) {
+      if (this.name == data2.appearance.theme || forceReload) {
         let imageURL = await getImageURL(this.name, async () => {
           return await getExtensionImage(
             "theme-backgrounds/" + this.name + ".jpg"
@@ -3699,9 +3699,10 @@ Is it scaring you off?`,
       this.update();
       return this.element;
     }
-    updateImages() {
+    updateImages(forceReload = false) {
+      console.log("updateing imagaes...");
       this.currentTiles.forEach(async (tile) => {
-        await tile.updateImage();
+        await tile.updateImage(forceReload);
       });
     }
     async update() {
@@ -3750,6 +3751,7 @@ Is it scaring you off?`,
       });
       this.currentTiles = tiles;
       await this.renderTiles(tiles);
+      this.updateImages(true);
     }
     async renderFolderContent() {
       let themes3 = await browser.runtime.sendMessage({
@@ -3764,6 +3766,7 @@ Is it scaring you off?`,
       });
       this.currentTiles = tiles;
       await this.renderTiles(tiles);
+      this.updateImages(true);
     }
     async changeCategory(category) {
       this.currentCategory = category;
