@@ -2298,6 +2298,7 @@ Is it scaring you off?`,
     performanceModeTooltipLabel.innerHTML += performanceModeSvg;
     const performanceModeInfo = document.createElement("span");
     performanceModeInfo.id = "performance-mode-info";
+    const compactThemeSelector = new CompyThemeSelector();
     const wallpaperTopContainer = document.createElement("div");
     const wallpaperHeading = document.createElement("h3");
     wallpaperHeading.className = "quick-settings-title";
@@ -2331,6 +2332,7 @@ Is it scaring you off?`,
     extraSettingsButton.innerHTML += settingsIconSvg;
     extraSettingsButton.addEventListener("click", (e) => openSettingsWindow(e));
     parent.appendChild(performanceModeTooltipLabel);
+    parent.appendChild(compactThemeSelector.render());
     parent.appendChild(wallpaperTopContainer);
     parent.appendChild(performanceModeInfo);
     parent.appendChild(extraSettingsButton);
@@ -2388,6 +2390,22 @@ Is it scaring you off?`,
     quickSettingsButtonWrapper.appendChild(quickSettingsButton);
     return quickSettingsButtonWrapper;
   }
+  var ThemeOptiony = class {
+    name;
+    constructor(name2) {
+      this.name = name2;
+    }
+    render() {
+    }
+  };
+  var CompyThemeSelector = class {
+    element = document.createElement("div");
+    render() {
+      let ThemeOptionyStalker = new ThemeOptiony("stalker");
+      console.log(ThemeOptionyStalker.name);
+      return this.element;
+    }
+  };
 
   // src/main-features/settings/main-settings.ts
   var SettingsWindow = class extends BaseWindow {

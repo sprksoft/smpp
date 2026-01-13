@@ -1,12 +1,13 @@
 import { apply } from "../main.js";
-import { ImageSelector } from "../modules/images.js";
+import { getImageURL, ImageSelector } from "../modules/images.js";
 import { performanceModeSvg, settingsIconSvg } from "../../fixes-utils/svgs.js";
 import {
   openSettingsWindow,
   settingsWindow,
   type Settings,
 } from "./main-settings.js";
-import { browser } from "../../common/utils.js";
+import { browser, getExtensionImage } from "../../common/utils.js";
+import { getTheme } from "../appearance/themes.js";
 
 let quickSettingsWindowIsHidden = true;
 let quickSettingsBackgroundImageSelector = new ImageSelector("backgroundImage");
@@ -109,6 +110,8 @@ function createQuickSettingsHTML(parent: HTMLDivElement): HTMLDivElement {
   const performanceModeInfo = document.createElement("span");
   performanceModeInfo.id = "performance-mode-info";
 
+  const compactThemeSelector = new CompyThemeSelector();
+
   const wallpaperTopContainer = document.createElement("div");
 
   const wallpaperHeading = document.createElement("h3");
@@ -152,6 +155,7 @@ function createQuickSettingsHTML(parent: HTMLDivElement): HTMLDivElement {
   extraSettingsButton.addEventListener("click", (e) => openSettingsWindow(e));
 
   parent.appendChild(performanceModeTooltipLabel);
+  parent.appendChild(compactThemeSelector.render());
   parent.appendChild(wallpaperTopContainer);
   parent.appendChild(performanceModeInfo);
   parent.appendChild(extraSettingsButton);
@@ -227,4 +231,61 @@ export function createQuickSettingsButton() {
   quickSettingsButton.addEventListener("click", toggleQuickSettings);
   quickSettingsButtonWrapper.appendChild(quickSettingsButton);
   return quickSettingsButtonWrapper;
+}
+
+class ThemeOptiony {
+  element = document.createElement("div");
+  name: string;
+  constructor(name: string) {
+    this.name = name;
+  }
+  createImageContainer() {
+    let imageContainer = document.createElement("div");
+    imageContainer.classList.add("image-container");
+    return imageContainer;
+  }
+
+  async imageIsOutdated() {}
+
+  async updateImage(forceReload = false) {
+    let data = (await browser.runtime.sendMessage({
+      action: "getSettingsData",
+    })) as Settings;
+    if (this.name == data.appearance.theme || forceReload) {
+      let imageURL = await getImageURL(this.name, async () => {
+        return await getExtensionImage(
+          "theme-backgrounds/" + this.name + ".jpg"
+        );
+      });
+
+      this.element.style.setProperty(
+        "--background-image-local",
+        `url(${await imageURL.url})`
+      );
+    }
+  }
+
+  async render() {
+    this.element.classList.add("lethal-compact-theme-option");
+
+    let theme = await getTheme(this.name);
+    Object.keys(theme.cssProperties).forEach((key) => {
+      this.element.style.setProperty(
+        `${key}-local`,
+        theme.cssProperties[key] as string
+      );
+    });
+
+    return this.element;
+  }
+}
+type ThemeOptions = ThemeOptiony[];
+
+class CompyThemeSelector {
+  element = document.createElement("div");
+  render() {
+    let ThemeOptionyStalker = new ThemeOptiony("stalker" as string);
+    console.log(ThemeOptionyStalker.name);
+    return this.element;
+  }
 }
