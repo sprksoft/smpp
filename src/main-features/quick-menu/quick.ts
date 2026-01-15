@@ -70,7 +70,7 @@ function add_quick_interactive() {
   let cmd_list = quick_cmd_list();
   dmenu(
     cmd_list,
-    function(name, shift) {
+    function (name, shift) {
       value_list = [];
       for (let i = 0; i < quicks.length; i++) {
         if (quicks[i].name == name) {
@@ -80,7 +80,7 @@ function add_quick_interactive() {
       }
       dmenu(
         value_list,
-        function(value, shift) {
+        function (value, shift) {
           if (!value.startsWith("http")) {
             value = "https://" + value;
           }
@@ -97,7 +97,7 @@ function remove_quick_interactive() {
   let cmd_list = quick_cmd_list();
   dmenu(
     cmd_list,
-    function(name, shift) {
+    function (name, shift) {
       remove_quick(name);
     },
     "name:"
@@ -183,6 +183,8 @@ export async function do_qm(opener = "") {
       "reset plant",
       "remove current theme",
       "test cats",
+      "posh text",
+      "funny text",
     ]);
 
   if (dmenuConfig.toplevelConfig) {
@@ -191,7 +193,7 @@ export async function do_qm(opener = "") {
 
   dmenu(
     cmd_list,
-    async function(cmd) {
+    async function (cmd) {
       switch (cmd) {
         case "unbloat":
           unbloat();
@@ -208,7 +210,7 @@ export async function do_qm(opener = "") {
         case "config":
           dmenu(
             await getDMenuOptionsForSettings(false),
-            function(cmd, shift) {
+            function (cmd, shift) {
               dmenuEditConfig(cmd);
             },
             "config: "
@@ -274,6 +276,17 @@ export async function do_qm(opener = "") {
             includeHidden: true,
           });
           console.log(themes);
+        case "posh text":
+          document.body.style.setProperty(
+            "--font-family",
+            `"Monsieur La Doulaise", "Montserrat", "Trebuchet MS", sans-serif`
+          );
+          break;
+        case "funny text":
+          document.body.style.setProperty(
+            "--font-family",
+            `"Comic Neue", "Montserrat", "Trebuchet MS", sans-serif`
+          );
         default:
           break;
       }

@@ -1990,11 +1990,11 @@ svg .pencil {
 .settings-page-image {
   border-radius: 0.75rem !important;
 }
-.enableAnimations #settings-page .smpp-text-input {
+.enableAnimations .smpp-text-input {
   transition-property: border-color;
   transition: 0.2s ease-in-out;
 }
-#settings-page .smpp-text-input {
+.smpp-text-input {
   background-color: var(--color-base01) !important;
   border-color: var(--color-base02) !important;
   border-radius: 1rem !important;
@@ -2006,10 +2006,10 @@ svg .pencil {
 #settings-page .full-file-input-container {
   width: 20rem !important;
 }
-#settings-page .full-file-input-container .smpp-text-input {
+.full-file-input-container .smpp-text-input {
   width: 100% !important;
 }
-#settings-page .smpp-text-input:focus-visible {
+.smpp-text-input:focus-visible {
   border-color: var(--color-base03) !important;
 }
 .enableAnimations .settings-page-image-button-wrapper {
@@ -2585,7 +2585,7 @@ input.settings-page-keybinding-input[type=text]:not(.aaaaaa):read-only.listening
   height: 100%;
   border: 2px solid var(--color-base02) !important;
 }
-#settings-page .smpp-color-picker-bottom-container .smpp-text-input {
+.smpp-color-picker-bottom-container .smpp-text-input {
   width: 65% !important;
   height: 100%;
 }
@@ -2702,7 +2702,7 @@ input.settings-page-keybinding-input[type=text]:not(.aaaaaa):read-only.listening
   background-color: var(--color-base02-local) !important;
   border-color: var(--color-base03-local) !important;
 }
-.bottom-container-button:active {
+button .bottom-container-button:active {
   scale: 0.9;
 }
 .bottom-container-button:hover > svg {
@@ -2745,8 +2745,8 @@ input.settings-page-keybinding-input[type=text]:not(.aaaaaa):read-only.listening
 #settings-page .theme-tile:not(.aaaaa).is-selected {
   border-color: var(--color-accent-local) !important;
 }
-.theme-tile:active {
-  scale: 0.95;
+.theme-tile:active:not(:has(.bottom-container-button:active)) {
+  scale: 0.97;
 }
 .theme-tile .image-container {
   border-radius: 1rem !important;
@@ -2929,6 +2929,10 @@ html {
   --darken-background: rgba(0, 0, 0, 0.2);
   --color-splashtext: var(--color-accent);
   --color-shadow: rgba(0, 0, 0, 0.2);
+  --font-family:
+    "Montserrat",
+    "Trebuchet MS",
+    sans-serif;
 }
 html {
   background-color: var(--color-base00) !important;
@@ -2954,10 +2958,7 @@ textarea .modern-ui,
 .blueprint select,
 .blueprint textarea,
 .blueprint div {
-  font-family:
-    "Montserrat",
-    "Trebuchet MS",
-    sans-serif !important;
+  font-family: var(--font-family) !important;
 }
 #modal-content,
 #content-container {

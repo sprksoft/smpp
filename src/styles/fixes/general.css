@@ -27,6 +27,7 @@ html {
   --darken-background: rgba(0, 0, 0, 0.2);
   --color-splashtext: var(--color-accent);
   --color-shadow: rgba(0, 0, 0, 0.2);
+  --font-family: "Montserrat", "Trebuchet MS", sans-serif;
 }
 
 html {
@@ -54,7 +55,7 @@ textarea .modern-ui,
 .blueprint select,
 .blueprint textarea,
 .blueprint div {
-  font-family: "Montserrat", "Trebuchet MS", sans-serif !important;
+  font-family: var(--font-family) !important;
 }
 
 /* hier is beter smartschool code*/

@@ -15,12 +15,18 @@ import {
   moonSvg,
   pineSvg,
   sunSvg,
+  trashSvg,
 } from "../../fixes-utils/svgs.js";
 import { getImageURL, type Image } from "../modules/images.js";
 import { BaseWindow } from "../modules/windows.js";
-import { settingsWindow, type Settings } from "../settings/main-settings.js";
+import {
+  openSettingsWindow,
+  settingsWindow,
+  type Settings,
+} from "../settings/main-settings.js";
 import { loadQuickSettings } from "../settings/quick-settings.js";
 import { applyAppearance, isFirefox } from "../main.js";
+import { createTextInput } from "./ui.js";
 
 export let currentThemeName: string;
 export let currentTheme: Theme;
@@ -302,11 +308,6 @@ export class ColorPicker {
       }
     }
 
-    this.hueCursor.xPos = this.currentColor.hue() / 3.6;
-    this.fieldCursor.xPos = this.currentColor.toHsv().s;
-    this.fieldCursor.yPos = 100 - this.currentColor.toHsv().v;
-    this.hueCursor.updateCursorPosition();
-    this.fieldCursor.updateCursorPosition();
     this.updateColorPicker();
   }
 
@@ -320,6 +321,11 @@ export class ColorPicker {
   }
 
   updateColorPicker() {
+    this.hueCursor.xPos = this.currentColor.hue() / 3.6;
+    this.fieldCursor.xPos = this.currentColor.toHsv().s;
+    this.fieldCursor.yPos = 100 - this.currentColor.toHsv().v;
+    this.hueCursor.updateCursorPosition();
+    this.fieldCursor.updateCursorPosition();
     let maxSatColor = colord({ h: this.hueCursor.xPos * 3.6, s: 100, v: 100 });
     this.element.style.setProperty("--max-sat", maxSatColor.toHex());
     this.element.style.setProperty(
@@ -600,6 +606,7 @@ export class ThemeSelector {
   }
 
   async update() {
+    console.log("UPDATING");
     this.content.innerHTML = "";
 
     this.element.appendChild(this.content);
@@ -669,7 +676,7 @@ export class ThemeSelector {
   async renderFolders() {
     let categories = (await browser.runtime.sendMessage({
       action: "getThemeCategories",
-      includeEmpty: false,
+      includeEmpty: true,
       includeHidden: true,
     })) as {
       [key: string]: string[];
@@ -705,13 +712,36 @@ export class ThemeSelector {
     if (!themes) return;
 
     let tiles = Object.keys(themes).map((name: string) => {
-      let tile = new ThemeTile(name, this.currentCategory == "custom");
+      let isCustom = this.currentCategory == "custom";
+      let tile = new ThemeTile(name, isCustom);
       tile.onDuplicate = async () => {
-        await browser.runtime.sendMessage({
+        let newTheme = await browser.runtime.sendMessage({
           action: "saveCustomTheme",
           data: await getTheme(name),
         });
+        if (isCustom) {
+          await this.update();
+        }
+        startCustomThemeCreator(await getTheme(name), name);
+        await browser.runtime.sendMessage({
+          action: "setSetting",
+          name: "appearance.theme",
+          data: newTheme,
+        });
+        let data = (await browser.runtime.sendMessage({
+          action: "getSettingsData",
+        })) as Settings;
+        applyAppearance(data.appearance);
+        await settingsWindow.loadPage(false);
+        await loadQuickSettings();
+        await settingsWindow.themeSelector.changeCategory("custom");
       };
+      if (isCustom) {
+        tile.onEdit = async () => {
+          startCustomThemeCreator(await getTheme(name), name);
+        };
+      }
+
       return tile;
     }) as Tiles;
     this.currentTiles = tiles;
@@ -726,20 +756,66 @@ export class ThemeSelector {
   }
 }
 
+async function startCustomThemeCreator(theme: Theme, name: string) {
+  let themeEditor = new CustomThemeCreator(theme, name);
+  settingsWindow.hide();
+  await themeEditor.create();
+  themeEditor.show();
+}
+
 export class CustomThemeCreator extends BaseWindow {
   theme: Theme;
-  content = document.createElement("div");
+  name: string;
 
-  constructor(theme: Theme) {
+  constructor(theme: Theme, name: string) {
     super("customThemeCreator", false);
     this.theme = theme;
+    this.name = name;
+  }
+  content = document.createElement("div");
+  displayNameInput = document.createElement("input");
+
+  createRemoveButton() {
+    let button = document.createElement("button");
+    button.classList.add("remove-custom-theme");
+    button.innerHTML = "Remove theme" + trashSvg;
+    button.addEventListener("click", () => {
+      this.onRemoveTheme();
+    });
+    return button;
+  }
+
+  createDisplayNameInput() {
+    this.displayNameInput = createTextInput("", "Name");
+    this.displayNameInput.value = this.theme.displayName;
+    return this.displayNameInput;
   }
 
   async renderContent() {
+    let colorPicker = new ColorPicker();
+    if (this.theme.cssProperties["--color-accent"]) {
+      let accentColor = colord(this.theme.cssProperties["--color-accent"]);
+      colorPicker.currentColor = accentColor;
+      colorPicker.updateColorPicker();
+    }
+    this.content.appendChild(colorPicker.render());
+    this.content.appendChild(this.createDisplayNameInput());
+    this.content.appendChild(this.createRemoveButton());
     return this.content;
   }
 
   onClosed(): void {
     document.body.removeChild(this.element);
+    openSettingsWindow(null);
+  }
+
+  async onRemoveTheme() {
+    await browser.runtime.sendMessage({
+      action: "removeCustomTheme",
+      id: this.name,
+    });
+    console.log();
+    settingsWindow.themeSelector.update();
+    this.hide();
   }
 }

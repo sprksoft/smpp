@@ -1506,7 +1506,9 @@ export async function createSettingsWindow() {
   settingsWindow.hide();
 }
 
-export async function openSettingsWindow(event: MouseEvent | KeyboardEvent) {
+export async function openSettingsWindow(
+  event: MouseEvent | KeyboardEvent | null
+) {
   settingsWindow.show(event);
   setTimeout(() => {
     settingsWindow.themeSelector.updateContentHeight();

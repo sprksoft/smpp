@@ -227,12 +227,12 @@
   border-radius: 0.75rem !important;
 }
 
-.enableAnimations #settings-page .smpp-text-input {
+.enableAnimations .smpp-text-input {
   transition-property: border-color;
   transition: 0.2s ease-in-out;
 }
 
-#settings-page .smpp-text-input {
+.smpp-text-input {
   background-color: var(--color-base01) !important;
   border-color: var(--color-base02) !important;
   border-radius: 1rem !important;
@@ -246,11 +246,11 @@
   width: 20rem !important;
 }
 
-#settings-page .full-file-input-container .smpp-text-input {
+.full-file-input-container .smpp-text-input {
   width: 100% !important;
 }
 
-#settings-page .smpp-text-input:focus-visible {
+.smpp-text-input:focus-visible {
   border-color: var(--color-base03) !important;
 }
 
@@ -923,7 +923,7 @@ input.settings-page-keybinding-input[type="text"]:not(
   border: 2px solid var(--color-base02) !important;
 }
 
-#settings-page .smpp-color-picker-bottom-container .smpp-text-input {
+.smpp-color-picker-bottom-container .smpp-text-input {
   width: 65% !important;
   height: 100%;
 }
@@ -1046,7 +1046,7 @@ input.settings-page-keybinding-input[type="text"]:not(
   border-color: var(--color-base03-local) !important;
 }
 
-.bottom-container-button:active {
+button .bottom-container-button:active {
   scale: 0.9;
 }
 
@@ -1091,8 +1091,8 @@ input.settings-page-keybinding-input[type="text"]:not(
   border-color: var(--color-accent-local) !important;
 }
 
-.theme-tile:active {
-  scale: 0.95;
+.theme-tile:active:not(:has(.bottom-container-button:active)) {
+  scale: 0.97;
 }
 
 .theme-tile .image-container {
