@@ -2,9 +2,7 @@
 
 .smpp-input-with-label {
   border-radius: 999999999px;
-
   min-width: 20rem;
-
   background-color: var(--color-base01);
   border: 2px solid var(--color-base02);
   padding: 0.75rem 1rem;
@@ -25,6 +23,10 @@
 
 .smpp-input-with-label:focus-visible {
   border-color: var(--color-base03) !important;
+}
+
+.smpp-input-with-label:has(#smpp-widget-news-toggle) span {
+  font-size: 1.4rem;
 }
 
 .full-file-input-container {

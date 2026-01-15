@@ -306,7 +306,6 @@ export class SettingsWindow extends BaseWindow {
   }
 
   async loadPage(shouldReloadTheme = true) {
-    console.log(shouldReloadTheme);
     const settings: Settings = await browser.runtime.sendMessage({
       action: "getSettingsData",
     });
@@ -361,6 +360,11 @@ export class SettingsWindow extends BaseWindow {
         if (shouldReloadTheme) {
           await this.themeSelector.updateImages(false);
         }
+        console.log(this.themeSelector.currentTiles);
+        this.themeSelector.currentTiles.forEach((tile) => {
+          console.log("AAA");
+          tile.updateSelection();
+        });
 
         // Background
         this.backgroundImageSelector.id = settings.appearance.theme;

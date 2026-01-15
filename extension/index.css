@@ -323,6 +323,9 @@ html {
 .smpp-input-with-label:focus-visible {
   border-color: var(--color-base03) !important;
 }
+.smpp-input-with-label:has(#smpp-widget-news-toggle) span {
+  font-size: 1.4rem;
+}
 .full-file-input-container {
   position: relative;
   width: fit-content;
@@ -2725,8 +2728,16 @@ input.settings-page-keybinding-input[type=text]:not(.aaaaaa):read-only.listening
   background-color: var(--color-base01) !important;
   cursor: pointer;
 }
+#settings-page .theme-tile:not(.aaaaa).is-selected {
+  border-color: var(--color-accent-local) !important;
+}
+.theme-tile:active {
+  scale: 0.95;
+}
 .theme-tile .image-container {
   border-radius: 1rem !important;
+  object-fit: cover !important;
+  object-position: center !important;
   background-size: cover !important;
   background-position: center !important;
   background-color: var(--color-base02-local) !important;

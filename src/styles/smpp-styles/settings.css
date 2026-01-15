@@ -1074,9 +1074,18 @@ input.settings-page-keybinding-input[type="text"]:not(
   cursor: pointer;
 }
 
+#settings-page .theme-tile:not(.aaaaa).is-selected {
+  border-color: var(--color-accent-local) !important;
+}
+
+.theme-tile:active {
+  scale: 0.95;
+}
+
 .theme-tile .image-container {
   border-radius: 1rem !important;
-
+  object-fit: cover !important;
+  object-position: center !important;
   background-size: cover !important;
   background-position: center !important;
   background-color: var(--color-base02-local) !important;

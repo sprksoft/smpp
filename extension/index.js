@@ -2638,7 +2638,6 @@ Is it scaring you off?`,
       });
     }
     async loadPage(shouldReloadTheme = true) {
-      console.log(shouldReloadTheme);
       const settings = await browser.runtime.sendMessage({
         action: "getSettingsData"
       });
@@ -2682,6 +2681,11 @@ Is it scaring you off?`,
           if (shouldReloadTheme) {
             await this.themeSelector.updateImages(false);
           }
+          console.log(this.themeSelector.currentTiles);
+          this.themeSelector.currentTiles.forEach((tile) => {
+            console.log("AAA");
+            tile.updateSelection();
+          });
           this.backgroundImageSelector.id = settings.appearance.theme;
           this.backgroundImageSelector.loadImageData();
           const blurSlider = document.getElementById("settings-page-blur-slider");
@@ -3604,6 +3608,7 @@ Is it scaring you off?`,
   }
   async function setTheme(themeName) {
     const style = document.documentElement.style;
+    console.log("applying the background");
     currentThemeName = themeName;
     currentTheme = await getTheme(themeName);
     Object.entries(currentTheme.cssProperties).forEach(([key, value]) => {
@@ -3611,10 +3616,23 @@ Is it scaring you off?`,
     });
     await widgetSystemNotifyThemeChange();
   }
+  function isBasicEntry(entry) {
+    let basicEntries = [
+      "--color-base00",
+      "--color-base01",
+      "--color-base02",
+      "--color-base03",
+      "--color-accent",
+      "--color-text"
+    ];
+    return basicEntries.includes(entry);
+  }
   function getThemeQueryString(theme) {
     let query = "";
     Object.entries(theme.cssProperties).forEach(([key, value]) => {
-      query += `&${key}=${value.startsWith("#") ? value.substring(1) : value}`;
+      if (isBasicEntry(key)) {
+        query += `&${key.slice(2)}=${value.startsWith("#") ? value.substring(1) : value}`;
+      }
     });
     return query;
   }
@@ -3623,18 +3641,22 @@ Is it scaring you off?`,
   }
   var Tile = class {
     element = document.createElement("div");
-    // Overide in de implementation
-    async onClick() {
-    }
     async render() {
       this.element.classList.add("theme-tile");
       this.element.addEventListener("click", async () => {
         await this.onClick();
       });
+      this.updateSelection();
       await this.createContent();
       return this.element;
     }
     async updateImage(currentTheme2, forceReload = false) {
+    }
+    // Overide this in the implementation
+    updateSelection() {
+    }
+    // Overide in de implementation
+    async onClick() {
     }
     // Overide this in the implementation
     async createContent() {
@@ -3689,7 +3711,14 @@ Is it scaring you off?`,
       this.element.appendChild(this.createImageContainer());
       this.element.appendChild(this.getBottomContainer(theme));
     }
-    async imageIsOutdated() {
+    updateSelection() {
+      console.log("Current: ", currentThemeName);
+      console.log("This theme: ", this.name);
+      if (currentThemeName == this.name) {
+        this.element.classList.add("is-selected");
+      } else {
+        this.element.classList.remove("is-selected");
+      }
     }
     async updateImage(currentTheme2, forceReload = false) {
       if (this.name == currentTheme2 || forceReload) {
@@ -3702,6 +3731,27 @@ Is it scaring you off?`,
           "--background-image-local",
           `url(${await imageURL.url})`
         );
+        if (isFirefox && imageURL.type == "file") {
+          let imageContainer = this.element.querySelector(".image-container");
+          if (!imageContainer) return;
+          let stupidImageContainer = document.createElement("img");
+          stupidImageContainer.classList.add(
+            "image-container",
+            "firefox-container"
+          );
+          stupidImageContainer.src = imageURL.url;
+          let bottomContainer = this.element.querySelector(".theme-tile-bottom");
+          if (!bottomContainer) return;
+          imageContainer.remove();
+          this.element.prepend(stupidImageContainer);
+        } else if (isFirefox) {
+          let firefoxImageContainer = this.element.querySelector(".firefox-container");
+          if (firefoxImageContainer) {
+            firefoxImageContainer.remove();
+            this.element.prepend(this.createImageContainer());
+            this.updateImage(currentTheme2, forceReload);
+          }
+        }
       }
     }
     async onClick() {
@@ -3710,12 +3760,12 @@ Is it scaring you off?`,
         name: "appearance.theme",
         data: this.name
       });
-      await settingsWindow.loadPage(false);
-      await loadQuickSettings();
       let data2 = await browser.runtime.sendMessage({
         action: "getSettingsData"
       });
       applyAppearance(data2.appearance);
+      await settingsWindow.loadPage(false);
+      await loadQuickSettings();
     }
     // Overide in de implementation
     async onEdit() {
@@ -3799,8 +3849,39 @@ Is it scaring you off?`,
     currentCategory = "all";
     currentTiles = [];
     createTopContainer() {
-      const newTopContainer = document.createElement("div");
-      newTopContainer.classList.add("theme-top-container");
+      this.topContainer = document.createElement("div");
+      this.topContainer.classList.add("theme-top-container");
+    }
+    render() {
+      console.log("RENDERING");
+      this.element.innerHTML = "";
+      this.createTopContainer();
+      this.createContentContainer();
+      this.element.appendChild(this.topContainer);
+      this.update();
+      return this.element;
+    }
+    async updateImages(forceReload = false) {
+      this.currentTiles.forEach(async (tile) => {
+        await tile.updateImage(currentThemeName, forceReload);
+      });
+    }
+    async update() {
+      if (this.element.contains(this.content)) {
+        this.element.removeChild(this.content);
+      }
+      this.createContentContainer();
+      this.element.appendChild(this.content);
+      this.updateTopContainer();
+      if (this.currentCategory == "all") {
+        await this.renderFolders();
+        console.log("rendered folders");
+      } else {
+        await this.renderFolderContent();
+      }
+    }
+    updateTopContainer() {
+      this.topContainer.innerHTML = "";
       let title = document.createElement("h2");
       title.classList.add("current-category");
       if (this.currentCategory != "all") {
@@ -3810,42 +3891,10 @@ Is it scaring you off?`,
           this.currentCategory = "all";
           await this.update();
         });
-        newTopContainer.appendChild(backButton);
+        this.topContainer.appendChild(backButton);
       }
       title.innerText = getFancyCategoryName(this.currentCategory) + " themes";
-      newTopContainer.appendChild(title);
-      return newTopContainer;
-    }
-    render() {
-      this.topContainer = this.createTopContainer();
-      this.element.appendChild(this.topContainer);
-      this.element.appendChild(this.content);
-      this.content.classList.add("theme-tiles");
-      this.update();
-      return this.element;
-    }
-    async updateImages(forceReload = false) {
-      let data2 = await browser.runtime.sendMessage({
-        action: "getSettingsData"
-      });
-      this.currentTiles.forEach(async (tile) => {
-        await tile.updateImage(data2.appearance.theme, forceReload);
-      });
-    }
-    async update() {
-      this.topContainer.remove();
-      this.element.innerHTML = "";
-      let newContent = this.createContentContainer();
-      this.content.remove();
-      this.content = newContent;
-      this.topContainer = this.createTopContainer();
-      this.element.appendChild(this.topContainer);
-      this.element.appendChild(this.content);
-      if (this.currentCategory == "all") {
-        await this.renderFolders();
-      } else {
-        await this.renderFolderContent();
-      }
+      this.topContainer.appendChild(title);
     }
     async renderTiles(tiles) {
       const renderedElements = await Promise.all(
@@ -3860,7 +3909,6 @@ Is it scaring you off?`,
     createContentContainer() {
       this.content = document.createElement("div");
       this.content.classList.add("theme-tiles");
-      return this.content;
     }
     async renderFolders() {
       let categories = await browser.runtime.sendMessage({
@@ -4831,14 +4879,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       return this.gcContent;
     }
     onOpened() {
-      const queryString = getThemeQueryString([
-        "color-base00",
-        "color-base01",
-        "color-base02",
-        "color-base03",
-        "color-accent",
-        "color-text"
-      ]);
+      const queryString = getThemeQueryString(currentTheme);
       this.iframe = document.createElement("iframe");
       this.iframe.style = "width:100%; height:100%; border:none";
       this.iframe.src = GC_DOMAINS[this.beta ? "beta" : "main"] + "/v1?" + queryString;

@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { BaseWindow } from "./modules/windows.js";
-import { getThemeQueryString } from "./appearance/themes.js";
+import { currentTheme, getThemeQueryString } from "./appearance/themes.js";
 import { gcIconSvg } from "../fixes-utils/svgs.js";
 import { browser } from "../common/utils.ts";
 import { getPlantSvg } from "../widgets/plant.js";
@@ -24,14 +24,7 @@ class GlobalChatWindow extends BaseWindow {
   }
 
   onOpened() {
-    const queryString = getThemeQueryString([
-      "color-base00",
-      "color-base01",
-      "color-base02",
-      "color-base03",
-      "color-accent",
-      "color-text",
-    ]);
+    const queryString = getThemeQueryString(currentTheme);
     this.iframe = document.createElement("iframe");
     this.iframe.style = "width:100%; height:100%; border:none";
     this.iframe.src =
