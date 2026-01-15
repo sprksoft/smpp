@@ -360,9 +360,7 @@ export class SettingsWindow extends BaseWindow {
         if (shouldReloadTheme) {
           await this.themeSelector.updateImages(false);
         }
-        console.log(this.themeSelector.currentTiles);
         this.themeSelector.currentTiles.forEach((tile) => {
-          console.log("AAA");
           tile.updateSelection();
         });
 
@@ -1135,12 +1133,6 @@ export class SettingsWindow extends BaseWindow {
         break;
       case "appearance":
         this.settingsPage.appendChild(createMainTitle("Appearance"));
-        this.settingsPage.appendChild(createSectionTitle("Theme"));
-        this.settingsPage.appendChild(
-          createDescription(
-            "Customize the overall look of the interface with different color styles."
-          )
-        );
 
         this.settingsPage.appendChild(this.themeSelector.render());
         this.settingsPage.appendChild(createSectionTitle("Wallpaper"));
@@ -1516,4 +1508,7 @@ export async function createSettingsWindow() {
 
 export async function openSettingsWindow(event: MouseEvent | KeyboardEvent) {
   settingsWindow.show(event);
+  setTimeout(() => {
+    settingsWindow.themeSelector.updateContentHeight();
+  }, 400);
 }

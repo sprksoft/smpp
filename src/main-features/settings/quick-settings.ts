@@ -110,7 +110,7 @@ function createQuickSettingsHTML(parent: HTMLDivElement): HTMLDivElement {
   const performanceModeInfo = document.createElement("span");
   performanceModeInfo.id = "performance-mode-info";
 
-  const compactThemeSelector = new CompyThemeSelector();
+  const compactThemeSelector = new CompactThemeSelector();
 
   const wallpaperTopContainer = document.createElement("div");
 
@@ -281,11 +281,10 @@ class ThemeOptiony {
 }
 type ThemeOptions = ThemeOptiony[];
 
-class CompyThemeSelector {
+class CompactThemeSelector {
   element = document.createElement("div");
   render() {
     let ThemeOptionyStalker = new ThemeOptiony("stalker" as string);
-    console.log(ThemeOptionyStalker.name);
     return this.element;
   }
 }

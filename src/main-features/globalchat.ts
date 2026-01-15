@@ -19,17 +19,15 @@ class GlobalChatWindow extends BaseWindow {
   }
 
   async renderContent() {
+    console.log("rendering gc window");
     this.gcContent = document.createElement("div");
-    return this.gcContent;
-  }
-
-  onOpened() {
     const queryString = getThemeQueryString(currentTheme);
     this.iframe = document.createElement("iframe");
     this.iframe.style = "width:100%; height:100%; border:none";
     this.iframe.src =
       GC_DOMAINS[this.beta ? "beta" : "main"] + "/v1?" + queryString;
     this.gcContent.appendChild(this.iframe);
+    return this.gcContent;
   }
 }
 

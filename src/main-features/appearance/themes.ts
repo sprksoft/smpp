@@ -44,7 +44,6 @@ export async function getTheme(name: string): Promise<Theme> {
 
 export async function setTheme(themeName: string) {
   const style = document.documentElement.style;
-  console.log("applying the background");
   currentThemeName = themeName;
   currentTheme = await getTheme(themeName);
   Object.entries(currentTheme.cssProperties).forEach(([key, value]) => {
@@ -337,8 +336,6 @@ export class ColorPicker {
   onChange() {}
 }
 
-export class CustomThemeCreator extends BaseWindow {}
-
 export class Tile {
   element = document.createElement("div");
 
@@ -422,8 +419,6 @@ export class ThemeTile extends Tile {
   }
 
   updateSelection() {
-    console.log("Current: ", currentThemeName);
-    console.log("This theme: ", this.name);
     if (currentThemeName == this.name) {
       this.element.classList.add("is-selected");
     } else {
@@ -585,10 +580,12 @@ export class ThemeSelector {
   }
 
   render() {
-    console.log("RENDERING");
     this.element.innerHTML = "";
     this.createTopContainer();
     this.createContentContainer();
+    window.addEventListener("resize", () => {
+      this.updateContentHeight();
+    });
 
     this.element.appendChild(this.topContainer);
 
@@ -603,21 +600,18 @@ export class ThemeSelector {
   }
 
   async update() {
-    if (this.element.contains(this.content)) {
-      this.element.removeChild(this.content);
-    }
+    this.content.innerHTML = "";
 
-    this.createContentContainer();
     this.element.appendChild(this.content);
 
     this.updateTopContainer();
 
     if (this.currentCategory == "all") {
       await this.renderFolders();
-      console.log("rendered folders");
     } else {
       await this.renderFolderContent();
     }
+    this.updateContentHeight();
   }
 
   updateTopContainer() {
@@ -657,6 +651,21 @@ export class ThemeSelector {
     this.content.classList.add("theme-tiles");
   }
 
+  calculateContentHeight(tiles: Tiles) {
+    const TILE_HEIGHT = tiles[0]?.element.getBoundingClientRect().height || 103;
+    const TILE_WIDTH = tiles[0]?.element.getBoundingClientRect().width || 168;
+    const GAP = 6;
+    const totalWidth = this.content.getBoundingClientRect().width;
+
+    const tileAmount = tiles.length;
+
+    const tilesPerRow = Math.floor((totalWidth + GAP) / (TILE_WIDTH + GAP));
+    const numRows = Math.ceil(tileAmount / tilesPerRow);
+    const totalHeight = numRows * TILE_HEIGHT + (numRows - 1) * GAP;
+
+    return totalHeight;
+  }
+
   async renderFolders() {
     let categories = (await browser.runtime.sendMessage({
       action: "getThemeCategories",
@@ -679,6 +688,11 @@ export class ThemeSelector {
     await this.updateImages(true);
   }
 
+  updateContentHeight() {
+    this.content.style.height =
+      String(this.calculateContentHeight(this.currentTiles)) + "px";
+  }
+
   async renderFolderContent() {
     let themes = (await browser.runtime.sendMessage({
       action: "getThemes",
@@ -689,10 +703,15 @@ export class ThemeSelector {
     };
 
     if (!themes) return;
-    console.log(themes);
 
     let tiles = Object.keys(themes).map((name: string) => {
-      let tile = new ThemeTile(name);
+      let tile = new ThemeTile(name, this.currentCategory == "custom");
+      tile.onDuplicate = async () => {
+        await browser.runtime.sendMessage({
+          action: "saveCustomTheme",
+          data: await getTheme(name),
+        });
+      };
       return tile;
     }) as Tiles;
     this.currentTiles = tiles;
@@ -704,5 +723,23 @@ export class ThemeSelector {
   async changeCategory(category: string) {
     this.currentCategory = category;
     await this.update();
+  }
+}
+
+export class CustomThemeCreator extends BaseWindow {
+  theme: Theme;
+  content = document.createElement("div");
+
+  constructor(theme: Theme) {
+    super("customThemeCreator", false);
+    this.theme = theme;
+  }
+
+  async renderContent() {
+    return this.content;
+  }
+
+  onClosed(): void {
+    document.body.removeChild(this.element);
   }
 }

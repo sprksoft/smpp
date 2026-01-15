@@ -119,7 +119,7 @@
 <path xmlns="http://www.w3.org/2000/svg" d="M14.2647 15.9377L12.5473 14.2346C11.758 13.4519 11.3633 13.0605 10.9089 12.9137C10.5092 12.7845 10.079 12.7845 9.67922 12.9137C9.22485 13.0605 8.83017 13.4519 8.04082 14.2346L4.04193 18.2622M14.2647 15.9377L14.606 15.5991C15.412 14.7999 15.8149 14.4003 16.2773 14.2545C16.6839 14.1262 17.1208 14.1312 17.5244 14.2688C17.9832 14.4253 18.3769 14.834 19.1642 15.6515L20 16.5001M14.2647 15.9377L18.22 19.9628M18.22 19.9628C17.8703 20 17.4213 20 16.8 20H7.2C6.07989 20 5.51984 20 5.09202 19.782C4.7157 19.5903 4.40973 19.2843 4.21799 18.908C4.12583 18.7271 4.07264 18.5226 4.04193 18.2622M18.22 19.9628C18.5007 19.9329 18.7175 19.8791 18.908 19.782C19.2843 19.5903 19.5903 19.2843 19.782 18.908C20 18.4802 20 17.9201 20 16.8V13M11 4H7.2C6.07989 4 5.51984 4 5.09202 4.21799C4.7157 4.40973 4.40973 4.71569 4.21799 5.09202C4 5.51984 4 6.0799 4 7.2V16.8C4 17.4466 4 17.9066 4.04193 18.2622M18 9V6M18 6V3M18 6H21M18 6H15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
   var editIconSvg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px"class=edit_button height="18px" width="18px" viewBox="0 0 24 24"  xml:space="preserve">
 <metadata> Svg Vector Icons : http://www.onlinewebfonts.com/icon</metadata>
-<g><g><path xmlns="http://www.w3.org/2000/svg" class=st1 stroke-linecap:round;stroke-linejoin:round;-inkscape-stroke:none" d="m 19.792969,1.2089844 c -0.773047,0 -1.546203,0.290977 -2.134766,0.8730469 -6.69e-4,6.478e-4 -0.0013,0.0013 -0.002,0.00195 L 8.4119915,11.389897 c -0.5321594,0.536333 -1.9587661,2.040145 -2.9061791,5.334709 -0.1062793,0.369579 -0.1650107,0.570623 -0.2207032,0.85994 -0.046789,0.243065 -0.1295961,0.724628 0.2070338,1.013107 0.3909805,0.335056 1.0440816,0.133455 1.3847656,0.03125 C 7.387553,18.47571 7.9834625,18.287442 8.5897993,18.031247 11.103423,16.969168 12.593117,15.70399 12.985931,15.188066 l 8.93985,-8.8697066 C 23.11495,5.1606353 23.105005,3.2461646 21.927734,2.0820313 21.339171,1.4999614 20.566016,1.2089844 19.792969,1.2089844 Z" id="path5" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="scccssssscccs"/><path xmlns="http://www.w3.org/2000/svg" d="M 10.273212,2.8358152 H 5.5822718 c -1.3827164,0 -2.0740869,0 -2.6022128,0.2661137 C 2.5154954,3.3360099 2.1378007,3.709514 1.9011058,4.1689107 1.6320062,4.6911889 1.6320062,5.3748762 1.6320062,6.7422506 V 18.461557 c 0,1.367374 0,2.051122 0.2690996,2.573363 0.2366949,0.459374 0.6143896,0.832926 1.0789532,1.066946 0.5281259,0.266126 1.2194964,0.266126 2.6022128,0.266126 H 17.433068 c 1.382716,0 2.074137,0 2.602237,-0.266126 0.464527,-0.23402 0.842271,-0.607572 1.078917,-1.066946 0.269112,-0.522241 0.269112,-1.205989 0.269112,-2.573363 v -5.249273"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="stroke-width:3.25435;stroke-dasharray:none" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="csccssccssccsccc"/> </g></g>
+<g><g><path xmlns="http://www.w3.org/2000/svg" class=pencil stroke-linecap:round;stroke-linejoin:round;-inkscape-stroke:none" d="m 19.792969,1.2089844 c -0.773047,0 -1.546203,0.290977 -2.134766,0.8730469 -6.69e-4,6.478e-4 -0.0013,0.0013 -0.002,0.00195 L 8.4119915,11.389897 c -0.5321594,0.536333 -1.9587661,2.040145 -2.9061791,5.334709 -0.1062793,0.369579 -0.1650107,0.570623 -0.2207032,0.85994 -0.046789,0.243065 -0.1295961,0.724628 0.2070338,1.013107 0.3909805,0.335056 1.0440816,0.133455 1.3847656,0.03125 C 7.387553,18.47571 7.9834625,18.287442 8.5897993,18.031247 11.103423,16.969168 12.593117,15.70399 12.985931,15.188066 l 8.93985,-8.8697066 C 23.11495,5.1606353 23.105005,3.2461646 21.927734,2.0820313 21.339171,1.4999614 20.566016,1.2089844 19.792969,1.2089844 Z" id="path5" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="scccssssscccs"/><path xmlns="http://www.w3.org/2000/svg" d="M 10.273212,2.8358152 H 5.5822718 c -1.3827164,0 -2.0740869,0 -2.6022128,0.2661137 C 2.5154954,3.3360099 2.1378007,3.709514 1.9011058,4.1689107 1.6320062,4.6911889 1.6320062,5.3748762 1.6320062,6.7422506 V 18.461557 c 0,1.367374 0,2.051122 0.2690996,2.573363 0.2366949,0.459374 0.6143896,0.832926 1.0789532,1.066946 0.5281259,0.266126 1.2194964,0.266126 2.6022128,0.266126 H 17.433068 c 1.382716,0 2.074137,0 2.602237,-0.266126 0.464527,-0.23402 0.842271,-0.607572 1.078917,-1.066946 0.269112,-0.522241 0.269112,-1.205989 0.269112,-2.573363 v -5.249273"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="stroke-width:3.25435;stroke-dasharray:none" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="csccssccssccsccc"/> </g></g>
 </svg>`;
   var lijnIconSvg = `<svg id="Laag_2" data-name="Laag 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 379.84 373.13">
   <defs>
@@ -2316,7 +2316,7 @@ Is it scaring you off?`,
     performanceModeTooltipLabel.innerHTML += performanceModeSvg;
     const performanceModeInfo = document.createElement("span");
     performanceModeInfo.id = "performance-mode-info";
-    const compactThemeSelector = new CompyThemeSelector();
+    const compactThemeSelector = new CompactThemeSelector();
     const wallpaperTopContainer = document.createElement("div");
     const wallpaperHeading = document.createElement("h3");
     wallpaperHeading.className = "quick-settings-title";
@@ -2449,11 +2449,10 @@ Is it scaring you off?`,
       return this.element;
     }
   };
-  var CompyThemeSelector = class {
+  var CompactThemeSelector = class {
     element = document.createElement("div");
     render() {
       let ThemeOptionyStalker = new ThemeOptiony("stalker");
-      console.log(ThemeOptionyStalker.name);
       return this.element;
     }
   };
@@ -2681,9 +2680,7 @@ Is it scaring you off?`,
           if (shouldReloadTheme) {
             await this.themeSelector.updateImages(false);
           }
-          console.log(this.themeSelector.currentTiles);
           this.themeSelector.currentTiles.forEach((tile) => {
-            console.log("AAA");
             tile.updateSelection();
           });
           this.backgroundImageSelector.id = settings.appearance.theme;
@@ -3257,12 +3254,6 @@ Is it scaring you off?`,
           break;
         case "appearance":
           this.settingsPage.appendChild(createMainTitle("Appearance"));
-          this.settingsPage.appendChild(createSectionTitle("Theme"));
-          this.settingsPage.appendChild(
-            createDescription(
-              "Customize the overall look of the interface with different color styles."
-            )
-          );
           this.settingsPage.appendChild(this.themeSelector.render());
           this.settingsPage.appendChild(createSectionTitle("Wallpaper"));
           this.settingsPage.appendChild(
@@ -3594,6 +3585,9 @@ Is it scaring you off?`,
   }
   async function openSettingsWindow(event) {
     settingsWindow.show(event);
+    setTimeout(() => {
+      settingsWindow.themeSelector.updateContentHeight();
+    }, 400);
   }
 
   // src/main-features/appearance/themes.ts
@@ -3608,7 +3602,6 @@ Is it scaring you off?`,
   }
   async function setTheme(themeName) {
     const style = document.documentElement.style;
-    console.log("applying the background");
     currentThemeName = themeName;
     currentTheme = await getTheme(themeName);
     Object.entries(currentTheme.cssProperties).forEach(([key, value]) => {
@@ -3712,8 +3705,6 @@ Is it scaring you off?`,
       this.element.appendChild(this.getBottomContainer(theme));
     }
     updateSelection() {
-      console.log("Current: ", currentThemeName);
-      console.log("This theme: ", this.name);
       if (currentThemeName == this.name) {
         this.element.classList.add("is-selected");
       } else {
@@ -3853,10 +3844,12 @@ Is it scaring you off?`,
       this.topContainer.classList.add("theme-top-container");
     }
     render() {
-      console.log("RENDERING");
       this.element.innerHTML = "";
       this.createTopContainer();
       this.createContentContainer();
+      window.addEventListener("resize", () => {
+        this.updateContentHeight();
+      });
       this.element.appendChild(this.topContainer);
       this.update();
       return this.element;
@@ -3867,18 +3860,15 @@ Is it scaring you off?`,
       });
     }
     async update() {
-      if (this.element.contains(this.content)) {
-        this.element.removeChild(this.content);
-      }
-      this.createContentContainer();
+      this.content.innerHTML = "";
       this.element.appendChild(this.content);
       this.updateTopContainer();
       if (this.currentCategory == "all") {
         await this.renderFolders();
-        console.log("rendered folders");
       } else {
         await this.renderFolderContent();
       }
+      this.updateContentHeight();
     }
     updateTopContainer() {
       this.topContainer.innerHTML = "";
@@ -3910,6 +3900,17 @@ Is it scaring you off?`,
       this.content = document.createElement("div");
       this.content.classList.add("theme-tiles");
     }
+    calculateContentHeight(tiles) {
+      const TILE_HEIGHT = tiles[0]?.element.getBoundingClientRect().height || 103;
+      const TILE_WIDTH = tiles[0]?.element.getBoundingClientRect().width || 168;
+      const GAP = 6;
+      const totalWidth = this.content.getBoundingClientRect().width;
+      const tileAmount = tiles.length;
+      const tilesPerRow = Math.floor((totalWidth + GAP) / (TILE_WIDTH + GAP));
+      const numRows = Math.ceil(tileAmount / tilesPerRow);
+      const totalHeight = numRows * TILE_HEIGHT + (numRows - 1) * GAP;
+      return totalHeight;
+    }
     async renderFolders() {
       let categories = await browser.runtime.sendMessage({
         action: "getThemeCategories",
@@ -3927,6 +3928,9 @@ Is it scaring you off?`,
       await this.renderTiles(tiles);
       await this.updateImages(true);
     }
+    updateContentHeight() {
+      this.content.style.height = String(this.calculateContentHeight(this.currentTiles)) + "px";
+    }
     async renderFolderContent() {
       let themes2 = await browser.runtime.sendMessage({
         action: "getThemes",
@@ -3934,9 +3938,14 @@ Is it scaring you off?`,
         includeHidden: true
       });
       if (!themes2) return;
-      console.log(themes2);
       let tiles = Object.keys(themes2).map((name2) => {
-        let tile = new ThemeTile2(name2);
+        let tile = new ThemeTile2(name2, this.currentCategory == "custom");
+        tile.onDuplicate = async () => {
+          await browser.runtime.sendMessage({
+            action: "saveCustomTheme",
+            data: await getTheme(name2)
+          });
+        };
         return tile;
       });
       this.currentTiles = tiles;
@@ -4875,15 +4884,14 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       super("global_chat_window", hidden);
     }
     async renderContent() {
+      console.log("rendering gc window");
       this.gcContent = document.createElement("div");
-      return this.gcContent;
-    }
-    onOpened() {
       const queryString = getThemeQueryString(currentTheme);
       this.iframe = document.createElement("iframe");
       this.iframe.style = "width:100%; height:100%; border:none";
       this.iframe.src = GC_DOMAINS[this.beta ? "beta" : "main"] + "/v1?" + queryString;
       this.gcContent.appendChild(this.iframe);
+      return this.gcContent;
     }
   };
   var gcWindow;

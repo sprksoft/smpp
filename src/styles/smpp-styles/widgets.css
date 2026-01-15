@@ -536,3 +536,7 @@ p.smpp-error-widget {
 .smpp-widget-bag-group:last-child {
   margin-bottom: 1rem;
 }
+
+svg .pencil {
+  fill: var(--color-accent);
+}
