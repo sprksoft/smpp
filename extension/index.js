@@ -3748,7 +3748,6 @@ Is it scaring you off?`,
   async function openSettingsWindow(event) {
     settingsWindow.show(event);
     let updateHeight = () => {
-      console.log("doing it from here");
       settingsWindow.themeSelector.updateSizes();
       settingsWindow.themeSelector.updateContentHeight();
       settingsWindow.element.removeEventListener("animationend", updateHeight);
@@ -3870,7 +3869,6 @@ Is it scaring you off?`,
       };
     }
     readColorInput() {
-      console.log("reading color input");
       let hexInput = this.element.querySelector("input");
       if (hexInput) {
         if (isValidHexColor(hexInput.value)) {
@@ -4017,6 +4015,7 @@ Is it scaring you off?`,
   var ThemeTile2 = class extends Tile {
     name;
     isCustom;
+    titleElement = document.createElement("span");
     constructor(name2, isCustom = false) {
       super();
       this.name = name2;
@@ -4031,19 +4030,21 @@ Is it scaring you off?`,
         );
       });
     }
-    async createContent() {
+    async updateTitle() {
       let theme = await getTheme(this.name);
-      await this.updateCSS();
-      this.element.appendChild(this.createImageContainer());
-      this.element.appendChild(this.getBottomContainer(theme));
+      this.titleElement.innerText = theme.displayName;
     }
-    getBottomContainer(theme) {
+    async createContent() {
+      this.element.appendChild(this.createImageContainer());
+      this.element.appendChild(this.getBottomContainer());
+      await this.updateTitle();
+      await this.updateCSS();
+    }
+    getBottomContainer() {
       let bottomContainer = document.createElement("div");
       bottomContainer.classList.add("theme-tile-bottom");
-      let title = document.createElement("span");
-      title.innerText = theme.displayName;
-      title.classList.add("theme-tile-title");
-      bottomContainer.appendChild(title);
+      this.titleElement.classList.add("theme-tile-title");
+      bottomContainer.appendChild(this.titleElement);
       let buttonContainer = document.createElement("div");
       buttonContainer.classList.add("theme-button-container");
       let duplicateButton = document.createElement("button");
@@ -4272,7 +4273,6 @@ Is it scaring you off?`,
       });
     }
     updateSizes() {
-      console.log("Updating sizes...");
       this.contentWidth = this.content.getBoundingClientRect().width;
     }
     async renderSelectorContent() {
@@ -4290,7 +4290,6 @@ Is it scaring you off?`,
     // this is used if some of the correct content is already loaded
     async updateSelectorContent() {
       if (this.currentCategory == "all") {
-        console.log("weird... (this shouldn't really happen you know)");
         await this.renderFolderTiles();
         return;
       }
@@ -4303,7 +4302,6 @@ Is it scaring you off?`,
         categories: [this.currentCategory],
         includeHidden: true
       });
-      console.log(themes2);
       if (!themes2) return;
       let visibleThemeTiles = this.content.querySelectorAll(".theme-tile");
       let visibleThemeTilesArray = [];
@@ -4358,7 +4356,10 @@ Is it scaring you off?`,
       };
       let updateLocalCSS = async () => {
         this.currentTiles.forEach((tile) => {
-          if (tile.name == currentThemeName) tile.updateCSS();
+          if (tile.name == currentThemeName) {
+            tile.updateCSS();
+            tile.updateTitle();
+          }
         });
       };
       await addMissingTiles(visibleThemeNames, correctThemeNames);
@@ -4396,7 +4397,6 @@ Is it scaring you off?`,
       this.content.classList.add("theme-tiles");
     }
     calculateContentHeight(tiles) {
-      console.log(tiles);
       const TILE_HEIGHT = parseFloat(tiles[0]?.element.style.height || "0");
       const TILE_WIDTH = parseFloat(tiles[0]?.element.style.width || "0");
       const GAP = 6;
@@ -4405,8 +4405,6 @@ Is it scaring you off?`,
       const tilesPerRow = Math.floor((totalWidth + GAP) / (TILE_WIDTH + GAP));
       const numRows = Math.ceil(tileAmount / tilesPerRow);
       const totalHeight = numRows * TILE_HEIGHT + (numRows - 1) * GAP;
-      console.log(totalHeight);
-      console.log(totalWidth);
       return totalHeight;
     }
     async renderFolderTiles() {
@@ -4426,7 +4424,6 @@ Is it scaring you off?`,
       await this.renderTiles(tiles);
     }
     updateContentHeight() {
-      console.log("Updating height");
       this.content.style.height = String(this.calculateContentHeight(this.currentTiles)) + "px";
     }
     createThemeTile(name2, isCustom) {

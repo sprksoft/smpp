@@ -195,7 +195,6 @@ export class ColorPicker {
   }
 
   readColorInput() {
-    console.log("reading color input");
     let hexInput = this.element.querySelector("input");
     if (hexInput) {
       if (isValidHexColor(hexInput.value)) {
@@ -367,6 +366,7 @@ export class Tile {
 export class ThemeTile extends Tile {
   name: string;
   isCustom: boolean;
+  titleElement = document.createElement("span");
 
   constructor(name: string, isCustom = false) {
     super();
@@ -384,21 +384,24 @@ export class ThemeTile extends Tile {
     });
   }
 
-  async createContent() {
+  async updateTitle() {
     let theme = await getTheme(this.name);
-    await this.updateCSS();
-    this.element.appendChild(this.createImageContainer());
-    this.element.appendChild(this.getBottomContainer(theme));
+    this.titleElement.innerText = theme.displayName;
   }
 
-  getBottomContainer(theme: Theme) {
+  async createContent() {
+    this.element.appendChild(this.createImageContainer());
+    this.element.appendChild(this.getBottomContainer());
+    await this.updateTitle();
+    await this.updateCSS();
+  }
+
+  getBottomContainer() {
     let bottomContainer = document.createElement("div");
     bottomContainer.classList.add("theme-tile-bottom");
 
-    let title = document.createElement("span");
-    title.innerText = theme.displayName;
-    title.classList.add("theme-tile-title");
-    bottomContainer.appendChild(title);
+    this.titleElement.classList.add("theme-tile-title");
+    bottomContainer.appendChild(this.titleElement);
 
     let buttonContainer = document.createElement("div");
     buttonContainer.classList.add("theme-button-container");
@@ -671,7 +674,6 @@ export class ThemeSelector {
   }
 
   updateSizes() {
-    console.log("Updating sizes...");
     this.contentWidth = this.content.getBoundingClientRect().width;
   }
 
@@ -694,7 +696,6 @@ export class ThemeSelector {
   // this is used if some of the correct content is already loaded
   async updateSelectorContent() {
     if (this.currentCategory == "all") {
-      console.log("weird... (this shouldn't really happen you know)");
       await this.renderFolderTiles();
       return;
     }
@@ -711,7 +712,6 @@ export class ThemeSelector {
     })) as {
       [key: string]: Theme;
     };
-    console.log(themes);
     if (!themes) return;
 
     let visibleThemeTiles = this.content.querySelectorAll(".theme-tile");
@@ -777,7 +777,10 @@ export class ThemeSelector {
 
     let updateLocalCSS = async () => {
       this.currentTiles.forEach((tile: ThemeTile) => {
-        if (tile.name == currentThemeName) tile.updateCSS();
+        if (tile.name == currentThemeName) {
+          tile.updateCSS();
+          tile.updateTitle();
+        }
       });
     };
 
@@ -824,7 +827,6 @@ export class ThemeSelector {
   }
 
   calculateContentHeight(tiles: Tiles) {
-    console.log(tiles);
     const TILE_HEIGHT = parseFloat(tiles[0]?.element.style.height || "0");
     const TILE_WIDTH = parseFloat(tiles[0]?.element.style.width || "0"); // Was .height, should be .width
     const GAP = 6;
@@ -833,8 +835,6 @@ export class ThemeSelector {
     const tilesPerRow = Math.floor((totalWidth + GAP) / (TILE_WIDTH + GAP));
     const numRows = Math.ceil(tileAmount / tilesPerRow);
     const totalHeight = numRows * TILE_HEIGHT + (numRows - 1) * GAP;
-    console.log(totalHeight);
-    console.log(totalWidth);
     return totalHeight;
   }
 
@@ -860,7 +860,6 @@ export class ThemeSelector {
   }
 
   updateContentHeight() {
-    console.log("Updating height");
     this.content.style.height =
       String(this.calculateContentHeight(this.currentTiles)) + "px";
   }
