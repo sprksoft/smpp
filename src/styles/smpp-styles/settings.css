@@ -136,6 +136,7 @@
   width: calc(100% - 20rem);
   padding: 1rem;
   padding-left: 1.5rem;
+  padding-right: 0.25rem;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
@@ -1008,7 +1009,7 @@ input.settings-page-keybinding-input[type="text"]:not(
   flex-direction: row;
   align-items: center;
   padding-left: 0.25rem;
-  height: 2rem;
+  height: fit-content;
   gap: 0.25rem;
 }
 
@@ -1059,8 +1060,19 @@ button .bottom-container-button:active {
   max-width: 6rem;
   font-weight: 700;
   text-align: center;
-  margin-right: auto;
+  max-width: 100%;
+  width: 100%;
   text-wrap-mode: nowrap;
+  overflow: hidden;
+}
+
+.theme-button-container {
+  position: absolute;
+  top: 0.25rem;
+  right: 0.25rem;
+  display: flex;
+  flex-direction: row;
+  gap: 0.25rem;
 }
 
 .theme-tile-bottom svg .pencil {
@@ -1085,6 +1097,7 @@ button .bottom-container-button:active {
   background-color: var(--color-base01) !important;
   cursor: pointer;
   height: fit-content;
+  position: relative;
 }
 
 #settings-page .theme-tile:not(.aaaaa).is-selected {
@@ -1147,6 +1160,28 @@ button .bottom-container-button:active {
 
 #settings-page .theme-tile:not(.aaaaa):hover .bottom-container-button {
   opacity: 1;
+}
+
+#settings-page .use-default-colors.theme-tile:not(.aaaaa).is-selected {
+  border-color: var(--color-accent) !important;
+}
+
+.use-default-colors.theme-tile .image-container {
+  background-color: var(--color-base02) !important;
+  background: linear-gradient(
+    40deg,
+    color-mix(in srgb, var(--color-base03) 70%, var(--color-accent) 30%) 0%,
+    color-mix(in srgb, var(--color-base03) 65%, var(--color-accent) 35%) 15%,
+    color-mix(in srgb, var(--color-base02) 70%, var(--color-accent) 30%) 45%,
+    color-mix(in srgb, var(--color-base02) 73%, var(--color-accent) 27%) 55%,
+    color-mix(in srgb, var(--color-base02) 95%, var(--color-accent) 5%) 100%
+  );
+}
+
+#settings-page .use-default-colors.theme-tile:not(.aaaaa):hover {
+  border-color: var(--color-accent);
+  background-color: var(--color-base01) !important;
+  color: var(--color-text) !important;
 }
 
 .theme-tile:focus-visible {
@@ -1225,7 +1260,59 @@ button .bottom-container-button:active {
   margin: 0.5rem 0rem;
 }
 
+.use-default-colors.theme-tile .image-container > svg {
+  box-sizing: border-box;
+  width: 100%;
+  height: calc(100% - 1rem);
+  stroke: var(--color-accent) !important;
+  margin: 0.5rem 0rem;
+}
+
+.theme-tile .image-container svg.edit_button {
+  height: calc(100% - 2rem);
+  margin: 1rem 0rem;
+}
+
+.theme-tile .image-container svg.heart-icon {
+  fill: var(--color-red) !important;
+  stroke: var(--color-red) !important;
+}
+
 .current-category {
   margin-bottom: 0 !important;
   font-size: 1.6rem;
+}
+
+button.remove-custom-theme {
+  background-color: var(--color-base01) !important;
+  border: 2px solid var(--color-base02) !important;
+  border-radius: 100000px !important;
+  padding: 0.25rem 0.75rem 0.25rem 1rem !important;
+  font-size: 1.4rem !important;
+  font-weight: 500 !important;
+  height: 3rem;
+  cursor: pointer !important;
+  color: var(--color-text) !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button.remove-custom-theme > svg {
+  height: 100%;
+  stroke: var(--color-red) !important;
+}
+
+.enableAnimations button.remove-custom-theme {
+  transition-property: border-color, background-color, transform, stroke;
+  transition: 0.15s ease-in-out;
+}
+
+button.remove-custom-theme:hover {
+  background-color: var(--color-base02) !important;
+  border-color: var(--color-base03) !important;
+}
+
+button.remove-custom-theme:hover {
+  border-color: var(--color-red) !important;
 }

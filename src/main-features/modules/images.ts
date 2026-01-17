@@ -161,7 +161,7 @@ export class ImageSelector {
     await browser.runtime.sendMessage({
       action: "setImage",
       id: this.id,
-      data,
+      data: data,
     });
     this.loadImageData();
     this.onStore();

@@ -14,6 +14,7 @@ import {
   folderSvg,
   moonSvg,
   pineSvg,
+  plusSVG,
   sunSvg,
   trashSvg,
 } from "../../fixes-utils/svgs.js";
@@ -107,14 +108,7 @@ export async function exampleSaveCustomTheme() {
     data: testCustomTheme,
   });
 
-  let data = await browser.runtime.sendMessage({
-    action: "getSettingsData",
-  });
-  data.appearance.theme = id;
-  await browser.runtime.sendMessage({
-    action: "setSettingsData",
-    data: data,
-  });
+  await updateTheme(id);
 }
 
 class ColorCursor {
@@ -376,42 +370,6 @@ export class ThemeTile extends Tile {
     this.isCustom = isCustom;
   }
 
-  getBottomContainer(theme: Theme) {
-    let bottomContainer = document.createElement("div");
-    bottomContainer.classList.add("theme-tile-bottom");
-
-    let title = document.createElement("span");
-    title.innerText = theme.displayName;
-    title.classList.add("theme-tile-title");
-    bottomContainer.appendChild(title);
-
-    let duplicateButton = document.createElement("button");
-    duplicateButton.classList.add("bottom-container-button");
-    duplicateButton.innerHTML = copySvg;
-    duplicateButton.addEventListener("click", async () => {
-      await this.onDuplicate();
-    });
-    bottomContainer.appendChild(duplicateButton);
-
-    if (this.isCustom) {
-      let editButton = document.createElement("button");
-      editButton.classList.add("bottom-container-button");
-      editButton.innerHTML = editIconSvg;
-      editButton.addEventListener("click", async () => {
-        await this.onEdit();
-      });
-      bottomContainer.appendChild(editButton);
-    }
-
-    return bottomContainer;
-  }
-
-  createImageContainer() {
-    let imageContainer = document.createElement("div");
-    imageContainer.classList.add("image-container");
-    return imageContainer;
-  }
-
   async createContent() {
     let theme = await getTheme(this.name);
     Object.keys(theme.cssProperties).forEach((key) => {
@@ -422,6 +380,46 @@ export class ThemeTile extends Tile {
     });
     this.element.appendChild(this.createImageContainer());
     this.element.appendChild(this.getBottomContainer(theme));
+  }
+
+  getBottomContainer(theme: Theme) {
+    let bottomContainer = document.createElement("div");
+    bottomContainer.classList.add("theme-tile-bottom");
+
+    let title = document.createElement("span");
+    title.innerText = theme.displayName;
+    title.classList.add("theme-tile-title");
+    bottomContainer.appendChild(title);
+
+    let buttonContainer = document.createElement("div");
+    buttonContainer.classList.add("theme-button-container");
+
+    let duplicateButton = document.createElement("button");
+    duplicateButton.classList.add("bottom-container-button");
+    duplicateButton.innerHTML = copySvg;
+    duplicateButton.addEventListener("click", async () => {
+      await this.onDuplicate();
+    });
+    buttonContainer.appendChild(duplicateButton);
+
+    if (this.isCustom) {
+      let editButton = document.createElement("button");
+      editButton.classList.add("bottom-container-button");
+      editButton.innerHTML = editIconSvg;
+      editButton.addEventListener("click", async () => {
+        await this.onEdit();
+      });
+      buttonContainer.appendChild(editButton);
+    }
+    bottomContainer.appendChild(buttonContainer);
+
+    return bottomContainer;
+  }
+
+  createImageContainer() {
+    let imageContainer = document.createElement("div");
+    imageContainer.classList.add("image-container");
+    return imageContainer;
   }
 
   updateSelection() {
@@ -472,15 +470,7 @@ export class ThemeTile extends Tile {
   }
 
   async onClick() {
-    await browser.runtime.sendMessage({
-      action: "setSetting",
-      name: "appearance.theme",
-      data: this.name,
-    });
-    let data = (await browser.runtime.sendMessage({
-      action: "getSettingsData",
-    })) as Settings;
-    applyAppearance(data.appearance);
+    await updateTheme(this.name);
     await settingsWindow.loadPage(false);
     await loadQuickSettings();
   }
@@ -492,6 +482,18 @@ export class ThemeTile extends Tile {
   async onDuplicate() {}
 }
 
+async function updateTheme(name: string) {
+  await browser.runtime.sendMessage({
+    action: "setSetting",
+    name: "appearance.theme",
+    data: name,
+  });
+  let data = (await browser.runtime.sendMessage({
+    action: "getSettingsData",
+  })) as Settings;
+  applyAppearance(data.appearance);
+}
+
 export class ThemeFolder extends Tile {
   category: string;
   constructor(category: string) {
@@ -499,12 +501,45 @@ export class ThemeFolder extends Tile {
     this.category = category;
   }
 
-  getBottomContainer() {
+  async createContent() {
+    let firstThemeInCategory = (await browser.runtime.sendMessage({
+      action: "getFirstThemeInCategory",
+      category: this.category,
+      includeHidden: true,
+    })) as string;
+
+    if (!firstThemeInCategory) return;
+    let theme = (await browser.runtime.sendMessage({
+      action: "getTheme",
+      name: firstThemeInCategory,
+    })) as Theme;
+
+    Object.keys(theme.cssProperties).forEach((key) => {
+      this.element.style.setProperty(
+        `${key}-local`,
+        theme.cssProperties[key] as string
+      );
+    });
+
+    if (this.category == "custom" || this.category == "quickSettings") {
+      this.element.classList.add("use-default-colors");
+    }
+
+    this.element.style.setProperty("--background-image-local", `url()`);
+    this.element.appendChild(this.createImageContainer());
+    this.element.appendChild(this.createBottomContainer());
+  }
+
+  createBottomContainer() {
     let bottomContainer = document.createElement("div");
     bottomContainer.classList.add("theme-tile-bottom");
 
     let title = document.createElement("span");
     title.innerText = getFancyCategoryName(this.category);
+    if (this.category == "quickSettings") {
+      title.innerText = "Favorites";
+    }
+
     title.classList.add("theme-tile-title");
     bottomContainer.appendChild(title);
 
@@ -528,6 +563,9 @@ export class ThemeFolder extends Tile {
       case "seasonal":
         svg = pineSvg;
         break;
+      case "custom":
+        svg = editIconSvg;
+        break;
       default:
         svg = folderSvg;
         break;
@@ -536,41 +574,56 @@ export class ThemeFolder extends Tile {
     imageContainer.classList.add("image-container");
     return imageContainer;
   }
-
-  async createContent() {
-    let firstThemeInCategory = (await browser.runtime.sendMessage({
-      action: "getFirstThemeInCategory",
-      category: this.category,
-      includeHidden: true,
-    })) as string;
-
-    if (!firstThemeInCategory) return;
-    let theme = (await browser.runtime.sendMessage({
-      action: "getTheme",
-      name: firstThemeInCategory,
-    })) as Theme;
-
-    Object.keys(theme.cssProperties).forEach((key) => {
-      this.element.style.setProperty(
-        `${key}-local`,
-        theme.cssProperties[key] as string
-      );
-    });
-
-    this.element.style.setProperty("--background-image-local", `url()`);
-    this.element.appendChild(this.createImageContainer());
-    this.element.appendChild(this.getBottomContainer());
-  }
 }
 
-type Tiles = Tile[] | ThemeTile[] | ThemeFolder[];
+type Tiles = Tile[] & ThemeTile[] & ThemeFolder[] & AddCustomTheme[];
 
 function getFancyCategoryName(name: string) {
   let fancyName = name.charAt(0).toUpperCase() + name.slice(1);
-  if (name == "quickSettings") {
-    fancyName = "Favorite";
-  }
   return fancyName;
+}
+
+class AddCustomTheme extends Tile {
+  createImageContainer() {
+    let imageContainer = document.createElement("div");
+    let svg = plusSVG;
+
+    imageContainer.innerHTML = svg;
+    imageContainer.classList.add("image-container");
+    return imageContainer;
+  }
+
+  createBottomContainer() {
+    let bottomContainer = document.createElement("div");
+    bottomContainer.classList.add("theme-tile-bottom");
+
+    let title = document.createElement("span");
+    title.classList.add("theme-tile-title");
+    title.innerText = "Create theme";
+    bottomContainer.appendChild(title);
+
+    return bottomContainer;
+  }
+
+  async onClick() {
+    let newTheme = await browser.runtime.sendMessage({
+      action: "saveCustomTheme",
+      data: await getTheme("defaultCustom"),
+    });
+
+    await settingsWindow.themeSelector.update();
+    await settingsWindow.loadPage(false);
+    await loadQuickSettings();
+
+    await updateTheme(newTheme);
+    startCustomThemeCreator(await getTheme("defaultCustom"), "defaultCustom");
+  }
+
+  async createContent() {
+    this.element.classList.add("use-default-colors");
+    this.element.appendChild(this.createImageContainer());
+    this.element.appendChild(this.createBottomContainer());
+  }
 }
 
 export class ThemeSelector {
@@ -606,7 +659,6 @@ export class ThemeSelector {
   }
 
   async update() {
-    console.log("UPDATING");
     this.content.innerHTML = "";
 
     this.element.appendChild(this.content);
@@ -614,9 +666,9 @@ export class ThemeSelector {
     this.updateTopContainer();
 
     if (this.currentCategory == "all") {
-      await this.renderFolders();
+      await this.renderFolderTiles();
     } else {
-      await this.renderFolderContent();
+      await this.renderThemeTiles();
     }
     this.updateContentHeight();
   }
@@ -637,6 +689,9 @@ export class ThemeSelector {
     }
 
     title.innerText = getFancyCategoryName(this.currentCategory) + " themes";
+    if (this.currentCategory == "quickSettings") {
+      title.innerText = "Favorite themes";
+    }
     this.topContainer.appendChild(title);
   }
 
@@ -673,7 +728,7 @@ export class ThemeSelector {
     return totalHeight;
   }
 
-  async renderFolders() {
+  async renderFolderTiles() {
     let categories = (await browser.runtime.sendMessage({
       action: "getThemeCategories",
       includeEmpty: true,
@@ -700,7 +755,7 @@ export class ThemeSelector {
       String(this.calculateContentHeight(this.currentTiles)) + "px";
   }
 
-  async renderFolderContent() {
+  async renderThemeTiles() {
     let themes = (await browser.runtime.sendMessage({
       action: "getThemes",
       categories: [this.currentCategory],
@@ -708,30 +763,43 @@ export class ThemeSelector {
     })) as {
       [key: string]: Theme;
     };
-
     if (!themes) return;
 
+    let isCustom = this.currentCategory == "custom";
     let tiles = Object.keys(themes).map((name: string) => {
-      let isCustom = this.currentCategory == "custom";
       let tile = new ThemeTile(name, isCustom);
       tile.onDuplicate = async () => {
         let newTheme = await browser.runtime.sendMessage({
           action: "saveCustomTheme",
           data: await getTheme(name),
         });
+        let result = (await browser.runtime.sendMessage({
+          action: "getImage",
+          id: name,
+        })) as Image;
+
+        if (result.type == "default") {
+          result.imageData = await getExtensionImage(
+            "theme-backgrounds/" + name + ".jpg"
+          );
+          if (!isCustom) {
+            console.log(result.imageData);
+            result.type = "link";
+            result.link = name + ".jpg";
+          }
+        }
+
+        await browser.runtime.sendMessage({
+          action: "setImage",
+          id: newTheme,
+          data: result,
+        });
+
         if (isCustom) {
           await this.update();
         }
         startCustomThemeCreator(await getTheme(name), name);
-        await browser.runtime.sendMessage({
-          action: "setSetting",
-          name: "appearance.theme",
-          data: newTheme,
-        });
-        let data = (await browser.runtime.sendMessage({
-          action: "getSettingsData",
-        })) as Settings;
-        applyAppearance(data.appearance);
+        await updateTheme(newTheme);
         await settingsWindow.loadPage(false);
         await loadQuickSettings();
         await settingsWindow.themeSelector.changeCategory("custom");
@@ -744,6 +812,9 @@ export class ThemeSelector {
 
       return tile;
     }) as Tiles;
+    if (isCustom) {
+      tiles.push(new AddCustomTheme());
+    }
     this.currentTiles = tiles;
 
     await this.renderTiles(tiles);
@@ -768,7 +839,7 @@ export class CustomThemeCreator extends BaseWindow {
   name: string;
 
   constructor(theme: Theme, name: string) {
-    super("customThemeCreator", false);
+    super("customThemeCreator", true);
     this.theme = theme;
     this.name = name;
   }
@@ -814,7 +885,9 @@ export class CustomThemeCreator extends BaseWindow {
       action: "removeCustomTheme",
       id: this.name,
     });
-    console.log();
+    await updateTheme("default");
+    await settingsWindow.loadPage(true);
+    await loadQuickSettings();
     settingsWindow.themeSelector.update();
     this.hide();
   }

@@ -197,13 +197,12 @@
         "background-scripts/data/theme-categories.json"
       );
     }
-    categories.custom = await getCustomCategory();
     categories.quickSettings = await getQuickSettingsThemes();
+    categories.custom = await getCustomCategory();
     return categories;
   }
   async function getFirstThemeInCategory(category, includeHidden) {
     let themeNames = await getThemeCategory(category);
-    console.log(category, themeNames);
     if (!themeNames[0]) return "error";
     return themeNames[0];
   }
@@ -221,7 +220,6 @@
     let allowedThemeKeys = await Promise.all(
       categories2.map((category) => getThemeCategory(category))
     );
-    console.log(allowedThemeKeys);
     if (mustMatchAllCategories) {
       allowedThemeKeys = allowedThemeKeys[0].filter(
         (themeKey) => allowedThemeKeys.every((arr) => arr.includes(themeKey))

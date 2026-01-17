@@ -20,7 +20,6 @@
     "smkerst"
   ],
   "light": ["white", "summer", "pink", "japan", "fairyblue", "boringwhite"],
-  "nature": ["matcha", "fall", "winter"],
   "seasonal": ["fall", "smkerst", "winter", "summer", "matcha"],
   "hidden": [
     "fairyblue",

@@ -1510,7 +1510,10 @@ export async function openSettingsWindow(
   event: MouseEvent | KeyboardEvent | null
 ) {
   settingsWindow.show(event);
-  setTimeout(() => {
+
+  let updateHeight = () => {
     settingsWindow.themeSelector.updateContentHeight();
-  }, 400);
+    settingsWindow.element.removeEventListener("animationend", updateHeight);
+  };
+  settingsWindow.element.addEventListener("animationend", updateHeight);
 }
