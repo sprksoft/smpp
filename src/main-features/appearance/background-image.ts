@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { browser, getExtensionImage } from "../../common/utils.js";
 
-export async function setBackground(appearance: Object) {
+export async function setBackground(appearance: any) {
   function displayBackgroundImage(imageSrc: string) {
     document.documentElement.style.setProperty(
       "--background-color",
@@ -28,15 +28,17 @@ export async function setBackground(appearance: Object) {
       document.body.appendChild(img);
     }
   }
-  let result = (await browser.runtime.sendMessage({
+  
+  let result = await browser.runtime.sendMessage({
     action: "getImage",
     id: appearance.theme,
-  })) as Image;
+  });
 
-  if (result.type == "default") {
+  if (result && result.type == "default") {
     result.imageData = await getExtensionImage(
       "theme-backgrounds/" + appearance.theme + ".jpg"
     );
   }
-  displayBackgroundImage(result.imageData);
+  
+  displayBackgroundImage(result?.imageData || null);
 }

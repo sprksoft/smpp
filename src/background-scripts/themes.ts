@@ -21,23 +21,28 @@ export async function getThemeCategories(
   includeHidden = false
 ) {
   let allCategories = await getAllThemeCategories();
-  console.log(allCategories);
+  
+  // Create a copy to avoid modifying the original object
+  let filteredCategories = JSON.parse(JSON.stringify(allCategories));
+  
   if (!includeHidden) {
     let hiddenThemeKeys = await getThemeCategory("hidden");
-    Object.keys(categories).forEach((category) => {
-      console.log(categories[category]);
-      categories[category].forEach((theme) => {
-        if (hiddenThemeKeys.includes(theme)) delete categories[category][theme];
-      });
+    Object.keys(filteredCategories).forEach((category) => {
+      filteredCategories[category] = filteredCategories[category].filter(
+        (theme: string) => !hiddenThemeKeys.includes(theme)
+      );
     });
   }
+  
   if (!includeEmpty) {
-    Object.keys(categories).forEach((category) => {
-      if (!categories[category] || !categories[category][0])
-        delete categories[category];
+    Object.keys(filteredCategories).forEach((category) => {
+      if (!filteredCategories[category] || filteredCategories[category].length === 0) {
+        delete filteredCategories[category];
+      }
     });
   }
-  return allCategories;
+  
+  return filteredCategories;
 }
 
 export async function getAllThemeCategories() {

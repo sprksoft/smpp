@@ -5817,12 +5817,12 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       action: "getImage",
       id: appearance.theme
     });
-    if (result.type == "default") {
+    if (result && result.type == "default") {
       result.imageData = await getExtensionImage(
         "theme-backgrounds/" + appearance.theme + ".jpg"
       );
     }
-    displayBackgroundImage(result.imageData);
+    displayBackgroundImage(result?.imageData || null);
   }
 
   // src/games/games.ts
