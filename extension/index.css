@@ -2539,6 +2539,14 @@ input.settings-page-keybinding-input[type=text]:not(.aaaaaa):read-only.listening
   -webkit-user-select: none;
   user-select: none;
 }
+.floating-picker.smpp-color-picker {
+  position: absolute;
+  padding: 0.5rem;
+  border-radius: 1.5rem;
+  border-color: var(--color-base02);
+  background: var(--color-base01);
+  box-shadow: var(--darken-background) 0px 0px 15px;
+}
 .color-picker-field {
   width: 100%;
   aspect-ratio: 16/9;
@@ -2925,6 +2933,14 @@ button.remove-custom-theme:hover {
 }
 button.remove-custom-theme:hover {
   border-color: var(--color-red) !important;
+}
+.color-preview-bubble {
+  aspect-ratio: 1;
+  width: 2rem;
+  border-radius: 100000px;
+  margin: 0.5rem;
+  background-color: var(--current-color);
+  cursor: pointer;
 }
 
 /* src/styles/smpp-styles/assignments.css */
@@ -4487,7 +4503,7 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
     top,
     border-radius;
   transition: 0.2s cubic-bezier(0.16, 1.13, 0.89, 0.96);
-  animation: popIn 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards !important;
+  animation: popIn 0.2s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards !important;
 }
 .glass .base-window {
   background: var(--darken-background);

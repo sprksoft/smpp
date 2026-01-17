@@ -265,7 +265,10 @@ button.smscButton.blue.fileupload_submit_button,
 .enableAnimations button.smscButton.blue.fileupload_submit_button,
 .enableAnimations .wide-colored-btn,
 .enableAnimations .topnav-scope button.medium-button.medium-button {
-  transition: border 0.3s, background-color 0.3s, color 0.3s;
+  transition:
+    border 0.3s,
+    background-color 0.3s,
+    color 0.3s;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -1002,7 +1005,9 @@ ul.smsc-column-nav {
 }
 
 .enableAnimations .main-slider {
-  transition: opacity 0.2s, border-color 0.2s !important;
+  transition:
+    opacity 0.2s,
+    border-color 0.2s !important;
 }
 
 .main-slider::-webkit-slider-thumb {
@@ -1820,12 +1825,14 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
 .enableAnimations .base-window {
   transition-property: width, height, left, top, border-radius;
   transition: 0.2s cubic-bezier(0.16, 1.13, 0.89, 0.96);
-  animation: popIn 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards !important;
+  animation: popIn 0.2s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards !important;
 }
+
 .glass .base-window {
   background: var(--darken-background);
   backdrop-filter: blur(20px);
 }
+
 .base-window {
   overflow: clip;
   background: var(--color-base00);
@@ -2607,7 +2614,9 @@ div#smscMain:has(.live__quick-nav) {
   border-radius: 1rem;
 }
 .enableAnimations .online-session__list-page .listview__row a:hover {
-  transition: border 0.3s, background 0.3s;
+  transition:
+    border 0.3s,
+    background 0.3s;
 }
 .online-session__list-page .listview__row a:hover {
   background-color: var(--color-base03) !important;

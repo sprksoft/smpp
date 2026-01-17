@@ -185,13 +185,50 @@ export class ColorPicker {
   constructor(width = "20rem") {
     this.width = width;
     this.hueCursor = this.createHueCursor();
-    this.hueCursor.onDrag = () => {
-      this.readColor();
+    this.hueCursor.onDrag = async () => {
+      await this.readColor();
     };
     this.fieldCursor = this.createFieldCursor();
-    this.fieldCursor.onDrag = () => {
-      this.readColor();
+    this.fieldCursor.onDrag = async () => {
+      await this.readColor();
     };
+  }
+
+  readColorInput() {
+    console.log("reading color input");
+    let hexInput = this.element.querySelector("input");
+    if (hexInput) {
+      if (isValidHexColor(hexInput.value)) {
+        this.currentColor = colord(hexInput.value);
+      } else {
+        hexInput.value = this.currentColor.toHex();
+      }
+    }
+
+    this.updateColorPicker();
+  }
+
+  async readColor() {
+    let hue = this.hueCursor.xPos * 3.6;
+    let saturation = this.fieldCursor.xPos;
+    let value = 100 - this.fieldCursor.yPos;
+
+    this.currentColor = colord({ h: hue, s: saturation, v: value });
+    await this.updateColorPicker();
+  }
+
+  async updateColorPicker() {
+    let maxSatColor = colord({ h: this.hueCursor.xPos * 3.6, s: 100, v: 100 });
+    this.element.style.setProperty("--max-sat", maxSatColor.toHex());
+    this.element.style.setProperty(
+      "--current-color",
+      this.currentColor.toHex()
+    );
+    let hexInput = this.element.querySelector("input");
+    if (hexInput) {
+      hexInput.value = this.currentColor.toHex();
+    }
+    await this.onChange();
   }
 
   createFieldCursor() {
@@ -288,52 +325,17 @@ export class ColorPicker {
     this.element.appendChild(this.createHueContainer());
     this.element.appendChild(this.createBottomContainer());
 
-    this.updateColorPicker();
-    return this.element;
-  }
-
-  readColorInput() {
-    let hexInput = this.element.querySelector("input");
-    if (hexInput) {
-      if (isValidHexColor(hexInput.value)) {
-        this.currentColor = colord(hexInput.value);
-      } else {
-        hexInput.value = this.currentColor.toHex();
-      }
-    }
-
-    this.updateColorPicker();
-  }
-
-  readColor() {
-    let hue = this.hueCursor.xPos * 3.6;
-    let saturation = this.fieldCursor.xPos;
-    let value = 100 - this.fieldCursor.yPos;
-
-    this.currentColor = colord({ h: hue, s: saturation, v: value });
-    this.updateColorPicker();
-  }
-
-  updateColorPicker() {
     this.hueCursor.xPos = this.currentColor.hue() / 3.6;
     this.fieldCursor.xPos = this.currentColor.toHsv().s;
     this.fieldCursor.yPos = 100 - this.currentColor.toHsv().v;
     this.hueCursor.updateCursorPosition();
     this.fieldCursor.updateCursorPosition();
-    let maxSatColor = colord({ h: this.hueCursor.xPos * 3.6, s: 100, v: 100 });
-    this.element.style.setProperty("--max-sat", maxSatColor.toHex());
-    this.element.style.setProperty(
-      "--current-color",
-      this.currentColor.toHex()
-    );
-    let hexInput = this.element.querySelector("input");
-    if (hexInput) {
-      hexInput.value = this.currentColor.toHex();
-    }
-    this.onChange();
+
+    this.updateColorPicker();
+    return this.element;
   }
 
-  onChange() {}
+  async onChange() {}
 }
 
 export class Tile {
@@ -611,7 +613,7 @@ class AddCustomTheme extends Tile {
       data: await getTheme("defaultCustom"),
     });
 
-    await settingsWindow.themeSelector.update();
+    await settingsWindow.themeSelector.updateSelectorContent();
     await settingsWindow.loadPage(false);
     await loadQuickSettings();
 
@@ -621,6 +623,7 @@ class AddCustomTheme extends Tile {
 
   async createContent() {
     this.element.classList.add("use-default-colors");
+    this.element.classList.add("create-theme-button");
     this.element.appendChild(this.createImageContainer());
     this.element.appendChild(this.createBottomContainer());
   }
@@ -648,7 +651,7 @@ export class ThemeSelector {
 
     this.element.appendChild(this.topContainer);
 
-    this.update();
+    this.renderSelectorContent();
     return this.element;
   }
 
@@ -658,7 +661,7 @@ export class ThemeSelector {
     });
   }
 
-  async update() {
+  async renderSelectorContent() {
     this.content.innerHTML = "";
 
     this.element.appendChild(this.content);
@@ -673,6 +676,94 @@ export class ThemeSelector {
     this.updateContentHeight();
   }
 
+  // this is used if some of the correct content is already loaded
+  async updateSelectorContent() {
+    if (this.currentCategory == "all") {
+      console.log("weird... (this shouldn't really happen you know)");
+      await this.renderFolderTiles();
+      this.updateContentHeight();
+      return;
+    }
+
+    await this.updateThemeTiles();
+    this.updateImages();
+  }
+
+  async updateThemeTiles() {
+    let themes = (await browser.runtime.sendMessage({
+      action: "getThemes",
+      categories: [this.currentCategory],
+      includeHidden: true,
+    })) as {
+      [key: string]: Theme;
+    };
+    console.log(themes);
+    if (!themes) return;
+
+    let visibleThemeTiles = this.content.querySelectorAll(".theme-tile");
+    let visibleThemeTilesArray: HTMLDivElement[] = [];
+    visibleThemeTiles.forEach((element) => {
+      visibleThemeTilesArray.push(element as HTMLDivElement);
+    });
+    let visibleThemeNames = visibleThemeTilesArray.map((element) => {
+      if (element.dataset["name"]) return element.dataset["name"];
+    }) as string[];
+
+    let correctThemeNames = Object.keys(themes).map((themeName) => {
+      return themeName;
+    });
+
+    let addMissingTiles = async (
+      visibleThemeNames: string[],
+      correctThemeNames: string[]
+    ) => {
+      correctThemeNames.forEach(async (themeName) => {
+        if (!visibleThemeNames.includes(themeName)) {
+          let newTile = this.createThemeTile(
+            themeName,
+            this.currentCategory == "custom"
+          );
+          let createThemeButton = this.content.querySelector(
+            ".create-theme-button"
+          );
+          if (createThemeButton) {
+            createThemeButton.insertAdjacentElement(
+              "beforebegin",
+              await newTile.render()
+            );
+          } else {
+            this.content.appendChild(await newTile.render());
+          }
+          this.currentTiles.push(newTile);
+          this.updateContentHeight();
+        }
+      });
+    };
+
+    let removeIncorrectTiles = async (
+      visibleThemeNames: string[],
+      correctThemeNames: string[]
+    ) => {
+      visibleThemeNames.forEach(async (themeName) => {
+        if (!correctThemeNames.includes(themeName)) {
+          let element = visibleThemeTilesArray.find((element) => {
+            if (element.dataset["name"] == themeName) return element;
+          });
+          if (!element) return;
+          if (element.classList.contains("create-theme-button")) return;
+          this.content.removeChild(element);
+          this.currentTiles = this.currentTiles.filter((tile) => {
+            if (tile instanceof AddCustomTheme) return true;
+            if (tile instanceof ThemeTile) return tile.name != themeName;
+          }) as Tiles;
+        }
+      });
+    };
+
+    await addMissingTiles(visibleThemeNames, correctThemeNames);
+    await removeIncorrectTiles(visibleThemeNames, correctThemeNames);
+  }
+
   updateTopContainer() {
     this.topContainer.innerHTML = "";
     let title = document.createElement("h2");
@@ -681,10 +772,7 @@ export class ThemeSelector {
     if (this.currentCategory != "all") {
       let backButton = document.createElement("button");
       backButton.innerHTML = chevronLeftSvg;
-      backButton.addEventListener("click", async () => {
-        this.currentCategory = "all";
-        await this.update();
-      });
+      backButton.addEventListener("click", () => this.changeCategory("all"));
       this.topContainer.appendChild(backButton);
     }
 
@@ -714,6 +802,7 @@ export class ThemeSelector {
   }
 
   calculateContentHeight(tiles: Tiles) {
+    console.log(tiles);
     const TILE_HEIGHT = tiles[0]?.element.getBoundingClientRect().height || 103;
     const TILE_WIDTH = tiles[0]?.element.getBoundingClientRect().width || 168;
     const GAP = 6;
@@ -747,12 +836,59 @@ export class ThemeSelector {
     this.currentTiles = tiles;
 
     await this.renderTiles(tiles);
-    await this.updateImages(true);
   }
 
   updateContentHeight() {
+    console.log("Updating height");
     this.content.style.height =
       String(this.calculateContentHeight(this.currentTiles)) + "px";
+  }
+
+  createThemeTile(name: string, isCustom: boolean) {
+    let tile = new ThemeTile(name, isCustom);
+    tile.element.dataset["name"] = name;
+
+    tile.onDuplicate = async () => {
+      let newTheme = await browser.runtime.sendMessage({
+        action: "saveCustomTheme",
+        data: await getTheme(name),
+      });
+      let result = (await browser.runtime.sendMessage({
+        action: "getImage",
+        id: name,
+      })) as Image;
+
+      if (result.type == "default") {
+        result.imageData = await getExtensionImage(
+          "theme-backgrounds/" + name + ".jpg"
+        );
+        if (!isCustom) {
+          result.type = "link";
+          result.link = name + ".jpg";
+        }
+      }
+
+      await browser.runtime.sendMessage({
+        action: "setImage",
+        id: newTheme,
+        data: result,
+      });
+
+      if (isCustom) {
+        await this.updateSelectorContent();
+      }
+      startCustomThemeCreator(await getTheme(name), name);
+      await updateTheme(newTheme);
+      await settingsWindow.loadPage(false);
+      await loadQuickSettings();
+      await settingsWindow.themeSelector.changeCategory("custom");
+    };
+    if (isCustom) {
+      tile.onEdit = async () => {
+        startCustomThemeCreator(await getTheme(name), name);
+      };
+    }
+    return tile;
   }
 
   async renderThemeTiles() {
@@ -766,52 +902,9 @@ export class ThemeSelector {
     if (!themes) return;
 
     let isCustom = this.currentCategory == "custom";
-    let tiles = Object.keys(themes).map((name: string) => {
-      let tile = new ThemeTile(name, isCustom);
-      tile.onDuplicate = async () => {
-        let newTheme = await browser.runtime.sendMessage({
-          action: "saveCustomTheme",
-          data: await getTheme(name),
-        });
-        let result = (await browser.runtime.sendMessage({
-          action: "getImage",
-          id: name,
-        })) as Image;
-
-        if (result.type == "default") {
-          result.imageData = await getExtensionImage(
-            "theme-backgrounds/" + name + ".jpg"
-          );
-          if (!isCustom) {
-            console.log(result.imageData);
-            result.type = "link";
-            result.link = name + ".jpg";
-          }
-        }
-
-        await browser.runtime.sendMessage({
-          action: "setImage",
-          id: newTheme,
-          data: result,
-        });
-
-        if (isCustom) {
-          await this.update();
-        }
-        startCustomThemeCreator(await getTheme(name), name);
-        await updateTheme(newTheme);
-        await settingsWindow.loadPage(false);
-        await loadQuickSettings();
-        await settingsWindow.themeSelector.changeCategory("custom");
-      };
-      if (isCustom) {
-        tile.onEdit = async () => {
-          startCustomThemeCreator(await getTheme(name), name);
-        };
-      }
-
-      return tile;
-    }) as Tiles;
+    let tiles = Object.keys(themes).map((name) =>
+      this.createThemeTile(name, isCustom)
+    ) as Tiles;
     if (isCustom) {
       tiles.push(new AddCustomTheme());
     }
@@ -823,7 +916,7 @@ export class ThemeSelector {
 
   async changeCategory(category: string) {
     this.currentCategory = category;
-    await this.update();
+    await this.renderSelectorContent();
   }
 }
 
@@ -837,14 +930,120 @@ async function startCustomThemeCreator(theme: Theme, name: string) {
 export class CustomThemeCreator extends BaseWindow {
   theme: Theme;
   name: string;
+  editableValues: string[];
+  colorPreviews: {
+    [key: string]: HTMLDivElement;
+  }[];
+
+  getEditableValues(cssProperties: Theme["cssProperties"]) {
+    let nonEditableValues = [
+      "--color-homepage-sidebars-bg",
+      "--darken-background",
+      "--color-splashtext",
+    ];
+    let editableValues = Object.keys(cssProperties).filter((property) => {
+      return !nonEditableValues.includes(property);
+    });
+    return editableValues;
+  }
+
+  createColorPreview(name: string) {
+    let colorPreview = document.createElement("div");
+    colorPreview.classList.add("color-preview-bubble");
+    if (this.theme.cssProperties[name]) {
+      colorPreview.style.setProperty(
+        "--current-color",
+        this.theme.cssProperties[name]
+      );
+    }
+    colorPreview.dataset["name"] = name;
+    colorPreview.addEventListener("click", (e: Event) => {
+      this.openColorPicker(name, colorPreview, e);
+    });
+    return colorPreview;
+  }
+
+  generateColorPreviews(editableValues: string[]) {
+    let colorPreviews = editableValues.map((colorName) => {
+      let colorPreview: { [key: string]: HTMLDivElement } = {};
+      colorPreview[colorName] = this.createColorPreview(colorName);
+      return colorPreview;
+    });
+
+    return colorPreviews;
+  }
 
   constructor(theme: Theme, name: string) {
     super("customThemeCreator", true);
     this.theme = theme;
     this.name = name;
+    this.editableValues = this.getEditableValues(theme.cssProperties);
+    this.colorPreviews = this.generateColorPreviews(this.editableValues);
   }
+
   content = document.createElement("div");
   displayNameInput = document.createElement("input");
+
+  openColorPicker(name: string, colorPreview: HTMLDivElement, e: Event) {
+    let colorPicker = new ColorPicker();
+
+    colorPicker.element.style.position = "absolute";
+    colorPicker.element.classList.add("floating-picker");
+
+    let _docEventHandler = (docEvent: Event) => {
+      if (docEvent === e) return;
+
+      if (!(docEvent.target instanceof Node)) return;
+
+      const targetElement = docEvent.target as HTMLElement;
+      const parentElement = targetElement.parentElement;
+
+      if (colorPicker.element.contains(targetElement)) return;
+
+      const isIconClick =
+        targetElement.classList?.contains("copy-svg") ||
+        targetElement.classList?.contains("done-icon") ||
+        parentElement?.classList?.contains("copy-svg") ||
+        parentElement?.classList?.contains("done-icon");
+
+      if (isIconClick) return;
+
+      colorPicker.element.remove();
+      document.removeEventListener("mousedown", _docEventHandler);
+    };
+
+    document.addEventListener("mousedown", _docEventHandler);
+
+    if (this.theme.cssProperties[name]) {
+      colorPicker.currentColor = colord(this.theme.cssProperties[name]);
+    }
+    colorPicker.onChange = async () => {
+      colorPreview.style.setProperty(
+        "--current-color",
+        colorPicker.currentColor.toHex()
+      );
+      await this.saveThemeData();
+      setTheme(this.name);
+    };
+    this.element.appendChild(colorPicker.render());
+  }
+
+  async saveThemeData() {
+    this.colorPreviews.forEach((preview) => {
+      let colorPreview = Object.values(preview)[0];
+      if (!colorPreview) return;
+      let colorName = colorPreview.dataset["name"];
+      if (!colorName) return;
+      this.theme.cssProperties[colorName] =
+        colorPreview.style.getPropertyValue("--current-color");
+    });
+    this.theme.displayName = this.displayNameInput.value;
+    await browser.runtime.sendMessage({
+      action: "saveCustomTheme",
+      data: this.theme,
+      id: this.name,
+    });
+  }
 
   createRemoveButton() {
     let button = document.createElement("button");
@@ -858,25 +1057,30 @@ export class CustomThemeCreator extends BaseWindow {
 
   createDisplayNameInput() {
     this.displayNameInput = createTextInput("", "Name");
-    this.displayNameInput.value = this.theme.displayName;
+    this.displayNameInput.addEventListener("change", async () => {
+      await this.saveThemeData();
+    });
     return this.displayNameInput;
   }
 
   async renderContent() {
-    let colorPicker = new ColorPicker();
-    if (this.theme.cssProperties["--color-accent"]) {
-      let accentColor = colord(this.theme.cssProperties["--color-accent"]);
-      colorPicker.currentColor = accentColor;
-      colorPicker.updateColorPicker();
-    }
-    this.content.appendChild(colorPicker.render());
+    this.colorPreviews.forEach((preview) => {
+      let colorPreview = Object.values(preview)[0];
+      if (colorPreview) this.content.appendChild(colorPreview);
+    });
     this.content.appendChild(this.createDisplayNameInput());
     this.content.appendChild(this.createRemoveButton());
+    this.load(this.theme);
     return this.content;
+  }
+
+  async load(theme: Theme) {
+    this.displayNameInput.value = theme.displayName;
   }
 
   onClosed(): void {
     document.body.removeChild(this.element);
+    settingsWindow.themeSelector.updateSelectorContent();
     openSettingsWindow(null);
   }
 
@@ -888,7 +1092,6 @@ export class CustomThemeCreator extends BaseWindow {
     await updateTheme("default");
     await settingsWindow.loadPage(true);
     await loadQuickSettings();
-    settingsWindow.themeSelector.update();
     this.hide();
   }
 }

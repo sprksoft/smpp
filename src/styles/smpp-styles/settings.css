@@ -165,7 +165,9 @@
 }
 
 .enableAnimations .settings-page-slider {
-  transition: opacity 0.2s, border-color 0.2s ease-in-out;
+  transition:
+    opacity 0.2s,
+    border-color 0.2s ease-in-out;
 }
 .settings-page-weather-overlay-container
   .settings-page-image-button-wrapper:has(input:checked) {
@@ -301,7 +303,10 @@ label.settings-page-image-button-wrapper:has(input:checked) {
   height: 100%;
   object-fit: cover;
   border-radius: 8px;
-  transition: transform 0.2s, filter 0.2s, outline 0.2s;
+  transition:
+    transform 0.2s,
+    filter 0.2s,
+    outline 0.2s;
 }
 
 .settings-page-theme-title {
@@ -311,7 +316,8 @@ label.settings-page-image-button-wrapper:has(input:checked) {
 }
 
 .enableAnimations .settings-page-theme-card {
-  transition-property: background-color, border-color, color, transform, outline;
+  transition-property:
+    background-color, border-color, color, transform, outline;
   transition: 0.15s ease-in-out;
 }
 
@@ -550,8 +556,8 @@ label.settings-page-image-button-wrapper:has(input:checked) {
 
 .settings-page-slider-container:has(#settings-page-weather-overlay-slider),
 .settings-page-slider-container:has(
-    #settings-page-weather-overlay-opacity-slider
-  ) {
+  #settings-page-weather-overlay-opacity-slider
+) {
   width: 20rem;
   gap: 1rem;
 }
@@ -588,8 +594,8 @@ input.settings-page-keybinding-input[type="text"]:not(
 }
 
 .settings-page-key-bind-container:has(
-    input.settings-page-keybinding-input.listening
-  ) {
+  input.settings-page-keybinding-input.listening
+) {
   border-color: var(--color-base02) !important;
 }
 
@@ -770,7 +776,9 @@ input.settings-page-keybinding-input[type="text"]:not(
   display: none !important;
 }
 .enableAnimations #quickSettings #extraSettingsButton {
-  transition: scale 0.1s ease-in-out, border-color 0.2s ease-in-out,
+  transition:
+    scale 0.1s ease-in-out,
+    border-color 0.2s ease-in-out,
     background 0.2s ease-in-out !important;
 }
 
@@ -820,8 +828,11 @@ input.settings-page-keybinding-input[type="text"]:not(
 }
 
 .enableAnimations .keybind-unbind-button {
-  transition: scale 0.1s ease-in-out, border-color 0.2s ease-in-out,
-    background 0.2s ease-in-out, opacity 0.1s ease-out;
+  transition:
+    scale 0.1s ease-in-out,
+    border-color 0.2s ease-in-out,
+    background 0.2s ease-in-out,
+    opacity 0.1s ease-out;
 }
 
 .keybind-unbind-button {
@@ -869,6 +880,15 @@ input.settings-page-keybinding-input[type="text"]:not(
   user-select: none;
 }
 
+.floating-picker.smpp-color-picker {
+  position: absolute;
+  padding: 0.5rem;
+  border-radius: 1.5rem;
+  border-color: var(--color-base02);
+  background: var(--color-base01);
+  box-shadow: var(--darken-background) 0px 0px 15px;
+}
+
 .color-picker-field {
   width: 100%;
   aspect-ratio: 16/9;
@@ -880,7 +900,9 @@ input.settings-page-keybinding-input[type="text"]:not(
 .color-picker-field .color-cursor-wrapper .color-cursor {
   border-radius: 100000px;
   border: 3px solid white;
-  box-shadow: 0px 0px 4px -2px black, inset 0px 0px 4px -2px black;
+  box-shadow:
+    0px 0px 4px -2px black,
+    inset 0px 0px 4px -2px black;
   height: 100%;
   transform: translate(-50%, -50%);
   pointer-events: none;
@@ -949,7 +971,9 @@ input.settings-page-keybinding-input[type="text"]:not(
 .hue-picker .color-cursor-wrapper .color-cursor {
   border-radius: 100000px;
   border: 3px solid white;
-  box-shadow: 0px 0px 4px -2px black, inset 0px 0px 4px -2px black;
+  box-shadow:
+    0px 0px 4px -2px black,
+    inset 0px 0px 4px -2px black;
   height: 100%;
   transform: translate(-50%, -50%);
   pointer-events: none;
@@ -1039,7 +1063,9 @@ input.settings-page-keybinding-input[type="text"]:not(
 
 .enableAnimations .bottom-container-button {
   transition-property: border-color, background-color, transform, stroke;
-  transition: 0.15s ease-in-out, opacity 0.15s ease-in-out 0.15s;
+  transition:
+    0.15s ease-in-out,
+    opacity 0.15s ease-in-out 0.15s;
 }
 
 .bottom-container-button:hover {
@@ -1081,7 +1107,8 @@ button .bottom-container-button:active {
 }
 
 .enableAnimations .theme-tile {
-  transition-property: background-color, border-color, color, transform, outline;
+  transition-property:
+    background-color, border-color, color, transform, outline;
   transition: 0.15s ease-in-out;
 }
 
@@ -1116,7 +1143,8 @@ button .bottom-container-button:active {
   background-position: center !important;
   background-color: var(--color-base02-local) !important;
   height: 6rem;
-  background: var(--background-image-local),
+  background:
+    var(--background-image-local),
     linear-gradient(
       40deg,
       color-mix(
@@ -1315,4 +1343,13 @@ button.remove-custom-theme:hover {
 
 button.remove-custom-theme:hover {
   border-color: var(--color-red) !important;
+}
+
+.color-preview-bubble {
+  aspect-ratio: 1;
+  width: 2rem;
+  border-radius: 100000px;
+  margin: 0.5rem;
+  background-color: var(--current-color);
+  cursor: pointer;
 }

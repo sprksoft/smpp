@@ -75,7 +75,7 @@ export class BaseWindow {
         : String(triggerEvent.type).startsWith("key"));
     const openEventTarget = isKeyboardEvent
       ? null
-      : (triggerEvent as MouseEvent | null)?.target ?? null;
+      : ((triggerEvent as MouseEvent | null)?.target ?? null);
 
     this._outsideClickHandler = (e: MouseEvent) => {
       if (
@@ -91,7 +91,7 @@ export class BaseWindow {
         this.hide();
       }
     };
-    document.addEventListener("click", this._outsideClickHandler, {
+    document.addEventListener("mousedown", this._outsideClickHandler, {
       capture: true,
     });
 
@@ -124,7 +124,7 @@ export class BaseWindow {
     this.hidden = true;
     this.element.classList.add("hidden");
     if (this._outsideClickHandler) {
-      document.removeEventListener("click", this._outsideClickHandler, {
+      document.removeEventListener("mousedown", this._outsideClickHandler, {
         capture: true,
       });
       this._outsideClickHandler = null;
