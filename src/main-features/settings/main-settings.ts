@@ -1512,8 +1512,15 @@ export async function openSettingsWindow(
   settingsWindow.show(event);
 
   let updateHeight = () => {
+    console.log("doing it from here");
+    settingsWindow.themeSelector.updateSizes();
     settingsWindow.themeSelector.updateContentHeight();
     settingsWindow.element.removeEventListener("animationend", updateHeight);
+    settingsWindow.element.removeEventListener("transitionend", updateHeight);
   };
   settingsWindow.element.addEventListener("animationend", updateHeight);
+  settingsWindow.onScreenSizeUpdate = () => {
+    settingsWindow.element.addEventListener("transitionend", updateHeight);
+  };
+  settingsWindow.themeSelector.updateContentHeight();
 }

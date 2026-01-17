@@ -44,6 +44,7 @@ export class BaseWindow {
     document.body.appendChild(this.element);
 
     fullscreenBtn.addEventListener("click", () => {
+      this.onScreenSizeUpdate?.();
       this.element.classList.toggle("fullscreen-window");
       void this.element.offsetWidth;
     });
@@ -62,6 +63,9 @@ export class BaseWindow {
 
   // Called when window is closed
   onClosed?(): void;
+
+  // Called when window grows or shrinks
+  onScreenSizeUpdate?(): void;
 
   show(triggerEvent: MouseEvent | KeyboardEvent | null = null): void {
     if (!this.hidden) return;

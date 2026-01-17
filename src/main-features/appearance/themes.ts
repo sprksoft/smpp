@@ -343,6 +343,8 @@ export class Tile {
 
   async render() {
     this.element.classList.add("theme-tile");
+    this.element.style.height = "104px";
+    this.element.style.width = "168px";
     this.element.addEventListener("click", async () => {
       await this.onClick();
     });
@@ -372,7 +374,7 @@ export class ThemeTile extends Tile {
     this.isCustom = isCustom;
   }
 
-  async createContent() {
+  async updateCSS() {
     let theme = await getTheme(this.name);
     Object.keys(theme.cssProperties).forEach((key) => {
       this.element.style.setProperty(
@@ -380,6 +382,11 @@ export class ThemeTile extends Tile {
         theme.cssProperties[key] as string
       );
     });
+  }
+
+  async createContent() {
+    let theme = await getTheme(this.name);
+    await this.updateCSS();
     this.element.appendChild(this.createImageContainer());
     this.element.appendChild(this.getBottomContainer(theme));
   }
@@ -618,7 +625,7 @@ class AddCustomTheme extends Tile {
     await loadQuickSettings();
 
     await updateTheme(newTheme);
-    startCustomThemeCreator(await getTheme("defaultCustom"), "defaultCustom");
+    startCustomThemeCreator(await getTheme("defaultCustom"), newTheme);
   }
 
   async createContent() {
@@ -635,6 +642,7 @@ export class ThemeSelector {
   topContainer = document.createElement("div");
   currentCategory: string = "all";
   currentTiles: Tiles = [];
+  contentWidth = 0;
 
   createTopContainer() {
     this.topContainer = document.createElement("div");
@@ -646,6 +654,7 @@ export class ThemeSelector {
     this.createTopContainer();
     this.createContentContainer();
     window.addEventListener("resize", () => {
+      this.updateSizes();
       this.updateContentHeight();
     });
 
@@ -661,6 +670,11 @@ export class ThemeSelector {
     });
   }
 
+  updateSizes() {
+    console.log("Updating sizes...");
+    this.contentWidth = this.content.getBoundingClientRect().width;
+  }
+
   async renderSelectorContent() {
     this.content.innerHTML = "";
 
@@ -673,6 +687,7 @@ export class ThemeSelector {
     } else {
       await this.renderThemeTiles();
     }
+    this.updateSizes();
     this.updateContentHeight();
   }
 
@@ -681,7 +696,6 @@ export class ThemeSelector {
     if (this.currentCategory == "all") {
       console.log("weird... (this shouldn't really happen you know)");
       await this.renderFolderTiles();
-      this.updateContentHeight();
       return;
     }
 
@@ -757,11 +771,19 @@ export class ThemeSelector {
             if (tile instanceof ThemeTile) return tile.name != themeName;
           }) as Tiles;
         }
+        this.updateContentHeight();
+      });
+    };
+
+    let updateLocalCSS = async () => {
+      this.currentTiles.forEach((tile: ThemeTile) => {
+        if (tile.name == currentThemeName) tile.updateCSS();
       });
     };
 
     await addMissingTiles(visibleThemeNames, correctThemeNames);
     await removeIncorrectTiles(visibleThemeNames, correctThemeNames);
+    updateLocalCSS();
   }
 
   updateTopContainer() {
@@ -803,17 +825,16 @@ export class ThemeSelector {
 
   calculateContentHeight(tiles: Tiles) {
     console.log(tiles);
-    const TILE_HEIGHT = tiles[0]?.element.getBoundingClientRect().height || 103;
-    const TILE_WIDTH = tiles[0]?.element.getBoundingClientRect().width || 168;
+    const TILE_HEIGHT = parseFloat(tiles[0]?.element.style.height || "0");
+    const TILE_WIDTH = parseFloat(tiles[0]?.element.style.width || "0"); // Was .height, should be .width
     const GAP = 6;
-    const totalWidth = this.content.getBoundingClientRect().width;
-
+    const totalWidth = this.contentWidth;
     const tileAmount = tiles.length;
-
     const tilesPerRow = Math.floor((totalWidth + GAP) / (TILE_WIDTH + GAP));
     const numRows = Math.ceil(tileAmount / tilesPerRow);
     const totalHeight = numRows * TILE_HEIGHT + (numRows - 1) * GAP;
-
+    console.log(totalHeight);
+    console.log(totalWidth);
     return totalHeight;
   }
 
@@ -877,11 +898,13 @@ export class ThemeSelector {
       if (isCustom) {
         await this.updateSelectorContent();
       }
-      startCustomThemeCreator(await getTheme(name), name);
+
       await updateTheme(newTheme);
       await settingsWindow.loadPage(false);
       await loadQuickSettings();
-      await settingsWindow.themeSelector.changeCategory("custom");
+      await this.changeCategory("custom");
+      this.updateContentHeight();
+      startCustomThemeCreator(await getTheme(name), name);
     };
     if (isCustom) {
       tile.onEdit = async () => {

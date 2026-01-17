@@ -1118,7 +1118,8 @@ button .bottom-container-button:active {
   flex-direction: column;
   border: 0.3rem solid transparent;
   gap: 0.25rem;
-  width: 14rem;
+  width: 168px;
+  height: 104px;
   padding: 0.25rem;
   border-radius: 1.5rem;
   background-color: var(--color-base01) !important;

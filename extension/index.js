@@ -619,6 +619,7 @@ Is it scaring you off?`,
       this.element.appendChild(controls);
       document.body.appendChild(this.element);
       fullscreenBtn.addEventListener("click", () => {
+        this.onScreenSizeUpdate?.();
         this.element.classList.toggle("fullscreen-window");
         void this.element.offsetWidth;
       });
@@ -3747,10 +3748,17 @@ Is it scaring you off?`,
   async function openSettingsWindow(event) {
     settingsWindow.show(event);
     let updateHeight = () => {
+      console.log("doing it from here");
+      settingsWindow.themeSelector.updateSizes();
       settingsWindow.themeSelector.updateContentHeight();
       settingsWindow.element.removeEventListener("animationend", updateHeight);
+      settingsWindow.element.removeEventListener("transitionend", updateHeight);
     };
     settingsWindow.element.addEventListener("animationend", updateHeight);
+    settingsWindow.onScreenSizeUpdate = () => {
+      settingsWindow.element.addEventListener("transitionend", updateHeight);
+    };
+    settingsWindow.themeSelector.updateContentHeight();
   }
 
   // src/main-features/appearance/themes.ts
@@ -3985,6 +3993,8 @@ Is it scaring you off?`,
     element = document.createElement("div");
     async render() {
       this.element.classList.add("theme-tile");
+      this.element.style.height = "104px";
+      this.element.style.width = "168px";
       this.element.addEventListener("click", async () => {
         await this.onClick();
       });
@@ -4012,7 +4022,7 @@ Is it scaring you off?`,
       this.name = name2;
       this.isCustom = isCustom;
     }
-    async createContent() {
+    async updateCSS() {
       let theme = await getTheme(this.name);
       Object.keys(theme.cssProperties).forEach((key) => {
         this.element.style.setProperty(
@@ -4020,6 +4030,10 @@ Is it scaring you off?`,
           theme.cssProperties[key]
         );
       });
+    }
+    async createContent() {
+      let theme = await getTheme(this.name);
+      await this.updateCSS();
       this.element.appendChild(this.createImageContainer());
       this.element.appendChild(this.getBottomContainer(theme));
     }
@@ -4220,7 +4234,7 @@ Is it scaring you off?`,
       await settingsWindow.loadPage(false);
       await loadQuickSettings();
       await updateTheme(newTheme);
-      startCustomThemeCreator(await getTheme("defaultCustom"), "defaultCustom");
+      startCustomThemeCreator(await getTheme("defaultCustom"), newTheme);
     }
     async createContent() {
       this.element.classList.add("use-default-colors");
@@ -4235,6 +4249,7 @@ Is it scaring you off?`,
     topContainer = document.createElement("div");
     currentCategory = "all";
     currentTiles = [];
+    contentWidth = 0;
     createTopContainer() {
       this.topContainer = document.createElement("div");
       this.topContainer.classList.add("theme-top-container");
@@ -4244,6 +4259,7 @@ Is it scaring you off?`,
       this.createTopContainer();
       this.createContentContainer();
       window.addEventListener("resize", () => {
+        this.updateSizes();
         this.updateContentHeight();
       });
       this.element.appendChild(this.topContainer);
@@ -4255,6 +4271,10 @@ Is it scaring you off?`,
         await tile.updateImage(currentThemeName, forceReload);
       });
     }
+    updateSizes() {
+      console.log("Updating sizes...");
+      this.contentWidth = this.content.getBoundingClientRect().width;
+    }
     async renderSelectorContent() {
       this.content.innerHTML = "";
       this.element.appendChild(this.content);
@@ -4264,6 +4284,7 @@ Is it scaring you off?`,
       } else {
         await this.renderThemeTiles();
       }
+      this.updateSizes();
       this.updateContentHeight();
     }
     // this is used if some of the correct content is already loaded
@@ -4271,7 +4292,6 @@ Is it scaring you off?`,
       if (this.currentCategory == "all") {
         console.log("weird... (this shouldn't really happen you know)");
         await this.renderFolderTiles();
-        this.updateContentHeight();
         return;
       }
       await this.updateThemeTiles();
@@ -4333,10 +4353,17 @@ Is it scaring you off?`,
               if (tile instanceof ThemeTile2) return tile.name != themeName;
             });
           }
+          this.updateContentHeight();
+        });
+      };
+      let updateLocalCSS = async () => {
+        this.currentTiles.forEach((tile) => {
+          if (tile.name == currentThemeName) tile.updateCSS();
         });
       };
       await addMissingTiles(visibleThemeNames, correctThemeNames);
       await removeIncorrectTiles(visibleThemeNames, correctThemeNames);
+      updateLocalCSS();
     }
     updateTopContainer() {
       this.topContainer.innerHTML = "";
@@ -4370,14 +4397,16 @@ Is it scaring you off?`,
     }
     calculateContentHeight(tiles) {
       console.log(tiles);
-      const TILE_HEIGHT = tiles[0]?.element.getBoundingClientRect().height || 103;
-      const TILE_WIDTH = tiles[0]?.element.getBoundingClientRect().width || 168;
+      const TILE_HEIGHT = parseFloat(tiles[0]?.element.style.height || "0");
+      const TILE_WIDTH = parseFloat(tiles[0]?.element.style.width || "0");
       const GAP = 6;
-      const totalWidth = this.content.getBoundingClientRect().width;
+      const totalWidth = this.contentWidth;
       const tileAmount = tiles.length;
       const tilesPerRow = Math.floor((totalWidth + GAP) / (TILE_WIDTH + GAP));
       const numRows = Math.ceil(tileAmount / tilesPerRow);
       const totalHeight = numRows * TILE_HEIGHT + (numRows - 1) * GAP;
+      console.log(totalHeight);
+      console.log(totalWidth);
       return totalHeight;
     }
     async renderFolderTiles() {
@@ -4429,11 +4458,12 @@ Is it scaring you off?`,
         if (isCustom) {
           await this.updateSelectorContent();
         }
-        startCustomThemeCreator(await getTheme(name2), name2);
         await updateTheme(newTheme);
         await settingsWindow.loadPage(false);
         await loadQuickSettings();
-        await settingsWindow.themeSelector.changeCategory("custom");
+        await this.changeCategory("custom");
+        this.updateContentHeight();
+        startCustomThemeCreator(await getTheme(name2), name2);
       };
       if (isCustom) {
         tile.onEdit = async () => {

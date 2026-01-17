@@ -2754,7 +2754,8 @@ button .bottom-container-button:active {
   flex-direction: column;
   border: 0.3rem solid transparent;
   gap: 0.25rem;
-  width: 14rem;
+  width: 168px;
+  height: 104px;
   padding: 0.25rem;
   border-radius: 1.5rem;
   background-color: var(--color-base01) !important;
@@ -4420,8 +4421,10 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
 }
 @keyframes popIn {
   0% {
-    transform: scale(0);
     opacity: 0;
+  }
+  50% {
+    transform: scale(0.5);
   }
   100% {
     transform: scale(1);
@@ -4503,7 +4506,7 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
     top,
     border-radius;
   transition: 0.2s cubic-bezier(0.16, 1.13, 0.89, 0.96);
-  animation: popIn 0.2s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards !important;
+  animation: popIn 0.3s cubic-bezier(0.24, 1.37, 0.5, 0.94) forwards !important;
 }
 .glass .base-window {
   background: var(--darken-background);
