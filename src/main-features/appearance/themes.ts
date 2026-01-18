@@ -18,7 +18,7 @@ import {
   sunSvg,
   trashSvg,
 } from "../../fixes-utils/svgs.js";
-import { getImageURL, type Image } from "../modules/images.js";
+import { getImageURL, ImageSelector, type Image } from "../modules/images.js";
 import { BaseWindow } from "../modules/windows.js";
 import {
   openSettingsWindow,
@@ -28,6 +28,7 @@ import {
 import { loadQuickSettings } from "../settings/quick-settings.js";
 import { applyAppearance, isFirefox } from "../main.js";
 import { createTextInput } from "./ui.js";
+import { Vibrant } from "node-vibrant/browser";
 
 export let currentThemeName: string;
 export let currentTheme: Theme;
@@ -203,7 +204,7 @@ export class ColorPicker {
         hexInput.value = this.currentColor.toHex();
       }
     }
-
+    this.updateFields();
     this.updateColorPicker();
   }
 
@@ -316,6 +317,14 @@ export class ColorPicker {
     return bottomContainer;
   }
 
+  updateFields() {
+    this.hueCursor.xPos = this.currentColor.hue() / 3.6;
+    this.fieldCursor.xPos = this.currentColor.toHsv().s;
+    this.fieldCursor.yPos = 100 - this.currentColor.toHsv().v;
+    this.hueCursor.updateCursorPosition();
+    this.fieldCursor.updateCursorPosition();
+  }
+
   render() {
     this.element.classList.add("smpp-color-picker");
 
@@ -324,11 +333,7 @@ export class ColorPicker {
     this.element.appendChild(this.createHueContainer());
     this.element.appendChild(this.createBottomContainer());
 
-    this.hueCursor.xPos = this.currentColor.hue() / 3.6;
-    this.fieldCursor.xPos = this.currentColor.toHsv().s;
-    this.fieldCursor.yPos = 100 - this.currentColor.toHsv().v;
-    this.hueCursor.updateCursorPosition();
-    this.fieldCursor.updateCursorPosition();
+    this.updateFields();
 
     this.updateColorPicker();
     return this.element;
@@ -956,6 +961,7 @@ export class CustomThemeCreator extends BaseWindow {
   colorPreviews: {
     [key: string]: HTMLDivElement;
   }[];
+  backgroundImageInput: ImageSelector;
 
   getEditableValues(cssProperties: Theme["cssProperties"]) {
     let nonEditableValues = [
@@ -1001,6 +1007,7 @@ export class CustomThemeCreator extends BaseWindow {
     this.name = name;
     this.editableValues = this.getEditableValues(theme.cssProperties);
     this.colorPreviews = this.generateColorPreviews(this.editableValues);
+    this.backgroundImageInput = new ImageSelector(this.name);
   }
 
   content = document.createElement("div");
@@ -1085,6 +1092,13 @@ export class CustomThemeCreator extends BaseWindow {
     return this.displayNameInput;
   }
 
+  async getThemeColors() {
+    const img = document.getElementById("background_image") as HTMLImageElement;
+    if (!img.src) return;
+    let vibrantTester = new Vibrant(img);
+    // add some onload bullshit and stuf yk
+  }
+
   async renderContent() {
     this.colorPreviews.forEach((preview) => {
       let colorPreview = Object.values(preview)[0];
@@ -1093,6 +1107,7 @@ export class CustomThemeCreator extends BaseWindow {
     this.content.appendChild(this.createDisplayNameInput());
     this.content.appendChild(this.createRemoveButton());
     this.load(this.theme);
+    await this.getThemeColors();
     return this.content;
   }
 

@@ -249,7 +249,6 @@ a:focus {
 .smscButton,
 .float-label__input,
 .input-search,
-button.smscButton.blue.fileupload_submit_button,
 .wide-colored-btn,
 .topnav-scope button.medium-button.medium-button {
   border: var(--border-size) solid var(--color-base02) !important;
@@ -259,10 +258,30 @@ button.smscButton.blue.fileupload_submit_button,
   border-radius: 1rem !important;
 }
 
+.smscButton.blue {
+  border: 2px solid var(--color-accent) !important;
+  background: var(--color-base02) !important;
+  color: var(--color-text) !important;
+  text-shadow: none !important;
+  box-shadow: none !important;
+  border-radius: 1rem !important;
+  font-weight: 600 !important;
+}
+
+.smscButton.blue:hover {
+  background: var(--color-base03) !important;
+  border-color: var(--color-accent) !important;
+}
+
+textarea#formval_omschrijving {
+  border: 2px solid var(--color-base02) !important;
+  border-radius: 1rem !important;
+}
+
 .enableAnimations .smscButton,
 .enableAnimations .float-label__input,
 .enableAnimations .input-search,
-.enableAnimations button.smscButton.blue.fileupload_submit_button,
+.enableAnimations button.smscButton.blue,
 .enableAnimations .wide-colored-btn,
 .enableAnimations .topnav-scope button.medium-button.medium-button {
   transition:
