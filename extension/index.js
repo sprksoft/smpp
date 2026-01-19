@@ -5666,7 +5666,7 @@ Is it scaring you off?`,
         await loadQuickSettings();
         await this.changeCategory("custom");
         this.updateContentHeight();
-        startCustomThemeCreator(await getTheme(name2), name2);
+        startCustomThemeCreator(await getTheme(newTheme), newTheme);
       };
       if (isCustom) {
         tile.onEdit = async () => {

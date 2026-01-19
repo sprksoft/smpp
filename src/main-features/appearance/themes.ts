@@ -908,7 +908,7 @@ export class ThemeSelector {
       await loadQuickSettings();
       await this.changeCategory("custom");
       this.updateContentHeight();
-      startCustomThemeCreator(await getTheme(name), name);
+      startCustomThemeCreator(await getTheme(newTheme), newTheme);
     };
     if (isCustom) {
       tile.onEdit = async () => {

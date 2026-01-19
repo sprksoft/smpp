@@ -30,15 +30,15 @@
   "ldev": {
     "displayName": "Dark Sands",
     "cssProperties": {
-      "--color-accent": "oklch(90% 0.069 70)",
-      "--color-text": "oklch(80% 0.004 90)",
-      "--color-base00": "oklch(0% 0.004 35)",
-      "--color-base01": "oklch(22% 0.004 35)",
-      "--color-base02": "oklch(29% 0.004 35)",
-      "--color-base03": "oklch(34% 0.004 35)",
-      "--color-homepage-sidebars-bg": "oklch(0% 0.004 35/ 50%)",
+      "--color-accent": "lch(92% 18 85)",
+      "--color-text": "lch(82% 1 95)",
+      "--color-base00": "lch(0% 1 40)",
+      "--color-base01": "lch(25% 1 40)",
+      "--color-base02": "lch(32% 1 40)",
+      "--color-base03": "lch(37% 1 40)",
+      "--color-homepage-sidebars-bg": "lch(0% 1 40 / 50%)",
       "--darken-background": "rgba(0,0,0,0.25)",
-      "--color-splashtext": "oklch(90% 0.069 70)"
+      "--color-splashtext": "lch(92% 18 85)"
     }
   },
   "birb": {
@@ -218,19 +218,19 @@
       "--color-base02": "#f0a8c1",
       "--color-base03": "#ea8eb0",
       "--darken-background": "rgba(241, 203, 218, 0.61)",
-      "--color-homepage-sidebars-bg": "oklch(95.58% 0.0337 351.52 / 10%)",
+      "--color-homepage-sidebars-bg": "rgba(255, 234, 242, 0.1)",
       "--color-splashtext": "#bf4183"
     }
   },
   "fairyblue": {
     "displayName": "Fairy Blue",
     "cssProperties": {
-      "--color-accent": "oklch(0.9 0.09 250)",
-      "--color-text": "oklch(1.0 0.09 250)",
-      "--color-base00": "oklch(0.65 0.09 250)",
-      "--color-base01": "oklch(0.70 0.09 250)",
-      "--color-base02": "oklch(0.75 0.09 250)",
-      "--color-base03": "oklch(0.80 0.09 250)",
+      "--color-accent": "lch(90% 23 260)",
+      "--color-text": "lch(100% 23 260)",
+      "--color-base00": "lch(68% 23 260)",
+      "--color-base01": "lch(73% 23 260)",
+      "--color-base02": "lch(78% 23 260)",
+      "--color-base03": "lch(83% 23 260)",
       "--darken-background": "#ffffff20",
       "--color-homepage-sidebars-bg": "#ffffff00",
       "--color-splashtext": "#7ac5ff"
