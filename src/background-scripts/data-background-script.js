@@ -26,7 +26,7 @@ async function getDefaultPlantData() {
 
 export async function getPlantAppData() {
   let data = await browser.storage.local.get("plantAppData");
-  let plantAppData = data.plantAppData || getDefaultPlantData();
+  let plantAppData = data.plantAppData || await getDefaultPlantData();
   return plantAppData;
 }
 
@@ -42,6 +42,7 @@ async function getFallbackColorData() {
       "background-scripts/data/delijn-kleuren.json"
     );
   }
+  return fallBackColorData;
 }
 
 export async function getDelijnColorData() {
@@ -63,7 +64,7 @@ export async function getDelijnColorData() {
     return delijnColorData;
   } catch (error) {
     console.error("Error retrieving Delijn Color Data:", error);
-    return getFallbackColorData;
+    return await getFallbackColorData();
   }
 }
 
