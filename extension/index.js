@@ -244,11 +244,13 @@
     document.getElementsByClassName(
       "login-app__platform-indicator"
     )[0].innerHTML = '<h1 class="logintitle">Smartschool ++</h1>';
-    document.getElementsByClassName("login-app__title--separator")[0].innerHTML = '<button type="button" class="white_text_button" id="showmore">More</button>';
-    document.getElementById("showmore").addEventListener("click", showmore);
-    function showmore() {
-      document.documentElement.style.setProperty("--show-options", "flex");
-      document.getElementById("showmore").style.display = "none";
+    let loginSeperator = document.querySelector(".login-app__title--separator");
+    if (loginSeperator) {
+      loginSeperator.innerHTML = '<button type="button" class="white_text_button" id="showmore">More</button>';
+      document.getElementById("showmore").addEventListener("click", () => {
+        document.documentElement.style.setProperty("--show-options", "flex");
+        document.getElementById("showmore").style.display = "none";
+      });
     }
   }
   function addSplashText() {
@@ -424,10 +426,10 @@ Is it scaring you off?`,
   function setByPath(object, path, value) {
     let ob = object;
     const pathSplit = path.split(".");
-    for (let i2 = 0; i2 < pathSplit.length - 1; i2++) {
-      ob = ob[pathSplit[i2]];
+    for (let i3 = 0; i3 < pathSplit.length - 1; i3++) {
+      ob = ob[pathSplit[i3]];
       if (ob === void 0) {
-        throw `setByPath: ${pathSplit[i2]} did not exist in path ${path}`;
+        throw `setByPath: ${pathSplit[i3]} did not exist in path ${path}`;
       }
     }
     ob[pathSplit[pathSplit.length - 1]] = value;
@@ -448,11 +450,11 @@ Is it scaring you off?`,
   }
   function openURL2(url, new_window = false) {
     if (new_window) {
-      let a2 = document.createElement("a");
-      a2.href = url;
-      a2.rel = "noopener noreferrer";
-      a2.target = "_blank";
-      a2.click();
+      let a3 = document.createElement("a");
+      a3.href = url;
+      a3.rel = "noopener noreferrer";
+      a3.target = "_blank";
+      a3.click();
       return;
     }
     window.location.href = url;
@@ -484,6 +486,14 @@ Is it scaring you off?`,
   }
 
   // src/fixes-utils/utils.ts
+  function isValidImage(src) {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => resolve(true);
+      img.onerror = () => resolve(false);
+      img.src = src;
+    });
+  }
   function getPfpLink(username) {
     let firstInitial;
     let secondInitial;
@@ -509,8 +519,8 @@ Is it scaring you off?`,
       sendDebug("Stored plannerUrl in cookies with 30 day expiration.");
       userId = plannerUrl.split("/")[4];
       sendDebug("Extracted userId from plannerUrl:", userId);
-    } catch (e2) {
-      sendDebug("Failed to get plannerUrl from DOM. Error:", e2.message);
+    } catch (e3) {
+      sendDebug("Failed to get plannerUrl from DOM. Error:", e3.message);
       sendDebug("Trying to get plannerUrl from cookies...");
       const cookies = document.cookie.split(";");
       const plannerUrlCookie = cookies.find(
@@ -639,11 +649,11 @@ Is it scaring you off?`,
       this.element.classList.remove("hidden");
       const isKeyboardEvent = triggerEvent && (typeof KeyboardEvent !== "undefined" ? triggerEvent instanceof KeyboardEvent : String(triggerEvent.type).startsWith("key"));
       const openEventTarget = isKeyboardEvent ? null : triggerEvent?.target ?? null;
-      this._outsideClickHandler = (e2) => {
-        if (openEventTarget && e2.target instanceof Node && (e2.target === openEventTarget || openEventTarget instanceof Node && openEventTarget.contains(e2.target))) {
+      this._outsideClickHandler = (e3) => {
+        if (openEventTarget && e3.target instanceof Node && (e3.target === openEventTarget || openEventTarget instanceof Node && openEventTarget.contains(e3.target))) {
           return;
         }
-        if (e2.target instanceof Node && !this.element.contains(e2.target)) {
+        if (e3.target instanceof Node && !this.element.contains(e3.target)) {
           this.hide();
         }
       };
@@ -651,8 +661,8 @@ Is it scaring you off?`,
         capture: true
       });
       if (!this._keydownHandler) {
-        this._keydownHandler = (e2) => {
-          if (e2.key === "Escape") {
+        this._keydownHandler = (e3) => {
+          if (e3.key === "Escape") {
             this.hide();
           }
         };
@@ -713,9 +723,9 @@ Is it scaring you off?`,
     let label = document.createElement("span");
     label.innerText = text;
     let button = createButton(id);
-    container.addEventListener("keydown", (e2) => {
-      if (e2.key === " " || e2.key === "Enter") {
-        e2.preventDefault();
+    container.addEventListener("keydown", (e3) => {
+      if (e3.key === " " || e3.key === "Enter") {
+        e3.preventDefault();
         button.click();
         container.focus();
       }
@@ -774,8 +784,8 @@ Is it scaring you off?`,
       this.fileInputButton.classList.add("smpp-file-input-button");
       this.fileInputButton.setAttribute("aria-label", "Choose image file");
       this.fileInputButton.innerHTML = imageInputSvg;
-      this.fileInputButton.addEventListener("click", (e2) => {
-        e2.preventDefault();
+      this.fileInputButton.addEventListener("click", (e3) => {
+        e3.preventDefault();
         this.fileInput.click();
       });
       fileInputContainer.appendChild(this.fileInput);
@@ -824,8 +834,8 @@ Is it scaring you off?`,
         }
         await this.storeImage();
       });
-      this.clearButton.addEventListener("click", async (e2) => {
-        e2.preventDefault();
+      this.clearButton.addEventListener("click", async (e3) => {
+        e3.preventDefault();
         this.linkInput.value = "";
         this.clearButton.classList.remove("active");
         this.fileInputButton.classList.remove("active");
@@ -934,8 +944,8 @@ Is it scaring you off?`,
           return;
         img.src = url;
         img.classList.add("personal-profile-picture");
-      } catch (e2) {
-        console.error("Error processing img:", e2, img);
+      } catch (e3) {
+        console.error("Error processing img:", e3, img);
       }
     }
     const existingImgs = Array.from(document.getElementsByTagName("img"));
@@ -953,8 +963,8 @@ Is it scaring you off?`,
             if (imgs && imgs.length) {
               for (const img of imgs) processImg(img);
             }
-          } catch (e2) {
-            console.error("Error querying imgs inside node:", e2, htmlNode);
+          } catch (e3) {
+            console.error("Error querying imgs inside node:", e3, htmlNode);
           }
         }
         if (mutation.type === "attributes" && mutation.target instanceof HTMLImageElement) {
@@ -1061,19 +1071,19 @@ Is it scaring you off?`,
       }
       this.close();
     }
-    #onKeydown(e2) {
-      if (e2.key == "Enter") {
+    #onKeydown(e3) {
+      if (e3.key == "Enter") {
         this.#accept();
-      } else if (e2.key == "Escape") {
+      } else if (e3.key == "Escape") {
         this.close();
-      } else if (e2.key == "Tab" && e2.shiftKey || e2.key == "ArrowUp") {
+      } else if (e3.key == "Tab" && e3.shiftKey || e3.key == "ArrowUp") {
         this.#selPrev();
-      } else if (e2.key == "Tab" && !e2.shiftKey || e2.key == "ArrowDown") {
+      } else if (e3.key == "Tab" && !e3.shiftKey || e3.key == "ArrowDown") {
         this.#selNext();
       } else {
         return;
       }
-      e2.preventDefault();
+      e3.preventDefault();
     }
     #oninput() {
       this.#sort();
@@ -1118,14 +1128,14 @@ Is it scaring you off?`,
           node.getElementsByClassName("dmenu-score")[0].innerText = score;
         }
       }
-      let sortedItems = items.sort(function(a2, b2) {
-        if (a2.score < b2.score) return 1;
-        if (a2.score > b2.score) return -1;
+      let sortedItems = items.sort(function(a3, b3) {
+        if (a3.score < b3.score) return 1;
+        if (a3.score > b3.score) return -1;
         return 0;
       });
-      for (let i2 = 0; i2 < sortedItems.length; i2++) {
-        let item = sortedItems[i2];
-        if (i2 == 0) {
+      for (let i3 = 0; i3 < sortedItems.length; i3++) {
+        let item = sortedItems[i3];
+        if (i3 == 0) {
           item.htmlNode.classList.add("dmenu-selected");
         } else {
           item.htmlNode.classList.remove("dmenu-selected");
@@ -1138,22 +1148,22 @@ Is it scaring you off?`,
       match = match.toLowerCase();
       let score = 0;
       let mi = 0;
-      let i2 = 0;
+      let i3 = 0;
       let streak = 0;
       let streakStartI = 0;
       while (true) {
-        if (i2 >= str.length || mi >= match.length) {
+        if (i3 >= str.length || mi >= match.length) {
           break;
         }
-        if (str[i2] == match[mi]) {
+        if (str[i3] == match[mi]) {
           score += (streak + 1) * (streak + 1) * ((str.length - streakStartI) / str.length);
           mi += 1;
           streak += 1;
         } else {
-          streakStartI = i2;
+          streakStartI = i3;
           streak = 0;
         }
-        i2++;
+        i3++;
       }
       if (mi < match.length) {
         return 0;
@@ -1184,7 +1194,7 @@ Is it scaring you off?`,
         row.getElementsByClassName("dmenu-score")[0].innerText = "0";
       }
       let klass = this;
-      row.addEventListener("click", function(e2) {
+      row.addEventListener("click", function(e3) {
         klass.#accept(row);
       });
       parent.appendChild(row);
@@ -1207,10 +1217,10 @@ Is it scaring you off?`,
       this.inputEl.type = "text";
       this.inputEl.classList.add("dmenu-input");
       let klass = this;
-      this.inputEl.addEventListener("keydown", (e2) => {
-        klass.#onKeydown(e2);
+      this.inputEl.addEventListener("keydown", (e3) => {
+        klass.#onKeydown(e3);
       });
-      this.inputEl.addEventListener("input", (e2) => {
+      this.inputEl.addEventListener("input", (e3) => {
         klass.#oninput();
       });
       top.appendChild(this.inputEl);
@@ -1247,13 +1257,13 @@ Is it scaring you off?`,
     });
     return quickMenuButton;
   }
-  document.addEventListener("click", function(e2) {
+  document.addEventListener("click", function(e3) {
     if (active_dmenu == null || !active_dmenu.isOpen()) {
       return;
     }
-    if (!active_dmenu.menuEl.contains(e2.target) && e2.target != active_dmenu.openerEl) {
+    if (!active_dmenu.menuEl.contains(e3.target) && e3.target != active_dmenu.openerEl) {
       active_dmenu.close();
-      e2.preventDefault();
+      e3.preventDefault();
     }
   });
 
@@ -1370,6 +1380,1447 @@ Is it scaring you off?`,
     }
   }
 
+  // node_modules/@vibrant/image/dist/esm/histogram.js
+  var Histogram = class {
+    constructor(pixels, opts) {
+      this.pixels = pixels;
+      this.opts = opts;
+      const { sigBits } = opts;
+      const getColorIndex = (r22, g22, b22) => (r22 << 2 * sigBits) + (g22 << sigBits) + b22;
+      this.getColorIndex = getColorIndex;
+      const rshift = 8 - sigBits;
+      const hn = 1 << 3 * sigBits;
+      const hist = new Uint32Array(hn);
+      let rmax;
+      let rmin;
+      let gmax;
+      let gmin;
+      let bmax;
+      let bmin;
+      let r3;
+      let g2;
+      let b3;
+      let a3;
+      rmax = gmax = bmax = 0;
+      rmin = gmin = bmin = Number.MAX_VALUE;
+      const n3 = pixels.length / 4;
+      let i3 = 0;
+      while (i3 < n3) {
+        const offset = i3 * 4;
+        i3++;
+        r3 = pixels[offset + 0];
+        g2 = pixels[offset + 1];
+        b3 = pixels[offset + 2];
+        a3 = pixels[offset + 3];
+        if (a3 === 0) continue;
+        r3 = r3 >> rshift;
+        g2 = g2 >> rshift;
+        b3 = b3 >> rshift;
+        const index = getColorIndex(r3, g2, b3);
+        if (hist[index] === void 0) hist[index] = 0;
+        hist[index] += 1;
+        if (r3 > rmax) rmax = r3;
+        if (r3 < rmin) rmin = r3;
+        if (g2 > gmax) gmax = g2;
+        if (g2 < gmin) gmin = g2;
+        if (b3 > bmax) bmax = b3;
+        if (b3 < bmin) bmin = b3;
+      }
+      this._colorCount = hist.reduce(
+        (total, c3) => c3 > 0 ? total + 1 : total,
+        0
+      );
+      this.hist = hist;
+      this.rmax = rmax;
+      this.rmin = rmin;
+      this.gmax = gmax;
+      this.gmin = gmin;
+      this.bmax = bmax;
+      this.bmin = bmin;
+    }
+    get colorCount() {
+      return this._colorCount;
+    }
+  };
+
+  // node_modules/@vibrant/image/dist/esm/index.js
+  var ImageBase = class {
+    scaleDown(opts) {
+      const width = this.getWidth();
+      const height = this.getHeight();
+      let ratio = 1;
+      if (opts.maxDimension > 0) {
+        const maxSide = Math.max(width, height);
+        if (maxSide > opts.maxDimension) ratio = opts.maxDimension / maxSide;
+      } else {
+        ratio = 1 / opts.quality;
+      }
+      if (ratio < 1) this.resize(width * ratio, height * ratio, ratio);
+    }
+  };
+  function applyFilters(imageData, filters) {
+    var _a;
+    if (filters.length > 0) {
+      const pixels = imageData.data;
+      const n3 = pixels.length / 4;
+      let offset;
+      let r3;
+      let g2;
+      let b3;
+      let a3;
+      for (let i3 = 0; i3 < n3; i3++) {
+        offset = i3 * 4;
+        r3 = pixels[offset + 0];
+        g2 = pixels[offset + 1];
+        b3 = pixels[offset + 2];
+        a3 = pixels[offset + 3];
+        for (let j2 = 0; j2 < filters.length; j2++) {
+          if (!((_a = filters[j2]) == null ? void 0 : _a.call(filters, r3, g2, b3, a3))) {
+            pixels[offset + 3] = 0;
+            break;
+          }
+        }
+      }
+    }
+    return imageData;
+  }
+
+  // node_modules/@vibrant/image-browser/dist/esm/index.js
+  function isRelativeUrl(url) {
+    const u3 = new URL(url, location.href);
+    return u3.protocol === location.protocol && u3.host === location.host && u3.port === location.port;
+  }
+  function isSameOrigin(a3, b3) {
+    const ua = new URL(a3);
+    const ub = new URL(b3);
+    return ua.protocol === ub.protocol && ua.hostname === ub.hostname && ua.port === ub.port;
+  }
+  var BrowserImage = class extends ImageBase {
+    _getCanvas() {
+      if (!this._canvas) {
+        throw new Error("Canvas is not initialized");
+      }
+      return this._canvas;
+    }
+    _getContext() {
+      if (!this._context) {
+        throw new Error("Context is not initialized");
+      }
+      return this._context;
+    }
+    _getWidth() {
+      if (!this._width) {
+        throw new Error("Width is not initialized");
+      }
+      return this._width;
+    }
+    _getHeight() {
+      if (!this._height) {
+        throw new Error("Height is not initialized");
+      }
+      return this._height;
+    }
+    _initCanvas() {
+      const img = this.image;
+      if (!img) {
+        throw new Error("Image is not initialized");
+      }
+      const canvas = this._canvas = document.createElement("canvas");
+      const context = canvas.getContext("2d");
+      if (!context) throw new ReferenceError("Failed to create canvas context");
+      this._context = context;
+      canvas.className = "@vibrant/canvas";
+      canvas.style.display = "none";
+      this._width = canvas.width = img.width;
+      this._height = canvas.height = img.height;
+      context.drawImage(img, 0, 0);
+      document.body.appendChild(canvas);
+    }
+    load(image) {
+      let img;
+      let src;
+      if (typeof image === "string") {
+        img = document.createElement("img");
+        src = image;
+        if (!isRelativeUrl(src) && !isSameOrigin(window.location.href, src)) {
+          img.crossOrigin = "anonymous";
+        }
+        img.src = src;
+      } else if (image instanceof HTMLImageElement) {
+        img = image;
+        src = image.src;
+      } else {
+        return Promise.reject(
+          new Error(`Cannot load buffer as an image in browser`)
+        );
+      }
+      this.image = img;
+      return new Promise((resolve, reject) => {
+        const onImageLoad = () => {
+          this._initCanvas();
+          resolve(this);
+        };
+        if (img.complete) {
+          onImageLoad();
+        } else {
+          img.onload = onImageLoad;
+          img.onerror = (_e) => reject(new Error(`Fail to load image: ${src}`));
+        }
+      });
+    }
+    clear() {
+      this._getContext().clearRect(0, 0, this._getWidth(), this._getHeight());
+    }
+    update(imageData) {
+      this._getContext().putImageData(imageData, 0, 0);
+    }
+    getWidth() {
+      return this._getWidth();
+    }
+    getHeight() {
+      return this._getHeight();
+    }
+    resize(targetWidth, targetHeight, ratio) {
+      if (!this.image) {
+        throw new Error("Image is not initialized");
+      }
+      this._width = this._getCanvas().width = targetWidth;
+      this._height = this._getCanvas().height = targetHeight;
+      this._getContext().scale(ratio, ratio);
+      this._getContext().drawImage(this.image, 0, 0);
+    }
+    getPixelCount() {
+      return this._getWidth() * this._getHeight();
+    }
+    getImageData() {
+      return this._getContext().getImageData(
+        0,
+        0,
+        this._getWidth(),
+        this._getHeight()
+      );
+    }
+    remove() {
+      if (this._canvas && this._canvas.parentNode) {
+        this._canvas.parentNode.removeChild(this._canvas);
+      }
+    }
+  };
+
+  // node_modules/@vibrant/core/dist/esm/utils.js
+  function assignDeep(target, ...sources) {
+    sources.forEach((s3) => {
+      if (!s3) return;
+      for (const key in s3) {
+        if (s3.hasOwnProperty(key)) {
+          const v3 = s3[key];
+          if (Array.isArray(v3)) {
+            target[key] = v3.slice(0);
+          } else if (typeof v3 === "object") {
+            if (!target[key]) target[key] = {};
+            assignDeep(target[key], v3);
+          } else {
+            target[key] = v3;
+          }
+        }
+      }
+    });
+    return target;
+  }
+
+  // node_modules/@vibrant/core/dist/esm/options.js
+  function buildProcessOptions(opts, override) {
+    const { colorCount, quantizer, generators, filters } = opts;
+    const commonQuantizerOpts = { colorCount };
+    const q = typeof quantizer === "string" ? { name: quantizer, options: {} } : quantizer;
+    q.options = assignDeep({}, commonQuantizerOpts, q.options);
+    return assignDeep(
+      {},
+      {
+        quantizer: q,
+        generators,
+        filters
+      },
+      override
+    );
+  }
+
+  // node_modules/@vibrant/core/dist/esm/builder.js
+  var Builder = class {
+    /**
+     * Arguments are the same as `Vibrant.constructor`.
+     */
+    constructor(src, opts = {}) {
+      this._src = src;
+      this._opts = assignDeep({}, Vibrant.DefaultOpts, opts);
+    }
+    /**
+     * Sets `opts.colorCount` to `n`.
+     * @returns this `Builder` instance.
+     */
+    maxColorCount(n3) {
+      this._opts.colorCount = n3;
+      return this;
+    }
+    /**
+     * Sets `opts.maxDimension` to `d`.
+     * @returns this `Builder` instance.
+     */
+    maxDimension(d3) {
+      this._opts.maxDimension = d3;
+      return this;
+    }
+    /**
+     * Adds a filter function
+     * @returns this `Builder` instance.
+     */
+    addFilter(name2) {
+      if (!this._opts.filters) {
+        this._opts.filters = [name2];
+      } else {
+        this._opts.filters.push(name2);
+      }
+      return this;
+    }
+    /**
+     * Removes a filter function.
+     * @returns this `Builder` instance.
+     */
+    removeFilter(name2) {
+      if (this._opts.filters) {
+        const i3 = this._opts.filters.indexOf(name2);
+        if (i3 > 0) this._opts.filters.splice(i3);
+      }
+      return this;
+    }
+    /**
+     * Clear all filters.
+     * @returns this `Builder` instance.
+     */
+    clearFilters() {
+      this._opts.filters = [];
+      return this;
+    }
+    /**
+     * Sets `opts.quality` to `q`.
+     * @returns this `Builder` instance.
+     */
+    quality(q) {
+      this._opts.quality = q;
+      return this;
+    }
+    /**
+     * Specifies which `Image` implementation class to use.
+     * @returns this `Builder` instance.
+     */
+    useImageClass(imageClass) {
+      this._opts.ImageClass = imageClass;
+      return this;
+    }
+    /**
+     * Sets `opts.generator` to `generator`
+     * @returns this `Builder` instance.
+     */
+    useGenerator(generator, options) {
+      if (!this._opts.generators) this._opts.generators = [];
+      this._opts.generators.push(
+        options ? { name: generator, options } : generator
+      );
+      return this;
+    }
+    /**
+     * Specifies which `Quantizer` implementation class to use
+     * @returns this `Builder` instance.
+     */
+    useQuantizer(quantizer, options) {
+      this._opts.quantizer = options ? { name: quantizer, options } : quantizer;
+      return this;
+    }
+    /**
+     * Builds and returns a `Vibrant` instance as configured.
+     */
+    build() {
+      return new Vibrant(this._src, this._opts);
+    }
+    /**
+     * Builds a `Vibrant` instance as configured and calls its `getPalette` method.
+     */
+    getPalette() {
+      return this.build().getPalette();
+    }
+  };
+
+  // node_modules/@vibrant/core/dist/esm/pipeline/index.js
+  var Stage = class {
+    constructor(pipeline2) {
+      this.pipeline = pipeline2;
+      this._map = {};
+    }
+    names() {
+      return Object.keys(this._map);
+    }
+    has(name2) {
+      return !!this._map[name2];
+    }
+    get(name2) {
+      return this._map[name2];
+    }
+    register(name2, stageFn) {
+      this._map[name2] = stageFn;
+      return this.pipeline;
+    }
+  };
+  var BasicPipeline = class {
+    constructor() {
+      this.filter = new Stage(this);
+      this.quantizer = new Stage(this);
+      this.generator = new Stage(this);
+    }
+    _buildProcessTasks({
+      filters,
+      quantizer,
+      generators
+    }) {
+      if (generators.length === 1 && generators[0] === "*") {
+        generators = this.generator.names();
+      }
+      return {
+        filters: filters.map((f3) => createTask(this.filter, f3)),
+        quantizer: createTask(this.quantizer, quantizer),
+        generators: generators.map((g2) => createTask(this.generator, g2))
+      };
+      function createTask(stage, o3) {
+        let name2;
+        let options;
+        if (typeof o3 === "string") {
+          name2 = o3;
+        } else {
+          name2 = o3.name;
+          options = o3.options;
+        }
+        return {
+          name: name2,
+          fn: stage.get(name2),
+          options
+        };
+      }
+    }
+    async process(imageData, opts) {
+      const { filters, quantizer, generators } = this._buildProcessTasks(opts);
+      const imageFilterData = await this._filterColors(filters, imageData);
+      const colors = await this._generateColors(quantizer, imageFilterData);
+      const palettes = await this._generatePalettes(generators, colors);
+      return {
+        colors,
+        palettes
+      };
+    }
+    _filterColors(filters, imageData) {
+      return Promise.resolve(
+        applyFilters(
+          imageData,
+          filters.map(({ fn }) => fn)
+        )
+      );
+    }
+    _generateColors(quantizer, imageData) {
+      return Promise.resolve(quantizer.fn(imageData.data, quantizer.options));
+    }
+    async _generatePalettes(generators, colors) {
+      const promiseArr = await Promise.all(
+        generators.map(({ fn, options }) => Promise.resolve(fn(colors, options)))
+      );
+      return Promise.resolve(
+        promiseArr.reduce(
+          (promises, promiseVal, i3) => {
+            promises[generators[i3].name] = promiseVal;
+            return promises;
+          },
+          {}
+        )
+      );
+    }
+  };
+
+  // node_modules/@vibrant/color/dist/esm/converter.js
+  function rgbToHex(r3, g2, b3) {
+    return "#" + ((1 << 24) + (r3 << 16) + (g2 << 8) + b3).toString(16).slice(1, 7);
+  }
+  function rgbToHsl(r3, g2, b3) {
+    r3 /= 255;
+    g2 /= 255;
+    b3 /= 255;
+    const max = Math.max(r3, g2, b3);
+    const min = Math.min(r3, g2, b3);
+    let h3 = 0;
+    let s3 = 0;
+    const l3 = (max + min) / 2;
+    if (max !== min) {
+      const d3 = max - min;
+      s3 = l3 > 0.5 ? d3 / (2 - max - min) : d3 / (max + min);
+      switch (max) {
+        case r3:
+          h3 = (g2 - b3) / d3 + (g2 < b3 ? 6 : 0);
+          break;
+        case g2:
+          h3 = (b3 - r3) / d3 + 2;
+          break;
+        case b3:
+          h3 = (r3 - g2) / d3 + 4;
+          break;
+      }
+      h3 /= 6;
+    }
+    return [h3, s3, l3];
+  }
+  function hslToRgb(h3, s3, l3) {
+    let r3;
+    let g2;
+    let b3;
+    function hue2rgb(p3, q, t3) {
+      if (t3 < 0) t3 += 1;
+      if (t3 > 1) t3 -= 1;
+      if (t3 < 1 / 6) return p3 + (q - p3) * 6 * t3;
+      if (t3 < 1 / 2) return q;
+      if (t3 < 2 / 3) return p3 + (q - p3) * (2 / 3 - t3) * 6;
+      return p3;
+    }
+    if (s3 === 0) {
+      r3 = g2 = b3 = l3;
+    } else {
+      const q = l3 < 0.5 ? l3 * (1 + s3) : l3 + s3 - l3 * s3;
+      const p3 = 2 * l3 - q;
+      r3 = hue2rgb(p3, q, h3 + 1 / 3);
+      g2 = hue2rgb(p3, q, h3);
+      b3 = hue2rgb(p3, q, h3 - 1 / 3);
+    }
+    return [r3 * 255, g2 * 255, b3 * 255];
+  }
+
+  // node_modules/@vibrant/color/dist/esm/index.js
+  var Swatch = class _Swatch {
+    static applyFilters(colors, filters) {
+      return filters.length > 0 ? colors.filter(({ r: r3, g: g2, b: b3 }) => {
+        var _a;
+        for (let j2 = 0; j2 < filters.length; j2++) {
+          if (!((_a = filters[j2]) == null ? void 0 : _a.call(filters, r3, g2, b3, 255))) return false;
+        }
+        return true;
+      }) : colors;
+    }
+    /**
+     * Make a value copy of a swatch based on a previous one. Returns a new Swatch instance
+     * @param {Swatch} swatch
+     */
+    static clone(swatch) {
+      return new _Swatch(swatch._rgb, swatch._population);
+    }
+    /**
+     * The red value in the RGB value
+     */
+    get r() {
+      return this._rgb[0];
+    }
+    /**
+     * The green value in the RGB value
+     */
+    get g() {
+      return this._rgb[1];
+    }
+    /**
+     * The blue value in the RGB value
+     */
+    get b() {
+      return this._rgb[2];
+    }
+    /**
+     * The color value as a rgb value
+     */
+    get rgb() {
+      return this._rgb;
+    }
+    /**
+     * The color value as a hsl value
+     */
+    get hsl() {
+      if (!this._hsl) {
+        const [r3, g2, b3] = this._rgb;
+        this._hsl = rgbToHsl(r3, g2, b3);
+      }
+      return this._hsl;
+    }
+    /**
+     * The color value as a hex string
+     */
+    get hex() {
+      if (!this._hex) {
+        const [r3, g2, b3] = this._rgb;
+        this._hex = rgbToHex(r3, g2, b3);
+      }
+      return this._hex;
+    }
+    get population() {
+      return this._population;
+    }
+    /**
+     * Get the JSON object for the swatch
+     */
+    toJSON() {
+      return {
+        rgb: this.rgb,
+        population: this.population
+      };
+    }
+    getYiq() {
+      if (!this._yiq) {
+        const rgb = this._rgb;
+        this._yiq = (rgb[0] * 299 + rgb[1] * 587 + rgb[2] * 114) / 1e3;
+      }
+      return this._yiq;
+    }
+    /**
+     * Returns an appropriate color to use for any 'title' text which is displayed over this Swatch's color.
+     */
+    get titleTextColor() {
+      if (!this._titleTextColor) {
+        this._titleTextColor = this.getYiq() < 200 ? "#fff" : "#000";
+      }
+      return this._titleTextColor;
+    }
+    /**
+     * Returns an appropriate color to use for any 'body' text which is displayed over this Swatch's color.
+     */
+    get bodyTextColor() {
+      if (!this._bodyTextColor) {
+        this._bodyTextColor = this.getYiq() < 150 ? "#fff" : "#000";
+      }
+      return this._bodyTextColor;
+    }
+    /**
+     * Internal use.
+     * @param rgb `[r, g, b]`
+     * @param population Population of the color in an image
+     */
+    constructor(rgb, population) {
+      this._rgb = rgb;
+      this._population = population;
+    }
+  };
+
+  // node_modules/@vibrant/core/dist/esm/index.js
+  var _Vibrant = class _Vibrant2 {
+    /**
+     *
+     * @param _src Path to image file (supports HTTP/HTTPs)
+     * @param opts Options (optional)
+     */
+    constructor(_src, opts) {
+      this._src = _src;
+      this.opts = assignDeep({}, _Vibrant2.DefaultOpts, opts);
+    }
+    static use(pipeline2) {
+      this._pipeline = pipeline2;
+    }
+    static from(src) {
+      return new Builder(src);
+    }
+    get result() {
+      return this._result;
+    }
+    _process(image, opts) {
+      image.scaleDown(this.opts);
+      const processOpts = buildProcessOptions(this.opts, opts);
+      return _Vibrant2._pipeline.process(image.getImageData(), processOpts);
+    }
+    async getPalette() {
+      const image = new this.opts.ImageClass();
+      try {
+        const image1 = await image.load(this._src);
+        const result1 = await this._process(image1, {
+          generators: ["default"]
+        });
+        this._result = result1;
+        const res = result1.palettes["default"];
+        if (!res) {
+          throw new Error(
+            `Something went wrong and a palette was not found, please file a bug against our GitHub repo: https://github.com/vibrant-Colors/node-vibrant/`
+          );
+        }
+        image.remove();
+        return res;
+      } catch (err) {
+        image.remove();
+        return Promise.reject(err);
+      }
+    }
+    async getPalettes() {
+      const image = new this.opts.ImageClass();
+      try {
+        const image1 = await image.load(this._src);
+        const result1 = await this._process(image1, {
+          generators: ["*"]
+        });
+        this._result = result1;
+        const res = result1.palettes;
+        image.remove();
+        return res;
+      } catch (err) {
+        image.remove();
+        return Promise.reject(err);
+      }
+    }
+  };
+  _Vibrant.DefaultOpts = {
+    colorCount: 64,
+    quality: 5,
+    filters: []
+  };
+  var Vibrant = _Vibrant;
+
+  // node_modules/node-vibrant/dist/esm/configs/config.js
+  Vibrant.DefaultOpts.quantizer = "mmcq";
+  Vibrant.DefaultOpts.generators = ["default"];
+  Vibrant.DefaultOpts.filters = ["default"];
+
+  // node_modules/node-vibrant/dist/esm/configs/browser.js
+  Vibrant.DefaultOpts.ImageClass = BrowserImage;
+
+  // node_modules/@vibrant/quantizer-mmcq/dist/esm/vbox.js
+  var SIGBITS = 5;
+  var RSHIFT = 8 - SIGBITS;
+  var VBox = class _VBox {
+    constructor(r1, r22, g1, g2, b1, b22, histogram) {
+      this.histogram = histogram;
+      this._volume = -1;
+      this._avg = null;
+      this._count = -1;
+      this.dimension = { r1, r2: r22, g1, g2, b1, b2: b22 };
+    }
+    static build(pixels) {
+      const h3 = new Histogram(pixels, { sigBits: SIGBITS });
+      const { rmin, rmax, gmin, gmax, bmin, bmax } = h3;
+      return new _VBox(rmin, rmax, gmin, gmax, bmin, bmax, h3);
+    }
+    invalidate() {
+      this._volume = this._count = -1;
+      this._avg = null;
+    }
+    volume() {
+      if (this._volume < 0) {
+        const { r1, r2: r22, g1, g2, b1, b2: b22 } = this.dimension;
+        this._volume = (r22 - r1 + 1) * (g2 - g1 + 1) * (b22 - b1 + 1);
+      }
+      return this._volume;
+    }
+    count() {
+      if (this._count < 0) {
+        const { hist, getColorIndex } = this.histogram;
+        const { r1, r2: r22, g1, g2, b1, b2: b22 } = this.dimension;
+        let c3 = 0;
+        for (let r3 = r1; r3 <= r22; r3++) {
+          for (let g3 = g1; g3 <= g2; g3++) {
+            for (let b3 = b1; b3 <= b22; b3++) {
+              const index = getColorIndex(r3, g3, b3);
+              if (!hist[index]) {
+                continue;
+              }
+              c3 += hist[index];
+            }
+          }
+        }
+        this._count = c3;
+      }
+      return this._count;
+    }
+    clone() {
+      const { histogram } = this;
+      const { r1, r2: r22, g1, g2, b1, b2: b22 } = this.dimension;
+      return new _VBox(r1, r22, g1, g2, b1, b22, histogram);
+    }
+    avg() {
+      if (!this._avg) {
+        const { hist, getColorIndex } = this.histogram;
+        const { r1, r2: r22, g1, g2, b1, b2: b22 } = this.dimension;
+        let ntot = 0;
+        const mult = 1 << 8 - SIGBITS;
+        let rsum;
+        let gsum;
+        let bsum;
+        rsum = gsum = bsum = 0;
+        for (let r3 = r1; r3 <= r22; r3++) {
+          for (let g3 = g1; g3 <= g2; g3++) {
+            for (let b3 = b1; b3 <= b22; b3++) {
+              const index = getColorIndex(r3, g3, b3);
+              const h3 = hist[index];
+              if (!h3) continue;
+              ntot += h3;
+              rsum += h3 * (r3 + 0.5) * mult;
+              gsum += h3 * (g3 + 0.5) * mult;
+              bsum += h3 * (b3 + 0.5) * mult;
+            }
+          }
+        }
+        if (ntot) {
+          this._avg = [~~(rsum / ntot), ~~(gsum / ntot), ~~(bsum / ntot)];
+        } else {
+          this._avg = [
+            ~~(mult * (r1 + r22 + 1) / 2),
+            ~~(mult * (g1 + g2 + 1) / 2),
+            ~~(mult * (b1 + b22 + 1) / 2)
+          ];
+        }
+      }
+      return this._avg;
+    }
+    contains(rgb) {
+      let [r3, g2, b3] = rgb;
+      const { r1, r2: r22, g1, g2: g22, b1, b2: b22 } = this.dimension;
+      r3 >>= RSHIFT;
+      g2 >>= RSHIFT;
+      b3 >>= RSHIFT;
+      return r3 >= r1 && r3 <= r22 && g2 >= g1 && g2 <= g22 && b3 >= b1 && b3 <= b22;
+    }
+    split() {
+      const { hist, getColorIndex } = this.histogram;
+      const { r1, r2: r22, g1, g2, b1, b2: b22 } = this.dimension;
+      const count = this.count();
+      if (!count) return [];
+      if (count === 1) return [this.clone()];
+      const rw = r22 - r1 + 1;
+      const gw = g2 - g1 + 1;
+      const bw = b22 - b1 + 1;
+      const maxw = Math.max(rw, gw, bw);
+      let accSum = null;
+      let sum;
+      let total;
+      sum = total = 0;
+      let maxd = null;
+      if (maxw === rw) {
+        maxd = "r";
+        accSum = new Uint32Array(r22 + 1);
+        for (let r3 = r1; r3 <= r22; r3++) {
+          sum = 0;
+          for (let g3 = g1; g3 <= g2; g3++) {
+            for (let b3 = b1; b3 <= b22; b3++) {
+              const index = getColorIndex(r3, g3, b3);
+              if (!hist[index]) continue;
+              sum += hist[index];
+            }
+          }
+          total += sum;
+          accSum[r3] = total;
+        }
+      } else if (maxw === gw) {
+        maxd = "g";
+        accSum = new Uint32Array(g2 + 1);
+        for (let g3 = g1; g3 <= g2; g3++) {
+          sum = 0;
+          for (let r3 = r1; r3 <= r22; r3++) {
+            for (let b3 = b1; b3 <= b22; b3++) {
+              const index = getColorIndex(r3, g3, b3);
+              if (!hist[index]) continue;
+              sum += hist[index];
+            }
+          }
+          total += sum;
+          accSum[g3] = total;
+        }
+      } else {
+        maxd = "b";
+        accSum = new Uint32Array(b22 + 1);
+        for (let b3 = b1; b3 <= b22; b3++) {
+          sum = 0;
+          for (let r3 = r1; r3 <= r22; r3++) {
+            for (let g3 = g1; g3 <= g2; g3++) {
+              const index = getColorIndex(r3, g3, b3);
+              if (!hist[index]) continue;
+              sum += hist[index];
+            }
+          }
+          total += sum;
+          accSum[b3] = total;
+        }
+      }
+      let splitPoint = -1;
+      const reverseSum = new Uint32Array(accSum.length);
+      for (let i3 = 0; i3 < accSum.length; i3++) {
+        const d3 = accSum[i3];
+        if (!d3) continue;
+        if (splitPoint < 0 && d3 > total / 2) splitPoint = i3;
+        reverseSum[i3] = total - d3;
+      }
+      const vbox = this;
+      function doCut(d3) {
+        const dim1 = d3 + "1";
+        const dim2 = d3 + "2";
+        const d1 = vbox.dimension[dim1];
+        let d22 = vbox.dimension[dim2];
+        const vbox1 = vbox.clone();
+        const vbox2 = vbox.clone();
+        const left = splitPoint - d1;
+        const right = d22 - splitPoint;
+        if (left <= right) {
+          d22 = Math.min(d22 - 1, ~~(splitPoint + right / 2));
+          d22 = Math.max(0, d22);
+        } else {
+          d22 = Math.max(d1, ~~(splitPoint - 1 - left / 2));
+          d22 = Math.min(vbox.dimension[dim2], d22);
+        }
+        while (!accSum[d22]) d22++;
+        let c22 = reverseSum[d22];
+        while (!c22 && accSum[d22 - 1]) c22 = reverseSum[--d22];
+        vbox1.dimension[dim2] = d22;
+        vbox2.dimension[dim1] = d22 + 1;
+        return [vbox1, vbox2];
+      }
+      return doCut(maxd);
+    }
+  };
+
+  // node_modules/@vibrant/quantizer-mmcq/dist/esm/pqueue.js
+  var PQueue = class {
+    _sort() {
+      if (!this._sorted) {
+        this.contents.sort(this._comparator);
+        this._sorted = true;
+      }
+    }
+    constructor(comparator) {
+      this._comparator = comparator;
+      this.contents = [];
+      this._sorted = false;
+    }
+    push(item) {
+      this.contents.push(item);
+      this._sorted = false;
+    }
+    peek(index) {
+      this._sort();
+      index = typeof index === "number" ? index : this.contents.length - 1;
+      return this.contents[index];
+    }
+    pop() {
+      this._sort();
+      return this.contents.pop();
+    }
+    size() {
+      return this.contents.length;
+    }
+    map(mapper) {
+      this._sort();
+      return this.contents.map(mapper);
+    }
+  };
+
+  // node_modules/@vibrant/quantizer-mmcq/dist/esm/index.js
+  var fractByPopulations = 0.75;
+  function _splitBoxes(pq, target) {
+    let lastSize = pq.size();
+    while (pq.size() < target) {
+      const vbox = pq.pop();
+      if (vbox && vbox.count() > 0) {
+        const [vbox1, vbox2] = vbox.split();
+        if (!vbox1) break;
+        pq.push(vbox1);
+        if (vbox2 && vbox2.count() > 0) pq.push(vbox2);
+        if (pq.size() === lastSize) {
+          break;
+        } else {
+          lastSize = pq.size();
+        }
+      } else {
+        break;
+      }
+    }
+  }
+  var MMCQ = (pixels, opts) => {
+    if (pixels.length === 0 || opts.colorCount < 2 || opts.colorCount > 256) {
+      throw new Error("Wrong MMCQ parameters");
+    }
+    const vbox = VBox.build(pixels);
+    vbox.histogram.colorCount;
+    const pq = new PQueue((a3, b3) => a3.count() - b3.count());
+    pq.push(vbox);
+    _splitBoxes(pq, fractByPopulations * opts.colorCount);
+    const pq2 = new PQueue(
+      (a3, b3) => a3.count() * a3.volume() - b3.count() * b3.volume()
+    );
+    pq2.contents = pq.contents;
+    _splitBoxes(pq2, opts.colorCount - pq2.size());
+    return generateSwatches(pq2);
+  };
+  function generateSwatches(pq) {
+    const swatches = [];
+    while (pq.size()) {
+      const v3 = pq.pop();
+      const color = v3.avg();
+      swatches.push(new Swatch(color, v3.count()));
+    }
+    return swatches;
+  }
+
+  // node_modules/@vibrant/generator-default/dist/esm/index.js
+  var DefaultOpts = {
+    targetDarkLuma: 0.26,
+    maxDarkLuma: 0.45,
+    minLightLuma: 0.55,
+    targetLightLuma: 0.74,
+    minNormalLuma: 0.3,
+    targetNormalLuma: 0.5,
+    maxNormalLuma: 0.7,
+    targetMutesSaturation: 0.3,
+    maxMutesSaturation: 0.4,
+    targetVibrantSaturation: 1,
+    minVibrantSaturation: 0.35,
+    weightSaturation: 3,
+    weightLuma: 6.5,
+    weightPopulation: 0.5
+  };
+  function _findMaxPopulation(swatches) {
+    let p3 = 0;
+    swatches.forEach((s3) => {
+      p3 = Math.max(p3, s3.population);
+    });
+    return p3;
+  }
+  function _isAlreadySelected(palette, s3) {
+    return palette.Vibrant === s3 || palette.DarkVibrant === s3 || palette.LightVibrant === s3 || palette.Muted === s3 || palette.DarkMuted === s3 || palette.LightMuted === s3;
+  }
+  function _createComparisonValue(saturation, targetSaturation, luma, targetLuma, population, maxPopulation, opts) {
+    function weightedMean(...values) {
+      let sum = 0;
+      let weightSum = 0;
+      for (let i3 = 0; i3 < values.length; i3 += 2) {
+        const value = values[i3];
+        const weight = values[i3 + 1];
+        if (!value || !weight) continue;
+        sum += value * weight;
+        weightSum += weight;
+      }
+      return sum / weightSum;
+    }
+    function invertDiff(value, targetValue) {
+      return 1 - Math.abs(value - targetValue);
+    }
+    return weightedMean(
+      invertDiff(saturation, targetSaturation),
+      opts.weightSaturation,
+      invertDiff(luma, targetLuma),
+      opts.weightLuma,
+      population / maxPopulation,
+      opts.weightPopulation
+    );
+  }
+  function _findColorVariation(palette, swatches, maxPopulation, targetLuma, minLuma, maxLuma, targetSaturation, minSaturation, maxSaturation, opts) {
+    let max = null;
+    let maxValue = 0;
+    swatches.forEach((swatch) => {
+      const [, s3, l3] = swatch.hsl;
+      if (s3 >= minSaturation && s3 <= maxSaturation && l3 >= minLuma && l3 <= maxLuma && !_isAlreadySelected(palette, swatch)) {
+        const value = _createComparisonValue(
+          s3,
+          targetSaturation,
+          l3,
+          targetLuma,
+          swatch.population,
+          maxPopulation,
+          opts
+        );
+        if (max === null || value > maxValue) {
+          max = swatch;
+          maxValue = value;
+        }
+      }
+    });
+    return max;
+  }
+  function _generateVariationColors(swatches, maxPopulation, opts) {
+    const palette = {
+      Vibrant: null,
+      DarkVibrant: null,
+      LightVibrant: null,
+      Muted: null,
+      DarkMuted: null,
+      LightMuted: null
+    };
+    palette.Vibrant = _findColorVariation(
+      palette,
+      swatches,
+      maxPopulation,
+      opts.targetNormalLuma,
+      opts.minNormalLuma,
+      opts.maxNormalLuma,
+      opts.targetVibrantSaturation,
+      opts.minVibrantSaturation,
+      1,
+      opts
+    );
+    palette.LightVibrant = _findColorVariation(
+      palette,
+      swatches,
+      maxPopulation,
+      opts.targetLightLuma,
+      opts.minLightLuma,
+      1,
+      opts.targetVibrantSaturation,
+      opts.minVibrantSaturation,
+      1,
+      opts
+    );
+    palette.DarkVibrant = _findColorVariation(
+      palette,
+      swatches,
+      maxPopulation,
+      opts.targetDarkLuma,
+      0,
+      opts.maxDarkLuma,
+      opts.targetVibrantSaturation,
+      opts.minVibrantSaturation,
+      1,
+      opts
+    );
+    palette.Muted = _findColorVariation(
+      palette,
+      swatches,
+      maxPopulation,
+      opts.targetNormalLuma,
+      opts.minNormalLuma,
+      opts.maxNormalLuma,
+      opts.targetMutesSaturation,
+      0,
+      opts.maxMutesSaturation,
+      opts
+    );
+    palette.LightMuted = _findColorVariation(
+      palette,
+      swatches,
+      maxPopulation,
+      opts.targetLightLuma,
+      opts.minLightLuma,
+      1,
+      opts.targetMutesSaturation,
+      0,
+      opts.maxMutesSaturation,
+      opts
+    );
+    palette.DarkMuted = _findColorVariation(
+      palette,
+      swatches,
+      maxPopulation,
+      opts.targetDarkLuma,
+      0,
+      opts.maxDarkLuma,
+      opts.targetMutesSaturation,
+      0,
+      opts.maxMutesSaturation,
+      opts
+    );
+    return palette;
+  }
+  function _generateEmptySwatches(palette, _maxPopulation, opts) {
+    if (!palette.Vibrant && !palette.DarkVibrant && !palette.LightVibrant) {
+      if (!palette.DarkVibrant && palette.DarkMuted) {
+        let [h3, s3, l3] = palette.DarkMuted.hsl;
+        l3 = opts.targetDarkLuma;
+        palette.DarkVibrant = new Swatch(hslToRgb(h3, s3, l3), 0);
+      }
+      if (!palette.LightVibrant && palette.LightMuted) {
+        let [h3, s3, l3] = palette.LightMuted.hsl;
+        l3 = opts.targetDarkLuma;
+        palette.DarkVibrant = new Swatch(hslToRgb(h3, s3, l3), 0);
+      }
+    }
+    if (!palette.Vibrant && palette.DarkVibrant) {
+      let [h3, s3, l3] = palette.DarkVibrant.hsl;
+      l3 = opts.targetNormalLuma;
+      palette.Vibrant = new Swatch(hslToRgb(h3, s3, l3), 0);
+    } else if (!palette.Vibrant && palette.LightVibrant) {
+      let [h3, s3, l3] = palette.LightVibrant.hsl;
+      l3 = opts.targetNormalLuma;
+      palette.Vibrant = new Swatch(hslToRgb(h3, s3, l3), 0);
+    }
+    if (!palette.DarkVibrant && palette.Vibrant) {
+      let [h3, s3, l3] = palette.Vibrant.hsl;
+      l3 = opts.targetDarkLuma;
+      palette.DarkVibrant = new Swatch(hslToRgb(h3, s3, l3), 0);
+    }
+    if (!palette.LightVibrant && palette.Vibrant) {
+      let [h3, s3, l3] = palette.Vibrant.hsl;
+      l3 = opts.targetLightLuma;
+      palette.LightVibrant = new Swatch(hslToRgb(h3, s3, l3), 0);
+    }
+    if (!palette.Muted && palette.Vibrant) {
+      let [h3, s3, l3] = palette.Vibrant.hsl;
+      l3 = opts.targetMutesSaturation;
+      palette.Muted = new Swatch(hslToRgb(h3, s3, l3), 0);
+    }
+    if (!palette.DarkMuted && palette.DarkVibrant) {
+      let [h3, s3, l3] = palette.DarkVibrant.hsl;
+      l3 = opts.targetMutesSaturation;
+      palette.DarkMuted = new Swatch(hslToRgb(h3, s3, l3), 0);
+    }
+    if (!palette.LightMuted && palette.LightVibrant) {
+      let [h3, s3, l3] = palette.LightVibrant.hsl;
+      l3 = opts.targetMutesSaturation;
+      palette.LightMuted = new Swatch(hslToRgb(h3, s3, l3), 0);
+    }
+  }
+  var DefaultGenerator = (swatches, opts) => {
+    opts = Object.assign({}, DefaultOpts, opts);
+    const maxPopulation = _findMaxPopulation(swatches);
+    const palette = _generateVariationColors(swatches, maxPopulation, opts);
+    _generateEmptySwatches(palette, maxPopulation, opts);
+    return palette;
+  };
+
+  // node_modules/node-vibrant/dist/esm/pipeline/index.js
+  var pipeline = new BasicPipeline().filter.register(
+    "default",
+    (r3, g2, b3, a3) => a3 >= 125 && !(r3 > 250 && g2 > 250 && b3 > 250)
+  ).quantizer.register("mmcq", MMCQ).generator.register("default", DefaultGenerator);
+
+  // node_modules/node-vibrant/dist/esm/browser.js
+  Vibrant.use(pipeline);
+
+  // node_modules/colord/index.mjs
+  var r = { grad: 0.9, turn: 360, rad: 360 / (2 * Math.PI) };
+  var t = function(r3) {
+    return "string" == typeof r3 ? r3.length > 0 : "number" == typeof r3;
+  };
+  var n = function(r3, t3, n3) {
+    return void 0 === t3 && (t3 = 0), void 0 === n3 && (n3 = Math.pow(10, t3)), Math.round(n3 * r3) / n3 + 0;
+  };
+  var e = function(r3, t3, n3) {
+    return void 0 === t3 && (t3 = 0), void 0 === n3 && (n3 = 1), r3 > n3 ? n3 : r3 > t3 ? r3 : t3;
+  };
+  var u = function(r3) {
+    return (r3 = isFinite(r3) ? r3 % 360 : 0) > 0 ? r3 : r3 + 360;
+  };
+  var a = function(r3) {
+    return { r: e(r3.r, 0, 255), g: e(r3.g, 0, 255), b: e(r3.b, 0, 255), a: e(r3.a) };
+  };
+  var o = function(r3) {
+    return { r: n(r3.r), g: n(r3.g), b: n(r3.b), a: n(r3.a, 3) };
+  };
+  var i = /^#([0-9a-f]{3,8})$/i;
+  var s = function(r3) {
+    var t3 = r3.toString(16);
+    return t3.length < 2 ? "0" + t3 : t3;
+  };
+  var h = function(r3) {
+    var t3 = r3.r, n3 = r3.g, e3 = r3.b, u3 = r3.a, a3 = Math.max(t3, n3, e3), o3 = a3 - Math.min(t3, n3, e3), i3 = o3 ? a3 === t3 ? (n3 - e3) / o3 : a3 === n3 ? 2 + (e3 - t3) / o3 : 4 + (t3 - n3) / o3 : 0;
+    return { h: 60 * (i3 < 0 ? i3 + 6 : i3), s: a3 ? o3 / a3 * 100 : 0, v: a3 / 255 * 100, a: u3 };
+  };
+  var b = function(r3) {
+    var t3 = r3.h, n3 = r3.s, e3 = r3.v, u3 = r3.a;
+    t3 = t3 / 360 * 6, n3 /= 100, e3 /= 100;
+    var a3 = Math.floor(t3), o3 = e3 * (1 - n3), i3 = e3 * (1 - (t3 - a3) * n3), s3 = e3 * (1 - (1 - t3 + a3) * n3), h3 = a3 % 6;
+    return { r: 255 * [e3, i3, o3, o3, s3, e3][h3], g: 255 * [s3, e3, e3, i3, o3, o3][h3], b: 255 * [o3, o3, s3, e3, e3, i3][h3], a: u3 };
+  };
+  var g = function(r3) {
+    return { h: u(r3.h), s: e(r3.s, 0, 100), l: e(r3.l, 0, 100), a: e(r3.a) };
+  };
+  var d = function(r3) {
+    return { h: n(r3.h), s: n(r3.s), l: n(r3.l), a: n(r3.a, 3) };
+  };
+  var f = function(r3) {
+    return b((n3 = (t3 = r3).s, { h: t3.h, s: (n3 *= ((e3 = t3.l) < 50 ? e3 : 100 - e3) / 100) > 0 ? 2 * n3 / (e3 + n3) * 100 : 0, v: e3 + n3, a: t3.a }));
+    var t3, n3, e3;
+  };
+  var c = function(r3) {
+    return { h: (t3 = h(r3)).h, s: (u3 = (200 - (n3 = t3.s)) * (e3 = t3.v) / 100) > 0 && u3 < 200 ? n3 * e3 / 100 / (u3 <= 100 ? u3 : 200 - u3) * 100 : 0, l: u3 / 2, a: t3.a };
+    var t3, n3, e3, u3;
+  };
+  var l = /^hsla?\(\s*([+-]?\d*\.?\d+)(deg|rad|grad|turn)?\s*,\s*([+-]?\d*\.?\d+)%\s*,\s*([+-]?\d*\.?\d+)%\s*(?:,\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
+  var p = /^hsla?\(\s*([+-]?\d*\.?\d+)(deg|rad|grad|turn)?\s+([+-]?\d*\.?\d+)%\s+([+-]?\d*\.?\d+)%\s*(?:\/\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
+  var v = /^rgba?\(\s*([+-]?\d*\.?\d+)(%)?\s*,\s*([+-]?\d*\.?\d+)(%)?\s*,\s*([+-]?\d*\.?\d+)(%)?\s*(?:,\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
+  var m = /^rgba?\(\s*([+-]?\d*\.?\d+)(%)?\s+([+-]?\d*\.?\d+)(%)?\s+([+-]?\d*\.?\d+)(%)?\s*(?:\/\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
+  var y = { string: [[function(r3) {
+    var t3 = i.exec(r3);
+    return t3 ? (r3 = t3[1]).length <= 4 ? { r: parseInt(r3[0] + r3[0], 16), g: parseInt(r3[1] + r3[1], 16), b: parseInt(r3[2] + r3[2], 16), a: 4 === r3.length ? n(parseInt(r3[3] + r3[3], 16) / 255, 2) : 1 } : 6 === r3.length || 8 === r3.length ? { r: parseInt(r3.substr(0, 2), 16), g: parseInt(r3.substr(2, 2), 16), b: parseInt(r3.substr(4, 2), 16), a: 8 === r3.length ? n(parseInt(r3.substr(6, 2), 16) / 255, 2) : 1 } : null : null;
+  }, "hex"], [function(r3) {
+    var t3 = v.exec(r3) || m.exec(r3);
+    return t3 ? t3[2] !== t3[4] || t3[4] !== t3[6] ? null : a({ r: Number(t3[1]) / (t3[2] ? 100 / 255 : 1), g: Number(t3[3]) / (t3[4] ? 100 / 255 : 1), b: Number(t3[5]) / (t3[6] ? 100 / 255 : 1), a: void 0 === t3[7] ? 1 : Number(t3[7]) / (t3[8] ? 100 : 1) }) : null;
+  }, "rgb"], [function(t3) {
+    var n3 = l.exec(t3) || p.exec(t3);
+    if (!n3) return null;
+    var e3, u3, a3 = g({ h: (e3 = n3[1], u3 = n3[2], void 0 === u3 && (u3 = "deg"), Number(e3) * (r[u3] || 1)), s: Number(n3[3]), l: Number(n3[4]), a: void 0 === n3[5] ? 1 : Number(n3[5]) / (n3[6] ? 100 : 1) });
+    return f(a3);
+  }, "hsl"]], object: [[function(r3) {
+    var n3 = r3.r, e3 = r3.g, u3 = r3.b, o3 = r3.a, i3 = void 0 === o3 ? 1 : o3;
+    return t(n3) && t(e3) && t(u3) ? a({ r: Number(n3), g: Number(e3), b: Number(u3), a: Number(i3) }) : null;
+  }, "rgb"], [function(r3) {
+    var n3 = r3.h, e3 = r3.s, u3 = r3.l, a3 = r3.a, o3 = void 0 === a3 ? 1 : a3;
+    if (!t(n3) || !t(e3) || !t(u3)) return null;
+    var i3 = g({ h: Number(n3), s: Number(e3), l: Number(u3), a: Number(o3) });
+    return f(i3);
+  }, "hsl"], [function(r3) {
+    var n3 = r3.h, a3 = r3.s, o3 = r3.v, i3 = r3.a, s3 = void 0 === i3 ? 1 : i3;
+    if (!t(n3) || !t(a3) || !t(o3)) return null;
+    var h3 = (function(r4) {
+      return { h: u(r4.h), s: e(r4.s, 0, 100), v: e(r4.v, 0, 100), a: e(r4.a) };
+    })({ h: Number(n3), s: Number(a3), v: Number(o3), a: Number(s3) });
+    return b(h3);
+  }, "hsv"]] };
+  var N = function(r3, t3) {
+    for (var n3 = 0; n3 < t3.length; n3++) {
+      var e3 = t3[n3][0](r3);
+      if (e3) return [e3, t3[n3][1]];
+    }
+    return [null, void 0];
+  };
+  var x = function(r3) {
+    return "string" == typeof r3 ? N(r3.trim(), y.string) : "object" == typeof r3 && null !== r3 ? N(r3, y.object) : [null, void 0];
+  };
+  var M = function(r3, t3) {
+    var n3 = c(r3);
+    return { h: n3.h, s: e(n3.s + 100 * t3, 0, 100), l: n3.l, a: n3.a };
+  };
+  var H = function(r3) {
+    return (299 * r3.r + 587 * r3.g + 114 * r3.b) / 1e3 / 255;
+  };
+  var $ = function(r3, t3) {
+    var n3 = c(r3);
+    return { h: n3.h, s: n3.s, l: e(n3.l + 100 * t3, 0, 100), a: n3.a };
+  };
+  var j = (function() {
+    function r3(r4) {
+      this.parsed = x(r4)[0], this.rgba = this.parsed || { r: 0, g: 0, b: 0, a: 1 };
+    }
+    return r3.prototype.isValid = function() {
+      return null !== this.parsed;
+    }, r3.prototype.brightness = function() {
+      return n(H(this.rgba), 2);
+    }, r3.prototype.isDark = function() {
+      return H(this.rgba) < 0.5;
+    }, r3.prototype.isLight = function() {
+      return H(this.rgba) >= 0.5;
+    }, r3.prototype.toHex = function() {
+      return r4 = o(this.rgba), t3 = r4.r, e3 = r4.g, u3 = r4.b, i3 = (a3 = r4.a) < 1 ? s(n(255 * a3)) : "", "#" + s(t3) + s(e3) + s(u3) + i3;
+      var r4, t3, e3, u3, a3, i3;
+    }, r3.prototype.toRgb = function() {
+      return o(this.rgba);
+    }, r3.prototype.toRgbString = function() {
+      return r4 = o(this.rgba), t3 = r4.r, n3 = r4.g, e3 = r4.b, (u3 = r4.a) < 1 ? "rgba(" + t3 + ", " + n3 + ", " + e3 + ", " + u3 + ")" : "rgb(" + t3 + ", " + n3 + ", " + e3 + ")";
+      var r4, t3, n3, e3, u3;
+    }, r3.prototype.toHsl = function() {
+      return d(c(this.rgba));
+    }, r3.prototype.toHslString = function() {
+      return r4 = d(c(this.rgba)), t3 = r4.h, n3 = r4.s, e3 = r4.l, (u3 = r4.a) < 1 ? "hsla(" + t3 + ", " + n3 + "%, " + e3 + "%, " + u3 + ")" : "hsl(" + t3 + ", " + n3 + "%, " + e3 + "%)";
+      var r4, t3, n3, e3, u3;
+    }, r3.prototype.toHsv = function() {
+      return r4 = h(this.rgba), { h: n(r4.h), s: n(r4.s), v: n(r4.v), a: n(r4.a, 3) };
+      var r4;
+    }, r3.prototype.invert = function() {
+      return w({ r: 255 - (r4 = this.rgba).r, g: 255 - r4.g, b: 255 - r4.b, a: r4.a });
+      var r4;
+    }, r3.prototype.saturate = function(r4) {
+      return void 0 === r4 && (r4 = 0.1), w(M(this.rgba, r4));
+    }, r3.prototype.desaturate = function(r4) {
+      return void 0 === r4 && (r4 = 0.1), w(M(this.rgba, -r4));
+    }, r3.prototype.grayscale = function() {
+      return w(M(this.rgba, -1));
+    }, r3.prototype.lighten = function(r4) {
+      return void 0 === r4 && (r4 = 0.1), w($(this.rgba, r4));
+    }, r3.prototype.darken = function(r4) {
+      return void 0 === r4 && (r4 = 0.1), w($(this.rgba, -r4));
+    }, r3.prototype.rotate = function(r4) {
+      return void 0 === r4 && (r4 = 15), this.hue(this.hue() + r4);
+    }, r3.prototype.alpha = function(r4) {
+      return "number" == typeof r4 ? w({ r: (t3 = this.rgba).r, g: t3.g, b: t3.b, a: r4 }) : n(this.rgba.a, 3);
+      var t3;
+    }, r3.prototype.hue = function(r4) {
+      var t3 = c(this.rgba);
+      return "number" == typeof r4 ? w({ h: r4, s: t3.s, l: t3.l, a: t3.a }) : n(t3.h);
+    }, r3.prototype.isEqual = function(r4) {
+      return this.toHex() === w(r4).toHex();
+    }, r3;
+  })();
+  var w = function(r3) {
+    return r3 instanceof j ? r3 : new j(r3);
+  };
+  var S = [];
+  var k = function(r3) {
+    r3.forEach(function(r4) {
+      S.indexOf(r4) < 0 && (r4(j, y), S.push(r4));
+    });
+  };
+
+  // node_modules/colord/plugins/lch.mjs
+  var r2 = { grad: 0.9, turn: 360, rad: 360 / (2 * Math.PI) };
+  var t2 = function(r3) {
+    return "string" == typeof r3 ? r3.length > 0 : "number" == typeof r3;
+  };
+  var a2 = function(r3, t3, a3) {
+    return void 0 === t3 && (t3 = 0), void 0 === a3 && (a3 = Math.pow(10, t3)), Math.round(a3 * r3) / a3 + 0;
+  };
+  var n2 = function(r3, t3, a3) {
+    return void 0 === t3 && (t3 = 0), void 0 === a3 && (a3 = 1), r3 > a3 ? a3 : r3 > t3 ? r3 : t3;
+  };
+  var u2 = function(r3) {
+    var t3 = r3 / 255;
+    return t3 < 0.04045 ? t3 / 12.92 : Math.pow((t3 + 0.055) / 1.055, 2.4);
+  };
+  var h2 = function(r3) {
+    return 255 * (r3 > 31308e-7 ? 1.055 * Math.pow(r3, 1 / 2.4) - 0.055 : 12.92 * r3);
+  };
+  var o2 = 96.422;
+  var e2 = 100;
+  var c2 = 82.521;
+  var i2 = function(r3) {
+    var t3, a3, u3 = { x: 0.9555766 * (t3 = r3).x + -0.0230393 * t3.y + 0.0631636 * t3.z, y: -0.0282895 * t3.x + 1.0099416 * t3.y + 0.0210077 * t3.z, z: 0.0122982 * t3.x + -0.020483 * t3.y + 1.3299098 * t3.z };
+    return a3 = { r: h2(0.032404542 * u3.x - 0.015371385 * u3.y - 4985314e-9 * u3.z), g: h2(-969266e-8 * u3.x + 0.018760108 * u3.y + 41556e-8 * u3.z), b: h2(556434e-9 * u3.x - 2040259e-9 * u3.y + 0.010572252 * u3.z), a: r3.a }, { r: n2(a3.r, 0, 255), g: n2(a3.g, 0, 255), b: n2(a3.b, 0, 255), a: n2(a3.a) };
+  };
+  var l2 = function(r3) {
+    var t3 = u2(r3.r), a3 = u2(r3.g), h3 = u2(r3.b);
+    return (function(r4) {
+      return { x: n2(r4.x, 0, o2), y: n2(r4.y, 0, e2), z: n2(r4.z, 0, c2), a: n2(r4.a) };
+    })((function(r4) {
+      return { x: 1.0478112 * r4.x + 0.0228866 * r4.y + -0.050127 * r4.z, y: 0.0295424 * r4.x + 0.9904844 * r4.y + -0.0170491 * r4.z, z: -92345e-7 * r4.x + 0.0150436 * r4.y + 0.7521316 * r4.z, a: r4.a };
+    })({ x: 100 * (0.4124564 * t3 + 0.3575761 * a3 + 0.1804375 * h3), y: 100 * (0.2126729 * t3 + 0.7151522 * a3 + 0.072175 * h3), z: 100 * (0.0193339 * t3 + 0.119192 * a3 + 0.9503041 * h3), a: r3.a }));
+  };
+  var f2 = 216 / 24389;
+  var b2 = 24389 / 27;
+  var d2 = function(r3) {
+    return { l: n2(r3.l, 0, 100), c: r3.c, h: (t3 = r3.h, (t3 = isFinite(t3) ? t3 % 360 : 0) > 0 ? t3 : t3 + 360), a: r3.a };
+    var t3;
+  };
+  var p2 = function(r3) {
+    return { l: a2(r3.l, 2), c: a2(r3.c, 2), h: a2(r3.h, 2), a: a2(r3.a, 3) };
+  };
+  var v2 = function(r3) {
+    var a3 = r3.l, n3 = r3.c, u3 = r3.h, h3 = r3.a, o3 = void 0 === h3 ? 1 : h3;
+    if (!t2(a3) || !t2(n3) || !t2(u3)) return null;
+    var e3 = d2({ l: Number(a3), c: Number(n3), h: Number(u3), a: Number(o3) });
+    return M2(e3);
+  };
+  var y2 = function(r3) {
+    var t3 = (function(r4) {
+      var t4 = l2(r4), a3 = t4.x / o2, n4 = t4.y / e2, u4 = t4.z / c2;
+      return a3 = a3 > f2 ? Math.cbrt(a3) : (b2 * a3 + 16) / 116, { l: 116 * (n4 = n4 > f2 ? Math.cbrt(n4) : (b2 * n4 + 16) / 116) - 16, a: 500 * (a3 - n4), b: 200 * (n4 - (u4 = u4 > f2 ? Math.cbrt(u4) : (b2 * u4 + 16) / 116)), alpha: t4.a };
+    })(r3), n3 = a2(t3.a, 3), u3 = a2(t3.b, 3), h3 = Math.atan2(u3, n3) / Math.PI * 180;
+    return { l: t3.l, c: Math.sqrt(n3 * n3 + u3 * u3), h: h3 < 0 ? h3 + 360 : h3, a: t3.alpha };
+  };
+  var M2 = function(r3) {
+    return t3 = { l: r3.l, a: r3.c * Math.cos(r3.h * Math.PI / 180), b: r3.c * Math.sin(r3.h * Math.PI / 180), alpha: r3.a }, n3 = t3.a / 500 + (a3 = (t3.l + 16) / 116), u3 = a3 - t3.b / 200, i2({ x: (Math.pow(n3, 3) > f2 ? Math.pow(n3, 3) : (116 * n3 - 16) / b2) * o2, y: (t3.l > 8 ? Math.pow((t3.l + 16) / 116, 3) : t3.l / b2) * e2, z: (Math.pow(u3, 3) > f2 ? Math.pow(u3, 3) : (116 * u3 - 16) / b2) * c2, a: t3.alpha });
+    var t3, a3, n3, u3;
+  };
+  var x2 = /^lch\(\s*([+-]?\d*\.?\d+)%\s+([+-]?\d*\.?\d+)\s+([+-]?\d*\.?\d+)(deg|rad|grad|turn)?\s*(?:\/\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
+  var s2 = function(t3) {
+    var a3 = x2.exec(t3);
+    if (!a3) return null;
+    var n3, u3, h3 = d2({ l: Number(a3[1]), c: Number(a3[2]), h: (n3 = a3[3], u3 = a3[4], void 0 === u3 && (u3 = "deg"), Number(n3) * (r2[u3] || 1)), a: void 0 === a3[5] ? 1 : Number(a3[5]) / (a3[6] ? 100 : 1) });
+    return M2(h3);
+  };
+  function lch_default(r3, t3) {
+    r3.prototype.toLch = function() {
+      return p2(y2(this.rgba));
+    }, r3.prototype.toLchString = function() {
+      return r4 = p2(y2(this.rgba)), t4 = r4.l, a3 = r4.c, n3 = r4.h, (u3 = r4.a) < 1 ? "lch(" + t4 + "% " + a3 + " " + n3 + " / " + u3 + ")" : "lch(" + t4 + "% " + a3 + " " + n3 + ")";
+      var r4, t4, a3, n3, u3;
+    }, t3.string.push([s2, "lch"]), t3.object.push([v2, "lch"]);
+  }
+
   // src/widgets/widgets.ts
   var PANNELIP_MARGIN_PX = 20;
   var widgetSystemCreated = false;
@@ -1415,14 +2866,14 @@ Is it scaring you off?`,
       this.#aboutToDel = false;
     }
     createWidgetErrorContent(name2) {
-      let p2 = document.createElement("p");
-      p2.classList.add("smpp-error-widget");
-      p2.innerHTML = "<span>Probleem bij het laden van de widget: </span><code class='widgetName'></code><button>Reset widget</button>";
-      p2.querySelector(".widgetName").innerText = name2;
-      p2.querySelector("button").addEventListener("click", async () => {
+      let p3 = document.createElement("p");
+      p3.classList.add("smpp-error-widget");
+      p3.innerHTML = "<span>Probleem bij het laden van de widget: </span><code class='widgetName'></code><button>Reset widget</button>";
+      p3.querySelector(".widgetName").innerText = name2;
+      p3.querySelector("button").addEventListener("click", async () => {
         this.clearWidgetSettings();
       });
-      return p2;
+      return p3;
     }
     async clearWidgetSettings() {
       await browser.runtime.sendMessage({
@@ -1437,8 +2888,8 @@ Is it scaring you off?`,
     }
     #createWidgetDiv() {
       let widgetDiv = document.createElement("div");
-      widgetDiv.addEventListener("mousedown", (e2) => {
-        this.startDragging(e2.clientX, e2.clientY);
+      widgetDiv.addEventListener("mousedown", (e3) => {
+        this.startDragging(e3.clientX, e3.clientY);
       });
       widgetDiv.classList.add("smpp-widget");
       return widgetDiv;
@@ -1470,9 +2921,9 @@ Is it scaring you off?`,
           newContent = await this.createContent();
           this.isActive = true;
         }
-      } catch (e2) {
+      } catch (e3) {
         console.error("Failed to create widget content");
-        console.error(e2);
+        console.error(e3);
         newContent = this.createWidgetErrorContent(this.name);
       }
       if (!newContent) {
@@ -1511,14 +2962,14 @@ Is it scaring you off?`,
         this.element.classList.remove("smpp-widget-delete");
       }
     }
-    dragMove(x2, y2) {
+    dragMove(x3, y3) {
       if (!curDragInfo || curDragInfo.widget != this) {
         return;
       }
       let el = this.element;
       let offset = curDragInfo.offset;
-      el.style.left = x2 - offset.x + "px";
-      el.style.top = y2 - offset.y + "px";
+      el.style.left = x3 - offset.x + "px";
+      el.style.top = y3 - offset.y + "px";
     }
     async drop(cancel = false) {
       if (!curDragInfo || curDragInfo.widget != this) {
@@ -1708,17 +3159,17 @@ Is it scaring you off?`,
       );
     }
   }
-  function onPannelHover(pannel, e2) {
+  function onPannelHover(pannel, e3) {
     if (!widgetEditMode || curDragInfo == null || hoveringBag) {
       return;
     }
-    const bounds = e2.target.getBoundingClientRect();
-    if (e2.clientX < bounds.left + PANNELIP_MARGIN_PX) {
-      targetInsertionPoint(e2.target.previousElementSibling);
+    const bounds = e3.target.getBoundingClientRect();
+    if (e3.clientX < bounds.left + PANNELIP_MARGIN_PX) {
+      targetInsertionPoint(e3.target.previousElementSibling);
       return;
     }
-    if (e2.clientX > bounds.right - PANNELIP_MARGIN_PX) {
-      targetInsertionPoint(e2.target.nextElementSibling);
+    if (e3.clientX > bounds.right - PANNELIP_MARGIN_PX) {
+      targetInsertionPoint(e3.target.nextElementSibling);
       return;
     }
     let target = pannel.firstChild;
@@ -1728,24 +3179,24 @@ Is it scaring you off?`,
       }
       const bounds2 = child.getBoundingClientRect();
       let centerY = bounds2.top + (bounds2.bottom - bounds2.top) * 0.5;
-      if (e2.clientY > centerY) {
+      if (e3.clientY > centerY) {
         target = child.nextElementSibling;
       }
     }
     targetInsertionPoint(target);
   }
-  function onPannelInsertionPointHover(e2) {
+  function onPannelInsertionPointHover(e3) {
     if (!widgetEditMode || curDragInfo == null || hoveringBag) {
       return;
     }
-    targetInsertionPoint(e2.target);
+    targetInsertionPoint(e3.target);
   }
-  function onCenterHover(div, e2) {
+  function onCenterHover(div, e3) {
     if (!widgetEditMode || curDragInfo == null || hoveringBag) {
       return;
     }
     const bounds = div.getBoundingClientRect();
-    if (e2.clientX < (bounds.right - bounds.left) / 2 + bounds.left) {
+    if (e3.clientX < (bounds.right - bounds.left) / 2 + bounds.left) {
       targetInsertionPoint(div.previousElementSibling);
     } else {
       targetInsertionPoint(div.nextElementSibling);
@@ -1762,7 +3213,7 @@ Is it scaring you off?`,
   }
   async function createPannelHTML(pannel) {
     let pannelDiv = document.createElement("div");
-    pannelDiv.addEventListener("mousemove", (e2) => onPannelHover(pannelDiv, e2));
+    pannelDiv.addEventListener("mousemove", (e3) => onPannelHover(pannelDiv, e3));
     pannelDiv.classList.add("smpp-widget-pannel");
     pannelDiv.appendChild(createInsertionPointHTML());
     for (let widgetName of pannel.widgets) {
@@ -1790,7 +3241,7 @@ Is it scaring you off?`,
     }
     let newsDiv = document.createElement("div");
     newsDiv.classList.add("smpp-news-container");
-    newsDiv.addEventListener("mousemove", (e2) => onCenterHover(newsDiv, e2));
+    newsDiv.addEventListener("mousemove", (e3) => onCenterHover(newsDiv, e3));
     newsContent.id = "smpp-news-content";
     newsContent.className = "";
     if (news) {
@@ -1826,12 +3277,12 @@ Is it scaring you off?`,
     const div = document.createElement("div");
     div.classList.add("smpp-news-editor");
     const button = createButtonWithLabel("smpp-widget-news-toggle", "Show News");
-    button.addEventListener("change", async (e2) => {
-      updateNews(e2.target.checked);
+    button.addEventListener("change", async (e3) => {
+      updateNews(e3.target.checked);
       await browser.runtime.sendMessage({
         action: "setSetting",
         name: "appearance.news",
-        data: e2.target.checked
+        data: e3.target.checked
       });
     });
     div.appendChild(button);
@@ -2120,16 +3571,16 @@ Is it scaring you off?`,
     }
     widgetEditModeInit = true;
     initNewsEditMode();
-    document.addEventListener("mouseup", async (e2) => {
+    document.addEventListener("mouseup", async (e3) => {
       if (curDragInfo) {
         await curDragInfo.widget.drop(false);
       }
     });
-    document.addEventListener("mousemove", (e2) => {
+    document.addEventListener("mousemove", (e3) => {
       if (curDragInfo) {
-        curDragInfo.widget.dragMove(e2.clientX, e2.clientY);
+        curDragInfo.widget.dragMove(e3.clientX, e3.clientY);
         let handleBounds = widgetBagHandle.getBoundingClientRect();
-        if (e2.clientY < handleBounds.bottom && e2.clientX > handleBounds.left && e2.clientX < handleBounds.right) {
+        if (e3.clientY < handleBounds.bottom && e3.clientX > handleBounds.left && e3.clientX < handleBounds.right) {
           bagHoverEnter();
         } else if (hoveringBag) {
           bagHoverExit();
@@ -2150,171 +3601,13 @@ Is it scaring you off?`,
     return btn;
   }
 
-  // node_modules/colord/index.mjs
-  var r = { grad: 0.9, turn: 360, rad: 360 / (2 * Math.PI) };
-  var t = function(r2) {
-    return "string" == typeof r2 ? r2.length > 0 : "number" == typeof r2;
-  };
-  var n = function(r2, t2, n2) {
-    return void 0 === t2 && (t2 = 0), void 0 === n2 && (n2 = Math.pow(10, t2)), Math.round(n2 * r2) / n2 + 0;
-  };
-  var e = function(r2, t2, n2) {
-    return void 0 === t2 && (t2 = 0), void 0 === n2 && (n2 = 1), r2 > n2 ? n2 : r2 > t2 ? r2 : t2;
-  };
-  var u = function(r2) {
-    return (r2 = isFinite(r2) ? r2 % 360 : 0) > 0 ? r2 : r2 + 360;
-  };
-  var a = function(r2) {
-    return { r: e(r2.r, 0, 255), g: e(r2.g, 0, 255), b: e(r2.b, 0, 255), a: e(r2.a) };
-  };
-  var o = function(r2) {
-    return { r: n(r2.r), g: n(r2.g), b: n(r2.b), a: n(r2.a, 3) };
-  };
-  var i = /^#([0-9a-f]{3,8})$/i;
-  var s = function(r2) {
-    var t2 = r2.toString(16);
-    return t2.length < 2 ? "0" + t2 : t2;
-  };
-  var h = function(r2) {
-    var t2 = r2.r, n2 = r2.g, e2 = r2.b, u2 = r2.a, a2 = Math.max(t2, n2, e2), o2 = a2 - Math.min(t2, n2, e2), i2 = o2 ? a2 === t2 ? (n2 - e2) / o2 : a2 === n2 ? 2 + (e2 - t2) / o2 : 4 + (t2 - n2) / o2 : 0;
-    return { h: 60 * (i2 < 0 ? i2 + 6 : i2), s: a2 ? o2 / a2 * 100 : 0, v: a2 / 255 * 100, a: u2 };
-  };
-  var b = function(r2) {
-    var t2 = r2.h, n2 = r2.s, e2 = r2.v, u2 = r2.a;
-    t2 = t2 / 360 * 6, n2 /= 100, e2 /= 100;
-    var a2 = Math.floor(t2), o2 = e2 * (1 - n2), i2 = e2 * (1 - (t2 - a2) * n2), s2 = e2 * (1 - (1 - t2 + a2) * n2), h2 = a2 % 6;
-    return { r: 255 * [e2, i2, o2, o2, s2, e2][h2], g: 255 * [s2, e2, e2, i2, o2, o2][h2], b: 255 * [o2, o2, s2, e2, e2, i2][h2], a: u2 };
-  };
-  var g = function(r2) {
-    return { h: u(r2.h), s: e(r2.s, 0, 100), l: e(r2.l, 0, 100), a: e(r2.a) };
-  };
-  var d = function(r2) {
-    return { h: n(r2.h), s: n(r2.s), l: n(r2.l), a: n(r2.a, 3) };
-  };
-  var f = function(r2) {
-    return b((n2 = (t2 = r2).s, { h: t2.h, s: (n2 *= ((e2 = t2.l) < 50 ? e2 : 100 - e2) / 100) > 0 ? 2 * n2 / (e2 + n2) * 100 : 0, v: e2 + n2, a: t2.a }));
-    var t2, n2, e2;
-  };
-  var c = function(r2) {
-    return { h: (t2 = h(r2)).h, s: (u2 = (200 - (n2 = t2.s)) * (e2 = t2.v) / 100) > 0 && u2 < 200 ? n2 * e2 / 100 / (u2 <= 100 ? u2 : 200 - u2) * 100 : 0, l: u2 / 2, a: t2.a };
-    var t2, n2, e2, u2;
-  };
-  var l = /^hsla?\(\s*([+-]?\d*\.?\d+)(deg|rad|grad|turn)?\s*,\s*([+-]?\d*\.?\d+)%\s*,\s*([+-]?\d*\.?\d+)%\s*(?:,\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
-  var p = /^hsla?\(\s*([+-]?\d*\.?\d+)(deg|rad|grad|turn)?\s+([+-]?\d*\.?\d+)%\s+([+-]?\d*\.?\d+)%\s*(?:\/\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
-  var v = /^rgba?\(\s*([+-]?\d*\.?\d+)(%)?\s*,\s*([+-]?\d*\.?\d+)(%)?\s*,\s*([+-]?\d*\.?\d+)(%)?\s*(?:,\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
-  var m = /^rgba?\(\s*([+-]?\d*\.?\d+)(%)?\s+([+-]?\d*\.?\d+)(%)?\s+([+-]?\d*\.?\d+)(%)?\s*(?:\/\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
-  var y = { string: [[function(r2) {
-    var t2 = i.exec(r2);
-    return t2 ? (r2 = t2[1]).length <= 4 ? { r: parseInt(r2[0] + r2[0], 16), g: parseInt(r2[1] + r2[1], 16), b: parseInt(r2[2] + r2[2], 16), a: 4 === r2.length ? n(parseInt(r2[3] + r2[3], 16) / 255, 2) : 1 } : 6 === r2.length || 8 === r2.length ? { r: parseInt(r2.substr(0, 2), 16), g: parseInt(r2.substr(2, 2), 16), b: parseInt(r2.substr(4, 2), 16), a: 8 === r2.length ? n(parseInt(r2.substr(6, 2), 16) / 255, 2) : 1 } : null : null;
-  }, "hex"], [function(r2) {
-    var t2 = v.exec(r2) || m.exec(r2);
-    return t2 ? t2[2] !== t2[4] || t2[4] !== t2[6] ? null : a({ r: Number(t2[1]) / (t2[2] ? 100 / 255 : 1), g: Number(t2[3]) / (t2[4] ? 100 / 255 : 1), b: Number(t2[5]) / (t2[6] ? 100 / 255 : 1), a: void 0 === t2[7] ? 1 : Number(t2[7]) / (t2[8] ? 100 : 1) }) : null;
-  }, "rgb"], [function(t2) {
-    var n2 = l.exec(t2) || p.exec(t2);
-    if (!n2) return null;
-    var e2, u2, a2 = g({ h: (e2 = n2[1], u2 = n2[2], void 0 === u2 && (u2 = "deg"), Number(e2) * (r[u2] || 1)), s: Number(n2[3]), l: Number(n2[4]), a: void 0 === n2[5] ? 1 : Number(n2[5]) / (n2[6] ? 100 : 1) });
-    return f(a2);
-  }, "hsl"]], object: [[function(r2) {
-    var n2 = r2.r, e2 = r2.g, u2 = r2.b, o2 = r2.a, i2 = void 0 === o2 ? 1 : o2;
-    return t(n2) && t(e2) && t(u2) ? a({ r: Number(n2), g: Number(e2), b: Number(u2), a: Number(i2) }) : null;
-  }, "rgb"], [function(r2) {
-    var n2 = r2.h, e2 = r2.s, u2 = r2.l, a2 = r2.a, o2 = void 0 === a2 ? 1 : a2;
-    if (!t(n2) || !t(e2) || !t(u2)) return null;
-    var i2 = g({ h: Number(n2), s: Number(e2), l: Number(u2), a: Number(o2) });
-    return f(i2);
-  }, "hsl"], [function(r2) {
-    var n2 = r2.h, a2 = r2.s, o2 = r2.v, i2 = r2.a, s2 = void 0 === i2 ? 1 : i2;
-    if (!t(n2) || !t(a2) || !t(o2)) return null;
-    var h2 = (function(r3) {
-      return { h: u(r3.h), s: e(r3.s, 0, 100), v: e(r3.v, 0, 100), a: e(r3.a) };
-    })({ h: Number(n2), s: Number(a2), v: Number(o2), a: Number(s2) });
-    return b(h2);
-  }, "hsv"]] };
-  var N = function(r2, t2) {
-    for (var n2 = 0; n2 < t2.length; n2++) {
-      var e2 = t2[n2][0](r2);
-      if (e2) return [e2, t2[n2][1]];
-    }
-    return [null, void 0];
-  };
-  var x = function(r2) {
-    return "string" == typeof r2 ? N(r2.trim(), y.string) : "object" == typeof r2 && null !== r2 ? N(r2, y.object) : [null, void 0];
-  };
-  var M = function(r2, t2) {
-    var n2 = c(r2);
-    return { h: n2.h, s: e(n2.s + 100 * t2, 0, 100), l: n2.l, a: n2.a };
-  };
-  var H = function(r2) {
-    return (299 * r2.r + 587 * r2.g + 114 * r2.b) / 1e3 / 255;
-  };
-  var $ = function(r2, t2) {
-    var n2 = c(r2);
-    return { h: n2.h, s: n2.s, l: e(n2.l + 100 * t2, 0, 100), a: n2.a };
-  };
-  var j = (function() {
-    function r2(r3) {
-      this.parsed = x(r3)[0], this.rgba = this.parsed || { r: 0, g: 0, b: 0, a: 1 };
-    }
-    return r2.prototype.isValid = function() {
-      return null !== this.parsed;
-    }, r2.prototype.brightness = function() {
-      return n(H(this.rgba), 2);
-    }, r2.prototype.isDark = function() {
-      return H(this.rgba) < 0.5;
-    }, r2.prototype.isLight = function() {
-      return H(this.rgba) >= 0.5;
-    }, r2.prototype.toHex = function() {
-      return r3 = o(this.rgba), t2 = r3.r, e2 = r3.g, u2 = r3.b, i2 = (a2 = r3.a) < 1 ? s(n(255 * a2)) : "", "#" + s(t2) + s(e2) + s(u2) + i2;
-      var r3, t2, e2, u2, a2, i2;
-    }, r2.prototype.toRgb = function() {
-      return o(this.rgba);
-    }, r2.prototype.toRgbString = function() {
-      return r3 = o(this.rgba), t2 = r3.r, n2 = r3.g, e2 = r3.b, (u2 = r3.a) < 1 ? "rgba(" + t2 + ", " + n2 + ", " + e2 + ", " + u2 + ")" : "rgb(" + t2 + ", " + n2 + ", " + e2 + ")";
-      var r3, t2, n2, e2, u2;
-    }, r2.prototype.toHsl = function() {
-      return d(c(this.rgba));
-    }, r2.prototype.toHslString = function() {
-      return r3 = d(c(this.rgba)), t2 = r3.h, n2 = r3.s, e2 = r3.l, (u2 = r3.a) < 1 ? "hsla(" + t2 + ", " + n2 + "%, " + e2 + "%, " + u2 + ")" : "hsl(" + t2 + ", " + n2 + "%, " + e2 + "%)";
-      var r3, t2, n2, e2, u2;
-    }, r2.prototype.toHsv = function() {
-      return r3 = h(this.rgba), { h: n(r3.h), s: n(r3.s), v: n(r3.v), a: n(r3.a, 3) };
-      var r3;
-    }, r2.prototype.invert = function() {
-      return w({ r: 255 - (r3 = this.rgba).r, g: 255 - r3.g, b: 255 - r3.b, a: r3.a });
-      var r3;
-    }, r2.prototype.saturate = function(r3) {
-      return void 0 === r3 && (r3 = 0.1), w(M(this.rgba, r3));
-    }, r2.prototype.desaturate = function(r3) {
-      return void 0 === r3 && (r3 = 0.1), w(M(this.rgba, -r3));
-    }, r2.prototype.grayscale = function() {
-      return w(M(this.rgba, -1));
-    }, r2.prototype.lighten = function(r3) {
-      return void 0 === r3 && (r3 = 0.1), w($(this.rgba, r3));
-    }, r2.prototype.darken = function(r3) {
-      return void 0 === r3 && (r3 = 0.1), w($(this.rgba, -r3));
-    }, r2.prototype.rotate = function(r3) {
-      return void 0 === r3 && (r3 = 15), this.hue(this.hue() + r3);
-    }, r2.prototype.alpha = function(r3) {
-      return "number" == typeof r3 ? w({ r: (t2 = this.rgba).r, g: t2.g, b: t2.b, a: r3 }) : n(this.rgba.a, 3);
-      var t2;
-    }, r2.prototype.hue = function(r3) {
-      var t2 = c(this.rgba);
-      return "number" == typeof r3 ? w({ h: r3, s: t2.s, l: t2.l, a: t2.a }) : n(t2.h);
-    }, r2.prototype.isEqual = function(r3) {
-      return this.toHex() === w(r3).toHex();
-    }, r2;
-  })();
-  var w = function(r2) {
-    return r2 instanceof j ? r2 : new j(r2);
-  };
-
   // src/main-features/appearance/weather-effects.ts
   function setSnowLevel(amount, opacity) {
     document.getElementById("snowflakes")?.remove();
     amount = amount > 3e3 ? 3e3 : amount;
     let snowDiv = document.createElement("div");
     snowDiv.id = "snowflakes";
-    for (let i2 = 0; i2 < amount; i2++) {
+    for (let i3 = 0; i3 < amount; i3++) {
       let flake = document.createElement("img");
       flake.classList = "snowflake";
       flake.src = currentThemeName == "pink" ? getExtensionImage("icons/weather-overlay/blossom.svg") : getExtensionImage("icons/weather-overlay/snowflake.svg");
@@ -2332,7 +3625,7 @@ Is it scaring you off?`,
     amount = amount > 3e3 ? 3e3 : amount;
     let rainDiv = document.createElement("div");
     rainDiv.id = "raindrops";
-    for (let i2 = 0; i2 < amount; i2++) {
+    for (let i3 = 0; i3 < amount; i3++) {
       let raindrop = document.createElement("img");
       raindrop.classList.add("raindrop");
       raindrop.src = getExtensionImage("icons/weather-overlay/raindrop.svg");
@@ -2510,7 +3803,7 @@ Is it scaring you off?`,
     extraSettingsButton.id = "extraSettingsButton";
     extraSettingsButton.innerHTML += "More Settings";
     extraSettingsButton.innerHTML += settingsIconSvg;
-    extraSettingsButton.addEventListener("click", (e2) => openSettingsWindow(e2));
+    extraSettingsButton.addEventListener("click", (e3) => openSettingsWindow(e3));
     parent.appendChild(performanceModeTooltipLabel);
     parent.appendChild(compactThemeSelector.render());
     parent.appendChild(wallpaperTopContainer);
@@ -2542,9 +3835,9 @@ Is it scaring you off?`,
         tooltipInfo.style.zIndex = "-1";
       });
     }
-    document.addEventListener("click", (e2) => {
+    document.addEventListener("click", (e3) => {
       if (quickSettingsWindowIsHidden) return;
-      const target = e2.target;
+      const target = e3.target;
       if (!target) return;
       if (target.id === "extraSettingsButton") {
         closeQuickSettings();
@@ -2639,7 +3932,7 @@ Is it scaring you off?`,
       let content = document.createElement("div");
       let settingsSideBar = await this.createSettingsSideBar();
       this.settingsPage.id = "settings-page";
-      this.settingsPage.addEventListener("change", (e2) => this.storePage());
+      this.settingsPage.addEventListener("change", (e3) => this.storePage());
       content.classList.add("settingsWindow");
       content.appendChild(settingsSideBar);
       content.appendChild(this.settingsPage);
@@ -2687,9 +3980,9 @@ Is it scaring you off?`,
         "profile-settings-button",
         "settings-category-button-js"
       );
-      profileSettingsLabel.addEventListener("keydown", (e2) => {
-        if (e2.key === " " || e2.key === "Enter") {
-          e2.preventDefault();
+      profileSettingsLabel.addEventListener("keydown", (e3) => {
+        if (e3.key === " " || e3.key === "Enter") {
+          e3.preventDefault();
           radioInput.click();
         }
       });
@@ -2734,9 +4027,9 @@ Is it scaring you off?`,
         "settings-category-button",
         "settings-category-button-js"
       );
-      categoryLabel.addEventListener("keydown", (e2) => {
-        if (e2.key === " " || e2.key === "Enter") {
-          e2.preventDefault();
+      categoryLabel.addEventListener("keydown", (e3) => {
+        if (e3.key === " " || e3.key === "Enter") {
+          e3.preventDefault();
           radioInput.click();
         }
       });
@@ -3257,12 +4550,12 @@ Is it scaring you off?`,
           let oldKeybind = input.value;
           input.value = "Press any key...";
           input.classList.add("listening");
-          const keyListener = async (e2) => {
+          const keyListener = async (e3) => {
             listening = false;
             input.classList.remove("listening");
-            e2.preventDefault();
-            e2.stopPropagation();
-            let keyName = e2.key.length === 1 ? e2.key.toUpperCase() : e2.key;
+            e3.preventDefault();
+            e3.stopPropagation();
+            let keyName = e3.key.length === 1 ? e3.key.toUpperCase() : e3.key;
             if (keyName === " ") keyName = "Space";
             if (keyName === "Backspace") keyName = "None";
             if (keyName === "Escape") keyName = oldKeybind;
@@ -3270,11 +4563,11 @@ Is it scaring you off?`,
             document.removeEventListener("keydown", keyListener);
             await this.storePage();
           };
-          const buttonListener = async (e2) => {
+          const buttonListener = async (e3) => {
             listening = false;
             input.classList.remove("listening");
-            e2.stopPropagation();
-            e2.preventDefault();
+            e3.stopPropagation();
+            e3.preventDefault();
             input.value = "None";
             document.removeEventListener("keydown", keyListener);
             await this.storePage();
@@ -3309,9 +4602,9 @@ Is it scaring you off?`,
         let image = document.createElement("img");
         image.classList.add("settings-page-image");
         image.src = getExtensionImage(src);
-        wrapper.addEventListener("keydown", (e2) => {
-          if (e2.key === " " || e2.key === "Enter") {
-            e2.preventDefault();
+        wrapper.addEventListener("keydown", (e3) => {
+          if (e3.key === " " || e3.key === "Enter") {
+            e3.preventDefault();
             input.click();
           }
         });
@@ -3760,1209 +5053,8 @@ Is it scaring you off?`,
     settingsWindow.themeSelector.updateContentHeight();
   }
 
-  // node_modules/@vibrant/image/dist/esm/histogram.js
-  var Histogram = class {
-    constructor(pixels, opts) {
-      this.pixels = pixels;
-      this.opts = opts;
-      const { sigBits } = opts;
-      const getColorIndex = (r22, g22, b22) => (r22 << 2 * sigBits) + (g22 << sigBits) + b22;
-      this.getColorIndex = getColorIndex;
-      const rshift = 8 - sigBits;
-      const hn = 1 << 3 * sigBits;
-      const hist = new Uint32Array(hn);
-      let rmax;
-      let rmin;
-      let gmax;
-      let gmin;
-      let bmax;
-      let bmin;
-      let r2;
-      let g2;
-      let b2;
-      let a2;
-      rmax = gmax = bmax = 0;
-      rmin = gmin = bmin = Number.MAX_VALUE;
-      const n2 = pixels.length / 4;
-      let i2 = 0;
-      while (i2 < n2) {
-        const offset = i2 * 4;
-        i2++;
-        r2 = pixels[offset + 0];
-        g2 = pixels[offset + 1];
-        b2 = pixels[offset + 2];
-        a2 = pixels[offset + 3];
-        if (a2 === 0) continue;
-        r2 = r2 >> rshift;
-        g2 = g2 >> rshift;
-        b2 = b2 >> rshift;
-        const index = getColorIndex(r2, g2, b2);
-        if (hist[index] === void 0) hist[index] = 0;
-        hist[index] += 1;
-        if (r2 > rmax) rmax = r2;
-        if (r2 < rmin) rmin = r2;
-        if (g2 > gmax) gmax = g2;
-        if (g2 < gmin) gmin = g2;
-        if (b2 > bmax) bmax = b2;
-        if (b2 < bmin) bmin = b2;
-      }
-      this._colorCount = hist.reduce(
-        (total, c2) => c2 > 0 ? total + 1 : total,
-        0
-      );
-      this.hist = hist;
-      this.rmax = rmax;
-      this.rmin = rmin;
-      this.gmax = gmax;
-      this.gmin = gmin;
-      this.bmax = bmax;
-      this.bmin = bmin;
-    }
-    get colorCount() {
-      return this._colorCount;
-    }
-  };
-
-  // node_modules/@vibrant/image/dist/esm/index.js
-  var ImageBase = class {
-    scaleDown(opts) {
-      const width = this.getWidth();
-      const height = this.getHeight();
-      let ratio = 1;
-      if (opts.maxDimension > 0) {
-        const maxSide = Math.max(width, height);
-        if (maxSide > opts.maxDimension) ratio = opts.maxDimension / maxSide;
-      } else {
-        ratio = 1 / opts.quality;
-      }
-      if (ratio < 1) this.resize(width * ratio, height * ratio, ratio);
-    }
-  };
-  function applyFilters(imageData, filters) {
-    var _a;
-    if (filters.length > 0) {
-      const pixels = imageData.data;
-      const n2 = pixels.length / 4;
-      let offset;
-      let r2;
-      let g2;
-      let b2;
-      let a2;
-      for (let i2 = 0; i2 < n2; i2++) {
-        offset = i2 * 4;
-        r2 = pixels[offset + 0];
-        g2 = pixels[offset + 1];
-        b2 = pixels[offset + 2];
-        a2 = pixels[offset + 3];
-        for (let j2 = 0; j2 < filters.length; j2++) {
-          if (!((_a = filters[j2]) == null ? void 0 : _a.call(filters, r2, g2, b2, a2))) {
-            pixels[offset + 3] = 0;
-            break;
-          }
-        }
-      }
-    }
-    return imageData;
-  }
-
-  // node_modules/@vibrant/image-browser/dist/esm/index.js
-  function isRelativeUrl(url) {
-    const u2 = new URL(url, location.href);
-    return u2.protocol === location.protocol && u2.host === location.host && u2.port === location.port;
-  }
-  function isSameOrigin(a2, b2) {
-    const ua = new URL(a2);
-    const ub = new URL(b2);
-    return ua.protocol === ub.protocol && ua.hostname === ub.hostname && ua.port === ub.port;
-  }
-  var BrowserImage = class extends ImageBase {
-    _getCanvas() {
-      if (!this._canvas) {
-        throw new Error("Canvas is not initialized");
-      }
-      return this._canvas;
-    }
-    _getContext() {
-      if (!this._context) {
-        throw new Error("Context is not initialized");
-      }
-      return this._context;
-    }
-    _getWidth() {
-      if (!this._width) {
-        throw new Error("Width is not initialized");
-      }
-      return this._width;
-    }
-    _getHeight() {
-      if (!this._height) {
-        throw new Error("Height is not initialized");
-      }
-      return this._height;
-    }
-    _initCanvas() {
-      const img = this.image;
-      if (!img) {
-        throw new Error("Image is not initialized");
-      }
-      const canvas = this._canvas = document.createElement("canvas");
-      const context = canvas.getContext("2d");
-      if (!context) throw new ReferenceError("Failed to create canvas context");
-      this._context = context;
-      canvas.className = "@vibrant/canvas";
-      canvas.style.display = "none";
-      this._width = canvas.width = img.width;
-      this._height = canvas.height = img.height;
-      context.drawImage(img, 0, 0);
-      document.body.appendChild(canvas);
-    }
-    load(image) {
-      let img;
-      let src;
-      if (typeof image === "string") {
-        img = document.createElement("img");
-        src = image;
-        if (!isRelativeUrl(src) && !isSameOrigin(window.location.href, src)) {
-          img.crossOrigin = "anonymous";
-        }
-        img.src = src;
-      } else if (image instanceof HTMLImageElement) {
-        img = image;
-        src = image.src;
-      } else {
-        return Promise.reject(
-          new Error(`Cannot load buffer as an image in browser`)
-        );
-      }
-      this.image = img;
-      return new Promise((resolve, reject) => {
-        const onImageLoad = () => {
-          this._initCanvas();
-          resolve(this);
-        };
-        if (img.complete) {
-          onImageLoad();
-        } else {
-          img.onload = onImageLoad;
-          img.onerror = (_e) => reject(new Error(`Fail to load image: ${src}`));
-        }
-      });
-    }
-    clear() {
-      this._getContext().clearRect(0, 0, this._getWidth(), this._getHeight());
-    }
-    update(imageData) {
-      this._getContext().putImageData(imageData, 0, 0);
-    }
-    getWidth() {
-      return this._getWidth();
-    }
-    getHeight() {
-      return this._getHeight();
-    }
-    resize(targetWidth, targetHeight, ratio) {
-      if (!this.image) {
-        throw new Error("Image is not initialized");
-      }
-      this._width = this._getCanvas().width = targetWidth;
-      this._height = this._getCanvas().height = targetHeight;
-      this._getContext().scale(ratio, ratio);
-      this._getContext().drawImage(this.image, 0, 0);
-    }
-    getPixelCount() {
-      return this._getWidth() * this._getHeight();
-    }
-    getImageData() {
-      return this._getContext().getImageData(
-        0,
-        0,
-        this._getWidth(),
-        this._getHeight()
-      );
-    }
-    remove() {
-      if (this._canvas && this._canvas.parentNode) {
-        this._canvas.parentNode.removeChild(this._canvas);
-      }
-    }
-  };
-
-  // node_modules/@vibrant/core/dist/esm/utils.js
-  function assignDeep(target, ...sources) {
-    sources.forEach((s2) => {
-      if (!s2) return;
-      for (const key in s2) {
-        if (s2.hasOwnProperty(key)) {
-          const v2 = s2[key];
-          if (Array.isArray(v2)) {
-            target[key] = v2.slice(0);
-          } else if (typeof v2 === "object") {
-            if (!target[key]) target[key] = {};
-            assignDeep(target[key], v2);
-          } else {
-            target[key] = v2;
-          }
-        }
-      }
-    });
-    return target;
-  }
-
-  // node_modules/@vibrant/core/dist/esm/options.js
-  function buildProcessOptions(opts, override) {
-    const { colorCount, quantizer, generators, filters } = opts;
-    const commonQuantizerOpts = { colorCount };
-    const q = typeof quantizer === "string" ? { name: quantizer, options: {} } : quantizer;
-    q.options = assignDeep({}, commonQuantizerOpts, q.options);
-    return assignDeep(
-      {},
-      {
-        quantizer: q,
-        generators,
-        filters
-      },
-      override
-    );
-  }
-
-  // node_modules/@vibrant/core/dist/esm/builder.js
-  var Builder = class {
-    /**
-     * Arguments are the same as `Vibrant.constructor`.
-     */
-    constructor(src, opts = {}) {
-      this._src = src;
-      this._opts = assignDeep({}, Vibrant.DefaultOpts, opts);
-    }
-    /**
-     * Sets `opts.colorCount` to `n`.
-     * @returns this `Builder` instance.
-     */
-    maxColorCount(n2) {
-      this._opts.colorCount = n2;
-      return this;
-    }
-    /**
-     * Sets `opts.maxDimension` to `d`.
-     * @returns this `Builder` instance.
-     */
-    maxDimension(d2) {
-      this._opts.maxDimension = d2;
-      return this;
-    }
-    /**
-     * Adds a filter function
-     * @returns this `Builder` instance.
-     */
-    addFilter(name2) {
-      if (!this._opts.filters) {
-        this._opts.filters = [name2];
-      } else {
-        this._opts.filters.push(name2);
-      }
-      return this;
-    }
-    /**
-     * Removes a filter function.
-     * @returns this `Builder` instance.
-     */
-    removeFilter(name2) {
-      if (this._opts.filters) {
-        const i2 = this._opts.filters.indexOf(name2);
-        if (i2 > 0) this._opts.filters.splice(i2);
-      }
-      return this;
-    }
-    /**
-     * Clear all filters.
-     * @returns this `Builder` instance.
-     */
-    clearFilters() {
-      this._opts.filters = [];
-      return this;
-    }
-    /**
-     * Sets `opts.quality` to `q`.
-     * @returns this `Builder` instance.
-     */
-    quality(q) {
-      this._opts.quality = q;
-      return this;
-    }
-    /**
-     * Specifies which `Image` implementation class to use.
-     * @returns this `Builder` instance.
-     */
-    useImageClass(imageClass) {
-      this._opts.ImageClass = imageClass;
-      return this;
-    }
-    /**
-     * Sets `opts.generator` to `generator`
-     * @returns this `Builder` instance.
-     */
-    useGenerator(generator, options) {
-      if (!this._opts.generators) this._opts.generators = [];
-      this._opts.generators.push(
-        options ? { name: generator, options } : generator
-      );
-      return this;
-    }
-    /**
-     * Specifies which `Quantizer` implementation class to use
-     * @returns this `Builder` instance.
-     */
-    useQuantizer(quantizer, options) {
-      this._opts.quantizer = options ? { name: quantizer, options } : quantizer;
-      return this;
-    }
-    /**
-     * Builds and returns a `Vibrant` instance as configured.
-     */
-    build() {
-      return new Vibrant(this._src, this._opts);
-    }
-    /**
-     * Builds a `Vibrant` instance as configured and calls its `getPalette` method.
-     */
-    getPalette() {
-      return this.build().getPalette();
-    }
-  };
-
-  // node_modules/@vibrant/core/dist/esm/pipeline/index.js
-  var Stage = class {
-    constructor(pipeline2) {
-      this.pipeline = pipeline2;
-      this._map = {};
-    }
-    names() {
-      return Object.keys(this._map);
-    }
-    has(name2) {
-      return !!this._map[name2];
-    }
-    get(name2) {
-      return this._map[name2];
-    }
-    register(name2, stageFn) {
-      this._map[name2] = stageFn;
-      return this.pipeline;
-    }
-  };
-  var BasicPipeline = class {
-    constructor() {
-      this.filter = new Stage(this);
-      this.quantizer = new Stage(this);
-      this.generator = new Stage(this);
-    }
-    _buildProcessTasks({
-      filters,
-      quantizer,
-      generators
-    }) {
-      if (generators.length === 1 && generators[0] === "*") {
-        generators = this.generator.names();
-      }
-      return {
-        filters: filters.map((f2) => createTask(this.filter, f2)),
-        quantizer: createTask(this.quantizer, quantizer),
-        generators: generators.map((g2) => createTask(this.generator, g2))
-      };
-      function createTask(stage, o2) {
-        let name2;
-        let options;
-        if (typeof o2 === "string") {
-          name2 = o2;
-        } else {
-          name2 = o2.name;
-          options = o2.options;
-        }
-        return {
-          name: name2,
-          fn: stage.get(name2),
-          options
-        };
-      }
-    }
-    async process(imageData, opts) {
-      const { filters, quantizer, generators } = this._buildProcessTasks(opts);
-      const imageFilterData = await this._filterColors(filters, imageData);
-      const colors = await this._generateColors(quantizer, imageFilterData);
-      const palettes = await this._generatePalettes(generators, colors);
-      return {
-        colors,
-        palettes
-      };
-    }
-    _filterColors(filters, imageData) {
-      return Promise.resolve(
-        applyFilters(
-          imageData,
-          filters.map(({ fn }) => fn)
-        )
-      );
-    }
-    _generateColors(quantizer, imageData) {
-      return Promise.resolve(quantizer.fn(imageData.data, quantizer.options));
-    }
-    async _generatePalettes(generators, colors) {
-      const promiseArr = await Promise.all(
-        generators.map(({ fn, options }) => Promise.resolve(fn(colors, options)))
-      );
-      return Promise.resolve(
-        promiseArr.reduce(
-          (promises, promiseVal, i2) => {
-            promises[generators[i2].name] = promiseVal;
-            return promises;
-          },
-          {}
-        )
-      );
-    }
-  };
-
-  // node_modules/@vibrant/color/dist/esm/converter.js
-  function rgbToHex(r2, g2, b2) {
-    return "#" + ((1 << 24) + (r2 << 16) + (g2 << 8) + b2).toString(16).slice(1, 7);
-  }
-  function rgbToHsl(r2, g2, b2) {
-    r2 /= 255;
-    g2 /= 255;
-    b2 /= 255;
-    const max = Math.max(r2, g2, b2);
-    const min = Math.min(r2, g2, b2);
-    let h2 = 0;
-    let s2 = 0;
-    const l2 = (max + min) / 2;
-    if (max !== min) {
-      const d2 = max - min;
-      s2 = l2 > 0.5 ? d2 / (2 - max - min) : d2 / (max + min);
-      switch (max) {
-        case r2:
-          h2 = (g2 - b2) / d2 + (g2 < b2 ? 6 : 0);
-          break;
-        case g2:
-          h2 = (b2 - r2) / d2 + 2;
-          break;
-        case b2:
-          h2 = (r2 - g2) / d2 + 4;
-          break;
-      }
-      h2 /= 6;
-    }
-    return [h2, s2, l2];
-  }
-  function hslToRgb(h2, s2, l2) {
-    let r2;
-    let g2;
-    let b2;
-    function hue2rgb(p2, q, t2) {
-      if (t2 < 0) t2 += 1;
-      if (t2 > 1) t2 -= 1;
-      if (t2 < 1 / 6) return p2 + (q - p2) * 6 * t2;
-      if (t2 < 1 / 2) return q;
-      if (t2 < 2 / 3) return p2 + (q - p2) * (2 / 3 - t2) * 6;
-      return p2;
-    }
-    if (s2 === 0) {
-      r2 = g2 = b2 = l2;
-    } else {
-      const q = l2 < 0.5 ? l2 * (1 + s2) : l2 + s2 - l2 * s2;
-      const p2 = 2 * l2 - q;
-      r2 = hue2rgb(p2, q, h2 + 1 / 3);
-      g2 = hue2rgb(p2, q, h2);
-      b2 = hue2rgb(p2, q, h2 - 1 / 3);
-    }
-    return [r2 * 255, g2 * 255, b2 * 255];
-  }
-
-  // node_modules/@vibrant/color/dist/esm/index.js
-  var Swatch = class _Swatch {
-    static applyFilters(colors, filters) {
-      return filters.length > 0 ? colors.filter(({ r: r2, g: g2, b: b2 }) => {
-        var _a;
-        for (let j2 = 0; j2 < filters.length; j2++) {
-          if (!((_a = filters[j2]) == null ? void 0 : _a.call(filters, r2, g2, b2, 255))) return false;
-        }
-        return true;
-      }) : colors;
-    }
-    /**
-     * Make a value copy of a swatch based on a previous one. Returns a new Swatch instance
-     * @param {Swatch} swatch
-     */
-    static clone(swatch) {
-      return new _Swatch(swatch._rgb, swatch._population);
-    }
-    /**
-     * The red value in the RGB value
-     */
-    get r() {
-      return this._rgb[0];
-    }
-    /**
-     * The green value in the RGB value
-     */
-    get g() {
-      return this._rgb[1];
-    }
-    /**
-     * The blue value in the RGB value
-     */
-    get b() {
-      return this._rgb[2];
-    }
-    /**
-     * The color value as a rgb value
-     */
-    get rgb() {
-      return this._rgb;
-    }
-    /**
-     * The color value as a hsl value
-     */
-    get hsl() {
-      if (!this._hsl) {
-        const [r2, g2, b2] = this._rgb;
-        this._hsl = rgbToHsl(r2, g2, b2);
-      }
-      return this._hsl;
-    }
-    /**
-     * The color value as a hex string
-     */
-    get hex() {
-      if (!this._hex) {
-        const [r2, g2, b2] = this._rgb;
-        this._hex = rgbToHex(r2, g2, b2);
-      }
-      return this._hex;
-    }
-    get population() {
-      return this._population;
-    }
-    /**
-     * Get the JSON object for the swatch
-     */
-    toJSON() {
-      return {
-        rgb: this.rgb,
-        population: this.population
-      };
-    }
-    getYiq() {
-      if (!this._yiq) {
-        const rgb = this._rgb;
-        this._yiq = (rgb[0] * 299 + rgb[1] * 587 + rgb[2] * 114) / 1e3;
-      }
-      return this._yiq;
-    }
-    /**
-     * Returns an appropriate color to use for any 'title' text which is displayed over this Swatch's color.
-     */
-    get titleTextColor() {
-      if (!this._titleTextColor) {
-        this._titleTextColor = this.getYiq() < 200 ? "#fff" : "#000";
-      }
-      return this._titleTextColor;
-    }
-    /**
-     * Returns an appropriate color to use for any 'body' text which is displayed over this Swatch's color.
-     */
-    get bodyTextColor() {
-      if (!this._bodyTextColor) {
-        this._bodyTextColor = this.getYiq() < 150 ? "#fff" : "#000";
-      }
-      return this._bodyTextColor;
-    }
-    /**
-     * Internal use.
-     * @param rgb `[r, g, b]`
-     * @param population Population of the color in an image
-     */
-    constructor(rgb, population) {
-      this._rgb = rgb;
-      this._population = population;
-    }
-  };
-
-  // node_modules/@vibrant/core/dist/esm/index.js
-  var _Vibrant = class _Vibrant2 {
-    /**
-     *
-     * @param _src Path to image file (supports HTTP/HTTPs)
-     * @param opts Options (optional)
-     */
-    constructor(_src, opts) {
-      this._src = _src;
-      this.opts = assignDeep({}, _Vibrant2.DefaultOpts, opts);
-    }
-    static use(pipeline2) {
-      this._pipeline = pipeline2;
-    }
-    static from(src) {
-      return new Builder(src);
-    }
-    get result() {
-      return this._result;
-    }
-    _process(image, opts) {
-      image.scaleDown(this.opts);
-      const processOpts = buildProcessOptions(this.opts, opts);
-      return _Vibrant2._pipeline.process(image.getImageData(), processOpts);
-    }
-    async getPalette() {
-      const image = new this.opts.ImageClass();
-      try {
-        const image1 = await image.load(this._src);
-        const result1 = await this._process(image1, {
-          generators: ["default"]
-        });
-        this._result = result1;
-        const res = result1.palettes["default"];
-        if (!res) {
-          throw new Error(
-            `Something went wrong and a palette was not found, please file a bug against our GitHub repo: https://github.com/vibrant-Colors/node-vibrant/`
-          );
-        }
-        image.remove();
-        return res;
-      } catch (err) {
-        image.remove();
-        return Promise.reject(err);
-      }
-    }
-    async getPalettes() {
-      const image = new this.opts.ImageClass();
-      try {
-        const image1 = await image.load(this._src);
-        const result1 = await this._process(image1, {
-          generators: ["*"]
-        });
-        this._result = result1;
-        const res = result1.palettes;
-        image.remove();
-        return res;
-      } catch (err) {
-        image.remove();
-        return Promise.reject(err);
-      }
-    }
-  };
-  _Vibrant.DefaultOpts = {
-    colorCount: 64,
-    quality: 5,
-    filters: []
-  };
-  var Vibrant = _Vibrant;
-
-  // node_modules/node-vibrant/dist/esm/configs/config.js
-  Vibrant.DefaultOpts.quantizer = "mmcq";
-  Vibrant.DefaultOpts.generators = ["default"];
-  Vibrant.DefaultOpts.filters = ["default"];
-
-  // node_modules/node-vibrant/dist/esm/configs/browser.js
-  Vibrant.DefaultOpts.ImageClass = BrowserImage;
-
-  // node_modules/@vibrant/quantizer-mmcq/dist/esm/vbox.js
-  var SIGBITS = 5;
-  var RSHIFT = 8 - SIGBITS;
-  var VBox = class _VBox {
-    constructor(r1, r2, g1, g2, b1, b2, histogram) {
-      this.histogram = histogram;
-      this._volume = -1;
-      this._avg = null;
-      this._count = -1;
-      this.dimension = { r1, r2, g1, g2, b1, b2 };
-    }
-    static build(pixels) {
-      const h2 = new Histogram(pixels, { sigBits: SIGBITS });
-      const { rmin, rmax, gmin, gmax, bmin, bmax } = h2;
-      return new _VBox(rmin, rmax, gmin, gmax, bmin, bmax, h2);
-    }
-    invalidate() {
-      this._volume = this._count = -1;
-      this._avg = null;
-    }
-    volume() {
-      if (this._volume < 0) {
-        const { r1, r2, g1, g2, b1, b2 } = this.dimension;
-        this._volume = (r2 - r1 + 1) * (g2 - g1 + 1) * (b2 - b1 + 1);
-      }
-      return this._volume;
-    }
-    count() {
-      if (this._count < 0) {
-        const { hist, getColorIndex } = this.histogram;
-        const { r1, r2, g1, g2, b1, b2 } = this.dimension;
-        let c2 = 0;
-        for (let r3 = r1; r3 <= r2; r3++) {
-          for (let g3 = g1; g3 <= g2; g3++) {
-            for (let b3 = b1; b3 <= b2; b3++) {
-              const index = getColorIndex(r3, g3, b3);
-              if (!hist[index]) {
-                continue;
-              }
-              c2 += hist[index];
-            }
-          }
-        }
-        this._count = c2;
-      }
-      return this._count;
-    }
-    clone() {
-      const { histogram } = this;
-      const { r1, r2, g1, g2, b1, b2 } = this.dimension;
-      return new _VBox(r1, r2, g1, g2, b1, b2, histogram);
-    }
-    avg() {
-      if (!this._avg) {
-        const { hist, getColorIndex } = this.histogram;
-        const { r1, r2, g1, g2, b1, b2 } = this.dimension;
-        let ntot = 0;
-        const mult = 1 << 8 - SIGBITS;
-        let rsum;
-        let gsum;
-        let bsum;
-        rsum = gsum = bsum = 0;
-        for (let r3 = r1; r3 <= r2; r3++) {
-          for (let g3 = g1; g3 <= g2; g3++) {
-            for (let b3 = b1; b3 <= b2; b3++) {
-              const index = getColorIndex(r3, g3, b3);
-              const h2 = hist[index];
-              if (!h2) continue;
-              ntot += h2;
-              rsum += h2 * (r3 + 0.5) * mult;
-              gsum += h2 * (g3 + 0.5) * mult;
-              bsum += h2 * (b3 + 0.5) * mult;
-            }
-          }
-        }
-        if (ntot) {
-          this._avg = [~~(rsum / ntot), ~~(gsum / ntot), ~~(bsum / ntot)];
-        } else {
-          this._avg = [
-            ~~(mult * (r1 + r2 + 1) / 2),
-            ~~(mult * (g1 + g2 + 1) / 2),
-            ~~(mult * (b1 + b2 + 1) / 2)
-          ];
-        }
-      }
-      return this._avg;
-    }
-    contains(rgb) {
-      let [r2, g2, b2] = rgb;
-      const { r1, r2: r22, g1, g2: g22, b1, b2: b22 } = this.dimension;
-      r2 >>= RSHIFT;
-      g2 >>= RSHIFT;
-      b2 >>= RSHIFT;
-      return r2 >= r1 && r2 <= r22 && g2 >= g1 && g2 <= g22 && b2 >= b1 && b2 <= b22;
-    }
-    split() {
-      const { hist, getColorIndex } = this.histogram;
-      const { r1, r2, g1, g2, b1, b2 } = this.dimension;
-      const count = this.count();
-      if (!count) return [];
-      if (count === 1) return [this.clone()];
-      const rw = r2 - r1 + 1;
-      const gw = g2 - g1 + 1;
-      const bw = b2 - b1 + 1;
-      const maxw = Math.max(rw, gw, bw);
-      let accSum = null;
-      let sum;
-      let total;
-      sum = total = 0;
-      let maxd = null;
-      if (maxw === rw) {
-        maxd = "r";
-        accSum = new Uint32Array(r2 + 1);
-        for (let r3 = r1; r3 <= r2; r3++) {
-          sum = 0;
-          for (let g3 = g1; g3 <= g2; g3++) {
-            for (let b3 = b1; b3 <= b2; b3++) {
-              const index = getColorIndex(r3, g3, b3);
-              if (!hist[index]) continue;
-              sum += hist[index];
-            }
-          }
-          total += sum;
-          accSum[r3] = total;
-        }
-      } else if (maxw === gw) {
-        maxd = "g";
-        accSum = new Uint32Array(g2 + 1);
-        for (let g3 = g1; g3 <= g2; g3++) {
-          sum = 0;
-          for (let r3 = r1; r3 <= r2; r3++) {
-            for (let b3 = b1; b3 <= b2; b3++) {
-              const index = getColorIndex(r3, g3, b3);
-              if (!hist[index]) continue;
-              sum += hist[index];
-            }
-          }
-          total += sum;
-          accSum[g3] = total;
-        }
-      } else {
-        maxd = "b";
-        accSum = new Uint32Array(b2 + 1);
-        for (let b3 = b1; b3 <= b2; b3++) {
-          sum = 0;
-          for (let r3 = r1; r3 <= r2; r3++) {
-            for (let g3 = g1; g3 <= g2; g3++) {
-              const index = getColorIndex(r3, g3, b3);
-              if (!hist[index]) continue;
-              sum += hist[index];
-            }
-          }
-          total += sum;
-          accSum[b3] = total;
-        }
-      }
-      let splitPoint = -1;
-      const reverseSum = new Uint32Array(accSum.length);
-      for (let i2 = 0; i2 < accSum.length; i2++) {
-        const d2 = accSum[i2];
-        if (!d2) continue;
-        if (splitPoint < 0 && d2 > total / 2) splitPoint = i2;
-        reverseSum[i2] = total - d2;
-      }
-      const vbox = this;
-      function doCut(d2) {
-        const dim1 = d2 + "1";
-        const dim2 = d2 + "2";
-        const d1 = vbox.dimension[dim1];
-        let d22 = vbox.dimension[dim2];
-        const vbox1 = vbox.clone();
-        const vbox2 = vbox.clone();
-        const left = splitPoint - d1;
-        const right = d22 - splitPoint;
-        if (left <= right) {
-          d22 = Math.min(d22 - 1, ~~(splitPoint + right / 2));
-          d22 = Math.max(0, d22);
-        } else {
-          d22 = Math.max(d1, ~~(splitPoint - 1 - left / 2));
-          d22 = Math.min(vbox.dimension[dim2], d22);
-        }
-        while (!accSum[d22]) d22++;
-        let c2 = reverseSum[d22];
-        while (!c2 && accSum[d22 - 1]) c2 = reverseSum[--d22];
-        vbox1.dimension[dim2] = d22;
-        vbox2.dimension[dim1] = d22 + 1;
-        return [vbox1, vbox2];
-      }
-      return doCut(maxd);
-    }
-  };
-
-  // node_modules/@vibrant/quantizer-mmcq/dist/esm/pqueue.js
-  var PQueue = class {
-    _sort() {
-      if (!this._sorted) {
-        this.contents.sort(this._comparator);
-        this._sorted = true;
-      }
-    }
-    constructor(comparator) {
-      this._comparator = comparator;
-      this.contents = [];
-      this._sorted = false;
-    }
-    push(item) {
-      this.contents.push(item);
-      this._sorted = false;
-    }
-    peek(index) {
-      this._sort();
-      index = typeof index === "number" ? index : this.contents.length - 1;
-      return this.contents[index];
-    }
-    pop() {
-      this._sort();
-      return this.contents.pop();
-    }
-    size() {
-      return this.contents.length;
-    }
-    map(mapper) {
-      this._sort();
-      return this.contents.map(mapper);
-    }
-  };
-
-  // node_modules/@vibrant/quantizer-mmcq/dist/esm/index.js
-  var fractByPopulations = 0.75;
-  function _splitBoxes(pq, target) {
-    let lastSize = pq.size();
-    while (pq.size() < target) {
-      const vbox = pq.pop();
-      if (vbox && vbox.count() > 0) {
-        const [vbox1, vbox2] = vbox.split();
-        if (!vbox1) break;
-        pq.push(vbox1);
-        if (vbox2 && vbox2.count() > 0) pq.push(vbox2);
-        if (pq.size() === lastSize) {
-          break;
-        } else {
-          lastSize = pq.size();
-        }
-      } else {
-        break;
-      }
-    }
-  }
-  var MMCQ = (pixels, opts) => {
-    if (pixels.length === 0 || opts.colorCount < 2 || opts.colorCount > 256) {
-      throw new Error("Wrong MMCQ parameters");
-    }
-    const vbox = VBox.build(pixels);
-    vbox.histogram.colorCount;
-    const pq = new PQueue((a2, b2) => a2.count() - b2.count());
-    pq.push(vbox);
-    _splitBoxes(pq, fractByPopulations * opts.colorCount);
-    const pq2 = new PQueue(
-      (a2, b2) => a2.count() * a2.volume() - b2.count() * b2.volume()
-    );
-    pq2.contents = pq.contents;
-    _splitBoxes(pq2, opts.colorCount - pq2.size());
-    return generateSwatches(pq2);
-  };
-  function generateSwatches(pq) {
-    const swatches = [];
-    while (pq.size()) {
-      const v2 = pq.pop();
-      const color = v2.avg();
-      swatches.push(new Swatch(color, v2.count()));
-    }
-    return swatches;
-  }
-
-  // node_modules/@vibrant/generator-default/dist/esm/index.js
-  var DefaultOpts = {
-    targetDarkLuma: 0.26,
-    maxDarkLuma: 0.45,
-    minLightLuma: 0.55,
-    targetLightLuma: 0.74,
-    minNormalLuma: 0.3,
-    targetNormalLuma: 0.5,
-    maxNormalLuma: 0.7,
-    targetMutesSaturation: 0.3,
-    maxMutesSaturation: 0.4,
-    targetVibrantSaturation: 1,
-    minVibrantSaturation: 0.35,
-    weightSaturation: 3,
-    weightLuma: 6.5,
-    weightPopulation: 0.5
-  };
-  function _findMaxPopulation(swatches) {
-    let p2 = 0;
-    swatches.forEach((s2) => {
-      p2 = Math.max(p2, s2.population);
-    });
-    return p2;
-  }
-  function _isAlreadySelected(palette, s2) {
-    return palette.Vibrant === s2 || palette.DarkVibrant === s2 || palette.LightVibrant === s2 || palette.Muted === s2 || palette.DarkMuted === s2 || palette.LightMuted === s2;
-  }
-  function _createComparisonValue(saturation, targetSaturation, luma, targetLuma, population, maxPopulation, opts) {
-    function weightedMean(...values) {
-      let sum = 0;
-      let weightSum = 0;
-      for (let i2 = 0; i2 < values.length; i2 += 2) {
-        const value = values[i2];
-        const weight = values[i2 + 1];
-        if (!value || !weight) continue;
-        sum += value * weight;
-        weightSum += weight;
-      }
-      return sum / weightSum;
-    }
-    function invertDiff(value, targetValue) {
-      return 1 - Math.abs(value - targetValue);
-    }
-    return weightedMean(
-      invertDiff(saturation, targetSaturation),
-      opts.weightSaturation,
-      invertDiff(luma, targetLuma),
-      opts.weightLuma,
-      population / maxPopulation,
-      opts.weightPopulation
-    );
-  }
-  function _findColorVariation(palette, swatches, maxPopulation, targetLuma, minLuma, maxLuma, targetSaturation, minSaturation, maxSaturation, opts) {
-    let max = null;
-    let maxValue = 0;
-    swatches.forEach((swatch) => {
-      const [, s2, l2] = swatch.hsl;
-      if (s2 >= minSaturation && s2 <= maxSaturation && l2 >= minLuma && l2 <= maxLuma && !_isAlreadySelected(palette, swatch)) {
-        const value = _createComparisonValue(
-          s2,
-          targetSaturation,
-          l2,
-          targetLuma,
-          swatch.population,
-          maxPopulation,
-          opts
-        );
-        if (max === null || value > maxValue) {
-          max = swatch;
-          maxValue = value;
-        }
-      }
-    });
-    return max;
-  }
-  function _generateVariationColors(swatches, maxPopulation, opts) {
-    const palette = {
-      Vibrant: null,
-      DarkVibrant: null,
-      LightVibrant: null,
-      Muted: null,
-      DarkMuted: null,
-      LightMuted: null
-    };
-    palette.Vibrant = _findColorVariation(
-      palette,
-      swatches,
-      maxPopulation,
-      opts.targetNormalLuma,
-      opts.minNormalLuma,
-      opts.maxNormalLuma,
-      opts.targetVibrantSaturation,
-      opts.minVibrantSaturation,
-      1,
-      opts
-    );
-    palette.LightVibrant = _findColorVariation(
-      palette,
-      swatches,
-      maxPopulation,
-      opts.targetLightLuma,
-      opts.minLightLuma,
-      1,
-      opts.targetVibrantSaturation,
-      opts.minVibrantSaturation,
-      1,
-      opts
-    );
-    palette.DarkVibrant = _findColorVariation(
-      palette,
-      swatches,
-      maxPopulation,
-      opts.targetDarkLuma,
-      0,
-      opts.maxDarkLuma,
-      opts.targetVibrantSaturation,
-      opts.minVibrantSaturation,
-      1,
-      opts
-    );
-    palette.Muted = _findColorVariation(
-      palette,
-      swatches,
-      maxPopulation,
-      opts.targetNormalLuma,
-      opts.minNormalLuma,
-      opts.maxNormalLuma,
-      opts.targetMutesSaturation,
-      0,
-      opts.maxMutesSaturation,
-      opts
-    );
-    palette.LightMuted = _findColorVariation(
-      palette,
-      swatches,
-      maxPopulation,
-      opts.targetLightLuma,
-      opts.minLightLuma,
-      1,
-      opts.targetMutesSaturation,
-      0,
-      opts.maxMutesSaturation,
-      opts
-    );
-    palette.DarkMuted = _findColorVariation(
-      palette,
-      swatches,
-      maxPopulation,
-      opts.targetDarkLuma,
-      0,
-      opts.maxDarkLuma,
-      opts.targetMutesSaturation,
-      0,
-      opts.maxMutesSaturation,
-      opts
-    );
-    return palette;
-  }
-  function _generateEmptySwatches(palette, _maxPopulation, opts) {
-    if (!palette.Vibrant && !palette.DarkVibrant && !palette.LightVibrant) {
-      if (!palette.DarkVibrant && palette.DarkMuted) {
-        let [h2, s2, l2] = palette.DarkMuted.hsl;
-        l2 = opts.targetDarkLuma;
-        palette.DarkVibrant = new Swatch(hslToRgb(h2, s2, l2), 0);
-      }
-      if (!palette.LightVibrant && palette.LightMuted) {
-        let [h2, s2, l2] = palette.LightMuted.hsl;
-        l2 = opts.targetDarkLuma;
-        palette.DarkVibrant = new Swatch(hslToRgb(h2, s2, l2), 0);
-      }
-    }
-    if (!palette.Vibrant && palette.DarkVibrant) {
-      let [h2, s2, l2] = palette.DarkVibrant.hsl;
-      l2 = opts.targetNormalLuma;
-      palette.Vibrant = new Swatch(hslToRgb(h2, s2, l2), 0);
-    } else if (!palette.Vibrant && palette.LightVibrant) {
-      let [h2, s2, l2] = palette.LightVibrant.hsl;
-      l2 = opts.targetNormalLuma;
-      palette.Vibrant = new Swatch(hslToRgb(h2, s2, l2), 0);
-    }
-    if (!palette.DarkVibrant && palette.Vibrant) {
-      let [h2, s2, l2] = palette.Vibrant.hsl;
-      l2 = opts.targetDarkLuma;
-      palette.DarkVibrant = new Swatch(hslToRgb(h2, s2, l2), 0);
-    }
-    if (!palette.LightVibrant && palette.Vibrant) {
-      let [h2, s2, l2] = palette.Vibrant.hsl;
-      l2 = opts.targetLightLuma;
-      palette.LightVibrant = new Swatch(hslToRgb(h2, s2, l2), 0);
-    }
-    if (!palette.Muted && palette.Vibrant) {
-      let [h2, s2, l2] = palette.Vibrant.hsl;
-      l2 = opts.targetMutesSaturation;
-      palette.Muted = new Swatch(hslToRgb(h2, s2, l2), 0);
-    }
-    if (!palette.DarkMuted && palette.DarkVibrant) {
-      let [h2, s2, l2] = palette.DarkVibrant.hsl;
-      l2 = opts.targetMutesSaturation;
-      palette.DarkMuted = new Swatch(hslToRgb(h2, s2, l2), 0);
-    }
-    if (!palette.LightMuted && palette.LightVibrant) {
-      let [h2, s2, l2] = palette.LightVibrant.hsl;
-      l2 = opts.targetMutesSaturation;
-      palette.LightMuted = new Swatch(hslToRgb(h2, s2, l2), 0);
-    }
-  }
-  var DefaultGenerator = (swatches, opts) => {
-    opts = Object.assign({}, DefaultOpts, opts);
-    const maxPopulation = _findMaxPopulation(swatches);
-    const palette = _generateVariationColors(swatches, maxPopulation, opts);
-    _generateEmptySwatches(palette, maxPopulation, opts);
-    return palette;
-  };
-
-  // node_modules/node-vibrant/dist/esm/pipeline/index.js
-  var pipeline = new BasicPipeline().filter.register(
-    "default",
-    (r2, g2, b2, a2) => a2 >= 125 && !(r2 > 250 && g2 > 250 && b2 > 250)
-  ).quantizer.register("mmcq", MMCQ).generator.register("default", DefaultGenerator);
-
-  // node_modules/node-vibrant/dist/esm/browser.js
-  Vibrant.use(pipeline);
-
   // src/main-features/appearance/themes.ts
+  k([lch_default]);
   var currentThemeName;
   var currentTheme;
   async function getTheme(name2) {
@@ -5018,26 +5110,26 @@ Is it scaring you off?`,
       this.enableY = enableY;
       this.element.appendChild(this.visibleElement);
       let isDragging = false;
-      this.parentContainer.addEventListener("mousedown", (e2) => {
+      this.parentContainer.addEventListener("mousedown", (e3) => {
         isDragging = true;
-        this.handlePointerEvent(e2);
+        this.handlePointerEvent(e3);
       });
       document.addEventListener("mouseup", () => {
         isDragging = false;
       });
-      document.addEventListener("mousemove", (e2) => {
+      document.addEventListener("mousemove", (e3) => {
         if (isDragging) {
-          this.handlePointerEvent(e2);
+          this.handlePointerEvent(e3);
         }
       });
       this.updateCursorPosition();
     }
-    handlePointerEvent(e2) {
+    handlePointerEvent(e3) {
       const rect = this.parentContainer.getBoundingClientRect();
-      const x2 = e2.clientX - rect.left;
-      const y2 = e2.clientY - rect.top;
-      const xPercent = x2 / rect.width * 100;
-      const yPercent = y2 / rect.height * 100;
+      const x3 = e3.clientX - rect.left;
+      const y3 = e3.clientY - rect.top;
+      const xPercent = x3 / rect.width * 100;
+      const yPercent = y3 / rect.height * 100;
       if (this.enableX) this.xPos = Math.max(0, Math.min(100, xPercent));
       if (this.enableY) this.yPos = Math.max(0, Math.min(100, yPercent));
       this.updateCursorPosition();
@@ -5291,10 +5383,14 @@ Is it scaring you off?`,
             "theme-backgrounds/" + this.name + ".jpg"
           );
         });
-        this.element.style.setProperty(
-          "--background-image-local",
-          `url(${await imageURL.url})`
-        );
+        if (await isValidImage(await imageURL.url)) {
+          this.element.style.setProperty(
+            "--background-image-local",
+            `url(${await imageURL.url})`
+          );
+        } else {
+          this.element.style.setProperty("--background-image-local", `url()`);
+        }
         if (isFirefox && imageURL.type == "file") {
           let imageContainer = this.element.querySelector(".image-container");
           if (!imageContainer) return;
@@ -5303,7 +5399,11 @@ Is it scaring you off?`,
             "image-container",
             "firefox-container"
           );
-          stupidImageContainer.src = imageURL.url;
+          if (await isValidImage(imageURL.url)) {
+            stupidImageContainer.src = imageURL.url;
+          } else {
+            stupidImageContainer.src = "";
+          }
           let bottomContainer = this.element.querySelector(".theme-tile-bottom");
           if (!bottomContainer) return;
           imageContainer.remove();
@@ -5653,11 +5753,13 @@ Is it scaring you off?`,
             result.link = name2 + ".jpg";
           }
         }
-        await browser.runtime.sendMessage({
-          action: "setImage",
-          id: newTheme,
-          data: result
-        });
+        if (await isValidImage(result.imageData)) {
+          await browser.runtime.sendMessage({
+            action: "setImage",
+            id: newTheme,
+            data: result
+          });
+        }
         if (isCustom) {
           await this.updateSelectorContent();
         }
@@ -5704,12 +5806,29 @@ Is it scaring you off?`,
     await themeEditor.create();
     themeEditor.show();
   }
+  function convertColorPalette(vibrantPalette) {
+    function convertSwatchToColord(swatch) {
+      if (!swatch) return w("#000");
+      return w(swatch.hex);
+    }
+    let colordPalette;
+    colordPalette = {
+      Vibrant: convertSwatchToColord(vibrantPalette.Vibrant),
+      DarkVibrant: convertSwatchToColord(vibrantPalette.DarkVibrant),
+      LightVibrant: convertSwatchToColord(vibrantPalette.LightVibrant),
+      Muted: convertSwatchToColord(vibrantPalette.Muted),
+      DarkMuted: convertSwatchToColord(vibrantPalette.DarkMuted),
+      LightMuted: convertSwatchToColord(vibrantPalette.LightMuted)
+    };
+    return colordPalette;
+  }
   var CustomThemeCreator = class extends BaseWindow {
     theme;
     name;
     editableValues;
     colorPreviews;
     backgroundImageInput;
+    backgroundImagePreview;
     getEditableValues(cssProperties) {
       let nonEditableValues = [
         "--color-homepage-sidebars-bg",
@@ -5731,10 +5850,20 @@ Is it scaring you off?`,
         );
       }
       colorPreview.dataset["name"] = name2;
-      colorPreview.addEventListener("click", (e2) => {
-        this.openColorPicker(name2, colorPreview, e2);
+      colorPreview.addEventListener("click", (e3) => {
+        this.openColorPicker(name2, colorPreview, e3);
       });
       return colorPreview;
+    }
+    updateColorPreviews() {
+      this.colorPreviews.forEach((preview) => {
+        let previewName = Object.keys(preview)[0];
+        let element = Object.values(preview)[0];
+        if (previewName && element) {
+          let newValue = this.theme.cssProperties[previewName];
+          if (newValue) element.style.setProperty("--current-color", newValue);
+        }
+      });
     }
     generateColorPreviews(editableValues) {
       let colorPreviews = editableValues.map((colorName) => {
@@ -5751,15 +5880,21 @@ Is it scaring you off?`,
       this.editableValues = this.getEditableValues(theme.cssProperties);
       this.colorPreviews = this.generateColorPreviews(this.editableValues);
       this.backgroundImageInput = new ImageSelector(this.name);
+      this.backgroundImageInput.id = this.name;
+      this.backgroundImageInput.onStore = () => {
+        updateTheme(this.name);
+        this.updateBackgroundImagePreview();
+      };
+      this.backgroundImagePreview = this.createBackgroundImagePreview();
     }
     content = document.createElement("div");
     displayNameInput = document.createElement("input");
-    openColorPicker(name2, colorPreview, e2) {
+    openColorPicker(name2, colorPreview, e3) {
       let colorPicker = new ColorPicker2();
       colorPicker.element.style.position = "absolute";
       colorPicker.element.classList.add("floating-picker");
       let _docEventHandler = (docEvent) => {
-        if (docEvent === e2) return;
+        if (docEvent === e3) return;
         if (!(docEvent.target instanceof Node)) return;
         const targetElement = docEvent.target;
         const parentElement = targetElement.parentElement;
@@ -5814,10 +5949,151 @@ Is it scaring you off?`,
       });
       return this.displayNameInput;
     }
-    async getThemeColors() {
-      const img = document.getElementById("background_image");
-      if (!img.src) return;
-      let vibrantTester = new Vibrant(img);
+    createMakeThemeButton() {
+      let button = document.createElement("button");
+      button.classList.add("make-theme-button");
+      button.innerHTML = "Generate Theme";
+      button.addEventListener("click", async () => {
+        if (await isValidImage(this.backgroundImagePreview.src))
+          await this.generateTheme();
+      });
+      return button;
+    }
+    createBackgroundImagePreview() {
+      let img = document.createElement("img");
+      img.classList.add("theme-creator-preview-image");
+      return img;
+    }
+    async updateBackgroundImagePreview() {
+      console.log("updating");
+      let result = await browser.runtime.sendMessage({
+        action: "getImage",
+        id: this.name
+      });
+      if (result.type == "default") {
+        result.imageData = await getExtensionImage(
+          "theme-backgrounds/" + this.name + ".jpg"
+        );
+      }
+      if (await isValidImage(result.imageData)) {
+        this.backgroundImagePreview.src = result.imageData;
+        this.element.classList.remove("no-image-available");
+      } else {
+        this.backgroundImagePreview.src = "";
+        this.element.classList.add("no-image-available");
+        this.content.classList.add("no-image-available");
+      }
+    }
+    async getImageColors() {
+      let vibrantTester = new Vibrant(this.backgroundImagePreview.src, {
+        quality: 1,
+        colorCount: 256
+      });
+      let palette = await vibrantTester.getPalette();
+      return palette;
+    }
+    readUserChoice() {
+      let brightnessButton = document.getElementById(
+        "brightness-control"
+      );
+      let saturationButton = document.getElementById(
+        "saturation-control"
+      );
+      if (!(brightnessButton && saturationButton)) return;
+      let choice = {
+        mode: brightnessButton.checked,
+        saturation: saturationButton.checked
+      };
+      return choice;
+    }
+    async generateTheme() {
+      let swatchPalette = await this.getImageColors();
+      let colordPalette = convertColorPalette(swatchPalette);
+      let choice = this.readUserChoice();
+      if (!choice) return;
+      let base00;
+      let base01;
+      let base02;
+      let base03;
+      let accent;
+      let textcolor;
+      let splashcolor;
+      let darkenColor;
+      if (choice.mode) {
+        darkenColor = w("rgba(0,0,0,0.2)");
+        if (choice.saturation) {
+          base00 = colordPalette.DarkVibrant.darken(0.2);
+          base01 = colordPalette.DarkVibrant.darken(0.1);
+          base02 = colordPalette.DarkVibrant;
+          base03 = colordPalette.DarkVibrant.lighten(0.1);
+          accent = colordPalette.Vibrant;
+          textcolor = colordPalette.LightVibrant;
+          splashcolor = colordPalette.DarkVibrant;
+        } else {
+          base00 = colordPalette.DarkMuted.darken(0.2);
+          base01 = colordPalette.DarkMuted.darken(0.1);
+          base02 = colordPalette.DarkMuted;
+          base03 = colordPalette.DarkMuted.lighten(0.1);
+          accent = colordPalette.Muted;
+          textcolor = colordPalette.LightMuted;
+          splashcolor = colordPalette.DarkMuted;
+        }
+      } else {
+        darkenColor = w("rgba(228, 228, 228, 0.4)");
+        if (choice.saturation) {
+          base00 = colordPalette.LightVibrant.lighten(0.1);
+          base01 = colordPalette.LightVibrant.lighten(0.05);
+          base02 = colordPalette.LightVibrant;
+          base03 = colordPalette.LightVibrant.darken(0.1);
+          accent = colordPalette.Vibrant;
+          textcolor = colordPalette.DarkVibrant;
+          splashcolor = colordPalette.DarkMuted;
+        } else {
+          base00 = colordPalette.LightMuted.lighten(0.1);
+          base01 = colordPalette.LightMuted.lighten(0.05);
+          base02 = colordPalette.LightMuted;
+          base03 = colordPalette.LightMuted.darken(0.1);
+          accent = colordPalette.Muted;
+          textcolor = colordPalette.DarkMuted;
+          splashcolor = colordPalette.DarkMuted;
+        }
+      }
+      this.theme = {
+        displayName: this.theme.displayName,
+        cssProperties: {
+          ...this.theme.cssProperties,
+          "--color-accent": accent.toHex(),
+          "--color-text": textcolor.toHex(),
+          "--color-base00": base00.toHex(),
+          "--color-base01": base01.toHex(),
+          "--color-base02": base02.toHex(),
+          "--color-base03": base03.toHex(),
+          "--darken-background": darkenColor.toHex(),
+          "--color-homepage-sidebars-bg": darkenColor.alpha(0.1).toHex(),
+          "--color-splashtext": splashcolor.toHex()
+        }
+      };
+      await browser.runtime.sendMessage({
+        action: "saveCustomTheme",
+        data: this.theme,
+        id: this.name
+      });
+      this.updateColorPreviews();
+      await updateTheme(this.name);
+    }
+    createThemeGenerationControls() {
+      let container = document.createElement("div");
+      let brightnessButton = createButtonWithLabel(
+        "brightness-control",
+        "Dark mode"
+      );
+      let saturationButton = createButtonWithLabel(
+        "saturation-control",
+        "Saturated"
+      );
+      container.appendChild(brightnessButton);
+      container.appendChild(saturationButton);
+      return container;
     }
     async renderContent() {
       this.colorPreviews.forEach((preview) => {
@@ -5826,16 +6102,24 @@ Is it scaring you off?`,
       });
       this.content.appendChild(this.createDisplayNameInput());
       this.content.appendChild(this.createRemoveButton());
+      this.content.appendChild(this.createMakeThemeButton());
+      this.content.appendChild(this.backgroundImagePreview);
+      this.content.appendChild(this.backgroundImageInput.createFullFileInput());
+      this.content.appendChild(this.createThemeGenerationControls());
+      await this.updateBackgroundImagePreview();
       this.load(this.theme);
-      await this.getThemeColors();
       return this.content;
     }
     async load(theme) {
       this.displayNameInput.value = theme.displayName;
+      this.updateColorPreviews();
+      await this.backgroundImageInput.loadImageData();
     }
     onClosed() {
       document.body.removeChild(this.element);
       settingsWindow.themeSelector.updateSelectorContent();
+      settingsWindow.loadPage();
+      loadQuickSettings();
       openSettingsWindow(null);
     }
     async onRemoveTheme() {
@@ -5998,16 +6282,16 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     });
     createPlantWidget(document.getElementById("plantWidget"));
   }
-  function calculatePercentile(t2) {
+  function calculatePercentile(t3) {
     const totalTime = 259200;
-    return Math.max(0, 100 * (1 - t2 / totalTime));
+    return Math.max(0, 100 * (1 - t3 / totalTime));
   }
-  function getTimeInCorrectFormat(t2) {
-    if (t2 / 60 / 1e3 < 1) return "Now";
-    if (t2 / 60 / 60 / 1e3 < 1) return Math.round(t2 / 60 / 1e3) + "min ago";
-    if (t2 / 60 / 60 / 1e3 / 24 < 1)
-      return Math.round(t2 / 60 / 60 / 1e3) + "h ago";
-    return Math.round(t2 / 60 / 60 / 1e3 / 24) + "d ago";
+  function getTimeInCorrectFormat(t3) {
+    if (t3 / 60 / 1e3 < 1) return "Now";
+    if (t3 / 60 / 60 / 1e3 < 1) return Math.round(t3 / 60 / 1e3) + "min ago";
+    if (t3 / 60 / 60 / 1e3 / 24 < 1)
+      return Math.round(t3 / 60 / 60 / 1e3) + "h ago";
+    return Math.round(t3 / 60 / 60 / 1e3 / 24) + "d ago";
   }
   function createRemoveButton(isAlive) {
     let removeButtonDiv = document.createElement("div");
@@ -6801,30 +7085,30 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     GlobalChatOpenButton.id = "global_chat_button";
     GlobalChatOpenButton.className = "topnav__btn";
     GlobalChatOpenButton.innerHTML = gcIconSvg;
-    GlobalChatOpenButton.addEventListener("click", (e2) => openGlobalChat(e2));
+    GlobalChatOpenButton.addEventListener("click", (e3) => openGlobalChat(e3));
     return GlobalChatOpenButton;
   }
-  window.addEventListener("message", async (e2) => {
-    if (!Object.values(GC_DOMAINS).includes(e2.origin)) {
+  window.addEventListener("message", async (e3) => {
+    if (!Object.values(GC_DOMAINS).includes(e3.origin)) {
       console.warn(
         "Got a message but it was not from one of the global chat domains."
       );
       return;
     }
     let response = { error: "not found" };
-    switch (e2.data.action) {
+    switch (e3.data.action) {
       // Get the current plant.
       case "plantapi.v1.get_current":
         response = await getPlantV1();
         break;
       case "plantapi.v1.get_stage_svg":
         response = {
-          svg: getPlantSvg(stageDataToInternalPlantData(e2.data.stageData))
+          svg: getPlantSvg(stageDataToInternalPlantData(e3.data.stageData))
         };
         break;
     }
-    response.callId = e2.data.callId;
-    e2.source.postMessage(response, e2.origin);
+    response.callId = e3.data.callId;
+    e3.source.postMessage(response, e3.origin);
   });
   function stageDataToInternalPlantData(stageData) {
     return {
@@ -6869,16 +7153,16 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   }
   function quick_cmd_list() {
     let cmd_list = [];
-    for (let i2 = 0; i2 < quicks.length; i2++) {
-      cmd_list.push({ value: quicks[i2].name, meta: "quick: " + quicks[i2].url });
+    for (let i3 = 0; i3 < quicks.length; i3++) {
+      cmd_list.push({ value: quicks[i3].name, meta: "quick: " + quicks[i3].url });
     }
     return cmd_list;
   }
   function add_quick(name2, url) {
     let quick = { name: name2.toLowerCase(), url };
-    for (let i2 = 0; i2 < quicks.length; i2++) {
-      if (quicks[i2].name == name2) {
-        quicks[i2] = quick;
+    for (let i3 = 0; i3 < quicks.length; i3++) {
+      if (quicks[i3].name == name2) {
+        quicks[i3] = quick;
         quick_save();
         return;
       }
@@ -6887,9 +7171,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     quick_save();
   }
   function remove_quick(name2) {
-    for (let i2 = 0; i2 < quicks.length; i2++) {
-      if (quicks[i2].name == name2) {
-        quicks.splice(i2, 1);
+    for (let i3 = 0; i3 < quicks.length; i3++) {
+      if (quicks[i3].name == name2) {
+        quicks.splice(i3, 1);
         quick_save();
         return;
       }
@@ -6918,9 +7202,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       cmd_list,
       function(name2, shift) {
         value_list = [];
-        for (let i2 = 0; i2 < quicks.length; i2++) {
-          if (quicks[i2].name == name2) {
-            value_list = [{ value: quicks[i2].url }];
+        for (let i3 = 0; i3 < quicks.length; i3++) {
+          if (quicks[i3].name == name2) {
+            value_list = [{ value: quicks[i3].url }];
             break;
           }
         }
@@ -6954,10 +7238,10 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     const contentType = response.headers.get("content-type");
     if (response.ok && contentType && contentType.includes("application/json")) {
       let response_data = await response.json();
-      for (let i2 = 0; i2 < response_data.length; i2++) {
+      for (let i3 = 0; i3 < response_data.length; i3++) {
         links.push({
-          url: response_data[i2].url,
-          value: response_data[i2].name.toLowerCase(),
+          url: response_data[i3].url,
+          value: response_data[i3].name.toLowerCase(),
           meta: "link"
         });
       }
@@ -6972,8 +7256,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     const contentType = response.headers.get("content-type");
     if (response.ok && contentType && contentType.includes("application/json")) {
       let response_data = await response.json();
-      for (let i2 = 0; i2 < response_data.own.length; i2++) {
-        let vak = response_data.own[i2];
+      for (let i3 = 0; i3 < response_data.own.length; i3++) {
+        let vak = response_data.own[i3];
         let meta = "vak";
         if (vak.descr != "") {
           meta += "  [ " + vak.descr + " ]";
@@ -6990,8 +7274,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     let goto_items_html = document.querySelectorAll(
       ".js-shortcuts-container > a"
     );
-    for (let i2 = 0; i2 < goto_items_html.length; i2++) {
-      const item = goto_items_html[i2];
+    for (let i3 = 0; i3 < goto_items_html.length; i3++) {
+      const item = goto_items_html[i3];
       goto_items.push({
         url: item.href,
         value: item.innerText.toLowerCase().trim(),
@@ -7127,26 +7411,26 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         if (cmd.startsWith("config.")) {
           dmenuEditConfig(cmd);
         }
-        for (let i2 = 0; i2 < quicks.length; i2++) {
-          const quick = quicks[i2];
+        for (let i3 = 0; i3 < quicks.length; i3++) {
+          const quick = quicks[i3];
           if (quick.name == cmd) {
             openURL2(quick.url, true);
             return;
           }
         }
-        for (let i2 = 0; i2 < links.length; i2++) {
-          if (links[i2].value == cmd) {
-            openURL2(links[i2].url, true);
+        for (let i3 = 0; i3 < links.length; i3++) {
+          if (links[i3].value == cmd) {
+            openURL2(links[i3].url, true);
           }
         }
-        for (let i2 = 0; i2 < goto_items.length; i2++) {
-          if (goto_items[i2].value == cmd) {
-            openURL2(goto_items[i2].url);
+        for (let i3 = 0; i3 < goto_items.length; i3++) {
+          if (goto_items[i3].value == cmd) {
+            openURL2(goto_items[i3].url);
           }
         }
-        for (let i2 = 0; i2 < vakken.length; i2++) {
-          if (vakken[i2].value == cmd) {
-            openURL2(vakken[i2].url);
+        for (let i3 = 0; i3 < vakken.length; i3++) {
+          if (vakken[i3].value == cmd) {
+            openURL2(vakken[i3].url);
           }
         }
       },
@@ -7156,11 +7440,11 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   }
 
   // src/main-features/keybinds.ts
-  document.addEventListener("keyup", async (e2) => {
-    if (e2.target?.tagName === "INPUT") return;
-    if (e2.target?.tagName === "TEXTAREA") return;
+  document.addEventListener("keyup", async (e3) => {
+    if (e3.target?.tagName === "INPUT") return;
+    if (e3.target?.tagName === "TEXTAREA") return;
     if (document.getElementById("tinymce")) return;
-    const key = e2.key === " " ? "Space" : e2.key.length === 1 ? e2.key.toUpperCase() : e2.key;
+    const key = e3.key === " " ? "Space" : e3.key.length === 1 ? e3.key.toUpperCase() : e3.key;
     if ((typeof keybinds === "undefined" || !keybinds || Object.keys(keybinds).length === 0) && key === ":") {
       do_qm("dmenu");
       return;
@@ -7170,10 +7454,10 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         do_qm(keybinds.dmenu);
         break;
       case keybinds.settings:
-        openSettingsWindow(e2);
+        openSettingsWindow(e3);
         break;
       case keybinds.gc:
-        openGlobalChat(e2);
+        openGlobalChat(e3);
         break;
     }
     if (!widgetEditModeInit) return;
@@ -7209,7 +7493,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       img.style.objectFit = "cover";
       img.style.zIndex = "-1";
       img.style.display = "block";
-      if (imageSrc) img.src = imageSrc;
+      img.src = imageSrc;
       if (!document.getElementById("background_image") && !document.getElementById("tinymce")) {
         document.body.appendChild(img);
       }
@@ -7223,7 +7507,11 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         "theme-backgrounds/" + appearance.theme + ".jpg"
       );
     }
-    displayBackgroundImage(result.imageData);
+    if (await isValidImage(result.imageData)) {
+      displayBackgroundImage(result.imageData);
+    } else {
+      displayBackgroundImage("");
+    }
   }
 
   // src/games/games.ts
@@ -7264,21 +7552,21 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       return "games";
     }
     constructor() {
-      document.addEventListener("keydown", async (e2) => {
-        if (e2.repeat) {
+      document.addEventListener("keydown", async (e3) => {
+        if (e3.repeat) {
           return;
         }
         if (this.playing) {
-          await this.onKeyDown(e2);
+          await this.onKeyDown(e3);
         } else if (this.hasPlayedAtLeastOnce) {
-          if (e2.code === "Space") {
+          if (e3.code === "Space") {
             await this.#startGame();
           }
         }
       });
-      document.addEventListener("keyup", async (e2) => {
+      document.addEventListener("keyup", async (e3) => {
         if (this.playing) {
-          await this.onKeyUp(e2);
+          await this.onKeyUp(e3);
         }
       });
       super();
@@ -7362,9 +7650,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       this.canvas.height = 300;
       this.canvas.classList.add("game-canvas");
       this.canvas.style.display = "none";
-      this.canvas.addEventListener("click", async (e2) => {
+      this.canvas.addEventListener("click", async (e3) => {
         if (this.playing) {
-          await this.onMouse(e2);
+          await this.onMouse(e3);
         }
       });
       div.appendChild(this.canvas);
@@ -7399,10 +7687,10 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           let display = document.createElement("span");
           sliderCont.appendChild(display);
           this.#optionElements[opt.name] = { display, input: slider };
-          slider.addEventListener("input", (e2) => {
-            this.#updateOpt(opt.name, e2.target.value);
+          slider.addEventListener("input", (e3) => {
+            this.#updateOpt(opt.name, e3.target.value);
           });
-          slider.addEventListener("change", async (e2) => {
+          slider.addEventListener("change", async (e3) => {
             await this.setSetting("options", this.#optionValues);
           });
           menuBottom.appendChild(sliderCont);
@@ -7411,7 +7699,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       this.#buttonEl = document.createElement("button");
       this.#buttonEl.classList.add("game-button");
       this.#buttonEl.innerText = "Play";
-      this.#buttonEl.addEventListener("click", async (e2) => {
+      this.#buttonEl.addEventListener("click", async (e3) => {
         await this.#startGame();
       });
       menuBottom.appendChild(this.#buttonEl);
@@ -7478,11 +7766,11 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     // frame)
     onGameDraw(ctx, deltaTime) {
     }
-    async onKeyDown(e2) {
+    async onKeyDown(e3) {
     }
-    async onKeyUp(e2) {
+    async onKeyUp(e3) {
     }
-    async onMouse(e2) {
+    async onMouse(e3) {
     }
     get tickSpeed() {
       return 60;
@@ -7518,10 +7806,10 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     }
     async onGameStart() {
       const w2 = this.canvas.width;
-      const h2 = this.canvas.height;
+      const h3 = this.canvas.height;
       this.ball = {
         x: w2 / 2,
-        y: h2 / 2,
+        y: h3 / 2,
         dx: BALL_SPEED * this.getOpt("speed") * 0.01,
         dy: -BALL_SPEED * this.getOpt("speed") * 0.01
       };
@@ -7530,35 +7818,35 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       this.rightPressed = false;
       this.score = 0;
       this.bricks = [];
-      for (let c2 = 0; c2 < BRICK_COLS; c2++) {
-        for (let r2 = 0; r2 < BRICK_ROWS; r2++) {
+      for (let c3 = 0; c3 < BRICK_COLS; c3++) {
+        for (let r3 = 0; r3 < BRICK_ROWS; r3++) {
           this.bricks.push({
-            x: c2 * (BRICK_WIDTH + BRICK_PADDING) + 10,
-            y: r2 * (BRICK_HEIGHT + BRICK_PADDING) + 10,
+            x: c3 * (BRICK_WIDTH + BRICK_PADDING) + 10,
+            y: r3 * (BRICK_HEIGHT + BRICK_PADDING) + 10,
             status: 1
           });
         }
       }
     }
-    drawRoundedRect(ctx, x2, y2, width, height, radius) {
+    drawRoundedRect(ctx, x3, y3, width, height, radius) {
       ctx.beginPath();
-      ctx.moveTo(x2 + radius, y2);
-      ctx.lineTo(x2 + width - radius, y2);
-      ctx.quadraticCurveTo(x2 + width, y2, x2 + width, y2 + radius);
-      ctx.lineTo(x2 + width, y2 + height - radius);
-      ctx.quadraticCurveTo(x2 + width, y2 + height, x2 + width - radius, y2 + height);
-      ctx.lineTo(x2 + radius, y2 + height);
-      ctx.quadraticCurveTo(x2, y2 + height, x2, y2 + height - radius);
-      ctx.lineTo(x2, y2 + radius);
-      ctx.quadraticCurveTo(x2, y2, x2 + radius, y2);
+      ctx.moveTo(x3 + radius, y3);
+      ctx.lineTo(x3 + width - radius, y3);
+      ctx.quadraticCurveTo(x3 + width, y3, x3 + width, y3 + radius);
+      ctx.lineTo(x3 + width, y3 + height - radius);
+      ctx.quadraticCurveTo(x3 + width, y3 + height, x3 + width - radius, y3 + height);
+      ctx.lineTo(x3 + radius, y3 + height);
+      ctx.quadraticCurveTo(x3, y3 + height, x3, y3 + height - radius);
+      ctx.lineTo(x3, y3 + radius);
+      ctx.quadraticCurveTo(x3, y3, x3 + radius, y3);
       ctx.closePath();
       ctx.fill();
     }
     onGameDraw(ctx, dt) {
       const w2 = this.canvas.width;
-      const h2 = this.canvas.height;
+      const h3 = this.canvas.height;
       ctx.fillStyle = getThemeVar("--color-base01");
-      ctx.fillRect(0, 0, w2, h2);
+      ctx.fillRect(0, 0, w2, h3);
       const speed = PADDLE_SPEED * this.getOpt("speed") * 0.01;
       if (this.leftPressed) this.paddleX -= speed * dt;
       if (this.rightPressed) this.paddleX += speed * dt;
@@ -7578,17 +7866,17 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         ball.y = BALL_RADIUS;
         ball.dy *= -1;
       }
-      if (ball.y > h2 - PADDLE_HEIGHT - BALL_RADIUS && ball.x > this.paddleX && ball.x < this.paddleX + PADDLE_WIDTH) {
+      if (ball.y > h3 - PADDLE_HEIGHT - BALL_RADIUS && ball.x > this.paddleX && ball.x < this.paddleX + PADDLE_WIDTH) {
         ball.dy *= -1;
-        ball.y = h2 - PADDLE_HEIGHT - BALL_RADIUS;
+        ball.y = h3 - PADDLE_HEIGHT - BALL_RADIUS;
       }
-      if (ball.y > h2 + BALL_RADIUS) {
+      if (ball.y > h3 + BALL_RADIUS) {
         this.stopGame();
       }
-      for (let b2 of this.bricks) {
-        if (b2.status === 1) {
-          if (ball.x > b2.x && ball.x < b2.x + BRICK_WIDTH && ball.y > b2.y && ball.y < b2.y + BRICK_HEIGHT) {
-            b2.status = 0;
+      for (let b3 of this.bricks) {
+        if (b3.status === 1) {
+          if (ball.x > b3.x && ball.x < b3.x + BRICK_WIDTH && ball.y > b3.y && ball.y < b3.y + BRICK_HEIGHT) {
+            b3.status = 0;
             ball.dy *= -1;
             this.score++;
             break;
@@ -7599,7 +7887,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       this.drawRoundedRect(
         ctx,
         this.paddleX,
-        h2 - PADDLE_HEIGHT,
+        h3 - PADDLE_HEIGHT,
         PADDLE_WIDTH,
         PADDLE_HEIGHT,
         5
@@ -7609,19 +7897,19 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       ctx.arc(ball.x, ball.y, BALL_RADIUS, 0, 2 * Math.PI);
       ctx.fill();
       ctx.fillStyle = getThemeVar("--color-accent");
-      for (let b2 of this.bricks) {
-        if (b2.status === 1) {
-          this.drawRoundedRect(ctx, b2.x, b2.y, BRICK_WIDTH, BRICK_HEIGHT, 5);
+      for (let b3 of this.bricks) {
+        if (b3.status === 1) {
+          this.drawRoundedRect(ctx, b3.x, b3.y, BRICK_WIDTH, BRICK_HEIGHT, 5);
         }
       }
     }
-    onKeyDown(e2) {
-      if (e2.code === "ArrowLeft") this.leftPressed = true;
-      else if (e2.code === "ArrowRight") this.rightPressed = true;
+    onKeyDown(e3) {
+      if (e3.code === "ArrowLeft") this.leftPressed = true;
+      else if (e3.code === "ArrowRight") this.rightPressed = true;
     }
-    onKeyUp(e2) {
-      if (e2.code === "ArrowLeft") this.leftPressed = false;
-      else if (e2.code === "ArrowRight") this.rightPressed = false;
+    onKeyUp(e3) {
+      if (e3.code === "ArrowLeft") this.leftPressed = false;
+      else if (e3.code === "ArrowRight") this.rightPressed = false;
     }
   };
   registerWidget(new BreakoutWidget());
@@ -7650,20 +7938,20 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     }
     #drawGround(ctx) {
       let w2 = this.canvas.width;
-      let h2 = this.canvas.height;
+      let h3 = this.canvas.height;
       ctx.beginPath();
       ctx.lineWidth = 1;
-      ctx.moveTo(0, h2 - FLOOR_H);
-      ctx.lineTo(w2, h2 - FLOOR_H);
+      ctx.moveTo(0, h3 - FLOOR_H);
+      ctx.lineTo(w2, h3 - FLOOR_H);
       ctx.stroke();
       ctx.fillStyle = getThemeVar("--color-accent");
       ctx.strokeStyle = getThemeVar("--color-base01");
-      ctx.fillRect(0, h2 - FLOOR_H, w2, FLOOR_H);
-      ctx.strokeRect(0, h2 - FLOOR_H, w2, FLOOR_H);
-      for (let i2 = 0; i2 < w2 / 20 * 2; i2++) {
+      ctx.fillRect(0, h3 - FLOOR_H, w2, FLOOR_H);
+      ctx.strokeRect(0, h3 - FLOOR_H, w2, FLOOR_H);
+      for (let i3 = 0; i3 < w2 / 20 * 2; i3++) {
         ctx.beginPath();
-        ctx.moveTo(i2 * 20 + this.bgX, h2 - FLOOR_H);
-        ctx.lineTo(i2 * 20 + this.bgX + FLOOR_H, h2);
+        ctx.moveTo(i3 * 20 + this.bgX, h3 - FLOOR_H);
+        ctx.lineTo(i3 * 20 + this.bgX + FLOOR_H, h3);
         ctx.stroke();
       }
     }
@@ -7764,13 +8052,13 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       this.#drawPipe(ctx, this.pipe);
       this.#drawGround(ctx);
     }
-    async onMouse(e2) {
+    async onMouse(e3) {
       this.jump = true;
     }
-    async onKeyDown(e2) {
-      if (e2.code === "Space" || e2.code === "ArrowUp") {
+    async onKeyDown(e3) {
+      if (e3.code === "Space" || e3.code === "ArrowUp") {
         this.jump = true;
-        e2.preventDefault();
+        e3.preventDefault();
       }
     }
   };
@@ -7780,9 +8068,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   var Point = class _Point {
     x;
     y;
-    constructor(x2, y2) {
-      this.x = x2;
-      this.y = y2;
+    constructor(x3, y3) {
+      this.x = x3;
+      this.y = y3;
     }
     add(other) {
       return new _Point(this.x + other.x, this.y + other.y);
@@ -7824,7 +8112,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         this.stopGame();
         return;
       }
-      if (this.#snake.find((p2) => p2.equal(newHead))) {
+      if (this.#snake.find((p3) => p3.equal(newHead))) {
         this.stopGame();
         return;
       }
@@ -7848,7 +8136,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     }
     #spawnFood() {
       this.#food = this.#getRandomFieldPos();
-      while (this.#snake.find((p2) => p2.equal(this.#food))) {
+      while (this.#snake.find((p3) => p3.equal(this.#food))) {
         this.#food = this.#getRandomFieldPos();
       }
     }
@@ -7903,17 +8191,17 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       ctx.fillStyle = getThemeVar("--color-base01");
       ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
       if (this.settings.enableGrid) {
-        for (let y2 = 0; y2 < cellCount; y2++) {
-          for (let x2 = 0; x2 < cellCount; x2++) {
-            if ((x2 + y2) % 2 == 0) {
+        for (let y3 = 0; y3 < cellCount; y3++) {
+          for (let x3 = 0; x3 < cellCount; x3++) {
+            if ((x3 + y3) % 2 == 0) {
               ctx.fillStyle = `${getThemeVar("--color-base03")}50`;
             } else {
               ctx.fillStyle = `${getThemeVar("--color-base02")}50`;
             }
             ctx.beginPath();
             ctx.arc(
-              celRad + x2 * celRad * 2,
-              celRad + y2 * celRad * 2,
+              celRad + x3 * celRad * 2,
+              celRad + y3 * celRad * 2,
               celRad * 0.7,
               0,
               Math.PI * 2
@@ -7937,8 +8225,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       ctx.fillStyle = getThemeVar("--color-accent");
       this.#drawDot(ctx, this.#food);
     }
-    onKeyDown(e2) {
-      switch (e2.key) {
+    onKeyDown(e3) {
+      switch (e3.key) {
         case "ArrowUp":
           if (this.#curDir !== DIR_DOWN) {
             this.#targetDir = DIR_UP;
@@ -7986,41 +8274,41 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     }
     async onGameStart() {
       const w2 = this.canvas.width;
-      const h2 = this.canvas.height;
+      const h3 = this.canvas.height;
       this.ball = {
         x: w2 / 2,
-        y: h2 / 2,
+        y: h3 / 2,
         dx: PONG_BALL_SPEED * this.getOpt("speed") * 0.01 * (Math.random() > 0.5 ? 1 : -1),
         dy: PONG_BALL_SPEED * this.getOpt("speed") * 0.01 * (Math.random() * 2 - 1)
       };
-      this.leftY = (h2 - PONG_PADDLE_HEIGHT) / 2;
-      this.rightY = (h2 - PONG_PADDLE_HEIGHT) / 2;
+      this.leftY = (h3 - PONG_PADDLE_HEIGHT) / 2;
+      this.rightY = (h3 - PONG_PADDLE_HEIGHT) / 2;
       this.leftUp = false;
       this.leftDown = false;
     }
-    drawRoundedRect(ctx, x2, y2, width, height, radius) {
+    drawRoundedRect(ctx, x3, y3, width, height, radius) {
       ctx.beginPath();
-      ctx.moveTo(x2 + radius, y2);
-      ctx.lineTo(x2 + width - radius, y2);
-      ctx.quadraticCurveTo(x2 + width, y2, x2 + width, y2 + radius);
-      ctx.lineTo(x2 + width, y2 + height - radius);
-      ctx.quadraticCurveTo(x2 + width, y2 + height, x2 + width - radius, y2 + height);
-      ctx.lineTo(x2 + radius, y2 + height);
-      ctx.quadraticCurveTo(x2, y2 + height, x2, y2 + height - radius);
-      ctx.lineTo(x2, y2 + radius);
-      ctx.quadraticCurveTo(x2, y2, x2 + radius, y2);
+      ctx.moveTo(x3 + radius, y3);
+      ctx.lineTo(x3 + width - radius, y3);
+      ctx.quadraticCurveTo(x3 + width, y3, x3 + width, y3 + radius);
+      ctx.lineTo(x3 + width, y3 + height - radius);
+      ctx.quadraticCurveTo(x3 + width, y3 + height, x3 + width - radius, y3 + height);
+      ctx.lineTo(x3 + radius, y3 + height);
+      ctx.quadraticCurveTo(x3, y3 + height, x3, y3 + height - radius);
+      ctx.lineTo(x3, y3 + radius);
+      ctx.quadraticCurveTo(x3, y3, x3 + radius, y3);
       ctx.closePath();
       ctx.fill();
     }
     onGameDraw(ctx, dt) {
       const w2 = this.canvas.width;
-      const h2 = this.canvas.height;
+      const h3 = this.canvas.height;
       ctx.fillStyle = getThemeVar("--color-base01");
-      ctx.fillRect(0, 0, w2, h2);
+      ctx.fillRect(0, 0, w2, h3);
       const speed = PONG_PADDLE_SPEED * this.getOpt("speed") * 0.01;
       if (this.leftUp) this.leftY -= speed * dt;
       if (this.leftDown) this.leftY += speed * dt;
-      this.leftY = Math.max(0, Math.min(h2 - PONG_PADDLE_HEIGHT, this.leftY));
+      this.leftY = Math.max(0, Math.min(h3 - PONG_PADDLE_HEIGHT, this.leftY));
       const aiCenter = this.rightY + PONG_PADDLE_HEIGHT / 2;
       const diff = this.ball.y - aiCenter;
       const maxMove = speed * dt * 0.8;
@@ -8029,39 +8317,39 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       } else {
         this.rightY += diff;
       }
-      this.rightY = Math.max(0, Math.min(h2 - PONG_PADDLE_HEIGHT, this.rightY));
-      let b2 = this.ball;
-      b2.x += b2.dx * dt;
-      b2.y += b2.dy * dt;
-      if (b2.y < PONG_BALL_RADIUS || b2.y > h2 - PONG_BALL_RADIUS) {
-        b2.dy *= -1;
+      this.rightY = Math.max(0, Math.min(h3 - PONG_PADDLE_HEIGHT, this.rightY));
+      let b3 = this.ball;
+      b3.x += b3.dx * dt;
+      b3.y += b3.dy * dt;
+      if (b3.y < PONG_BALL_RADIUS || b3.y > h3 - PONG_BALL_RADIUS) {
+        b3.dy *= -1;
       }
-      if (b2.x < PONG_PADDLE_WIDTH + PONG_BALL_RADIUS && b2.y > this.leftY && b2.y < this.leftY + PONG_PADDLE_HEIGHT) {
-        b2.dx *= -1;
-        b2.x = PONG_PADDLE_WIDTH + PONG_BALL_RADIUS;
-        b2.dx *= SPEEDUP_FACTOR;
-        b2.dy *= SPEEDUP_FACTOR;
-        b2.dx = Math.sign(b2.dx) * Math.min(Math.abs(b2.dx), MAX_SPEED);
-        b2.dy = Math.sign(b2.dy) * Math.min(Math.abs(b2.dy), MAX_SPEED);
+      if (b3.x < PONG_PADDLE_WIDTH + PONG_BALL_RADIUS && b3.y > this.leftY && b3.y < this.leftY + PONG_PADDLE_HEIGHT) {
+        b3.dx *= -1;
+        b3.x = PONG_PADDLE_WIDTH + PONG_BALL_RADIUS;
+        b3.dx *= SPEEDUP_FACTOR;
+        b3.dy *= SPEEDUP_FACTOR;
+        b3.dx = Math.sign(b3.dx) * Math.min(Math.abs(b3.dx), MAX_SPEED);
+        b3.dy = Math.sign(b3.dy) * Math.min(Math.abs(b3.dy), MAX_SPEED);
         this.score++;
       }
-      if (b2.x > w2 - PONG_PADDLE_WIDTH - PONG_BALL_RADIUS && b2.y > this.rightY && b2.y < this.rightY + PONG_PADDLE_HEIGHT) {
-        b2.dx *= -1;
-        b2.x = w2 - PONG_PADDLE_WIDTH - PONG_BALL_RADIUS;
-        b2.dx *= SPEEDUP_FACTOR;
-        b2.dy *= SPEEDUP_FACTOR;
-        b2.dx = Math.sign(b2.dx) * Math.min(Math.abs(b2.dx), MAX_SPEED);
-        b2.dy = Math.sign(b2.dy) * Math.min(Math.abs(b2.dy), MAX_SPEED);
+      if (b3.x > w2 - PONG_PADDLE_WIDTH - PONG_BALL_RADIUS && b3.y > this.rightY && b3.y < this.rightY + PONG_PADDLE_HEIGHT) {
+        b3.dx *= -1;
+        b3.x = w2 - PONG_PADDLE_WIDTH - PONG_BALL_RADIUS;
+        b3.dx *= SPEEDUP_FACTOR;
+        b3.dy *= SPEEDUP_FACTOR;
+        b3.dx = Math.sign(b3.dx) * Math.min(Math.abs(b3.dx), MAX_SPEED);
+        b3.dy = Math.sign(b3.dy) * Math.min(Math.abs(b3.dy), MAX_SPEED);
       }
-      if (b2.x < 0) {
+      if (b3.x < 0) {
         this.stopGame();
       }
-      if (b2.x > w2) {
+      if (b3.x > w2) {
         this.onGameStart();
       }
       ctx.fillStyle = getThemeVar("--color-text");
       ctx.beginPath();
-      ctx.arc(b2.x, b2.y, PONG_BALL_RADIUS, 0, Math.PI * 2);
+      ctx.arc(b3.x, b3.y, PONG_BALL_RADIUS, 0, Math.PI * 2);
       ctx.fill();
       ctx.fillStyle = getThemeVar("--color-accent");
       this.drawRoundedRect(
@@ -8084,17 +8372,17 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       ctx.setLineDash([4, 5]);
       ctx.beginPath();
       ctx.moveTo(w2 / 2, 0);
-      ctx.lineTo(w2 / 2, h2);
+      ctx.lineTo(w2 / 2, h3);
       ctx.stroke();
       ctx.setLineDash([]);
     }
-    onKeyDown(e2) {
-      if (e2.code === "ArrowUp") this.leftUp = true;
-      if (e2.code === "ArrowDown") this.leftDown = true;
+    onKeyDown(e3) {
+      if (e3.code === "ArrowUp") this.leftUp = true;
+      if (e3.code === "ArrowDown") this.leftDown = true;
     }
-    onKeyUp(e2) {
-      if (e2.code === "ArrowUp") this.leftUp = false;
-      if (e2.code === "ArrowDown") this.leftDown = false;
+    onKeyUp(e3) {
+      if (e3.code === "ArrowUp") this.leftUp = false;
+      if (e3.code === "ArrowDown") this.leftDown = false;
     }
   };
   registerWidget(new PongWidget());
@@ -8150,18 +8438,18 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   function rotate(matrix) {
     const size = matrix.length;
     const result = Array.from({ length: size }, () => Array(size).fill(0));
-    for (let y2 = 0; y2 < size; y2++) {
-      for (let x2 = 0; x2 < size; x2++) {
-        result[x2][size - 1 - y2] = matrix[y2][x2];
+    for (let y3 = 0; y3 < size; y3++) {
+      for (let x3 = 0; x3 < size; x3++) {
+        result[x3][size - 1 - y3] = matrix[y3][x3];
       }
     }
     return result;
   }
   function generateRotations(base) {
     const rotations = [base];
-    for (let i2 = 1; i2 < 4; i2++) {
-      const next = rotate(rotations[i2 - 1]);
-      if (!rotations.some((r2) => JSON.stringify(r2) === JSON.stringify(next))) {
+    for (let i3 = 1; i3 < 4; i3++) {
+      const next = rotate(rotations[i3 - 1]);
+      if (!rotations.some((r3) => JSON.stringify(r3) === JSON.stringify(next))) {
         rotations.push(next);
       }
     }
@@ -8303,17 +8591,17 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       "0>3": [[0, 0]]
     }
   };
-  function drawRoundedRect(ctx, x2, y2, width, height, radius) {
+  function drawRoundedRect(ctx, x3, y3, width, height, radius) {
     ctx.beginPath();
-    ctx.moveTo(x2 + radius, y2);
-    ctx.lineTo(x2 + width - radius, y2);
-    ctx.quadraticCurveTo(x2 + width, y2, x2 + width, y2 + radius);
-    ctx.lineTo(x2 + width, y2 + height - radius);
-    ctx.quadraticCurveTo(x2 + width, y2 + height, x2 + width - radius, y2 + height);
-    ctx.lineTo(x2 + radius, y2 + height);
-    ctx.quadraticCurveTo(x2, y2 + height, x2, y2 + height - radius);
-    ctx.lineTo(x2, y2 + radius);
-    ctx.quadraticCurveTo(x2, y2, x2 + radius, y2);
+    ctx.moveTo(x3 + radius, y3);
+    ctx.lineTo(x3 + width - radius, y3);
+    ctx.quadraticCurveTo(x3 + width, y3, x3 + width, y3 + radius);
+    ctx.lineTo(x3 + width, y3 + height - radius);
+    ctx.quadraticCurveTo(x3 + width, y3 + height, x3 + width - radius, y3 + height);
+    ctx.lineTo(x3 + radius, y3 + height);
+    ctx.quadraticCurveTo(x3, y3 + height, x3, y3 + height - radius);
+    ctx.lineTo(x3, y3 + radius);
+    ctx.quadraticCurveTo(x3, y3, x3 + radius, y3);
     ctx.closePath();
   }
   var TetrisWidget = class extends GameBase {
@@ -8349,13 +8637,13 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     #getPieceShape(type, rotation) {
       return PIECES[type][rotation % 4];
     }
-    #collision(pieceType, rotation, x2, y2) {
+    #collision(pieceType, rotation, x3, y3) {
       const shape = this.#getPieceShape(pieceType, rotation);
       for (let py = 0; py < 4; py++) {
         for (let px = 0; px < 4; px++) {
           if (shape[py][px]) {
-            const bx = x2 + px;
-            const by = y2 + py;
+            const bx = x3 + px;
+            const by = y3 + py;
             if (bx < 0 || bx >= BOARD_WIDTH || by >= BOARD_HEIGHT || by >= 0 && this.#board[by][bx])
               return true;
           }
@@ -8380,12 +8668,12 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     }
     #clearLines() {
       let linesCleared = 0;
-      for (let y2 = BOARD_HEIGHT - 1; y2 >= 0; y2--) {
-        if (this.#board[y2].every((c2) => c2 !== 0)) {
-          this.#board.splice(y2, 1);
+      for (let y3 = BOARD_HEIGHT - 1; y3 >= 0; y3--) {
+        if (this.#board[y3].every((c3) => c3 !== 0)) {
+          this.#board.splice(y3, 1);
           this.#board.unshift(new Array(BOARD_WIDTH).fill(0));
           linesCleared++;
-          y2++;
+          y3++;
         }
       }
       this.score += linesCleared;
@@ -8427,27 +8715,27 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       const offsetX = (this.canvas.width - BOARD_WIDTH * CELL_SIZE) / 2;
       ctx.strokeStyle = getThemeVar("--color-base03");
       ctx.lineWidth = 1;
-      for (let x2 = 0; x2 <= BOARD_WIDTH; x2++) {
+      for (let x3 = 0; x3 <= BOARD_WIDTH; x3++) {
         ctx.beginPath();
-        ctx.moveTo(offsetX + x2 * CELL_SIZE, 0);
-        ctx.lineTo(offsetX + x2 * CELL_SIZE, BOARD_HEIGHT * CELL_SIZE);
+        ctx.moveTo(offsetX + x3 * CELL_SIZE, 0);
+        ctx.lineTo(offsetX + x3 * CELL_SIZE, BOARD_HEIGHT * CELL_SIZE);
         ctx.stroke();
       }
-      for (let y2 = 0; y2 <= BOARD_HEIGHT; y2++) {
+      for (let y3 = 0; y3 <= BOARD_HEIGHT; y3++) {
         ctx.beginPath();
-        ctx.moveTo(offsetX, y2 * CELL_SIZE);
-        ctx.lineTo(offsetX + BOARD_WIDTH * CELL_SIZE, y2 * CELL_SIZE);
+        ctx.moveTo(offsetX, y3 * CELL_SIZE);
+        ctx.lineTo(offsetX + BOARD_WIDTH * CELL_SIZE, y3 * CELL_SIZE);
         ctx.stroke();
       }
       const radius = 5;
-      for (let y2 = 0; y2 < BOARD_HEIGHT; y2++) {
-        for (let x2 = 0; x2 < BOARD_WIDTH; x2++) {
-          if (this.#board[y2][x2]) {
-            ctx.fillStyle = this.#getColor(this.#board[y2][x2]);
+      for (let y3 = 0; y3 < BOARD_HEIGHT; y3++) {
+        for (let x3 = 0; x3 < BOARD_WIDTH; x3++) {
+          if (this.#board[y3][x3]) {
+            ctx.fillStyle = this.#getColor(this.#board[y3][x3]);
             drawRoundedRect(
               ctx,
-              offsetX + x2 * CELL_SIZE,
-              y2 * CELL_SIZE,
+              offsetX + x3 * CELL_SIZE,
+              y3 * CELL_SIZE,
               CELL_SIZE,
               CELL_SIZE,
               radius
@@ -8466,9 +8754,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       for (let py = 0; py < 4; py++) {
         for (let px = 0; px < 4; px++) {
           if (shape[py][px]) {
-            const x2 = offsetX + (this.#pieceX + px) * CELL_SIZE;
-            const y2 = (this.#pieceY + py) * CELL_SIZE;
-            drawRoundedRect(ctx, x2, y2, CELL_SIZE, CELL_SIZE, radius);
+            const x3 = offsetX + (this.#pieceX + px) * CELL_SIZE;
+            const y3 = (this.#pieceY + py) * CELL_SIZE;
+            drawRoundedRect(ctx, x3, y3, CELL_SIZE, CELL_SIZE, radius);
             ctx.fill();
             ctx.strokeStyle = getThemeVar("--color-base03");
             ctx.stroke();
@@ -8560,8 +8848,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         clearInterval(this.#downTimer);
       }
     }
-    onKeyDown(e2) {
-      switch (e2.key) {
+    onKeyDown(e3) {
+      switch (e3.key) {
         case "ArrowLeft":
           this.#startMoveLeft();
           break;
@@ -8573,13 +8861,13 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           break;
         case "ArrowUp":
         case " ":
-          e2.preventDefault();
+          e3.preventDefault();
           this.#rotate();
           break;
       }
     }
-    onKeyUp(e2) {
-      switch (e2.key) {
+    onKeyUp(e3) {
+      switch (e3.key) {
         case "ArrowLeft":
           this.#stopMoveLeft();
           break;
@@ -8629,7 +8917,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       dutchButton.appendChild(document.createTextNode("Nederlands"));
       langButtons.appendChild(dutchButton);
       this.container.appendChild(langButtons);
-      dutchButton.addEventListener("click", (e2) => {
+      dutchButton.addEventListener("click", (e3) => {
         this.lang = "dutch";
         this.displayWidgetTutorial(1);
       });
@@ -8793,7 +9081,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             TasksContainer.appendChild(noDataContainerTextContainer);
           }
           data2.sort(
-            (a2, b2) => new Date(a2.period.dateTimeFrom) - new Date(b2.period.dateTimeFrom)
+            (a3, b3) => new Date(a3.period.dateTimeFrom) - new Date(b3.period.dateTimeFrom)
           );
           let lastDate = "";
           if (data2.length > this.settings.maxAssignments) {
@@ -8854,8 +9142,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
                 iconSvg.setAttribute("width", "16px");
                 iconSvg.setAttribute("height", "16px");
                 const reader = new FileReader();
-                reader.onload = (e2) => {
-                  iconSvg.innerHTML = e2.target.result;
+                reader.onload = (e3) => {
+                  iconSvg.innerHTML = e3.target.result;
                 };
                 reader.readAsText(blob);
                 wrapperDiv.appendChild(iconSvg);
@@ -9250,12 +9538,12 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       }
       this.hideInfo();
       let sortedDoorkomsten = delijnData.halteDoorkomsten[0].doorkomsten.sort(
-        (a2, b2) => {
+        (a3, b3) => {
           const timeA = new Date(
-            a2["real-timeTijdstip"] || a2.dienstregelingTijdstip
+            a3["real-timeTijdstip"] || a3.dienstregelingTijdstip
           );
           const timeB = new Date(
-            b2["real-timeTijdstip"] || b2.dienstregelingTijdstip
+            b3["real-timeTijdstip"] || b3.dienstregelingTijdstip
           );
           return timeA - timeB;
         }
@@ -9342,16 +9630,16 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         this.displayInfo("Er liep iets mis: " + error);
         return;
       }
-      delijnHaltesLijnrichtingenData.halteLijnrichtingen.forEach((halte, i2) => {
-        halte.halte.omschrijving = delijnHaltesData.haltes[i2].omschrijving;
+      delijnHaltesLijnrichtingenData.halteLijnrichtingen.forEach((halte, i3) => {
+        halte.halte.omschrijving = delijnHaltesData.haltes[i3].omschrijving;
       });
       try {
         this.hideInfo();
         const startIndex = this.searchResultLimit - 5;
         const results = delijnHaltesLijnrichtingenData.halteLijnrichtingen.slice(startIndex);
-        for (let i2 = 0; i2 < results.length; i2++) {
+        for (let i3 = 0; i3 < results.length; i3++) {
           if (signal.aborted) return;
-          const halte = results[i2];
+          const halte = results[i3];
           await this.createHalteOption(halte, signal);
           if (signal.aborted) return;
         }
@@ -9855,11 +10143,11 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       if (this.settings.currentLocation == "Locatie") {
         locationInput.classList.add("not-initialized");
         locationInput.value = "";
-        locationInput.addEventListener("focusin", (e2) => {
-          e2.target.placeholder = "";
+        locationInput.addEventListener("focusin", (e3) => {
+          e3.target.placeholder = "";
         });
-        locationInput.addEventListener("focusout", (e2) => {
-          e2.target.placeholder = "Locatie";
+        locationInput.addEventListener("focusout", (e3) => {
+          e3.target.placeholder = "Locatie";
         });
         let mainIcon2 = document.createElement("div");
         mainIcon2.classList.add("weather-icon-container");
@@ -10628,8 +10916,8 @@ ${code}`;
   }
   function createProfileSettingButton() {
     let button = document.createElement("a");
-    button.addEventListener("click", (e2) => {
-      openSettingsWindow(e2);
+    button.addEventListener("click", (e3) => {
+      openSettingsWindow(e3);
       let topNavProfileMenu = document.getElementById("profileMenu");
       let settingsPageProfileButton = document.querySelector(
         ".profile-settings-button"

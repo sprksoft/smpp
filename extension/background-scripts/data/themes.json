@@ -30,15 +30,15 @@
   "ldev": {
     "displayName": "Dark Sands",
     "cssProperties": {
-      "--color-accent": "lch(92% 18 85)",
+      "--color-accent": "lch(88.37 27.48 70.54)",
       "--color-text": "lch(82% 1 95)",
-      "--color-base00": "lch(0% 1 40)",
-      "--color-base01": "lch(25% 1 40)",
-      "--color-base02": "lch(32% 1 40)",
-      "--color-base03": "lch(37% 1 40)",
+      "--color-base00": "lch(3% 1 40)",
+      "--color-base01": "lch(15% 1 40)",
+      "--color-base02": "lch(25% 1 40)",
+      "--color-base03": "lch(35% 1 40)",
       "--color-homepage-sidebars-bg": "lch(0% 1 40 / 50%)",
       "--darken-background": "rgba(0,0,0,0.25)",
-      "--color-splashtext": "lch(92% 18 85)"
+      "--color-splashtext": "lch(88.37 27.48 70.54)"
     }
   },
   "birb": {

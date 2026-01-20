@@ -1,6 +1,16 @@
 //@ts-nocheck
 import { DEBUG, sendDebug, browser } from "../common/utils.js";
 
+export function isValidImage(src) {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => resolve(true);
+    img.onerror = () => resolve(false);
+
+    img.src = src;
+  });
+}
+
 export function getPfpLink(username) {
   let firstInitial;
   let secondInitial;

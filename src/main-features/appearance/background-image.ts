@@ -1,7 +1,9 @@
-// @ts-nocheck
 import { browser, getExtensionImage } from "../../common/utils.js";
+import { isValidImage } from "../../fixes-utils/utils.js";
+import type { SMPPImage } from "../modules/images.js";
+import type { Settings } from "../settings/main-settings.js";
 
-export async function setBackground(appearance: Object) {
+export async function setBackground(appearance: Settings["appearance"]) {
   function displayBackgroundImage(imageSrc: string) {
     document.documentElement.style.setProperty(
       "--background-color",
@@ -20,7 +22,7 @@ export async function setBackground(appearance: Object) {
     img.style.objectFit = "cover";
     img.style.zIndex = "-1";
     img.style.display = "block";
-    if (imageSrc) img.src = imageSrc;
+    img.src = imageSrc;
     if (
       !document.getElementById("background_image") &&
       !document.getElementById("tinymce") // check for message writing box
@@ -31,12 +33,16 @@ export async function setBackground(appearance: Object) {
   let result = (await browser.runtime.sendMessage({
     action: "getImage",
     id: appearance.theme,
-  })) as Image;
+  })) as SMPPImage;
 
   if (result.type == "default") {
     result.imageData = await getExtensionImage(
       "theme-backgrounds/" + appearance.theme + ".jpg"
     );
   }
-  displayBackgroundImage(result.imageData);
+  if (await isValidImage(result.imageData)) {
+    displayBackgroundImage(result.imageData);
+  } else {
+    displayBackgroundImage("");
+  }
 }

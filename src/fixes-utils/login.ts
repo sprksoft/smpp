@@ -8,14 +8,14 @@ export function updateLoginPanel() {
     "login-app__platform-indicator"
   )[0].innerHTML = '<h1 class="logintitle">Smartschool ++</h1>';
 
-  document.getElementsByClassName("login-app__title--separator")[0].innerHTML =
-    '<button type="button" class="white_text_button" id="showmore">More</button>';
-
-  document.getElementById("showmore").addEventListener("click", showmore);
-
-  function showmore() {
-    document.documentElement.style.setProperty("--show-options", "flex");
-    document.getElementById("showmore").style.display = "none";
+  let loginSeperator = document.querySelector(".login-app__title--separator");
+  if (loginSeperator) {
+    loginSeperator.innerHTML =
+      '<button type="button" class="white_text_button" id="showmore">More</button>';
+    document.getElementById("showmore").addEventListener("click", () => {
+      document.documentElement.style.setProperty("--show-options", "flex");
+      document.getElementById("showmore").style.display = "none";
+    });
   }
 }
 

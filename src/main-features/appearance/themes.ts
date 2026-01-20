@@ -1,10 +1,16 @@
+import { Vibrant } from "node-vibrant/browser";
+import type { Palette, Swatch } from "@vibrant/color";
+import { Colord, colord, extend } from "colord";
+import lchPlugin from "colord/plugins/lch";
+extend([lchPlugin]);
+
 import { widgetSystemNotifyThemeChange } from "../../widgets/widgets.js";
 import {
   browser,
   getExtensionImage,
   isValidHexColor,
 } from "../../common/utils.js";
-import { colord } from "colord";
+
 import {
   chevronLeftSvg,
   copySvg,
@@ -15,10 +21,15 @@ import {
   moonSvg,
   pineSvg,
   plusSVG,
+  settingsIconSvg,
   sunSvg,
   trashSvg,
 } from "../../fixes-utils/svgs.js";
-import { getImageURL, ImageSelector, type Image } from "../modules/images.js";
+import {
+  getImageURL,
+  ImageSelector,
+  type SMPPImage,
+} from "../modules/images.js";
 import { BaseWindow } from "../modules/windows.js";
 import {
   openSettingsWindow,
@@ -27,8 +38,8 @@ import {
 } from "../settings/main-settings.js";
 import { loadQuickSettings } from "../settings/quick-settings.js";
 import { applyAppearance, isFirefox } from "../main.js";
-import { createTextInput } from "./ui.js";
-import { Vibrant } from "node-vibrant/browser";
+import { createButtonWithLabel, createTextInput } from "./ui.js";
+import { isValidImage } from "../../fixes-utils/utils.js";
 
 export let currentThemeName: string;
 export let currentTheme: Theme;
@@ -454,11 +465,15 @@ export class ThemeTile extends Tile {
           "theme-backgrounds/" + this.name + ".jpg"
         );
       });
+      if (await isValidImage(await imageURL.url)) {
+        this.element.style.setProperty(
+          "--background-image-local",
+          `url(${await imageURL.url})`
+        );
+      } else {
+        this.element.style.setProperty("--background-image-local", `url()`);
+      }
 
-      this.element.style.setProperty(
-        "--background-image-local",
-        `url(${await imageURL.url})`
-      );
       if (isFirefox && imageURL.type == "file") {
         let imageContainer = this.element.querySelector(".image-container");
         if (!imageContainer) return;
@@ -468,7 +483,11 @@ export class ThemeTile extends Tile {
           "image-container",
           "firefox-container"
         );
-        stupidImageContainer.src = imageURL.url;
+        if (await isValidImage(imageURL.url)) {
+          stupidImageContainer.src = imageURL.url;
+        } else {
+          stupidImageContainer.src = "";
+        }
 
         let bottomContainer = this.element.querySelector(".theme-tile-bottom");
         if (!bottomContainer) return;
@@ -881,7 +900,7 @@ export class ThemeSelector {
       let result = (await browser.runtime.sendMessage({
         action: "getImage",
         id: name,
-      })) as Image;
+      })) as SMPPImage;
 
       if (result.type == "default") {
         result.imageData = await getExtensionImage(
@@ -892,12 +911,13 @@ export class ThemeSelector {
           result.link = name + ".jpg";
         }
       }
-
-      await browser.runtime.sendMessage({
-        action: "setImage",
-        id: newTheme,
-        data: result,
-      });
+      if (await isValidImage(result.imageData)) {
+        await browser.runtime.sendMessage({
+          action: "setImage",
+          id: newTheme,
+          data: result,
+        });
+      }
 
       if (isCustom) {
         await this.updateSelectorContent();
@@ -954,6 +974,32 @@ async function startCustomThemeCreator(theme: Theme, name: string) {
   themeEditor.show();
 }
 
+type colordPalette = {
+  Vibrant: Colord;
+  DarkVibrant: Colord;
+  LightVibrant: Colord;
+  Muted: Colord;
+  DarkMuted: Colord;
+  LightMuted: Colord;
+};
+
+function convertColorPalette(vibrantPalette: Palette) {
+  function convertSwatchToColord(swatch: Swatch | null) {
+    if (!swatch) return colord("#000");
+    return colord(swatch.hex);
+  }
+  let colordPalette: colordPalette;
+  colordPalette = {
+    Vibrant: convertSwatchToColord(vibrantPalette.Vibrant),
+    DarkVibrant: convertSwatchToColord(vibrantPalette.DarkVibrant),
+    LightVibrant: convertSwatchToColord(vibrantPalette.LightVibrant),
+    Muted: convertSwatchToColord(vibrantPalette.Muted),
+    DarkMuted: convertSwatchToColord(vibrantPalette.DarkMuted),
+    LightMuted: convertSwatchToColord(vibrantPalette.LightMuted),
+  };
+  return colordPalette;
+}
+
 export class CustomThemeCreator extends BaseWindow {
   theme: Theme;
   name: string;
@@ -962,6 +1008,7 @@ export class CustomThemeCreator extends BaseWindow {
     [key: string]: HTMLDivElement;
   }[];
   backgroundImageInput: ImageSelector;
+  backgroundImagePreview: HTMLImageElement;
 
   getEditableValues(cssProperties: Theme["cssProperties"]) {
     let nonEditableValues = [
@@ -991,6 +1038,17 @@ export class CustomThemeCreator extends BaseWindow {
     return colorPreview;
   }
 
+  updateColorPreviews() {
+    this.colorPreviews.forEach((preview) => {
+      let previewName = Object.keys(preview)[0];
+      let element = Object.values(preview)[0];
+      if (previewName && element) {
+        let newValue = this.theme.cssProperties[previewName];
+        if (newValue) element.style.setProperty("--current-color", newValue);
+      }
+    });
+  }
+
   generateColorPreviews(editableValues: string[]) {
     let colorPreviews = editableValues.map((colorName) => {
       let colorPreview: { [key: string]: HTMLDivElement } = {};
@@ -1008,6 +1066,12 @@ export class CustomThemeCreator extends BaseWindow {
     this.editableValues = this.getEditableValues(theme.cssProperties);
     this.colorPreviews = this.generateColorPreviews(this.editableValues);
     this.backgroundImageInput = new ImageSelector(this.name);
+    this.backgroundImageInput.id = this.name;
+    this.backgroundImageInput.onStore = () => {
+      updateTheme(this.name);
+      this.updateBackgroundImagePreview();
+    };
+    this.backgroundImagePreview = this.createBackgroundImagePreview();
   }
 
   content = document.createElement("div");
@@ -1092,11 +1156,164 @@ export class CustomThemeCreator extends BaseWindow {
     return this.displayNameInput;
   }
 
-  async getThemeColors() {
-    const img = document.getElementById("background_image") as HTMLImageElement;
-    if (!img.src) return;
-    let vibrantTester = new Vibrant(img);
-    // add some onload bullshit and stuf yk
+  createMakeThemeButton() {
+    let button = document.createElement("button");
+    button.classList.add("make-theme-button");
+    button.innerHTML = "Generate Theme";
+    button.addEventListener("click", async () => {
+      if (await isValidImage(this.backgroundImagePreview.src))
+        await this.generateTheme();
+    });
+    return button;
+  }
+
+  createBackgroundImagePreview() {
+    let img = document.createElement("img");
+    img.classList.add("theme-creator-preview-image");
+    return img;
+  }
+
+  async updateBackgroundImagePreview() {
+    console.log("updating");
+    let result = (await browser.runtime.sendMessage({
+      action: "getImage",
+      id: this.name,
+    })) as SMPPImage;
+
+    if (result.type == "default") {
+      result.imageData = await getExtensionImage(
+        "theme-backgrounds/" + this.name + ".jpg"
+      );
+    }
+    if (await isValidImage(result.imageData)) {
+      this.backgroundImagePreview.src = result.imageData;
+      this.element.classList.remove("no-image-available");
+    } else {
+      this.backgroundImagePreview.src = "";
+      this.element.classList.add("no-image-available");
+      this.content.classList.add("no-image-available");
+    }
+  }
+
+  async getImageColors() {
+    let vibrantTester = new Vibrant(this.backgroundImagePreview.src, {
+      quality: 1,
+      colorCount: 256,
+    });
+    let palette = await vibrantTester.getPalette();
+    return palette;
+  }
+
+  readUserChoice() {
+    let brightnessButton = document.getElementById(
+      "brightness-control"
+    ) as HTMLInputElement;
+    let saturationButton = document.getElementById(
+      "saturation-control"
+    ) as HTMLInputElement;
+    if (!(brightnessButton && saturationButton)) return;
+    let choice = {
+      mode: brightnessButton.checked,
+      saturation: saturationButton.checked,
+    };
+    return choice;
+  }
+
+  async generateTheme() {
+    let swatchPalette = await this.getImageColors();
+    let colordPalette = convertColorPalette(swatchPalette);
+
+    let choice = this.readUserChoice();
+    if (!choice) return;
+
+    let base00: Colord;
+    let base01: Colord;
+    let base02: Colord;
+    let base03: Colord;
+    let accent: Colord;
+    let textcolor: Colord;
+    let splashcolor: Colord;
+    let darkenColor: Colord;
+
+    // true means dark mode
+    if (choice.mode) {
+      darkenColor = colord("rgba(0,0,0,0.2)");
+      // true means very saturated
+      if (choice.saturation) {
+        base00 = colordPalette.DarkVibrant.darken(0.2);
+        base01 = colordPalette.DarkVibrant.darken(0.1);
+        base02 = colordPalette.DarkVibrant;
+        base03 = colordPalette.DarkVibrant.lighten(0.1);
+        accent = colordPalette.Vibrant;
+        textcolor = colordPalette.LightVibrant;
+        splashcolor = colordPalette.DarkVibrant;
+      } else {
+        base00 = colordPalette.DarkMuted.darken(0.2);
+        base01 = colordPalette.DarkMuted.darken(0.1);
+        base02 = colordPalette.DarkMuted;
+        base03 = colordPalette.DarkMuted.lighten(0.1);
+        accent = colordPalette.Muted;
+        textcolor = colordPalette.LightMuted;
+        splashcolor = colordPalette.DarkMuted;
+      }
+    } else {
+      darkenColor = colord("rgba(228, 228, 228, 0.4)");
+      if (choice.saturation) {
+        base00 = colordPalette.LightVibrant.lighten(0.1);
+        base01 = colordPalette.LightVibrant.lighten(0.05);
+        base02 = colordPalette.LightVibrant;
+        base03 = colordPalette.LightVibrant.darken(0.1);
+        accent = colordPalette.Vibrant;
+        textcolor = colordPalette.DarkVibrant;
+        splashcolor = colordPalette.DarkMuted;
+      } else {
+        base00 = colordPalette.LightMuted.lighten(0.1);
+        base01 = colordPalette.LightMuted.lighten(0.05);
+        base02 = colordPalette.LightMuted;
+        base03 = colordPalette.LightMuted.darken(0.1);
+        accent = colordPalette.Muted;
+        textcolor = colordPalette.DarkMuted;
+        splashcolor = colordPalette.DarkMuted;
+      }
+    }
+
+    this.theme = {
+      displayName: this.theme.displayName,
+      cssProperties: {
+        ...this.theme.cssProperties,
+        "--color-accent": accent.toHex(),
+        "--color-text": textcolor.toHex(),
+        "--color-base00": base00.toHex(),
+        "--color-base01": base01.toHex(),
+        "--color-base02": base02.toHex(),
+        "--color-base03": base03.toHex(),
+        "--darken-background": darkenColor.toHex(),
+        "--color-homepage-sidebars-bg": darkenColor.alpha(0.1).toHex(),
+        "--color-splashtext": splashcolor.toHex(),
+      },
+    };
+    await browser.runtime.sendMessage({
+      action: "saveCustomTheme",
+      data: this.theme,
+      id: this.name,
+    });
+    this.updateColorPreviews();
+    await updateTheme(this.name);
+  }
+
+  createThemeGenerationControls() {
+    let container = document.createElement("div");
+    let brightnessButton = createButtonWithLabel(
+      "brightness-control",
+      "Dark mode"
+    );
+    let saturationButton = createButtonWithLabel(
+      "saturation-control",
+      "Saturated"
+    );
+    container.appendChild(brightnessButton);
+    container.appendChild(saturationButton);
+    return container;
   }
 
   async renderContent() {
@@ -1106,18 +1323,26 @@ export class CustomThemeCreator extends BaseWindow {
     });
     this.content.appendChild(this.createDisplayNameInput());
     this.content.appendChild(this.createRemoveButton());
+    this.content.appendChild(this.createMakeThemeButton());
+    this.content.appendChild(this.backgroundImagePreview);
+    this.content.appendChild(this.backgroundImageInput.createFullFileInput());
+    this.content.appendChild(this.createThemeGenerationControls());
+    await this.updateBackgroundImagePreview();
     this.load(this.theme);
-    await this.getThemeColors();
     return this.content;
   }
 
   async load(theme: Theme) {
     this.displayNameInput.value = theme.displayName;
+    this.updateColorPreviews();
+    await this.backgroundImageInput.loadImageData();
   }
 
   onClosed(): void {
     document.body.removeChild(this.element);
     settingsWindow.themeSelector.updateSelectorContent();
+    settingsWindow.loadPage();
+    loadQuickSettings();
     openSettingsWindow(null);
   }
 

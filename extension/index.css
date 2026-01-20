@@ -2943,6 +2943,46 @@ button.remove-custom-theme:hover {
   background-color: var(--current-color);
   cursor: pointer;
 }
+.no-image-available button.make-theme-button {
+  opacity: 0.7;
+  filter: saturate(70%);
+  pointer-events: none;
+}
+button.make-theme-button {
+  background-color: var(--color-base01) !important;
+  border: 2px solid var(--color-base02) !important;
+  border-radius: 100000px !important;
+  padding: 0.25rem 0.75rem 0.25rem 1rem !important;
+  font-size: 1.4rem !important;
+  font-weight: 500 !important;
+  height: 3rem;
+  cursor: pointer !important;
+  color: var(--color-text) !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.enableAnimations button.make-theme-button {
+  transition-property:
+    border-color,
+    background-color,
+    transform,
+    stroke;
+  transition: 0.15s ease-in-out;
+}
+button.make-theme-button:hover {
+  background-color: var(--color-base02) !important;
+  border-color: var(--color-base03) !important;
+}
+button.make-theme-button:hover {
+  border-color: var(--color-accent) !important;
+}
+.theme-creator-preview-image {
+  object-fit: cover;
+  object-position: center;
+  width: 16rem;
+  border-radius: 1rem;
+}
 
 /* src/styles/smpp-styles/assignments.css */
 .assignment__item {

@@ -4,7 +4,7 @@ import { imageInputSvg } from "../../fixes-utils/svgs.js";
 import { isAbsoluteUrl, browser } from "../../common/utils.js";
 import { isFirefox } from "../main.js";
 
-export type Image = {
+export type SMPPImage = {
   type: string;
   link: string;
   imageData: string | Base64URLString;
@@ -128,7 +128,7 @@ export class ImageSelector {
     let data = (await browser.runtime.sendMessage({
       action: "getImage",
       id: this.name,
-    })) as Image;
+    })) as SMPPImage;
 
     if (!data) data = { imageData: null, link: "", type: "default" };
 
