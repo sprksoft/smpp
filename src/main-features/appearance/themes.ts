@@ -18,12 +18,15 @@ import {
   editIconSvg,
   favoriteFolderSvg,
   folderSvg,
+  loadingSpinnerSvg,
+  magicWandSvg,
   moonSvg,
   pineSvg,
+  playSvg,
   plusSVG,
-  settingsIconSvg,
   sunSvg,
   trashSvg,
+  wandSvg,
 } from "../../fixes-utils/svgs.js";
 import {
   getImageURL,
@@ -38,7 +41,7 @@ import {
 } from "../settings/main-settings.js";
 import { loadQuickSettings } from "../settings/quick-settings.js";
 import { applyAppearance, isFirefox } from "../main.js";
-import { createButtonWithLabel, createTextInput } from "./ui.js";
+import { createTextInput } from "./ui.js";
 import { isValidImage } from "../../fixes-utils/utils.js";
 
 export let currentThemeName: string;
@@ -1009,6 +1012,8 @@ export class CustomThemeCreator extends BaseWindow {
   }[];
   backgroundImageInput: ImageSelector;
   backgroundImagePreview: HTMLImageElement;
+  themeGeneratorIsOpen: boolean = false;
+  imagePreviewContainer: HTMLDivElement;
 
   getEditableValues(cssProperties: Theme["cssProperties"]) {
     let nonEditableValues = [
@@ -1067,6 +1072,7 @@ export class CustomThemeCreator extends BaseWindow {
     this.colorPreviews = this.generateColorPreviews(this.editableValues);
     this.backgroundImageInput = new ImageSelector(this.name);
     this.backgroundImageInput.id = this.name;
+    this.imagePreviewContainer = document.createElement("div");
     this.backgroundImageInput.onStore = () => {
       updateTheme(this.name);
       this.updateBackgroundImagePreview();
@@ -1158,11 +1164,17 @@ export class CustomThemeCreator extends BaseWindow {
 
   createMakeThemeButton() {
     let button = document.createElement("button");
-    button.classList.add("make-theme-button");
-    button.innerHTML = "Auto";
+    button.classList.add("make-theme-button", "generate-theme-control");
+    button.innerHTML = playSvg;
     button.addEventListener("click", async () => {
-      if (await isValidImage(this.backgroundImagePreview.src))
-        await this.generateTheme();
+      if (await isValidImage(this.backgroundImagePreview.src)) {
+        button.innerHTML = loadingSpinnerSvg;
+        button.classList.add("loading");
+        await this.generateTheme().then(() => {
+          button.innerHTML = playSvg;
+          button.classList.remove("loading");
+        });
+      }
     });
     return button;
   }
@@ -1301,17 +1313,71 @@ export class CustomThemeCreator extends BaseWindow {
   }
 
   createThemeGenerationControls() {
+    class themeGenerationControl {
+      id: string;
+      element: HTMLInputElement;
+      label: HTMLLabelElement;
+
+      constructor(id: string) {
+        this.id = id;
+        const { input, label } = this.createThemeGenerationControl(this.id);
+        this.element = input;
+        this.label = label;
+      }
+
+      createThemeGenerationControl(id: string) {
+        let input = document.createElement("input");
+        input.type = "checkbox";
+        input.id = id;
+        input.classList.add("theme-maker-input");
+
+        let label = document.createElement("label");
+        label.htmlFor = id;
+        label.classList.add("theme-maker-label", "generate-theme-control");
+
+        input.addEventListener("click", () => {
+          this.updateLogo(this.label, this.element.checked);
+        });
+
+        return { input, label };
+      }
+
+      updateLogo(element: HTMLLabelElement, state: boolean) {}
+
+      load() {
+        this.updateLogo(this.label, this.element.checked);
+      }
+    }
+
     let container = document.createElement("div");
-    let brightnessButton = createButtonWithLabel(
-      "brightness-control",
-      "Dark mode"
-    );
-    let saturationButton = createButtonWithLabel(
-      "saturation-control",
-      "Saturated"
-    );
-    container.appendChild(brightnessButton);
-    container.appendChild(saturationButton);
+    container.classList.add("theme-controls-container");
+
+    let brightnessButton = new themeGenerationControl("brightness-control");
+    brightnessButton.updateLogo = (e, s) => {
+      if (s) {
+        e.innerHTML = moonSvg;
+      } else {
+        e.innerHTML = sunSvg;
+      }
+    };
+    brightnessButton.load();
+
+    let saturationButton = new themeGenerationControl("saturation-control");
+    saturationButton.updateLogo = (e, s) => {
+      if (s) {
+        e.innerHTML = magicWandSvg;
+      } else {
+        e.innerHTML = wandSvg;
+      }
+    };
+    saturationButton.load();
+
+    container.appendChild(brightnessButton.element);
+    container.appendChild(brightnessButton.label);
+    container.appendChild(saturationButton.element);
+    container.appendChild(saturationButton.label);
+
+    container.appendChild(this.createMakeThemeButton());
     return container;
   }
 
@@ -1334,18 +1400,40 @@ export class CustomThemeCreator extends BaseWindow {
     let divider = document.createElement("div");
     divider.classList.add("file-input-theme-button-divider");
     fileInputContainer.appendChild(divider);
-    fileInputContainer.appendChild(this.createMakeThemeButton());
+    fileInputContainer.appendChild(this.createOpenThemeMakerButton());
     return fileInputContainer;
   }
 
+  updateThemeGenerator() {
+    if (this.themeGeneratorIsOpen) {
+      this.imagePreviewContainer.classList.add("open");
+    } else {
+      this.imagePreviewContainer.classList.remove("open");
+    }
+  }
+
+  createOpenThemeMakerButton() {
+    let button = document.createElement("button");
+    button.classList.add("open-theme-editor-button");
+    button.innerHTML = "Auto";
+    button.addEventListener("click", async () => {
+      this.themeGeneratorIsOpen = !this.themeGeneratorIsOpen;
+      this.updateThemeGenerator();
+    });
+    return button;
+  }
+
   createImagePreviewContainer() {
-    let bigBox = document.createElement("div");
-    bigBox.classList.add("preview-image-container");
+    this.imagePreviewContainer.classList.add("preview-image-container");
     let imageWrapper = document.createElement("div");
     imageWrapper.classList.add("preview-image-wrapper");
     imageWrapper.appendChild(this.backgroundImagePreview);
-    bigBox.appendChild(imageWrapper);
-    return bigBox;
+    this.imagePreviewContainer.appendChild(imageWrapper);
+    this.imagePreviewContainer.appendChild(
+      this.createThemeGenerationControls()
+    );
+
+    return this.imagePreviewContainer;
   }
 
   async renderContent() {
@@ -1356,7 +1444,6 @@ export class CustomThemeCreator extends BaseWindow {
     this.content.appendChild(this.createImagePreviewContainer());
 
     this.content.appendChild(this.createFileInputContainer());
-    this.content.appendChild(this.createThemeGenerationControls());
     this.content.appendChild(this.createColorPickers());
 
     this.content.appendChild(this.createRemoveButton());

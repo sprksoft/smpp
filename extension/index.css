@@ -2943,12 +2943,12 @@ button.remove-custom-theme:hover {
   box-shadow: 0px 0px 10px 1px var(--color-shadow);
   cursor: pointer;
 }
-.no-image-available button.make-theme-button {
+.no-image-available button.open-theme-editor-button {
   opacity: 0.7;
   filter: saturate(70%);
   pointer-events: none;
 }
-button.make-theme-button {
+button.open-theme-editor-button {
   background-color: var(--color-base01) !important;
   border: 2px solid var(--color-base02) !important;
   border-radius: 100000px !important;
@@ -2962,7 +2962,7 @@ button.make-theme-button {
   justify-content: center;
   align-items: center;
 }
-.enableAnimations button.make-theme-button {
+.enableAnimations button.open-theme-editor-button {
   transition-property:
     border-color,
     background-color,
@@ -2970,11 +2970,8 @@ button.make-theme-button {
     stroke;
   transition: 0.15s ease-in-out;
 }
-button.make-theme-button:hover {
+button.open-theme-editor-button:hover {
   background-color: var(--color-base02) !important;
-  border-color: var(--color-base03) !important;
-}
-button.make-theme-button:hover {
   border-color: var(--color-accent) !important;
 }
 .custom-theme-maker {
@@ -3035,6 +3032,70 @@ button.make-theme-button:hover {
 }
 .no-image-available .theme-creator-preview-image {
   display: none;
+}
+.enableAnimations .generate-theme-control {
+  transition-property:
+    border-color,
+    background-color,
+    transform !important;
+  transition: 0.15s ease-in-out !important;
+}
+.generate-theme-control:active {
+  scale: 0.9;
+}
+.theme-maker-input {
+  appearance: none;
+  display: none;
+}
+.preview-image-container {
+  display: flex;
+  flex-direction: row;
+  border-radius: 2rem;
+  background-color: var(--color-base00) !important;
+  transition: all 0.3s ease-in-out;
+  padding: 0.5rem;
+}
+#customThemeCreator .preview-image-container.open:not(.aaaa) {
+  background-color: var(--color-base01) !important;
+}
+.theme-controls-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 0px;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+  box-sizing: content-box;
+  padding: 0.5rem;
+  padding-left: 0;
+  padding-right: 0;
+}
+.generate-theme-control {
+  stroke: var(--color-text);
+  height: 4rem;
+  width: 4rem;
+  border-radius: 1rem;
+  background-color: var(--color-base02);
+  padding: 0.5rem;
+  border: none;
+  margin: 0 !important;
+}
+.preview-image-container.open .theme-controls-container {
+  width: 4rem;
+  padding-left: 1rem;
+  padding-right: 0.5rem;
+}
+.generate-theme-control:last-child {
+  margin-top: auto !important;
+  stroke: var(--color-accent);
+}
+.generate-theme-control:hover {
+  background-color: var(--color-base03);
+}
+.make-theme-button.loading {
+  opacity: 0.7;
+  filter: saturate(70%);
+  pointer-events: none;
 }
 
 /* src/styles/smpp-styles/assignments.css */

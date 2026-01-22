@@ -236,6 +236,14 @@
 <path xmlns="http://www.w3.org/2000/svg" d="M15 6L9 12L15 18"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg`;
   var plusSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
 <path xmlns="http://www.w3.org/2000/svg" d="M4 12H20M12 4V20" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+  var wandSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path xmlns="http://www.w3.org/2000/svg" d="M14.0002 7.00004L16.8286 9.82846M3.69763 19.5653L4.26331 20.131C4.65933 20.527 4.85734 20.7251 5.08567 20.7992C5.28651 20.8645 5.50286 20.8645 5.7037 20.7992C5.93203 20.7251 6.13004 20.527 6.52606 20.131L20.0828 6.57427C20.4788 6.17825 20.6768 5.98025 20.751 5.75192C20.8163 5.55107 20.8163 5.33473 20.751 5.13388C20.6768 4.90555 20.4788 4.70755 20.0828 4.31153L19.5171 3.74584C19.1211 3.34983 18.9231 3.15182 18.6948 3.07763C18.4939 3.01237 18.2776 3.01237 18.0767 3.07763C17.8484 3.15182 17.6504 3.34983 17.2544 3.74585L3.69763 17.3026C3.30161 17.6986 3.1036 17.8966 3.02941 18.125C2.96415 18.3258 2.96415 18.5422 3.02941 18.743C3.1036 18.9713 3.30161 19.1693 3.69763 19.5653Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>`;
+  var magicWandSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path xmlns="http://www.w3.org/2000/svg" d="M4.9996 7V11M9.9996 2V6M17.9996 16V20M2.9996 9H6.9996M7.9996 4H11.9996M15.9996 18H19.9996M13.9996 7L16.828 9.82843M19.5162 3.74612L20.0819 4.3118C20.4779 4.70782 20.6759 4.90583 20.7501 5.13416C20.8154 5.335 20.8154 5.55135 20.7501 5.75219C20.6759 5.98052 20.4779 6.17853 20.0819 6.57454L6.52508 20.1314C6.12906 20.5274 5.93105 20.7254 5.70272 20.7996C5.50188 20.8649 5.28553 20.8649 5.08469 20.7996C4.85636 20.7254 4.65835 20.5274 4.26234 20.1314L3.69665 19.5657C3.30063 19.1697 3.10262 18.9717 3.02844 18.7433C2.96318 18.5425 2.96318 18.3262 3.02844 18.1253C3.10262 17.897 3.30063 17.699 3.69665 17.303L17.2535 3.74612C17.6495 3.3501 17.8475 3.15209 18.0758 3.0779C18.2767 3.01265 18.493 3.01265 18.6939 3.0779C18.9222 3.15209 19.1202 3.3501 19.5162 3.74612Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>`;
+  var playSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path xmlns="http://www.w3.org/2000/svg" d="M16.6582 9.28638C18.098 10.1862 18.8178 10.6361 19.0647 11.2122C19.2803 11.7152 19.2803 12.2847 19.0647 12.7878C18.8178 13.3638 18.098 13.8137 16.6582 14.7136L9.896 18.94C8.29805 19.9387 7.49907 20.4381 6.83973 20.385C6.26501 20.3388 5.73818 20.0469 5.3944 19.584C5 19.053 5 18.1108 5 16.2264V7.77357C5 5.88919 5 4.94701 5.3944 4.41598C5.73818 3.9531 6.26501 3.66111 6.83973 3.6149C7.49907 3.5619 8.29805 4.06126 9.896 5.05998L16.6582 9.28638Z"  stroke-width="2" stroke-linejoin="round"/><path xmlns="http://www.w3.org/2000/svg" d="M16.6582 9.28638C18.098 10.1862 18.8178 10.6361 19.0647 11.2122C19.2803 11.7152 19.2803 12.2847 19.0647 12.7878C18.8178 13.3638 18.098 13.8137 16.6582 14.7136L9.896 18.94C8.29805 19.9387 7.49907 20.4381 6.83973 20.385C6.26501 20.3388 5.73818 20.0469 5.3944 19.584C5 19.053 5 18.1108 5 16.2264V7.77357C5 5.88919 5 4.94701 5.3944 4.41598C5.73818 3.9531 6.26501 3.66111 6.83973 3.6149C7.49907 3.5619 8.29805 4.06126 9.896 5.05998L16.6582 9.28638Z"  stroke-width="2" stroke-linejoin="round"/></svg>`;
 
   // src/fixes-utils/login.ts
   function updateLoginPanel() {
@@ -5829,6 +5837,8 @@ Is it scaring you off?`,
     colorPreviews;
     backgroundImageInput;
     backgroundImagePreview;
+    themeGeneratorIsOpen = false;
+    imagePreviewContainer;
     getEditableValues(cssProperties) {
       let nonEditableValues = [
         "--color-homepage-sidebars-bg",
@@ -5881,6 +5891,7 @@ Is it scaring you off?`,
       this.colorPreviews = this.generateColorPreviews(this.editableValues);
       this.backgroundImageInput = new ImageSelector(this.name);
       this.backgroundImageInput.id = this.name;
+      this.imagePreviewContainer = document.createElement("div");
       this.backgroundImageInput.onStore = () => {
         updateTheme(this.name);
         this.updateBackgroundImagePreview();
@@ -5951,11 +5962,17 @@ Is it scaring you off?`,
     }
     createMakeThemeButton() {
       let button = document.createElement("button");
-      button.classList.add("make-theme-button");
-      button.innerHTML = "Auto";
+      button.classList.add("make-theme-button", "generate-theme-control");
+      button.innerHTML = playSvg;
       button.addEventListener("click", async () => {
-        if (await isValidImage(this.backgroundImagePreview.src))
-          await this.generateTheme();
+        if (await isValidImage(this.backgroundImagePreview.src)) {
+          button.innerHTML = loadingSpinnerSvg;
+          button.classList.add("loading");
+          await this.generateTheme().then(() => {
+            button.innerHTML = playSvg;
+            button.classList.remove("loading");
+          });
+        }
       });
       return button;
     }
@@ -6081,17 +6098,60 @@ Is it scaring you off?`,
       await updateTheme(this.name);
     }
     createThemeGenerationControls() {
+      class themeGenerationControl {
+        id;
+        element;
+        label;
+        constructor(id) {
+          this.id = id;
+          const { input, label } = this.createThemeGenerationControl(this.id);
+          this.element = input;
+          this.label = label;
+        }
+        createThemeGenerationControl(id) {
+          let input = document.createElement("input");
+          input.type = "checkbox";
+          input.id = id;
+          input.classList.add("theme-maker-input");
+          let label = document.createElement("label");
+          label.htmlFor = id;
+          label.classList.add("theme-maker-label", "generate-theme-control");
+          input.addEventListener("click", () => {
+            this.updateLogo(this.label, this.element.checked);
+          });
+          return { input, label };
+        }
+        updateLogo(element, state) {
+        }
+        load() {
+          this.updateLogo(this.label, this.element.checked);
+        }
+      }
       let container = document.createElement("div");
-      let brightnessButton = createButtonWithLabel(
-        "brightness-control",
-        "Dark mode"
-      );
-      let saturationButton = createButtonWithLabel(
-        "saturation-control",
-        "Saturated"
-      );
-      container.appendChild(brightnessButton);
-      container.appendChild(saturationButton);
+      container.classList.add("theme-controls-container");
+      let brightnessButton = new themeGenerationControl("brightness-control");
+      brightnessButton.updateLogo = (e3, s3) => {
+        if (s3) {
+          e3.innerHTML = moonSvg;
+        } else {
+          e3.innerHTML = sunSvg;
+        }
+      };
+      brightnessButton.load();
+      let saturationButton = new themeGenerationControl("saturation-control");
+      saturationButton.updateLogo = (e3, s3) => {
+        if (s3) {
+          e3.innerHTML = magicWandSvg;
+        } else {
+          e3.innerHTML = wandSvg;
+        }
+      };
+      saturationButton.load();
+      container.appendChild(brightnessButton.element);
+      container.appendChild(brightnessButton.label);
+      container.appendChild(saturationButton.element);
+      container.appendChild(saturationButton.label);
+      container.appendChild(this.createMakeThemeButton());
       return container;
     }
     createColorPickers() {
@@ -6112,24 +6172,42 @@ Is it scaring you off?`,
       let divider = document.createElement("div");
       divider.classList.add("file-input-theme-button-divider");
       fileInputContainer.appendChild(divider);
-      fileInputContainer.appendChild(this.createMakeThemeButton());
+      fileInputContainer.appendChild(this.createOpenThemeMakerButton());
       return fileInputContainer;
     }
+    updateThemeGenerator() {
+      if (this.themeGeneratorIsOpen) {
+        this.imagePreviewContainer.classList.add("open");
+      } else {
+        this.imagePreviewContainer.classList.remove("open");
+      }
+    }
+    createOpenThemeMakerButton() {
+      let button = document.createElement("button");
+      button.classList.add("open-theme-editor-button");
+      button.innerHTML = "Auto";
+      button.addEventListener("click", async () => {
+        this.themeGeneratorIsOpen = !this.themeGeneratorIsOpen;
+        this.updateThemeGenerator();
+      });
+      return button;
+    }
     createImagePreviewContainer() {
-      let bigBox = document.createElement("div");
-      bigBox.classList.add("preview-image-container");
+      this.imagePreviewContainer.classList.add("preview-image-container");
       let imageWrapper = document.createElement("div");
       imageWrapper.classList.add("preview-image-wrapper");
       imageWrapper.appendChild(this.backgroundImagePreview);
-      bigBox.appendChild(imageWrapper);
-      return bigBox;
+      this.imagePreviewContainer.appendChild(imageWrapper);
+      this.imagePreviewContainer.appendChild(
+        this.createThemeGenerationControls()
+      );
+      return this.imagePreviewContainer;
     }
     async renderContent() {
       this.content.classList.add("custom-theme-maker");
       this.content.appendChild(this.createDisplayNameInput());
       this.content.appendChild(this.createImagePreviewContainer());
       this.content.appendChild(this.createFileInputContainer());
-      this.content.appendChild(this.createThemeGenerationControls());
       this.content.appendChild(this.createColorPickers());
       this.content.appendChild(this.createRemoveButton());
       await this.updateBackgroundImagePreview();
