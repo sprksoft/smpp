@@ -5952,7 +5952,7 @@ Is it scaring you off?`,
     createMakeThemeButton() {
       let button = document.createElement("button");
       button.classList.add("make-theme-button");
-      button.innerHTML = "Generate Theme";
+      button.innerHTML = "Auto";
       button.addEventListener("click", async () => {
         if (await isValidImage(this.backgroundImagePreview.src))
           await this.generateTheme();
@@ -5977,10 +5977,9 @@ Is it scaring you off?`,
       }
       if (await isValidImage(result.imageData)) {
         this.backgroundImagePreview.src = result.imageData;
-        this.element.classList.remove("no-image-available");
+        this.content.classList.remove("no-image-available");
       } else {
         this.backgroundImagePreview.src = "";
-        this.element.classList.add("no-image-available");
         this.content.classList.add("no-image-available");
       }
     }
@@ -6095,20 +6094,48 @@ Is it scaring you off?`,
       container.appendChild(saturationButton);
       return container;
     }
-    async renderContent() {
+    createColorPickers() {
+      let colorPickerElement = document.createElement("div");
+      colorPickerElement.classList.add("custom-theme-color-picker-container");
       this.colorPreviews.forEach((preview) => {
         let colorPreview = Object.values(preview)[0];
-        if (colorPreview) this.content.appendChild(colorPreview);
+        if (colorPreview) colorPickerElement.appendChild(colorPreview);
       });
+      return colorPickerElement;
+    }
+    createFileInputContainer() {
+      let fileInputContainer = document.createElement("div");
+      fileInputContainer.classList.add("file-and-theme-button-container");
+      fileInputContainer.appendChild(
+        this.backgroundImageInput.createFullFileInput()
+      );
+      let divider = document.createElement("div");
+      divider.classList.add("file-input-theme-button-divider");
+      fileInputContainer.appendChild(divider);
+      fileInputContainer.appendChild(this.createMakeThemeButton());
+      return fileInputContainer;
+    }
+    createImagePreviewContainer() {
+      let bigBox = document.createElement("div");
+      bigBox.classList.add("preview-image-container");
+      let imageWrapper = document.createElement("div");
+      imageWrapper.classList.add("preview-image-wrapper");
+      imageWrapper.appendChild(this.backgroundImagePreview);
+      bigBox.appendChild(imageWrapper);
+      return bigBox;
+    }
+    async renderContent() {
+      this.content.classList.add("custom-theme-maker");
       this.content.appendChild(this.createDisplayNameInput());
-      this.content.appendChild(this.createRemoveButton());
-      this.content.appendChild(this.createMakeThemeButton());
-      this.content.appendChild(this.backgroundImagePreview);
-      this.content.appendChild(this.backgroundImageInput.createFullFileInput());
+      this.content.appendChild(this.createImagePreviewContainer());
+      this.content.appendChild(this.createFileInputContainer());
       this.content.appendChild(this.createThemeGenerationControls());
+      this.content.appendChild(this.createColorPickers());
+      this.content.appendChild(this.createRemoveButton());
       await this.updateBackgroundImagePreview();
       this.load(this.theme);
-      return this.content;
+      this.element.appendChild(this.content);
+      return this.element;
     }
     async load(theme) {
       this.displayNameInput.value = theme.displayName;

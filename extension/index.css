@@ -2937,10 +2937,10 @@ button.remove-custom-theme:hover {
 }
 .color-preview-bubble {
   aspect-ratio: 1;
-  width: 2rem;
+  width: 3rem;
   border-radius: 100000px;
-  margin: 0.5rem;
   background-color: var(--current-color);
+  box-shadow: 0px 0px 10px 1px var(--color-shadow);
   cursor: pointer;
 }
 .no-image-available button.make-theme-button {
@@ -2977,11 +2977,64 @@ button.make-theme-button:hover {
 button.make-theme-button:hover {
   border-color: var(--color-accent) !important;
 }
+.custom-theme-maker {
+  display: flex;
+  flex-direction: column;
+  max-width: fit-content;
+  gap: 1rem;
+  align-items: center;
+}
+.file-and-theme-button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 0.5rem;
+  max-width: fit-content;
+  height: 36px;
+}
+.file-input-theme-button-divider {
+  width: 2px;
+  background: var(--color-base02);
+  height: 80%;
+  border-radius: 100px;
+}
+.custom-theme-color-picker-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  padding: 1rem;
+}
+#customThemeCreator {
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem;
+}
+.preview-image-wrapper {
+  background-size: cover !important;
+  background-position: center !important;
+  background-color: var(--color-base02) !important;
+  background:
+    linear-gradient(
+      40deg,
+      color-mix(in srgb, var(--color-base03) 70%, var(--color-accent) 30%) 0%,
+      color-mix(in srgb, var(--color-base03) 65%, var(--color-accent) 35%) 15%,
+      color-mix(in srgb, var(--color-base02) 70%, var(--color-accent) 30%) 45%,
+      color-mix(in srgb, var(--color-base02) 73%, var(--color-accent) 27%) 55%,
+      color-mix(in srgb, var(--color-base02) 95%, var(--color-accent) 5%) 100%);
+  height: 20rem;
+  aspect-ratio: 16/9;
+  border-radius: 1.5rem;
+  overflow: hidden;
+}
 .theme-creator-preview-image {
   object-fit: cover;
   object-position: center;
-  width: 16rem;
-  border-radius: 1rem;
+  width: 100%;
+  height: 100%;
+}
+.no-image-available .theme-creator-preview-image {
+  display: none;
 }
 
 /* src/styles/smpp-styles/assignments.css */
