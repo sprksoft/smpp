@@ -41,7 +41,7 @@ import {
 } from "../settings/main-settings.js";
 import { loadQuickSettings } from "../settings/quick-settings.js";
 import { applyAppearance, isFirefox } from "../main.js";
-import { createTextInput } from "./ui.js";
+import { createHoverTooltip, createTextInput } from "./ui.js";
 import { isValidImage } from "../../fixes-utils/utils.js";
 
 export let currentThemeName: string;
@@ -977,6 +977,14 @@ async function startCustomThemeCreator(theme: Theme, name: string) {
   themeEditor.show();
 }
 
+type ThemeProperty =
+  | "--color-accent"
+  | "--color-text"
+  | "--color-base00"
+  | "--color-base01"
+  | "--color-base02"
+  | "--color-base03";
+
 type colordPalette = {
   Vibrant: Colord;
   DarkVibrant: Colord;
@@ -1038,7 +1046,9 @@ export class CustomThemeCreator extends BaseWindow {
     }
     colorPreview.dataset["name"] = name;
     colorPreview.addEventListener("click", (e: Event) => {
-      this.openColorPicker(name, colorPreview, e);
+      if (!colorPreview.parentElement?.querySelector(".floating-picker")) {
+        this.openColorPicker(name, colorPreview, e);
+      }
     });
     return colorPreview;
   }
@@ -1062,6 +1072,18 @@ export class CustomThemeCreator extends BaseWindow {
     });
 
     return colorPreviews;
+  }
+
+  convertPropertyName(name: ThemeProperty): string {
+    const propertyNames: Record<ThemeProperty, string> = {
+      "--color-accent": "Accent Color",
+      "--color-text": "Text Color",
+      "--color-base00": "Background",
+      "--color-base01": "Secondary Background",
+      "--color-base02": "Tertiary Background",
+      "--color-base03": "Border Color",
+    };
+    return propertyNames[name];
   }
 
   constructor(theme: Theme, name: string) {
@@ -1093,7 +1115,7 @@ export class CustomThemeCreator extends BaseWindow {
       if (docEvent === e) return;
 
       if (!(docEvent.target instanceof Node)) return;
-
+      if (docEvent.target == colorPreview) return;
       const targetElement = docEvent.target as HTMLElement;
       const parentElement = targetElement.parentElement;
 
@@ -1124,7 +1146,7 @@ export class CustomThemeCreator extends BaseWindow {
       await this.saveThemeData();
       setTheme(this.name);
     };
-    this.element.appendChild(colorPicker.render());
+    colorPreview.parentElement?.appendChild(colorPicker.render());
   }
 
   async saveThemeData() {
@@ -1156,6 +1178,7 @@ export class CustomThemeCreator extends BaseWindow {
 
   createDisplayNameInput() {
     this.displayNameInput = createTextInput("", "Name");
+    this.displayNameInput.classList.add("theme-name-input");
     this.displayNameInput.addEventListener("change", async () => {
       await this.saveThemeData();
     });
@@ -1246,10 +1269,8 @@ export class CustomThemeCreator extends BaseWindow {
     let splashcolor: Colord;
     let darkenColor: Colord;
 
-    // true means dark mode
     if (choice.mode) {
       darkenColor = colord("rgba(0,0,0,0.2)");
-      // true means very saturated
       if (choice.saturation) {
         base00 = colordPalette.DarkVibrant.darken(0.2);
         base01 = colordPalette.DarkVibrant.darken(0.1);
@@ -1347,6 +1368,21 @@ export class CustomThemeCreator extends BaseWindow {
       load() {
         this.updateLogo(this.label, this.element.checked);
       }
+
+      createWrapper() {
+        let wrapper = document.createElement("div");
+        wrapper.style.position = "relative";
+        wrapper.style.display = "flex";
+        wrapper.appendChild(this.element);
+        wrapper.appendChild(this.label);
+        return wrapper;
+      }
+    }
+
+    function createSmallThemeGenerationContainer() {
+      let container = document.createElement("div");
+      container.classList.add("theme-generation-sub-container");
+      return container;
     }
 
     let container = document.createElement("div");
@@ -1354,30 +1390,56 @@ export class CustomThemeCreator extends BaseWindow {
 
     let brightnessButton = new themeGenerationControl("brightness-control");
     brightnessButton.updateLogo = (e, s) => {
+      let tooltip = e.parentElement?.querySelector(".smpp-tooltip");
       if (s) {
+        if (tooltip) {
+          tooltip.innerHTML = "Dark";
+        }
         e.innerHTML = moonSvg;
       } else {
+        if (tooltip) {
+          tooltip.innerHTML = "Light";
+        }
         e.innerHTML = sunSvg;
       }
     };
-    brightnessButton.load();
 
     let saturationButton = new themeGenerationControl("saturation-control");
     saturationButton.updateLogo = (e, s) => {
+      let tooltip = e.parentElement?.querySelector(".smpp-tooltip");
       if (s) {
+        if (tooltip) {
+          tooltip.innerHTML = "Vibrant";
+        }
         e.innerHTML = magicWandSvg;
       } else {
+        if (tooltip) {
+          tooltip.innerHTML = "Muted";
+        }
         e.innerHTML = wandSvg;
       }
     };
+
+    let firstSubContainer = createSmallThemeGenerationContainer();
+
+    let brightnessButtonWrapper = brightnessButton.createWrapper();
+    brightnessButtonWrapper.appendChild(
+      createHoverTooltip("Brightness", "horizontal")
+    );
+    let saturationButtonWrapper = saturationButton.createWrapper();
+    saturationButtonWrapper.appendChild(
+      createHoverTooltip("Saturation", "horizontal")
+    );
+    firstSubContainer.appendChild(brightnessButtonWrapper);
+    firstSubContainer.appendChild(saturationButtonWrapper);
+
+    let secondSubContainer = createSmallThemeGenerationContainer();
+    secondSubContainer.appendChild(this.createMakeThemeButton());
+    container.appendChild(firstSubContainer);
+    container.appendChild(secondSubContainer);
+
+    brightnessButton.load();
     saturationButton.load();
-
-    container.appendChild(brightnessButton.element);
-    container.appendChild(brightnessButton.label);
-    container.appendChild(saturationButton.element);
-    container.appendChild(saturationButton.label);
-
-    container.appendChild(this.createMakeThemeButton());
     return container;
   }
 
@@ -1385,8 +1447,20 @@ export class CustomThemeCreator extends BaseWindow {
     let colorPickerElement = document.createElement("div");
     colorPickerElement.classList.add("custom-theme-color-picker-container");
     this.colorPreviews.forEach((preview) => {
+      let colorPreviewWrapper = document.createElement("div");
+      colorPreviewWrapper.classList.add("color-picker-preview-wrapper");
       let colorPreview = Object.values(preview)[0];
-      if (colorPreview) colorPickerElement.appendChild(colorPreview);
+      if (colorPreview) colorPreviewWrapper.appendChild(colorPreview);
+      let colorName = Object.keys(preview)[0];
+      if (colorName)
+        colorPreviewWrapper.appendChild(
+          createHoverTooltip(
+            this.convertPropertyName(colorName as ThemeProperty),
+            "vertical"
+          )
+        );
+
+      colorPickerElement.appendChild(colorPreviewWrapper);
     });
     return colorPickerElement;
   }

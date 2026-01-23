@@ -714,7 +714,7 @@ Is it scaring you off?`,
     outerSwitch.classList.add("switch");
     let innerButton = document.createElement("input");
     innerButton.classList.add("popupinput");
-    innerButton.tabIndex = "-1";
+    innerButton.tabIndex = -1;
     innerButton.type = "checkbox";
     innerButton.id = id;
     let innerSwitch = document.createElement("span");
@@ -727,7 +727,7 @@ Is it scaring you off?`,
     let container = document.createElement("label");
     container.classList.add("smpp-input-with-label");
     container.htmlFor = id;
-    container.dataset.for = id;
+    container.dataset["for"] = id;
     let label = document.createElement("span");
     label.innerText = text;
     let button = createButton(id);
@@ -750,6 +750,18 @@ Is it scaring you off?`,
     textInput.spellcheck = false;
     textInput.classList.add("smpp-text-input");
     return textInput;
+  }
+  function createHoverTooltip(content, position) {
+    let tooltip = document.createElement("div");
+    tooltip.classList.add("smpp-tooltip");
+    if (position == "vertical") {
+      tooltip.classList.add("smpp-tooltip-vertical");
+    }
+    if (position == "horizontal") {
+      tooltip.classList.add("smpp-tooltip-horizontal");
+    }
+    tooltip.innerText = content;
+    return tooltip;
   }
 
   // src/main-features/modules/images.ts
@@ -5861,7 +5873,9 @@ Is it scaring you off?`,
       }
       colorPreview.dataset["name"] = name2;
       colorPreview.addEventListener("click", (e3) => {
-        this.openColorPicker(name2, colorPreview, e3);
+        if (!colorPreview.parentElement?.querySelector(".floating-picker")) {
+          this.openColorPicker(name2, colorPreview, e3);
+        }
       });
       return colorPreview;
     }
@@ -5882,6 +5896,17 @@ Is it scaring you off?`,
         return colorPreview;
       });
       return colorPreviews;
+    }
+    convertPropertyName(name2) {
+      const propertyNames = {
+        "--color-accent": "Accent Color",
+        "--color-text": "Text Color",
+        "--color-base00": "Background",
+        "--color-base01": "Secondary Background",
+        "--color-base02": "Tertiary Background",
+        "--color-base03": "Border Color"
+      };
+      return propertyNames[name2];
     }
     constructor(theme, name2) {
       super("customThemeCreator", true);
@@ -5907,6 +5932,7 @@ Is it scaring you off?`,
       let _docEventHandler = (docEvent) => {
         if (docEvent === e3) return;
         if (!(docEvent.target instanceof Node)) return;
+        if (docEvent.target == colorPreview) return;
         const targetElement = docEvent.target;
         const parentElement = targetElement.parentElement;
         if (colorPicker.element.contains(targetElement)) return;
@@ -5927,7 +5953,7 @@ Is it scaring you off?`,
         await this.saveThemeData();
         setTheme(this.name);
       };
-      this.element.appendChild(colorPicker.render());
+      colorPreview.parentElement?.appendChild(colorPicker.render());
     }
     async saveThemeData() {
       this.colorPreviews.forEach((preview) => {
@@ -5955,6 +5981,7 @@ Is it scaring you off?`,
     }
     createDisplayNameInput() {
       this.displayNameInput = createTextInput("", "Name");
+      this.displayNameInput.classList.add("theme-name-input");
       this.displayNameInput.addEventListener("change", async () => {
         await this.saveThemeData();
       });
@@ -6126,40 +6153,88 @@ Is it scaring you off?`,
         load() {
           this.updateLogo(this.label, this.element.checked);
         }
+        createWrapper() {
+          let wrapper = document.createElement("div");
+          wrapper.style.position = "relative";
+          wrapper.style.display = "flex";
+          wrapper.appendChild(this.element);
+          wrapper.appendChild(this.label);
+          return wrapper;
+        }
+      }
+      function createSmallThemeGenerationContainer() {
+        let container2 = document.createElement("div");
+        container2.classList.add("theme-generation-sub-container");
+        return container2;
       }
       let container = document.createElement("div");
       container.classList.add("theme-controls-container");
       let brightnessButton = new themeGenerationControl("brightness-control");
       brightnessButton.updateLogo = (e3, s3) => {
+        let tooltip = e3.parentElement?.querySelector(".smpp-tooltip");
         if (s3) {
+          if (tooltip) {
+            tooltip.innerHTML = "Dark";
+          }
           e3.innerHTML = moonSvg;
         } else {
+          if (tooltip) {
+            tooltip.innerHTML = "Light";
+          }
           e3.innerHTML = sunSvg;
         }
       };
-      brightnessButton.load();
       let saturationButton = new themeGenerationControl("saturation-control");
       saturationButton.updateLogo = (e3, s3) => {
+        let tooltip = e3.parentElement?.querySelector(".smpp-tooltip");
         if (s3) {
+          if (tooltip) {
+            tooltip.innerHTML = "Vibrant";
+          }
           e3.innerHTML = magicWandSvg;
         } else {
+          if (tooltip) {
+            tooltip.innerHTML = "Muted";
+          }
           e3.innerHTML = wandSvg;
         }
       };
+      let firstSubContainer = createSmallThemeGenerationContainer();
+      let brightnessButtonWrapper = brightnessButton.createWrapper();
+      brightnessButtonWrapper.appendChild(
+        createHoverTooltip("Brightness", "horizontal")
+      );
+      let saturationButtonWrapper = saturationButton.createWrapper();
+      saturationButtonWrapper.appendChild(
+        createHoverTooltip("Saturation", "horizontal")
+      );
+      firstSubContainer.appendChild(brightnessButtonWrapper);
+      firstSubContainer.appendChild(saturationButtonWrapper);
+      let secondSubContainer = createSmallThemeGenerationContainer();
+      secondSubContainer.appendChild(this.createMakeThemeButton());
+      container.appendChild(firstSubContainer);
+      container.appendChild(secondSubContainer);
+      brightnessButton.load();
       saturationButton.load();
-      container.appendChild(brightnessButton.element);
-      container.appendChild(brightnessButton.label);
-      container.appendChild(saturationButton.element);
-      container.appendChild(saturationButton.label);
-      container.appendChild(this.createMakeThemeButton());
       return container;
     }
     createColorPickers() {
       let colorPickerElement = document.createElement("div");
       colorPickerElement.classList.add("custom-theme-color-picker-container");
       this.colorPreviews.forEach((preview) => {
+        let colorPreviewWrapper = document.createElement("div");
+        colorPreviewWrapper.classList.add("color-picker-preview-wrapper");
         let colorPreview = Object.values(preview)[0];
-        if (colorPreview) colorPickerElement.appendChild(colorPreview);
+        if (colorPreview) colorPreviewWrapper.appendChild(colorPreview);
+        let colorName = Object.keys(preview)[0];
+        if (colorName)
+          colorPreviewWrapper.appendChild(
+            createHoverTooltip(
+              this.convertPropertyName(colorName),
+              "vertical"
+            )
+          );
+        colorPickerElement.appendChild(colorPreviewWrapper);
       });
       return colorPickerElement;
     }

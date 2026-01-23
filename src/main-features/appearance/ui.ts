@@ -1,10 +1,9 @@
-// @ts-nocheck
 export function createButton(id = "") {
   let outerSwitch = document.createElement("label");
   outerSwitch.classList.add("switch");
   let innerButton = document.createElement("input");
   innerButton.classList.add("popupinput");
-  innerButton.tabIndex = "-1";
+  innerButton.tabIndex = -1;
   innerButton.type = "checkbox";
   innerButton.id = id;
   let innerSwitch = document.createElement("span");
@@ -14,11 +13,11 @@ export function createButton(id = "") {
   return outerSwitch;
 }
 
-export function createButtonWithLabel(id = "", text) {
+export function createButtonWithLabel(id = "", text: string) {
   let container = document.createElement("label");
   container.classList.add("smpp-input-with-label");
   container.htmlFor = id;
-  container.dataset.for = id;
+  container.dataset["for"] = id;
 
   let label = document.createElement("span");
   label.innerText = text;
@@ -46,4 +45,20 @@ export function createTextInput(id = "", placeholder = "") {
   textInput.spellcheck = false;
   textInput.classList.add("smpp-text-input");
   return textInput;
+}
+
+export function createHoverTooltip(
+  content: string,
+  position: "vertical" | "horizontal"
+) {
+  let tooltip = document.createElement("div");
+  tooltip.classList.add("smpp-tooltip");
+  if (position == "vertical") {
+    tooltip.classList.add("smpp-tooltip-vertical");
+  }
+  if (position == "horizontal") {
+    tooltip.classList.add("smpp-tooltip-horizontal");
+  }
+  tooltip.innerText = content;
+  return tooltip;
 }
