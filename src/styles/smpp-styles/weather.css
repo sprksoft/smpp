@@ -17,6 +17,10 @@ input.weather-location-input:focus {
   color: var(--color-text) !important;
   border-color: var(--color-accent) !important;
 }
+#container.homepage .smpp-widget-pannel .weather-location-input.inactive {
+  background: transparent !important;
+}
+
 .weather-location-input {
   text-align: center;
   color: var(--color-accent) !important;

@@ -553,8 +553,7 @@ button.detail-todo-icon-and-color__icon {
 .selected .evaluation-list-item__container__title {
   font-weight: 700 !important;
 }
-
-.evaluation-list-item.selected {
+.listview button.evaluation-list-item.selected {
   box-shadow: none !important;
   border-color: var(--color-accent) !important;
   background-color: var(--color-base02) !important;
@@ -568,6 +567,10 @@ button.detail-todo-icon-and-color__icon {
 .enableAnimations .evaluation-list-item {
   transition-property: background-color, border-color, box-shadow, color;
   transition: 0.1s ease-in-out !important;
+}
+.glass button.evaluation-list-item {
+  background: var(--darken-background) !important;
+  backdrop-filter: blur(10px);
 }
 
 button.evaluation-list-item {
@@ -945,7 +948,83 @@ h3.detail-description__title.title--3,
   transition-duration: 0.2s !important;
 }
 
-.rightblock.rightBlock--color.js-rightBlock--color:hover,
+.rightblock.rightBlock--color.js-rightBlock--color:hover {
+  background-color: var(--color-base02) !important;
+}
+
+.invite-status {
+  color: var(--color-text) !important;
+}
+
+.side-panel.sidepanel__participants-list
+  .side-panel__panel
+  .participants-list__row:hover,
+.side-panel.sidepanel__participants-list
+  .side-panel__panel
+  .participants-list__row--active {
+  background: var(--color-base01) !important;
+  border-radius: 1rem;
+}
+
+.side-panel.sidepanel__participants-list
+  .side-panel__panel
+  .participants-list__row
+  .description {
+  color: var(--color-text) !important;
+  opacity: 0.7 !important;
+}
+
+button.filter-btn.c-steel-combo-hover--500 {
+  background-color: var(--color-base02) !important;
+  color: var(--color-accent) !important;
+}
+button.filter-btn.c-green-combo-hover--500 {
+  background-color: var(--color-base02) !important;
+  color: var(--color-green) !important;
+}
+button.filter-btn.c-red-combo-hover--500 {
+  background-color: var(--color-base02) !important;
+  color: var(--color-red) !important;
+}
+
+button.filter-btn.c-steel-combo-hover--500:hover {
+  background-color: var(--color-base03) !important;
+  color: var(--color-accent) !important;
+}
+button.filter-btn.c-green-combo-hover--500:hover {
+  background-color: var(--color-base03) !important;
+  color: var(--color-green) !important;
+}
+button.filter-btn.c-red-combo-hover--500:hover {
+  background-color: var(--color-base03) !important;
+  color: var(--color-red) !important;
+}
+
+button.filter-btn.c-steel-combo-hover--100,
+button.filter-btn.c-green-combo-hover--100,
+button.filter-btn.c-red-combo-hover--100 {
+  background: var(--color-base01);
+}
+
+button.filter-btn.c-steel-combo-hover--100:hover {
+  background: var(--color-base02);
+  color: var(--color-text);
+}
+button.filter-btn.c-green-combo-hover--100:hover {
+  background: var(--color-base02);
+  color: var(--color-green) !important;
+}
+button.filter-btn.c-red-combo-hover--100:hover {
+  background: var(--color-base02);
+  color: var(--color-red) !important;
+}
+
+.side-panel.sidepanel__participants-list
+  .side-panel__panel
+  .participants-list__buttonbar {
+  border-top-color: var(--color-base02) !important;
+}
+
 .course-link__button:hover {
   background-color: var(--color-base03) !important;
 }

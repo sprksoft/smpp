@@ -2,7 +2,9 @@ import { Vibrant } from "node-vibrant/browser";
 import type { Palette, Swatch } from "@vibrant/color";
 import { Colord, colord, extend } from "colord";
 import lchPlugin from "colord/plugins/lch";
-extend([lchPlugin]);
+import mixPlugin from "colord/plugins/mix";
+
+extend([lchPlugin, mixPlugin]);
 
 import { widgetSystemNotifyThemeChange } from "../../widgets/widgets.js";
 import {
@@ -1159,6 +1161,32 @@ export class CustomThemeCreator extends BaseWindow {
         colorPreview.style.getPropertyValue("--current-color");
     });
     this.theme.displayName = this.displayNameInput.value;
+    if (
+      this.theme.cssProperties["--color-base00"] &&
+      this.theme.cssProperties["--color-base02"] &&
+      this.theme.cssProperties["--color-text"]
+    ) {
+      let base00 = colord(this.theme.cssProperties["--color-base00"]);
+      let darkenColor: Colord;
+      let splashColor: Colord;
+      if (base00.brightness() > 0.5) {
+        darkenColor = colord("rgba(228, 228, 228, 0.4)");
+        darkenColor = darkenColor
+          .mix(this.theme.cssProperties["--color-base02"], 0.5)
+          .alpha(0.4);
+      } else { 
+        darkenColor = colord("rgba(0,0,0,0.2)");
+        darkenColor = darkenColor
+          .mix(this.theme.cssProperties["--color-base00"], 0.5)
+          .alpha(0.3);
+      }
+      splashColor = colord(this.theme.cssProperties["--color-text"]);
+      this.theme.cssProperties["--color-splashtext"] = splashColor.toHex();
+      this.theme.cssProperties["--darken-background"] = darkenColor.toHex();
+      this.theme.cssProperties["--color-homepage-sidebars-bg"] = darkenColor
+        .alpha(0.1)
+        .toHex();
+    }
     await browser.runtime.sendMessage({
       action: "saveCustomTheme",
       data: this.theme,
@@ -1266,11 +1294,10 @@ export class CustomThemeCreator extends BaseWindow {
     let base03: Colord;
     let accent: Colord;
     let textcolor: Colord;
-    let splashcolor: Colord;
     let darkenColor: Colord;
 
     if (choice.mode) {
-      darkenColor = colord("rgba(0,0,0,0.2)");
+      // Dark mode
       if (choice.saturation) {
         base00 = colordPalette.DarkVibrant.darken(0.2);
         base01 = colordPalette.DarkVibrant.darken(0.1);
@@ -1278,7 +1305,6 @@ export class CustomThemeCreator extends BaseWindow {
         base03 = colordPalette.DarkVibrant.lighten(0.1);
         accent = colordPalette.Vibrant;
         textcolor = colordPalette.LightVibrant;
-        splashcolor = colordPalette.DarkVibrant;
       } else {
         base00 = colordPalette.DarkMuted.darken(0.2);
         base01 = colordPalette.DarkMuted.darken(0.1);
@@ -1286,10 +1312,13 @@ export class CustomThemeCreator extends BaseWindow {
         base03 = colordPalette.DarkMuted.lighten(0.1);
         accent = colordPalette.Muted;
         textcolor = colordPalette.LightMuted;
-        splashcolor = colordPalette.DarkMuted;
       }
+
+      darkenColor = colord("rgba(0,0,0,0.2)")
+        .mix(base00.toHex(), 0.5)
+        .alpha(0.3);
     } else {
-      darkenColor = colord("rgba(228, 228, 228, 0.4)");
+      // Light mode
       if (choice.saturation) {
         base00 = colordPalette.LightVibrant.lighten(0.1);
         base01 = colordPalette.LightVibrant.lighten(0.05);
@@ -1297,7 +1326,6 @@ export class CustomThemeCreator extends BaseWindow {
         base03 = colordPalette.LightVibrant.darken(0.1);
         accent = colordPalette.Vibrant;
         textcolor = colordPalette.DarkVibrant;
-        splashcolor = colordPalette.DarkMuted;
       } else {
         base00 = colordPalette.LightMuted.lighten(0.1);
         base01 = colordPalette.LightMuted.lighten(0.05);
@@ -1305,8 +1333,10 @@ export class CustomThemeCreator extends BaseWindow {
         base03 = colordPalette.LightMuted.darken(0.1);
         accent = colordPalette.Muted;
         textcolor = colordPalette.DarkMuted;
-        splashcolor = colordPalette.DarkMuted;
       }
+      darkenColor = colord("rgba(228, 228, 228, 0.4)")
+        .mix(base02.toHex(), 0.5)
+        .alpha(0.4);
     }
 
     this.theme = {
@@ -1321,7 +1351,7 @@ export class CustomThemeCreator extends BaseWindow {
         "--color-base03": base03.toHex(),
         "--darken-background": darkenColor.toHex(),
         "--color-homepage-sidebars-bg": darkenColor.alpha(0.1).toHex(),
-        "--color-splashtext": splashcolor.toHex(),
+        "--color-splashtext": textcolor.toHex(),
       },
     };
     await browser.runtime.sendMessage({

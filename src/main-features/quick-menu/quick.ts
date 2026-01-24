@@ -231,9 +231,6 @@ export async function do_qm(opener = "") {
         case "clearsettings":
           clearAllData();
           return;
-        case "glass":
-          document.body.classList.add("glass");
-          return;
         case "ridge":
           document.body.classList.add("ridge");
           return;

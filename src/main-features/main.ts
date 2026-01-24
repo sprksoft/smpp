@@ -246,6 +246,11 @@ async function createStaticGlobals() {
 
 export async function applyAppearance(appearance: Settings["appearance"]) {
   let style = document.documentElement.style;
+  if (appearance.glass) {
+    document.body.classList.add("glass");
+  } else {
+    document.body.classList.remove("glass");
+  }
 
   await setTheme(appearance.theme);
   setBackground(appearance);

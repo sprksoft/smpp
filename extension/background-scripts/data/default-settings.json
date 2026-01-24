@@ -2,6 +2,7 @@
   "username": null,
   "useSMpfp": false,
   "theme": "default",
+  "glass": false,
   "quickSettingsThemes": [
     "default",
     "white",

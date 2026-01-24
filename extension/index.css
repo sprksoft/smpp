@@ -482,6 +482,9 @@ input.weather-location-input:focus {
   color: var(--color-text) !important;
   border-color: var(--color-accent) !important;
 }
+#container.homepage .smpp-widget-pannel .weather-location-input.inactive {
+  background: transparent !important;
+}
 .weather-location-input {
   text-align: center;
   color: var(--color-accent) !important;
@@ -659,6 +662,9 @@ input.weather-location-input:focus {
 }
 
 /* src/styles/smpp-styles/delijn.css */
+.glass .lijnCard {
+  background: var(--darken-background) !important;
+}
 .lijnCard {
   background-color: var(--color-base01);
   border: 3px solid var(--color-base03);
@@ -1285,6 +1291,9 @@ html {
     transform: rotate(360deg);
   }
 }
+.glass .smpp-widget {
+  background: var(--darken-background) !important;
+}
 .smpp-widget {
   height: min-content;
   transition: transform 0.4s, padding 0.25s;
@@ -1356,6 +1365,9 @@ html {
 .smpp-widget-bag-placeholder {
   background: var(--color-base02);
   border-radius: 1.5rem;
+}
+.glass .smpp-widget-pannel {
+  backdrop-filter: blur(10px);
 }
 .smpp-widget-pannel {
   min-width: calc(300px + 1rem * 2);
@@ -1590,14 +1602,14 @@ p.smpp-error-widget {
 .smpp-widget:has(.smpp-widget-smartschool) {
   padding: 0px !important;
 }
-.smpp-widget-transparent {
-  background-color: transparent;
+.smpp-widget.smpp-widget-transparent {
+  background: transparent !important;
   border-color: transparent;
   box-shadow: none;
   padding: 0rem;
 }
 .smpp-widget-edit-mode .smpp-widget-transparent {
-  background-color: var(--color-base01);
+  background-color: var(--color-base01) !important;
   border: 3px solid var(--color-base03);
   box-shadow: 0 0 10px var(--color-shadow);
   padding: 1rem;
@@ -2074,67 +2086,6 @@ label.settings-page-image-button-wrapper:has(input:checked) {
     transform,
     outline;
   transition: 0.15s ease-in-out;
-}
-.settings-page-theme-card {
-  outline: 2px solid transparent !important;
-  display: flex;
-  flex-direction: column;
-  border: 0.3rem solid transparent;
-  gap: 0.5rem;
-  width: 14rem;
-  padding: 0.2rem;
-  border-radius: 1.5rem;
-  background-color: var(--color-base01);
-  cursor: pointer;
-}
-.settings-page-theme-card > img {
-  border-radius: 1rem !important;
-  background-color: var(--background-placeholder-color) !important;
-  background:
-    linear-gradient(
-      40deg,
-      color-mix(in srgb, var(--hover-color) 70%, var(--hover-border) 30%) 0%,
-      color-mix(in srgb, var(--hover-color) 65%, var(--hover-border) 35%) 15%,
-      color-mix(in srgb, var(--background-placeholder-color) 70%, var(--hover-border) 30%) 45%,
-      color-mix(in srgb, var(--background-placeholder-color) 73%, var(--hover-border) 27%) 55%,
-      color-mix(in srgb, var(--background-placeholder-color) 95%, var(--hover-border) 5%) 100%);
-}
-.settings-page-theme-card[data-theme=custom] {
-  background-color: var(--color-base01) !important;
-}
-.settings-page-theme-card[data-theme=custom] > img {
-  background:
-    linear-gradient(
-      40deg,
-      color-mix(in srgb, var(--color-base01) 70%, var(--color-accent) 30%) 0%,
-      color-mix(in srgb, var(--color-base01) 65%, var(--color-accent) 35%) 15%,
-      color-mix(in srgb, var(--color-base02) 70%, var(--color-accent) 30%) 45%,
-      color-mix(in srgb, var(--color-base02) 73%, var(--color-accent) 27%) 55%,
-      color-mix(in srgb, var(--color-base02) 95%, var(--color-accent) 5%) 100%);
-}
-.settings-page-theme-card[data-theme=custom]:hover > img {
-  background-color: var(--color-base03) !important;
-}
-.settings-page-theme-card[data-theme=custom]:hover {
-  border-color: var(--color-accent);
-  background-color: var(--color-base02) !important;
-  color: var(--color-text) !important;
-}
-.settings-page-theme-card:hover {
-  border-color: var(--hover-border);
-  background-color: var(--hover-color) !important;
-  color: var(--text-color) !important;
-}
-.settings-page-theme-card:active {
-  scale: 0.95;
-}
-.settings-page-theme-card:focus-visible {
-  outline: 2px solid var(--color-base03) !important;
-}
-.settings-page-theme-card:has(input:checked) {
-  border-color: var(--hover-border);
-  background-color: var(--hover-color) !important;
-  color: var(--text-color) !important;
 }
 .settings-page-icons-container {
   margin: 2px;
@@ -3070,7 +3021,7 @@ button.open-theme-editor-button:hover {
   display: flex;
   flex-direction: row;
   border-radius: 2rem;
-  background-color: var(--color-base00) !important;
+  background-color: transparent !important;
   box-shadow: 0px 2px 10px 0px var(--color-shadow);
   transition: all 0.3s ease-in-out;
   padding: 0.5rem;
@@ -3151,6 +3102,19 @@ button.open-theme-editor-button:hover {
   opacity: 0.7;
   filter: saturate(70%);
   pointer-events: none;
+}
+.arrow-_JyEf {
+  display: none;
+}
+.tooltip-TtRmZ {
+  border-radius: 1000rem !important;
+  background: var(--color-base01) !important;
+  border: 2px solid var(--color-base02) !important;
+  box-shadow: 0px 5px 10px 0px var(--color-shadow) !important;
+  padding: 0.5rem 1rem !important;
+  font-size: 1.2rem !important;
+  font-weight: 600 !important;
+  color: var(--color-text) !important;
 }
 .smpp-tooltip {
   z-index: 10000;
@@ -5684,6 +5648,10 @@ span.login-app__title.login-app__title--sign-in-with {
 .tox-icon .tox-tbtn__icon-wrap {
   background-color: var(--color-text) !important;
 }
+.glass .modern-message {
+  background: var(--darken-background) !important;
+  backdrop-filter: blur(5px);
+}
 .modern-message {
   border: 2px solid var(--color-base01) !important;
   border-radius: 1.25rem !important;
@@ -6882,6 +6850,10 @@ td[bgcolor*="#"] {
 .notification__content {
   color: var(--color-text) !important;
 }
+.glass .notification {
+  background: var(--darken-background) !important;
+  backdrop-filter: blur(5px);
+}
 .notification {
   border: 2px solid var(--color-base02) !important;
   border-radius: 15px !important;
@@ -6898,6 +6870,10 @@ td[bgcolor*="#"] {
 }
 .div {
   color: var(--color-text) !important;
+}
+.glass .notification:hover,
+.glass .modern-message:hover {
+  background-color: var(--color-base01) !important;
 }
 .notification:hover,
 .modern-message:hover {
@@ -6940,6 +6916,7 @@ button.tox-tbtn.tox-tbtn--enabled {
 }
 .notification__info {
   font-weight: 400 !important;
+  text-decoration: none !important;
 }
 .smsc-topnav [data-notifs] .notification__btn {
   padding: 1rem !important;
@@ -7402,7 +7379,7 @@ button.detail-todo-icon-and-color__icon {
 .selected .evaluation-list-item__container__title {
   font-weight: 700 !important;
 }
-.evaluation-list-item.selected {
+.listview button.evaluation-list-item.selected {
   box-shadow: none !important;
   border-color: var(--color-accent) !important;
   background-color: var(--color-base02) !important;
@@ -7418,6 +7395,10 @@ button.detail-todo-icon-and-color__icon {
     box-shadow,
     color;
   transition: 0.1s ease-in-out !important;
+}
+.glass button.evaluation-list-item {
+  background: var(--darken-background) !important;
+  backdrop-filter: blur(10px);
 }
 button.evaluation-list-item {
   background-color: var(--color-base01) !important;
@@ -7713,7 +7694,65 @@ h3.detail-description__title.title--3,
   transition: ease-in-out !important;
   transition-duration: 0.2s !important;
 }
-.rightblock.rightBlock--color.js-rightBlock--color:hover,
+.rightblock.rightBlock--color.js-rightBlock--color:hover {
+  background-color: var(--color-base02) !important;
+}
+.invite-status {
+  color: var(--color-text) !important;
+}
+.side-panel.sidepanel__participants-list .side-panel__panel .participants-list__row:hover,
+.side-panel.sidepanel__participants-list .side-panel__panel .participants-list__row--active {
+  background: var(--color-base01) !important;
+  border-radius: 1rem;
+}
+.side-panel.sidepanel__participants-list .side-panel__panel .participants-list__row .description {
+  color: var(--color-text) !important;
+  opacity: 0.7 !important;
+}
+button.filter-btn.c-steel-combo-hover--500 {
+  background-color: var(--color-base02) !important;
+  color: var(--color-accent) !important;
+}
+button.filter-btn.c-green-combo-hover--500 {
+  background-color: var(--color-base02) !important;
+  color: var(--color-green) !important;
+}
+button.filter-btn.c-red-combo-hover--500 {
+  background-color: var(--color-base02) !important;
+  color: var(--color-red) !important;
+}
+button.filter-btn.c-steel-combo-hover--500:hover {
+  background-color: var(--color-base03) !important;
+  color: var(--color-accent) !important;
+}
+button.filter-btn.c-green-combo-hover--500:hover {
+  background-color: var(--color-base03) !important;
+  color: var(--color-green) !important;
+}
+button.filter-btn.c-red-combo-hover--500:hover {
+  background-color: var(--color-base03) !important;
+  color: var(--color-red) !important;
+}
+button.filter-btn.c-steel-combo-hover--100,
+button.filter-btn.c-green-combo-hover--100,
+button.filter-btn.c-red-combo-hover--100 {
+  background: var(--color-base01);
+}
+button.filter-btn.c-steel-combo-hover--100:hover {
+  background: var(--color-base02);
+  color: var(--color-text);
+}
+button.filter-btn.c-green-combo-hover--100:hover {
+  background: var(--color-base02);
+  color: var(--color-green) !important;
+}
+button.filter-btn.c-red-combo-hover--100:hover {
+  background: var(--color-base02);
+  color: var(--color-red) !important;
+}
+.side-panel.sidepanel__participants-list .side-panel__panel .participants-list__buttonbar {
+  border-top-color: var(--color-base02) !important;
+}
 .course-link__button:hover {
   background-color: var(--color-base03) !important;
 }

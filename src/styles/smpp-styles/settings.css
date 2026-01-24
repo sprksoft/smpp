@@ -321,93 +321,6 @@ label.settings-page-image-button-wrapper:has(input:checked) {
   transition: 0.15s ease-in-out;
 }
 
-.settings-page-theme-card {
-  outline: 2px solid transparent !important;
-  display: flex;
-  flex-direction: column;
-  border: 0.3rem solid transparent;
-  gap: 0.5rem;
-  width: 14rem;
-  padding: 0.2rem;
-  border-radius: 1.5rem;
-  background-color: var(--color-base01);
-  cursor: pointer;
-}
-
-.settings-page-theme-card > img {
-  border-radius: 1rem !important;
-  background-color: var(--background-placeholder-color) !important;
-  background: linear-gradient(
-    40deg,
-    color-mix(in srgb, var(--hover-color) 70%, var(--hover-border) 30%) 0%,
-    color-mix(in srgb, var(--hover-color) 65%, var(--hover-border) 35%) 15%,
-    color-mix(
-        in srgb,
-        var(--background-placeholder-color) 70%,
-        var(--hover-border) 30%
-      )
-      45%,
-    color-mix(
-        in srgb,
-        var(--background-placeholder-color) 73%,
-        var(--hover-border) 27%
-      )
-      55%,
-    color-mix(
-        in srgb,
-        var(--background-placeholder-color) 95%,
-        var(--hover-border) 5%
-      )
-      100%
-  );
-}
-
-.settings-page-theme-card[data-theme="custom"] {
-  background-color: var(--color-base01) !important;
-}
-
-.settings-page-theme-card[data-theme="custom"] > img {
-  background: linear-gradient(
-    40deg,
-    color-mix(in srgb, var(--color-base01) 70%, var(--color-accent) 30%) 0%,
-    color-mix(in srgb, var(--color-base01) 65%, var(--color-accent) 35%) 15%,
-    color-mix(in srgb, var(--color-base02) 70%, var(--color-accent) 30%) 45%,
-    color-mix(in srgb, var(--color-base02) 73%, var(--color-accent) 27%) 55%,
-    color-mix(in srgb, var(--color-base02) 95%, var(--color-accent) 5%) 100%
-  );
-}
-
-.settings-page-theme-card[data-theme="custom"]:hover > img {
-  background-color: var(--color-base03) !important;
-}
-
-.settings-page-theme-card[data-theme="custom"]:hover {
-  border-color: var(--color-accent);
-  background-color: var(--color-base02) !important;
-  color: var(--color-text) !important;
-}
-
-.settings-page-theme-card:hover {
-  border-color: var(--hover-border);
-  background-color: var(--hover-color) !important;
-  color: var(--text-color) !important;
-}
-
-.settings-page-theme-card:active {
-  scale: 0.95;
-}
-
-.settings-page-theme-card:focus-visible {
-  outline: 2px solid var(--color-base03) !important;
-}
-
-/* Highlight chosen card */
-.settings-page-theme-card:has(input:checked) {
-  border-color: var(--hover-border);
-  background-color: var(--hover-color) !important;
-  color: var(--text-color) !important;
-}
-
 .settings-page-icons-container {
   margin: 2px;
   position: relative;
@@ -1492,7 +1405,7 @@ button.open-theme-editor-button:hover {
   display: flex;
   flex-direction: row;
   border-radius: 2rem;
-  background-color: var(--color-base00) !important;
+  background-color: transparent !important;
   box-shadow: 0px 2px 10px 0px var(--color-shadow);
   transition: all 0.3s ease-in-out;
   padding: 0.5rem;
@@ -1587,6 +1500,20 @@ button.open-theme-editor-button:hover {
   opacity: 0.7;
   filter: saturate(70%);
   pointer-events: none;
+}
+.arrow-_JyEf {
+  display: none;
+}
+
+.tooltip-TtRmZ {
+  border-radius: 1000rem !important;
+  background: var(--color-base01) !important;
+  border: 2px solid var(--color-base02) !important;
+  box-shadow: 0px 5px 10px 0px var(--color-shadow) !important;
+  padding: 0.5rem 1rem !important;
+  font-size: 1.2rem !important;
+  font-weight: 600 !important;
+  color: var(--color-text) !important;
 }
 
 .smpp-tooltip {

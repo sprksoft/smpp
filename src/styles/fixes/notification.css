@@ -30,6 +30,11 @@
   color: var(--color-text) !important;
 }
 
+.glass .notification {
+  background: var(--darken-background) !important;
+  backdrop-filter: blur(5px);
+}
+
 .notification {
   border: 2px solid var(--color-base02) !important;
   border-radius: 15px !important;
@@ -47,6 +52,11 @@
 
 .div {
   color: var(--color-text) !important;
+}
+
+.glass .notification:hover,
+.glass .modern-message:hover {
+  background-color: var(--color-base01) !important;
 }
 
 .notification:hover,
@@ -97,6 +107,7 @@ button.tox-tbtn.tox-tbtn--enabled {
 
 .notification__info {
   font-weight: 400 !important;
+  text-decoration: none !important;
 }
 
 .smsc-topnav [data-notifs] .notification__btn {

@@ -1,3 +1,7 @@
+.glass .lijnCard {
+  background: var(--darken-background) !important;
+}
+
 .lijnCard {
   background-color: var(--color-base01);
   border: 3px solid var(--color-base03);
@@ -160,8 +164,8 @@
 }
 
 .enableAnimations .delijnSearchButton {
-  transition-property: background-color, border-color, transform, animation,
-    origin;
+  transition-property:
+    background-color, border-color, transform, animation, origin;
   transition: 0.2s ease-in-out !important;
 }
 
@@ -244,8 +248,8 @@
 
 .enableAnimations .showMoreHaltesButton {
   animation: delijnCardAppear 0.3s ease-in-out 0ms 1;
-  transition-property: background-color, border-color, width, font-weight,
-    letter-spacing;
+  transition-property:
+    background-color, border-color, width, font-weight, letter-spacing;
   transition: 0.2s ease-in-out !important;
 }
 

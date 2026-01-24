@@ -19,7 +19,10 @@
 .tox-icon .tox-tbtn__icon-wrap {
   background-color: var(--color-text) !important;
 }
-
+.glass .modern-message {
+  background: var(--darken-background) !important;
+  backdrop-filter: blur(5px);
+}
 .modern-message {
   border: 2px solid var(--color-base01) !important;
   border-radius: 1.25rem !important;

@@ -7,6 +7,7 @@ import {
   feelsLikeSvg,
   windSvg,
   temperatureSvg,
+  noLocationSvg,
 } from "../fixes-utils/svgs.js";
 
 class WeatherWidgetBase extends WidgetBase {

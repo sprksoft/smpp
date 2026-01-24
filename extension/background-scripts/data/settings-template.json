@@ -5,6 +5,7 @@
   },
   "appearance": {
     "theme": null,
+    "glass": "boolean",
     "quickSettingsThemes": "array",
     "background": {
       "blur": "number"

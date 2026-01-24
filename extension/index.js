@@ -121,6 +121,9 @@
 <metadata> Svg Vector Icons : http://www.onlinewebfonts.com/icon</metadata>
 <g><g><path xmlns="http://www.w3.org/2000/svg" class=pencil stroke-linecap:round;stroke-linejoin:round;-inkscape-stroke:none" d="m 19.792969,1.2089844 c -0.773047,0 -1.546203,0.290977 -2.134766,0.8730469 -6.69e-4,6.478e-4 -0.0013,0.0013 -0.002,0.00195 L 8.4119915,11.389897 c -0.5321594,0.536333 -1.9587661,2.040145 -2.9061791,5.334709 -0.1062793,0.369579 -0.1650107,0.570623 -0.2207032,0.85994 -0.046789,0.243065 -0.1295961,0.724628 0.2070338,1.013107 0.3909805,0.335056 1.0440816,0.133455 1.3847656,0.03125 C 7.387553,18.47571 7.9834625,18.287442 8.5897993,18.031247 11.103423,16.969168 12.593117,15.70399 12.985931,15.188066 l 8.93985,-8.8697066 C 23.11495,5.1606353 23.105005,3.2461646 21.927734,2.0820313 21.339171,1.4999614 20.566016,1.2089844 19.792969,1.2089844 Z" id="path5" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="scccssssscccs"/><path xmlns="http://www.w3.org/2000/svg" d="M 10.273212,2.8358152 H 5.5822718 c -1.3827164,0 -2.0740869,0 -2.6022128,0.2661137 C 2.5154954,3.3360099 2.1378007,3.709514 1.9011058,4.1689107 1.6320062,4.6911889 1.6320062,5.3748762 1.6320062,6.7422506 V 18.461557 c 0,1.367374 0,2.051122 0.2690996,2.573363 0.2366949,0.459374 0.6143896,0.832926 1.0789532,1.066946 0.5281259,0.266126 1.2194964,0.266126 2.6022128,0.266126 H 17.433068 c 1.382716,0 2.074137,0 2.602237,-0.266126 0.464527,-0.23402 0.842271,-0.607572 1.078917,-1.066946 0.269112,-0.522241 0.269112,-1.205989 0.269112,-2.573363 v -5.249273"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="stroke-width:3.25435;stroke-dasharray:none" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="csccssccssccsccc"/> </g></g>
 </svg>`;
+  var noLocationSvg = `<svg xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="0 0 24 24" stroke="var(--color-red)" fill="var(--color-base01)">
+<path d="M10 8L14 12M14 8L10 12M19 10.2C19 14.1764 15.5 17.4 12 21C8.5 17.4 5 14.1764 5 10.2C5 6.22355 8.13401 3 12 3C15.866 3 19 6.22355 19 10.2Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>`;
   var lijnIconSvg = `<svg id="Laag_2" data-name="Laag 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 379.84 373.13">
   <defs>
 <style>
@@ -434,10 +437,10 @@ Is it scaring you off?`,
   function setByPath(object, path, value) {
     let ob = object;
     const pathSplit = path.split(".");
-    for (let i3 = 0; i3 < pathSplit.length - 1; i3++) {
-      ob = ob[pathSplit[i3]];
+    for (let i4 = 0; i4 < pathSplit.length - 1; i4++) {
+      ob = ob[pathSplit[i4]];
       if (ob === void 0) {
-        throw `setByPath: ${pathSplit[i3]} did not exist in path ${path}`;
+        throw `setByPath: ${pathSplit[i4]} did not exist in path ${path}`;
       }
     }
     ob[pathSplit[pathSplit.length - 1]] = value;
@@ -458,11 +461,11 @@ Is it scaring you off?`,
   }
   function openURL2(url, new_window = false) {
     if (new_window) {
-      let a3 = document.createElement("a");
-      a3.href = url;
-      a3.rel = "noopener noreferrer";
-      a3.target = "_blank";
-      a3.click();
+      let a4 = document.createElement("a");
+      a4.href = url;
+      a4.rel = "noopener noreferrer";
+      a4.target = "_blank";
+      a4.click();
       return;
     }
     window.location.href = url;
@@ -527,8 +530,8 @@ Is it scaring you off?`,
       sendDebug("Stored plannerUrl in cookies with 30 day expiration.");
       userId = plannerUrl.split("/")[4];
       sendDebug("Extracted userId from plannerUrl:", userId);
-    } catch (e3) {
-      sendDebug("Failed to get plannerUrl from DOM. Error:", e3.message);
+    } catch (e4) {
+      sendDebug("Failed to get plannerUrl from DOM. Error:", e4.message);
       sendDebug("Trying to get plannerUrl from cookies...");
       const cookies = document.cookie.split(";");
       const plannerUrlCookie = cookies.find(
@@ -657,11 +660,11 @@ Is it scaring you off?`,
       this.element.classList.remove("hidden");
       const isKeyboardEvent = triggerEvent && (typeof KeyboardEvent !== "undefined" ? triggerEvent instanceof KeyboardEvent : String(triggerEvent.type).startsWith("key"));
       const openEventTarget = isKeyboardEvent ? null : triggerEvent?.target ?? null;
-      this._outsideClickHandler = (e3) => {
-        if (openEventTarget && e3.target instanceof Node && (e3.target === openEventTarget || openEventTarget instanceof Node && openEventTarget.contains(e3.target))) {
+      this._outsideClickHandler = (e4) => {
+        if (openEventTarget && e4.target instanceof Node && (e4.target === openEventTarget || openEventTarget instanceof Node && openEventTarget.contains(e4.target))) {
           return;
         }
-        if (e3.target instanceof Node && !this.element.contains(e3.target)) {
+        if (e4.target instanceof Node && !this.element.contains(e4.target)) {
           this.hide();
         }
       };
@@ -669,8 +672,8 @@ Is it scaring you off?`,
         capture: true
       });
       if (!this._keydownHandler) {
-        this._keydownHandler = (e3) => {
-          if (e3.key === "Escape") {
+        this._keydownHandler = (e4) => {
+          if (e4.key === "Escape") {
             this.hide();
           }
         };
@@ -731,9 +734,9 @@ Is it scaring you off?`,
     let label = document.createElement("span");
     label.innerText = text;
     let button = createButton(id);
-    container.addEventListener("keydown", (e3) => {
-      if (e3.key === " " || e3.key === "Enter") {
-        e3.preventDefault();
+    container.addEventListener("keydown", (e4) => {
+      if (e4.key === " " || e4.key === "Enter") {
+        e4.preventDefault();
         button.click();
         container.focus();
       }
@@ -804,8 +807,8 @@ Is it scaring you off?`,
       this.fileInputButton.classList.add("smpp-file-input-button");
       this.fileInputButton.setAttribute("aria-label", "Choose image file");
       this.fileInputButton.innerHTML = imageInputSvg;
-      this.fileInputButton.addEventListener("click", (e3) => {
-        e3.preventDefault();
+      this.fileInputButton.addEventListener("click", (e4) => {
+        e4.preventDefault();
         this.fileInput.click();
       });
       fileInputContainer.appendChild(this.fileInput);
@@ -854,8 +857,8 @@ Is it scaring you off?`,
         }
         await this.storeImage();
       });
-      this.clearButton.addEventListener("click", async (e3) => {
-        e3.preventDefault();
+      this.clearButton.addEventListener("click", async (e4) => {
+        e4.preventDefault();
         this.linkInput.value = "";
         this.clearButton.classList.remove("active");
         this.fileInputButton.classList.remove("active");
@@ -964,8 +967,8 @@ Is it scaring you off?`,
           return;
         img.src = url;
         img.classList.add("personal-profile-picture");
-      } catch (e3) {
-        console.error("Error processing img:", e3, img);
+      } catch (e4) {
+        console.error("Error processing img:", e4, img);
       }
     }
     const existingImgs = Array.from(document.getElementsByTagName("img"));
@@ -983,8 +986,8 @@ Is it scaring you off?`,
             if (imgs && imgs.length) {
               for (const img of imgs) processImg(img);
             }
-          } catch (e3) {
-            console.error("Error querying imgs inside node:", e3, htmlNode);
+          } catch (e4) {
+            console.error("Error querying imgs inside node:", e4, htmlNode);
           }
         }
         if (mutation.type === "attributes" && mutation.target instanceof HTMLImageElement) {
@@ -1091,19 +1094,19 @@ Is it scaring you off?`,
       }
       this.close();
     }
-    #onKeydown(e3) {
-      if (e3.key == "Enter") {
+    #onKeydown(e4) {
+      if (e4.key == "Enter") {
         this.#accept();
-      } else if (e3.key == "Escape") {
+      } else if (e4.key == "Escape") {
         this.close();
-      } else if (e3.key == "Tab" && e3.shiftKey || e3.key == "ArrowUp") {
+      } else if (e4.key == "Tab" && e4.shiftKey || e4.key == "ArrowUp") {
         this.#selPrev();
-      } else if (e3.key == "Tab" && !e3.shiftKey || e3.key == "ArrowDown") {
+      } else if (e4.key == "Tab" && !e4.shiftKey || e4.key == "ArrowDown") {
         this.#selNext();
       } else {
         return;
       }
-      e3.preventDefault();
+      e4.preventDefault();
     }
     #oninput() {
       this.#sort();
@@ -1148,14 +1151,14 @@ Is it scaring you off?`,
           node.getElementsByClassName("dmenu-score")[0].innerText = score;
         }
       }
-      let sortedItems = items.sort(function(a3, b3) {
-        if (a3.score < b3.score) return 1;
-        if (a3.score > b3.score) return -1;
+      let sortedItems = items.sort(function(a4, b3) {
+        if (a4.score < b3.score) return 1;
+        if (a4.score > b3.score) return -1;
         return 0;
       });
-      for (let i3 = 0; i3 < sortedItems.length; i3++) {
-        let item = sortedItems[i3];
-        if (i3 == 0) {
+      for (let i4 = 0; i4 < sortedItems.length; i4++) {
+        let item = sortedItems[i4];
+        if (i4 == 0) {
           item.htmlNode.classList.add("dmenu-selected");
         } else {
           item.htmlNode.classList.remove("dmenu-selected");
@@ -1168,22 +1171,22 @@ Is it scaring you off?`,
       match = match.toLowerCase();
       let score = 0;
       let mi = 0;
-      let i3 = 0;
+      let i4 = 0;
       let streak = 0;
       let streakStartI = 0;
       while (true) {
-        if (i3 >= str.length || mi >= match.length) {
+        if (i4 >= str.length || mi >= match.length) {
           break;
         }
-        if (str[i3] == match[mi]) {
+        if (str[i4] == match[mi]) {
           score += (streak + 1) * (streak + 1) * ((str.length - streakStartI) / str.length);
           mi += 1;
           streak += 1;
         } else {
-          streakStartI = i3;
+          streakStartI = i4;
           streak = 0;
         }
-        i3++;
+        i4++;
       }
       if (mi < match.length) {
         return 0;
@@ -1214,7 +1217,7 @@ Is it scaring you off?`,
         row.getElementsByClassName("dmenu-score")[0].innerText = "0";
       }
       let klass = this;
-      row.addEventListener("click", function(e3) {
+      row.addEventListener("click", function(e4) {
         klass.#accept(row);
       });
       parent.appendChild(row);
@@ -1237,10 +1240,10 @@ Is it scaring you off?`,
       this.inputEl.type = "text";
       this.inputEl.classList.add("dmenu-input");
       let klass = this;
-      this.inputEl.addEventListener("keydown", (e3) => {
-        klass.#onKeydown(e3);
+      this.inputEl.addEventListener("keydown", (e4) => {
+        klass.#onKeydown(e4);
       });
-      this.inputEl.addEventListener("input", (e3) => {
+      this.inputEl.addEventListener("input", (e4) => {
         klass.#oninput();
       });
       top.appendChild(this.inputEl);
@@ -1277,13 +1280,13 @@ Is it scaring you off?`,
     });
     return quickMenuButton;
   }
-  document.addEventListener("click", function(e3) {
+  document.addEventListener("click", function(e4) {
     if (active_dmenu == null || !active_dmenu.isOpen()) {
       return;
     }
-    if (!active_dmenu.menuEl.contains(e3.target) && e3.target != active_dmenu.openerEl) {
+    if (!active_dmenu.menuEl.contains(e4.target) && e4.target != active_dmenu.openerEl) {
       active_dmenu.close();
-      e3.preventDefault();
+      e4.preventDefault();
     }
   });
 
@@ -1417,37 +1420,37 @@ Is it scaring you off?`,
       let gmin;
       let bmax;
       let bmin;
-      let r3;
+      let r4;
       let g2;
       let b3;
-      let a3;
+      let a4;
       rmax = gmax = bmax = 0;
       rmin = gmin = bmin = Number.MAX_VALUE;
-      const n3 = pixels.length / 4;
-      let i3 = 0;
-      while (i3 < n3) {
-        const offset = i3 * 4;
-        i3++;
-        r3 = pixels[offset + 0];
+      const n4 = pixels.length / 4;
+      let i4 = 0;
+      while (i4 < n4) {
+        const offset = i4 * 4;
+        i4++;
+        r4 = pixels[offset + 0];
         g2 = pixels[offset + 1];
         b3 = pixels[offset + 2];
-        a3 = pixels[offset + 3];
-        if (a3 === 0) continue;
-        r3 = r3 >> rshift;
+        a4 = pixels[offset + 3];
+        if (a4 === 0) continue;
+        r4 = r4 >> rshift;
         g2 = g2 >> rshift;
         b3 = b3 >> rshift;
-        const index = getColorIndex(r3, g2, b3);
+        const index = getColorIndex(r4, g2, b3);
         if (hist[index] === void 0) hist[index] = 0;
         hist[index] += 1;
-        if (r3 > rmax) rmax = r3;
-        if (r3 < rmin) rmin = r3;
+        if (r4 > rmax) rmax = r4;
+        if (r4 < rmin) rmin = r4;
         if (g2 > gmax) gmax = g2;
         if (g2 < gmin) gmin = g2;
         if (b3 > bmax) bmax = b3;
         if (b3 < bmin) bmin = b3;
       }
       this._colorCount = hist.reduce(
-        (total, c3) => c3 > 0 ? total + 1 : total,
+        (total, c4) => c4 > 0 ? total + 1 : total,
         0
       );
       this.hist = hist;
@@ -1482,20 +1485,20 @@ Is it scaring you off?`,
     var _a;
     if (filters.length > 0) {
       const pixels = imageData.data;
-      const n3 = pixels.length / 4;
+      const n4 = pixels.length / 4;
       let offset;
-      let r3;
+      let r4;
       let g2;
       let b3;
-      let a3;
-      for (let i3 = 0; i3 < n3; i3++) {
-        offset = i3 * 4;
-        r3 = pixels[offset + 0];
+      let a4;
+      for (let i4 = 0; i4 < n4; i4++) {
+        offset = i4 * 4;
+        r4 = pixels[offset + 0];
         g2 = pixels[offset + 1];
         b3 = pixels[offset + 2];
-        a3 = pixels[offset + 3];
+        a4 = pixels[offset + 3];
         for (let j2 = 0; j2 < filters.length; j2++) {
-          if (!((_a = filters[j2]) == null ? void 0 : _a.call(filters, r3, g2, b3, a3))) {
+          if (!((_a = filters[j2]) == null ? void 0 : _a.call(filters, r4, g2, b3, a4))) {
             pixels[offset + 3] = 0;
             break;
           }
@@ -1507,11 +1510,11 @@ Is it scaring you off?`,
 
   // node_modules/@vibrant/image-browser/dist/esm/index.js
   function isRelativeUrl(url) {
-    const u3 = new URL(url, location.href);
-    return u3.protocol === location.protocol && u3.host === location.host && u3.port === location.port;
+    const u4 = new URL(url, location.href);
+    return u4.protocol === location.protocol && u4.host === location.host && u4.port === location.port;
   }
-  function isSameOrigin(a3, b3) {
-    const ua = new URL(a3);
+  function isSameOrigin(a4, b3) {
+    const ua = new URL(a4);
     const ub = new URL(b3);
     return ua.protocol === ub.protocol && ua.hostname === ub.hostname && ua.port === ub.port;
   }
@@ -1678,8 +1681,8 @@ Is it scaring you off?`,
      * Sets `opts.colorCount` to `n`.
      * @returns this `Builder` instance.
      */
-    maxColorCount(n3) {
-      this._opts.colorCount = n3;
+    maxColorCount(n4) {
+      this._opts.colorCount = n4;
       return this;
     }
     /**
@@ -1708,8 +1711,8 @@ Is it scaring you off?`,
      */
     removeFilter(name2) {
       if (this._opts.filters) {
-        const i3 = this._opts.filters.indexOf(name2);
-        if (i3 > 0) this._opts.filters.splice(i3);
+        const i4 = this._opts.filters.indexOf(name2);
+        if (i4 > 0) this._opts.filters.splice(i4);
       }
       return this;
     }
@@ -1805,18 +1808,18 @@ Is it scaring you off?`,
         generators = this.generator.names();
       }
       return {
-        filters: filters.map((f3) => createTask(this.filter, f3)),
+        filters: filters.map((f4) => createTask(this.filter, f4)),
         quantizer: createTask(this.quantizer, quantizer),
         generators: generators.map((g2) => createTask(this.generator, g2))
       };
-      function createTask(stage, o3) {
+      function createTask(stage, o4) {
         let name2;
         let options;
-        if (typeof o3 === "string") {
-          name2 = o3;
+        if (typeof o4 === "string") {
+          name2 = o4;
         } else {
-          name2 = o3.name;
-          options = o3.options;
+          name2 = o4.name;
+          options = o4.options;
         }
         return {
           name: name2,
@@ -1852,8 +1855,8 @@ Is it scaring you off?`,
       );
       return Promise.resolve(
         promiseArr.reduce(
-          (promises, promiseVal, i3) => {
-            promises[generators[i3].name] = promiseVal;
+          (promises, promiseVal, i4) => {
+            promises[generators[i4].name] = promiseVal;
             return promises;
           },
           {}
@@ -1863,67 +1866,67 @@ Is it scaring you off?`,
   };
 
   // node_modules/@vibrant/color/dist/esm/converter.js
-  function rgbToHex(r3, g2, b3) {
-    return "#" + ((1 << 24) + (r3 << 16) + (g2 << 8) + b3).toString(16).slice(1, 7);
+  function rgbToHex(r4, g2, b3) {
+    return "#" + ((1 << 24) + (r4 << 16) + (g2 << 8) + b3).toString(16).slice(1, 7);
   }
-  function rgbToHsl(r3, g2, b3) {
-    r3 /= 255;
+  function rgbToHsl(r4, g2, b3) {
+    r4 /= 255;
     g2 /= 255;
     b3 /= 255;
-    const max = Math.max(r3, g2, b3);
-    const min = Math.min(r3, g2, b3);
-    let h3 = 0;
+    const max = Math.max(r4, g2, b3);
+    const min = Math.min(r4, g2, b3);
+    let h4 = 0;
     let s3 = 0;
     const l3 = (max + min) / 2;
     if (max !== min) {
       const d3 = max - min;
       s3 = l3 > 0.5 ? d3 / (2 - max - min) : d3 / (max + min);
       switch (max) {
-        case r3:
-          h3 = (g2 - b3) / d3 + (g2 < b3 ? 6 : 0);
+        case r4:
+          h4 = (g2 - b3) / d3 + (g2 < b3 ? 6 : 0);
           break;
         case g2:
-          h3 = (b3 - r3) / d3 + 2;
+          h4 = (b3 - r4) / d3 + 2;
           break;
         case b3:
-          h3 = (r3 - g2) / d3 + 4;
+          h4 = (r4 - g2) / d3 + 4;
           break;
       }
-      h3 /= 6;
+      h4 /= 6;
     }
-    return [h3, s3, l3];
+    return [h4, s3, l3];
   }
-  function hslToRgb(h3, s3, l3) {
-    let r3;
+  function hslToRgb(h4, s3, l3) {
+    let r4;
     let g2;
     let b3;
-    function hue2rgb(p3, q, t3) {
-      if (t3 < 0) t3 += 1;
-      if (t3 > 1) t3 -= 1;
-      if (t3 < 1 / 6) return p3 + (q - p3) * 6 * t3;
-      if (t3 < 1 / 2) return q;
-      if (t3 < 2 / 3) return p3 + (q - p3) * (2 / 3 - t3) * 6;
-      return p3;
+    function hue2rgb(p4, q, t4) {
+      if (t4 < 0) t4 += 1;
+      if (t4 > 1) t4 -= 1;
+      if (t4 < 1 / 6) return p4 + (q - p4) * 6 * t4;
+      if (t4 < 1 / 2) return q;
+      if (t4 < 2 / 3) return p4 + (q - p4) * (2 / 3 - t4) * 6;
+      return p4;
     }
     if (s3 === 0) {
-      r3 = g2 = b3 = l3;
+      r4 = g2 = b3 = l3;
     } else {
       const q = l3 < 0.5 ? l3 * (1 + s3) : l3 + s3 - l3 * s3;
-      const p3 = 2 * l3 - q;
-      r3 = hue2rgb(p3, q, h3 + 1 / 3);
-      g2 = hue2rgb(p3, q, h3);
-      b3 = hue2rgb(p3, q, h3 - 1 / 3);
+      const p4 = 2 * l3 - q;
+      r4 = hue2rgb(p4, q, h4 + 1 / 3);
+      g2 = hue2rgb(p4, q, h4);
+      b3 = hue2rgb(p4, q, h4 - 1 / 3);
     }
-    return [r3 * 255, g2 * 255, b3 * 255];
+    return [r4 * 255, g2 * 255, b3 * 255];
   }
 
   // node_modules/@vibrant/color/dist/esm/index.js
   var Swatch = class _Swatch {
     static applyFilters(colors, filters) {
-      return filters.length > 0 ? colors.filter(({ r: r3, g: g2, b: b3 }) => {
+      return filters.length > 0 ? colors.filter(({ r: r4, g: g2, b: b3 }) => {
         var _a;
         for (let j2 = 0; j2 < filters.length; j2++) {
-          if (!((_a = filters[j2]) == null ? void 0 : _a.call(filters, r3, g2, b3, 255))) return false;
+          if (!((_a = filters[j2]) == null ? void 0 : _a.call(filters, r4, g2, b3, 255))) return false;
         }
         return true;
       }) : colors;
@@ -1964,8 +1967,8 @@ Is it scaring you off?`,
      */
     get hsl() {
       if (!this._hsl) {
-        const [r3, g2, b3] = this._rgb;
-        this._hsl = rgbToHsl(r3, g2, b3);
+        const [r4, g2, b3] = this._rgb;
+        this._hsl = rgbToHsl(r4, g2, b3);
       }
       return this._hsl;
     }
@@ -1974,8 +1977,8 @@ Is it scaring you off?`,
      */
     get hex() {
       if (!this._hex) {
-        const [r3, g2, b3] = this._rgb;
-        this._hex = rgbToHex(r3, g2, b3);
+        const [r4, g2, b3] = this._rgb;
+        this._hex = rgbToHex(r4, g2, b3);
       }
       return this._hex;
     }
@@ -2117,9 +2120,9 @@ Is it scaring you off?`,
       this.dimension = { r1, r2: r22, g1, g2, b1, b2: b22 };
     }
     static build(pixels) {
-      const h3 = new Histogram(pixels, { sigBits: SIGBITS });
-      const { rmin, rmax, gmin, gmax, bmin, bmax } = h3;
-      return new _VBox(rmin, rmax, gmin, gmax, bmin, bmax, h3);
+      const h4 = new Histogram(pixels, { sigBits: SIGBITS });
+      const { rmin, rmax, gmin, gmax, bmin, bmax } = h4;
+      return new _VBox(rmin, rmax, gmin, gmax, bmin, bmax, h4);
     }
     invalidate() {
       this._volume = this._count = -1;
@@ -2136,19 +2139,19 @@ Is it scaring you off?`,
       if (this._count < 0) {
         const { hist, getColorIndex } = this.histogram;
         const { r1, r2: r22, g1, g2, b1, b2: b22 } = this.dimension;
-        let c3 = 0;
-        for (let r3 = r1; r3 <= r22; r3++) {
+        let c4 = 0;
+        for (let r4 = r1; r4 <= r22; r4++) {
           for (let g3 = g1; g3 <= g2; g3++) {
             for (let b3 = b1; b3 <= b22; b3++) {
-              const index = getColorIndex(r3, g3, b3);
+              const index = getColorIndex(r4, g3, b3);
               if (!hist[index]) {
                 continue;
               }
-              c3 += hist[index];
+              c4 += hist[index];
             }
           }
         }
-        this._count = c3;
+        this._count = c4;
       }
       return this._count;
     }
@@ -2167,16 +2170,16 @@ Is it scaring you off?`,
         let gsum;
         let bsum;
         rsum = gsum = bsum = 0;
-        for (let r3 = r1; r3 <= r22; r3++) {
+        for (let r4 = r1; r4 <= r22; r4++) {
           for (let g3 = g1; g3 <= g2; g3++) {
             for (let b3 = b1; b3 <= b22; b3++) {
-              const index = getColorIndex(r3, g3, b3);
-              const h3 = hist[index];
-              if (!h3) continue;
-              ntot += h3;
-              rsum += h3 * (r3 + 0.5) * mult;
-              gsum += h3 * (g3 + 0.5) * mult;
-              bsum += h3 * (b3 + 0.5) * mult;
+              const index = getColorIndex(r4, g3, b3);
+              const h4 = hist[index];
+              if (!h4) continue;
+              ntot += h4;
+              rsum += h4 * (r4 + 0.5) * mult;
+              gsum += h4 * (g3 + 0.5) * mult;
+              bsum += h4 * (b3 + 0.5) * mult;
             }
           }
         }
@@ -2193,12 +2196,12 @@ Is it scaring you off?`,
       return this._avg;
     }
     contains(rgb) {
-      let [r3, g2, b3] = rgb;
+      let [r4, g2, b3] = rgb;
       const { r1, r2: r22, g1, g2: g22, b1, b2: b22 } = this.dimension;
-      r3 >>= RSHIFT;
+      r4 >>= RSHIFT;
       g2 >>= RSHIFT;
       b3 >>= RSHIFT;
-      return r3 >= r1 && r3 <= r22 && g2 >= g1 && g2 <= g22 && b3 >= b1 && b3 <= b22;
+      return r4 >= r1 && r4 <= r22 && g2 >= g1 && g2 <= g22 && b3 >= b1 && b3 <= b22;
     }
     split() {
       const { hist, getColorIndex } = this.histogram;
@@ -2218,26 +2221,26 @@ Is it scaring you off?`,
       if (maxw === rw) {
         maxd = "r";
         accSum = new Uint32Array(r22 + 1);
-        for (let r3 = r1; r3 <= r22; r3++) {
+        for (let r4 = r1; r4 <= r22; r4++) {
           sum = 0;
           for (let g3 = g1; g3 <= g2; g3++) {
             for (let b3 = b1; b3 <= b22; b3++) {
-              const index = getColorIndex(r3, g3, b3);
+              const index = getColorIndex(r4, g3, b3);
               if (!hist[index]) continue;
               sum += hist[index];
             }
           }
           total += sum;
-          accSum[r3] = total;
+          accSum[r4] = total;
         }
       } else if (maxw === gw) {
         maxd = "g";
         accSum = new Uint32Array(g2 + 1);
         for (let g3 = g1; g3 <= g2; g3++) {
           sum = 0;
-          for (let r3 = r1; r3 <= r22; r3++) {
+          for (let r4 = r1; r4 <= r22; r4++) {
             for (let b3 = b1; b3 <= b22; b3++) {
-              const index = getColorIndex(r3, g3, b3);
+              const index = getColorIndex(r4, g3, b3);
               if (!hist[index]) continue;
               sum += hist[index];
             }
@@ -2250,9 +2253,9 @@ Is it scaring you off?`,
         accSum = new Uint32Array(b22 + 1);
         for (let b3 = b1; b3 <= b22; b3++) {
           sum = 0;
-          for (let r3 = r1; r3 <= r22; r3++) {
+          for (let r4 = r1; r4 <= r22; r4++) {
             for (let g3 = g1; g3 <= g2; g3++) {
-              const index = getColorIndex(r3, g3, b3);
+              const index = getColorIndex(r4, g3, b3);
               if (!hist[index]) continue;
               sum += hist[index];
             }
@@ -2263,11 +2266,11 @@ Is it scaring you off?`,
       }
       let splitPoint = -1;
       const reverseSum = new Uint32Array(accSum.length);
-      for (let i3 = 0; i3 < accSum.length; i3++) {
-        const d3 = accSum[i3];
+      for (let i4 = 0; i4 < accSum.length; i4++) {
+        const d3 = accSum[i4];
         if (!d3) continue;
-        if (splitPoint < 0 && d3 > total / 2) splitPoint = i3;
-        reverseSum[i3] = total - d3;
+        if (splitPoint < 0 && d3 > total / 2) splitPoint = i4;
+        reverseSum[i4] = total - d3;
       }
       const vbox = this;
       function doCut(d3) {
@@ -2359,11 +2362,11 @@ Is it scaring you off?`,
     }
     const vbox = VBox.build(pixels);
     vbox.histogram.colorCount;
-    const pq = new PQueue((a3, b3) => a3.count() - b3.count());
+    const pq = new PQueue((a4, b3) => a4.count() - b3.count());
     pq.push(vbox);
     _splitBoxes(pq, fractByPopulations * opts.colorCount);
     const pq2 = new PQueue(
-      (a3, b3) => a3.count() * a3.volume() - b3.count() * b3.volume()
+      (a4, b3) => a4.count() * a4.volume() - b3.count() * b3.volume()
     );
     pq2.contents = pq.contents;
     _splitBoxes(pq2, opts.colorCount - pq2.size());
@@ -2397,11 +2400,11 @@ Is it scaring you off?`,
     weightPopulation: 0.5
   };
   function _findMaxPopulation(swatches) {
-    let p3 = 0;
+    let p4 = 0;
     swatches.forEach((s3) => {
-      p3 = Math.max(p3, s3.population);
+      p4 = Math.max(p4, s3.population);
     });
-    return p3;
+    return p4;
   }
   function _isAlreadySelected(palette, s3) {
     return palette.Vibrant === s3 || palette.DarkVibrant === s3 || palette.LightVibrant === s3 || palette.Muted === s3 || palette.DarkMuted === s3 || palette.LightMuted === s3;
@@ -2410,9 +2413,9 @@ Is it scaring you off?`,
     function weightedMean(...values) {
       let sum = 0;
       let weightSum = 0;
-      for (let i3 = 0; i3 < values.length; i3 += 2) {
-        const value = values[i3];
-        const weight = values[i3 + 1];
+      for (let i4 = 0; i4 < values.length; i4 += 2) {
+        const value = values[i4];
+        const weight = values[i4 + 1];
         if (!value || !weight) continue;
         sum += value * weight;
         weightSum += weight;
@@ -2540,49 +2543,49 @@ Is it scaring you off?`,
   function _generateEmptySwatches(palette, _maxPopulation, opts) {
     if (!palette.Vibrant && !palette.DarkVibrant && !palette.LightVibrant) {
       if (!palette.DarkVibrant && palette.DarkMuted) {
-        let [h3, s3, l3] = palette.DarkMuted.hsl;
+        let [h4, s3, l3] = palette.DarkMuted.hsl;
         l3 = opts.targetDarkLuma;
-        palette.DarkVibrant = new Swatch(hslToRgb(h3, s3, l3), 0);
+        palette.DarkVibrant = new Swatch(hslToRgb(h4, s3, l3), 0);
       }
       if (!palette.LightVibrant && palette.LightMuted) {
-        let [h3, s3, l3] = palette.LightMuted.hsl;
+        let [h4, s3, l3] = palette.LightMuted.hsl;
         l3 = opts.targetDarkLuma;
-        palette.DarkVibrant = new Swatch(hslToRgb(h3, s3, l3), 0);
+        palette.DarkVibrant = new Swatch(hslToRgb(h4, s3, l3), 0);
       }
     }
     if (!palette.Vibrant && palette.DarkVibrant) {
-      let [h3, s3, l3] = palette.DarkVibrant.hsl;
+      let [h4, s3, l3] = palette.DarkVibrant.hsl;
       l3 = opts.targetNormalLuma;
-      palette.Vibrant = new Swatch(hslToRgb(h3, s3, l3), 0);
+      palette.Vibrant = new Swatch(hslToRgb(h4, s3, l3), 0);
     } else if (!palette.Vibrant && palette.LightVibrant) {
-      let [h3, s3, l3] = palette.LightVibrant.hsl;
+      let [h4, s3, l3] = palette.LightVibrant.hsl;
       l3 = opts.targetNormalLuma;
-      palette.Vibrant = new Swatch(hslToRgb(h3, s3, l3), 0);
+      palette.Vibrant = new Swatch(hslToRgb(h4, s3, l3), 0);
     }
     if (!palette.DarkVibrant && palette.Vibrant) {
-      let [h3, s3, l3] = palette.Vibrant.hsl;
+      let [h4, s3, l3] = palette.Vibrant.hsl;
       l3 = opts.targetDarkLuma;
-      palette.DarkVibrant = new Swatch(hslToRgb(h3, s3, l3), 0);
+      palette.DarkVibrant = new Swatch(hslToRgb(h4, s3, l3), 0);
     }
     if (!palette.LightVibrant && palette.Vibrant) {
-      let [h3, s3, l3] = palette.Vibrant.hsl;
+      let [h4, s3, l3] = palette.Vibrant.hsl;
       l3 = opts.targetLightLuma;
-      palette.LightVibrant = new Swatch(hslToRgb(h3, s3, l3), 0);
+      palette.LightVibrant = new Swatch(hslToRgb(h4, s3, l3), 0);
     }
     if (!palette.Muted && palette.Vibrant) {
-      let [h3, s3, l3] = palette.Vibrant.hsl;
+      let [h4, s3, l3] = palette.Vibrant.hsl;
       l3 = opts.targetMutesSaturation;
-      palette.Muted = new Swatch(hslToRgb(h3, s3, l3), 0);
+      palette.Muted = new Swatch(hslToRgb(h4, s3, l3), 0);
     }
     if (!palette.DarkMuted && palette.DarkVibrant) {
-      let [h3, s3, l3] = palette.DarkVibrant.hsl;
+      let [h4, s3, l3] = palette.DarkVibrant.hsl;
       l3 = opts.targetMutesSaturation;
-      palette.DarkMuted = new Swatch(hslToRgb(h3, s3, l3), 0);
+      palette.DarkMuted = new Swatch(hslToRgb(h4, s3, l3), 0);
     }
     if (!palette.LightMuted && palette.LightVibrant) {
-      let [h3, s3, l3] = palette.LightVibrant.hsl;
+      let [h4, s3, l3] = palette.LightVibrant.hsl;
       l3 = opts.targetMutesSaturation;
-      palette.LightMuted = new Swatch(hslToRgb(h3, s3, l3), 0);
+      palette.LightMuted = new Swatch(hslToRgb(h4, s3, l3), 0);
     }
   }
   var DefaultGenerator = (swatches, opts) => {
@@ -2596,7 +2599,7 @@ Is it scaring you off?`,
   // node_modules/node-vibrant/dist/esm/pipeline/index.js
   var pipeline = new BasicPipeline().filter.register(
     "default",
-    (r3, g2, b3, a3) => a3 >= 125 && !(r3 > 250 && g2 > 250 && b3 > 250)
+    (r4, g2, b3, a4) => a4 >= 125 && !(r4 > 250 && g2 > 250 && b3 > 250)
   ).quantizer.register("mmcq", MMCQ).generator.register("default", DefaultGenerator);
 
   // node_modules/node-vibrant/dist/esm/browser.js
@@ -2604,241 +2607,299 @@ Is it scaring you off?`,
 
   // node_modules/colord/index.mjs
   var r = { grad: 0.9, turn: 360, rad: 360 / (2 * Math.PI) };
-  var t = function(r3) {
-    return "string" == typeof r3 ? r3.length > 0 : "number" == typeof r3;
+  var t = function(r4) {
+    return "string" == typeof r4 ? r4.length > 0 : "number" == typeof r4;
   };
-  var n = function(r3, t3, n3) {
-    return void 0 === t3 && (t3 = 0), void 0 === n3 && (n3 = Math.pow(10, t3)), Math.round(n3 * r3) / n3 + 0;
+  var n = function(r4, t4, n4) {
+    return void 0 === t4 && (t4 = 0), void 0 === n4 && (n4 = Math.pow(10, t4)), Math.round(n4 * r4) / n4 + 0;
   };
-  var e = function(r3, t3, n3) {
-    return void 0 === t3 && (t3 = 0), void 0 === n3 && (n3 = 1), r3 > n3 ? n3 : r3 > t3 ? r3 : t3;
+  var e = function(r4, t4, n4) {
+    return void 0 === t4 && (t4 = 0), void 0 === n4 && (n4 = 1), r4 > n4 ? n4 : r4 > t4 ? r4 : t4;
   };
-  var u = function(r3) {
-    return (r3 = isFinite(r3) ? r3 % 360 : 0) > 0 ? r3 : r3 + 360;
+  var u = function(r4) {
+    return (r4 = isFinite(r4) ? r4 % 360 : 0) > 0 ? r4 : r4 + 360;
   };
-  var a = function(r3) {
-    return { r: e(r3.r, 0, 255), g: e(r3.g, 0, 255), b: e(r3.b, 0, 255), a: e(r3.a) };
+  var a = function(r4) {
+    return { r: e(r4.r, 0, 255), g: e(r4.g, 0, 255), b: e(r4.b, 0, 255), a: e(r4.a) };
   };
-  var o = function(r3) {
-    return { r: n(r3.r), g: n(r3.g), b: n(r3.b), a: n(r3.a, 3) };
+  var o = function(r4) {
+    return { r: n(r4.r), g: n(r4.g), b: n(r4.b), a: n(r4.a, 3) };
   };
   var i = /^#([0-9a-f]{3,8})$/i;
-  var s = function(r3) {
-    var t3 = r3.toString(16);
-    return t3.length < 2 ? "0" + t3 : t3;
+  var s = function(r4) {
+    var t4 = r4.toString(16);
+    return t4.length < 2 ? "0" + t4 : t4;
   };
-  var h = function(r3) {
-    var t3 = r3.r, n3 = r3.g, e3 = r3.b, u3 = r3.a, a3 = Math.max(t3, n3, e3), o3 = a3 - Math.min(t3, n3, e3), i3 = o3 ? a3 === t3 ? (n3 - e3) / o3 : a3 === n3 ? 2 + (e3 - t3) / o3 : 4 + (t3 - n3) / o3 : 0;
-    return { h: 60 * (i3 < 0 ? i3 + 6 : i3), s: a3 ? o3 / a3 * 100 : 0, v: a3 / 255 * 100, a: u3 };
+  var h = function(r4) {
+    var t4 = r4.r, n4 = r4.g, e4 = r4.b, u4 = r4.a, a4 = Math.max(t4, n4, e4), o4 = a4 - Math.min(t4, n4, e4), i4 = o4 ? a4 === t4 ? (n4 - e4) / o4 : a4 === n4 ? 2 + (e4 - t4) / o4 : 4 + (t4 - n4) / o4 : 0;
+    return { h: 60 * (i4 < 0 ? i4 + 6 : i4), s: a4 ? o4 / a4 * 100 : 0, v: a4 / 255 * 100, a: u4 };
   };
-  var b = function(r3) {
-    var t3 = r3.h, n3 = r3.s, e3 = r3.v, u3 = r3.a;
-    t3 = t3 / 360 * 6, n3 /= 100, e3 /= 100;
-    var a3 = Math.floor(t3), o3 = e3 * (1 - n3), i3 = e3 * (1 - (t3 - a3) * n3), s3 = e3 * (1 - (1 - t3 + a3) * n3), h3 = a3 % 6;
-    return { r: 255 * [e3, i3, o3, o3, s3, e3][h3], g: 255 * [s3, e3, e3, i3, o3, o3][h3], b: 255 * [o3, o3, s3, e3, e3, i3][h3], a: u3 };
+  var b = function(r4) {
+    var t4 = r4.h, n4 = r4.s, e4 = r4.v, u4 = r4.a;
+    t4 = t4 / 360 * 6, n4 /= 100, e4 /= 100;
+    var a4 = Math.floor(t4), o4 = e4 * (1 - n4), i4 = e4 * (1 - (t4 - a4) * n4), s3 = e4 * (1 - (1 - t4 + a4) * n4), h4 = a4 % 6;
+    return { r: 255 * [e4, i4, o4, o4, s3, e4][h4], g: 255 * [s3, e4, e4, i4, o4, o4][h4], b: 255 * [o4, o4, s3, e4, e4, i4][h4], a: u4 };
   };
-  var g = function(r3) {
-    return { h: u(r3.h), s: e(r3.s, 0, 100), l: e(r3.l, 0, 100), a: e(r3.a) };
+  var g = function(r4) {
+    return { h: u(r4.h), s: e(r4.s, 0, 100), l: e(r4.l, 0, 100), a: e(r4.a) };
   };
-  var d = function(r3) {
-    return { h: n(r3.h), s: n(r3.s), l: n(r3.l), a: n(r3.a, 3) };
+  var d = function(r4) {
+    return { h: n(r4.h), s: n(r4.s), l: n(r4.l), a: n(r4.a, 3) };
   };
-  var f = function(r3) {
-    return b((n3 = (t3 = r3).s, { h: t3.h, s: (n3 *= ((e3 = t3.l) < 50 ? e3 : 100 - e3) / 100) > 0 ? 2 * n3 / (e3 + n3) * 100 : 0, v: e3 + n3, a: t3.a }));
-    var t3, n3, e3;
+  var f = function(r4) {
+    return b((n4 = (t4 = r4).s, { h: t4.h, s: (n4 *= ((e4 = t4.l) < 50 ? e4 : 100 - e4) / 100) > 0 ? 2 * n4 / (e4 + n4) * 100 : 0, v: e4 + n4, a: t4.a }));
+    var t4, n4, e4;
   };
-  var c = function(r3) {
-    return { h: (t3 = h(r3)).h, s: (u3 = (200 - (n3 = t3.s)) * (e3 = t3.v) / 100) > 0 && u3 < 200 ? n3 * e3 / 100 / (u3 <= 100 ? u3 : 200 - u3) * 100 : 0, l: u3 / 2, a: t3.a };
-    var t3, n3, e3, u3;
+  var c = function(r4) {
+    return { h: (t4 = h(r4)).h, s: (u4 = (200 - (n4 = t4.s)) * (e4 = t4.v) / 100) > 0 && u4 < 200 ? n4 * e4 / 100 / (u4 <= 100 ? u4 : 200 - u4) * 100 : 0, l: u4 / 2, a: t4.a };
+    var t4, n4, e4, u4;
   };
   var l = /^hsla?\(\s*([+-]?\d*\.?\d+)(deg|rad|grad|turn)?\s*,\s*([+-]?\d*\.?\d+)%\s*,\s*([+-]?\d*\.?\d+)%\s*(?:,\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
   var p = /^hsla?\(\s*([+-]?\d*\.?\d+)(deg|rad|grad|turn)?\s+([+-]?\d*\.?\d+)%\s+([+-]?\d*\.?\d+)%\s*(?:\/\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
   var v = /^rgba?\(\s*([+-]?\d*\.?\d+)(%)?\s*,\s*([+-]?\d*\.?\d+)(%)?\s*,\s*([+-]?\d*\.?\d+)(%)?\s*(?:,\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
   var m = /^rgba?\(\s*([+-]?\d*\.?\d+)(%)?\s+([+-]?\d*\.?\d+)(%)?\s+([+-]?\d*\.?\d+)(%)?\s*(?:\/\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
-  var y = { string: [[function(r3) {
-    var t3 = i.exec(r3);
-    return t3 ? (r3 = t3[1]).length <= 4 ? { r: parseInt(r3[0] + r3[0], 16), g: parseInt(r3[1] + r3[1], 16), b: parseInt(r3[2] + r3[2], 16), a: 4 === r3.length ? n(parseInt(r3[3] + r3[3], 16) / 255, 2) : 1 } : 6 === r3.length || 8 === r3.length ? { r: parseInt(r3.substr(0, 2), 16), g: parseInt(r3.substr(2, 2), 16), b: parseInt(r3.substr(4, 2), 16), a: 8 === r3.length ? n(parseInt(r3.substr(6, 2), 16) / 255, 2) : 1 } : null : null;
-  }, "hex"], [function(r3) {
-    var t3 = v.exec(r3) || m.exec(r3);
-    return t3 ? t3[2] !== t3[4] || t3[4] !== t3[6] ? null : a({ r: Number(t3[1]) / (t3[2] ? 100 / 255 : 1), g: Number(t3[3]) / (t3[4] ? 100 / 255 : 1), b: Number(t3[5]) / (t3[6] ? 100 / 255 : 1), a: void 0 === t3[7] ? 1 : Number(t3[7]) / (t3[8] ? 100 : 1) }) : null;
-  }, "rgb"], [function(t3) {
-    var n3 = l.exec(t3) || p.exec(t3);
-    if (!n3) return null;
-    var e3, u3, a3 = g({ h: (e3 = n3[1], u3 = n3[2], void 0 === u3 && (u3 = "deg"), Number(e3) * (r[u3] || 1)), s: Number(n3[3]), l: Number(n3[4]), a: void 0 === n3[5] ? 1 : Number(n3[5]) / (n3[6] ? 100 : 1) });
-    return f(a3);
-  }, "hsl"]], object: [[function(r3) {
-    var n3 = r3.r, e3 = r3.g, u3 = r3.b, o3 = r3.a, i3 = void 0 === o3 ? 1 : o3;
-    return t(n3) && t(e3) && t(u3) ? a({ r: Number(n3), g: Number(e3), b: Number(u3), a: Number(i3) }) : null;
-  }, "rgb"], [function(r3) {
-    var n3 = r3.h, e3 = r3.s, u3 = r3.l, a3 = r3.a, o3 = void 0 === a3 ? 1 : a3;
-    if (!t(n3) || !t(e3) || !t(u3)) return null;
-    var i3 = g({ h: Number(n3), s: Number(e3), l: Number(u3), a: Number(o3) });
-    return f(i3);
-  }, "hsl"], [function(r3) {
-    var n3 = r3.h, a3 = r3.s, o3 = r3.v, i3 = r3.a, s3 = void 0 === i3 ? 1 : i3;
-    if (!t(n3) || !t(a3) || !t(o3)) return null;
-    var h3 = (function(r4) {
-      return { h: u(r4.h), s: e(r4.s, 0, 100), v: e(r4.v, 0, 100), a: e(r4.a) };
-    })({ h: Number(n3), s: Number(a3), v: Number(o3), a: Number(s3) });
-    return b(h3);
+  var y = { string: [[function(r4) {
+    var t4 = i.exec(r4);
+    return t4 ? (r4 = t4[1]).length <= 4 ? { r: parseInt(r4[0] + r4[0], 16), g: parseInt(r4[1] + r4[1], 16), b: parseInt(r4[2] + r4[2], 16), a: 4 === r4.length ? n(parseInt(r4[3] + r4[3], 16) / 255, 2) : 1 } : 6 === r4.length || 8 === r4.length ? { r: parseInt(r4.substr(0, 2), 16), g: parseInt(r4.substr(2, 2), 16), b: parseInt(r4.substr(4, 2), 16), a: 8 === r4.length ? n(parseInt(r4.substr(6, 2), 16) / 255, 2) : 1 } : null : null;
+  }, "hex"], [function(r4) {
+    var t4 = v.exec(r4) || m.exec(r4);
+    return t4 ? t4[2] !== t4[4] || t4[4] !== t4[6] ? null : a({ r: Number(t4[1]) / (t4[2] ? 100 / 255 : 1), g: Number(t4[3]) / (t4[4] ? 100 / 255 : 1), b: Number(t4[5]) / (t4[6] ? 100 / 255 : 1), a: void 0 === t4[7] ? 1 : Number(t4[7]) / (t4[8] ? 100 : 1) }) : null;
+  }, "rgb"], [function(t4) {
+    var n4 = l.exec(t4) || p.exec(t4);
+    if (!n4) return null;
+    var e4, u4, a4 = g({ h: (e4 = n4[1], u4 = n4[2], void 0 === u4 && (u4 = "deg"), Number(e4) * (r[u4] || 1)), s: Number(n4[3]), l: Number(n4[4]), a: void 0 === n4[5] ? 1 : Number(n4[5]) / (n4[6] ? 100 : 1) });
+    return f(a4);
+  }, "hsl"]], object: [[function(r4) {
+    var n4 = r4.r, e4 = r4.g, u4 = r4.b, o4 = r4.a, i4 = void 0 === o4 ? 1 : o4;
+    return t(n4) && t(e4) && t(u4) ? a({ r: Number(n4), g: Number(e4), b: Number(u4), a: Number(i4) }) : null;
+  }, "rgb"], [function(r4) {
+    var n4 = r4.h, e4 = r4.s, u4 = r4.l, a4 = r4.a, o4 = void 0 === a4 ? 1 : a4;
+    if (!t(n4) || !t(e4) || !t(u4)) return null;
+    var i4 = g({ h: Number(n4), s: Number(e4), l: Number(u4), a: Number(o4) });
+    return f(i4);
+  }, "hsl"], [function(r4) {
+    var n4 = r4.h, a4 = r4.s, o4 = r4.v, i4 = r4.a, s3 = void 0 === i4 ? 1 : i4;
+    if (!t(n4) || !t(a4) || !t(o4)) return null;
+    var h4 = (function(r5) {
+      return { h: u(r5.h), s: e(r5.s, 0, 100), v: e(r5.v, 0, 100), a: e(r5.a) };
+    })({ h: Number(n4), s: Number(a4), v: Number(o4), a: Number(s3) });
+    return b(h4);
   }, "hsv"]] };
-  var N = function(r3, t3) {
-    for (var n3 = 0; n3 < t3.length; n3++) {
-      var e3 = t3[n3][0](r3);
-      if (e3) return [e3, t3[n3][1]];
+  var N = function(r4, t4) {
+    for (var n4 = 0; n4 < t4.length; n4++) {
+      var e4 = t4[n4][0](r4);
+      if (e4) return [e4, t4[n4][1]];
     }
     return [null, void 0];
   };
-  var x = function(r3) {
-    return "string" == typeof r3 ? N(r3.trim(), y.string) : "object" == typeof r3 && null !== r3 ? N(r3, y.object) : [null, void 0];
+  var x = function(r4) {
+    return "string" == typeof r4 ? N(r4.trim(), y.string) : "object" == typeof r4 && null !== r4 ? N(r4, y.object) : [null, void 0];
   };
-  var M = function(r3, t3) {
-    var n3 = c(r3);
-    return { h: n3.h, s: e(n3.s + 100 * t3, 0, 100), l: n3.l, a: n3.a };
+  var M = function(r4, t4) {
+    var n4 = c(r4);
+    return { h: n4.h, s: e(n4.s + 100 * t4, 0, 100), l: n4.l, a: n4.a };
   };
-  var H = function(r3) {
-    return (299 * r3.r + 587 * r3.g + 114 * r3.b) / 1e3 / 255;
+  var H = function(r4) {
+    return (299 * r4.r + 587 * r4.g + 114 * r4.b) / 1e3 / 255;
   };
-  var $ = function(r3, t3) {
-    var n3 = c(r3);
-    return { h: n3.h, s: n3.s, l: e(n3.l + 100 * t3, 0, 100), a: n3.a };
+  var $ = function(r4, t4) {
+    var n4 = c(r4);
+    return { h: n4.h, s: n4.s, l: e(n4.l + 100 * t4, 0, 100), a: n4.a };
   };
   var j = (function() {
-    function r3(r4) {
-      this.parsed = x(r4)[0], this.rgba = this.parsed || { r: 0, g: 0, b: 0, a: 1 };
+    function r4(r5) {
+      this.parsed = x(r5)[0], this.rgba = this.parsed || { r: 0, g: 0, b: 0, a: 1 };
     }
-    return r3.prototype.isValid = function() {
+    return r4.prototype.isValid = function() {
       return null !== this.parsed;
-    }, r3.prototype.brightness = function() {
+    }, r4.prototype.brightness = function() {
       return n(H(this.rgba), 2);
-    }, r3.prototype.isDark = function() {
+    }, r4.prototype.isDark = function() {
       return H(this.rgba) < 0.5;
-    }, r3.prototype.isLight = function() {
+    }, r4.prototype.isLight = function() {
       return H(this.rgba) >= 0.5;
-    }, r3.prototype.toHex = function() {
-      return r4 = o(this.rgba), t3 = r4.r, e3 = r4.g, u3 = r4.b, i3 = (a3 = r4.a) < 1 ? s(n(255 * a3)) : "", "#" + s(t3) + s(e3) + s(u3) + i3;
-      var r4, t3, e3, u3, a3, i3;
-    }, r3.prototype.toRgb = function() {
+    }, r4.prototype.toHex = function() {
+      return r5 = o(this.rgba), t4 = r5.r, e4 = r5.g, u4 = r5.b, i4 = (a4 = r5.a) < 1 ? s(n(255 * a4)) : "", "#" + s(t4) + s(e4) + s(u4) + i4;
+      var r5, t4, e4, u4, a4, i4;
+    }, r4.prototype.toRgb = function() {
       return o(this.rgba);
-    }, r3.prototype.toRgbString = function() {
-      return r4 = o(this.rgba), t3 = r4.r, n3 = r4.g, e3 = r4.b, (u3 = r4.a) < 1 ? "rgba(" + t3 + ", " + n3 + ", " + e3 + ", " + u3 + ")" : "rgb(" + t3 + ", " + n3 + ", " + e3 + ")";
-      var r4, t3, n3, e3, u3;
-    }, r3.prototype.toHsl = function() {
+    }, r4.prototype.toRgbString = function() {
+      return r5 = o(this.rgba), t4 = r5.r, n4 = r5.g, e4 = r5.b, (u4 = r5.a) < 1 ? "rgba(" + t4 + ", " + n4 + ", " + e4 + ", " + u4 + ")" : "rgb(" + t4 + ", " + n4 + ", " + e4 + ")";
+      var r5, t4, n4, e4, u4;
+    }, r4.prototype.toHsl = function() {
       return d(c(this.rgba));
-    }, r3.prototype.toHslString = function() {
-      return r4 = d(c(this.rgba)), t3 = r4.h, n3 = r4.s, e3 = r4.l, (u3 = r4.a) < 1 ? "hsla(" + t3 + ", " + n3 + "%, " + e3 + "%, " + u3 + ")" : "hsl(" + t3 + ", " + n3 + "%, " + e3 + "%)";
-      var r4, t3, n3, e3, u3;
-    }, r3.prototype.toHsv = function() {
-      return r4 = h(this.rgba), { h: n(r4.h), s: n(r4.s), v: n(r4.v), a: n(r4.a, 3) };
-      var r4;
-    }, r3.prototype.invert = function() {
-      return w({ r: 255 - (r4 = this.rgba).r, g: 255 - r4.g, b: 255 - r4.b, a: r4.a });
-      var r4;
-    }, r3.prototype.saturate = function(r4) {
-      return void 0 === r4 && (r4 = 0.1), w(M(this.rgba, r4));
-    }, r3.prototype.desaturate = function(r4) {
-      return void 0 === r4 && (r4 = 0.1), w(M(this.rgba, -r4));
-    }, r3.prototype.grayscale = function() {
+    }, r4.prototype.toHslString = function() {
+      return r5 = d(c(this.rgba)), t4 = r5.h, n4 = r5.s, e4 = r5.l, (u4 = r5.a) < 1 ? "hsla(" + t4 + ", " + n4 + "%, " + e4 + "%, " + u4 + ")" : "hsl(" + t4 + ", " + n4 + "%, " + e4 + "%)";
+      var r5, t4, n4, e4, u4;
+    }, r4.prototype.toHsv = function() {
+      return r5 = h(this.rgba), { h: n(r5.h), s: n(r5.s), v: n(r5.v), a: n(r5.a, 3) };
+      var r5;
+    }, r4.prototype.invert = function() {
+      return w({ r: 255 - (r5 = this.rgba).r, g: 255 - r5.g, b: 255 - r5.b, a: r5.a });
+      var r5;
+    }, r4.prototype.saturate = function(r5) {
+      return void 0 === r5 && (r5 = 0.1), w(M(this.rgba, r5));
+    }, r4.prototype.desaturate = function(r5) {
+      return void 0 === r5 && (r5 = 0.1), w(M(this.rgba, -r5));
+    }, r4.prototype.grayscale = function() {
       return w(M(this.rgba, -1));
-    }, r3.prototype.lighten = function(r4) {
-      return void 0 === r4 && (r4 = 0.1), w($(this.rgba, r4));
-    }, r3.prototype.darken = function(r4) {
-      return void 0 === r4 && (r4 = 0.1), w($(this.rgba, -r4));
-    }, r3.prototype.rotate = function(r4) {
-      return void 0 === r4 && (r4 = 15), this.hue(this.hue() + r4);
-    }, r3.prototype.alpha = function(r4) {
-      return "number" == typeof r4 ? w({ r: (t3 = this.rgba).r, g: t3.g, b: t3.b, a: r4 }) : n(this.rgba.a, 3);
-      var t3;
-    }, r3.prototype.hue = function(r4) {
-      var t3 = c(this.rgba);
-      return "number" == typeof r4 ? w({ h: r4, s: t3.s, l: t3.l, a: t3.a }) : n(t3.h);
-    }, r3.prototype.isEqual = function(r4) {
-      return this.toHex() === w(r4).toHex();
-    }, r3;
+    }, r4.prototype.lighten = function(r5) {
+      return void 0 === r5 && (r5 = 0.1), w($(this.rgba, r5));
+    }, r4.prototype.darken = function(r5) {
+      return void 0 === r5 && (r5 = 0.1), w($(this.rgba, -r5));
+    }, r4.prototype.rotate = function(r5) {
+      return void 0 === r5 && (r5 = 15), this.hue(this.hue() + r5);
+    }, r4.prototype.alpha = function(r5) {
+      return "number" == typeof r5 ? w({ r: (t4 = this.rgba).r, g: t4.g, b: t4.b, a: r5 }) : n(this.rgba.a, 3);
+      var t4;
+    }, r4.prototype.hue = function(r5) {
+      var t4 = c(this.rgba);
+      return "number" == typeof r5 ? w({ h: r5, s: t4.s, l: t4.l, a: t4.a }) : n(t4.h);
+    }, r4.prototype.isEqual = function(r5) {
+      return this.toHex() === w(r5).toHex();
+    }, r4;
   })();
-  var w = function(r3) {
-    return r3 instanceof j ? r3 : new j(r3);
+  var w = function(r4) {
+    return r4 instanceof j ? r4 : new j(r4);
   };
   var S = [];
-  var k = function(r3) {
-    r3.forEach(function(r4) {
-      S.indexOf(r4) < 0 && (r4(j, y), S.push(r4));
+  var k = function(r4) {
+    r4.forEach(function(r5) {
+      S.indexOf(r5) < 0 && (r5(j, y), S.push(r5));
     });
   };
 
   // node_modules/colord/plugins/lch.mjs
   var r2 = { grad: 0.9, turn: 360, rad: 360 / (2 * Math.PI) };
-  var t2 = function(r3) {
-    return "string" == typeof r3 ? r3.length > 0 : "number" == typeof r3;
+  var t2 = function(r4) {
+    return "string" == typeof r4 ? r4.length > 0 : "number" == typeof r4;
   };
-  var a2 = function(r3, t3, a3) {
-    return void 0 === t3 && (t3 = 0), void 0 === a3 && (a3 = Math.pow(10, t3)), Math.round(a3 * r3) / a3 + 0;
+  var a2 = function(r4, t4, a4) {
+    return void 0 === t4 && (t4 = 0), void 0 === a4 && (a4 = Math.pow(10, t4)), Math.round(a4 * r4) / a4 + 0;
   };
-  var n2 = function(r3, t3, a3) {
-    return void 0 === t3 && (t3 = 0), void 0 === a3 && (a3 = 1), r3 > a3 ? a3 : r3 > t3 ? r3 : t3;
+  var n2 = function(r4, t4, a4) {
+    return void 0 === t4 && (t4 = 0), void 0 === a4 && (a4 = 1), r4 > a4 ? a4 : r4 > t4 ? r4 : t4;
   };
-  var u2 = function(r3) {
-    var t3 = r3 / 255;
-    return t3 < 0.04045 ? t3 / 12.92 : Math.pow((t3 + 0.055) / 1.055, 2.4);
+  var u2 = function(r4) {
+    var t4 = r4 / 255;
+    return t4 < 0.04045 ? t4 / 12.92 : Math.pow((t4 + 0.055) / 1.055, 2.4);
   };
-  var h2 = function(r3) {
-    return 255 * (r3 > 31308e-7 ? 1.055 * Math.pow(r3, 1 / 2.4) - 0.055 : 12.92 * r3);
+  var h2 = function(r4) {
+    return 255 * (r4 > 31308e-7 ? 1.055 * Math.pow(r4, 1 / 2.4) - 0.055 : 12.92 * r4);
   };
   var o2 = 96.422;
   var e2 = 100;
   var c2 = 82.521;
-  var i2 = function(r3) {
-    var t3, a3, u3 = { x: 0.9555766 * (t3 = r3).x + -0.0230393 * t3.y + 0.0631636 * t3.z, y: -0.0282895 * t3.x + 1.0099416 * t3.y + 0.0210077 * t3.z, z: 0.0122982 * t3.x + -0.020483 * t3.y + 1.3299098 * t3.z };
-    return a3 = { r: h2(0.032404542 * u3.x - 0.015371385 * u3.y - 4985314e-9 * u3.z), g: h2(-969266e-8 * u3.x + 0.018760108 * u3.y + 41556e-8 * u3.z), b: h2(556434e-9 * u3.x - 2040259e-9 * u3.y + 0.010572252 * u3.z), a: r3.a }, { r: n2(a3.r, 0, 255), g: n2(a3.g, 0, 255), b: n2(a3.b, 0, 255), a: n2(a3.a) };
+  var i2 = function(r4) {
+    var t4, a4, u4 = { x: 0.9555766 * (t4 = r4).x + -0.0230393 * t4.y + 0.0631636 * t4.z, y: -0.0282895 * t4.x + 1.0099416 * t4.y + 0.0210077 * t4.z, z: 0.0122982 * t4.x + -0.020483 * t4.y + 1.3299098 * t4.z };
+    return a4 = { r: h2(0.032404542 * u4.x - 0.015371385 * u4.y - 4985314e-9 * u4.z), g: h2(-969266e-8 * u4.x + 0.018760108 * u4.y + 41556e-8 * u4.z), b: h2(556434e-9 * u4.x - 2040259e-9 * u4.y + 0.010572252 * u4.z), a: r4.a }, { r: n2(a4.r, 0, 255), g: n2(a4.g, 0, 255), b: n2(a4.b, 0, 255), a: n2(a4.a) };
   };
-  var l2 = function(r3) {
-    var t3 = u2(r3.r), a3 = u2(r3.g), h3 = u2(r3.b);
-    return (function(r4) {
-      return { x: n2(r4.x, 0, o2), y: n2(r4.y, 0, e2), z: n2(r4.z, 0, c2), a: n2(r4.a) };
-    })((function(r4) {
-      return { x: 1.0478112 * r4.x + 0.0228866 * r4.y + -0.050127 * r4.z, y: 0.0295424 * r4.x + 0.9904844 * r4.y + -0.0170491 * r4.z, z: -92345e-7 * r4.x + 0.0150436 * r4.y + 0.7521316 * r4.z, a: r4.a };
-    })({ x: 100 * (0.4124564 * t3 + 0.3575761 * a3 + 0.1804375 * h3), y: 100 * (0.2126729 * t3 + 0.7151522 * a3 + 0.072175 * h3), z: 100 * (0.0193339 * t3 + 0.119192 * a3 + 0.9503041 * h3), a: r3.a }));
+  var l2 = function(r4) {
+    var t4 = u2(r4.r), a4 = u2(r4.g), h4 = u2(r4.b);
+    return (function(r5) {
+      return { x: n2(r5.x, 0, o2), y: n2(r5.y, 0, e2), z: n2(r5.z, 0, c2), a: n2(r5.a) };
+    })((function(r5) {
+      return { x: 1.0478112 * r5.x + 0.0228866 * r5.y + -0.050127 * r5.z, y: 0.0295424 * r5.x + 0.9904844 * r5.y + -0.0170491 * r5.z, z: -92345e-7 * r5.x + 0.0150436 * r5.y + 0.7521316 * r5.z, a: r5.a };
+    })({ x: 100 * (0.4124564 * t4 + 0.3575761 * a4 + 0.1804375 * h4), y: 100 * (0.2126729 * t4 + 0.7151522 * a4 + 0.072175 * h4), z: 100 * (0.0193339 * t4 + 0.119192 * a4 + 0.9503041 * h4), a: r4.a }));
   };
   var f2 = 216 / 24389;
   var b2 = 24389 / 27;
-  var d2 = function(r3) {
-    return { l: n2(r3.l, 0, 100), c: r3.c, h: (t3 = r3.h, (t3 = isFinite(t3) ? t3 % 360 : 0) > 0 ? t3 : t3 + 360), a: r3.a };
-    var t3;
+  var d2 = function(r4) {
+    return { l: n2(r4.l, 0, 100), c: r4.c, h: (t4 = r4.h, (t4 = isFinite(t4) ? t4 % 360 : 0) > 0 ? t4 : t4 + 360), a: r4.a };
+    var t4;
   };
-  var p2 = function(r3) {
-    return { l: a2(r3.l, 2), c: a2(r3.c, 2), h: a2(r3.h, 2), a: a2(r3.a, 3) };
+  var p2 = function(r4) {
+    return { l: a2(r4.l, 2), c: a2(r4.c, 2), h: a2(r4.h, 2), a: a2(r4.a, 3) };
   };
-  var v2 = function(r3) {
-    var a3 = r3.l, n3 = r3.c, u3 = r3.h, h3 = r3.a, o3 = void 0 === h3 ? 1 : h3;
-    if (!t2(a3) || !t2(n3) || !t2(u3)) return null;
-    var e3 = d2({ l: Number(a3), c: Number(n3), h: Number(u3), a: Number(o3) });
-    return M2(e3);
+  var v2 = function(r4) {
+    var a4 = r4.l, n4 = r4.c, u4 = r4.h, h4 = r4.a, o4 = void 0 === h4 ? 1 : h4;
+    if (!t2(a4) || !t2(n4) || !t2(u4)) return null;
+    var e4 = d2({ l: Number(a4), c: Number(n4), h: Number(u4), a: Number(o4) });
+    return M2(e4);
   };
-  var y2 = function(r3) {
-    var t3 = (function(r4) {
-      var t4 = l2(r4), a3 = t4.x / o2, n4 = t4.y / e2, u4 = t4.z / c2;
-      return a3 = a3 > f2 ? Math.cbrt(a3) : (b2 * a3 + 16) / 116, { l: 116 * (n4 = n4 > f2 ? Math.cbrt(n4) : (b2 * n4 + 16) / 116) - 16, a: 500 * (a3 - n4), b: 200 * (n4 - (u4 = u4 > f2 ? Math.cbrt(u4) : (b2 * u4 + 16) / 116)), alpha: t4.a };
-    })(r3), n3 = a2(t3.a, 3), u3 = a2(t3.b, 3), h3 = Math.atan2(u3, n3) / Math.PI * 180;
-    return { l: t3.l, c: Math.sqrt(n3 * n3 + u3 * u3), h: h3 < 0 ? h3 + 360 : h3, a: t3.alpha };
+  var y2 = function(r4) {
+    var t4 = (function(r5) {
+      var t5 = l2(r5), a4 = t5.x / o2, n5 = t5.y / e2, u5 = t5.z / c2;
+      return a4 = a4 > f2 ? Math.cbrt(a4) : (b2 * a4 + 16) / 116, { l: 116 * (n5 = n5 > f2 ? Math.cbrt(n5) : (b2 * n5 + 16) / 116) - 16, a: 500 * (a4 - n5), b: 200 * (n5 - (u5 = u5 > f2 ? Math.cbrt(u5) : (b2 * u5 + 16) / 116)), alpha: t5.a };
+    })(r4), n4 = a2(t4.a, 3), u4 = a2(t4.b, 3), h4 = Math.atan2(u4, n4) / Math.PI * 180;
+    return { l: t4.l, c: Math.sqrt(n4 * n4 + u4 * u4), h: h4 < 0 ? h4 + 360 : h4, a: t4.alpha };
   };
-  var M2 = function(r3) {
-    return t3 = { l: r3.l, a: r3.c * Math.cos(r3.h * Math.PI / 180), b: r3.c * Math.sin(r3.h * Math.PI / 180), alpha: r3.a }, n3 = t3.a / 500 + (a3 = (t3.l + 16) / 116), u3 = a3 - t3.b / 200, i2({ x: (Math.pow(n3, 3) > f2 ? Math.pow(n3, 3) : (116 * n3 - 16) / b2) * o2, y: (t3.l > 8 ? Math.pow((t3.l + 16) / 116, 3) : t3.l / b2) * e2, z: (Math.pow(u3, 3) > f2 ? Math.pow(u3, 3) : (116 * u3 - 16) / b2) * c2, a: t3.alpha });
-    var t3, a3, n3, u3;
+  var M2 = function(r4) {
+    return t4 = { l: r4.l, a: r4.c * Math.cos(r4.h * Math.PI / 180), b: r4.c * Math.sin(r4.h * Math.PI / 180), alpha: r4.a }, n4 = t4.a / 500 + (a4 = (t4.l + 16) / 116), u4 = a4 - t4.b / 200, i2({ x: (Math.pow(n4, 3) > f2 ? Math.pow(n4, 3) : (116 * n4 - 16) / b2) * o2, y: (t4.l > 8 ? Math.pow((t4.l + 16) / 116, 3) : t4.l / b2) * e2, z: (Math.pow(u4, 3) > f2 ? Math.pow(u4, 3) : (116 * u4 - 16) / b2) * c2, a: t4.alpha });
+    var t4, a4, n4, u4;
   };
   var x2 = /^lch\(\s*([+-]?\d*\.?\d+)%\s+([+-]?\d*\.?\d+)\s+([+-]?\d*\.?\d+)(deg|rad|grad|turn)?\s*(?:\/\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
-  var s2 = function(t3) {
-    var a3 = x2.exec(t3);
-    if (!a3) return null;
-    var n3, u3, h3 = d2({ l: Number(a3[1]), c: Number(a3[2]), h: (n3 = a3[3], u3 = a3[4], void 0 === u3 && (u3 = "deg"), Number(n3) * (r2[u3] || 1)), a: void 0 === a3[5] ? 1 : Number(a3[5]) / (a3[6] ? 100 : 1) });
-    return M2(h3);
+  var s2 = function(t4) {
+    var a4 = x2.exec(t4);
+    if (!a4) return null;
+    var n4, u4, h4 = d2({ l: Number(a4[1]), c: Number(a4[2]), h: (n4 = a4[3], u4 = a4[4], void 0 === u4 && (u4 = "deg"), Number(n4) * (r2[u4] || 1)), a: void 0 === a4[5] ? 1 : Number(a4[5]) / (a4[6] ? 100 : 1) });
+    return M2(h4);
   };
-  function lch_default(r3, t3) {
-    r3.prototype.toLch = function() {
+  function lch_default(r4, t4) {
+    r4.prototype.toLch = function() {
       return p2(y2(this.rgba));
-    }, r3.prototype.toLchString = function() {
-      return r4 = p2(y2(this.rgba)), t4 = r4.l, a3 = r4.c, n3 = r4.h, (u3 = r4.a) < 1 ? "lch(" + t4 + "% " + a3 + " " + n3 + " / " + u3 + ")" : "lch(" + t4 + "% " + a3 + " " + n3 + ")";
-      var r4, t4, a3, n3, u3;
-    }, t3.string.push([s2, "lch"]), t3.object.push([v2, "lch"]);
+    }, r4.prototype.toLchString = function() {
+      return r5 = p2(y2(this.rgba)), t5 = r5.l, a4 = r5.c, n4 = r5.h, (u4 = r5.a) < 1 ? "lch(" + t5 + "% " + a4 + " " + n4 + " / " + u4 + ")" : "lch(" + t5 + "% " + a4 + " " + n4 + ")";
+      var r5, t5, a4, n4, u4;
+    }, t4.string.push([s2, "lch"]), t4.object.push([v2, "lch"]);
+  }
+
+  // node_modules/colord/plugins/mix.mjs
+  var t3 = function(t4, a4, n4) {
+    return void 0 === a4 && (a4 = 0), void 0 === n4 && (n4 = 1), t4 > n4 ? n4 : t4 > a4 ? t4 : a4;
+  };
+  var a3 = function(t4) {
+    var a4 = t4 / 255;
+    return a4 < 0.04045 ? a4 / 12.92 : Math.pow((a4 + 0.055) / 1.055, 2.4);
+  };
+  var n3 = function(t4) {
+    return 255 * (t4 > 31308e-7 ? 1.055 * Math.pow(t4, 1 / 2.4) - 0.055 : 12.92 * t4);
+  };
+  var r3 = 96.422;
+  var o3 = 100;
+  var u3 = 82.521;
+  var e3 = function(a4) {
+    var r4, o4, u4 = { x: 0.9555766 * (r4 = a4).x + -0.0230393 * r4.y + 0.0631636 * r4.z, y: -0.0282895 * r4.x + 1.0099416 * r4.y + 0.0210077 * r4.z, z: 0.0122982 * r4.x + -0.020483 * r4.y + 1.3299098 * r4.z };
+    return o4 = { r: n3(0.032404542 * u4.x - 0.015371385 * u4.y - 4985314e-9 * u4.z), g: n3(-969266e-8 * u4.x + 0.018760108 * u4.y + 41556e-8 * u4.z), b: n3(556434e-9 * u4.x - 2040259e-9 * u4.y + 0.010572252 * u4.z), a: a4.a }, { r: t3(o4.r, 0, 255), g: t3(o4.g, 0, 255), b: t3(o4.b, 0, 255), a: t3(o4.a) };
+  };
+  var i3 = function(n4) {
+    var e4 = a3(n4.r), i4 = a3(n4.g), p4 = a3(n4.b);
+    return (function(a4) {
+      return { x: t3(a4.x, 0, r3), y: t3(a4.y, 0, o3), z: t3(a4.z, 0, u3), a: t3(a4.a) };
+    })((function(t4) {
+      return { x: 1.0478112 * t4.x + 0.0228866 * t4.y + -0.050127 * t4.z, y: 0.0295424 * t4.x + 0.9904844 * t4.y + -0.0170491 * t4.z, z: -92345e-7 * t4.x + 0.0150436 * t4.y + 0.7521316 * t4.z, a: t4.a };
+    })({ x: 100 * (0.4124564 * e4 + 0.3575761 * i4 + 0.1804375 * p4), y: 100 * (0.2126729 * e4 + 0.7151522 * i4 + 0.072175 * p4), z: 100 * (0.0193339 * e4 + 0.119192 * i4 + 0.9503041 * p4), a: n4.a }));
+  };
+  var p3 = 216 / 24389;
+  var h3 = 24389 / 27;
+  var f3 = function(t4) {
+    var a4 = i3(t4), n4 = a4.x / r3, e4 = a4.y / o3, f4 = a4.z / u3;
+    return n4 = n4 > p3 ? Math.cbrt(n4) : (h3 * n4 + 16) / 116, { l: 116 * (e4 = e4 > p3 ? Math.cbrt(e4) : (h3 * e4 + 16) / 116) - 16, a: 500 * (n4 - e4), b: 200 * (e4 - (f4 = f4 > p3 ? Math.cbrt(f4) : (h3 * f4 + 16) / 116)), alpha: a4.a };
+  };
+  var c3 = function(a4, n4, i4) {
+    var c4, y3 = f3(a4), x3 = f3(n4);
+    return (function(t4) {
+      var a5 = (t4.l + 16) / 116, n5 = t4.a / 500 + a5, i5 = a5 - t4.b / 200;
+      return e3({ x: (Math.pow(n5, 3) > p3 ? Math.pow(n5, 3) : (116 * n5 - 16) / h3) * r3, y: (t4.l > 8 ? Math.pow((t4.l + 16) / 116, 3) : t4.l / h3) * o3, z: (Math.pow(i5, 3) > p3 ? Math.pow(i5, 3) : (116 * i5 - 16) / h3) * u3, a: t4.alpha });
+    })({ l: t3((c4 = { l: y3.l * (1 - i4) + x3.l * i4, a: y3.a * (1 - i4) + x3.a * i4, b: y3.b * (1 - i4) + x3.b * i4, alpha: y3.alpha * (1 - i4) + x3.alpha * i4 }).l, 0, 400), a: c4.a, b: c4.b, alpha: t3(c4.alpha) });
+  };
+  function mix_default(t4) {
+    function a4(t5, a5, n4) {
+      void 0 === n4 && (n4 = 5);
+      for (var r4 = [], o4 = 1 / (n4 - 1), u4 = 0; u4 <= n4 - 1; u4++) r4.push(t5.mix(a5, o4 * u4));
+      return r4;
+    }
+    t4.prototype.mix = function(a5, n4) {
+      void 0 === n4 && (n4 = 0.5);
+      var r4 = a5 instanceof t4 ? a5 : new t4(a5), o4 = c3(this.toRgb(), r4.toRgb(), n4);
+      return new t4(o4);
+    }, t4.prototype.tints = function(t5) {
+      return a4(this, "#fff", t5);
+    }, t4.prototype.shades = function(t5) {
+      return a4(this, "#000", t5);
+    }, t4.prototype.tones = function(t5) {
+      return a4(this, "#808080", t5);
+    };
   }
 
   // src/widgets/widgets.ts
@@ -2886,14 +2947,14 @@ Is it scaring you off?`,
       this.#aboutToDel = false;
     }
     createWidgetErrorContent(name2) {
-      let p3 = document.createElement("p");
-      p3.classList.add("smpp-error-widget");
-      p3.innerHTML = "<span>Probleem bij het laden van de widget: </span><code class='widgetName'></code><button>Reset widget</button>";
-      p3.querySelector(".widgetName").innerText = name2;
-      p3.querySelector("button").addEventListener("click", async () => {
+      let p4 = document.createElement("p");
+      p4.classList.add("smpp-error-widget");
+      p4.innerHTML = "<span>Probleem bij het laden van de widget: </span><code class='widgetName'></code><button>Reset widget</button>";
+      p4.querySelector(".widgetName").innerText = name2;
+      p4.querySelector("button").addEventListener("click", async () => {
         this.clearWidgetSettings();
       });
-      return p3;
+      return p4;
     }
     async clearWidgetSettings() {
       await browser.runtime.sendMessage({
@@ -2908,8 +2969,8 @@ Is it scaring you off?`,
     }
     #createWidgetDiv() {
       let widgetDiv = document.createElement("div");
-      widgetDiv.addEventListener("mousedown", (e3) => {
-        this.startDragging(e3.clientX, e3.clientY);
+      widgetDiv.addEventListener("mousedown", (e4) => {
+        this.startDragging(e4.clientX, e4.clientY);
       });
       widgetDiv.classList.add("smpp-widget");
       return widgetDiv;
@@ -2941,9 +3002,9 @@ Is it scaring you off?`,
           newContent = await this.createContent();
           this.isActive = true;
         }
-      } catch (e3) {
+      } catch (e4) {
         console.error("Failed to create widget content");
-        console.error(e3);
+        console.error(e4);
         newContent = this.createWidgetErrorContent(this.name);
       }
       if (!newContent) {
@@ -3179,17 +3240,17 @@ Is it scaring you off?`,
       );
     }
   }
-  function onPannelHover(pannel, e3) {
+  function onPannelHover(pannel, e4) {
     if (!widgetEditMode || curDragInfo == null || hoveringBag) {
       return;
     }
-    const bounds = e3.target.getBoundingClientRect();
-    if (e3.clientX < bounds.left + PANNELIP_MARGIN_PX) {
-      targetInsertionPoint(e3.target.previousElementSibling);
+    const bounds = e4.target.getBoundingClientRect();
+    if (e4.clientX < bounds.left + PANNELIP_MARGIN_PX) {
+      targetInsertionPoint(e4.target.previousElementSibling);
       return;
     }
-    if (e3.clientX > bounds.right - PANNELIP_MARGIN_PX) {
-      targetInsertionPoint(e3.target.nextElementSibling);
+    if (e4.clientX > bounds.right - PANNELIP_MARGIN_PX) {
+      targetInsertionPoint(e4.target.nextElementSibling);
       return;
     }
     let target = pannel.firstChild;
@@ -3199,24 +3260,24 @@ Is it scaring you off?`,
       }
       const bounds2 = child.getBoundingClientRect();
       let centerY = bounds2.top + (bounds2.bottom - bounds2.top) * 0.5;
-      if (e3.clientY > centerY) {
+      if (e4.clientY > centerY) {
         target = child.nextElementSibling;
       }
     }
     targetInsertionPoint(target);
   }
-  function onPannelInsertionPointHover(e3) {
+  function onPannelInsertionPointHover(e4) {
     if (!widgetEditMode || curDragInfo == null || hoveringBag) {
       return;
     }
-    targetInsertionPoint(e3.target);
+    targetInsertionPoint(e4.target);
   }
-  function onCenterHover(div, e3) {
+  function onCenterHover(div, e4) {
     if (!widgetEditMode || curDragInfo == null || hoveringBag) {
       return;
     }
     const bounds = div.getBoundingClientRect();
-    if (e3.clientX < (bounds.right - bounds.left) / 2 + bounds.left) {
+    if (e4.clientX < (bounds.right - bounds.left) / 2 + bounds.left) {
       targetInsertionPoint(div.previousElementSibling);
     } else {
       targetInsertionPoint(div.nextElementSibling);
@@ -3233,7 +3294,7 @@ Is it scaring you off?`,
   }
   async function createPannelHTML(pannel) {
     let pannelDiv = document.createElement("div");
-    pannelDiv.addEventListener("mousemove", (e3) => onPannelHover(pannelDiv, e3));
+    pannelDiv.addEventListener("mousemove", (e4) => onPannelHover(pannelDiv, e4));
     pannelDiv.classList.add("smpp-widget-pannel");
     pannelDiv.appendChild(createInsertionPointHTML());
     for (let widgetName of pannel.widgets) {
@@ -3261,7 +3322,7 @@ Is it scaring you off?`,
     }
     let newsDiv = document.createElement("div");
     newsDiv.classList.add("smpp-news-container");
-    newsDiv.addEventListener("mousemove", (e3) => onCenterHover(newsDiv, e3));
+    newsDiv.addEventListener("mousemove", (e4) => onCenterHover(newsDiv, e4));
     newsContent.id = "smpp-news-content";
     newsContent.className = "";
     if (news) {
@@ -3297,12 +3358,12 @@ Is it scaring you off?`,
     const div = document.createElement("div");
     div.classList.add("smpp-news-editor");
     const button = createButtonWithLabel("smpp-widget-news-toggle", "Show News");
-    button.addEventListener("change", async (e3) => {
-      updateNews(e3.target.checked);
+    button.addEventListener("change", async (e4) => {
+      updateNews(e4.target.checked);
       await browser.runtime.sendMessage({
         action: "setSetting",
         name: "appearance.news",
-        data: e3.target.checked
+        data: e4.target.checked
       });
     });
     div.appendChild(button);
@@ -3591,16 +3652,16 @@ Is it scaring you off?`,
     }
     widgetEditModeInit = true;
     initNewsEditMode();
-    document.addEventListener("mouseup", async (e3) => {
+    document.addEventListener("mouseup", async (e4) => {
       if (curDragInfo) {
         await curDragInfo.widget.drop(false);
       }
     });
-    document.addEventListener("mousemove", (e3) => {
+    document.addEventListener("mousemove", (e4) => {
       if (curDragInfo) {
-        curDragInfo.widget.dragMove(e3.clientX, e3.clientY);
+        curDragInfo.widget.dragMove(e4.clientX, e4.clientY);
         let handleBounds = widgetBagHandle.getBoundingClientRect();
-        if (e3.clientY < handleBounds.bottom && e3.clientX > handleBounds.left && e3.clientX < handleBounds.right) {
+        if (e4.clientY < handleBounds.bottom && e4.clientX > handleBounds.left && e4.clientX < handleBounds.right) {
           bagHoverEnter();
         } else if (hoveringBag) {
           bagHoverExit();
@@ -3627,7 +3688,7 @@ Is it scaring you off?`,
     amount = amount > 3e3 ? 3e3 : amount;
     let snowDiv = document.createElement("div");
     snowDiv.id = "snowflakes";
-    for (let i3 = 0; i3 < amount; i3++) {
+    for (let i4 = 0; i4 < amount; i4++) {
       let flake = document.createElement("img");
       flake.classList = "snowflake";
       flake.src = currentThemeName == "pink" ? getExtensionImage("icons/weather-overlay/blossom.svg") : getExtensionImage("icons/weather-overlay/snowflake.svg");
@@ -3645,7 +3706,7 @@ Is it scaring you off?`,
     amount = amount > 3e3 ? 3e3 : amount;
     let rainDiv = document.createElement("div");
     rainDiv.id = "raindrops";
-    for (let i3 = 0; i3 < amount; i3++) {
+    for (let i4 = 0; i4 < amount; i4++) {
       let raindrop = document.createElement("img");
       raindrop.classList.add("raindrop");
       raindrop.src = getExtensionImage("icons/weather-overlay/raindrop.svg");
@@ -3823,7 +3884,7 @@ Is it scaring you off?`,
     extraSettingsButton.id = "extraSettingsButton";
     extraSettingsButton.innerHTML += "More Settings";
     extraSettingsButton.innerHTML += settingsIconSvg;
-    extraSettingsButton.addEventListener("click", (e3) => openSettingsWindow(e3));
+    extraSettingsButton.addEventListener("click", (e4) => openSettingsWindow(e4));
     parent.appendChild(performanceModeTooltipLabel);
     parent.appendChild(compactThemeSelector.render());
     parent.appendChild(wallpaperTopContainer);
@@ -3855,9 +3916,9 @@ Is it scaring you off?`,
         tooltipInfo.style.zIndex = "-1";
       });
     }
-    document.addEventListener("click", (e3) => {
+    document.addEventListener("click", (e4) => {
       if (quickSettingsWindowIsHidden) return;
-      const target = e3.target;
+      const target = e4.target;
       if (!target) return;
       if (target.id === "extraSettingsButton") {
         closeQuickSettings();
@@ -3952,7 +4013,7 @@ Is it scaring you off?`,
       let content = document.createElement("div");
       let settingsSideBar = await this.createSettingsSideBar();
       this.settingsPage.id = "settings-page";
-      this.settingsPage.addEventListener("change", (e3) => this.storePage());
+      this.settingsPage.addEventListener("change", (e4) => this.storePage());
       content.classList.add("settingsWindow");
       content.appendChild(settingsSideBar);
       content.appendChild(this.settingsPage);
@@ -4000,9 +4061,9 @@ Is it scaring you off?`,
         "profile-settings-button",
         "settings-category-button-js"
       );
-      profileSettingsLabel.addEventListener("keydown", (e3) => {
-        if (e3.key === " " || e3.key === "Enter") {
-          e3.preventDefault();
+      profileSettingsLabel.addEventListener("keydown", (e4) => {
+        if (e4.key === " " || e4.key === "Enter") {
+          e4.preventDefault();
           radioInput.click();
         }
       });
@@ -4047,9 +4108,9 @@ Is it scaring you off?`,
         "settings-category-button",
         "settings-category-button-js"
       );
-      categoryLabel.addEventListener("keydown", (e3) => {
-        if (e3.key === " " || e3.key === "Enter") {
-          e3.preventDefault();
+      categoryLabel.addEventListener("keydown", (e4) => {
+        if (e4.key === " " || e4.key === "Enter") {
+          e4.preventDefault();
           radioInput.click();
         }
       });
@@ -4158,6 +4219,12 @@ Is it scaring you off?`,
           this.themeSelector.currentTiles.forEach((tile) => {
             tile.updateSelection();
           });
+          const enableGlassButton = document.getElementById(
+            "settings-page-glass-button"
+          );
+          if (enableGlassButton) {
+            enableGlassButton.checked = settings.appearance.glass;
+          }
           this.backgroundImageSelector.id = settings.appearance.theme;
           this.backgroundImageSelector.loadImageData();
           const blurSlider = document.getElementById("settings-page-blur-slider");
@@ -4410,6 +4477,9 @@ Is it scaring you off?`,
           settings.appearance.news = getCheckboxValue(
             "settings-page-show-news-button"
           );
+          settings.appearance.glass = getCheckboxValue(
+            "settings-page-glass-button"
+          );
           await applyAppearance(settings.appearance);
           if (JSON.stringify(settings.appearance.weatherOverlay) !== JSON.stringify(previousSettings.appearance.weatherOverlay) && !liteMode) {
             applyWeatherEffects(settings.appearance.weatherOverlay);
@@ -4570,12 +4640,12 @@ Is it scaring you off?`,
           let oldKeybind = input.value;
           input.value = "Press any key...";
           input.classList.add("listening");
-          const keyListener = async (e3) => {
+          const keyListener = async (e4) => {
             listening = false;
             input.classList.remove("listening");
-            e3.preventDefault();
-            e3.stopPropagation();
-            let keyName = e3.key.length === 1 ? e3.key.toUpperCase() : e3.key;
+            e4.preventDefault();
+            e4.stopPropagation();
+            let keyName = e4.key.length === 1 ? e4.key.toUpperCase() : e4.key;
             if (keyName === " ") keyName = "Space";
             if (keyName === "Backspace") keyName = "None";
             if (keyName === "Escape") keyName = oldKeybind;
@@ -4583,11 +4653,11 @@ Is it scaring you off?`,
             document.removeEventListener("keydown", keyListener);
             await this.storePage();
           };
-          const buttonListener = async (e3) => {
+          const buttonListener = async (e4) => {
             listening = false;
             input.classList.remove("listening");
-            e3.stopPropagation();
-            e3.preventDefault();
+            e4.stopPropagation();
+            e4.preventDefault();
             input.value = "None";
             document.removeEventListener("keydown", keyListener);
             await this.storePage();
@@ -4622,9 +4692,9 @@ Is it scaring you off?`,
         let image = document.createElement("img");
         image.classList.add("settings-page-image");
         image.src = getExtensionImage(src);
-        wrapper.addEventListener("keydown", (e3) => {
-          if (e3.key === " " || e3.key === "Enter") {
-            e3.preventDefault();
+        wrapper.addEventListener("keydown", (e4) => {
+          if (e4.key === " " || e4.key === "Enter") {
+            e4.preventDefault();
             input.click();
           }
         });
@@ -4739,6 +4809,13 @@ Is it scaring you off?`,
           };
           this.settingsPage.appendChild(
             this.backgroundImageSelector.createFullFileInput()
+          );
+          this.settingsPage.appendChild(createSectionTitle("Glass"));
+          this.settingsPage.appendChild(
+            createDescription("Apply a glassy effect to the UI.")
+          );
+          this.settingsPage.appendChild(
+            createSettingsButtonWithLabel("settings-page-glass-button", "Glass")
           );
           this.settingsPage.appendChild(createSectionTitle("Background blur"));
           this.settingsPage.appendChild(
@@ -5074,7 +5151,7 @@ Is it scaring you off?`,
   }
 
   // src/main-features/appearance/themes.ts
-  k([lch_default]);
+  k([lch_default, mix_default]);
   var currentThemeName;
   var currentTheme;
   async function getTheme(name2) {
@@ -5130,24 +5207,24 @@ Is it scaring you off?`,
       this.enableY = enableY;
       this.element.appendChild(this.visibleElement);
       let isDragging = false;
-      this.parentContainer.addEventListener("mousedown", (e3) => {
+      this.parentContainer.addEventListener("mousedown", (e4) => {
         isDragging = true;
-        this.handlePointerEvent(e3);
+        this.handlePointerEvent(e4);
       });
       document.addEventListener("mouseup", () => {
         isDragging = false;
       });
-      document.addEventListener("mousemove", (e3) => {
+      document.addEventListener("mousemove", (e4) => {
         if (isDragging) {
-          this.handlePointerEvent(e3);
+          this.handlePointerEvent(e4);
         }
       });
       this.updateCursorPosition();
     }
-    handlePointerEvent(e3) {
+    handlePointerEvent(e4) {
       const rect = this.parentContainer.getBoundingClientRect();
-      const x3 = e3.clientX - rect.left;
-      const y3 = e3.clientY - rect.top;
+      const x3 = e4.clientX - rect.left;
+      const y3 = e4.clientY - rect.top;
       const xPercent = x3 / rect.width * 100;
       const yPercent = y3 / rect.height * 100;
       if (this.enableX) this.xPos = Math.max(0, Math.min(100, xPercent));
@@ -5872,9 +5949,9 @@ Is it scaring you off?`,
         );
       }
       colorPreview.dataset["name"] = name2;
-      colorPreview.addEventListener("click", (e3) => {
+      colorPreview.addEventListener("click", (e4) => {
         if (!colorPreview.parentElement?.querySelector(".floating-picker")) {
-          this.openColorPicker(name2, colorPreview, e3);
+          this.openColorPicker(name2, colorPreview, e4);
         }
       });
       return colorPreview;
@@ -5925,12 +6002,12 @@ Is it scaring you off?`,
     }
     content = document.createElement("div");
     displayNameInput = document.createElement("input");
-    openColorPicker(name2, colorPreview, e3) {
+    openColorPicker(name2, colorPreview, e4) {
       let colorPicker = new ColorPicker2();
       colorPicker.element.style.position = "absolute";
       colorPicker.element.classList.add("floating-picker");
       let _docEventHandler = (docEvent) => {
-        if (docEvent === e3) return;
+        if (docEvent === e4) return;
         if (!(docEvent.target instanceof Node)) return;
         if (docEvent.target == colorPreview) return;
         const targetElement = docEvent.target;
@@ -5964,6 +6041,22 @@ Is it scaring you off?`,
         this.theme.cssProperties[colorName] = colorPreview.style.getPropertyValue("--current-color");
       });
       this.theme.displayName = this.displayNameInput.value;
+      if (this.theme.cssProperties["--color-base00"] && this.theme.cssProperties["--color-base02"] && this.theme.cssProperties["--color-text"]) {
+        let base00 = w(this.theme.cssProperties["--color-base00"]);
+        let darkenColor;
+        let splashColor;
+        if (base00.brightness() > 0.5) {
+          darkenColor = w("rgba(228, 228, 228, 0.4)");
+          darkenColor = darkenColor.mix(this.theme.cssProperties["--color-base02"], 0.5).alpha(0.4);
+        } else {
+          darkenColor = w("rgba(0,0,0,0.2)");
+          darkenColor = darkenColor.mix(this.theme.cssProperties["--color-base00"], 0.5).alpha(0.3);
+        }
+        splashColor = w(this.theme.cssProperties["--color-text"]);
+        this.theme.cssProperties["--color-splashtext"] = splashColor.toHex();
+        this.theme.cssProperties["--darken-background"] = darkenColor.toHex();
+        this.theme.cssProperties["--color-homepage-sidebars-bg"] = darkenColor.alpha(0.1).toHex();
+      }
       await browser.runtime.sendMessage({
         action: "saveCustomTheme",
         data: this.theme,
@@ -6060,10 +6153,8 @@ Is it scaring you off?`,
       let base03;
       let accent;
       let textcolor;
-      let splashcolor;
       let darkenColor;
       if (choice.mode) {
-        darkenColor = w("rgba(0,0,0,0.2)");
         if (choice.saturation) {
           base00 = colordPalette.DarkVibrant.darken(0.2);
           base01 = colordPalette.DarkVibrant.darken(0.1);
@@ -6071,7 +6162,6 @@ Is it scaring you off?`,
           base03 = colordPalette.DarkVibrant.lighten(0.1);
           accent = colordPalette.Vibrant;
           textcolor = colordPalette.LightVibrant;
-          splashcolor = colordPalette.DarkVibrant;
         } else {
           base00 = colordPalette.DarkMuted.darken(0.2);
           base01 = colordPalette.DarkMuted.darken(0.1);
@@ -6079,10 +6169,9 @@ Is it scaring you off?`,
           base03 = colordPalette.DarkMuted.lighten(0.1);
           accent = colordPalette.Muted;
           textcolor = colordPalette.LightMuted;
-          splashcolor = colordPalette.DarkMuted;
         }
+        darkenColor = w("rgba(0,0,0,0.2)").mix(base00.toHex(), 0.5).alpha(0.3);
       } else {
-        darkenColor = w("rgba(228, 228, 228, 0.4)");
         if (choice.saturation) {
           base00 = colordPalette.LightVibrant.lighten(0.1);
           base01 = colordPalette.LightVibrant.lighten(0.05);
@@ -6090,7 +6179,6 @@ Is it scaring you off?`,
           base03 = colordPalette.LightVibrant.darken(0.1);
           accent = colordPalette.Vibrant;
           textcolor = colordPalette.DarkVibrant;
-          splashcolor = colordPalette.DarkMuted;
         } else {
           base00 = colordPalette.LightMuted.lighten(0.1);
           base01 = colordPalette.LightMuted.lighten(0.05);
@@ -6098,8 +6186,8 @@ Is it scaring you off?`,
           base03 = colordPalette.LightMuted.darken(0.1);
           accent = colordPalette.Muted;
           textcolor = colordPalette.DarkMuted;
-          splashcolor = colordPalette.DarkMuted;
         }
+        darkenColor = w("rgba(228, 228, 228, 0.4)").mix(base02.toHex(), 0.5).alpha(0.4);
       }
       this.theme = {
         displayName: this.theme.displayName,
@@ -6113,7 +6201,7 @@ Is it scaring you off?`,
           "--color-base03": base03.toHex(),
           "--darken-background": darkenColor.toHex(),
           "--color-homepage-sidebars-bg": darkenColor.alpha(0.1).toHex(),
-          "--color-splashtext": splashcolor.toHex()
+          "--color-splashtext": textcolor.toHex()
         }
       };
       await browser.runtime.sendMessage({
@@ -6170,33 +6258,33 @@ Is it scaring you off?`,
       let container = document.createElement("div");
       container.classList.add("theme-controls-container");
       let brightnessButton = new themeGenerationControl("brightness-control");
-      brightnessButton.updateLogo = (e3, s3) => {
-        let tooltip = e3.parentElement?.querySelector(".smpp-tooltip");
+      brightnessButton.updateLogo = (e4, s3) => {
+        let tooltip = e4.parentElement?.querySelector(".smpp-tooltip");
         if (s3) {
           if (tooltip) {
             tooltip.innerHTML = "Dark";
           }
-          e3.innerHTML = moonSvg;
+          e4.innerHTML = moonSvg;
         } else {
           if (tooltip) {
             tooltip.innerHTML = "Light";
           }
-          e3.innerHTML = sunSvg;
+          e4.innerHTML = sunSvg;
         }
       };
       let saturationButton = new themeGenerationControl("saturation-control");
-      saturationButton.updateLogo = (e3, s3) => {
-        let tooltip = e3.parentElement?.querySelector(".smpp-tooltip");
+      saturationButton.updateLogo = (e4, s3) => {
+        let tooltip = e4.parentElement?.querySelector(".smpp-tooltip");
         if (s3) {
           if (tooltip) {
             tooltip.innerHTML = "Vibrant";
           }
-          e3.innerHTML = magicWandSvg;
+          e4.innerHTML = magicWandSvg;
         } else {
           if (tooltip) {
             tooltip.innerHTML = "Muted";
           }
-          e3.innerHTML = wandSvg;
+          e4.innerHTML = wandSvg;
         }
       };
       let firstSubContainer = createSmallThemeGenerationContainer();
@@ -6462,16 +6550,16 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     });
     createPlantWidget(document.getElementById("plantWidget"));
   }
-  function calculatePercentile(t3) {
+  function calculatePercentile(t4) {
     const totalTime = 259200;
-    return Math.max(0, 100 * (1 - t3 / totalTime));
+    return Math.max(0, 100 * (1 - t4 / totalTime));
   }
-  function getTimeInCorrectFormat(t3) {
-    if (t3 / 60 / 1e3 < 1) return "Now";
-    if (t3 / 60 / 60 / 1e3 < 1) return Math.round(t3 / 60 / 1e3) + "min ago";
-    if (t3 / 60 / 60 / 1e3 / 24 < 1)
-      return Math.round(t3 / 60 / 60 / 1e3) + "h ago";
-    return Math.round(t3 / 60 / 60 / 1e3 / 24) + "d ago";
+  function getTimeInCorrectFormat(t4) {
+    if (t4 / 60 / 1e3 < 1) return "Now";
+    if (t4 / 60 / 60 / 1e3 < 1) return Math.round(t4 / 60 / 1e3) + "min ago";
+    if (t4 / 60 / 60 / 1e3 / 24 < 1)
+      return Math.round(t4 / 60 / 60 / 1e3) + "h ago";
+    return Math.round(t4 / 60 / 60 / 1e3 / 24) + "d ago";
   }
   function createRemoveButton(isAlive) {
     let removeButtonDiv = document.createElement("div");
@@ -7265,30 +7353,30 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     GlobalChatOpenButton.id = "global_chat_button";
     GlobalChatOpenButton.className = "topnav__btn";
     GlobalChatOpenButton.innerHTML = gcIconSvg;
-    GlobalChatOpenButton.addEventListener("click", (e3) => openGlobalChat(e3));
+    GlobalChatOpenButton.addEventListener("click", (e4) => openGlobalChat(e4));
     return GlobalChatOpenButton;
   }
-  window.addEventListener("message", async (e3) => {
-    if (!Object.values(GC_DOMAINS).includes(e3.origin)) {
+  window.addEventListener("message", async (e4) => {
+    if (!Object.values(GC_DOMAINS).includes(e4.origin)) {
       console.warn(
         "Got a message but it was not from one of the global chat domains."
       );
       return;
     }
     let response = { error: "not found" };
-    switch (e3.data.action) {
+    switch (e4.data.action) {
       // Get the current plant.
       case "plantapi.v1.get_current":
         response = await getPlantV1();
         break;
       case "plantapi.v1.get_stage_svg":
         response = {
-          svg: getPlantSvg(stageDataToInternalPlantData(e3.data.stageData))
+          svg: getPlantSvg(stageDataToInternalPlantData(e4.data.stageData))
         };
         break;
     }
-    response.callId = e3.data.callId;
-    e3.source.postMessage(response, e3.origin);
+    response.callId = e4.data.callId;
+    e4.source.postMessage(response, e4.origin);
   });
   function stageDataToInternalPlantData(stageData) {
     return {
@@ -7333,16 +7421,16 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   }
   function quick_cmd_list() {
     let cmd_list = [];
-    for (let i3 = 0; i3 < quicks.length; i3++) {
-      cmd_list.push({ value: quicks[i3].name, meta: "quick: " + quicks[i3].url });
+    for (let i4 = 0; i4 < quicks.length; i4++) {
+      cmd_list.push({ value: quicks[i4].name, meta: "quick: " + quicks[i4].url });
     }
     return cmd_list;
   }
   function add_quick(name2, url) {
     let quick = { name: name2.toLowerCase(), url };
-    for (let i3 = 0; i3 < quicks.length; i3++) {
-      if (quicks[i3].name == name2) {
-        quicks[i3] = quick;
+    for (let i4 = 0; i4 < quicks.length; i4++) {
+      if (quicks[i4].name == name2) {
+        quicks[i4] = quick;
         quick_save();
         return;
       }
@@ -7351,9 +7439,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     quick_save();
   }
   function remove_quick(name2) {
-    for (let i3 = 0; i3 < quicks.length; i3++) {
-      if (quicks[i3].name == name2) {
-        quicks.splice(i3, 1);
+    for (let i4 = 0; i4 < quicks.length; i4++) {
+      if (quicks[i4].name == name2) {
+        quicks.splice(i4, 1);
         quick_save();
         return;
       }
@@ -7382,9 +7470,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       cmd_list,
       function(name2, shift) {
         value_list = [];
-        for (let i3 = 0; i3 < quicks.length; i3++) {
-          if (quicks[i3].name == name2) {
-            value_list = [{ value: quicks[i3].url }];
+        for (let i4 = 0; i4 < quicks.length; i4++) {
+          if (quicks[i4].name == name2) {
+            value_list = [{ value: quicks[i4].url }];
             break;
           }
         }
@@ -7418,10 +7506,10 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     const contentType = response.headers.get("content-type");
     if (response.ok && contentType && contentType.includes("application/json")) {
       let response_data = await response.json();
-      for (let i3 = 0; i3 < response_data.length; i3++) {
+      for (let i4 = 0; i4 < response_data.length; i4++) {
         links.push({
-          url: response_data[i3].url,
-          value: response_data[i3].name.toLowerCase(),
+          url: response_data[i4].url,
+          value: response_data[i4].name.toLowerCase(),
           meta: "link"
         });
       }
@@ -7436,8 +7524,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     const contentType = response.headers.get("content-type");
     if (response.ok && contentType && contentType.includes("application/json")) {
       let response_data = await response.json();
-      for (let i3 = 0; i3 < response_data.own.length; i3++) {
-        let vak = response_data.own[i3];
+      for (let i4 = 0; i4 < response_data.own.length; i4++) {
+        let vak = response_data.own[i4];
         let meta = "vak";
         if (vak.descr != "") {
           meta += "  [ " + vak.descr + " ]";
@@ -7454,8 +7542,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     let goto_items_html = document.querySelectorAll(
       ".js-shortcuts-container > a"
     );
-    for (let i3 = 0; i3 < goto_items_html.length; i3++) {
-      const item = goto_items_html[i3];
+    for (let i4 = 0; i4 < goto_items_html.length; i4++) {
+      const item = goto_items_html[i4];
       goto_items.push({
         url: item.href,
         value: item.innerText.toLowerCase().trim(),
@@ -7529,9 +7617,6 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           case "clearsettings":
             clearAllData();
             return;
-          case "glass":
-            document.body.classList.add("glass");
-            return;
           case "ridge":
             document.body.classList.add("ridge");
             return;
@@ -7591,26 +7676,26 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         if (cmd.startsWith("config.")) {
           dmenuEditConfig(cmd);
         }
-        for (let i3 = 0; i3 < quicks.length; i3++) {
-          const quick = quicks[i3];
+        for (let i4 = 0; i4 < quicks.length; i4++) {
+          const quick = quicks[i4];
           if (quick.name == cmd) {
             openURL2(quick.url, true);
             return;
           }
         }
-        for (let i3 = 0; i3 < links.length; i3++) {
-          if (links[i3].value == cmd) {
-            openURL2(links[i3].url, true);
+        for (let i4 = 0; i4 < links.length; i4++) {
+          if (links[i4].value == cmd) {
+            openURL2(links[i4].url, true);
           }
         }
-        for (let i3 = 0; i3 < goto_items.length; i3++) {
-          if (goto_items[i3].value == cmd) {
-            openURL2(goto_items[i3].url);
+        for (let i4 = 0; i4 < goto_items.length; i4++) {
+          if (goto_items[i4].value == cmd) {
+            openURL2(goto_items[i4].url);
           }
         }
-        for (let i3 = 0; i3 < vakken.length; i3++) {
-          if (vakken[i3].value == cmd) {
-            openURL2(vakken[i3].url);
+        for (let i4 = 0; i4 < vakken.length; i4++) {
+          if (vakken[i4].value == cmd) {
+            openURL2(vakken[i4].url);
           }
         }
       },
@@ -7620,11 +7705,11 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   }
 
   // src/main-features/keybinds.ts
-  document.addEventListener("keyup", async (e3) => {
-    if (e3.target?.tagName === "INPUT") return;
-    if (e3.target?.tagName === "TEXTAREA") return;
+  document.addEventListener("keyup", async (e4) => {
+    if (e4.target?.tagName === "INPUT") return;
+    if (e4.target?.tagName === "TEXTAREA") return;
     if (document.getElementById("tinymce")) return;
-    const key = e3.key === " " ? "Space" : e3.key.length === 1 ? e3.key.toUpperCase() : e3.key;
+    const key = e4.key === " " ? "Space" : e4.key.length === 1 ? e4.key.toUpperCase() : e4.key;
     if ((typeof keybinds === "undefined" || !keybinds || Object.keys(keybinds).length === 0) && key === ":") {
       do_qm("dmenu");
       return;
@@ -7634,10 +7719,10 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         do_qm(keybinds.dmenu);
         break;
       case keybinds.settings:
-        openSettingsWindow(e3);
+        openSettingsWindow(e4);
         break;
       case keybinds.gc:
-        openGlobalChat(e3);
+        openGlobalChat(e4);
         break;
     }
     if (!widgetEditModeInit) return;
@@ -7732,21 +7817,21 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       return "games";
     }
     constructor() {
-      document.addEventListener("keydown", async (e3) => {
-        if (e3.repeat) {
+      document.addEventListener("keydown", async (e4) => {
+        if (e4.repeat) {
           return;
         }
         if (this.playing) {
-          await this.onKeyDown(e3);
+          await this.onKeyDown(e4);
         } else if (this.hasPlayedAtLeastOnce) {
-          if (e3.code === "Space") {
+          if (e4.code === "Space") {
             await this.#startGame();
           }
         }
       });
-      document.addEventListener("keyup", async (e3) => {
+      document.addEventListener("keyup", async (e4) => {
         if (this.playing) {
-          await this.onKeyUp(e3);
+          await this.onKeyUp(e4);
         }
       });
       super();
@@ -7830,9 +7915,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       this.canvas.height = 300;
       this.canvas.classList.add("game-canvas");
       this.canvas.style.display = "none";
-      this.canvas.addEventListener("click", async (e3) => {
+      this.canvas.addEventListener("click", async (e4) => {
         if (this.playing) {
-          await this.onMouse(e3);
+          await this.onMouse(e4);
         }
       });
       div.appendChild(this.canvas);
@@ -7867,10 +7952,10 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           let display = document.createElement("span");
           sliderCont.appendChild(display);
           this.#optionElements[opt.name] = { display, input: slider };
-          slider.addEventListener("input", (e3) => {
-            this.#updateOpt(opt.name, e3.target.value);
+          slider.addEventListener("input", (e4) => {
+            this.#updateOpt(opt.name, e4.target.value);
           });
-          slider.addEventListener("change", async (e3) => {
+          slider.addEventListener("change", async (e4) => {
             await this.setSetting("options", this.#optionValues);
           });
           menuBottom.appendChild(sliderCont);
@@ -7879,7 +7964,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       this.#buttonEl = document.createElement("button");
       this.#buttonEl.classList.add("game-button");
       this.#buttonEl.innerText = "Play";
-      this.#buttonEl.addEventListener("click", async (e3) => {
+      this.#buttonEl.addEventListener("click", async (e4) => {
         await this.#startGame();
       });
       menuBottom.appendChild(this.#buttonEl);
@@ -7946,11 +8031,11 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     // frame)
     onGameDraw(ctx, deltaTime) {
     }
-    async onKeyDown(e3) {
+    async onKeyDown(e4) {
     }
-    async onKeyUp(e3) {
+    async onKeyUp(e4) {
     }
-    async onMouse(e3) {
+    async onMouse(e4) {
     }
     get tickSpeed() {
       return 60;
@@ -7986,10 +8071,10 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     }
     async onGameStart() {
       const w2 = this.canvas.width;
-      const h3 = this.canvas.height;
+      const h4 = this.canvas.height;
       this.ball = {
         x: w2 / 2,
-        y: h3 / 2,
+        y: h4 / 2,
         dx: BALL_SPEED * this.getOpt("speed") * 0.01,
         dy: -BALL_SPEED * this.getOpt("speed") * 0.01
       };
@@ -7998,11 +8083,11 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       this.rightPressed = false;
       this.score = 0;
       this.bricks = [];
-      for (let c3 = 0; c3 < BRICK_COLS; c3++) {
-        for (let r3 = 0; r3 < BRICK_ROWS; r3++) {
+      for (let c4 = 0; c4 < BRICK_COLS; c4++) {
+        for (let r4 = 0; r4 < BRICK_ROWS; r4++) {
           this.bricks.push({
-            x: c3 * (BRICK_WIDTH + BRICK_PADDING) + 10,
-            y: r3 * (BRICK_HEIGHT + BRICK_PADDING) + 10,
+            x: c4 * (BRICK_WIDTH + BRICK_PADDING) + 10,
+            y: r4 * (BRICK_HEIGHT + BRICK_PADDING) + 10,
             status: 1
           });
         }
@@ -8024,9 +8109,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     }
     onGameDraw(ctx, dt) {
       const w2 = this.canvas.width;
-      const h3 = this.canvas.height;
+      const h4 = this.canvas.height;
       ctx.fillStyle = getThemeVar("--color-base01");
-      ctx.fillRect(0, 0, w2, h3);
+      ctx.fillRect(0, 0, w2, h4);
       const speed = PADDLE_SPEED * this.getOpt("speed") * 0.01;
       if (this.leftPressed) this.paddleX -= speed * dt;
       if (this.rightPressed) this.paddleX += speed * dt;
@@ -8046,11 +8131,11 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         ball.y = BALL_RADIUS;
         ball.dy *= -1;
       }
-      if (ball.y > h3 - PADDLE_HEIGHT - BALL_RADIUS && ball.x > this.paddleX && ball.x < this.paddleX + PADDLE_WIDTH) {
+      if (ball.y > h4 - PADDLE_HEIGHT - BALL_RADIUS && ball.x > this.paddleX && ball.x < this.paddleX + PADDLE_WIDTH) {
         ball.dy *= -1;
-        ball.y = h3 - PADDLE_HEIGHT - BALL_RADIUS;
+        ball.y = h4 - PADDLE_HEIGHT - BALL_RADIUS;
       }
-      if (ball.y > h3 + BALL_RADIUS) {
+      if (ball.y > h4 + BALL_RADIUS) {
         this.stopGame();
       }
       for (let b3 of this.bricks) {
@@ -8067,7 +8152,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       this.drawRoundedRect(
         ctx,
         this.paddleX,
-        h3 - PADDLE_HEIGHT,
+        h4 - PADDLE_HEIGHT,
         PADDLE_WIDTH,
         PADDLE_HEIGHT,
         5
@@ -8083,13 +8168,13 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         }
       }
     }
-    onKeyDown(e3) {
-      if (e3.code === "ArrowLeft") this.leftPressed = true;
-      else if (e3.code === "ArrowRight") this.rightPressed = true;
+    onKeyDown(e4) {
+      if (e4.code === "ArrowLeft") this.leftPressed = true;
+      else if (e4.code === "ArrowRight") this.rightPressed = true;
     }
-    onKeyUp(e3) {
-      if (e3.code === "ArrowLeft") this.leftPressed = false;
-      else if (e3.code === "ArrowRight") this.rightPressed = false;
+    onKeyUp(e4) {
+      if (e4.code === "ArrowLeft") this.leftPressed = false;
+      else if (e4.code === "ArrowRight") this.rightPressed = false;
     }
   };
   registerWidget(new BreakoutWidget());
@@ -8118,20 +8203,20 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     }
     #drawGround(ctx) {
       let w2 = this.canvas.width;
-      let h3 = this.canvas.height;
+      let h4 = this.canvas.height;
       ctx.beginPath();
       ctx.lineWidth = 1;
-      ctx.moveTo(0, h3 - FLOOR_H);
-      ctx.lineTo(w2, h3 - FLOOR_H);
+      ctx.moveTo(0, h4 - FLOOR_H);
+      ctx.lineTo(w2, h4 - FLOOR_H);
       ctx.stroke();
       ctx.fillStyle = getThemeVar("--color-accent");
       ctx.strokeStyle = getThemeVar("--color-base01");
-      ctx.fillRect(0, h3 - FLOOR_H, w2, FLOOR_H);
-      ctx.strokeRect(0, h3 - FLOOR_H, w2, FLOOR_H);
-      for (let i3 = 0; i3 < w2 / 20 * 2; i3++) {
+      ctx.fillRect(0, h4 - FLOOR_H, w2, FLOOR_H);
+      ctx.strokeRect(0, h4 - FLOOR_H, w2, FLOOR_H);
+      for (let i4 = 0; i4 < w2 / 20 * 2; i4++) {
         ctx.beginPath();
-        ctx.moveTo(i3 * 20 + this.bgX, h3 - FLOOR_H);
-        ctx.lineTo(i3 * 20 + this.bgX + FLOOR_H, h3);
+        ctx.moveTo(i4 * 20 + this.bgX, h4 - FLOOR_H);
+        ctx.lineTo(i4 * 20 + this.bgX + FLOOR_H, h4);
         ctx.stroke();
       }
     }
@@ -8232,13 +8317,13 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       this.#drawPipe(ctx, this.pipe);
       this.#drawGround(ctx);
     }
-    async onMouse(e3) {
+    async onMouse(e4) {
       this.jump = true;
     }
-    async onKeyDown(e3) {
-      if (e3.code === "Space" || e3.code === "ArrowUp") {
+    async onKeyDown(e4) {
+      if (e4.code === "Space" || e4.code === "ArrowUp") {
         this.jump = true;
-        e3.preventDefault();
+        e4.preventDefault();
       }
     }
   };
@@ -8292,7 +8377,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         this.stopGame();
         return;
       }
-      if (this.#snake.find((p3) => p3.equal(newHead))) {
+      if (this.#snake.find((p4) => p4.equal(newHead))) {
         this.stopGame();
         return;
       }
@@ -8316,7 +8401,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     }
     #spawnFood() {
       this.#food = this.#getRandomFieldPos();
-      while (this.#snake.find((p3) => p3.equal(this.#food))) {
+      while (this.#snake.find((p4) => p4.equal(this.#food))) {
         this.#food = this.#getRandomFieldPos();
       }
     }
@@ -8405,8 +8490,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       ctx.fillStyle = getThemeVar("--color-accent");
       this.#drawDot(ctx, this.#food);
     }
-    onKeyDown(e3) {
-      switch (e3.key) {
+    onKeyDown(e4) {
+      switch (e4.key) {
         case "ArrowUp":
           if (this.#curDir !== DIR_DOWN) {
             this.#targetDir = DIR_UP;
@@ -8454,15 +8539,15 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     }
     async onGameStart() {
       const w2 = this.canvas.width;
-      const h3 = this.canvas.height;
+      const h4 = this.canvas.height;
       this.ball = {
         x: w2 / 2,
-        y: h3 / 2,
+        y: h4 / 2,
         dx: PONG_BALL_SPEED * this.getOpt("speed") * 0.01 * (Math.random() > 0.5 ? 1 : -1),
         dy: PONG_BALL_SPEED * this.getOpt("speed") * 0.01 * (Math.random() * 2 - 1)
       };
-      this.leftY = (h3 - PONG_PADDLE_HEIGHT) / 2;
-      this.rightY = (h3 - PONG_PADDLE_HEIGHT) / 2;
+      this.leftY = (h4 - PONG_PADDLE_HEIGHT) / 2;
+      this.rightY = (h4 - PONG_PADDLE_HEIGHT) / 2;
       this.leftUp = false;
       this.leftDown = false;
     }
@@ -8482,13 +8567,13 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     }
     onGameDraw(ctx, dt) {
       const w2 = this.canvas.width;
-      const h3 = this.canvas.height;
+      const h4 = this.canvas.height;
       ctx.fillStyle = getThemeVar("--color-base01");
-      ctx.fillRect(0, 0, w2, h3);
+      ctx.fillRect(0, 0, w2, h4);
       const speed = PONG_PADDLE_SPEED * this.getOpt("speed") * 0.01;
       if (this.leftUp) this.leftY -= speed * dt;
       if (this.leftDown) this.leftY += speed * dt;
-      this.leftY = Math.max(0, Math.min(h3 - PONG_PADDLE_HEIGHT, this.leftY));
+      this.leftY = Math.max(0, Math.min(h4 - PONG_PADDLE_HEIGHT, this.leftY));
       const aiCenter = this.rightY + PONG_PADDLE_HEIGHT / 2;
       const diff = this.ball.y - aiCenter;
       const maxMove = speed * dt * 0.8;
@@ -8497,11 +8582,11 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       } else {
         this.rightY += diff;
       }
-      this.rightY = Math.max(0, Math.min(h3 - PONG_PADDLE_HEIGHT, this.rightY));
+      this.rightY = Math.max(0, Math.min(h4 - PONG_PADDLE_HEIGHT, this.rightY));
       let b3 = this.ball;
       b3.x += b3.dx * dt;
       b3.y += b3.dy * dt;
-      if (b3.y < PONG_BALL_RADIUS || b3.y > h3 - PONG_BALL_RADIUS) {
+      if (b3.y < PONG_BALL_RADIUS || b3.y > h4 - PONG_BALL_RADIUS) {
         b3.dy *= -1;
       }
       if (b3.x < PONG_PADDLE_WIDTH + PONG_BALL_RADIUS && b3.y > this.leftY && b3.y < this.leftY + PONG_PADDLE_HEIGHT) {
@@ -8552,17 +8637,17 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       ctx.setLineDash([4, 5]);
       ctx.beginPath();
       ctx.moveTo(w2 / 2, 0);
-      ctx.lineTo(w2 / 2, h3);
+      ctx.lineTo(w2 / 2, h4);
       ctx.stroke();
       ctx.setLineDash([]);
     }
-    onKeyDown(e3) {
-      if (e3.code === "ArrowUp") this.leftUp = true;
-      if (e3.code === "ArrowDown") this.leftDown = true;
+    onKeyDown(e4) {
+      if (e4.code === "ArrowUp") this.leftUp = true;
+      if (e4.code === "ArrowDown") this.leftDown = true;
     }
-    onKeyUp(e3) {
-      if (e3.code === "ArrowUp") this.leftUp = false;
-      if (e3.code === "ArrowDown") this.leftDown = false;
+    onKeyUp(e4) {
+      if (e4.code === "ArrowUp") this.leftUp = false;
+      if (e4.code === "ArrowDown") this.leftDown = false;
     }
   };
   registerWidget(new PongWidget());
@@ -8627,9 +8712,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   }
   function generateRotations(base) {
     const rotations = [base];
-    for (let i3 = 1; i3 < 4; i3++) {
-      const next = rotate(rotations[i3 - 1]);
-      if (!rotations.some((r3) => JSON.stringify(r3) === JSON.stringify(next))) {
+    for (let i4 = 1; i4 < 4; i4++) {
+      const next = rotate(rotations[i4 - 1]);
+      if (!rotations.some((r4) => JSON.stringify(r4) === JSON.stringify(next))) {
         rotations.push(next);
       }
     }
@@ -8849,7 +8934,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     #clearLines() {
       let linesCleared = 0;
       for (let y3 = BOARD_HEIGHT - 1; y3 >= 0; y3--) {
-        if (this.#board[y3].every((c3) => c3 !== 0)) {
+        if (this.#board[y3].every((c4) => c4 !== 0)) {
           this.#board.splice(y3, 1);
           this.#board.unshift(new Array(BOARD_WIDTH).fill(0));
           linesCleared++;
@@ -9028,8 +9113,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         clearInterval(this.#downTimer);
       }
     }
-    onKeyDown(e3) {
-      switch (e3.key) {
+    onKeyDown(e4) {
+      switch (e4.key) {
         case "ArrowLeft":
           this.#startMoveLeft();
           break;
@@ -9041,13 +9126,13 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           break;
         case "ArrowUp":
         case " ":
-          e3.preventDefault();
+          e4.preventDefault();
           this.#rotate();
           break;
       }
     }
-    onKeyUp(e3) {
-      switch (e3.key) {
+    onKeyUp(e4) {
+      switch (e4.key) {
         case "ArrowLeft":
           this.#stopMoveLeft();
           break;
@@ -9097,7 +9182,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       dutchButton.appendChild(document.createTextNode("Nederlands"));
       langButtons.appendChild(dutchButton);
       this.container.appendChild(langButtons);
-      dutchButton.addEventListener("click", (e3) => {
+      dutchButton.addEventListener("click", (e4) => {
         this.lang = "dutch";
         this.displayWidgetTutorial(1);
       });
@@ -9261,7 +9346,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             TasksContainer.appendChild(noDataContainerTextContainer);
           }
           data2.sort(
-            (a3, b3) => new Date(a3.period.dateTimeFrom) - new Date(b3.period.dateTimeFrom)
+            (a4, b3) => new Date(a4.period.dateTimeFrom) - new Date(b3.period.dateTimeFrom)
           );
           let lastDate = "";
           if (data2.length > this.settings.maxAssignments) {
@@ -9322,8 +9407,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
                 iconSvg.setAttribute("width", "16px");
                 iconSvg.setAttribute("height", "16px");
                 const reader = new FileReader();
-                reader.onload = (e3) => {
-                  iconSvg.innerHTML = e3.target.result;
+                reader.onload = (e4) => {
+                  iconSvg.innerHTML = e4.target.result;
                 };
                 reader.readAsText(blob);
                 wrapperDiv.appendChild(iconSvg);
@@ -9718,9 +9803,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       }
       this.hideInfo();
       let sortedDoorkomsten = delijnData.halteDoorkomsten[0].doorkomsten.sort(
-        (a3, b3) => {
+        (a4, b3) => {
           const timeA = new Date(
-            a3["real-timeTijdstip"] || a3.dienstregelingTijdstip
+            a4["real-timeTijdstip"] || a4.dienstregelingTijdstip
           );
           const timeB = new Date(
             b3["real-timeTijdstip"] || b3.dienstregelingTijdstip
@@ -9810,16 +9895,16 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         this.displayInfo("Er liep iets mis: " + error);
         return;
       }
-      delijnHaltesLijnrichtingenData.halteLijnrichtingen.forEach((halte, i3) => {
-        halte.halte.omschrijving = delijnHaltesData.haltes[i3].omschrijving;
+      delijnHaltesLijnrichtingenData.halteLijnrichtingen.forEach((halte, i4) => {
+        halte.halte.omschrijving = delijnHaltesData.haltes[i4].omschrijving;
       });
       try {
         this.hideInfo();
         const startIndex = this.searchResultLimit - 5;
         const results = delijnHaltesLijnrichtingenData.halteLijnrichtingen.slice(startIndex);
-        for (let i3 = 0; i3 < results.length; i3++) {
+        for (let i4 = 0; i4 < results.length; i4++) {
           if (signal.aborted) return;
-          const halte = results[i3];
+          const halte = results[i4];
           await this.createHalteOption(halte, signal);
           if (signal.aborted) return;
         }
@@ -10323,11 +10408,11 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       if (this.settings.currentLocation == "Locatie") {
         locationInput.classList.add("not-initialized");
         locationInput.value = "";
-        locationInput.addEventListener("focusin", (e3) => {
-          e3.target.placeholder = "";
+        locationInput.addEventListener("focusin", (e4) => {
+          e4.target.placeholder = "";
         });
-        locationInput.addEventListener("focusout", (e3) => {
-          e3.target.placeholder = "Locatie";
+        locationInput.addEventListener("focusout", (e4) => {
+          e4.target.placeholder = "Locatie";
         });
         let mainIcon2 = document.createElement("div");
         mainIcon2.classList.add("weather-icon-container");
@@ -11011,6 +11096,11 @@ ${code}`;
   }
   async function applyAppearance(appearance) {
     let style = document.documentElement.style;
+    if (appearance.glass) {
+      document.body.classList.add("glass");
+    } else {
+      document.body.classList.remove("glass");
+    }
     await setTheme(appearance.theme);
     setBackground(appearance);
     updateNews(appearance.news);
@@ -11096,8 +11186,8 @@ ${code}`;
   }
   function createProfileSettingButton() {
     let button = document.createElement("a");
-    button.addEventListener("click", (e3) => {
-      openSettingsWindow(e3);
+    button.addEventListener("click", (e4) => {
+      openSettingsWindow(e4);
       let topNavProfileMenu = document.getElementById("profileMenu");
       let settingsPageProfileButton = document.querySelector(
         ".profile-settings-button"

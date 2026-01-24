@@ -30,6 +30,7 @@ export type Settings = {
   };
   appearance: {
     theme: string;
+    glass: boolean;
     quickSettingsThemes: string[];
     background: { blur: number };
     weatherOverlay: {
@@ -363,6 +364,14 @@ export class SettingsWindow extends BaseWindow {
         this.themeSelector.currentTiles.forEach((tile) => {
           tile.updateSelection();
         });
+
+        const enableGlassButton = document.getElementById(
+          "settings-page-glass-button"
+        );
+        if (enableGlassButton) {
+          (enableGlassButton as HTMLInputElement).checked =
+            settings.appearance.glass;
+        }
 
         // Background
         this.backgroundImageSelector.id = settings.appearance.theme;
@@ -705,6 +714,10 @@ export class SettingsWindow extends BaseWindow {
         // News
         settings.appearance.news = getCheckboxValue(
           "settings-page-show-news-button"
+        );
+
+        settings.appearance.glass = getCheckboxValue(
+          "settings-page-glass-button"
         );
 
         await applyAppearance(settings.appearance);
@@ -1146,6 +1159,14 @@ export class SettingsWindow extends BaseWindow {
 
         this.settingsPage.appendChild(
           this.backgroundImageSelector.createFullFileInput()
+        );
+
+        this.settingsPage.appendChild(createSectionTitle("Glass"));
+        this.settingsPage.appendChild(
+          createDescription("Apply a glassy effect to the UI.")
+        );
+        this.settingsPage.appendChild(
+          createSettingsButtonWithLabel("settings-page-glass-button", "Glass")
         );
 
         this.settingsPage.appendChild(createSectionTitle("Background blur"));

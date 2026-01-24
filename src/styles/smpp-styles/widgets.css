@@ -11,7 +11,8 @@ html {
 
   --preview-width: calc(var(--pannel-width) * 0.7);
   --bag-close-transformy: calc(
-    -100% - var(--smpp-widget-bag-margin) - 8px + var(--smpp-widget-bag-handle-height)
+    -100% - var(--smpp-widget-bag-margin) - 8px +
+      var(--smpp-widget-bag-handle-height)
   ); /* -8px for 2 times the border size */
 }
 
@@ -29,11 +30,15 @@ html {
     transform: rotate(360deg);
   }
 }
-
+.glass .smpp-widget {
+  background: var(--darken-background) !important;
+}
 /* Only use rem's here no em because widgets will be moved to body when they are dragged */
 .smpp-widget {
   height: min-content;
-  transition: transform 0.4s, padding 0.25s;
+  transition:
+    transform 0.4s,
+    padding 0.25s;
   transform: scale(1) rotate(0deg);
   background-color: var(--color-base01);
   padding: 1.5rem;
@@ -117,7 +122,9 @@ html {
   background: var(--color-base02);
   border-radius: 1.5rem;
 }
-
+.glass .smpp-widget-pannel {
+  backdrop-filter: blur(10px);
+}
 .smpp-widget-pannel {
   min-width: calc(
     300px + 1rem * 2
@@ -170,7 +177,9 @@ html {
 }
 
 .enableAnimations .topnav {
-  transition: opacity 0.3s ease-in-out, filter 0.3s ease-in-out !important;
+  transition:
+    opacity 0.3s ease-in-out,
+    filter 0.3s ease-in-out !important;
 }
 
 .smpp-widget-edit-mode:not(.smpp-widget-dragging-something)
@@ -338,7 +347,10 @@ html {
 
 .enableAnimations .smpp-widget-bag-handle-icon,
 .enableAnimations .smpp-widget-bag-handle {
-  transition: border-color 0.5s, color 0.5s, transform 0.5s;
+  transition:
+    border-color 0.5s,
+    color 0.5s,
+    transform 0.5s;
 }
 
 .smpp-widget-bag-open .smpp-widget-bag-handle-icon {
@@ -369,7 +381,9 @@ p.smpp-error-widget {
 }
 
 .enableAnimations .smpp-error-widget button {
-  transition: scale 0.1s ease-in-out, border-color 0.2s ease-in-out,
+  transition:
+    scale 0.1s ease-in-out,
+    border-color 0.2s ease-in-out,
     background 0.2s ease-in-out;
 }
 
@@ -401,15 +415,15 @@ p.smpp-error-widget {
   padding: 0px !important;
 }
 
-.smpp-widget-transparent {
-  background-color: transparent;
+.smpp-widget.smpp-widget-transparent {
+  background: transparent !important;
   border-color: transparent;
   box-shadow: none;
   padding: 0rem;
 }
 
 .smpp-widget-edit-mode .smpp-widget-transparent {
-  background-color: var(--color-base01);
+  background-color: var(--color-base01) !important;
   border: 3px solid var(--color-base03);
   box-shadow: 0 0 10px var(--color-shadow);
   padding: 1rem;
@@ -500,8 +514,12 @@ p.smpp-error-widget {
 }
 
 .enableAnimations .widgets-done-button {
-  transition: opacity 0.2s ease-in, top 0.4s ease-in-out, right 0.4s ease-in-out,
-    font-size 0.4s ease-in-out, height 0.4s ease-in-out;
+  transition:
+    opacity 0.2s ease-in,
+    top 0.4s ease-in-out,
+    right 0.4s ease-in-out,
+    font-size 0.4s ease-in-out,
+    height 0.4s ease-in-out;
 }
 
 .enableAnimations .widgets-done-button {
