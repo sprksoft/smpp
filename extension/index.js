@@ -224,8 +224,10 @@
   var folderSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
 <path xmlns="http://www.w3.org/2000/svg" d="M3 8.2C3 7.07989 3 6.51984 3.21799 6.09202C3.40973 5.71569 3.71569 5.40973 4.09202 5.21799C4.51984 5 5.0799 5 6.2 5H9.67452C10.1637 5 10.4083 5 10.6385 5.05526C10.8425 5.10425 11.0376 5.18506 11.2166 5.29472C11.4184 5.4184 11.5914 5.59135 11.9373 5.93726L12.0627 6.06274C12.4086 6.40865 12.5816 6.5816 12.7834 6.70528C12.9624 6.81494 13.1575 6.89575 13.3615 6.94474C13.5917 7 13.8363 7 14.3255 7H17.8C18.9201 7 19.4802 7 19.908 7.21799C20.2843 7.40973 20.5903 7.71569 20.782 8.09202C21 8.51984 21 9.0799 21 10.2V15.8C21 16.9201 21 17.4802 20.782 17.908C20.5903 18.2843 20.2843 18.5903 19.908 18.782C19.4802 19 18.9201 19 17.8 19H6.2C5.07989 19 4.51984 19 4.09202 18.782C3.71569 18.5903 3.40973 18.2843 3.21799 17.908C3 17.4802 3 16.9201 3 15.8V8.2Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
 `;
-  var favoriteFolderSvg = `<svg class="heart-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  var heartSvg = `<svg class="heart-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
 <path xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" d="M12 6.00019C10.2006 3.90317 7.19377 3.2551 4.93923 5.17534C2.68468 7.09558 2.36727 10.3061 4.13778 12.5772C5.60984 14.4654 10.0648 18.4479 11.5249 19.7369C11.6882 19.8811 11.7699 19.9532 11.8652 19.9815C11.9483 20.0062 12.0393 20.0062 12.1225 19.9815C12.2178 19.9532 12.2994 19.8811 12.4628 19.7369C13.9229 18.4479 18.3778 14.4654 19.8499 12.5772C21.6204 10.3061 21.3417 7.07538 19.0484 5.17534C16.7551 3.2753 13.7994 3.90317 12 6.00019Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+  var brokenHeartSvg = `<svg class="broken-heart-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path xmlns="http://www.w3.org/2000/svg" d="M12 6.00011L14 8.00011L10 10.0001L13 13.0001M12 6.00011C10.2006 3.90309 7.19377 3.25515 4.93923 5.17539C2.68468 7.09563 2.36727 10.3062 4.13778 12.5772C5.60984 14.4655 10.0648 18.4479 11.5249 19.7369C11.6882 19.8811 11.7699 19.9532 11.8652 19.9816C11.9483 20.0063 12.0393 20.0063 12.1225 19.9816C12.2178 19.9532 12.2994 19.8811 12.4628 19.7369C13.9229 18.4479 18.3778 14.4655 19.8499 12.5772C21.6204 10.3062 21.3417 7.07543 19.0484 5.17539C16.7551 3.27535 13.7994 3.90309 12 6.00011Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
   var pineSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
 <path xmlns="http://www.w3.org/2000/svg" d="M15.0001 17.0001V21.0001H9.0001V17.0001M19.2784 17.0001H4.72182C4.17319 17.0001 3.89888 17.0001 3.76119 16.8884C3.64151 16.7913 3.57328 16.6445 3.57627 16.4904C3.5797 16.3131 3.75659 16.1035 4.11038 15.6842L6.13538 13.2842C6.22352 13.1797 6.26759 13.1275 6.32141 13.0899C6.36911 13.0567 6.42223 13.032 6.47841 13.017C6.5418 13.0001 6.61014 13.0001 6.74682 13.0001H17.2534C17.3901 13.0001 17.4584 13.0001 17.5218 13.017C17.578 13.032 17.6311 13.0567 17.6788 13.0899C17.7326 13.1275 17.7767 13.1797 17.8648 13.2842L19.8898 15.6842C20.2436 16.1035 20.4205 16.3131 20.4239 16.4904C20.4269 16.6445 20.3587 16.7913 20.239 16.8884C20.1013 17.0001 19.827 17.0001 19.2784 17.0001ZM5.60245 11.598L8.34531 9.198C8.42902 9.12476 8.47087 9.08813 8.51829 9.06203C8.56034 9.03889 8.60551 9.02191 8.6524 9.01164C8.70527 9.00006 8.76088 9.00006 8.87211 9.00006H15.1281C15.2393 9.00006 15.2949 9.00006 15.3478 9.01164C15.3947 9.02191 15.4399 9.03889 15.4819 9.06203C15.5293 9.08813 15.5712 9.12476 15.6549 9.198L18.3977 11.598C18.8937 12.032 19.1417 12.249 19.1655 12.4377C19.186 12.6011 19.1247 12.7642 19.0016 12.8737C18.8595 13.0001 18.53 13.0001 17.8709 13.0001H6.12926C5.4702 13.0001 5.14067 13.0001 4.99857 12.8737C4.87545 12.7642 4.81417 12.6011 4.83473 12.4377C4.85846 12.249 5.10646 12.032 5.60245 11.598ZM13.0414 3.89257L17.3581 7.59266C17.8653 8.02739 18.1189 8.24475 18.1441 8.43411C18.1659 8.59814 18.1052 8.76235 17.9819 8.87268C17.8395 9.00006 17.5055 9.00006 16.8375 9.00006H7.1627C6.4947 9.00006 6.1607 9.00006 6.01833 8.87268C5.89501 8.76235 5.83427 8.59814 5.85609 8.43411C5.88129 8.24475 6.13488 8.02739 6.64207 7.59266L10.9588 3.89257C11.3284 3.5758 11.5132 3.41741 11.7204 3.35704C11.9031 3.30384 12.0971 3.30384 12.2798 3.35704C12.487 3.41741 12.6718 3.5758 13.0414 3.89257Z" stroke-width="2" stroke-linejoin="round"/>
 </svg`;
@@ -5388,8 +5390,8 @@ Is it scaring you off?`,
       this.element.classList.add("theme-tile");
       this.element.style.height = "104px";
       this.element.style.width = "168px";
-      this.element.addEventListener("click", async () => {
-        await this.onClick();
+      this.element.addEventListener("click", async (e4) => {
+        await this.onClick(e4);
       });
       this.updateSelection();
       await this.createContent();
@@ -5401,7 +5403,7 @@ Is it scaring you off?`,
     updateSelection() {
     }
     // Overide in de implementation
-    async onClick() {
+    async onClick(e4) {
     }
     // Overide this in the implementation
     async createContent() {
@@ -5409,11 +5411,15 @@ Is it scaring you off?`,
   };
   var ThemeTile2 = class extends Tile {
     name;
+    isFavorite;
     isCustom;
+    currentCategory;
     titleElement = document.createElement("span");
-    constructor(name2, isCustom = false) {
+    constructor(name2, currentCategory, isFavorite, isCustom = false) {
       super();
       this.name = name2;
+      this.currentCategory = currentCategory;
+      this.isFavorite = isFavorite;
       this.isCustom = isCustom;
     }
     async updateCSS() {
@@ -5446,7 +5452,7 @@ Is it scaring you off?`,
       duplicateButton.classList.add("bottom-container-button");
       duplicateButton.innerHTML = copySvg;
       duplicateButton.addEventListener("click", async () => {
-        await this.onDuplicate();
+        await this.duplicate();
       });
       buttonContainer.appendChild(duplicateButton);
       if (this.isCustom) {
@@ -5454,10 +5460,18 @@ Is it scaring you off?`,
         editButton.classList.add("bottom-container-button");
         editButton.innerHTML = editIconSvg;
         editButton.addEventListener("click", async () => {
-          await this.onEdit();
+          await this.edit();
         });
         buttonContainer.appendChild(editButton);
       }
+      let favoriteButton = document.createElement("button");
+      favoriteButton.classList.add("bottom-container-button");
+      favoriteButton.innerHTML = heartSvg;
+      favoriteButton.addEventListener("click", async () => {
+        await this.favoriteToggle();
+      });
+      if (this.isFavorite) this.element.classList.add("is-favorite");
+      buttonContainer.appendChild(favoriteButton);
       bottomContainer.appendChild(buttonContainer);
       return bottomContainer;
     }
@@ -5515,16 +5529,76 @@ Is it scaring you off?`,
         }
       }
     }
-    async onClick() {
+    async onClick(e4) {
+      if (e4.target instanceof HTMLElement) {
+        const targetElement = e4.target;
+        if (targetElement.classList.contains("heart-icon")) return;
+      }
       await updateTheme(this.name);
       await settingsWindow.loadPage(false);
       await loadQuickSettings();
     }
-    // Overide in de implementation
-    async onEdit() {
+    async favoriteToggle() {
+      this.isFavorite = !this.isFavorite;
+      console.log(this.isFavorite);
+      let data2 = await browser.runtime.sendMessage({
+        action: "getSettingsData"
+      });
+      let quickSettingsThemes = data2.appearance.quickSettingsThemes;
+      if (this.isFavorite) {
+        quickSettingsThemes.push(this.name);
+      } else {
+        quickSettingsThemes = quickSettingsThemes.filter((name2) => {
+          return name2 != this.name;
+        });
+        if (this.currentCategory == "quickSettings") {
+          this.element.classList.add("being-removed");
+        }
+      }
+      await browser.runtime.sendMessage({
+        action: "setSetting",
+        name: "appearance.quickSettingsThemes",
+        data: quickSettingsThemes
+      });
+      console.log(quickSettingsThemes);
+      this.element.classList.toggle("is-favorite");
+      this.onFavoriteToggle();
+    }
+    async edit() {
+      startCustomThemeCreator(await getTheme(this.name), this.name);
+    }
+    async duplicate() {
+      let newThemeName = await browser.runtime.sendMessage({
+        action: "saveCustomTheme",
+        data: await getTheme(this.name)
+      });
+      let result = await browser.runtime.sendMessage({
+        action: "getImage",
+        id: this.name
+      });
+      if (result.type == "default") {
+        result.imageData = await getExtensionImage(
+          "theme-backgrounds/" + this.name + ".jpg"
+        );
+        if (!this.isCustom) {
+          result.type = "link";
+          result.link = this.name + ".jpg";
+        }
+      }
+      if (await isValidImage(result.imageData)) {
+        await browser.runtime.sendMessage({
+          action: "setImage",
+          id: newThemeName,
+          data: result
+        });
+      }
+      this.onDuplicate(newThemeName);
     }
     // Overide in de implementation
-    async onDuplicate() {
+    async onFavoriteToggle() {
+    }
+    // Overide in de implementation
+    async onDuplicate(newThemeName) {
     }
   };
   async function updateTheme(name2) {
@@ -5585,7 +5659,7 @@ Is it scaring you off?`,
       let svg;
       switch (this.category) {
         case "quickSettings":
-          svg = favoriteFolderSvg;
+          svg = heartSvg;
           break;
         case "light":
           svg = sunSvg;
@@ -5647,6 +5721,30 @@ Is it scaring you off?`,
       this.element.appendChild(this.createBottomContainer());
     }
   };
+  var noThemes = class extends Tile {
+    createImageContainer() {
+      let imageContainer = document.createElement("div");
+      let svg = brokenHeartSvg;
+      imageContainer.innerHTML = svg;
+      imageContainer.classList.add("image-container");
+      return imageContainer;
+    }
+    createBottomContainer() {
+      let bottomContainer = document.createElement("div");
+      bottomContainer.classList.add("theme-tile-bottom");
+      let title = document.createElement("span");
+      title.classList.add("theme-tile-title");
+      title.innerText = "No themes";
+      bottomContainer.appendChild(title);
+      return bottomContainer;
+    }
+    async createContent() {
+      this.element.classList.add("use-default-colors");
+      this.element.classList.add("no-themes");
+      this.element.appendChild(this.createImageContainer());
+      this.element.appendChild(this.createBottomContainer());
+    }
+  };
   var ThemeSelector = class {
     element = document.createElement("div");
     content = document.createElement("div");
@@ -5696,6 +5794,7 @@ Is it scaring you off?`,
         await this.renderFolderTiles();
         return;
       }
+      console.log("updating selector");
       await this.updateThemeTiles();
       this.updateImages();
     }
@@ -5705,7 +5804,9 @@ Is it scaring you off?`,
         categories: [this.currentCategory],
         includeHidden: true
       });
-      if (!themes2) return;
+      let data2 = await browser.runtime.sendMessage({
+        action: "getSettingsData"
+      });
       let visibleThemeTiles = this.content.querySelectorAll(".theme-tile");
       let visibleThemeTilesArray = [];
       visibleThemeTiles.forEach((element) => {
@@ -5718,11 +5819,19 @@ Is it scaring you off?`,
         return themeName;
       });
       let addMissingTiles = async (visibleThemeNames2, correctThemeNames2) => {
+        let customThemes = await browser.runtime.sendMessage({
+          action: "getThemes",
+          categories: ["custom"],
+          includeHidden: true
+        });
+        console.log(customThemes);
         correctThemeNames2.forEach(async (themeName) => {
           if (!visibleThemeNames2.includes(themeName)) {
+            let isFavorite = data2.appearance.quickSettingsThemes.includes(themeName);
             let newTile = this.createThemeTile(
               themeName,
-              this.currentCategory == "custom"
+              isFavorite,
+              Object.keys(customThemes).includes(themeName)
             );
             let createThemeButton = this.content.querySelector(
               ".create-theme-button"
@@ -5765,6 +5874,10 @@ Is it scaring you off?`,
           }
         });
       };
+      if (Object.keys(themes2).length == 0 && this.currentCategory != "custom") {
+        this.currentTiles.push(new noThemes());
+        await this.renderTiles(this.currentTiles);
+      }
       await addMissingTiles(visibleThemeNames, correctThemeNames);
       await removeIncorrectTiles(visibleThemeNames, correctThemeNames);
       updateLocalCSS();
@@ -5827,51 +5940,31 @@ Is it scaring you off?`,
       await this.renderTiles(tiles);
     }
     updateContentHeight() {
+      console.log(this.currentTiles);
       this.content.style.height = String(this.calculateContentHeight(this.currentTiles)) + "px";
     }
-    createThemeTile(name2, isCustom) {
-      let tile = new ThemeTile2(name2, isCustom);
+    createThemeTile(name2, isFavorite, isCustom) {
+      let tile = new ThemeTile2(name2, this.currentCategory, isFavorite, isCustom);
       tile.element.dataset["name"] = name2;
-      tile.onDuplicate = async () => {
-        let newTheme = await browser.runtime.sendMessage({
-          action: "saveCustomTheme",
-          data: await getTheme(name2)
-        });
-        let result = await browser.runtime.sendMessage({
-          action: "getImage",
-          id: name2
-        });
-        if (result.type == "default") {
-          result.imageData = await getExtensionImage(
-            "theme-backgrounds/" + name2 + ".jpg"
-          );
-          if (!isCustom) {
-            result.type = "link";
-            result.link = name2 + ".jpg";
-          }
-        }
-        if (await isValidImage(result.imageData)) {
-          await browser.runtime.sendMessage({
-            action: "setImage",
-            id: newTheme,
-            data: result
-          });
-        }
+      tile.onDuplicate = async (newThemeName) => {
         if (isCustom) {
           await this.updateSelectorContent();
         }
-        await updateTheme(newTheme);
+        await updateTheme(newThemeName);
         await settingsWindow.loadPage(false);
         await loadQuickSettings();
         await this.changeCategory("custom");
         this.updateContentHeight();
-        startCustomThemeCreator(await getTheme(newTheme), newTheme);
+        startCustomThemeCreator(await getTheme(newThemeName), newThemeName);
       };
-      if (isCustom) {
-        tile.onEdit = async () => {
-          startCustomThemeCreator(await getTheme(name2), name2);
-        };
-      }
+      tile.onFavoriteToggle = async () => {
+        await settingsWindow.loadPage(false);
+        await loadQuickSettings();
+        console.log(this.currentCategory);
+        if (this.currentCategory == "quickSettings") {
+          await this.updateSelectorContent();
+        }
+      };
       return tile;
     }
     async renderThemeTiles() {
@@ -5880,16 +5973,28 @@ Is it scaring you off?`,
         categories: [this.currentCategory],
         includeHidden: true
       });
-      if (!themes2) return;
-      let isCustom = this.currentCategory == "custom";
-      let tiles = Object.keys(themes2).map(
-        (name2) => this.createThemeTile(name2, isCustom)
-      );
-      if (isCustom) {
+      let customThemes = await browser.runtime.sendMessage({
+        action: "getThemes",
+        categories: ["custom"],
+        includeHidden: true
+      });
+      let data2 = await browser.runtime.sendMessage({
+        action: "getSettingsData"
+      });
+      let tiles = Object.keys(themes2).map((name2) => {
+        let isFavorite = data2.appearance.quickSettingsThemes.includes(name2);
+        let isCustom = Object.keys(customThemes).includes(name2);
+        return this.createThemeTile(name2, isFavorite, isCustom);
+      });
+      if (this.currentCategory == "custom") {
         tiles.push(new AddCustomTheme());
       }
       this.currentTiles = tiles;
-      await this.renderTiles(tiles);
+      if (Object.keys(themes2).length == 0 && this.currentCategory != "custom") {
+        this.currentTiles.push(new noThemes());
+        console.log(this.currentTiles);
+      }
+      await this.renderTiles(this.currentTiles);
       await this.updateImages(true);
     }
     async changeCategory(category) {

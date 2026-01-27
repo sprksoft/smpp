@@ -1,8 +1,8 @@
 //@ts-nocheck
 import { loadJSON } from "./json-loader.js";
-import { browser } from "../common/utils.js";
+import { browser, setByPath } from "../common/utils.js";
 import { removeImage } from "./data-background-script.js";
-import { getSettingsData } from "./settings.js";
+import { getSettingsData, setSettingsData } from "./settings.js";
 
 let nativeThemes;
 let categories;
@@ -133,5 +133,13 @@ export async function removeCustomTheme(id) {
   const customThemes = await getAllCustomThemes();
   delete customThemes[id];
   await removeImage(id);
+  let data = await getSettingsData();
+  let quickSettingsThemes = data.appearance.quickSettingsThemes.filter(
+    (name: string) => {
+      return name != id;
+    }
+  );
+  setByPath(data, "appearance.quickSettingsThemes", quickSettingsThemes);
+  await setSettingsData(data);
   await browser.storage.local.set({ customThemes });
 }

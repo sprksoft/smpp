@@ -1293,6 +1293,8 @@ html {
 }
 .glass .smpp-widget {
   background: var(--darken-background) !important;
+  backdrop-filter: blur(15px) !important;
+  border-width: 2px;
 }
 .smpp-widget {
   height: min-content;
@@ -1367,7 +1369,7 @@ html {
   border-radius: 1.5rem;
 }
 .glass .smpp-widget-pannel {
-  backdrop-filter: blur(10px);
+  backdrop-filter: none;
 }
 .smpp-widget-pannel {
   min-width: calc(300px + 1rem * 2);
@@ -3163,6 +3165,25 @@ button.open-theme-editor-button:hover {
 .theme-name-input {
   text-align: center;
   font-size: 1.4rem !important;
+}
+@keyframes removed-theme-tile {
+  0% {
+    scale: 1;
+    opacity: 1;
+  }
+  100% {
+    scale: 0;
+    opacity: 0;
+  }
+}
+.theme-tile.being-removed {
+  animation: removed-theme-tile 0.3s ease-in;
+  scale: 0;
+  opacity: 0;
+}
+.theme-tile.is-favorite svg.heart-icon {
+  fill: var(--color-red) !important;
+  stroke: var(--color-red) !important;
 }
 
 /* src/styles/smpp-styles/assignments.css */
@@ -5427,6 +5448,10 @@ div#smscMain:has(.live__quick-nav) {
 }
 #smscMain .online-session__list-page .listview__row:hover {
   background-color: var(--color-base01) !important;
+}
+.smpp-news-container img {
+  width: auto !important;
+  max-height: 500px !important;
 }
 
 /* src/styles/fixes/login.css */

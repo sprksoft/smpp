@@ -2646,3 +2646,7 @@ div#smscMain:has(.live__quick-nav) {
 #smscMain .online-session__list-page .listview__row:hover {
   background-color: var(--color-base01) !important;
 }
+.smpp-news-container img {
+  width: auto !important;
+  max-height: 500px !important;
+}

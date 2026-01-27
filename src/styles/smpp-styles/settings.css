@@ -1570,3 +1570,25 @@ button.open-theme-editor-button:hover {
   text-align: center;
   font-size: 1.4rem !important;
 }
+
+@keyframes removed-theme-tile {
+  0% {
+    scale: 1;
+    opacity: 1;
+  }
+  100% {
+    scale: 0;
+    opacity: 0;
+  }
+}
+
+.theme-tile.being-removed {
+  animation: removed-theme-tile 0.3s ease-in;
+  scale: 0;
+  opacity: 0;
+}
+
+.theme-tile.is-favorite svg.heart-icon {
+  fill: var(--color-red) !important;
+  stroke: var(--color-red) !important;
+}

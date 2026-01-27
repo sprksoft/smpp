@@ -32,6 +32,8 @@ html {
 }
 .glass .smpp-widget {
   background: var(--darken-background) !important;
+  backdrop-filter: blur(15px) !important;
+  border-width: 2px;
 }
 /* Only use rem's here no em because widgets will be moved to body when they are dragged */
 .smpp-widget {
@@ -123,7 +125,7 @@ html {
   border-radius: 1.5rem;
 }
 .glass .smpp-widget-pannel {
-  backdrop-filter: blur(10px);
+  backdrop-filter: none;
 }
 .smpp-widget-pannel {
   min-width: calc(

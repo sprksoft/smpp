@@ -268,6 +268,14 @@
     const customThemes = await getAllCustomThemes();
     delete customThemes[id];
     await removeImage(id);
+    let data = await getSettingsData();
+    let quickSettingsThemes = data.appearance.quickSettingsThemes.filter(
+      (name) => {
+        return name != id;
+      }
+    );
+    setByPath(data, "appearance.quickSettingsThemes", quickSettingsThemes);
+    await setSettingsData(data);
     await browser.storage.local.set({ customThemes });
   }
 
@@ -479,9 +487,7 @@
         console.log("weatherAppData sent.");
       }
       if (message.action === "getBackgroundImage") {
-        const backgroundImage = await browser.storage.local.get(
-          "backgroundImage"
-        );
+        const backgroundImage = await browser.storage.local.get("backgroundImage");
         await browser.storage.local.remove("backgroundImage");
         sendResponse(backgroundImage);
         console.log("Background image sent.");
