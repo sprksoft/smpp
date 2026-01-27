@@ -30,10 +30,10 @@
   "ldev": {
     "displayName": "Dark Sands",
     "cssProperties": {
-      "--color-accent": "oklch(88.37 27.48 70.54)",
-      "--color-base00": "oklch(4% 1 40)",
-      "--color-base01": "oklch(10% 1 40)",
-      "--color-base02": "oklch(20% 1 40)",
+      "--color-accent": "lch(88.37 27.48 70.54)",
+      "--color-base00": "lch(4% 1 40)",
+      "--color-base01": "lch(10% 1 40)",
+      "--color-base02": "lch(20% 1 40)",
       "--color-base03": "#545251",
       "--color-homepage-sidebars-bg": "#0907071a",
       "--color-splashtext": "#ccccca",
@@ -226,11 +226,11 @@
   "fairyblue": {
     "displayName": "Fairy Blue",
     "cssProperties": {
-      "--color-accent": "oklch(90% 23 260)",
-      "--color-base00": "oklch(68% 23 260)",
-      "--color-base01": "oklch(73% 23 260)",
-      "--color-base02": "oklch(78% 23 260)",
-      "--color-base03": "oklch(83% 23 260)",
+      "--color-accent": "lch(90% 23 260)",
+      "--color-base00": "lch(68% 23 260)",
+      "--color-base01": "lch(73% 23 260)",
+      "--color-base02": "lch(78% 23 260)",
+      "--color-base03": "lch(83% 23 260)",
       "--color-homepage-sidebars-bg": "#c6d4e81a",
       "--color-splashtext": "#e4ffff",
       "--color-text": "#e4ffff",

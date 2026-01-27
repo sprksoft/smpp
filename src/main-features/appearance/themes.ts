@@ -46,6 +46,7 @@ import { loadQuickSettings } from "../settings/quick-settings.js";
 import { applyAppearance, isFirefox } from "../main.js";
 import { createHoverTooltip, createTextInput } from "./ui.js";
 import { isValidImage } from "../../fixes-utils/utils.js";
+import { recreateGlobalChat } from "../globalchat.js";
 
 export let currentThemeName: string;
 export let currentTheme: Theme;
@@ -76,6 +77,7 @@ export async function setTheme(themeName: string) {
   });
 
   await widgetSystemNotifyThemeChange();
+  recreateGlobalChat();
 }
 
 export function getThemeQueryString(theme: Theme) {

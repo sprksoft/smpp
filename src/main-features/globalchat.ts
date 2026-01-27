@@ -42,6 +42,13 @@ export async function openGlobalChat(event, beta = false) {
   gcWindow.show(event);
 }
 
+export function recreateGlobalChat() {
+  if (gcWindow) {
+    gcWindow.remove();
+    gcWindow = null;
+  }
+}
+
 export function createGC() {
   const GlobalChatOpenButton = document.createElement("button");
   GlobalChatOpenButton.title =

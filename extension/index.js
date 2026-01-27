@@ -5171,6 +5171,7 @@ Is it scaring you off?`,
       style.setProperty(key, value);
     });
     await widgetSystemNotifyThemeChange();
+    recreateGlobalChat();
   }
   function getThemeQueryString(theme) {
     let query = "";
@@ -7438,6 +7439,12 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     }
     gcWindow.beta = beta;
     gcWindow.show(event);
+  }
+  function recreateGlobalChat() {
+    if (gcWindow) {
+      gcWindow.remove();
+      gcWindow = null;
+    }
   }
   function createGC() {
     const GlobalChatOpenButton = document.createElement("button");

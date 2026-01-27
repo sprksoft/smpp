@@ -59,7 +59,7 @@ export class BaseWindow {
 
   // Called every time the window is opened
   // Override this in subclass
-  onOpened(): void {}
+  onOpened(): void { }
 
   // Called when window is closed
   onClosed?(): void;
