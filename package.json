@@ -24,6 +24,7 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
+    "browser-image-compression": "^2.0.2",
     "colord": "^2.9.3",
     "node-vibrant": "^4.0.3"
   }

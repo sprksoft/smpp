@@ -1,5 +1,5 @@
 import { browser } from "../common/utils.js";
-
+import type { SMPPImage } from "../main-features/modules/images.js";
 import { fetchDelijnData } from "./api-background-script.js";
 import { loadJSON } from "./json-loader.js";
 
@@ -14,7 +14,7 @@ function getDefaultCustomThemeData() {
   };
 }
 
-let defaultPlantData;
+let defaultPlantData = {};
 async function getDefaultPlantData() {
   if (!defaultPlantData) {
     defaultPlantData = await loadJSON(
@@ -35,7 +35,7 @@ export async function getCustomThemeData() {
   return data.customThemeData || getDefaultCustomThemeData();
 }
 
-let fallBackColorData;
+let fallBackColorData = {};
 async function getFallbackColorData() {
   if (!fallBackColorData) {
     fallBackColorData = await loadJSON(
@@ -67,19 +67,24 @@ export async function getDelijnColorData() {
   }
 }
 
-export async function setImage(id, data) {
+// TODO: Change how images are saved because the images object gets too big
+
+export async function setImage(id: string, data: SMPPImage) {
   const images = (await browser.storage.local.get("images")).images || {};
   images[id] = data;
   await browser.storage.local.set({ images });
 }
 
-export async function getImage(id) {
+export async function getImage(id: string) {
   const images = (await browser.storage.local.get("images")).images || {};
-  if (!images[id]) return { type: "default", link: null, imageData: null };
+  console.log(images);
+  console.log(images[id]);
+  if (!images[id])
+    return { type: "default", link: "", imageData: "" } as SMPPImage;
   return images[id];
 }
 
-export async function removeImage(id) {
+export async function removeImage(id: string) {
   const images = (await browser.storage.local.get("images")).images || {};
   delete images[id];
   await browser.storage.local.set({ images });

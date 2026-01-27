@@ -107,7 +107,7 @@ export async function applyProfilePicture(profile: Settings["profile"]) {
       const onDefault = () => {
         return getPfpLink(profile.username || originalUsername);
       };
-      let result = await getImageURL("profilePicture", onDefault);
+      let result = await getImageURL("profilePicture", onDefault, true);
 
       profileImageURL = result.url;
       break;

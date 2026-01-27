@@ -471,17 +471,22 @@ export class ThemeTile extends Tile {
 
   async updateImage(currentTheme: string, forceReload = false) {
     if (this.name == currentTheme || forceReload) {
-      let imageURL = await getImageURL(this.name, async () => {
-        return await getExtensionImage(
-          "theme-backgrounds/" + this.name + ".jpg"
-        );
-      });
+      let imageURL = await getImageURL(
+        this.name,
+        async () => {
+          return await getExtensionImage(
+            "theme-backgrounds/compressed/" + this.name + ".jpg"
+          );
+        },
+        true
+      );
       if (await isValidImage(await imageURL.url)) {
         this.element.style.setProperty(
           "--background-image-local",
           `url(${await imageURL.url})`
         );
       } else {
+        console.log(imageURL.url, "is not valdid");
         this.element.style.setProperty("--background-image-local", `url()`);
       }
 
@@ -510,7 +515,7 @@ export class ThemeTile extends Tile {
         if (firefoxImageContainer) {
           firefoxImageContainer.remove();
           this.element.prepend(this.createImageContainer());
-          this.updateImage(currentTheme, forceReload);
+          await this.updateImage(currentTheme, forceReload);
         }
       }
     }
@@ -567,21 +572,39 @@ export class ThemeTile extends Tile {
       action: "getImage",
       id: this.name,
     })) as SMPPImage;
+    let compressedResult = (await browser.runtime.sendMessage({
+      action: "getImage",
+      id: "compressed-" + this.name,
+    })) as SMPPImage;
 
     if (result.type == "default") {
       result.imageData = await getExtensionImage(
         "theme-backgrounds/" + this.name + ".jpg"
       );
+      compressedResult.imageData = await getExtensionImage(
+        "theme-backgrounds/compressed/" + this.name + ".jpg"
+      );
       if (!this.isCustom) {
         result.type = "link";
         result.link = this.name + ".jpg";
+
+        compressedResult.type = "link";
+        compressedResult.link = this.name + ".jpg";
       }
     }
+
     if (await isValidImage(result.imageData)) {
       await browser.runtime.sendMessage({
         action: "setImage",
         id: newThemeName,
         data: result,
+      });
+    }
+    if (await isValidImage(compressedResult.imageData)) {
+      await browser.runtime.sendMessage({
+        action: "setImage",
+        id: "compressed-" + newThemeName,
+        data: compressedResult,
       });
     }
     this.onDuplicate(newThemeName);
@@ -1011,7 +1034,6 @@ export class ThemeSelector {
   }
 
   updateContentHeight() {
-    console.log(this.currentTiles);
     this.content.style.height =
       String(this.calculateContentHeight(this.currentTiles)) + "px";
   }
@@ -1025,10 +1047,9 @@ export class ThemeSelector {
         await this.updateSelectorContent();
       }
       await updateTheme(newThemeName);
-      await settingsWindow.loadPage(false);
-      await loadQuickSettings();
       await this.changeCategory("custom");
-      this.updateContentHeight();
+      Promise.all([settingsWindow.loadPage(false), loadQuickSettings()]);
+
       startCustomThemeCreator(await getTheme(newThemeName), newThemeName);
     };
     tile.onFavoriteToggle = async () => {
@@ -1359,11 +1380,18 @@ export class CustomThemeCreator extends BaseWindow {
 
     if (result.type == "default") {
       result.imageData = await getExtensionImage(
-        "theme-backgrounds/" + this.name + ".jpg"
+        "theme-backgrounds/compressed/" + this.name + ".jpg"
       );
     }
     if (await isValidImage(result.imageData)) {
-      this.backgroundImagePreview.src = result.imageData;
+      let url = await getImageURL(
+        this.name,
+        () => {
+          return "a";
+        },
+        true
+      );
+      this.backgroundImagePreview.src = url.url;
       this.content.classList.remove("no-image-available");
     } else {
       this.backgroundImagePreview.src = "";

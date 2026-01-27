@@ -1,4 +1,4 @@
-export async function fetchWeatherData(location) {
+export async function fetchWeatherData(location: string) {
   const apiKey = "2b6f9b6dbe5064dd770f29d4b229a22c";
   try {
     console.log("Fetching Weather data...");
@@ -15,7 +15,7 @@ export async function fetchWeatherData(location) {
     };
   }
 }
-export async function fetchDelijnData(apiUrl) {
+export async function fetchDelijnData(apiUrl: string) {
   const apiKey = "ddb68605719d4bb8b6444b6871cefc7a";
   try {
     console.log("Fetching Delijn data...");

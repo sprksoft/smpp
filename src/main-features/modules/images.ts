@@ -1,8 +1,8 @@
-// @ts-nocheck
 import { createTextInput } from "../appearance/ui.js";
 import { imageInputSvg } from "../../fixes-utils/svgs.js";
 import { isAbsoluteUrl, browser } from "../../common/utils.js";
 import { isFirefox } from "../main.js";
+import imageCompression, { type Options } from "browser-image-compression";
 
 export type SMPPImage = {
   type: string;
@@ -11,32 +11,21 @@ export type SMPPImage = {
 };
 
 export class ImageSelector {
-  constructor(name) {
+  name: string;
+  constructor(name: string) {
     this.name = name;
 
     this._bindEvents();
   }
 
-  id: string | null = null;
-  clearButton = null;
-  linkInput = null;
-  fileInput = null;
-  fileInputButton = null;
+  id: string = "";
+  clearButton = document.createElement("button");
+  linkInput = createTextInput("", "Link");
+  fileInput = document.createElement("input");
+  fileInputButton = document.createElement("button");
   linkInputContainer = this.createLinkImageInputContainer();
   fileInputContainer = this.createImageFileInputContainer();
   fullContainer = this.createFullFileInput();
-
-  readFileAsDataURL(file) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onerror = () => {
-        reader.abort();
-        reject(new Error("Failed to read file"));
-      };
-      reader.onload = () => resolve(reader.result);
-      reader.readAsDataURL(file);
-    });
-  }
 
   onStore() {}
 
@@ -44,13 +33,11 @@ export class ImageSelector {
     const fileInputContainer = document.createElement("div");
     fileInputContainer.classList.add("file-input-container");
 
-    this.fileInput = document.createElement("input");
     this.fileInput.style.display = "none";
-    this.fileInput.tabindex = "-1";
+    this.fileInput.tabIndex = -1;
     this.fileInput.type = "file";
     this.fileInput.accept = "image/*";
 
-    this.fileInputButton = document.createElement("button");
     this.fileInputButton.type = "button";
     this.fileInputButton.classList.add("smpp-file-input-button");
     this.fileInputButton.setAttribute("aria-label", "Choose image file");
@@ -70,9 +57,9 @@ export class ImageSelector {
     const linkInputContainer = document.createElement("div");
     linkInputContainer.classList.add("link-input-container");
 
-    this.clearButton = document.createElement("button");
+    this.clearButton;
     this.clearButton.type = "button";
-    this.clearButton.tabIndex = "-1";
+    this.clearButton.tabIndex = -1;
     this.clearButton.classList.add("smpp-link-clear-button");
     this.clearButton.setAttribute("aria-label", "Clear link");
     this.clearButton.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke-width="2">
@@ -80,8 +67,6 @@ export class ImageSelector {
           <path d="M7 7.00006L17 17.0001M7 17.0001L17 7.00006" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
           </g>
         </svg>`;
-
-    this.linkInput = createTextInput(null, "Link");
 
     linkInputContainer.appendChild(this.linkInput);
     linkInputContainer.appendChild(this.clearButton);
@@ -124,47 +109,104 @@ export class ImageSelector {
     });
   }
 
+  async getCompressedData(file: File): Promise<string> {
+    try {
+      const options: Options = {
+        maxSizeMB: 0.2, // More aggressive compression
+        maxWidthOrHeight: 400, // Higher resolution for better quality
+        useWebWorker: false,
+      };
+
+      const compressedFile = await imageCompression(file, options);
+      const dataUrl = await imageCompression.getDataUrlFromFile(compressedFile);
+
+      return dataUrl;
+    } catch (error) {
+      console.error("Compression failed:", error);
+      return await imageCompression.getDataUrlFromFile(file);
+    }
+  }
+
   async storeImage() {
-    let data = (await browser.runtime.sendMessage({
-      action: "getImage",
-      id: this.name,
-    })) as SMPPImage;
+    try {
+      let data = (await browser.runtime.sendMessage({
+        action: "getImage",
+        id: this.id,
+      })) as SMPPImage;
 
-    if (!data) data = { imageData: null, link: "", type: "default" };
+      if (!data) {
+        data = { imageData: "", link: "", type: "default" };
+      }
 
-    const file = this.fileInput.files && this.fileInput.files[0];
-    if (file) {
-      const dataUrl = await this.readFileAsDataURL(file);
-      data.imageData = dataUrl;
-      data.link = file.name;
-      data.type = "file";
+      const compressedId = `compressed-${this.id}`;
+      let compressedImage: SMPPImage = {
+        link: data.link,
+        imageData: data.imageData,
+        type: data.type,
+      };
 
-      this.fileInput.value = "";
-    } else {
-      const linkValue = (this.linkInput.value || "").trim();
-      if (linkValue === "") {
-        data.type = "default";
-        data.link = "";
-        data.imageData = null;
+      // Handle file upload
+      const file = this.fileInput.files?.[0];
+      if (file) {
+        const [originalDataUrl, compressedDataUrl] = await Promise.all([
+          imageCompression.getDataUrlFromFile(file),
+          this.getCompressedData(file),
+        ]);
+
+        data.imageData = originalDataUrl;
+        data.link = file.name;
+        data.type = "file";
+
+        compressedImage.imageData = compressedDataUrl;
+        compressedImage.link = file.name;
+        compressedImage.type = "file";
+
+        this.fileInput.value = "";
       } else {
-        data.link = linkValue;
-        if (isAbsoluteUrl(linkValue)) {
+        const linkValue = this.linkInput.value?.trim() || "";
+
+        if (linkValue === "") {
+          data.type = "default";
+          data.link = "";
+          data.imageData = "";
+
+          compressedImage.type = "default";
+          compressedImage.link = "";
+          compressedImage.imageData = "";
+        } else if (isAbsoluteUrl(linkValue)) {
           data.type = "link";
+          data.link = linkValue;
           data.imageData = linkValue;
+
+          compressedImage.type = "link";
+          compressedImage.link = linkValue;
+          compressedImage.imageData = linkValue;
         } else {
           data.type = "default";
-          data.imageData = null;
+          data.link = "";
+          data.imageData = "";
+
+          compressedImage.type = "default";
+          compressedImage.link = "";
+          compressedImage.imageData = "";
         }
       }
-    }
 
-    await browser.runtime.sendMessage({
-      action: "setImage",
-      id: this.id,
-      data: data,
-    });
-    this.loadImageData();
-    this.onStore();
+      await browser.runtime.sendMessage({
+        action: "setImage",
+        id: this.id,
+        data: data,
+      });
+      await browser.runtime.sendMessage({
+        action: "setImage",
+        id: compressedId,
+        data: compressedImage,
+      });
+      await this.loadImageData();
+      this.onStore();
+    } catch (error) {
+      console.error("Failed to store image:", error);
+    }
   }
 
   async loadImageData() {
@@ -192,18 +234,26 @@ export class ImageSelector {
 }
 
 // Returns { url: string|null, type: file, link, default }
-export async function getImageURL(id, onDefault) {
+export async function getImageURL(
+  id: string,
+  onDefault: Function,
+  getCompressed: boolean
+) {
   let image;
+  if (getCompressed) {
+    id = "compressed-" + id;
+  }
   try {
     image = await browser.runtime.sendMessage({ action: "getImage", id });
+    console.log(image);
   } catch (err) {
     console.warn("[getImageURL] Failed to get image from background:", err);
-    return { url: onDefault(), type: null };
+    return { url: await onDefault(), type: null };
   }
 
   // Default
   if (image.type === "default") {
-    return { url: onDefault(), type: image.type };
+    return { url: await onDefault(), type: image.type };
   }
 
   // Link
@@ -226,6 +276,6 @@ export async function getImageURL(id, onDefault) {
     return { url: objectURL, type: image.type };
   } catch (err) {
     console.warn("[getImageURL] Failed to create Blob URL:", err);
-    return { url: onDefault(), type: image.type };
+    return { url: await onDefault(), type: image.type };
   }
 }

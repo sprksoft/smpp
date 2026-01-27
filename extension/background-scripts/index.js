@@ -44,7 +44,7 @@
     return object;
   }
 
-  // src/background-scripts/api-background-script.js
+  // src/background-scripts/api-background-script.ts
   async function fetchWeatherData(location) {
     const apiKey = "2b6f9b6dbe5064dd770f29d4b229a22c";
     try {
@@ -86,7 +86,7 @@
     return await response.json();
   }
 
-  // src/background-scripts/data-background-script.js
+  // src/background-scripts/data-background-script.ts
   function getDefaultCustomThemeData() {
     return {
       color_accent: "#a3a2ec",
@@ -97,7 +97,7 @@
       color_text: "#ede3e3"
     };
   }
-  var defaultPlantData;
+  var defaultPlantData = {};
   async function getDefaultPlantData() {
     if (!defaultPlantData) {
       defaultPlantData = await loadJSON(
@@ -115,7 +115,7 @@
     let data = await browser.storage.local.get("customThemeData");
     return data.customThemeData || getDefaultCustomThemeData();
   }
-  var fallBackColorData;
+  var fallBackColorData = {};
   async function getFallbackColorData() {
     if (!fallBackColorData) {
       fallBackColorData = await loadJSON(
@@ -151,7 +151,10 @@
   }
   async function getImage(id) {
     const images = (await browser.storage.local.get("images")).images || {};
-    if (!images[id]) return { type: "default", link: null, imageData: null };
+    console.log(images);
+    console.log(images[id]);
+    if (!images[id])
+      return { type: "default", link: "", imageData: "" };
     return images[id];
   }
   async function removeImage(id) {
@@ -268,6 +271,7 @@
     const customThemes = await getAllCustomThemes();
     delete customThemes[id];
     await removeImage(id);
+    await removeImage("compressed-" + id);
     let data = await getSettingsData();
     let quickSettingsThemes = data.appearance.quickSettingsThemes.filter(
       (name) => {

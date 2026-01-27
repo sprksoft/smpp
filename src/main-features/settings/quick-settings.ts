@@ -252,11 +252,15 @@ class ThemeOptiony {
       action: "getSettingsData",
     })) as Settings;
     if (this.name == data.appearance.theme || forceReload) {
-      let imageURL = await getImageURL(this.name, async () => {
-        return await getExtensionImage(
-          "theme-backgrounds/" + this.name + ".jpg"
-        );
-      });
+      let imageURL = await getImageURL(
+        this.name,
+        async () => {
+          return await getExtensionImage(
+            "theme-backgrounds/" + this.name + ".jpg"
+          );
+        },
+        true
+      );
 
       this.element.style.setProperty(
         "--background-image-local",

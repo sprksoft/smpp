@@ -133,6 +133,7 @@ export async function removeCustomTheme(id) {
   const customThemes = await getAllCustomThemes();
   delete customThemes[id];
   await removeImage(id);
+  await removeImage("compressed-" + id);
   let data = await getSettingsData();
   let quickSettingsThemes = data.appearance.quickSettingsThemes.filter(
     (name: string) => {
