@@ -33,7 +33,7 @@ import {
   createWidgetSystem,
   createWidgetEditModeButton,
 } from "../widgets/widgets.js";
-import { createGC } from "./globalchat.js";
+import { createGC, setGlobalGlass } from "./globalchat.js";
 import {
   createQuickSettingsButton,
   createQuickSettings,
@@ -115,7 +115,7 @@ function changeFont() {
 function fixCoursesSearch() {
   document
     .getElementById("courseSearch")
-    ?.addEventListener("keydown", function (event) {
+    ?.addEventListener("keydown", function(event) {
       if (event.key === "Enter") {
         event.preventDefault();
 
@@ -251,6 +251,7 @@ export async function applyAppearance(appearance: Settings["appearance"]) {
   } else {
     document.body.classList.remove("glass");
   }
+  setGlobalGlass(appearance.glass);
 
   await setTheme(appearance.theme);
   setBackground(appearance);

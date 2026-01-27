@@ -7414,9 +7414,10 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     beta: "https://gcbeta.smartschoolplusplus.com"
   };
   var GlobalChatWindow = class extends BaseWindow {
-    beta;
     iframe;
     gcContent;
+    beta;
+    glass;
     constructor(hidden = true) {
       super("global_chat_window", hidden);
     }
@@ -7426,12 +7427,13 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       const queryString = getThemeQueryString(currentTheme);
       this.iframe = document.createElement("iframe");
       this.iframe.style = "width:100%; height:100%; border:none";
-      this.iframe.src = GC_DOMAINS[this.beta ? "beta" : "main"] + "/v1?" + queryString;
+      this.iframe.src = GC_DOMAINS[this.beta ? "beta" : "main"] + "/v1?" + queryString + "&glass=" + gcGlass;
       this.gcContent.appendChild(this.iframe);
       return this.gcContent;
     }
   };
   var gcWindow;
+  var gcGlass;
   async function openGlobalChat(event, beta = false) {
     if (!gcWindow || !gcWindow.element?.isConnected) {
       gcWindow = new GlobalChatWindow();
@@ -7445,6 +7447,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       gcWindow.remove();
       gcWindow = null;
     }
+  }
+  function setGlobalGlass(glass) {
+    gcGlass = glass;
   }
   function createGC() {
     const GlobalChatOpenButton = document.createElement("button");
@@ -11200,6 +11205,7 @@ ${code}`;
     } else {
       document.body.classList.remove("glass");
     }
+    setGlobalGlass(appearance.glass);
     await setTheme(appearance.theme);
     setBackground(appearance);
     updateNews(appearance.news);

@@ -11,9 +11,10 @@ const GC_DOMAINS = {
 };
 
 class GlobalChatWindow extends BaseWindow {
-  beta;
-  iframe;
-  gcContent;
+  iframe: HTMLIFrameElement;
+  gcContent: HTMLDivElement;
+  beta: boolean;
+  glass: boolean;
   constructor(hidden = true) {
     super("global_chat_window", hidden);
   }
@@ -25,13 +26,14 @@ class GlobalChatWindow extends BaseWindow {
     this.iframe = document.createElement("iframe");
     this.iframe.style = "width:100%; height:100%; border:none";
     this.iframe.src =
-      GC_DOMAINS[this.beta ? "beta" : "main"] + "/v1?" + queryString;
+      GC_DOMAINS[this.beta ? "beta" : "main"] + "/v1?" + queryString + "&glass=" + gcGlass;
     this.gcContent.appendChild(this.iframe);
     return this.gcContent;
   }
 }
 
-let gcWindow;
+let gcWindow: GlobalChatWindow;
+let gcGlass: boolean;
 
 export async function openGlobalChat(event, beta = false) {
   if (!gcWindow || !gcWindow.element?.isConnected) {
@@ -47,6 +49,9 @@ export function recreateGlobalChat() {
     gcWindow.remove();
     gcWindow = null;
   }
+}
+export function setGlobalGlass(glass: boolean) {
+  gcGlass = glass;
 }
 
 export function createGC() {

@@ -1853,6 +1853,9 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   background: var(--darken-background);
   backdrop-filter: blur(20px);
 }
+.glass #global_chat_window {
+  backdrop-filter: none; /* Filters can't stack so disable to allow gc glass */
+}
 
 .base-window {
   overflow: clip;
