@@ -78,26 +78,10 @@ export async function setTheme(themeName: string) {
   await widgetSystemNotifyThemeChange();
 }
 
-function isBasicEntry(entry: string) {
-  let basicEntries = [
-    "--color-base00",
-    "--color-base01",
-    "--color-base02",
-    "--color-base03",
-    "--color-accent",
-    "--color-text",
-  ];
-  return basicEntries.includes(entry);
-}
-
 export function getThemeQueryString(theme: Theme) {
   let query = "";
   Object.entries(theme.cssProperties).forEach(([key, value]) => {
-    if (isBasicEntry(key)) {
-      query += `&${key.slice(2)}=${
-        value.startsWith("#") ? value.substring(1) : value
-      }`;
-    }
+    query += `&${key.slice(2)}=${value.startsWith("#") ? value.substring(1) : value}`;
   });
   return query;
 }
@@ -182,7 +166,7 @@ class ColorCursor {
   }
 
   // Overwrite this if needed
-  onDrag() {}
+  onDrag() { }
 
   updateCursorPosition() {
     this.element.style.left = `${this.xPos}%`;
@@ -356,7 +340,7 @@ export class ColorPicker {
     return this.element;
   }
 
-  async onChange() {}
+  async onChange() { }
 }
 
 export class Tile {
@@ -374,15 +358,15 @@ export class Tile {
     return this.element;
   }
 
-  async updateImage(currentTheme: string, forceReload = false) {}
+  async updateImage(currentTheme: string, forceReload = false) { }
 
   // Overide this in the implementation
-  updateSelection() {}
+  updateSelection() { }
   // Overide in de implementation
-  async onClick(e: MouseEvent) {}
+  async onClick(e: MouseEvent) { }
 
   // Overide this in the implementation
-  async createContent() {}
+  async createContent() { }
 }
 
 export class ThemeTile extends Tile {
@@ -602,10 +586,10 @@ export class ThemeTile extends Tile {
   }
 
   // Overide in de implementation
-  async onFavoriteToggle() {}
+  async onFavoriteToggle() { }
 
   // Overide in de implementation
-  async onDuplicate(newThemeName: string) {}
+  async onDuplicate(newThemeName: string) { }
 }
 
 async function updateTheme(name: string) {
@@ -1521,7 +1505,7 @@ export class CustomThemeCreator extends BaseWindow {
         return { input, label };
       }
 
-      updateLogo(element: HTMLLabelElement, state: boolean) {}
+      updateLogo(element: HTMLLabelElement, state: boolean) { }
 
       load() {
         this.updateLogo(this.label, this.element.checked);

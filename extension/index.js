@@ -5172,23 +5172,10 @@ Is it scaring you off?`,
     });
     await widgetSystemNotifyThemeChange();
   }
-  function isBasicEntry(entry) {
-    let basicEntries = [
-      "--color-base00",
-      "--color-base01",
-      "--color-base02",
-      "--color-base03",
-      "--color-accent",
-      "--color-text"
-    ];
-    return basicEntries.includes(entry);
-  }
   function getThemeQueryString(theme) {
     let query = "";
     Object.entries(theme.cssProperties).forEach(([key, value]) => {
-      if (isBasicEntry(key)) {
-        query += `&${key.slice(2)}=${value.startsWith("#") ? value.substring(1) : value}`;
-      }
+      query += `&${key.slice(2)}=${value.startsWith("#") ? value.substring(1) : value}`;
     });
     return query;
   }
