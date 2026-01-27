@@ -348,5 +348,19 @@
       "--color-text": "#e0e0e0",
       "--darken-background": "#1010104d"
     }
+  },
+  "otters": {
+    "cssProperties": {
+      "--color-accent": "#fcc464",
+      "--color-base00": "#09181f",
+      "--color-base01": "#0c3649",
+      "--color-base02": "#135675",
+      "--color-base03": "#1a76a1",
+      "--color-homepage-sidebars-bg": "#050e131a",
+      "--color-splashtext": "#fff1d7",
+      "--color-text": "#fff1d7",
+      "--darken-background": "#050e134d"
+    },
+    "displayName": "Sea Otters"
   }
 }

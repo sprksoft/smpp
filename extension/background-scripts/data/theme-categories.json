@@ -14,12 +14,20 @@
     "vax",
     "sand",
     "ocean",
-    "pizza",
+    "otters",
     "galaxy",
     "error",
     "smkerst"
   ],
-  "light": ["white", "summer", "pink", "japan", "fairyblue", "boringwhite"],
+  "light": [
+    "white",
+    "summer",
+    "pink",
+    "japan",
+    "fairyblue",
+    "boringwhite",
+    "pizza"
+  ],
   "seasonal": ["fall", "smkerst", "winter", "summer", "matcha"],
   "hidden": [
     "fairyblue",

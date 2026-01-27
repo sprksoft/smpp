@@ -3019,13 +3019,17 @@ button.open-theme-editor-button:hover {
   appearance: none;
   display: none;
 }
+.enableAnimations .preview-image-container,
+.enableAnimations .theme-controls-container,
+.enableAnimations .theme-generation-sub-container {
+  transition: all 0.3s ease-in-out;
+}
 .preview-image-container {
   display: flex;
   flex-direction: row;
   border-radius: 2rem;
   background-color: transparent !important;
   box-shadow: 0px 2px 10px 0px var(--color-shadow);
-  transition: all 0.3s ease-in-out;
   padding: 0.5rem;
 }
 #customThemeCreator .preview-image-container.open:not(.aaaa) {
@@ -3036,7 +3040,6 @@ button.open-theme-editor-button:hover {
   flex-direction: column;
   gap: 1rem;
   overflow: hidden;
-  transition: all 0.3s ease-in-out;
   box-sizing: content-box;
   padding-right: 0;
   z-index: 0;
@@ -3064,7 +3067,6 @@ button.open-theme-editor-button:hover {
   border: 2px solid var(--color-base03);
   border-radius: 1.5rem;
   transform: translateX(-100%);
-  transition: all 0.3s ease-in-out;
   position: absolute;
   box-shadow: 0px 2px 10px 0px var(--color-shadow);
 }
@@ -3081,13 +3083,15 @@ button.open-theme-editor-button:hover {
 .preview-image-container.open .theme-generation-sub-container {
   transform: translateX(0px);
 }
+.enableAnimations .custom-theme-maker:not(.no-image-available) .preview-image-container.open .theme-controls-container {
+  animation: openThemeGenerator 0.3s ease-in-out forwards;
+}
 .custom-theme-maker:not(.no-image-available) .preview-image-container.open .theme-controls-container {
   z-index: 20;
   width: calc(5rem + 4px - 0.2rem);
   padding-left: 0.5rem;
   filter: blur(0px);
   overflow: visible;
-  animation: openThemeGenerator 0.3s ease-in-out forwards;
 }
 .theme-generation-sub-container:last-child {
   bottom: 0;
