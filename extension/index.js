@@ -9259,11 +9259,14 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   var gcWindow;
   var gcGlass;
   async function openGlobalChat(event, beta = false) {
+    if (gcWindow?.beta != beta) {
+      recreateGlobalChat();
+    }
     if (!gcWindow || !gcWindow.element?.isConnected) {
       gcWindow = new GlobalChatWindow();
+      gcWindow.beta = beta;
       await gcWindow.create();
     }
-    gcWindow.beta = beta;
     gcWindow.show(event);
   }
   function recreateGlobalChat() {
@@ -9550,6 +9553,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             return;
           case "gcbeta":
             openGlobalChat(null, true);
+            console.log("a");
             return;
           case "dizzy":
             const styleEl = document.createElement("style");
@@ -10494,17 +10498,22 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       ctx.fill();
     }
     onGameDraw(ctx, dt) {
+      if (!this.ball) return;
       const w2 = this.canvas.width;
       const h4 = this.canvas.height;
-      ctx.fillStyle = getThemeVar("--color-base01");
+      const colorBase = getThemeVar("--color-base01");
+      const colorText = getThemeVar("--color-text");
+      const colorAccent = getThemeVar("--color-accent");
+      ctx.fillStyle = colorBase;
       ctx.fillRect(0, 0, w2, h4);
       const speed = PONG_PADDLE_SPEED * this.getOpt("speed") * 0.01;
-      if (this.leftUp) this.leftY -= speed * dt;
-      if (this.leftDown) this.leftY += speed * dt;
+      const paddleDelta = speed * dt;
+      if (this.leftUp) this.leftY -= paddleDelta;
+      if (this.leftDown) this.leftY += paddleDelta;
       this.leftY = Math.max(0, Math.min(h4 - PONG_PADDLE_HEIGHT, this.leftY));
       const aiCenter = this.rightY + PONG_PADDLE_HEIGHT / 2;
       const diff = this.ball.y - aiCenter;
-      const maxMove = speed * dt * 0.8;
+      const maxMove = paddleDelta * 0.8;
       if (Math.abs(diff) > maxMove) {
         this.rightY += Math.sign(diff) * maxMove;
       } else {
@@ -10516,6 +10525,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       b3.y += b3.dy * dt;
       if (b3.y < PONG_BALL_RADIUS || b3.y > h4 - PONG_BALL_RADIUS) {
         b3.dy *= -1;
+        b3.y = Math.max(PONG_BALL_RADIUS, Math.min(h4 - PONG_BALL_RADIUS, b3.y));
       }
       if (b3.x < PONG_PADDLE_WIDTH + PONG_BALL_RADIUS && b3.y > this.leftY && b3.y < this.leftY + PONG_PADDLE_HEIGHT) {
         b3.dx *= -1;
@@ -10534,17 +10544,17 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         b3.dx = Math.sign(b3.dx) * Math.min(Math.abs(b3.dx), MAX_SPEED);
         b3.dy = Math.sign(b3.dy) * Math.min(Math.abs(b3.dy), MAX_SPEED);
       }
-      if (b3.x < 0) {
+      if (b3.x < -PONG_BALL_RADIUS) {
         this.stopGame();
       }
-      if (b3.x > w2) {
+      if (b3.x > w2 + PONG_BALL_RADIUS) {
         this.onGameStart();
       }
-      ctx.fillStyle = getThemeVar("--color-text");
+      ctx.fillStyle = colorText;
       ctx.beginPath();
       ctx.arc(b3.x, b3.y, PONG_BALL_RADIUS, 0, Math.PI * 2);
       ctx.fill();
-      ctx.fillStyle = getThemeVar("--color-accent");
+      ctx.fillStyle = colorAccent;
       this.drawRoundedRect(
         ctx,
         0,
@@ -10561,7 +10571,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         PONG_PADDLE_HEIGHT,
         3
       );
-      ctx.strokeStyle = getThemeVar("--color-text");
+      ctx.strokeStyle = colorText;
       ctx.setLineDash([4, 5]);
       ctx.beginPath();
       ctx.moveTo(w2 / 2, 0);

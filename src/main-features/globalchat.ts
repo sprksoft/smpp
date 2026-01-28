@@ -36,11 +36,14 @@ let gcWindow: GlobalChatWindow;
 let gcGlass: boolean;
 
 export async function openGlobalChat(event, beta = false) {
+  if (gcWindow?.beta != beta) {
+    recreateGlobalChat();
+  }
   if (!gcWindow || !gcWindow.element?.isConnected) {
     gcWindow = new GlobalChatWindow();
+    gcWindow.beta = beta;
     await gcWindow.create();
   }
-  gcWindow.beta = beta;
   gcWindow.show(event);
 }
 
