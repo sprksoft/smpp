@@ -1,5 +1,8 @@
 import { browser } from "../common/utils.js";
-import type { SMPPImage } from "../main-features/modules/images.js";
+import type {
+  SMPPImage,
+  SMPPImageMetaData,
+} from "../main-features/modules/images.js";
 import { fetchDelijnData } from "./api-background-script.js";
 import { loadJSON } from "./json-loader.js";
 
@@ -16,7 +19,7 @@ function getDefaultCustomThemeData() {
 
 let defaultPlantData = {};
 async function getDefaultPlantData() {
-  if (!defaultPlantData) {
+  if (Object.keys(defaultPlantData).length == 0) {
     defaultPlantData = await loadJSON(
       "background-scripts/data/default-plant-data.json"
     );
@@ -37,7 +40,7 @@ export async function getCustomThemeData() {
 
 let fallBackColorData = {};
 async function getFallbackColorData() {
-  if (!fallBackColorData) {
+  if (Object.keys(fallBackColorData).length == 0) {
     fallBackColorData = await loadJSON(
       "background-scripts/data/delijn-kleuren.json"
     );
@@ -67,25 +70,42 @@ export async function getDelijnColorData() {
   }
 }
 
-// TODO: Change how images are saved because the images object gets too big
-
 export async function setImage(id: string, data: SMPPImage) {
-  const images = (await browser.storage.local.get("images")).images || {};
-  images[id] = data;
-  await browser.storage.local.set({ images });
+  const imagesMetaData =
+    (await browser.storage.local.get("images")).images || {};
+
+  imagesMetaData[id] = data.metaData;
+  await browser.storage.local.set({ images: imagesMetaData });
+
+  const customId = "SMPPImage-" + id;
+  await browser.storage.local.set({ [customId]: data.imageData });
 }
 
 export async function getImage(id: string) {
-  const images = (await browser.storage.local.get("images")).images || {};
-  console.log(images);
-  console.log(images[id]);
-  if (!images[id])
-    return { type: "default", link: "", imageData: "" } as SMPPImage;
-  return images[id];
+  const imagesMetaData =
+    (await browser.storage.local.get("images")).images || {};
+  let metaData = imagesMetaData[id] as SMPPImageMetaData;
+  if (!metaData)
+    return {
+      metaData: { type: "default", link: "" },
+      imageData: "",
+    } as SMPPImage;
+
+  const customId = "SMPPImage-" + id;
+  const image: string =
+    (await browser.storage.local.get(customId))[customId] || "";
+
+  return {
+    metaData,
+    imageData: image,
+  } as SMPPImage;
 }
 
 export async function removeImage(id: string) {
-  const images = (await browser.storage.local.get("images")).images || {};
-  delete images[id];
-  await browser.storage.local.set({ images });
+  const imagesMetaData =
+    (await browser.storage.local.get("images")).images || {};
+  delete imagesMetaData[id];
+  const customId = "SMPPImage-" + id;
+  await browser.storage.local.remove([customId]);
+  await browser.storage.local.set({ images: imagesMetaData });
 }

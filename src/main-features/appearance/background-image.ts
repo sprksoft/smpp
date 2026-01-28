@@ -35,7 +35,7 @@ export async function setBackground(appearance: Settings["appearance"]) {
     id: appearance.theme,
   })) as SMPPImage;
 
-  if (result.type == "default") {
+  if (result.metaData.type == "default") {
     result.imageData = await getExtensionImage(
       "theme-backgrounds/" + appearance.theme + ".jpg"
     );

@@ -139,10 +139,13 @@
   color: var(--color-text) !important;
   box-shadow: 0px 2px 10px 0px var(--color-shadow) !important;
 }
+.glass .todo-column__container {
+  background-color: var(--darken-background) !important;
+  backdrop-filter: var(--small-blur) !important;
+}
 
 .todo-column__container {
-  background-color: var(--darken-background) !important;
-  backdrop-filter: blur(5px) !important;
+  background: var(--color-base01) !important;
   border-radius: 2rem !important;
   padding: 1rem !important;
 }
@@ -168,12 +171,19 @@
   border-radius: 0.5rem !important;
 }
 
+.glass .listview__row.js-listview-row.todo-column__row:hover,
+.glass .listview__row.js-listview-row.todo-column__row--resolved:hover,
+.glass .content__day-column.js-day-column.highlight,
+.glass .header__day.header__wholeday-column.js-wholeday-column.highlight {
+  background-color: var(--darken-background) !important;
+  backdrop-filter: var(--small-blur) !important;
+}
+
 .listview__row.js-listview-row.todo-column__row:hover,
 .listview__row.js-listview-row.todo-column__row--resolved:hover,
 .content__day-column.js-day-column.highlight,
 .header__day.header__wholeday-column.js-wholeday-column.highlight {
-  background-color: var(--darken-background) !important;
-  backdrop-filter: blur(5px) !important;
+  background-color: var(--color-base02) !important;
   border-radius: 1.25rem !important;
 }
 
@@ -184,7 +194,7 @@
 .listview__row.js-listview-row.todo-column__row:has(
     .todo-column__date-cell
   ):not(:first-of-type) {
-  margin-top: 1rem !important;
+  margin-top: 0.5rem !important;
 }
 
 .todo-column__container .todo-column__pinned > * {
@@ -240,10 +250,13 @@ hr.separator.todo-column__pinned__seperator {
 .twinbutton__button:hover {
   background-color: var(--darken-background) !important;
 }
+.glass .planner-header .header__borderdropdowncontainer {
+  background: var(--darken-background) !important;
+  backdrop-filter: var(--small-blur) !important;
+}
 
 .planner-header .header__borderdropdowncontainer {
-  background: var(--darken-background) !important;
-  backdrop-filter: blur(5px) !important;
+  background: var(--color-base01) !important;
   border-radius: 1rem !important;
   border: 2px solid transparent !important;
 }
@@ -255,10 +268,13 @@ hr.separator.todo-column__pinned__seperator {
 .render-on-mode-change:hover {
   border-color: transparent !important;
 }
+.glass .twinbutton {
+  background-color: var(--darken-background) !important;
+  backdrop-filter: var(--small-blur) !important;
+}
 
 .twinbutton {
-  background-color: var(--darken-background) !important;
-  backdrop-filter: blur(5px) !important;
+  background: var(--color-base01) !important;
   border-radius: 1rem !important;
 }
 
@@ -277,7 +293,7 @@ hr.separator.todo-column__pinned__seperator {
 .toggleCollapseBtn-edz3i:hover,
 .toggleCollapseBtn-edz3i:focus {
   background: var(--darken-background) !important;
-  backdrop-filter: blur(5px) !important;
+  backdrop-filter: var(--small-blur) !important;
 }
 
 .bubble.sidebar-plan-bubble .plan-tile-wrapper {
@@ -570,7 +586,7 @@ button.detail-todo-icon-and-color__icon {
 }
 .glass button.evaluation-list-item {
   background: var(--darken-background) !important;
-  backdrop-filter: blur(10px);
+  backdrop-filter: var(--medium-blur);
 }
 
 button.evaluation-list-item {
@@ -636,7 +652,7 @@ button.icon-label-btn.js-icon-label-btn.icon-label-btn--linkbutton:hover {
 .month-view .grid-day.state--hovered,
 .month-view .week-day:not(.day--today).state--hovered .day-label {
   background-color: var(--darken-background) !important;
-  backdrop-filter: blur(5px) !important;
+  backdrop-filter: var(--small-blur) !important;
 }
 
 .month-view .header-row,
@@ -956,6 +972,18 @@ h3.detail-description__title.title--3,
   color: var(--color-text) !important;
 }
 
+.glass
+  .side-panel.sidepanel__participants-list
+  .side-panel__panel
+  .participants-list__row:hover,
+.glass
+  .side-panel.sidepanel__participants-list
+  .side-panel__panel
+  .participants-list__row--active {
+  background: var(--darken-background) !important;
+  backdrop-filter: var(--surface-blur) !important;
+}
+
 .side-panel.sidepanel__participants-list
   .side-panel__panel
   .participants-list__row:hover,
@@ -1142,17 +1170,26 @@ button.filter-btn.c-red-combo-hover--100:hover {
   padding-top: 0.2rem !important;
 }
 
+.glass .sidebar-PJxvI[data-collapsed="false"] {
+  backdrop-filter: var(--medium-blur) !important;
+  background: var(--darken-background) !important;
+}
+
+.glass .button-mJfIq:hover,
+.glass .optionWrapper-IEDUX[data-selected="true"] .button-mJfIq:hover {
+  background: var(--darken-background) !important;
+  backdrop-filter: var(--medium-blur) !important;
+}
+
 .button-mJfIq:hover,
 .optionWrapper-IEDUX[data-selected="true"] .button-mJfIq:hover {
   border-color: var(--color-accent) !important;
-  background: var(--darken-background) !important;
-  backdrop-filter: blur(10px) !important;
+  background: var(--color-base02) !important;
 }
 
 .sidebar-PJxvI[data-collapsed="false"] {
-  border-right: 2px solid var(--color-base01) !important;
-  backdrop-filter: blur(10px) !important;
-  background: var(--darken-background) !important;
+  border-right: 2px solid var(--color-base02) !important;
+  background: var(--color-base01) !important;
 }
 
 .spacer-w0RDl:before,
@@ -1181,7 +1218,7 @@ button.filter-btn.c-red-combo-hover--100:hover {
 .optionWrapper-IEDUX[data-selected="false"] .button-mJfIq:focus-visible {
   border-color: var(--color-accent) !important;
   background: var(--darken-background) !important;
-  backdrop-filter: blur(10px) !important;
+  backdrop-filter: var(--medium-blur) !important;
 }
 
 .optionWrapper-IEDUX[data-selected="true"] .button-mJfIq {
@@ -1192,7 +1229,7 @@ button.filter-btn.c-red-combo-hover--100:hover {
 .optionWrapper-IEDUX[data-selected="false"] .button-mJfIq:active {
   box-shadow: none !important;
   background: var(--darken-background) !important;
-  backdrop-filter: blur(10px) !important;
+  backdrop-filter: var(--medium-blur) !important;
 }
 
 .detailLint-hCvSX {

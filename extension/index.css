@@ -383,6 +383,7 @@ html {
   font-weight: 500;
 }
 .game-canvas {
+  border-radius: 0.75rem;
   width: 260px;
   height: 260px;
 }
@@ -664,6 +665,7 @@ input.weather-location-input:focus {
 /* src/styles/smpp-styles/delijn.css */
 .glass .lijnCard {
   background: var(--darken-background) !important;
+  backdrop-filter: var(--medium-blur) !important;
 }
 .lijnCard {
   background-color: var(--color-base01);
@@ -789,6 +791,13 @@ input.weather-location-input:focus {
   text-align: right;
   flex-grow: 1;
 }
+.glass .delijnSearchButton {
+  background: var(--darken-background) !important;
+  backdrop-filter: var(--small-blur) !important;
+}
+.glass .delijnSearchButton:hover {
+  background: var(--darken-background) !important;
+}
 .delijnSearchButton {
   height: 40px !important;
   width: 40px !important;
@@ -842,6 +851,10 @@ input.weather-location-input:focus {
   flex-direction: row;
   align-items: center;
   gap: 1rem !important;
+}
+.glass .popupinput.halteInput {
+  background: var(--darken-background) !important;
+  backdrop-filter: var(--small-blur) !important;
 }
 .popupinput.halteInput {
   flex-grow: 1;
@@ -1293,7 +1306,7 @@ html {
 }
 .glass .smpp-widget {
   background: var(--darken-background) !important;
-  backdrop-filter: blur(15px) !important;
+  backdrop-filter: var(--large-blur) !important;
   border-width: 2px;
 }
 .smpp-widget {
@@ -1484,7 +1497,7 @@ html {
 }
 .glass .smpp-widget-bag-content {
   background: var(--darken-background);
-  backdrop-filter: blur(30px);
+  backdrop-filter: var(--surface-blur);
 }
 .smpp-widget-bag-content {
   width: 100%;
@@ -1604,8 +1617,9 @@ p.smpp-error-widget {
 .smpp-widget:has(.smpp-widget-smartschool) {
   padding: 0px !important;
 }
-.smpp-widget.smpp-widget-transparent {
+div.smpp-widget.smpp-widget-transparent {
   background: transparent !important;
+  backdrop-filter: none !important;
   border-color: transparent;
   box-shadow: none;
   padding: 0rem;
@@ -1623,7 +1637,7 @@ p.smpp-error-widget {
   50% {
     opacity: 0;
     transform: translateY(-30px) translateX(0px);
-    filter: blur(10px);
+    filter: var(--medium-blur);
   }
   70% {
     opacity: 1;
@@ -1641,7 +1655,7 @@ p.smpp-error-widget {
   50% {
     opacity: 0;
     transform: translateY(-30px) translateX(0px);
-    filter: blur(10px);
+    filter: var(--medium-blur);
   }
   90% {
     opacity: 1;
@@ -2495,7 +2509,7 @@ input.settings-page-keybinding-input[type=text]:not(.aaaaaa):read-only.listening
 @keyframes openPicker {
   0% {
     left: 50%;
-    filter: blur(5px);
+    filter: var(--small-blur);
     transform: translateX(-50%) translateY(-50%) scale(0.5);
   }
   100% {
@@ -2645,6 +2659,16 @@ input.settings-page-keybinding-input[type=text]:not(.aaaaaa):read-only.listening
   padding-left: 0.25rem;
   height: fit-content;
   gap: 0.25rem;
+}
+.enableAnimations .bottom-container-button {
+  transition-property:
+    opacity,
+    border-color,
+    stroke,
+    background,
+    scale,
+    fill !important;
+  transition: 0.3s ease-out !important;
 }
 .bottom-container-button {
   background-color: var(--color-base01-local) !important;
@@ -2859,9 +2883,8 @@ button .bottom-container-button:active {
   stroke: var(--color-accent) !important;
   margin: 0.5rem 0rem;
 }
-.theme-tile .image-container svg.edit_button {
-  height: calc(100% - 2rem);
-  margin: 1rem 0rem;
+.theme-tile .theme-tile-bottom svg.edit_button {
+  scale: 0.85;
 }
 .theme-tile .image-container svg.heart-icon {
   fill: var(--color-red) !important;
@@ -3045,7 +3068,7 @@ button.open-theme-editor-button:hover {
   z-index: 0;
   width: 0px;
   padding-left: 0rem;
-  filter: blur(5px);
+  filter: var(--small-blur);
 }
 @keyframes openThemeGenerator {
   0% {
@@ -3275,6 +3298,10 @@ html {
     "Montserrat",
     "Trebuchet MS",
     sans-serif;
+  --small-blur: blur(5px);
+  --medium-blur: blur(10px);
+  --large-blur: blur(20px);
+  --surface-blur: blur(30px);
 }
 html {
   background-color: var(--color-base00) !important;
@@ -3322,7 +3349,7 @@ textarea .modern-ui,
 }
 .messageframe:has(#msgdetail):has(.msgDetail--empty) {
   background-color: var(--darken-background) !important;
-  backdrop-filter: blur(5px) !important;
+  backdrop-filter: var(--small-blur) !important;
 }
 .smsc-container .smsc-container--left,
 .smscMain .smscMain--left-tb-main,
@@ -3920,7 +3947,7 @@ input:checked + .slider:before {
 }
 .glass #quickSettings {
   background-color: var(--darken-background) !important;
-  backdrop-filter: blur(10px);
+  backdrop-filter: var(--medium-blur);
 }
 .ridge #quickSettings {
   border: none !important;
@@ -4403,9 +4430,6 @@ smsc-listview .checkbox-button[aria-checked=true] {
   border-top-right-radius: 1rem;
   border-bottom-right-radius: 1rem;
 }
-[listview] .listview__rows {
-  gap: 0.5rem !important;
-}
 .moveToPostbox__item__icon,
 label.radiobutton input[type=radio] {
   appearance: none !important;
@@ -4644,7 +4668,7 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
 }
 .smscComposeMessage {
   background-color: var(--darken-background) !important;
-  backdrop-filter: blur(5px) !important;
+  backdrop-filter: var(--small-blur) !important;
   border: 2px solid var(--color-base02) !important;
 }
 #custom-name-input-container {
@@ -4768,11 +4792,11 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
     top,
     border-radius;
   transition: 0.2s cubic-bezier(0.16, 1.13, 0.89, 0.96);
-  animation: popIn 0.3s cubic-bezier(0.24, 1.37, 0.5, 0.94) forwards !important;
+  animation: popIn 0.3s cubic-bezier(0.01, 1.13, 0.32, 0.96) forwards !important;
 }
 .glass .base-window {
   background: var(--darken-background);
-  backdrop-filter: blur(20px);
+  backdrop-filter: var(--surface-blur);
 }
 .glass #global_chat_window {
   backdrop-filter: none;
@@ -4881,7 +4905,7 @@ smsc-listview {
   border-radius: 1rem !important;
   overflow: hidden !important;
   background-color: var(--darken-background);
-  backdrop-filter: blur(5px) !important;
+  backdrop-filter: var(--small-blur) !important;
 }
 smsc-listview table tr .listview-row__row-actions .action-button:hover {
   background-color: var(--color-base03) !important;
@@ -4908,7 +4932,7 @@ input.smsc-inlineeditor--editable.smsc-inlineeditor__input.js-inlineEditor-input
   border: 2px solid var(--color-base02) !important;
   box-shadow: none !important;
   background-color: var(--darken-background) !important;
-  backdrop-filter: blur(5px) !important;
+  backdrop-filter: var(--small-blur) !important;
 }
 hr.smsc-dialog__ruler,
 .deliberation-line-picker__button-bar {
@@ -5089,7 +5113,7 @@ div[style*=background]:not(.manual_widgettitle) {
 }
 .glass .bubble-s87kI {
   background-color: var(--darken-background) !important;
-  backdrop-filter: blur(5px) !important;
+  backdrop-filter: var(--small-blur) !important;
 }
 .dropdownMenuItem-Vszox[data-selected=true] {
   background-color: var(--color-base03) !important;
@@ -5152,7 +5176,7 @@ label.checkbox.js-checkbox.form-page__receive-copy-by-mail-checkbox {
 }
 .smsc-container.form-completed-page__content {
   background-color: var(--darken-background) !important;
-  backdrop-filter: blur(5px) !important;
+  backdrop-filter: var(--small-blur) !important;
   background-image: none !important;
   height: fit-content;
 }
@@ -5187,7 +5211,7 @@ span.smsc-treeitem__label {
 div#folders {
   border-radius: 1.5rem !important;
   background-color: var(--darken-background) !important;
-  backdrop-filter: blur(5px) !important;
+  backdrop-filter: var(--small-blur) !important;
   border: 2px solid var(--color-base02) !important;
   font-weight: 500 !important;
 }
@@ -5196,7 +5220,7 @@ div#folders {
 }
 .glass div#smscMainBlockContainer {
   background: var(--darken-background) !important;
-  backdrop-filter: blur(30px) !important;
+  backdrop-filter: var(--surface-blur) !important;
 }
 div#smscMainBlockContainer {
   background: var(--color-base00) !important;
@@ -5498,7 +5522,7 @@ html {
   height: auto;
 }
 .login-app__top {
-  backdrop-filter: blur(10px) !important;
+  backdrop-filter: var(--medium-blur) !important;
   background: var(--darken-background) !important;
   border-radius: 2.5rem !important;
   border: 3px solid var(--color-base03) !important;
@@ -5682,7 +5706,7 @@ span.login-app__title.login-app__title--sign-in-with {
 }
 .glass .modern-message {
   background: var(--darken-background) !important;
-  backdrop-filter: blur(5px);
+  backdrop-filter: var(--small-blur);
 }
 .modern-message {
   border: 2px solid var(--color-base01) !important;
@@ -5747,7 +5771,7 @@ span.login-app__title.login-app__title--sign-in-with {
 .modern-ui .modern-message__actions {
   background-color: var(--color-base01) !important;
   box-shadow: 0px 2px 5px 0px var(--color-shadow) !important;
-  backdrop-filter: blur(5px) !important;
+  backdrop-filter: var(--small-blur) !important;
   border-radius: 1rem !important;
   top: 0.25rem !important;
   right: 0.25rem !important;
@@ -5951,7 +5975,7 @@ p:not(:first-of-type) {
   border-radius: 1.5rem !important;
   overflow: hidden !important;
   background-color: var(--darken-background) !important;
-  backdrop-filter: blur(5px) !important;
+  backdrop-filter: var(--small-blur) !important;
   padding: 5px 5px 0px 5px !important;
 }
 .max-width--inherit {
@@ -6217,7 +6241,7 @@ button.accswitchmain.mbnotselected {
 }
 .tox .tox-dialog-wrap__backdrop {
   background-color: var(--darken-background) !important;
-  backdrop-filter: blur(5px) !important;
+  backdrop-filter: var(--small-blur) !important;
 }
 td#tabmaina {
   border: 2px solid var(--color-base02) !important;
@@ -6341,7 +6365,7 @@ upload-app.smsc-container.smsc-container--flex {
 smsc-tabs .smsc-tabslist__item,
 .smsc-table__row.smsc-table__row--nohover.smsc-table__row--noborder {
   background-color: var(--darken-background) !important;
-  backdrop-filter: blur(5px) !important;
+  backdrop-filter: var(--small-blur) !important;
 }
 .smsc-table__row.smsc-table__row--nohover.smsc-table__row--noborder:hover,
 smsc-tabs .smsc-tabslist__item:hover {
@@ -6644,10 +6668,10 @@ input::placeholder {
 .glass .smsc-topnav .topnav__menu,
 .glass .smsctooltip {
   background-color: var(--darken-background) !important;
-  backdrop-filter: blur(5px) !important;
+  backdrop-filter: var(--small-blur) !important;
 }
 .glass .topnav__menu-wrapper {
-  backdrop-filter: blur(10px);
+  backdrop-filter: var(--medium-blur);
 }
 .topnav__menu-wrapper {
   padding: 0 !important;
@@ -6884,7 +6908,7 @@ td[bgcolor*="#"] {
 }
 .glass .notification {
   background: var(--darken-background) !important;
-  backdrop-filter: blur(5px);
+  backdrop-filter: var(--small-blur);
 }
 .notification {
   border: 2px solid var(--color-base02) !important;
@@ -7084,9 +7108,12 @@ ul.js-notifs-list.notifs__list {
   color: var(--color-text) !important;
   box-shadow: 0px 2px 10px 0px var(--color-shadow) !important;
 }
-.todo-column__container {
+.glass .todo-column__container {
   background-color: var(--darken-background) !important;
-  backdrop-filter: blur(5px) !important;
+  backdrop-filter: var(--small-blur) !important;
+}
+.todo-column__container {
+  background: var(--color-base01) !important;
   border-radius: 2rem !important;
   padding: 1rem !important;
 }
@@ -7108,19 +7135,25 @@ ul.js-notifs-list.notifs__list {
 .todo-column [listview] .todo-column__abbreviation-cell__wrapper {
   border-radius: 0.5rem !important;
 }
+.glass .listview__row.js-listview-row.todo-column__row:hover,
+.glass .listview__row.js-listview-row.todo-column__row--resolved:hover,
+.glass .content__day-column.js-day-column.highlight,
+.glass .header__day.header__wholeday-column.js-wholeday-column.highlight {
+  background-color: var(--darken-background) !important;
+  backdrop-filter: var(--small-blur) !important;
+}
 .listview__row.js-listview-row.todo-column__row:hover,
 .listview__row.js-listview-row.todo-column__row--resolved:hover,
 .content__day-column.js-day-column.highlight,
 .header__day.header__wholeday-column.js-wholeday-column.highlight {
-  background-color: var(--darken-background) !important;
-  backdrop-filter: blur(5px) !important;
+  background-color: var(--color-base02) !important;
   border-radius: 1.25rem !important;
 }
 .todo-column [listview] .todo-column__date-cell {
   padding: 0.75rem !important;
 }
 .listview__row.js-listview-row.todo-column__row:has(.todo-column__date-cell):not(:first-of-type) {
-  margin-top: 1rem !important;
+  margin-top: 0.5rem !important;
 }
 .todo-column__container .todo-column__pinned > * {
   margin-left: 0 !important;
@@ -7165,9 +7198,12 @@ hr.separator.todo-column__pinned__seperator {
 .twinbutton__button:hover {
   background-color: var(--darken-background) !important;
 }
-.planner-header .header__borderdropdowncontainer {
+.glass .planner-header .header__borderdropdowncontainer {
   background: var(--darken-background) !important;
-  backdrop-filter: blur(5px) !important;
+  backdrop-filter: var(--small-blur) !important;
+}
+.planner-header .header__borderdropdowncontainer {
+  background: var(--color-base01) !important;
   border-radius: 1rem !important;
   border: 2px solid transparent !important;
 }
@@ -7177,9 +7213,12 @@ hr.separator.todo-column__pinned__seperator {
 .render-on-mode-change:hover {
   border-color: transparent !important;
 }
-.twinbutton {
+.glass .twinbutton {
   background-color: var(--darken-background) !important;
-  backdrop-filter: blur(5px) !important;
+  backdrop-filter: var(--small-blur) !important;
+}
+.twinbutton {
+  background: var(--color-base01) !important;
   border-radius: 1rem !important;
 }
 .twinbutton__button {
@@ -7195,7 +7234,7 @@ hr.separator.todo-column__pinned__seperator {
 .toggleCollapseBtn-edz3i:hover,
 .toggleCollapseBtn-edz3i:focus {
   background: var(--darken-background) !important;
-  backdrop-filter: blur(5px) !important;
+  backdrop-filter: var(--small-blur) !important;
 }
 .bubble.sidebar-plan-bubble .plan-tile-wrapper {
   padding: 0 !important;
@@ -7430,7 +7469,7 @@ button.detail-todo-icon-and-color__icon {
 }
 .glass button.evaluation-list-item {
   background: var(--darken-background) !important;
-  backdrop-filter: blur(10px);
+  backdrop-filter: var(--medium-blur);
 }
 button.evaluation-list-item {
   background-color: var(--color-base01) !important;
@@ -7478,7 +7517,7 @@ button.icon-label-btn.js-icon-label-btn.icon-label-btn--linkbutton:hover {
 .month-view .grid-day.state--hovered,
 .month-view .week-day:not(.day--today).state--hovered .day-label {
   background-color: var(--darken-background) !important;
-  backdrop-filter: blur(5px) !important;
+  backdrop-filter: var(--small-blur) !important;
 }
 .month-view .header-row,
 .month-view .element.show-more-element {
@@ -7732,6 +7771,11 @@ h3.detail-description__title.title--3,
 .invite-status {
   color: var(--color-text) !important;
 }
+.glass .side-panel.sidepanel__participants-list .side-panel__panel .participants-list__row:hover,
+.glass .side-panel.sidepanel__participants-list .side-panel__panel .participants-list__row--active {
+  background: var(--darken-background) !important;
+  backdrop-filter: var(--surface-blur) !important;
+}
 .side-panel.sidepanel__participants-list .side-panel__panel .participants-list__row:hover,
 .side-panel.sidepanel__participants-list .side-panel__panel .participants-list__row--active {
   background: var(--color-base01) !important;
@@ -7881,16 +7925,23 @@ button.filter-btn.c-red-combo-hover--100:hover {
   padding-left: 0.2rem !important;
   padding-top: 0.2rem !important;
 }
+.glass .sidebar-PJxvI[data-collapsed=false] {
+  backdrop-filter: var(--medium-blur) !important;
+  background: var(--darken-background) !important;
+}
+.glass .button-mJfIq:hover,
+.glass .optionWrapper-IEDUX[data-selected=true] .button-mJfIq:hover {
+  background: var(--darken-background) !important;
+  backdrop-filter: var(--medium-blur) !important;
+}
 .button-mJfIq:hover,
 .optionWrapper-IEDUX[data-selected=true] .button-mJfIq:hover {
   border-color: var(--color-accent) !important;
-  background: var(--darken-background) !important;
-  backdrop-filter: blur(10px) !important;
+  background: var(--color-base02) !important;
 }
 .sidebar-PJxvI[data-collapsed=false] {
-  border-right: 2px solid var(--color-base01) !important;
-  backdrop-filter: blur(10px) !important;
-  background: var(--darken-background) !important;
+  border-right: 2px solid var(--color-base02) !important;
+  background: var(--color-base01) !important;
 }
 .spacer-w0RDl:before,
 .spacer-w0RDl:after {
@@ -7914,7 +7965,7 @@ button.filter-btn.c-red-combo-hover--100:hover {
 .optionWrapper-IEDUX[data-selected=false] .button-mJfIq:focus-visible {
   border-color: var(--color-accent) !important;
   background: var(--darken-background) !important;
-  backdrop-filter: blur(10px) !important;
+  backdrop-filter: var(--medium-blur) !important;
 }
 .optionWrapper-IEDUX[data-selected=true] .button-mJfIq {
   background-color: var(--darken-background) !important;
@@ -7923,7 +7974,7 @@ button.filter-btn.c-red-combo-hover--100:hover {
 .optionWrapper-IEDUX[data-selected=false] .button-mJfIq:active {
   box-shadow: none !important;
   background: var(--darken-background) !important;
-  backdrop-filter: blur(10px) !important;
+  backdrop-filter: var(--medium-blur) !important;
 }
 .detailLint-hCvSX {
   background-color: transparent !important;
@@ -7955,7 +8006,7 @@ button.filter-btn.c-red-combo-hover--100:hover {
   background-color: var(--color-base00) !important;
   color: var(--color-text) !important;
   background: var(--darken-background) !important;
-  backdrop-filter: blur(5px) !important;
+  backdrop-filter: var(--small-blur) !important;
   height: fit-content !important;
   padding: 0.75rem !important;
   margin-left: 4px !important;
@@ -7981,7 +8032,7 @@ button.filter-btn.c-red-combo-hover--100:hover {
 }
 .glass [dialog-content] {
   background-color: var(--darken-background) !important;
-  backdrop-filter: blur(30px) !important;
+  backdrop-filter: var(--surface-blur) !important;
 }
 .side-panel__panel {
   max-width: none !important;
@@ -8041,17 +8092,22 @@ button.filter-btn.c-red-combo-hover--100:hover {
 }
 .glass .results-evaluation--small .side-panel__panel {
   background: var(--darken-background) !important;
-  backdrop-filter: blur(30px) !important;
+  backdrop-filter: var(--surface-blur) !important;
 }
 .results-evaluation--small .side-panel__panel {
   background-color: var(--color-base00) !important;
 }
-.results-evaluation--wide .side-panel__panel {
+.results-evaluations.results-evaluation--wide .side-panel__panel {
   background-color: transparent !important;
+  backdrop-filter: none !important;
   box-shadow: none !important;
 }
 .side-panel__panel {
   box-shadow: -10px 0px 20px -10px var(--color-shadow) !important;
+}
+.glass .side-panel__panel {
+  background: var(--darken-background) !important;
+  backdrop-filter: var(--surface-blur) !important;
 }
 .side-panel__panel {
   background-color: var(--color-base00) !important;
@@ -8075,7 +8131,7 @@ button.reset-filters-btn.reset-filters-btn--hidden {
 }
 .goal-evaluations-details__row {
   background: var(--darken-background) !important;
-  backdrop-filter: blur(5px) !important;
+  backdrop-filter: var(--small-blur) !important;
 }
 button.goal-evaluations-details__row:active {
   scale: 1 !important;
@@ -8097,12 +8153,20 @@ input.input.bootstrap__input.search-input {
 .contentContainer {
   background-color: transparent !important;
 }
+.glass .evaluation-list-item,
+.glass .goals-filter__item,
+.glass .content_container,
+.glass .navigation_container {
+  background-color: var(--darken-background) !important;
+  backdrop-filter: var(--small-blur) !important;
+  color: var(--color-text) !important;
+  border-color: var(--color-base01) !important;
+}
 .evaluation-list-item,
 .goals-filter__item,
 .content_container,
 .navigation_container {
-  background-color: var(--darken-background) !important;
-  backdrop-filter: blur(5px) !important;
+  background-color: var(--color-base01) !important;
   color: var(--color-text) !important;
   border-color: var(--color-base01) !important;
 }
@@ -8127,16 +8191,21 @@ input.input.bootstrap__input.search-input {
 }
 button.goals-filter__item.selected {
   border-color: var(--color-accent) !important;
+  outline: 1px var(--color-accent) !important;
 }
 .goals-filter__item:hover:not(.selected) {
-  border-color: var(--color-base03) !important;
+  border-color: var(--color-accent) !important;
 }
 .enableAnimations .goals-filter__item {
-  transition: border-color 0.2s ease-in-out !important;
+  transition-property: border-color, outline;
+  transition: 0.2s ease-in-out !important;
+}
+.glass .side-panel__content .side-panel__content__title__name {
+  background: var(--darken-background) !important;
+  backdrop-filter: var(--small-blur) !important;
 }
 .side-panel__content .side-panel__content__title__name {
-  background: var(--darken-background) !important;
-  backdrop-filter: blur(5px) !important;
+  background: var(--color-base01) !important;
   width: fit-content !important;
   padding: 0rem 1rem !important;
   max-width: 100% !important;
@@ -8285,11 +8354,11 @@ span.evaluation-graphic__progress-ring__value {
 .title-and-schoolyear-selector[aria-expanded=true] .title-and-schoolyear-selector__period-container:not(:disabled) {
   border-color: var(--color-accent) !important;
   background-color: var(--darken-background) !important;
-  backdrop-filter: blur(5px) !important;
+  backdrop-filter: var(--small-blur) !important;
 }
 .title-and-schoolyear-selector .title-and-schoolyear-selector__period-container:hover:not(:disabled) {
   border-color: var(--color-accent) !important;
-  backdrop-filter: blur(5px) !important;
+  backdrop-filter: var(--small-blur) !important;
 }
 .title-and-schoolyear-selector .title-and-schoolyear-selector__period-container:not(:disabled) {
   border-width: 2px !important;
@@ -8308,7 +8377,7 @@ span.evaluation-graphic__progress-ring__value {
 }
 .results-goals-overview__content .listview__row.js-listview-row {
   border-radius: 2rem !important;
-  backdrop-filter: blur(10px) !important;
+  backdrop-filter: var(--medium-blur) !important;
   background-color: var(--darken-background) !important;
   margin-bottom: 1rem !important;
 }
@@ -8451,9 +8520,12 @@ button.button-ZR3rz.bp-c-combo-hover-plain-outline--300 {
 .results-evaluations.js-evaluations-page.js-routehandler.results-evaluation--wide {
   width: 10% !important;
 }
-.title-and-schoolyear-selector.js-title-and-schoolyear-selector {
+.glass .title-and-schoolyear-selector.js-title-and-schoolyear-selector {
   background: var(--darken-background) !important;
-  backdrop-filter: blur(10px) !important;
+  backdrop-filter: var(--medium-blur) !important;
+}
+.title-and-schoolyear-selector.js-title-and-schoolyear-selector {
+  background: var(--color-base01) !important;
   border-radius: 1.5rem !important;
   padding: 0.5rem 1rem !important;
   width: fit-content !important;
@@ -8461,7 +8533,7 @@ button.button-ZR3rz.bp-c-combo-hover-plain-outline--300 {
 }
 .glass .bubble {
   background-color: var(--darken-background) !important;
-  backdrop-filter: blur(5px) !important;
+  backdrop-filter: var(--medium-blur) !important;
 }
 .bubble.js-bubble.schoolyear-dropdown-bubble.js-schoolyear-dropdown-bubble {
   padding: 1.5rem !important;

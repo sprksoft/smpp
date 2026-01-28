@@ -1,5 +1,6 @@
 .glass .lijnCard {
   background: var(--darken-background) !important;
+  backdrop-filter: var(--medium-blur) !important;
 }
 
 .lijnCard {
@@ -146,6 +147,14 @@
   flex-grow: 1;
 }
 
+.glass .delijnSearchButton {
+  background: var(--darken-background) !important;
+  backdrop-filter: var(--small-blur) !important;
+}
+.glass .delijnSearchButton:hover {
+  background: var(--darken-background) !important;
+}
+
 .delijnSearchButton {
   height: 40px !important;
   width: 40px !important;
@@ -205,7 +214,10 @@
   align-items: center;
   gap: 1rem !important;
 }
-
+.glass .popupinput.halteInput {
+  background: var(--darken-background) !important;
+  backdrop-filter: var(--small-blur) !important;
+}
 .popupinput.halteInput {
   flex-grow: 1;
   height: 40px !important;

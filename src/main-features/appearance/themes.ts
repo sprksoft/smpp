@@ -6,6 +6,7 @@ import mixPlugin from "colord/plugins/mix";
 
 extend([lchPlugin, mixPlugin]);
 
+import imageCompression from "browser-image-compression";
 import { widgetSystemNotifyThemeChange } from "../../widgets/widgets.js";
 import {
   browser,
@@ -30,6 +31,7 @@ import {
   trashSvg,
   wandSvg,
   brokenHeartSvg,
+  shareSvg,
 } from "../../fixes-utils/svgs.js";
 import {
   getImageURL,
@@ -168,7 +170,7 @@ class ColorCursor {
   }
 
   // Overwrite this if needed
-  onDrag() { }
+  onDrag() {}
 
   updateCursorPosition() {
     this.element.style.left = `${this.xPos}%`;
@@ -342,7 +344,7 @@ export class ColorPicker {
     return this.element;
   }
 
-  async onChange() { }
+  async onChange() {}
 }
 
 export class Tile {
@@ -360,15 +362,15 @@ export class Tile {
     return this.element;
   }
 
-  async updateImage(currentTheme: string, forceReload = false) { }
+  async updateImage(currentTheme: string, forceReload = false) {}
 
   // Overide this in the implementation
-  updateSelection() { }
+  updateSelection() {}
   // Overide in de implementation
-  async onClick(e: MouseEvent) { }
+  async onClick(e: MouseEvent) {}
 
   // Overide this in the implementation
-  async createContent() { }
+  async createContent() {}
 }
 
 export class ThemeTile extends Tile {
@@ -429,8 +431,25 @@ export class ThemeTile extends Tile {
     duplicateButton.addEventListener("click", async () => {
       await this.duplicate();
     });
-    buttonContainer.appendChild(duplicateButton);
 
+    let favoriteButton = document.createElement("button");
+    favoriteButton.classList.add("bottom-container-button");
+    favoriteButton.innerHTML = heartSvg;
+    favoriteButton.addEventListener("click", async () => {
+      await this.favoriteToggle();
+    });
+    if (this.isFavorite) this.element.classList.add("is-favorite");
+
+    let shareButton = document.createElement("button");
+    shareButton.classList.add("bottom-container-button");
+    shareButton.innerHTML = shareSvg;
+    shareButton.addEventListener("click", async () => {
+      await this.share();
+    });
+
+    buttonContainer.appendChild(shareButton);
+    buttonContainer.appendChild(duplicateButton);
+    buttonContainer.appendChild(favoriteButton);
     if (this.isCustom) {
       let editButton = document.createElement("button");
       editButton.classList.add("bottom-container-button");
@@ -440,15 +459,6 @@ export class ThemeTile extends Tile {
       });
       buttonContainer.appendChild(editButton);
     }
-
-    let favoriteButton = document.createElement("button");
-    favoriteButton.classList.add("bottom-container-button");
-    favoriteButton.innerHTML = heartSvg;
-    favoriteButton.addEventListener("click", async () => {
-      await this.favoriteToggle();
-    });
-    if (this.isFavorite) this.element.classList.add("is-favorite");
-    buttonContainer.appendChild(favoriteButton);
 
     bottomContainer.appendChild(buttonContainer);
 
@@ -486,7 +496,6 @@ export class ThemeTile extends Tile {
           `url(${await imageURL.url})`
         );
       } else {
-        console.log(imageURL.url, "is not valdid");
         this.element.style.setProperty("--background-image-local", `url()`);
       }
 
@@ -533,30 +542,34 @@ export class ThemeTile extends Tile {
 
   async favoriteToggle() {
     this.isFavorite = !this.isFavorite;
-    console.log(this.isFavorite);
     let data = (await browser.runtime.sendMessage({
       action: "getSettingsData",
     })) as Settings;
-    let quickSettingsThemes = data.appearance.quickSettingsThemes;
+    let updateFavorite = async () => {
+      await browser.runtime.sendMessage({
+        action: "setSetting",
+        name: "appearance.quickSettingsThemes",
+        data: quickSettingsThemes,
+      });
+      this.element.classList.toggle("is-favorite");
+      this.onFavoriteToggle();
+    };
 
+    let quickSettingsThemes = data.appearance.quickSettingsThemes;
     if (this.isFavorite) {
       quickSettingsThemes.push(this.name);
+      await updateFavorite();
     } else {
       quickSettingsThemes = quickSettingsThemes.filter((name: string) => {
         return name != this.name;
       });
       if (this.currentCategory == "quickSettings") {
+        this.element.addEventListener("animationend", updateFavorite);
         this.element.classList.add("being-removed");
+      } else {
+        await updateFavorite();
       }
     }
-    await browser.runtime.sendMessage({
-      action: "setSetting",
-      name: "appearance.quickSettingsThemes",
-      data: quickSettingsThemes,
-    });
-    console.log(quickSettingsThemes);
-    this.element.classList.toggle("is-favorite");
-    this.onFavoriteToggle();
   }
 
   async edit() {
@@ -577,19 +590,37 @@ export class ThemeTile extends Tile {
       id: "compressed-" + this.name,
     })) as SMPPImage;
 
-    if (result.type == "default") {
-      result.imageData = await getExtensionImage(
-        "theme-backgrounds/" + this.name + ".jpg"
-      );
-      compressedResult.imageData = await getExtensionImage(
-        "theme-backgrounds/compressed/" + this.name + ".jpg"
-      );
-      if (!this.isCustom) {
-        result.type = "link";
-        result.link = this.name + ".jpg";
+    async function convertBlobToBase64(blob: Blob) {
+      let base64 = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(blob);
+      });
+      return base64 as string;
+    }
 
-        compressedResult.type = "link";
-        compressedResult.link = this.name + ".jpg";
+    if (result.metaData.type == "default") {
+      let response = await fetch(
+        await getExtensionImage("theme-backgrounds/" + this.name + ".jpg")
+      );
+      result.imageData = await convertBlobToBase64(await response.blob());
+
+      let compressedResponse = await fetch(
+        await getExtensionImage(
+          "theme-backgrounds/compressed/" + this.name + ".jpg"
+        )
+      );
+      compressedResult.imageData = await convertBlobToBase64(
+        await compressedResponse.blob()
+      );
+
+      if (!this.isCustom) {
+        result.metaData.type = "file";
+        result.metaData.link = this.name + ".jpg";
+
+        compressedResult.metaData.type = "file";
+        compressedResult.metaData.link = this.name + ".jpg";
       }
     }
 
@@ -610,11 +641,23 @@ export class ThemeTile extends Tile {
     this.onDuplicate(newThemeName);
   }
 
-  // Overide in de implementation
-  async onFavoriteToggle() { }
+  async share() {
+    console.log("Started sharing");
+    await browser.runtime.sendMessage({
+      action: "shareTheme",
+      name: this.name,
+    });
+    this.onShare();
+  }
 
   // Overide in de implementation
-  async onDuplicate(newThemeName: string) { }
+  async onFavoriteToggle() {}
+
+  // Overide in de implementation
+  async onShare() {}
+
+  // Overide in de implementation
+  async onDuplicate(newThemeName: string) {}
 }
 
 async function updateTheme(name: string) {
@@ -855,7 +898,6 @@ export class ThemeSelector {
       await this.renderFolderTiles();
       return;
     }
-    console.log("updating selector");
 
     await this.updateThemeTiles();
     this.updateImages();
@@ -897,7 +939,6 @@ export class ThemeSelector {
       })) as {
         [key: string]: Theme;
       };
-      console.log(customThemes);
       correctThemeNames.forEach(async (themeName) => {
         if (!visibleThemeNames.includes(themeName)) {
           let isFavorite =
@@ -1055,7 +1096,6 @@ export class ThemeSelector {
     tile.onFavoriteToggle = async () => {
       await settingsWindow.loadPage(false);
       await loadQuickSettings();
-      console.log(this.currentCategory);
       if (this.currentCategory == "quickSettings") {
         await this.updateSelectorContent();
       }
@@ -1094,7 +1134,6 @@ export class ThemeSelector {
 
     if (Object.keys(themes).length == 0 && this.currentCategory != "custom") {
       this.currentTiles.push(new noThemes());
-      console.log(this.currentTiles);
     }
 
     await this.renderTiles(this.currentTiles);
@@ -1372,26 +1411,18 @@ export class CustomThemeCreator extends BaseWindow {
   }
 
   async updateBackgroundImagePreview() {
-    console.log("updating");
     let result = (await browser.runtime.sendMessage({
       action: "getImage",
       id: this.name,
     })) as SMPPImage;
 
-    if (result.type == "default") {
+    if (result.metaData.type == "default") {
       result.imageData = await getExtensionImage(
         "theme-backgrounds/compressed/" + this.name + ".jpg"
       );
     }
     if (await isValidImage(result.imageData)) {
-      let url = await getImageURL(
-        this.name,
-        () => {
-          return "a";
-        },
-        true
-      );
-      this.backgroundImagePreview.src = url.url;
+      this.backgroundImagePreview.src = result.imageData;
       this.content.classList.remove("no-image-available");
     } else {
       this.backgroundImagePreview.src = "";
@@ -1400,12 +1431,19 @@ export class CustomThemeCreator extends BaseWindow {
   }
 
   async getImageColors() {
-    let vibrantTester = new Vibrant(this.backgroundImagePreview.src, {
-      quality: 1,
-      colorCount: 256,
-    });
-    let palette = await vibrantTester.getPalette();
-    return palette;
+    try {
+      let vibrantTester = new Vibrant(this.backgroundImagePreview.src, {
+        quality: 1,
+        colorCount: 256,
+      });
+
+      let palette = await vibrantTester.getPalette();
+
+      return palette;
+    } catch (error) {
+      console.error("Error extracting image colors:", error);
+      return null;
+    }
   }
 
   readUserChoice() {
@@ -1425,6 +1463,8 @@ export class CustomThemeCreator extends BaseWindow {
 
   async generateTheme() {
     let swatchPalette = await this.getImageColors();
+    if (!swatchPalette) return;
+
     let colordPalette = convertColorPalette(swatchPalette);
 
     let choice = this.readUserChoice();
@@ -1535,7 +1575,7 @@ export class CustomThemeCreator extends BaseWindow {
         return { input, label };
       }
 
-      updateLogo(element: HTMLLabelElement, state: boolean) { }
+      updateLogo(element: HTMLLabelElement, state: boolean) {}
 
       load() {
         this.updateLogo(this.label, this.element.checked);

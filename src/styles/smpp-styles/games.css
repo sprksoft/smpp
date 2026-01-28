@@ -39,6 +39,7 @@
 }
 
 .game-canvas {
+  border-radius: 0.75rem;
   width: 260px;
   height: 260px;
 }

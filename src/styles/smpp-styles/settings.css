@@ -796,7 +796,7 @@ input.settings-page-keybinding-input[type="text"]:not(
 @keyframes openPicker {
   0% {
     left: 50%;
-    filter: blur(5px);
+    filter: var(--small-blur);
     transform: translateX(-50%) translateY(-50%) scale(0.5);
   }
 
@@ -966,6 +966,12 @@ input.settings-page-keybinding-input[type="text"]:not(
   padding-left: 0.25rem;
   height: fit-content;
   gap: 0.25rem;
+}
+
+.enableAnimations .bottom-container-button {
+  transition-property:
+    opacity, border-color, stroke, background, scale, fill !important;
+  transition: 0.3s ease-out !important;
 }
 
 .bottom-container-button {
@@ -1228,9 +1234,8 @@ button .bottom-container-button:active {
   margin: 0.5rem 0rem;
 }
 
-.theme-tile .image-container svg.edit_button {
-  height: calc(100% - 2rem);
-  margin: 1rem 0rem;
+.theme-tile .theme-tile-bottom svg.edit_button {
+  scale: 0.85;
 }
 
 .theme-tile .image-container svg.heart-icon {
@@ -1430,7 +1435,7 @@ button.open-theme-editor-button:hover {
   z-index: 0;
   width: 0px;
   padding-left: 0rem;
-  filter: blur(5px);
+  filter: var(--small-blur);
 }
 
 @keyframes openThemeGenerator {

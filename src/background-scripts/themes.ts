@@ -1,8 +1,10 @@
 //@ts-nocheck
 import { loadJSON } from "./json-loader.js";
 import { browser, setByPath } from "../common/utils.js";
-import { removeImage } from "./data-background-script.js";
+import { getImage, removeImage } from "./data-background-script.js";
 import { getSettingsData, setSettingsData } from "./settings.js";
+import type { Theme } from "../main-features/appearance/themes.js";
+import type { SMPPImage } from "../main-features/modules/images.js";
 
 let nativeThemes;
 let categories;
@@ -143,4 +145,11 @@ export async function removeCustomTheme(id) {
   setByPath(data, "appearance.quickSettingsThemes", quickSettingsThemes);
   await setSettingsData(data);
   await browser.storage.local.set({ customThemes });
+}
+
+export async function shareTheme(id: string) {
+  let theme = (await getTheme(id)) as Theme;
+  let image = (await getImage(id)) as SMPPImage;
+
+  // TODO: sibe fix it, important: Metadata in SMPPImage really does matter...
 }

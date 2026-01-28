@@ -143,8 +143,12 @@ input::placeholder {
 .enableAnimations .token,
 .enableAnimations .titleRight {
   transition-duration: 0.1s !important;
-  transition: background-color 0.2s, border-color 0.3s, text-decoration 0.1s,
-    width 0.2s, scale 0.2s !important ;
+  transition:
+    background-color 0.2s,
+    border-color 0.3s,
+    text-decoration 0.1s,
+    width 0.2s,
+    scale 0.2s !important ;
 }
 
 .smsc-topnav .topnav__menu,
@@ -162,11 +166,11 @@ input::placeholder {
 .glass .smsc-topnav .topnav__menu,
 .glass .smsctooltip {
   background-color: var(--darken-background) !important;
-  backdrop-filter: blur(5px) !important;
+  backdrop-filter: var(--small-blur) !important;
 }
 
 .glass .topnav__menu-wrapper {
-  backdrop-filter: blur(10px);
+  backdrop-filter: var(--medium-blur);
 }
 
 .topnav__menu-wrapper {
@@ -251,7 +255,10 @@ input::placeholder {
 }
 
 .enableAnimations .topnav__menuitem {
-  transition: font-size 0.3s, background-position-x 0.3s, border-radius 0.3s;
+  transition:
+    font-size 0.3s,
+    background-position-x 0.3s,
+    border-radius 0.3s;
 }
 
 .topnav__menu--shortcuts > .topnav__menuitem {

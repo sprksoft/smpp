@@ -32,7 +32,7 @@ html {
 }
 .glass .smpp-widget {
   background: var(--darken-background) !important;
-  backdrop-filter: blur(15px) !important;
+  backdrop-filter: var(--large-blur) !important;
   border-width: 2px;
 }
 /* Only use rem's here no em because widgets will be moved to body when they are dragged */
@@ -271,7 +271,7 @@ html {
 
 .glass .smpp-widget-bag-content {
   background: var(--darken-background);
-  backdrop-filter: blur(30px);
+  backdrop-filter: var(--surface-blur);
 }
 
 .smpp-widget-bag-content {
@@ -417,8 +417,9 @@ p.smpp-error-widget {
   padding: 0px !important;
 }
 
-.smpp-widget.smpp-widget-transparent {
+div.smpp-widget.smpp-widget-transparent {
   background: transparent !important;
+  backdrop-filter: none !important;
   border-color: transparent;
   box-shadow: none;
   padding: 0rem;
@@ -439,7 +440,7 @@ p.smpp-error-widget {
   50% {
     opacity: 0;
     transform: translateY(-30px) translateX(0px);
-    filter: blur(10px);
+    filter: var(--medium-blur);
   }
 
   70% {
@@ -461,7 +462,7 @@ p.smpp-error-widget {
   50% {
     opacity: 0;
     transform: translateY(-30px) translateX(0px);
-    filter: blur(10px);
+    filter: var(--medium-blur);
   }
 
   90% {

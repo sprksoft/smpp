@@ -249,6 +249,9 @@
 </svg>`;
   var playSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
 <path xmlns="http://www.w3.org/2000/svg" d="M16.6582 9.28638C18.098 10.1862 18.8178 10.6361 19.0647 11.2122C19.2803 11.7152 19.2803 12.2847 19.0647 12.7878C18.8178 13.3638 18.098 13.8137 16.6582 14.7136L9.896 18.94C8.29805 19.9387 7.49907 20.4381 6.83973 20.385C6.26501 20.3388 5.73818 20.0469 5.3944 19.584C5 19.053 5 18.1108 5 16.2264V7.77357C5 5.88919 5 4.94701 5.3944 4.41598C5.73818 3.9531 6.26501 3.66111 6.83973 3.6149C7.49907 3.5619 8.29805 4.06126 9.896 5.05998L16.6582 9.28638Z"  stroke-width="2" stroke-linejoin="round"/><path xmlns="http://www.w3.org/2000/svg" d="M16.6582 9.28638C18.098 10.1862 18.8178 10.6361 19.0647 11.2122C19.2803 11.7152 19.2803 12.2847 19.0647 12.7878C18.8178 13.3638 18.098 13.8137 16.6582 14.7136L9.896 18.94C8.29805 19.9387 7.49907 20.4381 6.83973 20.385C6.26501 20.3388 5.73818 20.0469 5.3944 19.584C5 19.053 5 18.1108 5 16.2264V7.77357C5 5.88919 5 4.94701 5.3944 4.41598C5.73818 3.9531 6.26501 3.66111 6.83973 3.6149C7.49907 3.5619 8.29805 4.06126 9.896 5.05998L16.6582 9.28638Z"  stroke-width="2" stroke-linejoin="round"/></svg>`;
+  var shareSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path xmlns="http://www.w3.org/2000/svg" d="M16 7L12 3M12 3L8 7M12 3V15M21 11V17.7992C21 18.9193 21 19.4794 20.782 19.9072C20.5903 20.2835 20.2843 20.5895 19.908 20.7812C19.4802 20.9992 18.9201 20.9992 17.8 20.9992H6.2C5.0799 20.9992 4.51984 20.9992 4.09202 20.7812C3.71569 20.5895 3.40973 20.2835 3.21799 19.9072C3 19.4794 3 18.9193 3 17.7992V11" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>`;
 
   // src/fixes-utils/login.ts
   function updateLoginPanel() {
@@ -2614,9 +2617,7 @@ Is it scaring you off?`,
       try {
         const options = {
           maxSizeMB: 0.2,
-          // More aggressive compression
           maxWidthOrHeight: 400,
-          // Higher resolution for better quality
           useWebWorker: false
         };
         const compressedFile = await imageCompression(file, options);
@@ -2634,13 +2635,12 @@ Is it scaring you off?`,
           id: this.id
         });
         if (!data2) {
-          data2 = { imageData: "", link: "", type: "default" };
+          data2 = { imageData: "", metaData: { link: "", type: "default" } };
         }
         const compressedId = `compressed-${this.id}`;
         let compressedImage = {
-          link: data2.link,
           imageData: data2.imageData,
-          type: data2.type
+          metaData: { link: data2.metaData.link, type: data2.metaData.type }
         };
         const file = this.fileInput.files?.[0];
         if (file) {
@@ -2649,34 +2649,34 @@ Is it scaring you off?`,
             this.getCompressedData(file)
           ]);
           data2.imageData = originalDataUrl;
-          data2.link = file.name;
-          data2.type = "file";
+          data2.metaData.link = file.name;
+          data2.metaData.type = "file";
           compressedImage.imageData = compressedDataUrl;
-          compressedImage.link = file.name;
-          compressedImage.type = "file";
+          compressedImage.metaData.link = file.name;
+          compressedImage.metaData.type = "file";
           this.fileInput.value = "";
         } else {
           const linkValue = this.linkInput.value?.trim() || "";
           if (linkValue === "") {
-            data2.type = "default";
-            data2.link = "";
+            data2.metaData.type = "default";
+            data2.metaData.link = "";
             data2.imageData = "";
-            compressedImage.type = "default";
-            compressedImage.link = "";
+            compressedImage.metaData.type = "default";
+            compressedImage.metaData.link = "";
             compressedImage.imageData = "";
           } else if (isAbsoluteUrl(linkValue)) {
-            data2.type = "link";
-            data2.link = linkValue;
+            data2.metaData.type = "link";
+            data2.metaData.link = linkValue;
             data2.imageData = linkValue;
-            compressedImage.type = "link";
-            compressedImage.link = linkValue;
+            compressedImage.metaData.type = "link";
+            compressedImage.metaData.link = linkValue;
             compressedImage.imageData = linkValue;
           } else {
-            data2.type = "default";
-            data2.link = "";
+            data2.metaData.type = "default";
+            data2.metaData.link = "";
             data2.imageData = "";
-            compressedImage.type = "default";
-            compressedImage.link = "";
+            compressedImage.metaData.type = "default";
+            compressedImage.metaData.link = "";
             compressedImage.imageData = "";
           }
         }
@@ -2701,9 +2701,10 @@ Is it scaring you off?`,
         action: "getImage",
         id: this.id
       });
-      if (!data2) data2 = { link: "", type: "default" };
-      this.linkInput.value = data2.link || "";
-      if (data2.type === "file") {
+      let metaData = data2.metaData;
+      if (!metaData) metaData = { link: "", type: "default" };
+      this.linkInput.value = metaData.link || "";
+      if (metaData.type === "file") {
         this.fileInputButton.classList.add("active");
       } else {
         this.fileInputButton.classList.remove("active");
@@ -2721,29 +2722,31 @@ Is it scaring you off?`,
       id = "compressed-" + id;
     }
     try {
-      image = await browser.runtime.sendMessage({ action: "getImage", id });
-      console.log(image);
+      image = await browser.runtime.sendMessage({
+        action: "getImage",
+        id
+      });
     } catch (err) {
       console.warn("[getImageURL] Failed to get image from background:", err);
       return { url: await onDefault(), type: null };
     }
-    if (image.type === "default") {
-      return { url: await onDefault(), type: image.type };
+    if (image.metaData.type === "default") {
+      return { url: await onDefault(), type: image.metaData.type };
     }
-    if (image.type === "link") {
-      return { url: image.imageData, type: image.type };
+    if (image.metaData.type === "link") {
+      return { url: image.imageData, type: image.metaData.type };
     }
     if (isFirefox) {
-      return { url: image.imageData, type: image.type };
+      return { url: image.imageData, type: image.metaData.type };
     }
     try {
       const res = await fetch(image.imageData);
       const blob = await res.blob();
       const objectURL = URL.createObjectURL(blob);
-      return { url: objectURL, type: image.type };
+      return { url: objectURL, type: image.metaData.type };
     } catch (err) {
       console.warn("[getImageURL] Failed to create Blob URL:", err);
-      return { url: await onDefault(), type: image.type };
+      return { url: await onDefault(), type: image.metaData.type };
     }
   }
 
@@ -7241,7 +7244,22 @@ Is it scaring you off?`,
       duplicateButton.addEventListener("click", async () => {
         await this.duplicate();
       });
+      let favoriteButton = document.createElement("button");
+      favoriteButton.classList.add("bottom-container-button");
+      favoriteButton.innerHTML = heartSvg;
+      favoriteButton.addEventListener("click", async () => {
+        await this.favoriteToggle();
+      });
+      if (this.isFavorite) this.element.classList.add("is-favorite");
+      let shareButton = document.createElement("button");
+      shareButton.classList.add("bottom-container-button");
+      shareButton.innerHTML = shareSvg;
+      shareButton.addEventListener("click", async () => {
+        await this.share();
+      });
+      buttonContainer.appendChild(shareButton);
       buttonContainer.appendChild(duplicateButton);
+      buttonContainer.appendChild(favoriteButton);
       if (this.isCustom) {
         let editButton = document.createElement("button");
         editButton.classList.add("bottom-container-button");
@@ -7251,14 +7269,6 @@ Is it scaring you off?`,
         });
         buttonContainer.appendChild(editButton);
       }
-      let favoriteButton = document.createElement("button");
-      favoriteButton.classList.add("bottom-container-button");
-      favoriteButton.innerHTML = heartSvg;
-      favoriteButton.addEventListener("click", async () => {
-        await this.favoriteToggle();
-      });
-      if (this.isFavorite) this.element.classList.add("is-favorite");
-      buttonContainer.appendChild(favoriteButton);
       bottomContainer.appendChild(buttonContainer);
       return bottomContainer;
     }
@@ -7291,7 +7301,6 @@ Is it scaring you off?`,
             `url(${await imageURL.url})`
           );
         } else {
-          console.log(imageURL.url, "is not valdid");
           this.element.style.setProperty("--background-image-local", `url()`);
         }
         if (isFirefox && imageURL.type == "file") {
@@ -7332,29 +7341,33 @@ Is it scaring you off?`,
     }
     async favoriteToggle() {
       this.isFavorite = !this.isFavorite;
-      console.log(this.isFavorite);
       let data2 = await browser.runtime.sendMessage({
         action: "getSettingsData"
       });
+      let updateFavorite = async () => {
+        await browser.runtime.sendMessage({
+          action: "setSetting",
+          name: "appearance.quickSettingsThemes",
+          data: quickSettingsThemes
+        });
+        this.element.classList.toggle("is-favorite");
+        this.onFavoriteToggle();
+      };
       let quickSettingsThemes = data2.appearance.quickSettingsThemes;
       if (this.isFavorite) {
         quickSettingsThemes.push(this.name);
+        await updateFavorite();
       } else {
         quickSettingsThemes = quickSettingsThemes.filter((name2) => {
           return name2 != this.name;
         });
         if (this.currentCategory == "quickSettings") {
+          this.element.addEventListener("animationend", updateFavorite);
           this.element.classList.add("being-removed");
+        } else {
+          await updateFavorite();
         }
       }
-      await browser.runtime.sendMessage({
-        action: "setSetting",
-        name: "appearance.quickSettingsThemes",
-        data: quickSettingsThemes
-      });
-      console.log(quickSettingsThemes);
-      this.element.classList.toggle("is-favorite");
-      this.onFavoriteToggle();
     }
     async edit() {
       startCustomThemeCreator(await getTheme(this.name), this.name);
@@ -7372,18 +7385,33 @@ Is it scaring you off?`,
         action: "getImage",
         id: "compressed-" + this.name
       });
-      if (result.type == "default") {
-        result.imageData = await getExtensionImage(
-          "theme-backgrounds/" + this.name + ".jpg"
+      async function convertBlobToBase64(blob) {
+        let base64 = await new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onloadend = () => resolve(reader.result);
+          reader.onerror = reject;
+          reader.readAsDataURL(blob);
+        });
+        return base64;
+      }
+      if (result.metaData.type == "default") {
+        let response = await fetch(
+          await getExtensionImage("theme-backgrounds/" + this.name + ".jpg")
         );
-        compressedResult.imageData = await getExtensionImage(
-          "theme-backgrounds/compressed/" + this.name + ".jpg"
+        result.imageData = await convertBlobToBase64(await response.blob());
+        let compressedResponse = await fetch(
+          await getExtensionImage(
+            "theme-backgrounds/compressed/" + this.name + ".jpg"
+          )
+        );
+        compressedResult.imageData = await convertBlobToBase64(
+          await compressedResponse.blob()
         );
         if (!this.isCustom) {
-          result.type = "link";
-          result.link = this.name + ".jpg";
-          compressedResult.type = "link";
-          compressedResult.link = this.name + ".jpg";
+          result.metaData.type = "file";
+          result.metaData.link = this.name + ".jpg";
+          compressedResult.metaData.type = "file";
+          compressedResult.metaData.link = this.name + ".jpg";
         }
       }
       if (await isValidImage(result.imageData)) {
@@ -7402,8 +7430,19 @@ Is it scaring you off?`,
       }
       this.onDuplicate(newThemeName);
     }
+    async share() {
+      console.log("Started sharing");
+      await browser.runtime.sendMessage({
+        action: "shareTheme",
+        name: this.name
+      });
+      this.onShare();
+    }
     // Overide in de implementation
     async onFavoriteToggle() {
+    }
+    // Overide in de implementation
+    async onShare() {
     }
     // Overide in de implementation
     async onDuplicate(newThemeName) {
@@ -7602,7 +7641,6 @@ Is it scaring you off?`,
         await this.renderFolderTiles();
         return;
       }
-      console.log("updating selector");
       await this.updateThemeTiles();
       this.updateImages();
     }
@@ -7632,7 +7670,6 @@ Is it scaring you off?`,
           categories: ["custom"],
           includeHidden: true
         });
-        console.log(customThemes);
         correctThemeNames2.forEach(async (themeName) => {
           if (!visibleThemeNames2.includes(themeName)) {
             let isFavorite = data2.appearance.quickSettingsThemes.includes(themeName);
@@ -7765,7 +7802,6 @@ Is it scaring you off?`,
       tile.onFavoriteToggle = async () => {
         await settingsWindow.loadPage(false);
         await loadQuickSettings();
-        console.log(this.currentCategory);
         if (this.currentCategory == "quickSettings") {
           await this.updateSelectorContent();
         }
@@ -7797,7 +7833,6 @@ Is it scaring you off?`,
       this.currentTiles = tiles;
       if (Object.keys(themes2).length == 0 && this.currentCategory != "custom") {
         this.currentTiles.push(new noThemes());
-        console.log(this.currentTiles);
       }
       await this.renderTiles(this.currentTiles);
       await this.updateImages(true);
@@ -8012,25 +8047,17 @@ Is it scaring you off?`,
       return img;
     }
     async updateBackgroundImagePreview() {
-      console.log("updating");
       let result = await browser.runtime.sendMessage({
         action: "getImage",
         id: this.name
       });
-      if (result.type == "default") {
+      if (result.metaData.type == "default") {
         result.imageData = await getExtensionImage(
           "theme-backgrounds/compressed/" + this.name + ".jpg"
         );
       }
       if (await isValidImage(result.imageData)) {
-        let url = await getImageURL(
-          this.name,
-          () => {
-            return "a";
-          },
-          true
-        );
-        this.backgroundImagePreview.src = url.url;
+        this.backgroundImagePreview.src = result.imageData;
         this.content.classList.remove("no-image-available");
       } else {
         this.backgroundImagePreview.src = "";
@@ -8038,12 +8065,17 @@ Is it scaring you off?`,
       }
     }
     async getImageColors() {
-      let vibrantTester = new Vibrant(this.backgroundImagePreview.src, {
-        quality: 1,
-        colorCount: 256
-      });
-      let palette = await vibrantTester.getPalette();
-      return palette;
+      try {
+        let vibrantTester = new Vibrant(this.backgroundImagePreview.src, {
+          quality: 1,
+          colorCount: 256
+        });
+        let palette = await vibrantTester.getPalette();
+        return palette;
+      } catch (error) {
+        console.error("Error extracting image colors:", error);
+        return null;
+      }
     }
     readUserChoice() {
       let brightnessButton = document.getElementById(
@@ -8061,6 +8093,7 @@ Is it scaring you off?`,
     }
     async generateTheme() {
       let swatchPalette = await this.getImageColors();
+      if (!swatchPalette) return;
       let colordPalette = convertColorPalette(swatchPalette);
       let choice = this.readUserChoice();
       if (!choice) return;
@@ -9699,7 +9732,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       action: "getImage",
       id: appearance.theme
     });
-    if (result.type == "default") {
+    if (result.metaData.type == "default") {
       result.imageData = await getExtensionImage(
         "theme-backgrounds/" + appearance.theme + ".jpg"
       );

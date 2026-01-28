@@ -5,9 +5,13 @@ import { isFirefox } from "../main.js";
 import imageCompression, { type Options } from "browser-image-compression";
 
 export type SMPPImage = {
+  metaData: SMPPImageMetaData;
+  imageData: string | Base64URLString;
+};
+
+export type SMPPImageMetaData = {
   type: string;
   link: string;
-  imageData: string | Base64URLString;
 };
 
 export class ImageSelector {
@@ -112,8 +116,8 @@ export class ImageSelector {
   async getCompressedData(file: File): Promise<string> {
     try {
       const options: Options = {
-        maxSizeMB: 0.2, // More aggressive compression
-        maxWidthOrHeight: 400, // Higher resolution for better quality
+        maxSizeMB: 0.2,
+        maxWidthOrHeight: 400,
         useWebWorker: false,
       };
 
@@ -135,14 +139,13 @@ export class ImageSelector {
       })) as SMPPImage;
 
       if (!data) {
-        data = { imageData: "", link: "", type: "default" };
+        data = { imageData: "", metaData: { link: "", type: "default" } };
       }
 
       const compressedId = `compressed-${this.id}`;
       let compressedImage: SMPPImage = {
-        link: data.link,
         imageData: data.imageData,
-        type: data.type,
+        metaData: { link: data.metaData.link, type: data.metaData.type },
       };
 
       // Handle file upload
@@ -154,40 +157,40 @@ export class ImageSelector {
         ]);
 
         data.imageData = originalDataUrl;
-        data.link = file.name;
-        data.type = "file";
+        data.metaData.link = file.name;
+        data.metaData.type = "file";
 
         compressedImage.imageData = compressedDataUrl;
-        compressedImage.link = file.name;
-        compressedImage.type = "file";
+        compressedImage.metaData.link = file.name;
+        compressedImage.metaData.type = "file";
 
         this.fileInput.value = "";
       } else {
         const linkValue = this.linkInput.value?.trim() || "";
 
         if (linkValue === "") {
-          data.type = "default";
-          data.link = "";
+          data.metaData.type = "default";
+          data.metaData.link = "";
           data.imageData = "";
 
-          compressedImage.type = "default";
-          compressedImage.link = "";
+          compressedImage.metaData.type = "default";
+          compressedImage.metaData.link = "";
           compressedImage.imageData = "";
         } else if (isAbsoluteUrl(linkValue)) {
-          data.type = "link";
-          data.link = linkValue;
+          data.metaData.type = "link";
+          data.metaData.link = linkValue;
           data.imageData = linkValue;
 
-          compressedImage.type = "link";
-          compressedImage.link = linkValue;
+          compressedImage.metaData.type = "link";
+          compressedImage.metaData.link = linkValue;
           compressedImage.imageData = linkValue;
         } else {
-          data.type = "default";
-          data.link = "";
+          data.metaData.type = "default";
+          data.metaData.link = "";
           data.imageData = "";
 
-          compressedImage.type = "default";
-          compressedImage.link = "";
+          compressedImage.metaData.type = "default";
+          compressedImage.metaData.link = "";
           compressedImage.imageData = "";
         }
       }
@@ -210,16 +213,16 @@ export class ImageSelector {
   }
 
   async loadImageData() {
-    let data = await browser.runtime.sendMessage({
+    let data = (await browser.runtime.sendMessage({
       action: "getImage",
       id: this.id,
-    });
+    })) as SMPPImage;
+    let metaData = data.metaData;
 
-    if (!data) data = { link: "", type: "default" };
+    if (!metaData) metaData = { link: "", type: "default" };
 
-    this.linkInput.value = data.link || "";
-
-    if (data.type === "file") {
+    this.linkInput.value = metaData.link || "";
+    if (metaData.type === "file") {
       this.fileInputButton.classList.add("active");
     } else {
       this.fileInputButton.classList.remove("active");
@@ -244,26 +247,28 @@ export async function getImageURL(
     id = "compressed-" + id;
   }
   try {
-    image = await browser.runtime.sendMessage({ action: "getImage", id });
-    console.log(image);
+    image = (await browser.runtime.sendMessage({
+      action: "getImage",
+      id,
+    })) as SMPPImage;
   } catch (err) {
     console.warn("[getImageURL] Failed to get image from background:", err);
     return { url: await onDefault(), type: null };
   }
 
   // Default
-  if (image.type === "default") {
-    return { url: await onDefault(), type: image.type };
+  if (image.metaData.type === "default") {
+    return { url: await onDefault(), type: image.metaData.type };
   }
 
   // Link
-  if (image.type === "link") {
-    return { url: image.imageData, type: image.type };
+  if (image.metaData.type === "link") {
+    return { url: image.imageData, type: image.metaData.type };
   }
 
   // WARNING, THIS IS CURSED BUT I DON'T CARE!
   if (isFirefox) {
-    return { url: image.imageData, type: image.type };
+    return { url: image.imageData, type: image.metaData.type };
   }
 
   // File (base64)
@@ -273,9 +278,9 @@ export async function getImageURL(
 
     const objectURL = URL.createObjectURL(blob);
 
-    return { url: objectURL, type: image.type };
+    return { url: objectURL, type: image.metaData.type };
   } catch (err) {
     console.warn("[getImageURL] Failed to create Blob URL:", err);
-    return { url: await onDefault(), type: image.type };
+    return { url: await onDefault(), type: image.metaData.type };
   }
 }

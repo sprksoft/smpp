@@ -5,7 +5,7 @@
   background-color: var(--color-base00) !important;
   color: var(--color-text) !important;
   background: var(--darken-background) !important;
-  backdrop-filter: blur(5px) !important;
+  backdrop-filter: var(--small-blur) !important;
   height: fit-content !important;
   padding: 0.75rem !important;
   margin-left: 4px !important;
@@ -36,7 +36,7 @@
 
 .glass [dialog-content] {
   background-color: var(--darken-background) !important;
-  backdrop-filter: blur(30px) !important;
+  backdrop-filter: var(--surface-blur) !important;
 }
 
 .side-panel__panel {
@@ -107,20 +107,26 @@
 }
 .glass .results-evaluation--small .side-panel__panel {
   background: var(--darken-background) !important;
-  backdrop-filter: blur(30px) !important;
+  backdrop-filter: var(--surface-blur) !important;
 }
 
 .results-evaluation--small .side-panel__panel {
   background-color: var(--color-base00) !important;
 }
 
-.results-evaluation--wide .side-panel__panel {
+.results-evaluations.results-evaluation--wide .side-panel__panel {
   background-color: transparent !important;
+  backdrop-filter: none !important;
   box-shadow: none !important;
 }
 
 .side-panel__panel {
   box-shadow: -10px 0px 20px -10px var(--color-shadow) !important;
+}
+
+.glass .side-panel__panel {
+  background: var(--darken-background) !important;
+  backdrop-filter: var(--surface-blur) !important;
 }
 
 .side-panel__panel {
@@ -152,7 +158,7 @@ button.reset-filters-btn.reset-filters-btn--hidden {
 
 .goal-evaluations-details__row {
   background: var(--darken-background) !important;
-  backdrop-filter: blur(5px) !important;
+  backdrop-filter: var(--small-blur) !important;
 }
 
 button.goal-evaluations-details__row:active {
@@ -179,12 +185,21 @@ input.input.bootstrap__input.search-input {
   background-color: transparent !important;
 }
 
+.glass .evaluation-list-item,
+.glass .goals-filter__item,
+.glass .content_container,
+.glass .navigation_container {
+  background-color: var(--darken-background) !important;
+  backdrop-filter: var(--small-blur) !important;
+  color: var(--color-text) !important;
+  border-color: var(--color-base01) !important;
+}
+
 .evaluation-list-item,
 .goals-filter__item,
 .content_container,
 .navigation_container {
-  background-color: var(--darken-background) !important;
-  backdrop-filter: blur(5px) !important;
+  background-color: var(--color-base01) !important;
   color: var(--color-text) !important;
   border-color: var(--color-base01) !important;
 }
@@ -216,19 +231,24 @@ input.input.bootstrap__input.search-input {
 
 button.goals-filter__item.selected {
   border-color: var(--color-accent) !important;
+  outline: 1px var(--color-accent) !important;
 }
 
 .goals-filter__item:hover:not(.selected) {
-  border-color: var(--color-base03) !important;
+  border-color: var(--color-accent) !important;
 }
 
 .enableAnimations .goals-filter__item {
-  transition: border-color 0.2s ease-in-out !important;
+  transition-property: border-color, outline;
+  transition: 0.2s ease-in-out !important;
+}
+.glass .side-panel__content .side-panel__content__title__name {
+  background: var(--darken-background) !important;
+  backdrop-filter: var(--small-blur) !important;
 }
 
 .side-panel__content .side-panel__content__title__name {
-  background: var(--darken-background) !important;
-  backdrop-filter: blur(5px) !important;
+  background: var(--color-base01) !important;
   width: fit-content !important;
   padding: 0rem 1rem !important;
   max-width: 100% !important;
@@ -415,13 +435,13 @@ span.evaluation-graphic__progress-ring__value {
   .title-and-schoolyear-selector__period-container:not(:disabled) {
   border-color: var(--color-accent) !important;
   background-color: var(--darken-background) !important;
-  backdrop-filter: blur(5px) !important;
+  backdrop-filter: var(--small-blur) !important;
 }
 
 .title-and-schoolyear-selector
   .title-and-schoolyear-selector__period-container:hover:not(:disabled) {
   border-color: var(--color-accent) !important;
-  backdrop-filter: blur(5px) !important;
+  backdrop-filter: var(--small-blur) !important;
 }
 
 .title-and-schoolyear-selector
@@ -447,7 +467,7 @@ span.evaluation-graphic__progress-ring__value {
 
 .results-goals-overview__content .listview__row.js-listview-row {
   border-radius: 2rem !important;
-  backdrop-filter: blur(10px) !important;
+  backdrop-filter: var(--medium-blur) !important;
   background-color: var(--darken-background) !important;
   margin-bottom: 1rem !important;
 }
@@ -615,10 +635,13 @@ button.button-ZR3rz.bp-c-combo-hover-plain-outline--300 {
 .results-evaluations.js-evaluations-page.js-routehandler.results-evaluation--wide {
   width: 10% !important;
 }
+.glass .title-and-schoolyear-selector.js-title-and-schoolyear-selector {
+  background: var(--darken-background) !important;
+  backdrop-filter: var(--medium-blur) !important;
+}
 
 .title-and-schoolyear-selector.js-title-and-schoolyear-selector {
-  background: var(--darken-background) !important;
-  backdrop-filter: blur(10px) !important;
+  background: var(--color-base01) !important;
   border-radius: 1.5rem !important;
   padding: 0.5rem 1rem !important;
   width: fit-content !important;
@@ -627,7 +650,7 @@ button.button-ZR3rz.bp-c-combo-hover-plain-outline--300 {
 
 .glass .bubble {
   background-color: var(--darken-background) !important;
-  backdrop-filter: blur(5px) !important;
+  backdrop-filter: var(--medium-blur) !important;
 }
 
 .bubble.js-bubble.schoolyear-dropdown-bubble.js-schoolyear-dropdown-bubble {

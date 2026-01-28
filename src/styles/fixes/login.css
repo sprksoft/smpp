@@ -42,7 +42,7 @@ html {
 }
 
 .login-app__top {
-  backdrop-filter: blur(10px) !important;
+  backdrop-filter: var(--medium-blur) !important;
   background: var(--darken-background) !important;
   border-radius: 2.5rem !important;
   border: 3px solid var(--color-base03) !important;
@@ -116,8 +116,8 @@ a.smscButton[href^="/login/sso/init"],
 .enableAnimations
   .login-app
   .smscButton.blue:not(#pushWizardPopupConfirmButton) {
-  transition-property: background-color, border-color, box-shadow, width,
-    font-weigt, margin-left;
+  transition-property:
+    background-color, border-color, box-shadow, width, font-weigt, margin-left;
   transition: 0.3s !important;
 }
 

@@ -32,7 +32,7 @@
 
 .glass .notification {
   background: var(--darken-background) !important;
-  backdrop-filter: blur(5px);
+  backdrop-filter: var(--small-blur);
 }
 
 .notification {

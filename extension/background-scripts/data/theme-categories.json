@@ -16,18 +16,11 @@
     "ocean",
     "otters",
     "galaxy",
+    "japan",
     "error",
     "smkerst"
   ],
-  "light": [
-    "white",
-    "summer",
-    "pink",
-    "japan",
-    "fairyblue",
-    "boringwhite",
-    "pizza"
-  ],
+  "light": ["white", "summer", "pink", "fairyblue", "boringwhite", "pizza"],
   "seasonal": ["fall", "smkerst", "winter", "summer", "matcha"],
   "hidden": [
     "fairyblue",

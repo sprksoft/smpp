@@ -28,6 +28,10 @@ html {
   --color-splashtext: var(--color-accent);
   --color-shadow: rgba(0, 0, 0, 0.2);
   --font-family: "Montserrat", "Trebuchet MS", sans-serif;
+  --small-blur: blur(5px);
+  --medium-blur: blur(10px);
+  --large-blur: blur(20px);
+  --surface-blur: blur(30px);
 }
 
 html {
@@ -82,7 +86,7 @@ textarea .modern-ui,
 
 .messageframe:has(#msgdetail):has(.msgDetail--empty) {
   background-color: var(--darken-background) !important;
-  backdrop-filter: blur(5px) !important;
+  backdrop-filter: var(--small-blur) !important;
 }
 
 .smsc-container .smsc-container--left,
@@ -818,7 +822,7 @@ input:checked + .slider:before {
 
 .glass #quickSettings {
   background-color: var(--darken-background) !important;
-  backdrop-filter: blur(10px);
+  backdrop-filter: var(--medium-blur);
 }
 
 .ridge #quickSettings {
@@ -1404,10 +1408,6 @@ smsc-listview .checkbox-button[aria-checked="true"] {
   border-bottom-right-radius: 1rem;
 }
 
-[listview] .listview__rows {
-  gap: 0.5rem !important;
-}
-
 .moveToPostbox__item__icon,
 label.radiobutton input[type="radio"] {
   appearance: none !important;
@@ -1708,7 +1708,7 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
 
 .smscComposeMessage {
   background-color: var(--darken-background) !important;
-  backdrop-filter: blur(5px) !important;
+  backdrop-filter: var(--small-blur) !important;
   border: 2px solid var(--color-base02) !important;
 }
 
@@ -1846,12 +1846,12 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
 .enableAnimations .base-window {
   transition-property: width, height, left, top, border-radius;
   transition: 0.2s cubic-bezier(0.16, 1.13, 0.89, 0.96);
-  animation: popIn 0.3s cubic-bezier(0.24, 1.37, 0.5, 0.94) forwards !important;
+  animation: popIn 0.3s cubic-bezier(0.01, 1.13, 0.32, 0.96) forwards !important;
 }
 
 .glass .base-window {
   background: var(--darken-background);
-  backdrop-filter: blur(20px);
+  backdrop-filter: var(--surface-blur);
 }
 .glass #global_chat_window {
   backdrop-filter: none; /* Filters can't stack so disable to allow gc glass */
@@ -1979,7 +1979,7 @@ smsc-listview {
   border-radius: 1rem !important;
   overflow: hidden !important;
   background-color: var(--darken-background);
-  backdrop-filter: blur(5px) !important;
+  backdrop-filter: var(--small-blur) !important;
 }
 
 smsc-listview table tr .listview-row__row-actions .action-button:hover {
@@ -2010,7 +2010,7 @@ input.smsc-inlineeditor--editable.smsc-inlineeditor__input.js-inlineEditor-input
   border: 2px solid var(--color-base02) !important;
   box-shadow: none !important;
   background-color: var(--darken-background) !important;
-  backdrop-filter: blur(5px) !important;
+  backdrop-filter: var(--small-blur) !important;
 }
 hr.smsc-dialog__ruler,
 .deliberation-line-picker__button-bar {
@@ -2215,7 +2215,7 @@ div[style*="background"]:not(.manual_widgettitle) {
 
 .glass .bubble-s87kI {
   background-color: var(--darken-background) !important;
-  backdrop-filter: blur(5px) !important;
+  backdrop-filter: var(--small-blur) !important;
 }
 
 .dropdownMenuItem-Vszox[data-selected="true"] {
@@ -2293,7 +2293,7 @@ label.checkbox.js-checkbox.form-page__receive-copy-by-mail-checkbox {
 
 .smsc-container.form-completed-page__content {
   background-color: var(--darken-background) !important;
-  backdrop-filter: blur(5px) !important;
+  backdrop-filter: var(--small-blur) !important;
   background-image: none !important;
   height: fit-content;
 }
@@ -2336,7 +2336,7 @@ div#folders {
   border-radius: 1.5rem !important;
 
   background-color: var(--darken-background) !important;
-  backdrop-filter: blur(5px) !important;
+  backdrop-filter: var(--small-blur) !important;
   border: 2px solid var(--color-base02) !important;
   font-weight: 500 !important;
 }
@@ -2346,7 +2346,7 @@ div#folders {
 
 .glass div#smscMainBlockContainer {
   background: var(--darken-background) !important;
-  backdrop-filter: blur(30px) !important;
+  backdrop-filter: var(--surface-blur) !important;
 }
 
 div#smscMainBlockContainer {

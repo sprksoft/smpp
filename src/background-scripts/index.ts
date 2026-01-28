@@ -21,6 +21,7 @@ import {
   saveCustomTheme,
   removeCustomTheme,
   getFirstThemeInCategory,
+  shareTheme,
 } from "./themes.js";
 
 browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -87,6 +88,10 @@ async function handleMessage(message, sendResponse) {
       await removeCustomTheme(message.id);
       sendResponse({ success: true });
       console.log(`Theme ${message.id} removed.`);
+    }
+    if (message.action === "shareTheme") {
+      await shareTheme(message.name);
+      console.log(`Theme ${message.name} was shared`);
     }
 
     // Custom theme OLD

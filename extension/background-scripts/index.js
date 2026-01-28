@@ -99,7 +99,7 @@
   }
   var defaultPlantData = {};
   async function getDefaultPlantData() {
-    if (!defaultPlantData) {
+    if (Object.keys(defaultPlantData).length == 0) {
       defaultPlantData = await loadJSON(
         "background-scripts/data/default-plant-data.json"
       );
@@ -117,7 +117,7 @@
   }
   var fallBackColorData = {};
   async function getFallbackColorData() {
-    if (!fallBackColorData) {
+    if (Object.keys(fallBackColorData).length == 0) {
       fallBackColorData = await loadJSON(
         "background-scripts/data/delijn-kleuren.json"
       );
@@ -145,22 +145,33 @@
     }
   }
   async function setImage(id, data) {
-    const images = (await browser.storage.local.get("images")).images || {};
-    images[id] = data;
-    await browser.storage.local.set({ images });
+    const imagesMetaData = (await browser.storage.local.get("images")).images || {};
+    imagesMetaData[id] = data.metaData;
+    await browser.storage.local.set({ images: imagesMetaData });
+    const customId = "SMPPImage-" + id;
+    await browser.storage.local.set({ [customId]: data.imageData });
   }
   async function getImage(id) {
-    const images = (await browser.storage.local.get("images")).images || {};
-    console.log(images);
-    console.log(images[id]);
-    if (!images[id])
-      return { type: "default", link: "", imageData: "" };
-    return images[id];
+    const imagesMetaData = (await browser.storage.local.get("images")).images || {};
+    let metaData = imagesMetaData[id];
+    if (!metaData)
+      return {
+        metaData: { type: "default", link: "" },
+        imageData: ""
+      };
+    const customId = "SMPPImage-" + id;
+    const image = (await browser.storage.local.get(customId))[customId] || "";
+    return {
+      metaData,
+      imageData: image
+    };
   }
   async function removeImage(id) {
-    const images = (await browser.storage.local.get("images")).images || {};
-    delete images[id];
-    await browser.storage.local.set({ images });
+    const imagesMetaData = (await browser.storage.local.get("images")).images || {};
+    delete imagesMetaData[id];
+    const customId = "SMPPImage-" + id;
+    await browser.storage.local.remove([customId]);
+    await browser.storage.local.set({ images: imagesMetaData });
   }
 
   // src/background-scripts/themes.ts
@@ -282,6 +293,10 @@
     await setSettingsData(data);
     await browser.storage.local.set({ customThemes });
   }
+  async function shareTheme(id) {
+    let theme = await getTheme(id);
+    let image = await getImage(id);
+  }
 
   // src/background-scripts/settings.js
   var settingsTemplate;
@@ -381,6 +396,10 @@
         await removeCustomTheme(message.id);
         sendResponse({ success: true });
         console.log(`Theme ${message.id} removed.`);
+      }
+      if (message.action === "shareTheme") {
+        await shareTheme(message.name);
+        console.log(`Theme ${message.name} was shared`);
       }
       if (message.action === "getCustomThemeData") {
         const customThemeData = await getCustomThemeData();
