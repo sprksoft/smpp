@@ -1,6 +1,12 @@
 import { createTextInput } from "../appearance/ui.js";
-import { imageInputSvg } from "../../fixes-utils/svgs.js";
-import { isAbsoluteUrl, browser } from "../../common/utils.js";
+import { imageInputSvg, loadingSpinnerSvg } from "../../fixes-utils/svgs.js";
+import {
+  isAbsoluteUrl,
+  browser,
+  convertLinkToBase64,
+  getCompressedData,
+  convertLinkToFile,
+} from "../../common/utils.js";
 import { isFirefox } from "../main.js";
 import imageCompression, { type Options } from "browser-image-compression";
 
@@ -10,7 +16,7 @@ export type SMPPImage = {
 };
 
 export type SMPPImageMetaData = {
-  type: string;
+  type: "file" | "default";
   link: string;
 };
 
@@ -113,22 +119,8 @@ export class ImageSelector {
     });
   }
 
-  async getCompressedData(file: File): Promise<string> {
-    try {
-      const options: Options = {
-        maxSizeMB: 0.2,
-        maxWidthOrHeight: 400,
-        useWebWorker: false,
-      };
-
-      const compressedFile = await imageCompression(file, options);
-      const dataUrl = await imageCompression.getDataUrlFromFile(compressedFile);
-
-      return dataUrl;
-    } catch (error) {
-      console.error("Compression failed:", error);
-      return await imageCompression.getDataUrlFromFile(file);
-    }
+  displayError() {
+    alert("Failed to fetch this image");
   }
 
   async storeImage() {
@@ -151,10 +143,12 @@ export class ImageSelector {
       // Handle file upload
       const file = this.fileInput.files?.[0];
       if (file) {
+        this.fileInputButton.innerHTML = loadingSpinnerSvg;
         const [originalDataUrl, compressedDataUrl] = await Promise.all([
           imageCompression.getDataUrlFromFile(file),
-          this.getCompressedData(file),
+          getCompressedData(file),
         ]);
+        this.fileInputButton.innerHTML = imageInputSvg;
 
         data.imageData = originalDataUrl;
         data.metaData.link = file.name;
@@ -177,13 +171,34 @@ export class ImageSelector {
           compressedImage.metaData.link = "";
           compressedImage.imageData = "";
         } else if (isAbsoluteUrl(linkValue)) {
-          data.metaData.type = "link";
-          data.metaData.link = linkValue;
-          data.imageData = linkValue;
+          this.fileInputButton.innerHTML = loadingSpinnerSvg;
+          let [base64, file] = await Promise.all([
+            await convertLinkToBase64(linkValue),
+            await convertLinkToFile(linkValue),
+          ]);
+          this.fileInputButton.innerHTML = imageInputSvg;
+          if (base64 && file) {
+            data.metaData.type = "file";
+            data.metaData.link = linkValue;
+            data.imageData = base64;
 
-          compressedImage.metaData.type = "link";
-          compressedImage.metaData.link = linkValue;
-          compressedImage.imageData = linkValue;
+            this.fileInputButton.innerHTML = loadingSpinnerSvg;
+            let compressedBase64 = await getCompressedData(file);
+            this.fileInputButton.innerHTML = imageInputSvg;
+
+            compressedImage.metaData.type = "file";
+            compressedImage.metaData.link = linkValue;
+            compressedImage.imageData = compressedBase64;
+          } else {
+            this.displayError();
+            data.metaData.type = "default";
+            data.metaData.link = "";
+            data.imageData = "";
+
+            compressedImage.metaData.type = "default";
+            compressedImage.metaData.link = "";
+            compressedImage.imageData = "";
+          }
         } else {
           data.metaData.type = "default";
           data.metaData.link = "";
@@ -205,6 +220,7 @@ export class ImageSelector {
         id: compressedId,
         data: compressedImage,
       });
+      console.log("Loading data from here");
       await this.loadImageData();
       this.onStore();
     } catch (error) {
@@ -259,11 +275,6 @@ export async function getImageURL(
   // Default
   if (image.metaData.type === "default") {
     return { url: await onDefault(), type: image.metaData.type };
-  }
-
-  // Link
-  if (image.metaData.type === "link") {
-    return { url: image.imageData, type: image.metaData.type };
   }
 
   // WARNING, THIS IS CURSED BUT I DON'T CARE!

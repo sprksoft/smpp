@@ -19,6 +19,7 @@
   background-color: var(--color-base01) !important;
   border-radius: 1rem;
   box-shadow: 0px 2px 10px 0px var(--color-shadow);
+  height: 3rem;
 }
 
 #quickSettings .full-file-input-container .smpp-text-input:hover,
@@ -36,10 +37,19 @@
   background: var(--color-base01) !important;
   opacity: 1;
   display: flex;
+  width: fit-content;
+}
+
+.smpp-file-input-button svg {
+  aspect-ratio: 1;
+  height: 100%;
 }
 
 .enableAnimations .smpp-file-input-button {
-  transition: opacity 0.3s, filter 0.3s, border-color ease-in-out 0.3s !important;
+  transition:
+    opacity 0.3s,
+    filter 0.3s,
+    border-color ease-in-out 0.3s !important;
 }
 
 .smpp-file-input-button:hover,
@@ -74,7 +84,9 @@
   z-index: auto;
 }
 .enableAnimations .smpp-link-clear-button {
-  transition: filter 0.2s ease-in-out, stroke 0.2s ease-in-out,
+  transition:
+    filter 0.2s ease-in-out,
+    stroke 0.2s ease-in-out,
     scale 0.2s ease-in-out;
 }
 

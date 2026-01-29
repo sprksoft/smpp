@@ -115,7 +115,7 @@
     <rect x="16.594" y="12.8062" width="11.8729" height="3.95764" rx="1.97882" transform="rotate(45 16.594 12.8062)"
         class="st5"></rect>
 </svg>`;
-  var imageInputSvg = `<svg width="30px" height="30px" viewBox="0 0 24.00 24.00" fill="none" xmlns="http://www.w3.org/2000/svg">
+  var imageInputSvg = `<svg viewBox="0 0 24.00 24.00" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path xmlns="http://www.w3.org/2000/svg" d="M14.2647 15.9377L12.5473 14.2346C11.758 13.4519 11.3633 13.0605 10.9089 12.9137C10.5092 12.7845 10.079 12.7845 9.67922 12.9137C9.22485 13.0605 8.83017 13.4519 8.04082 14.2346L4.04193 18.2622M14.2647 15.9377L14.606 15.5991C15.412 14.7999 15.8149 14.4003 16.2773 14.2545C16.6839 14.1262 17.1208 14.1312 17.5244 14.2688C17.9832 14.4253 18.3769 14.834 19.1642 15.6515L20 16.5001M14.2647 15.9377L18.22 19.9628M18.22 19.9628C17.8703 20 17.4213 20 16.8 20H7.2C6.07989 20 5.51984 20 5.09202 19.782C4.7157 19.5903 4.40973 19.2843 4.21799 18.908C4.12583 18.7271 4.07264 18.5226 4.04193 18.2622M18.22 19.9628C18.5007 19.9329 18.7175 19.8791 18.908 19.782C19.2843 19.5903 19.5903 19.2843 19.782 18.908C20 18.4802 20 17.9201 20 16.8V13M11 4H7.2C6.07989 4 5.51984 4 5.09202 4.21799C4.7157 4.40973 4.40973 4.71569 4.21799 5.09202C4 5.51984 4 6.0799 4 7.2V16.8C4 17.4466 4 17.9066 4.04193 18.2622M18 9V6M18 6V3M18 6H21M18 6H15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
   var editIconSvg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px"class=edit_button height="18px" width="18px" viewBox="0 0 24 24"  xml:space="preserve">
 <metadata> Svg Vector Icons : http://www.onlinewebfonts.com/icon</metadata>
@@ -418,358 +418,6 @@ Is it scaring you off?`,
   ];
   function getSplashText() {
     return splashtexts[Math.floor(Math.random() * splashtexts.length)];
-  }
-
-  // src/common/utils.ts
-  var DEBUG = false;
-  var browser;
-  if (browser == void 0) {
-    browser = chrome;
-  }
-  function getByPath(object, path) {
-    if (!path) {
-      return object;
-    }
-    let ob = object;
-    for (let node of path.split(".")) {
-      ob = ob[node];
-      if (ob === void 0) {
-        throw `getByPath: ${node} did not exist in path ${path}`;
-      }
-    }
-    return ob;
-  }
-  function setByPath(object, path, value) {
-    let ob = object;
-    const pathSplit = path.split(".");
-    for (let i5 = 0; i5 < pathSplit.length - 1; i5++) {
-      ob = ob[pathSplit[i5]];
-      if (ob === void 0) {
-        throw `setByPath: ${pathSplit[i5]} did not exist in path ${path}`;
-      }
-    }
-    ob[pathSplit[pathSplit.length - 1]] = value;
-  }
-  function fillObjectWithDefaults(object, defaults) {
-    if (!object) {
-      object = {};
-    }
-    for (const key of Object.keys(defaults)) {
-      if (typeof defaults[key] === "object" && !Array.isArray(defaults[key]) && defaults[key] !== null) {
-        object[key] = fillObjectWithDefaults(object[key], defaults[key]);
-      }
-      if (object[key] === void 0) {
-        object[key] = defaults[key];
-      }
-    }
-    return object;
-  }
-  function openURL2(url, new_window = false) {
-    if (new_window) {
-      let a5 = document.createElement("a");
-      a5.href = url;
-      a5.rel = "noopener noreferrer";
-      a5.target = "_blank";
-      a5.click();
-      return;
-    }
-    window.location.href = url;
-  }
-  function getExtensionImage(name2) {
-    return browser.runtime.getURL(`media/${name2}`);
-  }
-  function sendDebug(...messages) {
-    if (DEBUG) {
-      console.log(...messages);
-    }
-  }
-  function isValidHexColor(color) {
-    return /^#[0-9a-f]{3}(?:[0-9a-f]{3})?(?:[0-9a-f]{2})?$/i.test(color);
-  }
-  function getCurrentDate() {
-    return (/* @__PURE__ */ new Date()).toISOString().split("T")[0];
-  }
-  function getFutureDate(days) {
-    return new Date(Date.now() + days * 864e5).toISOString().split("T")[0];
-  }
-  function randomChance(probability) {
-    if (probability <= 0) return false;
-    if (probability >= 1) return true;
-    return Math.random() < probability;
-  }
-  function isAbsoluteUrl(url) {
-    return /^(https?:\/\/|data:image\/)/i.test(url);
-  }
-
-  // src/fixes-utils/utils.ts
-  function isValidImage(src) {
-    return new Promise((resolve) => {
-      const img = new Image();
-      img.onload = () => resolve(true);
-      img.onerror = () => resolve(false);
-      img.src = src;
-    });
-  }
-  function getPfpLink(username) {
-    let firstInitial;
-    let secondInitial;
-    if (username) {
-      const parts = username.trim().split(/\s+/);
-      firstInitial = parts[0][0].toUpperCase();
-      secondInitial = parts.length > 1 ? parts[1][0].toUpperCase() : "";
-    } else {
-      firstInitial = "M";
-      secondInitial = "U";
-    }
-    return `https://userpicture20.smartschool.be/User/Userimage/hashimage/hash/initials_${firstInitial + secondInitial}/plain/1/res/128`;
-  }
-  function getUserId() {
-    let userId;
-    try {
-      sendDebug("Trying to get plannerUrl from DOM...");
-      const plannerUrl = document.getElementById("datePickerMenu").getAttribute("plannerurl");
-      sendDebug("Found plannerUrl from DOM:", plannerUrl);
-      const expirationDate = /* @__PURE__ */ new Date();
-      expirationDate.setDate(expirationDate.getDate() + 30);
-      document.cookie = `plannerUrl=${plannerUrl};expires=${expirationDate.toUTCString()};path=/`;
-      sendDebug("Stored plannerUrl in cookies with 30 day expiration.");
-      userId = plannerUrl.split("/")[4];
-      sendDebug("Extracted userId from plannerUrl:", userId);
-    } catch (e5) {
-      sendDebug("Failed to get plannerUrl from DOM. Error:", e5.message);
-      sendDebug("Trying to get plannerUrl from cookies...");
-      const cookies = document.cookie.split(";");
-      const plannerUrlCookie = cookies.find(
-        (cookie) => cookie.trim().startsWith("plannerUrl=")
-      );
-      if (plannerUrlCookie) {
-        sendDebug("Retrieved plannerUrl from cookies" + plannerUrlCookie);
-        const plannerUrl = plannerUrlCookie.split("=")[1];
-        sendDebug("Found plannerUrl in cookies:", plannerUrl);
-        userId = plannerUrl.split("/")[4];
-        sendDebug("Extracted userId from cookie plannerUrl:", userId);
-      } else {
-        console.error(
-          "UID is fucked, refresh 5 keer en als het dan niet werkt vraag hulp op discord @JJorne"
-        );
-      }
-    }
-    if (userId) {
-      return userId;
-    } else {
-      console.error("No userID? womp womp");
-    }
-  }
-  function getSchoolName() {
-    try {
-      const schoolName = window.location.hostname.split(".")[0];
-      if (!schoolName) {
-        throw new Error("Failed to extract school name");
-      }
-      return schoolName;
-    } catch (error) {
-      console.error(error.message);
-      return null;
-    }
-  }
-  async function clearAllData() {
-    localStorage.clear();
-    await browser.runtime.sendMessage({
-      action: "clearLocalStorage"
-    });
-    location.reload();
-  }
-
-  // src/fixes-utils/results.ts
-  function buisStats() {
-    setTimeout(function() {
-      const url = `https://${getSchoolName()}.smartschool.be/results/api/v1/evaluations/?itemsOnPage=1000`;
-      fetch(url).then((response) => response.json()).then((data2) => {
-        const categories = {
-          buis: 0,
-          voldoende: 0
-        };
-        data2.forEach((evaluation) => {
-          if (evaluation.graphic && evaluation.graphic.value !== void 0) {
-            const value = evaluation.graphic.value;
-            if (value < 50) {
-              categories.buis++;
-            } else {
-              categories.voldoende++;
-            }
-          }
-        });
-        let newElement = document.createElement("div");
-        newElement.id = "buis-stats";
-        document.getElementsByClassName("results-evaluations__filters")[0].appendChild(newElement);
-        newElement.innerHTML = `<div class="buis-stats" id="buis_amount"></div><div class="buis-stats" id="voldoende_amount"></div>`;
-        document.getElementById(
-          "buis_amount"
-        ).innerHTML = `<div class="buis-stats-box"><span class="buis-stats-title">Onvoldoendes:</span><span class="buis-stats-value">${categories.buis}</span></div>`;
-        document.getElementById(
-          "voldoende_amount"
-        ).innerHTML = `<div class="buis-stats-box"><span class="buis-stats-title">Voldoendes:</span><span class="buis-stats-value">${categories.voldoende}</span></div>`;
-      }).catch((error) => console.error("Error fetching:", error));
-    }, 1e3);
-  }
-
-  // src/main-features/modules/windows.ts
-  var BaseWindow = class {
-    id;
-    hidden;
-    element;
-    _outsideClickHandler = null;
-    _keydownHandler = null;
-    constructor(id, hidden = true) {
-      this.id = id;
-      this.hidden = hidden;
-      this.element = document.createElement("div");
-    }
-    async create() {
-      this.element = await this.renderContent();
-      this.element.id = this.id;
-      this.element.classList.add("base-window");
-      if (this.hidden) this.element.classList.add("hidden");
-      const controls = document.createElement("div");
-      controls.classList.add("window-controls");
-      const fullscreenBtn = document.createElement("button");
-      fullscreenBtn.classList.add("window-button", "window-fullscreen-btn");
-      fullscreenBtn.title = "Volledig scherm";
-      fullscreenBtn.innerHTML = contractIconSVG + expandIconSVG;
-      const closeBtn = document.createElement("button");
-      closeBtn.classList.add("window-button", "window-close");
-      closeBtn.title = "Sluiten";
-      closeBtn.innerHTML = closeIconSVG;
-      controls.appendChild(fullscreenBtn);
-      controls.appendChild(closeBtn);
-      this.element.appendChild(controls);
-      document.body.appendChild(this.element);
-      fullscreenBtn.addEventListener("click", () => {
-        this.onScreenSizeUpdate?.();
-        this.element.classList.toggle("fullscreen-window");
-        void this.element.offsetWidth;
-      });
-      closeBtn.addEventListener("click", () => this.hide());
-    }
-    // Override this in subclass
-    async renderContent() {
-      return document.createElement("div");
-    }
-    // Called every time the window is opened
-    // Override this in subclass
-    onOpened() {
-    }
-    show(triggerEvent = null) {
-      if (!this.hidden) return;
-      this.hidden = false;
-      this.element.classList.remove("hidden");
-      const isKeyboardEvent = triggerEvent && (typeof KeyboardEvent !== "undefined" ? triggerEvent instanceof KeyboardEvent : String(triggerEvent.type).startsWith("key"));
-      const openEventTarget = isKeyboardEvent ? null : triggerEvent?.target ?? null;
-      this._outsideClickHandler = (e5) => {
-        if (openEventTarget && e5.target instanceof Node && (e5.target === openEventTarget || openEventTarget instanceof Node && openEventTarget.contains(e5.target))) {
-          return;
-        }
-        if (e5.target instanceof Node && !this.element.contains(e5.target)) {
-          this.hide();
-        }
-      };
-      document.addEventListener("mousedown", this._outsideClickHandler, {
-        capture: true
-      });
-      if (!this._keydownHandler) {
-        this._keydownHandler = (e5) => {
-          if (e5.key === "Escape") {
-            this.hide();
-          }
-        };
-        document.addEventListener("keydown", this._keydownHandler);
-      }
-      if (isKeyboardEvent) {
-        requestAnimationFrame(() => {
-          const focusableElements = this.element.querySelectorAll("label");
-          if (focusableElements.length > 0) {
-            focusableElements[0]?.focus();
-          }
-        });
-      }
-      this.onOpened();
-    }
-    hide() {
-      if (this.hidden) return;
-      this.hidden = true;
-      this.element.classList.add("hidden");
-      if (this._outsideClickHandler) {
-        document.removeEventListener("mousedown", this._outsideClickHandler, {
-          capture: true
-        });
-        this._outsideClickHandler = null;
-      }
-      if (this._keydownHandler) {
-        document.removeEventListener("keydown", this._keydownHandler);
-        this._keydownHandler = null;
-      }
-      this.onClosed?.();
-    }
-    remove() {
-      this.element?.remove();
-      this.hidden = true;
-    }
-  };
-
-  // src/main-features/appearance/ui.ts
-  function createButton(id = "") {
-    let outerSwitch = document.createElement("label");
-    outerSwitch.classList.add("switch");
-    let innerButton = document.createElement("input");
-    innerButton.classList.add("popupinput");
-    innerButton.tabIndex = -1;
-    innerButton.type = "checkbox";
-    innerButton.id = id;
-    let innerSwitch = document.createElement("span");
-    innerSwitch.classList.add("slider", "round");
-    outerSwitch.appendChild(innerButton);
-    outerSwitch.appendChild(innerSwitch);
-    return outerSwitch;
-  }
-  function createButtonWithLabel(id = "", text) {
-    let container = document.createElement("label");
-    container.classList.add("smpp-input-with-label");
-    container.htmlFor = id;
-    container.dataset["for"] = id;
-    let label = document.createElement("span");
-    label.innerText = text;
-    let button = createButton(id);
-    container.addEventListener("keydown", (e5) => {
-      if (e5.key === " " || e5.key === "Enter") {
-        e5.preventDefault();
-        button.click();
-        container.focus();
-      }
-    });
-    container.appendChild(label);
-    container.appendChild(button);
-    return container;
-  }
-  function createTextInput(id = "", placeholder = "") {
-    let textInput = document.createElement("input");
-    textInput.id = id;
-    textInput.type = "text";
-    textInput.placeholder = placeholder;
-    textInput.spellcheck = false;
-    textInput.classList.add("smpp-text-input");
-    return textInput;
-  }
-  function createHoverTooltip(content, position) {
-    let tooltip = document.createElement("div");
-    tooltip.classList.add("smpp-tooltip");
-    if (position == "vertical") {
-      tooltip.classList.add("smpp-tooltip-vertical");
-    }
-    if (position == "horizontal") {
-      tooltip.classList.add("smpp-tooltip-horizontal");
-    }
-    tooltip.innerText = content;
-    return tooltip;
   }
 
   // node_modules/browser-image-compression/dist/browser-image-compression.mjs
@@ -2528,6 +2176,401 @@ Is it scaring you off?`,
   }
   imageCompression.getDataUrlFromFile = getDataUrlFromFile, imageCompression.getFilefromDataUrl = getFilefromDataUrl, imageCompression.loadImage = loadImage, imageCompression.drawImageInCanvas = drawImageInCanvas, imageCompression.drawFileInCanvas = drawFileInCanvas, imageCompression.canvasToFile = canvasToFile, imageCompression.getExifOrientation = getExifOrientation, imageCompression.handleMaxWidthOrHeight = handleMaxWidthOrHeight, imageCompression.followExifOrientation = followExifOrientation, imageCompression.cleanupCanvasMemory = cleanupCanvasMemory, imageCompression.isAutoOrientationInBrowser = isAutoOrientationInBrowser, imageCompression.approximateBelowMaximumCanvasSizeOfBrowser = approximateBelowMaximumCanvasSizeOfBrowser, imageCompression.copyExifWithoutOrientation = copyExifWithoutOrientation, imageCompression.getBrowserName = getBrowserName, imageCompression.version = "2.0.2";
 
+  // src/common/utils.ts
+  var DEBUG = false;
+  var browser;
+  if (browser == void 0) {
+    browser = chrome;
+  }
+  function getByPath(object, path) {
+    if (!path) {
+      return object;
+    }
+    let ob = object;
+    for (let node of path.split(".")) {
+      ob = ob[node];
+      if (ob === void 0) {
+        throw `getByPath: ${node} did not exist in path ${path}`;
+      }
+    }
+    return ob;
+  }
+  function setByPath(object, path, value) {
+    let ob = object;
+    const pathSplit = path.split(".");
+    for (let i5 = 0; i5 < pathSplit.length - 1; i5++) {
+      ob = ob[pathSplit[i5]];
+      if (ob === void 0) {
+        throw `setByPath: ${pathSplit[i5]} did not exist in path ${path}`;
+      }
+    }
+    ob[pathSplit[pathSplit.length - 1]] = value;
+  }
+  function fillObjectWithDefaults(object, defaults) {
+    if (!object) {
+      object = {};
+    }
+    for (const key of Object.keys(defaults)) {
+      if (typeof defaults[key] === "object" && !Array.isArray(defaults[key]) && defaults[key] !== null) {
+        object[key] = fillObjectWithDefaults(object[key], defaults[key]);
+      }
+      if (object[key] === void 0) {
+        object[key] = defaults[key];
+      }
+    }
+    return object;
+  }
+  function openURL2(url, new_window = false) {
+    if (new_window) {
+      let a5 = document.createElement("a");
+      a5.href = url;
+      a5.rel = "noopener noreferrer";
+      a5.target = "_blank";
+      a5.click();
+      return;
+    }
+    window.location.href = url;
+  }
+  function getExtensionImage(name2) {
+    return browser.runtime.getURL(`media/${name2}`);
+  }
+  function sendDebug(...messages) {
+    if (DEBUG) {
+      console.log(...messages);
+    }
+  }
+  function isValidHexColor(color) {
+    return /^#[0-9a-f]{3}(?:[0-9a-f]{3})?(?:[0-9a-f]{2})?$/i.test(color);
+  }
+  function getCurrentDate() {
+    return (/* @__PURE__ */ new Date()).toISOString().split("T")[0];
+  }
+  function getFutureDate(days) {
+    return new Date(Date.now() + days * 864e5).toISOString().split("T")[0];
+  }
+  function randomChance(probability) {
+    if (probability <= 0) return false;
+    if (probability >= 1) return true;
+    return Math.random() < probability;
+  }
+  function isAbsoluteUrl(url) {
+    return /^(https?:\/\/|data:image\/)/i.test(url);
+  }
+  async function convertLinkToBase64(link) {
+    let base64 = await browser.runtime.sendMessage({
+      action: "getBase64",
+      link
+    });
+    if (base64) return base64;
+    console.error(`Failed to convert link:${link} to base64`);
+    return null;
+  }
+  async function convertLinkToFile(link) {
+    try {
+      const fileData = await browser.runtime.sendMessage({
+        action: "getFileData",
+        link
+      });
+      if (!fileData) {
+        console.error(`Failed to get file data for link: ${link}`);
+        return null;
+      }
+      const { arrayBuffer, mimeType, filename } = fileData;
+      const uint8Array = new Uint8Array(arrayBuffer);
+      const file = new File([uint8Array], filename, { type: mimeType });
+      return file;
+    } catch (error) {
+      console.error("Error converting link to file:", error);
+      return null;
+    }
+  }
+  async function getCompressedData(file) {
+    try {
+      const options = {
+        maxSizeMB: 0.2,
+        maxWidthOrHeight: 400,
+        useWebWorker: false
+      };
+      const compressedFile = await imageCompression(file, options);
+      const dataUrl = await imageCompression.getDataUrlFromFile(compressedFile);
+      return dataUrl;
+    } catch (error) {
+      console.error("Compression failed:", error);
+      return await imageCompression.getDataUrlFromFile(file);
+    }
+  }
+
+  // src/fixes-utils/utils.ts
+  function isValidImage(src) {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => resolve(true);
+      img.onerror = () => resolve(false);
+      img.src = src;
+    });
+  }
+  function getPfpLink(username) {
+    let firstInitial;
+    let secondInitial;
+    if (username) {
+      const parts = username.trim().split(/\s+/);
+      firstInitial = parts[0][0].toUpperCase();
+      secondInitial = parts.length > 1 ? parts[1][0].toUpperCase() : "";
+    } else {
+      firstInitial = "M";
+      secondInitial = "U";
+    }
+    return `https://userpicture20.smartschool.be/User/Userimage/hashimage/hash/initials_${firstInitial + secondInitial}/plain/1/res/128`;
+  }
+  function getUserId() {
+    let userId;
+    try {
+      sendDebug("Trying to get plannerUrl from DOM...");
+      const plannerUrl = document.getElementById("datePickerMenu").getAttribute("plannerurl");
+      sendDebug("Found plannerUrl from DOM:", plannerUrl);
+      const expirationDate = /* @__PURE__ */ new Date();
+      expirationDate.setDate(expirationDate.getDate() + 30);
+      document.cookie = `plannerUrl=${plannerUrl};expires=${expirationDate.toUTCString()};path=/`;
+      sendDebug("Stored plannerUrl in cookies with 30 day expiration.");
+      userId = plannerUrl.split("/")[4];
+      sendDebug("Extracted userId from plannerUrl:", userId);
+    } catch (e5) {
+      sendDebug("Failed to get plannerUrl from DOM. Error:", e5.message);
+      sendDebug("Trying to get plannerUrl from cookies...");
+      const cookies = document.cookie.split(";");
+      const plannerUrlCookie = cookies.find(
+        (cookie) => cookie.trim().startsWith("plannerUrl=")
+      );
+      if (plannerUrlCookie) {
+        sendDebug("Retrieved plannerUrl from cookies" + plannerUrlCookie);
+        const plannerUrl = plannerUrlCookie.split("=")[1];
+        sendDebug("Found plannerUrl in cookies:", plannerUrl);
+        userId = plannerUrl.split("/")[4];
+        sendDebug("Extracted userId from cookie plannerUrl:", userId);
+      } else {
+        console.error(
+          "UID is fucked, refresh 5 keer en als het dan niet werkt vraag hulp op discord @JJorne"
+        );
+      }
+    }
+    if (userId) {
+      return userId;
+    } else {
+      console.error("No userID? womp womp");
+    }
+  }
+  function getSchoolName() {
+    try {
+      const schoolName = window.location.hostname.split(".")[0];
+      if (!schoolName) {
+        throw new Error("Failed to extract school name");
+      }
+      return schoolName;
+    } catch (error) {
+      console.error(error.message);
+      return null;
+    }
+  }
+  async function clearAllData() {
+    localStorage.clear();
+    await browser.runtime.sendMessage({
+      action: "clearLocalStorage"
+    });
+    location.reload();
+  }
+
+  // src/fixes-utils/results.ts
+  function buisStats() {
+    setTimeout(function() {
+      const url = `https://${getSchoolName()}.smartschool.be/results/api/v1/evaluations/?itemsOnPage=1000`;
+      fetch(url).then((response) => response.json()).then((data2) => {
+        const categories = {
+          buis: 0,
+          voldoende: 0
+        };
+        data2.forEach((evaluation) => {
+          if (evaluation.graphic && evaluation.graphic.value !== void 0) {
+            const value = evaluation.graphic.value;
+            if (value < 50) {
+              categories.buis++;
+            } else {
+              categories.voldoende++;
+            }
+          }
+        });
+        let newElement = document.createElement("div");
+        newElement.id = "buis-stats";
+        document.getElementsByClassName("results-evaluations__filters")[0].appendChild(newElement);
+        newElement.innerHTML = `<div class="buis-stats" id="buis_amount"></div><div class="buis-stats" id="voldoende_amount"></div>`;
+        document.getElementById(
+          "buis_amount"
+        ).innerHTML = `<div class="buis-stats-box"><span class="buis-stats-title">Onvoldoendes:</span><span class="buis-stats-value">${categories.buis}</span></div>`;
+        document.getElementById(
+          "voldoende_amount"
+        ).innerHTML = `<div class="buis-stats-box"><span class="buis-stats-title">Voldoendes:</span><span class="buis-stats-value">${categories.voldoende}</span></div>`;
+      }).catch((error) => console.error("Error fetching:", error));
+    }, 1e3);
+  }
+
+  // src/main-features/modules/windows.ts
+  var BaseWindow = class {
+    id;
+    hidden;
+    element;
+    _outsideClickHandler = null;
+    _keydownHandler = null;
+    constructor(id, hidden = true) {
+      this.id = id;
+      this.hidden = hidden;
+      this.element = document.createElement("div");
+    }
+    async create() {
+      this.element = await this.renderContent();
+      this.element.id = this.id;
+      this.element.classList.add("base-window");
+      if (this.hidden) this.element.classList.add("hidden");
+      const controls = document.createElement("div");
+      controls.classList.add("window-controls");
+      const fullscreenBtn = document.createElement("button");
+      fullscreenBtn.classList.add("window-button", "window-fullscreen-btn");
+      fullscreenBtn.title = "Volledig scherm";
+      fullscreenBtn.innerHTML = contractIconSVG + expandIconSVG;
+      const closeBtn = document.createElement("button");
+      closeBtn.classList.add("window-button", "window-close");
+      closeBtn.title = "Sluiten";
+      closeBtn.innerHTML = closeIconSVG;
+      controls.appendChild(fullscreenBtn);
+      controls.appendChild(closeBtn);
+      this.element.appendChild(controls);
+      document.body.appendChild(this.element);
+      fullscreenBtn.addEventListener("click", () => {
+        this.onScreenSizeUpdate?.();
+        this.element.classList.toggle("fullscreen-window");
+        void this.element.offsetWidth;
+      });
+      closeBtn.addEventListener("click", () => this.hide());
+    }
+    // Override this in subclass
+    async renderContent() {
+      return document.createElement("div");
+    }
+    // Called every time the window is opened
+    // Override this in subclass
+    onOpened() {
+    }
+    show(triggerEvent = null) {
+      if (!this.hidden) return;
+      this.hidden = false;
+      this.element.classList.remove("hidden");
+      const isKeyboardEvent = triggerEvent && (typeof KeyboardEvent !== "undefined" ? triggerEvent instanceof KeyboardEvent : String(triggerEvent.type).startsWith("key"));
+      const openEventTarget = isKeyboardEvent ? null : triggerEvent?.target ?? null;
+      this._outsideClickHandler = (e5) => {
+        if (openEventTarget && e5.target instanceof Node && (e5.target === openEventTarget || openEventTarget instanceof Node && openEventTarget.contains(e5.target))) {
+          return;
+        }
+        if (e5.target instanceof Node && !this.element.contains(e5.target)) {
+          this.hide();
+        }
+      };
+      document.addEventListener("mousedown", this._outsideClickHandler, {
+        capture: true
+      });
+      if (!this._keydownHandler) {
+        this._keydownHandler = (e5) => {
+          if (e5.key === "Escape") {
+            this.hide();
+          }
+        };
+        document.addEventListener("keydown", this._keydownHandler);
+      }
+      if (isKeyboardEvent) {
+        requestAnimationFrame(() => {
+          const focusableElements = this.element.querySelectorAll("label");
+          if (focusableElements.length > 0) {
+            focusableElements[0]?.focus();
+          }
+        });
+      }
+      this.onOpened();
+    }
+    hide() {
+      if (this.hidden) return;
+      this.hidden = true;
+      this.element.classList.add("hidden");
+      if (this._outsideClickHandler) {
+        document.removeEventListener("mousedown", this._outsideClickHandler, {
+          capture: true
+        });
+        this._outsideClickHandler = null;
+      }
+      if (this._keydownHandler) {
+        document.removeEventListener("keydown", this._keydownHandler);
+        this._keydownHandler = null;
+      }
+      this.onClosed?.();
+    }
+    remove() {
+      this.element?.remove();
+      this.hidden = true;
+    }
+  };
+
+  // src/main-features/appearance/ui.ts
+  function createButton(id = "") {
+    let outerSwitch = document.createElement("label");
+    outerSwitch.classList.add("switch");
+    let innerButton = document.createElement("input");
+    innerButton.classList.add("popupinput");
+    innerButton.tabIndex = -1;
+    innerButton.type = "checkbox";
+    innerButton.id = id;
+    let innerSwitch = document.createElement("span");
+    innerSwitch.classList.add("slider", "round");
+    outerSwitch.appendChild(innerButton);
+    outerSwitch.appendChild(innerSwitch);
+    return outerSwitch;
+  }
+  function createButtonWithLabel(id = "", text) {
+    let container = document.createElement("label");
+    container.classList.add("smpp-input-with-label");
+    container.htmlFor = id;
+    container.dataset["for"] = id;
+    let label = document.createElement("span");
+    label.innerText = text;
+    let button = createButton(id);
+    container.addEventListener("keydown", (e5) => {
+      if (e5.key === " " || e5.key === "Enter") {
+        e5.preventDefault();
+        button.click();
+        container.focus();
+      }
+    });
+    container.appendChild(label);
+    container.appendChild(button);
+    return container;
+  }
+  function createTextInput(id = "", placeholder = "") {
+    let textInput = document.createElement("input");
+    textInput.id = id;
+    textInput.type = "text";
+    textInput.placeholder = placeholder;
+    textInput.spellcheck = false;
+    textInput.classList.add("smpp-text-input");
+    return textInput;
+  }
+  function createHoverTooltip(content, position) {
+    let tooltip = document.createElement("div");
+    tooltip.classList.add("smpp-tooltip");
+    if (position == "vertical") {
+      tooltip.classList.add("smpp-tooltip-vertical");
+    }
+    if (position == "horizontal") {
+      tooltip.classList.add("smpp-tooltip-horizontal");
+    }
+    tooltip.innerText = content;
+    return tooltip;
+  }
+
   // src/main-features/modules/images.ts
   var ImageSelector = class {
     name;
@@ -2613,20 +2656,8 @@ Is it scaring you off?`,
         await this.storeImage();
       });
     }
-    async getCompressedData(file) {
-      try {
-        const options = {
-          maxSizeMB: 0.2,
-          maxWidthOrHeight: 400,
-          useWebWorker: false
-        };
-        const compressedFile = await imageCompression(file, options);
-        const dataUrl = await imageCompression.getDataUrlFromFile(compressedFile);
-        return dataUrl;
-      } catch (error) {
-        console.error("Compression failed:", error);
-        return await imageCompression.getDataUrlFromFile(file);
-      }
+    displayError() {
+      alert("Failed to fetch this image");
     }
     async storeImage() {
       try {
@@ -2644,10 +2675,12 @@ Is it scaring you off?`,
         };
         const file = this.fileInput.files?.[0];
         if (file) {
+          this.fileInputButton.innerHTML = loadingSpinnerSvg;
           const [originalDataUrl, compressedDataUrl] = await Promise.all([
             imageCompression.getDataUrlFromFile(file),
-            this.getCompressedData(file)
+            getCompressedData(file)
           ]);
+          this.fileInputButton.innerHTML = imageInputSvg;
           data2.imageData = originalDataUrl;
           data2.metaData.link = file.name;
           data2.metaData.type = "file";
@@ -2665,12 +2698,31 @@ Is it scaring you off?`,
             compressedImage.metaData.link = "";
             compressedImage.imageData = "";
           } else if (isAbsoluteUrl(linkValue)) {
-            data2.metaData.type = "link";
-            data2.metaData.link = linkValue;
-            data2.imageData = linkValue;
-            compressedImage.metaData.type = "link";
-            compressedImage.metaData.link = linkValue;
-            compressedImage.imageData = linkValue;
+            this.fileInputButton.innerHTML = loadingSpinnerSvg;
+            let [base64, file2] = await Promise.all([
+              await convertLinkToBase64(linkValue),
+              await convertLinkToFile(linkValue)
+            ]);
+            this.fileInputButton.innerHTML = imageInputSvg;
+            if (base64 && file2) {
+              data2.metaData.type = "file";
+              data2.metaData.link = linkValue;
+              data2.imageData = base64;
+              this.fileInputButton.innerHTML = loadingSpinnerSvg;
+              let compressedBase64 = await getCompressedData(file2);
+              this.fileInputButton.innerHTML = imageInputSvg;
+              compressedImage.metaData.type = "file";
+              compressedImage.metaData.link = linkValue;
+              compressedImage.imageData = compressedBase64;
+            } else {
+              this.displayError();
+              data2.metaData.type = "default";
+              data2.metaData.link = "";
+              data2.imageData = "";
+              compressedImage.metaData.type = "default";
+              compressedImage.metaData.link = "";
+              compressedImage.imageData = "";
+            }
           } else {
             data2.metaData.type = "default";
             data2.metaData.link = "";
@@ -2690,6 +2742,7 @@ Is it scaring you off?`,
           id: compressedId,
           data: compressedImage
         });
+        console.log("Loading data from here");
         await this.loadImageData();
         this.onStore();
       } catch (error) {
@@ -2732,9 +2785,6 @@ Is it scaring you off?`,
     }
     if (image.metaData.type === "default") {
       return { url: await onDefault(), type: image.metaData.type };
-    }
-    if (image.metaData.type === "link") {
-      return { url: image.imageData, type: image.metaData.type };
     }
     if (isFirefox) {
       return { url: image.imageData, type: image.metaData.type };
@@ -7385,28 +7435,17 @@ Is it scaring you off?`,
         action: "getImage",
         id: "compressed-" + this.name
       });
-      async function convertBlobToBase64(blob) {
-        let base64 = await new Promise((resolve, reject) => {
-          const reader = new FileReader();
-          reader.onloadend = () => resolve(reader.result);
-          reader.onerror = reject;
-          reader.readAsDataURL(blob);
-        });
-        return base64;
-      }
       if (result.metaData.type == "default") {
-        let response = await fetch(
+        let base64 = await convertLinkToBase64(
           await getExtensionImage("theme-backgrounds/" + this.name + ".jpg")
         );
-        result.imageData = await convertBlobToBase64(await response.blob());
-        let compressedResponse = await fetch(
+        if (base64) result.imageData = base64;
+        let compressedBase64 = await convertLinkToBase64(
           await getExtensionImage(
             "theme-backgrounds/compressed/" + this.name + ".jpg"
           )
         );
-        compressedResult.imageData = await convertBlobToBase64(
-          await compressedResponse.blob()
-        );
+        if (compressedBase64) compressedResult.imageData = compressedBase64;
         if (!this.isCustom) {
           result.metaData.type = "file";
           result.metaData.link = this.name + ".jpg";

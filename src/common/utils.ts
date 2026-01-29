@@ -1,3 +1,4 @@
+import imageCompression, { type Options } from "browser-image-compression";
 export const DEBUG = false;
 
 export var browser: any;
@@ -112,4 +113,55 @@ export function randomChance(probability: number) {
 
 export function isAbsoluteUrl(url: string) {
   return /^(https?:\/\/|data:image\/)/i.test(url);
+}
+
+export async function convertLinkToBase64(link: string) {
+  let base64 = (await browser.runtime.sendMessage({
+    action: "getBase64",
+    link: link,
+  })) as string | null;
+  if (base64) return base64;
+  console.error(`Failed to convert link:${link} to base64`);
+  return null;
+}
+
+export async function convertLinkToFile(link: string) {
+  try {
+    const fileData = await browser.runtime.sendMessage({
+      action: "getFileData",
+      link: link,
+    });
+
+    if (!fileData) {
+      console.error(`Failed to get file data for link: ${link}`);
+      return null;
+    }
+
+    const { arrayBuffer, mimeType, filename } = fileData;
+    const uint8Array = new Uint8Array(arrayBuffer);
+    const file = new File([uint8Array], filename, { type: mimeType });
+
+    return file;
+  } catch (error) {
+    console.error("Error converting link to file:", error);
+    return null;
+  }
+}
+
+export async function getCompressedData(file: File): Promise<string> {
+  try {
+    const options: Options = {
+      maxSizeMB: 0.2,
+      maxWidthOrHeight: 400,
+      useWebWorker: false,
+    };
+
+    const compressedFile = await imageCompression(file, options);
+    const dataUrl = await imageCompression.getDataUrlFromFile(compressedFile);
+
+    return dataUrl;
+  } catch (error) {
+    console.error("Compression failed:", error);
+    return await imageCompression.getDataUrlFromFile(file);
+  }
 }

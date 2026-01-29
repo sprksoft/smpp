@@ -6,6 +6,9 @@ import {
   getCustomThemeData,
   setImage,
   getImage,
+  getBase64,
+  getFileFromUrl,
+  getFileData,
 } from "./data-background-script.js";
 import {
   setSettingsData,
@@ -116,6 +119,16 @@ async function handleMessage(message, sendResponse) {
       const image = await getImage(message.id);
       sendResponse(image || null);
       console.log(`Image with id:${message.id} sent.`);
+    }
+    if (message.action === "getBase64") {
+      const base64 = await getBase64(message.link);
+      sendResponse(base64 || null);
+      console.log(`Image with link:${message.link} converted to base64.`);
+    }
+    if (message.action === "getFileData") {
+      const file = await getFileData(message.link);
+      sendResponse(file || null);
+      console.log(`Image with link:${message.link} converted to Data.`);
     }
 
     // Weather

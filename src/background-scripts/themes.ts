@@ -23,11 +23,9 @@ export async function getThemeCategories(
   includeHidden = false
 ) {
   let allCategories = await getAllThemeCategories();
-  console.log(allCategories);
   if (!includeHidden) {
     let hiddenThemeKeys = await getThemeCategory("hidden");
     Object.keys(categories).forEach((category) => {
-      console.log(categories[category]);
       categories[category].forEach((theme) => {
         if (hiddenThemeKeys.includes(theme)) delete categories[category][theme];
       });

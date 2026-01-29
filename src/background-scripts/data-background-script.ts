@@ -62,7 +62,6 @@ export async function getDelijnColorData() {
     await browser.storage.local.set({
       delijnColorData: delijnColorData,
     });
-    console.log("Retrieved Delijn Color Data.");
     return delijnColorData;
   } catch (error) {
     console.error("Error retrieving Delijn Color Data:", error);
@@ -108,4 +107,51 @@ export async function removeImage(id: string) {
   const customId = "SMPPImage-" + id;
   await browser.storage.local.remove([customId]);
   await browser.storage.local.set({ images: imagesMetaData });
+}
+
+export async function getBase64(link: string) {
+  try {
+    let response = await fetch(link);
+    if (!response.ok) {
+      console.error(
+        `Failed to fetch image: ${response.status} ${response.statusText}`
+      );
+      return null;
+    }
+
+    let blob = await response.blob();
+    let base64 = await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+
+    return base64 as string;
+  } catch (error) {
+    console.error("Error converting image to base64:", error);
+    return null;
+  }
+}
+
+export async function getFileData(link: string) {
+  try {
+    let response = await fetch(link);
+    if (!response.ok) return null;
+
+    let blob = await response.blob();
+    let arrayBuffer = await blob.arrayBuffer();
+
+    const urlParts = link.split("/");
+    const filename = urlParts[urlParts.length - 1] || "image.jpg";
+
+    return {
+      arrayBuffer: Array.from(new Uint8Array(arrayBuffer)), // Convert to regular array
+      mimeType: blob.type || "image/jpeg",
+      filename: filename,
+    };
+  } catch (error) {
+    console.error("Error getting file data:", error);
+    return null;
+  }
 }

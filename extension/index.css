@@ -200,6 +200,7 @@ html {
   background-color: var(--color-base01) !important;
   border-radius: 1rem;
   box-shadow: 0px 2px 10px 0px var(--color-shadow);
+  height: 3rem;
 }
 #quickSettings .full-file-input-container .smpp-text-input:hover,
 #quickSettings .full-file-input-container .smpp-text-input:focus-visible {
@@ -214,6 +215,11 @@ html {
   background: var(--color-base01) !important;
   opacity: 1;
   display: flex;
+  width: fit-content;
+}
+.smpp-file-input-button svg {
+  aspect-ratio: 1;
+  height: 100%;
 }
 .enableAnimations .smpp-file-input-button {
   transition:

@@ -10,6 +10,7 @@ import imageCompression from "browser-image-compression";
 import { widgetSystemNotifyThemeChange } from "../../widgets/widgets.js";
 import {
   browser,
+  convertLinkToBase64,
   getExtensionImage,
   isValidHexColor,
 } from "../../common/utils.js";
@@ -590,30 +591,17 @@ export class ThemeTile extends Tile {
       id: "compressed-" + this.name,
     })) as SMPPImage;
 
-    async function convertBlobToBase64(blob: Blob) {
-      let base64 = await new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onloadend = () => resolve(reader.result);
-        reader.onerror = reject;
-        reader.readAsDataURL(blob);
-      });
-      return base64 as string;
-    }
-
     if (result.metaData.type == "default") {
-      let response = await fetch(
+      let base64 = await convertLinkToBase64(
         await getExtensionImage("theme-backgrounds/" + this.name + ".jpg")
       );
-      result.imageData = await convertBlobToBase64(await response.blob());
-
-      let compressedResponse = await fetch(
+      if (base64) result.imageData = base64;
+      let compressedBase64 = await convertLinkToBase64(
         await getExtensionImage(
           "theme-backgrounds/compressed/" + this.name + ".jpg"
         )
       );
-      compressedResult.imageData = await convertBlobToBase64(
-        await compressedResponse.blob()
-      );
+      if (compressedBase64) compressedResult.imageData = compressedBase64;
 
       if (!this.isCustom) {
         result.metaData.type = "file";
