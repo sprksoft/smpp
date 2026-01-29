@@ -15,15 +15,15 @@ import { assignmentsSvg } from "../fixes-utils/svgs.js";
 // THANK YOU LDEVVVV 🫂🫂🫂
 
 class TakenWidget extends WidgetBase {
-  defaultSettings() {
+  defaultSettings(): json {
     return {
       maxAssignments: 5,
     };
   }
-  onSettingsChange() {
+  onSettingsChange(): void {
     this.element.appendChild(this.createContent());
   }
-  createContent() {
+  createContent(): HTMLElement {
     const foresight = 28; // dagen in de toekomst dat het zoekt voor taken
     let userId = getUserId();
 
@@ -35,7 +35,7 @@ class TakenWidget extends WidgetBase {
       sendDebug("Next Date:", getFutureDate(foresight));
     }
     this.clearContent();
-    async function fetchPlannerData() {
+    async function fetchPlannerData(): json {
       try {
         const schoolName = getSchoolName();
         if (!schoolName) {
@@ -62,7 +62,7 @@ class TakenWidget extends WidgetBase {
       }
     }
 
-    let initTaskList = () => {
+    let initTaskList: HTMLElement = () => {
       const TasksContainer = document.createElement("div");
       const TitleScreenDiv = document.createElement("div");
       const TitleScreenText = document.createElement("h2");
@@ -232,7 +232,7 @@ class TakenWidget extends WidgetBase {
     };
     return initTaskList();
   }
-  async createPreview() {
+  async createPreview(): HTMLElement {
     const previewElement = document.createElement("div");
 
     const previewElementTitle = document.createElement("div");
@@ -249,12 +249,12 @@ class TakenWidget extends WidgetBase {
 
     return previewElement;
   }
-  clearContent() {
+  clearContent(): void {
     this.element.innerHTML = "";
   }
 }
 
-async function markAsFinished(as_ID, name) {
+async function markAsFinished(as_ID, name): Promise<boolean> {
   const schoolName = getSchoolName();
   const userId = getUserId();
 
