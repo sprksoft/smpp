@@ -6,9 +6,11 @@ import {
   convertLinkToBase64,
   getCompressedData,
   convertLinkToFile,
+  delay,
 } from "../../common/utils.js";
 import { isFirefox } from "../main.js";
 import imageCompression, { type Options } from "browser-image-compression";
+import { Toast } from "../../fixes-utils/utils.js";
 
 export type SMPPImage = {
   metaData: SMPPImageMetaData;
@@ -119,10 +121,6 @@ export class ImageSelector {
     });
   }
 
-  displayError() {
-    alert("Failed to fetch this image");
-  }
-
   async storeImage() {
     try {
       let data = (await browser.runtime.sendMessage({
@@ -190,7 +188,12 @@ export class ImageSelector {
             compressedImage.metaData.link = linkValue;
             compressedImage.imageData = compressedBase64;
           } else {
-            this.displayError();
+            await this.loadImageData();
+            await new Toast(
+              "Failed to access image, try to upload it as a file",
+              "error",
+              5000
+            ).render();
             data.metaData.type = "default";
             data.metaData.link = "";
             data.imageData = "";
@@ -200,6 +203,8 @@ export class ImageSelector {
             compressedImage.imageData = "";
           }
         } else {
+          await this.loadImageData();
+          await new Toast("That's not a valid link!", "warning").render();
           data.metaData.type = "default";
           data.metaData.link = "";
           data.imageData = "";
@@ -220,10 +225,13 @@ export class ImageSelector {
         id: compressedId,
         data: compressedImage,
       });
-      console.log("Loading data from here");
       await this.loadImageData();
       this.onStore();
+      if (data.metaData.type == "file") {
+        new Toast("Image succesfully saved", "succes").render();
+      }
     } catch (error) {
+      await new Toast("Failed to save image", "error", 5000).render();
       console.error("Failed to store image:", error);
     }
   }

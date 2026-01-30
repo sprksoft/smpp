@@ -48,7 +48,7 @@ import {
 import { loadQuickSettings } from "../settings/quick-settings.js";
 import { applyAppearance, isFirefox } from "../main.js";
 import { createHoverTooltip, createTextInput } from "./ui.js";
-import { isValidImage } from "../../fixes-utils/utils.js";
+import { isValidImage, Toast } from "../../fixes-utils/utils.js";
 import { recreateGlobalChat } from "../globalchat.js";
 
 export let currentThemeName: string;
@@ -627,6 +627,7 @@ export class ThemeTile extends Tile {
       });
     }
     this.onDuplicate(newThemeName);
+    new Toast("Theme succesfully duplicated", "succes").render();
   }
 
   async share() {
@@ -1668,9 +1669,7 @@ export class CustomThemeCreator extends BaseWindow {
   createFileInputContainer() {
     let fileInputContainer = document.createElement("div");
     fileInputContainer.classList.add("file-and-theme-button-container");
-    fileInputContainer.appendChild(
-      this.backgroundImageInput.createFullFileInput()
-    );
+    fileInputContainer.appendChild(this.backgroundImageInput.fullContainer);
     let divider = document.createElement("div");
     divider.classList.add("file-input-theme-button-divider");
     fileInputContainer.appendChild(divider);

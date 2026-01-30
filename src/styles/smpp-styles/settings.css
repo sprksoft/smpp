@@ -1605,3 +1605,10 @@ button.open-theme-editor-button:hover {
   fill: var(--color-red) !important;
   stroke: var(--color-red) !important;
 }
+
+.wallpaper-error-message {
+  color: var(--color-red) !important;
+  font-weight: 600 !important;
+  margin-top: 0.5rem;
+  max-width: 20rem !important;
+}

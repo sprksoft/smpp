@@ -131,6 +131,13 @@ function fixCoursesSearch() {
     });
 }
 
+function addToastContainer() {
+  let toastContainer = document.createElement("div");
+  toastContainer.id = "toast-container";
+  toastContainer.classList.add("toast-container");
+  document.body.appendChild(toastContainer);
+}
+
 function updateTopNavIcons(data: Settings["topNav"]["icons"]) {
   const notifsButton = document.querySelector(
     ".js-btn-notifs"
@@ -295,6 +302,7 @@ function applyFixes() {
   changeFont();
   fixCoursesSearch();
   titleFix();
+  addToastContainer();
 
   let notifsToggleLabel = document.getElementById(
     "notifsToggleLabel"

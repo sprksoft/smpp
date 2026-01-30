@@ -252,6 +252,14 @@
   var shareSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
 <path xmlns="http://www.w3.org/2000/svg" d="M16 7L12 3M12 3L8 7M12 3V15M21 11V17.7992C21 18.9193 21 19.4794 20.782 19.9072C20.5903 20.2835 20.2843 20.5895 19.908 20.7812C19.4802 20.9992 18.9201 20.9992 17.8 20.9992H6.2C5.0799 20.9992 4.51984 20.9992 4.09202 20.7812C3.71569 20.5895 3.40973 20.2835 3.21799 19.9072C3 19.4794 3 18.9193 3 17.7992V11" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>`;
+  var infoSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path xmlns="http://www.w3.org/2000/svg" d="M12 8H12.01M12 11V16M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+  var errorSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path xmlns="http://www.w3.org/2000/svg" d="M9 9L15 15M15 9L9 15M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+  var succesSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path xmlns="http://www.w3.org/2000/svg" d="M8 12.3333L10.4615 15L16 9M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+  var warnSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path xmlns="http://www.w3.org/2000/svg" d="M12 8V13M12 16H12.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"  stroke-width="2" stroke-linecap="round"/></svg>`;
 
   // src/fixes-utils/login.ts
   function updateLoginPanel() {
@@ -404,13 +412,14 @@ didn't you?`,
     `Ruby chan, haii!!`,
     `It's so sweet`,
     `Feeling diskinserted?`,
-    `Vamipre in the corner.
+    `Vampire in the corner.
 Is it scaring you off?`,
     `Whopper Whopper`,
     `<s>nginx</s>, <i>Enginks</i>`,
     `I love ECMAScript`,
     `bAcK iN My DaY!`,
-    `I forgot \u{1F480}`,
+    `I forgor \u{1F480}`,
+    // This is intentional, its a Ye reference
     `Error 418 
  I'm a tea pot...`,
     `Met 100+ splash texts!`,
@@ -2231,6 +2240,9 @@ Is it scaring you off?`,
     }
     window.location.href = url;
   }
+  function delay(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
   function getExtensionImage(name2) {
     return browser.runtime.getURL(`media/${name2}`);
   }
@@ -2314,8 +2326,8 @@ Is it scaring you off?`,
     let secondInitial;
     if (username) {
       const parts = username.trim().split(/\s+/);
-      firstInitial = parts[0][0].toUpperCase();
-      secondInitial = parts.length > 1 ? parts[1][0].toUpperCase() : "";
+      firstInitial = parts[0] && parts[0][0] ? parts[0][0].toUpperCase() : "M";
+      secondInitial = parts.length > 1 && parts[1] && parts[1][0] ? parts[1][0].toUpperCase() : "U";
     } else {
       firstInitial = "M";
       secondInitial = "U";
@@ -2326,7 +2338,11 @@ Is it scaring you off?`,
     let userId;
     try {
       sendDebug("Trying to get plannerUrl from DOM...");
-      const plannerUrl = document.getElementById("datePickerMenu").getAttribute("plannerurl");
+      const plannerElement = document.getElementById("datePickerMenu");
+      const plannerUrl = plannerElement?.getAttribute("plannerurl");
+      if (!plannerUrl) {
+        throw new Error("plannerUrl attribute not found");
+      }
       sendDebug("Found plannerUrl from DOM:", plannerUrl);
       const expirationDate = /* @__PURE__ */ new Date();
       expirationDate.setDate(expirationDate.getDate() + 30);
@@ -2335,7 +2351,8 @@ Is it scaring you off?`,
       userId = plannerUrl.split("/")[4];
       sendDebug("Extracted userId from plannerUrl:", userId);
     } catch (e5) {
-      sendDebug("Failed to get plannerUrl from DOM. Error:", e5.message);
+      const errorMessage = e5 instanceof Error ? e5.message : String(e5);
+      sendDebug("Failed to get plannerUrl from DOM. Error:", errorMessage);
       sendDebug("Trying to get plannerUrl from cookies...");
       const cookies = document.cookie.split(";");
       const plannerUrlCookie = cookies.find(
@@ -2345,7 +2362,7 @@ Is it scaring you off?`,
         sendDebug("Retrieved plannerUrl from cookies" + plannerUrlCookie);
         const plannerUrl = plannerUrlCookie.split("=")[1];
         sendDebug("Found plannerUrl in cookies:", plannerUrl);
-        userId = plannerUrl.split("/")[4];
+        if (plannerUrl) userId = plannerUrl.split("/")[4];
         sendDebug("Extracted userId from cookie plannerUrl:", userId);
       } else {
         console.error(
@@ -2357,6 +2374,7 @@ Is it scaring you off?`,
       return userId;
     } else {
       console.error("No userID? womp womp");
+      return void 0;
     }
   }
   function getSchoolName() {
@@ -2367,7 +2385,8 @@ Is it scaring you off?`,
       }
       return schoolName;
     } catch (error) {
-      console.error(error.message);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      console.error(errorMessage);
       return null;
     }
   }
@@ -2378,6 +2397,71 @@ Is it scaring you off?`,
     });
     location.reload();
   }
+  var Toast = class {
+    content;
+    type;
+    time;
+    toastElement;
+    constructor(content, type, time = 3e3) {
+      this.content = content;
+      this.type = type;
+      this.time = time;
+      this.toastElement = this.createToastElement();
+    }
+    createToastElement() {
+      let toast = document.createElement("div");
+      toast.classList.add("smpp-toast");
+      let icon = document.createElement("div");
+      icon.classList.add("smpp-toast-icon");
+      let title = document.createElement("span");
+      switch (this.type) {
+        case "info":
+          title.innerText = "Info";
+          icon.innerHTML = infoSvg;
+          toast.classList.add("smpp-info-toast");
+          break;
+        case "succes":
+          title.innerText = "Succes";
+          icon.innerHTML = succesSvg;
+          toast.classList.add("smpp-succes-toast");
+          break;
+        case "error":
+          title.innerText = "Error";
+          icon.innerHTML = errorSvg;
+          toast.classList.add("smpp-error-toast");
+          break;
+        case "warning":
+          title.innerText = "Warning";
+          icon.innerHTML = warnSvg;
+          toast.classList.add("smpp-warning-toast");
+          break;
+      }
+      let topContainer = document.createElement("div");
+      topContainer.classList.add("smpp-toast-top");
+      topContainer.appendChild(icon);
+      topContainer.appendChild(title);
+      toast.appendChild(topContainer);
+      let content = document.createElement("span");
+      content.classList.add("smpp-toast-content");
+      content.innerText = this.content;
+      toast.appendChild(content);
+      return toast;
+    }
+    async hideToastElement() {
+      let toastContainer = document.getElementById("toast-container");
+      if (!toastContainer) return;
+      this.toastElement.classList.add("being-removed");
+      await delay(300);
+      toastContainer.removeChild(this.toastElement);
+    }
+    async render() {
+      let toastContainer = document.getElementById("toast-container");
+      if (!toastContainer) return;
+      toastContainer.appendChild(this.toastElement);
+      await delay(this.time);
+      await this.hideToastElement();
+    }
+  };
 
   // src/fixes-utils/results.ts
   function buisStats() {
@@ -2656,9 +2740,6 @@ Is it scaring you off?`,
         await this.storeImage();
       });
     }
-    displayError() {
-      alert("Failed to fetch this image");
-    }
     async storeImage() {
       try {
         let data2 = await browser.runtime.sendMessage({
@@ -2715,7 +2796,12 @@ Is it scaring you off?`,
               compressedImage.metaData.link = linkValue;
               compressedImage.imageData = compressedBase64;
             } else {
-              this.displayError();
+              await this.loadImageData();
+              await new Toast(
+                "Failed to access image, try to upload it as a file",
+                "error",
+                5e3
+              ).render();
               data2.metaData.type = "default";
               data2.metaData.link = "";
               data2.imageData = "";
@@ -2724,6 +2810,8 @@ Is it scaring you off?`,
               compressedImage.imageData = "";
             }
           } else {
+            await this.loadImageData();
+            await new Toast("That's not a valid link!", "warning").render();
             data2.metaData.type = "default";
             data2.metaData.link = "";
             data2.imageData = "";
@@ -2742,10 +2830,13 @@ Is it scaring you off?`,
           id: compressedId,
           data: compressedImage
         });
-        console.log("Loading data from here");
         await this.loadImageData();
         this.onStore();
+        if (data2.metaData.type == "file") {
+          new Toast("Image succesfully saved", "succes").render();
+        }
       } catch (error) {
+        await new Toast("Failed to save image", "error", 5e3).render();
         console.error("Failed to store image:", error);
       }
     }
@@ -6641,7 +6732,7 @@ Is it scaring you off?`,
             });
             applyProfilePicture(data2.profile);
           };
-          let profilePictureInputContainer = this.profilePictureInput.createFullFileInput();
+          let profilePictureInputContainer = this.profilePictureInput.fullContainer;
           profilePictureInputContainer.id = "profile-picture-input-container";
           this.settingsPage.appendChild(profilePictureInputContainer);
           this.settingsPage.appendChild(
@@ -6662,7 +6753,7 @@ Is it scaring you off?`,
             this.storePage();
           };
           this.settingsPage.appendChild(
-            this.backgroundImageSelector.createFullFileInput()
+            this.backgroundImageSelector.fullContainer
           );
           this.settingsPage.appendChild(createSectionTitle("Glass"));
           this.settingsPage.appendChild(
@@ -7468,6 +7559,7 @@ Is it scaring you off?`,
         });
       }
       this.onDuplicate(newThemeName);
+      new Toast("Theme succesfully duplicated", "succes").render();
     }
     async share() {
       console.log("Started sharing");
@@ -8318,9 +8410,7 @@ Is it scaring you off?`,
     createFileInputContainer() {
       let fileInputContainer = document.createElement("div");
       fileInputContainer.classList.add("file-and-theme-button-container");
-      fileInputContainer.appendChild(
-        this.backgroundImageInput.createFullFileInput()
-      );
+      fileInputContainer.appendChild(this.backgroundImageInput.fullContainer);
       let divider = document.createElement("div");
       divider.classList.add("file-input-theme-button-divider");
       fileInputContainer.appendChild(divider);
@@ -13012,6 +13102,12 @@ ${code}`;
       }
     });
   }
+  function addToastContainer() {
+    let toastContainer = document.createElement("div");
+    toastContainer.id = "toast-container";
+    toastContainer.classList.add("toast-container");
+    document.body.appendChild(toastContainer);
+  }
   function updateTopNavIcons(data2) {
     const notifsButton = document.querySelector(
       ".js-btn-notifs"
@@ -13145,6 +13241,7 @@ ${code}`;
     changeFont();
     fixCoursesSearch();
     titleFix();
+    addToastContainer();
     let notifsToggleLabel = document.getElementById(
       "notifsToggleLabel"
     );

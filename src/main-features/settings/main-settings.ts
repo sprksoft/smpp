@@ -1132,7 +1132,7 @@ export class SettingsWindow extends BaseWindow {
           applyProfilePicture(data.profile);
         };
         let profilePictureInputContainer =
-          this.profilePictureInput.createFullFileInput();
+          this.profilePictureInput.fullContainer;
         profilePictureInputContainer.id = "profile-picture-input-container";
         this.settingsPage.appendChild(profilePictureInputContainer);
 
@@ -1158,7 +1158,7 @@ export class SettingsWindow extends BaseWindow {
         };
 
         this.settingsPage.appendChild(
-          this.backgroundImageSelector.createFullFileInput()
+          this.backgroundImageSelector.fullContainer
         );
 
         this.settingsPage.appendChild(createSectionTitle("Glass"));
