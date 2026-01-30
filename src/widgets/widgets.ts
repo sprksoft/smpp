@@ -8,6 +8,8 @@ import {
 import { createButtonWithLabel } from "../main-features/appearance/ui.js";
 import { liteMode } from "../main-features/main.ts";
 import { doneSvg, editIconSvg } from "../fixes-utils/svgs.js";
+import { settingsWindow } from "../main-features/settings/main-settings.js";
+import { loadQuickSettings } from "../main-features/settings/quick-settings.js";
 const PANNELIP_MARGIN_PX = 20;
 
 let widgetSystemCreated = false;
@@ -272,9 +274,8 @@ export class WidgetBase {
     el.style.width = rect.width + "px";
     el.style.left = rect.left + "px";
     el.style.top = rect.top + "px";
-    el.style[
-      "transform-origin"
-    ] = `${curDragInfo.offset.x}px ${curDragInfo.offset.y}px`;
+    el.style["transform-origin"] =
+      `${curDragInfo.offset.x}px ${curDragInfo.offset.y}px`;
 
     el.classList.add("smpp-widget-dragging");
 
@@ -563,6 +564,8 @@ function initNewsEditMode() {
       name: "appearance.news",
       data: e.target.checked,
     });
+    await settingsWindow.loadPage();
+    await loadQuickSettings();
   });
   div.appendChild(button);
   document.querySelector(".smpp-news-container").appendChild(div);
