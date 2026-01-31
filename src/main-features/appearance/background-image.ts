@@ -1,48 +1,59 @@
 import { browser, getExtensionImage } from "../../common/utils.js";
 import { isValidImage } from "../../fixes-utils/utils.js";
-import type { SMPPImage } from "../modules/images.js";
+import { getImageURL, type SMPPImage } from "../modules/images.js";
 import type { Settings } from "../settings/main-settings.js";
 
 export async function setBackground(appearance: Settings["appearance"]) {
-  function displayBackgroundImage(imageSrc: string) {
+  function displayBackgroundImage(imageSrc: string | null) {
     document.documentElement.style.setProperty(
       "--background-color",
       `transparent`
     );
+    let imgContainer =
+      (document.getElementById(
+        "smpp-background-image-container"
+      ) as HTMLDivElement) || document.createElement("div");
+    imgContainer.id = "smpp-background-image-container";
+    imgContainer.classList.add("smpp-background-image-container");
+
     let img =
-      (document.getElementById("background_image") as HTMLImageElement) ||
+      (document.getElementById("smpp-background-image") as HTMLImageElement) ||
       document.createElement("img");
-    img.id = "background_image";
-    img.style.backgroundColor = "var(--color-base00)";
-    img.style.position = "absolute";
-    img.style.top = "0";
-    img.style.left = "0";
-    img.style.width = "100%";
-    img.style.height = "100%";
-    img.style.objectFit = "cover";
-    img.style.zIndex = "-1";
-    img.style.display = "block";
-    img.src = imageSrc;
+    img.id = "smpp-background-image";
+    img.classList.add("smpp-background-image");
+
+    if (imageSrc) {
+      img.classList.remove("image-not-available");
+      img.src = imageSrc;
+    } else {
+      img.classList.add("image-not-available");
+      img.src = "";
+    }
+
     if (
-      !document.getElementById("background_image") &&
-      !document.getElementById("tinymce") // check for message writing box
+      !document.getElementById("smpp-background-image") &&
+      !document.getElementById("tinymce")
     ) {
-      document.body.appendChild(img);
+      document.body.appendChild(imgContainer);
+      imgContainer.appendChild(img);
     }
   }
-  let result = (await browser.runtime.sendMessage({
-    action: "getImage",
-    id: appearance.theme,
-  })) as SMPPImage;
 
-  if (result.metaData.type == "default") {
-    result.imageData = await getExtensionImage(
-      "theme-backgrounds/" + appearance.theme + ".jpg"
-    );
-  }
-  if (await isValidImage(result.imageData)) {
-    displayBackgroundImage(result.imageData);
+  let imageURL = await getImageURL(
+    appearance.theme,
+    async () => {
+      return await getExtensionImage(
+        "theme-backgrounds/" + appearance.theme + ".jpg"
+      );
+    },
+    false
+  );
+  console.log(imageURL.url);
+  if (await isValidImage(imageURL.url)) {
+    console.log("valid");
+    displayBackgroundImage(imageURL.url);
   } else {
-    displayBackgroundImage("");
+    console.log("not valid");
+    displayBackgroundImage(null);
   }
 }

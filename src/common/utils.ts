@@ -151,8 +151,8 @@ export async function convertLinkToFile(link: string) {
 export async function getCompressedData(file: File): Promise<string> {
   try {
     const options: Options = {
-      maxSizeMB: 0.2,
-      maxWidthOrHeight: 400,
+      maxSizeMB: 0.01,
+      maxWidthOrHeight: 350,
       useWebWorker: false,
     };
 

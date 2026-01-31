@@ -275,6 +275,8 @@ export async function getImageURL(
       action: "getImage",
       id,
     })) as SMPPImage;
+    console.log(image);
+    console.log(id);
   } catch (err) {
     console.warn("[getImageURL] Failed to get image from background:", err);
     return { url: await onDefault(), type: null };
@@ -282,6 +284,7 @@ export async function getImageURL(
 
   // Default
   if (image.metaData.type === "default") {
+    console.log("why");
     return { url: await onDefault(), type: image.metaData.type };
   }
 
@@ -296,6 +299,7 @@ export async function getImageURL(
     const blob = await res.blob();
 
     const objectURL = URL.createObjectURL(blob);
+    console.log("yes");
 
     return { url: objectURL, type: image.metaData.type };
   } catch (err) {

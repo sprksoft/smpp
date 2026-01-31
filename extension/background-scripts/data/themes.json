@@ -9,7 +9,7 @@
       "--color-base02": "#2c2c2c",
       "--color-base03": "#383838",
       "--color-homepage-sidebars-bg": "#0b0b0b1a",
-      "--color-splashtext": "#adadad",
+      "--color-splashtext": "#e8e8e8",
       "--darken-background": "#0b0b0b4d"
     }
   },
@@ -50,7 +50,7 @@
       "--color-base02": "#232428",
       "--color-base03": "#3a3c44",
       "--color-homepage-sidebars-bg": "#09090e1a",
-      "--color-splashtext": "#a8a9ab",
+      "--color-splashtext": "#6e81b1",
       "--color-text": "#a8a9ab",
       "--darken-background": "#09090e4d"
     }
@@ -362,5 +362,62 @@
       "--darken-background": "#050e134d"
     },
     "displayName": "Sea Otters"
+  },
+
+  "darkglass": {
+    "cssProperties": {
+      "--color-accent": "#5e78f8",
+      "--color-base00": "#010a2c",
+      "--color-base01": "#0a1a5b",
+      "--color-base02": "#142d8d",
+      "--color-base03": "#1e40c4",
+      "--color-homepage-sidebars-bg": "#03051a1a",
+      "--color-splashtext": "#cbd6ff",
+      "--color-text": "#cbd6ff",
+      "--darken-background": "#03051a4d"
+    },
+    "displayName": "Dark Glass"
+  },
+  "lightglass": {
+    "cssProperties": {
+      "--color-accent": "#418494",
+      "--color-base00": "#cdd8e4",
+      "--color-base01": "#bdcbdb",
+      "--color-base02": "#acbed2",
+      "--color-base03": "#8ba4c0",
+      "--color-homepage-sidebars-bg": "#c8d1db1a",
+      "--color-splashtext": "#272f31",
+      "--color-text": "#272f31",
+      "--darken-background": "#c8d1db66"
+    },
+    "displayName": "Light Glass"
+  },
+  "minecraft": {
+    "cssProperties": {
+      "--color-accent": "#f7cb6d",
+      "--color-base00": "#0c171b",
+      "--color-base01": "#1d303d",
+      "--color-base02": "#38566f",
+      "--color-base03": "#9bce75",
+      "--color-homepage-sidebars-bg": "#060e111a",
+      "--color-splashtext": "#feffff",
+      "--color-text": "#feffff",
+      "--darken-background": "#060e114d"
+    },
+    "displayName": "Minecraft"
+  },
+  "lost": {
+    "cssProperties": {
+      "--color-accent": "#c85f4b",
+      "--color-base00": "#10131d",
+      "--color-base01": "#1b1f2d",
+      "--color-base02": "#2f3341",
+      "--color-base03": "#2d395d",
+      "--color-homepage-sidebars-bg": "#090b121a",
+      "--color-splashtext": "#a4b0d4",
+      "--color-text": "#a4b0d4",
+      "--darken-background": "#090b124d"
+    },
+    "displayName": "Lost"
   }
 }

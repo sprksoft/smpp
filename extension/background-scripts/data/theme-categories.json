@@ -18,9 +18,20 @@
     "galaxy",
     "japan",
     "error",
-    "smkerst"
+    "smkerst",
+    "darkglass",
+    "minecraft",
+    "lost"
   ],
-  "light": ["white", "summer", "pink", "fairyblue", "boringwhite", "pizza"],
+  "light": [
+    "white",
+    "summer",
+    "pink",
+    "fairyblue",
+    "boringwhite",
+    "pizza",
+    "lightglass"
+  ],
   "seasonal": ["fall", "smkerst", "winter", "summer", "matcha"],
   "hidden": [
     "fairyblue",

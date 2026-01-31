@@ -21,10 +21,10 @@
 }
 .glass .modern-message {
   background: var(--darken-background) !important;
-  backdrop-filter: var(--small-blur);
+  backdrop-filter: var(--medium-blur);
 }
 .modern-message {
-  border: 2px solid var(--color-base01) !important;
+  border: 2px solid var(--color-base02) !important;
   border-radius: 1.25rem !important;
   background: var(--color-base01) !important;
   padding: 6px 10px !important;
@@ -342,7 +342,9 @@ p:not(:first-of-type) {
   background: var(--color-base03) !important;
   height: var(--border-size) !important;
 }
-
+.glass .messageframe {
+  backdrop-filter: none !important;
+}
 .messageframe {
   border: 2px solid var(--color-base02) !important;
   border-radius: 1.5rem !important;

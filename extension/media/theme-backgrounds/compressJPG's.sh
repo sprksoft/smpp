@@ -6,7 +6,7 @@ mkdir -p $OUTDIR
 for file in *.jpg ; do
   echo Procesing $file
   # === Convert and compress ===
-  magick "$file" -resize "2560x1440>" -strip -interlace Plane -quality 85 "$OUTDIR/$file"
+  magick "$file" -resize "2560x1440>" -strip -interlace Plane -quality 90 "$OUTDIR/$file"
 done
 
 echo "Done! Optimized images saved in $OUTDIR"

@@ -160,6 +160,11 @@
   gap: 0.5rem;
 }
 
+.glass .smpp-toast {
+  background: var(--darken-background);
+  backdrop-filter: var(--medium-blur);
+}
+
 .smpp-toast {
   animation: toast-in 0.1s ease-in-out;
   width: 100%;
@@ -233,4 +238,33 @@
     opacity: 0;
     transform: translateX(100%);
   }
+}
+.smpp-background-image-container {
+  background: linear-gradient(
+    45deg,
+    color-mix(in srgb, var(--color-base00) 95%, var(--color-accent) 5%) 0%,
+    color-mix(in srgb, var(--color-base00) 90%, var(--color-accent) 10%) 15%,
+    color-mix(in srgb, var(--color-base01) 93%, var(--color-accent) 7%) 45%,
+    color-mix(in srgb, var(--color-base01) 95%, var(--color-accent) 5%) 55%,
+    color-mix(in srgb, var(--color-base01) 98%, var(--color-accent) 2%) 100%
+  ) !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  filter: var(--background-blur) !important;
+  z-index: -1;
+}
+
+.smpp-background-image {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+
+  display: block;
+}
+
+.smpp-background-image.image-not-available {
+  display: none;
 }

@@ -1059,7 +1059,6 @@ export class ThemeSelector {
       return tile;
     }) as Tiles;
     this.currentTiles = tiles;
-
     await this.renderTiles(tiles);
   }
 

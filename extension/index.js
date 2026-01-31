@@ -2299,8 +2299,8 @@ Is it scaring you off?`,
   async function getCompressedData(file) {
     try {
       const options = {
-        maxSizeMB: 0.2,
-        maxWidthOrHeight: 400,
+        maxSizeMB: 0.01,
+        maxWidthOrHeight: 350,
         useWebWorker: false
       };
       const compressedFile = await imageCompression(file, options);
@@ -2870,11 +2870,14 @@ Is it scaring you off?`,
         action: "getImage",
         id
       });
+      console.log(image);
+      console.log(id);
     } catch (err) {
       console.warn("[getImageURL] Failed to get image from background:", err);
       return { url: await onDefault(), type: null };
     }
     if (image.metaData.type === "default") {
+      console.log("why");
       return { url: await onDefault(), type: image.metaData.type };
     }
     if (isFirefox) {
@@ -2884,6 +2887,7 @@ Is it scaring you off?`,
       const res = await fetch(image.imageData);
       const blob = await res.blob();
       const objectURL = URL.createObjectURL(blob);
+      console.log("yes");
       return { url: objectURL, type: image.metaData.type };
     } catch (err) {
       console.warn("[getImageURL] Failed to create Blob URL:", err);
@@ -9843,35 +9847,42 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         "--background-color",
         `transparent`
       );
-      let img = document.getElementById("background_image") || document.createElement("img");
-      img.id = "background_image";
-      img.style.backgroundColor = "var(--color-base00)";
-      img.style.position = "absolute";
-      img.style.top = "0";
-      img.style.left = "0";
-      img.style.width = "100%";
-      img.style.height = "100%";
-      img.style.objectFit = "cover";
-      img.style.zIndex = "-1";
-      img.style.display = "block";
-      img.src = imageSrc;
-      if (!document.getElementById("background_image") && !document.getElementById("tinymce")) {
-        document.body.appendChild(img);
+      let imgContainer = document.getElementById(
+        "smpp-background-image-container"
+      ) || document.createElement("div");
+      imgContainer.id = "smpp-background-image-container";
+      imgContainer.classList.add("smpp-background-image-container");
+      let img = document.getElementById("smpp-background-image") || document.createElement("img");
+      img.id = "smpp-background-image";
+      img.classList.add("smpp-background-image");
+      if (imageSrc) {
+        img.classList.remove("image-not-available");
+        img.src = imageSrc;
+      } else {
+        img.classList.add("image-not-available");
+        img.src = "";
+      }
+      if (!document.getElementById("smpp-background-image") && !document.getElementById("tinymce")) {
+        document.body.appendChild(imgContainer);
+        imgContainer.appendChild(img);
       }
     }
-    let result = await browser.runtime.sendMessage({
-      action: "getImage",
-      id: appearance.theme
-    });
-    if (result.metaData.type == "default") {
-      result.imageData = await getExtensionImage(
-        "theme-backgrounds/" + appearance.theme + ".jpg"
-      );
-    }
-    if (await isValidImage(result.imageData)) {
-      displayBackgroundImage(result.imageData);
+    let imageURL = await getImageURL(
+      appearance.theme,
+      async () => {
+        return await getExtensionImage(
+          "theme-backgrounds/" + appearance.theme + ".jpg"
+        );
+      },
+      false
+    );
+    console.log(imageURL.url);
+    if (await isValidImage(imageURL.url)) {
+      console.log("valid");
+      displayBackgroundImage(imageURL.url);
     } else {
-      displayBackgroundImage("");
+      console.log("not valid");
+      displayBackgroundImage(null);
     }
   }
 

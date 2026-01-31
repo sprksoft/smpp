@@ -83,8 +83,7 @@ textarea .modern-ui,
 .smsc-tabslist__item:after {
   opacity: 1;
 }
-
-.messageframe:has(#msgdetail):has(.msgDetail--empty) {
+.glass .messageframe:has(#msgdetail):has(.msgDetail--empty) {
   background-color: var(--darken-background) !important;
   backdrop-filter: var(--small-blur) !important;
 }
@@ -1961,11 +1960,6 @@ body.modern-ui .smscMain .smsc-container {
   }
 }
 
-#background_image {
-  filter: var(--background-blur) !important;
-  background-color: var(--color-base00) !important;
-}
-
 .mydoc smsc-listview .js-table-container {
   padding-bottom: 0px !important;
 }
@@ -2332,14 +2326,19 @@ span.uploaddetail {
 span.smsc-treeitem__label {
   color: var(--color-text) !important;
 }
-div#folders {
-  border-radius: 1.5rem !important;
 
+.glass div#folders {
   background-color: var(--darken-background) !important;
   backdrop-filter: var(--small-blur) !important;
+}
+
+div#folders {
+  border-radius: 1.5rem !important;
+  background: var(--color-base01) !important;
   border: 2px solid var(--color-base02) !important;
   font-weight: 500 !important;
 }
+
 .smsc_cm_breadcrumb.subline {
   border: none !important;
 }

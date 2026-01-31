@@ -317,6 +317,10 @@ html {
   z-index: 1000000000;
   gap: 0.5rem;
 }
+.glass .smpp-toast {
+  background: var(--darken-background);
+  backdrop-filter: var(--medium-blur);
+}
 .smpp-toast {
   animation: toast-in 0.1s ease-in-out;
   width: 100%;
@@ -380,6 +384,32 @@ html {
     opacity: 0;
     transform: translateX(100%);
   }
+}
+.smpp-background-image-container {
+  background:
+    linear-gradient(
+      45deg,
+      color-mix(in srgb, var(--color-base00) 95%, var(--color-accent) 5%) 0%,
+      color-mix(in srgb, var(--color-base00) 90%, var(--color-accent) 10%) 15%,
+      color-mix(in srgb, var(--color-base01) 93%, var(--color-accent) 7%) 45%,
+      color-mix(in srgb, var(--color-base01) 95%, var(--color-accent) 5%) 55%,
+      color-mix(in srgb, var(--color-base01) 98%, var(--color-accent) 2%) 100%) !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  filter: var(--background-blur) !important;
+  z-index: -1;
+}
+.smpp-background-image {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  display: block;
+}
+.smpp-background-image.image-not-available {
+  display: none;
 }
 
 /* src/styles/smpp-styles/ui.css */
@@ -2754,6 +2784,7 @@ input.settings-page-keybinding-input[type=text]:not(.aaaaaa):read-only.listening
 .bottom-container-button {
   background-color: var(--color-base01-local) !important;
   border: 2px solid var(--color-base02-local) !important;
+  box-shadow: 0px 0px 10px 2px var(--color-shadow) !important;
   border-radius: 1rem !important;
   padding: 0 !important;
   font-size: 1.4rem !important;
@@ -3293,12 +3324,6 @@ button.open-theme-editor-button:hover {
   fill: var(--color-red) !important;
   stroke: var(--color-red) !important;
 }
-.wallpaper-error-message {
-  color: var(--color-red) !important;
-  font-weight: 600 !important;
-  margin-top: 0.5rem;
-  max-width: 20rem !important;
-}
 
 /* src/styles/smpp-styles/assignments.css */
 .assignment__item {
@@ -3434,7 +3459,7 @@ textarea .modern-ui,
 .smsc-tabslist__item:after {
   opacity: 1;
 }
-.messageframe:has(#msgdetail):has(.msgDetail--empty) {
+.glass .messageframe:has(#msgdetail):has(.msgDetail--empty) {
   background-color: var(--darken-background) !important;
   backdrop-filter: var(--small-blur) !important;
 }
@@ -4977,10 +5002,6 @@ body.modern-ui .smscMain .smsc-container {
     color: transparent !important;
   }
 }
-#background_image {
-  filter: var(--background-blur) !important;
-  background-color: var(--color-base00) !important;
-}
 .mydoc smsc-listview .js-table-container {
   padding-bottom: 0px !important;
 }
@@ -5295,10 +5316,13 @@ span.uploaddetail {
 span.smsc-treeitem__label {
   color: var(--color-text) !important;
 }
-div#folders {
-  border-radius: 1.5rem !important;
+.glass div#folders {
   background-color: var(--darken-background) !important;
   backdrop-filter: var(--small-blur) !important;
+}
+div#folders {
+  border-radius: 1.5rem !important;
+  background: var(--color-base01) !important;
   border: 2px solid var(--color-base02) !important;
   font-weight: 500 !important;
 }
@@ -5595,6 +5619,7 @@ html {
 }
 .login-app__container,
 .login-app {
+  position: relative;
   background-position: center !important;
   background-size: cover !important;
   flex-grow: 0 !important;
@@ -5608,20 +5633,23 @@ html {
   width: 400px;
   height: auto;
 }
-.login-app__top {
+.glass .login-app__top {
   backdrop-filter: var(--medium-blur) !important;
   background: var(--darken-background) !important;
+}
+.login-app__top {
+  background: var(--color-base01) !important;
   border-radius: 2.5rem !important;
-  border: 3px solid var(--color-base03) !important;
+  border: 2px solid var(--color-base02) !important;
 }
 .login-app__bottom {
   display: none !important;
 }
 .logintitle {
-  font-size: 36px !important;
-  font-weight: 650 !important;
+  font-size: 3rem !important;
+  font-weight: 600 !important;
   margin-bottom: 0px !important;
-  color: var(--color-text) !important;
+  color: var(--color-accent) !important;
 }
 .login-app__link,
 .login-app__link--password {
@@ -5651,22 +5679,33 @@ a.smscButton[href^="/login/sso/init"],
   flex-direction: row !important;
   align-items: flex-start !important;
 }
-.float-label__input {
+body form.form .float-label .float-label__input {
+  box-shadow: 0px 0px 10px -2px var(--color-shadow) !important;
+  background: var(--color-base02) !important;
+  border: 2px solid var(--color-base03) !important;
   border-radius: 40px !important;
   height: 40px !important;
-  font-size: 15px !important;
+  font-size: 1.2rem !important;
   margin: 10px !important;
   margin-left: 0px !important;
+}
+.glass .login-app .smscButton.blue:not(#pushWizardPopupConfirmButton) {
+  border-color: var(--color-base02) !important;
+  background-color: var(--color-base01) !important;
+}
+.glass .login-app .smscButton.blue:hover:not(#pushWizardPopupConfirmButton:hover) {
+  background-color: var(--color-base02) !important;
+  border-color: var(--color-base03) !important;
 }
 .login-app .smscButton.blue:not(#pushWizardPopupConfirmButton) {
   border-radius: 9999px !important;
   width: 90% !important;
   height: 40px !important;
   color: var(--color-text) !important;
-  border-color: var(--color-base02) !important;
-  background-color: var(--color-base01) !important;
+  border-color: var(--color-base03) !important;
+  background-color: var(--color-base02) !important;
+  box-shadow: 0px 0px 10px -2px var(--color-shadow) !important;
   font-weight: 450;
-  box-shadow: none !important;
   justify-self: center;
 }
 .enableAnimations .login-app .smscButton.blue:not(#pushWizardPopupConfirmButton) {
@@ -5680,9 +5719,9 @@ a.smscButton[href^="/login/sso/init"],
   transition: 0.3s !important;
 }
 .login-app .smscButton.blue:hover:not(#pushWizardPopupConfirmButton:hover) {
-  background-color: var(--color-base02) !important;
-  border-color: var(--color-base03) !important;
-  box-shadow: none !important;
+  background-color: var(--color-base03) !important;
+  border-color: var(--color-accent) !important;
+  box-shadow: 0px 0px 5px 0px var(--color-shadow) !important;
   width: 100% !important;
   font-weight: 700 !important;
   margin-left: 0% !important;
@@ -5704,6 +5743,7 @@ a.smscButton[href^="/login/sso/init"],
   background-color: var(--color-base01);
   color: var(--color-text) !important;
   border: 2px solid var(--color-base02) !important;
+  box-shadow: 0px 0px 10px -2px var(--color-shadow) !important;
   border-radius: 5px !important;
   margin: 10px !important;
   font-size: 15px !important;
@@ -5728,17 +5768,15 @@ span.login-app__title.login-app__title--sign-in-with {
 }
 .splashtextcontainer {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  transform-origin: left !important;
-  transform: translateX(180px) translateY(-240px) rotate(30deg) !important;
+  right: 1rem;
+  top: -0.5rem;
+  transform: translateX(50%) rotate(25deg) !important;
   text-align: center;
   z-index: 99999;
 }
 .splashtext {
   color: var(--color-splashtext) !important;
-  font-size: 30px !important;
-  left: -50% !important;
+  font-size: 2rem !important;
   position: relative !important;
 }
 .enableAnimations .splashtext {
@@ -5793,10 +5831,10 @@ span.login-app__title.login-app__title--sign-in-with {
 }
 .glass .modern-message {
   background: var(--darken-background) !important;
-  backdrop-filter: var(--small-blur);
+  backdrop-filter: var(--medium-blur);
 }
 .modern-message {
-  border: 2px solid var(--color-base01) !important;
+  border: 2px solid var(--color-base02) !important;
   border-radius: 1.25rem !important;
   background: var(--color-base01) !important;
   padding: 6px 10px !important;
@@ -6056,6 +6094,9 @@ p:not(:first-of-type) {
 .toolbar__line:after {
   background: var(--color-base03) !important;
   height: var(--border-size) !important;
+}
+.glass .messageframe {
+  backdrop-filter: none !important;
 }
 .messageframe {
   border: 2px solid var(--color-base02) !important;

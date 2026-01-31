@@ -25,6 +25,7 @@ html {
 
 .login-app__container,
 .login-app {
+  position: relative;
   background-position: center !important;
   background-size: cover !important;
   flex-grow: 0 !important;
@@ -40,12 +41,14 @@ html {
   width: 400px;
   height: auto;
 }
-
-.login-app__top {
+.glass .login-app__top {
   backdrop-filter: var(--medium-blur) !important;
   background: var(--darken-background) !important;
+}
+.login-app__top {
+  background: var(--color-base01) !important;
   border-radius: 2.5rem !important;
-  border: 3px solid var(--color-base03) !important;
+  border: 2px solid var(--color-base02) !important;
 }
 
 .login-app__bottom {
@@ -53,10 +56,10 @@ html {
 }
 
 .logintitle {
-  font-size: 36px !important;
-  font-weight: 650 !important;
+  font-size: 3rem !important;
+  font-weight: 600 !important;
   margin-bottom: 0px !important;
-  color: var(--color-text) !important;
+  color: var(--color-accent) !important;
 }
 
 .login-app__link,
@@ -93,12 +96,26 @@ a.smscButton[href^="/login/sso/init"],
   align-items: flex-start !important;
 }
 
-.float-label__input {
+body form.form .float-label .float-label__input {
+  box-shadow: 0px 0px 10px -2px var(--color-shadow) !important;
+  background: var(--color-base02) !important;
+  border: 2px solid var(--color-base03) !important;
   border-radius: 40px !important;
   height: 40px !important;
-  font-size: 15px !important;
+  font-size: 1.2rem !important;
   margin: 10px !important;
   margin-left: 0px !important;
+}
+
+.glass .login-app .smscButton.blue:not(#pushWizardPopupConfirmButton) {
+  border-color: var(--color-base02) !important;
+  background-color: var(--color-base01) !important;
+}
+.glass
+  .login-app
+  .smscButton.blue:hover:not(#pushWizardPopupConfirmButton:hover) {
+  background-color: var(--color-base02) !important;
+  border-color: var(--color-base03) !important;
 }
 
 .login-app .smscButton.blue:not(#pushWizardPopupConfirmButton) {
@@ -106,10 +123,10 @@ a.smscButton[href^="/login/sso/init"],
   width: 90% !important;
   height: 40px !important;
   color: var(--color-text) !important;
-  border-color: var(--color-base02) !important;
-  background-color: var(--color-base01) !important;
+  border-color: var(--color-base03) !important;
+  background-color: var(--color-base02) !important;
+  box-shadow: 0px 0px 10px -2px var(--color-shadow) !important;
   font-weight: 450;
-  box-shadow: none !important;
   justify-self: center;
 }
 
@@ -122,9 +139,9 @@ a.smscButton[href^="/login/sso/init"],
 }
 
 .login-app .smscButton.blue:hover:not(#pushWizardPopupConfirmButton:hover) {
-  background-color: var(--color-base02) !important;
-  border-color: var(--color-base03) !important;
-  box-shadow: none !important;
+  background-color: var(--color-base03) !important;
+  border-color: var(--color-accent) !important;
+  box-shadow: 0px 0px 5px 0px var(--color-shadow) !important;
   width: 100% !important;
   font-weight: 700 !important;
   margin-left: 0% !important;
@@ -149,6 +166,7 @@ a.smscButton[href^="/login/sso/init"],
   background-color: var(--color-base01);
   color: var(--color-text) !important;
   border: 2px solid var(--color-base02) !important;
+  box-shadow: 0px 0px 10px -2px var(--color-shadow) !important;
   border-radius: 5px !important;
   margin: 10px !important;
   font-size: 15px !important;
@@ -179,19 +197,16 @@ span.login-app__title.login-app__title--sign-in-with {
 
 .splashtextcontainer {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  transform-origin: left !important;
-  transform: translateX(180px) translateY(-240px) rotate(30deg) !important;
-  /* Moves right by 200px and rotates */
+  right: 1rem;
+  top: -0.5rem;
+  transform: translateX(50%) rotate(25deg) !important;
   text-align: center;
   z-index: 99999;
 }
 
 .splashtext {
   color: var(--color-splashtext) !important;
-  font-size: 30px !important;
-  left: -50% !important;
+  font-size: 2rem !important;
   position: relative !important;
 }
 
