@@ -419,5 +419,19 @@
       "--darken-background": "#090b124d"
     },
     "displayName": "Lost"
+  },
+  "mclaren": {
+    "cssProperties": {
+      "--color-accent": "#e8a07a",
+      "--color-base00": "#100a08",
+      "--color-base01": "#321f19",
+      "--color-base02": "#54342a",
+      "--color-base03": "#76493b",
+      "--color-homepage-sidebars-bg": "#0905041a",
+      "--color-splashtext": "#eedad6",
+      "--color-text": "#eedad6",
+      "--darken-background": "#0905044d"
+    },
+    "displayName": "McLaren"
   }
 }
