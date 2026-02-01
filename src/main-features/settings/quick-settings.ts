@@ -10,7 +10,7 @@ import { browser, getExtensionImage } from "../../common/utils.js";
 import { getTheme } from "../appearance/themes.js";
 
 let quickSettingsWindowIsHidden = true;
-let quickSettingsBackgroundImageSelector = new ImageSelector("backgroundImage");
+let quickSettingsBackgroundImageSelector = new ImageSelector("backgroundImage", true);
 
 async function storeQuickSettings() {
   const oldData = (await browser.runtime.sendMessage({
@@ -62,11 +62,10 @@ export async function loadQuickSettings() {
 
   const performanceModeInfo = document.getElementById("performance-mode-info");
   if (performanceModeInfo) {
-    performanceModeInfo.innerHTML = `Toggle performance mode ${
-      data.other.performanceMode
+    performanceModeInfo.innerHTML = `Toggle performance mode ${data.other.performanceMode
         ? "<span class='green-underline'>Enabled</span>"
         : "<span class='red-underline'>Disabled</span>"
-    }`;
+      }`;
   }
 }
 
@@ -245,7 +244,7 @@ class ThemeOptiony {
     return imageContainer;
   }
 
-  async imageIsOutdated() {}
+  async imageIsOutdated() { }
 
   async updateImage(forceReload = false) {
     let data = (await browser.runtime.sendMessage({

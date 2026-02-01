@@ -80,7 +80,7 @@ export async function setImage(id: string, data: SMPPImage) {
   await browser.storage.local.set({ [customId]: data.imageData });
 }
 
-export async function getImage(id: string) {
+export async function getImage(id: string): Promise<SMPPImage> {
   const imagesMetaData =
     (await browser.storage.local.get("images")).images || {};
   let metaData = imagesMetaData[id] as SMPPImageMetaData;
@@ -109,7 +109,7 @@ export async function removeImage(id: string) {
   await browser.storage.local.set({ images: imagesMetaData });
 }
 
-export async function getBase64(link: string) {
+export async function getBase64(link: string): Promise<string | null> {
   try {
     let response = await fetch(link);
     if (!response.ok) {

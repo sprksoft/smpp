@@ -18,6 +18,10 @@
       "match_about_blank": true,
       "css": ["index.css"],
       "js": ["index.js"]
+    },
+    {
+      "matches": ["*://theme.smpp.be/*"],
+      "js": ["theme_sharing_content.js"]
     }
   ],
   "web_accessible_resources": [

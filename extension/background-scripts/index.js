@@ -1799,6 +1799,16 @@
     }
     return object;
   }
+  var FNV_PRIME = 0x0100000001b3n;
+  var FNV_OFFSET = 0xcbf29ce484222325n;
+  function fnv1aHash(byteArray) {
+    let hash = FNV_OFFSET;
+    for (let i2 = 0; i2 < byteArray.length; i2++) {
+      hash ^= BigInt(byteArray[i2]);
+      hash = BigInt.asUintN(64, hash * FNV_PRIME);
+    }
+    return hash.toString();
+  }
 
   // src/background-scripts/api-background-script.ts
   async function fetchWeatherData(location) {
@@ -1983,16 +1993,14 @@
     let allCategories = await getAllThemeCategories();
     if (!includeHidden) {
       let hiddenThemeKeys = await getThemeCategory("hidden");
-      Object.keys(categories).forEach((category) => {
-        categories[category].forEach((theme) => {
-          if (hiddenThemeKeys.includes(theme)) delete categories[category][theme];
-        });
-      });
+      for (let [name, category] of Object.entries(allCategories)) {
+        allCategories[name] = category.filter((c2) => !hiddenThemeKeys.includes(c2));
+      }
     }
     if (!includeEmpty) {
-      Object.keys(categories).forEach((category) => {
-        if (!categories[category] || !categories[category][0])
-          delete categories[category];
+      Object.keys(allCategories).forEach((category) => {
+        if (!allCategories[category] || !allCategories[category][0])
+          delete allCategories[category];
       });
     }
     return allCategories;
@@ -2003,12 +2011,15 @@
         "background-scripts/data/theme-categories.json"
       );
     }
-    categories.quickSettings = await getQuickSettingsThemes();
-    categories.custom = await getCustomCategory();
+    categories["quickSettings"] = await getQuickSettingsThemes();
+    categories["custom"] = await getCustomCategory();
     return categories;
   }
   async function getFirstThemeInCategory(category, includeHidden) {
     let themeNames = await getThemeCategory(category);
+    if (!themeNames) {
+      return "error";
+    }
     if (!themeNames[0]) return "error";
     return themeNames[0];
   }
@@ -2020,27 +2031,29 @@
     let categories2 = await getAllThemeCategories();
     return categories2[category];
   }
-  async function getThemes(categories2 = ["all"], includeHidden = false, mustMatchAllCategories = false) {
+  async function getThemes(categorynames = ["all"], includeHidden = false, mustMatchAllCategories = false) {
     let themes = await getAllThemes();
-    if (categories2.includes("all")) return themes;
-    let allowedThemeKeys = await Promise.all(
-      categories2.map((category) => getThemeCategory(category))
+    if (categorynames.includes("all")) return themes;
+    const categories2 = await Promise.all(
+      categorynames.map((category) => getThemeCategory(category))
     );
+    const allThemeNames = categories2.flat();
+    let allowedThemeNames;
     if (mustMatchAllCategories) {
-      allowedThemeKeys = allowedThemeKeys[0].filter(
-        (themeKey) => allowedThemeKeys.every((arr) => arr.includes(themeKey))
+      allowedThemeNames = allThemeNames.filter(
+        (themeName) => categories2.every((cat) => cat.includes(themeName))
       );
     } else {
-      allowedThemeKeys = allowedThemeKeys.flat();
+      allowedThemeNames = allThemeNames;
     }
     if (!includeHidden) {
       let hiddenThemeKeys = await getThemeCategory("hidden");
-      allowedThemeKeys = allowedThemeKeys.filter(
+      allowedThemeNames = allowedThemeNames.filter(
         (themeKey) => !hiddenThemeKeys.includes(themeKey)
       );
     }
     const filteredThemes = Object.fromEntries(
-      Object.entries(themes).filter(([key]) => allowedThemeKeys.includes(key))
+      Object.entries(themes).filter(([key]) => allowedThemeNames.includes(key))
     );
     return filteredThemes;
   }
@@ -2053,6 +2066,21 @@
       console.error(`Invalid theme requested:"${name}", sent "error" theme`);
       return allThemes["error"];
     }
+  }
+  async function getSharedTheme(shareId) {
+    let themes = await getAllCustomThemes();
+    for (let theme of Object.values(themes)) {
+      console.log(theme.shareId);
+      if (theme.shareId === shareId) {
+        console.log("returing " + shareId);
+        return theme;
+      }
+    }
+    return null;
+  }
+  async function getCustomTheme(id) {
+    let themes = await getAllCustomThemes();
+    return themes[id];
   }
   async function getAllCustomThemes() {
     const result = await browser.storage.local.get("customThemes");
@@ -2085,12 +2113,109 @@
     await setSettingsData(data);
     await browser.storage.local.set({ customThemes });
   }
+  async function installTheme(shareId) {
+    const resp = await fetch("https://theme.smpp.be/api/" + shareId);
+    const json = await resp.json();
+    const theme = {
+      displayName: json.name,
+      cssProperties: json.css,
+      shareId
+    };
+    let id = await saveCustomTheme(theme);
+    const settingsData = await getSettingsData();
+    settingsData.appearance.theme = id;
+    await setSettingsData(settingsData);
+    if (json.img_url) {
+      const base64 = await getBase64("https://theme.smpp.be/api/" + shareId + "/image");
+      if (base64 === null) {
+        throw new Error("Failed to fetch img_url returned by the server while trying to create base64.");
+      }
+      const image = {
+        metaData: {
+          type: "file",
+          link: "ImportedFile.png"
+        },
+        imageData: base64
+      };
+      await setImage(id, image);
+    }
+    return;
+  }
+  async function fetchAsUnit8Array(url) {
+    try {
+      const resp = await fetch(url);
+      return new Uint8Array(await resp.arrayBuffer());
+    } catch (e2) {
+      return e2;
+    }
+  }
+  function shareUrlFromShareId(id) {
+    return "https://theme.smpp.be/" + id;
+  }
+  var defaultThemeShareIdCache = {};
+  async function purgeThemeShareCache(themeId) {
+    if (defaultThemeShareIdCache[themeId] != void 0) {
+      delete defaultThemeShareIdCache[themeId];
+      return;
+    }
+    const theme = await getCustomTheme(themeId);
+    if (theme && theme.shareId !== null) {
+      theme.shareId = null;
+      await saveCustomTheme(theme, themeId);
+    }
+  }
   async function shareTheme(id) {
+    if (defaultThemeShareIdCache[id] != void 0) {
+      return shareUrlFromShareId(defaultThemeShareIdCache[id]);
+    }
     let theme = await getTheme(id);
+    if (theme.shareId != null) {
+      return shareUrlFromShareId(theme.shareId);
+    }
     let image = await getImage(id);
+    let hash = null;
+    let imageData = null;
+    if (image.imageData != "") {
+      const data = await fetchAsUnit8Array(image.imageData);
+      if (data instanceof Error) {
+        throw new Error("Failed to get image data while trying to sharing theme: " + data.message);
+      }
+      imageData = data;
+      hash = fnv1aHash(imageData);
+    }
+    const apiTheme = {
+      name: theme.displayName,
+      css: theme.cssProperties,
+      img_upload_chksum: hash
+    };
+    const resp = await fetch("https://theme.smpp.be/api", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(apiTheme)
+    });
+    const themeInfo = await resp.json();
+    let isCustom = Object.keys(getAllCustomThemes()).includes(id);
+    if (isCustom) {
+      theme.shareId = themeInfo.id;
+      saveCustomTheme(theme, id);
+    } else {
+      defaultThemeShareIdCache[id] = themeInfo.id;
+    }
+    if (themeInfo.needs_img && hash && imageData) {
+      await fetch("https://theme.smpp.be/api/" + themeInfo.id + "/image", {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + themeInfo.edit_key
+        },
+        body: imageData.buffer
+      });
+    }
+    return shareUrlFromShareId(themeInfo.id);
   }
 
-  // src/background-scripts/settings.js
+  // src/background-scripts/settings.ts
   var settingsTemplate;
   var defaultSettings;
   async function getSettingsTemplate() {
@@ -2134,7 +2259,7 @@
   }
 
   // src/background-scripts/index.ts
-  browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  browser.runtime.onMessage.addListener((message, _sender, sendResponse) => {
     handleMessage(message, sendResponse);
     return true;
   });
@@ -2189,9 +2314,23 @@
         sendResponse({ success: true });
         console.log(`Theme ${message.id} removed.`);
       }
+      if (message.action === "markThemeAsModified") {
+        await purgeThemeShareCache(message.name);
+        sendResponse({ success: true });
+      }
+      if (message.action === "getSharedTheme") {
+        const theme = await getSharedTheme(message.shareId);
+        console.log("sending", theme);
+        sendResponse({ theme });
+      }
+      if (message.action === "installTheme") {
+        await installTheme(message.shareId);
+        sendResponse({ success: true });
+      }
       if (message.action === "shareTheme") {
-        await shareTheme(message.name);
-        console.log(`Theme ${message.name} was shared`);
+        const url = await shareTheme(message.name);
+        console.log(`Theme ${message.name} was shared (url: ${url})`);
+        sendResponse({ shareUrl: url });
       }
       if (message.action === "getCustomThemeData") {
         const customThemeData = await getCustomThemeData();

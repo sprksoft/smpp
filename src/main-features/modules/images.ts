@@ -6,10 +6,9 @@ import {
   convertLinkToBase64,
   getCompressedData,
   convertLinkToFile,
-  delay,
 } from "../../common/utils.js";
 import { isFirefox } from "../main.js";
-import imageCompression, { type Options } from "browser-image-compression";
+import imageCompression from "browser-image-compression";
 import { Toast } from "../../fixes-utils/utils.js";
 
 export type SMPPImage = {
@@ -23,12 +22,9 @@ export type SMPPImageMetaData = {
 };
 
 export class ImageSelector {
-  name: string;
-  constructor(name: string) {
-    this.name = name;
 
-    this._bindEvents();
-  }
+  name: string;
+  isThemeImage: boolean;
 
   id: string = "";
   clearButton = document.createElement("button");
@@ -39,7 +35,16 @@ export class ImageSelector {
   fileInputContainer = this.createImageFileInputContainer();
   fullContainer = this.createFullFileInput();
 
-  onStore() {}
+
+  /* theme: Indicates that this image selector references the background image of a theme. (used for theme share cache invalidation on modify) */
+  constructor(name: string, isThemeImage: boolean = false) {
+    this.name = name;
+    this.isThemeImage = isThemeImage;
+
+    this._bindEvents();
+  }
+
+  onStore() { }
 
   createImageFileInputContainer() {
     const fileInputContainer = document.createElement("div");
@@ -227,6 +232,12 @@ export class ImageSelector {
       });
       await this.loadImageData();
       this.onStore();
+      if (this.isThemeImage) {
+        await browser.runtime.sendMessage({
+          action: "markThemeAsModified",
+          name: this.id,
+        });
+      }
       if (data.metaData.type == "file") {
         new Toast("Image succesfully saved", "succes").render();
       }
@@ -260,12 +271,11 @@ export class ImageSelector {
   }
 }
 
-// Returns { url: string|null, type: file, link, default }
 export async function getImageURL(
   id: string,
-  onDefault: Function,
+  onDefault: (() => Promise<string>),
   getCompressed: boolean
-) {
+): Promise<{ url: string, type: "file" | "default" | null }> {
   let image;
   if (getCompressed) {
     id = "compressed-" + id;

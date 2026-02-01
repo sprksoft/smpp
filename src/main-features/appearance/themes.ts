@@ -54,9 +54,19 @@ import { recreateGlobalChat } from "../globalchat.js";
 export let currentThemeName: string;
 export let currentTheme: Theme;
 
+export type ShareId = string;
+export type ThemeId = string;
+
+export type ThemeCategory = [ThemeId];
+
+export type ThemeCategories = {
+  [name: string]: ThemeCategory
+}
+
 export type Theme = {
   displayName: string;
   cssProperties: { [key: string]: string };
+  shareId: ShareId | null,
 };
 
 export type Themes = {
@@ -109,6 +119,7 @@ export async function exampleSaveCustomTheme() {
       "--darken-background": "rgba(215, 215, 215, 0.40)",
       "--color-splashtext": "#120500",
     },
+    shareId: null
   };
   let id = await browser.runtime.sendMessage({
     action: "saveCustomTheme",
@@ -171,7 +182,7 @@ class ColorCursor {
   }
 
   // Overwrite this if needed
-  onDrag() {}
+  onDrag() { }
 
   updateCursorPosition() {
     this.element.style.left = `${this.xPos}%`;
@@ -345,7 +356,7 @@ export class ColorPicker {
     return this.element;
   }
 
-  async onChange() {}
+  async onChange() { }
 }
 
 export class Tile {
@@ -363,15 +374,15 @@ export class Tile {
     return this.element;
   }
 
-  async updateImage(currentTheme: string, forceReload = false) {}
+  async updateImage(currentTheme: string, forceReload = false) { }
 
   // Overide this in the implementation
-  updateSelection() {}
+  updateSelection() { }
   // Overide in de implementation
-  async onClick(e: MouseEvent) {}
+  async onClick(e: MouseEvent) { }
 
   // Overide this in the implementation
-  async createContent() {}
+  async createContent() { }
 }
 
 export class ThemeTile extends Tile {
@@ -632,21 +643,28 @@ export class ThemeTile extends Tile {
 
   async share() {
     console.log("Started sharing");
-    await browser.runtime.sendMessage({
+    const resp = await browser.runtime.sendMessage({
       action: "shareTheme",
       name: this.name,
     });
+    if (resp.error) {
+      console.error("Failed to share theme", resp.error);
+      new Toast("Failed to share theme", "error").render();
+    } else {
+      navigator.clipboard.writeText(resp.shareUrl);
+      new Toast("Theme link copied to clipboard", "succes").render();
+    }
     this.onShare();
   }
 
   // Overide in de implementation
-  async onFavoriteToggle() {}
+  async onFavoriteToggle() { }
 
   // Overide in de implementation
-  async onShare() {}
+  async onShare() { }
 
   // Overide in de implementation
-  async onDuplicate(newThemeName: string) {}
+  async onDuplicate(newThemeName: string) { }
 }
 
 async function updateTheme(name: string) {
@@ -1256,10 +1274,10 @@ export class CustomThemeCreator extends BaseWindow {
     this.name = name;
     this.editableValues = this.getEditableValues(theme.cssProperties);
     this.colorPreviews = this.generateColorPreviews(this.editableValues);
-    this.backgroundImageInput = new ImageSelector(this.name);
+    this.backgroundImageInput = new ImageSelector(this.name, true);
     this.backgroundImageInput.id = this.name;
     this.imagePreviewContainer = document.createElement("div");
-    this.backgroundImageInput.onStore = () => {
+    this.backgroundImageInput.onStore = async () => {
       updateTheme(this.name);
       this.updateBackgroundImagePreview();
     };
@@ -1314,6 +1332,7 @@ export class CustomThemeCreator extends BaseWindow {
   }
 
   async saveThemeData() {
+    this.theme.shareId = null;
     this.colorPreviews.forEach((preview) => {
       let colorPreview = Object.values(preview)[0];
       if (!colorPreview) return;
@@ -1523,6 +1542,7 @@ export class CustomThemeCreator extends BaseWindow {
         "--color-homepage-sidebars-bg": darkenColor.alpha(0.1).toHex(),
         "--color-splashtext": textcolor.toHex(),
       },
+      shareId: null
     };
     await browser.runtime.sendMessage({
       action: "saveCustomTheme",
@@ -1563,7 +1583,7 @@ export class CustomThemeCreator extends BaseWindow {
         return { input, label };
       }
 
-      updateLogo(element: HTMLLabelElement, state: boolean) {}
+      updateLogo(element: HTMLLabelElement, state: boolean) { }
 
       load() {
         this.updateLogo(this.label, this.element.checked);

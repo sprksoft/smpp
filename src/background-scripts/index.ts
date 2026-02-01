@@ -1,4 +1,3 @@
-//@ts-nocheck
 import { browser, getByPath, setByPath } from "../common/utils.js";
 import {
   getDelijnColorData,
@@ -7,7 +6,6 @@ import {
   setImage,
   getImage,
   getBase64,
-  getFileFromUrl,
   getFileData,
 } from "./data-background-script.js";
 import {
@@ -16,23 +14,26 @@ import {
   getSettingsTemplate,
 } from "./settings.js";
 import { fetchWeatherData, fetchDelijnData } from "./api-background-script.js";
-import { initGlobals } from "./json-loader.js";
 import {
   getTheme,
   getThemes,
   getThemeCategories,
+  getCustomTheme,
   saveCustomTheme,
   removeCustomTheme,
   getFirstThemeInCategory,
   shareTheme,
+  installTheme,
+  getSharedTheme,
+  purgeThemeShareCache,
 } from "./themes.js";
 
-browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
+browser.runtime.onMessage.addListener((message: any, _sender: any, sendResponse: ((resp: any) => void)) => {
   handleMessage(message, sendResponse);
   return true;
 });
 
-async function handleMessage(message, sendResponse) {
+async function handleMessage(message: any, sendResponse: (resp: any) => void) {
   try {
     // General
     if (message.action === "clearLocalStorage") {
@@ -50,10 +51,8 @@ async function handleMessage(message, sendResponse) {
       );
       sendResponse(themes);
       console.log(
-        `Themes for categories: ${
-          message.categories
-        } sent, including hidden themes: ${
-          message.includeHidden ? true : false
+        `Themes for categories: ${message.categories
+        } sent, including hidden themes: ${message.includeHidden ? true : false
         }`
       );
       console.log(themes);
@@ -92,9 +91,25 @@ async function handleMessage(message, sendResponse) {
       sendResponse({ success: true });
       console.log(`Theme ${message.id} removed.`);
     }
+
+    // Theme Sharing
+    if (message.action === "markThemeAsModified") {
+      await purgeThemeShareCache(message.name);
+      sendResponse({ success: true });
+    }
+    if (message.action === "getSharedTheme") {
+      const theme = await getSharedTheme(message.shareId);
+      console.log("sending", theme);
+      sendResponse({ theme: theme })
+    }
+    if (message.action === "installTheme") {
+      await installTheme(message.shareId);
+      sendResponse({ success: true });
+    }
     if (message.action === "shareTheme") {
-      await shareTheme(message.name);
-      console.log(`Theme ${message.name} was shared`);
+      const url = await shareTheme(message.name);
+      console.log(`Theme ${message.name} was shared (url: ${url})`);
+      sendResponse({ shareUrl: url })
     }
 
     // Custom theme OLD
@@ -211,7 +226,7 @@ async function handleMessage(message, sendResponse) {
     }
     if (message.action === "setWidgetData") {
       console.log("Saving widget data...");
-      let data = {};
+      let data: any = {};
       data["Game." + message.widget] = message.data;
       await browser.storage.local.set(data);
       sendResponse({ success: true });
@@ -256,6 +271,6 @@ async function handleMessage(message, sendResponse) {
     }
   } catch (err) {
     console.error("Service worker error:", err);
-    sendResponse({ error: err.message || String(err) });
+    sendResponse({ error: (err as any).message || String(err) });
   }
 }

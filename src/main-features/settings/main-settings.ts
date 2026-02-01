@@ -89,7 +89,7 @@ export class SettingsWindow extends BaseWindow {
 
   currentPage = "appearance";
   settingsPage: HTMLDivElement = document.createElement("div");
-  backgroundImageSelector = new ImageSelector("backgroundImage");
+  backgroundImageSelector = new ImageSelector("backgroundImage", true);
   themeSelector = new ThemeSelector();
   profilePictureInput = new ImageSelector("profilePicture");
 
@@ -725,7 +725,7 @@ export class SettingsWindow extends BaseWindow {
         // Apply weather effects if they changed
         if (
           JSON.stringify(settings.appearance.weatherOverlay) !==
-            JSON.stringify(previousSettings.appearance.weatherOverlay) &&
+          JSON.stringify(previousSettings.appearance.weatherOverlay) &&
           !liteMode
         ) {
           applyWeatherEffects(settings.appearance.weatherOverlay);

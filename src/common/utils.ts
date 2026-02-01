@@ -148,6 +148,17 @@ export async function convertLinkToFile(link: string) {
   }
 }
 
+const FNV_PRIME = 0x0100000001b3n;
+const FNV_OFFSET = 0xcbf29ce484222325n;
+export function fnv1aHash(byteArray: Uint8Array): string {
+  let hash = FNV_OFFSET;
+  for (let i = 0; i < byteArray.length; i++) {
+    hash ^= BigInt(byteArray[i] as number);
+    hash = BigInt.asUintN(64, hash * FNV_PRIME);
+  }
+  return hash.toString();
+}
+
 export async function getCompressedData(file: File): Promise<string> {
   try {
     const options: Options = {

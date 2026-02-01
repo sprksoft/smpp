@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { browser, fillObjectWithDefaults } from "../common/utils.js";
 import { loadJSON } from "./json-loader.js";
 import { getThemes } from "./themes.js";
@@ -25,7 +26,7 @@ export async function getDefaultSettings() {
   return defaultSettings;
 }
 
-export async function getSettingsData() {
+export async function getSettingsData(): any {
   let data = (await browser.storage.local.get("settingsData")).settingsData;
   data = fillObjectWithDefaults(data, await getDefaultSettings());
 

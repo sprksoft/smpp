@@ -2658,10 +2658,7 @@ Is it scaring you off?`,
   // src/main-features/modules/images.ts
   var ImageSelector = class {
     name;
-    constructor(name2) {
-      this.name = name2;
-      this._bindEvents();
-    }
+    isThemeImage;
     id = "";
     clearButton = document.createElement("button");
     linkInput = createTextInput("", "Link");
@@ -2670,6 +2667,12 @@ Is it scaring you off?`,
     linkInputContainer = this.createLinkImageInputContainer();
     fileInputContainer = this.createImageFileInputContainer();
     fullContainer = this.createFullFileInput();
+    /* theme: Indicates that this image selector references the background image of a theme. (used for theme share cache invalidation on modify) */
+    constructor(name2, isThemeImage = false) {
+      this.name = name2;
+      this.isThemeImage = isThemeImage;
+      this._bindEvents();
+    }
     onStore() {
     }
     createImageFileInputContainer() {
@@ -2832,6 +2835,12 @@ Is it scaring you off?`,
         });
         await this.loadImageData();
         this.onStore();
+        if (this.isThemeImage) {
+          await browser.runtime.sendMessage({
+            action: "markThemeAsModified",
+            name: this.id
+          });
+        }
         if (data2.metaData.type == "file") {
           new Toast("Image succesfully saved", "succes").render();
         }
@@ -4935,7 +4944,7 @@ Is it scaring you off?`,
 
   // src/main-features/settings/quick-settings.ts
   var quickSettingsWindowIsHidden = true;
-  var quickSettingsBackgroundImageSelector = new ImageSelector("backgroundImage");
+  var quickSettingsBackgroundImageSelector = new ImageSelector("backgroundImage", true);
   async function storeQuickSettings() {
     const oldData = await browser.runtime.sendMessage({
       action: "getSettingsData"
@@ -5172,7 +5181,7 @@ Is it scaring you off?`,
     ];
     currentPage = "appearance";
     settingsPage = document.createElement("div");
-    backgroundImageSelector = new ImageSelector("backgroundImage");
+    backgroundImageSelector = new ImageSelector("backgroundImage", true);
     themeSelector = new ThemeSelector();
     profilePictureInput = new ImageSelector("profilePicture");
     constructor() {
@@ -7569,10 +7578,17 @@ Is it scaring you off?`,
     }
     async share() {
       console.log("Started sharing");
-      await browser.runtime.sendMessage({
+      const resp = await browser.runtime.sendMessage({
         action: "shareTheme",
         name: this.name
       });
+      if (resp.error) {
+        console.error("Failed to share theme", resp.error);
+        new Toast("Failed to share theme", "error").render();
+      } else {
+        navigator.clipboard.writeText(resp.shareUrl);
+        new Toast("Theme link copied to clipboard", "succes").render();
+      }
       this.onShare();
     }
     // Overide in de implementation
@@ -8073,10 +8089,10 @@ Is it scaring you off?`,
       this.name = name2;
       this.editableValues = this.getEditableValues(theme.cssProperties);
       this.colorPreviews = this.generateColorPreviews(this.editableValues);
-      this.backgroundImageInput = new ImageSelector(this.name);
+      this.backgroundImageInput = new ImageSelector(this.name, true);
       this.backgroundImageInput.id = this.name;
       this.imagePreviewContainer = document.createElement("div");
-      this.backgroundImageInput.onStore = () => {
+      this.backgroundImageInput.onStore = async () => {
         updateTheme(this.name);
         this.updateBackgroundImagePreview();
       };
@@ -8115,6 +8131,7 @@ Is it scaring you off?`,
       colorPreview.parentElement?.appendChild(colorPicker.render());
     }
     async saveThemeData() {
+      this.theme.shareId = null;
       this.colorPreviews.forEach((preview) => {
         let colorPreview = Object.values(preview)[0];
         if (!colorPreview) return;
@@ -8289,7 +8306,8 @@ Is it scaring you off?`,
           "--darken-background": darkenColor.toHex(),
           "--color-homepage-sidebars-bg": darkenColor.alpha(0.1).toHex(),
           "--color-splashtext": textcolor.toHex()
-        }
+        },
+        shareId: null
       };
       await browser.runtime.sendMessage({
         action: "saveCustomTheme",
