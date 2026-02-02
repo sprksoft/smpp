@@ -1,3 +1,8 @@
+let browser;
+if (browser == undefined) {
+  browser = chrome;
+}
+
 function sendMessage(action, data) {
   let detail = data ?? {};
   detail.action = action;
@@ -7,9 +12,11 @@ function sendMessage(action, data) {
     detail = cloneInto(detail, window);
   }
 
-  document.dispatchEvent(new CustomEvent("smppContentScriptMessage", {
-    detail: detail
-  }));
+  document.dispatchEvent(
+    new CustomEvent("smppContentScriptMessage", {
+      detail: detail,
+    })
+  );
 }
 
 document.addEventListener("smppPageScriptMessage", async (e) => {
@@ -26,8 +33,8 @@ document.addEventListener("smppPageScriptMessage", async (e) => {
         });
 
         sendMessage("setMode", {
-          mode: resp.theme ? "installed" : "canInstall"
-        })
+          mode: resp.theme ? "installed" : "canInstall",
+        });
       }
       break;
 
@@ -39,8 +46,8 @@ document.addEventListener("smppPageScriptMessage", async (e) => {
         });
         if (getResp.theme) {
           sendMessage("setMode", {
-            mode: "installed"
-          })
+            mode: "installed",
+          });
           return;
         }
 
@@ -51,15 +58,15 @@ document.addEventListener("smppPageScriptMessage", async (e) => {
         if (resp.error) {
           sendMessage("error", {
             message: resp.error,
-          })
+          });
         } else {
           sendMessage("setMode", {
-            mode: "installed"
-          })
+            mode: "installed",
+          });
         }
       }
       break;
   }
-})
+});
 
 sendMessage("init");
