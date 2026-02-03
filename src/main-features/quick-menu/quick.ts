@@ -236,7 +236,6 @@ export async function do_qm(opener = "") {
           return;
         case "gcbeta":
           openGlobalChat(null, true);
-          console.log("a");
           return;
         case "dizzy":
           const styleEl = document.createElement("style");

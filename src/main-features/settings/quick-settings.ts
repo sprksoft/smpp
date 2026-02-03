@@ -7,10 +7,19 @@ import {
   type Settings,
 } from "./main-settings.js";
 import { browser, getExtensionImage } from "../../common/utils.js";
-import { getTheme } from "../appearance/themes.js";
+import {
+  currentThemeName,
+  getTheme,
+  updateTheme,
+  type Theme,
+  type Themes,
+} from "../appearance/themes.js";
 
 let quickSettingsWindowIsHidden = true;
-let quickSettingsBackgroundImageSelector = new ImageSelector("backgroundImage", true);
+let quickSettingsBackgroundImageSelector = new ImageSelector(
+  "backgroundImage",
+  true
+);
 
 async function storeQuickSettings() {
   const oldData = (await browser.runtime.sendMessage({
@@ -62,10 +71,11 @@ export async function loadQuickSettings() {
 
   const performanceModeInfo = document.getElementById("performance-mode-info");
   if (performanceModeInfo) {
-    performanceModeInfo.innerHTML = `Toggle performance mode ${data.other.performanceMode
+    performanceModeInfo.innerHTML = `Toggle performance mode ${
+      data.other.performanceMode
         ? "<span class='green-underline'>Enabled</span>"
         : "<span class='red-underline'>Disabled</span>"
-      }`;
+    }`;
   }
 }
 
@@ -94,7 +104,7 @@ function closeQuickSettings() {
   quickSettingsWindowIsHidden = true;
 }
 
-function createQuickSettingsHTML(parent: HTMLDivElement): HTMLDivElement {
+async function createQuickSettingsHTML(parent: HTMLDivElement) {
   const performanceModeTooltipLabel = document.createElement("label");
   performanceModeTooltipLabel.className = "performanceModeTooltipLabel";
   performanceModeTooltipLabel.id = "performanceModeTooltipLabel";
@@ -154,14 +164,14 @@ function createQuickSettingsHTML(parent: HTMLDivElement): HTMLDivElement {
   extraSettingsButton.addEventListener("click", (e) => openSettingsWindow(e));
 
   parent.appendChild(performanceModeTooltipLabel);
-  parent.appendChild(compactThemeSelector.render());
+  parent.appendChild(await compactThemeSelector.render());
   parent.appendChild(wallpaperTopContainer);
   parent.appendChild(performanceModeInfo);
   parent.appendChild(extraSettingsButton);
   return parent;
 }
 
-export function createQuickSettings() {
+export async function createQuickSettings() {
   let quickSettingsWindow = document.createElement("div");
   quickSettingsWindow.id = "quickSettings";
   quickSettingsWindow.addEventListener("change", storeQuickSettings);
@@ -170,7 +180,7 @@ export function createQuickSettings() {
     storeQuickSettings();
   };
 
-  quickSettingsWindow = createQuickSettingsHTML(quickSettingsWindow);
+  quickSettingsWindow = await createQuickSettingsHTML(quickSettingsWindow);
 
   const quickSettingsButton = document.getElementById("quickSettingsButton");
   if (quickSettingsButton) {
@@ -232,30 +242,37 @@ export function createQuickSettingsButton() {
   return quickSettingsButtonWrapper;
 }
 
-class ThemeOptiony {
+class CompactThemeOption {
   element = document.createElement("div");
   name: string;
-  constructor(name: string) {
+  currentTheme: Theme;
+
+  constructor(name: string, theme: Theme) {
     this.name = name;
+    this.currentTheme = theme;
   }
+
+  render() {
+    this.element.classList.add("compact-theme-option");
+    this.element.dataset["name"] = this.name;
+    this.element.addEventListener("click", () => this.click());
+    this.update(true);
+    return this.element;
+  }
+
   createImageContainer() {
     let imageContainer = document.createElement("div");
     imageContainer.classList.add("image-container");
     return imageContainer;
   }
 
-  async imageIsOutdated() { }
-
   async updateImage(forceReload = false) {
-    let data = (await browser.runtime.sendMessage({
-      action: "getSettingsData",
-    })) as Settings;
-    if (this.name == data.appearance.theme || forceReload) {
+    if (this.name == currentThemeName || forceReload) {
       let imageURL = await getImageURL(
         this.name,
         async () => {
           return await getExtensionImage(
-            "theme-backgrounds/" + this.name + ".jpg"
+            "theme-backgrounds/compressed/" + this.name + ".jpg"
           );
         },
         true
@@ -263,31 +280,79 @@ class ThemeOptiony {
 
       this.element.style.setProperty(
         "--background-image-local",
-        `url(${await imageURL.url})`
+        `url(${imageURL.url})`
       );
     }
   }
 
-  async render() {
-    this.element.classList.add("lethal-compact-theme-option");
-
-    let theme = await getTheme(this.name);
-    Object.keys(theme.cssProperties).forEach((key) => {
+  updateElement() {
+    Object.keys(this.currentTheme.cssProperties).forEach((key) => {
       this.element.style.setProperty(
         `${key}-local`,
-        theme.cssProperties[key] as string
+        this.currentTheme.cssProperties[key] as string
       );
     });
+  }
 
-    return this.element;
+  async click() {
+    await updateTheme(this.name);
+    this.element.classList.add("is-selected");
+  }
+
+  async update(forceReload = false) {
+    this.currentTheme = await getTheme(this.name);
+
+    if (this.name == currentThemeName) {
+      this.element.classList.add("is-selected");
+    } else {
+      console.log(this.name, "is not equal to", currentThemeName);
+      this.element.classList.remove("is-selected");
+    }
+
+    this.updateElement();
+    this.updateImage(forceReload);
   }
 }
-type ThemeOptions = ThemeOptiony[];
 
 class CompactThemeSelector {
   element = document.createElement("div");
-  render() {
-    let ThemeOptionyStalker = new ThemeOptiony("stalker" as string);
+  input = document.createElement("div");
+  selector = document.createElement("div");
+  themeOptions: CompactThemeOption[] = [];
+
+  async createThemeOptions(themes: Themes) {
+    Object.entries(themes).forEach((theme) => {
+      this.themeOptions.push(new CompactThemeOption(theme[0], theme[1]));
+    });
+  }
+
+  renderThemeOptions() {
+    this.themeOptions.forEach((option) => {
+      this.selector.appendChild(option.render());
+    });
+  }
+
+  async updateThemeOptions() {
+    this.themeOptions.forEach((option) => {
+      option.update();
+    });
+  }
+
+  async render() {
+    this.element.classList.add("compact-theme-options");
+    let themes = (await browser.runtime.sendMessage({
+      action: "getThemes",
+      categories: ["quickSettings"],
+      includeHidden: true,
+    })) as Themes;
+    this.themeOptions = [];
+
+    this.createThemeOptions(themes);
+    this.renderThemeOptions();
+
+    this.element.appendChild(this.input);
+    this.element.appendChild(this.selector);
+
     return this.element;
   }
 }

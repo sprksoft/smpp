@@ -48,12 +48,9 @@ export async function setBackground(appearance: Settings["appearance"]) {
     },
     false
   );
-  console.log(imageURL.url);
   if (await isValidImage(imageURL.url)) {
-    console.log("valid");
     displayBackgroundImage(imageURL.url);
   } else {
-    console.log("not valid");
     displayBackgroundImage(null);
   }
 }

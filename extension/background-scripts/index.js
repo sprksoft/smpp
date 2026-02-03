@@ -1983,7 +1983,9 @@
   var categories;
   async function getAllThemes() {
     if (!nativeThemes) {
-      nativeThemes = await loadJSON("background-scripts/data/themes.json");
+      nativeThemes = await loadJSON(
+        "background-scripts/data/themes.json"
+      );
     }
     let customThemes = await getAllCustomThemes();
     let themes = { ...nativeThemes, ...customThemes };
@@ -1994,7 +1996,9 @@
     if (!includeHidden) {
       let hiddenThemeKeys = await getThemeCategory("hidden");
       for (let [name, category] of Object.entries(allCategories)) {
-        allCategories[name] = category.filter((c2) => !hiddenThemeKeys.includes(c2));
+        allCategories[name] = category.filter(
+          (c2) => !hiddenThemeKeys.includes(c2)
+        );
       }
     }
     if (!includeEmpty) {
@@ -2035,7 +2039,9 @@
     let themes = await getAllThemes();
     if (categorynames.includes("all")) return themes;
     const categories2 = await Promise.all(
-      categorynames.map((category) => getThemeCategory(category))
+      categorynames.map(
+        (category) => getThemeCategory(category)
+      )
     );
     const allThemeNames = categories2.flat();
     let allowedThemeNames;
@@ -2126,9 +2132,13 @@
     settingsData.appearance.theme = id;
     await setSettingsData(settingsData);
     if (json.img_url) {
-      const base64 = await getBase64("https://theme.smpp.be/api/" + shareId + "/image");
+      const base64 = await getBase64(
+        "https://theme.smpp.be/api/" + shareId + "/image"
+      );
       if (base64 === null) {
-        throw new Error("Failed to fetch img_url returned by the server while trying to create base64.");
+        throw new Error(
+          "Failed to fetch img_url returned by the server while trying to create base64."
+        );
       }
       const image = {
         metaData: {
@@ -2178,7 +2188,9 @@
     if (image.imageData != "") {
       const data = await fetchAsUnit8Array(image.imageData);
       if (data instanceof Error) {
-        throw new Error("Failed to get image data while trying to sharing theme: " + data.message);
+        throw new Error(
+          "Failed to get image data while trying to sharing theme: " + data.message
+        );
       }
       imageData = data;
       hash = fnv1aHash(imageData);

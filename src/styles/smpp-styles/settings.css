@@ -1606,3 +1606,16 @@ button.open-theme-editor-button:hover {
   fill: var(--color-red) !important;
   stroke: var(--color-red) !important;
 }
+
+#quickSettings .compact-theme-options .compact-theme-option {
+  width: 100%;
+  height: 2rem;
+  background-color: var(--color-base01-local) !important;
+  cursor: pointer;
+}
+.compact-theme-options {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}

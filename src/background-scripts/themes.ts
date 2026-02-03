@@ -1,8 +1,20 @@
 import { loadJSON } from "./json-loader.js";
 import { browser, setByPath, fnv1aHash } from "../common/utils.js";
-import { getBase64, getImage, removeImage, setImage } from "./data-background-script.js";
+import {
+  getBase64,
+  getImage,
+  removeImage,
+  setImage,
+} from "./data-background-script.js";
 import { getSettingsData, setSettingsData } from "./settings.js";
-import type { Theme, ShareId, Themes, ThemeCategories, ThemeCategory, ThemeId } from "../main-features/appearance/themes.js";
+import type {
+  Theme,
+  ShareId,
+  Themes,
+  ThemeCategories,
+  ThemeCategory,
+  ThemeId,
+} from "../main-features/appearance/themes.js";
 import type { SMPPImage } from "../main-features/modules/images.js";
 
 let nativeThemes: Themes | undefined;
@@ -10,7 +22,9 @@ let categories: ThemeCategories | undefined;
 
 async function getAllThemes(): Promise<Themes> {
   if (!nativeThemes) {
-    nativeThemes = (await loadJSON("background-scripts/data/themes.json")) as Themes;
+    nativeThemes = (await loadJSON(
+      "background-scripts/data/themes.json"
+    )) as Themes;
   }
   let customThemes = await getAllCustomThemes();
   let themes = { ...nativeThemes, ...customThemes };
@@ -23,10 +37,12 @@ export async function getThemeCategories(
 ) {
   let allCategories = await getAllThemeCategories();
   if (!includeHidden) {
-    let hiddenThemeKeys = await getThemeCategory("hidden") as ThemeCategory;
+    let hiddenThemeKeys = (await getThemeCategory("hidden")) as ThemeCategory;
 
     for (let [name, category] of Object.entries(allCategories)) {
-      allCategories[name] = category.filter((c) => !hiddenThemeKeys.includes(c)) as ThemeCategory
+      allCategories[name] = category.filter(
+        (c) => !hiddenThemeKeys.includes(c)
+      ) as ThemeCategory;
     }
   }
   if (!includeEmpty) {
@@ -40,16 +56,19 @@ export async function getThemeCategories(
 
 export async function getAllThemeCategories(): Promise<ThemeCategories> {
   if (!categories) {
-    categories = await loadJSON(
+    categories = (await loadJSON(
       "background-scripts/data/theme-categories.json"
-    ) as ThemeCategories;
+    )) as ThemeCategories;
   }
   categories["quickSettings"] = await getQuickSettingsThemes();
   categories["custom"] = await getCustomCategory();
   return categories;
 }
 
-export async function getFirstThemeInCategory(category: string, includeHidden: boolean): Promise<string> {
+export async function getFirstThemeInCategory(
+  category: string,
+  includeHidden: boolean
+): Promise<string> {
   let themeNames = await getThemeCategory(category);
   if (!themeNames) {
     return "error";
@@ -63,7 +82,9 @@ async function getQuickSettingsThemes() {
   return data.appearance.quickSettingsThemes;
 }
 
-async function getThemeCategory(category: string): Promise<ThemeCategory | undefined> {
+async function getThemeCategory(
+  category: string
+): Promise<ThemeCategory | undefined> {
   let categories = await getAllThemeCategories();
   return categories[category];
 }
@@ -77,7 +98,9 @@ export async function getThemes(
   if (categorynames.includes("all")) return themes;
 
   const categories = await Promise.all(
-    categorynames.map((category) => getThemeCategory(category) as Promise<ThemeCategory>)
+    categorynames.map(
+      (category) => getThemeCategory(category) as Promise<ThemeCategory>
+    )
   );
   // Names of all the themes in the requested categories.
   const allThemeNames = categories.flat();
@@ -92,7 +115,7 @@ export async function getThemes(
   }
 
   if (!includeHidden) {
-    let hiddenThemeKeys = await getThemeCategory("hidden") as ThemeCategory;
+    let hiddenThemeKeys = (await getThemeCategory("hidden")) as ThemeCategory;
     allowedThemeNames = allowedThemeNames.filter(
       (themeKey) => !hiddenThemeKeys.includes(themeKey)
     );
@@ -141,7 +164,10 @@ async function getCustomCategory(): Promise<ThemeCategory> {
   return customCategory;
 }
 
-export async function saveCustomTheme(data: Theme, id: string | undefined = undefined) {
+export async function saveCustomTheme(
+  data: Theme,
+  id: string | undefined = undefined
+) {
   if (id === undefined) id = crypto.randomUUID();
 
   const customThemes = await getAllCustomThemes();
@@ -155,7 +181,7 @@ export async function removeCustomTheme(id: ThemeId) {
   delete customThemes[id];
   await removeImage(id);
   await removeImage("compressed-" + id);
-  let data = await getSettingsData() as any;
+  let data = (await getSettingsData()) as any;
   let quickSettingsThemes = data.appearance.quickSettingsThemes.filter(
     (name: string) => {
       return name != id;
@@ -174,25 +200,29 @@ export async function installTheme(shareId: ShareId) {
     displayName: json.name,
     cssProperties: json.css,
     shareId: shareId,
-  }
+  };
   let id = await saveCustomTheme(theme);
 
-  const settingsData = await getSettingsData() as any;
+  const settingsData = (await getSettingsData()) as any;
   settingsData.appearance.theme = id;
   await setSettingsData(settingsData);
 
   if (json.img_url) {
-    const base64 = await getBase64("https://theme.smpp.be/api/" + shareId + "/image");
+    const base64 = await getBase64(
+      "https://theme.smpp.be/api/" + shareId + "/image"
+    );
     if (base64 === null) {
-      throw new Error("Failed to fetch img_url returned by the server while trying to create base64.");
+      throw new Error(
+        "Failed to fetch img_url returned by the server while trying to create base64."
+      );
     }
     const image: SMPPImage = {
       metaData: {
         type: "file",
         link: "ImportedFile.png",
       },
-      imageData: base64
-    }
+      imageData: base64,
+    };
     // TODO: generate compressed images (needs to be done on client side)
     await setImage(id, image);
   }
@@ -230,7 +260,7 @@ export async function purgeThemeShareCache(themeId: ThemeId) {
 
 export async function shareTheme(id: ThemeId): Promise<string> {
   if (defaultThemeShareIdCache[id] != undefined) {
-    return shareUrlFromShareId(defaultThemeShareIdCache[id])
+    return shareUrlFromShareId(defaultThemeShareIdCache[id]);
   }
   let theme = (await getTheme(id)) as Theme;
   if (theme.shareId != null) {
@@ -244,7 +274,10 @@ export async function shareTheme(id: ThemeId): Promise<string> {
   if (image.imageData != "") {
     const data = await fetchAsUnit8Array(image.imageData);
     if (data instanceof Error) {
-      throw new Error("Failed to get image data while trying to sharing theme: " + data.message);
+      throw new Error(
+        "Failed to get image data while trying to sharing theme: " +
+          data.message
+      );
     }
     imageData = data;
     hash = fnv1aHash(imageData);
@@ -261,7 +294,7 @@ export async function shareTheme(id: ThemeId): Promise<string> {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(apiTheme)
+    body: JSON.stringify(apiTheme),
   });
   const themeInfo = await resp.json();
 

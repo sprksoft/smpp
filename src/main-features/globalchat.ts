@@ -20,7 +20,6 @@ class GlobalChatWindow extends BaseWindow {
   }
 
   async renderContent() {
-    console.log("rendering gc window");
     this.gcContent = document.createElement("div");
     const queryString = getThemeQueryString(currentTheme);
     this.iframe = document.createElement("iframe");

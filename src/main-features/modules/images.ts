@@ -22,7 +22,6 @@ export type SMPPImageMetaData = {
 };
 
 export class ImageSelector {
-
   name: string;
   isThemeImage: boolean;
 
@@ -35,7 +34,6 @@ export class ImageSelector {
   fileInputContainer = this.createImageFileInputContainer();
   fullContainer = this.createFullFileInput();
 
-
   /* theme: Indicates that this image selector references the background image of a theme. (used for theme share cache invalidation on modify) */
   constructor(name: string, isThemeImage: boolean = false) {
     this.name = name;
@@ -44,7 +42,7 @@ export class ImageSelector {
     this._bindEvents();
   }
 
-  onStore() { }
+  onStore() {}
 
   createImageFileInputContainer() {
     const fileInputContainer = document.createElement("div");
@@ -273,9 +271,9 @@ export class ImageSelector {
 
 export async function getImageURL(
   id: string,
-  onDefault: (() => Promise<string>),
+  onDefault: () => Promise<string>,
   getCompressed: boolean
-): Promise<{ url: string, type: "file" | "default" | null }> {
+): Promise<{ url: string; type: "file" | "default" | null }> {
   let image;
   if (getCompressed) {
     id = "compressed-" + id;
@@ -285,8 +283,6 @@ export async function getImageURL(
       action: "getImage",
       id,
     })) as SMPPImage;
-    console.log(image);
-    console.log(id);
   } catch (err) {
     console.warn("[getImageURL] Failed to get image from background:", err);
     return { url: await onDefault(), type: null };
@@ -294,7 +290,6 @@ export async function getImageURL(
 
   // Default
   if (image.metaData.type === "default") {
-    console.log("why");
     return { url: await onDefault(), type: image.metaData.type };
   }
 
@@ -309,7 +304,6 @@ export async function getImageURL(
     const blob = await res.blob();
 
     const objectURL = URL.createObjectURL(blob);
-    console.log("yes");
 
     return { url: objectURL, type: image.metaData.type };
   } catch (err) {

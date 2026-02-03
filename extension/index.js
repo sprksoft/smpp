@@ -2486,12 +2486,8 @@ Is it scaring you off?`,
         newElement.id = "buis-stats";
         document.getElementsByClassName("results-evaluations__filters")[0].appendChild(newElement);
         newElement.innerHTML = `<div class="buis-stats" id="buis_amount"></div><div class="buis-stats" id="voldoende_amount"></div>`;
-        document.getElementById(
-          "buis_amount"
-        ).innerHTML = `<div class="buis-stats-box"><span class="buis-stats-title">Onvoldoendes:</span><span class="buis-stats-value">${categories.buis}</span></div>`;
-        document.getElementById(
-          "voldoende_amount"
-        ).innerHTML = `<div class="buis-stats-box"><span class="buis-stats-title">Voldoendes:</span><span class="buis-stats-value">${categories.voldoende}</span></div>`;
+        document.getElementById("buis_amount").innerHTML = `<div class="buis-stats-box"><span class="buis-stats-title">Onvoldoendes:</span><span class="buis-stats-value">${categories.buis}</span></div>`;
+        document.getElementById("voldoende_amount").innerHTML = `<div class="buis-stats-box"><span class="buis-stats-title">Voldoendes:</span><span class="buis-stats-value">${categories.voldoende}</span></div>`;
       }).catch((error) => console.error("Error fetching:", error));
     }, 1e3);
   }
@@ -2879,14 +2875,11 @@ Is it scaring you off?`,
         action: "getImage",
         id
       });
-      console.log(image);
-      console.log(id);
     } catch (err) {
       console.warn("[getImageURL] Failed to get image from background:", err);
       return { url: await onDefault(), type: null };
     }
     if (image.metaData.type === "default") {
-      console.log("why");
       return { url: await onDefault(), type: image.metaData.type };
     }
     if (isFirefox) {
@@ -2896,7 +2889,6 @@ Is it scaring you off?`,
       const res = await fetch(image.imageData);
       const blob = await res.blob();
       const objectURL = URL.createObjectURL(blob);
-      console.log("yes");
       return { url: objectURL, type: image.metaData.type };
     } catch (err) {
       console.warn("[getImageURL] Failed to create Blob URL:", err);
@@ -4944,7 +4936,10 @@ Is it scaring you off?`,
 
   // src/main-features/settings/quick-settings.ts
   var quickSettingsWindowIsHidden = true;
-  var quickSettingsBackgroundImageSelector = new ImageSelector("backgroundImage", true);
+  var quickSettingsBackgroundImageSelector = new ImageSelector(
+    "backgroundImage",
+    true
+  );
   async function storeQuickSettings() {
     const oldData = await browser.runtime.sendMessage({
       action: "getSettingsData"
@@ -5015,7 +5010,7 @@ Is it scaring you off?`,
     }
     quickSettingsWindowIsHidden = true;
   }
-  function createQuickSettingsHTML(parent) {
+  async function createQuickSettingsHTML(parent) {
     const performanceModeTooltipLabel = document.createElement("label");
     performanceModeTooltipLabel.className = "performanceModeTooltipLabel";
     performanceModeTooltipLabel.id = "performanceModeTooltipLabel";
@@ -5060,20 +5055,20 @@ Is it scaring you off?`,
     extraSettingsButton.innerHTML += settingsIconSvg;
     extraSettingsButton.addEventListener("click", (e5) => openSettingsWindow(e5));
     parent.appendChild(performanceModeTooltipLabel);
-    parent.appendChild(compactThemeSelector.render());
+    parent.appendChild(await compactThemeSelector.render());
     parent.appendChild(wallpaperTopContainer);
     parent.appendChild(performanceModeInfo);
     parent.appendChild(extraSettingsButton);
     return parent;
   }
-  function createQuickSettings() {
+  async function createQuickSettings() {
     let quickSettingsWindow = document.createElement("div");
     quickSettingsWindow.id = "quickSettings";
     quickSettingsWindow.addEventListener("change", storeQuickSettings);
     quickSettingsBackgroundImageSelector.onStore = () => {
       storeQuickSettings();
     };
-    quickSettingsWindow = createQuickSettingsHTML(quickSettingsWindow);
+    quickSettingsWindow = await createQuickSettingsHTML(quickSettingsWindow);
     const quickSettingsButton = document.getElementById("quickSettingsButton");
     if (quickSettingsButton) {
       quickSettingsButton.insertAdjacentElement("afterend", quickSettingsWindow);
@@ -5118,55 +5113,99 @@ Is it scaring you off?`,
     quickSettingsButtonWrapper.appendChild(quickSettingsButton);
     return quickSettingsButtonWrapper;
   }
-  var ThemeOptiony = class {
+  var CompactThemeOption = class {
     element = document.createElement("div");
     name;
-    constructor(name2) {
+    currentTheme;
+    constructor(name2, theme) {
       this.name = name2;
+      this.currentTheme = theme;
+    }
+    render() {
+      this.element.classList.add("compact-theme-option");
+      this.element.dataset["name"] = this.name;
+      this.element.addEventListener("click", () => this.click());
+      this.update(true);
+      return this.element;
     }
     createImageContainer() {
       let imageContainer = document.createElement("div");
       imageContainer.classList.add("image-container");
       return imageContainer;
     }
-    async imageIsOutdated() {
-    }
     async updateImage(forceReload = false) {
-      let data2 = await browser.runtime.sendMessage({
-        action: "getSettingsData"
-      });
-      if (this.name == data2.appearance.theme || forceReload) {
+      if (this.name == currentThemeName || forceReload) {
         let imageURL = await getImageURL(
           this.name,
           async () => {
             return await getExtensionImage(
-              "theme-backgrounds/" + this.name + ".jpg"
+              "theme-backgrounds/compressed/" + this.name + ".jpg"
             );
           },
           true
         );
         this.element.style.setProperty(
           "--background-image-local",
-          `url(${await imageURL.url})`
+          `url(${imageURL.url})`
         );
       }
     }
-    async render() {
-      this.element.classList.add("lethal-compact-theme-option");
-      let theme = await getTheme(this.name);
-      Object.keys(theme.cssProperties).forEach((key) => {
+    updateElement() {
+      Object.keys(this.currentTheme.cssProperties).forEach((key) => {
         this.element.style.setProperty(
           `${key}-local`,
-          theme.cssProperties[key]
+          this.currentTheme.cssProperties[key]
         );
       });
-      return this.element;
+    }
+    async click() {
+      await updateTheme(this.name);
+      this.element.classList.add("is-selected");
+    }
+    async update(forceReload = false) {
+      this.currentTheme = await getTheme(this.name);
+      if (this.name == currentThemeName) {
+        this.element.classList.add("is-selected");
+      } else {
+        console.log(this.name, "is not equal to", currentThemeName);
+        this.element.classList.remove("is-selected");
+      }
+      this.updateElement();
+      this.updateImage(forceReload);
     }
   };
   var CompactThemeSelector = class {
     element = document.createElement("div");
-    render() {
-      let ThemeOptionyStalker = new ThemeOptiony("stalker");
+    input = document.createElement("div");
+    selector = document.createElement("div");
+    themeOptions = [];
+    async createThemeOptions(themes2) {
+      Object.entries(themes2).forEach((theme) => {
+        this.themeOptions.push(new CompactThemeOption(theme[0], theme[1]));
+      });
+    }
+    renderThemeOptions() {
+      this.themeOptions.forEach((option) => {
+        this.selector.appendChild(option.render());
+      });
+    }
+    async updateThemeOptions() {
+      this.themeOptions.forEach((option) => {
+        option.update();
+      });
+    }
+    async render() {
+      this.element.classList.add("compact-theme-options");
+      let themes2 = await browser.runtime.sendMessage({
+        action: "getThemes",
+        categories: ["quickSettings"],
+        includeHidden: true
+      });
+      this.themeOptions = [];
+      this.createThemeOptions(themes2);
+      this.renderThemeOptions();
+      this.element.appendChild(this.input);
+      this.element.appendChild(this.selector);
       return this.element;
     }
   };
@@ -7122,6 +7161,7 @@ Is it scaring you off?`,
     return theme;
   }
   async function setTheme(themeName) {
+    console.log("setting name");
     const style = document.documentElement.style;
     currentThemeName = themeName;
     currentTheme = await getTheme(themeName);
@@ -7130,6 +7170,9 @@ Is it scaring you off?`,
     });
     await widgetSystemNotifyThemeChange();
     recreateGlobalChat();
+  }
+  function updateCurrentThemeName(themeName) {
+    currentThemeName = themeName;
   }
   function getThemeQueryString(theme) {
     let query = "";
@@ -9432,7 +9475,6 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       super("global_chat_window", hidden);
     }
     async renderContent() {
-      console.log("rendering gc window");
       this.gcContent = document.createElement("div");
       const queryString = getThemeQueryString(currentTheme);
       this.iframe = document.createElement("iframe");
@@ -9739,7 +9781,6 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             return;
           case "gcbeta":
             openGlobalChat(null, true);
-            console.log("a");
             return;
           case "dizzy":
             const styleEl = document.createElement("style");
@@ -9894,12 +9935,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       },
       false
     );
-    console.log(imageURL.url);
     if (await isValidImage(imageURL.url)) {
-      console.log("valid");
       displayBackgroundImage(imageURL.url);
     } else {
-      console.log("not valid");
       displayBackgroundImage(null);
     }
   }
@@ -13277,7 +13315,7 @@ ${code}`;
       "notifsToggleLabel"
     );
     if (notifsToggleLabel) notifsToggleLabel.innerText = "Toon pop-ups";
-    if (window.location.pathname.startsWith("/results/main/results/")) {
+    if (window.location.pathname.startsWith("/results/main/results")) {
       buisStats();
     }
     if (document.querySelector(".login-app__left")) updateLoginPanel();
@@ -13287,6 +13325,7 @@ ${code}`;
       action: "getSettingsData"
     });
     console.log("Applying with settings data: \n", data2);
+    updateCurrentThemeName(data2.appearance.theme);
     await reloadDMenuConfig();
     if (onHomePage) setEditMode(false);
     await applyAppearance(data2.appearance);

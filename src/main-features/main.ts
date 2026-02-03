@@ -69,7 +69,11 @@ import { initWidgetEditMode } from "../widgets/widgets.js";
 import { applyUsername, applyProfilePicture } from "./profile.js";
 import { updateLoginPanel } from "../fixes-utils/login.js";
 import { buisStats } from "../fixes-utils/results.js";
-import { setTheme } from "./appearance/themes.js";
+import {
+  currentThemeName,
+  setTheme,
+  updateCurrentThemeName,
+} from "./appearance/themes.js";
 import { setBackground } from "./appearance/background-image.js";
 import { updateNews } from "../widgets/widgets.js";
 import { updateSplashText } from "../fixes-utils/login.js";
@@ -309,7 +313,7 @@ function applyFixes() {
   ) as HTMLLabelElement;
   if (notifsToggleLabel) notifsToggleLabel.innerText = "Toon pop-ups";
 
-  if (window.location.pathname.startsWith("/results/main/results/")) {
+  if (window.location.pathname.startsWith("/results/main/results")) {
     buisStats();
   }
   if (document.querySelector(".login-app__left")) updateLoginPanel();
@@ -319,7 +323,9 @@ export async function apply() {
   const data = (await browser.runtime.sendMessage({
     action: "getSettingsData",
   })) as Settings;
+
   console.log("Applying with settings data: \n", data);
+  updateCurrentThemeName(data.appearance.theme);
 
   await reloadDMenuConfig(); // reload the dmenu config. (er is een object voor async raarheid te vermijden en dat wordt herladen door deze functie)
   if (onHomePage) setEditMode(false);
