@@ -28,11 +28,11 @@ class TakenWidget extends WidgetBase {
     let userId = getUserId();
 
     if (DEBUG) {
-      sendDebug("Debug mode enabled ✅");
-      sendDebug("User ID:", userId);
-      sendDebug("Current URL:", window.location.href);
-      sendDebug("Today's Date:", getCurrentDate());
-      sendDebug("Next Date:", getFutureDate(foresight));
+      sendDebug("[AS]", "Debug mode enabled ✅");
+      sendDebug("[AS]", "User ID:", userId);
+      sendDebug("[AS]", "Current URL:", window.location.href);
+      sendDebug("[AS]", "Today's Date:", getCurrentDate());
+      sendDebug("[AS]", "Next Date:", getFutureDate(foresight));
     }
     this.clearContent();
     async function fetchPlannerData() {
@@ -45,7 +45,7 @@ class TakenWidget extends WidgetBase {
         const url = `https://${schoolName}.smartschool.be/planner/api/v1/planned-elements/user/${userId}?from=${getCurrentDate()}&to=${getFutureDate(
           foresight
         )}&types=planned-assignments,planned-to-dos`;
-        sendDebug("Fetching planner data from:", url);
+        sendDebug("[AS]", "Fetching planner data from:", url);
         const response = await fetch(url);
 
         if (!response.ok) {
@@ -54,7 +54,7 @@ class TakenWidget extends WidgetBase {
           );
         }
         const data = await response.json();
-        sendDebug("Planner data:", data);
+        sendDebug("[AS]", "Planner data:", data);
         return data;
       } catch (error) {
         console.error("Fetch error:", error);
@@ -72,7 +72,7 @@ class TakenWidget extends WidgetBase {
       TasksContainer.append(TitleScreenDiv);
 
       if (!userId) {
-        return sendDebug("User ID not found.");
+        return sendDebug("[AS]", "User ID not found.");
       }
 
       fetchPlannerData().then(async (data) => {
@@ -81,7 +81,7 @@ class TakenWidget extends WidgetBase {
           TasksContainer.innerHTML = "Er is iets ernstig misgegaan :(";
           return console.error("No planner data, Did something go wrong?");
         } else if (DEBUG) {
-          sendDebug("Planner data fetched successfully.");
+          sendDebug("[AS]", "Planner data fetched successfully.");
         }
         if (!Array.isArray(data) || data.length === 0) {
           let noDataContainer = document.createElement("div");
@@ -160,7 +160,8 @@ class TakenWidget extends WidgetBase {
           );
 
           // make the litle icon cubes
-          if (element.icon) {
+          sendDebug("[AS]", "Creating icon for assignment:", element, element.icon);
+          if (element.plannedElementType === "planned-to-dos") {
             // dont try to understand, i dont either
             fetch(
               `https://${getSchoolName()}.smartschool.be/smsc/svg/${
@@ -226,7 +227,7 @@ class TakenWidget extends WidgetBase {
           TasksContainer.append(rowDiv);
         });
 
-        return sendDebug("UI updated successfully.");
+        return sendDebug("[AS]", "UI updated successfully.");
       });
       return TasksContainer;
     };
@@ -283,7 +284,7 @@ async function markAsFinished(as_ID, name) {
       );
     }
 
-    sendDebug(`Assignment ${as_ID} marked as finished successfully.`);
+    sendDebug("[AS]", `Assignment ${as_ID} marked as finished successfully.`);
 
     // too lazy to code the rest of the cleanup thingy so ill let ai do it, haters gonna hate
 
