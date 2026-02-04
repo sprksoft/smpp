@@ -23,6 +23,7 @@ import "../widgets/plant.ts";
 import "../widgets/planner.ts";
 import "../widgets/weather.ts";
 import "../widgets/clock.ts";
+import "../widgets/calendar.ts";
 
 import { browser, getExtensionImage, randomChance } from "../common/utils.js";
 import { getPfpLink } from "../fixes-utils/utils.js";

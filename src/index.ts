@@ -9,6 +9,7 @@ import "./styles/smpp-styles/weather.css";
 import "./styles/smpp-styles/delijn.css";
 import "./styles/smpp-styles/plant.css";
 import "./styles/smpp-styles/clock.css";
+import "./styles/smpp-styles/calendar.css";
 import "./styles/smpp-styles/widgets.css";
 import "./styles/smpp-styles/tutorial-widget.css";
 import "./styles/smpp-styles/settings.css";
