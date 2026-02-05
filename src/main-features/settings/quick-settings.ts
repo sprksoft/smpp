@@ -39,7 +39,7 @@ class CompactThemeOption {
     this.element.addEventListener("click", () => this.click());
     this.element.appendChild(this.createText());
     this.element.appendChild(this.createImageContainer());
-    this.update(true);
+    this.update();
     return this.element;
   }
 
@@ -88,16 +88,17 @@ class CompactThemeOption {
   async updateSelection() {
     if (this.name == currentThemeName) {
       this.element.classList.add("is-selected");
+      this.updateImage(true);
     } else {
       this.element.classList.remove("is-selected");
+      this.element.style.setProperty("--background-image-local", `url()`);
     }
   }
 
-  async update(forceReload = false) {
+  async update() {
     this.currentTheme = await getTheme(this.name);
     this.updateSelection();
     this.updateElement();
-    this.updateImage(forceReload);
   }
 }
 
@@ -117,7 +118,6 @@ class CompactThemeSelector {
       }
       this.themeOptions.forEach((option) => {
         option.updateSelection();
-        console.log("updated selection");
       });
     };
     this.themeOptions.push(option);
@@ -143,8 +143,6 @@ class CompactThemeSelector {
       categories: ["quickSettings"],
       includeHidden: true,
     })) as Themes;
-    console.log(themes);
-
     let themeOptionNames = this.themeOptions.map((option) => {
       return option.name;
     });
@@ -157,7 +155,6 @@ class CompactThemeSelector {
     missingThemeOptionNames.forEach(async (name) => {
       if (!themes[name]) return;
       let option = await this.createThemeOption(name, themes[name]);
-      console.log("addingg missing");
       option.render();
       this.selector.appendChild(option.element);
     });
@@ -177,7 +174,6 @@ class CompactThemeSelector {
     });
     this.themeOptions.forEach((option) => {
       option.updateSelection();
-      console.log("updated selection");
     });
   }
   createInput() {
@@ -222,7 +218,7 @@ class CompactThemeSelector {
 
     document.addEventListener("click", (e: MouseEvent) => {
       if (e.target instanceof HTMLElement) {
-        if (e.target == this.input) return;
+        if (e.target == this.input || this.input.contains(e.target)) return;
         this.selectorIsOpen = false;
         this.updateSelectorStatus();
       }

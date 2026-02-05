@@ -4955,7 +4955,7 @@ Is it scaring you off?`,
       this.element.addEventListener("click", () => this.click());
       this.element.appendChild(this.createText());
       this.element.appendChild(this.createImageContainer());
-      this.update(true);
+      this.update();
       return this.element;
     }
     createImageContainer() {
@@ -4998,15 +4998,16 @@ Is it scaring you off?`,
     async updateSelection() {
       if (this.name == currentThemeName) {
         this.element.classList.add("is-selected");
+        this.updateImage(true);
       } else {
         this.element.classList.remove("is-selected");
+        this.element.style.setProperty("--background-image-local", `url()`);
       }
     }
-    async update(forceReload = false) {
+    async update() {
       this.currentTheme = await getTheme(this.name);
       this.updateSelection();
       this.updateElement();
-      this.updateImage(forceReload);
     }
   };
   var CompactThemeSelector = class {
@@ -5024,7 +5025,6 @@ Is it scaring you off?`,
         }
         this.themeOptions.forEach((option2) => {
           option2.updateSelection();
-          console.log("updated selection");
         });
       };
       this.themeOptions.push(option);
@@ -5047,7 +5047,6 @@ Is it scaring you off?`,
         categories: ["quickSettings"],
         includeHidden: true
       });
-      console.log(themes2);
       let themeOptionNames = this.themeOptions.map((option) => {
         return option.name;
       });
@@ -5058,7 +5057,6 @@ Is it scaring you off?`,
       missingThemeOptionNames.forEach(async (name2) => {
         if (!themes2[name2]) return;
         let option = await this.createThemeOption(name2, themes2[name2]);
-        console.log("addingg missing");
         option.render();
         this.selector.appendChild(option.element);
       });
@@ -5075,7 +5073,6 @@ Is it scaring you off?`,
       });
       this.themeOptions.forEach((option) => {
         option.updateSelection();
-        console.log("updated selection");
       });
     }
     createInput() {
@@ -5116,7 +5113,7 @@ Is it scaring you off?`,
       this.createInput();
       document.addEventListener("click", (e5) => {
         if (e5.target instanceof HTMLElement) {
-          if (e5.target == this.input) return;
+          if (e5.target == this.input || this.input.contains(e5.target)) return;
           this.selectorIsOpen = false;
           this.updateSelectorStatus();
         }

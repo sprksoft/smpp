@@ -3425,13 +3425,12 @@ button.open-theme-editor-button:hover {
   width: 100%;
 }
 .compact-theme-options {
-  max-height: 70vh;
+  max-height: calc(100vh - 10rem);
   overflow-y: auto;
   opacity: 0;
   pointer-events: none;
   width: 100%;
-  display: flex;
-  flex-direction: column;
+  display: block;
   gap: 0.25rem;
   background: var(--color-base02);
   padding: 0.25rem;
@@ -3441,13 +3440,16 @@ button.open-theme-editor-button:hover {
   position: absolute;
   width: 100%;
 }
+.compact-theme-options > *:not(:last-child) {
+  margin-bottom: 0.25rem;
+}
 #quickSettings .compact-theme-option {
   width: 100%;
   height: 3rem;
   overflow: hidden !important;
   cursor: pointer;
   border-radius: 1rem;
-  border: 2px solid transparent;
+  border: 2px solid var(--color-base02-local) !important;
   position: relative;
   box-shadow: 0 0 10px 0px var(--color-shadow) !important;
   display: flex;
@@ -3473,11 +3475,11 @@ button.open-theme-editor-button:hover {
   color: var(--color-text-local) !important;
   font-weight: 700 !important;
 }
-.compact-theme-option:hover {
+#quickSettings .compact-theme-option:hover {
   border-color: var(--color-base03-local) !important;
   scale: 1.02;
 }
-.compact-theme-option.is-selected {
+#quickSettings .compact-theme-option.is-selected {
   border-color: var(--color-accent-local) !important;
 }
 .compact-theme-option .compact-theme-option-text {

@@ -59,7 +59,7 @@ export class BaseWindow {
 
   // Called every time the window is opened
   // Override this in subclass
-  onOpened(): void { }
+  onOpened(): void {}
 
   // Called when window is closed
   onClosed?(): void;
@@ -144,5 +144,11 @@ export class BaseWindow {
   remove(): void {
     this.element?.remove();
     this.hidden = true;
+  }
+}
+// TO DO: Add this for theme sharing and make it have no fullscreen button and be small
+export class Dialog extends BaseWindow {
+  constructor(id: string, hidden = true) {
+    super(id, hidden);
   }
 }

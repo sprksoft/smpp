@@ -441,10 +441,11 @@
       "--color-base01": "#2c213a",
       "--color-base02": "#45345a",
       "--color-base03": "#5e477a",
+      "--color-homepage-sidebars-bg": "#0b080f1a",
+      "--color-splashtext": "#c3bdd8",
       "--color-text": "#c3bdd8",
       "--darken-background": "#0b080f4d"
-  },
+    },
     "displayName": "Space"
   }
 }
-
