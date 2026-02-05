@@ -6,14 +6,237 @@ import {
   settingsWindow,
   type Settings,
 } from "./main-settings.js";
-import { browser, getExtensionImage } from "../../common/utils.js";
+import { browser, delay, getExtensionImage } from "../../common/utils.js";
 import {
+  currentTheme,
   currentThemeName,
   getTheme,
   updateTheme,
   type Theme,
   type Themes,
 } from "../appearance/themes.js";
+
+class CompactThemeOption {
+  element = document.createElement("div");
+  name: string;
+  currentTheme: Theme;
+
+  constructor(name: string, theme: Theme) {
+    this.name = name;
+    this.currentTheme = theme;
+  }
+  createText() {
+    let text = document.createElement("div");
+    text.classList.add("compact-theme-option-text");
+    text.innerText = this.currentTheme.displayName;
+
+    return text;
+  }
+
+  render() {
+    this.element.classList.add("compact-theme-option");
+    this.element.dataset["name"] = this.name;
+    this.element.addEventListener("click", () => this.click());
+    this.element.appendChild(this.createText());
+    this.element.appendChild(this.createImageContainer());
+    this.update(true);
+    return this.element;
+  }
+
+  createImageContainer() {
+    let imageContainer = document.createElement("div");
+    imageContainer.classList.add("compact-theme-option-image-container");
+    return imageContainer;
+  }
+
+  async updateImage(forceReload = false) {
+    if (this.name == currentThemeName || forceReload) {
+      let imageURL = await getImageURL(
+        this.name,
+        async () => {
+          return await getExtensionImage(
+            "theme-backgrounds/compressed/" + this.name + ".jpg"
+          );
+        },
+        true
+      );
+
+      this.element.style.setProperty(
+        "--background-image-local",
+        `url(${imageURL.url})`
+      );
+    }
+  }
+
+  updateElement() {
+    Object.keys(this.currentTheme.cssProperties).forEach((key) => {
+      this.element.style.setProperty(
+        `${key}-local`,
+        this.currentTheme.cssProperties[key] as string
+      );
+    });
+  }
+
+  async click() {
+    await updateTheme(this.name);
+    await this.onClick();
+    this.element.classList.add("is-selected");
+  }
+
+  async onClick() {}
+
+  async updateSelection() {
+    if (this.name == currentThemeName) {
+      this.element.classList.add("is-selected");
+    } else {
+      this.element.classList.remove("is-selected");
+    }
+  }
+
+  async update(forceReload = false) {
+    this.currentTheme = await getTheme(this.name);
+    this.updateSelection();
+    this.updateElement();
+    this.updateImage(forceReload);
+  }
+}
+
+class CompactThemeSelector {
+  element = document.createElement("div");
+  input = document.createElement("div");
+  selector = document.createElement("div");
+  selectorIsOpen: boolean = false;
+  themeOptions: CompactThemeOption[] = [];
+
+  async createThemeOption(name: string, theme: Theme) {
+    let option = new CompactThemeOption(name, theme);
+    option.onClick = async () => {
+      this.updateInput();
+      if (settingsWindow) {
+        await settingsWindow.loadPage();
+      }
+      this.themeOptions.forEach((option) => {
+        option.updateSelection();
+        console.log("updated selection");
+      });
+    };
+    this.themeOptions.push(option);
+    return option;
+  }
+
+  async createThemeOptions(themes: Themes) {
+    Object.entries(themes).forEach((theme) => {
+      this.createThemeOption(theme[0], theme[1]);
+    });
+  }
+
+  renderThemeOptions() {
+    this.themeOptions.forEach((option) => {
+      option.render();
+      this.selector.appendChild(option.element);
+    });
+  }
+
+  async updateThemeOptions() {
+    let themes = (await browser.runtime.sendMessage({
+      action: "getThemes",
+      categories: ["quickSettings"],
+      includeHidden: true,
+    })) as Themes;
+    console.log(themes);
+
+    let themeOptionNames = this.themeOptions.map((option) => {
+      return option.name;
+    });
+
+    let themeNames = Object.keys(themes);
+
+    let missingThemeOptionNames = themeNames.filter((name: string) => {
+      return !themeOptionNames.includes(name);
+    });
+    missingThemeOptionNames.forEach(async (name) => {
+      if (!themes[name]) return;
+      let option = await this.createThemeOption(name, themes[name]);
+      console.log("addingg missing");
+      option.render();
+      this.selector.appendChild(option.element);
+    });
+
+    let extraThemeOptionNames = themeOptionNames.filter((name: string) => {
+      return !themeNames.includes(name);
+    });
+
+    this.themeOptions.forEach((option) => {
+      if (extraThemeOptionNames.includes(option.name)) {
+        option.element.remove();
+      }
+    });
+
+    this.themeOptions = this.themeOptions.filter((option) => {
+      return !extraThemeOptionNames.includes(option.name);
+    });
+    this.themeOptions.forEach((option) => {
+      option.updateSelection();
+      console.log("updated selection");
+    });
+  }
+  createInput() {
+    this.input.classList.add("theme-selector-input");
+    this.updateInput();
+  }
+  async updateInput() {
+    let currentOption = new CompactThemeOption(
+      currentThemeName,
+      await getTheme(currentThemeName)
+    );
+    currentOption.onClick = async () => {
+      this.selectorIsOpen = !this.selectorIsOpen;
+      this.updateSelectorStatus();
+    };
+    currentOption.render();
+    this.input.innerHTML = "";
+    this.input.appendChild(currentOption.element);
+  }
+  updateSelectorStatus() {
+    if (this.selectorIsOpen) {
+      this.selector.classList.add("visible");
+    } else {
+      this.selector.classList.remove("visible");
+    }
+  }
+
+  async render() {
+    this.element.classList.add("compact-theme-selector");
+    let themes = (await browser.runtime.sendMessage({
+      action: "getThemes",
+      categories: ["quickSettings"],
+      includeHidden: true,
+    })) as Themes;
+    this.themeOptions = [];
+
+    this.createThemeOptions(themes);
+    this.renderThemeOptions();
+
+    this.updateThemeOptions();
+    this.createInput();
+
+    document.addEventListener("click", (e: MouseEvent) => {
+      if (e.target instanceof HTMLElement) {
+        if (e.target == this.input) return;
+        this.selectorIsOpen = false;
+        this.updateSelectorStatus();
+      }
+    });
+
+    this.element.appendChild(this.input);
+    this.element.appendChild(this.selector);
+    this.selector.classList.add("compact-theme-options");
+
+    return this.element;
+  }
+}
+
+const compactThemeSelector = new CompactThemeSelector();
 
 let quickSettingsWindowIsHidden = true;
 let quickSettingsBackgroundImageSelector = new ImageSelector(
@@ -77,6 +300,8 @@ export async function loadQuickSettings() {
         : "<span class='red-underline'>Disabled</span>"
     }`;
   }
+  await compactThemeSelector.updateInput();
+  await compactThemeSelector.updateThemeOptions();
 }
 
 function toggleQuickSettings() {
@@ -119,7 +344,9 @@ async function createQuickSettingsHTML(parent: HTMLDivElement) {
   const performanceModeInfo = document.createElement("span");
   performanceModeInfo.id = "performance-mode-info";
 
-  const compactThemeSelector = new CompactThemeSelector();
+  const themeHeading = document.createElement("h3");
+  themeHeading.className = "quick-settings-title";
+  themeHeading.textContent = "Theme:";
 
   const wallpaperTopContainer = document.createElement("div");
 
@@ -163,8 +390,13 @@ async function createQuickSettingsHTML(parent: HTMLDivElement) {
   extraSettingsButton.innerHTML += settingsIconSvg;
   extraSettingsButton.addEventListener("click", (e) => openSettingsWindow(e));
 
+  let themeContainer = document.createElement("div");
+  themeContainer.classList.add("quick-settings-theme-container");
+  await compactThemeSelector.render();
+  themeContainer.appendChild(themeHeading);
+  themeContainer.appendChild(compactThemeSelector.element);
   parent.appendChild(performanceModeTooltipLabel);
-  parent.appendChild(await compactThemeSelector.render());
+  parent.appendChild(themeContainer);
   parent.appendChild(wallpaperTopContainer);
   parent.appendChild(performanceModeInfo);
   parent.appendChild(extraSettingsButton);
@@ -193,12 +425,10 @@ export async function createQuickSettings() {
   if (tooltipLabel && tooltipInfo) {
     tooltipLabel.addEventListener("mouseover", () => {
       tooltipInfo.style.opacity = "1";
-      tooltipInfo.style.zIndex = "2";
     });
 
     tooltipLabel.addEventListener("mouseout", () => {
       tooltipInfo.style.opacity = "0";
-      tooltipInfo.style.zIndex = "-1";
     });
   }
 
@@ -240,119 +470,4 @@ export function createQuickSettingsButton() {
   quickSettingsButton.addEventListener("click", toggleQuickSettings);
   quickSettingsButtonWrapper.appendChild(quickSettingsButton);
   return quickSettingsButtonWrapper;
-}
-
-class CompactThemeOption {
-  element = document.createElement("div");
-  name: string;
-  currentTheme: Theme;
-
-  constructor(name: string, theme: Theme) {
-    this.name = name;
-    this.currentTheme = theme;
-  }
-
-  render() {
-    this.element.classList.add("compact-theme-option");
-    this.element.dataset["name"] = this.name;
-    this.element.addEventListener("click", () => this.click());
-    this.update(true);
-    return this.element;
-  }
-
-  createImageContainer() {
-    let imageContainer = document.createElement("div");
-    imageContainer.classList.add("image-container");
-    return imageContainer;
-  }
-
-  async updateImage(forceReload = false) {
-    if (this.name == currentThemeName || forceReload) {
-      let imageURL = await getImageURL(
-        this.name,
-        async () => {
-          return await getExtensionImage(
-            "theme-backgrounds/compressed/" + this.name + ".jpg"
-          );
-        },
-        true
-      );
-
-      this.element.style.setProperty(
-        "--background-image-local",
-        `url(${imageURL.url})`
-      );
-    }
-  }
-
-  updateElement() {
-    Object.keys(this.currentTheme.cssProperties).forEach((key) => {
-      this.element.style.setProperty(
-        `${key}-local`,
-        this.currentTheme.cssProperties[key] as string
-      );
-    });
-  }
-
-  async click() {
-    await updateTheme(this.name);
-    this.element.classList.add("is-selected");
-  }
-
-  async update(forceReload = false) {
-    this.currentTheme = await getTheme(this.name);
-
-    if (this.name == currentThemeName) {
-      this.element.classList.add("is-selected");
-    } else {
-      console.log(this.name, "is not equal to", currentThemeName);
-      this.element.classList.remove("is-selected");
-    }
-
-    this.updateElement();
-    this.updateImage(forceReload);
-  }
-}
-
-class CompactThemeSelector {
-  element = document.createElement("div");
-  input = document.createElement("div");
-  selector = document.createElement("div");
-  themeOptions: CompactThemeOption[] = [];
-
-  async createThemeOptions(themes: Themes) {
-    Object.entries(themes).forEach((theme) => {
-      this.themeOptions.push(new CompactThemeOption(theme[0], theme[1]));
-    });
-  }
-
-  renderThemeOptions() {
-    this.themeOptions.forEach((option) => {
-      this.selector.appendChild(option.render());
-    });
-  }
-
-  async updateThemeOptions() {
-    this.themeOptions.forEach((option) => {
-      option.update();
-    });
-  }
-
-  async render() {
-    this.element.classList.add("compact-theme-options");
-    let themes = (await browser.runtime.sendMessage({
-      action: "getThemes",
-      categories: ["quickSettings"],
-      includeHidden: true,
-    })) as Themes;
-    this.themeOptions = [];
-
-    this.createThemeOptions(themes);
-    this.renderThemeOptions();
-
-    this.element.appendChild(this.input);
-    this.element.appendChild(this.selector);
-
-    return this.element;
-  }
 }

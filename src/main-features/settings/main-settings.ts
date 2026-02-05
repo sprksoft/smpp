@@ -725,7 +725,7 @@ export class SettingsWindow extends BaseWindow {
         // Apply weather effects if they changed
         if (
           JSON.stringify(settings.appearance.weatherOverlay) !==
-          JSON.stringify(previousSettings.appearance.weatherOverlay) &&
+            JSON.stringify(previousSettings.appearance.weatherOverlay) &&
           !liteMode
         ) {
           applyWeatherEffects(settings.appearance.weatherOverlay);

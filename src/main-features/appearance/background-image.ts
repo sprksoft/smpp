@@ -1,9 +1,8 @@
 import { browser, getExtensionImage } from "../../common/utils.js";
 import { isValidImage } from "../../fixes-utils/utils.js";
 import { getImageURL, type SMPPImage } from "../modules/images.js";
-import type { Settings } from "../settings/main-settings.js";
 
-export async function setBackground(appearance: Settings["appearance"]) {
+export async function setBackground(themeName: string) {
   function displayBackgroundImage(imageSrc: string | null) {
     document.documentElement.style.setProperty(
       "--background-color",
@@ -40,11 +39,9 @@ export async function setBackground(appearance: Settings["appearance"]) {
   }
 
   let imageURL = await getImageURL(
-    appearance.theme,
+    themeName,
     async () => {
-      return await getExtensionImage(
-        "theme-backgrounds/" + appearance.theme + ".jpg"
-      );
+      return await getExtensionImage("theme-backgrounds/" + themeName + ".jpg");
     },
     false
   );

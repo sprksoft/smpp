@@ -171,20 +171,11 @@
   border-radius: 0.5rem !important;
 }
 
-.glass .listview__row.js-listview-row.todo-column__row:hover,
-.glass .listview__row.js-listview-row.todo-column__row--resolved:hover,
-.glass .content__day-column.js-day-column.highlight,
-.glass .header__day.header__wholeday-column.js-wholeday-column.highlight {
-  background-color: var(--darken-background) !important;
-  backdrop-filter: var(--small-blur) !important;
-}
-
 .listview__row.js-listview-row.todo-column__row:hover,
 .listview__row.js-listview-row.todo-column__row--resolved:hover,
 .content__day-column.js-day-column.highlight,
 .header__day.header__wholeday-column.js-wholeday-column.highlight {
-  background-color: var(--color-base02) !important;
-  border-radius: 1.25rem !important;
+  background-color: transparent !important;
 }
 
 .todo-column [listview] .todo-column__date-cell {

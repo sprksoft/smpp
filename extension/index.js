@@ -4935,6 +4935,199 @@ Is it scaring you off?`,
   }
 
   // src/main-features/settings/quick-settings.ts
+  var CompactThemeOption = class {
+    element = document.createElement("div");
+    name;
+    currentTheme;
+    constructor(name2, theme) {
+      this.name = name2;
+      this.currentTheme = theme;
+    }
+    createText() {
+      let text = document.createElement("div");
+      text.classList.add("compact-theme-option-text");
+      text.innerText = this.currentTheme.displayName;
+      return text;
+    }
+    render() {
+      this.element.classList.add("compact-theme-option");
+      this.element.dataset["name"] = this.name;
+      this.element.addEventListener("click", () => this.click());
+      this.element.appendChild(this.createText());
+      this.element.appendChild(this.createImageContainer());
+      this.update(true);
+      return this.element;
+    }
+    createImageContainer() {
+      let imageContainer = document.createElement("div");
+      imageContainer.classList.add("compact-theme-option-image-container");
+      return imageContainer;
+    }
+    async updateImage(forceReload = false) {
+      if (this.name == currentThemeName || forceReload) {
+        let imageURL = await getImageURL(
+          this.name,
+          async () => {
+            return await getExtensionImage(
+              "theme-backgrounds/compressed/" + this.name + ".jpg"
+            );
+          },
+          true
+        );
+        this.element.style.setProperty(
+          "--background-image-local",
+          `url(${imageURL.url})`
+        );
+      }
+    }
+    updateElement() {
+      Object.keys(this.currentTheme.cssProperties).forEach((key) => {
+        this.element.style.setProperty(
+          `${key}-local`,
+          this.currentTheme.cssProperties[key]
+        );
+      });
+    }
+    async click() {
+      await updateTheme(this.name);
+      await this.onClick();
+      this.element.classList.add("is-selected");
+    }
+    async onClick() {
+    }
+    async updateSelection() {
+      if (this.name == currentThemeName) {
+        this.element.classList.add("is-selected");
+      } else {
+        this.element.classList.remove("is-selected");
+      }
+    }
+    async update(forceReload = false) {
+      this.currentTheme = await getTheme(this.name);
+      this.updateSelection();
+      this.updateElement();
+      this.updateImage(forceReload);
+    }
+  };
+  var CompactThemeSelector = class {
+    element = document.createElement("div");
+    input = document.createElement("div");
+    selector = document.createElement("div");
+    selectorIsOpen = false;
+    themeOptions = [];
+    async createThemeOption(name2, theme) {
+      let option = new CompactThemeOption(name2, theme);
+      option.onClick = async () => {
+        this.updateInput();
+        if (settingsWindow) {
+          await settingsWindow.loadPage();
+        }
+        this.themeOptions.forEach((option2) => {
+          option2.updateSelection();
+          console.log("updated selection");
+        });
+      };
+      this.themeOptions.push(option);
+      return option;
+    }
+    async createThemeOptions(themes2) {
+      Object.entries(themes2).forEach((theme) => {
+        this.createThemeOption(theme[0], theme[1]);
+      });
+    }
+    renderThemeOptions() {
+      this.themeOptions.forEach((option) => {
+        option.render();
+        this.selector.appendChild(option.element);
+      });
+    }
+    async updateThemeOptions() {
+      let themes2 = await browser.runtime.sendMessage({
+        action: "getThemes",
+        categories: ["quickSettings"],
+        includeHidden: true
+      });
+      console.log(themes2);
+      let themeOptionNames = this.themeOptions.map((option) => {
+        return option.name;
+      });
+      let themeNames = Object.keys(themes2);
+      let missingThemeOptionNames = themeNames.filter((name2) => {
+        return !themeOptionNames.includes(name2);
+      });
+      missingThemeOptionNames.forEach(async (name2) => {
+        if (!themes2[name2]) return;
+        let option = await this.createThemeOption(name2, themes2[name2]);
+        console.log("addingg missing");
+        option.render();
+        this.selector.appendChild(option.element);
+      });
+      let extraThemeOptionNames = themeOptionNames.filter((name2) => {
+        return !themeNames.includes(name2);
+      });
+      this.themeOptions.forEach((option) => {
+        if (extraThemeOptionNames.includes(option.name)) {
+          option.element.remove();
+        }
+      });
+      this.themeOptions = this.themeOptions.filter((option) => {
+        return !extraThemeOptionNames.includes(option.name);
+      });
+      this.themeOptions.forEach((option) => {
+        option.updateSelection();
+        console.log("updated selection");
+      });
+    }
+    createInput() {
+      this.input.classList.add("theme-selector-input");
+      this.updateInput();
+    }
+    async updateInput() {
+      let currentOption = new CompactThemeOption(
+        currentThemeName,
+        await getTheme(currentThemeName)
+      );
+      currentOption.onClick = async () => {
+        this.selectorIsOpen = !this.selectorIsOpen;
+        this.updateSelectorStatus();
+      };
+      currentOption.render();
+      this.input.innerHTML = "";
+      this.input.appendChild(currentOption.element);
+    }
+    updateSelectorStatus() {
+      if (this.selectorIsOpen) {
+        this.selector.classList.add("visible");
+      } else {
+        this.selector.classList.remove("visible");
+      }
+    }
+    async render() {
+      this.element.classList.add("compact-theme-selector");
+      let themes2 = await browser.runtime.sendMessage({
+        action: "getThemes",
+        categories: ["quickSettings"],
+        includeHidden: true
+      });
+      this.themeOptions = [];
+      this.createThemeOptions(themes2);
+      this.renderThemeOptions();
+      this.updateThemeOptions();
+      this.createInput();
+      document.addEventListener("click", (e5) => {
+        if (e5.target instanceof HTMLElement) {
+          if (e5.target == this.input) return;
+          this.selectorIsOpen = false;
+          this.updateSelectorStatus();
+        }
+      });
+      this.element.appendChild(this.input);
+      this.element.appendChild(this.selector);
+      this.selector.classList.add("compact-theme-options");
+      return this.element;
+    }
+  };
+  var compactThemeSelector = new CompactThemeSelector();
   var quickSettingsWindowIsHidden = true;
   var quickSettingsBackgroundImageSelector = new ImageSelector(
     "backgroundImage",
@@ -4987,6 +5180,8 @@ Is it scaring you off?`,
     if (performanceModeInfo) {
       performanceModeInfo.innerHTML = `Toggle performance mode ${data2.other.performanceMode ? "<span class='green-underline'>Enabled</span>" : "<span class='red-underline'>Disabled</span>"}`;
     }
+    await compactThemeSelector.updateInput();
+    await compactThemeSelector.updateThemeOptions();
   }
   function toggleQuickSettings() {
     let win = document.getElementById("quickSettings");
@@ -5021,7 +5216,9 @@ Is it scaring you off?`,
     performanceModeTooltipLabel.innerHTML += performanceModeSvg;
     const performanceModeInfo = document.createElement("span");
     performanceModeInfo.id = "performance-mode-info";
-    const compactThemeSelector = new CompactThemeSelector();
+    const themeHeading = document.createElement("h3");
+    themeHeading.className = "quick-settings-title";
+    themeHeading.textContent = "Theme:";
     const wallpaperTopContainer = document.createElement("div");
     const wallpaperHeading = document.createElement("h3");
     wallpaperHeading.className = "quick-settings-title";
@@ -5054,8 +5251,13 @@ Is it scaring you off?`,
     extraSettingsButton.innerHTML += "More Settings";
     extraSettingsButton.innerHTML += settingsIconSvg;
     extraSettingsButton.addEventListener("click", (e5) => openSettingsWindow(e5));
+    let themeContainer = document.createElement("div");
+    themeContainer.classList.add("quick-settings-theme-container");
+    await compactThemeSelector.render();
+    themeContainer.appendChild(themeHeading);
+    themeContainer.appendChild(compactThemeSelector.element);
     parent.appendChild(performanceModeTooltipLabel);
-    parent.appendChild(await compactThemeSelector.render());
+    parent.appendChild(themeContainer);
     parent.appendChild(wallpaperTopContainer);
     parent.appendChild(performanceModeInfo);
     parent.appendChild(extraSettingsButton);
@@ -5078,11 +5280,9 @@ Is it scaring you off?`,
     if (tooltipLabel && tooltipInfo) {
       tooltipLabel.addEventListener("mouseover", () => {
         tooltipInfo.style.opacity = "1";
-        tooltipInfo.style.zIndex = "2";
       });
       tooltipLabel.addEventListener("mouseout", () => {
         tooltipInfo.style.opacity = "0";
-        tooltipInfo.style.zIndex = "-1";
       });
     }
     document.addEventListener("click", (e5) => {
@@ -5113,102 +5313,6 @@ Is it scaring you off?`,
     quickSettingsButtonWrapper.appendChild(quickSettingsButton);
     return quickSettingsButtonWrapper;
   }
-  var CompactThemeOption = class {
-    element = document.createElement("div");
-    name;
-    currentTheme;
-    constructor(name2, theme) {
-      this.name = name2;
-      this.currentTheme = theme;
-    }
-    render() {
-      this.element.classList.add("compact-theme-option");
-      this.element.dataset["name"] = this.name;
-      this.element.addEventListener("click", () => this.click());
-      this.update(true);
-      return this.element;
-    }
-    createImageContainer() {
-      let imageContainer = document.createElement("div");
-      imageContainer.classList.add("image-container");
-      return imageContainer;
-    }
-    async updateImage(forceReload = false) {
-      if (this.name == currentThemeName || forceReload) {
-        let imageURL = await getImageURL(
-          this.name,
-          async () => {
-            return await getExtensionImage(
-              "theme-backgrounds/compressed/" + this.name + ".jpg"
-            );
-          },
-          true
-        );
-        this.element.style.setProperty(
-          "--background-image-local",
-          `url(${imageURL.url})`
-        );
-      }
-    }
-    updateElement() {
-      Object.keys(this.currentTheme.cssProperties).forEach((key) => {
-        this.element.style.setProperty(
-          `${key}-local`,
-          this.currentTheme.cssProperties[key]
-        );
-      });
-    }
-    async click() {
-      await updateTheme(this.name);
-      this.element.classList.add("is-selected");
-    }
-    async update(forceReload = false) {
-      this.currentTheme = await getTheme(this.name);
-      if (this.name == currentThemeName) {
-        this.element.classList.add("is-selected");
-      } else {
-        console.log(this.name, "is not equal to", currentThemeName);
-        this.element.classList.remove("is-selected");
-      }
-      this.updateElement();
-      this.updateImage(forceReload);
-    }
-  };
-  var CompactThemeSelector = class {
-    element = document.createElement("div");
-    input = document.createElement("div");
-    selector = document.createElement("div");
-    themeOptions = [];
-    async createThemeOptions(themes2) {
-      Object.entries(themes2).forEach((theme) => {
-        this.themeOptions.push(new CompactThemeOption(theme[0], theme[1]));
-      });
-    }
-    renderThemeOptions() {
-      this.themeOptions.forEach((option) => {
-        this.selector.appendChild(option.render());
-      });
-    }
-    async updateThemeOptions() {
-      this.themeOptions.forEach((option) => {
-        option.update();
-      });
-    }
-    async render() {
-      this.element.classList.add("compact-theme-options");
-      let themes2 = await browser.runtime.sendMessage({
-        action: "getThemes",
-        categories: ["quickSettings"],
-        includeHidden: true
-      });
-      this.themeOptions = [];
-      this.createThemeOptions(themes2);
-      this.renderThemeOptions();
-      this.element.appendChild(this.input);
-      this.element.appendChild(this.selector);
-      return this.element;
-    }
-  };
 
   // src/main-features/settings/main-settings.ts
   var SettingsWindow = class extends BaseWindow {
@@ -7149,10 +7253,51 @@ Is it scaring you off?`,
     return btn;
   }
 
+  // src/main-features/appearance/background-image.ts
+  async function setBackground(themeName) {
+    function displayBackgroundImage(imageSrc) {
+      document.documentElement.style.setProperty(
+        "--background-color",
+        `transparent`
+      );
+      let imgContainer = document.getElementById(
+        "smpp-background-image-container"
+      ) || document.createElement("div");
+      imgContainer.id = "smpp-background-image-container";
+      imgContainer.classList.add("smpp-background-image-container");
+      let img = document.getElementById("smpp-background-image") || document.createElement("img");
+      img.id = "smpp-background-image";
+      img.classList.add("smpp-background-image");
+      if (imageSrc) {
+        img.classList.remove("image-not-available");
+        img.src = imageSrc;
+      } else {
+        img.classList.add("image-not-available");
+        img.src = "";
+      }
+      if (!document.getElementById("smpp-background-image") && !document.getElementById("tinymce")) {
+        document.body.appendChild(imgContainer);
+        imgContainer.appendChild(img);
+      }
+    }
+    let imageURL = await getImageURL(
+      themeName,
+      async () => {
+        return await getExtensionImage("theme-backgrounds/" + themeName + ".jpg");
+      },
+      false
+    );
+    if (await isValidImage(imageURL.url)) {
+      displayBackgroundImage(imageURL.url);
+    } else {
+      displayBackgroundImage(null);
+    }
+  }
+
   // src/main-features/appearance/themes.ts
   k([lch_default, mix_default]);
   var currentThemeName;
-  var currentTheme;
+  var currentTheme2;
   async function getTheme(name2) {
     let theme = await browser.runtime.sendMessage({
       action: "getTheme",
@@ -7161,11 +7306,10 @@ Is it scaring you off?`,
     return theme;
   }
   async function setTheme(themeName) {
-    console.log("setting name");
     const style = document.documentElement.style;
     currentThemeName = themeName;
-    currentTheme = await getTheme(themeName);
-    Object.entries(currentTheme.cssProperties).forEach(([key, value]) => {
+    currentTheme2 = await getTheme(themeName);
+    Object.entries(currentTheme2.cssProperties).forEach(([key, value]) => {
       style.setProperty(key, value);
     });
     await widgetSystemNotifyThemeChange();
@@ -7182,7 +7326,7 @@ Is it scaring you off?`,
     return query;
   }
   function getThemeVar(varName) {
-    return currentTheme.cssProperties[varName];
+    return currentTheme2.cssProperties[varName];
   }
   var ColorCursor = class {
     element = document.createElement("div");
@@ -7386,7 +7530,7 @@ Is it scaring you off?`,
       await this.createContent();
       return this.element;
     }
-    async updateImage(currentTheme2, forceReload = false) {
+    async updateImage(currentTheme3, forceReload = false) {
     }
     // Overide this in the implementation
     updateSelection() {
@@ -7483,8 +7627,8 @@ Is it scaring you off?`,
         this.element.classList.remove("is-selected");
       }
     }
-    async updateImage(currentTheme2, forceReload = false) {
-      if (this.name == currentTheme2 || forceReload) {
+    async updateImage(currentTheme3, forceReload = false) {
+      if (this.name == currentTheme3 || forceReload) {
         let imageURL = await getImageURL(
           this.name,
           async () => {
@@ -7524,19 +7668,20 @@ Is it scaring you off?`,
           if (firefoxImageContainer) {
             firefoxImageContainer.remove();
             this.element.prepend(this.createImageContainer());
-            await this.updateImage(currentTheme2, forceReload);
+            await this.updateImage(currentTheme3, forceReload);
           }
         }
       }
     }
     async onClick(e5) {
       if (e5.target instanceof HTMLElement) {
-        const targetElement = e5.target;
-        if (targetElement.classList.contains("heart-icon")) return;
+        const target = e5.target;
+        if (target.classList.contains("theme-tile-title") || target.classList.contains("image-container") || target.classList.contains("theme-tile")) {
+          await updateTheme(this.name);
+          await settingsWindow.loadPage(false);
+          await loadQuickSettings();
+        }
       }
-      await updateTheme(this.name);
-      await settingsWindow.loadPage(false);
-      await loadQuickSettings();
     }
     async favoriteToggle() {
       this.isFavorite = !this.isFavorite;
@@ -7569,6 +7714,8 @@ Is it scaring you off?`,
       }
     }
     async edit() {
+      await updateTheme(this.name);
+      Promise.all([settingsWindow.loadPage(false), loadQuickSettings()]);
       startCustomThemeCreator(await getTheme(this.name), this.name);
     }
     async duplicate() {
@@ -7650,10 +7797,7 @@ Is it scaring you off?`,
       name: "appearance.theme",
       data: name2
     });
-    let data2 = await browser.runtime.sendMessage({
-      action: "getSettingsData"
-    });
-    applyAppearance(data2.appearance);
+    Promise.all([setTheme(name2), setBackground(name2)]);
   }
   var ThemeFolder = class extends Tile {
     category;
@@ -7753,7 +7897,6 @@ Is it scaring you off?`,
       });
       await settingsWindow.themeSelector.updateSelectorContent();
       await settingsWindow.loadPage(false);
-      await loadQuickSettings();
       await updateTheme(newTheme);
       startCustomThemeCreator(await getTheme("defaultCustom"), newTheme);
     }
@@ -7992,7 +8135,7 @@ Is it scaring you off?`,
         }
         await updateTheme(newThemeName);
         await this.changeCategory("custom");
-        Promise.all([settingsWindow.loadPage(false), loadQuickSettings()]);
+        Promise.all([settingsWindow.loadPage(false)]);
         startCustomThemeCreator(await getTheme(newThemeName), newThemeName);
       };
       tile.onFavoriteToggle = async () => {
@@ -9476,7 +9619,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     }
     async renderContent() {
       this.gcContent = document.createElement("div");
-      const queryString = getThemeQueryString(currentTheme);
+      const queryString = getThemeQueryString(currentTheme2);
       this.iframe = document.createElement("iframe");
       this.iframe.style = "width:100%; height:100%; border:none";
       this.iframe.src = GC_DOMAINS[this.beta ? "beta" : "main"] + "/v1?" + queryString + "&glass=" + gcGlass;
@@ -9898,49 +10041,6 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         break;
     }
   });
-
-  // src/main-features/appearance/background-image.ts
-  async function setBackground(appearance) {
-    function displayBackgroundImage(imageSrc) {
-      document.documentElement.style.setProperty(
-        "--background-color",
-        `transparent`
-      );
-      let imgContainer = document.getElementById(
-        "smpp-background-image-container"
-      ) || document.createElement("div");
-      imgContainer.id = "smpp-background-image-container";
-      imgContainer.classList.add("smpp-background-image-container");
-      let img = document.getElementById("smpp-background-image") || document.createElement("img");
-      img.id = "smpp-background-image";
-      img.classList.add("smpp-background-image");
-      if (imageSrc) {
-        img.classList.remove("image-not-available");
-        img.src = imageSrc;
-      } else {
-        img.classList.add("image-not-available");
-        img.src = "";
-      }
-      if (!document.getElementById("smpp-background-image") && !document.getElementById("tinymce")) {
-        document.body.appendChild(imgContainer);
-        imgContainer.appendChild(img);
-      }
-    }
-    let imageURL = await getImageURL(
-      appearance.theme,
-      async () => {
-        return await getExtensionImage(
-          "theme-backgrounds/" + appearance.theme + ".jpg"
-        );
-      },
-      false
-    );
-    if (await isValidImage(imageURL.url)) {
-      displayBackgroundImage(imageURL.url);
-    } else {
-      displayBackgroundImage(null);
-    }
-  }
 
   // src/games/games.ts
   var GAME_OPTION_TYPE_SLIDER = 0;
@@ -13440,7 +13540,7 @@ ${code}`;
     }
     setGlobalGlass(appearance.glass);
     await setTheme(appearance.theme);
-    setBackground(appearance);
+    setBackground(appearance.theme);
     updateNews(appearance.news);
     updateTabLogo(appearance.tabLogo);
     if (onLoginPage) {

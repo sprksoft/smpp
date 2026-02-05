@@ -49,6 +49,7 @@ import { applyAppearance, isFirefox } from "../main.js";
 import { createHoverTooltip, createTextInput } from "./ui.js";
 import { isValidImage, Toast } from "../../fixes-utils/utils.js";
 import { recreateGlobalChat } from "../globalchat.js";
+import { setBackground } from "./background-image.js";
 
 export let currentThemeName: string;
 export let currentTheme: Theme;
@@ -81,7 +82,6 @@ export async function getTheme(name: string): Promise<Theme> {
 }
 
 export async function setTheme(themeName: string) {
-  console.log("setting name");
   const style = document.documentElement.style;
   currentThemeName = themeName;
   currentTheme = await getTheme(themeName);
@@ -548,12 +548,18 @@ export class ThemeTile extends Tile {
 
   async onClick(e: Event) {
     if (e.target instanceof HTMLElement) {
-      const targetElement = e.target;
-      if (targetElement.classList.contains("heart-icon")) return;
+      const target = e.target;
+
+      if (
+        target.classList.contains("theme-tile-title") ||
+        target.classList.contains("image-container") ||
+        target.classList.contains("theme-tile")
+      ) {
+        await updateTheme(this.name);
+        await settingsWindow.loadPage(false);
+        await loadQuickSettings();
+      }
     }
-    await updateTheme(this.name);
-    await settingsWindow.loadPage(false);
-    await loadQuickSettings();
   }
 
   async favoriteToggle() {
@@ -589,6 +595,8 @@ export class ThemeTile extends Tile {
   }
 
   async edit() {
+    await updateTheme(this.name);
+    Promise.all([settingsWindow.loadPage(false), loadQuickSettings()]);
     startCustomThemeCreator(await getTheme(this.name), this.name);
   }
 
@@ -677,10 +685,7 @@ export async function updateTheme(name: string) {
     name: "appearance.theme",
     data: name,
   });
-  let data = (await browser.runtime.sendMessage({
-    action: "getSettingsData",
-  })) as Settings;
-  applyAppearance(data.appearance);
+  Promise.all([setTheme(name), setBackground(name)]);
 }
 
 export class ThemeFolder extends Tile {
@@ -806,7 +811,6 @@ class AddCustomTheme extends Tile {
 
     await settingsWindow.themeSelector.updateSelectorContent();
     await settingsWindow.loadPage(false);
-    await loadQuickSettings();
 
     await updateTheme(newTheme);
     startCustomThemeCreator(await getTheme("defaultCustom"), newTheme);
@@ -1099,7 +1103,7 @@ export class ThemeSelector {
       }
       await updateTheme(newThemeName);
       await this.changeCategory("custom");
-      Promise.all([settingsWindow.loadPage(false), loadQuickSettings()]);
+      Promise.all([settingsWindow.loadPage(false)]);
 
       startCustomThemeCreator(await getTheme(newThemeName), newThemeName);
     };

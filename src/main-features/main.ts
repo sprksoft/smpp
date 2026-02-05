@@ -266,7 +266,7 @@ export async function applyAppearance(appearance: Settings["appearance"]) {
   setGlobalGlass(appearance.glass);
 
   await setTheme(appearance.theme);
-  setBackground(appearance);
+  setBackground(appearance.theme);
   updateNews(appearance.news);
   updateTabLogo(appearance.tabLogo);
 

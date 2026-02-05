@@ -855,7 +855,7 @@ input:checked + .slider:before {
   z-index: 777;
   position: absolute;
   padding: 1.2rem !important;
-  box-shadow: 0 0.2rem 3rem 0.2rem rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0.333rem 1.333rem var(--color-shadow) !important;
 }
 
 .textandbutton {
@@ -2373,6 +2373,7 @@ div#smscMainBlockContainer {
 }
 
 #performance-mode-info {
+  pointer-events: none;
   left: -12px;
   max-width: 209px;
   top: -7px;
@@ -2384,7 +2385,7 @@ div#smscMainBlockContainer {
   position: absolute;
   opacity: 0;
   text-align: center;
-  z-index: -1;
+  z-index: 10;
 }
 
 .enableAnimations #performance-mode-info {

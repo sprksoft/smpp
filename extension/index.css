@@ -2853,7 +2853,6 @@ input.settings-page-keybinding-input[type=text]:not(.aaaaaa):read-only.listening
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding-left: 0.25rem;
   height: fit-content;
   gap: 0.25rem;
 }
@@ -3410,17 +3409,109 @@ button.open-theme-editor-button:hover {
   fill: var(--color-red) !important;
   stroke: var(--color-red) !important;
 }
-#quickSettings .compact-theme-options .compact-theme-option {
+.compact-theme-selector {
   width: 100%;
-  height: 2rem;
-  background-color: var(--color-base01-local) !important;
-  cursor: pointer;
+  position: relative;
+  z-index: 2;
+}
+.compact-theme-options.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+.enableAnimations .compact-theme-options {
+  transition: opacity 0.2s ease-in-out;
+}
+.quick-settings-theme-container {
+  width: 100%;
 }
 .compact-theme-options {
+  max-height: 70vh;
+  overflow-y: auto;
+  opacity: 0;
+  pointer-events: none;
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.25rem;
+  background: var(--color-base02);
+  padding: 0.25rem;
+  border-radius: 1.5rem;
+  border: 2px solid var(--color-base03);
+  box-shadow: 0 0.333rem 1.333rem var(--color-shadow) !important;
+  position: absolute;
+  width: 100%;
+}
+#quickSettings .compact-theme-option {
+  width: 100%;
+  height: 3rem;
+  overflow: hidden !important;
+  cursor: pointer;
+  border-radius: 1rem;
+  border: 2px solid transparent;
+  position: relative;
+  box-shadow: 0 0 10px 0px var(--color-shadow) !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+.enableAnimations .compact-theme-option-text {
+  transition-property: border-color background;
+  transition: 0.2s ease-out;
+}
+.enableAnimations .compact-theme-option {
+  transition-property: border-color scale;
+  transition: 0.2s ease-out;
+}
+.compact-theme-option:hover .compact-theme-option-text {
+  color: var(--color-accent-local) !important;
+  background: var(--color-base02-local) !important;
+  font-weight: 600 !important;
+}
+.compact-theme-option.is-selected .compact-theme-option-text {
+  background: var(--darken-background-local) !important;
+  color: var(--color-text-local) !important;
+  font-weight: 700 !important;
+}
+.compact-theme-option:hover {
+  border-color: var(--color-base03-local) !important;
+  scale: 1.02;
+}
+.compact-theme-option.is-selected {
+  border-color: var(--color-accent-local) !important;
+}
+.compact-theme-option .compact-theme-option-text {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  height: 100% !important;
+  font-size: 1.2rem !important;
+  font-weight: 500 !important;
+  color: var(--color-text-local) !important;
+  background: var(--color-base01-local) !important;
+  text-wrap-mode: nowrap !important;
+  overflow: hidden !important;
+  z-index: 1;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.compact-theme-option:active {
+  scale: 0.95;
+}
+.compact-theme-option.is-selected .compact-theme-option-image-container {
+  display: block;
+}
+.compact-theme-option .compact-theme-option-image-container {
+  width: 100%;
+  height: 100%;
+  display: none;
+  filter: blur(2px);
+  position: absolute;
+  background: var(--background-image-local);
+  background-size: cover;
+  background-position: center;
 }
 
 /* src/styles/smpp-styles/assignments.css */
@@ -4184,7 +4275,7 @@ input:checked + .slider:before {
   z-index: 777;
   position: absolute;
   padding: 1.2rem !important;
-  box-shadow: 0 0.2rem 3rem 0.2rem rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0.333rem 1.333rem var(--color-shadow) !important;
 }
 .textandbutton {
   display: flex !important;
@@ -5452,6 +5543,7 @@ div#smscMainBlockContainer {
   vertical-align: top !important;
 }
 #performance-mode-info {
+  pointer-events: none;
   left: -12px;
   max-width: 209px;
   top: -7px;
@@ -5463,7 +5555,7 @@ div#smscMainBlockContainer {
   position: absolute;
   opacity: 0;
   text-align: center;
-  z-index: -1;
+  z-index: 10;
 }
 .enableAnimations #performance-mode-info {
   transition-duration: 0.3s;
@@ -6890,6 +6982,7 @@ input::placeholder {
   align-items: center !important;
   transition: none !important;
   overflow-y: hidden !important;
+  box-shadow: 0 0.333rem 1.333rem var(--color-shadow) !important;
 }
 .glass .smsc-topnav .topnav__menu,
 .glass .smsctooltip {
@@ -7361,19 +7454,11 @@ ul.js-notifs-list.notifs__list {
 .todo-column [listview] .todo-column__abbreviation-cell__wrapper {
   border-radius: 0.5rem !important;
 }
-.glass .listview__row.js-listview-row.todo-column__row:hover,
-.glass .listview__row.js-listview-row.todo-column__row--resolved:hover,
-.glass .content__day-column.js-day-column.highlight,
-.glass .header__day.header__wholeday-column.js-wholeday-column.highlight {
-  background-color: var(--darken-background) !important;
-  backdrop-filter: var(--small-blur) !important;
-}
 .listview__row.js-listview-row.todo-column__row:hover,
 .listview__row.js-listview-row.todo-column__row--resolved:hover,
 .content__day-column.js-day-column.highlight,
 .header__day.header__wholeday-column.js-wholeday-column.highlight {
-  background-color: var(--color-base02) !important;
-  border-radius: 1.25rem !important;
+  background-color: transparent !important;
 }
 .todo-column [listview] .todo-column__date-cell {
   padding: 0.75rem !important;

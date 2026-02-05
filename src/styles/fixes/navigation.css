@@ -161,6 +161,7 @@ input::placeholder {
   align-items: center !important;
   transition: none !important;
   overflow-y: hidden !important;
+  box-shadow: 0 0.333rem 1.333rem var(--color-shadow) !important;
 }
 
 .glass .smsc-topnav .topnav__menu,
