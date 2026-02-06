@@ -151,4 +151,27 @@ export class Dialog extends BaseWindow {
   constructor(id: string, hidden = true) {
     super(id, hidden);
   }
+
+  async create(): Promise<void> {
+    this.element = await this.renderContent();
+    this.element.id = this.id;
+    this.element.classList.add("base-dialog", "base-window");
+    if (this.hidden) this.element.classList.add("hidden");
+
+    // Create controls container
+    const controls = document.createElement("div");
+    controls.classList.add("window-controls");
+
+    const closeBtn = document.createElement("button");
+    closeBtn.classList.add("window-button", "window-close");
+    closeBtn.title = "Sluiten";
+    closeBtn.innerHTML = closeIconSVG;
+
+    controls.appendChild(closeBtn);
+    this.element.appendChild(controls);
+
+    document.body.appendChild(this.element);
+
+    closeBtn.addEventListener("click", () => this.hide());
+  }
 }

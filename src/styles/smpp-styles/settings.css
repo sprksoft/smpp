@@ -1617,7 +1617,7 @@ button.open-theme-editor-button:hover {
   pointer-events: all;
 }
 .enableAnimations .compact-theme-options {
-  transition: opacity 0.2s ease-in-out;
+  transition: all 0.2s ease-out;
 }
 
 .quick-settings-theme-container {
@@ -1625,7 +1625,6 @@ button.open-theme-editor-button:hover {
 }
 .compact-theme-options {
   max-height: calc(100vh - 10rem);
-  overflow-y: auto;
   opacity: 0;
   pointer-events: none;
   width: 100%;
@@ -1700,7 +1699,7 @@ button.open-theme-editor-button:hover {
   overflow: hidden !important;
   z-index: 1;
   position: relative;
-
+  user-select: none;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -1723,4 +1722,19 @@ button.open-theme-editor-button:hover {
   background: var(--background-image-local);
   background-size: cover;
   background-position: center;
+}
+@keyframes theme-option-render {
+  0% {
+    opacity: 0.5;
+    transform: translateY(-200%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
+
+.enableAnimations .compact-theme-options .compact-theme-option {
+  animation: theme-option-render 0.4s cubic-bezier(0, 0.63, 0, 1.14);
 }

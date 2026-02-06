@@ -34,6 +34,7 @@ class CompactThemeOption {
   }
 
   render() {
+    this.element.innerHTML = "";
     this.element.classList.add("compact-theme-option");
     this.element.dataset["name"] = this.name;
     this.element.addEventListener("click", () => this.click());
@@ -130,11 +131,16 @@ class CompactThemeSelector {
     });
   }
 
-  renderThemeOptions() {
-    this.themeOptions.forEach((option) => {
+  async renderThemeOptions() {
+    for (let i = 1; i < this.themeOptions.length; i++) {
+      const option = this.themeOptions[i - 1];
+      if (!option) break;
       option.render();
+      this.selector.style.height = this.calculateHeight(i) + "px";
       this.selector.appendChild(option.element);
-    });
+
+      if (document.body.classList.contains("enableAnimations")) await delay(30);
+    }
   }
 
   async updateThemeOptions() {
@@ -193,12 +199,26 @@ class CompactThemeSelector {
     this.input.innerHTML = "";
     this.input.appendChild(currentOption.element);
   }
-  updateSelectorStatus() {
+  async updateSelectorStatus() {
     if (this.selectorIsOpen) {
+      this.selector.innerHTML = "";
       this.selector.classList.add("visible");
+      this.selector.style.overflowY = "hidden";
+
+      await this.renderThemeOptions();
+      await delay(500);
+      this.selector.style.overflowY = "auto";
     } else {
+      this.selector.style.overflowY = "hidden";
+      this.selector.style.height = "0px";
       this.selector.classList.remove("visible");
     }
+  }
+
+  calculateHeight(themeOptionsCount: number) {
+    const TOP_MARGIN = 6;
+    const CONTENT_HEIGHT = themeOptionsCount * (36 + 3);
+    return TOP_MARGIN + CONTENT_HEIGHT;
   }
 
   async render() {
@@ -211,7 +231,6 @@ class CompactThemeSelector {
     this.themeOptions = [];
 
     this.createThemeOptions(themes);
-    this.renderThemeOptions();
 
     this.updateThemeOptions();
     this.createInput();
