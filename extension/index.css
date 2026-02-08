@@ -1394,47 +1394,55 @@ input.weather-location-input:focus {
 
 /* src/styles/smpp-styles/calendar.css */
 .calendar-widget {
-  background-color: var(--color-base00);
   border-radius: 8px;
-  padding: 16px;
   font-family: inherit;
-  color: var(--color-base05);
 }
 .calendar-widget-preview {
-  background-color: var(--color-base00);
   border-radius: 8px;
-  padding: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 200px;
-  color: var(--color-base05);
 }
 .calendar-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 1rem;
 }
 .calendar-header h3 {
   margin: 0;
   font-size: 18px;
   font-weight: 600;
+  margin-bottom: 0 !important;
+}
+.calendar-prev svg,
+.calendar-next svg {
+  width: 2rem;
+  stroke: var(--color-text);
+}
+.calendar-next svg {
+  rotate: 180deg;
 }
 .calendar-prev,
 .calendar-next {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: none;
   border: none;
-  color: var(--color-base05);
   cursor: pointer;
   font-size: 24px;
-  padding: 4px 8px;
-  border-radius: 4px;
-  transition: background-color 0.2s;
+  padding: 0.5rem;
+  border-radius: 1rem;
+}
+.enableAnimations .calendar-prev,
+.enableAnimations .calendar-next {
+  transition: background-color 0.2s, scale 0.2s ease-in-out !important;
 }
 .calendar-prev:hover,
 .calendar-next:hover {
-  background-color: var(--color-base01);
+  background-color: var(--color-base02);
 }
 .calendar-weekdays {
   display: grid;
@@ -1446,8 +1454,6 @@ input.weather-location-input:focus {
   text-align: center;
   font-weight: 600;
   font-size: 12px;
-  color: var(--color-base04);
-  padding: 8px 0;
 }
 .calendar-days {
   display: grid;
@@ -1459,14 +1465,14 @@ input.weather-location-input:focus {
   align-items: center;
   justify-content: center;
   aspect-ratio: 1;
-  border-radius: 4px;
-  cursor: pointer;
-  background-color: var(--color-base01);
+  background: transparent;
+  border-radius: 0.75rem;
   transition: background-color 0.2s;
   font-size: 14px;
+  cursor: default;
 }
 .calendar-day:hover:not(.empty) {
-  background-color: var(--color-base02);
+  cursor: default;
 }
 .calendar-day.empty {
   cursor: default;
@@ -2929,6 +2935,14 @@ button .bottom-container-button:active {
   fill: var(--color-accent-local);
   stroke: var(--color-accent-local);
 }
+@keyframes theme-tile {
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 .enableAnimations .theme-tile {
   transition-property:
     background-color,
@@ -2937,6 +2951,7 @@ button .bottom-container-button:active {
     transform,
     outline;
   transition: 0.15s ease-in-out;
+  animation: theme-tile 0.2s ease-out;
 }
 #settings-page .theme-tile:not(.aaaaa) {
   outline: 2px solid transparent !important;
@@ -3130,6 +3145,7 @@ button.remove-custom-theme:hover {
   border-radius: 100000px;
   background-color: var(--current-color);
   box-shadow: 0px 0px 10px 1px var(--color-shadow);
+  border: solid 3px color-mix(in oklch, var(--current-color), 10% #000000);
   cursor: pointer;
 }
 .no-image-available button.open-theme-editor-button {
@@ -3401,7 +3417,7 @@ button.open-theme-editor-button:hover {
   }
 }
 .theme-tile.being-removed {
-  animation: removed-theme-tile 0.3s ease-in;
+  animation: removed-theme-tile 0.3s ease-out;
   scale: 0;
   opacity: 0;
 }
@@ -3518,15 +3534,15 @@ button.open-theme-editor-button:hover {
 @keyframes theme-option-render {
   0% {
     opacity: 0.5;
-    transform: translateY(-200%);
+    transform: translateY(-200%) scale(0.75);
   }
   100% {
     opacity: 1;
-    transform: translateY(0%);
+    transform: translateY(0%) scale(1);
   }
 }
 .enableAnimations .compact-theme-options .compact-theme-option {
-  animation: theme-option-render 0.4s cubic-bezier(0, 0.63, 0, 1.14);
+  animation: theme-option-render 0.5s cubic-bezier(0.33, 1.31, 0.65, 0.98);
 }
 
 /* src/styles/smpp-styles/assignments.css */
@@ -5134,10 +5150,10 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   animation: popIn 0s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
 }
 .base-dialog {
-  width: 40%;
-  height: 20%;
-  left: 30%;
-  top: 40%;
+  width: 50%;
+  height: 30%;
+  left: 25%;
+  top: 35%;
 }
 @keyframes popIn {
   0% {

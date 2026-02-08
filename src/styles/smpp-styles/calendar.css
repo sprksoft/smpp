@@ -1,50 +1,63 @@
 .calendar-widget {
-  background-color: var(--color-base00);
   border-radius: 8px;
-  padding: 16px;
   font-family: inherit;
-  color: var(--color-base05);
 }
 
 .calendar-widget-preview {
-  background-color: var(--color-base00);
   border-radius: 8px;
-  padding: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 200px;
-  color: var(--color-base05);
 }
 
 .calendar-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 1rem;
 }
 
 .calendar-header h3 {
   margin: 0;
   font-size: 18px;
   font-weight: 600;
+  margin-bottom: 0 !important;
+}
+
+.calendar-prev svg,
+.calendar-next svg {
+  width: 2rem;
+  stroke: var(--color-text);
+}
+
+.calendar-next svg {
+  rotate: 180deg;
 }
 
 .calendar-prev,
 .calendar-next {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: none;
   border: none;
-  color: var(--color-base05);
   cursor: pointer;
   font-size: 24px;
-  padding: 4px 8px;
-  border-radius: 4px;
-  transition: background-color 0.2s;
+  padding: 0.5rem;
+  border-radius: 1rem;
+}
+
+.enableAnimations .calendar-prev,
+.enableAnimations .calendar-next {
+  transition:
+    background-color 0.2s,
+    scale 0.2s ease-in-out !important;
 }
 
 .calendar-prev:hover,
 .calendar-next:hover {
-  background-color: var(--color-base01);
+  background-color: var(--color-base02);
 }
 
 .calendar-weekdays {
@@ -58,8 +71,6 @@
   text-align: center;
   font-weight: 600;
   font-size: 12px;
-  color: var(--color-base04);
-  padding: 8px 0;
 }
 
 .calendar-days {
@@ -73,15 +84,15 @@
   align-items: center;
   justify-content: center;
   aspect-ratio: 1;
-  border-radius: 4px;
-  cursor: pointer;
-  background-color: var(--color-base01);
+  background: transparent;
+  border-radius: 0.75rem;
   transition: background-color 0.2s;
   font-size: 14px;
+  cursor: default;
 }
 
 .calendar-day:hover:not(.empty) {
-  background-color: var(--color-base02);
+  cursor: default;
 }
 
 .calendar-day.empty {

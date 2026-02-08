@@ -2545,7 +2545,7 @@ Is it scaring you off?`,
       const isKeyboardEvent = triggerEvent && (typeof KeyboardEvent !== "undefined" ? triggerEvent instanceof KeyboardEvent : String(triggerEvent.type).startsWith("key"));
       const openEventTarget = isKeyboardEvent ? null : triggerEvent?.target ?? null;
       this._outsideClickHandler = (e5) => {
-        if (openEventTarget && e5.target instanceof Node && (e5.target === openEventTarget || openEventTarget instanceof Node && openEventTarget.contains(e5.target))) {
+        if (e5.target.closest(".base-dialog")?.classList.contains("base-dialog") || e5.target.classList?.contains("base-dialog") || openEventTarget && e5.target instanceof Node && (e5.target === openEventTarget || openEventTarget instanceof Node && openEventTarget.contains(e5.target))) {
           return;
         }
         if (e5.target instanceof Node && !this.element.contains(e5.target)) {
@@ -2592,6 +2592,27 @@ Is it scaring you off?`,
     remove() {
       this.element?.remove();
       this.hidden = true;
+    }
+  };
+  var Dialog = class extends BaseWindow {
+    constructor(id, hidden = true) {
+      super(id, hidden);
+    }
+    async create() {
+      this.element = await this.renderContent();
+      this.element.id = this.id;
+      this.element.classList.add("base-dialog", "base-window");
+      if (this.hidden) this.element.classList.add("hidden");
+      const controls = document.createElement("div");
+      controls.classList.add("window-controls");
+      const closeBtn = document.createElement("button");
+      closeBtn.classList.add("window-button", "window-close");
+      closeBtn.title = "Sluiten";
+      closeBtn.innerHTML = closeIconSVG;
+      controls.appendChild(closeBtn);
+      this.element.appendChild(controls);
+      document.body.appendChild(this.element);
+      closeBtn.addEventListener("click", () => this.hide());
     }
   };
 
@@ -5037,13 +5058,13 @@ Is it scaring you off?`,
       });
     }
     async renderThemeOptions() {
-      for (let i5 = 1; i5 < this.themeOptions.length; i5++) {
+      for (let i5 = 1; i5 <= this.themeOptions.length; i5++) {
         const option = this.themeOptions[i5 - 1];
         if (!option) break;
         option.render();
         this.selector.style.height = this.calculateHeight(i5) + "px";
         this.selector.appendChild(option.element);
-        if (document.body.classList.contains("enableAnimations")) await delay(30);
+        if (document.body.classList.contains("enableAnimations")) await delay(20);
       }
     }
     async updateThemeOptions() {
@@ -5060,7 +5081,9 @@ Is it scaring you off?`,
         return !themeOptionNames.includes(name2);
       });
       missingThemeOptionNames.forEach(async (name2) => {
-        if (!themes2[name2]) return;
+        if (!themes2[name2]) {
+          return;
+        }
         let option = await this.createThemeOption(name2, themes2[name2]);
         option.render();
         this.selector.appendChild(option.element);
@@ -5094,6 +5117,7 @@ Is it scaring you off?`,
         this.updateSelectorStatus();
       };
       currentOption.render();
+      currentOption.element.classList.add("is-selected");
       this.input.innerHTML = "";
       this.input.appendChild(currentOption.element);
     }
@@ -5112,7 +5136,7 @@ Is it scaring you off?`,
       }
     }
     calculateHeight(themeOptionsCount) {
-      const TOP_MARGIN = 6;
+      const TOP_MARGIN = 7;
       const CONTENT_HEIGHT = themeOptionsCount * (36 + 3);
       return TOP_MARGIN + CONTENT_HEIGHT;
     }
@@ -7781,6 +7805,39 @@ Is it scaring you off?`,
     }
     async share() {
       console.log("Started sharing");
+      let shareDialog = new Dialog("themeSharing", true);
+      let linkOutput = document.createElement("a");
+      linkOutput.classList.add("link-output");
+      linkOutput.target = "_blank";
+      let shareUrl = null;
+      const copyToClipboard = () => {
+        if (shareUrl) {
+          navigator.clipboard.writeText(shareUrl);
+          new Toast("Theme link copied to clipboard", "succes").render();
+        } else {
+          new Toast("Theme link is not ready yet", "error").render();
+        }
+      };
+      shareDialog.renderContent = async () => {
+        let element = document.createElement("div");
+        element.classList.add("share-dialog-content");
+        let title = document.createElement("h1");
+        title.innerText = "Share theme";
+        let subTitle = document.createElement("h3");
+        subTitle.innerText = (await getTheme(this.name)).displayName;
+        linkOutput.innerText = "Loading...";
+        let copyToClipboardButton = document.createElement("button");
+        copyToClipboardButton.classList.add("copy-theme-link");
+        copyToClipboardButton.addEventListener("click", copyToClipboard);
+        element.appendChild(title);
+        element.appendChild(subTitle);
+        element.appendChild(linkOutput);
+        element.appendChild(copyToClipboardButton);
+        return element;
+      };
+      await shareDialog.create();
+      shareDialog.show();
+      new Toast("Uploading theme...", "info").render();
       const resp = await browser.runtime.sendMessage({
         action: "shareTheme",
         name: this.name
@@ -7789,8 +7846,11 @@ Is it scaring you off?`,
         console.error("Failed to share theme", resp.error);
         new Toast("Failed to share theme", "error").render();
       } else {
-        navigator.clipboard.writeText(resp.shareUrl);
-        new Toast("Theme link copied to clipboard", "succes").render();
+        shareUrl = resp.shareUrl;
+        console.log(linkOutput);
+        linkOutput.innerText = resp.shareUrl;
+        linkOutput.href = resp.shareUrl;
+        new Toast("Theme uploaded", "succes").render();
       }
       this.onShare();
     }
@@ -13033,7 +13093,7 @@ ${code}`;
       header.className = "calendar-header";
       const prevBtn = document.createElement("button");
       prevBtn.className = "calendar-prev";
-      prevBtn.textContent = "\u2039";
+      prevBtn.innerHTML = chevronLeftSvg;
       prevBtn.addEventListener("click", () => {
         this.currentDate.setMonth(this.currentDate.getMonth() - 1);
         const parent = container.parentElement;
@@ -13044,7 +13104,7 @@ ${code}`;
       title.textContent = `${monthName} ${year}`;
       const nextBtn = document.createElement("button");
       nextBtn.className = "calendar-next";
-      nextBtn.textContent = "\u203A";
+      nextBtn.innerHTML = chevronLeftSvg;
       nextBtn.addEventListener("click", () => {
         this.currentDate.setMonth(this.currentDate.getMonth() + 1);
         const parent = container.parentElement;
@@ -13115,7 +13175,10 @@ ${code}`;
       body.setAttribute("fill", "#FFE55C");
       body.setAttribute("stroke", "#000");
       body.setAttribute("stroke-width", "3");
-      const header = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+      const header = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "rect"
+      );
       header.setAttribute("x", "8");
       header.setAttribute("y", "8");
       header.setAttribute("width", "84");
@@ -13126,7 +13189,10 @@ ${code}`;
       header.setAttribute("stroke-width", "3");
       const ringPositions = [20, 50, 80];
       ringPositions.forEach((x3) => {
-        const ring = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        const ring = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "circle"
+        );
         ring.setAttribute("cx", String(x3));
         ring.setAttribute("cy", "6");
         ring.setAttribute("r", "6");
@@ -13137,7 +13203,10 @@ ${code}`;
       });
       const checkboxes = [45, 65, 85];
       checkboxes.forEach((y3) => {
-        const checkbox = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+        const checkbox = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "rect"
+        );
         checkbox.setAttribute("x", "20");
         checkbox.setAttribute("y", String(y3));
         checkbox.setAttribute("width", "10");
@@ -13150,7 +13219,10 @@ ${code}`;
       });
       const lines = [45, 65, 85];
       lines.forEach((y3) => {
-        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        const line = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "line"
+        );
         line.setAttribute("x1", "35");
         line.setAttribute("y1", String(y3 + 5));
         line.setAttribute("x2", "75");

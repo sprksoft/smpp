@@ -83,11 +83,15 @@ export class BaseWindow {
 
     this._outsideClickHandler = (e: MouseEvent) => {
       if (
-        openEventTarget &&
-        e.target instanceof Node &&
-        (e.target === openEventTarget ||
-          (openEventTarget instanceof Node &&
-            openEventTarget.contains(e.target)))
+        (e.target as HTMLElement)
+          .closest(".base-dialog")
+          ?.classList.contains("base-dialog") ||
+        (e.target as HTMLElement).classList?.contains("base-dialog") ||
+        (openEventTarget &&
+          e.target instanceof Node &&
+          (e.target === openEventTarget ||
+            (openEventTarget instanceof Node &&
+              openEventTarget.contains(e.target))))
       ) {
         return;
       }

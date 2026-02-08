@@ -38,7 +38,7 @@ import {
   ImageSelector,
   type SMPPImage,
 } from "../modules/images.js";
-import { BaseWindow } from "../modules/windows.js";
+import { BaseWindow, Dialog } from "../modules/windows.js";
 import {
   openSettingsWindow,
   settingsWindow,
@@ -655,17 +655,60 @@ export class ThemeTile extends Tile {
 
   async share() {
     console.log("Started sharing");
+    let shareDialog = new Dialog("themeSharing", true);
+    let linkOutput = document.createElement("a");
+    linkOutput.classList.add("link-output");
+    linkOutput.target = "_blank";
+
+    let shareUrl: string | null = null; // Store the URL instead
+
+    const copyToClipboard = () => {
+      if (shareUrl) {
+        navigator.clipboard.writeText(shareUrl);
+        new Toast("Theme link copied to clipboard", "succes").render();
+      } else {
+        new Toast("Theme link is not ready yet", "error").render();
+      }
+    };
+
+    shareDialog.renderContent = async () => {
+      let element = document.createElement("div");
+      element.classList.add("share-dialog-content");
+      let title = document.createElement("h1");
+      title.innerText = "Share theme";
+      let subTitle = document.createElement("h3");
+      subTitle.innerText = (await getTheme(this.name)).displayName;
+      linkOutput.innerText = "Loading...";
+      let copyToClipboardButton = document.createElement("button");
+      copyToClipboardButton.classList.add("copy-theme-link");
+      copyToClipboardButton.addEventListener("click", copyToClipboard);
+      element.appendChild(title);
+      element.appendChild(subTitle);
+      element.appendChild(linkOutput);
+      element.appendChild(copyToClipboardButton);
+      return element;
+    };
+
+    await shareDialog.create();
+    shareDialog.show();
+    new Toast("Uploading theme...", "info").render();
+
     const resp = await browser.runtime.sendMessage({
       action: "shareTheme",
       name: this.name,
     });
+
     if (resp.error) {
       console.error("Failed to share theme", resp.error);
       new Toast("Failed to share theme", "error").render();
     } else {
-      navigator.clipboard.writeText(resp.shareUrl);
-      new Toast("Theme link copied to clipboard", "succes").render();
+      shareUrl = resp.shareUrl; // Update the URL variable
+      console.log(linkOutput);
+      linkOutput.innerText = resp.shareUrl;
+      linkOutput.href = resp.shareUrl;
+      new Toast("Theme uploaded", "succes").render();
     }
+
     this.onShare();
   }
 

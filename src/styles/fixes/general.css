@@ -1874,10 +1874,10 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
 }
 
 .base-dialog {
-  width: 40%;
-  height: 20%;
-  left: 30%;
-  top: 40%;
+  width: 50%;
+  height: 30%;
+  left: 25%;
+  top: 35%;
 }
 
 @keyframes popIn {

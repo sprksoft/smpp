@@ -132,14 +132,14 @@ class CompactThemeSelector {
   }
 
   async renderThemeOptions() {
-    for (let i = 1; i < this.themeOptions.length; i++) {
+    for (let i = 1; i <= this.themeOptions.length; i++) {
       const option = this.themeOptions[i - 1];
       if (!option) break;
       option.render();
       this.selector.style.height = this.calculateHeight(i) + "px";
       this.selector.appendChild(option.element);
 
-      if (document.body.classList.contains("enableAnimations")) await delay(30);
+      if (document.body.classList.contains("enableAnimations")) await delay(20);
     }
   }
 
@@ -149,6 +149,7 @@ class CompactThemeSelector {
       categories: ["quickSettings"],
       includeHidden: true,
     })) as Themes;
+
     let themeOptionNames = this.themeOptions.map((option) => {
       return option.name;
     });
@@ -159,7 +160,9 @@ class CompactThemeSelector {
       return !themeOptionNames.includes(name);
     });
     missingThemeOptionNames.forEach(async (name) => {
-      if (!themes[name]) return;
+      if (!themes[name]) {
+        return;
+      }
       let option = await this.createThemeOption(name, themes[name]);
       option.render();
       this.selector.appendChild(option.element);
@@ -196,6 +199,7 @@ class CompactThemeSelector {
       this.updateSelectorStatus();
     };
     currentOption.render();
+    currentOption.element.classList.add("is-selected");
     this.input.innerHTML = "";
     this.input.appendChild(currentOption.element);
   }
@@ -216,7 +220,7 @@ class CompactThemeSelector {
   }
 
   calculateHeight(themeOptionsCount: number) {
-    const TOP_MARGIN = 6;
+    const TOP_MARGIN = 7;
     const CONTENT_HEIGHT = themeOptionsCount * (36 + 3);
     return TOP_MARGIN + CONTENT_HEIGHT;
   }
