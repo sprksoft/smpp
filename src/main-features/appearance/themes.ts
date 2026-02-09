@@ -50,6 +50,7 @@ import { createHoverTooltip, createTextInput } from "./ui.js";
 import { isValidImage, Toast } from "../../fixes-utils/utils.js";
 import { recreateGlobalChat } from "../globalchat.js";
 import { setBackground } from "./background-image.js";
+import { getImage } from "../../background-scripts/data-background-script.js";
 
 export let currentThemeName: string;
 export let currentTheme: Theme;
@@ -363,6 +364,39 @@ export class ColorPicker {
   async onChange() {}
 }
 
+class ThemeSharingTile {
+  name: string;
+  element = document.createElement("div");
+  constructor(name: string) {
+    this.name = name;
+  }
+  async render() {
+    let imageURL = await getImageURL(
+      this.name,
+      async () => {
+        return await getExtensionImage(
+          "theme-backgrounds/compressed/" + this.name + ".jpg"
+        );
+      },
+      false
+    );
+    if (await isValidImage(await imageURL.url)) {
+      this.element.style.setProperty(
+        "--background-image-local",
+        `url(${await imageURL.url})`
+      );
+    } else {
+      this.element.style.setProperty("--background-image-local", `url()`);
+    }
+  }
+
+  createImageContainer() {
+    let imageContainer = document.createElement("div");
+    imageContainer.classList.add("image-container");
+    return imageContainer;
+  }
+}
+
 export class Tile {
   element = document.createElement("div");
 
@@ -654,38 +688,56 @@ export class ThemeTile extends Tile {
   }
 
   async share() {
-    console.log("Started sharing");
     let shareDialog = new Dialog("themeSharing", true);
     let linkOutput = document.createElement("a");
     linkOutput.classList.add("link-output");
     linkOutput.target = "_blank";
-
-    let shareUrl: string | null = null; // Store the URL instead
+    let copyToClipboardButton = document.createElement("button");
+    copyToClipboardButton.classList.add("copy-hex-button");
+    copyToClipboardButton.classList.add("copy-link-button");
 
     const copyToClipboard = () => {
       if (shareUrl) {
         navigator.clipboard.writeText(shareUrl);
+
+        let svg = copyToClipboardButton.querySelector("svg");
+        if (!svg) return;
+        svg.style.fill = "var(--color-text)";
+        copyToClipboardButton.innerHTML = doneSvg;
+
+        setTimeout(() => {
+          svg.style.fill = "none";
+          copyToClipboardButton.innerHTML = copySvg;
+        }, 1000);
+
         new Toast("Theme link copied to clipboard", "succes").render();
       } else {
         new Toast("Theme link is not ready yet", "error").render();
       }
     };
 
+    copyToClipboardButton.addEventListener("click", copyToClipboard);
+    copyToClipboardButton.innerHTML = loadingSpinnerSvg;
+
+    let shareUrl: string | null = null; // Store the URL instead
+
     shareDialog.renderContent = async () => {
       let element = document.createElement("div");
       element.classList.add("share-dialog-content");
       let title = document.createElement("h1");
-      title.innerText = "Share theme";
-      let subTitle = document.createElement("h3");
-      subTitle.innerText = (await getTheme(this.name)).displayName;
+      title.innerText = (await getTheme(this.name)).displayName;
+      let subTitle = document.createElement("h2");
+      subTitle.innerText = "Theme sharing";
       linkOutput.innerText = "Loading...";
-      let copyToClipboardButton = document.createElement("button");
-      copyToClipboardButton.classList.add("copy-theme-link");
-      copyToClipboardButton.addEventListener("click", copyToClipboard);
+      let copyContainer = document.createElement("div");
+      copyContainer.classList.add("copy-container");
+
+      copyContainer.appendChild(linkOutput);
+      copyContainer.appendChild(copyToClipboardButton);
+
       element.appendChild(title);
       element.appendChild(subTitle);
-      element.appendChild(linkOutput);
-      element.appendChild(copyToClipboardButton);
+      element.appendChild(copyContainer);
       return element;
     };
 
@@ -706,6 +758,7 @@ export class ThemeTile extends Tile {
       console.log(linkOutput);
       linkOutput.innerText = resp.shareUrl;
       linkOutput.href = resp.shareUrl;
+      copyToClipboardButton.innerHTML = copySvg;
       new Toast("Theme uploaded", "succes").render();
     }
 

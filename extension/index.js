@@ -7804,35 +7804,47 @@ Is it scaring you off?`,
       new Toast("Theme succesfully duplicated", "succes").render();
     }
     async share() {
-      console.log("Started sharing");
       let shareDialog = new Dialog("themeSharing", true);
       let linkOutput = document.createElement("a");
       linkOutput.classList.add("link-output");
       linkOutput.target = "_blank";
-      let shareUrl = null;
+      let copyToClipboardButton = document.createElement("button");
+      copyToClipboardButton.classList.add("copy-hex-button");
+      copyToClipboardButton.classList.add("copy-link-button");
       const copyToClipboard = () => {
         if (shareUrl) {
           navigator.clipboard.writeText(shareUrl);
+          let svg = copyToClipboardButton.querySelector("svg");
+          if (!svg) return;
+          svg.style.fill = "var(--color-text)";
+          copyToClipboardButton.innerHTML = doneSvg;
+          setTimeout(() => {
+            svg.style.fill = "none";
+            copyToClipboardButton.innerHTML = copySvg;
+          }, 1e3);
           new Toast("Theme link copied to clipboard", "succes").render();
         } else {
           new Toast("Theme link is not ready yet", "error").render();
         }
       };
+      copyToClipboardButton.addEventListener("click", copyToClipboard);
+      copyToClipboardButton.innerHTML = loadingSpinnerSvg;
+      let shareUrl = null;
       shareDialog.renderContent = async () => {
         let element = document.createElement("div");
         element.classList.add("share-dialog-content");
         let title = document.createElement("h1");
-        title.innerText = "Share theme";
-        let subTitle = document.createElement("h3");
-        subTitle.innerText = (await getTheme(this.name)).displayName;
+        title.innerText = (await getTheme(this.name)).displayName;
+        let subTitle = document.createElement("h2");
+        subTitle.innerText = "Theme sharing";
         linkOutput.innerText = "Loading...";
-        let copyToClipboardButton = document.createElement("button");
-        copyToClipboardButton.classList.add("copy-theme-link");
-        copyToClipboardButton.addEventListener("click", copyToClipboard);
+        let copyContainer = document.createElement("div");
+        copyContainer.classList.add("copy-container");
+        copyContainer.appendChild(linkOutput);
+        copyContainer.appendChild(copyToClipboardButton);
         element.appendChild(title);
         element.appendChild(subTitle);
-        element.appendChild(linkOutput);
-        element.appendChild(copyToClipboardButton);
+        element.appendChild(copyContainer);
         return element;
       };
       await shareDialog.create();
@@ -7850,6 +7862,7 @@ Is it scaring you off?`,
         console.log(linkOutput);
         linkOutput.innerText = resp.shareUrl;
         linkOutput.href = resp.shareUrl;
+        copyToClipboardButton.innerHTML = copySvg;
         new Toast("Theme uploaded", "succes").render();
       }
       this.onShare();
@@ -9914,9 +9927,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   }
   function scrape_goto() {
     goto_items = [];
-    let goto_items_html = document.querySelectorAll(
-      ".js-shortcuts-container > a"
-    );
+    let goto_items_html = document.querySelectorAll(".js-shortcuts-container a");
     for (let i5 = 0; i5 < goto_items_html.length; i5++) {
       const item = goto_items_html[i5];
       goto_items.push({
@@ -11919,7 +11930,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     });
     return delijnDirectionsArray.join(", ");
   }
-  async function fetchDelijnData(url) {
+  async function fetchDelijnData2(url) {
     return await browser.runtime.sendMessage({
       action: "fetchDelijnData",
       url
@@ -12011,14 +12022,14 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   async function updateLijnCardWithApiData(lijnNumberElement, entiteitnummer, lijnnummer, monochrome, signal) {
     if (signal?.aborted) return;
     try {
-      const individualLijnData = await fetchDelijnData(
+      const individualLijnData = await fetchDelijnData2(
         `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${entiteitnummer}/${lijnnummer}`,
         { signal }
       );
       if (signal?.aborted) return;
       const publicLineNumber = individualLijnData.lijnnummerPubliek;
       lijnNumberElement.textContent = publicLineNumber;
-      const individualLijnDataColors = await fetchDelijnData(
+      const individualLijnDataColors = await fetchDelijnData2(
         `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${entiteitnummer}/${lijnnummer}/lijnkleuren`,
         { signal }
       );
@@ -12121,7 +12132,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       this.clearBottomContainer();
       let delijnData;
       try {
-        delijnData = await fetchDelijnData(
+        delijnData = await fetchDelijnData2(
           `https://api.delijn.be/DLKernOpenData/api/v1/haltes/${this.settings.halte.entiteit}/${this.settings.halte.nummer}/real-time?maxAantalDoorkomsten=${this.settings.maxBusses}`,
           { signal }
         );
@@ -12211,7 +12222,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       const signal = this.currentHalteOptionsAbortController.signal;
       let delijnHaltesData;
       try {
-        delijnHaltesData = await fetchDelijnData(
+        delijnHaltesData = await fetchDelijnData2(
           `https://api.delijn.be/DLZoekOpenData/v1/zoek/haltes/${searchQuery}?maxAantalHits=${this.searchResultLimit}`,
           { signal }
         );
@@ -12228,7 +12239,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       const halteSleutels = delijnHaltesData.haltes.map((halte) => `${halte.entiteitnummer}_${halte.haltenummer}`).join("_");
       let delijnHaltesLijnrichtingenData;
       try {
-        delijnHaltesLijnrichtingenData = await fetchDelijnData(
+        delijnHaltesLijnrichtingenData = await fetchDelijnData2(
           `https://api.delijn.be/DLKernOpenData/api/v1/haltes/lijst/${halteSleutels}/lijnrichtingen`,
           { signal }
         );
@@ -12283,7 +12294,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         lijnenContainer.append(lijn);
         let individualLijnData;
         try {
-          individualLijnData = await fetchDelijnData(
+          individualLijnData = await fetchDelijnData2(
             `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${lijnrichting.entiteitnummer}/${lijnrichting.lijnnummer}`,
             { signal }
           );
@@ -12301,7 +12312,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         lijn.innerText = individualLijnData.lijnnummerPubliek;
         let individualLijnDataColors;
         try {
-          individualLijnDataColors = await fetchDelijnData(
+          individualLijnDataColors = await fetchDelijnData2(
             `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${lijnrichting.entiteitnummer}/${lijnrichting.lijnnummer}/lijnkleuren`,
             { signal }
           );
@@ -13543,7 +13554,9 @@ ${code}`;
     } else if (startButton && !data2.home) {
       startButton.innerHTML = "Start";
     }
-    const messageButton = document.querySelector(".js-btn-messages");
+    const messageButton = document.querySelector(
+      `a.topnav__btn[title="Berichten"]`
+    );
     if (messageButton && data2.mail) {
       const textSpan = messageButton.querySelector("span");
       messageButton.innerHTML = messageSvg;

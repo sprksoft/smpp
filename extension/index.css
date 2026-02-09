@@ -3544,6 +3544,44 @@ button.open-theme-editor-button:hover {
 .enableAnimations .compact-theme-options .compact-theme-option {
   animation: theme-option-render 0.5s cubic-bezier(0.33, 1.31, 0.65, 0.98);
 }
+.share-dialog-content {
+  padding: 1rem;
+}
+.share-dialog-content h1 {
+  color: var(--color-accent);
+}
+.share-dialog-content h1,
+.share-dialog-content h2 {
+  text-align: center;
+  margin-bottom: 0.5rem !important;
+}
+.share-dialog-content h2 {
+  margin-bottom: 1.5rem !important;
+}
+.link-output {
+  display: flex;
+  background-color: var(--color-base01) !important;
+  font-size: 1rem !important;
+  border-radius: 1rem !important;
+  padding: 0.6rem 0.8rem !important;
+  border: 2px solid var(--color-base02) !important;
+  text-wrap-mode: nowrap;
+  max-width: 100%;
+  width: 20rem;
+  overflow-x: hidden;
+}
+.copy-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+.copy-hex-button.copy-link-button {
+  width: 3rem !important;
+  height: 3rem !important;
+}
 
 /* src/styles/smpp-styles/assignments.css */
 .assignment__item {
@@ -7235,6 +7273,19 @@ td[bgcolor*="#"] {
 .smsc-topnav [data-shortcuts] .topnav__menu--shortcuts hr.menu-divider {
   border-top: none !important;
 }
+.smsc-topnav [data-shortcuts] .topnav__menu--shortcuts .pin-button {
+  right: 0 !important;
+}
+.smsc-topnav [data-shortcuts] .topnav__menu--shortcuts .pin-button:focus,
+.smsc-topnav [data-shortcuts] .topnav__menu--shortcuts .pin-button:hover {
+  border: 2px solid var(--color-base03) !important;
+  background-color: var(--color-base02) !important;
+  border-radius: 0.5rem !important;
+}
+.modern-ui .smsc-topnav .topnav .favourites-container,
+.smsc-topnav .topnav .favourites-container {
+  gap: 0.5rem !important;
+}
 
 /* src/styles/fixes/notification.css */
 .notifs__hdr {
@@ -7348,6 +7399,10 @@ ul.js-notifs-list.notifs__list {
   display: flex !important;
   flex-direction: column !important;
   gap: 3px !important;
+}
+.smsc-topnav .topnav__badge {
+  top: 0 !important;
+  margin-left: 2px !important;
 }
 
 /* src/styles/fixes/planner.css */

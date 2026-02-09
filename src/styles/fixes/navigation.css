@@ -429,3 +429,20 @@ td[bgcolor*="#"] {
 .smsc-topnav [data-shortcuts] .topnav__menu--shortcuts hr.menu-divider {
   border-top: none !important;
 }
+
+.smsc-topnav [data-shortcuts] .topnav__menu--shortcuts .pin-button {
+  right: 0 !important;
+}
+
+.smsc-topnav [data-shortcuts] .topnav__menu--shortcuts .pin-button:focus,
+.smsc-topnav [data-shortcuts] .topnav__menu--shortcuts .pin-button:hover {
+  border: 2px solid var(--color-base03) !important;
+  background-color: var(--color-base02) !important;
+  border-radius: 0.5rem !important;
+}
+
+.modern-ui .smsc-topnav .topnav .favourites-container,
+.smsc-topnav .topnav .favourites-container {
+  gap: 0.5rem !important;
+}
+

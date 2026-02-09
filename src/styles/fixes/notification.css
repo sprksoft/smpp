@@ -141,3 +141,8 @@ ul.js-notifs-list.notifs__list {
   flex-direction: column !important;
   gap: 3px !important;
 }
+
+.smsc-topnav .topnav__badge {
+  top: 0 !important;
+  margin-left: 2px !important;
+}

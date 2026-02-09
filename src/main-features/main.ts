@@ -164,7 +164,9 @@ function updateTopNavIcons(data: Settings["topNav"]["icons"]) {
     startButton.innerHTML = "Start";
   }
 
-  const messageButton = document.querySelector(".js-btn-messages");
+  const messageButton = document.querySelector(
+    `a.topnav__btn[title="Berichten"]`
+  );
   if (messageButton && data.mail) {
     const textSpan = messageButton.querySelector("span");
     messageButton.innerHTML = messageSvg;
