@@ -732,12 +732,88 @@ export class ThemeTile extends Tile {
       let copyContainer = document.createElement("div");
       copyContainer.classList.add("copy-container");
 
+      let tile = document.createElement("div");
+      tile.classList.add("sharing-tile");
+
+      let theme = await getTheme(this.name);
+      Object.keys(theme.cssProperties).forEach((key) => {
+        element.style.setProperty(
+          `${key}-local`,
+          theme.cssProperties[key] as string
+        );
+      });
+
+      function getEditableValues(cssProperties: Theme["cssProperties"]) {
+        let nonEditableValues = [
+          "--color-homepage-sidebars-bg",
+          "--darken-background",
+          "--color-splashtext",
+        ];
+        let editableValues = Object.keys(cssProperties).filter((property) => {
+          return !nonEditableValues.includes(property);
+        });
+        return editableValues;
+      }
+
+      function createColorPreview(name: string) {
+        let colorPreview = document.createElement("div");
+        colorPreview.classList.add("color-preview-bubble");
+        if (theme.cssProperties[name]) {
+          colorPreview.style.setProperty(
+            "--current-color",
+            theme.cssProperties[name]
+          );
+        }
+        return colorPreview;
+      }
+
+      function generateColorPreviews(editableValues: string[]) {
+        let colorPreviews = editableValues.map((colorName) => {
+          let colorPreview: { [key: string]: HTMLDivElement } = {};
+          colorPreview[colorName] = createColorPreview(colorName);
+          return colorPreview;
+        });
+
+        return colorPreviews;
+      }
+
+      let imageContainer = document.createElement("div");
+      imageContainer.classList.add("sharing-image-container");
+
+      let imageURL = await getImageURL(
+        this.name,
+        async () => {
+          return await getExtensionImage(
+            "theme-backgrounds/compressed/" + this.name + ".jpg"
+          );
+        },
+        false
+      );
+      let image = document.createElement("img");
+      image.classList.add("sharing-image");
+
+      image.src = imageURL.url;
+      imageContainer.appendChild(image);
+
+      tile.appendChild(imageContainer);
+
+      let colorPreviewsContainer = document.createElement("div");
+      colorPreviewsContainer.classList.add("sharing-color-previews")
+      Object.values(
+        generateColorPreviews(getEditableValues(theme.cssProperties))
+      ).forEach((preview) => {
+        let actualPreview = Object.values(preview)[0];
+        if (actualPreview) colorPreviewsContainer.appendChild(actualPreview);
+      });
+      tile.appendChild(colorPreviewsContainer);
+
       copyContainer.appendChild(linkOutput);
       copyContainer.appendChild(copyToClipboardButton);
 
       element.appendChild(title);
       element.appendChild(subTitle);
-      element.appendChild(copyContainer);
+      tile.appendChild(copyContainer);
+      element.appendChild(tile);
       return element;
     };
 
@@ -756,8 +832,8 @@ export class ThemeTile extends Tile {
     } else {
       shareUrl = resp.shareUrl; // Update the URL variable
       console.log(linkOutput);
-      linkOutput.innerText = resp.shareUrl;
-      linkOutput.href = resp.shareUrl;
+      linkOutput.innerText = (resp.shareUrl as string).slice(0, 32) + "…";
+      linkOutput.addEventListener("click", copyToClipboard);
       copyToClipboardButton.innerHTML = copySvg;
       new Toast("Theme uploaded", "succes").render();
     }

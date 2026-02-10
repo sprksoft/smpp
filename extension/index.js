@@ -7840,11 +7840,76 @@ Is it scaring you off?`,
         linkOutput.innerText = "Loading...";
         let copyContainer = document.createElement("div");
         copyContainer.classList.add("copy-container");
+        let tile = document.createElement("div");
+        tile.classList.add("sharing-tile");
+        let theme = await getTheme(this.name);
+        Object.keys(theme.cssProperties).forEach((key) => {
+          element.style.setProperty(
+            `${key}-local`,
+            theme.cssProperties[key]
+          );
+        });
+        function getEditableValues(cssProperties) {
+          let nonEditableValues = [
+            "--color-homepage-sidebars-bg",
+            "--darken-background",
+            "--color-splashtext"
+          ];
+          let editableValues = Object.keys(cssProperties).filter((property) => {
+            return !nonEditableValues.includes(property);
+          });
+          return editableValues;
+        }
+        function createColorPreview(name2) {
+          let colorPreview = document.createElement("div");
+          colorPreview.classList.add("color-preview-bubble");
+          if (theme.cssProperties[name2]) {
+            colorPreview.style.setProperty(
+              "--current-color",
+              theme.cssProperties[name2]
+            );
+          }
+          return colorPreview;
+        }
+        function generateColorPreviews(editableValues) {
+          let colorPreviews = editableValues.map((colorName) => {
+            let colorPreview = {};
+            colorPreview[colorName] = createColorPreview(colorName);
+            return colorPreview;
+          });
+          return colorPreviews;
+        }
+        let imageContainer = document.createElement("div");
+        imageContainer.classList.add("sharing-image-container");
+        let imageURL = await getImageURL(
+          this.name,
+          async () => {
+            return await getExtensionImage(
+              "theme-backgrounds/compressed/" + this.name + ".jpg"
+            );
+          },
+          false
+        );
+        let image = document.createElement("img");
+        image.classList.add("sharing-image");
+        image.src = imageURL.url;
+        imageContainer.appendChild(image);
+        tile.appendChild(imageContainer);
+        let colorPreviewsContainer = document.createElement("div");
+        colorPreviewsContainer.classList.add("sharing-color-previews");
+        Object.values(
+          generateColorPreviews(getEditableValues(theme.cssProperties))
+        ).forEach((preview) => {
+          let actualPreview = Object.values(preview)[0];
+          if (actualPreview) colorPreviewsContainer.appendChild(actualPreview);
+        });
+        tile.appendChild(colorPreviewsContainer);
         copyContainer.appendChild(linkOutput);
         copyContainer.appendChild(copyToClipboardButton);
         element.appendChild(title);
         element.appendChild(subTitle);
-        element.appendChild(copyContainer);
+        tile.appendChild(copyContainer);
+        element.appendChild(tile);
         return element;
       };
       await shareDialog.create();
@@ -7860,8 +7925,8 @@ Is it scaring you off?`,
       } else {
         shareUrl = resp.shareUrl;
         console.log(linkOutput);
-        linkOutput.innerText = resp.shareUrl;
-        linkOutput.href = resp.shareUrl;
+        linkOutput.innerText = resp.shareUrl.slice(0, 32) + "\u2026";
+        linkOutput.addEventListener("click", copyToClipboard);
         copyToClipboardButton.innerHTML = copySvg;
         new Toast("Theme uploaded", "succes").render();
       }
@@ -11635,11 +11700,11 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       const foresight = 28;
       let userId = getUserId();
       if (DEBUG) {
-        sendDebug("Debug mode enabled \u2705");
-        sendDebug("User ID:", userId);
-        sendDebug("Current URL:", window.location.href);
-        sendDebug("Today's Date:", getCurrentDate());
-        sendDebug("Next Date:", getFutureDate(foresight));
+        sendDebug("[AS]", "Debug mode enabled \u2705");
+        sendDebug("[AS]", "User ID:", userId);
+        sendDebug("[AS]", "Current URL:", window.location.href);
+        sendDebug("[AS]", "Today's Date:", getCurrentDate());
+        sendDebug("[AS]", "Next Date:", getFutureDate(foresight));
       }
       this.clearContent();
       async function fetchPlannerData2() {
@@ -11651,7 +11716,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           const url = `https://${schoolName}.smartschool.be/planner/api/v1/planned-elements/user/${userId}?from=${getCurrentDate()}&to=${getFutureDate(
             foresight
           )}&types=planned-assignments,planned-to-dos`;
-          sendDebug("Fetching planner data from:", url);
+          sendDebug("[AS]", "Fetching planner data from:", url);
           const response = await fetch(url);
           if (!response.ok) {
             throw new Error(
@@ -11659,7 +11724,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             );
           }
           const data2 = await response.json();
-          sendDebug("Planner data:", data2);
+          sendDebug("[AS]", "Planner data:", data2);
           return data2;
         } catch (error) {
           console.error("Fetch error:", error);
@@ -11675,7 +11740,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         TitleScreenDiv.append(TitleScreenText);
         TasksContainer.append(TitleScreenDiv);
         if (!userId) {
-          return sendDebug("User ID not found.");
+          return sendDebug("[AS]", "User ID not found.");
         }
         fetchPlannerData2().then(async (data2) => {
           data2 = data2.filter((element) => element.resolvedStatus !== "resolved");
@@ -11683,7 +11748,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             TasksContainer.innerHTML = "Er is iets ernstig misgegaan :(";
             return console.error("No planner data, Did something go wrong?");
           } else if (DEBUG) {
-            sendDebug("Planner data fetched successfully.");
+            sendDebug("[AS]", "Planner data fetched successfully.");
           }
           if (!Array.isArray(data2) || data2.length === 0) {
             let noDataContainer = document.createElement("div");
@@ -11749,7 +11814,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
               `c-${element.color.split("-")[0]}-combo--${element.color.split("-")[1]}`
               // LET HIM COOK
             );
-            if (element.icon) {
+            sendDebug("[AS]", "Creating icon for assignment:", element, element.icon);
+            if (element.plannedElementType === "planned-to-dos") {
               fetch(
                 `https://${getSchoolName()}.smartschool.be/smsc/svg/${element.icon}/${element.icon}_16x16.svg`
               ).then((response) => response.blob()).then((blob) => {
@@ -11802,7 +11868,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             });
             TasksContainer.append(rowDiv);
           });
-          return sendDebug("UI updated successfully.");
+          return sendDebug("[AS]", "UI updated successfully.");
         });
         return TasksContainer;
       };
@@ -11850,7 +11916,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           `Failed to mark assignment ${as_ID} as finished: ${response.status} ${response.statusText}. Response: ${errorData}`
         );
       }
-      sendDebug(`Assignment ${as_ID} marked as finished successfully.`);
+      sendDebug("[AS]", `Assignment ${as_ID} marked as finished successfully.`);
       const assignmentElement = document.querySelector(`[data-id="${as_ID}"]`);
       if (assignmentElement) {
         const parentContainer = assignmentElement.parentElement;
