@@ -18,7 +18,6 @@ import {
   getTheme,
   getThemes,
   getThemeCategories,
-  getCustomTheme,
   saveCustomTheme,
   removeCustomTheme,
   getFirstThemeInCategory,

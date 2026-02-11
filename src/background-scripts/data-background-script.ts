@@ -109,6 +109,18 @@ export async function removeImage(id: string) {
   await browser.storage.local.set({ images: imagesMetaData });
 }
 
+export async function getBase64FromResponse(response: Response): Promise<string> {
+  let blob = await response.blob();
+  let base64 = await new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onloadend = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(blob);
+  });
+
+  return base64 as string;
+}
+
 export async function getBase64(link: string): Promise<string | null> {
   try {
     let response = await fetch(link);
@@ -118,16 +130,8 @@ export async function getBase64(link: string): Promise<string | null> {
       );
       return null;
     }
+    return getBase64FromResponse(response);
 
-    let blob = await response.blob();
-    let base64 = await new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onloadend = () => resolve(reader.result);
-      reader.onerror = reject;
-      reader.readAsDataURL(blob);
-    });
-
-    return base64 as string;
   } catch (error) {
     console.error("Error converting image to base64:", error);
     return null;

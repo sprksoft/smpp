@@ -8468,7 +8468,10 @@ Is it scaring you off?`,
       colorPreview.parentElement?.appendChild(colorPicker.render());
     }
     async saveThemeData() {
-      this.theme.shareId = null;
+      await browser.runtime.sendMessage({
+        action: "markThemeAsModified",
+        name: this.name
+      });
       this.colorPreviews.forEach((preview) => {
         let colorPreview = Object.values(preview)[0];
         if (!colorPreview) return;
@@ -8643,9 +8646,12 @@ Is it scaring you off?`,
           "--darken-background": darkenColor.toHex(),
           "--color-homepage-sidebars-bg": darkenColor.alpha(0.1).toHex(),
           "--color-splashtext": textcolor.toHex()
-        },
-        shareId: null
+        }
       };
+      await browser.runtime.sendMessage({
+        action: "markThemeAsModified",
+        name: this.name
+      });
       await browser.runtime.sendMessage({
         action: "saveCustomTheme",
         data: this.theme,
@@ -11996,7 +12002,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     });
     return delijnDirectionsArray.join(", ");
   }
-  async function fetchDelijnData2(url) {
+  async function fetchDelijnData(url) {
     return await browser.runtime.sendMessage({
       action: "fetchDelijnData",
       url
@@ -12088,14 +12094,14 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   async function updateLijnCardWithApiData(lijnNumberElement, entiteitnummer, lijnnummer, monochrome, signal) {
     if (signal?.aborted) return;
     try {
-      const individualLijnData = await fetchDelijnData2(
+      const individualLijnData = await fetchDelijnData(
         `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${entiteitnummer}/${lijnnummer}`,
         { signal }
       );
       if (signal?.aborted) return;
       const publicLineNumber = individualLijnData.lijnnummerPubliek;
       lijnNumberElement.textContent = publicLineNumber;
-      const individualLijnDataColors = await fetchDelijnData2(
+      const individualLijnDataColors = await fetchDelijnData(
         `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${entiteitnummer}/${lijnnummer}/lijnkleuren`,
         { signal }
       );
@@ -12198,7 +12204,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       this.clearBottomContainer();
       let delijnData;
       try {
-        delijnData = await fetchDelijnData2(
+        delijnData = await fetchDelijnData(
           `https://api.delijn.be/DLKernOpenData/api/v1/haltes/${this.settings.halte.entiteit}/${this.settings.halte.nummer}/real-time?maxAantalDoorkomsten=${this.settings.maxBusses}`,
           { signal }
         );
@@ -12288,7 +12294,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       const signal = this.currentHalteOptionsAbortController.signal;
       let delijnHaltesData;
       try {
-        delijnHaltesData = await fetchDelijnData2(
+        delijnHaltesData = await fetchDelijnData(
           `https://api.delijn.be/DLZoekOpenData/v1/zoek/haltes/${searchQuery}?maxAantalHits=${this.searchResultLimit}`,
           { signal }
         );
@@ -12305,7 +12311,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       const halteSleutels = delijnHaltesData.haltes.map((halte) => `${halte.entiteitnummer}_${halte.haltenummer}`).join("_");
       let delijnHaltesLijnrichtingenData;
       try {
-        delijnHaltesLijnrichtingenData = await fetchDelijnData2(
+        delijnHaltesLijnrichtingenData = await fetchDelijnData(
           `https://api.delijn.be/DLKernOpenData/api/v1/haltes/lijst/${halteSleutels}/lijnrichtingen`,
           { signal }
         );
@@ -12360,7 +12366,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         lijnenContainer.append(lijn);
         let individualLijnData;
         try {
-          individualLijnData = await fetchDelijnData2(
+          individualLijnData = await fetchDelijnData(
             `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${lijnrichting.entiteitnummer}/${lijnrichting.lijnnummer}`,
             { signal }
           );
@@ -12378,7 +12384,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         lijn.innerText = individualLijnData.lijnnummerPubliek;
         let individualLijnDataColors;
         try {
-          individualLijnDataColors = await fetchDelijnData2(
+          individualLijnDataColors = await fetchDelijnData(
             `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${lijnrichting.entiteitnummer}/${lijnrichting.lijnnummer}/lijnkleuren`,
             { signal }
           );

@@ -1936,6 +1936,16 @@
     await browser.storage.local.remove([customId]);
     await browser.storage.local.set({ images: imagesMetaData });
   }
+  async function getBase64FromResponse(response) {
+    let blob = await response.blob();
+    let base64 = await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+    return base64;
+  }
   async function getBase64(link) {
     try {
       let response = await fetch(link);
@@ -1945,14 +1955,7 @@
         );
         return null;
       }
-      let blob = await response.blob();
-      let base64 = await new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onloadend = () => resolve(reader.result);
-        reader.onerror = reject;
-        reader.readAsDataURL(blob);
-      });
-      return base64;
+      return getBase64FromResponse(response);
     } catch (error) {
       console.error("Error converting image to base64:", error);
       return null;
@@ -2073,20 +2076,21 @@
       return allThemes["error"];
     }
   }
-  async function getSharedTheme(shareId) {
-    let themes = await getAllCustomThemes();
-    for (let theme of Object.values(themes)) {
-      console.log(theme.shareId);
-      if (theme.shareId === shareId) {
-        console.log("returing " + shareId);
+  async function getSharedThemeId(shareId) {
+    const cache = await loadThemeShareCache();
+    for (let [theme, themeShareId] of Object.entries(cache)) {
+      if (themeShareId === shareId) {
         return theme;
       }
     }
     return null;
   }
-  async function getCustomTheme(id) {
-    let themes = await getAllCustomThemes();
-    return themes[id];
+  async function getSharedTheme(shareId) {
+    const id = await getSharedThemeId(shareId);
+    if (!id) {
+      return null;
+    }
+    return await getTheme(id);
   }
   async function getAllCustomThemes() {
     const result = await browser.storage.local.get("customThemes");
@@ -2119,22 +2123,37 @@
     await setSettingsData(data);
     await browser.storage.local.set({ customThemes });
   }
+  function getContentDispositionFileName(headerValue) {
+    if (!headerValue) {
+      return null;
+    }
+    const match = [...headerValue.matchAll(/filename="(.*)"/)];
+    if (match && match[0] && match[0][0]) {
+      return match[0][0];
+    }
+    return null;
+  }
   async function installTheme(shareId) {
-    const resp = await fetch("https://theme.smpp.be/api/" + shareId);
+    const resp = await fetch("https://theme.smpp.be/" + shareId, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
     const json = await resp.json();
     const theme = {
       displayName: json.name,
-      cssProperties: json.css,
-      shareId
+      cssProperties: json.css
     };
     let id = await saveCustomTheme(theme);
+    await updateThemeShareCache(id, shareId);
     const settingsData = await getSettingsData();
     settingsData.appearance.theme = id;
     await setSettingsData(settingsData);
     if (json.img_url) {
-      const base64 = await getBase64(
-        "https://theme.smpp.be/api/" + shareId + "/image"
-      );
+      const resp2 = await fetch(json.img_url);
+      const filename = getContentDispositionFileName(resp2.headers.get("Content-Disposition")) ?? "importedFile.webp";
+      const base64 = await getBase64FromResponse(resp2);
       if (base64 === null) {
         throw new Error(
           "Failed to fetch img_url returned by the server while trying to create base64."
@@ -2143,7 +2162,7 @@
       const image = {
         metaData: {
           type: "file",
-          link: "ImportedFile.png"
+          link: filename
         },
         imageData: base64
       };
@@ -2162,26 +2181,29 @@
   function shareUrlFromShareId(id) {
     return "https://theme.smpp.be/" + id;
   }
-  var defaultThemeShareIdCache = {};
+  async function loadThemeShareCache() {
+    return await browser.storage.local.get("themeShareCache");
+  }
   async function purgeThemeShareCache(themeId) {
-    if (defaultThemeShareIdCache[themeId] != void 0) {
-      delete defaultThemeShareIdCache[themeId];
-      return;
-    }
-    const theme = await getCustomTheme(themeId);
-    if (theme && theme.shareId !== null) {
-      theme.shareId = null;
-      await saveCustomTheme(theme, themeId);
-    }
+    const data = await loadThemeShareCache();
+    delete data[themeId];
+    await browser.storage.local.set({ themeShareCache: data });
+  }
+  async function getCachedShareId(themeId) {
+    const data = await loadThemeShareCache();
+    return data[themeId];
+  }
+  async function updateThemeShareCache(themeId, shareId) {
+    const data = await loadThemeShareCache();
+    data[themeId] = shareId;
+    await browser.storage.local.set({ themeShareCache: data });
   }
   async function shareTheme(id) {
-    if (defaultThemeShareIdCache[id] != void 0) {
-      return shareUrlFromShareId(defaultThemeShareIdCache[id]);
+    const cachedShareId = await getCachedShareId(id);
+    if (cachedShareId) {
+      return shareUrlFromShareId(cachedShareId);
     }
     let theme = await getTheme(id);
-    if (theme.shareId != null) {
-      return shareUrlFromShareId(theme.shareId);
-    }
     let image = await getImage(id);
     let hash = null;
     let imageData = null;
@@ -2200,7 +2222,7 @@
       css: theme.cssProperties,
       img_upload_chksum: hash
     };
-    const resp = await fetch("https://theme.smpp.be/api", {
+    const resp = await fetch("https://theme.smpp.be", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -2208,15 +2230,9 @@
       body: JSON.stringify(apiTheme)
     });
     const themeInfo = await resp.json();
-    let isCustom = Object.keys(getAllCustomThemes()).includes(id);
-    if (isCustom) {
-      theme.shareId = themeInfo.id;
-      saveCustomTheme(theme, id);
-    } else {
-      defaultThemeShareIdCache[id] = themeInfo.id;
-    }
+    await updateThemeShareCache(id, themeInfo.id);
     if (themeInfo.needs_img && hash && imageData) {
-      await fetch("https://theme.smpp.be/api/" + themeInfo.id + "/image", {
+      await fetch("https://theme.smpp.be/" + themeInfo.id + "/image", {
         method: "POST",
         headers: {
           Authorization: "Bearer " + themeInfo.edit_key

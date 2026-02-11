@@ -45,12 +45,11 @@ import {
   type Settings,
 } from "../settings/main-settings.js";
 import { loadQuickSettings } from "../settings/quick-settings.js";
-import { applyAppearance, isFirefox } from "../main.js";
+import { isFirefox } from "../main.js";
 import { createHoverTooltip, createTextInput } from "./ui.js";
 import { isValidImage, Toast } from "../../fixes-utils/utils.js";
 import { recreateGlobalChat } from "../globalchat.js";
 import { setBackground } from "./background-image.js";
-import { getImage } from "../../background-scripts/data-background-script.js";
 
 export let currentThemeName: string;
 export let currentTheme: Theme;
@@ -67,14 +66,13 @@ export type ThemeCategories = {
 export type Theme = {
   displayName: string;
   cssProperties: { [key: string]: string };
-  shareId: ShareId | null;
 };
 
 export type Themes = {
   [key: string]: Theme;
 };
 
-export async function getTheme(name: string): Promise<Theme> {
+export async function getTheme(name: ThemeId): Promise<Theme> {
   let theme = (await browser.runtime.sendMessage({
     action: "getTheme",
     name: name,
@@ -82,7 +80,7 @@ export async function getTheme(name: string): Promise<Theme> {
   return theme;
 }
 
-export async function setTheme(themeName: string) {
+export async function setTheme(themeName: ThemeId) {
   const style = document.documentElement.style;
   currentThemeName = themeName;
   currentTheme = await getTheme(themeName);
@@ -124,7 +122,6 @@ export async function exampleSaveCustomTheme() {
       "--darken-background": "rgba(215, 215, 215, 0.40)",
       "--color-splashtext": "#120500",
     },
-    shareId: null,
   };
   let id = await browser.runtime.sendMessage({
     action: "saveCustomTheme",
@@ -187,7 +184,7 @@ class ColorCursor {
   }
 
   // Overwrite this if needed
-  onDrag() {}
+  onDrag() { }
 
   updateCursorPosition() {
     this.element.style.left = `${this.xPos}%`;
@@ -361,7 +358,7 @@ export class ColorPicker {
     return this.element;
   }
 
-  async onChange() {}
+  async onChange() { }
 }
 
 class ThemeSharingTile {
@@ -412,15 +409,15 @@ export class Tile {
     return this.element;
   }
 
-  async updateImage(currentTheme: string, forceReload = false) {}
+  async updateImage(currentTheme: string, forceReload = false) { }
 
   // Overide this in the implementation
-  updateSelection() {}
+  updateSelection() { }
   // Overide in de implementation
-  async onClick(e: MouseEvent) {}
+  async onClick(e: MouseEvent) { }
 
   // Overide this in the implementation
-  async createContent() {}
+  async createContent() { }
 }
 
 export class ThemeTile extends Tile {
@@ -842,13 +839,13 @@ export class ThemeTile extends Tile {
   }
 
   // Overide in de implementation
-  async onFavoriteToggle() {}
+  async onFavoriteToggle() { }
 
   // Overide in de implementation
-  async onShare() {}
+  async onShare() { }
 
   // Overide in de implementation
-  async onDuplicate(newThemeName: string) {}
+  async onDuplicate(newThemeName: string) { }
 }
 
 export async function updateTheme(name: string) {
@@ -1375,7 +1372,7 @@ function convertColorPalette(vibrantPalette: Palette) {
 
 export class CustomThemeCreator extends BaseWindow {
   theme: Theme;
-  name: string;
+  name: ThemeId;
   editableValues: string[];
   colorPreviews: {
     [key: string]: HTMLDivElement;
@@ -1448,7 +1445,7 @@ export class CustomThemeCreator extends BaseWindow {
     return propertyNames[name];
   }
 
-  constructor(theme: Theme, name: string) {
+  constructor(theme: Theme, name: ThemeId) {
     super("customThemeCreator", true);
     this.theme = theme;
     this.name = name;
@@ -1512,7 +1509,11 @@ export class CustomThemeCreator extends BaseWindow {
   }
 
   async saveThemeData() {
-    this.theme.shareId = null;
+    await browser.runtime.sendMessage({
+      action: "markThemeAsModified",
+      name: this.name,
+    });
+
     this.colorPreviews.forEach((preview) => {
       let colorPreview = Object.values(preview)[0];
       if (!colorPreview) return;
@@ -1721,9 +1722,12 @@ export class CustomThemeCreator extends BaseWindow {
         "--darken-background": darkenColor.toHex(),
         "--color-homepage-sidebars-bg": darkenColor.alpha(0.1).toHex(),
         "--color-splashtext": textcolor.toHex(),
-      },
-      shareId: null,
+      }
     };
+    await browser.runtime.sendMessage({
+      action: "markThemeAsModified",
+      name: this.name,
+    });
     await browser.runtime.sendMessage({
       action: "saveCustomTheme",
       data: this.theme,
@@ -1763,7 +1767,7 @@ export class CustomThemeCreator extends BaseWindow {
         return { input, label };
       }
 
-      updateLogo(element: HTMLLabelElement, state: boolean) {}
+      updateLogo(element: HTMLLabelElement, state: boolean) { }
 
       load() {
         this.updateLogo(this.label, this.element.checked);
