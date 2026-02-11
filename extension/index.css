@@ -3547,6 +3547,12 @@ button.open-theme-editor-button:hover {
 .enableAnimations .compact-theme-options .compact-theme-option {
   animation: theme-option-render 0.5s cubic-bezier(0.33, 1.31, 0.65, 0.98);
 }
+.error-theme-sharing.share-dialog-content .link-output {
+  color: var(--color-red) !important;
+}
+.error-theme-sharing.share-dialog-content .copy-link-button svg {
+  stroke: var(--color-red) !important;
+}
 .share-dialog-content {
   padding: 1.5rem;
   display: flex;

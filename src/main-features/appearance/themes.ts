@@ -32,6 +32,7 @@ import {
   wandSvg,
   brokenHeartSvg,
   shareSvg,
+  errorSvg,
 } from "../../fixes-utils/svgs.js";
 import {
   getImageURL,
@@ -763,6 +764,7 @@ export class ThemeTile extends Tile {
       let subTitle = document.createElement("h2");
       subTitle.innerText = "Share theme:";
       linkOutput.innerText = "Loading...";
+      linkOutput.style.pointerEvents = "none";
       let copyContainer = document.createElement("div");
       copyContainer.classList.add("copy-container");
 
@@ -844,11 +846,16 @@ export class ThemeTile extends Tile {
 
     if (resp.error) {
       console.error("Failed to share theme", resp.error);
+      linkOutput.innerText = "Failed to share theme";
+      shareDialog.element.classList.add("error-theme-sharing")
+      copyToClipboardButton.innerHTML = errorSvg;
+      copyToClipboardButton.style.pointerEvents = "none";
       new Toast("Failed to share theme", "error").render();
     } else {
       shareUrl = resp.shareUrl; // Update the URL variable
       console.log(linkOutput);
       linkOutput.innerText = (resp.shareUrl as string).slice(0, 32) + "…";
+      linkOutput.style.pointerEvents = "all";
       linkOutput.addEventListener("click", copyToClipboard);
       copyToClipboardButton.innerHTML = copySvg;
       new Toast("Theme uploaded", "succes").render();
@@ -1975,6 +1982,6 @@ export class CustomThemeCreator extends Dialog {
     await updateTheme("default");
     await settingsWindow.loadPage(true);
     await loadQuickSettings();
-    this.hide();
+    this.hide(true);
   }
 }
