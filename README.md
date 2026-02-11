@@ -50,7 +50,7 @@ Gebruik Bun en Biome zodat formatting en linting consistent blijven.
 1. Installeer [Bun](https://bun.sh/docs/installation).
 2. Installeer dependencies:
    - `bun install`
-3. Build de extesie:
+3. Build de extensie:
    - `bun run build`
 4. Laad de extensie als "Load unpacked" van `extension/` in Chrome.
 

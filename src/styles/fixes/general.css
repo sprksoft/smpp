@@ -1797,15 +1797,28 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   height: 25px;
   color: var(--color-red);
 }
+.window-wrapper:has(.base-window.hidden) {
+  display: none !important;
+}
+.window-wrapper {
+  position: fixed;
+  width: 100% !important;
+  height: 100% !important;
+  left: 0 !important;
+  top: 0 !important;
+  z-index: 1000 !important;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
 
 .base-window.fullscreen-window {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  left: 0;
-  top: 0;
-  border-radius: 2px;
-  z-index: 1000;
+  width: 100% !important;
+  height: 100% !important;
+  left: 0 !important;
+  top: 0 !important;
+  border-radius: 2px !important;
+  z-index: 1000 !important;
 }
 
 .base-window.fullscreen-window .contract-icon {
@@ -1848,18 +1861,14 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   border-radius: 2rem;
   width: 90%;
   height: 85%;
-  left: 5%;
-  top: 7.5%;
   transform: scale(0);
   transform-origin: center;
   animation: popIn 0s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
 }
 
 .base-dialog {
-  width: 50%;
-  height: 30%;
-  left: 25%;
-  top: 35%;
+  width: fit-content;
+  height: fit-content;
 }
 
 @keyframes popIn {

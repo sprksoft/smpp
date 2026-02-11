@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { browser, getByPath } from "../../common/utils.js";
+import { browser, getByPath, openURL } from "../../common/utils.js";
 import { apply } from "../main.js";
 import { dmenu } from "./dmenu.js";
 
@@ -100,7 +100,7 @@ export async function dmenuEditConfig(path) {
           openURL("https://www.youtube.com/watch?v=Bz4l9_bzfZM", true);
           return;
         }
-        setSettingByPath(configPath, new Number(cmd));
+        setSettingByPath(configPath, Number(cmd));
       },
       label,
     );

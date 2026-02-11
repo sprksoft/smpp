@@ -399,6 +399,9 @@ export class ThemeTile extends Tile {
   async updateTitle() {
     const theme = await getTheme(this.name);
     this.titleElement.innerText = theme.displayName;
+    if (this.titleElement.innerText.length > 22) {
+      this.titleElement.innerText = theme.displayName.slice(0, 22) + "…";
+    }
   }
 
   async createContent() {
@@ -716,9 +719,24 @@ export class ThemeTile extends Tile {
       const image = document.createElement("img");
       image.classList.add("sharing-image");
 
+      if (await isValidImage(await imageURL.url)) {
+        imageContainer.appendChild(image);
+      }
       image.src = imageURL.url;
-      imageContainer.appendChild(image);
 
+      const displayNameLength = title.innerText.length;
+
+      if (displayNameLength < 20) {
+        title.style.fontSize = "2rem";
+      } else if (displayNameLength < 25) {
+        title.style.fontSize = "1.5rem";
+      } else if (displayNameLength < 30) {
+        title.style.fontSize = "1.2rem";
+      } else {
+        title.style.fontSize = "1.2rem";
+        title.innerText = title.innerText.slice(0, 30) + "…";
+      }
+      imageContainer.appendChild(title);
       tile.appendChild(imageContainer);
 
       const colorPreviewsContainer = document.createElement("div");
@@ -734,7 +752,6 @@ export class ThemeTile extends Tile {
       copyContainer.appendChild(linkOutput);
       copyContainer.appendChild(copyToClipboardButton);
 
-      element.appendChild(title);
       element.appendChild(subTitle);
       tile.appendChild(copyContainer);
       element.appendChild(tile);
@@ -755,7 +772,6 @@ export class ThemeTile extends Tile {
       new Toast("Failed to share theme", "error").render();
     } else {
       shareUrl = resp.shareUrl; // Update the URL variable
-      console.log(linkOutput);
       linkOutput.innerText = `${(resp.shareUrl as string).slice(0, 32)}…`;
       linkOutput.addEventListener("click", copyToClipboard);
       copyToClipboardButton.innerHTML = copySvg;
@@ -1008,6 +1024,7 @@ export class ThemeSelector {
   }
 
   async updateThemeTiles() {
+    if (this.currentCategory === "all") return;
     const themes = (await browser.runtime.sendMessage({
       action: "getThemes",
       categories: [this.currentCategory],
@@ -1283,7 +1300,7 @@ function convertColorPalette(vibrantPalette: Palette) {
   return colordPalette;
 }
 
-export class CustomThemeCreator extends BaseWindow {
+export class CustomThemeCreator extends Dialog {
   theme: Theme;
   name: ThemeId;
   editableValues: string[];
@@ -1816,8 +1833,9 @@ export class CustomThemeCreator extends BaseWindow {
     await this.backgroundImageInput.loadImageData();
   }
 
-  onClosed(): void {
-    document.body.removeChild(this.element);
+  onClosed(realUserIntent: boolean): void {
+    document.body.removeChild(this.wrapper);
+    if (!realUserIntent) return;
     settingsWindow.themeSelector.updateSelectorContent();
     settingsWindow.loadPage();
     loadQuickSettings();

@@ -2235,7 +2235,7 @@ Is it scaring you off?`,
     }
     return object;
   }
-  function openURL2(url, new_window = false) {
+  function openURL(url, new_window = false) {
     if (new_window) {
       const a5 = document.createElement("a");
       a5.href = url;
@@ -2501,17 +2501,20 @@ Is it scaring you off?`,
     id;
     hidden;
     element;
+    wrapper;
     _outsideClickHandler = null;
     _keydownHandler = null;
     constructor(id, hidden = true) {
       this.id = id;
       this.hidden = hidden;
       this.element = document.createElement("div");
+      this.wrapper = document.createElement("div");
     }
     async create() {
       this.element = await this.renderContent();
       this.element.id = this.id;
       this.element.classList.add("base-window");
+      this.wrapper.classList.add("window-wrapper");
       if (this.hidden) this.element.classList.add("hidden");
       const controls = document.createElement("div");
       controls.classList.add("window-controls");
@@ -2526,13 +2529,14 @@ Is it scaring you off?`,
       controls.appendChild(fullscreenBtn);
       controls.appendChild(closeBtn);
       this.element.appendChild(controls);
-      document.body.appendChild(this.element);
+      this.wrapper.appendChild(this.element);
+      document.body.appendChild(this.wrapper);
       fullscreenBtn.addEventListener("click", () => {
         this.onScreenSizeUpdate?.();
         this.element.classList.toggle("fullscreen-window");
         void this.element.offsetWidth;
       });
-      closeBtn.addEventListener("click", () => this.hide());
+      closeBtn.addEventListener("click", () => this.hide(true));
     }
     // Override this in subclass
     async renderContent() {
@@ -2549,12 +2553,29 @@ Is it scaring you off?`,
       const isKeyboardEvent = triggerEvent && (typeof KeyboardEvent !== "undefined" ? triggerEvent instanceof KeyboardEvent : String(triggerEvent.type).startsWith("key"));
       const openEventTarget = isKeyboardEvent ? null : triggerEvent?.target ?? null;
       this._outsideClickHandler = (e5) => {
-        if (e5.target.closest(".base-dialog")?.classList.contains("base-dialog") || e5.target.classList?.contains("base-dialog") || openEventTarget && e5.target instanceof Node && (e5.target === openEventTarget || openEventTarget instanceof Node && openEventTarget.contains(e5.target))) {
+        const clickedElement = e5.target;
+        const isInsideDialog = this.element.contains(clickedElement);
+        if (isInsideDialog) {
           return;
         }
-        if (e5.target instanceof Node && !this.element.contains(e5.target)) {
-          this.hide();
+        const isInsideBaseDialog = clickedElement.closest(".base-dialog") !== null;
+        if (isInsideBaseDialog) {
+          return;
         }
+        const windowWrapper = clickedElement.closest(".window-wrapper");
+        const isInsideDialogWrapper = windowWrapper?.querySelector(".base-dialog") !== null;
+        const isOwnWrapper = clickedElement == this.wrapper;
+        if (isInsideDialogWrapper && !isOwnWrapper) {
+          return;
+        }
+        if (openEventTarget && clickedElement instanceof Node) {
+          const isOpenTrigger = clickedElement === openEventTarget;
+          const isInsideOpenTrigger = openEventTarget instanceof Node && openEventTarget.contains(clickedElement);
+          if (isOpenTrigger || isInsideOpenTrigger) {
+            return;
+          }
+        }
+        this.hide();
       };
       document.addEventListener("mousedown", this._outsideClickHandler, {
         capture: true
@@ -2562,7 +2583,7 @@ Is it scaring you off?`,
       if (!this._keydownHandler) {
         this._keydownHandler = (e5) => {
           if (e5.key === "Escape") {
-            this.hide();
+            this.hide(true);
           }
         };
         document.addEventListener("keydown", this._keydownHandler);
@@ -2577,7 +2598,7 @@ Is it scaring you off?`,
       }
       this.onOpened();
     }
-    hide() {
+    hide(realUserIntent = false) {
       if (this.hidden) return;
       this.hidden = true;
       this.element.classList.add("hidden");
@@ -2591,7 +2612,7 @@ Is it scaring you off?`,
         document.removeEventListener("keydown", this._keydownHandler);
         this._keydownHandler = null;
       }
-      this.onClosed?.();
+      this.onClosed?.(realUserIntent);
     }
     remove() {
       this.element?.remove();
@@ -2605,7 +2626,8 @@ Is it scaring you off?`,
     async create() {
       this.element = await this.renderContent();
       this.element.id = this.id;
-      this.element.classList.add("base-dialog", "base-window");
+      this.element.classList.add("base-window", "base-dialog");
+      this.wrapper.classList.add("window-wrapper");
       if (this.hidden) this.element.classList.add("hidden");
       const controls = document.createElement("div");
       controls.classList.add("window-controls");
@@ -2615,8 +2637,9 @@ Is it scaring you off?`,
       closeBtn.innerHTML = closeIconSVG;
       controls.appendChild(closeBtn);
       this.element.appendChild(controls);
-      document.body.appendChild(this.element);
-      closeBtn.addEventListener("click", () => this.hide());
+      this.wrapper.appendChild(this.element);
+      document.body.appendChild(this.wrapper);
+      closeBtn.addEventListener("click", () => this.hide(true));
     }
   };
 
@@ -5542,6 +5565,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       const text = document.createElement("div");
       text.classList.add("compact-theme-option-text");
       text.innerText = this.currentTheme.displayName;
+      if (text.innerText.length > 22) {
+        text.innerText = this.currentTheme.displayName.slice(0, 22) + "\u2026";
+      }
       return text;
     }
     render() {
@@ -6222,6 +6248,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     async updateTitle() {
       const theme = await getTheme(this.name);
       this.titleElement.innerText = theme.displayName;
+      if (this.titleElement.innerText.length > 22) {
+        this.titleElement.innerText = theme.displayName.slice(0, 22) + "\u2026";
+      }
     }
     async createContent() {
       this.element.appendChild(this.createImageContainer());
@@ -6492,8 +6521,22 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         );
         const image = document.createElement("img");
         image.classList.add("sharing-image");
+        if (await isValidImage(await imageURL.url)) {
+          imageContainer.appendChild(image);
+        }
         image.src = imageURL.url;
-        imageContainer.appendChild(image);
+        const displayNameLength = title.innerText.length;
+        if (displayNameLength < 20) {
+          title.style.fontSize = "2rem";
+        } else if (displayNameLength < 25) {
+          title.style.fontSize = "1.5rem";
+        } else if (displayNameLength < 30) {
+          title.style.fontSize = "1.2rem";
+        } else {
+          title.style.fontSize = "1.2rem";
+          title.innerText = title.innerText.slice(0, 30) + "\u2026";
+        }
+        imageContainer.appendChild(title);
         tile.appendChild(imageContainer);
         const colorPreviewsContainer = document.createElement("div");
         colorPreviewsContainer.classList.add("sharing-color-previews");
@@ -6506,7 +6549,6 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         tile.appendChild(colorPreviewsContainer);
         copyContainer.appendChild(linkOutput);
         copyContainer.appendChild(copyToClipboardButton);
-        element.appendChild(title);
         element.appendChild(subTitle);
         tile.appendChild(copyContainer);
         element.appendChild(tile);
@@ -6524,7 +6566,6 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         new Toast("Failed to share theme", "error").render();
       } else {
         shareUrl = resp.shareUrl;
-        console.log(linkOutput);
         linkOutput.innerText = `${resp.shareUrl.slice(0, 32)}\u2026`;
         linkOutput.addEventListener("click", copyToClipboard);
         copyToClipboardButton.innerHTML = copySvg;
@@ -6732,6 +6773,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       this.updateImages();
     }
     async updateThemeTiles() {
+      if (this.currentCategory === "all") return;
       const themes2 = await browser.runtime.sendMessage({
         action: "getThemes",
         categories: [this.currentCategory],
@@ -6947,7 +6989,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     };
     return colordPalette;
   }
-  var CustomThemeCreator = class extends BaseWindow {
+  var CustomThemeCreator = class extends Dialog {
     theme;
     name;
     editableValues;
@@ -7400,8 +7442,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       this.updateColorPreviews();
       await this.backgroundImageInput.loadImageData();
     }
-    onClosed() {
-      document.body.removeChild(this.element);
+    onClosed(realUserIntent) {
+      document.body.removeChild(this.wrapper);
+      if (!realUserIntent) return;
       settingsWindow.themeSelector.updateSelectorContent();
       settingsWindow.loadPage();
       loadQuickSettings();
@@ -8444,6 +8487,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   }
   async function openSettingsWindow(event) {
     settingsWindow.show(event);
+    settingsWindow.themeSelector.updateThemeTiles();
     const updateHeight = () => {
       settingsWindow.themeSelector.updateSizes();
       settingsWindow.themeSelector.updateContentHeight();
@@ -9543,7 +9587,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             openURL("https://www.youtube.com/watch?v=Bz4l9_bzfZM", true);
             return;
           }
-          setSettingByPath(configPath, new Number(cmd));
+          setSettingByPath(configPath, Number(cmd));
         },
         label
       );
@@ -9587,9 +9631,10 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     return cmd_list;
   }
   function add_quick(name2, url) {
-    const quick = { name: name2.toLowerCase(), url };
+    const normalizedName = name2.toLowerCase();
+    const quick = { name: normalizedName, url };
     for (let i5 = 0; i5 < quicks.length; i5++) {
-      if (quicks[i5].name === name2) {
+      if (quicks[i5].name === normalizedName) {
         quicks[i5] = quick;
         quick_save();
         return;
@@ -9767,10 +9812,10 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             remove_quick_interactive();
             return;
           case "discord":
-            openURL2("https://discord.com/invite/qCHZYepDqZ");
+            openURL("https://discord.com/invite/qCHZYepDqZ");
             return;
           case "home":
-            openURL2("/");
+            openURL("/");
             return;
           case "clearsettings":
             clearAllData();
@@ -9843,23 +9888,23 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         for (let i5 = 0; i5 < quicks.length; i5++) {
           const quick = quicks[i5];
           if (quick.name === cmd) {
-            openURL2(quick.url, true);
+            openURL(quick.url, true);
             return;
           }
         }
         for (let i5 = 0; i5 < links.length; i5++) {
           if (links[i5].value === cmd) {
-            openURL2(links[i5].url, true);
+            openURL(links[i5].url, true);
           }
         }
         for (let i5 = 0; i5 < goto_items.length; i5++) {
           if (goto_items[i5].value === cmd) {
-            openURL2(goto_items[i5].url);
+            openURL(goto_items[i5].url);
           }
         }
         for (let i5 = 0; i5 < vakken.length; i5++) {
           if (vakken[i5].value === cmd) {
-            openURL2(vakken[i5].url);
+            openURL(vakken[i5].url);
           }
         }
       },
@@ -13223,9 +13268,7 @@ ${code}`;
         iconElement.href = "https://static4.smart-school.net/smsc/svg/favicon/favicon.svg";
         break;
       case "smpp":
-        iconElement.href = liteMode ? "https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/smpp_lite_logo128.png" : "https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/icon128.png";
-        break;
-      default:
+        iconElement.href = getExtensionImage("icons/smpp/128.png");
         break;
     }
   }

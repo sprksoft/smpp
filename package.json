@@ -15,7 +15,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "build": "esbuild src/index.ts src/background-scripts/index.ts --bundle --outdir=./extension '--external:/includes/*' '--external:/smsc/*'",
+    "build": "esbuild src/index.ts src/background-scripts/index.ts --bundle --outdir=./extension \"--external:/includes/*\" \"--external:/smsc/*\"",
     "lint": "biome lint .",
     "lint:fix": "biome lint . --write",
     "format": "biome format . --write",

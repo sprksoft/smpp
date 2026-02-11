@@ -1297,6 +1297,7 @@ export async function createSettingsWindow() {
 
 export async function openSettingsWindow(event: MouseEvent | KeyboardEvent | null) {
   settingsWindow.show(event);
+  settingsWindow.themeSelector.updateThemeTiles();
 
   const updateHeight = () => {
     settingsWindow.themeSelector.updateSizes();

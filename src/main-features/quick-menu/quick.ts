@@ -27,9 +27,10 @@ function quick_cmd_list() {
 }
 
 function add_quick(name, url) {
-  const quick = { name: name.toLowerCase(), url: url };
+  const normalizedName = name.toLowerCase();
+  const quick = { name: normalizedName, url: url };
   for (let i = 0; i < quicks.length; i++) {
-    if (quicks[i].name === name) {
+    if (quicks[i].name === normalizedName) {
       quicks[i] = quick;
       quick_save();
       return;
