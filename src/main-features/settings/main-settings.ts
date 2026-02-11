@@ -1531,6 +1531,7 @@ export async function openSettingsWindow(
   event: MouseEvent | KeyboardEvent | null
 ) {
   settingsWindow.show(event);
+  settingsWindow.themeSelector.updateThemeTiles();
 
   let updateHeight = () => {
     settingsWindow.themeSelector.updateSizes();

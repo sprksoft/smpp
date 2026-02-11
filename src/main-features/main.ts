@@ -200,11 +200,7 @@ function updateTabLogo(logo: Settings["appearance"]["tabLogo"]) {
         "https://static4.smart-school.net/smsc/svg/favicon/favicon.svg";
       break;
     case "smpp":
-      iconElement.href = liteMode
-        ? "https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/smpp_lite_logo128.png"
-        : "https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/icon128.png";
-      break;
-    default:
+      iconElement.href = getExtensionImage("icons/smpp/128.png");
       break;
   }
 }

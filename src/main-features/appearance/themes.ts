@@ -453,6 +453,9 @@ export class ThemeTile extends Tile {
   async updateTitle() {
     let theme = await getTheme(this.name);
     this.titleElement.innerText = theme.displayName;
+    if (this.titleElement.innerText.length > 22) {
+      this.titleElement.innerText = theme.displayName.slice(0, 22) + "…";
+    }
   }
 
   async createContent() {
@@ -719,27 +722,6 @@ export class ThemeTile extends Tile {
     let shareUrl: string | null = null; // Store the URL instead
 
     shareDialog.renderContent = async () => {
-      let element = document.createElement("div");
-      element.classList.add("share-dialog-content");
-      let title = document.createElement("h1");
-      title.innerText = (await getTheme(this.name)).displayName;
-      let subTitle = document.createElement("h2");
-      subTitle.innerText = "Theme sharing";
-      linkOutput.innerText = "Loading...";
-      let copyContainer = document.createElement("div");
-      copyContainer.classList.add("copy-container");
-
-      let tile = document.createElement("div");
-      tile.classList.add("sharing-tile");
-
-      let theme = await getTheme(this.name);
-      Object.keys(theme.cssProperties).forEach((key) => {
-        element.style.setProperty(
-          `${key}-local`,
-          theme.cssProperties[key] as string
-        );
-      });
-
       function getEditableValues(cssProperties: Theme["cssProperties"]) {
         let nonEditableValues = [
           "--color-homepage-sidebars-bg",
@@ -774,6 +756,27 @@ export class ThemeTile extends Tile {
         return colorPreviews;
       }
 
+      let element = document.createElement("div");
+      element.classList.add("share-dialog-content");
+      let title = document.createElement("h1");
+      title.innerText = (await getTheme(this.name)).displayName;
+      let subTitle = document.createElement("h2");
+      subTitle.innerText = "Share theme:";
+      linkOutput.innerText = "Loading...";
+      let copyContainer = document.createElement("div");
+      copyContainer.classList.add("copy-container");
+
+      let tile = document.createElement("div");
+      tile.classList.add("sharing-tile");
+
+      let theme = await getTheme(this.name);
+      Object.keys(theme.cssProperties).forEach((key) => {
+        element.style.setProperty(
+          `${key}-local`,
+          theme.cssProperties[key] as string
+        );
+      });
+
       let imageContainer = document.createElement("div");
       imageContainer.classList.add("sharing-image-container");
 
@@ -789,13 +792,30 @@ export class ThemeTile extends Tile {
       let image = document.createElement("img");
       image.classList.add("sharing-image");
 
+      if (await isValidImage(await imageURL.url)) {
+        imageContainer.appendChild(image);
+      }
       image.src = imageURL.url;
-      imageContainer.appendChild(image);
 
+      const displayNameLength = title.innerText.length;
+
+      if (displayNameLength < 20) {
+        title.style.fontSize = "2rem";
+      } else if (displayNameLength < 25) {
+        title.style.fontSize = "1.5rem";
+      } else if (displayNameLength < 30) {
+        title.style.fontSize = "1.2rem";
+      } else {
+        title.style.fontSize = "1.2rem";
+        title.innerText = title.innerText.slice(0, 30) + "…";
+      }
+      console.log(imageContainer);
+      imageContainer.appendChild(title);
+      console.log(imageContainer);
       tile.appendChild(imageContainer);
 
       let colorPreviewsContainer = document.createElement("div");
-      colorPreviewsContainer.classList.add("sharing-color-previews")
+      colorPreviewsContainer.classList.add("sharing-color-previews");
       Object.values(
         generateColorPreviews(getEditableValues(theme.cssProperties))
       ).forEach((preview) => {
@@ -807,7 +827,6 @@ export class ThemeTile extends Tile {
       copyContainer.appendChild(linkOutput);
       copyContainer.appendChild(copyToClipboardButton);
 
-      element.appendChild(title);
       element.appendChild(subTitle);
       tile.appendChild(copyContainer);
       element.appendChild(tile);
@@ -1088,6 +1107,7 @@ export class ThemeSelector {
   }
 
   async updateThemeTiles() {
+    if (this.currentCategory == "all") return;
     let themes = (await browser.runtime.sendMessage({
       action: "getThemes",
       categories: [this.currentCategory],
@@ -1370,7 +1390,7 @@ function convertColorPalette(vibrantPalette: Palette) {
   return colordPalette;
 }
 
-export class CustomThemeCreator extends BaseWindow {
+export class CustomThemeCreator extends Dialog {
   theme: Theme;
   name: ThemeId;
   editableValues: string[];
@@ -1936,8 +1956,9 @@ export class CustomThemeCreator extends BaseWindow {
     await this.backgroundImageInput.loadImageData();
   }
 
-  onClosed(): void {
-    document.body.removeChild(this.element);
+  onClosed(realUserIntent: boolean): void {
+    document.body.removeChild(this.wrapper);
+    if (!realUserIntent) return;
     settingsWindow.themeSelector.updateSelectorContent();
     settingsWindow.loadPage();
     loadQuickSettings();

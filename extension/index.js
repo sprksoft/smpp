@@ -2497,17 +2497,20 @@ Is it scaring you off?`,
     id;
     hidden;
     element;
+    wrapper;
     _outsideClickHandler = null;
     _keydownHandler = null;
     constructor(id, hidden = true) {
       this.id = id;
       this.hidden = hidden;
       this.element = document.createElement("div");
+      this.wrapper = document.createElement("div");
     }
     async create() {
       this.element = await this.renderContent();
       this.element.id = this.id;
       this.element.classList.add("base-window");
+      this.wrapper.classList.add("window-wrapper");
       if (this.hidden) this.element.classList.add("hidden");
       const controls = document.createElement("div");
       controls.classList.add("window-controls");
@@ -2522,13 +2525,14 @@ Is it scaring you off?`,
       controls.appendChild(fullscreenBtn);
       controls.appendChild(closeBtn);
       this.element.appendChild(controls);
-      document.body.appendChild(this.element);
+      this.wrapper.appendChild(this.element);
+      document.body.appendChild(this.wrapper);
       fullscreenBtn.addEventListener("click", () => {
         this.onScreenSizeUpdate?.();
         this.element.classList.toggle("fullscreen-window");
         void this.element.offsetWidth;
       });
-      closeBtn.addEventListener("click", () => this.hide());
+      closeBtn.addEventListener("click", () => this.hide(true));
     }
     // Override this in subclass
     async renderContent() {
@@ -2545,12 +2549,29 @@ Is it scaring you off?`,
       const isKeyboardEvent = triggerEvent && (typeof KeyboardEvent !== "undefined" ? triggerEvent instanceof KeyboardEvent : String(triggerEvent.type).startsWith("key"));
       const openEventTarget = isKeyboardEvent ? null : triggerEvent?.target ?? null;
       this._outsideClickHandler = (e5) => {
-        if (e5.target.closest(".base-dialog")?.classList.contains("base-dialog") || e5.target.classList?.contains("base-dialog") || openEventTarget && e5.target instanceof Node && (e5.target === openEventTarget || openEventTarget instanceof Node && openEventTarget.contains(e5.target))) {
+        const clickedElement = e5.target;
+        const isInsideDialog = this.element.contains(clickedElement);
+        if (isInsideDialog) {
           return;
         }
-        if (e5.target instanceof Node && !this.element.contains(e5.target)) {
-          this.hide();
+        const isInsideBaseDialog = clickedElement.closest(".base-dialog") !== null;
+        if (isInsideBaseDialog) {
+          return;
         }
+        const windowWrapper = clickedElement.closest(".window-wrapper");
+        const isInsideDialogWrapper = windowWrapper?.querySelector(".base-dialog") !== null;
+        const isOwnWrapper = clickedElement == this.wrapper;
+        if (isInsideDialogWrapper && !isOwnWrapper) {
+          return;
+        }
+        if (openEventTarget && clickedElement instanceof Node) {
+          const isOpenTrigger = clickedElement === openEventTarget;
+          const isInsideOpenTrigger = openEventTarget instanceof Node && openEventTarget.contains(clickedElement);
+          if (isOpenTrigger || isInsideOpenTrigger) {
+            return;
+          }
+        }
+        this.hide();
       };
       document.addEventListener("mousedown", this._outsideClickHandler, {
         capture: true
@@ -2558,7 +2579,7 @@ Is it scaring you off?`,
       if (!this._keydownHandler) {
         this._keydownHandler = (e5) => {
           if (e5.key === "Escape") {
-            this.hide();
+            this.hide(true);
           }
         };
         document.addEventListener("keydown", this._keydownHandler);
@@ -2573,7 +2594,7 @@ Is it scaring you off?`,
       }
       this.onOpened();
     }
-    hide() {
+    hide(realUserIntent = false) {
       if (this.hidden) return;
       this.hidden = true;
       this.element.classList.add("hidden");
@@ -2587,7 +2608,7 @@ Is it scaring you off?`,
         document.removeEventListener("keydown", this._keydownHandler);
         this._keydownHandler = null;
       }
-      this.onClosed?.();
+      this.onClosed?.(realUserIntent);
     }
     remove() {
       this.element?.remove();
@@ -2601,7 +2622,8 @@ Is it scaring you off?`,
     async create() {
       this.element = await this.renderContent();
       this.element.id = this.id;
-      this.element.classList.add("base-dialog", "base-window");
+      this.element.classList.add("base-window", "base-dialog");
+      this.wrapper.classList.add("window-wrapper");
       if (this.hidden) this.element.classList.add("hidden");
       const controls = document.createElement("div");
       controls.classList.add("window-controls");
@@ -2611,8 +2633,9 @@ Is it scaring you off?`,
       closeBtn.innerHTML = closeIconSVG;
       controls.appendChild(closeBtn);
       this.element.appendChild(controls);
-      document.body.appendChild(this.element);
-      closeBtn.addEventListener("click", () => this.hide());
+      this.wrapper.appendChild(this.element);
+      document.body.appendChild(this.wrapper);
+      closeBtn.addEventListener("click", () => this.hide(true));
     }
   };
 
@@ -4968,6 +4991,9 @@ Is it scaring you off?`,
       let text = document.createElement("div");
       text.classList.add("compact-theme-option-text");
       text.innerText = this.currentTheme.displayName;
+      if (text.innerText.length > 22) {
+        text.innerText = this.currentTheme.displayName.slice(0, 22) + "\u2026";
+      }
       return text;
     }
     render() {
@@ -6495,6 +6521,7 @@ Is it scaring you off?`,
   }
   async function openSettingsWindow(event) {
     settingsWindow.show(event);
+    settingsWindow.themeSelector.updateThemeTiles();
     let updateHeight = () => {
       settingsWindow.themeSelector.updateSizes();
       settingsWindow.themeSelector.updateContentHeight();
@@ -7604,6 +7631,9 @@ Is it scaring you off?`,
     async updateTitle() {
       let theme = await getTheme(this.name);
       this.titleElement.innerText = theme.displayName;
+      if (this.titleElement.innerText.length > 22) {
+        this.titleElement.innerText = theme.displayName.slice(0, 22) + "\u2026";
+      }
     }
     async createContent() {
       this.element.appendChild(this.createImageContainer());
@@ -7831,24 +7861,6 @@ Is it scaring you off?`,
       copyToClipboardButton.innerHTML = loadingSpinnerSvg;
       let shareUrl = null;
       shareDialog.renderContent = async () => {
-        let element = document.createElement("div");
-        element.classList.add("share-dialog-content");
-        let title = document.createElement("h1");
-        title.innerText = (await getTheme(this.name)).displayName;
-        let subTitle = document.createElement("h2");
-        subTitle.innerText = "Theme sharing";
-        linkOutput.innerText = "Loading...";
-        let copyContainer = document.createElement("div");
-        copyContainer.classList.add("copy-container");
-        let tile = document.createElement("div");
-        tile.classList.add("sharing-tile");
-        let theme = await getTheme(this.name);
-        Object.keys(theme.cssProperties).forEach((key) => {
-          element.style.setProperty(
-            `${key}-local`,
-            theme.cssProperties[key]
-          );
-        });
         function getEditableValues(cssProperties) {
           let nonEditableValues = [
             "--color-homepage-sidebars-bg",
@@ -7879,6 +7891,24 @@ Is it scaring you off?`,
           });
           return colorPreviews;
         }
+        let element = document.createElement("div");
+        element.classList.add("share-dialog-content");
+        let title = document.createElement("h1");
+        title.innerText = (await getTheme(this.name)).displayName;
+        let subTitle = document.createElement("h2");
+        subTitle.innerText = "Share theme:";
+        linkOutput.innerText = "Loading...";
+        let copyContainer = document.createElement("div");
+        copyContainer.classList.add("copy-container");
+        let tile = document.createElement("div");
+        tile.classList.add("sharing-tile");
+        let theme = await getTheme(this.name);
+        Object.keys(theme.cssProperties).forEach((key) => {
+          element.style.setProperty(
+            `${key}-local`,
+            theme.cssProperties[key]
+          );
+        });
         let imageContainer = document.createElement("div");
         imageContainer.classList.add("sharing-image-container");
         let imageURL = await getImageURL(
@@ -7892,8 +7922,24 @@ Is it scaring you off?`,
         );
         let image = document.createElement("img");
         image.classList.add("sharing-image");
+        if (await isValidImage(await imageURL.url)) {
+          imageContainer.appendChild(image);
+        }
         image.src = imageURL.url;
-        imageContainer.appendChild(image);
+        const displayNameLength = title.innerText.length;
+        if (displayNameLength < 20) {
+          title.style.fontSize = "2rem";
+        } else if (displayNameLength < 25) {
+          title.style.fontSize = "1.5rem";
+        } else if (displayNameLength < 30) {
+          title.style.fontSize = "1.2rem";
+        } else {
+          title.style.fontSize = "1.2rem";
+          title.innerText = title.innerText.slice(0, 30) + "\u2026";
+        }
+        console.log(imageContainer);
+        imageContainer.appendChild(title);
+        console.log(imageContainer);
         tile.appendChild(imageContainer);
         let colorPreviewsContainer = document.createElement("div");
         colorPreviewsContainer.classList.add("sharing-color-previews");
@@ -7906,7 +7952,6 @@ Is it scaring you off?`,
         tile.appendChild(colorPreviewsContainer);
         copyContainer.appendChild(linkOutput);
         copyContainer.appendChild(copyToClipboardButton);
-        element.appendChild(title);
         element.appendChild(subTitle);
         tile.appendChild(copyContainer);
         element.appendChild(tile);
@@ -8135,6 +8180,7 @@ Is it scaring you off?`,
       this.updateImages();
     }
     async updateThemeTiles() {
+      if (this.currentCategory == "all") return;
       let themes2 = await browser.runtime.sendMessage({
         action: "getThemes",
         categories: [this.currentCategory],
@@ -8354,7 +8400,7 @@ Is it scaring you off?`,
     };
     return colordPalette;
   }
-  var CustomThemeCreator = class extends BaseWindow {
+  var CustomThemeCreator = class extends Dialog {
     theme;
     name;
     editableValues;
@@ -8829,8 +8875,9 @@ Is it scaring you off?`,
       this.updateColorPreviews();
       await this.backgroundImageInput.loadImageData();
     }
-    onClosed() {
-      document.body.removeChild(this.element);
+    onClosed(realUserIntent) {
+      document.body.removeChild(this.wrapper);
+      if (!realUserIntent) return;
       settingsWindow.themeSelector.updateSelectorContent();
       settingsWindow.loadPage();
       loadQuickSettings();
@@ -13659,9 +13706,7 @@ ${code}`;
         iconElement.href = "https://static4.smart-school.net/smsc/svg/favicon/favicon.svg";
         break;
       case "smpp":
-        iconElement.href = liteMode ? "https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/smpp_lite_logo128.png" : "https://raw.githubusercontent.com/frickingbird8002/smpp-images/main/icon128.png";
-        break;
-      default:
+        iconElement.href = getExtensionImage("icons/smpp/128.png");
         break;
     }
   }

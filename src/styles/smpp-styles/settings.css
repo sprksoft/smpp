@@ -1294,7 +1294,7 @@ button.remove-custom-theme:hover {
 
 .color-preview-bubble {
   aspect-ratio: 1;
-  width: 3rem;
+  width: 3.5rem;
   border-radius: 100000px;
   background-color: var(--current-color);
   box-shadow: 0px 0px 10px 1px var(--color-shadow);
@@ -1368,7 +1368,8 @@ button.open-theme-editor-button:hover {
 #customThemeCreator {
   display: flex;
   justify-content: center;
-  padding: 1.5rem;
+  padding: 2.5rem;
+  width: 600px;
 }
 
 .preview-image-wrapper {
@@ -1751,23 +1752,31 @@ button.open-theme-editor-button:hover {
 }
 
 .share-dialog-content {
-  padding: 1rem;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow-y: auto !important;
+  width: 400px !important;
 }
 .share-dialog-content h1 {
-  color: var(--color-accent);
+  color: var(--color-accent-local) !important;
+  z-index: 1;
+  background: var(--darken-background-local) !important;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  backdrop-filter: blur(2px);
+  box-shadow: 0px 0px 20px var(--color-shadow) !important;
 }
 
 .share-dialog-content h1,
 .share-dialog-content h2 {
   text-align: center;
-  margin-bottom: 0.5rem !important;
+  margin-bottom: 0rem !important;
 }
 .share-dialog-content h2 {
-  margin-bottom: 1.5rem !important;
+  margin-bottom: 1rem !important;
+  font-size: 1.8rem !important;
 }
 
 .link-output {
@@ -1820,20 +1829,61 @@ button.open-theme-editor-button:hover {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  margin-bottom: 1rem;
 }
 
 .sharing-image-container {
   border-radius: 1rem;
   width: 100%;
-  height: 12.5rem;
+  height: 10rem;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(
+    40deg,
+    color-mix(
+        in srgb,
+        var(--color-base03-local) 70%,
+        var(--color-accent-local) 30%
+      )
+      0%,
+    color-mix(
+        in srgb,
+        var(--color-base03-local) 65%,
+        var(--color-accent-local) 35%
+      )
+      15%,
+    color-mix(
+        in srgb,
+        var(--color-base02-local) 70%,
+        var(--color-accent-local) 30%
+      )
+      45%,
+    color-mix(
+        in srgb,
+        var(--color-base02-local) 73%,
+        var(--color-accent-local) 27%
+      )
+      55%,
+    color-mix(
+        in srgb,
+        var(--color-base02-local) 95%,
+        var(--color-accent-local) 5%
+      )
+      100%
+  );
+  position: relative;
 }
 
 .sharing-image {
+  top: 0;
+  left: 0;
   height: 100%;
   width: 100%;
   object-fit: cover;
   object-position: center;
+  position: absolute;
 }
 .sharing-color-previews {
   display: flex;
@@ -1843,4 +1893,5 @@ button.open-theme-editor-button:hover {
 
 .sharing-color-previews .color-preview-bubble {
   width: 2.5rem;
+  cursor: default !important;
 }

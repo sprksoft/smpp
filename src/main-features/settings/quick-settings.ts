@@ -29,6 +29,9 @@ class CompactThemeOption {
     let text = document.createElement("div");
     text.classList.add("compact-theme-option-text");
     text.innerText = this.currentTheme.displayName;
+    if (text.innerText.length > 22) {
+      text.innerText = this.currentTheme.displayName.slice(0, 22) + "…";
+    }
 
     return text;
   }

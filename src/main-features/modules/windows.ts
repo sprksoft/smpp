@@ -8,6 +8,7 @@ export class BaseWindow {
   id: string;
   hidden: boolean;
   element: HTMLDivElement;
+  wrapper: HTMLDivElement;
   private _outsideClickHandler: ((e: MouseEvent) => void) | null = null;
   private _keydownHandler: ((e: KeyboardEvent) => void) | null = null;
 
@@ -15,12 +16,14 @@ export class BaseWindow {
     this.id = id;
     this.hidden = hidden;
     this.element = document.createElement("div");
+    this.wrapper = document.createElement("div");
   }
 
   async create(): Promise<void> {
     this.element = await this.renderContent();
     this.element.id = this.id;
     this.element.classList.add("base-window");
+    this.wrapper.classList.add("window-wrapper");
     if (this.hidden) this.element.classList.add("hidden");
 
     // Create controls container
@@ -41,7 +44,8 @@ export class BaseWindow {
     controls.appendChild(closeBtn);
     this.element.appendChild(controls);
 
-    document.body.appendChild(this.element);
+    this.wrapper.appendChild(this.element);
+    document.body.appendChild(this.wrapper);
 
     fullscreenBtn.addEventListener("click", () => {
       this.onScreenSizeUpdate?.();
@@ -49,7 +53,7 @@ export class BaseWindow {
       void this.element.offsetWidth;
     });
 
-    closeBtn.addEventListener("click", () => this.hide());
+    closeBtn.addEventListener("click", () => this.hide(true));
   }
 
   // Override this in subclass
@@ -62,7 +66,7 @@ export class BaseWindow {
   onOpened(): void {}
 
   // Called when window is closed
-  onClosed?(): void;
+  onClosed?(clickedCloseButton: boolean): void;
 
   // Called when window grows or shrinks
   onScreenSizeUpdate?(): void;
@@ -82,22 +86,44 @@ export class BaseWindow {
       : ((triggerEvent as MouseEvent | null)?.target ?? null);
 
     this._outsideClickHandler = (e: MouseEvent) => {
-      if (
-        (e.target as HTMLElement)
-          .closest(".base-dialog")
-          ?.classList.contains("base-dialog") ||
-        (e.target as HTMLElement).classList?.contains("base-dialog") ||
-        (openEventTarget &&
-          e.target instanceof Node &&
-          (e.target === openEventTarget ||
-            (openEventTarget instanceof Node &&
-              openEventTarget.contains(e.target))))
-      ) {
+      const clickedElement = e.target as HTMLElement;
+
+      // Check if click is inside the dialog itself
+      const isInsideDialog = this.element.contains(clickedElement);
+      if (isInsideDialog) {
         return;
       }
-      if (e.target instanceof Node && !this.element.contains(e.target)) {
-        this.hide();
+
+      // Check if click is inside a .base-dialog element
+      const isInsideBaseDialog =
+        clickedElement.closest(".base-dialog") !== null;
+      if (isInsideBaseDialog) {
+        return;
       }
+
+      // Check if click is inside a .window-wrapper that contains a .base-dialog
+      const windowWrapper = clickedElement.closest(".window-wrapper");
+      const isInsideDialogWrapper =
+        windowWrapper?.querySelector(".base-dialog") !== null;
+      const isOwnWrapper = clickedElement == this.wrapper;
+      if (isInsideDialogWrapper && !isOwnWrapper) {
+        return;
+      }
+
+      // Check if click is on or inside the element that opened this dialog
+      if (openEventTarget && clickedElement instanceof Node) {
+        const isOpenTrigger = clickedElement === openEventTarget;
+        const isInsideOpenTrigger =
+          openEventTarget instanceof Node &&
+          openEventTarget.contains(clickedElement);
+
+        if (isOpenTrigger || isInsideOpenTrigger) {
+          return;
+        }
+      }
+
+      // Click was outside - hide the dialog
+      this.hide();
     };
     document.addEventListener("mousedown", this._outsideClickHandler, {
       capture: true,
@@ -106,7 +132,7 @@ export class BaseWindow {
     if (!this._keydownHandler) {
       this._keydownHandler = (e: KeyboardEvent) => {
         if (e.key === "Escape") {
-          this.hide();
+          this.hide(true);
         }
       };
       document.addEventListener("keydown", this._keydownHandler);
@@ -126,7 +152,7 @@ export class BaseWindow {
     this.onOpened();
   }
 
-  hide(): void {
+  hide(realUserIntent = false): void {
     if (this.hidden) return;
 
     this.hidden = true;
@@ -142,7 +168,7 @@ export class BaseWindow {
       this._keydownHandler = null;
     }
 
-    this.onClosed?.();
+    this.onClosed?.(realUserIntent);
   }
 
   remove(): void {
@@ -159,7 +185,8 @@ export class Dialog extends BaseWindow {
   async create(): Promise<void> {
     this.element = await this.renderContent();
     this.element.id = this.id;
-    this.element.classList.add("base-dialog", "base-window");
+    this.element.classList.add("base-window", "base-dialog");
+    this.wrapper.classList.add("window-wrapper");
     if (this.hidden) this.element.classList.add("hidden");
 
     // Create controls container
@@ -174,8 +201,9 @@ export class Dialog extends BaseWindow {
     controls.appendChild(closeBtn);
     this.element.appendChild(controls);
 
-    document.body.appendChild(this.element);
+    this.wrapper.appendChild(this.element);
+    document.body.appendChild(this.wrapper);
 
-    closeBtn.addEventListener("click", () => this.hide());
+    closeBtn.addEventListener("click", () => this.hide(true));
   }
 }
