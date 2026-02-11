@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { chevronLeftSvg } from "../fixes-utils/svgs.js";
-import { WidgetBase, registerWidget } from "./widgets.js";
+import { registerWidget, WidgetBase } from "./widgets.js";
 
 class CalendarWidget extends WidgetBase {
   get category() {
@@ -84,9 +84,7 @@ class CalendarWidget extends WidgetBase {
     for (let day = 1; day <= daysInMonth; day++) {
       const dayEl = document.createElement("div");
       const isToday =
-        day === today.getDate() &&
-        month === today.getMonth() &&
-        year === today.getFullYear();
+        day === today.getDate() && month === today.getMonth() && year === today.getFullYear();
 
       dayEl.className = isToday ? "calendar-day today" : "calendar-day";
       dayEl.textContent = String(day);
@@ -142,10 +140,7 @@ class CalendarWidget extends WidgetBase {
     body.setAttribute("stroke-width", "3");
 
     // Header (red/pink)
-    const header = document.createElementNS(
-      "http://www.w3.org/2000/svg",
-      "rect"
-    );
+    const header = document.createElementNS("http://www.w3.org/2000/svg", "rect");
     header.setAttribute("x", "8");
     header.setAttribute("y", "8");
     header.setAttribute("width", "84");
@@ -158,10 +153,7 @@ class CalendarWidget extends WidgetBase {
     // Rings (blue circles at top)
     const ringPositions = [20, 50, 80];
     ringPositions.forEach((x) => {
-      const ring = document.createElementNS(
-        "http://www.w3.org/2000/svg",
-        "circle"
-      );
+      const ring = document.createElementNS("http://www.w3.org/2000/svg", "circle");
       ring.setAttribute("cx", String(x));
       ring.setAttribute("cy", "6");
       ring.setAttribute("r", "6");
@@ -174,10 +166,7 @@ class CalendarWidget extends WidgetBase {
     // Checkboxes (cyan squares on left)
     const checkboxes = [45, 65, 85];
     checkboxes.forEach((y) => {
-      const checkbox = document.createElementNS(
-        "http://www.w3.org/2000/svg",
-        "rect"
-      );
+      const checkbox = document.createElementNS("http://www.w3.org/2000/svg", "rect");
       checkbox.setAttribute("x", "20");
       checkbox.setAttribute("y", String(y));
       checkbox.setAttribute("width", "10");
@@ -192,10 +181,7 @@ class CalendarWidget extends WidgetBase {
     // Text lines
     const lines = [45, 65, 85];
     lines.forEach((y) => {
-      const line = document.createElementNS(
-        "http://www.w3.org/2000/svg",
-        "line"
-      );
+      const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
       line.setAttribute("x1", "35");
       line.setAttribute("y1", String(y + 5));
       line.setAttribute("x2", "75");

@@ -1,22 +1,18 @@
 // @ts-nocheck
-import {
-  browser,
-  fillObjectWithDefaults,
-  getByPath,
-  setByPath,
-} from "../common/utils.js";
+import { browser, fillObjectWithDefaults, getByPath, setByPath } from "../common/utils.js";
+import { doneSvg, editIconSvg } from "../fixes-utils/svgs.js";
 import { createButtonWithLabel } from "../main-features/appearance/ui.js";
 import { liteMode } from "../main-features/main.ts";
-import { doneSvg, editIconSvg } from "../fixes-utils/svgs.js";
 import { settingsWindow } from "../main-features/settings/main-settings.js";
 import { loadQuickSettings } from "../main-features/settings/quick-settings.js";
+
 const PANNELIP_MARGIN_PX = 20;
 
 let widgetSystemCreated = false;
 
 export let widgetEditModeInit = false;
 export let widgetEditMode = false;
-export let widgets = [];
+export const widgets = [];
 
 let hoveringBag = false;
 let newsState = false; // Used for if the news state is changed before it could be created.
@@ -65,7 +61,7 @@ export class WidgetBase {
   }
 
   createWidgetErrorContent(name) {
-    let p = document.createElement("p");
+    const p = document.createElement("p");
     p.classList.add("smpp-error-widget");
     p.innerHTML =
       "<span>Probleem bij het laden van de widget: </span><code class='widgetName'></code><button>Reset widget</button>";
@@ -89,7 +85,7 @@ export class WidgetBase {
   }
 
   #createWidgetDiv() {
-    let widgetDiv = document.createElement("div");
+    const widgetDiv = document.createElement("div");
     widgetDiv.addEventListener("mousedown", (e) => {
       this.startDragging(e.clientX, e.clientY);
     });
@@ -99,7 +95,7 @@ export class WidgetBase {
   }
 
   async #intoBag() {
-    if (this.element.parentElement == this.#bagGroup) {
+    if (this.element.parentElement === this.#bagGroup) {
       return;
     }
 
@@ -113,7 +109,7 @@ export class WidgetBase {
   }
 
   async #setPreview(preview) {
-    if (this.#preview == preview && this.#content !== null) {
+    if (this.#preview === preview && this.#content !== null) {
       return;
     }
 
@@ -137,7 +133,7 @@ export class WidgetBase {
     }
     if (!newContent) {
       console.error(
-        "createContent and createPreview method's needs to return an html object. in widget impl"
+        "createContent and createPreview method's needs to return an html object. in widget impl",
       );
       newContent = this.createWidgetErrorContent(this.name);
     }
@@ -177,26 +173,26 @@ export class WidgetBase {
   }
 
   dragMove(x, y) {
-    if (!curDragInfo || curDragInfo.widget != this) {
+    if (!curDragInfo || curDragInfo.widget !== this) {
       return;
     }
 
-    let el = this.element;
-    let offset = curDragInfo.offset;
-    el.style.left = x - offset.x + "px";
-    el.style.top = y - offset.y + "px";
+    const el = this.element;
+    const offset = curDragInfo.offset;
+    el.style.left = `${x - offset.x}px`;
+    el.style.top = `${y - offset.y}px`;
   }
 
   async drop(cancel = false) {
-    if (!curDragInfo || curDragInfo.widget != this) {
+    if (!curDragInfo || curDragInfo.widget !== this) {
       return;
     }
 
-    let el = this.element;
+    const el = this.element;
     el.classList.remove("smpp-widget-dragging");
     el.style = "";
 
-    let sourceIp = curDragInfo.sourceInsertionPoint;
+    const sourceIp = curDragInfo.sourceInsertionPoint;
     let targetIp = curDragInfo.targetInsertionPoint;
 
     targetIp?.classList.remove("smpp-widget-insertion-point-targeted");
@@ -216,29 +212,23 @@ export class WidgetBase {
       await this.#intoBag();
     } else {
       if (targetIp.classList.contains("smpp-widget-insertion-point-pannel")) {
-        let pannelContainer = targetIp.parentElement;
-        let pannel = await createPannelHTML({ widgets: [] });
-        pannelContainer.insertBefore(
-          createInsertionPointHTML(true),
-          targetIp.nextElementSibling
-        );
+        const pannelContainer = targetIp.parentElement;
+        const pannel = await createPannelHTML({ widgets: [] });
+        pannelContainer.insertBefore(createInsertionPointHTML(true), targetIp.nextElementSibling);
         pannelContainer.insertBefore(pannel, targetIp.nextElementSibling);
         targetIp = pannel.firstChild;
       }
 
-      let targetPannel = targetIp.parentElement;
+      const targetPannel = targetIp.parentElement;
       targetPannel.style.display = "block";
-      targetPannel.insertBefore(
-        createInsertionPointHTML(),
-        targetIp.nextElementSibling
-      );
+      targetPannel.insertBefore(createInsertionPointHTML(), targetIp.nextElementSibling);
       targetPannel.insertBefore(el, targetIp.nextElementSibling);
 
       await this.#setPreview(false);
     }
 
-    let sourcePannel = sourceIp?.parentElement;
-    if (sourcePannel && sourcePannel.childNodes.length == 1) {
+    const sourcePannel = sourceIp?.parentElement;
+    if (sourcePannel && sourcePannel.childNodes.length === 1) {
       // Check if the pannel is empty (1 is because of the insertion point)
       sourcePannel.nextElementSibling.remove();
       sourcePannel.remove();
@@ -256,9 +246,9 @@ export class WidgetBase {
     const el = this.element;
 
     let sourceIp = this.element.previousElementSibling;
-    let rect = this.element.getBoundingClientRect();
+    const rect = this.element.getBoundingClientRect();
 
-    if (el.parentElement == this.#bagGroup) {
+    if (el.parentElement === this.#bagGroup) {
       sourceIp = null;
       this.#bagGroup.insertBefore(this.#bagPlaceHolder, el);
       el.remove();
@@ -271,11 +261,10 @@ export class WidgetBase {
       y: grabY - rect.top,
     });
     document.body.classList.add("smpp-widget-dragging-something");
-    el.style.width = rect.width + "px";
-    el.style.left = rect.left + "px";
-    el.style.top = rect.top + "px";
-    el.style["transform-origin"] =
-      `${curDragInfo.offset.x}px ${curDragInfo.offset.y}px`;
+    el.style.width = `${rect.width}px`;
+    el.style.left = `${rect.left}px`;
+    el.style.top = `${rect.top}px`;
+    el.style["transform-origin"] = `${curDragInfo.offset.x}px ${curDragInfo.offset.y}px`;
 
     el.classList.add("smpp-widget-dragging");
 
@@ -320,7 +309,7 @@ export class WidgetBase {
   get settings() {
     if (this.#settings === undefined) {
       console.error(
-        "Settings were not loaded before access. Don't use .settings outside of the widget. Call await widget.getSetting(path)"
+        "Settings were not loaded before access. Don't use .settings outside of the widget. Call await widget.getSetting(path)",
       );
     }
     return this.#settings;
@@ -394,7 +383,7 @@ class SmartschoolWidget extends WidgetBase {
   }
 
   get name() {
-    return this.constructor.name + "-" + this.smContent.id;
+    return `${this.constructor.name}-${this.smContent.id}`;
   }
 
   async createContent() {
@@ -404,13 +393,9 @@ class SmartschoolWidget extends WidgetBase {
 
 function targetInsertionPoint(target) {
   if (target !== curDragInfo.targetInsertionPoint) {
-    curDragInfo.targetInsertionPoint?.classList.remove(
-      "smpp-widget-insertion-point-targeted"
-    );
+    curDragInfo.targetInsertionPoint?.classList.remove("smpp-widget-insertion-point-targeted");
     curDragInfo.targetInsertionPoint = target;
-    curDragInfo.targetInsertionPoint?.classList.add(
-      "smpp-widget-insertion-point-targeted"
-    );
+    curDragInfo.targetInsertionPoint?.classList.add("smpp-widget-insertion-point-targeted");
   }
 }
 
@@ -432,12 +417,12 @@ function onPannelHover(pannel, e) {
   }
 
   let target = pannel.firstChild;
-  for (let child of pannel.childNodes) {
+  for (const child of pannel.childNodes) {
     if (!child.classList.contains("smpp-widget")) {
       continue;
     }
     const bounds = child.getBoundingClientRect();
-    let centerY = bounds.top + (bounds.bottom - bounds.top) * 0.5;
+    const centerY = bounds.top + (bounds.bottom - bounds.top) * 0.5;
     if (e.clientY > centerY) {
       target = child.nextElementSibling;
     }
@@ -465,7 +450,7 @@ function onCenterHover(div, e) {
 }
 
 function createInsertionPointHTML(pannel = false) {
-  let ipoint = document.createElement("div");
+  const ipoint = document.createElement("div");
   ipoint.classList.add("smpp-widget-insertion-point");
   if (pannel) {
     ipoint.classList.add("smpp-widget-insertion-point-pannel");
@@ -475,15 +460,15 @@ function createInsertionPointHTML(pannel = false) {
 }
 
 async function createPannelHTML(pannel) {
-  let pannelDiv = document.createElement("div");
+  const pannelDiv = document.createElement("div");
   pannelDiv.addEventListener("mousemove", (e) => onPannelHover(pannelDiv, e));
   pannelDiv.classList.add("smpp-widget-pannel");
   pannelDiv.appendChild(createInsertionPointHTML());
 
-  for (let widgetName of pannel.widgets) {
+  for (const widgetName of pannel.widgets) {
     let widget = getWidgetByName(widgetName);
     if (!widget) {
-      console.error("Widget " + widgetName + " doesn't exist.");
+      console.error(`Widget ${widgetName} doesn't exist.`);
       registerWidget(new ErrorWidget(widgetName));
       widget = getWidgetByName(widgetName);
     }
@@ -493,21 +478,21 @@ async function createPannelHTML(pannel) {
 }
 
 async function createWidgetsContainerHTML(widgetData, newsContent, news) {
-  let widgetsContainer = document.createElement("div");
+  const widgetsContainer = document.createElement("div");
   widgetsContainer.classList.add("smpp-widgets-container");
 
   widgetsContainer.appendChild(createInsertionPointHTML(true));
 
   async function createAppendPannel(pannel) {
-    let pannelDiv = await createPannelHTML(pannel);
+    const pannelDiv = await createPannelHTML(pannel);
     widgetsContainer.appendChild(pannelDiv);
     widgetsContainer.appendChild(createInsertionPointHTML(true));
   }
-  for (let pannel of widgetData.leftPannels) {
+  for (const pannel of widgetData.leftPannels) {
     await createAppendPannel(pannel);
   }
 
-  let newsDiv = document.createElement("div");
+  const newsDiv = document.createElement("div");
   newsDiv.classList.add("smpp-news-container");
   newsDiv.addEventListener("mousemove", (e) => onCenterHover(newsDiv, e));
   newsContent.id = "smpp-news-content";
@@ -520,7 +505,7 @@ async function createWidgetsContainerHTML(widgetData, newsContent, news) {
   widgetsContainer.appendChild(newsDiv);
 
   widgetsContainer.appendChild(createInsertionPointHTML(true));
-  for (let pannel of widgetData.rightPannels) {
+  for (const pannel of widgetData.rightPannels) {
     await createAppendPannel(pannel);
   }
 
@@ -531,17 +516,13 @@ export function updateNews(value: boolean) {
   newsState = value;
   const newsCon = document.querySelector(".smpp-news-container");
   if (newsCon) {
-    value
-      ? newsCon.classList.add("show-news")
-      : newsCon.classList.remove("show-news");
+    value ? newsCon.classList.add("show-news") : newsCon.classList.remove("show-news");
   }
 }
 
 function setNewsEditMode(value) {
   const newsCon = document.querySelector(".smpp-news-container");
-  document.querySelector(".smpp-news-editor").style.display = value
-    ? ""
-    : "none";
+  document.querySelector(".smpp-news-editor").style.display = value ? "" : "none";
 
   const button = document.getElementById("smpp-widget-news-toggle");
   button.checked = newsState;
@@ -575,19 +556,19 @@ function initNewsEditMode() {
 
 // Notify the widget system about a theme change
 export async function widgetSystemNotifyThemeChange() {
-  for (let widget of widgets) {
+  for (const widget of widgets) {
     await widget.onThemeChange();
   }
 }
 
 export async function createWidgetSystem() {
-  let container = document.getElementById("container");
+  const container = document.getElementById("container");
   if (!container) {
     return false;
   }
 
   // extract dingetjes
-  let news = document.getElementById("centercontainer");
+  const news = document.getElementById("centercontainer");
   if (!news) {
     console.error(`"centercontainer" doesn't exist`);
     return false;
@@ -606,19 +587,15 @@ export async function createWidgetSystem() {
   }
 
   // Create smartschool default widgets
-  for (let smWidget of document.querySelectorAll(
-    "#rightcontainer .homepage__block"
-  )) {
-    let wName = "SmartschoolWidget-" + smWidget.id;
+  for (const smWidget of document.querySelectorAll("#rightcontainer .homepage__block")) {
+    const wName = `SmartschoolWidget-${smWidget.id}`;
     registerWidget(new SmartschoolWidget(smWidget));
     if (setDefaults) {
       widgetData.rightPannels[0].widgets.push(wName);
     }
   }
-  for (let smWidget of document.querySelectorAll(
-    "#leftcontainer .homepage__block"
-  )) {
-    let wName = "SmartschoolWidget-" + smWidget.id;
+  for (const smWidget of document.querySelectorAll("#leftcontainer .homepage__block")) {
+    const wName = `SmartschoolWidget-${smWidget.id}`;
     registerWidget(new SmartschoolWidget(smWidget));
     if (setDefaults) {
       widgetData.leftPannels[0].widgets.push(wName);
@@ -628,11 +605,7 @@ export async function createWidgetSystem() {
     widgetData.rightPannels[0].widgets.unshift("TutorialWidget");
   }
 
-  widgetsContainer = await createWidgetsContainerHTML(
-    widgetData,
-    news,
-    newsState
-  );
+  widgetsContainer = await createWidgetsContainerHTML(widgetData, news, newsState);
 
   container.innerHTML = "";
   container.appendChild(widgetsContainer);
@@ -642,9 +615,9 @@ export async function createWidgetSystem() {
 }
 
 async function saveWidgets() {
-  let widgetData = { leftPannels: [], rightPannels: [] };
+  const widgetData = { leftPannels: [], rightPannels: [] };
   let onLeftPannels = true;
-  for (let pan of widgetsContainer.childNodes) {
+  for (const pan of widgetsContainer.childNodes) {
     if (pan.classList.contains("smpp-widget-insertion-point")) {
       continue;
     }
@@ -652,8 +625,8 @@ async function saveWidgets() {
       onLeftPannels = false;
       continue;
     }
-    let pannelData = { widgets: [] };
-    for (let wid of pan.childNodes) {
+    const pannelData = { widgets: [] };
+    for (const wid of pan.childNodes) {
       if (wid.classList.contains("smpp-widget-insertion-point")) {
         continue;
       }
@@ -696,17 +669,17 @@ function bagHoverExit() {
 }
 
 async function createGroup(bag, name, displayName) {
-  let group = document.createElement("div");
+  const group = document.createElement("div");
   group.classList.add("smpp-widget-bag-group");
-  for (let widget of widgets) {
-    if (widget.category == name) {
-      let pl = document.createElement("div");
+  for (const widget of widgets) {
+    if (widget.category === name) {
+      const pl = document.createElement("div");
       pl.classList.add("smpp-widget-bag-placeholder");
       await widget.setBagPlaceHolder(group, pl);
       group.appendChild(pl);
     }
   }
-  let groupTitle = document.createElement("h2");
+  const groupTitle = document.createElement("h2");
   groupTitle.classList.add("smpp-widget-bag-group-title");
   groupTitle.innerText = displayName;
   bag.appendChild(groupTitle);
@@ -714,13 +687,13 @@ async function createGroup(bag, name, displayName) {
 }
 
 async function createWidgetBag() {
-  let bag = document.createElement("div");
+  const bag = document.createElement("div");
   bag.classList.add("smpp-widget-bag");
 
-  let content = document.createElement("div");
+  const content = document.createElement("div");
   content.classList.add("smpp-widget-bag-content");
 
-  let innerContent = document.createElement("div");
+  const innerContent = document.createElement("div");
   innerContent.classList.add("smpp-widget-bag-inner-content");
 
   await createGroup(innerContent, "other", "Widgets");
@@ -729,7 +702,7 @@ async function createWidgetBag() {
   content.appendChild(innerContent);
   bag.appendChild(content);
 
-  let handle = document.createElement("div");
+  const handle = document.createElement("div");
   handle.classList.add("smpp-widget-bag-handle");
   handle.addEventListener("click", () => {
     toggleBag();
@@ -740,7 +713,7 @@ async function createWidgetBag() {
 `;
   bag.appendChild(handle);
 
-  for (let widget of widgets) {
+  for (const widget of widgets) {
     await widget.createIfNotExist();
   }
 
@@ -777,7 +750,7 @@ function openBag() {
     bagHoverEnter();
   }
 }
-export function toggleBag(params) {
+export function toggleBag(_params) {
   if (isBagOpen()) {
     closeBag();
   } else {
@@ -831,8 +804,8 @@ function splitWidgetNameAndSettingPath(path) {
 // Gets a widget by its name.
 // Use shorthands: setWidgetSetting/getWidgetSetting to set and get settings of a widget
 function getWidgetByName(name) {
-  for (let widget of widgets) {
-    if (widget.name == name) {
+  for (const widget of widgets) {
+    if (widget.name === name) {
       return widget;
     }
   }
@@ -859,7 +832,7 @@ export async function setWidgetSetting(path, value) {
 export async function setEditMode(value) {
   if (value && !widgetEditModeInit) {
     console.error(
-      "Widget edit mode has not been initalized. setEditMode(true) has been called. (call initWidgetEditMode first) (This is a bug)"
+      "Widget edit mode has not been initalized. setEditMode(true) has been called. (call initWidgetEditMode first) (This is a bug)",
     );
   }
 
@@ -891,16 +864,14 @@ export function initWidgetEditMode() {
   }
 
   if (!widgetSystemCreated) {
-    console.error(
-      "Widget system has not been created yet. But initWidgetEditMode has been called"
-    );
+    console.error("Widget system has not been created yet. But initWidgetEditMode has been called");
     return;
   }
   widgetEditModeInit = true;
 
   initNewsEditMode();
 
-  document.addEventListener("mouseup", async (e) => {
+  document.addEventListener("mouseup", async (_e) => {
     if (curDragInfo) {
       await curDragInfo.widget.drop(false);
     }
@@ -910,7 +881,7 @@ export function initWidgetEditMode() {
     if (curDragInfo) {
       curDragInfo.widget.dragMove(e.clientX, e.clientY);
 
-      let handleBounds = widgetBagHandle.getBoundingClientRect();
+      const handleBounds = widgetBagHandle.getBoundingClientRect();
       if (
         e.clientY < handleBounds.bottom &&
         e.clientX > handleBounds.left &&
@@ -925,7 +896,7 @@ export function initWidgetEditMode() {
 }
 
 export function createWidgetEditModeButton() {
-  let btn = document.createElement("button");
+  const btn = document.createElement("button");
   btn.classList.add("topnav__btn");
   btn.classList.add("smpp-button");
   btn.id = "smpp-widget-edit-mode-btn";

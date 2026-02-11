@@ -1,11 +1,11 @@
 .game-container {
-  padding: 0px !important;
+  padding: 0px;
   height: 260px;
   overflow: hidden;
   width: 100%;
 }
 .smpp-widget-preview .game-container {
-  height: 100% !important;
+  height: 100%;
   aspect-ratio: 1;
 }
 .game-menu {
@@ -26,7 +26,7 @@
 .game-title {
   font-size: 3rem;
   font-weight: 800;
-  margin-bottom: 0.1rem !important;
+  margin-bottom: 0.1rem;
 }
 
 .smpp-widget-preview .game-title {
@@ -34,7 +34,7 @@
 }
 
 .game-score {
-  font-size: 1.75rem !important;
+  font-size: 1.75rem;
   font-weight: 500;
 }
 
@@ -45,13 +45,13 @@
 }
 
 .game-button {
-  font-size: 1.7rem !important;
+  font-size: 1.7rem;
   font-weight: 500;
-  width: 80% !important;
+  width: 80%;
 
   margin-top: 1rem;
-  padding: 0.5rem 0rem !important;
-  align-self: center !important;
+  padding: 0.5rem 0rem;
+  align-self: center;
   background: linear-gradient(
     100deg,
     color-mix(in srgb, var(--color-base01) 30%, var(--color-base02) 70%),
@@ -60,17 +60,17 @@
     color-mix(in srgb, var(--color-base01) 30%, var(--color-base02) 70%)
   );
   border: 3px solid var(--color-base03);
-  border-radius: 1000px !important;
+  border-radius: 1000px;
   margin-bottom: 1.8rem;
 }
 
 .game-button:hover {
-  border-color: var(--color-accent) !important;
+  border-color: var(--color-accent);
   font-weight: 600;
 }
 
 .enableAnimations .game-button {
-  transition-property: border, font-weight !important;
+  transition-property: border, font-weight;
   transition: 0.2s ease-in-out;
 }
 
@@ -83,11 +83,11 @@
 }
 
 .game-slider-label {
-  margin: 0 !important;
-  margin-bottom: 1rem !important;
+  margin: 0;
+  margin-bottom: 1rem;
   font-size: 1.6rem;
   font-weight: 400;
-  cursor: text !important;
+  cursor: text;
 }
 .game-option-value {
   font-size: 1.2rem;
@@ -111,7 +111,7 @@
   width: 1.5rem;
   height: 1.5rem;
   border-radius: 50%;
-  background: var(--color-accent) !important;
+  background: var(--color-accent);
   border-color: transparent;
   cursor: pointer;
   transition: opacity 0.2s ease-in-out;
@@ -122,7 +122,7 @@
   width: 1.5rem;
   height: 1.5rem;
   border-radius: 50%;
-  background: var(--color-accent) !important;
+  background: var(--color-accent);
   border-color: transparent;
   cursor: pointer;
   transition: opacity 0.2s ease-in-out;

@@ -1,14 +1,13 @@
 /* vim:set shiftwidth=4: */
 // @ts-nocheck
 export function updateLoginPanel() {
-  let login_app_left = document.querySelector(".login-app__left");
+  const login_app_left = document.querySelector(".login-app__left");
   login_app_left.innerHTML = " ";
 
-  document.getElementsByClassName(
-    "login-app__platform-indicator"
-  )[0].innerHTML = '<h1 class="logintitle">Smartschool ++</h1>';
+  document.getElementsByClassName("login-app__platform-indicator")[0].innerHTML =
+    '<h1 class="logintitle">Smartschool ++</h1>';
 
-  let loginSeperator = document.querySelector(".login-app__title--separator");
+  const loginSeperator = document.querySelector(".login-app__title--separator");
   if (loginSeperator) {
     loginSeperator.innerHTML =
       '<button type="button" class="white_text_button" id="showmore">More</button>';
@@ -39,7 +38,7 @@ export function updateSplashText(splashTextEnabled) {
   }
 }
 
-let splashtexts = [
+const splashtexts = [
   `It even works under water!`,
   `Hoelang is een chinees.`,
   `404 Splashtext not found`,

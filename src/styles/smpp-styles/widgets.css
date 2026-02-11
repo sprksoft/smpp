@@ -6,13 +6,17 @@ html {
   --smpp-widget-bag-handle-height: 60px;
 
   --pannel-width: calc(
-    300px + 1rem * 2
+    300px +
+    1rem *
+    2
   ); /*  panelWidth(300px) + widgetMargin(1rem) + widgetBorderSize(3px) * 2  // times 2 because left and right border+margin */
 
   --preview-width: calc(var(--pannel-width) * 0.7);
   --bag-close-transformy: calc(
-    -100% - var(--smpp-widget-bag-margin) - 8px +
-      var(--smpp-widget-bag-handle-height)
+    -100% -
+    var(--smpp-widget-bag-margin) -
+    8px +
+    var(--smpp-widget-bag-handle-height)
   ); /* -8px for 2 times the border size */
 }
 
@@ -31,8 +35,8 @@ html {
   }
 }
 .glass .smpp-widget {
-  background: var(--darken-background) !important;
-  backdrop-filter: var(--large-blur) !important;
+  background: var(--darken-background);
+  backdrop-filter: var(--large-blur);
   border-width: 2px;
 }
 /* Only use rem's here no em because widgets will be moved to body when they are dragged */
@@ -78,11 +82,11 @@ html {
 }
 
 #smpp-news-content {
-  display: none !important;
-  background: var(--darken-background) !important;
+  display: none;
+  background: var(--darken-background);
 }
 .smpp-news-container.show-news:not(.smpp-news-editmode) #smpp-news-content {
-  display: block !important;
+  display: block;
 }
 
 .smpp-news-editor {
@@ -129,7 +133,9 @@ html {
 }
 .smpp-widget-pannel {
   min-width: calc(
-    300px + 1rem * 2
+    300px +
+    1rem *
+    2
   ); /* panelWidth(300px) + widgetMargin(1rem) + widgetBorderSize(3px) * 2  // times 2 because left and right border+margin */
   max-width: calc(300px + (1rem) * 2);
   background-color: var(--color-homepage-sidebars-bg);
@@ -181,7 +187,7 @@ html {
 .enableAnimations .topnav {
   transition:
     opacity 0.3s ease-in-out,
-    filter 0.3s ease-in-out !important;
+    filter 0.3s ease-in-out;
 }
 
 .smpp-widget-edit-mode:not(.smpp-widget-dragging-something)
@@ -314,10 +320,10 @@ html {
 }
 
 .smpp-widget-bag-group-title {
-  margin: 1rem 1rem 0.5rem 3rem !important;
+  margin: 1rem 1rem 0.5rem 3rem;
   width: fit-content;
   font-size: 2.5rem;
-  border-bottom: 3px solid var(--color-base02) !important;
+  border-bottom: 3px solid var(--color-base02);
 }
 
 .smpp-widget-bag.smpp-widget-bag-open {
@@ -374,7 +380,7 @@ html {
 }
 
 p.smpp-error-widget {
-  margin-bottom: 0 !important;
+  margin-bottom: 0;
 }
 
 .smpp-error-widget .widgetName {
@@ -398,9 +404,9 @@ p.smpp-error-widget {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  color: var(--color-accent) !important;
-  font-size: 1.4rem !important;
-  font-weight: 700 !important;
+  color: var(--color-accent);
+  font-size: 1.4rem;
+  font-weight: 700;
   padding: 0.5rem 1.5rem 0.6rem;
   background: var(--color-base01);
   border-radius: 1.25rem;
@@ -414,19 +420,19 @@ p.smpp-error-widget {
 }
 
 .smpp-widget:has(.smpp-widget-smartschool) {
-  padding: 0px !important;
+  padding: 0px;
 }
 
 div.smpp-widget.smpp-widget-transparent {
-  background: transparent !important;
-  backdrop-filter: none !important;
+  background: transparent;
+  backdrop-filter: none;
   border-color: transparent;
   box-shadow: none;
   padding: 0rem;
 }
 
 .smpp-widget-edit-mode .smpp-widget-transparent {
-  background-color: var(--color-base01) !important;
+  background-color: var(--color-base01);
   border: 3px solid var(--color-base03);
   box-shadow: 0 0 10px var(--color-shadow);
   padding: 1rem;
@@ -477,12 +483,12 @@ div.smpp-widget.smpp-widget-transparent {
 }
 
 .widgets-done-button {
-  padding: 0 !important;
+  padding: 0;
   position: absolute;
   right: 0.5rem;
   top: 0.5rem;
   height: 3.25rem;
-  display: flex !important;
+  display: flex;
   gap: 1rem;
   align-items: center;
   justify-content: center;
@@ -490,7 +496,7 @@ div.smpp-widget.smpp-widget-transparent {
   font-weight: 700;
   opacity: 1;
   border-radius: 100000px;
-  padding: 0rem 1.5rem !important;
+  padding: 0rem 1.5rem;
   border: 3px solid var(--color-base02);
   background-color: var(--color-base01);
   box-shadow: 0rem -0.5rem 2rem 1rem rgba(0, 0, 0, 0.5);
@@ -539,7 +545,7 @@ div.smpp-widget.smpp-widget-transparent {
 }
 
 .widgets-done-button.hidden {
-  display: flex !important;
+  display: flex;
   opacity: 0;
 }
 

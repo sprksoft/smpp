@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { WidgetBase, registerWidget } from "./widgets.js";
+import { registerWidget, WidgetBase } from "./widgets.js";
 
 const pixelsPerMinute = 1.46;
 
@@ -30,16 +30,14 @@ function fancyfyTime(inputTime) {
 
   function convertTo24HourFormat(time) {
     let [hours, minutes, period] = time.split(":");
-    hours = parseInt(hours);
-    minutes = parseInt(minutes);
+    hours = parseInt(hours, 10);
+    minutes = parseInt(minutes, 10);
     if (period.toLowerCase().includes("pm") && hours !== 12) {
       hours += 12;
     } else if (period.toLowerCase().includes("am") && hours === 12) {
       hours = 0;
     }
-    return `${hours.toString().padStart(2, "0")}:${minutes
-      .toString()
-      .padStart(2, "0")}`;
+    return `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}`;
   }
 
   const formattedStartTime = convertTo24HourFormat(startTime);
@@ -48,7 +46,7 @@ function fancyfyTime(inputTime) {
 }
 
 async function getDateInCorrectFormat(isFancyFormat, addend) {
-  let currentDate = new Date();
+  const currentDate = new Date();
   currentDate.setDate(currentDate.getDate() + addend);
 
   if (isFancyFormat) {
@@ -127,14 +125,7 @@ class PlannerWidget extends WidgetBase {
     return messageContainer;
   }
 
-  createPlannerSubElement(
-    element,
-    index,
-    numElements,
-    elementWidthPercentage,
-    beginTime,
-    slot
-  ) {
+  createPlannerSubElement(element, index, numElements, elementWidthPercentage, beginTime, slot) {
     const plannerElement = document.createElement("div");
     plannerElement.classList.add("planner-element");
 
@@ -143,10 +134,7 @@ class PlannerWidget extends WidgetBase {
     plannerElement.classList.add(cssVariableColor);
 
     const itemName = element.courses?.[0]?.name || element.name;
-    const teachers =
-      element.organisers?.users.map(
-        (user) => user.name.startingWithFirstName
-      ) || [];
+    const teachers = element.organisers?.users.map((user) => user.name.startingWithFirstName) || [];
 
     const itemNameElement = document.createElement("h3");
     itemNameElement.textContent = `${itemName} - ${teachers.join(", ")}`;
@@ -158,7 +146,7 @@ class PlannerWidget extends WidgetBase {
 
     const timeElement = document.createElement("p");
     timeElement.textContent = fancyfyTime(
-      `${dateTimeFrom.toLocaleTimeString()} - ${dateTimeTo.toLocaleTimeString()}`
+      `${dateTimeFrom.toLocaleTimeString()} - ${dateTimeTo.toLocaleTimeString()}`,
     );
     timeElement.classList.add("no-bottom-margin");
     plannerElement.appendChild(timeElement);
@@ -180,9 +168,7 @@ class PlannerWidget extends WidgetBase {
     plannerElement.style.width = `${elementWidthPercentage}%`;
 
     if (index < numElements - 1) {
-      const nextStartTime = new Date(
-        slot.elements[index + 1].period.dateTimeFrom
-      );
+      const nextStartTime = new Date(slot.elements[index + 1].period.dateTimeFrom);
       const marginBottom = (nextStartTime - dateTimeTo) / 60000;
       plannerElement.style.marginBottom = `${marginBottom * pixelsPerMinute}px`;
     }
@@ -218,9 +204,7 @@ class PlannerWidget extends WidgetBase {
   }
 
   async updatePlanner(addend) {
-    const plannerUrl = document
-      .getElementById("datePickerMenu")
-      .getAttribute("plannerurl");
+    const plannerUrl = document.getElementById("datePickerMenu").getAttribute("plannerurl");
     const date = await getDateInCorrectFormat(true, addend);
     const data = await fetchPlannerData(date, plannerUrl.split("/")[4]);
 
@@ -240,9 +224,7 @@ class PlannerWidget extends WidgetBase {
       this.planningContainer.style.height = "initial";
     } else {
       const earliestStartTime = Math.min(
-        ...data.map((element) =>
-          new Date(element.period.dateTimeFrom).getTime()
-        )
+        ...data.map((element) => new Date(element.period.dateTimeFrom).getTime()),
       );
       const beginTime = new Date(earliestStartTime);
 
@@ -258,7 +240,7 @@ class PlannerWidget extends WidgetBase {
         }
 
         const overlappingSlot = timeSlots.find(
-          (slot) => slot.from < dateTimeTo && slot.to > dateTimeFrom
+          (slot) => slot.from < dateTimeTo && slot.to > dateTimeFrom,
         );
 
         if (overlappingSlot) {
@@ -272,7 +254,7 @@ class PlannerWidget extends WidgetBase {
         }
       });
 
-      let allHeights = [];
+      const allHeights = [];
       timeSlots.forEach((slot) => {
         const numElements = slot.elements.length;
         const elementWidthPercentage = 100 / numElements;
@@ -284,18 +266,17 @@ class PlannerWidget extends WidgetBase {
             numElements,
             elementWidthPercentage,
             beginTime,
-            slot
+            slot,
           );
           this.planningContainer.appendChild(plannerElement);
           allHeights.push(
             Number(
-              parseInt(plannerElement.style.height) +
-                parseInt(plannerElement.style.top)
-            )
+              parseInt(plannerElement.style.height, 10) + parseInt(plannerElement.style.top, 10),
+            ),
           );
         });
       });
-      this.planningContainer.style.height = Math.max(...allHeights) + "px";
+      this.planningContainer.style.height = `${Math.max(...allHeights)}px`;
     }
 
     this.plannerContainer.appendChild(this.planningContainer);

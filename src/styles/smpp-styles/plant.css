@@ -61,7 +61,7 @@
   top: 50%;
   flex: 1;
   vertical-align: center;
-  max-height: 50px !important;
+  max-height: 50px;
 }
 
 #glass-container {
@@ -175,10 +175,10 @@
 }
 
 #plant_streak {
-  color: var(--color-accent) !important;
-  font-size: 50px !important;
-  font-weight: 800 !important;
-  text-align: center !important;
+  color: var(--color-accent);
+  font-size: 50px;
+  font-weight: 800;
+  text-align: center;
 }
 
 .enableAnimations #plant_the_plant_svg {
@@ -186,13 +186,13 @@
 }
 
 #riseMask {
-  y: 0% !important;
+  y: 0%;
 }
 
 /* Rising/draining effect */
 .enableAnimations #riseMask {
-  transition: transform 0.4s cubic-bezier(0.52, 0.56, 0.29, 0.98) !important;
-  y: 100% !important;
+  transition: transform 0.4s cubic-bezier(0.52, 0.56, 0.29, 0.98);
+  y: 100%;
   /* Animate transform */
   /* Start hidden at the bottom */
 }
@@ -203,7 +203,7 @@
 }
 
 .leaves-base {
-  fill: var(--color-base03) !important;
+  fill: var(--color-base03);
 }
 .leaves {
   fill: rgb(90, 143, 1);
@@ -221,33 +221,33 @@
 }
 
 #plant_the_plant_svg:hover {
-  cursor: pointer !important;
+  cursor: pointer;
 }
 
 #water_title {
-  font-size: 15px !important;
-  font-weight: 600 !important;
-  margin: 0px !important;
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0px;
 }
 
 #water_time {
-  font-size: 15px !important;
-  font-weight: 400 !important;
-  margin: 0px !important;
-  width: 150% !important;
+  font-size: 15px;
+  font-weight: 400;
+  margin: 0px;
+  width: 150%;
 }
 
 .plantConfirmationButton {
-  border-color: var(--color-red) !important;
-  color: var(--color-red) !important;
+  border-color: var(--color-red);
+  color: var(--color-red);
 }
 .smpp-widget-preview div:has(.planttheplantbutton) {
-  width: 100% !important;
+  width: 100%;
 }
 .planttheplantbutton {
-  background-color: transparent !important;
-  border: none !important;
-  width: 100% !important;
+  background-color: transparent;
+  border: none;
+  width: 100%;
 }
 
 #remove-button-top-div {

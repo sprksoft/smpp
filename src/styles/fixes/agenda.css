@@ -1,6 +1,6 @@
 .border {
-  background-image: none !important;
-  background-color: var(--color-base00) !important;
+  background-image: none;
+  background-color: var(--color-base00);
 }
 
 body {
@@ -10,76 +10,76 @@ body {
   padding: 0px;
   overflow-x: hidden;
   overflow-y: hidden;
-  display: flex !important;
-  flex-direction: column !important;
+  display: flex;
+  flex-direction: column;
 }
 
 .agenda_grid_main {
-  background-color: var(--color-base01) !important;
-  border: 3px solid var(--color-base03) !important;
-  border-radius: 10px !important;
+  background-color: var(--color-base01);
+  border: 3px solid var(--color-base03);
+  border-radius: 10px;
 }
 
 #menuContainerContent {
-  background-color: var(--color-base01) !important;
-  border: 3px solid var(--color-base03) !important;
-  border-radius: 10px !important;
-  width: 34px !important;
+  background-color: var(--color-base01);
+  border: 3px solid var(--color-base03);
+  border-radius: 10px;
+  width: 34px;
 }
 
 .color_snow_white {
-  background-color: var(--color-base01) !important;
-  border: 2px solid var(--color-base03) !important;
-  border-radius: 5px !important;
+  background-color: var(--color-base01);
+  border: 2px solid var(--color-base03);
+  border-radius: 5px;
 }
 
 .navNextInput,
 .navPrevInput,
 .ui-datepicker-month,
 .ui-datepicker-year {
-  color: var(--color-accent) !important;
-  background-color: var(--color-base01) !important;
-  border: 2px solid var(--color-base03) !important;
-  border-radius: 5px !important;
+  color: var(--color-accent);
+  background-color: var(--color-base01);
+  border: 2px solid var(--color-base03);
+  border-radius: 5px;
 }
 
 .agenda_grid_header_day,
 .navTitle {
-  color: var(--color-accent) !important;
+  color: var(--color-accent);
 }
 
 .ui-datepicker-header {
-  background-color: var(--color-base01) !important;
-  border: 2px solid var(--color-base03) !important;
-  border-radius: 5px !important;
+  background-color: var(--color-base01);
+  border: 2px solid var(--color-base03);
+  border-radius: 5px;
 }
 
 .ui-state-default {
-  background-color: var(--color-base02) !important;
-  border: 1px solid var(--color-base03) !important;
+  background-color: var(--color-base02);
+  border: 1px solid var(--color-base03);
 }
 
 .border.centery.bottomy,
 .smsclayerloading {
-  display: none !important;
+  display: none;
 }
 
 .cf .margin-top--milli {
-  border: 0px !important;
+  border: 0px;
 }
 
 .border.centerxy {
-  border-right: 1px solid var(--color-base02) !important;
+  border-right: 1px solid var(--color-base02);
 }
 
 .tasksAndMaterials__label:hover {
-  color: var(--color-accent) !important;
+  color: var(--color-accent);
 }
 
 .titleWithLine.grey:after {
-  background: linear-gradient(var(--color-base02), var(--color-base02)) repeat-x !important;
-  background-size: 1px 1px !important;
-  background-position: left center !important;
+  background: linear-gradient(var(--color-base02), var(--color-base02)) repeat-x;
+  background-size: 1px 1px;
+  background-position: left center;
 }
 
 #infoContainerStudent,
@@ -90,30 +90,30 @@ body {
 .wborder.wrightxy,
 .wborder.wcentery.wbottomy,
 .infoContainer {
-  color: var(--color-accent) !important;
-  background: var(--color-base01) !important;
+  color: var(--color-accent);
+  background: var(--color-base01);
 }
 
 #infoContainerNote .infoContainerNoteContent,
 .infoContainerBlock {
-  background-color: var(--color-base02) !important;
+  background-color: var(--color-base02);
 }
 
 .wborder.wbright.wtopr {
-  background: var(--color-base01) !important;
+  background: var(--color-base01);
 }
 
 .wborder.wbright.wbottomr {
-  border-bottom-right-radius: 4px !important;
-  background: var(--color-base01) !important;
+  border-bottom-right-radius: 4px;
+  background: var(--color-base01);
 }
 
 .wborder.wbleft.wtopl {
-  border-top-left-radius: 4px !important;
-  background: var(--color-base01) !important;
+  border-top-left-radius: 4px;
+  background: var(--color-base01);
 }
 
 .wborder.wbleft.wbottoml {
-  border-bottom-left-radius: 8px !important;
-  background: var(--color-base01) !important;
+  border-bottom-left-radius: 8px;
+  background: var(--color-base01);
 }

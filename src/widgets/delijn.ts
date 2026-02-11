@@ -1,11 +1,8 @@
 // @ts-nocheck
-import { WidgetBase, registerWidget } from "./widgets.js";
-import { randomChance, browser } from "../common/utils.ts";
-import {
-  lijnIconSvg,
-  loadingSpinnerSvg,
-  searchButtonSvg,
-} from "../fixes-utils/svgs.js";
+
+import { browser, randomChance } from "../common/utils.ts";
+import { lijnIconSvg, loadingSpinnerSvg, searchButtonSvg } from "../fixes-utils/svgs.js";
+import { registerWidget, WidgetBase } from "./widgets.js";
 
 // Constants and configuration
 
@@ -20,26 +17,23 @@ function calculateTimeUntilDepartureInMins(ETA) {
 
 function getHexByCode(code) {
   const color = lijnDataKleuren.kleuren.find((color) => color.code === code);
-  return color ? "#" + color.hex : null;
+  return color ? `#${color.hex}` : null;
 }
 
 function getHalteDirections(delijnDirectionsData) {
-  let delijnDirectionsArray = [];
+  const delijnDirectionsArray = [];
   delijnDirectionsData.forEach((lijn) => {
-    let description = lijn.omschrijving.split("-");
+    const description = lijn.omschrijving.split("-");
     let descriptionEndStop = description[description.length - 1];
     descriptionEndStop = descriptionEndStop.replace(")", "").replace("(", "");
-    if (
-      !delijnDirectionsArray.includes(descriptionEndStop) &&
-      delijnDirectionsArray.length < 3
-    ) {
+    if (!delijnDirectionsArray.includes(descriptionEndStop) && delijnDirectionsArray.length < 3) {
       delijnDirectionsArray.push(descriptionEndStop);
     }
   });
   return delijnDirectionsArray.join(", ");
 }
 
-async function delay(ms) {
+async function _delay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
@@ -69,7 +63,7 @@ async function createHalteDoorkomst(doorkomst, container, monochrome, signal) {
 
   const originalETA = new Date(doorkomst.dienstregelingTijdstip);
   let ETA = originalETA;
-  let predictionStatuses = doorkomst.predictionStatussen;
+  const predictionStatuses = doorkomst.predictionStatussen;
   let timeUntilDeparture;
   let arrivalTimeDeviation;
 
@@ -83,8 +77,7 @@ async function createHalteDoorkomst(doorkomst, container, monochrome, signal) {
   } else if (predictionStatuses.includes("GEENREALTIME")) {
     lijnCard.classList.add("lijnCardNoData");
     timeUntilDeparture = calculateTimeUntilDepartureInMins(ETA);
-    timeUntilDeparture =
-      timeUntilDeparture < 1 ? "Now" : `${timeUntilDeparture} Min.`;
+    timeUntilDeparture = timeUntilDeparture < 1 ? "Now" : `${timeUntilDeparture} Min.`;
     arrivalTimeDeviation = "No data";
   } else if (predictionStatuses.includes("REALTIME")) {
     if (doorkomst["real-timeTijdstip"] != null) {
@@ -95,11 +88,10 @@ async function createHalteDoorkomst(doorkomst, container, monochrome, signal) {
       arrivalTimeDeviation === 0
         ? "On time"
         : arrivalTimeDeviation > 0
-        ? `+${arrivalTimeDeviation}`
-        : arrivalTimeDeviation;
+          ? `+${arrivalTimeDeviation}`
+          : arrivalTimeDeviation;
     timeUntilDeparture = calculateTimeUntilDepartureInMins(ETA);
-    timeUntilDeparture =
-      timeUntilDeparture < 1 ? "Now" : `${timeUntilDeparture} Min.`;
+    timeUntilDeparture = timeUntilDeparture < 1 ? "Now" : `${timeUntilDeparture} Min.`;
   }
 
   const lijnCardTop = document.createElement("div");
@@ -128,9 +120,7 @@ async function createHalteDoorkomst(doorkomst, container, monochrome, signal) {
 
   const time = document.createElement("span");
   time.classList.add("time");
-  time.textContent = `${ETA.getHours()}:${ETA.getMinutes()
-    .toString()
-    .padStart(2, "0")}`;
+  time.textContent = `${ETA.getHours()}:${ETA.getMinutes().toString().padStart(2, "0")}`;
 
   const timeUntilDepartureElement = document.createElement("span");
   timeUntilDepartureElement.classList.add("timeUntilDeparture");
@@ -153,7 +143,7 @@ async function createHalteDoorkomst(doorkomst, container, monochrome, signal) {
       entiteitnummer,
       lijnnummer,
       monochrome,
-      cardSignal
+      cardSignal,
     );
   } catch (err) {
     if (err.name === "AbortError") {
@@ -168,14 +158,14 @@ async function updateLijnCardWithApiData(
   entiteitnummer,
   lijnnummer,
   monochrome,
-  signal
+  signal,
 ) {
   if (signal?.aborted) return;
 
   try {
     const individualLijnData = await fetchDelijnData(
       `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${entiteitnummer}/${lijnnummer}`,
-      { signal }
+      { signal },
     );
 
     if (signal?.aborted) return;
@@ -185,21 +175,19 @@ async function updateLijnCardWithApiData(
 
     const individualLijnDataColors = await fetchDelijnData(
       `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${entiteitnummer}/${lijnnummer}/lijnkleuren`,
-      { signal }
+      { signal },
     );
 
     if (signal?.aborted) return;
 
     if (!monochrome) {
       lijnNumberElement.style.backgroundColor = getHexByCode(
-        individualLijnDataColors.achtergrond.code
+        individualLijnDataColors.achtergrond.code,
       );
       lijnNumberElement.style.borderColor = getHexByCode(
-        individualLijnDataColors.achtergrondRand.code
+        individualLijnDataColors.achtergrondRand.code,
       );
-      lijnNumberElement.style.color = getHexByCode(
-        individualLijnDataColors.voorgrond.code
-      );
+      lijnNumberElement.style.color = getHexByCode(individualLijnDataColors.voorgrond.code);
     }
   } catch (error) {
     if (error.name === "AbortError") {
@@ -214,7 +202,7 @@ function addDelijnAttest(container) {
   delijnAttestElement.classList.add("delijnAttest");
   delijnAttestElement.target = "_blank";
   delijnAttestElement.rel = "noopener noreferrer";
-  let specialChance = randomChance(1 / 12);
+  const specialChance = randomChance(1 / 12);
   delijnAttestElement.href = specialChance
     ? "https://www.coolblue.be/nl/koffiezetapparaten/koffiezetapparaten-voor-latte-macchiato"
     : "https://www.delijn.be/nl/contact/attest-aanvraag/";
@@ -278,9 +266,7 @@ class DelijnWidget extends WidgetBase {
     this.elements.searchButton = document.createElement("button");
     this.elements.searchButton.classList.add("delijnSearchButton");
     this.elements.searchButton.innerHTML = searchButtonSvg;
-    this.elements.searchButton.addEventListener("click", () =>
-      this.handleHalteSearch()
-    );
+    this.elements.searchButton.addEventListener("click", () => this.handleHalteSearch());
 
     this.elements.bottomContainer = document.createElement("div");
     this.elements.bottomContainer.id = "delijnBottomContainer";
@@ -311,13 +297,13 @@ class DelijnWidget extends WidgetBase {
     try {
       delijnData = await fetchDelijnData(
         `https://api.delijn.be/DLKernOpenData/api/v1/haltes/${this.settings.halte.entiteit}/${this.settings.halte.nummer}/real-time?maxAantalDoorkomsten=${this.settings.maxBusses}`,
-        { signal }
+        { signal },
       );
     } catch (error) {
       if (error.name === "AbortError") {
         return;
       }
-      this.displayInfo("Er liep iets mis: " + error);
+      this.displayInfo(`Er liep iets mis: ${error}`);
       console.error(error);
       return;
     }
@@ -325,9 +311,7 @@ class DelijnWidget extends WidgetBase {
     if (signal.aborted) return;
 
     if (!delijnData.halteDoorkomsten[0]) {
-      this.displayInfo(
-        "Er zijn momenteel geen bussen beschikbaar voor deze halte."
-      );
+      this.displayInfo("Er zijn momenteel geen bussen beschikbaar voor deze halte.");
       return;
     } else if (delijnData.halteDoorkomsten[0].doorkomsten.length < 1) {
       this.displayInfo("Er zijn momenteel geen vertrekkende bussen");
@@ -335,17 +319,11 @@ class DelijnWidget extends WidgetBase {
     }
 
     this.hideInfo();
-    let sortedDoorkomsten = delijnData.halteDoorkomsten[0].doorkomsten.sort(
-      (a, b) => {
-        const timeA = new Date(
-          a["real-timeTijdstip"] || a.dienstregelingTijdstip
-        );
-        const timeB = new Date(
-          b["real-timeTijdstip"] || b.dienstregelingTijdstip
-        );
-        return timeA - timeB;
-      }
-    );
+    const sortedDoorkomsten = delijnData.halteDoorkomsten[0].doorkomsten.sort((a, b) => {
+      const timeA = new Date(a["real-timeTijdstip"] || a.dienstregelingTijdstip);
+      const timeB = new Date(b["real-timeTijdstip"] || b.dienstregelingTijdstip);
+      return timeA - timeB;
+    });
 
     for (const doorkomst of sortedDoorkomsten) {
       if (signal.aborted) return; // Check before each card creation
@@ -354,7 +332,7 @@ class DelijnWidget extends WidgetBase {
         doorkomst,
         this.elements.bottomContainer,
         this.settings.monochrome,
-        signal // Pass signal to createHalteDoorkomst
+        signal, // Pass signal to createHalteDoorkomst
       );
 
       if (signal.aborted) return; // Check after each card creation
@@ -415,11 +393,11 @@ class DelijnWidget extends WidgetBase {
     try {
       delijnHaltesData = await fetchDelijnData(
         `https://api.delijn.be/DLZoekOpenData/v1/zoek/haltes/${searchQuery}?maxAantalHits=${this.searchResultLimit}`,
-        { signal }
+        { signal },
       );
     } catch (error) {
       if (error.name === "AbortError") return;
-      this.displayInfo("Er liep iets mis: " + error);
+      this.displayInfo(`Er liep iets mis: ${error}`);
       return;
     }
 
@@ -437,11 +415,11 @@ class DelijnWidget extends WidgetBase {
     try {
       delijnHaltesLijnrichtingenData = await fetchDelijnData(
         `https://api.delijn.be/DLKernOpenData/api/v1/haltes/lijst/${halteSleutels}/lijnrichtingen`,
-        { signal }
+        { signal },
       );
     } catch (error) {
       if (error.name === "AbortError") return;
-      this.displayInfo("Er liep iets mis: " + error);
+      this.displayInfo(`Er liep iets mis: ${error}`);
       return;
     }
 
@@ -453,8 +431,7 @@ class DelijnWidget extends WidgetBase {
       this.hideInfo();
       const startIndex = this.searchResultLimit - 5;
 
-      const results =
-        delijnHaltesLijnrichtingenData.halteLijnrichtingen.slice(startIndex);
+      const results = delijnHaltesLijnrichtingenData.halteLijnrichtingen.slice(startIndex);
 
       for (let i = 0; i < results.length; i++) {
         if (signal.aborted) return; // <--- Early return before running `createHalteOption`
@@ -468,7 +445,7 @@ class DelijnWidget extends WidgetBase {
       }
     } catch (error) {
       if (error.name !== "AbortError") {
-        this.displayInfo("Er liep iets mis: " + error);
+        this.displayInfo(`Er liep iets mis: ${error}`);
         console.error(error);
       }
       this.setLoadingState(false);
@@ -483,7 +460,7 @@ class DelijnWidget extends WidgetBase {
     halteLijnCard.dataset.haltenummer = halte.halte.haltenummer;
     halteLijnCard.classList.add("lijnCard", "lijnCardHalte");
 
-    const richtingen = "Naar: " + getHalteDirections(halte.lijnrichtingen);
+    const richtingen = `Naar: ${getHalteDirections(halte.lijnrichtingen)}`;
     halteLijnCard.innerHTML = `
     <h3 class="halteTitle">${halte.halte.omschrijving}</h3>
     <div class="halteDirections">${richtingen}</div>
@@ -505,7 +482,7 @@ class DelijnWidget extends WidgetBase {
       try {
         individualLijnData = await fetchDelijnData(
           `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${lijnrichting.entiteitnummer}/${lijnrichting.lijnnummer}`,
-          { signal }
+          { signal },
         );
       } catch (error) {
         if (error.name === "AbortError") return;
@@ -527,7 +504,7 @@ class DelijnWidget extends WidgetBase {
       try {
         individualLijnDataColors = await fetchDelijnData(
           `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${lijnrichting.entiteitnummer}/${lijnrichting.lijnnummer}/lijnkleuren`,
-          { signal }
+          { signal },
         );
       } catch (error) {
         if (error.name === "AbortError") return;
@@ -538,15 +515,9 @@ class DelijnWidget extends WidgetBase {
       if (signal.aborted) return;
 
       if (!this.settings.monochrome) {
-        lijn.style.backgroundColor = getHexByCode(
-          individualLijnDataColors.achtergrond.code
-        );
-        lijn.style.borderColor = getHexByCode(
-          individualLijnDataColors.achtergrondRand.code
-        );
-        lijn.style.color = getHexByCode(
-          individualLijnDataColors.voorgrond.code
-        );
+        lijn.style.backgroundColor = getHexByCode(individualLijnDataColors.achtergrond.code);
+        lijn.style.borderColor = getHexByCode(individualLijnDataColors.achtergrondRand.code);
+        lijn.style.color = getHexByCode(individualLijnDataColors.voorgrond.code);
       }
     }
 
@@ -587,7 +558,7 @@ class DelijnWidget extends WidgetBase {
       this.elements.infoContainer = document.createElement("div");
       this.elements.infoContainer.classList.add(
         "delijnInfoContainer",
-        "delijnInfoContainerVisible"
+        "delijnInfoContainerVisible",
       );
       this.elements.bottomContainer.appendChild(this.elements.infoContainer);
     }

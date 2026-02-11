@@ -1,172 +1,171 @@
 #smscMain div.wide-toolbar.js-wide-toolbar {
-  justify-content: space-between !important;
+  justify-content: space-between;
   max-height: 95%;
-  overflow: auto !important;
-  background-color: var(--color-base00) !important;
-  color: var(--color-text) !important;
-  background: var(--darken-background) !important;
-  backdrop-filter: var(--small-blur) !important;
-  height: fit-content !important;
-  padding: 0.75rem !important;
-  margin-left: 4px !important;
-  border-radius: 25px !important;
-  margin-top: 4px !important;
-  gap: 2rem !important;
-  width: 120px !important;
-  min-width: 100px !important;
+  overflow: auto;
+  background-color: var(--color-base00);
+  color: var(--color-text);
+  background: var(--darken-background);
+  backdrop-filter: var(--small-blur);
+  height: fit-content;
+  padding: 0.75rem;
+  margin-left: 4px;
+  border-radius: 25px;
+  margin-top: 4px;
+  gap: 2rem;
+  width: 120px;
+  min-width: 100px;
 }
 
 .wide-toolbar__item__icon {
-  height: 3.3rem !important;
-  width: 3.3rem !important;
+  height: 3.3rem;
+  width: 3.3rem;
 }
 
-.results-evaluations__content.smsc-container.smsc-container--main
-  .listview__rows {
-  padding-left: 1.5rem !important;
+.results-evaluations__content.smsc-container.smsc-container--main .listview__rows {
+  padding-left: 1.5rem;
 }
 
 [dialog-content] {
-  background-color: var(--color-base01) !important;
-  border: solid 2px var(--color-base02) !important;
-  border-radius: 1rem !important;
-  box-shadow: 0 4px 16px var(--color-shadow) !important;
+  background-color: var(--color-base01);
+  border: solid 2px var(--color-base02);
+  border-radius: 1rem;
+  box-shadow: 0 4px 16px var(--color-shadow);
   padding: 1.5rem;
 }
 
 .glass [dialog-content] {
-  background-color: var(--darken-background) !important;
-  backdrop-filter: var(--surface-blur) !important;
+  background-color: var(--darken-background);
+  backdrop-filter: var(--surface-blur);
 }
 
 .side-panel__panel {
-  max-width: none !important;
-  width: 50vw !important;
+  max-width: none;
+  width: 50vw;
 }
 
 .wide-toolbar__item:after,
 .wide-toolbar__item:before {
-  display: none !important;
+  display: none;
 }
 
 .wide-toolbar__item {
-  background-color: var(--color-base01) !important;
-  color: var(--color-text) !important;
-  border: var(--border-size) solid var(--color-base02) !important;
-  border-radius: 18px !important;
-  margin: 0px !important;
-  width: 100% !important;
-  padding: 0 !important;
-  justify-content: center !important;
-  aspect-ratio: 1/1 !important;
+  background-color: var(--color-base01);
+  color: var(--color-text);
+  border: var(--border-size) solid var(--color-base02);
+  border-radius: 18px;
+  margin: 0px;
+  width: 100%;
+  padding: 0;
+  justify-content: center;
+  aspect-ratio: 1 / 1;
 }
 
 .wide-toolbar__item__icon {
-  z-index: 2 !important;
-  background-size: cover !important;
-  background-repeat: no-repeat !important;
+  z-index: 2;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .wide-toolbar__item__name {
-  background-color: transparent !important;
+  background-color: transparent;
 }
 
 .wide-toolbar__item--selected {
-  background-color: var(--color-base02) !important;
-  border-color: var(--color-base03) !important;
-  font-weight: 800 !important;
+  background-color: var(--color-base02);
+  border-color: var(--color-base03);
+  font-weight: 800;
 }
 
 .wide-toolbar__item--selected:hover {
-  background-color: var(--color-base02) !important;
+  background-color: var(--color-base02);
 }
 
 .wide-toolbar__item:hover {
-  border-color: var(--color-accent) !important;
-  background-color: var(--color-base02) !important;
+  border-color: var(--color-accent);
+  background-color: var(--color-base02);
 }
 
 .title--1,
 .title--5 {
-  color: var(--color-text) !important;
+  color: var(--color-text);
 }
 
 .title--2,
 .smsc-title--1 {
-  color: var(--color-accent) !important;
-  font-weight: 700 !important;
+  color: var(--color-accent);
+  font-weight: 700;
 }
 
 .js-emptystate {
-  box-shadow: none !important;
-  color: var(--color-text) !important;
-  padding: 20px !important;
-  border-radius: 20px !important;
-  margin-left: 20px !important;
-  margin-right: 20px !important;
+  box-shadow: none;
+  color: var(--color-text);
+  padding: 20px;
+  border-radius: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 .glass .results-evaluation--small .side-panel__panel {
-  background: var(--darken-background) !important;
-  backdrop-filter: var(--surface-blur) !important;
+  background: var(--darken-background);
+  backdrop-filter: var(--surface-blur);
 }
 
 .results-evaluation--small .side-panel__panel {
-  background-color: var(--color-base00) !important;
+  background-color: var(--color-base00);
 }
 
 .results-evaluations.results-evaluation--wide .side-panel__panel {
-  background-color: transparent !important;
-  backdrop-filter: none !important;
-  box-shadow: none !important;
+  background-color: transparent;
+  backdrop-filter: none;
+  box-shadow: none;
 }
 
 .side-panel__panel {
-  box-shadow: -10px 0px 20px -10px var(--color-shadow) !important;
+  box-shadow: -10px 0px 20px -10px var(--color-shadow);
 }
 
 .glass .side-panel__panel {
-  background: var(--darken-background) !important;
-  backdrop-filter: var(--surface-blur) !important;
+  background: var(--darken-background);
+  backdrop-filter: var(--surface-blur);
 }
 
 .side-panel__panel {
-  background-color: var(--color-base00) !important;
+  background-color: var(--color-base00);
 }
 
 button.reset-filters-btn.reset-filters-btn--hidden {
-  height: 0px !important;
+  height: 0px;
 }
 
 .evaluation__content:active,
 .evaluation__content[active] {
-  border-color: var(--color-accent) !important;
+  border-color: var(--color-accent);
 }
 
 .table-page .table-page__container__wrapper__table .cell {
-  border: 2px solid var(--color-base02) !important;
+  border: 2px solid var(--color-base02);
 }
 
 .reset-filters-btn-container {
   /*sowwy lukas  (this is the scoll) */
-  margin-bottom: 41px !important;
+  margin-bottom: 41px;
 }
 
 .js-side-panel-next-button,
 .js-side-panel-prev-button {
-  display: none !important;
+  display: none;
 }
 
 .goal-evaluations-details__row {
-  background: var(--darken-background) !important;
-  backdrop-filter: var(--small-blur) !important;
+  background: var(--darken-background);
+  backdrop-filter: var(--small-blur);
 }
 
 button.goal-evaluations-details__row:active {
-  scale: 1 !important;
+  scale: 1;
 }
 
 input.input.bootstrap__input.search-input {
-  border: 2px solid var(--color-base03) !important;
+  border: 2px solid var(--color-base03);
   border-radius: 7px;
 }
 .results-evaluations .results-evaluations__filters {
@@ -177,106 +176,103 @@ input.input.bootstrap__input.search-input {
   display: flex;
   flex-basis: 100%;
   height: 1px;
-  justify-content: flex-end !important;
+  justify-content: flex-end;
   margin-top: 1em;
 }
 
 .contentContainer {
-  background-color: transparent !important;
+  background-color: transparent;
 }
 
 .glass .evaluation-list-item,
 .glass .goals-filter__item,
 .glass .content_container,
 .glass .navigation_container {
-  background-color: var(--darken-background) !important;
-  backdrop-filter: var(--small-blur) !important;
-  color: var(--color-text) !important;
-  border-color: var(--color-base01) !important;
+  background-color: var(--darken-background);
+  backdrop-filter: var(--small-blur);
+  color: var(--color-text);
+  border-color: var(--color-base01);
 }
 
 .evaluation-list-item,
 .goals-filter__item,
 .content_container,
 .navigation_container {
-  background-color: var(--color-base01) !important;
-  color: var(--color-text) !important;
-  border-color: var(--color-base01) !important;
+  background-color: var(--color-base01);
+  color: var(--color-text);
+  border-color: var(--color-base01);
 }
 .dropdown-button {
-  background: var(--color-base01) !important;
-  color: var(--color-text) !important;
-  border-color: var(--color-base02) !important;
+  background: var(--color-base01);
+  color: var(--color-text);
+  border-color: var(--color-base02);
 }
 
 .todo-column [listview] .todo-column__row.active-row {
-  border-radius: 15px !important;
-  background-color: var(--color-base01) !important;
+  border-radius: 15px;
+  background-color: var(--color-base01);
 }
 
-.todo-column
-  [listview]
-  .todo-column__row.active-row
-  .todo-column__actions-cell {
-  background-color: var(--color-base02) !important;
+.todo-column [listview] .todo-column__row.active-row .todo-column__actions-cell {
+  background-color: var(--color-base02);
 }
 
 .evaluation-list-item:hover:not(.evaluation-list-item.selected),
 .dropdown-button:hover,
 .smscleftnavcontainer {
-  box-shadow: none !important;
-  border-color: var(--color-base03) !important;
-  background-color: var(--color-base02) !important;
+  box-shadow: none;
+  border-color: var(--color-base03);
+  background-color: var(--color-base02);
 }
 
 button.goals-filter__item.selected {
-  border-color: var(--color-accent) !important;
-  outline: 1px var(--color-accent) !important;
+  border-color: var(--color-accent);
+  outline: 1px var(--color-accent);
 }
 
 .goals-filter__item:hover:not(.selected) {
-  border-color: var(--color-accent) !important;
+  border-color: var(--color-accent);
 }
 
 .enableAnimations .goals-filter__item {
   transition-property: border-color, outline;
-  transition: 0.2s ease-in-out !important;
+  transition: 0.2s ease-in-out;
 }
 .glass .side-panel__content .side-panel__content__title__name {
-  background: var(--darken-background) !important;
-  backdrop-filter: var(--small-blur) !important;
+  background: var(--darken-background);
+  backdrop-filter: var(--small-blur);
 }
 
 .side-panel__content .side-panel__content__title__name {
-  background: var(--color-base01) !important;
-  width: fit-content !important;
-  padding: 0rem 1rem !important;
-  max-width: 100% !important;
-  flex: unset !important;
-  border-radius: 1.5rem !important;
+  background: var(--color-base01);
+  width: fit-content;
+  padding: 0rem 1rem;
+  max-width: 100%;
+  flex: unset;
+  border-radius: 1.5rem;
 }
 
 .goals-filter__item {
-  border: 2px solid transparent !important;
+  border: 2px solid transparent;
 }
 
 .goals-filter__item {
-  border-radius: 15px !important;
+  border-radius: 15px;
 }
 
 .feedback--white {
-  background-color: var(--color-base00) !important;
-  color: var(--color-text) !important;
+  background-color: var(--color-base00);
+  color: var(--color-text);
 }
 
 .goals__goal__content__title {
-  background-color: var(--color-base00) !important;
-  color: var(--color-text) !important;
-  border: var(--border-size) solid var(--color-base00) !important;
-  border-radius: 7px !important;
-  padding: 10px !important;
-  font-weight: 600 !important;
-  display: flex !important;
+  background-color: var(--color-base00);
+  color: var(--color-text);
+  border: var(--border-size) solid var(--color-base00);
+  border-radius: 7px;
+  padding: 10px;
+  font-weight: 600;
+  display: flex;
 }
 
 .evaluation-graphic.evaluation-graphic--large.evaluation-graphic--percentage.side-panel__content__score__large-ring.c-olive-combo--100,
@@ -287,22 +283,19 @@ button.goals-filter__item.selected {
 .evaluation-graphic.evaluation-graphic--large.evaluation-graphic--image.side-panel__content__score__large-ring.c-orange-combo--100,
 .evaluation-graphic.evaluation-graphic--large.evaluation-graphic--image.side-panel__content__score__large-ring.c-aqua-combo--100,
 .evaluation-graphic.evaluation-graphic--large.evaluation-graphic--image.side-panel__content__score__large-ring.c-red-combo--100 {
-  background-color: var(--color-base00) !important;
+  background-color: var(--color-base00);
 }
 
 .filterlistview.js-filterlistview.evaluations__filterlistview:hover {
-  background-color: transparent !important;
+  background-color: transparent;
 }
 
 .evaluation__content:not(:active):not([active]) {
-  background-color: var(--color-base01) !important;
+  background-color: var(--color-base01);
 }
 
-.evaluation-graphic
-  .evaluation-graphic--goal
-  .evaluation-graphic--icon
-  .goals__goal__graphic {
-  display: none !important;
+.evaluation-graphic .evaluation-graphic--goal .evaluation-graphic--icon .goals__goal__graphic {
+  display: none;
 }
 
 /*Doelen*/
@@ -316,27 +309,25 @@ button.goals-filter__item.selected {
 input[type="search"].input.search-input,
 .feedback,
 .feedback--silver {
-  background-color: var(--color-base01) !important;
-  border-color: var(--color-base02) !important;
+  background-color: var(--color-base01);
+  border-color: var(--color-base02);
 }
 
 .cell__content {
-  background-color: var(--color-base01) !important;
-  padding-left: 20px !important;
+  background-color: var(--color-base01);
+  padding-left: 20px;
 }
 
 .c-steel-combo--100,
 .c-steel-combo-hover--100,
 [listview]
   .listview__row:hover:not(.listview__row--selected)
-  .listview__cell:not(.listview__cell--select-btn):not(
-    .listview__cell--no-hover
-  ) {
-  background-color: transparent !important;
+  .listview__cell:not(.listview__cell--select-btn):not(.listview__cell--no-hover) {
+  background-color: transparent;
 }
 
 .table-page .table-page__container__wrapper__table .cell {
-  border-color: var(--color-base02) !important;
+  border-color: var(--color-base02);
 }
 
 body,
@@ -347,56 +338,56 @@ textarea,
 .modern-message__name,
 .modern-message__subject,
 .msgHeaderVal {
-  color: var(--color-text) !important;
+  color: var(--color-text);
 }
 
 .row--course:not(:last-child) .cell__course-name {
-  border-bottom-color: var(--color-base02) !important;
+  border-bottom-color: var(--color-base02);
 }
 
 .cell {
-  margin: 3px !important;
+  margin: 3px;
 }
 
 .js-course-filters,
 .course-btnbar,
 .js-btn-manual {
-  display: none !important;
+  display: none;
 }
 
 .filterlistview:hover {
-  background-color: transparent !important;
+  background-color: transparent;
 }
 
 .evaluation-graphic--large {
-  border: 8px solid var(--color-base01) !important;
-  box-shadow: none !important;
+  border: 8px solid var(--color-base01);
+  box-shadow: none;
 }
 
 .manual_widgettitle {
-  background-color: var(--color-base01) !important;
-  border: 1px solid var(--color-base02) !important;
+  background-color: var(--color-base01);
+  border: 1px solid var(--color-base02);
 }
 
 .rubrics__row--title {
-  color: var(--color-text) !important;
+  color: var(--color-text);
 }
 
 .token:hover {
-  background-color: var(--color-base02) !important;
-  border-color: var(--color-base03) !important;
+  background-color: var(--color-base02);
+  border-color: var(--color-base03);
 }
 
 .timegrid {
-  background: transparent !important;
+  background: transparent;
 }
 
 .bubble__menu-btn:hover {
-  border-radius: 5px !important;
+  border-radius: 5px;
 }
 
 .separator {
-  background-color: var(--color-base02) !important;
+  background-color: var(--color-base02);
 }
 
 .buis-stats-title {
@@ -406,7 +397,7 @@ textarea,
 .buis-stats-box {
   margin-right: 0.667rem;
   background-color: var(--color-base01);
-  margin-bottom: 0px !important;
+  margin-bottom: 0px;
   border-radius: 50px;
   padding: 4px;
   border: 2px solid var(--color-base02);
@@ -420,68 +411,67 @@ textarea,
   padding: 0px 4px 0px 4px;
   font-size: 17px;
   font-weight: bold;
-  margin-bottom: 0px !important;
-  color: var(--color-accent) !important;
+  margin-bottom: 0px;
+  color: var(--color-accent);
 }
 
 .blob__text,
 span.feedback__text,
 span.evaluation-graphic__progress-ring__description,
 span.evaluation-graphic__progress-ring__value {
-  color: var(--color-text) !important;
+  color: var(--color-text);
 }
 
 .title-and-schoolyear-selector[aria-expanded="true"]
   .title-and-schoolyear-selector__period-container:not(:disabled) {
-  border-color: var(--color-accent) !important;
-  background-color: var(--darken-background) !important;
-  backdrop-filter: var(--small-blur) !important;
+  border-color: var(--color-accent);
+  background-color: var(--darken-background);
+  backdrop-filter: var(--small-blur);
 }
 
 .title-and-schoolyear-selector
   .title-and-schoolyear-selector__period-container:hover:not(:disabled) {
-  border-color: var(--color-accent) !important;
-  backdrop-filter: var(--small-blur) !important;
+  border-color: var(--color-accent);
+  backdrop-filter: var(--small-blur);
 }
 
-.title-and-schoolyear-selector
-  .title-and-schoolyear-selector__period-container:not(:disabled) {
-  border-width: 2px !important;
-  border-radius: 15px !important;
+.title-and-schoolyear-selector .title-and-schoolyear-selector__period-container:not(:disabled) {
+  border-width: 2px;
+  border-radius: 15px;
 }
 
 .enableAnimations
   .title-and-schoolyear-selector
   .title-and-schoolyear-selector__period-container:not(:disabled) {
   transition-property: border-color, background-color;
-  transition: 0.1s !important;
+  transition: 0.1s;
 }
 
 .listview__row.js-listview-row.leerplannen-overview__list__listview__row {
-  background-color: var(--color-base01) !important;
-  border: 2px solid var(--color-base02) !important;
-  max-width: 33% !important;
-  margin-bottom: 10px !important;
-  border-radius: 15px !important;
+  background-color: var(--color-base01);
+  border: 2px solid var(--color-base02);
+  max-width: 33%;
+  margin-bottom: 10px;
+  border-radius: 15px;
 }
 
 .results-goals-overview__content .listview__row.js-listview-row {
-  border-radius: 2rem !important;
-  backdrop-filter: var(--medium-blur) !important;
-  background-color: var(--darken-background) !important;
-  margin-bottom: 1rem !important;
+  border-radius: 2rem;
+  backdrop-filter: var(--medium-blur);
+  background-color: var(--darken-background);
+  margin-bottom: 1rem;
 }
 
 .goal-evaluations-details__row:not(:last-child) {
-  border-color: transparent !important;
+  border-color: transparent;
 }
 
 .results-goals-overview__content .listview__row.js-listview-row:hover {
-  background-color: var(--darken-background) !important;
+  background-color: var(--darken-background);
 }
 
 .filterlistview.leerplan [listview].listview .cell--prefix {
-  min-width: 12rem !important;
+  min-width: 12rem;
 }
 .goal-evaluations-details {
   margin-bottom: 1rem;
@@ -489,177 +479,174 @@ span.evaluation-graphic__progress-ring__value {
   border-radius: 1rem;
 }
 
-.enableAnimations
-  .listview__row.js-listview-row.leerplannen-overview__list__listview__row {
+.enableAnimations .listview__row.js-listview-row.leerplannen-overview__list__listview__row {
   transition-property: border-color, background-color;
-  transition: 0.1s ease-in-out !important;
+  transition: 0.1s ease-in-out;
 }
 
 .listview__row.js-listview-row.leerplannen-overview__list__listview__row:hover {
-  background-color: var(--color-base02) !important;
-  border-color: var(--color-accent) !important;
+  background-color: var(--color-base02);
+  border-color: var(--color-accent);
 }
 
 .title-and-schoolyear-selector__title {
-  border-right: 1px solid var(--color-accent) !important;
+  border-right: 1px solid var(--color-accent);
 }
 
 .evaluation-list-item__container__title {
-  font-weight: 550 !important;
+  font-weight: 550;
 }
 
 .evaluation-list-item__container__subtitle {
-  font-weight: 450 !important;
+  font-weight: 450;
 }
 
 .evaluation__content {
-  border-radius: 6px !important;
+  border-radius: 6px;
 }
 
 td.cell.cell--evaluation.js-cell-evaluation.evaluation:hover {
-  border-color: var(--color-accent) !important;
+  border-color: var(--color-accent);
 }
 
 .feedback .user-image-label {
-  color: var(--color-text) !important;
-  font-weight: 600 !important;
+  color: var(--color-text);
+  font-weight: 600;
 }
 
 .feedback__text {
-  color: var(--color-text) !important;
+  color: var(--color-text);
 }
 
 .js-routehandler.table-page {
-  width: 89vw !important;
+  width: 89vw;
 }
 
 #smscMain.results {
-  height: 100% !important;
-  overflow-y: hidden !important;
-  overflow-x: hidden !important;
-  align-items: normal !important;
-  flex-direction: row !important;
-  justify-content: start !important;
+  height: 100%;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  align-items: normal;
+  flex-direction: row;
+  justify-content: start;
 }
 
 div.reports-overview__listview__row {
-  background-color: rgb(0 0 0 / 20%) !important;
+  background-color: rgb(0 0 0 / 20%);
   border-radius: 1rem;
   margin-bottom: 1rem;
 }
 
 .listview__rows div.reports-overview__listview__row:hover {
-  background-color: rgb(0 0 0 / 50%) !important;
+  background-color: rgb(0 0 0 / 50%);
   border-radius: 1rem;
   margin-bottom: 1rem;
   transition: background-color 0.3s ease;
 }
 
 .evaluation-graphic__progress-ring__value {
-  margin-top: 1rem !important;
+  margin-top: 1rem;
 }
 
 .progress-ring__content .evaluation-graphic__progress-ring__description {
-  margin-top: 1.5rem !important;
+  margin-top: 1.5rem;
 }
 button.button-ZR3rz.bp-c-combo-hover-plain-outline--300,
 .searchInput-eoZIF.textInput-ACLPH {
-  background-color: var(--color-base01) !important;
-  border: 2px solid var(--color-base03) !important;
+  background-color: var(--color-base01);
+  border: 2px solid var(--color-base03);
 }
 
 .input-arO6v {
-  background-color: var(--color-base01) !important;
-  border-right: 2px solid var(--color-base03) !important;
-  color: var(--color-text) !important;
-  margin-right: 0.6rem !important;
+  background-color: var(--color-base01);
+  border-right: 2px solid var(--color-base03);
+  color: var(--color-text);
+  margin-right: 0.6rem;
 }
 .tabs[role="tablist"] > [role="presentation"] > [role="tab"][aria-selected] {
-  box-shadow: none !important;
-  border-bottom: 2px solid var(--color-accent) !important;
-  background-color: var(--color-base02) !important;
+  box-shadow: none;
+  border-bottom: 2px solid var(--color-accent);
+  background-color: var(--color-base02);
 }
 
-.tabs[role="tablist"]
-  > [role="presentation"]
-  > [role="tab"]:hover:not([aria-selected]) {
-  border-bottom-color: var(--color-base03) !important;
+.tabs[role="tablist"] > [role="presentation"] > [role="tab"]:hover:not([aria-selected]) {
+  border-bottom-color: var(--color-base03);
 }
 .tabs[role="tablist"] {
-  border-bottom: none !important;
+  border-bottom: none;
 }
 
 .tabs[role="tablist"] {
-  border-bottom: none !important;
+  border-bottom: none;
 }
 .bubble-_lWSE {
-  background-color: var(--color-base01) !important;
-  border: transparent !important;
-  border-radius: 2rem !important;
-  box-shadow: none !important;
-  box-shadow: 0px 5px 20px 5px rgba(0, 0, 0, 0.3) !important;
+  background-color: var(--color-base01);
+  border: transparent;
+  border-radius: 2rem;
+  box-shadow: none;
+  box-shadow: 0px 5px 20px 5px rgba(0, 0, 0, 0.3);
 }
 .reportFilterDropdown-dAkBc > .js-emptystate {
-  background-color: var(--color-base01) !important;
+  background-color: var(--color-base01);
 }
 .textInput-ACLPH:focus-within {
-  outline: none !important;
+  outline: none;
 }
 .graphicRight-r_Pnt.graphic-g55I1.small-Du6aA > svg > path {
-  fill: var(--color-text) !important;
+  fill: var(--color-text);
 }
 .schoolyearLabel-MtXJE {
-  color: var(--color-text) !important;
-  background: none !important;
+  color: var(--color-text);
+  background: none;
 }
 .feedbackSubItem-uK8I1 {
-  background-color: var(--color-base01) !important;
-  color: var(--color-text) !important;
+  background-color: var(--color-base01);
+  color: var(--color-text);
 }
 .evaluationName-bJYm6 {
-  font-weight: 999 !important;
+  font-weight: 999;
 }
 .token-EsU0c {
-  border: var(--border-size) solid var(--color-base03) !important;
-  background-color: var(--color-base02) !important;
-  color: var(--color-text) !important;
-  box-shadow: none !important;
+  border: var(--border-size) solid var(--color-base03);
+  background-color: var(--color-base02);
+  color: var(--color-text);
+  box-shadow: none;
 }
 button.button-ZR3rz.bp-c-combo-hover-plain-outline--300 {
-  border-color: var(--color-base02) !important;
+  border-color: var(--color-base02);
 }
 .groupTitle-r2b_L {
-  color: var(--color-accent) !important;
+  color: var(--color-accent);
 }
 
 .results-evaluations.js-evaluations-page.js-routehandler.results-evaluation--wide {
-  width: 10% !important;
+  width: 10%;
 }
 .glass .title-and-schoolyear-selector.js-title-and-schoolyear-selector {
-  background: var(--darken-background) !important;
-  backdrop-filter: var(--medium-blur) !important;
+  background: var(--darken-background);
+  backdrop-filter: var(--medium-blur);
 }
 
 .title-and-schoolyear-selector.js-title-and-schoolyear-selector {
-  background: var(--color-base01) !important;
-  border-radius: 1.5rem !important;
-  padding: 0.5rem 1rem !important;
-  width: fit-content !important;
-  max-width: 100% !important;
+  background: var(--color-base01);
+  border-radius: 1.5rem;
+  padding: 0.5rem 1rem;
+  width: fit-content;
+  max-width: 100%;
 }
 
 .glass .bubble {
-  background-color: var(--darken-background) !important;
-  backdrop-filter: var(--medium-blur) !important;
+  background-color: var(--darken-background);
+  backdrop-filter: var(--medium-blur);
 }
 
 .bubble.js-bubble.schoolyear-dropdown-bubble.js-schoolyear-dropdown-bubble {
-  padding: 1.5rem !important;
+  padding: 1.5rem;
 }
 
 .table-page .table-page__header {
   gap: 0.5rem;
 }
 .filterlistview.leerplan [listview].listview .cell {
-  border-color: transparent !important;
+  border-color: transparent;
 }

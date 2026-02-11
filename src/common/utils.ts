@@ -3,7 +3,7 @@ export const DEBUG = false;
 
 export var browser: any;
 declare const chrome: any;
-if (browser == undefined) {
+if (browser === undefined) {
   browser = chrome;
 }
 
@@ -22,7 +22,7 @@ export function getByPath(object: any, path: string): any {
     return object;
   }
   let ob = object;
-  for (let node of path.split(".")) {
+  for (const node of path.split(".")) {
     ob = ob[node];
     if (ob === undefined) {
       throw `getByPath: ${node} did not exist in path ${path}`;
@@ -36,12 +36,20 @@ export function setByPath(object: any, path: string, value: any) {
   let ob = object;
   const pathSplit = path.split(".");
   for (let i = 0; i < pathSplit.length - 1; i++) {
-    ob = ob[pathSplit[i]!];
+    const node = pathSplit[i];
+    if (node === undefined) {
+      throw `setByPath: invalid path ${path}`;
+    }
+    ob = ob[node];
     if (ob === undefined) {
-      throw `setByPath: ${pathSplit[i]} did not exist in path ${path}`;
+      throw `setByPath: ${node} did not exist in path ${path}`;
     }
   }
-  ob[pathSplit[pathSplit.length - 1]!] = value;
+  const leaf = pathSplit[pathSplit.length - 1];
+  if (leaf === undefined) {
+    throw `setByPath: invalid path ${path}`;
+  }
+  ob[leaf] = value;
 }
 
 /// Fills missing fields in an object with values from a default object.
@@ -69,7 +77,7 @@ export function fillObjectWithDefaults(object: any, defaults: any) {
 
 export function openURL(url: string, new_window = false) {
   if (new_window) {
-    let a = document.createElement("a");
+    const a = document.createElement("a");
     a.href = url;
     a.rel = "noopener noreferrer";
     a.target = "_blank";
@@ -116,7 +124,7 @@ export function isAbsoluteUrl(url: string) {
 }
 
 export async function convertLinkToBase64(link: string) {
-  let base64 = (await browser.runtime.sendMessage({
+  const base64 = (await browser.runtime.sendMessage({
     action: "getBase64",
     link: link,
   })) as string | null;

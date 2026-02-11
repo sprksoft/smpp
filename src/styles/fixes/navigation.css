@@ -1,12 +1,12 @@
 .smsc-topnav .topnav__badge {
-  background-color: var(--color-text) !important;
-  color: var(--color-base02) !important;
-  border: 2px solid var(--color-base03) !important;
-  max-height: 18.6px !important;
+  background-color: var(--color-text);
+  color: var(--color-base02);
+  border: 2px solid var(--color-base03);
+  max-height: 18.6px;
 }
 
 .topnav__menu-arrow {
-  display: none !important;
+  display: none;
 }
 
 .topnav__menu--search {
@@ -16,66 +16,66 @@
 }
 
 nav.topnav {
-  border-bottom: none !important;
-  min-height: fit-content !important;
-  padding: 0.5rem !important;
-  top: 0 !important;
-  background: var(--color-base00) !important;
-  height: auto !important;
-  gap: 0.5rem !important;
+  border-bottom: none;
+  min-height: fit-content;
+  padding: 0.5rem;
+  top: 0;
+  background: var(--color-base00);
+  height: auto;
+  gap: 0.5rem;
 }
 
 .smsc-topnav .topnav__menu {
-  overflow: hidden !important;
+  overflow: hidden;
 }
 
 .smsc-topnav .topnav__menu__title {
-  color: var(--color-text) !important;
+  color: var(--color-text);
 }
 
 .topnav__btn,
 .token,
 .titleRight {
-  border: 2px solid var(--color-base02) !important;
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  border-radius: 10000px !important;
-  background: var(--color-base01) !important;
-  padding: 0.15rem 0.75rem !important;
-  height: 2.5rem !important;
-  line-height: initial !important;
-  color: var(--color-text) !important;
-  font-weight: bold !important;
-  text-decoration-color: var(--color-text) !important;
-  text-decoration-thickness: 2px !important;
-  width: auto !important;
-  transition: none !important;
+  border: 2px solid var(--color-base02);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10000px;
+  background: var(--color-base01);
+  padding: 0.15rem 0.75rem;
+  height: 2.5rem;
+  line-height: initial;
+  color: var(--color-text);
+  font-weight: bold;
+  text-decoration-color: var(--color-text);
+  text-decoration-thickness: 2px;
+  width: auto;
+  transition: none;
 }
 
 .topnav__btn:has(svg) {
-  padding: 0rem 0.85rem !important;
+  padding: 0rem 0.85rem;
 }
 
 input::placeholder {
-  opacity: 0.7 !important;
-  color: var(--color-text) !important;
+  opacity: 0.7;
+  color: var(--color-text);
 }
 
 .topnav__menu.topnav__menu--courses {
-  max-height: 50rem !important;
+  max-height: 50rem;
 }
 
 #topnavCoursesTitle {
-  font-size: 1.6rem !important;
-  font-weight: 600 !important;
+  font-size: 1.6rem;
+  font-weight: 600;
 }
 
 .topnav__btn:hover {
-  cursor: pointer !important;
-  text-decoration: underline !important;
-  background-color: var(--color-base02) !important;
-  border-color: var(--color-base03) !important;
+  cursor: pointer;
+  text-decoration: underline;
+  background-color: var(--color-base02);
+  border-color: var(--color-base03);
 }
 
 .topnav__btn:active {
@@ -115,7 +115,7 @@ input::placeholder {
   background-color: var(--color-base01);
   border: 2px solid transparent;
   border-radius: 999px;
-  fill: var(--color-text) !important;
+  fill: var(--color-text);
   box-shadow: 0px 2px 10px 0px var(--color-shadow);
 }
 
@@ -131,43 +131,43 @@ input::placeholder {
 }
 
 #performance-mode-toggle:checked + svg {
-  fill: var(--color-accent) !important;
+  fill: var(--color-accent);
 }
 
 .performanceModeTooltipLabel:hover {
-  border-color: var(--color-base03) !important;
-  background-color: var(--color-base02) !important;
+  border-color: var(--color-base03);
+  background-color: var(--color-base02);
 }
 
 .enableAnimations .topnav__btn,
 .enableAnimations .token,
 .enableAnimations .titleRight {
-  transition-duration: 0.1s !important;
+  transition-duration: 0.1s;
   transition:
     background-color 0.2s,
     border-color 0.3s,
     text-decoration 0.1s,
     width 0.2s,
-    scale 0.2s !important ;
+    scale 0.2s;
 }
 
 .smsc-topnav .topnav__menu,
 .smsctooltip {
-  background-color: var(--color-base01) !important;
-  border: 2px solid var(--color-base03) !important;
-  text-decoration: none !important;
-  border-radius: 2rem !important;
-  color: var(--color-text) !important;
-  align-items: center !important;
-  transition: none !important;
-  overflow-y: hidden !important;
-  box-shadow: 0 0.333rem 1.333rem var(--color-shadow) !important;
+  background-color: var(--color-base01);
+  border: 2px solid var(--color-base03);
+  text-decoration: none;
+  border-radius: 2rem;
+  color: var(--color-text);
+  align-items: center;
+  transition: none;
+  overflow-y: hidden;
+  box-shadow: 0 0.333rem 1.333rem var(--color-shadow);
 }
 
 .glass .smsc-topnav .topnav__menu,
 .glass .smsctooltip {
-  background-color: var(--darken-background) !important;
-  backdrop-filter: var(--small-blur) !important;
+  background-color: var(--darken-background);
+  backdrop-filter: var(--small-blur);
 }
 
 .glass .topnav__menu-wrapper {
@@ -175,60 +175,60 @@ input::placeholder {
 }
 
 .topnav__menu-wrapper {
-  padding: 0 !important;
-  border-radius: 2rem !important;
+  padding: 0;
+  border-radius: 2rem;
 }
 
 .bubble {
-  overflow-y: auto !important;
-  border-radius: 1rem !important;
-  padding: 0.5rem !important;
-  background-color: var(--color-base01) !important;
-  border-color: var(--color-base02) !important;
-  text-decoration: none !important;
+  overflow-y: auto;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  background-color: var(--color-base01);
+  border-color: var(--color-base02);
+  text-decoration: none;
 }
 
 .class:not(.profile_header_pupilinfo_item) {
-  background-color: var(--color-base01) !important;
-  border: 2px solid var(--color-base03) !important;
+  background-color: var(--color-base01);
+  border: 2px solid var(--color-base03);
 
-  border-radius: 2rem !important;
-  color: var(--color-text) !important;
-  align-items: center !important;
-  transition: none !important;
-  overflow-y: hidden !important;
+  border-radius: 2rem;
+  color: var(--color-text);
+  align-items: center;
+  transition: none;
+  overflow-y: hidden;
 }
 
 .smsctooltip {
-  line-height: 25px !important;
-  overflow: hidden !important;
+  line-height: 25px;
+  overflow: hidden;
 }
 
 .todo-column__header__filter {
-  height: 30px !important;
+  height: 30px;
 }
 
 .menu-divider::before {
-  background-color: var(--color-accent) !important;
-  height: var(--border-size) !important;
+  background-color: var(--color-accent);
+  height: var(--border-size);
 }
 
 .topnav-scope button.medium-button.medium-button:hover,
 .smscButton:hover,
 .topnav__menuitem:hover {
-  border-color: var(--color-base03) !important;
-  background-color: var(--color-base02) !important;
-  font-weight: 600 !important;
+  border-color: var(--color-base03);
+  background-color: var(--color-base02);
+  font-weight: 600;
 }
 
 .btn.btn--primary {
-  border-color: var(--color-accent) !important;
-  background-color: var(--color-base02) !important;
+  border-color: var(--color-accent);
+  background-color: var(--color-base02);
 }
 
 .btn.btn--primary:hover {
-  border-color: var(--color-accent) !important;
-  background-color: var(--color-base03) !important;
+  border-color: var(--color-accent);
+  background-color: var(--color-base03);
 }
 
 .campaign-dialog {
@@ -236,23 +236,23 @@ input::placeholder {
 }
 
 .campaign-close-button {
-  background: var(--color-base01) !important;
+  background: var(--color-base01);
 }
 
 .campaign-close-button > svg {
-  fill: var(--color-text) !important;
+  fill: var(--color-text);
 }
 
 .campaign-close-button:hover > svg {
-  fill: var(--color-red) !important;
+  fill: var(--color-red);
 }
 
 .topnav__menuitem {
-  border: var(--border-size) solid transparent !important;
-  border-radius: 10px !important;
-  background-color: transparent !important;
-  margin-right: 0px !important;
-  color: var(--color-text) !important;
+  border: var(--border-size) solid transparent;
+  border-radius: 10px;
+  background-color: transparent;
+  margin-right: 0px;
+  color: var(--color-text);
 }
 
 .enableAnimations .topnav__menuitem {
@@ -263,49 +263,44 @@ input::placeholder {
 }
 
 .topnav__menu--shortcuts > .topnav__menuitem {
-  margin-right: 7x !important;
+  margin-right: 7px;
 }
 
 li {
-  background: transparent !important;
+  background: transparent;
 }
 
 .tree-classic li.open.root {
-  background: none !important;
-  padding: 0px !important;
+  background: none;
+  padding: 0px;
 }
 
 .pupil_nav_pupilinfo {
-  text-align: center !important;
+  text-align: center;
 }
 
-.pupil_nav_info
-  .pupil_nav_info_pupilData
-  .pupil_nav_pupilinfo
-  .pupil_nav_pupilinfo_item.teachers {
-  max-width: none !important;
+.pupil_nav_info .pupil_nav_info_pupilData .pupil_nav_pupilinfo .pupil_nav_pupilinfo_item.teachers {
+  max-width: none;
 }
 
 #lvs_toolbar {
-  background-color: var(--color-base01) !important;
+  background-color: var(--color-base01);
 }
 
 .tree-classic li.open {
-  background: url(/includes/jQuery/plugins/jsTree/themes/classic/icons.png) -32px -48px
-    no-repeat !important;
+  background: url(/includes/jQuery/plugins/jsTree/themes/classic/icons.png) -32px -48px no-repeat;
 }
 
 .tree-classic li.closed {
-  background: url(/includes/jQuery/plugins/jsTree/themes/classic/icons.png) -48px -32px
-    no-repeat !important;
+  background: url(/includes/jQuery/plugins/jsTree/themes/classic/icons.png) -48px -32px no-repeat;
 }
 
 .tree-classic li {
-  background-image: none !important;
+  background-image: none;
 }
 
 .tree li li {
-  overflow: visible !important;
+  overflow: visible;
 }
 
 .tree-classic li:hover,
@@ -314,135 +309,134 @@ li {
 }
 
 .course-list {
-  background: none !important;
-  color: var(--color-base02) !important;
+  background: none;
+  color: var(--color-base02);
 }
 
 .smsc-column-nav__item a.smsc-column-nav__button {
-  font-weight: 500 !important;
-  color: var(--color-text) !important;
+  font-weight: 500;
+  color: var(--color-text);
 }
 
 .smsc-column-nav__item:hover a.smsc-column-nav__button:hover {
-  font-weight: 600 !important;
-  color: var(--color-accent) !important;
+  font-weight: 600;
+  color: var(--color-accent);
 }
 
 .smsc_cm_breadcrumb {
-  font-weight: 600 !important;
-  font-size: 15px !important;
-  margin-bottom: -20px !important;
+  font-weight: 600;
+  font-size: 15px;
+  margin-bottom: -20px;
 }
 
 .treecollapse {
-  padding-left: 5px !important;
-  padding-right: 5px !important;
-  padding-bottom: 5px !important;
-  background-image: none !important;
-  width: fit-content !important;
-  height: fit-content !important;
-  border-radius: 10px !important;
-  border: 2px solid var(--color-base02) !important;
-  background-color: var(--color-base01) !important;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 5px;
+  background-image: none;
+  width: fit-content;
+  height: fit-content;
+  border-radius: 10px;
+  border: 2px solid var(--color-base02);
+  background-color: var(--color-base01);
 }
 
 .enableAnimations .treecollapse {
   transition-property: border-color, background-color, color;
-  transition: 0.1s ease-in-out !important;
+  transition: 0.1s ease-in-out;
 }
 
 .treecollapse a,
 .treecollapse:hover a:hover {
-  color: var(--color-text) !important;
+  color: var(--color-text);
 }
 
 .treecollapse:hover {
-  background-color: var(--color-base02) !important;
-  border-color: var(--color-accent) !important;
+  background-color: var(--color-base02);
+  border-color: var(--color-accent);
 }
 
 #navigation {
-  border-radius: 15px !important;
+  border-radius: 15px;
 }
 
 #navigation table,
 #navigation td {
-  overflow: hidden !important;
-  background-color: transparent !important;
+  overflow: hidden;
+  background-color: transparent;
 }
 
 table {
-  background-color: transparent !important;
+  background-color: transparent;
 }
 
 td[background*="static6"],
 td[background*="images"] {
-  display: none !important;
+  display: none;
 }
 
 td[bgcolor*="#"] {
-  background-color: transparent !important;
+  background-color: transparent;
 }
 
 .smsc_cm_body {
-  position: relative !important;
-  top: 0px !important;
-  margin-top: 37px !important;
-  height: 100% !important;
+  position: relative;
+  top: 0px;
+  margin-top: 37px;
+  height: 100%;
 
-  border: 2px solid var(--color-base02) !important;
-  border-radius: 1.5rem !important;
-  padding: 1rem !important;
+  border: 2px solid var(--color-base02);
+  border-radius: 1.5rem;
+  padding: 1rem;
 }
 
 .margin-top--milli {
-  margin-top: 0px !important;
+  margin-top: 0px;
 }
 
 .js-course-session-page__container {
-  margin: 0px !important;
-  margin-right: 10px !important;
-  position: relative !important;
-  top: 20px !important;
-  border: 2px solid var(--color-base02) !important;
-  border-radius: 15px !important;
+  margin: 0px;
+  margin-right: 10px;
+  position: relative;
+  top: 20px;
+  border: 2px solid var(--color-base02);
+  border-radius: 15px;
 }
 
 .smscleftnav {
-  margin-top: 20px !important;
-  position: relative !important;
-  top: 0px !important;
+  margin-top: 20px;
+  position: relative;
+  top: 0px;
 }
 
 .breadcrumb_url {
-  float: none !important;
-  margin-top: 17px !important;
-  width: fit-content !important;
+  float: none;
+  margin-top: 17px;
+  width: fit-content;
 }
 
 .breadcrumb_spacer {
-  float: none !important;
-  width: 10px !important;
-  margin: 17px 5px 0px 5px !important;
+  float: none;
+  width: 10px;
+  margin: 17px 5px 0px 5px;
 }
 
 .smsc-topnav [data-shortcuts] .topnav__menu--shortcuts hr.menu-divider {
-  border-top: none !important;
+  border-top: none;
 }
 
 .smsc-topnav [data-shortcuts] .topnav__menu--shortcuts .pin-button {
-  right: 0 !important;
+  right: 0;
 }
 
 .smsc-topnav [data-shortcuts] .topnav__menu--shortcuts .pin-button:focus,
 .smsc-topnav [data-shortcuts] .topnav__menu--shortcuts .pin-button:hover {
-  border: 2px solid var(--color-base03) !important;
-  background-color: var(--color-base02) !important;
-  border-radius: 0.5rem !important;
+  border: 2px solid var(--color-base03);
+  background-color: var(--color-base02);
+  border-radius: 0.5rem;
 }
 
 .modern-ui .smsc-topnav .topnav .favourites-container,
 .smsc-topnav .topnav .favourites-container {
-  gap: 0.5rem !important;
+  gap: 0.5rem;
 }
-

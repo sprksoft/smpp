@@ -1,8 +1,4 @@
-import {
-  contractIconSVG,
-  expandIconSVG,
-  closeIconSVG,
-} from "../../fixes-utils/svgs.js";
+import { closeIconSVG, contractIconSVG, expandIconSVG } from "../../fixes-utils/svgs.js";
 
 export class BaseWindow {
   id: string;
@@ -83,15 +79,12 @@ export class BaseWindow {
 
     this._outsideClickHandler = (e: MouseEvent) => {
       if (
-        (e.target as HTMLElement)
-          .closest(".base-dialog")
-          ?.classList.contains("base-dialog") ||
+        (e.target as HTMLElement).closest(".base-dialog")?.classList.contains("base-dialog") ||
         (e.target as HTMLElement).classList?.contains("base-dialog") ||
         (openEventTarget &&
           e.target instanceof Node &&
           (e.target === openEventTarget ||
-            (openEventTarget instanceof Node &&
-              openEventTarget.contains(e.target))))
+            (openEventTarget instanceof Node && openEventTarget.contains(e.target))))
       ) {
         return;
       }
@@ -115,8 +108,7 @@ export class BaseWindow {
     // Focus the first focusable element inside the window
     if (isKeyboardEvent) {
       requestAnimationFrame(() => {
-        const focusableElements =
-          this.element.querySelectorAll<HTMLLabelElement>("label");
+        const focusableElements = this.element.querySelectorAll<HTMLLabelElement>("label");
         if (focusableElements.length > 0) {
           focusableElements[0]?.focus();
         }

@@ -1,7 +1,8 @@
 // @ts-nocheck
-import { WidgetBase, registerWidget } from "./widgets.js";
+
 import { browser } from "../common/utils.js";
 import { plantThePlantSvg, waterPlantSvg } from "../fixes-utils/svgs.js";
+import { registerWidget, WidgetBase } from "./widgets.js";
 
 const plantVersion = 2;
 class PlantWidget extends WidgetBase {
@@ -12,17 +13,17 @@ class PlantWidget extends WidgetBase {
     return plantDiv;
   }
   async createPreview() {
-    let plantPreviewDiv = document.createElement("div");
+    const plantPreviewDiv = document.createElement("div");
     plantPreviewDiv.id = "plantPreviewWidget";
-    let plantData = await browser.runtime.sendMessage({
+    const plantData = await browser.runtime.sendMessage({
       action: "getPlantAppData",
     });
-    let plantTitle = document.createElement("div");
+    const plantTitle = document.createElement("div");
     plantTitle.id = "plant-preview-title";
     plantTitle.innerText = "Plant";
     plantPreviewDiv.appendChild(plantTitle);
-    let plantPreviewImg = document.createElement("div");
-    if (plantData.age == null || plantData.age == 0) {
+    const plantPreviewImg = document.createElement("div");
+    if (plantData.age == null || plantData.age === 0) {
       plantPreviewImg.appendChild(createPlantThePlantVisual());
     } else {
       plantPreviewImg.innerHTML = getPlantHTML(plantData);
@@ -40,52 +41,50 @@ async function createPlantWidget(plantDiv) {
   let plantData = await browser.runtime.sendMessage({
     action: "getPlantAppData",
   });
-  let outdated = checkIfOutdated(plantData.plantVersion);
+  const outdated = checkIfOutdated(plantData.plantVersion);
   plantDiv.innerHTML = "";
   if (outdated) {
     plantDiv.appendChild(createUpdatePrompt(plantData));
     return plantDiv;
   }
-  if (plantData.age == 0) {
+  if (plantData.age === 0) {
     plantDiv.appendChild(createPlantThePlantVisual());
     return plantDiv;
   }
   plantData = calculateGrowth(plantData);
-  if (plantData.birthday != null)
-    plantDiv.appendChild(createPlantStreak(plantData));
+  if (plantData.birthday != null) plantDiv.appendChild(createPlantStreak(plantData));
   plantDiv.appendChild(createPlantVisual(plantData));
   plantDiv.appendChild(await createPlantBottomUI(plantData));
   return plantDiv;
 }
 
 function createPlantVisual(data) {
-  let plantVisualContainer = document.createElement("div");
+  const plantVisualContainer = document.createElement("div");
   plantVisualContainer.id = "plant_image_container";
   plantVisualContainer.innerHTML = getPlantHTML(data);
   return plantVisualContainer;
 }
 
 async function createPlantBottomUI(data) {
-  let currentTime = new Date();
-  let lastWaterTime = new Date(data.lastWaterTime);
-  let timeSinceLastWater = currentTime - lastWaterTime;
-  let bottomUIContainer = document.createElement("div");
+  const currentTime = new Date();
+  const lastWaterTime = new Date(data.lastWaterTime);
+  const timeSinceLastWater = currentTime - lastWaterTime;
+  const bottomUIContainer = document.createElement("div");
   bottomUIContainer.id = "buttondivforplant";
-  let topUIContainer = document.createElement("div");
+  const topUIContainer = document.createElement("div");
   topUIContainer.id = "top-plant-button-div";
-  let UIContainer = document.createElement("div");
+  const UIContainer = document.createElement("div");
   UIContainer.id = "fullbuttondivforplant";
 
-  let waterAmountContainer = document.createElement("div");
+  const waterAmountContainer = document.createElement("div");
   waterAmountContainer.id = "glass-container";
 
-  let waterAmount = document.createElement("div");
+  const waterAmount = document.createElement("div");
   waterAmount.id = "glass-fill";
-  waterAmount.style.height =
-    calculatePercentile(timeSinceLastWater / 1000) + `%`;
+  waterAmount.style.height = `${calculatePercentile(timeSinceLastWater / 1000)}%`;
   waterAmountContainer.appendChild(waterAmount);
 
-  let waterButton = document.createElement("button");
+  const waterButton = document.createElement("button");
   waterButton.id = "watering_button";
   waterButton.innerHTML = waterPlantSvg;
   if (data.isAlive) {
@@ -94,24 +93,24 @@ async function createPlantBottomUI(data) {
     waterButton.classList.add("disabled");
   }
 
-  let lastWaterTimeContainer = document.createElement("div");
+  const lastWaterTimeContainer = document.createElement("div");
   lastWaterTimeContainer.id = "time_difference_last_watered";
 
-  let lastWaterTimeTitle = document.createElement("span");
+  const lastWaterTimeTitle = document.createElement("span");
   lastWaterTimeTitle.id = "water_title";
   lastWaterTimeTitle.innerText = "Watered";
 
-  let lastWaterTimeElement = document.createElement("span");
+  const lastWaterTimeElement = document.createElement("span");
   lastWaterTimeElement.id = "water_time";
   lastWaterTimeElement.innerText = getTimeInCorrectFormat(timeSinceLastWater);
   lastWaterTimeContainer.appendChild(lastWaterTimeTitle);
   lastWaterTimeContainer.appendChild(lastWaterTimeElement);
 
   if (!data.isAlive) {
-    let removeButton = createRemoveButton(false);
+    const removeButton = createRemoveButton(false);
     topUIContainer.appendChild(removeButton);
-  } else if (data.age == 8) {
-    let removeButton = createRemoveButton(true);
+  } else if (data.age === 8) {
+    const removeButton = createRemoveButton(true);
     topUIContainer.appendChild(removeButton);
   }
 
@@ -124,35 +123,34 @@ async function createPlantBottomUI(data) {
   return UIContainer;
 }
 async function updatePlantBottomUI(data) {
-  let currentTime = new Date();
-  let lastWaterTime = new Date(data.lastWaterTime);
-  let timeSinceLastWater = currentTime - lastWaterTime;
+  const currentTime = new Date();
+  const lastWaterTime = new Date(data.lastWaterTime);
+  const timeSinceLastWater = currentTime - lastWaterTime;
   document.getElementById("glass-fill").style.height =
-    calculatePercentile(timeSinceLastWater / 1000) + `%`;
-  document.getElementById("water_time").innerText =
-    getTimeInCorrectFormat(timeSinceLastWater);
+    `${calculatePercentile(timeSinceLastWater / 1000)}%`;
+  document.getElementById("water_time").innerText = getTimeInCorrectFormat(timeSinceLastWater);
 }
 function createPlantStreak(data) {
-  let plantStreak = document.createElement("h2");
+  const plantStreak = document.createElement("h2");
   plantStreak.id = "plant_streak";
   plantStreak.innerText = `${data.daysSinceBirthday} ${
-    data.daysSinceBirthday == 1 ? "Day" : "Days"
+    data.daysSinceBirthday === 1 ? "Day" : "Days"
   }`;
   return plantStreak;
 }
 
 function checkIfOutdated(version) {
-  return Boolean(!version || version != plantVersion);
+  return Boolean(!version || version !== plantVersion);
 }
 
 function createUpdatePrompt(data) {
-  let updatePromptContainer = document.createElement("div");
+  const updatePromptContainer = document.createElement("div");
   updatePromptContainer.id = "update-prompt-container";
-  let updatePromptTitle = document.createElement("h1");
+  const updatePromptTitle = document.createElement("h1");
   updatePromptTitle.innerText = `Update Required!`;
-  let updatePromptDescription = document.createElement("p");
+  const updatePromptDescription = document.createElement("p");
   updatePromptDescription.innerHTML = `You have to reset to be up to date \nYour version: <b>${data.plantVersion}</b> is not the newest available version`;
-  let resetButton = document.createElement("button");
+  const resetButton = document.createElement("button");
   resetButton.innerText = "Reset Plant";
   resetButton.id = "removeplantButton";
   resetButton.addEventListener("click", resetPlant);
@@ -178,45 +176,43 @@ function calculatePercentile(t) {
 function getTimeInCorrectFormat(t) {
   if (t / 60 / 1000 < 1) return "Now";
   // check if time is less than 1 minute
-  if (t / 60 / 60 / 1000 < 1) return Math.round(t / 60 / 1000) + "min ago";
+  if (t / 60 / 60 / 1000 < 1) return `${Math.round(t / 60 / 1000)}min ago`;
   // check if time is less than 1 hour
-  if (t / 60 / 60 / 1000 / 24 < 1)
-    return Math.round(t / 60 / 60 / 1000) + "h ago";
+  if (t / 60 / 60 / 1000 / 24 < 1) return `${Math.round(t / 60 / 60 / 1000)}h ago`;
   // check if time is less than 1 day
-  return Math.round(t / 60 / 60 / 1000 / 24) + "d ago";
+  return `${Math.round(t / 60 / 60 / 1000 / 24)}d ago`;
   // time is more than 1 day
 }
 
 function createRemoveButton(isAlive) {
-  let removeButtonDiv = document.createElement("div");
+  const removeButtonDiv = document.createElement("div");
   removeButtonDiv.id = "remove-button-div";
 
-  let removeButtonBottomDiv = document.createElement("div");
+  const removeButtonBottomDiv = document.createElement("div");
   removeButtonBottomDiv.id = "remove-button-bottom-div";
 
-  let removeButtonTopDiv = document.createElement("div");
+  const removeButtonTopDiv = document.createElement("div");
   removeButtonTopDiv.id = "remove-button-top-div";
 
-  let removeButton = document.createElement("button");
+  const removeButton = document.createElement("button");
   removeButton.id = "removeplantButton";
   removeButton.innerText = "Remove plant";
 
-  let removeInfoButton = document.createElement("div");
+  const removeInfoButton = document.createElement("div");
   removeInfoButton.id = "remove_button_info";
   removeInfoButton.innerText = "?";
 
-  removeInfoButton.addEventListener("mouseover", function () {
+  removeInfoButton.addEventListener("mouseover", () => {
     removeInfo.style.opacity = "1";
   });
-  removeInfoButton.addEventListener("mouseout", function () {
+  removeInfoButton.addEventListener("mouseout", () => {
     removeInfo.style.opacity = "0";
   });
 
-  let removeInfo = document.createElement("div");
+  const removeInfo = document.createElement("div");
   removeInfo.id = "plant_remove_info_text";
   if (isAlive) {
-    removeInfo.innerText =
-      "Your plant is fully grown, remove it to plant a new one (optional)";
+    removeInfo.innerText = "Your plant is fully grown, remove it to plant a new one (optional)";
     removeButton.addEventListener("click", displayConfirmButton);
   } else {
     removeInfo.innerText = "Your plant has died, remove it to plant a new one";
@@ -234,7 +230,7 @@ function createRemoveButton(isAlive) {
 }
 
 function displayConfirmButton() {
-  let removeplantButton = document.getElementById("removeplantButton");
+  const removeplantButton = document.getElementById("removeplantButton");
   removeplantButton.innerText = "Are you sure?";
   removeplantButton.classList.add("plantConfirmationButton");
   removeplantButton.addEventListener("click", resetPlant);
@@ -242,7 +238,7 @@ function displayConfirmButton() {
 //plant logic
 
 async function userWateredPlant() {
-  let data = await browser.runtime.sendMessage({
+  const data = await browser.runtime.sendMessage({
     action: "getPlantAppData",
   });
   data.lastWaterTime = new Date();
@@ -260,20 +256,20 @@ function calculateGrowth(data) {
   const msIn1Day = 1000 * 60 * 60 * 24;
   const daysSinceLastGrow = (currentTime - lastGrowTime) / msIn1Day;
   const daysSinceLastWater = (currentTime - lastWaterTime) / msIn1Day;
-  if (daysSinceLastGrow >= 2 && data.age != 8) {
+  if (daysSinceLastGrow >= 2 && data.age !== 8) {
     // check if plant should grow
     data.age += 1;
     data.lastGrowTime = currentTime;
   }
   if (data.age > 8) data.age = 8;
   // some bug in previous code
-  if (daysSinceLastWater > 3 && data.age != 1) data.isAlive = false;
+  if (daysSinceLastWater > 3 && data.age !== 1) data.isAlive = false;
   // check if plant should die
   if (data.age > 1 && data.birthday == null) data.birthday = currentTime;
   // check if plant is no longer a seed
   if (data.birthday != null && data.isAlive) {
     data.daysSinceBirthday = Math.round(
-      (currentTime - new Date(data.birthday)) / (1000 * 60 * 60 * 24) + 1
+      (currentTime - new Date(data.birthday)) / (1000 * 60 * 60 * 24) + 1,
     );
   }
   browser.runtime.sendMessage({
@@ -295,7 +291,7 @@ function plantThePlant() {
     "#d8d475",
     "#f5cb04",
   ];
-  let plantData = {
+  const plantData = {
     age: 1,
     lastWaterTime: new Date(),
     lastGrowTime: new Date(),
@@ -312,15 +308,15 @@ function plantThePlant() {
   createPlantWidget(document.getElementById("plantWidget"));
 }
 function createPlantThePlantVisual() {
-  let plantThePlantButton = document.createElement("button");
+  const plantThePlantButton = document.createElement("button");
   plantThePlantButton.classList.add("planttheplantbutton");
   plantThePlantButton.addEventListener("click", plantThePlant);
   plantThePlantButton.innerHTML = plantThePlantSvg;
   return plantThePlantButton;
 }
 function getPlantHTML(data) {
-  if (Number(data.age) == 0) {
-    if (Boolean(data.isAlive)) {
+  if (Number(data.age) === 0) {
+    if (data.isAlive) {
       return `<div id="planttheplantbutton">
                 <svg xmlns="http://www.w3.org/2000/svg" id="plant_the_plant_svg" data-name="Laag 2" viewBox="0 0 50.16 37.5">
                     <defs>
@@ -365,8 +361,8 @@ function getPlantHTML(data) {
 }
 
 export function getPlantSvg(data) {
-  let age = Number(data.age);
-  let isAlive = Boolean(data.isAlive);
+  const age = Number(data.age);
+  const isAlive = Boolean(data.isAlive);
 
   switch (age) {
     case 0:

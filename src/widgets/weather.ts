@@ -1,20 +1,21 @@
 // @ts-nocheck
-import { WidgetBase, registerWidget } from "./widgets.js";
+
 import { browser } from "../common/utils.js";
-import { applyWeatherEffects } from "../main-features/appearance/weather-effects.js";
 import {
-  humiditySvg,
   feelsLikeSvg,
-  windSvg,
-  temperatureSvg,
+  humiditySvg,
   noLocationSvg,
+  temperatureSvg,
+  windSvg,
 } from "../fixes-utils/svgs.js";
+import { applyWeatherEffects } from "../main-features/appearance/weather-effects.js";
+import { registerWidget, WidgetBase } from "./widgets.js";
 
 class WeatherWidgetBase extends WidgetBase {
   isCompact = false;
 
   async createContent() {
-    let newWeatherData = await this.getWeatherData();
+    const newWeatherData = await this.getWeatherData();
 
     return this.createHTML(newWeatherData);
   }
@@ -22,10 +23,7 @@ class WeatherWidgetBase extends WidgetBase {
   async getWeatherData() {
     if (this.settings.cache.weatherData == null) {
       await this.updateCache();
-    } else if (
-      (new Date() - new Date(this.settings.cache.lastUpdateDate)) / 1000 / 60 >
-      10
-    ) {
+    } else if ((Date.now() - new Date(this.settings.cache.lastUpdateDate)) / 1000 / 60 > 10) {
       await this.updateCache();
     }
     return this.settings.cache.weatherData;
@@ -39,9 +37,7 @@ class WeatherWidgetBase extends WidgetBase {
   }
 
   async updateCache() {
-    let newWeatherData = await this.fetchWeatherData(
-      this.settings.currentLocation
-    );
+    const newWeatherData = await this.fetchWeatherData(this.settings.currentLocation);
 
     if (newWeatherData.name) {
       await this.setSetting("currentLocation", newWeatherData.name);
@@ -69,8 +65,8 @@ class WeatherWidgetBase extends WidgetBase {
   }
 
   async updateWeatherLocation(event) {
-    let newLocation = event.target.value.trim();
-    if (newLocation == "") {
+    const newLocation = event.target.value.trim();
+    if (newLocation === "") {
       event.target.value = this.settings.currentLocation;
       return;
     }
@@ -97,31 +93,28 @@ class WeatherWidgetBase extends WidgetBase {
 
   createHTML(weatherData) {
     this.updateWeatherEffect();
-    let container = document.createElement("div");
+    const container = document.createElement("div");
     container.classList.add("weather-div");
     if (this.isCompact) container.classList.add("compact");
 
-    let topContentContainer = document.createElement("div");
+    const topContentContainer = document.createElement("div");
     topContentContainer.classList.add("top-weather-content-container");
-    let bottomContentContainer = document.createElement("div");
+    const bottomContentContainer = document.createElement("div");
     bottomContentContainer.classList.add("bottom-weather-content-container");
 
-    let locationInput = document.createElement("input");
+    const locationInput = document.createElement("input");
     locationInput.classList.add("weather-location-input");
     locationInput.value = this.settings.currentLocation;
     locationInput.type = "text";
     locationInput.placeholder = "Locatie";
     locationInput.spellcheck = false;
     locationInput.classList.add("inactive");
-    locationInput.addEventListener(
-      "change",
-      this.updateWeatherLocation.bind(this)
-    );
+    locationInput.addEventListener("change", this.updateWeatherLocation.bind(this));
 
     topContentContainer.appendChild(locationInput);
     container.appendChild(topContentContainer);
 
-    if (this.settings.currentLocation == "Locatie") {
+    if (this.settings.currentLocation === "Locatie") {
       locationInput.classList.add("not-initialized");
       locationInput.value = "";
 
@@ -132,7 +125,7 @@ class WeatherWidgetBase extends WidgetBase {
         e.target.placeholder = "Locatie";
       });
 
-      let mainIcon = document.createElement("div");
+      const mainIcon = document.createElement("div");
       mainIcon.classList.add("weather-icon-container");
       mainIcon.innerHTML = getWeatherIcon(null, "broken clouds");
 
@@ -141,74 +134,74 @@ class WeatherWidgetBase extends WidgetBase {
       return container;
     }
 
-    if (weatherData.cod != 200) {
+    if (weatherData.cod !== 200) {
       console.log(weatherData.cod);
 
       container.appendChild(createNotFoundContent(weatherData.cod));
       return container;
     }
 
-    let description = document.createElement("span");
+    const description = document.createElement("span");
     description.classList.add("weather-description");
     description.innerText = weatherData.weather[0].main;
 
-    let mainIcon = document.createElement("div");
+    const mainIcon = document.createElement("div");
     mainIcon.classList.add("weather-icon-container");
     mainIcon.innerHTML = getWeatherIcon(
       weatherData.weather[0].main,
-      weatherData.weather[0].description
+      weatherData.weather[0].description,
     );
 
-    let temperature = document.createElement("span");
+    const temperature = document.createElement("span");
     temperature.classList.add("temperature");
-    temperature.innerText = Math.round(weatherData.main.temp) + "°C";
+    temperature.innerText = `${Math.round(weatherData.main.temp)}°C`;
 
-    let conditionsContainer = document.createElement("div");
+    const conditionsContainer = document.createElement("div");
     conditionsContainer.classList.add("conditions-container");
 
-    let humidityContainer = document.createElement("div");
+    const humidityContainer = document.createElement("div");
     humidityContainer.classList.add("humidity-container");
     humidityContainer.classList.add("condition-container");
-    let humidityIcon = document.createElement("div");
+    const humidityIcon = document.createElement("div");
     humidityIcon.classList.add("humidity-icon");
     humidityIcon.innerHTML = humiditySvg;
-    let humidity = document.createElement("span");
+    const humidity = document.createElement("span");
     humidity.classList.add("humidity");
-    humidity.innerText = weatherData.main.humidity + "%";
+    humidity.innerText = `${weatherData.main.humidity}%`;
     humidityContainer.appendChild(humidityIcon);
     humidityContainer.appendChild(humidity);
 
-    let feelsLikeContainer = document.createElement("div");
+    const feelsLikeContainer = document.createElement("div");
     feelsLikeContainer.classList.add("feels-like-container");
     feelsLikeContainer.classList.add("condition-container");
-    let feelsLikeIcon = document.createElement("div");
+    const feelsLikeIcon = document.createElement("div");
     feelsLikeIcon.classList.add("feels-like-icon");
     feelsLikeIcon.innerHTML = feelsLikeSvg;
-    let feelsLike = document.createElement("span");
+    const feelsLike = document.createElement("span");
     feelsLike.classList.add("feels-like");
-    feelsLike.innerText = Math.round(weatherData.main.feels_like) + "°C";
+    feelsLike.innerText = `${Math.round(weatherData.main.feels_like)}°C`;
     feelsLikeContainer.appendChild(feelsLikeIcon);
     feelsLikeContainer.appendChild(feelsLike);
 
-    let windContainer = document.createElement("div");
+    const windContainer = document.createElement("div");
     windContainer.classList.add("wind-container");
     windContainer.classList.add("condition-container");
-    let windIcon = document.createElement("div");
+    const windIcon = document.createElement("div");
     windIcon.classList.add("wind-icon");
     windIcon.innerHTML = windSvg;
-    let wind = document.createElement("span");
+    const wind = document.createElement("span");
     wind.classList.add("wind");
-    wind.innerText = Math.round(Number(weatherData.wind.speed) * 3.6) + "km/h";
+    wind.innerText = `${Math.round(Number(weatherData.wind.speed) * 3.6)}km/h`;
     windContainer.appendChild(windIcon);
     windContainer.appendChild(wind);
 
     topContentContainer.appendChild(description);
     topContentContainer.appendChild(mainIcon);
     if (this.isCompact) {
-      let temperatureContainer = document.createElement("div");
+      const temperatureContainer = document.createElement("div");
       temperatureContainer.classList.add("temperature-container");
       temperatureContainer.classList.add("condition-container");
-      let temperatureIcon = document.createElement("div");
+      const temperatureIcon = document.createElement("div");
       temperatureIcon.classList.add("temperature-icon");
       temperatureIcon.innerHTML = temperatureSvg;
       temperatureContainer.appendChild(temperatureIcon);
@@ -243,51 +236,51 @@ registerWidget(new CompactWeatherWidget());
 registerWidget(new WeatherWidget());
 
 function createWeatherPreview(isCompact) {
-  let container = document.createElement("div");
+  const container = document.createElement("div");
   container.classList.add("weather-div");
   container.classList.add("preview");
   if (isCompact) container.classList.add("compact");
-  let weatherTitle = document.createElement("div");
+  const weatherTitle = document.createElement("div");
   weatherTitle.classList.add("weather-preview-title");
   weatherTitle.innerText = isCompact ? "Tiny Weather" : "Weather";
   container.appendChild(weatherTitle);
 
-  let mainIcon = document.createElement("div");
+  const mainIcon = document.createElement("div");
   mainIcon.classList.add("weather-icon-container");
 
   mainIcon.innerHTML = getWeatherIcon(null, "broken clouds");
-  let conditionsContainer = document.createElement("div");
+  const conditionsContainer = document.createElement("div");
   conditionsContainer.classList.add("conditions-container");
 
-  let humidityContainer = document.createElement("div");
+  const humidityContainer = document.createElement("div");
   humidityContainer.classList.add("humidity-container");
   humidityContainer.classList.add("condition-container");
-  let humidityIcon = document.createElement("div");
+  const humidityIcon = document.createElement("div");
   humidityIcon.classList.add("humidity-icon");
   humidityIcon.innerHTML = humiditySvg;
   humidityContainer.appendChild(humidityIcon);
 
-  let feelsLikeContainer = document.createElement("div");
+  const feelsLikeContainer = document.createElement("div");
   feelsLikeContainer.classList.add("feels-like-container");
   feelsLikeContainer.classList.add("condition-container");
-  let feelsLikeIcon = document.createElement("div");
+  const feelsLikeIcon = document.createElement("div");
   feelsLikeIcon.classList.add("feels-like-icon");
   feelsLikeIcon.innerHTML = feelsLikeSvg;
   feelsLikeContainer.appendChild(feelsLikeIcon);
 
-  let windContainer = document.createElement("div");
+  const windContainer = document.createElement("div");
   windContainer.classList.add("wind-container");
   windContainer.classList.add("condition-container");
-  let windIcon = document.createElement("div");
+  const windIcon = document.createElement("div");
   windIcon.classList.add("wind-icon");
   windIcon.innerHTML = windSvg;
   windContainer.appendChild(windIcon);
 
   if (isCompact) {
-    let temperatureContainer = document.createElement("div");
+    const temperatureContainer = document.createElement("div");
     temperatureContainer.classList.add("temperature-container");
     temperatureContainer.classList.add("condition-container");
-    let temperatureIcon = document.createElement("div");
+    const temperatureIcon = document.createElement("div");
     temperatureIcon.classList.add("temperature-icon");
     temperatureIcon.innerHTML = temperatureSvg;
     temperatureContainer.appendChild(temperatureIcon);
@@ -300,7 +293,7 @@ function createWeatherPreview(isCompact) {
     conditionsContainer.appendChild(feelsLikeContainer);
     conditionsContainer.appendChild(windContainer);
   }
-  let bottomContentContainer = document.createElement("div");
+  const bottomContentContainer = document.createElement("div");
   bottomContentContainer.classList.add("weather-widget-content");
 
   bottomContentContainer.appendChild(mainIcon);
@@ -311,16 +304,16 @@ function createWeatherPreview(isCompact) {
 }
 
 function createNotFoundContent(code) {
-  let notFoundContent = document.createElement("div");
-  let notFoundText = document.createElement("span");
+  const notFoundContent = document.createElement("div");
+  const notFoundText = document.createElement("span");
   notFoundText.classList.add("not-found-text");
-  if (code == 404) {
-    let notFoundIcon = document.createElement("div");
+  if (code === 404) {
+    const notFoundIcon = document.createElement("div");
     notFoundIcon.classList.add("no-location-icon");
     notFoundIcon.innerHTML = noLocationSvg;
     notFoundContent.appendChild(notFoundIcon);
     notFoundText.innerText = "Location not found";
-  } else if (code == 69) {
+  } else if (code === 69) {
     notFoundText.innerText = `Unexpected error:\nUnable to fetch`;
   } else {
     notFoundText.innerText = `Unexpected error:\n${code}`;
@@ -360,6 +353,6 @@ function getWeatherIcon(description, cloudDescription) {
       return `<svg xmlns="http://www.w3.org/2000/svg" id="weather-icon-tstorms" class="weather-icon tstorms" viewBox="0 0 64 64"><g id="tstorms"><path class="blue-weather-fill" d="M19.7 53c-.2 0-.4 0-.6-.1-.7-.3-.9-1.1-.6-1.8l2.8-5.8c.3-.7 1.1-.9 1.8-.6.7.3.9 1.1.6 1.8l-2.8 5.8c-.3.4-.7.7-1.2.7zM13.1 53c-.2 0-.4 0-.6-.1-.7-.3-.9-1.1-.6-1.8l2.8-5.8c.3-.7 1.1-.9 1.8-.6.7.3.9 1.1.6 1.8l-2.8 5.8c-.2.4-.7.7-1.2.7zM46.8 53c-.2 0-.4 0-.6-.1-.7-.3-.9-1.1-.6-1.8l2.8-5.8c.3-.7 1.1-.9 1.8-.6.7.3.9 1.1.6 1.8L48 52.3c-.2.4-.7.7-1.2.7zM40.2 53c-.2 0-.4 0-.6-.1-.7-.3-.9-1.1-.6-1.8l2.8-5.8c.3-.7 1.1-.9 1.8-.6.7.3.9 1.1.6 1.8l-2.8 5.8c-.2.4-.7.7-1.2.7z"/><path class="orange-weather-fill" d="M27.7 59.3c-.2 0-.5-.1-.7-.2-.6-.4-.8-1.2-.4-1.8l7.9-13.1h-8.3L35.5 31c.4-.6 1.2-.7 1.8-.3.6.4.7 1.3.3 1.9l-6.4 9.1h7.9L28.8 58.6c-.2.4-.7.7-1.1.7z"/><path class="st2" d="M50.9 22.3c.1-.8.2-1.6.2-2.4 0-7.4-6-13.4-13.4-13.4-4.5 0-8.7 2.3-11.2 6-1.1-.5-2.4-.8-3.6-.8-5.1 0-9.3 4.2-9.3 9.3v.3c-4.1 1.4-7 5.2-7 9.7 0 5.6 4.6 10.2 10.2 10.2h5c1.6 0 1.5-2.6 0-2.6h-5c-4.2 0-7.5-3.4-7.5-7.5 0-3.6 2.5-6.7 6.1-7.4l1.3-.2-.2-1.3c-.1-.4-.1-.8-.1-1.1 0-3.6 3-6.6 6.6-6.6 1.2 0 2.4.3 3.5 1l1.2.7.7-1.3c1.9-3.5 5.5-5.7 9.5-5.7 5.9 0 10.7 4.8 10.7 10.7 0 1.1-.2 2.2-.5 3.3l-.8 1.8 2.1-.1h.3c3.8 0 6.8 3.1 6.8 6.8 0 3.8-3.1 6.8-6.8 6.8H44c-1.7 0-2 2.6 0 2.6h5.7c5.2 0 9.5-4.3 9.5-9.5 0-4.7-3.7-8.7-8.3-9.3z"/></g></svg>`;
     default:
       console.error("Main weather not recognized:", description);
-      return "Main weather not recognized:" + description;
+      return `Main weather not recognized:${description}`;
   }
 }

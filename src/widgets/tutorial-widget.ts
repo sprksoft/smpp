@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { WidgetBase, registerWidget } from "./widgets.js";
+import { registerWidget, WidgetBase } from "./widgets.js";
 
 class TutorialWidget extends WidgetBase {
   constructor() {
@@ -10,34 +10,34 @@ class TutorialWidget extends WidgetBase {
     this.container = document.createElement("div");
     this.container.id = "tutorial-widget";
 
-    let title = document.createElement("h1");
+    const title = document.createElement("h1");
     title.className = "tutorial-widget-title";
     title.textContent = "Widgets Tutorial";
     title.style.textAlign = "center";
     this.container.appendChild(title);
 
-    let langTitle = document.createElement("p");
+    const langTitle = document.createElement("p");
     langTitle.className = "tutorial-lang-title";
     langTitle.textContent = "Choose a language / Kies je taal";
     this.container.appendChild(langTitle);
 
-    let langButtons = document.createElement("div");
+    const langButtons = document.createElement("div");
     langButtons.className = "lang-buttons";
 
-    let englishButton = document.createElement("button");
+    const englishButton = document.createElement("button");
     englishButton.id = "english-tutorial-lang";
 
-    let englishIcon = document.createElement("div");
+    const englishIcon = document.createElement("div");
     englishIcon.id = "english-tutorial-lang-icon";
     englishButton.appendChild(englishIcon);
 
     englishButton.appendChild(document.createTextNode(" English"));
     langButtons.appendChild(englishButton);
 
-    let dutchButton = document.createElement("button");
+    const dutchButton = document.createElement("button");
     dutchButton.id = "dutch-tutorial-lang";
 
-    let dutchIcon = document.createElement("div");
+    const dutchIcon = document.createElement("div");
     dutchIcon.id = "dutch-tutorial-lang-icon";
     dutchButton.appendChild(dutchIcon);
 
@@ -46,7 +46,7 @@ class TutorialWidget extends WidgetBase {
 
     this.container.appendChild(langButtons);
 
-    dutchButton.addEventListener("click", (e) => {
+    dutchButton.addEventListener("click", (_e) => {
       this.lang = "dutch";
       this.displayWidgetTutorial(1);
     });
@@ -87,9 +87,8 @@ class TutorialWidget extends WidgetBase {
     description.className = "tutorial-widget-description";
 
     switch (stage) {
-      case 1:
-        title.textContent =
-          this.lang === "dutch" ? "1. Bewerken📝" : "1. Edit📝";
+      case 1: {
+        title.textContent = this.lang === "dutch" ? "1. Bewerken📝" : "1. Edit📝";
         description.innerHTML =
           this.lang === "dutch"
             ? `Pas je widgets aan door op de <button class="topnav__btn smpp-button" style="display:inline-flex !important; pointer-events: none"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" class="edit_button" height="18px" width="18px" viewBox="0 0 24 24" xml:space="preserve">
@@ -107,10 +106,10 @@ class TutorialWidget extends WidgetBase {
           editBtn.addEventListener("click", this.boundEditTutorial);
         }
         break;
+      }
 
       case 2:
-        title.textContent =
-          this.lang === "dutch" ? "2. Verplaatsen📍" : "2. Move📍";
+        title.textContent = this.lang === "dutch" ? "2. Verplaatsen📍" : "2. Move📍";
         description.innerHTML =
           this.lang === "dutch"
             ? "Sleep <strong><i>deze widget</i></strong> naar de gewenste locatie en laat los om ze te verplaatsen."
@@ -125,7 +124,7 @@ class TutorialWidget extends WidgetBase {
         this.boundMoveTutorial = this.moveTutorial.bind(this);
         this.element.addEventListener("mousedown", this.boundMoveTutorial);
         break;
-      case 3:
+      case 3: {
         title.innerHTML =
           this.lang === "dutch"
             ? `3. Widgets toevoegen <svg class="smpp-widget-bag-handle-icon" style="pointer-events: none; height: 1em; width: 1.2em; display:inline" version="1.1" viewBox="0 0 448 448" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-.898 -124.01)"><path d="m26.458 288.48 198.44 119.06 198.44-119.06" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="100px"></path></g></svg>`
@@ -144,10 +143,10 @@ class TutorialWidget extends WidgetBase {
           bagHandle.addEventListener("click", this.boundBagTutorial);
         }
         break;
+      }
 
       case 4:
-        title.textContent =
-          this.lang === "dutch" ? "4. Verwijderen❌" : "4. Removing❌";
+        title.textContent = this.lang === "dutch" ? "4. Verwijderen❌" : "4. Removing❌";
         description.innerHTML =
           this.lang === "dutch"
             ? "Sleep <strong><i>deze widget</i></strong> naar diezelfde balk om hem te verwijderen."

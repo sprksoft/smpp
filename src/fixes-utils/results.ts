@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { getSchoolName } from "./utils.js";
 export function buisStats() {
-  setTimeout(function () {
+  setTimeout(() => {
     const url = `https://${getSchoolName()}.smartschool.be/results/api/v1/evaluations/?itemsOnPage=1000`;
 
     fetch(url)
@@ -22,11 +22,9 @@ export function buisStats() {
             }
           }
         });
-        let newElement = document.createElement("div");
+        const newElement = document.createElement("div");
         newElement.id = "buis-stats";
-        document
-          .getElementsByClassName("results-evaluations__filters")[0]
-          .appendChild(newElement);
+        document.getElementsByClassName("results-evaluations__filters")[0].appendChild(newElement);
         newElement.innerHTML = `<div class="buis-stats" id="buis_amount"></div><div class="buis-stats" id="voldoende_amount"></div>`;
         document.getElementById("buis_amount").innerHTML =
           `<div class="buis-stats-box"><span class="buis-stats-title">Onvoldoendes:</span><span class="buis-stats-value">${categories.buis}</span></div>`;

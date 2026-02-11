@@ -8,9 +8,7 @@ let defaultSettings;
 
 export async function getSettingsTemplate() {
   if (!settingsTemplate) {
-    settingsTemplate = await loadJSON(
-      "background-scripts/data/settings-template.json"
-    );
+    settingsTemplate = await loadJSON("background-scripts/data/settings-template.json");
   }
   settingsTemplate.appearance.theme = Object.keys(await getThemes());
 
@@ -19,9 +17,7 @@ export async function getSettingsTemplate() {
 
 export async function getDefaultSettings() {
   if (!defaultSettings) {
-    defaultSettings = await loadJSON(
-      "background-scripts/data/default-settings.json"
-    );
+    defaultSettings = await loadJSON("background-scripts/data/default-settings.json");
   }
   return defaultSettings;
 }
@@ -30,7 +26,7 @@ export async function getSettingsData(): any {
   let data = (await browser.storage.local.get("settingsData")).settingsData;
   data = fillObjectWithDefaults(data, await getDefaultSettings());
 
-  let categorized = {};
+  const categorized = {};
   const template = await getSettingsTemplate();
   for (const cat of Object.keys(template)) {
     for (const fieldName of Object.keys(template[cat])) {

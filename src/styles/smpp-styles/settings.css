@@ -5,7 +5,7 @@
 }
 
 .settings-category-button {
-  border: 2px solid transparent !important;
+  border: 2px solid transparent;
 
   width: 100%;
   background-color: var(--color-base01);
@@ -16,7 +16,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: start;
-  font-size: 1.6rem !important;
+  font-size: 1.6rem;
   gap: 1rem;
 }
 
@@ -26,22 +26,22 @@
 }
 
 .settings-radio:checked + label {
-  border-color: var(--color-base03) !important;
+  border-color: var(--color-base03);
   background-color: var(--color-base02);
-  color: var(--color-accent) !important;
-  font-weight: 600 !important;
+  color: var(--color-accent);
+  font-weight: 600;
 }
 
 .settings-radio:checked + label:focus-visible {
-  border-color: var(--color-accent) !important;
+  border-color: var(--color-accent);
 }
 
 .settings-category-button-js:active {
-  scale: 0.95 !important;
+  scale: 0.95;
 }
 
 .settings-category-button-js:focus-visible {
-  border-color: var(--color-accent) !important;
+  border-color: var(--color-accent);
 }
 
 .settings-category-button-js:hover {
@@ -88,7 +88,7 @@
 }
 
 .profile-settings-button {
-  border: 2px solid transparent !important;
+  border: 2px solid transparent;
   display: flex;
   flex-direction: row;
   gap: 1rem;
@@ -104,7 +104,7 @@
 
 .profile-picture-settings {
   background-image: var(--profile-picture);
-  image-rendering: smooth !important;
+  image-rendering: smooth;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -123,13 +123,13 @@
 }
 
 #profile-settings-label-title {
-  margin: 0 !important;
+  margin: 0;
   font-size: 1.5rem;
-  text-wrap: nowrap !important;
+  text-wrap: nowrap;
 }
 
 .profile-settings-label-description {
-  margin: 0 !important;
+  margin: 0;
 }
 
 #settings-page {
@@ -155,13 +155,13 @@
   background: var(--color-base01);
   outline: none;
   opacity: 1;
-  margin-bottom: 1rem !important;
+  margin-bottom: 1rem;
   width: 18rem;
-  border: 2px solid transparent !important;
+  border: 2px solid transparent;
 }
 
 .settings-page-slider:focus-visible {
-  border-color: var(--color-base03) !important;
+  border-color: var(--color-base03);
 }
 
 .enableAnimations .settings-page-slider {
@@ -169,9 +169,8 @@
     opacity 0.2s,
     border-color 0.2s ease-in-out;
 }
-.settings-page-weather-overlay-container
-  .settings-page-image-button-wrapper:has(input:checked) {
-  border-color: transparent !important;
+.settings-page-weather-overlay-container .settings-page-image-button-wrapper:has(input:checked) {
+  border-color: transparent;
   background-color: var(--color-base02);
 }
 
@@ -179,7 +178,7 @@
   width: 1.4rem;
   height: 1.4rem;
   border-radius: 50%;
-  background: var(--color-accent) !important;
+  background: var(--color-accent);
   border-color: transparent;
   cursor: pointer;
   transition: opacity 0.2s ease-in-out;
@@ -191,7 +190,7 @@
   width: 1.4rem;
   height: 1.4rem;
   border-radius: 50%;
-  background: var(--color-accent) !important;
+  background: var(--color-accent);
   border-color: transparent;
   cursor: pointer;
   transition: opacity 0.2s ease-in-out;
@@ -201,33 +200,33 @@
 .settings-page-small-title {
   font-size: 1.3rem;
   font-weight: 500;
-  margin: 0 !important;
-  margin-bottom: 0.5rem !important;
+  margin: 0;
+  margin-bottom: 0.5rem;
   cursor: default;
 }
 
 .settings-page-section-title {
   font-size: 1.6rem;
   font-weight: 600;
-  margin: 0 !important;
-  margin-bottom: 0.1rem !important;
-  margin-top: 2rem !important;
+  margin: 0;
+  margin-bottom: 0.1rem;
+  margin-top: 2rem;
   cursor: default;
 }
 
 .settings-page-main-title {
   font-size: 2.25rem;
   font-weight: 700;
-  margin: 0 !important;
+  margin: 0;
   cursor: default;
 }
 
 .settings-page-main-title:not(:first-of-type) {
-  margin-top: 2rem !important;
+  margin-top: 2rem;
 }
 
 .settings-page-image {
-  border-radius: 0.75rem !important;
+  border-radius: 0.75rem;
 }
 
 .enableAnimations .smpp-text-input {
@@ -236,25 +235,25 @@
 }
 
 .smpp-text-input {
-  background-color: var(--color-base01) !important;
-  border-color: var(--color-base02) !important;
-  border-radius: 1rem !important;
-  padding: 0.6rem 0.8rem !important;
-  border: 2px solid var(--color-base02) !important;
-  font-size: 1.2rem !important;
-  width: 20rem !important;
+  background-color: var(--color-base01);
+  border-color: var(--color-base02);
+  border-radius: 1rem;
+  padding: 0.6rem 0.8rem;
+  border: 2px solid var(--color-base02);
+  font-size: 1.2rem;
+  width: 20rem;
 }
 
 #settings-page .full-file-input-container {
-  width: 20rem !important;
+  width: 20rem;
 }
 
 .full-file-input-container .smpp-text-input {
-  width: 100% !important;
+  width: 100%;
 }
 
 .smpp-text-input:focus-visible {
-  border-color: var(--color-base03) !important;
+  border-color: var(--color-base03);
 }
 
 .enableAnimations .settings-page-image-button-wrapper {
@@ -263,7 +262,7 @@
 }
 
 .settings-page-image-button-wrapper:focus-visible {
-  outline: 2px solid var(--color-base03) !important;
+  outline: 2px solid var(--color-base03);
 }
 
 .settings-page-image-button-wrapper:active {
@@ -273,7 +272,7 @@
 .settings-page-image-button-wrapper > img {
   width: 100%;
   height: 100%;
-  border-radius: 0px !important;
+  border-radius: 0px;
   object-fit: cover;
 }
 
@@ -281,13 +280,13 @@
   display: inline-block;
   position: relative;
   cursor: pointer;
-  margin: 0 !important;
+  margin: 0;
   overflow: hidden;
   width: 80px;
   height: 80px;
   border-radius: 1.5rem;
   border: 0.5rem solid transparent;
-  outline: 2px solid transparent !important;
+  outline: 2px solid transparent;
 }
 
 .settings-page-image-button-wrapper input[type="radio"] {
@@ -295,7 +294,7 @@
 }
 
 label.settings-page-image-button-wrapper:has(input:checked) {
-  border-color: var(--color-accent) !important;
+  border-color: var(--color-accent);
 }
 
 .settings-page-image-wrapper img.settings-page-image {
@@ -316,8 +315,7 @@ label.settings-page-image-button-wrapper:has(input:checked) {
 }
 
 .enableAnimations .settings-page-theme-card {
-  transition-property:
-    background-color, border-color, color, transform, outline;
+  transition-property: background-color, border-color, color, transform, outline;
   transition: 0.15s ease-in-out;
 }
 
@@ -358,12 +356,12 @@ label.settings-page-image-button-wrapper:has(input:checked) {
   font-weight: 400;
   max-width: 18rem;
   font-size: 1rem;
-  margin-bottom: 0.75rem !important;
-  margin-top: 0 !important;
+  margin-bottom: 0.75rem;
+  margin-top: 0;
 }
 
 .settings-page-icons-container.settings-page-weather-overlay-container {
-  margin-bottom: 1.5rem !important;
+  margin-bottom: 1.5rem;
   background-color: var(--color-base01);
   width: fit-content;
   width: 20rem;
@@ -384,7 +382,7 @@ label.settings-page-image-button-wrapper:has(input:checked) {
 .settings-page-slider-label {
   font-size: 1.4rem;
   font-weight: 400;
-  margin: 0rem !important;
+  margin: 0rem;
 }
 
 #settings-page .smpp-file-input-button,
@@ -407,10 +405,10 @@ label.settings-page-image-button-wrapper:has(input:checked) {
   gap: 1rem;
   font-size: 1.4rem;
   font-weight: 400;
-  margin: 0 !important;
-  margin-bottom: 1rem !important;
-  height: fit-content !important;
-  background-color: var(--color-base01) !important;
+  margin: 0;
+  margin-bottom: 1rem;
+  height: fit-content;
+  background-color: var(--color-base01);
   max-width: 30rem;
 }
 
@@ -419,7 +417,7 @@ label.settings-page-image-button-wrapper:has(input:checked) {
 }
 
 .settings-page-button-label-container:first-of-type > span {
-  margin-top: 0rem !important;
+  margin-top: 0rem;
 }
 
 .settings-page-slider.settings-page-labeled-slider::-webkit-slider-thumb {
@@ -450,27 +448,25 @@ label.settings-page-image-button-wrapper:has(input:checked) {
 .settings-page-slider.settings-page-labeled-slider {
   width: 9rem;
   background-color: var(--color-base02);
-  margin: 0 !important;
+  margin: 0;
   height: 1.75rem;
 }
 
 .settings-page-slider-container {
   display: flex;
   flex-direction: row;
-  height: 4rem !important;
+  height: 4rem;
   gap: 0.25rem;
   background-color: var(--color-base01);
   max-width: 30rem;
   align-items: center;
-  margin: 0 !important;
-  margin-bottom: 1rem !important;
+  margin: 0;
+  margin-bottom: 1rem;
   border-radius: 1000px;
 }
 
 .settings-page-slider-container:has(#settings-page-weather-overlay-slider),
-.settings-page-slider-container:has(
-  #settings-page-weather-overlay-opacity-slider
-) {
+.settings-page-slider-container:has(#settings-page-weather-overlay-opacity-slider) {
   width: 20rem;
   gap: 1rem;
 }
@@ -480,49 +476,42 @@ label.settings-page-image-button-wrapper:has(input:checked) {
   z-index: 1000;
 }
 
-.enableAnimations
-  input.settings-page-keybinding-input[type="text"]:not(.aaaaaa):read-only {
-  transition: opacity 0.1s ease-in-out !important;
+.enableAnimations input.settings-page-keybinding-input[type="text"]:not(.aaaaaa):read-only {
+  transition: opacity 0.1s ease-in-out;
 }
 
 input.settings-page-keybinding-input[type="text"]:not(.aaaaaa):read-only {
-  padding: 0.25rem 0.5rem !important;
-  font-size: 1.6rem !important;
-  color: var(--color-accent) !important;
-  border-radius: 10000px !important;
+  padding: 0.25rem 0.5rem;
+  font-size: 1.6rem;
+  color: var(--color-accent);
+  border-radius: 10000px;
 
-  width: fit-content !important;
-  max-width: 14rem !important;
+  width: fit-content;
+  max-width: 14rem;
   font-weight: 700;
   transform-origin: 100%;
   text-align: right;
   opacity: 0.6;
 }
 
-input.settings-page-keybinding-input[type="text"]:not(
-    .aaaaaa
-  ):read-only:hover:not(.listening) {
+input.settings-page-keybinding-input[type="text"]:not(.aaaaaa):read-only:hover:not(.listening) {
   cursor: pointer;
   opacity: 1;
 }
 
-.settings-page-key-bind-container:has(
-  input.settings-page-keybinding-input.listening
-) {
-  border-color: var(--color-base02) !important;
+.settings-page-key-bind-container:has(input.settings-page-keybinding-input.listening) {
+  border-color: var(--color-base02);
 }
 
-input.settings-page-keybinding-input[type="text"]:not(
-    .aaaaaa
-  ):read-only.listening {
+input.settings-page-keybinding-input[type="text"]:not(.aaaaaa):read-only.listening {
   font-weight: 500;
-  color: var(--color-text) !important;
+  color: var(--color-text);
   opacity: 1;
 }
 
 .settings-page-keybinding-input {
-  background-color: transparent !important;
-  caret-color: transparent !important;
+  background-color: transparent;
+  caret-color: transparent;
 }
 
 .settings-page-disclaimer-button {
@@ -556,16 +545,16 @@ input.settings-page-keybinding-input[type="text"]:not(
 }
 
 .settings-page-reset-button {
-  background-color: var(--color-base01) !important;
-  border: 2px solid var(--color-base02) !important;
-  border-radius: 1000rem !important;
-  padding: 1rem 1.5rem !important;
-  font-size: 1.4rem !important;
-  font-weight: 500 !important;
-  width: 16.5rem !important ;
-  cursor: pointer !important;
-  color: var(--color-text) !important;
-  margin-bottom: 1rem !important;
+  background-color: var(--color-base01);
+  border: 2px solid var(--color-base02);
+  border-radius: 1000rem;
+  padding: 1rem 1.5rem;
+  font-size: 1.4rem;
+  font-weight: 500;
+  width: 16.5rem;
+  cursor: pointer;
+  color: var(--color-text);
+  margin-bottom: 1rem;
 }
 
 .enableAnimations .settings-page-reset-button {
@@ -574,8 +563,8 @@ input.settings-page-keybinding-input[type="text"]:not(
 }
 
 .settings-page-reset-button:hover {
-  background-color: var(--color-base02) !important;
-  border-color: var(--color-base03) !important;
+  background-color: var(--color-base02);
+  border-color: var(--color-base03);
 }
 
 .settings-page-reset-button:active {
@@ -644,8 +633,8 @@ input.settings-page-keybinding-input[type="text"]:not(
   border: none;
   border-radius: 0.75rem;
   border: 2px solid var(--color-base02);
-  font-size: 1.4rem !important;
-  font-weight: 500 !important;
+  font-size: 1.4rem;
+  font-weight: 500;
   cursor: pointer;
 }
 
@@ -682,22 +671,22 @@ input.settings-page-keybinding-input[type="text"]:not(
 }
 
 #profile-picture-input-container {
-  margin-bottom: 1.5rem !important;
+  margin-bottom: 1.5rem;
 }
 
 .settings-radio {
-  display: none !important;
+  display: none;
 }
 .enableAnimations #quickSettings #extraSettingsButton {
   transition:
     scale 0.1s ease-in-out,
     border-color 0.2s ease-in-out,
-    background 0.2s ease-in-out !important;
+    background 0.2s ease-in-out;
 }
 
 #quickSettings #extraSettingsButton {
   margin-top: 0.5rem;
-  color: var(--color-accent) !important;
+  color: var(--color-accent);
   appearance: none;
   padding: 0.5rem 1.5rem;
 
@@ -707,8 +696,8 @@ input.settings-page-keybinding-input[type="text"]:not(
   border: none;
   border-radius: 1.25rem;
   border: 2px solid var(--color-base03);
-  font-size: 1.4rem !important;
-  font-weight: 700 !important;
+  font-size: 1.4rem;
+  font-weight: 700;
   cursor: pointer;
   width: 100%;
   box-shadow: 0px 2px 10px 0px var(--color-shadow);
@@ -720,13 +709,13 @@ input.settings-page-keybinding-input[type="text"]:not(
 }
 
 #quickSettings #extraSettingsButton:focus-visible {
-  border-color: var(--color-accent) !important;
+  border-color: var(--color-accent);
 }
 
 #quickSettings #extraSettingsButton > svg {
   width: 1.75rem;
   height: 1.75rem;
-  fill: var(--color-accent) !important;
+  fill: var(--color-accent);
   overflow: visible;
   align-self: flex-end;
 }
@@ -750,31 +739,31 @@ input.settings-page-keybinding-input[type="text"]:not(
 
 .keybind-unbind-button {
   display: block;
-  background: var(--color-base01) !important;
+  background: var(--color-base01);
   border-radius: 10000px;
-  width: 2.25rem !important;
-  height: 2.25rem !important;
-  border: 2px solid var(--color-base02) !important;
-  position: absolute !important;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 2px solid var(--color-base02);
+  position: absolute;
   right: -1.2rem;
   top: -1.2rem;
-  padding: 0.2rem !important;
+  padding: 0.2rem;
   opacity: 0;
-  pointer-events: none !important;
+  pointer-events: none;
 }
 
 .listening + .keybind-unbind-button {
   opacity: 1;
-  pointer-events: all !important;
+  pointer-events: all;
 }
 
 .keybind-unbind-button svg {
-  stroke: var(--color-red) !important;
+  stroke: var(--color-red);
 }
 
 .keybind-unbind-button:hover {
-  background: var(--color-base02) !important;
-  border-color: var(--color-red) !important;
+  background: var(--color-base02);
+  border-color: var(--color-red);
 }
 
 .keybind-unbind-button:active {
@@ -788,7 +777,7 @@ input.settings-page-keybinding-input[type="text"]:not(
 .smpp-color-picker {
   display: flex;
   flex-direction: column;
-  gap: 1rem !important;
+  gap: 1rem;
   -webkit-user-select: none;
   user-select: none;
 }
@@ -822,7 +811,7 @@ input.settings-page-keybinding-input[type="text"]:not(
 
 .color-picker-field {
   width: 100%;
-  aspect-ratio: 16/9;
+  aspect-ratio: 16 / 9;
   position: relative;
   border-radius: 1rem;
   overflow: hidden;
@@ -837,7 +826,7 @@ input.settings-page-keybinding-input[type="text"]:not(
   height: 100%;
   transform: translate(-50%, -50%);
   pointer-events: none;
-  background-color: var(--current-color) !important;
+  background-color: var(--current-color);
 }
 
 .color-picker-field .color-cursor-wrapper {
@@ -872,13 +861,13 @@ input.settings-page-keybinding-input[type="text"]:not(
 .smpp-color-picker-bottom-container .color-preview {
   width: 25%;
   border-radius: 1rem;
-  background-color: var(--current-color) !important;
+  background-color: var(--current-color);
   height: 100%;
-  border: 2px solid var(--color-base02) !important;
+  border: 2px solid var(--color-base02);
 }
 
 .smpp-color-picker-bottom-container .smpp-text-input {
-  width: 65% !important;
+  width: 65%;
   height: 100%;
 }
 
@@ -908,7 +897,7 @@ input.settings-page-keybinding-input[type="text"]:not(
   height: 100%;
   transform: translate(-50%, -50%);
   pointer-events: none;
-  background-color: var(--max-sat) !important;
+  background-color: var(--max-sat);
 }
 
 .hue-picker .color-cursor-wrapper {
@@ -919,16 +908,16 @@ input.settings-page-keybinding-input[type="text"]:not(
 }
 
 .copy-hex-button {
-  background-color: var(--color-base01) !important;
-  border: 2px solid var(--color-base02) !important;
-  border-radius: 1rem !important;
-  padding: 0 !important;
-  font-size: 1.4rem !important;
-  font-weight: 500 !important;
-  width: 20% !important ;
-  cursor: pointer !important;
-  color: var(--color-text) !important;
-  padding: 0.1rem 0.4rem !important;
+  background-color: var(--color-base01);
+  border: 2px solid var(--color-base02);
+  border-radius: 1rem;
+  padding: 0;
+  font-size: 1.4rem;
+  font-weight: 500;
+  width: 20%;
+  cursor: pointer;
+  color: var(--color-text);
+  padding: 0.1rem 0.4rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -937,13 +926,13 @@ input.settings-page-keybinding-input[type="text"]:not(
 .copy-hex-button > svg {
   width: 100%;
   height: 100%;
-  stroke: var(--color-text) !important;
+  stroke: var(--color-text);
 }
 
 .copy-hex-button > .done-icon {
   width: 90%;
   height: 70%;
-  fill: var(--color-green) !important;
+  fill: var(--color-green);
 }
 
 .enableAnimations .copy-hex-button {
@@ -952,11 +941,11 @@ input.settings-page-keybinding-input[type="text"]:not(
 }
 
 .copy-hex-button:hover {
-  background-color: var(--color-base02) !important;
-  border-color: var(--color-base03) !important;
+  background-color: var(--color-base02);
+  border-color: var(--color-base03);
 }
 .copy-hex-button:hover > svg {
-  stroke: var(--color-accent) !important;
+  stroke: var(--color-accent);
 }
 
 .theme-tile-bottom {
@@ -968,24 +957,23 @@ input.settings-page-keybinding-input[type="text"]:not(
 }
 
 .enableAnimations .bottom-container-button {
-  transition-property:
-    opacity, border-color, stroke, background, scale, fill !important;
-  transition: 0.3s ease-out !important;
+  transition-property: opacity, border-color, stroke, background, scale, fill;
+  transition: 0.3s ease-out;
 }
 
 .bottom-container-button {
-  background-color: var(--color-base01-local) !important;
-  border: 2px solid var(--color-base02-local) !important;
-  box-shadow: 0px 0px 10px 2px var(--color-shadow) !important;
-  border-radius: 1rem !important;
-  padding: 0 !important;
-  font-size: 1.4rem !important;
-  font-weight: 500 !important;
-  width: 3rem !important ;
+  background-color: var(--color-base01-local);
+  border: 2px solid var(--color-base02-local);
+  box-shadow: 0px 0px 10px 2px var(--color-shadow);
+  border-radius: 1rem;
+  padding: 0;
+  font-size: 1.4rem;
+  font-weight: 500;
+  width: 3rem;
   height: 100%;
-  cursor: pointer !important;
-  color: var(--color-text) !important;
-  padding: 0.1rem 0.4rem !important;
+  cursor: pointer;
+  color: var(--color-text);
+  padding: 0.1rem 0.4rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -995,7 +983,7 @@ input.settings-page-keybinding-input[type="text"]:not(
 .bottom-container-button > svg {
   width: 100%;
   height: 100%;
-  stroke: var(--color-text-local) !important;
+  stroke: var(--color-text-local);
 }
 
 .enableAnimations .bottom-container-button {
@@ -1006,8 +994,8 @@ input.settings-page-keybinding-input[type="text"]:not(
 }
 
 .bottom-container-button:hover {
-  background-color: var(--color-base02-local) !important;
-  border-color: var(--color-base03-local) !important;
+  background-color: var(--color-base02-local);
+  border-color: var(--color-base03-local);
 }
 
 button .bottom-container-button:active {
@@ -1015,7 +1003,7 @@ button .bottom-container-button:active {
 }
 
 .bottom-container-button:hover > svg {
-  stroke: var(--color-accent-local) !important;
+  stroke: var(--color-accent-local);
 }
 
 .theme-tile-title {
@@ -1053,14 +1041,13 @@ button .bottom-container-button:active {
 }
 
 .enableAnimations .theme-tile {
-  transition-property:
-    background-color, border-color, color, transform, outline;
+  transition-property: background-color, border-color, color, transform, outline;
   transition: 0.15s ease-in-out;
   animation: theme-tile 0.2s ease-out;
 }
 
 #settings-page .theme-tile:not(.aaaaa) {
-  outline: 2px solid transparent !important;
+  outline: 2px solid transparent;
   display: flex;
   flex-direction: column;
   border: 0.3rem solid transparent;
@@ -1069,14 +1056,14 @@ button .bottom-container-button:active {
   height: 104px;
   padding: 0.25rem;
   border-radius: 1.5rem;
-  background-color: var(--color-base01) !important;
+  background-color: var(--color-base01);
   cursor: pointer;
   height: fit-content;
   position: relative;
 }
 
 #settings-page .theme-tile:not(.aaaaa).is-selected {
-  border-color: var(--color-accent-local) !important;
+  border-color: var(--color-accent-local);
 }
 
 .theme-tile:active:not(:has(.bottom-container-button:active)) {
@@ -1084,54 +1071,29 @@ button .bottom-container-button:active {
 }
 
 .theme-tile .image-container {
-  border-radius: 1rem !important;
-  object-fit: cover !important;
-  object-position: center !important;
-  background-size: cover !important;
-  background-position: center !important;
-  background-color: var(--color-base02-local) !important;
+  border-radius: 1rem;
+  object-fit: cover;
+  object-position: center;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--color-base02-local);
   height: 6rem;
   background:
     var(--background-image-local),
     linear-gradient(
       40deg,
-      color-mix(
-          in srgb,
-          var(--color-base03-local) 70%,
-          var(--color-accent-local) 30%
-        )
-        0%,
-      color-mix(
-          in srgb,
-          var(--color-base03-local) 65%,
-          var(--color-accent-local) 35%
-        )
-        15%,
-      color-mix(
-          in srgb,
-          var(--color-base02-local) 70%,
-          var(--color-accent-local) 30%
-        )
-        45%,
-      color-mix(
-          in srgb,
-          var(--color-base02-local) 73%,
-          var(--color-accent-local) 27%
-        )
-        55%,
-      color-mix(
-          in srgb,
-          var(--color-base02-local) 95%,
-          var(--color-accent-local) 5%
-        )
-        100%
+      color-mix(in srgb, var(--color-base03-local) 70%, var(--color-accent-local) 30%) 0%,
+      color-mix(in srgb, var(--color-base03-local) 65%, var(--color-accent-local) 35%) 15%,
+      color-mix(in srgb, var(--color-base02-local) 70%, var(--color-accent-local) 30%) 45%,
+      color-mix(in srgb, var(--color-base02-local) 73%, var(--color-accent-local) 27%) 55%,
+      color-mix(in srgb, var(--color-base02-local) 95%, var(--color-accent-local) 5%) 100%
     );
 }
 
 #settings-page .theme-tile:not(.aaaaa):hover {
   border-color: var(--color-accent-local);
-  background-color: var(--color-base01-local) !important;
-  color: var(--color-text-local) !important;
+  background-color: var(--color-base01-local);
+  color: var(--color-text-local);
 }
 
 #settings-page .theme-tile:not(.aaaaa):hover .bottom-container-button {
@@ -1139,11 +1101,11 @@ button .bottom-container-button:active {
 }
 
 #settings-page .use-default-colors.theme-tile:not(.aaaaa).is-selected {
-  border-color: var(--color-accent) !important;
+  border-color: var(--color-accent);
 }
 
 .use-default-colors.theme-tile .image-container {
-  background-color: var(--color-base02) !important;
+  background-color: var(--color-base02);
   background: linear-gradient(
     40deg,
     color-mix(in srgb, var(--color-base03) 70%, var(--color-accent) 30%) 0%,
@@ -1156,19 +1118,19 @@ button .bottom-container-button:active {
 
 #settings-page .use-default-colors.theme-tile:not(.aaaaa):hover {
   border-color: var(--color-accent);
-  background-color: var(--color-base01) !important;
-  color: var(--color-text) !important;
+  background-color: var(--color-base01);
+  color: var(--color-text);
 }
 
 .theme-tile:focus-visible {
-  outline: 2px solid var(--color-base03) !important;
+  outline: 2px solid var(--color-base03);
 }
 
 /* Highlight chosen card */
 .theme-tile:has(input:checked) {
   border-color: var(--hover-border);
-  background-color: var(--hover-color) !important;
-  color: var(--text-color) !important;
+  background-color: var(--hover-color);
+  color: var(--text-color);
 }
 
 .theme-tiles {
@@ -1185,24 +1147,24 @@ button .bottom-container-button:active {
   gap: 0.5rem;
   height: 2.5rem;
   font-weight: 600;
-  margin: 0 !important;
-  margin-bottom: 0.1rem !important;
-  margin-top: 2rem !important;
+  margin: 0;
+  margin-bottom: 0.1rem;
+  margin-top: 2rem;
   cursor: default;
 }
 
 .theme-top-container button {
-  background-color: var(--color-base01) !important;
-  border: 2px solid var(--color-base02) !important;
-  border-radius: 100000px !important;
-  padding: 0 !important;
-  font-size: 1.4rem !important;
-  font-weight: 500 !important;
+  background-color: var(--color-base01);
+  border: 2px solid var(--color-base02);
+  border-radius: 100000px;
+  padding: 0;
+  font-size: 1.4rem;
+  font-weight: 500;
   height: 100%;
   aspect-ratio: 1;
-  cursor: pointer !important;
-  color: var(--color-text) !important;
-  padding: 0.2rem !important;
+  cursor: pointer;
+  color: var(--color-text);
+  padding: 0.2rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1211,7 +1173,7 @@ button .bottom-container-button:active {
 .theme-top-container button > svg {
   width: 100%;
   height: 100%;
-  stroke: var(--color-text) !important;
+  stroke: var(--color-text);
 }
 
 .enableAnimations .theme-top-container button {
@@ -1220,19 +1182,19 @@ button .bottom-container-button:active {
 }
 
 .theme-top-container button:hover {
-  background-color: var(--color-base02) !important;
-  border-color: var(--color-base03) !important;
+  background-color: var(--color-base02);
+  border-color: var(--color-base03);
 }
 
 .theme-top-container button:hover > svg {
-  stroke: var(--color-accent) !important;
+  stroke: var(--color-accent);
 }
 
 .theme-tile .image-container > svg {
   box-sizing: border-box;
   width: 100%;
   height: calc(100% - 1rem);
-  stroke: var(--color-accent-local) !important;
+  stroke: var(--color-accent-local);
   margin: 0.5rem 0rem;
 }
 
@@ -1240,7 +1202,7 @@ button .bottom-container-button:active {
   box-sizing: border-box;
   width: 100%;
   height: calc(100% - 1rem);
-  stroke: var(--color-accent) !important;
+  stroke: var(--color-accent);
   margin: 0.5rem 0rem;
 }
 
@@ -1249,25 +1211,25 @@ button .bottom-container-button:active {
 }
 
 .theme-tile .image-container svg.heart-icon {
-  fill: var(--color-red) !important;
-  stroke: var(--color-red) !important;
+  fill: var(--color-red);
+  stroke: var(--color-red);
 }
 
 .current-category {
-  margin-bottom: 0 !important;
+  margin-bottom: 0;
   font-size: 1.6rem;
 }
 
 button.remove-custom-theme {
-  background-color: var(--color-base01) !important;
-  border: 2px solid var(--color-base02) !important;
-  border-radius: 100000px !important;
-  padding: 0.25rem 0.75rem 0.25rem 1rem !important;
-  font-size: 1.4rem !important;
-  font-weight: 500 !important;
+  background-color: var(--color-base01);
+  border: 2px solid var(--color-base02);
+  border-radius: 100000px;
+  padding: 0.25rem 0.75rem 0.25rem 1rem;
+  font-size: 1.4rem;
+  font-weight: 500;
   height: 3rem;
-  cursor: pointer !important;
-  color: var(--color-text) !important;
+  cursor: pointer;
+  color: var(--color-text);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1275,7 +1237,7 @@ button.remove-custom-theme {
 
 button.remove-custom-theme > svg {
   height: 100%;
-  stroke: var(--color-red) !important;
+  stroke: var(--color-red);
 }
 
 .enableAnimations button.remove-custom-theme {
@@ -1284,12 +1246,12 @@ button.remove-custom-theme > svg {
 }
 
 button.remove-custom-theme:hover {
-  background-color: var(--color-base02) !important;
-  border-color: var(--color-base03) !important;
+  background-color: var(--color-base02);
+  border-color: var(--color-base03);
 }
 
 button.remove-custom-theme:hover {
-  border-color: var(--color-red) !important;
+  border-color: var(--color-red);
 }
 
 .color-preview-bubble {
@@ -1309,15 +1271,15 @@ button.remove-custom-theme:hover {
 }
 
 button.open-theme-editor-button {
-  background-color: var(--color-base01) !important;
-  border: 2px solid var(--color-base02) !important;
-  border-radius: 100000px !important;
-  padding: 0.25rem 0.75rem !important;
-  font-size: 1.4rem !important;
-  font-weight: 500 !important;
+  background-color: var(--color-base01);
+  border: 2px solid var(--color-base02);
+  border-radius: 100000px;
+  padding: 0.25rem 0.75rem;
+  font-size: 1.4rem;
+  font-weight: 500;
   height: 3rem;
-  cursor: pointer !important;
-  color: var(--color-text) !important;
+  cursor: pointer;
+  color: var(--color-text);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1329,8 +1291,8 @@ button.open-theme-editor-button {
 }
 
 button.open-theme-editor-button:hover {
-  background-color: var(--color-base02) !important;
-  border-color: var(--color-accent) !important;
+  background-color: var(--color-base02);
+  border-color: var(--color-accent);
 }
 
 .custom-theme-maker {
@@ -1375,9 +1337,9 @@ button.open-theme-editor-button:hover {
   box-shadow: 0px 2px 10px 0px var(--color-shadow);
   position: relative;
   z-index: 10;
-  background-size: cover !important;
-  background-position: center !important;
-  background-color: var(--color-base02) !important;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--color-base02);
   background: linear-gradient(
     40deg,
     color-mix(in srgb, var(--color-base03) 70%, var(--color-accent) 30%) 0%,
@@ -1387,7 +1349,7 @@ button.open-theme-editor-button:hover {
     color-mix(in srgb, var(--color-base02) 95%, var(--color-accent) 5%) 100%
   );
   height: 20rem;
-  aspect-ratio: 16/9;
+  aspect-ratio: 16 / 9;
   border-radius: 1.5rem;
   overflow: hidden;
 }
@@ -1404,8 +1366,8 @@ button.open-theme-editor-button:hover {
 }
 
 .enableAnimations .generate-theme-control {
-  transition-property: border-color, background-color, transform !important;
-  transition: 0.15s ease-in-out !important;
+  transition-property: border-color, background-color, transform;
+  transition: 0.15s ease-in-out;
 }
 
 .generate-theme-control:active {
@@ -1427,13 +1389,13 @@ button.open-theme-editor-button:hover {
   display: flex;
   flex-direction: row;
   border-radius: 2rem;
-  background-color: transparent !important;
+  background-color: transparent;
   box-shadow: 0px 2px 10px 0px var(--color-shadow);
   padding: 0.5rem;
 }
 
 #customThemeCreator .preview-image-container.open:not(.aaaa) {
-  background-color: var(--color-base01) !important;
+  background-color: var(--color-base01);
 }
 
 .theme-controls-container {
@@ -1482,7 +1444,7 @@ button.open-theme-editor-button:hover {
   background-color: var(--color-base02);
   padding: 0.5rem;
   border: none;
-  margin: 0 !important;
+  margin: 0;
 }
 
 .preview-image-container.open .theme-generation-sub-container {
@@ -1530,14 +1492,14 @@ button.open-theme-editor-button:hover {
 }
 
 .tooltip-TtRmZ {
-  border-radius: 1000rem !important;
-  background: var(--color-base01) !important;
-  border: 2px solid var(--color-base02) !important;
-  box-shadow: 0px 5px 10px 0px var(--color-shadow) !important;
-  padding: 0.5rem 1rem !important;
-  font-size: 1.2rem !important;
-  font-weight: 600 !important;
-  color: var(--color-text) !important;
+  border-radius: 1000rem;
+  background: var(--color-base01);
+  border: 2px solid var(--color-base02);
+  box-shadow: 0px 5px 10px 0px var(--color-shadow);
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--color-text);
 }
 
 .smpp-tooltip {
@@ -1592,7 +1554,7 @@ button.open-theme-editor-button:hover {
 
 .theme-name-input {
   text-align: center;
-  font-size: 1.4rem !important;
+  font-size: 1.4rem;
 }
 
 @keyframes removed-theme-tile {
@@ -1613,8 +1575,8 @@ button.open-theme-editor-button:hover {
 }
 
 .theme-tile.is-favorite svg.heart-icon {
-  fill: var(--color-red) !important;
-  stroke: var(--color-red) !important;
+  fill: var(--color-red);
+  stroke: var(--color-red);
 }
 
 .compact-theme-selector {
@@ -1645,7 +1607,7 @@ button.open-theme-editor-button:hover {
   padding: 0.25rem;
   border-radius: 1.5rem;
   border: 2px solid var(--color-base03);
-  box-shadow: 0 0.333rem 1.333rem var(--color-shadow) !important;
+  box-shadow: 0 0.333rem 1.333rem var(--color-shadow);
   position: absolute;
   width: 100%;
 }
@@ -1657,12 +1619,12 @@ button.open-theme-editor-button:hover {
 #quickSettings .compact-theme-option {
   width: 100%;
   height: 3rem;
-  overflow: hidden !important;
+  overflow: hidden;
   cursor: pointer;
   border-radius: 1rem;
-  border: 2px solid var(--color-base02-local) !important;
+  border: 2px solid var(--color-base02-local);
   position: relative;
-  box-shadow: 0 0 10px 0px var(--color-shadow) !important;
+  box-shadow: 0 0 10px 0px var(--color-shadow);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1680,34 +1642,34 @@ button.open-theme-editor-button:hover {
 }
 
 .compact-theme-option:hover .compact-theme-option-text {
-  color: var(--color-accent-local) !important;
-  background: var(--color-base02-local) !important;
-  font-weight: 600 !important;
+  color: var(--color-accent-local);
+  background: var(--color-base02-local);
+  font-weight: 600;
 }
 .compact-theme-option.is-selected .compact-theme-option-text {
-  background: var(--darken-background-local) !important;
-  color: var(--color-text-local) !important;
-  font-weight: 700 !important;
+  background: var(--darken-background-local);
+  color: var(--color-text-local);
+  font-weight: 700;
 }
 #quickSettings .compact-theme-option:hover {
-  border-color: var(--color-base03-local) !important;
+  border-color: var(--color-base03-local);
   scale: 1.02;
 }
 
 #quickSettings .compact-theme-option.is-selected {
-  border-color: var(--color-accent-local) !important;
+  border-color: var(--color-accent-local);
 }
 
 .compact-theme-option .compact-theme-option-text {
   width: 100%;
   padding: 0.5rem 0.75rem;
-  height: 100% !important;
-  font-size: 1.2rem !important;
-  font-weight: 500 !important;
-  color: var(--color-text-local) !important;
-  background: var(--color-base01-local) !important;
-  text-wrap-mode: nowrap !important;
-  overflow: hidden !important;
+  height: 100%;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--color-text-local);
+  background: var(--color-base01-local);
+  text-wrap-mode: nowrap;
+  overflow: hidden;
   z-index: 1;
   position: relative;
   user-select: none;
@@ -1755,7 +1717,7 @@ button.open-theme-editor-button:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow-y: auto !important;
+  overflow-y: auto;
 }
 .share-dialog-content h1 {
   color: var(--color-accent);
@@ -1764,24 +1726,24 @@ button.open-theme-editor-button:hover {
 .share-dialog-content h1,
 .share-dialog-content h2 {
   text-align: center;
-  margin-bottom: 0.5rem !important;
+  margin-bottom: 0.5rem;
 }
 .share-dialog-content h2 {
-  margin-bottom: 1.5rem !important;
+  margin-bottom: 1.5rem;
 }
 
 .link-output {
   display: flex;
-  background-color: var(--color-base01-local) !important;
-  font-size: 1rem !important;
-  border-radius: 1rem !important;
-  padding: 0.6rem 0.8rem !important;
-  border: 2px solid var(--color-base02-local) !important;
+  background-color: var(--color-base01-local);
+  font-size: 1rem;
+  border-radius: 1rem;
+  padding: 0.6rem 0.8rem;
+  border: 2px solid var(--color-base02-local);
   text-wrap-mode: nowrap;
   max-width: 100%;
   width: 20rem;
   overflow-x: hidden;
-  color: var(--color-text-local) !important;
+  color: var(--color-text-local);
 }
 
 .copy-container {
@@ -1794,26 +1756,26 @@ button.open-theme-editor-button:hover {
 }
 
 .copy-hex-button.copy-link-button {
-  width: 3rem !important;
-  height: 3rem !important;
+  width: 3rem;
+  height: 3rem;
 
-  background-color: var(--color-base01-local) !important;
-  color: var(--color-text-local) !important;
-  border: 2px solid var(--color-base02-local) !important;
+  background-color: var(--color-base01-local);
+  color: var(--color-text-local);
+  border: 2px solid var(--color-base02-local);
 }
 
 .copy-hex-button.copy-link-button:hover {
-  background-color: var(--color-base02-local) !important;
-  border: 2px solid var(--color-base03-local) !important;
+  background-color: var(--color-base02-local);
+  border: 2px solid var(--color-base03-local);
 }
 
 .copy-hex-button.copy-link-button > svg {
-  stroke: var(--color-text-local) !important;
+  stroke: var(--color-text-local);
 }
 
 .sharing-tile {
-  width: fit-content !important;
-  background: var(--color-base01-local) !important;
+  width: fit-content;
+  background: var(--color-base01-local);
   box-shadow: 0px 2px 10px 0px var(--color-shadow);
   border-radius: 1.5rem;
   padding: 0.5rem;

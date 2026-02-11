@@ -1,16 +1,17 @@
 // @ts-nocheck
-import { clearAllData } from "./utils.js";
-import { setWidgetSetting, widgets } from "../widgets/widgets.js";
+
 import { browser } from "../common/utils.ts";
+import { setWidgetSetting, widgets } from "../widgets/widgets.js";
+import { clearAllData } from "./utils.js";
 
 export async function migrate() {
   await removeLegacyData(); // will reload the page if legacy data is present
 
-  let settingsData = await browser.runtime.sendMessage({
+  const settingsData = await browser.runtime.sendMessage({
     action: "getRawSettingsData",
   });
-  if (settingsData == undefined) return;
-  if (settingsData.backgroundBlurAmount == undefined) return;
+  if (settingsData === undefined) return;
+  if (settingsData.backgroundBlurAmount === undefined) return;
   await migrateV5(settingsData);
 }
 
@@ -22,10 +23,10 @@ async function migrateV5(settingsData) {
 }
 
 async function migrateWidgetSettingsData() {
-  let delijnAppData = await browser.runtime.sendMessage({
+  const delijnAppData = await browser.runtime.sendMessage({
     action: "getDelijnAppData",
   });
-  let weatherAppData = await browser.runtime.sendMessage({
+  const weatherAppData = await browser.runtime.sendMessage({
     action: "getWeatherAppData",
   });
 
@@ -36,14 +37,9 @@ async function migrateWidgetSettingsData() {
     });
   }
   if (Object.keys(weatherAppData).length !== 0) {
-    let weatherWidgets = widgets.filter((item) =>
-      item.name.toLowerCase().includes("weather")
-    );
+    const weatherWidgets = widgets.filter((item) => item.name.toLowerCase().includes("weather"));
     weatherWidgets.forEach(async (widget) => {
-      await widget.setSetting(
-        "currentLocation",
-        weatherAppData.weatherAppData.lastLocation
-      );
+      await widget.setSetting("currentLocation", weatherAppData.weatherAppData.lastLocation);
     });
   }
 }
@@ -65,8 +61,9 @@ async function migrateImageV5(oldData) {
         type: "link",
       };
       break;
-    case 2: //file
-      let imageData = await browser.runtime.sendMessage({
+    case 2: {
+      //file
+      const imageData = await browser.runtime.sendMessage({
         action: "getBackgroundImage",
       });
       data = {
@@ -75,6 +72,7 @@ async function migrateImageV5(oldData) {
         type: "file",
       };
       break;
+    }
     default:
       break;
   }
@@ -85,10 +83,7 @@ async function migrateImageV5(oldData) {
     data: data,
   });
 
-  console.log(
-    "MIG V: \n Successfully migrated background image  with data:",
-    data
-  );
+  console.log("MIG V: \n Successfully migrated background image  with data:", data);
 }
 
 async function migrateSettingsV5(oldData) {
@@ -106,7 +101,7 @@ async function migrateSettingsV5(oldData) {
   }
   console.log(oldData);
   console.log(oldData.customName);
-  let newSettingsData = {
+  const newSettingsData = {
     username: oldData.customName,
     theme: oldData.theme,
     background: {
@@ -136,10 +131,7 @@ async function migrateSettingsV5(oldData) {
     data: settings,
   });
 
-  console.log(
-    "MIG V: \n Succesfully migrated settings data to:",
-    newSettingsData
-  );
+  console.log("MIG V: \n Succesfully migrated settings data to:", newSettingsData);
 }
 
 async function removeLegacyData() {

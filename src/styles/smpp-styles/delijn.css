@@ -1,6 +1,6 @@
 .glass .lijnCard {
-  background: var(--darken-background) !important;
-  backdrop-filter: var(--medium-blur) !important;
+  background: var(--darken-background);
+  backdrop-filter: var(--medium-blur);
 }
 
 .lijnCard {
@@ -38,7 +38,7 @@
 .halteTitle {
   font-size: 16px;
   font-weight: 600;
-  margin-bottom: 2px !important;
+  margin-bottom: 2px;
 }
 
 .halteLijnen {
@@ -95,12 +95,12 @@
 }
 
 .lijnCardHalte:hover {
-  background-color: var(--color-base02) !important;
-  cursor: pointer !important;
+  background-color: var(--color-base02);
+  cursor: pointer;
 }
 
 .lijnDestination {
-  margin-bottom: 0px !important;
+  margin-bottom: 0px;
   font-size: 17px;
   vertical-align: middle;
   align-self: center;
@@ -148,34 +148,33 @@
 }
 
 .glass .delijnSearchButton {
-  background: var(--darken-background) !important;
-  backdrop-filter: var(--small-blur) !important;
+  background: var(--darken-background);
+  backdrop-filter: var(--small-blur);
 }
 .glass .delijnSearchButton:hover {
-  background: var(--darken-background) !important;
+  background: var(--darken-background);
 }
 
 .delijnSearchButton {
-  height: 40px !important;
-  width: 40px !important;
-  background: var(--color-base01) !important;
-  border-radius: 10px !important;
-  border: 2px solid var(--color-base03) !important;
-  display: flex !important;
-  align-items: center !important;
+  height: 40px;
+  width: 40px;
+  background: var(--color-base01);
+  border-radius: 10px;
+  border: 2px solid var(--color-base03);
+  display: flex;
+  align-items: center;
   justify-content: center;
-  flex-grow: 0 !important;
+  flex-grow: 0;
 }
 
 .delijnSearchButton:hover {
-  background-color: var(--color-base02) !important;
-  border-color: var(--color-accent) !important;
+  background-color: var(--color-base02);
+  border-color: var(--color-accent);
 }
 
 .enableAnimations .delijnSearchButton {
-  transition-property:
-    background-color, border-color, transform, animation, origin;
-  transition: 0.2s ease-in-out !important;
+  transition-property: background-color, border-color, transform, animation, origin;
+  transition: 0.2s ease-in-out;
 }
 
 .enableAnimations .delijnSearchButton:hover > .delijnSearchIcon {
@@ -203,7 +202,7 @@
 
 .delijnInfoContainer {
   justify-content: center;
-  font-size: 16px !important;
+  font-size: 16px;
   font-weight: bold;
   text-align: center;
 }
@@ -212,23 +211,23 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 1rem !important;
+  gap: 1rem;
 }
 .glass .popupinput.halteInput {
-  background: var(--darken-background) !important;
-  backdrop-filter: var(--small-blur) !important;
+  background: var(--darken-background);
+  backdrop-filter: var(--small-blur);
 }
 .popupinput.halteInput {
   flex-grow: 1;
-  height: 40px !important;
-  margin: 0px !important;
-  font-size: 16px !important;
+  height: 40px;
+  margin: 0px;
+  font-size: 16px;
 }
 
 #delijncontainer {
   display: flex;
   flex-direction: column;
-  gap: 12.5px !important;
+  gap: 12.5px;
 }
 
 #delijnBottomContainer {
@@ -244,9 +243,9 @@
   background-color: var(--color-base01);
   width: 70%;
   border: 2px solid var(--color-base02);
-  border-radius: 20px !important;
-  padding: 5px !important;
-  font-size: 18px !important;
+  border-radius: 20px;
+  padding: 5px;
+  font-size: 18px;
 }
 
 .showMoreHaltesButton:hover {
@@ -260,9 +259,8 @@
 
 .enableAnimations .showMoreHaltesButton {
   animation: delijnCardAppear 0.3s ease-in-out 0ms 1;
-  transition-property:
-    background-color, border-color, width, font-weight, letter-spacing;
-  transition: 0.2s ease-in-out !important;
+  transition-property: background-color, border-color, width, font-weight, letter-spacing;
+  transition: 0.2s ease-in-out;
 }
 
 .delijnInfoContainerHidden {

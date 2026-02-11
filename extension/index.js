@@ -263,12 +263,10 @@
 
   // src/fixes-utils/login.ts
   function updateLoginPanel() {
-    let login_app_left = document.querySelector(".login-app__left");
+    const login_app_left = document.querySelector(".login-app__left");
     login_app_left.innerHTML = " ";
-    document.getElementsByClassName(
-      "login-app__platform-indicator"
-    )[0].innerHTML = '<h1 class="logintitle">Smartschool ++</h1>';
-    let loginSeperator = document.querySelector(".login-app__title--separator");
+    document.getElementsByClassName("login-app__platform-indicator")[0].innerHTML = '<h1 class="logintitle">Smartschool ++</h1>';
+    const loginSeperator = document.querySelector(".login-app__title--separator");
     if (loginSeperator) {
       loginSeperator.innerHTML = '<button type="button" class="white_text_button" id="showmore">More</button>';
       document.getElementById("showmore").addEventListener("click", () => {
@@ -2188,7 +2186,7 @@ Is it scaring you off?`,
   // src/common/utils.ts
   var DEBUG = false;
   var browser;
-  if (browser == void 0) {
+  if (browser === void 0) {
     browser = chrome;
   }
   function getByPath(object, path) {
@@ -2196,7 +2194,7 @@ Is it scaring you off?`,
       return object;
     }
     let ob = object;
-    for (let node of path.split(".")) {
+    for (const node of path.split(".")) {
       ob = ob[node];
       if (ob === void 0) {
         throw `getByPath: ${node} did not exist in path ${path}`;
@@ -2208,12 +2206,20 @@ Is it scaring you off?`,
     let ob = object;
     const pathSplit = path.split(".");
     for (let i5 = 0; i5 < pathSplit.length - 1; i5++) {
-      ob = ob[pathSplit[i5]];
+      const node = pathSplit[i5];
+      if (node === void 0) {
+        throw `setByPath: invalid path ${path}`;
+      }
+      ob = ob[node];
       if (ob === void 0) {
-        throw `setByPath: ${pathSplit[i5]} did not exist in path ${path}`;
+        throw `setByPath: ${node} did not exist in path ${path}`;
       }
     }
-    ob[pathSplit[pathSplit.length - 1]] = value;
+    const leaf = pathSplit[pathSplit.length - 1];
+    if (leaf === void 0) {
+      throw `setByPath: invalid path ${path}`;
+    }
+    ob[leaf] = value;
   }
   function fillObjectWithDefaults(object, defaults) {
     if (!object) {
@@ -2231,7 +2237,7 @@ Is it scaring you off?`,
   }
   function openURL2(url, new_window = false) {
     if (new_window) {
-      let a5 = document.createElement("a");
+      const a5 = document.createElement("a");
       a5.href = url;
       a5.rel = "noopener noreferrer";
       a5.target = "_blank";
@@ -2269,7 +2275,7 @@ Is it scaring you off?`,
     return /^(https?:\/\/|data:image\/)/i.test(url);
   }
   async function convertLinkToBase64(link) {
-    let base64 = await browser.runtime.sendMessage({
+    const base64 = await browser.runtime.sendMessage({
       action: "getBase64",
       link
     });
@@ -2326,7 +2332,7 @@ Is it scaring you off?`,
     let secondInitial;
     if (username) {
       const parts = username.trim().split(/\s+/);
-      firstInitial = parts[0] && parts[0][0] ? parts[0][0].toUpperCase() : "M";
+      firstInitial = parts[0]?.[0] ? parts[0][0].toUpperCase() : "M";
       secondInitial = parts.length > 1 && parts[1] && parts[1][0] ? parts[1][0].toUpperCase() : "U";
     } else {
       firstInitial = "M";
@@ -2355,11 +2361,9 @@ Is it scaring you off?`,
       sendDebug("Failed to get plannerUrl from DOM. Error:", errorMessage);
       sendDebug("Trying to get plannerUrl from cookies...");
       const cookies = document.cookie.split(";");
-      const plannerUrlCookie = cookies.find(
-        (cookie) => cookie.trim().startsWith("plannerUrl=")
-      );
+      const plannerUrlCookie = cookies.find((cookie) => cookie.trim().startsWith("plannerUrl="));
       if (plannerUrlCookie) {
-        sendDebug("Retrieved plannerUrl from cookies" + plannerUrlCookie);
+        sendDebug(`Retrieved plannerUrl from cookies${plannerUrlCookie}`);
         const plannerUrl = plannerUrlCookie.split("=")[1];
         sendDebug("Found plannerUrl in cookies:", plannerUrl);
         if (plannerUrl) userId = plannerUrl.split("/")[4];
@@ -2409,11 +2413,11 @@ Is it scaring you off?`,
       this.toastElement = this.createToastElement();
     }
     createToastElement() {
-      let toast = document.createElement("div");
+      const toast = document.createElement("div");
       toast.classList.add("smpp-toast");
-      let icon = document.createElement("div");
+      const icon = document.createElement("div");
       icon.classList.add("smpp-toast-icon");
-      let title = document.createElement("span");
+      const title = document.createElement("span");
       switch (this.type) {
         case "info":
           title.innerText = "Info";
@@ -2436,26 +2440,26 @@ Is it scaring you off?`,
           toast.classList.add("smpp-warning-toast");
           break;
       }
-      let topContainer = document.createElement("div");
+      const topContainer = document.createElement("div");
       topContainer.classList.add("smpp-toast-top");
       topContainer.appendChild(icon);
       topContainer.appendChild(title);
       toast.appendChild(topContainer);
-      let content = document.createElement("span");
+      const content = document.createElement("span");
       content.classList.add("smpp-toast-content");
       content.innerText = this.content;
       toast.appendChild(content);
       return toast;
     }
     async hideToastElement() {
-      let toastContainer = document.getElementById("toast-container");
+      const toastContainer = document.getElementById("toast-container");
       if (!toastContainer) return;
       this.toastElement.classList.add("being-removed");
       await delay(300);
       toastContainer.removeChild(this.toastElement);
     }
     async render() {
-      let toastContainer = document.getElementById("toast-container");
+      const toastContainer = document.getElementById("toast-container");
       if (!toastContainer) return;
       toastContainer.appendChild(this.toastElement);
       await delay(this.time);
@@ -2465,7 +2469,7 @@ Is it scaring you off?`,
 
   // src/fixes-utils/results.ts
   function buisStats() {
-    setTimeout(function() {
+    setTimeout(() => {
       const url = `https://${getSchoolName()}.smartschool.be/results/api/v1/evaluations/?itemsOnPage=1000`;
       fetch(url).then((response) => response.json()).then((data2) => {
         const categories = {
@@ -2482,7 +2486,7 @@ Is it scaring you off?`,
             }
           }
         });
-        let newElement = document.createElement("div");
+        const newElement = document.createElement("div");
         newElement.id = "buis-stats";
         document.getElementsByClassName("results-evaluations__filters")[0].appendChild(newElement);
         newElement.innerHTML = `<div class="buis-stats" id="buis_amount"></div><div class="buis-stats" id="voldoende_amount"></div>`;
@@ -2618,27 +2622,27 @@ Is it scaring you off?`,
 
   // src/main-features/appearance/ui.ts
   function createButton(id = "") {
-    let outerSwitch = document.createElement("label");
+    const outerSwitch = document.createElement("label");
     outerSwitch.classList.add("switch");
-    let innerButton = document.createElement("input");
+    const innerButton = document.createElement("input");
     innerButton.classList.add("popupinput");
     innerButton.tabIndex = -1;
     innerButton.type = "checkbox";
     innerButton.id = id;
-    let innerSwitch = document.createElement("span");
+    const innerSwitch = document.createElement("span");
     innerSwitch.classList.add("slider", "round");
     outerSwitch.appendChild(innerButton);
     outerSwitch.appendChild(innerSwitch);
     return outerSwitch;
   }
   function createButtonWithLabel(id = "", text) {
-    let container = document.createElement("label");
+    const container = document.createElement("label");
     container.classList.add("smpp-input-with-label");
     container.htmlFor = id;
-    container.dataset["for"] = id;
-    let label = document.createElement("span");
+    container.dataset.for = id;
+    const label = document.createElement("span");
     label.innerText = text;
-    let button = createButton(id);
+    const button = createButton(id);
     container.addEventListener("keydown", (e5) => {
       if (e5.key === " " || e5.key === "Enter") {
         e5.preventDefault();
@@ -2651,7 +2655,7 @@ Is it scaring you off?`,
     return container;
   }
   function createTextInput(id = "", placeholder = "") {
-    let textInput = document.createElement("input");
+    const textInput = document.createElement("input");
     textInput.id = id;
     textInput.type = "text";
     textInput.placeholder = placeholder;
@@ -2660,12 +2664,12 @@ Is it scaring you off?`,
     return textInput;
   }
   function createHoverTooltip(content, position) {
-    let tooltip = document.createElement("div");
+    const tooltip = document.createElement("div");
     tooltip.classList.add("smpp-tooltip");
-    if (position == "vertical") {
+    if (position === "vertical") {
       tooltip.classList.add("smpp-tooltip-vertical");
     }
-    if (position == "horizontal") {
+    if (position === "horizontal") {
       tooltip.classList.add("smpp-tooltip-horizontal");
     }
     tooltip.innerText = content;
@@ -2770,7 +2774,7 @@ Is it scaring you off?`,
           data2 = { imageData: "", metaData: { link: "", type: "default" } };
         }
         const compressedId = `compressed-${this.id}`;
-        let compressedImage = {
+        const compressedImage = {
           imageData: data2.imageData,
           metaData: { link: data2.metaData.link, type: data2.metaData.type }
         };
@@ -2800,7 +2804,7 @@ Is it scaring you off?`,
             compressedImage.imageData = "";
           } else if (isAbsoluteUrl(linkValue)) {
             this.fileInputButton.innerHTML = loadingSpinnerSvg;
-            let [base64, file2] = await Promise.all([
+            const [base64, file2] = await Promise.all([
               await convertLinkToBase64(linkValue),
               await convertLinkToFile(linkValue)
             ]);
@@ -2810,7 +2814,7 @@ Is it scaring you off?`,
               data2.metaData.link = linkValue;
               data2.imageData = base64;
               this.fileInputButton.innerHTML = loadingSpinnerSvg;
-              let compressedBase64 = await getCompressedData(file2);
+              const compressedBase64 = await getCompressedData(file2);
               this.fileInputButton.innerHTML = imageInputSvg;
               compressedImage.metaData.type = "file";
               compressedImage.metaData.link = linkValue;
@@ -2858,7 +2862,7 @@ Is it scaring you off?`,
             name: this.id
           });
         }
-        if (data2.metaData.type == "file") {
+        if (data2.metaData.type === "file") {
           new Toast("Image succesfully saved", "succes").render();
         }
       } catch (error) {
@@ -2867,7 +2871,7 @@ Is it scaring you off?`,
       }
     }
     async loadImageData() {
-      let data2 = await browser.runtime.sendMessage({
+      const data2 = await browser.runtime.sendMessage({
         action: "getImage",
         id: this.id
       });
@@ -2889,7 +2893,7 @@ Is it scaring you off?`,
   async function getImageURL(id, onDefault, getCompressed) {
     let image;
     if (getCompressed) {
-      id = "compressed-" + id;
+      id = `compressed-${id}`;
     }
     try {
       image = await browser.runtime.sendMessage({
@@ -2920,18 +2924,15 @@ Is it scaring you off?`,
   // src/main-features/profile.ts
   var profilePictureObserver;
   async function displayUsernameTopNav(name2) {
-    let originalNameElement = document.querySelector(
-      ".js-btn-profile .hlp-vert-box span"
-    );
+    const originalNameElement = document.querySelector(".js-btn-profile .hlp-vert-box span");
     if (originalNameElement) originalNameElement.innerHTML = name2;
   }
   async function attachProfilePictureObserver(url) {
     function processImg(img) {
       try {
         if (!(img instanceof HTMLImageElement) || !img.src) return;
-        if (img.src == url) return;
-        if (!isOriginalPfpUrl(img.src) && !img.classList.contains("personal-profile-picture"))
-          return;
+        if (img.src === url) return;
+        if (!isOriginalPfpUrl(img.src) && !img.classList.contains("personal-profile-picture")) return;
         img.src = url;
         img.classList.add("personal-profile-picture");
       } catch (e5) {
@@ -2950,7 +2951,7 @@ Is it scaring you off?`,
           }
           try {
             const imgs = htmlNode.querySelectorAll?.("img");
-            if (imgs && imgs.length) {
+            if (imgs?.length) {
               for (const img of imgs) processImg(img);
             }
           } catch (e5) {
@@ -2978,9 +2979,9 @@ Is it scaring you off?`,
     }
   }
   async function applyProfilePicture(profile) {
-    let style = document.documentElement.style;
+    const style = document.documentElement.style;
     const setPFPstyle = (url) => {
-      style.setProperty("--profile-picture", "url(" + url + ")");
+      style.setProperty("--profile-picture", `url(${url})`);
     };
     const fixObserver = async (url) => {
       if (profilePictureObserver != null) {
@@ -2993,13 +2994,14 @@ Is it scaring you off?`,
       case true:
         profileImageURL = originalPfpUrl;
         break;
-      case false:
+      case false: {
         const onDefault = () => {
           return getPfpLink(profile.username || originalUsername);
         };
-        let result = await getImageURL("profilePicture", onDefault, true);
+        const result = await getImageURL("profilePicture", onDefault, true);
         profileImageURL = result.url;
         break;
+      }
     }
     setPFPstyle(profileImageURL);
     fixObserver(profileImageURL);
@@ -3010,364 +3012,304 @@ Is it scaring you off?`,
       parts.pop();
       return parts.join("/");
     }
-    return createSimpleUrl(originalPfpUrl) == createSimpleUrl(url);
+    return createSimpleUrl(originalPfpUrl) === createSimpleUrl(url);
   }
 
-  // src/main-features/quick-menu/dmenu.ts
-  var active_dmenu = null;
-  var dmenuConfig = null;
-  async function reloadDMenuConfig() {
-    dmenuConfig = await browser.runtime.sendMessage({
-      action: "getSetting",
-      name: "other.dmenu"
-    });
-  }
-  var DMenu = class {
-    openerEl;
-    menuEl;
-    #endFunc;
-    #inputEl;
-    #itemListEl;
-    #userText;
-    #selectedIndex;
-    constructor(itemList, endFunc = void 0, title = "dmenu:", openerEl = void 0) {
-      this.endFunc = endFunc;
-      this.openerEl = openerEl;
-      this.userText = "";
-      this.selectedIndex = 0;
-      this.#mkDmenu(itemList, title);
-      this.inputEl.focus();
-    }
-    isOpen() {
-      return this.menuEl != null;
-    }
-    close() {
-      if (!this.isOpen()) {
-        return;
-      }
-      this.menuEl.remove();
-      this.menuEl = null;
-    }
-    #accept(row = void 0) {
-      if (row == void 0) {
-        row = this.itemListEl.childNodes[this.selectedIndex];
-      }
-      let content = this.inputEl.value;
-      if (row != void 0 && !row.classList.contains("hidden")) {
-        content = row.dataset.content;
-      }
-      if (this.endFunc != void 0 && content !== "") {
-        this.endFunc(content);
-      }
-      this.close();
-    }
-    #onKeydown(e5) {
-      if (e5.key == "Enter") {
-        this.#accept();
-      } else if (e5.key == "Escape") {
-        this.close();
-      } else if (e5.key == "Tab" && e5.shiftKey || e5.key == "ArrowUp") {
-        this.#selPrev();
-      } else if (e5.key == "Tab" && !e5.shiftKey || e5.key == "ArrowDown") {
-        this.#selNext();
-      } else {
-        return;
-      }
-      e5.preventDefault();
-    }
-    #oninput() {
-      this.#sort();
-      return;
-    }
-    #selNext() {
-      this.#select(this.selectedIndex + 1);
-    }
-    #selPrev() {
-      this.#select(this.selectedIndex - 1);
-    }
-    #validIndex(index) {
-      if (index < 0 || index >= this.itemListEl.childNodes.length) {
-        return false;
-      }
-      return !this.itemListEl.childNodes[index].classList.contains("hidden");
-    }
-    #select(index) {
-      if (!this.#validIndex(index)) {
-        return;
-      }
-      let row = this.itemListEl.childNodes[this.selectedIndex];
-      row.classList.remove("dmenu-selected");
-      this.selectedIndex = index;
-      let newrow = this.itemListEl.childNodes[this.selectedIndex];
-      newrow.classList.add("dmenu-selected");
-      newrow.scrollIntoView(false);
-    }
-    #sort() {
-      this.selectedIndex = 0;
-      let searchq = this.inputEl.value.trim();
-      let items = [];
-      for (let node of this.itemListEl.childNodes) {
-        let score = this.#matchScore(node.dataset.content, searchq);
-        if (score == 0 && searchq != "") {
-          node.classList.add("hidden");
-        } else {
-          node.classList.remove("hidden");
-        }
-        items.push({ score, htmlNode: node });
-        if (dmenuConfig.itemScore) {
-          node.getElementsByClassName("dmenu-score")[0].innerText = score;
-        }
-      }
-      let sortedItems = items.sort(function(a5, b3) {
-        if (a5.score < b3.score) return 1;
-        if (a5.score > b3.score) return -1;
-        return 0;
-      });
-      for (let i5 = 0; i5 < sortedItems.length; i5++) {
-        let item = sortedItems[i5];
-        if (i5 == 0) {
-          item.htmlNode.classList.add("dmenu-selected");
-        } else {
-          item.htmlNode.classList.remove("dmenu-selected");
-        }
-        this.itemListEl.appendChild(item.htmlNode);
-      }
-    }
-    #matchScore(str, match) {
-      str = str.toLowerCase();
-      match = match.toLowerCase();
-      let score = 0;
-      let mi = 0;
-      let i5 = 0;
-      let streak = 0;
-      let streakStartI = 0;
-      while (true) {
-        if (i5 >= str.length || mi >= match.length) {
-          break;
-        }
-        if (str[i5] == match[mi]) {
-          score += (streak + 1) * (streak + 1) * ((str.length - streakStartI) / str.length);
-          mi += 1;
-          streak += 1;
-        } else {
-          streakStartI = i5;
-          streak = 0;
-        }
-        i5++;
-      }
-      if (mi < match.length) {
-        return 0;
-      }
-      if (score < 0) {
-        score = 0;
-      }
-      return score;
-    }
-    #mkRow(item, parent) {
-      let cmd;
-      let meta = void 0;
-      if (typeof item == "string") {
-        cmd = item.toLowerCase();
-      } else {
-        cmd = item.value;
-        meta = item.meta;
-      }
-      let row = document.createElement("div");
-      row.classList.add("dmenu-row");
-      row.innerHTML = '<div class="dmenu-content"></div><div class="dmenu-meta"></div><div class="dmenu-score"></div>';
-      row.getElementsByClassName("dmenu-content")[0].innerText = cmd;
-      row.dataset.content = cmd;
-      if (meta != void 0) {
-        row.getElementsByClassName("dmenu-meta")[0].innerText = meta;
-      }
-      if (dmenuConfig.itemScore) {
-        row.getElementsByClassName("dmenu-score")[0].innerText = "0";
-      }
-      let klass = this;
-      row.addEventListener("click", function(e5) {
-        klass.#accept(row);
-      });
-      parent.appendChild(row);
-      return row;
-    }
-    #mkDmenu(itemList, title) {
-      this.menuEl = document.createElement("div");
-      this.menuEl.classList.add("dmenu");
-      if (randomChance(1 / 100)) this.menuEl.classList.add("jokeDmenu");
-      if (dmenuConfig.centered) {
-        this.menuEl.classList.add("dmenu-centered");
-      }
-      let top = document.createElement("div");
-      top.classList.add("dmenu-top");
-      let dtitle = document.createElement("label");
-      dtitle.innerText = title;
-      dtitle.classList.add("dmenu-title");
-      top.appendChild(dtitle);
-      this.inputEl = document.createElement("input");
-      this.inputEl.type = "text";
-      this.inputEl.classList.add("dmenu-input");
-      let klass = this;
-      this.inputEl.addEventListener("keydown", (e5) => {
-        klass.#onKeydown(e5);
-      });
-      this.inputEl.addEventListener("input", (e5) => {
-        klass.#oninput();
-      });
-      top.appendChild(this.inputEl);
-      this.menuEl.appendChild(top);
-      this.itemListEl = document.createElement("div");
-      this.itemListEl.classList.add("dmenu-itemlist");
-      this.menuEl.appendChild(this.itemListEl);
-      let first = true;
-      for (let item of itemList) {
-        let row = this.#mkRow(item, this.itemListEl);
-        if (first) {
-          row.classList.add("dmenu-selected");
-          first = false;
-        }
-      }
-      document.body.appendChild(this.menuEl);
-    }
+  // node_modules/colord/index.mjs
+  var r2 = { grad: 0.9, turn: 360, rad: 360 / (2 * Math.PI) };
+  var t2 = function(r5) {
+    return "string" == typeof r5 ? r5.length > 0 : "number" == typeof r5;
   };
-  function dmenu(itemList, endFunc = void 0, title = "dmenu:", opener = void 0) {
-    if (active_dmenu !== null && active_dmenu.isOpen()) {
-      active_dmenu.close();
+  var n = function(r5, t5, n4) {
+    return void 0 === t5 && (t5 = 0), void 0 === n4 && (n4 = Math.pow(10, t5)), Math.round(n4 * r5) / n4 + 0;
+  };
+  var e2 = function(r5, t5, n4) {
+    return void 0 === t5 && (t5 = 0), void 0 === n4 && (n4 = 1), r5 > n4 ? n4 : r5 > t5 ? r5 : t5;
+  };
+  var u = function(r5) {
+    return (r5 = isFinite(r5) ? r5 % 360 : 0) > 0 ? r5 : r5 + 360;
+  };
+  var a2 = function(r5) {
+    return { r: e2(r5.r, 0, 255), g: e2(r5.g, 0, 255), b: e2(r5.b, 0, 255), a: e2(r5.a) };
+  };
+  var o2 = function(r5) {
+    return { r: n(r5.r), g: n(r5.g), b: n(r5.b), a: n(r5.a, 3) };
+  };
+  var i2 = /^#([0-9a-f]{3,8})$/i;
+  var s2 = function(r5) {
+    var t5 = r5.toString(16);
+    return t5.length < 2 ? "0" + t5 : t5;
+  };
+  var h = function(r5) {
+    var t5 = r5.r, n4 = r5.g, e5 = r5.b, u4 = r5.a, a5 = Math.max(t5, n4, e5), o5 = a5 - Math.min(t5, n4, e5), i5 = o5 ? a5 === t5 ? (n4 - e5) / o5 : a5 === n4 ? 2 + (e5 - t5) / o5 : 4 + (t5 - n4) / o5 : 0;
+    return { h: 60 * (i5 < 0 ? i5 + 6 : i5), s: a5 ? o5 / a5 * 100 : 0, v: a5 / 255 * 100, a: u4 };
+  };
+  var b = function(r5) {
+    var t5 = r5.h, n4 = r5.s, e5 = r5.v, u4 = r5.a;
+    t5 = t5 / 360 * 6, n4 /= 100, e5 /= 100;
+    var a5 = Math.floor(t5), o5 = e5 * (1 - n4), i5 = e5 * (1 - (t5 - a5) * n4), s4 = e5 * (1 - (1 - t5 + a5) * n4), h4 = a5 % 6;
+    return { r: 255 * [e5, i5, o5, o5, s4, e5][h4], g: 255 * [s4, e5, e5, i5, o5, o5][h4], b: 255 * [o5, o5, s4, e5, e5, i5][h4], a: u4 };
+  };
+  var g = function(r5) {
+    return { h: u(r5.h), s: e2(r5.s, 0, 100), l: e2(r5.l, 0, 100), a: e2(r5.a) };
+  };
+  var d = function(r5) {
+    return { h: n(r5.h), s: n(r5.s), l: n(r5.l), a: n(r5.a, 3) };
+  };
+  var f2 = function(r5) {
+    return b((n4 = (t5 = r5).s, { h: t5.h, s: (n4 *= ((e5 = t5.l) < 50 ? e5 : 100 - e5) / 100) > 0 ? 2 * n4 / (e5 + n4) * 100 : 0, v: e5 + n4, a: t5.a }));
+    var t5, n4, e5;
+  };
+  var c2 = function(r5) {
+    return { h: (t5 = h(r5)).h, s: (u4 = (200 - (n4 = t5.s)) * (e5 = t5.v) / 100) > 0 && u4 < 200 ? n4 * e5 / 100 / (u4 <= 100 ? u4 : 200 - u4) * 100 : 0, l: u4 / 2, a: t5.a };
+    var t5, n4, e5, u4;
+  };
+  var l2 = /^hsla?\(\s*([+-]?\d*\.?\d+)(deg|rad|grad|turn)?\s*,\s*([+-]?\d*\.?\d+)%\s*,\s*([+-]?\d*\.?\d+)%\s*(?:,\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
+  var p = /^hsla?\(\s*([+-]?\d*\.?\d+)(deg|rad|grad|turn)?\s+([+-]?\d*\.?\d+)%\s+([+-]?\d*\.?\d+)%\s*(?:\/\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
+  var v = /^rgba?\(\s*([+-]?\d*\.?\d+)(%)?\s*,\s*([+-]?\d*\.?\d+)(%)?\s*,\s*([+-]?\d*\.?\d+)(%)?\s*(?:,\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
+  var m = /^rgba?\(\s*([+-]?\d*\.?\d+)(%)?\s+([+-]?\d*\.?\d+)(%)?\s+([+-]?\d*\.?\d+)(%)?\s*(?:\/\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
+  var y = { string: [[function(r5) {
+    var t5 = i2.exec(r5);
+    return t5 ? (r5 = t5[1]).length <= 4 ? { r: parseInt(r5[0] + r5[0], 16), g: parseInt(r5[1] + r5[1], 16), b: parseInt(r5[2] + r5[2], 16), a: 4 === r5.length ? n(parseInt(r5[3] + r5[3], 16) / 255, 2) : 1 } : 6 === r5.length || 8 === r5.length ? { r: parseInt(r5.substr(0, 2), 16), g: parseInt(r5.substr(2, 2), 16), b: parseInt(r5.substr(4, 2), 16), a: 8 === r5.length ? n(parseInt(r5.substr(6, 2), 16) / 255, 2) : 1 } : null : null;
+  }, "hex"], [function(r5) {
+    var t5 = v.exec(r5) || m.exec(r5);
+    return t5 ? t5[2] !== t5[4] || t5[4] !== t5[6] ? null : a2({ r: Number(t5[1]) / (t5[2] ? 100 / 255 : 1), g: Number(t5[3]) / (t5[4] ? 100 / 255 : 1), b: Number(t5[5]) / (t5[6] ? 100 / 255 : 1), a: void 0 === t5[7] ? 1 : Number(t5[7]) / (t5[8] ? 100 : 1) }) : null;
+  }, "rgb"], [function(t5) {
+    var n4 = l2.exec(t5) || p.exec(t5);
+    if (!n4) return null;
+    var e5, u4, a5 = g({ h: (e5 = n4[1], u4 = n4[2], void 0 === u4 && (u4 = "deg"), Number(e5) * (r2[u4] || 1)), s: Number(n4[3]), l: Number(n4[4]), a: void 0 === n4[5] ? 1 : Number(n4[5]) / (n4[6] ? 100 : 1) });
+    return f2(a5);
+  }, "hsl"]], object: [[function(r5) {
+    var n4 = r5.r, e5 = r5.g, u4 = r5.b, o5 = r5.a, i5 = void 0 === o5 ? 1 : o5;
+    return t2(n4) && t2(e5) && t2(u4) ? a2({ r: Number(n4), g: Number(e5), b: Number(u4), a: Number(i5) }) : null;
+  }, "rgb"], [function(r5) {
+    var n4 = r5.h, e5 = r5.s, u4 = r5.l, a5 = r5.a, o5 = void 0 === a5 ? 1 : a5;
+    if (!t2(n4) || !t2(e5) || !t2(u4)) return null;
+    var i5 = g({ h: Number(n4), s: Number(e5), l: Number(u4), a: Number(o5) });
+    return f2(i5);
+  }, "hsl"], [function(r5) {
+    var n4 = r5.h, a5 = r5.s, o5 = r5.v, i5 = r5.a, s4 = void 0 === i5 ? 1 : i5;
+    if (!t2(n4) || !t2(a5) || !t2(o5)) return null;
+    var h4 = (function(r6) {
+      return { h: u(r6.h), s: e2(r6.s, 0, 100), v: e2(r6.v, 0, 100), a: e2(r6.a) };
+    })({ h: Number(n4), s: Number(a5), v: Number(o5), a: Number(s4) });
+    return b(h4);
+  }, "hsv"]] };
+  var N = function(r5, t5) {
+    for (var n4 = 0; n4 < t5.length; n4++) {
+      var e5 = t5[n4][0](r5);
+      if (e5) return [e5, t5[n4][1]];
     }
-    let menu = new DMenu(itemList, endFunc, title, opener);
-    active_dmenu = menu;
-    return menu;
-  }
-  function createQuickMenuButton() {
-    const quickMenuButton = document.createElement("button");
-    quickMenuButton.id = "quick-menu-button";
-    quickMenuButton.className = "topnav__btn";
-    quickMenuButton.innerHTML = "Quick";
-    quickMenuButton.addEventListener("click", function() {
-      do_qm(quickMenuButton);
+    return [null, void 0];
+  };
+  var x = function(r5) {
+    return "string" == typeof r5 ? N(r5.trim(), y.string) : "object" == typeof r5 && null !== r5 ? N(r5, y.object) : [null, void 0];
+  };
+  var M = function(r5, t5) {
+    var n4 = c2(r5);
+    return { h: n4.h, s: e2(n4.s + 100 * t5, 0, 100), l: n4.l, a: n4.a };
+  };
+  var H = function(r5) {
+    return (299 * r5.r + 587 * r5.g + 114 * r5.b) / 1e3 / 255;
+  };
+  var $ = function(r5, t5) {
+    var n4 = c2(r5);
+    return { h: n4.h, s: n4.s, l: e2(n4.l + 100 * t5, 0, 100), a: n4.a };
+  };
+  var j = (function() {
+    function r5(r6) {
+      this.parsed = x(r6)[0], this.rgba = this.parsed || { r: 0, g: 0, b: 0, a: 1 };
+    }
+    return r5.prototype.isValid = function() {
+      return null !== this.parsed;
+    }, r5.prototype.brightness = function() {
+      return n(H(this.rgba), 2);
+    }, r5.prototype.isDark = function() {
+      return H(this.rgba) < 0.5;
+    }, r5.prototype.isLight = function() {
+      return H(this.rgba) >= 0.5;
+    }, r5.prototype.toHex = function() {
+      return r6 = o2(this.rgba), t5 = r6.r, e5 = r6.g, u4 = r6.b, i5 = (a5 = r6.a) < 1 ? s2(n(255 * a5)) : "", "#" + s2(t5) + s2(e5) + s2(u4) + i5;
+      var r6, t5, e5, u4, a5, i5;
+    }, r5.prototype.toRgb = function() {
+      return o2(this.rgba);
+    }, r5.prototype.toRgbString = function() {
+      return r6 = o2(this.rgba), t5 = r6.r, n4 = r6.g, e5 = r6.b, (u4 = r6.a) < 1 ? "rgba(" + t5 + ", " + n4 + ", " + e5 + ", " + u4 + ")" : "rgb(" + t5 + ", " + n4 + ", " + e5 + ")";
+      var r6, t5, n4, e5, u4;
+    }, r5.prototype.toHsl = function() {
+      return d(c2(this.rgba));
+    }, r5.prototype.toHslString = function() {
+      return r6 = d(c2(this.rgba)), t5 = r6.h, n4 = r6.s, e5 = r6.l, (u4 = r6.a) < 1 ? "hsla(" + t5 + ", " + n4 + "%, " + e5 + "%, " + u4 + ")" : "hsl(" + t5 + ", " + n4 + "%, " + e5 + "%)";
+      var r6, t5, n4, e5, u4;
+    }, r5.prototype.toHsv = function() {
+      return r6 = h(this.rgba), { h: n(r6.h), s: n(r6.s), v: n(r6.v), a: n(r6.a, 3) };
+      var r6;
+    }, r5.prototype.invert = function() {
+      return w({ r: 255 - (r6 = this.rgba).r, g: 255 - r6.g, b: 255 - r6.b, a: r6.a });
+      var r6;
+    }, r5.prototype.saturate = function(r6) {
+      return void 0 === r6 && (r6 = 0.1), w(M(this.rgba, r6));
+    }, r5.prototype.desaturate = function(r6) {
+      return void 0 === r6 && (r6 = 0.1), w(M(this.rgba, -r6));
+    }, r5.prototype.grayscale = function() {
+      return w(M(this.rgba, -1));
+    }, r5.prototype.lighten = function(r6) {
+      return void 0 === r6 && (r6 = 0.1), w($(this.rgba, r6));
+    }, r5.prototype.darken = function(r6) {
+      return void 0 === r6 && (r6 = 0.1), w($(this.rgba, -r6));
+    }, r5.prototype.rotate = function(r6) {
+      return void 0 === r6 && (r6 = 15), this.hue(this.hue() + r6);
+    }, r5.prototype.alpha = function(r6) {
+      return "number" == typeof r6 ? w({ r: (t5 = this.rgba).r, g: t5.g, b: t5.b, a: r6 }) : n(this.rgba.a, 3);
+      var t5;
+    }, r5.prototype.hue = function(r6) {
+      var t5 = c2(this.rgba);
+      return "number" == typeof r6 ? w({ h: r6, s: t5.s, l: t5.l, a: t5.a }) : n(t5.h);
+    }, r5.prototype.isEqual = function(r6) {
+      return this.toHex() === w(r6).toHex();
+    }, r5;
+  })();
+  var w = function(r5) {
+    return r5 instanceof j ? r5 : new j(r5);
+  };
+  var S = [];
+  var k = function(r5) {
+    r5.forEach(function(r6) {
+      S.indexOf(r6) < 0 && (r6(j, y), S.push(r6));
     });
-    return quickMenuButton;
-  }
-  document.addEventListener("click", function(e5) {
-    if (active_dmenu == null || !active_dmenu.isOpen()) {
-      return;
-    }
-    if (!active_dmenu.menuEl.contains(e5.target) && e5.target != active_dmenu.openerEl) {
-      active_dmenu.close();
-      e5.preventDefault();
-    }
-  });
+  };
 
-  // src/main-features/quick-menu/config.ts
-  function gatherOptions(template, name2) {
-    let options = [];
-    for (let keyName of Object.keys(template)) {
-      const key = template[keyName];
-      const newName = (name2 ? name2 + "." : "") + keyName;
-      if (typeof key == "object" && !Array.isArray(key)) {
-        options = options.concat(gatherOptions(template[keyName], newName));
-      } else if (key == "array") {
-      } else {
-        options.push({ meta: "config", value: newName });
-      }
-    }
-    return options;
+  // node_modules/colord/plugins/lch.mjs
+  var r3 = { grad: 0.9, turn: 360, rad: 360 / (2 * Math.PI) };
+  var t3 = function(r5) {
+    return "string" == typeof r5 ? r5.length > 0 : "number" == typeof r5;
+  };
+  var a3 = function(r5, t5, a5) {
+    return void 0 === t5 && (t5 = 0), void 0 === a5 && (a5 = Math.pow(10, t5)), Math.round(a5 * r5) / a5 + 0;
+  };
+  var n2 = function(r5, t5, a5) {
+    return void 0 === t5 && (t5 = 0), void 0 === a5 && (a5 = 1), r5 > a5 ? a5 : r5 > t5 ? r5 : t5;
+  };
+  var u2 = function(r5) {
+    var t5 = r5 / 255;
+    return t5 < 0.04045 ? t5 / 12.92 : Math.pow((t5 + 0.055) / 1.055, 2.4);
+  };
+  var h2 = function(r5) {
+    return 255 * (r5 > 31308e-7 ? 1.055 * Math.pow(r5, 1 / 2.4) - 0.055 : 12.92 * r5);
+  };
+  var o3 = 96.422;
+  var e3 = 100;
+  var c3 = 82.521;
+  var i3 = function(r5) {
+    var t5, a5, u4 = { x: 0.9555766 * (t5 = r5).x + -0.0230393 * t5.y + 0.0631636 * t5.z, y: -0.0282895 * t5.x + 1.0099416 * t5.y + 0.0210077 * t5.z, z: 0.0122982 * t5.x + -0.020483 * t5.y + 1.3299098 * t5.z };
+    return a5 = { r: h2(0.032404542 * u4.x - 0.015371385 * u4.y - 4985314e-9 * u4.z), g: h2(-969266e-8 * u4.x + 0.018760108 * u4.y + 41556e-8 * u4.z), b: h2(556434e-9 * u4.x - 2040259e-9 * u4.y + 0.010572252 * u4.z), a: r5.a }, { r: n2(a5.r, 0, 255), g: n2(a5.g, 0, 255), b: n2(a5.b, 0, 255), a: n2(a5.a) };
+  };
+  var l3 = function(r5) {
+    var t5 = u2(r5.r), a5 = u2(r5.g), h4 = u2(r5.b);
+    return (function(r6) {
+      return { x: n2(r6.x, 0, o3), y: n2(r6.y, 0, e3), z: n2(r6.z, 0, c3), a: n2(r6.a) };
+    })((function(r6) {
+      return { x: 1.0478112 * r6.x + 0.0228866 * r6.y + -0.050127 * r6.z, y: 0.0295424 * r6.x + 0.9904844 * r6.y + -0.0170491 * r6.z, z: -92345e-7 * r6.x + 0.0150436 * r6.y + 0.7521316 * r6.z, a: r6.a };
+    })({ x: 100 * (0.4124564 * t5 + 0.3575761 * a5 + 0.1804375 * h4), y: 100 * (0.2126729 * t5 + 0.7151522 * a5 + 0.072175 * h4), z: 100 * (0.0193339 * t5 + 0.119192 * a5 + 0.9503041 * h4), a: r5.a }));
+  };
+  var f3 = 216 / 24389;
+  var b2 = 24389 / 27;
+  var d2 = function(r5) {
+    return { l: n2(r5.l, 0, 100), c: r5.c, h: (t5 = r5.h, (t5 = isFinite(t5) ? t5 % 360 : 0) > 0 ? t5 : t5 + 360), a: r5.a };
+    var t5;
+  };
+  var p2 = function(r5) {
+    return { l: a3(r5.l, 2), c: a3(r5.c, 2), h: a3(r5.h, 2), a: a3(r5.a, 3) };
+  };
+  var v2 = function(r5) {
+    var a5 = r5.l, n4 = r5.c, u4 = r5.h, h4 = r5.a, o5 = void 0 === h4 ? 1 : h4;
+    if (!t3(a5) || !t3(n4) || !t3(u4)) return null;
+    var e5 = d2({ l: Number(a5), c: Number(n4), h: Number(u4), a: Number(o5) });
+    return M2(e5);
+  };
+  var y2 = function(r5) {
+    var t5 = (function(r6) {
+      var t6 = l3(r6), a5 = t6.x / o3, n5 = t6.y / e3, u5 = t6.z / c3;
+      return a5 = a5 > f3 ? Math.cbrt(a5) : (b2 * a5 + 16) / 116, { l: 116 * (n5 = n5 > f3 ? Math.cbrt(n5) : (b2 * n5 + 16) / 116) - 16, a: 500 * (a5 - n5), b: 200 * (n5 - (u5 = u5 > f3 ? Math.cbrt(u5) : (b2 * u5 + 16) / 116)), alpha: t6.a };
+    })(r5), n4 = a3(t5.a, 3), u4 = a3(t5.b, 3), h4 = Math.atan2(u4, n4) / Math.PI * 180;
+    return { l: t5.l, c: Math.sqrt(n4 * n4 + u4 * u4), h: h4 < 0 ? h4 + 360 : h4, a: t5.alpha };
+  };
+  var M2 = function(r5) {
+    return t5 = { l: r5.l, a: r5.c * Math.cos(r5.h * Math.PI / 180), b: r5.c * Math.sin(r5.h * Math.PI / 180), alpha: r5.a }, n4 = t5.a / 500 + (a5 = (t5.l + 16) / 116), u4 = a5 - t5.b / 200, i3({ x: (Math.pow(n4, 3) > f3 ? Math.pow(n4, 3) : (116 * n4 - 16) / b2) * o3, y: (t5.l > 8 ? Math.pow((t5.l + 16) / 116, 3) : t5.l / b2) * e3, z: (Math.pow(u4, 3) > f3 ? Math.pow(u4, 3) : (116 * u4 - 16) / b2) * c3, a: t5.alpha });
+    var t5, a5, n4, u4;
+  };
+  var x2 = /^lch\(\s*([+-]?\d*\.?\d+)%\s+([+-]?\d*\.?\d+)\s+([+-]?\d*\.?\d+)(deg|rad|grad|turn)?\s*(?:\/\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
+  var s3 = function(t5) {
+    var a5 = x2.exec(t5);
+    if (!a5) return null;
+    var n4, u4, h4 = d2({ l: Number(a5[1]), c: Number(a5[2]), h: (n4 = a5[3], u4 = a5[4], void 0 === u4 && (u4 = "deg"), Number(n4) * (r3[u4] || 1)), a: void 0 === a5[5] ? 1 : Number(a5[5]) / (a5[6] ? 100 : 1) });
+    return M2(h4);
+  };
+  function lch_default(r5, t5) {
+    r5.prototype.toLch = function() {
+      return p2(y2(this.rgba));
+    }, r5.prototype.toLchString = function() {
+      return r6 = p2(y2(this.rgba)), t6 = r6.l, a5 = r6.c, n4 = r6.h, (u4 = r6.a) < 1 ? "lch(" + t6 + "% " + a5 + " " + n4 + " / " + u4 + ")" : "lch(" + t6 + "% " + a5 + " " + n4 + ")";
+      var r6, t6, a5, n4, u4;
+    }, t5.string.push([s3, "lch"]), t5.object.push([v2, "lch"]);
   }
-  async function getDMenuOptionsForSettings(toplevel) {
-    const template = await browser.runtime.sendMessage({
-      action: "getSettingsTemplate"
-    });
-    let options = [];
-    for (let cat of Object.keys(template)) {
-      options = options.concat(
-        gatherOptions(template[cat], toplevel ? "config" : null)
-      );
+
+  // node_modules/colord/plugins/mix.mjs
+  var t4 = function(t5, a5, n4) {
+    return void 0 === a5 && (a5 = 0), void 0 === n4 && (n4 = 1), t5 > n4 ? n4 : t5 > a5 ? t5 : a5;
+  };
+  var a4 = function(t5) {
+    var a5 = t5 / 255;
+    return a5 < 0.04045 ? a5 / 12.92 : Math.pow((a5 + 0.055) / 1.055, 2.4);
+  };
+  var n3 = function(t5) {
+    return 255 * (t5 > 31308e-7 ? 1.055 * Math.pow(t5, 1 / 2.4) - 0.055 : 12.92 * t5);
+  };
+  var r4 = 96.422;
+  var o4 = 100;
+  var u3 = 82.521;
+  var e4 = function(a5) {
+    var r5, o5, u4 = { x: 0.9555766 * (r5 = a5).x + -0.0230393 * r5.y + 0.0631636 * r5.z, y: -0.0282895 * r5.x + 1.0099416 * r5.y + 0.0210077 * r5.z, z: 0.0122982 * r5.x + -0.020483 * r5.y + 1.3299098 * r5.z };
+    return o5 = { r: n3(0.032404542 * u4.x - 0.015371385 * u4.y - 4985314e-9 * u4.z), g: n3(-969266e-8 * u4.x + 0.018760108 * u4.y + 41556e-8 * u4.z), b: n3(556434e-9 * u4.x - 2040259e-9 * u4.y + 0.010572252 * u4.z), a: a5.a }, { r: t4(o5.r, 0, 255), g: t4(o5.g, 0, 255), b: t4(o5.b, 0, 255), a: t4(o5.a) };
+  };
+  var i4 = function(n4) {
+    var e5 = a4(n4.r), i5 = a4(n4.g), p4 = a4(n4.b);
+    return (function(a5) {
+      return { x: t4(a5.x, 0, r4), y: t4(a5.y, 0, o4), z: t4(a5.z, 0, u3), a: t4(a5.a) };
+    })((function(t5) {
+      return { x: 1.0478112 * t5.x + 0.0228866 * t5.y + -0.050127 * t5.z, y: 0.0295424 * t5.x + 0.9904844 * t5.y + -0.0170491 * t5.z, z: -92345e-7 * t5.x + 0.0150436 * t5.y + 0.7521316 * t5.z, a: t5.a };
+    })({ x: 100 * (0.4124564 * e5 + 0.3575761 * i5 + 0.1804375 * p4), y: 100 * (0.2126729 * e5 + 0.7151522 * i5 + 0.072175 * p4), z: 100 * (0.0193339 * e5 + 0.119192 * i5 + 0.9503041 * p4), a: n4.a }));
+  };
+  var p3 = 216 / 24389;
+  var h3 = 24389 / 27;
+  var f4 = function(t5) {
+    var a5 = i4(t5), n4 = a5.x / r4, e5 = a5.y / o4, f5 = a5.z / u3;
+    return n4 = n4 > p3 ? Math.cbrt(n4) : (h3 * n4 + 16) / 116, { l: 116 * (e5 = e5 > p3 ? Math.cbrt(e5) : (h3 * e5 + 16) / 116) - 16, a: 500 * (n4 - e5), b: 200 * (e5 - (f5 = f5 > p3 ? Math.cbrt(f5) : (h3 * f5 + 16) / 116)), alpha: a5.a };
+  };
+  var c4 = function(a5, n4, i5) {
+    var c5, y3 = f4(a5), x3 = f4(n4);
+    return (function(t5) {
+      var a6 = (t5.l + 16) / 116, n5 = t5.a / 500 + a6, i6 = a6 - t5.b / 200;
+      return e4({ x: (Math.pow(n5, 3) > p3 ? Math.pow(n5, 3) : (116 * n5 - 16) / h3) * r4, y: (t5.l > 8 ? Math.pow((t5.l + 16) / 116, 3) : t5.l / h3) * o4, z: (Math.pow(i6, 3) > p3 ? Math.pow(i6, 3) : (116 * i6 - 16) / h3) * u3, a: t5.alpha });
+    })({ l: t4((c5 = { l: y3.l * (1 - i5) + x3.l * i5, a: y3.a * (1 - i5) + x3.a * i5, b: y3.b * (1 - i5) + x3.b * i5, alpha: y3.alpha * (1 - i5) + x3.alpha * i5 }).l, 0, 400), a: c5.a, b: c5.b, alpha: t4(c5.alpha) });
+  };
+  function mix_default(t5) {
+    function a5(t6, a6, n4) {
+      void 0 === n4 && (n4 = 5);
+      for (var r5 = [], o5 = 1 / (n4 - 1), u4 = 0; u4 <= n4 - 1; u4++) r5.push(t6.mix(a6, o5 * u4));
+      return r5;
     }
-    return options;
-  }
-  function getFullOptPath(template, optName) {
-    if (optName.startsWith("config.")) {
-      optName = optName.substring("config.".length);
-    }
-    const first = optName.split(".")[0];
-    for (let key of Object.keys(template)) {
-      if (template[key][first] !== void 0) {
-        return key + "." + optName;
-      }
-    }
-    console.error(
-      `Was not able to convert the optName '${optName}' to full because it was not found in the template json (returning an option with no category)`
-    );
-    return optName;
-  }
-  async function setSettingByPath(path, value) {
-    await browser.runtime.sendMessage({
-      action: "setSetting",
-      name: path,
-      data: value
-    });
-    await apply();
-  }
-  async function dmenuEditConfig(path) {
-    const templates = await browser.runtime.sendMessage({
-      action: "getSettingsTemplate"
-    });
-    let configPath = getFullOptPath(templates, path);
-    const template = getByPath(templates, configPath);
-    let optionValue = await browser.runtime.sendMessage({
-      action: "getSetting",
-      name: configPath
-    });
-    if (optionValue.error) {
-      console.error("error from service worker: " + optionValue.error);
-      optionValue = "worker error";
-    }
-    const label = path + " (" + optionValue + "): ";
-    if (template == "boolean") {
-      dmenu(
-        ["true", "false"],
-        function(cmd, shift) {
-          if (cmd == "true") {
-            setSettingByPath(configPath, true);
-          } else if (cmd == "false") {
-            setSettingByPath(configPath, false);
-          }
-        },
-        label
-      );
-    } else if (template == "number") {
-      dmenu(
-        [],
-        function(cmd, shift) {
-          if (configPath == "appearance.background.blur" && cmd == "song 2") {
-            openURL("https://www.youtube.com/watch?v=Bz4l9_bzfZM", true);
-            return;
-          }
-          setSettingByPath(configPath, new Number(cmd));
-        },
-        label
-      );
-    } else if (Array.isArray(template)) {
-      dmenu(
-        template,
-        function(cmd, shift) {
-          setSettingByPath(configPath, cmd);
-        },
-        label
-      );
-    } else {
-      if (template !== "string") {
-        console.error(
-          "Invalid template type: '" + template + "' Falling back to 'string' template type"
-        );
-      }
-      dmenu(
-        [],
-        function(cmd, shift) {
-          setSettingByPath(configPath, cmd);
-        },
-        label
-      );
-    }
+    t5.prototype.mix = function(a6, n4) {
+      void 0 === n4 && (n4 = 0.5);
+      var r5 = a6 instanceof t5 ? a6 : new t5(a6), o5 = c4(this.toRgb(), r5.toRgb(), n4);
+      return new t5(o5);
+    }, t5.prototype.tints = function(t6) {
+      return a5(this, "#fff", t6);
+    }, t5.prototype.shades = function(t6) {
+      return a5(this, "#000", t6);
+    }, t5.prototype.tones = function(t6) {
+      return a5(this, "#808080", t6);
+    };
   }
 
   // node_modules/@vibrant/image/dist/esm/histogram.js
@@ -3449,7 +3391,6 @@ Is it scaring you off?`,
     }
   };
   function applyFilters(imageData, filters) {
-    var _a;
     if (filters.length > 0) {
       const pixels = imageData.data;
       const n4 = pixels.length / 4;
@@ -3465,7 +3406,7 @@ Is it scaring you off?`,
         b3 = pixels[offset + 2];
         a5 = pixels[offset + 3];
         for (let j2 = 0; j2 < filters.length; j2++) {
-          if (!((_a = filters[j2]) == null ? void 0 : _a.call(filters, r5, g2, b3, a5))) {
+          if (!filters[j2]?.(r5, g2, b3, a5)) {
             pixels[offset + 3] = 0;
             break;
           }
@@ -3891,9 +3832,8 @@ Is it scaring you off?`,
   var Swatch = class _Swatch {
     static applyFilters(colors, filters) {
       return filters.length > 0 ? colors.filter(({ r: r5, g: g2, b: b3 }) => {
-        var _a;
         for (let j2 = 0; j2 < filters.length; j2++) {
-          if (!((_a = filters[j2]) == null ? void 0 : _a.call(filters, r5, g2, b3, 255))) return false;
+          if (!filters[j2]?.(r5, g2, b3, 255)) return false;
         }
         return true;
       }) : colors;
@@ -4344,6 +4284,7 @@ Is it scaring you off?`,
     while (pq.size()) {
       const v3 = pq.pop();
       const color = v3.avg();
+      const [r5, g2, b3] = color;
       swatches.push(new Swatch(color, v3.count()));
     }
     return swatches;
@@ -4555,13 +4496,13 @@ Is it scaring you off?`,
       palette.LightMuted = new Swatch(hslToRgb(h4, s4, l4), 0);
     }
   }
-  var DefaultGenerator = (swatches, opts) => {
+  var DefaultGenerator = ((swatches, opts) => {
     opts = Object.assign({}, DefaultOpts, opts);
     const maxPopulation = _findMaxPopulation(swatches);
     const palette = _generateVariationColors(swatches, maxPopulation, opts);
     _generateEmptySwatches(palette, maxPopulation, opts);
     return palette;
-  };
+  });
 
   // node_modules/node-vibrant/dist/esm/pipeline/index.js
   var pipeline = new BasicPipeline().filter.register(
@@ -4571,4282 +4512,6 @@ Is it scaring you off?`,
 
   // node_modules/node-vibrant/dist/esm/browser.js
   Vibrant.use(pipeline);
-
-  // node_modules/colord/index.mjs
-  var r2 = { grad: 0.9, turn: 360, rad: 360 / (2 * Math.PI) };
-  var t2 = function(r5) {
-    return "string" == typeof r5 ? r5.length > 0 : "number" == typeof r5;
-  };
-  var n = function(r5, t5, n4) {
-    return void 0 === t5 && (t5 = 0), void 0 === n4 && (n4 = Math.pow(10, t5)), Math.round(n4 * r5) / n4 + 0;
-  };
-  var e2 = function(r5, t5, n4) {
-    return void 0 === t5 && (t5 = 0), void 0 === n4 && (n4 = 1), r5 > n4 ? n4 : r5 > t5 ? r5 : t5;
-  };
-  var u = function(r5) {
-    return (r5 = isFinite(r5) ? r5 % 360 : 0) > 0 ? r5 : r5 + 360;
-  };
-  var a2 = function(r5) {
-    return { r: e2(r5.r, 0, 255), g: e2(r5.g, 0, 255), b: e2(r5.b, 0, 255), a: e2(r5.a) };
-  };
-  var o2 = function(r5) {
-    return { r: n(r5.r), g: n(r5.g), b: n(r5.b), a: n(r5.a, 3) };
-  };
-  var i2 = /^#([0-9a-f]{3,8})$/i;
-  var s2 = function(r5) {
-    var t5 = r5.toString(16);
-    return t5.length < 2 ? "0" + t5 : t5;
-  };
-  var h = function(r5) {
-    var t5 = r5.r, n4 = r5.g, e5 = r5.b, u4 = r5.a, a5 = Math.max(t5, n4, e5), o5 = a5 - Math.min(t5, n4, e5), i5 = o5 ? a5 === t5 ? (n4 - e5) / o5 : a5 === n4 ? 2 + (e5 - t5) / o5 : 4 + (t5 - n4) / o5 : 0;
-    return { h: 60 * (i5 < 0 ? i5 + 6 : i5), s: a5 ? o5 / a5 * 100 : 0, v: a5 / 255 * 100, a: u4 };
-  };
-  var b = function(r5) {
-    var t5 = r5.h, n4 = r5.s, e5 = r5.v, u4 = r5.a;
-    t5 = t5 / 360 * 6, n4 /= 100, e5 /= 100;
-    var a5 = Math.floor(t5), o5 = e5 * (1 - n4), i5 = e5 * (1 - (t5 - a5) * n4), s4 = e5 * (1 - (1 - t5 + a5) * n4), h4 = a5 % 6;
-    return { r: 255 * [e5, i5, o5, o5, s4, e5][h4], g: 255 * [s4, e5, e5, i5, o5, o5][h4], b: 255 * [o5, o5, s4, e5, e5, i5][h4], a: u4 };
-  };
-  var g = function(r5) {
-    return { h: u(r5.h), s: e2(r5.s, 0, 100), l: e2(r5.l, 0, 100), a: e2(r5.a) };
-  };
-  var d = function(r5) {
-    return { h: n(r5.h), s: n(r5.s), l: n(r5.l), a: n(r5.a, 3) };
-  };
-  var f2 = function(r5) {
-    return b((n4 = (t5 = r5).s, { h: t5.h, s: (n4 *= ((e5 = t5.l) < 50 ? e5 : 100 - e5) / 100) > 0 ? 2 * n4 / (e5 + n4) * 100 : 0, v: e5 + n4, a: t5.a }));
-    var t5, n4, e5;
-  };
-  var c2 = function(r5) {
-    return { h: (t5 = h(r5)).h, s: (u4 = (200 - (n4 = t5.s)) * (e5 = t5.v) / 100) > 0 && u4 < 200 ? n4 * e5 / 100 / (u4 <= 100 ? u4 : 200 - u4) * 100 : 0, l: u4 / 2, a: t5.a };
-    var t5, n4, e5, u4;
-  };
-  var l2 = /^hsla?\(\s*([+-]?\d*\.?\d+)(deg|rad|grad|turn)?\s*,\s*([+-]?\d*\.?\d+)%\s*,\s*([+-]?\d*\.?\d+)%\s*(?:,\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
-  var p = /^hsla?\(\s*([+-]?\d*\.?\d+)(deg|rad|grad|turn)?\s+([+-]?\d*\.?\d+)%\s+([+-]?\d*\.?\d+)%\s*(?:\/\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
-  var v = /^rgba?\(\s*([+-]?\d*\.?\d+)(%)?\s*,\s*([+-]?\d*\.?\d+)(%)?\s*,\s*([+-]?\d*\.?\d+)(%)?\s*(?:,\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
-  var m = /^rgba?\(\s*([+-]?\d*\.?\d+)(%)?\s+([+-]?\d*\.?\d+)(%)?\s+([+-]?\d*\.?\d+)(%)?\s*(?:\/\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
-  var y = { string: [[function(r5) {
-    var t5 = i2.exec(r5);
-    return t5 ? (r5 = t5[1]).length <= 4 ? { r: parseInt(r5[0] + r5[0], 16), g: parseInt(r5[1] + r5[1], 16), b: parseInt(r5[2] + r5[2], 16), a: 4 === r5.length ? n(parseInt(r5[3] + r5[3], 16) / 255, 2) : 1 } : 6 === r5.length || 8 === r5.length ? { r: parseInt(r5.substr(0, 2), 16), g: parseInt(r5.substr(2, 2), 16), b: parseInt(r5.substr(4, 2), 16), a: 8 === r5.length ? n(parseInt(r5.substr(6, 2), 16) / 255, 2) : 1 } : null : null;
-  }, "hex"], [function(r5) {
-    var t5 = v.exec(r5) || m.exec(r5);
-    return t5 ? t5[2] !== t5[4] || t5[4] !== t5[6] ? null : a2({ r: Number(t5[1]) / (t5[2] ? 100 / 255 : 1), g: Number(t5[3]) / (t5[4] ? 100 / 255 : 1), b: Number(t5[5]) / (t5[6] ? 100 / 255 : 1), a: void 0 === t5[7] ? 1 : Number(t5[7]) / (t5[8] ? 100 : 1) }) : null;
-  }, "rgb"], [function(t5) {
-    var n4 = l2.exec(t5) || p.exec(t5);
-    if (!n4) return null;
-    var e5, u4, a5 = g({ h: (e5 = n4[1], u4 = n4[2], void 0 === u4 && (u4 = "deg"), Number(e5) * (r2[u4] || 1)), s: Number(n4[3]), l: Number(n4[4]), a: void 0 === n4[5] ? 1 : Number(n4[5]) / (n4[6] ? 100 : 1) });
-    return f2(a5);
-  }, "hsl"]], object: [[function(r5) {
-    var n4 = r5.r, e5 = r5.g, u4 = r5.b, o5 = r5.a, i5 = void 0 === o5 ? 1 : o5;
-    return t2(n4) && t2(e5) && t2(u4) ? a2({ r: Number(n4), g: Number(e5), b: Number(u4), a: Number(i5) }) : null;
-  }, "rgb"], [function(r5) {
-    var n4 = r5.h, e5 = r5.s, u4 = r5.l, a5 = r5.a, o5 = void 0 === a5 ? 1 : a5;
-    if (!t2(n4) || !t2(e5) || !t2(u4)) return null;
-    var i5 = g({ h: Number(n4), s: Number(e5), l: Number(u4), a: Number(o5) });
-    return f2(i5);
-  }, "hsl"], [function(r5) {
-    var n4 = r5.h, a5 = r5.s, o5 = r5.v, i5 = r5.a, s4 = void 0 === i5 ? 1 : i5;
-    if (!t2(n4) || !t2(a5) || !t2(o5)) return null;
-    var h4 = (function(r6) {
-      return { h: u(r6.h), s: e2(r6.s, 0, 100), v: e2(r6.v, 0, 100), a: e2(r6.a) };
-    })({ h: Number(n4), s: Number(a5), v: Number(o5), a: Number(s4) });
-    return b(h4);
-  }, "hsv"]] };
-  var N = function(r5, t5) {
-    for (var n4 = 0; n4 < t5.length; n4++) {
-      var e5 = t5[n4][0](r5);
-      if (e5) return [e5, t5[n4][1]];
-    }
-    return [null, void 0];
-  };
-  var x = function(r5) {
-    return "string" == typeof r5 ? N(r5.trim(), y.string) : "object" == typeof r5 && null !== r5 ? N(r5, y.object) : [null, void 0];
-  };
-  var M = function(r5, t5) {
-    var n4 = c2(r5);
-    return { h: n4.h, s: e2(n4.s + 100 * t5, 0, 100), l: n4.l, a: n4.a };
-  };
-  var H = function(r5) {
-    return (299 * r5.r + 587 * r5.g + 114 * r5.b) / 1e3 / 255;
-  };
-  var $ = function(r5, t5) {
-    var n4 = c2(r5);
-    return { h: n4.h, s: n4.s, l: e2(n4.l + 100 * t5, 0, 100), a: n4.a };
-  };
-  var j = (function() {
-    function r5(r6) {
-      this.parsed = x(r6)[0], this.rgba = this.parsed || { r: 0, g: 0, b: 0, a: 1 };
-    }
-    return r5.prototype.isValid = function() {
-      return null !== this.parsed;
-    }, r5.prototype.brightness = function() {
-      return n(H(this.rgba), 2);
-    }, r5.prototype.isDark = function() {
-      return H(this.rgba) < 0.5;
-    }, r5.prototype.isLight = function() {
-      return H(this.rgba) >= 0.5;
-    }, r5.prototype.toHex = function() {
-      return r6 = o2(this.rgba), t5 = r6.r, e5 = r6.g, u4 = r6.b, i5 = (a5 = r6.a) < 1 ? s2(n(255 * a5)) : "", "#" + s2(t5) + s2(e5) + s2(u4) + i5;
-      var r6, t5, e5, u4, a5, i5;
-    }, r5.prototype.toRgb = function() {
-      return o2(this.rgba);
-    }, r5.prototype.toRgbString = function() {
-      return r6 = o2(this.rgba), t5 = r6.r, n4 = r6.g, e5 = r6.b, (u4 = r6.a) < 1 ? "rgba(" + t5 + ", " + n4 + ", " + e5 + ", " + u4 + ")" : "rgb(" + t5 + ", " + n4 + ", " + e5 + ")";
-      var r6, t5, n4, e5, u4;
-    }, r5.prototype.toHsl = function() {
-      return d(c2(this.rgba));
-    }, r5.prototype.toHslString = function() {
-      return r6 = d(c2(this.rgba)), t5 = r6.h, n4 = r6.s, e5 = r6.l, (u4 = r6.a) < 1 ? "hsla(" + t5 + ", " + n4 + "%, " + e5 + "%, " + u4 + ")" : "hsl(" + t5 + ", " + n4 + "%, " + e5 + "%)";
-      var r6, t5, n4, e5, u4;
-    }, r5.prototype.toHsv = function() {
-      return r6 = h(this.rgba), { h: n(r6.h), s: n(r6.s), v: n(r6.v), a: n(r6.a, 3) };
-      var r6;
-    }, r5.prototype.invert = function() {
-      return w({ r: 255 - (r6 = this.rgba).r, g: 255 - r6.g, b: 255 - r6.b, a: r6.a });
-      var r6;
-    }, r5.prototype.saturate = function(r6) {
-      return void 0 === r6 && (r6 = 0.1), w(M(this.rgba, r6));
-    }, r5.prototype.desaturate = function(r6) {
-      return void 0 === r6 && (r6 = 0.1), w(M(this.rgba, -r6));
-    }, r5.prototype.grayscale = function() {
-      return w(M(this.rgba, -1));
-    }, r5.prototype.lighten = function(r6) {
-      return void 0 === r6 && (r6 = 0.1), w($(this.rgba, r6));
-    }, r5.prototype.darken = function(r6) {
-      return void 0 === r6 && (r6 = 0.1), w($(this.rgba, -r6));
-    }, r5.prototype.rotate = function(r6) {
-      return void 0 === r6 && (r6 = 15), this.hue(this.hue() + r6);
-    }, r5.prototype.alpha = function(r6) {
-      return "number" == typeof r6 ? w({ r: (t5 = this.rgba).r, g: t5.g, b: t5.b, a: r6 }) : n(this.rgba.a, 3);
-      var t5;
-    }, r5.prototype.hue = function(r6) {
-      var t5 = c2(this.rgba);
-      return "number" == typeof r6 ? w({ h: r6, s: t5.s, l: t5.l, a: t5.a }) : n(t5.h);
-    }, r5.prototype.isEqual = function(r6) {
-      return this.toHex() === w(r6).toHex();
-    }, r5;
-  })();
-  var w = function(r5) {
-    return r5 instanceof j ? r5 : new j(r5);
-  };
-  var S = [];
-  var k = function(r5) {
-    r5.forEach(function(r6) {
-      S.indexOf(r6) < 0 && (r6(j, y), S.push(r6));
-    });
-  };
-
-  // node_modules/colord/plugins/lch.mjs
-  var r3 = { grad: 0.9, turn: 360, rad: 360 / (2 * Math.PI) };
-  var t3 = function(r5) {
-    return "string" == typeof r5 ? r5.length > 0 : "number" == typeof r5;
-  };
-  var a3 = function(r5, t5, a5) {
-    return void 0 === t5 && (t5 = 0), void 0 === a5 && (a5 = Math.pow(10, t5)), Math.round(a5 * r5) / a5 + 0;
-  };
-  var n2 = function(r5, t5, a5) {
-    return void 0 === t5 && (t5 = 0), void 0 === a5 && (a5 = 1), r5 > a5 ? a5 : r5 > t5 ? r5 : t5;
-  };
-  var u2 = function(r5) {
-    var t5 = r5 / 255;
-    return t5 < 0.04045 ? t5 / 12.92 : Math.pow((t5 + 0.055) / 1.055, 2.4);
-  };
-  var h2 = function(r5) {
-    return 255 * (r5 > 31308e-7 ? 1.055 * Math.pow(r5, 1 / 2.4) - 0.055 : 12.92 * r5);
-  };
-  var o3 = 96.422;
-  var e3 = 100;
-  var c3 = 82.521;
-  var i3 = function(r5) {
-    var t5, a5, u4 = { x: 0.9555766 * (t5 = r5).x + -0.0230393 * t5.y + 0.0631636 * t5.z, y: -0.0282895 * t5.x + 1.0099416 * t5.y + 0.0210077 * t5.z, z: 0.0122982 * t5.x + -0.020483 * t5.y + 1.3299098 * t5.z };
-    return a5 = { r: h2(0.032404542 * u4.x - 0.015371385 * u4.y - 4985314e-9 * u4.z), g: h2(-969266e-8 * u4.x + 0.018760108 * u4.y + 41556e-8 * u4.z), b: h2(556434e-9 * u4.x - 2040259e-9 * u4.y + 0.010572252 * u4.z), a: r5.a }, { r: n2(a5.r, 0, 255), g: n2(a5.g, 0, 255), b: n2(a5.b, 0, 255), a: n2(a5.a) };
-  };
-  var l3 = function(r5) {
-    var t5 = u2(r5.r), a5 = u2(r5.g), h4 = u2(r5.b);
-    return (function(r6) {
-      return { x: n2(r6.x, 0, o3), y: n2(r6.y, 0, e3), z: n2(r6.z, 0, c3), a: n2(r6.a) };
-    })((function(r6) {
-      return { x: 1.0478112 * r6.x + 0.0228866 * r6.y + -0.050127 * r6.z, y: 0.0295424 * r6.x + 0.9904844 * r6.y + -0.0170491 * r6.z, z: -92345e-7 * r6.x + 0.0150436 * r6.y + 0.7521316 * r6.z, a: r6.a };
-    })({ x: 100 * (0.4124564 * t5 + 0.3575761 * a5 + 0.1804375 * h4), y: 100 * (0.2126729 * t5 + 0.7151522 * a5 + 0.072175 * h4), z: 100 * (0.0193339 * t5 + 0.119192 * a5 + 0.9503041 * h4), a: r5.a }));
-  };
-  var f3 = 216 / 24389;
-  var b2 = 24389 / 27;
-  var d2 = function(r5) {
-    return { l: n2(r5.l, 0, 100), c: r5.c, h: (t5 = r5.h, (t5 = isFinite(t5) ? t5 % 360 : 0) > 0 ? t5 : t5 + 360), a: r5.a };
-    var t5;
-  };
-  var p2 = function(r5) {
-    return { l: a3(r5.l, 2), c: a3(r5.c, 2), h: a3(r5.h, 2), a: a3(r5.a, 3) };
-  };
-  var v2 = function(r5) {
-    var a5 = r5.l, n4 = r5.c, u4 = r5.h, h4 = r5.a, o5 = void 0 === h4 ? 1 : h4;
-    if (!t3(a5) || !t3(n4) || !t3(u4)) return null;
-    var e5 = d2({ l: Number(a5), c: Number(n4), h: Number(u4), a: Number(o5) });
-    return M2(e5);
-  };
-  var y2 = function(r5) {
-    var t5 = (function(r6) {
-      var t6 = l3(r6), a5 = t6.x / o3, n5 = t6.y / e3, u5 = t6.z / c3;
-      return a5 = a5 > f3 ? Math.cbrt(a5) : (b2 * a5 + 16) / 116, { l: 116 * (n5 = n5 > f3 ? Math.cbrt(n5) : (b2 * n5 + 16) / 116) - 16, a: 500 * (a5 - n5), b: 200 * (n5 - (u5 = u5 > f3 ? Math.cbrt(u5) : (b2 * u5 + 16) / 116)), alpha: t6.a };
-    })(r5), n4 = a3(t5.a, 3), u4 = a3(t5.b, 3), h4 = Math.atan2(u4, n4) / Math.PI * 180;
-    return { l: t5.l, c: Math.sqrt(n4 * n4 + u4 * u4), h: h4 < 0 ? h4 + 360 : h4, a: t5.alpha };
-  };
-  var M2 = function(r5) {
-    return t5 = { l: r5.l, a: r5.c * Math.cos(r5.h * Math.PI / 180), b: r5.c * Math.sin(r5.h * Math.PI / 180), alpha: r5.a }, n4 = t5.a / 500 + (a5 = (t5.l + 16) / 116), u4 = a5 - t5.b / 200, i3({ x: (Math.pow(n4, 3) > f3 ? Math.pow(n4, 3) : (116 * n4 - 16) / b2) * o3, y: (t5.l > 8 ? Math.pow((t5.l + 16) / 116, 3) : t5.l / b2) * e3, z: (Math.pow(u4, 3) > f3 ? Math.pow(u4, 3) : (116 * u4 - 16) / b2) * c3, a: t5.alpha });
-    var t5, a5, n4, u4;
-  };
-  var x2 = /^lch\(\s*([+-]?\d*\.?\d+)%\s+([+-]?\d*\.?\d+)\s+([+-]?\d*\.?\d+)(deg|rad|grad|turn)?\s*(?:\/\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
-  var s3 = function(t5) {
-    var a5 = x2.exec(t5);
-    if (!a5) return null;
-    var n4, u4, h4 = d2({ l: Number(a5[1]), c: Number(a5[2]), h: (n4 = a5[3], u4 = a5[4], void 0 === u4 && (u4 = "deg"), Number(n4) * (r3[u4] || 1)), a: void 0 === a5[5] ? 1 : Number(a5[5]) / (a5[6] ? 100 : 1) });
-    return M2(h4);
-  };
-  function lch_default(r5, t5) {
-    r5.prototype.toLch = function() {
-      return p2(y2(this.rgba));
-    }, r5.prototype.toLchString = function() {
-      return r6 = p2(y2(this.rgba)), t6 = r6.l, a5 = r6.c, n4 = r6.h, (u4 = r6.a) < 1 ? "lch(" + t6 + "% " + a5 + " " + n4 + " / " + u4 + ")" : "lch(" + t6 + "% " + a5 + " " + n4 + ")";
-      var r6, t6, a5, n4, u4;
-    }, t5.string.push([s3, "lch"]), t5.object.push([v2, "lch"]);
-  }
-
-  // node_modules/colord/plugins/mix.mjs
-  var t4 = function(t5, a5, n4) {
-    return void 0 === a5 && (a5 = 0), void 0 === n4 && (n4 = 1), t5 > n4 ? n4 : t5 > a5 ? t5 : a5;
-  };
-  var a4 = function(t5) {
-    var a5 = t5 / 255;
-    return a5 < 0.04045 ? a5 / 12.92 : Math.pow((a5 + 0.055) / 1.055, 2.4);
-  };
-  var n3 = function(t5) {
-    return 255 * (t5 > 31308e-7 ? 1.055 * Math.pow(t5, 1 / 2.4) - 0.055 : 12.92 * t5);
-  };
-  var r4 = 96.422;
-  var o4 = 100;
-  var u3 = 82.521;
-  var e4 = function(a5) {
-    var r5, o5, u4 = { x: 0.9555766 * (r5 = a5).x + -0.0230393 * r5.y + 0.0631636 * r5.z, y: -0.0282895 * r5.x + 1.0099416 * r5.y + 0.0210077 * r5.z, z: 0.0122982 * r5.x + -0.020483 * r5.y + 1.3299098 * r5.z };
-    return o5 = { r: n3(0.032404542 * u4.x - 0.015371385 * u4.y - 4985314e-9 * u4.z), g: n3(-969266e-8 * u4.x + 0.018760108 * u4.y + 41556e-8 * u4.z), b: n3(556434e-9 * u4.x - 2040259e-9 * u4.y + 0.010572252 * u4.z), a: a5.a }, { r: t4(o5.r, 0, 255), g: t4(o5.g, 0, 255), b: t4(o5.b, 0, 255), a: t4(o5.a) };
-  };
-  var i4 = function(n4) {
-    var e5 = a4(n4.r), i5 = a4(n4.g), p4 = a4(n4.b);
-    return (function(a5) {
-      return { x: t4(a5.x, 0, r4), y: t4(a5.y, 0, o4), z: t4(a5.z, 0, u3), a: t4(a5.a) };
-    })((function(t5) {
-      return { x: 1.0478112 * t5.x + 0.0228866 * t5.y + -0.050127 * t5.z, y: 0.0295424 * t5.x + 0.9904844 * t5.y + -0.0170491 * t5.z, z: -92345e-7 * t5.x + 0.0150436 * t5.y + 0.7521316 * t5.z, a: t5.a };
-    })({ x: 100 * (0.4124564 * e5 + 0.3575761 * i5 + 0.1804375 * p4), y: 100 * (0.2126729 * e5 + 0.7151522 * i5 + 0.072175 * p4), z: 100 * (0.0193339 * e5 + 0.119192 * i5 + 0.9503041 * p4), a: n4.a }));
-  };
-  var p3 = 216 / 24389;
-  var h3 = 24389 / 27;
-  var f4 = function(t5) {
-    var a5 = i4(t5), n4 = a5.x / r4, e5 = a5.y / o4, f5 = a5.z / u3;
-    return n4 = n4 > p3 ? Math.cbrt(n4) : (h3 * n4 + 16) / 116, { l: 116 * (e5 = e5 > p3 ? Math.cbrt(e5) : (h3 * e5 + 16) / 116) - 16, a: 500 * (n4 - e5), b: 200 * (e5 - (f5 = f5 > p3 ? Math.cbrt(f5) : (h3 * f5 + 16) / 116)), alpha: a5.a };
-  };
-  var c4 = function(a5, n4, i5) {
-    var c5, y3 = f4(a5), x3 = f4(n4);
-    return (function(t5) {
-      var a6 = (t5.l + 16) / 116, n5 = t5.a / 500 + a6, i6 = a6 - t5.b / 200;
-      return e4({ x: (Math.pow(n5, 3) > p3 ? Math.pow(n5, 3) : (116 * n5 - 16) / h3) * r4, y: (t5.l > 8 ? Math.pow((t5.l + 16) / 116, 3) : t5.l / h3) * o4, z: (Math.pow(i6, 3) > p3 ? Math.pow(i6, 3) : (116 * i6 - 16) / h3) * u3, a: t5.alpha });
-    })({ l: t4((c5 = { l: y3.l * (1 - i5) + x3.l * i5, a: y3.a * (1 - i5) + x3.a * i5, b: y3.b * (1 - i5) + x3.b * i5, alpha: y3.alpha * (1 - i5) + x3.alpha * i5 }).l, 0, 400), a: c5.a, b: c5.b, alpha: t4(c5.alpha) });
-  };
-  function mix_default(t5) {
-    function a5(t6, a6, n4) {
-      void 0 === n4 && (n4 = 5);
-      for (var r5 = [], o5 = 1 / (n4 - 1), u4 = 0; u4 <= n4 - 1; u4++) r5.push(t6.mix(a6, o5 * u4));
-      return r5;
-    }
-    t5.prototype.mix = function(a6, n4) {
-      void 0 === n4 && (n4 = 0.5);
-      var r5 = a6 instanceof t5 ? a6 : new t5(a6), o5 = c4(this.toRgb(), r5.toRgb(), n4);
-      return new t5(o5);
-    }, t5.prototype.tints = function(t6) {
-      return a5(this, "#fff", t6);
-    }, t5.prototype.shades = function(t6) {
-      return a5(this, "#000", t6);
-    }, t5.prototype.tones = function(t6) {
-      return a5(this, "#808080", t6);
-    };
-  }
-
-  // src/main-features/appearance/weather-effects.ts
-  function setSnowLevel(amount, opacity) {
-    document.getElementById("snowflakes")?.remove();
-    amount = amount > 3e3 ? 3e3 : amount;
-    let snowDiv = document.createElement("div");
-    snowDiv.id = "snowflakes";
-    for (let i5 = 0; i5 < amount; i5++) {
-      let flake = document.createElement("img");
-      flake.classList = "snowflake";
-      flake.src = currentThemeName == "pink" ? getExtensionImage("icons/weather-overlay/blossom.svg") : getExtensionImage("icons/weather-overlay/snowflake.svg");
-      flake.style.left = `${Math.floor(Math.random() * 100)}%`;
-      flake.style.animation = `snowflake_fall_${Math.floor(Math.random() * 3)} ${Math.floor(Math.random() * 7) + 10}s ease-in-out infinite`;
-      flake.style.animationDelay = `${Math.floor(Math.random() * 40) - 40}s`;
-      flake.style.width = `${Math.floor(Math.random() * 20) + 10}px`;
-      flake.style.opacity = opacity;
-      snowDiv.appendChild(flake);
-    }
-    document.documentElement.appendChild(snowDiv);
-  }
-  function setRainLevel(amount, opacity) {
-    document.getElementById("raindrops")?.remove();
-    amount = amount > 3e3 ? 3e3 : amount;
-    let rainDiv = document.createElement("div");
-    rainDiv.id = "raindrops";
-    for (let i5 = 0; i5 < amount; i5++) {
-      let raindrop = document.createElement("img");
-      raindrop.classList.add("raindrop");
-      raindrop.src = getExtensionImage("icons/weather-overlay/raindrop.svg");
-      raindrop.style.left = `${Math.random() * 100}%`;
-      raindrop.style.animation = `raindrop_fall ${Math.random() * 2 + 2}s linear infinite`;
-      raindrop.style.animationDelay = `${Math.random() * 5 - 5}s`;
-      raindrop.style.width = `${Math.random() * 7.5 + 7.5}px`;
-      raindrop.style.opacity = opacity;
-      rainDiv.appendChild(raindrop);
-    }
-    document.documentElement.appendChild(rainDiv);
-  }
-  async function setOverlayBasedOnConditions(amount, opacity) {
-    async function getWeatherDescription(widget) {
-      const weatherData = await getWidgetSetting(widget + ".cache.weatherData");
-      if (weatherData == null) return null;
-      if (weatherData.cod != 200) return null;
-      return weatherData.weather[0].main;
-    }
-    let weatherWidgets = widgets.filter(
-      (item) => item.name.toLowerCase().includes("weather") && item.isActive
-    );
-    let weathers = await Promise.all(
-      weatherWidgets.map(async (widget) => {
-        return await getWeatherDescription(widget.name);
-      })
-    );
-    weathers = weathers.filter((description) => description != null);
-    if (weathers.includes("Rain") || weathers.includes("Drizzle")) {
-      setRainLevel(amount, opacity);
-    }
-    if (weathers.includes("Snow")) {
-      setSnowLevel(amount, opacity);
-    }
-  }
-  function applyWeatherEffects(weatherOverlay) {
-    let rainDiv = document.getElementById("raindrops");
-    let snowDiv = document.getElementById("snowflakes");
-    switch (weatherOverlay.type) {
-      case "snow":
-        if (rainDiv) rainDiv.remove();
-        setSnowLevel(weatherOverlay.amount, weatherOverlay.opacity);
-        break;
-      case "realtime":
-        if (rainDiv) rainDiv.remove();
-        if (snowDiv) snowDiv.remove();
-        setOverlayBasedOnConditions(
-          weatherOverlay.amount,
-          weatherOverlay.opacity
-        );
-        break;
-      case "rain":
-        if (snowDiv) snowDiv.remove();
-        setRainLevel(weatherOverlay.amount, weatherOverlay.opacity);
-        break;
-      default:
-        console.error("No weather selector");
-        break;
-    }
-  }
-
-  // src/main-features/settings/quick-settings.ts
-  var CompactThemeOption = class {
-    element = document.createElement("div");
-    name;
-    currentTheme;
-    constructor(name2, theme) {
-      this.name = name2;
-      this.currentTheme = theme;
-    }
-    createText() {
-      let text = document.createElement("div");
-      text.classList.add("compact-theme-option-text");
-      text.innerText = this.currentTheme.displayName;
-      return text;
-    }
-    render() {
-      this.element.innerHTML = "";
-      this.element.classList.add("compact-theme-option");
-      this.element.dataset["name"] = this.name;
-      this.element.addEventListener("click", () => this.click());
-      this.element.appendChild(this.createText());
-      this.element.appendChild(this.createImageContainer());
-      this.update();
-      return this.element;
-    }
-    createImageContainer() {
-      let imageContainer = document.createElement("div");
-      imageContainer.classList.add("compact-theme-option-image-container");
-      return imageContainer;
-    }
-    async updateImage(forceReload = false) {
-      if (this.name == currentThemeName || forceReload) {
-        let imageURL = await getImageURL(
-          this.name,
-          async () => {
-            return await getExtensionImage(
-              "theme-backgrounds/compressed/" + this.name + ".jpg"
-            );
-          },
-          true
-        );
-        this.element.style.setProperty(
-          "--background-image-local",
-          `url(${imageURL.url})`
-        );
-      }
-    }
-    updateElement() {
-      Object.keys(this.currentTheme.cssProperties).forEach((key) => {
-        this.element.style.setProperty(
-          `${key}-local`,
-          this.currentTheme.cssProperties[key]
-        );
-      });
-    }
-    async click() {
-      await updateTheme(this.name);
-      await this.onClick();
-      this.element.classList.add("is-selected");
-    }
-    async onClick() {
-    }
-    async updateSelection() {
-      if (this.name == currentThemeName) {
-        this.element.classList.add("is-selected");
-        this.updateImage(true);
-      } else {
-        this.element.classList.remove("is-selected");
-        this.element.style.setProperty("--background-image-local", `url()`);
-      }
-    }
-    async update() {
-      this.currentTheme = await getTheme(this.name);
-      this.updateSelection();
-      this.updateElement();
-    }
-  };
-  var CompactThemeSelector = class {
-    element = document.createElement("div");
-    input = document.createElement("div");
-    selector = document.createElement("div");
-    selectorIsOpen = false;
-    themeOptions = [];
-    async createThemeOption(name2, theme) {
-      let option = new CompactThemeOption(name2, theme);
-      option.onClick = async () => {
-        this.updateInput();
-        if (settingsWindow) {
-          await settingsWindow.loadPage();
-        }
-        this.themeOptions.forEach((option2) => {
-          option2.updateSelection();
-        });
-      };
-      this.themeOptions.push(option);
-      return option;
-    }
-    async createThemeOptions(themes2) {
-      Object.entries(themes2).forEach((theme) => {
-        this.createThemeOption(theme[0], theme[1]);
-      });
-    }
-    async renderThemeOptions() {
-      for (let i5 = 1; i5 <= this.themeOptions.length; i5++) {
-        const option = this.themeOptions[i5 - 1];
-        if (!option) break;
-        option.render();
-        this.selector.style.height = this.calculateHeight(i5) + "px";
-        this.selector.appendChild(option.element);
-        if (document.body.classList.contains("enableAnimations")) await delay(20);
-      }
-    }
-    async updateThemeOptions() {
-      let themes2 = await browser.runtime.sendMessage({
-        action: "getThemes",
-        categories: ["quickSettings"],
-        includeHidden: true
-      });
-      let themeOptionNames = this.themeOptions.map((option) => {
-        return option.name;
-      });
-      let themeNames = Object.keys(themes2);
-      let missingThemeOptionNames = themeNames.filter((name2) => {
-        return !themeOptionNames.includes(name2);
-      });
-      missingThemeOptionNames.forEach(async (name2) => {
-        if (!themes2[name2]) {
-          return;
-        }
-        let option = await this.createThemeOption(name2, themes2[name2]);
-        option.render();
-        this.selector.appendChild(option.element);
-      });
-      let extraThemeOptionNames = themeOptionNames.filter((name2) => {
-        return !themeNames.includes(name2);
-      });
-      this.themeOptions.forEach((option) => {
-        if (extraThemeOptionNames.includes(option.name)) {
-          option.element.remove();
-        }
-      });
-      this.themeOptions = this.themeOptions.filter((option) => {
-        return !extraThemeOptionNames.includes(option.name);
-      });
-      this.themeOptions.forEach((option) => {
-        option.updateSelection();
-      });
-    }
-    createInput() {
-      this.input.classList.add("theme-selector-input");
-      this.updateInput();
-    }
-    async updateInput() {
-      let currentOption = new CompactThemeOption(
-        currentThemeName,
-        await getTheme(currentThemeName)
-      );
-      currentOption.onClick = async () => {
-        this.selectorIsOpen = !this.selectorIsOpen;
-        this.updateSelectorStatus();
-      };
-      currentOption.render();
-      currentOption.element.classList.add("is-selected");
-      this.input.innerHTML = "";
-      this.input.appendChild(currentOption.element);
-    }
-    async updateSelectorStatus() {
-      if (this.selectorIsOpen) {
-        this.selector.innerHTML = "";
-        this.selector.classList.add("visible");
-        this.selector.style.overflowY = "hidden";
-        await this.renderThemeOptions();
-        await delay(500);
-        this.selector.style.overflowY = "auto";
-      } else {
-        this.selector.style.overflowY = "hidden";
-        this.selector.style.height = "0px";
-        this.selector.classList.remove("visible");
-      }
-    }
-    calculateHeight(themeOptionsCount) {
-      const TOP_MARGIN = 7;
-      const CONTENT_HEIGHT = themeOptionsCount * (36 + 3);
-      return TOP_MARGIN + CONTENT_HEIGHT;
-    }
-    async render() {
-      this.element.classList.add("compact-theme-selector");
-      let themes2 = await browser.runtime.sendMessage({
-        action: "getThemes",
-        categories: ["quickSettings"],
-        includeHidden: true
-      });
-      this.themeOptions = [];
-      this.createThemeOptions(themes2);
-      this.updateThemeOptions();
-      this.createInput();
-      document.addEventListener("click", (e5) => {
-        if (e5.target instanceof HTMLElement) {
-          if (e5.target == this.input || this.input.contains(e5.target)) return;
-          this.selectorIsOpen = false;
-          this.updateSelectorStatus();
-        }
-      });
-      this.element.appendChild(this.input);
-      this.element.appendChild(this.selector);
-      this.selector.classList.add("compact-theme-options");
-      return this.element;
-    }
-  };
-  var compactThemeSelector = new CompactThemeSelector();
-  var quickSettingsWindowIsHidden = true;
-  var quickSettingsBackgroundImageSelector = new ImageSelector(
-    "backgroundImage",
-    true
-  );
-  async function storeQuickSettings() {
-    const oldData = await browser.runtime.sendMessage({
-      action: "getSettingsData"
-    });
-    const data2 = structuredClone(oldData);
-    const backgroundBlurAmountSlider = document.getElementById(
-      "background-blur-amount-slider"
-    );
-    if (backgroundBlurAmountSlider) {
-      data2.appearance.background.blur = Number(backgroundBlurAmountSlider.value);
-    }
-    const performanceModeToggle = document.getElementById(
-      "performance-mode-toggle"
-    );
-    if (performanceModeToggle) {
-      data2.other.performanceMode = performanceModeToggle.checked;
-    }
-    await browser.runtime.sendMessage({ action: "setSettingsData", data: data2 });
-    await loadQuickSettings();
-    if (settingsWindow) {
-      await settingsWindow.loadPage();
-    }
-    console.log("Successfull stored quick settings:\n", data2);
-    await apply();
-  }
-  async function loadQuickSettings() {
-    const data2 = await browser.runtime.sendMessage({
-      action: "getSettingsData"
-    });
-    quickSettingsBackgroundImageSelector.id = data2.appearance.theme;
-    quickSettingsBackgroundImageSelector.loadImageData();
-    const backgroundBlurAmountSlider = document.getElementById(
-      "background-blur-amount-slider"
-    );
-    if (backgroundBlurAmountSlider) {
-      backgroundBlurAmountSlider.value = data2.appearance.background.blur;
-    }
-    const performanceModeToggle = document.getElementById(
-      "performance-mode-toggle"
-    );
-    if (performanceModeToggle) {
-      performanceModeToggle.checked = data2.other.performanceMode;
-    }
-    const performanceModeInfo = document.getElementById("performance-mode-info");
-    if (performanceModeInfo) {
-      performanceModeInfo.innerHTML = `Toggle performance mode ${data2.other.performanceMode ? "<span class='green-underline'>Enabled</span>" : "<span class='red-underline'>Disabled</span>"}`;
-    }
-    await compactThemeSelector.updateInput();
-    await compactThemeSelector.updateThemeOptions();
-  }
-  function toggleQuickSettings() {
-    let win = document.getElementById("quickSettings");
-    if (win && !quickSettingsWindowIsHidden) {
-      closeQuickSettings();
-    } else {
-      openQuickSettings();
-    }
-  }
-  async function openQuickSettings() {
-    let win = document.getElementById("quickSettings");
-    if (!win) return;
-    win.classList.remove("qs-hidden");
-    await loadQuickSettings();
-    quickSettingsWindowIsHidden = false;
-  }
-  function closeQuickSettings() {
-    let win = document.getElementById("quickSettings");
-    if (win) {
-      win.classList.add("qs-hidden");
-    }
-    quickSettingsWindowIsHidden = true;
-  }
-  async function createQuickSettingsHTML(parent) {
-    const performanceModeTooltipLabel = document.createElement("label");
-    performanceModeTooltipLabel.className = "performanceModeTooltipLabel";
-    performanceModeTooltipLabel.id = "performanceModeTooltipLabel";
-    const performanceModeTooltip = document.createElement("input");
-    performanceModeTooltip.type = "checkbox";
-    performanceModeTooltip.id = "performance-mode-toggle";
-    performanceModeTooltipLabel.appendChild(performanceModeTooltip);
-    performanceModeTooltipLabel.innerHTML += performanceModeSvg;
-    const performanceModeInfo = document.createElement("span");
-    performanceModeInfo.id = "performance-mode-info";
-    const themeHeading = document.createElement("h3");
-    themeHeading.className = "quick-settings-title";
-    themeHeading.textContent = "Theme:";
-    const wallpaperTopContainer = document.createElement("div");
-    const wallpaperHeading = document.createElement("h3");
-    wallpaperHeading.className = "quick-settings-title";
-    wallpaperHeading.textContent = "Wallpaper:";
-    const wallpaperContainer = document.createElement("div");
-    wallpaperContainer.className = "wallpaper-quick-settings-container";
-    const blurSliderContainer = document.createElement("div");
-    blurSliderContainer.className = "blur-slider-container";
-    const blurSlider = document.createElement("input");
-    blurSlider.type = "range";
-    blurSlider.min = "0";
-    blurSlider.max = "10";
-    blurSlider.value = "0";
-    blurSlider.className = "main-slider";
-    blurSlider.id = "background-blur-amount-slider";
-    const backgroundBlurLabel = document.createElement("span");
-    backgroundBlurLabel.className = "color-label";
-    backgroundBlurLabel.id = "blurPlaats";
-    backgroundBlurLabel.textContent = "blur";
-    blurSliderContainer.appendChild(blurSlider);
-    blurSliderContainer.appendChild(backgroundBlurLabel);
-    wallpaperContainer.appendChild(
-      quickSettingsBackgroundImageSelector.fullContainer
-    );
-    wallpaperContainer.appendChild(blurSliderContainer);
-    wallpaperTopContainer.appendChild(wallpaperHeading);
-    wallpaperTopContainer.appendChild(wallpaperContainer);
-    const extraSettingsButton = document.createElement("button");
-    extraSettingsButton.id = "extraSettingsButton";
-    extraSettingsButton.innerHTML += "More Settings";
-    extraSettingsButton.innerHTML += settingsIconSvg;
-    extraSettingsButton.addEventListener("click", (e5) => openSettingsWindow(e5));
-    let themeContainer = document.createElement("div");
-    themeContainer.classList.add("quick-settings-theme-container");
-    await compactThemeSelector.render();
-    themeContainer.appendChild(themeHeading);
-    themeContainer.appendChild(compactThemeSelector.element);
-    parent.appendChild(performanceModeTooltipLabel);
-    parent.appendChild(themeContainer);
-    parent.appendChild(wallpaperTopContainer);
-    parent.appendChild(performanceModeInfo);
-    parent.appendChild(extraSettingsButton);
-    return parent;
-  }
-  async function createQuickSettings() {
-    let quickSettingsWindow = document.createElement("div");
-    quickSettingsWindow.id = "quickSettings";
-    quickSettingsWindow.addEventListener("change", storeQuickSettings);
-    quickSettingsBackgroundImageSelector.onStore = () => {
-      storeQuickSettings();
-    };
-    quickSettingsWindow = await createQuickSettingsHTML(quickSettingsWindow);
-    const quickSettingsButton = document.getElementById("quickSettingsButton");
-    if (quickSettingsButton) {
-      quickSettingsButton.insertAdjacentElement("afterend", quickSettingsWindow);
-    }
-    const tooltipLabel = document.getElementById("performanceModeTooltipLabel");
-    const tooltipInfo = document.getElementById("performance-mode-info");
-    if (tooltipLabel && tooltipInfo) {
-      tooltipLabel.addEventListener("mouseover", () => {
-        tooltipInfo.style.opacity = "1";
-      });
-      tooltipLabel.addEventListener("mouseout", () => {
-        tooltipInfo.style.opacity = "0";
-      });
-    }
-    document.addEventListener("click", (e5) => {
-      if (quickSettingsWindowIsHidden) return;
-      const target = e5.target;
-      if (!target) return;
-      if (target.id === "extraSettingsButton") {
-        closeQuickSettings();
-        return;
-      }
-      if (target.id === "quickSettings" || quickSettingsWindow.contains(target) || target.id === "quickSettingsButton") {
-        return;
-      }
-      closeQuickSettings();
-    });
-    closeQuickSettings();
-  }
-  function createQuickSettingsButton() {
-    let quickSettingsButtonWrapper = document.createElement("div");
-    quickSettingsButtonWrapper.id = "quickSettingsButtonWrapper";
-    quickSettingsButtonWrapper.classList.add("smpp-button");
-    quickSettingsButtonWrapper.classList.add("topnav__btn-wrapper");
-    let quickSettingsButton = document.createElement("button");
-    quickSettingsButton.id = "quickSettingsButton";
-    quickSettingsButton.classList.add("topnav__btn");
-    quickSettingsButton.innerText = "Settings";
-    quickSettingsButton.addEventListener("click", toggleQuickSettings);
-    quickSettingsButtonWrapper.appendChild(quickSettingsButton);
-    return quickSettingsButtonWrapper;
-  }
-
-  // src/main-features/settings/main-settings.ts
-  var SettingsWindow = class extends BaseWindow {
-    settingsSideBarCategories = [
-      { name: "Appearance", id: "appearance" },
-      { name: "Navigation", id: "topNav" },
-      { name: "Widgets", id: "widgets" },
-      { name: "Other", id: "other" }
-    ];
-    currentPage = "appearance";
-    settingsPage = document.createElement("div");
-    backgroundImageSelector = new ImageSelector("backgroundImage", true);
-    themeSelector = new ThemeSelector();
-    profilePictureInput = new ImageSelector("profilePicture");
-    constructor() {
-      super("settings-window");
-    }
-    async renderContent() {
-      let content = document.createElement("div");
-      let settingsSideBar = await this.createSettingsSideBar();
-      this.settingsPage.id = "settings-page";
-      this.settingsPage.addEventListener("change", (e5) => this.storePage());
-      content.classList.add("settingsWindow");
-      content.appendChild(settingsSideBar);
-      content.appendChild(this.settingsPage);
-      this.displaySettingsPage();
-      return content;
-    }
-    async createSettingsSideBar() {
-      let settingsSideBar = document.createElement("div");
-      settingsSideBar.classList.add("settings-sidebar");
-      let settingsSideBarProfileButton = await this.createSettingsSideBarProfileButton();
-      settingsSideBar.appendChild(settingsSideBarProfileButton);
-      this.settingsSideBarCategories.forEach((category) => {
-        settingsSideBar.appendChild(this.createSettingsSideBarCategory(category));
-      });
-      let currentRadio = settingsSideBar.querySelector(
-        `input[value="${this.currentPage}"]`
-      );
-      if (currentRadio) currentRadio.checked = true;
-      settingsSideBar.addEventListener("change", this.updateSideBar);
-      return settingsSideBar;
-    }
-    updateSideBar = async (event) => {
-      if (event.target instanceof HTMLInputElement) {
-        if (event.target.type === "radio") {
-          this.currentPage = event.target.value;
-          this.displaySettingsPage();
-          await this.loadPage();
-        }
-      }
-    };
-    async createSettingsSideBarProfileButton() {
-      let data2 = await browser.runtime.sendMessage({
-        action: "getSettingsData"
-      });
-      let radioInput = document.createElement("input");
-      radioInput.type = "radio";
-      radioInput.name = "settings-page";
-      radioInput.value = "profile";
-      radioInput.id = "settings-profile";
-      radioInput.classList.add("settings-radio");
-      let profileSettingsLabel = document.createElement("label");
-      profileSettingsLabel.htmlFor = "settings-profile";
-      profileSettingsLabel.tabIndex = 0;
-      profileSettingsLabel.classList.add(
-        "profile-settings-button",
-        "settings-category-button-js"
-      );
-      profileSettingsLabel.addEventListener("keydown", (e5) => {
-        if (e5.key === " " || e5.key === "Enter") {
-          e5.preventDefault();
-          radioInput.click();
-        }
-      });
-      let profilePicture = document.createElement("div");
-      profilePicture.classList.add("profile-picture-settings");
-      let profileTextContainer = document.createElement("div");
-      profileTextContainer.classList.add("profile-settings-label");
-      let profileSettingsLabelTitle = document.createElement("h2");
-      profileSettingsLabelTitle.id = "profile-settings-label-title";
-      let firstName = String(data2.profile.username || originalUsername).split(
-        " "
-      )[0];
-      if (firstName) profileSettingsLabelTitle.innerText = firstName;
-      let profileSettingsLabelDescription = document.createElement("p");
-      profileSettingsLabelDescription.classList.add(
-        "profile-settings-label-description"
-      );
-      profileSettingsLabelDescription.innerText = "view profile";
-      profileTextContainer.appendChild(profileSettingsLabelTitle);
-      profileTextContainer.appendChild(profileSettingsLabelDescription);
-      profileSettingsLabel.appendChild(profilePicture);
-      profileSettingsLabel.appendChild(profileTextContainer);
-      let container = document.createElement("div");
-      container.appendChild(radioInput);
-      container.appendChild(profileSettingsLabel);
-      return container;
-    }
-    isPastaTime() {
-      return (/* @__PURE__ */ new Date()).getHours() === 12;
-    }
-    createSettingsSideBarCategory(category) {
-      let radioInput = document.createElement("input");
-      radioInput.type = "radio";
-      radioInput.name = "settings-page";
-      radioInput.value = category.id;
-      radioInput.id = `settings-${category.id}`;
-      radioInput.classList.add("settings-radio");
-      let categoryLabel = document.createElement("label");
-      categoryLabel.htmlFor = `settings-${category.id}`;
-      categoryLabel.tabIndex = 0;
-      categoryLabel.classList.add(
-        "settings-category-button",
-        "settings-category-button-js"
-      );
-      categoryLabel.addEventListener("keydown", (e5) => {
-        if (e5.key === " " || e5.key === "Enter") {
-          e5.preventDefault();
-          radioInput.click();
-        }
-      });
-      let categoryButtonIcon = document.createElement("img");
-      categoryButtonIcon.classList.add("category-button-icon");
-      let imageFileName = category.id + ".webp";
-      if (category.id === "appearance" && this.isPastaTime()) {
-        imageFileName = "pasta.webp";
-      }
-      categoryButtonIcon.src = getExtensionImage(
-        "settings-icons/" + imageFileName
-      );
-      categoryLabel.appendChild(categoryButtonIcon);
-      categoryLabel.appendChild(document.createTextNode(category.name));
-      let container = document.createElement("div");
-      container.appendChild(radioInput);
-      container.appendChild(categoryLabel);
-      return container;
-    }
-    clearSettingsPage() {
-      this.settingsPage.innerHTML = "";
-    }
-    addDisclaimer(element, disclaimerHTML = `
-    * Changes will only apply after 
-    <a class="settings-page-disclaimer-button" href="#" onclick="window.location.href = window.location.href; return false;">reload</a>
-  `) {
-      if (element.nextElementSibling?.classList.contains("settings-page-disclaimer")) {
-        return;
-      }
-      const disclaimer = document.createElement("span");
-      disclaimer.classList.add("settings-page-disclaimer");
-      disclaimer.innerHTML = disclaimerHTML;
-      element.insertAdjacentElement("afterend", disclaimer);
-    }
-    async resetSettings() {
-      const popup = document.createElement("div");
-      popup.classList.add("reset-confirmation-popup");
-      const popupContent = document.createElement("div");
-      popupContent.classList.add("reset-popup-content");
-      const title = document.createElement("h3");
-      title.textContent = "Reset Settings";
-      const description = document.createElement("p");
-      description.textContent = "Are you sure you want to reset all settings to defaults? This will delete all your customizations and cannot be undone.";
-      const buttonContainer = document.createElement("div");
-      buttonContainer.classList.add("reset-popup-buttons");
-      const cancelButton = document.createElement("button");
-      cancelButton.classList.add("reset-popup-cancel");
-      cancelButton.textContent = "Cancel";
-      const confirmButton = document.createElement("button");
-      confirmButton.classList.add("reset-popup-confirm");
-      confirmButton.textContent = "Reset";
-      buttonContainer.append(cancelButton, confirmButton);
-      popupContent.append(title, description, buttonContainer);
-      popup.appendChild(popupContent);
-      this.element.appendChild(popup);
-      cancelButton.addEventListener("click", () => popup.remove());
-      confirmButton.addEventListener("click", async () => {
-        popup.remove();
-        await clearAllData();
-      });
-    }
-    async loadPage(shouldReloadTheme = true) {
-      const settings = await browser.runtime.sendMessage({
-        action: "getSettingsData"
-      });
-      async function loadWidgetSettingSlider(id, setting) {
-        const element = document.getElementById(id);
-        const valueDisplay = document.querySelector(
-          `#${id} + .settings-page-live-value`
-        );
-        if (!element || !valueDisplay) return;
-        const value = await getWidgetSetting(setting);
-        element.value = value;
-        valueDisplay.textContent = String(value);
-      }
-      const profileTitleElement = document.getElementById(
-        "profile-settings-label-title"
-      );
-      if (profileTitleElement) {
-        let firstName = String(
-          settings.profile.username || originalUsername
-        ).split(" ")[0];
-        if (firstName) profileTitleElement.textContent = firstName;
-      }
-      switch (this.currentPage) {
-        case "profile": {
-          const usernameInput = document.getElementById(
-            "settings-page-username-input"
-          );
-          if (settings.profile.username && usernameInput) {
-            usernameInput.value = settings.profile.username;
-          }
-          this.profilePictureInput.loadImageData();
-          const defaultPfpButton = document.getElementById(
-            "settings-page-default-sm-pfp-button"
-          );
-          if (defaultPfpButton) {
-            defaultPfpButton.checked = settings.profile.useSMpfp;
-          }
-          break;
-        }
-        case "appearance": {
-          if (shouldReloadTheme) {
-            await this.themeSelector.updateImages(false);
-          }
-          this.themeSelector.currentTiles.forEach((tile) => {
-            tile.updateSelection();
-          });
-          const enableGlassButton = document.getElementById(
-            "settings-page-glass-button"
-          );
-          if (enableGlassButton) {
-            enableGlassButton.checked = settings.appearance.glass;
-          }
-          this.backgroundImageSelector.id = settings.appearance.theme;
-          this.backgroundImageSelector.loadImageData();
-          const blurSlider = document.getElementById("settings-page-blur-slider");
-          if (blurSlider) {
-            blurSlider.value = String(
-              settings.appearance.background.blur * 10
-            );
-          }
-          document.querySelectorAll(".settings-page-weather-overlay-container input").forEach((input) => {
-            const inputElement = input;
-            if (inputElement.id) {
-              inputElement.checked = inputElement.id.includes(
-                settings.appearance.weatherOverlay.type
-              );
-            }
-          });
-          const weatherOverlaySlider = document.getElementById(
-            "settings-page-weather-overlay-slider"
-          );
-          if (weatherOverlaySlider) {
-            weatherOverlaySlider.value = String(
-              settings.appearance.weatherOverlay.amount
-            );
-          }
-          const weatherOpacitySlider = document.getElementById(
-            "settings-page-weather-overlay-opacity-slider"
-          );
-          if (weatherOpacitySlider) {
-            weatherOpacitySlider.value = String(
-              settings.appearance.weatherOverlay.opacity * 100
-            );
-          }
-          const defaultIconButton = document.getElementById(
-            "settings-page-default-icon-button"
-          );
-          if (defaultIconButton) {
-            defaultIconButton.checked = settings.appearance.tabLogo === "sm";
-          }
-          const smppIconButton = document.getElementById(
-            "settings-page-smpp-icon-button"
-          );
-          if (smppIconButton) {
-            smppIconButton.checked = settings.appearance.tabLogo === "smpp";
-          }
-          const showNewsButton = document.getElementById(
-            "settings-page-show-news-button"
-          );
-          if (showNewsButton) {
-            showNewsButton.checked = settings.appearance.news;
-          }
-          break;
-        }
-        case "topNav": {
-          const swapCoursesButton = document.getElementById(
-            "settings-page-swap-courses-button"
-          );
-          if (swapCoursesButton) {
-            swapCoursesButton.checked = settings.topNav.switchCoursesAndLinks;
-          }
-          if (isGOSchool) {
-            const goButton = document.getElementById("settings-page-go-button");
-            if (goButton) {
-              goButton.checked = settings.topNav.buttons.GO;
-            }
-          }
-          if (!liteMode) {
-            const globalChatButton = document.getElementById(
-              "settings-page-global-chat-button"
-            );
-            if (globalChatButton) {
-              globalChatButton.checked = settings.topNav.buttons.GC;
-            }
-          }
-          const searchButton = document.getElementById(
-            "settings-page-search-button"
-          );
-          if (searchButton) {
-            searchButton.checked = settings.topNav.buttons.search;
-          }
-          const quickMenuButton = document.getElementById(
-            "settings-page-quick-menu-button"
-          );
-          if (quickMenuButton) {
-            quickMenuButton.checked = settings.topNav.buttons.quickMenu;
-          }
-          const homeIconButton = document.getElementById(
-            "settings-page-home-icon-button"
-          );
-          if (homeIconButton) {
-            homeIconButton.checked = settings.topNav.icons.home;
-          }
-          const mailIconButton = document.getElementById(
-            "settings-page-mail-icon-button"
-          );
-          if (mailIconButton) {
-            mailIconButton.checked = settings.topNav.icons.mail;
-          }
-          const notificationsIconButton = document.getElementById(
-            "settings-page-notifications-icon-button"
-          );
-          if (notificationsIconButton) {
-            notificationsIconButton.checked = settings.topNav.icons.notifications;
-          }
-          const settingsIconButton = document.getElementById(
-            "settings-page-settings-icon-button"
-          );
-          if (settingsIconButton) {
-            settingsIconButton.checked = settings.topNav.icons.settings;
-          }
-          break;
-        }
-        case "widgets": {
-          const delijnMonochromeButton = document.getElementById(
-            "settings-page-delijn-monochrome-button"
-          );
-          if (delijnMonochromeButton) {
-            delijnMonochromeButton.checked = await getWidgetSetting("DelijnWidget.monochrome");
-          }
-          await loadWidgetSettingSlider(
-            "settings-page-max-busses-slider",
-            "DelijnWidget.maxBusses"
-          );
-          await loadWidgetSettingSlider(
-            "settings-page-max-assignments-slider",
-            "TakenWidget.maxAssignments"
-          );
-          if (!liteMode) {
-            const showSnakeGridButton = document.getElementById(
-              "settings-page-show-snake-grid-button"
-            );
-            if (showSnakeGridButton) {
-              showSnakeGridButton.checked = await getWidgetSetting("SnakeWidget.enableGrid");
-            }
-          }
-          break;
-        }
-        case "other": {
-          let loadKeybind2 = function(id, key) {
-            let keybindInput = document.getElementById(id);
-            if (!keybindInput) return;
-            keybindInput.value = key;
-          };
-          var loadKeybind = loadKeybind2;
-          const performanceModeButton = document.getElementById(
-            "settings-page-performance-mode-button"
-          );
-          if (performanceModeButton) {
-            performanceModeButton.checked = settings.other.performanceMode;
-          }
-          const splashTextButton = document.getElementById(
-            "settings-page-splash-text-button"
-          );
-          if (splashTextButton) {
-            splashTextButton.checked = settings.other.splashText;
-          }
-          const discordButton = document.getElementById(
-            "settings-page-discord-button"
-          );
-          if (discordButton) {
-            discordButton.checked = settings.other.discordButton;
-          }
-          loadKeybind2(
-            "settings-page-quick-menu-keybinding",
-            settings.other.keybinds.dmenu
-          );
-          loadKeybind2(
-            "settings-page-widget-edit-keybinding",
-            settings.other.keybinds.widgetEditMode
-          );
-          loadKeybind2(
-            "settings-widget-bag-keybinding",
-            settings.other.keybinds.widgetBag
-          );
-          loadKeybind2(
-            "settings-page-settings-keybinding",
-            settings.other.keybinds.settings
-          );
-          if (!liteMode)
-            loadKeybind2(
-              "settings-page-gc-keybinding",
-              settings.other.keybinds.gc
-            );
-          break;
-        }
-        default:
-          break;
-      }
-    }
-    async storePage() {
-      const settings = await browser.runtime.sendMessage({
-        action: "getSettingsData"
-      });
-      const previousSettings = structuredClone(settings);
-      const getCheckboxValue = (id) => {
-        const element = document.getElementById(id);
-        return element?.checked || false;
-      };
-      const getSliderValue = (id) => {
-        const element = document.getElementById(id);
-        return element?.value ? parseFloat(element.value) : 0;
-      };
-      const saveKeybind = (id) => {
-        const element = document.getElementById(id);
-        return element?.value || "None";
-      };
-      switch (this.currentPage) {
-        case "profile": {
-          const usernameInput = document.getElementById(
-            "settings-page-username-input"
-          );
-          if (usernameInput) {
-            settings.profile.username = usernameInput.value || null;
-          }
-          settings.profile.useSMpfp = getCheckboxValue(
-            "settings-page-default-sm-pfp-button"
-          );
-          applyProfile(settings.profile);
-          break;
-        }
-        case "appearance": {
-          const selectedTheme = document.querySelector(
-            ".settings-page-theme-card:has(input[type='radio']:checked)"
-          );
-          if (selectedTheme && selectedTheme.dataset["theme"]) {
-            settings.appearance.theme = selectedTheme.dataset["theme"];
-          }
-          settings.appearance.background.blur = getSliderValue("settings-page-blur-slider") / 10;
-          const chosenWeather = document.querySelector(
-            ".settings-page-weather-overlay-container input:checked"
-          );
-          if (chosenWeather) {
-            const weatherContainer = chosenWeather.closest(
-              "[data-weather]"
-            );
-            if (weatherContainer?.dataset["weather"]) {
-              const weatherType = weatherContainer.dataset["weather"];
-              if (weatherType === "realtime" || weatherType === "rain" || weatherType === "snow") {
-                settings.appearance.weatherOverlay.type = weatherType;
-              }
-            }
-          }
-          settings.appearance.weatherOverlay.amount = getSliderValue(
-            "settings-page-weather-overlay-slider"
-          );
-          settings.appearance.weatherOverlay.opacity = getSliderValue("settings-page-weather-overlay-opacity-slider") / 100;
-          const smppIconChecked = getCheckboxValue(
-            "settings-page-smpp-icon-button"
-          );
-          settings.appearance.tabLogo = smppIconChecked ? "smpp" : "sm";
-          settings.appearance.news = getCheckboxValue(
-            "settings-page-show-news-button"
-          );
-          settings.appearance.glass = getCheckboxValue(
-            "settings-page-glass-button"
-          );
-          await applyAppearance(settings.appearance);
-          if (JSON.stringify(settings.appearance.weatherOverlay) !== JSON.stringify(previousSettings.appearance.weatherOverlay) && !liteMode) {
-            applyWeatherEffects(settings.appearance.weatherOverlay);
-          }
-          break;
-        }
-        case "topNav": {
-          settings.topNav.switchCoursesAndLinks = getCheckboxValue(
-            "settings-page-swap-courses-button"
-          );
-          if (isGOSchool) {
-            settings.topNav.buttons.GO = getCheckboxValue(
-              "settings-page-go-button"
-            );
-          }
-          if (!liteMode) {
-            settings.topNav.buttons.GC = getCheckboxValue(
-              "settings-page-global-chat-button"
-            );
-          }
-          settings.topNav.buttons.search = getCheckboxValue(
-            "settings-page-search-button"
-          );
-          settings.topNav.buttons.quickMenu = getCheckboxValue(
-            "settings-page-quick-menu-button"
-          );
-          settings.topNav.icons.home = getCheckboxValue(
-            "settings-page-home-icon-button"
-          );
-          settings.topNav.icons.mail = getCheckboxValue(
-            "settings-page-mail-icon-button"
-          );
-          settings.topNav.icons.notifications = getCheckboxValue(
-            "settings-page-notifications-icon-button"
-          );
-          settings.topNav.icons.settings = getCheckboxValue(
-            "settings-page-settings-icon-button"
-          );
-          applyTopNav(settings.topNav);
-          break;
-        }
-        case "widgets": {
-          const updateWidgetSetting = async (id, settingName, type) => {
-            const element = document.getElementById(
-              id
-            );
-            if (!element) return;
-            const currentValue = type == "boolean" ? element.checked : parseInt(element.value, 10);
-            const storedValue = await getWidgetSetting(settingName);
-            if (JSON.stringify(currentValue) !== JSON.stringify(storedValue)) {
-              await setWidgetSetting(settingName, currentValue);
-            }
-          };
-          await updateWidgetSetting(
-            "settings-page-delijn-monochrome-button",
-            "DelijnWidget.monochrome",
-            "boolean"
-          );
-          await updateWidgetSetting(
-            "settings-page-max-busses-slider",
-            "DelijnWidget.maxBusses",
-            "number"
-          );
-          await updateWidgetSetting(
-            "settings-page-max-assignments-slider",
-            "TakenWidget.maxAssignments",
-            "number"
-          );
-          if (!liteMode) {
-            await updateWidgetSetting(
-              "settings-page-show-snake-grid-button",
-              "SnakeWidget.enableGrid",
-              "boolean"
-            );
-          }
-          break;
-        }
-        case "other": {
-          settings.other.performanceMode = getCheckboxValue(
-            "settings-page-performance-mode-button"
-          );
-          settings.other.splashText = getCheckboxValue(
-            "settings-page-splash-text-button"
-          );
-          settings.other.discordButton = getCheckboxValue(
-            "settings-page-discord-button"
-          );
-          settings.other.keybinds.dmenu = saveKeybind(
-            "settings-page-quick-menu-keybinding"
-          );
-          settings.other.keybinds.widgetEditMode = saveKeybind(
-            "settings-page-widget-edit-keybinding"
-          );
-          settings.other.keybinds.widgetBag = saveKeybind(
-            "settings-widget-bag-keybinding"
-          );
-          settings.other.keybinds.settings = saveKeybind(
-            "settings-page-settings-keybinding"
-          );
-          if (!liteMode) {
-            settings.other.keybinds.gc = saveKeybind(
-              "settings-page-gc-keybinding"
-            );
-          }
-          applyOther(settings.other);
-          break;
-        }
-        default:
-          break;
-      }
-      await browser.runtime.sendMessage({
-        action: "setSettingsData",
-        data: settings
-      });
-      console.log("Successfully stored main settings: \n", settings);
-      loadQuickSettings();
-      await this.loadPage();
-    }
-    async displaySettingsPage() {
-      function createMainTitle(text) {
-        let title = document.createElement("h1");
-        title.innerText = text;
-        title.classList.add("settings-page-main-title");
-        return title;
-      }
-      function createSectionTitle(text) {
-        let title = document.createElement("h2");
-        title.innerText = text;
-        title.classList.add("settings-page-section-title");
-        return title;
-      }
-      const createKeybindInput = (id, text) => {
-        const container = document.createElement("div");
-        container.classList.add("settings-page-key-bind-container");
-        container.classList.add("smpp-input-with-label");
-        let label = document.createElement("span");
-        label.tabIndex = 0;
-        label.classList.add("settings-page-button-label");
-        label.innerText = text;
-        let button = createButton(id);
-        button.classList.add("settings-page-button");
-        const input = document.createElement("input");
-        input.id = id;
-        input.type = "text";
-        input.readOnly = true;
-        input.spellcheck = false;
-        input.classList.add("settings-page-keybinding-input");
-        input.value = "None";
-        const unbindButton = document.createElement("button");
-        unbindButton.classList.add("keybind-unbind-button");
-        unbindButton.innerHTML = trashSvg;
-        unbindButton.title = "Clear keybind";
-        unbindButton.setAttribute("aria-label", "Clear keybind");
-        let listening = false;
-        input.addEventListener("click", () => {
-          if (listening) return;
-          listening = true;
-          let oldKeybind = input.value;
-          input.value = "Press any key...";
-          input.classList.add("listening");
-          const keyListener = async (e5) => {
-            listening = false;
-            input.classList.remove("listening");
-            e5.preventDefault();
-            e5.stopPropagation();
-            let keyName = e5.key.length === 1 ? e5.key.toUpperCase() : e5.key;
-            if (keyName === " ") keyName = "Space";
-            if (keyName === "Backspace") keyName = "None";
-            if (keyName === "Escape") keyName = oldKeybind;
-            input.value = keyName;
-            document.removeEventListener("keydown", keyListener);
-            await this.storePage();
-          };
-          const buttonListener = async (e5) => {
-            listening = false;
-            input.classList.remove("listening");
-            e5.stopPropagation();
-            e5.preventDefault();
-            input.value = "None";
-            document.removeEventListener("keydown", keyListener);
-            await this.storePage();
-          };
-          unbindButton.addEventListener("click", buttonListener);
-          document.addEventListener("keydown", keyListener);
-        });
-        const inputWrapper = document.createElement("div");
-        inputWrapper.classList.add("keybind-input-wrapper");
-        inputWrapper.appendChild(input);
-        inputWrapper.appendChild(unbindButton);
-        container.appendChild(label);
-        container.appendChild(inputWrapper);
-        return container;
-      };
-      function createSettingsButtonWithLabel(id, text) {
-        let container = createButtonWithLabel(id, text);
-        container.tabIndex = 0;
-        container.classList.add("settings-page-button-label-container");
-        return container;
-      }
-      function createImageButton(src, width, height, name2, id) {
-        let wrapper = document.createElement("label");
-        wrapper.classList.add("settings-page-image-button-wrapper");
-        wrapper.tabIndex = 0;
-        wrapper.style.width = width;
-        wrapper.style.height = height;
-        let input = document.createElement("input");
-        input.type = "radio";
-        input.name = name2;
-        if (id) input.id = id;
-        let image = document.createElement("img");
-        image.classList.add("settings-page-image");
-        image.src = getExtensionImage(src);
-        wrapper.addEventListener("keydown", (e5) => {
-          if (e5.key === " " || e5.key === "Enter") {
-            e5.preventDefault();
-            input.click();
-          }
-        });
-        wrapper.appendChild(input);
-        wrapper.appendChild(image);
-        return wrapper;
-      }
-      function createImageButtonWithLabel(src, text, width = "80px", height = "80px", name2, id) {
-        let container = document.createElement("label");
-        container.classList.add("settings-page-image-button-label");
-        let imageButton = createImageButton(src, width, height, name2, id);
-        let imageButtonLabel = document.createElement("span");
-        imageButtonLabel.innerText = text;
-        container.appendChild(imageButton);
-        container.appendChild(imageButtonLabel);
-        return container;
-      }
-      function createSlider(min, max, id) {
-        let slider = document.createElement("input");
-        slider.id = id;
-        slider.type = "range";
-        slider.min = min;
-        slider.max = max;
-        slider.classList.add("settings-page-slider");
-        return slider;
-      }
-      function createLabeledSlider(min, max, id, text, showValue = true) {
-        let container = document.createElement("div");
-        container.classList.add("settings-page-slider-container");
-        container.classList.add("smpp-input-with-label");
-        let textContainer = document.createElement("span");
-        textContainer.classList.add("settings-page-slider-label");
-        textContainer.innerText = text;
-        let slider = createSlider(min, max, id);
-        slider.classList.add("settings-page-labeled-slider");
-        if (showValue)
-          slider.addEventListener("input", (event) => {
-            let liveValueElement = document.querySelector(
-              "#" + id + " ~ .settings-page-live-value"
-            );
-            if (liveValueElement) liveValueElement.innerText = slider.value;
-          });
-        let currentValue = document.createElement("span");
-        currentValue.classList.add("settings-page-live-value");
-        currentValue.innerText = min;
-        container.appendChild(textContainer);
-        container.appendChild(slider);
-        if (showValue) container.appendChild(currentValue);
-        return container;
-      }
-      function createImage(src, width, height) {
-        let image = document.createElement("img");
-        image.classList.add("settings-page-image");
-        image.src = getExtensionImage(src);
-        image.style.width = width;
-        image.style.height = height;
-        image.style.objectFit = "cover";
-        return image;
-      }
-      function createDescription(text) {
-        let description = document.createElement("p");
-        description.innerText = text;
-        description.classList.add("settings-page-description");
-        return description;
-      }
-      this.clearSettingsPage();
-      this.settingsPage.scrollTo(0, 0);
-      switch (this.currentPage) {
-        case "profile":
-          this.settingsPage.appendChild(createMainTitle("Profile"));
-          this.settingsPage.appendChild(createSectionTitle("Custom name"));
-          this.settingsPage.appendChild(
-            createDescription("Edit your username, displayed at the top left")
-          );
-          this.settingsPage.appendChild(
-            createTextInput("settings-page-username-input", "Username")
-          );
-          this.settingsPage.appendChild(createSectionTitle("Profile picture"));
-          this.settingsPage.appendChild(
-            createDescription(
-              isFirefox ? "Upload your own profile picture, large files not recommended on Firefox" : "Upload your own profile picture"
-            )
-          );
-          this.profilePictureInput.id = "profilePicture";
-          this.profilePictureInput.loadImageData();
-          this.profilePictureInput.onStore = async () => {
-            this.storePage();
-            const data2 = await browser.runtime.sendMessage({
-              action: "getSettingsData"
-            });
-            applyProfilePicture(data2.profile);
-          };
-          let profilePictureInputContainer = this.profilePictureInput.fullContainer;
-          profilePictureInputContainer.id = "profile-picture-input-container";
-          this.settingsPage.appendChild(profilePictureInputContainer);
-          this.settingsPage.appendChild(
-            createSettingsButtonWithLabel(
-              "settings-page-default-sm-pfp-button",
-              "Original profile picture"
-            )
-          );
-          break;
-        case "appearance":
-          this.settingsPage.appendChild(createMainTitle("Appearance"));
-          this.settingsPage.appendChild(this.themeSelector.render());
-          this.settingsPage.appendChild(createSectionTitle("Wallpaper"));
-          this.settingsPage.appendChild(
-            createDescription("Personalize your backdrop with a custom image.")
-          );
-          this.backgroundImageSelector.onStore = () => {
-            this.storePage();
-          };
-          this.settingsPage.appendChild(
-            this.backgroundImageSelector.fullContainer
-          );
-          this.settingsPage.appendChild(createSectionTitle("Glass"));
-          this.settingsPage.appendChild(
-            createDescription("Apply a glassy effect to the UI.")
-          );
-          this.settingsPage.appendChild(
-            createSettingsButtonWithLabel("settings-page-glass-button", "Glass")
-          );
-          this.settingsPage.appendChild(createSectionTitle("Background blur"));
-          this.settingsPage.appendChild(
-            createDescription("Apply a blur to your background.")
-          );
-          this.settingsPage.appendChild(
-            createSlider("0", "100", "settings-page-blur-slider")
-            // must be divided by 10
-            // for real value
-          );
-          let blurPreviewContainer = document.createElement("div");
-          blurPreviewContainer.classList.add(
-            "settings-page-blur-preview-container"
-          );
-          blurPreviewContainer.appendChild(
-            createImage("theme-backgrounds/birb.jpg", "6rem", "4rem")
-          );
-          let blurredImage = createImage(
-            "theme-backgrounds/birb.jpg",
-            "100%",
-            "100%"
-          );
-          blurredImage.style.filter = "blur(2px)";
-          let blurredImageContainer = document.createElement("div");
-          blurredImageContainer.classList.add("blurred-image-container");
-          blurredImageContainer.appendChild(blurredImage);
-          blurPreviewContainer.appendChild(blurredImageContainer);
-          this.settingsPage.appendChild(blurPreviewContainer);
-          this.settingsPage.appendChild(createSectionTitle("Weather overlay"));
-          this.settingsPage.appendChild(
-            createDescription("Add dynamic weather visuals.")
-          );
-          let weatherIconsContainer = document.createElement("div");
-          weatherIconsContainer.classList.add(
-            "settings-page-icons-container",
-            "settings-page-weather-overlay-container"
-          );
-          let rainBtn = createImageButtonWithLabel(
-            "icons/weather-overlay/raindropfancy.svg",
-            "Rain",
-            "5rem",
-            "5rem",
-            "weather",
-            "settings-page-raindrop-button"
-          );
-          rainBtn.dataset["weather"] = "rain";
-          weatherIconsContainer.appendChild(rainBtn);
-          let realtimeBtn = createImageButtonWithLabel(
-            "icons/weather-overlay/realtimefancy.svg",
-            "Realtime",
-            "5rem",
-            "5rem",
-            "weather",
-            "settings-page-realtime-button"
-          );
-          realtimeBtn.dataset["weather"] = "realtime";
-          weatherIconsContainer.appendChild(realtimeBtn);
-          let snowBtn = createImageButtonWithLabel(
-            "icons/weather-overlay/snowflakefancy.svg",
-            "Snow",
-            "5rem",
-            "5rem",
-            "weather",
-            "settings-page-snow-button"
-          );
-          snowBtn.dataset["weather"] = "snow";
-          weatherIconsContainer.appendChild(snowBtn);
-          this.settingsPage.appendChild(weatherIconsContainer);
-          this.settingsPage.appendChild(
-            createLabeledSlider(
-              "0",
-              "500",
-              "settings-page-weather-overlay-slider",
-              "Amount",
-              false
-            )
-          );
-          this.settingsPage.appendChild(
-            createLabeledSlider(
-              "0",
-              "100",
-              "settings-page-weather-overlay-opacity-slider",
-              "Opacity",
-              false
-            )
-          );
-          this.settingsPage.appendChild(createSectionTitle("Icon"));
-          this.settingsPage.appendChild(
-            createDescription("Choose the icon displayed in your browser tab.")
-          );
-          let iconsContainer = document.createElement("div");
-          iconsContainer.classList.add("settings-page-icons-container");
-          iconsContainer.appendChild(
-            createImageButton(
-              "icons/sm-icon.svg",
-              "5rem",
-              "5rem",
-              "logo",
-              "settings-page-default-icon-button"
-            )
-          );
-          iconsContainer.appendChild(
-            createImageButton(
-              "icons/smpp/128.png",
-              "5rem",
-              "5rem",
-              "logo",
-              "settings-page-smpp-icon-button"
-            )
-          );
-          this.settingsPage.appendChild(iconsContainer);
-          this.settingsPage.appendChild(createSectionTitle("News"));
-          this.settingsPage.appendChild(
-            createDescription("Change the homepage news configuration.")
-          );
-          this.settingsPage.appendChild(
-            createSettingsButtonWithLabel(
-              "settings-page-show-news-button",
-              "Show news"
-            )
-          );
-          break;
-        case "topNav":
-          this.settingsPage.appendChild(createMainTitle("Navigation"));
-          this.settingsPage.appendChild(createSectionTitle("Buttons"));
-          this.settingsPage.appendChild(
-            createDescription(
-              "Choose which buttons you want to see in the top navigation."
-            )
-          );
-          if (!liteMode) {
-            this.settingsPage.appendChild(
-              createSettingsButtonWithLabel(
-                "settings-page-global-chat-button",
-                "Global Chat"
-              )
-            );
-          }
-          this.settingsPage.appendChild(
-            createSettingsButtonWithLabel("settings-page-search-button", "Search")
-          );
-          this.settingsPage.appendChild(
-            createSettingsButtonWithLabel(
-              "settings-page-quick-menu-button",
-              "Quick Menu"
-            )
-          );
-          this.settingsPage.appendChild(
-            createSettingsButtonWithLabel(
-              "settings-page-swap-courses-button",
-              "Swap courses/links"
-            )
-          );
-          if (isGOSchool)
-            this.settingsPage.appendChild(
-              createSettingsButtonWithLabel("settings-page-go-button", "GO")
-            );
-          this.settingsPage.appendChild(createSectionTitle("Icons"));
-          this.settingsPage.appendChild(
-            createDescription(
-              "Choose which buttons you want to replace with icons."
-            )
-          );
-          this.settingsPage.appendChild(
-            createSettingsButtonWithLabel(
-              "settings-page-home-icon-button",
-              "Start"
-            )
-          );
-          this.settingsPage.appendChild(
-            createSettingsButtonWithLabel(
-              "settings-page-mail-icon-button",
-              "Mail"
-            )
-          );
-          this.settingsPage.appendChild(
-            createSettingsButtonWithLabel(
-              "settings-page-notifications-icon-button",
-              "Notifications"
-            )
-          );
-          this.settingsPage.appendChild(
-            createSettingsButtonWithLabel(
-              "settings-page-settings-icon-button",
-              "Settings"
-            )
-          );
-          break;
-        case "widgets":
-          this.settingsPage.appendChild(createMainTitle("Widgets"));
-          this.settingsPage.appendChild(createSectionTitle("De Lijn"));
-          this.settingsPage.appendChild(
-            createDescription("Change the De Lijn app configuration.")
-          );
-          this.settingsPage.appendChild(
-            createSettingsButtonWithLabel(
-              "settings-page-delijn-monochrome-button",
-              "Monochrome"
-            )
-          );
-          this.settingsPage.appendChild(
-            createLabeledSlider(
-              "1",
-              "10",
-              "settings-page-max-busses-slider",
-              "Max busses"
-            )
-          );
-          this.settingsPage.appendChild(createSectionTitle("Assignments"));
-          this.settingsPage.appendChild(
-            createDescription("Change the assignments app configuration.")
-          );
-          this.settingsPage.appendChild(
-            createLabeledSlider(
-              "1",
-              "10",
-              "settings-page-max-assignments-slider",
-              "Max assignments"
-            )
-          );
-          if (!liteMode) {
-            this.settingsPage.appendChild(createMainTitle("Games"));
-            this.settingsPage.appendChild(createSectionTitle("Snake"));
-            this.settingsPage.appendChild(
-              createDescription("Change configuration of Snake++")
-            );
-            this.settingsPage.appendChild(
-              createSettingsButtonWithLabel(
-                "settings-page-show-snake-grid-button",
-                "Grid"
-              )
-            );
-          }
-          break;
-        case "other":
-          this.settingsPage.appendChild(createMainTitle("Other"));
-          this.settingsPage.appendChild(createSectionTitle("Performance"));
-          this.settingsPage.appendChild(
-            createDescription(
-              "Disables animations for better performance on low end devices."
-            )
-          );
-          this.settingsPage.appendChild(
-            createSettingsButtonWithLabel(
-              "settings-page-performance-mode-button",
-              "Performance mode"
-            )
-          );
-          this.settingsPage.appendChild(createSectionTitle("Login"));
-          this.settingsPage.appendChild(
-            createDescription("Change the login page configuration.")
-          );
-          this.settingsPage.appendChild(
-            createSettingsButtonWithLabel(
-              "settings-page-splash-text-button",
-              "Splash-text"
-            )
-          );
-          this.settingsPage.appendChild(createSectionTitle("Homepage"));
-          this.settingsPage.appendChild(
-            createDescription("Change the home page configuration.")
-          );
-          this.settingsPage.appendChild(
-            createSettingsButtonWithLabel(
-              "settings-page-discord-button",
-              "Discord button"
-            )
-          );
-          this.settingsPage.appendChild(createSectionTitle("Keybindings"));
-          this.settingsPage.appendChild(
-            createDescription("Customize your keybindings")
-          );
-          this.settingsPage.appendChild(
-            createKeybindInput(
-              "settings-page-quick-menu-keybinding",
-              "Quick Menu"
-            )
-          );
-          this.settingsPage.appendChild(
-            createKeybindInput(
-              "settings-page-widget-edit-keybinding",
-              "Widget editing"
-            )
-          );
-          this.settingsPage.appendChild(
-            createKeybindInput("settings-widget-bag-keybinding", "Widget bag")
-          );
-          this.settingsPage.appendChild(
-            createKeybindInput("settings-page-settings-keybinding", "Settings")
-          );
-          if (!liteMode) {
-            this.settingsPage.appendChild(
-              createKeybindInput("settings-page-gc-keybinding", "Global Chat")
-            );
-          }
-          this.settingsPage.appendChild(createSectionTitle("Reset"));
-          this.settingsPage.appendChild(
-            createDescription(
-              "Reset all settings and widgets to their default values."
-            )
-          );
-          let resetButton = document.createElement("button");
-          resetButton.innerText = "Reset to Defaults";
-          resetButton.classList.add("settings-page-reset-button");
-          resetButton.addEventListener("click", () => this.resetSettings());
-          this.settingsPage.appendChild(resetButton);
-          break;
-        default:
-          break;
-      }
-    }
-  };
-  var settingsWindow;
-  async function createSettingsWindow() {
-    settingsWindow = new SettingsWindow();
-    await settingsWindow.create();
-    await settingsWindow.loadPage();
-    settingsWindow.hide();
-  }
-  async function openSettingsWindow(event) {
-    settingsWindow.show(event);
-    let updateHeight = () => {
-      settingsWindow.themeSelector.updateSizes();
-      settingsWindow.themeSelector.updateContentHeight();
-      settingsWindow.element.removeEventListener("animationend", updateHeight);
-      settingsWindow.element.removeEventListener("transitionend", updateHeight);
-    };
-    settingsWindow.element.addEventListener("animationend", updateHeight);
-    settingsWindow.onScreenSizeUpdate = () => {
-      settingsWindow.element.addEventListener("transitionend", updateHeight);
-    };
-    settingsWindow.themeSelector.updateContentHeight();
-  }
-
-  // src/widgets/widgets.ts
-  var PANNELIP_MARGIN_PX = 20;
-  var widgetSystemCreated = false;
-  var widgetEditModeInit = false;
-  var widgetEditMode = false;
-  var widgets = [];
-  var hoveringBag = false;
-  var newsState = false;
-  var curDragInfo = null;
-  var widgetsContainer;
-  var widgetBag;
-  var widgetBagHandle;
-  var doneButton;
-  function registerWidget(widget) {
-    widgets.push(widget);
-  }
-  var WidgetDragInfo = class {
-    offset;
-    widget;
-    sourceInsertionPoint;
-    targetInsertionPoint;
-    constructor(widget, sourceInsertionPoint, offset) {
-      this.widget = widget;
-      this.sourceInsertionPoint = sourceInsertionPoint;
-      this.targetInsertionPoint = null;
-      this.offset = offset;
-    }
-  };
-  var WidgetBase = class {
-    element;
-    isActive;
-    #content;
-    #preview;
-    #bagPlaceHolder;
-    #bagGroup;
-    #aboutToDel;
-    #settings;
-    constructor() {
-      this.element = this.#createWidgetDiv();
-      this.isActive = false;
-      this.#content = null;
-      this.#preview = false;
-      this.#aboutToDel = false;
-    }
-    createWidgetErrorContent(name2) {
-      let p4 = document.createElement("p");
-      p4.classList.add("smpp-error-widget");
-      p4.innerHTML = "<span>Probleem bij het laden van de widget: </span><code class='widgetName'></code><button>Reset widget</button>";
-      p4.querySelector(".widgetName").innerText = name2;
-      p4.querySelector("button").addEventListener("click", async () => {
-        this.clearWidgetSettings();
-      });
-      return p4;
-    }
-    async clearWidgetSettings() {
-      await browser.runtime.sendMessage({
-        action: "setWidgetData",
-        widget: this.constructor.name,
-        data: this.defaultSettings()
-      });
-      this.#settings = this.defaultSettings();
-      console.log("Clearing", this.name, "'s settings");
-      this.#content = null;
-      this.#setPreview(false);
-    }
-    #createWidgetDiv() {
-      let widgetDiv = document.createElement("div");
-      widgetDiv.addEventListener("mousedown", (e5) => {
-        this.startDragging(e5.clientX, e5.clientY);
-      });
-      widgetDiv.classList.add("smpp-widget");
-      return widgetDiv;
-    }
-    async #intoBag() {
-      if (this.element.parentElement == this.#bagGroup) {
-        return;
-      }
-      if (this.#bagPlaceHolder) {
-        this.#bagGroup.insertBefore(this.element, this.#bagPlaceHolder);
-        this.#bagPlaceHolder.remove();
-      } else {
-        this.element.remove();
-      }
-      await this.#setPreview(true);
-    }
-    async #setPreview(preview) {
-      if (this.#preview == preview && this.#content !== null) {
-        return;
-      }
-      let newContent;
-      try {
-        if (preview) {
-          this.element.classList.add("smpp-widget-preview");
-          newContent = await this.createPreview();
-        } else {
-          this.element.classList.remove("smpp-widget-preview");
-          await this.#loadSettings();
-          newContent = await this.createContent();
-          this.isActive = true;
-        }
-      } catch (e5) {
-        console.error("Failed to create widget content");
-        console.error(e5);
-        newContent = this.createWidgetErrorContent(this.name);
-      }
-      if (!newContent) {
-        console.error(
-          "createContent and createPreview method's needs to return an html object. in widget impl"
-        );
-        newContent = this.createWidgetErrorContent(this.name);
-      }
-      this.#content?.remove();
-      newContent.classList.add("smpp-widget-content");
-      this.#content = newContent;
-      this.element.dataset.widgetName = this.name;
-      this.element.innerHTML = "";
-      this.element.appendChild(this.#content);
-      this.#preview = preview;
-    }
-    async createIfNotExist() {
-      if (!this.#content) {
-        await this.#intoBag();
-      }
-    }
-    async setBagPlaceHolder(group, placeholder) {
-      this.#bagPlaceHolder = placeholder;
-      this.#bagGroup = group;
-    }
-    async addToPannel(pannel) {
-      await this.#setPreview(false);
-      pannel.appendChild(this.element);
-      pannel.appendChild(createInsertionPointHTML(false));
-    }
-    aboutToDel(value) {
-      this.#aboutToDel = value;
-      if (value) {
-        this.element.classList.add("smpp-widget-delete");
-      } else {
-        this.element.classList.remove("smpp-widget-delete");
-      }
-    }
-    dragMove(x3, y3) {
-      if (!curDragInfo || curDragInfo.widget != this) {
-        return;
-      }
-      let el = this.element;
-      let offset = curDragInfo.offset;
-      el.style.left = x3 - offset.x + "px";
-      el.style.top = y3 - offset.y + "px";
-    }
-    async drop(cancel = false) {
-      if (!curDragInfo || curDragInfo.widget != this) {
-        return;
-      }
-      let el = this.element;
-      el.classList.remove("smpp-widget-dragging");
-      el.style = "";
-      let sourceIp = curDragInfo.sourceInsertionPoint;
-      let targetIp = curDragInfo.targetInsertionPoint;
-      targetIp?.classList.remove("smpp-widget-insertion-point-targeted");
-      if (cancel || !targetIp) {
-        targetIp = sourceIp;
-      }
-      if (!cancel && this.#aboutToDel) {
-        targetIp = null;
-      }
-      bagHoverExit();
-      curDragInfo = null;
-      if (targetIp == null) {
-        this.onRemove();
-        this.isActive = false;
-        await this.#intoBag();
-      } else {
-        if (targetIp.classList.contains("smpp-widget-insertion-point-pannel")) {
-          let pannelContainer = targetIp.parentElement;
-          let pannel = await createPannelHTML({ widgets: [] });
-          pannelContainer.insertBefore(
-            createInsertionPointHTML(true),
-            targetIp.nextElementSibling
-          );
-          pannelContainer.insertBefore(pannel, targetIp.nextElementSibling);
-          targetIp = pannel.firstChild;
-        }
-        let targetPannel = targetIp.parentElement;
-        targetPannel.style.display = "block";
-        targetPannel.insertBefore(
-          createInsertionPointHTML(),
-          targetIp.nextElementSibling
-        );
-        targetPannel.insertBefore(el, targetIp.nextElementSibling);
-        await this.#setPreview(false);
-      }
-      let sourcePannel = sourceIp?.parentElement;
-      if (sourcePannel && sourcePannel.childNodes.length == 1) {
-        sourcePannel.nextElementSibling.remove();
-        sourcePannel.remove();
-      }
-      document.body.classList.remove("smpp-widget-dragging-something");
-      await saveWidgets();
-    }
-    startDragging(grabX, grabY) {
-      if (!widgetEditMode) {
-        return;
-      }
-      const el = this.element;
-      let sourceIp = this.element.previousElementSibling;
-      let rect = this.element.getBoundingClientRect();
-      if (el.parentElement == this.#bagGroup) {
-        sourceIp = null;
-        this.#bagGroup.insertBefore(this.#bagPlaceHolder, el);
-        el.remove();
-      } else {
-        el.nextElementSibling.remove();
-      }
-      curDragInfo = new WidgetDragInfo(this, sourceIp, {
-        x: grabX - rect.left,
-        y: grabY - rect.top
-      });
-      document.body.classList.add("smpp-widget-dragging-something");
-      el.style.width = rect.width + "px";
-      el.style.left = rect.left + "px";
-      el.style.top = rect.top + "px";
-      el.style["transform-origin"] = `${curDragInfo.offset.x}px ${curDragInfo.offset.y}px`;
-      el.classList.add("smpp-widget-dragging");
-      document.body.appendChild(el);
-      closeBag();
-    }
-    /// Loads widget settings if needed.
-    async #loadSettings() {
-      if (this.#settings !== void 0) {
-        return;
-      }
-      const settings = await browser.runtime.sendMessage({
-        action: "getWidgetData",
-        widget: this.constructor.name
-      });
-      this.#settings = fillObjectWithDefaults(settings, this.defaultSettings());
-    }
-    // modifies a setting
-    async setSetting(path, value) {
-      await this.#loadSettings();
-      setByPath(this.#settings, path, value);
-      await browser.runtime.sendMessage({
-        action: "setWidgetData",
-        widget: this.constructor.name,
-        data: this.#settings
-      });
-      if (this.isActive) {
-        await this.onSettingsChange();
-      }
-    }
-    async getSetting(path) {
-      await this.#loadSettings();
-      return getByPath(this.#settings, path);
-    }
-    get settings() {
-      if (this.#settings === void 0) {
-        console.error(
-          "Settings were not loaded before access. Don't use .settings outside of the widget. Call await widget.getSetting(path)"
-        );
-      }
-      return this.#settings;
-    }
-    // Override us
-    // Name of the widget
-    get name() {
-      return this.constructor.name;
-    }
-    // The category the widget is in
-    get category() {
-      return "other";
-    }
-    // Returns the default settings. (will be filled in so that you always get a valid settings object inside onSettingsChange )
-    defaultSettings() {
-      return {};
-    }
-    // (Required): Gets called when the content element of the widget needs to be
-    // created (return html element). (Don't do slow tasks in here)
-    async createContent() {
-    }
-    // Gets called when the preview element needs to be created (return html
-    // element) NOTE: preview and content never exist at the same time
-    async createPreview() {
-      return await this.createContent();
-    }
-    // Gets called when the settings of the widget change.
-    // Use this to update the widget content based on the new settings. (settings object is always valid based on the value returned by defaultSettings())
-    async onSettingsChange() {
-    }
-    async onThemeChange() {
-    }
-    async onRemove() {
-    }
-  };
-  var ErrorWidget = class extends WidgetBase {
-    origWidgetName;
-    constructor(origWidgetName) {
-      super();
-      this.origWidgetName = origWidgetName;
-    }
-    get category() {
-      return null;
-    }
-    get name() {
-      return this.origWidgetName;
-    }
-    async createContent() {
-      return this.createWidgetErrorContent(this.origWidgetName);
-    }
-  };
-  var SmartschoolWidget = class extends WidgetBase {
-    smContent;
-    constructor(content) {
-      super();
-      this.smContent = content;
-      this.smContent.classList.add("smpp-widget-smartschool");
-    }
-    get category() {
-      return "smartschool";
-    }
-    get name() {
-      return this.constructor.name + "-" + this.smContent.id;
-    }
-    async createContent() {
-      return this.smContent;
-    }
-  };
-  function targetInsertionPoint(target) {
-    if (target !== curDragInfo.targetInsertionPoint) {
-      curDragInfo.targetInsertionPoint?.classList.remove(
-        "smpp-widget-insertion-point-targeted"
-      );
-      curDragInfo.targetInsertionPoint = target;
-      curDragInfo.targetInsertionPoint?.classList.add(
-        "smpp-widget-insertion-point-targeted"
-      );
-    }
-  }
-  function onPannelHover(pannel, e5) {
-    if (!widgetEditMode || curDragInfo == null || hoveringBag) {
-      return;
-    }
-    const bounds = e5.target.getBoundingClientRect();
-    if (e5.clientX < bounds.left + PANNELIP_MARGIN_PX) {
-      targetInsertionPoint(e5.target.previousElementSibling);
-      return;
-    }
-    if (e5.clientX > bounds.right - PANNELIP_MARGIN_PX) {
-      targetInsertionPoint(e5.target.nextElementSibling);
-      return;
-    }
-    let target = pannel.firstChild;
-    for (let child of pannel.childNodes) {
-      if (!child.classList.contains("smpp-widget")) {
-        continue;
-      }
-      const bounds2 = child.getBoundingClientRect();
-      let centerY = bounds2.top + (bounds2.bottom - bounds2.top) * 0.5;
-      if (e5.clientY > centerY) {
-        target = child.nextElementSibling;
-      }
-    }
-    targetInsertionPoint(target);
-  }
-  function onPannelInsertionPointHover(e5) {
-    if (!widgetEditMode || curDragInfo == null || hoveringBag) {
-      return;
-    }
-    targetInsertionPoint(e5.target);
-  }
-  function onCenterHover(div, e5) {
-    if (!widgetEditMode || curDragInfo == null || hoveringBag) {
-      return;
-    }
-    const bounds = div.getBoundingClientRect();
-    if (e5.clientX < (bounds.right - bounds.left) / 2 + bounds.left) {
-      targetInsertionPoint(div.previousElementSibling);
-    } else {
-      targetInsertionPoint(div.nextElementSibling);
-    }
-  }
-  function createInsertionPointHTML(pannel = false) {
-    let ipoint = document.createElement("div");
-    ipoint.classList.add("smpp-widget-insertion-point");
-    if (pannel) {
-      ipoint.classList.add("smpp-widget-insertion-point-pannel");
-      ipoint.addEventListener("mouseenter", onPannelInsertionPointHover);
-    }
-    return ipoint;
-  }
-  async function createPannelHTML(pannel) {
-    let pannelDiv = document.createElement("div");
-    pannelDiv.addEventListener("mousemove", (e5) => onPannelHover(pannelDiv, e5));
-    pannelDiv.classList.add("smpp-widget-pannel");
-    pannelDiv.appendChild(createInsertionPointHTML());
-    for (let widgetName of pannel.widgets) {
-      let widget = getWidgetByName(widgetName);
-      if (!widget) {
-        console.error("Widget " + widgetName + " doesn't exist.");
-        registerWidget(new ErrorWidget(widgetName));
-        widget = getWidgetByName(widgetName);
-      }
-      await widget.addToPannel(pannelDiv);
-    }
-    return pannelDiv;
-  }
-  async function createWidgetsContainerHTML(widgetData, newsContent, news) {
-    let widgetsContainer2 = document.createElement("div");
-    widgetsContainer2.classList.add("smpp-widgets-container");
-    widgetsContainer2.appendChild(createInsertionPointHTML(true));
-    async function createAppendPannel(pannel) {
-      let pannelDiv = await createPannelHTML(pannel);
-      widgetsContainer2.appendChild(pannelDiv);
-      widgetsContainer2.appendChild(createInsertionPointHTML(true));
-    }
-    for (let pannel of widgetData.leftPannels) {
-      await createAppendPannel(pannel);
-    }
-    let newsDiv = document.createElement("div");
-    newsDiv.classList.add("smpp-news-container");
-    newsDiv.addEventListener("mousemove", (e5) => onCenterHover(newsDiv, e5));
-    newsContent.id = "smpp-news-content";
-    newsContent.className = "";
-    if (news) {
-      newsDiv.classList.add("show-news");
-    }
-    newsDiv.appendChild(newsContent);
-    widgetsContainer2.appendChild(newsDiv);
-    widgetsContainer2.appendChild(createInsertionPointHTML(true));
-    for (let pannel of widgetData.rightPannels) {
-      await createAppendPannel(pannel);
-    }
-    return widgetsContainer2;
-  }
-  function updateNews(value) {
-    newsState = value;
-    const newsCon = document.querySelector(".smpp-news-container");
-    if (newsCon) {
-      value ? newsCon.classList.add("show-news") : newsCon.classList.remove("show-news");
-    }
-  }
-  function setNewsEditMode(value) {
-    const newsCon = document.querySelector(".smpp-news-container");
-    document.querySelector(".smpp-news-editor").style.display = value ? "" : "none";
-    const button = document.getElementById("smpp-widget-news-toggle");
-    button.checked = newsState;
-    if (value) {
-      newsCon.classList.add("smpp-news-editmode");
-    } else {
-      newsCon.classList.remove("smpp-news-editmode");
-    }
-  }
-  function initNewsEditMode() {
-    const div = document.createElement("div");
-    div.classList.add("smpp-news-editor");
-    const button = createButtonWithLabel("smpp-widget-news-toggle", "Show News");
-    button.addEventListener("change", async (e5) => {
-      updateNews(e5.target.checked);
-      await browser.runtime.sendMessage({
-        action: "setSetting",
-        name: "appearance.news",
-        data: e5.target.checked
-      });
-      await settingsWindow.loadPage();
-      await loadQuickSettings();
-    });
-    div.appendChild(button);
-    document.querySelector(".smpp-news-container").appendChild(div);
-    setNewsEditMode(false);
-  }
-  async function widgetSystemNotifyThemeChange() {
-    for (let widget of widgets) {
-      await widget.onThemeChange();
-    }
-  }
-  async function createWidgetSystem() {
-    let container = document.getElementById("container");
-    if (!container) {
-      return false;
-    }
-    let news = document.getElementById("centercontainer");
-    if (!news) {
-      console.error(`"centercontainer" doesn't exist`);
-      return false;
-    }
-    let widgetData = await browser.runtime.sendMessage({
-      action: "getWidgetLayout"
-    });
-    console.log("Applying widgets with data: \n", widgetData);
-    let setDefaults = false;
-    if (!widgetData) {
-      setDefaults = true;
-      widgetData = {
-        leftPannels: [{ widgets: [] }],
-        rightPannels: [{ widgets: [] }]
-      };
-    }
-    for (let smWidget of document.querySelectorAll(
-      "#rightcontainer .homepage__block"
-    )) {
-      let wName = "SmartschoolWidget-" + smWidget.id;
-      registerWidget(new SmartschoolWidget(smWidget));
-      if (setDefaults) {
-        widgetData.rightPannels[0].widgets.push(wName);
-      }
-    }
-    for (let smWidget of document.querySelectorAll(
-      "#leftcontainer .homepage__block"
-    )) {
-      let wName = "SmartschoolWidget-" + smWidget.id;
-      registerWidget(new SmartschoolWidget(smWidget));
-      if (setDefaults) {
-        widgetData.leftPannels[0].widgets.push(wName);
-      }
-    }
-    if (setDefaults) {
-      widgetData.rightPannels[0].widgets.unshift("TutorialWidget");
-    }
-    widgetsContainer = await createWidgetsContainerHTML(
-      widgetData,
-      news,
-      newsState
-    );
-    container.innerHTML = "";
-    container.appendChild(widgetsContainer);
-    widgetSystemCreated = true;
-    return true;
-  }
-  async function saveWidgets() {
-    let widgetData = { leftPannels: [], rightPannels: [] };
-    let onLeftPannels = true;
-    for (let pan of widgetsContainer.childNodes) {
-      if (pan.classList.contains("smpp-widget-insertion-point")) {
-        continue;
-      }
-      if (pan.classList.contains("smpp-news-container")) {
-        onLeftPannels = false;
-        continue;
-      }
-      let pannelData = { widgets: [] };
-      for (let wid of pan.childNodes) {
-        if (wid.classList.contains("smpp-widget-insertion-point")) {
-          continue;
-        }
-        pannelData.widgets.push(wid.dataset.widgetName);
-      }
-      if (onLeftPannels) {
-        widgetData.leftPannels.push(pannelData);
-      } else {
-        widgetData.rightPannels.push(pannelData);
-      }
-    }
-    await browser.runtime.sendMessage({
-      action: "setWidgetLayout",
-      layout: widgetData
-    });
-  }
-  function bagHoverEnter() {
-    if (!widgetBag) {
-      return;
-    }
-    hoveringBag = true;
-    if (curDragInfo) {
-      targetInsertionPoint(null);
-      widgetBag.classList.add("smpp-widget-bag-delete");
-      curDragInfo.widget.aboutToDel(true);
-    }
-  }
-  function bagHoverExit() {
-    if (!widgetBag) {
-      return;
-    }
-    hoveringBag = false;
-    if (curDragInfo) {
-      widgetBag.classList.remove("smpp-widget-bag-delete");
-      curDragInfo.widget.aboutToDel(false);
-    }
-  }
-  async function createGroup(bag, name2, displayName) {
-    let group = document.createElement("div");
-    group.classList.add("smpp-widget-bag-group");
-    for (let widget of widgets) {
-      if (widget.category == name2) {
-        let pl = document.createElement("div");
-        pl.classList.add("smpp-widget-bag-placeholder");
-        await widget.setBagPlaceHolder(group, pl);
-        group.appendChild(pl);
-      }
-    }
-    let groupTitle = document.createElement("h2");
-    groupTitle.classList.add("smpp-widget-bag-group-title");
-    groupTitle.innerText = displayName;
-    bag.appendChild(groupTitle);
-    bag.appendChild(group);
-  }
-  async function createWidgetBag() {
-    let bag = document.createElement("div");
-    bag.classList.add("smpp-widget-bag");
-    let content = document.createElement("div");
-    content.classList.add("smpp-widget-bag-content");
-    let innerContent = document.createElement("div");
-    innerContent.classList.add("smpp-widget-bag-inner-content");
-    await createGroup(innerContent, "other", "Widgets");
-    if (!liteMode) await createGroup(innerContent, "games", "Games");
-    await createGroup(innerContent, "smartschool", "Smartschool Widgets");
-    content.appendChild(innerContent);
-    bag.appendChild(content);
-    let handle = document.createElement("div");
-    handle.classList.add("smpp-widget-bag-handle");
-    handle.addEventListener("click", () => {
-      toggleBag();
-    });
-    handle.innerHTML = `
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-<svg class="smpp-widget-bag-handle-icon" version="1.1" viewBox="0 0 448 448" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-.898 -124.01)"><path d="m26.458 288.48 198.44 119.06 198.44-119.06" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="39.511"/></g></svg>
-`;
-    bag.appendChild(handle);
-    for (let widget of widgets) {
-      await widget.createIfNotExist();
-    }
-    document.body.appendChild(bag);
-    return bag;
-  }
-  function isBagOpen() {
-    if (!widgetBag) {
-      return false;
-    }
-    return widgetBag.classList.contains("smpp-widget-bag-open");
-  }
-  function closeBag() {
-    if (widgetBag) {
-      widgetBag.classList.remove("smpp-widget-bag-open");
-    }
-    if (doneButton) {
-      changeDoneButtonState("noBag");
-      doneButton.classList.remove("smpp-widget-bag-open");
-    }
-    bagHoverExit();
-  }
-  function openBag() {
-    if (widgetBag) {
-      widgetBag.classList.add("smpp-widget-bag-open");
-    }
-    if (doneButton) {
-      changeDoneButtonState("inBag");
-      doneButton.classList.add("smpp-widget-bag-open");
-    }
-    if (curDragInfo) {
-      bagHoverEnter();
-    }
-  }
-  function toggleBag(params) {
-    if (isBagOpen()) {
-      closeBag();
-    } else {
-      if (!curDragInfo) {
-        openBag();
-      }
-    }
-  }
-  var setEditModeFalse = () => setEditMode(false);
-  function createWidgetsDoneButton() {
-    doneButton = document.createElement("button");
-    doneButton.innerHTML = `Done ${doneSvg}`;
-    doneButton.classList.add("widgets-done-button");
-    doneButton.classList.add("hidden");
-    doneButton.addEventListener("click", setEditModeFalse);
-    document.body.appendChild(doneButton);
-  }
-  function changeDoneButtonState(state) {
-    doneButton.removeEventListener("click", setEditModeFalse);
-    doneButton.removeEventListener("click", toggleBag);
-    switch (state) {
-      case "noBag":
-        doneButton.addEventListener("click", setEditModeFalse);
-        break;
-      case "inBag":
-        doneButton.addEventListener("click", toggleBag);
-        break;
-    }
-  }
-  function updateDoneButtonState(value) {
-    requestAnimationFrame(() => {
-      if (value) {
-        doneButton.classList.remove("hidden");
-      } else {
-        doneButton.classList.add("hidden");
-      }
-    });
-  }
-  function splitWidgetNameAndSettingPath(path) {
-    const index = path.indexOf(".");
-    const widgetName = path.slice(0, index);
-    const settingPath = path.slice(index + 1);
-    return [widgetName, settingPath];
-  }
-  function getWidgetByName(name2) {
-    for (let widget of widgets) {
-      if (widget.name == name2) {
-        return widget;
-      }
-    }
-    return null;
-  }
-  async function getWidgetSetting(path) {
-    const [widgetName, settingPath] = splitWidgetNameAndSettingPath(path);
-    const widget = getWidgetByName(widgetName);
-    return await widget.getSetting(settingPath);
-  }
-  async function setWidgetSetting(path, value) {
-    const [widgetName, settingPath] = splitWidgetNameAndSettingPath(path);
-    const widget = getWidgetByName(widgetName);
-    await widget.setSetting(settingPath, value);
-  }
-  async function setEditMode(value) {
-    if (value && !widgetEditModeInit) {
-      console.error(
-        "Widget edit mode has not been initalized. setEditMode(true) has been called. (call initWidgetEditMode first) (This is a bug)"
-      );
-    }
-    if (!doneButton) {
-      createWidgetsDoneButton();
-    }
-    setNewsEditMode(value);
-    if (value) {
-      document.body.classList.add("smpp-widget-edit-mode");
-      if (!widgetBag) {
-        widgetBag = await createWidgetBag();
-        widgetBagHandle = widgetBag.querySelector(".smpp-widget-bag-handle");
-      }
-    } else {
-      if (curDragInfo) {
-        await curDragInfo.widget.drop(true);
-      }
-      closeBag();
-      document.body.classList.remove("smpp-widget-edit-mode");
-    }
-    updateDoneButtonState(value);
-    widgetEditMode = value;
-  }
-  function initWidgetEditMode() {
-    if (widgetEditModeInit) {
-      return;
-    }
-    if (!widgetSystemCreated) {
-      console.error(
-        "Widget system has not been created yet. But initWidgetEditMode has been called"
-      );
-      return;
-    }
-    widgetEditModeInit = true;
-    initNewsEditMode();
-    document.addEventListener("mouseup", async (e5) => {
-      if (curDragInfo) {
-        await curDragInfo.widget.drop(false);
-      }
-    });
-    document.addEventListener("mousemove", (e5) => {
-      if (curDragInfo) {
-        curDragInfo.widget.dragMove(e5.clientX, e5.clientY);
-        let handleBounds = widgetBagHandle.getBoundingClientRect();
-        if (e5.clientY < handleBounds.bottom && e5.clientX > handleBounds.left && e5.clientX < handleBounds.right) {
-          bagHoverEnter();
-        } else if (hoveringBag) {
-          bagHoverExit();
-        }
-      }
-    });
-  }
-  function createWidgetEditModeButton() {
-    let btn = document.createElement("button");
-    btn.classList.add("topnav__btn");
-    btn.classList.add("smpp-button");
-    btn.id = "smpp-widget-edit-mode-btn";
-    btn.addEventListener("click", async () => {
-      await setEditMode(!widgetEditMode);
-    });
-    btn.innerHTML = editIconSvg;
-    btn.title = "Ga in/uit edit mode om de positie van je widgets te veranderen.";
-    return btn;
-  }
-
-  // src/main-features/appearance/background-image.ts
-  async function setBackground(themeName) {
-    function displayBackgroundImage(imageSrc) {
-      document.documentElement.style.setProperty(
-        "--background-color",
-        `transparent`
-      );
-      let imgContainer = document.getElementById(
-        "smpp-background-image-container"
-      ) || document.createElement("div");
-      imgContainer.id = "smpp-background-image-container";
-      imgContainer.classList.add("smpp-background-image-container");
-      let img = document.getElementById("smpp-background-image") || document.createElement("img");
-      img.id = "smpp-background-image";
-      img.classList.add("smpp-background-image");
-      if (imageSrc) {
-        img.classList.remove("image-not-available");
-        img.src = imageSrc;
-      } else {
-        img.classList.add("image-not-available");
-        img.src = "";
-      }
-      if (!document.getElementById("smpp-background-image") && !document.getElementById("tinymce")) {
-        document.body.appendChild(imgContainer);
-        imgContainer.appendChild(img);
-      }
-    }
-    let imageURL = await getImageURL(
-      themeName,
-      async () => {
-        return await getExtensionImage("theme-backgrounds/" + themeName + ".jpg");
-      },
-      false
-    );
-    if (await isValidImage(imageURL.url)) {
-      displayBackgroundImage(imageURL.url);
-    } else {
-      displayBackgroundImage(null);
-    }
-  }
-
-  // src/main-features/appearance/themes.ts
-  k([lch_default, mix_default]);
-  var currentThemeName;
-  var currentTheme2;
-  async function getTheme(name2) {
-    let theme = await browser.runtime.sendMessage({
-      action: "getTheme",
-      name: name2
-    });
-    return theme;
-  }
-  async function setTheme(themeName) {
-    const style = document.documentElement.style;
-    currentThemeName = themeName;
-    currentTheme2 = await getTheme(themeName);
-    Object.entries(currentTheme2.cssProperties).forEach(([key, value]) => {
-      style.setProperty(key, value);
-    });
-    await widgetSystemNotifyThemeChange();
-    recreateGlobalChat();
-  }
-  function updateCurrentThemeName(themeName) {
-    currentThemeName = themeName;
-  }
-  function getThemeQueryString(theme) {
-    let query = "";
-    Object.entries(theme.cssProperties).forEach(([key, value]) => {
-      query += `&${key.slice(2)}=${value.startsWith("#") ? value.substring(1) : value}`;
-    });
-    return query;
-  }
-  function getThemeVar(varName) {
-    return currentTheme2.cssProperties[varName];
-  }
-  var ColorCursor = class {
-    element = document.createElement("div");
-    visibleElement = document.createElement("div");
-    xPos = 50;
-    yPos = 50;
-    enableX;
-    enableY;
-    parentContainer;
-    constructor(parentContainer, enableX = true, enableY = true) {
-      this.parentContainer = parentContainer;
-      this.enableX = enableX;
-      this.enableY = enableY;
-      this.element.appendChild(this.visibleElement);
-      let isDragging = false;
-      this.parentContainer.addEventListener("mousedown", (e5) => {
-        isDragging = true;
-        this.handlePointerEvent(e5);
-      });
-      document.addEventListener("mouseup", () => {
-        isDragging = false;
-      });
-      document.addEventListener("mousemove", (e5) => {
-        if (isDragging) {
-          this.handlePointerEvent(e5);
-        }
-      });
-      this.updateCursorPosition();
-    }
-    handlePointerEvent(e5) {
-      const rect = this.parentContainer.getBoundingClientRect();
-      const x3 = e5.clientX - rect.left;
-      const y3 = e5.clientY - rect.top;
-      const xPercent = x3 / rect.width * 100;
-      const yPercent = y3 / rect.height * 100;
-      if (this.enableX) this.xPos = Math.max(0, Math.min(100, xPercent));
-      if (this.enableY) this.yPos = Math.max(0, Math.min(100, yPercent));
-      this.updateCursorPosition();
-      this.onDrag();
-    }
-    // Overwrite this if needed
-    onDrag() {
-    }
-    updateCursorPosition() {
-      this.element.style.left = `${this.xPos}%`;
-      this.element.style.top = `${this.yPos}%`;
-    }
-  };
-  var ColorPicker2 = class {
-    currentColor = w("#72b6c0ff");
-    width;
-    element = document.createElement("div");
-    hueContainer = document.createElement("div");
-    fieldContainer = document.createElement("div");
-    hueCursor;
-    fieldCursor;
-    constructor(width = "20rem") {
-      this.width = width;
-      this.hueCursor = this.createHueCursor();
-      this.hueCursor.onDrag = async () => {
-        await this.readColor();
-      };
-      this.fieldCursor = this.createFieldCursor();
-      this.fieldCursor.onDrag = async () => {
-        await this.readColor();
-      };
-    }
-    readColorInput() {
-      let hexInput = this.element.querySelector("input");
-      if (hexInput) {
-        if (isValidHexColor(hexInput.value)) {
-          this.currentColor = w(hexInput.value);
-        } else {
-          hexInput.value = this.currentColor.toHex();
-        }
-      }
-      this.updateFields();
-      this.updateColorPicker();
-    }
-    async readColor() {
-      let hue = this.hueCursor.xPos * 3.6;
-      let saturation = this.fieldCursor.xPos;
-      let value = 100 - this.fieldCursor.yPos;
-      this.currentColor = w({ h: hue, s: saturation, v: value });
-      await this.updateColorPicker();
-    }
-    async updateColorPicker() {
-      let maxSatColor = w({ h: this.hueCursor.xPos * 3.6, s: 100, v: 100 });
-      this.element.style.setProperty("--max-sat", maxSatColor.toHex());
-      this.element.style.setProperty(
-        "--current-color",
-        this.currentColor.toHex()
-      );
-      let hexInput = this.element.querySelector("input");
-      if (hexInput) {
-        hexInput.value = this.currentColor.toHex();
-      }
-      await this.onChange();
-    }
-    createFieldCursor() {
-      let fieldCursor = new ColorCursor(this.fieldContainer);
-      fieldCursor.element.classList.add("color-cursor-wrapper");
-      fieldCursor.visibleElement.classList.add("color-cursor");
-      return fieldCursor;
-    }
-    createHueCursor() {
-      let hueCursor = new ColorCursor(this.hueContainer, true, false);
-      hueCursor.element.classList.add("color-cursor-wrapper");
-      hueCursor.visibleElement.classList.add("color-cursor");
-      return hueCursor;
-    }
-    createHueContainer() {
-      this.hueContainer.classList.add("hue-picker");
-      this.hueContainer.appendChild(this.hueCursor.element);
-      return this.hueContainer;
-    }
-    createFieldContainer() {
-      this.fieldContainer.classList.add("color-picker-field");
-      let horizontalContainer = document.createElement("div");
-      horizontalContainer.style.background = `linear-gradient(to left, var(--max-sat) 0%, rgba(255, 255, 255, 1) 100%)`;
-      let verticalContainer = document.createElement("div");
-      verticalContainer.style.background = "linear-gradient(to top, black, transparent)";
-      this.fieldContainer.appendChild(horizontalContainer);
-      this.fieldContainer.append(verticalContainer);
-      this.fieldContainer.appendChild(this.fieldCursor.element);
-      return this.fieldContainer;
-    }
-    copyHexToClipBoard() {
-      navigator.clipboard.writeText(this.currentColor.toHex());
-    }
-    createBottomContainer() {
-      let createCopyButton = () => {
-        let button = document.createElement("button");
-        button.innerHTML = copySvg;
-        button.classList.add("copy-hex-button");
-        button.addEventListener("click", () => {
-          this.copyHexToClipBoard();
-          let svg = button.querySelector("svg");
-          if (!svg) return;
-          svg.style.fill = "var(--color-text)";
-          button.innerHTML = doneSvg;
-          setTimeout(() => {
-            svg.style.fill = "none";
-            button.innerHTML = copySvg;
-          }, 1e3);
-        });
-        return button;
-      };
-      let createHexInput = () => {
-        let hexInput = document.createElement("input");
-        hexInput.classList.add("smpp-text-input");
-        hexInput.addEventListener("change", () => {
-          this.readColorInput();
-        });
-        hexInput.type = "text";
-        hexInput.value = this.currentColor.toHex();
-        return hexInput;
-      };
-      function createColorPreview() {
-        let colorPreview = document.createElement("div");
-        colorPreview.classList.add("color-preview");
-        return colorPreview;
-      }
-      let bottomContainer = document.createElement("div");
-      bottomContainer.classList.add("smpp-color-picker-bottom-container");
-      bottomContainer.appendChild(createColorPreview());
-      bottomContainer.appendChild(createHexInput());
-      bottomContainer.appendChild(createCopyButton());
-      return bottomContainer;
-    }
-    updateFields() {
-      this.hueCursor.xPos = this.currentColor.hue() / 3.6;
-      this.fieldCursor.xPos = this.currentColor.toHsv().s;
-      this.fieldCursor.yPos = 100 - this.currentColor.toHsv().v;
-      this.hueCursor.updateCursorPosition();
-      this.fieldCursor.updateCursorPosition();
-    }
-    render() {
-      this.element.classList.add("smpp-color-picker");
-      this.element.style.width = this.width;
-      this.element.appendChild(this.createFieldContainer());
-      this.element.appendChild(this.createHueContainer());
-      this.element.appendChild(this.createBottomContainer());
-      this.updateFields();
-      this.updateColorPicker();
-      return this.element;
-    }
-    async onChange() {
-    }
-  };
-  var Tile = class {
-    element = document.createElement("div");
-    async render() {
-      this.element.classList.add("theme-tile");
-      this.element.style.height = "104px";
-      this.element.style.width = "168px";
-      this.element.addEventListener("click", async (e5) => {
-        await this.onClick(e5);
-      });
-      this.updateSelection();
-      await this.createContent();
-      return this.element;
-    }
-    async updateImage(currentTheme3, forceReload = false) {
-    }
-    // Overide this in the implementation
-    updateSelection() {
-    }
-    // Overide in de implementation
-    async onClick(e5) {
-    }
-    // Overide this in the implementation
-    async createContent() {
-    }
-  };
-  var ThemeTile2 = class extends Tile {
-    name;
-    isFavorite;
-    isCustom;
-    currentCategory;
-    titleElement = document.createElement("span");
-    constructor(name2, currentCategory, isFavorite, isCustom = false) {
-      super();
-      this.name = name2;
-      this.currentCategory = currentCategory;
-      this.isFavorite = isFavorite;
-      this.isCustom = isCustom;
-    }
-    async updateCSS() {
-      let theme = await getTheme(this.name);
-      Object.keys(theme.cssProperties).forEach((key) => {
-        this.element.style.setProperty(
-          `${key}-local`,
-          theme.cssProperties[key]
-        );
-      });
-    }
-    async updateTitle() {
-      let theme = await getTheme(this.name);
-      this.titleElement.innerText = theme.displayName;
-    }
-    async createContent() {
-      this.element.appendChild(this.createImageContainer());
-      this.element.appendChild(this.getBottomContainer());
-      await this.updateTitle();
-      await this.updateCSS();
-    }
-    getBottomContainer() {
-      let bottomContainer = document.createElement("div");
-      bottomContainer.classList.add("theme-tile-bottom");
-      this.titleElement.classList.add("theme-tile-title");
-      bottomContainer.appendChild(this.titleElement);
-      let buttonContainer = document.createElement("div");
-      buttonContainer.classList.add("theme-button-container");
-      let duplicateButton = document.createElement("button");
-      duplicateButton.classList.add("bottom-container-button");
-      duplicateButton.innerHTML = copySvg;
-      duplicateButton.addEventListener("click", async () => {
-        await this.duplicate();
-      });
-      let favoriteButton = document.createElement("button");
-      favoriteButton.classList.add("bottom-container-button");
-      favoriteButton.innerHTML = heartSvg;
-      favoriteButton.addEventListener("click", async () => {
-        await this.favoriteToggle();
-      });
-      if (this.isFavorite) this.element.classList.add("is-favorite");
-      let shareButton = document.createElement("button");
-      shareButton.classList.add("bottom-container-button");
-      shareButton.innerHTML = shareSvg;
-      shareButton.addEventListener("click", async () => {
-        await this.share();
-      });
-      buttonContainer.appendChild(shareButton);
-      buttonContainer.appendChild(duplicateButton);
-      buttonContainer.appendChild(favoriteButton);
-      if (this.isCustom) {
-        let editButton = document.createElement("button");
-        editButton.classList.add("bottom-container-button");
-        editButton.innerHTML = editIconSvg;
-        editButton.addEventListener("click", async () => {
-          await this.edit();
-        });
-        buttonContainer.appendChild(editButton);
-      }
-      bottomContainer.appendChild(buttonContainer);
-      return bottomContainer;
-    }
-    createImageContainer() {
-      let imageContainer = document.createElement("div");
-      imageContainer.classList.add("image-container");
-      return imageContainer;
-    }
-    updateSelection() {
-      if (currentThemeName == this.name) {
-        this.element.classList.add("is-selected");
-      } else {
-        this.element.classList.remove("is-selected");
-      }
-    }
-    async updateImage(currentTheme3, forceReload = false) {
-      if (this.name == currentTheme3 || forceReload) {
-        let imageURL = await getImageURL(
-          this.name,
-          async () => {
-            return await getExtensionImage(
-              "theme-backgrounds/compressed/" + this.name + ".jpg"
-            );
-          },
-          true
-        );
-        if (await isValidImage(await imageURL.url)) {
-          this.element.style.setProperty(
-            "--background-image-local",
-            `url(${await imageURL.url})`
-          );
-        } else {
-          this.element.style.setProperty("--background-image-local", `url()`);
-        }
-        if (isFirefox && imageURL.type == "file") {
-          let imageContainer = this.element.querySelector(".image-container");
-          if (!imageContainer) return;
-          let stupidImageContainer = document.createElement("img");
-          stupidImageContainer.classList.add(
-            "image-container",
-            "firefox-container"
-          );
-          if (await isValidImage(imageURL.url)) {
-            stupidImageContainer.src = imageURL.url;
-          } else {
-            stupidImageContainer.src = "";
-          }
-          let bottomContainer = this.element.querySelector(".theme-tile-bottom");
-          if (!bottomContainer) return;
-          imageContainer.remove();
-          this.element.prepend(stupidImageContainer);
-        } else if (isFirefox) {
-          let firefoxImageContainer = this.element.querySelector(".firefox-container");
-          if (firefoxImageContainer) {
-            firefoxImageContainer.remove();
-            this.element.prepend(this.createImageContainer());
-            await this.updateImage(currentTheme3, forceReload);
-          }
-        }
-      }
-    }
-    async onClick(e5) {
-      if (e5.target instanceof HTMLElement) {
-        const target = e5.target;
-        if (target.classList.contains("theme-tile-title") || target.classList.contains("image-container") || target.classList.contains("theme-tile")) {
-          await updateTheme(this.name);
-          await settingsWindow.loadPage(false);
-          await loadQuickSettings();
-        }
-      }
-    }
-    async favoriteToggle() {
-      this.isFavorite = !this.isFavorite;
-      let data2 = await browser.runtime.sendMessage({
-        action: "getSettingsData"
-      });
-      let updateFavorite = async () => {
-        await browser.runtime.sendMessage({
-          action: "setSetting",
-          name: "appearance.quickSettingsThemes",
-          data: quickSettingsThemes
-        });
-        this.element.classList.toggle("is-favorite");
-        this.onFavoriteToggle();
-      };
-      let quickSettingsThemes = data2.appearance.quickSettingsThemes;
-      if (this.isFavorite) {
-        quickSettingsThemes.push(this.name);
-        await updateFavorite();
-      } else {
-        quickSettingsThemes = quickSettingsThemes.filter((name2) => {
-          return name2 != this.name;
-        });
-        if (this.currentCategory == "quickSettings") {
-          this.element.addEventListener("animationend", updateFavorite);
-          this.element.classList.add("being-removed");
-        } else {
-          await updateFavorite();
-        }
-      }
-    }
-    async edit() {
-      await updateTheme(this.name);
-      Promise.all([settingsWindow.loadPage(false), loadQuickSettings()]);
-      startCustomThemeCreator(await getTheme(this.name), this.name);
-    }
-    async duplicate() {
-      let newThemeName = await browser.runtime.sendMessage({
-        action: "saveCustomTheme",
-        data: await getTheme(this.name)
-      });
-      let result = await browser.runtime.sendMessage({
-        action: "getImage",
-        id: this.name
-      });
-      let compressedResult = await browser.runtime.sendMessage({
-        action: "getImage",
-        id: "compressed-" + this.name
-      });
-      if (result.metaData.type == "default") {
-        let base64 = await convertLinkToBase64(
-          await getExtensionImage("theme-backgrounds/" + this.name + ".jpg")
-        );
-        if (base64) result.imageData = base64;
-        let compressedBase64 = await convertLinkToBase64(
-          await getExtensionImage(
-            "theme-backgrounds/compressed/" + this.name + ".jpg"
-          )
-        );
-        if (compressedBase64) compressedResult.imageData = compressedBase64;
-        if (!this.isCustom) {
-          result.metaData.type = "file";
-          result.metaData.link = this.name + ".jpg";
-          compressedResult.metaData.type = "file";
-          compressedResult.metaData.link = this.name + ".jpg";
-        }
-      }
-      if (await isValidImage(result.imageData)) {
-        await browser.runtime.sendMessage({
-          action: "setImage",
-          id: newThemeName,
-          data: result
-        });
-      }
-      if (await isValidImage(compressedResult.imageData)) {
-        await browser.runtime.sendMessage({
-          action: "setImage",
-          id: "compressed-" + newThemeName,
-          data: compressedResult
-        });
-      }
-      this.onDuplicate(newThemeName);
-      new Toast("Theme succesfully duplicated", "succes").render();
-    }
-    async share() {
-      let shareDialog = new Dialog("themeSharing", true);
-      let linkOutput = document.createElement("a");
-      linkOutput.classList.add("link-output");
-      linkOutput.target = "_blank";
-      let copyToClipboardButton = document.createElement("button");
-      copyToClipboardButton.classList.add("copy-hex-button");
-      copyToClipboardButton.classList.add("copy-link-button");
-      const copyToClipboard = () => {
-        if (shareUrl) {
-          navigator.clipboard.writeText(shareUrl);
-          let svg = copyToClipboardButton.querySelector("svg");
-          if (!svg) return;
-          svg.style.fill = "var(--color-text)";
-          copyToClipboardButton.innerHTML = doneSvg;
-          setTimeout(() => {
-            svg.style.fill = "none";
-            copyToClipboardButton.innerHTML = copySvg;
-          }, 1e3);
-          new Toast("Theme link copied to clipboard", "succes").render();
-        } else {
-          new Toast("Theme link is not ready yet", "error").render();
-        }
-      };
-      copyToClipboardButton.addEventListener("click", copyToClipboard);
-      copyToClipboardButton.innerHTML = loadingSpinnerSvg;
-      let shareUrl = null;
-      shareDialog.renderContent = async () => {
-        let element = document.createElement("div");
-        element.classList.add("share-dialog-content");
-        let title = document.createElement("h1");
-        title.innerText = (await getTheme(this.name)).displayName;
-        let subTitle = document.createElement("h2");
-        subTitle.innerText = "Theme sharing";
-        linkOutput.innerText = "Loading...";
-        let copyContainer = document.createElement("div");
-        copyContainer.classList.add("copy-container");
-        let tile = document.createElement("div");
-        tile.classList.add("sharing-tile");
-        let theme = await getTheme(this.name);
-        Object.keys(theme.cssProperties).forEach((key) => {
-          element.style.setProperty(
-            `${key}-local`,
-            theme.cssProperties[key]
-          );
-        });
-        function getEditableValues(cssProperties) {
-          let nonEditableValues = [
-            "--color-homepage-sidebars-bg",
-            "--darken-background",
-            "--color-splashtext"
-          ];
-          let editableValues = Object.keys(cssProperties).filter((property) => {
-            return !nonEditableValues.includes(property);
-          });
-          return editableValues;
-        }
-        function createColorPreview(name2) {
-          let colorPreview = document.createElement("div");
-          colorPreview.classList.add("color-preview-bubble");
-          if (theme.cssProperties[name2]) {
-            colorPreview.style.setProperty(
-              "--current-color",
-              theme.cssProperties[name2]
-            );
-          }
-          return colorPreview;
-        }
-        function generateColorPreviews(editableValues) {
-          let colorPreviews = editableValues.map((colorName) => {
-            let colorPreview = {};
-            colorPreview[colorName] = createColorPreview(colorName);
-            return colorPreview;
-          });
-          return colorPreviews;
-        }
-        let imageContainer = document.createElement("div");
-        imageContainer.classList.add("sharing-image-container");
-        let imageURL = await getImageURL(
-          this.name,
-          async () => {
-            return await getExtensionImage(
-              "theme-backgrounds/compressed/" + this.name + ".jpg"
-            );
-          },
-          false
-        );
-        let image = document.createElement("img");
-        image.classList.add("sharing-image");
-        image.src = imageURL.url;
-        imageContainer.appendChild(image);
-        tile.appendChild(imageContainer);
-        let colorPreviewsContainer = document.createElement("div");
-        colorPreviewsContainer.classList.add("sharing-color-previews");
-        Object.values(
-          generateColorPreviews(getEditableValues(theme.cssProperties))
-        ).forEach((preview) => {
-          let actualPreview = Object.values(preview)[0];
-          if (actualPreview) colorPreviewsContainer.appendChild(actualPreview);
-        });
-        tile.appendChild(colorPreviewsContainer);
-        copyContainer.appendChild(linkOutput);
-        copyContainer.appendChild(copyToClipboardButton);
-        element.appendChild(title);
-        element.appendChild(subTitle);
-        tile.appendChild(copyContainer);
-        element.appendChild(tile);
-        return element;
-      };
-      await shareDialog.create();
-      shareDialog.show();
-      new Toast("Uploading theme...", "info").render();
-      const resp = await browser.runtime.sendMessage({
-        action: "shareTheme",
-        name: this.name
-      });
-      if (resp.error) {
-        console.error("Failed to share theme", resp.error);
-        new Toast("Failed to share theme", "error").render();
-      } else {
-        shareUrl = resp.shareUrl;
-        console.log(linkOutput);
-        linkOutput.innerText = resp.shareUrl.slice(0, 32) + "\u2026";
-        linkOutput.addEventListener("click", copyToClipboard);
-        copyToClipboardButton.innerHTML = copySvg;
-        new Toast("Theme uploaded", "succes").render();
-      }
-      this.onShare();
-    }
-    // Overide in de implementation
-    async onFavoriteToggle() {
-    }
-    // Overide in de implementation
-    async onShare() {
-    }
-    // Overide in de implementation
-    async onDuplicate(newThemeName) {
-    }
-  };
-  async function updateTheme(name2) {
-    await browser.runtime.sendMessage({
-      action: "setSetting",
-      name: "appearance.theme",
-      data: name2
-    });
-    Promise.all([setTheme(name2), setBackground(name2)]);
-  }
-  var ThemeFolder = class extends Tile {
-    category;
-    constructor(category) {
-      super();
-      this.category = category;
-    }
-    async createContent() {
-      let firstThemeInCategory = await browser.runtime.sendMessage({
-        action: "getFirstThemeInCategory",
-        category: this.category,
-        includeHidden: true
-      });
-      if (!firstThemeInCategory) return;
-      let theme = await browser.runtime.sendMessage({
-        action: "getTheme",
-        name: firstThemeInCategory
-      });
-      Object.keys(theme.cssProperties).forEach((key) => {
-        this.element.style.setProperty(
-          `${key}-local`,
-          theme.cssProperties[key]
-        );
-      });
-      if (this.category == "custom" || this.category == "quickSettings") {
-        this.element.classList.add("use-default-colors");
-      }
-      this.element.style.setProperty("--background-image-local", `url()`);
-      this.element.appendChild(this.createImageContainer());
-      this.element.appendChild(this.createBottomContainer());
-    }
-    createBottomContainer() {
-      let bottomContainer = document.createElement("div");
-      bottomContainer.classList.add("theme-tile-bottom");
-      let title = document.createElement("span");
-      title.innerText = getFancyCategoryName(this.category);
-      if (this.category == "quickSettings") {
-        title.innerText = "Favorites";
-      }
-      title.classList.add("theme-tile-title");
-      bottomContainer.appendChild(title);
-      return bottomContainer;
-    }
-    createImageContainer() {
-      let imageContainer = document.createElement("div");
-      let svg;
-      switch (this.category) {
-        case "quickSettings":
-          svg = heartSvg;
-          break;
-        case "light":
-          svg = sunSvg;
-          break;
-        case "dark":
-          svg = moonSvg;
-          break;
-        case "seasonal":
-          svg = pineSvg;
-          break;
-        case "custom":
-          svg = editIconSvg;
-          break;
-        default:
-          svg = folderSvg;
-          break;
-      }
-      imageContainer.innerHTML = svg;
-      imageContainer.classList.add("image-container");
-      return imageContainer;
-    }
-  };
-  function getFancyCategoryName(name2) {
-    let fancyName = name2.charAt(0).toUpperCase() + name2.slice(1);
-    return fancyName;
-  }
-  var AddCustomTheme = class extends Tile {
-    createImageContainer() {
-      let imageContainer = document.createElement("div");
-      let svg = plusSVG;
-      imageContainer.innerHTML = svg;
-      imageContainer.classList.add("image-container");
-      return imageContainer;
-    }
-    createBottomContainer() {
-      let bottomContainer = document.createElement("div");
-      bottomContainer.classList.add("theme-tile-bottom");
-      let title = document.createElement("span");
-      title.classList.add("theme-tile-title");
-      title.innerText = "Create theme";
-      bottomContainer.appendChild(title);
-      return bottomContainer;
-    }
-    async onClick() {
-      let newTheme = await browser.runtime.sendMessage({
-        action: "saveCustomTheme",
-        data: await getTheme("defaultCustom")
-      });
-      await settingsWindow.themeSelector.updateSelectorContent();
-      await settingsWindow.loadPage(false);
-      await updateTheme(newTheme);
-      startCustomThemeCreator(await getTheme("defaultCustom"), newTheme);
-    }
-    async createContent() {
-      this.element.classList.add("use-default-colors");
-      this.element.classList.add("create-theme-button");
-      this.element.appendChild(this.createImageContainer());
-      this.element.appendChild(this.createBottomContainer());
-    }
-  };
-  var noThemes = class extends Tile {
-    createImageContainer() {
-      let imageContainer = document.createElement("div");
-      let svg = brokenHeartSvg;
-      imageContainer.innerHTML = svg;
-      imageContainer.classList.add("image-container");
-      return imageContainer;
-    }
-    createBottomContainer() {
-      let bottomContainer = document.createElement("div");
-      bottomContainer.classList.add("theme-tile-bottom");
-      let title = document.createElement("span");
-      title.classList.add("theme-tile-title");
-      title.innerText = "No themes";
-      bottomContainer.appendChild(title);
-      return bottomContainer;
-    }
-    async createContent() {
-      this.element.classList.add("use-default-colors");
-      this.element.classList.add("no-themes");
-      this.element.appendChild(this.createImageContainer());
-      this.element.appendChild(this.createBottomContainer());
-    }
-  };
-  var ThemeSelector = class {
-    element = document.createElement("div");
-    content = document.createElement("div");
-    topContainer = document.createElement("div");
-    currentCategory = "all";
-    currentTiles = [];
-    contentWidth = 0;
-    createTopContainer() {
-      this.topContainer = document.createElement("div");
-      this.topContainer.classList.add("theme-top-container");
-    }
-    render() {
-      this.element.innerHTML = "";
-      this.createTopContainer();
-      this.createContentContainer();
-      window.addEventListener("resize", () => {
-        this.updateSizes();
-        this.updateContentHeight();
-      });
-      this.element.appendChild(this.topContainer);
-      this.renderSelectorContent();
-      return this.element;
-    }
-    async updateImages(forceReload = false) {
-      this.currentTiles.forEach(async (tile) => {
-        await tile.updateImage(currentThemeName, forceReload);
-      });
-    }
-    updateSizes() {
-      this.contentWidth = this.content.getBoundingClientRect().width;
-    }
-    async renderSelectorContent() {
-      this.content.innerHTML = "";
-      this.element.appendChild(this.content);
-      this.updateTopContainer();
-      if (this.currentCategory == "all") {
-        await this.renderFolderTiles();
-      } else {
-        await this.renderThemeTiles();
-      }
-      this.updateSizes();
-      this.updateContentHeight();
-    }
-    // this is used if some of the correct content is already loaded
-    async updateSelectorContent() {
-      if (this.currentCategory == "all") {
-        await this.renderFolderTiles();
-        return;
-      }
-      await this.updateThemeTiles();
-      this.updateImages();
-    }
-    async updateThemeTiles() {
-      let themes2 = await browser.runtime.sendMessage({
-        action: "getThemes",
-        categories: [this.currentCategory],
-        includeHidden: true
-      });
-      let data2 = await browser.runtime.sendMessage({
-        action: "getSettingsData"
-      });
-      let visibleThemeTiles = this.content.querySelectorAll(".theme-tile");
-      let visibleThemeTilesArray = [];
-      visibleThemeTiles.forEach((element) => {
-        visibleThemeTilesArray.push(element);
-      });
-      let visibleThemeNames = visibleThemeTilesArray.map((element) => {
-        if (element.dataset["name"]) return element.dataset["name"];
-      });
-      let correctThemeNames = Object.keys(themes2).map((themeName) => {
-        return themeName;
-      });
-      let addMissingTiles = async (visibleThemeNames2, correctThemeNames2) => {
-        let customThemes = await browser.runtime.sendMessage({
-          action: "getThemes",
-          categories: ["custom"],
-          includeHidden: true
-        });
-        correctThemeNames2.forEach(async (themeName) => {
-          if (!visibleThemeNames2.includes(themeName)) {
-            let isFavorite = data2.appearance.quickSettingsThemes.includes(themeName);
-            let newTile = this.createThemeTile(
-              themeName,
-              isFavorite,
-              Object.keys(customThemes).includes(themeName)
-            );
-            let createThemeButton = this.content.querySelector(
-              ".create-theme-button"
-            );
-            if (createThemeButton) {
-              createThemeButton.insertAdjacentElement(
-                "beforebegin",
-                await newTile.render()
-              );
-            } else {
-              this.content.appendChild(await newTile.render());
-            }
-            this.currentTiles.push(newTile);
-            this.updateContentHeight();
-          }
-        });
-      };
-      let removeIncorrectTiles = async (visibleThemeNames2, correctThemeNames2) => {
-        visibleThemeNames2.forEach(async (themeName) => {
-          if (!correctThemeNames2.includes(themeName)) {
-            let element = visibleThemeTilesArray.find((element2) => {
-              if (element2.dataset["name"] == themeName) return element2;
-            });
-            if (!element) return;
-            if (element.classList.contains("create-theme-button")) return;
-            this.content.removeChild(element);
-            this.currentTiles = this.currentTiles.filter((tile) => {
-              if (tile instanceof AddCustomTheme) return true;
-              if (tile instanceof ThemeTile2) return tile.name != themeName;
-            });
-          }
-          this.updateContentHeight();
-        });
-      };
-      let updateLocalCSS = async () => {
-        this.currentTiles.forEach((tile) => {
-          if (tile.name == currentThemeName) {
-            tile.updateCSS();
-            tile.updateTitle();
-          }
-        });
-      };
-      if (Object.keys(themes2).length == 0 && this.currentCategory != "custom") {
-        this.currentTiles.push(new noThemes());
-        await this.renderTiles(this.currentTiles);
-      }
-      await addMissingTiles(visibleThemeNames, correctThemeNames);
-      await removeIncorrectTiles(visibleThemeNames, correctThemeNames);
-      updateLocalCSS();
-    }
-    updateTopContainer() {
-      this.topContainer.innerHTML = "";
-      let title = document.createElement("h2");
-      title.classList.add("current-category");
-      if (this.currentCategory != "all") {
-        let backButton = document.createElement("button");
-        backButton.innerHTML = chevronLeftSvg;
-        backButton.addEventListener("click", () => this.changeCategory("all"));
-        this.topContainer.appendChild(backButton);
-      }
-      title.innerText = getFancyCategoryName(this.currentCategory) + " themes";
-      if (this.currentCategory == "quickSettings") {
-        title.innerText = "Favorite themes";
-      }
-      this.topContainer.appendChild(title);
-    }
-    async renderTiles(tiles) {
-      const renderedElements = await Promise.all(
-        tiles.map((tile) => tile.render())
-      );
-      const fragment = document.createDocumentFragment();
-      renderedElements.forEach((element) => {
-        fragment.appendChild(element);
-      });
-      this.content.appendChild(fragment);
-    }
-    createContentContainer() {
-      this.content = document.createElement("div");
-      this.content.classList.add("theme-tiles");
-    }
-    calculateContentHeight(tiles) {
-      const TILE_HEIGHT = parseFloat(tiles[0]?.element.style.height || "0");
-      const TILE_WIDTH = parseFloat(tiles[0]?.element.style.width || "0");
-      const GAP = 6;
-      const totalWidth = this.contentWidth;
-      const tileAmount = tiles.length;
-      const tilesPerRow = Math.floor((totalWidth + GAP) / (TILE_WIDTH + GAP));
-      const numRows = Math.ceil(tileAmount / tilesPerRow);
-      const totalHeight = numRows * TILE_HEIGHT + (numRows - 1) * GAP;
-      return totalHeight;
-    }
-    async renderFolderTiles() {
-      let categories = await browser.runtime.sendMessage({
-        action: "getThemeCategories",
-        includeEmpty: true,
-        includeHidden: true
-      });
-      let tiles = Object.keys(categories).map((category) => {
-        let tile = new ThemeFolder(category);
-        tile.onClick = async () => {
-          this.changeCategory(category);
-        };
-        return tile;
-      });
-      this.currentTiles = tiles;
-      await this.renderTiles(tiles);
-    }
-    updateContentHeight() {
-      this.content.style.height = String(this.calculateContentHeight(this.currentTiles)) + "px";
-    }
-    createThemeTile(name2, isFavorite, isCustom) {
-      let tile = new ThemeTile2(name2, this.currentCategory, isFavorite, isCustom);
-      tile.element.dataset["name"] = name2;
-      tile.onDuplicate = async (newThemeName) => {
-        if (isCustom) {
-          await this.updateSelectorContent();
-        }
-        await updateTheme(newThemeName);
-        await this.changeCategory("custom");
-        Promise.all([settingsWindow.loadPage(false)]);
-        startCustomThemeCreator(await getTheme(newThemeName), newThemeName);
-      };
-      tile.onFavoriteToggle = async () => {
-        await settingsWindow.loadPage(false);
-        await loadQuickSettings();
-        if (this.currentCategory == "quickSettings") {
-          await this.updateSelectorContent();
-        }
-      };
-      return tile;
-    }
-    async renderThemeTiles() {
-      let themes2 = await browser.runtime.sendMessage({
-        action: "getThemes",
-        categories: [this.currentCategory],
-        includeHidden: true
-      });
-      let customThemes = await browser.runtime.sendMessage({
-        action: "getThemes",
-        categories: ["custom"],
-        includeHidden: true
-      });
-      let data2 = await browser.runtime.sendMessage({
-        action: "getSettingsData"
-      });
-      let tiles = Object.keys(themes2).map((name2) => {
-        let isFavorite = data2.appearance.quickSettingsThemes.includes(name2);
-        let isCustom = Object.keys(customThemes).includes(name2);
-        return this.createThemeTile(name2, isFavorite, isCustom);
-      });
-      if (this.currentCategory == "custom") {
-        tiles.push(new AddCustomTheme());
-      }
-      this.currentTiles = tiles;
-      if (Object.keys(themes2).length == 0 && this.currentCategory != "custom") {
-        this.currentTiles.push(new noThemes());
-      }
-      await this.renderTiles(this.currentTiles);
-      await this.updateImages(true);
-    }
-    async changeCategory(category) {
-      this.currentCategory = category;
-      await this.renderSelectorContent();
-    }
-  };
-  async function startCustomThemeCreator(theme, name2) {
-    let themeEditor = new CustomThemeCreator(theme, name2);
-    settingsWindow.hide();
-    await themeEditor.create();
-    themeEditor.show();
-  }
-  function convertColorPalette(vibrantPalette) {
-    function convertSwatchToColord(swatch) {
-      if (!swatch) return w("#000");
-      return w(swatch.hex);
-    }
-    let colordPalette;
-    colordPalette = {
-      Vibrant: convertSwatchToColord(vibrantPalette.Vibrant),
-      DarkVibrant: convertSwatchToColord(vibrantPalette.DarkVibrant),
-      LightVibrant: convertSwatchToColord(vibrantPalette.LightVibrant),
-      Muted: convertSwatchToColord(vibrantPalette.Muted),
-      DarkMuted: convertSwatchToColord(vibrantPalette.DarkMuted),
-      LightMuted: convertSwatchToColord(vibrantPalette.LightMuted)
-    };
-    return colordPalette;
-  }
-  var CustomThemeCreator = class extends BaseWindow {
-    theme;
-    name;
-    editableValues;
-    colorPreviews;
-    backgroundImageInput;
-    backgroundImagePreview;
-    themeGeneratorIsOpen = false;
-    imagePreviewContainer;
-    getEditableValues(cssProperties) {
-      let nonEditableValues = [
-        "--color-homepage-sidebars-bg",
-        "--darken-background",
-        "--color-splashtext"
-      ];
-      let editableValues = Object.keys(cssProperties).filter((property) => {
-        return !nonEditableValues.includes(property);
-      });
-      return editableValues;
-    }
-    createColorPreview(name2) {
-      let colorPreview = document.createElement("div");
-      colorPreview.classList.add("color-preview-bubble");
-      if (this.theme.cssProperties[name2]) {
-        colorPreview.style.setProperty(
-          "--current-color",
-          this.theme.cssProperties[name2]
-        );
-      }
-      colorPreview.dataset["name"] = name2;
-      colorPreview.addEventListener("click", (e5) => {
-        if (!colorPreview.parentElement?.querySelector(".floating-picker")) {
-          this.openColorPicker(name2, colorPreview, e5);
-        }
-      });
-      return colorPreview;
-    }
-    updateColorPreviews() {
-      this.colorPreviews.forEach((preview) => {
-        let previewName = Object.keys(preview)[0];
-        let element = Object.values(preview)[0];
-        if (previewName && element) {
-          let newValue = this.theme.cssProperties[previewName];
-          if (newValue) element.style.setProperty("--current-color", newValue);
-        }
-      });
-    }
-    generateColorPreviews(editableValues) {
-      let colorPreviews = editableValues.map((colorName) => {
-        let colorPreview = {};
-        colorPreview[colorName] = this.createColorPreview(colorName);
-        return colorPreview;
-      });
-      return colorPreviews;
-    }
-    convertPropertyName(name2) {
-      const propertyNames = {
-        "--color-accent": "Accent Color",
-        "--color-text": "Text Color",
-        "--color-base00": "Background",
-        "--color-base01": "Secondary Background",
-        "--color-base02": "Tertiary Background",
-        "--color-base03": "Border Color"
-      };
-      return propertyNames[name2];
-    }
-    constructor(theme, name2) {
-      super("customThemeCreator", true);
-      this.theme = theme;
-      this.name = name2;
-      this.editableValues = this.getEditableValues(theme.cssProperties);
-      this.colorPreviews = this.generateColorPreviews(this.editableValues);
-      this.backgroundImageInput = new ImageSelector(this.name, true);
-      this.backgroundImageInput.id = this.name;
-      this.imagePreviewContainer = document.createElement("div");
-      this.backgroundImageInput.onStore = async () => {
-        updateTheme(this.name);
-        this.updateBackgroundImagePreview();
-      };
-      this.backgroundImagePreview = this.createBackgroundImagePreview();
-    }
-    content = document.createElement("div");
-    displayNameInput = document.createElement("input");
-    openColorPicker(name2, colorPreview, e5) {
-      let colorPicker = new ColorPicker2();
-      colorPicker.element.style.position = "absolute";
-      colorPicker.element.classList.add("floating-picker");
-      let _docEventHandler = (docEvent) => {
-        if (docEvent === e5) return;
-        if (!(docEvent.target instanceof Node)) return;
-        if (docEvent.target == colorPreview) return;
-        const targetElement = docEvent.target;
-        const parentElement = targetElement.parentElement;
-        if (colorPicker.element.contains(targetElement)) return;
-        const isIconClick = targetElement.classList?.contains("copy-svg") || targetElement.classList?.contains("done-icon") || parentElement?.classList?.contains("copy-svg") || parentElement?.classList?.contains("done-icon");
-        if (isIconClick) return;
-        colorPicker.element.remove();
-        document.removeEventListener("mousedown", _docEventHandler);
-      };
-      document.addEventListener("mousedown", _docEventHandler);
-      if (this.theme.cssProperties[name2]) {
-        colorPicker.currentColor = w(this.theme.cssProperties[name2]);
-      }
-      colorPicker.onChange = async () => {
-        colorPreview.style.setProperty(
-          "--current-color",
-          colorPicker.currentColor.toHex()
-        );
-        await this.saveThemeData();
-        setTheme(this.name);
-      };
-      colorPreview.parentElement?.appendChild(colorPicker.render());
-    }
-    async saveThemeData() {
-      await browser.runtime.sendMessage({
-        action: "markThemeAsModified",
-        name: this.name
-      });
-      this.colorPreviews.forEach((preview) => {
-        let colorPreview = Object.values(preview)[0];
-        if (!colorPreview) return;
-        let colorName = colorPreview.dataset["name"];
-        if (!colorName) return;
-        this.theme.cssProperties[colorName] = colorPreview.style.getPropertyValue("--current-color");
-      });
-      this.theme.displayName = this.displayNameInput.value;
-      if (this.theme.cssProperties["--color-base00"] && this.theme.cssProperties["--color-base02"] && this.theme.cssProperties["--color-text"]) {
-        let base00 = w(this.theme.cssProperties["--color-base00"]);
-        let darkenColor;
-        let splashColor;
-        if (base00.brightness() > 0.5) {
-          darkenColor = w("rgba(228, 228, 228, 0.4)");
-          darkenColor = darkenColor.mix(this.theme.cssProperties["--color-base02"], 0.5).alpha(0.4);
-        } else {
-          darkenColor = w("rgba(0,0,0,0.2)");
-          darkenColor = darkenColor.mix(this.theme.cssProperties["--color-base00"], 0.5).alpha(0.3);
-        }
-        splashColor = w(this.theme.cssProperties["--color-text"]);
-        this.theme.cssProperties["--color-splashtext"] = splashColor.toHex();
-        this.theme.cssProperties["--darken-background"] = darkenColor.toHex();
-        this.theme.cssProperties["--color-homepage-sidebars-bg"] = darkenColor.alpha(0.1).toHex();
-      }
-      await browser.runtime.sendMessage({
-        action: "saveCustomTheme",
-        data: this.theme,
-        id: this.name
-      });
-    }
-    createRemoveButton() {
-      let button = document.createElement("button");
-      button.classList.add("remove-custom-theme");
-      button.innerHTML = "Remove theme" + trashSvg;
-      button.addEventListener("click", () => {
-        this.onRemoveTheme();
-      });
-      return button;
-    }
-    createDisplayNameInput() {
-      this.displayNameInput = createTextInput("", "Name");
-      this.displayNameInput.classList.add("theme-name-input");
-      this.displayNameInput.addEventListener("change", async () => {
-        await this.saveThemeData();
-      });
-      return this.displayNameInput;
-    }
-    createMakeThemeButton() {
-      let button = document.createElement("button");
-      button.classList.add("make-theme-button", "generate-theme-control");
-      button.innerHTML = playSvg;
-      button.addEventListener("click", async () => {
-        if (await isValidImage(this.backgroundImagePreview.src)) {
-          button.innerHTML = loadingSpinnerSvg;
-          button.classList.add("loading");
-          await this.generateTheme().then(() => {
-            button.innerHTML = playSvg;
-            button.classList.remove("loading");
-          });
-        }
-      });
-      return button;
-    }
-    createBackgroundImagePreview() {
-      let img = document.createElement("img");
-      img.classList.add("theme-creator-preview-image");
-      return img;
-    }
-    async updateBackgroundImagePreview() {
-      let result = await browser.runtime.sendMessage({
-        action: "getImage",
-        id: this.name
-      });
-      if (result.metaData.type == "default") {
-        result.imageData = await getExtensionImage(
-          "theme-backgrounds/compressed/" + this.name + ".jpg"
-        );
-      }
-      if (await isValidImage(result.imageData)) {
-        this.backgroundImagePreview.src = result.imageData;
-        this.content.classList.remove("no-image-available");
-      } else {
-        this.backgroundImagePreview.src = "";
-        this.content.classList.add("no-image-available");
-      }
-    }
-    async getImageColors() {
-      try {
-        let vibrantTester = new Vibrant(this.backgroundImagePreview.src, {
-          quality: 1,
-          colorCount: 256
-        });
-        let palette = await vibrantTester.getPalette();
-        return palette;
-      } catch (error) {
-        console.error("Error extracting image colors:", error);
-        return null;
-      }
-    }
-    readUserChoice() {
-      let brightnessButton = document.getElementById(
-        "brightness-control"
-      );
-      let saturationButton = document.getElementById(
-        "saturation-control"
-      );
-      if (!(brightnessButton && saturationButton)) return;
-      let choice = {
-        mode: brightnessButton.checked,
-        saturation: saturationButton.checked
-      };
-      return choice;
-    }
-    async generateTheme() {
-      let swatchPalette = await this.getImageColors();
-      if (!swatchPalette) return;
-      let colordPalette = convertColorPalette(swatchPalette);
-      let choice = this.readUserChoice();
-      if (!choice) return;
-      let base00;
-      let base01;
-      let base02;
-      let base03;
-      let accent;
-      let textcolor;
-      let darkenColor;
-      if (choice.mode) {
-        if (choice.saturation) {
-          base00 = colordPalette.DarkVibrant.darken(0.2);
-          base01 = colordPalette.DarkVibrant.darken(0.1);
-          base02 = colordPalette.DarkVibrant;
-          base03 = colordPalette.DarkVibrant.lighten(0.1);
-          accent = colordPalette.Vibrant;
-          textcolor = colordPalette.LightVibrant;
-        } else {
-          base00 = colordPalette.DarkMuted.darken(0.2);
-          base01 = colordPalette.DarkMuted.darken(0.1);
-          base02 = colordPalette.DarkMuted;
-          base03 = colordPalette.DarkMuted.lighten(0.1);
-          accent = colordPalette.Muted;
-          textcolor = colordPalette.LightMuted;
-        }
-        darkenColor = w("rgba(0,0,0,0.2)").mix(base00.toHex(), 0.5).alpha(0.3);
-      } else {
-        if (choice.saturation) {
-          base00 = colordPalette.LightVibrant.lighten(0.1);
-          base01 = colordPalette.LightVibrant.lighten(0.05);
-          base02 = colordPalette.LightVibrant;
-          base03 = colordPalette.LightVibrant.darken(0.1);
-          accent = colordPalette.Vibrant;
-          textcolor = colordPalette.DarkVibrant;
-        } else {
-          base00 = colordPalette.LightMuted.lighten(0.1);
-          base01 = colordPalette.LightMuted.lighten(0.05);
-          base02 = colordPalette.LightMuted;
-          base03 = colordPalette.LightMuted.darken(0.1);
-          accent = colordPalette.Muted;
-          textcolor = colordPalette.DarkMuted;
-        }
-        darkenColor = w("rgba(228, 228, 228, 0.4)").mix(base02.toHex(), 0.5).alpha(0.4);
-      }
-      this.theme = {
-        displayName: this.theme.displayName,
-        cssProperties: {
-          ...this.theme.cssProperties,
-          "--color-accent": accent.toHex(),
-          "--color-text": textcolor.toHex(),
-          "--color-base00": base00.toHex(),
-          "--color-base01": base01.toHex(),
-          "--color-base02": base02.toHex(),
-          "--color-base03": base03.toHex(),
-          "--darken-background": darkenColor.toHex(),
-          "--color-homepage-sidebars-bg": darkenColor.alpha(0.1).toHex(),
-          "--color-splashtext": textcolor.toHex()
-        }
-      };
-      await browser.runtime.sendMessage({
-        action: "markThemeAsModified",
-        name: this.name
-      });
-      await browser.runtime.sendMessage({
-        action: "saveCustomTheme",
-        data: this.theme,
-        id: this.name
-      });
-      this.updateColorPreviews();
-      await updateTheme(this.name);
-    }
-    createThemeGenerationControls() {
-      class themeGenerationControl {
-        id;
-        element;
-        label;
-        constructor(id) {
-          this.id = id;
-          const { input, label } = this.createThemeGenerationControl(this.id);
-          this.element = input;
-          this.label = label;
-        }
-        createThemeGenerationControl(id) {
-          let input = document.createElement("input");
-          input.type = "checkbox";
-          input.id = id;
-          input.classList.add("theme-maker-input");
-          let label = document.createElement("label");
-          label.htmlFor = id;
-          label.classList.add("theme-maker-label", "generate-theme-control");
-          input.addEventListener("click", () => {
-            this.updateLogo(this.label, this.element.checked);
-          });
-          return { input, label };
-        }
-        updateLogo(element, state) {
-        }
-        load() {
-          this.updateLogo(this.label, this.element.checked);
-        }
-        createWrapper() {
-          let wrapper = document.createElement("div");
-          wrapper.style.position = "relative";
-          wrapper.style.display = "flex";
-          wrapper.appendChild(this.element);
-          wrapper.appendChild(this.label);
-          return wrapper;
-        }
-      }
-      function createSmallThemeGenerationContainer() {
-        let container2 = document.createElement("div");
-        container2.classList.add("theme-generation-sub-container");
-        return container2;
-      }
-      let container = document.createElement("div");
-      container.classList.add("theme-controls-container");
-      let brightnessButton = new themeGenerationControl("brightness-control");
-      brightnessButton.updateLogo = (e5, s4) => {
-        let tooltip = e5.parentElement?.querySelector(".smpp-tooltip");
-        if (s4) {
-          if (tooltip) {
-            tooltip.innerHTML = "Dark";
-          }
-          e5.innerHTML = moonSvg;
-        } else {
-          if (tooltip) {
-            tooltip.innerHTML = "Light";
-          }
-          e5.innerHTML = sunSvg;
-        }
-      };
-      let saturationButton = new themeGenerationControl("saturation-control");
-      saturationButton.updateLogo = (e5, s4) => {
-        let tooltip = e5.parentElement?.querySelector(".smpp-tooltip");
-        if (s4) {
-          if (tooltip) {
-            tooltip.innerHTML = "Vibrant";
-          }
-          e5.innerHTML = magicWandSvg;
-        } else {
-          if (tooltip) {
-            tooltip.innerHTML = "Muted";
-          }
-          e5.innerHTML = wandSvg;
-        }
-      };
-      let firstSubContainer = createSmallThemeGenerationContainer();
-      let brightnessButtonWrapper = brightnessButton.createWrapper();
-      brightnessButtonWrapper.appendChild(
-        createHoverTooltip("Brightness", "horizontal")
-      );
-      let saturationButtonWrapper = saturationButton.createWrapper();
-      saturationButtonWrapper.appendChild(
-        createHoverTooltip("Saturation", "horizontal")
-      );
-      firstSubContainer.appendChild(brightnessButtonWrapper);
-      firstSubContainer.appendChild(saturationButtonWrapper);
-      let secondSubContainer = createSmallThemeGenerationContainer();
-      secondSubContainer.appendChild(this.createMakeThemeButton());
-      container.appendChild(firstSubContainer);
-      container.appendChild(secondSubContainer);
-      brightnessButton.load();
-      saturationButton.load();
-      return container;
-    }
-    createColorPickers() {
-      let colorPickerElement = document.createElement("div");
-      colorPickerElement.classList.add("custom-theme-color-picker-container");
-      this.colorPreviews.forEach((preview) => {
-        let colorPreviewWrapper = document.createElement("div");
-        colorPreviewWrapper.classList.add("color-picker-preview-wrapper");
-        let colorPreview = Object.values(preview)[0];
-        if (colorPreview) colorPreviewWrapper.appendChild(colorPreview);
-        let colorName = Object.keys(preview)[0];
-        if (colorName)
-          colorPreviewWrapper.appendChild(
-            createHoverTooltip(
-              this.convertPropertyName(colorName),
-              "vertical"
-            )
-          );
-        colorPickerElement.appendChild(colorPreviewWrapper);
-      });
-      return colorPickerElement;
-    }
-    createFileInputContainer() {
-      let fileInputContainer = document.createElement("div");
-      fileInputContainer.classList.add("file-and-theme-button-container");
-      fileInputContainer.appendChild(this.backgroundImageInput.fullContainer);
-      let divider = document.createElement("div");
-      divider.classList.add("file-input-theme-button-divider");
-      fileInputContainer.appendChild(divider);
-      fileInputContainer.appendChild(this.createOpenThemeMakerButton());
-      return fileInputContainer;
-    }
-    updateThemeGenerator() {
-      if (this.themeGeneratorIsOpen) {
-        this.imagePreviewContainer.classList.add("open");
-      } else {
-        this.imagePreviewContainer.classList.remove("open");
-      }
-    }
-    createOpenThemeMakerButton() {
-      let button = document.createElement("button");
-      button.classList.add("open-theme-editor-button");
-      button.innerHTML = "Auto";
-      button.addEventListener("click", async () => {
-        this.themeGeneratorIsOpen = !this.themeGeneratorIsOpen;
-        this.updateThemeGenerator();
-      });
-      return button;
-    }
-    createImagePreviewContainer() {
-      this.imagePreviewContainer.classList.add("preview-image-container");
-      let imageWrapper = document.createElement("div");
-      imageWrapper.classList.add("preview-image-wrapper");
-      imageWrapper.appendChild(this.backgroundImagePreview);
-      this.imagePreviewContainer.appendChild(imageWrapper);
-      this.imagePreviewContainer.appendChild(
-        this.createThemeGenerationControls()
-      );
-      return this.imagePreviewContainer;
-    }
-    async renderContent() {
-      this.content.classList.add("custom-theme-maker");
-      this.content.appendChild(this.createDisplayNameInput());
-      this.content.appendChild(this.createImagePreviewContainer());
-      this.content.appendChild(this.createFileInputContainer());
-      this.content.appendChild(this.createColorPickers());
-      this.content.appendChild(this.createRemoveButton());
-      await this.updateBackgroundImagePreview();
-      this.load(this.theme);
-      this.element.appendChild(this.content);
-      return this.element;
-    }
-    async load(theme) {
-      this.displayNameInput.value = theme.displayName;
-      this.updateColorPreviews();
-      await this.backgroundImageInput.loadImageData();
-    }
-    onClosed() {
-      document.body.removeChild(this.element);
-      settingsWindow.themeSelector.updateSelectorContent();
-      settingsWindow.loadPage();
-      loadQuickSettings();
-      openSettingsWindow(null);
-    }
-    async onRemoveTheme() {
-      await browser.runtime.sendMessage({
-        action: "removeCustomTheme",
-        id: this.name
-      });
-      await updateTheme("default");
-      await settingsWindow.loadPage(true);
-      await loadQuickSettings();
-      this.hide();
-    }
-  };
 
   // src/widgets/plant.ts
   var plantVersion = 2;
@@ -8858,17 +4523,17 @@ Is it scaring you off?`,
       return plantDiv;
     }
     async createPreview() {
-      let plantPreviewDiv = document.createElement("div");
+      const plantPreviewDiv = document.createElement("div");
       plantPreviewDiv.id = "plantPreviewWidget";
-      let plantData = await browser.runtime.sendMessage({
+      const plantData = await browser.runtime.sendMessage({
         action: "getPlantAppData"
       });
-      let plantTitle = document.createElement("div");
+      const plantTitle = document.createElement("div");
       plantTitle.id = "plant-preview-title";
       plantTitle.innerText = "Plant";
       plantPreviewDiv.appendChild(plantTitle);
-      let plantPreviewImg = document.createElement("div");
-      if (plantData.age == null || plantData.age == 0) {
+      const plantPreviewImg = document.createElement("div");
+      if (plantData.age == null || plantData.age === 0) {
         plantPreviewImg.appendChild(createPlantThePlantVisual());
       } else {
         plantPreviewImg.innerHTML = getPlantHTML(plantData);
@@ -8885,46 +4550,45 @@ Is it scaring you off?`,
     let plantData = await browser.runtime.sendMessage({
       action: "getPlantAppData"
     });
-    let outdated = checkIfOutdated(plantData.plantVersion);
+    const outdated = checkIfOutdated(plantData.plantVersion);
     plantDiv.innerHTML = "";
     if (outdated) {
       plantDiv.appendChild(createUpdatePrompt(plantData));
       return plantDiv;
     }
-    if (plantData.age == 0) {
+    if (plantData.age === 0) {
       plantDiv.appendChild(createPlantThePlantVisual());
       return plantDiv;
     }
     plantData = calculateGrowth(plantData);
-    if (plantData.birthday != null)
-      plantDiv.appendChild(createPlantStreak(plantData));
+    if (plantData.birthday != null) plantDiv.appendChild(createPlantStreak(plantData));
     plantDiv.appendChild(createPlantVisual(plantData));
     plantDiv.appendChild(await createPlantBottomUI(plantData));
     return plantDiv;
   }
   function createPlantVisual(data2) {
-    let plantVisualContainer = document.createElement("div");
+    const plantVisualContainer = document.createElement("div");
     plantVisualContainer.id = "plant_image_container";
     plantVisualContainer.innerHTML = getPlantHTML(data2);
     return plantVisualContainer;
   }
   async function createPlantBottomUI(data2) {
-    let currentTime = /* @__PURE__ */ new Date();
-    let lastWaterTime = new Date(data2.lastWaterTime);
-    let timeSinceLastWater = currentTime - lastWaterTime;
-    let bottomUIContainer = document.createElement("div");
+    const currentTime = /* @__PURE__ */ new Date();
+    const lastWaterTime = new Date(data2.lastWaterTime);
+    const timeSinceLastWater = currentTime - lastWaterTime;
+    const bottomUIContainer = document.createElement("div");
     bottomUIContainer.id = "buttondivforplant";
-    let topUIContainer = document.createElement("div");
+    const topUIContainer = document.createElement("div");
     topUIContainer.id = "top-plant-button-div";
-    let UIContainer = document.createElement("div");
+    const UIContainer = document.createElement("div");
     UIContainer.id = "fullbuttondivforplant";
-    let waterAmountContainer = document.createElement("div");
+    const waterAmountContainer = document.createElement("div");
     waterAmountContainer.id = "glass-container";
-    let waterAmount = document.createElement("div");
+    const waterAmount = document.createElement("div");
     waterAmount.id = "glass-fill";
-    waterAmount.style.height = calculatePercentile(timeSinceLastWater / 1e3) + `%`;
+    waterAmount.style.height = `${calculatePercentile(timeSinceLastWater / 1e3)}%`;
     waterAmountContainer.appendChild(waterAmount);
-    let waterButton = document.createElement("button");
+    const waterButton = document.createElement("button");
     waterButton.id = "watering_button";
     waterButton.innerHTML = waterPlantSvg;
     if (data2.isAlive) {
@@ -8932,21 +4596,21 @@ Is it scaring you off?`,
     } else {
       waterButton.classList.add("disabled");
     }
-    let lastWaterTimeContainer = document.createElement("div");
+    const lastWaterTimeContainer = document.createElement("div");
     lastWaterTimeContainer.id = "time_difference_last_watered";
-    let lastWaterTimeTitle = document.createElement("span");
+    const lastWaterTimeTitle = document.createElement("span");
     lastWaterTimeTitle.id = "water_title";
     lastWaterTimeTitle.innerText = "Watered";
-    let lastWaterTimeElement = document.createElement("span");
+    const lastWaterTimeElement = document.createElement("span");
     lastWaterTimeElement.id = "water_time";
     lastWaterTimeElement.innerText = getTimeInCorrectFormat(timeSinceLastWater);
     lastWaterTimeContainer.appendChild(lastWaterTimeTitle);
     lastWaterTimeContainer.appendChild(lastWaterTimeElement);
     if (!data2.isAlive) {
-      let removeButton = createRemoveButton(false);
+      const removeButton = createRemoveButton(false);
       topUIContainer.appendChild(removeButton);
-    } else if (data2.age == 8) {
-      let removeButton = createRemoveButton(true);
+    } else if (data2.age === 8) {
+      const removeButton = createRemoveButton(true);
       topUIContainer.appendChild(removeButton);
     }
     bottomUIContainer.appendChild(waterAmountContainer);
@@ -8957,30 +4621,30 @@ Is it scaring you off?`,
     return UIContainer;
   }
   async function updatePlantBottomUI(data2) {
-    let currentTime = /* @__PURE__ */ new Date();
-    let lastWaterTime = new Date(data2.lastWaterTime);
-    let timeSinceLastWater = currentTime - lastWaterTime;
-    document.getElementById("glass-fill").style.height = calculatePercentile(timeSinceLastWater / 1e3) + `%`;
+    const currentTime = /* @__PURE__ */ new Date();
+    const lastWaterTime = new Date(data2.lastWaterTime);
+    const timeSinceLastWater = currentTime - lastWaterTime;
+    document.getElementById("glass-fill").style.height = `${calculatePercentile(timeSinceLastWater / 1e3)}%`;
     document.getElementById("water_time").innerText = getTimeInCorrectFormat(timeSinceLastWater);
   }
   function createPlantStreak(data2) {
-    let plantStreak = document.createElement("h2");
+    const plantStreak = document.createElement("h2");
     plantStreak.id = "plant_streak";
-    plantStreak.innerText = `${data2.daysSinceBirthday} ${data2.daysSinceBirthday == 1 ? "Day" : "Days"}`;
+    plantStreak.innerText = `${data2.daysSinceBirthday} ${data2.daysSinceBirthday === 1 ? "Day" : "Days"}`;
     return plantStreak;
   }
   function checkIfOutdated(version) {
-    return Boolean(!version || version != plantVersion);
+    return Boolean(!version || version !== plantVersion);
   }
   function createUpdatePrompt(data2) {
-    let updatePromptContainer = document.createElement("div");
+    const updatePromptContainer = document.createElement("div");
     updatePromptContainer.id = "update-prompt-container";
-    let updatePromptTitle = document.createElement("h1");
+    const updatePromptTitle = document.createElement("h1");
     updatePromptTitle.innerText = `Update Required!`;
-    let updatePromptDescription = document.createElement("p");
+    const updatePromptDescription = document.createElement("p");
     updatePromptDescription.innerHTML = `You have to reset to be up to date 
 Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
-    let resetButton = document.createElement("button");
+    const resetButton = document.createElement("button");
     resetButton.innerText = "Reset Plant";
     resetButton.id = "removeplantButton";
     resetButton.addEventListener("click", resetPlant);
@@ -9002,31 +4666,30 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   }
   function getTimeInCorrectFormat(t5) {
     if (t5 / 60 / 1e3 < 1) return "Now";
-    if (t5 / 60 / 60 / 1e3 < 1) return Math.round(t5 / 60 / 1e3) + "min ago";
-    if (t5 / 60 / 60 / 1e3 / 24 < 1)
-      return Math.round(t5 / 60 / 60 / 1e3) + "h ago";
-    return Math.round(t5 / 60 / 60 / 1e3 / 24) + "d ago";
+    if (t5 / 60 / 60 / 1e3 < 1) return `${Math.round(t5 / 60 / 1e3)}min ago`;
+    if (t5 / 60 / 60 / 1e3 / 24 < 1) return `${Math.round(t5 / 60 / 60 / 1e3)}h ago`;
+    return `${Math.round(t5 / 60 / 60 / 1e3 / 24)}d ago`;
   }
   function createRemoveButton(isAlive) {
-    let removeButtonDiv = document.createElement("div");
+    const removeButtonDiv = document.createElement("div");
     removeButtonDiv.id = "remove-button-div";
-    let removeButtonBottomDiv = document.createElement("div");
+    const removeButtonBottomDiv = document.createElement("div");
     removeButtonBottomDiv.id = "remove-button-bottom-div";
-    let removeButtonTopDiv = document.createElement("div");
+    const removeButtonTopDiv = document.createElement("div");
     removeButtonTopDiv.id = "remove-button-top-div";
-    let removeButton = document.createElement("button");
+    const removeButton = document.createElement("button");
     removeButton.id = "removeplantButton";
     removeButton.innerText = "Remove plant";
-    let removeInfoButton = document.createElement("div");
+    const removeInfoButton = document.createElement("div");
     removeInfoButton.id = "remove_button_info";
     removeInfoButton.innerText = "?";
-    removeInfoButton.addEventListener("mouseover", function() {
+    removeInfoButton.addEventListener("mouseover", () => {
       removeInfo.style.opacity = "1";
     });
-    removeInfoButton.addEventListener("mouseout", function() {
+    removeInfoButton.addEventListener("mouseout", () => {
       removeInfo.style.opacity = "0";
     });
-    let removeInfo = document.createElement("div");
+    const removeInfo = document.createElement("div");
     removeInfo.id = "plant_remove_info_text";
     if (isAlive) {
       removeInfo.innerText = "Your plant is fully grown, remove it to plant a new one (optional)";
@@ -9043,13 +4706,13 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     return removeButtonDiv;
   }
   function displayConfirmButton() {
-    let removeplantButton = document.getElementById("removeplantButton");
+    const removeplantButton = document.getElementById("removeplantButton");
     removeplantButton.innerText = "Are you sure?";
     removeplantButton.classList.add("plantConfirmationButton");
     removeplantButton.addEventListener("click", resetPlant);
   }
   async function userWateredPlant() {
-    let data2 = await browser.runtime.sendMessage({
+    const data2 = await browser.runtime.sendMessage({
       action: "getPlantAppData"
     });
     data2.lastWaterTime = /* @__PURE__ */ new Date();
@@ -9066,12 +4729,12 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     const msIn1Day = 1e3 * 60 * 60 * 24;
     const daysSinceLastGrow = (currentTime - lastGrowTime) / msIn1Day;
     const daysSinceLastWater = (currentTime - lastWaterTime) / msIn1Day;
-    if (daysSinceLastGrow >= 2 && data2.age != 8) {
+    if (daysSinceLastGrow >= 2 && data2.age !== 8) {
       data2.age += 1;
       data2.lastGrowTime = currentTime;
     }
     if (data2.age > 8) data2.age = 8;
-    if (daysSinceLastWater > 3 && data2.age != 1) data2.isAlive = false;
+    if (daysSinceLastWater > 3 && data2.age !== 1) data2.isAlive = false;
     if (data2.age > 1 && data2.birthday == null) data2.birthday = currentTime;
     if (data2.birthday != null && data2.isAlive) {
       data2.daysSinceBirthday = Math.round(
@@ -9097,7 +4760,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       "#d8d475",
       "#f5cb04"
     ];
-    let plantData = {
+    const plantData = {
       age: 1,
       lastWaterTime: /* @__PURE__ */ new Date(),
       lastGrowTime: /* @__PURE__ */ new Date(),
@@ -9114,15 +4777,15 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     createPlantWidget(document.getElementById("plantWidget"));
   }
   function createPlantThePlantVisual() {
-    let plantThePlantButton = document.createElement("button");
+    const plantThePlantButton = document.createElement("button");
     plantThePlantButton.classList.add("planttheplantbutton");
     plantThePlantButton.addEventListener("click", plantThePlant);
     plantThePlantButton.innerHTML = plantThePlantSvg;
     return plantThePlantButton;
   }
   function getPlantHTML(data2) {
-    if (Number(data2.age) == 0) {
-      if (Boolean(data2.isAlive)) {
+    if (Number(data2.age) === 0) {
+      if (data2.isAlive) {
         return `<div id="planttheplantbutton">
                 <svg xmlns="http://www.w3.org/2000/svg" id="plant_the_plant_svg" data-name="Laag 2" viewBox="0 0 50.16 37.5">
                     <defs>
@@ -9166,8 +4829,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     return getPlantSvg(data2);
   }
   function getPlantSvg(data2) {
-    let age = Number(data2.age);
-    let isAlive = Boolean(data2.isAlive);
+    const age = Number(data2.age);
+    const isAlive = Boolean(data2.isAlive);
     switch (age) {
       case 0:
         return "";
@@ -9776,10 +5439,10 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     }
     async renderContent() {
       this.gcContent = document.createElement("div");
-      const queryString = getThemeQueryString(currentTheme2);
+      const queryString = getThemeQueryString(currentTheme);
       this.iframe = document.createElement("iframe");
       this.iframe.style = "width:100%; height:100%; border:none";
-      this.iframe.src = GC_DOMAINS[this.beta ? "beta" : "main"] + "/v1?" + queryString + "&glass=" + gcGlass;
+      this.iframe.src = `${GC_DOMAINS[this.beta ? "beta" : "main"]}/v1?${queryString}&glass=${gcGlass}`;
       this.gcContent.appendChild(this.iframe);
       return this.gcContent;
     }
@@ -9787,7 +5450,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   var gcWindow;
   var gcGlass;
   async function openGlobalChat(event, beta = false) {
-    if (gcWindow?.beta != beta) {
+    if (gcWindow?.beta !== beta) {
       recreateGlobalChat();
     }
     if (!gcWindow || !gcWindow.element?.isConnected) {
@@ -9817,9 +5480,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   }
   window.addEventListener("message", async (e5) => {
     if (!Object.values(GC_DOMAINS).includes(e5.origin)) {
-      console.warn(
-        "Got a message but it was not from one of the global chat domains."
-      );
+      console.warn("Got a message but it was not from one of the global chat domains.");
       return;
     }
     let response = { error: "not found" };
@@ -9845,7 +5506,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     };
   }
   async function getPlantV1() {
-    let data2 = await browser.runtime.sendMessage({
+    const data2 = await browser.runtime.sendMessage({
       action: "getPlantAppData"
     });
     if (!data2) {
@@ -9868,6 +5529,4046 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     };
   }
 
+  // src/main-features/settings/quick-settings.ts
+  var CompactThemeOption = class {
+    element = document.createElement("div");
+    name;
+    currentTheme;
+    constructor(name2, theme) {
+      this.name = name2;
+      this.currentTheme = theme;
+    }
+    createText() {
+      const text = document.createElement("div");
+      text.classList.add("compact-theme-option-text");
+      text.innerText = this.currentTheme.displayName;
+      return text;
+    }
+    render() {
+      this.element.innerHTML = "";
+      this.element.classList.add("compact-theme-option");
+      this.element.dataset.name = this.name;
+      this.element.addEventListener("click", () => this.click());
+      this.element.appendChild(this.createText());
+      this.element.appendChild(this.createImageContainer());
+      this.update();
+      return this.element;
+    }
+    createImageContainer() {
+      const imageContainer = document.createElement("div");
+      imageContainer.classList.add("compact-theme-option-image-container");
+      return imageContainer;
+    }
+    async updateImage(forceReload = false) {
+      if (this.name === currentThemeName || forceReload) {
+        const imageURL = await getImageURL(
+          this.name,
+          async () => {
+            return await getExtensionImage(`theme-backgrounds/compressed/${this.name}.jpg`);
+          },
+          true
+        );
+        this.element.style.setProperty("--background-image-local", `url(${imageURL.url})`);
+      }
+    }
+    updateElement() {
+      Object.keys(this.currentTheme.cssProperties).forEach((key) => {
+        this.element.style.setProperty(
+          `${key}-local`,
+          this.currentTheme.cssProperties[key]
+        );
+      });
+    }
+    async click() {
+      await updateTheme(this.name);
+      await this.onClick();
+      this.element.classList.add("is-selected");
+    }
+    async onClick() {
+    }
+    async updateSelection() {
+      if (this.name === currentThemeName) {
+        this.element.classList.add("is-selected");
+        this.updateImage(true);
+      } else {
+        this.element.classList.remove("is-selected");
+        this.element.style.setProperty("--background-image-local", `url()`);
+      }
+    }
+    async update() {
+      this.currentTheme = await getTheme(this.name);
+      this.updateSelection();
+      this.updateElement();
+    }
+  };
+  var CompactThemeSelector = class {
+    element = document.createElement("div");
+    input = document.createElement("div");
+    selector = document.createElement("div");
+    selectorIsOpen = false;
+    themeOptions = [];
+    async createThemeOption(name2, theme) {
+      const option = new CompactThemeOption(name2, theme);
+      option.onClick = async () => {
+        this.updateInput();
+        if (settingsWindow) {
+          await settingsWindow.loadPage();
+        }
+        this.themeOptions.forEach((option2) => {
+          option2.updateSelection();
+        });
+      };
+      this.themeOptions.push(option);
+      return option;
+    }
+    async createThemeOptions(themes2) {
+      Object.entries(themes2).forEach((theme) => {
+        this.createThemeOption(theme[0], theme[1]);
+      });
+    }
+    async renderThemeOptions() {
+      for (let i5 = 1; i5 <= this.themeOptions.length; i5++) {
+        const option = this.themeOptions[i5 - 1];
+        if (!option) break;
+        option.render();
+        this.selector.style.height = `${this.calculateHeight(i5)}px`;
+        this.selector.appendChild(option.element);
+        if (document.body.classList.contains("enableAnimations")) await delay(20);
+      }
+    }
+    async updateThemeOptions() {
+      const themes2 = await browser.runtime.sendMessage({
+        action: "getThemes",
+        categories: ["quickSettings"],
+        includeHidden: true
+      });
+      const themeOptionNames = this.themeOptions.map((option) => {
+        return option.name;
+      });
+      const themeNames = Object.keys(themes2);
+      const missingThemeOptionNames = themeNames.filter((name2) => {
+        return !themeOptionNames.includes(name2);
+      });
+      missingThemeOptionNames.forEach(async (name2) => {
+        if (!themes2[name2]) {
+          return;
+        }
+        const option = await this.createThemeOption(name2, themes2[name2]);
+        option.render();
+        this.selector.appendChild(option.element);
+      });
+      const extraThemeOptionNames = themeOptionNames.filter((name2) => {
+        return !themeNames.includes(name2);
+      });
+      this.themeOptions.forEach((option) => {
+        if (extraThemeOptionNames.includes(option.name)) {
+          option.element.remove();
+        }
+      });
+      this.themeOptions = this.themeOptions.filter((option) => {
+        return !extraThemeOptionNames.includes(option.name);
+      });
+      this.themeOptions.forEach((option) => {
+        option.updateSelection();
+      });
+    }
+    createInput() {
+      this.input.classList.add("theme-selector-input");
+      this.updateInput();
+    }
+    async updateInput() {
+      const currentOption = new CompactThemeOption(
+        currentThemeName,
+        await getTheme(currentThemeName)
+      );
+      currentOption.onClick = async () => {
+        this.selectorIsOpen = !this.selectorIsOpen;
+        this.updateSelectorStatus();
+      };
+      currentOption.render();
+      currentOption.element.classList.add("is-selected");
+      this.input.innerHTML = "";
+      this.input.appendChild(currentOption.element);
+    }
+    async updateSelectorStatus() {
+      if (this.selectorIsOpen) {
+        this.selector.innerHTML = "";
+        this.selector.classList.add("visible");
+        this.selector.style.overflowY = "hidden";
+        await this.renderThemeOptions();
+        await delay(500);
+        this.selector.style.overflowY = "auto";
+      } else {
+        this.selector.style.overflowY = "hidden";
+        this.selector.style.height = "0px";
+        this.selector.classList.remove("visible");
+      }
+    }
+    calculateHeight(themeOptionsCount) {
+      const TOP_MARGIN = 7;
+      const CONTENT_HEIGHT = themeOptionsCount * (36 + 3);
+      return TOP_MARGIN + CONTENT_HEIGHT;
+    }
+    async render() {
+      this.element.classList.add("compact-theme-selector");
+      const themes2 = await browser.runtime.sendMessage({
+        action: "getThemes",
+        categories: ["quickSettings"],
+        includeHidden: true
+      });
+      this.themeOptions = [];
+      this.createThemeOptions(themes2);
+      this.updateThemeOptions();
+      this.createInput();
+      document.addEventListener("click", (e5) => {
+        if (e5.target instanceof HTMLElement) {
+          if (e5.target === this.input || this.input.contains(e5.target)) return;
+          this.selectorIsOpen = false;
+          this.updateSelectorStatus();
+        }
+      });
+      this.element.appendChild(this.input);
+      this.element.appendChild(this.selector);
+      this.selector.classList.add("compact-theme-options");
+      return this.element;
+    }
+  };
+  var compactThemeSelector = new CompactThemeSelector();
+  var quickSettingsWindowIsHidden = true;
+  var quickSettingsBackgroundImageSelector = new ImageSelector("backgroundImage", true);
+  async function storeQuickSettings() {
+    const oldData = await browser.runtime.sendMessage({
+      action: "getSettingsData"
+    });
+    const data2 = structuredClone(oldData);
+    const backgroundBlurAmountSlider = document.getElementById(
+      "background-blur-amount-slider"
+    );
+    if (backgroundBlurAmountSlider) {
+      data2.appearance.background.blur = Number(backgroundBlurAmountSlider.value);
+    }
+    const performanceModeToggle = document.getElementById(
+      "performance-mode-toggle"
+    );
+    if (performanceModeToggle) {
+      data2.other.performanceMode = performanceModeToggle.checked;
+    }
+    await browser.runtime.sendMessage({ action: "setSettingsData", data: data2 });
+    await loadQuickSettings();
+    if (settingsWindow) {
+      await settingsWindow.loadPage();
+    }
+    console.log("Successfull stored quick settings:\n", data2);
+    await apply();
+  }
+  async function loadQuickSettings() {
+    const data2 = await browser.runtime.sendMessage({
+      action: "getSettingsData"
+    });
+    quickSettingsBackgroundImageSelector.id = data2.appearance.theme;
+    quickSettingsBackgroundImageSelector.loadImageData();
+    const backgroundBlurAmountSlider = document.getElementById(
+      "background-blur-amount-slider"
+    );
+    if (backgroundBlurAmountSlider) {
+      backgroundBlurAmountSlider.value = data2.appearance.background.blur;
+    }
+    const performanceModeToggle = document.getElementById(
+      "performance-mode-toggle"
+    );
+    if (performanceModeToggle) {
+      performanceModeToggle.checked = data2.other.performanceMode;
+    }
+    const performanceModeInfo = document.getElementById("performance-mode-info");
+    if (performanceModeInfo) {
+      performanceModeInfo.innerHTML = `Toggle performance mode ${data2.other.performanceMode ? "<span class='green-underline'>Enabled</span>" : "<span class='red-underline'>Disabled</span>"}`;
+    }
+    await compactThemeSelector.updateInput();
+    await compactThemeSelector.updateThemeOptions();
+  }
+  function toggleQuickSettings() {
+    const win = document.getElementById("quickSettings");
+    if (win && !quickSettingsWindowIsHidden) {
+      closeQuickSettings();
+    } else {
+      openQuickSettings();
+    }
+  }
+  async function openQuickSettings() {
+    const win = document.getElementById("quickSettings");
+    if (!win) return;
+    win.classList.remove("qs-hidden");
+    await loadQuickSettings();
+    quickSettingsWindowIsHidden = false;
+  }
+  function closeQuickSettings() {
+    const win = document.getElementById("quickSettings");
+    if (win) {
+      win.classList.add("qs-hidden");
+    }
+    quickSettingsWindowIsHidden = true;
+  }
+  async function createQuickSettingsHTML(parent) {
+    const performanceModeTooltipLabel = document.createElement("label");
+    performanceModeTooltipLabel.className = "performanceModeTooltipLabel";
+    performanceModeTooltipLabel.id = "performanceModeTooltipLabel";
+    const performanceModeTooltip = document.createElement("input");
+    performanceModeTooltip.type = "checkbox";
+    performanceModeTooltip.id = "performance-mode-toggle";
+    performanceModeTooltipLabel.appendChild(performanceModeTooltip);
+    performanceModeTooltipLabel.innerHTML += performanceModeSvg;
+    const performanceModeInfo = document.createElement("span");
+    performanceModeInfo.id = "performance-mode-info";
+    const themeHeading = document.createElement("h3");
+    themeHeading.className = "quick-settings-title";
+    themeHeading.textContent = "Theme:";
+    const wallpaperTopContainer = document.createElement("div");
+    const wallpaperHeading = document.createElement("h3");
+    wallpaperHeading.className = "quick-settings-title";
+    wallpaperHeading.textContent = "Wallpaper:";
+    const wallpaperContainer = document.createElement("div");
+    wallpaperContainer.className = "wallpaper-quick-settings-container";
+    const blurSliderContainer = document.createElement("div");
+    blurSliderContainer.className = "blur-slider-container";
+    const blurSlider = document.createElement("input");
+    blurSlider.type = "range";
+    blurSlider.min = "0";
+    blurSlider.max = "10";
+    blurSlider.value = "0";
+    blurSlider.className = "main-slider";
+    blurSlider.id = "background-blur-amount-slider";
+    const backgroundBlurLabel = document.createElement("span");
+    backgroundBlurLabel.className = "color-label";
+    backgroundBlurLabel.id = "blurPlaats";
+    backgroundBlurLabel.textContent = "blur";
+    blurSliderContainer.appendChild(blurSlider);
+    blurSliderContainer.appendChild(backgroundBlurLabel);
+    wallpaperContainer.appendChild(quickSettingsBackgroundImageSelector.fullContainer);
+    wallpaperContainer.appendChild(blurSliderContainer);
+    wallpaperTopContainer.appendChild(wallpaperHeading);
+    wallpaperTopContainer.appendChild(wallpaperContainer);
+    const extraSettingsButton = document.createElement("button");
+    extraSettingsButton.id = "extraSettingsButton";
+    extraSettingsButton.innerHTML += "More Settings";
+    extraSettingsButton.innerHTML += settingsIconSvg;
+    extraSettingsButton.addEventListener("click", (e5) => openSettingsWindow(e5));
+    const themeContainer = document.createElement("div");
+    themeContainer.classList.add("quick-settings-theme-container");
+    await compactThemeSelector.render();
+    themeContainer.appendChild(themeHeading);
+    themeContainer.appendChild(compactThemeSelector.element);
+    parent.appendChild(performanceModeTooltipLabel);
+    parent.appendChild(themeContainer);
+    parent.appendChild(wallpaperTopContainer);
+    parent.appendChild(performanceModeInfo);
+    parent.appendChild(extraSettingsButton);
+    return parent;
+  }
+  async function createQuickSettings() {
+    let quickSettingsWindow = document.createElement("div");
+    quickSettingsWindow.id = "quickSettings";
+    quickSettingsWindow.addEventListener("change", storeQuickSettings);
+    quickSettingsBackgroundImageSelector.onStore = () => {
+      storeQuickSettings();
+    };
+    quickSettingsWindow = await createQuickSettingsHTML(quickSettingsWindow);
+    const quickSettingsButton = document.getElementById("quickSettingsButton");
+    if (quickSettingsButton) {
+      quickSettingsButton.insertAdjacentElement("afterend", quickSettingsWindow);
+    }
+    const tooltipLabel = document.getElementById("performanceModeTooltipLabel");
+    const tooltipInfo = document.getElementById("performance-mode-info");
+    if (tooltipLabel && tooltipInfo) {
+      tooltipLabel.addEventListener("mouseover", () => {
+        tooltipInfo.style.opacity = "1";
+      });
+      tooltipLabel.addEventListener("mouseout", () => {
+        tooltipInfo.style.opacity = "0";
+      });
+    }
+    document.addEventListener("click", (e5) => {
+      if (quickSettingsWindowIsHidden) return;
+      const target = e5.target;
+      if (!target) return;
+      if (target.id === "extraSettingsButton") {
+        closeQuickSettings();
+        return;
+      }
+      if (target.id === "quickSettings" || quickSettingsWindow.contains(target) || target.id === "quickSettingsButton") {
+        return;
+      }
+      closeQuickSettings();
+    });
+    closeQuickSettings();
+  }
+  function createQuickSettingsButton() {
+    const quickSettingsButtonWrapper = document.createElement("div");
+    quickSettingsButtonWrapper.id = "quickSettingsButtonWrapper";
+    quickSettingsButtonWrapper.classList.add("smpp-button");
+    quickSettingsButtonWrapper.classList.add("topnav__btn-wrapper");
+    const quickSettingsButton = document.createElement("button");
+    quickSettingsButton.id = "quickSettingsButton";
+    quickSettingsButton.classList.add("topnav__btn");
+    quickSettingsButton.innerText = "Settings";
+    quickSettingsButton.addEventListener("click", toggleQuickSettings);
+    quickSettingsButtonWrapper.appendChild(quickSettingsButton);
+    return quickSettingsButtonWrapper;
+  }
+
+  // src/main-features/appearance/background-image.ts
+  async function setBackground(themeName) {
+    function displayBackgroundImage(imageSrc) {
+      document.documentElement.style.setProperty("--background-color", `transparent`);
+      const imgContainer = document.getElementById("smpp-background-image-container") || document.createElement("div");
+      imgContainer.id = "smpp-background-image-container";
+      imgContainer.classList.add("smpp-background-image-container");
+      const img = document.getElementById("smpp-background-image") || document.createElement("img");
+      img.id = "smpp-background-image";
+      img.classList.add("smpp-background-image");
+      if (imageSrc) {
+        img.classList.remove("image-not-available");
+        img.src = imageSrc;
+      } else {
+        img.classList.add("image-not-available");
+        img.src = "";
+      }
+      if (!document.getElementById("smpp-background-image") && !document.getElementById("tinymce")) {
+        document.body.appendChild(imgContainer);
+        imgContainer.appendChild(img);
+      }
+    }
+    const imageURL = await getImageURL(
+      themeName,
+      async () => {
+        return await getExtensionImage(`theme-backgrounds/${themeName}.jpg`);
+      },
+      false
+    );
+    if (await isValidImage(imageURL.url)) {
+      displayBackgroundImage(imageURL.url);
+    } else {
+      displayBackgroundImage(null);
+    }
+  }
+
+  // src/main-features/appearance/themes.ts
+  k([lch_default, mix_default]);
+  var currentThemeName;
+  var currentTheme;
+  async function getTheme(name2) {
+    const theme = await browser.runtime.sendMessage({
+      action: "getTheme",
+      name: name2
+    });
+    return theme;
+  }
+  async function setTheme(themeName) {
+    const style = document.documentElement.style;
+    currentThemeName = themeName;
+    currentTheme = await getTheme(themeName);
+    Object.entries(currentTheme.cssProperties).forEach(([key, value]) => {
+      style.setProperty(key, value);
+    });
+    await widgetSystemNotifyThemeChange();
+    recreateGlobalChat();
+  }
+  function updateCurrentThemeName(themeName) {
+    currentThemeName = themeName;
+  }
+  function getThemeQueryString(theme) {
+    let query = "";
+    Object.entries(theme.cssProperties).forEach(([key, value]) => {
+      query += `&${key.slice(2)}=${value.startsWith("#") ? value.substring(1) : value}`;
+    });
+    return query;
+  }
+  function getThemeVar(varName) {
+    return currentTheme.cssProperties[varName];
+  }
+  var ColorCursor = class {
+    element = document.createElement("div");
+    visibleElement = document.createElement("div");
+    xPos = 50;
+    yPos = 50;
+    enableX;
+    enableY;
+    parentContainer;
+    constructor(parentContainer, enableX = true, enableY = true) {
+      this.parentContainer = parentContainer;
+      this.enableX = enableX;
+      this.enableY = enableY;
+      this.element.appendChild(this.visibleElement);
+      let isDragging = false;
+      this.parentContainer.addEventListener("mousedown", (e5) => {
+        isDragging = true;
+        this.handlePointerEvent(e5);
+      });
+      document.addEventListener("mouseup", () => {
+        isDragging = false;
+      });
+      document.addEventListener("mousemove", (e5) => {
+        if (isDragging) {
+          this.handlePointerEvent(e5);
+        }
+      });
+      this.updateCursorPosition();
+    }
+    handlePointerEvent(e5) {
+      const rect = this.parentContainer.getBoundingClientRect();
+      const x3 = e5.clientX - rect.left;
+      const y3 = e5.clientY - rect.top;
+      const xPercent = x3 / rect.width * 100;
+      const yPercent = y3 / rect.height * 100;
+      if (this.enableX) this.xPos = Math.max(0, Math.min(100, xPercent));
+      if (this.enableY) this.yPos = Math.max(0, Math.min(100, yPercent));
+      this.updateCursorPosition();
+      this.onDrag();
+    }
+    // Overwrite this if needed
+    onDrag() {
+    }
+    updateCursorPosition() {
+      this.element.style.left = `${this.xPos}%`;
+      this.element.style.top = `${this.yPos}%`;
+    }
+  };
+  var ColorPicker = class {
+    currentColor = w("#72b6c0ff");
+    width;
+    element = document.createElement("div");
+    hueContainer = document.createElement("div");
+    fieldContainer = document.createElement("div");
+    hueCursor;
+    fieldCursor;
+    constructor(width = "20rem") {
+      this.width = width;
+      this.hueCursor = this.createHueCursor();
+      this.hueCursor.onDrag = async () => {
+        await this.readColor();
+      };
+      this.fieldCursor = this.createFieldCursor();
+      this.fieldCursor.onDrag = async () => {
+        await this.readColor();
+      };
+    }
+    readColorInput() {
+      const hexInput = this.element.querySelector("input");
+      if (hexInput) {
+        if (isValidHexColor(hexInput.value)) {
+          this.currentColor = w(hexInput.value);
+        } else {
+          hexInput.value = this.currentColor.toHex();
+        }
+      }
+      this.updateFields();
+      this.updateColorPicker();
+    }
+    async readColor() {
+      const hue = this.hueCursor.xPos * 3.6;
+      const saturation = this.fieldCursor.xPos;
+      const value = 100 - this.fieldCursor.yPos;
+      this.currentColor = w({ h: hue, s: saturation, v: value });
+      await this.updateColorPicker();
+    }
+    async updateColorPicker() {
+      const maxSatColor = w({
+        h: this.hueCursor.xPos * 3.6,
+        s: 100,
+        v: 100
+      });
+      this.element.style.setProperty("--max-sat", maxSatColor.toHex());
+      this.element.style.setProperty("--current-color", this.currentColor.toHex());
+      const hexInput = this.element.querySelector("input");
+      if (hexInput) {
+        hexInput.value = this.currentColor.toHex();
+      }
+      await this.onChange();
+    }
+    createFieldCursor() {
+      const fieldCursor = new ColorCursor(this.fieldContainer);
+      fieldCursor.element.classList.add("color-cursor-wrapper");
+      fieldCursor.visibleElement.classList.add("color-cursor");
+      return fieldCursor;
+    }
+    createHueCursor() {
+      const hueCursor = new ColorCursor(this.hueContainer, true, false);
+      hueCursor.element.classList.add("color-cursor-wrapper");
+      hueCursor.visibleElement.classList.add("color-cursor");
+      return hueCursor;
+    }
+    createHueContainer() {
+      this.hueContainer.classList.add("hue-picker");
+      this.hueContainer.appendChild(this.hueCursor.element);
+      return this.hueContainer;
+    }
+    createFieldContainer() {
+      this.fieldContainer.classList.add("color-picker-field");
+      const horizontalContainer = document.createElement("div");
+      horizontalContainer.style.background = `linear-gradient(to left, var(--max-sat) 0%, rgba(255, 255, 255, 1) 100%)`;
+      const verticalContainer = document.createElement("div");
+      verticalContainer.style.background = "linear-gradient(to top, black, transparent)";
+      this.fieldContainer.appendChild(horizontalContainer);
+      this.fieldContainer.append(verticalContainer);
+      this.fieldContainer.appendChild(this.fieldCursor.element);
+      return this.fieldContainer;
+    }
+    copyHexToClipBoard() {
+      navigator.clipboard.writeText(this.currentColor.toHex());
+    }
+    createBottomContainer() {
+      const createCopyButton = () => {
+        const button = document.createElement("button");
+        button.innerHTML = copySvg;
+        button.classList.add("copy-hex-button");
+        button.addEventListener("click", () => {
+          this.copyHexToClipBoard();
+          const svg = button.querySelector("svg");
+          if (!svg) return;
+          svg.style.fill = "var(--color-text)";
+          button.innerHTML = doneSvg;
+          setTimeout(() => {
+            svg.style.fill = "none";
+            button.innerHTML = copySvg;
+          }, 1e3);
+        });
+        return button;
+      };
+      const createHexInput = () => {
+        const hexInput = document.createElement("input");
+        hexInput.classList.add("smpp-text-input");
+        hexInput.addEventListener("change", () => {
+          this.readColorInput();
+        });
+        hexInput.type = "text";
+        hexInput.value = this.currentColor.toHex();
+        return hexInput;
+      };
+      function createColorPreview() {
+        const colorPreview = document.createElement("div");
+        colorPreview.classList.add("color-preview");
+        return colorPreview;
+      }
+      const bottomContainer = document.createElement("div");
+      bottomContainer.classList.add("smpp-color-picker-bottom-container");
+      bottomContainer.appendChild(createColorPreview());
+      bottomContainer.appendChild(createHexInput());
+      bottomContainer.appendChild(createCopyButton());
+      return bottomContainer;
+    }
+    updateFields() {
+      this.hueCursor.xPos = this.currentColor.hue() / 3.6;
+      this.fieldCursor.xPos = this.currentColor.toHsv().s;
+      this.fieldCursor.yPos = 100 - this.currentColor.toHsv().v;
+      this.hueCursor.updateCursorPosition();
+      this.fieldCursor.updateCursorPosition();
+    }
+    render() {
+      this.element.classList.add("smpp-color-picker");
+      this.element.style.width = this.width;
+      this.element.appendChild(this.createFieldContainer());
+      this.element.appendChild(this.createHueContainer());
+      this.element.appendChild(this.createBottomContainer());
+      this.updateFields();
+      this.updateColorPicker();
+      return this.element;
+    }
+    async onChange() {
+    }
+  };
+  var Tile = class {
+    element = document.createElement("div");
+    async render() {
+      this.element.classList.add("theme-tile");
+      this.element.style.height = "104px";
+      this.element.style.width = "168px";
+      this.element.addEventListener("click", async (e5) => {
+        await this.onClick(e5);
+      });
+      this.updateSelection();
+      await this.createContent();
+      return this.element;
+    }
+    async updateImage(_currentTheme, _forceReload = false) {
+    }
+    // Overide this in the implementation
+    updateSelection() {
+    }
+    // Overide in de implementation
+    async onClick(_e) {
+    }
+    // Overide this in the implementation
+    async createContent() {
+    }
+  };
+  var ThemeTile = class extends Tile {
+    name;
+    isFavorite;
+    isCustom;
+    currentCategory;
+    titleElement = document.createElement("span");
+    constructor(name2, currentCategory, isFavorite, isCustom = false) {
+      super();
+      this.name = name2;
+      this.currentCategory = currentCategory;
+      this.isFavorite = isFavorite;
+      this.isCustom = isCustom;
+    }
+    async updateCSS() {
+      const theme = await getTheme(this.name);
+      Object.keys(theme.cssProperties).forEach((key) => {
+        this.element.style.setProperty(`${key}-local`, theme.cssProperties[key]);
+      });
+    }
+    async updateTitle() {
+      const theme = await getTheme(this.name);
+      this.titleElement.innerText = theme.displayName;
+    }
+    async createContent() {
+      this.element.appendChild(this.createImageContainer());
+      this.element.appendChild(this.getBottomContainer());
+      await this.updateTitle();
+      await this.updateCSS();
+    }
+    getBottomContainer() {
+      const bottomContainer = document.createElement("div");
+      bottomContainer.classList.add("theme-tile-bottom");
+      this.titleElement.classList.add("theme-tile-title");
+      bottomContainer.appendChild(this.titleElement);
+      const buttonContainer = document.createElement("div");
+      buttonContainer.classList.add("theme-button-container");
+      const duplicateButton = document.createElement("button");
+      duplicateButton.classList.add("bottom-container-button");
+      duplicateButton.innerHTML = copySvg;
+      duplicateButton.addEventListener("click", async () => {
+        await this.duplicate();
+      });
+      const favoriteButton = document.createElement("button");
+      favoriteButton.classList.add("bottom-container-button");
+      favoriteButton.innerHTML = heartSvg;
+      favoriteButton.addEventListener("click", async () => {
+        await this.favoriteToggle();
+      });
+      if (this.isFavorite) this.element.classList.add("is-favorite");
+      const shareButton = document.createElement("button");
+      shareButton.classList.add("bottom-container-button");
+      shareButton.innerHTML = shareSvg;
+      shareButton.addEventListener("click", async () => {
+        await this.share();
+      });
+      buttonContainer.appendChild(shareButton);
+      buttonContainer.appendChild(duplicateButton);
+      buttonContainer.appendChild(favoriteButton);
+      if (this.isCustom) {
+        const editButton = document.createElement("button");
+        editButton.classList.add("bottom-container-button");
+        editButton.innerHTML = editIconSvg;
+        editButton.addEventListener("click", async () => {
+          await this.edit();
+        });
+        buttonContainer.appendChild(editButton);
+      }
+      bottomContainer.appendChild(buttonContainer);
+      return bottomContainer;
+    }
+    createImageContainer() {
+      const imageContainer = document.createElement("div");
+      imageContainer.classList.add("image-container");
+      return imageContainer;
+    }
+    updateSelection() {
+      if (currentThemeName === this.name) {
+        this.element.classList.add("is-selected");
+      } else {
+        this.element.classList.remove("is-selected");
+      }
+    }
+    async updateImage(currentTheme2, forceReload = false) {
+      if (this.name === currentTheme2 || forceReload) {
+        const imageURL = await getImageURL(
+          this.name,
+          async () => {
+            return await getExtensionImage(`theme-backgrounds/compressed/${this.name}.jpg`);
+          },
+          true
+        );
+        if (await isValidImage(await imageURL.url)) {
+          this.element.style.setProperty("--background-image-local", `url(${await imageURL.url})`);
+        } else {
+          this.element.style.setProperty("--background-image-local", `url()`);
+        }
+        if (isFirefox && imageURL.type === "file") {
+          const imageContainer = this.element.querySelector(".image-container");
+          if (!imageContainer) return;
+          const stupidImageContainer = document.createElement("img");
+          stupidImageContainer.classList.add("image-container", "firefox-container");
+          if (await isValidImage(imageURL.url)) {
+            stupidImageContainer.src = imageURL.url;
+          } else {
+            stupidImageContainer.src = "";
+          }
+          const bottomContainer = this.element.querySelector(".theme-tile-bottom");
+          if (!bottomContainer) return;
+          imageContainer.remove();
+          this.element.prepend(stupidImageContainer);
+        } else if (isFirefox) {
+          const firefoxImageContainer = this.element.querySelector(".firefox-container");
+          if (firefoxImageContainer) {
+            firefoxImageContainer.remove();
+            this.element.prepend(this.createImageContainer());
+            await this.updateImage(currentTheme2, forceReload);
+          }
+        }
+      }
+    }
+    async onClick(e5) {
+      if (e5.target instanceof HTMLElement) {
+        const target = e5.target;
+        if (target.classList.contains("theme-tile-title") || target.classList.contains("image-container") || target.classList.contains("theme-tile")) {
+          await updateTheme(this.name);
+          await settingsWindow.loadPage(false);
+          await loadQuickSettings();
+        }
+      }
+    }
+    async favoriteToggle() {
+      this.isFavorite = !this.isFavorite;
+      const data2 = await browser.runtime.sendMessage({
+        action: "getSettingsData"
+      });
+      const updateFavorite = async () => {
+        await browser.runtime.sendMessage({
+          action: "setSetting",
+          name: "appearance.quickSettingsThemes",
+          data: quickSettingsThemes
+        });
+        this.element.classList.toggle("is-favorite");
+        this.onFavoriteToggle();
+      };
+      let quickSettingsThemes = data2.appearance.quickSettingsThemes;
+      if (this.isFavorite) {
+        quickSettingsThemes.push(this.name);
+        await updateFavorite();
+      } else {
+        quickSettingsThemes = quickSettingsThemes.filter((name2) => {
+          return name2 !== this.name;
+        });
+        if (this.currentCategory === "quickSettings") {
+          this.element.addEventListener("animationend", updateFavorite);
+          this.element.classList.add("being-removed");
+        } else {
+          await updateFavorite();
+        }
+      }
+    }
+    async edit() {
+      await updateTheme(this.name);
+      Promise.all([settingsWindow.loadPage(false), loadQuickSettings()]);
+      startCustomThemeCreator(await getTheme(this.name), this.name);
+    }
+    async duplicate() {
+      const newThemeName = await browser.runtime.sendMessage({
+        action: "saveCustomTheme",
+        data: await getTheme(this.name)
+      });
+      const result = await browser.runtime.sendMessage({
+        action: "getImage",
+        id: this.name
+      });
+      const compressedResult = await browser.runtime.sendMessage({
+        action: "getImage",
+        id: `compressed-${this.name}`
+      });
+      if (result.metaData.type === "default") {
+        const base64 = await convertLinkToBase64(
+          await getExtensionImage(`theme-backgrounds/${this.name}.jpg`)
+        );
+        if (base64) result.imageData = base64;
+        const compressedBase64 = await convertLinkToBase64(
+          await getExtensionImage(`theme-backgrounds/compressed/${this.name}.jpg`)
+        );
+        if (compressedBase64) compressedResult.imageData = compressedBase64;
+        if (!this.isCustom) {
+          result.metaData.type = "file";
+          result.metaData.link = `${this.name}.jpg`;
+          compressedResult.metaData.type = "file";
+          compressedResult.metaData.link = `${this.name}.jpg`;
+        }
+      }
+      if (await isValidImage(result.imageData)) {
+        await browser.runtime.sendMessage({
+          action: "setImage",
+          id: newThemeName,
+          data: result
+        });
+      }
+      if (await isValidImage(compressedResult.imageData)) {
+        await browser.runtime.sendMessage({
+          action: "setImage",
+          id: `compressed-${newThemeName}`,
+          data: compressedResult
+        });
+      }
+      this.onDuplicate(newThemeName);
+      new Toast("Theme succesfully duplicated", "succes").render();
+    }
+    async share() {
+      const shareDialog = new Dialog("themeSharing", true);
+      const linkOutput = document.createElement("a");
+      linkOutput.classList.add("link-output");
+      linkOutput.target = "_blank";
+      const copyToClipboardButton = document.createElement("button");
+      copyToClipboardButton.classList.add("copy-hex-button");
+      copyToClipboardButton.classList.add("copy-link-button");
+      const copyToClipboard = () => {
+        if (shareUrl) {
+          navigator.clipboard.writeText(shareUrl);
+          const svg = copyToClipboardButton.querySelector("svg");
+          if (!svg) return;
+          svg.style.fill = "var(--color-text)";
+          copyToClipboardButton.innerHTML = doneSvg;
+          setTimeout(() => {
+            svg.style.fill = "none";
+            copyToClipboardButton.innerHTML = copySvg;
+          }, 1e3);
+          new Toast("Theme link copied to clipboard", "succes").render();
+        } else {
+          new Toast("Theme link is not ready yet", "error").render();
+        }
+      };
+      copyToClipboardButton.addEventListener("click", copyToClipboard);
+      copyToClipboardButton.innerHTML = loadingSpinnerSvg;
+      let shareUrl = null;
+      shareDialog.renderContent = async () => {
+        const element = document.createElement("div");
+        element.classList.add("share-dialog-content");
+        const title = document.createElement("h1");
+        title.innerText = (await getTheme(this.name)).displayName;
+        const subTitle = document.createElement("h2");
+        subTitle.innerText = "Theme sharing";
+        linkOutput.innerText = "Loading...";
+        const copyContainer = document.createElement("div");
+        copyContainer.classList.add("copy-container");
+        const tile = document.createElement("div");
+        tile.classList.add("sharing-tile");
+        const theme = await getTheme(this.name);
+        Object.keys(theme.cssProperties).forEach((key) => {
+          element.style.setProperty(`${key}-local`, theme.cssProperties[key]);
+        });
+        function getEditableValues(cssProperties) {
+          const nonEditableValues = [
+            "--color-homepage-sidebars-bg",
+            "--darken-background",
+            "--color-splashtext"
+          ];
+          const editableValues = Object.keys(cssProperties).filter((property) => {
+            return !nonEditableValues.includes(property);
+          });
+          return editableValues;
+        }
+        function createColorPreview(name2) {
+          const colorPreview = document.createElement("div");
+          colorPreview.classList.add("color-preview-bubble");
+          if (theme.cssProperties[name2]) {
+            colorPreview.style.setProperty("--current-color", theme.cssProperties[name2]);
+          }
+          return colorPreview;
+        }
+        function generateColorPreviews(editableValues) {
+          const colorPreviews = editableValues.map((colorName) => {
+            const colorPreview = {};
+            colorPreview[colorName] = createColorPreview(colorName);
+            return colorPreview;
+          });
+          return colorPreviews;
+        }
+        const imageContainer = document.createElement("div");
+        imageContainer.classList.add("sharing-image-container");
+        const imageURL = await getImageURL(
+          this.name,
+          async () => {
+            return await getExtensionImage(`theme-backgrounds/compressed/${this.name}.jpg`);
+          },
+          false
+        );
+        const image = document.createElement("img");
+        image.classList.add("sharing-image");
+        image.src = imageURL.url;
+        imageContainer.appendChild(image);
+        tile.appendChild(imageContainer);
+        const colorPreviewsContainer = document.createElement("div");
+        colorPreviewsContainer.classList.add("sharing-color-previews");
+        Object.values(generateColorPreviews(getEditableValues(theme.cssProperties))).forEach(
+          (preview) => {
+            const actualPreview = Object.values(preview)[0];
+            if (actualPreview) colorPreviewsContainer.appendChild(actualPreview);
+          }
+        );
+        tile.appendChild(colorPreviewsContainer);
+        copyContainer.appendChild(linkOutput);
+        copyContainer.appendChild(copyToClipboardButton);
+        element.appendChild(title);
+        element.appendChild(subTitle);
+        tile.appendChild(copyContainer);
+        element.appendChild(tile);
+        return element;
+      };
+      await shareDialog.create();
+      shareDialog.show();
+      new Toast("Uploading theme...", "info").render();
+      const resp = await browser.runtime.sendMessage({
+        action: "shareTheme",
+        name: this.name
+      });
+      if (resp.error) {
+        console.error("Failed to share theme", resp.error);
+        new Toast("Failed to share theme", "error").render();
+      } else {
+        shareUrl = resp.shareUrl;
+        console.log(linkOutput);
+        linkOutput.innerText = `${resp.shareUrl.slice(0, 32)}\u2026`;
+        linkOutput.addEventListener("click", copyToClipboard);
+        copyToClipboardButton.innerHTML = copySvg;
+        new Toast("Theme uploaded", "succes").render();
+      }
+      this.onShare();
+    }
+    // Overide in de implementation
+    async onFavoriteToggle() {
+    }
+    // Overide in de implementation
+    async onShare() {
+    }
+    // Overide in de implementation
+    async onDuplicate(_newThemeName) {
+    }
+  };
+  async function updateTheme(name2) {
+    await browser.runtime.sendMessage({
+      action: "setSetting",
+      name: "appearance.theme",
+      data: name2
+    });
+    Promise.all([setTheme(name2), setBackground(name2)]);
+  }
+  var ThemeFolder = class extends Tile {
+    category;
+    constructor(category) {
+      super();
+      this.category = category;
+    }
+    async createContent() {
+      const firstThemeInCategory = await browser.runtime.sendMessage({
+        action: "getFirstThemeInCategory",
+        category: this.category,
+        includeHidden: true
+      });
+      if (!firstThemeInCategory) return;
+      const theme = await browser.runtime.sendMessage({
+        action: "getTheme",
+        name: firstThemeInCategory
+      });
+      Object.keys(theme.cssProperties).forEach((key) => {
+        this.element.style.setProperty(`${key}-local`, theme.cssProperties[key]);
+      });
+      if (this.category === "custom" || this.category === "quickSettings") {
+        this.element.classList.add("use-default-colors");
+      }
+      this.element.style.setProperty("--background-image-local", `url()`);
+      this.element.appendChild(this.createImageContainer());
+      this.element.appendChild(this.createBottomContainer());
+    }
+    createBottomContainer() {
+      const bottomContainer = document.createElement("div");
+      bottomContainer.classList.add("theme-tile-bottom");
+      const title = document.createElement("span");
+      title.innerText = getFancyCategoryName(this.category);
+      if (this.category === "quickSettings") {
+        title.innerText = "Favorites";
+      }
+      title.classList.add("theme-tile-title");
+      bottomContainer.appendChild(title);
+      return bottomContainer;
+    }
+    createImageContainer() {
+      const imageContainer = document.createElement("div");
+      let svg;
+      switch (this.category) {
+        case "quickSettings":
+          svg = heartSvg;
+          break;
+        case "light":
+          svg = sunSvg;
+          break;
+        case "dark":
+          svg = moonSvg;
+          break;
+        case "seasonal":
+          svg = pineSvg;
+          break;
+        case "custom":
+          svg = editIconSvg;
+          break;
+        default:
+          svg = folderSvg;
+          break;
+      }
+      imageContainer.innerHTML = svg;
+      imageContainer.classList.add("image-container");
+      return imageContainer;
+    }
+  };
+  function getFancyCategoryName(name2) {
+    const fancyName = name2.charAt(0).toUpperCase() + name2.slice(1);
+    return fancyName;
+  }
+  var AddCustomTheme = class extends Tile {
+    createImageContainer() {
+      const imageContainer = document.createElement("div");
+      const svg = plusSVG;
+      imageContainer.innerHTML = svg;
+      imageContainer.classList.add("image-container");
+      return imageContainer;
+    }
+    createBottomContainer() {
+      const bottomContainer = document.createElement("div");
+      bottomContainer.classList.add("theme-tile-bottom");
+      const title = document.createElement("span");
+      title.classList.add("theme-tile-title");
+      title.innerText = "Create theme";
+      bottomContainer.appendChild(title);
+      return bottomContainer;
+    }
+    async onClick() {
+      const newTheme = await browser.runtime.sendMessage({
+        action: "saveCustomTheme",
+        data: await getTheme("defaultCustom")
+      });
+      await settingsWindow.themeSelector.updateSelectorContent();
+      await settingsWindow.loadPage(false);
+      await updateTheme(newTheme);
+      startCustomThemeCreator(await getTheme("defaultCustom"), newTheme);
+    }
+    async createContent() {
+      this.element.classList.add("use-default-colors");
+      this.element.classList.add("create-theme-button");
+      this.element.appendChild(this.createImageContainer());
+      this.element.appendChild(this.createBottomContainer());
+    }
+  };
+  var noThemes = class extends Tile {
+    createImageContainer() {
+      const imageContainer = document.createElement("div");
+      const svg = brokenHeartSvg;
+      imageContainer.innerHTML = svg;
+      imageContainer.classList.add("image-container");
+      return imageContainer;
+    }
+    createBottomContainer() {
+      const bottomContainer = document.createElement("div");
+      bottomContainer.classList.add("theme-tile-bottom");
+      const title = document.createElement("span");
+      title.classList.add("theme-tile-title");
+      title.innerText = "No themes";
+      bottomContainer.appendChild(title);
+      return bottomContainer;
+    }
+    async createContent() {
+      this.element.classList.add("use-default-colors");
+      this.element.classList.add("no-themes");
+      this.element.appendChild(this.createImageContainer());
+      this.element.appendChild(this.createBottomContainer());
+    }
+  };
+  var ThemeSelector = class {
+    element = document.createElement("div");
+    content = document.createElement("div");
+    topContainer = document.createElement("div");
+    currentCategory = "all";
+    currentTiles = [];
+    contentWidth = 0;
+    createTopContainer() {
+      this.topContainer = document.createElement("div");
+      this.topContainer.classList.add("theme-top-container");
+    }
+    render() {
+      this.element.innerHTML = "";
+      this.createTopContainer();
+      this.createContentContainer();
+      window.addEventListener("resize", () => {
+        this.updateSizes();
+        this.updateContentHeight();
+      });
+      this.element.appendChild(this.topContainer);
+      this.renderSelectorContent();
+      return this.element;
+    }
+    async updateImages(forceReload = false) {
+      this.currentTiles.forEach(async (tile) => {
+        await tile.updateImage(currentThemeName, forceReload);
+      });
+    }
+    updateSizes() {
+      this.contentWidth = this.content.getBoundingClientRect().width;
+    }
+    async renderSelectorContent() {
+      this.content.innerHTML = "";
+      this.element.appendChild(this.content);
+      this.updateTopContainer();
+      if (this.currentCategory === "all") {
+        await this.renderFolderTiles();
+      } else {
+        await this.renderThemeTiles();
+      }
+      this.updateSizes();
+      this.updateContentHeight();
+    }
+    // this is used if some of the correct content is already loaded
+    async updateSelectorContent() {
+      if (this.currentCategory === "all") {
+        await this.renderFolderTiles();
+        return;
+      }
+      await this.updateThemeTiles();
+      this.updateImages();
+    }
+    async updateThemeTiles() {
+      const themes2 = await browser.runtime.sendMessage({
+        action: "getThemes",
+        categories: [this.currentCategory],
+        includeHidden: true
+      });
+      const data2 = await browser.runtime.sendMessage({
+        action: "getSettingsData"
+      });
+      const visibleThemeTiles = this.content.querySelectorAll(".theme-tile");
+      const visibleThemeTilesArray = [];
+      visibleThemeTiles.forEach((element) => {
+        visibleThemeTilesArray.push(element);
+      });
+      const visibleThemeNames = visibleThemeTilesArray.map((element) => {
+        return element.dataset.name;
+      }).filter((name2) => {
+        return Boolean(name2);
+      });
+      const correctThemeNames = Object.keys(themes2).map((themeName) => {
+        return themeName;
+      });
+      const addMissingTiles = async (visibleThemeNames2, correctThemeNames2) => {
+        const customThemes = await browser.runtime.sendMessage({
+          action: "getThemes",
+          categories: ["custom"],
+          includeHidden: true
+        });
+        correctThemeNames2.forEach(async (themeName) => {
+          if (!visibleThemeNames2.includes(themeName)) {
+            const isFavorite = data2.appearance.quickSettingsThemes.includes(themeName);
+            const newTile = this.createThemeTile(
+              themeName,
+              isFavorite,
+              Object.keys(customThemes).includes(themeName)
+            );
+            const createThemeButton = this.content.querySelector(".create-theme-button");
+            if (createThemeButton) {
+              createThemeButton.insertAdjacentElement("beforebegin", await newTile.render());
+            } else {
+              this.content.appendChild(await newTile.render());
+            }
+            this.currentTiles.push(newTile);
+            this.updateContentHeight();
+          }
+        });
+      };
+      const removeIncorrectTiles = async (visibleThemeNames2, correctThemeNames2) => {
+        visibleThemeNames2.forEach(async (themeName) => {
+          if (!correctThemeNames2.includes(themeName)) {
+            const element = visibleThemeTilesArray.find((element2) => {
+              return element2.dataset.name === themeName;
+            });
+            if (!element) return;
+            if (element.classList.contains("create-theme-button")) return;
+            this.content.removeChild(element);
+            this.currentTiles = this.currentTiles.filter((tile) => {
+              if (tile instanceof AddCustomTheme) return true;
+              if (tile instanceof ThemeTile) return tile.name !== themeName;
+              return true;
+            });
+          }
+          this.updateContentHeight();
+        });
+      };
+      const updateLocalCSS = async () => {
+        this.currentTiles.forEach((tile) => {
+          if (tile.name === currentThemeName) {
+            tile.updateCSS();
+            tile.updateTitle();
+          }
+        });
+      };
+      if (Object.keys(themes2).length === 0 && this.currentCategory !== "custom") {
+        this.currentTiles.push(new noThemes());
+        await this.renderTiles(this.currentTiles);
+      }
+      await addMissingTiles(visibleThemeNames, correctThemeNames);
+      await removeIncorrectTiles(visibleThemeNames, correctThemeNames);
+      updateLocalCSS();
+    }
+    updateTopContainer() {
+      this.topContainer.innerHTML = "";
+      const title = document.createElement("h2");
+      title.classList.add("current-category");
+      if (this.currentCategory !== "all") {
+        const backButton = document.createElement("button");
+        backButton.innerHTML = chevronLeftSvg;
+        backButton.addEventListener("click", () => this.changeCategory("all"));
+        this.topContainer.appendChild(backButton);
+      }
+      title.innerText = `${getFancyCategoryName(this.currentCategory)} themes`;
+      if (this.currentCategory === "quickSettings") {
+        title.innerText = "Favorite themes";
+      }
+      this.topContainer.appendChild(title);
+    }
+    async renderTiles(tiles) {
+      const renderedElements = await Promise.all(tiles.map((tile) => tile.render()));
+      const fragment = document.createDocumentFragment();
+      renderedElements.forEach((element) => {
+        fragment.appendChild(element);
+      });
+      this.content.appendChild(fragment);
+    }
+    createContentContainer() {
+      this.content = document.createElement("div");
+      this.content.classList.add("theme-tiles");
+    }
+    calculateContentHeight(tiles) {
+      const TILE_HEIGHT = parseFloat(tiles[0]?.element.style.height || "0");
+      const TILE_WIDTH = parseFloat(tiles[0]?.element.style.width || "0");
+      const GAP = 6;
+      const totalWidth = this.contentWidth;
+      const tileAmount = tiles.length;
+      const tilesPerRow = Math.floor((totalWidth + GAP) / (TILE_WIDTH + GAP));
+      const numRows = Math.ceil(tileAmount / tilesPerRow);
+      const totalHeight = numRows * TILE_HEIGHT + (numRows - 1) * GAP;
+      return totalHeight;
+    }
+    async renderFolderTiles() {
+      const categories = await browser.runtime.sendMessage({
+        action: "getThemeCategories",
+        includeEmpty: true,
+        includeHidden: true
+      });
+      const tiles = Object.keys(categories).map((category) => {
+        const tile = new ThemeFolder(category);
+        tile.onClick = async () => {
+          this.changeCategory(category);
+        };
+        return tile;
+      });
+      this.currentTiles = tiles;
+      await this.renderTiles(tiles);
+    }
+    updateContentHeight() {
+      this.content.style.height = `${String(this.calculateContentHeight(this.currentTiles))}px`;
+    }
+    createThemeTile(name2, isFavorite, isCustom) {
+      const tile = new ThemeTile(name2, this.currentCategory, isFavorite, isCustom);
+      tile.element.dataset.name = name2;
+      tile.onDuplicate = async (newThemeName) => {
+        if (isCustom) {
+          await this.updateSelectorContent();
+        }
+        await updateTheme(newThemeName);
+        await this.changeCategory("custom");
+        Promise.all([settingsWindow.loadPage(false)]);
+        startCustomThemeCreator(await getTheme(newThemeName), newThemeName);
+      };
+      tile.onFavoriteToggle = async () => {
+        await settingsWindow.loadPage(false);
+        await loadQuickSettings();
+        if (this.currentCategory === "quickSettings") {
+          await this.updateSelectorContent();
+        }
+      };
+      return tile;
+    }
+    async renderThemeTiles() {
+      const themes2 = await browser.runtime.sendMessage({
+        action: "getThemes",
+        categories: [this.currentCategory],
+        includeHidden: true
+      });
+      const customThemes = await browser.runtime.sendMessage({
+        action: "getThemes",
+        categories: ["custom"],
+        includeHidden: true
+      });
+      const data2 = await browser.runtime.sendMessage({
+        action: "getSettingsData"
+      });
+      const tiles = Object.keys(themes2).map((name2) => {
+        const isFavorite = data2.appearance.quickSettingsThemes.includes(name2);
+        const isCustom = Object.keys(customThemes).includes(name2);
+        return this.createThemeTile(name2, isFavorite, isCustom);
+      });
+      if (this.currentCategory === "custom") {
+        tiles.push(new AddCustomTheme());
+      }
+      this.currentTiles = tiles;
+      if (Object.keys(themes2).length === 0 && this.currentCategory !== "custom") {
+        this.currentTiles.push(new noThemes());
+      }
+      await this.renderTiles(this.currentTiles);
+      await this.updateImages(true);
+    }
+    async changeCategory(category) {
+      this.currentCategory = category;
+      await this.renderSelectorContent();
+    }
+  };
+  async function startCustomThemeCreator(theme, name2) {
+    const themeEditor = new CustomThemeCreator(theme, name2);
+    settingsWindow.hide();
+    await themeEditor.create();
+    themeEditor.show();
+  }
+  function convertColorPalette(vibrantPalette) {
+    function convertSwatchToColord(swatch) {
+      if (!swatch) return w("#000");
+      return w(swatch.hex);
+    }
+    let colordPalette;
+    colordPalette = {
+      Vibrant: convertSwatchToColord(vibrantPalette.Vibrant),
+      DarkVibrant: convertSwatchToColord(vibrantPalette.DarkVibrant),
+      LightVibrant: convertSwatchToColord(vibrantPalette.LightVibrant),
+      Muted: convertSwatchToColord(vibrantPalette.Muted),
+      DarkMuted: convertSwatchToColord(vibrantPalette.DarkMuted),
+      LightMuted: convertSwatchToColord(vibrantPalette.LightMuted)
+    };
+    return colordPalette;
+  }
+  var CustomThemeCreator = class extends BaseWindow {
+    theme;
+    name;
+    editableValues;
+    colorPreviews;
+    backgroundImageInput;
+    backgroundImagePreview;
+    themeGeneratorIsOpen = false;
+    imagePreviewContainer;
+    getEditableValues(cssProperties) {
+      const nonEditableValues = [
+        "--color-homepage-sidebars-bg",
+        "--darken-background",
+        "--color-splashtext"
+      ];
+      const editableValues = Object.keys(cssProperties).filter((property) => {
+        return !nonEditableValues.includes(property);
+      });
+      return editableValues;
+    }
+    createColorPreview(name2) {
+      const colorPreview = document.createElement("div");
+      colorPreview.classList.add("color-preview-bubble");
+      if (this.theme.cssProperties[name2]) {
+        colorPreview.style.setProperty("--current-color", this.theme.cssProperties[name2]);
+      }
+      colorPreview.dataset.name = name2;
+      colorPreview.addEventListener("click", (e5) => {
+        if (!colorPreview.parentElement?.querySelector(".floating-picker")) {
+          this.openColorPicker(name2, colorPreview, e5);
+        }
+      });
+      return colorPreview;
+    }
+    updateColorPreviews() {
+      this.colorPreviews.forEach((preview) => {
+        const previewName = Object.keys(preview)[0];
+        const element = Object.values(preview)[0];
+        if (previewName && element) {
+          const newValue = this.theme.cssProperties[previewName];
+          if (newValue) element.style.setProperty("--current-color", newValue);
+        }
+      });
+    }
+    generateColorPreviews(editableValues) {
+      const colorPreviews = editableValues.map((colorName) => {
+        const colorPreview = {};
+        colorPreview[colorName] = this.createColorPreview(colorName);
+        return colorPreview;
+      });
+      return colorPreviews;
+    }
+    convertPropertyName(name2) {
+      const propertyNames = {
+        "--color-accent": "Accent Color",
+        "--color-text": "Text Color",
+        "--color-base00": "Background",
+        "--color-base01": "Secondary Background",
+        "--color-base02": "Tertiary Background",
+        "--color-base03": "Border Color"
+      };
+      return propertyNames[name2];
+    }
+    constructor(theme, name2) {
+      super("customThemeCreator", true);
+      this.theme = theme;
+      this.name = name2;
+      this.editableValues = this.getEditableValues(theme.cssProperties);
+      this.colorPreviews = this.generateColorPreviews(this.editableValues);
+      this.backgroundImageInput = new ImageSelector(this.name, true);
+      this.backgroundImageInput.id = this.name;
+      this.imagePreviewContainer = document.createElement("div");
+      this.backgroundImageInput.onStore = async () => {
+        updateTheme(this.name);
+        this.updateBackgroundImagePreview();
+      };
+      this.backgroundImagePreview = this.createBackgroundImagePreview();
+    }
+    content = document.createElement("div");
+    displayNameInput = document.createElement("input");
+    openColorPicker(name2, colorPreview, e5) {
+      const colorPicker = new ColorPicker();
+      colorPicker.element.style.position = "absolute";
+      colorPicker.element.classList.add("floating-picker");
+      const _docEventHandler = (docEvent) => {
+        if (docEvent === e5) return;
+        if (!(docEvent.target instanceof Node)) return;
+        if (docEvent.target === colorPreview) return;
+        const targetElement = docEvent.target;
+        const parentElement = targetElement.parentElement;
+        if (colorPicker.element.contains(targetElement)) return;
+        const isIconClick = targetElement.classList?.contains("copy-svg") || targetElement.classList?.contains("done-icon") || parentElement?.classList?.contains("copy-svg") || parentElement?.classList?.contains("done-icon");
+        if (isIconClick) return;
+        colorPicker.element.remove();
+        document.removeEventListener("mousedown", _docEventHandler);
+      };
+      document.addEventListener("mousedown", _docEventHandler);
+      if (this.theme.cssProperties[name2]) {
+        colorPicker.currentColor = w(this.theme.cssProperties[name2]);
+      }
+      colorPicker.onChange = async () => {
+        colorPreview.style.setProperty("--current-color", colorPicker.currentColor.toHex());
+        await this.saveThemeData();
+        setTheme(this.name);
+      };
+      colorPreview.parentElement?.appendChild(colorPicker.render());
+    }
+    async saveThemeData() {
+      await browser.runtime.sendMessage({
+        action: "markThemeAsModified",
+        name: this.name
+      });
+      this.colorPreviews.forEach((preview) => {
+        const colorPreview = Object.values(preview)[0];
+        if (!colorPreview) return;
+        const colorName = colorPreview.dataset.name;
+        if (!colorName) return;
+        this.theme.cssProperties[colorName] = colorPreview.style.getPropertyValue("--current-color");
+      });
+      this.theme.displayName = this.displayNameInput.value;
+      if (this.theme.cssProperties["--color-base00"] && this.theme.cssProperties["--color-base02"] && this.theme.cssProperties["--color-text"]) {
+        const base00 = w(this.theme.cssProperties["--color-base00"]);
+        let darkenColor;
+        if (base00.brightness() > 0.5) {
+          darkenColor = w("rgba(228, 228, 228, 0.4)");
+          darkenColor = darkenColor.mix(this.theme.cssProperties["--color-base02"], 0.5).alpha(0.4);
+        } else {
+          darkenColor = w("rgba(0,0,0,0.2)");
+          darkenColor = darkenColor.mix(this.theme.cssProperties["--color-base00"], 0.5).alpha(0.3);
+        }
+        const splashColor = w(this.theme.cssProperties["--color-text"]);
+        this.theme.cssProperties["--color-splashtext"] = splashColor.toHex();
+        this.theme.cssProperties["--darken-background"] = darkenColor.toHex();
+        this.theme.cssProperties["--color-homepage-sidebars-bg"] = darkenColor.alpha(0.1).toHex();
+      }
+      await browser.runtime.sendMessage({
+        action: "saveCustomTheme",
+        data: this.theme,
+        id: this.name
+      });
+    }
+    createRemoveButton() {
+      const button = document.createElement("button");
+      button.classList.add("remove-custom-theme");
+      button.innerHTML = `Remove theme${trashSvg}`;
+      button.addEventListener("click", () => {
+        this.onRemoveTheme();
+      });
+      return button;
+    }
+    createDisplayNameInput() {
+      this.displayNameInput = createTextInput("", "Name");
+      this.displayNameInput.classList.add("theme-name-input");
+      this.displayNameInput.addEventListener("change", async () => {
+        await this.saveThemeData();
+      });
+      return this.displayNameInput;
+    }
+    createMakeThemeButton() {
+      const button = document.createElement("button");
+      button.classList.add("make-theme-button", "generate-theme-control");
+      button.innerHTML = playSvg;
+      button.addEventListener("click", async () => {
+        if (await isValidImage(this.backgroundImagePreview.src)) {
+          button.innerHTML = loadingSpinnerSvg;
+          button.classList.add("loading");
+          await this.generateTheme().then(() => {
+            button.innerHTML = playSvg;
+            button.classList.remove("loading");
+          });
+        }
+      });
+      return button;
+    }
+    createBackgroundImagePreview() {
+      const img = document.createElement("img");
+      img.classList.add("theme-creator-preview-image");
+      return img;
+    }
+    async updateBackgroundImagePreview() {
+      const result = await browser.runtime.sendMessage({
+        action: "getImage",
+        id: this.name
+      });
+      if (result.metaData.type === "default") {
+        result.imageData = await getExtensionImage(`theme-backgrounds/compressed/${this.name}.jpg`);
+      }
+      if (await isValidImage(result.imageData)) {
+        this.backgroundImagePreview.src = result.imageData;
+        this.content.classList.remove("no-image-available");
+      } else {
+        this.backgroundImagePreview.src = "";
+        this.content.classList.add("no-image-available");
+      }
+    }
+    async getImageColors() {
+      try {
+        const vibrantTester = new Vibrant(this.backgroundImagePreview.src, {
+          quality: 1,
+          colorCount: 256
+        });
+        const palette = await vibrantTester.getPalette();
+        return palette;
+      } catch (error) {
+        console.error("Error extracting image colors:", error);
+        return null;
+      }
+    }
+    readUserChoice() {
+      const brightnessButton = document.getElementById("brightness-control");
+      const saturationButton = document.getElementById("saturation-control");
+      if (!(brightnessButton && saturationButton)) return;
+      const choice = {
+        mode: brightnessButton.checked,
+        saturation: saturationButton.checked
+      };
+      return choice;
+    }
+    async generateTheme() {
+      const swatchPalette = await this.getImageColors();
+      if (!swatchPalette) return;
+      const colordPalette = convertColorPalette(swatchPalette);
+      const choice = this.readUserChoice();
+      if (!choice) return;
+      let base00;
+      let base01;
+      let base02;
+      let base03;
+      let accent;
+      let textcolor;
+      let darkenColor;
+      if (choice.mode) {
+        if (choice.saturation) {
+          base00 = colordPalette.DarkVibrant.darken(0.2);
+          base01 = colordPalette.DarkVibrant.darken(0.1);
+          base02 = colordPalette.DarkVibrant;
+          base03 = colordPalette.DarkVibrant.lighten(0.1);
+          accent = colordPalette.Vibrant;
+          textcolor = colordPalette.LightVibrant;
+        } else {
+          base00 = colordPalette.DarkMuted.darken(0.2);
+          base01 = colordPalette.DarkMuted.darken(0.1);
+          base02 = colordPalette.DarkMuted;
+          base03 = colordPalette.DarkMuted.lighten(0.1);
+          accent = colordPalette.Muted;
+          textcolor = colordPalette.LightMuted;
+        }
+        darkenColor = w("rgba(0,0,0,0.2)").mix(base00.toHex(), 0.5).alpha(0.3);
+      } else {
+        if (choice.saturation) {
+          base00 = colordPalette.LightVibrant.lighten(0.1);
+          base01 = colordPalette.LightVibrant.lighten(0.05);
+          base02 = colordPalette.LightVibrant;
+          base03 = colordPalette.LightVibrant.darken(0.1);
+          accent = colordPalette.Vibrant;
+          textcolor = colordPalette.DarkVibrant;
+        } else {
+          base00 = colordPalette.LightMuted.lighten(0.1);
+          base01 = colordPalette.LightMuted.lighten(0.05);
+          base02 = colordPalette.LightMuted;
+          base03 = colordPalette.LightMuted.darken(0.1);
+          accent = colordPalette.Muted;
+          textcolor = colordPalette.DarkMuted;
+        }
+        darkenColor = w("rgba(228, 228, 228, 0.4)").mix(base02.toHex(), 0.5).alpha(0.4);
+      }
+      this.theme = {
+        displayName: this.theme.displayName,
+        cssProperties: {
+          ...this.theme.cssProperties,
+          "--color-accent": accent.toHex(),
+          "--color-text": textcolor.toHex(),
+          "--color-base00": base00.toHex(),
+          "--color-base01": base01.toHex(),
+          "--color-base02": base02.toHex(),
+          "--color-base03": base03.toHex(),
+          "--darken-background": darkenColor.toHex(),
+          "--color-homepage-sidebars-bg": darkenColor.alpha(0.1).toHex(),
+          "--color-splashtext": textcolor.toHex()
+        }
+      };
+      await browser.runtime.sendMessage({
+        action: "markThemeAsModified",
+        name: this.name
+      });
+      await browser.runtime.sendMessage({
+        action: "saveCustomTheme",
+        data: this.theme,
+        id: this.name
+      });
+      this.updateColorPreviews();
+      await updateTheme(this.name);
+    }
+    createThemeGenerationControls() {
+      class themeGenerationControl {
+        id;
+        element;
+        label;
+        constructor(id) {
+          this.id = id;
+          const { input, label } = this.createThemeGenerationControl(this.id);
+          this.element = input;
+          this.label = label;
+        }
+        createThemeGenerationControl(id) {
+          const input = document.createElement("input");
+          input.type = "checkbox";
+          input.id = id;
+          input.classList.add("theme-maker-input");
+          const label = document.createElement("label");
+          label.htmlFor = id;
+          label.classList.add("theme-maker-label", "generate-theme-control");
+          input.addEventListener("click", () => {
+            this.updateLogo(this.label, this.element.checked);
+          });
+          return { input, label };
+        }
+        updateLogo(_element, _state) {
+        }
+        load() {
+          this.updateLogo(this.label, this.element.checked);
+        }
+        createWrapper() {
+          const wrapper = document.createElement("div");
+          wrapper.style.position = "relative";
+          wrapper.style.display = "flex";
+          wrapper.appendChild(this.element);
+          wrapper.appendChild(this.label);
+          return wrapper;
+        }
+      }
+      function createSmallThemeGenerationContainer() {
+        const container2 = document.createElement("div");
+        container2.classList.add("theme-generation-sub-container");
+        return container2;
+      }
+      const container = document.createElement("div");
+      container.classList.add("theme-controls-container");
+      const brightnessButton = new themeGenerationControl("brightness-control");
+      brightnessButton.updateLogo = (e5, s4) => {
+        const tooltip = e5.parentElement?.querySelector(".smpp-tooltip");
+        if (s4) {
+          if (tooltip) {
+            tooltip.innerHTML = "Dark";
+          }
+          e5.innerHTML = moonSvg;
+        } else {
+          if (tooltip) {
+            tooltip.innerHTML = "Light";
+          }
+          e5.innerHTML = sunSvg;
+        }
+      };
+      const saturationButton = new themeGenerationControl("saturation-control");
+      saturationButton.updateLogo = (e5, s4) => {
+        const tooltip = e5.parentElement?.querySelector(".smpp-tooltip");
+        if (s4) {
+          if (tooltip) {
+            tooltip.innerHTML = "Vibrant";
+          }
+          e5.innerHTML = magicWandSvg;
+        } else {
+          if (tooltip) {
+            tooltip.innerHTML = "Muted";
+          }
+          e5.innerHTML = wandSvg;
+        }
+      };
+      const firstSubContainer = createSmallThemeGenerationContainer();
+      const brightnessButtonWrapper = brightnessButton.createWrapper();
+      brightnessButtonWrapper.appendChild(createHoverTooltip("Brightness", "horizontal"));
+      const saturationButtonWrapper = saturationButton.createWrapper();
+      saturationButtonWrapper.appendChild(createHoverTooltip("Saturation", "horizontal"));
+      firstSubContainer.appendChild(brightnessButtonWrapper);
+      firstSubContainer.appendChild(saturationButtonWrapper);
+      const secondSubContainer = createSmallThemeGenerationContainer();
+      secondSubContainer.appendChild(this.createMakeThemeButton());
+      container.appendChild(firstSubContainer);
+      container.appendChild(secondSubContainer);
+      brightnessButton.load();
+      saturationButton.load();
+      return container;
+    }
+    createColorPickers() {
+      const colorPickerElement = document.createElement("div");
+      colorPickerElement.classList.add("custom-theme-color-picker-container");
+      this.colorPreviews.forEach((preview) => {
+        const colorPreviewWrapper = document.createElement("div");
+        colorPreviewWrapper.classList.add("color-picker-preview-wrapper");
+        const colorPreview = Object.values(preview)[0];
+        if (colorPreview) colorPreviewWrapper.appendChild(colorPreview);
+        const colorName = Object.keys(preview)[0];
+        if (colorName)
+          colorPreviewWrapper.appendChild(
+            createHoverTooltip(this.convertPropertyName(colorName), "vertical")
+          );
+        colorPickerElement.appendChild(colorPreviewWrapper);
+      });
+      return colorPickerElement;
+    }
+    createFileInputContainer() {
+      const fileInputContainer = document.createElement("div");
+      fileInputContainer.classList.add("file-and-theme-button-container");
+      fileInputContainer.appendChild(this.backgroundImageInput.fullContainer);
+      const divider = document.createElement("div");
+      divider.classList.add("file-input-theme-button-divider");
+      fileInputContainer.appendChild(divider);
+      fileInputContainer.appendChild(this.createOpenThemeMakerButton());
+      return fileInputContainer;
+    }
+    updateThemeGenerator() {
+      if (this.themeGeneratorIsOpen) {
+        this.imagePreviewContainer.classList.add("open");
+      } else {
+        this.imagePreviewContainer.classList.remove("open");
+      }
+    }
+    createOpenThemeMakerButton() {
+      const button = document.createElement("button");
+      button.classList.add("open-theme-editor-button");
+      button.innerHTML = "Auto";
+      button.addEventListener("click", async () => {
+        this.themeGeneratorIsOpen = !this.themeGeneratorIsOpen;
+        this.updateThemeGenerator();
+      });
+      return button;
+    }
+    createImagePreviewContainer() {
+      this.imagePreviewContainer.classList.add("preview-image-container");
+      const imageWrapper = document.createElement("div");
+      imageWrapper.classList.add("preview-image-wrapper");
+      imageWrapper.appendChild(this.backgroundImagePreview);
+      this.imagePreviewContainer.appendChild(imageWrapper);
+      this.imagePreviewContainer.appendChild(this.createThemeGenerationControls());
+      return this.imagePreviewContainer;
+    }
+    async renderContent() {
+      this.content.classList.add("custom-theme-maker");
+      this.content.appendChild(this.createDisplayNameInput());
+      this.content.appendChild(this.createImagePreviewContainer());
+      this.content.appendChild(this.createFileInputContainer());
+      this.content.appendChild(this.createColorPickers());
+      this.content.appendChild(this.createRemoveButton());
+      await this.updateBackgroundImagePreview();
+      this.load(this.theme);
+      this.element.appendChild(this.content);
+      return this.element;
+    }
+    async load(theme) {
+      this.displayNameInput.value = theme.displayName;
+      this.updateColorPreviews();
+      await this.backgroundImageInput.loadImageData();
+    }
+    onClosed() {
+      document.body.removeChild(this.element);
+      settingsWindow.themeSelector.updateSelectorContent();
+      settingsWindow.loadPage();
+      loadQuickSettings();
+      openSettingsWindow(null);
+    }
+    async onRemoveTheme() {
+      await browser.runtime.sendMessage({
+        action: "removeCustomTheme",
+        id: this.name
+      });
+      await updateTheme("default");
+      await settingsWindow.loadPage(true);
+      await loadQuickSettings();
+      this.hide();
+    }
+  };
+
+  // src/main-features/appearance/weather-effects.ts
+  function setSnowLevel(amount, opacity) {
+    document.getElementById("snowflakes")?.remove();
+    amount = amount > 3e3 ? 3e3 : amount;
+    const snowDiv = document.createElement("div");
+    snowDiv.id = "snowflakes";
+    for (let i5 = 0; i5 < amount; i5++) {
+      const flake = document.createElement("img");
+      flake.classList = "snowflake";
+      flake.src = currentThemeName === "pink" ? getExtensionImage("icons/weather-overlay/blossom.svg") : getExtensionImage("icons/weather-overlay/snowflake.svg");
+      flake.style.left = `${Math.floor(Math.random() * 100)}%`;
+      flake.style.animation = `snowflake_fall_${Math.floor(Math.random() * 3)} ${Math.floor(Math.random() * 7) + 10}s ease-in-out infinite`;
+      flake.style.animationDelay = `${Math.floor(Math.random() * 40) - 40}s`;
+      flake.style.width = `${Math.floor(Math.random() * 20) + 10}px`;
+      flake.style.opacity = opacity;
+      snowDiv.appendChild(flake);
+    }
+    document.documentElement.appendChild(snowDiv);
+  }
+  function setRainLevel(amount, opacity) {
+    document.getElementById("raindrops")?.remove();
+    amount = amount > 3e3 ? 3e3 : amount;
+    const rainDiv = document.createElement("div");
+    rainDiv.id = "raindrops";
+    for (let i5 = 0; i5 < amount; i5++) {
+      const raindrop = document.createElement("img");
+      raindrop.classList.add("raindrop");
+      raindrop.src = getExtensionImage("icons/weather-overlay/raindrop.svg");
+      raindrop.style.left = `${Math.random() * 100}%`;
+      raindrop.style.animation = `raindrop_fall ${Math.random() * 2 + 2}s linear infinite`;
+      raindrop.style.animationDelay = `${Math.random() * 5 - 5}s`;
+      raindrop.style.width = `${Math.random() * 7.5 + 7.5}px`;
+      raindrop.style.opacity = opacity;
+      rainDiv.appendChild(raindrop);
+    }
+    document.documentElement.appendChild(rainDiv);
+  }
+  async function setOverlayBasedOnConditions(amount, opacity) {
+    async function getWeatherDescription(widget) {
+      const weatherData = await getWidgetSetting(`${widget}.cache.weatherData`);
+      if (weatherData == null) return null;
+      if (weatherData.cod !== 200) return null;
+      return weatherData.weather[0].main;
+    }
+    const weatherWidgets = widgets.filter(
+      (item) => item.name.toLowerCase().includes("weather") && item.isActive
+    );
+    let weathers = await Promise.all(
+      weatherWidgets.map(async (widget) => {
+        return await getWeatherDescription(widget.name);
+      })
+    );
+    weathers = weathers.filter((description) => description != null);
+    if (weathers.includes("Rain") || weathers.includes("Drizzle")) {
+      setRainLevel(amount, opacity);
+    }
+    if (weathers.includes("Snow")) {
+      setSnowLevel(amount, opacity);
+    }
+  }
+  function applyWeatherEffects(weatherOverlay) {
+    const rainDiv = document.getElementById("raindrops");
+    const snowDiv = document.getElementById("snowflakes");
+    switch (weatherOverlay.type) {
+      case "snow":
+        if (rainDiv) rainDiv.remove();
+        setSnowLevel(weatherOverlay.amount, weatherOverlay.opacity);
+        break;
+      case "realtime":
+        if (rainDiv) rainDiv.remove();
+        if (snowDiv) snowDiv.remove();
+        setOverlayBasedOnConditions(weatherOverlay.amount, weatherOverlay.opacity);
+        break;
+      case "rain":
+        if (snowDiv) snowDiv.remove();
+        setRainLevel(weatherOverlay.amount, weatherOverlay.opacity);
+        break;
+      default:
+        console.error("No weather selector");
+        break;
+    }
+  }
+
+  // src/main-features/settings/main-settings.ts
+  var SettingsWindow = class extends BaseWindow {
+    settingsSideBarCategories = [
+      { name: "Appearance", id: "appearance" },
+      { name: "Navigation", id: "topNav" },
+      { name: "Widgets", id: "widgets" },
+      { name: "Other", id: "other" }
+    ];
+    currentPage = "appearance";
+    settingsPage = document.createElement("div");
+    backgroundImageSelector = new ImageSelector("backgroundImage", true);
+    themeSelector = new ThemeSelector();
+    profilePictureInput = new ImageSelector("profilePicture");
+    constructor() {
+      super("settings-window");
+    }
+    async renderContent() {
+      const content = document.createElement("div");
+      const settingsSideBar = await this.createSettingsSideBar();
+      this.settingsPage.id = "settings-page";
+      this.settingsPage.addEventListener("change", (_e) => this.storePage());
+      content.classList.add("settingsWindow");
+      content.appendChild(settingsSideBar);
+      content.appendChild(this.settingsPage);
+      this.displaySettingsPage();
+      return content;
+    }
+    async createSettingsSideBar() {
+      const settingsSideBar = document.createElement("div");
+      settingsSideBar.classList.add("settings-sidebar");
+      const settingsSideBarProfileButton = await this.createSettingsSideBarProfileButton();
+      settingsSideBar.appendChild(settingsSideBarProfileButton);
+      this.settingsSideBarCategories.forEach((category) => {
+        settingsSideBar.appendChild(this.createSettingsSideBarCategory(category));
+      });
+      const currentRadio = settingsSideBar.querySelector(
+        `input[value="${this.currentPage}"]`
+      );
+      if (currentRadio) currentRadio.checked = true;
+      settingsSideBar.addEventListener("change", this.updateSideBar);
+      return settingsSideBar;
+    }
+    updateSideBar = async (event) => {
+      if (event.target instanceof HTMLInputElement) {
+        if (event.target.type === "radio") {
+          this.currentPage = event.target.value;
+          this.displaySettingsPage();
+          await this.loadPage();
+        }
+      }
+    };
+    async createSettingsSideBarProfileButton() {
+      const data2 = await browser.runtime.sendMessage({
+        action: "getSettingsData"
+      });
+      const radioInput = document.createElement("input");
+      radioInput.type = "radio";
+      radioInput.name = "settings-page";
+      radioInput.value = "profile";
+      radioInput.id = "settings-profile";
+      radioInput.classList.add("settings-radio");
+      const profileSettingsLabel = document.createElement("label");
+      profileSettingsLabel.htmlFor = "settings-profile";
+      profileSettingsLabel.tabIndex = 0;
+      profileSettingsLabel.classList.add("profile-settings-button", "settings-category-button-js");
+      profileSettingsLabel.addEventListener("keydown", (e5) => {
+        if (e5.key === " " || e5.key === "Enter") {
+          e5.preventDefault();
+          radioInput.click();
+        }
+      });
+      const profilePicture = document.createElement("div");
+      profilePicture.classList.add("profile-picture-settings");
+      const profileTextContainer = document.createElement("div");
+      profileTextContainer.classList.add("profile-settings-label");
+      const profileSettingsLabelTitle = document.createElement("h2");
+      profileSettingsLabelTitle.id = "profile-settings-label-title";
+      const firstName = String(data2.profile.username || originalUsername).split(" ")[0];
+      if (firstName) profileSettingsLabelTitle.innerText = firstName;
+      const profileSettingsLabelDescription = document.createElement("p");
+      profileSettingsLabelDescription.classList.add("profile-settings-label-description");
+      profileSettingsLabelDescription.innerText = "view profile";
+      profileTextContainer.appendChild(profileSettingsLabelTitle);
+      profileTextContainer.appendChild(profileSettingsLabelDescription);
+      profileSettingsLabel.appendChild(profilePicture);
+      profileSettingsLabel.appendChild(profileTextContainer);
+      const container = document.createElement("div");
+      container.appendChild(radioInput);
+      container.appendChild(profileSettingsLabel);
+      return container;
+    }
+    isPastaTime() {
+      return (/* @__PURE__ */ new Date()).getHours() === 12;
+    }
+    createSettingsSideBarCategory(category) {
+      const radioInput = document.createElement("input");
+      radioInput.type = "radio";
+      radioInput.name = "settings-page";
+      radioInput.value = category.id;
+      radioInput.id = `settings-${category.id}`;
+      radioInput.classList.add("settings-radio");
+      const categoryLabel = document.createElement("label");
+      categoryLabel.htmlFor = `settings-${category.id}`;
+      categoryLabel.tabIndex = 0;
+      categoryLabel.classList.add("settings-category-button", "settings-category-button-js");
+      categoryLabel.addEventListener("keydown", (e5) => {
+        if (e5.key === " " || e5.key === "Enter") {
+          e5.preventDefault();
+          radioInput.click();
+        }
+      });
+      const categoryButtonIcon = document.createElement("img");
+      categoryButtonIcon.classList.add("category-button-icon");
+      let imageFileName = `${category.id}.webp`;
+      if (category.id === "appearance" && this.isPastaTime()) {
+        imageFileName = "pasta.webp";
+      }
+      categoryButtonIcon.src = getExtensionImage(`settings-icons/${imageFileName}`);
+      categoryLabel.appendChild(categoryButtonIcon);
+      categoryLabel.appendChild(document.createTextNode(category.name));
+      const container = document.createElement("div");
+      container.appendChild(radioInput);
+      container.appendChild(categoryLabel);
+      return container;
+    }
+    clearSettingsPage() {
+      this.settingsPage.innerHTML = "";
+    }
+    addDisclaimer(element, disclaimerHTML = `
+    * Changes will only apply after 
+    <a class="settings-page-disclaimer-button" href="#" onclick="window.location.href = window.location.href; return false;">reload</a>
+  `) {
+      if (element.nextElementSibling?.classList.contains("settings-page-disclaimer")) {
+        return;
+      }
+      const disclaimer = document.createElement("span");
+      disclaimer.classList.add("settings-page-disclaimer");
+      disclaimer.innerHTML = disclaimerHTML;
+      element.insertAdjacentElement("afterend", disclaimer);
+    }
+    async resetSettings() {
+      const popup = document.createElement("div");
+      popup.classList.add("reset-confirmation-popup");
+      const popupContent = document.createElement("div");
+      popupContent.classList.add("reset-popup-content");
+      const title = document.createElement("h3");
+      title.textContent = "Reset Settings";
+      const description = document.createElement("p");
+      description.textContent = "Are you sure you want to reset all settings to defaults? This will delete all your customizations and cannot be undone.";
+      const buttonContainer = document.createElement("div");
+      buttonContainer.classList.add("reset-popup-buttons");
+      const cancelButton = document.createElement("button");
+      cancelButton.classList.add("reset-popup-cancel");
+      cancelButton.textContent = "Cancel";
+      const confirmButton = document.createElement("button");
+      confirmButton.classList.add("reset-popup-confirm");
+      confirmButton.textContent = "Reset";
+      buttonContainer.append(cancelButton, confirmButton);
+      popupContent.append(title, description, buttonContainer);
+      popup.appendChild(popupContent);
+      this.element.appendChild(popup);
+      cancelButton.addEventListener("click", () => popup.remove());
+      confirmButton.addEventListener("click", async () => {
+        popup.remove();
+        await clearAllData();
+      });
+    }
+    async loadPage(shouldReloadTheme = true) {
+      const settings = await browser.runtime.sendMessage({
+        action: "getSettingsData"
+      });
+      async function loadWidgetSettingSlider(id, setting) {
+        const element = document.getElementById(id);
+        const valueDisplay = document.querySelector(`#${id} + .settings-page-live-value`);
+        if (!element || !valueDisplay) return;
+        const value = await getWidgetSetting(setting);
+        element.value = value;
+        valueDisplay.textContent = String(value);
+      }
+      const profileTitleElement = document.getElementById("profile-settings-label-title");
+      if (profileTitleElement) {
+        const firstName = String(settings.profile.username || originalUsername).split(" ")[0];
+        if (firstName) profileTitleElement.textContent = firstName;
+      }
+      switch (this.currentPage) {
+        case "profile": {
+          const usernameInput = document.getElementById("settings-page-username-input");
+          if (settings.profile.username && usernameInput) {
+            usernameInput.value = settings.profile.username;
+          }
+          this.profilePictureInput.loadImageData();
+          const defaultPfpButton = document.getElementById("settings-page-default-sm-pfp-button");
+          if (defaultPfpButton) {
+            defaultPfpButton.checked = settings.profile.useSMpfp;
+          }
+          break;
+        }
+        case "appearance": {
+          if (shouldReloadTheme) {
+            await this.themeSelector.updateImages(false);
+          }
+          this.themeSelector.currentTiles.forEach((tile) => {
+            tile.updateSelection();
+          });
+          const enableGlassButton = document.getElementById("settings-page-glass-button");
+          if (enableGlassButton) {
+            enableGlassButton.checked = settings.appearance.glass;
+          }
+          this.backgroundImageSelector.id = settings.appearance.theme;
+          this.backgroundImageSelector.loadImageData();
+          const blurSlider = document.getElementById("settings-page-blur-slider");
+          if (blurSlider) {
+            blurSlider.value = String(settings.appearance.background.blur * 10);
+          }
+          document.querySelectorAll(".settings-page-weather-overlay-container input").forEach((input) => {
+            const inputElement = input;
+            if (inputElement.id) {
+              inputElement.checked = inputElement.id.includes(
+                settings.appearance.weatherOverlay.type
+              );
+            }
+          });
+          const weatherOverlaySlider = document.getElementById(
+            "settings-page-weather-overlay-slider"
+          );
+          if (weatherOverlaySlider) {
+            weatherOverlaySlider.value = String(
+              settings.appearance.weatherOverlay.amount
+            );
+          }
+          const weatherOpacitySlider = document.getElementById(
+            "settings-page-weather-overlay-opacity-slider"
+          );
+          if (weatherOpacitySlider) {
+            weatherOpacitySlider.value = String(
+              settings.appearance.weatherOverlay.opacity * 100
+            );
+          }
+          const defaultIconButton = document.getElementById("settings-page-default-icon-button");
+          if (defaultIconButton) {
+            defaultIconButton.checked = settings.appearance.tabLogo === "sm";
+          }
+          const smppIconButton = document.getElementById("settings-page-smpp-icon-button");
+          if (smppIconButton) {
+            smppIconButton.checked = settings.appearance.tabLogo === "smpp";
+          }
+          const showNewsButton = document.getElementById("settings-page-show-news-button");
+          if (showNewsButton) {
+            showNewsButton.checked = settings.appearance.news;
+          }
+          break;
+        }
+        case "topNav": {
+          const swapCoursesButton = document.getElementById("settings-page-swap-courses-button");
+          if (swapCoursesButton) {
+            swapCoursesButton.checked = settings.topNav.switchCoursesAndLinks;
+          }
+          if (isGOSchool) {
+            const goButton = document.getElementById("settings-page-go-button");
+            if (goButton) {
+              goButton.checked = settings.topNav.buttons.GO;
+            }
+          }
+          if (!liteMode) {
+            const globalChatButton = document.getElementById("settings-page-global-chat-button");
+            if (globalChatButton) {
+              globalChatButton.checked = settings.topNav.buttons.GC;
+            }
+          }
+          const searchButton = document.getElementById("settings-page-search-button");
+          if (searchButton) {
+            searchButton.checked = settings.topNav.buttons.search;
+          }
+          const quickMenuButton = document.getElementById("settings-page-quick-menu-button");
+          if (quickMenuButton) {
+            quickMenuButton.checked = settings.topNav.buttons.quickMenu;
+          }
+          const homeIconButton = document.getElementById("settings-page-home-icon-button");
+          if (homeIconButton) {
+            homeIconButton.checked = settings.topNav.icons.home;
+          }
+          const mailIconButton = document.getElementById("settings-page-mail-icon-button");
+          if (mailIconButton) {
+            mailIconButton.checked = settings.topNav.icons.mail;
+          }
+          const notificationsIconButton = document.getElementById(
+            "settings-page-notifications-icon-button"
+          );
+          if (notificationsIconButton) {
+            notificationsIconButton.checked = settings.topNav.icons.notifications;
+          }
+          const settingsIconButton = document.getElementById("settings-page-settings-icon-button");
+          if (settingsIconButton) {
+            settingsIconButton.checked = settings.topNav.icons.settings;
+          }
+          break;
+        }
+        case "widgets": {
+          const delijnMonochromeButton = document.getElementById(
+            "settings-page-delijn-monochrome-button"
+          );
+          if (delijnMonochromeButton) {
+            delijnMonochromeButton.checked = await getWidgetSetting("DelijnWidget.monochrome");
+          }
+          await loadWidgetSettingSlider("settings-page-max-busses-slider", "DelijnWidget.maxBusses");
+          await loadWidgetSettingSlider(
+            "settings-page-max-assignments-slider",
+            "TakenWidget.maxAssignments"
+          );
+          if (!liteMode) {
+            const showSnakeGridButton = document.getElementById(
+              "settings-page-show-snake-grid-button"
+            );
+            if (showSnakeGridButton) {
+              showSnakeGridButton.checked = await getWidgetSetting("SnakeWidget.enableGrid");
+            }
+          }
+          break;
+        }
+        case "other": {
+          let loadKeybind2 = function(id, key) {
+            const keybindInput = document.getElementById(id);
+            if (!keybindInput) return;
+            keybindInput.value = key;
+          };
+          var loadKeybind = loadKeybind2;
+          const performanceModeButton = document.getElementById(
+            "settings-page-performance-mode-button"
+          );
+          if (performanceModeButton) {
+            performanceModeButton.checked = settings.other.performanceMode;
+          }
+          const splashTextButton = document.getElementById("settings-page-splash-text-button");
+          if (splashTextButton) {
+            splashTextButton.checked = settings.other.splashText;
+          }
+          const discordButton = document.getElementById("settings-page-discord-button");
+          if (discordButton) {
+            discordButton.checked = settings.other.discordButton;
+          }
+          loadKeybind2("settings-page-quick-menu-keybinding", settings.other.keybinds.dmenu);
+          loadKeybind2("settings-page-widget-edit-keybinding", settings.other.keybinds.widgetEditMode);
+          loadKeybind2("settings-widget-bag-keybinding", settings.other.keybinds.widgetBag);
+          loadKeybind2("settings-page-settings-keybinding", settings.other.keybinds.settings);
+          if (!liteMode) loadKeybind2("settings-page-gc-keybinding", settings.other.keybinds.gc);
+          break;
+        }
+        default:
+          break;
+      }
+    }
+    async storePage() {
+      const settings = await browser.runtime.sendMessage({
+        action: "getSettingsData"
+      });
+      const previousSettings = structuredClone(settings);
+      const getCheckboxValue = (id) => {
+        const element = document.getElementById(id);
+        return element?.checked || false;
+      };
+      const getSliderValue = (id) => {
+        const element = document.getElementById(id);
+        return element?.value ? parseFloat(element.value) : 0;
+      };
+      const saveKeybind = (id) => {
+        const element = document.getElementById(id);
+        return element?.value || "None";
+      };
+      switch (this.currentPage) {
+        case "profile": {
+          const usernameInput = document.getElementById(
+            "settings-page-username-input"
+          );
+          if (usernameInput) {
+            settings.profile.username = usernameInput.value || null;
+          }
+          settings.profile.useSMpfp = getCheckboxValue("settings-page-default-sm-pfp-button");
+          applyProfile(settings.profile);
+          break;
+        }
+        case "appearance": {
+          const selectedTheme = document.querySelector(
+            ".settings-page-theme-card:has(input[type='radio']:checked)"
+          );
+          if (selectedTheme?.dataset.theme) {
+            settings.appearance.theme = selectedTheme.dataset.theme;
+          }
+          settings.appearance.background.blur = getSliderValue("settings-page-blur-slider") / 10;
+          const chosenWeather = document.querySelector(
+            ".settings-page-weather-overlay-container input:checked"
+          );
+          if (chosenWeather) {
+            const weatherContainer = chosenWeather.closest("[data-weather]");
+            if (weatherContainer?.dataset.weather) {
+              const weatherType = weatherContainer.dataset.weather;
+              if (weatherType === "realtime" || weatherType === "rain" || weatherType === "snow") {
+                settings.appearance.weatherOverlay.type = weatherType;
+              }
+            }
+          }
+          settings.appearance.weatherOverlay.amount = getSliderValue(
+            "settings-page-weather-overlay-slider"
+          );
+          settings.appearance.weatherOverlay.opacity = getSliderValue("settings-page-weather-overlay-opacity-slider") / 100;
+          const smppIconChecked = getCheckboxValue("settings-page-smpp-icon-button");
+          settings.appearance.tabLogo = smppIconChecked ? "smpp" : "sm";
+          settings.appearance.news = getCheckboxValue("settings-page-show-news-button");
+          settings.appearance.glass = getCheckboxValue("settings-page-glass-button");
+          await applyAppearance(settings.appearance);
+          if (JSON.stringify(settings.appearance.weatherOverlay) !== JSON.stringify(previousSettings.appearance.weatherOverlay) && !liteMode) {
+            applyWeatherEffects(settings.appearance.weatherOverlay);
+          }
+          break;
+        }
+        case "topNav": {
+          settings.topNav.switchCoursesAndLinks = getCheckboxValue(
+            "settings-page-swap-courses-button"
+          );
+          if (isGOSchool) {
+            settings.topNav.buttons.GO = getCheckboxValue("settings-page-go-button");
+          }
+          if (!liteMode) {
+            settings.topNav.buttons.GC = getCheckboxValue("settings-page-global-chat-button");
+          }
+          settings.topNav.buttons.search = getCheckboxValue("settings-page-search-button");
+          settings.topNav.buttons.quickMenu = getCheckboxValue("settings-page-quick-menu-button");
+          settings.topNav.icons.home = getCheckboxValue("settings-page-home-icon-button");
+          settings.topNav.icons.mail = getCheckboxValue("settings-page-mail-icon-button");
+          settings.topNav.icons.notifications = getCheckboxValue(
+            "settings-page-notifications-icon-button"
+          );
+          settings.topNav.icons.settings = getCheckboxValue("settings-page-settings-icon-button");
+          applyTopNav(settings.topNav);
+          break;
+        }
+        case "widgets": {
+          const updateWidgetSetting = async (id, settingName, type) => {
+            const element = document.getElementById(id);
+            if (!element) return;
+            const currentValue = type === "boolean" ? element.checked : parseInt(element.value, 10);
+            const storedValue = await getWidgetSetting(settingName);
+            if (JSON.stringify(currentValue) !== JSON.stringify(storedValue)) {
+              await setWidgetSetting(settingName, currentValue);
+            }
+          };
+          await updateWidgetSetting(
+            "settings-page-delijn-monochrome-button",
+            "DelijnWidget.monochrome",
+            "boolean"
+          );
+          await updateWidgetSetting(
+            "settings-page-max-busses-slider",
+            "DelijnWidget.maxBusses",
+            "number"
+          );
+          await updateWidgetSetting(
+            "settings-page-max-assignments-slider",
+            "TakenWidget.maxAssignments",
+            "number"
+          );
+          if (!liteMode) {
+            await updateWidgetSetting(
+              "settings-page-show-snake-grid-button",
+              "SnakeWidget.enableGrid",
+              "boolean"
+            );
+          }
+          break;
+        }
+        case "other": {
+          settings.other.performanceMode = getCheckboxValue("settings-page-performance-mode-button");
+          settings.other.splashText = getCheckboxValue("settings-page-splash-text-button");
+          settings.other.discordButton = getCheckboxValue("settings-page-discord-button");
+          settings.other.keybinds.dmenu = saveKeybind("settings-page-quick-menu-keybinding");
+          settings.other.keybinds.widgetEditMode = saveKeybind(
+            "settings-page-widget-edit-keybinding"
+          );
+          settings.other.keybinds.widgetBag = saveKeybind("settings-widget-bag-keybinding");
+          settings.other.keybinds.settings = saveKeybind("settings-page-settings-keybinding");
+          if (!liteMode) {
+            settings.other.keybinds.gc = saveKeybind("settings-page-gc-keybinding");
+          }
+          applyOther(settings.other);
+          break;
+        }
+        default:
+          break;
+      }
+      await browser.runtime.sendMessage({
+        action: "setSettingsData",
+        data: settings
+      });
+      console.log("Successfully stored main settings: \n", settings);
+      loadQuickSettings();
+      await this.loadPage();
+    }
+    async displaySettingsPage() {
+      function createMainTitle(text) {
+        const title = document.createElement("h1");
+        title.innerText = text;
+        title.classList.add("settings-page-main-title");
+        return title;
+      }
+      function createSectionTitle(text) {
+        const title = document.createElement("h2");
+        title.innerText = text;
+        title.classList.add("settings-page-section-title");
+        return title;
+      }
+      const createKeybindInput = (id, text) => {
+        const container = document.createElement("div");
+        container.classList.add("settings-page-key-bind-container");
+        container.classList.add("smpp-input-with-label");
+        const label = document.createElement("span");
+        label.tabIndex = 0;
+        label.classList.add("settings-page-button-label");
+        label.innerText = text;
+        const button = createButton(id);
+        button.classList.add("settings-page-button");
+        const input = document.createElement("input");
+        input.id = id;
+        input.type = "text";
+        input.readOnly = true;
+        input.spellcheck = false;
+        input.classList.add("settings-page-keybinding-input");
+        input.value = "None";
+        const unbindButton = document.createElement("button");
+        unbindButton.classList.add("keybind-unbind-button");
+        unbindButton.innerHTML = trashSvg;
+        unbindButton.title = "Clear keybind";
+        unbindButton.setAttribute("aria-label", "Clear keybind");
+        let listening = false;
+        input.addEventListener("click", () => {
+          if (listening) return;
+          listening = true;
+          const oldKeybind = input.value;
+          input.value = "Press any key...";
+          input.classList.add("listening");
+          const keyListener = async (e5) => {
+            listening = false;
+            input.classList.remove("listening");
+            e5.preventDefault();
+            e5.stopPropagation();
+            let keyName = e5.key.length === 1 ? e5.key.toUpperCase() : e5.key;
+            if (keyName === " ") keyName = "Space";
+            if (keyName === "Backspace") keyName = "None";
+            if (keyName === "Escape") keyName = oldKeybind;
+            input.value = keyName;
+            document.removeEventListener("keydown", keyListener);
+            await this.storePage();
+          };
+          const buttonListener = async (e5) => {
+            listening = false;
+            input.classList.remove("listening");
+            e5.stopPropagation();
+            e5.preventDefault();
+            input.value = "None";
+            document.removeEventListener("keydown", keyListener);
+            await this.storePage();
+          };
+          unbindButton.addEventListener("click", buttonListener);
+          document.addEventListener("keydown", keyListener);
+        });
+        const inputWrapper = document.createElement("div");
+        inputWrapper.classList.add("keybind-input-wrapper");
+        inputWrapper.appendChild(input);
+        inputWrapper.appendChild(unbindButton);
+        container.appendChild(label);
+        container.appendChild(inputWrapper);
+        return container;
+      };
+      function createSettingsButtonWithLabel(id, text) {
+        const container = createButtonWithLabel(id, text);
+        container.tabIndex = 0;
+        container.classList.add("settings-page-button-label-container");
+        return container;
+      }
+      function createImageButton(src, width, height, name2, id) {
+        const wrapper = document.createElement("label");
+        wrapper.classList.add("settings-page-image-button-wrapper");
+        wrapper.tabIndex = 0;
+        wrapper.style.width = width;
+        wrapper.style.height = height;
+        const input = document.createElement("input");
+        input.type = "radio";
+        input.name = name2;
+        if (id) input.id = id;
+        const image = document.createElement("img");
+        image.classList.add("settings-page-image");
+        image.src = getExtensionImage(src);
+        wrapper.addEventListener("keydown", (e5) => {
+          if (e5.key === " " || e5.key === "Enter") {
+            e5.preventDefault();
+            input.click();
+          }
+        });
+        wrapper.appendChild(input);
+        wrapper.appendChild(image);
+        return wrapper;
+      }
+      function createImageButtonWithLabel(src, text, width = "80px", height = "80px", name2, id) {
+        const container = document.createElement("label");
+        container.classList.add("settings-page-image-button-label");
+        const imageButton = createImageButton(src, width, height, name2, id);
+        const imageButtonLabel = document.createElement("span");
+        imageButtonLabel.innerText = text;
+        container.appendChild(imageButton);
+        container.appendChild(imageButtonLabel);
+        return container;
+      }
+      function createSlider(min, max, id) {
+        const slider = document.createElement("input");
+        slider.id = id;
+        slider.type = "range";
+        slider.min = min;
+        slider.max = max;
+        slider.classList.add("settings-page-slider");
+        return slider;
+      }
+      function createLabeledSlider(min, max, id, text, showValue = true) {
+        const container = document.createElement("div");
+        container.classList.add("settings-page-slider-container");
+        container.classList.add("smpp-input-with-label");
+        const textContainer = document.createElement("span");
+        textContainer.classList.add("settings-page-slider-label");
+        textContainer.innerText = text;
+        const slider = createSlider(min, max, id);
+        slider.classList.add("settings-page-labeled-slider");
+        if (showValue)
+          slider.addEventListener("input", (_event) => {
+            const liveValueElement = document.querySelector(
+              `#${id} ~ .settings-page-live-value`
+            );
+            if (liveValueElement) liveValueElement.innerText = slider.value;
+          });
+        const currentValue = document.createElement("span");
+        currentValue.classList.add("settings-page-live-value");
+        currentValue.innerText = min;
+        container.appendChild(textContainer);
+        container.appendChild(slider);
+        if (showValue) container.appendChild(currentValue);
+        return container;
+      }
+      function createImage(src, width, height) {
+        const image = document.createElement("img");
+        image.classList.add("settings-page-image");
+        image.src = getExtensionImage(src);
+        image.style.width = width;
+        image.style.height = height;
+        image.style.objectFit = "cover";
+        return image;
+      }
+      function createDescription(text) {
+        const description = document.createElement("p");
+        description.innerText = text;
+        description.classList.add("settings-page-description");
+        return description;
+      }
+      this.clearSettingsPage();
+      this.settingsPage.scrollTo(0, 0);
+      switch (this.currentPage) {
+        case "profile": {
+          this.settingsPage.appendChild(createMainTitle("Profile"));
+          this.settingsPage.appendChild(createSectionTitle("Custom name"));
+          this.settingsPage.appendChild(
+            createDescription("Edit your username, displayed at the top left")
+          );
+          this.settingsPage.appendChild(createTextInput("settings-page-username-input", "Username"));
+          this.settingsPage.appendChild(createSectionTitle("Profile picture"));
+          this.settingsPage.appendChild(
+            createDescription(
+              isFirefox ? "Upload your own profile picture, large files not recommended on Firefox" : "Upload your own profile picture"
+            )
+          );
+          this.profilePictureInput.id = "profilePicture";
+          this.profilePictureInput.loadImageData();
+          this.profilePictureInput.onStore = async () => {
+            this.storePage();
+            const data2 = await browser.runtime.sendMessage({
+              action: "getSettingsData"
+            });
+            applyProfilePicture(data2.profile);
+          };
+          const profilePictureInputContainer = this.profilePictureInput.fullContainer;
+          profilePictureInputContainer.id = "profile-picture-input-container";
+          this.settingsPage.appendChild(profilePictureInputContainer);
+          this.settingsPage.appendChild(
+            createSettingsButtonWithLabel(
+              "settings-page-default-sm-pfp-button",
+              "Original profile picture"
+            )
+          );
+          break;
+        }
+        case "appearance": {
+          this.settingsPage.appendChild(createMainTitle("Appearance"));
+          this.settingsPage.appendChild(this.themeSelector.render());
+          this.settingsPage.appendChild(createSectionTitle("Wallpaper"));
+          this.settingsPage.appendChild(
+            createDescription("Personalize your backdrop with a custom image.")
+          );
+          this.backgroundImageSelector.onStore = () => {
+            this.storePage();
+          };
+          this.settingsPage.appendChild(this.backgroundImageSelector.fullContainer);
+          this.settingsPage.appendChild(createSectionTitle("Glass"));
+          this.settingsPage.appendChild(createDescription("Apply a glassy effect to the UI."));
+          this.settingsPage.appendChild(
+            createSettingsButtonWithLabel("settings-page-glass-button", "Glass")
+          );
+          this.settingsPage.appendChild(createSectionTitle("Background blur"));
+          this.settingsPage.appendChild(createDescription("Apply a blur to your background."));
+          this.settingsPage.appendChild(
+            createSlider("0", "100", "settings-page-blur-slider")
+            // must be divided by 10
+            // for real value
+          );
+          const blurPreviewContainer = document.createElement("div");
+          blurPreviewContainer.classList.add("settings-page-blur-preview-container");
+          blurPreviewContainer.appendChild(createImage("theme-backgrounds/birb.jpg", "6rem", "4rem"));
+          const blurredImage = createImage("theme-backgrounds/birb.jpg", "100%", "100%");
+          blurredImage.style.filter = "blur(2px)";
+          const blurredImageContainer = document.createElement("div");
+          blurredImageContainer.classList.add("blurred-image-container");
+          blurredImageContainer.appendChild(blurredImage);
+          blurPreviewContainer.appendChild(blurredImageContainer);
+          this.settingsPage.appendChild(blurPreviewContainer);
+          this.settingsPage.appendChild(createSectionTitle("Weather overlay"));
+          this.settingsPage.appendChild(createDescription("Add dynamic weather visuals."));
+          const weatherIconsContainer = document.createElement("div");
+          weatherIconsContainer.classList.add(
+            "settings-page-icons-container",
+            "settings-page-weather-overlay-container"
+          );
+          const rainBtn = createImageButtonWithLabel(
+            "icons/weather-overlay/raindropfancy.svg",
+            "Rain",
+            "5rem",
+            "5rem",
+            "weather",
+            "settings-page-raindrop-button"
+          );
+          rainBtn.dataset.weather = "rain";
+          weatherIconsContainer.appendChild(rainBtn);
+          const realtimeBtn = createImageButtonWithLabel(
+            "icons/weather-overlay/realtimefancy.svg",
+            "Realtime",
+            "5rem",
+            "5rem",
+            "weather",
+            "settings-page-realtime-button"
+          );
+          realtimeBtn.dataset.weather = "realtime";
+          weatherIconsContainer.appendChild(realtimeBtn);
+          const snowBtn = createImageButtonWithLabel(
+            "icons/weather-overlay/snowflakefancy.svg",
+            "Snow",
+            "5rem",
+            "5rem",
+            "weather",
+            "settings-page-snow-button"
+          );
+          snowBtn.dataset.weather = "snow";
+          weatherIconsContainer.appendChild(snowBtn);
+          this.settingsPage.appendChild(weatherIconsContainer);
+          this.settingsPage.appendChild(
+            createLabeledSlider("0", "500", "settings-page-weather-overlay-slider", "Amount", false)
+          );
+          this.settingsPage.appendChild(
+            createLabeledSlider(
+              "0",
+              "100",
+              "settings-page-weather-overlay-opacity-slider",
+              "Opacity",
+              false
+            )
+          );
+          this.settingsPage.appendChild(createSectionTitle("Icon"));
+          this.settingsPage.appendChild(
+            createDescription("Choose the icon displayed in your browser tab.")
+          );
+          const iconsContainer = document.createElement("div");
+          iconsContainer.classList.add("settings-page-icons-container");
+          iconsContainer.appendChild(
+            createImageButton(
+              "icons/sm-icon.svg",
+              "5rem",
+              "5rem",
+              "logo",
+              "settings-page-default-icon-button"
+            )
+          );
+          iconsContainer.appendChild(
+            createImageButton(
+              "icons/smpp/128.png",
+              "5rem",
+              "5rem",
+              "logo",
+              "settings-page-smpp-icon-button"
+            )
+          );
+          this.settingsPage.appendChild(iconsContainer);
+          this.settingsPage.appendChild(createSectionTitle("News"));
+          this.settingsPage.appendChild(createDescription("Change the homepage news configuration."));
+          this.settingsPage.appendChild(
+            createSettingsButtonWithLabel("settings-page-show-news-button", "Show news")
+          );
+          break;
+        }
+        case "topNav":
+          this.settingsPage.appendChild(createMainTitle("Navigation"));
+          this.settingsPage.appendChild(createSectionTitle("Buttons"));
+          this.settingsPage.appendChild(
+            createDescription("Choose which buttons you want to see in the top navigation.")
+          );
+          if (!liteMode) {
+            this.settingsPage.appendChild(
+              createSettingsButtonWithLabel("settings-page-global-chat-button", "Global Chat")
+            );
+          }
+          this.settingsPage.appendChild(
+            createSettingsButtonWithLabel("settings-page-search-button", "Search")
+          );
+          this.settingsPage.appendChild(
+            createSettingsButtonWithLabel("settings-page-quick-menu-button", "Quick Menu")
+          );
+          this.settingsPage.appendChild(
+            createSettingsButtonWithLabel("settings-page-swap-courses-button", "Swap courses/links")
+          );
+          if (isGOSchool)
+            this.settingsPage.appendChild(
+              createSettingsButtonWithLabel("settings-page-go-button", "GO")
+            );
+          this.settingsPage.appendChild(createSectionTitle("Icons"));
+          this.settingsPage.appendChild(
+            createDescription("Choose which buttons you want to replace with icons.")
+          );
+          this.settingsPage.appendChild(
+            createSettingsButtonWithLabel("settings-page-home-icon-button", "Start")
+          );
+          this.settingsPage.appendChild(
+            createSettingsButtonWithLabel("settings-page-mail-icon-button", "Mail")
+          );
+          this.settingsPage.appendChild(
+            createSettingsButtonWithLabel("settings-page-notifications-icon-button", "Notifications")
+          );
+          this.settingsPage.appendChild(
+            createSettingsButtonWithLabel("settings-page-settings-icon-button", "Settings")
+          );
+          break;
+        case "widgets":
+          this.settingsPage.appendChild(createMainTitle("Widgets"));
+          this.settingsPage.appendChild(createSectionTitle("De Lijn"));
+          this.settingsPage.appendChild(createDescription("Change the De Lijn app configuration."));
+          this.settingsPage.appendChild(
+            createSettingsButtonWithLabel("settings-page-delijn-monochrome-button", "Monochrome")
+          );
+          this.settingsPage.appendChild(
+            createLabeledSlider("1", "10", "settings-page-max-busses-slider", "Max busses")
+          );
+          this.settingsPage.appendChild(createSectionTitle("Assignments"));
+          this.settingsPage.appendChild(
+            createDescription("Change the assignments app configuration.")
+          );
+          this.settingsPage.appendChild(
+            createLabeledSlider("1", "10", "settings-page-max-assignments-slider", "Max assignments")
+          );
+          if (!liteMode) {
+            this.settingsPage.appendChild(createMainTitle("Games"));
+            this.settingsPage.appendChild(createSectionTitle("Snake"));
+            this.settingsPage.appendChild(createDescription("Change configuration of Snake++"));
+            this.settingsPage.appendChild(
+              createSettingsButtonWithLabel("settings-page-show-snake-grid-button", "Grid")
+            );
+          }
+          break;
+        case "other": {
+          this.settingsPage.appendChild(createMainTitle("Other"));
+          this.settingsPage.appendChild(createSectionTitle("Performance"));
+          this.settingsPage.appendChild(
+            createDescription("Disables animations for better performance on low end devices.")
+          );
+          this.settingsPage.appendChild(
+            createSettingsButtonWithLabel(
+              "settings-page-performance-mode-button",
+              "Performance mode"
+            )
+          );
+          this.settingsPage.appendChild(createSectionTitle("Login"));
+          this.settingsPage.appendChild(createDescription("Change the login page configuration."));
+          this.settingsPage.appendChild(
+            createSettingsButtonWithLabel("settings-page-splash-text-button", "Splash-text")
+          );
+          this.settingsPage.appendChild(createSectionTitle("Homepage"));
+          this.settingsPage.appendChild(createDescription("Change the home page configuration."));
+          this.settingsPage.appendChild(
+            createSettingsButtonWithLabel("settings-page-discord-button", "Discord button")
+          );
+          this.settingsPage.appendChild(createSectionTitle("Keybindings"));
+          this.settingsPage.appendChild(createDescription("Customize your keybindings"));
+          this.settingsPage.appendChild(
+            createKeybindInput("settings-page-quick-menu-keybinding", "Quick Menu")
+          );
+          this.settingsPage.appendChild(
+            createKeybindInput("settings-page-widget-edit-keybinding", "Widget editing")
+          );
+          this.settingsPage.appendChild(
+            createKeybindInput("settings-widget-bag-keybinding", "Widget bag")
+          );
+          this.settingsPage.appendChild(
+            createKeybindInput("settings-page-settings-keybinding", "Settings")
+          );
+          if (!liteMode) {
+            this.settingsPage.appendChild(
+              createKeybindInput("settings-page-gc-keybinding", "Global Chat")
+            );
+          }
+          this.settingsPage.appendChild(createSectionTitle("Reset"));
+          this.settingsPage.appendChild(
+            createDescription("Reset all settings and widgets to their default values.")
+          );
+          const resetButton = document.createElement("button");
+          resetButton.innerText = "Reset to Defaults";
+          resetButton.classList.add("settings-page-reset-button");
+          resetButton.addEventListener("click", () => this.resetSettings());
+          this.settingsPage.appendChild(resetButton);
+          break;
+        }
+        default:
+          break;
+      }
+    }
+  };
+  var settingsWindow;
+  async function createSettingsWindow() {
+    settingsWindow = new SettingsWindow();
+    await settingsWindow.create();
+    await settingsWindow.loadPage();
+    settingsWindow.hide();
+  }
+  async function openSettingsWindow(event) {
+    settingsWindow.show(event);
+    const updateHeight = () => {
+      settingsWindow.themeSelector.updateSizes();
+      settingsWindow.themeSelector.updateContentHeight();
+      settingsWindow.element.removeEventListener("animationend", updateHeight);
+      settingsWindow.element.removeEventListener("transitionend", updateHeight);
+    };
+    settingsWindow.element.addEventListener("animationend", updateHeight);
+    settingsWindow.onScreenSizeUpdate = () => {
+      settingsWindow.element.addEventListener("transitionend", updateHeight);
+    };
+    settingsWindow.themeSelector.updateContentHeight();
+  }
+
+  // src/widgets/widgets.ts
+  var PANNELIP_MARGIN_PX = 20;
+  var widgetSystemCreated = false;
+  var widgetEditModeInit = false;
+  var widgetEditMode = false;
+  var widgets = [];
+  var hoveringBag = false;
+  var newsState = false;
+  var curDragInfo = null;
+  var widgetsContainer;
+  var widgetBag;
+  var widgetBagHandle;
+  var doneButton;
+  function registerWidget(widget) {
+    widgets.push(widget);
+  }
+  var WidgetDragInfo = class {
+    offset;
+    widget;
+    sourceInsertionPoint;
+    targetInsertionPoint;
+    constructor(widget, sourceInsertionPoint, offset) {
+      this.widget = widget;
+      this.sourceInsertionPoint = sourceInsertionPoint;
+      this.targetInsertionPoint = null;
+      this.offset = offset;
+    }
+  };
+  var WidgetBase = class {
+    element;
+    isActive;
+    #content;
+    #preview;
+    #bagPlaceHolder;
+    #bagGroup;
+    #aboutToDel;
+    #settings;
+    constructor() {
+      this.element = this.#createWidgetDiv();
+      this.isActive = false;
+      this.#content = null;
+      this.#preview = false;
+      this.#aboutToDel = false;
+    }
+    createWidgetErrorContent(name2) {
+      const p4 = document.createElement("p");
+      p4.classList.add("smpp-error-widget");
+      p4.innerHTML = "<span>Probleem bij het laden van de widget: </span><code class='widgetName'></code><button>Reset widget</button>";
+      p4.querySelector(".widgetName").innerText = name2;
+      p4.querySelector("button").addEventListener("click", async () => {
+        this.clearWidgetSettings();
+      });
+      return p4;
+    }
+    async clearWidgetSettings() {
+      await browser.runtime.sendMessage({
+        action: "setWidgetData",
+        widget: this.constructor.name,
+        data: this.defaultSettings()
+      });
+      this.#settings = this.defaultSettings();
+      console.log("Clearing", this.name, "'s settings");
+      this.#content = null;
+      this.#setPreview(false);
+    }
+    #createWidgetDiv() {
+      const widgetDiv = document.createElement("div");
+      widgetDiv.addEventListener("mousedown", (e5) => {
+        this.startDragging(e5.clientX, e5.clientY);
+      });
+      widgetDiv.classList.add("smpp-widget");
+      return widgetDiv;
+    }
+    async #intoBag() {
+      if (this.element.parentElement === this.#bagGroup) {
+        return;
+      }
+      if (this.#bagPlaceHolder) {
+        this.#bagGroup.insertBefore(this.element, this.#bagPlaceHolder);
+        this.#bagPlaceHolder.remove();
+      } else {
+        this.element.remove();
+      }
+      await this.#setPreview(true);
+    }
+    async #setPreview(preview) {
+      if (this.#preview === preview && this.#content !== null) {
+        return;
+      }
+      let newContent;
+      try {
+        if (preview) {
+          this.element.classList.add("smpp-widget-preview");
+          newContent = await this.createPreview();
+        } else {
+          this.element.classList.remove("smpp-widget-preview");
+          await this.#loadSettings();
+          newContent = await this.createContent();
+          this.isActive = true;
+        }
+      } catch (e5) {
+        console.error("Failed to create widget content");
+        console.error(e5);
+        newContent = this.createWidgetErrorContent(this.name);
+      }
+      if (!newContent) {
+        console.error(
+          "createContent and createPreview method's needs to return an html object. in widget impl"
+        );
+        newContent = this.createWidgetErrorContent(this.name);
+      }
+      this.#content?.remove();
+      newContent.classList.add("smpp-widget-content");
+      this.#content = newContent;
+      this.element.dataset.widgetName = this.name;
+      this.element.innerHTML = "";
+      this.element.appendChild(this.#content);
+      this.#preview = preview;
+    }
+    async createIfNotExist() {
+      if (!this.#content) {
+        await this.#intoBag();
+      }
+    }
+    async setBagPlaceHolder(group, placeholder) {
+      this.#bagPlaceHolder = placeholder;
+      this.#bagGroup = group;
+    }
+    async addToPannel(pannel) {
+      await this.#setPreview(false);
+      pannel.appendChild(this.element);
+      pannel.appendChild(createInsertionPointHTML(false));
+    }
+    aboutToDel(value) {
+      this.#aboutToDel = value;
+      if (value) {
+        this.element.classList.add("smpp-widget-delete");
+      } else {
+        this.element.classList.remove("smpp-widget-delete");
+      }
+    }
+    dragMove(x3, y3) {
+      if (!curDragInfo || curDragInfo.widget !== this) {
+        return;
+      }
+      const el = this.element;
+      const offset = curDragInfo.offset;
+      el.style.left = `${x3 - offset.x}px`;
+      el.style.top = `${y3 - offset.y}px`;
+    }
+    async drop(cancel = false) {
+      if (!curDragInfo || curDragInfo.widget !== this) {
+        return;
+      }
+      const el = this.element;
+      el.classList.remove("smpp-widget-dragging");
+      el.style = "";
+      const sourceIp = curDragInfo.sourceInsertionPoint;
+      let targetIp = curDragInfo.targetInsertionPoint;
+      targetIp?.classList.remove("smpp-widget-insertion-point-targeted");
+      if (cancel || !targetIp) {
+        targetIp = sourceIp;
+      }
+      if (!cancel && this.#aboutToDel) {
+        targetIp = null;
+      }
+      bagHoverExit();
+      curDragInfo = null;
+      if (targetIp == null) {
+        this.onRemove();
+        this.isActive = false;
+        await this.#intoBag();
+      } else {
+        if (targetIp.classList.contains("smpp-widget-insertion-point-pannel")) {
+          const pannelContainer = targetIp.parentElement;
+          const pannel = await createPannelHTML({ widgets: [] });
+          pannelContainer.insertBefore(createInsertionPointHTML(true), targetIp.nextElementSibling);
+          pannelContainer.insertBefore(pannel, targetIp.nextElementSibling);
+          targetIp = pannel.firstChild;
+        }
+        const targetPannel = targetIp.parentElement;
+        targetPannel.style.display = "block";
+        targetPannel.insertBefore(createInsertionPointHTML(), targetIp.nextElementSibling);
+        targetPannel.insertBefore(el, targetIp.nextElementSibling);
+        await this.#setPreview(false);
+      }
+      const sourcePannel = sourceIp?.parentElement;
+      if (sourcePannel && sourcePannel.childNodes.length === 1) {
+        sourcePannel.nextElementSibling.remove();
+        sourcePannel.remove();
+      }
+      document.body.classList.remove("smpp-widget-dragging-something");
+      await saveWidgets();
+    }
+    startDragging(grabX, grabY) {
+      if (!widgetEditMode) {
+        return;
+      }
+      const el = this.element;
+      let sourceIp = this.element.previousElementSibling;
+      const rect = this.element.getBoundingClientRect();
+      if (el.parentElement === this.#bagGroup) {
+        sourceIp = null;
+        this.#bagGroup.insertBefore(this.#bagPlaceHolder, el);
+        el.remove();
+      } else {
+        el.nextElementSibling.remove();
+      }
+      curDragInfo = new WidgetDragInfo(this, sourceIp, {
+        x: grabX - rect.left,
+        y: grabY - rect.top
+      });
+      document.body.classList.add("smpp-widget-dragging-something");
+      el.style.width = `${rect.width}px`;
+      el.style.left = `${rect.left}px`;
+      el.style.top = `${rect.top}px`;
+      el.style["transform-origin"] = `${curDragInfo.offset.x}px ${curDragInfo.offset.y}px`;
+      el.classList.add("smpp-widget-dragging");
+      document.body.appendChild(el);
+      closeBag();
+    }
+    /// Loads widget settings if needed.
+    async #loadSettings() {
+      if (this.#settings !== void 0) {
+        return;
+      }
+      const settings = await browser.runtime.sendMessage({
+        action: "getWidgetData",
+        widget: this.constructor.name
+      });
+      this.#settings = fillObjectWithDefaults(settings, this.defaultSettings());
+    }
+    // modifies a setting
+    async setSetting(path, value) {
+      await this.#loadSettings();
+      setByPath(this.#settings, path, value);
+      await browser.runtime.sendMessage({
+        action: "setWidgetData",
+        widget: this.constructor.name,
+        data: this.#settings
+      });
+      if (this.isActive) {
+        await this.onSettingsChange();
+      }
+    }
+    async getSetting(path) {
+      await this.#loadSettings();
+      return getByPath(this.#settings, path);
+    }
+    get settings() {
+      if (this.#settings === void 0) {
+        console.error(
+          "Settings were not loaded before access. Don't use .settings outside of the widget. Call await widget.getSetting(path)"
+        );
+      }
+      return this.#settings;
+    }
+    // Override us
+    // Name of the widget
+    get name() {
+      return this.constructor.name;
+    }
+    // The category the widget is in
+    get category() {
+      return "other";
+    }
+    // Returns the default settings. (will be filled in so that you always get a valid settings object inside onSettingsChange )
+    defaultSettings() {
+      return {};
+    }
+    // (Required): Gets called when the content element of the widget needs to be
+    // created (return html element). (Don't do slow tasks in here)
+    async createContent() {
+    }
+    // Gets called when the preview element needs to be created (return html
+    // element) NOTE: preview and content never exist at the same time
+    async createPreview() {
+      return await this.createContent();
+    }
+    // Gets called when the settings of the widget change.
+    // Use this to update the widget content based on the new settings. (settings object is always valid based on the value returned by defaultSettings())
+    async onSettingsChange() {
+    }
+    async onThemeChange() {
+    }
+    async onRemove() {
+    }
+  };
+  var ErrorWidget = class extends WidgetBase {
+    origWidgetName;
+    constructor(origWidgetName) {
+      super();
+      this.origWidgetName = origWidgetName;
+    }
+    get category() {
+      return null;
+    }
+    get name() {
+      return this.origWidgetName;
+    }
+    async createContent() {
+      return this.createWidgetErrorContent(this.origWidgetName);
+    }
+  };
+  var SmartschoolWidget = class extends WidgetBase {
+    smContent;
+    constructor(content) {
+      super();
+      this.smContent = content;
+      this.smContent.classList.add("smpp-widget-smartschool");
+    }
+    get category() {
+      return "smartschool";
+    }
+    get name() {
+      return `${this.constructor.name}-${this.smContent.id}`;
+    }
+    async createContent() {
+      return this.smContent;
+    }
+  };
+  function targetInsertionPoint(target) {
+    if (target !== curDragInfo.targetInsertionPoint) {
+      curDragInfo.targetInsertionPoint?.classList.remove("smpp-widget-insertion-point-targeted");
+      curDragInfo.targetInsertionPoint = target;
+      curDragInfo.targetInsertionPoint?.classList.add("smpp-widget-insertion-point-targeted");
+    }
+  }
+  function onPannelHover(pannel, e5) {
+    if (!widgetEditMode || curDragInfo == null || hoveringBag) {
+      return;
+    }
+    const bounds = e5.target.getBoundingClientRect();
+    if (e5.clientX < bounds.left + PANNELIP_MARGIN_PX) {
+      targetInsertionPoint(e5.target.previousElementSibling);
+      return;
+    }
+    if (e5.clientX > bounds.right - PANNELIP_MARGIN_PX) {
+      targetInsertionPoint(e5.target.nextElementSibling);
+      return;
+    }
+    let target = pannel.firstChild;
+    for (const child of pannel.childNodes) {
+      if (!child.classList.contains("smpp-widget")) {
+        continue;
+      }
+      const bounds2 = child.getBoundingClientRect();
+      const centerY = bounds2.top + (bounds2.bottom - bounds2.top) * 0.5;
+      if (e5.clientY > centerY) {
+        target = child.nextElementSibling;
+      }
+    }
+    targetInsertionPoint(target);
+  }
+  function onPannelInsertionPointHover(e5) {
+    if (!widgetEditMode || curDragInfo == null || hoveringBag) {
+      return;
+    }
+    targetInsertionPoint(e5.target);
+  }
+  function onCenterHover(div, e5) {
+    if (!widgetEditMode || curDragInfo == null || hoveringBag) {
+      return;
+    }
+    const bounds = div.getBoundingClientRect();
+    if (e5.clientX < (bounds.right - bounds.left) / 2 + bounds.left) {
+      targetInsertionPoint(div.previousElementSibling);
+    } else {
+      targetInsertionPoint(div.nextElementSibling);
+    }
+  }
+  function createInsertionPointHTML(pannel = false) {
+    const ipoint = document.createElement("div");
+    ipoint.classList.add("smpp-widget-insertion-point");
+    if (pannel) {
+      ipoint.classList.add("smpp-widget-insertion-point-pannel");
+      ipoint.addEventListener("mouseenter", onPannelInsertionPointHover);
+    }
+    return ipoint;
+  }
+  async function createPannelHTML(pannel) {
+    const pannelDiv = document.createElement("div");
+    pannelDiv.addEventListener("mousemove", (e5) => onPannelHover(pannelDiv, e5));
+    pannelDiv.classList.add("smpp-widget-pannel");
+    pannelDiv.appendChild(createInsertionPointHTML());
+    for (const widgetName of pannel.widgets) {
+      let widget = getWidgetByName(widgetName);
+      if (!widget) {
+        console.error(`Widget ${widgetName} doesn't exist.`);
+        registerWidget(new ErrorWidget(widgetName));
+        widget = getWidgetByName(widgetName);
+      }
+      await widget.addToPannel(pannelDiv);
+    }
+    return pannelDiv;
+  }
+  async function createWidgetsContainerHTML(widgetData, newsContent, news) {
+    const widgetsContainer2 = document.createElement("div");
+    widgetsContainer2.classList.add("smpp-widgets-container");
+    widgetsContainer2.appendChild(createInsertionPointHTML(true));
+    async function createAppendPannel(pannel) {
+      const pannelDiv = await createPannelHTML(pannel);
+      widgetsContainer2.appendChild(pannelDiv);
+      widgetsContainer2.appendChild(createInsertionPointHTML(true));
+    }
+    for (const pannel of widgetData.leftPannels) {
+      await createAppendPannel(pannel);
+    }
+    const newsDiv = document.createElement("div");
+    newsDiv.classList.add("smpp-news-container");
+    newsDiv.addEventListener("mousemove", (e5) => onCenterHover(newsDiv, e5));
+    newsContent.id = "smpp-news-content";
+    newsContent.className = "";
+    if (news) {
+      newsDiv.classList.add("show-news");
+    }
+    newsDiv.appendChild(newsContent);
+    widgetsContainer2.appendChild(newsDiv);
+    widgetsContainer2.appendChild(createInsertionPointHTML(true));
+    for (const pannel of widgetData.rightPannels) {
+      await createAppendPannel(pannel);
+    }
+    return widgetsContainer2;
+  }
+  function updateNews(value) {
+    newsState = value;
+    const newsCon = document.querySelector(".smpp-news-container");
+    if (newsCon) {
+      value ? newsCon.classList.add("show-news") : newsCon.classList.remove("show-news");
+    }
+  }
+  function setNewsEditMode(value) {
+    const newsCon = document.querySelector(".smpp-news-container");
+    document.querySelector(".smpp-news-editor").style.display = value ? "" : "none";
+    const button = document.getElementById("smpp-widget-news-toggle");
+    button.checked = newsState;
+    if (value) {
+      newsCon.classList.add("smpp-news-editmode");
+    } else {
+      newsCon.classList.remove("smpp-news-editmode");
+    }
+  }
+  function initNewsEditMode() {
+    const div = document.createElement("div");
+    div.classList.add("smpp-news-editor");
+    const button = createButtonWithLabel("smpp-widget-news-toggle", "Show News");
+    button.addEventListener("change", async (e5) => {
+      updateNews(e5.target.checked);
+      await browser.runtime.sendMessage({
+        action: "setSetting",
+        name: "appearance.news",
+        data: e5.target.checked
+      });
+      await settingsWindow.loadPage();
+      await loadQuickSettings();
+    });
+    div.appendChild(button);
+    document.querySelector(".smpp-news-container").appendChild(div);
+    setNewsEditMode(false);
+  }
+  async function widgetSystemNotifyThemeChange() {
+    for (const widget of widgets) {
+      await widget.onThemeChange();
+    }
+  }
+  async function createWidgetSystem() {
+    const container = document.getElementById("container");
+    if (!container) {
+      return false;
+    }
+    const news = document.getElementById("centercontainer");
+    if (!news) {
+      console.error(`"centercontainer" doesn't exist`);
+      return false;
+    }
+    let widgetData = await browser.runtime.sendMessage({
+      action: "getWidgetLayout"
+    });
+    console.log("Applying widgets with data: \n", widgetData);
+    let setDefaults = false;
+    if (!widgetData) {
+      setDefaults = true;
+      widgetData = {
+        leftPannels: [{ widgets: [] }],
+        rightPannels: [{ widgets: [] }]
+      };
+    }
+    for (const smWidget of document.querySelectorAll("#rightcontainer .homepage__block")) {
+      const wName = `SmartschoolWidget-${smWidget.id}`;
+      registerWidget(new SmartschoolWidget(smWidget));
+      if (setDefaults) {
+        widgetData.rightPannels[0].widgets.push(wName);
+      }
+    }
+    for (const smWidget of document.querySelectorAll("#leftcontainer .homepage__block")) {
+      const wName = `SmartschoolWidget-${smWidget.id}`;
+      registerWidget(new SmartschoolWidget(smWidget));
+      if (setDefaults) {
+        widgetData.leftPannels[0].widgets.push(wName);
+      }
+    }
+    if (setDefaults) {
+      widgetData.rightPannels[0].widgets.unshift("TutorialWidget");
+    }
+    widgetsContainer = await createWidgetsContainerHTML(widgetData, news, newsState);
+    container.innerHTML = "";
+    container.appendChild(widgetsContainer);
+    widgetSystemCreated = true;
+    return true;
+  }
+  async function saveWidgets() {
+    const widgetData = { leftPannels: [], rightPannels: [] };
+    let onLeftPannels = true;
+    for (const pan of widgetsContainer.childNodes) {
+      if (pan.classList.contains("smpp-widget-insertion-point")) {
+        continue;
+      }
+      if (pan.classList.contains("smpp-news-container")) {
+        onLeftPannels = false;
+        continue;
+      }
+      const pannelData = { widgets: [] };
+      for (const wid of pan.childNodes) {
+        if (wid.classList.contains("smpp-widget-insertion-point")) {
+          continue;
+        }
+        pannelData.widgets.push(wid.dataset.widgetName);
+      }
+      if (onLeftPannels) {
+        widgetData.leftPannels.push(pannelData);
+      } else {
+        widgetData.rightPannels.push(pannelData);
+      }
+    }
+    await browser.runtime.sendMessage({
+      action: "setWidgetLayout",
+      layout: widgetData
+    });
+  }
+  function bagHoverEnter() {
+    if (!widgetBag) {
+      return;
+    }
+    hoveringBag = true;
+    if (curDragInfo) {
+      targetInsertionPoint(null);
+      widgetBag.classList.add("smpp-widget-bag-delete");
+      curDragInfo.widget.aboutToDel(true);
+    }
+  }
+  function bagHoverExit() {
+    if (!widgetBag) {
+      return;
+    }
+    hoveringBag = false;
+    if (curDragInfo) {
+      widgetBag.classList.remove("smpp-widget-bag-delete");
+      curDragInfo.widget.aboutToDel(false);
+    }
+  }
+  async function createGroup(bag, name2, displayName) {
+    const group = document.createElement("div");
+    group.classList.add("smpp-widget-bag-group");
+    for (const widget of widgets) {
+      if (widget.category === name2) {
+        const pl = document.createElement("div");
+        pl.classList.add("smpp-widget-bag-placeholder");
+        await widget.setBagPlaceHolder(group, pl);
+        group.appendChild(pl);
+      }
+    }
+    const groupTitle = document.createElement("h2");
+    groupTitle.classList.add("smpp-widget-bag-group-title");
+    groupTitle.innerText = displayName;
+    bag.appendChild(groupTitle);
+    bag.appendChild(group);
+  }
+  async function createWidgetBag() {
+    const bag = document.createElement("div");
+    bag.classList.add("smpp-widget-bag");
+    const content = document.createElement("div");
+    content.classList.add("smpp-widget-bag-content");
+    const innerContent = document.createElement("div");
+    innerContent.classList.add("smpp-widget-bag-inner-content");
+    await createGroup(innerContent, "other", "Widgets");
+    if (!liteMode) await createGroup(innerContent, "games", "Games");
+    await createGroup(innerContent, "smartschool", "Smartschool Widgets");
+    content.appendChild(innerContent);
+    bag.appendChild(content);
+    const handle = document.createElement("div");
+    handle.classList.add("smpp-widget-bag-handle");
+    handle.addEventListener("click", () => {
+      toggleBag();
+    });
+    handle.innerHTML = `
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg class="smpp-widget-bag-handle-icon" version="1.1" viewBox="0 0 448 448" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-.898 -124.01)"><path d="m26.458 288.48 198.44 119.06 198.44-119.06" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="39.511"/></g></svg>
+`;
+    bag.appendChild(handle);
+    for (const widget of widgets) {
+      await widget.createIfNotExist();
+    }
+    document.body.appendChild(bag);
+    return bag;
+  }
+  function isBagOpen() {
+    if (!widgetBag) {
+      return false;
+    }
+    return widgetBag.classList.contains("smpp-widget-bag-open");
+  }
+  function closeBag() {
+    if (widgetBag) {
+      widgetBag.classList.remove("smpp-widget-bag-open");
+    }
+    if (doneButton) {
+      changeDoneButtonState("noBag");
+      doneButton.classList.remove("smpp-widget-bag-open");
+    }
+    bagHoverExit();
+  }
+  function openBag() {
+    if (widgetBag) {
+      widgetBag.classList.add("smpp-widget-bag-open");
+    }
+    if (doneButton) {
+      changeDoneButtonState("inBag");
+      doneButton.classList.add("smpp-widget-bag-open");
+    }
+    if (curDragInfo) {
+      bagHoverEnter();
+    }
+  }
+  function toggleBag(_params) {
+    if (isBagOpen()) {
+      closeBag();
+    } else {
+      if (!curDragInfo) {
+        openBag();
+      }
+    }
+  }
+  var setEditModeFalse = () => setEditMode(false);
+  function createWidgetsDoneButton() {
+    doneButton = document.createElement("button");
+    doneButton.innerHTML = `Done ${doneSvg}`;
+    doneButton.classList.add("widgets-done-button");
+    doneButton.classList.add("hidden");
+    doneButton.addEventListener("click", setEditModeFalse);
+    document.body.appendChild(doneButton);
+  }
+  function changeDoneButtonState(state) {
+    doneButton.removeEventListener("click", setEditModeFalse);
+    doneButton.removeEventListener("click", toggleBag);
+    switch (state) {
+      case "noBag":
+        doneButton.addEventListener("click", setEditModeFalse);
+        break;
+      case "inBag":
+        doneButton.addEventListener("click", toggleBag);
+        break;
+    }
+  }
+  function updateDoneButtonState(value) {
+    requestAnimationFrame(() => {
+      if (value) {
+        doneButton.classList.remove("hidden");
+      } else {
+        doneButton.classList.add("hidden");
+      }
+    });
+  }
+  function splitWidgetNameAndSettingPath(path) {
+    const index = path.indexOf(".");
+    const widgetName = path.slice(0, index);
+    const settingPath = path.slice(index + 1);
+    return [widgetName, settingPath];
+  }
+  function getWidgetByName(name2) {
+    for (const widget of widgets) {
+      if (widget.name === name2) {
+        return widget;
+      }
+    }
+    return null;
+  }
+  async function getWidgetSetting(path) {
+    const [widgetName, settingPath] = splitWidgetNameAndSettingPath(path);
+    const widget = getWidgetByName(widgetName);
+    return await widget.getSetting(settingPath);
+  }
+  async function setWidgetSetting(path, value) {
+    const [widgetName, settingPath] = splitWidgetNameAndSettingPath(path);
+    const widget = getWidgetByName(widgetName);
+    await widget.setSetting(settingPath, value);
+  }
+  async function setEditMode(value) {
+    if (value && !widgetEditModeInit) {
+      console.error(
+        "Widget edit mode has not been initalized. setEditMode(true) has been called. (call initWidgetEditMode first) (This is a bug)"
+      );
+    }
+    if (!doneButton) {
+      createWidgetsDoneButton();
+    }
+    setNewsEditMode(value);
+    if (value) {
+      document.body.classList.add("smpp-widget-edit-mode");
+      if (!widgetBag) {
+        widgetBag = await createWidgetBag();
+        widgetBagHandle = widgetBag.querySelector(".smpp-widget-bag-handle");
+      }
+    } else {
+      if (curDragInfo) {
+        await curDragInfo.widget.drop(true);
+      }
+      closeBag();
+      document.body.classList.remove("smpp-widget-edit-mode");
+    }
+    updateDoneButtonState(value);
+    widgetEditMode = value;
+  }
+  function initWidgetEditMode() {
+    if (widgetEditModeInit) {
+      return;
+    }
+    if (!widgetSystemCreated) {
+      console.error("Widget system has not been created yet. But initWidgetEditMode has been called");
+      return;
+    }
+    widgetEditModeInit = true;
+    initNewsEditMode();
+    document.addEventListener("mouseup", async (_e) => {
+      if (curDragInfo) {
+        await curDragInfo.widget.drop(false);
+      }
+    });
+    document.addEventListener("mousemove", (e5) => {
+      if (curDragInfo) {
+        curDragInfo.widget.dragMove(e5.clientX, e5.clientY);
+        const handleBounds = widgetBagHandle.getBoundingClientRect();
+        if (e5.clientY < handleBounds.bottom && e5.clientX > handleBounds.left && e5.clientX < handleBounds.right) {
+          bagHoverEnter();
+        } else if (hoveringBag) {
+          bagHoverExit();
+        }
+      }
+    });
+  }
+  function createWidgetEditModeButton() {
+    const btn = document.createElement("button");
+    btn.classList.add("topnav__btn");
+    btn.classList.add("smpp-button");
+    btn.id = "smpp-widget-edit-mode-btn";
+    btn.addEventListener("click", async () => {
+      await setEditMode(!widgetEditMode);
+    });
+    btn.innerHTML = editIconSvg;
+    btn.title = "Ga in/uit edit mode om de positie van je widgets te veranderen.";
+    return btn;
+  }
+
+  // src/main-features/quick-menu/dmenu.ts
+  var active_dmenu = null;
+  var dmenuConfig = null;
+  async function reloadDMenuConfig() {
+    dmenuConfig = await browser.runtime.sendMessage({
+      action: "getSetting",
+      name: "other.dmenu"
+    });
+  }
+  var DMenu = class {
+    openerEl;
+    menuEl;
+    #endFunc;
+    #inputEl;
+    #itemListEl;
+    #selectedIndex;
+    constructor(itemList, endFunc = void 0, title = "dmenu:", openerEl = void 0) {
+      this.endFunc = endFunc;
+      this.openerEl = openerEl;
+      this.userText = "";
+      this.selectedIndex = 0;
+      this.#mkDmenu(itemList, title);
+      this.inputEl.focus();
+    }
+    isOpen() {
+      return this.menuEl != null;
+    }
+    close() {
+      if (!this.isOpen()) {
+        return;
+      }
+      this.menuEl.remove();
+      this.menuEl = null;
+    }
+    #accept(row = void 0) {
+      if (row === void 0) {
+        row = this.itemListEl.childNodes[this.selectedIndex];
+      }
+      let content = this.inputEl.value;
+      if (row !== void 0 && !row.classList.contains("hidden")) {
+        content = row.dataset.content;
+      }
+      if (this.endFunc !== void 0 && content !== "") {
+        this.endFunc(content);
+      }
+      this.close();
+    }
+    #onKeydown(e5) {
+      if (e5.key === "Enter") {
+        this.#accept();
+      } else if (e5.key === "Escape") {
+        this.close();
+      } else if (e5.key === "Tab" && e5.shiftKey || e5.key === "ArrowUp") {
+        this.#selPrev();
+      } else if (e5.key === "Tab" && !e5.shiftKey || e5.key === "ArrowDown") {
+        this.#selNext();
+      } else {
+        return;
+      }
+      e5.preventDefault();
+    }
+    #oninput() {
+      this.#sort();
+      return;
+    }
+    #selNext() {
+      this.#select(this.selectedIndex + 1);
+    }
+    #selPrev() {
+      this.#select(this.selectedIndex - 1);
+    }
+    #validIndex(index) {
+      if (index < 0 || index >= this.itemListEl.childNodes.length) {
+        return false;
+      }
+      return !this.itemListEl.childNodes[index].classList.contains("hidden");
+    }
+    #select(index) {
+      if (!this.#validIndex(index)) {
+        return;
+      }
+      const row = this.itemListEl.childNodes[this.selectedIndex];
+      row.classList.remove("dmenu-selected");
+      this.selectedIndex = index;
+      const newrow = this.itemListEl.childNodes[this.selectedIndex];
+      newrow.classList.add("dmenu-selected");
+      newrow.scrollIntoView(false);
+    }
+    #sort() {
+      this.selectedIndex = 0;
+      const searchq = this.inputEl.value.trim();
+      const items = [];
+      for (const node of this.itemListEl.childNodes) {
+        const score = this.#matchScore(node.dataset.content, searchq);
+        if (score === 0 && searchq !== "") {
+          node.classList.add("hidden");
+        } else {
+          node.classList.remove("hidden");
+        }
+        items.push({ score, htmlNode: node });
+        if (dmenuConfig.itemScore) {
+          node.getElementsByClassName("dmenu-score")[0].innerText = score;
+        }
+      }
+      const sortedItems = items.sort((a5, b3) => {
+        if (a5.score < b3.score) return 1;
+        if (a5.score > b3.score) return -1;
+        return 0;
+      });
+      for (let i5 = 0; i5 < sortedItems.length; i5++) {
+        const item = sortedItems[i5];
+        if (i5 === 0) {
+          item.htmlNode.classList.add("dmenu-selected");
+        } else {
+          item.htmlNode.classList.remove("dmenu-selected");
+        }
+        this.itemListEl.appendChild(item.htmlNode);
+      }
+    }
+    #matchScore(str, match) {
+      str = str.toLowerCase();
+      match = match.toLowerCase();
+      let score = 0;
+      let mi = 0;
+      let i5 = 0;
+      let streak = 0;
+      let streakStartI = 0;
+      while (true) {
+        if (i5 >= str.length || mi >= match.length) {
+          break;
+        }
+        if (str[i5] === match[mi]) {
+          score += (streak + 1) * (streak + 1) * ((str.length - streakStartI) / str.length);
+          mi += 1;
+          streak += 1;
+        } else {
+          streakStartI = i5;
+          streak = 0;
+        }
+        i5++;
+      }
+      if (mi < match.length) {
+        return 0;
+      }
+      if (score < 0) {
+        score = 0;
+      }
+      return score;
+    }
+    #mkRow(item, parent) {
+      let cmd;
+      let meta;
+      if (typeof item === "string") {
+        cmd = item.toLowerCase();
+      } else {
+        cmd = item.value;
+        meta = item.meta;
+      }
+      const row = document.createElement("div");
+      row.classList.add("dmenu-row");
+      row.innerHTML = '<div class="dmenu-content"></div><div class="dmenu-meta"></div><div class="dmenu-score"></div>';
+      row.getElementsByClassName("dmenu-content")[0].innerText = cmd;
+      row.dataset.content = cmd;
+      if (meta !== void 0) {
+        row.getElementsByClassName("dmenu-meta")[0].innerText = meta;
+      }
+      if (dmenuConfig.itemScore) {
+        row.getElementsByClassName("dmenu-score")[0].innerText = "0";
+      }
+      row.addEventListener("click", (_e) => {
+        this.#accept(row);
+      });
+      parent.appendChild(row);
+      return row;
+    }
+    #mkDmenu(itemList, title) {
+      this.menuEl = document.createElement("div");
+      this.menuEl.classList.add("dmenu");
+      if (randomChance(1 / 100)) this.menuEl.classList.add("jokeDmenu");
+      if (dmenuConfig.centered) {
+        this.menuEl.classList.add("dmenu-centered");
+      }
+      const top = document.createElement("div");
+      top.classList.add("dmenu-top");
+      const dtitle = document.createElement("label");
+      dtitle.innerText = title;
+      dtitle.classList.add("dmenu-title");
+      top.appendChild(dtitle);
+      this.inputEl = document.createElement("input");
+      this.inputEl.type = "text";
+      this.inputEl.classList.add("dmenu-input");
+      this.inputEl.addEventListener("keydown", (e5) => {
+        this.#onKeydown(e5);
+      });
+      this.inputEl.addEventListener("input", (_e) => {
+        this.#oninput();
+      });
+      top.appendChild(this.inputEl);
+      this.menuEl.appendChild(top);
+      this.itemListEl = document.createElement("div");
+      this.itemListEl.classList.add("dmenu-itemlist");
+      this.menuEl.appendChild(this.itemListEl);
+      let first = true;
+      for (const item of itemList) {
+        const row = this.#mkRow(item, this.itemListEl);
+        if (first) {
+          row.classList.add("dmenu-selected");
+          first = false;
+        }
+      }
+      document.body.appendChild(this.menuEl);
+    }
+  };
+  function dmenu(itemList, endFunc = void 0, title = "dmenu:", opener = void 0) {
+    if (active_dmenu?.isOpen()) {
+      active_dmenu.close();
+    }
+    const menu = new DMenu(itemList, endFunc, title, opener);
+    active_dmenu = menu;
+    return menu;
+  }
+  function createQuickMenuButton() {
+    const quickMenuButton = document.createElement("button");
+    quickMenuButton.id = "quick-menu-button";
+    quickMenuButton.className = "topnav__btn";
+    quickMenuButton.innerHTML = "Quick";
+    quickMenuButton.addEventListener("click", () => {
+      do_qm(quickMenuButton);
+    });
+    return quickMenuButton;
+  }
+  document.addEventListener("click", (e5) => {
+    if (active_dmenu == null || !active_dmenu.isOpen()) {
+      return;
+    }
+    if (!active_dmenu.menuEl.contains(e5.target) && e5.target !== active_dmenu.openerEl) {
+      active_dmenu.close();
+      e5.preventDefault();
+    }
+  });
+
+  // src/main-features/quick-menu/config.ts
+  function gatherOptions(template, name2) {
+    let options = [];
+    for (const keyName of Object.keys(template)) {
+      const key = template[keyName];
+      const newName = (name2 ? `${name2}.` : "") + keyName;
+      if (typeof key === "object" && !Array.isArray(key)) {
+        options = options.concat(gatherOptions(template[keyName], newName));
+      } else if (key === "array") {
+      } else {
+        options.push({ meta: "config", value: newName });
+      }
+    }
+    return options;
+  }
+  async function getDMenuOptionsForSettings(toplevel) {
+    const template = await browser.runtime.sendMessage({
+      action: "getSettingsTemplate"
+    });
+    let options = [];
+    for (const cat of Object.keys(template)) {
+      options = options.concat(gatherOptions(template[cat], toplevel ? "config" : null));
+    }
+    return options;
+  }
+  function getFullOptPath(template, optName) {
+    if (optName.startsWith("config.")) {
+      optName = optName.substring("config.".length);
+    }
+    const first = optName.split(".")[0];
+    for (const key of Object.keys(template)) {
+      if (template[key][first] !== void 0) {
+        return `${key}.${optName}`;
+      }
+    }
+    console.error(
+      `Was not able to convert the optName '${optName}' to full because it was not found in the template json (returning an option with no category)`
+    );
+    return optName;
+  }
+  async function setSettingByPath(path, value) {
+    await browser.runtime.sendMessage({
+      action: "setSetting",
+      name: path,
+      data: value
+    });
+    await apply();
+  }
+  async function dmenuEditConfig(path) {
+    const templates = await browser.runtime.sendMessage({
+      action: "getSettingsTemplate"
+    });
+    const configPath = getFullOptPath(templates, path);
+    const template = getByPath(templates, configPath);
+    let optionValue = await browser.runtime.sendMessage({
+      action: "getSetting",
+      name: configPath
+    });
+    if (optionValue.error) {
+      console.error(`error from service worker: ${optionValue.error}`);
+      optionValue = "worker error";
+    }
+    const label = `${path} (${optionValue}): `;
+    if (template === "boolean") {
+      dmenu(
+        ["true", "false"],
+        (cmd, _shift) => {
+          if (cmd === "true") {
+            setSettingByPath(configPath, true);
+          } else if (cmd === "false") {
+            setSettingByPath(configPath, false);
+          }
+        },
+        label
+      );
+    } else if (template === "number") {
+      dmenu(
+        [],
+        (cmd, _shift) => {
+          if (configPath === "appearance.background.blur" && cmd === "song 2") {
+            openURL("https://www.youtube.com/watch?v=Bz4l9_bzfZM", true);
+            return;
+          }
+          setSettingByPath(configPath, new Number(cmd));
+        },
+        label
+      );
+    } else if (Array.isArray(template)) {
+      dmenu(
+        template,
+        (cmd, _shift) => {
+          setSettingByPath(configPath, cmd);
+        },
+        label
+      );
+    } else {
+      if (template !== "string") {
+        console.error(`Invalid template type: '${template}' Falling back to 'string' template type`);
+      }
+      dmenu(
+        [],
+        (cmd, _shift) => {
+          setSettingByPath(configPath, cmd);
+        },
+        label
+      );
+    }
+  }
+
   // src/main-features/quick-menu/quick.ts
   var quicks = [];
   var links = [];
@@ -9879,16 +9580,16 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     scrape_goto();
   }
   function quick_cmd_list() {
-    let cmd_list = [];
+    const cmd_list = [];
     for (let i5 = 0; i5 < quicks.length; i5++) {
-      cmd_list.push({ value: quicks[i5].name, meta: "quick: " + quicks[i5].url });
+      cmd_list.push({ value: quicks[i5].name, meta: `quick: ${quicks[i5].url}` });
     }
     return cmd_list;
   }
   function add_quick(name2, url) {
-    let quick = { name: name2.toLowerCase(), url };
+    const quick = { name: name2.toLowerCase(), url };
     for (let i5 = 0; i5 < quicks.length; i5++) {
-      if (quicks[i5].name == name2) {
+      if (quicks[i5].name === name2) {
         quicks[i5] = quick;
         quick_save();
         return;
@@ -9899,7 +9600,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   }
   function remove_quick(name2) {
     for (let i5 = 0; i5 < quicks.length; i5++) {
-      if (quicks[i5].name == name2) {
+      if (quicks[i5].name === name2) {
         quicks.splice(i5, 1);
         quick_save();
         return;
@@ -9924,22 +9625,22 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     });
   }
   function add_quick_interactive() {
-    let cmd_list = quick_cmd_list();
+    const cmd_list = quick_cmd_list();
     dmenu(
       cmd_list,
-      function(name2, shift) {
+      (name2, _shift) => {
         value_list = [];
         for (let i5 = 0; i5 < quicks.length; i5++) {
-          if (quicks[i5].name == name2) {
+          if (quicks[i5].name === name2) {
             value_list = [{ value: quicks[i5].url }];
             break;
           }
         }
         dmenu(
           value_list,
-          function(value, shift2) {
+          (value, _shift2) => {
             if (!value.startsWith("http")) {
-              value = "https://" + value;
+              value = `https://${value}`;
             }
             add_quick(name2, value);
           },
@@ -9950,10 +9651,10 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     );
   }
   function remove_quick_interactive() {
-    let cmd_list = quick_cmd_list();
+    const cmd_list = quick_cmd_list();
     dmenu(
       cmd_list,
-      function(name2, shift) {
+      (name2, _shift) => {
         remove_quick(name2);
       },
       "name:"
@@ -9961,10 +9662,10 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   }
   async function fetch_links() {
     links = [];
-    let response = await fetch("/links/api/v1/");
+    const response = await fetch("/links/api/v1/");
     const contentType = response.headers.get("content-type");
     if (response.ok && contentType && contentType.includes("application/json")) {
-      let response_data = await response.json();
+      const response_data = await response.json();
       for (let i5 = 0; i5 < response_data.length; i5++) {
         links.push({
           url: response_data[i5].url,
@@ -9973,32 +9674,32 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         });
       }
     } else {
-      console.error("Fetching links failed (" + response.status + " http code)");
+      console.error(`Fetching links failed (${response.status} http code)`);
       links = [];
     }
   }
   async function fetch_vakken() {
     vakken = [];
-    let response = await fetch("/Topnav/getCourseConfig");
+    const response = await fetch("/Topnav/getCourseConfig");
     const contentType = response.headers.get("content-type");
     if (response.ok && contentType && contentType.includes("application/json")) {
-      let response_data = await response.json();
+      const response_data = await response.json();
       for (let i5 = 0; i5 < response_data.own.length; i5++) {
-        let vak = response_data.own[i5];
+        const vak = response_data.own[i5];
         let meta = "vak";
-        if (vak.descr != "") {
-          meta += "  [ " + vak.descr + " ]";
+        if (vak.descr !== "") {
+          meta += `  [ ${vak.descr} ]`;
         }
         vakken.push({ url: vak.url, value: vak.name.toLowerCase(), meta });
       }
     } else {
-      console.error("Fetching vakken failed (" + response.status + " http code)");
+      console.error(`Fetching vakken failed (${response.status} http code)`);
       vakken = [];
     }
   }
   function scrape_goto() {
     goto_items = [];
-    let goto_items_html = document.querySelectorAll(".js-shortcuts-container a");
+    const goto_items_html = document.querySelectorAll(".js-shortcuts-container a");
     for (let i5 = 0; i5 < goto_items_html.length; i5++) {
       const item = goto_items_html[i5];
       goto_items.push({
@@ -10036,7 +9737,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     }
     dmenu(
       cmd_list,
-      async function(cmd) {
+      async (cmd) => {
         switch (cmd) {
           case "unbloat":
             unbloat();
@@ -10053,7 +9754,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           case "config":
             dmenu(
               await getDMenuOptionsForSettings(false),
-              function(cmd2, shift) {
+              (cmd2, _shift) => {
                 dmenuEditConfig(cmd2);
               },
               "config: "
@@ -10080,7 +9781,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           case "gcbeta":
             openGlobalChat(null, true);
             return;
-          case "dizzy":
+          case "dizzy": {
             const styleEl = document.createElement("style");
             styleEl.innerText = `
                               *{
@@ -10091,6 +9792,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
                               }`;
             document.body.appendChild(styleEl);
             return;
+          }
           case "reset plant":
             resetPlant();
             return;
@@ -10100,8 +9802,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
                 action: "getPlantAppData"
               })
             );
-          case "remove current theme":
-            let data2 = await browser.runtime.sendMessage({
+            break;
+          case "remove current theme": {
+            const data2 = await browser.runtime.sendMessage({
               action: "getSettingsData"
             });
             await browser.runtime.sendMessage({
@@ -10109,13 +9812,16 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
               id: data2.appearance.theme
             });
             break;
-          case "test cats":
-            let themes2 = await browser.runtime.sendMessage({
+          }
+          case "test cats": {
+            const themes2 = await browser.runtime.sendMessage({
               action: "getThemes",
               categories: ["quickSettings"],
               includeHidden: true
             });
             console.log(themes2);
+            break;
+          }
           case "posh text":
             document.body.style.setProperty(
               "--font-family",
@@ -10127,6 +9833,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
               "--font-family",
               `"Comic Neue", "Montserrat", "Trebuchet MS", sans-serif`
             );
+            break;
           default:
             break;
         }
@@ -10135,29 +9842,29 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         }
         for (let i5 = 0; i5 < quicks.length; i5++) {
           const quick = quicks[i5];
-          if (quick.name == cmd) {
+          if (quick.name === cmd) {
             openURL2(quick.url, true);
             return;
           }
         }
         for (let i5 = 0; i5 < links.length; i5++) {
-          if (links[i5].value == cmd) {
+          if (links[i5].value === cmd) {
             openURL2(links[i5].url, true);
           }
         }
         for (let i5 = 0; i5 < goto_items.length; i5++) {
-          if (goto_items[i5].value == cmd) {
+          if (goto_items[i5].value === cmd) {
             openURL2(goto_items[i5].url);
           }
         }
         for (let i5 = 0; i5 < vakken.length; i5++) {
-          if (vakken[i5].value == cmd) {
+          if (vakken[i5].value === cmd) {
             openURL2(vakken[i5].url);
           }
         }
       },
       "quick:",
-      opener = opener
+      opener
     );
   }
 
@@ -10207,7 +9914,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     max;
     def;
     static slider(name2, title, min = 0, max = 0, def = 0) {
-      let go = new _GameOption();
+      const go = new _GameOption();
       go.name = name2;
       go.title = title;
       go.type = GAME_OPTION_TYPE_SLIDER;
@@ -10271,15 +9978,15 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       inputEl.value = value;
       let displayValue = Math.round(value / 10);
       displayValue /= 10;
-      if (displayValue == Math.round(displayValue)) {
+      if (displayValue === Math.round(displayValue)) {
         displayValue += ".0";
       }
-      displayEl.innerText = displayValue + "x";
+      displayEl.innerText = `${displayValue}x`;
       displayEl.classList.add("game-option-value");
       this.#optionValues[name2] = value * 1;
     }
     #updateScore() {
-      this.#scoreEl.innerText = "High Score: " + this.#hiScore;
+      this.#scoreEl.innerText = `High Score: ${this.#hiScore}`;
     }
     #draw(ts) {
       if (!this.#lastTs) {
@@ -10306,8 +10013,6 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         });
       }
     }
-    #tick() {
-    }
     async #startGame() {
       this.canvas.style.display = "block";
       this.menu.style.display = "none";
@@ -10326,7 +10031,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     }
     async createContent() {
       this.#optionValues = {};
-      let div = document.createElement("div");
+      const div = document.createElement("div");
       div.classList.add("game-container");
       this.canvas = document.createElement("canvas");
       this.canvas.width = 300;
@@ -10339,41 +10044,41 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         }
       });
       div.appendChild(this.canvas);
-      let menuTop = document.createElement("div");
+      const menuTop = document.createElement("div");
       menuTop.classList.add("game-menu-top");
-      let menuBottom = document.createElement("div");
+      const menuBottom = document.createElement("div");
       menuBottom.classList.add("game-menu-bottom");
-      let menu = document.createElement("div");
+      const menu = document.createElement("div");
       menu.classList.add("game-menu");
-      let title = document.createElement("h2");
+      const title = document.createElement("h2");
       title.classList.add("game-title");
-      title.innerText = this.title.endsWith("++") ? this.title : this.title + "++";
+      title.innerText = this.title.endsWith("++") ? this.title : `${this.title}++`;
       menuTop.appendChild(title);
       this.#scoreEl = document.createElement("span");
       this.#scoreEl.classList.add("game-score");
       menuTop.appendChild(this.#scoreEl);
-      for (let opt of this.options) {
-        let label = document.createElement("label");
+      for (const opt of this.options) {
+        const label = document.createElement("label");
         label.classList.add("game-slider-label");
         label.innerText = opt.title;
         menuBottom.appendChild(label);
-        if (opt.type == GAME_OPTION_TYPE_SLIDER) {
-          let sliderCont = document.createElement("div");
+        if (opt.type === GAME_OPTION_TYPE_SLIDER) {
+          const sliderCont = document.createElement("div");
           sliderCont.classList.add("game-slide-container");
-          let slider = document.createElement("input");
+          const slider = document.createElement("input");
           slider.type = "range";
           slider.min = opt.min;
           slider.max = opt.max;
           slider.value = 0;
           slider.classList.add("game-slider");
           sliderCont.appendChild(slider);
-          let display = document.createElement("span");
+          const display = document.createElement("span");
           sliderCont.appendChild(display);
           this.#optionElements[opt.name] = { display, input: slider };
           slider.addEventListener("input", (e5) => {
             this.#updateOpt(opt.name, e5.target.value);
           });
-          slider.addEventListener("change", async (e5) => {
+          slider.addEventListener("change", async (_e) => {
             await this.setSetting("options", this.#optionValues);
           });
           menuBottom.appendChild(sliderCont);
@@ -10382,7 +10087,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       this.#buttonEl = document.createElement("button");
       this.#buttonEl.classList.add("game-button");
       this.#buttonEl.innerText = "Play";
-      this.#buttonEl.addEventListener("click", async (e5) => {
+      this.#buttonEl.addEventListener("click", async (_e) => {
         await this.#startGame();
       });
       menuBottom.appendChild(this.#buttonEl);
@@ -10394,16 +10099,16 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       return div;
     }
     async onSettingsChange() {
-      if (this.constructor.name == "SnakeWidget") {
+      if (this.constructor.name === "SnakeWidget") {
         if (window.localStorage.getItem("snakehighscore")) {
           this.settings = await migrateSnake();
         }
-      } else if (this.constructor.name == "FlappyWidget") {
+      } else if (this.constructor.name === "FlappyWidget") {
         if (window.localStorage.getItem("flappyhighscore")) {
           this.settings = await migrateFlappy();
         }
       }
-      for (let opt of this.options) {
+      for (const opt of this.options) {
         let value = this.settings.options[opt.name];
         if (!value) {
           value = opt.def;
@@ -10414,19 +10119,19 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       this.#updateScore();
     }
     async createPreview() {
-      let div = document.createElement("div");
+      const div = document.createElement("div");
       div.classList.add("game-container");
-      let menuTop = document.createElement("div");
+      const menuTop = document.createElement("div");
       menuTop.classList.add("game-menu-top");
-      let menuBottom = document.createElement("div");
+      const menuBottom = document.createElement("div");
       menuBottom.classList.add("game-menu-bottom");
-      let menu = document.createElement("div");
+      const menu = document.createElement("div");
       menu.classList.add("game-menu");
-      let title = document.createElement("h2");
+      const title = document.createElement("h2");
       title.classList.add("game-title");
-      title.innerText = this.title.endsWith("++") ? this.title : this.title + "++";
+      title.innerText = this.title.endsWith("++") ? this.title : `${this.title}++`;
       menuTop.appendChild(title);
-      let buttonEl = document.createElement("button");
+      const buttonEl = document.createElement("button");
       buttonEl.classList.add("game-button");
       buttonEl.innerText = "Play";
       menuBottom.appendChild(buttonEl);
@@ -10439,6 +10144,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     // Override us
     // (required)
     get title() {
+      return "Game";
     }
     async onGameStart() {
     }
@@ -10447,13 +10153,13 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     }
     // Called when the game needs to render a new frame (dt is time since last
     // frame)
-    onGameDraw(ctx, deltaTime) {
+    onGameDraw(_ctx, _deltaTime) {
     }
-    async onKeyDown(e5) {
+    async onKeyDown(_e) {
     }
-    async onKeyUp(e5) {
+    async onKeyUp(_e) {
     }
-    async onMouse(e5) {
+    async onMouse(_e) {
     }
     get tickSpeed() {
       return 60;
@@ -10534,7 +10240,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       if (this.leftPressed) this.paddleX -= speed * dt;
       if (this.rightPressed) this.paddleX += speed * dt;
       this.paddleX = Math.max(0, Math.min(w2 - PADDLE_WIDTH, this.paddleX));
-      let ball = this.ball;
+      const ball = this.ball;
       ball.x += ball.dx * dt;
       ball.y += ball.dy * dt;
       if (ball.x < BALL_RADIUS) {
@@ -10556,7 +10262,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       if (ball.y > h4 + BALL_RADIUS) {
         this.stopGame();
       }
-      for (let b3 of this.bricks) {
+      for (const b3 of this.bricks) {
         if (b3.status === 1) {
           if (ball.x > b3.x && ball.x < b3.x + BRICK_WIDTH && ball.y > b3.y && ball.y < b3.y + BRICK_HEIGHT) {
             b3.status = 0;
@@ -10567,20 +10273,13 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         }
       }
       ctx.fillStyle = getThemeVar("--color-accent");
-      this.drawRoundedRect(
-        ctx,
-        this.paddleX,
-        h4 - PADDLE_HEIGHT,
-        PADDLE_WIDTH,
-        PADDLE_HEIGHT,
-        5
-      );
+      this.drawRoundedRect(ctx, this.paddleX, h4 - PADDLE_HEIGHT, PADDLE_WIDTH, PADDLE_HEIGHT, 5);
       ctx.fillStyle = getThemeVar("--color-text");
       ctx.beginPath();
       ctx.arc(ball.x, ball.y, BALL_RADIUS, 0, 2 * Math.PI);
       ctx.fill();
       ctx.fillStyle = getThemeVar("--color-accent");
-      for (let b3 of this.bricks) {
+      for (const b3 of this.bricks) {
         if (b3.status === 1) {
           this.drawRoundedRect(ctx, b3.x, b3.y, BRICK_WIDTH, BRICK_HEIGHT, 5);
         }
@@ -10620,8 +10319,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       return [GameOption.slider("speed", "Speed:", 10, 300, 100)];
     }
     #drawGround(ctx) {
-      let w2 = this.canvas.width;
-      let h4 = this.canvas.height;
+      const w2 = this.canvas.width;
+      const h4 = this.canvas.height;
       ctx.beginPath();
       ctx.lineWidth = 1;
       ctx.moveTo(0, h4 - FLOOR_H);
@@ -10639,33 +10338,18 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       }
     }
     #calcGap() {
-      return Math.max(
-        PIPE_GAP * this.getOpt("speed") * 0.01,
-        BIRD_RADIUS * 2 + 5
-      );
+      return Math.max(PIPE_GAP * this.getOpt("speed") * 0.01, BIRD_RADIUS * 2 + 5);
     }
     #drawPipe(ctx, pipe) {
       const gap_size = this.#calcGap();
       ctx.fillStyle = getThemeVar("--color-accent");
       ctx.lineCap = "round";
       ctx.beginPath();
-      ctx.roundRect(
-        pipe.x,
-        -PIPE_W,
-        PIPE_W,
-        pipe.y + PIPE_W - gap_size / 2,
-        PIPE_W
-      );
+      ctx.roundRect(pipe.x, -PIPE_W, PIPE_W, pipe.y + PIPE_W - gap_size / 2, PIPE_W);
       ctx.fill();
       ctx.beginPath();
       const botStartY = pipe.y + gap_size * 0.5;
-      ctx.roundRect(
-        pipe.x,
-        botStartY,
-        PIPE_W,
-        this.canvas.height - botStartY + PIPE_W,
-        PIPE_W
-      );
+      ctx.roundRect(pipe.x, botStartY, PIPE_W, this.canvas.height - botStartY + PIPE_W, PIPE_W);
       ctx.fill();
     }
     #updatePipe(pipe, dt) {
@@ -10735,7 +10419,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       this.#drawPipe(ctx, this.pipe);
       this.#drawGround(ctx);
     }
-    async onMouse(e5) {
+    async onMouse(_e) {
       this.jump = true;
     }
     async onKeyDown(e5) {
@@ -10775,9 +10459,6 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     #snake;
     #food;
     #backgroundCanvas;
-    constructor() {
-      super();
-    }
     get title() {
       return "Snake++";
     }
@@ -10812,10 +10493,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     }
     #getRandomFieldPos() {
       const cellCount = this.#getCellCount();
-      return new Point(
-        Math.floor(Math.random() * cellCount),
-        Math.floor(Math.random() * cellCount)
-      );
+      return new Point(Math.floor(Math.random() * cellCount), Math.floor(Math.random() * cellCount));
     }
     #spawnFood() {
       this.#food = this.#getRandomFieldPos();
@@ -10839,9 +10517,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       this.#counter = 0;
       this.#curDir = DIR_DOWN;
       this.#targetDir = DIR_DOWN;
-      this.#snake = [
-        new Point(Math.floor(cellCount / 2), Math.floor(cellCount / 2))
-      ];
+      this.#snake = [new Point(Math.floor(cellCount / 2), Math.floor(cellCount / 2))];
       this.#spawnFood();
     }
     async onThemeChange() {
@@ -10876,19 +10552,13 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       if (this.settings.enableGrid) {
         for (let y3 = 0; y3 < cellCount; y3++) {
           for (let x3 = 0; x3 < cellCount; x3++) {
-            if ((x3 + y3) % 2 == 0) {
+            if ((x3 + y3) % 2 === 0) {
               ctx.fillStyle = `${getThemeVar("--color-base03")}50`;
             } else {
               ctx.fillStyle = `${getThemeVar("--color-base02")}50`;
             }
             ctx.beginPath();
-            ctx.arc(
-              celRad + x3 * celRad * 2,
-              celRad + y3 * celRad * 2,
-              celRad * 0.7,
-              0,
-              Math.PI * 2
-            );
+            ctx.arc(celRad + x3 * celRad * 2, celRad + y3 * celRad * 2, celRad * 0.7, 0, Math.PI * 2);
             ctx.fill();
           }
         }
@@ -10902,7 +10572,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       }
       ctx.drawImage(this.#backgroundCanvas, 0, 0);
       ctx.fillStyle = getThemeVar("--color-text");
-      for (let part of this.#snake) {
+      for (const part of this.#snake) {
         this.#drawDot(ctx, part);
       }
       ctx.fillStyle = getThemeVar("--color-accent");
@@ -11006,7 +10676,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         this.rightY += diff;
       }
       this.rightY = Math.max(0, Math.min(h4 - PONG_PADDLE_HEIGHT, this.rightY));
-      let b3 = this.ball;
+      const b3 = this.ball;
       b3.x += b3.dx * dt;
       b3.y += b3.dy * dt;
       if (b3.y < PONG_BALL_RADIUS || b3.y > h4 - PONG_BALL_RADIUS) {
@@ -11041,14 +10711,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       ctx.arc(b3.x, b3.y, PONG_BALL_RADIUS, 0, Math.PI * 2);
       ctx.fill();
       ctx.fillStyle = colorAccent;
-      this.drawRoundedRect(
-        ctx,
-        0,
-        this.leftY,
-        PONG_PADDLE_WIDTH,
-        PONG_PADDLE_HEIGHT,
-        3
-      );
+      this.drawRoundedRect(ctx, 0, this.leftY, PONG_PADDLE_WIDTH, PONG_PADDLE_HEIGHT, 3);
       this.drawRoundedRect(
         ctx,
         w2 - PONG_PADDLE_WIDTH,
@@ -11146,10 +10809,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     return rotations;
   }
   var PIECES = Object.fromEntries(
-    Object.entries(BASE_PIECES).map(([name2, base]) => [
-      name2,
-      generateRotations(base)
-    ])
+    Object.entries(BASE_PIECES).map(([name2, base]) => [name2, generateRotations(base)])
   );
   var PIECE_TYPES = Object.keys(PIECES);
   var KICKS = {
@@ -11341,10 +11001,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       return false;
     }
     #placePiece() {
-      const shape = this.#getPieceShape(
-        this.#currentPiece,
-        this.#currentRotation
-      );
+      const shape = this.#getPieceShape(this.#currentPiece, this.#currentRotation);
       for (let py = 0; py < 4; py++) {
         for (let px = 0; px < 4; px++) {
           if (shape[py][px]) {
@@ -11373,19 +11030,11 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       this.#currentRotation = 0;
       this.#pieceX = Math.floor(BOARD_WIDTH / 2) - 2;
       this.#pieceY = -1;
-      if (this.#collision(
-        this.#currentPiece,
-        this.#currentRotation,
-        this.#pieceX,
-        this.#pieceY
-      ))
+      if (this.#collision(this.#currentPiece, this.#currentRotation, this.#pieceX, this.#pieceY))
         this.stopGame();
     }
     async onGameStart() {
-      this.#board = Array.from(
-        { length: BOARD_HEIGHT },
-        () => new Array(BOARD_WIDTH).fill(0)
-      );
+      this.#board = Array.from({ length: BOARD_HEIGHT }, () => new Array(BOARD_WIDTH).fill(0));
       this.#dropTime = 0;
       this.#dropInterval = 1e3 / (this.getOpt("speed") / 10);
       this.#stopMoveLeft();
@@ -11435,10 +11084,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           }
         }
       }
-      const shape = this.#getPieceShape(
-        this.#currentPiece,
-        this.#currentRotation
-      );
+      const shape = this.#getPieceShape(this.#currentPiece, this.#currentRotation);
       ctx.fillStyle = this.#getColor(this.#currentPiece);
       for (let py = 0; py < 4; py++) {
         for (let px = 0; px < 4; px++) {
@@ -11468,12 +11114,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     #move(dx, dy) {
       this.#pieceX += dx;
       this.#pieceY += dy;
-      if (this.#collision(
-        this.#currentPiece,
-        this.#currentRotation,
-        this.#pieceX,
-        this.#pieceY
-      )) {
+      if (this.#collision(this.#currentPiece, this.#currentRotation, this.#pieceX, this.#pieceY)) {
         this.#pieceX -= dx;
         this.#pieceY -= dy;
         if (dy > 0) {
@@ -11580,33 +11221,33 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     async createContent() {
       this.container = document.createElement("div");
       this.container.id = "tutorial-widget";
-      let title = document.createElement("h1");
+      const title = document.createElement("h1");
       title.className = "tutorial-widget-title";
       title.textContent = "Widgets Tutorial";
       title.style.textAlign = "center";
       this.container.appendChild(title);
-      let langTitle = document.createElement("p");
+      const langTitle = document.createElement("p");
       langTitle.className = "tutorial-lang-title";
       langTitle.textContent = "Choose a language / Kies je taal";
       this.container.appendChild(langTitle);
-      let langButtons = document.createElement("div");
+      const langButtons = document.createElement("div");
       langButtons.className = "lang-buttons";
-      let englishButton = document.createElement("button");
+      const englishButton = document.createElement("button");
       englishButton.id = "english-tutorial-lang";
-      let englishIcon = document.createElement("div");
+      const englishIcon = document.createElement("div");
       englishIcon.id = "english-tutorial-lang-icon";
       englishButton.appendChild(englishIcon);
       englishButton.appendChild(document.createTextNode(" English"));
       langButtons.appendChild(englishButton);
-      let dutchButton = document.createElement("button");
+      const dutchButton = document.createElement("button");
       dutchButton.id = "dutch-tutorial-lang";
-      let dutchIcon = document.createElement("div");
+      const dutchIcon = document.createElement("div");
       dutchIcon.id = "dutch-tutorial-lang-icon";
       dutchButton.appendChild(dutchIcon);
       dutchButton.appendChild(document.createTextNode("Nederlands"));
       langButtons.appendChild(dutchButton);
       this.container.appendChild(langButtons);
-      dutchButton.addEventListener("click", (e5) => {
+      dutchButton.addEventListener("click", (_e) => {
         this.lang = "dutch";
         this.displayWidgetTutorial(1);
       });
@@ -11640,7 +11281,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       const description = document.createElement("p");
       description.className = "tutorial-widget-description";
       switch (stage) {
-        case 1:
+        case 1: {
           title.textContent = this.lang === "dutch" ? "1. Bewerken\u{1F4DD}" : "1. Edit\u{1F4DD}";
           description.innerHTML = this.lang === "dutch" ? `Pas je widgets aan door op de <button class="topnav__btn smpp-button" style="display:inline-flex !important; pointer-events: none"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" class="edit_button" height="18px" width="18px" viewBox="0 0 24 24" xml:space="preserve">
 <g><g><path xmlns="http://www.w3.org/2000/svg" class="st1" stroke-linecap:round;stroke-linejoin:round;-inkscape-stroke:none"="" d="m 19.792969,1.2089844 c -0.773047,0 -1.546203,0.290977 -2.134766,0.8730469 -6.69e-4,6.478e-4 -0.0013,0.0013 -0.002,0.00195 L 8.4119915,11.389897 c -0.5321594,0.536333 -1.9587661,2.040145 -2.9061791,5.334709 -0.1062793,0.369579 -0.1650107,0.570623 -0.2207032,0.85994 -0.046789,0.243065 -0.1295961,0.724628 0.2070338,1.013107 0.3909805,0.335056 1.0440816,0.133455 1.3847656,0.03125 C 7.387553,18.47571 7.9834625,18.287442 8.5897993,18.031247 11.103423,16.969168 12.593117,15.70399 12.985931,15.188066 l 8.93985,-8.8697066 C 23.11495,5.1606353 23.105005,3.2461646 21.927734,2.0820313 21.339171,1.4999614 20.566016,1.2089844 19.792969,1.2089844 Z" id="path5" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="scccssssscccs"></path><path xmlns="http://www.w3.org/2000/svg" d="M 10.273212,2.8358152 H 5.5822718 c -1.3827164,0 -2.0740869,0 -2.6022128,0.2661137 C 2.5154954,3.3360099 2.1378007,3.709514 1.9011058,4.1689107 1.6320062,4.6911889 1.6320062,5.3748762 1.6320062,6.7422506 V 18.461557 c 0,1.367374 0,2.051122 0.2690996,2.573363 0.2366949,0.459374 0.6143896,0.832926 1.0789532,1.066946 0.5281259,0.266126 1.2194964,0.266126 2.6022128,0.266126 H 17.433068 c 1.382716,0 2.074137,0 2.602237,-0.266126 0.464527,-0.23402 0.842271,-0.607572 1.078917,-1.066946 0.269112,-0.522241 0.269112,-1.205989 0.269112,-2.573363 v -5.249273" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="stroke-width:3.25435;stroke-dasharray:none" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="csccssccssccsccc"></path> </g></g>
@@ -11655,6 +11296,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             editBtn.addEventListener("click", this.boundEditTutorial);
           }
           break;
+        }
         case 2:
           title.textContent = this.lang === "dutch" ? "2. Verplaatsen\u{1F4CD}" : "2. Move\u{1F4CD}";
           description.innerHTML = this.lang === "dutch" ? "Sleep <strong><i>deze widget</i></strong> naar de gewenste locatie en laat los om ze te verplaatsen." : "Move <strong><i>this widget</i></strong> by dragging and dropping it";
@@ -11666,7 +11308,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           this.boundMoveTutorial = this.moveTutorial.bind(this);
           this.element.addEventListener("mousedown", this.boundMoveTutorial);
           break;
-        case 3:
+        case 3: {
           title.innerHTML = this.lang === "dutch" ? `3. Widgets toevoegen <svg class="smpp-widget-bag-handle-icon" style="pointer-events: none; height: 1em; width: 1.2em; display:inline" version="1.1" viewBox="0 0 448 448" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-.898 -124.01)"><path d="m26.458 288.48 198.44 119.06 198.44-119.06" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="100px"></path></g></svg>` : `3. Add widgets <svg class="smpp-widget-bag-handle-icon" style="pointer-events: none; height: 1em; width: 1.2em; display:inline" version="1.1" viewBox="0 0 448 448" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-.898 -124.01)"><path d="m26.458 288.48 198.44 119.06 198.44-119.06" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="100px"></path></g></svg>`;
           title.style = "font-size: 1.6rem !important;";
           description.innerHTML = this.lang === "dutch" ? "Klik bovenaan op de <strong><i>balk met het pijltje</i></strong> om widgets te kiezen en toe te voegen. " : "Click the <strong><i>bar with the arrow</i></strong> at the top to pick and add widgets.";
@@ -11678,6 +11320,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             bagHandle.addEventListener("click", this.boundBagTutorial);
           }
           break;
+        }
         case 4:
           title.textContent = this.lang === "dutch" ? "4. Verwijderen\u274C" : "4. Removing\u274C";
           description.innerHTML = this.lang === "dutch" ? "Sleep <strong><i>deze widget</i></strong> naar diezelfde balk om hem te verwijderen." : "Drag <strong><i>this widget</i></strong> back to that same bar to remove it.";
@@ -11704,7 +11347,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     }
     createContent() {
       const foresight = 28;
-      let userId = getUserId();
+      const userId = getUserId();
       if (DEBUG) {
         sendDebug("[AS]", "Debug mode enabled \u2705");
         sendDebug("[AS]", "User ID:", userId);
@@ -11725,9 +11368,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           sendDebug("[AS]", "Fetching planner data from:", url);
           const response = await fetch(url);
           if (!response.ok) {
-            throw new Error(
-              `Failed to fetch planner data (Status: ${response.status})`
-            );
+            throw new Error(`Failed to fetch planner data (Status: ${response.status})`);
           }
           const data2 = await response.json();
           sendDebug("[AS]", "Planner data:", data2);
@@ -11737,7 +11378,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           return null;
         }
       }
-      let initTaskList = () => {
+      const initTaskList = () => {
         const TasksContainer = document.createElement("div");
         const TitleScreenDiv = document.createElement("div");
         const TitleScreenText = document.createElement("h2");
@@ -11757,9 +11398,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             sendDebug("[AS]", "Planner data fetched successfully.");
           }
           if (!Array.isArray(data2) || data2.length === 0) {
-            let noDataContainer = document.createElement("div");
+            const noDataContainer = document.createElement("div");
             noDataContainer.classList.add("blue-ghost-96");
-            let noDataContainerTextContainer = document.createElement("div");
+            const noDataContainerTextContainer = document.createElement("div");
             noDataContainerTextContainer.classList.add("no-data-text");
             noDataContainerTextContainer.innerText = `Er zijn geen opdrachten gepland in de komende ${foresight} dagen.`;
             noDataContainerTextContainer.style.textAlign = "center";
@@ -11769,9 +11410,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             TasksContainer.appendChild(noDataContainer);
             TasksContainer.appendChild(noDataContainerTextContainer);
           }
-          data2.sort(
-            (a5, b3) => new Date(a5.period.dateTimeFrom) - new Date(b3.period.dateTimeFrom)
-          );
+          data2.sort((a5, b3) => new Date(a5.period.dateTimeFrom) - new Date(b3.period.dateTimeFrom));
           let lastDate = "";
           if (data2.length > this.settings.maxAssignments) {
             data2 = data2.slice(0, this.settings.maxAssignments);
@@ -11803,19 +11442,12 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
               lastDate = dateText;
             }
             const rowDiv = document.createElement("div");
-            rowDiv.classList.add(
-              "listview__row",
-              "todo__row",
-              "assignment__item"
-            );
+            rowDiv.classList.add("listview__row", "todo__row", "assignment__item");
             rowDiv.setAttribute("data-id", element.id);
             const abbreviationDiv = document.createElement("div");
             abbreviationDiv.classList.add("listview__cell", "abvr__div");
             const wrapperDiv = document.createElement("div");
-            wrapperDiv.classList.add(
-              "todo-column__abbreviation-cell__wrapper",
-              "wrapperdiv"
-            );
+            wrapperDiv.classList.add("todo-column__abbreviation-cell__wrapper", "wrapperdiv");
             wrapperDiv.classList.add(
               `c-${element.color.split("-")[0]}-combo--${element.color.split("-")[1]}`
               // LET HIM COOK
@@ -11825,10 +11457,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
               fetch(
                 `https://${getSchoolName()}.smartschool.be/smsc/svg/${element.icon}/${element.icon}_16x16.svg`
               ).then((response) => response.blob()).then((blob) => {
-                const iconSvg = document.createElementNS(
-                  "http://www.w3.org/2000/svg",
-                  "svg"
-                );
+                const iconSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
                 iconSvg.setAttribute("width", "16px");
                 iconSvg.setAttribute("height", "16px");
                 const reader = new FileReader();
@@ -11840,9 +11469,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
               });
             } else {
               const abbreviationSpan = document.createElement("span");
-              abbreviationSpan.classList.add(
-                "todo-column__abbreviation-cell__wrapper__abbreviation"
-              );
+              abbreviationSpan.classList.add("todo-column__abbreviation-cell__wrapper__abbreviation");
               abbreviationSpan.textContent = element.assignmentType.abbreviation || "?";
               abbreviationSpan.style.cssText = "font-size:14px;font-weight:700;";
               wrapperDiv.appendChild(abbreviationSpan);
@@ -11854,12 +11481,13 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             titleSpan.textContent = element.name;
             titleSpan.classList.add("task-description");
             const metadataSpan = document.createElement("span");
-            metadataSpan.textContent = `${new Date(
-              element.period.dateTimeFrom
-            ).toLocaleTimeString("nl-NL", {
-              hour: "2-digit",
-              minute: "2-digit"
-            })} \u2022 ${element.courses?.[0]?.name || "TODO "}`;
+            metadataSpan.textContent = `${new Date(element.period.dateTimeFrom).toLocaleTimeString(
+              "nl-NL",
+              {
+                hour: "2-digit",
+                minute: "2-digit"
+              }
+            )} \u2022 ${element.courses?.[0]?.name || "TODO "}`;
             metadataSpan.classList.add("task-description");
             detailsDiv.append(titleSpan, metadataSpan);
             rowDiv.append(abbreviationDiv, detailsDiv);
@@ -11906,7 +11534,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       );
       return false;
     }
-    let as_type = name2 ? "assignment" : "to-do";
+    const as_type = name2 ? "assignment" : "to-do";
     const url = `https://${schoolName}.smartschool.be/planner/api/v1/planned-${as_type}s/${userId}/${as_ID}/resolve`;
     try {
       const response = await fetch(url, {
@@ -11958,22 +11586,17 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             doneMessage.innerText = "You're all done!";
           }
           parentContainer.appendChild(doneMessage);
-          const allDateHeaders = parentContainer.querySelectorAll(
-            ".date-header-assignments"
-          );
-          allDateHeaders.forEach((header) => header.remove());
+          const allDateHeaders = parentContainer.querySelectorAll(".date-header-assignments");
+          allDateHeaders.forEach((header) => {
+            header.remove();
+          });
         }
       } else {
-        console.warn(
-          `SMPP: Assignment element with data-id="${as_ID}" not found :/ this is good?`
-        );
+        console.warn(`SMPP: Assignment element with data-id="${as_ID}" not found :/ this is good?`);
       }
       return true;
     } catch (error) {
-      console.error(
-        `SMPP: Error marking assignment ${as_ID} as finished:`,
-        error
-      );
+      console.error(`SMPP: Error marking assignment ${as_ID} as finished:`, error);
       return false;
     }
   }
@@ -11988,12 +11611,12 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   }
   function getHexByCode(code) {
     const color = lijnDataKleuren.kleuren.find((color2) => color2.code === code);
-    return color ? "#" + color.hex : null;
+    return color ? `#${color.hex}` : null;
   }
   function getHalteDirections(delijnDirectionsData) {
-    let delijnDirectionsArray = [];
+    const delijnDirectionsArray = [];
     delijnDirectionsData.forEach((lijn) => {
-      let description = lijn.omschrijving.split("-");
+      const description = lijn.omschrijving.split("-");
       let descriptionEndStop = description[description.length - 1];
       descriptionEndStop = descriptionEndStop.replace(")", "").replace("(", "");
       if (!delijnDirectionsArray.includes(descriptionEndStop) && delijnDirectionsArray.length < 3) {
@@ -12022,7 +11645,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     const cardSignal = controller.signal;
     const originalETA = new Date(doorkomst.dienstregelingTijdstip);
     let ETA = originalETA;
-    let predictionStatuses = doorkomst.predictionStatussen;
+    const predictionStatuses = doorkomst.predictionStatussen;
     let timeUntilDeparture;
     let arrivalTimeDeviation;
     const lijnCard = document.createElement("div");
@@ -12113,9 +11736,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         lijnNumberElement.style.borderColor = getHexByCode(
           individualLijnDataColors.achtergrondRand.code
         );
-        lijnNumberElement.style.color = getHexByCode(
-          individualLijnDataColors.voorgrond.code
-        );
+        lijnNumberElement.style.color = getHexByCode(individualLijnDataColors.voorgrond.code);
       }
     } catch (error) {
       if (error.name === "AbortError") {
@@ -12129,7 +11750,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     delijnAttestElement.classList.add("delijnAttest");
     delijnAttestElement.target = "_blank";
     delijnAttestElement.rel = "noopener noreferrer";
-    let specialChance = randomChance(1 / 12);
+    const specialChance = randomChance(1 / 12);
     delijnAttestElement.href = specialChance ? "https://www.coolblue.be/nl/koffiezetapparaten/koffiezetapparaten-voor-latte-macchiato" : "https://www.delijn.be/nl/contact/attest-aanvraag/";
     delijnAttestElement.innerText = specialChance ? "Latte?" : "Late?";
     container.appendChild(delijnAttestElement);
@@ -12182,10 +11803,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       this.elements.searchButton = document.createElement("button");
       this.elements.searchButton.classList.add("delijnSearchButton");
       this.elements.searchButton.innerHTML = searchButtonSvg;
-      this.elements.searchButton.addEventListener(
-        "click",
-        () => this.handleHalteSearch()
-      );
+      this.elements.searchButton.addEventListener("click", () => this.handleHalteSearch());
       this.elements.bottomContainer = document.createElement("div");
       this.elements.bottomContainer.id = "delijnBottomContainer";
       this.elements.topContainer.appendChild(this.elements.searchInput);
@@ -12212,32 +11830,24 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         if (error.name === "AbortError") {
           return;
         }
-        this.displayInfo("Er liep iets mis: " + error);
+        this.displayInfo(`Er liep iets mis: ${error}`);
         console.error(error);
         return;
       }
       if (signal.aborted) return;
       if (!delijnData.halteDoorkomsten[0]) {
-        this.displayInfo(
-          "Er zijn momenteel geen bussen beschikbaar voor deze halte."
-        );
+        this.displayInfo("Er zijn momenteel geen bussen beschikbaar voor deze halte.");
         return;
       } else if (delijnData.halteDoorkomsten[0].doorkomsten.length < 1) {
         this.displayInfo("Er zijn momenteel geen vertrekkende bussen");
         return;
       }
       this.hideInfo();
-      let sortedDoorkomsten = delijnData.halteDoorkomsten[0].doorkomsten.sort(
-        (a5, b3) => {
-          const timeA = new Date(
-            a5["real-timeTijdstip"] || a5.dienstregelingTijdstip
-          );
-          const timeB = new Date(
-            b3["real-timeTijdstip"] || b3.dienstregelingTijdstip
-          );
-          return timeA - timeB;
-        }
-      );
+      const sortedDoorkomsten = delijnData.halteDoorkomsten[0].doorkomsten.sort((a5, b3) => {
+        const timeA = new Date(a5["real-timeTijdstip"] || a5.dienstregelingTijdstip);
+        const timeB = new Date(b3["real-timeTijdstip"] || b3.dienstregelingTijdstip);
+        return timeA - timeB;
+      });
       for (const doorkomst of sortedDoorkomsten) {
         if (signal.aborted) return;
         await createHalteDoorkomst(
@@ -12300,7 +11910,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         );
       } catch (error) {
         if (error.name === "AbortError") return;
-        this.displayInfo("Er liep iets mis: " + error);
+        this.displayInfo(`Er liep iets mis: ${error}`);
         return;
       }
       if (delijnHaltesData?.aantalHits === 0) {
@@ -12317,7 +11927,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         );
       } catch (error) {
         if (error.name === "AbortError") return;
-        this.displayInfo("Er liep iets mis: " + error);
+        this.displayInfo(`Er liep iets mis: ${error}`);
         return;
       }
       delijnHaltesLijnrichtingenData.halteLijnrichtingen.forEach((halte, i5) => {
@@ -12338,7 +11948,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         }
       } catch (error) {
         if (error.name !== "AbortError") {
-          this.displayInfo("Er liep iets mis: " + error);
+          this.displayInfo(`Er liep iets mis: ${error}`);
           console.error(error);
         }
         this.setLoadingState(false);
@@ -12350,7 +11960,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       halteLijnCard.dataset.entiteitnummer = halte.halte.entiteitnummer;
       halteLijnCard.dataset.haltenummer = halte.halte.haltenummer;
       halteLijnCard.classList.add("lijnCard", "lijnCardHalte");
-      const richtingen = "Naar: " + getHalteDirections(halte.lijnrichtingen);
+      const richtingen = `Naar: ${getHalteDirections(halte.lijnrichtingen)}`;
       halteLijnCard.innerHTML = `
     <h3 class="halteTitle">${halte.halte.omschrijving}</h3>
     <div class="halteDirections">${richtingen}</div>
@@ -12395,15 +12005,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         }
         if (signal.aborted) return;
         if (!this.settings.monochrome) {
-          lijn.style.backgroundColor = getHexByCode(
-            individualLijnDataColors.achtergrond.code
-          );
-          lijn.style.borderColor = getHexByCode(
-            individualLijnDataColors.achtergrondRand.code
-          );
-          lijn.style.color = getHexByCode(
-            individualLijnDataColors.voorgrond.code
-          );
+          lijn.style.backgroundColor = getHexByCode(individualLijnDataColors.achtergrond.code);
+          lijn.style.borderColor = getHexByCode(individualLijnDataColors.achtergrondRand.code);
+          lijn.style.color = getHexByCode(individualLijnDataColors.voorgrond.code);
         }
       }
       halteLijnCard.addEventListener("click", (event) => {
@@ -12503,8 +12107,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     const [startTime, endTime] = inputTime.split(" - ");
     function convertTo24HourFormat(time) {
       let [hours, minutes, period] = time.split(":");
-      hours = parseInt(hours);
-      minutes = parseInt(minutes);
+      hours = parseInt(hours, 10);
+      minutes = parseInt(minutes, 10);
       if (period.toLowerCase().includes("pm") && hours !== 12) {
         hours += 12;
       } else if (period.toLowerCase().includes("am") && hours === 12) {
@@ -12517,7 +12121,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     return `${formattedStartTime} - ${formattedEndTime}`;
   }
   async function getDateInCorrectFormat(isFancyFormat, addend) {
-    let currentDate = /* @__PURE__ */ new Date();
+    const currentDate = /* @__PURE__ */ new Date();
     currentDate.setDate(currentDate.getDate() + addend);
     if (isFancyFormat) {
       const day = currentDate.getDate().toString().padStart(2, "0");
@@ -12587,9 +12191,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       const cssVariableColor = `c-${colorParts[0]}-combo--${colorParts[1]}`;
       plannerElement.classList.add(cssVariableColor);
       const itemName = element.courses?.[0]?.name || element.name;
-      const teachers = element.organisers?.users.map(
-        (user) => user.name.startingWithFirstName
-      ) || [];
+      const teachers = element.organisers?.users.map((user) => user.name.startingWithFirstName) || [];
       const itemNameElement = document.createElement("h3");
       itemNameElement.textContent = `${itemName} - ${teachers.join(", ")}`;
       itemNameElement.classList.add("no-bottom-margin");
@@ -12616,9 +12218,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       plannerElement.style.left = `${left}%`;
       plannerElement.style.width = `${elementWidthPercentage}%`;
       if (index < numElements - 1) {
-        const nextStartTime = new Date(
-          slot.elements[index + 1].period.dateTimeFrom
-        );
+        const nextStartTime = new Date(slot.elements[index + 1].period.dateTimeFrom);
         const marginBottom = (nextStartTime - dateTimeTo) / 6e4;
         plannerElement.style.marginBottom = `${marginBottom * pixelsPerMinute}px`;
       }
@@ -12662,9 +12262,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         this.planningContainer.style.height = "initial";
       } else {
         const earliestStartTime = Math.min(
-          ...data2.map(
-            (element) => new Date(element.period.dateTimeFrom).getTime()
-          )
+          ...data2.map((element) => new Date(element.period.dateTimeFrom).getTime())
         );
         const beginTime = new Date(earliestStartTime);
         const timeSlots = [];
@@ -12689,7 +12287,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             });
           }
         });
-        let allHeights = [];
+        const allHeights = [];
         timeSlots.forEach((slot) => {
           const numElements = slot.elements.length;
           const elementWidthPercentage = 100 / numElements;
@@ -12706,12 +12304,12 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             this.planningContainer.appendChild(plannerElement);
             allHeights.push(
               Number(
-                parseInt(plannerElement.style.height) + parseInt(plannerElement.style.top)
+                parseInt(plannerElement.style.height, 10) + parseInt(plannerElement.style.top, 10)
               )
             );
           });
         });
-        this.planningContainer.style.height = Math.max(...allHeights) + "px";
+        this.planningContainer.style.height = `${Math.max(...allHeights)}px`;
       }
       this.plannerContainer.appendChild(this.planningContainer);
     }
@@ -12743,13 +12341,13 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   var WeatherWidgetBase = class extends WidgetBase {
     isCompact = false;
     async createContent() {
-      let newWeatherData = await this.getWeatherData();
+      const newWeatherData = await this.getWeatherData();
       return this.createHTML(newWeatherData);
     }
     async getWeatherData() {
       if (this.settings.cache.weatherData == null) {
         await this.updateCache();
-      } else if ((/* @__PURE__ */ new Date() - new Date(this.settings.cache.lastUpdateDate)) / 1e3 / 60 > 10) {
+      } else if ((Date.now() - new Date(this.settings.cache.lastUpdateDate)) / 1e3 / 60 > 10) {
         await this.updateCache();
       }
       return this.settings.cache.weatherData;
@@ -12761,9 +12359,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       });
     }
     async updateCache() {
-      let newWeatherData = await this.fetchWeatherData(
-        this.settings.currentLocation
-      );
+      const newWeatherData = await this.fetchWeatherData(this.settings.currentLocation);
       if (newWeatherData.name) {
         await this.setSetting("currentLocation", newWeatherData.name);
       }
@@ -12786,8 +12382,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       return createWeatherPreview(this.isCompact);
     }
     async updateWeatherLocation(event) {
-      let newLocation = event.target.value.trim();
-      if (newLocation == "") {
+      const newLocation = event.target.value.trim();
+      if (newLocation === "") {
         event.target.value = this.settings.currentLocation;
         return;
       }
@@ -12810,27 +12406,24 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     }
     createHTML(weatherData) {
       this.updateWeatherEffect();
-      let container = document.createElement("div");
+      const container = document.createElement("div");
       container.classList.add("weather-div");
       if (this.isCompact) container.classList.add("compact");
-      let topContentContainer = document.createElement("div");
+      const topContentContainer = document.createElement("div");
       topContentContainer.classList.add("top-weather-content-container");
-      let bottomContentContainer = document.createElement("div");
+      const bottomContentContainer = document.createElement("div");
       bottomContentContainer.classList.add("bottom-weather-content-container");
-      let locationInput = document.createElement("input");
+      const locationInput = document.createElement("input");
       locationInput.classList.add("weather-location-input");
       locationInput.value = this.settings.currentLocation;
       locationInput.type = "text";
       locationInput.placeholder = "Locatie";
       locationInput.spellcheck = false;
       locationInput.classList.add("inactive");
-      locationInput.addEventListener(
-        "change",
-        this.updateWeatherLocation.bind(this)
-      );
+      locationInput.addEventListener("change", this.updateWeatherLocation.bind(this));
       topContentContainer.appendChild(locationInput);
       container.appendChild(topContentContainer);
-      if (this.settings.currentLocation == "Locatie") {
+      if (this.settings.currentLocation === "Locatie") {
         locationInput.classList.add("not-initialized");
         locationInput.value = "";
         locationInput.addEventListener("focusin", (e5) => {
@@ -12839,71 +12432,71 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         locationInput.addEventListener("focusout", (e5) => {
           e5.target.placeholder = "Locatie";
         });
-        let mainIcon2 = document.createElement("div");
+        const mainIcon2 = document.createElement("div");
         mainIcon2.classList.add("weather-icon-container");
         mainIcon2.innerHTML = getWeatherIcon(null, "broken clouds");
         container.appendChild(mainIcon2);
         return container;
       }
-      if (weatherData.cod != 200) {
+      if (weatherData.cod !== 200) {
         console.log(weatherData.cod);
         container.appendChild(createNotFoundContent(weatherData.cod));
         return container;
       }
-      let description = document.createElement("span");
+      const description = document.createElement("span");
       description.classList.add("weather-description");
       description.innerText = weatherData.weather[0].main;
-      let mainIcon = document.createElement("div");
+      const mainIcon = document.createElement("div");
       mainIcon.classList.add("weather-icon-container");
       mainIcon.innerHTML = getWeatherIcon(
         weatherData.weather[0].main,
         weatherData.weather[0].description
       );
-      let temperature = document.createElement("span");
+      const temperature = document.createElement("span");
       temperature.classList.add("temperature");
-      temperature.innerText = Math.round(weatherData.main.temp) + "\xB0C";
-      let conditionsContainer = document.createElement("div");
+      temperature.innerText = `${Math.round(weatherData.main.temp)}\xB0C`;
+      const conditionsContainer = document.createElement("div");
       conditionsContainer.classList.add("conditions-container");
-      let humidityContainer = document.createElement("div");
+      const humidityContainer = document.createElement("div");
       humidityContainer.classList.add("humidity-container");
       humidityContainer.classList.add("condition-container");
-      let humidityIcon = document.createElement("div");
+      const humidityIcon = document.createElement("div");
       humidityIcon.classList.add("humidity-icon");
       humidityIcon.innerHTML = humiditySvg;
-      let humidity = document.createElement("span");
+      const humidity = document.createElement("span");
       humidity.classList.add("humidity");
-      humidity.innerText = weatherData.main.humidity + "%";
+      humidity.innerText = `${weatherData.main.humidity}%`;
       humidityContainer.appendChild(humidityIcon);
       humidityContainer.appendChild(humidity);
-      let feelsLikeContainer = document.createElement("div");
+      const feelsLikeContainer = document.createElement("div");
       feelsLikeContainer.classList.add("feels-like-container");
       feelsLikeContainer.classList.add("condition-container");
-      let feelsLikeIcon = document.createElement("div");
+      const feelsLikeIcon = document.createElement("div");
       feelsLikeIcon.classList.add("feels-like-icon");
       feelsLikeIcon.innerHTML = feelsLikeSvg;
-      let feelsLike = document.createElement("span");
+      const feelsLike = document.createElement("span");
       feelsLike.classList.add("feels-like");
-      feelsLike.innerText = Math.round(weatherData.main.feels_like) + "\xB0C";
+      feelsLike.innerText = `${Math.round(weatherData.main.feels_like)}\xB0C`;
       feelsLikeContainer.appendChild(feelsLikeIcon);
       feelsLikeContainer.appendChild(feelsLike);
-      let windContainer = document.createElement("div");
+      const windContainer = document.createElement("div");
       windContainer.classList.add("wind-container");
       windContainer.classList.add("condition-container");
-      let windIcon = document.createElement("div");
+      const windIcon = document.createElement("div");
       windIcon.classList.add("wind-icon");
       windIcon.innerHTML = windSvg;
-      let wind = document.createElement("span");
+      const wind = document.createElement("span");
       wind.classList.add("wind");
-      wind.innerText = Math.round(Number(weatherData.wind.speed) * 3.6) + "km/h";
+      wind.innerText = `${Math.round(Number(weatherData.wind.speed) * 3.6)}km/h`;
       windContainer.appendChild(windIcon);
       windContainer.appendChild(wind);
       topContentContainer.appendChild(description);
       topContentContainer.appendChild(mainIcon);
       if (this.isCompact) {
-        let temperatureContainer = document.createElement("div");
+        const temperatureContainer = document.createElement("div");
         temperatureContainer.classList.add("temperature-container");
         temperatureContainer.classList.add("condition-container");
-        let temperatureIcon = document.createElement("div");
+        const temperatureIcon = document.createElement("div");
         temperatureIcon.classList.add("temperature-icon");
         temperatureIcon.innerHTML = temperatureSvg;
         temperatureContainer.appendChild(temperatureIcon);
@@ -12932,45 +12525,45 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   registerWidget(new CompactWeatherWidget());
   registerWidget(new WeatherWidget());
   function createWeatherPreview(isCompact) {
-    let container = document.createElement("div");
+    const container = document.createElement("div");
     container.classList.add("weather-div");
     container.classList.add("preview");
     if (isCompact) container.classList.add("compact");
-    let weatherTitle = document.createElement("div");
+    const weatherTitle = document.createElement("div");
     weatherTitle.classList.add("weather-preview-title");
     weatherTitle.innerText = isCompact ? "Tiny Weather" : "Weather";
     container.appendChild(weatherTitle);
-    let mainIcon = document.createElement("div");
+    const mainIcon = document.createElement("div");
     mainIcon.classList.add("weather-icon-container");
     mainIcon.innerHTML = getWeatherIcon(null, "broken clouds");
-    let conditionsContainer = document.createElement("div");
+    const conditionsContainer = document.createElement("div");
     conditionsContainer.classList.add("conditions-container");
-    let humidityContainer = document.createElement("div");
+    const humidityContainer = document.createElement("div");
     humidityContainer.classList.add("humidity-container");
     humidityContainer.classList.add("condition-container");
-    let humidityIcon = document.createElement("div");
+    const humidityIcon = document.createElement("div");
     humidityIcon.classList.add("humidity-icon");
     humidityIcon.innerHTML = humiditySvg;
     humidityContainer.appendChild(humidityIcon);
-    let feelsLikeContainer = document.createElement("div");
+    const feelsLikeContainer = document.createElement("div");
     feelsLikeContainer.classList.add("feels-like-container");
     feelsLikeContainer.classList.add("condition-container");
-    let feelsLikeIcon = document.createElement("div");
+    const feelsLikeIcon = document.createElement("div");
     feelsLikeIcon.classList.add("feels-like-icon");
     feelsLikeIcon.innerHTML = feelsLikeSvg;
     feelsLikeContainer.appendChild(feelsLikeIcon);
-    let windContainer = document.createElement("div");
+    const windContainer = document.createElement("div");
     windContainer.classList.add("wind-container");
     windContainer.classList.add("condition-container");
-    let windIcon = document.createElement("div");
+    const windIcon = document.createElement("div");
     windIcon.classList.add("wind-icon");
     windIcon.innerHTML = windSvg;
     windContainer.appendChild(windIcon);
     if (isCompact) {
-      let temperatureContainer = document.createElement("div");
+      const temperatureContainer = document.createElement("div");
       temperatureContainer.classList.add("temperature-container");
       temperatureContainer.classList.add("condition-container");
-      let temperatureIcon = document.createElement("div");
+      const temperatureIcon = document.createElement("div");
       temperatureIcon.classList.add("temperature-icon");
       temperatureIcon.innerHTML = temperatureSvg;
       temperatureContainer.appendChild(temperatureIcon);
@@ -12982,7 +12575,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       conditionsContainer.appendChild(feelsLikeContainer);
       conditionsContainer.appendChild(windContainer);
     }
-    let bottomContentContainer = document.createElement("div");
+    const bottomContentContainer = document.createElement("div");
     bottomContentContainer.classList.add("weather-widget-content");
     bottomContentContainer.appendChild(mainIcon);
     bottomContentContainer.appendChild(conditionsContainer);
@@ -12990,16 +12583,16 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     return container;
   }
   function createNotFoundContent(code) {
-    let notFoundContent = document.createElement("div");
-    let notFoundText = document.createElement("span");
+    const notFoundContent = document.createElement("div");
+    const notFoundText = document.createElement("span");
     notFoundText.classList.add("not-found-text");
-    if (code == 404) {
-      let notFoundIcon = document.createElement("div");
+    if (code === 404) {
+      const notFoundIcon = document.createElement("div");
       notFoundIcon.classList.add("no-location-icon");
       notFoundIcon.innerHTML = noLocationSvg;
       notFoundContent.appendChild(notFoundIcon);
       notFoundText.innerText = "Location not found";
-    } else if (code == 69) {
+    } else if (code === 69) {
       notFoundText.innerText = `Unexpected error:
 Unable to fetch`;
     } else {
@@ -13040,13 +12633,12 @@ ${code}`;
         return `<svg xmlns="http://www.w3.org/2000/svg" id="weather-icon-tstorms" class="weather-icon tstorms" viewBox="0 0 64 64"><g id="tstorms"><path class="blue-weather-fill" d="M19.7 53c-.2 0-.4 0-.6-.1-.7-.3-.9-1.1-.6-1.8l2.8-5.8c.3-.7 1.1-.9 1.8-.6.7.3.9 1.1.6 1.8l-2.8 5.8c-.3.4-.7.7-1.2.7zM13.1 53c-.2 0-.4 0-.6-.1-.7-.3-.9-1.1-.6-1.8l2.8-5.8c.3-.7 1.1-.9 1.8-.6.7.3.9 1.1.6 1.8l-2.8 5.8c-.2.4-.7.7-1.2.7zM46.8 53c-.2 0-.4 0-.6-.1-.7-.3-.9-1.1-.6-1.8l2.8-5.8c.3-.7 1.1-.9 1.8-.6.7.3.9 1.1.6 1.8L48 52.3c-.2.4-.7.7-1.2.7zM40.2 53c-.2 0-.4 0-.6-.1-.7-.3-.9-1.1-.6-1.8l2.8-5.8c.3-.7 1.1-.9 1.8-.6.7.3.9 1.1.6 1.8l-2.8 5.8c-.2.4-.7.7-1.2.7z"/><path class="orange-weather-fill" d="M27.7 59.3c-.2 0-.5-.1-.7-.2-.6-.4-.8-1.2-.4-1.8l7.9-13.1h-8.3L35.5 31c.4-.6 1.2-.7 1.8-.3.6.4.7 1.3.3 1.9l-6.4 9.1h7.9L28.8 58.6c-.2.4-.7.7-1.1.7z"/><path class="st2" d="M50.9 22.3c.1-.8.2-1.6.2-2.4 0-7.4-6-13.4-13.4-13.4-4.5 0-8.7 2.3-11.2 6-1.1-.5-2.4-.8-3.6-.8-5.1 0-9.3 4.2-9.3 9.3v.3c-4.1 1.4-7 5.2-7 9.7 0 5.6 4.6 10.2 10.2 10.2h5c1.6 0 1.5-2.6 0-2.6h-5c-4.2 0-7.5-3.4-7.5-7.5 0-3.6 2.5-6.7 6.1-7.4l1.3-.2-.2-1.3c-.1-.4-.1-.8-.1-1.1 0-3.6 3-6.6 6.6-6.6 1.2 0 2.4.3 3.5 1l1.2.7.7-1.3c1.9-3.5 5.5-5.7 9.5-5.7 5.9 0 10.7 4.8 10.7 10.7 0 1.1-.2 2.2-.5 3.3l-.8 1.8 2.1-.1h.3c3.8 0 6.8 3.1 6.8 6.8 0 3.8-3.1 6.8-6.8 6.8H44c-1.7 0-2 2.6 0 2.6h5.7c5.2 0 9.5-4.3 9.5-9.5 0-4.7-3.7-8.7-8.3-9.3z"/></g></svg>`;
       default:
         console.error("Main weather not recognized:", description);
-        return "Main weather not recognized:" + description;
+        return `Main weather not recognized:${description}`;
     }
   }
 
   // src/widgets/clock.ts
   var ClockWidget = class extends WidgetBase {
-    #interval;
     get category() {
       return "other";
     }
@@ -13055,30 +12647,30 @@ ${code}`;
     }
     async createContent() {
       this.element.classList.add("smpp-widget-transparent");
-      let clockContainer = document.createElement("div");
+      const clockContainer = document.createElement("div");
       clockContainer.classList.add("clock-widget");
-      let container = document.createElement("div");
+      const container = document.createElement("div");
       container.classList.add("clock-container");
       clockContainer.appendChild(container);
-      let clockFace = document.createElement("div");
+      const clockFace = document.createElement("div");
       clockFace.classList.add("clock-face");
       container.appendChild(clockFace);
-      let minuteHand = document.createElement("div");
+      const minuteHand = document.createElement("div");
       minuteHand.classList.add("clock-hand", "minute-hand");
       clockFace.appendChild(minuteHand);
-      let hourHand = document.createElement("div");
+      const hourHand = document.createElement("div");
       hourHand.classList.add("clock-hand", "hour-hand");
       clockFace.appendChild(hourHand);
-      let secondHand = document.createElement("div");
+      const secondHand = document.createElement("div");
       secondHand.classList.add("clock-hand", "second-hand");
       clockFace.appendChild(secondHand);
       const centerCircle = document.createElement("div");
       centerCircle.classList.add("clock-center");
       clockFace.appendChild(centerCircle);
-      let bottomContainer = document.createElement("div");
+      const bottomContainer = document.createElement("div");
       bottomContainer.classList.add("clock-bottom");
       container.appendChild(bottomContainer);
-      let timeEl = document.createElement("div");
+      const timeEl = document.createElement("div");
       timeEl.classList.add("digital-time");
       timeEl.innerText = "00:00";
       bottomContainer.appendChild(timeEl);
@@ -13088,8 +12680,8 @@ ${code}`;
         const minutes = now.getMinutes();
         const seconds = now.getSeconds();
         const milliseconds = now.getMilliseconds();
-        const timeText = (hours < 10 ? "0" : "") + hours + ":" + (minutes < 10 ? "0" : "") + minutes;
-        if (timeEl.innerText != timeText) {
+        const timeText = `${(hours < 10 ? "0" : "") + hours}:${minutes < 10 ? "0" : ""}${minutes}`;
+        if (timeEl.innerText !== timeText) {
           timeEl.innerText = timeText;
         }
         const totalSeconds = hours * 3600 + minutes * 60 + seconds + milliseconds / 1e3;
@@ -13110,36 +12702,36 @@ ${code}`;
       return clockContainer;
     }
     async createPreview() {
-      let div = document.createElement("div");
+      const div = document.createElement("div");
       div.classList.add("clock-widget-preview");
-      let title = document.createElement("div");
+      const title = document.createElement("div");
       title.classList.add("clock-preview-title");
       title.innerText = "Clock";
       div.appendChild(title);
-      let container = document.createElement("div");
+      const container = document.createElement("div");
       container.classList.add("clock-container");
       div.appendChild(container);
-      let clockFace = document.createElement("div");
+      const clockFace = document.createElement("div");
       clockFace.classList.add("clock-face");
       container.appendChild(clockFace);
-      let minuteHand = document.createElement("div");
+      const minuteHand = document.createElement("div");
       minuteHand.classList.add("clock-hand", "minute-hand");
       minuteHand.style.transform = "rotate(0deg)";
       clockFace.appendChild(minuteHand);
-      let hourHand = document.createElement("div");
+      const hourHand = document.createElement("div");
       hourHand.classList.add("clock-hand", "hour-hand");
       hourHand.style.transform = "rotate(0deg)";
       clockFace.appendChild(hourHand);
-      let secondHand = document.createElement("div");
+      const secondHand = document.createElement("div");
       secondHand.classList.add("clock-hand", "second-hand");
       secondHand.style.transform = "rotate(0deg)";
       clockFace.appendChild(secondHand);
       const centerCircle = document.createElement("div");
       centerCircle.classList.add("clock-center");
       clockFace.appendChild(centerCircle);
-      let secondsAngle = 50;
-      let minutesAngle = 120;
-      let hoursAngle = 240;
+      const secondsAngle = 50;
+      const minutesAngle = 120;
+      const hoursAngle = 240;
       secondHand.style.transform = `translate(-50%, -100%) rotate(${secondsAngle}deg)`;
       minuteHand.style.transform = `translate(-50%, -100%) rotate(${minutesAngle}deg)`;
       hourHand.style.transform = `translate(-50%, -100%) rotate(${hoursAngle}deg)`;
@@ -13258,10 +12850,7 @@ ${code}`;
       body.setAttribute("fill", "#FFE55C");
       body.setAttribute("stroke", "#000");
       body.setAttribute("stroke-width", "3");
-      const header = document.createElementNS(
-        "http://www.w3.org/2000/svg",
-        "rect"
-      );
+      const header = document.createElementNS("http://www.w3.org/2000/svg", "rect");
       header.setAttribute("x", "8");
       header.setAttribute("y", "8");
       header.setAttribute("width", "84");
@@ -13272,10 +12861,7 @@ ${code}`;
       header.setAttribute("stroke-width", "3");
       const ringPositions = [20, 50, 80];
       ringPositions.forEach((x3) => {
-        const ring = document.createElementNS(
-          "http://www.w3.org/2000/svg",
-          "circle"
-        );
+        const ring = document.createElementNS("http://www.w3.org/2000/svg", "circle");
         ring.setAttribute("cx", String(x3));
         ring.setAttribute("cy", "6");
         ring.setAttribute("r", "6");
@@ -13286,10 +12872,7 @@ ${code}`;
       });
       const checkboxes = [45, 65, 85];
       checkboxes.forEach((y3) => {
-        const checkbox = document.createElementNS(
-          "http://www.w3.org/2000/svg",
-          "rect"
-        );
+        const checkbox = document.createElementNS("http://www.w3.org/2000/svg", "rect");
         checkbox.setAttribute("x", "20");
         checkbox.setAttribute("y", String(y3));
         checkbox.setAttribute("width", "10");
@@ -13302,10 +12885,7 @@ ${code}`;
       });
       const lines = [45, 65, 85];
       lines.forEach((y3) => {
-        const line = document.createElementNS(
-          "http://www.w3.org/2000/svg",
-          "line"
-        );
+        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
         line.setAttribute("x1", "35");
         line.setAttribute("y1", String(y3 + 5));
         line.setAttribute("x2", "75");
@@ -13327,11 +12907,11 @@ ${code}`;
   // src/fixes-utils/migration.ts
   async function migrate() {
     await removeLegacyData();
-    let settingsData = await browser.runtime.sendMessage({
+    const settingsData = await browser.runtime.sendMessage({
       action: "getRawSettingsData"
     });
-    if (settingsData == void 0) return;
-    if (settingsData.backgroundBlurAmount == void 0) return;
+    if (settingsData === void 0) return;
+    if (settingsData.backgroundBlurAmount === void 0) return;
     await migrateV5(settingsData);
   }
   async function migrateV5(settingsData) {
@@ -13341,10 +12921,10 @@ ${code}`;
     await migrateWidgetSettingsData();
   }
   async function migrateWidgetSettingsData() {
-    let delijnAppData = await browser.runtime.sendMessage({
+    const delijnAppData = await browser.runtime.sendMessage({
       action: "getDelijnAppData"
     });
-    let weatherAppData = await browser.runtime.sendMessage({
+    const weatherAppData = await browser.runtime.sendMessage({
       action: "getWeatherAppData"
     });
     if (Object.keys(delijnAppData).length !== 0) {
@@ -13354,14 +12934,9 @@ ${code}`;
       });
     }
     if (Object.keys(weatherAppData).length !== 0) {
-      let weatherWidgets = widgets.filter(
-        (item) => item.name.toLowerCase().includes("weather")
-      );
+      const weatherWidgets = widgets.filter((item) => item.name.toLowerCase().includes("weather"));
       weatherWidgets.forEach(async (widget) => {
-        await widget.setSetting(
-          "currentLocation",
-          weatherAppData.weatherAppData.lastLocation
-        );
+        await widget.setSetting("currentLocation", weatherAppData.weatherAppData.lastLocation);
       });
     }
   }
@@ -13382,8 +12957,8 @@ ${code}`;
           type: "link"
         };
         break;
-      case 2:
-        let imageData = await browser.runtime.sendMessage({
+      case 2: {
+        const imageData = await browser.runtime.sendMessage({
           action: "getBackgroundImage"
         });
         data2 = {
@@ -13392,6 +12967,7 @@ ${code}`;
           type: "file"
         };
         break;
+      }
       default:
         break;
     }
@@ -13400,10 +12976,7 @@ ${code}`;
       id: "backgroundImage",
       data: data2
     });
-    console.log(
-      "MIG V: \n Successfully migrated background image  with data:",
-      data2
-    );
+    console.log("MIG V: \n Successfully migrated background image  with data:", data2);
   }
   async function migrateSettingsV5(oldData) {
     let newWeatherOverlayType;
@@ -13420,7 +12993,7 @@ ${code}`;
     }
     console.log(oldData);
     console.log(oldData.customName);
-    let newSettingsData = {
+    const newSettingsData = {
       username: oldData.customName,
       theme: oldData.theme,
       background: {
@@ -13446,10 +13019,7 @@ ${code}`;
       action: "setSettingsData",
       data: settings
     });
-    console.log(
-      "MIG V: \n Succesfully migrated settings data to:",
-      newSettingsData
-    );
+    console.log("MIG V: \n Succesfully migrated settings data to:", newSettingsData);
   }
   async function removeLegacyData() {
     if (window.localStorage.getItem("settingsdata")) {
@@ -13491,10 +13061,10 @@ ${code}`;
     }
   }
   function title_prefix() {
-    let subdomain = location.host.split(".")[0].charAt(0).toUpperCase() + location.host.split(".")[0].slice(1);
-    let url = location.pathname;
-    let qstr = new URLSearchParams(location.search);
-    let module = qstr.get("module");
+    const subdomain = location.host.split(".")[0].charAt(0).toUpperCase() + location.host.split(".")[0].slice(1);
+    const url = location.pathname;
+    const qstr = new URLSearchParams(location.search);
+    const module = qstr.get("module");
     if (!url.split("/")[1]) return;
     let page = url.split("/")[1].toLowerCase();
     if (module !== null) {
@@ -13528,7 +13098,7 @@ ${code}`;
       case "lvs":
         return "Leerlingvolgsysteem";
       case "":
-        return "Start - " + subdomain;
+        return `Start - ${subdomain}`;
       default:
         break;
     }
@@ -13536,20 +13106,20 @@ ${code}`;
     if (topnav_title) {
       topnav_title = topnav_title.innerText;
     }
-    let prefix = vak_prefix(page);
-    if (prefix != void 0) {
+    const prefix = vak_prefix(page);
+    if (prefix !== void 0) {
       if (topnav_title) {
-        return prefix + " - " + topnav_title;
+        return `${prefix} - ${topnav_title}`;
       } else {
         return prefix;
       }
     }
   }
   function titleFix() {
-    let prepend = title_prefix();
-    if (prepend != void 0) {
-      let title = document.querySelector("head > title");
-      title.innerText = prepend + " - Smartschool";
+    const prepend = title_prefix();
+    if (prepend !== void 0) {
+      const title = document.querySelector("head > title");
+      title.innerText = `${prepend} - Smartschool`;
     }
   }
 
@@ -13565,7 +13135,7 @@ ${code}`;
   var liteMode;
   function updateDiscordPopup(discordButtonEnabled) {
     if (discordButtonEnabled) {
-      let discordButtonContainer = document.getElementById("discord-link-container") || document.createElement("div");
+      const discordButtonContainer = document.getElementById("discord-link-container") || document.createElement("div");
       discordButtonContainer.id = "discord-link-container";
       discordButtonContainer.innerHTML = discordSvg;
       document.body.appendChild(discordButtonContainer);
@@ -13580,14 +13150,14 @@ ${code}`;
     return "Log out \u2192";
   }
   function changeFont() {
-    let fontLinks = document.createElement("div");
+    const fontLinks = document.createElement("div");
     fontLinks.innerHTML = `<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">`;
     fontLinks.innerHTML += `<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">`;
     fontLinks.innerHTML += `<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Monsieur+La+Doulaise&display=swap" rel="stylesheet">`;
     document.getElementsByTagName("head")[0]?.appendChild(fontLinks);
   }
   function fixCoursesSearch() {
-    document.getElementById("courseSearch")?.addEventListener("keydown", function(event) {
+    document.getElementById("courseSearch")?.addEventListener("keydown", (event) => {
       if (event.key === "Enter") {
         event.preventDefault();
         setTimeout(() => {
@@ -13602,15 +13172,13 @@ ${code}`;
     });
   }
   function addToastContainer() {
-    let toastContainer = document.createElement("div");
+    const toastContainer = document.createElement("div");
     toastContainer.id = "toast-container";
     toastContainer.classList.add("toast-container");
     document.body.appendChild(toastContainer);
   }
   function updateTopNavIcons(data2) {
-    const notifsButton = document.querySelector(
-      ".js-btn-notifs"
-    );
+    const notifsButton = document.querySelector(".js-btn-notifs");
     if (notifsButton && data2.notifications) {
       const textSpan = notifsButton.querySelector("span");
       notifsButton.innerHTML = notfisSvg;
@@ -13626,9 +13194,7 @@ ${code}`;
     } else if (startButton && !data2.home) {
       startButton.innerHTML = "Start";
     }
-    const messageButton = document.querySelector(
-      `a.topnav__btn[title="Berichten"]`
-    );
+    const messageButton = document.querySelector(`a.topnav__btn[title="Berichten"]`);
     if (messageButton && data2.mail) {
       const textSpan = messageButton.querySelector("span");
       messageButton.innerHTML = messageSvg;
@@ -13646,9 +13212,7 @@ ${code}`;
     }
   }
   function updateTabLogo(logo) {
-    let iconElement = document.querySelector(
-      'link[rel="icon"]'
-    );
+    let iconElement = document.querySelector('link[rel="icon"]');
     if (!iconElement) {
       iconElement = document.createElement("link");
       document.head.appendChild(iconElement);
@@ -13666,14 +13230,12 @@ ${code}`;
     }
   }
   function applyTopNav(data2) {
-    let topNav = document.querySelector(".topnav");
+    const topNav = document.querySelector(".topnav");
     if (!topNav) return;
     updateTopNavIcons(data2.icons);
     updateTopButtons(data2.buttons);
-    let linksButton = document.querySelector("[data-links]");
-    let coursesButton = document.querySelector(
-      "[data-courses]"
-    );
+    const linksButton = document.querySelector("[data-links]");
+    const coursesButton = document.querySelector("[data-courses]");
     if (linksButton && coursesButton) {
       data2.switchCoursesAndLinks ? topNav.insertBefore(linksButton, coursesButton) : topNav.insertBefore(coursesButton, linksButton);
     }
@@ -13682,27 +13244,25 @@ ${code}`;
     themes = await browser.runtime.sendMessage({
       action: "getThemes"
     });
-    let originalUsernameElement = document.querySelector(
+    const originalUsernameElement = document.querySelector(
       ".js-btn-profile .hlp-vert-box span"
     );
     originalUsername = originalUsernameElement?.innerText || "Mr Unknown";
     isGOSchool = document.body.classList.contains("go");
     isFirefox = typeof navigator.userAgent === "string" && /firefox/i.test(navigator.userAgent);
     if (document.querySelector('img[alt="Profiel afbeelding"]')) {
-      let originalPfp = document.querySelector(
-        'img[alt="Profiel afbeelding"]'
-      );
+      const originalPfp = document.querySelector('img[alt="Profiel afbeelding"]');
       originalPfpUrl = originalPfp?.src;
     } else {
       originalPfpUrl = getPfpLink(originalUsername);
     }
     onHomePage = document.getElementById("container") != null;
     onLoginPage = document.querySelector(".login-app") != null;
-    var quicks2 = await quickLoad();
+    var _quicks = await quickLoad();
     liteMode = browser.runtime.getManifest().name.includes("Lite");
   }
   async function applyAppearance(appearance) {
-    let style = document.documentElement.style;
+    const style = document.documentElement.style;
     if (appearance.glass) {
       document.body.classList.add("glass");
     } else {
@@ -13716,24 +13276,20 @@ ${code}`;
     if (onLoginPage) {
       style.setProperty("--background-blur", `blur(${0}px)`);
     } else {
-      style.setProperty(
-        "--background-blur",
-        `blur(${appearance.background.blur}px)`
-      );
+      style.setProperty("--background-blur", `blur(${appearance.background.blur}px)`);
     }
   }
   function applyOther(other) {
-    if (window.location.href.split("/")[3] == "login")
-      updateSplashText(other.splashText);
+    if (window.location.href.split("/")[3] === "login") updateSplashText(other.splashText);
     keybinds = other.keybinds;
     other.performanceMode ? document.body.classList.remove("enableAnimations") : document.body.classList.add("enableAnimations");
     if (onHomePage) updateDiscordPopup(other.discordButton);
   }
   function applyProfile(profile) {
-    let style = document.documentElement.style;
+    const style = document.documentElement.style;
     style.setProperty(
       "--profile-picture",
-      "url(" + getPfpLink(profile.username || originalUsername) + ")"
+      `url(${getPfpLink(profile.username || originalUsername)})`
     );
     applyUsername(profile.username);
     applyProfilePicture(profile);
@@ -13743,9 +13299,7 @@ ${code}`;
     fixCoursesSearch();
     titleFix();
     addToastContainer();
-    let notifsToggleLabel = document.getElementById(
-      "notifsToggleLabel"
-    );
+    const notifsToggleLabel = document.getElementById("notifsToggleLabel");
     if (notifsToggleLabel) notifsToggleLabel.innerText = "Toon pop-ups";
     if (window.location.pathname.startsWith("/results/main/results")) {
       buisStats();
@@ -13767,22 +13321,19 @@ ${code}`;
     applyOther(data2.other);
   }
   function createTopButtons() {
-    let topNav = document.querySelector("nav.topnav");
+    const topNav = document.querySelector("nav.topnav");
     if (!topNav) return;
-    let logoutButton = document.querySelector(".js-btn-logout");
+    const logoutButton = document.querySelector(".js-btn-logout");
     if (logoutButton) {
       logoutButton.innerHTML = changeLogoutText();
     }
-    let searchButton = document.querySelector(".topnav__btn--icon--search");
+    const searchButton = document.querySelector(".topnav__btn--icon--search");
     if (searchButton) {
-      topNav.insertBefore(
-        createQuickSettingsButton(),
-        searchButton.parentElement
-      );
+      topNav.insertBefore(createQuickSettingsButton(), searchButton.parentElement);
       searchButton.innerHTML = searchButtonSvg;
     }
     createQuickSettings();
-    let pushRight = topNav.childNodes[2];
+    const pushRight = topNav.childNodes[2];
     if (!pushRight) return;
     if (!liteMode) {
       topNav.insertBefore(createGC(), pushRight);
@@ -13795,11 +13346,11 @@ ${code}`;
     document.getElementById("profileMenu")?.querySelector(".topnav__menu")?.appendChild(createProfileSettingButton());
   }
   function createProfileSettingButton() {
-    let button = document.createElement("a");
+    const button = document.createElement("a");
     button.addEventListener("click", (e5) => {
       openSettingsWindow(e5);
-      let topNavProfileMenu = document.getElementById("profileMenu");
-      let settingsPageProfileButton = document.querySelector(
+      const topNavProfileMenu = document.getElementById("profileMenu");
+      const settingsPageProfileButton = document.querySelector(
         ".profile-settings-button"
       );
       if (!topNavProfileMenu || !settingsPageProfileButton) return;
@@ -13808,9 +13359,9 @@ ${code}`;
     });
     button.classList.add("topnav__menuitem");
     button.classList.add("topnav__menuitem--img");
-    let textContent = document.createElement("span");
+    const textContent = document.createElement("span");
     textContent.textContent = "Smartschool++ Profile";
-    let image = document.createElement("img");
+    const image = document.createElement("img");
     image.src = getExtensionImage("icons/smpp/128.png");
     image.style.borderRadius = "0.5rem";
     button.appendChild(image);
@@ -13818,21 +13369,21 @@ ${code}`;
     return button;
   }
   function updateTopButtons(data2) {
-    let GOButton = document.querySelector(`[data-go=""]`);
+    const GOButton = document.querySelector(`[data-go=""]`);
     if (GOButton) {
-      data2.GO ? GOButton.style = "display:flex" : GOButton.style = "display:none";
+      GOButton.style = data2.GO ? "display:flex" : "display:none";
     }
-    let searchButton = document.querySelector(".topnav__btn--icon--search");
+    const searchButton = document.querySelector(".topnav__btn--icon--search");
     if (searchButton?.parentElement) {
-      data2.search ? searchButton.parentElement.style = "display:flex" : searchButton.parentElement.style = "display:none";
+      searchButton.parentElement.style = data2.search ? "display:flex" : "display:none";
     }
-    let GC = document.getElementById("global_chat_button");
+    const GC = document.getElementById("global_chat_button");
     if (GC) {
-      data2.GC ? GC.style = "display:flex !important" : GC.style = "display:none !important";
+      GC.style = data2.GC ? "display:flex !important" : "display:none !important";
     }
-    let quickButton = document.getElementById("quick-menu-button");
+    const quickButton = document.getElementById("quick-menu-button");
     if (quickButton) {
-      data2.quickMenu ? quickButton.style = "display:flex !important" : quickButton.style = "display:none !important";
+      quickButton.style = data2.quickMenu ? "display:flex !important" : "display:none !important";
     }
   }
   async function main() {

@@ -1,8 +1,8 @@
 // @ts-nocheck
-import { GameBase } from "./games.js";
-import { registerWidget } from "../widgets/widgets.js";
+
 import { getThemeVar } from "../main-features/appearance/themes.js";
-import { GameOption } from "./games.js";
+import { registerWidget } from "../widgets/widgets.js";
+import { GameBase, GameOption } from "./games.js";
 
 const PONG_BALL_RADIUS = 4;
 const PONG_PADDLE_WIDTH = 5;
@@ -35,13 +35,8 @@ class PongWidget extends GameBase {
     this.ball = {
       x: w / 2,
       y: h / 2,
-      dx:
-        PONG_BALL_SPEED *
-        this.getOpt("speed") *
-        0.01 *
-        (Math.random() > 0.5 ? 1 : -1),
-      dy:
-        PONG_BALL_SPEED * this.getOpt("speed") * 0.01 * (Math.random() * 2 - 1),
+      dx: PONG_BALL_SPEED * this.getOpt("speed") * 0.01 * (Math.random() > 0.5 ? 1 : -1),
+      dy: PONG_BALL_SPEED * this.getOpt("speed") * 0.01 * (Math.random() * 2 - 1),
     };
 
     this.leftY = (h - PONG_PADDLE_HEIGHT) / 2;
@@ -96,7 +91,7 @@ class PongWidget extends GameBase {
     }
     this.rightY = Math.max(0, Math.min(h - PONG_PADDLE_HEIGHT, this.rightY));
 
-    let b = this.ball;
+    const b = this.ball;
     b.x += b.dx * dt;
     b.y += b.dy * dt;
 
@@ -153,21 +148,14 @@ class PongWidget extends GameBase {
     ctx.fill();
 
     ctx.fillStyle = colorAccent;
-    this.drawRoundedRect(
-      ctx,
-      0,
-      this.leftY,
-      PONG_PADDLE_WIDTH,
-      PONG_PADDLE_HEIGHT,
-      3
-    );
+    this.drawRoundedRect(ctx, 0, this.leftY, PONG_PADDLE_WIDTH, PONG_PADDLE_HEIGHT, 3);
     this.drawRoundedRect(
       ctx,
       w - PONG_PADDLE_WIDTH,
       this.rightY,
       PONG_PADDLE_WIDTH,
       PONG_PADDLE_HEIGHT,
-      3
+      3,
     );
 
     ctx.strokeStyle = colorText;

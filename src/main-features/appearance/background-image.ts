@@ -1,21 +1,17 @@
-import { browser, getExtensionImage } from "../../common/utils.js";
+import { getExtensionImage } from "../../common/utils.js";
 import { isValidImage } from "../../fixes-utils/utils.js";
-import { getImageURL, type SMPPImage } from "../modules/images.js";
+import { getImageURL } from "../modules/images.js";
 
 export async function setBackground(themeName: string) {
   function displayBackgroundImage(imageSrc: string | null) {
-    document.documentElement.style.setProperty(
-      "--background-color",
-      `transparent`
-    );
-    let imgContainer =
-      (document.getElementById(
-        "smpp-background-image-container"
-      ) as HTMLDivElement) || document.createElement("div");
+    document.documentElement.style.setProperty("--background-color", `transparent`);
+    const imgContainer =
+      (document.getElementById("smpp-background-image-container") as HTMLDivElement) ||
+      document.createElement("div");
     imgContainer.id = "smpp-background-image-container";
     imgContainer.classList.add("smpp-background-image-container");
 
-    let img =
+    const img =
       (document.getElementById("smpp-background-image") as HTMLImageElement) ||
       document.createElement("img");
     img.id = "smpp-background-image";
@@ -29,21 +25,18 @@ export async function setBackground(themeName: string) {
       img.src = "";
     }
 
-    if (
-      !document.getElementById("smpp-background-image") &&
-      !document.getElementById("tinymce")
-    ) {
+    if (!document.getElementById("smpp-background-image") && !document.getElementById("tinymce")) {
       document.body.appendChild(imgContainer);
       imgContainer.appendChild(img);
     }
   }
 
-  let imageURL = await getImageURL(
+  const imageURL = await getImageURL(
     themeName,
     async () => {
-      return await getExtensionImage("theme-backgrounds/" + themeName + ".jpg");
+      return await getExtensionImage(`theme-backgrounds/${themeName}.jpg`);
     },
-    false
+    false,
   );
   if (await isValidImage(imageURL.url)) {
     displayBackgroundImage(imageURL.url);

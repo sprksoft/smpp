@@ -1,8 +1,9 @@
 // @ts-nocheck
-import { GameBase } from "./games.js";
-import { registerWidget } from "../widgets/widgets.js";
+
 import { getThemeVar } from "../main-features/appearance/themes.js";
-import { GameOption } from "./games.js";
+import { registerWidget } from "../widgets/widgets.js";
+import { GameBase, GameOption } from "./games.js";
+
 const BALL_RADIUS = 4;
 const PADDLE_WIDTH = 50;
 const PADDLE_HEIGHT = 5;
@@ -84,7 +85,7 @@ class BreakoutWidget extends GameBase {
     if (this.rightPressed) this.paddleX += speed * dt;
     this.paddleX = Math.max(0, Math.min(w - PADDLE_WIDTH, this.paddleX));
 
-    let ball = this.ball;
+    const ball = this.ball;
     ball.x += ball.dx * dt;
     ball.y += ball.dy * dt;
 
@@ -114,7 +115,7 @@ class BreakoutWidget extends GameBase {
       this.stopGame();
     }
 
-    for (let b of this.bricks) {
+    for (const b of this.bricks) {
       if (b.status === 1) {
         if (
           ball.x > b.x &&
@@ -131,14 +132,7 @@ class BreakoutWidget extends GameBase {
     }
 
     ctx.fillStyle = getThemeVar("--color-accent");
-    this.drawRoundedRect(
-      ctx,
-      this.paddleX,
-      h - PADDLE_HEIGHT,
-      PADDLE_WIDTH,
-      PADDLE_HEIGHT,
-      5
-    );
+    this.drawRoundedRect(ctx, this.paddleX, h - PADDLE_HEIGHT, PADDLE_WIDTH, PADDLE_HEIGHT, 5);
 
     ctx.fillStyle = getThemeVar("--color-text");
     ctx.beginPath();
@@ -146,7 +140,7 @@ class BreakoutWidget extends GameBase {
     ctx.fill();
 
     ctx.fillStyle = getThemeVar("--color-accent");
-    for (let b of this.bricks) {
+    for (const b of this.bricks) {
       if (b.status === 1) {
         this.drawRoundedRect(ctx, b.x, b.y, BRICK_WIDTH, BRICK_HEIGHT, 5); // 5 = corner radius
       }

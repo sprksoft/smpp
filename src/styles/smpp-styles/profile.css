@@ -1,5 +1,5 @@
 .personal-profile-picture {
-  background-size: cover !important;
-  object-fit: cover !important;
+  background-size: cover;
+  object-fit: cover;
   aspect-ratio: 1;
 }
