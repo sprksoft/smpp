@@ -120,7 +120,7 @@ function changeFont() {
 function fixCoursesSearch() {
   document
     .getElementById("courseSearch")
-    ?.addEventListener("keydown", function (event) {
+    ?.addEventListener("keydown", function(event) {
       if (event.key === "Enter") {
         event.preventDefault();
 

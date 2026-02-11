@@ -8195,7 +8195,7 @@ Is it scaring you off?`,
         visibleThemeTilesArray.push(element);
       });
       let visibleThemeNames = visibleThemeTilesArray.map((element) => {
-        if (element.dataset["name"]) return element.dataset["name"];
+        return element.dataset["name"];
       });
       let correctThemeNames = Object.keys(themes2).map((themeName) => {
         return themeName;
@@ -8235,6 +8235,7 @@ Is it scaring you off?`,
           if (!correctThemeNames2.includes(themeName)) {
             let element = visibleThemeTilesArray.find((element2) => {
               if (element2.dataset["name"] == themeName) return element2;
+              return false;
             });
             if (!element) return;
             if (element.classList.contains("create-theme-button")) return;
@@ -8242,6 +8243,7 @@ Is it scaring you off?`,
             this.currentTiles = this.currentTiles.filter((tile) => {
               if (tile instanceof AddCustomTheme) return true;
               if (tile instanceof ThemeTile2) return tile.name != themeName;
+              return false;
             });
           }
           this.updateContentHeight();

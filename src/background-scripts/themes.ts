@@ -139,7 +139,9 @@ export async function getTheme(name: ThemeId): Promise<Theme> {
   }
 }
 
-export async function getSharedThemeId(shareId: ShareId): Promise<ThemeId | null> {
+export async function getSharedThemeId(
+  shareId: ShareId
+): Promise<ThemeId | null> {
   const cache = await loadThemeShareCache();
   for (let [theme, themeShareId] of Object.entries(cache)) {
     if (themeShareId === shareId) {
@@ -200,7 +202,9 @@ export async function removeCustomTheme(id: ThemeId) {
   await browser.storage.local.set({ customThemes });
 }
 
-function getContentDispositionFileName(headerValue: string | null): string | null {
+function getContentDispositionFileName(
+  headerValue: string | null
+): string | null {
   if (!headerValue) {
     return null;
   }
@@ -216,7 +220,7 @@ export async function installTheme(shareId: ShareId) {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-    }
+    },
   });
   const json = await resp.json();
 
@@ -233,7 +237,9 @@ export async function installTheme(shareId: ShareId) {
 
   if (json.img_url) {
     const resp = await fetch(json.img_url);
-    const filename = getContentDispositionFileName(resp.headers.get("Content-Disposition")) ?? "importedFile.webp";
+    const filename =
+      getContentDispositionFileName(resp.headers.get("Content-Disposition")) ??
+      "importedFile.webp";
 
     const base64 = await getBase64FromResponse(resp);
     if (base64 === null) {
@@ -281,12 +287,17 @@ export async function purgeThemeShareCache(themeId: ThemeId) {
   await browser.storage.local.set({ themeShareCache: data });
 }
 
-export async function getCachedShareId(themeId: ThemeId): Promise<ShareId | undefined> {
+export async function getCachedShareId(
+  themeId: ThemeId
+): Promise<ShareId | undefined> {
   const data = await loadThemeShareCache();
   return data[themeId];
 }
 
-export async function updateThemeShareCache(themeId: ThemeId, shareId: ShareId) {
+export async function updateThemeShareCache(
+  themeId: ThemeId,
+  shareId: ShareId
+) {
   const data = await loadThemeShareCache();
   data[themeId] = shareId;
   await browser.storage.local.set({ themeShareCache: data });
@@ -308,7 +319,7 @@ export async function shareTheme(id: ThemeId): Promise<string> {
     if (data instanceof Error) {
       throw new Error(
         "Failed to get image data while trying to sharing theme: " +
-        data.message
+          data.message
       );
     }
     imageData = data;

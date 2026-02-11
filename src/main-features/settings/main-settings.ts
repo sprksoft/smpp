@@ -97,7 +97,7 @@ export class SettingsWindow extends BaseWindow {
     super("settings-window");
   }
 
-  async renderContent() {
+  override async renderContent() {
     let content = document.createElement("div");
     let settingsSideBar = await this.createSettingsSideBar();
     this.settingsPage.id = "settings-page";
@@ -725,7 +725,7 @@ export class SettingsWindow extends BaseWindow {
         // Apply weather effects if they changed
         if (
           JSON.stringify(settings.appearance.weatherOverlay) !==
-            JSON.stringify(previousSettings.appearance.weatherOverlay) &&
+          JSON.stringify(previousSettings.appearance.weatherOverlay) &&
           !liteMode
         ) {
           applyWeatherEffects(settings.appearance.weatherOverlay);

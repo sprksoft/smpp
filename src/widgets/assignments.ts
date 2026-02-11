@@ -15,15 +15,15 @@ import { assignmentsSvg } from "../fixes-utils/svgs.js";
 // THANK YOU LDEVVVV 🫂🫂🫂
 
 class TakenWidget extends WidgetBase {
-  defaultSettings() {
+  override defaultSettings() {
     return {
       maxAssignments: 5,
     };
   }
-  onSettingsChange() {
+  override onSettingsChange() {
     this.element.appendChild(this.createContent());
   }
-  createContent() {
+  override createContent() {
     const foresight = 28; // dagen in de toekomst dat het zoekt voor taken
     let userId = getUserId();
 
@@ -154,8 +154,7 @@ class TakenWidget extends WidgetBase {
             "wrapperdiv"
           );
           wrapperDiv.classList.add(
-            `c-${element.color.split("-")[0]}-combo--${
-              element.color.split("-")[1]
+            `c-${element.color.split("-")[0]}-combo--${element.color.split("-")[1]
             }` // LET HIM COOK
           );
 
@@ -164,8 +163,7 @@ class TakenWidget extends WidgetBase {
           if (element.plannedElementType === "planned-to-dos") {
             // dont try to understand, i dont either
             fetch(
-              `https://${getSchoolName()}.smartschool.be/smsc/svg/${
-                element.icon
+              `https://${getSchoolName()}.smartschool.be/smsc/svg/${element.icon
               }/${element.icon}_16x16.svg`
             )
               .then((response) => response.blob())
@@ -233,7 +231,7 @@ class TakenWidget extends WidgetBase {
     };
     return initTaskList();
   }
-  async createPreview() {
+  override async createPreview() {
     const previewElement = document.createElement("div");
 
     const previewElementTitle = document.createElement("div");

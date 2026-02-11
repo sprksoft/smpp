@@ -184,7 +184,7 @@ class ColorCursor {
   }
 
   // Overwrite this if needed
-  onDrag() { }
+  onDrag() {}
 
   updateCursorPosition() {
     this.element.style.left = `${this.xPos}%`;
@@ -358,7 +358,7 @@ export class ColorPicker {
     return this.element;
   }
 
-  async onChange() { }
+  async onChange() {}
 }
 
 class ThemeSharingTile {
@@ -409,15 +409,15 @@ export class Tile {
     return this.element;
   }
 
-  async updateImage(currentTheme: string, forceReload = false) { }
+  async updateImage(currentTheme: string, forceReload = false) {}
 
   // Overide this in the implementation
-  updateSelection() { }
+  updateSelection() {}
   // Overide in de implementation
-  async onClick(e: MouseEvent) { }
+  async onClick(e: MouseEvent) {}
 
   // Overide this in the implementation
-  async createContent() { }
+  async createContent() {}
 }
 
 export class ThemeTile extends Tile {
@@ -458,7 +458,7 @@ export class ThemeTile extends Tile {
     }
   }
 
-  async createContent() {
+  override async createContent() {
     this.element.appendChild(this.createImageContainer());
     this.element.appendChild(this.getBottomContainer());
     await this.updateTitle();
@@ -521,7 +521,7 @@ export class ThemeTile extends Tile {
     return imageContainer;
   }
 
-  updateSelection() {
+  override updateSelection() {
     if (currentThemeName == this.name) {
       this.element.classList.add("is-selected");
     } else {
@@ -529,7 +529,7 @@ export class ThemeTile extends Tile {
     }
   }
 
-  async updateImage(currentTheme: string, forceReload = false) {
+  override async updateImage(currentTheme: string, forceReload = false) {
     if (this.name == currentTheme || forceReload) {
       let imageURL = await getImageURL(
         this.name,
@@ -580,7 +580,7 @@ export class ThemeTile extends Tile {
     }
   }
 
-  async onClick(e: Event) {
+  override async onClick(e: Event) {
     if (e.target instanceof HTMLElement) {
       const target = e.target;
 
@@ -858,13 +858,13 @@ export class ThemeTile extends Tile {
   }
 
   // Overide in de implementation
-  async onFavoriteToggle() { }
+  async onFavoriteToggle() {}
 
   // Overide in de implementation
-  async onShare() { }
+  async onShare() {}
 
   // Overide in de implementation
-  async onDuplicate(newThemeName: string) { }
+  async onDuplicate(newThemeName: string) {}
 }
 
 export async function updateTheme(name: string) {
@@ -883,7 +883,7 @@ export class ThemeFolder extends Tile {
     this.category = category;
   }
 
-  async createContent() {
+  override async createContent() {
     let firstThemeInCategory = (await browser.runtime.sendMessage({
       action: "getFirstThemeInCategory",
       category: this.category,
@@ -991,7 +991,7 @@ class AddCustomTheme extends Tile {
     return bottomContainer;
   }
 
-  async onClick() {
+  override async onClick() {
     let newTheme = await browser.runtime.sendMessage({
       action: "saveCustomTheme",
       data: await getTheme("defaultCustom"),
@@ -1004,7 +1004,7 @@ class AddCustomTheme extends Tile {
     startCustomThemeCreator(await getTheme("defaultCustom"), newTheme);
   }
 
-  async createContent() {
+  override async createContent() {
     this.element.classList.add("use-default-colors");
     this.element.classList.add("create-theme-button");
     this.element.appendChild(this.createImageContainer());
@@ -1033,7 +1033,7 @@ class noThemes extends Tile {
 
     return bottomContainer;
   }
-  async createContent() {
+  override async createContent() {
     this.element.classList.add("use-default-colors");
     this.element.classList.add("no-themes");
     this.element.appendChild(this.createImageContainer());
@@ -1125,7 +1125,7 @@ export class ThemeSelector {
       visibleThemeTilesArray.push(element as HTMLDivElement);
     });
     let visibleThemeNames = visibleThemeTilesArray.map((element) => {
-      if (element.dataset["name"]) return element.dataset["name"];
+      return element.dataset["name"];
     }) as string[];
 
     let correctThemeNames = Object.keys(themes).map((themeName) => {
@@ -1177,6 +1177,7 @@ export class ThemeSelector {
         if (!correctThemeNames.includes(themeName)) {
           let element = visibleThemeTilesArray.find((element) => {
             if (element.dataset["name"] == themeName) return element;
+            return false;
           });
           if (!element) return;
           if (element.classList.contains("create-theme-button")) return;
@@ -1184,6 +1185,7 @@ export class ThemeSelector {
           this.currentTiles = this.currentTiles.filter((tile) => {
             if (tile instanceof AddCustomTheme) return true;
             if (tile instanceof ThemeTile) return tile.name != themeName;
+            return false;
           }) as Tiles;
         }
         this.updateContentHeight();
@@ -1742,7 +1744,7 @@ export class CustomThemeCreator extends Dialog {
         "--darken-background": darkenColor.toHex(),
         "--color-homepage-sidebars-bg": darkenColor.alpha(0.1).toHex(),
         "--color-splashtext": textcolor.toHex(),
-      }
+      },
     };
     await browser.runtime.sendMessage({
       action: "markThemeAsModified",
@@ -1787,7 +1789,7 @@ export class CustomThemeCreator extends Dialog {
         return { input, label };
       }
 
-      updateLogo(element: HTMLLabelElement, state: boolean) { }
+      updateLogo(element: HTMLLabelElement, state: boolean) {}
 
       load() {
         this.updateLogo(this.label, this.element.checked);
@@ -1932,7 +1934,7 @@ export class CustomThemeCreator extends Dialog {
     return this.imagePreviewContainer;
   }
 
-  async renderContent() {
+  override async renderContent() {
     this.content.classList.add("custom-theme-maker");
 
     this.content.appendChild(this.createDisplayNameInput());
@@ -1956,7 +1958,7 @@ export class CustomThemeCreator extends Dialog {
     await this.backgroundImageInput.loadImageData();
   }
 
-  onClosed(realUserIntent: boolean): void {
+  override onClosed(realUserIntent: boolean): void {
     document.body.removeChild(this.wrapper);
     if (!realUserIntent) return;
     settingsWindow.themeSelector.updateSelectorContent();

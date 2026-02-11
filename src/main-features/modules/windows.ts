@@ -63,7 +63,7 @@ export class BaseWindow {
 
   // Called every time the window is opened
   // Override this in subclass
-  onOpened(): void {}
+  onOpened(): void { }
 
   // Called when window is closed
   onClosed?(clickedCloseButton: boolean): void;
@@ -182,7 +182,7 @@ export class Dialog extends BaseWindow {
     super(id, hidden);
   }
 
-  async create(): Promise<void> {
+  override async create(): Promise<void> {
     this.element = await this.renderContent();
     this.element.id = this.id;
     this.element.classList.add("base-window", "base-dialog");
