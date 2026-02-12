@@ -96,7 +96,6 @@ class TakenWidget extends WidgetBase {
           TasksContainer.appendChild(noDataContainer);
           TasksContainer.appendChild(noDataContainerTextContainer);
         }
-        // sort based on day
         data.sort(
           (a, b) =>
             new Date(a.period.dateTimeFrom) - new Date(b.period.dateTimeFrom)
