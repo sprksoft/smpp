@@ -54,6 +54,7 @@ export class BaseWindow {
     });
 
     closeBtn.addEventListener("click", () => this.hide(true));
+    this.onCreate?.();
   }
 
   // Override this in subclass
@@ -63,13 +64,16 @@ export class BaseWindow {
 
   // Called every time the window is opened
   // Override this in subclass
-  onOpened(): void { }
+  onOpened(): void {}
 
   // Called when window is closed
   onClosed?(clickedCloseButton: boolean): void;
 
   // Called when window grows or shrinks
   onScreenSizeUpdate?(): void;
+
+  // Called when window is created
+  onCreate?(): void;
 
   show(triggerEvent: MouseEvent | KeyboardEvent | null = null): void {
     if (!this.hidden) return;
@@ -205,5 +209,6 @@ export class Dialog extends BaseWindow {
     document.body.appendChild(this.wrapper);
 
     closeBtn.addEventListener("click", () => this.hide(true));
+    this.onCreate?.();
   }
 }

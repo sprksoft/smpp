@@ -10,6 +10,7 @@ import { widgetSystemNotifyThemeChange } from "../../widgets/widgets.js";
 import {
   browser,
   convertLinkToBase64,
+  delay,
   getExtensionImage,
   isValidHexColor,
 } from "../../common/utils.js";
@@ -847,7 +848,7 @@ export class ThemeTile extends Tile {
     if (resp.error) {
       console.error("Failed to share theme", resp.error);
       linkOutput.innerText = "Failed to share theme";
-      shareDialog.element.classList.add("error-theme-sharing")
+      shareDialog.element.classList.add("error-theme-sharing");
       copyToClipboardButton.innerHTML = errorSvg;
       copyToClipboardButton.style.pointerEvents = "none";
       new Toast("Failed to share theme", "error").render();
@@ -1237,16 +1238,29 @@ export class ThemeSelector {
   }
 
   async renderTiles(tiles: Tiles) {
-    const renderedElements = await Promise.all(
-      tiles.map((tile) => tile.render())
-    );
+    function getTileDelay(number: number) {
+      if (number < 8) {
+        return 20;
+      } else if (number < 12) {
+        return 15;
+      } else {
+        return 7;
+      }
+    }
+    this.content.style.height =
+      this.calculateContentHeight(tiles.length) + "px";
+    const delayAmount = getTileDelay(tiles.length);
+    for (let i = 1; i <= tiles.length; i++) {
+      const tile = tiles[i - 1];
+      if (!tile) break;
+      await tile.render();
+      await tile.updateImage(currentThemeName, true);
 
-    const fragment = document.createDocumentFragment();
-    renderedElements.forEach((element) => {
-      fragment.appendChild(element);
-    });
+      this.content.appendChild(tile.element);
 
-    this.content.appendChild(fragment);
+      if (document.body.classList.contains("enableAnimations"))
+        await delay(delayAmount);
+    }
   }
 
   createContentContainer() {
@@ -1254,12 +1268,11 @@ export class ThemeSelector {
     this.content.classList.add("theme-tiles");
   }
 
-  calculateContentHeight(tiles: Tiles) {
-    const TILE_HEIGHT = parseFloat(tiles[0]?.element.style.height || "0");
-    const TILE_WIDTH = parseFloat(tiles[0]?.element.style.width || "0"); // Was .height, should be .width
+  calculateContentHeight(tileAmount: number) {
+    const TILE_HEIGHT = 104;
+    const TILE_WIDTH = 168;
     const GAP = 6;
     const totalWidth = this.contentWidth;
-    const tileAmount = tiles.length;
     const tilesPerRow = Math.floor((totalWidth + GAP) / (TILE_WIDTH + GAP));
     const numRows = Math.ceil(tileAmount / tilesPerRow);
     const totalHeight = numRows * TILE_HEIGHT + (numRows - 1) * GAP;
@@ -1288,7 +1301,7 @@ export class ThemeSelector {
 
   updateContentHeight() {
     this.content.style.height =
-      String(this.calculateContentHeight(this.currentTiles)) + "px";
+      String(this.calculateContentHeight(this.currentTiles.length)) + "px";
   }
 
   createThemeTile(name: string, isFavorite: boolean, isCustom: boolean) {
@@ -1349,7 +1362,6 @@ export class ThemeSelector {
     }
 
     await this.renderTiles(this.currentTiles);
-    await this.updateImages(true);
   }
 
   async changeCategory(category: string) {
@@ -1952,11 +1964,14 @@ export class CustomThemeCreator extends Dialog {
     this.content.appendChild(this.createColorPickers());
 
     this.content.appendChild(this.createRemoveButton());
+    this.element.appendChild(this.content);
+
+    return this.element;
+  }
+
+  override async onCreate(): Promise<void> {
     await this.updateBackgroundImagePreview();
     this.load(this.theme);
-
-    this.element.appendChild(this.content);
-    return this.element;
   }
 
   async load(theme: Theme) {

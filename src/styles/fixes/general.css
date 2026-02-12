@@ -1875,7 +1875,10 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   border: var(--border-size) solid var(--color-base03);
   position: absolute;
   z-index: 20;
-  box-shadow: 0px 0px 150px black;
+  box-shadow:
+    0px 0px 150px var(--color-shadow),
+    0px 0px 150px var(--color-shadow),
+    0px 0px 150px var(--color-shadow);
   border-radius: 2rem;
   width: 90%;
   height: 85%;

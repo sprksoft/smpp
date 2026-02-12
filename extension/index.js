@@ -2533,6 +2533,7 @@ Is it scaring you off?`,
         void this.element.offsetWidth;
       });
       closeBtn.addEventListener("click", () => this.hide(true));
+      this.onCreate?.();
     }
     // Override this in subclass
     async renderContent() {
@@ -2636,6 +2637,7 @@ Is it scaring you off?`,
       this.wrapper.appendChild(this.element);
       document.body.appendChild(this.wrapper);
       closeBtn.addEventListener("click", () => this.hide(true));
+      this.onCreate?.();
     }
   };
 
@@ -8288,25 +8290,36 @@ Is it scaring you off?`,
       this.topContainer.appendChild(title);
     }
     async renderTiles(tiles) {
-      const renderedElements = await Promise.all(
-        tiles.map((tile) => tile.render())
-      );
-      const fragment = document.createDocumentFragment();
-      renderedElements.forEach((element) => {
-        fragment.appendChild(element);
-      });
-      this.content.appendChild(fragment);
+      function getTileDelay(number) {
+        if (number < 8) {
+          return 20;
+        } else if (number < 12) {
+          return 15;
+        } else {
+          return 7;
+        }
+      }
+      this.content.style.height = this.calculateContentHeight(tiles.length) + "px";
+      const delayAmount = getTileDelay(tiles.length);
+      for (let i5 = 1; i5 <= tiles.length; i5++) {
+        const tile = tiles[i5 - 1];
+        if (!tile) break;
+        await tile.render();
+        await tile.updateImage(currentThemeName, true);
+        this.content.appendChild(tile.element);
+        if (document.body.classList.contains("enableAnimations"))
+          await delay(delayAmount);
+      }
     }
     createContentContainer() {
       this.content = document.createElement("div");
       this.content.classList.add("theme-tiles");
     }
-    calculateContentHeight(tiles) {
-      const TILE_HEIGHT = parseFloat(tiles[0]?.element.style.height || "0");
-      const TILE_WIDTH = parseFloat(tiles[0]?.element.style.width || "0");
+    calculateContentHeight(tileAmount) {
+      const TILE_HEIGHT = 104;
+      const TILE_WIDTH = 168;
       const GAP = 6;
       const totalWidth = this.contentWidth;
-      const tileAmount = tiles.length;
       const tilesPerRow = Math.floor((totalWidth + GAP) / (TILE_WIDTH + GAP));
       const numRows = Math.ceil(tileAmount / tilesPerRow);
       const totalHeight = numRows * TILE_HEIGHT + (numRows - 1) * GAP;
@@ -8329,7 +8342,7 @@ Is it scaring you off?`,
       await this.renderTiles(tiles);
     }
     updateContentHeight() {
-      this.content.style.height = String(this.calculateContentHeight(this.currentTiles)) + "px";
+      this.content.style.height = String(this.calculateContentHeight(this.currentTiles.length)) + "px";
     }
     createThemeTile(name2, isFavorite, isCustom) {
       let tile = new ThemeTile2(name2, this.currentCategory, isFavorite, isCustom);
@@ -8379,7 +8392,6 @@ Is it scaring you off?`,
         this.currentTiles.push(new noThemes());
       }
       await this.renderTiles(this.currentTiles);
-      await this.updateImages(true);
     }
     async changeCategory(category) {
       this.currentCategory = category;
@@ -8873,10 +8885,12 @@ Is it scaring you off?`,
       this.content.appendChild(this.createFileInputContainer());
       this.content.appendChild(this.createColorPickers());
       this.content.appendChild(this.createRemoveButton());
-      await this.updateBackgroundImagePreview();
-      this.load(this.theme);
       this.element.appendChild(this.content);
       return this.element;
+    }
+    async onCreate() {
+      await this.updateBackgroundImagePreview();
+      this.load(this.theme);
     }
     async load(theme) {
       this.displayNameInput.value = theme.displayName;
