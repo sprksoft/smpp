@@ -10,10 +10,10 @@ export async function migrate() {
   const settingsData = await browser.runtime.sendMessage({
     action: "getRawSettingsData",
   });
-  if (settingsData === undefined) {
+  if (!settingsData || typeof settingsData !== "object") {
     return;
   }
-  if (settingsData.backgroundBlurAmount === undefined) {
+  if (!("backgroundBlurAmount" in settingsData)) {
     return;
   }
   await migrateV5(settingsData);

@@ -29,17 +29,26 @@ document.addEventListener("keyup", async (e) => {
     return;
   }
 
+  if (!keybinds) {
+    return;
+  }
+
+  const dmenuKey = keybinds.dmenu;
+  const settingsKey = keybinds.settings;
+  const gcKey = keybinds.gc;
+
   // General
-  switch (key) {
-    case keybinds.dmenu:
-      do_qm(keybinds.dmenu);
-      break;
-    case keybinds.settings:
-      openSettingsWindow(e);
-      break;
-    case keybinds.gc:
-      openGlobalChat(e);
-      break;
+  if (dmenuKey && key === dmenuKey) {
+    do_qm(dmenuKey);
+    return;
+  }
+  if (settingsKey && key === settingsKey) {
+    openSettingsWindow(e);
+    return;
+  }
+  if (gcKey && key === gcKey) {
+    openGlobalChat(e);
+    return;
   }
 
   // Widget
@@ -52,14 +61,12 @@ document.addEventListener("keyup", async (e) => {
     return;
   }
 
-  switch (key) {
-    case keybinds.widgetEditMode:
-      await setEditMode(true);
-      break;
-    case keybinds.widgetBag:
-      if (widgetEditMode) {
-        toggleBag();
-      }
-      break;
+  if (keybinds.widgetEditMode && key === keybinds.widgetEditMode) {
+    await setEditMode(true);
+    return;
+  }
+
+  if (keybinds.widgetBag && key === keybinds.widgetBag && widgetEditMode) {
+    toggleBag();
   }
 });

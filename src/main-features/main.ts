@@ -8,6 +8,14 @@ import "./profile.ts";
 import "../main-features/keybinds.ts";
 import "./appearance/background-image.ts";
 import "./appearance/weather-effects.ts";
+import {
+  createWidgetEditModeButton,
+  createWidgetSystem,
+  initWidgetEditMode,
+  setEditMode,
+  setWidgetLiteMode,
+  updateNews,
+} from "../widgets/widgets.js";
 // Games
 import "../games/games.ts";
 import "../games/breakout.ts";
@@ -19,7 +27,6 @@ import "../games/tetris.ts";
 import "../widgets/tutorial-widget.ts";
 import "../widgets/assignments.ts";
 import "../widgets/delijn.ts";
-import "../widgets/plant.ts";
 import "../widgets/planner.ts";
 import "../widgets/weather.ts";
 import "../widgets/clock.ts";
@@ -29,7 +36,7 @@ import { browser, getExtensionImage, randomChance } from "../common/utils.js";
 import { migrate } from "../fixes-utils/migration.js";
 import { titleFix } from "../fixes-utils/titlefix.js";
 import { getPfpLink } from "../fixes-utils/utils.js";
-import { createWidgetEditModeButton, createWidgetSystem } from "../widgets/widgets.js";
+import { registerPlantWidget } from "../widgets/plant.js";
 import { createGC, setGlobalGlass } from "./globalchat.js";
 import { quickLoad } from "./quick-menu/quick.js";
 import { createSettingsWindow, type Settings } from "./settings/main-settings.js";
@@ -57,7 +64,6 @@ import {
   settingsIconSvg,
 } from "../fixes-utils/svgs.js";
 import { createQuickMenuButton, reloadDMenuConfig } from "../main-features/quick-menu/dmenu.js";
-import { initWidgetEditMode, setEditMode, updateNews } from "../widgets/widgets.js";
 import { setBackground } from "./appearance/background-image.js";
 import { setTheme, updateCurrentThemeName } from "./appearance/themes.js";
 import { applyWeatherEffects } from "./appearance/weather-effects.js";
@@ -225,6 +231,7 @@ async function createStaticGlobals() {
 
   const _quicks = await quickLoad();
   liteMode = browser.runtime.getManifest().name.includes("Lite");
+  setWidgetLiteMode(liteMode);
 }
 
 export async function applyAppearance(appearance: Settings["appearance"]) {
@@ -433,6 +440,7 @@ async function main() {
 
   applyFixes();
   await createStaticGlobals();
+  await registerPlantWidget();
 
   await createWidgetSystem();
 

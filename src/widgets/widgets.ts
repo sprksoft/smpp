@@ -2,9 +2,6 @@
 import { browser, fillObjectWithDefaults, getByPath, setByPath } from "../common/utils.js";
 import { doneSvg, editIconSvg } from "../fixes-utils/svgs.js";
 import { createButtonWithLabel } from "../main-features/appearance/ui.js";
-import { liteMode } from "../main-features/main.ts";
-import { settingsWindow } from "../main-features/settings/main-settings.js";
-import { loadQuickSettings } from "../main-features/settings/quick-settings.js";
 
 const PANNELIP_MARGIN_PX = 20;
 
@@ -23,6 +20,11 @@ let widgetsContainer;
 let widgetBag;
 let widgetBagHandle;
 let doneButton;
+let liteMode = false;
+
+export function setWidgetLiteMode(value: boolean) {
+  liteMode = value;
+}
 
 export function registerWidget(widget) {
   widgets.push(widget);
@@ -545,6 +547,10 @@ function initNewsEditMode() {
       name: "appearance.news",
       data: e.target.checked,
     });
+    const [{ settingsWindow }, { loadQuickSettings }] = await Promise.all([
+      import("../main-features/settings/main-settings.js"),
+      import("../main-features/settings/quick-settings.js"),
+    ]);
     await settingsWindow.loadPage();
     await loadQuickSettings();
   });

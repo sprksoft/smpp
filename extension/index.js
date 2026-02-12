@@ -1,6 +1,21 @@
+"use strict";
 (() => {
+  var __defProp = Object.defineProperty;
+  var __getOwnPropNames = Object.getOwnPropertyNames;
+  var __esm = (fn, res) => function __init() {
+    return fn && (res = (0, fn[__getOwnPropNames(fn)[0]])(fn = 0)), res;
+  };
+  var __export = (target, all) => {
+    for (var name in all)
+      __defProp(target, name, { get: all[name], enumerable: true });
+  };
+
   // src/fixes-utils/svgs.ts
-  var discordSvg = `<div class="bigdiscordbutton">
+  var discordSvg, homeiconSvg, notfisSvg, messageSvg, plantThePlantSvg, performanceModeSvg, temperatureSvg, feelsLikeSvg, humiditySvg, windSvg, waterPlantSvg, searchButtonSvg, imageInputSvg, editIconSvg, noLocationSvg, lijnIconSvg, assignmentsSvg, doneSvg, contractIconSVG, expandIconSVG, closeIconSVG, gcIconSvg, settingsIconSvg, loadingSpinnerSvg, trashSvg, copySvg, folderSvg, heartSvg, brokenHeartSvg, pineSvg, moonSvg, sunSvg, chevronLeftSvg, plusSVG, wandSvg, magicWandSvg, playSvg, shareSvg, infoSvg, errorSvg, succesSvg, warnSvg;
+  var init_svgs = __esm({
+    "src/fixes-utils/svgs.ts"() {
+      "use strict";
+      discordSvg = `<div class="bigdiscordbutton">
 <a target="_blank" href="https://discord.gg/qCHZYepDqZ" class="discordbutton"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="30px" height="30px" viewBox="0 -28.5 256 256" version="1.1" preserveAspectRatio="xMidYMid">
 <g>
     <path d="M216.856339,16.5966031 C200.285002,8.84328665 182.566144,3.2084988 164.041564,0 C161.766523,4.11318106 159.108624,9.64549908 157.276099,14.0464379 C137.583995,11.0849896 118.072967,11.0849896 98.7430163,14.0464379 C96.9108417,9.64549908 94.1925838,4.11318106 91.8971895,0 C73.3526068,3.2084988 55.6133949,8.86399117 39.0420583,16.6376612 C5.61752293,67.146514 -3.4433191,116.400813 1.08711069,164.955721 C23.2560196,181.510915 44.7403634,191.567697 65.8621325,198.148576 C71.0772151,190.971126 75.7283628,183.341335 79.7352139,175.300261 C72.104019,172.400575 64.7949724,168.822202 57.8887866,164.667963 C59.7209612,163.310589 61.5131304,161.891452 63.2445898,160.431257 C105.36741,180.133187 151.134928,180.133187 192.754523,160.431257 C194.506336,161.891452 196.298154,163.310589 198.110326,164.667963 C191.183787,168.842556 183.854737,172.420929 176.223542,175.320965 C180.230393,183.341335 184.861538,190.991831 190.096624,198.16893 C211.238746,191.588051 232.743023,181.531619 254.911949,164.955721 C260.227747,108.668201 245.831087,59.8662432 216.856339,16.5966031 Z M85.4738752,135.09489 C72.8290281,135.09489 62.4592217,123.290155 62.4592217,108.914901 C62.4592217,94.5396472 72.607595,82.7145587 85.4738752,82.7145587 C98.3405064,82.7145587 108.709962,94.5189427 108.488529,108.914901 C108.508531,123.290155 98.3405064,135.09489 85.4738752,135.09489 Z M170.525237,135.09489 C157.88039,135.09489 147.510584,123.290155 147.510584,108.914901 C147.510584,94.5396472 157.658606,82.7145587 170.525237,82.7145587 C183.391518,82.7145587 193.761324,94.5189427 193.539891,108.914901 C193.539891,123.290155 183.391518,135.09489 170.525237,135.09489 Z" class="st1" fill-rule="nonzero">
@@ -9,18 +24,18 @@
 </g>
 </svg></a>
 </div>`;
-  var homeiconSvg = `
+      homeiconSvg = `
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px"class=text-color-fill height="18px" width="18px" viewBox="0 0 256 256" enable-background="new 0 0 256 256" xml:space="preserve">
 <metadata> Svg Vector Icons : http://www.onlinewebfonts.com/icon</metadata>
 <g><g><path  d="M241.4,104.9l-96-89.5c-4.9-5.5-11.9-8.7-19.3-8.7c-7.3,0-14.3,3.1-19,8.4l-92.5,89.8c-4.6,4.7-5.9,11.6-3.4,17.7c2.6,6.1,8.5,9.9,15.1,9.9h8.3v91.3c0,14.2,11.3,25.7,25.5,25.7h39.7c5.2,0,9.7-4.2,9.7-9.3v-60.7c0-2.6,1.7-4.9,4.3-4.9h28c2.6,0,4.6,2.3,4.6,4.9V240c0,5.2,4.3,9.3,9.5,9.3h39.7c14.2,0,25.8-11.5,25.8-25.7v-91.3h8.3c6.6,0,12.5-3.8,15.1-9.9C247.3,116.5,246,109.6,241.4,104.9L241.4,104.9z"/></g></g>
 </svg>`;
-  var notfisSvg = `
+      notfisSvg = `
 <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24" class=text-color-fill>span.js-badge-msg.topnav__badge
 <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C9.9695 2 8.34903 2.72578 7.24822 3.98079C6.16397 5.21692 5.66667 6.87057 5.66667 8.6V10.3333C5.66667 10.5774 5.55716 10.8709 5.27166 11.2498C4.99798 11.6129 4.6427 11.9534 4.25022 12.3296L4.18372 12.3934C3.49997 13.0494 3 13.9996 3 15.1333C3 16.67 4.19824 18 5.77778 18H18.2222C19.8018 18 21 16.67 21 15.1333C21 13.9996 20.5 13.0494 19.8163 12.3934L19.7498 12.3296L19.7497 12.3296C19.3573 11.9534 19.002 11.6129 18.7283 11.2498C18.4428 10.8709 18.3333 10.5774 18.3333 10.3333V8.6C18.3333 6.87057 17.836 5.21692 16.7518 3.98079C15.651 2.72578 14.0305 2 12 2Z"/>
 <path fill-rule="evenodd" clip-rule="evenodd" d="M9.44303 19.1694C9.90172 18.8618 10.5229 18.9843 10.8305 19.443C10.9299 19.5912 11.0843 19.731 11.2919 19.8345C11.4998 19.938 11.7444 19.9964 12 19.9964C12.2556 19.9964 12.5002 19.938 12.7081 19.8345C12.9157 19.731 13.0701 19.5912 13.1695 19.443C13.4771 18.9843 14.0983 18.8618 14.557 19.1694C15.0157 19.4771 15.1381 20.0983 14.8305 20.557C14.5234 21.0149 14.0944 21.3783 13.6 21.6246C13.1058 21.8708 12.5546 21.9964 12 21.9964C11.4454 21.9964 10.8942 21.8708 10.4 21.6246C9.90564 21.3783 9.47658 21.0149 9.16946 20.557C8.86186 20.0983 8.98434 19.4771 9.44303 19.1694Z"/>
 </svg>
 `;
-  var messageSvg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:svg="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 6.3500002 6.3500002" class=text-color-fill id="svg1976" version="1.1">
+      messageSvg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:svg="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 6.3500002 6.3500002" class=text-color-fill id="svg1976" version="1.1">
 
 <defs id="defs1970"/>
 
@@ -31,7 +46,7 @@
 </g>
 
 </svg>`;
-  var plantThePlantSvg = `<svg xmlns="http://www.w3.org/2000/svg" id="plant_the_plant_svg" viewBox="0 0 50.16 37.5">
+      plantThePlantSvg = `<svg xmlns="http://www.w3.org/2000/svg" id="plant_the_plant_svg" viewBox="0 0 50.16 37.5">
         <defs>
           <!-- Clip-path for the rising effect -->
           <clipPath id="riseClip">
@@ -63,8 +78,8 @@
           </g>
         </g>
       </svg>`;
-  var performanceModeSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24" id="lightning" class="icon glyph"><path d="M18,11.74a1,1,0,0,0-.52-.63L14.09,9.43,15,3.14a1,1,0,0,0-1.78-.75l-7,9a1,1,0,0,0-.17.87,1,1,0,0,0,.59.67l4.27,1.71L10,20.86a1,1,0,0,0,.63,1.07A.92.92,0,0,0,11,22a1,1,0,0,0,.83-.45l6-9A1,1,0,0,0,18,11.74Z"/></svg>`;
-  var temperatureSvg = `<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" style="height: 100%;" data-name="Laag 2" viewBox="0 0 13 26">
+      performanceModeSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24" id="lightning" class="icon glyph"><path d="M18,11.74a1,1,0,0,0-.52-.63L14.09,9.43,15,3.14a1,1,0,0,0-1.78-.75l-7,9a1,1,0,0,0-.17.87,1,1,0,0,0,.59.67l4.27,1.71L10,20.86a1,1,0,0,0,.63,1.07A.92.92,0,0,0,11,22a1,1,0,0,0,.83-.45l6-9A1,1,0,0,0,18,11.74Z"/></svg>`;
+      temperatureSvg = `<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" style="height: 100%;" data-name="Laag 2" viewBox="0 0 13 26">
 <g id="Laag_1-2" data-name="Laag 1">
   <g>
   <path class="st1" d="M10.57,14.75V5.29c0-2.44-1.99-4.43-4.43-4.43S1.72,2.85,1.72,5.29v9.46c-1.11,1.15-1.72,2.66-1.72,4.26.01,3.38,2.76,6.13,6.14,6.13,1.62,0,3.15-.62,4.31-1.75,2.4-2.36,2.45-6.22.12-8.64ZM8.91,22.09c-.83.74-1.9,1.12-3,1.05-1.1-.06-2.12-.55-2.85-1.37-.74-.83-1.12-1.89-1.05-2.99.06-1.11.55-2.13,1.37-2.86l.33-.3V5.29c0-1.34,1.09-2.43,2.43-2.44,1.34.01,2.43,1.1,2.43,2.44v10.33l.33.29c.12.11.23.22.33.33.74.83,1.11,1.9,1.05,3-.06,1.11-.55,2.12-1.37,2.85Z"></path>
@@ -72,7 +87,7 @@
   </g>
 </g>
 </svg>`;
-  var feelsLikeSvg = `<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 24.28 25.14">
+      feelsLikeSvg = `<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 24.28 25.14">
 <g id="Laag_1-2" data-name="Laag 1">
   <g>
     <path class="st1" d="M21.57,7.72h-5.24c-1.47.02-2.64,1.24-2.61,2.71v5.14c0,.97.76,1.78,1.71,1.85v5.87c0,1.02.84,1.85,1.86,1.85h3.43c1.02,0,1.85-.83,1.85-1.86v-5.86c.96-.07,1.71-.88,1.71-1.85v-5.24c-.02-1.47-1.25-2.64-2.71-2.61ZM15.71,15.43v-5.09c.01-.18.09-.34.23-.46.13-.12.3-.18.48-.17h5.24c.18.01.34.09.46.23.12.13.18.3.17.49v5h-1.72v7.71h-3.14v-7.71h-1.72Z"></path>
@@ -82,7 +97,7 @@
   </g>
 </g>
 </svg>`;
-  var humiditySvg = `<svg xmlns="http://www.w3.org/2000/svg" id="layer1" style="margin: 0% 11% 0% 11%" data-name="Laag 2" viewBox="0 0 29.83 24.41">
+      humiditySvg = `<svg xmlns="http://www.w3.org/2000/svg" id="layer1" style="margin: 0% 11% 0% 11%" data-name="Laag 2" viewBox="0 0 29.83 24.41">
 <g id="Laag_1-2" data-name="Laag 1">
   <g>
     <path class="st1" d="M18.99.35c2.5-.54,5.6-.51,9.81.54.73.18,1.17.92.99,1.64s-.92,1.17-1.64.98c-3.92-.98-6.58-.95-8.58-.52-2,.43-3.44,1.29-4.96,2.22l-.11.07c-1.47.9-3.09,1.89-5.24,2.25-2.23.37-4.86.04-8.4-1.37-.7-.28-1.03-1.06-.76-1.76.28-.69,1.07-1.03,1.76-.75,3.24,1.29,5.36,1.47,6.94,1.21,1.61-.27,2.84-1.01,4.39-1.95,1.53-.93,3.31-2.02,5.8-2.56Z"></path>
@@ -93,7 +108,7 @@
 </g>
 </svg>
 `;
-  var windSvg = `<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 39.94 24.5">
+      windSvg = `<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" viewBox="0 0 39.94 24.5">
 				<g id="Laag_1-2" data-name="Laag 1">
 					<g>
 						<path class="st1" d="M38.09,12.21c-.96.78-2.07,1.18-3.33,1.18-1.29-.01-2.57-.01-3.86-.01h-14.61c-.54,0-.97-.29-1.13-.78-.17-.51.01-1.07.43-1.33.21-.13.49-.21.74-.21,4.41-.01,8.83-.01,13.24-.01h5.15c1.44,0,2.56-.91,2.85-2.32.27-1.38-.75-2.89-2.15-3.18-.2-.04-.4-.06-.6-.06-1.51,0-2.73,1.21-2.77,2.76-.02.71-.49,1.18-1.17,1.18h-.14c-.57-.06-1.01-.53-1.02-1.1-.03-1.26.37-2.39,1.17-3.34.99-1.16,2.42-1.83,3.93-1.83,1.95,0,3.72,1.09,4.6,2.86,1.05,2.09.49,4.7-1.33,6.19Z"></path>
@@ -102,28 +117,28 @@
 					</g>
 				</g>
 			</svg>`;
-  var waterPlantSvg = `<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" height=40px viewBox="0 0 34.74 41.95">
+      waterPlantSvg = `<svg xmlns="http://www.w3.org/2000/svg" id="Laag_2" data-name="Laag 2" height=40px viewBox="0 0 34.74 41.95">
     <g id="Laag_1-2" data-name="Laag 1">
       <path d="M21.83,3.45c-.81,3.5-2.37,6.69-4.13,9.62l-.62-.98c-2.16-3.41-4.6-7.26-5.56-11.35-.08-.36-.36-.63-.71-.71-.52-.12-1.03.2-1.15.71-.95,4.12-3.39,7.96-5.56,11.37-.56.89-1.11,1.77-1.71,2.77C.81,17.52-.2,20.35.03,23.06c.2,2.34,1.3,4.55,3.72,6.42,1.04.8,2.23,1.4,3.5,1.76.6.18,1.23.3,1.85.38,2.22,14.49,25.64,13.73,25.64-2.27,0-6.6-10.3-14.73-12.91-25.91ZM8.94,29.36v.31h0c-.39-.05-.77-.14-1.15-.25-1.03-.3-2-.78-2.85-1.43-1.95-1.5-2.83-3.24-2.99-5.07-.19-2.27.71-4.73,2.08-7.05.46-.77,1.07-1.73,1.71-2.73,1.72-2.72,3.62-5.7,4.88-8.96,1.25,3.24,3.14,6.22,4.87,8.94.39.61.77,1.21,1.11,1.77-3.64,5.66-7.64,10.35-7.64,14.48ZM21.45,37.15c-.37.54-1.07.72-1.65.44-1.82-1.03-3.3-2.56-4.27-4.4-.89-1.78-1.42-3.72-1.56-5.71-.03-.72.53-1.33,1.26-1.37.67-.03,1.26.46,1.35,1.13.11,1.64.54,3.25,1.27,4.73.74,1.41,1.87,2.58,3.26,3.37.6.41.75,1.22.34,1.82Z"/>
     </g>
   </svg>`;
-  var searchButtonSvg = `<svg class=delijnSearchIcon width="25" height="25" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+      searchButtonSvg = `<svg class=delijnSearchIcon width="25" height="25" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg"
     aria-hidden="true">
     <path d="M16.0073 9.00364C16.0073 12.8716 12.8716 16.0073 9.00364 16.0073C5.13564 16.0073 2 12.8716 2 9.00364C2
     5.13564 5.13564 2 9.00364 2C12.8716 2 16.0073 5.13564 16.0073 9.00364Z" class="text-stroke" stroke-width="4"></path>
     <rect x="16.594" y="12.8062" width="11.8729" height="3.95764" rx="1.97882" transform="rotate(45 16.594 12.8062)"
         class="st5"></rect>
 </svg>`;
-  var imageInputSvg = `<svg viewBox="0 0 24.00 24.00" fill="none" xmlns="http://www.w3.org/2000/svg">
+      imageInputSvg = `<svg viewBox="0 0 24.00 24.00" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path xmlns="http://www.w3.org/2000/svg" d="M14.2647 15.9377L12.5473 14.2346C11.758 13.4519 11.3633 13.0605 10.9089 12.9137C10.5092 12.7845 10.079 12.7845 9.67922 12.9137C9.22485 13.0605 8.83017 13.4519 8.04082 14.2346L4.04193 18.2622M14.2647 15.9377L14.606 15.5991C15.412 14.7999 15.8149 14.4003 16.2773 14.2545C16.6839 14.1262 17.1208 14.1312 17.5244 14.2688C17.9832 14.4253 18.3769 14.834 19.1642 15.6515L20 16.5001M14.2647 15.9377L18.22 19.9628M18.22 19.9628C17.8703 20 17.4213 20 16.8 20H7.2C6.07989 20 5.51984 20 5.09202 19.782C4.7157 19.5903 4.40973 19.2843 4.21799 18.908C4.12583 18.7271 4.07264 18.5226 4.04193 18.2622M18.22 19.9628C18.5007 19.9329 18.7175 19.8791 18.908 19.782C19.2843 19.5903 19.5903 19.2843 19.782 18.908C20 18.4802 20 17.9201 20 16.8V13M11 4H7.2C6.07989 4 5.51984 4 5.09202 4.21799C4.7157 4.40973 4.40973 4.71569 4.21799 5.09202C4 5.51984 4 6.0799 4 7.2V16.8C4 17.4466 4 17.9066 4.04193 18.2622M18 9V6M18 6V3M18 6H21M18 6H15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-  var editIconSvg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px"class=edit_button height="18px" width="18px" viewBox="0 0 24 24"  xml:space="preserve">
+      editIconSvg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px"class=edit_button height="18px" width="18px" viewBox="0 0 24 24"  xml:space="preserve">
 <metadata> Svg Vector Icons : http://www.onlinewebfonts.com/icon</metadata>
 <g><g><path xmlns="http://www.w3.org/2000/svg" class=pencil stroke-linecap:round;stroke-linejoin:round;-inkscape-stroke:none" d="m 19.792969,1.2089844 c -0.773047,0 -1.546203,0.290977 -2.134766,0.8730469 -6.69e-4,6.478e-4 -0.0013,0.0013 -0.002,0.00195 L 8.4119915,11.389897 c -0.5321594,0.536333 -1.9587661,2.040145 -2.9061791,5.334709 -0.1062793,0.369579 -0.1650107,0.570623 -0.2207032,0.85994 -0.046789,0.243065 -0.1295961,0.724628 0.2070338,1.013107 0.3909805,0.335056 1.0440816,0.133455 1.3847656,0.03125 C 7.387553,18.47571 7.9834625,18.287442 8.5897993,18.031247 11.103423,16.969168 12.593117,15.70399 12.985931,15.188066 l 8.93985,-8.8697066 C 23.11495,5.1606353 23.105005,3.2461646 21.927734,2.0820313 21.339171,1.4999614 20.566016,1.2089844 19.792969,1.2089844 Z" id="path5" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="scccssssscccs"/><path xmlns="http://www.w3.org/2000/svg" d="M 10.273212,2.8358152 H 5.5822718 c -1.3827164,0 -2.0740869,0 -2.6022128,0.2661137 C 2.5154954,3.3360099 2.1378007,3.709514 1.9011058,4.1689107 1.6320062,4.6911889 1.6320062,5.3748762 1.6320062,6.7422506 V 18.461557 c 0,1.367374 0,2.051122 0.2690996,2.573363 0.2366949,0.459374 0.6143896,0.832926 1.0789532,1.066946 0.5281259,0.266126 1.2194964,0.266126 2.6022128,0.266126 H 17.433068 c 1.382716,0 2.074137,0 2.602237,-0.266126 0.464527,-0.23402 0.842271,-0.607572 1.078917,-1.066946 0.269112,-0.522241 0.269112,-1.205989 0.269112,-2.573363 v -5.249273"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="stroke-width:3.25435;stroke-dasharray:none" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="csccssccssccsccc"/> </g></g>
 </svg>`;
-  var noLocationSvg = `<svg xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="0 0 24 24" stroke="var(--color-red)" fill="var(--color-base01)">
+      noLocationSvg = `<svg xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="0 0 24 24" stroke="var(--color-red)" fill="var(--color-base01)">
 <path d="M10 8L14 12M14 8L10 12M19 10.2C19 14.1764 15.5 17.4 12 21C8.5 17.4 5 14.1764 5 10.2C5 6.22355 8.13401 3 12 3C15.866 3 19 6.22355 19 10.2Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>`;
-  var lijnIconSvg = `<svg id="Laag_2" data-name="Laag 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 379.84 373.13">
+      lijnIconSvg = `<svg id="Laag_2" data-name="Laag 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 379.84 373.13">
   <defs>
 <style>
   .base-gray {
@@ -171,7 +186,7 @@
     <rect class="pure-white" x="264.31" y="286.08" width="55" height="17" rx="5" ry="5"/>
   </g>
 </svg>`;
-  var assignmentsSvg = `<svg class="assignments-icon-160" viewBox="0 0 500 500" style=" mix-blend-mode: normal !important;" fill="none" xmlns="http://www.w3.org/2000/svg">
+      assignmentsSvg = `<svg class="assignments-icon-160" viewBox="0 0 500 500" style=" mix-blend-mode: normal !important;" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect width="500" fill="#1E1E1E"/>
 <rect width="500" height="500" rx="54" fill="#ddddea"/>
 <rect x="31" y="265" width="436" height="200" rx="37" fill="#B2B2BE"/>
@@ -183,26 +198,26 @@
 <rect x="210" y="89" width="230" height="39" rx="19.5" fill="#7C7C87"/>
 <rect x="210" y="148" width="171" height="30" rx="15" fill="#7C7C87"/>
 </svg>`;
-  var doneSvg = `<svg xmlns="http://www.w3.org/2000/svg" class="done-icon" viewBox="0 0 193 180" fill="none">
+      doneSvg = `<svg xmlns="http://www.w3.org/2000/svg" class="done-icon" viewBox="0 0 193 180" fill="none">
 <rect xmlns="http://www.w3.org/2000/svg" x="108.281" y="146.148" width="45" height="116.069" rx="22.5" transform="rotate(131 108.281 146.148)"/>
 <rect xmlns="http://www.w3.org/2000/svg" x="159.568" y="-8" width="45" height="198" rx="22.5" transform="rotate(35 159.568 -8)"/>
 </svg>`;
-  var contractIconSVG = `
+      contractIconSVG = `
     <svg viewBox="0 0 16 16" class="contract-icon" stroke="currentColor" fill="none" stroke-width="1">
       <path fill-rule="evenodd" d="M.172 15.828a.5.5 0 0 0 .707 0l4.096-4.096V14.5a.5.5 0 1 0 1 0v-3.975a.5.5 0 0 0-.5-.5H1.5a.5.5 0 0 0 0 1h2.768L.172 15.121a.5.5 0 0 0 0 .707zM15.828.172a.5.5 0 0 0-.707 0l-4.096 4.096V1.5a.5.5 0 1 0-1 0v3.975a.5.5 0 0 0 .5.5H14.5a.5.5 0 0 0 0-1h-2.768L15.828.879a.5.5 0 0 0 0-.707z"/>
     </svg>`;
-  var expandIconSVG = `
+      expandIconSVG = `
     <svg viewBox="0 0 24 24" class="expand-icon" stroke="currentColor" fill="none" stroke-width="2.6">
       <path d="M3,14v6a1,1,0,0,0,1,1h6"/>
       <line x1="10" y1="14" x2="3.29" y2="20.71"/>
       <path d="M14,3h6a1,1,0,0,1,1,1v6"/>
       <line x1="20.71" y1="3.29" x2="14" y2="10"/>
     </svg>`;
-  var closeIconSVG = `
+      closeIconSVG = `
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
       <path d="M7 7L17 17M7 17L17 7" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>`;
-  var gcIconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="3009 50 450 450" class="st1">
+      gcIconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="3009 50 450 450" class="st1">
   <g>
     <g id="Laag_1">
       <path d="M3436.9,158.5c0-3.6-.4-7-.9-10.8-2.6-20.6-12.9-39.8-29-53.9-16.3-14.2-37-22.1-58.4-22.1h-.3c-56,.2-112.9.2-168,.1-29.2,0-58.3,0-87.5,0-3.9,0-8.1.3-12.9.9-20.5,2.7-39.5,12.9-53.6,28.9-14.2,16.1-22,36.6-21.9,57.6,0,31.4,0,63.4,0,94.3,0,26.1,0,52.2,0,78.3,0,3.8.3,7.6.9,11.5,5.4,33.9,24.4,57.5,56.3,70,6.6,2.6,13.5,3.9,20.7,5.3,2.3.5,4.7.9,7.1,1.4v1.7c0,5.2,0,10.3,0,15.5,0,13.6-.1,27.8.3,41.6.2,5.9,2.4,12.3,5.8,16.7,4.2,5.5,10.2,8.8,16.7,9.2.5,0,1,0,1.5,0,6.7,0,13.2-2.9,18.6-8.3,26.5-26.4,50.9-50.9,74.5-74.7,1.9-1.9,3.5-2.5,6.2-2.5h0c51.1.1,93.2.1,132.5,0,6.7,0,13.5-.7,20.4-2,40.4-7.5,70.9-44.1,71-85.1,0-59.1,0-119.9,0-173.5h0ZM3203.6,344.5c-16.5,14.1-40.7,21.6-70,21.6s-51.3-6.3-66.1-15.2l-2.8-1.7,12.1-43,4.7,2.7c11.8,6.8,32.5,14,54.8,14s38.4-10.1,38.4-27-10.1-23.9-38.8-34c-44.9-15.6-66.8-38.7-66.8-70.6s8.6-37.8,24.1-50.4c15.9-12.9,37.9-19.8,63.7-19.8s34.1,2.6,48.1,7.7c1.2.4,2.4.9,3.9,1.5h.1c0,0,3.5,1.6,3.5,1.6l30.3,13.2,18.8-43.2,39.7,17.2-18.8,43.2,41.4,18-17.2,39.7-41.4-18-18.8,43.2-39.7-17.2,18.8-43.2-19.7-8.6v.5c-.1,0-4.8-2.3-4.8-2.3-9.4-4.8-24.9-10.4-45.3-10.4s-34.5,12.5-34.5,23.3,9.1,21.2,42.3,33.7c43.7,16,63.2,38.2,63.2,71.9s-8.3,38.7-23.4,51.6h0ZM3375.4,308.6c-3.8,11.3-8.8,22.3-14.8,32.6l-2,3.4-2-.9-34.7-15.1-19,43.7-40-17.4,19-43.7-41.9-18.2,17.4-40,41.9,18.2,19-43.7,40,17.4-19,43.7,37.4,16.2-1.3,3.7h0Z"/>
@@ -211,65 +226,65 @@
     </g>
   </g>
 </svg>`;
-  var settingsIconSvg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="st1" width="20px" height="20px" viewBox="0 0 32 32" enable-background="new 0 0 32 32" id="Glyph" version="1.1" xml:space="preserve"><path d="M27.526,18.036L27,17.732c-0.626-0.361-1-1.009-1-1.732s0.374-1.371,1-1.732l0.526-0.304  c1.436-0.83,1.927-2.662,1.098-4.098l-1-1.732c-0.827-1.433-2.666-1.925-4.098-1.098L23,7.339c-0.626,0.362-1.375,0.362-2,0  c-0.626-0.362-1-1.009-1-1.732V5c0-1.654-1.346-3-3-3h-2c-1.654,0-3,1.346-3,3v0.608c0,0.723-0.374,1.37-1,1.732  c-0.626,0.361-1.374,0.362-2,0L8.474,7.036C7.042,6.209,5.203,6.701,4.375,8.134l-1,1.732c-0.829,1.436-0.338,3.269,1.098,4.098  L5,14.268C5.626,14.629,6,15.277,6,16s-0.374,1.371-1,1.732l-0.526,0.304c-1.436,0.829-1.927,2.662-1.098,4.098l1,1.732  c0.828,1.433,2.667,1.925,4.098,1.098L9,24.661c0.626-0.363,1.374-0.361,2,0c0.626,0.362,1,1.009,1,1.732V27c0,1.654,1.346,3,3,3h2  c1.654,0,3-1.346,3-3v-0.608c0-0.723,0.374-1.37,1-1.732c0.625-0.361,1.374-0.362,2,0l0.526,0.304  c1.432,0.826,3.271,0.334,4.098-1.098l1-1.732C29.453,20.698,28.962,18.865,27.526,18.036z M16,21c-2.757,0-5-2.243-5-5s2.243-5,5-5  s5,2.243,5,5S18.757,21,16,21z" /></svg>`;
-  var loadingSpinnerSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="loading-spinner">
+      settingsIconSvg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="st1" width="20px" height="20px" viewBox="0 0 32 32" enable-background="new 0 0 32 32" id="Glyph" version="1.1" xml:space="preserve"><path d="M27.526,18.036L27,17.732c-0.626-0.361-1-1.009-1-1.732s0.374-1.371,1-1.732l0.526-0.304  c1.436-0.83,1.927-2.662,1.098-4.098l-1-1.732c-0.827-1.433-2.666-1.925-4.098-1.098L23,7.339c-0.626,0.362-1.375,0.362-2,0  c-0.626-0.362-1-1.009-1-1.732V5c0-1.654-1.346-3-3-3h-2c-1.654,0-3,1.346-3,3v0.608c0,0.723-0.374,1.37-1,1.732  c-0.626,0.361-1.374,0.362-2,0L8.474,7.036C7.042,6.209,5.203,6.701,4.375,8.134l-1,1.732c-0.829,1.436-0.338,3.269,1.098,4.098  L5,14.268C5.626,14.629,6,15.277,6,16s-0.374,1.371-1,1.732l-0.526,0.304c-1.436,0.829-1.927,2.662-1.098,4.098l1,1.732  c0.828,1.433,2.667,1.925,4.098,1.098L9,24.661c0.626-0.363,1.374-0.361,2,0c0.626,0.362,1,1.009,1,1.732V27c0,1.654,1.346,3,3,3h2  c1.654,0,3-1.346,3-3v-0.608c0-0.723,0.374-1.37,1-1.732c0.625-0.361,1.374-0.362,2,0l0.526,0.304  c1.432,0.826,3.271,0.334,4.098-1.098l1-1.732C29.453,20.698,28.962,18.865,27.526,18.036z M16,21c-2.757,0-5-2.243-5-5s2.243-5,5-5  s5,2.243,5,5S18.757,21,16,21z" /></svg>`;
+      loadingSpinnerSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="loading-spinner">
   <path d="M21 12a9 9 0 1 1-6.219-8.56"></path>
 </svg>`;
-  var trashSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+      trashSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
 <path d="M18 6L17.1991 18.0129C17.129 19.065 17.0939 19.5911 16.8667 19.99C16.6666 20.3412 16.3648 20.6235 16.0011 20.7998C15.588 21 15.0607 21 14.0062 21H9.99377C8.93927 21 8.41202 21 7.99889 20.7998C7.63517 20.6235 7.33339 20.3412 7.13332 19.99C6.90607 19.5911 6.871 19.065 6.80086 18.0129L6 6M4 6H20M16 6L15.7294 5.18807C15.4671 4.40125 15.3359 4.00784 15.0927 3.71698C14.8779 3.46013 14.6021 3.26132 14.2905 3.13878C13.9376 3 13.523 3 12.6936 3H11.3064C10.477 3 10.0624 3 9.70951 3.13878C9.39792 3.26132 9.12208 3.46013 8.90729 3.71698C8.66405 4.00784 8.53292 4.40125 8.27064 5.18807L8 6M14 10V17M10 10V17" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>`;
-  var copySvg = `<svg class="copy-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+      copySvg = `<svg class="copy-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
 <path xmlns="http://www.w3.org/2000/svg" d="M8 8H7.2C6.0799 8 5.51984 8 5.09202 8.21799C4.71569 8.40973 4.40973 8.71569 4.21799 9.09202C4 9.51984 4 10.0799 4 11.2V16.8C4 17.9201 4 18.4802 4.21799 18.908C4.40973 19.2843 4.71569 19.5903 5.09202 19.782C5.51984 20 6.0799 20 7.2 20H12.8C13.9201 20 14.4802 20 14.908 19.782C15.2843 19.5903 15.5903 19.2843 15.782 18.908C16 18.4802 16 17.9201 16 16.8V16M11.2 16H16.8C17.9201 16 18.4802 16 18.908 15.782C19.2843 15.5903 19.5903 15.2843 19.782 14.908C20 14.4802 20 13.9201 20 12.8V7.2C20 6.0799 20 5.51984 19.782 5.09202C19.5903 4.71569 19.2843 4.40973 18.908 4.21799C18.4802 4 17.9201 4 16.8 4H11.2C10.0799 4 9.51984 4 9.09202 4.21799C8.71569 4.40973 8.40973 4.71569 8.21799 5.09202C8 5.51984 8 6.07989 8 7.2V12.8C8 13.9201 8 14.4802 8.21799 14.908C8.40973 15.2843 8.71569 15.5903 9.09202 15.782C9.51984 16 10.0799 16 11.2 16Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-  var folderSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+      folderSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
 <path xmlns="http://www.w3.org/2000/svg" d="M3 8.2C3 7.07989 3 6.51984 3.21799 6.09202C3.40973 5.71569 3.71569 5.40973 4.09202 5.21799C4.51984 5 5.0799 5 6.2 5H9.67452C10.1637 5 10.4083 5 10.6385 5.05526C10.8425 5.10425 11.0376 5.18506 11.2166 5.29472C11.4184 5.4184 11.5914 5.59135 11.9373 5.93726L12.0627 6.06274C12.4086 6.40865 12.5816 6.5816 12.7834 6.70528C12.9624 6.81494 13.1575 6.89575 13.3615 6.94474C13.5917 7 13.8363 7 14.3255 7H17.8C18.9201 7 19.4802 7 19.908 7.21799C20.2843 7.40973 20.5903 7.71569 20.782 8.09202C21 8.51984 21 9.0799 21 10.2V15.8C21 16.9201 21 17.4802 20.782 17.908C20.5903 18.2843 20.2843 18.5903 19.908 18.782C19.4802 19 18.9201 19 17.8 19H6.2C5.07989 19 4.51984 19 4.09202 18.782C3.71569 18.5903 3.40973 18.2843 3.21799 17.908C3 17.4802 3 16.9201 3 15.8V8.2Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
 `;
-  var heartSvg = `<svg class="heart-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+      heartSvg = `<svg class="heart-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
 <path xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" d="M12 6.00019C10.2006 3.90317 7.19377 3.2551 4.93923 5.17534C2.68468 7.09558 2.36727 10.3061 4.13778 12.5772C5.60984 14.4654 10.0648 18.4479 11.5249 19.7369C11.6882 19.8811 11.7699 19.9532 11.8652 19.9815C11.9483 20.0062 12.0393 20.0062 12.1225 19.9815C12.2178 19.9532 12.2994 19.8811 12.4628 19.7369C13.9229 18.4479 18.3778 14.4654 19.8499 12.5772C21.6204 10.3061 21.3417 7.07538 19.0484 5.17534C16.7551 3.2753 13.7994 3.90317 12 6.00019Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-  var brokenHeartSvg = `<svg class="broken-heart-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+      brokenHeartSvg = `<svg class="broken-heart-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
 <path xmlns="http://www.w3.org/2000/svg" d="M12 6.00011L14 8.00011L10 10.0001L13 13.0001M12 6.00011C10.2006 3.90309 7.19377 3.25515 4.93923 5.17539C2.68468 7.09563 2.36727 10.3062 4.13778 12.5772C5.60984 14.4655 10.0648 18.4479 11.5249 19.7369C11.6882 19.8811 11.7699 19.9532 11.8652 19.9816C11.9483 20.0063 12.0393 20.0063 12.1225 19.9816C12.2178 19.9532 12.2994 19.8811 12.4628 19.7369C13.9229 18.4479 18.3778 14.4655 19.8499 12.5772C21.6204 10.3062 21.3417 7.07543 19.0484 5.17539C16.7551 3.27535 13.7994 3.90309 12 6.00011Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-  var pineSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+      pineSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
 <path xmlns="http://www.w3.org/2000/svg" d="M15.0001 17.0001V21.0001H9.0001V17.0001M19.2784 17.0001H4.72182C4.17319 17.0001 3.89888 17.0001 3.76119 16.8884C3.64151 16.7913 3.57328 16.6445 3.57627 16.4904C3.5797 16.3131 3.75659 16.1035 4.11038 15.6842L6.13538 13.2842C6.22352 13.1797 6.26759 13.1275 6.32141 13.0899C6.36911 13.0567 6.42223 13.032 6.47841 13.017C6.5418 13.0001 6.61014 13.0001 6.74682 13.0001H17.2534C17.3901 13.0001 17.4584 13.0001 17.5218 13.017C17.578 13.032 17.6311 13.0567 17.6788 13.0899C17.7326 13.1275 17.7767 13.1797 17.8648 13.2842L19.8898 15.6842C20.2436 16.1035 20.4205 16.3131 20.4239 16.4904C20.4269 16.6445 20.3587 16.7913 20.239 16.8884C20.1013 17.0001 19.827 17.0001 19.2784 17.0001ZM5.60245 11.598L8.34531 9.198C8.42902 9.12476 8.47087 9.08813 8.51829 9.06203C8.56034 9.03889 8.60551 9.02191 8.6524 9.01164C8.70527 9.00006 8.76088 9.00006 8.87211 9.00006H15.1281C15.2393 9.00006 15.2949 9.00006 15.3478 9.01164C15.3947 9.02191 15.4399 9.03889 15.4819 9.06203C15.5293 9.08813 15.5712 9.12476 15.6549 9.198L18.3977 11.598C18.8937 12.032 19.1417 12.249 19.1655 12.4377C19.186 12.6011 19.1247 12.7642 19.0016 12.8737C18.8595 13.0001 18.53 13.0001 17.8709 13.0001H6.12926C5.4702 13.0001 5.14067 13.0001 4.99857 12.8737C4.87545 12.7642 4.81417 12.6011 4.83473 12.4377C4.85846 12.249 5.10646 12.032 5.60245 11.598ZM13.0414 3.89257L17.3581 7.59266C17.8653 8.02739 18.1189 8.24475 18.1441 8.43411C18.1659 8.59814 18.1052 8.76235 17.9819 8.87268C17.8395 9.00006 17.5055 9.00006 16.8375 9.00006H7.1627C6.4947 9.00006 6.1607 9.00006 6.01833 8.87268C5.89501 8.76235 5.83427 8.59814 5.85609 8.43411C5.88129 8.24475 6.13488 8.02739 6.64207 7.59266L10.9588 3.89257C11.3284 3.5758 11.5132 3.41741 11.7204 3.35704C11.9031 3.30384 12.0971 3.30384 12.2798 3.35704C12.487 3.41741 12.6718 3.5758 13.0414 3.89257Z" stroke-width="2" stroke-linejoin="round"/>
 </svg`;
-  var moonSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+      moonSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
 <path xmlns="http://www.w3.org/2000/svg" d="M3.32031 11.6835C3.32031 16.6541 7.34975 20.6835 12.3203 20.6835C16.1075 20.6835 19.3483 18.3443 20.6768 15.032C19.6402 15.4486 18.5059 15.6834 17.3203 15.6834C12.3497 15.6834 8.32031 11.654 8.32031 6.68342C8.32031 5.50338 8.55165 4.36259 8.96453 3.32996C5.65605 4.66028 3.32031 7.89912 3.32031 11.6835Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 </svg`;
-  var sunSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+      sunSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
 <path xmlns="http://www.w3.org/2000/svg" d="M12 3V4M12 20V21M4 12H3M6.31412 6.31412L5.5 5.5M17.6859 6.31412L18.5 5.5M6.31412 17.69L5.5 18.5001M17.6859 17.69L18.5 18.5001M21 12H20M16 12C16 14.2091 14.2091 16 12 16C9.79086 16 8 14.2091 8 12C8 9.79086 9.79086 8 12 8C14.2091 8 16 9.79086 16 12Z"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 </svg`;
-  var chevronLeftSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+      chevronLeftSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
 <path xmlns="http://www.w3.org/2000/svg" d="M15 6L9 12L15 18"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg`;
-  var plusSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+      plusSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
 <path xmlns="http://www.w3.org/2000/svg" d="M4 12H20M12 4V20" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-  var wandSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+      wandSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
 <path xmlns="http://www.w3.org/2000/svg" d="M14.0002 7.00004L16.8286 9.82846M3.69763 19.5653L4.26331 20.131C4.65933 20.527 4.85734 20.7251 5.08567 20.7992C5.28651 20.8645 5.50286 20.8645 5.7037 20.7992C5.93203 20.7251 6.13004 20.527 6.52606 20.131L20.0828 6.57427C20.4788 6.17825 20.6768 5.98025 20.751 5.75192C20.8163 5.55107 20.8163 5.33473 20.751 5.13388C20.6768 4.90555 20.4788 4.70755 20.0828 4.31153L19.5171 3.74584C19.1211 3.34983 18.9231 3.15182 18.6948 3.07763C18.4939 3.01237 18.2776 3.01237 18.0767 3.07763C17.8484 3.15182 17.6504 3.34983 17.2544 3.74585L3.69763 17.3026C3.30161 17.6986 3.1036 17.8966 3.02941 18.125C2.96415 18.3258 2.96415 18.5422 3.02941 18.743C3.1036 18.9713 3.30161 19.1693 3.69763 19.5653Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>`;
-  var magicWandSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+      magicWandSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
 <path xmlns="http://www.w3.org/2000/svg" d="M4.9996 7V11M9.9996 2V6M17.9996 16V20M2.9996 9H6.9996M7.9996 4H11.9996M15.9996 18H19.9996M13.9996 7L16.828 9.82843M19.5162 3.74612L20.0819 4.3118C20.4779 4.70782 20.6759 4.90583 20.7501 5.13416C20.8154 5.335 20.8154 5.55135 20.7501 5.75219C20.6759 5.98052 20.4779 6.17853 20.0819 6.57454L6.52508 20.1314C6.12906 20.5274 5.93105 20.7254 5.70272 20.7996C5.50188 20.8649 5.28553 20.8649 5.08469 20.7996C4.85636 20.7254 4.65835 20.5274 4.26234 20.1314L3.69665 19.5657C3.30063 19.1697 3.10262 18.9717 3.02844 18.7433C2.96318 18.5425 2.96318 18.3262 3.02844 18.1253C3.10262 17.897 3.30063 17.699 3.69665 17.303L17.2535 3.74612C17.6495 3.3501 17.8475 3.15209 18.0758 3.0779C18.2767 3.01265 18.493 3.01265 18.6939 3.0779C18.9222 3.15209 19.1202 3.3501 19.5162 3.74612Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>`;
-  var playSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+      playSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
 <path xmlns="http://www.w3.org/2000/svg" d="M16.6582 9.28638C18.098 10.1862 18.8178 10.6361 19.0647 11.2122C19.2803 11.7152 19.2803 12.2847 19.0647 12.7878C18.8178 13.3638 18.098 13.8137 16.6582 14.7136L9.896 18.94C8.29805 19.9387 7.49907 20.4381 6.83973 20.385C6.26501 20.3388 5.73818 20.0469 5.3944 19.584C5 19.053 5 18.1108 5 16.2264V7.77357C5 5.88919 5 4.94701 5.3944 4.41598C5.73818 3.9531 6.26501 3.66111 6.83973 3.6149C7.49907 3.5619 8.29805 4.06126 9.896 5.05998L16.6582 9.28638Z"  stroke-width="2" stroke-linejoin="round"/><path xmlns="http://www.w3.org/2000/svg" d="M16.6582 9.28638C18.098 10.1862 18.8178 10.6361 19.0647 11.2122C19.2803 11.7152 19.2803 12.2847 19.0647 12.7878C18.8178 13.3638 18.098 13.8137 16.6582 14.7136L9.896 18.94C8.29805 19.9387 7.49907 20.4381 6.83973 20.385C6.26501 20.3388 5.73818 20.0469 5.3944 19.584C5 19.053 5 18.1108 5 16.2264V7.77357C5 5.88919 5 4.94701 5.3944 4.41598C5.73818 3.9531 6.26501 3.66111 6.83973 3.6149C7.49907 3.5619 8.29805 4.06126 9.896 5.05998L16.6582 9.28638Z"  stroke-width="2" stroke-linejoin="round"/></svg>`;
-  var shareSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+      shareSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
 <path xmlns="http://www.w3.org/2000/svg" d="M16 7L12 3M12 3L8 7M12 3V15M21 11V17.7992C21 18.9193 21 19.4794 20.782 19.9072C20.5903 20.2835 20.2843 20.5895 19.908 20.7812C19.4802 20.9992 18.9201 20.9992 17.8 20.9992H6.2C5.0799 20.9992 4.51984 20.9992 4.09202 20.7812C3.71569 20.5895 3.40973 20.2835 3.21799 19.9072C3 19.4794 3 18.9193 3 17.7992V11" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>`;
-  var infoSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+      infoSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
 <path xmlns="http://www.w3.org/2000/svg" d="M12 8H12.01M12 11V16M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-  var errorSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+      errorSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
 <path xmlns="http://www.w3.org/2000/svg" d="M9 9L15 15M15 9L9 15M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-  var succesSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+      succesSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
 <path xmlns="http://www.w3.org/2000/svg" d="M8 12.3333L10.4615 15L16 9M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-  var warnSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+      warnSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
 <path xmlns="http://www.w3.org/2000/svg" d="M12 8V13M12 16H12.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"  stroke-width="2" stroke-linecap="round"/></svg>`;
+    }
+  });
 
   // src/fixes-utils/login.ts
   function updateLoginPanel() {
     const login_app_left = document.querySelector(".login-app__left");
     login_app_left.innerHTML = " ";
-    document.getElementsByClassName("login-app__platform-indicator")[0].innerHTML =
-      '<h1 class="logintitle">Smartschool ++</h1>';
+    document.getElementsByClassName("login-app__platform-indicator")[0].innerHTML = '<h1 class="logintitle">Smartschool ++</h1>';
     const loginSeperator = document.querySelector(".login-app__title--separator");
     if (loginSeperator) {
-      loginSeperator.innerHTML =
-        '<button type="button" class="white_text_button" id="showmore">More</button>';
+      loginSeperator.innerHTML = '<button type="button" class="white_text_button" id="showmore">More</button>';
       document.getElementById("showmore").addEventListener("click", () => {
         document.documentElement.style.setProperty("--show-options", "flex");
         document.getElementById("showmore").style.display = "none";
@@ -277,8 +292,8 @@
     }
   }
   function addSplashText() {
-    var loginApp = document.querySelector(".login-app");
-    var splashTextContainer = document.createElement("div");
+    const loginApp = document.querySelector(".login-app");
+    const splashTextContainer = document.createElement("div");
     loginApp.prepend(splashTextContainer);
     splashTextContainer.classList.add("splashtextcontainer");
     splashTextContainer.innerHTML = `<div class='splashtext'>${getSplashText()}</div>`;
@@ -293,3489 +308,398 @@
       removeSplashText();
     }
   }
-  var splashtexts = [
-    "It even works under water!",
-    "Hoelang is een chinees.",
-    "404 Splashtext not found",
-    `Don't Smartschool 
- and drive kids!`,
-    "Home-made!",
-    "Pythagoras was used in this",
-    // where????
-    "Like that smash button!",
-    "What <i>DOES</i> the fox say?",
-    "Supercalifragilisticexpialidocious!",
-    "Hottentotententententoonstelling",
-    "Not on steam!",
-    "Made in Belgium!",
-    `De L in frans 
- staat voor leuk!`,
-    `Doesn't contain nuts!`,
-    "Glutenfree!!!",
-    "Colorblind approved!",
-    "Not vegan!",
-    // :O
-    "Never gonna give you up ;)",
-    "The cake is a lie!",
-    "I know what you did...",
-    "Join de discord!",
-    "2 + 2 = 5",
-    "2 * 3 = 4",
-    `Listen to the 
- Arctic Monkeys!`,
-    "Global chat before GTA VI???",
-    "Water your plant(s)!",
-    "Check out Snake++!",
-    "Je suis une baguette",
-    "Dikke BMW!",
-    "Mand!",
-    "Net pindakaas gegeten dus...",
-    "BINGO!",
-    "GEKOLONISEERD!",
-    "pssst, its free real estate",
-    "Europapa!",
-    "Made by Sprksoft!",
-    "Made by Lukas",
-    "Made by Bjarne",
-    "Made by Sibe",
-    "Not made in China!",
-    "How did we get here?",
-    "Aboo?!",
-    "Check out Insym!",
-    "Do your homework!",
-    `Look mom I'm in 
- the splashtext!`,
-    "[Insert funny splashtext]",
-    "Totally not ripping off Minecraft!",
-    "Yippieeee",
-    "Chop Suey!",
-    "AAAAAAAAA!!!",
-    "Is tHaT a sUpRA?!?!",
-    "English or Spanish?",
-    "Jennifer eet matrassen! WTF?",
-    "Listen to Am\xE9lie Farren!",
-    `"How to exit VIM???"`,
-    "Are ya vimming son?",
-    `It's either Spanish or vanish`,
-    "Are you hacking??",
-    ":3",
-    `Ma alleee ik word 
- gekilled door ne kerstboom!`,
-    "<s>SQL</s>,<i> Squil</i> \u2713",
-    "undefined is not a function",
-    ":p",
-    `I'm blue dabadie dabadaa`,
-    "Chet jipitie",
-    "Bloat",
-    "MERGE CONFLICT!",
-    `In case of fire: git add . 
- ; git commit ; git push`,
-    `Always remove French language 
-pack: sudo rm -fr /`,
-    void 0,
-    // never change this losers!!!!  // rude
-    "Is tHaT A JOjO ReFEreNce?",
-    "https://ldev.eu.org",
-    "https://smartschoolplusplus.com",
-    "weak fingers",
-    `Beep beep I'm a sheep`,
-    "I love yavascript !",
-    "Always take your maths kids",
-    "Gele auto!",
-    "LET ME OUTTT!!!",
-    "HELP",
-    `It's that <i>me</i> espresso!`,
-    `You lied about your age, 
-didn't you?`,
-    "Check out Undertale",
-    `Nobody expects the 
- Spanish Inquisition!`,
-    "Beans Beans Beans!",
-    `Baby Shark, doo-doo, 
- doo-doo, doo-doo`,
-    "Brood int frans",
-    "CORS >:(",
-    "Le poisson Steve!",
-    `Il est oraaaange! 
- Il a des bras.. et des jambes`,
-    "Since Nov 14, 2023",
-    "Over 1000+ commits!",
-    `Took at least 
- 5 hours to make!`,
-    "Sometimes works!",
-    "Survive, Adapt, Overcome!",
-    "Rode auto!",
-    "Cookie clicker",
-    "Are you serious?",
-    "Breakout++",
-    "Ruby chan, haii!!",
-    `It's so sweet`,
-    "Feeling diskinserted?",
-    `Vampire in the corner.
-Is it scaring you off?`,
-    "Whopper Whopper",
-    "<s>nginx</s>, <i>Enginks</i>",
-    "I love ECMAScript",
-    "bAcK iN My DaY!",
-    "I forgor \u{1F480}",
-    // This is intentional, its a Ye reference
-    `Error 418 
- I'm a tea pot...`,
-    "Met 100+ splash texts!",
-    "Do it",
-  ];
   function getSplashText() {
     return splashtexts[Math.floor(Math.random() * splashtexts.length)];
   }
+  var splashtexts;
+  var init_login = __esm({
+    "src/fixes-utils/login.ts"() {
+      "use strict";
+      splashtexts = [
+        "It even works under water!",
+        "Hoelang is een chinees.",
+        "404 Splashtext not found",
+        `Don't Smartschool 
+ and drive kids!`,
+        "Home-made!",
+        "Pythagoras was used in this",
+        // where????
+        "Like that smash button!",
+        "What <i>DOES</i> the fox say?",
+        "Supercalifragilisticexpialidocious!",
+        "Hottentotententententoonstelling",
+        "Not on steam!",
+        "Made in Belgium!",
+        "De L in frans \n staat voor leuk!",
+        `Doesn't contain nuts!`,
+        "Glutenfree!!!",
+        "Colorblind approved!",
+        "Not vegan!",
+        // :O
+        "Never gonna give you up ;)",
+        "The cake is a lie!",
+        "I know what you did...",
+        "Join de discord!",
+        "2 + 2 = 5",
+        "2 * 3 = 4",
+        "Listen to the \n Arctic Monkeys!",
+        "Global chat before GTA VI???",
+        "Water your plant(s)!",
+        "Check out Snake++!",
+        "Je suis une baguette",
+        "Dikke BMW!",
+        "Mand!",
+        "Net pindakaas gegeten dus...",
+        "BINGO!",
+        "GEKOLONISEERD!",
+        "pssst, its free real estate",
+        "Europapa!",
+        "Made by Sprksoft!",
+        "Made by Lukas",
+        "Made by Bjarne",
+        "Made by Sibe",
+        "Not made in China!",
+        "How did we get here?",
+        "Aboo?!",
+        "Check out Insym!",
+        "Do your homework!",
+        `Look mom I'm in 
+ the splashtext!`,
+        "[Insert funny splashtext]",
+        "Totally not ripping off Minecraft!",
+        "Yippieeee",
+        "Chop Suey!",
+        "AAAAAAAAA!!!",
+        "Is tHaT a sUpRA?!?!",
+        "English or Spanish?",
+        "Jennifer eet matrassen! WTF?",
+        "Listen to Am\xE9lie Farren!",
+        `"How to exit VIM???"`,
+        "Are ya vimming son?",
+        `It's either Spanish or vanish`,
+        "Are you hacking??",
+        ":3",
+        "Ma alleee ik word \n gekilled door ne kerstboom!",
+        "<s>SQL</s>,<i> Squil</i> \u2713",
+        "undefined is not a function",
+        ":p",
+        `I'm blue dabadie dabadaa`,
+        "Chet jipitie",
+        "Bloat",
+        "MERGE CONFLICT!",
+        "In case of fire: git add . \n ; git commit ; git push",
+        "Always remove French language \npack: sudo rm -fr /",
+        void 0,
+        // never change this losers!!!!  // rude
+        "Is tHaT A JOjO ReFEreNce?",
+        "https://ldev.eu.org",
+        "https://smartschoolplusplus.com",
+        "weak fingers",
+        `Beep beep I'm a sheep`,
+        "I love yavascript !",
+        "Always take your maths kids",
+        "Gele auto!",
+        "LET ME OUTTT!!!",
+        "HELP",
+        `It's that <i>me</i> espresso!`,
+        `You lied about your age, 
+didn't you?`,
+        "Check out Undertale",
+        "Nobody expects the \n Spanish Inquisition!",
+        "Beans Beans Beans!",
+        "Baby Shark, doo-doo, \n doo-doo, doo-doo",
+        "Brood int frans",
+        "CORS >:(",
+        "Le poisson Steve!",
+        "Il est oraaaange! \n Il a des bras.. et des jambes",
+        "Since Nov 14, 2023",
+        "Over 1000+ commits!",
+        "Took at least \n 5 hours to make!",
+        "Sometimes works!",
+        "Survive, Adapt, Overcome!",
+        "Rode auto!",
+        "Cookie clicker",
+        "Are you serious?",
+        "Breakout++",
+        "Ruby chan, haii!!",
+        `It's so sweet`,
+        "Feeling diskinserted?",
+        "Vampire in the corner.\nIs it scaring you off?",
+        "Whopper Whopper",
+        "<s>nginx</s>, <i>Enginks</i>",
+        "I love ECMAScript",
+        "bAcK iN My DaY!",
+        "I forgor \u{1F480}",
+        // This is intentional, its a Ye reference
+        `Error 418 
+ I'm a tea pot...`,
+        "Met 100+ splash texts!",
+        "Do it"
+      ];
+    }
+  });
+
+  // src/fixes-utils/scraper.ts
+  var init_scraper = __esm({
+    "src/fixes-utils/scraper.ts"() {
+      "use strict";
+    }
+  });
 
   // node_modules/browser-image-compression/dist/browser-image-compression.mjs
   function _mergeNamespaces(e5, t5) {
-    return (
-      t5.forEach((t6) => {
-        t6 &&
-          typeof t6 != "string" &&
-          !Array.isArray(t6) &&
-          Object.keys(t6).forEach((r5) => {
-            if (r5 !== "default" && !(r5 in e5)) {
-              var i5 = Object.getOwnPropertyDescriptor(t6, r5);
-              Object.defineProperty(
-                e5,
-                r5,
-                i5.get
-                  ? i5
-                  : {
-                      enumerable: true,
-                      get() {
-                        return t6[r5];
-                      },
-                    },
-              );
-            }
-          });
-      }),
-      Object.freeze(e5)
-    );
+    return t5.forEach((function(t6) {
+      t6 && "string" != typeof t6 && !Array.isArray(t6) && Object.keys(t6).forEach((function(r5) {
+        if ("default" !== r5 && !(r5 in e5)) {
+          var i5 = Object.getOwnPropertyDescriptor(t6, r5);
+          Object.defineProperty(e5, r5, i5.get ? i5 : { enumerable: true, get: function() {
+            return t6[r5];
+          } });
+        }
+      }));
+    })), Object.freeze(e5);
   }
   function copyExifWithoutOrientation(e5, t5) {
-    return new Promise((r5, i5) => {
+    return new Promise((function(r5, i5) {
       let o5;
-      return getApp1Segment(e5).then((e6) => {
+      return getApp1Segment(e5).then((function(e6) {
         try {
-          return (o5 = e6), r5(new Blob([t5.slice(0, 2), o5, t5.slice(2)], { type: "image/jpeg" }));
+          return o5 = e6, r5(new Blob([t5.slice(0, 2), o5, t5.slice(2)], { type: "image/jpeg" }));
         } catch (e7) {
           return i5(e7);
         }
-      }, i5);
-    });
+      }), i5);
+    }));
   }
-  var getApp1Segment = (e5) =>
-    new Promise((t5, r5) => {
-      const i5 = new FileReader();
-      i5.addEventListener("load", ({ target: { result: e6 } }) => {
-        const i6 = new DataView(e6);
-        let o5 = 0;
-        if (i6.getUint16(o5) !== 65_496) {
-          return r5("not a valid JPEG");
-        }
-        for (o5 += 2; ; ) {
-          const a5 = i6.getUint16(o5);
-          if (a5 === 65_498) {
-            break;
-          }
-          const s4 = i6.getUint16(o5 + 2);
-          if (a5 === 65_505 && i6.getUint32(o5 + 4) === 1_165_519_206) {
-            const a6 = o5 + 10;
-            let f5;
-            switch (i6.getUint16(a6)) {
-              case 18_761:
-                f5 = true;
-                break;
-              case 19_789:
-                f5 = false;
-                break;
-              default:
-                return r5("TIFF header contains invalid endian");
-            }
-            if (i6.getUint16(a6 + 2, f5) !== 42) {
-              return r5("TIFF header contains invalid version");
-            }
-            const l4 = i6.getUint32(a6 + 4, f5),
-              c5 = a6 + l4 + 2 + 12 * i6.getUint16(a6 + l4, f5);
-            for (let e7 = a6 + l4 + 2; e7 < c5; e7 += 12) {
-              if (i6.getUint16(e7, f5) == 274) {
-                if (i6.getUint16(e7 + 2, f5) !== 3) {
-                  return r5("Orientation data type is invalid");
-                }
-                if (i6.getUint32(e7 + 4, f5) !== 1) {
-                  return r5("Orientation data count is invalid");
-                }
-                i6.setUint16(e7 + 8, 1, f5);
-                break;
-              }
-            }
-            return t5(e6.slice(o5, o5 + 2 + s4));
-          }
-          o5 += 2 + s4;
-        }
-        return t5(new Blob());
-      }),
-        i5.readAsArrayBuffer(e5);
-    });
-  var e = {};
-  var t = {
-    get exports() {
-      return e;
-    },
-    set exports(t5) {
-      e = t5;
-    },
-  };
-  !((e5) => {
-    var r5,
-      i5,
-      UZIP2 = {};
-    (t.exports = UZIP2),
-      (UZIP2.parse = (e6, t5) => {
-        for (
-          var r6 = UZIP2.bin.readUshort,
-            i6 = UZIP2.bin.readUint,
-            o5 = 0,
-            a5 = {},
-            s4 = new Uint8Array(e6),
-            f5 = s4.length - 4;
-          i6(s4, f5) != 101_010_256;
-        ) {
-          f5--;
-        }
-        o5 = f5;
-        o5 += 4;
-        var l4 = r6(s4, (o5 += 4));
-        r6(s4, (o5 += 2));
-        var c5 = i6(s4, (o5 += 2)),
-          u4 = i6(s4, (o5 += 4));
-        (o5 += 4), (o5 = u4);
-        for (var h4 = 0; h4 < l4; h4++) {
-          i6(s4, o5), (o5 += 4), (o5 += 4), (o5 += 4), i6(s4, (o5 += 4));
-          c5 = i6(s4, (o5 += 4));
-          var d3 = i6(s4, (o5 += 4)),
-            A = r6(s4, (o5 += 4)),
-            g2 = r6(s4, o5 + 2),
-            p4 = r6(s4, o5 + 4);
-          o5 += 6;
-          var m2 = i6(s4, (o5 += 8));
-          (o5 += 4), (o5 += A + g2 + p4), UZIP2._readLocal(s4, m2, a5, c5, d3, t5);
-        }
-        return a5;
-      }),
-      (UZIP2._readLocal = (e6, t5, r6, i6, o5, a5) => {
-        var s4 = UZIP2.bin.readUshort,
-          f5 = UZIP2.bin.readUint;
-        f5(e6, t5), s4(e6, (t5 += 4)), s4(e6, (t5 += 2));
-        var l4 = s4(e6, (t5 += 2));
-        f5(e6, (t5 += 2)), f5(e6, (t5 += 4)), (t5 += 4);
-        var c5 = s4(e6, (t5 += 8)),
-          u4 = s4(e6, (t5 += 2));
-        t5 += 2;
-        var h4 = UZIP2.bin.readUTF8(e6, t5, c5);
-        if (((t5 += c5), (t5 += u4), a5)) {
-          r6[h4] = { size: o5, csize: i6 };
-        } else {
-          var d3 = new Uint8Array(e6.buffer, t5);
-          if (l4 == 0) {
-            r6[h4] = new Uint8Array(d3.buffer.slice(t5, t5 + i6));
-          } else {
-            if (l4 != 8) {
-              throw "unknown compression method: " + l4;
-            }
-            var A = new Uint8Array(o5);
-            UZIP2.inflateRaw(d3, A), (r6[h4] = A);
-          }
-        }
-      }),
-      (UZIP2.inflateRaw = (e6, t5) => UZIP2.F.inflate(e6, t5)),
-      (UZIP2.inflate = (e6, t5) => (
-        e6[0],
-        e6[1],
-        UZIP2.inflateRaw(new Uint8Array(e6.buffer, e6.byteOffset + 2, e6.length - 6), t5)
-      )),
-      (UZIP2.deflate = (e6, t5) => {
-        t5 == null && (t5 = { level: 6 });
-        var r6 = 0,
-          i6 = new Uint8Array(50 + Math.floor(1.1 * e6.length));
-        (i6[r6] = 120),
-          (i6[r6 + 1] = 156),
-          (r6 += 2),
-          (r6 = UZIP2.F.deflateRaw(e6, i6, r6, t5.level));
-        var o5 = UZIP2.adler(e6, 0, e6.length);
-        return (
-          (i6[r6 + 0] = (o5 >>> 24) & 255),
-          (i6[r6 + 1] = (o5 >>> 16) & 255),
-          (i6[r6 + 2] = (o5 >>> 8) & 255),
-          (i6[r6 + 3] = (o5 >>> 0) & 255),
-          new Uint8Array(i6.buffer, 0, r6 + 4)
-        );
-      }),
-      (UZIP2.deflateRaw = (e6, t5) => {
-        t5 == null && (t5 = { level: 6 });
-        var r6 = new Uint8Array(50 + Math.floor(1.1 * e6.length)),
-          i6 = UZIP2.F.deflateRaw(e6, r6, i6, t5.level);
-        return new Uint8Array(r6.buffer, 0, i6);
-      }),
-      (UZIP2.encode = (e6, t5) => {
-        t5 == null && (t5 = false);
-        var r6 = 0,
-          i6 = UZIP2.bin.writeUint,
-          o5 = UZIP2.bin.writeUshort,
-          a5 = {};
-        for (var s4 in e6) {
-          var f5 = !(UZIP2._noNeed(s4) || t5),
-            l4 = e6[s4],
-            c5 = UZIP2.crc.crc(l4, 0, l4.length);
-          a5[s4] = { cpr: f5, usize: l4.length, crc: c5, file: f5 ? UZIP2.deflateRaw(l4) : l4 };
-        }
-        for (var s4 in a5) {
-          r6 += a5[s4].file.length + 30 + 46 + 2 * UZIP2.bin.sizeUTF8(s4);
-        }
-        r6 += 22;
-        var u4 = new Uint8Array(r6),
-          h4 = 0,
-          d3 = [];
-        for (var s4 in a5) {
-          var A = a5[s4];
-          d3.push(h4), (h4 = UZIP2._writeHeader(u4, h4, s4, A, 0));
-        }
-        var g2 = 0,
-          p4 = h4;
-        for (var s4 in a5) {
-          A = a5[s4];
-          d3.push(h4), (h4 = UZIP2._writeHeader(u4, h4, s4, A, 1, d3[g2++]));
-        }
-        var m2 = h4 - p4;
-        return (
-          i6(u4, h4, 101_010_256),
-          (h4 += 4),
-          o5(u4, (h4 += 4), g2),
-          o5(u4, (h4 += 2), g2),
-          i6(u4, (h4 += 2), m2),
-          i6(u4, (h4 += 4), p4),
-          (h4 += 4),
-          (h4 += 2),
-          u4.buffer
-        );
-      }),
-      (UZIP2._noNeed = (e6) => {
-        var t5 = e6.split(".").pop().toLowerCase();
-        return "png,jpg,jpeg,zip".indexOf(t5) != -1;
-      }),
-      (UZIP2._writeHeader = (e6, t5, r6, i6, o5, a5) => {
-        var s4 = UZIP2.bin.writeUint,
-          f5 = UZIP2.bin.writeUshort,
-          l4 = i6.file;
-        return (
-          s4(e6, t5, o5 == 0 ? 67_324_752 : 33_639_248),
-          (t5 += 4),
-          o5 == 1 && (t5 += 2),
-          f5(e6, t5, 20),
-          f5(e6, (t5 += 2), 0),
-          f5(e6, (t5 += 2), i6.cpr ? 8 : 0),
-          s4(e6, (t5 += 2), 0),
-          s4(e6, (t5 += 4), i6.crc),
-          s4(e6, (t5 += 4), l4.length),
-          s4(e6, (t5 += 4), i6.usize),
-          f5(e6, (t5 += 4), UZIP2.bin.sizeUTF8(r6)),
-          f5(e6, (t5 += 2), 0),
-          (t5 += 2),
-          o5 == 1 && ((t5 += 2), (t5 += 2), s4(e6, (t5 += 6), a5), (t5 += 4)),
-          (t5 += UZIP2.bin.writeUTF8(e6, t5, r6)),
-          o5 == 0 && (e6.set(l4, t5), (t5 += l4.length)),
-          t5
-        );
-      }),
-      (UZIP2.crc = {
-        table: (() => {
-          for (var e6 = new Uint32Array(256), t5 = 0; t5 < 256; t5++) {
-            for (var r6 = t5, i6 = 0; i6 < 8; i6++) {
-              1 & r6 ? (r6 = 3_988_292_384 ^ (r6 >>> 1)) : (r6 >>>= 1);
-            }
-            e6[t5] = r6;
-          }
-          return e6;
-        })(),
-        update(e6, t5, r6, i6) {
-          for (var o5 = 0; o5 < i6; o5++) {
-            e6 = UZIP2.crc.table[255 & (e6 ^ t5[r6 + o5])] ^ (e6 >>> 8);
-          }
-          return e6;
-        },
-        crc(e6, t5, r6) {
-          return 4_294_967_295 ^ UZIP2.crc.update(4_294_967_295, e6, t5, r6);
-        },
-      }),
-      (UZIP2.adler = (e6, t5, r6) => {
-        for (var i6 = 1, o5 = 0, a5 = t5, s4 = t5 + r6; a5 < s4; ) {
-          for (var f5 = Math.min(a5 + 5552, s4); a5 < f5; ) {
-            o5 += i6 += e6[a5++];
-          }
-          (i6 %= 65_521), (o5 %= 65_521);
-        }
-        return (o5 << 16) | i6;
-      }),
-      (UZIP2.bin = {
-        readUshort(e6, t5) {
-          return e6[t5] | (e6[t5 + 1] << 8);
-        },
-        writeUshort(e6, t5, r6) {
-          (e6[t5] = 255 & r6), (e6[t5 + 1] = (r6 >> 8) & 255);
-        },
-        readUint(e6, t5) {
-          return 16_777_216 * e6[t5 + 3] + ((e6[t5 + 2] << 16) | (e6[t5 + 1] << 8) | e6[t5]);
-        },
-        writeUint(e6, t5, r6) {
-          (e6[t5] = 255 & r6),
-            (e6[t5 + 1] = (r6 >> 8) & 255),
-            (e6[t5 + 2] = (r6 >> 16) & 255),
-            (e6[t5 + 3] = (r6 >> 24) & 255);
-        },
-        readASCII(e6, t5, r6) {
-          for (var i6 = "", o5 = 0; o5 < r6; o5++) {
-            i6 += String.fromCharCode(e6[t5 + o5]);
-          }
-          return i6;
-        },
-        writeASCII(e6, t5, r6) {
-          for (var i6 = 0; i6 < r6.length; i6++) {
-            e6[t5 + i6] = r6.charCodeAt(i6);
-          }
-        },
-        pad(e6) {
-          return e6.length < 2 ? "0" + e6 : e6;
-        },
-        readUTF8(e6, t5, r6) {
-          for (var i6, o5 = "", a5 = 0; a5 < r6; a5++) {
-            o5 += "%" + UZIP2.bin.pad(e6[t5 + a5].toString(16));
-          }
-          try {
-            i6 = decodeURIComponent(o5);
-          } catch (i7) {
-            return UZIP2.bin.readASCII(e6, t5, r6);
-          }
-          return i6;
-        },
-        writeUTF8(e6, t5, r6) {
-          for (var i6 = r6.length, o5 = 0, a5 = 0; a5 < i6; a5++) {
-            var s4 = r6.charCodeAt(a5);
-            if ((4_294_967_168 & s4) == 0) {
-              (e6[t5 + o5] = s4), o5++;
-            } else if ((4_294_965_248 & s4) == 0) {
-              (e6[t5 + o5] = 192 | (s4 >> 6)),
-                (e6[t5 + o5 + 1] = 128 | ((s4 >> 0) & 63)),
-                (o5 += 2);
-            } else if ((4_294_901_760 & s4) == 0) {
-              (e6[t5 + o5] = 224 | (s4 >> 12)),
-                (e6[t5 + o5 + 1] = 128 | ((s4 >> 6) & 63)),
-                (e6[t5 + o5 + 2] = 128 | ((s4 >> 0) & 63)),
-                (o5 += 3);
-            } else {
-              if ((4_292_870_144 & s4) != 0) {
-                throw "e";
-              }
-              (e6[t5 + o5] = 240 | (s4 >> 18)),
-                (e6[t5 + o5 + 1] = 128 | ((s4 >> 12) & 63)),
-                (e6[t5 + o5 + 2] = 128 | ((s4 >> 6) & 63)),
-                (e6[t5 + o5 + 3] = 128 | ((s4 >> 0) & 63)),
-                (o5 += 4);
-            }
-          }
-          return o5;
-        },
-        sizeUTF8(e6) {
-          for (var t5 = e6.length, r6 = 0, i6 = 0; i6 < t5; i6++) {
-            var o5 = e6.charCodeAt(i6);
-            if ((4_294_967_168 & o5) == 0) {
-              r6++;
-            } else if ((4_294_965_248 & o5) == 0) {
-              r6 += 2;
-            } else if ((4_294_901_760 & o5) == 0) {
-              r6 += 3;
-            } else {
-              if ((4_292_870_144 & o5) != 0) {
-                throw "e";
-              }
-              r6 += 4;
-            }
-          }
-          return r6;
-        },
-      }),
-      (UZIP2.F = {}),
-      (UZIP2.F.deflateRaw = (e6, t5, r6, i6) => {
-        var o5 = [
-            [0, 0, 0, 0, 0],
-            [4, 4, 8, 4, 0],
-            [4, 5, 16, 8, 0],
-            [4, 6, 16, 16, 0],
-            [4, 10, 16, 32, 0],
-            [8, 16, 32, 32, 0],
-            [8, 16, 128, 128, 0],
-            [8, 32, 128, 256, 0],
-            [32, 128, 258, 1024, 1],
-            [32, 258, 258, 4096, 1],
-          ][i6],
-          a5 = UZIP2.F.U,
-          s4 = UZIP2.F._goodIndex;
-        UZIP2.F._hash;
-        var f5 = UZIP2.F._putsE,
-          l4 = 0,
-          c5 = r6 << 3,
-          u4 = 0,
-          h4 = e6.length;
-        if (i6 == 0) {
-          while (l4 < h4) {
-            f5(t5, c5, l4 + (_ = Math.min(65_535, h4 - l4)) == h4 ? 1 : 0),
-              (c5 = UZIP2.F._copyExact(e6, l4, _, t5, c5 + 8)),
-              (l4 += _);
-          }
-          return c5 >>> 3;
-        }
-        var d3 = a5.lits,
-          A = a5.strt,
-          g2 = a5.prev,
-          p4 = 0,
-          m2 = 0,
-          w2 = 0,
-          v3 = 0,
-          b3 = 0,
-          y3 = 0;
-        for (h4 > 2 && (A[(y3 = UZIP2.F._hash(e6, 0))] = 0), l4 = 0; l4 < h4; l4++) {
-          if (((b3 = y3), l4 + 1 < h4 - 2)) {
-            y3 = UZIP2.F._hash(e6, l4 + 1);
-            var E = (l4 + 1) & 32_767;
-            (g2[E] = A[y3]), (A[y3] = E);
-          }
-          if (u4 <= l4) {
-            (p4 > 14e3 || m2 > 26_697) &&
-              h4 - l4 > 100 &&
-              (u4 < l4 && ((d3[p4] = l4 - u4), (p4 += 2), (u4 = l4)),
-              (c5 = UZIP2.F._writeBlock(
-                l4 == h4 - 1 || u4 == h4 ? 1 : 0,
-                d3,
-                p4,
-                v3,
-                e6,
-                w2,
-                l4 - w2,
-                t5,
-                c5,
-              )),
-              (p4 = m2 = v3 = 0),
-              (w2 = l4));
-            var F = 0;
-            l4 < h4 - 2 &&
-              (F = UZIP2.F._bestMatch(e6, l4, g2, b3, Math.min(o5[2], h4 - l4), o5[3]));
-            var _ = F >>> 16,
-              B = 65_535 & F;
-            if (F != 0) {
-              B = 65_535 & F;
-              var U = s4((_ = F >>> 16), a5.of0);
-              a5.lhst[257 + U]++;
-              var C = s4(B, a5.df0);
-              a5.dhst[C]++,
-                (v3 += a5.exb[U] + a5.dxb[C]),
-                (d3[p4] = (_ << 23) | (l4 - u4)),
-                (d3[p4 + 1] = (B << 16) | (U << 8) | C),
-                (p4 += 2),
-                (u4 = l4 + _);
-            } else {
-              a5.lhst[e6[l4]]++;
-            }
-            m2++;
-          }
-        }
-        for (
-          (w2 == l4 && e6.length != 0) ||
-          (u4 < l4 && ((d3[p4] = l4 - u4), (p4 += 2), (u4 = l4)),
-          (c5 = UZIP2.F._writeBlock(1, d3, p4, v3, e6, w2, l4 - w2, t5, c5)),
-          (p4 = 0),
-          (m2 = 0),
-          (p4 = m2 = v3 = 0),
-          (w2 = l4));
-          (7 & c5) != 0;
-        ) {
-          c5++;
-        }
-        return c5 >>> 3;
-      }),
-      (UZIP2.F._bestMatch = (e6, t5, r6, i6, o5, a5) => {
-        var s4 = 32_767 & t5,
-          f5 = r6[s4],
-          l4 = (s4 - f5 + 32_768) & 32_767;
-        if (f5 == s4 || i6 != UZIP2.F._hash(e6, t5 - l4)) {
-          return 0;
-        }
-        for (var c5 = 0, u4 = 0, h4 = Math.min(32_767, t5); l4 <= h4 && --a5 != 0 && f5 != s4; ) {
-          if (c5 == 0 || e6[t5 + c5] == e6[t5 + c5 - l4]) {
-            var d3 = UZIP2.F._howLong(e6, t5, l4);
-            if (d3 > c5) {
-              if (((u4 = l4), (c5 = d3) >= o5)) {
-                break;
-              }
-              l4 + 2 < d3 && (d3 = l4 + 2);
-              for (var A = 0, g2 = 0; g2 < d3 - 2; g2++) {
-                var p4 = (t5 - l4 + g2 + 32_768) & 32_767,
-                  m2 = (p4 - r6[p4] + 32_768) & 32_767;
-                m2 > A && ((A = m2), (f5 = p4));
-              }
-            }
-          }
-          l4 += ((s4 = f5) - (f5 = r6[s4]) + 32_768) & 32_767;
-        }
-        return (c5 << 16) | u4;
-      }),
-      (UZIP2.F._howLong = (e6, t5, r6) => {
-        if (
-          e6[t5] != e6[t5 - r6] ||
-          e6[t5 + 1] != e6[t5 + 1 - r6] ||
-          e6[t5 + 2] != e6[t5 + 2 - r6]
-        ) {
-          return 0;
-        }
-        var i6 = t5,
-          o5 = Math.min(e6.length, t5 + 258);
-        for (t5 += 3; t5 < o5 && e6[t5] == e6[t5 - r6]; ) {
-          t5++;
-        }
-        return t5 - i6;
-      }),
-      (UZIP2.F._hash = (e6, t5) => (((e6[t5] << 8) | e6[t5 + 1]) + (e6[t5 + 2] << 4)) & 65_535),
-      (UZIP2.saved = 0),
-      (UZIP2.F._writeBlock = (e6, t5, r6, i6, o5, a5, s4, f5, l4) => {
-        var c5,
-          u4,
-          h4,
-          d3,
-          A,
-          g2,
-          p4,
-          m2,
-          w2,
-          v3 = UZIP2.F.U,
-          b3 = UZIP2.F._putsF,
-          y3 = UZIP2.F._putsE;
-        v3.lhst[256]++,
-          (u4 = (c5 = UZIP2.F.getTrees())[0]),
-          (h4 = c5[1]),
-          (d3 = c5[2]),
-          (A = c5[3]),
-          (g2 = c5[4]),
-          (p4 = c5[5]),
-          (m2 = c5[6]),
-          (w2 = c5[7]);
-        var E = 32 + (((l4 + 3) & 7) == 0 ? 0 : 8 - ((l4 + 3) & 7)) + (s4 << 3),
-          F = i6 + UZIP2.F.contSize(v3.fltree, v3.lhst) + UZIP2.F.contSize(v3.fdtree, v3.dhst),
-          _ = i6 + UZIP2.F.contSize(v3.ltree, v3.lhst) + UZIP2.F.contSize(v3.dtree, v3.dhst);
-        _ +=
-          14 +
-          3 * p4 +
-          UZIP2.F.contSize(v3.itree, v3.ihst) +
-          (2 * v3.ihst[16] + 3 * v3.ihst[17] + 7 * v3.ihst[18]);
-        for (var B = 0; B < 286; B++) {
-          v3.lhst[B] = 0;
-        }
-        for (B = 0; B < 30; B++) {
-          v3.dhst[B] = 0;
-        }
-        for (B = 0; B < 19; B++) {
-          v3.ihst[B] = 0;
-        }
-        var U = E < F && E < _ ? 0 : F < _ ? 1 : 2;
-        if ((b3(f5, l4, e6), b3(f5, l4 + 1, U), (l4 += 3), U == 0)) {
-          while ((7 & l4) != 0) {
-            l4++;
-          }
-          l4 = UZIP2.F._copyExact(o5, a5, s4, f5, l4);
-        } else {
-          var C, I;
-          if ((U == 1 && ((C = v3.fltree), (I = v3.fdtree)), U == 2)) {
-            UZIP2.F.makeCodes(v3.ltree, u4),
-              UZIP2.F.revCodes(v3.ltree, u4),
-              UZIP2.F.makeCodes(v3.dtree, h4),
-              UZIP2.F.revCodes(v3.dtree, h4),
-              UZIP2.F.makeCodes(v3.itree, d3),
-              UZIP2.F.revCodes(v3.itree, d3),
-              (C = v3.ltree),
-              (I = v3.dtree),
-              y3(f5, l4, A - 257),
-              y3(f5, (l4 += 5), g2 - 1),
-              y3(f5, (l4 += 5), p4 - 4),
-              (l4 += 4);
-            for (var Q = 0; Q < p4; Q++) {
-              y3(f5, l4 + 3 * Q, v3.itree[1 + (v3.ordr[Q] << 1)]);
-            }
-            (l4 += 3 * p4),
-              (l4 = UZIP2.F._codeTiny(m2, v3.itree, f5, l4)),
-              (l4 = UZIP2.F._codeTiny(w2, v3.itree, f5, l4));
-          }
-          for (var M3 = a5, x3 = 0; x3 < r6; x3 += 2) {
-            for (var S2 = t5[x3], R = S2 >>> 23, T = M3 + (8_388_607 & S2); M3 < T; ) {
-              l4 = UZIP2.F._writeLit(o5[M3++], C, f5, l4);
-            }
-            if (R != 0) {
-              var O = t5[x3 + 1],
-                P = O >> 16,
-                H2 = (O >> 8) & 255,
-                L = 255 & O;
-              y3(f5, (l4 = UZIP2.F._writeLit(257 + H2, C, f5, l4)), R - v3.of0[H2]),
-                (l4 += v3.exb[H2]),
-                b3(f5, (l4 = UZIP2.F._writeLit(L, I, f5, l4)), P - v3.df0[L]),
-                (l4 += v3.dxb[L]),
-                (M3 += R);
-            }
-          }
-          l4 = UZIP2.F._writeLit(256, C, f5, l4);
-        }
-        return l4;
-      }),
-      (UZIP2.F._copyExact = (e6, t5, r6, i6, o5) => {
-        var a5 = o5 >>> 3;
-        return (
-          (i6[a5] = r6),
-          (i6[a5 + 1] = r6 >>> 8),
-          (i6[a5 + 2] = 255 - i6[a5]),
-          (i6[a5 + 3] = 255 - i6[a5 + 1]),
-          (a5 += 4),
-          i6.set(new Uint8Array(e6.buffer, t5, r6), a5),
-          o5 + ((r6 + 4) << 3)
-        );
-      }),
-      (UZIP2.F.getTrees = () => {
-        for (
-          var e6 = UZIP2.F.U,
-            t5 = UZIP2.F._hufTree(e6.lhst, e6.ltree, 15),
-            r6 = UZIP2.F._hufTree(e6.dhst, e6.dtree, 15),
-            i6 = [],
-            o5 = UZIP2.F._lenCodes(e6.ltree, i6),
-            a5 = [],
-            s4 = UZIP2.F._lenCodes(e6.dtree, a5),
-            f5 = 0;
-          f5 < i6.length;
-          f5 += 2
-        ) {
-          e6.ihst[i6[f5]]++;
-        }
-        for (f5 = 0; f5 < a5.length; f5 += 2) {
-          e6.ihst[a5[f5]]++;
-        }
-        for (
-          var l4 = UZIP2.F._hufTree(e6.ihst, e6.itree, 7), c5 = 19;
-          c5 > 4 && e6.itree[1 + (e6.ordr[c5 - 1] << 1)] == 0;
-        ) {
-          c5--;
-        }
-        return [t5, r6, l4, o5, s4, c5, i6, a5];
-      }),
-      (UZIP2.F.getSecond = (e6) => {
-        for (var t5 = [], r6 = 0; r6 < e6.length; r6 += 2) {
-          t5.push(e6[r6 + 1]);
-        }
-        return t5;
-      }),
-      (UZIP2.F.nonZero = (e6) => {
-        for (var t5 = "", r6 = 0; r6 < e6.length; r6 += 2) {
-          e6[r6 + 1] != 0 && (t5 += (r6 >> 1) + ",");
-        }
-        return t5;
-      }),
-      (UZIP2.F.contSize = (e6, t5) => {
-        for (var r6 = 0, i6 = 0; i6 < t5.length; i6++) {
-          r6 += t5[i6] * e6[1 + (i6 << 1)];
-        }
-        return r6;
-      }),
-      (UZIP2.F._codeTiny = (e6, t5, r6, i6) => {
-        for (var o5 = 0; o5 < e6.length; o5 += 2) {
-          var a5 = e6[o5],
-            s4 = e6[o5 + 1];
-          i6 = UZIP2.F._writeLit(a5, t5, r6, i6);
-          var f5 = a5 == 16 ? 2 : a5 == 17 ? 3 : 7;
-          a5 > 15 && (UZIP2.F._putsE(r6, i6, s4, f5), (i6 += f5));
-        }
-        return i6;
-      }),
-      (UZIP2.F._lenCodes = (e6, t5) => {
-        for (var r6 = e6.length; r6 != 2 && e6[r6 - 1] == 0; ) {
-          r6 -= 2;
-        }
-        for (var i6 = 0; i6 < r6; i6 += 2) {
-          var o5 = e6[i6 + 1],
-            a5 = i6 + 3 < r6 ? e6[i6 + 3] : -1,
-            s4 = i6 + 5 < r6 ? e6[i6 + 5] : -1,
-            f5 = i6 == 0 ? -1 : e6[i6 - 1];
-          if (o5 == 0 && a5 == o5 && s4 == o5) {
-            for (var l4 = i6 + 5; l4 + 2 < r6 && e6[l4 + 2] == o5; ) {
-              l4 += 2;
-            }
-            (c5 = Math.min((l4 + 1 - i6) >>> 1, 138)) < 11
-              ? t5.push(17, c5 - 3)
-              : t5.push(18, c5 - 11),
-              (i6 += 2 * c5 - 2);
-          } else if (o5 == f5 && a5 == o5 && s4 == o5) {
-            for (l4 = i6 + 5; l4 + 2 < r6 && e6[l4 + 2] == o5; ) {
-              l4 += 2;
-            }
-            var c5 = Math.min((l4 + 1 - i6) >>> 1, 6);
-            t5.push(16, c5 - 3), (i6 += 2 * c5 - 2);
-          } else {
-            t5.push(o5, 0);
-          }
-        }
-        return r6 >>> 1;
-      }),
-      (UZIP2.F._hufTree = (e6, t5, r6) => {
-        var i6 = [],
-          o5 = e6.length,
-          a5 = t5.length,
-          s4 = 0;
-        for (s4 = 0; s4 < a5; s4 += 2) {
-          (t5[s4] = 0), (t5[s4 + 1] = 0);
-        }
-        for (s4 = 0; s4 < o5; s4++) {
-          e6[s4] != 0 && i6.push({ lit: s4, f: e6[s4] });
-        }
-        var f5 = i6.length,
-          l4 = i6.slice(0);
-        if (f5 == 0) {
-          return 0;
-        }
-        if (f5 == 1) {
-          var c5 = i6[0].lit;
-          l4 = c5 == 0 ? 1 : 0;
-          return (t5[1 + (c5 << 1)] = 1), (t5[1 + (l4 << 1)] = 1), 1;
-        }
-        i6.sort((e7, t6) => e7.f - t6.f);
-        var u4 = i6[0],
-          h4 = i6[1],
-          d3 = 0,
-          A = 1,
-          g2 = 2;
-        for (i6[0] = { lit: -1, f: u4.f + h4.f, l: u4, r: h4, d: 0 }; A != f5 - 1; ) {
-          (u4 = d3 != A && (g2 == f5 || i6[d3].f < i6[g2].f) ? i6[d3++] : i6[g2++]),
-            (h4 = d3 != A && (g2 == f5 || i6[d3].f < i6[g2].f) ? i6[d3++] : i6[g2++]),
-            (i6[A++] = { lit: -1, f: u4.f + h4.f, l: u4, r: h4 });
-        }
-        var p4 = UZIP2.F.setDepth(i6[A - 1], 0);
-        for (p4 > r6 && (UZIP2.F.restrictDepth(l4, r6, p4), (p4 = r6)), s4 = 0; s4 < f5; s4++) {
-          t5[1 + (l4[s4].lit << 1)] = l4[s4].d;
-        }
-        return p4;
-      }),
-      (UZIP2.F.setDepth = (e6, t5) =>
-        e6.lit != -1
-          ? ((e6.d = t5), t5)
-          : Math.max(UZIP2.F.setDepth(e6.l, t5 + 1), UZIP2.F.setDepth(e6.r, t5 + 1))),
-      (UZIP2.F.restrictDepth = (e6, t5, r6) => {
-        var i6 = 0,
-          o5 = 1 << (r6 - t5),
-          a5 = 0;
-        for (
-          e6.sort((e7, t6) => (t6.d == e7.d ? e7.f - t6.f : t6.d - e7.d)), i6 = 0;
-          i6 < e6.length && e6[i6].d > t5;
-          i6++
-        ) {
-          var s4 = e6[i6].d;
-          (e6[i6].d = t5), (a5 += o5 - (1 << (r6 - s4)));
-        }
-        for (a5 >>>= r6 - t5; a5 > 0; ) {
-          (s4 = e6[i6].d) < t5 ? (e6[i6].d++, (a5 -= 1 << (t5 - s4 - 1))) : i6++;
-        }
-        for (; i6 >= 0; i6--) {
-          e6[i6].d == t5 && a5 < 0 && (e6[i6].d--, a5++);
-        }
-        a5 != 0 && console.log("debt left");
-      }),
-      (UZIP2.F._goodIndex = (e6, t5) => {
-        var r6 = 0;
-        return (
-          t5[16 | r6] <= e6 && (r6 |= 16),
-          t5[8 | r6] <= e6 && (r6 |= 8),
-          t5[4 | r6] <= e6 && (r6 |= 4),
-          t5[2 | r6] <= e6 && (r6 |= 2),
-          t5[1 | r6] <= e6 && (r6 |= 1),
-          r6
-        );
-      }),
-      (UZIP2.F._writeLit = (e6, t5, r6, i6) => (
-        UZIP2.F._putsF(r6, i6, t5[e6 << 1]), i6 + t5[1 + (e6 << 1)]
-      )),
-      (UZIP2.F.inflate = (e6, t5) => {
-        var r6 = Uint8Array;
-        if (e6[0] == 3 && e6[1] == 0) {
-          return t5 || new r6(0);
-        }
-        var i6 = UZIP2.F,
-          o5 = i6._bitsF,
-          a5 = i6._bitsE,
-          s4 = i6._decodeTiny,
-          f5 = i6.makeCodes,
-          l4 = i6.codes2map,
-          c5 = i6._get17,
-          u4 = i6.U,
-          h4 = t5 == null;
-        h4 && (t5 = new r6((e6.length >>> 2) << 3));
-        for (
-          var d3, A, g2 = 0, p4 = 0, m2 = 0, w2 = 0, v3 = 0, b3 = 0, y3 = 0, E = 0, F = 0;
-          g2 == 0;
-        ) {
-          if (((g2 = o5(e6, F, 1)), (p4 = o5(e6, F + 1, 2)), (F += 3), p4 != 0)) {
-            if (
-              (h4 && (t5 = UZIP2.F._check(t5, E + (1 << 17))),
-              p4 == 1 && ((d3 = u4.flmap), (A = u4.fdmap), (b3 = 511), (y3 = 31)),
-              p4 == 2)
-            ) {
-              (m2 = a5(e6, F, 5) + 257),
-                (w2 = a5(e6, F + 5, 5) + 1),
-                (v3 = a5(e6, F + 10, 4) + 4),
-                (F += 14);
-              for (var _ = 0; _ < 38; _ += 2) {
-                (u4.itree[_] = 0), (u4.itree[_ + 1] = 0);
-              }
-              var B = 1;
-              for (_ = 0; _ < v3; _++) {
-                var U = a5(e6, F + 3 * _, 3);
-                (u4.itree[1 + (u4.ordr[_] << 1)] = U), U > B && (B = U);
-              }
-              (F += 3 * v3),
-                f5(u4.itree, B),
-                l4(u4.itree, B, u4.imap),
-                (d3 = u4.lmap),
-                (A = u4.dmap),
-                (F = s4(u4.imap, (1 << B) - 1, m2 + w2, e6, F, u4.ttree));
-              var C = i6._copyOut(u4.ttree, 0, m2, u4.ltree);
-              b3 = (1 << C) - 1;
-              var I = i6._copyOut(u4.ttree, m2, w2, u4.dtree);
-              (y3 = (1 << I) - 1),
-                f5(u4.ltree, C),
-                l4(u4.ltree, C, d3),
-                f5(u4.dtree, I),
-                l4(u4.dtree, I, A);
-            }
-            for (;;) {
-              var Q = d3[c5(e6, F) & b3];
-              F += 15 & Q;
-              var M3 = Q >>> 4;
-              if (M3 >>> 8 == 0) {
-                t5[E++] = M3;
-              } else {
-                if (M3 == 256) {
-                  break;
-                }
-                var x3 = E + M3 - 254;
-                if (M3 > 264) {
-                  var S2 = u4.ldef[M3 - 257];
-                  (x3 = E + (S2 >>> 3) + a5(e6, F, 7 & S2)), (F += 7 & S2);
-                }
-                var R = A[c5(e6, F) & y3];
-                F += 15 & R;
-                var T = R >>> 4,
-                  O = u4.ddef[T],
-                  P = (O >>> 4) + o5(e6, F, 15 & O);
-                for (F += 15 & O, h4 && (t5 = UZIP2.F._check(t5, E + (1 << 17))); E < x3; ) {
-                  (t5[E] = t5[E++ - P]),
-                    (t5[E] = t5[E++ - P]),
-                    (t5[E] = t5[E++ - P]),
-                    (t5[E] = t5[E++ - P]);
-                }
-                E = x3;
-              }
-            }
-          } else {
-            (7 & F) != 0 && (F += 8 - (7 & F));
-            var H2 = 4 + (F >>> 3),
-              L = e6[H2 - 4] | (e6[H2 - 3] << 8);
-            h4 && (t5 = UZIP2.F._check(t5, E + L)),
-              t5.set(new r6(e6.buffer, e6.byteOffset + H2, L), E),
-              (F = (H2 + L) << 3),
-              (E += L);
-          }
-        }
-        return t5.length == E ? t5 : t5.slice(0, E);
-      }),
-      (UZIP2.F._check = (e6, t5) => {
-        var r6 = e6.length;
-        if (t5 <= r6) {
-          return e6;
-        }
-        var i6 = new Uint8Array(Math.max(r6 << 1, t5));
-        return i6.set(e6, 0), i6;
-      }),
-      (UZIP2.F._decodeTiny = (e6, t5, r6, i6, o5, a5) => {
-        for (var s4 = UZIP2.F._bitsE, f5 = UZIP2.F._get17, l4 = 0; l4 < r6; ) {
-          var c5 = e6[f5(i6, o5) & t5];
-          o5 += 15 & c5;
-          var u4 = c5 >>> 4;
-          if (u4 <= 15) {
-            (a5[l4] = u4), l4++;
-          } else {
-            var h4 = 0,
-              d3 = 0;
-            u4 == 16
-              ? ((d3 = 3 + s4(i6, o5, 2)), (o5 += 2), (h4 = a5[l4 - 1]))
-              : u4 == 17
-                ? ((d3 = 3 + s4(i6, o5, 3)), (o5 += 3))
-                : u4 == 18 && ((d3 = 11 + s4(i6, o5, 7)), (o5 += 7));
-            for (var A = l4 + d3; l4 < A; ) {
-              (a5[l4] = h4), l4++;
-            }
-          }
-        }
-        return o5;
-      }),
-      (UZIP2.F._copyOut = (e6, t5, r6, i6) => {
-        for (var o5 = 0, a5 = 0, s4 = i6.length >>> 1; a5 < r6; ) {
-          var f5 = e6[a5 + t5];
-          (i6[a5 << 1] = 0), (i6[1 + (a5 << 1)] = f5), f5 > o5 && (o5 = f5), a5++;
-        }
-        while (a5 < s4) {
-          (i6[a5 << 1] = 0), (i6[1 + (a5 << 1)] = 0), a5++;
-        }
-        return o5;
-      }),
-      (UZIP2.F.makeCodes = (e6, t5) => {
-        for (
-          var r6, i6, o5, a5, s4 = UZIP2.F.U, f5 = e6.length, l4 = s4.bl_count, c5 = 0;
-          c5 <= t5;
-          c5++
-        ) {
-          l4[c5] = 0;
-        }
-        for (c5 = 1; c5 < f5; c5 += 2) {
-          l4[e6[c5]]++;
-        }
-        var u4 = s4.next_code;
-        for (r6 = 0, l4[0] = 0, i6 = 1; i6 <= t5; i6++) {
-          (r6 = (r6 + l4[i6 - 1]) << 1), (u4[i6] = r6);
-        }
-        for (o5 = 0; o5 < f5; o5 += 2) {
-          (a5 = e6[o5 + 1]) != 0 && ((e6[o5] = u4[a5]), u4[a5]++);
-        }
-      }),
-      (UZIP2.F.codes2map = (e6, t5, r6) => {
-        for (var i6 = e6.length, o5 = UZIP2.F.U.rev15, a5 = 0; a5 < i6; a5 += 2) {
-          if (e6[a5 + 1] != 0) {
-            for (
-              var s4 = a5 >> 1,
-                f5 = e6[a5 + 1],
-                l4 = (s4 << 4) | f5,
-                c5 = t5 - f5,
-                u4 = e6[a5] << c5,
-                h4 = u4 + (1 << c5);
-              u4 != h4;
-            ) {
-              (r6[o5[u4] >>> (15 - t5)] = l4), u4++;
-            }
-          }
-        }
-      }),
-      (UZIP2.F.revCodes = (e6, t5) => {
-        for (var r6 = UZIP2.F.U.rev15, i6 = 15 - t5, o5 = 0; o5 < e6.length; o5 += 2) {
-          var a5 = e6[o5] << (t5 - e6[o5 + 1]);
-          e6[o5] = r6[a5] >>> i6;
-        }
-      }),
-      (UZIP2.F._putsE = (e6, t5, r6) => {
-        r6 <<= 7 & t5;
-        var i6 = t5 >>> 3;
-        (e6[i6] |= r6), (e6[i6 + 1] |= r6 >>> 8);
-      }),
-      (UZIP2.F._putsF = (e6, t5, r6) => {
-        r6 <<= 7 & t5;
-        var i6 = t5 >>> 3;
-        (e6[i6] |= r6), (e6[i6 + 1] |= r6 >>> 8), (e6[i6 + 2] |= r6 >>> 16);
-      }),
-      (UZIP2.F._bitsE = (e6, t5, r6) =>
-        ((e6[t5 >>> 3] | (e6[1 + (t5 >>> 3)] << 8)) >>> (7 & t5)) & ((1 << r6) - 1)),
-      (UZIP2.F._bitsF = (e6, t5, r6) =>
-        ((e6[t5 >>> 3] | (e6[1 + (t5 >>> 3)] << 8) | (e6[2 + (t5 >>> 3)] << 16)) >>> (7 & t5)) &
-        ((1 << r6) - 1)),
-      (UZIP2.F._get17 = (e6, t5) =>
-        (e6[t5 >>> 3] | (e6[1 + (t5 >>> 3)] << 8) | (e6[2 + (t5 >>> 3)] << 16)) >>> (7 & t5)),
-      (UZIP2.F._get25 = (e6, t5) =>
-        (e6[t5 >>> 3] |
-          (e6[1 + (t5 >>> 3)] << 8) |
-          (e6[2 + (t5 >>> 3)] << 16) |
-          (e6[3 + (t5 >>> 3)] << 24)) >>>
-        (7 & t5)),
-      (UZIP2.F.U =
-        ((r5 = Uint16Array),
-        (i5 = Uint32Array),
-        {
-          next_code: new r5(16),
-          bl_count: new r5(16),
-          ordr: [16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15],
-          of0: [
-            3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 15, 17, 19, 23, 27, 31, 35, 43, 51, 59, 67, 83, 99,
-            115, 131, 163, 195, 227, 258, 999, 999, 999,
-          ],
-          exb: [
-            0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 0,
-            0, 0, 0,
-          ],
-          ldef: new r5(32),
-          df0: [
-            1, 2, 3, 4, 5, 7, 9, 13, 17, 25, 33, 49, 65, 97, 129, 193, 257, 385, 513, 769, 1025,
-            1537, 2049, 3073, 4097, 6145, 8193, 12_289, 16_385, 24_577, 65_535, 65_535,
-          ],
-          dxb: [
-            0, 0, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12,
-            12, 13, 13, 0, 0,
-          ],
-          ddef: new i5(32),
-          flmap: new r5(512),
-          fltree: [],
-          fdmap: new r5(32),
-          fdtree: [],
-          lmap: new r5(32_768),
-          ltree: [],
-          ttree: [],
-          dmap: new r5(32_768),
-          dtree: [],
-          imap: new r5(512),
-          itree: [],
-          rev15: new r5(32_768),
-          lhst: new i5(286),
-          dhst: new i5(30),
-          ihst: new i5(19),
-          lits: new i5(15e3),
-          strt: new r5(65_536),
-          prev: new r5(32_768),
-        })),
-      (() => {
-        for (var e6 = UZIP2.F.U, t5 = 0; t5 < 32_768; t5++) {
-          var r6 = t5;
-          (r6 =
-            ((4_278_255_360 &
-              (r6 =
-                ((4_042_322_160 &
-                  (r6 =
-                    ((3_435_973_836 &
-                      (r6 = ((2_863_311_530 & r6) >>> 1) | ((1_431_655_765 & r6) << 1))) >>>
-                      2) |
-                    ((858_993_459 & r6) << 2))) >>>
-                  4) |
-                ((252_645_135 & r6) << 4))) >>>
-              8) |
-            ((16_711_935 & r6) << 8)),
-            (e6.rev15[t5] = ((r6 >>> 16) | (r6 << 16)) >>> 17);
-        }
-        function pushV(e7, t6, r7) {
-          while (t6-- != 0) {
-            e7.push(0, r7);
-          }
-        }
-        for (t5 = 0; t5 < 32; t5++) {
-          (e6.ldef[t5] = (e6.of0[t5] << 3) | e6.exb[t5]),
-            (e6.ddef[t5] = (e6.df0[t5] << 4) | e6.dxb[t5]);
-        }
-        pushV(e6.fltree, 144, 8),
-          pushV(e6.fltree, 112, 9),
-          pushV(e6.fltree, 24, 7),
-          pushV(e6.fltree, 8, 8),
-          UZIP2.F.makeCodes(e6.fltree, 9),
-          UZIP2.F.codes2map(e6.fltree, 9, e6.flmap),
-          UZIP2.F.revCodes(e6.fltree, 9),
-          pushV(e6.fdtree, 32, 5),
-          UZIP2.F.makeCodes(e6.fdtree, 5),
-          UZIP2.F.codes2map(e6.fdtree, 5, e6.fdmap),
-          UZIP2.F.revCodes(e6.fdtree, 5),
-          pushV(e6.itree, 19, 0),
-          pushV(e6.ltree, 286, 0),
-          pushV(e6.dtree, 30, 0),
-          pushV(e6.ttree, 320, 0);
-      })();
-  })();
-  var UZIP = _mergeNamespaces({ __proto__: null, default: e }, [e]);
-  var UPNG = (() => {
-    var e5 = {
-      nextZero(e6, t6) {
-        while (e6[t6] != 0) {
-          t6++;
-        }
-        return t6;
-      },
-      readUshort: (e6, t6) => (e6[t6] << 8) | e6[t6 + 1],
-      writeUshort(e6, t6, r5) {
-        (e6[t6] = (r5 >> 8) & 255), (e6[t6 + 1] = 255 & r5);
-      },
-      readUint: (e6, t6) =>
-        16_777_216 * e6[t6] + ((e6[t6 + 1] << 16) | (e6[t6 + 2] << 8) | e6[t6 + 3]),
-      writeUint(e6, t6, r5) {
-        (e6[t6] = (r5 >> 24) & 255),
-          (e6[t6 + 1] = (r5 >> 16) & 255),
-          (e6[t6 + 2] = (r5 >> 8) & 255),
-          (e6[t6 + 3] = 255 & r5);
-      },
-      readASCII(e6, t6, r5) {
-        let i5 = "";
-        for (let o5 = 0; o5 < r5; o5++) {
-          i5 += String.fromCharCode(e6[t6 + o5]);
-        }
-        return i5;
-      },
-      writeASCII(e6, t6, r5) {
-        for (let i5 = 0; i5 < r5.length; i5++) {
-          e6[t6 + i5] = r5.charCodeAt(i5);
-        }
-      },
-      readBytes(e6, t6, r5) {
-        const i5 = [];
-        for (let o5 = 0; o5 < r5; o5++) {
-          i5.push(e6[t6 + o5]);
-        }
-        return i5;
-      },
-      pad: (e6) => (e6.length < 2 ? `0${e6}` : e6),
-      readUTF8(t6, r5, i5) {
-        let o5,
-          a5 = "";
-        for (let o6 = 0; o6 < i5; o6++) {
-          a5 += `%${e5.pad(t6[r5 + o6].toString(16))}`;
-        }
-        try {
-          o5 = decodeURIComponent(a5);
-        } catch (o6) {
-          return e5.readASCII(t6, r5, i5);
-        }
-        return o5;
-      },
-    };
-    function decodeImage(t6, r5, i5, o5) {
-      const a5 = r5 * i5,
-        s4 = _getBPP(o5),
-        f5 = Math.ceil((r5 * s4) / 8),
-        l4 = new Uint8Array(4 * a5),
-        c5 = new Uint32Array(l4.buffer),
-        { ctype: u4 } = o5,
-        { depth: h4 } = o5,
-        d3 = e5.readUshort;
-      if (u4 == 6) {
-        const e6 = a5 << 2;
-        if (h4 == 8) {
-          for (var A = 0; A < e6; A += 4) {
-            (l4[A] = t6[A]),
-              (l4[A + 1] = t6[A + 1]),
-              (l4[A + 2] = t6[A + 2]),
-              (l4[A + 3] = t6[A + 3]);
-          }
-        }
-        if (h4 == 16) {
-          for (A = 0; A < e6; A++) {
-            l4[A] = t6[A << 1];
-          }
-        }
-      } else if (u4 == 2) {
-        const e6 = o5.tabs.tRNS;
-        if (e6 == null) {
-          if (h4 == 8) {
-            for (A = 0; A < a5; A++) {
-              var g2 = 3 * A;
-              c5[A] = (255 << 24) | (t6[g2 + 2] << 16) | (t6[g2 + 1] << 8) | t6[g2];
-            }
-          }
-          if (h4 == 16) {
-            for (A = 0; A < a5; A++) {
-              g2 = 6 * A;
-              c5[A] = (255 << 24) | (t6[g2 + 4] << 16) | (t6[g2 + 2] << 8) | t6[g2];
-            }
-          }
-        } else {
-          var p4 = e6[0];
-          const r6 = e6[1],
-            i6 = e6[2];
-          if (h4 == 8) {
-            for (A = 0; A < a5; A++) {
-              var m2 = A << 2;
-              g2 = 3 * A;
-              (c5[A] = (255 << 24) | (t6[g2 + 2] << 16) | (t6[g2 + 1] << 8) | t6[g2]),
-                t6[g2] == p4 && t6[g2 + 1] == r6 && t6[g2 + 2] == i6 && (l4[m2 + 3] = 0);
-            }
-          }
-          if (h4 == 16) {
-            for (A = 0; A < a5; A++) {
-              (m2 = A << 2), (g2 = 6 * A);
-              (c5[A] = (255 << 24) | (t6[g2 + 4] << 16) | (t6[g2 + 2] << 8) | t6[g2]),
-                d3(t6, g2) == p4 &&
-                  d3(t6, g2 + 2) == r6 &&
-                  d3(t6, g2 + 4) == i6 &&
-                  (l4[m2 + 3] = 0);
-            }
-          }
-        }
-      } else if (u4 == 3) {
-        const e6 = o5.tabs.PLTE,
-          s5 = o5.tabs.tRNS,
-          c6 = s5 ? s5.length : 0;
-        if (h4 == 1) {
-          for (var w2 = 0; w2 < i5; w2++) {
-            var v3 = w2 * f5,
-              b3 = w2 * r5;
-            for (A = 0; A < r5; A++) {
-              m2 = (b3 + A) << 2;
-              var y3 = 3 * (E = (t6[v3 + (A >> 3)] >> (7 - ((7 & A) << 0))) & 1);
-              (l4[m2] = e6[y3]),
-                (l4[m2 + 1] = e6[y3 + 1]),
-                (l4[m2 + 2] = e6[y3 + 2]),
-                (l4[m2 + 3] = E < c6 ? s5[E] : 255);
-            }
-          }
-        }
-        if (h4 == 2) {
-          for (w2 = 0; w2 < i5; w2++) {
-            for (v3 = w2 * f5, b3 = w2 * r5, A = 0; A < r5; A++) {
-              (m2 = (b3 + A) << 2),
-                (y3 = 3 * (E = (t6[v3 + (A >> 2)] >> (6 - ((3 & A) << 1))) & 3));
-              (l4[m2] = e6[y3]),
-                (l4[m2 + 1] = e6[y3 + 1]),
-                (l4[m2 + 2] = e6[y3 + 2]),
-                (l4[m2 + 3] = E < c6 ? s5[E] : 255);
-            }
-          }
-        }
-        if (h4 == 4) {
-          for (w2 = 0; w2 < i5; w2++) {
-            for (v3 = w2 * f5, b3 = w2 * r5, A = 0; A < r5; A++) {
-              (m2 = (b3 + A) << 2),
-                (y3 = 3 * (E = (t6[v3 + (A >> 1)] >> (4 - ((1 & A) << 2))) & 15));
-              (l4[m2] = e6[y3]),
-                (l4[m2 + 1] = e6[y3 + 1]),
-                (l4[m2 + 2] = e6[y3 + 2]),
-                (l4[m2 + 3] = E < c6 ? s5[E] : 255);
-            }
-          }
-        }
-        if (h4 == 8) {
-          for (A = 0; A < a5; A++) {
-            var E;
-            (m2 = A << 2), (y3 = 3 * (E = t6[A]));
-            (l4[m2] = e6[y3]),
-              (l4[m2 + 1] = e6[y3 + 1]),
-              (l4[m2 + 2] = e6[y3 + 2]),
-              (l4[m2 + 3] = E < c6 ? s5[E] : 255);
-          }
-        }
-      } else if (u4 == 4) {
-        if (h4 == 8) {
-          for (A = 0; A < a5; A++) {
-            m2 = A << 2;
-            var F = t6[(_ = A << 1)];
-            (l4[m2] = F), (l4[m2 + 1] = F), (l4[m2 + 2] = F), (l4[m2 + 3] = t6[_ + 1]);
-          }
-        }
-        if (h4 == 16) {
-          for (A = 0; A < a5; A++) {
-            var _;
-            (m2 = A << 2), (F = t6[(_ = A << 2)]);
-            (l4[m2] = F), (l4[m2 + 1] = F), (l4[m2 + 2] = F), (l4[m2 + 3] = t6[_ + 2]);
-          }
-        }
-      } else if (u4 == 0) {
-        for (p4 = o5.tabs.tRNS ? o5.tabs.tRNS : -1, w2 = 0; w2 < i5; w2++) {
-          const e6 = w2 * f5,
-            i6 = w2 * r5;
-          if (h4 == 1) {
-            for (var B = 0; B < r5; B++) {
-              var U =
-                (F = 255 * ((t6[e6 + (B >>> 3)] >>> (7 - (7 & B))) & 1)) == 255 * p4 ? 0 : 255;
-              c5[i6 + B] = (U << 24) | (F << 16) | (F << 8) | F;
-            }
-          } else if (h4 == 2) {
-            for (B = 0; B < r5; B++) {
-              U =
-                (F = 85 * ((t6[e6 + (B >>> 2)] >>> (6 - ((3 & B) << 1))) & 3)) == 85 * p4 ? 0 : 255;
-              c5[i6 + B] = (U << 24) | (F << 16) | (F << 8) | F;
-            }
-          } else if (h4 == 4) {
-            for (B = 0; B < r5; B++) {
-              U =
-                (F = 17 * ((t6[e6 + (B >>> 1)] >>> (4 - ((1 & B) << 2))) & 15)) == 17 * p4
-                  ? 0
-                  : 255;
-              c5[i6 + B] = (U << 24) | (F << 16) | (F << 8) | F;
-            }
-          } else if (h4 == 8) {
-            for (B = 0; B < r5; B++) {
-              U = (F = t6[e6 + B]) == p4 ? 0 : 255;
-              c5[i6 + B] = (U << 24) | (F << 16) | (F << 8) | F;
-            }
-          } else if (h4 == 16) {
-            for (B = 0; B < r5; B++) {
-              (F = t6[e6 + (B << 1)]), (U = d3(t6, e6 + (B << 1)) == p4 ? 0 : 255);
-              c5[i6 + B] = (U << 24) | (F << 16) | (F << 8) | F;
-            }
-          }
-        }
-      }
-      return l4;
-    }
-    function _decompress(e6, r5, i5, o5) {
-      const a5 = _getBPP(e6),
-        s4 = Math.ceil((i5 * a5) / 8),
-        f5 = new Uint8Array((s4 + 1 + e6.interlace) * o5);
-      return (
-        (r5 = e6.tabs.CgBI ? t5(r5, f5) : _inflate(r5, f5)),
-        e6.interlace == 0
-          ? (r5 = _filterZero(r5, e6, 0, i5, o5))
-          : e6.interlace == 1 &&
-            (r5 = (function _readInterlace(e7, t6) {
-              const r6 = t6.width,
-                i6 = t6.height,
-                o6 = _getBPP(t6),
-                a6 = o6 >> 3,
-                s5 = Math.ceil((r6 * o6) / 8),
-                f6 = new Uint8Array(i6 * s5);
-              let l4 = 0;
-              const c5 = [0, 0, 4, 0, 2, 0, 1],
-                u4 = [0, 4, 0, 2, 0, 1, 0],
-                h4 = [8, 8, 8, 4, 4, 2, 2],
-                d3 = [8, 8, 4, 4, 2, 2, 1];
-              let A = 0;
-              while (A < 7) {
-                const p4 = h4[A],
-                  m2 = d3[A];
-                let w2 = 0,
-                  v3 = 0,
-                  b3 = c5[A];
-                while (b3 < i6) {
-                  (b3 += p4), v3++;
-                }
-                let y3 = u4[A];
-                while (y3 < r6) {
-                  (y3 += m2), w2++;
-                }
-                const E = Math.ceil((w2 * o6) / 8);
-                _filterZero(e7, t6, l4, w2, v3);
-                let F = 0,
-                  _ = c5[A];
-                while (_ < i6) {
-                  let t7 = u4[A],
-                    i7 = (l4 + F * E) << 3;
-                  while (t7 < r6) {
-                    var g2;
-                    if (o6 == 1) {
-                      (g2 = ((g2 = e7[i7 >> 3]) >> (7 - (7 & i7))) & 1),
-                        (f6[_ * s5 + (t7 >> 3)] |= g2 << (7 - ((7 & t7) << 0)));
-                    }
-                    if (o6 == 2) {
-                      (g2 = ((g2 = e7[i7 >> 3]) >> (6 - (7 & i7))) & 3),
-                        (f6[_ * s5 + (t7 >> 2)] |= g2 << (6 - ((3 & t7) << 1)));
-                    }
-                    if (o6 == 4) {
-                      (g2 = ((g2 = e7[i7 >> 3]) >> (4 - (7 & i7))) & 15),
-                        (f6[_ * s5 + (t7 >> 1)] |= g2 << (4 - ((1 & t7) << 2)));
-                    }
-                    if (o6 >= 8) {
-                      const r7 = _ * s5 + t7 * a6;
-                      for (let t8 = 0; t8 < a6; t8++) {
-                        f6[r7 + t8] = e7[(i7 >> 3) + t8];
-                      }
-                    }
-                    (i7 += o6), (t7 += m2);
-                  }
-                  F++, (_ += p4);
-                }
-                w2 * v3 != 0 && (l4 += v3 * (1 + E)), (A += 1);
-              }
-              return f6;
-            })(r5, e6)),
-        r5
-      );
-    }
-    function _inflate(e6, r5) {
-      return t5(new Uint8Array(e6.buffer, 2, e6.length - 6), r5);
-    }
-    var t5 = (() => {
-      const e6 = { H: {} };
-      return (
-        (e6.H.N = (t6, r5) => {
-          const i5 = Uint8Array;
-          let o5,
-            a5,
-            s4 = 0,
-            f5 = 0,
-            l4 = 0,
-            c5 = 0,
-            u4 = 0,
-            h4 = 0,
-            d3 = 0,
-            A = 0,
-            g2 = 0;
-          if (t6[0] == 3 && t6[1] == 0) {
-            return r5 || new i5(0);
-          }
-          const p4 = e6.H,
-            m2 = p4.b,
-            w2 = p4.e,
-            v3 = p4.R,
-            b3 = p4.n,
-            y3 = p4.A,
-            E = p4.Z,
-            F = p4.m,
-            _ = r5 == null;
-          for (_ && (r5 = new i5((t6.length >>> 2) << 5)); s4 == 0; ) {
-            if (((s4 = m2(t6, g2, 1)), (f5 = m2(t6, g2 + 1, 2)), (g2 += 3), f5 != 0)) {
-              if (
-                (_ && (r5 = e6.H.W(r5, A + (1 << 17))),
-                f5 == 1 && ((o5 = F.J), (a5 = F.h), (h4 = 511), (d3 = 31)),
-                f5 == 2)
-              ) {
-                (l4 = w2(t6, g2, 5) + 257),
-                  (c5 = w2(t6, g2 + 5, 5) + 1),
-                  (u4 = w2(t6, g2 + 10, 4) + 4),
-                  (g2 += 14);
-                let e7 = 1;
-                for (var B = 0; B < 38; B += 2) {
-                  (F.Q[B] = 0), (F.Q[B + 1] = 0);
-                }
-                for (B = 0; B < u4; B++) {
-                  const r7 = w2(t6, g2 + 3 * B, 3);
-                  (F.Q[1 + (F.X[B] << 1)] = r7), r7 > e7 && (e7 = r7);
-                }
-                (g2 += 3 * u4),
-                  b3(F.Q, e7),
-                  y3(F.Q, e7, F.u),
-                  (o5 = F.w),
-                  (a5 = F.d),
-                  (g2 = v3(F.u, (1 << e7) - 1, l4 + c5, t6, g2, F.v));
-                const r6 = p4.V(F.v, 0, l4, F.C);
-                h4 = (1 << r6) - 1;
-                const i6 = p4.V(F.v, l4, c5, F.D);
-                (d3 = (1 << i6) - 1), b3(F.C, r6), y3(F.C, r6, o5), b3(F.D, i6), y3(F.D, i6, a5);
-              }
-              for (;;) {
-                const e7 = o5[E(t6, g2) & h4];
-                g2 += 15 & e7;
-                const i6 = e7 >>> 4;
-                if (i6 >>> 8 == 0) {
-                  r5[A++] = i6;
-                } else {
-                  if (i6 == 256) {
-                    break;
-                  }
-                  {
-                    let e8 = A + i6 - 254;
-                    if (i6 > 264) {
-                      const r6 = F.q[i6 - 257];
-                      (e8 = A + (r6 >>> 3) + w2(t6, g2, 7 & r6)), (g2 += 7 & r6);
-                    }
-                    const o6 = a5[E(t6, g2) & d3];
-                    g2 += 15 & o6;
-                    const s5 = o6 >>> 4,
-                      f6 = F.c[s5],
-                      l5 = (f6 >>> 4) + m2(t6, g2, 15 & f6);
-                    for (g2 += 15 & f6; A < e8; ) {
-                      (r5[A] = r5[A++ - l5]),
-                        (r5[A] = r5[A++ - l5]),
-                        (r5[A] = r5[A++ - l5]),
-                        (r5[A] = r5[A++ - l5]);
-                    }
-                    A = e8;
-                  }
-                }
-              }
-            } else {
-              (7 & g2) != 0 && (g2 += 8 - (7 & g2));
-              const o6 = 4 + (g2 >>> 3),
-                a6 = t6[o6 - 4] | (t6[o6 - 3] << 8);
-              _ && (r5 = e6.H.W(r5, A + a6)),
-                r5.set(new i5(t6.buffer, t6.byteOffset + o6, a6), A),
-                (g2 = (o6 + a6) << 3),
-                (A += a6);
-            }
-          }
-          return r5.length == A ? r5 : r5.slice(0, A);
-        }),
-        (e6.H.W = (e7, t6) => {
-          const r5 = e7.length;
-          if (t6 <= r5) {
-            return e7;
-          }
-          const i5 = new Uint8Array(r5 << 1);
-          return i5.set(e7, 0), i5;
-        }),
-        (e6.H.R = (t6, r5, i5, o5, a5, s4) => {
-          const f5 = e6.H.e,
-            l4 = e6.H.Z;
-          let c5 = 0;
-          while (c5 < i5) {
-            const e7 = t6[l4(o5, a5) & r5];
-            a5 += 15 & e7;
-            const i6 = e7 >>> 4;
-            if (i6 <= 15) {
-              (s4[c5] = i6), c5++;
-            } else {
-              let e8 = 0,
-                t7 = 0;
-              i6 == 16
-                ? ((t7 = 3 + f5(o5, a5, 2)), (a5 += 2), (e8 = s4[c5 - 1]))
-                : i6 == 17
-                  ? ((t7 = 3 + f5(o5, a5, 3)), (a5 += 3))
-                  : i6 == 18 && ((t7 = 11 + f5(o5, a5, 7)), (a5 += 7));
-              const r6 = c5 + t7;
-              while (c5 < r6) {
-                (s4[c5] = e8), c5++;
-              }
-            }
-          }
-          return a5;
-        }),
-        (e6.H.V = (e7, t6, r5, i5) => {
-          let o5 = 0,
-            a5 = 0;
-          const s4 = i5.length >>> 1;
-          while (a5 < r5) {
-            const r6 = e7[a5 + t6];
-            (i5[a5 << 1] = 0), (i5[1 + (a5 << 1)] = r6), r6 > o5 && (o5 = r6), a5++;
-          }
-          while (a5 < s4) {
-            (i5[a5 << 1] = 0), (i5[1 + (a5 << 1)] = 0), a5++;
-          }
-          return o5;
-        }),
-        (e6.H.n = (t6, r5) => {
-          const i5 = e6.H.m,
-            o5 = t6.length;
-          let a5, s4, f5;
-          let l4;
-          const c5 = i5.j;
-          for (var u4 = 0; u4 <= r5; u4++) {
-            c5[u4] = 0;
-          }
-          for (u4 = 1; u4 < o5; u4 += 2) {
-            c5[t6[u4]]++;
-          }
-          const h4 = i5.K;
-          for (a5 = 0, c5[0] = 0, s4 = 1; s4 <= r5; s4++) {
-            (a5 = (a5 + c5[s4 - 1]) << 1), (h4[s4] = a5);
-          }
-          for (f5 = 0; f5 < o5; f5 += 2) {
-            (l4 = t6[f5 + 1]), l4 != 0 && ((t6[f5] = h4[l4]), h4[l4]++);
-          }
-        }),
-        (e6.H.A = (t6, r5, i5) => {
-          const o5 = t6.length,
-            a5 = e6.H.m.r;
-          for (let e7 = 0; e7 < o5; e7 += 2) {
-            if (t6[e7 + 1] != 0) {
-              const o6 = e7 >> 1,
-                s4 = t6[e7 + 1],
-                f5 = (o6 << 4) | s4,
-                l4 = r5 - s4;
-              let c5 = t6[e7] << l4;
-              const u4 = c5 + (1 << l4);
-              while (c5 != u4) {
-                (i5[a5[c5] >>> (15 - r5)] = f5), c5++;
-              }
-            }
-          }
-        }),
-        (e6.H.l = (t6, r5) => {
-          const i5 = e6.H.m.r,
-            o5 = 15 - r5;
-          for (let e7 = 0; e7 < t6.length; e7 += 2) {
-            const a5 = t6[e7] << (r5 - t6[e7 + 1]);
-            t6[e7] = i5[a5] >>> o5;
-          }
-        }),
-        (e6.H.M = (e7, t6, r5) => {
-          r5 <<= 7 & t6;
-          const i5 = t6 >>> 3;
-          (e7[i5] |= r5), (e7[i5 + 1] |= r5 >>> 8);
-        }),
-        (e6.H.I = (e7, t6, r5) => {
-          r5 <<= 7 & t6;
-          const i5 = t6 >>> 3;
-          (e7[i5] |= r5), (e7[i5 + 1] |= r5 >>> 8), (e7[i5 + 2] |= r5 >>> 16);
-        }),
-        (e6.H.e = (e7, t6, r5) =>
-          ((e7[t6 >>> 3] | (e7[1 + (t6 >>> 3)] << 8)) >>> (7 & t6)) & ((1 << r5) - 1)),
-        (e6.H.b = (e7, t6, r5) =>
-          ((e7[t6 >>> 3] | (e7[1 + (t6 >>> 3)] << 8) | (e7[2 + (t6 >>> 3)] << 16)) >>> (7 & t6)) &
-          ((1 << r5) - 1)),
-        (e6.H.Z = (e7, t6) =>
-          (e7[t6 >>> 3] | (e7[1 + (t6 >>> 3)] << 8) | (e7[2 + (t6 >>> 3)] << 16)) >>> (7 & t6)),
-        (e6.H.i = (e7, t6) =>
-          (e7[t6 >>> 3] |
-            (e7[1 + (t6 >>> 3)] << 8) |
-            (e7[2 + (t6 >>> 3)] << 16) |
-            (e7[3 + (t6 >>> 3)] << 24)) >>>
-          (7 & t6)),
-        (e6.H.m = (() => {
-          const e7 = Uint16Array,
-            t6 = Uint32Array;
-          return {
-            K: new e7(16),
-            j: new e7(16),
-            X: [16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15],
-            S: [
-              3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 15, 17, 19, 23, 27, 31, 35, 43, 51, 59, 67, 83, 99,
-              115, 131, 163, 195, 227, 258, 999, 999, 999,
-            ],
-            T: [
-              0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 0,
-              0, 0, 0,
-            ],
-            q: new e7(32),
-            p: [
-              1, 2, 3, 4, 5, 7, 9, 13, 17, 25, 33, 49, 65, 97, 129, 193, 257, 385, 513, 769, 1025,
-              1537, 2049, 3073, 4097, 6145, 8193, 12_289, 16_385, 24_577, 65_535, 65_535,
-            ],
-            z: [
-              0, 0, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12,
-              12, 13, 13, 0, 0,
-            ],
-            c: new t6(32),
-            J: new e7(512),
-            _: [],
-            h: new e7(32),
-            $: [],
-            w: new e7(32_768),
-            C: [],
-            v: [],
-            d: new e7(32_768),
-            D: [],
-            u: new e7(512),
-            Q: [],
-            r: new e7(32_768),
-            s: new t6(286),
-            Y: new t6(30),
-            a: new t6(19),
-            t: new t6(15e3),
-            k: new e7(65_536),
-            g: new e7(32_768),
-          };
-        })()),
-        (() => {
-          const t6 = e6.H.m;
-          for (var r5 = 0; r5 < 32_768; r5++) {
-            let e7 = r5;
-            (e7 = ((2_863_311_530 & e7) >>> 1) | ((1_431_655_765 & e7) << 1)),
-              (e7 = ((3_435_973_836 & e7) >>> 2) | ((858_993_459 & e7) << 2)),
-              (e7 = ((4_042_322_160 & e7) >>> 4) | ((252_645_135 & e7) << 4)),
-              (e7 = ((4_278_255_360 & e7) >>> 8) | ((16_711_935 & e7) << 8)),
-              (t6.r[r5] = ((e7 >>> 16) | (e7 << 16)) >>> 17);
-          }
-          function n4(e7, t7, r6) {
-            while (t7-- != 0) {
-              e7.push(0, r6);
-            }
-          }
-          for (r5 = 0; r5 < 32; r5++) {
-            (t6.q[r5] = (t6.S[r5] << 3) | t6.T[r5]), (t6.c[r5] = (t6.p[r5] << 4) | t6.z[r5]);
-          }
-          n4(t6._, 144, 8),
-            n4(t6._, 112, 9),
-            n4(t6._, 24, 7),
-            n4(t6._, 8, 8),
-            e6.H.n(t6._, 9),
-            e6.H.A(t6._, 9, t6.J),
-            e6.H.l(t6._, 9),
-            n4(t6.$, 32, 5),
-            e6.H.n(t6.$, 5),
-            e6.H.A(t6.$, 5, t6.h),
-            e6.H.l(t6.$, 5),
-            n4(t6.Q, 19, 0),
-            n4(t6.C, 286, 0),
-            n4(t6.D, 30, 0),
-            n4(t6.v, 320, 0);
-        })(),
-        e6.H.N
-      );
-    })();
-    function _getBPP(e6) {
-      return [1, null, 3, 1, 2, null, 4][e6.ctype] * e6.depth;
-    }
-    function _filterZero(e6, t6, r5, i5, o5) {
-      let a5 = _getBPP(t6);
-      const s4 = Math.ceil((i5 * a5) / 8);
-      let f5, l4;
-      a5 = Math.ceil(a5 / 8);
-      let c5 = e6[r5],
-        u4 = 0;
-      if ((c5 > 1 && (e6[r5] = [0, 0, 1][c5 - 2]), c5 == 3)) {
-        for (u4 = a5; u4 < s4; u4++) {
-          e6[u4 + 1] = (e6[u4 + 1] + (e6[u4 + 1 - a5] >>> 1)) & 255;
-        }
-      }
-      for (let t7 = 0; t7 < o5; t7++) {
-        if (((f5 = r5 + t7 * s4), (l4 = f5 + t7 + 1), (c5 = e6[l4 - 1]), (u4 = 0), c5 == 0)) {
-          for (; u4 < s4; u4++) {
-            e6[f5 + u4] = e6[l4 + u4];
-          }
-        } else if (c5 == 1) {
-          for (; u4 < a5; u4++) {
-            e6[f5 + u4] = e6[l4 + u4];
-          }
-          for (; u4 < s4; u4++) {
-            e6[f5 + u4] = e6[l4 + u4] + e6[f5 + u4 - a5];
-          }
-        } else if (c5 == 2) {
-          for (; u4 < s4; u4++) {
-            e6[f5 + u4] = e6[l4 + u4] + e6[f5 + u4 - s4];
-          }
-        } else if (c5 == 3) {
-          for (; u4 < a5; u4++) {
-            e6[f5 + u4] = e6[l4 + u4] + (e6[f5 + u4 - s4] >>> 1);
-          }
-          for (; u4 < s4; u4++) {
-            e6[f5 + u4] = e6[l4 + u4] + ((e6[f5 + u4 - s4] + e6[f5 + u4 - a5]) >>> 1);
-          }
-        } else {
-          for (; u4 < a5; u4++) {
-            e6[f5 + u4] = e6[l4 + u4] + _paeth(0, e6[f5 + u4 - s4], 0);
-          }
-          for (; u4 < s4; u4++) {
-            e6[f5 + u4] =
-              e6[l4 + u4] + _paeth(e6[f5 + u4 - a5], e6[f5 + u4 - s4], e6[f5 + u4 - a5 - s4]);
-          }
-        }
-      }
-      return e6;
-    }
-    function _paeth(e6, t6, r5) {
-      const i5 = e6 + t6 - r5,
-        o5 = i5 - e6,
-        a5 = i5 - t6,
-        s4 = i5 - r5;
-      return o5 * o5 <= a5 * a5 && o5 * o5 <= s4 * s4 ? e6 : a5 * a5 <= s4 * s4 ? t6 : r5;
-    }
-    function _IHDR(t6, r5, i5) {
-      (i5.width = e5.readUint(t6, r5)),
-        (r5 += 4),
-        (i5.height = e5.readUint(t6, r5)),
-        (r5 += 4),
-        (i5.depth = t6[r5]),
-        r5++,
-        (i5.ctype = t6[r5]),
-        r5++,
-        (i5.compress = t6[r5]),
-        r5++,
-        (i5.filter = t6[r5]),
-        r5++,
-        (i5.interlace = t6[r5]),
-        r5++;
-    }
-    function _copyTile(e6, t6, r5, i5, o5, a5, s4, f5, l4) {
-      const c5 = Math.min(t6, o5),
-        u4 = Math.min(r5, a5);
-      let h4 = 0,
-        d3 = 0;
-      for (let r6 = 0; r6 < u4; r6++) {
-        for (let a6 = 0; a6 < c5; a6++) {
-          if (
-            (s4 >= 0 && f5 >= 0
-              ? ((h4 = (r6 * t6 + a6) << 2), (d3 = ((f5 + r6) * o5 + s4 + a6) << 2))
-              : ((h4 = ((-f5 + r6) * t6 - s4 + a6) << 2), (d3 = (r6 * o5 + a6) << 2)),
-            l4 == 0)
-          ) {
-            (i5[d3] = e6[h4]),
-              (i5[d3 + 1] = e6[h4 + 1]),
-              (i5[d3 + 2] = e6[h4 + 2]),
-              (i5[d3 + 3] = e6[h4 + 3]);
-          } else if (l4 == 1) {
-            var A = e6[h4 + 3] * (1 / 255),
-              g2 = e6[h4] * A,
-              p4 = e6[h4 + 1] * A,
-              m2 = e6[h4 + 2] * A,
-              w2 = i5[d3 + 3] * (1 / 255),
-              v3 = i5[d3] * w2,
-              b3 = i5[d3 + 1] * w2,
-              y3 = i5[d3 + 2] * w2;
-            const t7 = 1 - A,
-              r7 = A + w2 * t7,
-              o6 = r7 == 0 ? 0 : 1 / r7;
-            (i5[d3 + 3] = 255 * r7),
-              (i5[d3 + 0] = (g2 + v3 * t7) * o6),
-              (i5[d3 + 1] = (p4 + b3 * t7) * o6),
-              (i5[d3 + 2] = (m2 + y3 * t7) * o6);
-          } else if (l4 == 2) {
-            (A = e6[h4 + 3]),
-              (g2 = e6[h4]),
-              (p4 = e6[h4 + 1]),
-              (m2 = e6[h4 + 2]),
-              (w2 = i5[d3 + 3]),
-              (v3 = i5[d3]),
-              (b3 = i5[d3 + 1]),
-              (y3 = i5[d3 + 2]);
-            A == w2 && g2 == v3 && p4 == b3 && m2 == y3
-              ? ((i5[d3] = 0), (i5[d3 + 1] = 0), (i5[d3 + 2] = 0), (i5[d3 + 3] = 0))
-              : ((i5[d3] = g2), (i5[d3 + 1] = p4), (i5[d3 + 2] = m2), (i5[d3 + 3] = A));
-          } else if (l4 == 3) {
-            (A = e6[h4 + 3]),
-              (g2 = e6[h4]),
-              (p4 = e6[h4 + 1]),
-              (m2 = e6[h4 + 2]),
-              (w2 = i5[d3 + 3]),
-              (v3 = i5[d3]),
-              (b3 = i5[d3 + 1]),
-              (y3 = i5[d3 + 2]);
-            if (A == w2 && g2 == v3 && p4 == b3 && m2 == y3) {
-              continue;
-            }
-            if (A < 220 && w2 > 20) {
-              return false;
-            }
-          }
-        }
-      }
-      return true;
-    }
-    return {
-      decode(r5) {
-        const i5 = new Uint8Array(r5);
-        let o5 = 8;
-        const a5 = e5,
-          s4 = a5.readUshort,
-          f5 = a5.readUint,
-          l4 = { tabs: {}, frames: [] },
-          c5 = new Uint8Array(i5.length);
-        let u4,
-          h4 = 0,
-          d3 = 0;
-        const A = [137, 80, 78, 71, 13, 10, 26, 10];
-        for (var g2 = 0; g2 < 8; g2++) {
-          if (i5[g2] != A[g2]) {
-            throw "The input is not a PNG file!";
-          }
-        }
-        while (o5 < i5.length) {
-          const e6 = a5.readUint(i5, o5);
-          o5 += 4;
-          const r6 = a5.readASCII(i5, o5, 4);
-          if (((o5 += 4), r6 == "IHDR")) {
-            _IHDR(i5, o5, l4);
-          } else if (r6 == "iCCP") {
-            for (var p4 = o5; i5[p4] != 0; ) {
-              p4++;
-            }
-            a5.readASCII(i5, o5, p4 - o5), i5[p4 + 1];
-            const s5 = i5.slice(p4 + 2, o5 + e6);
-            let f6 = null;
-            try {
-              f6 = _inflate(s5);
-            } catch (e7) {
-              f6 = t5(s5);
-            }
-            l4.tabs[r6] = f6;
-          } else if (r6 == "CgBI") {
-            l4.tabs[r6] = i5.slice(o5, o5 + 4);
-          } else if (r6 == "IDAT") {
-            for (g2 = 0; g2 < e6; g2++) {
-              c5[h4 + g2] = i5[o5 + g2];
-            }
-            h4 += e6;
-          } else if (r6 == "acTL") {
-            (l4.tabs[r6] = { num_frames: f5(i5, o5), num_plays: f5(i5, o5 + 4) }),
-              (u4 = new Uint8Array(i5.length));
-          } else if (r6 == "fcTL") {
-            if (d3 != 0) {
-              ((E = l4.frames[l4.frames.length - 1]).data = _decompress(
-                l4,
-                u4.slice(0, d3),
-                E.rect.width,
-                E.rect.height,
-              )),
-                (d3 = 0);
-            }
-            const e7 = {
-              x: f5(i5, o5 + 12),
-              y: f5(i5, o5 + 16),
-              width: f5(i5, o5 + 4),
-              height: f5(i5, o5 + 8),
-            };
-            let t6 = s4(i5, o5 + 22);
-            t6 = s4(i5, o5 + 20) / (t6 == 0 ? 100 : t6);
-            const r7 = {
-              rect: e7,
-              delay: Math.round(1e3 * t6),
-              dispose: i5[o5 + 24],
-              blend: i5[o5 + 25],
-            };
-            l4.frames.push(r7);
-          } else if (r6 == "fdAT") {
-            for (g2 = 0; g2 < e6 - 4; g2++) {
-              u4[d3 + g2] = i5[o5 + g2 + 4];
-            }
-            d3 += e6 - 4;
-          } else if (r6 == "pHYs") {
-            l4.tabs[r6] = [a5.readUint(i5, o5), a5.readUint(i5, o5 + 4), i5[o5 + 8]];
-          } else if (r6 == "cHRM") {
-            l4.tabs[r6] = [];
-            for (g2 = 0; g2 < 8; g2++) {
-              l4.tabs[r6].push(a5.readUint(i5, o5 + 4 * g2));
-            }
-          } else if (r6 == "tEXt" || r6 == "zTXt") {
-            l4.tabs[r6] == null && (l4.tabs[r6] = {});
-            var m2 = a5.nextZero(i5, o5),
-              w2 = a5.readASCII(i5, o5, m2 - o5),
-              v3 = o5 + e6 - m2 - 1;
-            if (r6 == "tEXt") {
-              y3 = a5.readASCII(i5, m2 + 1, v3);
-            } else {
-              var b3 = _inflate(i5.slice(m2 + 2, m2 + 2 + v3));
-              y3 = a5.readUTF8(b3, 0, b3.length);
-            }
-            l4.tabs[r6][w2] = y3;
-          } else if (r6 == "iTXt") {
-            l4.tabs[r6] == null && (l4.tabs[r6] = {});
-            (m2 = 0), (p4 = o5);
-            m2 = a5.nextZero(i5, p4);
-            w2 = a5.readASCII(i5, p4, m2 - p4);
-            const t6 = i5[(p4 = m2 + 1)];
-            var y3;
-            i5[p4 + 1],
-              (p4 += 2),
-              (m2 = a5.nextZero(i5, p4)),
-              a5.readASCII(i5, p4, m2 - p4),
-              (p4 = m2 + 1),
-              (m2 = a5.nextZero(i5, p4)),
-              a5.readUTF8(i5, p4, m2 - p4);
-            v3 = e6 - ((p4 = m2 + 1) - o5);
-            if (t6 == 0) {
-              y3 = a5.readUTF8(i5, p4, v3);
-            } else {
-              b3 = _inflate(i5.slice(p4, p4 + v3));
-              y3 = a5.readUTF8(b3, 0, b3.length);
-            }
-            l4.tabs[r6][w2] = y3;
-          } else if (r6 == "PLTE") {
-            l4.tabs[r6] = a5.readBytes(i5, o5, e6);
-          } else if (r6 == "hIST") {
-            const e7 = l4.tabs.PLTE.length / 3;
-            l4.tabs[r6] = [];
-            for (g2 = 0; g2 < e7; g2++) {
-              l4.tabs[r6].push(s4(i5, o5 + 2 * g2));
-            }
-          } else if (r6 == "tRNS") {
-            l4.ctype == 3
-              ? (l4.tabs[r6] = a5.readBytes(i5, o5, e6))
-              : l4.ctype == 0
-                ? (l4.tabs[r6] = s4(i5, o5))
-                : l4.ctype == 2 && (l4.tabs[r6] = [s4(i5, o5), s4(i5, o5 + 2), s4(i5, o5 + 4)]);
-          } else if (r6 == "gAMA") {
-            l4.tabs[r6] = a5.readUint(i5, o5) / 1e5;
-          } else if (r6 == "sRGB") {
-            l4.tabs[r6] = i5[o5];
-          } else if (r6 == "bKGD") {
-            l4.ctype == 0 || l4.ctype == 4
-              ? (l4.tabs[r6] = [s4(i5, o5)])
-              : l4.ctype == 2 || l4.ctype == 6
-                ? (l4.tabs[r6] = [s4(i5, o5), s4(i5, o5 + 2), s4(i5, o5 + 4)])
-                : l4.ctype == 3 && (l4.tabs[r6] = i5[o5]);
-          } else if (r6 == "IEND") {
-            break;
-          }
-          (o5 += e6), a5.readUint(i5, o5), (o5 += 4);
-        }
-        var E;
-        return (
-          d3 != 0 &&
-            ((E = l4.frames[l4.frames.length - 1]).data = _decompress(
-              l4,
-              u4.slice(0, d3),
-              E.rect.width,
-              E.rect.height,
-            )),
-          (l4.data = _decompress(l4, c5, l4.width, l4.height)),
-          delete l4.compress,
-          delete l4.interlace,
-          delete l4.filter,
-          l4
-        );
-      },
-      toRGBA8(e6) {
-        const t6 = e6.width,
-          r5 = e6.height;
-        if (e6.tabs.acTL == null) {
-          return [decodeImage(e6.data, t6, r5, e6).buffer];
-        }
-        const i5 = [];
-        e6.frames[0].data == null && (e6.frames[0].data = e6.data);
-        const o5 = t6 * r5 * 4,
-          a5 = new Uint8Array(o5),
-          s4 = new Uint8Array(o5),
-          f5 = new Uint8Array(o5);
-        for (let c5 = 0; c5 < e6.frames.length; c5++) {
-          const u4 = e6.frames[c5],
-            h4 = u4.rect.x,
-            d3 = u4.rect.y,
-            A = u4.rect.width,
-            g2 = u4.rect.height,
-            p4 = decodeImage(u4.data, A, g2, e6);
-          if (c5 != 0) {
-            for (var l4 = 0; l4 < o5; l4++) {
-              f5[l4] = a5[l4];
-            }
-          }
-          if (
-            (u4.blend == 0
-              ? _copyTile(p4, A, g2, a5, t6, r5, h4, d3, 0)
-              : u4.blend == 1 && _copyTile(p4, A, g2, a5, t6, r5, h4, d3, 1),
-            i5.push(a5.buffer.slice(0)),
-            u4.dispose == 0)
-          ) {
-          } else if (u4.dispose == 1) {
-            _copyTile(s4, A, g2, a5, t6, r5, h4, d3, 0);
-          } else if (u4.dispose == 2) {
-            for (l4 = 0; l4 < o5; l4++) {
-              a5[l4] = f5[l4];
-            }
-          }
-        }
-        return i5;
-      },
-      _paeth,
-      _copyTile,
-      _bin: e5,
-    };
-  })();
-  !(() => {
-    const { _copyTile: e5 } = UPNG,
-      { _bin: t5 } = UPNG,
-      r5 = UPNG._paeth;
-    var i5 = {
-      table: (() => {
-        const e6 = new Uint32Array(256);
-        for (let t6 = 0; t6 < 256; t6++) {
-          let r6 = t6;
-          for (let e7 = 0; e7 < 8; e7++) {
-            1 & r6 ? (r6 = 3_988_292_384 ^ (r6 >>> 1)) : (r6 >>>= 1);
-          }
-          e6[t6] = r6;
-        }
-        return e6;
-      })(),
-      update(e6, t6, r6, o6) {
-        for (let a5 = 0; a5 < o6; a5++) {
-          e6 = i5.table[255 & (e6 ^ t6[r6 + a5])] ^ (e6 >>> 8);
-        }
-        return e6;
-      },
-      crc: (e6, t6, r6) => 4_294_967_295 ^ i5.update(4_294_967_295, e6, t6, r6),
-    };
-    function addErr(e6, t6, r6, i6) {
-      (t6[r6] += (e6[0] * i6) >> 4),
-        (t6[r6 + 1] += (e6[1] * i6) >> 4),
-        (t6[r6 + 2] += (e6[2] * i6) >> 4),
-        (t6[r6 + 3] += (e6[3] * i6) >> 4);
-    }
-    function N2(e6) {
-      return Math.max(0, Math.min(255, e6));
-    }
-    function D(e6, t6) {
-      const r6 = e6[0] - t6[0],
-        i6 = e6[1] - t6[1],
-        o6 = e6[2] - t6[2],
-        a5 = e6[3] - t6[3];
-      return r6 * r6 + i6 * i6 + o6 * o6 + a5 * a5;
-    }
-    function dither(e6, t6, r6, i6, o6, a5, s4) {
-      s4 == null && (s4 = 1);
-      const f5 = i6.length,
-        l4 = [];
-      for (var c5 = 0; c5 < f5; c5++) {
-        const e7 = i6[c5];
-        l4.push([(e7 >>> 0) & 255, (e7 >>> 8) & 255, (e7 >>> 16) & 255, (e7 >>> 24) & 255]);
-      }
-      for (c5 = 0; c5 < f5; c5++) {
-        let e7 = 4_294_967_295;
-        for (var u4 = 0, h4 = 0; h4 < f5; h4++) {
-          var d3 = D(l4[c5], l4[h4]);
-          h4 != c5 && d3 < e7 && ((e7 = d3), (u4 = h4));
-        }
-      }
-      const A = new Uint32Array(o6.buffer),
-        g2 = new Int16Array(t6 * r6 * 4),
-        p4 = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5];
-      for (c5 = 0; c5 < p4.length; c5++) {
-        p4[c5] = 255 * ((p4[c5] + 0.5) / 16 - 0.5);
-      }
-      for (let o7 = 0; o7 < r6; o7++) {
-        for (let w2 = 0; w2 < t6; w2++) {
-          var m2;
-          c5 = 4 * (o7 * t6 + w2);
-          if (s4 != 2) {
-            m2 = [
-              N2(e6[c5] + g2[c5]),
-              N2(e6[c5 + 1] + g2[c5 + 1]),
-              N2(e6[c5 + 2] + g2[c5 + 2]),
-              N2(e6[c5 + 3] + g2[c5 + 3]),
-            ];
-          } else {
-            d3 = p4[4 * (3 & o7) + (3 & w2)];
-            m2 = [N2(e6[c5] + d3), N2(e6[c5 + 1] + d3), N2(e6[c5 + 2] + d3), N2(e6[c5 + 3] + d3)];
-          }
-          u4 = 0;
-          let v3 = 16_777_215;
-          for (h4 = 0; h4 < f5; h4++) {
-            const e7 = D(m2, l4[h4]);
-            e7 < v3 && ((v3 = e7), (u4 = h4));
-          }
-          const b3 = l4[u4],
-            y3 = [m2[0] - b3[0], m2[1] - b3[1], m2[2] - b3[2], m2[3] - b3[3]];
-          s4 == 1 &&
-            (w2 != t6 - 1 && addErr(y3, g2, c5 + 4, 7),
-            o7 != r6 - 1 &&
-              (w2 != 0 && addErr(y3, g2, c5 + 4 * t6 - 4, 3),
-              addErr(y3, g2, c5 + 4 * t6, 5),
-              w2 != t6 - 1 && addErr(y3, g2, c5 + 4 * t6 + 4, 1))),
-            (a5[c5 >> 2] = u4),
-            (A[c5 >> 2] = i6[u4]);
-        }
-      }
-    }
-    function _main(e6, r6, o6, a5, s4) {
-      s4 == null && (s4 = {});
-      const { crc: f5 } = i5,
-        l4 = t5.writeUint,
-        c5 = t5.writeUshort,
-        u4 = t5.writeASCII;
-      let h4 = 8;
-      const d3 = e6.frames.length > 1;
-      let A,
-        g2 = false,
-        p4 = 33 + (d3 ? 20 : 0);
-      if (
-        (s4.sRGB != null && (p4 += 13),
-        s4.pHYs != null && (p4 += 21),
-        s4.iCCP != null && ((A = pako.deflate(s4.iCCP)), (p4 += 21 + A.length + 4)),
-        e6.ctype == 3)
-      ) {
-        for (var m2 = e6.plte.length, w2 = 0; w2 < m2; w2++) {
-          e6.plte[w2] >>> 24 != 255 && (g2 = true);
-        }
-        p4 += 8 + 3 * m2 + 4 + (g2 ? 8 + 1 * m2 + 4 : 0);
-      }
-      for (var v3 = 0; v3 < e6.frames.length; v3++) {
-        d3 && (p4 += 38), (p4 += (F = e6.frames[v3]).cimg.length + 12), v3 != 0 && (p4 += 4);
-      }
-      p4 += 12;
-      const b3 = new Uint8Array(p4),
-        y3 = [137, 80, 78, 71, 13, 10, 26, 10];
-      for (w2 = 0; w2 < 8; w2++) {
-        b3[w2] = y3[w2];
-      }
-      if (
-        (l4(b3, h4, 13),
-        (h4 += 4),
-        u4(b3, h4, "IHDR"),
-        (h4 += 4),
-        l4(b3, h4, r6),
-        (h4 += 4),
-        l4(b3, h4, o6),
-        (h4 += 4),
-        (b3[h4] = e6.depth),
-        h4++,
-        (b3[h4] = e6.ctype),
-        h4++,
-        (b3[h4] = 0),
-        h4++,
-        (b3[h4] = 0),
-        h4++,
-        (b3[h4] = 0),
-        h4++,
-        l4(b3, h4, f5(b3, h4 - 17, 17)),
-        (h4 += 4),
-        s4.sRGB != null &&
-          (l4(b3, h4, 1),
-          (h4 += 4),
-          u4(b3, h4, "sRGB"),
-          (h4 += 4),
-          (b3[h4] = s4.sRGB),
-          h4++,
-          l4(b3, h4, f5(b3, h4 - 5, 5)),
-          (h4 += 4)),
-        s4.iCCP != null)
-      ) {
-        const e7 = 13 + A.length;
-        l4(b3, h4, e7),
-          (h4 += 4),
-          u4(b3, h4, "iCCP"),
-          (h4 += 4),
-          u4(b3, h4, "ICC profile"),
-          (h4 += 11),
-          (h4 += 2),
-          b3.set(A, h4),
-          (h4 += A.length),
-          l4(b3, h4, f5(b3, h4 - (e7 + 4), e7 + 4)),
-          (h4 += 4);
-      }
-      if (
-        (s4.pHYs != null &&
-          (l4(b3, h4, 9),
-          (h4 += 4),
-          u4(b3, h4, "pHYs"),
-          (h4 += 4),
-          l4(b3, h4, s4.pHYs[0]),
-          (h4 += 4),
-          l4(b3, h4, s4.pHYs[1]),
-          (h4 += 4),
-          (b3[h4] = s4.pHYs[2]),
-          h4++,
-          l4(b3, h4, f5(b3, h4 - 13, 13)),
-          (h4 += 4)),
-        d3 &&
-          (l4(b3, h4, 8),
-          (h4 += 4),
-          u4(b3, h4, "acTL"),
-          (h4 += 4),
-          l4(b3, h4, e6.frames.length),
-          (h4 += 4),
-          l4(b3, h4, s4.loop != null ? s4.loop : 0),
-          (h4 += 4),
-          l4(b3, h4, f5(b3, h4 - 12, 12)),
-          (h4 += 4)),
-        e6.ctype == 3)
-      ) {
-        l4(b3, h4, 3 * (m2 = e6.plte.length)), (h4 += 4), u4(b3, h4, "PLTE"), (h4 += 4);
-        for (w2 = 0; w2 < m2; w2++) {
-          const t6 = 3 * w2,
-            r7 = e6.plte[w2],
-            i6 = 255 & r7,
-            o7 = (r7 >>> 8) & 255,
-            a6 = (r7 >>> 16) & 255;
-          (b3[h4 + t6 + 0] = i6), (b3[h4 + t6 + 1] = o7), (b3[h4 + t6 + 2] = a6);
-        }
-        if (((h4 += 3 * m2), l4(b3, h4, f5(b3, h4 - 3 * m2 - 4, 3 * m2 + 4)), (h4 += 4), g2)) {
-          l4(b3, h4, m2), (h4 += 4), u4(b3, h4, "tRNS"), (h4 += 4);
-          for (w2 = 0; w2 < m2; w2++) {
-            b3[h4 + w2] = (e6.plte[w2] >>> 24) & 255;
-          }
-          (h4 += m2), l4(b3, h4, f5(b3, h4 - m2 - 4, m2 + 4)), (h4 += 4);
-        }
-      }
-      let E = 0;
-      for (v3 = 0; v3 < e6.frames.length; v3++) {
-        var F = e6.frames[v3];
-        d3 &&
-          (l4(b3, h4, 26),
-          (h4 += 4),
-          u4(b3, h4, "fcTL"),
-          (h4 += 4),
-          l4(b3, h4, E++),
-          (h4 += 4),
-          l4(b3, h4, F.rect.width),
-          (h4 += 4),
-          l4(b3, h4, F.rect.height),
-          (h4 += 4),
-          l4(b3, h4, F.rect.x),
-          (h4 += 4),
-          l4(b3, h4, F.rect.y),
-          (h4 += 4),
-          c5(b3, h4, a5[v3]),
-          (h4 += 2),
-          c5(b3, h4, 1e3),
-          (h4 += 2),
-          (b3[h4] = F.dispose),
-          h4++,
-          (b3[h4] = F.blend),
-          h4++,
-          l4(b3, h4, f5(b3, h4 - 30, 30)),
-          (h4 += 4));
-        const t6 = F.cimg;
-        l4(b3, h4, (m2 = t6.length) + (v3 == 0 ? 0 : 4)), (h4 += 4);
-        const r7 = h4;
-        u4(b3, h4, v3 == 0 ? "IDAT" : "fdAT"),
-          (h4 += 4),
-          v3 != 0 && (l4(b3, h4, E++), (h4 += 4)),
-          b3.set(t6, h4),
-          (h4 += m2),
-          l4(b3, h4, f5(b3, r7, h4 - r7)),
-          (h4 += 4);
-      }
-      return (
-        l4(b3, h4, 0),
-        (h4 += 4),
-        u4(b3, h4, "IEND"),
-        (h4 += 4),
-        l4(b3, h4, f5(b3, h4 - 4, 4)),
-        (h4 += 4),
-        b3.buffer
-      );
-    }
-    function compressPNG(e6, t6, r6) {
-      for (let i6 = 0; i6 < e6.frames.length; i6++) {
-        const o6 = e6.frames[i6];
-        o6.rect.width;
-        const a5 = o6.rect.height,
-          s4 = new Uint8Array(a5 * o6.bpl + a5);
-        o6.cimg = _filterZero(o6.img, a5, o6.bpp, o6.bpl, s4, t6, r6);
-      }
-    }
-    function compress2(t6, r6, i6, o6, a5) {
-      const s4 = a5[0],
-        f5 = a5[1],
-        l4 = a5[2],
-        c5 = a5[3],
-        u4 = a5[4],
-        h4 = a5[5];
-      let d3 = 6,
-        A = 8,
-        g2 = 255;
-      for (var p4 = 0; p4 < t6.length; p4++) {
-        const e6 = new Uint8Array(t6[p4]);
-        for (var m2 = e6.length, w2 = 0; w2 < m2; w2 += 4) {
-          g2 &= e6[w2 + 3];
-        }
-      }
-      const v3 = g2 != 255,
-        b3 = (function framize(t7, r7, i7, o7, a6, s5) {
-          const f6 = [];
-          for (var l5 = 0; l5 < t7.length; l5++) {
-            const h6 = new Uint8Array(t7[l5]),
-              A3 = new Uint32Array(h6.buffer);
-            var c6;
-            let g3 = 0,
-              p5 = 0,
-              m3 = r7,
-              w3 = i7,
-              v4 = o7 ? 1 : 0;
-            if (l5 != 0) {
-              const b4 = s5 || o7 || l5 == 1 || f6[l5 - 2].dispose != 0 ? 1 : 2;
-              let y4 = 0,
-                E2 = 1e9;
-              for (let e6 = 0; e6 < b4; e6++) {
-                var u5 = new Uint8Array(t7[l5 - 1 - e6]);
-                const o8 = new Uint32Array(t7[l5 - 1 - e6]);
-                let s6 = r7,
-                  f7 = i7,
-                  c7 = -1,
-                  h7 = -1;
-                for (let e7 = 0; e7 < i7; e7++) {
-                  for (let t8 = 0; t8 < r7; t8++) {
-                    A3[(d4 = e7 * r7 + t8)] != o8[d4] &&
-                      (t8 < s6 && (s6 = t8),
-                      t8 > c7 && (c7 = t8),
-                      e7 < f7 && (f7 = e7),
-                      e7 > h7 && (h7 = e7));
-                  }
-                }
-                c7 == -1 && (s6 = f7 = c7 = h7 = 0),
-                  a6 && ((1 & s6) == 1 && s6--, (1 & f7) == 1 && f7--);
-                const v5 = (c7 - s6 + 1) * (h7 - f7 + 1);
-                v5 < E2 &&
-                  ((E2 = v5),
-                  (y4 = e6),
-                  (g3 = s6),
-                  (p5 = f7),
-                  (m3 = c7 - s6 + 1),
-                  (w3 = h7 - f7 + 1));
-              }
-              u5 = new Uint8Array(t7[l5 - 1 - y4]);
-              y4 == 1 && (f6[l5 - 1].dispose = 2),
-                (c6 = new Uint8Array(m3 * w3 * 4)),
-                e5(u5, r7, i7, c6, m3, w3, -g3, -p5, 0),
-                (v4 = e5(h6, r7, i7, c6, m3, w3, -g3, -p5, 3) ? 1 : 0),
-                v4 == 1
-                  ? _prepareDiff(h6, r7, i7, c6, { x: g3, y: p5, width: m3, height: w3 })
-                  : e5(h6, r7, i7, c6, m3, w3, -g3, -p5, 0);
-            } else {
-              c6 = h6.slice(0);
-            }
-            f6.push({
-              rect: { x: g3, y: p5, width: m3, height: w3 },
-              img: c6,
-              blend: v4,
-              dispose: 0,
-            });
-          }
-          if (o7) {
-            for (l5 = 0; l5 < f6.length; l5++) {
-              if ((A2 = f6[l5]).blend == 1) {
-                continue;
-              }
-              const e6 = A2.rect,
-                o8 = f6[l5 - 1].rect,
-                s6 = Math.min(e6.x, o8.x),
-                c7 = Math.min(e6.y, o8.y),
-                u6 = {
-                  x: s6,
-                  y: c7,
-                  width: Math.max(e6.x + e6.width, o8.x + o8.width) - s6,
-                  height: Math.max(e6.y + e6.height, o8.y + o8.height) - c7,
-                };
-              (f6[l5 - 1].dispose = 1),
-                l5 - 1 != 0 && _updateFrame(t7, r7, i7, f6, l5 - 1, u6, a6),
-                _updateFrame(t7, r7, i7, f6, l5, u6, a6);
-            }
-          }
-          let h5 = 0;
-          if (t7.length != 1) {
-            for (var d4 = 0; d4 < f6.length; d4++) {
-              var A2;
-              h5 += (A2 = f6[d4]).rect.width * A2.rect.height;
-            }
-          }
-          return f6;
-        })(t6, r6, i6, s4, f5, l4),
-        y3 = {},
-        E = [],
-        F = [];
-      if (o6 != 0) {
-        const e6 = [];
-        for (w2 = 0; w2 < b3.length; w2++) {
-          e6.push(b3[w2].img.buffer);
-        }
-        const t7 = (function concatRGBA(e7) {
-            let t8 = 0;
-            for (var r8 = 0; r8 < e7.length; r8++) {
-              t8 += e7[r8].byteLength;
-            }
-            const i8 = new Uint8Array(t8);
-            let o7 = 0;
-            for (r8 = 0; r8 < e7.length; r8++) {
-              const t9 = new Uint8Array(e7[r8]),
-                a6 = t9.length;
-              for (let e8 = 0; e8 < a6; e8 += 4) {
-                let r9 = t9[e8],
-                  a7 = t9[e8 + 1],
-                  s5 = t9[e8 + 2];
-                const f6 = t9[e8 + 3];
-                f6 == 0 && (r9 = a7 = s5 = 0),
-                  (i8[o7 + e8] = r9),
-                  (i8[o7 + e8 + 1] = a7),
-                  (i8[o7 + e8 + 2] = s5),
-                  (i8[o7 + e8 + 3] = f6);
-              }
-              o7 += a6;
-            }
-            return i8.buffer;
-          })(e6),
-          r7 = quantize(t7, o6);
-        for (w2 = 0; w2 < r7.plte.length; w2++) {
-          E.push(r7.plte[w2].est.rgba);
-        }
-        let i7 = 0;
-        for (w2 = 0; w2 < b3.length; w2++) {
-          const e7 = (B = b3[w2]).img.length;
-          var _ = new Uint8Array(r7.inds.buffer, i7 >> 2, e7 >> 2);
-          F.push(_);
-          const t8 = new Uint8Array(r7.abuf, i7, e7);
-          h4 && dither(B.img, B.rect.width, B.rect.height, E, t8, _), B.img.set(t8), (i7 += e7);
-        }
-      } else {
-        for (p4 = 0; p4 < b3.length; p4++) {
-          var B = b3[p4];
-          const e6 = new Uint32Array(B.img.buffer);
-          var U = B.rect.width;
-          (m2 = e6.length), (_ = new Uint8Array(m2));
-          F.push(_);
-          for (w2 = 0; w2 < m2; w2++) {
-            const t7 = e6[w2];
-            if (w2 != 0 && t7 == e6[w2 - 1]) {
-              _[w2] = _[w2 - 1];
-            } else if (w2 > U && t7 == e6[w2 - U]) {
-              _[w2] = _[w2 - U];
-            } else {
-              let e7 = y3[t7];
-              if (e7 == null && ((y3[t7] = e7 = E.length), E.push(t7), E.length >= 300)) {
-                break;
-              }
-              _[w2] = e7;
-            }
-          }
-        }
-      }
-      const C = E.length;
-      C <= 256 &&
-        u4 == 0 &&
-        ((A = C <= 2 ? 1 : C <= 4 ? 2 : C <= 16 ? 4 : 8), (A = Math.max(A, c5)));
-      for (p4 = 0; p4 < b3.length; p4++) {
-        (B = b3[p4]).rect.x, B.rect.y;
-        U = B.rect.width;
-        const e6 = B.rect.height;
-        let t7 = B.img;
-        new Uint32Array(t7.buffer);
-        let r7 = 4 * U,
-          i7 = 4;
-        if (C <= 256 && u4 == 0) {
-          r7 = Math.ceil((A * U) / 8);
-          var I = new Uint8Array(r7 * e6);
-          const o7 = F[p4];
-          for (let t8 = 0; t8 < e6; t8++) {
-            w2 = t8 * r7;
-            const e7 = t8 * U;
-            if (A == 8) {
-              for (var Q = 0; Q < U; Q++) {
-                I[w2 + Q] = o7[e7 + Q];
-              }
-            } else if (A == 4) {
-              for (Q = 0; Q < U; Q++) {
-                I[w2 + (Q >> 1)] |= o7[e7 + Q] << (4 - 4 * (1 & Q));
-              }
-            } else if (A == 2) {
-              for (Q = 0; Q < U; Q++) {
-                I[w2 + (Q >> 2)] |= o7[e7 + Q] << (6 - 2 * (3 & Q));
-              }
-            } else if (A == 1) {
-              for (Q = 0; Q < U; Q++) {
-                I[w2 + (Q >> 3)] |= o7[e7 + Q] << (7 - 1 * (7 & Q));
-              }
-            }
-          }
-          (t7 = I), (d3 = 3), (i7 = 1);
-        } else if (v3 == 0 && b3.length == 1) {
-          I = new Uint8Array(U * e6 * 3);
-          const o7 = U * e6;
-          for (w2 = 0; w2 < o7; w2++) {
-            const e7 = 3 * w2,
-              r8 = 4 * w2;
-            (I[e7] = t7[r8]), (I[e7 + 1] = t7[r8 + 1]), (I[e7 + 2] = t7[r8 + 2]);
-          }
-          (t7 = I), (d3 = 2), (i7 = 3), (r7 = 3 * U);
-        }
-        (B.img = t7), (B.bpl = r7), (B.bpp = i7);
-      }
-      return { ctype: d3, depth: A, plte: E, frames: b3 };
-    }
-    function _updateFrame(t6, r6, i6, o6, a5, s4, f5) {
-      const l4 = Uint8Array,
-        c5 = Uint32Array,
-        u4 = new l4(t6[a5 - 1]),
-        h4 = new c5(t6[a5 - 1]),
-        d3 = a5 + 1 < t6.length ? new l4(t6[a5 + 1]) : null,
-        A = new l4(t6[a5]),
-        g2 = new c5(A.buffer);
-      let p4 = r6,
-        m2 = i6,
-        w2 = -1,
-        v3 = -1;
-      for (let e6 = 0; e6 < s4.height; e6++) {
-        for (let t7 = 0; t7 < s4.width; t7++) {
-          const i7 = s4.x + t7,
-            f6 = s4.y + e6,
-            l5 = f6 * r6 + i7,
-            c6 = g2[l5];
-          c6 == 0 ||
-            (o6[a5 - 1].dispose == 0 && h4[l5] == c6 && (d3 == null || d3[4 * l5 + 3] != 0)) ||
-            (i7 < p4 && (p4 = i7),
-            i7 > w2 && (w2 = i7),
-            f6 < m2 && (m2 = f6),
-            f6 > v3 && (v3 = f6));
-        }
-      }
-      w2 == -1 && (p4 = m2 = w2 = v3 = 0),
-        f5 && ((1 & p4) == 1 && p4--, (1 & m2) == 1 && m2--),
-        (s4 = { x: p4, y: m2, width: w2 - p4 + 1, height: v3 - m2 + 1 });
-      const b3 = o6[a5];
-      (b3.rect = s4),
-        (b3.blend = 1),
-        (b3.img = new Uint8Array(s4.width * s4.height * 4)),
-        o6[a5 - 1].dispose == 0
-          ? (e5(u4, r6, i6, b3.img, s4.width, s4.height, -s4.x, -s4.y, 0),
-            _prepareDiff(A, r6, i6, b3.img, s4))
-          : e5(A, r6, i6, b3.img, s4.width, s4.height, -s4.x, -s4.y, 0);
-    }
-    function _prepareDiff(t6, r6, i6, o6, a5) {
-      e5(t6, r6, i6, o6, a5.width, a5.height, -a5.x, -a5.y, 2);
-    }
-    function _filterZero(e6, t6, r6, i6, o6, a5, s4) {
-      const f5 = [];
-      let l4,
-        c5 = [0, 1, 2, 3, 4];
-      a5 != -1 ? (c5 = [a5]) : (t6 * i6 > 5e5 || r6 == 1) && (c5 = [0]), s4 && (l4 = { level: 0 });
-      const u4 = UZIP;
-      for (var h4 = 0; h4 < c5.length; h4++) {
-        for (let a6 = 0; a6 < t6; a6++) {
-          _filterLine(o6, e6, a6, i6, r6, c5[h4]);
-        }
-        f5.push(u4.deflate(o6, l4));
-      }
-      let d3,
-        A = 1e9;
-      for (h4 = 0; h4 < f5.length; h4++) {
-        f5[h4].length < A && ((d3 = h4), (A = f5[h4].length));
-      }
-      return f5[d3];
-    }
-    function _filterLine(e6, t6, i6, o6, a5, s4) {
-      const f5 = i6 * o6;
-      let l4 = f5 + i6;
-      if (((e6[l4] = s4), l4++, s4 == 0)) {
-        if (o6 < 500) {
-          for (var c5 = 0; c5 < o6; c5++) {
-            e6[l4 + c5] = t6[f5 + c5];
-          }
-        } else {
-          e6.set(new Uint8Array(t6.buffer, f5, o6), l4);
-        }
-      } else if (s4 == 1) {
-        for (c5 = 0; c5 < a5; c5++) {
-          e6[l4 + c5] = t6[f5 + c5];
-        }
-        for (c5 = a5; c5 < o6; c5++) {
-          e6[l4 + c5] = (t6[f5 + c5] - t6[f5 + c5 - a5] + 256) & 255;
-        }
-      } else if (i6 == 0) {
-        for (c5 = 0; c5 < a5; c5++) {
-          e6[l4 + c5] = t6[f5 + c5];
-        }
-        if (s4 == 2) {
-          for (c5 = a5; c5 < o6; c5++) {
-            e6[l4 + c5] = t6[f5 + c5];
-          }
-        }
-        if (s4 == 3) {
-          for (c5 = a5; c5 < o6; c5++) {
-            e6[l4 + c5] = (t6[f5 + c5] - (t6[f5 + c5 - a5] >> 1) + 256) & 255;
-          }
-        }
-        if (s4 == 4) {
-          for (c5 = a5; c5 < o6; c5++) {
-            e6[l4 + c5] = (t6[f5 + c5] - r5(t6[f5 + c5 - a5], 0, 0) + 256) & 255;
-          }
-        }
-      } else {
-        if (s4 == 2) {
-          for (c5 = 0; c5 < o6; c5++) {
-            e6[l4 + c5] = (t6[f5 + c5] + 256 - t6[f5 + c5 - o6]) & 255;
-          }
-        }
-        if (s4 == 3) {
-          for (c5 = 0; c5 < a5; c5++) {
-            e6[l4 + c5] = (t6[f5 + c5] + 256 - (t6[f5 + c5 - o6] >> 1)) & 255;
-          }
-          for (c5 = a5; c5 < o6; c5++) {
-            e6[l4 + c5] = (t6[f5 + c5] + 256 - ((t6[f5 + c5 - o6] + t6[f5 + c5 - a5]) >> 1)) & 255;
-          }
-        }
-        if (s4 == 4) {
-          for (c5 = 0; c5 < a5; c5++) {
-            e6[l4 + c5] = (t6[f5 + c5] + 256 - r5(0, t6[f5 + c5 - o6], 0)) & 255;
-          }
-          for (c5 = a5; c5 < o6; c5++) {
-            e6[l4 + c5] =
-              (t6[f5 + c5] + 256 - r5(t6[f5 + c5 - a5], t6[f5 + c5 - o6], t6[f5 + c5 - a5 - o6])) &
-              255;
-          }
-        }
-      }
-    }
-    function quantize(e6, t6) {
-      const r6 = new Uint8Array(e6),
-        i6 = r6.slice(0),
-        o6 = new Uint32Array(i6.buffer),
-        a5 = getKDtree(i6, t6),
-        s4 = a5[0],
-        f5 = a5[1],
-        l4 = r6.length,
-        c5 = new Uint8Array(l4 >> 2);
-      let u4;
-      if (r6.length < 2e7) {
-        for (var h4 = 0; h4 < l4; h4 += 4) {
-          (u4 = getNearest(
-            s4,
-            (d3 = r6[h4] * (1 / 255)),
-            (A = r6[h4 + 1] * (1 / 255)),
-            (g2 = r6[h4 + 2] * (1 / 255)),
-            (p4 = r6[h4 + 3] * (1 / 255)),
-          )),
-            (c5[h4 >> 2] = u4.ind),
-            (o6[h4 >> 2] = u4.est.rgba);
-        }
-      } else {
-        for (h4 = 0; h4 < l4; h4 += 4) {
-          var d3 = r6[h4] * (1 / 255),
-            A = r6[h4 + 1] * (1 / 255),
-            g2 = r6[h4 + 2] * (1 / 255),
-            p4 = r6[h4 + 3] * (1 / 255);
-          for (u4 = s4; u4.left; ) {
-            u4 = planeDst(u4.est, d3, A, g2, p4) <= 0 ? u4.left : u4.right;
-          }
-          (c5[h4 >> 2] = u4.ind), (o6[h4 >> 2] = u4.est.rgba);
-        }
-      }
-      return { abuf: i6.buffer, inds: c5, plte: f5 };
-    }
-    function getKDtree(e6, t6, r6) {
-      r6 == null && (r6 = 1e-4);
-      const i6 = new Uint32Array(e6.buffer),
-        o6 = { i0: 0, i1: e6.length, bst: null, est: null, tdst: 0, left: null, right: null };
-      (o6.bst = stats(e6, o6.i0, o6.i1)), (o6.est = estats(o6.bst));
-      const a5 = [o6];
-      while (a5.length < t6) {
-        let t7 = 0,
-          o7 = 0;
-        for (var s4 = 0; s4 < a5.length; s4++) {
-          a5[s4].est.L > t7 && ((t7 = a5[s4].est.L), (o7 = s4));
-        }
-        if (t7 < r6) {
-          break;
-        }
-        const f5 = a5[o7],
-          l4 = splitPixels(e6, i6, f5.i0, f5.i1, f5.est.e, f5.est.eMq255);
-        if (f5.i0 >= l4 || f5.i1 <= l4) {
-          f5.est.L = 0;
-          continue;
-        }
-        const c5 = { i0: f5.i0, i1: l4, bst: null, est: null, tdst: 0, left: null, right: null };
-        (c5.bst = stats(e6, c5.i0, c5.i1)), (c5.est = estats(c5.bst));
-        const u4 = { i0: l4, i1: f5.i1, bst: null, est: null, tdst: 0, left: null, right: null };
-        u4.bst = { R: [], m: [], N: f5.bst.N - c5.bst.N };
-        for (s4 = 0; s4 < 16; s4++) {
-          u4.bst.R[s4] = f5.bst.R[s4] - c5.bst.R[s4];
-        }
-        for (s4 = 0; s4 < 4; s4++) {
-          u4.bst.m[s4] = f5.bst.m[s4] - c5.bst.m[s4];
-        }
-        (u4.est = estats(u4.bst)), (f5.left = c5), (f5.right = u4), (a5[o7] = c5), a5.push(u4);
-      }
-      a5.sort((e7, t7) => t7.bst.N - e7.bst.N);
-      for (s4 = 0; s4 < a5.length; s4++) {
-        a5[s4].ind = s4;
-      }
-      return [o6, a5];
-    }
-    function getNearest(e6, t6, r6, i6, o6) {
-      if (e6.left == null) {
-        return (
-          (e6.tdst = (function dist(e7, t7, r7, i7, o7) {
-            const a6 = t7 - e7[0],
-              s5 = r7 - e7[1],
-              f6 = i7 - e7[2],
-              l5 = o7 - e7[3];
-            return a6 * a6 + s5 * s5 + f6 * f6 + l5 * l5;
-          })(e6.est.q, t6, r6, i6, o6)),
-          e6
-        );
-      }
-      const a5 = planeDst(e6.est, t6, r6, i6, o6);
-      let s4 = e6.left,
-        f5 = e6.right;
-      a5 > 0 && ((s4 = e6.right), (f5 = e6.left));
-      const l4 = getNearest(s4, t6, r6, i6, o6);
-      if (l4.tdst <= a5 * a5) {
-        return l4;
-      }
-      const c5 = getNearest(f5, t6, r6, i6, o6);
-      return c5.tdst < l4.tdst ? c5 : l4;
-    }
-    function planeDst(e6, t6, r6, i6, o6) {
-      const { e: a5 } = e6;
-      return a5[0] * t6 + a5[1] * r6 + a5[2] * i6 + a5[3] * o6 - e6.eMq;
-    }
-    function splitPixels(e6, t6, r6, i6, o6, a5) {
-      for (i6 -= 4; r6 < i6; ) {
-        while (vecDot(e6, r6, o6) <= a5) {
-          r6 += 4;
-        }
-        while (vecDot(e6, i6, o6) > a5) {
-          i6 -= 4;
-        }
-        if (r6 >= i6) {
-          break;
-        }
-        const s4 = t6[r6 >> 2];
-        (t6[r6 >> 2] = t6[i6 >> 2]), (t6[i6 >> 2] = s4), (r6 += 4), (i6 -= 4);
-      }
-      while (vecDot(e6, r6, o6) > a5) {
-        r6 -= 4;
-      }
-      return r6 + 4;
-    }
-    function vecDot(e6, t6, r6) {
-      return e6[t6] * r6[0] + e6[t6 + 1] * r6[1] + e6[t6 + 2] * r6[2] + e6[t6 + 3] * r6[3];
-    }
-    function stats(e6, t6, r6) {
-      const i6 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        o6 = [0, 0, 0, 0],
-        a5 = (r6 - t6) >> 2;
-      for (let a6 = t6; a6 < r6; a6 += 4) {
-        const t7 = e6[a6] * (1 / 255),
-          r7 = e6[a6 + 1] * (1 / 255),
-          s4 = e6[a6 + 2] * (1 / 255),
-          f5 = e6[a6 + 3] * (1 / 255);
-        (o6[0] += t7),
-          (o6[1] += r7),
-          (o6[2] += s4),
-          (o6[3] += f5),
-          (i6[0] += t7 * t7),
-          (i6[1] += t7 * r7),
-          (i6[2] += t7 * s4),
-          (i6[3] += t7 * f5),
-          (i6[5] += r7 * r7),
-          (i6[6] += r7 * s4),
-          (i6[7] += r7 * f5),
-          (i6[10] += s4 * s4),
-          (i6[11] += s4 * f5),
-          (i6[15] += f5 * f5);
-      }
-      return (
-        (i6[4] = i6[1]),
-        (i6[8] = i6[2]),
-        (i6[9] = i6[6]),
-        (i6[12] = i6[3]),
-        (i6[13] = i6[7]),
-        (i6[14] = i6[11]),
-        { R: i6, m: o6, N: a5 }
-      );
-    }
-    function estats(e6) {
-      const { R: t6 } = e6,
-        { m: r6 } = e6,
-        { N: i6 } = e6,
-        a5 = r6[0],
-        s4 = r6[1],
-        f5 = r6[2],
-        l4 = r6[3],
-        c5 = i6 == 0 ? 0 : 1 / i6,
-        u4 = [
-          t6[0] - a5 * a5 * c5,
-          t6[1] - a5 * s4 * c5,
-          t6[2] - a5 * f5 * c5,
-          t6[3] - a5 * l4 * c5,
-          t6[4] - s4 * a5 * c5,
-          t6[5] - s4 * s4 * c5,
-          t6[6] - s4 * f5 * c5,
-          t6[7] - s4 * l4 * c5,
-          t6[8] - f5 * a5 * c5,
-          t6[9] - f5 * s4 * c5,
-          t6[10] - f5 * f5 * c5,
-          t6[11] - f5 * l4 * c5,
-          t6[12] - l4 * a5 * c5,
-          t6[13] - l4 * s4 * c5,
-          t6[14] - l4 * f5 * c5,
-          t6[15] - l4 * l4 * c5,
-        ],
-        h4 = u4,
-        d3 = o5;
-      let A = [Math.random(), Math.random(), Math.random(), Math.random()],
-        g2 = 0,
-        p4 = 0;
-      if (i6 != 0) {
-        for (
-          let e7 = 0;
-          e7 < 16 &&
-          ((A = d3.multVec(h4, A)),
-          (p4 = Math.sqrt(d3.dot(A, A))),
-          (A = d3.sml(1 / p4, A)),
-          !(e7 != 0 && Math.abs(p4 - g2) < 1e-9));
-          e7++
-        ) {
-          g2 = p4;
-        }
-      }
-      const m2 = [a5 * c5, s4 * c5, f5 * c5, l4 * c5];
-      return {
-        Cov: u4,
-        q: m2,
-        e: A,
-        L: g2,
-        eMq255: d3.dot(d3.sml(255, m2), A),
-        eMq: d3.dot(A, m2),
-        rgba:
-          ((Math.round(255 * m2[3]) << 24) |
-            (Math.round(255 * m2[2]) << 16) |
-            (Math.round(255 * m2[1]) << 8) |
-            (Math.round(255 * m2[0]) << 0)) >>>
-          0,
-      };
-    }
-    var o5 = {
-      multVec: (e6, t6) => [
-        e6[0] * t6[0] + e6[1] * t6[1] + e6[2] * t6[2] + e6[3] * t6[3],
-        e6[4] * t6[0] + e6[5] * t6[1] + e6[6] * t6[2] + e6[7] * t6[3],
-        e6[8] * t6[0] + e6[9] * t6[1] + e6[10] * t6[2] + e6[11] * t6[3],
-        e6[12] * t6[0] + e6[13] * t6[1] + e6[14] * t6[2] + e6[15] * t6[3],
-      ],
-      dot: (e6, t6) => e6[0] * t6[0] + e6[1] * t6[1] + e6[2] * t6[2] + e6[3] * t6[3],
-      sml: (e6, t6) => [e6 * t6[0], e6 * t6[1], e6 * t6[2], e6 * t6[3]],
-    };
-    (UPNG.encode = function encode(e6, t6, r6, i6, o6, a5, s4) {
-      i6 == null && (i6 = 0), s4 == null && (s4 = false);
-      const f5 = compress2(e6, t6, r6, i6, [false, false, false, 0, s4, false]);
-      return compressPNG(f5, -1), _main(f5, t6, r6, o6, a5);
-    }),
-      (UPNG.encodeLL = function encodeLL(e6, t6, r6, i6, o6, a5, s4, f5) {
-        const l4 = { ctype: 0 + (i6 == 1 ? 0 : 2) + (o6 == 0 ? 0 : 4), depth: a5, frames: [] },
-          c5 = (i6 + o6) * a5,
-          u4 = c5 * t6;
-        for (let i7 = 0; i7 < e6.length; i7++) {
-          l4.frames.push({
-            rect: { x: 0, y: 0, width: t6, height: r6 },
-            img: new Uint8Array(e6[i7]),
-            blend: 0,
-            dispose: 1,
-            bpp: Math.ceil(c5 / 8),
-            bpl: Math.ceil(u4 / 8),
-          });
-        }
-        return compressPNG(l4, 0, true), _main(l4, t6, r6, s4, f5);
-      }),
-      (UPNG.encode.compress = compress2),
-      (UPNG.encode.dither = dither),
-      (UPNG.quantize = quantize),
-      (UPNG.quantize.getKDtree = getKDtree),
-      (UPNG.quantize.getNearest = getNearest);
-  })();
-  var r = {
-    toArrayBuffer(e5, t5) {
-      const i5 = e5.width,
-        o5 = e5.height,
-        a5 = i5 << 2,
-        s4 = e5.getContext("2d").getImageData(0, 0, i5, o5),
-        f5 = new Uint32Array(s4.data.buffer),
-        l4 = ((32 * i5 + 31) / 32) << 2,
-        c5 = l4 * o5,
-        u4 = 122 + c5,
-        h4 = new ArrayBuffer(u4),
-        d3 = new DataView(h4),
-        A = 1 << 20;
-      let g2,
-        p4,
-        m2,
-        w2,
-        v3 = A,
-        b3 = 0,
-        y3 = 0,
-        E = 0;
-      function set16(e6) {
-        d3.setUint16(y3, e6, true), (y3 += 2);
-      }
-      function set32(e6) {
-        d3.setUint32(y3, e6, true), (y3 += 4);
-      }
-      function seek(e6) {
-        y3 += e6;
-      }
-      set16(19_778),
-        set32(u4),
-        seek(4),
-        set32(122),
-        set32(108),
-        set32(i5),
-        set32(-o5 >>> 0),
-        set16(1),
-        set16(32),
-        set32(3),
-        set32(c5),
-        set32(2835),
-        set32(2835),
-        seek(8),
-        set32(16_711_680),
-        set32(65_280),
-        set32(255),
-        set32(4_278_190_080),
-        set32(1_466_527_264),
-        (function convert() {
-          while (b3 < o5 && v3 > 0) {
-            for (w2 = 122 + b3 * l4, g2 = 0; g2 < a5; ) {
-              v3--,
-                (p4 = f5[E++]),
-                (m2 = p4 >>> 24),
-                d3.setUint32(w2 + g2, (p4 << 8) | m2),
-                (g2 += 4);
-            }
-            b3++;
-          }
-          E < f5.length ? ((v3 = A), setTimeout(convert, r._dly)) : t5(h4);
-        })();
-    },
-    toBlob(e5, t5) {
-      this.toArrayBuffer(e5, (e6) => {
-        t5(new Blob([e6], { type: "image/bmp" }));
-      });
-    },
-    _dly: 9,
-  };
-  var i = {
-    CHROME: "CHROME",
-    FIREFOX: "FIREFOX",
-    DESKTOP_SAFARI: "DESKTOP_SAFARI",
-    IE: "IE",
-    IOS: "IOS",
-    ETC: "ETC",
-  };
-  var o = {
-    [i.CHROME]: 16_384,
-    [i.FIREFOX]: 11_180,
-    [i.DESKTOP_SAFARI]: 16_384,
-    [i.IE]: 8192,
-    [i.IOS]: 4096,
-    [i.ETC]: 8192,
-  };
-  var a = typeof window != "undefined";
-  var s = typeof WorkerGlobalScope != "undefined" && self instanceof WorkerGlobalScope;
-  var f =
-    a && window.cordova && window.cordova.require && window.cordova.require("cordova/modulemapper");
-  var CustomFile =
-    (a || s) &&
-    ((f && f.getOriginalSymbol(window, "File")) || (typeof File != "undefined" && File));
-  var CustomFileReader =
-    (a || s) &&
-    ((f && f.getOriginalSymbol(window, "FileReader")) ||
-      (typeof FileReader != "undefined" && FileReader));
   function getFilefromDataUrl(e5, t5, r5 = Date.now()) {
-    return new Promise((i5) => {
-      const o5 = e5.split(","),
-        a5 = o5[0].match(/:(.*?);/)[1],
-        s4 = globalThis.atob(o5[1]);
+    return new Promise(((i5) => {
+      const o5 = e5.split(","), a5 = o5[0].match(/:(.*?);/)[1], s4 = globalThis.atob(o5[1]);
       let f5 = s4.length;
       const l4 = new Uint8Array(f5);
-      while (f5--) {
-        l4[f5] = s4.charCodeAt(f5);
-      }
+      for (; f5--; ) l4[f5] = s4.charCodeAt(f5);
       const c5 = new Blob([l4], { type: a5 });
-      (c5.name = t5), (c5.lastModified = r5), i5(c5);
-    });
+      c5.name = t5, c5.lastModified = r5, i5(c5);
+    }));
   }
   function getDataUrlFromFile(e5) {
-    return new Promise((t5, r5) => {
+    return new Promise(((t5, r5) => {
       const i5 = new CustomFileReader();
-      (i5.onload = () => t5(i5.result)), (i5.onerror = (e6) => r5(e6)), i5.readAsDataURL(e5);
-    });
+      i5.onload = () => t5(i5.result), i5.onerror = (e6) => r5(e6), i5.readAsDataURL(e5);
+    }));
   }
   function loadImage(e5) {
-    return new Promise((t5, r5) => {
+    return new Promise(((t5, r5) => {
       const i5 = new Image();
-      (i5.onload = () => t5(i5)), (i5.onerror = (e6) => r5(e6)), (i5.src = e5);
-    });
+      i5.onload = () => t5(i5), i5.onerror = (e6) => r5(e6), i5.src = e5;
+    }));
   }
   function getBrowserName() {
-    if (void 0 !== getBrowserName.cachedResult) {
-      return getBrowserName.cachedResult;
-    }
+    if (void 0 !== getBrowserName.cachedResult) return getBrowserName.cachedResult;
     let e5 = i.ETC;
     const { userAgent: t5 } = navigator;
-    return (
-      /Chrom(e|ium)/i.test(t5)
-        ? (e5 = i.CHROME)
-        : /iP(ad|od|hone)/i.test(t5) && /WebKit/i.test(t5)
-          ? (e5 = i.IOS)
-          : /Safari/i.test(t5)
-            ? (e5 = i.DESKTOP_SAFARI)
-            : /Firefox/i.test(t5)
-              ? (e5 = i.FIREFOX)
-              : (/MSIE/i.test(t5) || !!document.documentMode == true) && (e5 = i.IE),
-      (getBrowserName.cachedResult = e5),
-      getBrowserName.cachedResult
-    );
+    return /Chrom(e|ium)/i.test(t5) ? e5 = i.CHROME : /iP(ad|od|hone)/i.test(t5) && /WebKit/i.test(t5) ? e5 = i.IOS : /Safari/i.test(t5) ? e5 = i.DESKTOP_SAFARI : /Firefox/i.test(t5) ? e5 = i.FIREFOX : (/MSIE/i.test(t5) || true == !!document.documentMode) && (e5 = i.IE), getBrowserName.cachedResult = e5, getBrowserName.cachedResult;
   }
   function approximateBelowMaximumCanvasSizeOfBrowser(e5, t5) {
-    const r5 = getBrowserName(),
-      i5 = o[r5];
-    let a5 = e5,
-      s4 = t5,
-      f5 = a5 * s4;
+    const r5 = getBrowserName(), i5 = o[r5];
+    let a5 = e5, s4 = t5, f5 = a5 * s4;
     const l4 = a5 > s4 ? s4 / a5 : a5 / s4;
-    while (f5 > i5 * i5) {
-      const e6 = (i5 + a5) / 2,
-        t6 = (i5 + s4) / 2;
-      e6 < t6 ? ((s4 = t6), (a5 = t6 * l4)) : ((s4 = e6 * l4), (a5 = e6)), (f5 = a5 * s4);
+    for (; f5 > i5 * i5; ) {
+      const e6 = (i5 + a5) / 2, t6 = (i5 + s4) / 2;
+      e6 < t6 ? (s4 = t6, a5 = t6 * l4) : (s4 = e6 * l4, a5 = e6), f5 = a5 * s4;
     }
     return { width: a5, height: s4 };
   }
   function getNewCanvasAndCtx(e5, t5) {
     let r5, i5;
     try {
-      if (((r5 = new OffscreenCanvas(e5, t5)), (i5 = r5.getContext("2d")), i5 === null)) {
-        throw new Error("getContext of OffscreenCanvas returns null");
-      }
+      if (r5 = new OffscreenCanvas(e5, t5), i5 = r5.getContext("2d"), null === i5) throw new Error("getContext of OffscreenCanvas returns null");
     } catch (e6) {
-      (r5 = document.createElement("canvas")), (i5 = r5.getContext("2d"));
+      r5 = document.createElement("canvas"), i5 = r5.getContext("2d");
     }
-    return (r5.width = e5), (r5.height = t5), [r5, i5];
+    return r5.width = e5, r5.height = t5, [r5, i5];
   }
   function drawImageInCanvas(e5, t5) {
-    const { width: r5, height: i5 } = approximateBelowMaximumCanvasSizeOfBrowser(
-        e5.width,
-        e5.height,
-      ),
-      [o5, a5] = getNewCanvasAndCtx(r5, i5);
-    return (
-      t5 && /jpe?g/.test(t5) && ((a5.fillStyle = "white"), a5.fillRect(0, 0, o5.width, o5.height)),
-      a5.drawImage(e5, 0, 0, o5.width, o5.height),
-      o5
-    );
+    const { width: r5, height: i5 } = approximateBelowMaximumCanvasSizeOfBrowser(e5.width, e5.height), [o5, a5] = getNewCanvasAndCtx(r5, i5);
+    return t5 && /jpe?g/.test(t5) && (a5.fillStyle = "white", a5.fillRect(0, 0, o5.width, o5.height)), a5.drawImage(e5, 0, 0, o5.width, o5.height), o5;
   }
   function isIOS() {
-    return (
-      void 0 !== isIOS.cachedResult ||
-        (isIOS.cachedResult =
-          [
-            "iPad Simulator",
-            "iPhone Simulator",
-            "iPod Simulator",
-            "iPad",
-            "iPhone",
-            "iPod",
-          ].includes(navigator.platform) ||
-          (navigator.userAgent.includes("Mac") &&
-            typeof document != "undefined" &&
-            "ontouchend" in document)),
-      isIOS.cachedResult
-    );
+    return void 0 !== isIOS.cachedResult || (isIOS.cachedResult = ["iPad Simulator", "iPhone Simulator", "iPod Simulator", "iPad", "iPhone", "iPod"].includes(navigator.platform) || navigator.userAgent.includes("Mac") && "undefined" != typeof document && "ontouchend" in document), isIOS.cachedResult;
   }
   function drawFileInCanvas(e5, t5 = {}) {
-    return new Promise((r5, o5) => {
+    return new Promise((function(r5, o5) {
       let a5, s4;
-      var $Try_2_Post = () => {
-          try {
-            return (s4 = drawImageInCanvas(a5, t5.fileType || e5.type)), r5([a5, s4]);
-          } catch (e6) {
-            return o5(e6);
-          }
-        },
-        $Try_2_Catch = (t6) => {
-          try {
-            0;
-            var $Try_3_Catch = (e6) => {
-              try {
-                throw e6;
-              } catch (e7) {
-                return o5(e7);
-              }
-            };
-            try {
-              let t7;
-              return getDataUrlFromFile(e5).then((e6) => {
-                try {
-                  return (
-                    (t7 = e6),
-                    loadImage(t7).then((e7) => {
-                      try {
-                        return (
-                          (a5 = e7),
-                          (() => {
-                            try {
-                              return $Try_2_Post();
-                            } catch (e8) {
-                              return o5(e8);
-                            }
-                          })()
-                        );
-                      } catch (e8) {
-                        return $Try_3_Catch(e8);
-                      }
-                    }, $Try_3_Catch)
-                  );
-                } catch (e7) {
-                  return $Try_3_Catch(e7);
-                }
-              }, $Try_3_Catch);
-            } catch (e6) {
-              $Try_3_Catch(e6);
-            }
-          } catch (e6) {
-            return o5(e6);
-          }
-        };
-      try {
-        if (isIOS() || [i.DESKTOP_SAFARI, i.MOBILE_SAFARI].includes(getBrowserName())) {
-          throw new Error("Skip createImageBitmap on IOS and Safari");
+      var $Try_2_Post = function() {
+        try {
+          return s4 = drawImageInCanvas(a5, t5.fileType || e5.type), r5([a5, s4]);
+        } catch (e6) {
+          return o5(e6);
         }
-        return createImageBitmap(e5).then((e6) => {
+      }, $Try_2_Catch = function(t6) {
+        try {
+          0;
+          var $Try_3_Catch = function(e6) {
+            try {
+              throw e6;
+            } catch (e7) {
+              return o5(e7);
+            }
+          };
           try {
-            return (a5 = e6), $Try_2_Post();
+            let t7;
+            return getDataUrlFromFile(e5).then((function(e6) {
+              try {
+                return t7 = e6, loadImage(t7).then((function(e7) {
+                  try {
+                    return a5 = e7, (function() {
+                      try {
+                        return $Try_2_Post();
+                      } catch (e8) {
+                        return o5(e8);
+                      }
+                    })();
+                  } catch (e8) {
+                    return $Try_3_Catch(e8);
+                  }
+                }), $Try_3_Catch);
+              } catch (e7) {
+                return $Try_3_Catch(e7);
+              }
+            }), $Try_3_Catch);
+          } catch (e6) {
+            $Try_3_Catch(e6);
+          }
+        } catch (e6) {
+          return o5(e6);
+        }
+      };
+      try {
+        if (isIOS() || [i.DESKTOP_SAFARI, i.MOBILE_SAFARI].includes(getBrowserName())) throw new Error("Skip createImageBitmap on IOS and Safari");
+        return createImageBitmap(e5).then((function(e6) {
+          try {
+            return a5 = e6, $Try_2_Post();
           } catch (e7) {
             return $Try_2_Catch();
           }
-        }, $Try_2_Catch);
+        }), $Try_2_Catch);
       } catch (e6) {
         $Try_2_Catch();
       }
-    });
+    }));
   }
   function canvasToFile(e5, t5, i5, o5, a5 = 1) {
-    return new Promise(function (s4, f5) {
+    return new Promise((function(s4, f5) {
       let l4;
-      if (t5 === "image/png") {
+      if ("image/png" === t5) {
         let c5, u4, h4;
-        return (
-          (c5 = e5.getContext("2d")),
-          ({ data: u4 } = c5.getImageData(0, 0, e5.width, e5.height)),
-          (h4 = UPNG.encode([u4.buffer], e5.width, e5.height, 4096 * a5)),
-          (l4 = new Blob([h4], { type: t5 })),
-          (l4.name = i5),
-          (l4.lastModified = o5),
-          $If_4.call(this)
-        );
+        return c5 = e5.getContext("2d"), { data: u4 } = c5.getImageData(0, 0, e5.width, e5.height), h4 = UPNG.encode([u4.buffer], e5.width, e5.height, 4096 * a5), l4 = new Blob([h4], { type: t5 }), l4.name = i5, l4.lastModified = o5, $If_4.call(this);
       }
       {
-        const $If_5 = function () {
+        let $If_5 = function() {
           return $If_4.call(this);
         };
-        if (t5 === "image/bmp") {
-          return new Promise((t6) => r.toBlob(e5, t6)).then(
-            function (e6) {
+        if ("image/bmp" === t5) return new Promise(((t6) => r.toBlob(e5, t6))).then(function(e6) {
+          try {
+            return l4 = e6, l4.name = i5, l4.lastModified = o5, $If_5.call(this);
+          } catch (e7) {
+            return f5(e7);
+          }
+        }.bind(this), f5);
+        {
+          let $If_6 = function() {
+            return $If_5.call(this);
+          };
+          if ("function" == typeof OffscreenCanvas && e5 instanceof OffscreenCanvas) return e5.convertToBlob({ type: t5, quality: a5 }).then(function(e6) {
+            try {
+              return l4 = e6, l4.name = i5, l4.lastModified = o5, $If_6.call(this);
+            } catch (e7) {
+              return f5(e7);
+            }
+          }.bind(this), f5);
+          {
+            let d3;
+            return d3 = e5.toDataURL(t5, a5), getFilefromDataUrl(d3, i5, o5).then(function(e6) {
               try {
-                return (l4 = e6), (l4.name = i5), (l4.lastModified = o5), $If_5.call(this);
+                return l4 = e6, $If_6.call(this);
               } catch (e7) {
                 return f5(e7);
               }
-            }.bind(this),
-            f5,
-          );
-        }
-        {
-          const $If_6 = function () {
-            return $If_5.call(this);
-          };
-          if (typeof OffscreenCanvas == "function" && e5 instanceof OffscreenCanvas) {
-            return e5.convertToBlob({ type: t5, quality: a5 }).then(
-              function (e6) {
-                try {
-                  return (l4 = e6), (l4.name = i5), (l4.lastModified = o5), $If_6.call(this);
-                } catch (e7) {
-                  return f5(e7);
-                }
-              }.bind(this),
-              f5,
-            );
-          }
-          {
-            let d3;
-            return (
-              (d3 = e5.toDataURL(t5, a5)),
-              getFilefromDataUrl(d3, i5, o5).then(
-                function (e6) {
-                  try {
-                    return (l4 = e6), $If_6.call(this);
-                  } catch (e7) {
-                    return f5(e7);
-                  }
-                }.bind(this),
-                f5,
-              )
-            );
+            }.bind(this), f5);
           }
         }
       }
       function $If_4() {
         return s4(l4);
       }
-    });
+    }));
   }
   function cleanupCanvasMemory(e5) {
-    (e5.width = 0), (e5.height = 0);
+    e5.width = 0, e5.height = 0;
   }
   function isAutoOrientationInBrowser() {
-    return new Promise((e5, t5) => {
+    return new Promise((function(e5, t5) {
       let r5, i5, o5, a5, s4;
-      return void 0 !== isAutoOrientationInBrowser.cachedResult
-        ? e5(isAutoOrientationInBrowser.cachedResult)
-        : ((r5 =
-            "data:image/jpeg;base64,/9j/4QAiRXhpZgAATU0AKgAAAAgAAQESAAMAAAABAAYAAAAAAAD/2wCEAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAf/AABEIAAEAAgMBEQACEQEDEQH/xABKAAEAAAAAAAAAAAAAAAAAAAALEAEAAAAAAAAAAAAAAAAAAAAAAQEAAAAAAAAAAAAAAAAAAAAAEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwA/8H//2Q=="),
-          getFilefromDataUrl(
-            "data:image/jpeg;base64,/9j/4QAiRXhpZgAATU0AKgAAAAgAAQESAAMAAAABAAYAAAAAAAD/2wCEAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAf/AABEIAAEAAgMBEQACEQEDEQH/xABKAAEAAAAAAAAAAAAAAAAAAAALEAEAAAAAAAAAAAAAAAAAAAAAAQEAAAAAAAAAAAAAAAAAAAAAEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwA/8H//2Q==",
-            "test.jpg",
-            Date.now(),
-          ).then((r6) => {
+      return void 0 !== isAutoOrientationInBrowser.cachedResult ? e5(isAutoOrientationInBrowser.cachedResult) : (r5 = "data:image/jpeg;base64,/9j/4QAiRXhpZgAATU0AKgAAAAgAAQESAAMAAAABAAYAAAAAAAD/2wCEAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAf/AABEIAAEAAgMBEQACEQEDEQH/xABKAAEAAAAAAAAAAAAAAAAAAAALEAEAAAAAAAAAAAAAAAAAAAAAAQEAAAAAAAAAAAAAAAAAAAAAEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwA/8H//2Q==", getFilefromDataUrl("data:image/jpeg;base64,/9j/4QAiRXhpZgAATU0AKgAAAAgAAQESAAMAAAABAAYAAAAAAAD/2wCEAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAf/AABEIAAEAAgMBEQACEQEDEQH/xABKAAEAAAAAAAAAAAAAAAAAAAALEAEAAAAAAAAAAAAAAAAAAAAAAQEAAAAAAAAAAAAAAAAAAAAAEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwA/8H//2Q==", "test.jpg", Date.now()).then((function(r6) {
+        try {
+          return i5 = r6, drawFileInCanvas(i5).then((function(r7) {
             try {
-              return (
-                (i5 = r6),
-                drawFileInCanvas(i5).then((r7) => {
-                  try {
-                    return (
-                      (o5 = r7[1]),
-                      canvasToFile(o5, i5.type, i5.name, i5.lastModified).then((r8) => {
-                        try {
-                          return (
-                            (a5 = r8),
-                            cleanupCanvasMemory(o5),
-                            drawFileInCanvas(a5).then((r9) => {
-                              try {
-                                return (
-                                  (s4 = r9[0]),
-                                  (isAutoOrientationInBrowser.cachedResult =
-                                    s4.width === 1 && s4.height === 2),
-                                  e5(isAutoOrientationInBrowser.cachedResult)
-                                );
-                              } catch (e6) {
-                                return t5(e6);
-                              }
-                            }, t5)
-                          );
-                        } catch (e6) {
-                          return t5(e6);
-                        }
-                      }, t5)
-                    );
-                  } catch (e6) {
-                    return t5(e6);
-                  }
-                }, t5)
-              );
+              return o5 = r7[1], canvasToFile(o5, i5.type, i5.name, i5.lastModified).then((function(r8) {
+                try {
+                  return a5 = r8, cleanupCanvasMemory(o5), drawFileInCanvas(a5).then((function(r9) {
+                    try {
+                      return s4 = r9[0], isAutoOrientationInBrowser.cachedResult = 1 === s4.width && 2 === s4.height, e5(isAutoOrientationInBrowser.cachedResult);
+                    } catch (e6) {
+                      return t5(e6);
+                    }
+                  }), t5);
+                } catch (e6) {
+                  return t5(e6);
+                }
+              }), t5);
             } catch (e6) {
               return t5(e6);
             }
-          }, t5));
-    });
+          }), t5);
+        } catch (e6) {
+          return t5(e6);
+        }
+      }), t5));
+    }));
   }
   function getExifOrientation(e5) {
-    return new Promise((t5, r5) => {
+    return new Promise(((t5, r5) => {
       const i5 = new CustomFileReader();
-      (i5.onload = (e6) => {
+      i5.onload = (e6) => {
         const r6 = new DataView(e6.target.result);
-        if (r6.getUint16(0, false) != 65_496) {
-          return t5(-2);
-        }
+        if (65496 != r6.getUint16(0, false)) return t5(-2);
         const i6 = r6.byteLength;
         let o5 = 2;
-        while (o5 < i6) {
-          if (r6.getUint16(o5 + 2, false) <= 8) {
-            return t5(-1);
-          }
+        for (; o5 < i6; ) {
+          if (r6.getUint16(o5 + 2, false) <= 8) return t5(-1);
           const e7 = r6.getUint16(o5, false);
-          if (((o5 += 2), e7 == 65_505)) {
-            if (r6.getUint32((o5 += 2), false) != 1_165_519_206) {
-              return t5(-1);
-            }
-            const e8 = r6.getUint16((o5 += 6), false) == 18_761;
+          if (o5 += 2, 65505 == e7) {
+            if (1165519206 != r6.getUint32(o5 += 2, false)) return t5(-1);
+            const e8 = 18761 == r6.getUint16(o5 += 6, false);
             o5 += r6.getUint32(o5 + 4, e8);
             const i7 = r6.getUint16(o5, e8);
             o5 += 2;
-            for (let a5 = 0; a5 < i7; a5++) {
-              if (r6.getUint16(o5 + 12 * a5, e8) == 274) {
-                return t5(r6.getUint16(o5 + 12 * a5 + 8, e8));
-              }
-            }
+            for (let a5 = 0; a5 < i7; a5++) if (274 == r6.getUint16(o5 + 12 * a5, e8)) return t5(r6.getUint16(o5 + 12 * a5 + 8, e8));
           } else {
-            if ((65_280 & e7) != 65_280) {
-              break;
-            }
+            if (65280 != (65280 & e7)) break;
             o5 += r6.getUint16(o5, false);
           }
         }
         return t5(-1);
-      }),
-        (i5.onerror = (e6) => r5(e6)),
-        i5.readAsArrayBuffer(e5);
-    });
+      }, i5.onerror = (e6) => r5(e6), i5.readAsArrayBuffer(e5);
+    }));
   }
   function handleMaxWidthOrHeight(e5, t5) {
-    const { width: r5 } = e5,
-      { height: i5 } = e5,
-      { maxWidthOrHeight: o5 } = t5;
-    let a5,
-      s4 = e5;
-    return (
-      isFinite(o5) &&
-        (r5 > o5 || i5 > o5) &&
-        (([s4, a5] = getNewCanvasAndCtx(r5, i5)),
-        r5 > i5
-          ? ((s4.width = o5), (s4.height = (i5 / r5) * o5))
-          : ((s4.width = (r5 / i5) * o5), (s4.height = o5)),
-        a5.drawImage(e5, 0, 0, s4.width, s4.height),
-        cleanupCanvasMemory(e5)),
-      s4
-    );
+    const { width: r5 } = e5, { height: i5 } = e5, { maxWidthOrHeight: o5 } = t5;
+    let a5, s4 = e5;
+    return isFinite(o5) && (r5 > o5 || i5 > o5) && ([s4, a5] = getNewCanvasAndCtx(r5, i5), r5 > i5 ? (s4.width = o5, s4.height = i5 / r5 * o5) : (s4.width = r5 / i5 * o5, s4.height = o5), a5.drawImage(e5, 0, 0, s4.width, s4.height), cleanupCanvasMemory(e5)), s4;
   }
   function followExifOrientation(e5, t5) {
-    const { width: r5 } = e5,
-      { height: i5 } = e5,
-      [o5, a5] = getNewCanvasAndCtx(r5, i5);
-    switch (
-      (t5 > 4 && t5 < 9 ? ((o5.width = i5), (o5.height = r5)) : ((o5.width = r5), (o5.height = i5)),
-      t5)
-    ) {
+    const { width: r5 } = e5, { height: i5 } = e5, [o5, a5] = getNewCanvasAndCtx(r5, i5);
+    switch (t5 > 4 && t5 < 9 ? (o5.width = i5, o5.height = r5) : (o5.width = r5, o5.height = i5), t5) {
       case 2:
         a5.transform(-1, 0, 0, 1, r5, 0);
         break;
@@ -3800,329 +724,1489 @@ Is it scaring you off?`,
     return a5.drawImage(e5, 0, 0, r5, i5), cleanupCanvasMemory(e5), o5;
   }
   function compress(e5, t5, r5 = 0) {
-    return new Promise(function (i5, o5) {
+    return new Promise((function(i5, o5) {
       let a5, s4, f5, l4, c5, u4, h4, d3, A, g2, p4, m2, w2, v3, b3, y3, E, F, _, B;
       function incProgress(e6 = 5) {
-        if (t5.signal && t5.signal.aborted) {
-          throw t5.signal.reason;
-        }
-        (a5 += e6), t5.onProgress(Math.min(a5, 100));
+        if (t5.signal && t5.signal.aborted) throw t5.signal.reason;
+        a5 += e6, t5.onProgress(Math.min(a5, 100));
       }
       function setProgress(e6) {
-        if (t5.signal && t5.signal.aborted) {
-          throw t5.signal.reason;
-        }
-        (a5 = Math.min(Math.max(e6, a5), 100)), t5.onProgress(a5);
+        if (t5.signal && t5.signal.aborted) throw t5.signal.reason;
+        a5 = Math.min(Math.max(e6, a5), 100), t5.onProgress(a5);
       }
-      return (
-        (a5 = r5),
-        (s4 = t5.maxIteration || 10),
-        (f5 = 1024 * t5.maxSizeMB * 1024),
-        incProgress(),
-        drawFileInCanvas(e5, t5).then(
-          function (r6) {
+      return a5 = r5, s4 = t5.maxIteration || 10, f5 = 1024 * t5.maxSizeMB * 1024, incProgress(), drawFileInCanvas(e5, t5).then(function(r6) {
+        try {
+          return [, l4] = r6, incProgress(), c5 = handleMaxWidthOrHeight(l4, t5), incProgress(), new Promise((function(r7, i6) {
+            var o6;
+            if (!(o6 = t5.exifOrientation)) return getExifOrientation(e5).then(function(e6) {
+              try {
+                return o6 = e6, $If_2.call(this);
+              } catch (e7) {
+                return i6(e7);
+              }
+            }.bind(this), i6);
+            function $If_2() {
+              return r7(o6);
+            }
+            return $If_2.call(this);
+          })).then(function(r7) {
             try {
-              return (
-                ([, l4] = r6),
-                incProgress(),
-                (c5 = handleMaxWidthOrHeight(l4, t5)),
-                incProgress(),
-                new Promise(function (r7, i6) {
-                  var o6;
-                  if (!(o6 = t5.exifOrientation)) {
-                    return getExifOrientation(e5).then(
-                      function (e6) {
-                        try {
-                          return (o6 = e6), $If_2.call(this);
-                        } catch (e7) {
-                          return i6(e7);
-                        }
-                      }.bind(this),
-                      i6,
-                    );
-                  }
-                  function $If_2() {
-                    return r7(o6);
-                  }
-                  return $If_2.call(this);
-                }).then(
-                  function (r7) {
+              return u4 = r7, incProgress(), isAutoOrientationInBrowser().then(function(r8) {
+                try {
+                  return h4 = r8 ? c5 : followExifOrientation(c5, u4), incProgress(), d3 = t5.initialQuality || 1, A = t5.fileType || e5.type, canvasToFile(h4, A, e5.name, e5.lastModified, d3).then(function(r9) {
                     try {
-                      return (
-                        (u4 = r7),
-                        incProgress(),
-                        isAutoOrientationInBrowser().then(
-                          function (r8) {
+                      {
+                        let $Loop_3 = function() {
+                          if (s4-- && (b3 > f5 || b3 > w2)) {
+                            let t6, r10;
+                            return t6 = B ? 0.95 * _.width : _.width, r10 = B ? 0.95 * _.height : _.height, [E, F] = getNewCanvasAndCtx(t6, r10), F.drawImage(_, 0, 0, t6, r10), d3 *= "image/png" === A ? 0.85 : 0.95, canvasToFile(E, A, e5.name, e5.lastModified, d3).then((function(e6) {
+                              try {
+                                return y3 = e6, cleanupCanvasMemory(_), _ = E, b3 = y3.size, setProgress(Math.min(99, Math.floor((v3 - b3) / (v3 - f5) * 100))), $Loop_3;
+                              } catch (e7) {
+                                return o5(e7);
+                              }
+                            }), o5);
+                          }
+                          return [1];
+                        }, $Loop_3_exit = function() {
+                          return cleanupCanvasMemory(_), cleanupCanvasMemory(E), cleanupCanvasMemory(c5), cleanupCanvasMemory(h4), cleanupCanvasMemory(l4), setProgress(100), i5(y3);
+                        };
+                        if (g2 = r9, incProgress(), p4 = g2.size > f5, m2 = g2.size > e5.size, !p4 && !m2) return setProgress(100), i5(g2);
+                        var a6;
+                        return w2 = e5.size, v3 = g2.size, b3 = v3, _ = h4, B = !t5.alwaysKeepResolution && p4, (a6 = function(e6) {
+                          for (; e6; ) {
+                            if (e6.then) return void e6.then(a6, o5);
                             try {
-                              return (
-                                (h4 = r8 ? c5 : followExifOrientation(c5, u4)),
-                                incProgress(),
-                                (d3 = t5.initialQuality || 1),
-                                (A = t5.fileType || e5.type),
-                                canvasToFile(h4, A, e5.name, e5.lastModified, d3).then(
-                                  function (r9) {
-                                    try {
-                                      {
-                                        const $Loop_3 = () => {
-                                            if (s4-- && (b3 > f5 || b3 > w2)) {
-                                              let t6, r10;
-                                              return (
-                                                (t6 = B ? 0.95 * _.width : _.width),
-                                                (r10 = B ? 0.95 * _.height : _.height),
-                                                ([E, F] = getNewCanvasAndCtx(t6, r10)),
-                                                F.drawImage(_, 0, 0, t6, r10),
-                                                (d3 *= A === "image/png" ? 0.85 : 0.95),
-                                                canvasToFile(
-                                                  E,
-                                                  A,
-                                                  e5.name,
-                                                  e5.lastModified,
-                                                  d3,
-                                                ).then((e6) => {
-                                                  try {
-                                                    return (
-                                                      (y3 = e6),
-                                                      cleanupCanvasMemory(_),
-                                                      (_ = E),
-                                                      (b3 = y3.size),
-                                                      setProgress(
-                                                        Math.min(
-                                                          99,
-                                                          Math.floor(((v3 - b3) / (v3 - f5)) * 100),
-                                                        ),
-                                                      ),
-                                                      $Loop_3
-                                                    );
-                                                  } catch (e7) {
-                                                    return o5(e7);
-                                                  }
-                                                }, o5)
-                                              );
-                                            }
-                                            return [1];
-                                          },
-                                          $Loop_3_exit = () => (
-                                            cleanupCanvasMemory(_),
-                                            cleanupCanvasMemory(E),
-                                            cleanupCanvasMemory(c5),
-                                            cleanupCanvasMemory(h4),
-                                            cleanupCanvasMemory(l4),
-                                            setProgress(100),
-                                            i5(y3)
-                                          );
-                                        if (
-                                          ((g2 = r9),
-                                          incProgress(),
-                                          (p4 = g2.size > f5),
-                                          (m2 = g2.size > e5.size),
-                                          !(p4 || m2))
-                                        ) {
-                                          return setProgress(100), i5(g2);
-                                        }
-                                        var a6;
-                                        return (
-                                          (w2 = e5.size),
-                                          (v3 = g2.size),
-                                          (b3 = v3),
-                                          (_ = h4),
-                                          (B = !t5.alwaysKeepResolution && p4),
-                                          (a6 = function (e6) {
-                                            while (e6) {
-                                              if (e6.then) {
-                                                return void e6.then(a6, o5);
-                                              }
-                                              try {
-                                                if (e6.pop) {
-                                                  if (e6.length) {
-                                                    return e6.pop() ? $Loop_3_exit.call(this) : e6;
-                                                  }
-                                                  e6 = $Loop_3;
-                                                } else {
-                                                  e6 = e6.call(this);
-                                                }
-                                              } catch (e7) {
-                                                return o5(e7);
-                                              }
-                                            }
-                                          }.bind(this))($Loop_3)
-                                        );
-                                      }
-                                    } catch (u5) {
-                                      return o5(u5);
-                                    }
-                                  }.bind(this),
-                                  o5,
-                                )
-                              );
-                            } catch (e6) {
-                              return o5(e6);
+                              if (e6.pop) {
+                                if (e6.length) return e6.pop() ? $Loop_3_exit.call(this) : e6;
+                                e6 = $Loop_3;
+                              } else e6 = e6.call(this);
+                            } catch (e7) {
+                              return o5(e7);
                             }
-                          }.bind(this),
-                          o5,
-                        )
-                      );
-                    } catch (e6) {
-                      return o5(e6);
+                          }
+                        }.bind(this))($Loop_3);
+                      }
+                    } catch (u5) {
+                      return o5(u5);
                     }
-                  }.bind(this),
-                  o5,
-                )
-              );
+                  }.bind(this), o5);
+                } catch (e6) {
+                  return o5(e6);
+                }
+              }.bind(this), o5);
             } catch (e6) {
               return o5(e6);
             }
-          }.bind(this),
-          o5,
-        )
-      );
-    });
-  }
-  var l =
-    "\nlet scriptImported = false\nself.addEventListener('message', async (e) => {\n  const { file, id, imageCompressionLibUrl, options } = e.data\n  options.onProgress = (progress) => self.postMessage({ progress, id })\n  try {\n    if (!scriptImported) {\n      // console.log('[worker] importScripts', imageCompressionLibUrl)\n      self.importScripts(imageCompressionLibUrl)\n      scriptImported = true\n    }\n    // console.log('[worker] self', self)\n    const compressedFile = await imageCompression(file, options)\n    self.postMessage({ file: compressedFile, id })\n  } catch (e) {\n    // console.error('[worker] error', e)\n    self.postMessage({ error: e.message + '\\n' + e.stack, id })\n  }\n})\n";
-  var c;
-  function compressOnWebWorker(e5, t5) {
-    return new Promise((r5, i5) => {
-      c ||
-        (c = (function createWorkerScriptURL(e6) {
-          const t6 = [];
-          return (
-            typeof e6 == "function" ? t6.push(`(${e6})()`) : t6.push(e6),
-            URL.createObjectURL(new Blob(t6))
-          );
-        })(l));
-      const o5 = new Worker(c);
-      o5.addEventListener("message", function handler(e6) {
-        if (t5.signal && t5.signal.aborted) {
-          o5.terminate();
-        } else if (void 0 === e6.data.progress) {
-          if (e6.data.error) {
-            return i5(new Error(e6.data.error)), void o5.terminate();
-          }
-          r5(e6.data.file), o5.terminate();
-        } else {
-          t5.onProgress(e6.data.progress);
+          }.bind(this), o5);
+        } catch (e6) {
+          return o5(e6);
         }
-      }),
-        o5.addEventListener("error", i5),
-        t5.signal &&
-          t5.signal.addEventListener("abort", () => {
-            i5(t5.signal.reason), o5.terminate();
-          }),
-        o5.postMessage({
-          file: e5,
-          imageCompressionLibUrl: t5.libURL,
-          options: { ...t5, onProgress: void 0, signal: void 0 },
-        });
-    });
+      }.bind(this), o5);
+    }));
+  }
+  function compressOnWebWorker(e5, t5) {
+    return new Promise(((r5, i5) => {
+      c || (c = (function createWorkerScriptURL(e6) {
+        const t6 = [];
+        return "function" == typeof e6 ? t6.push(`(${e6})()`) : t6.push(e6), URL.createObjectURL(new Blob(t6));
+      })(l));
+      const o5 = new Worker(c);
+      o5.addEventListener("message", (function handler(e6) {
+        if (t5.signal && t5.signal.aborted) o5.terminate();
+        else if (void 0 === e6.data.progress) {
+          if (e6.data.error) return i5(new Error(e6.data.error)), void o5.terminate();
+          r5(e6.data.file), o5.terminate();
+        } else t5.onProgress(e6.data.progress);
+      })), o5.addEventListener("error", i5), t5.signal && t5.signal.addEventListener("abort", (() => {
+        i5(t5.signal.reason), o5.terminate();
+      })), o5.postMessage({ file: e5, imageCompressionLibUrl: t5.libURL, options: { ...t5, onProgress: void 0, signal: void 0 } });
+    }));
   }
   function imageCompression(e5, t5) {
-    return new Promise(function (r5, i5) {
+    return new Promise((function(r5, i5) {
       let o5, a5, s4, f5, l4, c5;
-      if (
-        ((o5 = { ...t5 }),
-        (s4 = 0),
-        ({ onProgress: f5 } = o5),
-        (o5.maxSizeMB = o5.maxSizeMB || Number.POSITIVE_INFINITY),
-        (l4 = typeof o5.useWebWorker != "boolean" || o5.useWebWorker),
-        delete o5.useWebWorker,
-        (o5.onProgress = (e6) => {
-          (s4 = e6), typeof f5 == "function" && f5(s4);
-        }),
-        !(e5 instanceof Blob || e5 instanceof CustomFile))
-      ) {
-        return i5(new Error("The file given is not an instance of Blob or File"));
-      }
-      if (!/^image/.test(e5.type)) {
-        return i5(new Error("The file given is not an image"));
-      }
-      if (
-        ((c5 = typeof WorkerGlobalScope != "undefined" && self instanceof WorkerGlobalScope),
-        !l4 || typeof Worker != "function" || c5)
-      ) {
-        return compress(e5, o5).then(
-          function (e6) {
+      if (o5 = { ...t5 }, s4 = 0, { onProgress: f5 } = o5, o5.maxSizeMB = o5.maxSizeMB || Number.POSITIVE_INFINITY, l4 = "boolean" != typeof o5.useWebWorker || o5.useWebWorker, delete o5.useWebWorker, o5.onProgress = (e6) => {
+        s4 = e6, "function" == typeof f5 && f5(s4);
+      }, !(e5 instanceof Blob || e5 instanceof CustomFile)) return i5(new Error("The file given is not an instance of Blob or File"));
+      if (!/^image/.test(e5.type)) return i5(new Error("The file given is not an image"));
+      if (c5 = "undefined" != typeof WorkerGlobalScope && self instanceof WorkerGlobalScope, !l4 || "function" != typeof Worker || c5) return compress(e5, o5).then(function(e6) {
+        try {
+          return a5 = e6, $If_4.call(this);
+        } catch (e7) {
+          return i5(e7);
+        }
+      }.bind(this), i5);
+      var u4 = function() {
+        try {
+          return $If_4.call(this);
+        } catch (e6) {
+          return i5(e6);
+        }
+      }.bind(this), $Try_1_Catch = function(t6) {
+        try {
+          return compress(e5, o5).then((function(e6) {
             try {
-              return (a5 = e6), $If_4.call(this);
+              return a5 = e6, u4();
             } catch (e7) {
               return i5(e7);
             }
-          }.bind(this),
-          i5,
-        );
-      }
-      var u4 = function () {
-          try {
-            return $If_4.call(this);
-          } catch (e6) {
-            return i5(e6);
-          }
-        }.bind(this),
-        $Try_1_Catch = (t6) => {
-          try {
-            return compress(e5, o5).then((e6) => {
-              try {
-                return (a5 = e6), u4();
-              } catch (e7) {
-                return i5(e7);
-              }
-            }, i5);
-          } catch (e6) {
-            return i5(e6);
-          }
-        };
+          }), i5);
+        } catch (e6) {
+          return i5(e6);
+        }
+      };
       try {
-        return (
-          (o5.libURL =
-            o5.libURL ||
-            "https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.2/dist/browser-image-compression.js"),
-          compressOnWebWorker(e5, o5).then((e6) => {
-            try {
-              return (a5 = e6), u4();
-            } catch (e7) {
-              return $Try_1_Catch();
-            }
-          }, $Try_1_Catch)
-        );
+        return o5.libURL = o5.libURL || "https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.2/dist/browser-image-compression.js", compressOnWebWorker(e5, o5).then((function(e6) {
+          try {
+            return a5 = e6, u4();
+          } catch (e7) {
+            return $Try_1_Catch();
+          }
+        }), $Try_1_Catch);
       } catch (e6) {
         $Try_1_Catch();
       }
       function $If_4() {
         try {
-          (a5.name = e5.name), (a5.lastModified = e5.lastModified);
-        } catch (e6) {}
+          a5.name = e5.name, a5.lastModified = e5.lastModified;
+        } catch (e6) {
+        }
         try {
-          o5.preserveExif &&
-            e5.type === "image/jpeg" &&
-            (!o5.fileType || (o5.fileType && o5.fileType === e5.type)) &&
-            (a5 = copyExifWithoutOrientation(e5, a5));
-        } catch (e6) {}
+          o5.preserveExif && "image/jpeg" === e5.type && (!o5.fileType || o5.fileType && o5.fileType === e5.type) && (a5 = copyExifWithoutOrientation(e5, a5));
+        } catch (e6) {
+        }
         return r5(a5);
       }
-    });
+    }));
   }
-  (imageCompression.getDataUrlFromFile = getDataUrlFromFile),
-    (imageCompression.getFilefromDataUrl = getFilefromDataUrl),
-    (imageCompression.loadImage = loadImage),
-    (imageCompression.drawImageInCanvas = drawImageInCanvas),
-    (imageCompression.drawFileInCanvas = drawFileInCanvas),
-    (imageCompression.canvasToFile = canvasToFile),
-    (imageCompression.getExifOrientation = getExifOrientation),
-    (imageCompression.handleMaxWidthOrHeight = handleMaxWidthOrHeight),
-    (imageCompression.followExifOrientation = followExifOrientation),
-    (imageCompression.cleanupCanvasMemory = cleanupCanvasMemory),
-    (imageCompression.isAutoOrientationInBrowser = isAutoOrientationInBrowser),
-    (imageCompression.approximateBelowMaximumCanvasSizeOfBrowser =
-      approximateBelowMaximumCanvasSizeOfBrowser),
-    (imageCompression.copyExifWithoutOrientation = copyExifWithoutOrientation),
-    (imageCompression.getBrowserName = getBrowserName),
-    (imageCompression.version = "2.0.2");
+  var getApp1Segment, e, t, UZIP, UPNG, r, i, o, a, s, f, CustomFile, CustomFileReader, l, c;
+  var init_browser_image_compression = __esm({
+    "node_modules/browser-image-compression/dist/browser-image-compression.mjs"() {
+      getApp1Segment = (e5) => new Promise(((t5, r5) => {
+        const i5 = new FileReader();
+        i5.addEventListener("load", (({ target: { result: e6 } }) => {
+          const i6 = new DataView(e6);
+          let o5 = 0;
+          if (65496 !== i6.getUint16(o5)) return r5("not a valid JPEG");
+          for (o5 += 2; ; ) {
+            const a5 = i6.getUint16(o5);
+            if (65498 === a5) break;
+            const s4 = i6.getUint16(o5 + 2);
+            if (65505 === a5 && 1165519206 === i6.getUint32(o5 + 4)) {
+              const a6 = o5 + 10;
+              let f5;
+              switch (i6.getUint16(a6)) {
+                case 18761:
+                  f5 = true;
+                  break;
+                case 19789:
+                  f5 = false;
+                  break;
+                default:
+                  return r5("TIFF header contains invalid endian");
+              }
+              if (42 !== i6.getUint16(a6 + 2, f5)) return r5("TIFF header contains invalid version");
+              const l4 = i6.getUint32(a6 + 4, f5), c5 = a6 + l4 + 2 + 12 * i6.getUint16(a6 + l4, f5);
+              for (let e7 = a6 + l4 + 2; e7 < c5; e7 += 12) {
+                if (274 == i6.getUint16(e7, f5)) {
+                  if (3 !== i6.getUint16(e7 + 2, f5)) return r5("Orientation data type is invalid");
+                  if (1 !== i6.getUint32(e7 + 4, f5)) return r5("Orientation data count is invalid");
+                  i6.setUint16(e7 + 8, 1, f5);
+                  break;
+                }
+              }
+              return t5(e6.slice(o5, o5 + 2 + s4));
+            }
+            o5 += 2 + s4;
+          }
+          return t5(new Blob());
+        })), i5.readAsArrayBuffer(e5);
+      }));
+      e = {};
+      t = { get exports() {
+        return e;
+      }, set exports(t5) {
+        e = t5;
+      } };
+      !(function(e5) {
+        var r5, i5, UZIP2 = {};
+        t.exports = UZIP2, UZIP2.parse = function(e6, t5) {
+          for (var r6 = UZIP2.bin.readUshort, i6 = UZIP2.bin.readUint, o5 = 0, a5 = {}, s4 = new Uint8Array(e6), f5 = s4.length - 4; 101010256 != i6(s4, f5); ) f5--;
+          o5 = f5;
+          o5 += 4;
+          var l4 = r6(s4, o5 += 4);
+          r6(s4, o5 += 2);
+          var c5 = i6(s4, o5 += 2), u4 = i6(s4, o5 += 4);
+          o5 += 4, o5 = u4;
+          for (var h4 = 0; h4 < l4; h4++) {
+            i6(s4, o5), o5 += 4, o5 += 4, o5 += 4, i6(s4, o5 += 4);
+            c5 = i6(s4, o5 += 4);
+            var d3 = i6(s4, o5 += 4), A = r6(s4, o5 += 4), g2 = r6(s4, o5 + 2), p4 = r6(s4, o5 + 4);
+            o5 += 6;
+            var m2 = i6(s4, o5 += 8);
+            o5 += 4, o5 += A + g2 + p4, UZIP2._readLocal(s4, m2, a5, c5, d3, t5);
+          }
+          return a5;
+        }, UZIP2._readLocal = function(e6, t5, r6, i6, o5, a5) {
+          var s4 = UZIP2.bin.readUshort, f5 = UZIP2.bin.readUint;
+          f5(e6, t5), s4(e6, t5 += 4), s4(e6, t5 += 2);
+          var l4 = s4(e6, t5 += 2);
+          f5(e6, t5 += 2), f5(e6, t5 += 4), t5 += 4;
+          var c5 = s4(e6, t5 += 8), u4 = s4(e6, t5 += 2);
+          t5 += 2;
+          var h4 = UZIP2.bin.readUTF8(e6, t5, c5);
+          if (t5 += c5, t5 += u4, a5) r6[h4] = { size: o5, csize: i6 };
+          else {
+            var d3 = new Uint8Array(e6.buffer, t5);
+            if (0 == l4) r6[h4] = new Uint8Array(d3.buffer.slice(t5, t5 + i6));
+            else {
+              if (8 != l4) throw "unknown compression method: " + l4;
+              var A = new Uint8Array(o5);
+              UZIP2.inflateRaw(d3, A), r6[h4] = A;
+            }
+          }
+        }, UZIP2.inflateRaw = function(e6, t5) {
+          return UZIP2.F.inflate(e6, t5);
+        }, UZIP2.inflate = function(e6, t5) {
+          return e6[0], e6[1], UZIP2.inflateRaw(new Uint8Array(e6.buffer, e6.byteOffset + 2, e6.length - 6), t5);
+        }, UZIP2.deflate = function(e6, t5) {
+          null == t5 && (t5 = { level: 6 });
+          var r6 = 0, i6 = new Uint8Array(50 + Math.floor(1.1 * e6.length));
+          i6[r6] = 120, i6[r6 + 1] = 156, r6 += 2, r6 = UZIP2.F.deflateRaw(e6, i6, r6, t5.level);
+          var o5 = UZIP2.adler(e6, 0, e6.length);
+          return i6[r6 + 0] = o5 >>> 24 & 255, i6[r6 + 1] = o5 >>> 16 & 255, i6[r6 + 2] = o5 >>> 8 & 255, i6[r6 + 3] = o5 >>> 0 & 255, new Uint8Array(i6.buffer, 0, r6 + 4);
+        }, UZIP2.deflateRaw = function(e6, t5) {
+          null == t5 && (t5 = { level: 6 });
+          var r6 = new Uint8Array(50 + Math.floor(1.1 * e6.length)), i6 = UZIP2.F.deflateRaw(e6, r6, i6, t5.level);
+          return new Uint8Array(r6.buffer, 0, i6);
+        }, UZIP2.encode = function(e6, t5) {
+          null == t5 && (t5 = false);
+          var r6 = 0, i6 = UZIP2.bin.writeUint, o5 = UZIP2.bin.writeUshort, a5 = {};
+          for (var s4 in e6) {
+            var f5 = !UZIP2._noNeed(s4) && !t5, l4 = e6[s4], c5 = UZIP2.crc.crc(l4, 0, l4.length);
+            a5[s4] = { cpr: f5, usize: l4.length, crc: c5, file: f5 ? UZIP2.deflateRaw(l4) : l4 };
+          }
+          for (var s4 in a5) r6 += a5[s4].file.length + 30 + 46 + 2 * UZIP2.bin.sizeUTF8(s4);
+          r6 += 22;
+          var u4 = new Uint8Array(r6), h4 = 0, d3 = [];
+          for (var s4 in a5) {
+            var A = a5[s4];
+            d3.push(h4), h4 = UZIP2._writeHeader(u4, h4, s4, A, 0);
+          }
+          var g2 = 0, p4 = h4;
+          for (var s4 in a5) {
+            A = a5[s4];
+            d3.push(h4), h4 = UZIP2._writeHeader(u4, h4, s4, A, 1, d3[g2++]);
+          }
+          var m2 = h4 - p4;
+          return i6(u4, h4, 101010256), h4 += 4, o5(u4, h4 += 4, g2), o5(u4, h4 += 2, g2), i6(u4, h4 += 2, m2), i6(u4, h4 += 4, p4), h4 += 4, h4 += 2, u4.buffer;
+        }, UZIP2._noNeed = function(e6) {
+          var t5 = e6.split(".").pop().toLowerCase();
+          return -1 != "png,jpg,jpeg,zip".indexOf(t5);
+        }, UZIP2._writeHeader = function(e6, t5, r6, i6, o5, a5) {
+          var s4 = UZIP2.bin.writeUint, f5 = UZIP2.bin.writeUshort, l4 = i6.file;
+          return s4(e6, t5, 0 == o5 ? 67324752 : 33639248), t5 += 4, 1 == o5 && (t5 += 2), f5(e6, t5, 20), f5(e6, t5 += 2, 0), f5(e6, t5 += 2, i6.cpr ? 8 : 0), s4(e6, t5 += 2, 0), s4(e6, t5 += 4, i6.crc), s4(e6, t5 += 4, l4.length), s4(e6, t5 += 4, i6.usize), f5(e6, t5 += 4, UZIP2.bin.sizeUTF8(r6)), f5(e6, t5 += 2, 0), t5 += 2, 1 == o5 && (t5 += 2, t5 += 2, s4(e6, t5 += 6, a5), t5 += 4), t5 += UZIP2.bin.writeUTF8(e6, t5, r6), 0 == o5 && (e6.set(l4, t5), t5 += l4.length), t5;
+        }, UZIP2.crc = { table: (function() {
+          for (var e6 = new Uint32Array(256), t5 = 0; t5 < 256; t5++) {
+            for (var r6 = t5, i6 = 0; i6 < 8; i6++) 1 & r6 ? r6 = 3988292384 ^ r6 >>> 1 : r6 >>>= 1;
+            e6[t5] = r6;
+          }
+          return e6;
+        })(), update: function(e6, t5, r6, i6) {
+          for (var o5 = 0; o5 < i6; o5++) e6 = UZIP2.crc.table[255 & (e6 ^ t5[r6 + o5])] ^ e6 >>> 8;
+          return e6;
+        }, crc: function(e6, t5, r6) {
+          return 4294967295 ^ UZIP2.crc.update(4294967295, e6, t5, r6);
+        } }, UZIP2.adler = function(e6, t5, r6) {
+          for (var i6 = 1, o5 = 0, a5 = t5, s4 = t5 + r6; a5 < s4; ) {
+            for (var f5 = Math.min(a5 + 5552, s4); a5 < f5; ) o5 += i6 += e6[a5++];
+            i6 %= 65521, o5 %= 65521;
+          }
+          return o5 << 16 | i6;
+        }, UZIP2.bin = { readUshort: function(e6, t5) {
+          return e6[t5] | e6[t5 + 1] << 8;
+        }, writeUshort: function(e6, t5, r6) {
+          e6[t5] = 255 & r6, e6[t5 + 1] = r6 >> 8 & 255;
+        }, readUint: function(e6, t5) {
+          return 16777216 * e6[t5 + 3] + (e6[t5 + 2] << 16 | e6[t5 + 1] << 8 | e6[t5]);
+        }, writeUint: function(e6, t5, r6) {
+          e6[t5] = 255 & r6, e6[t5 + 1] = r6 >> 8 & 255, e6[t5 + 2] = r6 >> 16 & 255, e6[t5 + 3] = r6 >> 24 & 255;
+        }, readASCII: function(e6, t5, r6) {
+          for (var i6 = "", o5 = 0; o5 < r6; o5++) i6 += String.fromCharCode(e6[t5 + o5]);
+          return i6;
+        }, writeASCII: function(e6, t5, r6) {
+          for (var i6 = 0; i6 < r6.length; i6++) e6[t5 + i6] = r6.charCodeAt(i6);
+        }, pad: function(e6) {
+          return e6.length < 2 ? "0" + e6 : e6;
+        }, readUTF8: function(e6, t5, r6) {
+          for (var i6, o5 = "", a5 = 0; a5 < r6; a5++) o5 += "%" + UZIP2.bin.pad(e6[t5 + a5].toString(16));
+          try {
+            i6 = decodeURIComponent(o5);
+          } catch (i7) {
+            return UZIP2.bin.readASCII(e6, t5, r6);
+          }
+          return i6;
+        }, writeUTF8: function(e6, t5, r6) {
+          for (var i6 = r6.length, o5 = 0, a5 = 0; a5 < i6; a5++) {
+            var s4 = r6.charCodeAt(a5);
+            if (0 == (4294967168 & s4)) e6[t5 + o5] = s4, o5++;
+            else if (0 == (4294965248 & s4)) e6[t5 + o5] = 192 | s4 >> 6, e6[t5 + o5 + 1] = 128 | s4 >> 0 & 63, o5 += 2;
+            else if (0 == (4294901760 & s4)) e6[t5 + o5] = 224 | s4 >> 12, e6[t5 + o5 + 1] = 128 | s4 >> 6 & 63, e6[t5 + o5 + 2] = 128 | s4 >> 0 & 63, o5 += 3;
+            else {
+              if (0 != (4292870144 & s4)) throw "e";
+              e6[t5 + o5] = 240 | s4 >> 18, e6[t5 + o5 + 1] = 128 | s4 >> 12 & 63, e6[t5 + o5 + 2] = 128 | s4 >> 6 & 63, e6[t5 + o5 + 3] = 128 | s4 >> 0 & 63, o5 += 4;
+            }
+          }
+          return o5;
+        }, sizeUTF8: function(e6) {
+          for (var t5 = e6.length, r6 = 0, i6 = 0; i6 < t5; i6++) {
+            var o5 = e6.charCodeAt(i6);
+            if (0 == (4294967168 & o5)) r6++;
+            else if (0 == (4294965248 & o5)) r6 += 2;
+            else if (0 == (4294901760 & o5)) r6 += 3;
+            else {
+              if (0 != (4292870144 & o5)) throw "e";
+              r6 += 4;
+            }
+          }
+          return r6;
+        } }, UZIP2.F = {}, UZIP2.F.deflateRaw = function(e6, t5, r6, i6) {
+          var o5 = [[0, 0, 0, 0, 0], [4, 4, 8, 4, 0], [4, 5, 16, 8, 0], [4, 6, 16, 16, 0], [4, 10, 16, 32, 0], [8, 16, 32, 32, 0], [8, 16, 128, 128, 0], [8, 32, 128, 256, 0], [32, 128, 258, 1024, 1], [32, 258, 258, 4096, 1]][i6], a5 = UZIP2.F.U, s4 = UZIP2.F._goodIndex;
+          UZIP2.F._hash;
+          var f5 = UZIP2.F._putsE, l4 = 0, c5 = r6 << 3, u4 = 0, h4 = e6.length;
+          if (0 == i6) {
+            for (; l4 < h4; ) {
+              f5(t5, c5, l4 + (_ = Math.min(65535, h4 - l4)) == h4 ? 1 : 0), c5 = UZIP2.F._copyExact(e6, l4, _, t5, c5 + 8), l4 += _;
+            }
+            return c5 >>> 3;
+          }
+          var d3 = a5.lits, A = a5.strt, g2 = a5.prev, p4 = 0, m2 = 0, w2 = 0, v3 = 0, b3 = 0, y3 = 0;
+          for (h4 > 2 && (A[y3 = UZIP2.F._hash(e6, 0)] = 0), l4 = 0; l4 < h4; l4++) {
+            if (b3 = y3, l4 + 1 < h4 - 2) {
+              y3 = UZIP2.F._hash(e6, l4 + 1);
+              var E = l4 + 1 & 32767;
+              g2[E] = A[y3], A[y3] = E;
+            }
+            if (u4 <= l4) {
+              (p4 > 14e3 || m2 > 26697) && h4 - l4 > 100 && (u4 < l4 && (d3[p4] = l4 - u4, p4 += 2, u4 = l4), c5 = UZIP2.F._writeBlock(l4 == h4 - 1 || u4 == h4 ? 1 : 0, d3, p4, v3, e6, w2, l4 - w2, t5, c5), p4 = m2 = v3 = 0, w2 = l4);
+              var F = 0;
+              l4 < h4 - 2 && (F = UZIP2.F._bestMatch(e6, l4, g2, b3, Math.min(o5[2], h4 - l4), o5[3]));
+              var _ = F >>> 16, B = 65535 & F;
+              if (0 != F) {
+                B = 65535 & F;
+                var U = s4(_ = F >>> 16, a5.of0);
+                a5.lhst[257 + U]++;
+                var C = s4(B, a5.df0);
+                a5.dhst[C]++, v3 += a5.exb[U] + a5.dxb[C], d3[p4] = _ << 23 | l4 - u4, d3[p4 + 1] = B << 16 | U << 8 | C, p4 += 2, u4 = l4 + _;
+              } else a5.lhst[e6[l4]]++;
+              m2++;
+            }
+          }
+          for (w2 == l4 && 0 != e6.length || (u4 < l4 && (d3[p4] = l4 - u4, p4 += 2, u4 = l4), c5 = UZIP2.F._writeBlock(1, d3, p4, v3, e6, w2, l4 - w2, t5, c5), p4 = 0, m2 = 0, p4 = m2 = v3 = 0, w2 = l4); 0 != (7 & c5); ) c5++;
+          return c5 >>> 3;
+        }, UZIP2.F._bestMatch = function(e6, t5, r6, i6, o5, a5) {
+          var s4 = 32767 & t5, f5 = r6[s4], l4 = s4 - f5 + 32768 & 32767;
+          if (f5 == s4 || i6 != UZIP2.F._hash(e6, t5 - l4)) return 0;
+          for (var c5 = 0, u4 = 0, h4 = Math.min(32767, t5); l4 <= h4 && 0 != --a5 && f5 != s4; ) {
+            if (0 == c5 || e6[t5 + c5] == e6[t5 + c5 - l4]) {
+              var d3 = UZIP2.F._howLong(e6, t5, l4);
+              if (d3 > c5) {
+                if (u4 = l4, (c5 = d3) >= o5) break;
+                l4 + 2 < d3 && (d3 = l4 + 2);
+                for (var A = 0, g2 = 0; g2 < d3 - 2; g2++) {
+                  var p4 = t5 - l4 + g2 + 32768 & 32767, m2 = p4 - r6[p4] + 32768 & 32767;
+                  m2 > A && (A = m2, f5 = p4);
+                }
+              }
+            }
+            l4 += (s4 = f5) - (f5 = r6[s4]) + 32768 & 32767;
+          }
+          return c5 << 16 | u4;
+        }, UZIP2.F._howLong = function(e6, t5, r6) {
+          if (e6[t5] != e6[t5 - r6] || e6[t5 + 1] != e6[t5 + 1 - r6] || e6[t5 + 2] != e6[t5 + 2 - r6]) return 0;
+          var i6 = t5, o5 = Math.min(e6.length, t5 + 258);
+          for (t5 += 3; t5 < o5 && e6[t5] == e6[t5 - r6]; ) t5++;
+          return t5 - i6;
+        }, UZIP2.F._hash = function(e6, t5) {
+          return (e6[t5] << 8 | e6[t5 + 1]) + (e6[t5 + 2] << 4) & 65535;
+        }, UZIP2.saved = 0, UZIP2.F._writeBlock = function(e6, t5, r6, i6, o5, a5, s4, f5, l4) {
+          var c5, u4, h4, d3, A, g2, p4, m2, w2, v3 = UZIP2.F.U, b3 = UZIP2.F._putsF, y3 = UZIP2.F._putsE;
+          v3.lhst[256]++, u4 = (c5 = UZIP2.F.getTrees())[0], h4 = c5[1], d3 = c5[2], A = c5[3], g2 = c5[4], p4 = c5[5], m2 = c5[6], w2 = c5[7];
+          var E = 32 + (0 == (l4 + 3 & 7) ? 0 : 8 - (l4 + 3 & 7)) + (s4 << 3), F = i6 + UZIP2.F.contSize(v3.fltree, v3.lhst) + UZIP2.F.contSize(v3.fdtree, v3.dhst), _ = i6 + UZIP2.F.contSize(v3.ltree, v3.lhst) + UZIP2.F.contSize(v3.dtree, v3.dhst);
+          _ += 14 + 3 * p4 + UZIP2.F.contSize(v3.itree, v3.ihst) + (2 * v3.ihst[16] + 3 * v3.ihst[17] + 7 * v3.ihst[18]);
+          for (var B = 0; B < 286; B++) v3.lhst[B] = 0;
+          for (B = 0; B < 30; B++) v3.dhst[B] = 0;
+          for (B = 0; B < 19; B++) v3.ihst[B] = 0;
+          var U = E < F && E < _ ? 0 : F < _ ? 1 : 2;
+          if (b3(f5, l4, e6), b3(f5, l4 + 1, U), l4 += 3, 0 == U) {
+            for (; 0 != (7 & l4); ) l4++;
+            l4 = UZIP2.F._copyExact(o5, a5, s4, f5, l4);
+          } else {
+            var C, I;
+            if (1 == U && (C = v3.fltree, I = v3.fdtree), 2 == U) {
+              UZIP2.F.makeCodes(v3.ltree, u4), UZIP2.F.revCodes(v3.ltree, u4), UZIP2.F.makeCodes(v3.dtree, h4), UZIP2.F.revCodes(v3.dtree, h4), UZIP2.F.makeCodes(v3.itree, d3), UZIP2.F.revCodes(v3.itree, d3), C = v3.ltree, I = v3.dtree, y3(f5, l4, A - 257), y3(f5, l4 += 5, g2 - 1), y3(f5, l4 += 5, p4 - 4), l4 += 4;
+              for (var Q = 0; Q < p4; Q++) y3(f5, l4 + 3 * Q, v3.itree[1 + (v3.ordr[Q] << 1)]);
+              l4 += 3 * p4, l4 = UZIP2.F._codeTiny(m2, v3.itree, f5, l4), l4 = UZIP2.F._codeTiny(w2, v3.itree, f5, l4);
+            }
+            for (var M3 = a5, x3 = 0; x3 < r6; x3 += 2) {
+              for (var S2 = t5[x3], R = S2 >>> 23, T = M3 + (8388607 & S2); M3 < T; ) l4 = UZIP2.F._writeLit(o5[M3++], C, f5, l4);
+              if (0 != R) {
+                var O = t5[x3 + 1], P = O >> 16, H2 = O >> 8 & 255, L = 255 & O;
+                y3(f5, l4 = UZIP2.F._writeLit(257 + H2, C, f5, l4), R - v3.of0[H2]), l4 += v3.exb[H2], b3(f5, l4 = UZIP2.F._writeLit(L, I, f5, l4), P - v3.df0[L]), l4 += v3.dxb[L], M3 += R;
+              }
+            }
+            l4 = UZIP2.F._writeLit(256, C, f5, l4);
+          }
+          return l4;
+        }, UZIP2.F._copyExact = function(e6, t5, r6, i6, o5) {
+          var a5 = o5 >>> 3;
+          return i6[a5] = r6, i6[a5 + 1] = r6 >>> 8, i6[a5 + 2] = 255 - i6[a5], i6[a5 + 3] = 255 - i6[a5 + 1], a5 += 4, i6.set(new Uint8Array(e6.buffer, t5, r6), a5), o5 + (r6 + 4 << 3);
+        }, UZIP2.F.getTrees = function() {
+          for (var e6 = UZIP2.F.U, t5 = UZIP2.F._hufTree(e6.lhst, e6.ltree, 15), r6 = UZIP2.F._hufTree(e6.dhst, e6.dtree, 15), i6 = [], o5 = UZIP2.F._lenCodes(e6.ltree, i6), a5 = [], s4 = UZIP2.F._lenCodes(e6.dtree, a5), f5 = 0; f5 < i6.length; f5 += 2) e6.ihst[i6[f5]]++;
+          for (f5 = 0; f5 < a5.length; f5 += 2) e6.ihst[a5[f5]]++;
+          for (var l4 = UZIP2.F._hufTree(e6.ihst, e6.itree, 7), c5 = 19; c5 > 4 && 0 == e6.itree[1 + (e6.ordr[c5 - 1] << 1)]; ) c5--;
+          return [t5, r6, l4, o5, s4, c5, i6, a5];
+        }, UZIP2.F.getSecond = function(e6) {
+          for (var t5 = [], r6 = 0; r6 < e6.length; r6 += 2) t5.push(e6[r6 + 1]);
+          return t5;
+        }, UZIP2.F.nonZero = function(e6) {
+          for (var t5 = "", r6 = 0; r6 < e6.length; r6 += 2) 0 != e6[r6 + 1] && (t5 += (r6 >> 1) + ",");
+          return t5;
+        }, UZIP2.F.contSize = function(e6, t5) {
+          for (var r6 = 0, i6 = 0; i6 < t5.length; i6++) r6 += t5[i6] * e6[1 + (i6 << 1)];
+          return r6;
+        }, UZIP2.F._codeTiny = function(e6, t5, r6, i6) {
+          for (var o5 = 0; o5 < e6.length; o5 += 2) {
+            var a5 = e6[o5], s4 = e6[o5 + 1];
+            i6 = UZIP2.F._writeLit(a5, t5, r6, i6);
+            var f5 = 16 == a5 ? 2 : 17 == a5 ? 3 : 7;
+            a5 > 15 && (UZIP2.F._putsE(r6, i6, s4, f5), i6 += f5);
+          }
+          return i6;
+        }, UZIP2.F._lenCodes = function(e6, t5) {
+          for (var r6 = e6.length; 2 != r6 && 0 == e6[r6 - 1]; ) r6 -= 2;
+          for (var i6 = 0; i6 < r6; i6 += 2) {
+            var o5 = e6[i6 + 1], a5 = i6 + 3 < r6 ? e6[i6 + 3] : -1, s4 = i6 + 5 < r6 ? e6[i6 + 5] : -1, f5 = 0 == i6 ? -1 : e6[i6 - 1];
+            if (0 == o5 && a5 == o5 && s4 == o5) {
+              for (var l4 = i6 + 5; l4 + 2 < r6 && e6[l4 + 2] == o5; ) l4 += 2;
+              (c5 = Math.min(l4 + 1 - i6 >>> 1, 138)) < 11 ? t5.push(17, c5 - 3) : t5.push(18, c5 - 11), i6 += 2 * c5 - 2;
+            } else if (o5 == f5 && a5 == o5 && s4 == o5) {
+              for (l4 = i6 + 5; l4 + 2 < r6 && e6[l4 + 2] == o5; ) l4 += 2;
+              var c5 = Math.min(l4 + 1 - i6 >>> 1, 6);
+              t5.push(16, c5 - 3), i6 += 2 * c5 - 2;
+            } else t5.push(o5, 0);
+          }
+          return r6 >>> 1;
+        }, UZIP2.F._hufTree = function(e6, t5, r6) {
+          var i6 = [], o5 = e6.length, a5 = t5.length, s4 = 0;
+          for (s4 = 0; s4 < a5; s4 += 2) t5[s4] = 0, t5[s4 + 1] = 0;
+          for (s4 = 0; s4 < o5; s4++) 0 != e6[s4] && i6.push({ lit: s4, f: e6[s4] });
+          var f5 = i6.length, l4 = i6.slice(0);
+          if (0 == f5) return 0;
+          if (1 == f5) {
+            var c5 = i6[0].lit;
+            l4 = 0 == c5 ? 1 : 0;
+            return t5[1 + (c5 << 1)] = 1, t5[1 + (l4 << 1)] = 1, 1;
+          }
+          i6.sort((function(e7, t6) {
+            return e7.f - t6.f;
+          }));
+          var u4 = i6[0], h4 = i6[1], d3 = 0, A = 1, g2 = 2;
+          for (i6[0] = { lit: -1, f: u4.f + h4.f, l: u4, r: h4, d: 0 }; A != f5 - 1; ) u4 = d3 != A && (g2 == f5 || i6[d3].f < i6[g2].f) ? i6[d3++] : i6[g2++], h4 = d3 != A && (g2 == f5 || i6[d3].f < i6[g2].f) ? i6[d3++] : i6[g2++], i6[A++] = { lit: -1, f: u4.f + h4.f, l: u4, r: h4 };
+          var p4 = UZIP2.F.setDepth(i6[A - 1], 0);
+          for (p4 > r6 && (UZIP2.F.restrictDepth(l4, r6, p4), p4 = r6), s4 = 0; s4 < f5; s4++) t5[1 + (l4[s4].lit << 1)] = l4[s4].d;
+          return p4;
+        }, UZIP2.F.setDepth = function(e6, t5) {
+          return -1 != e6.lit ? (e6.d = t5, t5) : Math.max(UZIP2.F.setDepth(e6.l, t5 + 1), UZIP2.F.setDepth(e6.r, t5 + 1));
+        }, UZIP2.F.restrictDepth = function(e6, t5, r6) {
+          var i6 = 0, o5 = 1 << r6 - t5, a5 = 0;
+          for (e6.sort((function(e7, t6) {
+            return t6.d == e7.d ? e7.f - t6.f : t6.d - e7.d;
+          })), i6 = 0; i6 < e6.length && e6[i6].d > t5; i6++) {
+            var s4 = e6[i6].d;
+            e6[i6].d = t5, a5 += o5 - (1 << r6 - s4);
+          }
+          for (a5 >>>= r6 - t5; a5 > 0; ) {
+            (s4 = e6[i6].d) < t5 ? (e6[i6].d++, a5 -= 1 << t5 - s4 - 1) : i6++;
+          }
+          for (; i6 >= 0; i6--) e6[i6].d == t5 && a5 < 0 && (e6[i6].d--, a5++);
+          0 != a5 && console.log("debt left");
+        }, UZIP2.F._goodIndex = function(e6, t5) {
+          var r6 = 0;
+          return t5[16 | r6] <= e6 && (r6 |= 16), t5[8 | r6] <= e6 && (r6 |= 8), t5[4 | r6] <= e6 && (r6 |= 4), t5[2 | r6] <= e6 && (r6 |= 2), t5[1 | r6] <= e6 && (r6 |= 1), r6;
+        }, UZIP2.F._writeLit = function(e6, t5, r6, i6) {
+          return UZIP2.F._putsF(r6, i6, t5[e6 << 1]), i6 + t5[1 + (e6 << 1)];
+        }, UZIP2.F.inflate = function(e6, t5) {
+          var r6 = Uint8Array;
+          if (3 == e6[0] && 0 == e6[1]) return t5 || new r6(0);
+          var i6 = UZIP2.F, o5 = i6._bitsF, a5 = i6._bitsE, s4 = i6._decodeTiny, f5 = i6.makeCodes, l4 = i6.codes2map, c5 = i6._get17, u4 = i6.U, h4 = null == t5;
+          h4 && (t5 = new r6(e6.length >>> 2 << 3));
+          for (var d3, A, g2 = 0, p4 = 0, m2 = 0, w2 = 0, v3 = 0, b3 = 0, y3 = 0, E = 0, F = 0; 0 == g2; ) if (g2 = o5(e6, F, 1), p4 = o5(e6, F + 1, 2), F += 3, 0 != p4) {
+            if (h4 && (t5 = UZIP2.F._check(t5, E + (1 << 17))), 1 == p4 && (d3 = u4.flmap, A = u4.fdmap, b3 = 511, y3 = 31), 2 == p4) {
+              m2 = a5(e6, F, 5) + 257, w2 = a5(e6, F + 5, 5) + 1, v3 = a5(e6, F + 10, 4) + 4, F += 14;
+              for (var _ = 0; _ < 38; _ += 2) u4.itree[_] = 0, u4.itree[_ + 1] = 0;
+              var B = 1;
+              for (_ = 0; _ < v3; _++) {
+                var U = a5(e6, F + 3 * _, 3);
+                u4.itree[1 + (u4.ordr[_] << 1)] = U, U > B && (B = U);
+              }
+              F += 3 * v3, f5(u4.itree, B), l4(u4.itree, B, u4.imap), d3 = u4.lmap, A = u4.dmap, F = s4(u4.imap, (1 << B) - 1, m2 + w2, e6, F, u4.ttree);
+              var C = i6._copyOut(u4.ttree, 0, m2, u4.ltree);
+              b3 = (1 << C) - 1;
+              var I = i6._copyOut(u4.ttree, m2, w2, u4.dtree);
+              y3 = (1 << I) - 1, f5(u4.ltree, C), l4(u4.ltree, C, d3), f5(u4.dtree, I), l4(u4.dtree, I, A);
+            }
+            for (; ; ) {
+              var Q = d3[c5(e6, F) & b3];
+              F += 15 & Q;
+              var M3 = Q >>> 4;
+              if (M3 >>> 8 == 0) t5[E++] = M3;
+              else {
+                if (256 == M3) break;
+                var x3 = E + M3 - 254;
+                if (M3 > 264) {
+                  var S2 = u4.ldef[M3 - 257];
+                  x3 = E + (S2 >>> 3) + a5(e6, F, 7 & S2), F += 7 & S2;
+                }
+                var R = A[c5(e6, F) & y3];
+                F += 15 & R;
+                var T = R >>> 4, O = u4.ddef[T], P = (O >>> 4) + o5(e6, F, 15 & O);
+                for (F += 15 & O, h4 && (t5 = UZIP2.F._check(t5, E + (1 << 17))); E < x3; ) t5[E] = t5[E++ - P], t5[E] = t5[E++ - P], t5[E] = t5[E++ - P], t5[E] = t5[E++ - P];
+                E = x3;
+              }
+            }
+          } else {
+            0 != (7 & F) && (F += 8 - (7 & F));
+            var H2 = 4 + (F >>> 3), L = e6[H2 - 4] | e6[H2 - 3] << 8;
+            h4 && (t5 = UZIP2.F._check(t5, E + L)), t5.set(new r6(e6.buffer, e6.byteOffset + H2, L), E), F = H2 + L << 3, E += L;
+          }
+          return t5.length == E ? t5 : t5.slice(0, E);
+        }, UZIP2.F._check = function(e6, t5) {
+          var r6 = e6.length;
+          if (t5 <= r6) return e6;
+          var i6 = new Uint8Array(Math.max(r6 << 1, t5));
+          return i6.set(e6, 0), i6;
+        }, UZIP2.F._decodeTiny = function(e6, t5, r6, i6, o5, a5) {
+          for (var s4 = UZIP2.F._bitsE, f5 = UZIP2.F._get17, l4 = 0; l4 < r6; ) {
+            var c5 = e6[f5(i6, o5) & t5];
+            o5 += 15 & c5;
+            var u4 = c5 >>> 4;
+            if (u4 <= 15) a5[l4] = u4, l4++;
+            else {
+              var h4 = 0, d3 = 0;
+              16 == u4 ? (d3 = 3 + s4(i6, o5, 2), o5 += 2, h4 = a5[l4 - 1]) : 17 == u4 ? (d3 = 3 + s4(i6, o5, 3), o5 += 3) : 18 == u4 && (d3 = 11 + s4(i6, o5, 7), o5 += 7);
+              for (var A = l4 + d3; l4 < A; ) a5[l4] = h4, l4++;
+            }
+          }
+          return o5;
+        }, UZIP2.F._copyOut = function(e6, t5, r6, i6) {
+          for (var o5 = 0, a5 = 0, s4 = i6.length >>> 1; a5 < r6; ) {
+            var f5 = e6[a5 + t5];
+            i6[a5 << 1] = 0, i6[1 + (a5 << 1)] = f5, f5 > o5 && (o5 = f5), a5++;
+          }
+          for (; a5 < s4; ) i6[a5 << 1] = 0, i6[1 + (a5 << 1)] = 0, a5++;
+          return o5;
+        }, UZIP2.F.makeCodes = function(e6, t5) {
+          for (var r6, i6, o5, a5, s4 = UZIP2.F.U, f5 = e6.length, l4 = s4.bl_count, c5 = 0; c5 <= t5; c5++) l4[c5] = 0;
+          for (c5 = 1; c5 < f5; c5 += 2) l4[e6[c5]]++;
+          var u4 = s4.next_code;
+          for (r6 = 0, l4[0] = 0, i6 = 1; i6 <= t5; i6++) r6 = r6 + l4[i6 - 1] << 1, u4[i6] = r6;
+          for (o5 = 0; o5 < f5; o5 += 2) 0 != (a5 = e6[o5 + 1]) && (e6[o5] = u4[a5], u4[a5]++);
+        }, UZIP2.F.codes2map = function(e6, t5, r6) {
+          for (var i6 = e6.length, o5 = UZIP2.F.U.rev15, a5 = 0; a5 < i6; a5 += 2) if (0 != e6[a5 + 1]) for (var s4 = a5 >> 1, f5 = e6[a5 + 1], l4 = s4 << 4 | f5, c5 = t5 - f5, u4 = e6[a5] << c5, h4 = u4 + (1 << c5); u4 != h4; ) {
+            r6[o5[u4] >>> 15 - t5] = l4, u4++;
+          }
+        }, UZIP2.F.revCodes = function(e6, t5) {
+          for (var r6 = UZIP2.F.U.rev15, i6 = 15 - t5, o5 = 0; o5 < e6.length; o5 += 2) {
+            var a5 = e6[o5] << t5 - e6[o5 + 1];
+            e6[o5] = r6[a5] >>> i6;
+          }
+        }, UZIP2.F._putsE = function(e6, t5, r6) {
+          r6 <<= 7 & t5;
+          var i6 = t5 >>> 3;
+          e6[i6] |= r6, e6[i6 + 1] |= r6 >>> 8;
+        }, UZIP2.F._putsF = function(e6, t5, r6) {
+          r6 <<= 7 & t5;
+          var i6 = t5 >>> 3;
+          e6[i6] |= r6, e6[i6 + 1] |= r6 >>> 8, e6[i6 + 2] |= r6 >>> 16;
+        }, UZIP2.F._bitsE = function(e6, t5, r6) {
+          return (e6[t5 >>> 3] | e6[1 + (t5 >>> 3)] << 8) >>> (7 & t5) & (1 << r6) - 1;
+        }, UZIP2.F._bitsF = function(e6, t5, r6) {
+          return (e6[t5 >>> 3] | e6[1 + (t5 >>> 3)] << 8 | e6[2 + (t5 >>> 3)] << 16) >>> (7 & t5) & (1 << r6) - 1;
+        }, UZIP2.F._get17 = function(e6, t5) {
+          return (e6[t5 >>> 3] | e6[1 + (t5 >>> 3)] << 8 | e6[2 + (t5 >>> 3)] << 16) >>> (7 & t5);
+        }, UZIP2.F._get25 = function(e6, t5) {
+          return (e6[t5 >>> 3] | e6[1 + (t5 >>> 3)] << 8 | e6[2 + (t5 >>> 3)] << 16 | e6[3 + (t5 >>> 3)] << 24) >>> (7 & t5);
+        }, UZIP2.F.U = (r5 = Uint16Array, i5 = Uint32Array, { next_code: new r5(16), bl_count: new r5(16), ordr: [16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15], of0: [3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 15, 17, 19, 23, 27, 31, 35, 43, 51, 59, 67, 83, 99, 115, 131, 163, 195, 227, 258, 999, 999, 999], exb: [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 0, 0, 0, 0], ldef: new r5(32), df0: [1, 2, 3, 4, 5, 7, 9, 13, 17, 25, 33, 49, 65, 97, 129, 193, 257, 385, 513, 769, 1025, 1537, 2049, 3073, 4097, 6145, 8193, 12289, 16385, 24577, 65535, 65535], dxb: [0, 0, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 0, 0], ddef: new i5(32), flmap: new r5(512), fltree: [], fdmap: new r5(32), fdtree: [], lmap: new r5(32768), ltree: [], ttree: [], dmap: new r5(32768), dtree: [], imap: new r5(512), itree: [], rev15: new r5(32768), lhst: new i5(286), dhst: new i5(30), ihst: new i5(19), lits: new i5(15e3), strt: new r5(65536), prev: new r5(32768) }), (function() {
+          for (var e6 = UZIP2.F.U, t5 = 0; t5 < 32768; t5++) {
+            var r6 = t5;
+            r6 = (4278255360 & (r6 = (4042322160 & (r6 = (3435973836 & (r6 = (2863311530 & r6) >>> 1 | (1431655765 & r6) << 1)) >>> 2 | (858993459 & r6) << 2)) >>> 4 | (252645135 & r6) << 4)) >>> 8 | (16711935 & r6) << 8, e6.rev15[t5] = (r6 >>> 16 | r6 << 16) >>> 17;
+          }
+          function pushV(e7, t6, r7) {
+            for (; 0 != t6--; ) e7.push(0, r7);
+          }
+          for (t5 = 0; t5 < 32; t5++) e6.ldef[t5] = e6.of0[t5] << 3 | e6.exb[t5], e6.ddef[t5] = e6.df0[t5] << 4 | e6.dxb[t5];
+          pushV(e6.fltree, 144, 8), pushV(e6.fltree, 112, 9), pushV(e6.fltree, 24, 7), pushV(e6.fltree, 8, 8), UZIP2.F.makeCodes(e6.fltree, 9), UZIP2.F.codes2map(e6.fltree, 9, e6.flmap), UZIP2.F.revCodes(e6.fltree, 9), pushV(e6.fdtree, 32, 5), UZIP2.F.makeCodes(e6.fdtree, 5), UZIP2.F.codes2map(e6.fdtree, 5, e6.fdmap), UZIP2.F.revCodes(e6.fdtree, 5), pushV(e6.itree, 19, 0), pushV(e6.ltree, 286, 0), pushV(e6.dtree, 30, 0), pushV(e6.ttree, 320, 0);
+        })();
+      })();
+      UZIP = _mergeNamespaces({ __proto__: null, default: e }, [e]);
+      UPNG = (function() {
+        var e5 = { nextZero(e6, t6) {
+          for (; 0 != e6[t6]; ) t6++;
+          return t6;
+        }, readUshort: (e6, t6) => e6[t6] << 8 | e6[t6 + 1], writeUshort(e6, t6, r5) {
+          e6[t6] = r5 >> 8 & 255, e6[t6 + 1] = 255 & r5;
+        }, readUint: (e6, t6) => 16777216 * e6[t6] + (e6[t6 + 1] << 16 | e6[t6 + 2] << 8 | e6[t6 + 3]), writeUint(e6, t6, r5) {
+          e6[t6] = r5 >> 24 & 255, e6[t6 + 1] = r5 >> 16 & 255, e6[t6 + 2] = r5 >> 8 & 255, e6[t6 + 3] = 255 & r5;
+        }, readASCII(e6, t6, r5) {
+          let i5 = "";
+          for (let o5 = 0; o5 < r5; o5++) i5 += String.fromCharCode(e6[t6 + o5]);
+          return i5;
+        }, writeASCII(e6, t6, r5) {
+          for (let i5 = 0; i5 < r5.length; i5++) e6[t6 + i5] = r5.charCodeAt(i5);
+        }, readBytes(e6, t6, r5) {
+          const i5 = [];
+          for (let o5 = 0; o5 < r5; o5++) i5.push(e6[t6 + o5]);
+          return i5;
+        }, pad: (e6) => e6.length < 2 ? `0${e6}` : e6, readUTF8(t6, r5, i5) {
+          let o5, a5 = "";
+          for (let o6 = 0; o6 < i5; o6++) a5 += `%${e5.pad(t6[r5 + o6].toString(16))}`;
+          try {
+            o5 = decodeURIComponent(a5);
+          } catch (o6) {
+            return e5.readASCII(t6, r5, i5);
+          }
+          return o5;
+        } };
+        function decodeImage(t6, r5, i5, o5) {
+          const a5 = r5 * i5, s4 = _getBPP(o5), f5 = Math.ceil(r5 * s4 / 8), l4 = new Uint8Array(4 * a5), c5 = new Uint32Array(l4.buffer), { ctype: u4 } = o5, { depth: h4 } = o5, d3 = e5.readUshort;
+          if (6 == u4) {
+            const e6 = a5 << 2;
+            if (8 == h4) for (var A = 0; A < e6; A += 4) l4[A] = t6[A], l4[A + 1] = t6[A + 1], l4[A + 2] = t6[A + 2], l4[A + 3] = t6[A + 3];
+            if (16 == h4) for (A = 0; A < e6; A++) l4[A] = t6[A << 1];
+          } else if (2 == u4) {
+            const e6 = o5.tabs.tRNS;
+            if (null == e6) {
+              if (8 == h4) for (A = 0; A < a5; A++) {
+                var g2 = 3 * A;
+                c5[A] = 255 << 24 | t6[g2 + 2] << 16 | t6[g2 + 1] << 8 | t6[g2];
+              }
+              if (16 == h4) for (A = 0; A < a5; A++) {
+                g2 = 6 * A;
+                c5[A] = 255 << 24 | t6[g2 + 4] << 16 | t6[g2 + 2] << 8 | t6[g2];
+              }
+            } else {
+              var p4 = e6[0];
+              const r6 = e6[1], i6 = e6[2];
+              if (8 == h4) for (A = 0; A < a5; A++) {
+                var m2 = A << 2;
+                g2 = 3 * A;
+                c5[A] = 255 << 24 | t6[g2 + 2] << 16 | t6[g2 + 1] << 8 | t6[g2], t6[g2] == p4 && t6[g2 + 1] == r6 && t6[g2 + 2] == i6 && (l4[m2 + 3] = 0);
+              }
+              if (16 == h4) for (A = 0; A < a5; A++) {
+                m2 = A << 2, g2 = 6 * A;
+                c5[A] = 255 << 24 | t6[g2 + 4] << 16 | t6[g2 + 2] << 8 | t6[g2], d3(t6, g2) == p4 && d3(t6, g2 + 2) == r6 && d3(t6, g2 + 4) == i6 && (l4[m2 + 3] = 0);
+              }
+            }
+          } else if (3 == u4) {
+            const e6 = o5.tabs.PLTE, s5 = o5.tabs.tRNS, c6 = s5 ? s5.length : 0;
+            if (1 == h4) for (var w2 = 0; w2 < i5; w2++) {
+              var v3 = w2 * f5, b3 = w2 * r5;
+              for (A = 0; A < r5; A++) {
+                m2 = b3 + A << 2;
+                var y3 = 3 * (E = t6[v3 + (A >> 3)] >> 7 - ((7 & A) << 0) & 1);
+                l4[m2] = e6[y3], l4[m2 + 1] = e6[y3 + 1], l4[m2 + 2] = e6[y3 + 2], l4[m2 + 3] = E < c6 ? s5[E] : 255;
+              }
+            }
+            if (2 == h4) for (w2 = 0; w2 < i5; w2++) for (v3 = w2 * f5, b3 = w2 * r5, A = 0; A < r5; A++) {
+              m2 = b3 + A << 2, y3 = 3 * (E = t6[v3 + (A >> 2)] >> 6 - ((3 & A) << 1) & 3);
+              l4[m2] = e6[y3], l4[m2 + 1] = e6[y3 + 1], l4[m2 + 2] = e6[y3 + 2], l4[m2 + 3] = E < c6 ? s5[E] : 255;
+            }
+            if (4 == h4) for (w2 = 0; w2 < i5; w2++) for (v3 = w2 * f5, b3 = w2 * r5, A = 0; A < r5; A++) {
+              m2 = b3 + A << 2, y3 = 3 * (E = t6[v3 + (A >> 1)] >> 4 - ((1 & A) << 2) & 15);
+              l4[m2] = e6[y3], l4[m2 + 1] = e6[y3 + 1], l4[m2 + 2] = e6[y3 + 2], l4[m2 + 3] = E < c6 ? s5[E] : 255;
+            }
+            if (8 == h4) for (A = 0; A < a5; A++) {
+              var E;
+              m2 = A << 2, y3 = 3 * (E = t6[A]);
+              l4[m2] = e6[y3], l4[m2 + 1] = e6[y3 + 1], l4[m2 + 2] = e6[y3 + 2], l4[m2 + 3] = E < c6 ? s5[E] : 255;
+            }
+          } else if (4 == u4) {
+            if (8 == h4) for (A = 0; A < a5; A++) {
+              m2 = A << 2;
+              var F = t6[_ = A << 1];
+              l4[m2] = F, l4[m2 + 1] = F, l4[m2 + 2] = F, l4[m2 + 3] = t6[_ + 1];
+            }
+            if (16 == h4) for (A = 0; A < a5; A++) {
+              var _;
+              m2 = A << 2, F = t6[_ = A << 2];
+              l4[m2] = F, l4[m2 + 1] = F, l4[m2 + 2] = F, l4[m2 + 3] = t6[_ + 2];
+            }
+          } else if (0 == u4) for (p4 = o5.tabs.tRNS ? o5.tabs.tRNS : -1, w2 = 0; w2 < i5; w2++) {
+            const e6 = w2 * f5, i6 = w2 * r5;
+            if (1 == h4) for (var B = 0; B < r5; B++) {
+              var U = (F = 255 * (t6[e6 + (B >>> 3)] >>> 7 - (7 & B) & 1)) == 255 * p4 ? 0 : 255;
+              c5[i6 + B] = U << 24 | F << 16 | F << 8 | F;
+            }
+            else if (2 == h4) for (B = 0; B < r5; B++) {
+              U = (F = 85 * (t6[e6 + (B >>> 2)] >>> 6 - ((3 & B) << 1) & 3)) == 85 * p4 ? 0 : 255;
+              c5[i6 + B] = U << 24 | F << 16 | F << 8 | F;
+            }
+            else if (4 == h4) for (B = 0; B < r5; B++) {
+              U = (F = 17 * (t6[e6 + (B >>> 1)] >>> 4 - ((1 & B) << 2) & 15)) == 17 * p4 ? 0 : 255;
+              c5[i6 + B] = U << 24 | F << 16 | F << 8 | F;
+            }
+            else if (8 == h4) for (B = 0; B < r5; B++) {
+              U = (F = t6[e6 + B]) == p4 ? 0 : 255;
+              c5[i6 + B] = U << 24 | F << 16 | F << 8 | F;
+            }
+            else if (16 == h4) for (B = 0; B < r5; B++) {
+              F = t6[e6 + (B << 1)], U = d3(t6, e6 + (B << 1)) == p4 ? 0 : 255;
+              c5[i6 + B] = U << 24 | F << 16 | F << 8 | F;
+            }
+          }
+          return l4;
+        }
+        function _decompress(e6, r5, i5, o5) {
+          const a5 = _getBPP(e6), s4 = Math.ceil(i5 * a5 / 8), f5 = new Uint8Array((s4 + 1 + e6.interlace) * o5);
+          return r5 = e6.tabs.CgBI ? t5(r5, f5) : _inflate(r5, f5), 0 == e6.interlace ? r5 = _filterZero(r5, e6, 0, i5, o5) : 1 == e6.interlace && (r5 = (function _readInterlace(e7, t6) {
+            const r6 = t6.width, i6 = t6.height, o6 = _getBPP(t6), a6 = o6 >> 3, s5 = Math.ceil(r6 * o6 / 8), f6 = new Uint8Array(i6 * s5);
+            let l4 = 0;
+            const c5 = [0, 0, 4, 0, 2, 0, 1], u4 = [0, 4, 0, 2, 0, 1, 0], h4 = [8, 8, 8, 4, 4, 2, 2], d3 = [8, 8, 4, 4, 2, 2, 1];
+            let A = 0;
+            for (; A < 7; ) {
+              const p4 = h4[A], m2 = d3[A];
+              let w2 = 0, v3 = 0, b3 = c5[A];
+              for (; b3 < i6; ) b3 += p4, v3++;
+              let y3 = u4[A];
+              for (; y3 < r6; ) y3 += m2, w2++;
+              const E = Math.ceil(w2 * o6 / 8);
+              _filterZero(e7, t6, l4, w2, v3);
+              let F = 0, _ = c5[A];
+              for (; _ < i6; ) {
+                let t7 = u4[A], i7 = l4 + F * E << 3;
+                for (; t7 < r6; ) {
+                  var g2;
+                  if (1 == o6) g2 = (g2 = e7[i7 >> 3]) >> 7 - (7 & i7) & 1, f6[_ * s5 + (t7 >> 3)] |= g2 << 7 - ((7 & t7) << 0);
+                  if (2 == o6) g2 = (g2 = e7[i7 >> 3]) >> 6 - (7 & i7) & 3, f6[_ * s5 + (t7 >> 2)] |= g2 << 6 - ((3 & t7) << 1);
+                  if (4 == o6) g2 = (g2 = e7[i7 >> 3]) >> 4 - (7 & i7) & 15, f6[_ * s5 + (t7 >> 1)] |= g2 << 4 - ((1 & t7) << 2);
+                  if (o6 >= 8) {
+                    const r7 = _ * s5 + t7 * a6;
+                    for (let t8 = 0; t8 < a6; t8++) f6[r7 + t8] = e7[(i7 >> 3) + t8];
+                  }
+                  i7 += o6, t7 += m2;
+                }
+                F++, _ += p4;
+              }
+              w2 * v3 != 0 && (l4 += v3 * (1 + E)), A += 1;
+            }
+            return f6;
+          })(r5, e6)), r5;
+        }
+        function _inflate(e6, r5) {
+          return t5(new Uint8Array(e6.buffer, 2, e6.length - 6), r5);
+        }
+        var t5 = (function() {
+          const e6 = { H: {} };
+          return e6.H.N = function(t6, r5) {
+            const i5 = Uint8Array;
+            let o5, a5, s4 = 0, f5 = 0, l4 = 0, c5 = 0, u4 = 0, h4 = 0, d3 = 0, A = 0, g2 = 0;
+            if (3 == t6[0] && 0 == t6[1]) return r5 || new i5(0);
+            const p4 = e6.H, m2 = p4.b, w2 = p4.e, v3 = p4.R, b3 = p4.n, y3 = p4.A, E = p4.Z, F = p4.m, _ = null == r5;
+            for (_ && (r5 = new i5(t6.length >>> 2 << 5)); 0 == s4; ) if (s4 = m2(t6, g2, 1), f5 = m2(t6, g2 + 1, 2), g2 += 3, 0 != f5) {
+              if (_ && (r5 = e6.H.W(r5, A + (1 << 17))), 1 == f5 && (o5 = F.J, a5 = F.h, h4 = 511, d3 = 31), 2 == f5) {
+                l4 = w2(t6, g2, 5) + 257, c5 = w2(t6, g2 + 5, 5) + 1, u4 = w2(t6, g2 + 10, 4) + 4, g2 += 14;
+                let e7 = 1;
+                for (var B = 0; B < 38; B += 2) F.Q[B] = 0, F.Q[B + 1] = 0;
+                for (B = 0; B < u4; B++) {
+                  const r7 = w2(t6, g2 + 3 * B, 3);
+                  F.Q[1 + (F.X[B] << 1)] = r7, r7 > e7 && (e7 = r7);
+                }
+                g2 += 3 * u4, b3(F.Q, e7), y3(F.Q, e7, F.u), o5 = F.w, a5 = F.d, g2 = v3(F.u, (1 << e7) - 1, l4 + c5, t6, g2, F.v);
+                const r6 = p4.V(F.v, 0, l4, F.C);
+                h4 = (1 << r6) - 1;
+                const i6 = p4.V(F.v, l4, c5, F.D);
+                d3 = (1 << i6) - 1, b3(F.C, r6), y3(F.C, r6, o5), b3(F.D, i6), y3(F.D, i6, a5);
+              }
+              for (; ; ) {
+                const e7 = o5[E(t6, g2) & h4];
+                g2 += 15 & e7;
+                const i6 = e7 >>> 4;
+                if (i6 >>> 8 == 0) r5[A++] = i6;
+                else {
+                  if (256 == i6) break;
+                  {
+                    let e8 = A + i6 - 254;
+                    if (i6 > 264) {
+                      const r6 = F.q[i6 - 257];
+                      e8 = A + (r6 >>> 3) + w2(t6, g2, 7 & r6), g2 += 7 & r6;
+                    }
+                    const o6 = a5[E(t6, g2) & d3];
+                    g2 += 15 & o6;
+                    const s5 = o6 >>> 4, f6 = F.c[s5], l5 = (f6 >>> 4) + m2(t6, g2, 15 & f6);
+                    for (g2 += 15 & f6; A < e8; ) r5[A] = r5[A++ - l5], r5[A] = r5[A++ - l5], r5[A] = r5[A++ - l5], r5[A] = r5[A++ - l5];
+                    A = e8;
+                  }
+                }
+              }
+            } else {
+              0 != (7 & g2) && (g2 += 8 - (7 & g2));
+              const o6 = 4 + (g2 >>> 3), a6 = t6[o6 - 4] | t6[o6 - 3] << 8;
+              _ && (r5 = e6.H.W(r5, A + a6)), r5.set(new i5(t6.buffer, t6.byteOffset + o6, a6), A), g2 = o6 + a6 << 3, A += a6;
+            }
+            return r5.length == A ? r5 : r5.slice(0, A);
+          }, e6.H.W = function(e7, t6) {
+            const r5 = e7.length;
+            if (t6 <= r5) return e7;
+            const i5 = new Uint8Array(r5 << 1);
+            return i5.set(e7, 0), i5;
+          }, e6.H.R = function(t6, r5, i5, o5, a5, s4) {
+            const f5 = e6.H.e, l4 = e6.H.Z;
+            let c5 = 0;
+            for (; c5 < i5; ) {
+              const e7 = t6[l4(o5, a5) & r5];
+              a5 += 15 & e7;
+              const i6 = e7 >>> 4;
+              if (i6 <= 15) s4[c5] = i6, c5++;
+              else {
+                let e8 = 0, t7 = 0;
+                16 == i6 ? (t7 = 3 + f5(o5, a5, 2), a5 += 2, e8 = s4[c5 - 1]) : 17 == i6 ? (t7 = 3 + f5(o5, a5, 3), a5 += 3) : 18 == i6 && (t7 = 11 + f5(o5, a5, 7), a5 += 7);
+                const r6 = c5 + t7;
+                for (; c5 < r6; ) s4[c5] = e8, c5++;
+              }
+            }
+            return a5;
+          }, e6.H.V = function(e7, t6, r5, i5) {
+            let o5 = 0, a5 = 0;
+            const s4 = i5.length >>> 1;
+            for (; a5 < r5; ) {
+              const r6 = e7[a5 + t6];
+              i5[a5 << 1] = 0, i5[1 + (a5 << 1)] = r6, r6 > o5 && (o5 = r6), a5++;
+            }
+            for (; a5 < s4; ) i5[a5 << 1] = 0, i5[1 + (a5 << 1)] = 0, a5++;
+            return o5;
+          }, e6.H.n = function(t6, r5) {
+            const i5 = e6.H.m, o5 = t6.length;
+            let a5, s4, f5;
+            let l4;
+            const c5 = i5.j;
+            for (var u4 = 0; u4 <= r5; u4++) c5[u4] = 0;
+            for (u4 = 1; u4 < o5; u4 += 2) c5[t6[u4]]++;
+            const h4 = i5.K;
+            for (a5 = 0, c5[0] = 0, s4 = 1; s4 <= r5; s4++) a5 = a5 + c5[s4 - 1] << 1, h4[s4] = a5;
+            for (f5 = 0; f5 < o5; f5 += 2) l4 = t6[f5 + 1], 0 != l4 && (t6[f5] = h4[l4], h4[l4]++);
+          }, e6.H.A = function(t6, r5, i5) {
+            const o5 = t6.length, a5 = e6.H.m.r;
+            for (let e7 = 0; e7 < o5; e7 += 2) if (0 != t6[e7 + 1]) {
+              const o6 = e7 >> 1, s4 = t6[e7 + 1], f5 = o6 << 4 | s4, l4 = r5 - s4;
+              let c5 = t6[e7] << l4;
+              const u4 = c5 + (1 << l4);
+              for (; c5 != u4; ) {
+                i5[a5[c5] >>> 15 - r5] = f5, c5++;
+              }
+            }
+          }, e6.H.l = function(t6, r5) {
+            const i5 = e6.H.m.r, o5 = 15 - r5;
+            for (let e7 = 0; e7 < t6.length; e7 += 2) {
+              const a5 = t6[e7] << r5 - t6[e7 + 1];
+              t6[e7] = i5[a5] >>> o5;
+            }
+          }, e6.H.M = function(e7, t6, r5) {
+            r5 <<= 7 & t6;
+            const i5 = t6 >>> 3;
+            e7[i5] |= r5, e7[i5 + 1] |= r5 >>> 8;
+          }, e6.H.I = function(e7, t6, r5) {
+            r5 <<= 7 & t6;
+            const i5 = t6 >>> 3;
+            e7[i5] |= r5, e7[i5 + 1] |= r5 >>> 8, e7[i5 + 2] |= r5 >>> 16;
+          }, e6.H.e = function(e7, t6, r5) {
+            return (e7[t6 >>> 3] | e7[1 + (t6 >>> 3)] << 8) >>> (7 & t6) & (1 << r5) - 1;
+          }, e6.H.b = function(e7, t6, r5) {
+            return (e7[t6 >>> 3] | e7[1 + (t6 >>> 3)] << 8 | e7[2 + (t6 >>> 3)] << 16) >>> (7 & t6) & (1 << r5) - 1;
+          }, e6.H.Z = function(e7, t6) {
+            return (e7[t6 >>> 3] | e7[1 + (t6 >>> 3)] << 8 | e7[2 + (t6 >>> 3)] << 16) >>> (7 & t6);
+          }, e6.H.i = function(e7, t6) {
+            return (e7[t6 >>> 3] | e7[1 + (t6 >>> 3)] << 8 | e7[2 + (t6 >>> 3)] << 16 | e7[3 + (t6 >>> 3)] << 24) >>> (7 & t6);
+          }, e6.H.m = (function() {
+            const e7 = Uint16Array, t6 = Uint32Array;
+            return { K: new e7(16), j: new e7(16), X: [16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15], S: [3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 15, 17, 19, 23, 27, 31, 35, 43, 51, 59, 67, 83, 99, 115, 131, 163, 195, 227, 258, 999, 999, 999], T: [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 0, 0, 0, 0], q: new e7(32), p: [1, 2, 3, 4, 5, 7, 9, 13, 17, 25, 33, 49, 65, 97, 129, 193, 257, 385, 513, 769, 1025, 1537, 2049, 3073, 4097, 6145, 8193, 12289, 16385, 24577, 65535, 65535], z: [0, 0, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 0, 0], c: new t6(32), J: new e7(512), _: [], h: new e7(32), $: [], w: new e7(32768), C: [], v: [], d: new e7(32768), D: [], u: new e7(512), Q: [], r: new e7(32768), s: new t6(286), Y: new t6(30), a: new t6(19), t: new t6(15e3), k: new e7(65536), g: new e7(32768) };
+          })(), (function() {
+            const t6 = e6.H.m;
+            for (var r5 = 0; r5 < 32768; r5++) {
+              let e7 = r5;
+              e7 = (2863311530 & e7) >>> 1 | (1431655765 & e7) << 1, e7 = (3435973836 & e7) >>> 2 | (858993459 & e7) << 2, e7 = (4042322160 & e7) >>> 4 | (252645135 & e7) << 4, e7 = (4278255360 & e7) >>> 8 | (16711935 & e7) << 8, t6.r[r5] = (e7 >>> 16 | e7 << 16) >>> 17;
+            }
+            function n4(e7, t7, r6) {
+              for (; 0 != t7--; ) e7.push(0, r6);
+            }
+            for (r5 = 0; r5 < 32; r5++) t6.q[r5] = t6.S[r5] << 3 | t6.T[r5], t6.c[r5] = t6.p[r5] << 4 | t6.z[r5];
+            n4(t6._, 144, 8), n4(t6._, 112, 9), n4(t6._, 24, 7), n4(t6._, 8, 8), e6.H.n(t6._, 9), e6.H.A(t6._, 9, t6.J), e6.H.l(t6._, 9), n4(t6.$, 32, 5), e6.H.n(t6.$, 5), e6.H.A(t6.$, 5, t6.h), e6.H.l(t6.$, 5), n4(t6.Q, 19, 0), n4(t6.C, 286, 0), n4(t6.D, 30, 0), n4(t6.v, 320, 0);
+          })(), e6.H.N;
+        })();
+        function _getBPP(e6) {
+          return [1, null, 3, 1, 2, null, 4][e6.ctype] * e6.depth;
+        }
+        function _filterZero(e6, t6, r5, i5, o5) {
+          let a5 = _getBPP(t6);
+          const s4 = Math.ceil(i5 * a5 / 8);
+          let f5, l4;
+          a5 = Math.ceil(a5 / 8);
+          let c5 = e6[r5], u4 = 0;
+          if (c5 > 1 && (e6[r5] = [0, 0, 1][c5 - 2]), 3 == c5) for (u4 = a5; u4 < s4; u4++) e6[u4 + 1] = e6[u4 + 1] + (e6[u4 + 1 - a5] >>> 1) & 255;
+          for (let t7 = 0; t7 < o5; t7++) if (f5 = r5 + t7 * s4, l4 = f5 + t7 + 1, c5 = e6[l4 - 1], u4 = 0, 0 == c5) for (; u4 < s4; u4++) e6[f5 + u4] = e6[l4 + u4];
+          else if (1 == c5) {
+            for (; u4 < a5; u4++) e6[f5 + u4] = e6[l4 + u4];
+            for (; u4 < s4; u4++) e6[f5 + u4] = e6[l4 + u4] + e6[f5 + u4 - a5];
+          } else if (2 == c5) for (; u4 < s4; u4++) e6[f5 + u4] = e6[l4 + u4] + e6[f5 + u4 - s4];
+          else if (3 == c5) {
+            for (; u4 < a5; u4++) e6[f5 + u4] = e6[l4 + u4] + (e6[f5 + u4 - s4] >>> 1);
+            for (; u4 < s4; u4++) e6[f5 + u4] = e6[l4 + u4] + (e6[f5 + u4 - s4] + e6[f5 + u4 - a5] >>> 1);
+          } else {
+            for (; u4 < a5; u4++) e6[f5 + u4] = e6[l4 + u4] + _paeth(0, e6[f5 + u4 - s4], 0);
+            for (; u4 < s4; u4++) e6[f5 + u4] = e6[l4 + u4] + _paeth(e6[f5 + u4 - a5], e6[f5 + u4 - s4], e6[f5 + u4 - a5 - s4]);
+          }
+          return e6;
+        }
+        function _paeth(e6, t6, r5) {
+          const i5 = e6 + t6 - r5, o5 = i5 - e6, a5 = i5 - t6, s4 = i5 - r5;
+          return o5 * o5 <= a5 * a5 && o5 * o5 <= s4 * s4 ? e6 : a5 * a5 <= s4 * s4 ? t6 : r5;
+        }
+        function _IHDR(t6, r5, i5) {
+          i5.width = e5.readUint(t6, r5), r5 += 4, i5.height = e5.readUint(t6, r5), r5 += 4, i5.depth = t6[r5], r5++, i5.ctype = t6[r5], r5++, i5.compress = t6[r5], r5++, i5.filter = t6[r5], r5++, i5.interlace = t6[r5], r5++;
+        }
+        function _copyTile(e6, t6, r5, i5, o5, a5, s4, f5, l4) {
+          const c5 = Math.min(t6, o5), u4 = Math.min(r5, a5);
+          let h4 = 0, d3 = 0;
+          for (let r6 = 0; r6 < u4; r6++) for (let a6 = 0; a6 < c5; a6++) if (s4 >= 0 && f5 >= 0 ? (h4 = r6 * t6 + a6 << 2, d3 = (f5 + r6) * o5 + s4 + a6 << 2) : (h4 = (-f5 + r6) * t6 - s4 + a6 << 2, d3 = r6 * o5 + a6 << 2), 0 == l4) i5[d3] = e6[h4], i5[d3 + 1] = e6[h4 + 1], i5[d3 + 2] = e6[h4 + 2], i5[d3 + 3] = e6[h4 + 3];
+          else if (1 == l4) {
+            var A = e6[h4 + 3] * (1 / 255), g2 = e6[h4] * A, p4 = e6[h4 + 1] * A, m2 = e6[h4 + 2] * A, w2 = i5[d3 + 3] * (1 / 255), v3 = i5[d3] * w2, b3 = i5[d3 + 1] * w2, y3 = i5[d3 + 2] * w2;
+            const t7 = 1 - A, r7 = A + w2 * t7, o6 = 0 == r7 ? 0 : 1 / r7;
+            i5[d3 + 3] = 255 * r7, i5[d3 + 0] = (g2 + v3 * t7) * o6, i5[d3 + 1] = (p4 + b3 * t7) * o6, i5[d3 + 2] = (m2 + y3 * t7) * o6;
+          } else if (2 == l4) {
+            A = e6[h4 + 3], g2 = e6[h4], p4 = e6[h4 + 1], m2 = e6[h4 + 2], w2 = i5[d3 + 3], v3 = i5[d3], b3 = i5[d3 + 1], y3 = i5[d3 + 2];
+            A == w2 && g2 == v3 && p4 == b3 && m2 == y3 ? (i5[d3] = 0, i5[d3 + 1] = 0, i5[d3 + 2] = 0, i5[d3 + 3] = 0) : (i5[d3] = g2, i5[d3 + 1] = p4, i5[d3 + 2] = m2, i5[d3 + 3] = A);
+          } else if (3 == l4) {
+            A = e6[h4 + 3], g2 = e6[h4], p4 = e6[h4 + 1], m2 = e6[h4 + 2], w2 = i5[d3 + 3], v3 = i5[d3], b3 = i5[d3 + 1], y3 = i5[d3 + 2];
+            if (A == w2 && g2 == v3 && p4 == b3 && m2 == y3) continue;
+            if (A < 220 && w2 > 20) return false;
+          }
+          return true;
+        }
+        return { decode: function decode(r5) {
+          const i5 = new Uint8Array(r5);
+          let o5 = 8;
+          const a5 = e5, s4 = a5.readUshort, f5 = a5.readUint, l4 = { tabs: {}, frames: [] }, c5 = new Uint8Array(i5.length);
+          let u4, h4 = 0, d3 = 0;
+          const A = [137, 80, 78, 71, 13, 10, 26, 10];
+          for (var g2 = 0; g2 < 8; g2++) if (i5[g2] != A[g2]) throw "The input is not a PNG file!";
+          for (; o5 < i5.length; ) {
+            const e6 = a5.readUint(i5, o5);
+            o5 += 4;
+            const r6 = a5.readASCII(i5, o5, 4);
+            if (o5 += 4, "IHDR" == r6) _IHDR(i5, o5, l4);
+            else if ("iCCP" == r6) {
+              for (var p4 = o5; 0 != i5[p4]; ) p4++;
+              a5.readASCII(i5, o5, p4 - o5), i5[p4 + 1];
+              const s5 = i5.slice(p4 + 2, o5 + e6);
+              let f6 = null;
+              try {
+                f6 = _inflate(s5);
+              } catch (e7) {
+                f6 = t5(s5);
+              }
+              l4.tabs[r6] = f6;
+            } else if ("CgBI" == r6) l4.tabs[r6] = i5.slice(o5, o5 + 4);
+            else if ("IDAT" == r6) {
+              for (g2 = 0; g2 < e6; g2++) c5[h4 + g2] = i5[o5 + g2];
+              h4 += e6;
+            } else if ("acTL" == r6) l4.tabs[r6] = { num_frames: f5(i5, o5), num_plays: f5(i5, o5 + 4) }, u4 = new Uint8Array(i5.length);
+            else if ("fcTL" == r6) {
+              if (0 != d3) (E = l4.frames[l4.frames.length - 1]).data = _decompress(l4, u4.slice(0, d3), E.rect.width, E.rect.height), d3 = 0;
+              const e7 = { x: f5(i5, o5 + 12), y: f5(i5, o5 + 16), width: f5(i5, o5 + 4), height: f5(i5, o5 + 8) };
+              let t6 = s4(i5, o5 + 22);
+              t6 = s4(i5, o5 + 20) / (0 == t6 ? 100 : t6);
+              const r7 = { rect: e7, delay: Math.round(1e3 * t6), dispose: i5[o5 + 24], blend: i5[o5 + 25] };
+              l4.frames.push(r7);
+            } else if ("fdAT" == r6) {
+              for (g2 = 0; g2 < e6 - 4; g2++) u4[d3 + g2] = i5[o5 + g2 + 4];
+              d3 += e6 - 4;
+            } else if ("pHYs" == r6) l4.tabs[r6] = [a5.readUint(i5, o5), a5.readUint(i5, o5 + 4), i5[o5 + 8]];
+            else if ("cHRM" == r6) {
+              l4.tabs[r6] = [];
+              for (g2 = 0; g2 < 8; g2++) l4.tabs[r6].push(a5.readUint(i5, o5 + 4 * g2));
+            } else if ("tEXt" == r6 || "zTXt" == r6) {
+              null == l4.tabs[r6] && (l4.tabs[r6] = {});
+              var m2 = a5.nextZero(i5, o5), w2 = a5.readASCII(i5, o5, m2 - o5), v3 = o5 + e6 - m2 - 1;
+              if ("tEXt" == r6) y3 = a5.readASCII(i5, m2 + 1, v3);
+              else {
+                var b3 = _inflate(i5.slice(m2 + 2, m2 + 2 + v3));
+                y3 = a5.readUTF8(b3, 0, b3.length);
+              }
+              l4.tabs[r6][w2] = y3;
+            } else if ("iTXt" == r6) {
+              null == l4.tabs[r6] && (l4.tabs[r6] = {});
+              m2 = 0, p4 = o5;
+              m2 = a5.nextZero(i5, p4);
+              w2 = a5.readASCII(i5, p4, m2 - p4);
+              const t6 = i5[p4 = m2 + 1];
+              var y3;
+              i5[p4 + 1], p4 += 2, m2 = a5.nextZero(i5, p4), a5.readASCII(i5, p4, m2 - p4), p4 = m2 + 1, m2 = a5.nextZero(i5, p4), a5.readUTF8(i5, p4, m2 - p4);
+              v3 = e6 - ((p4 = m2 + 1) - o5);
+              if (0 == t6) y3 = a5.readUTF8(i5, p4, v3);
+              else {
+                b3 = _inflate(i5.slice(p4, p4 + v3));
+                y3 = a5.readUTF8(b3, 0, b3.length);
+              }
+              l4.tabs[r6][w2] = y3;
+            } else if ("PLTE" == r6) l4.tabs[r6] = a5.readBytes(i5, o5, e6);
+            else if ("hIST" == r6) {
+              const e7 = l4.tabs.PLTE.length / 3;
+              l4.tabs[r6] = [];
+              for (g2 = 0; g2 < e7; g2++) l4.tabs[r6].push(s4(i5, o5 + 2 * g2));
+            } else if ("tRNS" == r6) 3 == l4.ctype ? l4.tabs[r6] = a5.readBytes(i5, o5, e6) : 0 == l4.ctype ? l4.tabs[r6] = s4(i5, o5) : 2 == l4.ctype && (l4.tabs[r6] = [s4(i5, o5), s4(i5, o5 + 2), s4(i5, o5 + 4)]);
+            else if ("gAMA" == r6) l4.tabs[r6] = a5.readUint(i5, o5) / 1e5;
+            else if ("sRGB" == r6) l4.tabs[r6] = i5[o5];
+            else if ("bKGD" == r6) 0 == l4.ctype || 4 == l4.ctype ? l4.tabs[r6] = [s4(i5, o5)] : 2 == l4.ctype || 6 == l4.ctype ? l4.tabs[r6] = [s4(i5, o5), s4(i5, o5 + 2), s4(i5, o5 + 4)] : 3 == l4.ctype && (l4.tabs[r6] = i5[o5]);
+            else if ("IEND" == r6) break;
+            o5 += e6, a5.readUint(i5, o5), o5 += 4;
+          }
+          var E;
+          return 0 != d3 && ((E = l4.frames[l4.frames.length - 1]).data = _decompress(l4, u4.slice(0, d3), E.rect.width, E.rect.height)), l4.data = _decompress(l4, c5, l4.width, l4.height), delete l4.compress, delete l4.interlace, delete l4.filter, l4;
+        }, toRGBA8: function toRGBA8(e6) {
+          const t6 = e6.width, r5 = e6.height;
+          if (null == e6.tabs.acTL) return [decodeImage(e6.data, t6, r5, e6).buffer];
+          const i5 = [];
+          null == e6.frames[0].data && (e6.frames[0].data = e6.data);
+          const o5 = t6 * r5 * 4, a5 = new Uint8Array(o5), s4 = new Uint8Array(o5), f5 = new Uint8Array(o5);
+          for (let c5 = 0; c5 < e6.frames.length; c5++) {
+            const u4 = e6.frames[c5], h4 = u4.rect.x, d3 = u4.rect.y, A = u4.rect.width, g2 = u4.rect.height, p4 = decodeImage(u4.data, A, g2, e6);
+            if (0 != c5) for (var l4 = 0; l4 < o5; l4++) f5[l4] = a5[l4];
+            if (0 == u4.blend ? _copyTile(p4, A, g2, a5, t6, r5, h4, d3, 0) : 1 == u4.blend && _copyTile(p4, A, g2, a5, t6, r5, h4, d3, 1), i5.push(a5.buffer.slice(0)), 0 == u4.dispose) ;
+            else if (1 == u4.dispose) _copyTile(s4, A, g2, a5, t6, r5, h4, d3, 0);
+            else if (2 == u4.dispose) for (l4 = 0; l4 < o5; l4++) a5[l4] = f5[l4];
+          }
+          return i5;
+        }, _paeth, _copyTile, _bin: e5 };
+      })();
+      !(function() {
+        const { _copyTile: e5 } = UPNG, { _bin: t5 } = UPNG, r5 = UPNG._paeth;
+        var i5 = { table: (function() {
+          const e6 = new Uint32Array(256);
+          for (let t6 = 0; t6 < 256; t6++) {
+            let r6 = t6;
+            for (let e7 = 0; e7 < 8; e7++) 1 & r6 ? r6 = 3988292384 ^ r6 >>> 1 : r6 >>>= 1;
+            e6[t6] = r6;
+          }
+          return e6;
+        })(), update(e6, t6, r6, o6) {
+          for (let a5 = 0; a5 < o6; a5++) e6 = i5.table[255 & (e6 ^ t6[r6 + a5])] ^ e6 >>> 8;
+          return e6;
+        }, crc: (e6, t6, r6) => 4294967295 ^ i5.update(4294967295, e6, t6, r6) };
+        function addErr(e6, t6, r6, i6) {
+          t6[r6] += e6[0] * i6 >> 4, t6[r6 + 1] += e6[1] * i6 >> 4, t6[r6 + 2] += e6[2] * i6 >> 4, t6[r6 + 3] += e6[3] * i6 >> 4;
+        }
+        function N2(e6) {
+          return Math.max(0, Math.min(255, e6));
+        }
+        function D(e6, t6) {
+          const r6 = e6[0] - t6[0], i6 = e6[1] - t6[1], o6 = e6[2] - t6[2], a5 = e6[3] - t6[3];
+          return r6 * r6 + i6 * i6 + o6 * o6 + a5 * a5;
+        }
+        function dither(e6, t6, r6, i6, o6, a5, s4) {
+          null == s4 && (s4 = 1);
+          const f5 = i6.length, l4 = [];
+          for (var c5 = 0; c5 < f5; c5++) {
+            const e7 = i6[c5];
+            l4.push([e7 >>> 0 & 255, e7 >>> 8 & 255, e7 >>> 16 & 255, e7 >>> 24 & 255]);
+          }
+          for (c5 = 0; c5 < f5; c5++) {
+            let e7 = 4294967295;
+            for (var u4 = 0, h4 = 0; h4 < f5; h4++) {
+              var d3 = D(l4[c5], l4[h4]);
+              h4 != c5 && d3 < e7 && (e7 = d3, u4 = h4);
+            }
+          }
+          const A = new Uint32Array(o6.buffer), g2 = new Int16Array(t6 * r6 * 4), p4 = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5];
+          for (c5 = 0; c5 < p4.length; c5++) p4[c5] = 255 * ((p4[c5] + 0.5) / 16 - 0.5);
+          for (let o7 = 0; o7 < r6; o7++) for (let w2 = 0; w2 < t6; w2++) {
+            var m2;
+            c5 = 4 * (o7 * t6 + w2);
+            if (2 != s4) m2 = [N2(e6[c5] + g2[c5]), N2(e6[c5 + 1] + g2[c5 + 1]), N2(e6[c5 + 2] + g2[c5 + 2]), N2(e6[c5 + 3] + g2[c5 + 3])];
+            else {
+              d3 = p4[4 * (3 & o7) + (3 & w2)];
+              m2 = [N2(e6[c5] + d3), N2(e6[c5 + 1] + d3), N2(e6[c5 + 2] + d3), N2(e6[c5 + 3] + d3)];
+            }
+            u4 = 0;
+            let v3 = 16777215;
+            for (h4 = 0; h4 < f5; h4++) {
+              const e7 = D(m2, l4[h4]);
+              e7 < v3 && (v3 = e7, u4 = h4);
+            }
+            const b3 = l4[u4], y3 = [m2[0] - b3[0], m2[1] - b3[1], m2[2] - b3[2], m2[3] - b3[3]];
+            1 == s4 && (w2 != t6 - 1 && addErr(y3, g2, c5 + 4, 7), o7 != r6 - 1 && (0 != w2 && addErr(y3, g2, c5 + 4 * t6 - 4, 3), addErr(y3, g2, c5 + 4 * t6, 5), w2 != t6 - 1 && addErr(y3, g2, c5 + 4 * t6 + 4, 1))), a5[c5 >> 2] = u4, A[c5 >> 2] = i6[u4];
+          }
+        }
+        function _main(e6, r6, o6, a5, s4) {
+          null == s4 && (s4 = {});
+          const { crc: f5 } = i5, l4 = t5.writeUint, c5 = t5.writeUshort, u4 = t5.writeASCII;
+          let h4 = 8;
+          const d3 = e6.frames.length > 1;
+          let A, g2 = false, p4 = 33 + (d3 ? 20 : 0);
+          if (null != s4.sRGB && (p4 += 13), null != s4.pHYs && (p4 += 21), null != s4.iCCP && (A = pako.deflate(s4.iCCP), p4 += 21 + A.length + 4), 3 == e6.ctype) {
+            for (var m2 = e6.plte.length, w2 = 0; w2 < m2; w2++) e6.plte[w2] >>> 24 != 255 && (g2 = true);
+            p4 += 8 + 3 * m2 + 4 + (g2 ? 8 + 1 * m2 + 4 : 0);
+          }
+          for (var v3 = 0; v3 < e6.frames.length; v3++) {
+            d3 && (p4 += 38), p4 += (F = e6.frames[v3]).cimg.length + 12, 0 != v3 && (p4 += 4);
+          }
+          p4 += 12;
+          const b3 = new Uint8Array(p4), y3 = [137, 80, 78, 71, 13, 10, 26, 10];
+          for (w2 = 0; w2 < 8; w2++) b3[w2] = y3[w2];
+          if (l4(b3, h4, 13), h4 += 4, u4(b3, h4, "IHDR"), h4 += 4, l4(b3, h4, r6), h4 += 4, l4(b3, h4, o6), h4 += 4, b3[h4] = e6.depth, h4++, b3[h4] = e6.ctype, h4++, b3[h4] = 0, h4++, b3[h4] = 0, h4++, b3[h4] = 0, h4++, l4(b3, h4, f5(b3, h4 - 17, 17)), h4 += 4, null != s4.sRGB && (l4(b3, h4, 1), h4 += 4, u4(b3, h4, "sRGB"), h4 += 4, b3[h4] = s4.sRGB, h4++, l4(b3, h4, f5(b3, h4 - 5, 5)), h4 += 4), null != s4.iCCP) {
+            const e7 = 13 + A.length;
+            l4(b3, h4, e7), h4 += 4, u4(b3, h4, "iCCP"), h4 += 4, u4(b3, h4, "ICC profile"), h4 += 11, h4 += 2, b3.set(A, h4), h4 += A.length, l4(b3, h4, f5(b3, h4 - (e7 + 4), e7 + 4)), h4 += 4;
+          }
+          if (null != s4.pHYs && (l4(b3, h4, 9), h4 += 4, u4(b3, h4, "pHYs"), h4 += 4, l4(b3, h4, s4.pHYs[0]), h4 += 4, l4(b3, h4, s4.pHYs[1]), h4 += 4, b3[h4] = s4.pHYs[2], h4++, l4(b3, h4, f5(b3, h4 - 13, 13)), h4 += 4), d3 && (l4(b3, h4, 8), h4 += 4, u4(b3, h4, "acTL"), h4 += 4, l4(b3, h4, e6.frames.length), h4 += 4, l4(b3, h4, null != s4.loop ? s4.loop : 0), h4 += 4, l4(b3, h4, f5(b3, h4 - 12, 12)), h4 += 4), 3 == e6.ctype) {
+            l4(b3, h4, 3 * (m2 = e6.plte.length)), h4 += 4, u4(b3, h4, "PLTE"), h4 += 4;
+            for (w2 = 0; w2 < m2; w2++) {
+              const t6 = 3 * w2, r7 = e6.plte[w2], i6 = 255 & r7, o7 = r7 >>> 8 & 255, a6 = r7 >>> 16 & 255;
+              b3[h4 + t6 + 0] = i6, b3[h4 + t6 + 1] = o7, b3[h4 + t6 + 2] = a6;
+            }
+            if (h4 += 3 * m2, l4(b3, h4, f5(b3, h4 - 3 * m2 - 4, 3 * m2 + 4)), h4 += 4, g2) {
+              l4(b3, h4, m2), h4 += 4, u4(b3, h4, "tRNS"), h4 += 4;
+              for (w2 = 0; w2 < m2; w2++) b3[h4 + w2] = e6.plte[w2] >>> 24 & 255;
+              h4 += m2, l4(b3, h4, f5(b3, h4 - m2 - 4, m2 + 4)), h4 += 4;
+            }
+          }
+          let E = 0;
+          for (v3 = 0; v3 < e6.frames.length; v3++) {
+            var F = e6.frames[v3];
+            d3 && (l4(b3, h4, 26), h4 += 4, u4(b3, h4, "fcTL"), h4 += 4, l4(b3, h4, E++), h4 += 4, l4(b3, h4, F.rect.width), h4 += 4, l4(b3, h4, F.rect.height), h4 += 4, l4(b3, h4, F.rect.x), h4 += 4, l4(b3, h4, F.rect.y), h4 += 4, c5(b3, h4, a5[v3]), h4 += 2, c5(b3, h4, 1e3), h4 += 2, b3[h4] = F.dispose, h4++, b3[h4] = F.blend, h4++, l4(b3, h4, f5(b3, h4 - 30, 30)), h4 += 4);
+            const t6 = F.cimg;
+            l4(b3, h4, (m2 = t6.length) + (0 == v3 ? 0 : 4)), h4 += 4;
+            const r7 = h4;
+            u4(b3, h4, 0 == v3 ? "IDAT" : "fdAT"), h4 += 4, 0 != v3 && (l4(b3, h4, E++), h4 += 4), b3.set(t6, h4), h4 += m2, l4(b3, h4, f5(b3, r7, h4 - r7)), h4 += 4;
+          }
+          return l4(b3, h4, 0), h4 += 4, u4(b3, h4, "IEND"), h4 += 4, l4(b3, h4, f5(b3, h4 - 4, 4)), h4 += 4, b3.buffer;
+        }
+        function compressPNG(e6, t6, r6) {
+          for (let i6 = 0; i6 < e6.frames.length; i6++) {
+            const o6 = e6.frames[i6];
+            o6.rect.width;
+            const a5 = o6.rect.height, s4 = new Uint8Array(a5 * o6.bpl + a5);
+            o6.cimg = _filterZero(o6.img, a5, o6.bpp, o6.bpl, s4, t6, r6);
+          }
+        }
+        function compress2(t6, r6, i6, o6, a5) {
+          const s4 = a5[0], f5 = a5[1], l4 = a5[2], c5 = a5[3], u4 = a5[4], h4 = a5[5];
+          let d3 = 6, A = 8, g2 = 255;
+          for (var p4 = 0; p4 < t6.length; p4++) {
+            const e6 = new Uint8Array(t6[p4]);
+            for (var m2 = e6.length, w2 = 0; w2 < m2; w2 += 4) g2 &= e6[w2 + 3];
+          }
+          const v3 = 255 != g2, b3 = (function framize(t7, r7, i7, o7, a6, s5) {
+            const f6 = [];
+            for (var l5 = 0; l5 < t7.length; l5++) {
+              const h6 = new Uint8Array(t7[l5]), A3 = new Uint32Array(h6.buffer);
+              var c6;
+              let g3 = 0, p5 = 0, m3 = r7, w3 = i7, v4 = o7 ? 1 : 0;
+              if (0 != l5) {
+                const b4 = s5 || o7 || 1 == l5 || 0 != f6[l5 - 2].dispose ? 1 : 2;
+                let y4 = 0, E2 = 1e9;
+                for (let e6 = 0; e6 < b4; e6++) {
+                  var u5 = new Uint8Array(t7[l5 - 1 - e6]);
+                  const o8 = new Uint32Array(t7[l5 - 1 - e6]);
+                  let s6 = r7, f7 = i7, c7 = -1, h7 = -1;
+                  for (let e7 = 0; e7 < i7; e7++) for (let t8 = 0; t8 < r7; t8++) {
+                    A3[d4 = e7 * r7 + t8] != o8[d4] && (t8 < s6 && (s6 = t8), t8 > c7 && (c7 = t8), e7 < f7 && (f7 = e7), e7 > h7 && (h7 = e7));
+                  }
+                  -1 == c7 && (s6 = f7 = c7 = h7 = 0), a6 && (1 == (1 & s6) && s6--, 1 == (1 & f7) && f7--);
+                  const v5 = (c7 - s6 + 1) * (h7 - f7 + 1);
+                  v5 < E2 && (E2 = v5, y4 = e6, g3 = s6, p5 = f7, m3 = c7 - s6 + 1, w3 = h7 - f7 + 1);
+                }
+                u5 = new Uint8Array(t7[l5 - 1 - y4]);
+                1 == y4 && (f6[l5 - 1].dispose = 2), c6 = new Uint8Array(m3 * w3 * 4), e5(u5, r7, i7, c6, m3, w3, -g3, -p5, 0), v4 = e5(h6, r7, i7, c6, m3, w3, -g3, -p5, 3) ? 1 : 0, 1 == v4 ? _prepareDiff(h6, r7, i7, c6, { x: g3, y: p5, width: m3, height: w3 }) : e5(h6, r7, i7, c6, m3, w3, -g3, -p5, 0);
+              } else c6 = h6.slice(0);
+              f6.push({ rect: { x: g3, y: p5, width: m3, height: w3 }, img: c6, blend: v4, dispose: 0 });
+            }
+            if (o7) for (l5 = 0; l5 < f6.length; l5++) {
+              if (1 == (A2 = f6[l5]).blend) continue;
+              const e6 = A2.rect, o8 = f6[l5 - 1].rect, s6 = Math.min(e6.x, o8.x), c7 = Math.min(e6.y, o8.y), u6 = { x: s6, y: c7, width: Math.max(e6.x + e6.width, o8.x + o8.width) - s6, height: Math.max(e6.y + e6.height, o8.y + o8.height) - c7 };
+              f6[l5 - 1].dispose = 1, l5 - 1 != 0 && _updateFrame(t7, r7, i7, f6, l5 - 1, u6, a6), _updateFrame(t7, r7, i7, f6, l5, u6, a6);
+            }
+            let h5 = 0;
+            if (1 != t7.length) for (var d4 = 0; d4 < f6.length; d4++) {
+              var A2;
+              h5 += (A2 = f6[d4]).rect.width * A2.rect.height;
+            }
+            return f6;
+          })(t6, r6, i6, s4, f5, l4), y3 = {}, E = [], F = [];
+          if (0 != o6) {
+            const e6 = [];
+            for (w2 = 0; w2 < b3.length; w2++) e6.push(b3[w2].img.buffer);
+            const t7 = (function concatRGBA(e7) {
+              let t8 = 0;
+              for (var r8 = 0; r8 < e7.length; r8++) t8 += e7[r8].byteLength;
+              const i8 = new Uint8Array(t8);
+              let o7 = 0;
+              for (r8 = 0; r8 < e7.length; r8++) {
+                const t9 = new Uint8Array(e7[r8]), a6 = t9.length;
+                for (let e8 = 0; e8 < a6; e8 += 4) {
+                  let r9 = t9[e8], a7 = t9[e8 + 1], s5 = t9[e8 + 2];
+                  const f6 = t9[e8 + 3];
+                  0 == f6 && (r9 = a7 = s5 = 0), i8[o7 + e8] = r9, i8[o7 + e8 + 1] = a7, i8[o7 + e8 + 2] = s5, i8[o7 + e8 + 3] = f6;
+                }
+                o7 += a6;
+              }
+              return i8.buffer;
+            })(e6), r7 = quantize(t7, o6);
+            for (w2 = 0; w2 < r7.plte.length; w2++) E.push(r7.plte[w2].est.rgba);
+            let i7 = 0;
+            for (w2 = 0; w2 < b3.length; w2++) {
+              const e7 = (B = b3[w2]).img.length;
+              var _ = new Uint8Array(r7.inds.buffer, i7 >> 2, e7 >> 2);
+              F.push(_);
+              const t8 = new Uint8Array(r7.abuf, i7, e7);
+              h4 && dither(B.img, B.rect.width, B.rect.height, E, t8, _), B.img.set(t8), i7 += e7;
+            }
+          } else for (p4 = 0; p4 < b3.length; p4++) {
+            var B = b3[p4];
+            const e6 = new Uint32Array(B.img.buffer);
+            var U = B.rect.width;
+            m2 = e6.length, _ = new Uint8Array(m2);
+            F.push(_);
+            for (w2 = 0; w2 < m2; w2++) {
+              const t7 = e6[w2];
+              if (0 != w2 && t7 == e6[w2 - 1]) _[w2] = _[w2 - 1];
+              else if (w2 > U && t7 == e6[w2 - U]) _[w2] = _[w2 - U];
+              else {
+                let e7 = y3[t7];
+                if (null == e7 && (y3[t7] = e7 = E.length, E.push(t7), E.length >= 300)) break;
+                _[w2] = e7;
+              }
+            }
+          }
+          const C = E.length;
+          C <= 256 && 0 == u4 && (A = C <= 2 ? 1 : C <= 4 ? 2 : C <= 16 ? 4 : 8, A = Math.max(A, c5));
+          for (p4 = 0; p4 < b3.length; p4++) {
+            (B = b3[p4]).rect.x, B.rect.y;
+            U = B.rect.width;
+            const e6 = B.rect.height;
+            let t7 = B.img;
+            new Uint32Array(t7.buffer);
+            let r7 = 4 * U, i7 = 4;
+            if (C <= 256 && 0 == u4) {
+              r7 = Math.ceil(A * U / 8);
+              var I = new Uint8Array(r7 * e6);
+              const o7 = F[p4];
+              for (let t8 = 0; t8 < e6; t8++) {
+                w2 = t8 * r7;
+                const e7 = t8 * U;
+                if (8 == A) for (var Q = 0; Q < U; Q++) I[w2 + Q] = o7[e7 + Q];
+                else if (4 == A) for (Q = 0; Q < U; Q++) I[w2 + (Q >> 1)] |= o7[e7 + Q] << 4 - 4 * (1 & Q);
+                else if (2 == A) for (Q = 0; Q < U; Q++) I[w2 + (Q >> 2)] |= o7[e7 + Q] << 6 - 2 * (3 & Q);
+                else if (1 == A) for (Q = 0; Q < U; Q++) I[w2 + (Q >> 3)] |= o7[e7 + Q] << 7 - 1 * (7 & Q);
+              }
+              t7 = I, d3 = 3, i7 = 1;
+            } else if (0 == v3 && 1 == b3.length) {
+              I = new Uint8Array(U * e6 * 3);
+              const o7 = U * e6;
+              for (w2 = 0; w2 < o7; w2++) {
+                const e7 = 3 * w2, r8 = 4 * w2;
+                I[e7] = t7[r8], I[e7 + 1] = t7[r8 + 1], I[e7 + 2] = t7[r8 + 2];
+              }
+              t7 = I, d3 = 2, i7 = 3, r7 = 3 * U;
+            }
+            B.img = t7, B.bpl = r7, B.bpp = i7;
+          }
+          return { ctype: d3, depth: A, plte: E, frames: b3 };
+        }
+        function _updateFrame(t6, r6, i6, o6, a5, s4, f5) {
+          const l4 = Uint8Array, c5 = Uint32Array, u4 = new l4(t6[a5 - 1]), h4 = new c5(t6[a5 - 1]), d3 = a5 + 1 < t6.length ? new l4(t6[a5 + 1]) : null, A = new l4(t6[a5]), g2 = new c5(A.buffer);
+          let p4 = r6, m2 = i6, w2 = -1, v3 = -1;
+          for (let e6 = 0; e6 < s4.height; e6++) for (let t7 = 0; t7 < s4.width; t7++) {
+            const i7 = s4.x + t7, f6 = s4.y + e6, l5 = f6 * r6 + i7, c6 = g2[l5];
+            0 == c6 || 0 == o6[a5 - 1].dispose && h4[l5] == c6 && (null == d3 || 0 != d3[4 * l5 + 3]) || (i7 < p4 && (p4 = i7), i7 > w2 && (w2 = i7), f6 < m2 && (m2 = f6), f6 > v3 && (v3 = f6));
+          }
+          -1 == w2 && (p4 = m2 = w2 = v3 = 0), f5 && (1 == (1 & p4) && p4--, 1 == (1 & m2) && m2--), s4 = { x: p4, y: m2, width: w2 - p4 + 1, height: v3 - m2 + 1 };
+          const b3 = o6[a5];
+          b3.rect = s4, b3.blend = 1, b3.img = new Uint8Array(s4.width * s4.height * 4), 0 == o6[a5 - 1].dispose ? (e5(u4, r6, i6, b3.img, s4.width, s4.height, -s4.x, -s4.y, 0), _prepareDiff(A, r6, i6, b3.img, s4)) : e5(A, r6, i6, b3.img, s4.width, s4.height, -s4.x, -s4.y, 0);
+        }
+        function _prepareDiff(t6, r6, i6, o6, a5) {
+          e5(t6, r6, i6, o6, a5.width, a5.height, -a5.x, -a5.y, 2);
+        }
+        function _filterZero(e6, t6, r6, i6, o6, a5, s4) {
+          const f5 = [];
+          let l4, c5 = [0, 1, 2, 3, 4];
+          -1 != a5 ? c5 = [a5] : (t6 * i6 > 5e5 || 1 == r6) && (c5 = [0]), s4 && (l4 = { level: 0 });
+          const u4 = UZIP;
+          for (var h4 = 0; h4 < c5.length; h4++) {
+            for (let a6 = 0; a6 < t6; a6++) _filterLine(o6, e6, a6, i6, r6, c5[h4]);
+            f5.push(u4.deflate(o6, l4));
+          }
+          let d3, A = 1e9;
+          for (h4 = 0; h4 < f5.length; h4++) f5[h4].length < A && (d3 = h4, A = f5[h4].length);
+          return f5[d3];
+        }
+        function _filterLine(e6, t6, i6, o6, a5, s4) {
+          const f5 = i6 * o6;
+          let l4 = f5 + i6;
+          if (e6[l4] = s4, l4++, 0 == s4) if (o6 < 500) for (var c5 = 0; c5 < o6; c5++) e6[l4 + c5] = t6[f5 + c5];
+          else e6.set(new Uint8Array(t6.buffer, f5, o6), l4);
+          else if (1 == s4) {
+            for (c5 = 0; c5 < a5; c5++) e6[l4 + c5] = t6[f5 + c5];
+            for (c5 = a5; c5 < o6; c5++) e6[l4 + c5] = t6[f5 + c5] - t6[f5 + c5 - a5] + 256 & 255;
+          } else if (0 == i6) {
+            for (c5 = 0; c5 < a5; c5++) e6[l4 + c5] = t6[f5 + c5];
+            if (2 == s4) for (c5 = a5; c5 < o6; c5++) e6[l4 + c5] = t6[f5 + c5];
+            if (3 == s4) for (c5 = a5; c5 < o6; c5++) e6[l4 + c5] = t6[f5 + c5] - (t6[f5 + c5 - a5] >> 1) + 256 & 255;
+            if (4 == s4) for (c5 = a5; c5 < o6; c5++) e6[l4 + c5] = t6[f5 + c5] - r5(t6[f5 + c5 - a5], 0, 0) + 256 & 255;
+          } else {
+            if (2 == s4) for (c5 = 0; c5 < o6; c5++) e6[l4 + c5] = t6[f5 + c5] + 256 - t6[f5 + c5 - o6] & 255;
+            if (3 == s4) {
+              for (c5 = 0; c5 < a5; c5++) e6[l4 + c5] = t6[f5 + c5] + 256 - (t6[f5 + c5 - o6] >> 1) & 255;
+              for (c5 = a5; c5 < o6; c5++) e6[l4 + c5] = t6[f5 + c5] + 256 - (t6[f5 + c5 - o6] + t6[f5 + c5 - a5] >> 1) & 255;
+            }
+            if (4 == s4) {
+              for (c5 = 0; c5 < a5; c5++) e6[l4 + c5] = t6[f5 + c5] + 256 - r5(0, t6[f5 + c5 - o6], 0) & 255;
+              for (c5 = a5; c5 < o6; c5++) e6[l4 + c5] = t6[f5 + c5] + 256 - r5(t6[f5 + c5 - a5], t6[f5 + c5 - o6], t6[f5 + c5 - a5 - o6]) & 255;
+            }
+          }
+        }
+        function quantize(e6, t6) {
+          const r6 = new Uint8Array(e6), i6 = r6.slice(0), o6 = new Uint32Array(i6.buffer), a5 = getKDtree(i6, t6), s4 = a5[0], f5 = a5[1], l4 = r6.length, c5 = new Uint8Array(l4 >> 2);
+          let u4;
+          if (r6.length < 2e7) for (var h4 = 0; h4 < l4; h4 += 4) {
+            u4 = getNearest(s4, d3 = r6[h4] * (1 / 255), A = r6[h4 + 1] * (1 / 255), g2 = r6[h4 + 2] * (1 / 255), p4 = r6[h4 + 3] * (1 / 255)), c5[h4 >> 2] = u4.ind, o6[h4 >> 2] = u4.est.rgba;
+          }
+          else for (h4 = 0; h4 < l4; h4 += 4) {
+            var d3 = r6[h4] * (1 / 255), A = r6[h4 + 1] * (1 / 255), g2 = r6[h4 + 2] * (1 / 255), p4 = r6[h4 + 3] * (1 / 255);
+            for (u4 = s4; u4.left; ) u4 = planeDst(u4.est, d3, A, g2, p4) <= 0 ? u4.left : u4.right;
+            c5[h4 >> 2] = u4.ind, o6[h4 >> 2] = u4.est.rgba;
+          }
+          return { abuf: i6.buffer, inds: c5, plte: f5 };
+        }
+        function getKDtree(e6, t6, r6) {
+          null == r6 && (r6 = 1e-4);
+          const i6 = new Uint32Array(e6.buffer), o6 = { i0: 0, i1: e6.length, bst: null, est: null, tdst: 0, left: null, right: null };
+          o6.bst = stats(e6, o6.i0, o6.i1), o6.est = estats(o6.bst);
+          const a5 = [o6];
+          for (; a5.length < t6; ) {
+            let t7 = 0, o7 = 0;
+            for (var s4 = 0; s4 < a5.length; s4++) a5[s4].est.L > t7 && (t7 = a5[s4].est.L, o7 = s4);
+            if (t7 < r6) break;
+            const f5 = a5[o7], l4 = splitPixels(e6, i6, f5.i0, f5.i1, f5.est.e, f5.est.eMq255);
+            if (f5.i0 >= l4 || f5.i1 <= l4) {
+              f5.est.L = 0;
+              continue;
+            }
+            const c5 = { i0: f5.i0, i1: l4, bst: null, est: null, tdst: 0, left: null, right: null };
+            c5.bst = stats(e6, c5.i0, c5.i1), c5.est = estats(c5.bst);
+            const u4 = { i0: l4, i1: f5.i1, bst: null, est: null, tdst: 0, left: null, right: null };
+            u4.bst = { R: [], m: [], N: f5.bst.N - c5.bst.N };
+            for (s4 = 0; s4 < 16; s4++) u4.bst.R[s4] = f5.bst.R[s4] - c5.bst.R[s4];
+            for (s4 = 0; s4 < 4; s4++) u4.bst.m[s4] = f5.bst.m[s4] - c5.bst.m[s4];
+            u4.est = estats(u4.bst), f5.left = c5, f5.right = u4, a5[o7] = c5, a5.push(u4);
+          }
+          a5.sort(((e7, t7) => t7.bst.N - e7.bst.N));
+          for (s4 = 0; s4 < a5.length; s4++) a5[s4].ind = s4;
+          return [o6, a5];
+        }
+        function getNearest(e6, t6, r6, i6, o6) {
+          if (null == e6.left) return e6.tdst = (function dist(e7, t7, r7, i7, o7) {
+            const a6 = t7 - e7[0], s5 = r7 - e7[1], f6 = i7 - e7[2], l5 = o7 - e7[3];
+            return a6 * a6 + s5 * s5 + f6 * f6 + l5 * l5;
+          })(e6.est.q, t6, r6, i6, o6), e6;
+          const a5 = planeDst(e6.est, t6, r6, i6, o6);
+          let s4 = e6.left, f5 = e6.right;
+          a5 > 0 && (s4 = e6.right, f5 = e6.left);
+          const l4 = getNearest(s4, t6, r6, i6, o6);
+          if (l4.tdst <= a5 * a5) return l4;
+          const c5 = getNearest(f5, t6, r6, i6, o6);
+          return c5.tdst < l4.tdst ? c5 : l4;
+        }
+        function planeDst(e6, t6, r6, i6, o6) {
+          const { e: a5 } = e6;
+          return a5[0] * t6 + a5[1] * r6 + a5[2] * i6 + a5[3] * o6 - e6.eMq;
+        }
+        function splitPixels(e6, t6, r6, i6, o6, a5) {
+          for (i6 -= 4; r6 < i6; ) {
+            for (; vecDot(e6, r6, o6) <= a5; ) r6 += 4;
+            for (; vecDot(e6, i6, o6) > a5; ) i6 -= 4;
+            if (r6 >= i6) break;
+            const s4 = t6[r6 >> 2];
+            t6[r6 >> 2] = t6[i6 >> 2], t6[i6 >> 2] = s4, r6 += 4, i6 -= 4;
+          }
+          for (; vecDot(e6, r6, o6) > a5; ) r6 -= 4;
+          return r6 + 4;
+        }
+        function vecDot(e6, t6, r6) {
+          return e6[t6] * r6[0] + e6[t6 + 1] * r6[1] + e6[t6 + 2] * r6[2] + e6[t6 + 3] * r6[3];
+        }
+        function stats(e6, t6, r6) {
+          const i6 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], o6 = [0, 0, 0, 0], a5 = r6 - t6 >> 2;
+          for (let a6 = t6; a6 < r6; a6 += 4) {
+            const t7 = e6[a6] * (1 / 255), r7 = e6[a6 + 1] * (1 / 255), s4 = e6[a6 + 2] * (1 / 255), f5 = e6[a6 + 3] * (1 / 255);
+            o6[0] += t7, o6[1] += r7, o6[2] += s4, o6[3] += f5, i6[0] += t7 * t7, i6[1] += t7 * r7, i6[2] += t7 * s4, i6[3] += t7 * f5, i6[5] += r7 * r7, i6[6] += r7 * s4, i6[7] += r7 * f5, i6[10] += s4 * s4, i6[11] += s4 * f5, i6[15] += f5 * f5;
+          }
+          return i6[4] = i6[1], i6[8] = i6[2], i6[9] = i6[6], i6[12] = i6[3], i6[13] = i6[7], i6[14] = i6[11], { R: i6, m: o6, N: a5 };
+        }
+        function estats(e6) {
+          const { R: t6 } = e6, { m: r6 } = e6, { N: i6 } = e6, a5 = r6[0], s4 = r6[1], f5 = r6[2], l4 = r6[3], c5 = 0 == i6 ? 0 : 1 / i6, u4 = [t6[0] - a5 * a5 * c5, t6[1] - a5 * s4 * c5, t6[2] - a5 * f5 * c5, t6[3] - a5 * l4 * c5, t6[4] - s4 * a5 * c5, t6[5] - s4 * s4 * c5, t6[6] - s4 * f5 * c5, t6[7] - s4 * l4 * c5, t6[8] - f5 * a5 * c5, t6[9] - f5 * s4 * c5, t6[10] - f5 * f5 * c5, t6[11] - f5 * l4 * c5, t6[12] - l4 * a5 * c5, t6[13] - l4 * s4 * c5, t6[14] - l4 * f5 * c5, t6[15] - l4 * l4 * c5], h4 = u4, d3 = o5;
+          let A = [Math.random(), Math.random(), Math.random(), Math.random()], g2 = 0, p4 = 0;
+          if (0 != i6) for (let e7 = 0; e7 < 16 && (A = d3.multVec(h4, A), p4 = Math.sqrt(d3.dot(A, A)), A = d3.sml(1 / p4, A), !(0 != e7 && Math.abs(p4 - g2) < 1e-9)); e7++) g2 = p4;
+          const m2 = [a5 * c5, s4 * c5, f5 * c5, l4 * c5];
+          return { Cov: u4, q: m2, e: A, L: g2, eMq255: d3.dot(d3.sml(255, m2), A), eMq: d3.dot(A, m2), rgba: (Math.round(255 * m2[3]) << 24 | Math.round(255 * m2[2]) << 16 | Math.round(255 * m2[1]) << 8 | Math.round(255 * m2[0]) << 0) >>> 0 };
+        }
+        var o5 = { multVec: (e6, t6) => [e6[0] * t6[0] + e6[1] * t6[1] + e6[2] * t6[2] + e6[3] * t6[3], e6[4] * t6[0] + e6[5] * t6[1] + e6[6] * t6[2] + e6[7] * t6[3], e6[8] * t6[0] + e6[9] * t6[1] + e6[10] * t6[2] + e6[11] * t6[3], e6[12] * t6[0] + e6[13] * t6[1] + e6[14] * t6[2] + e6[15] * t6[3]], dot: (e6, t6) => e6[0] * t6[0] + e6[1] * t6[1] + e6[2] * t6[2] + e6[3] * t6[3], sml: (e6, t6) => [e6 * t6[0], e6 * t6[1], e6 * t6[2], e6 * t6[3]] };
+        UPNG.encode = function encode(e6, t6, r6, i6, o6, a5, s4) {
+          null == i6 && (i6 = 0), null == s4 && (s4 = false);
+          const f5 = compress2(e6, t6, r6, i6, [false, false, false, 0, s4, false]);
+          return compressPNG(f5, -1), _main(f5, t6, r6, o6, a5);
+        }, UPNG.encodeLL = function encodeLL(e6, t6, r6, i6, o6, a5, s4, f5) {
+          const l4 = { ctype: 0 + (1 == i6 ? 0 : 2) + (0 == o6 ? 0 : 4), depth: a5, frames: [] }, c5 = (i6 + o6) * a5, u4 = c5 * t6;
+          for (let i7 = 0; i7 < e6.length; i7++) l4.frames.push({ rect: { x: 0, y: 0, width: t6, height: r6 }, img: new Uint8Array(e6[i7]), blend: 0, dispose: 1, bpp: Math.ceil(c5 / 8), bpl: Math.ceil(u4 / 8) });
+          return compressPNG(l4, 0, true), _main(l4, t6, r6, s4, f5);
+        }, UPNG.encode.compress = compress2, UPNG.encode.dither = dither, UPNG.quantize = quantize, UPNG.quantize.getKDtree = getKDtree, UPNG.quantize.getNearest = getNearest;
+      })();
+      r = { toArrayBuffer(e5, t5) {
+        const i5 = e5.width, o5 = e5.height, a5 = i5 << 2, s4 = e5.getContext("2d").getImageData(0, 0, i5, o5), f5 = new Uint32Array(s4.data.buffer), l4 = (32 * i5 + 31) / 32 << 2, c5 = l4 * o5, u4 = 122 + c5, h4 = new ArrayBuffer(u4), d3 = new DataView(h4), A = 1 << 20;
+        let g2, p4, m2, w2, v3 = A, b3 = 0, y3 = 0, E = 0;
+        function set16(e6) {
+          d3.setUint16(y3, e6, true), y3 += 2;
+        }
+        function set32(e6) {
+          d3.setUint32(y3, e6, true), y3 += 4;
+        }
+        function seek(e6) {
+          y3 += e6;
+        }
+        set16(19778), set32(u4), seek(4), set32(122), set32(108), set32(i5), set32(-o5 >>> 0), set16(1), set16(32), set32(3), set32(c5), set32(2835), set32(2835), seek(8), set32(16711680), set32(65280), set32(255), set32(4278190080), set32(1466527264), (function convert() {
+          for (; b3 < o5 && v3 > 0; ) {
+            for (w2 = 122 + b3 * l4, g2 = 0; g2 < a5; ) v3--, p4 = f5[E++], m2 = p4 >>> 24, d3.setUint32(w2 + g2, p4 << 8 | m2), g2 += 4;
+            b3++;
+          }
+          E < f5.length ? (v3 = A, setTimeout(convert, r._dly)) : t5(h4);
+        })();
+      }, toBlob(e5, t5) {
+        this.toArrayBuffer(e5, ((e6) => {
+          t5(new Blob([e6], { type: "image/bmp" }));
+        }));
+      }, _dly: 9 };
+      i = { CHROME: "CHROME", FIREFOX: "FIREFOX", DESKTOP_SAFARI: "DESKTOP_SAFARI", IE: "IE", IOS: "IOS", ETC: "ETC" };
+      o = { [i.CHROME]: 16384, [i.FIREFOX]: 11180, [i.DESKTOP_SAFARI]: 16384, [i.IE]: 8192, [i.IOS]: 4096, [i.ETC]: 8192 };
+      a = "undefined" != typeof window;
+      s = "undefined" != typeof WorkerGlobalScope && self instanceof WorkerGlobalScope;
+      f = a && window.cordova && window.cordova.require && window.cordova.require("cordova/modulemapper");
+      CustomFile = (a || s) && (f && f.getOriginalSymbol(window, "File") || "undefined" != typeof File && File);
+      CustomFileReader = (a || s) && (f && f.getOriginalSymbol(window, "FileReader") || "undefined" != typeof FileReader && FileReader);
+      l = "\nlet scriptImported = false\nself.addEventListener('message', async (e) => {\n  const { file, id, imageCompressionLibUrl, options } = e.data\n  options.onProgress = (progress) => self.postMessage({ progress, id })\n  try {\n    if (!scriptImported) {\n      // console.log('[worker] importScripts', imageCompressionLibUrl)\n      self.importScripts(imageCompressionLibUrl)\n      scriptImported = true\n    }\n    // console.log('[worker] self', self)\n    const compressedFile = await imageCompression(file, options)\n    self.postMessage({ file: compressedFile, id })\n  } catch (e) {\n    // console.error('[worker] error', e)\n    self.postMessage({ error: e.message + '\\n' + e.stack, id })\n  }\n})\n";
+      imageCompression.getDataUrlFromFile = getDataUrlFromFile, imageCompression.getFilefromDataUrl = getFilefromDataUrl, imageCompression.loadImage = loadImage, imageCompression.drawImageInCanvas = drawImageInCanvas, imageCompression.drawFileInCanvas = drawFileInCanvas, imageCompression.canvasToFile = canvasToFile, imageCompression.getExifOrientation = getExifOrientation, imageCompression.handleMaxWidthOrHeight = handleMaxWidthOrHeight, imageCompression.followExifOrientation = followExifOrientation, imageCompression.cleanupCanvasMemory = cleanupCanvasMemory, imageCompression.isAutoOrientationInBrowser = isAutoOrientationInBrowser, imageCompression.approximateBelowMaximumCanvasSizeOfBrowser = approximateBelowMaximumCanvasSizeOfBrowser, imageCompression.copyExifWithoutOrientation = copyExifWithoutOrientation, imageCompression.getBrowserName = getBrowserName, imageCompression.version = "2.0.2";
+    }
+  });
 
   // src/common/utils.ts
-  var DEBUG = false;
-  var browser;
-  if (browser === void 0) {
-    browser = chrome;
-  }
   function getByPath(object, path) {
     if (!path) {
       return object;
@@ -4149,7 +2233,7 @@ Is it scaring you off?`,
         throw `setByPath: ${node} did not exist in path ${path}`;
       }
     }
-    const leaf = pathSplit[pathSplit.length - 1];
+    const leaf = pathSplit.at(-1);
     if (leaf === void 0) {
       throw `setByPath: invalid path ${path}`;
     }
@@ -4160,11 +2244,7 @@ Is it scaring you off?`,
       object = {};
     }
     for (const key of Object.keys(defaults)) {
-      if (
-        typeof defaults[key] === "object" &&
-        !Array.isArray(defaults[key]) &&
-        defaults[key] !== null
-      ) {
+      if (typeof defaults[key] === "object" && !Array.isArray(defaults[key]) && defaults[key] !== null) {
         object[key] = fillObjectWithDefaults(object[key], defaults[key]);
       }
       if (object[key] === void 0) {
@@ -4187,8 +2267,8 @@ Is it scaring you off?`,
   function delay(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
-  function getExtensionImage(name2) {
-    return browser.runtime.getURL(`media/${name2}`);
+  function getExtensionImage(name) {
+    return browser.runtime.getURL(`media/${name}`);
   }
   function sendDebug(...messages) {
     if (DEBUG) {
@@ -4199,7 +2279,7 @@ Is it scaring you off?`,
     return /^#[0-9a-f]{3}(?:[0-9a-f]{3})?(?:[0-9a-f]{2})?$/i.test(color);
   }
   function getCurrentDate() {
-    return /* @__PURE__ */ new Date().toISOString().split("T")[0];
+    return (/* @__PURE__ */ new Date()).toISOString().split("T")[0];
   }
   function getFutureDate(days) {
     return new Date(Date.now() + days * 864e5).toISOString().split("T")[0];
@@ -4219,7 +2299,7 @@ Is it scaring you off?`,
   async function convertLinkToBase64(link) {
     const base64 = await browser.runtime.sendMessage({
       action: "getBase64",
-      link,
+      link
     });
     if (base64) {
       return base64;
@@ -4231,7 +2311,7 @@ Is it scaring you off?`,
     try {
       const fileData = await browser.runtime.sendMessage({
         action: "getFileData",
-        link,
+        link
       });
       if (!fileData) {
         console.error(`Failed to get file data for link: ${link}`);
@@ -4251,7 +2331,7 @@ Is it scaring you off?`,
       const options = {
         maxSizeMB: 0.01,
         maxWidthOrHeight: 350,
-        useWebWorker: false,
+        useWebWorker: false
       };
       const compressedFile = await imageCompression(file, options);
       const dataUrl = await imageCompression.getDataUrlFromFile(compressedFile);
@@ -4261,6 +2341,17 @@ Is it scaring you off?`,
       return await imageCompression.getDataUrlFromFile(file);
     }
   }
+  var DEBUG, browser;
+  var init_utils = __esm({
+    "src/common/utils.ts"() {
+      "use strict";
+      init_browser_image_compression();
+      DEBUG = false;
+      if (browser === void 0) {
+        browser = chrome;
+      }
+    }
+  });
 
   // src/fixes-utils/utils.ts
   function isValidImage(src) {
@@ -4316,7 +2407,7 @@ Is it scaring you off?`,
         sendDebug("Extracted userId from cookie plannerUrl:", userId);
       } else {
         console.error(
-          "UID is fucked, refresh 5 keer en als het dan niet werkt vraag hulp op discord @JJorne",
+          "UID is fucked, refresh 5 keer en als het dan niet werkt vraag hulp op discord @JJorne"
         );
       }
     }
@@ -4342,276 +2433,286 @@ Is it scaring you off?`,
   async function clearAllData() {
     localStorage.clear();
     await browser.runtime.sendMessage({
-      action: "clearLocalStorage",
+      action: "clearLocalStorage"
     });
     location.reload();
   }
-  var Toast = class {
-    content;
-    type;
-    time;
-    toastElement;
-    constructor(content, type, time = 3e3) {
-      this.content = content;
-      this.type = type;
-      this.time = time;
-      this.toastElement = this.createToastElement();
+  var Toast;
+  var init_utils2 = __esm({
+    "src/fixes-utils/utils.ts"() {
+      "use strict";
+      init_utils();
+      init_svgs();
+      Toast = class {
+        content;
+        type;
+        time;
+        toastElement;
+        constructor(content, type, time = 3e3) {
+          this.content = content;
+          this.type = type;
+          this.time = time;
+          this.toastElement = this.createToastElement();
+        }
+        createToastElement() {
+          const toast = document.createElement("div");
+          toast.classList.add("smpp-toast");
+          const icon = document.createElement("div");
+          icon.classList.add("smpp-toast-icon");
+          const title = document.createElement("span");
+          switch (this.type) {
+            case "info":
+              title.innerText = "Info";
+              icon.innerHTML = infoSvg;
+              toast.classList.add("smpp-info-toast");
+              break;
+            case "succes":
+              title.innerText = "Succes";
+              icon.innerHTML = succesSvg;
+              toast.classList.add("smpp-succes-toast");
+              break;
+            case "error":
+              title.innerText = "Error";
+              icon.innerHTML = errorSvg;
+              toast.classList.add("smpp-error-toast");
+              break;
+            case "warning":
+              title.innerText = "Warning";
+              icon.innerHTML = warnSvg;
+              toast.classList.add("smpp-warning-toast");
+              break;
+          }
+          const topContainer = document.createElement("div");
+          topContainer.classList.add("smpp-toast-top");
+          topContainer.appendChild(icon);
+          topContainer.appendChild(title);
+          toast.appendChild(topContainer);
+          const content = document.createElement("span");
+          content.classList.add("smpp-toast-content");
+          content.innerText = this.content;
+          toast.appendChild(content);
+          return toast;
+        }
+        async hideToastElement() {
+          const toastContainer = document.getElementById("toast-container");
+          if (!toastContainer) {
+            return;
+          }
+          this.toastElement.classList.add("being-removed");
+          await delay(300);
+          toastContainer.removeChild(this.toastElement);
+        }
+        async render() {
+          const toastContainer = document.getElementById("toast-container");
+          if (!toastContainer) {
+            return;
+          }
+          toastContainer.appendChild(this.toastElement);
+          await delay(this.time);
+          await this.hideToastElement();
+        }
+      };
     }
-    createToastElement() {
-      const toast = document.createElement("div");
-      toast.classList.add("smpp-toast");
-      const icon = document.createElement("div");
-      icon.classList.add("smpp-toast-icon");
-      const title = document.createElement("span");
-      switch (this.type) {
-        case "info":
-          title.innerText = "Info";
-          icon.innerHTML = infoSvg;
-          toast.classList.add("smpp-info-toast");
-          break;
-        case "succes":
-          title.innerText = "Succes";
-          icon.innerHTML = succesSvg;
-          toast.classList.add("smpp-succes-toast");
-          break;
-        case "error":
-          title.innerText = "Error";
-          icon.innerHTML = errorSvg;
-          toast.classList.add("smpp-error-toast");
-          break;
-        case "warning":
-          title.innerText = "Warning";
-          icon.innerHTML = warnSvg;
-          toast.classList.add("smpp-warning-toast");
-          break;
-      }
-      const topContainer = document.createElement("div");
-      topContainer.classList.add("smpp-toast-top");
-      topContainer.appendChild(icon);
-      topContainer.appendChild(title);
-      toast.appendChild(topContainer);
-      const content = document.createElement("span");
-      content.classList.add("smpp-toast-content");
-      content.innerText = this.content;
-      toast.appendChild(content);
-      return toast;
-    }
-    async hideToastElement() {
-      const toastContainer = document.getElementById("toast-container");
-      if (!toastContainer) {
-        return;
-      }
-      this.toastElement.classList.add("being-removed");
-      await delay(300);
-      toastContainer.removeChild(this.toastElement);
-    }
-    async render() {
-      const toastContainer = document.getElementById("toast-container");
-      if (!toastContainer) {
-        return;
-      }
-      toastContainer.appendChild(this.toastElement);
-      await delay(this.time);
-      await this.hideToastElement();
-    }
-  };
+  });
 
   // src/fixes-utils/results.ts
   function buisStats() {
     setTimeout(() => {
       const url = `https://${getSchoolName()}.smartschool.be/results/api/v1/evaluations/?itemsOnPage=1000`;
-      fetch(url)
-        .then((response) => response.json())
-        .then((data2) => {
-          const categories = {
-            buis: 0,
-            voldoende: 0,
-          };
-          data2.forEach((evaluation) => {
-            if (evaluation.graphic && evaluation.graphic.value !== void 0) {
-              const value = evaluation.graphic.value;
-              if (value < 50) {
-                categories.buis++;
-              } else {
-                categories.voldoende++;
-              }
+      fetch(url).then((response) => response.json()).then((data) => {
+        const categories = {
+          buis: 0,
+          voldoende: 0
+        };
+        for (const evaluation of data) {
+          if (evaluation.graphic && evaluation.graphic.value !== void 0) {
+            const value = evaluation.graphic.value;
+            if (value < 50) {
+              categories.buis++;
+            } else {
+              categories.voldoende++;
             }
-          });
-          const newElement = document.createElement("div");
-          newElement.id = "buis-stats";
-          document
-            .getElementsByClassName("results-evaluations__filters")[0]
-            .appendChild(newElement);
-          newElement.innerHTML = `<div class="buis-stats" id="buis_amount"></div><div class="buis-stats" id="voldoende_amount"></div>`;
-          document.getElementById("buis_amount").innerHTML =
-            `<div class="buis-stats-box"><span class="buis-stats-title">Onvoldoendes:</span><span class="buis-stats-value">${categories.buis}</span></div>`;
-          document.getElementById("voldoende_amount").innerHTML =
-            `<div class="buis-stats-box"><span class="buis-stats-title">Voldoendes:</span><span class="buis-stats-value">${categories.voldoende}</span></div>`;
-        })
-        .catch((error) => console.error("Error fetching:", error));
+          }
+        }
+        const newElement = document.createElement("div");
+        newElement.id = "buis-stats";
+        document.getElementsByClassName("results-evaluations__filters")[0].appendChild(newElement);
+        newElement.innerHTML = `<div class="buis-stats" id="buis_amount"></div><div class="buis-stats" id="voldoende_amount"></div>`;
+        document.getElementById("buis_amount").innerHTML = `<div class="buis-stats-box"><span class="buis-stats-title">Onvoldoendes:</span><span class="buis-stats-value">${categories.buis}</span></div>`;
+        document.getElementById("voldoende_amount").innerHTML = `<div class="buis-stats-box"><span class="buis-stats-title">Voldoendes:</span><span class="buis-stats-value">${categories.voldoende}</span></div>`;
+      }).catch((error) => console.error("Error fetching:", error));
     }, 1e3);
   }
+  var init_results = __esm({
+    "src/fixes-utils/results.ts"() {
+      "use strict";
+      init_utils2();
+    }
+  });
 
   // src/main-features/modules/windows.ts
-  var BaseWindow = class {
-    id;
-    hidden;
-    element;
-    wrapper;
-    _outsideClickHandler = null;
-    _keydownHandler = null;
-    constructor(id, hidden = true) {
-      this.id = id;
-      this.hidden = hidden;
-      this.element = document.createElement("div");
-      this.wrapper = document.createElement("div");
-    }
-    async create() {
-      this.element = await this.renderContent();
-      this.element.id = this.id;
-      this.element.classList.add("base-window");
-      this.wrapper.classList.add("window-wrapper");
-      if (this.hidden) {
-        this.element.classList.add("hidden");
-      }
-      const controls = document.createElement("div");
-      controls.classList.add("window-controls");
-      const fullscreenBtn = document.createElement("button");
-      fullscreenBtn.classList.add("window-button", "window-fullscreen-btn");
-      fullscreenBtn.title = "Volledig scherm";
-      fullscreenBtn.innerHTML = contractIconSVG + expandIconSVG;
-      const closeBtn = document.createElement("button");
-      closeBtn.classList.add("window-button", "window-close");
-      closeBtn.title = "Sluiten";
-      closeBtn.innerHTML = closeIconSVG;
-      controls.appendChild(fullscreenBtn);
-      controls.appendChild(closeBtn);
-      this.element.appendChild(controls);
-      this.wrapper.appendChild(this.element);
-      document.body.appendChild(this.wrapper);
-      fullscreenBtn.addEventListener("click", () => {
-        this.onScreenSizeUpdate?.();
-        this.element.classList.toggle("fullscreen-window");
-        void this.element.offsetWidth;
-      });
-      closeBtn.addEventListener("click", () => this.hide(true));
-      this.onCreate?.();
-    }
-    // Override this in subclass
-    async renderContent() {
-      return document.createElement("div");
-    }
-    // Called every time the window is opened
-    // Override this in subclass
-    onOpened() {}
-    show(triggerEvent = null) {
-      if (!this.hidden) {
-        return;
-      }
-      this.hidden = false;
-      this.element.classList.remove("hidden");
-      const isKeyboardEvent =
-        triggerEvent &&
-        (typeof KeyboardEvent !== "undefined"
-          ? triggerEvent instanceof KeyboardEvent
-          : String(triggerEvent.type).startsWith("key"));
-      const openEventTarget = isKeyboardEvent ? null : (triggerEvent?.target ?? null);
-      this._outsideClickHandler = (e5) => {
-        const clickedElement = e5.target;
-        const isInsideDialog = this.element.contains(clickedElement);
-        if (isInsideDialog) {
-          return;
+  var BaseWindow, Dialog;
+  var init_windows = __esm({
+    "src/main-features/modules/windows.ts"() {
+      "use strict";
+      init_svgs();
+      BaseWindow = class {
+        id;
+        hidden;
+        element;
+        wrapper;
+        _outsideClickHandler = null;
+        _keydownHandler = null;
+        constructor(id, hidden = true) {
+          this.id = id;
+          this.hidden = hidden;
+          this.element = document.createElement("div");
+          this.wrapper = document.createElement("div");
         }
-        const isInsideBaseDialog = clickedElement.closest(".base-dialog") !== null;
-        if (isInsideBaseDialog) {
-          return;
+        async create() {
+          this.element = await this.renderContent();
+          this.element.id = this.id;
+          this.element.classList.add("base-window");
+          this.wrapper.classList.add("window-wrapper");
+          if (this.hidden) {
+            this.element.classList.add("hidden");
+          }
+          const controls = document.createElement("div");
+          controls.classList.add("window-controls");
+          const fullscreenBtn = document.createElement("button");
+          fullscreenBtn.classList.add("window-button", "window-fullscreen-btn");
+          fullscreenBtn.title = "Volledig scherm";
+          fullscreenBtn.innerHTML = contractIconSVG + expandIconSVG;
+          const closeBtn = document.createElement("button");
+          closeBtn.classList.add("window-button", "window-close");
+          closeBtn.title = "Sluiten";
+          closeBtn.innerHTML = closeIconSVG;
+          controls.appendChild(fullscreenBtn);
+          controls.appendChild(closeBtn);
+          this.element.appendChild(controls);
+          this.wrapper.appendChild(this.element);
+          document.body.appendChild(this.wrapper);
+          fullscreenBtn.addEventListener("click", () => {
+            this.onScreenSizeUpdate?.();
+            this.element.classList.toggle("fullscreen-window");
+            this.element.offsetWidth;
+          });
+          closeBtn.addEventListener("click", () => this.hide(true));
+          this.onCreate?.();
         }
-        const windowWrapper = clickedElement.closest(".window-wrapper");
-        const isInsideDialogWrapper = windowWrapper?.querySelector(".base-dialog") !== null;
-        const isOwnWrapper = clickedElement === this.wrapper;
-        if (isInsideDialogWrapper && !isOwnWrapper) {
-          return;
+        // Override this in subclass
+        async renderContent() {
+          return document.createElement("div");
         }
-        if (openEventTarget && clickedElement instanceof Node) {
-          const isOpenTrigger = clickedElement === openEventTarget;
-          const isInsideOpenTrigger =
-            openEventTarget instanceof Node && openEventTarget.contains(clickedElement);
-          if (isOpenTrigger || isInsideOpenTrigger) {
+        // Called every time the window is opened
+        // Override this in subclass
+        onOpened() {
+        }
+        show(triggerEvent = null) {
+          if (!this.hidden) {
             return;
           }
+          this.hidden = false;
+          this.element.classList.remove("hidden");
+          const isKeyboardEvent = triggerEvent && (typeof KeyboardEvent !== "undefined" ? triggerEvent instanceof KeyboardEvent : String(triggerEvent.type).startsWith("key"));
+          const openEventTarget = isKeyboardEvent ? null : triggerEvent?.target ?? null;
+          this._outsideClickHandler = (e5) => {
+            const clickedElement = e5.target;
+            const isInsideDialog = this.element.contains(clickedElement);
+            if (isInsideDialog) {
+              return;
+            }
+            const isInsideBaseDialog = clickedElement.closest(".base-dialog") !== null;
+            if (isInsideBaseDialog) {
+              return;
+            }
+            const windowWrapper = clickedElement.closest(".window-wrapper");
+            const isInsideDialogWrapper = windowWrapper?.querySelector(".base-dialog") !== null;
+            const isOwnWrapper = clickedElement === this.wrapper;
+            if (isInsideDialogWrapper && !isOwnWrapper) {
+              return;
+            }
+            if (openEventTarget && clickedElement instanceof Node) {
+              const isOpenTrigger = clickedElement === openEventTarget;
+              const isInsideOpenTrigger = openEventTarget instanceof Node && openEventTarget.contains(clickedElement);
+              if (isOpenTrigger || isInsideOpenTrigger) {
+                return;
+              }
+            }
+            this.hide();
+          };
+          document.addEventListener("mousedown", this._outsideClickHandler, {
+            capture: true
+          });
+          if (!this._keydownHandler) {
+            this._keydownHandler = (e5) => {
+              if (e5.key === "Escape") {
+                this.hide(true);
+              }
+            };
+            document.addEventListener("keydown", this._keydownHandler);
+          }
+          if (isKeyboardEvent) {
+            requestAnimationFrame(() => {
+              const focusableElements = this.element.querySelectorAll("label");
+              if (focusableElements.length > 0) {
+                focusableElements[0]?.focus();
+              }
+            });
+          }
+          this.onOpened();
         }
-        this.hide();
+        hide(realUserIntent = false) {
+          if (this.hidden) {
+            return;
+          }
+          this.hidden = true;
+          this.element.classList.add("hidden");
+          if (this._outsideClickHandler) {
+            document.removeEventListener("mousedown", this._outsideClickHandler, {
+              capture: true
+            });
+            this._outsideClickHandler = null;
+          }
+          if (this._keydownHandler) {
+            document.removeEventListener("keydown", this._keydownHandler);
+            this._keydownHandler = null;
+          }
+          this.onClosed?.(realUserIntent);
+        }
+        remove() {
+          this.element?.remove();
+          this.hidden = true;
+        }
       };
-      document.addEventListener("mousedown", this._outsideClickHandler, {
-        capture: true,
-      });
-      if (!this._keydownHandler) {
-        this._keydownHandler = (e5) => {
-          if (e5.key === "Escape") {
-            this.hide(true);
+      Dialog = class extends BaseWindow {
+        constructor(id, hidden = true) {
+          super(id, hidden);
+        }
+        async create() {
+          this.element = await this.renderContent();
+          this.element.id = this.id;
+          this.element.classList.add("base-window", "base-dialog");
+          this.wrapper.classList.add("window-wrapper");
+          if (this.hidden) {
+            this.element.classList.add("hidden");
           }
-        };
-        document.addEventListener("keydown", this._keydownHandler);
-      }
-      if (isKeyboardEvent) {
-        requestAnimationFrame(() => {
-          const focusableElements = this.element.querySelectorAll("label");
-          if (focusableElements.length > 0) {
-            focusableElements[0]?.focus();
-          }
-        });
-      }
-      this.onOpened();
+          const controls = document.createElement("div");
+          controls.classList.add("window-controls");
+          const closeBtn = document.createElement("button");
+          closeBtn.classList.add("window-button", "window-close");
+          closeBtn.title = "Sluiten";
+          closeBtn.innerHTML = closeIconSVG;
+          controls.appendChild(closeBtn);
+          this.element.appendChild(controls);
+          this.wrapper.appendChild(this.element);
+          document.body.appendChild(this.wrapper);
+          closeBtn.addEventListener("click", () => this.hide(true));
+          this.onCreate?.();
+        }
+      };
     }
-    hide(realUserIntent = false) {
-      if (this.hidden) {
-        return;
-      }
-      this.hidden = true;
-      this.element.classList.add("hidden");
-      if (this._outsideClickHandler) {
-        document.removeEventListener("mousedown", this._outsideClickHandler, {
-          capture: true,
-        });
-        this._outsideClickHandler = null;
-      }
-      if (this._keydownHandler) {
-        document.removeEventListener("keydown", this._keydownHandler);
-        this._keydownHandler = null;
-      }
-      this.onClosed?.(realUserIntent);
-    }
-    remove() {
-      this.element?.remove();
-      this.hidden = true;
-    }
-  };
-  var Dialog = class extends BaseWindow {
-    constructor(id, hidden = true) {
-      super(id, hidden);
-    }
-    async create() {
-      this.element = await this.renderContent();
-      this.element.id = this.id;
-      this.element.classList.add("base-window", "base-dialog");
-      this.wrapper.classList.add("window-wrapper");
-      if (this.hidden) {
-        this.element.classList.add("hidden");
-      }
-      const controls = document.createElement("div");
-      controls.classList.add("window-controls");
-      const closeBtn = document.createElement("button");
-      closeBtn.classList.add("window-button", "window-close");
-      closeBtn.title = "Sluiten";
-      closeBtn.innerHTML = closeIconSVG;
-      controls.appendChild(closeBtn);
-      this.element.appendChild(controls);
-      this.wrapper.appendChild(this.element);
-      document.body.appendChild(this.wrapper);
-      closeBtn.addEventListener("click", () => this.hide(true));
-      this.onCreate?.();
-    }
-  };
+  });
 
   // src/main-features/appearance/ui.ts
   function createButton(id = "") {
@@ -4628,7 +2729,7 @@ Is it scaring you off?`,
     outerSwitch.appendChild(innerSwitch);
     return outerSwitch;
   }
-  function createButtonWithLabel(id = "", text) {
+  function createButtonWithLabel(id, text) {
     const container = document.createElement("label");
     container.classList.add("smpp-input-with-label");
     container.htmlFor = id;
@@ -4668,222 +2769,13 @@ Is it scaring you off?`,
     tooltip.innerText = content;
     return tooltip;
   }
+  var init_ui = __esm({
+    "src/main-features/appearance/ui.ts"() {
+      "use strict";
+    }
+  });
 
   // src/main-features/modules/images.ts
-  var ImageSelector = class {
-    name;
-    isThemeImage;
-    id = "";
-    clearButton = document.createElement("button");
-    linkInput = createTextInput("", "Link");
-    fileInput = document.createElement("input");
-    fileInputButton = document.createElement("button");
-    linkInputContainer = this.createLinkImageInputContainer();
-    fileInputContainer = this.createImageFileInputContainer();
-    fullContainer = this.createFullFileInput();
-    /* theme: Indicates that this image selector references the background image of a theme. (used for theme share cache invalidation on modify) */
-    constructor(name2, isThemeImage = false) {
-      this.name = name2;
-      this.isThemeImage = isThemeImage;
-      this._bindEvents();
-    }
-    onStore() {}
-    createImageFileInputContainer() {
-      const fileInputContainer = document.createElement("div");
-      fileInputContainer.classList.add("file-input-container");
-      this.fileInput.style.display = "none";
-      this.fileInput.tabIndex = -1;
-      this.fileInput.type = "file";
-      this.fileInput.accept = "image/*";
-      this.fileInputButton.type = "button";
-      this.fileInputButton.classList.add("smpp-file-input-button");
-      this.fileInputButton.setAttribute("aria-label", "Choose image file");
-      this.fileInputButton.innerHTML = imageInputSvg;
-      this.fileInputButton.addEventListener("click", (e5) => {
-        e5.preventDefault();
-        this.fileInput.click();
-      });
-      fileInputContainer.appendChild(this.fileInput);
-      fileInputContainer.appendChild(this.fileInputButton);
-      return fileInputContainer;
-    }
-    createLinkImageInputContainer() {
-      const linkInputContainer = document.createElement("div");
-      linkInputContainer.classList.add("link-input-container");
-      this.clearButton;
-      this.clearButton.type = "button";
-      this.clearButton.tabIndex = -1;
-      this.clearButton.classList.add("smpp-link-clear-button");
-      this.clearButton.setAttribute("aria-label", "Clear link");
-      this.clearButton.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-          <g xmlns="http://www.w3.org/2000/svg">
-          <path d="M7 7.00006L17 17.0001M7 17.0001L17 7.00006" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </g>
-        </svg>`;
-      linkInputContainer.appendChild(this.linkInput);
-      linkInputContainer.appendChild(this.clearButton);
-      return linkInputContainer;
-    }
-    createFullFileInput() {
-      const container = document.createElement("div");
-      container.classList.add("full-file-input-container");
-      container.appendChild(this.linkInputContainer);
-      container.appendChild(this.fileInputContainer);
-      return container;
-    }
-    _bindEvents() {
-      this.fileInput.addEventListener("change", async () => {
-        if (this.fileInput.files && this.fileInput.files.length > 0) {
-          this.fileInputButton.classList.add("active");
-        } else {
-          this.fileInputButton.classList.remove("active");
-        }
-        await this.storeImage();
-      });
-      this.linkInput.addEventListener("change", async () => {
-        if ((this.linkInput.value || "").trim() !== "") {
-          this.clearButton.classList.add("active");
-        } else {
-          this.clearButton.classList.remove("active");
-        }
-        await this.storeImage();
-      });
-      this.clearButton.addEventListener("click", async (e5) => {
-        e5.preventDefault();
-        this.linkInput.value = "";
-        this.clearButton.classList.remove("active");
-        this.fileInputButton.classList.remove("active");
-        await this.storeImage();
-      });
-    }
-    async storeImage() {
-      try {
-        let data2 = await browser.runtime.sendMessage({
-          action: "getImage",
-          id: this.id,
-        });
-        if (!data2) {
-          data2 = { imageData: "", metaData: { link: "", type: "default" } };
-        }
-        const compressedId = `compressed-${this.id}`;
-        const compressedImage = {
-          imageData: data2.imageData,
-          metaData: { link: data2.metaData.link, type: data2.metaData.type },
-        };
-        const file = this.fileInput.files?.[0];
-        if (file) {
-          this.fileInputButton.innerHTML = loadingSpinnerSvg;
-          const [originalDataUrl, compressedDataUrl] = await Promise.all([
-            imageCompression.getDataUrlFromFile(file),
-            getCompressedData(file),
-          ]);
-          this.fileInputButton.innerHTML = imageInputSvg;
-          data2.imageData = originalDataUrl;
-          data2.metaData.link = file.name;
-          data2.metaData.type = "file";
-          compressedImage.imageData = compressedDataUrl;
-          compressedImage.metaData.link = file.name;
-          compressedImage.metaData.type = "file";
-          this.fileInput.value = "";
-        } else {
-          const linkValue = this.linkInput.value?.trim() || "";
-          if (linkValue === "") {
-            data2.metaData.type = "default";
-            data2.metaData.link = "";
-            data2.imageData = "";
-            compressedImage.metaData.type = "default";
-            compressedImage.metaData.link = "";
-            compressedImage.imageData = "";
-          } else if (isAbsoluteUrl(linkValue)) {
-            this.fileInputButton.innerHTML = loadingSpinnerSvg;
-            const [base64, file2] = await Promise.all([
-              await convertLinkToBase64(linkValue),
-              await convertLinkToFile(linkValue),
-            ]);
-            this.fileInputButton.innerHTML = imageInputSvg;
-            if (base64 && file2) {
-              data2.metaData.type = "file";
-              data2.metaData.link = linkValue;
-              data2.imageData = base64;
-              this.fileInputButton.innerHTML = loadingSpinnerSvg;
-              const compressedBase64 = await getCompressedData(file2);
-              this.fileInputButton.innerHTML = imageInputSvg;
-              compressedImage.metaData.type = "file";
-              compressedImage.metaData.link = linkValue;
-              compressedImage.imageData = compressedBase64;
-            } else {
-              await this.loadImageData();
-              await new Toast(
-                "Failed to access image, try to upload it as a file",
-                "error",
-                5e3,
-              ).render();
-              data2.metaData.type = "default";
-              data2.metaData.link = "";
-              data2.imageData = "";
-              compressedImage.metaData.type = "default";
-              compressedImage.metaData.link = "";
-              compressedImage.imageData = "";
-            }
-          } else {
-            await this.loadImageData();
-            await new Toast("That's not a valid link!", "warning").render();
-            data2.metaData.type = "default";
-            data2.metaData.link = "";
-            data2.imageData = "";
-            compressedImage.metaData.type = "default";
-            compressedImage.metaData.link = "";
-            compressedImage.imageData = "";
-          }
-        }
-        await browser.runtime.sendMessage({
-          action: "setImage",
-          id: this.id,
-          data: data2,
-        });
-        await browser.runtime.sendMessage({
-          action: "setImage",
-          id: compressedId,
-          data: compressedImage,
-        });
-        await this.loadImageData();
-        this.onStore();
-        if (this.isThemeImage) {
-          await browser.runtime.sendMessage({
-            action: "markThemeAsModified",
-            name: this.id,
-          });
-        }
-        if (data2.metaData.type === "file") {
-          new Toast("Image succesfully saved", "succes").render();
-        }
-      } catch (error) {
-        await new Toast("Failed to save image", "error", 5e3).render();
-        console.error("Failed to store image:", error);
-      }
-    }
-    async loadImageData() {
-      const data2 = await browser.runtime.sendMessage({
-        action: "getImage",
-        id: this.id,
-      });
-      let metaData = data2.metaData;
-      if (!metaData) {
-        metaData = { link: "", type: "default" };
-      }
-      this.linkInput.value = metaData.link || "";
-      if (metaData.type === "file") {
-        this.fileInputButton.classList.add("active");
-      } else {
-        this.fileInputButton.classList.remove("active");
-      }
-      if ((this.linkInput.value || "").trim() !== "") {
-        this.clearButton.classList.add("active");
-      } else {
-        this.clearButton.classList.remove("active");
-      }
-    }
-  };
   async function getImageURL(id, onDefault, getCompressed) {
     let image;
     if (getCompressed) {
@@ -4892,7 +2784,7 @@ Is it scaring you off?`,
     try {
       image = await browser.runtime.sendMessage({
         action: "getImage",
-        id,
+        id
       });
     } catch (err) {
       console.warn("[getImageURL] Failed to get image from background:", err);
@@ -4914,13 +2806,239 @@ Is it scaring you off?`,
       return { url: await onDefault(), type: image.metaData.type };
     }
   }
+  var ImageSelector;
+  var init_images = __esm({
+    "src/main-features/modules/images.ts"() {
+      "use strict";
+      init_browser_image_compression();
+      init_utils();
+      init_svgs();
+      init_utils2();
+      init_ui();
+      init_main();
+      ImageSelector = class {
+        name;
+        isThemeImage;
+        id = "";
+        clearButton = document.createElement("button");
+        linkInput = createTextInput("", "Link");
+        fileInput = document.createElement("input");
+        fileInputButton = document.createElement("button");
+        linkInputContainer = this.createLinkImageInputContainer();
+        fileInputContainer = this.createImageFileInputContainer();
+        fullContainer = this.createFullFileInput();
+        /* theme: Indicates that this image selector references the background image of a theme. (used for theme share cache invalidation on modify) */
+        constructor(name, isThemeImage = false) {
+          this.name = name;
+          this.isThemeImage = isThemeImage;
+          this._bindEvents();
+        }
+        onStore() {
+        }
+        createImageFileInputContainer() {
+          const fileInputContainer = document.createElement("div");
+          fileInputContainer.classList.add("file-input-container");
+          this.fileInput.style.display = "none";
+          this.fileInput.tabIndex = -1;
+          this.fileInput.type = "file";
+          this.fileInput.accept = "image/*";
+          this.fileInputButton.type = "button";
+          this.fileInputButton.classList.add("smpp-file-input-button");
+          this.fileInputButton.setAttribute("aria-label", "Choose image file");
+          this.fileInputButton.innerHTML = imageInputSvg;
+          this.fileInputButton.addEventListener("click", (e5) => {
+            e5.preventDefault();
+            this.fileInput.click();
+          });
+          fileInputContainer.appendChild(this.fileInput);
+          fileInputContainer.appendChild(this.fileInputButton);
+          return fileInputContainer;
+        }
+        createLinkImageInputContainer() {
+          const linkInputContainer = document.createElement("div");
+          linkInputContainer.classList.add("link-input-container");
+          this.clearButton;
+          this.clearButton.type = "button";
+          this.clearButton.tabIndex = -1;
+          this.clearButton.classList.add("smpp-link-clear-button");
+          this.clearButton.setAttribute("aria-label", "Clear link");
+          this.clearButton.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+          <g xmlns="http://www.w3.org/2000/svg">
+          <path d="M7 7.00006L17 17.0001M7 17.0001L17 7.00006" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
+        </svg>`;
+          linkInputContainer.appendChild(this.linkInput);
+          linkInputContainer.appendChild(this.clearButton);
+          return linkInputContainer;
+        }
+        createFullFileInput() {
+          const container = document.createElement("div");
+          container.classList.add("full-file-input-container");
+          container.appendChild(this.linkInputContainer);
+          container.appendChild(this.fileInputContainer);
+          return container;
+        }
+        _bindEvents() {
+          this.fileInput.addEventListener("change", async () => {
+            if (this.fileInput.files && this.fileInput.files.length > 0) {
+              this.fileInputButton.classList.add("active");
+            } else {
+              this.fileInputButton.classList.remove("active");
+            }
+            await this.storeImage();
+          });
+          this.linkInput.addEventListener("change", async () => {
+            if ((this.linkInput.value || "").trim() !== "") {
+              this.clearButton.classList.add("active");
+            } else {
+              this.clearButton.classList.remove("active");
+            }
+            await this.storeImage();
+          });
+          this.clearButton.addEventListener("click", async (e5) => {
+            e5.preventDefault();
+            this.linkInput.value = "";
+            this.clearButton.classList.remove("active");
+            this.fileInputButton.classList.remove("active");
+            await this.storeImage();
+          });
+        }
+        async storeImage() {
+          try {
+            let data = await browser.runtime.sendMessage({
+              action: "getImage",
+              id: this.id
+            });
+            if (!data) {
+              data = { imageData: "", metaData: { link: "", type: "default" } };
+            }
+            const compressedId = `compressed-${this.id}`;
+            const compressedImage = {
+              imageData: data.imageData,
+              metaData: { link: data.metaData.link, type: data.metaData.type }
+            };
+            const file = this.fileInput.files?.[0];
+            if (file) {
+              this.fileInputButton.innerHTML = loadingSpinnerSvg;
+              const [originalDataUrl, compressedDataUrl] = await Promise.all([
+                imageCompression.getDataUrlFromFile(file),
+                getCompressedData(file)
+              ]);
+              this.fileInputButton.innerHTML = imageInputSvg;
+              data.imageData = originalDataUrl;
+              data.metaData.link = file.name;
+              data.metaData.type = "file";
+              compressedImage.imageData = compressedDataUrl;
+              compressedImage.metaData.link = file.name;
+              compressedImage.metaData.type = "file";
+              this.fileInput.value = "";
+            } else {
+              const linkValue = this.linkInput.value?.trim() || "";
+              if (linkValue === "") {
+                data.metaData.type = "default";
+                data.metaData.link = "";
+                data.imageData = "";
+                compressedImage.metaData.type = "default";
+                compressedImage.metaData.link = "";
+                compressedImage.imageData = "";
+              } else if (isAbsoluteUrl(linkValue)) {
+                this.fileInputButton.innerHTML = loadingSpinnerSvg;
+                const [base64, file2] = await Promise.all([
+                  await convertLinkToBase64(linkValue),
+                  await convertLinkToFile(linkValue)
+                ]);
+                this.fileInputButton.innerHTML = imageInputSvg;
+                if (base64 && file2) {
+                  data.metaData.type = "file";
+                  data.metaData.link = linkValue;
+                  data.imageData = base64;
+                  this.fileInputButton.innerHTML = loadingSpinnerSvg;
+                  const compressedBase64 = await getCompressedData(file2);
+                  this.fileInputButton.innerHTML = imageInputSvg;
+                  compressedImage.metaData.type = "file";
+                  compressedImage.metaData.link = linkValue;
+                  compressedImage.imageData = compressedBase64;
+                } else {
+                  await this.loadImageData();
+                  await new Toast(
+                    "Failed to access image, try to upload it as a file",
+                    "error",
+                    5e3
+                  ).render();
+                  data.metaData.type = "default";
+                  data.metaData.link = "";
+                  data.imageData = "";
+                  compressedImage.metaData.type = "default";
+                  compressedImage.metaData.link = "";
+                  compressedImage.imageData = "";
+                }
+              } else {
+                await this.loadImageData();
+                await new Toast("That's not a valid link!", "warning").render();
+                data.metaData.type = "default";
+                data.metaData.link = "";
+                data.imageData = "";
+                compressedImage.metaData.type = "default";
+                compressedImage.metaData.link = "";
+                compressedImage.imageData = "";
+              }
+            }
+            await browser.runtime.sendMessage({
+              action: "setImage",
+              id: this.id,
+              data
+            });
+            await browser.runtime.sendMessage({
+              action: "setImage",
+              id: compressedId,
+              data: compressedImage
+            });
+            await this.loadImageData();
+            this.onStore();
+            if (this.isThemeImage) {
+              await browser.runtime.sendMessage({
+                action: "markThemeAsModified",
+                name: this.id
+              });
+            }
+            if (data.metaData.type === "file") {
+              new Toast("Image succesfully saved", "succes").render();
+            }
+          } catch (error) {
+            await new Toast("Failed to save image", "error", 5e3).render();
+            console.error("Failed to store image:", error);
+          }
+        }
+        async loadImageData() {
+          const data = await browser.runtime.sendMessage({
+            action: "getImage",
+            id: this.id
+          });
+          let metaData = data.metaData;
+          if (!metaData) {
+            metaData = { link: "", type: "default" };
+          }
+          this.linkInput.value = metaData.link || "";
+          if (metaData.type === "file") {
+            this.fileInputButton.classList.add("active");
+          } else {
+            this.fileInputButton.classList.remove("active");
+          }
+          if ((this.linkInput.value || "").trim() !== "") {
+            this.clearButton.classList.add("active");
+          } else {
+            this.clearButton.classList.remove("active");
+          }
+        }
+      };
+    }
+  });
 
   // src/main-features/profile.ts
-  var profilePictureObserver;
-  async function displayUsernameTopNav(name2) {
+  async function displayUsernameTopNav(name) {
     const originalNameElement = document.querySelector(".js-btn-profile .hlp-vert-box span");
     if (originalNameElement) {
-      originalNameElement.innerHTML = name2;
+      originalNameElement.innerHTML = name;
     }
   }
   async function attachProfilePictureObserver(url) {
@@ -4973,7 +3091,7 @@ Is it scaring you off?`,
       childList: true,
       subtree: true,
       attributes: true,
-      attributeFilter: ["src"],
+      attributeFilter: ["src"]
     });
     return observer;
   }
@@ -5020,702 +3138,397 @@ Is it scaring you off?`,
     }
     return createSimpleUrl(originalPfpUrl) === createSimpleUrl(url);
   }
+  var profilePictureObserver;
+  var init_profile = __esm({
+    "src/main-features/profile.ts"() {
+      "use strict";
+      init_utils2();
+      init_main();
+      init_images();
+    }
+  });
 
   // node_modules/colord/index.mjs
-  var r2 = { grad: 0.9, turn: 360, rad: 360 / (2 * Math.PI) };
-  var t2 = (r5) => (typeof r5 == "string" ? r5.length > 0 : typeof r5 == "number");
-  var n = (r5, t5, n4) => (
-    void 0 === t5 && (t5 = 0), void 0 === n4 && (n4 = 10 ** t5), Math.round(n4 * r5) / n4 + 0
-  );
-  var e2 = (r5, t5, n4) => (
-    void 0 === t5 && (t5 = 0), void 0 === n4 && (n4 = 1), r5 > n4 ? n4 : r5 > t5 ? r5 : t5
-  );
-  var u = (r5) => ((r5 = isFinite(r5) ? r5 % 360 : 0) > 0 ? r5 : r5 + 360);
-  var a2 = (r5) => ({ r: e2(r5.r, 0, 255), g: e2(r5.g, 0, 255), b: e2(r5.b, 0, 255), a: e2(r5.a) });
-  var o2 = (r5) => ({ r: n(r5.r), g: n(r5.g), b: n(r5.b), a: n(r5.a, 3) });
-  var i2 = /^#([0-9a-f]{3,8})$/i;
-  var s2 = (r5) => {
-    var t5 = r5.toString(16);
-    return t5.length < 2 ? "0" + t5 : t5;
-  };
-  var h = (r5) => {
-    var t5 = r5.r,
-      n4 = r5.g,
-      e5 = r5.b,
-      u4 = r5.a,
-      a5 = Math.max(t5, n4, e5),
-      o5 = a5 - Math.min(t5, n4, e5),
-      i5 = o5
-        ? a5 === t5
-          ? (n4 - e5) / o5
-          : a5 === n4
-            ? 2 + (e5 - t5) / o5
-            : 4 + (t5 - n4) / o5
-        : 0;
-    return {
-      h: 60 * (i5 < 0 ? i5 + 6 : i5),
-      s: a5 ? (o5 / a5) * 100 : 0,
-      v: (a5 / 255) * 100,
-      a: u4,
-    };
-  };
-  var b = (r5) => {
-    var t5 = r5.h,
-      n4 = r5.s,
-      e5 = r5.v,
-      u4 = r5.a;
-    (t5 = (t5 / 360) * 6), (n4 /= 100), (e5 /= 100);
-    var a5 = Math.floor(t5),
-      o5 = e5 * (1 - n4),
-      i5 = e5 * (1 - (t5 - a5) * n4),
-      s4 = e5 * (1 - (1 - t5 + a5) * n4),
-      h4 = a5 % 6;
-    return {
-      r: 255 * [e5, i5, o5, o5, s4, e5][h4],
-      g: 255 * [s4, e5, e5, i5, o5, o5][h4],
-      b: 255 * [o5, o5, s4, e5, e5, i5][h4],
-      a: u4,
-    };
-  };
-  var g = (r5) => ({ h: u(r5.h), s: e2(r5.s, 0, 100), l: e2(r5.l, 0, 100), a: e2(r5.a) });
-  var d = (r5) => ({ h: n(r5.h), s: n(r5.s), l: n(r5.l), a: n(r5.a, 3) });
-  var f2 = (r5) =>
-    b(
-      ((n4 = (t5 = r5).s),
-      {
-        h: t5.h,
-        s: (n4 *= ((e5 = t5.l) < 50 ? e5 : 100 - e5) / 100) > 0 ? ((2 * n4) / (e5 + n4)) * 100 : 0,
-        v: e5 + n4,
-        a: t5.a,
-      }),
-    );
-  var c2 = (r5) => ({
-    h: (t5 = h(r5)).h,
-    s:
-      (u4 = ((200 - (n4 = t5.s)) * (e5 = t5.v)) / 100) > 0 && u4 < 200
-        ? ((n4 * e5) / 100 / (u4 <= 100 ? u4 : 200 - u4)) * 100
-        : 0,
-    l: u4 / 2,
-    a: t5.a,
+  var r2, t2, n, e2, u, a2, o2, i2, s2, h, b, g, d, f2, c2, l2, p, v, m, y, N, x, M, H, $, j, w, S, k;
+  var init_colord = __esm({
+    "node_modules/colord/index.mjs"() {
+      r2 = { grad: 0.9, turn: 360, rad: 360 / (2 * Math.PI) };
+      t2 = function(r5) {
+        return "string" == typeof r5 ? r5.length > 0 : "number" == typeof r5;
+      };
+      n = function(r5, t5, n4) {
+        return void 0 === t5 && (t5 = 0), void 0 === n4 && (n4 = Math.pow(10, t5)), Math.round(n4 * r5) / n4 + 0;
+      };
+      e2 = function(r5, t5, n4) {
+        return void 0 === t5 && (t5 = 0), void 0 === n4 && (n4 = 1), r5 > n4 ? n4 : r5 > t5 ? r5 : t5;
+      };
+      u = function(r5) {
+        return (r5 = isFinite(r5) ? r5 % 360 : 0) > 0 ? r5 : r5 + 360;
+      };
+      a2 = function(r5) {
+        return { r: e2(r5.r, 0, 255), g: e2(r5.g, 0, 255), b: e2(r5.b, 0, 255), a: e2(r5.a) };
+      };
+      o2 = function(r5) {
+        return { r: n(r5.r), g: n(r5.g), b: n(r5.b), a: n(r5.a, 3) };
+      };
+      i2 = /^#([0-9a-f]{3,8})$/i;
+      s2 = function(r5) {
+        var t5 = r5.toString(16);
+        return t5.length < 2 ? "0" + t5 : t5;
+      };
+      h = function(r5) {
+        var t5 = r5.r, n4 = r5.g, e5 = r5.b, u4 = r5.a, a5 = Math.max(t5, n4, e5), o5 = a5 - Math.min(t5, n4, e5), i5 = o5 ? a5 === t5 ? (n4 - e5) / o5 : a5 === n4 ? 2 + (e5 - t5) / o5 : 4 + (t5 - n4) / o5 : 0;
+        return { h: 60 * (i5 < 0 ? i5 + 6 : i5), s: a5 ? o5 / a5 * 100 : 0, v: a5 / 255 * 100, a: u4 };
+      };
+      b = function(r5) {
+        var t5 = r5.h, n4 = r5.s, e5 = r5.v, u4 = r5.a;
+        t5 = t5 / 360 * 6, n4 /= 100, e5 /= 100;
+        var a5 = Math.floor(t5), o5 = e5 * (1 - n4), i5 = e5 * (1 - (t5 - a5) * n4), s4 = e5 * (1 - (1 - t5 + a5) * n4), h4 = a5 % 6;
+        return { r: 255 * [e5, i5, o5, o5, s4, e5][h4], g: 255 * [s4, e5, e5, i5, o5, o5][h4], b: 255 * [o5, o5, s4, e5, e5, i5][h4], a: u4 };
+      };
+      g = function(r5) {
+        return { h: u(r5.h), s: e2(r5.s, 0, 100), l: e2(r5.l, 0, 100), a: e2(r5.a) };
+      };
+      d = function(r5) {
+        return { h: n(r5.h), s: n(r5.s), l: n(r5.l), a: n(r5.a, 3) };
+      };
+      f2 = function(r5) {
+        return b((n4 = (t5 = r5).s, { h: t5.h, s: (n4 *= ((e5 = t5.l) < 50 ? e5 : 100 - e5) / 100) > 0 ? 2 * n4 / (e5 + n4) * 100 : 0, v: e5 + n4, a: t5.a }));
+        var t5, n4, e5;
+      };
+      c2 = function(r5) {
+        return { h: (t5 = h(r5)).h, s: (u4 = (200 - (n4 = t5.s)) * (e5 = t5.v) / 100) > 0 && u4 < 200 ? n4 * e5 / 100 / (u4 <= 100 ? u4 : 200 - u4) * 100 : 0, l: u4 / 2, a: t5.a };
+        var t5, n4, e5, u4;
+      };
+      l2 = /^hsla?\(\s*([+-]?\d*\.?\d+)(deg|rad|grad|turn)?\s*,\s*([+-]?\d*\.?\d+)%\s*,\s*([+-]?\d*\.?\d+)%\s*(?:,\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
+      p = /^hsla?\(\s*([+-]?\d*\.?\d+)(deg|rad|grad|turn)?\s+([+-]?\d*\.?\d+)%\s+([+-]?\d*\.?\d+)%\s*(?:\/\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
+      v = /^rgba?\(\s*([+-]?\d*\.?\d+)(%)?\s*,\s*([+-]?\d*\.?\d+)(%)?\s*,\s*([+-]?\d*\.?\d+)(%)?\s*(?:,\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
+      m = /^rgba?\(\s*([+-]?\d*\.?\d+)(%)?\s+([+-]?\d*\.?\d+)(%)?\s+([+-]?\d*\.?\d+)(%)?\s*(?:\/\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
+      y = { string: [[function(r5) {
+        var t5 = i2.exec(r5);
+        return t5 ? (r5 = t5[1]).length <= 4 ? { r: parseInt(r5[0] + r5[0], 16), g: parseInt(r5[1] + r5[1], 16), b: parseInt(r5[2] + r5[2], 16), a: 4 === r5.length ? n(parseInt(r5[3] + r5[3], 16) / 255, 2) : 1 } : 6 === r5.length || 8 === r5.length ? { r: parseInt(r5.substr(0, 2), 16), g: parseInt(r5.substr(2, 2), 16), b: parseInt(r5.substr(4, 2), 16), a: 8 === r5.length ? n(parseInt(r5.substr(6, 2), 16) / 255, 2) : 1 } : null : null;
+      }, "hex"], [function(r5) {
+        var t5 = v.exec(r5) || m.exec(r5);
+        return t5 ? t5[2] !== t5[4] || t5[4] !== t5[6] ? null : a2({ r: Number(t5[1]) / (t5[2] ? 100 / 255 : 1), g: Number(t5[3]) / (t5[4] ? 100 / 255 : 1), b: Number(t5[5]) / (t5[6] ? 100 / 255 : 1), a: void 0 === t5[7] ? 1 : Number(t5[7]) / (t5[8] ? 100 : 1) }) : null;
+      }, "rgb"], [function(t5) {
+        var n4 = l2.exec(t5) || p.exec(t5);
+        if (!n4) return null;
+        var e5, u4, a5 = g({ h: (e5 = n4[1], u4 = n4[2], void 0 === u4 && (u4 = "deg"), Number(e5) * (r2[u4] || 1)), s: Number(n4[3]), l: Number(n4[4]), a: void 0 === n4[5] ? 1 : Number(n4[5]) / (n4[6] ? 100 : 1) });
+        return f2(a5);
+      }, "hsl"]], object: [[function(r5) {
+        var n4 = r5.r, e5 = r5.g, u4 = r5.b, o5 = r5.a, i5 = void 0 === o5 ? 1 : o5;
+        return t2(n4) && t2(e5) && t2(u4) ? a2({ r: Number(n4), g: Number(e5), b: Number(u4), a: Number(i5) }) : null;
+      }, "rgb"], [function(r5) {
+        var n4 = r5.h, e5 = r5.s, u4 = r5.l, a5 = r5.a, o5 = void 0 === a5 ? 1 : a5;
+        if (!t2(n4) || !t2(e5) || !t2(u4)) return null;
+        var i5 = g({ h: Number(n4), s: Number(e5), l: Number(u4), a: Number(o5) });
+        return f2(i5);
+      }, "hsl"], [function(r5) {
+        var n4 = r5.h, a5 = r5.s, o5 = r5.v, i5 = r5.a, s4 = void 0 === i5 ? 1 : i5;
+        if (!t2(n4) || !t2(a5) || !t2(o5)) return null;
+        var h4 = (function(r6) {
+          return { h: u(r6.h), s: e2(r6.s, 0, 100), v: e2(r6.v, 0, 100), a: e2(r6.a) };
+        })({ h: Number(n4), s: Number(a5), v: Number(o5), a: Number(s4) });
+        return b(h4);
+      }, "hsv"]] };
+      N = function(r5, t5) {
+        for (var n4 = 0; n4 < t5.length; n4++) {
+          var e5 = t5[n4][0](r5);
+          if (e5) return [e5, t5[n4][1]];
+        }
+        return [null, void 0];
+      };
+      x = function(r5) {
+        return "string" == typeof r5 ? N(r5.trim(), y.string) : "object" == typeof r5 && null !== r5 ? N(r5, y.object) : [null, void 0];
+      };
+      M = function(r5, t5) {
+        var n4 = c2(r5);
+        return { h: n4.h, s: e2(n4.s + 100 * t5, 0, 100), l: n4.l, a: n4.a };
+      };
+      H = function(r5) {
+        return (299 * r5.r + 587 * r5.g + 114 * r5.b) / 1e3 / 255;
+      };
+      $ = function(r5, t5) {
+        var n4 = c2(r5);
+        return { h: n4.h, s: n4.s, l: e2(n4.l + 100 * t5, 0, 100), a: n4.a };
+      };
+      j = (function() {
+        function r5(r6) {
+          this.parsed = x(r6)[0], this.rgba = this.parsed || { r: 0, g: 0, b: 0, a: 1 };
+        }
+        return r5.prototype.isValid = function() {
+          return null !== this.parsed;
+        }, r5.prototype.brightness = function() {
+          return n(H(this.rgba), 2);
+        }, r5.prototype.isDark = function() {
+          return H(this.rgba) < 0.5;
+        }, r5.prototype.isLight = function() {
+          return H(this.rgba) >= 0.5;
+        }, r5.prototype.toHex = function() {
+          return r6 = o2(this.rgba), t5 = r6.r, e5 = r6.g, u4 = r6.b, i5 = (a5 = r6.a) < 1 ? s2(n(255 * a5)) : "", "#" + s2(t5) + s2(e5) + s2(u4) + i5;
+          var r6, t5, e5, u4, a5, i5;
+        }, r5.prototype.toRgb = function() {
+          return o2(this.rgba);
+        }, r5.prototype.toRgbString = function() {
+          return r6 = o2(this.rgba), t5 = r6.r, n4 = r6.g, e5 = r6.b, (u4 = r6.a) < 1 ? "rgba(" + t5 + ", " + n4 + ", " + e5 + ", " + u4 + ")" : "rgb(" + t5 + ", " + n4 + ", " + e5 + ")";
+          var r6, t5, n4, e5, u4;
+        }, r5.prototype.toHsl = function() {
+          return d(c2(this.rgba));
+        }, r5.prototype.toHslString = function() {
+          return r6 = d(c2(this.rgba)), t5 = r6.h, n4 = r6.s, e5 = r6.l, (u4 = r6.a) < 1 ? "hsla(" + t5 + ", " + n4 + "%, " + e5 + "%, " + u4 + ")" : "hsl(" + t5 + ", " + n4 + "%, " + e5 + "%)";
+          var r6, t5, n4, e5, u4;
+        }, r5.prototype.toHsv = function() {
+          return r6 = h(this.rgba), { h: n(r6.h), s: n(r6.s), v: n(r6.v), a: n(r6.a, 3) };
+          var r6;
+        }, r5.prototype.invert = function() {
+          return w({ r: 255 - (r6 = this.rgba).r, g: 255 - r6.g, b: 255 - r6.b, a: r6.a });
+          var r6;
+        }, r5.prototype.saturate = function(r6) {
+          return void 0 === r6 && (r6 = 0.1), w(M(this.rgba, r6));
+        }, r5.prototype.desaturate = function(r6) {
+          return void 0 === r6 && (r6 = 0.1), w(M(this.rgba, -r6));
+        }, r5.prototype.grayscale = function() {
+          return w(M(this.rgba, -1));
+        }, r5.prototype.lighten = function(r6) {
+          return void 0 === r6 && (r6 = 0.1), w($(this.rgba, r6));
+        }, r5.prototype.darken = function(r6) {
+          return void 0 === r6 && (r6 = 0.1), w($(this.rgba, -r6));
+        }, r5.prototype.rotate = function(r6) {
+          return void 0 === r6 && (r6 = 15), this.hue(this.hue() + r6);
+        }, r5.prototype.alpha = function(r6) {
+          return "number" == typeof r6 ? w({ r: (t5 = this.rgba).r, g: t5.g, b: t5.b, a: r6 }) : n(this.rgba.a, 3);
+          var t5;
+        }, r5.prototype.hue = function(r6) {
+          var t5 = c2(this.rgba);
+          return "number" == typeof r6 ? w({ h: r6, s: t5.s, l: t5.l, a: t5.a }) : n(t5.h);
+        }, r5.prototype.isEqual = function(r6) {
+          return this.toHex() === w(r6).toHex();
+        }, r5;
+      })();
+      w = function(r5) {
+        return r5 instanceof j ? r5 : new j(r5);
+      };
+      S = [];
+      k = function(r5) {
+        r5.forEach(function(r6) {
+          S.indexOf(r6) < 0 && (r6(j, y), S.push(r6));
+        });
+      };
+    }
   });
-  var l2 =
-    /^hsla?\(\s*([+-]?\d*\.?\d+)(deg|rad|grad|turn)?\s*,\s*([+-]?\d*\.?\d+)%\s*,\s*([+-]?\d*\.?\d+)%\s*(?:,\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
-  var p =
-    /^hsla?\(\s*([+-]?\d*\.?\d+)(deg|rad|grad|turn)?\s+([+-]?\d*\.?\d+)%\s+([+-]?\d*\.?\d+)%\s*(?:\/\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
-  var v =
-    /^rgba?\(\s*([+-]?\d*\.?\d+)(%)?\s*,\s*([+-]?\d*\.?\d+)(%)?\s*,\s*([+-]?\d*\.?\d+)(%)?\s*(?:,\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
-  var m =
-    /^rgba?\(\s*([+-]?\d*\.?\d+)(%)?\s+([+-]?\d*\.?\d+)(%)?\s+([+-]?\d*\.?\d+)(%)?\s*(?:\/\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
-  var y = {
-    string: [
-      [
-        (r5) => {
-          var t5 = i2.exec(r5);
-          return t5
-            ? (r5 = t5[1]).length <= 4
-              ? {
-                  r: Number.parseInt(r5[0] + r5[0], 16),
-                  g: Number.parseInt(r5[1] + r5[1], 16),
-                  b: Number.parseInt(r5[2] + r5[2], 16),
-                  a: r5.length === 4 ? n(Number.parseInt(r5[3] + r5[3], 16) / 255, 2) : 1,
-                }
-              : r5.length === 6 || r5.length === 8
-                ? {
-                    r: Number.parseInt(r5.substr(0, 2), 16),
-                    g: Number.parseInt(r5.substr(2, 2), 16),
-                    b: Number.parseInt(r5.substr(4, 2), 16),
-                    a: r5.length === 8 ? n(Number.parseInt(r5.substr(6, 2), 16) / 255, 2) : 1,
-                  }
-                : null
-            : null;
-        },
-        "hex",
-      ],
-      [
-        (r5) => {
-          var t5 = v.exec(r5) || m.exec(r5);
-          return t5
-            ? t5[2] !== t5[4] || t5[4] !== t5[6]
-              ? null
-              : a2({
-                  r: Number(t5[1]) / (t5[2] ? 100 / 255 : 1),
-                  g: Number(t5[3]) / (t5[4] ? 100 / 255 : 1),
-                  b: Number(t5[5]) / (t5[6] ? 100 / 255 : 1),
-                  a: void 0 === t5[7] ? 1 : Number(t5[7]) / (t5[8] ? 100 : 1),
-                })
-            : null;
-        },
-        "rgb",
-      ],
-      [
-        (t5) => {
-          var n4 = l2.exec(t5) || p.exec(t5);
-          if (!n4) {
-            return null;
-          }
-          var e5,
-            u4,
-            a5 = g({
-              h:
-                ((e5 = n4[1]),
-                (u4 = n4[2]),
-                void 0 === u4 && (u4 = "deg"),
-                Number(e5) * (r2[u4] || 1)),
-              s: Number(n4[3]),
-              l: Number(n4[4]),
-              a: void 0 === n4[5] ? 1 : Number(n4[5]) / (n4[6] ? 100 : 1),
-            });
-          return f2(a5);
-        },
-        "hsl",
-      ],
-    ],
-    object: [
-      [
-        (r5) => {
-          var n4 = r5.r,
-            e5 = r5.g,
-            u4 = r5.b,
-            o5 = r5.a,
-            i5 = void 0 === o5 ? 1 : o5;
-          return t2(n4) && t2(e5) && t2(u4)
-            ? a2({ r: Number(n4), g: Number(e5), b: Number(u4), a: Number(i5) })
-            : null;
-        },
-        "rgb",
-      ],
-      [
-        (r5) => {
-          var n4 = r5.h,
-            e5 = r5.s,
-            u4 = r5.l,
-            a5 = r5.a,
-            o5 = void 0 === a5 ? 1 : a5;
-          if (!(t2(n4) && t2(e5) && t2(u4))) {
-            return null;
-          }
-          var i5 = g({ h: Number(n4), s: Number(e5), l: Number(u4), a: Number(o5) });
-          return f2(i5);
-        },
-        "hsl",
-      ],
-      [
-        (r5) => {
-          var n4 = r5.h,
-            a5 = r5.s,
-            o5 = r5.v,
-            i5 = r5.a,
-            s4 = void 0 === i5 ? 1 : i5;
-          if (!(t2(n4) && t2(a5) && t2(o5))) {
-            return null;
-          }
-          var h4 = ((r6) => ({
-            h: u(r6.h),
-            s: e2(r6.s, 0, 100),
-            v: e2(r6.v, 0, 100),
-            a: e2(r6.a),
-          }))({ h: Number(n4), s: Number(a5), v: Number(o5), a: Number(s4) });
-          return b(h4);
-        },
-        "hsv",
-      ],
-    ],
-  };
-  var N = (r5, t5) => {
-    for (var n4 = 0; n4 < t5.length; n4++) {
-      var e5 = t5[n4][0](r5);
-      if (e5) {
-        return [e5, t5[n4][1]];
-      }
-    }
-    return [null, void 0];
-  };
-  var x = (r5) =>
-    typeof r5 == "string"
-      ? N(r5.trim(), y.string)
-      : typeof r5 == "object" && r5 !== null
-        ? N(r5, y.object)
-        : [null, void 0];
-  var M = (r5, t5) => {
-    var n4 = c2(r5);
-    return { h: n4.h, s: e2(n4.s + 100 * t5, 0, 100), l: n4.l, a: n4.a };
-  };
-  var H = (r5) => (299 * r5.r + 587 * r5.g + 114 * r5.b) / 1e3 / 255;
-  var $ = (r5, t5) => {
-    var n4 = c2(r5);
-    return { h: n4.h, s: n4.s, l: e2(n4.l + 100 * t5, 0, 100), a: n4.a };
-  };
-  var j = (() => {
-    function r5(r6) {
-      (this.parsed = x(r6)[0]), (this.rgba = this.parsed || { r: 0, g: 0, b: 0, a: 1 });
-    }
-    return (
-      (r5.prototype.isValid = function () {
-        return this.parsed !== null;
-      }),
-      (r5.prototype.brightness = function () {
-        return n(H(this.rgba), 2);
-      }),
-      (r5.prototype.isDark = function () {
-        return H(this.rgba) < 0.5;
-      }),
-      (r5.prototype.isLight = function () {
-        return H(this.rgba) >= 0.5;
-      }),
-      (r5.prototype.toHex = function () {
-        return (
-          (r6 = o2(this.rgba)),
-          (t5 = r6.r),
-          (e5 = r6.g),
-          (u4 = r6.b),
-          (i5 = (a5 = r6.a) < 1 ? s2(n(255 * a5)) : ""),
-          "#" + s2(t5) + s2(e5) + s2(u4) + i5
-        );
-        var r6, t5, e5, u4, a5, i5;
-      }),
-      (r5.prototype.toRgb = function () {
-        return o2(this.rgba);
-      }),
-      (r5.prototype.toRgbString = function () {
-        return (
-          (r6 = o2(this.rgba)),
-          (t5 = r6.r),
-          (n4 = r6.g),
-          (e5 = r6.b),
-          (u4 = r6.a) < 1
-            ? "rgba(" + t5 + ", " + n4 + ", " + e5 + ", " + u4 + ")"
-            : "rgb(" + t5 + ", " + n4 + ", " + e5 + ")"
-        );
-        var r6, t5, n4, e5, u4;
-      }),
-      (r5.prototype.toHsl = function () {
-        return d(c2(this.rgba));
-      }),
-      (r5.prototype.toHslString = function () {
-        return (
-          (r6 = d(c2(this.rgba))),
-          (t5 = r6.h),
-          (n4 = r6.s),
-          (e5 = r6.l),
-          (u4 = r6.a) < 1
-            ? "hsla(" + t5 + ", " + n4 + "%, " + e5 + "%, " + u4 + ")"
-            : "hsl(" + t5 + ", " + n4 + "%, " + e5 + "%)"
-        );
-        var r6, t5, n4, e5, u4;
-      }),
-      (r5.prototype.toHsv = function () {
-        return (r6 = h(this.rgba)), { h: n(r6.h), s: n(r6.s), v: n(r6.v), a: n(r6.a, 3) };
-        var r6;
-      }),
-      (r5.prototype.invert = function () {
-        return w({ r: 255 - (r6 = this.rgba).r, g: 255 - r6.g, b: 255 - r6.b, a: r6.a });
-        var r6;
-      }),
-      (r5.prototype.saturate = function (r6) {
-        return void 0 === r6 && (r6 = 0.1), w(M(this.rgba, r6));
-      }),
-      (r5.prototype.desaturate = function (r6) {
-        return void 0 === r6 && (r6 = 0.1), w(M(this.rgba, -r6));
-      }),
-      (r5.prototype.grayscale = function () {
-        return w(M(this.rgba, -1));
-      }),
-      (r5.prototype.lighten = function (r6) {
-        return void 0 === r6 && (r6 = 0.1), w($(this.rgba, r6));
-      }),
-      (r5.prototype.darken = function (r6) {
-        return void 0 === r6 && (r6 = 0.1), w($(this.rgba, -r6));
-      }),
-      (r5.prototype.rotate = function (r6) {
-        return void 0 === r6 && (r6 = 15), this.hue(this.hue() + r6);
-      }),
-      (r5.prototype.alpha = function (r6) {
-        return typeof r6 == "number"
-          ? w({ r: (t5 = this.rgba).r, g: t5.g, b: t5.b, a: r6 })
-          : n(this.rgba.a, 3);
-        var t5;
-      }),
-      (r5.prototype.hue = function (r6) {
-        var t5 = c2(this.rgba);
-        return typeof r6 == "number" ? w({ h: r6, s: t5.s, l: t5.l, a: t5.a }) : n(t5.h);
-      }),
-      (r5.prototype.isEqual = function (r6) {
-        return this.toHex() === w(r6).toHex();
-      }),
-      r5
-    );
-  })();
-  var w = (r5) => (r5 instanceof j ? r5 : new j(r5));
-  var S = [];
-  var k = (r5) => {
-    r5.forEach((r6) => {
-      S.indexOf(r6) < 0 && (r6(j, y), S.push(r6));
-    });
-  };
 
   // node_modules/colord/plugins/lch.mjs
-  var r3 = { grad: 0.9, turn: 360, rad: 360 / (2 * Math.PI) };
-  var t3 = (r5) => (typeof r5 == "string" ? r5.length > 0 : typeof r5 == "number");
-  var a3 = (r5, t5, a5) => (
-    void 0 === t5 && (t5 = 0), void 0 === a5 && (a5 = 10 ** t5), Math.round(a5 * r5) / a5 + 0
-  );
-  var n2 = (r5, t5, a5) => (
-    void 0 === t5 && (t5 = 0), void 0 === a5 && (a5 = 1), r5 > a5 ? a5 : r5 > t5 ? r5 : t5
-  );
-  var u2 = (r5) => {
-    var t5 = r5 / 255;
-    return t5 < 0.040_45 ? t5 / 12.92 : ((t5 + 0.055) / 1.055) ** 2.4;
-  };
-  var h2 = (r5) => 255 * (r5 > 31_308e-7 ? 1.055 * r5 ** (1 / 2.4) - 0.055 : 12.92 * r5);
-  var o3 = 96.422;
-  var e3 = 100;
-  var c3 = 82.521;
-  var i3 = (r5) => {
-    var t5,
-      a5,
-      u4 = {
-        x: 0.955_576_6 * (t5 = r5).x + -0.023_039_3 * t5.y + 0.063_163_6 * t5.z,
-        y: -0.028_289_5 * t5.x + 1.009_941_6 * t5.y + 0.021_007_7 * t5.z,
-        z: 0.012_298_2 * t5.x + -0.020_483 * t5.y + 1.329_909_8 * t5.z,
-      };
-    return (
-      (a5 = {
-        r: h2(0.032_404_542 * u4.x - 0.015_371_385 * u4.y - 4_985_314e-9 * u4.z),
-        g: h2(-969_266e-8 * u4.x + 0.018_760_108 * u4.y + 41_556e-8 * u4.z),
-        b: h2(556_434e-9 * u4.x - 2_040_259e-9 * u4.y + 0.010_572_252 * u4.z),
-        a: r5.a,
-      }),
-      { r: n2(a5.r, 0, 255), g: n2(a5.g, 0, 255), b: n2(a5.b, 0, 255), a: n2(a5.a) }
-    );
-  };
-  var l3 = (r5) => {
-    var t5 = u2(r5.r),
-      a5 = u2(r5.g),
-      h4 = u2(r5.b);
-    return ((r6) => ({ x: n2(r6.x, 0, o3), y: n2(r6.y, 0, e3), z: n2(r6.z, 0, c3), a: n2(r6.a) }))(
-      ((r6) => ({
-        x: 1.047_811_2 * r6.x + 0.022_886_6 * r6.y + -0.050_127 * r6.z,
-        y: 0.029_542_4 * r6.x + 0.990_484_4 * r6.y + -0.017_049_1 * r6.z,
-        z: -92_345e-7 * r6.x + 0.015_043_6 * r6.y + 0.752_131_6 * r6.z,
-        a: r6.a,
-      }))({
-        x: 100 * (0.412_456_4 * t5 + 0.357_576_1 * a5 + 0.180_437_5 * h4),
-        y: 100 * (0.212_672_9 * t5 + 0.715_152_2 * a5 + 0.072_175 * h4),
-        z: 100 * (0.019_333_9 * t5 + 0.119_192 * a5 + 0.950_304_1 * h4),
-        a: r5.a,
-      }),
-    );
-  };
-  var f3 = 216 / 24_389;
-  var b2 = 24_389 / 27;
-  var d2 = (r5) => ({
-    l: n2(r5.l, 0, 100),
-    c: r5.c,
-    h: ((t5 = r5.h), (t5 = isFinite(t5) ? t5 % 360 : 0) > 0 ? t5 : t5 + 360),
-    a: r5.a,
-  });
-  var p2 = (r5) => ({ l: a3(r5.l, 2), c: a3(r5.c, 2), h: a3(r5.h, 2), a: a3(r5.a, 3) });
-  var v2 = (r5) => {
-    var a5 = r5.l,
-      n4 = r5.c,
-      u4 = r5.h,
-      h4 = r5.a,
-      o5 = void 0 === h4 ? 1 : h4;
-    if (!(t3(a5) && t3(n4) && t3(u4))) {
-      return null;
-    }
-    var e5 = d2({ l: Number(a5), c: Number(n4), h: Number(u4), a: Number(o5) });
-    return M2(e5);
-  };
-  var y2 = (r5) => {
-    var t5 = ((r6) => {
-        var t6 = l3(r6),
-          a5 = t6.x / o3,
-          n5 = t6.y / e3,
-          u5 = t6.z / c3;
-        return (
-          (a5 = a5 > f3 ? Math.cbrt(a5) : (b2 * a5 + 16) / 116),
-          {
-            l: 116 * (n5 = n5 > f3 ? Math.cbrt(n5) : (b2 * n5 + 16) / 116) - 16,
-            a: 500 * (a5 - n5),
-            b: 200 * (n5 - (u5 = u5 > f3 ? Math.cbrt(u5) : (b2 * u5 + 16) / 116)),
-            alpha: t6.a,
-          }
-        );
-      })(r5),
-      n4 = a3(t5.a, 3),
-      u4 = a3(t5.b, 3),
-      h4 = (Math.atan2(u4, n4) / Math.PI) * 180;
-    return { l: t5.l, c: Math.sqrt(n4 * n4 + u4 * u4), h: h4 < 0 ? h4 + 360 : h4, a: t5.alpha };
-  };
-  var M2 = (r5) => (
-    (t5 = {
-      l: r5.l,
-      a: r5.c * Math.cos((r5.h * Math.PI) / 180),
-      b: r5.c * Math.sin((r5.h * Math.PI) / 180),
-      alpha: r5.a,
-    }),
-    (n4 = t5.a / 500 + (a5 = (t5.l + 16) / 116)),
-    (u4 = a5 - t5.b / 200),
-    i3({
-      x: (n4 ** 3 > f3 ? n4 ** 3 : (116 * n4 - 16) / b2) * o3,
-      y: (t5.l > 8 ? ((t5.l + 16) / 116) ** 3 : t5.l / b2) * e3,
-      z: (u4 ** 3 > f3 ? u4 ** 3 : (116 * u4 - 16) / b2) * c3,
-      a: t5.alpha,
-    })
-  );
-  var x2 =
-    /^lch\(\s*([+-]?\d*\.?\d+)%\s+([+-]?\d*\.?\d+)\s+([+-]?\d*\.?\d+)(deg|rad|grad|turn)?\s*(?:\/\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
-  var s3 = (t5) => {
-    var a5 = x2.exec(t5);
-    if (!a5) {
-      return null;
-    }
-    var n4,
-      u4,
-      h4 = d2({
-        l: Number(a5[1]),
-        c: Number(a5[2]),
-        h: ((n4 = a5[3]), (u4 = a5[4]), void 0 === u4 && (u4 = "deg"), Number(n4) * (r3[u4] || 1)),
-        a: void 0 === a5[5] ? 1 : Number(a5[5]) / (a5[6] ? 100 : 1),
-      });
-    return M2(h4);
-  };
   function lch_default(r5, t5) {
-    (r5.prototype.toLch = function () {
+    r5.prototype.toLch = function() {
       return p2(y2(this.rgba));
-    }),
-      (r5.prototype.toLchString = function () {
-        return (
-          (r6 = p2(y2(this.rgba))),
-          (t6 = r6.l),
-          (a5 = r6.c),
-          (n4 = r6.h),
-          (u4 = r6.a) < 1
-            ? "lch(" + t6 + "% " + a5 + " " + n4 + " / " + u4 + ")"
-            : "lch(" + t6 + "% " + a5 + " " + n4 + ")"
-        );
-        var r6, t6, a5, n4, u4;
-      }),
-      t5.string.push([s3, "lch"]),
-      t5.object.push([v2, "lch"]);
+    }, r5.prototype.toLchString = function() {
+      return r6 = p2(y2(this.rgba)), t6 = r6.l, a5 = r6.c, n4 = r6.h, (u4 = r6.a) < 1 ? "lch(" + t6 + "% " + a5 + " " + n4 + " / " + u4 + ")" : "lch(" + t6 + "% " + a5 + " " + n4 + ")";
+      var r6, t6, a5, n4, u4;
+    }, t5.string.push([s3, "lch"]), t5.object.push([v2, "lch"]);
   }
+  var r3, t3, a3, n2, u2, h2, o3, e3, c3, i3, l3, f3, b2, d2, p2, v2, y2, M2, x2, s3;
+  var init_lch = __esm({
+    "node_modules/colord/plugins/lch.mjs"() {
+      r3 = { grad: 0.9, turn: 360, rad: 360 / (2 * Math.PI) };
+      t3 = function(r5) {
+        return "string" == typeof r5 ? r5.length > 0 : "number" == typeof r5;
+      };
+      a3 = function(r5, t5, a5) {
+        return void 0 === t5 && (t5 = 0), void 0 === a5 && (a5 = Math.pow(10, t5)), Math.round(a5 * r5) / a5 + 0;
+      };
+      n2 = function(r5, t5, a5) {
+        return void 0 === t5 && (t5 = 0), void 0 === a5 && (a5 = 1), r5 > a5 ? a5 : r5 > t5 ? r5 : t5;
+      };
+      u2 = function(r5) {
+        var t5 = r5 / 255;
+        return t5 < 0.04045 ? t5 / 12.92 : Math.pow((t5 + 0.055) / 1.055, 2.4);
+      };
+      h2 = function(r5) {
+        return 255 * (r5 > 31308e-7 ? 1.055 * Math.pow(r5, 1 / 2.4) - 0.055 : 12.92 * r5);
+      };
+      o3 = 96.422;
+      e3 = 100;
+      c3 = 82.521;
+      i3 = function(r5) {
+        var t5, a5, u4 = { x: 0.9555766 * (t5 = r5).x + -0.0230393 * t5.y + 0.0631636 * t5.z, y: -0.0282895 * t5.x + 1.0099416 * t5.y + 0.0210077 * t5.z, z: 0.0122982 * t5.x + -0.020483 * t5.y + 1.3299098 * t5.z };
+        return a5 = { r: h2(0.032404542 * u4.x - 0.015371385 * u4.y - 4985314e-9 * u4.z), g: h2(-969266e-8 * u4.x + 0.018760108 * u4.y + 41556e-8 * u4.z), b: h2(556434e-9 * u4.x - 2040259e-9 * u4.y + 0.010572252 * u4.z), a: r5.a }, { r: n2(a5.r, 0, 255), g: n2(a5.g, 0, 255), b: n2(a5.b, 0, 255), a: n2(a5.a) };
+      };
+      l3 = function(r5) {
+        var t5 = u2(r5.r), a5 = u2(r5.g), h4 = u2(r5.b);
+        return (function(r6) {
+          return { x: n2(r6.x, 0, o3), y: n2(r6.y, 0, e3), z: n2(r6.z, 0, c3), a: n2(r6.a) };
+        })((function(r6) {
+          return { x: 1.0478112 * r6.x + 0.0228866 * r6.y + -0.050127 * r6.z, y: 0.0295424 * r6.x + 0.9904844 * r6.y + -0.0170491 * r6.z, z: -92345e-7 * r6.x + 0.0150436 * r6.y + 0.7521316 * r6.z, a: r6.a };
+        })({ x: 100 * (0.4124564 * t5 + 0.3575761 * a5 + 0.1804375 * h4), y: 100 * (0.2126729 * t5 + 0.7151522 * a5 + 0.072175 * h4), z: 100 * (0.0193339 * t5 + 0.119192 * a5 + 0.9503041 * h4), a: r5.a }));
+      };
+      f3 = 216 / 24389;
+      b2 = 24389 / 27;
+      d2 = function(r5) {
+        return { l: n2(r5.l, 0, 100), c: r5.c, h: (t5 = r5.h, (t5 = isFinite(t5) ? t5 % 360 : 0) > 0 ? t5 : t5 + 360), a: r5.a };
+        var t5;
+      };
+      p2 = function(r5) {
+        return { l: a3(r5.l, 2), c: a3(r5.c, 2), h: a3(r5.h, 2), a: a3(r5.a, 3) };
+      };
+      v2 = function(r5) {
+        var a5 = r5.l, n4 = r5.c, u4 = r5.h, h4 = r5.a, o5 = void 0 === h4 ? 1 : h4;
+        if (!t3(a5) || !t3(n4) || !t3(u4)) return null;
+        var e5 = d2({ l: Number(a5), c: Number(n4), h: Number(u4), a: Number(o5) });
+        return M2(e5);
+      };
+      y2 = function(r5) {
+        var t5 = (function(r6) {
+          var t6 = l3(r6), a5 = t6.x / o3, n5 = t6.y / e3, u5 = t6.z / c3;
+          return a5 = a5 > f3 ? Math.cbrt(a5) : (b2 * a5 + 16) / 116, { l: 116 * (n5 = n5 > f3 ? Math.cbrt(n5) : (b2 * n5 + 16) / 116) - 16, a: 500 * (a5 - n5), b: 200 * (n5 - (u5 = u5 > f3 ? Math.cbrt(u5) : (b2 * u5 + 16) / 116)), alpha: t6.a };
+        })(r5), n4 = a3(t5.a, 3), u4 = a3(t5.b, 3), h4 = Math.atan2(u4, n4) / Math.PI * 180;
+        return { l: t5.l, c: Math.sqrt(n4 * n4 + u4 * u4), h: h4 < 0 ? h4 + 360 : h4, a: t5.alpha };
+      };
+      M2 = function(r5) {
+        return t5 = { l: r5.l, a: r5.c * Math.cos(r5.h * Math.PI / 180), b: r5.c * Math.sin(r5.h * Math.PI / 180), alpha: r5.a }, n4 = t5.a / 500 + (a5 = (t5.l + 16) / 116), u4 = a5 - t5.b / 200, i3({ x: (Math.pow(n4, 3) > f3 ? Math.pow(n4, 3) : (116 * n4 - 16) / b2) * o3, y: (t5.l > 8 ? Math.pow((t5.l + 16) / 116, 3) : t5.l / b2) * e3, z: (Math.pow(u4, 3) > f3 ? Math.pow(u4, 3) : (116 * u4 - 16) / b2) * c3, a: t5.alpha });
+        var t5, a5, n4, u4;
+      };
+      x2 = /^lch\(\s*([+-]?\d*\.?\d+)%\s+([+-]?\d*\.?\d+)\s+([+-]?\d*\.?\d+)(deg|rad|grad|turn)?\s*(?:\/\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
+      s3 = function(t5) {
+        var a5 = x2.exec(t5);
+        if (!a5) return null;
+        var n4, u4, h4 = d2({ l: Number(a5[1]), c: Number(a5[2]), h: (n4 = a5[3], u4 = a5[4], void 0 === u4 && (u4 = "deg"), Number(n4) * (r3[u4] || 1)), a: void 0 === a5[5] ? 1 : Number(a5[5]) / (a5[6] ? 100 : 1) });
+        return M2(h4);
+      };
+    }
+  });
 
   // node_modules/colord/plugins/mix.mjs
-  var t4 = (t5, a5, n4) => (
-    void 0 === a5 && (a5 = 0), void 0 === n4 && (n4 = 1), t5 > n4 ? n4 : t5 > a5 ? t5 : a5
-  );
-  var a4 = (t5) => {
-    var a5 = t5 / 255;
-    return a5 < 0.040_45 ? a5 / 12.92 : ((a5 + 0.055) / 1.055) ** 2.4;
-  };
-  var n3 = (t5) => 255 * (t5 > 31_308e-7 ? 1.055 * t5 ** (1 / 2.4) - 0.055 : 12.92 * t5);
-  var r4 = 96.422;
-  var o4 = 100;
-  var u3 = 82.521;
-  var e4 = (a5) => {
-    var r5,
-      o5,
-      u4 = {
-        x: 0.955_576_6 * (r5 = a5).x + -0.023_039_3 * r5.y + 0.063_163_6 * r5.z,
-        y: -0.028_289_5 * r5.x + 1.009_941_6 * r5.y + 0.021_007_7 * r5.z,
-        z: 0.012_298_2 * r5.x + -0.020_483 * r5.y + 1.329_909_8 * r5.z,
-      };
-    return (
-      (o5 = {
-        r: n3(0.032_404_542 * u4.x - 0.015_371_385 * u4.y - 4_985_314e-9 * u4.z),
-        g: n3(-969_266e-8 * u4.x + 0.018_760_108 * u4.y + 41_556e-8 * u4.z),
-        b: n3(556_434e-9 * u4.x - 2_040_259e-9 * u4.y + 0.010_572_252 * u4.z),
-        a: a5.a,
-      }),
-      { r: t4(o5.r, 0, 255), g: t4(o5.g, 0, 255), b: t4(o5.b, 0, 255), a: t4(o5.a) }
-    );
-  };
-  var i4 = (n4) => {
-    var e5 = a4(n4.r),
-      i5 = a4(n4.g),
-      p4 = a4(n4.b);
-    return ((a5) => ({ x: t4(a5.x, 0, r4), y: t4(a5.y, 0, o4), z: t4(a5.z, 0, u3), a: t4(a5.a) }))(
-      ((t5) => ({
-        x: 1.047_811_2 * t5.x + 0.022_886_6 * t5.y + -0.050_127 * t5.z,
-        y: 0.029_542_4 * t5.x + 0.990_484_4 * t5.y + -0.017_049_1 * t5.z,
-        z: -92_345e-7 * t5.x + 0.015_043_6 * t5.y + 0.752_131_6 * t5.z,
-        a: t5.a,
-      }))({
-        x: 100 * (0.412_456_4 * e5 + 0.357_576_1 * i5 + 0.180_437_5 * p4),
-        y: 100 * (0.212_672_9 * e5 + 0.715_152_2 * i5 + 0.072_175 * p4),
-        z: 100 * (0.019_333_9 * e5 + 0.119_192 * i5 + 0.950_304_1 * p4),
-        a: n4.a,
-      }),
-    );
-  };
-  var p3 = 216 / 24_389;
-  var h3 = 24_389 / 27;
-  var f4 = (t5) => {
-    var a5 = i4(t5),
-      n4 = a5.x / r4,
-      e5 = a5.y / o4,
-      f5 = a5.z / u3;
-    return (
-      (n4 = n4 > p3 ? Math.cbrt(n4) : (h3 * n4 + 16) / 116),
-      {
-        l: 116 * (e5 = e5 > p3 ? Math.cbrt(e5) : (h3 * e5 + 16) / 116) - 16,
-        a: 500 * (n4 - e5),
-        b: 200 * (e5 - (f5 = f5 > p3 ? Math.cbrt(f5) : (h3 * f5 + 16) / 116)),
-        alpha: a5.a,
-      }
-    );
-  };
-  var c4 = (a5, n4, i5) => {
-    var c5,
-      y3 = f4(a5),
-      x3 = f4(n4);
-    return ((t5) => {
-      var a6 = (t5.l + 16) / 116,
-        n5 = t5.a / 500 + a6,
-        i6 = a6 - t5.b / 200;
-      return e4({
-        x: (n5 ** 3 > p3 ? n5 ** 3 : (116 * n5 - 16) / h3) * r4,
-        y: (t5.l > 8 ? ((t5.l + 16) / 116) ** 3 : t5.l / h3) * o4,
-        z: (i6 ** 3 > p3 ? i6 ** 3 : (116 * i6 - 16) / h3) * u3,
-        a: t5.alpha,
-      });
-    })({
-      l: t4(
-        (c5 = {
-          l: y3.l * (1 - i5) + x3.l * i5,
-          a: y3.a * (1 - i5) + x3.a * i5,
-          b: y3.b * (1 - i5) + x3.b * i5,
-          alpha: y3.alpha * (1 - i5) + x3.alpha * i5,
-        }).l,
-        0,
-        400,
-      ),
-      a: c5.a,
-      b: c5.b,
-      alpha: t4(c5.alpha),
-    });
-  };
   function mix_default(t5) {
     function a5(t6, a6, n4) {
       void 0 === n4 && (n4 = 5);
-      for (var r5 = [], o5 = 1 / (n4 - 1), u4 = 0; u4 <= n4 - 1; u4++) {
-        r5.push(t6.mix(a6, o5 * u4));
-      }
+      for (var r5 = [], o5 = 1 / (n4 - 1), u4 = 0; u4 <= n4 - 1; u4++) r5.push(t6.mix(a6, o5 * u4));
       return r5;
     }
-    (t5.prototype.mix = function (a6, n4) {
+    t5.prototype.mix = function(a6, n4) {
       void 0 === n4 && (n4 = 0.5);
-      var r5 = a6 instanceof t5 ? a6 : new t5(a6),
-        o5 = c4(this.toRgb(), r5.toRgb(), n4);
+      var r5 = a6 instanceof t5 ? a6 : new t5(a6), o5 = c4(this.toRgb(), r5.toRgb(), n4);
       return new t5(o5);
-    }),
-      (t5.prototype.tints = function (t6) {
-        return a5(this, "#fff", t6);
-      }),
-      (t5.prototype.shades = function (t6) {
-        return a5(this, "#000", t6);
-      }),
-      (t5.prototype.tones = function (t6) {
-        return a5(this, "#808080", t6);
-      });
+    }, t5.prototype.tints = function(t6) {
+      return a5(this, "#fff", t6);
+    }, t5.prototype.shades = function(t6) {
+      return a5(this, "#000", t6);
+    }, t5.prototype.tones = function(t6) {
+      return a5(this, "#808080", t6);
+    };
   }
+  var t4, a4, n3, r4, o4, u3, e4, i4, p3, h3, f4, c4;
+  var init_mix = __esm({
+    "node_modules/colord/plugins/mix.mjs"() {
+      t4 = function(t5, a5, n4) {
+        return void 0 === a5 && (a5 = 0), void 0 === n4 && (n4 = 1), t5 > n4 ? n4 : t5 > a5 ? t5 : a5;
+      };
+      a4 = function(t5) {
+        var a5 = t5 / 255;
+        return a5 < 0.04045 ? a5 / 12.92 : Math.pow((a5 + 0.055) / 1.055, 2.4);
+      };
+      n3 = function(t5) {
+        return 255 * (t5 > 31308e-7 ? 1.055 * Math.pow(t5, 1 / 2.4) - 0.055 : 12.92 * t5);
+      };
+      r4 = 96.422;
+      o4 = 100;
+      u3 = 82.521;
+      e4 = function(a5) {
+        var r5, o5, u4 = { x: 0.9555766 * (r5 = a5).x + -0.0230393 * r5.y + 0.0631636 * r5.z, y: -0.0282895 * r5.x + 1.0099416 * r5.y + 0.0210077 * r5.z, z: 0.0122982 * r5.x + -0.020483 * r5.y + 1.3299098 * r5.z };
+        return o5 = { r: n3(0.032404542 * u4.x - 0.015371385 * u4.y - 4985314e-9 * u4.z), g: n3(-969266e-8 * u4.x + 0.018760108 * u4.y + 41556e-8 * u4.z), b: n3(556434e-9 * u4.x - 2040259e-9 * u4.y + 0.010572252 * u4.z), a: a5.a }, { r: t4(o5.r, 0, 255), g: t4(o5.g, 0, 255), b: t4(o5.b, 0, 255), a: t4(o5.a) };
+      };
+      i4 = function(n4) {
+        var e5 = a4(n4.r), i5 = a4(n4.g), p4 = a4(n4.b);
+        return (function(a5) {
+          return { x: t4(a5.x, 0, r4), y: t4(a5.y, 0, o4), z: t4(a5.z, 0, u3), a: t4(a5.a) };
+        })((function(t5) {
+          return { x: 1.0478112 * t5.x + 0.0228866 * t5.y + -0.050127 * t5.z, y: 0.0295424 * t5.x + 0.9904844 * t5.y + -0.0170491 * t5.z, z: -92345e-7 * t5.x + 0.0150436 * t5.y + 0.7521316 * t5.z, a: t5.a };
+        })({ x: 100 * (0.4124564 * e5 + 0.3575761 * i5 + 0.1804375 * p4), y: 100 * (0.2126729 * e5 + 0.7151522 * i5 + 0.072175 * p4), z: 100 * (0.0193339 * e5 + 0.119192 * i5 + 0.9503041 * p4), a: n4.a }));
+      };
+      p3 = 216 / 24389;
+      h3 = 24389 / 27;
+      f4 = function(t5) {
+        var a5 = i4(t5), n4 = a5.x / r4, e5 = a5.y / o4, f5 = a5.z / u3;
+        return n4 = n4 > p3 ? Math.cbrt(n4) : (h3 * n4 + 16) / 116, { l: 116 * (e5 = e5 > p3 ? Math.cbrt(e5) : (h3 * e5 + 16) / 116) - 16, a: 500 * (n4 - e5), b: 200 * (e5 - (f5 = f5 > p3 ? Math.cbrt(f5) : (h3 * f5 + 16) / 116)), alpha: a5.a };
+      };
+      c4 = function(a5, n4, i5) {
+        var c5, y3 = f4(a5), x3 = f4(n4);
+        return (function(t5) {
+          var a6 = (t5.l + 16) / 116, n5 = t5.a / 500 + a6, i6 = a6 - t5.b / 200;
+          return e4({ x: (Math.pow(n5, 3) > p3 ? Math.pow(n5, 3) : (116 * n5 - 16) / h3) * r4, y: (t5.l > 8 ? Math.pow((t5.l + 16) / 116, 3) : t5.l / h3) * o4, z: (Math.pow(i6, 3) > p3 ? Math.pow(i6, 3) : (116 * i6 - 16) / h3) * u3, a: t5.alpha });
+        })({ l: t4((c5 = { l: y3.l * (1 - i5) + x3.l * i5, a: y3.a * (1 - i5) + x3.a * i5, b: y3.b * (1 - i5) + x3.b * i5, alpha: y3.alpha * (1 - i5) + x3.alpha * i5 }).l, 0, 400), a: c5.a, b: c5.b, alpha: t4(c5.alpha) });
+      };
+    }
+  });
 
   // node_modules/@vibrant/image/dist/esm/histogram.js
-  var Histogram = class {
-    constructor(pixels, opts) {
-      this.pixels = pixels;
-      this.opts = opts;
-      const { sigBits } = opts;
-      const getColorIndex = (r22, g22, b22) => (r22 << (2 * sigBits)) + (g22 << sigBits) + b22;
-      this.getColorIndex = getColorIndex;
-      const rshift = 8 - sigBits;
-      const hn = 1 << (3 * sigBits);
-      const hist = new Uint32Array(hn);
-      let rmax;
-      let rmin;
-      let gmax;
-      let gmin;
-      let bmax;
-      let bmin;
-      let r5;
-      let g2;
-      let b3;
-      let a5;
-      rmax = gmax = bmax = 0;
-      rmin = gmin = bmin = Number.MAX_VALUE;
-      const n4 = pixels.length / 4;
-      let i5 = 0;
-      while (i5 < n4) {
-        const offset = i5 * 4;
-        i5++;
-        r5 = pixels[offset + 0];
-        g2 = pixels[offset + 1];
-        b3 = pixels[offset + 2];
-        a5 = pixels[offset + 3];
-        if (a5 === 0) {
-          continue;
+  var Histogram;
+  var init_histogram = __esm({
+    "node_modules/@vibrant/image/dist/esm/histogram.js"() {
+      Histogram = class {
+        constructor(pixels, opts) {
+          this.pixels = pixels;
+          this.opts = opts;
+          const { sigBits } = opts;
+          const getColorIndex = (r22, g22, b22) => (r22 << 2 * sigBits) + (g22 << sigBits) + b22;
+          this.getColorIndex = getColorIndex;
+          const rshift = 8 - sigBits;
+          const hn = 1 << 3 * sigBits;
+          const hist = new Uint32Array(hn);
+          let rmax;
+          let rmin;
+          let gmax;
+          let gmin;
+          let bmax;
+          let bmin;
+          let r5;
+          let g2;
+          let b3;
+          let a5;
+          rmax = gmax = bmax = 0;
+          rmin = gmin = bmin = Number.MAX_VALUE;
+          const n4 = pixels.length / 4;
+          let i5 = 0;
+          while (i5 < n4) {
+            const offset = i5 * 4;
+            i5++;
+            r5 = pixels[offset + 0];
+            g2 = pixels[offset + 1];
+            b3 = pixels[offset + 2];
+            a5 = pixels[offset + 3];
+            if (a5 === 0) continue;
+            r5 = r5 >> rshift;
+            g2 = g2 >> rshift;
+            b3 = b3 >> rshift;
+            const index = getColorIndex(r5, g2, b3);
+            if (hist[index] === void 0) hist[index] = 0;
+            hist[index] += 1;
+            if (r5 > rmax) rmax = r5;
+            if (r5 < rmin) rmin = r5;
+            if (g2 > gmax) gmax = g2;
+            if (g2 < gmin) gmin = g2;
+            if (b3 > bmax) bmax = b3;
+            if (b3 < bmin) bmin = b3;
+          }
+          this._colorCount = hist.reduce(
+            (total, c5) => c5 > 0 ? total + 1 : total,
+            0
+          );
+          this.hist = hist;
+          this.rmax = rmax;
+          this.rmin = rmin;
+          this.gmax = gmax;
+          this.gmin = gmin;
+          this.bmax = bmax;
+          this.bmin = bmin;
         }
-        r5 = r5 >> rshift;
-        g2 = g2 >> rshift;
-        b3 = b3 >> rshift;
-        const index = getColorIndex(r5, g2, b3);
-        if (hist[index] === void 0) {
-          hist[index] = 0;
+        get colorCount() {
+          return this._colorCount;
         }
-        hist[index] += 1;
-        if (r5 > rmax) {
-          rmax = r5;
-        }
-        if (r5 < rmin) {
-          rmin = r5;
-        }
-        if (g2 > gmax) {
-          gmax = g2;
-        }
-        if (g2 < gmin) {
-          gmin = g2;
-        }
-        if (b3 > bmax) {
-          bmax = b3;
-        }
-        if (b3 < bmin) {
-          bmin = b3;
-        }
-      }
-      this._colorCount = hist.reduce((total, c5) => (c5 > 0 ? total + 1 : total), 0);
-      this.hist = hist;
-      this.rmax = rmax;
-      this.rmin = rmin;
-      this.gmax = gmax;
-      this.gmin = gmin;
-      this.bmax = bmax;
-      this.bmin = bmin;
+      };
     }
-    get colorCount() {
-      return this._colorCount;
-    }
-  };
+  });
 
   // node_modules/@vibrant/image/dist/esm/index.js
-  var ImageBase = class {
-    scaleDown(opts) {
-      const width = this.getWidth();
-      const height = this.getHeight();
-      let ratio = 1;
-      if (opts.maxDimension > 0) {
-        const maxSide = Math.max(width, height);
-        if (maxSide > opts.maxDimension) {
-          ratio = opts.maxDimension / maxSide;
-        }
-      } else {
-        ratio = 1 / opts.quality;
-      }
-      if (ratio < 1) {
-        this.resize(width * ratio, height * ratio, ratio);
-      }
-    }
-  };
   function applyFilters(imageData, filters) {
     if (filters.length > 0) {
       const pixels = imageData.data;
@@ -5741,141 +3554,166 @@ Is it scaring you off?`,
     }
     return imageData;
   }
+  var ImageBase;
+  var init_esm = __esm({
+    "node_modules/@vibrant/image/dist/esm/index.js"() {
+      init_histogram();
+      ImageBase = class {
+        scaleDown(opts) {
+          const width = this.getWidth();
+          const height = this.getHeight();
+          let ratio = 1;
+          if (opts.maxDimension > 0) {
+            const maxSide = Math.max(width, height);
+            if (maxSide > opts.maxDimension) ratio = opts.maxDimension / maxSide;
+          } else {
+            ratio = 1 / opts.quality;
+          }
+          if (ratio < 1) this.resize(width * ratio, height * ratio, ratio);
+        }
+      };
+    }
+  });
 
   // node_modules/@vibrant/image-browser/dist/esm/index.js
   function isRelativeUrl(url) {
     const u4 = new URL(url, location.href);
-    return (
-      u4.protocol === location.protocol && u4.host === location.host && u4.port === location.port
-    );
+    return u4.protocol === location.protocol && u4.host === location.host && u4.port === location.port;
   }
   function isSameOrigin(a5, b3) {
     const ua = new URL(a5);
     const ub = new URL(b3);
     return ua.protocol === ub.protocol && ua.hostname === ub.hostname && ua.port === ub.port;
   }
-  var BrowserImage = class extends ImageBase {
-    _getCanvas() {
-      if (!this._canvas) {
-        throw new Error("Canvas is not initialized");
-      }
-      return this._canvas;
-    }
-    _getContext() {
-      if (!this._context) {
-        throw new Error("Context is not initialized");
-      }
-      return this._context;
-    }
-    _getWidth() {
-      if (!this._width) {
-        throw new Error("Width is not initialized");
-      }
-      return this._width;
-    }
-    _getHeight() {
-      if (!this._height) {
-        throw new Error("Height is not initialized");
-      }
-      return this._height;
-    }
-    _initCanvas() {
-      const img = this.image;
-      if (!img) {
-        throw new Error("Image is not initialized");
-      }
-      const canvas = (this._canvas = document.createElement("canvas"));
-      const context = canvas.getContext("2d");
-      if (!context) {
-        throw new ReferenceError("Failed to create canvas context");
-      }
-      this._context = context;
-      canvas.className = "@vibrant/canvas";
-      canvas.style.display = "none";
-      this._width = canvas.width = img.width;
-      this._height = canvas.height = img.height;
-      context.drawImage(img, 0, 0);
-      document.body.appendChild(canvas);
-    }
-    load(image) {
-      let img;
-      let src;
-      if (typeof image === "string") {
-        img = document.createElement("img");
-        src = image;
-        if (!(isRelativeUrl(src) || isSameOrigin(window.location.href, src))) {
-          img.crossOrigin = "anonymous";
+  var BrowserImage;
+  var init_esm2 = __esm({
+    "node_modules/@vibrant/image-browser/dist/esm/index.js"() {
+      init_esm();
+      BrowserImage = class extends ImageBase {
+        _getCanvas() {
+          if (!this._canvas) {
+            throw new Error("Canvas is not initialized");
+          }
+          return this._canvas;
         }
-        img.src = src;
-      } else if (image instanceof HTMLImageElement) {
-        img = image;
-        src = image.src;
-      } else {
-        return Promise.reject(new Error("Cannot load buffer as an image in browser"));
-      }
-      this.image = img;
-      return new Promise((resolve, reject) => {
-        const onImageLoad = () => {
-          this._initCanvas();
-          resolve(this);
-        };
-        if (img.complete) {
-          onImageLoad();
-        } else {
-          img.onload = onImageLoad;
-          img.onerror = (_e) => reject(new Error(`Fail to load image: ${src}`));
+        _getContext() {
+          if (!this._context) {
+            throw new Error("Context is not initialized");
+          }
+          return this._context;
         }
-      });
+        _getWidth() {
+          if (!this._width) {
+            throw new Error("Width is not initialized");
+          }
+          return this._width;
+        }
+        _getHeight() {
+          if (!this._height) {
+            throw new Error("Height is not initialized");
+          }
+          return this._height;
+        }
+        _initCanvas() {
+          const img = this.image;
+          if (!img) {
+            throw new Error("Image is not initialized");
+          }
+          const canvas = this._canvas = document.createElement("canvas");
+          const context = canvas.getContext("2d");
+          if (!context) throw new ReferenceError("Failed to create canvas context");
+          this._context = context;
+          canvas.className = "@vibrant/canvas";
+          canvas.style.display = "none";
+          this._width = canvas.width = img.width;
+          this._height = canvas.height = img.height;
+          context.drawImage(img, 0, 0);
+          document.body.appendChild(canvas);
+        }
+        load(image) {
+          let img;
+          let src;
+          if (typeof image === "string") {
+            img = document.createElement("img");
+            src = image;
+            if (!isRelativeUrl(src) && !isSameOrigin(window.location.href, src)) {
+              img.crossOrigin = "anonymous";
+            }
+            img.src = src;
+          } else if (image instanceof HTMLImageElement) {
+            img = image;
+            src = image.src;
+          } else {
+            return Promise.reject(
+              new Error(`Cannot load buffer as an image in browser`)
+            );
+          }
+          this.image = img;
+          return new Promise((resolve, reject) => {
+            const onImageLoad = () => {
+              this._initCanvas();
+              resolve(this);
+            };
+            if (img.complete) {
+              onImageLoad();
+            } else {
+              img.onload = onImageLoad;
+              img.onerror = (_e) => reject(new Error(`Fail to load image: ${src}`));
+            }
+          });
+        }
+        clear() {
+          this._getContext().clearRect(0, 0, this._getWidth(), this._getHeight());
+        }
+        update(imageData) {
+          this._getContext().putImageData(imageData, 0, 0);
+        }
+        getWidth() {
+          return this._getWidth();
+        }
+        getHeight() {
+          return this._getHeight();
+        }
+        resize(targetWidth, targetHeight, ratio) {
+          if (!this.image) {
+            throw new Error("Image is not initialized");
+          }
+          this._width = this._getCanvas().width = targetWidth;
+          this._height = this._getCanvas().height = targetHeight;
+          this._getContext().scale(ratio, ratio);
+          this._getContext().drawImage(this.image, 0, 0);
+        }
+        getPixelCount() {
+          return this._getWidth() * this._getHeight();
+        }
+        getImageData() {
+          return this._getContext().getImageData(
+            0,
+            0,
+            this._getWidth(),
+            this._getHeight()
+          );
+        }
+        remove() {
+          if (this._canvas && this._canvas.parentNode) {
+            this._canvas.parentNode.removeChild(this._canvas);
+          }
+        }
+      };
     }
-    clear() {
-      this._getContext().clearRect(0, 0, this._getWidth(), this._getHeight());
-    }
-    update(imageData) {
-      this._getContext().putImageData(imageData, 0, 0);
-    }
-    getWidth() {
-      return this._getWidth();
-    }
-    getHeight() {
-      return this._getHeight();
-    }
-    resize(targetWidth, targetHeight, ratio) {
-      if (!this.image) {
-        throw new Error("Image is not initialized");
-      }
-      this._width = this._getCanvas().width = targetWidth;
-      this._height = this._getCanvas().height = targetHeight;
-      this._getContext().scale(ratio, ratio);
-      this._getContext().drawImage(this.image, 0, 0);
-    }
-    getPixelCount() {
-      return this._getWidth() * this._getHeight();
-    }
-    getImageData() {
-      return this._getContext().getImageData(0, 0, this._getWidth(), this._getHeight());
-    }
-    remove() {
-      if (this._canvas && this._canvas.parentNode) {
-        this._canvas.parentNode.removeChild(this._canvas);
-      }
-    }
-  };
+  });
 
   // node_modules/@vibrant/core/dist/esm/utils.js
   function assignDeep(target, ...sources) {
     sources.forEach((s4) => {
-      if (!s4) {
-        return;
-      }
+      if (!s4) return;
       for (const key in s4) {
-        if (Object.hasOwn(s4, key)) {
+        if (s4.hasOwnProperty(key)) {
           const v3 = s4[key];
           if (Array.isArray(v3)) {
             target[key] = v3.slice(0);
           } else if (typeof v3 === "object") {
-            if (!target[key]) {
-              target[key] = {};
-            }
+            if (!target[key]) target[key] = {};
             assignDeep(target[key], v3);
           } else {
             target[key] = v3;
@@ -5885,6 +3723,10 @@ Is it scaring you off?`,
     });
     return target;
   }
+  var init_utils3 = __esm({
+    "node_modules/@vibrant/core/dist/esm/utils.js"() {
+    }
+  });
 
   // node_modules/@vibrant/core/dist/esm/options.js
   function buildProcessOptions(opts, override) {
@@ -5897,203 +3739,226 @@ Is it scaring you off?`,
       {
         quantizer: q,
         generators,
-        filters,
+        filters
       },
-      override,
+      override
     );
   }
+  var init_options = __esm({
+    "node_modules/@vibrant/core/dist/esm/options.js"() {
+      init_utils3();
+    }
+  });
 
   // node_modules/@vibrant/core/dist/esm/builder.js
-  var Builder = class {
-    /**
-     * Arguments are the same as `Vibrant.constructor`.
-     */
-    constructor(src, opts = {}) {
-      this._src = src;
-      this._opts = assignDeep({}, Vibrant.DefaultOpts, opts);
-    }
-    /**
-     * Sets `opts.colorCount` to `n`.
-     * @returns this `Builder` instance.
-     */
-    maxColorCount(n4) {
-      this._opts.colorCount = n4;
-      return this;
-    }
-    /**
-     * Sets `opts.maxDimension` to `d`.
-     * @returns this `Builder` instance.
-     */
-    maxDimension(d3) {
-      this._opts.maxDimension = d3;
-      return this;
-    }
-    /**
-     * Adds a filter function
-     * @returns this `Builder` instance.
-     */
-    addFilter(name2) {
-      if (this._opts.filters) {
-        this._opts.filters.push(name2);
-      } else {
-        this._opts.filters = [name2];
-      }
-      return this;
-    }
-    /**
-     * Removes a filter function.
-     * @returns this `Builder` instance.
-     */
-    removeFilter(name2) {
-      if (this._opts.filters) {
-        const i5 = this._opts.filters.indexOf(name2);
-        if (i5 > 0) {
-          this._opts.filters.splice(i5);
+  var Builder;
+  var init_builder = __esm({
+    "node_modules/@vibrant/core/dist/esm/builder.js"() {
+      init_utils3();
+      init_esm4();
+      Builder = class {
+        /**
+         * Arguments are the same as `Vibrant.constructor`.
+         */
+        constructor(src, opts = {}) {
+          this._src = src;
+          this._opts = assignDeep({}, Vibrant.DefaultOpts, opts);
         }
-      }
-      return this;
+        /**
+         * Sets `opts.colorCount` to `n`.
+         * @returns this `Builder` instance.
+         */
+        maxColorCount(n4) {
+          this._opts.colorCount = n4;
+          return this;
+        }
+        /**
+         * Sets `opts.maxDimension` to `d`.
+         * @returns this `Builder` instance.
+         */
+        maxDimension(d3) {
+          this._opts.maxDimension = d3;
+          return this;
+        }
+        /**
+         * Adds a filter function
+         * @returns this `Builder` instance.
+         */
+        addFilter(name) {
+          if (!this._opts.filters) {
+            this._opts.filters = [name];
+          } else {
+            this._opts.filters.push(name);
+          }
+          return this;
+        }
+        /**
+         * Removes a filter function.
+         * @returns this `Builder` instance.
+         */
+        removeFilter(name) {
+          if (this._opts.filters) {
+            const i5 = this._opts.filters.indexOf(name);
+            if (i5 > 0) this._opts.filters.splice(i5);
+          }
+          return this;
+        }
+        /**
+         * Clear all filters.
+         * @returns this `Builder` instance.
+         */
+        clearFilters() {
+          this._opts.filters = [];
+          return this;
+        }
+        /**
+         * Sets `opts.quality` to `q`.
+         * @returns this `Builder` instance.
+         */
+        quality(q) {
+          this._opts.quality = q;
+          return this;
+        }
+        /**
+         * Specifies which `Image` implementation class to use.
+         * @returns this `Builder` instance.
+         */
+        useImageClass(imageClass) {
+          this._opts.ImageClass = imageClass;
+          return this;
+        }
+        /**
+         * Sets `opts.generator` to `generator`
+         * @returns this `Builder` instance.
+         */
+        useGenerator(generator, options) {
+          if (!this._opts.generators) this._opts.generators = [];
+          this._opts.generators.push(
+            options ? { name: generator, options } : generator
+          );
+          return this;
+        }
+        /**
+         * Specifies which `Quantizer` implementation class to use
+         * @returns this `Builder` instance.
+         */
+        useQuantizer(quantizer, options) {
+          this._opts.quantizer = options ? { name: quantizer, options } : quantizer;
+          return this;
+        }
+        /**
+         * Builds and returns a `Vibrant` instance as configured.
+         */
+        build() {
+          return new Vibrant(this._src, this._opts);
+        }
+        /**
+         * Builds a `Vibrant` instance as configured and calls its `getPalette` method.
+         */
+        getPalette() {
+          return this.build().getPalette();
+        }
+      };
     }
-    /**
-     * Clear all filters.
-     * @returns this `Builder` instance.
-     */
-    clearFilters() {
-      this._opts.filters = [];
-      return this;
-    }
-    /**
-     * Sets `opts.quality` to `q`.
-     * @returns this `Builder` instance.
-     */
-    quality(q) {
-      this._opts.quality = q;
-      return this;
-    }
-    /**
-     * Specifies which `Image` implementation class to use.
-     * @returns this `Builder` instance.
-     */
-    useImageClass(imageClass) {
-      this._opts.ImageClass = imageClass;
-      return this;
-    }
-    /**
-     * Sets `opts.generator` to `generator`
-     * @returns this `Builder` instance.
-     */
-    useGenerator(generator, options) {
-      if (!this._opts.generators) {
-        this._opts.generators = [];
-      }
-      this._opts.generators.push(options ? { name: generator, options } : generator);
-      return this;
-    }
-    /**
-     * Specifies which `Quantizer` implementation class to use
-     * @returns this `Builder` instance.
-     */
-    useQuantizer(quantizer, options) {
-      this._opts.quantizer = options ? { name: quantizer, options } : quantizer;
-      return this;
-    }
-    /**
-     * Builds and returns a `Vibrant` instance as configured.
-     */
-    build() {
-      return new Vibrant(this._src, this._opts);
-    }
-    /**
-     * Builds a `Vibrant` instance as configured and calls its `getPalette` method.
-     */
-    getPalette() {
-      return this.build().getPalette();
-    }
-  };
+  });
 
   // node_modules/@vibrant/core/dist/esm/pipeline/index.js
-  var Stage = class {
-    constructor(pipeline2) {
-      this.pipeline = pipeline2;
-      this._map = {};
-    }
-    names() {
-      return Object.keys(this._map);
-    }
-    has(name2) {
-      return !!this._map[name2];
-    }
-    get(name2) {
-      return this._map[name2];
-    }
-    register(name2, stageFn) {
-      this._map[name2] = stageFn;
-      return this.pipeline;
-    }
-  };
-  var BasicPipeline = class {
-    constructor() {
-      this.filter = new Stage(this);
-      this.quantizer = new Stage(this);
-      this.generator = new Stage(this);
-    }
-    _buildProcessTasks({ filters, quantizer, generators }) {
-      if (generators.length === 1 && generators[0] === "*") {
-        generators = this.generator.names();
-      }
-      return {
-        filters: filters.map((f5) => createTask(this.filter, f5)),
-        quantizer: createTask(this.quantizer, quantizer),
-        generators: generators.map((g2) => createTask(this.generator, g2)),
-      };
-      function createTask(stage, o5) {
-        let name2;
-        let options;
-        if (typeof o5 === "string") {
-          name2 = o5;
-        } else {
-          name2 = o5.name;
-          options = o5.options;
+  var Stage, BasicPipeline;
+  var init_pipeline = __esm({
+    "node_modules/@vibrant/core/dist/esm/pipeline/index.js"() {
+      init_esm();
+      Stage = class {
+        constructor(pipeline2) {
+          this.pipeline = pipeline2;
+          this._map = {};
         }
-        return {
-          name: name2,
-          fn: stage.get(name2),
-          options,
-        };
-      }
-    }
-    async process(imageData, opts) {
-      const { filters, quantizer, generators } = this._buildProcessTasks(opts);
-      const imageFilterData = await this._filterColors(filters, imageData);
-      const colors = await this._generateColors(quantizer, imageFilterData);
-      const palettes = await this._generatePalettes(generators, colors);
-      return {
-        colors,
-        palettes,
+        names() {
+          return Object.keys(this._map);
+        }
+        has(name) {
+          return !!this._map[name];
+        }
+        get(name) {
+          return this._map[name];
+        }
+        register(name, stageFn) {
+          this._map[name] = stageFn;
+          return this.pipeline;
+        }
+      };
+      BasicPipeline = class {
+        constructor() {
+          this.filter = new Stage(this);
+          this.quantizer = new Stage(this);
+          this.generator = new Stage(this);
+        }
+        _buildProcessTasks({
+          filters,
+          quantizer,
+          generators
+        }) {
+          if (generators.length === 1 && generators[0] === "*") {
+            generators = this.generator.names();
+          }
+          return {
+            filters: filters.map((f5) => createTask(this.filter, f5)),
+            quantizer: createTask(this.quantizer, quantizer),
+            generators: generators.map((g2) => createTask(this.generator, g2))
+          };
+          function createTask(stage, o5) {
+            let name;
+            let options;
+            if (typeof o5 === "string") {
+              name = o5;
+            } else {
+              name = o5.name;
+              options = o5.options;
+            }
+            return {
+              name,
+              fn: stage.get(name),
+              options
+            };
+          }
+        }
+        async process(imageData, opts) {
+          const { filters, quantizer, generators } = this._buildProcessTasks(opts);
+          const imageFilterData = await this._filterColors(filters, imageData);
+          const colors = await this._generateColors(quantizer, imageFilterData);
+          const palettes = await this._generatePalettes(generators, colors);
+          return {
+            colors,
+            palettes
+          };
+        }
+        _filterColors(filters, imageData) {
+          return Promise.resolve(
+            applyFilters(
+              imageData,
+              filters.map(({ fn }) => fn)
+            )
+          );
+        }
+        _generateColors(quantizer, imageData) {
+          return Promise.resolve(quantizer.fn(imageData.data, quantizer.options));
+        }
+        async _generatePalettes(generators, colors) {
+          const promiseArr = await Promise.all(
+            generators.map(({ fn, options }) => Promise.resolve(fn(colors, options)))
+          );
+          return Promise.resolve(
+            promiseArr.reduce(
+              (promises, promiseVal, i5) => {
+                promises[generators[i5].name] = promiseVal;
+                return promises;
+              },
+              {}
+            )
+          );
+        }
       };
     }
-    _filterColors(filters, imageData) {
-      return Promise.resolve(
-        applyFilters(
-          imageData,
-          filters.map(({ fn }) => fn),
-        ),
-      );
-    }
-    _generateColors(quantizer, imageData) {
-      return Promise.resolve(quantizer.fn(imageData.data, quantizer.options));
-    }
-    async _generatePalettes(generators, colors) {
-      const promiseArr = await Promise.all(
-        generators.map(({ fn, options }) => Promise.resolve(fn(colors, options))),
-      );
-      return Promise.resolve(
-        promiseArr.reduce((promises, promiseVal, i5) => {
-          promises[generators[i5].name] = promiseVal;
-          return promises;
-        }, {}),
-      );
-    }
-  };
+  });
 
   // node_modules/@vibrant/color/dist/esm/converter.js
   function rgbToHex(r5, g2, b3) {
@@ -6131,21 +3996,11 @@ Is it scaring you off?`,
     let g2;
     let b3;
     function hue2rgb(p4, q, t5) {
-      if (t5 < 0) {
-        t5 += 1;
-      }
-      if (t5 > 1) {
-        t5 -= 1;
-      }
-      if (t5 < 1 / 6) {
-        return p4 + (q - p4) * 6 * t5;
-      }
-      if (t5 < 1 / 2) {
-        return q;
-      }
-      if (t5 < 2 / 3) {
-        return p4 + (q - p4) * (2 / 3 - t5) * 6;
-      }
+      if (t5 < 0) t5 += 1;
+      if (t5 > 1) t5 -= 1;
+      if (t5 < 1 / 6) return p4 + (q - p4) * 6 * t5;
+      if (t5 < 1 / 2) return q;
+      if (t5 < 2 / 3) return p4 + (q - p4) * (2 / 3 - t5) * 6;
       return p4;
     }
     if (s4 === 0) {
@@ -6159,483 +4014,484 @@ Is it scaring you off?`,
     }
     return [r5 * 255, g2 * 255, b3 * 255];
   }
+  var init_converter = __esm({
+    "node_modules/@vibrant/color/dist/esm/converter.js"() {
+    }
+  });
 
   // node_modules/@vibrant/color/dist/esm/index.js
-  var Swatch = class _Swatch {
-    static applyFilters(colors, filters) {
-      return filters.length > 0
-        ? colors.filter(({ r: r5, g: g2, b: b3 }) => {
+  var Swatch;
+  var init_esm3 = __esm({
+    "node_modules/@vibrant/color/dist/esm/index.js"() {
+      init_converter();
+      init_converter();
+      Swatch = class _Swatch {
+        static applyFilters(colors, filters) {
+          return filters.length > 0 ? colors.filter(({ r: r5, g: g2, b: b3 }) => {
             for (let j2 = 0; j2 < filters.length; j2++) {
-              if (!filters[j2]?.(r5, g2, b3, 255)) {
-                return false;
-              }
+              if (!filters[j2]?.(r5, g2, b3, 255)) return false;
             }
             return true;
-          })
-        : colors;
-    }
-    /**
-     * Make a value copy of a swatch based on a previous one. Returns a new Swatch instance
-     * @param {Swatch} swatch
-     */
-    static clone(swatch) {
-      return new _Swatch(swatch._rgb, swatch._population);
-    }
-    /**
-     * The red value in the RGB value
-     */
-    get r() {
-      return this._rgb[0];
-    }
-    /**
-     * The green value in the RGB value
-     */
-    get g() {
-      return this._rgb[1];
-    }
-    /**
-     * The blue value in the RGB value
-     */
-    get b() {
-      return this._rgb[2];
-    }
-    /**
-     * The color value as a rgb value
-     */
-    get rgb() {
-      return this._rgb;
-    }
-    /**
-     * The color value as a hsl value
-     */
-    get hsl() {
-      if (!this._hsl) {
-        const [r5, g2, b3] = this._rgb;
-        this._hsl = rgbToHsl(r5, g2, b3);
-      }
-      return this._hsl;
-    }
-    /**
-     * The color value as a hex string
-     */
-    get hex() {
-      if (!this._hex) {
-        const [r5, g2, b3] = this._rgb;
-        this._hex = rgbToHex(r5, g2, b3);
-      }
-      return this._hex;
-    }
-    get population() {
-      return this._population;
-    }
-    /**
-     * Get the JSON object for the swatch
-     */
-    toJSON() {
-      return {
-        rgb: this.rgb,
-        population: this.population,
+          }) : colors;
+        }
+        /**
+         * Make a value copy of a swatch based on a previous one. Returns a new Swatch instance
+         * @param {Swatch} swatch
+         */
+        static clone(swatch) {
+          return new _Swatch(swatch._rgb, swatch._population);
+        }
+        /**
+         * The red value in the RGB value
+         */
+        get r() {
+          return this._rgb[0];
+        }
+        /**
+         * The green value in the RGB value
+         */
+        get g() {
+          return this._rgb[1];
+        }
+        /**
+         * The blue value in the RGB value
+         */
+        get b() {
+          return this._rgb[2];
+        }
+        /**
+         * The color value as a rgb value
+         */
+        get rgb() {
+          return this._rgb;
+        }
+        /**
+         * The color value as a hsl value
+         */
+        get hsl() {
+          if (!this._hsl) {
+            const [r5, g2, b3] = this._rgb;
+            this._hsl = rgbToHsl(r5, g2, b3);
+          }
+          return this._hsl;
+        }
+        /**
+         * The color value as a hex string
+         */
+        get hex() {
+          if (!this._hex) {
+            const [r5, g2, b3] = this._rgb;
+            this._hex = rgbToHex(r5, g2, b3);
+          }
+          return this._hex;
+        }
+        get population() {
+          return this._population;
+        }
+        /**
+         * Get the JSON object for the swatch
+         */
+        toJSON() {
+          return {
+            rgb: this.rgb,
+            population: this.population
+          };
+        }
+        getYiq() {
+          if (!this._yiq) {
+            const rgb = this._rgb;
+            this._yiq = (rgb[0] * 299 + rgb[1] * 587 + rgb[2] * 114) / 1e3;
+          }
+          return this._yiq;
+        }
+        /**
+         * Returns an appropriate color to use for any 'title' text which is displayed over this Swatch's color.
+         */
+        get titleTextColor() {
+          if (!this._titleTextColor) {
+            this._titleTextColor = this.getYiq() < 200 ? "#fff" : "#000";
+          }
+          return this._titleTextColor;
+        }
+        /**
+         * Returns an appropriate color to use for any 'body' text which is displayed over this Swatch's color.
+         */
+        get bodyTextColor() {
+          if (!this._bodyTextColor) {
+            this._bodyTextColor = this.getYiq() < 150 ? "#fff" : "#000";
+          }
+          return this._bodyTextColor;
+        }
+        /**
+         * Internal use.
+         * @param rgb `[r, g, b]`
+         * @param population Population of the color in an image
+         */
+        constructor(rgb, population) {
+          this._rgb = rgb;
+          this._population = population;
+        }
       };
     }
-    getYiq() {
-      if (!this._yiq) {
-        const rgb = this._rgb;
-        this._yiq = (rgb[0] * 299 + rgb[1] * 587 + rgb[2] * 114) / 1e3;
-      }
-      return this._yiq;
-    }
-    /**
-     * Returns an appropriate color to use for any 'title' text which is displayed over this Swatch's color.
-     */
-    get titleTextColor() {
-      if (!this._titleTextColor) {
-        this._titleTextColor = this.getYiq() < 200 ? "#fff" : "#000";
-      }
-      return this._titleTextColor;
-    }
-    /**
-     * Returns an appropriate color to use for any 'body' text which is displayed over this Swatch's color.
-     */
-    get bodyTextColor() {
-      if (!this._bodyTextColor) {
-        this._bodyTextColor = this.getYiq() < 150 ? "#fff" : "#000";
-      }
-      return this._bodyTextColor;
-    }
-    /**
-     * Internal use.
-     * @param rgb `[r, g, b]`
-     * @param population Population of the color in an image
-     */
-    constructor(rgb, population) {
-      this._rgb = rgb;
-      this._population = population;
-    }
-  };
+  });
 
   // node_modules/@vibrant/core/dist/esm/index.js
-  var _Vibrant = class _Vibrant2 {
-    /**
-     *
-     * @param _src Path to image file (supports HTTP/HTTPs)
-     * @param opts Options (optional)
-     */
-    constructor(_src, opts) {
-      this._src = _src;
-      this.opts = assignDeep({}, _Vibrant2.DefaultOpts, opts);
-    }
-    static use(pipeline2) {
-      _Vibrant2._pipeline = pipeline2;
-    }
-    static from(src) {
-      return new Builder(src);
-    }
-    get result() {
-      return this._result;
-    }
-    _process(image, opts) {
-      image.scaleDown(this.opts);
-      const processOpts = buildProcessOptions(this.opts, opts);
-      return _Vibrant2._pipeline.process(image.getImageData(), processOpts);
-    }
-    async getPalette() {
-      const image = new this.opts.ImageClass();
-      try {
-        const image1 = await image.load(this._src);
-        const result1 = await this._process(image1, {
-          generators: ["default"],
-        });
-        this._result = result1;
-        const res = result1.palettes["default"];
-        if (!res) {
-          throw new Error(
-            "Something went wrong and a palette was not found, please file a bug against our GitHub repo: https://github.com/vibrant-Colors/node-vibrant/",
-          );
+  var _Vibrant, Vibrant;
+  var init_esm4 = __esm({
+    "node_modules/@vibrant/core/dist/esm/index.js"() {
+      init_options();
+      init_builder();
+      init_utils3();
+      init_pipeline();
+      _Vibrant = class _Vibrant2 {
+        /**
+         *
+         * @param _src Path to image file (supports HTTP/HTTPs)
+         * @param opts Options (optional)
+         */
+        constructor(_src, opts) {
+          this._src = _src;
+          this.opts = assignDeep({}, _Vibrant2.DefaultOpts, opts);
         }
-        image.remove();
-        return res;
-      } catch (err) {
-        image.remove();
-        return Promise.reject(err);
-      }
+        static use(pipeline2) {
+          this._pipeline = pipeline2;
+        }
+        static from(src) {
+          return new Builder(src);
+        }
+        get result() {
+          return this._result;
+        }
+        _process(image, opts) {
+          image.scaleDown(this.opts);
+          const processOpts = buildProcessOptions(this.opts, opts);
+          return _Vibrant2._pipeline.process(image.getImageData(), processOpts);
+        }
+        async getPalette() {
+          const image = new this.opts.ImageClass();
+          try {
+            const image1 = await image.load(this._src);
+            const result1 = await this._process(image1, {
+              generators: ["default"]
+            });
+            this._result = result1;
+            const res = result1.palettes["default"];
+            if (!res) {
+              throw new Error(
+                `Something went wrong and a palette was not found, please file a bug against our GitHub repo: https://github.com/vibrant-Colors/node-vibrant/`
+              );
+            }
+            image.remove();
+            return res;
+          } catch (err) {
+            image.remove();
+            return Promise.reject(err);
+          }
+        }
+        async getPalettes() {
+          const image = new this.opts.ImageClass();
+          try {
+            const image1 = await image.load(this._src);
+            const result1 = await this._process(image1, {
+              generators: ["*"]
+            });
+            this._result = result1;
+            const res = result1.palettes;
+            image.remove();
+            return res;
+          } catch (err) {
+            image.remove();
+            return Promise.reject(err);
+          }
+        }
+      };
+      _Vibrant.DefaultOpts = {
+        colorCount: 64,
+        quality: 5,
+        filters: []
+      };
+      Vibrant = _Vibrant;
     }
-    async getPalettes() {
-      const image = new this.opts.ImageClass();
-      try {
-        const image1 = await image.load(this._src);
-        const result1 = await this._process(image1, {
-          generators: ["*"],
-        });
-        this._result = result1;
-        const res = result1.palettes;
-        image.remove();
-        return res;
-      } catch (err) {
-        image.remove();
-        return Promise.reject(err);
-      }
-    }
-  };
-  _Vibrant.DefaultOpts = {
-    colorCount: 64,
-    quality: 5,
-    filters: [],
-  };
-  var Vibrant = _Vibrant;
+  });
 
   // node_modules/node-vibrant/dist/esm/configs/config.js
-  Vibrant.DefaultOpts.quantizer = "mmcq";
-  Vibrant.DefaultOpts.generators = ["default"];
-  Vibrant.DefaultOpts.filters = ["default"];
+  var init_config = __esm({
+    "node_modules/node-vibrant/dist/esm/configs/config.js"() {
+      init_esm4();
+      Vibrant.DefaultOpts.quantizer = "mmcq";
+      Vibrant.DefaultOpts.generators = ["default"];
+      Vibrant.DefaultOpts.filters = ["default"];
+    }
+  });
 
   // node_modules/node-vibrant/dist/esm/configs/browser.js
-  Vibrant.DefaultOpts.ImageClass = BrowserImage;
+  var init_browser = __esm({
+    "node_modules/node-vibrant/dist/esm/configs/browser.js"() {
+      init_esm2();
+      init_config();
+      init_esm4();
+      Vibrant.DefaultOpts.ImageClass = BrowserImage;
+    }
+  });
 
   // node_modules/@vibrant/quantizer-mmcq/dist/esm/vbox.js
-  var SIGBITS = 5;
-  var RSHIFT = 8 - SIGBITS;
-  var VBox = class _VBox {
-    constructor(r1, r22, g1, g2, b1, b22, histogram) {
-      this.histogram = histogram;
-      this._volume = -1;
-      this._avg = null;
-      this._count = -1;
-      this.dimension = { r1, r2: r22, g1, g2, b1, b2: b22 };
-    }
-    static build(pixels) {
-      const h4 = new Histogram(pixels, { sigBits: SIGBITS });
-      const { rmin, rmax, gmin, gmax, bmin, bmax } = h4;
-      return new _VBox(rmin, rmax, gmin, gmax, bmin, bmax, h4);
-    }
-    invalidate() {
-      this._volume = this._count = -1;
-      this._avg = null;
-    }
-    volume() {
-      if (this._volume < 0) {
-        const { r1, r2: r22, g1, g2, b1, b2: b22 } = this.dimension;
-        this._volume = (r22 - r1 + 1) * (g2 - g1 + 1) * (b22 - b1 + 1);
-      }
-      return this._volume;
-    }
-    count() {
-      if (this._count < 0) {
-        const { hist, getColorIndex } = this.histogram;
-        const { r1, r2: r22, g1, g2, b1, b2: b22 } = this.dimension;
-        let c5 = 0;
-        for (let r5 = r1; r5 <= r22; r5++) {
-          for (let g3 = g1; g3 <= g2; g3++) {
-            for (let b3 = b1; b3 <= b22; b3++) {
-              const index = getColorIndex(r5, g3, b3);
-              if (!hist[index]) {
-                continue;
+  var SIGBITS, RSHIFT, VBox;
+  var init_vbox = __esm({
+    "node_modules/@vibrant/quantizer-mmcq/dist/esm/vbox.js"() {
+      init_esm();
+      SIGBITS = 5;
+      RSHIFT = 8 - SIGBITS;
+      VBox = class _VBox {
+        constructor(r1, r22, g1, g2, b1, b22, histogram) {
+          this.histogram = histogram;
+          this._volume = -1;
+          this._avg = null;
+          this._count = -1;
+          this.dimension = { r1, r2: r22, g1, g2, b1, b2: b22 };
+        }
+        static build(pixels) {
+          const h4 = new Histogram(pixels, { sigBits: SIGBITS });
+          const { rmin, rmax, gmin, gmax, bmin, bmax } = h4;
+          return new _VBox(rmin, rmax, gmin, gmax, bmin, bmax, h4);
+        }
+        invalidate() {
+          this._volume = this._count = -1;
+          this._avg = null;
+        }
+        volume() {
+          if (this._volume < 0) {
+            const { r1, r2: r22, g1, g2, b1, b2: b22 } = this.dimension;
+            this._volume = (r22 - r1 + 1) * (g2 - g1 + 1) * (b22 - b1 + 1);
+          }
+          return this._volume;
+        }
+        count() {
+          if (this._count < 0) {
+            const { hist, getColorIndex } = this.histogram;
+            const { r1, r2: r22, g1, g2, b1, b2: b22 } = this.dimension;
+            let c5 = 0;
+            for (let r5 = r1; r5 <= r22; r5++) {
+              for (let g3 = g1; g3 <= g2; g3++) {
+                for (let b3 = b1; b3 <= b22; b3++) {
+                  const index = getColorIndex(r5, g3, b3);
+                  if (!hist[index]) {
+                    continue;
+                  }
+                  c5 += hist[index];
+                }
               }
-              c5 += hist[index];
+            }
+            this._count = c5;
+          }
+          return this._count;
+        }
+        clone() {
+          const { histogram } = this;
+          const { r1, r2: r22, g1, g2, b1, b2: b22 } = this.dimension;
+          return new _VBox(r1, r22, g1, g2, b1, b22, histogram);
+        }
+        avg() {
+          if (!this._avg) {
+            const { hist, getColorIndex } = this.histogram;
+            const { r1, r2: r22, g1, g2, b1, b2: b22 } = this.dimension;
+            let ntot = 0;
+            const mult = 1 << 8 - SIGBITS;
+            let rsum;
+            let gsum;
+            let bsum;
+            rsum = gsum = bsum = 0;
+            for (let r5 = r1; r5 <= r22; r5++) {
+              for (let g3 = g1; g3 <= g2; g3++) {
+                for (let b3 = b1; b3 <= b22; b3++) {
+                  const index = getColorIndex(r5, g3, b3);
+                  const h4 = hist[index];
+                  if (!h4) continue;
+                  ntot += h4;
+                  rsum += h4 * (r5 + 0.5) * mult;
+                  gsum += h4 * (g3 + 0.5) * mult;
+                  bsum += h4 * (b3 + 0.5) * mult;
+                }
+              }
+            }
+            if (ntot) {
+              this._avg = [~~(rsum / ntot), ~~(gsum / ntot), ~~(bsum / ntot)];
+            } else {
+              this._avg = [
+                ~~(mult * (r1 + r22 + 1) / 2),
+                ~~(mult * (g1 + g2 + 1) / 2),
+                ~~(mult * (b1 + b22 + 1) / 2)
+              ];
             }
           }
+          return this._avg;
         }
-        this._count = c5;
-      }
-      return this._count;
-    }
-    clone() {
-      const { histogram } = this;
-      const { r1, r2: r22, g1, g2, b1, b2: b22 } = this.dimension;
-      return new _VBox(r1, r22, g1, g2, b1, b22, histogram);
-    }
-    avg() {
-      if (!this._avg) {
-        const { hist, getColorIndex } = this.histogram;
-        const { r1, r2: r22, g1, g2, b1, b2: b22 } = this.dimension;
-        let ntot = 0;
-        const mult = 1 << (8 - SIGBITS);
-        let rsum;
-        let gsum;
-        let bsum;
-        rsum = gsum = bsum = 0;
-        for (let r5 = r1; r5 <= r22; r5++) {
-          for (let g3 = g1; g3 <= g2; g3++) {
-            for (let b3 = b1; b3 <= b22; b3++) {
-              const index = getColorIndex(r5, g3, b3);
-              const h4 = hist[index];
-              if (!h4) {
-                continue;
+        contains(rgb) {
+          let [r5, g2, b3] = rgb;
+          const { r1, r2: r22, g1, g2: g22, b1, b2: b22 } = this.dimension;
+          r5 >>= RSHIFT;
+          g2 >>= RSHIFT;
+          b3 >>= RSHIFT;
+          return r5 >= r1 && r5 <= r22 && g2 >= g1 && g2 <= g22 && b3 >= b1 && b3 <= b22;
+        }
+        split() {
+          const { hist, getColorIndex } = this.histogram;
+          const { r1, r2: r22, g1, g2, b1, b2: b22 } = this.dimension;
+          const count = this.count();
+          if (!count) return [];
+          if (count === 1) return [this.clone()];
+          const rw = r22 - r1 + 1;
+          const gw = g2 - g1 + 1;
+          const bw = b22 - b1 + 1;
+          const maxw = Math.max(rw, gw, bw);
+          let accSum = null;
+          let sum;
+          let total;
+          sum = total = 0;
+          let maxd = null;
+          if (maxw === rw) {
+            maxd = "r";
+            accSum = new Uint32Array(r22 + 1);
+            for (let r5 = r1; r5 <= r22; r5++) {
+              sum = 0;
+              for (let g3 = g1; g3 <= g2; g3++) {
+                for (let b3 = b1; b3 <= b22; b3++) {
+                  const index = getColorIndex(r5, g3, b3);
+                  if (!hist[index]) continue;
+                  sum += hist[index];
+                }
               }
-              ntot += h4;
-              rsum += h4 * (r5 + 0.5) * mult;
-              gsum += h4 * (g3 + 0.5) * mult;
-              bsum += h4 * (b3 + 0.5) * mult;
+              total += sum;
+              accSum[r5] = total;
             }
-          }
-        }
-        if (ntot) {
-          this._avg = [~~(rsum / ntot), ~~(gsum / ntot), ~~(bsum / ntot)];
-        } else {
-          this._avg = [
-            ~~((mult * (r1 + r22 + 1)) / 2),
-            ~~((mult * (g1 + g2 + 1)) / 2),
-            ~~((mult * (b1 + b22 + 1)) / 2),
-          ];
-        }
-      }
-      return this._avg;
-    }
-    contains(rgb) {
-      let [r5, g2, b3] = rgb;
-      const { r1, r2: r22, g1, g2: g22, b1, b2: b22 } = this.dimension;
-      r5 >>= RSHIFT;
-      g2 >>= RSHIFT;
-      b3 >>= RSHIFT;
-      return r5 >= r1 && r5 <= r22 && g2 >= g1 && g2 <= g22 && b3 >= b1 && b3 <= b22;
-    }
-    split() {
-      const { hist, getColorIndex } = this.histogram;
-      const { r1, r2: r22, g1, g2, b1, b2: b22 } = this.dimension;
-      const count = this.count();
-      if (!count) {
-        return [];
-      }
-      if (count === 1) {
-        return [this.clone()];
-      }
-      const rw = r22 - r1 + 1;
-      const gw = g2 - g1 + 1;
-      const bw = b22 - b1 + 1;
-      const maxw = Math.max(rw, gw, bw);
-      let accSum = null;
-      let sum;
-      let total;
-      sum = total = 0;
-      let maxd = null;
-      if (maxw === rw) {
-        maxd = "r";
-        accSum = new Uint32Array(r22 + 1);
-        for (let r5 = r1; r5 <= r22; r5++) {
-          sum = 0;
-          for (let g3 = g1; g3 <= g2; g3++) {
-            for (let b3 = b1; b3 <= b22; b3++) {
-              const index = getColorIndex(r5, g3, b3);
-              if (!hist[index]) {
-                continue;
-              }
-              sum += hist[index];
-            }
-          }
-          total += sum;
-          accSum[r5] = total;
-        }
-      } else if (maxw === gw) {
-        maxd = "g";
-        accSum = new Uint32Array(g2 + 1);
-        for (let g3 = g1; g3 <= g2; g3++) {
-          sum = 0;
-          for (let r5 = r1; r5 <= r22; r5++) {
-            for (let b3 = b1; b3 <= b22; b3++) {
-              const index = getColorIndex(r5, g3, b3);
-              if (!hist[index]) {
-                continue;
-              }
-              sum += hist[index];
-            }
-          }
-          total += sum;
-          accSum[g3] = total;
-        }
-      } else {
-        maxd = "b";
-        accSum = new Uint32Array(b22 + 1);
-        for (let b3 = b1; b3 <= b22; b3++) {
-          sum = 0;
-          for (let r5 = r1; r5 <= r22; r5++) {
+          } else if (maxw === gw) {
+            maxd = "g";
+            accSum = new Uint32Array(g2 + 1);
             for (let g3 = g1; g3 <= g2; g3++) {
-              const index = getColorIndex(r5, g3, b3);
-              if (!hist[index]) {
-                continue;
+              sum = 0;
+              for (let r5 = r1; r5 <= r22; r5++) {
+                for (let b3 = b1; b3 <= b22; b3++) {
+                  const index = getColorIndex(r5, g3, b3);
+                  if (!hist[index]) continue;
+                  sum += hist[index];
+                }
               }
-              sum += hist[index];
+              total += sum;
+              accSum[g3] = total;
+            }
+          } else {
+            maxd = "b";
+            accSum = new Uint32Array(b22 + 1);
+            for (let b3 = b1; b3 <= b22; b3++) {
+              sum = 0;
+              for (let r5 = r1; r5 <= r22; r5++) {
+                for (let g3 = g1; g3 <= g2; g3++) {
+                  const index = getColorIndex(r5, g3, b3);
+                  if (!hist[index]) continue;
+                  sum += hist[index];
+                }
+              }
+              total += sum;
+              accSum[b3] = total;
             }
           }
-          total += sum;
-          accSum[b3] = total;
+          let splitPoint = -1;
+          const reverseSum = new Uint32Array(accSum.length);
+          for (let i5 = 0; i5 < accSum.length; i5++) {
+            const d3 = accSum[i5];
+            if (!d3) continue;
+            if (splitPoint < 0 && d3 > total / 2) splitPoint = i5;
+            reverseSum[i5] = total - d3;
+          }
+          const vbox = this;
+          function doCut(d3) {
+            const dim1 = d3 + "1";
+            const dim2 = d3 + "2";
+            const d1 = vbox.dimension[dim1];
+            let d22 = vbox.dimension[dim2];
+            const vbox1 = vbox.clone();
+            const vbox2 = vbox.clone();
+            const left = splitPoint - d1;
+            const right = d22 - splitPoint;
+            if (left <= right) {
+              d22 = Math.min(d22 - 1, ~~(splitPoint + right / 2));
+              d22 = Math.max(0, d22);
+            } else {
+              d22 = Math.max(d1, ~~(splitPoint - 1 - left / 2));
+              d22 = Math.min(vbox.dimension[dim2], d22);
+            }
+            while (!accSum[d22]) d22++;
+            let c22 = reverseSum[d22];
+            while (!c22 && accSum[d22 - 1]) c22 = reverseSum[--d22];
+            vbox1.dimension[dim2] = d22;
+            vbox2.dimension[dim1] = d22 + 1;
+            return [vbox1, vbox2];
+          }
+          return doCut(maxd);
         }
-      }
-      let splitPoint = -1;
-      const reverseSum = new Uint32Array(accSum.length);
-      for (let i5 = 0; i5 < accSum.length; i5++) {
-        const d3 = accSum[i5];
-        if (!d3) {
-          continue;
-        }
-        if (splitPoint < 0 && d3 > total / 2) {
-          splitPoint = i5;
-        }
-        reverseSum[i5] = total - d3;
-      }
-      const vbox = this;
-      function doCut(d3) {
-        const dim1 = d3 + "1";
-        const dim2 = d3 + "2";
-        const d1 = vbox.dimension[dim1];
-        let d22 = vbox.dimension[dim2];
-        const vbox1 = vbox.clone();
-        const vbox2 = vbox.clone();
-        const left = splitPoint - d1;
-        const right = d22 - splitPoint;
-        if (left <= right) {
-          d22 = Math.min(d22 - 1, ~~(splitPoint + right / 2));
-          d22 = Math.max(0, d22);
-        } else {
-          d22 = Math.max(d1, ~~(splitPoint - 1 - left / 2));
-          d22 = Math.min(vbox.dimension[dim2], d22);
-        }
-        while (!accSum[d22]) {
-          d22++;
-        }
-        let c22 = reverseSum[d22];
-        while (!c22 && accSum[d22 - 1]) {
-          c22 = reverseSum[--d22];
-        }
-        vbox1.dimension[dim2] = d22;
-        vbox2.dimension[dim1] = d22 + 1;
-        return [vbox1, vbox2];
-      }
-      return doCut(maxd);
+      };
     }
-  };
+  });
 
   // node_modules/@vibrant/quantizer-mmcq/dist/esm/pqueue.js
-  var PQueue = class {
-    _sort() {
-      if (!this._sorted) {
-        this.contents.sort(this._comparator);
-        this._sorted = true;
-      }
+  var PQueue;
+  var init_pqueue = __esm({
+    "node_modules/@vibrant/quantizer-mmcq/dist/esm/pqueue.js"() {
+      PQueue = class {
+        _sort() {
+          if (!this._sorted) {
+            this.contents.sort(this._comparator);
+            this._sorted = true;
+          }
+        }
+        constructor(comparator) {
+          this._comparator = comparator;
+          this.contents = [];
+          this._sorted = false;
+        }
+        push(item) {
+          this.contents.push(item);
+          this._sorted = false;
+        }
+        peek(index) {
+          this._sort();
+          index = typeof index === "number" ? index : this.contents.length - 1;
+          return this.contents[index];
+        }
+        pop() {
+          this._sort();
+          return this.contents.pop();
+        }
+        size() {
+          return this.contents.length;
+        }
+        map(mapper) {
+          this._sort();
+          return this.contents.map(mapper);
+        }
+      };
     }
-    constructor(comparator) {
-      this._comparator = comparator;
-      this.contents = [];
-      this._sorted = false;
-    }
-    push(item) {
-      this.contents.push(item);
-      this._sorted = false;
-    }
-    peek(index) {
-      this._sort();
-      index = typeof index === "number" ? index : this.contents.length - 1;
-      return this.contents[index];
-    }
-    pop() {
-      this._sort();
-      return this.contents.pop();
-    }
-    size() {
-      return this.contents.length;
-    }
-    map(mapper) {
-      this._sort();
-      return this.contents.map(mapper);
-    }
-  };
+  });
 
   // node_modules/@vibrant/quantizer-mmcq/dist/esm/index.js
-  var fractByPopulations = 0.75;
   function _splitBoxes(pq, target) {
     let lastSize = pq.size();
     while (pq.size() < target) {
       const vbox = pq.pop();
       if (vbox && vbox.count() > 0) {
         const [vbox1, vbox2] = vbox.split();
-        if (!vbox1) {
-          break;
-        }
+        if (!vbox1) break;
         pq.push(vbox1);
-        if (vbox2 && vbox2.count() > 0) {
-          pq.push(vbox2);
-        }
+        if (vbox2 && vbox2.count() > 0) pq.push(vbox2);
         if (pq.size() === lastSize) {
           break;
+        } else {
+          lastSize = pq.size();
         }
-        lastSize = pq.size();
       } else {
         break;
       }
     }
   }
-  var MMCQ = (pixels, opts) => {
-    if (pixels.length === 0 || opts.colorCount < 2 || opts.colorCount > 256) {
-      throw new Error("Wrong MMCQ parameters");
-    }
-    const vbox = VBox.build(pixels);
-    vbox.histogram.colorCount;
-    const pq = new PQueue((a5, b3) => a5.count() - b3.count());
-    pq.push(vbox);
-    _splitBoxes(pq, fractByPopulations * opts.colorCount);
-    const pq2 = new PQueue((a5, b3) => a5.count() * a5.volume() - b3.count() * b3.volume());
-    pq2.contents = pq.contents;
-    _splitBoxes(pq2, opts.colorCount - pq2.size());
-    return generateSwatches(pq2);
-  };
   function generateSwatches(pq) {
     const swatches = [];
     while (pq.size()) {
@@ -6646,24 +4502,33 @@ Is it scaring you off?`,
     }
     return swatches;
   }
+  var fractByPopulations, MMCQ;
+  var init_esm5 = __esm({
+    "node_modules/@vibrant/quantizer-mmcq/dist/esm/index.js"() {
+      init_esm3();
+      init_vbox();
+      init_pqueue();
+      fractByPopulations = 0.75;
+      MMCQ = (pixels, opts) => {
+        if (pixels.length === 0 || opts.colorCount < 2 || opts.colorCount > 256) {
+          throw new Error("Wrong MMCQ parameters");
+        }
+        const vbox = VBox.build(pixels);
+        vbox.histogram.colorCount;
+        const pq = new PQueue((a5, b3) => a5.count() - b3.count());
+        pq.push(vbox);
+        _splitBoxes(pq, fractByPopulations * opts.colorCount);
+        const pq2 = new PQueue(
+          (a5, b3) => a5.count() * a5.volume() - b3.count() * b3.volume()
+        );
+        pq2.contents = pq.contents;
+        _splitBoxes(pq2, opts.colorCount - pq2.size());
+        return generateSwatches(pq2);
+      };
+    }
+  });
 
   // node_modules/@vibrant/generator-default/dist/esm/index.js
-  var DefaultOpts = {
-    targetDarkLuma: 0.26,
-    maxDarkLuma: 0.45,
-    minLightLuma: 0.55,
-    targetLightLuma: 0.74,
-    minNormalLuma: 0.3,
-    targetNormalLuma: 0.5,
-    maxNormalLuma: 0.7,
-    targetMutesSaturation: 0.3,
-    maxMutesSaturation: 0.4,
-    targetVibrantSaturation: 1,
-    minVibrantSaturation: 0.35,
-    weightSaturation: 3,
-    weightLuma: 6.5,
-    weightPopulation: 0.5,
-  };
   function _findMaxPopulation(swatches) {
     let p4 = 0;
     swatches.forEach((s4) => {
@@ -6672,33 +4537,16 @@ Is it scaring you off?`,
     return p4;
   }
   function _isAlreadySelected(palette, s4) {
-    return (
-      palette.Vibrant === s4 ||
-      palette.DarkVibrant === s4 ||
-      palette.LightVibrant === s4 ||
-      palette.Muted === s4 ||
-      palette.DarkMuted === s4 ||
-      palette.LightMuted === s4
-    );
+    return palette.Vibrant === s4 || palette.DarkVibrant === s4 || palette.LightVibrant === s4 || palette.Muted === s4 || palette.DarkMuted === s4 || palette.LightMuted === s4;
   }
-  function _createComparisonValue(
-    saturation,
-    targetSaturation,
-    luma,
-    targetLuma,
-    population,
-    maxPopulation,
-    opts,
-  ) {
+  function _createComparisonValue(saturation, targetSaturation, luma, targetLuma, population, maxPopulation, opts) {
     function weightedMean(...values) {
       let sum = 0;
       let weightSum = 0;
       for (let i5 = 0; i5 < values.length; i5 += 2) {
         const value = values[i5];
         const weight = values[i5 + 1];
-        if (!(value && weight)) {
-          continue;
-        }
+        if (!value || !weight) continue;
         sum += value * weight;
         weightSum += weight;
       }
@@ -6713,32 +4561,15 @@ Is it scaring you off?`,
       invertDiff(luma, targetLuma),
       opts.weightLuma,
       population / maxPopulation,
-      opts.weightPopulation,
+      opts.weightPopulation
     );
   }
-  function _findColorVariation(
-    palette,
-    swatches,
-    maxPopulation,
-    targetLuma,
-    minLuma,
-    maxLuma,
-    targetSaturation,
-    minSaturation,
-    maxSaturation,
-    opts,
-  ) {
+  function _findColorVariation(palette, swatches, maxPopulation, targetLuma, minLuma, maxLuma, targetSaturation, minSaturation, maxSaturation, opts) {
     let max = null;
     let maxValue = 0;
     swatches.forEach((swatch) => {
       const [, s4, l4] = swatch.hsl;
-      if (
-        s4 >= minSaturation &&
-        s4 <= maxSaturation &&
-        l4 >= minLuma &&
-        l4 <= maxLuma &&
-        !_isAlreadySelected(palette, swatch)
-      ) {
+      if (s4 >= minSaturation && s4 <= maxSaturation && l4 >= minLuma && l4 <= maxLuma && !_isAlreadySelected(palette, swatch)) {
         const value = _createComparisonValue(
           s4,
           targetSaturation,
@@ -6746,7 +4577,7 @@ Is it scaring you off?`,
           targetLuma,
           swatch.population,
           maxPopulation,
-          opts,
+          opts
         );
         if (max === null || value > maxValue) {
           max = swatch;
@@ -6763,7 +4594,7 @@ Is it scaring you off?`,
       LightVibrant: null,
       Muted: null,
       DarkMuted: null,
-      LightMuted: null,
+      LightMuted: null
     };
     palette.Vibrant = _findColorVariation(
       palette,
@@ -6775,7 +4606,7 @@ Is it scaring you off?`,
       opts.targetVibrantSaturation,
       opts.minVibrantSaturation,
       1,
-      opts,
+      opts
     );
     palette.LightVibrant = _findColorVariation(
       palette,
@@ -6787,7 +4618,7 @@ Is it scaring you off?`,
       opts.targetVibrantSaturation,
       opts.minVibrantSaturation,
       1,
-      opts,
+      opts
     );
     palette.DarkVibrant = _findColorVariation(
       palette,
@@ -6799,7 +4630,7 @@ Is it scaring you off?`,
       opts.targetVibrantSaturation,
       opts.minVibrantSaturation,
       1,
-      opts,
+      opts
     );
     palette.Muted = _findColorVariation(
       palette,
@@ -6811,7 +4642,7 @@ Is it scaring you off?`,
       opts.targetMutesSaturation,
       0,
       opts.maxMutesSaturation,
-      opts,
+      opts
     );
     palette.LightMuted = _findColorVariation(
       palette,
@@ -6823,7 +4654,7 @@ Is it scaring you off?`,
       opts.targetMutesSaturation,
       0,
       opts.maxMutesSaturation,
-      opts,
+      opts
     );
     palette.DarkMuted = _findColorVariation(
       palette,
@@ -6835,12 +4666,12 @@ Is it scaring you off?`,
       opts.targetMutesSaturation,
       0,
       opts.maxMutesSaturation,
-      opts,
+      opts
     );
     return palette;
   }
   function _generateEmptySwatches(palette, _maxPopulation, opts) {
-    if (!(palette.Vibrant || palette.DarkVibrant || palette.LightVibrant)) {
+    if (!palette.Vibrant && !palette.DarkVibrant && !palette.LightVibrant) {
       if (!palette.DarkVibrant && palette.DarkMuted) {
         let [h4, s4, l4] = palette.DarkMuted.hsl;
         l4 = opts.targetDarkLuma;
@@ -6887,59 +4718,104 @@ Is it scaring you off?`,
       palette.LightMuted = new Swatch(hslToRgb(h4, s4, l4), 0);
     }
   }
-  var DefaultGenerator = (swatches, opts) => {
-    opts = { ...DefaultOpts, ...opts };
-    const maxPopulation = _findMaxPopulation(swatches);
-    const palette = _generateVariationColors(swatches, maxPopulation, opts);
-    _generateEmptySwatches(palette, maxPopulation, opts);
-    return palette;
-  };
+  var DefaultOpts, DefaultGenerator;
+  var init_esm6 = __esm({
+    "node_modules/@vibrant/generator-default/dist/esm/index.js"() {
+      init_esm3();
+      DefaultOpts = {
+        targetDarkLuma: 0.26,
+        maxDarkLuma: 0.45,
+        minLightLuma: 0.55,
+        targetLightLuma: 0.74,
+        minNormalLuma: 0.3,
+        targetNormalLuma: 0.5,
+        maxNormalLuma: 0.7,
+        targetMutesSaturation: 0.3,
+        maxMutesSaturation: 0.4,
+        targetVibrantSaturation: 1,
+        minVibrantSaturation: 0.35,
+        weightSaturation: 3,
+        weightLuma: 6.5,
+        weightPopulation: 0.5
+      };
+      DefaultGenerator = ((swatches, opts) => {
+        opts = Object.assign({}, DefaultOpts, opts);
+        const maxPopulation = _findMaxPopulation(swatches);
+        const palette = _generateVariationColors(swatches, maxPopulation, opts);
+        _generateEmptySwatches(palette, maxPopulation, opts);
+        return palette;
+      });
+    }
+  });
 
   // node_modules/node-vibrant/dist/esm/pipeline/index.js
-  var pipeline = new BasicPipeline().filter
-    .register("default", (r5, g2, b3, a5) => a5 >= 125 && !(r5 > 250 && g2 > 250 && b3 > 250))
-    .quantizer.register("mmcq", MMCQ)
-    .generator.register("default", DefaultGenerator);
+  var pipeline;
+  var init_pipeline2 = __esm({
+    "node_modules/node-vibrant/dist/esm/pipeline/index.js"() {
+      init_esm5();
+      init_esm6();
+      init_esm4();
+      pipeline = new BasicPipeline().filter.register(
+        "default",
+        (r5, g2, b3, a5) => a5 >= 125 && !(r5 > 250 && g2 > 250 && b3 > 250)
+      ).quantizer.register("mmcq", MMCQ).generator.register("default", DefaultGenerator);
+    }
+  });
 
   // node_modules/node-vibrant/dist/esm/browser.js
-  Vibrant.use(pipeline);
+  var init_browser2 = __esm({
+    "node_modules/node-vibrant/dist/esm/browser.js"() {
+      init_browser();
+      init_pipeline2();
+      init_config();
+      init_esm4();
+      init_esm4();
+      Vibrant.use(pipeline);
+    }
+  });
 
   // src/widgets/plant.ts
-  var plantVersion = 2;
-  var PlantWidget = class extends WidgetBase {
-    async createContent() {
-      let plantDiv = document.createElement("div");
-      plantDiv.id = "plantWidget";
-      plantDiv = await createPlantWidget(plantDiv);
-      return plantDiv;
+  async function registerPlantWidget() {
+    if (isPlantWidgetRegistered) {
+      return;
     }
-    async createPreview() {
-      const plantPreviewDiv = document.createElement("div");
-      plantPreviewDiv.id = "plantPreviewWidget";
-      const plantData = await browser.runtime.sendMessage({
-        action: "getPlantAppData",
-      });
-      const plantTitle = document.createElement("div");
-      plantTitle.id = "plant-preview-title";
-      plantTitle.innerText = "Plant";
-      plantPreviewDiv.appendChild(plantTitle);
-      const plantPreviewImg = document.createElement("div");
-      if (plantData.age == null || plantData.age === 0) {
-        plantPreviewImg.appendChild(createPlantThePlantVisual());
-      } else {
-        plantPreviewImg.innerHTML = getPlantHTML(plantData);
+    const { registerWidget: registerWidget2, WidgetBase: WidgetBase2 } = await Promise.resolve().then(() => (init_widgets(), widgets_exports));
+    class PlantWidget extends WidgetBase2 {
+      async createContent() {
+        let plantDiv = document.createElement("div");
+        plantDiv.id = "plantWidget";
+        plantDiv = await createPlantWidget(plantDiv);
+        return plantDiv;
       }
-      plantPreviewDiv.appendChild(plantPreviewImg);
-      return plantPreviewDiv;
+      async createPreview() {
+        const plantPreviewDiv = document.createElement("div");
+        plantPreviewDiv.id = "plantPreviewWidget";
+        const plantData = await browser.runtime.sendMessage({
+          action: "getPlantAppData"
+        });
+        const plantTitle = document.createElement("div");
+        plantTitle.id = "plant-preview-title";
+        plantTitle.innerText = "Plant";
+        plantPreviewDiv.appendChild(plantTitle);
+        const plantPreviewImg = document.createElement("div");
+        if (plantData.age == null || plantData.age === 0) {
+          plantPreviewImg.appendChild(createPlantThePlantVisual());
+        } else {
+          plantPreviewImg.innerHTML = getPlantHTML(plantData);
+        }
+        plantPreviewDiv.appendChild(plantPreviewImg);
+        return plantPreviewDiv;
+      }
     }
-  };
-  registerWidget(new PlantWidget());
+    registerWidget2(new PlantWidget());
+    isPlantWidgetRegistered = true;
+  }
   async function createPlantWidget(plantDiv) {
     if (window.localStorage.getItem("current_plant_conditions")) {
       await migratePlantData();
     }
     let plantData = await browser.runtime.sendMessage({
-      action: "getPlantAppData",
+      action: "getPlantAppData"
     });
     const outdated = checkIfOutdated(plantData.plantVersion);
     plantDiv.innerHTML = "";
@@ -6959,15 +4835,15 @@ Is it scaring you off?`,
     plantDiv.appendChild(await createPlantBottomUI(plantData));
     return plantDiv;
   }
-  function createPlantVisual(data2) {
+  function createPlantVisual(data) {
     const plantVisualContainer = document.createElement("div");
     plantVisualContainer.id = "plant_image_container";
-    plantVisualContainer.innerHTML = getPlantHTML(data2);
+    plantVisualContainer.innerHTML = getPlantHTML(data);
     return plantVisualContainer;
   }
-  async function createPlantBottomUI(data2) {
+  async function createPlantBottomUI(data) {
     const currentTime = /* @__PURE__ */ new Date();
-    const lastWaterTime = new Date(data2.lastWaterTime);
+    const lastWaterTime = new Date(data.lastWaterTime);
     const timeSinceLastWater = currentTime - lastWaterTime;
     const bottomUIContainer = document.createElement("div");
     bottomUIContainer.id = "buttondivforplant";
@@ -6984,7 +4860,7 @@ Is it scaring you off?`,
     const waterButton = document.createElement("button");
     waterButton.id = "watering_button";
     waterButton.innerHTML = waterPlantSvg;
-    if (data2.isAlive) {
+    if (data.isAlive) {
       waterButton.addEventListener("click", userWateredPlant);
     } else {
       waterButton.classList.add("disabled");
@@ -6999,10 +4875,10 @@ Is it scaring you off?`,
     lastWaterTimeElement.innerText = getTimeInCorrectFormat(timeSinceLastWater);
     lastWaterTimeContainer.appendChild(lastWaterTimeTitle);
     lastWaterTimeContainer.appendChild(lastWaterTimeElement);
-    if (!data2.isAlive) {
+    if (!data.isAlive) {
       const removeButton = createRemoveButton(false);
       topUIContainer.appendChild(removeButton);
-    } else if (data2.age === 8) {
+    } else if (data.age === 8) {
       const removeButton = createRemoveButton(true);
       topUIContainer.appendChild(removeButton);
     }
@@ -7013,31 +4889,30 @@ Is it scaring you off?`,
     UIContainer.appendChild(bottomUIContainer);
     return UIContainer;
   }
-  async function updatePlantBottomUI(data2) {
+  async function updatePlantBottomUI(data) {
     const currentTime = /* @__PURE__ */ new Date();
-    const lastWaterTime = new Date(data2.lastWaterTime);
+    const lastWaterTime = new Date(data.lastWaterTime);
     const timeSinceLastWater = currentTime - lastWaterTime;
-    document.getElementById("glass-fill").style.height =
-      `${calculatePercentile(timeSinceLastWater / 1e3)}%`;
+    document.getElementById("glass-fill").style.height = `${calculatePercentile(timeSinceLastWater / 1e3)}%`;
     document.getElementById("water_time").innerText = getTimeInCorrectFormat(timeSinceLastWater);
   }
-  function createPlantStreak(data2) {
+  function createPlantStreak(data) {
     const plantStreak = document.createElement("h2");
     plantStreak.id = "plant_streak";
-    plantStreak.innerText = `${data2.daysSinceBirthday} ${data2.daysSinceBirthday === 1 ? "Day" : "Days"}`;
+    plantStreak.innerText = `${data.daysSinceBirthday} ${data.daysSinceBirthday === 1 ? "Day" : "Days"}`;
     return plantStreak;
   }
   function checkIfOutdated(version) {
     return Boolean(!version || version !== plantVersion);
   }
-  function createUpdatePrompt(data2) {
+  function createUpdatePrompt(data) {
     const updatePromptContainer = document.createElement("div");
     updatePromptContainer.id = "update-prompt-container";
     const updatePromptTitle = document.createElement("h1");
     updatePromptTitle.innerText = "Update Required!";
     const updatePromptDescription = document.createElement("p");
     updatePromptDescription.innerHTML = `You have to reset to be up to date 
-Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
+Your version: <b>${data.plantVersion}</b> is not the newest available version`;
     const resetButton = document.createElement("button");
     resetButton.innerText = "Reset Plant";
     resetButton.id = "removeplantButton";
@@ -7050,12 +4925,12 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   async function resetPlant() {
     await browser.runtime.sendMessage({
       action: "setPlantAppData",
-      data: null,
+      data: null
     });
     createPlantWidget(document.getElementById("plantWidget"));
   }
   function calculatePercentile(t5) {
-    const totalTime = 259_200;
+    const totalTime = 259200;
     return Math.max(0, 100 * (1 - t5 / totalTime));
   }
   function getTimeInCorrectFormat(t5) {
@@ -7112,46 +4987,46 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     removeplantButton.addEventListener("click", resetPlant);
   }
   async function userWateredPlant() {
-    const data2 = await browser.runtime.sendMessage({
-      action: "getPlantAppData",
+    const data = await browser.runtime.sendMessage({
+      action: "getPlantAppData"
     });
-    data2.lastWaterTime = /* @__PURE__ */ new Date();
+    data.lastWaterTime = /* @__PURE__ */ new Date();
     await browser.runtime.sendMessage({
       action: "setPlantAppData",
-      data: data2,
+      data
     });
-    updatePlantBottomUI(data2);
+    updatePlantBottomUI(data);
   }
-  function calculateGrowth(data2) {
+  function calculateGrowth(data) {
     const currentTime = /* @__PURE__ */ new Date();
-    const lastGrowTime = new Date(data2.lastGrowTime);
-    const lastWaterTime = new Date(data2.lastWaterTime);
+    const lastGrowTime = new Date(data.lastGrowTime);
+    const lastWaterTime = new Date(data.lastWaterTime);
     const msIn1Day = 1e3 * 60 * 60 * 24;
     const daysSinceLastGrow = (currentTime - lastGrowTime) / msIn1Day;
     const daysSinceLastWater = (currentTime - lastWaterTime) / msIn1Day;
-    if (daysSinceLastGrow >= 2 && data2.age !== 8) {
-      data2.age += 1;
-      data2.lastGrowTime = currentTime;
+    if (daysSinceLastGrow >= 2 && data.age !== 8) {
+      data.age += 1;
+      data.lastGrowTime = currentTime;
     }
-    if (data2.age > 8) {
-      data2.age = 8;
+    if (data.age > 8) {
+      data.age = 8;
     }
-    if (daysSinceLastWater > 3 && data2.age !== 1) {
-      data2.isAlive = false;
+    if (daysSinceLastWater > 3 && data.age !== 1) {
+      data.isAlive = false;
     }
-    if (data2.age > 1 && data2.birthday == null) {
-      data2.birthday = currentTime;
+    if (data.age > 1 && data.birthday == null) {
+      data.birthday = currentTime;
     }
-    if (data2.birthday != null && data2.isAlive) {
-      data2.daysSinceBirthday = Math.round(
-        (currentTime - new Date(data2.birthday)) / (1e3 * 60 * 60 * 24) + 1,
+    if (data.birthday != null && data.isAlive) {
+      data.daysSinceBirthday = Math.round(
+        (currentTime - new Date(data.birthday)) / (1e3 * 60 * 60 * 24) + 1
       );
     }
     browser.runtime.sendMessage({
       action: "setPlantAppData",
-      data: data2,
+      data
     });
-    return data2;
+    return data;
   }
   function plantThePlant() {
     const colorArray = [
@@ -7164,7 +5039,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       "#6024c9",
       "#de51c1",
       "#d8d475",
-      "#f5cb04",
+      "#f5cb04"
     ];
     const plantData = {
       age: 1,
@@ -7174,11 +5049,11 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       plantVersion,
       birthday: null,
       daysSinceBirthday: 0,
-      isAlive: true,
+      isAlive: true
     };
     browser.runtime.sendMessage({
       action: "setPlantAppData",
-      data: plantData,
+      data: plantData
     });
     createPlantWidget(document.getElementById("plantWidget"));
   }
@@ -7189,9 +5064,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     plantThePlantButton.innerHTML = plantThePlantSvg;
     return plantThePlantButton;
   }
-  function getPlantHTML(data2) {
-    if (Number(data2.age) === 0) {
-      if (data2.isAlive) {
+  function getPlantHTML(data) {
+    if (Number(data.age) === 0) {
+      if (data.isAlive) {
         return `<div id="planttheplantbutton">
                 <svg xmlns="http://www.w3.org/2000/svg" id="plant_the_plant_svg" data-name="Laag 2" viewBox="0 0 50.16 37.5">
                     <defs>
@@ -7232,11 +5107,11 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       }
       return `Stage 0 died, how? How have you done this? This is the stage before the plant is planted and you've already managed to kill it????`;
     }
-    return getPlantSvg(data2);
+    return getPlantSvg(data);
   }
-  function getPlantSvg(data2) {
-    const age = Number(data2.age);
-    const isAlive = Boolean(data2.isAlive);
+  function getPlantSvg(data) {
+    const age = Number(data.age);
+    const isAlive = Boolean(data.isAlive);
     switch (age) {
       case 0:
         return "";
@@ -7713,7 +5588,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   <defs>
     <style>
       .cls-1 {
-        fill: ${data2.uniqueColor} !important;
+        fill: ${data.uniqueColor} !important;
       }
 
       .cls-1, .cls-2, .cls-3, .cls-4 {
@@ -7829,37 +5704,23 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
 </svg>`;
     }
   }
+  var plantVersion, isPlantWidgetRegistered;
+  var init_plant = __esm({
+    "src/widgets/plant.ts"() {
+      "use strict";
+      init_utils();
+      init_svgs();
+      plantVersion = 2;
+      isPlantWidgetRegistered = false;
+    }
+  });
 
   // src/main-features/globalchat.ts
-  var GC_DOMAINS = {
-    main: "https://gc.smartschoolplusplus.com",
-    beta: "https://gcbeta.smartschoolplusplus.com",
-  };
-  var GlobalChatWindow = class extends BaseWindow {
-    iframe;
-    gcContent;
-    beta;
-    glass;
-    constructor(hidden = true) {
-      super("global_chat_window", hidden);
-    }
-    async renderContent() {
-      this.gcContent = document.createElement("div");
-      const queryString = getThemeQueryString(currentTheme);
-      this.iframe = document.createElement("iframe");
-      this.iframe.style = "width:100%; height:100%; border:none";
-      this.iframe.src = `${GC_DOMAINS[this.beta ? "beta" : "main"]}/v1?${queryString}&glass=${gcGlass}`;
-      this.gcContent.appendChild(this.iframe);
-      return this.gcContent;
-    }
-  };
-  var gcWindow;
-  var gcGlass;
   async function openGlobalChat(event, beta = false) {
     if (gcWindow?.beta !== beta) {
       recreateGlobalChat();
     }
-    if (!(gcWindow && gcWindow.element?.isConnected)) {
+    if (!gcWindow?.element?.isConnected) {
       gcWindow = new GlobalChatWindow();
       gcWindow.beta = beta;
       await gcWindow.create();
@@ -7884,307 +5745,143 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     GlobalChatOpenButton.addEventListener("click", (e5) => openGlobalChat(e5));
     return GlobalChatOpenButton;
   }
-  window.addEventListener("message", async (e5) => {
-    if (!Object.values(GC_DOMAINS).includes(e5.origin)) {
-      console.warn("Got a message but it was not from one of the global chat domains.");
-      return;
-    }
-    let response = { error: "not found" };
-    switch (e5.data.action) {
-      // Get the current plant.
-      case "plantapi.v1.get_current":
-        response = await getPlantV1();
-        break;
-      case "plantapi.v1.get_stage_svg":
-        response = {
-          svg: getPlantSvg(stageDataToInternalPlantData(e5.data.stageData)),
-        };
-        break;
-    }
-    response.callId = e5.data.callId;
-    e5.source.postMessage(response, e5.origin);
-  });
   function stageDataToInternalPlantData(stageData) {
     return {
       uniqueColor: stageData.color,
       isAlive: stageData.isAlive,
-      age: stageData.stage,
+      age: stageData.stage
     };
   }
   async function getPlantV1() {
-    const data2 = await browser.runtime.sendMessage({
-      action: "getPlantAppData",
+    const data = await browser.runtime.sendMessage({
+      action: "getPlantAppData"
     });
-    if (!data2) {
+    if (!data) {
       return {
         stageData: {
           color: "#fff",
           isAlive: true,
-          stage: 0,
+          stage: 0
         },
-        age: 0,
+        age: 0
       };
     }
     return {
       stageData: {
-        color: data2.uniqueColor,
-        isAlive: data2.isAlive,
-        stage: data2.age,
+        color: data.uniqueColor,
+        isAlive: data.isAlive,
+        stage: data.age
       },
-      age: data2.daysSinceBirthday,
+      age: data.daysSinceBirthday
     };
   }
-
-  // src/main-features/settings/quick-settings.ts
-  var CompactThemeOption = class {
-    element = document.createElement("div");
-    name;
-    currentTheme;
-    constructor(name2, theme) {
-      this.name = name2;
-      this.currentTheme = theme;
-    }
-    createText() {
-      const text = document.createElement("div");
-      text.classList.add("compact-theme-option-text");
-      text.innerText = this.currentTheme.displayName;
-      if (text.innerText.length > 22) {
-        text.innerText = `${this.currentTheme.displayName.slice(0, 22)}\u2026`;
-      }
-      return text;
-    }
-    render() {
-      this.element.innerHTML = "";
-      this.element.classList.add("compact-theme-option");
-      this.element.dataset.name = this.name;
-      this.element.addEventListener("click", () => this.click());
-      this.element.appendChild(this.createText());
-      this.element.appendChild(this.createImageContainer());
-      this.update();
-      return this.element;
-    }
-    createImageContainer() {
-      const imageContainer = document.createElement("div");
-      imageContainer.classList.add("compact-theme-option-image-container");
-      return imageContainer;
-    }
-    async updateImage(forceReload = false) {
-      if (this.name === currentThemeName || forceReload) {
-        const imageURL = await getImageURL(
-          this.name,
-          async () => {
-            return await getExtensionImage(`theme-backgrounds/compressed/${this.name}.jpg`);
-          },
-          true,
-        );
-        this.element.style.setProperty("--background-image-local", `url(${imageURL.url})`);
-      }
-    }
-    updateElement() {
-      Object.keys(this.currentTheme.cssProperties).forEach((key) => {
-        this.element.style.setProperty(`${key}-local`, this.currentTheme.cssProperties[key]);
-      });
-    }
-    async click() {
-      await updateTheme(this.name);
-      await this.onClick();
-      this.element.classList.add("is-selected");
-    }
-    async onClick() {}
-    async updateSelection() {
-      if (this.name === currentThemeName) {
-        this.element.classList.add("is-selected");
-        this.updateImage(true);
-      } else {
-        this.element.classList.remove("is-selected");
-        this.element.style.setProperty("--background-image-local", "url()");
-      }
-    }
-    async update() {
-      this.currentTheme = await getTheme(this.name);
-      this.updateSelection();
-      this.updateElement();
-    }
-  };
-  var CompactThemeSelector = class {
-    element = document.createElement("div");
-    input = document.createElement("div");
-    selector = document.createElement("div");
-    selectorIsOpen = false;
-    themeOptions = [];
-    async createThemeOption(name2, theme) {
-      const option = new CompactThemeOption(name2, theme);
-      option.onClick = async () => {
-        this.updateInput();
-        if (settingsWindow) {
-          await settingsWindow.loadPage();
-        }
-        this.themeOptions.forEach((option2) => {
-          option2.updateSelection();
-        });
+  var GC_DOMAINS, GlobalChatWindow, gcWindow, gcGlass;
+  var init_globalchat = __esm({
+    "src/main-features/globalchat.ts"() {
+      "use strict";
+      init_utils();
+      init_svgs();
+      init_plant();
+      init_themes();
+      init_windows();
+      GC_DOMAINS = {
+        main: "https://gc.smartschoolplusplus.com",
+        beta: "https://gcbeta.smartschoolplusplus.com"
       };
-      this.themeOptions.push(option);
-      return option;
-    }
-    async createThemeOptions(themes2) {
-      Object.entries(themes2).forEach((theme) => {
-        this.createThemeOption(theme[0], theme[1]);
-      });
-    }
-    async renderThemeOptions() {
-      for (let i5 = 1; i5 <= this.themeOptions.length; i5++) {
-        const option = this.themeOptions[i5 - 1];
-        if (!option) {
-          break;
+      GlobalChatWindow = class extends BaseWindow {
+        iframe;
+        gcContent;
+        beta;
+        glass;
+        constructor(hidden = true) {
+          super("global_chat_window", hidden);
         }
-        option.render();
-        this.selector.style.height = `${this.calculateHeight(i5)}px`;
-        this.selector.appendChild(option.element);
-        if (document.body.classList.contains("enableAnimations")) {
-          await delay(20);
+        async renderContent() {
+          this.gcContent = document.createElement("div");
+          const queryString = getThemeQueryString(currentTheme);
+          this.iframe = document.createElement("iframe");
+          this.iframe.style = "width:100%; height:100%; border:none";
+          this.iframe.src = `${GC_DOMAINS[this.beta ? "beta" : "main"]}/v1?${queryString}&glass=${gcGlass}`;
+          this.gcContent.appendChild(this.iframe);
+          return this.gcContent;
         }
-      }
-    }
-    async updateThemeOptions() {
-      const themes2 = await browser.runtime.sendMessage({
-        action: "getThemes",
-        categories: ["quickSettings"],
-        includeHidden: true,
-      });
-      const themeOptionNames = this.themeOptions.map((option) => {
-        return option.name;
-      });
-      const themeNames = Object.keys(themes2);
-      const missingThemeOptionNames = themeNames.filter((name2) => {
-        return !themeOptionNames.includes(name2);
-      });
-      missingThemeOptionNames.forEach(async (name2) => {
-        if (!themes2[name2]) {
+      };
+      window.addEventListener("message", async (e5) => {
+        if (!Object.values(GC_DOMAINS).includes(e5.origin)) {
+          console.warn("Got a message but it was not from one of the global chat domains.");
           return;
         }
-        const option = await this.createThemeOption(name2, themes2[name2]);
-        option.render();
-        this.selector.appendChild(option.element);
-      });
-      const extraThemeOptionNames = themeOptionNames.filter((name2) => {
-        return !themeNames.includes(name2);
-      });
-      this.themeOptions.forEach((option) => {
-        if (extraThemeOptionNames.includes(option.name)) {
-          option.element.remove();
+        let response = { error: "not found" };
+        switch (e5.data.action) {
+          // Get the current plant.
+          case "plantapi.v1.get_current":
+            response = await getPlantV1();
+            break;
+          case "plantapi.v1.get_stage_svg":
+            response = {
+              svg: getPlantSvg(stageDataToInternalPlantData(e5.data.stageData))
+            };
+            break;
         }
-      });
-      this.themeOptions = this.themeOptions.filter((option) => {
-        return !extraThemeOptionNames.includes(option.name);
-      });
-      this.themeOptions.forEach((option) => {
-        option.updateSelection();
+        response.callId = e5.data.callId;
+        e5.source.postMessage(response, e5.origin);
       });
     }
-    createInput() {
-      this.input.classList.add("theme-selector-input");
-      this.updateInput();
-    }
-    async updateInput() {
-      const currentOption = new CompactThemeOption(
-        currentThemeName,
-        await getTheme(currentThemeName),
-      );
-      currentOption.onClick = async () => {
-        this.selectorIsOpen = !this.selectorIsOpen;
-        this.updateSelectorStatus();
-      };
-      currentOption.render();
-      currentOption.element.classList.add("is-selected");
-      this.input.innerHTML = "";
-      this.input.appendChild(currentOption.element);
-    }
-    async updateSelectorStatus() {
-      if (this.selectorIsOpen) {
-        this.selector.innerHTML = "";
-        this.selector.classList.add("visible");
-        this.selector.style.overflowY = "hidden";
-        await this.renderThemeOptions();
-        await delay(500);
-        this.selector.style.overflowY = "auto";
-      } else {
-        this.selector.style.overflowY = "hidden";
-        this.selector.style.height = "0px";
-        this.selector.classList.remove("visible");
-      }
-    }
-    calculateHeight(themeOptionsCount) {
-      const TOP_MARGIN = 7;
-      const CONTENT_HEIGHT = themeOptionsCount * (36 + 3);
-      return TOP_MARGIN + CONTENT_HEIGHT;
-    }
-    async render() {
-      this.element.classList.add("compact-theme-selector");
-      const themes2 = await browser.runtime.sendMessage({
-        action: "getThemes",
-        categories: ["quickSettings"],
-        includeHidden: true,
-      });
-      this.themeOptions = [];
-      this.createThemeOptions(themes2);
-      this.updateThemeOptions();
-      this.createInput();
-      document.addEventListener("click", (e5) => {
-        if (e5.target instanceof HTMLElement) {
-          if (e5.target === this.input || this.input.contains(e5.target)) {
-            return;
-          }
-          this.selectorIsOpen = false;
-          this.updateSelectorStatus();
-        }
-      });
-      this.element.appendChild(this.input);
-      this.element.appendChild(this.selector);
-      this.selector.classList.add("compact-theme-options");
-      return this.element;
-    }
-  };
-  var compactThemeSelector = new CompactThemeSelector();
-  var quickSettingsWindowIsHidden = true;
-  var quickSettingsBackgroundImageSelector = new ImageSelector("backgroundImage", true);
+  });
+
+  // src/main-features/settings/quick-settings.ts
+  var quick_settings_exports = {};
+  __export(quick_settings_exports, {
+    createQuickSettings: () => createQuickSettings,
+    createQuickSettingsButton: () => createQuickSettingsButton,
+    loadQuickSettings: () => loadQuickSettings
+  });
   async function storeQuickSettings() {
     const oldData = await browser.runtime.sendMessage({
-      action: "getSettingsData",
+      action: "getSettingsData"
     });
-    const data2 = structuredClone(oldData);
-    const backgroundBlurAmountSlider = document.getElementById("background-blur-amount-slider");
+    const data = structuredClone(oldData);
+    const backgroundBlurAmountSlider = document.getElementById(
+      "background-blur-amount-slider"
+    );
     if (backgroundBlurAmountSlider) {
-      data2.appearance.background.blur = Number(backgroundBlurAmountSlider.value);
+      data.appearance.background.blur = Number(backgroundBlurAmountSlider.value);
     }
-    const performanceModeToggle = document.getElementById("performance-mode-toggle");
+    const performanceModeToggle = document.getElementById(
+      "performance-mode-toggle"
+    );
     if (performanceModeToggle) {
-      data2.other.performanceMode = performanceModeToggle.checked;
+      data.other.performanceMode = performanceModeToggle.checked;
     }
-    await browser.runtime.sendMessage({ action: "setSettingsData", data: data2 });
+    await browser.runtime.sendMessage({ action: "setSettingsData", data });
     await loadQuickSettings();
     if (settingsWindow) {
       await settingsWindow.loadPage();
     }
-    console.log("Successfull stored quick settings:\n", data2);
+    console.log("Successfull stored quick settings:\n", data);
     await apply();
   }
   async function loadQuickSettings() {
-    const data2 = await browser.runtime.sendMessage({
-      action: "getSettingsData",
+    const data = await browser.runtime.sendMessage({
+      action: "getSettingsData"
     });
-    quickSettingsBackgroundImageSelector.id = data2.appearance.theme;
+    quickSettingsBackgroundImageSelector.id = data.appearance.theme;
     quickSettingsBackgroundImageSelector.loadImageData();
-    const backgroundBlurAmountSlider = document.getElementById("background-blur-amount-slider");
+    const backgroundBlurAmountSlider = document.getElementById(
+      "background-blur-amount-slider"
+    );
     if (backgroundBlurAmountSlider) {
-      backgroundBlurAmountSlider.value = data2.appearance.background.blur;
+      backgroundBlurAmountSlider.value = data.appearance.background.blur;
     }
-    const performanceModeToggle = document.getElementById("performance-mode-toggle");
+    const performanceModeToggle = document.getElementById(
+      "performance-mode-toggle"
+    );
     if (performanceModeToggle) {
-      performanceModeToggle.checked = data2.other.performanceMode;
+      performanceModeToggle.checked = data.other.performanceMode;
     }
     const performanceModeInfo = document.getElementById("performance-mode-info");
     if (performanceModeInfo) {
-      performanceModeInfo.innerHTML = `Toggle performance mode ${data2.other.performanceMode ? "<span class='green-underline'>Enabled</span>" : "<span class='red-underline'>Disabled</span>"}`;
+      performanceModeInfo.innerHTML = `Toggle performance mode ${data.other.performanceMode ? "<span class='green-underline'>Enabled</span>" : "<span class='red-underline'>Disabled</span>"}`;
     }
     await compactThemeSelector.updateInput();
     await compactThemeSelector.updateThemeOptions();
@@ -8303,11 +6000,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         closeQuickSettings();
         return;
       }
-      if (
-        target.id === "quickSettings" ||
-        quickSettingsWindow.contains(target) ||
-        target.id === "quickSettingsButton"
-      ) {
+      if (target.id === "quickSettings" || quickSettingsWindow.contains(target) || target.id === "quickSettingsButton") {
         return;
       }
       closeQuickSettings();
@@ -8327,13 +6020,239 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     quickSettingsButtonWrapper.appendChild(quickSettingsButton);
     return quickSettingsButtonWrapper;
   }
+  var CompactThemeOption, CompactThemeSelector, compactThemeSelector, quickSettingsWindowIsHidden, quickSettingsBackgroundImageSelector;
+  var init_quick_settings = __esm({
+    "src/main-features/settings/quick-settings.ts"() {
+      "use strict";
+      init_utils();
+      init_svgs();
+      init_themes();
+      init_main();
+      init_images();
+      init_main_settings();
+      CompactThemeOption = class {
+        element = document.createElement("div");
+        name;
+        currentTheme;
+        constructor(name, theme) {
+          this.name = name;
+          this.currentTheme = theme;
+        }
+        createText() {
+          const text = document.createElement("div");
+          text.classList.add("compact-theme-option-text");
+          text.innerText = this.currentTheme.displayName;
+          if (text.innerText.length > 22) {
+            text.innerText = `${this.currentTheme.displayName.slice(0, 22)}\u2026`;
+          }
+          return text;
+        }
+        render() {
+          this.element.innerHTML = "";
+          this.element.classList.add("compact-theme-option");
+          this.element.dataset.name = this.name;
+          this.element.addEventListener("click", () => this.click());
+          this.element.appendChild(this.createText());
+          this.element.appendChild(this.createImageContainer());
+          this.update();
+          return this.element;
+        }
+        createImageContainer() {
+          const imageContainer = document.createElement("div");
+          imageContainer.classList.add("compact-theme-option-image-container");
+          return imageContainer;
+        }
+        async updateImage(forceReload = false) {
+          if (this.name === currentThemeName || forceReload) {
+            const imageURL = await getImageURL(
+              this.name,
+              async () => {
+                return await getExtensionImage(`theme-backgrounds/compressed/${this.name}.jpg`);
+              },
+              true
+            );
+            this.element.style.setProperty("--background-image-local", `url(${imageURL.url})`);
+          }
+        }
+        updateElement() {
+          Object.keys(this.currentTheme.cssProperties).forEach((key) => {
+            this.element.style.setProperty(
+              `${key}-local`,
+              this.currentTheme.cssProperties[key]
+            );
+          });
+        }
+        async click() {
+          await updateTheme(this.name);
+          await this.onClick();
+          this.element.classList.add("is-selected");
+        }
+        async onClick() {
+        }
+        async updateSelection() {
+          if (this.name === currentThemeName) {
+            this.element.classList.add("is-selected");
+            this.updateImage(true);
+          } else {
+            this.element.classList.remove("is-selected");
+            this.element.style.setProperty("--background-image-local", "url()");
+          }
+        }
+        async update() {
+          this.currentTheme = await getTheme(this.name);
+          this.updateSelection();
+          this.updateElement();
+        }
+      };
+      CompactThemeSelector = class {
+        element = document.createElement("div");
+        input = document.createElement("div");
+        selector = document.createElement("div");
+        selectorIsOpen = false;
+        themeOptions = [];
+        async createThemeOption(name, theme) {
+          const option = new CompactThemeOption(name, theme);
+          option.onClick = async () => {
+            this.updateInput();
+            if (settingsWindow) {
+              await settingsWindow.loadPage();
+            }
+            this.themeOptions.forEach((option2) => {
+              option2.updateSelection();
+            });
+          };
+          this.themeOptions.push(option);
+          return option;
+        }
+        async createThemeOptions(themes2) {
+          Object.entries(themes2).forEach((theme) => {
+            this.createThemeOption(theme[0], theme[1]);
+          });
+        }
+        async renderThemeOptions() {
+          for (let i5 = 1; i5 <= this.themeOptions.length; i5++) {
+            const option = this.themeOptions[i5 - 1];
+            if (!option) {
+              break;
+            }
+            option.render();
+            this.selector.style.height = `${this.calculateHeight(i5)}px`;
+            this.selector.appendChild(option.element);
+            if (document.body.classList.contains("enableAnimations")) {
+              await delay(20);
+            }
+          }
+        }
+        async updateThemeOptions() {
+          const themes2 = await browser.runtime.sendMessage({
+            action: "getThemes",
+            categories: ["quickSettings"],
+            includeHidden: true
+          });
+          const themeOptionNames = this.themeOptions.map((option) => {
+            return option.name;
+          });
+          const themeNames = Object.keys(themes2);
+          const missingThemeOptionNames = themeNames.filter((name) => {
+            return !themeOptionNames.includes(name);
+          });
+          missingThemeOptionNames.forEach(async (name) => {
+            if (!themes2[name]) {
+              return;
+            }
+            const option = await this.createThemeOption(name, themes2[name]);
+            option.render();
+            this.selector.appendChild(option.element);
+          });
+          const extraThemeOptionNames = themeOptionNames.filter((name) => {
+            return !themeNames.includes(name);
+          });
+          this.themeOptions.forEach((option) => {
+            if (extraThemeOptionNames.includes(option.name)) {
+              option.element.remove();
+            }
+          });
+          this.themeOptions = this.themeOptions.filter((option) => {
+            return !extraThemeOptionNames.includes(option.name);
+          });
+          this.themeOptions.forEach((option) => {
+            option.updateSelection();
+          });
+        }
+        createInput() {
+          this.input.classList.add("theme-selector-input");
+          this.updateInput();
+        }
+        async updateInput() {
+          const currentOption = new CompactThemeOption(
+            currentThemeName,
+            await getTheme(currentThemeName)
+          );
+          currentOption.onClick = async () => {
+            this.selectorIsOpen = !this.selectorIsOpen;
+            this.updateSelectorStatus();
+          };
+          currentOption.render();
+          currentOption.element.classList.add("is-selected");
+          this.input.innerHTML = "";
+          this.input.appendChild(currentOption.element);
+        }
+        async updateSelectorStatus() {
+          if (this.selectorIsOpen) {
+            this.selector.innerHTML = "";
+            this.selector.classList.add("visible");
+            this.selector.style.overflowY = "hidden";
+            await this.renderThemeOptions();
+            await delay(500);
+            this.selector.style.overflowY = "auto";
+          } else {
+            this.selector.style.overflowY = "hidden";
+            this.selector.style.height = "0px";
+            this.selector.classList.remove("visible");
+          }
+        }
+        calculateHeight(themeOptionsCount) {
+          const TOP_MARGIN = 7;
+          const CONTENT_HEIGHT = themeOptionsCount * (36 + 3);
+          return TOP_MARGIN + CONTENT_HEIGHT;
+        }
+        async render() {
+          this.element.classList.add("compact-theme-selector");
+          const themes2 = await browser.runtime.sendMessage({
+            action: "getThemes",
+            categories: ["quickSettings"],
+            includeHidden: true
+          });
+          this.themeOptions = [];
+          this.createThemeOptions(themes2);
+          this.updateThemeOptions();
+          this.createInput();
+          document.addEventListener("click", (e5) => {
+            if (e5.target instanceof HTMLElement) {
+              if (e5.target === this.input || this.input.contains(e5.target)) {
+                return;
+              }
+              this.selectorIsOpen = false;
+              this.updateSelectorStatus();
+            }
+          });
+          this.element.appendChild(this.input);
+          this.element.appendChild(this.selector);
+          this.selector.classList.add("compact-theme-options");
+          return this.element;
+        }
+      };
+      compactThemeSelector = new CompactThemeSelector();
+      quickSettingsWindowIsHidden = true;
+      quickSettingsBackgroundImageSelector = new ImageSelector("backgroundImage", true);
+    }
+  });
 
   // src/main-features/appearance/background-image.ts
   async function setBackground(themeName) {
     function displayBackgroundImage(imageSrc) {
       document.documentElement.style.setProperty("--background-color", "transparent");
-      const imgContainer =
-        document.getElementById("smpp-background-image-container") || document.createElement("div");
+      const imgContainer = document.getElementById("smpp-background-image-container") || document.createElement("div");
       imgContainer.id = "smpp-background-image-container";
       imgContainer.classList.add("smpp-background-image-container");
       const img = document.getElementById("smpp-background-image") || document.createElement("img");
@@ -8346,9 +6265,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         img.classList.add("image-not-available");
         img.src = "";
       }
-      if (
-        !(document.getElementById("smpp-background-image") || document.getElementById("tinymce"))
-      ) {
+      if (!(document.getElementById("smpp-background-image") || document.getElementById("tinymce"))) {
         document.body.appendChild(imgContainer);
         imgContainer.appendChild(img);
       }
@@ -8358,7 +6275,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       async () => {
         return await getExtensionImage(`theme-backgrounds/${themeName}.jpg`);
       },
-      false,
+      false
     );
     if (await isValidImage(imageURL.url)) {
       displayBackgroundImage(imageURL.url);
@@ -8366,15 +6283,20 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       displayBackgroundImage(null);
     }
   }
+  var init_background_image = __esm({
+    "src/main-features/appearance/background-image.ts"() {
+      "use strict";
+      init_utils();
+      init_utils2();
+      init_images();
+    }
+  });
 
   // src/main-features/appearance/themes.ts
-  k([lch_default, mix_default]);
-  var currentThemeName;
-  var currentTheme;
-  async function getTheme(name2) {
+  async function getTheme(name) {
     const theme = await browser.runtime.sendMessage({
       action: "getTheme",
-      name: name2,
+      name
     });
     return theme;
   }
@@ -8401,1013 +6323,20 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   function getThemeVar(varName) {
     return currentTheme.cssProperties[varName];
   }
-  var ColorCursor = class {
-    element = document.createElement("div");
-    visibleElement = document.createElement("div");
-    xPos = 50;
-    yPos = 50;
-    enableX;
-    enableY;
-    parentContainer;
-    constructor(parentContainer, enableX = true, enableY = true) {
-      this.parentContainer = parentContainer;
-      this.enableX = enableX;
-      this.enableY = enableY;
-      this.element.appendChild(this.visibleElement);
-      let isDragging = false;
-      this.parentContainer.addEventListener("mousedown", (e5) => {
-        isDragging = true;
-        this.handlePointerEvent(e5);
-      });
-      document.addEventListener("mouseup", () => {
-        isDragging = false;
-      });
-      document.addEventListener("mousemove", (e5) => {
-        if (isDragging) {
-          this.handlePointerEvent(e5);
-        }
-      });
-      this.updateCursorPosition();
-    }
-    handlePointerEvent(e5) {
-      const rect = this.parentContainer.getBoundingClientRect();
-      const x3 = e5.clientX - rect.left;
-      const y3 = e5.clientY - rect.top;
-      const xPercent = (x3 / rect.width) * 100;
-      const yPercent = (y3 / rect.height) * 100;
-      if (this.enableX) {
-        this.xPos = Math.max(0, Math.min(100, xPercent));
-      }
-      if (this.enableY) {
-        this.yPos = Math.max(0, Math.min(100, yPercent));
-      }
-      this.updateCursorPosition();
-      this.onDrag();
-    }
-    // Overwrite this if needed
-    onDrag() {}
-    updateCursorPosition() {
-      this.element.style.left = `${this.xPos}%`;
-      this.element.style.top = `${this.yPos}%`;
-    }
-  };
-  var ColorPicker = class {
-    currentColor = w("#72b6c0ff");
-    width;
-    element = document.createElement("div");
-    hueContainer = document.createElement("div");
-    fieldContainer = document.createElement("div");
-    hueCursor;
-    fieldCursor;
-    constructor(width = "20rem") {
-      this.width = width;
-      this.hueCursor = this.createHueCursor();
-      this.hueCursor.onDrag = async () => {
-        await this.readColor();
-      };
-      this.fieldCursor = this.createFieldCursor();
-      this.fieldCursor.onDrag = async () => {
-        await this.readColor();
-      };
-    }
-    readColorInput() {
-      const hexInput = this.element.querySelector("input");
-      if (hexInput) {
-        if (isValidHexColor(hexInput.value)) {
-          this.currentColor = w(hexInput.value);
-        } else {
-          hexInput.value = this.currentColor.toHex();
-        }
-      }
-      this.updateFields();
-      this.updateColorPicker();
-    }
-    async readColor() {
-      const hue = this.hueCursor.xPos * 3.6;
-      const saturation = this.fieldCursor.xPos;
-      const value = 100 - this.fieldCursor.yPos;
-      this.currentColor = w({ h: hue, s: saturation, v: value });
-      await this.updateColorPicker();
-    }
-    async updateColorPicker() {
-      const maxSatColor = w({ h: this.hueCursor.xPos * 3.6, s: 100, v: 100 });
-      this.element.style.setProperty("--max-sat", maxSatColor.toHex());
-      this.element.style.setProperty("--current-color", this.currentColor.toHex());
-      const hexInput = this.element.querySelector("input");
-      if (hexInput) {
-        hexInput.value = this.currentColor.toHex();
-      }
-      await this.onChange();
-    }
-    createFieldCursor() {
-      const fieldCursor = new ColorCursor(this.fieldContainer);
-      fieldCursor.element.classList.add("color-cursor-wrapper");
-      fieldCursor.visibleElement.classList.add("color-cursor");
-      return fieldCursor;
-    }
-    createHueCursor() {
-      const hueCursor = new ColorCursor(this.hueContainer, true, false);
-      hueCursor.element.classList.add("color-cursor-wrapper");
-      hueCursor.visibleElement.classList.add("color-cursor");
-      return hueCursor;
-    }
-    createHueContainer() {
-      this.hueContainer.classList.add("hue-picker");
-      this.hueContainer.appendChild(this.hueCursor.element);
-      return this.hueContainer;
-    }
-    createFieldContainer() {
-      this.fieldContainer.classList.add("color-picker-field");
-      const horizontalContainer = document.createElement("div");
-      horizontalContainer.style.background =
-        "linear-gradient(to left, var(--max-sat) 0%, rgba(255, 255, 255, 1) 100%)";
-      const verticalContainer = document.createElement("div");
-      verticalContainer.style.background = "linear-gradient(to top, black, transparent)";
-      this.fieldContainer.appendChild(horizontalContainer);
-      this.fieldContainer.append(verticalContainer);
-      this.fieldContainer.appendChild(this.fieldCursor.element);
-      return this.fieldContainer;
-    }
-    copyHexToClipBoard() {
-      navigator.clipboard.writeText(this.currentColor.toHex());
-    }
-    createBottomContainer() {
-      const createCopyButton = () => {
-        const button = document.createElement("button");
-        button.innerHTML = copySvg;
-        button.classList.add("copy-hex-button");
-        button.addEventListener("click", () => {
-          this.copyHexToClipBoard();
-          const svg = button.querySelector("svg");
-          if (!svg) {
-            return;
-          }
-          svg.style.fill = "var(--color-text)";
-          button.innerHTML = doneSvg;
-          setTimeout(() => {
-            svg.style.fill = "none";
-            button.innerHTML = copySvg;
-          }, 1e3);
-        });
-        return button;
-      };
-      const createHexInput = () => {
-        const hexInput = document.createElement("input");
-        hexInput.classList.add("smpp-text-input");
-        hexInput.addEventListener("change", () => {
-          this.readColorInput();
-        });
-        hexInput.type = "text";
-        hexInput.value = this.currentColor.toHex();
-        return hexInput;
-      };
-      function createColorPreview() {
-        const colorPreview = document.createElement("div");
-        colorPreview.classList.add("color-preview");
-        return colorPreview;
-      }
-      const bottomContainer = document.createElement("div");
-      bottomContainer.classList.add("smpp-color-picker-bottom-container");
-      bottomContainer.appendChild(createColorPreview());
-      bottomContainer.appendChild(createHexInput());
-      bottomContainer.appendChild(createCopyButton());
-      return bottomContainer;
-    }
-    updateFields() {
-      this.hueCursor.xPos = this.currentColor.hue() / 3.6;
-      this.fieldCursor.xPos = this.currentColor.toHsv().s;
-      this.fieldCursor.yPos = 100 - this.currentColor.toHsv().v;
-      this.hueCursor.updateCursorPosition();
-      this.fieldCursor.updateCursorPosition();
-    }
-    render() {
-      this.element.classList.add("smpp-color-picker");
-      this.element.style.width = this.width;
-      this.element.appendChild(this.createFieldContainer());
-      this.element.appendChild(this.createHueContainer());
-      this.element.appendChild(this.createBottomContainer());
-      this.updateFields();
-      this.updateColorPicker();
-      return this.element;
-    }
-    async onChange() {}
-  };
-  var Tile = class {
-    element = document.createElement("div");
-    async render() {
-      this.element.classList.add("theme-tile");
-      this.element.style.height = "104px";
-      this.element.style.width = "168px";
-      this.element.addEventListener("click", async (e5) => {
-        await this.onClick(e5);
-      });
-      this.updateSelection();
-      await this.createContent();
-      return this.element;
-    }
-    async updateImage(_currentTheme, _forceReload = false) {}
-    // Overide this in the implementation
-    updateSelection() {}
-    // Overide in de implementation
-    async onClick(_e) {}
-    // Overide this in the implementation
-    async createContent() {}
-  };
-  var ThemeTile = class extends Tile {
-    name;
-    isFavorite;
-    isCustom;
-    currentCategory;
-    titleElement = document.createElement("span");
-    constructor(name2, currentCategory, isFavorite, isCustom = false) {
-      super();
-      this.name = name2;
-      this.currentCategory = currentCategory;
-      this.isFavorite = isFavorite;
-      this.isCustom = isCustom;
-    }
-    async updateCSS() {
-      const theme = await getTheme(this.name);
-      Object.keys(theme.cssProperties).forEach((key) => {
-        this.element.style.setProperty(`${key}-local`, theme.cssProperties[key]);
-      });
-    }
-    async updateTitle() {
-      const theme = await getTheme(this.name);
-      this.titleElement.innerText = theme.displayName;
-      if (this.titleElement.innerText.length > 22) {
-        this.titleElement.innerText = `${theme.displayName.slice(0, 22)}\u2026`;
-      }
-    }
-    async createContent() {
-      this.element.appendChild(this.createImageContainer());
-      this.element.appendChild(this.getBottomContainer());
-      await this.updateTitle();
-      await this.updateCSS();
-    }
-    getBottomContainer() {
-      const bottomContainer = document.createElement("div");
-      bottomContainer.classList.add("theme-tile-bottom");
-      this.titleElement.classList.add("theme-tile-title");
-      bottomContainer.appendChild(this.titleElement);
-      const buttonContainer = document.createElement("div");
-      buttonContainer.classList.add("theme-button-container");
-      const duplicateButton = document.createElement("button");
-      duplicateButton.classList.add("bottom-container-button");
-      duplicateButton.innerHTML = copySvg;
-      duplicateButton.addEventListener("click", async () => {
-        await this.duplicate();
-      });
-      const favoriteButton = document.createElement("button");
-      favoriteButton.classList.add("bottom-container-button");
-      favoriteButton.innerHTML = heartSvg;
-      favoriteButton.addEventListener("click", async () => {
-        await this.favoriteToggle();
-      });
-      if (this.isFavorite) {
-        this.element.classList.add("is-favorite");
-      }
-      const shareButton = document.createElement("button");
-      shareButton.classList.add("bottom-container-button");
-      shareButton.innerHTML = shareSvg;
-      shareButton.addEventListener("click", async () => {
-        await this.share();
-      });
-      buttonContainer.appendChild(shareButton);
-      buttonContainer.appendChild(duplicateButton);
-      buttonContainer.appendChild(favoriteButton);
-      if (this.isCustom) {
-        const editButton = document.createElement("button");
-        editButton.classList.add("bottom-container-button");
-        editButton.innerHTML = editIconSvg;
-        editButton.addEventListener("click", async () => {
-          await this.edit();
-        });
-        buttonContainer.appendChild(editButton);
-      }
-      bottomContainer.appendChild(buttonContainer);
-      return bottomContainer;
-    }
-    createImageContainer() {
-      const imageContainer = document.createElement("div");
-      imageContainer.classList.add("image-container");
-      return imageContainer;
-    }
-    updateSelection() {
-      if (currentThemeName === this.name) {
-        this.element.classList.add("is-selected");
-      } else {
-        this.element.classList.remove("is-selected");
-      }
-    }
-    async updateImage(currentTheme2, forceReload = false) {
-      if (this.name === currentTheme2 || forceReload) {
-        const imageURL = await getImageURL(
-          this.name,
-          async () => {
-            return await getExtensionImage(`theme-backgrounds/compressed/${this.name}.jpg`);
-          },
-          true,
-        );
-        if (await isValidImage(await imageURL.url)) {
-          this.element.style.setProperty("--background-image-local", `url(${await imageURL.url})`);
-        } else {
-          this.element.style.setProperty("--background-image-local", "url()");
-        }
-        if (isFirefox && imageURL.type === "file") {
-          const imageContainer = this.element.querySelector(".image-container");
-          if (!imageContainer) {
-            return;
-          }
-          const stupidImageContainer = document.createElement("img");
-          stupidImageContainer.classList.add("image-container", "firefox-container");
-          if (await isValidImage(imageURL.url)) {
-            stupidImageContainer.src = imageURL.url;
-          } else {
-            stupidImageContainer.src = "";
-          }
-          const bottomContainer = this.element.querySelector(".theme-tile-bottom");
-          if (!bottomContainer) {
-            return;
-          }
-          imageContainer.remove();
-          this.element.prepend(stupidImageContainer);
-        } else if (isFirefox) {
-          const firefoxImageContainer = this.element.querySelector(".firefox-container");
-          if (firefoxImageContainer) {
-            firefoxImageContainer.remove();
-            this.element.prepend(this.createImageContainer());
-            await this.updateImage(currentTheme2, forceReload);
-          }
-        }
-      }
-    }
-    async onClick(e5) {
-      if (e5.target instanceof HTMLElement) {
-        const target = e5.target;
-        if (
-          target.classList.contains("theme-tile-title") ||
-          target.classList.contains("image-container") ||
-          target.classList.contains("theme-tile")
-        ) {
-          await updateTheme(this.name);
-          await settingsWindow.loadPage(false);
-          await loadQuickSettings();
-        }
-      }
-    }
-    async favoriteToggle() {
-      this.isFavorite = !this.isFavorite;
-      const data2 = await browser.runtime.sendMessage({
-        action: "getSettingsData",
-      });
-      const updateFavorite = async () => {
-        await browser.runtime.sendMessage({
-          action: "setSetting",
-          name: "appearance.quickSettingsThemes",
-          data: quickSettingsThemes,
-        });
-        this.element.classList.toggle("is-favorite");
-        this.onFavoriteToggle();
-      };
-      let quickSettingsThemes = data2.appearance.quickSettingsThemes;
-      if (this.isFavorite) {
-        quickSettingsThemes.push(this.name);
-        await updateFavorite();
-      } else {
-        quickSettingsThemes = quickSettingsThemes.filter((name2) => {
-          return name2 !== this.name;
-        });
-        if (this.currentCategory === "quickSettings") {
-          this.element.addEventListener("animationend", updateFavorite);
-          this.element.classList.add("being-removed");
-        } else {
-          await updateFavorite();
-        }
-      }
-    }
-    async edit() {
-      await updateTheme(this.name);
-      Promise.all([settingsWindow.loadPage(false), loadQuickSettings()]);
-      startCustomThemeCreator(await getTheme(this.name), this.name);
-    }
-    async duplicate() {
-      const newThemeName = await browser.runtime.sendMessage({
-        action: "saveCustomTheme",
-        data: await getTheme(this.name),
-      });
-      const result = await browser.runtime.sendMessage({
-        action: "getImage",
-        id: this.name,
-      });
-      const compressedResult = await browser.runtime.sendMessage({
-        action: "getImage",
-        id: `compressed-${this.name}`,
-      });
-      if (result.metaData.type === "default") {
-        const base64 = await convertLinkToBase64(
-          await getExtensionImage(`theme-backgrounds/${this.name}.jpg`),
-        );
-        if (base64) {
-          result.imageData = base64;
-        }
-        const compressedBase64 = await convertLinkToBase64(
-          await getExtensionImage(`theme-backgrounds/compressed/${this.name}.jpg`),
-        );
-        if (compressedBase64) {
-          compressedResult.imageData = compressedBase64;
-        }
-        if (!this.isCustom) {
-          result.metaData.type = "file";
-          result.metaData.link = `${this.name}.jpg`;
-          compressedResult.metaData.type = "file";
-          compressedResult.metaData.link = `${this.name}.jpg`;
-        }
-      }
-      if (await isValidImage(result.imageData)) {
-        await browser.runtime.sendMessage({
-          action: "setImage",
-          id: newThemeName,
-          data: result,
-        });
-      }
-      if (await isValidImage(compressedResult.imageData)) {
-        await browser.runtime.sendMessage({
-          action: "setImage",
-          id: `compressed-${newThemeName}`,
-          data: compressedResult,
-        });
-      }
-      this.onDuplicate(newThemeName);
-      new Toast("Theme succesfully duplicated", "succes").render();
-    }
-    async share() {
-      const shareDialog = new Dialog("themeSharing", true);
-      const linkOutput = document.createElement("a");
-      linkOutput.classList.add("link-output");
-      linkOutput.target = "_blank";
-      const copyToClipboardButton = document.createElement("button");
-      copyToClipboardButton.classList.add("copy-hex-button");
-      copyToClipboardButton.classList.add("copy-link-button");
-      const copyToClipboard = () => {
-        if (shareUrl) {
-          navigator.clipboard.writeText(shareUrl);
-          const svg = copyToClipboardButton.querySelector("svg");
-          if (!svg) {
-            return;
-          }
-          svg.style.fill = "var(--color-text)";
-          copyToClipboardButton.innerHTML = doneSvg;
-          setTimeout(() => {
-            svg.style.fill = "none";
-            copyToClipboardButton.innerHTML = copySvg;
-          }, 1e3);
-          new Toast("Theme link copied to clipboard", "succes").render();
-        } else {
-          new Toast("Theme link is not ready yet", "error").render();
-        }
-      };
-      copyToClipboardButton.addEventListener("click", copyToClipboard);
-      copyToClipboardButton.innerHTML = loadingSpinnerSvg;
-      let shareUrl = null;
-      shareDialog.renderContent = async () => {
-        function getEditableValues(cssProperties) {
-          const nonEditableValues = [
-            "--color-homepage-sidebars-bg",
-            "--darken-background",
-            "--color-splashtext",
-          ];
-          const editableValues = Object.keys(cssProperties).filter((property) => {
-            return !nonEditableValues.includes(property);
-          });
-          return editableValues;
-        }
-        function createColorPreview(name2) {
-          const colorPreview = document.createElement("div");
-          colorPreview.classList.add("color-preview-bubble");
-          if (theme.cssProperties[name2]) {
-            colorPreview.style.setProperty("--current-color", theme.cssProperties[name2]);
-          }
-          return colorPreview;
-        }
-        function generateColorPreviews(editableValues) {
-          const colorPreviews = editableValues.map((colorName) => {
-            const colorPreview = {};
-            colorPreview[colorName] = createColorPreview(colorName);
-            return colorPreview;
-          });
-          return colorPreviews;
-        }
-        const element = document.createElement("div");
-        element.classList.add("share-dialog-content");
-        const title = document.createElement("h1");
-        title.innerText = (await getTheme(this.name)).displayName;
-        const subTitle = document.createElement("h2");
-        subTitle.innerText = "Share theme:";
-        linkOutput.innerText = "Loading...";
-        linkOutput.style.pointerEvents = "none";
-        const copyContainer = document.createElement("div");
-        copyContainer.classList.add("copy-container");
-        const tile = document.createElement("div");
-        tile.classList.add("sharing-tile");
-        const theme = await getTheme(this.name);
-        Object.keys(theme.cssProperties).forEach((key) => {
-          element.style.setProperty(`${key}-local`, theme.cssProperties[key]);
-        });
-        const imageContainer = document.createElement("div");
-        imageContainer.classList.add("sharing-image-container");
-        const imageURL = await getImageURL(
-          this.name,
-          async () => {
-            return await getExtensionImage(`theme-backgrounds/compressed/${this.name}.jpg`);
-          },
-          false,
-        );
-        const image = document.createElement("img");
-        image.classList.add("sharing-image");
-        if (await isValidImage(await imageURL.url)) {
-          imageContainer.appendChild(image);
-        }
-        image.src = imageURL.url;
-        const displayNameLength = title.innerText.length;
-        if (displayNameLength < 20) {
-          title.style.fontSize = "2rem";
-        } else if (displayNameLength < 25) {
-          title.style.fontSize = "1.5rem";
-        } else if (displayNameLength < 30) {
-          title.style.fontSize = "1.2rem";
-        } else {
-          title.style.fontSize = "1.2rem";
-          title.innerText = `${title.innerText.slice(0, 30)}\u2026`;
-        }
-        console.log(imageContainer);
-        imageContainer.appendChild(title);
-        console.log(imageContainer);
-        tile.appendChild(imageContainer);
-        const colorPreviewsContainer = document.createElement("div");
-        colorPreviewsContainer.classList.add("sharing-color-previews");
-        Object.values(generateColorPreviews(getEditableValues(theme.cssProperties))).forEach(
-          (preview) => {
-            const actualPreview = Object.values(preview)[0];
-            if (actualPreview) {
-              colorPreviewsContainer.appendChild(actualPreview);
-            }
-          },
-        );
-        tile.appendChild(colorPreviewsContainer);
-        copyContainer.appendChild(linkOutput);
-        copyContainer.appendChild(copyToClipboardButton);
-        element.appendChild(subTitle);
-        tile.appendChild(copyContainer);
-        element.appendChild(tile);
-        return element;
-      };
-      await shareDialog.create();
-      shareDialog.show();
-      new Toast("Uploading theme...", "info").render();
-      const resp = await browser.runtime.sendMessage({
-        action: "shareTheme",
-        name: this.name,
-      });
-      if (resp.error) {
-        console.error("Failed to share theme", resp.error);
-        linkOutput.innerText = "Failed to share theme";
-        shareDialog.element.classList.add("error-theme-sharing");
-        copyToClipboardButton.innerHTML = errorSvg;
-        copyToClipboardButton.style.pointerEvents = "none";
-        new Toast("Failed to share theme", "error").render();
-      } else {
-        shareUrl = resp.shareUrl;
-        console.log(linkOutput);
-        linkOutput.innerText = `${resp.shareUrl.slice(0, 32)}\u2026`;
-        linkOutput.style.pointerEvents = "all";
-        linkOutput.addEventListener("click", copyToClipboard);
-        copyToClipboardButton.innerHTML = copySvg;
-        new Toast("Theme uploaded", "succes").render();
-      }
-      this.onShare();
-    }
-    // Overide in de implementation
-    async onFavoriteToggle() {}
-    // Overide in de implementation
-    async onShare() {}
-    // Overide in de implementation
-    async onDuplicate(_newThemeName) {}
-  };
-  async function updateTheme(name2) {
+  async function updateTheme(name) {
     await browser.runtime.sendMessage({
       action: "setSetting",
       name: "appearance.theme",
-      data: name2,
+      data: name
     });
-    Promise.all([setTheme(name2), setBackground(name2)]);
+    Promise.all([setTheme(name), setBackground(name)]);
   }
-  var ThemeFolder = class extends Tile {
-    category;
-    constructor(category) {
-      super();
-      this.category = category;
-    }
-    async createContent() {
-      const firstThemeInCategory = await browser.runtime.sendMessage({
-        action: "getFirstThemeInCategory",
-        category: this.category,
-        includeHidden: true,
-      });
-      if (!firstThemeInCategory) {
-        return;
-      }
-      const theme = await browser.runtime.sendMessage({
-        action: "getTheme",
-        name: firstThemeInCategory,
-      });
-      Object.keys(theme.cssProperties).forEach((key) => {
-        this.element.style.setProperty(`${key}-local`, theme.cssProperties[key]);
-      });
-      if (this.category === "custom" || this.category === "quickSettings") {
-        this.element.classList.add("use-default-colors");
-      }
-      this.element.style.setProperty("--background-image-local", "url()");
-      this.element.appendChild(this.createImageContainer());
-      this.element.appendChild(this.createBottomContainer());
-    }
-    createBottomContainer() {
-      const bottomContainer = document.createElement("div");
-      bottomContainer.classList.add("theme-tile-bottom");
-      const title = document.createElement("span");
-      title.innerText = getFancyCategoryName(this.category);
-      if (this.category === "quickSettings") {
-        title.innerText = "Favorites";
-      }
-      title.classList.add("theme-tile-title");
-      bottomContainer.appendChild(title);
-      return bottomContainer;
-    }
-    createImageContainer() {
-      const imageContainer = document.createElement("div");
-      let svg;
-      switch (this.category) {
-        case "quickSettings":
-          svg = heartSvg;
-          break;
-        case "light":
-          svg = sunSvg;
-          break;
-        case "dark":
-          svg = moonSvg;
-          break;
-        case "seasonal":
-          svg = pineSvg;
-          break;
-        case "custom":
-          svg = editIconSvg;
-          break;
-        default:
-          svg = folderSvg;
-          break;
-      }
-      imageContainer.innerHTML = svg;
-      imageContainer.classList.add("image-container");
-      return imageContainer;
-    }
-  };
-  function getFancyCategoryName(name2) {
-    const fancyName = name2.charAt(0).toUpperCase() + name2.slice(1);
+  function getFancyCategoryName(name) {
+    const fancyName = name.charAt(0).toUpperCase() + name.slice(1);
     return fancyName;
   }
-  var AddCustomTheme = class extends Tile {
-    createImageContainer() {
-      const imageContainer = document.createElement("div");
-      const svg = plusSVG;
-      imageContainer.innerHTML = svg;
-      imageContainer.classList.add("image-container");
-      return imageContainer;
-    }
-    createBottomContainer() {
-      const bottomContainer = document.createElement("div");
-      bottomContainer.classList.add("theme-tile-bottom");
-      const title = document.createElement("span");
-      title.classList.add("theme-tile-title");
-      title.innerText = "Create theme";
-      bottomContainer.appendChild(title);
-      return bottomContainer;
-    }
-    async onClick() {
-      const newTheme = await browser.runtime.sendMessage({
-        action: "saveCustomTheme",
-        data: await getTheme("defaultCustom"),
-      });
-      await settingsWindow.themeSelector.updateSelectorContent();
-      await settingsWindow.loadPage(false);
-      await updateTheme(newTheme);
-      startCustomThemeCreator(await getTheme("defaultCustom"), newTheme);
-    }
-    async createContent() {
-      this.element.classList.add("use-default-colors");
-      this.element.classList.add("create-theme-button");
-      this.element.appendChild(this.createImageContainer());
-      this.element.appendChild(this.createBottomContainer());
-    }
-  };
-  var noThemes = class extends Tile {
-    createImageContainer() {
-      const imageContainer = document.createElement("div");
-      const svg = brokenHeartSvg;
-      imageContainer.innerHTML = svg;
-      imageContainer.classList.add("image-container");
-      return imageContainer;
-    }
-    createBottomContainer() {
-      const bottomContainer = document.createElement("div");
-      bottomContainer.classList.add("theme-tile-bottom");
-      const title = document.createElement("span");
-      title.classList.add("theme-tile-title");
-      title.innerText = "No themes";
-      bottomContainer.appendChild(title);
-      return bottomContainer;
-    }
-    async createContent() {
-      this.element.classList.add("use-default-colors");
-      this.element.classList.add("no-themes");
-      this.element.appendChild(this.createImageContainer());
-      this.element.appendChild(this.createBottomContainer());
-    }
-  };
-  var ThemeSelector = class {
-    element = document.createElement("div");
-    content = document.createElement("div");
-    topContainer = document.createElement("div");
-    currentCategory = "all";
-    currentTiles = [];
-    contentWidth = 0;
-    createTopContainer() {
-      this.topContainer = document.createElement("div");
-      this.topContainer.classList.add("theme-top-container");
-    }
-    render() {
-      this.element.innerHTML = "";
-      this.createTopContainer();
-      this.createContentContainer();
-      window.addEventListener("resize", () => {
-        this.updateSizes();
-        this.updateContentHeight();
-      });
-      this.element.appendChild(this.topContainer);
-      this.renderSelectorContent();
-      return this.element;
-    }
-    async updateImages(forceReload = false) {
-      this.currentTiles.forEach(async (tile) => {
-        await tile.updateImage(currentThemeName, forceReload);
-      });
-    }
-    updateSizes() {
-      this.contentWidth = this.content.getBoundingClientRect().width;
-    }
-    async renderSelectorContent() {
-      this.content.innerHTML = "";
-      this.element.appendChild(this.content);
-      this.updateTopContainer();
-      if (this.currentCategory === "all") {
-        await this.renderFolderTiles();
-      } else {
-        await this.renderThemeTiles();
-      }
-      this.updateSizes();
-      this.updateContentHeight();
-    }
-    // this is used if some of the correct content is already loaded
-    async updateSelectorContent() {
-      if (this.currentCategory === "all") {
-        await this.renderFolderTiles();
-        return;
-      }
-      await this.updateThemeTiles();
-      this.updateImages();
-    }
-    async updateThemeTiles() {
-      if (this.currentCategory === "all") {
-        return;
-      }
-      const themes2 = await browser.runtime.sendMessage({
-        action: "getThemes",
-        categories: [this.currentCategory],
-        includeHidden: true,
-      });
-      const data2 = await browser.runtime.sendMessage({
-        action: "getSettingsData",
-      });
-      const visibleThemeTiles = this.content.querySelectorAll(".theme-tile");
-      const visibleThemeTilesArray = [];
-      visibleThemeTiles.forEach((element) => {
-        visibleThemeTilesArray.push(element);
-      });
-      const visibleThemeNames = visibleThemeTilesArray.map((element) => {
-        return element.dataset.name;
-      });
-      const correctThemeNames = Object.keys(themes2).map((themeName) => {
-        return themeName;
-      });
-      const addMissingTiles = async (visibleThemeNames2, correctThemeNames2) => {
-        const customThemes = await browser.runtime.sendMessage({
-          action: "getThemes",
-          categories: ["custom"],
-          includeHidden: true,
-        });
-        correctThemeNames2.forEach(async (themeName) => {
-          if (!visibleThemeNames2.includes(themeName)) {
-            const isFavorite = data2.appearance.quickSettingsThemes.includes(themeName);
-            const newTile = this.createThemeTile(
-              themeName,
-              isFavorite,
-              Object.keys(customThemes).includes(themeName),
-            );
-            const createThemeButton = this.content.querySelector(".create-theme-button");
-            if (createThemeButton) {
-              createThemeButton.insertAdjacentElement("beforebegin", await newTile.render());
-            } else {
-              this.content.appendChild(await newTile.render());
-            }
-            this.currentTiles.push(newTile);
-            this.updateContentHeight();
-          }
-        });
-      };
-      const removeIncorrectTiles = async (visibleThemeNames2, correctThemeNames2) => {
-        visibleThemeNames2.forEach(async (themeName) => {
-          if (!correctThemeNames2.includes(themeName)) {
-            const element = visibleThemeTilesArray.find((element2) => {
-              if (element2.dataset.name === themeName) {
-                return element2;
-              }
-              return false;
-            });
-            if (!element) {
-              return;
-            }
-            if (element.classList.contains("create-theme-button")) {
-              return;
-            }
-            this.content.removeChild(element);
-            this.currentTiles = this.currentTiles.filter((tile) => {
-              if (tile instanceof AddCustomTheme) {
-                return true;
-              }
-              if (tile instanceof ThemeTile) {
-                return tile.name !== themeName;
-              }
-              return false;
-            });
-          }
-          this.updateContentHeight();
-        });
-      };
-      const updateLocalCSS = async () => {
-        this.currentTiles.forEach((tile) => {
-          if (tile.name === currentThemeName) {
-            tile.updateCSS();
-            tile.updateTitle();
-          }
-        });
-      };
-      if (Object.keys(themes2).length === 0 && this.currentCategory !== "custom") {
-        this.currentTiles.push(new noThemes());
-        await this.renderTiles(this.currentTiles);
-      }
-      await addMissingTiles(visibleThemeNames, correctThemeNames);
-      await removeIncorrectTiles(visibleThemeNames, correctThemeNames);
-      updateLocalCSS();
-    }
-    updateTopContainer() {
-      this.topContainer.innerHTML = "";
-      const title = document.createElement("h2");
-      title.classList.add("current-category");
-      if (this.currentCategory !== "all") {
-        const backButton = document.createElement("button");
-        backButton.innerHTML = chevronLeftSvg;
-        backButton.addEventListener("click", () => this.changeCategory("all"));
-        this.topContainer.appendChild(backButton);
-      }
-      title.innerText = `${getFancyCategoryName(this.currentCategory)} themes`;
-      if (this.currentCategory === "quickSettings") {
-        title.innerText = "Favorite themes";
-      }
-      this.topContainer.appendChild(title);
-    }
-    async renderTiles(tiles) {
-      function getTileDelay(number) {
-        if (number < 8) {
-          return 20;
-        }
-        if (number < 12) {
-          return 15;
-        }
-        return 7;
-      }
-      this.content.style.height = `${this.calculateContentHeight(tiles.length)}px`;
-      const delayAmount = getTileDelay(tiles.length);
-      for (let i5 = 1; i5 <= tiles.length; i5++) {
-        const tile = tiles[i5 - 1];
-        if (!tile) {
-          break;
-        }
-        await tile.render();
-        await tile.updateImage(currentThemeName, true);
-        this.content.appendChild(tile.element);
-        if (document.body.classList.contains("enableAnimations")) {
-          await delay(delayAmount);
-        }
-      }
-    }
-    createContentContainer() {
-      this.content = document.createElement("div");
-      this.content.classList.add("theme-tiles");
-    }
-    calculateContentHeight(tileAmount) {
-      const TILE_HEIGHT = 104;
-      const TILE_WIDTH = 168;
-      const GAP = 6;
-      const totalWidth = this.contentWidth;
-      const tilesPerRow = Math.floor((totalWidth + GAP) / (TILE_WIDTH + GAP));
-      const numRows = Math.ceil(tileAmount / tilesPerRow);
-      const totalHeight = numRows * TILE_HEIGHT + (numRows - 1) * GAP;
-      return totalHeight;
-    }
-    async renderFolderTiles() {
-      const categories = await browser.runtime.sendMessage({
-        action: "getThemeCategories",
-        includeEmpty: true,
-        includeHidden: true,
-      });
-      const tiles = Object.keys(categories).map((category) => {
-        const tile = new ThemeFolder(category);
-        tile.onClick = async () => {
-          this.changeCategory(category);
-        };
-        return tile;
-      });
-      this.currentTiles = tiles;
-      await this.renderTiles(tiles);
-    }
-    updateContentHeight() {
-      this.content.style.height = `${String(this.calculateContentHeight(this.currentTiles.length))}px`;
-    }
-    createThemeTile(name2, isFavorite, isCustom) {
-      const tile = new ThemeTile(name2, this.currentCategory, isFavorite, isCustom);
-      tile.element.dataset.name = name2;
-      tile.onDuplicate = async (newThemeName) => {
-        if (isCustom) {
-          await this.updateSelectorContent();
-        }
-        await updateTheme(newThemeName);
-        await this.changeCategory("custom");
-        Promise.all([settingsWindow.loadPage(false)]);
-        startCustomThemeCreator(await getTheme(newThemeName), newThemeName);
-      };
-      tile.onFavoriteToggle = async () => {
-        await settingsWindow.loadPage(false);
-        await loadQuickSettings();
-        if (this.currentCategory === "quickSettings") {
-          await this.updateSelectorContent();
-        }
-      };
-      return tile;
-    }
-    async renderThemeTiles() {
-      const themes2 = await browser.runtime.sendMessage({
-        action: "getThemes",
-        categories: [this.currentCategory],
-        includeHidden: true,
-      });
-      const customThemes = await browser.runtime.sendMessage({
-        action: "getThemes",
-        categories: ["custom"],
-        includeHidden: true,
-      });
-      const data2 = await browser.runtime.sendMessage({
-        action: "getSettingsData",
-      });
-      const tiles = Object.keys(themes2).map((name2) => {
-        const isFavorite = data2.appearance.quickSettingsThemes.includes(name2);
-        const isCustom = Object.keys(customThemes).includes(name2);
-        return this.createThemeTile(name2, isFavorite, isCustom);
-      });
-      if (this.currentCategory === "custom") {
-        tiles.push(new AddCustomTheme());
-      }
-      this.currentTiles = tiles;
-      if (Object.keys(themes2).length === 0 && this.currentCategory !== "custom") {
-        this.currentTiles.push(new noThemes());
-      }
-      await this.renderTiles(this.currentTiles);
-    }
-    async changeCategory(category) {
-      this.currentCategory = category;
-      await this.renderSelectorContent();
-    }
-  };
-  async function startCustomThemeCreator(theme, name2) {
-    const themeEditor = new CustomThemeCreator(theme, name2);
+  async function startCustomThemeCreator(theme, name) {
+    const themeEditor = new CustomThemeCreator(theme, name);
     settingsWindow.hide();
     await themeEditor.create();
     themeEditor.show();
@@ -9426,519 +6355,1531 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       LightVibrant: convertSwatchToColord(vibrantPalette.LightVibrant),
       Muted: convertSwatchToColord(vibrantPalette.Muted),
       DarkMuted: convertSwatchToColord(vibrantPalette.DarkMuted),
-      LightMuted: convertSwatchToColord(vibrantPalette.LightMuted),
+      LightMuted: convertSwatchToColord(vibrantPalette.LightMuted)
     };
     return colordPalette;
   }
-  var CustomThemeCreator = class extends Dialog {
-    theme;
-    name;
-    editableValues;
-    colorPreviews;
-    backgroundImageInput;
-    backgroundImagePreview;
-    themeGeneratorIsOpen = false;
-    imagePreviewContainer;
-    getEditableValues(cssProperties) {
-      const nonEditableValues = [
-        "--color-homepage-sidebars-bg",
-        "--darken-background",
-        "--color-splashtext",
-      ];
-      const editableValues = Object.keys(cssProperties).filter((property) => {
-        return !nonEditableValues.includes(property);
-      });
-      return editableValues;
-    }
-    createColorPreview(name2) {
-      const colorPreview = document.createElement("div");
-      colorPreview.classList.add("color-preview-bubble");
-      if (this.theme.cssProperties[name2]) {
-        colorPreview.style.setProperty("--current-color", this.theme.cssProperties[name2]);
-      }
-      colorPreview.dataset.name = name2;
-      colorPreview.addEventListener("click", (e5) => {
-        if (!colorPreview.parentElement?.querySelector(".floating-picker")) {
-          this.openColorPicker(name2, colorPreview, e5);
+  var currentThemeName, currentTheme, ColorCursor, ColorPicker, Tile, ThemeTile, ThemeFolder, AddCustomTheme, noThemes, ThemeSelector, CustomThemeCreator;
+  var init_themes = __esm({
+    "src/main-features/appearance/themes.ts"() {
+      "use strict";
+      init_colord();
+      init_lch();
+      init_mix();
+      init_browser2();
+      init_utils();
+      init_svgs();
+      init_utils2();
+      init_widgets();
+      init_globalchat();
+      init_main();
+      init_images();
+      init_windows();
+      init_main_settings();
+      init_quick_settings();
+      init_background_image();
+      init_ui();
+      k([lch_default, mix_default]);
+      ColorCursor = class {
+        element = document.createElement("div");
+        visibleElement = document.createElement("div");
+        xPos = 50;
+        yPos = 50;
+        enableX;
+        enableY;
+        parentContainer;
+        constructor(parentContainer, enableX = true, enableY = true) {
+          this.parentContainer = parentContainer;
+          this.enableX = enableX;
+          this.enableY = enableY;
+          this.element.appendChild(this.visibleElement);
+          let isDragging = false;
+          this.parentContainer.addEventListener("mousedown", (e5) => {
+            isDragging = true;
+            this.handlePointerEvent(e5);
+          });
+          document.addEventListener("mouseup", () => {
+            isDragging = false;
+          });
+          document.addEventListener("mousemove", (e5) => {
+            if (isDragging) {
+              this.handlePointerEvent(e5);
+            }
+          });
+          this.updateCursorPosition();
         }
-      });
-      return colorPreview;
-    }
-    updateColorPreviews() {
-      this.colorPreviews.forEach((preview) => {
-        const previewName = Object.keys(preview)[0];
-        const element = Object.values(preview)[0];
-        if (previewName && element) {
-          const newValue = this.theme.cssProperties[previewName];
-          if (newValue) {
-            element.style.setProperty("--current-color", newValue);
+        handlePointerEvent(e5) {
+          const rect = this.parentContainer.getBoundingClientRect();
+          const x3 = e5.clientX - rect.left;
+          const y3 = e5.clientY - rect.top;
+          const xPercent = x3 / rect.width * 100;
+          const yPercent = y3 / rect.height * 100;
+          if (this.enableX) {
+            this.xPos = Math.max(0, Math.min(100, xPercent));
           }
+          if (this.enableY) {
+            this.yPos = Math.max(0, Math.min(100, yPercent));
+          }
+          this.updateCursorPosition();
+          this.onDrag();
         }
-      });
-    }
-    generateColorPreviews(editableValues) {
-      const colorPreviews = editableValues.map((colorName) => {
-        const colorPreview = {};
-        colorPreview[colorName] = this.createColorPreview(colorName);
-        return colorPreview;
-      });
-      return colorPreviews;
-    }
-    convertPropertyName(name2) {
-      const propertyNames = {
-        "--color-accent": "Accent Color",
-        "--color-text": "Text Color",
-        "--color-base00": "Background",
-        "--color-base01": "Secondary Background",
-        "--color-base02": "Tertiary Background",
-        "--color-base03": "Border Color",
+        // Overwrite this if needed
+        onDrag() {
+        }
+        updateCursorPosition() {
+          this.element.style.left = `${this.xPos}%`;
+          this.element.style.top = `${this.yPos}%`;
+        }
       };
-      return propertyNames[name2];
-    }
-    constructor(theme, name2) {
-      super("customThemeCreator", true);
-      this.theme = theme;
-      this.name = name2;
-      this.editableValues = this.getEditableValues(theme.cssProperties);
-      this.colorPreviews = this.generateColorPreviews(this.editableValues);
-      this.backgroundImageInput = new ImageSelector(this.name, true);
-      this.backgroundImageInput.id = this.name;
-      this.imagePreviewContainer = document.createElement("div");
-      this.backgroundImageInput.onStore = async () => {
-        updateTheme(this.name);
-        this.updateBackgroundImagePreview();
+      ColorPicker = class {
+        currentColor = w("#72b6c0ff");
+        width;
+        element = document.createElement("div");
+        hueContainer = document.createElement("div");
+        fieldContainer = document.createElement("div");
+        hueCursor;
+        fieldCursor;
+        constructor(width = "20rem") {
+          this.width = width;
+          this.hueCursor = this.createHueCursor();
+          this.hueCursor.onDrag = async () => {
+            await this.readColor();
+          };
+          this.fieldCursor = this.createFieldCursor();
+          this.fieldCursor.onDrag = async () => {
+            await this.readColor();
+          };
+        }
+        readColorInput() {
+          const hexInput = this.element.querySelector("input");
+          if (hexInput) {
+            if (isValidHexColor(hexInput.value)) {
+              this.currentColor = w(hexInput.value);
+            } else {
+              hexInput.value = this.currentColor.toHex();
+            }
+          }
+          this.updateFields();
+          this.updateColorPicker();
+        }
+        async readColor() {
+          const hue = this.hueCursor.xPos * 3.6;
+          const saturation = this.fieldCursor.xPos;
+          const value = 100 - this.fieldCursor.yPos;
+          this.currentColor = w({ h: hue, s: saturation, v: value });
+          await this.updateColorPicker();
+        }
+        async updateColorPicker() {
+          const maxSatColor = w({ h: this.hueCursor.xPos * 3.6, s: 100, v: 100 });
+          this.element.style.setProperty("--max-sat", maxSatColor.toHex());
+          this.element.style.setProperty("--current-color", this.currentColor.toHex());
+          const hexInput = this.element.querySelector("input");
+          if (hexInput) {
+            hexInput.value = this.currentColor.toHex();
+          }
+          await this.onChange();
+        }
+        createFieldCursor() {
+          const fieldCursor = new ColorCursor(this.fieldContainer);
+          fieldCursor.element.classList.add("color-cursor-wrapper");
+          fieldCursor.visibleElement.classList.add("color-cursor");
+          return fieldCursor;
+        }
+        createHueCursor() {
+          const hueCursor = new ColorCursor(this.hueContainer, true, false);
+          hueCursor.element.classList.add("color-cursor-wrapper");
+          hueCursor.visibleElement.classList.add("color-cursor");
+          return hueCursor;
+        }
+        createHueContainer() {
+          this.hueContainer.classList.add("hue-picker");
+          this.hueContainer.appendChild(this.hueCursor.element);
+          return this.hueContainer;
+        }
+        createFieldContainer() {
+          this.fieldContainer.classList.add("color-picker-field");
+          const horizontalContainer = document.createElement("div");
+          horizontalContainer.style.background = "linear-gradient(to left, var(--max-sat) 0%, rgba(255, 255, 255, 1) 100%)";
+          const verticalContainer = document.createElement("div");
+          verticalContainer.style.background = "linear-gradient(to top, black, transparent)";
+          this.fieldContainer.appendChild(horizontalContainer);
+          this.fieldContainer.append(verticalContainer);
+          this.fieldContainer.appendChild(this.fieldCursor.element);
+          return this.fieldContainer;
+        }
+        copyHexToClipBoard() {
+          navigator.clipboard.writeText(this.currentColor.toHex());
+        }
+        createBottomContainer() {
+          const createCopyButton = () => {
+            const button = document.createElement("button");
+            button.innerHTML = copySvg;
+            button.classList.add("copy-hex-button");
+            button.addEventListener("click", () => {
+              this.copyHexToClipBoard();
+              const svg = button.querySelector("svg");
+              if (!svg) {
+                return;
+              }
+              svg.style.fill = "var(--color-text)";
+              button.innerHTML = doneSvg;
+              setTimeout(() => {
+                svg.style.fill = "none";
+                button.innerHTML = copySvg;
+              }, 1e3);
+            });
+            return button;
+          };
+          const createHexInput = () => {
+            const hexInput = document.createElement("input");
+            hexInput.classList.add("smpp-text-input");
+            hexInput.addEventListener("change", () => {
+              this.readColorInput();
+            });
+            hexInput.type = "text";
+            hexInput.value = this.currentColor.toHex();
+            return hexInput;
+          };
+          function createColorPreview() {
+            const colorPreview = document.createElement("div");
+            colorPreview.classList.add("color-preview");
+            return colorPreview;
+          }
+          const bottomContainer = document.createElement("div");
+          bottomContainer.classList.add("smpp-color-picker-bottom-container");
+          bottomContainer.appendChild(createColorPreview());
+          bottomContainer.appendChild(createHexInput());
+          bottomContainer.appendChild(createCopyButton());
+          return bottomContainer;
+        }
+        updateFields() {
+          this.hueCursor.xPos = this.currentColor.hue() / 3.6;
+          this.fieldCursor.xPos = this.currentColor.toHsv().s;
+          this.fieldCursor.yPos = 100 - this.currentColor.toHsv().v;
+          this.hueCursor.updateCursorPosition();
+          this.fieldCursor.updateCursorPosition();
+        }
+        render() {
+          this.element.classList.add("smpp-color-picker");
+          this.element.style.width = this.width;
+          this.element.appendChild(this.createFieldContainer());
+          this.element.appendChild(this.createHueContainer());
+          this.element.appendChild(this.createBottomContainer());
+          this.updateFields();
+          this.updateColorPicker();
+          return this.element;
+        }
+        async onChange() {
+        }
       };
-      this.backgroundImagePreview = this.createBackgroundImagePreview();
-    }
-    content = document.createElement("div");
-    displayNameInput = document.createElement("input");
-    openColorPicker(name2, colorPreview, e5) {
-      const colorPicker = new ColorPicker();
-      colorPicker.element.style.position = "absolute";
-      colorPicker.element.classList.add("floating-picker");
-      const _docEventHandler = (docEvent) => {
-        if (docEvent === e5) {
-          return;
+      Tile = class {
+        element = document.createElement("div");
+        async render() {
+          this.element.classList.add("theme-tile");
+          this.element.style.height = "104px";
+          this.element.style.width = "168px";
+          this.element.addEventListener("click", async (e5) => {
+            await this.onClick(e5);
+          });
+          this.updateSelection();
+          await this.createContent();
+          return this.element;
         }
-        if (!(docEvent.target instanceof Node)) {
-          return;
+        async updateImage(_currentTheme, _forceReload = false) {
         }
-        if (docEvent.target === colorPreview) {
-          return;
+        // Overide this in the implementation
+        updateSelection() {
         }
-        const targetElement = docEvent.target;
-        const parentElement = targetElement.parentElement;
-        if (colorPicker.element.contains(targetElement)) {
-          return;
+        // Overide in de implementation
+        async onClick(_e) {
         }
-        const isIconClick =
-          targetElement.classList?.contains("copy-svg") ||
-          targetElement.classList?.contains("done-icon") ||
-          parentElement?.classList?.contains("copy-svg") ||
-          parentElement?.classList?.contains("done-icon");
-        if (isIconClick) {
-          return;
+        // Overide this in the implementation
+        async createContent() {
         }
-        colorPicker.element.remove();
-        document.removeEventListener("mousedown", _docEventHandler);
       };
-      document.addEventListener("mousedown", _docEventHandler);
-      if (this.theme.cssProperties[name2]) {
-        colorPicker.currentColor = w(this.theme.cssProperties[name2]);
-      }
-      colorPicker.onChange = async () => {
-        colorPreview.style.setProperty("--current-color", colorPicker.currentColor.toHex());
-        await this.saveThemeData();
-        setTheme(this.name);
-      };
-      colorPreview.parentElement?.appendChild(colorPicker.render());
-    }
-    async saveThemeData() {
-      await browser.runtime.sendMessage({
-        action: "markThemeAsModified",
-        name: this.name,
-      });
-      this.colorPreviews.forEach((preview) => {
-        const colorPreview = Object.values(preview)[0];
-        if (!colorPreview) {
-          return;
+      ThemeTile = class extends Tile {
+        name;
+        isFavorite;
+        isCustom;
+        currentCategory;
+        titleElement = document.createElement("span");
+        constructor(name, currentCategory, isFavorite, isCustom = false) {
+          super();
+          this.name = name;
+          this.currentCategory = currentCategory;
+          this.isFavorite = isFavorite;
+          this.isCustom = isCustom;
         }
-        const colorName = colorPreview.dataset.name;
-        if (!colorName) {
-          return;
-        }
-        this.theme.cssProperties[colorName] =
-          colorPreview.style.getPropertyValue("--current-color");
-      });
-      this.theme.displayName = this.displayNameInput.value;
-      if (
-        this.theme.cssProperties["--color-base00"] &&
-        this.theme.cssProperties["--color-base02"] &&
-        this.theme.cssProperties["--color-text"]
-      ) {
-        const base00 = w(this.theme.cssProperties["--color-base00"]);
-        let darkenColor;
-        const splashColor = w(this.theme.cssProperties["--color-text"]);
-        if (base00.brightness() > 0.5) {
-          darkenColor = w("rgba(228, 228, 228, 0.4)");
-          darkenColor = darkenColor.mix(this.theme.cssProperties["--color-base02"], 0.5).alpha(0.4);
-        } else {
-          darkenColor = w("rgba(0,0,0,0.2)");
-          darkenColor = darkenColor.mix(this.theme.cssProperties["--color-base00"], 0.5).alpha(0.3);
-        }
-        this.theme.cssProperties["--color-splashtext"] = splashColor.toHex();
-        this.theme.cssProperties["--darken-background"] = darkenColor.toHex();
-        this.theme.cssProperties["--color-homepage-sidebars-bg"] = darkenColor.alpha(0.1).toHex();
-      }
-      await browser.runtime.sendMessage({
-        action: "saveCustomTheme",
-        data: this.theme,
-        id: this.name,
-      });
-    }
-    createRemoveButton() {
-      const button = document.createElement("button");
-      button.classList.add("remove-custom-theme");
-      button.innerHTML = `Remove theme${trashSvg}`;
-      button.addEventListener("click", () => {
-        this.onRemoveTheme();
-      });
-      return button;
-    }
-    createDisplayNameInput() {
-      this.displayNameInput = createTextInput("", "Name");
-      this.displayNameInput.classList.add("theme-name-input");
-      this.displayNameInput.addEventListener("change", async () => {
-        await this.saveThemeData();
-      });
-      return this.displayNameInput;
-    }
-    createMakeThemeButton() {
-      const button = document.createElement("button");
-      button.classList.add("make-theme-button", "generate-theme-control");
-      button.innerHTML = playSvg;
-      button.addEventListener("click", async () => {
-        if (await isValidImage(this.backgroundImagePreview.src)) {
-          button.innerHTML = loadingSpinnerSvg;
-          button.classList.add("loading");
-          await this.generateTheme().then(() => {
-            button.innerHTML = playSvg;
-            button.classList.remove("loading");
+        async updateCSS() {
+          const theme = await getTheme(this.name);
+          Object.keys(theme.cssProperties).forEach((key) => {
+            this.element.style.setProperty(`${key}-local`, theme.cssProperties[key]);
           });
         }
-      });
-      return button;
-    }
-    createBackgroundImagePreview() {
-      const img = document.createElement("img");
-      img.classList.add("theme-creator-preview-image");
-      return img;
-    }
-    async updateBackgroundImagePreview() {
-      const result = await browser.runtime.sendMessage({
-        action: "getImage",
-        id: this.name,
-      });
-      if (result.metaData.type === "default") {
-        result.imageData = await getExtensionImage(`theme-backgrounds/compressed/${this.name}.jpg`);
-      }
-      if (await isValidImage(result.imageData)) {
-        this.backgroundImagePreview.src = result.imageData;
-        this.content.classList.remove("no-image-available");
-      } else {
-        this.backgroundImagePreview.src = "";
-        this.content.classList.add("no-image-available");
-      }
-    }
-    async getImageColors() {
-      try {
-        const vibrantTester = new Vibrant(this.backgroundImagePreview.src, {
-          quality: 1,
-          colorCount: 256,
-        });
-        const palette = await vibrantTester.getPalette();
-        return palette;
-      } catch (error) {
-        console.error("Error extracting image colors:", error);
-        return null;
-      }
-    }
-    readUserChoice() {
-      const brightnessButton = document.getElementById("brightness-control");
-      const saturationButton = document.getElementById("saturation-control");
-      if (!(brightnessButton && saturationButton)) {
-        return;
-      }
-      const choice = {
-        mode: brightnessButton.checked,
-        saturation: saturationButton.checked,
-      };
-      return choice;
-    }
-    async generateTheme() {
-      const swatchPalette = await this.getImageColors();
-      if (!swatchPalette) {
-        return;
-      }
-      const colordPalette = convertColorPalette(swatchPalette);
-      const choice = this.readUserChoice();
-      if (!choice) {
-        return;
-      }
-      let base00;
-      let base01;
-      let base02;
-      let base03;
-      let accent;
-      let textcolor;
-      let darkenColor;
-      if (choice.mode) {
-        if (choice.saturation) {
-          base00 = colordPalette.DarkVibrant.darken(0.2);
-          base01 = colordPalette.DarkVibrant.darken(0.1);
-          base02 = colordPalette.DarkVibrant;
-          base03 = colordPalette.DarkVibrant.lighten(0.1);
-          accent = colordPalette.Vibrant;
-          textcolor = colordPalette.LightVibrant;
-        } else {
-          base00 = colordPalette.DarkMuted.darken(0.2);
-          base01 = colordPalette.DarkMuted.darken(0.1);
-          base02 = colordPalette.DarkMuted;
-          base03 = colordPalette.DarkMuted.lighten(0.1);
-          accent = colordPalette.Muted;
-          textcolor = colordPalette.LightMuted;
+        async updateTitle() {
+          const theme = await getTheme(this.name);
+          this.titleElement.innerText = theme.displayName;
+          if (this.titleElement.innerText.length > 22) {
+            this.titleElement.innerText = `${theme.displayName.slice(0, 22)}\u2026`;
+          }
         }
-        darkenColor = w("rgba(0,0,0,0.2)").mix(base00.toHex(), 0.5).alpha(0.3);
-      } else {
-        if (choice.saturation) {
-          base00 = colordPalette.LightVibrant.lighten(0.1);
-          base01 = colordPalette.LightVibrant.lighten(0.05);
-          base02 = colordPalette.LightVibrant;
-          base03 = colordPalette.LightVibrant.darken(0.1);
-          accent = colordPalette.Vibrant;
-          textcolor = colordPalette.DarkVibrant;
-        } else {
-          base00 = colordPalette.LightMuted.lighten(0.1);
-          base01 = colordPalette.LightMuted.lighten(0.05);
-          base02 = colordPalette.LightMuted;
-          base03 = colordPalette.LightMuted.darken(0.1);
-          accent = colordPalette.Muted;
-          textcolor = colordPalette.DarkMuted;
+        async createContent() {
+          this.element.appendChild(this.createImageContainer());
+          this.element.appendChild(this.getBottomContainer());
+          await this.updateTitle();
+          await this.updateCSS();
         }
-        darkenColor = w("rgba(228, 228, 228, 0.4)").mix(base02.toHex(), 0.5).alpha(0.4);
-      }
-      this.theme = {
-        displayName: this.theme.displayName,
-        cssProperties: {
-          ...this.theme.cssProperties,
-          "--color-accent": accent.toHex(),
-          "--color-text": textcolor.toHex(),
-          "--color-base00": base00.toHex(),
-          "--color-base01": base01.toHex(),
-          "--color-base02": base02.toHex(),
-          "--color-base03": base03.toHex(),
-          "--darken-background": darkenColor.toHex(),
-          "--color-homepage-sidebars-bg": darkenColor.alpha(0.1).toHex(),
-          "--color-splashtext": textcolor.toHex(),
-        },
-      };
-      await browser.runtime.sendMessage({
-        action: "markThemeAsModified",
-        name: this.name,
-      });
-      await browser.runtime.sendMessage({
-        action: "saveCustomTheme",
-        data: this.theme,
-        id: this.name,
-      });
-      this.updateColorPreviews();
-      await updateTheme(this.name);
-    }
-    createThemeGenerationControls() {
-      class themeGenerationControl {
-        id;
-        element;
-        label;
-        constructor(id) {
-          this.id = id;
-          const { input, label } = this.createThemeGenerationControl(this.id);
-          this.element = input;
-          this.label = label;
-        }
-        createThemeGenerationControl(id) {
-          const input = document.createElement("input");
-          input.type = "checkbox";
-          input.id = id;
-          input.classList.add("theme-maker-input");
-          const label = document.createElement("label");
-          label.htmlFor = id;
-          label.classList.add("theme-maker-label", "generate-theme-control");
-          input.addEventListener("click", () => {
-            this.updateLogo(this.label, this.element.checked);
+        getBottomContainer() {
+          const bottomContainer = document.createElement("div");
+          bottomContainer.classList.add("theme-tile-bottom");
+          this.titleElement.classList.add("theme-tile-title");
+          bottomContainer.appendChild(this.titleElement);
+          const buttonContainer = document.createElement("div");
+          buttonContainer.classList.add("theme-button-container");
+          const duplicateButton = document.createElement("button");
+          duplicateButton.classList.add("bottom-container-button");
+          duplicateButton.innerHTML = copySvg;
+          duplicateButton.addEventListener("click", async () => {
+            await this.duplicate();
           });
-          return { input, label };
-        }
-        updateLogo(_element, _state) {}
-        load() {
-          this.updateLogo(this.label, this.element.checked);
-        }
-        createWrapper() {
-          const wrapper = document.createElement("div");
-          wrapper.style.position = "relative";
-          wrapper.style.display = "flex";
-          wrapper.appendChild(this.element);
-          wrapper.appendChild(this.label);
-          return wrapper;
-        }
-      }
-      function createSmallThemeGenerationContainer() {
-        const container2 = document.createElement("div");
-        container2.classList.add("theme-generation-sub-container");
-        return container2;
-      }
-      const container = document.createElement("div");
-      container.classList.add("theme-controls-container");
-      const brightnessButton = new themeGenerationControl("brightness-control");
-      brightnessButton.updateLogo = (e5, s4) => {
-        const tooltip = e5.parentElement?.querySelector(".smpp-tooltip");
-        if (s4) {
-          if (tooltip) {
-            tooltip.innerHTML = "Dark";
+          const favoriteButton = document.createElement("button");
+          favoriteButton.classList.add("bottom-container-button");
+          favoriteButton.innerHTML = heartSvg;
+          favoriteButton.addEventListener("click", async () => {
+            await this.favoriteToggle();
+          });
+          if (this.isFavorite) {
+            this.element.classList.add("is-favorite");
           }
-          e5.innerHTML = moonSvg;
-        } else {
-          if (tooltip) {
-            tooltip.innerHTML = "Light";
+          const shareButton = document.createElement("button");
+          shareButton.classList.add("bottom-container-button");
+          shareButton.innerHTML = shareSvg;
+          shareButton.addEventListener("click", async () => {
+            await this.share();
+          });
+          buttonContainer.appendChild(shareButton);
+          buttonContainer.appendChild(duplicateButton);
+          buttonContainer.appendChild(favoriteButton);
+          if (this.isCustom) {
+            const editButton = document.createElement("button");
+            editButton.classList.add("bottom-container-button");
+            editButton.innerHTML = editIconSvg;
+            editButton.addEventListener("click", async () => {
+              await this.edit();
+            });
+            buttonContainer.appendChild(editButton);
           }
-          e5.innerHTML = sunSvg;
+          bottomContainer.appendChild(buttonContainer);
+          return bottomContainer;
+        }
+        createImageContainer() {
+          const imageContainer = document.createElement("div");
+          imageContainer.classList.add("image-container");
+          return imageContainer;
+        }
+        updateSelection() {
+          if (currentThemeName === this.name) {
+            this.element.classList.add("is-selected");
+          } else {
+            this.element.classList.remove("is-selected");
+          }
+        }
+        async updateImage(currentTheme2, forceReload = false) {
+          if (this.name === currentTheme2 || forceReload) {
+            const imageURL = await getImageURL(
+              this.name,
+              async () => {
+                return await getExtensionImage(`theme-backgrounds/compressed/${this.name}.jpg`);
+              },
+              true
+            );
+            if (await isValidImage(await imageURL.url)) {
+              this.element.style.setProperty("--background-image-local", `url(${await imageURL.url})`);
+            } else {
+              this.element.style.setProperty("--background-image-local", "url()");
+            }
+            if (isFirefox && imageURL.type === "file") {
+              const imageContainer = this.element.querySelector(".image-container");
+              if (!imageContainer) {
+                return;
+              }
+              const stupidImageContainer = document.createElement("img");
+              stupidImageContainer.classList.add("image-container", "firefox-container");
+              if (await isValidImage(imageURL.url)) {
+                stupidImageContainer.src = imageURL.url;
+              } else {
+                stupidImageContainer.src = "";
+              }
+              const bottomContainer = this.element.querySelector(".theme-tile-bottom");
+              if (!bottomContainer) {
+                return;
+              }
+              imageContainer.remove();
+              this.element.prepend(stupidImageContainer);
+            } else if (isFirefox) {
+              const firefoxImageContainer = this.element.querySelector(".firefox-container");
+              if (firefoxImageContainer) {
+                firefoxImageContainer.remove();
+                this.element.prepend(this.createImageContainer());
+                await this.updateImage(currentTheme2, forceReload);
+              }
+            }
+          }
+        }
+        async onClick(e5) {
+          if (e5.target instanceof HTMLElement) {
+            const target = e5.target;
+            if (target.classList.contains("theme-tile-title") || target.classList.contains("image-container") || target.classList.contains("theme-tile")) {
+              await updateTheme(this.name);
+              await settingsWindow.loadPage(false);
+              await loadQuickSettings();
+            }
+          }
+        }
+        async favoriteToggle() {
+          this.isFavorite = !this.isFavorite;
+          const data = await browser.runtime.sendMessage({
+            action: "getSettingsData"
+          });
+          const updateFavorite = async () => {
+            await browser.runtime.sendMessage({
+              action: "setSetting",
+              name: "appearance.quickSettingsThemes",
+              data: quickSettingsThemes
+            });
+            this.element.classList.toggle("is-favorite");
+            this.onFavoriteToggle();
+          };
+          let quickSettingsThemes = data.appearance.quickSettingsThemes;
+          if (this.isFavorite) {
+            quickSettingsThemes.push(this.name);
+            await updateFavorite();
+          } else {
+            quickSettingsThemes = quickSettingsThemes.filter((name) => {
+              return name !== this.name;
+            });
+            if (this.currentCategory === "quickSettings") {
+              this.element.addEventListener("animationend", updateFavorite);
+              this.element.classList.add("being-removed");
+            } else {
+              await updateFavorite();
+            }
+          }
+        }
+        async edit() {
+          await updateTheme(this.name);
+          Promise.all([settingsWindow.loadPage(false), loadQuickSettings()]);
+          startCustomThemeCreator(await getTheme(this.name), this.name);
+        }
+        async duplicate() {
+          const newThemeName = await browser.runtime.sendMessage({
+            action: "saveCustomTheme",
+            data: await getTheme(this.name)
+          });
+          const result = await browser.runtime.sendMessage({
+            action: "getImage",
+            id: this.name
+          });
+          const compressedResult = await browser.runtime.sendMessage({
+            action: "getImage",
+            id: `compressed-${this.name}`
+          });
+          if (result.metaData.type === "default") {
+            const base64 = await convertLinkToBase64(
+              await getExtensionImage(`theme-backgrounds/${this.name}.jpg`)
+            );
+            if (base64) {
+              result.imageData = base64;
+            }
+            const compressedBase64 = await convertLinkToBase64(
+              await getExtensionImage(`theme-backgrounds/compressed/${this.name}.jpg`)
+            );
+            if (compressedBase64) {
+              compressedResult.imageData = compressedBase64;
+            }
+            if (!this.isCustom) {
+              result.metaData.type = "file";
+              result.metaData.link = `${this.name}.jpg`;
+              compressedResult.metaData.type = "file";
+              compressedResult.metaData.link = `${this.name}.jpg`;
+            }
+          }
+          if (await isValidImage(result.imageData)) {
+            await browser.runtime.sendMessage({
+              action: "setImage",
+              id: newThemeName,
+              data: result
+            });
+          }
+          if (await isValidImage(compressedResult.imageData)) {
+            await browser.runtime.sendMessage({
+              action: "setImage",
+              id: `compressed-${newThemeName}`,
+              data: compressedResult
+            });
+          }
+          this.onDuplicate(newThemeName);
+          new Toast("Theme succesfully duplicated", "succes").render();
+        }
+        async share() {
+          const shareDialog = new Dialog("themeSharing", true);
+          const linkOutput = document.createElement("a");
+          linkOutput.classList.add("link-output");
+          linkOutput.target = "_blank";
+          const copyToClipboardButton = document.createElement("button");
+          copyToClipboardButton.classList.add("copy-hex-button");
+          copyToClipboardButton.classList.add("copy-link-button");
+          const copyToClipboard = () => {
+            if (shareUrl) {
+              navigator.clipboard.writeText(shareUrl);
+              const svg = copyToClipboardButton.querySelector("svg");
+              if (!svg) {
+                return;
+              }
+              svg.style.fill = "var(--color-text)";
+              copyToClipboardButton.innerHTML = doneSvg;
+              setTimeout(() => {
+                svg.style.fill = "none";
+                copyToClipboardButton.innerHTML = copySvg;
+              }, 1e3);
+              new Toast("Theme link copied to clipboard", "succes").render();
+            } else {
+              new Toast("Theme link is not ready yet", "error").render();
+            }
+          };
+          copyToClipboardButton.addEventListener("click", copyToClipboard);
+          copyToClipboardButton.innerHTML = loadingSpinnerSvg;
+          let shareUrl = null;
+          shareDialog.renderContent = async () => {
+            function getEditableValues(cssProperties) {
+              const nonEditableValues = [
+                "--color-homepage-sidebars-bg",
+                "--darken-background",
+                "--color-splashtext"
+              ];
+              const editableValues = Object.keys(cssProperties).filter((property) => {
+                return !nonEditableValues.includes(property);
+              });
+              return editableValues;
+            }
+            function createColorPreview(name) {
+              const colorPreview = document.createElement("div");
+              colorPreview.classList.add("color-preview-bubble");
+              if (theme.cssProperties[name]) {
+                colorPreview.style.setProperty("--current-color", theme.cssProperties[name]);
+              }
+              return colorPreview;
+            }
+            function generateColorPreviews(editableValues) {
+              const colorPreviews = editableValues.map((colorName) => {
+                const colorPreview = {};
+                colorPreview[colorName] = createColorPreview(colorName);
+                return colorPreview;
+              });
+              return colorPreviews;
+            }
+            const element = document.createElement("div");
+            element.classList.add("share-dialog-content");
+            const title = document.createElement("h1");
+            title.innerText = (await getTheme(this.name)).displayName;
+            const subTitle = document.createElement("h2");
+            subTitle.innerText = "Share theme:";
+            linkOutput.innerText = "Loading...";
+            linkOutput.style.pointerEvents = "none";
+            const copyContainer = document.createElement("div");
+            copyContainer.classList.add("copy-container");
+            const tile = document.createElement("div");
+            tile.classList.add("sharing-tile");
+            const theme = await getTheme(this.name);
+            Object.keys(theme.cssProperties).forEach((key) => {
+              element.style.setProperty(`${key}-local`, theme.cssProperties[key]);
+            });
+            const imageContainer = document.createElement("div");
+            imageContainer.classList.add("sharing-image-container");
+            const imageURL = await getImageURL(
+              this.name,
+              async () => {
+                return await getExtensionImage(`theme-backgrounds/compressed/${this.name}.jpg`);
+              },
+              false
+            );
+            const image = document.createElement("img");
+            image.classList.add("sharing-image");
+            if (await isValidImage(await imageURL.url)) {
+              imageContainer.appendChild(image);
+            }
+            image.src = imageURL.url;
+            const displayNameLength = title.innerText.length;
+            if (displayNameLength < 20) {
+              title.style.fontSize = "2rem";
+            } else if (displayNameLength < 25) {
+              title.style.fontSize = "1.5rem";
+            } else if (displayNameLength < 30) {
+              title.style.fontSize = "1.2rem";
+            } else {
+              title.style.fontSize = "1.2rem";
+              title.innerText = `${title.innerText.slice(0, 30)}\u2026`;
+            }
+            console.log(imageContainer);
+            imageContainer.appendChild(title);
+            console.log(imageContainer);
+            tile.appendChild(imageContainer);
+            const colorPreviewsContainer = document.createElement("div");
+            colorPreviewsContainer.classList.add("sharing-color-previews");
+            Object.values(generateColorPreviews(getEditableValues(theme.cssProperties))).forEach(
+              (preview) => {
+                const actualPreview = Object.values(preview)[0];
+                if (actualPreview) {
+                  colorPreviewsContainer.appendChild(actualPreview);
+                }
+              }
+            );
+            tile.appendChild(colorPreviewsContainer);
+            copyContainer.appendChild(linkOutput);
+            copyContainer.appendChild(copyToClipboardButton);
+            element.appendChild(subTitle);
+            tile.appendChild(copyContainer);
+            element.appendChild(tile);
+            return element;
+          };
+          await shareDialog.create();
+          shareDialog.show();
+          new Toast("Uploading theme...", "info").render();
+          const resp = await browser.runtime.sendMessage({
+            action: "shareTheme",
+            name: this.name
+          });
+          if (resp.error) {
+            console.error("Failed to share theme", resp.error);
+            linkOutput.innerText = "Failed to share theme";
+            shareDialog.element.classList.add("error-theme-sharing");
+            copyToClipboardButton.innerHTML = errorSvg;
+            copyToClipboardButton.style.pointerEvents = "none";
+            new Toast("Failed to share theme", "error").render();
+          } else {
+            shareUrl = resp.shareUrl;
+            console.log(linkOutput);
+            linkOutput.innerText = `${resp.shareUrl.slice(0, 32)}\u2026`;
+            linkOutput.style.pointerEvents = "all";
+            linkOutput.addEventListener("click", copyToClipboard);
+            copyToClipboardButton.innerHTML = copySvg;
+            new Toast("Theme uploaded", "succes").render();
+          }
+          this.onShare();
+        }
+        // Overide in de implementation
+        async onFavoriteToggle() {
+        }
+        // Overide in de implementation
+        async onShare() {
+        }
+        // Overide in de implementation
+        async onDuplicate(_newThemeName) {
         }
       };
-      const saturationButton = new themeGenerationControl("saturation-control");
-      saturationButton.updateLogo = (e5, s4) => {
-        const tooltip = e5.parentElement?.querySelector(".smpp-tooltip");
-        if (s4) {
-          if (tooltip) {
-            tooltip.innerHTML = "Vibrant";
+      ThemeFolder = class extends Tile {
+        category;
+        constructor(category) {
+          super();
+          this.category = category;
+        }
+        async createContent() {
+          const firstThemeInCategory = await browser.runtime.sendMessage({
+            action: "getFirstThemeInCategory",
+            category: this.category,
+            includeHidden: true
+          });
+          if (!firstThemeInCategory) {
+            return;
           }
-          e5.innerHTML = magicWandSvg;
-        } else {
-          if (tooltip) {
-            tooltip.innerHTML = "Muted";
+          const theme = await browser.runtime.sendMessage({
+            action: "getTheme",
+            name: firstThemeInCategory
+          });
+          Object.keys(theme.cssProperties).forEach((key) => {
+            this.element.style.setProperty(`${key}-local`, theme.cssProperties[key]);
+          });
+          if (this.category === "custom" || this.category === "quickSettings") {
+            this.element.classList.add("use-default-colors");
           }
-          e5.innerHTML = wandSvg;
+          this.element.style.setProperty("--background-image-local", "url()");
+          this.element.appendChild(this.createImageContainer());
+          this.element.appendChild(this.createBottomContainer());
+        }
+        createBottomContainer() {
+          const bottomContainer = document.createElement("div");
+          bottomContainer.classList.add("theme-tile-bottom");
+          const title = document.createElement("span");
+          title.innerText = getFancyCategoryName(this.category);
+          if (this.category === "quickSettings") {
+            title.innerText = "Favorites";
+          }
+          title.classList.add("theme-tile-title");
+          bottomContainer.appendChild(title);
+          return bottomContainer;
+        }
+        createImageContainer() {
+          const imageContainer = document.createElement("div");
+          let svg;
+          switch (this.category) {
+            case "quickSettings":
+              svg = heartSvg;
+              break;
+            case "light":
+              svg = sunSvg;
+              break;
+            case "dark":
+              svg = moonSvg;
+              break;
+            case "seasonal":
+              svg = pineSvg;
+              break;
+            case "custom":
+              svg = editIconSvg;
+              break;
+            default:
+              svg = folderSvg;
+              break;
+          }
+          imageContainer.innerHTML = svg;
+          imageContainer.classList.add("image-container");
+          return imageContainer;
         }
       };
-      const firstSubContainer = createSmallThemeGenerationContainer();
-      const brightnessButtonWrapper = brightnessButton.createWrapper();
-      brightnessButtonWrapper.appendChild(createHoverTooltip("Brightness", "horizontal"));
-      const saturationButtonWrapper = saturationButton.createWrapper();
-      saturationButtonWrapper.appendChild(createHoverTooltip("Saturation", "horizontal"));
-      firstSubContainer.appendChild(brightnessButtonWrapper);
-      firstSubContainer.appendChild(saturationButtonWrapper);
-      const secondSubContainer = createSmallThemeGenerationContainer();
-      secondSubContainer.appendChild(this.createMakeThemeButton());
-      container.appendChild(firstSubContainer);
-      container.appendChild(secondSubContainer);
-      brightnessButton.load();
-      saturationButton.load();
-      return container;
-    }
-    createColorPickers() {
-      const colorPickerElement = document.createElement("div");
-      colorPickerElement.classList.add("custom-theme-color-picker-container");
-      this.colorPreviews.forEach((preview) => {
-        const colorPreviewWrapper = document.createElement("div");
-        colorPreviewWrapper.classList.add("color-picker-preview-wrapper");
-        const colorPreview = Object.values(preview)[0];
-        if (colorPreview) {
-          colorPreviewWrapper.appendChild(colorPreview);
+      AddCustomTheme = class extends Tile {
+        createImageContainer() {
+          const imageContainer = document.createElement("div");
+          const svg = plusSVG;
+          imageContainer.innerHTML = svg;
+          imageContainer.classList.add("image-container");
+          return imageContainer;
         }
-        const colorName = Object.keys(preview)[0];
-        if (colorName) {
-          colorPreviewWrapper.appendChild(
-            createHoverTooltip(this.convertPropertyName(colorName), "vertical"),
-          );
+        createBottomContainer() {
+          const bottomContainer = document.createElement("div");
+          bottomContainer.classList.add("theme-tile-bottom");
+          const title = document.createElement("span");
+          title.classList.add("theme-tile-title");
+          title.innerText = "Create theme";
+          bottomContainer.appendChild(title);
+          return bottomContainer;
         }
-        colorPickerElement.appendChild(colorPreviewWrapper);
-      });
-      return colorPickerElement;
+        async onClick() {
+          const newTheme = await browser.runtime.sendMessage({
+            action: "saveCustomTheme",
+            data: await getTheme("defaultCustom")
+          });
+          await settingsWindow.themeSelector.updateSelectorContent();
+          await settingsWindow.loadPage(false);
+          await updateTheme(newTheme);
+          startCustomThemeCreator(await getTheme("defaultCustom"), newTheme);
+        }
+        async createContent() {
+          this.element.classList.add("use-default-colors");
+          this.element.classList.add("create-theme-button");
+          this.element.appendChild(this.createImageContainer());
+          this.element.appendChild(this.createBottomContainer());
+        }
+      };
+      noThemes = class extends Tile {
+        createImageContainer() {
+          const imageContainer = document.createElement("div");
+          const svg = brokenHeartSvg;
+          imageContainer.innerHTML = svg;
+          imageContainer.classList.add("image-container");
+          return imageContainer;
+        }
+        createBottomContainer() {
+          const bottomContainer = document.createElement("div");
+          bottomContainer.classList.add("theme-tile-bottom");
+          const title = document.createElement("span");
+          title.classList.add("theme-tile-title");
+          title.innerText = "No themes";
+          bottomContainer.appendChild(title);
+          return bottomContainer;
+        }
+        async createContent() {
+          this.element.classList.add("use-default-colors");
+          this.element.classList.add("no-themes");
+          this.element.appendChild(this.createImageContainer());
+          this.element.appendChild(this.createBottomContainer());
+        }
+      };
+      ThemeSelector = class {
+        element = document.createElement("div");
+        content = document.createElement("div");
+        topContainer = document.createElement("div");
+        currentCategory = "all";
+        currentTiles = [];
+        contentWidth = 0;
+        createTopContainer() {
+          this.topContainer = document.createElement("div");
+          this.topContainer.classList.add("theme-top-container");
+        }
+        render() {
+          this.element.innerHTML = "";
+          this.createTopContainer();
+          this.createContentContainer();
+          window.addEventListener("resize", () => {
+            this.updateSizes();
+            this.updateContentHeight();
+          });
+          this.element.appendChild(this.topContainer);
+          this.renderSelectorContent();
+          return this.element;
+        }
+        async updateImages(forceReload = false) {
+          this.currentTiles.forEach(async (tile) => {
+            await tile.updateImage(currentThemeName, forceReload);
+          });
+        }
+        updateSizes() {
+          this.contentWidth = this.content.getBoundingClientRect().width;
+        }
+        async renderSelectorContent() {
+          this.content.innerHTML = "";
+          this.element.appendChild(this.content);
+          this.updateTopContainer();
+          if (this.currentCategory === "all") {
+            await this.renderFolderTiles();
+          } else {
+            await this.renderThemeTiles();
+          }
+          this.updateSizes();
+          this.updateContentHeight();
+        }
+        // this is used if some of the correct content is already loaded
+        async updateSelectorContent() {
+          if (this.currentCategory === "all") {
+            await this.renderFolderTiles();
+            return;
+          }
+          await this.updateThemeTiles();
+          this.updateImages();
+        }
+        async updateThemeTiles() {
+          if (this.currentCategory === "all") {
+            return;
+          }
+          const themes2 = await browser.runtime.sendMessage({
+            action: "getThemes",
+            categories: [this.currentCategory],
+            includeHidden: true
+          });
+          const data = await browser.runtime.sendMessage({
+            action: "getSettingsData"
+          });
+          const visibleThemeTiles = this.content.querySelectorAll(".theme-tile");
+          const visibleThemeTilesArray = [];
+          visibleThemeTiles.forEach((element) => {
+            visibleThemeTilesArray.push(element);
+          });
+          const visibleThemeNames = visibleThemeTilesArray.map((element) => {
+            return element.dataset.name;
+          });
+          const correctThemeNames = Object.keys(themes2).map((themeName) => {
+            return themeName;
+          });
+          const addMissingTiles = async (visibleThemeNames2, correctThemeNames2) => {
+            const customThemes = await browser.runtime.sendMessage({
+              action: "getThemes",
+              categories: ["custom"],
+              includeHidden: true
+            });
+            correctThemeNames2.forEach(async (themeName) => {
+              if (!visibleThemeNames2.includes(themeName)) {
+                const isFavorite = data.appearance.quickSettingsThemes.includes(themeName);
+                const newTile = this.createThemeTile(
+                  themeName,
+                  isFavorite,
+                  Object.keys(customThemes).includes(themeName)
+                );
+                const createThemeButton = this.content.querySelector(".create-theme-button");
+                if (createThemeButton) {
+                  createThemeButton.insertAdjacentElement("beforebegin", await newTile.render());
+                } else {
+                  this.content.appendChild(await newTile.render());
+                }
+                this.currentTiles.push(newTile);
+                this.updateContentHeight();
+              }
+            });
+          };
+          const removeIncorrectTiles = async (visibleThemeNames2, correctThemeNames2) => {
+            visibleThemeNames2.forEach(async (themeName) => {
+              if (!correctThemeNames2.includes(themeName)) {
+                const element = visibleThemeTilesArray.find((element2) => {
+                  if (element2.dataset.name === themeName) {
+                    return element2;
+                  }
+                  return false;
+                });
+                if (!element) {
+                  return;
+                }
+                if (element.classList.contains("create-theme-button")) {
+                  return;
+                }
+                this.content.removeChild(element);
+                this.currentTiles = this.currentTiles.filter((tile) => {
+                  if (tile instanceof AddCustomTheme) {
+                    return true;
+                  }
+                  if (tile instanceof ThemeTile) {
+                    return tile.name !== themeName;
+                  }
+                  return false;
+                });
+              }
+              this.updateContentHeight();
+            });
+          };
+          const updateLocalCSS = async () => {
+            this.currentTiles.forEach((tile) => {
+              if (tile.name === currentThemeName) {
+                tile.updateCSS();
+                tile.updateTitle();
+              }
+            });
+          };
+          if (Object.keys(themes2).length === 0 && this.currentCategory !== "custom") {
+            this.currentTiles.push(new noThemes());
+            await this.renderTiles(this.currentTiles);
+          }
+          await addMissingTiles(visibleThemeNames, correctThemeNames);
+          await removeIncorrectTiles(visibleThemeNames, correctThemeNames);
+          updateLocalCSS();
+        }
+        updateTopContainer() {
+          this.topContainer.innerHTML = "";
+          const title = document.createElement("h2");
+          title.classList.add("current-category");
+          if (this.currentCategory !== "all") {
+            const backButton = document.createElement("button");
+            backButton.innerHTML = chevronLeftSvg;
+            backButton.addEventListener("click", () => this.changeCategory("all"));
+            this.topContainer.appendChild(backButton);
+          }
+          title.innerText = `${getFancyCategoryName(this.currentCategory)} themes`;
+          if (this.currentCategory === "quickSettings") {
+            title.innerText = "Favorite themes";
+          }
+          this.topContainer.appendChild(title);
+        }
+        async renderTiles(tiles) {
+          function getTileDelay(number) {
+            if (number < 8) {
+              return 20;
+            }
+            if (number < 12) {
+              return 15;
+            }
+            return 7;
+          }
+          this.content.style.height = `${this.calculateContentHeight(tiles.length)}px`;
+          const delayAmount = getTileDelay(tiles.length);
+          for (let i5 = 1; i5 <= tiles.length; i5++) {
+            const tile = tiles[i5 - 1];
+            if (!tile) {
+              break;
+            }
+            await tile.render();
+            await tile.updateImage(currentThemeName, true);
+            this.content.appendChild(tile.element);
+            if (document.body.classList.contains("enableAnimations")) {
+              await delay(delayAmount);
+            }
+          }
+        }
+        createContentContainer() {
+          this.content = document.createElement("div");
+          this.content.classList.add("theme-tiles");
+        }
+        calculateContentHeight(tileAmount) {
+          const TILE_HEIGHT = 104;
+          const TILE_WIDTH = 168;
+          const GAP = 6;
+          const totalWidth = this.contentWidth;
+          const tilesPerRow = Math.floor((totalWidth + GAP) / (TILE_WIDTH + GAP));
+          const numRows = Math.ceil(tileAmount / tilesPerRow);
+          const totalHeight = numRows * TILE_HEIGHT + (numRows - 1) * GAP;
+          return totalHeight;
+        }
+        async renderFolderTiles() {
+          const categories = await browser.runtime.sendMessage({
+            action: "getThemeCategories",
+            includeEmpty: true,
+            includeHidden: true
+          });
+          const tiles = Object.keys(categories).map((category) => {
+            const tile = new ThemeFolder(category);
+            tile.onClick = async () => {
+              this.changeCategory(category);
+            };
+            return tile;
+          });
+          this.currentTiles = tiles;
+          await this.renderTiles(tiles);
+        }
+        updateContentHeight() {
+          this.content.style.height = `${String(this.calculateContentHeight(this.currentTiles.length))}px`;
+        }
+        createThemeTile(name, isFavorite, isCustom) {
+          const tile = new ThemeTile(name, this.currentCategory, isFavorite, isCustom);
+          tile.element.dataset.name = name;
+          tile.onDuplicate = async (newThemeName) => {
+            if (isCustom) {
+              await this.updateSelectorContent();
+            }
+            await updateTheme(newThemeName);
+            await this.changeCategory("custom");
+            Promise.all([settingsWindow.loadPage(false)]);
+            startCustomThemeCreator(await getTheme(newThemeName), newThemeName);
+          };
+          tile.onFavoriteToggle = async () => {
+            await settingsWindow.loadPage(false);
+            await loadQuickSettings();
+            if (this.currentCategory === "quickSettings") {
+              await this.updateSelectorContent();
+            }
+          };
+          return tile;
+        }
+        async renderThemeTiles() {
+          const themes2 = await browser.runtime.sendMessage({
+            action: "getThemes",
+            categories: [this.currentCategory],
+            includeHidden: true
+          });
+          const customThemes = await browser.runtime.sendMessage({
+            action: "getThemes",
+            categories: ["custom"],
+            includeHidden: true
+          });
+          const data = await browser.runtime.sendMessage({
+            action: "getSettingsData"
+          });
+          const tiles = Object.keys(themes2).map((name) => {
+            const isFavorite = data.appearance.quickSettingsThemes.includes(name);
+            const isCustom = Object.keys(customThemes).includes(name);
+            return this.createThemeTile(name, isFavorite, isCustom);
+          });
+          if (this.currentCategory === "custom") {
+            tiles.push(new AddCustomTheme());
+          }
+          this.currentTiles = tiles;
+          if (Object.keys(themes2).length === 0 && this.currentCategory !== "custom") {
+            this.currentTiles.push(new noThemes());
+          }
+          await this.renderTiles(this.currentTiles);
+        }
+        async changeCategory(category) {
+          this.currentCategory = category;
+          await this.renderSelectorContent();
+        }
+      };
+      CustomThemeCreator = class extends Dialog {
+        theme;
+        name;
+        editableValues;
+        colorPreviews;
+        backgroundImageInput;
+        backgroundImagePreview;
+        themeGeneratorIsOpen = false;
+        imagePreviewContainer;
+        getEditableValues(cssProperties) {
+          const nonEditableValues = [
+            "--color-homepage-sidebars-bg",
+            "--darken-background",
+            "--color-splashtext"
+          ];
+          const editableValues = Object.keys(cssProperties).filter((property) => {
+            return !nonEditableValues.includes(property);
+          });
+          return editableValues;
+        }
+        createColorPreview(name) {
+          const colorPreview = document.createElement("div");
+          colorPreview.classList.add("color-preview-bubble");
+          if (this.theme.cssProperties[name]) {
+            colorPreview.style.setProperty("--current-color", this.theme.cssProperties[name]);
+          }
+          colorPreview.dataset.name = name;
+          colorPreview.addEventListener("click", (e5) => {
+            if (!colorPreview.parentElement?.querySelector(".floating-picker")) {
+              this.openColorPicker(name, colorPreview, e5);
+            }
+          });
+          return colorPreview;
+        }
+        updateColorPreviews() {
+          this.colorPreviews.forEach((preview) => {
+            const previewName = Object.keys(preview)[0];
+            const element = Object.values(preview)[0];
+            if (previewName && element) {
+              const newValue = this.theme.cssProperties[previewName];
+              if (newValue) {
+                element.style.setProperty("--current-color", newValue);
+              }
+            }
+          });
+        }
+        generateColorPreviews(editableValues) {
+          const colorPreviews = editableValues.map((colorName) => {
+            const colorPreview = {};
+            colorPreview[colorName] = this.createColorPreview(colorName);
+            return colorPreview;
+          });
+          return colorPreviews;
+        }
+        convertPropertyName(name) {
+          const propertyNames = {
+            "--color-accent": "Accent Color",
+            "--color-text": "Text Color",
+            "--color-base00": "Background",
+            "--color-base01": "Secondary Background",
+            "--color-base02": "Tertiary Background",
+            "--color-base03": "Border Color"
+          };
+          return propertyNames[name];
+        }
+        constructor(theme, name) {
+          super("customThemeCreator", true);
+          this.theme = theme;
+          this.name = name;
+          this.editableValues = this.getEditableValues(theme.cssProperties);
+          this.colorPreviews = this.generateColorPreviews(this.editableValues);
+          this.backgroundImageInput = new ImageSelector(this.name, true);
+          this.backgroundImageInput.id = this.name;
+          this.imagePreviewContainer = document.createElement("div");
+          this.backgroundImageInput.onStore = async () => {
+            updateTheme(this.name);
+            this.updateBackgroundImagePreview();
+          };
+          this.backgroundImagePreview = this.createBackgroundImagePreview();
+        }
+        content = document.createElement("div");
+        displayNameInput = document.createElement("input");
+        openColorPicker(name, colorPreview, e5) {
+          const colorPicker = new ColorPicker();
+          colorPicker.element.style.position = "absolute";
+          colorPicker.element.classList.add("floating-picker");
+          const _docEventHandler = (docEvent) => {
+            if (docEvent === e5) {
+              return;
+            }
+            if (!(docEvent.target instanceof Node)) {
+              return;
+            }
+            if (docEvent.target === colorPreview) {
+              return;
+            }
+            const targetElement = docEvent.target;
+            const parentElement = targetElement.parentElement;
+            if (colorPicker.element.contains(targetElement)) {
+              return;
+            }
+            const isIconClick = targetElement.classList?.contains("copy-svg") || targetElement.classList?.contains("done-icon") || parentElement?.classList?.contains("copy-svg") || parentElement?.classList?.contains("done-icon");
+            if (isIconClick) {
+              return;
+            }
+            colorPicker.element.remove();
+            document.removeEventListener("mousedown", _docEventHandler);
+          };
+          document.addEventListener("mousedown", _docEventHandler);
+          if (this.theme.cssProperties[name]) {
+            colorPicker.currentColor = w(this.theme.cssProperties[name]);
+          }
+          colorPicker.onChange = async () => {
+            colorPreview.style.setProperty("--current-color", colorPicker.currentColor.toHex());
+            await this.saveThemeData();
+            setTheme(this.name);
+          };
+          colorPreview.parentElement?.appendChild(colorPicker.render());
+        }
+        async saveThemeData() {
+          await browser.runtime.sendMessage({
+            action: "markThemeAsModified",
+            name: this.name
+          });
+          this.colorPreviews.forEach((preview) => {
+            const colorPreview = Object.values(preview)[0];
+            if (!colorPreview) {
+              return;
+            }
+            const colorName = colorPreview.dataset.name;
+            if (!colorName) {
+              return;
+            }
+            this.theme.cssProperties[colorName] = colorPreview.style.getPropertyValue("--current-color");
+          });
+          this.theme.displayName = this.displayNameInput.value;
+          if (this.theme.cssProperties["--color-base00"] && this.theme.cssProperties["--color-base02"] && this.theme.cssProperties["--color-text"]) {
+            const base00 = w(this.theme.cssProperties["--color-base00"]);
+            let darkenColor;
+            const splashColor = w(this.theme.cssProperties["--color-text"]);
+            if (base00.brightness() > 0.5) {
+              darkenColor = w("rgba(228, 228, 228, 0.4)");
+              darkenColor = darkenColor.mix(this.theme.cssProperties["--color-base02"], 0.5).alpha(0.4);
+            } else {
+              darkenColor = w("rgba(0,0,0,0.2)");
+              darkenColor = darkenColor.mix(this.theme.cssProperties["--color-base00"], 0.5).alpha(0.3);
+            }
+            this.theme.cssProperties["--color-splashtext"] = splashColor.toHex();
+            this.theme.cssProperties["--darken-background"] = darkenColor.toHex();
+            this.theme.cssProperties["--color-homepage-sidebars-bg"] = darkenColor.alpha(0.1).toHex();
+          }
+          await browser.runtime.sendMessage({
+            action: "saveCustomTheme",
+            data: this.theme,
+            id: this.name
+          });
+        }
+        createRemoveButton() {
+          const button = document.createElement("button");
+          button.classList.add("remove-custom-theme");
+          button.innerHTML = `Remove theme${trashSvg}`;
+          button.addEventListener("click", () => {
+            this.onRemoveTheme();
+          });
+          return button;
+        }
+        createDisplayNameInput() {
+          this.displayNameInput = createTextInput("", "Name");
+          this.displayNameInput.classList.add("theme-name-input");
+          this.displayNameInput.addEventListener("change", async () => {
+            await this.saveThemeData();
+          });
+          return this.displayNameInput;
+        }
+        createMakeThemeButton() {
+          const button = document.createElement("button");
+          button.classList.add("make-theme-button", "generate-theme-control");
+          button.innerHTML = playSvg;
+          button.addEventListener("click", async () => {
+            if (await isValidImage(this.backgroundImagePreview.src)) {
+              button.innerHTML = loadingSpinnerSvg;
+              button.classList.add("loading");
+              await this.generateTheme().then(() => {
+                button.innerHTML = playSvg;
+                button.classList.remove("loading");
+              });
+            }
+          });
+          return button;
+        }
+        createBackgroundImagePreview() {
+          const img = document.createElement("img");
+          img.classList.add("theme-creator-preview-image");
+          return img;
+        }
+        async updateBackgroundImagePreview() {
+          const result = await browser.runtime.sendMessage({
+            action: "getImage",
+            id: this.name
+          });
+          if (result.metaData.type === "default") {
+            result.imageData = await getExtensionImage(`theme-backgrounds/compressed/${this.name}.jpg`);
+          }
+          if (await isValidImage(result.imageData)) {
+            this.backgroundImagePreview.src = result.imageData;
+            this.content.classList.remove("no-image-available");
+          } else {
+            this.backgroundImagePreview.src = "";
+            this.content.classList.add("no-image-available");
+          }
+        }
+        async getImageColors() {
+          try {
+            const vibrantTester = new Vibrant(this.backgroundImagePreview.src, {
+              quality: 1,
+              colorCount: 256
+            });
+            const palette = await vibrantTester.getPalette();
+            return palette;
+          } catch (error) {
+            console.error("Error extracting image colors:", error);
+            return null;
+          }
+        }
+        readUserChoice() {
+          const brightnessButton = document.getElementById("brightness-control");
+          const saturationButton = document.getElementById("saturation-control");
+          if (!(brightnessButton && saturationButton)) {
+            return;
+          }
+          const choice = {
+            mode: brightnessButton.checked,
+            saturation: saturationButton.checked
+          };
+          return choice;
+        }
+        async generateTheme() {
+          const swatchPalette = await this.getImageColors();
+          if (!swatchPalette) {
+            return;
+          }
+          const colordPalette = convertColorPalette(swatchPalette);
+          const choice = this.readUserChoice();
+          if (!choice) {
+            return;
+          }
+          let base00;
+          let base01;
+          let base02;
+          let base03;
+          let accent;
+          let textcolor;
+          let darkenColor;
+          if (choice.mode) {
+            if (choice.saturation) {
+              base00 = colordPalette.DarkVibrant.darken(0.2);
+              base01 = colordPalette.DarkVibrant.darken(0.1);
+              base02 = colordPalette.DarkVibrant;
+              base03 = colordPalette.DarkVibrant.lighten(0.1);
+              accent = colordPalette.Vibrant;
+              textcolor = colordPalette.LightVibrant;
+            } else {
+              base00 = colordPalette.DarkMuted.darken(0.2);
+              base01 = colordPalette.DarkMuted.darken(0.1);
+              base02 = colordPalette.DarkMuted;
+              base03 = colordPalette.DarkMuted.lighten(0.1);
+              accent = colordPalette.Muted;
+              textcolor = colordPalette.LightMuted;
+            }
+            darkenColor = w("rgba(0,0,0,0.2)").mix(base00.toHex(), 0.5).alpha(0.3);
+          } else {
+            if (choice.saturation) {
+              base00 = colordPalette.LightVibrant.lighten(0.1);
+              base01 = colordPalette.LightVibrant.lighten(0.05);
+              base02 = colordPalette.LightVibrant;
+              base03 = colordPalette.LightVibrant.darken(0.1);
+              accent = colordPalette.Vibrant;
+              textcolor = colordPalette.DarkVibrant;
+            } else {
+              base00 = colordPalette.LightMuted.lighten(0.1);
+              base01 = colordPalette.LightMuted.lighten(0.05);
+              base02 = colordPalette.LightMuted;
+              base03 = colordPalette.LightMuted.darken(0.1);
+              accent = colordPalette.Muted;
+              textcolor = colordPalette.DarkMuted;
+            }
+            darkenColor = w("rgba(228, 228, 228, 0.4)").mix(base02.toHex(), 0.5).alpha(0.4);
+          }
+          this.theme = {
+            displayName: this.theme.displayName,
+            cssProperties: {
+              ...this.theme.cssProperties,
+              "--color-accent": accent.toHex(),
+              "--color-text": textcolor.toHex(),
+              "--color-base00": base00.toHex(),
+              "--color-base01": base01.toHex(),
+              "--color-base02": base02.toHex(),
+              "--color-base03": base03.toHex(),
+              "--darken-background": darkenColor.toHex(),
+              "--color-homepage-sidebars-bg": darkenColor.alpha(0.1).toHex(),
+              "--color-splashtext": textcolor.toHex()
+            }
+          };
+          await browser.runtime.sendMessage({
+            action: "markThemeAsModified",
+            name: this.name
+          });
+          await browser.runtime.sendMessage({
+            action: "saveCustomTheme",
+            data: this.theme,
+            id: this.name
+          });
+          this.updateColorPreviews();
+          await updateTheme(this.name);
+        }
+        createThemeGenerationControls() {
+          class themeGenerationControl {
+            id;
+            element;
+            label;
+            constructor(id) {
+              this.id = id;
+              const { input, label } = this.createThemeGenerationControl(this.id);
+              this.element = input;
+              this.label = label;
+            }
+            createThemeGenerationControl(id) {
+              const input = document.createElement("input");
+              input.type = "checkbox";
+              input.id = id;
+              input.classList.add("theme-maker-input");
+              const label = document.createElement("label");
+              label.htmlFor = id;
+              label.classList.add("theme-maker-label", "generate-theme-control");
+              input.addEventListener("click", () => {
+                this.updateLogo(this.label, this.element.checked);
+              });
+              return { input, label };
+            }
+            updateLogo(_element, _state) {
+            }
+            load() {
+              this.updateLogo(this.label, this.element.checked);
+            }
+            createWrapper() {
+              const wrapper = document.createElement("div");
+              wrapper.style.position = "relative";
+              wrapper.style.display = "flex";
+              wrapper.appendChild(this.element);
+              wrapper.appendChild(this.label);
+              return wrapper;
+            }
+          }
+          function createSmallThemeGenerationContainer() {
+            const container2 = document.createElement("div");
+            container2.classList.add("theme-generation-sub-container");
+            return container2;
+          }
+          const container = document.createElement("div");
+          container.classList.add("theme-controls-container");
+          const brightnessButton = new themeGenerationControl("brightness-control");
+          brightnessButton.updateLogo = (e5, s4) => {
+            const tooltip = e5.parentElement?.querySelector(".smpp-tooltip");
+            if (s4) {
+              if (tooltip) {
+                tooltip.innerHTML = "Dark";
+              }
+              e5.innerHTML = moonSvg;
+            } else {
+              if (tooltip) {
+                tooltip.innerHTML = "Light";
+              }
+              e5.innerHTML = sunSvg;
+            }
+          };
+          const saturationButton = new themeGenerationControl("saturation-control");
+          saturationButton.updateLogo = (e5, s4) => {
+            const tooltip = e5.parentElement?.querySelector(".smpp-tooltip");
+            if (s4) {
+              if (tooltip) {
+                tooltip.innerHTML = "Vibrant";
+              }
+              e5.innerHTML = magicWandSvg;
+            } else {
+              if (tooltip) {
+                tooltip.innerHTML = "Muted";
+              }
+              e5.innerHTML = wandSvg;
+            }
+          };
+          const firstSubContainer = createSmallThemeGenerationContainer();
+          const brightnessButtonWrapper = brightnessButton.createWrapper();
+          brightnessButtonWrapper.appendChild(createHoverTooltip("Brightness", "horizontal"));
+          const saturationButtonWrapper = saturationButton.createWrapper();
+          saturationButtonWrapper.appendChild(createHoverTooltip("Saturation", "horizontal"));
+          firstSubContainer.appendChild(brightnessButtonWrapper);
+          firstSubContainer.appendChild(saturationButtonWrapper);
+          const secondSubContainer = createSmallThemeGenerationContainer();
+          secondSubContainer.appendChild(this.createMakeThemeButton());
+          container.appendChild(firstSubContainer);
+          container.appendChild(secondSubContainer);
+          brightnessButton.load();
+          saturationButton.load();
+          return container;
+        }
+        createColorPickers() {
+          const colorPickerElement = document.createElement("div");
+          colorPickerElement.classList.add("custom-theme-color-picker-container");
+          this.colorPreviews.forEach((preview) => {
+            const colorPreviewWrapper = document.createElement("div");
+            colorPreviewWrapper.classList.add("color-picker-preview-wrapper");
+            const colorPreview = Object.values(preview)[0];
+            if (colorPreview) {
+              colorPreviewWrapper.appendChild(colorPreview);
+            }
+            const colorName = Object.keys(preview)[0];
+            if (colorName) {
+              colorPreviewWrapper.appendChild(
+                createHoverTooltip(this.convertPropertyName(colorName), "vertical")
+              );
+            }
+            colorPickerElement.appendChild(colorPreviewWrapper);
+          });
+          return colorPickerElement;
+        }
+        createFileInputContainer() {
+          const fileInputContainer = document.createElement("div");
+          fileInputContainer.classList.add("file-and-theme-button-container");
+          fileInputContainer.appendChild(this.backgroundImageInput.fullContainer);
+          const divider = document.createElement("div");
+          divider.classList.add("file-input-theme-button-divider");
+          fileInputContainer.appendChild(divider);
+          fileInputContainer.appendChild(this.createOpenThemeMakerButton());
+          return fileInputContainer;
+        }
+        updateThemeGenerator() {
+          if (this.themeGeneratorIsOpen) {
+            this.imagePreviewContainer.classList.add("open");
+          } else {
+            this.imagePreviewContainer.classList.remove("open");
+          }
+        }
+        createOpenThemeMakerButton() {
+          const button = document.createElement("button");
+          button.classList.add("open-theme-editor-button");
+          button.innerHTML = "Auto";
+          button.addEventListener("click", async () => {
+            this.themeGeneratorIsOpen = !this.themeGeneratorIsOpen;
+            this.updateThemeGenerator();
+          });
+          return button;
+        }
+        createImagePreviewContainer() {
+          this.imagePreviewContainer.classList.add("preview-image-container");
+          const imageWrapper = document.createElement("div");
+          imageWrapper.classList.add("preview-image-wrapper");
+          imageWrapper.appendChild(this.backgroundImagePreview);
+          this.imagePreviewContainer.appendChild(imageWrapper);
+          this.imagePreviewContainer.appendChild(this.createThemeGenerationControls());
+          return this.imagePreviewContainer;
+        }
+        async renderContent() {
+          this.content.classList.add("custom-theme-maker");
+          this.content.appendChild(this.createDisplayNameInput());
+          this.content.appendChild(this.createImagePreviewContainer());
+          this.content.appendChild(this.createFileInputContainer());
+          this.content.appendChild(this.createColorPickers());
+          this.content.appendChild(this.createRemoveButton());
+          this.element.appendChild(this.content);
+          return this.element;
+        }
+        async onCreate() {
+          await this.updateBackgroundImagePreview();
+          this.load(this.theme);
+        }
+        async load(theme) {
+          this.displayNameInput.value = theme.displayName;
+          this.updateColorPreviews();
+          await this.backgroundImageInput.loadImageData();
+        }
+        onClosed(realUserIntent) {
+          document.body.removeChild(this.wrapper);
+          if (!realUserIntent) {
+            return;
+          }
+          settingsWindow.themeSelector.updateSelectorContent();
+          settingsWindow.loadPage();
+          loadQuickSettings();
+          openSettingsWindow(null);
+        }
+        async onRemoveTheme() {
+          await browser.runtime.sendMessage({
+            action: "removeCustomTheme",
+            id: this.name
+          });
+          await updateTheme("default");
+          await settingsWindow.loadPage(true);
+          await loadQuickSettings();
+          this.hide(true);
+        }
+      };
     }
-    createFileInputContainer() {
-      const fileInputContainer = document.createElement("div");
-      fileInputContainer.classList.add("file-and-theme-button-container");
-      fileInputContainer.appendChild(this.backgroundImageInput.fullContainer);
-      const divider = document.createElement("div");
-      divider.classList.add("file-input-theme-button-divider");
-      fileInputContainer.appendChild(divider);
-      fileInputContainer.appendChild(this.createOpenThemeMakerButton());
-      return fileInputContainer;
-    }
-    updateThemeGenerator() {
-      if (this.themeGeneratorIsOpen) {
-        this.imagePreviewContainer.classList.add("open");
-      } else {
-        this.imagePreviewContainer.classList.remove("open");
-      }
-    }
-    createOpenThemeMakerButton() {
-      const button = document.createElement("button");
-      button.classList.add("open-theme-editor-button");
-      button.innerHTML = "Auto";
-      button.addEventListener("click", async () => {
-        this.themeGeneratorIsOpen = !this.themeGeneratorIsOpen;
-        this.updateThemeGenerator();
-      });
-      return button;
-    }
-    createImagePreviewContainer() {
-      this.imagePreviewContainer.classList.add("preview-image-container");
-      const imageWrapper = document.createElement("div");
-      imageWrapper.classList.add("preview-image-wrapper");
-      imageWrapper.appendChild(this.backgroundImagePreview);
-      this.imagePreviewContainer.appendChild(imageWrapper);
-      this.imagePreviewContainer.appendChild(this.createThemeGenerationControls());
-      return this.imagePreviewContainer;
-    }
-    async renderContent() {
-      this.content.classList.add("custom-theme-maker");
-      this.content.appendChild(this.createDisplayNameInput());
-      this.content.appendChild(this.createImagePreviewContainer());
-      this.content.appendChild(this.createFileInputContainer());
-      this.content.appendChild(this.createColorPickers());
-      this.content.appendChild(this.createRemoveButton());
-      this.element.appendChild(this.content);
-      return this.element;
-    }
-    async onCreate() {
-      await this.updateBackgroundImagePreview();
-      this.load(this.theme);
-    }
-    async load(theme) {
-      this.displayNameInput.value = theme.displayName;
-      this.updateColorPreviews();
-      await this.backgroundImageInput.loadImageData();
-    }
-    onClosed(realUserIntent) {
-      document.body.removeChild(this.wrapper);
-      if (!realUserIntent) {
-        return;
-      }
-      settingsWindow.themeSelector.updateSelectorContent();
-      settingsWindow.loadPage();
-      loadQuickSettings();
-      openSettingsWindow(null);
-    }
-    async onRemoveTheme() {
-      await browser.runtime.sendMessage({
-        action: "removeCustomTheme",
-        id: this.name,
-      });
-      await updateTheme("default");
-      await settingsWindow.loadPage(true);
-      await loadQuickSettings();
-      this.hide(true);
-    }
-  };
+  });
 
   // src/main-features/appearance/weather-effects.ts
   function setSnowLevel(amount, opacity) {
@@ -9949,10 +7890,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     for (let i5 = 0; i5 < amount; i5++) {
       const flake = document.createElement("img");
       flake.classList = "snowflake";
-      flake.src =
-        currentThemeName === "pink"
-          ? getExtensionImage("icons/weather-overlay/blossom.svg")
-          : getExtensionImage("icons/weather-overlay/snowflake.svg");
+      flake.src = currentThemeName === "pink" ? getExtensionImage("icons/weather-overlay/blossom.svg") : getExtensionImage("icons/weather-overlay/snowflake.svg");
       flake.style.left = `${Math.floor(Math.random() * 100)}%`;
       flake.style.animation = `snowflake_fall_${Math.floor(Math.random() * 3)} ${Math.floor(Math.random() * 7) + 10}s ease-in-out infinite`;
       flake.style.animationDelay = `${Math.floor(Math.random() * 40) - 40}s`;
@@ -9992,12 +7930,12 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       return weatherData.weather[0].main;
     }
     const weatherWidgets = widgets.filter(
-      (item) => item.name.toLowerCase().includes("weather") && item.isActive,
+      (item) => item.name.toLowerCase().includes("weather") && item.isActive
     );
     let weathers = await Promise.all(
       weatherWidgets.map(async (widget) => {
         return await getWeatherDescription(widget.name);
-      }),
+      })
     );
     weathers = weathers.filter((description) => description != null);
     if (weathers.includes("Rain") || weathers.includes("Drizzle")) {
@@ -10037,1004 +7975,23 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         break;
     }
   }
+  var init_weather_effects = __esm({
+    "src/main-features/appearance/weather-effects.ts"() {
+      "use strict";
+      init_utils();
+      init_widgets();
+      init_themes();
+    }
+  });
 
   // src/main-features/settings/main-settings.ts
-  var SettingsWindow = class extends BaseWindow {
-    settingsSideBarCategories = [
-      { name: "Appearance", id: "appearance" },
-      { name: "Navigation", id: "topNav" },
-      { name: "Widgets", id: "widgets" },
-      { name: "Other", id: "other" },
-    ];
-    currentPage = "appearance";
-    settingsPage = document.createElement("div");
-    backgroundImageSelector = new ImageSelector("backgroundImage", true);
-    themeSelector = new ThemeSelector();
-    profilePictureInput = new ImageSelector("profilePicture");
-    constructor() {
-      super("settings-window");
-    }
-    async renderContent() {
-      const content = document.createElement("div");
-      const settingsSideBar = await this.createSettingsSideBar();
-      this.settingsPage.id = "settings-page";
-      this.settingsPage.addEventListener("change", (_e) => this.storePage());
-      content.classList.add("settingsWindow");
-      content.appendChild(settingsSideBar);
-      content.appendChild(this.settingsPage);
-      this.displaySettingsPage();
-      return content;
-    }
-    async createSettingsSideBar() {
-      const settingsSideBar = document.createElement("div");
-      settingsSideBar.classList.add("settings-sidebar");
-      const settingsSideBarProfileButton = await this.createSettingsSideBarProfileButton();
-      settingsSideBar.appendChild(settingsSideBarProfileButton);
-      this.settingsSideBarCategories.forEach((category) => {
-        settingsSideBar.appendChild(this.createSettingsSideBarCategory(category));
-      });
-      const currentRadio = settingsSideBar.querySelector(`input[value="${this.currentPage}"]`);
-      if (currentRadio) {
-        currentRadio.checked = true;
-      }
-      settingsSideBar.addEventListener("change", this.updateSideBar);
-      return settingsSideBar;
-    }
-    updateSideBar = async (event) => {
-      if (event.target instanceof HTMLInputElement && event.target.type === "radio") {
-        this.currentPage = event.target.value;
-        this.displaySettingsPage();
-        await this.loadPage();
-      }
-    };
-    async createSettingsSideBarProfileButton() {
-      const data2 = await browser.runtime.sendMessage({
-        action: "getSettingsData",
-      });
-      const radioInput = document.createElement("input");
-      radioInput.type = "radio";
-      radioInput.name = "settings-page";
-      radioInput.value = "profile";
-      radioInput.id = "settings-profile";
-      radioInput.classList.add("settings-radio");
-      const profileSettingsLabel = document.createElement("label");
-      profileSettingsLabel.htmlFor = "settings-profile";
-      profileSettingsLabel.tabIndex = 0;
-      profileSettingsLabel.classList.add("profile-settings-button", "settings-category-button-js");
-      profileSettingsLabel.addEventListener("keydown", (e5) => {
-        if (e5.key === " " || e5.key === "Enter") {
-          e5.preventDefault();
-          radioInput.click();
-        }
-      });
-      const profilePicture = document.createElement("div");
-      profilePicture.classList.add("profile-picture-settings");
-      const profileTextContainer = document.createElement("div");
-      profileTextContainer.classList.add("profile-settings-label");
-      const profileSettingsLabelTitle = document.createElement("h2");
-      profileSettingsLabelTitle.id = "profile-settings-label-title";
-      const firstName = String(data2.profile.username || originalUsername).split(" ")[0];
-      if (firstName) {
-        profileSettingsLabelTitle.innerText = firstName;
-      }
-      const profileSettingsLabelDescription = document.createElement("p");
-      profileSettingsLabelDescription.classList.add("profile-settings-label-description");
-      profileSettingsLabelDescription.innerText = "view profile";
-      profileTextContainer.appendChild(profileSettingsLabelTitle);
-      profileTextContainer.appendChild(profileSettingsLabelDescription);
-      profileSettingsLabel.appendChild(profilePicture);
-      profileSettingsLabel.appendChild(profileTextContainer);
-      const container = document.createElement("div");
-      container.appendChild(radioInput);
-      container.appendChild(profileSettingsLabel);
-      return container;
-    }
-    isPastaTime() {
-      return /* @__PURE__ */ new Date().getHours() === 12;
-    }
-    createSettingsSideBarCategory(category) {
-      const radioInput = document.createElement("input");
-      radioInput.type = "radio";
-      radioInput.name = "settings-page";
-      radioInput.value = category.id;
-      radioInput.id = `settings-${category.id}`;
-      radioInput.classList.add("settings-radio");
-      const categoryLabel = document.createElement("label");
-      categoryLabel.htmlFor = `settings-${category.id}`;
-      categoryLabel.tabIndex = 0;
-      categoryLabel.classList.add("settings-category-button", "settings-category-button-js");
-      categoryLabel.addEventListener("keydown", (e5) => {
-        if (e5.key === " " || e5.key === "Enter") {
-          e5.preventDefault();
-          radioInput.click();
-        }
-      });
-      const categoryButtonIcon = document.createElement("img");
-      categoryButtonIcon.classList.add("category-button-icon");
-      let imageFileName = `${category.id}.webp`;
-      if (category.id === "appearance" && this.isPastaTime()) {
-        imageFileName = "pasta.webp";
-      }
-      categoryButtonIcon.src = getExtensionImage(`settings-icons/${imageFileName}`);
-      categoryLabel.appendChild(categoryButtonIcon);
-      categoryLabel.appendChild(document.createTextNode(category.name));
-      const container = document.createElement("div");
-      container.appendChild(radioInput);
-      container.appendChild(categoryLabel);
-      return container;
-    }
-    clearSettingsPage() {
-      this.settingsPage.innerHTML = "";
-    }
-    addDisclaimer(
-      element,
-      disclaimerHTML = `
-    * Changes will only apply after 
-    <a class="settings-page-disclaimer-button" href="#" onclick="window.location.href = window.location.href; return false;">reload</a>
-  `,
-    ) {
-      if (element.nextElementSibling?.classList.contains("settings-page-disclaimer")) {
-        return;
-      }
-      const disclaimer = document.createElement("span");
-      disclaimer.classList.add("settings-page-disclaimer");
-      disclaimer.innerHTML = disclaimerHTML;
-      element.insertAdjacentElement("afterend", disclaimer);
-    }
-    async resetSettings() {
-      const popup = document.createElement("div");
-      popup.classList.add("reset-confirmation-popup");
-      const popupContent = document.createElement("div");
-      popupContent.classList.add("reset-popup-content");
-      const title = document.createElement("h3");
-      title.textContent = "Reset Settings";
-      const description = document.createElement("p");
-      description.textContent =
-        "Are you sure you want to reset all settings to defaults? This will delete all your customizations and cannot be undone.";
-      const buttonContainer = document.createElement("div");
-      buttonContainer.classList.add("reset-popup-buttons");
-      const cancelButton = document.createElement("button");
-      cancelButton.classList.add("reset-popup-cancel");
-      cancelButton.textContent = "Cancel";
-      const confirmButton = document.createElement("button");
-      confirmButton.classList.add("reset-popup-confirm");
-      confirmButton.textContent = "Reset";
-      buttonContainer.append(cancelButton, confirmButton);
-      popupContent.append(title, description, buttonContainer);
-      popup.appendChild(popupContent);
-      this.element.appendChild(popup);
-      cancelButton.addEventListener("click", () => popup.remove());
-      confirmButton.addEventListener("click", async () => {
-        popup.remove();
-        await clearAllData();
-      });
-    }
-    async loadPage(shouldReloadTheme = true) {
-      const settings = await browser.runtime.sendMessage({
-        action: "getSettingsData",
-      });
-      async function loadWidgetSettingSlider(id, setting) {
-        const element = document.getElementById(id);
-        const valueDisplay = document.querySelector(`#${id} + .settings-page-live-value`);
-        if (!(element && valueDisplay)) {
-          return;
-        }
-        const value = await getWidgetSetting(setting);
-        element.value = value;
-        valueDisplay.textContent = String(value);
-      }
-      const profileTitleElement = document.getElementById("profile-settings-label-title");
-      if (profileTitleElement) {
-        const firstName = String(settings.profile.username || originalUsername).split(" ")[0];
-        if (firstName) {
-          profileTitleElement.textContent = firstName;
-        }
-      }
-      switch (this.currentPage) {
-        case "profile": {
-          const usernameInput = document.getElementById("settings-page-username-input");
-          if (settings.profile.username && usernameInput) {
-            usernameInput.value = settings.profile.username;
-          }
-          this.profilePictureInput.loadImageData();
-          const defaultPfpButton = document.getElementById("settings-page-default-sm-pfp-button");
-          if (defaultPfpButton) {
-            defaultPfpButton.checked = settings.profile.useSMpfp;
-          }
-          break;
-        }
-        case "appearance": {
-          if (shouldReloadTheme) {
-            await this.themeSelector.updateImages(false);
-          }
-          this.themeSelector.currentTiles.forEach((tile) => {
-            tile.updateSelection();
-          });
-          const enableGlassButton = document.getElementById("settings-page-glass-button");
-          if (enableGlassButton) {
-            enableGlassButton.checked = settings.appearance.glass;
-          }
-          this.backgroundImageSelector.id = settings.appearance.theme;
-          this.backgroundImageSelector.loadImageData();
-          const blurSlider = document.getElementById("settings-page-blur-slider");
-          if (blurSlider) {
-            blurSlider.value = String(settings.appearance.background.blur * 10);
-          }
-          document
-            .querySelectorAll(".settings-page-weather-overlay-container input")
-            .forEach((input) => {
-              const inputElement = input;
-              if (inputElement.id) {
-                inputElement.checked = inputElement.id.includes(
-                  settings.appearance.weatherOverlay.type,
-                );
-              }
-            });
-          const weatherOverlaySlider = document.getElementById(
-            "settings-page-weather-overlay-slider",
-          );
-          if (weatherOverlaySlider) {
-            weatherOverlaySlider.value = String(settings.appearance.weatherOverlay.amount);
-          }
-          const weatherOpacitySlider = document.getElementById(
-            "settings-page-weather-overlay-opacity-slider",
-          );
-          if (weatherOpacitySlider) {
-            weatherOpacitySlider.value = String(settings.appearance.weatherOverlay.opacity * 100);
-          }
-          const defaultIconButton = document.getElementById("settings-page-default-icon-button");
-          if (defaultIconButton) {
-            defaultIconButton.checked = settings.appearance.tabLogo === "sm";
-          }
-          const smppIconButton = document.getElementById("settings-page-smpp-icon-button");
-          if (smppIconButton) {
-            smppIconButton.checked = settings.appearance.tabLogo === "smpp";
-          }
-          const showNewsButton = document.getElementById("settings-page-show-news-button");
-          if (showNewsButton) {
-            showNewsButton.checked = settings.appearance.news;
-          }
-          break;
-        }
-        case "topNav": {
-          const swapCoursesButton = document.getElementById("settings-page-swap-courses-button");
-          if (swapCoursesButton) {
-            swapCoursesButton.checked = settings.topNav.switchCoursesAndLinks;
-          }
-          if (isGOSchool) {
-            const goButton = document.getElementById("settings-page-go-button");
-            if (goButton) {
-              goButton.checked = settings.topNav.buttons.GO;
-            }
-          }
-          if (!liteMode) {
-            const globalChatButton = document.getElementById("settings-page-global-chat-button");
-            if (globalChatButton) {
-              globalChatButton.checked = settings.topNav.buttons.GC;
-            }
-          }
-          const searchButton = document.getElementById("settings-page-search-button");
-          if (searchButton) {
-            searchButton.checked = settings.topNav.buttons.search;
-          }
-          const quickMenuButton = document.getElementById("settings-page-quick-menu-button");
-          if (quickMenuButton) {
-            quickMenuButton.checked = settings.topNav.buttons.quickMenu;
-          }
-          const homeIconButton = document.getElementById("settings-page-home-icon-button");
-          if (homeIconButton) {
-            homeIconButton.checked = settings.topNav.icons.home;
-          }
-          const mailIconButton = document.getElementById("settings-page-mail-icon-button");
-          if (mailIconButton) {
-            mailIconButton.checked = settings.topNav.icons.mail;
-          }
-          const notificationsIconButton = document.getElementById(
-            "settings-page-notifications-icon-button",
-          );
-          if (notificationsIconButton) {
-            notificationsIconButton.checked = settings.topNav.icons.notifications;
-          }
-          const settingsIconButton = document.getElementById("settings-page-settings-icon-button");
-          if (settingsIconButton) {
-            settingsIconButton.checked = settings.topNav.icons.settings;
-          }
-          break;
-        }
-        case "widgets": {
-          const delijnMonochromeButton = document.getElementById(
-            "settings-page-delijn-monochrome-button",
-          );
-          if (delijnMonochromeButton) {
-            delijnMonochromeButton.checked = await getWidgetSetting("DelijnWidget.monochrome");
-          }
-          await loadWidgetSettingSlider(
-            "settings-page-max-busses-slider",
-            "DelijnWidget.maxBusses",
-          );
-          await loadWidgetSettingSlider(
-            "settings-page-max-assignments-slider",
-            "TakenWidget.maxAssignments",
-          );
-          if (!liteMode) {
-            const showSnakeGridButton = document.getElementById(
-              "settings-page-show-snake-grid-button",
-            );
-            if (showSnakeGridButton) {
-              showSnakeGridButton.checked = await getWidgetSetting("SnakeWidget.enableGrid");
-            }
-          }
-          break;
-        }
-        case "other": {
-          const loadKeybind2 = (id, key) => {
-            const keybindInput = document.getElementById(id);
-            if (!keybindInput) {
-              return;
-            }
-            keybindInput.value = key;
-          };
-          var loadKeybind = loadKeybind2;
-          const performanceModeButton = document.getElementById(
-            "settings-page-performance-mode-button",
-          );
-          if (performanceModeButton) {
-            performanceModeButton.checked = settings.other.performanceMode;
-          }
-          const splashTextButton = document.getElementById("settings-page-splash-text-button");
-          if (splashTextButton) {
-            splashTextButton.checked = settings.other.splashText;
-          }
-          const discordButton = document.getElementById("settings-page-discord-button");
-          if (discordButton) {
-            discordButton.checked = settings.other.discordButton;
-          }
-          loadKeybind2("settings-page-quick-menu-keybinding", settings.other.keybinds.dmenu);
-          loadKeybind2(
-            "settings-page-widget-edit-keybinding",
-            settings.other.keybinds.widgetEditMode,
-          );
-          loadKeybind2("settings-widget-bag-keybinding", settings.other.keybinds.widgetBag);
-          loadKeybind2("settings-page-settings-keybinding", settings.other.keybinds.settings);
-          if (!liteMode) {
-            loadKeybind2("settings-page-gc-keybinding", settings.other.keybinds.gc);
-          }
-          break;
-        }
-        default:
-          break;
-      }
-    }
-    async storePage() {
-      const settings = await browser.runtime.sendMessage({
-        action: "getSettingsData",
-      });
-      const previousSettings = structuredClone(settings);
-      const getCheckboxValue = (id) => {
-        const element = document.getElementById(id);
-        return element?.checked;
-      };
-      const getSliderValue = (id) => {
-        const element = document.getElementById(id);
-        return element?.value ? Number.parseFloat(element.value) : 0;
-      };
-      const saveKeybind = (id) => {
-        const element = document.getElementById(id);
-        return element?.value || "None";
-      };
-      switch (this.currentPage) {
-        case "profile": {
-          const usernameInput = document.getElementById("settings-page-username-input");
-          if (usernameInput) {
-            settings.profile.username = usernameInput.value || null;
-          }
-          settings.profile.useSMpfp = getCheckboxValue("settings-page-default-sm-pfp-button");
-          applyProfile(settings.profile);
-          break;
-        }
-        case "appearance": {
-          const selectedTheme = document.querySelector(
-            ".settings-page-theme-card:has(input[type='radio']:checked)",
-          );
-          if (selectedTheme?.dataset.theme) {
-            settings.appearance.theme = selectedTheme.dataset.theme;
-          }
-          settings.appearance.background.blur = getSliderValue("settings-page-blur-slider") / 10;
-          const chosenWeather = document.querySelector(
-            ".settings-page-weather-overlay-container input:checked",
-          );
-          if (chosenWeather) {
-            const weatherContainer = chosenWeather.closest("[data-weather]");
-            if (weatherContainer?.dataset.weather) {
-              const weatherType = weatherContainer.dataset.weather;
-              if (weatherType === "realtime" || weatherType === "rain" || weatherType === "snow") {
-                settings.appearance.weatherOverlay.type = weatherType;
-              }
-            }
-          }
-          settings.appearance.weatherOverlay.amount = getSliderValue(
-            "settings-page-weather-overlay-slider",
-          );
-          settings.appearance.weatherOverlay.opacity =
-            getSliderValue("settings-page-weather-overlay-opacity-slider") / 100;
-          const smppIconChecked = getCheckboxValue("settings-page-smpp-icon-button");
-          settings.appearance.tabLogo = smppIconChecked ? "smpp" : "sm";
-          settings.appearance.news = getCheckboxValue("settings-page-show-news-button");
-          settings.appearance.glass = getCheckboxValue("settings-page-glass-button");
-          await applyAppearance(settings.appearance);
-          if (
-            JSON.stringify(settings.appearance.weatherOverlay) !==
-              JSON.stringify(previousSettings.appearance.weatherOverlay) &&
-            !liteMode
-          ) {
-            applyWeatherEffects(settings.appearance.weatherOverlay);
-          }
-          break;
-        }
-        case "topNav": {
-          settings.topNav.switchCoursesAndLinks = getCheckboxValue(
-            "settings-page-swap-courses-button",
-          );
-          if (isGOSchool) {
-            settings.topNav.buttons.GO = getCheckboxValue("settings-page-go-button");
-          }
-          if (!liteMode) {
-            settings.topNav.buttons.GC = getCheckboxValue("settings-page-global-chat-button");
-          }
-          settings.topNav.buttons.search = getCheckboxValue("settings-page-search-button");
-          settings.topNav.buttons.quickMenu = getCheckboxValue("settings-page-quick-menu-button");
-          settings.topNav.icons.home = getCheckboxValue("settings-page-home-icon-button");
-          settings.topNav.icons.mail = getCheckboxValue("settings-page-mail-icon-button");
-          settings.topNav.icons.notifications = getCheckboxValue(
-            "settings-page-notifications-icon-button",
-          );
-          settings.topNav.icons.settings = getCheckboxValue("settings-page-settings-icon-button");
-          applyTopNav(settings.topNav);
-          break;
-        }
-        case "widgets": {
-          const updateWidgetSetting = async (id, settingName, type) => {
-            const element = document.getElementById(id);
-            if (!element) {
-              return;
-            }
-            const currentValue =
-              type === "boolean" ? element.checked : Number.parseInt(element.value, 10);
-            const storedValue = await getWidgetSetting(settingName);
-            if (JSON.stringify(currentValue) !== JSON.stringify(storedValue)) {
-              await setWidgetSetting(settingName, currentValue);
-            }
-          };
-          await updateWidgetSetting(
-            "settings-page-delijn-monochrome-button",
-            "DelijnWidget.monochrome",
-            "boolean",
-          );
-          await updateWidgetSetting(
-            "settings-page-max-busses-slider",
-            "DelijnWidget.maxBusses",
-            "number",
-          );
-          await updateWidgetSetting(
-            "settings-page-max-assignments-slider",
-            "TakenWidget.maxAssignments",
-            "number",
-          );
-          if (!liteMode) {
-            await updateWidgetSetting(
-              "settings-page-show-snake-grid-button",
-              "SnakeWidget.enableGrid",
-              "boolean",
-            );
-          }
-          break;
-        }
-        case "other": {
-          settings.other.performanceMode = getCheckboxValue(
-            "settings-page-performance-mode-button",
-          );
-          settings.other.splashText = getCheckboxValue("settings-page-splash-text-button");
-          settings.other.discordButton = getCheckboxValue("settings-page-discord-button");
-          settings.other.keybinds.dmenu = saveKeybind("settings-page-quick-menu-keybinding");
-          settings.other.keybinds.widgetEditMode = saveKeybind(
-            "settings-page-widget-edit-keybinding",
-          );
-          settings.other.keybinds.widgetBag = saveKeybind("settings-widget-bag-keybinding");
-          settings.other.keybinds.settings = saveKeybind("settings-page-settings-keybinding");
-          if (!liteMode) {
-            settings.other.keybinds.gc = saveKeybind("settings-page-gc-keybinding");
-          }
-          applyOther(settings.other);
-          break;
-        }
-        default:
-          break;
-      }
-      await browser.runtime.sendMessage({
-        action: "setSettingsData",
-        data: settings,
-      });
-      console.log("Successfully stored main settings: \n", settings);
-      loadQuickSettings();
-      await this.loadPage();
-    }
-    async displaySettingsPage() {
-      function createMainTitle(text) {
-        const title = document.createElement("h1");
-        title.innerText = text;
-        title.classList.add("settings-page-main-title");
-        return title;
-      }
-      function createSectionTitle(text) {
-        const title = document.createElement("h2");
-        title.innerText = text;
-        title.classList.add("settings-page-section-title");
-        return title;
-      }
-      const createKeybindInput = (id, text) => {
-        const container = document.createElement("div");
-        container.classList.add("settings-page-key-bind-container");
-        container.classList.add("smpp-input-with-label");
-        const label = document.createElement("span");
-        label.tabIndex = 0;
-        label.classList.add("settings-page-button-label");
-        label.innerText = text;
-        const button = createButton(id);
-        button.classList.add("settings-page-button");
-        const input = document.createElement("input");
-        input.id = id;
-        input.type = "text";
-        input.readOnly = true;
-        input.spellcheck = false;
-        input.classList.add("settings-page-keybinding-input");
-        input.value = "None";
-        const unbindButton = document.createElement("button");
-        unbindButton.classList.add("keybind-unbind-button");
-        unbindButton.innerHTML = trashSvg;
-        unbindButton.title = "Clear keybind";
-        unbindButton.setAttribute("aria-label", "Clear keybind");
-        let listening = false;
-        input.addEventListener("click", () => {
-          if (listening) {
-            return;
-          }
-          listening = true;
-          const oldKeybind = input.value;
-          input.value = "Press any key...";
-          input.classList.add("listening");
-          const keyListener = async (e5) => {
-            listening = false;
-            input.classList.remove("listening");
-            e5.preventDefault();
-            e5.stopPropagation();
-            let keyName = e5.key.length === 1 ? e5.key.toUpperCase() : e5.key;
-            if (keyName === " ") {
-              keyName = "Space";
-            }
-            if (keyName === "Backspace") {
-              keyName = "None";
-            }
-            if (keyName === "Escape") {
-              keyName = oldKeybind;
-            }
-            input.value = keyName;
-            document.removeEventListener("keydown", keyListener);
-            await this.storePage();
-          };
-          const buttonListener = async (e5) => {
-            listening = false;
-            input.classList.remove("listening");
-            e5.stopPropagation();
-            e5.preventDefault();
-            input.value = "None";
-            document.removeEventListener("keydown", keyListener);
-            await this.storePage();
-          };
-          unbindButton.addEventListener("click", buttonListener);
-          document.addEventListener("keydown", keyListener);
-        });
-        const inputWrapper = document.createElement("div");
-        inputWrapper.classList.add("keybind-input-wrapper");
-        inputWrapper.appendChild(input);
-        inputWrapper.appendChild(unbindButton);
-        container.appendChild(label);
-        container.appendChild(inputWrapper);
-        return container;
-      };
-      function createSettingsButtonWithLabel(id, text) {
-        const container = createButtonWithLabel(id, text);
-        container.tabIndex = 0;
-        container.classList.add("settings-page-button-label-container");
-        return container;
-      }
-      function createImageButton(src, width, height, name2, id) {
-        const wrapper = document.createElement("label");
-        wrapper.classList.add("settings-page-image-button-wrapper");
-        wrapper.tabIndex = 0;
-        wrapper.style.width = width;
-        wrapper.style.height = height;
-        const input = document.createElement("input");
-        input.type = "radio";
-        input.name = name2;
-        if (id) {
-          input.id = id;
-        }
-        const image = document.createElement("img");
-        image.classList.add("settings-page-image");
-        image.src = getExtensionImage(src);
-        wrapper.addEventListener("keydown", (e5) => {
-          if (e5.key === " " || e5.key === "Enter") {
-            e5.preventDefault();
-            input.click();
-          }
-        });
-        wrapper.appendChild(input);
-        wrapper.appendChild(image);
-        return wrapper;
-      }
-      function createImageButtonWithLabel(src, text, width = "80px", height = "80px", name2, id) {
-        const container = document.createElement("label");
-        container.classList.add("settings-page-image-button-label");
-        const imageButton = createImageButton(src, width, height, name2, id);
-        const imageButtonLabel = document.createElement("span");
-        imageButtonLabel.innerText = text;
-        container.appendChild(imageButton);
-        container.appendChild(imageButtonLabel);
-        return container;
-      }
-      function createSlider(min, max, id) {
-        const slider = document.createElement("input");
-        slider.id = id;
-        slider.type = "range";
-        slider.min = min;
-        slider.max = max;
-        slider.classList.add("settings-page-slider");
-        return slider;
-      }
-      function createLabeledSlider(min, max, id, text, showValue = true) {
-        const container = document.createElement("div");
-        container.classList.add("settings-page-slider-container");
-        container.classList.add("smpp-input-with-label");
-        const textContainer = document.createElement("span");
-        textContainer.classList.add("settings-page-slider-label");
-        textContainer.innerText = text;
-        const slider = createSlider(min, max, id);
-        slider.classList.add("settings-page-labeled-slider");
-        if (showValue) {
-          slider.addEventListener("input", (_event) => {
-            const liveValueElement = document.querySelector(`#${id} ~ .settings-page-live-value`);
-            if (liveValueElement) {
-              liveValueElement.innerText = slider.value;
-            }
-          });
-        }
-        const currentValue = document.createElement("span");
-        currentValue.classList.add("settings-page-live-value");
-        currentValue.innerText = min;
-        container.appendChild(textContainer);
-        container.appendChild(slider);
-        if (showValue) {
-          container.appendChild(currentValue);
-        }
-        return container;
-      }
-      function createImage(src, width, height) {
-        const image = document.createElement("img");
-        image.classList.add("settings-page-image");
-        image.src = getExtensionImage(src);
-        image.style.width = width;
-        image.style.height = height;
-        image.style.objectFit = "cover";
-        return image;
-      }
-      function createDescription(text) {
-        const description = document.createElement("p");
-        description.innerText = text;
-        description.classList.add("settings-page-description");
-        return description;
-      }
-      this.clearSettingsPage();
-      this.settingsPage.scrollTo(0, 0);
-      switch (this.currentPage) {
-        case "profile": {
-          this.settingsPage.appendChild(createMainTitle("Profile"));
-          this.settingsPage.appendChild(createSectionTitle("Custom name"));
-          this.settingsPage.appendChild(
-            createDescription("Edit your username, displayed at the top left"),
-          );
-          this.settingsPage.appendChild(
-            createTextInput("settings-page-username-input", "Username"),
-          );
-          this.settingsPage.appendChild(createSectionTitle("Profile picture"));
-          this.settingsPage.appendChild(
-            createDescription(
-              isFirefox
-                ? "Upload your own profile picture, large files not recommended on Firefox"
-                : "Upload your own profile picture",
-            ),
-          );
-          this.profilePictureInput.id = "profilePicture";
-          this.profilePictureInput.loadImageData();
-          this.profilePictureInput.onStore = async () => {
-            this.storePage();
-            const data2 = await browser.runtime.sendMessage({
-              action: "getSettingsData",
-            });
-            applyProfilePicture(data2.profile);
-          };
-          const profilePictureInputContainer = this.profilePictureInput.fullContainer;
-          profilePictureInputContainer.id = "profile-picture-input-container";
-          this.settingsPage.appendChild(profilePictureInputContainer);
-          this.settingsPage.appendChild(
-            createSettingsButtonWithLabel(
-              "settings-page-default-sm-pfp-button",
-              "Original profile picture",
-            ),
-          );
-          break;
-        }
-        case "appearance": {
-          this.settingsPage.appendChild(createMainTitle("Appearance"));
-          this.settingsPage.appendChild(this.themeSelector.render());
-          this.settingsPage.appendChild(createSectionTitle("Wallpaper"));
-          this.settingsPage.appendChild(
-            createDescription("Personalize your backdrop with a custom image."),
-          );
-          this.backgroundImageSelector.onStore = () => {
-            this.storePage();
-          };
-          this.settingsPage.appendChild(this.backgroundImageSelector.fullContainer);
-          this.settingsPage.appendChild(createSectionTitle("Glass"));
-          this.settingsPage.appendChild(createDescription("Apply a glassy effect to the UI."));
-          this.settingsPage.appendChild(
-            createSettingsButtonWithLabel("settings-page-glass-button", "Glass"),
-          );
-          this.settingsPage.appendChild(createSectionTitle("Background blur"));
-          this.settingsPage.appendChild(createDescription("Apply a blur to your background."));
-          this.settingsPage.appendChild(
-            createSlider("0", "100", "settings-page-blur-slider"),
-            // must be divided by 10
-            // for real value
-          );
-          const blurPreviewContainer = document.createElement("div");
-          blurPreviewContainer.classList.add("settings-page-blur-preview-container");
-          blurPreviewContainer.appendChild(
-            createImage("theme-backgrounds/birb.jpg", "6rem", "4rem"),
-          );
-          const blurredImage = createImage("theme-backgrounds/birb.jpg", "100%", "100%");
-          blurredImage.style.filter = "blur(2px)";
-          const blurredImageContainer = document.createElement("div");
-          blurredImageContainer.classList.add("blurred-image-container");
-          blurredImageContainer.appendChild(blurredImage);
-          blurPreviewContainer.appendChild(blurredImageContainer);
-          this.settingsPage.appendChild(blurPreviewContainer);
-          this.settingsPage.appendChild(createSectionTitle("Weather overlay"));
-          this.settingsPage.appendChild(createDescription("Add dynamic weather visuals."));
-          const weatherIconsContainer = document.createElement("div");
-          weatherIconsContainer.classList.add(
-            "settings-page-icons-container",
-            "settings-page-weather-overlay-container",
-          );
-          const rainBtn = createImageButtonWithLabel(
-            "icons/weather-overlay/raindropfancy.svg",
-            "Rain",
-            "5rem",
-            "5rem",
-            "weather",
-            "settings-page-raindrop-button",
-          );
-          rainBtn.dataset.weather = "rain";
-          weatherIconsContainer.appendChild(rainBtn);
-          const realtimeBtn = createImageButtonWithLabel(
-            "icons/weather-overlay/realtimefancy.svg",
-            "Realtime",
-            "5rem",
-            "5rem",
-            "weather",
-            "settings-page-realtime-button",
-          );
-          realtimeBtn.dataset.weather = "realtime";
-          weatherIconsContainer.appendChild(realtimeBtn);
-          const snowBtn = createImageButtonWithLabel(
-            "icons/weather-overlay/snowflakefancy.svg",
-            "Snow",
-            "5rem",
-            "5rem",
-            "weather",
-            "settings-page-snow-button",
-          );
-          snowBtn.dataset.weather = "snow";
-          weatherIconsContainer.appendChild(snowBtn);
-          this.settingsPage.appendChild(weatherIconsContainer);
-          this.settingsPage.appendChild(
-            createLabeledSlider(
-              "0",
-              "500",
-              "settings-page-weather-overlay-slider",
-              "Amount",
-              false,
-            ),
-          );
-          this.settingsPage.appendChild(
-            createLabeledSlider(
-              "0",
-              "100",
-              "settings-page-weather-overlay-opacity-slider",
-              "Opacity",
-              false,
-            ),
-          );
-          this.settingsPage.appendChild(createSectionTitle("Icon"));
-          this.settingsPage.appendChild(
-            createDescription("Choose the icon displayed in your browser tab."),
-          );
-          const iconsContainer = document.createElement("div");
-          iconsContainer.classList.add("settings-page-icons-container");
-          iconsContainer.appendChild(
-            createImageButton(
-              "icons/sm-icon.svg",
-              "5rem",
-              "5rem",
-              "logo",
-              "settings-page-default-icon-button",
-            ),
-          );
-          iconsContainer.appendChild(
-            createImageButton(
-              "icons/smpp/128.png",
-              "5rem",
-              "5rem",
-              "logo",
-              "settings-page-smpp-icon-button",
-            ),
-          );
-          this.settingsPage.appendChild(iconsContainer);
-          this.settingsPage.appendChild(createSectionTitle("News"));
-          this.settingsPage.appendChild(
-            createDescription("Change the homepage news configuration."),
-          );
-          this.settingsPage.appendChild(
-            createSettingsButtonWithLabel("settings-page-show-news-button", "Show news"),
-          );
-          break;
-        }
-        case "topNav":
-          this.settingsPage.appendChild(createMainTitle("Navigation"));
-          this.settingsPage.appendChild(createSectionTitle("Buttons"));
-          this.settingsPage.appendChild(
-            createDescription("Choose which buttons you want to see in the top navigation."),
-          );
-          if (!liteMode) {
-            this.settingsPage.appendChild(
-              createSettingsButtonWithLabel("settings-page-global-chat-button", "Global Chat"),
-            );
-          }
-          this.settingsPage.appendChild(
-            createSettingsButtonWithLabel("settings-page-search-button", "Search"),
-          );
-          this.settingsPage.appendChild(
-            createSettingsButtonWithLabel("settings-page-quick-menu-button", "Quick Menu"),
-          );
-          this.settingsPage.appendChild(
-            createSettingsButtonWithLabel(
-              "settings-page-swap-courses-button",
-              "Swap courses/links",
-            ),
-          );
-          if (isGOSchool) {
-            this.settingsPage.appendChild(
-              createSettingsButtonWithLabel("settings-page-go-button", "GO"),
-            );
-          }
-          this.settingsPage.appendChild(createSectionTitle("Icons"));
-          this.settingsPage.appendChild(
-            createDescription("Choose which buttons you want to replace with icons."),
-          );
-          this.settingsPage.appendChild(
-            createSettingsButtonWithLabel("settings-page-home-icon-button", "Start"),
-          );
-          this.settingsPage.appendChild(
-            createSettingsButtonWithLabel("settings-page-mail-icon-button", "Mail"),
-          );
-          this.settingsPage.appendChild(
-            createSettingsButtonWithLabel(
-              "settings-page-notifications-icon-button",
-              "Notifications",
-            ),
-          );
-          this.settingsPage.appendChild(
-            createSettingsButtonWithLabel("settings-page-settings-icon-button", "Settings"),
-          );
-          break;
-        case "widgets":
-          this.settingsPage.appendChild(createMainTitle("Widgets"));
-          this.settingsPage.appendChild(createSectionTitle("De Lijn"));
-          this.settingsPage.appendChild(createDescription("Change the De Lijn app configuration."));
-          this.settingsPage.appendChild(
-            createSettingsButtonWithLabel("settings-page-delijn-monochrome-button", "Monochrome"),
-          );
-          this.settingsPage.appendChild(
-            createLabeledSlider("1", "10", "settings-page-max-busses-slider", "Max busses"),
-          );
-          this.settingsPage.appendChild(createSectionTitle("Assignments"));
-          this.settingsPage.appendChild(
-            createDescription("Change the assignments app configuration."),
-          );
-          this.settingsPage.appendChild(
-            createLabeledSlider(
-              "1",
-              "10",
-              "settings-page-max-assignments-slider",
-              "Max assignments",
-            ),
-          );
-          if (!liteMode) {
-            this.settingsPage.appendChild(createMainTitle("Games"));
-            this.settingsPage.appendChild(createSectionTitle("Snake"));
-            this.settingsPage.appendChild(createDescription("Change configuration of Snake++"));
-            this.settingsPage.appendChild(
-              createSettingsButtonWithLabel("settings-page-show-snake-grid-button", "Grid"),
-            );
-          }
-          break;
-        case "other": {
-          this.settingsPage.appendChild(createMainTitle("Other"));
-          this.settingsPage.appendChild(createSectionTitle("Performance"));
-          this.settingsPage.appendChild(
-            createDescription("Disables animations for better performance on low end devices."),
-          );
-          this.settingsPage.appendChild(
-            createSettingsButtonWithLabel(
-              "settings-page-performance-mode-button",
-              "Performance mode",
-            ),
-          );
-          this.settingsPage.appendChild(createSectionTitle("Login"));
-          this.settingsPage.appendChild(createDescription("Change the login page configuration."));
-          this.settingsPage.appendChild(
-            createSettingsButtonWithLabel("settings-page-splash-text-button", "Splash-text"),
-          );
-          this.settingsPage.appendChild(createSectionTitle("Homepage"));
-          this.settingsPage.appendChild(createDescription("Change the home page configuration."));
-          this.settingsPage.appendChild(
-            createSettingsButtonWithLabel("settings-page-discord-button", "Discord button"),
-          );
-          this.settingsPage.appendChild(createSectionTitle("Keybindings"));
-          this.settingsPage.appendChild(createDescription("Customize your keybindings"));
-          this.settingsPage.appendChild(
-            createKeybindInput("settings-page-quick-menu-keybinding", "Quick Menu"),
-          );
-          this.settingsPage.appendChild(
-            createKeybindInput("settings-page-widget-edit-keybinding", "Widget editing"),
-          );
-          this.settingsPage.appendChild(
-            createKeybindInput("settings-widget-bag-keybinding", "Widget bag"),
-          );
-          this.settingsPage.appendChild(
-            createKeybindInput("settings-page-settings-keybinding", "Settings"),
-          );
-          if (!liteMode) {
-            this.settingsPage.appendChild(
-              createKeybindInput("settings-page-gc-keybinding", "Global Chat"),
-            );
-          }
-          this.settingsPage.appendChild(createSectionTitle("Reset"));
-          this.settingsPage.appendChild(
-            createDescription("Reset all settings and widgets to their default values."),
-          );
-          const resetButton = document.createElement("button");
-          resetButton.innerText = "Reset to Defaults";
-          resetButton.classList.add("settings-page-reset-button");
-          resetButton.addEventListener("click", () => this.resetSettings());
-          this.settingsPage.appendChild(resetButton);
-          break;
-        }
-        default:
-          break;
-      }
-    }
-  };
-  var settingsWindow;
+  var main_settings_exports = {};
+  __export(main_settings_exports, {
+    SettingsWindow: () => SettingsWindow,
+    createSettingsWindow: () => createSettingsWindow,
+    openSettingsWindow: () => openSettingsWindow,
+    settingsWindow: () => settingsWindow
+  });
   async function createSettingsWindow() {
     settingsWindow = new SettingsWindow();
     await settingsWindow.create();
@@ -11056,325 +8013,1010 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     };
     settingsWindow.themeSelector.updateContentHeight();
   }
+  var SettingsWindow, settingsWindow;
+  var init_main_settings = __esm({
+    "src/main-features/settings/main-settings.ts"() {
+      "use strict";
+      init_utils();
+      init_svgs();
+      init_utils2();
+      init_widgets();
+      init_themes();
+      init_ui();
+      init_weather_effects();
+      init_main();
+      init_images();
+      init_windows();
+      init_profile();
+      init_quick_settings();
+      SettingsWindow = class extends BaseWindow {
+        settingsSideBarCategories = [
+          { name: "Appearance", id: "appearance" },
+          { name: "Navigation", id: "topNav" },
+          { name: "Widgets", id: "widgets" },
+          { name: "Other", id: "other" }
+        ];
+        currentPage = "appearance";
+        settingsPage = document.createElement("div");
+        backgroundImageSelector = new ImageSelector("backgroundImage", true);
+        themeSelector = new ThemeSelector();
+        profilePictureInput = new ImageSelector("profilePicture");
+        constructor() {
+          super("settings-window");
+        }
+        async renderContent() {
+          const content = document.createElement("div");
+          const settingsSideBar = await this.createSettingsSideBar();
+          this.settingsPage.id = "settings-page";
+          this.settingsPage.addEventListener("change", (_e) => this.storePage());
+          content.classList.add("settingsWindow");
+          content.appendChild(settingsSideBar);
+          content.appendChild(this.settingsPage);
+          this.displaySettingsPage();
+          return content;
+        }
+        async createSettingsSideBar() {
+          const settingsSideBar = document.createElement("div");
+          settingsSideBar.classList.add("settings-sidebar");
+          const settingsSideBarProfileButton = await this.createSettingsSideBarProfileButton();
+          settingsSideBar.appendChild(settingsSideBarProfileButton);
+          this.settingsSideBarCategories.forEach((category) => {
+            settingsSideBar.appendChild(this.createSettingsSideBarCategory(category));
+          });
+          const currentRadio = settingsSideBar.querySelector(
+            `input[value="${this.currentPage}"]`
+          );
+          if (currentRadio) {
+            currentRadio.checked = true;
+          }
+          settingsSideBar.addEventListener("change", this.updateSideBar);
+          return settingsSideBar;
+        }
+        updateSideBar = async (event) => {
+          if (event.target instanceof HTMLInputElement && event.target.type === "radio") {
+            this.currentPage = event.target.value;
+            this.displaySettingsPage();
+            await this.loadPage();
+          }
+        };
+        async createSettingsSideBarProfileButton() {
+          const data = await browser.runtime.sendMessage({
+            action: "getSettingsData"
+          });
+          const radioInput = document.createElement("input");
+          radioInput.type = "radio";
+          radioInput.name = "settings-page";
+          radioInput.value = "profile";
+          radioInput.id = "settings-profile";
+          radioInput.classList.add("settings-radio");
+          const profileSettingsLabel = document.createElement("label");
+          profileSettingsLabel.htmlFor = "settings-profile";
+          profileSettingsLabel.tabIndex = 0;
+          profileSettingsLabel.classList.add("profile-settings-button", "settings-category-button-js");
+          profileSettingsLabel.addEventListener("keydown", (e5) => {
+            if (e5.key === " " || e5.key === "Enter") {
+              e5.preventDefault();
+              radioInput.click();
+            }
+          });
+          const profilePicture = document.createElement("div");
+          profilePicture.classList.add("profile-picture-settings");
+          const profileTextContainer = document.createElement("div");
+          profileTextContainer.classList.add("profile-settings-label");
+          const profileSettingsLabelTitle = document.createElement("h2");
+          profileSettingsLabelTitle.id = "profile-settings-label-title";
+          const firstName = String(data.profile.username || originalUsername).split(" ")[0];
+          if (firstName) {
+            profileSettingsLabelTitle.innerText = firstName;
+          }
+          const profileSettingsLabelDescription = document.createElement("p");
+          profileSettingsLabelDescription.classList.add("profile-settings-label-description");
+          profileSettingsLabelDescription.innerText = "view profile";
+          profileTextContainer.appendChild(profileSettingsLabelTitle);
+          profileTextContainer.appendChild(profileSettingsLabelDescription);
+          profileSettingsLabel.appendChild(profilePicture);
+          profileSettingsLabel.appendChild(profileTextContainer);
+          const container = document.createElement("div");
+          container.appendChild(radioInput);
+          container.appendChild(profileSettingsLabel);
+          return container;
+        }
+        isPastaTime() {
+          return (/* @__PURE__ */ new Date()).getHours() === 12;
+        }
+        createSettingsSideBarCategory(category) {
+          const radioInput = document.createElement("input");
+          radioInput.type = "radio";
+          radioInput.name = "settings-page";
+          radioInput.value = category.id;
+          radioInput.id = `settings-${category.id}`;
+          radioInput.classList.add("settings-radio");
+          const categoryLabel = document.createElement("label");
+          categoryLabel.htmlFor = `settings-${category.id}`;
+          categoryLabel.tabIndex = 0;
+          categoryLabel.classList.add("settings-category-button", "settings-category-button-js");
+          categoryLabel.addEventListener("keydown", (e5) => {
+            if (e5.key === " " || e5.key === "Enter") {
+              e5.preventDefault();
+              radioInput.click();
+            }
+          });
+          const categoryButtonIcon = document.createElement("img");
+          categoryButtonIcon.classList.add("category-button-icon");
+          let imageFileName = `${category.id}.webp`;
+          if (category.id === "appearance" && this.isPastaTime()) {
+            imageFileName = "pasta.webp";
+          }
+          categoryButtonIcon.src = getExtensionImage(`settings-icons/${imageFileName}`);
+          categoryLabel.appendChild(categoryButtonIcon);
+          categoryLabel.appendChild(document.createTextNode(category.name));
+          const container = document.createElement("div");
+          container.appendChild(radioInput);
+          container.appendChild(categoryLabel);
+          return container;
+        }
+        clearSettingsPage() {
+          this.settingsPage.innerHTML = "";
+        }
+        addDisclaimer(element, disclaimerHTML = `
+    * Changes will only apply after 
+    <a class="settings-page-disclaimer-button" href="#" onclick="window.location.href = window.location.href; return false;">reload</a>
+  `) {
+          if (element.nextElementSibling?.classList.contains("settings-page-disclaimer")) {
+            return;
+          }
+          const disclaimer = document.createElement("span");
+          disclaimer.classList.add("settings-page-disclaimer");
+          disclaimer.innerHTML = disclaimerHTML;
+          element.insertAdjacentElement("afterend", disclaimer);
+        }
+        async resetSettings() {
+          const popup = document.createElement("div");
+          popup.classList.add("reset-confirmation-popup");
+          const popupContent = document.createElement("div");
+          popupContent.classList.add("reset-popup-content");
+          const title = document.createElement("h3");
+          title.textContent = "Reset Settings";
+          const description = document.createElement("p");
+          description.textContent = "Are you sure you want to reset all settings to defaults? This will delete all your customizations and cannot be undone.";
+          const buttonContainer = document.createElement("div");
+          buttonContainer.classList.add("reset-popup-buttons");
+          const cancelButton = document.createElement("button");
+          cancelButton.classList.add("reset-popup-cancel");
+          cancelButton.textContent = "Cancel";
+          const confirmButton = document.createElement("button");
+          confirmButton.classList.add("reset-popup-confirm");
+          confirmButton.textContent = "Reset";
+          buttonContainer.append(cancelButton, confirmButton);
+          popupContent.append(title, description, buttonContainer);
+          popup.appendChild(popupContent);
+          this.element.appendChild(popup);
+          cancelButton.addEventListener("click", () => popup.remove());
+          confirmButton.addEventListener("click", async () => {
+            popup.remove();
+            await clearAllData();
+          });
+        }
+        async loadPage(shouldReloadTheme = true) {
+          const settings = await browser.runtime.sendMessage({
+            action: "getSettingsData"
+          });
+          async function loadWidgetSettingSlider(id, setting) {
+            const element = document.getElementById(id);
+            const valueDisplay = document.querySelector(`#${id} + .settings-page-live-value`);
+            if (!(element && valueDisplay)) {
+              return;
+            }
+            const value = await getWidgetSetting(setting);
+            element.value = value;
+            valueDisplay.textContent = String(value);
+          }
+          const profileTitleElement = document.getElementById("profile-settings-label-title");
+          if (profileTitleElement) {
+            const firstName = String(settings.profile.username || originalUsername).split(" ")[0];
+            if (firstName) {
+              profileTitleElement.textContent = firstName;
+            }
+          }
+          switch (this.currentPage) {
+            case "profile": {
+              const usernameInput = document.getElementById("settings-page-username-input");
+              if (settings.profile.username && usernameInput) {
+                usernameInput.value = settings.profile.username;
+              }
+              this.profilePictureInput.loadImageData();
+              const defaultPfpButton = document.getElementById("settings-page-default-sm-pfp-button");
+              if (defaultPfpButton) {
+                defaultPfpButton.checked = settings.profile.useSMpfp;
+              }
+              break;
+            }
+            case "appearance": {
+              if (shouldReloadTheme) {
+                await this.themeSelector.updateImages(false);
+              }
+              this.themeSelector.currentTiles.forEach((tile) => {
+                tile.updateSelection();
+              });
+              const enableGlassButton = document.getElementById("settings-page-glass-button");
+              if (enableGlassButton) {
+                enableGlassButton.checked = settings.appearance.glass;
+              }
+              this.backgroundImageSelector.id = settings.appearance.theme;
+              this.backgroundImageSelector.loadImageData();
+              const blurSlider = document.getElementById("settings-page-blur-slider");
+              if (blurSlider) {
+                blurSlider.value = String(settings.appearance.background.blur * 10);
+              }
+              document.querySelectorAll(".settings-page-weather-overlay-container input").forEach((input) => {
+                const inputElement = input;
+                if (inputElement.id) {
+                  inputElement.checked = inputElement.id.includes(
+                    settings.appearance.weatherOverlay.type
+                  );
+                }
+              });
+              const weatherOverlaySlider = document.getElementById(
+                "settings-page-weather-overlay-slider"
+              );
+              if (weatherOverlaySlider) {
+                weatherOverlaySlider.value = String(
+                  settings.appearance.weatherOverlay.amount
+                );
+              }
+              const weatherOpacitySlider = document.getElementById(
+                "settings-page-weather-overlay-opacity-slider"
+              );
+              if (weatherOpacitySlider) {
+                weatherOpacitySlider.value = String(
+                  settings.appearance.weatherOverlay.opacity * 100
+                );
+              }
+              const defaultIconButton = document.getElementById("settings-page-default-icon-button");
+              if (defaultIconButton) {
+                defaultIconButton.checked = settings.appearance.tabLogo === "sm";
+              }
+              const smppIconButton = document.getElementById("settings-page-smpp-icon-button");
+              if (smppIconButton) {
+                smppIconButton.checked = settings.appearance.tabLogo === "smpp";
+              }
+              const showNewsButton = document.getElementById("settings-page-show-news-button");
+              if (showNewsButton) {
+                showNewsButton.checked = settings.appearance.news;
+              }
+              break;
+            }
+            case "topNav": {
+              const swapCoursesButton = document.getElementById("settings-page-swap-courses-button");
+              if (swapCoursesButton) {
+                swapCoursesButton.checked = settings.topNav.switchCoursesAndLinks;
+              }
+              if (isGOSchool) {
+                const goButton = document.getElementById("settings-page-go-button");
+                if (goButton) {
+                  goButton.checked = settings.topNav.buttons.GO;
+                }
+              }
+              if (!liteMode) {
+                const globalChatButton = document.getElementById("settings-page-global-chat-button");
+                if (globalChatButton) {
+                  globalChatButton.checked = settings.topNav.buttons.GC;
+                }
+              }
+              const searchButton = document.getElementById("settings-page-search-button");
+              if (searchButton) {
+                searchButton.checked = settings.topNav.buttons.search;
+              }
+              const quickMenuButton = document.getElementById("settings-page-quick-menu-button");
+              if (quickMenuButton) {
+                quickMenuButton.checked = settings.topNav.buttons.quickMenu;
+              }
+              const homeIconButton = document.getElementById("settings-page-home-icon-button");
+              if (homeIconButton) {
+                homeIconButton.checked = settings.topNav.icons.home;
+              }
+              const mailIconButton = document.getElementById("settings-page-mail-icon-button");
+              if (mailIconButton) {
+                mailIconButton.checked = settings.topNav.icons.mail;
+              }
+              const notificationsIconButton = document.getElementById(
+                "settings-page-notifications-icon-button"
+              );
+              if (notificationsIconButton) {
+                notificationsIconButton.checked = settings.topNav.icons.notifications;
+              }
+              const settingsIconButton = document.getElementById("settings-page-settings-icon-button");
+              if (settingsIconButton) {
+                settingsIconButton.checked = settings.topNav.icons.settings;
+              }
+              break;
+            }
+            case "widgets": {
+              const delijnMonochromeButton = document.getElementById(
+                "settings-page-delijn-monochrome-button"
+              );
+              if (delijnMonochromeButton) {
+                delijnMonochromeButton.checked = await getWidgetSetting("DelijnWidget.monochrome");
+              }
+              await loadWidgetSettingSlider("settings-page-max-busses-slider", "DelijnWidget.maxBusses");
+              await loadWidgetSettingSlider(
+                "settings-page-max-assignments-slider",
+                "TakenWidget.maxAssignments"
+              );
+              if (!liteMode) {
+                const showSnakeGridButton = document.getElementById(
+                  "settings-page-show-snake-grid-button"
+                );
+                if (showSnakeGridButton) {
+                  showSnakeGridButton.checked = await getWidgetSetting("SnakeWidget.enableGrid");
+                }
+              }
+              break;
+            }
+            case "other": {
+              let loadKeybind2 = function(id, key) {
+                const keybindInput = document.getElementById(id);
+                if (!keybindInput) {
+                  return;
+                }
+                keybindInput.value = key;
+              };
+              var loadKeybind = loadKeybind2;
+              const performanceModeButton = document.getElementById(
+                "settings-page-performance-mode-button"
+              );
+              if (performanceModeButton) {
+                performanceModeButton.checked = settings.other.performanceMode;
+              }
+              const splashTextButton = document.getElementById("settings-page-splash-text-button");
+              if (splashTextButton) {
+                splashTextButton.checked = settings.other.splashText;
+              }
+              const discordButton = document.getElementById("settings-page-discord-button");
+              if (discordButton) {
+                discordButton.checked = settings.other.discordButton;
+              }
+              loadKeybind2("settings-page-quick-menu-keybinding", settings.other.keybinds.dmenu);
+              loadKeybind2("settings-page-widget-edit-keybinding", settings.other.keybinds.widgetEditMode);
+              loadKeybind2("settings-widget-bag-keybinding", settings.other.keybinds.widgetBag);
+              loadKeybind2("settings-page-settings-keybinding", settings.other.keybinds.settings);
+              if (!liteMode) {
+                loadKeybind2("settings-page-gc-keybinding", settings.other.keybinds.gc);
+              }
+              break;
+            }
+            default:
+              break;
+          }
+        }
+        async storePage() {
+          const settings = await browser.runtime.sendMessage({
+            action: "getSettingsData"
+          });
+          const previousSettings = structuredClone(settings);
+          const getCheckboxValue = (id) => {
+            const element = document.getElementById(id);
+            return element?.checked;
+          };
+          const getSliderValue = (id) => {
+            const element = document.getElementById(id);
+            return element?.value ? Number.parseFloat(element.value) : 0;
+          };
+          const saveKeybind = (id) => {
+            const element = document.getElementById(id);
+            return element?.value || "None";
+          };
+          switch (this.currentPage) {
+            case "profile": {
+              const usernameInput = document.getElementById(
+                "settings-page-username-input"
+              );
+              if (usernameInput) {
+                settings.profile.username = usernameInput.value || null;
+              }
+              settings.profile.useSMpfp = getCheckboxValue("settings-page-default-sm-pfp-button");
+              applyProfile(settings.profile);
+              break;
+            }
+            case "appearance": {
+              const selectedTheme = document.querySelector(
+                ".settings-page-theme-card:has(input[type='radio']:checked)"
+              );
+              if (selectedTheme?.dataset.theme) {
+                settings.appearance.theme = selectedTheme.dataset.theme;
+              }
+              settings.appearance.background.blur = getSliderValue("settings-page-blur-slider") / 10;
+              const chosenWeather = document.querySelector(
+                ".settings-page-weather-overlay-container input:checked"
+              );
+              if (chosenWeather) {
+                const weatherContainer = chosenWeather.closest("[data-weather]");
+                if (weatherContainer?.dataset.weather) {
+                  const weatherType = weatherContainer.dataset.weather;
+                  if (weatherType === "realtime" || weatherType === "rain" || weatherType === "snow") {
+                    settings.appearance.weatherOverlay.type = weatherType;
+                  }
+                }
+              }
+              settings.appearance.weatherOverlay.amount = getSliderValue(
+                "settings-page-weather-overlay-slider"
+              );
+              settings.appearance.weatherOverlay.opacity = getSliderValue("settings-page-weather-overlay-opacity-slider") / 100;
+              const smppIconChecked = getCheckboxValue("settings-page-smpp-icon-button");
+              settings.appearance.tabLogo = smppIconChecked ? "smpp" : "sm";
+              settings.appearance.news = getCheckboxValue("settings-page-show-news-button");
+              settings.appearance.glass = getCheckboxValue("settings-page-glass-button");
+              await applyAppearance(settings.appearance);
+              if (JSON.stringify(settings.appearance.weatherOverlay) !== JSON.stringify(previousSettings.appearance.weatherOverlay) && !liteMode) {
+                applyWeatherEffects(settings.appearance.weatherOverlay);
+              }
+              break;
+            }
+            case "topNav": {
+              settings.topNav.switchCoursesAndLinks = getCheckboxValue(
+                "settings-page-swap-courses-button"
+              );
+              if (isGOSchool) {
+                settings.topNav.buttons.GO = getCheckboxValue("settings-page-go-button");
+              }
+              if (!liteMode) {
+                settings.topNav.buttons.GC = getCheckboxValue("settings-page-global-chat-button");
+              }
+              settings.topNav.buttons.search = getCheckboxValue("settings-page-search-button");
+              settings.topNav.buttons.quickMenu = getCheckboxValue("settings-page-quick-menu-button");
+              settings.topNav.icons.home = getCheckboxValue("settings-page-home-icon-button");
+              settings.topNav.icons.mail = getCheckboxValue("settings-page-mail-icon-button");
+              settings.topNav.icons.notifications = getCheckboxValue(
+                "settings-page-notifications-icon-button"
+              );
+              settings.topNav.icons.settings = getCheckboxValue("settings-page-settings-icon-button");
+              applyTopNav(settings.topNav);
+              break;
+            }
+            case "widgets": {
+              const updateWidgetSetting = async (id, settingName, type) => {
+                const element = document.getElementById(id);
+                if (!element) {
+                  return;
+                }
+                const currentValue = type === "boolean" ? element.checked : Number.parseInt(element.value, 10);
+                const storedValue = await getWidgetSetting(settingName);
+                if (JSON.stringify(currentValue) !== JSON.stringify(storedValue)) {
+                  await setWidgetSetting(settingName, currentValue);
+                }
+              };
+              await updateWidgetSetting(
+                "settings-page-delijn-monochrome-button",
+                "DelijnWidget.monochrome",
+                "boolean"
+              );
+              await updateWidgetSetting(
+                "settings-page-max-busses-slider",
+                "DelijnWidget.maxBusses",
+                "number"
+              );
+              await updateWidgetSetting(
+                "settings-page-max-assignments-slider",
+                "TakenWidget.maxAssignments",
+                "number"
+              );
+              if (!liteMode) {
+                await updateWidgetSetting(
+                  "settings-page-show-snake-grid-button",
+                  "SnakeWidget.enableGrid",
+                  "boolean"
+                );
+              }
+              break;
+            }
+            case "other": {
+              settings.other.performanceMode = getCheckboxValue("settings-page-performance-mode-button");
+              settings.other.splashText = getCheckboxValue("settings-page-splash-text-button");
+              settings.other.discordButton = getCheckboxValue("settings-page-discord-button");
+              settings.other.keybinds.dmenu = saveKeybind("settings-page-quick-menu-keybinding");
+              settings.other.keybinds.widgetEditMode = saveKeybind(
+                "settings-page-widget-edit-keybinding"
+              );
+              settings.other.keybinds.widgetBag = saveKeybind("settings-widget-bag-keybinding");
+              settings.other.keybinds.settings = saveKeybind("settings-page-settings-keybinding");
+              if (!liteMode) {
+                settings.other.keybinds.gc = saveKeybind("settings-page-gc-keybinding");
+              }
+              applyOther(settings.other);
+              break;
+            }
+            default:
+              break;
+          }
+          await browser.runtime.sendMessage({
+            action: "setSettingsData",
+            data: settings
+          });
+          console.log("Successfully stored main settings: \n", settings);
+          loadQuickSettings();
+          await this.loadPage();
+        }
+        async displaySettingsPage() {
+          function createMainTitle(text) {
+            const title = document.createElement("h1");
+            title.innerText = text;
+            title.classList.add("settings-page-main-title");
+            return title;
+          }
+          function createSectionTitle(text) {
+            const title = document.createElement("h2");
+            title.innerText = text;
+            title.classList.add("settings-page-section-title");
+            return title;
+          }
+          const createKeybindInput = (id, text) => {
+            const container = document.createElement("div");
+            container.classList.add("settings-page-key-bind-container");
+            container.classList.add("smpp-input-with-label");
+            const label = document.createElement("span");
+            label.tabIndex = 0;
+            label.classList.add("settings-page-button-label");
+            label.innerText = text;
+            const button = createButton(id);
+            button.classList.add("settings-page-button");
+            const input = document.createElement("input");
+            input.id = id;
+            input.type = "text";
+            input.readOnly = true;
+            input.spellcheck = false;
+            input.classList.add("settings-page-keybinding-input");
+            input.value = "None";
+            const unbindButton = document.createElement("button");
+            unbindButton.classList.add("keybind-unbind-button");
+            unbindButton.innerHTML = trashSvg;
+            unbindButton.title = "Clear keybind";
+            unbindButton.setAttribute("aria-label", "Clear keybind");
+            let listening = false;
+            input.addEventListener("click", () => {
+              if (listening) {
+                return;
+              }
+              listening = true;
+              const oldKeybind = input.value;
+              input.value = "Press any key...";
+              input.classList.add("listening");
+              const keyListener = async (e5) => {
+                listening = false;
+                input.classList.remove("listening");
+                e5.preventDefault();
+                e5.stopPropagation();
+                let keyName = e5.key.length === 1 ? e5.key.toUpperCase() : e5.key;
+                if (keyName === " ") {
+                  keyName = "Space";
+                }
+                if (keyName === "Backspace") {
+                  keyName = "None";
+                }
+                if (keyName === "Escape") {
+                  keyName = oldKeybind;
+                }
+                input.value = keyName;
+                document.removeEventListener("keydown", keyListener);
+                await this.storePage();
+              };
+              const buttonListener = async (e5) => {
+                listening = false;
+                input.classList.remove("listening");
+                e5.stopPropagation();
+                e5.preventDefault();
+                input.value = "None";
+                document.removeEventListener("keydown", keyListener);
+                await this.storePage();
+              };
+              unbindButton.addEventListener("click", buttonListener);
+              document.addEventListener("keydown", keyListener);
+            });
+            const inputWrapper = document.createElement("div");
+            inputWrapper.classList.add("keybind-input-wrapper");
+            inputWrapper.appendChild(input);
+            inputWrapper.appendChild(unbindButton);
+            container.appendChild(label);
+            container.appendChild(inputWrapper);
+            return container;
+          };
+          function createSettingsButtonWithLabel(id, text) {
+            const container = createButtonWithLabel(id, text);
+            container.tabIndex = 0;
+            container.classList.add("settings-page-button-label-container");
+            return container;
+          }
+          function createImageButton(src, width, height, name, id) {
+            const wrapper = document.createElement("label");
+            wrapper.classList.add("settings-page-image-button-wrapper");
+            wrapper.tabIndex = 0;
+            wrapper.style.width = width;
+            wrapper.style.height = height;
+            const input = document.createElement("input");
+            input.type = "radio";
+            input.name = name;
+            if (id) {
+              input.id = id;
+            }
+            const image = document.createElement("img");
+            image.classList.add("settings-page-image");
+            image.src = getExtensionImage(src);
+            wrapper.addEventListener("keydown", (e5) => {
+              if (e5.key === " " || e5.key === "Enter") {
+                e5.preventDefault();
+                input.click();
+              }
+            });
+            wrapper.appendChild(input);
+            wrapper.appendChild(image);
+            return wrapper;
+          }
+          function createImageButtonWithLabel(src, text, width, height, name, id) {
+            const container = document.createElement("label");
+            container.classList.add("settings-page-image-button-label");
+            const imageButton = createImageButton(src, width, height, name, id);
+            const imageButtonLabel = document.createElement("span");
+            imageButtonLabel.innerText = text;
+            container.appendChild(imageButton);
+            container.appendChild(imageButtonLabel);
+            return container;
+          }
+          function createSlider(min, max, id) {
+            const slider = document.createElement("input");
+            slider.id = id;
+            slider.type = "range";
+            slider.min = min;
+            slider.max = max;
+            slider.classList.add("settings-page-slider");
+            return slider;
+          }
+          function createLabeledSlider(min, max, id, text, showValue = true) {
+            const container = document.createElement("div");
+            container.classList.add("settings-page-slider-container");
+            container.classList.add("smpp-input-with-label");
+            const textContainer = document.createElement("span");
+            textContainer.classList.add("settings-page-slider-label");
+            textContainer.innerText = text;
+            const slider = createSlider(min, max, id);
+            slider.classList.add("settings-page-labeled-slider");
+            if (showValue) {
+              slider.addEventListener("input", (_event) => {
+                const liveValueElement = document.querySelector(
+                  `#${id} ~ .settings-page-live-value`
+                );
+                if (liveValueElement) {
+                  liveValueElement.innerText = slider.value;
+                }
+              });
+            }
+            const currentValue = document.createElement("span");
+            currentValue.classList.add("settings-page-live-value");
+            currentValue.innerText = min;
+            container.appendChild(textContainer);
+            container.appendChild(slider);
+            if (showValue) {
+              container.appendChild(currentValue);
+            }
+            return container;
+          }
+          function createImage(src, width, height) {
+            const image = document.createElement("img");
+            image.classList.add("settings-page-image");
+            image.src = getExtensionImage(src);
+            image.style.width = width;
+            image.style.height = height;
+            image.style.objectFit = "cover";
+            return image;
+          }
+          function createDescription(text) {
+            const description = document.createElement("p");
+            description.innerText = text;
+            description.classList.add("settings-page-description");
+            return description;
+          }
+          this.clearSettingsPage();
+          this.settingsPage.scrollTo(0, 0);
+          switch (this.currentPage) {
+            case "profile": {
+              this.settingsPage.appendChild(createMainTitle("Profile"));
+              this.settingsPage.appendChild(createSectionTitle("Custom name"));
+              this.settingsPage.appendChild(
+                createDescription("Edit your username, displayed at the top left")
+              );
+              this.settingsPage.appendChild(createTextInput("settings-page-username-input", "Username"));
+              this.settingsPage.appendChild(createSectionTitle("Profile picture"));
+              this.settingsPage.appendChild(
+                createDescription(
+                  isFirefox ? "Upload your own profile picture, large files not recommended on Firefox" : "Upload your own profile picture"
+                )
+              );
+              this.profilePictureInput.id = "profilePicture";
+              this.profilePictureInput.loadImageData();
+              this.profilePictureInput.onStore = async () => {
+                this.storePage();
+                const data = await browser.runtime.sendMessage({
+                  action: "getSettingsData"
+                });
+                applyProfilePicture(data.profile);
+              };
+              const profilePictureInputContainer = this.profilePictureInput.fullContainer;
+              profilePictureInputContainer.id = "profile-picture-input-container";
+              this.settingsPage.appendChild(profilePictureInputContainer);
+              this.settingsPage.appendChild(
+                createSettingsButtonWithLabel(
+                  "settings-page-default-sm-pfp-button",
+                  "Original profile picture"
+                )
+              );
+              break;
+            }
+            case "appearance": {
+              this.settingsPage.appendChild(createMainTitle("Appearance"));
+              this.settingsPage.appendChild(this.themeSelector.render());
+              this.settingsPage.appendChild(createSectionTitle("Wallpaper"));
+              this.settingsPage.appendChild(
+                createDescription("Personalize your backdrop with a custom image.")
+              );
+              this.backgroundImageSelector.onStore = () => {
+                this.storePage();
+              };
+              this.settingsPage.appendChild(this.backgroundImageSelector.fullContainer);
+              this.settingsPage.appendChild(createSectionTitle("Glass"));
+              this.settingsPage.appendChild(createDescription("Apply a glassy effect to the UI."));
+              this.settingsPage.appendChild(
+                createSettingsButtonWithLabel("settings-page-glass-button", "Glass")
+              );
+              this.settingsPage.appendChild(createSectionTitle("Background blur"));
+              this.settingsPage.appendChild(createDescription("Apply a blur to your background."));
+              this.settingsPage.appendChild(
+                createSlider("0", "100", "settings-page-blur-slider")
+                // must be divided by 10
+                // for real value
+              );
+              const blurPreviewContainer = document.createElement("div");
+              blurPreviewContainer.classList.add("settings-page-blur-preview-container");
+              blurPreviewContainer.appendChild(createImage("theme-backgrounds/birb.jpg", "6rem", "4rem"));
+              const blurredImage = createImage("theme-backgrounds/birb.jpg", "100%", "100%");
+              blurredImage.style.filter = "blur(2px)";
+              const blurredImageContainer = document.createElement("div");
+              blurredImageContainer.classList.add("blurred-image-container");
+              blurredImageContainer.appendChild(blurredImage);
+              blurPreviewContainer.appendChild(blurredImageContainer);
+              this.settingsPage.appendChild(blurPreviewContainer);
+              this.settingsPage.appendChild(createSectionTitle("Weather overlay"));
+              this.settingsPage.appendChild(createDescription("Add dynamic weather visuals."));
+              const weatherIconsContainer = document.createElement("div");
+              weatherIconsContainer.classList.add(
+                "settings-page-icons-container",
+                "settings-page-weather-overlay-container"
+              );
+              const rainBtn = createImageButtonWithLabel(
+                "icons/weather-overlay/raindropfancy.svg",
+                "Rain",
+                "5rem",
+                "5rem",
+                "weather",
+                "settings-page-raindrop-button"
+              );
+              rainBtn.dataset.weather = "rain";
+              weatherIconsContainer.appendChild(rainBtn);
+              const realtimeBtn = createImageButtonWithLabel(
+                "icons/weather-overlay/realtimefancy.svg",
+                "Realtime",
+                "5rem",
+                "5rem",
+                "weather",
+                "settings-page-realtime-button"
+              );
+              realtimeBtn.dataset.weather = "realtime";
+              weatherIconsContainer.appendChild(realtimeBtn);
+              const snowBtn = createImageButtonWithLabel(
+                "icons/weather-overlay/snowflakefancy.svg",
+                "Snow",
+                "5rem",
+                "5rem",
+                "weather",
+                "settings-page-snow-button"
+              );
+              snowBtn.dataset.weather = "snow";
+              weatherIconsContainer.appendChild(snowBtn);
+              this.settingsPage.appendChild(weatherIconsContainer);
+              this.settingsPage.appendChild(
+                createLabeledSlider("0", "500", "settings-page-weather-overlay-slider", "Amount", false)
+              );
+              this.settingsPage.appendChild(
+                createLabeledSlider(
+                  "0",
+                  "100",
+                  "settings-page-weather-overlay-opacity-slider",
+                  "Opacity",
+                  false
+                )
+              );
+              this.settingsPage.appendChild(createSectionTitle("Icon"));
+              this.settingsPage.appendChild(
+                createDescription("Choose the icon displayed in your browser tab.")
+              );
+              const iconsContainer = document.createElement("div");
+              iconsContainer.classList.add("settings-page-icons-container");
+              iconsContainer.appendChild(
+                createImageButton(
+                  "icons/sm-icon.svg",
+                  "5rem",
+                  "5rem",
+                  "logo",
+                  "settings-page-default-icon-button"
+                )
+              );
+              iconsContainer.appendChild(
+                createImageButton(
+                  "icons/smpp/128.png",
+                  "5rem",
+                  "5rem",
+                  "logo",
+                  "settings-page-smpp-icon-button"
+                )
+              );
+              this.settingsPage.appendChild(iconsContainer);
+              this.settingsPage.appendChild(createSectionTitle("News"));
+              this.settingsPage.appendChild(createDescription("Change the homepage news configuration."));
+              this.settingsPage.appendChild(
+                createSettingsButtonWithLabel("settings-page-show-news-button", "Show news")
+              );
+              break;
+            }
+            case "topNav":
+              this.settingsPage.appendChild(createMainTitle("Navigation"));
+              this.settingsPage.appendChild(createSectionTitle("Buttons"));
+              this.settingsPage.appendChild(
+                createDescription("Choose which buttons you want to see in the top navigation.")
+              );
+              if (!liteMode) {
+                this.settingsPage.appendChild(
+                  createSettingsButtonWithLabel("settings-page-global-chat-button", "Global Chat")
+                );
+              }
+              this.settingsPage.appendChild(
+                createSettingsButtonWithLabel("settings-page-search-button", "Search")
+              );
+              this.settingsPage.appendChild(
+                createSettingsButtonWithLabel("settings-page-quick-menu-button", "Quick Menu")
+              );
+              this.settingsPage.appendChild(
+                createSettingsButtonWithLabel("settings-page-swap-courses-button", "Swap courses/links")
+              );
+              if (isGOSchool) {
+                this.settingsPage.appendChild(
+                  createSettingsButtonWithLabel("settings-page-go-button", "GO")
+                );
+              }
+              this.settingsPage.appendChild(createSectionTitle("Icons"));
+              this.settingsPage.appendChild(
+                createDescription("Choose which buttons you want to replace with icons.")
+              );
+              this.settingsPage.appendChild(
+                createSettingsButtonWithLabel("settings-page-home-icon-button", "Start")
+              );
+              this.settingsPage.appendChild(
+                createSettingsButtonWithLabel("settings-page-mail-icon-button", "Mail")
+              );
+              this.settingsPage.appendChild(
+                createSettingsButtonWithLabel("settings-page-notifications-icon-button", "Notifications")
+              );
+              this.settingsPage.appendChild(
+                createSettingsButtonWithLabel("settings-page-settings-icon-button", "Settings")
+              );
+              break;
+            case "widgets":
+              this.settingsPage.appendChild(createMainTitle("Widgets"));
+              this.settingsPage.appendChild(createSectionTitle("De Lijn"));
+              this.settingsPage.appendChild(createDescription("Change the De Lijn app configuration."));
+              this.settingsPage.appendChild(
+                createSettingsButtonWithLabel("settings-page-delijn-monochrome-button", "Monochrome")
+              );
+              this.settingsPage.appendChild(
+                createLabeledSlider("1", "10", "settings-page-max-busses-slider", "Max busses")
+              );
+              this.settingsPage.appendChild(createSectionTitle("Assignments"));
+              this.settingsPage.appendChild(
+                createDescription("Change the assignments app configuration.")
+              );
+              this.settingsPage.appendChild(
+                createLabeledSlider("1", "10", "settings-page-max-assignments-slider", "Max assignments")
+              );
+              if (!liteMode) {
+                this.settingsPage.appendChild(createMainTitle("Games"));
+                this.settingsPage.appendChild(createSectionTitle("Snake"));
+                this.settingsPage.appendChild(createDescription("Change configuration of Snake++"));
+                this.settingsPage.appendChild(
+                  createSettingsButtonWithLabel("settings-page-show-snake-grid-button", "Grid")
+                );
+              }
+              break;
+            case "other": {
+              this.settingsPage.appendChild(createMainTitle("Other"));
+              this.settingsPage.appendChild(createSectionTitle("Performance"));
+              this.settingsPage.appendChild(
+                createDescription("Disables animations for better performance on low end devices.")
+              );
+              this.settingsPage.appendChild(
+                createSettingsButtonWithLabel(
+                  "settings-page-performance-mode-button",
+                  "Performance mode"
+                )
+              );
+              this.settingsPage.appendChild(createSectionTitle("Login"));
+              this.settingsPage.appendChild(createDescription("Change the login page configuration."));
+              this.settingsPage.appendChild(
+                createSettingsButtonWithLabel("settings-page-splash-text-button", "Splash-text")
+              );
+              this.settingsPage.appendChild(createSectionTitle("Homepage"));
+              this.settingsPage.appendChild(createDescription("Change the home page configuration."));
+              this.settingsPage.appendChild(
+                createSettingsButtonWithLabel("settings-page-discord-button", "Discord button")
+              );
+              this.settingsPage.appendChild(createSectionTitle("Keybindings"));
+              this.settingsPage.appendChild(createDescription("Customize your keybindings"));
+              this.settingsPage.appendChild(
+                createKeybindInput("settings-page-quick-menu-keybinding", "Quick Menu")
+              );
+              this.settingsPage.appendChild(
+                createKeybindInput("settings-page-widget-edit-keybinding", "Widget editing")
+              );
+              this.settingsPage.appendChild(
+                createKeybindInput("settings-widget-bag-keybinding", "Widget bag")
+              );
+              this.settingsPage.appendChild(
+                createKeybindInput("settings-page-settings-keybinding", "Settings")
+              );
+              if (!liteMode) {
+                this.settingsPage.appendChild(
+                  createKeybindInput("settings-page-gc-keybinding", "Global Chat")
+                );
+              }
+              this.settingsPage.appendChild(createSectionTitle("Reset"));
+              this.settingsPage.appendChild(
+                createDescription("Reset all settings and widgets to their default values.")
+              );
+              const resetButton = document.createElement("button");
+              resetButton.innerText = "Reset to Defaults";
+              resetButton.classList.add("settings-page-reset-button");
+              resetButton.addEventListener("click", () => this.resetSettings());
+              this.settingsPage.appendChild(resetButton);
+              break;
+            }
+            default:
+              break;
+          }
+        }
+      };
+    }
+  });
 
   // src/widgets/widgets.ts
-  var PANNELIP_MARGIN_PX = 20;
-  var widgetSystemCreated = false;
-  var widgetEditModeInit = false;
-  var widgetEditMode = false;
-  var widgets = [];
-  var hoveringBag = false;
-  var newsState = false;
-  var curDragInfo = null;
-  var widgetsContainer;
-  var widgetBag;
-  var widgetBagHandle;
-  var doneButton;
+  var widgets_exports = {};
+  __export(widgets_exports, {
+    WidgetBase: () => WidgetBase,
+    createWidgetEditModeButton: () => createWidgetEditModeButton,
+    createWidgetSystem: () => createWidgetSystem,
+    getWidgetSetting: () => getWidgetSetting,
+    initWidgetEditMode: () => initWidgetEditMode,
+    registerWidget: () => registerWidget,
+    setEditMode: () => setEditMode,
+    setWidgetLiteMode: () => setWidgetLiteMode,
+    setWidgetSetting: () => setWidgetSetting,
+    toggleBag: () => toggleBag,
+    updateNews: () => updateNews,
+    widgetEditMode: () => widgetEditMode,
+    widgetEditModeInit: () => widgetEditModeInit,
+    widgetSystemNotifyThemeChange: () => widgetSystemNotifyThemeChange,
+    widgets: () => widgets
+  });
+  function setWidgetLiteMode(value) {
+    liteMode2 = value;
+  }
   function registerWidget(widget) {
     widgets.push(widget);
   }
-  var WidgetDragInfo = class {
-    offset;
-    widget;
-    sourceInsertionPoint;
-    targetInsertionPoint;
-    constructor(widget, sourceInsertionPoint, offset) {
-      this.widget = widget;
-      this.sourceInsertionPoint = sourceInsertionPoint;
-      this.targetInsertionPoint = null;
-      this.offset = offset;
-    }
-  };
-  var WidgetBase = class {
-    element;
-    isActive;
-    #content;
-    #preview;
-    #bagPlaceHolder;
-    #bagGroup;
-    #aboutToDel;
-    #settings;
-    constructor() {
-      this.element = this.#createWidgetDiv();
-      this.isActive = false;
-      this.#content = null;
-      this.#preview = false;
-      this.#aboutToDel = false;
-    }
-    createWidgetErrorContent(name2) {
-      const p4 = document.createElement("p");
-      p4.classList.add("smpp-error-widget");
-      p4.innerHTML =
-        "<span>Probleem bij het laden van de widget: </span><code class='widgetName'></code><button>Reset widget</button>";
-      p4.querySelector(".widgetName").innerText = name2;
-      p4.querySelector("button").addEventListener("click", async () => {
-        this.clearWidgetSettings();
-      });
-      return p4;
-    }
-    async clearWidgetSettings() {
-      await browser.runtime.sendMessage({
-        action: "setWidgetData",
-        widget: this.constructor.name,
-        data: this.defaultSettings(),
-      });
-      this.#settings = this.defaultSettings();
-      console.log("Clearing", this.name, "'s settings");
-      this.#content = null;
-      this.#setPreview(false);
-    }
-    #createWidgetDiv() {
-      const widgetDiv = document.createElement("div");
-      widgetDiv.addEventListener("mousedown", (e5) => {
-        this.startDragging(e5.clientX, e5.clientY);
-      });
-      widgetDiv.classList.add("smpp-widget");
-      return widgetDiv;
-    }
-    async #intoBag() {
-      if (this.element.parentElement === this.#bagGroup) {
-        return;
-      }
-      if (this.#bagPlaceHolder) {
-        this.#bagGroup.insertBefore(this.element, this.#bagPlaceHolder);
-        this.#bagPlaceHolder.remove();
-      } else {
-        this.element.remove();
-      }
-      await this.#setPreview(true);
-    }
-    async #setPreview(preview) {
-      if (this.#preview === preview && this.#content !== null) {
-        return;
-      }
-      let newContent;
-      try {
-        if (preview) {
-          this.element.classList.add("smpp-widget-preview");
-          newContent = await this.createPreview();
-        } else {
-          this.element.classList.remove("smpp-widget-preview");
-          await this.#loadSettings();
-          newContent = await this.createContent();
-          this.isActive = true;
-        }
-      } catch (e5) {
-        console.error("Failed to create widget content");
-        console.error(e5);
-        newContent = this.createWidgetErrorContent(this.name);
-      }
-      if (!newContent) {
-        console.error(
-          "createContent and createPreview method's needs to return an html object. in widget impl",
-        );
-        newContent = this.createWidgetErrorContent(this.name);
-      }
-      this.#content?.remove();
-      newContent.classList.add("smpp-widget-content");
-      this.#content = newContent;
-      this.element.dataset.widgetName = this.name;
-      this.element.innerHTML = "";
-      this.element.appendChild(this.#content);
-      this.#preview = preview;
-    }
-    async createIfNotExist() {
-      if (!this.#content) {
-        await this.#intoBag();
-      }
-    }
-    async setBagPlaceHolder(group, placeholder) {
-      this.#bagPlaceHolder = placeholder;
-      this.#bagGroup = group;
-    }
-    async addToPannel(pannel) {
-      await this.#setPreview(false);
-      pannel.appendChild(this.element);
-      pannel.appendChild(createInsertionPointHTML(false));
-    }
-    aboutToDel(value) {
-      this.#aboutToDel = value;
-      if (value) {
-        this.element.classList.add("smpp-widget-delete");
-      } else {
-        this.element.classList.remove("smpp-widget-delete");
-      }
-    }
-    dragMove(x3, y3) {
-      if (!curDragInfo || curDragInfo.widget !== this) {
-        return;
-      }
-      const el = this.element;
-      const offset = curDragInfo.offset;
-      el.style.left = `${x3 - offset.x}px`;
-      el.style.top = `${y3 - offset.y}px`;
-    }
-    async drop(cancel = false) {
-      if (!curDragInfo || curDragInfo.widget !== this) {
-        return;
-      }
-      const el = this.element;
-      el.classList.remove("smpp-widget-dragging");
-      el.style = "";
-      const sourceIp = curDragInfo.sourceInsertionPoint;
-      let targetIp = curDragInfo.targetInsertionPoint;
-      targetIp?.classList.remove("smpp-widget-insertion-point-targeted");
-      if (cancel || !targetIp) {
-        targetIp = sourceIp;
-      }
-      if (!cancel && this.#aboutToDel) {
-        targetIp = null;
-      }
-      bagHoverExit();
-      curDragInfo = null;
-      if (targetIp == null) {
-        this.onRemove();
-        this.isActive = false;
-        await this.#intoBag();
-      } else {
-        if (targetIp.classList.contains("smpp-widget-insertion-point-pannel")) {
-          const pannelContainer = targetIp.parentElement;
-          const pannel = await createPannelHTML({ widgets: [] });
-          pannelContainer.insertBefore(createInsertionPointHTML(true), targetIp.nextElementSibling);
-          pannelContainer.insertBefore(pannel, targetIp.nextElementSibling);
-          targetIp = pannel.firstChild;
-        }
-        const targetPannel = targetIp.parentElement;
-        targetPannel.style.display = "block";
-        targetPannel.insertBefore(createInsertionPointHTML(), targetIp.nextElementSibling);
-        targetPannel.insertBefore(el, targetIp.nextElementSibling);
-        await this.#setPreview(false);
-      }
-      const sourcePannel = sourceIp?.parentElement;
-      if (sourcePannel && sourcePannel.childNodes.length === 1) {
-        sourcePannel.nextElementSibling.remove();
-        sourcePannel.remove();
-      }
-      document.body.classList.remove("smpp-widget-dragging-something");
-      await saveWidgets();
-    }
-    startDragging(grabX, grabY) {
-      if (!widgetEditMode) {
-        return;
-      }
-      const el = this.element;
-      let sourceIp = this.element.previousElementSibling;
-      const rect = this.element.getBoundingClientRect();
-      if (el.parentElement === this.#bagGroup) {
-        sourceIp = null;
-        this.#bagGroup.insertBefore(this.#bagPlaceHolder, el);
-        el.remove();
-      } else {
-        el.nextElementSibling.remove();
-      }
-      curDragInfo = new WidgetDragInfo(this, sourceIp, {
-        x: grabX - rect.left,
-        y: grabY - rect.top,
-      });
-      document.body.classList.add("smpp-widget-dragging-something");
-      el.style.width = `${rect.width}px`;
-      el.style.left = `${rect.left}px`;
-      el.style.top = `${rect.top}px`;
-      el.style["transform-origin"] = `${curDragInfo.offset.x}px ${curDragInfo.offset.y}px`;
-      el.classList.add("smpp-widget-dragging");
-      document.body.appendChild(el);
-      closeBag();
-    }
-    /// Loads widget settings if needed.
-    async #loadSettings() {
-      if (this.#settings !== void 0) {
-        return;
-      }
-      const settings = await browser.runtime.sendMessage({
-        action: "getWidgetData",
-        widget: this.constructor.name,
-      });
-      this.#settings = fillObjectWithDefaults(settings, this.defaultSettings());
-    }
-    // modifies a setting
-    async setSetting(path, value) {
-      await this.#loadSettings();
-      setByPath(this.#settings, path, value);
-      await browser.runtime.sendMessage({
-        action: "setWidgetData",
-        widget: this.constructor.name,
-        data: this.#settings,
-      });
-      if (this.isActive) {
-        await this.onSettingsChange();
-      }
-    }
-    async getSetting(path) {
-      await this.#loadSettings();
-      return getByPath(this.#settings, path);
-    }
-    get settings() {
-      if (this.#settings === void 0) {
-        console.error(
-          "Settings were not loaded before access. Don't use .settings outside of the widget. Call await widget.getSetting(path)",
-        );
-      }
-      return this.#settings;
-    }
-    // Override us
-    // Name of the widget
-    get name() {
-      return this.constructor.name;
-    }
-    // The category the widget is in
-    get category() {
-      return "other";
-    }
-    // Returns the default settings. (will be filled in so that you always get a valid settings object inside onSettingsChange )
-    defaultSettings() {
-      return {};
-    }
-    // (Required): Gets called when the content element of the widget needs to be
-    // created (return html element). (Don't do slow tasks in here)
-    async createContent() {}
-    // Gets called when the preview element needs to be created (return html
-    // element) NOTE: preview and content never exist at the same time
-    async createPreview() {
-      return await this.createContent();
-    }
-    // Gets called when the settings of the widget change.
-    // Use this to update the widget content based on the new settings. (settings object is always valid based on the value returned by defaultSettings())
-    async onSettingsChange() {}
-    async onThemeChange() {}
-    async onRemove() {}
-  };
-  var ErrorWidget = class extends WidgetBase {
-    origWidgetName;
-    constructor(origWidgetName) {
-      super();
-      this.origWidgetName = origWidgetName;
-    }
-    get category() {
-      return null;
-    }
-    get name() {
-      return this.origWidgetName;
-    }
-    async createContent() {
-      return this.createWidgetErrorContent(this.origWidgetName);
-    }
-  };
-  var SmartschoolWidget = class extends WidgetBase {
-    smContent;
-    constructor(content) {
-      super();
-      this.smContent = content;
-      this.smContent.classList.add("smpp-widget-smartschool");
-    }
-    get category() {
-      return "smartschool";
-    }
-    get name() {
-      return `${this.constructor.name}-${this.smContent.id}`;
-    }
-    async createContent() {
-      return this.smContent;
-    }
-  };
   function targetInsertionPoint(target) {
     if (target !== curDragInfo.targetInsertionPoint) {
       curDragInfo.targetInsertionPoint?.classList.remove("smpp-widget-insertion-point-targeted");
@@ -11505,10 +9147,14 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       await browser.runtime.sendMessage({
         action: "setSetting",
         name: "appearance.news",
-        data: e5.target.checked,
+        data: e5.target.checked
       });
-      await settingsWindow.loadPage();
-      await loadQuickSettings();
+      const [{ settingsWindow: settingsWindow2 }, { loadQuickSettings: loadQuickSettings2 }] = await Promise.all([
+        Promise.resolve().then(() => (init_main_settings(), main_settings_exports)),
+        Promise.resolve().then(() => (init_quick_settings(), quick_settings_exports))
+      ]);
+      await settingsWindow2.loadPage();
+      await loadQuickSettings2();
     });
     div.appendChild(button);
     document.querySelector(".smpp-news-container").appendChild(div);
@@ -11530,7 +9176,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       return false;
     }
     let widgetData = await browser.runtime.sendMessage({
-      action: "getWidgetLayout",
+      action: "getWidgetLayout"
     });
     console.log("Applying widgets with data: \n", widgetData);
     let setDefaults = false;
@@ -11538,7 +9184,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       setDefaults = true;
       widgetData = {
         leftPannels: [{ widgets: [] }],
-        rightPannels: [{ widgets: [] }],
+        rightPannels: [{ widgets: [] }]
       };
     }
     for (const smWidget of document.querySelectorAll("#rightcontainer .homepage__block")) {
@@ -11590,7 +9236,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     }
     await browser.runtime.sendMessage({
       action: "setWidgetLayout",
-      layout: widgetData,
+      layout: widgetData
     });
   }
   function bagHoverEnter() {
@@ -11614,11 +9260,11 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       curDragInfo.widget.aboutToDel(false);
     }
   }
-  async function createGroup(bag, name2, displayName) {
+  async function createGroup(bag, name, displayName) {
     const group = document.createElement("div");
     group.classList.add("smpp-widget-bag-group");
     for (const widget of widgets) {
-      if (widget.category === name2) {
+      if (widget.category === name) {
         const pl = document.createElement("div");
         pl.classList.add("smpp-widget-bag-placeholder");
         await widget.setBagPlaceHolder(group, pl);
@@ -11639,7 +9285,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     const innerContent = document.createElement("div");
     innerContent.classList.add("smpp-widget-bag-inner-content");
     await createGroup(innerContent, "other", "Widgets");
-    if (!liteMode) {
+    if (!liteMode2) {
       await createGroup(innerContent, "games", "Games");
     }
     await createGroup(innerContent, "smartschool", "Smartschool Widgets");
@@ -11696,7 +9342,6 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       openBag();
     }
   }
-  var setEditModeFalse = () => setEditMode(false);
   function createWidgetsDoneButton() {
     doneButton = document.createElement("button");
     doneButton.innerHTML = `Done ${doneSvg}`;
@@ -11732,9 +9377,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     const settingPath = path.slice(index + 1);
     return [widgetName, settingPath];
   }
-  function getWidgetByName(name2) {
+  function getWidgetByName(name) {
     for (const widget of widgets) {
-      if (widget.name === name2) {
+      if (widget.name === name) {
         return widget;
       }
     }
@@ -11753,7 +9398,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   async function setEditMode(value) {
     if (value && !widgetEditModeInit) {
       console.error(
-        "Widget edit mode has not been initalized. setEditMode(true) has been called. (call initWidgetEditMode first) (This is a bug)",
+        "Widget edit mode has not been initalized. setEditMode(true) has been called. (call initWidgetEditMode first) (This is a bug)"
       );
     }
     if (!doneButton) {
@@ -11781,9 +9426,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       return;
     }
     if (!widgetSystemCreated) {
-      console.error(
-        "Widget system has not been created yet. But initWidgetEditMode has been called",
-      );
+      console.error("Widget system has not been created yet. But initWidgetEditMode has been called");
       return;
     }
     widgetEditModeInit = true;
@@ -11797,11 +9440,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       if (curDragInfo) {
         curDragInfo.widget.dragMove(e5.clientX, e5.clientY);
         const handleBounds = widgetBagHandle.getBoundingClientRect();
-        if (
-          e5.clientY < handleBounds.bottom &&
-          e5.clientX > handleBounds.left &&
-          e5.clientX < handleBounds.right
-        ) {
+        if (e5.clientY < handleBounds.bottom && e5.clientX > handleBounds.left && e5.clientX < handleBounds.right) {
           bagHoverEnter();
         } else if (hoveringBag) {
           bagHoverExit();
@@ -11821,227 +9460,338 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     btn.title = "Ga in/uit edit mode om de positie van je widgets te veranderen.";
     return btn;
   }
+  var PANNELIP_MARGIN_PX, widgetSystemCreated, widgetEditModeInit, widgetEditMode, widgets, hoveringBag, newsState, curDragInfo, widgetsContainer, widgetBag, widgetBagHandle, doneButton, liteMode2, WidgetDragInfo, WidgetBase, ErrorWidget, SmartschoolWidget, setEditModeFalse;
+  var init_widgets = __esm({
+    "src/widgets/widgets.ts"() {
+      "use strict";
+      init_utils();
+      init_svgs();
+      init_ui();
+      PANNELIP_MARGIN_PX = 20;
+      widgetSystemCreated = false;
+      widgetEditModeInit = false;
+      widgetEditMode = false;
+      widgets = [];
+      hoveringBag = false;
+      newsState = false;
+      curDragInfo = null;
+      liteMode2 = false;
+      WidgetDragInfo = class {
+        offset;
+        widget;
+        sourceInsertionPoint;
+        targetInsertionPoint;
+        constructor(widget, sourceInsertionPoint, offset) {
+          this.widget = widget;
+          this.sourceInsertionPoint = sourceInsertionPoint;
+          this.targetInsertionPoint = null;
+          this.offset = offset;
+        }
+      };
+      WidgetBase = class {
+        element;
+        isActive;
+        #content;
+        #preview;
+        #bagPlaceHolder;
+        #bagGroup;
+        #aboutToDel;
+        #settings;
+        constructor() {
+          this.element = this.#createWidgetDiv();
+          this.isActive = false;
+          this.#content = null;
+          this.#preview = false;
+          this.#aboutToDel = false;
+        }
+        createWidgetErrorContent(name) {
+          const p4 = document.createElement("p");
+          p4.classList.add("smpp-error-widget");
+          p4.innerHTML = "<span>Probleem bij het laden van de widget: </span><code class='widgetName'></code><button>Reset widget</button>";
+          p4.querySelector(".widgetName").innerText = name;
+          p4.querySelector("button").addEventListener("click", async () => {
+            this.clearWidgetSettings();
+          });
+          return p4;
+        }
+        async clearWidgetSettings() {
+          await browser.runtime.sendMessage({
+            action: "setWidgetData",
+            widget: this.constructor.name,
+            data: this.defaultSettings()
+          });
+          this.#settings = this.defaultSettings();
+          console.log("Clearing", this.name, "'s settings");
+          this.#content = null;
+          this.#setPreview(false);
+        }
+        #createWidgetDiv() {
+          const widgetDiv = document.createElement("div");
+          widgetDiv.addEventListener("mousedown", (e5) => {
+            this.startDragging(e5.clientX, e5.clientY);
+          });
+          widgetDiv.classList.add("smpp-widget");
+          return widgetDiv;
+        }
+        async #intoBag() {
+          if (this.element.parentElement === this.#bagGroup) {
+            return;
+          }
+          if (this.#bagPlaceHolder) {
+            this.#bagGroup.insertBefore(this.element, this.#bagPlaceHolder);
+            this.#bagPlaceHolder.remove();
+          } else {
+            this.element.remove();
+          }
+          await this.#setPreview(true);
+        }
+        async #setPreview(preview) {
+          if (this.#preview === preview && this.#content !== null) {
+            return;
+          }
+          let newContent;
+          try {
+            if (preview) {
+              this.element.classList.add("smpp-widget-preview");
+              newContent = await this.createPreview();
+            } else {
+              this.element.classList.remove("smpp-widget-preview");
+              await this.#loadSettings();
+              newContent = await this.createContent();
+              this.isActive = true;
+            }
+          } catch (e5) {
+            console.error("Failed to create widget content");
+            console.error(e5);
+            newContent = this.createWidgetErrorContent(this.name);
+          }
+          if (!newContent) {
+            console.error(
+              "createContent and createPreview method's needs to return an html object. in widget impl"
+            );
+            newContent = this.createWidgetErrorContent(this.name);
+          }
+          this.#content?.remove();
+          newContent.classList.add("smpp-widget-content");
+          this.#content = newContent;
+          this.element.dataset.widgetName = this.name;
+          this.element.innerHTML = "";
+          this.element.appendChild(this.#content);
+          this.#preview = preview;
+        }
+        async createIfNotExist() {
+          if (!this.#content) {
+            await this.#intoBag();
+          }
+        }
+        async setBagPlaceHolder(group, placeholder) {
+          this.#bagPlaceHolder = placeholder;
+          this.#bagGroup = group;
+        }
+        async addToPannel(pannel) {
+          await this.#setPreview(false);
+          pannel.appendChild(this.element);
+          pannel.appendChild(createInsertionPointHTML(false));
+        }
+        aboutToDel(value) {
+          this.#aboutToDel = value;
+          if (value) {
+            this.element.classList.add("smpp-widget-delete");
+          } else {
+            this.element.classList.remove("smpp-widget-delete");
+          }
+        }
+        dragMove(x3, y3) {
+          if (!curDragInfo || curDragInfo.widget !== this) {
+            return;
+          }
+          const el = this.element;
+          const offset = curDragInfo.offset;
+          el.style.left = `${x3 - offset.x}px`;
+          el.style.top = `${y3 - offset.y}px`;
+        }
+        async drop(cancel = false) {
+          if (!curDragInfo || curDragInfo.widget !== this) {
+            return;
+          }
+          const el = this.element;
+          el.classList.remove("smpp-widget-dragging");
+          el.style = "";
+          const sourceIp = curDragInfo.sourceInsertionPoint;
+          let targetIp = curDragInfo.targetInsertionPoint;
+          targetIp?.classList.remove("smpp-widget-insertion-point-targeted");
+          if (cancel || !targetIp) {
+            targetIp = sourceIp;
+          }
+          if (!cancel && this.#aboutToDel) {
+            targetIp = null;
+          }
+          bagHoverExit();
+          curDragInfo = null;
+          if (targetIp == null) {
+            this.onRemove();
+            this.isActive = false;
+            await this.#intoBag();
+          } else {
+            if (targetIp.classList.contains("smpp-widget-insertion-point-pannel")) {
+              const pannelContainer = targetIp.parentElement;
+              const pannel = await createPannelHTML({ widgets: [] });
+              pannelContainer.insertBefore(createInsertionPointHTML(true), targetIp.nextElementSibling);
+              pannelContainer.insertBefore(pannel, targetIp.nextElementSibling);
+              targetIp = pannel.firstChild;
+            }
+            const targetPannel = targetIp.parentElement;
+            targetPannel.style.display = "block";
+            targetPannel.insertBefore(createInsertionPointHTML(), targetIp.nextElementSibling);
+            targetPannel.insertBefore(el, targetIp.nextElementSibling);
+            await this.#setPreview(false);
+          }
+          const sourcePannel = sourceIp?.parentElement;
+          if (sourcePannel && sourcePannel.childNodes.length === 1) {
+            sourcePannel.nextElementSibling.remove();
+            sourcePannel.remove();
+          }
+          document.body.classList.remove("smpp-widget-dragging-something");
+          await saveWidgets();
+        }
+        startDragging(grabX, grabY) {
+          if (!widgetEditMode) {
+            return;
+          }
+          const el = this.element;
+          let sourceIp = this.element.previousElementSibling;
+          const rect = this.element.getBoundingClientRect();
+          if (el.parentElement === this.#bagGroup) {
+            sourceIp = null;
+            this.#bagGroup.insertBefore(this.#bagPlaceHolder, el);
+            el.remove();
+          } else {
+            el.nextElementSibling.remove();
+          }
+          curDragInfo = new WidgetDragInfo(this, sourceIp, {
+            x: grabX - rect.left,
+            y: grabY - rect.top
+          });
+          document.body.classList.add("smpp-widget-dragging-something");
+          el.style.width = `${rect.width}px`;
+          el.style.left = `${rect.left}px`;
+          el.style.top = `${rect.top}px`;
+          el.style["transform-origin"] = `${curDragInfo.offset.x}px ${curDragInfo.offset.y}px`;
+          el.classList.add("smpp-widget-dragging");
+          document.body.appendChild(el);
+          closeBag();
+        }
+        /// Loads widget settings if needed.
+        async #loadSettings() {
+          if (this.#settings !== void 0) {
+            return;
+          }
+          const settings = await browser.runtime.sendMessage({
+            action: "getWidgetData",
+            widget: this.constructor.name
+          });
+          this.#settings = fillObjectWithDefaults(settings, this.defaultSettings());
+        }
+        // modifies a setting
+        async setSetting(path, value) {
+          await this.#loadSettings();
+          setByPath(this.#settings, path, value);
+          await browser.runtime.sendMessage({
+            action: "setWidgetData",
+            widget: this.constructor.name,
+            data: this.#settings
+          });
+          if (this.isActive) {
+            await this.onSettingsChange();
+          }
+        }
+        async getSetting(path) {
+          await this.#loadSettings();
+          return getByPath(this.#settings, path);
+        }
+        get settings() {
+          if (this.#settings === void 0) {
+            console.error(
+              "Settings were not loaded before access. Don't use .settings outside of the widget. Call await widget.getSetting(path)"
+            );
+          }
+          return this.#settings;
+        }
+        // Override us
+        // Name of the widget
+        get name() {
+          return this.constructor.name;
+        }
+        // The category the widget is in
+        get category() {
+          return "other";
+        }
+        // Returns the default settings. (will be filled in so that you always get a valid settings object inside onSettingsChange )
+        defaultSettings() {
+          return {};
+        }
+        // (Required): Gets called when the content element of the widget needs to be
+        // created (return html element). (Don't do slow tasks in here)
+        async createContent() {
+        }
+        // Gets called when the preview element needs to be created (return html
+        // element) NOTE: preview and content never exist at the same time
+        async createPreview() {
+          return await this.createContent();
+        }
+        // Gets called when the settings of the widget change.
+        // Use this to update the widget content based on the new settings. (settings object is always valid based on the value returned by defaultSettings())
+        async onSettingsChange() {
+        }
+        async onThemeChange() {
+        }
+        async onRemove() {
+        }
+      };
+      ErrorWidget = class extends WidgetBase {
+        origWidgetName;
+        constructor(origWidgetName) {
+          super();
+          this.origWidgetName = origWidgetName;
+        }
+        get category() {
+          return null;
+        }
+        get name() {
+          return this.origWidgetName;
+        }
+        async createContent() {
+          return this.createWidgetErrorContent(this.origWidgetName);
+        }
+      };
+      SmartschoolWidget = class extends WidgetBase {
+        smContent;
+        constructor(content) {
+          super();
+          this.smContent = content;
+          this.smContent.classList.add("smpp-widget-smartschool");
+        }
+        get category() {
+          return "smartschool";
+        }
+        get name() {
+          return `${this.constructor.name}-${this.smContent.id}`;
+        }
+        async createContent() {
+          return this.smContent;
+        }
+      };
+      setEditModeFalse = () => setEditMode(false);
+    }
+  });
 
   // src/main-features/quick-menu/dmenu.ts
-  var active_dmenu = null;
-  var dmenuConfig = null;
   async function reloadDMenuConfig() {
     dmenuConfig = await browser.runtime.sendMessage({
       action: "getSetting",
-      name: "other.dmenu",
+      name: "other.dmenu"
     });
   }
-  var DMenu = class {
-    openerEl;
-    menuEl;
-    #endFunc;
-    #inputEl;
-    #itemListEl;
-    #selectedIndex;
-    constructor(itemList, endFunc = void 0, title = "dmenu:", openerEl = void 0) {
-      this.endFunc = endFunc;
-      this.openerEl = openerEl;
-      this.userText = "";
-      this.selectedIndex = 0;
-      this.#mkDmenu(itemList, title);
-      this.inputEl.focus();
-    }
-    isOpen() {
-      return this.menuEl != null;
-    }
-    close() {
-      if (!this.isOpen()) {
-        return;
-      }
-      this.menuEl.remove();
-      this.menuEl = null;
-    }
-    #accept(row = void 0) {
-      if (row === void 0) {
-        row = this.itemListEl.childNodes[this.selectedIndex];
-      }
-      let content = this.inputEl.value;
-      if (row !== void 0 && !row.classList.contains("hidden")) {
-        content = row.dataset.content;
-      }
-      if (this.endFunc !== void 0 && content !== "") {
-        this.endFunc(content);
-      }
-      this.close();
-    }
-    #onKeydown(e5) {
-      if (e5.key === "Enter") {
-        this.#accept();
-      } else if (e5.key === "Escape") {
-        this.close();
-      } else if ((e5.key === "Tab" && e5.shiftKey) || e5.key === "ArrowUp") {
-        this.#selPrev();
-      } else if ((e5.key === "Tab" && !e5.shiftKey) || e5.key === "ArrowDown") {
-        this.#selNext();
-      } else {
-        return;
-      }
-      e5.preventDefault();
-    }
-    #oninput() {
-      this.#sort();
-      return;
-    }
-    #selNext() {
-      this.#select(this.selectedIndex + 1);
-    }
-    #selPrev() {
-      this.#select(this.selectedIndex - 1);
-    }
-    #validIndex(index) {
-      if (index < 0 || index >= this.itemListEl.childNodes.length) {
-        return false;
-      }
-      return !this.itemListEl.childNodes[index].classList.contains("hidden");
-    }
-    #select(index) {
-      if (!this.#validIndex(index)) {
-        return;
-      }
-      const row = this.itemListEl.childNodes[this.selectedIndex];
-      row.classList.remove("dmenu-selected");
-      this.selectedIndex = index;
-      const newrow = this.itemListEl.childNodes[this.selectedIndex];
-      newrow.classList.add("dmenu-selected");
-      newrow.scrollIntoView(false);
-    }
-    #sort() {
-      this.selectedIndex = 0;
-      const searchq = this.inputEl.value.trim();
-      const items = [];
-      for (const node of this.itemListEl.childNodes) {
-        const score = this.#matchScore(node.dataset.content, searchq);
-        if (score === 0 && searchq !== "") {
-          node.classList.add("hidden");
-        } else {
-          node.classList.remove("hidden");
-        }
-        items.push({ score, htmlNode: node });
-        if (dmenuConfig.itemScore) {
-          node.getElementsByClassName("dmenu-score")[0].innerText = score;
-        }
-      }
-      const sortedItems = items.sort((a5, b3) => {
-        if (a5.score < b3.score) {
-          return 1;
-        }
-        if (a5.score > b3.score) {
-          return -1;
-        }
-        return 0;
-      });
-      for (let i5 = 0; i5 < sortedItems.length; i5++) {
-        const item = sortedItems[i5];
-        if (i5 === 0) {
-          item.htmlNode.classList.add("dmenu-selected");
-        } else {
-          item.htmlNode.classList.remove("dmenu-selected");
-        }
-        this.itemListEl.appendChild(item.htmlNode);
-      }
-    }
-    #matchScore(str, match) {
-      str = str.toLowerCase();
-      match = match.toLowerCase();
-      let score = 0;
-      let mi = 0;
-      let i5 = 0;
-      let streak = 0;
-      let streakStartI = 0;
-      while (true) {
-        if (i5 >= str.length || mi >= match.length) {
-          break;
-        }
-        if (str[i5] === match[mi]) {
-          score += (streak + 1) * (streak + 1) * ((str.length - streakStartI) / str.length);
-          mi += 1;
-          streak += 1;
-        } else {
-          streakStartI = i5;
-          streak = 0;
-        }
-        i5++;
-      }
-      if (mi < match.length) {
-        return 0;
-      }
-      if (score < 0) {
-        score = 0;
-      }
-      return score;
-    }
-    #mkRow(item, parent) {
-      let cmd;
-      let meta;
-      if (typeof item === "string") {
-        cmd = item.toLowerCase();
-      } else {
-        cmd = item.value;
-        meta = item.meta;
-      }
-      const row = document.createElement("div");
-      row.classList.add("dmenu-row");
-      row.innerHTML =
-        '<div class="dmenu-content"></div><div class="dmenu-meta"></div><div class="dmenu-score"></div>';
-      row.getElementsByClassName("dmenu-content")[0].innerText = cmd;
-      row.dataset.content = cmd;
-      if (meta !== void 0) {
-        row.getElementsByClassName("dmenu-meta")[0].innerText = meta;
-      }
-      if (dmenuConfig.itemScore) {
-        row.getElementsByClassName("dmenu-score")[0].innerText = "0";
-      }
-      row.addEventListener("click", (_e) => {
-        this.#accept(row);
-      });
-      parent.appendChild(row);
-      return row;
-    }
-    #mkDmenu(itemList, title) {
-      this.menuEl = document.createElement("div");
-      this.menuEl.classList.add("dmenu");
-      if (randomChance(1 / 100)) {
-        this.menuEl.classList.add("jokeDmenu");
-      }
-      if (dmenuConfig.centered) {
-        this.menuEl.classList.add("dmenu-centered");
-      }
-      const top = document.createElement("div");
-      top.classList.add("dmenu-top");
-      const dtitle = document.createElement("label");
-      dtitle.innerText = title;
-      dtitle.classList.add("dmenu-title");
-      top.appendChild(dtitle);
-      this.inputEl = document.createElement("input");
-      this.inputEl.type = "text";
-      this.inputEl.classList.add("dmenu-input");
-      this.inputEl.addEventListener("keydown", (e5) => {
-        this.#onKeydown(e5);
-      });
-      this.inputEl.addEventListener("input", (_e) => {
-        this.#oninput();
-      });
-      top.appendChild(this.inputEl);
-      this.menuEl.appendChild(top);
-      this.itemListEl = document.createElement("div");
-      this.itemListEl.classList.add("dmenu-itemlist");
-      this.menuEl.appendChild(this.itemListEl);
-      let first = true;
-      for (const item of itemList) {
-        const row = this.#mkRow(item, this.itemListEl);
-        if (first) {
-          row.classList.add("dmenu-selected");
-          first = false;
-        }
-      }
-      document.body.appendChild(this.menuEl);
-    }
-  };
   function dmenu(itemList, endFunc = void 0, title = "dmenu:", opener = void 0) {
     if (active_dmenu?.isOpen()) {
       active_dmenu.close();
@@ -12060,22 +9810,242 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     });
     return quickMenuButton;
   }
-  document.addEventListener("click", (e5) => {
-    if (active_dmenu == null || !active_dmenu.isOpen()) {
-      return;
-    }
-    if (!active_dmenu.menuEl.contains(e5.target) && e5.target !== active_dmenu.openerEl) {
-      active_dmenu.close();
-      e5.preventDefault();
+  var active_dmenu, dmenuConfig, DMenu;
+  var init_dmenu = __esm({
+    "src/main-features/quick-menu/dmenu.ts"() {
+      "use strict";
+      init_utils();
+      init_quick();
+      active_dmenu = null;
+      dmenuConfig = null;
+      DMenu = class {
+        openerEl;
+        menuEl;
+        #endFunc;
+        #inputEl;
+        #itemListEl;
+        #selectedIndex;
+        constructor(itemList, endFunc = void 0, title = "dmenu:", openerEl = void 0) {
+          this.endFunc = endFunc;
+          this.openerEl = openerEl;
+          this.userText = "";
+          this.selectedIndex = 0;
+          this.#mkDmenu(itemList, title);
+          this.inputEl.focus();
+        }
+        isOpen() {
+          return this.menuEl != null;
+        }
+        close() {
+          if (!this.isOpen()) {
+            return;
+          }
+          this.menuEl.remove();
+          this.menuEl = null;
+        }
+        #accept(row = void 0) {
+          if (row === void 0) {
+            row = this.itemListEl.childNodes[this.selectedIndex];
+          }
+          let content = this.inputEl.value;
+          if (row !== void 0 && !row.classList.contains("hidden")) {
+            content = row.dataset.content;
+          }
+          if (this.endFunc !== void 0 && content !== "") {
+            this.endFunc(content);
+          }
+          this.close();
+        }
+        #onKeydown(e5) {
+          if (e5.key === "Enter") {
+            this.#accept();
+          } else if (e5.key === "Escape") {
+            this.close();
+          } else if (e5.key === "Tab" && e5.shiftKey || e5.key === "ArrowUp") {
+            this.#selPrev();
+          } else if (e5.key === "Tab" && !e5.shiftKey || e5.key === "ArrowDown") {
+            this.#selNext();
+          } else {
+            return;
+          }
+          e5.preventDefault();
+        }
+        #oninput() {
+          this.#sort();
+          return;
+        }
+        #selNext() {
+          this.#select(this.selectedIndex + 1);
+        }
+        #selPrev() {
+          this.#select(this.selectedIndex - 1);
+        }
+        #validIndex(index) {
+          if (index < 0 || index >= this.itemListEl.childNodes.length) {
+            return false;
+          }
+          return !this.itemListEl.childNodes[index].classList.contains("hidden");
+        }
+        #select(index) {
+          if (!this.#validIndex(index)) {
+            return;
+          }
+          const row = this.itemListEl.childNodes[this.selectedIndex];
+          row.classList.remove("dmenu-selected");
+          this.selectedIndex = index;
+          const newrow = this.itemListEl.childNodes[this.selectedIndex];
+          newrow.classList.add("dmenu-selected");
+          newrow.scrollIntoView(false);
+        }
+        #sort() {
+          this.selectedIndex = 0;
+          const searchq = this.inputEl.value.trim();
+          const items = [];
+          for (const node of this.itemListEl.childNodes) {
+            const score = this.#matchScore(node.dataset.content, searchq);
+            if (score === 0 && searchq !== "") {
+              node.classList.add("hidden");
+            } else {
+              node.classList.remove("hidden");
+            }
+            items.push({ score, htmlNode: node });
+            if (dmenuConfig.itemScore) {
+              node.getElementsByClassName("dmenu-score")[0].innerText = score;
+            }
+          }
+          const sortedItems = items.sort((a5, b3) => {
+            if (a5.score < b3.score) {
+              return 1;
+            }
+            if (a5.score > b3.score) {
+              return -1;
+            }
+            return 0;
+          });
+          for (let i5 = 0; i5 < sortedItems.length; i5++) {
+            const item = sortedItems[i5];
+            if (i5 === 0) {
+              item.htmlNode.classList.add("dmenu-selected");
+            } else {
+              item.htmlNode.classList.remove("dmenu-selected");
+            }
+            this.itemListEl.appendChild(item.htmlNode);
+          }
+        }
+        #matchScore(str, match) {
+          str = str.toLowerCase();
+          match = match.toLowerCase();
+          let score = 0;
+          let mi = 0;
+          let i5 = 0;
+          let streak = 0;
+          let streakStartI = 0;
+          while (true) {
+            if (i5 >= str.length || mi >= match.length) {
+              break;
+            }
+            if (str[i5] === match[mi]) {
+              score += (streak + 1) * (streak + 1) * ((str.length - streakStartI) / str.length);
+              mi += 1;
+              streak += 1;
+            } else {
+              streakStartI = i5;
+              streak = 0;
+            }
+            i5++;
+          }
+          if (mi < match.length) {
+            return 0;
+          }
+          if (score < 0) {
+            score = 0;
+          }
+          return score;
+        }
+        #mkRow(item, parent) {
+          let cmd;
+          let meta;
+          if (typeof item === "string") {
+            cmd = item.toLowerCase();
+          } else {
+            cmd = item.value;
+            meta = item.meta;
+          }
+          const row = document.createElement("div");
+          row.classList.add("dmenu-row");
+          row.innerHTML = '<div class="dmenu-content"></div><div class="dmenu-meta"></div><div class="dmenu-score"></div>';
+          row.getElementsByClassName("dmenu-content")[0].innerText = cmd;
+          row.dataset.content = cmd;
+          if (meta !== void 0) {
+            row.getElementsByClassName("dmenu-meta")[0].innerText = meta;
+          }
+          if (dmenuConfig.itemScore) {
+            row.getElementsByClassName("dmenu-score")[0].innerText = "0";
+          }
+          row.addEventListener("click", (_e) => {
+            this.#accept(row);
+          });
+          parent.appendChild(row);
+          return row;
+        }
+        #mkDmenu(itemList, title) {
+          this.menuEl = document.createElement("div");
+          this.menuEl.classList.add("dmenu");
+          if (randomChance(1 / 100)) {
+            this.menuEl.classList.add("jokeDmenu");
+          }
+          if (dmenuConfig.centered) {
+            this.menuEl.classList.add("dmenu-centered");
+          }
+          const top = document.createElement("div");
+          top.classList.add("dmenu-top");
+          const dtitle = document.createElement("label");
+          dtitle.innerText = title;
+          dtitle.classList.add("dmenu-title");
+          top.appendChild(dtitle);
+          this.inputEl = document.createElement("input");
+          this.inputEl.type = "text";
+          this.inputEl.classList.add("dmenu-input");
+          this.inputEl.addEventListener("keydown", (e5) => {
+            this.#onKeydown(e5);
+          });
+          this.inputEl.addEventListener("input", (_e) => {
+            this.#oninput();
+          });
+          top.appendChild(this.inputEl);
+          this.menuEl.appendChild(top);
+          this.itemListEl = document.createElement("div");
+          this.itemListEl.classList.add("dmenu-itemlist");
+          this.menuEl.appendChild(this.itemListEl);
+          let first = true;
+          for (const item of itemList) {
+            const row = this.#mkRow(item, this.itemListEl);
+            if (first) {
+              row.classList.add("dmenu-selected");
+              first = false;
+            }
+          }
+          document.body.appendChild(this.menuEl);
+        }
+      };
+      document.addEventListener("click", (e5) => {
+        if (active_dmenu == null || !active_dmenu.isOpen()) {
+          return;
+        }
+        if (!active_dmenu.menuEl.contains(e5.target) && e5.target !== active_dmenu.openerEl) {
+          active_dmenu.close();
+          e5.preventDefault();
+        }
+      });
     }
   });
 
   // src/main-features/quick-menu/config.ts
-  function gatherOptions(template, name2) {
+  function gatherOptions(template, name) {
     let options = [];
     for (const keyName of Object.keys(template)) {
       const key = template[keyName];
-      const newName = (name2 ? `${name2}.` : "") + keyName;
+      const newName = (name ? `${name}.` : "") + keyName;
       if (typeof key === "object" && !Array.isArray(key)) {
         options = options.concat(gatherOptions(template[keyName], newName));
       } else if (key === "array") {
@@ -12087,7 +10057,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   }
   async function getDMenuOptionsForSettings(toplevel) {
     const template = await browser.runtime.sendMessage({
-      action: "getSettingsTemplate",
+      action: "getSettingsTemplate"
     });
     let options = [];
     for (const cat of Object.keys(template)) {
@@ -12106,7 +10076,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       }
     }
     console.error(
-      `Was not able to convert the optName '${optName}' to full because it was not found in the template json (returning an option with no category)`,
+      `Was not able to convert the optName '${optName}' to full because it was not found in the template json (returning an option with no category)`
     );
     return optName;
   }
@@ -12114,19 +10084,19 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     await browser.runtime.sendMessage({
       action: "setSetting",
       name: path,
-      data: value,
+      data: value
     });
     await apply();
   }
   async function dmenuEditConfig(path) {
     const templates = await browser.runtime.sendMessage({
-      action: "getSettingsTemplate",
+      action: "getSettingsTemplate"
     });
     const configPath = getFullOptPath(templates, path);
     const template = getByPath(templates, configPath);
     let optionValue = await browser.runtime.sendMessage({
       action: "getSetting",
-      name: configPath,
+      name: configPath
     });
     if (optionValue.error) {
       console.error(`error from service worker: ${optionValue.error}`);
@@ -12143,7 +10113,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             setSettingByPath(configPath, false);
           }
         },
-        label,
+        label
       );
     } else if (template === "number") {
       dmenu(
@@ -12155,7 +10125,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           }
           setSettingByPath(configPath, Number(cmd));
         },
-        label,
+        label
       );
     } else if (Array.isArray(template)) {
       dmenu(
@@ -12163,34 +10133,31 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         (cmd, _shift) => {
           setSettingByPath(configPath, cmd);
         },
-        label,
+        label
       );
     } else {
       if (template !== "string") {
-        console.error(
-          `Invalid template type: '${template}' Falling back to 'string' template type`,
-        );
+        console.error(`Invalid template type: '${template}' Falling back to 'string' template type`);
       }
       dmenu(
         [],
         (cmd, _shift) => {
           setSettingByPath(configPath, cmd);
         },
-        label,
+        label
       );
     }
   }
+  var init_config2 = __esm({
+    "src/main-features/quick-menu/config.ts"() {
+      "use strict";
+      init_utils();
+      init_main();
+      init_dmenu();
+    }
+  });
 
   // src/main-features/quick-menu/quick.ts
-  var quicks = [];
-  var links = [];
-  var vakken = [];
-  var goto_items = [];
-  if (document.querySelector(".topnav")) {
-    fetch_links();
-    fetch_vakken();
-    scrape_goto();
-  }
   function quick_cmd_list() {
     const cmd_list = [];
     for (let i5 = 0; i5 < quicks.length; i5++) {
@@ -12198,8 +10165,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     }
     return cmd_list;
   }
-  function add_quick(name2, url) {
-    const normalizedName = name2.toLowerCase();
+  function add_quick(name, url) {
+    const normalizedName = name.toLowerCase();
     const quick = { name: normalizedName, url };
     for (let i5 = 0; i5 < quicks.length; i5++) {
       if (quicks[i5].name === normalizedName) {
@@ -12211,9 +10178,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     quicks.push(quick);
     quick_save();
   }
-  function remove_quick(name2) {
+  function remove_quick(name) {
     for (let i5 = 0; i5 < quicks.length; i5++) {
-      if (quicks[i5].name === name2) {
+      if (quicks[i5].name === name) {
         quicks.splice(i5, 1);
         quick_save();
         return;
@@ -12223,7 +10190,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   async function quickLoad() {
     const quicks2 = await browser.runtime.sendMessage({
       action: "getSetting",
-      name: "other.quicks",
+      name: "other.quicks"
     });
     if (!quicks2) {
       return [];
@@ -12234,17 +10201,17 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     await browser.runtime.sendMessage({
       action: "setSetting",
       name: "other.quicks",
-      data: quicks,
+      data: quicks
     });
   }
   function add_quick_interactive() {
     const cmd_list = quick_cmd_list();
     dmenu(
       cmd_list,
-      (name2, _shift) => {
+      (name, _shift) => {
         value_list = [];
         for (let i5 = 0; i5 < quicks.length; i5++) {
-          if (quicks[i5].name === name2) {
+          if (quicks[i5].name === name) {
             value_list = [{ value: quicks[i5].url }];
             break;
           }
@@ -12255,22 +10222,22 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             if (!value.startsWith("http")) {
               value = `https://${value}`;
             }
-            add_quick(name2, value);
+            add_quick(name, value);
           },
-          "value:",
+          "value:"
         );
       },
-      "name:",
+      "name:"
     );
   }
   function remove_quick_interactive() {
     const cmd_list = quick_cmd_list();
     dmenu(
       cmd_list,
-      (name2, _shift) => {
-        remove_quick(name2);
+      (name, _shift) => {
+        remove_quick(name);
       },
-      "name:",
+      "name:"
     );
   }
   async function fetch_links() {
@@ -12283,7 +10250,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         links.push({
           url: response_data[i5].url,
           value: response_data[i5].name.toLowerCase(),
-          meta: "link",
+          meta: "link"
         });
       }
     } else {
@@ -12318,7 +10285,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       goto_items.push({
         url: item.href,
         value: item.innerText.toLowerCase().trim(),
-        meta: "goto",
+        meta: "goto"
       });
     }
   }
@@ -12326,29 +10293,25 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     document.body.innerHTML = "";
   }
   async function do_qm(opener = "") {
-    let cmd_list = quick_cmd_list()
-      .concat(goto_items)
-      .concat(vakken)
-      .concat(links)
-      .concat([
-        "home",
-        "quick add",
-        "quick remove",
-        "unbloat",
-        "config",
-        "clearsettings",
-        "discord",
-        "toggle performance mode",
-        "dizzy",
-        "breakdmenu",
-        "glass",
-        "ridge",
-        "reset plant",
-        "remove current theme",
-        "test cats",
-        "posh text",
-        "funny text",
-      ]);
+    let cmd_list = quick_cmd_list().concat(goto_items).concat(vakken).concat(links).concat([
+      "home",
+      "quick add",
+      "quick remove",
+      "unbloat",
+      "config",
+      "clearsettings",
+      "discord",
+      "toggle performance mode",
+      "dizzy",
+      "breakdmenu",
+      "glass",
+      "ridge",
+      "reset plant",
+      "remove current theme",
+      "test cats",
+      "posh text",
+      "funny text"
+    ]);
     if (dmenuConfig.toplevelConfig) {
       cmd_list = cmd_list.concat(await getDMenuOptionsForSettings(true));
     }
@@ -12364,8 +10327,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
               action: "setSetting",
               name: "other.dmenu",
               data: {
-                itemScore: false,
-              },
+                itemScore: false
+              }
             });
             return;
           case "config":
@@ -12374,7 +10337,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
               (cmd2, _shift) => {
                 dmenuEditConfig(cmd2);
               },
-              "config: ",
+              "config: "
             );
             return;
           case "quick add":
@@ -12416,17 +10379,17 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           case "plant data":
             console.log(
               await browser.runtime.sendMessage({
-                action: "getPlantAppData",
-              }),
+                action: "getPlantAppData"
+              })
             );
             break;
           case "remove current theme": {
-            const data2 = await browser.runtime.sendMessage({
-              action: "getSettingsData",
+            const data = await browser.runtime.sendMessage({
+              action: "getSettingsData"
             });
             await browser.runtime.sendMessage({
               action: "removeCustomTheme",
-              id: data2.appearance.theme,
+              id: data.appearance.theme
             });
             break;
           }
@@ -12434,7 +10397,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             const themes2 = await browser.runtime.sendMessage({
               action: "getThemes",
               categories: ["quickSettings"],
-              includeHidden: true,
+              includeHidden: true
             });
             console.log(themes2);
             break;
@@ -12442,13 +10405,13 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           case "posh text":
             document.body.style.setProperty(
               "--font-family",
-              `"Monsieur La Doulaise", "Montserrat", "Trebuchet MS", sans-serif`,
+              `"Monsieur La Doulaise", "Montserrat", "Trebuchet MS", sans-serif`
             );
             break;
           case "funny text":
             document.body.style.setProperty(
               "--font-family",
-              `"Comic Neue", "Montserrat", "Trebuchet MS", sans-serif`,
+              `"Comic Neue", "Montserrat", "Trebuchet MS", sans-serif`
             );
             break;
           default:
@@ -12481,992 +10444,991 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         }
       },
       "quick:",
-      opener,
+      opener
     );
   }
+  var quicks, links, vakken, goto_items;
+  var init_quick = __esm({
+    "src/main-features/quick-menu/quick.ts"() {
+      "use strict";
+      init_utils();
+      init_utils2();
+      init_plant();
+      init_globalchat();
+      init_config2();
+      init_dmenu();
+      quicks = [];
+      links = [];
+      vakken = [];
+      goto_items = [];
+      if (document.querySelector(".topnav")) {
+        fetch_links();
+        fetch_vakken();
+        scrape_goto();
+      }
+    }
+  });
 
   // src/main-features/keybinds.ts
-  document.addEventListener("keyup", async (e5) => {
-    if (e5.target?.tagName === "INPUT") {
-      return;
-    }
-    if (e5.target?.tagName === "TEXTAREA") {
-      return;
-    }
-    if (document.getElementById("tinymce")) {
-      return;
-    }
-    const key = e5.key === " " ? "Space" : e5.key.length === 1 ? e5.key.toUpperCase() : e5.key;
-    if (
-      (typeof keybinds === "undefined" || !keybinds || Object.keys(keybinds).length === 0) &&
-      key === ":"
-    ) {
-      do_qm("dmenu");
-      return;
-    }
-    switch (key) {
-      case keybinds.dmenu:
-        do_qm(keybinds.dmenu);
-        break;
-      case keybinds.settings:
-        openSettingsWindow(e5);
-        break;
-      case keybinds.gc:
-        openGlobalChat(e5);
-        break;
-    }
-    if (!widgetEditModeInit) {
-      return;
-    }
-    if (key === "Escape" && widgetEditMode) {
-      await setEditMode(false);
-      return;
-    }
-    switch (key) {
-      case keybinds.widgetEditMode:
-        await setEditMode(true);
-        break;
-      case keybinds.widgetBag:
-        if (widgetEditMode) {
+  var init_keybinds = __esm({
+    "src/main-features/keybinds.ts"() {
+      "use strict";
+      init_widgets();
+      init_globalchat();
+      init_main();
+      init_quick();
+      init_main_settings();
+      document.addEventListener("keyup", async (e5) => {
+        if (e5.target?.tagName === "INPUT") {
+          return;
+        }
+        if (e5.target?.tagName === "TEXTAREA") {
+          return;
+        }
+        if (document.getElementById("tinymce")) {
+          return;
+        }
+        const key = e5.key === " " ? "Space" : e5.key.length === 1 ? e5.key.toUpperCase() : e5.key;
+        if ((typeof keybinds === "undefined" || !keybinds || Object.keys(keybinds).length === 0) && key === ":") {
+          do_qm("dmenu");
+          return;
+        }
+        if (!keybinds) {
+          return;
+        }
+        const dmenuKey = keybinds.dmenu;
+        const settingsKey = keybinds.settings;
+        const gcKey = keybinds.gc;
+        if (dmenuKey && key === dmenuKey) {
+          do_qm(dmenuKey);
+          return;
+        }
+        if (settingsKey && key === settingsKey) {
+          openSettingsWindow(e5);
+          return;
+        }
+        if (gcKey && key === gcKey) {
+          openGlobalChat(e5);
+          return;
+        }
+        if (!widgetEditModeInit) {
+          return;
+        }
+        if (key === "Escape" && widgetEditMode) {
+          await setEditMode(false);
+          return;
+        }
+        if (keybinds.widgetEditMode && key === keybinds.widgetEditMode) {
+          await setEditMode(true);
+          return;
+        }
+        if (keybinds.widgetBag && key === keybinds.widgetBag && widgetEditMode) {
           toggleBag();
         }
-        break;
+      });
     }
   });
 
   // src/games/games.ts
-  var GAME_OPTION_TYPE_SLIDER = 0;
-  var GameOption = class _GameOption {
-    name;
-    title;
-    type;
-    min;
-    max;
-    def;
-    static slider(name2, title, min = 0, max = 0, def = 0) {
-      const go = new _GameOption();
-      go.name = name2;
-      go.title = title;
-      go.type = GAME_OPTION_TYPE_SLIDER;
-      go.min = min;
-      go.def = def;
-      go.max = max;
-      return go;
-    }
-  };
-  var GameBase = class extends WidgetBase {
-    canvas;
-    menu;
-    score;
-    playing;
-    hasPlayedAtLeastOnce;
-    #hiScore;
-    #requestStopGame;
-    #optionValues;
-    #optionElements = {};
-    #lastTs;
-    #ctx;
-    #scoreEl;
-    #buttonEl;
-    get category() {
-      return "games";
-    }
-    constructor() {
-      document.addEventListener("keydown", async (e5) => {
-        if (e5.repeat) {
-          return;
+  var GAME_OPTION_TYPE_SLIDER, GameOption, GameBase;
+  var init_games = __esm({
+    "src/games/games.ts"() {
+      "use strict";
+      init_widgets();
+      GAME_OPTION_TYPE_SLIDER = 0;
+      GameOption = class _GameOption {
+        name;
+        title;
+        type;
+        min;
+        max;
+        def;
+        static slider(name, title, min = 0, max = 0, def = 0) {
+          const go = new _GameOption();
+          go.name = name;
+          go.title = title;
+          go.type = GAME_OPTION_TYPE_SLIDER;
+          go.min = min;
+          go.def = def;
+          go.max = max;
+          return go;
         }
-        if (this.playing) {
-          await this.onKeyDown(e5);
-        } else if (this.hasPlayedAtLeastOnce && e5.code === "Space") {
-          await this.#startGame();
+      };
+      GameBase = class extends WidgetBase {
+        canvas;
+        menu;
+        score;
+        playing;
+        hasPlayedAtLeastOnce;
+        #hiScore;
+        #requestStopGame;
+        #optionValues;
+        #optionElements = {};
+        #lastTs;
+        #ctx;
+        #scoreEl;
+        #buttonEl;
+        get category() {
+          return "games";
         }
-      });
-      document.addEventListener("keyup", async (e5) => {
-        if (this.playing) {
-          await this.onKeyUp(e5);
+        constructor() {
+          document.addEventListener("keydown", async (e5) => {
+            if (e5.repeat) {
+              return;
+            }
+            if (this.playing) {
+              await this.onKeyDown(e5);
+            } else if (this.hasPlayedAtLeastOnce && e5.code === "Space") {
+              await this.#startGame();
+            }
+          });
+          document.addEventListener("keyup", async (e5) => {
+            if (this.playing) {
+              await this.onKeyUp(e5);
+            }
+          });
+          super();
         }
-      });
-      super();
-    }
-    // Start Protected (Use these functions in sub classes)
-    getOpt(name2) {
-      return this.#optionValues[name2];
-    }
-    stopGame() {
-      this.#requestStopGame = true;
-      if (this.score > this.#hiScore) {
-        this.#hiScore = this.score;
-      }
-    }
-    // End protected
-    #updateOpt(name2, value) {
-      const displayEl = this.#optionElements[name2].display;
-      const inputEl = this.#optionElements[name2].input;
-      inputEl.value = value;
-      let displayValue = Math.round(value / 10);
-      displayValue /= 10;
-      if (displayValue === Math.round(displayValue)) {
-        displayValue += ".0";
-      }
-      displayEl.innerText = `${displayValue}x`;
-      displayEl.classList.add("game-option-value");
-      this.#optionValues[name2] = value * 1;
-    }
-    #updateScore() {
-      this.#scoreEl.innerText = `High Score: ${this.#hiScore}`;
-    }
-    #draw(ts) {
-      if (!this.#lastTs) {
-        this.#lastTs = ts;
-      }
-      const deltaTime = ts - this.#lastTs;
-      this.#lastTs = ts;
-      this.onGameDraw(this.#ctx, deltaTime);
-      if (this.#requestStopGame) {
-        setTimeout(async () => {
-          this.playing = false;
-          this.setSetting("score", this.#hiScore);
+        // Start Protected (Use these functions in sub classes)
+        getOpt(name) {
+          return this.#optionValues[name];
+        }
+        stopGame() {
+          this.#requestStopGame = true;
+          if (this.score > this.#hiScore) {
+            this.#hiScore = this.score;
+          }
+        }
+        // End protected
+        #updateOpt(name, value) {
+          const displayEl = this.#optionElements[name].display;
+          const inputEl = this.#optionElements[name].input;
+          inputEl.value = value;
+          let displayValue = Math.round(value / 10);
+          displayValue /= 10;
+          if (displayValue === Math.round(displayValue)) {
+            displayValue += ".0";
+          }
+          displayEl.innerText = `${displayValue}x`;
+          displayEl.classList.add("game-option-value");
+          this.#optionValues[name] = value * 1;
+        }
+        #updateScore() {
+          this.#scoreEl.innerText = `High Score: ${this.#hiScore}`;
+        }
+        #draw(ts) {
+          if (!this.#lastTs) {
+            this.#lastTs = ts;
+          }
+          const deltaTime = ts - this.#lastTs;
+          this.#lastTs = ts;
+          this.onGameDraw(this.#ctx, deltaTime);
+          if (this.#requestStopGame) {
+            setTimeout(async () => {
+              this.playing = false;
+              this.setSetting("score", this.#hiScore);
+              this.canvas.style.display = "none";
+              this.menu.style.display = "flex";
+              this.#buttonEl.innerText = "Try Again (Space)";
+              this.hasPlayedAtLeastOnce = true;
+              this.lastTs = void 0;
+            }, 500);
+            return;
+          }
+          if (this.playing) {
+            requestAnimationFrame((ts2) => {
+              this.#draw(ts2);
+            });
+          }
+        }
+        async #startGame() {
+          this.canvas.style.display = "block";
+          this.menu.style.display = "none";
+          this.#requestStopGame = false;
+          this.#ctx = this.canvas.getContext("2d", { alpha: false });
+          this.playing = true;
+          this.score = 0;
+          await this.onGameStart();
+          this.#lastTs = void 0;
+          window.requestAnimationFrame((ts) => {
+            this.#draw(ts);
+          });
+        }
+        defaultSettings() {
+          return { score: 0, options: [] };
+        }
+        async createContent() {
+          this.#optionValues = {};
+          const div = document.createElement("div");
+          div.classList.add("game-container");
+          this.canvas = document.createElement("canvas");
+          this.canvas.width = 300;
+          this.canvas.height = 300;
+          this.canvas.classList.add("game-canvas");
           this.canvas.style.display = "none";
-          this.menu.style.display = "flex";
-          this.#buttonEl.innerText = "Try Again (Space)";
-          this.hasPlayedAtLeastOnce = true;
-          this.lastTs = void 0;
-        }, 500);
-        return;
-      }
-      if (this.playing) {
-        requestAnimationFrame((ts2) => {
-          this.#draw(ts2);
-        });
-      }
-    }
-    async #startGame() {
-      this.canvas.style.display = "block";
-      this.menu.style.display = "none";
-      this.#requestStopGame = false;
-      this.#ctx = this.canvas.getContext("2d", { alpha: false });
-      this.playing = true;
-      this.score = 0;
-      await this.onGameStart();
-      this.#lastTs = void 0;
-      window.requestAnimationFrame((ts) => {
-        this.#draw(ts);
-      });
-    }
-    defaultSettings() {
-      return { score: 0, options: [] };
-    }
-    async createContent() {
-      this.#optionValues = {};
-      const div = document.createElement("div");
-      div.classList.add("game-container");
-      this.canvas = document.createElement("canvas");
-      this.canvas.width = 300;
-      this.canvas.height = 300;
-      this.canvas.classList.add("game-canvas");
-      this.canvas.style.display = "none";
-      this.canvas.addEventListener("click", async (e5) => {
-        if (this.playing) {
-          await this.onMouse(e5);
-        }
-      });
-      div.appendChild(this.canvas);
-      const menuTop = document.createElement("div");
-      menuTop.classList.add("game-menu-top");
-      const menuBottom = document.createElement("div");
-      menuBottom.classList.add("game-menu-bottom");
-      const menu = document.createElement("div");
-      menu.classList.add("game-menu");
-      const title = document.createElement("h2");
-      title.classList.add("game-title");
-      title.innerText = this.title.endsWith("++") ? this.title : `${this.title}++`;
-      menuTop.appendChild(title);
-      this.#scoreEl = document.createElement("span");
-      this.#scoreEl.classList.add("game-score");
-      menuTop.appendChild(this.#scoreEl);
-      for (const opt of this.options) {
-        const label = document.createElement("label");
-        label.classList.add("game-slider-label");
-        label.innerText = opt.title;
-        menuBottom.appendChild(label);
-        if (opt.type === GAME_OPTION_TYPE_SLIDER) {
-          const sliderCont = document.createElement("div");
-          sliderCont.classList.add("game-slide-container");
-          const slider = document.createElement("input");
-          slider.type = "range";
-          slider.min = opt.min;
-          slider.max = opt.max;
-          slider.value = 0;
-          slider.classList.add("game-slider");
-          sliderCont.appendChild(slider);
-          const display = document.createElement("span");
-          sliderCont.appendChild(display);
-          this.#optionElements[opt.name] = { display, input: slider };
-          slider.addEventListener("input", (e5) => {
-            this.#updateOpt(opt.name, e5.target.value);
+          this.canvas.addEventListener("click", async (e5) => {
+            if (this.playing) {
+              await this.onMouse(e5);
+            }
           });
-          slider.addEventListener("change", async (_e) => {
-            await this.setSetting("options", this.#optionValues);
+          div.appendChild(this.canvas);
+          const menuTop = document.createElement("div");
+          menuTop.classList.add("game-menu-top");
+          const menuBottom = document.createElement("div");
+          menuBottom.classList.add("game-menu-bottom");
+          const menu = document.createElement("div");
+          menu.classList.add("game-menu");
+          const title = document.createElement("h2");
+          title.classList.add("game-title");
+          title.innerText = this.title.endsWith("++") ? this.title : `${this.title}++`;
+          menuTop.appendChild(title);
+          this.#scoreEl = document.createElement("span");
+          this.#scoreEl.classList.add("game-score");
+          menuTop.appendChild(this.#scoreEl);
+          for (const opt of this.options) {
+            const label = document.createElement("label");
+            label.classList.add("game-slider-label");
+            label.innerText = opt.title;
+            menuBottom.appendChild(label);
+            if (opt.type === GAME_OPTION_TYPE_SLIDER) {
+              const sliderCont = document.createElement("div");
+              sliderCont.classList.add("game-slide-container");
+              const slider = document.createElement("input");
+              slider.type = "range";
+              slider.min = opt.min;
+              slider.max = opt.max;
+              slider.value = 0;
+              slider.classList.add("game-slider");
+              sliderCont.appendChild(slider);
+              const display = document.createElement("span");
+              sliderCont.appendChild(display);
+              this.#optionElements[opt.name] = { display, input: slider };
+              slider.addEventListener("input", (e5) => {
+                this.#updateOpt(opt.name, e5.target.value);
+              });
+              slider.addEventListener("change", async (_e) => {
+                await this.setSetting("options", this.#optionValues);
+              });
+              menuBottom.appendChild(sliderCont);
+            }
+          }
+          this.#buttonEl = document.createElement("button");
+          this.#buttonEl.classList.add("game-button");
+          this.#buttonEl.innerText = "Play";
+          this.#buttonEl.addEventListener("click", async (_e) => {
+            await this.#startGame();
           });
-          menuBottom.appendChild(sliderCont);
+          menuBottom.appendChild(this.#buttonEl);
+          menu.appendChild(menuTop);
+          menu.appendChild(menuBottom);
+          this.menu = menu;
+          div.appendChild(menu);
+          this.onSettingsChange();
+          return div;
         }
-      }
-      this.#buttonEl = document.createElement("button");
-      this.#buttonEl.classList.add("game-button");
-      this.#buttonEl.innerText = "Play";
-      this.#buttonEl.addEventListener("click", async (_e) => {
-        await this.#startGame();
-      });
-      menuBottom.appendChild(this.#buttonEl);
-      menu.appendChild(menuTop);
-      menu.appendChild(menuBottom);
-      this.menu = menu;
-      div.appendChild(menu);
-      this.onSettingsChange();
-      return div;
-    }
-    async onSettingsChange() {
-      if (this.constructor.name === "SnakeWidget") {
-        if (window.localStorage.getItem("snakehighscore")) {
-          this.settings = await migrateSnake();
+        async onSettingsChange() {
+          if (this.constructor.name === "SnakeWidget") {
+            if (window.localStorage.getItem("snakehighscore")) {
+              this.settings = await migrateSnake();
+            }
+          } else if (this.constructor.name === "FlappyWidget" && window.localStorage.getItem("flappyhighscore")) {
+            this.settings = await migrateFlappy();
+          }
+          for (const opt of this.options) {
+            let value = this.settings.options[opt.name];
+            if (!value) {
+              value = opt.def;
+            }
+            this.#updateOpt(opt.name, value);
+          }
+          this.#hiScore = this.settings.score;
+          this.#updateScore();
         }
-      } else if (
-        this.constructor.name === "FlappyWidget" &&
-        window.localStorage.getItem("flappyhighscore")
-      ) {
-        this.settings = await migrateFlappy();
-      }
-      for (const opt of this.options) {
-        let value = this.settings.options[opt.name];
-        if (!value) {
-          value = opt.def;
+        async createPreview() {
+          const div = document.createElement("div");
+          div.classList.add("game-container");
+          const menuTop = document.createElement("div");
+          menuTop.classList.add("game-menu-top");
+          const menuBottom = document.createElement("div");
+          menuBottom.classList.add("game-menu-bottom");
+          const menu = document.createElement("div");
+          menu.classList.add("game-menu");
+          const title = document.createElement("h2");
+          title.classList.add("game-title");
+          title.innerText = this.title.endsWith("++") ? this.title : `${this.title}++`;
+          menuTop.appendChild(title);
+          const buttonEl = document.createElement("button");
+          buttonEl.classList.add("game-button");
+          buttonEl.innerText = "Play";
+          menuBottom.appendChild(buttonEl);
+          menu.appendChild(menuTop);
+          menu.appendChild(menuBottom);
+          this.menu = menu;
+          div.appendChild(menu);
+          return div;
         }
-        this.#updateOpt(opt.name, value);
-      }
-      this.#hiScore = this.settings.score;
-      this.#updateScore();
+        // Override us
+        // (required)
+        get title() {
+          return "Game";
+        }
+        async onGameStart() {
+        }
+        // Called when the game to update (same on all devices)
+        onGameTick() {
+        }
+        // Called when the game needs to render a new frame (dt is time since last
+        // frame)
+        onGameDraw(_ctx, _deltaTime) {
+        }
+        async onKeyDown(_e) {
+        }
+        async onKeyUp(_e) {
+        }
+        async onMouse(_e) {
+        }
+        get tickSpeed() {
+          return 60;
+        }
+        get options() {
+          return [];
+        }
+      };
     }
-    async createPreview() {
-      const div = document.createElement("div");
-      div.classList.add("game-container");
-      const menuTop = document.createElement("div");
-      menuTop.classList.add("game-menu-top");
-      const menuBottom = document.createElement("div");
-      menuBottom.classList.add("game-menu-bottom");
-      const menu = document.createElement("div");
-      menu.classList.add("game-menu");
-      const title = document.createElement("h2");
-      title.classList.add("game-title");
-      title.innerText = this.title.endsWith("++") ? this.title : `${this.title}++`;
-      menuTop.appendChild(title);
-      const buttonEl = document.createElement("button");
-      buttonEl.classList.add("game-button");
-      buttonEl.innerText = "Play";
-      menuBottom.appendChild(buttonEl);
-      menu.appendChild(menuTop);
-      menu.appendChild(menuBottom);
-      this.menu = menu;
-      div.appendChild(menu);
-      return div;
-    }
-    // Override us
-    // (required)
-    get title() {
-      return "Game";
-    }
-    async onGameStart() {}
-    // Called when the game to update (same on all devices)
-    onGameTick() {}
-    // Called when the game needs to render a new frame (dt is time since last
-    // frame)
-    onGameDraw(_ctx, _deltaTime) {}
-    async onKeyDown(_e) {}
-    async onKeyUp(_e) {}
-    async onMouse(_e) {}
-    get tickSpeed() {
-      return 60;
-    }
-    get options() {
-      return [];
-    }
-  };
+  });
 
   // src/games/breakout.ts
-  var BALL_RADIUS = 4;
-  var PADDLE_WIDTH = 50;
-  var PADDLE_HEIGHT = 5;
-  var BRICK_ROWS = 4;
-  var BRICK_COLS = 8;
-  var BRICK_WIDTH = 30;
-  var BRICK_HEIGHT = 10;
-  var BRICK_PADDING = 4;
-  var PADDLE_SPEED = 0.2;
-  var BALL_SPEED = 0.1;
-  var BreakoutWidget = class extends GameBase {
-    ball;
-    paddleX;
-    leftPressed = false;
-    rightPressed = false;
-    bricks;
-    score = 0;
-    get title() {
-      return "Breakout++";
-    }
-    get options() {
-      return [GameOption.slider("speed", "Speed:", 10, 300, 100)];
-    }
-    async onGameStart() {
-      const w2 = this.canvas.width;
-      const h4 = this.canvas.height;
-      this.ball = {
-        x: w2 / 2,
-        y: h4 / 2,
-        dx: BALL_SPEED * this.getOpt("speed") * 0.01,
-        dy: -BALL_SPEED * this.getOpt("speed") * 0.01,
+  var BALL_RADIUS, PADDLE_WIDTH, PADDLE_HEIGHT, BRICK_ROWS, BRICK_COLS, BRICK_WIDTH, BRICK_HEIGHT, BRICK_PADDING, PADDLE_SPEED, BALL_SPEED, BreakoutWidget;
+  var init_breakout = __esm({
+    "src/games/breakout.ts"() {
+      "use strict";
+      init_themes();
+      init_widgets();
+      init_games();
+      BALL_RADIUS = 4;
+      PADDLE_WIDTH = 50;
+      PADDLE_HEIGHT = 5;
+      BRICK_ROWS = 4;
+      BRICK_COLS = 8;
+      BRICK_WIDTH = 30;
+      BRICK_HEIGHT = 10;
+      BRICK_PADDING = 4;
+      PADDLE_SPEED = 0.2;
+      BALL_SPEED = 0.1;
+      BreakoutWidget = class extends GameBase {
+        ball;
+        paddleX;
+        leftPressed = false;
+        rightPressed = false;
+        bricks;
+        score = 0;
+        get title() {
+          return "Breakout++";
+        }
+        get options() {
+          return [GameOption.slider("speed", "Speed:", 10, 300, 100)];
+        }
+        async onGameStart() {
+          const w2 = this.canvas.width;
+          const h4 = this.canvas.height;
+          this.ball = {
+            x: w2 / 2,
+            y: h4 / 2,
+            dx: BALL_SPEED * this.getOpt("speed") * 0.01,
+            dy: -BALL_SPEED * this.getOpt("speed") * 0.01
+          };
+          this.paddleX = (w2 - PADDLE_WIDTH) / 2;
+          this.leftPressed = false;
+          this.rightPressed = false;
+          this.score = 0;
+          this.bricks = [];
+          for (let c5 = 0; c5 < BRICK_COLS; c5++) {
+            for (let r5 = 0; r5 < BRICK_ROWS; r5++) {
+              this.bricks.push({
+                x: c5 * (BRICK_WIDTH + BRICK_PADDING) + 10,
+                y: r5 * (BRICK_HEIGHT + BRICK_PADDING) + 10,
+                status: 1
+              });
+            }
+          }
+        }
+        drawRoundedRect(ctx, x3, y3, width, height, radius) {
+          ctx.beginPath();
+          ctx.moveTo(x3 + radius, y3);
+          ctx.lineTo(x3 + width - radius, y3);
+          ctx.quadraticCurveTo(x3 + width, y3, x3 + width, y3 + radius);
+          ctx.lineTo(x3 + width, y3 + height - radius);
+          ctx.quadraticCurveTo(x3 + width, y3 + height, x3 + width - radius, y3 + height);
+          ctx.lineTo(x3 + radius, y3 + height);
+          ctx.quadraticCurveTo(x3, y3 + height, x3, y3 + height - radius);
+          ctx.lineTo(x3, y3 + radius);
+          ctx.quadraticCurveTo(x3, y3, x3 + radius, y3);
+          ctx.closePath();
+          ctx.fill();
+        }
+        onGameDraw(ctx, dt) {
+          const w2 = this.canvas.width;
+          const h4 = this.canvas.height;
+          ctx.fillStyle = getThemeVar("--color-base01");
+          ctx.fillRect(0, 0, w2, h4);
+          const speed = PADDLE_SPEED * this.getOpt("speed") * 0.01;
+          if (this.leftPressed) {
+            this.paddleX -= speed * dt;
+          }
+          if (this.rightPressed) {
+            this.paddleX += speed * dt;
+          }
+          this.paddleX = Math.max(0, Math.min(w2 - PADDLE_WIDTH, this.paddleX));
+          const ball = this.ball;
+          ball.x += ball.dx * dt;
+          ball.y += ball.dy * dt;
+          if (ball.x < BALL_RADIUS) {
+            ball.x = BALL_RADIUS;
+            ball.dx *= -1;
+          }
+          if (ball.x > w2 - BALL_RADIUS) {
+            ball.x = w2 - BALL_RADIUS;
+            ball.dx *= -1;
+          }
+          if (ball.y < BALL_RADIUS) {
+            ball.y = BALL_RADIUS;
+            ball.dy *= -1;
+          }
+          if (ball.y > h4 - PADDLE_HEIGHT - BALL_RADIUS && ball.x > this.paddleX && ball.x < this.paddleX + PADDLE_WIDTH) {
+            ball.dy *= -1;
+            ball.y = h4 - PADDLE_HEIGHT - BALL_RADIUS;
+          }
+          if (ball.y > h4 + BALL_RADIUS) {
+            this.stopGame();
+          }
+          for (const b3 of this.bricks) {
+            if (b3.status === 1 && ball.x > b3.x && ball.x < b3.x + BRICK_WIDTH && ball.y > b3.y && ball.y < b3.y + BRICK_HEIGHT) {
+              b3.status = 0;
+              ball.dy *= -1;
+              this.score++;
+              break;
+            }
+          }
+          ctx.fillStyle = getThemeVar("--color-accent");
+          this.drawRoundedRect(ctx, this.paddleX, h4 - PADDLE_HEIGHT, PADDLE_WIDTH, PADDLE_HEIGHT, 5);
+          ctx.fillStyle = getThemeVar("--color-text");
+          ctx.beginPath();
+          ctx.arc(ball.x, ball.y, BALL_RADIUS, 0, 2 * Math.PI);
+          ctx.fill();
+          ctx.fillStyle = getThemeVar("--color-accent");
+          for (const b3 of this.bricks) {
+            if (b3.status === 1) {
+              this.drawRoundedRect(ctx, b3.x, b3.y, BRICK_WIDTH, BRICK_HEIGHT, 5);
+            }
+          }
+        }
+        onKeyDown(e5) {
+          if (e5.code === "ArrowLeft") {
+            this.leftPressed = true;
+          } else if (e5.code === "ArrowRight") {
+            this.rightPressed = true;
+          }
+        }
+        onKeyUp(e5) {
+          if (e5.code === "ArrowLeft") {
+            this.leftPressed = false;
+          } else if (e5.code === "ArrowRight") {
+            this.rightPressed = false;
+          }
+        }
       };
-      this.paddleX = (w2 - PADDLE_WIDTH) / 2;
-      this.leftPressed = false;
-      this.rightPressed = false;
-      this.score = 0;
-      this.bricks = [];
-      for (let c5 = 0; c5 < BRICK_COLS; c5++) {
-        for (let r5 = 0; r5 < BRICK_ROWS; r5++) {
-          this.bricks.push({
-            x: c5 * (BRICK_WIDTH + BRICK_PADDING) + 10,
-            y: r5 * (BRICK_HEIGHT + BRICK_PADDING) + 10,
-            status: 1,
-          });
-        }
-      }
+      registerWidget(new BreakoutWidget());
     }
-    drawRoundedRect(ctx, x3, y3, width, height, radius) {
-      ctx.beginPath();
-      ctx.moveTo(x3 + radius, y3);
-      ctx.lineTo(x3 + width - radius, y3);
-      ctx.quadraticCurveTo(x3 + width, y3, x3 + width, y3 + radius);
-      ctx.lineTo(x3 + width, y3 + height - radius);
-      ctx.quadraticCurveTo(x3 + width, y3 + height, x3 + width - radius, y3 + height);
-      ctx.lineTo(x3 + radius, y3 + height);
-      ctx.quadraticCurveTo(x3, y3 + height, x3, y3 + height - radius);
-      ctx.lineTo(x3, y3 + radius);
-      ctx.quadraticCurveTo(x3, y3, x3 + radius, y3);
-      ctx.closePath();
-      ctx.fill();
-    }
-    onGameDraw(ctx, dt) {
-      const w2 = this.canvas.width;
-      const h4 = this.canvas.height;
-      ctx.fillStyle = getThemeVar("--color-base01");
-      ctx.fillRect(0, 0, w2, h4);
-      const speed = PADDLE_SPEED * this.getOpt("speed") * 0.01;
-      if (this.leftPressed) {
-        this.paddleX -= speed * dt;
-      }
-      if (this.rightPressed) {
-        this.paddleX += speed * dt;
-      }
-      this.paddleX = Math.max(0, Math.min(w2 - PADDLE_WIDTH, this.paddleX));
-      const ball = this.ball;
-      ball.x += ball.dx * dt;
-      ball.y += ball.dy * dt;
-      if (ball.x < BALL_RADIUS) {
-        ball.x = BALL_RADIUS;
-        ball.dx *= -1;
-      }
-      if (ball.x > w2 - BALL_RADIUS) {
-        ball.x = w2 - BALL_RADIUS;
-        ball.dx *= -1;
-      }
-      if (ball.y < BALL_RADIUS) {
-        ball.y = BALL_RADIUS;
-        ball.dy *= -1;
-      }
-      if (
-        ball.y > h4 - PADDLE_HEIGHT - BALL_RADIUS &&
-        ball.x > this.paddleX &&
-        ball.x < this.paddleX + PADDLE_WIDTH
-      ) {
-        ball.dy *= -1;
-        ball.y = h4 - PADDLE_HEIGHT - BALL_RADIUS;
-      }
-      if (ball.y > h4 + BALL_RADIUS) {
-        this.stopGame();
-      }
-      for (const b3 of this.bricks) {
-        if (
-          b3.status === 1 &&
-          ball.x > b3.x &&
-          ball.x < b3.x + BRICK_WIDTH &&
-          ball.y > b3.y &&
-          ball.y < b3.y + BRICK_HEIGHT
-        ) {
-          b3.status = 0;
-          ball.dy *= -1;
-          this.score++;
-          break;
-        }
-      }
-      ctx.fillStyle = getThemeVar("--color-accent");
-      this.drawRoundedRect(ctx, this.paddleX, h4 - PADDLE_HEIGHT, PADDLE_WIDTH, PADDLE_HEIGHT, 5);
-      ctx.fillStyle = getThemeVar("--color-text");
-      ctx.beginPath();
-      ctx.arc(ball.x, ball.y, BALL_RADIUS, 0, 2 * Math.PI);
-      ctx.fill();
-      ctx.fillStyle = getThemeVar("--color-accent");
-      for (const b3 of this.bricks) {
-        if (b3.status === 1) {
-          this.drawRoundedRect(ctx, b3.x, b3.y, BRICK_WIDTH, BRICK_HEIGHT, 5);
-        }
-      }
-    }
-    onKeyDown(e5) {
-      if (e5.code === "ArrowLeft") {
-        this.leftPressed = true;
-      } else if (e5.code === "ArrowRight") {
-        this.rightPressed = true;
-      }
-    }
-    onKeyUp(e5) {
-      if (e5.code === "ArrowLeft") {
-        this.leftPressed = false;
-      } else if (e5.code === "ArrowRight") {
-        this.rightPressed = false;
-      }
-    }
-  };
-  registerWidget(new BreakoutWidget());
+  });
 
   // src/games/flappy.ts
-  var BIRD_RADIUS = 5;
-  var BIRD_X = 50;
-  var FLOOR_H = 15;
-  var PIPE_GAP = 50;
-  var PIPE_SPEED = 0.2;
-  var TERMVEL = 0.3;
-  var PIPE_W = 10;
-  var GRAVITY = 5e-4;
-  var FlappyWidget = class extends GameBase {
-    bgX;
-    birdY;
-    birdVel;
-    jump;
-    pipe;
-    color;
-    get title() {
-      return "Flappy++";
-    }
-    get options() {
-      return [GameOption.slider("speed", "Speed:", 10, 300, 100)];
-    }
-    #drawGround(ctx) {
-      const w2 = this.canvas.width;
-      const h4 = this.canvas.height;
-      ctx.beginPath();
-      ctx.lineWidth = 1;
-      ctx.moveTo(0, h4 - FLOOR_H);
-      ctx.lineTo(w2, h4 - FLOOR_H);
-      ctx.stroke();
-      ctx.fillStyle = getThemeVar("--color-accent");
-      ctx.strokeStyle = getThemeVar("--color-base01");
-      ctx.fillRect(0, h4 - FLOOR_H, w2, FLOOR_H);
-      ctx.strokeRect(0, h4 - FLOOR_H, w2, FLOOR_H);
-      for (let i5 = 0; i5 < (w2 / 20) * 2; i5++) {
-        ctx.beginPath();
-        ctx.moveTo(i5 * 20 + this.bgX, h4 - FLOOR_H);
-        ctx.lineTo(i5 * 20 + this.bgX + FLOOR_H, h4);
-        ctx.stroke();
-      }
-    }
-    #calcGap() {
-      return Math.max(PIPE_GAP * this.getOpt("speed") * 0.01, BIRD_RADIUS * 2 + 5);
-    }
-    #drawPipe(ctx, pipe) {
-      const gap_size = this.#calcGap();
-      ctx.fillStyle = getThemeVar("--color-accent");
-      ctx.lineCap = "round";
-      ctx.beginPath();
-      ctx.roundRect(pipe.x, -PIPE_W, PIPE_W, pipe.y + PIPE_W - gap_size / 2, PIPE_W);
-      ctx.fill();
-      ctx.beginPath();
-      const botStartY = pipe.y + gap_size * 0.5;
-      ctx.roundRect(pipe.x, botStartY, PIPE_W, this.canvas.height - botStartY + PIPE_W, PIPE_W);
-      ctx.fill();
-    }
-    #updatePipe(pipe, dt) {
-      pipe.x -= this.getOpt("speed") * 0.01 * dt * PIPE_SPEED;
-      if (pipe.x < -PIPE_W) {
-        this.#resetPipe(pipe);
-      }
-      if (pipe.x <= BIRD_X + BIRD_RADIUS && pipe.x + PIPE_W > BIRD_X - BIRD_RADIUS) {
-        const gap_size = this.#calcGap();
-        const gapTop = pipe.y - gap_size * 0.5;
-        const gapBot = pipe.y + gap_size * 0.5;
-        if (this.birdY >= gapTop && this.birdY < gapBot) {
-          if (!pipe.checked) {
-            pipe.checked = true;
-            this.score++;
-          }
-        } else {
-          if (pipe.checked) {
-            this.score--;
-            this.checked = false;
-          }
-          this.stopGame();
+  var BIRD_RADIUS, BIRD_X, FLOOR_H, PIPE_GAP, PIPE_SPEED, TERMVEL, PIPE_W, GRAVITY, FlappyWidget;
+  var init_flappy = __esm({
+    "src/games/flappy.ts"() {
+      "use strict";
+      init_themes();
+      init_widgets();
+      init_games();
+      BIRD_RADIUS = 5;
+      BIRD_X = 50;
+      FLOOR_H = 15;
+      PIPE_GAP = 50;
+      PIPE_SPEED = 0.2;
+      TERMVEL = 0.3;
+      PIPE_W = 10;
+      GRAVITY = 5e-4;
+      FlappyWidget = class extends GameBase {
+        bgX;
+        birdY;
+        birdVel;
+        jump;
+        pipe;
+        color;
+        get title() {
+          return "Flappy++";
         }
-      }
+        get options() {
+          return [GameOption.slider("speed", "Speed:", 10, 300, 100)];
+        }
+        #drawGround(ctx) {
+          const w2 = this.canvas.width;
+          const h4 = this.canvas.height;
+          ctx.beginPath();
+          ctx.lineWidth = 1;
+          ctx.moveTo(0, h4 - FLOOR_H);
+          ctx.lineTo(w2, h4 - FLOOR_H);
+          ctx.stroke();
+          ctx.fillStyle = getThemeVar("--color-accent");
+          ctx.strokeStyle = getThemeVar("--color-base01");
+          ctx.fillRect(0, h4 - FLOOR_H, w2, FLOOR_H);
+          ctx.strokeRect(0, h4 - FLOOR_H, w2, FLOOR_H);
+          for (let i5 = 0; i5 < w2 / 20 * 2; i5++) {
+            ctx.beginPath();
+            ctx.moveTo(i5 * 20 + this.bgX, h4 - FLOOR_H);
+            ctx.lineTo(i5 * 20 + this.bgX + FLOOR_H, h4);
+            ctx.stroke();
+          }
+        }
+        #calcGap() {
+          return Math.max(PIPE_GAP * this.getOpt("speed") * 0.01, BIRD_RADIUS * 2 + 5);
+        }
+        #drawPipe(ctx, pipe) {
+          const gap_size = this.#calcGap();
+          ctx.fillStyle = getThemeVar("--color-accent");
+          ctx.lineCap = "round";
+          ctx.beginPath();
+          ctx.roundRect(pipe.x, -PIPE_W, PIPE_W, pipe.y + PIPE_W - gap_size / 2, PIPE_W);
+          ctx.fill();
+          ctx.beginPath();
+          const botStartY = pipe.y + gap_size * 0.5;
+          ctx.roundRect(pipe.x, botStartY, PIPE_W, this.canvas.height - botStartY + PIPE_W, PIPE_W);
+          ctx.fill();
+        }
+        #updatePipe(pipe, dt) {
+          pipe.x -= this.getOpt("speed") * 0.01 * dt * PIPE_SPEED;
+          if (pipe.x < -PIPE_W) {
+            this.#resetPipe(pipe);
+          }
+          if (pipe.x <= BIRD_X + BIRD_RADIUS && pipe.x + PIPE_W > BIRD_X - BIRD_RADIUS) {
+            const gap_size = this.#calcGap();
+            const gapTop = pipe.y - gap_size * 0.5;
+            const gapBot = pipe.y + gap_size * 0.5;
+            if (this.birdY >= gapTop && this.birdY < gapBot) {
+              if (!pipe.checked) {
+                pipe.checked = true;
+                this.score++;
+              }
+            } else {
+              if (pipe.checked) {
+                this.score--;
+                this.checked = false;
+              }
+              this.stopGame();
+            }
+          }
+        }
+        #resetPipe(pipe) {
+          const gap_size = this.#calcGap();
+          pipe.x = this.canvas.width + PIPE_W;
+          const MARGIN = gap_size * 0.5 + FLOOR_H + 10;
+          pipe.y = Math.random() * (this.canvas.height - MARGIN * 2) + MARGIN;
+          pipe.checked = false;
+        }
+        #drawBird(ctx) {
+          ctx.fillStyle = getThemeVar("--color-accent");
+          ctx.beginPath();
+          ctx.arc(BIRD_X, this.birdY, BIRD_RADIUS, 0, 2 * Math.PI);
+          ctx.fill();
+        }
+        async onGameStart() {
+          this.bgX = 0;
+          this.jump = false;
+          this.birdY = this.canvas.height / 2;
+          this.birdVel = 0;
+          this.pipe = { x: 0, y: 0 };
+          this.#resetPipe(this.pipe);
+        }
+        onGameDraw(ctx, dt) {
+          ctx.fillStyle = getThemeVar("--color-base01");
+          ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+          this.birdY += this.birdVel * dt;
+          this.birdVel = Math.min(
+            this.birdVel + GRAVITY * this.getOpt("speed") * 0.01 * dt,
+            TERMVEL * this.getOpt("speed") * 0.01
+          );
+          ctx;
+          if (this.jump) {
+            this.jump = false;
+            this.birdVel = -0.4 * this.getOpt("speed") * 0.01 * 0.4;
+          }
+          if (this.birdY > this.canvas.height - FLOOR_H - BIRD_RADIUS) {
+            this.birdY = this.canvas.height - FLOOR_H - BIRD_RADIUS;
+            this.stopGame();
+          }
+          this.bgX = (this.bgX - this.getOpt("speed") * 0.01 * PIPE_SPEED * dt) % this.canvas.width;
+          this.#updatePipe(this.pipe, dt);
+          this.#drawBird(ctx);
+          this.#drawPipe(ctx, this.pipe);
+          this.#drawGround(ctx);
+        }
+        async onMouse(_e) {
+          this.jump = true;
+        }
+        async onKeyDown(e5) {
+          if (e5.code === "Space" || e5.code === "ArrowUp") {
+            this.jump = true;
+            e5.preventDefault();
+          }
+        }
+      };
+      registerWidget(new FlappyWidget());
     }
-    #resetPipe(pipe) {
-      const gap_size = this.#calcGap();
-      pipe.x = this.canvas.width + PIPE_W;
-      const MARGIN = gap_size * 0.5 + FLOOR_H + 10;
-      pipe.y = Math.random() * (this.canvas.height - MARGIN * 2) + MARGIN;
-      pipe.checked = false;
-    }
-    #drawBird(ctx) {
-      ctx.fillStyle = getThemeVar("--color-accent");
-      ctx.beginPath();
-      ctx.arc(BIRD_X, this.birdY, BIRD_RADIUS, 0, 2 * Math.PI);
-      ctx.fill();
-    }
-    async onGameStart() {
-      this.bgX = 0;
-      this.jump = false;
-      this.birdY = this.canvas.height / 2;
-      this.birdVel = 0;
-      this.pipe = { x: 0, y: 0 };
-      this.#resetPipe(this.pipe);
-    }
-    onGameDraw(ctx, dt) {
-      ctx.fillStyle = getThemeVar("--color-base01");
-      ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-      this.birdY += this.birdVel * dt;
-      this.birdVel = Math.min(
-        this.birdVel + GRAVITY * this.getOpt("speed") * 0.01 * dt,
-        TERMVEL * this.getOpt("speed") * 0.01,
-      );
-      ctx;
-      if (this.jump) {
-        this.jump = false;
-        this.birdVel = -0.4 * this.getOpt("speed") * 0.01 * 0.4;
-      }
-      if (this.birdY > this.canvas.height - FLOOR_H - BIRD_RADIUS) {
-        this.birdY = this.canvas.height - FLOOR_H - BIRD_RADIUS;
-        this.stopGame();
-      }
-      this.bgX = (this.bgX - this.getOpt("speed") * 0.01 * PIPE_SPEED * dt) % this.canvas.width;
-      this.#updatePipe(this.pipe, dt);
-      this.#drawBird(ctx);
-      this.#drawPipe(ctx, this.pipe);
-      this.#drawGround(ctx);
-    }
-    async onMouse(_e) {
-      this.jump = true;
-    }
-    async onKeyDown(e5) {
-      if (e5.code === "Space" || e5.code === "ArrowUp") {
-        this.jump = true;
-        e5.preventDefault();
-      }
-    }
-  };
-  registerWidget(new FlappyWidget());
+  });
 
   // src/games/snake.ts
-  var Point = class _Point {
-    x;
-    y;
-    constructor(x3, y3) {
-      this.x = x3;
-      this.y = y3;
-    }
-    add(other) {
-      return new _Point(this.x + other.x, this.y + other.y);
-    }
-    equal(other) {
-      return this.x === other.x && this.y === other.y;
-    }
-  };
-  var DIR_UP = new Point(0, -1);
-  var DIR_LEFT = new Point(-1, 0);
-  var DIR_RIGHT = new Point(1, 0);
-  var DIR_DOWN = new Point(0, 1);
-  var CELL_COUNT = 15;
-  var FRAME_TIME = 400;
-  var SnakeWidget = class extends GameBase {
-    #targetDir;
-    #curDir;
-    #counter;
-    #snake;
-    #food;
-    #backgroundCanvas;
-    get title() {
-      return "Snake++";
-    }
-    get options() {
-      return [
-        GameOption.slider("speed", "Speed:", 10, 300, 100),
-        GameOption.slider("size", "Size:", 100, 500, 100),
-      ];
-    }
-    #tick() {
-      this.#curDir = this.#targetDir;
-      const head = this.#snake[this.#snake.length - 1];
-      const newHead = head.add(this.#curDir);
-      if (
-        newHead.x < 0 ||
-        newHead.y < 0 ||
-        newHead.x >= this.#getCellCount() ||
-        newHead.y >= this.#getCellCount()
-      ) {
-        this.stopGame();
-        return;
-      }
-      if (this.#snake.find((p4) => p4.equal(newHead))) {
-        this.stopGame();
-        return;
-      }
-      if (newHead.equal(this.#food)) {
-        this.#spawnFood();
-        this.score += 1;
-      } else {
-        this.#snake.shift();
-      }
-      this.#snake.push(newHead);
-    }
-    #calcCelRad() {
-      return this.canvas.width / (this.#getCellCount() * 2);
-    }
-    #getRandomFieldPos() {
-      const cellCount = this.#getCellCount();
-      return new Point(
-        Math.floor(Math.random() * cellCount),
-        Math.floor(Math.random() * cellCount),
-      );
-    }
-    #spawnFood() {
-      this.#food = this.#getRandomFieldPos();
-      while (this.#snake.find((p4) => p4.equal(this.#food))) {
-        this.#food = this.#getRandomFieldPos();
-      }
-    }
-    defaultSettings() {
-      return { score: 0, options: [], enableGrid: true };
-    }
-    async onGameStart() {
-      const cellCount = this.#getCellCount();
-      if (!this.#backgroundCanvas) {
-        const bg = document.createElement("canvas");
-        bg.height = this.canvas.width;
-        bg.width = this.canvas.width;
-        this.#backgroundCanvas = bg;
-      }
-      const bgctx = this.#backgroundCanvas.getContext("2d", { alpha: false });
-      this.#drawBg(bgctx);
-      this.#counter = 0;
-      this.#curDir = DIR_DOWN;
-      this.#targetDir = DIR_DOWN;
-      this.#snake = [new Point(Math.floor(cellCount / 2), Math.floor(cellCount / 2))];
-      this.#spawnFood();
-    }
-    async onThemeChange() {
-      if (!this.#backgroundCanvas) {
-        return;
-      }
-      const bgctx = this.#backgroundCanvas.getContext("2d", { alpha: false });
-      this.#drawBg(bgctx);
-    }
-    #drawDot(ctx, dot) {
-      ctx.strokeWidth = 0;
-      ctx.beginPath();
-      const celRad = this.#calcCelRad();
-      ctx.arc(
-        Math.floor(celRad + dot.x * celRad * 2),
-        Math.floor(celRad + dot.y * celRad * 2),
-        celRad * 0.9,
-        0,
-        Math.PI * 2,
-      );
-      ctx.fill();
-    }
-    #getCellCount() {
-      return Math.round(CELL_COUNT * Math.sqrt(this.getOpt("size") * 0.01));
-    }
-    #drawBg(ctx) {
-      const cellCount = this.#getCellCount();
-      const celRad = this.#calcCelRad();
-      ctx.strokeWidth = 0;
-      ctx.fillStyle = getThemeVar("--color-base01");
-      ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-      if (this.settings.enableGrid) {
-        for (let y3 = 0; y3 < cellCount; y3++) {
-          for (let x3 = 0; x3 < cellCount; x3++) {
-            if ((x3 + y3) % 2 === 0) {
-              ctx.fillStyle = `${getThemeVar("--color-base03")}50`;
-            } else {
-              ctx.fillStyle = `${getThemeVar("--color-base02")}50`;
-            }
-            ctx.beginPath();
-            ctx.arc(
-              celRad + x3 * celRad * 2,
-              celRad + y3 * celRad * 2,
-              celRad * 0.7,
-              0,
-              Math.PI * 2,
-            );
-            ctx.fill();
+  var Point, DIR_UP, DIR_LEFT, DIR_RIGHT, DIR_DOWN, CELL_COUNT, FRAME_TIME, SnakeWidget;
+  var init_snake = __esm({
+    "src/games/snake.ts"() {
+      "use strict";
+      init_themes();
+      init_widgets();
+      init_games();
+      Point = class _Point {
+        x;
+        y;
+        constructor(x3, y3) {
+          this.x = x3;
+          this.y = y3;
+        }
+        add(other) {
+          return new _Point(this.x + other.x, this.y + other.y);
+        }
+        equal(other) {
+          return this.x === other.x && this.y === other.y;
+        }
+      };
+      DIR_UP = new Point(0, -1);
+      DIR_LEFT = new Point(-1, 0);
+      DIR_RIGHT = new Point(1, 0);
+      DIR_DOWN = new Point(0, 1);
+      CELL_COUNT = 15;
+      FRAME_TIME = 400;
+      SnakeWidget = class extends GameBase {
+        #targetDir;
+        #curDir;
+        #counter;
+        #snake;
+        #food;
+        #backgroundCanvas;
+        get title() {
+          return "Snake++";
+        }
+        get options() {
+          return [
+            GameOption.slider("speed", "Speed:", 10, 300, 100),
+            GameOption.slider("size", "Size:", 100, 500, 100)
+          ];
+        }
+        #tick() {
+          this.#curDir = this.#targetDir;
+          const head = this.#snake.at(-1);
+          const newHead = head.add(this.#curDir);
+          if (newHead.x < 0 || newHead.y < 0 || newHead.x >= this.#getCellCount() || newHead.y >= this.#getCellCount()) {
+            this.stopGame();
+            return;
+          }
+          if (this.#snake.find((p4) => p4.equal(newHead))) {
+            this.stopGame();
+            return;
+          }
+          if (newHead.equal(this.#food)) {
+            this.#spawnFood();
+            this.score += 1;
+          } else {
+            this.#snake.shift();
+          }
+          this.#snake.push(newHead);
+        }
+        #calcCelRad() {
+          return this.canvas.width / (this.#getCellCount() * 2);
+        }
+        #getRandomFieldPos() {
+          const cellCount = this.#getCellCount();
+          return new Point(Math.floor(Math.random() * cellCount), Math.floor(Math.random() * cellCount));
+        }
+        #spawnFood() {
+          this.#food = this.#getRandomFieldPos();
+          while (this.#snake.find((p4) => p4.equal(this.#food))) {
+            this.#food = this.#getRandomFieldPos();
           }
         }
-      }
+        defaultSettings() {
+          return { score: 0, options: [], enableGrid: true };
+        }
+        async onGameStart() {
+          const cellCount = this.#getCellCount();
+          if (!this.#backgroundCanvas) {
+            const bg = document.createElement("canvas");
+            bg.height = this.canvas.width;
+            bg.width = this.canvas.width;
+            this.#backgroundCanvas = bg;
+          }
+          const bgctx = this.#backgroundCanvas.getContext("2d", { alpha: false });
+          this.#drawBg(bgctx);
+          this.#counter = 0;
+          this.#curDir = DIR_DOWN;
+          this.#targetDir = DIR_DOWN;
+          this.#snake = [new Point(Math.floor(cellCount / 2), Math.floor(cellCount / 2))];
+          this.#spawnFood();
+        }
+        async onThemeChange() {
+          if (!this.#backgroundCanvas) {
+            return;
+          }
+          const bgctx = this.#backgroundCanvas.getContext("2d", { alpha: false });
+          this.#drawBg(bgctx);
+        }
+        #drawDot(ctx, dot) {
+          ctx.strokeWidth = 0;
+          ctx.beginPath();
+          const celRad = this.#calcCelRad();
+          ctx.arc(
+            Math.floor(celRad + dot.x * celRad * 2),
+            Math.floor(celRad + dot.y * celRad * 2),
+            celRad * 0.9,
+            0,
+            Math.PI * 2
+          );
+          ctx.fill();
+        }
+        #getCellCount() {
+          return Math.round(CELL_COUNT * Math.sqrt(this.getOpt("size") * 0.01));
+        }
+        #drawBg(ctx) {
+          const cellCount = this.#getCellCount();
+          const celRad = this.#calcCelRad();
+          ctx.strokeWidth = 0;
+          ctx.fillStyle = getThemeVar("--color-base01");
+          ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+          if (this.settings.enableGrid) {
+            for (let y3 = 0; y3 < cellCount; y3++) {
+              for (let x3 = 0; x3 < cellCount; x3++) {
+                if ((x3 + y3) % 2 === 0) {
+                  ctx.fillStyle = `${getThemeVar("--color-base03")}50`;
+                } else {
+                  ctx.fillStyle = `${getThemeVar("--color-base02")}50`;
+                }
+                ctx.beginPath();
+                ctx.arc(celRad + x3 * celRad * 2, celRad + y3 * celRad * 2, celRad * 0.7, 0, Math.PI * 2);
+                ctx.fill();
+              }
+            }
+          }
+        }
+        onGameDraw(ctx, dt) {
+          this.#counter += dt;
+          if (this.#counter * this.getOpt("speed") * 0.02 >= FRAME_TIME) {
+            this.#tick();
+            this.#counter = 0;
+          }
+          ctx.drawImage(this.#backgroundCanvas, 0, 0);
+          ctx.fillStyle = getThemeVar("--color-text");
+          for (const part of this.#snake) {
+            this.#drawDot(ctx, part);
+          }
+          ctx.fillStyle = getThemeVar("--color-accent");
+          this.#drawDot(ctx, this.#food);
+        }
+        onKeyDown(e5) {
+          switch (e5.key) {
+            case "ArrowUp":
+              if (this.#curDir !== DIR_DOWN) {
+                this.#targetDir = DIR_UP;
+              }
+              break;
+            case "ArrowDown":
+              if (this.#curDir !== DIR_UP) {
+                this.#targetDir = DIR_DOWN;
+              }
+              break;
+            case "ArrowLeft":
+              if (this.#curDir !== DIR_RIGHT) {
+                this.#targetDir = DIR_LEFT;
+              }
+              break;
+            case "ArrowRight":
+              if (this.#curDir !== DIR_LEFT) {
+                this.#targetDir = DIR_RIGHT;
+              }
+              break;
+          }
+        }
+      };
+      registerWidget(new SnakeWidget());
     }
-    onGameDraw(ctx, dt) {
-      this.#counter += dt;
-      if (this.#counter * this.getOpt("speed") * 0.02 >= FRAME_TIME) {
-        this.#tick();
-        this.#counter = 0;
-      }
-      ctx.drawImage(this.#backgroundCanvas, 0, 0);
-      ctx.fillStyle = getThemeVar("--color-text");
-      for (const part of this.#snake) {
-        this.#drawDot(ctx, part);
-      }
-      ctx.fillStyle = getThemeVar("--color-accent");
-      this.#drawDot(ctx, this.#food);
-    }
-    onKeyDown(e5) {
-      switch (e5.key) {
-        case "ArrowUp":
-          if (this.#curDir !== DIR_DOWN) {
-            this.#targetDir = DIR_UP;
-          }
-          break;
-        case "ArrowDown":
-          if (this.#curDir !== DIR_UP) {
-            this.#targetDir = DIR_DOWN;
-          }
-          break;
-        case "ArrowLeft":
-          if (this.#curDir !== DIR_RIGHT) {
-            this.#targetDir = DIR_LEFT;
-          }
-          break;
-        case "ArrowRight":
-          if (this.#curDir !== DIR_LEFT) {
-            this.#targetDir = DIR_RIGHT;
-          }
-          break;
-      }
-    }
-  };
-  registerWidget(new SnakeWidget());
+  });
 
   // src/games/pong.ts
-  var PONG_BALL_RADIUS = 4;
-  var PONG_PADDLE_WIDTH = 5;
-  var PONG_PADDLE_HEIGHT = 40;
-  var PONG_PADDLE_SPEED = 0.2;
-  var PONG_BALL_SPEED = 0.1;
-  var SPEEDUP_FACTOR = 1.05;
-  var MAX_SPEED = 0.5;
-  var PongWidget = class extends GameBase {
-    ball;
-    leftY;
-    rightY;
-    leftUp = false;
-    leftDown = false;
-    get title() {
-      return "Pong++";
-    }
-    get options() {
-      return [GameOption.slider("speed", "Speed:", 10, 300, 100)];
-    }
-    async onGameStart() {
-      const w2 = this.canvas.width;
-      const h4 = this.canvas.height;
-      this.ball = {
-        x: w2 / 2,
-        y: h4 / 2,
-        dx: PONG_BALL_SPEED * this.getOpt("speed") * 0.01 * (Math.random() > 0.5 ? 1 : -1),
-        dy: PONG_BALL_SPEED * this.getOpt("speed") * 0.01 * (Math.random() * 2 - 1),
+  var PONG_BALL_RADIUS, PONG_PADDLE_WIDTH, PONG_PADDLE_HEIGHT, PONG_PADDLE_SPEED, PONG_BALL_SPEED, SPEEDUP_FACTOR, MAX_SPEED, PongWidget;
+  var init_pong = __esm({
+    "src/games/pong.ts"() {
+      "use strict";
+      init_themes();
+      init_widgets();
+      init_games();
+      PONG_BALL_RADIUS = 4;
+      PONG_PADDLE_WIDTH = 5;
+      PONG_PADDLE_HEIGHT = 40;
+      PONG_PADDLE_SPEED = 0.2;
+      PONG_BALL_SPEED = 0.1;
+      SPEEDUP_FACTOR = 1.05;
+      MAX_SPEED = 0.5;
+      PongWidget = class extends GameBase {
+        ball;
+        leftY;
+        rightY;
+        leftUp = false;
+        leftDown = false;
+        get title() {
+          return "Pong++";
+        }
+        get options() {
+          return [GameOption.slider("speed", "Speed:", 10, 300, 100)];
+        }
+        async onGameStart() {
+          const w2 = this.canvas.width;
+          const h4 = this.canvas.height;
+          this.ball = {
+            x: w2 / 2,
+            y: h4 / 2,
+            dx: PONG_BALL_SPEED * this.getOpt("speed") * 0.01 * (Math.random() > 0.5 ? 1 : -1),
+            dy: PONG_BALL_SPEED * this.getOpt("speed") * 0.01 * (Math.random() * 2 - 1)
+          };
+          this.leftY = (h4 - PONG_PADDLE_HEIGHT) / 2;
+          this.rightY = (h4 - PONG_PADDLE_HEIGHT) / 2;
+          this.leftUp = false;
+          this.leftDown = false;
+        }
+        drawRoundedRect(ctx, x3, y3, width, height, radius) {
+          ctx.beginPath();
+          ctx.moveTo(x3 + radius, y3);
+          ctx.lineTo(x3 + width - radius, y3);
+          ctx.quadraticCurveTo(x3 + width, y3, x3 + width, y3 + radius);
+          ctx.lineTo(x3 + width, y3 + height - radius);
+          ctx.quadraticCurveTo(x3 + width, y3 + height, x3 + width - radius, y3 + height);
+          ctx.lineTo(x3 + radius, y3 + height);
+          ctx.quadraticCurveTo(x3, y3 + height, x3, y3 + height - radius);
+          ctx.lineTo(x3, y3 + radius);
+          ctx.quadraticCurveTo(x3, y3, x3 + radius, y3);
+          ctx.closePath();
+          ctx.fill();
+        }
+        onGameDraw(ctx, dt) {
+          if (!this.ball) {
+            return;
+          }
+          const w2 = this.canvas.width;
+          const h4 = this.canvas.height;
+          const colorBase = getThemeVar("--color-base01");
+          const colorText = getThemeVar("--color-text");
+          const colorAccent = getThemeVar("--color-accent");
+          ctx.fillStyle = colorBase;
+          ctx.fillRect(0, 0, w2, h4);
+          const speed = PONG_PADDLE_SPEED * this.getOpt("speed") * 0.01;
+          const paddleDelta = speed * dt;
+          if (this.leftUp) {
+            this.leftY -= paddleDelta;
+          }
+          if (this.leftDown) {
+            this.leftY += paddleDelta;
+          }
+          this.leftY = Math.max(0, Math.min(h4 - PONG_PADDLE_HEIGHT, this.leftY));
+          const aiCenter = this.rightY + PONG_PADDLE_HEIGHT / 2;
+          const diff = this.ball.y - aiCenter;
+          const maxMove = paddleDelta * 0.8;
+          if (Math.abs(diff) > maxMove) {
+            this.rightY += Math.sign(diff) * maxMove;
+          } else {
+            this.rightY += diff;
+          }
+          this.rightY = Math.max(0, Math.min(h4 - PONG_PADDLE_HEIGHT, this.rightY));
+          const b3 = this.ball;
+          b3.x += b3.dx * dt;
+          b3.y += b3.dy * dt;
+          if (b3.y < PONG_BALL_RADIUS || b3.y > h4 - PONG_BALL_RADIUS) {
+            b3.dy *= -1;
+            b3.y = Math.max(PONG_BALL_RADIUS, Math.min(h4 - PONG_BALL_RADIUS, b3.y));
+          }
+          if (b3.x < PONG_PADDLE_WIDTH + PONG_BALL_RADIUS && b3.y > this.leftY && b3.y < this.leftY + PONG_PADDLE_HEIGHT) {
+            b3.dx *= -1;
+            b3.x = PONG_PADDLE_WIDTH + PONG_BALL_RADIUS;
+            b3.dx *= SPEEDUP_FACTOR;
+            b3.dy *= SPEEDUP_FACTOR;
+            b3.dx = Math.sign(b3.dx) * Math.min(Math.abs(b3.dx), MAX_SPEED);
+            b3.dy = Math.sign(b3.dy) * Math.min(Math.abs(b3.dy), MAX_SPEED);
+            this.score++;
+          }
+          if (b3.x > w2 - PONG_PADDLE_WIDTH - PONG_BALL_RADIUS && b3.y > this.rightY && b3.y < this.rightY + PONG_PADDLE_HEIGHT) {
+            b3.dx *= -1;
+            b3.x = w2 - PONG_PADDLE_WIDTH - PONG_BALL_RADIUS;
+            b3.dx *= SPEEDUP_FACTOR;
+            b3.dy *= SPEEDUP_FACTOR;
+            b3.dx = Math.sign(b3.dx) * Math.min(Math.abs(b3.dx), MAX_SPEED);
+            b3.dy = Math.sign(b3.dy) * Math.min(Math.abs(b3.dy), MAX_SPEED);
+          }
+          if (b3.x < -PONG_BALL_RADIUS) {
+            this.stopGame();
+          }
+          if (b3.x > w2 + PONG_BALL_RADIUS) {
+            this.onGameStart();
+          }
+          ctx.fillStyle = colorText;
+          ctx.beginPath();
+          ctx.arc(b3.x, b3.y, PONG_BALL_RADIUS, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillStyle = colorAccent;
+          this.drawRoundedRect(ctx, 0, this.leftY, PONG_PADDLE_WIDTH, PONG_PADDLE_HEIGHT, 3);
+          this.drawRoundedRect(
+            ctx,
+            w2 - PONG_PADDLE_WIDTH,
+            this.rightY,
+            PONG_PADDLE_WIDTH,
+            PONG_PADDLE_HEIGHT,
+            3
+          );
+          ctx.strokeStyle = colorText;
+          ctx.setLineDash([4, 5]);
+          ctx.beginPath();
+          ctx.moveTo(w2 / 2, 0);
+          ctx.lineTo(w2 / 2, h4);
+          ctx.stroke();
+          ctx.setLineDash([]);
+        }
+        onKeyDown(e5) {
+          if (e5.code === "ArrowUp") {
+            this.leftUp = true;
+          }
+          if (e5.code === "ArrowDown") {
+            this.leftDown = true;
+          }
+        }
+        onKeyUp(e5) {
+          if (e5.code === "ArrowUp") {
+            this.leftUp = false;
+          }
+          if (e5.code === "ArrowDown") {
+            this.leftDown = false;
+          }
+        }
       };
-      this.leftY = (h4 - PONG_PADDLE_HEIGHT) / 2;
-      this.rightY = (h4 - PONG_PADDLE_HEIGHT) / 2;
-      this.leftUp = false;
-      this.leftDown = false;
+      registerWidget(new PongWidget());
     }
-    drawRoundedRect(ctx, x3, y3, width, height, radius) {
-      ctx.beginPath();
-      ctx.moveTo(x3 + radius, y3);
-      ctx.lineTo(x3 + width - radius, y3);
-      ctx.quadraticCurveTo(x3 + width, y3, x3 + width, y3 + radius);
-      ctx.lineTo(x3 + width, y3 + height - radius);
-      ctx.quadraticCurveTo(x3 + width, y3 + height, x3 + width - radius, y3 + height);
-      ctx.lineTo(x3 + radius, y3 + height);
-      ctx.quadraticCurveTo(x3, y3 + height, x3, y3 + height - radius);
-      ctx.lineTo(x3, y3 + radius);
-      ctx.quadraticCurveTo(x3, y3, x3 + radius, y3);
-      ctx.closePath();
-      ctx.fill();
-    }
-    onGameDraw(ctx, dt) {
-      if (!this.ball) {
-        return;
-      }
-      const w2 = this.canvas.width;
-      const h4 = this.canvas.height;
-      const colorBase = getThemeVar("--color-base01");
-      const colorText = getThemeVar("--color-text");
-      const colorAccent = getThemeVar("--color-accent");
-      ctx.fillStyle = colorBase;
-      ctx.fillRect(0, 0, w2, h4);
-      const speed = PONG_PADDLE_SPEED * this.getOpt("speed") * 0.01;
-      const paddleDelta = speed * dt;
-      if (this.leftUp) {
-        this.leftY -= paddleDelta;
-      }
-      if (this.leftDown) {
-        this.leftY += paddleDelta;
-      }
-      this.leftY = Math.max(0, Math.min(h4 - PONG_PADDLE_HEIGHT, this.leftY));
-      const aiCenter = this.rightY + PONG_PADDLE_HEIGHT / 2;
-      const diff = this.ball.y - aiCenter;
-      const maxMove = paddleDelta * 0.8;
-      if (Math.abs(diff) > maxMove) {
-        this.rightY += Math.sign(diff) * maxMove;
-      } else {
-        this.rightY += diff;
-      }
-      this.rightY = Math.max(0, Math.min(h4 - PONG_PADDLE_HEIGHT, this.rightY));
-      const b3 = this.ball;
-      b3.x += b3.dx * dt;
-      b3.y += b3.dy * dt;
-      if (b3.y < PONG_BALL_RADIUS || b3.y > h4 - PONG_BALL_RADIUS) {
-        b3.dy *= -1;
-        b3.y = Math.max(PONG_BALL_RADIUS, Math.min(h4 - PONG_BALL_RADIUS, b3.y));
-      }
-      if (
-        b3.x < PONG_PADDLE_WIDTH + PONG_BALL_RADIUS &&
-        b3.y > this.leftY &&
-        b3.y < this.leftY + PONG_PADDLE_HEIGHT
-      ) {
-        b3.dx *= -1;
-        b3.x = PONG_PADDLE_WIDTH + PONG_BALL_RADIUS;
-        b3.dx *= SPEEDUP_FACTOR;
-        b3.dy *= SPEEDUP_FACTOR;
-        b3.dx = Math.sign(b3.dx) * Math.min(Math.abs(b3.dx), MAX_SPEED);
-        b3.dy = Math.sign(b3.dy) * Math.min(Math.abs(b3.dy), MAX_SPEED);
-        this.score++;
-      }
-      if (
-        b3.x > w2 - PONG_PADDLE_WIDTH - PONG_BALL_RADIUS &&
-        b3.y > this.rightY &&
-        b3.y < this.rightY + PONG_PADDLE_HEIGHT
-      ) {
-        b3.dx *= -1;
-        b3.x = w2 - PONG_PADDLE_WIDTH - PONG_BALL_RADIUS;
-        b3.dx *= SPEEDUP_FACTOR;
-        b3.dy *= SPEEDUP_FACTOR;
-        b3.dx = Math.sign(b3.dx) * Math.min(Math.abs(b3.dx), MAX_SPEED);
-        b3.dy = Math.sign(b3.dy) * Math.min(Math.abs(b3.dy), MAX_SPEED);
-      }
-      if (b3.x < -PONG_BALL_RADIUS) {
-        this.stopGame();
-      }
-      if (b3.x > w2 + PONG_BALL_RADIUS) {
-        this.onGameStart();
-      }
-      ctx.fillStyle = colorText;
-      ctx.beginPath();
-      ctx.arc(b3.x, b3.y, PONG_BALL_RADIUS, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.fillStyle = colorAccent;
-      this.drawRoundedRect(ctx, 0, this.leftY, PONG_PADDLE_WIDTH, PONG_PADDLE_HEIGHT, 3);
-      this.drawRoundedRect(
-        ctx,
-        w2 - PONG_PADDLE_WIDTH,
-        this.rightY,
-        PONG_PADDLE_WIDTH,
-        PONG_PADDLE_HEIGHT,
-        3,
-      );
-      ctx.strokeStyle = colorText;
-      ctx.setLineDash([4, 5]);
-      ctx.beginPath();
-      ctx.moveTo(w2 / 2, 0);
-      ctx.lineTo(w2 / 2, h4);
-      ctx.stroke();
-      ctx.setLineDash([]);
-    }
-    onKeyDown(e5) {
-      if (e5.code === "ArrowUp") {
-        this.leftUp = true;
-      }
-      if (e5.code === "ArrowDown") {
-        this.leftDown = true;
-      }
-    }
-    onKeyUp(e5) {
-      if (e5.code === "ArrowUp") {
-        this.leftUp = false;
-      }
-      if (e5.code === "ArrowDown") {
-        this.leftDown = false;
-      }
-    }
-  };
-  registerWidget(new PongWidget());
+  });
 
   // src/games/tetris.ts
-  var BOARD_WIDTH = 10;
-  var BOARD_HEIGHT = 12;
-  var CELL_SIZE = 25;
-  var BASE_PIECES = {
-    I: [
-      [0, 0, 0, 0],
-      [1, 1, 1, 1],
-      [0, 0, 0, 0],
-      [0, 0, 0, 0],
-    ],
-    O: [
-      [0, 1, 1, 0],
-      [0, 1, 1, 0],
-      [0, 0, 0, 0],
-      [0, 0, 0, 0],
-    ],
-    T: [
-      [0, 1, 0, 0],
-      [1, 1, 1, 0],
-      [0, 0, 0, 0],
-      [0, 0, 0, 0],
-    ],
-    S: [
-      [0, 1, 1, 0],
-      [1, 1, 0, 0],
-      [0, 0, 0, 0],
-      [0, 0, 0, 0],
-    ],
-    Z: [
-      [1, 1, 0, 0],
-      [0, 1, 1, 0],
-      [0, 0, 0, 0],
-      [0, 0, 0, 0],
-    ],
-    J: [
-      [1, 0, 0, 0],
-      [1, 1, 1, 0],
-      [0, 0, 0, 0],
-      [0, 0, 0, 0],
-    ],
-    L: [
-      [0, 0, 1, 0],
-      [1, 1, 1, 0],
-      [0, 0, 0, 0],
-      [0, 0, 0, 0],
-    ],
-  };
   function rotate(matrix) {
     const size = matrix.length;
-    const result = Array.from({ length: size }, () => Array(size).fill(0));
+    const result = Array.from({ length: size }, () => new Array(size).fill(0));
     for (let y3 = 0; y3 < size; y3++) {
       for (let x3 = 0; x3 < size; x3++) {
         result[x3][size - 1 - y3] = matrix[y3][x3];
@@ -13487,138 +11449,6 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     }
     return rotations;
   }
-  var PIECES = Object.fromEntries(
-    Object.entries(BASE_PIECES).map(([name2, base]) => [name2, generateRotations(base)]),
-  );
-  var PIECE_TYPES = Object.keys(PIECES);
-  var KICKS = {
-    JLTSZ: {
-      "0>1": [
-        [0, 0],
-        [-1, 0],
-        [-1, 1],
-        [0, -2],
-        [-1, -2],
-      ],
-      "1>0": [
-        [0, 0],
-        [1, 0],
-        [1, -1],
-        [0, 2],
-        [1, 2],
-      ],
-      "1>2": [
-        [0, 0],
-        [1, 0],
-        [1, -1],
-        [0, 2],
-        [1, 2],
-      ],
-      "2>1": [
-        [0, 0],
-        [-1, 0],
-        [-1, 1],
-        [0, -2],
-        [-1, -2],
-      ],
-      "2>3": [
-        [0, 0],
-        [1, 0],
-        [1, 1],
-        [0, -2],
-        [1, -2],
-      ],
-      "3>2": [
-        [0, 0],
-        [-1, 0],
-        [-1, -1],
-        [0, 2],
-        [-1, 2],
-      ],
-      "3>0": [
-        [0, 0],
-        [-1, 0],
-        [-1, -1],
-        [0, 2],
-        [-1, 2],
-      ],
-      "0>3": [
-        [0, 0],
-        [1, 0],
-        [1, 1],
-        [0, -2],
-        [1, -2],
-      ],
-    },
-    I: {
-      "0>1": [
-        [0, 0],
-        [-2, 0],
-        [1, 0],
-        [-2, -1],
-        [1, 2],
-      ],
-      "1>0": [
-        [0, 0],
-        [2, 0],
-        [-1, 0],
-        [2, 1],
-        [-1, -2],
-      ],
-      "1>2": [
-        [0, 0],
-        [-1, 0],
-        [2, 0],
-        [-1, 2],
-        [2, -1],
-      ],
-      "2>1": [
-        [0, 0],
-        [1, 0],
-        [-2, 0],
-        [1, -2],
-        [-2, 1],
-      ],
-      "2>3": [
-        [0, 0],
-        [2, 0],
-        [-1, 0],
-        [2, 1],
-        [-1, -2],
-      ],
-      "3>2": [
-        [0, 0],
-        [-2, 0],
-        [1, 0],
-        [-2, -1],
-        [1, 2],
-      ],
-      "3>0": [
-        [0, 0],
-        [1, 0],
-        [-2, 0],
-        [1, -2],
-        [-2, 1],
-      ],
-      "0>3": [
-        [0, 0],
-        [-1, 0],
-        [2, 0],
-        [-1, 2],
-        [2, -1],
-      ],
-    },
-    O: {
-      "0>1": [[0, 0]],
-      "1>2": [[0, 0]],
-      "2>3": [[0, 0]],
-      "3>0": [[0, 0]],
-      "1>0": [[0, 0]],
-      "2>1": [[0, 0]],
-      "3>2": [[0, 0]],
-      "0>3": [[0, 0]],
-    },
-  };
   function drawRoundedRect(ctx, x3, y3, width, height, radius) {
     ctx.beginPath();
     ctx.moveTo(x3 + radius, y3);
@@ -13632,633 +11462,611 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     ctx.quadraticCurveTo(x3, y3, x3 + radius, y3);
     ctx.closePath();
   }
-  var TetrisWidget = class extends GameBase {
-    #board;
-    #currentPiece;
-    #currentRotation;
-    #pieceX;
-    #pieceY;
-    #nextPiece;
-    #dropTime;
-    #dropInterval;
-    #leftHeld;
-    #rightHeld;
-    #downHeld;
-    #leftTimer;
-    #rightTimer;
-    #downTimer;
-    constructor() {
-      super();
-      this.#leftHeld = false;
-      this.#rightHeld = false;
-      this.#downHeld = false;
-    }
-    get title() {
-      return "Tetris++";
-    }
-    get options() {
-      return [GameOption.slider("speed", "Speed:", 10, 100, 30)];
-    }
-    #randomPiece() {
-      return PIECE_TYPES[Math.floor(Math.random() * PIECE_TYPES.length)];
-    }
-    #getPieceShape(type, rotation) {
-      return PIECES[type][rotation % 4];
-    }
-    #collision(pieceType, rotation, x3, y3) {
-      const shape = this.#getPieceShape(pieceType, rotation);
-      for (let py = 0; py < 4; py++) {
-        for (let px = 0; px < 4; px++) {
-          if (shape[py][px]) {
-            const bx = x3 + px;
-            const by = y3 + py;
-            if (
-              bx < 0 ||
-              bx >= BOARD_WIDTH ||
-              by >= BOARD_HEIGHT ||
-              (by >= 0 && this.#board[by][bx])
-            ) {
-              return true;
-            }
-          }
-        }
-      }
-      return false;
-    }
-    #placePiece() {
-      const shape = this.#getPieceShape(this.#currentPiece, this.#currentRotation);
-      for (let py = 0; py < 4; py++) {
-        for (let px = 0; px < 4; px++) {
-          if (shape[py][px]) {
-            const bx = this.#pieceX + px;
-            const by = this.#pieceY + py;
-            if (by >= 0) {
-              this.#board[by][bx] = this.#currentPiece;
-            }
-          }
-        }
-      }
-    }
-    #clearLines() {
-      let linesCleared = 0;
-      for (let y3 = BOARD_HEIGHT - 1; y3 >= 0; y3--) {
-        if (this.#board[y3].every((c5) => c5 !== 0)) {
-          this.#board.splice(y3, 1);
-          this.#board.unshift(new Array(BOARD_WIDTH).fill(0));
-          linesCleared++;
-          y3++;
-        }
-      }
-      this.score += linesCleared;
-    }
-    #spawnPiece() {
-      this.#currentPiece = this.#nextPiece || this.#randomPiece();
-      this.#nextPiece = this.#randomPiece();
-      this.#currentRotation = 0;
-      this.#pieceX = Math.floor(BOARD_WIDTH / 2) - 2;
-      this.#pieceY = -1;
-      if (this.#collision(this.#currentPiece, this.#currentRotation, this.#pieceX, this.#pieceY)) {
-        this.stopGame();
-      }
-    }
-    async onGameStart() {
-      this.#board = Array.from({ length: BOARD_HEIGHT }, () => new Array(BOARD_WIDTH).fill(0));
-      this.#dropTime = 0;
-      this.#dropInterval = 1e3 / (this.getOpt("speed") / 10);
-      this.#stopMoveLeft();
-      this.#stopMoveRight();
-      this.#stopMoveDown();
-      this.#spawnPiece();
-    }
-    onGameDraw(ctx, dt) {
-      this.#dropTime += dt;
-      if (this.#dropTime >= this.#dropInterval) {
-        this.#move(0, 1);
-        this.#dropTime = 0;
-      }
-      ctx.fillStyle = getThemeVar("--color-base01");
-      ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-      const offsetX = (this.canvas.width - BOARD_WIDTH * CELL_SIZE) / 2;
-      ctx.strokeStyle = getThemeVar("--color-base03");
-      ctx.lineWidth = 1;
-      for (let x3 = 0; x3 <= BOARD_WIDTH; x3++) {
-        ctx.beginPath();
-        ctx.moveTo(offsetX + x3 * CELL_SIZE, 0);
-        ctx.lineTo(offsetX + x3 * CELL_SIZE, BOARD_HEIGHT * CELL_SIZE);
-        ctx.stroke();
-      }
-      for (let y3 = 0; y3 <= BOARD_HEIGHT; y3++) {
-        ctx.beginPath();
-        ctx.moveTo(offsetX, y3 * CELL_SIZE);
-        ctx.lineTo(offsetX + BOARD_WIDTH * CELL_SIZE, y3 * CELL_SIZE);
-        ctx.stroke();
-      }
-      const radius = 5;
-      for (let y3 = 0; y3 < BOARD_HEIGHT; y3++) {
-        for (let x3 = 0; x3 < BOARD_WIDTH; x3++) {
-          if (this.#board[y3][x3]) {
-            ctx.fillStyle = this.#getColor(this.#board[y3][x3]);
-            drawRoundedRect(
-              ctx,
-              offsetX + x3 * CELL_SIZE,
-              y3 * CELL_SIZE,
-              CELL_SIZE,
-              CELL_SIZE,
-              radius,
-            );
-            ctx.fill();
-            ctx.strokeStyle = getThemeVar("--color-base03");
-            ctx.stroke();
-          }
-        }
-      }
-      const shape = this.#getPieceShape(this.#currentPiece, this.#currentRotation);
-      ctx.fillStyle = this.#getColor(this.#currentPiece);
-      for (let py = 0; py < 4; py++) {
-        for (let px = 0; px < 4; px++) {
-          if (shape[py][px]) {
-            const x3 = offsetX + (this.#pieceX + px) * CELL_SIZE;
-            const y3 = (this.#pieceY + py) * CELL_SIZE;
-            drawRoundedRect(ctx, x3, y3, CELL_SIZE, CELL_SIZE, radius);
-            ctx.fill();
-            ctx.strokeStyle = getThemeVar("--color-base03");
-            ctx.stroke();
-          }
-        }
-      }
-    }
-    #getColor(type) {
-      const colors = {
-        I: "#00FFFF",
-        O: "#FFFF00",
-        T: "#800080",
-        S: "#00FF00",
-        Z: "#FF0000",
-        J: "#0000FF",
-        L: "#FFA500",
+  var BOARD_WIDTH, BOARD_HEIGHT, CELL_SIZE, BASE_PIECES, PIECES, PIECE_TYPES, KICKS, TetrisWidget;
+  var init_tetris = __esm({
+    "src/games/tetris.ts"() {
+      "use strict";
+      init_themes();
+      init_widgets();
+      init_games();
+      BOARD_WIDTH = 10;
+      BOARD_HEIGHT = 12;
+      CELL_SIZE = 25;
+      BASE_PIECES = {
+        I: [
+          [0, 0, 0, 0],
+          [1, 1, 1, 1],
+          [0, 0, 0, 0],
+          [0, 0, 0, 0]
+        ],
+        O: [
+          [0, 1, 1, 0],
+          [0, 1, 1, 0],
+          [0, 0, 0, 0],
+          [0, 0, 0, 0]
+        ],
+        T: [
+          [0, 1, 0, 0],
+          [1, 1, 1, 0],
+          [0, 0, 0, 0],
+          [0, 0, 0, 0]
+        ],
+        S: [
+          [0, 1, 1, 0],
+          [1, 1, 0, 0],
+          [0, 0, 0, 0],
+          [0, 0, 0, 0]
+        ],
+        Z: [
+          [1, 1, 0, 0],
+          [0, 1, 1, 0],
+          [0, 0, 0, 0],
+          [0, 0, 0, 0]
+        ],
+        J: [
+          [1, 0, 0, 0],
+          [1, 1, 1, 0],
+          [0, 0, 0, 0],
+          [0, 0, 0, 0]
+        ],
+        L: [
+          [0, 0, 1, 0],
+          [1, 1, 1, 0],
+          [0, 0, 0, 0],
+          [0, 0, 0, 0]
+        ]
       };
-      return colors[type] || "#FFFFFF";
-    }
-    #move(dx, dy) {
-      this.#pieceX += dx;
-      this.#pieceY += dy;
-      if (this.#collision(this.#currentPiece, this.#currentRotation, this.#pieceX, this.#pieceY)) {
-        this.#pieceX -= dx;
-        this.#pieceY -= dy;
-        if (dy > 0) {
-          this.#placePiece();
-          this.#clearLines();
+      PIECES = Object.fromEntries(
+        Object.entries(BASE_PIECES).map(([name, base]) => [name, generateRotations(base)])
+      );
+      PIECE_TYPES = Object.keys(PIECES);
+      KICKS = {
+        JLTSZ: {
+          "0>1": [
+            [0, 0],
+            [-1, 0],
+            [-1, 1],
+            [0, -2],
+            [-1, -2]
+          ],
+          "1>0": [
+            [0, 0],
+            [1, 0],
+            [1, -1],
+            [0, 2],
+            [1, 2]
+          ],
+          "1>2": [
+            [0, 0],
+            [1, 0],
+            [1, -1],
+            [0, 2],
+            [1, 2]
+          ],
+          "2>1": [
+            [0, 0],
+            [-1, 0],
+            [-1, 1],
+            [0, -2],
+            [-1, -2]
+          ],
+          "2>3": [
+            [0, 0],
+            [1, 0],
+            [1, 1],
+            [0, -2],
+            [1, -2]
+          ],
+          "3>2": [
+            [0, 0],
+            [-1, 0],
+            [-1, -1],
+            [0, 2],
+            [-1, 2]
+          ],
+          "3>0": [
+            [0, 0],
+            [-1, 0],
+            [-1, -1],
+            [0, 2],
+            [-1, 2]
+          ],
+          "0>3": [
+            [0, 0],
+            [1, 0],
+            [1, 1],
+            [0, -2],
+            [1, -2]
+          ]
+        },
+        I: {
+          "0>1": [
+            [0, 0],
+            [-2, 0],
+            [1, 0],
+            [-2, -1],
+            [1, 2]
+          ],
+          "1>0": [
+            [0, 0],
+            [2, 0],
+            [-1, 0],
+            [2, 1],
+            [-1, -2]
+          ],
+          "1>2": [
+            [0, 0],
+            [-1, 0],
+            [2, 0],
+            [-1, 2],
+            [2, -1]
+          ],
+          "2>1": [
+            [0, 0],
+            [1, 0],
+            [-2, 0],
+            [1, -2],
+            [-2, 1]
+          ],
+          "2>3": [
+            [0, 0],
+            [2, 0],
+            [-1, 0],
+            [2, 1],
+            [-1, -2]
+          ],
+          "3>2": [
+            [0, 0],
+            [-2, 0],
+            [1, 0],
+            [-2, -1],
+            [1, 2]
+          ],
+          "3>0": [
+            [0, 0],
+            [1, 0],
+            [-2, 0],
+            [1, -2],
+            [-2, 1]
+          ],
+          "0>3": [
+            [0, 0],
+            [-1, 0],
+            [2, 0],
+            [-1, 2],
+            [2, -1]
+          ]
+        },
+        O: {
+          "0>1": [[0, 0]],
+          "1>2": [[0, 0]],
+          "2>3": [[0, 0]],
+          "3>0": [[0, 0]],
+          "1>0": [[0, 0]],
+          "2>1": [[0, 0]],
+          "3>2": [[0, 0]],
+          "0>3": [[0, 0]]
+        }
+      };
+      TetrisWidget = class extends GameBase {
+        #board;
+        #currentPiece;
+        #currentRotation;
+        #pieceX;
+        #pieceY;
+        #nextPiece;
+        #dropTime;
+        #dropInterval;
+        #leftHeld;
+        #rightHeld;
+        #downHeld;
+        #leftTimer;
+        #rightTimer;
+        #downTimer;
+        constructor() {
+          super();
+          this.#leftHeld = false;
+          this.#rightHeld = false;
+          this.#downHeld = false;
+        }
+        get title() {
+          return "Tetris++";
+        }
+        get options() {
+          return [GameOption.slider("speed", "Speed:", 10, 100, 30)];
+        }
+        #randomPiece() {
+          return PIECE_TYPES[Math.floor(Math.random() * PIECE_TYPES.length)];
+        }
+        #getPieceShape(type, rotation) {
+          return PIECES[type][rotation % 4];
+        }
+        #collision(pieceType, rotation, x3, y3) {
+          const shape = this.#getPieceShape(pieceType, rotation);
+          for (let py = 0; py < 4; py++) {
+            for (let px = 0; px < 4; px++) {
+              if (shape[py][px]) {
+                const bx = x3 + px;
+                const by = y3 + py;
+                if (bx < 0 || bx >= BOARD_WIDTH || by >= BOARD_HEIGHT || by >= 0 && this.#board[by][bx]) {
+                  return true;
+                }
+              }
+            }
+          }
+          return false;
+        }
+        #placePiece() {
+          const shape = this.#getPieceShape(this.#currentPiece, this.#currentRotation);
+          for (let py = 0; py < 4; py++) {
+            for (let px = 0; px < 4; px++) {
+              if (shape[py][px]) {
+                const bx = this.#pieceX + px;
+                const by = this.#pieceY + py;
+                if (by >= 0) {
+                  this.#board[by][bx] = this.#currentPiece;
+                }
+              }
+            }
+          }
+        }
+        #clearLines() {
+          let linesCleared = 0;
+          for (let y3 = BOARD_HEIGHT - 1; y3 >= 0; y3--) {
+            if (this.#board[y3].every((c5) => c5 !== 0)) {
+              this.#board.splice(y3, 1);
+              this.#board.unshift(new Array(BOARD_WIDTH).fill(0));
+              linesCleared++;
+              y3++;
+            }
+          }
+          this.score += linesCleared;
+        }
+        #spawnPiece() {
+          this.#currentPiece = this.#nextPiece || this.#randomPiece();
+          this.#nextPiece = this.#randomPiece();
+          this.#currentRotation = 0;
+          this.#pieceX = Math.floor(BOARD_WIDTH / 2) - 2;
+          this.#pieceY = -1;
+          if (this.#collision(this.#currentPiece, this.#currentRotation, this.#pieceX, this.#pieceY)) {
+            this.stopGame();
+          }
+        }
+        async onGameStart() {
+          this.#board = Array.from({ length: BOARD_HEIGHT }, () => new Array(BOARD_WIDTH).fill(0));
+          this.#dropTime = 0;
+          this.#dropInterval = 1e3 / (this.getOpt("speed") / 10);
+          this.#stopMoveLeft();
+          this.#stopMoveRight();
+          this.#stopMoveDown();
           this.#spawnPiece();
         }
-      }
-    }
-    #rotate() {
-      const piece = this.#currentPiece;
-      const from = this.#currentRotation;
-      const to = (this.#currentRotation + 1) % 4;
-      const kickSet = piece === "I" ? KICKS.I : piece === "O" ? KICKS.O : KICKS.JLTSZ;
-      const key = `${from}>${to}`;
-      for (const [dx, dy] of kickSet[key]) {
-        if (!this.#collision(piece, to, this.#pieceX + dx, this.#pieceY + dy)) {
-          this.#currentRotation = to;
+        onGameDraw(ctx, dt) {
+          this.#dropTime += dt;
+          if (this.#dropTime >= this.#dropInterval) {
+            this.#move(0, 1);
+            this.#dropTime = 0;
+          }
+          ctx.fillStyle = getThemeVar("--color-base01");
+          ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+          const offsetX = (this.canvas.width - BOARD_WIDTH * CELL_SIZE) / 2;
+          ctx.strokeStyle = getThemeVar("--color-base03");
+          ctx.lineWidth = 1;
+          for (let x3 = 0; x3 <= BOARD_WIDTH; x3++) {
+            ctx.beginPath();
+            ctx.moveTo(offsetX + x3 * CELL_SIZE, 0);
+            ctx.lineTo(offsetX + x3 * CELL_SIZE, BOARD_HEIGHT * CELL_SIZE);
+            ctx.stroke();
+          }
+          for (let y3 = 0; y3 <= BOARD_HEIGHT; y3++) {
+            ctx.beginPath();
+            ctx.moveTo(offsetX, y3 * CELL_SIZE);
+            ctx.lineTo(offsetX + BOARD_WIDTH * CELL_SIZE, y3 * CELL_SIZE);
+            ctx.stroke();
+          }
+          const radius = 5;
+          for (let y3 = 0; y3 < BOARD_HEIGHT; y3++) {
+            for (let x3 = 0; x3 < BOARD_WIDTH; x3++) {
+              if (this.#board[y3][x3]) {
+                ctx.fillStyle = this.#getColor(this.#board[y3][x3]);
+                drawRoundedRect(
+                  ctx,
+                  offsetX + x3 * CELL_SIZE,
+                  y3 * CELL_SIZE,
+                  CELL_SIZE,
+                  CELL_SIZE,
+                  radius
+                );
+                ctx.fill();
+                ctx.strokeStyle = getThemeVar("--color-base03");
+                ctx.stroke();
+              }
+            }
+          }
+          const shape = this.#getPieceShape(this.#currentPiece, this.#currentRotation);
+          ctx.fillStyle = this.#getColor(this.#currentPiece);
+          for (let py = 0; py < 4; py++) {
+            for (let px = 0; px < 4; px++) {
+              if (shape[py][px]) {
+                const x3 = offsetX + (this.#pieceX + px) * CELL_SIZE;
+                const y3 = (this.#pieceY + py) * CELL_SIZE;
+                drawRoundedRect(ctx, x3, y3, CELL_SIZE, CELL_SIZE, radius);
+                ctx.fill();
+                ctx.strokeStyle = getThemeVar("--color-base03");
+                ctx.stroke();
+              }
+            }
+          }
+        }
+        #getColor(type) {
+          const colors = {
+            I: "#00FFFF",
+            O: "#FFFF00",
+            T: "#800080",
+            S: "#00FF00",
+            Z: "#FF0000",
+            J: "#0000FF",
+            L: "#FFA500"
+          };
+          return colors[type] || "#FFFFFF";
+        }
+        #move(dx, dy) {
           this.#pieceX += dx;
           this.#pieceY += dy;
-          return;
+          if (this.#collision(this.#currentPiece, this.#currentRotation, this.#pieceX, this.#pieceY)) {
+            this.#pieceX -= dx;
+            this.#pieceY -= dy;
+            if (dy > 0) {
+              this.#placePiece();
+              this.#clearLines();
+              this.#spawnPiece();
+            }
+          }
         }
-      }
+        #rotate() {
+          const piece = this.#currentPiece;
+          const from = this.#currentRotation;
+          const to = (this.#currentRotation + 1) % 4;
+          const kickSet = piece === "I" ? KICKS.I : piece === "O" ? KICKS.O : KICKS.JLTSZ;
+          const key = `${from}>${to}`;
+          for (const [dx, dy] of kickSet[key]) {
+            if (!this.#collision(piece, to, this.#pieceX + dx, this.#pieceY + dy)) {
+              this.#currentRotation = to;
+              this.#pieceX += dx;
+              this.#pieceY += dy;
+              return;
+            }
+          }
+        }
+        #startMoveLeft() {
+          if (!this.#leftHeld) {
+            this.#move(-1, 0);
+            this.#leftHeld = true;
+            this.#leftTimer = setInterval(() => this.#move(-1, 0), 100);
+          }
+        }
+        #stopMoveLeft() {
+          if (this.#leftHeld) {
+            this.#leftHeld = false;
+            clearInterval(this.#leftTimer);
+          }
+        }
+        #startMoveRight() {
+          if (!this.#rightHeld) {
+            this.#move(1, 0);
+            this.#rightHeld = true;
+            this.#rightTimer = setInterval(() => this.#move(1, 0), 100);
+          }
+        }
+        #stopMoveRight() {
+          if (this.#rightHeld) {
+            this.#rightHeld = false;
+            clearInterval(this.#rightTimer);
+          }
+        }
+        #startMoveDown() {
+          if (!this.#downHeld) {
+            this.#move(0, 1);
+            this.#downHeld = true;
+            this.#downTimer = setInterval(() => this.#move(0, 1), 50);
+          }
+        }
+        #stopMoveDown() {
+          if (this.#downHeld) {
+            this.#downHeld = false;
+            clearInterval(this.#downTimer);
+          }
+        }
+        onKeyDown(e5) {
+          switch (e5.key) {
+            case "ArrowLeft":
+              this.#startMoveLeft();
+              break;
+            case "ArrowRight":
+              this.#startMoveRight();
+              break;
+            case "ArrowDown":
+              this.#startMoveDown();
+              break;
+            case "ArrowUp":
+            case " ":
+              e5.preventDefault();
+              this.#rotate();
+              break;
+          }
+        }
+        onKeyUp(e5) {
+          switch (e5.key) {
+            case "ArrowLeft":
+              this.#stopMoveLeft();
+              break;
+            case "ArrowRight":
+              this.#stopMoveRight();
+              break;
+            case "ArrowDown":
+              this.#stopMoveDown();
+              break;
+          }
+        }
+      };
+      registerWidget(new TetrisWidget());
     }
-    #startMoveLeft() {
-      if (!this.#leftHeld) {
-        this.#move(-1, 0);
-        this.#leftHeld = true;
-        this.#leftTimer = setInterval(() => this.#move(-1, 0), 100);
-      }
-    }
-    #stopMoveLeft() {
-      if (this.#leftHeld) {
-        this.#leftHeld = false;
-        clearInterval(this.#leftTimer);
-      }
-    }
-    #startMoveRight() {
-      if (!this.#rightHeld) {
-        this.#move(1, 0);
-        this.#rightHeld = true;
-        this.#rightTimer = setInterval(() => this.#move(1, 0), 100);
-      }
-    }
-    #stopMoveRight() {
-      if (this.#rightHeld) {
-        this.#rightHeld = false;
-        clearInterval(this.#rightTimer);
-      }
-    }
-    #startMoveDown() {
-      if (!this.#downHeld) {
-        this.#move(0, 1);
-        this.#downHeld = true;
-        this.#downTimer = setInterval(() => this.#move(0, 1), 50);
-      }
-    }
-    #stopMoveDown() {
-      if (this.#downHeld) {
-        this.#downHeld = false;
-        clearInterval(this.#downTimer);
-      }
-    }
-    onKeyDown(e5) {
-      switch (e5.key) {
-        case "ArrowLeft":
-          this.#startMoveLeft();
-          break;
-        case "ArrowRight":
-          this.#startMoveRight();
-          break;
-        case "ArrowDown":
-          this.#startMoveDown();
-          break;
-        case "ArrowUp":
-        case " ":
-          e5.preventDefault();
-          this.#rotate();
-          break;
-      }
-    }
-    onKeyUp(e5) {
-      switch (e5.key) {
-        case "ArrowLeft":
-          this.#stopMoveLeft();
-          break;
-        case "ArrowRight":
-          this.#stopMoveRight();
-          break;
-        case "ArrowDown":
-          this.#stopMoveDown();
-          break;
-      }
-    }
-  };
-  registerWidget(new TetrisWidget());
+  });
 
   // src/widgets/tutorial-widget.ts
-  var TutorialWidget = class extends WidgetBase {
-    constructor() {
-      super();
-      this.lang;
-    }
-    async createContent() {
-      this.container = document.createElement("div");
-      this.container.id = "tutorial-widget";
-      const title = document.createElement("h1");
-      title.className = "tutorial-widget-title";
-      title.textContent = "Widgets Tutorial";
-      title.style.textAlign = "center";
-      this.container.appendChild(title);
-      const langTitle = document.createElement("p");
-      langTitle.className = "tutorial-lang-title";
-      langTitle.textContent = "Choose a language / Kies je taal";
-      this.container.appendChild(langTitle);
-      const langButtons = document.createElement("div");
-      langButtons.className = "lang-buttons";
-      const englishButton = document.createElement("button");
-      englishButton.id = "english-tutorial-lang";
-      const englishIcon = document.createElement("div");
-      englishIcon.id = "english-tutorial-lang-icon";
-      englishButton.appendChild(englishIcon);
-      englishButton.appendChild(document.createTextNode(" English"));
-      langButtons.appendChild(englishButton);
-      const dutchButton = document.createElement("button");
-      dutchButton.id = "dutch-tutorial-lang";
-      const dutchIcon = document.createElement("div");
-      dutchIcon.id = "dutch-tutorial-lang-icon";
-      dutchButton.appendChild(dutchIcon);
-      dutchButton.appendChild(document.createTextNode("Nederlands"));
-      langButtons.appendChild(dutchButton);
-      this.container.appendChild(langButtons);
-      dutchButton.addEventListener("click", (_e) => {
-        this.lang = "dutch";
-        this.displayWidgetTutorial(1);
-      });
-      englishButton.addEventListener("click", () => {
-        this.lang = "english";
-        this.displayWidgetTutorial(1);
-      });
-      return this.container;
-    }
-    editTutorial() {
-      this.displayWidgetTutorial(2);
-      const editBtn = document.getElementById("smpp-widget-edit-mode-btn");
-      if (editBtn) {
-        editBtn.removeEventListener("click", this.boundEditTutorial);
-      }
-    }
-    moveTutorial() {
-      this.displayWidgetTutorial(3);
-      if (this.boundMoveTutorial) {
-        this.element.removeEventListener("mousedown", this.boundMoveTutorial);
-        this.boundMoveTutorial = null;
-      }
-    }
-    bagTutorial() {
-      this.displayWidgetTutorial(4);
-    }
-    displayWidgetTutorial(stage) {
-      this.container.innerHTML = "";
-      const title = document.createElement("h1");
-      title.className = "tutorial-widget-title";
-      const description = document.createElement("p");
-      description.className = "tutorial-widget-description";
-      switch (stage) {
-        case 1: {
-          title.textContent = this.lang === "dutch" ? "1. Bewerken\u{1F4DD}" : "1. Edit\u{1F4DD}";
-          description.innerHTML =
-            this.lang === "dutch"
-              ? `Pas je widgets aan door op de <button class="topnav__btn smpp-button" style="display:inline-flex !important; pointer-events: none"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" class="edit_button" height="18px" width="18px" viewBox="0 0 24 24" xml:space="preserve">
-<g><g><path xmlns="http://www.w3.org/2000/svg" class="st1" stroke-linecap:round;stroke-linejoin:round;-inkscape-stroke:none"="" d="m 19.792969,1.2089844 c -0.773047,0 -1.546203,0.290977 -2.134766,0.8730469 -6.69e-4,6.478e-4 -0.0013,0.0013 -0.002,0.00195 L 8.4119915,11.389897 c -0.5321594,0.536333 -1.9587661,2.040145 -2.9061791,5.334709 -0.1062793,0.369579 -0.1650107,0.570623 -0.2207032,0.85994 -0.046789,0.243065 -0.1295961,0.724628 0.2070338,1.013107 0.3909805,0.335056 1.0440816,0.133455 1.3847656,0.03125 C 7.387553,18.47571 7.9834625,18.287442 8.5897993,18.031247 11.103423,16.969168 12.593117,15.70399 12.985931,15.188066 l 8.93985,-8.8697066 C 23.11495,5.1606353 23.105005,3.2461646 21.927734,2.0820313 21.339171,1.4999614 20.566016,1.2089844 19.792969,1.2089844 Z" id="path5" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="scccssssscccs"></path><path xmlns="http://www.w3.org/2000/svg" d="M 10.273212,2.8358152 H 5.5822718 c -1.3827164,0 -2.0740869,0 -2.6022128,0.2661137 C 2.5154954,3.3360099 2.1378007,3.709514 1.9011058,4.1689107 1.6320062,4.6911889 1.6320062,5.3748762 1.6320062,6.7422506 V 18.461557 c 0,1.367374 0,2.051122 0.2690996,2.573363 0.2366949,0.459374 0.6143896,0.832926 1.0789532,1.066946 0.5281259,0.266126 1.2194964,0.266126 2.6022128,0.266126 H 17.433068 c 1.382716,0 2.074137,0 2.602237,-0.266126 0.464527,-0.23402 0.842271,-0.607572 1.078917,-1.066946 0.269112,-0.522241 0.269112,-1.205989 0.269112,-2.573363 v -5.249273" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="stroke-width:3.25435;stroke-dasharray:none" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="csccssccssccsccc"></path> </g></g>
-</svg></button> knop <strong><i>linksboven</i></strong> te drukken`
-              : `Edit your widgets using the <button class="topnav__btn smpp-button"  style="display:inline-flex !important; pointer-events: none"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" class="edit_button" height="18px" width="18px" viewBox="0 0 24 24" xml:space="preserve">
-<g><g><path xmlns="http://www.w3.org/2000/svg" class="st1" stroke-linecap:round;stroke-linejoin:round;-inkscape-stroke:none"="" d="m 19.792969,1.2089844 c -0.773047,0 -1.546203,0.290977 -2.134766,0.8730469 -6.69e-4,6.478e-4 -0.0013,0.0013 -0.002,0.00195 L 8.4119915,11.389897 c -0.5321594,0.536333 -1.9587661,2.040145 -2.9061791,5.334709 -0.1062793,0.369579 -0.1650107,0.570623 -0.2207032,0.85994 -0.046789,0.243065 -0.1295961,0.724628 0.2070338,1.013107 0.3909805,0.335056 1.0440816,0.133455 1.3847656,0.03125 C 7.387553,18.47571 7.9834625,18.287442 8.5897993,18.031247 11.103423,16.969168 12.593117,15.70399 12.985931,15.188066 l 8.93985,-8.8697066 C 23.11495,5.1606353 23.105005,3.2461646 21.927734,2.0820313 21.339171,1.4999614 20.566016,1.2089844 19.792969,1.2089844 Z" id="path5" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="scccssssscccs"></path><path xmlns="http://www.w3.org/2000/svg" d="M 10.273212,2.8358152 H 5.5822718 c -1.3827164,0 -2.0740869,0 -2.6022128,0.2661137 C 2.5154954,3.3360099 2.1378007,3.709514 1.9011058,4.1689107 1.6320062,4.6911889 1.6320062,5.3748762 1.6320062,6.7422506 V 18.461557 c 0,1.367374 0,2.051122 0.2690996,2.573363 0.2366949,0.459374 0.6143896,0.832926 1.0789532,1.066946 0.5281259,0.266126 1.2194964,0.266126 2.6022128,0.266126 H 17.433068 c 1.382716,0 2.074137,0 2.602237,-0.266126 0.464527,-0.23402 0.842271,-0.607572 1.078917,-1.066946 0.269112,-0.522241 0.269112,-1.205989 0.269112,-2.573363 v -5.249273" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="stroke-width:3.25435;stroke-dasharray:none" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="csccssccssccsccc"></path> </g></g>
-</svg></button> button in the <strong><i> top left </i></strong> corner`;
+  var TutorialWidget;
+  var init_tutorial_widget = __esm({
+    "src/widgets/tutorial-widget.ts"() {
+      "use strict";
+      init_widgets();
+      TutorialWidget = class extends WidgetBase {
+        constructor() {
+          super();
+          this.lang;
+        }
+        async createContent() {
+          this.container = document.createElement("div");
+          this.container.id = "tutorial-widget";
+          const title = document.createElement("h1");
+          title.className = "tutorial-widget-title";
+          title.textContent = "Widgets Tutorial";
+          title.style.textAlign = "center";
           this.container.appendChild(title);
-          this.container.appendChild(description);
+          const langTitle = document.createElement("p");
+          langTitle.className = "tutorial-lang-title";
+          langTitle.textContent = "Choose a language / Kies je taal";
+          this.container.appendChild(langTitle);
+          const langButtons = document.createElement("div");
+          langButtons.className = "lang-buttons";
+          const englishButton = document.createElement("button");
+          englishButton.id = "english-tutorial-lang";
+          const englishIcon = document.createElement("div");
+          englishIcon.id = "english-tutorial-lang-icon";
+          englishButton.appendChild(englishIcon);
+          englishButton.appendChild(document.createTextNode(" English"));
+          langButtons.appendChild(englishButton);
+          const dutchButton = document.createElement("button");
+          dutchButton.id = "dutch-tutorial-lang";
+          const dutchIcon = document.createElement("div");
+          dutchIcon.id = "dutch-tutorial-lang-icon";
+          dutchButton.appendChild(dutchIcon);
+          dutchButton.appendChild(document.createTextNode("Nederlands"));
+          langButtons.appendChild(dutchButton);
+          this.container.appendChild(langButtons);
+          dutchButton.addEventListener("click", (_e) => {
+            this.lang = "dutch";
+            this.displayWidgetTutorial(1);
+          });
+          englishButton.addEventListener("click", () => {
+            this.lang = "english";
+            this.displayWidgetTutorial(1);
+          });
+          return this.container;
+        }
+        editTutorial() {
+          this.displayWidgetTutorial(2);
           const editBtn = document.getElementById("smpp-widget-edit-mode-btn");
           if (editBtn) {
-            this.boundEditTutorial = this.editTutorial.bind(this);
-            editBtn.addEventListener("click", this.boundEditTutorial);
+            editBtn.removeEventListener("click", this.boundEditTutorial);
           }
-          break;
         }
-        case 2:
-          title.textContent =
-            this.lang === "dutch" ? "2. Verplaatsen\u{1F4CD}" : "2. Move\u{1F4CD}";
-          description.innerHTML =
-            this.lang === "dutch"
-              ? "Sleep <strong><i>deze widget</i></strong> naar de gewenste locatie en laat los om ze te verplaatsen."
-              : "Move <strong><i>this widget</i></strong> by dragging and dropping it";
-          this.container.appendChild(title);
-          this.container.appendChild(description);
+        moveTutorial() {
+          this.displayWidgetTutorial(3);
           if (this.boundMoveTutorial) {
             this.element.removeEventListener("mousedown", this.boundMoveTutorial);
+            this.boundMoveTutorial = null;
           }
-          this.boundMoveTutorial = this.moveTutorial.bind(this);
-          this.element.addEventListener("mousedown", this.boundMoveTutorial);
-          break;
-        case 3: {
-          title.innerHTML =
-            this.lang === "dutch"
-              ? `3. Widgets toevoegen <svg class="smpp-widget-bag-handle-icon" style="pointer-events: none; height: 1em; width: 1.2em; display:inline" version="1.1" viewBox="0 0 448 448" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-.898 -124.01)"><path d="m26.458 288.48 198.44 119.06 198.44-119.06" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="100px"></path></g></svg>`
-              : `3. Add widgets <svg class="smpp-widget-bag-handle-icon" style="pointer-events: none; height: 1em; width: 1.2em; display:inline" version="1.1" viewBox="0 0 448 448" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-.898 -124.01)"><path d="m26.458 288.48 198.44 119.06 198.44-119.06" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="100px"></path></g></svg>`;
-          title.style = "font-size: 1.6rem !important;";
-          description.innerHTML =
-            this.lang === "dutch"
-              ? "Klik bovenaan op de <strong><i>balk met het pijltje</i></strong> om widgets te kiezen en toe te voegen. "
-              : "Click the <strong><i>bar with the arrow</i></strong> at the top to pick and add widgets.";
-          this.container.appendChild(title);
-          this.container.appendChild(description);
-          const bagHandle = document.querySelector(".smpp-widget-bag-handle");
-          if (bagHandle) {
-            this.boundBagTutorial = this.bagTutorial.bind(this);
-            bagHandle.addEventListener("click", this.boundBagTutorial);
-          }
-          break;
         }
-        case 4:
-          title.textContent = this.lang === "dutch" ? "4. Verwijderen\u274C" : "4. Removing\u274C";
-          description.innerHTML =
-            this.lang === "dutch"
-              ? "Sleep <strong><i>deze widget</i></strong> naar diezelfde balk om hem te verwijderen."
-              : "Drag <strong><i>this widget</i></strong> back to that same bar to remove it.";
-          this.container.appendChild(title);
-          this.container.appendChild(description);
-          break;
-      }
+        bagTutorial() {
+          this.displayWidgetTutorial(4);
+        }
+        displayWidgetTutorial(stage) {
+          this.container.innerHTML = "";
+          const title = document.createElement("h1");
+          title.className = "tutorial-widget-title";
+          const description = document.createElement("p");
+          description.className = "tutorial-widget-description";
+          switch (stage) {
+            case 1: {
+              title.textContent = this.lang === "dutch" ? "1. Bewerken\u{1F4DD}" : "1. Edit\u{1F4DD}";
+              description.innerHTML = this.lang === "dutch" ? `Pas je widgets aan door op de <button class="topnav__btn smpp-button" style="display:inline-flex !important; pointer-events: none"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" class="edit_button" height="18px" width="18px" viewBox="0 0 24 24" xml:space="preserve">
+<g><g><path xmlns="http://www.w3.org/2000/svg" class="st1" stroke-linecap:round;stroke-linejoin:round;-inkscape-stroke:none"="" d="m 19.792969,1.2089844 c -0.773047,0 -1.546203,0.290977 -2.134766,0.8730469 -6.69e-4,6.478e-4 -0.0013,0.0013 -0.002,0.00195 L 8.4119915,11.389897 c -0.5321594,0.536333 -1.9587661,2.040145 -2.9061791,5.334709 -0.1062793,0.369579 -0.1650107,0.570623 -0.2207032,0.85994 -0.046789,0.243065 -0.1295961,0.724628 0.2070338,1.013107 0.3909805,0.335056 1.0440816,0.133455 1.3847656,0.03125 C 7.387553,18.47571 7.9834625,18.287442 8.5897993,18.031247 11.103423,16.969168 12.593117,15.70399 12.985931,15.188066 l 8.93985,-8.8697066 C 23.11495,5.1606353 23.105005,3.2461646 21.927734,2.0820313 21.339171,1.4999614 20.566016,1.2089844 19.792969,1.2089844 Z" id="path5" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="scccssssscccs"></path><path xmlns="http://www.w3.org/2000/svg" d="M 10.273212,2.8358152 H 5.5822718 c -1.3827164,0 -2.0740869,0 -2.6022128,0.2661137 C 2.5154954,3.3360099 2.1378007,3.709514 1.9011058,4.1689107 1.6320062,4.6911889 1.6320062,5.3748762 1.6320062,6.7422506 V 18.461557 c 0,1.367374 0,2.051122 0.2690996,2.573363 0.2366949,0.459374 0.6143896,0.832926 1.0789532,1.066946 0.5281259,0.266126 1.2194964,0.266126 2.6022128,0.266126 H 17.433068 c 1.382716,0 2.074137,0 2.602237,-0.266126 0.464527,-0.23402 0.842271,-0.607572 1.078917,-1.066946 0.269112,-0.522241 0.269112,-1.205989 0.269112,-2.573363 v -5.249273" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="stroke-width:3.25435;stroke-dasharray:none" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="csccssccssccsccc"></path> </g></g>
+</svg></button> knop <strong><i>linksboven</i></strong> te drukken` : `Edit your widgets using the <button class="topnav__btn smpp-button"  style="display:inline-flex !important; pointer-events: none"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" class="edit_button" height="18px" width="18px" viewBox="0 0 24 24" xml:space="preserve">
+<g><g><path xmlns="http://www.w3.org/2000/svg" class="st1" stroke-linecap:round;stroke-linejoin:round;-inkscape-stroke:none"="" d="m 19.792969,1.2089844 c -0.773047,0 -1.546203,0.290977 -2.134766,0.8730469 -6.69e-4,6.478e-4 -0.0013,0.0013 -0.002,0.00195 L 8.4119915,11.389897 c -0.5321594,0.536333 -1.9587661,2.040145 -2.9061791,5.334709 -0.1062793,0.369579 -0.1650107,0.570623 -0.2207032,0.85994 -0.046789,0.243065 -0.1295961,0.724628 0.2070338,1.013107 0.3909805,0.335056 1.0440816,0.133455 1.3847656,0.03125 C 7.387553,18.47571 7.9834625,18.287442 8.5897993,18.031247 11.103423,16.969168 12.593117,15.70399 12.985931,15.188066 l 8.93985,-8.8697066 C 23.11495,5.1606353 23.105005,3.2461646 21.927734,2.0820313 21.339171,1.4999614 20.566016,1.2089844 19.792969,1.2089844 Z" id="path5" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="scccssssscccs"></path><path xmlns="http://www.w3.org/2000/svg" d="M 10.273212,2.8358152 H 5.5822718 c -1.3827164,0 -2.0740869,0 -2.6022128,0.2661137 C 2.5154954,3.3360099 2.1378007,3.709514 1.9011058,4.1689107 1.6320062,4.6911889 1.6320062,5.3748762 1.6320062,6.7422506 V 18.461557 c 0,1.367374 0,2.051122 0.2690996,2.573363 0.2366949,0.459374 0.6143896,0.832926 1.0789532,1.066946 0.5281259,0.266126 1.2194964,0.266126 2.6022128,0.266126 H 17.433068 c 1.382716,0 2.074137,0 2.602237,-0.266126 0.464527,-0.23402 0.842271,-0.607572 1.078917,-1.066946 0.269112,-0.522241 0.269112,-1.205989 0.269112,-2.573363 v -5.249273" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="stroke-width:3.25435;stroke-dasharray:none" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="csccssccssccsccc"></path> </g></g>
+</svg></button> button in the <strong><i> top left </i></strong> corner`;
+              this.container.appendChild(title);
+              this.container.appendChild(description);
+              const editBtn = document.getElementById("smpp-widget-edit-mode-btn");
+              if (editBtn) {
+                this.boundEditTutorial = this.editTutorial.bind(this);
+                editBtn.addEventListener("click", this.boundEditTutorial);
+              }
+              break;
+            }
+            case 2:
+              title.textContent = this.lang === "dutch" ? "2. Verplaatsen\u{1F4CD}" : "2. Move\u{1F4CD}";
+              description.innerHTML = this.lang === "dutch" ? "Sleep <strong><i>deze widget</i></strong> naar de gewenste locatie en laat los om ze te verplaatsen." : "Move <strong><i>this widget</i></strong> by dragging and dropping it";
+              this.container.appendChild(title);
+              this.container.appendChild(description);
+              if (this.boundMoveTutorial) {
+                this.element.removeEventListener("mousedown", this.boundMoveTutorial);
+              }
+              this.boundMoveTutorial = this.moveTutorial.bind(this);
+              this.element.addEventListener("mousedown", this.boundMoveTutorial);
+              break;
+            case 3: {
+              title.innerHTML = this.lang === "dutch" ? `3. Widgets toevoegen <svg class="smpp-widget-bag-handle-icon" style="pointer-events: none; height: 1em; width: 1.2em; display:inline" version="1.1" viewBox="0 0 448 448" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-.898 -124.01)"><path d="m26.458 288.48 198.44 119.06 198.44-119.06" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="100px"></path></g></svg>` : `3. Add widgets <svg class="smpp-widget-bag-handle-icon" style="pointer-events: none; height: 1em; width: 1.2em; display:inline" version="1.1" viewBox="0 0 448 448" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-.898 -124.01)"><path d="m26.458 288.48 198.44 119.06 198.44-119.06" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="100px"></path></g></svg>`;
+              title.style = "font-size: 1.6rem !important;";
+              description.innerHTML = this.lang === "dutch" ? "Klik bovenaan op de <strong><i>balk met het pijltje</i></strong> om widgets te kiezen en toe te voegen. " : "Click the <strong><i>bar with the arrow</i></strong> at the top to pick and add widgets.";
+              this.container.appendChild(title);
+              this.container.appendChild(description);
+              const bagHandle = document.querySelector(".smpp-widget-bag-handle");
+              if (bagHandle) {
+                this.boundBagTutorial = this.bagTutorial.bind(this);
+                bagHandle.addEventListener("click", this.boundBagTutorial);
+              }
+              break;
+            }
+            case 4:
+              title.textContent = this.lang === "dutch" ? "4. Verwijderen\u274C" : "4. Removing\u274C";
+              description.innerHTML = this.lang === "dutch" ? "Sleep <strong><i>deze widget</i></strong> naar diezelfde balk om hem te verwijderen." : "Drag <strong><i>this widget</i></strong> back to that same bar to remove it.";
+              this.container.appendChild(title);
+              this.container.appendChild(description);
+              break;
+          }
+        }
+        get category() {
+          return void 0;
+        }
+      };
+      registerWidget(new TutorialWidget());
     }
-    get category() {
-      return void 0;
-    }
-  };
-  registerWidget(new TutorialWidget());
+  });
 
   // src/widgets/assignments.ts
-  var TakenWidget = class extends WidgetBase {
-    defaultSettings() {
-      return {
-        maxAssignments: 5,
-      };
-    }
-    onSettingsChange() {
-      this.element.appendChild(this.createContent());
-    }
-    createContent() {
-      const foresight = 28;
-      const userId = getUserId();
-      if (DEBUG) {
-        sendDebug("[AS]", "Debug mode enabled \u2705");
-        sendDebug("[AS]", "User ID:", userId);
-        sendDebug("[AS]", "Current URL:", window.location.href);
-        sendDebug("[AS]", "Today's Date:", getCurrentDate());
-        sendDebug("[AS]", "Next Date:", getFutureDate(foresight));
-      }
-      this.clearContent();
-      async function fetchPlannerData2() {
-        try {
-          const schoolName = getSchoolName();
-          if (!schoolName) {
-            throw new Error("School name could not be determined.");
-          }
-          const url = `https://${schoolName}.smartschool.be/planner/api/v1/planned-elements/user/${userId}?from=${getCurrentDate()}&to=${getFutureDate(
-            foresight,
-          )}&types=planned-assignments,planned-to-dos`;
-          sendDebug("[AS]", "Fetching planner data from:", url);
-          const response = await fetch(url);
-          if (!response.ok) {
-            throw new Error(`Failed to fetch planner data (Status: ${response.status})`);
-          }
-          const data2 = await response.json();
-          sendDebug("[AS]", "Planner data:", data2);
-          return data2;
-        } catch (error) {
-          console.error("Fetch error:", error);
-          return null;
-        }
-      }
-      const initTaskList = () => {
-        const TasksContainer = document.createElement("div");
-        const TitleScreenDiv = document.createElement("div");
-        const TitleScreenText = document.createElement("h2");
-        TitleScreenText.innerText = "Assignments";
-        TitleScreenText.classList.add("assignments-title");
-        TitleScreenDiv.append(TitleScreenText);
-        TasksContainer.append(TitleScreenDiv);
-        if (!userId) {
-          return sendDebug("[AS]", "User ID not found.");
-        }
-        fetchPlannerData2().then(async (data2) => {
-          data2 = data2.filter((element) => element.resolvedStatus !== "resolved");
-          if (!data2) {
-            TasksContainer.innerHTML = "Er is iets ernstig misgegaan :(";
-            return console.error("No planner data, Did something go wrong?");
-          }
-          if (DEBUG) {
-            sendDebug("[AS]", "Planner data fetched successfully.");
-          }
-          if (!Array.isArray(data2) || data2.length === 0) {
-            const noDataContainer = document.createElement("div");
-            noDataContainer.classList.add("blue-ghost-96");
-            const noDataContainerTextContainer = document.createElement("div");
-            noDataContainerTextContainer.classList.add("no-data-text");
-            noDataContainerTextContainer.innerText = `Er zijn geen opdrachten gepland in de komende ${foresight} dagen.`;
-            noDataContainerTextContainer.style.textAlign = "center";
-            noDataContainerTextContainer.style.padding = "1rem";
-            noDataContainerTextContainer.style.fontSize = "1rem";
-            noDataContainerTextContainer.style.fontWeight = "semibold";
-            TasksContainer.appendChild(noDataContainer);
-            TasksContainer.appendChild(noDataContainerTextContainer);
-          }
-          data2.sort(
-            (a5, b3) => new Date(a5.period.dateTimeFrom) - new Date(b3.period.dateTimeFrom),
-          );
-          let lastDate = "";
-          if (data2.length > this.settings.maxAssignments) {
-            data2 = data2.slice(0, this.settings.maxAssignments);
-          }
-          const today = /* @__PURE__ */ new Date();
-          data2.forEach((element) => {
-            const taskDate = new Date(element.period.dateTimeFrom);
-            const tomorrow = new Date(today);
-            tomorrow.setDate(today.getDate() + 1);
-            const dayAfterTomorrow = new Date(today);
-            dayAfterTomorrow.setDate(today.getDate() + 2);
-            let dateText = taskDate.toLocaleDateString("nl-NL", {
-              weekday: "long",
-              month: "long",
-              day: "numeric",
-            });
-            if (taskDate.toDateString() === today.toDateString()) {
-              dateText = "Vandaag";
-            } else if (taskDate.toDateString() === tomorrow.toDateString()) {
-              dateText = "Morgen";
-            } else if (taskDate.toDateString() === dayAfterTomorrow.toDateString()) {
-              dateText = "Overmorgen";
-            }
-            if (dateText !== lastDate) {
-              const dateHeader = document.createElement("h3");
-              dateHeader.textContent = dateText;
-              dateHeader.classList.add("date-header-assignments");
-              TasksContainer.appendChild(dateHeader);
-              lastDate = dateText;
-            }
-            const rowDiv = document.createElement("div");
-            rowDiv.classList.add("listview__row", "todo__row", "assignment__item");
-            rowDiv.setAttribute("data-id", element.id);
-            const abbreviationDiv = document.createElement("div");
-            abbreviationDiv.classList.add("listview__cell", "abvr__div");
-            const wrapperDiv = document.createElement("div");
-            wrapperDiv.classList.add("todo-column__abbreviation-cell__wrapper", "wrapperdiv");
-            wrapperDiv.classList.add(
-              `c-${element.color.split("-")[0]}-combo--${element.color.split("-")[1]}`,
-              // LET HIM COOK
-            );
-            sendDebug("[AS]", "Creating icon for assignment:", element, element.icon);
-            if (element.plannedElementType === "planned-to-dos") {
-              fetch(
-                `https://${getSchoolName()}.smartschool.be/smsc/svg/${element.icon}/${element.icon}_16x16.svg`,
-              )
-                .then((response) => response.blob())
-                .then((blob) => {
-                  const iconSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-                  iconSvg.setAttribute("width", "16px");
-                  iconSvg.setAttribute("height", "16px");
-                  const reader = new FileReader();
-                  reader.onload = (e5) => {
-                    iconSvg.innerHTML = e5.target.result;
-                  };
-                  reader.readAsText(blob);
-                  wrapperDiv.appendChild(iconSvg);
-                });
-            } else {
-              const abbreviationSpan = document.createElement("span");
-              abbreviationSpan.classList.add(
-                "todo-column__abbreviation-cell__wrapper__abbreviation",
-              );
-              abbreviationSpan.textContent = element.assignmentType.abbreviation || "?";
-              abbreviationSpan.style.cssText = "font-size:14px;font-weight:700;";
-              wrapperDiv.appendChild(abbreviationSpan);
-            }
-            abbreviationDiv.appendChild(wrapperDiv);
-            const detailsDiv = document.createElement("div");
-            detailsDiv.classList.add("listview__cell");
-            const titleSpan = document.createElement("span");
-            titleSpan.textContent = element.name;
-            titleSpan.classList.add("task-description");
-            const metadataSpan = document.createElement("span");
-            metadataSpan.textContent = `${new Date(element.period.dateTimeFrom).toLocaleTimeString(
-              "nl-NL",
-              {
-                hour: "2-digit",
-                minute: "2-digit",
-              },
-            )} \u2022 ${element.courses?.[0]?.name || "TODO "}`;
-            metadataSpan.classList.add("task-description");
-            detailsDiv.append(titleSpan, metadataSpan);
-            rowDiv.append(abbreviationDiv, detailsDiv);
-            rowDiv.addEventListener("click", () => {
-              markAsFinished(element.id, element.courses?.[0]?.name);
-            });
-            rowDiv.addEventListener("mouseenter", () => {
-              titleSpan.style.textDecoration = "line-through";
-            });
-            rowDiv.addEventListener("mouseleave", () => {
-              titleSpan.style.textDecoration = "none";
-            });
-            TasksContainer.append(rowDiv);
-          });
-          return sendDebug("[AS]", "UI updated successfully.");
-        });
-        return TasksContainer;
-      };
-      return initTaskList();
-    }
-    async createPreview() {
-      const previewElement = document.createElement("div");
-      const previewElementTitle = document.createElement("div");
-      previewElementTitle.classList.add("assignments-preview-title");
-      previewElementTitle.innerText = "Assignments";
-      const previewElementIcon = document.createElement("div");
-      previewElementIcon.classList.add("assignments-icon-160-container");
-      previewElementIcon.style.marginBottom = "1rem";
-      previewElementIcon.innerHTML = assignmentsSvg;
-      previewElement.appendChild(previewElementTitle);
-      previewElement.appendChild(previewElementIcon);
-      return previewElement;
-    }
-    clearContent() {
-      this.element.innerHTML = "";
-    }
-  };
-  async function markAsFinished(as_ID, name2) {
+  async function markAsFinished(as_ID, name) {
     const schoolName = getSchoolName();
     const userId = getUserId();
     if (!(schoolName && userId)) {
       console.error(
-        "SMPP: Could not retrieve school name or user ID. Cannot mark assignment as finished.",
+        "SMPP: Could not retrieve school name or user ID. Cannot mark assignment as finished."
       );
       return false;
     }
-    const as_type = name2 ? "assignment" : "to-do";
+    const as_type = name ? "assignment" : "to-do";
     const url = `https://${schoolName}.smartschool.be/planner/api/v1/planned-${as_type}s/${userId}/${as_ID}/resolve`;
     try {
       const response = await fetch(url, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
-        body: JSON.stringify({}),
+        body: JSON.stringify({})
       });
       if (!response.ok) {
         const errorData = await response.text();
         throw new Error(
-          `Failed to mark assignment ${as_ID} as finished: ${response.status} ${response.statusText}. Response: ${errorData}`,
+          `Failed to mark assignment ${as_ID} as finished: ${response.status} ${response.statusText}. Response: ${errorData}`
         );
       }
       sendDebug("[AS]", `Assignment ${as_ID} marked as finished successfully.`);
@@ -14266,10 +12074,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       if (assignmentElement) {
         const parentContainer = assignmentElement.parentElement;
         let dayHeader = assignmentElement.previousElementSibling;
-        while (
-          dayHeader &&
-          (!dayHeader.classList.contains("date-header-assignments") || dayHeader.tagName !== "H3")
-        ) {
+        while (dayHeader && (!dayHeader.classList.contains("date-header-assignments") || dayHeader.tagName !== "H3")) {
           dayHeader = dayHeader.previousElementSibling;
         }
         assignmentElement.remove();
@@ -14281,10 +12086,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
               hasMoreAssignmentsForThisDay = true;
               break;
             }
-            if (
-              nextSibling.classList.contains("date-header-assignments") &&
-              nextSibling.tagName === "H3"
-            ) {
+            if (nextSibling.classList.contains("date-header-assignments") && nextSibling.tagName === "H3") {
               break;
             }
             nextSibling = nextSibling.nextElementSibling;
@@ -14317,11 +12119,209 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       return false;
     }
   }
-  registerWidget(new TakenWidget());
+  var TakenWidget;
+  var init_assignments = __esm({
+    "src/widgets/assignments.ts"() {
+      "use strict";
+      init_utils();
+      init_svgs();
+      init_utils2();
+      init_widgets();
+      TakenWidget = class extends WidgetBase {
+        defaultSettings() {
+          return {
+            maxAssignments: 5
+          };
+        }
+        onSettingsChange() {
+          this.element.appendChild(this.createContent());
+        }
+        createContent() {
+          const foresight = 28;
+          const userId = getUserId();
+          if (DEBUG) {
+            sendDebug("[AS]", "Debug mode enabled \u2705");
+            sendDebug("[AS]", "User ID:", userId);
+            sendDebug("[AS]", "Current URL:", window.location.href);
+            sendDebug("[AS]", "Today's Date:", getCurrentDate());
+            sendDebug("[AS]", "Next Date:", getFutureDate(foresight));
+          }
+          this.clearContent();
+          async function fetchPlannerData2() {
+            try {
+              const schoolName = getSchoolName();
+              if (!schoolName) {
+                throw new Error("School name could not be determined.");
+              }
+              const url = `https://${schoolName}.smartschool.be/planner/api/v1/planned-elements/user/${userId}?from=${getCurrentDate()}&to=${getFutureDate(
+                foresight
+              )}&types=planned-assignments,planned-to-dos`;
+              sendDebug("[AS]", "Fetching planner data from:", url);
+              const response = await fetch(url);
+              if (!response.ok) {
+                throw new Error(`Failed to fetch planner data (Status: ${response.status})`);
+              }
+              const data = await response.json();
+              sendDebug("[AS]", "Planner data:", data);
+              return data;
+            } catch (error) {
+              console.error("Fetch error:", error);
+              return null;
+            }
+          }
+          const initTaskList = () => {
+            const TasksContainer = document.createElement("div");
+            const TitleScreenDiv = document.createElement("div");
+            const TitleScreenText = document.createElement("h2");
+            TitleScreenText.innerText = "Assignments";
+            TitleScreenText.classList.add("assignments-title");
+            TitleScreenDiv.append(TitleScreenText);
+            TasksContainer.append(TitleScreenDiv);
+            if (!userId) {
+              return sendDebug("[AS]", "User ID not found.");
+            }
+            fetchPlannerData2().then(async (data) => {
+              data = data.filter((element) => element.resolvedStatus !== "resolved");
+              if (!data) {
+                TasksContainer.innerHTML = "Er is iets ernstig misgegaan :(";
+                return console.error("No planner data, Did something go wrong?");
+              }
+              if (DEBUG) {
+                sendDebug("[AS]", "Planner data fetched successfully.");
+              }
+              if (!Array.isArray(data) || data.length === 0) {
+                const noDataContainer = document.createElement("div");
+                noDataContainer.classList.add("blue-ghost-96");
+                const noDataContainerTextContainer = document.createElement("div");
+                noDataContainerTextContainer.classList.add("no-data-text");
+                noDataContainerTextContainer.innerText = `Er zijn geen opdrachten gepland in de komende ${foresight} dagen.`;
+                noDataContainerTextContainer.style.textAlign = "center";
+                noDataContainerTextContainer.style.padding = "1rem";
+                noDataContainerTextContainer.style.fontSize = "1rem";
+                noDataContainerTextContainer.style.fontWeight = "semibold";
+                TasksContainer.appendChild(noDataContainer);
+                TasksContainer.appendChild(noDataContainerTextContainer);
+              }
+              data.sort((a5, b3) => new Date(a5.period.dateTimeFrom) - new Date(b3.period.dateTimeFrom));
+              let lastDate = "";
+              if (data.length > this.settings.maxAssignments) {
+                data = data.slice(0, this.settings.maxAssignments);
+              }
+              const today = /* @__PURE__ */ new Date();
+              data.forEach((element) => {
+                const taskDate = new Date(element.period.dateTimeFrom);
+                const tomorrow = new Date(today);
+                tomorrow.setDate(today.getDate() + 1);
+                const dayAfterTomorrow = new Date(today);
+                dayAfterTomorrow.setDate(today.getDate() + 2);
+                let dateText = taskDate.toLocaleDateString("nl-NL", {
+                  weekday: "long",
+                  month: "long",
+                  day: "numeric"
+                });
+                if (taskDate.toDateString() === today.toDateString()) {
+                  dateText = "Vandaag";
+                } else if (taskDate.toDateString() === tomorrow.toDateString()) {
+                  dateText = "Morgen";
+                } else if (taskDate.toDateString() === dayAfterTomorrow.toDateString()) {
+                  dateText = "Overmorgen";
+                }
+                if (dateText !== lastDate) {
+                  const dateHeader = document.createElement("h3");
+                  dateHeader.textContent = dateText;
+                  dateHeader.classList.add("date-header-assignments");
+                  TasksContainer.appendChild(dateHeader);
+                  lastDate = dateText;
+                }
+                const rowDiv = document.createElement("div");
+                rowDiv.classList.add("listview__row", "todo__row", "assignment__item");
+                rowDiv.setAttribute("data-id", element.id);
+                const abbreviationDiv = document.createElement("div");
+                abbreviationDiv.classList.add("listview__cell", "abvr__div");
+                const wrapperDiv = document.createElement("div");
+                wrapperDiv.classList.add("todo-column__abbreviation-cell__wrapper", "wrapperdiv");
+                wrapperDiv.classList.add(
+                  `c-${element.color.split("-")[0]}-combo--${element.color.split("-")[1]}`
+                  // LET HIM COOK
+                );
+                sendDebug("[AS]", "Creating icon for assignment:", element, element.icon);
+                if (element.plannedElementType === "planned-to-dos") {
+                  fetch(
+                    `https://${getSchoolName()}.smartschool.be/smsc/svg/${element.icon}/${element.icon}_16x16.svg`
+                  ).then((response) => response.blob()).then((blob) => {
+                    const iconSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                    iconSvg.setAttribute("width", "16px");
+                    iconSvg.setAttribute("height", "16px");
+                    const reader = new FileReader();
+                    reader.onload = (e5) => {
+                      iconSvg.innerHTML = e5.target.result;
+                    };
+                    reader.readAsText(blob);
+                    wrapperDiv.appendChild(iconSvg);
+                  });
+                } else {
+                  const abbreviationSpan = document.createElement("span");
+                  abbreviationSpan.classList.add("todo-column__abbreviation-cell__wrapper__abbreviation");
+                  abbreviationSpan.textContent = element.assignmentType.abbreviation || "?";
+                  abbreviationSpan.style.cssText = "font-size:14px;font-weight:700;";
+                  wrapperDiv.appendChild(abbreviationSpan);
+                }
+                abbreviationDiv.appendChild(wrapperDiv);
+                const detailsDiv = document.createElement("div");
+                detailsDiv.classList.add("listview__cell");
+                const titleSpan = document.createElement("span");
+                titleSpan.textContent = element.name;
+                titleSpan.classList.add("task-description");
+                const metadataSpan = document.createElement("span");
+                metadataSpan.textContent = `${new Date(element.period.dateTimeFrom).toLocaleTimeString(
+                  "nl-NL",
+                  {
+                    hour: "2-digit",
+                    minute: "2-digit"
+                  }
+                )} \u2022 ${element.courses?.[0]?.name || "TODO "}`;
+                metadataSpan.classList.add("task-description");
+                detailsDiv.append(titleSpan, metadataSpan);
+                rowDiv.append(abbreviationDiv, detailsDiv);
+                rowDiv.addEventListener("click", () => {
+                  markAsFinished(element.id, element.courses?.[0]?.name);
+                });
+                rowDiv.addEventListener("mouseenter", () => {
+                  titleSpan.style.textDecoration = "line-through";
+                });
+                rowDiv.addEventListener("mouseleave", () => {
+                  titleSpan.style.textDecoration = "none";
+                });
+                TasksContainer.append(rowDiv);
+              });
+              return sendDebug("[AS]", "UI updated successfully.");
+            });
+            return TasksContainer;
+          };
+          return initTaskList();
+        }
+        async createPreview() {
+          const previewElement = document.createElement("div");
+          const previewElementTitle = document.createElement("div");
+          previewElementTitle.classList.add("assignments-preview-title");
+          previewElementTitle.innerText = "Assignments";
+          const previewElementIcon = document.createElement("div");
+          previewElementIcon.classList.add("assignments-icon-160-container");
+          previewElementIcon.style.marginBottom = "1rem";
+          previewElementIcon.innerHTML = assignmentsSvg;
+          previewElement.appendChild(previewElementTitle);
+          previewElement.appendChild(previewElementIcon);
+          return previewElement;
+        }
+        clearContent() {
+          this.element.innerHTML = "";
+        }
+      };
+      registerWidget(new TakenWidget());
+    }
+  });
 
   // src/widgets/delijn.ts
-  var lijnDataKleuren;
-  var lijnUpdateControllers = {};
   function calculateTimeUntilDepartureInMins(ETA) {
     const currentDate = /* @__PURE__ */ new Date();
     return Math.round((ETA - currentDate) / 1e3 / 60);
@@ -14334,7 +12334,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     const delijnDirectionsArray = [];
     delijnDirectionsData.forEach((lijn) => {
       const description = lijn.omschrijving.split("-");
-      let descriptionEndStop = description[description.length - 1];
+      let descriptionEndStop = description.at(-1);
       descriptionEndStop = descriptionEndStop.replace(")", "").replace("(", "");
       if (!delijnDirectionsArray.includes(descriptionEndStop) && delijnDirectionsArray.length < 3) {
         delijnDirectionsArray.push(descriptionEndStop);
@@ -14345,7 +12345,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   async function fetchDelijnData(url) {
     return await browser.runtime.sendMessage({
       action: "fetchDelijnData",
-      url,
+      url
     });
   }
   async function createHalteDoorkomst(doorkomst, container, monochrome, signal) {
@@ -14383,12 +12383,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         ETA = new Date(doorkomst["real-timeTijdstip"]);
       }
       arrivalTimeDeviation = Math.round((ETA - originalETA) / 1e3 / 60);
-      arrivalTimeDeviation =
-        arrivalTimeDeviation === 0
-          ? "On time"
-          : arrivalTimeDeviation > 0
-            ? `+${arrivalTimeDeviation}`
-            : arrivalTimeDeviation;
+      arrivalTimeDeviation = arrivalTimeDeviation === 0 ? "On time" : arrivalTimeDeviation > 0 ? `+${arrivalTimeDeviation}` : arrivalTimeDeviation;
       timeUntilDeparture = calculateTimeUntilDepartureInMins(ETA);
       timeUntilDeparture = timeUntilDeparture < 1 ? "Now" : `${timeUntilDeparture} Min.`;
     }
@@ -14431,7 +12426,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         entiteitnummer,
         lijnnummer,
         monochrome,
-        cardSignal,
+        cardSignal
       );
     } catch (err) {
       if (err.name === "AbortError") {
@@ -14440,20 +12435,14 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       console.error(err);
     }
   }
-  async function updateLijnCardWithApiData(
-    lijnNumberElement,
-    entiteitnummer,
-    lijnnummer,
-    monochrome,
-    signal,
-  ) {
+  async function updateLijnCardWithApiData(lijnNumberElement, entiteitnummer, lijnnummer, monochrome, signal) {
     if (signal?.aborted) {
       return;
     }
     try {
       const individualLijnData = await fetchDelijnData(
         `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${entiteitnummer}/${lijnnummer}`,
-        { signal },
+        { signal }
       );
       if (signal?.aborted) {
         return;
@@ -14462,17 +12451,17 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       lijnNumberElement.textContent = publicLineNumber;
       const individualLijnDataColors = await fetchDelijnData(
         `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${entiteitnummer}/${lijnnummer}/lijnkleuren`,
-        { signal },
+        { signal }
       );
       if (signal?.aborted) {
         return;
       }
       if (!monochrome) {
         lijnNumberElement.style.backgroundColor = getHexByCode(
-          individualLijnDataColors.achtergrond.code,
+          individualLijnDataColors.achtergrond.code
         );
         lijnNumberElement.style.borderColor = getHexByCode(
-          individualLijnDataColors.achtergrondRand.code,
+          individualLijnDataColors.achtergrondRand.code
         );
         lijnNumberElement.style.color = getHexByCode(individualLijnDataColors.voorgrond.code);
       }
@@ -14489,373 +12478,378 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     delijnAttestElement.target = "_blank";
     delijnAttestElement.rel = "noopener noreferrer";
     const specialChance = randomChance(1 / 12);
-    delijnAttestElement.href = specialChance
-      ? "https://www.coolblue.be/nl/koffiezetapparaten/koffiezetapparaten-voor-latte-macchiato"
-      : "https://www.delijn.be/nl/contact/attest-aanvraag/";
+    delijnAttestElement.href = specialChance ? "https://www.coolblue.be/nl/koffiezetapparaten/koffiezetapparaten-voor-latte-macchiato" : "https://www.delijn.be/nl/contact/attest-aanvraag/";
     delijnAttestElement.innerText = specialChance ? "Latte?" : "Late?";
     container.appendChild(delijnAttestElement);
   }
-  var DelijnWidget = class extends WidgetBase {
-    constructor() {
-      super();
-      this.searchResultLimit = 5;
-      this.currentHalteOptionsAbortController = null;
-      this.currentDoorkomstenAbortController = null;
-      this.elements = {
-        topContainer: null,
-        searchInput: null,
-        searchButton: null,
-        bottomContainer: null,
-        infoContainer: null,
-      };
-    }
-    defaultSettings() {
-      return {
-        maxBusses: 5,
-        monochrome: false,
-        halte: { nummer: null, entiteit: null },
-      };
-    }
-    async createContent() {
-      this.element.classList.add("smpp-widget-transparent");
-      this.container = document.createElement("div");
-      this.initializeData();
-      this.initializeHTML();
-      return this.container;
-    }
-    async onSettingsChange() {
-      if (this.currentDoorkomstenAbortController) {
-        this.currentDoorkomstenAbortController.abort();
-      }
-      this.initializeData();
-    }
-    initializeHTML() {
-      this.container.id = "delijncontainer";
-      this.elements.topContainer = document.createElement("div");
-      this.elements.topContainer.id = "delijnTopContainer";
-      this.elements.searchInput = document.createElement("input");
-      this.elements.searchInput.classList.add("popupinput");
-      this.elements.searchInput.classList.add("halteInput");
-      this.elements.searchInput.spellcheck = false;
-      this.elements.searchInput.addEventListener("keyup", (event) => {
-        if (event.key === "Enter") {
-          this.handleHalteSearch();
+  var lijnDataKleuren, lijnUpdateControllers, DelijnWidget;
+  var init_delijn = __esm({
+    "src/widgets/delijn.ts"() {
+      "use strict";
+      init_utils();
+      init_svgs();
+      init_widgets();
+      lijnUpdateControllers = {};
+      DelijnWidget = class extends WidgetBase {
+        constructor() {
+          super();
+          this.searchResultLimit = 5;
+          this.currentHalteOptionsAbortController = null;
+          this.currentDoorkomstenAbortController = null;
+          this.elements = {
+            topContainer: null,
+            searchInput: null,
+            searchButton: null,
+            bottomContainer: null,
+            infoContainer: null
+          };
         }
-      });
-      this.elements.searchButton = document.createElement("button");
-      this.elements.searchButton.classList.add("delijnSearchButton");
-      this.elements.searchButton.innerHTML = searchButtonSvg;
-      this.elements.searchButton.addEventListener("click", () => this.handleHalteSearch());
-      this.elements.bottomContainer = document.createElement("div");
-      this.elements.bottomContainer.id = "delijnBottomContainer";
-      this.elements.topContainer.appendChild(this.elements.searchInput);
-      this.elements.topContainer.appendChild(this.elements.searchButton);
-      this.container.appendChild(this.elements.topContainer);
-      this.container.appendChild(this.elements.bottomContainer);
-      this.displayInfo("Loading...");
-    }
-    async displayLijnenBasedOnHalte() {
-      if (this.currentDoorkomstenAbortController) {
-        this.currentDoorkomstenAbortController.abort();
-      }
-      this.currentDoorkomstenAbortController = new AbortController();
-      const signal = this.currentDoorkomstenAbortController.signal;
-      this.displayInfo("Loading...");
-      this.clearBottomContainer();
-      let delijnData;
-      try {
-        delijnData = await fetchDelijnData(
-          `https://api.delijn.be/DLKernOpenData/api/v1/haltes/${this.settings.halte.entiteit}/${this.settings.halte.nummer}/real-time?maxAantalDoorkomsten=${this.settings.maxBusses}`,
-          { signal },
-        );
-      } catch (error) {
-        if (error.name === "AbortError") {
-          return;
+        defaultSettings() {
+          return {
+            maxBusses: 5,
+            monochrome: false,
+            halte: { nummer: null, entiteit: null }
+          };
         }
-        this.displayInfo(`Er liep iets mis: ${error}`);
-        console.error(error);
-        return;
-      }
-      if (signal.aborted) {
-        return;
-      }
-      if (!delijnData.halteDoorkomsten[0]) {
-        this.displayInfo("Er zijn momenteel geen bussen beschikbaar voor deze halte.");
-        return;
-      }
-      if (delijnData.halteDoorkomsten[0].doorkomsten.length < 1) {
-        this.displayInfo("Er zijn momenteel geen vertrekkende bussen");
-        return;
-      }
-      this.hideInfo();
-      const sortedDoorkomsten = delijnData.halteDoorkomsten[0].doorkomsten.sort((a5, b3) => {
-        const timeA = new Date(a5["real-timeTijdstip"] || a5.dienstregelingTijdstip);
-        const timeB = new Date(b3["real-timeTijdstip"] || b3.dienstregelingTijdstip);
-        return timeA - timeB;
-      });
-      for (const doorkomst of sortedDoorkomsten) {
-        if (signal.aborted) {
-          return;
+        async createContent() {
+          this.element.classList.add("smpp-widget-transparent");
+          this.container = document.createElement("div");
+          this.initializeData();
+          this.initializeHTML();
+          return this.container;
         }
-        await createHalteDoorkomst(
-          doorkomst,
-          this.elements.bottomContainer,
-          this.settings.monochrome,
-          signal,
-          // Pass signal to createHalteDoorkomst
-        );
-        if (signal.aborted) {
-          return;
+        async onSettingsChange() {
+          if (this.currentDoorkomstenAbortController) {
+            this.currentDoorkomstenAbortController.abort();
+          }
+          this.initializeData();
         }
-      }
-      if (!signal.aborted) {
-        addDelijnAttest(this.elements.bottomContainer);
-      }
-    }
-    async initializeData() {
-      lijnDataKleuren = await browser.runtime.sendMessage({
-        action: "getDelijnColorData",
-      });
-      if (this.settings.halte.nummer == null) {
-        this.displayInfo("Zoek een halte");
-      } else {
-        await this.displayLijnenBasedOnHalte();
-      }
-    }
-    setLoadingState(isLoading) {
-      if (isLoading) {
-        this.elements.searchButton.innerHTML = loadingSpinnerSvg;
-        this.elements.searchButton.disabled = true;
-        this.elements.searchButton.classList.add("loading");
-      } else {
-        this.elements.searchButton.innerHTML = searchButtonSvg;
-        this.elements.searchButton.disabled = false;
-        this.elements.searchButton.classList.remove("loading");
-      }
-    }
-    async handleHalteSearch() {
-      const searchQuery = this.elements.searchInput.value;
-      this.searchResultLimit = 5;
-      this.clearBottomContainer();
-      if (!searchQuery) {
-        this.displayInfo("Gelieve een halte te kiezen.");
-        return;
-      }
-      this.setLoadingState(true);
-      await this.showHalteOptions(searchQuery);
-      this.setLoadingState(false);
-    }
-    async showHalteOptions(searchQuery) {
-      if (this.currentHalteOptionsAbortController) {
-        this.currentHalteOptionsAbortController.abort();
-      }
-      this.currentHalteOptionsAbortController = new AbortController();
-      const signal = this.currentHalteOptionsAbortController.signal;
-      let delijnHaltesData;
-      try {
-        delijnHaltesData = await fetchDelijnData(
-          `https://api.delijn.be/DLZoekOpenData/v1/zoek/haltes/${searchQuery}?maxAantalHits=${this.searchResultLimit}`,
-          { signal },
-        );
-      } catch (error) {
-        if (error.name === "AbortError") {
-          return;
+        initializeHTML() {
+          this.container.id = "delijncontainer";
+          this.elements.topContainer = document.createElement("div");
+          this.elements.topContainer.id = "delijnTopContainer";
+          this.elements.searchInput = document.createElement("input");
+          this.elements.searchInput.classList.add("popupinput");
+          this.elements.searchInput.classList.add("halteInput");
+          this.elements.searchInput.spellcheck = false;
+          this.elements.searchInput.addEventListener("keyup", (event) => {
+            if (event.key === "Enter") {
+              this.handleHalteSearch();
+            }
+          });
+          this.elements.searchButton = document.createElement("button");
+          this.elements.searchButton.classList.add("delijnSearchButton");
+          this.elements.searchButton.innerHTML = searchButtonSvg;
+          this.elements.searchButton.addEventListener("click", () => this.handleHalteSearch());
+          this.elements.bottomContainer = document.createElement("div");
+          this.elements.bottomContainer.id = "delijnBottomContainer";
+          this.elements.topContainer.appendChild(this.elements.searchInput);
+          this.elements.topContainer.appendChild(this.elements.searchButton);
+          this.container.appendChild(this.elements.topContainer);
+          this.container.appendChild(this.elements.bottomContainer);
+          this.displayInfo("Loading...");
         }
-        this.displayInfo(`Er liep iets mis: ${error}`);
-        return;
-      }
-      if (delijnHaltesData?.aantalHits === 0) {
-        this.setLoadingState(false);
-        this.displayInfo("Geen zoekresultaten");
-        return;
-      }
-      const halteSleutels = delijnHaltesData.haltes
-        .map((halte) => `${halte.entiteitnummer}_${halte.haltenummer}`)
-        .join("_");
-      let delijnHaltesLijnrichtingenData;
-      try {
-        delijnHaltesLijnrichtingenData = await fetchDelijnData(
-          `https://api.delijn.be/DLKernOpenData/api/v1/haltes/lijst/${halteSleutels}/lijnrichtingen`,
-          { signal },
-        );
-      } catch (error) {
-        if (error.name === "AbortError") {
-          return;
-        }
-        this.displayInfo(`Er liep iets mis: ${error}`);
-        return;
-      }
-      delijnHaltesLijnrichtingenData.halteLijnrichtingen.forEach((halte, i5) => {
-        halte.halte.omschrijving = delijnHaltesData.haltes[i5].omschrijving;
-      });
-      try {
-        this.hideInfo();
-        const startIndex = this.searchResultLimit - 5;
-        const results = delijnHaltesLijnrichtingenData.halteLijnrichtingen.slice(startIndex);
-        for (let i5 = 0; i5 < results.length; i5++) {
+        async displayLijnenBasedOnHalte() {
+          if (this.currentDoorkomstenAbortController) {
+            this.currentDoorkomstenAbortController.abort();
+          }
+          this.currentDoorkomstenAbortController = new AbortController();
+          const signal = this.currentDoorkomstenAbortController.signal;
+          this.displayInfo("Loading...");
+          this.clearBottomContainer();
+          let delijnData;
+          try {
+            delijnData = await fetchDelijnData(
+              `https://api.delijn.be/DLKernOpenData/api/v1/haltes/${this.settings.halte.entiteit}/${this.settings.halte.nummer}/real-time?maxAantalDoorkomsten=${this.settings.maxBusses}`,
+              { signal }
+            );
+          } catch (error) {
+            if (error.name === "AbortError") {
+              return;
+            }
+            this.displayInfo(`Er liep iets mis: ${error}`);
+            console.error(error);
+            return;
+          }
           if (signal.aborted) {
             return;
           }
-          const halte = results[i5];
-          await this.createHalteOption(halte, signal);
+          if (!delijnData.halteDoorkomsten[0]) {
+            this.displayInfo("Er zijn momenteel geen bussen beschikbaar voor deze halte.");
+            return;
+          }
+          if (delijnData.halteDoorkomsten[0].doorkomsten.length < 1) {
+            this.displayInfo("Er zijn momenteel geen vertrekkende bussen");
+            return;
+          }
+          this.hideInfo();
+          const sortedDoorkomsten = delijnData.halteDoorkomsten[0].doorkomsten.sort((a5, b3) => {
+            const timeA = new Date(a5["real-timeTijdstip"] || a5.dienstregelingTijdstip);
+            const timeB = new Date(b3["real-timeTijdstip"] || b3.dienstregelingTijdstip);
+            return timeA - timeB;
+          });
+          for (const doorkomst of sortedDoorkomsten) {
+            if (signal.aborted) {
+              return;
+            }
+            await createHalteDoorkomst(
+              doorkomst,
+              this.elements.bottomContainer,
+              this.settings.monochrome,
+              signal
+              // Pass signal to createHalteDoorkomst
+            );
+            if (signal.aborted) {
+              return;
+            }
+          }
+          if (!signal.aborted) {
+            addDelijnAttest(this.elements.bottomContainer);
+          }
+        }
+        async initializeData() {
+          lijnDataKleuren = await browser.runtime.sendMessage({
+            action: "getDelijnColorData"
+          });
+          if (this.settings.halte.nummer == null) {
+            this.displayInfo("Zoek een halte");
+          } else {
+            await this.displayLijnenBasedOnHalte();
+          }
+        }
+        setLoadingState(isLoading) {
+          if (isLoading) {
+            this.elements.searchButton.innerHTML = loadingSpinnerSvg;
+            this.elements.searchButton.disabled = true;
+            this.elements.searchButton.classList.add("loading");
+          } else {
+            this.elements.searchButton.innerHTML = searchButtonSvg;
+            this.elements.searchButton.disabled = false;
+            this.elements.searchButton.classList.remove("loading");
+          }
+        }
+        async handleHalteSearch() {
+          const searchQuery = this.elements.searchInput.value;
+          this.searchResultLimit = 5;
+          this.clearBottomContainer();
+          if (!searchQuery) {
+            this.displayInfo("Gelieve een halte te kiezen.");
+            return;
+          }
+          this.setLoadingState(true);
+          await this.showHalteOptions(searchQuery);
+          this.setLoadingState(false);
+        }
+        async showHalteOptions(searchQuery) {
+          if (this.currentHalteOptionsAbortController) {
+            this.currentHalteOptionsAbortController.abort();
+          }
+          this.currentHalteOptionsAbortController = new AbortController();
+          const signal = this.currentHalteOptionsAbortController.signal;
+          let delijnHaltesData;
+          try {
+            delijnHaltesData = await fetchDelijnData(
+              `https://api.delijn.be/DLZoekOpenData/v1/zoek/haltes/${searchQuery}?maxAantalHits=${this.searchResultLimit}`,
+              { signal }
+            );
+          } catch (error) {
+            if (error.name === "AbortError") {
+              return;
+            }
+            this.displayInfo(`Er liep iets mis: ${error}`);
+            return;
+          }
+          if (delijnHaltesData?.aantalHits === 0) {
+            this.setLoadingState(false);
+            this.displayInfo("Geen zoekresultaten");
+            return;
+          }
+          const halteSleutels = delijnHaltesData.haltes.map((halte) => `${halte.entiteitnummer}_${halte.haltenummer}`).join("_");
+          let delijnHaltesLijnrichtingenData;
+          try {
+            delijnHaltesLijnrichtingenData = await fetchDelijnData(
+              `https://api.delijn.be/DLKernOpenData/api/v1/haltes/lijst/${halteSleutels}/lijnrichtingen`,
+              { signal }
+            );
+          } catch (error) {
+            if (error.name === "AbortError") {
+              return;
+            }
+            this.displayInfo(`Er liep iets mis: ${error}`);
+            return;
+          }
+          delijnHaltesLijnrichtingenData.halteLijnrichtingen.forEach((halte, i5) => {
+            halte.halte.omschrijving = delijnHaltesData.haltes[i5].omschrijving;
+          });
+          try {
+            this.hideInfo();
+            const startIndex = this.searchResultLimit - 5;
+            const results = delijnHaltesLijnrichtingenData.halteLijnrichtingen.slice(startIndex);
+            for (let i5 = 0; i5 < results.length; i5++) {
+              if (signal.aborted) {
+                return;
+              }
+              const halte = results[i5];
+              await this.createHalteOption(halte, signal);
+              if (signal.aborted) {
+                return;
+              }
+            }
+            if (delijnHaltesData.aantalHits > this.searchResultLimit) {
+              this.addShowMoreHaltesButton();
+            }
+          } catch (error) {
+            if (error.name !== "AbortError") {
+              this.displayInfo(`Er liep iets mis: ${error}`);
+              console.error(error);
+            }
+            this.setLoadingState(false);
+          }
+        }
+        async createHalteOption(halte, signal) {
           if (signal.aborted) {
             return;
           }
-        }
-        if (delijnHaltesData.aantalHits > this.searchResultLimit) {
-          this.addShowMoreHaltesButton();
-        }
-      } catch (error) {
-        if (error.name !== "AbortError") {
-          this.displayInfo(`Er liep iets mis: ${error}`);
-          console.error(error);
-        }
-        this.setLoadingState(false);
-      }
-    }
-    async createHalteOption(halte, signal) {
-      if (signal.aborted) {
-        return;
-      }
-      const halteLijnCard = document.createElement("div");
-      halteLijnCard.dataset.entiteitnummer = halte.halte.entiteitnummer;
-      halteLijnCard.dataset.haltenummer = halte.halte.haltenummer;
-      halteLijnCard.classList.add("lijnCard", "lijnCardHalte");
-      const richtingen = `Naar: ${getHalteDirections(halte.lijnrichtingen)}`;
-      halteLijnCard.innerHTML = `
+          const halteLijnCard = document.createElement("div");
+          halteLijnCard.dataset.entiteitnummer = halte.halte.entiteitnummer;
+          halteLijnCard.dataset.haltenummer = halte.halte.haltenummer;
+          halteLijnCard.classList.add("lijnCard", "lijnCardHalte");
+          const richtingen = `Naar: ${getHalteDirections(halte.lijnrichtingen)}`;
+          halteLijnCard.innerHTML = `
     <h3 class="halteTitle">${halte.halte.omschrijving}</h3>
     <div class="halteDirections">${richtingen}</div>
     <div class="halteLijnen"></div>`;
-      const lijnenContainer = halteLijnCard.querySelector(".halteLijnen");
-      const lijnenArray = [];
-      for (const lijnrichting of halte.lijnrichtingen.slice(0, 5)) {
-        if (signal.aborted) {
-          return;
-        }
-        const lijn = document.createElement("span");
-        lijn.classList.add("lijnNumber", "halteLijnNumber");
-        lijn.dataset.entiteitnummer = lijnrichting.entiteitnummer;
-        lijn.dataset.lijnnummer = lijnrichting.lijnnummer;
-        lijnenContainer.append(lijn);
-        let individualLijnData;
-        try {
-          individualLijnData = await fetchDelijnData(
-            `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${lijnrichting.entiteitnummer}/${lijnrichting.lijnnummer}`,
-            { signal },
-          );
-        } catch (error) {
-          if (error.name === "AbortError") {
-            return;
+          const lijnenContainer = halteLijnCard.querySelector(".halteLijnen");
+          const lijnenArray = [];
+          for (const lijnrichting of halte.lijnrichtingen.slice(0, 5)) {
+            if (signal.aborted) {
+              return;
+            }
+            const lijn = document.createElement("span");
+            lijn.classList.add("lijnNumber", "halteLijnNumber");
+            lijn.dataset.entiteitnummer = lijnrichting.entiteitnummer;
+            lijn.dataset.lijnnummer = lijnrichting.lijnnummer;
+            lijnenContainer.append(lijn);
+            let individualLijnData;
+            try {
+              individualLijnData = await fetchDelijnData(
+                `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${lijnrichting.entiteitnummer}/${lijnrichting.lijnnummer}`,
+                { signal }
+              );
+            } catch (error) {
+              if (error.name === "AbortError") {
+                return;
+              }
+              console.error("Lijn data fetch error:", error);
+              continue;
+            }
+            if (signal.aborted) {
+              return;
+            }
+            if (lijnenArray.includes(individualLijnData.lijnnummerPubliek)) {
+              lijn.remove();
+              continue;
+            }
+            lijnenArray.push(individualLijnData.lijnnummerPubliek);
+            lijn.innerText = individualLijnData.lijnnummerPubliek;
+            let individualLijnDataColors;
+            try {
+              individualLijnDataColors = await fetchDelijnData(
+                `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${lijnrichting.entiteitnummer}/${lijnrichting.lijnnummer}/lijnkleuren`,
+                { signal }
+              );
+            } catch (error) {
+              if (error.name === "AbortError") {
+                return;
+              }
+              console.error("Lijn color fetch error:", error);
+              continue;
+            }
+            if (signal.aborted) {
+              return;
+            }
+            if (!this.settings.monochrome) {
+              lijn.style.backgroundColor = getHexByCode(individualLijnDataColors.achtergrond.code);
+              lijn.style.borderColor = getHexByCode(individualLijnDataColors.achtergrondRand.code);
+              lijn.style.color = getHexByCode(individualLijnDataColors.voorgrond.code);
+            }
           }
-          console.error("Lijn data fetch error:", error);
-          continue;
-        }
-        if (signal.aborted) {
-          return;
-        }
-        if (lijnenArray.includes(individualLijnData.lijnnummerPubliek)) {
-          lijn.remove();
-          continue;
-        }
-        lijnenArray.push(individualLijnData.lijnnummerPubliek);
-        lijn.innerText = individualLijnData.lijnnummerPubliek;
-        let individualLijnDataColors;
-        try {
-          individualLijnDataColors = await fetchDelijnData(
-            `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${lijnrichting.entiteitnummer}/${lijnrichting.lijnnummer}/lijnkleuren`,
-            { signal },
-          );
-        } catch (error) {
-          if (error.name === "AbortError") {
-            return;
+          halteLijnCard.addEventListener("click", (event) => {
+            this.choseThisHalte(event.currentTarget);
+          });
+          if (!signal.aborted) {
+            this.elements.bottomContainer.appendChild(halteLijnCard);
           }
-          console.error("Lijn color fetch error:", error);
-          continue;
         }
-        if (signal.aborted) {
-          return;
+        async choseThisHalte(halteElement) {
+          this.currentHalteOptionsAbortController?.abort();
+          this.setSetting("halte", {
+            entiteit: halteElement.dataset.entiteitnummer,
+            nummer: halteElement.dataset.haltenummer
+          });
         }
-        if (!this.settings.monochrome) {
-          lijn.style.backgroundColor = getHexByCode(individualLijnDataColors.achtergrond.code);
-          lijn.style.borderColor = getHexByCode(individualLijnDataColors.achtergrondRand.code);
-          lijn.style.color = getHexByCode(individualLijnDataColors.voorgrond.code);
+        addShowMoreHaltesButton() {
+          const showMoreButton = document.createElement("button");
+          showMoreButton.classList.add("showMoreHaltesButton");
+          showMoreButton.innerText = "Toon meer";
+          showMoreButton.addEventListener("click", () => {
+            this.searchResultLimit += 5;
+            showMoreButton.remove();
+            this.setLoadingState(true);
+            this.showHalteOptions(this.elements.searchInput.value).finally(() => {
+              this.setLoadingState(false);
+            });
+          });
+          this.elements.bottomContainer.appendChild(showMoreButton);
         }
-      }
-      halteLijnCard.addEventListener("click", (event) => {
-        this.choseThisHalte(event.currentTarget);
-      });
-      if (!signal.aborted) {
-        this.elements.bottomContainer.appendChild(halteLijnCard);
-      }
+        createInfoElement() {
+          if (!this.elements.infoContainer) {
+            this.elements.infoContainer = document.createElement("div");
+            this.elements.infoContainer.classList.add(
+              "delijnInfoContainer",
+              "delijnInfoContainerVisible"
+            );
+            this.elements.bottomContainer.appendChild(this.elements.infoContainer);
+          }
+          return this.elements.infoContainer;
+        }
+        displayInfo(info) {
+          const infoContainer = this.createInfoElement();
+          if (info) {
+            infoContainer.innerText = info;
+          }
+          infoContainer.classList.add("delijnInfoContainerVisible");
+          infoContainer.classList.remove("delijnInfoContainerHidden");
+        }
+        hideInfo() {
+          const infoContainer = this.createInfoElement();
+          infoContainer.classList.add("delijnInfoContainerHidden");
+          infoContainer.classList.remove("delijnInfoContainerVisible");
+        }
+        clearBottomContainer() {
+          this.elements.bottomContainer.innerHTML = "";
+          this.elements.bottomContainer.appendChild(this.elements.infoContainer);
+          this.displayInfo("");
+        }
+        async createPreview() {
+          const previewElement = document.createElement("div");
+          const previewElementTitle = document.createElement("div");
+          previewElementTitle.classList.add("delijn-preview-title");
+          previewElementTitle.innerText = "De Lijn";
+          const previewElementIcon = document.createElement("div");
+          previewElementIcon.classList.add("delijn-icon-128-container");
+          previewElementIcon.innerHTML = lijnIconSvg;
+          previewElementIcon.style.marginBottom = "1rem";
+          previewElement.appendChild(previewElementTitle);
+          previewElement.appendChild(previewElementIcon);
+          return previewElement;
+        }
+      };
+      registerWidget(new DelijnWidget());
     }
-    async choseThisHalte(halteElement) {
-      this.currentHalteOptionsAbortController?.abort();
-      this.setSetting("halte", {
-        entiteit: halteElement.dataset.entiteitnummer,
-        nummer: halteElement.dataset.haltenummer,
-      });
-    }
-    addShowMoreHaltesButton() {
-      const showMoreButton = document.createElement("button");
-      showMoreButton.classList.add("showMoreHaltesButton");
-      showMoreButton.innerText = "Toon meer";
-      showMoreButton.addEventListener("click", () => {
-        this.searchResultLimit += 5;
-        showMoreButton.remove();
-        this.setLoadingState(true);
-        this.showHalteOptions(this.elements.searchInput.value).finally(() => {
-          this.setLoadingState(false);
-        });
-      });
-      this.elements.bottomContainer.appendChild(showMoreButton);
-    }
-    createInfoElement() {
-      if (!this.elements.infoContainer) {
-        this.elements.infoContainer = document.createElement("div");
-        this.elements.infoContainer.classList.add(
-          "delijnInfoContainer",
-          "delijnInfoContainerVisible",
-        );
-        this.elements.bottomContainer.appendChild(this.elements.infoContainer);
-      }
-      return this.elements.infoContainer;
-    }
-    displayInfo(info) {
-      const infoContainer = this.createInfoElement();
-      if (info) {
-        infoContainer.innerText = info;
-      }
-      infoContainer.classList.add("delijnInfoContainerVisible");
-      infoContainer.classList.remove("delijnInfoContainerHidden");
-    }
-    hideInfo() {
-      const infoContainer = this.createInfoElement();
-      infoContainer.classList.add("delijnInfoContainerHidden");
-      infoContainer.classList.remove("delijnInfoContainerVisible");
-    }
-    clearBottomContainer() {
-      this.elements.bottomContainer.innerHTML = "";
-      this.elements.bottomContainer.appendChild(this.elements.infoContainer);
-      this.displayInfo("");
-    }
-    async createPreview() {
-      const previewElement = document.createElement("div");
-      const previewElementTitle = document.createElement("div");
-      previewElementTitle.classList.add("delijn-preview-title");
-      previewElementTitle.innerText = "De Lijn";
-      const previewElementIcon = document.createElement("div");
-      previewElementIcon.classList.add("delijn-icon-128-container");
-      previewElementIcon.innerHTML = lijnIconSvg;
-      previewElementIcon.style.marginBottom = "1rem";
-      previewElement.appendChild(previewElementTitle);
-      previewElement.appendChild(previewElementIcon);
-      return previewElement;
-    }
-  };
-  registerWidget(new DelijnWidget());
+  });
 
   // src/widgets/planner.ts
-  var pixelsPerMinute = 1.46;
   async function fetchPlannerData(date, user) {
     try {
       const currentUrl = window.location.href;
@@ -14904,408 +12898,223 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     }
     return currentDate;
   }
-  var PlannerWidget = class extends WidgetBase {
-    constructor() {
-      super();
-      this.daysAddedOnTop = 0;
-      this.plannerContainer = null;
-      this.planningContainer = null;
-      this.forwardButton = null;
-      this.backButton = null;
-    }
-    nextDayPlanner() {
-      this.daysAddedOnTop += 1;
-      this.updatePlanner(this.daysAddedOnTop);
-    }
-    previousDayPlanner() {
-      this.daysAddedOnTop -= 1;
-      this.updatePlanner(this.daysAddedOnTop);
-    }
-    createTitleElement(dateText) {
-      const titleContainer = document.createElement("div");
-      titleContainer.classList.add("planner-title-startpage");
-      this.backButton = document.createElement("button");
-      this.backButton.style.width = "15%";
-      this.backButton.title = "back";
-      this.backButton.id = "back_button_planner";
-      this.backButton.addEventListener("click", () => this.previousDayPlanner());
-      const title = document.createElement("h3");
-      title.style.width = "70%";
-      title.style.fontWeight = "500";
-      title.style.fontSize = "20px";
-      title.textContent = dateText;
-      this.forwardButton = document.createElement("button");
-      this.forwardButton.style.width = "15%";
-      this.forwardButton.title = "forward";
-      this.forwardButton.id = "forward_button_planner";
-      this.forwardButton.addEventListener("click", () => this.nextDayPlanner());
-      titleContainer.appendChild(this.backButton);
-      titleContainer.appendChild(title);
-      titleContainer.appendChild(this.forwardButton);
-      return titleContainer;
-    }
-    createEmptyPlannerMessage() {
-      const messageContainer = document.createElement("div");
-      const message = document.createElement("p");
-      message.style.textAlign = "center";
-      message.style.fontSize = "1.5rem";
-      message.style.fontWeight = "600";
-      message.textContent = "No planner data for this day";
-      const ghostIcon = document.createElement("div");
-      ghostIcon.classList.add("blue-ghost-96");
-      messageContainer.appendChild(message);
-      messageContainer.appendChild(ghostIcon);
-      return messageContainer;
-    }
-    createPlannerSubElement(element, index, numElements, elementWidthPercentage, beginTime, slot) {
-      const plannerElement = document.createElement("div");
-      plannerElement.classList.add("planner-element");
-      const colorParts = element.color.split("-");
-      const cssVariableColor = `c-${colorParts[0]}-combo--${colorParts[1]}`;
-      plannerElement.classList.add(cssVariableColor);
-      const itemName = element.courses?.[0]?.name || element.name;
-      const teachers =
-        element.organisers?.users.map((user) => user.name.startingWithFirstName) || [];
-      const itemNameElement = document.createElement("h3");
-      itemNameElement.textContent = `${itemName} - ${teachers.join(", ")}`;
-      itemNameElement.classList.add("no-bottom-margin");
-      plannerElement.appendChild(itemNameElement);
-      const dateTimeFrom = new Date(element.period.dateTimeFrom);
-      const dateTimeTo = new Date(element.period.dateTimeTo);
-      const timeElement = document.createElement("p");
-      timeElement.textContent = fancyfyTime(
-        `${dateTimeFrom.toLocaleTimeString()} - ${dateTimeTo.toLocaleTimeString()}`,
-      );
-      timeElement.classList.add("no-bottom-margin");
-      plannerElement.appendChild(timeElement);
-      if (element.name) {
-        const itemDescriptionElement = document.createElement("p");
-        itemDescriptionElement.textContent = element.name;
-        itemDescriptionElement.classList.add("no-bottom-margin");
-        plannerElement.appendChild(itemDescriptionElement);
-      }
-      const height = calculateElementHeight(dateTimeFrom, dateTimeTo);
-      const top = calculateElementHeight(beginTime, dateTimeFrom);
-      const left = index * elementWidthPercentage;
-      plannerElement.style.height = `${height}px`;
-      plannerElement.style.top = `${top}px`;
-      plannerElement.style.left = `${left}%`;
-      plannerElement.style.width = `${elementWidthPercentage}%`;
-      if (index < numElements - 1) {
-        const nextStartTime = new Date(slot.elements[index + 1].period.dateTimeFrom);
-        const marginBottom = (nextStartTime - dateTimeTo) / 6e4;
-        plannerElement.style.marginBottom = `${marginBottom * pixelsPerMinute}px`;
-      }
-      const hoverPlannerElement = () => {
-        plannerElement.style.width = "100%";
-        if (height < 73) {
-          plannerElement.style.height = "73px";
+  var pixelsPerMinute, PlannerWidget;
+  var init_planner = __esm({
+    "src/widgets/planner.ts"() {
+      "use strict";
+      init_widgets();
+      pixelsPerMinute = 1.46;
+      PlannerWidget = class extends WidgetBase {
+        constructor() {
+          super();
+          this.daysAddedOnTop = 0;
+          this.plannerContainer = null;
+          this.planningContainer = null;
+          this.forwardButton = null;
+          this.backButton = null;
         }
-        plannerElement.style.left = "0";
-        plannerElement.style.zIndex = "100";
-      };
-      const noHoverPlannerElement = () => {
-        plannerElement.style.left = `${left}%`;
-        plannerElement.style.top = `${top}px`;
-        plannerElement.style.height = `${height}px`;
-        plannerElement.style.width = `${elementWidthPercentage}%`;
-        plannerElement.style.zIndex = "99";
-      };
-      plannerElement.addEventListener("mouseover", hoverPlannerElement);
-      plannerElement.addEventListener("mouseout", noHoverPlannerElement);
-      if (element.period.wholeDay) {
-        plannerElement.style.width = "100%";
-        plannerElement.style.height = "24px";
-        plannerElement.style.top = "0";
-        plannerElement.style.zIndex = "100";
-        plannerElement.removeEventListener("mouseover", hoverPlannerElement);
-        plannerElement.removeEventListener("mouseout", noHoverPlannerElement);
-      }
-      return plannerElement;
-    }
-    async updatePlanner(addend) {
-      const plannerUrl = document.getElementById("datePickerMenu").getAttribute("plannerurl");
-      const date = await getDateInCorrectFormat(true, addend);
-      const data2 = await fetchPlannerData(date, plannerUrl.split("/")[4]);
-      this.plannerContainer.innerHTML = "";
-      this.planningContainer.innerHTML = "";
-      const dateText = `${await getDateInCorrectFormat(false, addend)}`
-        .split(" ")
-        .slice(0, 4)
-        .join(" ");
-      const title = this.createTitleElement(dateText);
-      this.plannerContainer.appendChild(title);
-      if (!data2 || data2.length === 0) {
-        const message = this.createEmptyPlannerMessage();
-        this.plannerContainer.appendChild(message);
-        this.planningContainer.style.height = "initial";
-      } else {
-        const earliestStartTime = Math.min(
-          ...data2.map((element) => new Date(element.period.dateTimeFrom).getTime()),
-        );
-        const beginTime = new Date(earliestStartTime);
-        const timeSlots = [];
-        data2.forEach((element) => {
+        nextDayPlanner() {
+          this.daysAddedOnTop += 1;
+          this.updatePlanner(this.daysAddedOnTop);
+        }
+        previousDayPlanner() {
+          this.daysAddedOnTop -= 1;
+          this.updatePlanner(this.daysAddedOnTop);
+        }
+        createTitleElement(dateText) {
+          const titleContainer = document.createElement("div");
+          titleContainer.classList.add("planner-title-startpage");
+          this.backButton = document.createElement("button");
+          this.backButton.style.width = "15%";
+          this.backButton.title = "back";
+          this.backButton.id = "back_button_planner";
+          this.backButton.addEventListener("click", () => this.previousDayPlanner());
+          const title = document.createElement("h3");
+          title.style.width = "70%";
+          title.style.fontWeight = "500";
+          title.style.fontSize = "20px";
+          title.textContent = dateText;
+          this.forwardButton = document.createElement("button");
+          this.forwardButton.style.width = "15%";
+          this.forwardButton.title = "forward";
+          this.forwardButton.id = "forward_button_planner";
+          this.forwardButton.addEventListener("click", () => this.nextDayPlanner());
+          titleContainer.appendChild(this.backButton);
+          titleContainer.appendChild(title);
+          titleContainer.appendChild(this.forwardButton);
+          return titleContainer;
+        }
+        createEmptyPlannerMessage() {
+          const messageContainer = document.createElement("div");
+          const message = document.createElement("p");
+          message.style.textAlign = "center";
+          message.style.fontSize = "1.5rem";
+          message.style.fontWeight = "600";
+          message.textContent = "No planner data for this day";
+          const ghostIcon = document.createElement("div");
+          ghostIcon.classList.add("blue-ghost-96");
+          messageContainer.appendChild(message);
+          messageContainer.appendChild(ghostIcon);
+          return messageContainer;
+        }
+        createPlannerSubElement(element, index, numElements, elementWidthPercentage, beginTime, slot) {
+          const plannerElement = document.createElement("div");
+          plannerElement.classList.add("planner-element");
+          const colorParts = element.color.split("-");
+          const cssVariableColor = `c-${colorParts[0]}-combo--${colorParts[1]}`;
+          plannerElement.classList.add(cssVariableColor);
+          const itemName = element.courses?.[0]?.name || element.name;
+          const teachers = element.organisers?.users.map((user) => user.name.startingWithFirstName) || [];
+          const itemNameElement = document.createElement("h3");
+          itemNameElement.textContent = `${itemName} - ${teachers.join(", ")}`;
+          itemNameElement.classList.add("no-bottom-margin");
+          plannerElement.appendChild(itemNameElement);
           const dateTimeFrom = new Date(element.period.dateTimeFrom);
           const dateTimeTo = new Date(element.period.dateTimeTo);
-          if (element.period.wholeDay) {
-            dateTimeFrom.setHours(7, 30);
-            dateTimeTo.setHours(7, 35);
-            beginTime.setHours(7, 30);
-          }
-          const overlappingSlot = timeSlots.find(
-            (slot) => slot.from < dateTimeTo && slot.to > dateTimeFrom,
+          const timeElement = document.createElement("p");
+          timeElement.textContent = fancyfyTime(
+            `${dateTimeFrom.toLocaleTimeString()} - ${dateTimeTo.toLocaleTimeString()}`
           );
-          if (overlappingSlot) {
-            overlappingSlot.elements.push(element);
-          } else {
-            timeSlots.push({
-              from: dateTimeFrom,
-              to: dateTimeTo,
-              elements: [element],
-            });
+          timeElement.classList.add("no-bottom-margin");
+          plannerElement.appendChild(timeElement);
+          if (element.name) {
+            const itemDescriptionElement = document.createElement("p");
+            itemDescriptionElement.textContent = element.name;
+            itemDescriptionElement.classList.add("no-bottom-margin");
+            plannerElement.appendChild(itemDescriptionElement);
           }
-        });
-        const allHeights = [];
-        timeSlots.forEach((slot) => {
-          const numElements = slot.elements.length;
-          const elementWidthPercentage = 100 / numElements;
-          let plannerElement;
-          slot.elements.forEach((element, index) => {
-            plannerElement = this.createPlannerSubElement(
-              element,
-              index,
-              numElements,
-              elementWidthPercentage,
-              beginTime,
-              slot,
+          const height = calculateElementHeight(dateTimeFrom, dateTimeTo);
+          const top = calculateElementHeight(beginTime, dateTimeFrom);
+          const left = index * elementWidthPercentage;
+          plannerElement.style.height = `${height}px`;
+          plannerElement.style.top = `${top}px`;
+          plannerElement.style.left = `${left}%`;
+          plannerElement.style.width = `${elementWidthPercentage}%`;
+          if (index < numElements - 1) {
+            const nextStartTime = new Date(slot.elements[index + 1].period.dateTimeFrom);
+            const marginBottom = (nextStartTime - dateTimeTo) / 6e4;
+            plannerElement.style.marginBottom = `${marginBottom * pixelsPerMinute}px`;
+          }
+          const hoverPlannerElement = () => {
+            plannerElement.style.width = "100%";
+            if (height < 73) {
+              plannerElement.style.height = "73px";
+            }
+            plannerElement.style.left = "0";
+            plannerElement.style.zIndex = "100";
+          };
+          const noHoverPlannerElement = () => {
+            plannerElement.style.left = `${left}%`;
+            plannerElement.style.top = `${top}px`;
+            plannerElement.style.height = `${height}px`;
+            plannerElement.style.width = `${elementWidthPercentage}%`;
+            plannerElement.style.zIndex = "99";
+          };
+          plannerElement.addEventListener("mouseover", hoverPlannerElement);
+          plannerElement.addEventListener("mouseout", noHoverPlannerElement);
+          if (element.period.wholeDay) {
+            plannerElement.style.width = "100%";
+            plannerElement.style.height = "24px";
+            plannerElement.style.top = "0";
+            plannerElement.style.zIndex = "100";
+            plannerElement.removeEventListener("mouseover", hoverPlannerElement);
+            plannerElement.removeEventListener("mouseout", noHoverPlannerElement);
+          }
+          return plannerElement;
+        }
+        async updatePlanner(addend) {
+          const plannerUrl = document.getElementById("datePickerMenu").getAttribute("plannerurl");
+          const date = await getDateInCorrectFormat(true, addend);
+          const data = await fetchPlannerData(date, plannerUrl.split("/")[4]);
+          this.plannerContainer.innerHTML = "";
+          this.planningContainer.innerHTML = "";
+          const dateText = `${await getDateInCorrectFormat(false, addend)}`.split(" ").slice(0, 4).join(" ");
+          const title = this.createTitleElement(dateText);
+          this.plannerContainer.appendChild(title);
+          if (!data || data.length === 0) {
+            const message = this.createEmptyPlannerMessage();
+            this.plannerContainer.appendChild(message);
+            this.planningContainer.style.height = "initial";
+          } else {
+            const earliestStartTime = Math.min(
+              ...data.map((element) => new Date(element.period.dateTimeFrom).getTime())
             );
-            this.planningContainer.appendChild(plannerElement);
-            allHeights.push(
-              Number(
-                Number.parseInt(plannerElement.style.height, 10) +
-                  Number.parseInt(plannerElement.style.top, 10),
-              ),
-            );
-          });
-        });
-        this.planningContainer.style.height = `${Math.max(...allHeights)}px`;
-      }
-      this.plannerContainer.appendChild(this.planningContainer);
+            const beginTime = new Date(earliestStartTime);
+            const timeSlots = [];
+            data.forEach((element) => {
+              const dateTimeFrom = new Date(element.period.dateTimeFrom);
+              const dateTimeTo = new Date(element.period.dateTimeTo);
+              if (element.period.wholeDay) {
+                dateTimeFrom.setHours(7, 30);
+                dateTimeTo.setHours(7, 35);
+                beginTime.setHours(7, 30);
+              }
+              const overlappingSlot = timeSlots.find(
+                (slot) => slot.from < dateTimeTo && slot.to > dateTimeFrom
+              );
+              if (overlappingSlot) {
+                overlappingSlot.elements.push(element);
+              } else {
+                timeSlots.push({
+                  from: dateTimeFrom,
+                  to: dateTimeTo,
+                  elements: [element]
+                });
+              }
+            });
+            const allHeights = [];
+            timeSlots.forEach((slot) => {
+              const numElements = slot.elements.length;
+              const elementWidthPercentage = 100 / numElements;
+              let plannerElement;
+              slot.elements.forEach((element, index) => {
+                plannerElement = this.createPlannerSubElement(
+                  element,
+                  index,
+                  numElements,
+                  elementWidthPercentage,
+                  beginTime,
+                  slot
+                );
+                this.planningContainer.appendChild(plannerElement);
+                allHeights.push(
+                  Number(
+                    Number.parseInt(plannerElement.style.height, 10) + Number.parseInt(plannerElement.style.top, 10)
+                  )
+                );
+              });
+            });
+            this.planningContainer.style.height = `${Math.max(...allHeights)}px`;
+          }
+          this.plannerContainer.appendChild(this.planningContainer);
+        }
+        async createContent() {
+          this.element.classList.add("smpp-widget-transparent");
+          this.plannerContainer = document.createElement("div");
+          this.plannerContainer.classList.add("planner-container");
+          this.planningContainer = document.createElement("div");
+          this.planningContainer.classList.add("planning-container");
+          await this.updatePlanner(0);
+          return this.plannerContainer;
+        }
+        async createPreview() {
+          const previewElement = document.createElement("div");
+          const previewElementTitle = document.createElement("div");
+          previewElementTitle.classList.add("planner-preview-title");
+          previewElementTitle.innerText = "Planner";
+          const previewElementIcon = document.createElement("div");
+          previewElementIcon.classList.add("planner-icon-128");
+          previewElementIcon.style.marginBottom = "1rem";
+          previewElement.appendChild(previewElementTitle);
+          previewElement.appendChild(previewElementIcon);
+          return previewElement;
+        }
+      };
+      registerWidget(new PlannerWidget());
     }
-    async createContent() {
-      this.element.classList.add("smpp-widget-transparent");
-      this.plannerContainer = document.createElement("div");
-      this.plannerContainer.classList.add("planner-container");
-      this.planningContainer = document.createElement("div");
-      this.planningContainer.classList.add("planning-container");
-      await this.updatePlanner(0);
-      return this.plannerContainer;
-    }
-    async createPreview() {
-      const previewElement = document.createElement("div");
-      const previewElementTitle = document.createElement("div");
-      previewElementTitle.classList.add("planner-preview-title");
-      previewElementTitle.innerText = "Planner";
-      const previewElementIcon = document.createElement("div");
-      previewElementIcon.classList.add("planner-icon-128");
-      previewElementIcon.style.marginBottom = "1rem";
-      previewElement.appendChild(previewElementTitle);
-      previewElement.appendChild(previewElementIcon);
-      return previewElement;
-    }
-  };
-  registerWidget(new PlannerWidget());
+  });
 
   // src/widgets/weather.ts
-  var WeatherWidgetBase = class extends WidgetBase {
-    isCompact = false;
-    async createContent() {
-      const newWeatherData = await this.getWeatherData();
-      return this.createHTML(newWeatherData);
-    }
-    async getWeatherData() {
-      if (this.settings.cache.weatherData == null) {
-        await this.updateCache();
-      } else if ((Date.now() - new Date(this.settings.cache.lastUpdateDate)) / 1e3 / 60 > 10) {
-        await this.updateCache();
-      }
-      return this.settings.cache.weatherData;
-    }
-    async fetchWeatherData(location2) {
-      return await browser.runtime.sendMessage({
-        action: "fetchWeatherData",
-        location: location2,
-      });
-    }
-    async updateCache() {
-      const newWeatherData = await this.fetchWeatherData(this.settings.currentLocation);
-      if (newWeatherData.name) {
-        await this.setSetting("currentLocation", newWeatherData.name);
-      }
-      await this.setSetting("cache", {
-        weatherData: newWeatherData,
-        lastUpdateDate: /* @__PURE__ */ new Date(),
-      });
-    }
-    defaultSettings() {
-      return {
-        currentLocation: "Locatie",
-        cache: {
-          weatherData: null,
-          lastUpdateDate: /* @__PURE__ */ new Date(),
-        },
-      };
-    }
-    async createPreview() {
-      this.element.innerHTML = "";
-      return createWeatherPreview(this.isCompact);
-    }
-    async updateWeatherLocation(event) {
-      const newLocation = event.target.value.trim();
-      if (newLocation === "") {
-        event.target.value = this.settings.currentLocation;
-        return;
-      }
-      await this.setSetting("currentLocation", newLocation);
-      await this.updateCache();
-      await this.updateHTML();
-    }
-    async updateHTML() {
-      this.element.innerHTML = "";
-      this.element.appendChild(this.createHTML(await this.getWeatherData()));
-    }
-    async updateWeatherEffect() {
-      const settings = await browser.runtime.sendMessage({
-        action: "getSettingsData",
-      });
-      applyWeatherEffects(settings.appearance.weatherOverlay);
-    }
-    onRemove() {
-      this.updateWeatherEffect();
-    }
-    createHTML(weatherData) {
-      this.updateWeatherEffect();
-      const container = document.createElement("div");
-      container.classList.add("weather-div");
-      if (this.isCompact) {
-        container.classList.add("compact");
-      }
-      const topContentContainer = document.createElement("div");
-      topContentContainer.classList.add("top-weather-content-container");
-      const bottomContentContainer = document.createElement("div");
-      bottomContentContainer.classList.add("bottom-weather-content-container");
-      const locationInput = document.createElement("input");
-      locationInput.classList.add("weather-location-input");
-      locationInput.value = this.settings.currentLocation;
-      locationInput.type = "text";
-      locationInput.placeholder = "Locatie";
-      locationInput.spellcheck = false;
-      locationInput.classList.add("inactive");
-      locationInput.addEventListener("change", this.updateWeatherLocation.bind(this));
-      topContentContainer.appendChild(locationInput);
-      container.appendChild(topContentContainer);
-      if (this.settings.currentLocation === "Locatie") {
-        locationInput.classList.add("not-initialized");
-        locationInput.value = "";
-        locationInput.addEventListener("focusin", (e5) => {
-          e5.target.placeholder = "";
-        });
-        locationInput.addEventListener("focusout", (e5) => {
-          e5.target.placeholder = "Locatie";
-        });
-        const mainIcon2 = document.createElement("div");
-        mainIcon2.classList.add("weather-icon-container");
-        mainIcon2.innerHTML = getWeatherIcon(null, "broken clouds");
-        container.appendChild(mainIcon2);
-        return container;
-      }
-      if (weatherData.cod !== 200) {
-        console.log(weatherData.cod);
-        container.appendChild(createNotFoundContent(weatherData.cod));
-        return container;
-      }
-      const description = document.createElement("span");
-      description.classList.add("weather-description");
-      description.innerText = weatherData.weather[0].main;
-      const mainIcon = document.createElement("div");
-      mainIcon.classList.add("weather-icon-container");
-      mainIcon.innerHTML = getWeatherIcon(
-        weatherData.weather[0].main,
-        weatherData.weather[0].description,
-      );
-      const temperature = document.createElement("span");
-      temperature.classList.add("temperature");
-      temperature.innerText = `${Math.round(weatherData.main.temp)}\xB0C`;
-      const conditionsContainer = document.createElement("div");
-      conditionsContainer.classList.add("conditions-container");
-      const humidityContainer = document.createElement("div");
-      humidityContainer.classList.add("humidity-container");
-      humidityContainer.classList.add("condition-container");
-      const humidityIcon = document.createElement("div");
-      humidityIcon.classList.add("humidity-icon");
-      humidityIcon.innerHTML = humiditySvg;
-      const humidity = document.createElement("span");
-      humidity.classList.add("humidity");
-      humidity.innerText = `${weatherData.main.humidity}%`;
-      humidityContainer.appendChild(humidityIcon);
-      humidityContainer.appendChild(humidity);
-      const feelsLikeContainer = document.createElement("div");
-      feelsLikeContainer.classList.add("feels-like-container");
-      feelsLikeContainer.classList.add("condition-container");
-      const feelsLikeIcon = document.createElement("div");
-      feelsLikeIcon.classList.add("feels-like-icon");
-      feelsLikeIcon.innerHTML = feelsLikeSvg;
-      const feelsLike = document.createElement("span");
-      feelsLike.classList.add("feels-like");
-      feelsLike.innerText = `${Math.round(weatherData.main.feels_like)}\xB0C`;
-      feelsLikeContainer.appendChild(feelsLikeIcon);
-      feelsLikeContainer.appendChild(feelsLike);
-      const windContainer = document.createElement("div");
-      windContainer.classList.add("wind-container");
-      windContainer.classList.add("condition-container");
-      const windIcon = document.createElement("div");
-      windIcon.classList.add("wind-icon");
-      windIcon.innerHTML = windSvg;
-      const wind = document.createElement("span");
-      wind.classList.add("wind");
-      wind.innerText = `${Math.round(Number(weatherData.wind.speed) * 3.6)}km/h`;
-      windContainer.appendChild(windIcon);
-      windContainer.appendChild(wind);
-      topContentContainer.appendChild(description);
-      topContentContainer.appendChild(mainIcon);
-      if (this.isCompact) {
-        const temperatureContainer = document.createElement("div");
-        temperatureContainer.classList.add("temperature-container");
-        temperatureContainer.classList.add("condition-container");
-        const temperatureIcon = document.createElement("div");
-        temperatureIcon.classList.add("temperature-icon");
-        temperatureIcon.innerHTML = temperatureSvg;
-        temperatureContainer.appendChild(temperatureIcon);
-        temperatureContainer.appendChild(temperature);
-        conditionsContainer.appendChild(humidityContainer);
-        conditionsContainer.appendChild(windContainer);
-        conditionsContainer.appendChild(temperatureContainer);
-      } else {
-        bottomContentContainer.appendChild(temperature);
-        conditionsContainer.appendChild(humidityContainer);
-        conditionsContainer.appendChild(feelsLikeContainer);
-        conditionsContainer.appendChild(windContainer);
-      }
-      bottomContentContainer.appendChild(conditionsContainer);
-      container.appendChild(topContentContainer);
-      container.appendChild(bottomContentContainer);
-      return container;
-    }
-  };
-  var WeatherWidget = class extends WeatherWidgetBase {
-    isCompact = false;
-  };
-  var CompactWeatherWidget = class extends WeatherWidgetBase {
-    isCompact = true;
-  };
-  registerWidget(new CompactWeatherWidget());
-  registerWidget(new WeatherWidget());
   function createWeatherPreview(isCompact) {
     const container = document.createElement("div");
     container.classList.add("weather-div");
@@ -15377,8 +13186,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       notFoundContent.appendChild(notFoundIcon);
       notFoundText.innerText = "Location not found";
     } else if (code === 69) {
-      notFoundText.innerText = `Unexpected error:
-Unable to fetch`;
+      notFoundText.innerText = "Unexpected error:\nUnable to fetch";
     } else {
       notFoundText.innerText = `Unexpected error:
 ${code}`;
@@ -15420,291 +13228,503 @@ ${code}`;
         return `Main weather not recognized:${description}`;
     }
   }
+  var WeatherWidgetBase, WeatherWidget, CompactWeatherWidget;
+  var init_weather = __esm({
+    "src/widgets/weather.ts"() {
+      "use strict";
+      init_utils();
+      init_svgs();
+      init_weather_effects();
+      init_widgets();
+      WeatherWidgetBase = class extends WidgetBase {
+        isCompact = false;
+        async createContent() {
+          const newWeatherData = await this.getWeatherData();
+          return this.createHTML(newWeatherData);
+        }
+        async getWeatherData() {
+          if (this.settings.cache.weatherData == null) {
+            await this.updateCache();
+          } else if ((Date.now() - new Date(this.settings.cache.lastUpdateDate)) / 1e3 / 60 > 10) {
+            await this.updateCache();
+          }
+          return this.settings.cache.weatherData;
+        }
+        async fetchWeatherData(location2) {
+          return await browser.runtime.sendMessage({
+            action: "fetchWeatherData",
+            location: location2
+          });
+        }
+        async updateCache() {
+          const newWeatherData = await this.fetchWeatherData(this.settings.currentLocation);
+          if (newWeatherData.name) {
+            await this.setSetting("currentLocation", newWeatherData.name);
+          }
+          await this.setSetting("cache", {
+            weatherData: newWeatherData,
+            lastUpdateDate: /* @__PURE__ */ new Date()
+          });
+        }
+        defaultSettings() {
+          return {
+            currentLocation: "Locatie",
+            cache: {
+              weatherData: null,
+              lastUpdateDate: /* @__PURE__ */ new Date()
+            }
+          };
+        }
+        async createPreview() {
+          this.element.innerHTML = "";
+          return createWeatherPreview(this.isCompact);
+        }
+        async updateWeatherLocation(event) {
+          const newLocation = event.target.value.trim();
+          if (newLocation === "") {
+            event.target.value = this.settings.currentLocation;
+            return;
+          }
+          await this.setSetting("currentLocation", newLocation);
+          await this.updateCache();
+          await this.updateHTML();
+        }
+        async updateHTML() {
+          this.element.innerHTML = "";
+          this.element.appendChild(this.createHTML(await this.getWeatherData()));
+        }
+        async updateWeatherEffect() {
+          const settings = await browser.runtime.sendMessage({
+            action: "getSettingsData"
+          });
+          applyWeatherEffects(settings.appearance.weatherOverlay);
+        }
+        onRemove() {
+          this.updateWeatherEffect();
+        }
+        createHTML(weatherData) {
+          this.updateWeatherEffect();
+          const container = document.createElement("div");
+          container.classList.add("weather-div");
+          if (this.isCompact) {
+            container.classList.add("compact");
+          }
+          const topContentContainer = document.createElement("div");
+          topContentContainer.classList.add("top-weather-content-container");
+          const bottomContentContainer = document.createElement("div");
+          bottomContentContainer.classList.add("bottom-weather-content-container");
+          const locationInput = document.createElement("input");
+          locationInput.classList.add("weather-location-input");
+          locationInput.value = this.settings.currentLocation;
+          locationInput.type = "text";
+          locationInput.placeholder = "Locatie";
+          locationInput.spellcheck = false;
+          locationInput.classList.add("inactive");
+          locationInput.addEventListener("change", this.updateWeatherLocation.bind(this));
+          topContentContainer.appendChild(locationInput);
+          container.appendChild(topContentContainer);
+          if (this.settings.currentLocation === "Locatie") {
+            locationInput.classList.add("not-initialized");
+            locationInput.value = "";
+            locationInput.addEventListener("focusin", (e5) => {
+              e5.target.placeholder = "";
+            });
+            locationInput.addEventListener("focusout", (e5) => {
+              e5.target.placeholder = "Locatie";
+            });
+            const mainIcon2 = document.createElement("div");
+            mainIcon2.classList.add("weather-icon-container");
+            mainIcon2.innerHTML = getWeatherIcon(null, "broken clouds");
+            container.appendChild(mainIcon2);
+            return container;
+          }
+          if (weatherData.cod !== 200) {
+            console.log(weatherData.cod);
+            container.appendChild(createNotFoundContent(weatherData.cod));
+            return container;
+          }
+          const description = document.createElement("span");
+          description.classList.add("weather-description");
+          description.innerText = weatherData.weather[0].main;
+          const mainIcon = document.createElement("div");
+          mainIcon.classList.add("weather-icon-container");
+          mainIcon.innerHTML = getWeatherIcon(
+            weatherData.weather[0].main,
+            weatherData.weather[0].description
+          );
+          const temperature = document.createElement("span");
+          temperature.classList.add("temperature");
+          temperature.innerText = `${Math.round(weatherData.main.temp)}\xB0C`;
+          const conditionsContainer = document.createElement("div");
+          conditionsContainer.classList.add("conditions-container");
+          const humidityContainer = document.createElement("div");
+          humidityContainer.classList.add("humidity-container");
+          humidityContainer.classList.add("condition-container");
+          const humidityIcon = document.createElement("div");
+          humidityIcon.classList.add("humidity-icon");
+          humidityIcon.innerHTML = humiditySvg;
+          const humidity = document.createElement("span");
+          humidity.classList.add("humidity");
+          humidity.innerText = `${weatherData.main.humidity}%`;
+          humidityContainer.appendChild(humidityIcon);
+          humidityContainer.appendChild(humidity);
+          const feelsLikeContainer = document.createElement("div");
+          feelsLikeContainer.classList.add("feels-like-container");
+          feelsLikeContainer.classList.add("condition-container");
+          const feelsLikeIcon = document.createElement("div");
+          feelsLikeIcon.classList.add("feels-like-icon");
+          feelsLikeIcon.innerHTML = feelsLikeSvg;
+          const feelsLike = document.createElement("span");
+          feelsLike.classList.add("feels-like");
+          feelsLike.innerText = `${Math.round(weatherData.main.feels_like)}\xB0C`;
+          feelsLikeContainer.appendChild(feelsLikeIcon);
+          feelsLikeContainer.appendChild(feelsLike);
+          const windContainer = document.createElement("div");
+          windContainer.classList.add("wind-container");
+          windContainer.classList.add("condition-container");
+          const windIcon = document.createElement("div");
+          windIcon.classList.add("wind-icon");
+          windIcon.innerHTML = windSvg;
+          const wind = document.createElement("span");
+          wind.classList.add("wind");
+          wind.innerText = `${Math.round(Number(weatherData.wind.speed) * 3.6)}km/h`;
+          windContainer.appendChild(windIcon);
+          windContainer.appendChild(wind);
+          topContentContainer.appendChild(description);
+          topContentContainer.appendChild(mainIcon);
+          if (this.isCompact) {
+            const temperatureContainer = document.createElement("div");
+            temperatureContainer.classList.add("temperature-container");
+            temperatureContainer.classList.add("condition-container");
+            const temperatureIcon = document.createElement("div");
+            temperatureIcon.classList.add("temperature-icon");
+            temperatureIcon.innerHTML = temperatureSvg;
+            temperatureContainer.appendChild(temperatureIcon);
+            temperatureContainer.appendChild(temperature);
+            conditionsContainer.appendChild(humidityContainer);
+            conditionsContainer.appendChild(windContainer);
+            conditionsContainer.appendChild(temperatureContainer);
+          } else {
+            bottomContentContainer.appendChild(temperature);
+            conditionsContainer.appendChild(humidityContainer);
+            conditionsContainer.appendChild(feelsLikeContainer);
+            conditionsContainer.appendChild(windContainer);
+          }
+          bottomContentContainer.appendChild(conditionsContainer);
+          container.appendChild(topContentContainer);
+          container.appendChild(bottomContentContainer);
+          return container;
+        }
+      };
+      WeatherWidget = class extends WeatherWidgetBase {
+        isCompact = false;
+      };
+      CompactWeatherWidget = class extends WeatherWidgetBase {
+        isCompact = true;
+      };
+      registerWidget(new CompactWeatherWidget());
+      registerWidget(new WeatherWidget());
+    }
+  });
 
   // src/widgets/clock.ts
-  var ClockWidget = class extends WidgetBase {
-    get category() {
-      return "other";
-    }
-    get name() {
-      return "ClockWidget";
-    }
-    async createContent() {
-      this.element.classList.add("smpp-widget-transparent");
-      const clockContainer = document.createElement("div");
-      clockContainer.classList.add("clock-widget");
-      const container = document.createElement("div");
-      container.classList.add("clock-container");
-      clockContainer.appendChild(container);
-      const clockFace = document.createElement("div");
-      clockFace.classList.add("clock-face");
-      container.appendChild(clockFace);
-      const minuteHand = document.createElement("div");
-      minuteHand.classList.add("clock-hand", "minute-hand");
-      clockFace.appendChild(minuteHand);
-      const hourHand = document.createElement("div");
-      hourHand.classList.add("clock-hand", "hour-hand");
-      clockFace.appendChild(hourHand);
-      const secondHand = document.createElement("div");
-      secondHand.classList.add("clock-hand", "second-hand");
-      clockFace.appendChild(secondHand);
-      const centerCircle = document.createElement("div");
-      centerCircle.classList.add("clock-center");
-      clockFace.appendChild(centerCircle);
-      const bottomContainer = document.createElement("div");
-      bottomContainer.classList.add("clock-bottom");
-      container.appendChild(bottomContainer);
-      const timeEl = document.createElement("div");
-      timeEl.classList.add("digital-time");
-      timeEl.innerText = "00:00";
-      bottomContainer.appendChild(timeEl);
-      const update = () => {
-        const now = /* @__PURE__ */ new Date();
-        const hours = now.getHours();
-        const minutes = now.getMinutes();
-        const seconds = now.getSeconds();
-        const milliseconds = now.getMilliseconds();
-        const timeText = `${(hours < 10 ? "0" : "") + hours}:${minutes < 10 ? "0" : ""}${minutes}`;
-        if (timeEl.innerText !== timeText) {
-          timeEl.innerText = timeText;
+  var ClockWidget;
+  var init_clock = __esm({
+    "src/widgets/clock.ts"() {
+      "use strict";
+      init_widgets();
+      ClockWidget = class extends WidgetBase {
+        get category() {
+          return "other";
         }
-        const totalSeconds = hours * 3600 + minutes * 60 + seconds + milliseconds / 1e3;
-        const totalMinutes = hours * 60 + minutes + seconds / 60 + milliseconds / (1e3 * 60);
-        const totalHours =
-          hours + minutes / 60 + seconds / (60 * 60) + milliseconds / (1e3 * 60 * 60);
-        let secondsAngle = totalSeconds * 6;
-        let minutesAngle = totalMinutes * 6;
-        let hoursAngle = totalHours * 30;
-        if (secondsAngle > 270) {
-          secondsAngle -= 360;
+        get name() {
+          return "ClockWidget";
         }
-        if (minutesAngle > 270) {
-          minutesAngle -= 360;
+        async createContent() {
+          this.element.classList.add("smpp-widget-transparent");
+          const clockContainer = document.createElement("div");
+          clockContainer.classList.add("clock-widget");
+          const container = document.createElement("div");
+          container.classList.add("clock-container");
+          clockContainer.appendChild(container);
+          const clockFace = document.createElement("div");
+          clockFace.classList.add("clock-face");
+          container.appendChild(clockFace);
+          const minuteHand = document.createElement("div");
+          minuteHand.classList.add("clock-hand", "minute-hand");
+          clockFace.appendChild(minuteHand);
+          const hourHand = document.createElement("div");
+          hourHand.classList.add("clock-hand", "hour-hand");
+          clockFace.appendChild(hourHand);
+          const secondHand = document.createElement("div");
+          secondHand.classList.add("clock-hand", "second-hand");
+          clockFace.appendChild(secondHand);
+          const centerCircle = document.createElement("div");
+          centerCircle.classList.add("clock-center");
+          clockFace.appendChild(centerCircle);
+          const bottomContainer = document.createElement("div");
+          bottomContainer.classList.add("clock-bottom");
+          container.appendChild(bottomContainer);
+          const timeEl = document.createElement("div");
+          timeEl.classList.add("digital-time");
+          timeEl.innerText = "00:00";
+          bottomContainer.appendChild(timeEl);
+          const update = () => {
+            const now = /* @__PURE__ */ new Date();
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const seconds = now.getSeconds();
+            const milliseconds = now.getMilliseconds();
+            const timeText = `${(hours < 10 ? "0" : "") + hours}:${minutes < 10 ? "0" : ""}${minutes}`;
+            if (timeEl.innerText !== timeText) {
+              timeEl.innerText = timeText;
+            }
+            const totalSeconds = hours * 3600 + minutes * 60 + seconds + milliseconds / 1e3;
+            const totalMinutes = hours * 60 + minutes + seconds / 60 + milliseconds / (1e3 * 60);
+            const totalHours = hours + minutes / 60 + seconds / (60 * 60) + milliseconds / (1e3 * 60 * 60);
+            let secondsAngle = totalSeconds * 6;
+            let minutesAngle = totalMinutes * 6;
+            let hoursAngle = totalHours * 30;
+            if (secondsAngle > 270) {
+              secondsAngle -= 360;
+            }
+            if (minutesAngle > 270) {
+              minutesAngle -= 360;
+            }
+            if (hoursAngle > 270) {
+              hoursAngle -= 360;
+            }
+            secondHand.style.transform = `translate(-50%, -100%) rotate(${secondsAngle}deg)`;
+            minuteHand.style.transform = `translate(-50%, -100%) rotate(${minutesAngle}deg)`;
+            hourHand.style.transform = `translate(-50%, -100%) rotate(${hoursAngle}deg)`;
+            requestAnimationFrame(update);
+          };
+          requestAnimationFrame(update);
+          return clockContainer;
         }
-        if (hoursAngle > 270) {
-          hoursAngle -= 360;
+        async createPreview() {
+          const div = document.createElement("div");
+          div.classList.add("clock-widget-preview");
+          const title = document.createElement("div");
+          title.classList.add("clock-preview-title");
+          title.innerText = "Clock";
+          div.appendChild(title);
+          const container = document.createElement("div");
+          container.classList.add("clock-container");
+          div.appendChild(container);
+          const clockFace = document.createElement("div");
+          clockFace.classList.add("clock-face");
+          container.appendChild(clockFace);
+          const minuteHand = document.createElement("div");
+          minuteHand.classList.add("clock-hand", "minute-hand");
+          minuteHand.style.transform = "rotate(0deg)";
+          clockFace.appendChild(minuteHand);
+          const hourHand = document.createElement("div");
+          hourHand.classList.add("clock-hand", "hour-hand");
+          hourHand.style.transform = "rotate(0deg)";
+          clockFace.appendChild(hourHand);
+          const secondHand = document.createElement("div");
+          secondHand.classList.add("clock-hand", "second-hand");
+          secondHand.style.transform = "rotate(0deg)";
+          clockFace.appendChild(secondHand);
+          const centerCircle = document.createElement("div");
+          centerCircle.classList.add("clock-center");
+          clockFace.appendChild(centerCircle);
+          const secondsAngle = 50;
+          const minutesAngle = 120;
+          const hoursAngle = 240;
+          secondHand.style.transform = `translate(-50%, -100%) rotate(${secondsAngle}deg)`;
+          minuteHand.style.transform = `translate(-50%, -100%) rotate(${minutesAngle}deg)`;
+          hourHand.style.transform = `translate(-50%, -100%) rotate(${hoursAngle}deg)`;
+          return div;
         }
-        secondHand.style.transform = `translate(-50%, -100%) rotate(${secondsAngle}deg)`;
-        minuteHand.style.transform = `translate(-50%, -100%) rotate(${minutesAngle}deg)`;
-        hourHand.style.transform = `translate(-50%, -100%) rotate(${hoursAngle}deg)`;
-        requestAnimationFrame(update);
+        async onThemeChange() {
+        }
       };
-      requestAnimationFrame(update);
-      return clockContainer;
+      registerWidget(new ClockWidget());
     }
-    async createPreview() {
-      const div = document.createElement("div");
-      div.classList.add("clock-widget-preview");
-      const title = document.createElement("div");
-      title.classList.add("clock-preview-title");
-      title.innerText = "Clock";
-      div.appendChild(title);
-      const container = document.createElement("div");
-      container.classList.add("clock-container");
-      div.appendChild(container);
-      const clockFace = document.createElement("div");
-      clockFace.classList.add("clock-face");
-      container.appendChild(clockFace);
-      const minuteHand = document.createElement("div");
-      minuteHand.classList.add("clock-hand", "minute-hand");
-      minuteHand.style.transform = "rotate(0deg)";
-      clockFace.appendChild(minuteHand);
-      const hourHand = document.createElement("div");
-      hourHand.classList.add("clock-hand", "hour-hand");
-      hourHand.style.transform = "rotate(0deg)";
-      clockFace.appendChild(hourHand);
-      const secondHand = document.createElement("div");
-      secondHand.classList.add("clock-hand", "second-hand");
-      secondHand.style.transform = "rotate(0deg)";
-      clockFace.appendChild(secondHand);
-      const centerCircle = document.createElement("div");
-      centerCircle.classList.add("clock-center");
-      clockFace.appendChild(centerCircle);
-      const secondsAngle = 50;
-      const minutesAngle = 120;
-      const hoursAngle = 240;
-      secondHand.style.transform = `translate(-50%, -100%) rotate(${secondsAngle}deg)`;
-      minuteHand.style.transform = `translate(-50%, -100%) rotate(${minutesAngle}deg)`;
-      hourHand.style.transform = `translate(-50%, -100%) rotate(${hoursAngle}deg)`;
-      return div;
-    }
-    async onThemeChange() {}
-  };
-  registerWidget(new ClockWidget());
+  });
 
   // src/widgets/calendar.ts
-  var CalendarWidget = class extends WidgetBase {
-    get category() {
-      return "other";
+  var CalendarWidget;
+  var init_calendar = __esm({
+    "src/widgets/calendar.ts"() {
+      "use strict";
+      init_svgs();
+      init_widgets();
+      CalendarWidget = class extends WidgetBase {
+        get category() {
+          return "other";
+        }
+        get name() {
+          return "CalendarWidget";
+        }
+        defaultSettings() {
+          return {};
+        }
+        currentDate = /* @__PURE__ */ new Date();
+        generateCalendar() {
+          const year = this.currentDate.getFullYear();
+          const month = this.currentDate.getMonth();
+          const monthName = new Intl.DateTimeFormat("en-US", {
+            month: "long"
+          }).format(this.currentDate);
+          const firstDay = new Date(year, month, 1).getDay();
+          const daysInMonth = new Date(year, month + 1, 0).getDate();
+          const container = document.createElement("div");
+          container.className = "calendar-widget";
+          const header = document.createElement("div");
+          header.className = "calendar-header";
+          const prevBtn = document.createElement("button");
+          prevBtn.className = "calendar-prev";
+          prevBtn.innerHTML = chevronLeftSvg;
+          prevBtn.addEventListener("click", () => {
+            this.currentDate.setMonth(this.currentDate.getMonth() - 1);
+            const parent = container.parentElement;
+            const newCalendar = this.generateCalendar();
+            parent?.replaceChild(newCalendar, container);
+          });
+          const title = document.createElement("h3");
+          title.textContent = `${monthName} ${year}`;
+          const nextBtn = document.createElement("button");
+          nextBtn.className = "calendar-next";
+          nextBtn.innerHTML = chevronLeftSvg;
+          nextBtn.addEventListener("click", () => {
+            this.currentDate.setMonth(this.currentDate.getMonth() + 1);
+            const parent = container.parentElement;
+            const newCalendar = this.generateCalendar();
+            parent?.replaceChild(newCalendar, container);
+          });
+          header.appendChild(prevBtn);
+          header.appendChild(title);
+          header.appendChild(nextBtn);
+          const weekdays = document.createElement("div");
+          weekdays.className = "calendar-weekdays";
+          ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].forEach((day) => {
+            const dayEl = document.createElement("div");
+            dayEl.className = "calendar-weekday";
+            dayEl.textContent = day;
+            weekdays.appendChild(dayEl);
+          });
+          const days = document.createElement("div");
+          days.className = "calendar-days";
+          for (let i5 = 0; i5 < firstDay; i5++) {
+            const empty = document.createElement("div");
+            empty.className = "calendar-day empty";
+            days.appendChild(empty);
+          }
+          const today = /* @__PURE__ */ new Date();
+          for (let day = 1; day <= daysInMonth; day++) {
+            const dayEl = document.createElement("div");
+            const isToday = day === today.getDate() && month === today.getMonth() && year === today.getFullYear();
+            dayEl.className = isToday ? "calendar-day today" : "calendar-day";
+            dayEl.textContent = String(day);
+            days.appendChild(dayEl);
+          }
+          container.appendChild(header);
+          container.appendChild(weekdays);
+          container.appendChild(days);
+          return container;
+        }
+        async createContent() {
+          return this.generateCalendar();
+        }
+        async createPreview() {
+          const preview = document.createElement("div");
+          preview.className = "calendar-widget-preview";
+          preview.style.background = "none";
+          preview.style.display = "flex";
+          preview.style.flexDirection = "column";
+          preview.style.alignItems = "center";
+          preview.style.justifyContent = "center";
+          preview.style.gap = "12px";
+          preview.style.padding = "12px";
+          preview.style.minHeight = "auto";
+          const label = document.createElement("div");
+          label.style.fontSize = "2rem";
+          label.style.fontWeight = "700";
+          label.style.color = "var(--color-base05)";
+          label.style.marginBottom = "0.5rem";
+          label.textContent = "Calendar";
+          const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+          svg.setAttribute("viewBox", "0 0 100 120");
+          svg.setAttribute("width", "52");
+          svg.setAttribute("height", "65");
+          const body = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+          body.setAttribute("x", "8");
+          body.setAttribute("y", "28");
+          body.setAttribute("width", "84");
+          body.setAttribute("height", "84");
+          body.setAttribute("rx", "6");
+          body.setAttribute("fill", "#FFE55C");
+          body.setAttribute("stroke", "#000");
+          body.setAttribute("stroke-width", "3");
+          const header = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+          header.setAttribute("x", "8");
+          header.setAttribute("y", "8");
+          header.setAttribute("width", "84");
+          header.setAttribute("height", "24");
+          header.setAttribute("rx", "6");
+          header.setAttribute("fill", "#FF5C6D");
+          header.setAttribute("stroke", "#000");
+          header.setAttribute("stroke-width", "3");
+          const ringPositions = [20, 50, 80];
+          ringPositions.forEach((x3) => {
+            const ring = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+            ring.setAttribute("cx", String(x3));
+            ring.setAttribute("cy", "6");
+            ring.setAttribute("r", "6");
+            ring.setAttribute("fill", "#1E90FF");
+            ring.setAttribute("stroke", "#000");
+            ring.setAttribute("stroke-width", "2");
+            svg.appendChild(ring);
+          });
+          const checkboxes = [45, 65, 85];
+          checkboxes.forEach((y3) => {
+            const checkbox = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+            checkbox.setAttribute("x", "20");
+            checkbox.setAttribute("y", String(y3));
+            checkbox.setAttribute("width", "10");
+            checkbox.setAttribute("height", "10");
+            checkbox.setAttribute("rx", "2");
+            checkbox.setAttribute("fill", "#00D9FF");
+            checkbox.setAttribute("stroke", "#000");
+            checkbox.setAttribute("stroke-width", "2");
+            svg.appendChild(checkbox);
+          });
+          const lines = [45, 65, 85];
+          lines.forEach((y3) => {
+            const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+            line.setAttribute("x1", "35");
+            line.setAttribute("y1", String(y3 + 5));
+            line.setAttribute("x2", "75");
+            line.setAttribute("y2", String(y3 + 5));
+            line.setAttribute("stroke", "#000");
+            line.setAttribute("stroke-width", "2");
+            line.setAttribute("stroke-linecap", "round");
+            svg.appendChild(line);
+          });
+          svg.appendChild(body);
+          svg.appendChild(header);
+          preview.appendChild(label);
+          preview.appendChild(svg);
+          return preview;
+        }
+      };
+      registerWidget(new CalendarWidget());
     }
-    get name() {
-      return "CalendarWidget";
-    }
-    defaultSettings() {
-      return {};
-    }
-    currentDate = /* @__PURE__ */ new Date();
-    generateCalendar() {
-      const year = this.currentDate.getFullYear();
-      const month = this.currentDate.getMonth();
-      const monthName = new Intl.DateTimeFormat("en-US", {
-        month: "long",
-      }).format(this.currentDate);
-      const firstDay = new Date(year, month, 1).getDay();
-      const daysInMonth = new Date(year, month + 1, 0).getDate();
-      const container = document.createElement("div");
-      container.className = "calendar-widget";
-      const header = document.createElement("div");
-      header.className = "calendar-header";
-      const prevBtn = document.createElement("button");
-      prevBtn.className = "calendar-prev";
-      prevBtn.innerHTML = chevronLeftSvg;
-      prevBtn.addEventListener("click", () => {
-        this.currentDate.setMonth(this.currentDate.getMonth() - 1);
-        const parent = container.parentElement;
-        const newCalendar = this.generateCalendar();
-        parent?.replaceChild(newCalendar, container);
-      });
-      const title = document.createElement("h3");
-      title.textContent = `${monthName} ${year}`;
-      const nextBtn = document.createElement("button");
-      nextBtn.className = "calendar-next";
-      nextBtn.innerHTML = chevronLeftSvg;
-      nextBtn.addEventListener("click", () => {
-        this.currentDate.setMonth(this.currentDate.getMonth() + 1);
-        const parent = container.parentElement;
-        const newCalendar = this.generateCalendar();
-        parent?.replaceChild(newCalendar, container);
-      });
-      header.appendChild(prevBtn);
-      header.appendChild(title);
-      header.appendChild(nextBtn);
-      const weekdays = document.createElement("div");
-      weekdays.className = "calendar-weekdays";
-      ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].forEach((day) => {
-        const dayEl = document.createElement("div");
-        dayEl.className = "calendar-weekday";
-        dayEl.textContent = day;
-        weekdays.appendChild(dayEl);
-      });
-      const days = document.createElement("div");
-      days.className = "calendar-days";
-      for (let i5 = 0; i5 < firstDay; i5++) {
-        const empty = document.createElement("div");
-        empty.className = "calendar-day empty";
-        days.appendChild(empty);
-      }
-      const today = /* @__PURE__ */ new Date();
-      for (let day = 1; day <= daysInMonth; day++) {
-        const dayEl = document.createElement("div");
-        const isToday =
-          day === today.getDate() && month === today.getMonth() && year === today.getFullYear();
-        dayEl.className = isToday ? "calendar-day today" : "calendar-day";
-        dayEl.textContent = String(day);
-        days.appendChild(dayEl);
-      }
-      container.appendChild(header);
-      container.appendChild(weekdays);
-      container.appendChild(days);
-      return container;
-    }
-    async createContent() {
-      return this.generateCalendar();
-    }
-    async createPreview() {
-      const preview = document.createElement("div");
-      preview.className = "calendar-widget-preview";
-      preview.style.background = "none";
-      preview.style.display = "flex";
-      preview.style.flexDirection = "column";
-      preview.style.alignItems = "center";
-      preview.style.justifyContent = "center";
-      preview.style.gap = "12px";
-      preview.style.padding = "12px";
-      preview.style.minHeight = "auto";
-      const label = document.createElement("div");
-      label.style.fontSize = "2rem";
-      label.style.fontWeight = "700";
-      label.style.color = "var(--color-base05)";
-      label.style.marginBottom = "0.5rem";
-      label.textContent = "Calendar";
-      const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-      svg.setAttribute("viewBox", "0 0 100 120");
-      svg.setAttribute("width", "52");
-      svg.setAttribute("height", "65");
-      const body = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-      body.setAttribute("x", "8");
-      body.setAttribute("y", "28");
-      body.setAttribute("width", "84");
-      body.setAttribute("height", "84");
-      body.setAttribute("rx", "6");
-      body.setAttribute("fill", "#FFE55C");
-      body.setAttribute("stroke", "#000");
-      body.setAttribute("stroke-width", "3");
-      const header = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-      header.setAttribute("x", "8");
-      header.setAttribute("y", "8");
-      header.setAttribute("width", "84");
-      header.setAttribute("height", "24");
-      header.setAttribute("rx", "6");
-      header.setAttribute("fill", "#FF5C6D");
-      header.setAttribute("stroke", "#000");
-      header.setAttribute("stroke-width", "3");
-      const ringPositions = [20, 50, 80];
-      ringPositions.forEach((x3) => {
-        const ring = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-        ring.setAttribute("cx", String(x3));
-        ring.setAttribute("cy", "6");
-        ring.setAttribute("r", "6");
-        ring.setAttribute("fill", "#1E90FF");
-        ring.setAttribute("stroke", "#000");
-        ring.setAttribute("stroke-width", "2");
-        svg.appendChild(ring);
-      });
-      const checkboxes = [45, 65, 85];
-      checkboxes.forEach((y3) => {
-        const checkbox = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-        checkbox.setAttribute("x", "20");
-        checkbox.setAttribute("y", String(y3));
-        checkbox.setAttribute("width", "10");
-        checkbox.setAttribute("height", "10");
-        checkbox.setAttribute("rx", "2");
-        checkbox.setAttribute("fill", "#00D9FF");
-        checkbox.setAttribute("stroke", "#000");
-        checkbox.setAttribute("stroke-width", "2");
-        svg.appendChild(checkbox);
-      });
-      const lines = [45, 65, 85];
-      lines.forEach((y3) => {
-        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-        line.setAttribute("x1", "35");
-        line.setAttribute("y1", String(y3 + 5));
-        line.setAttribute("x2", "75");
-        line.setAttribute("y2", String(y3 + 5));
-        line.setAttribute("stroke", "#000");
-        line.setAttribute("stroke-width", "2");
-        line.setAttribute("stroke-linecap", "round");
-        svg.appendChild(line);
-      });
-      svg.appendChild(body);
-      svg.appendChild(header);
-      preview.appendChild(label);
-      preview.appendChild(svg);
-      return preview;
-    }
-  };
-  registerWidget(new CalendarWidget());
+  });
 
   // src/fixes-utils/migration.ts
   async function migrate() {
     await removeLegacyData();
     const settingsData = await browser.runtime.sendMessage({
-      action: "getRawSettingsData",
+      action: "getRawSettingsData"
     });
-    if (settingsData === void 0) {
+    if (!settingsData || typeof settingsData !== "object") {
       return;
     }
-    if (settingsData.backgroundBlurAmount === void 0) {
+    if (!("backgroundBlurAmount" in settingsData)) {
       return;
     }
     await migrateV5(settingsData);
@@ -15717,64 +13737,73 @@ ${code}`;
   }
   async function migrateWidgetSettingsData() {
     const delijnAppData = await browser.runtime.sendMessage({
-      action: "getDelijnAppData",
+      action: "getDelijnAppData"
     });
     const weatherAppData = await browser.runtime.sendMessage({
-      action: "getWeatherAppData",
+      action: "getWeatherAppData"
     });
     if (Object.keys(delijnAppData).length !== 0) {
       await setWidgetSetting("DelijnWidget.halte", {
         entiteit: delijnAppData.delijnAppData.entiteitnummer,
-        nummer: delijnAppData.delijnAppData.haltenummer,
+        nummer: delijnAppData.delijnAppData.haltenummer
       });
     }
     if (Object.keys(weatherAppData).length !== 0) {
       const weatherWidgets = widgets.filter((item) => item.name.toLowerCase().includes("weather"));
-      weatherWidgets.forEach(async (widget) => {
+      for (const widget of weatherWidgets) {
         await widget.setSetting("currentLocation", weatherAppData.weatherAppData.lastLocation);
-      });
+      }
     }
   }
   async function migrateImageV5(oldData) {
-    let data2;
+    let data = {
+      imageData: null,
+      link: "",
+      type: "default"
+    };
     switch (oldData.backgroundSelection) {
       case 0:
-        data2 = {
+        data = {
           imageData: null,
           link: "",
-          type: "default",
+          type: "default"
         };
         break;
       case 1:
-        data2 = {
+        data = {
           imageData: oldData.backgroundLink,
           link: oldData.backgroundLink,
-          type: "link",
+          type: "link"
         };
         break;
       case 2: {
         const imageData = await browser.runtime.sendMessage({
-          action: "getBackgroundImage",
+          action: "getBackgroundImage"
         });
-        data2 = {
+        data = {
           imageData: imageData.backgroundImage,
           link: oldData.backgroundLink,
-          type: "file",
+          type: "file"
         };
         break;
       }
       default:
+        data = {
+          imageData: null,
+          link: "",
+          type: "default"
+        };
         break;
     }
     await browser.runtime.sendMessage({
       action: "setImage",
       id: "backgroundImage",
-      data: data2,
+      data
     });
-    console.log("MIG V: \n Successfully migrated background image  with data:", data2);
+    console.log("MIG V: \n Successfully migrated background image  with data:", data);
   }
   async function migrateSettingsV5(oldData) {
-    let newWeatherOverlayType;
+    let newWeatherOverlayType = "snow";
     switch (oldData.weatherOverlaySelection) {
       case 0:
         newWeatherOverlayType = "snow";
@@ -15785,6 +13814,9 @@ ${code}`;
       case 2:
         newWeatherOverlayType = "snow";
         break;
+      default:
+        newWeatherOverlayType = "snow";
+        break;
     }
     console.log(oldData);
     console.log(oldData.customName);
@@ -15792,27 +13824,27 @@ ${code}`;
       username: oldData.customName,
       theme: oldData.theme,
       background: {
-        blur: oldData.backgroundBlurAmount,
+        blur: oldData.backgroundBlurAmount
       },
       weatherOverlay: {
         type: newWeatherOverlayType,
-        amount: oldData.weatherOverlayAmount,
+        amount: oldData.weatherOverlayAmount
       },
       tabLogo: oldData.enableSMPPLogo ? "smpp" : "sm",
       news: oldData.showNews,
       quicks: oldData.quicks,
-      performanceMode: oldData.enablePerfomanceMode,
+      performanceMode: oldData.enablePerfomanceMode
     };
     await browser.runtime.sendMessage({
       action: "setRawSettingsData",
-      data: newSettingsData,
+      data: newSettingsData
     });
     const settings = await browser.runtime.sendMessage({
-      action: "getSettingsData",
+      action: "getSettingsData"
     });
     await browser.runtime.sendMessage({
       action: "setSettingsData",
-      data: settings,
+      data: settings
     });
     console.log("MIG V: \n Succesfully migrated settings data to:", newSettingsData);
   }
@@ -15821,6 +13853,14 @@ ${code}`;
       await clearAllData();
     }
   }
+  var init_migration = __esm({
+    "src/fixes-utils/migration.ts"() {
+      "use strict";
+      init_utils();
+      init_widgets();
+      init_utils2();
+    }
+  });
 
   // src/fixes-utils/titlefix.ts
   function vak_prefix(page) {
@@ -15856,8 +13896,7 @@ ${code}`;
     }
   }
   function title_prefix() {
-    const subdomain =
-      location.host.split(".")[0].charAt(0).toUpperCase() + location.host.split(".")[0].slice(1);
+    const subdomain = location.host.split(".")[0].charAt(0).toUpperCase() + location.host.split(".")[0].slice(1);
     const url = location.pathname;
     const qstr = new URLSearchParams(location.search);
     const module = qstr.get("module");
@@ -15919,21 +13958,16 @@ ${code}`;
       title.innerText = `${prepend} - Smartschool`;
     }
   }
+  var init_titlefix = __esm({
+    "src/fixes-utils/titlefix.ts"() {
+      "use strict";
+    }
+  });
 
   // src/main-features/main.ts
-  var originalUsername;
-  var themes;
-  var onHomePage;
-  var onLoginPage;
-  var isGOSchool;
-  var isFirefox;
-  var originalPfpUrl;
-  var keybinds;
-  var liteMode;
   function updateDiscordPopup(discordButtonEnabled) {
     if (discordButtonEnabled) {
-      const discordButtonContainer =
-        document.getElementById("discord-link-container") || document.createElement("div");
+      const discordButtonContainer = document.getElementById("discord-link-container") || document.createElement("div");
       discordButtonContainer.id = "discord-link-container";
       discordButtonContainer.innerHTML = discordSvg;
       document.body.appendChild(discordButtonContainer);
@@ -15959,7 +13993,9 @@ ${code}`;
       if (event.key === "Enter") {
         event.preventDefault();
         setTimeout(() => {
-          const firstCourse = document.querySelector(".course-list.js-courses-list li a");
+          const firstCourse = document.querySelector(
+            ".course-list.js-courses-list li a"
+          );
           if (firstCourse) {
             firstCourse.click();
           }
@@ -15973,15 +14009,15 @@ ${code}`;
     toastContainer.classList.add("toast-container");
     document.body.appendChild(toastContainer);
   }
-  function updateTopNavIcons(data2) {
+  function updateTopNavIcons(data) {
     const notifsButton = document.querySelector(".js-btn-notifs");
-    if (notifsButton && data2.notifications) {
+    if (notifsButton && data.notifications) {
       const textSpan = notifsButton.querySelector("span");
       notifsButton.innerHTML = notfisSvg;
       if (textSpan) {
         notifsButton.appendChild(textSpan);
       }
-    } else if (notifsButton && !data2.notifications) {
+    } else if (notifsButton && !data.notifications) {
       const textSpan = notifsButton.querySelector("span");
       notifsButton.innerHTML = "Meldingen";
       if (textSpan) {
@@ -15989,19 +14025,19 @@ ${code}`;
       }
     }
     const startButton = document.querySelector(".js-btn-home");
-    if (startButton && data2.home) {
+    if (startButton && data.home) {
       startButton.innerHTML = homeiconSvg;
-    } else if (startButton && !data2.home) {
+    } else if (startButton && !data.home) {
       startButton.innerHTML = "Start";
     }
     const messageButton = document.querySelector(`a.topnav__btn[title="Berichten"]`);
-    if (messageButton && data2.mail) {
+    if (messageButton && data.mail) {
       const textSpan = messageButton.querySelector("span");
       messageButton.innerHTML = messageSvg;
       if (textSpan) {
         messageButton.appendChild(textSpan);
       }
-    } else if (messageButton && !data2.mail) {
+    } else if (messageButton && !data.mail) {
       const textSpan = messageButton.querySelector("span");
       messageButton.innerHTML = "Berichten";
       if (textSpan) {
@@ -16009,9 +14045,9 @@ ${code}`;
       }
     }
     const settingButton = document.getElementById("quickSettingsButton");
-    if (settingButton && data2.settings) {
+    if (settingButton && data.settings) {
       settingButton.innerHTML = settingsIconSvg;
-    } else if (settingButton && !data2.settings) {
+    } else if (settingButton && !data.settings) {
       settingButton.innerHTML = "Settings";
     }
   }
@@ -16031,26 +14067,26 @@ ${code}`;
         break;
     }
   }
-  function applyTopNav(data2) {
+  function applyTopNav(data) {
     const topNav = document.querySelector(".topnav");
     if (!topNav) {
       return;
     }
-    updateTopNavIcons(data2.icons);
-    updateTopButtons(data2.buttons);
+    updateTopNavIcons(data.icons);
+    updateTopButtons(data.buttons);
     const linksButton = document.querySelector("[data-links]");
     const coursesButton = document.querySelector("[data-courses]");
     if (linksButton && coursesButton) {
-      data2.switchCoursesAndLinks
-        ? topNav.insertBefore(linksButton, coursesButton)
-        : topNav.insertBefore(coursesButton, linksButton);
+      data.switchCoursesAndLinks ? topNav.insertBefore(linksButton, coursesButton) : topNav.insertBefore(coursesButton, linksButton);
     }
   }
   async function createStaticGlobals() {
     themes = await browser.runtime.sendMessage({
-      action: "getThemes",
+      action: "getThemes"
     });
-    const originalUsernameElement = document.querySelector(".js-btn-profile .hlp-vert-box span");
+    const originalUsernameElement = document.querySelector(
+      ".js-btn-profile .hlp-vert-box span"
+    );
     originalUsername = originalUsernameElement?.innerText || "Mr Unknown";
     isGOSchool = document.body.classList.contains("go");
     isFirefox = typeof navigator.userAgent === "string" && /firefox/i.test(navigator.userAgent);
@@ -16062,8 +14098,9 @@ ${code}`;
     }
     onHomePage = document.getElementById("container") != null;
     onLoginPage = document.querySelector(".login-app") != null;
-    var _quicks = await quickLoad();
+    const _quicks = await quickLoad();
     liteMode = browser.runtime.getManifest().name.includes("Lite");
+    setWidgetLiteMode(liteMode);
   }
   async function applyAppearance(appearance) {
     const style = document.documentElement.style;
@@ -16088,9 +14125,7 @@ ${code}`;
       updateSplashText(other.splashText);
     }
     keybinds = other.keybinds;
-    other.performanceMode
-      ? document.body.classList.remove("enableAnimations")
-      : document.body.classList.add("enableAnimations");
+    other.performanceMode ? document.body.classList.remove("enableAnimations") : document.body.classList.add("enableAnimations");
     if (onHomePage) {
       updateDiscordPopup(other.discordButton);
     }
@@ -16099,7 +14134,7 @@ ${code}`;
     const style = document.documentElement.style;
     style.setProperty(
       "--profile-picture",
-      `url(${getPfpLink(profile.username || originalUsername)})`,
+      `url(${getPfpLink(profile.username || originalUsername)})`
     );
     applyUsername(profile.username);
     applyProfilePicture(profile);
@@ -16121,22 +14156,22 @@ ${code}`;
     }
   }
   async function apply() {
-    const data2 = await browser.runtime.sendMessage({
-      action: "getSettingsData",
+    const data = await browser.runtime.sendMessage({
+      action: "getSettingsData"
     });
-    console.log("Applying with settings data: \n", data2);
-    updateCurrentThemeName(data2.appearance.theme);
+    console.log("Applying with settings data: \n", data);
+    updateCurrentThemeName(data.appearance.theme);
     await reloadDMenuConfig();
     if (onHomePage) {
       setEditMode(false);
     }
-    await applyAppearance(data2.appearance);
+    await applyAppearance(data.appearance);
     if (!liteMode) {
-      applyWeatherEffects(data2.appearance.weatherOverlay);
+      applyWeatherEffects(data.appearance.weatherOverlay);
     }
-    applyProfile(data2.profile);
-    applyTopNav(data2.topNav);
-    applyOther(data2.other);
+    applyProfile(data.profile);
+    applyTopNav(data.topNav);
+    applyOther(data.other);
   }
   function createTopButtons() {
     const topNav = document.querySelector("nav.topnav");
@@ -16165,17 +14200,16 @@ ${code}`;
       topNav.insertBefore(createWidgetEditModeButton(), pushRight);
     }
     topNav.insertBefore(createQuickMenuButton(), pushRight);
-    document
-      .getElementById("profileMenu")
-      ?.querySelector(".topnav__menu")
-      ?.appendChild(createProfileSettingButton());
+    document.getElementById("profileMenu")?.querySelector(".topnav__menu")?.appendChild(createProfileSettingButton());
   }
   function createProfileSettingButton() {
     const button = document.createElement("a");
     button.addEventListener("click", (e5) => {
       openSettingsWindow(e5);
       const topNavProfileMenu = document.getElementById("profileMenu");
-      const settingsPageProfileButton = document.querySelector(".profile-settings-button");
+      const settingsPageProfileButton = document.querySelector(
+        ".profile-settings-button"
+      );
       if (!(topNavProfileMenu && settingsPageProfileButton)) {
         return;
       }
@@ -16193,10 +14227,10 @@ ${code}`;
     button.appendChild(textContent);
     return button;
   }
-  function updateTopButtons(data2) {
+  function updateTopButtons(data) {
     const GOButton = document.querySelector(`[data-go=""]`);
     if (GOButton) {
-      if (data2.GO) {
+      if (data.GO) {
         GOButton.style = "display:flex";
       } else {
         GOButton.style = "display:none";
@@ -16204,7 +14238,7 @@ ${code}`;
     }
     const searchButton = document.querySelector(".topnav__btn--icon--search");
     if (searchButton?.parentElement) {
-      if (data2.search) {
+      if (data.search) {
         searchButton.parentElement.style = "display:flex";
       } else {
         searchButton.parentElement.style = "display:none";
@@ -16212,7 +14246,7 @@ ${code}`;
     }
     const GC = document.getElementById("global_chat_button");
     if (GC) {
-      if (data2.GC) {
+      if (data.GC) {
         GC.style = "display:flex !important";
       } else {
         GC.style = "display:none !important";
@@ -16220,7 +14254,7 @@ ${code}`;
     }
     const quickButton = document.getElementById("quick-menu-button");
     if (quickButton) {
-      if (data2.quickMenu) {
+      if (data.quickMenu) {
         quickButton.style = "display:flex !important";
       } else {
         quickButton.style = "display:none !important";
@@ -16230,12 +14264,12 @@ ${code}`;
   async function main() {
     if (document.body.classList.contains("smpp")) {
       console.error("SMPP is 2x geladen");
-      alert("SMPP is 2x geladen");
     }
     document.body.classList.add("smpp");
     await migrate();
     applyFixes();
     await createStaticGlobals();
+    await registerPlantWidget();
     await createWidgetSystem();
     if (document.querySelector("nav.topnav")) {
       await createSettingsWindow();
@@ -16243,5 +14277,56 @@ ${code}`;
     }
     await apply();
   }
-  main();
+  var originalUsername, themes, onHomePage, onLoginPage, isGOSchool, isFirefox, originalPfpUrl, keybinds, liteMode;
+  var init_main = __esm({
+    "src/main-features/main.ts"() {
+      "use strict";
+      init_svgs();
+      init_login();
+      init_scraper();
+      init_results();
+      init_windows();
+      init_images();
+      init_profile();
+      init_keybinds();
+      init_background_image();
+      init_weather_effects();
+      init_widgets();
+      init_games();
+      init_breakout();
+      init_flappy();
+      init_snake();
+      init_pong();
+      init_tetris();
+      init_tutorial_widget();
+      init_assignments();
+      init_delijn();
+      init_planner();
+      init_weather();
+      init_clock();
+      init_calendar();
+      init_utils();
+      init_migration();
+      init_titlefix();
+      init_utils2();
+      init_plant();
+      init_globalchat();
+      init_quick();
+      init_main_settings();
+      init_quick_settings();
+      init_login();
+      init_results();
+      init_svgs();
+      init_dmenu();
+      init_background_image();
+      init_themes();
+      init_weather_effects();
+      init_profile();
+      init_main_settings();
+      main();
+    }
+  });
+
+  // src/index.ts
+  init_main();
 })();

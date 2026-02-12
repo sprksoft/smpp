@@ -2,37 +2,45 @@
 
 import { browser } from "../common/utils.js";
 import { plantThePlantSvg, waterPlantSvg } from "../fixes-utils/svgs.js";
-import { registerWidget, WidgetBase } from "./widgets.js";
 
 const plantVersion = 2;
-class PlantWidget extends WidgetBase {
-  async createContent() {
-    let plantDiv = document.createElement("div");
-    plantDiv.id = "plantWidget";
-    plantDiv = await createPlantWidget(plantDiv);
-    return plantDiv;
+let isPlantWidgetRegistered = false;
+
+export async function registerPlantWidget() {
+  if (isPlantWidgetRegistered) {
+    return;
   }
-  async createPreview() {
-    const plantPreviewDiv = document.createElement("div");
-    plantPreviewDiv.id = "plantPreviewWidget";
-    const plantData = await browser.runtime.sendMessage({
-      action: "getPlantAppData",
-    });
-    const plantTitle = document.createElement("div");
-    plantTitle.id = "plant-preview-title";
-    plantTitle.innerText = "Plant";
-    plantPreviewDiv.appendChild(plantTitle);
-    const plantPreviewImg = document.createElement("div");
-    if (plantData.age == null || plantData.age === 0) {
-      plantPreviewImg.appendChild(createPlantThePlantVisual());
-    } else {
-      plantPreviewImg.innerHTML = getPlantHTML(plantData);
+  const { registerWidget, WidgetBase } = await import("./widgets.js");
+  class PlantWidget extends WidgetBase {
+    async createContent() {
+      let plantDiv = document.createElement("div");
+      plantDiv.id = "plantWidget";
+      plantDiv = await createPlantWidget(plantDiv);
+      return plantDiv;
     }
-    plantPreviewDiv.appendChild(plantPreviewImg);
-    return plantPreviewDiv;
+    async createPreview() {
+      const plantPreviewDiv = document.createElement("div");
+      plantPreviewDiv.id = "plantPreviewWidget";
+      const plantData = await browser.runtime.sendMessage({
+        action: "getPlantAppData",
+      });
+      const plantTitle = document.createElement("div");
+      plantTitle.id = "plant-preview-title";
+      plantTitle.innerText = "Plant";
+      plantPreviewDiv.appendChild(plantTitle);
+      const plantPreviewImg = document.createElement("div");
+      if (plantData.age == null || plantData.age === 0) {
+        plantPreviewImg.appendChild(createPlantThePlantVisual());
+      } else {
+        plantPreviewImg.innerHTML = getPlantHTML(plantData);
+      }
+      plantPreviewDiv.appendChild(plantPreviewImg);
+      return plantPreviewDiv;
+    }
   }
+  registerWidget(new PlantWidget());
+  isPlantWidgetRegistered = true;
 }
-registerWidget(new PlantWidget());
 
 async function createPlantWidget(plantDiv) {
   if (window.localStorage.getItem("current_plant_conditions")) {
