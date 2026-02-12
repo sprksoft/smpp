@@ -15,16 +15,16 @@ import { assignmentsSvg } from "../fixes-utils/svgs.js";
 // THANK YOU LDEVVVV 🫂🫂🫂
 
 class TakenWidget extends WidgetBase {
-  defaultSettings() {
+  override defaultSettings() {
     return {
       maxAssignments: 5,
     };
   }
-  onSettingsChange() {
+  override onSettingsChange() {
     this.element.appendChild(this.createContent());
   }
-  createContent() {
-    const foresight = 28;
+  override createContent() {
+    const foresight = 28; // dagen in de toekomst dat het zoekt voor taken
     let userId = getUserId();
 
     if (DEBUG) {
@@ -96,6 +96,7 @@ class TakenWidget extends WidgetBase {
           TasksContainer.appendChild(noDataContainer);
           TasksContainer.appendChild(noDataContainerTextContainer);
         }
+        // sort based on day
         data.sort(
           (a, b) =>
             new Date(a.period.dateTimeFrom) - new Date(b.period.dateTimeFrom)
@@ -156,10 +157,12 @@ class TakenWidget extends WidgetBase {
           wrapperDiv.classList.add(
             `c-${element.color.split("-")[0]}-combo--${
               element.color.split("-")[1]
-            }`
+            }` // LET HIM COOK
           );
 
+          // make the litle icon cubes
           if (element.plannedElementType === "planned-to-dos") {
+            // dont try to understand, i dont either
             fetch(
               `https://${getSchoolName()}.smartschool.be/smsc/svg/${
                 element.icon
@@ -205,7 +208,7 @@ class TakenWidget extends WidgetBase {
           ).toLocaleTimeString("nl-NL", {
             hour: "2-digit",
             minute: "2-digit",
-          })} • ${element.courses?.[0]?.name || "TODO "}`;
+          })} • ${element.courses?.[0]?.name || "TODO "}`; // durf dit nog eens aan te passen en ik ga je pesten op het internet
           metadataSpan.classList.add("task-description");
 
           detailsDiv.append(titleSpan, metadataSpan);
@@ -229,8 +232,6 @@ class TakenWidget extends WidgetBase {
             window.location.href = mainPlannerUrl;
           });
 
-          rowDiv.style.cursor = "pointer";
-
           TasksContainer.append(rowDiv);
         });
 
@@ -241,7 +242,7 @@ class TakenWidget extends WidgetBase {
     return initTaskList();
   }
 
-  async createPreview() {
+  override async createPreview() {
     const previewElement = document.createElement("div");
     const previewElementTitle = document.createElement("div");
     previewElementTitle.classList.add("assignments-preview-title");
@@ -262,58 +263,4 @@ class TakenWidget extends WidgetBase {
   }
 }
 
-async function markAsFinished(as_ID, name) {
-  const schoolName = getSchoolName();
-  const userId = getUserId();
-
-  if (!schoolName || !userId) return false;
-  let as_type = name ? "assignment" : "to-do";
-  const url = `https://${schoolName}.smartschool.be/planner/api/v1/planned-${as_type}s/${userId}/${as_ID}/resolve`;
-
-  try {
-    const response = await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({}),
-    });
-
-    if (!response.ok) throw new Error("Resolve failed");
-
-    const assignmentElement = document.querySelector(`[data-id="${as_ID}"]`);
-    if (assignmentElement) {
-      const parentContainer = assignmentElement.parentElement;
-      let dayHeader = assignmentElement.previousElementSibling;
-      while (dayHeader && (!dayHeader.classList.contains("date-header-assignments") || dayHeader.tagName !== "H3")) {
-        dayHeader = dayHeader.previousElementSibling;
-      }
-
-      assignmentElement.remove();
-
-      if (dayHeader) {
-        let hasMore = false;
-        let next = dayHeader.nextElementSibling;
-        while (next && !next.classList.contains("date-header-assignments")) {
-          if (next.classList.contains("assignment__item")) {
-            hasMore = true;
-            break;
-          }
-          next = next.nextElementSibling;
-        }
-        if (!hasMore) dayHeader.remove();
-      }
-
-      if (parentContainer.querySelectorAll(".assignment__item").length === 0) {
-        const doneMessage = document.createElement("p");
-        doneMessage.classList.add("as_all_done");
-        doneMessage.innerText = randomChance(1/5) ? "You're all done! You deserve a break 💜" : "You're all done!";
-        parentContainer.appendChild(doneMessage);
-      }
-    }
-    return true;
-  } catch (error) {
-    console.error("Error marking finished:", error);
-    return false;
-  }
-}
-
-registerWidget(new TakenWidget());
+registerWidget(new TakenWidget()); // so easy
