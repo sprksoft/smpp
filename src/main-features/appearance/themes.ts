@@ -9,6 +9,7 @@ extend([lchPlugin, mixPlugin]);
 import {
   browser,
   convertLinkToBase64,
+  delay,
   getExtensionImage,
   isValidHexColor,
 } from "../../common/utils.js";
@@ -18,6 +19,7 @@ import {
   copySvg,
   doneSvg,
   editIconSvg,
+  errorSvg,
   folderSvg,
   heartSvg,
   loadingSpinnerSvg,
@@ -36,7 +38,7 @@ import { widgetSystemNotifyThemeChange } from "../../widgets/widgets.js";
 import { recreateGlobalChat } from "../globalchat.js";
 import { isFirefox } from "../main.js";
 import { getImageURL, ImageSelector, type SMPPImage } from "../modules/images.js";
-import { BaseWindow, Dialog } from "../modules/windows.js";
+import { Dialog } from "../modules/windows.js";
 import { openSettingsWindow, type Settings, settingsWindow } from "../settings/main-settings.js";
 import { loadQuickSettings } from "../settings/quick-settings.js";
 import { setBackground } from "./background-image.js";
@@ -224,11 +226,7 @@ export class ColorPicker {
   }
 
   async updateColorPicker() {
-    const maxSatColor = colord({
-      h: this.hueCursor.xPos * 3.6,
-      s: 100,
-      v: 100,
-    });
+    const maxSatColor = colord({ h: this.hueCursor.xPos * 3.6, s: 100, v: 100 });
     this.element.style.setProperty("--max-sat", maxSatColor.toHex());
     this.element.style.setProperty("--current-color", this.currentColor.toHex());
     const hexInput = this.element.querySelector("input");
@@ -400,11 +398,11 @@ export class ThemeTile extends Tile {
     const theme = await getTheme(this.name);
     this.titleElement.innerText = theme.displayName;
     if (this.titleElement.innerText.length > 22) {
-      this.titleElement.innerText = theme.displayName.slice(0, 22) + "…";
+      this.titleElement.innerText = `${theme.displayName.slice(0, 22)}…`;
     }
   }
 
-  async createContent() {
+  override async createContent() {
     this.element.appendChild(this.createImageContainer());
     this.element.appendChild(this.getBottomContainer());
     await this.updateTitle();
@@ -467,7 +465,7 @@ export class ThemeTile extends Tile {
     return imageContainer;
   }
 
-  updateSelection() {
+  override updateSelection() {
     if (currentThemeName === this.name) {
       this.element.classList.add("is-selected");
     } else {
@@ -475,7 +473,7 @@ export class ThemeTile extends Tile {
     }
   }
 
-  async updateImage(currentTheme: string, forceReload = false) {
+  override async updateImage(currentTheme: string, forceReload = false) {
     if (this.name === currentTheme || forceReload) {
       const imageURL = await getImageURL(
         this.name,
@@ -517,7 +515,7 @@ export class ThemeTile extends Tile {
     }
   }
 
-  async onClick(e: Event) {
+  override async onClick(e: Event) {
     if (e.target instanceof HTMLElement) {
       const target = e.target;
 
@@ -657,24 +655,6 @@ export class ThemeTile extends Tile {
     let shareUrl: string | null = null; // Store the URL instead
 
     shareDialog.renderContent = async () => {
-      const element = document.createElement("div");
-      element.classList.add("share-dialog-content");
-      const title = document.createElement("h1");
-      title.innerText = (await getTheme(this.name)).displayName;
-      const subTitle = document.createElement("h2");
-      subTitle.innerText = "Theme sharing";
-      linkOutput.innerText = "Loading...";
-      const copyContainer = document.createElement("div");
-      copyContainer.classList.add("copy-container");
-
-      const tile = document.createElement("div");
-      tile.classList.add("sharing-tile");
-
-      const theme = await getTheme(this.name);
-      Object.keys(theme.cssProperties).forEach((key) => {
-        element.style.setProperty(`${key}-local`, theme.cssProperties[key] as string);
-      });
-
       function getEditableValues(cssProperties: Theme["cssProperties"]) {
         const nonEditableValues = [
           "--color-homepage-sidebars-bg",
@@ -706,6 +686,25 @@ export class ThemeTile extends Tile {
         return colorPreviews;
       }
 
+      const element = document.createElement("div");
+      element.classList.add("share-dialog-content");
+      const title = document.createElement("h1");
+      title.innerText = (await getTheme(this.name)).displayName;
+      const subTitle = document.createElement("h2");
+      subTitle.innerText = "Share theme:";
+      linkOutput.innerText = "Loading...";
+      linkOutput.style.pointerEvents = "none";
+      const copyContainer = document.createElement("div");
+      copyContainer.classList.add("copy-container");
+
+      const tile = document.createElement("div");
+      tile.classList.add("sharing-tile");
+
+      const theme = await getTheme(this.name);
+      Object.keys(theme.cssProperties).forEach((key) => {
+        element.style.setProperty(`${key}-local`, theme.cssProperties[key] as string);
+      });
+
       const imageContainer = document.createElement("div");
       imageContainer.classList.add("sharing-image-container");
 
@@ -734,9 +733,11 @@ export class ThemeTile extends Tile {
         title.style.fontSize = "1.2rem";
       } else {
         title.style.fontSize = "1.2rem";
-        title.innerText = title.innerText.slice(0, 30) + "…";
+        title.innerText = `${title.innerText.slice(0, 30)}…`;
       }
+      console.log(imageContainer);
       imageContainer.appendChild(title);
+      console.log(imageContainer);
       tile.appendChild(imageContainer);
 
       const colorPreviewsContainer = document.createElement("div");
@@ -769,10 +770,16 @@ export class ThemeTile extends Tile {
 
     if (resp.error) {
       console.error("Failed to share theme", resp.error);
+      linkOutput.innerText = "Failed to share theme";
+      shareDialog.element.classList.add("error-theme-sharing");
+      copyToClipboardButton.innerHTML = errorSvg;
+      copyToClipboardButton.style.pointerEvents = "none";
       new Toast("Failed to share theme", "error").render();
     } else {
       shareUrl = resp.shareUrl; // Update the URL variable
+      console.log(linkOutput);
       linkOutput.innerText = `${(resp.shareUrl as string).slice(0, 32)}…`;
+      linkOutput.style.pointerEvents = "all";
       linkOutput.addEventListener("click", copyToClipboard);
       copyToClipboardButton.innerHTML = copySvg;
       new Toast("Theme uploaded", "succes").render();
@@ -807,7 +814,7 @@ export class ThemeFolder extends Tile {
     this.category = category;
   }
 
-  async createContent() {
+  override async createContent() {
     const firstThemeInCategory = (await browser.runtime.sendMessage({
       action: "getFirstThemeInCategory",
       category: this.category,
@@ -908,7 +915,7 @@ class AddCustomTheme extends Tile {
     return bottomContainer;
   }
 
-  async onClick() {
+  override async onClick() {
     const newTheme = await browser.runtime.sendMessage({
       action: "saveCustomTheme",
       data: await getTheme("defaultCustom"),
@@ -921,7 +928,7 @@ class AddCustomTheme extends Tile {
     startCustomThemeCreator(await getTheme("defaultCustom"), newTheme);
   }
 
-  async createContent() {
+  override async createContent() {
     this.element.classList.add("use-default-colors");
     this.element.classList.add("create-theme-button");
     this.element.appendChild(this.createImageContainer());
@@ -950,7 +957,7 @@ class noThemes extends Tile {
 
     return bottomContainer;
   }
-  async createContent() {
+  override async createContent() {
     this.element.classList.add("use-default-colors");
     this.element.classList.add("no-themes");
     this.element.appendChild(this.createImageContainer());
@@ -1041,13 +1048,9 @@ export class ThemeSelector {
     visibleThemeTiles.forEach((element) => {
       visibleThemeTilesArray.push(element as HTMLDivElement);
     });
-    const visibleThemeNames = visibleThemeTilesArray
-      .map((element) => {
-        return element.dataset.name;
-      })
-      .filter((name): name is string => {
-        return Boolean(name);
-      });
+    const visibleThemeNames = visibleThemeTilesArray.map((element) => {
+      return element.dataset.name;
+    }) as string[];
 
     const correctThemeNames = Object.keys(themes).map((themeName) => {
       return themeName;
@@ -1088,7 +1091,8 @@ export class ThemeSelector {
       visibleThemeNames.forEach(async (themeName) => {
         if (!correctThemeNames.includes(themeName)) {
           const element = visibleThemeTilesArray.find((element) => {
-            return element.dataset.name === themeName;
+            if (element.dataset.name === themeName) return element;
+            return false;
           });
           if (!element) return;
           if (element.classList.contains("create-theme-button")) return;
@@ -1096,7 +1100,7 @@ export class ThemeSelector {
           this.currentTiles = this.currentTiles.filter((tile) => {
             if (tile instanceof AddCustomTheme) return true;
             if (tile instanceof ThemeTile) return tile.name !== themeName;
-            return true;
+            return false;
           }) as Tiles;
         }
         this.updateContentHeight();
@@ -1141,14 +1145,27 @@ export class ThemeSelector {
   }
 
   async renderTiles(tiles: Tiles) {
-    const renderedElements = await Promise.all(tiles.map((tile) => tile.render()));
+    function getTileDelay(number: number) {
+      if (number < 8) {
+        return 20;
+      } else if (number < 12) {
+        return 15;
+      } else {
+        return 7;
+      }
+    }
+    this.content.style.height = `${this.calculateContentHeight(tiles.length)}px`;
+    const delayAmount = getTileDelay(tiles.length);
+    for (let i = 1; i <= tiles.length; i++) {
+      const tile = tiles[i - 1];
+      if (!tile) break;
+      await tile.render();
+      await tile.updateImage(currentThemeName, true);
 
-    const fragment = document.createDocumentFragment();
-    renderedElements.forEach((element) => {
-      fragment.appendChild(element);
-    });
+      this.content.appendChild(tile.element);
 
-    this.content.appendChild(fragment);
+      if (document.body.classList.contains("enableAnimations")) await delay(delayAmount);
+    }
   }
 
   createContentContainer() {
@@ -1156,12 +1173,11 @@ export class ThemeSelector {
     this.content.classList.add("theme-tiles");
   }
 
-  calculateContentHeight(tiles: Tiles) {
-    const TILE_HEIGHT = parseFloat(tiles[0]?.element.style.height || "0");
-    const TILE_WIDTH = parseFloat(tiles[0]?.element.style.width || "0"); // Was .height, should be .width
+  calculateContentHeight(tileAmount: number) {
+    const TILE_HEIGHT = 104;
+    const TILE_WIDTH = 168;
     const GAP = 6;
     const totalWidth = this.contentWidth;
-    const tileAmount = tiles.length;
     const tilesPerRow = Math.floor((totalWidth + GAP) / (TILE_WIDTH + GAP));
     const numRows = Math.ceil(tileAmount / tilesPerRow);
     const totalHeight = numRows * TILE_HEIGHT + (numRows - 1) * GAP;
@@ -1189,7 +1205,7 @@ export class ThemeSelector {
   }
 
   updateContentHeight() {
-    this.content.style.height = `${String(this.calculateContentHeight(this.currentTiles))}px`;
+    this.content.style.height = `${String(this.calculateContentHeight(this.currentTiles.length))}px`;
   }
 
   createThemeTile(name: string, isFavorite: boolean, isCustom: boolean) {
@@ -1250,7 +1266,6 @@ export class ThemeSelector {
     }
 
     await this.renderTiles(this.currentTiles);
-    await this.updateImages(true);
   }
 
   async changeCategory(category: string) {
@@ -1453,6 +1468,7 @@ export class CustomThemeCreator extends Dialog {
     ) {
       const base00 = colord(this.theme.cssProperties["--color-base00"]);
       let darkenColor: Colord;
+      const splashColor: Colord = colord(this.theme.cssProperties["--color-text"]);
       if (base00.brightness() > 0.5) {
         darkenColor = colord("rgba(228, 228, 228, 0.4)");
         darkenColor = darkenColor.mix(this.theme.cssProperties["--color-base02"], 0.5).alpha(0.4);
@@ -1460,7 +1476,6 @@ export class CustomThemeCreator extends Dialog {
         darkenColor = colord("rgba(0,0,0,0.2)");
         darkenColor = darkenColor.mix(this.theme.cssProperties["--color-base00"], 0.5).alpha(0.3);
       }
-      const splashColor = colord(this.theme.cssProperties["--color-text"]);
       this.theme.cssProperties["--color-splashtext"] = splashColor.toHex();
       this.theme.cssProperties["--darken-background"] = darkenColor.toHex();
       this.theme.cssProperties["--color-homepage-sidebars-bg"] = darkenColor.alpha(0.1).toHex();
@@ -1809,7 +1824,7 @@ export class CustomThemeCreator extends Dialog {
     return this.imagePreviewContainer;
   }
 
-  async renderContent() {
+  override async renderContent() {
     this.content.classList.add("custom-theme-maker");
 
     this.content.appendChild(this.createDisplayNameInput());
@@ -1820,11 +1835,14 @@ export class CustomThemeCreator extends Dialog {
     this.content.appendChild(this.createColorPickers());
 
     this.content.appendChild(this.createRemoveButton());
+    this.element.appendChild(this.content);
+
+    return this.element;
+  }
+
+  override async onCreate(): Promise<void> {
     await this.updateBackgroundImagePreview();
     this.load(this.theme);
-
-    this.element.appendChild(this.content);
-    return this.element;
   }
 
   async load(theme: Theme) {
@@ -1833,7 +1851,7 @@ export class CustomThemeCreator extends Dialog {
     await this.backgroundImageInput.loadImageData();
   }
 
-  onClosed(realUserIntent: boolean): void {
+  override onClosed(realUserIntent: boolean): void {
     document.body.removeChild(this.wrapper);
     if (!realUserIntent) return;
     settingsWindow.themeSelector.updateSelectorContent();
@@ -1850,6 +1868,6 @@ export class CustomThemeCreator extends Dialog {
     await updateTheme("default");
     await settingsWindow.loadPage(true);
     await loadQuickSettings();
-    this.hide();
+    this.hide(true);
   }
 }

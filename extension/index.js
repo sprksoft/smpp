@@ -2537,6 +2537,7 @@ Is it scaring you off?`,
         void this.element.offsetWidth;
       });
       closeBtn.addEventListener("click", () => this.hide(true));
+      this.onCreate?.();
     }
     // Override this in subclass
     async renderContent() {
@@ -2564,7 +2565,7 @@ Is it scaring you off?`,
         }
         const windowWrapper = clickedElement.closest(".window-wrapper");
         const isInsideDialogWrapper = windowWrapper?.querySelector(".base-dialog") !== null;
-        const isOwnWrapper = clickedElement == this.wrapper;
+        const isOwnWrapper = clickedElement === this.wrapper;
         if (isInsideDialogWrapper && !isOwnWrapper) {
           return;
         }
@@ -2640,6 +2641,7 @@ Is it scaring you off?`,
       this.wrapper.appendChild(this.element);
       document.body.appendChild(this.wrapper);
       closeBtn.addEventListener("click", () => this.hide(true));
+      this.onCreate?.();
     }
   };
 
@@ -5566,7 +5568,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       text.classList.add("compact-theme-option-text");
       text.innerText = this.currentTheme.displayName;
       if (text.innerText.length > 22) {
-        text.innerText = this.currentTheme.displayName.slice(0, 22) + "\u2026";
+        text.innerText = `${this.currentTheme.displayName.slice(0, 22)}\u2026`;
       }
       return text;
     }
@@ -6097,11 +6099,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       await this.updateColorPicker();
     }
     async updateColorPicker() {
-      const maxSatColor = w({
-        h: this.hueCursor.xPos * 3.6,
-        s: 100,
-        v: 100
-      });
+      const maxSatColor = w({ h: this.hueCursor.xPos * 3.6, s: 100, v: 100 });
       this.element.style.setProperty("--max-sat", maxSatColor.toHex());
       this.element.style.setProperty("--current-color", this.currentColor.toHex());
       const hexInput = this.element.querySelector("input");
@@ -6249,7 +6247,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       const theme = await getTheme(this.name);
       this.titleElement.innerText = theme.displayName;
       if (this.titleElement.innerText.length > 22) {
-        this.titleElement.innerText = theme.displayName.slice(0, 22) + "\u2026";
+        this.titleElement.innerText = `${theme.displayName.slice(0, 22)}\u2026`;
       }
     }
     async createContent() {
@@ -6468,21 +6466,6 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       copyToClipboardButton.innerHTML = loadingSpinnerSvg;
       let shareUrl = null;
       shareDialog.renderContent = async () => {
-        const element = document.createElement("div");
-        element.classList.add("share-dialog-content");
-        const title = document.createElement("h1");
-        title.innerText = (await getTheme(this.name)).displayName;
-        const subTitle = document.createElement("h2");
-        subTitle.innerText = "Theme sharing";
-        linkOutput.innerText = "Loading...";
-        const copyContainer = document.createElement("div");
-        copyContainer.classList.add("copy-container");
-        const tile = document.createElement("div");
-        tile.classList.add("sharing-tile");
-        const theme = await getTheme(this.name);
-        Object.keys(theme.cssProperties).forEach((key) => {
-          element.style.setProperty(`${key}-local`, theme.cssProperties[key]);
-        });
         function getEditableValues(cssProperties) {
           const nonEditableValues = [
             "--color-homepage-sidebars-bg",
@@ -6510,6 +6493,22 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           });
           return colorPreviews;
         }
+        const element = document.createElement("div");
+        element.classList.add("share-dialog-content");
+        const title = document.createElement("h1");
+        title.innerText = (await getTheme(this.name)).displayName;
+        const subTitle = document.createElement("h2");
+        subTitle.innerText = "Share theme:";
+        linkOutput.innerText = "Loading...";
+        linkOutput.style.pointerEvents = "none";
+        const copyContainer = document.createElement("div");
+        copyContainer.classList.add("copy-container");
+        const tile = document.createElement("div");
+        tile.classList.add("sharing-tile");
+        const theme = await getTheme(this.name);
+        Object.keys(theme.cssProperties).forEach((key) => {
+          element.style.setProperty(`${key}-local`, theme.cssProperties[key]);
+        });
         const imageContainer = document.createElement("div");
         imageContainer.classList.add("sharing-image-container");
         const imageURL = await getImageURL(
@@ -6534,9 +6533,11 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           title.style.fontSize = "1.2rem";
         } else {
           title.style.fontSize = "1.2rem";
-          title.innerText = title.innerText.slice(0, 30) + "\u2026";
+          title.innerText = `${title.innerText.slice(0, 30)}\u2026`;
         }
+        console.log(imageContainer);
         imageContainer.appendChild(title);
+        console.log(imageContainer);
         tile.appendChild(imageContainer);
         const colorPreviewsContainer = document.createElement("div");
         colorPreviewsContainer.classList.add("sharing-color-previews");
@@ -6563,10 +6564,16 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       });
       if (resp.error) {
         console.error("Failed to share theme", resp.error);
+        linkOutput.innerText = "Failed to share theme";
+        shareDialog.element.classList.add("error-theme-sharing");
+        copyToClipboardButton.innerHTML = errorSvg;
+        copyToClipboardButton.style.pointerEvents = "none";
         new Toast("Failed to share theme", "error").render();
       } else {
         shareUrl = resp.shareUrl;
+        console.log(linkOutput);
         linkOutput.innerText = `${resp.shareUrl.slice(0, 32)}\u2026`;
+        linkOutput.style.pointerEvents = "all";
         linkOutput.addEventListener("click", copyToClipboard);
         copyToClipboardButton.innerHTML = copySvg;
         new Toast("Theme uploaded", "succes").render();
@@ -6789,8 +6796,6 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       });
       const visibleThemeNames = visibleThemeTilesArray.map((element) => {
         return element.dataset.name;
-      }).filter((name2) => {
-        return Boolean(name2);
       });
       const correctThemeNames = Object.keys(themes2).map((themeName) => {
         return themeName;
@@ -6824,7 +6829,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         visibleThemeNames2.forEach(async (themeName) => {
           if (!correctThemeNames2.includes(themeName)) {
             const element = visibleThemeTilesArray.find((element2) => {
-              return element2.dataset.name === themeName;
+              if (element2.dataset.name === themeName) return element2;
+              return false;
             });
             if (!element) return;
             if (element.classList.contains("create-theme-button")) return;
@@ -6832,7 +6838,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             this.currentTiles = this.currentTiles.filter((tile) => {
               if (tile instanceof AddCustomTheme) return true;
               if (tile instanceof ThemeTile) return tile.name !== themeName;
-              return true;
+              return false;
             });
           }
           this.updateContentHeight();
@@ -6871,23 +6877,35 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       this.topContainer.appendChild(title);
     }
     async renderTiles(tiles) {
-      const renderedElements = await Promise.all(tiles.map((tile) => tile.render()));
-      const fragment = document.createDocumentFragment();
-      renderedElements.forEach((element) => {
-        fragment.appendChild(element);
-      });
-      this.content.appendChild(fragment);
+      function getTileDelay(number) {
+        if (number < 8) {
+          return 20;
+        } else if (number < 12) {
+          return 15;
+        } else {
+          return 7;
+        }
+      }
+      this.content.style.height = `${this.calculateContentHeight(tiles.length)}px`;
+      const delayAmount = getTileDelay(tiles.length);
+      for (let i5 = 1; i5 <= tiles.length; i5++) {
+        const tile = tiles[i5 - 1];
+        if (!tile) break;
+        await tile.render();
+        await tile.updateImage(currentThemeName, true);
+        this.content.appendChild(tile.element);
+        if (document.body.classList.contains("enableAnimations")) await delay(delayAmount);
+      }
     }
     createContentContainer() {
       this.content = document.createElement("div");
       this.content.classList.add("theme-tiles");
     }
-    calculateContentHeight(tiles) {
-      const TILE_HEIGHT = parseFloat(tiles[0]?.element.style.height || "0");
-      const TILE_WIDTH = parseFloat(tiles[0]?.element.style.width || "0");
+    calculateContentHeight(tileAmount) {
+      const TILE_HEIGHT = 104;
+      const TILE_WIDTH = 168;
       const GAP = 6;
       const totalWidth = this.contentWidth;
-      const tileAmount = tiles.length;
       const tilesPerRow = Math.floor((totalWidth + GAP) / (TILE_WIDTH + GAP));
       const numRows = Math.ceil(tileAmount / tilesPerRow);
       const totalHeight = numRows * TILE_HEIGHT + (numRows - 1) * GAP;
@@ -6910,7 +6928,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       await this.renderTiles(tiles);
     }
     updateContentHeight() {
-      this.content.style.height = `${String(this.calculateContentHeight(this.currentTiles))}px`;
+      this.content.style.height = `${String(this.calculateContentHeight(this.currentTiles.length))}px`;
     }
     createThemeTile(name2, isFavorite, isCustom) {
       const tile = new ThemeTile(name2, this.currentCategory, isFavorite, isCustom);
@@ -6960,7 +6978,6 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         this.currentTiles.push(new noThemes());
       }
       await this.renderTiles(this.currentTiles);
-      await this.updateImages(true);
     }
     async changeCategory(category) {
       this.currentCategory = category;
@@ -7112,6 +7129,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       if (this.theme.cssProperties["--color-base00"] && this.theme.cssProperties["--color-base02"] && this.theme.cssProperties["--color-text"]) {
         const base00 = w(this.theme.cssProperties["--color-base00"]);
         let darkenColor;
+        const splashColor = w(this.theme.cssProperties["--color-text"]);
         if (base00.brightness() > 0.5) {
           darkenColor = w("rgba(228, 228, 228, 0.4)");
           darkenColor = darkenColor.mix(this.theme.cssProperties["--color-base02"], 0.5).alpha(0.4);
@@ -7119,7 +7137,6 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           darkenColor = w("rgba(0,0,0,0.2)");
           darkenColor = darkenColor.mix(this.theme.cssProperties["--color-base00"], 0.5).alpha(0.3);
         }
-        const splashColor = w(this.theme.cssProperties["--color-text"]);
         this.theme.cssProperties["--color-splashtext"] = splashColor.toHex();
         this.theme.cssProperties["--darken-background"] = darkenColor.toHex();
         this.theme.cssProperties["--color-homepage-sidebars-bg"] = darkenColor.alpha(0.1).toHex();
@@ -7432,10 +7449,12 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       this.content.appendChild(this.createFileInputContainer());
       this.content.appendChild(this.createColorPickers());
       this.content.appendChild(this.createRemoveButton());
-      await this.updateBackgroundImagePreview();
-      this.load(this.theme);
       this.element.appendChild(this.content);
       return this.element;
+    }
+    async onCreate() {
+      await this.updateBackgroundImagePreview();
+      this.load(this.theme);
     }
     async load(theme) {
       this.displayNameInput.value = theme.displayName;
@@ -7458,7 +7477,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       await updateTheme("default");
       await settingsWindow.loadPage(true);
       await loadQuickSettings();
-      this.hide();
+      this.hide(true);
     }
   };
 
@@ -13414,19 +13433,35 @@ ${code}`;
   function updateTopButtons(data2) {
     const GOButton = document.querySelector(`[data-go=""]`);
     if (GOButton) {
-      GOButton.style = data2.GO ? "display:flex" : "display:none";
+      if (data2.GO) {
+        GOButton.style = "display:flex";
+      } else {
+        GOButton.style = "display:none";
+      }
     }
     const searchButton = document.querySelector(".topnav__btn--icon--search");
     if (searchButton?.parentElement) {
-      searchButton.parentElement.style = data2.search ? "display:flex" : "display:none";
+      if (data2.search) {
+        searchButton.parentElement.style = "display:flex";
+      } else {
+        searchButton.parentElement.style = "display:none";
+      }
     }
     const GC = document.getElementById("global_chat_button");
     if (GC) {
-      GC.style = data2.GC ? "display:flex !important" : "display:none !important";
+      if (data2.GC) {
+        GC.style = "display:flex !important";
+      } else {
+        GC.style = "display:none !important";
+      }
     }
     const quickButton = document.getElementById("quick-menu-button");
     if (quickButton) {
-      quickButton.style = data2.quickMenu ? "display:flex !important" : "display:none !important";
+      if (data2.quickMenu) {
+        quickButton.style = "display:flex !important";
+      } else {
+        quickButton.style = "display:none !important";
+      }
     }
   }
   async function main() {

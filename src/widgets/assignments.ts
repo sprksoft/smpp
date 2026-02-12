@@ -10,15 +10,15 @@ import { registerWidget, WidgetBase } from "./widgets.js";
 // THANK YOU LDEVVVV 🫂🫂🫂
 
 class TakenWidget extends WidgetBase {
-  defaultSettings() {
+  override defaultSettings() {
     return {
       maxAssignments: 5,
     };
   }
-  onSettingsChange() {
+  override onSettingsChange() {
     this.element.appendChild(this.createContent());
   }
-  createContent() {
+  override createContent() {
     const foresight = 28; // dagen in de toekomst dat het zoekt voor taken
     const userId = getUserId();
 
@@ -207,7 +207,7 @@ class TakenWidget extends WidgetBase {
     };
     return initTaskList();
   }
-  async createPreview() {
+  override async createPreview() {
     const previewElement = document.createElement("div");
 
     const previewElementTitle = document.createElement("div");

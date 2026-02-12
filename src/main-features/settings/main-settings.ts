@@ -96,7 +96,7 @@ export class SettingsWindow extends BaseWindow {
     super("settings-window");
   }
 
-  async renderContent() {
+  override async renderContent() {
     const content = document.createElement("div");
     const settingsSideBar = await this.createSettingsSideBar();
     this.settingsPage.id = "settings-page";

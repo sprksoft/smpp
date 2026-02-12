@@ -50,6 +50,7 @@ export class BaseWindow {
     });
 
     closeBtn.addEventListener("click", () => this.hide(true));
+    this.onCreate?.();
   }
 
   // Override this in subclass
@@ -66,6 +67,9 @@ export class BaseWindow {
 
   // Called when window grows or shrinks
   onScreenSizeUpdate?(): void;
+
+  // Called when window is created
+  onCreate?(): void;
 
   show(triggerEvent: MouseEvent | KeyboardEvent | null = null): void {
     if (!this.hidden) return;
@@ -174,7 +178,7 @@ export class Dialog extends BaseWindow {
     super(id, hidden);
   }
 
-  async create(): Promise<void> {
+  override async create(): Promise<void> {
     this.element = await this.renderContent();
     this.element.id = this.id;
     this.element.classList.add("base-window", "base-dialog");
@@ -197,5 +201,6 @@ export class Dialog extends BaseWindow {
     document.body.appendChild(this.wrapper);
 
     closeBtn.addEventListener("click", () => this.hide(true));
+    this.onCreate?.();
   }
 }

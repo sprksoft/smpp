@@ -2939,10 +2939,12 @@ button .bottom-container-button:active {
 }
 @keyframes theme-tile {
   0% {
-    opacity: 0.5;
+    opacity: 0.2;
+    transform: translateX(-5%) translateY(-20%) scale(0.7);
   }
   100% {
     opacity: 1;
+    transform: translateX(0) translateY(0) scale(1);
   }
 }
 .enableAnimations .theme-tile {
@@ -2953,7 +2955,7 @@ button .bottom-container-button:active {
     transform,
     outline;
   transition: 0.15s ease-in-out;
-  animation: theme-tile 0.2s ease-out;
+  animation: theme-tile 0.4s cubic-bezier(0.33, 1.31, 0.65, 0.98);
 }
 #settings-page .theme-tile:not(.aaaaa) {
   outline: 2px solid transparent;
@@ -2969,6 +2971,7 @@ button .bottom-container-button:active {
   cursor: pointer;
   height: fit-content;
   position: relative;
+  box-shadow: 0px 0px 5px -2px var(--color-shadow);
 }
 #settings-page .theme-tile:not(.aaaaa).is-selected {
   border-color: var(--color-accent-local);
@@ -2998,6 +3001,8 @@ button .bottom-container-button:active {
   border-color: var(--color-accent-local);
   background-color: var(--color-base01-local);
   color: var(--color-text-local);
+  scale: 1.03;
+  box-shadow: 0px 0px 15px 2px var(--color-shadow);
 }
 #settings-page .theme-tile:not(.aaaaa):hover .bottom-container-button {
   opacity: 1;
@@ -3030,10 +3035,13 @@ button .bottom-container-button:active {
   color: var(--text-color);
 }
 .theme-tiles {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 168px);
   gap: 0.5rem;
-  margin-top: 1rem;
+  align-content: start;
+}
+.enableAnimations .theme-tiles {
+  transition: height 0.3s cubic-bezier(0.33, 1.31, 0.65, 0.98);
 }
 .theme-top-container {
   display: flex;
@@ -3043,7 +3051,7 @@ button .bottom-container-button:active {
   height: 2.5rem;
   font-weight: 600;
   margin: 0;
-  margin-bottom: 0.1rem;
+  margin-bottom: 0.5rem;
   margin-top: 2rem;
   cursor: default;
 }
@@ -3547,31 +3555,37 @@ button.open-theme-editor-button:hover {
 .enableAnimations .compact-theme-options .compact-theme-option {
   animation: theme-option-render 0.5s cubic-bezier(0.33, 1.31, 0.65, 0.98);
 }
+.error-theme-sharing.share-dialog-content .link-output {
+  color: var(--color-red);
+}
+.error-theme-sharing.share-dialog-content .copy-link-button svg {
+  stroke: var(--color-red);
+}
 .share-dialog-content {
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow-y: auto !important;
-  width: 400px !important;
+  overflow-y: auto;
+  width: 400px;
 }
 .share-dialog-content h1 {
-  color: var(--color-accent-local) !important;
+  color: var(--color-accent-local);
   z-index: 1;
-  background: var(--darken-background-local) !important;
+  background: var(--darken-background-local);
   border-radius: 1rem;
   padding: 0.5rem;
   backdrop-filter: blur(2px);
-  box-shadow: 0px 0px 20px var(--color-shadow) !important;
+  box-shadow: 0px 0px 20px var(--color-shadow);
 }
 .share-dialog-content h1,
 .share-dialog-content h2 {
   text-align: center;
-  margin-bottom: 0rem !important;
+  margin-bottom: 0rem;
 }
 .share-dialog-content h2 {
-  margin-bottom: 1rem !important;
-  font-size: 1.8rem !important;
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
 }
 .link-output {
   display: flex;
@@ -3653,7 +3667,7 @@ button.open-theme-editor-button:hover {
 }
 .sharing-color-previews .color-preview-bubble {
   width: 2.5rem;
-  cursor: default !important;
+  cursor: default;
 }
 
 /* src/styles/smpp-styles/assignments.css */
@@ -5205,26 +5219,26 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   color: var(--color-red);
 }
 .window-wrapper:has(.base-window.hidden) {
-  display: none !important;
+  display: none;
 }
 .window-wrapper {
   position: fixed;
-  width: 100% !important;
-  height: 100% !important;
-  left: 0 !important;
-  top: 0 !important;
-  z-index: 1000 !important;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: 1000;
   justify-content: center;
   display: flex;
   align-items: center;
 }
 .base-window.fullscreen-window {
-  width: 100% !important;
-  height: 100% !important;
-  left: 0 !important;
-  top: 0 !important;
-  border-radius: 2px !important;
-  z-index: 1000 !important;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  border-radius: 2px;
+  z-index: 1000;
 }
 .base-window.fullscreen-window .contract-icon {
   display: block;
@@ -5261,7 +5275,10 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   border: var(--border-size) solid var(--color-base03);
   position: absolute;
   z-index: 20;
-  box-shadow: 0px 0px 150px black;
+  box-shadow:
+    0px 0px 150px var(--color-shadow),
+    0px 0px 150px var(--color-shadow),
+    0px 0px 150px var(--color-shadow);
   border-radius: 2rem;
   width: 90%;
   height: 85%;

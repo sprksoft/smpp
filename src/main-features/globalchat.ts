@@ -20,7 +20,7 @@ class GlobalChatWindow extends BaseWindow {
     super("global_chat_window", hidden);
   }
 
-  async renderContent() {
+  override async renderContent() {
     this.gcContent = document.createElement("div");
     const queryString = getThemeQueryString(currentTheme);
     this.iframe = document.createElement("iframe");

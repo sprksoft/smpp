@@ -359,22 +359,38 @@ function createProfileSettingButton() {
 function updateTopButtons(data: Settings["topNav"]["buttons"]) {
   const GOButton = document.querySelector(`[data-go=""]`) as HTMLElement;
   if (GOButton) {
-    GOButton.style = data.GO ? "display:flex" : "display:none";
+    if (data.GO) {
+      GOButton.style = "display:flex";
+    } else {
+      GOButton.style = "display:none";
+    }
   }
 
   const searchButton = document.querySelector(".topnav__btn--icon--search");
   if (searchButton?.parentElement) {
-    searchButton.parentElement.style = data.search ? "display:flex" : "display:none";
+    if (data.search) {
+      searchButton.parentElement.style = "display:flex";
+    } else {
+      searchButton.parentElement.style = "display:none";
+    }
   }
 
   const GC = document.getElementById("global_chat_button");
   if (GC) {
-    GC.style = data.GC ? "display:flex !important" : "display:none !important";
+    if (data.GC) {
+      GC.style = "display:flex !important";
+    } else {
+      GC.style = "display:none !important";
+    }
   }
 
   const quickButton = document.getElementById("quick-menu-button");
   if (quickButton) {
-    quickButton.style = data.quickMenu ? "display:flex !important" : "display:none !important";
+    if (data.quickMenu) {
+      quickButton.style = "display:flex !important";
+    } else {
+      quickButton.style = "display:none !important";
+    }
   }
 }
 
