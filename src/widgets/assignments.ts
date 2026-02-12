@@ -15,15 +15,15 @@ import { assignmentsSvg } from "../fixes-utils/svgs.js";
 // THANK YOU LDEVVVV 🫂🫂🫂
 
 class TakenWidget extends WidgetBase {
-  override defaultSettings() {
+  defaultSettings() {
     return {
       maxAssignments: 5,
     };
   }
-  override onSettingsChange() {
+  onSettingsChange() {
     this.element.appendChild(this.createContent());
   }
-  override createContent() {
+  createContent() {
     const foresight = 28; // dagen in de toekomst dat het zoekt voor taken
     let userId = getUserId();
 
@@ -144,6 +144,7 @@ class TakenWidget extends WidgetBase {
             "assignment__item"
           );
           rowDiv.setAttribute("data-id", element.id);
+          rowDiv.style.cursor = "pointer";
 
           const abbreviationDiv = document.createElement("div");
           abbreviationDiv.classList.add("listview__cell", "abvr__div");
@@ -154,16 +155,15 @@ class TakenWidget extends WidgetBase {
             "wrapperdiv"
           );
           wrapperDiv.classList.add(
-            `c-${element.color.split("-")[0]}-combo--${element.color.split("-")[1]
-            }` // LET HIM COOK
+            `c-${element.color.split("-")[0]}-combo--${
+              element.color.split("-")[1]
+            }`
           );
 
-          // make the litle icon cubes
-          sendDebug("[AS]", "Creating icon for assignment:", element, element.icon);
           if (element.plannedElementType === "planned-to-dos") {
-            // dont try to understand, i dont either
             fetch(
-              `https://${getSchoolName()}.smartschool.be/smsc/svg/${element.icon
+              `https://${getSchoolName()}.smartschool.be/smsc/svg/${
+                element.icon
               }/${element.icon}_16x16.svg`
             )
               .then((response) => response.blob())
@@ -206,21 +206,31 @@ class TakenWidget extends WidgetBase {
           ).toLocaleTimeString("nl-NL", {
             hour: "2-digit",
             minute: "2-digit",
-          })} • ${element.courses?.[0]?.name || "TODO "}`; // durf dit nog eens aan te passen en ik ga je pesten op het internet
+          })} • ${element.courses?.[0]?.name || "TODO "}`;
           metadataSpan.classList.add("task-description");
 
           detailsDiv.append(titleSpan, metadataSpan);
           rowDiv.append(abbreviationDiv, detailsDiv);
 
-          rowDiv.addEventListener("click", () => {
-            markAsFinished(element.id, element.courses?.[0]?.name);
+          rowDiv.addEventListener("click", (e) => {
+            e.preventDefault();
+            
+            const schoolName = getSchoolName();
+            const elementId = element.id;
+            
+            const taskDate = new Date(element.period.dateTimeFrom);
+            const formattedDate = taskDate.toISOString().split('T')[0];
+            
+            const type = element.plannedElementType === "planned-to-dos" ? "planned-to-dos" : "planned-assignments";
+            
+            const mainPlannerUrl = `https://${schoolName}.smartschool.be/planner/main/user/${userId}/${formattedDate}/${type}/260/${elementId}`;
+            
+            if (DEBUG) sendDebug("[AS]", "Navigating to planner view:", mainPlannerUrl);
+            
+            window.location.href = mainPlannerUrl;
           });
-          rowDiv.addEventListener("mouseenter", () => {
-            titleSpan.style.textDecoration = "line-through";
-          });
-          rowDiv.addEventListener("mouseleave", () => {
-            titleSpan.style.textDecoration = "none";
-          });
+
+          rowDiv.style.cursor = "pointer";
 
           TasksContainer.append(rowDiv);
         });
@@ -231,9 +241,9 @@ class TakenWidget extends WidgetBase {
     };
     return initTaskList();
   }
-  override async createPreview() {
-    const previewElement = document.createElement("div");
 
+  async createPreview() {
+    const previewElement = document.createElement("div");
     const previewElementTitle = document.createElement("div");
     previewElementTitle.classList.add("assignments-preview-title");
     previewElementTitle.innerText = "Assignments";
@@ -245,9 +255,9 @@ class TakenWidget extends WidgetBase {
 
     previewElement.appendChild(previewElementTitle);
     previewElement.appendChild(previewElementIcon);
-
     return previewElement;
   }
+
   clearContent() {
     this.element.innerHTML = "";
   }
@@ -257,118 +267,54 @@ async function markAsFinished(as_ID, name) {
   const schoolName = getSchoolName();
   const userId = getUserId();
 
-  if (!schoolName || !userId) {
-    console.error(
-      "SMPP: Could not retrieve school name or user ID. Cannot mark assignment as finished."
-    );
-    return false;
-  }
-  let as_type = name ? "assignment" : "to-do"; // im using ternary u proud of me siebe? 🥺 o((>ω< ))o
+  if (!schoolName || !userId) return false;
+  let as_type = name ? "assignment" : "to-do";
   const url = `https://${schoolName}.smartschool.be/planner/api/v1/planned-${as_type}s/${userId}/${as_ID}/resolve`;
 
   try {
     const response = await fetch(url, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({}),
     });
 
-    if (!response.ok) {
-      const errorData = await response.text();
-      throw new Error(
-        `Failed to mark assignment ${as_ID} as finished: ${response.status} ${response.statusText}. Response: ${errorData}`
-      );
-    }
-
-    sendDebug("[AS]", `Assignment ${as_ID} marked as finished successfully.`);
-
-    // too lazy to code the rest of the cleanup thingy so ill let ai do it, haters gonna hate
+    if (!response.ok) throw new Error("Resolve failed");
 
     const assignmentElement = document.querySelector(`[data-id="${as_ID}"]`);
     if (assignmentElement) {
-      // Find the parent container that holds both the date headers and assignment items.
-      // Based on the provided HTML, this is the .smpp-widget-content div.
       const parentContainer = assignmentElement.parentElement;
-
-      // Find the date header (h3.date-header-assignments) that precedes this assignment.
-      // This header marks the start of the day for this assignment.
       let dayHeader = assignmentElement.previousElementSibling;
-      while (
-        dayHeader &&
-        (!dayHeader.classList.contains("date-header-assignments") ||
-          dayHeader.tagName !== "H3")
-      ) {
+      while (dayHeader && (!dayHeader.classList.contains("date-header-assignments") || dayHeader.tagName !== "H3")) {
         dayHeader = dayHeader.previousElementSibling;
       }
 
-      // Remove the specific assignment element.
       assignmentElement.remove();
 
-      // Now, check if the day header (if found) still has any assignment items following it
-      // before the next day header or the end of the container.
       if (dayHeader) {
-        let hasMoreAssignmentsForThisDay = false;
-        let nextSibling = dayHeader.nextElementSibling;
-
-        while (nextSibling) {
-          // If we find another assignment item, it means there are still assignments for this day.
-          if (nextSibling.classList.contains("assignment__item")) {
-            hasMoreAssignmentsForThisDay = true;
-            break; // Stop checking, we found another assignment.
+        let hasMore = false;
+        let next = dayHeader.nextElementSibling;
+        while (next && !next.classList.contains("date-header-assignments")) {
+          if (next.classList.contains("assignment__item")) {
+            hasMore = true;
+            break;
           }
-          // If we encounter another date header, it means we've passed all assignments for the current day
-          // without finding any remaining ones.
-          if (
-            nextSibling.classList.contains("date-header-assignments") &&
-            nextSibling.tagName === "H3"
-          ) {
-            break; // Stop checking, reached the next day's header.
-          }
-          nextSibling = nextSibling.nextElementSibling;
+          next = next.nextElementSibling;
         }
-
-        // If no more assignments were found for this day, remove the day header.
-        if (!hasMoreAssignmentsForThisDay) {
-          dayHeader.remove();
-        }
+        if (!hasMore) dayHeader.remove();
       }
 
-      // Check if this was the last assignment in total
-      const remainingAssignmentsInWidget =
-        parentContainer.querySelectorAll(".assignment__item");
-      if (remainingAssignmentsInWidget.length === 0) {
-        // If no assignments are left, add the "you're all done" message
+      if (parentContainer.querySelectorAll(".assignment__item").length === 0) {
         const doneMessage = document.createElement("p");
-        doneMessage.classList.add("as_all_done"); // Add a class for potential styling
-        if (randomChance(1 / 5)) {
-          doneMessage.innerText = "You're all done! You deserve a break 💜";
-        } else {
-          doneMessage.innerText = "You're all done!";
-        }
+        doneMessage.classList.add("as_all_done");
+        doneMessage.innerText = randomChance(1/5) ? "You're all done! You deserve a break 💜" : "You're all done!";
         parentContainer.appendChild(doneMessage);
-
-        // Ensure all date headers are removed if the widget is completely empty of assignments
-        // This handles cases where a header might remain if the last assignment was removed
-        // and the header wasn't directly adjacent or the logic missed it.
-        const allDateHeaders = parentContainer.querySelectorAll(
-          ".date-header-assignments"
-        );
-        allDateHeaders.forEach((header) => header.remove());
       }
-    } else {
-      console.warn(
-        `SMPP: Assignment element with data-id="${as_ID}" not found :/ this is good?`
-      );
     }
     return true;
   } catch (error) {
-    console.error(
-      `SMPP: Error marking assignment ${as_ID} as finished:`,
-      error
-    );
+    console.error("Error marking finished:", error);
     return false;
   }
 }
-registerWidget(new TakenWidget()); // so easy
+
+registerWidget(new TakenWidget());
