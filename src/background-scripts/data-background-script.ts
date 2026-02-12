@@ -53,7 +53,7 @@ export async function getDelijnColorData() {
     }
 
     await browser.storage.local.set({
-      delijnColorData: delijnColorData,
+      delijnColorData,
     });
     return delijnColorData;
   } catch (error) {
@@ -75,11 +75,12 @@ export async function setImage(id: string, data: SMPPImage) {
 export async function getImage(id: string): Promise<SMPPImage> {
   const imagesMetaData = (await browser.storage.local.get("images")).images || {};
   const metaData = imagesMetaData[id] as SMPPImageMetaData;
-  if (!metaData)
+  if (!metaData) {
     return {
       metaData: { type: "default", link: "" },
       imageData: "",
     } as SMPPImage;
+  }
 
   const customId = `SMPPImage-${id}`;
   const image: string = (await browser.storage.local.get(customId))[customId] || "";
@@ -127,18 +128,20 @@ export async function getBase64(link: string): Promise<string | null> {
 export async function getFileData(link: string) {
   try {
     const response = await fetch(link);
-    if (!response.ok) return null;
+    if (!response.ok) {
+      return null;
+    }
 
     const blob = await response.blob();
     const arrayBuffer = await blob.arrayBuffer();
 
     const urlParts = link.split("/");
-    const filename = urlParts[urlParts.length - 1] || "image.jpg";
+    const filename = urlParts.at(-1) || "image.jpg";
 
     return {
       arrayBuffer: Array.from(new Uint8Array(arrayBuffer)), // Convert to regular array
       mimeType: blob.type || "image/jpeg",
-      filename: filename,
+      filename,
     };
   } catch (error) {
     console.error("Error getting file data:", error);

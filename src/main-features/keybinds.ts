@@ -9,9 +9,15 @@ import { openSettingsWindow } from "./settings/main-settings.js";
 export type Keybind = Uppercase<string> | symbol | "None" | "Space";
 
 document.addEventListener("keyup", async (e) => {
-  if (e.target?.tagName === "INPUT") return;
-  if (e.target?.tagName === "TEXTAREA") return;
-  if (document.getElementById("tinymce")) return;
+  if (e.target?.tagName === "INPUT") {
+    return;
+  }
+  if (e.target?.tagName === "TEXTAREA") {
+    return;
+  }
+  if (document.getElementById("tinymce")) {
+    return;
+  }
 
   const key = e.key === " " ? "Space" : e.key.length === 1 ? e.key.toUpperCase() : e.key; // this is so readable i love it
 
@@ -37,7 +43,9 @@ document.addEventListener("keyup", async (e) => {
   }
 
   // Widget
-  if (!widgetEditModeInit) return;
+  if (!widgetEditModeInit) {
+    return;
+  }
 
   if (key === "Escape" && widgetEditMode) {
     await setEditMode(false);
@@ -49,7 +57,9 @@ document.addEventListener("keyup", async (e) => {
       await setEditMode(true);
       break;
     case keybinds.widgetBag:
-      if (widgetEditMode) toggleBag();
+      if (widgetEditMode) {
+        toggleBag();
+      }
       break;
   }
 });

@@ -73,7 +73,8 @@ class TakenWidget extends WidgetBase {
         if (!data) {
           TasksContainer.innerHTML = "Er is iets ernstig misgegaan :(";
           return console.error("No planner data, Did something go wrong?");
-        } else if (DEBUG) {
+        }
+        if (DEBUG) {
           sendDebug("[AS]", "Planner data fetched successfully.");
         }
         if (!Array.isArray(data) || data.length === 0) {
@@ -233,7 +234,7 @@ async function markAsFinished(as_ID, name) {
   const schoolName = getSchoolName();
   const userId = getUserId();
 
-  if (!schoolName || !userId) {
+  if (!(schoolName && userId)) {
     console.error(
       "SMPP: Could not retrieve school name or user ID. Cannot mark assignment as finished.",
     );

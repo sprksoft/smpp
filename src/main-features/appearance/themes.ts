@@ -52,23 +52,23 @@ export type ThemeId = string;
 
 export type ThemeCategory = [ThemeId];
 
-export type ThemeCategories = {
+export interface ThemeCategories {
   [name: string]: ThemeCategory;
-};
+}
 
-export type Theme = {
+export interface Theme {
   displayName: string;
   cssProperties: { [key: string]: string };
-};
+}
 
-export type Themes = {
+export interface Themes {
   [key: string]: Theme;
-};
+}
 
 export async function getTheme(name: ThemeId): Promise<Theme> {
   const theme = (await browser.runtime.sendMessage({
     action: "getTheme",
-    name: name,
+    name,
   })) as Theme;
   return theme;
 }
@@ -133,7 +133,7 @@ class ColorCursor {
   enableY: boolean;
   parentContainer: HTMLElement;
 
-  constructor(parentContainer: HTMLElement, enableX: boolean = true, enableY: boolean = true) {
+  constructor(parentContainer: HTMLElement, enableX = true, enableY = true) {
     this.parentContainer = parentContainer;
     this.enableX = enableX;
     this.enableY = enableY;
@@ -165,8 +165,12 @@ class ColorCursor {
     const xPercent = (x / rect.width) * 100;
     const yPercent = (y / rect.height) * 100;
 
-    if (this.enableX) this.xPos = Math.max(0, Math.min(100, xPercent));
-    if (this.enableY) this.yPos = Math.max(0, Math.min(100, yPercent));
+    if (this.enableX) {
+      this.xPos = Math.max(0, Math.min(100, xPercent));
+    }
+    if (this.enableY) {
+      this.yPos = Math.max(0, Math.min(100, yPercent));
+    }
 
     this.updateCursorPosition();
     this.onDrag();
@@ -259,7 +263,8 @@ export class ColorPicker {
   createFieldContainer() {
     this.fieldContainer.classList.add("color-picker-field");
     const horizontalContainer = document.createElement("div");
-    horizontalContainer.style.background = `linear-gradient(to left, var(--max-sat) 0%, rgba(255, 255, 255, 1) 100%)`;
+    horizontalContainer.style.background =
+      "linear-gradient(to left, var(--max-sat) 0%, rgba(255, 255, 255, 1) 100%)";
 
     const verticalContainer = document.createElement("div");
     verticalContainer.style.background = "linear-gradient(to top, black, transparent)";
@@ -283,7 +288,9 @@ export class ColorPicker {
       button.addEventListener("click", () => {
         this.copyHexToClipBoard();
         const svg = button.querySelector("svg");
-        if (!svg) return;
+        if (!svg) {
+          return;
+        }
         svg.style.fill = "var(--color-text)";
         button.innerHTML = doneSvg;
 
@@ -432,7 +439,9 @@ export class ThemeTile extends Tile {
     favoriteButton.addEventListener("click", async () => {
       await this.favoriteToggle();
     });
-    if (this.isFavorite) this.element.classList.add("is-favorite");
+    if (this.isFavorite) {
+      this.element.classList.add("is-favorite");
+    }
 
     const shareButton = document.createElement("button");
     shareButton.classList.add("bottom-container-button");
@@ -485,12 +494,14 @@ export class ThemeTile extends Tile {
       if (await isValidImage(await imageURL.url)) {
         this.element.style.setProperty("--background-image-local", `url(${await imageURL.url})`);
       } else {
-        this.element.style.setProperty("--background-image-local", `url()`);
+        this.element.style.setProperty("--background-image-local", "url()");
       }
 
       if (isFirefox && imageURL.type === "file") {
         const imageContainer = this.element.querySelector(".image-container");
-        if (!imageContainer) return;
+        if (!imageContainer) {
+          return;
+        }
 
         const stupidImageContainer = document.createElement("img");
         stupidImageContainer.classList.add("image-container", "firefox-container");
@@ -501,7 +512,9 @@ export class ThemeTile extends Tile {
         }
 
         const bottomContainer = this.element.querySelector(".theme-tile-bottom");
-        if (!bottomContainer) return;
+        if (!bottomContainer) {
+          return;
+        }
         imageContainer.remove();
         this.element.prepend(stupidImageContainer);
       } else if (isFirefox) {
@@ -587,11 +600,15 @@ export class ThemeTile extends Tile {
       const base64 = await convertLinkToBase64(
         await getExtensionImage(`theme-backgrounds/${this.name}.jpg`),
       );
-      if (base64) result.imageData = base64;
+      if (base64) {
+        result.imageData = base64;
+      }
       const compressedBase64 = await convertLinkToBase64(
         await getExtensionImage(`theme-backgrounds/compressed/${this.name}.jpg`),
       );
-      if (compressedBase64) compressedResult.imageData = compressedBase64;
+      if (compressedBase64) {
+        compressedResult.imageData = compressedBase64;
+      }
 
       if (!this.isCustom) {
         result.metaData.type = "file";
@@ -634,7 +651,9 @@ export class ThemeTile extends Tile {
         navigator.clipboard.writeText(shareUrl);
 
         const svg = copyToClipboardButton.querySelector("svg");
-        if (!svg) return;
+        if (!svg) {
+          return;
+        }
         svg.style.fill = "var(--color-text)";
         copyToClipboardButton.innerHTML = doneSvg;
 
@@ -745,7 +764,9 @@ export class ThemeTile extends Tile {
       Object.values(generateColorPreviews(getEditableValues(theme.cssProperties))).forEach(
         (preview) => {
           const actualPreview = Object.values(preview)[0];
-          if (actualPreview) colorPreviewsContainer.appendChild(actualPreview);
+          if (actualPreview) {
+            colorPreviewsContainer.appendChild(actualPreview);
+          }
         },
       );
       tile.appendChild(colorPreviewsContainer);
@@ -821,7 +842,9 @@ export class ThemeFolder extends Tile {
       includeHidden: true,
     })) as string;
 
-    if (!firstThemeInCategory) return;
+    if (!firstThemeInCategory) {
+      return;
+    }
     const theme = (await browser.runtime.sendMessage({
       action: "getTheme",
       name: firstThemeInCategory,
@@ -835,7 +858,7 @@ export class ThemeFolder extends Tile {
       this.element.classList.add("use-default-colors");
     }
 
-    this.element.style.setProperty("--background-image-local", `url()`);
+    this.element.style.setProperty("--background-image-local", "url()");
     this.element.appendChild(this.createImageContainer());
     this.element.appendChild(this.createBottomContainer());
   }
@@ -969,7 +992,7 @@ export class ThemeSelector {
   element = document.createElement("div");
   content = document.createElement("div");
   topContainer = document.createElement("div");
-  currentCategory: string = "all";
+  currentCategory = "all";
   currentTiles: Tiles = [];
   contentWidth = 0;
 
@@ -1031,7 +1054,9 @@ export class ThemeSelector {
   }
 
   async updateThemeTiles() {
-    if (this.currentCategory === "all") return;
+    if (this.currentCategory === "all") {
+      return;
+    }
     const themes = (await browser.runtime.sendMessage({
       action: "getThemes",
       categories: [this.currentCategory],
@@ -1091,15 +1116,25 @@ export class ThemeSelector {
       visibleThemeNames.forEach(async (themeName) => {
         if (!correctThemeNames.includes(themeName)) {
           const element = visibleThemeTilesArray.find((element) => {
-            if (element.dataset.name === themeName) return element;
+            if (element.dataset.name === themeName) {
+              return element;
+            }
             return false;
           });
-          if (!element) return;
-          if (element.classList.contains("create-theme-button")) return;
+          if (!element) {
+            return;
+          }
+          if (element.classList.contains("create-theme-button")) {
+            return;
+          }
           this.content.removeChild(element);
           this.currentTiles = this.currentTiles.filter((tile) => {
-            if (tile instanceof AddCustomTheme) return true;
-            if (tile instanceof ThemeTile) return tile.name !== themeName;
+            if (tile instanceof AddCustomTheme) {
+              return true;
+            }
+            if (tile instanceof ThemeTile) {
+              return tile.name !== themeName;
+            }
             return false;
           }) as Tiles;
         }
@@ -1148,23 +1183,27 @@ export class ThemeSelector {
     function getTileDelay(number: number) {
       if (number < 8) {
         return 20;
-      } else if (number < 12) {
-        return 15;
-      } else {
-        return 7;
       }
+      if (number < 12) {
+        return 15;
+      }
+      return 7;
     }
     this.content.style.height = `${this.calculateContentHeight(tiles.length)}px`;
     const delayAmount = getTileDelay(tiles.length);
     for (let i = 1; i <= tiles.length; i++) {
       const tile = tiles[i - 1];
-      if (!tile) break;
+      if (!tile) {
+        break;
+      }
       await tile.render();
       await tile.updateImage(currentThemeName, true);
 
       this.content.appendChild(tile.element);
 
-      if (document.body.classList.contains("enableAnimations")) await delay(delayAmount);
+      if (document.body.classList.contains("enableAnimations")) {
+        await delay(delayAmount);
+      }
     }
   }
 
@@ -1289,18 +1328,20 @@ type ThemeProperty =
   | "--color-base02"
   | "--color-base03";
 
-type colordPalette = {
+interface colordPalette {
   Vibrant: Colord;
   DarkVibrant: Colord;
   LightVibrant: Colord;
   Muted: Colord;
   DarkMuted: Colord;
   LightMuted: Colord;
-};
+}
 
 function convertColorPalette(vibrantPalette: Palette) {
   function convertSwatchToColord(swatch: Swatch | null) {
-    if (!swatch) return colord("#000");
+    if (!swatch) {
+      return colord("#000");
+    }
     return colord(swatch.hex);
   }
   let colordPalette: colordPalette;
@@ -1324,7 +1365,7 @@ export class CustomThemeCreator extends Dialog {
   }[];
   backgroundImageInput: ImageSelector;
   backgroundImagePreview: HTMLImageElement;
-  themeGeneratorIsOpen: boolean = false;
+  themeGeneratorIsOpen = false;
   imagePreviewContainer: HTMLDivElement;
 
   getEditableValues(cssProperties: Theme["cssProperties"]) {
@@ -1360,7 +1401,9 @@ export class CustomThemeCreator extends Dialog {
       const element = Object.values(preview)[0];
       if (previewName && element) {
         const newValue = this.theme.cssProperties[previewName];
-        if (newValue) element.style.setProperty("--current-color", newValue);
+        if (newValue) {
+          element.style.setProperty("--current-color", newValue);
+        }
       }
     });
   }
@@ -1413,14 +1456,22 @@ export class CustomThemeCreator extends Dialog {
     colorPicker.element.classList.add("floating-picker");
 
     const _docEventHandler = (docEvent: Event) => {
-      if (docEvent === e) return;
+      if (docEvent === e) {
+        return;
+      }
 
-      if (!(docEvent.target instanceof Node)) return;
-      if (docEvent.target === colorPreview) return;
+      if (!(docEvent.target instanceof Node)) {
+        return;
+      }
+      if (docEvent.target === colorPreview) {
+        return;
+      }
       const targetElement = docEvent.target as HTMLElement;
       const parentElement = targetElement.parentElement;
 
-      if (colorPicker.element.contains(targetElement)) return;
+      if (colorPicker.element.contains(targetElement)) {
+        return;
+      }
 
       const isIconClick =
         targetElement.classList?.contains("copy-svg") ||
@@ -1428,7 +1479,9 @@ export class CustomThemeCreator extends Dialog {
         parentElement?.classList?.contains("copy-svg") ||
         parentElement?.classList?.contains("done-icon");
 
-      if (isIconClick) return;
+      if (isIconClick) {
+        return;
+      }
 
       colorPicker.element.remove();
       document.removeEventListener("mousedown", _docEventHandler);
@@ -1455,9 +1508,13 @@ export class CustomThemeCreator extends Dialog {
 
     this.colorPreviews.forEach((preview) => {
       const colorPreview = Object.values(preview)[0];
-      if (!colorPreview) return;
+      if (!colorPreview) {
+        return;
+      }
       const colorName = colorPreview.dataset.name;
-      if (!colorName) return;
+      if (!colorName) {
+        return;
+      }
       this.theme.cssProperties[colorName] = colorPreview.style.getPropertyValue("--current-color");
     });
     this.theme.displayName = this.displayNameInput.value;
@@ -1566,7 +1623,9 @@ export class CustomThemeCreator extends Dialog {
   readUserChoice() {
     const brightnessButton = document.getElementById("brightness-control") as HTMLInputElement;
     const saturationButton = document.getElementById("saturation-control") as HTMLInputElement;
-    if (!(brightnessButton && saturationButton)) return;
+    if (!(brightnessButton && saturationButton)) {
+      return;
+    }
     const choice = {
       mode: brightnessButton.checked,
       saturation: saturationButton.checked,
@@ -1576,12 +1635,16 @@ export class CustomThemeCreator extends Dialog {
 
   async generateTheme() {
     const swatchPalette = await this.getImageColors();
-    if (!swatchPalette) return;
+    if (!swatchPalette) {
+      return;
+    }
 
     const colordPalette = convertColorPalette(swatchPalette);
 
     const choice = this.readUserChoice();
-    if (!choice) return;
+    if (!choice) {
+      return;
+    }
 
     let base00: Colord;
     let base01: Colord;
@@ -1771,12 +1834,15 @@ export class CustomThemeCreator extends Dialog {
       const colorPreviewWrapper = document.createElement("div");
       colorPreviewWrapper.classList.add("color-picker-preview-wrapper");
       const colorPreview = Object.values(preview)[0];
-      if (colorPreview) colorPreviewWrapper.appendChild(colorPreview);
+      if (colorPreview) {
+        colorPreviewWrapper.appendChild(colorPreview);
+      }
       const colorName = Object.keys(preview)[0];
-      if (colorName)
+      if (colorName) {
         colorPreviewWrapper.appendChild(
           createHoverTooltip(this.convertPropertyName(colorName as ThemeProperty), "vertical"),
         );
+      }
 
       colorPickerElement.appendChild(colorPreviewWrapper);
     });
@@ -1853,7 +1919,9 @@ export class CustomThemeCreator extends Dialog {
 
   override onClosed(realUserIntent: boolean): void {
     document.body.removeChild(this.wrapper);
-    if (!realUserIntent) return;
+    if (!realUserIntent) {
+      return;
+    }
     settingsWindow.themeSelector.updateSelectorContent();
     settingsWindow.loadPage();
     loadQuickSettings();

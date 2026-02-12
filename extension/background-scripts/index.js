@@ -1787,7 +1787,7 @@
         throw `setByPath: ${node} did not exist in path ${path}`;
       }
     }
-    const leaf = pathSplit[pathSplit.length - 1];
+    const leaf = pathSplit.at(-1);
     if (leaf === void 0) {
       throw `setByPath: invalid path ${path}`;
     }
@@ -1921,11 +1921,12 @@
   async function getImage(id) {
     const imagesMetaData = (await browser.storage.local.get("images")).images || {};
     const metaData = imagesMetaData[id];
-    if (!metaData)
+    if (!metaData) {
       return {
         metaData: { type: "default", link: "" },
         imageData: ""
       };
+    }
     const customId = `SMPPImage-${id}`;
     const image = (await browser.storage.local.get(customId))[customId] || "";
     return {
@@ -1966,11 +1967,13 @@
   async function getFileData(link) {
     try {
       const response = await fetch(link);
-      if (!response.ok) return null;
+      if (!response.ok) {
+        return null;
+      }
       const blob = await response.blob();
       const arrayBuffer = await blob.arrayBuffer();
       const urlParts = link.split("/");
-      const filename = urlParts[urlParts.length - 1] || "image.jpg";
+      const filename = urlParts.at(-1) || "image.jpg";
       return {
         arrayBuffer: Array.from(new Uint8Array(arrayBuffer)),
         // Convert to regular array
@@ -2004,7 +2007,9 @@
     }
     if (!includeEmpty) {
       Object.keys(allCategories).forEach((category) => {
-        if (!allCategories[category] || !allCategories[category][0]) delete allCategories[category];
+        if (!allCategories[category]?.[0]) {
+          delete allCategories[category];
+        }
       });
     }
     return allCategories;
@@ -2024,7 +2029,9 @@
     if (!themeNames) {
       return "error";
     }
-    if (!themeNames[0]) return "error";
+    if (!themeNames[0]) {
+      return "error";
+    }
     return themeNames[0];
   }
   async function getQuickSettingsThemes() {
@@ -2037,7 +2044,9 @@
   }
   async function getThemes(categorynames = ["all"], includeHidden = false, mustMatchAllCategories = false) {
     const themes = await getAllThemes();
-    if (categorynames.includes("all")) return themes;
+    if (categorynames.includes("all")) {
+      return themes;
+    }
     const categories2 = await Promise.all(
       categorynames.map((category) => getThemeCategory(category))
     );
@@ -2064,10 +2073,9 @@
     const theme = allThemes[name];
     if (theme !== void 0) {
       return theme;
-    } else {
-      console.error(`Invalid theme requested:"${name}", sent "error" theme`);
-      return allThemes.error;
     }
+    console.error(`Invalid theme requested:"${name}", sent "error" theme`);
+    return allThemes.error;
   }
   async function getSharedThemeId(shareId) {
     const cache = await loadThemeShareCache();
@@ -2095,7 +2103,9 @@
     return customCategory;
   }
   async function saveCustomTheme(data, id = void 0) {
-    if (id === void 0) id = crypto.randomUUID();
+    if (id === void 0) {
+      id = crypto.randomUUID();
+    }
     const customThemes = await getAllCustomThemes();
     customThemes[id] = data;
     await browser.storage.local.set({ customThemes });

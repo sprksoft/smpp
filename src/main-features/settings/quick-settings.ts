@@ -85,7 +85,7 @@ class CompactThemeOption {
       this.updateImage(true);
     } else {
       this.element.classList.remove("is-selected");
-      this.element.style.setProperty("--background-image-local", `url()`);
+      this.element.style.setProperty("--background-image-local", "url()");
     }
   }
 
@@ -100,7 +100,7 @@ class CompactThemeSelector {
   element = document.createElement("div");
   input = document.createElement("div");
   selector = document.createElement("div");
-  selectorIsOpen: boolean = false;
+  selectorIsOpen = false;
   themeOptions: CompactThemeOption[] = [];
 
   async createThemeOption(name: string, theme: Theme) {
@@ -127,12 +127,16 @@ class CompactThemeSelector {
   async renderThemeOptions() {
     for (let i = 1; i <= this.themeOptions.length; i++) {
       const option = this.themeOptions[i - 1];
-      if (!option) break;
+      if (!option) {
+        break;
+      }
       option.render();
       this.selector.style.height = `${this.calculateHeight(i)}px`;
       this.selector.appendChild(option.element);
 
-      if (document.body.classList.contains("enableAnimations")) await delay(20);
+      if (document.body.classList.contains("enableAnimations")) {
+        await delay(20);
+      }
     }
   }
 
@@ -234,7 +238,9 @@ class CompactThemeSelector {
 
     document.addEventListener("click", (e: MouseEvent) => {
       if (e.target instanceof HTMLElement) {
-        if (e.target === this.input || this.input.contains(e.target)) return;
+        if (e.target === this.input || this.input.contains(e.target)) {
+          return;
+        }
         this.selectorIsOpen = false;
         this.updateSelectorStatus();
       }
@@ -324,7 +330,9 @@ function toggleQuickSettings() {
 
 async function openQuickSettings() {
   const win = document.getElementById("quickSettings");
-  if (!win) return;
+  if (!win) {
+    return;
+  }
   win.classList.remove("qs-hidden");
   await loadQuickSettings();
   quickSettingsWindowIsHidden = false;
@@ -440,10 +448,14 @@ export async function createQuickSettings() {
   }
 
   document.addEventListener("click", (e: MouseEvent) => {
-    if (quickSettingsWindowIsHidden) return;
+    if (quickSettingsWindowIsHidden) {
+      return;
+    }
 
     const target = e.target as HTMLElement | null;
-    if (!target) return;
+    if (!target) {
+      return;
+    }
 
     if (target.id === "extraSettingsButton") {
       closeQuickSettings();

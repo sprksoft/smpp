@@ -95,7 +95,10 @@
 }
 
 .todo-column [listview] .todo-column__row:hover .todo-column__actions-cell,
-.todo-column [listview] .todo-column__row--resolved:hover .todo-column__actions-cell {
+.todo-column
+  [listview]
+  .todo-column__row--resolved:hover
+  .todo-column__actions-cell {
   background-color: var(--color-base02);
   transition: none;
   display: flex;
@@ -179,7 +182,9 @@
   padding: 0.75rem;
 }
 
-.listview__row.js-listview-row.todo-column__row:has(.todo-column__date-cell):not(:first-of-type) {
+.listview__row.js-listview-row.todo-column__row:has(
+    .todo-column__date-cell
+  ):not(:first-of-type) {
   margin-top: 0.5rem;
 }
 
@@ -428,7 +433,9 @@ hr.separator.todo-column__pinned__seperator {
   background-color: transparent;
 }
 
-.course-module-planner__timeline .timeline-row.planned-element-row .action-block__buttons {
+.course-module-planner__timeline
+  .timeline-row.planned-element-row
+  .action-block__buttons {
   background-color: var(--color-base02);
 }
 
@@ -591,7 +598,8 @@ button.icon-label-btn.js-icon-label-btn.icon-label-btn--linkbutton {
   border: 2px solid var(--color-accent);
 }
 
-.enableAnimations button.icon-label-btn.js-icon-label-btn.icon-label-btn--linkbutton {
+.enableAnimations
+  button.icon-label-btn.js-icon-label-btn.icon-label-btn--linkbutton {
   transition: ease-in-out 0.1s all;
 }
 
@@ -621,7 +629,9 @@ button.icon-label-btn.js-icon-label-btn.icon-label-btn--linkbutton:hover {
 
 .listview__row.js-listview-row.planner-listview-data-row--selected.js-planner-listview-data-row--selected,
 .month-view
-  .element.show-more-element:not(:hover):not(.state--hovered--forced).state--hovered
+  .element.show-more-element:not(:hover):not(
+    .state--hovered--forced
+  ).state--hovered
   .element__label-container {
   background-color: var(--color-base01);
 }
@@ -918,8 +928,12 @@ h3.card-block__title.fluid-ui-heading.fluid-ui-heading--3 {
   color: var(--color-text);
 }
 
-.course-module-planner__timeline .timeline-row.planned-element-row:hover .icon-block,
-.course-module-planner__timeline .timeline-row.planned-element-row:hover .card-block {
+.course-module-planner__timeline
+  .timeline-row.planned-element-row:hover
+  .icon-block,
+.course-module-planner__timeline
+  .timeline-row.planned-element-row:hover
+  .card-block {
   box-shadow: 0 6px 32px rgba(0, 0, 0, 0.5);
 }
 .course-module-planner__timeline .timeline-row.planned-element-row .card-block {
@@ -949,19 +963,32 @@ h3.detail-description__title.title--3,
   color: var(--color-text);
 }
 
-.glass .side-panel.sidepanel__participants-list .side-panel__panel .participants-list__row:hover,
-.glass .side-panel.sidepanel__participants-list .side-panel__panel .participants-list__row--active {
+.glass
+  .side-panel.sidepanel__participants-list
+  .side-panel__panel
+  .participants-list__row:hover,
+.glass
+  .side-panel.sidepanel__participants-list
+  .side-panel__panel
+  .participants-list__row--active {
   background: var(--darken-background);
   backdrop-filter: var(--surface-blur);
 }
 
-.side-panel.sidepanel__participants-list .side-panel__panel .participants-list__row:hover,
-.side-panel.sidepanel__participants-list .side-panel__panel .participants-list__row--active {
+.side-panel.sidepanel__participants-list
+  .side-panel__panel
+  .participants-list__row:hover,
+.side-panel.sidepanel__participants-list
+  .side-panel__panel
+  .participants-list__row--active {
   background: var(--color-base01);
   border-radius: 1rem;
 }
 
-.side-panel.sidepanel__participants-list .side-panel__panel .participants-list__row .description {
+.side-panel.sidepanel__participants-list
+  .side-panel__panel
+  .participants-list__row
+  .description {
   color: var(--color-text);
   opacity: 0.7;
 }
@@ -1011,7 +1038,9 @@ button.filter-btn.c-red-combo-hover--100:hover {
   color: var(--color-red);
 }
 
-.side-panel.sidepanel__participants-list .side-panel__panel .participants-list__buttonbar {
+.side-panel.sidepanel__participants-list
+  .side-panel__panel
+  .participants-list__buttonbar {
   border-top-color: var(--color-base02);
 }
 

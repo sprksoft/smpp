@@ -51,7 +51,9 @@ function title_prefix() {
   const url = location.pathname;
   const qstr = new URLSearchParams(location.search);
   const module = qstr.get("module");
-  if (!url.split("/")[1]) return;
+  if (!url.split("/")[1]) {
+    return;
+  }
   let page = url.split("/")[1].toLowerCase();
   if (module !== null) {
     page = module.toLowerCase();
@@ -98,9 +100,8 @@ function title_prefix() {
   if (prefix !== undefined) {
     if (topnav_title) {
       return `${prefix} - ${topnav_title}`;
-    } else {
-      return prefix;
     }
+    return prefix;
   }
 }
 

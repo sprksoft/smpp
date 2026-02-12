@@ -48,7 +48,7 @@ class SnakeWidget extends GameBase {
 
   #tick() {
     this.#curDir = this.#targetDir;
-    const head = this.#snake[this.#snake.length - 1];
+    const head = this.#snake.at(-1);
     const newHead = head.add(this.#curDir);
 
     // bounds check

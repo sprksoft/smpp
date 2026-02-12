@@ -10,11 +10,11 @@ async function fetchPlannerData(date, user) {
     const url = `https://${school_name}/planner/api/v1/planned-elements/user/${user}?from=${date}&to=${date}`;
     const response = await fetch(url);
     if (!response.ok) {
-      throw new Error(`Failed to fetch planner data`);
+      throw new Error("Failed to fetch planner data");
     }
     return await response.json();
   } catch (error) {
-    console.error(`Failed to fetch:`, error);
+    console.error("Failed to fetch:", error);
     return null;
   }
 }
@@ -30,8 +30,8 @@ function fancyfyTime(inputTime) {
 
   function convertTo24HourFormat(time) {
     let [hours, minutes, period] = time.split(":");
-    hours = parseInt(hours, 10);
-    minutes = parseInt(minutes, 10);
+    hours = Number.parseInt(hours, 10);
+    minutes = Number.parseInt(minutes, 10);
     if (period.toLowerCase().includes("pm") && hours !== 12) {
       hours += 12;
     } else if (period.toLowerCase().includes("am") && hours === 12) {
@@ -169,13 +169,15 @@ class PlannerWidget extends WidgetBase {
 
     if (index < numElements - 1) {
       const nextStartTime = new Date(slot.elements[index + 1].period.dateTimeFrom);
-      const marginBottom = (nextStartTime - dateTimeTo) / 60000;
+      const marginBottom = (nextStartTime - dateTimeTo) / 60_000;
       plannerElement.style.marginBottom = `${marginBottom * pixelsPerMinute}px`;
     }
 
     const hoverPlannerElement = () => {
       plannerElement.style.width = "100%";
-      if (height < 73) plannerElement.style.height = "73px";
+      if (height < 73) {
+        plannerElement.style.height = "73px";
+      }
       plannerElement.style.left = "0";
       plannerElement.style.zIndex = "100";
     };
@@ -271,7 +273,8 @@ class PlannerWidget extends WidgetBase {
           this.planningContainer.appendChild(plannerElement);
           allHeights.push(
             Number(
-              parseInt(plannerElement.style.height, 10) + parseInt(plannerElement.style.top, 10),
+              Number.parseInt(plannerElement.style.height, 10) +
+                Number.parseInt(plannerElement.style.top, 10),
             ),
           );
         });

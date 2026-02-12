@@ -1,4 +1,3 @@
-"use strict";
 (() => {
   // src/fixes-utils/svgs.ts
   var discordSvg = `<div class="bigdiscordbutton">
@@ -265,10 +264,12 @@
   function updateLoginPanel() {
     const login_app_left = document.querySelector(".login-app__left");
     login_app_left.innerHTML = " ";
-    document.getElementsByClassName("login-app__platform-indicator")[0].innerHTML = '<h1 class="logintitle">Smartschool ++</h1>';
+    document.getElementsByClassName("login-app__platform-indicator")[0].innerHTML =
+      '<h1 class="logintitle">Smartschool ++</h1>';
     const loginSeperator = document.querySelector(".login-app__title--separator");
     if (loginSeperator) {
-      loginSeperator.innerHTML = '<button type="button" class="white_text_button" id="showmore">More</button>';
+      loginSeperator.innerHTML =
+        '<button type="button" class="white_text_button" id="showmore">More</button>';
       document.getElementById("showmore").addEventListener("click", () => {
         document.documentElement.style.setProperty("--show-options", "flex");
         document.getElementById("showmore").style.display = "none";
@@ -293,135 +294,135 @@
     }
   }
   var splashtexts = [
-    `It even works under water!`,
-    `Hoelang is een chinees.`,
-    `404 Splashtext not found`,
+    "It even works under water!",
+    "Hoelang is een chinees.",
+    "404 Splashtext not found",
     `Don't Smartschool 
  and drive kids!`,
-    `Home-made!`,
-    `Pythagoras was used in this`,
+    "Home-made!",
+    "Pythagoras was used in this",
     // where????
-    `Like that smash button!`,
-    `What <i>DOES</i> the fox say?`,
-    `Supercalifragilisticexpialidocious!`,
-    `Hottentotententententoonstelling`,
-    `Not on steam!`,
-    `Made in Belgium!`,
+    "Like that smash button!",
+    "What <i>DOES</i> the fox say?",
+    "Supercalifragilisticexpialidocious!",
+    "Hottentotententententoonstelling",
+    "Not on steam!",
+    "Made in Belgium!",
     `De L in frans 
  staat voor leuk!`,
     `Doesn't contain nuts!`,
-    `Glutenfree!!!`,
-    `Colorblind approved!`,
-    `Not vegan!`,
+    "Glutenfree!!!",
+    "Colorblind approved!",
+    "Not vegan!",
     // :O
-    `Never gonna give you up ;)`,
-    `The cake is a lie!`,
-    `I know what you did...`,
-    `Join de discord!`,
-    `2 + 2 = 5`,
-    `2 * 3 = 4`,
+    "Never gonna give you up ;)",
+    "The cake is a lie!",
+    "I know what you did...",
+    "Join de discord!",
+    "2 + 2 = 5",
+    "2 * 3 = 4",
     `Listen to the 
  Arctic Monkeys!`,
-    `Global chat before GTA VI???`,
-    `Water your plant(s)!`,
-    `Check out Snake++!`,
-    `Je suis une baguette`,
-    `Dikke BMW!`,
-    `Mand!`,
-    `Net pindakaas gegeten dus...`,
-    `BINGO!`,
-    `GEKOLONISEERD!`,
-    `pssst, its free real estate`,
-    `Europapa!`,
-    `Made by Sprksoft!`,
-    `Made by Lukas`,
-    `Made by Bjarne`,
-    `Made by Sibe`,
-    `Not made in China!`,
-    `How did we get here?`,
-    `Aboo?!`,
-    `Check out Insym!`,
-    `Do your homework!`,
+    "Global chat before GTA VI???",
+    "Water your plant(s)!",
+    "Check out Snake++!",
+    "Je suis une baguette",
+    "Dikke BMW!",
+    "Mand!",
+    "Net pindakaas gegeten dus...",
+    "BINGO!",
+    "GEKOLONISEERD!",
+    "pssst, its free real estate",
+    "Europapa!",
+    "Made by Sprksoft!",
+    "Made by Lukas",
+    "Made by Bjarne",
+    "Made by Sibe",
+    "Not made in China!",
+    "How did we get here?",
+    "Aboo?!",
+    "Check out Insym!",
+    "Do your homework!",
     `Look mom I'm in 
  the splashtext!`,
-    `[Insert funny splashtext]`,
-    `Totally not ripping off Minecraft!`,
-    `Yippieeee`,
-    `Chop Suey!`,
-    `AAAAAAAAA!!!`,
-    `Is tHaT a sUpRA?!?!`,
-    `English or Spanish?`,
-    `Jennifer eet matrassen! WTF?`,
-    `Listen to Am\xE9lie Farren!`,
+    "[Insert funny splashtext]",
+    "Totally not ripping off Minecraft!",
+    "Yippieeee",
+    "Chop Suey!",
+    "AAAAAAAAA!!!",
+    "Is tHaT a sUpRA?!?!",
+    "English or Spanish?",
+    "Jennifer eet matrassen! WTF?",
+    "Listen to Am\xE9lie Farren!",
     `"How to exit VIM???"`,
-    `Are ya vimming son?`,
+    "Are ya vimming son?",
     `It's either Spanish or vanish`,
-    `Are you hacking??`,
-    `:3`,
+    "Are you hacking??",
+    ":3",
     `Ma alleee ik word 
  gekilled door ne kerstboom!`,
-    `<s>SQL</s>,<i> Squil</i> \u2713`,
-    `undefined is not a function`,
-    `:p`,
+    "<s>SQL</s>,<i> Squil</i> \u2713",
+    "undefined is not a function",
+    ":p",
     `I'm blue dabadie dabadaa`,
-    `Chet jipitie`,
-    `Bloat`,
-    `MERGE CONFLICT!`,
+    "Chet jipitie",
+    "Bloat",
+    "MERGE CONFLICT!",
     `In case of fire: git add . 
  ; git commit ; git push`,
     `Always remove French language 
 pack: sudo rm -fr /`,
     void 0,
     // never change this losers!!!!  // rude
-    `Is tHaT A JOjO ReFEreNce?`,
-    `https://ldev.eu.org`,
-    `https://smartschoolplusplus.com`,
-    `weak fingers`,
+    "Is tHaT A JOjO ReFEreNce?",
+    "https://ldev.eu.org",
+    "https://smartschoolplusplus.com",
+    "weak fingers",
     `Beep beep I'm a sheep`,
-    `I love yavascript !`,
-    `Always take your maths kids`,
-    `Gele auto!`,
-    `LET ME OUTTT!!!`,
-    `HELP`,
+    "I love yavascript !",
+    "Always take your maths kids",
+    "Gele auto!",
+    "LET ME OUTTT!!!",
+    "HELP",
     `It's that <i>me</i> espresso!`,
     `You lied about your age, 
 didn't you?`,
-    `Check out Undertale`,
+    "Check out Undertale",
     `Nobody expects the 
  Spanish Inquisition!`,
-    `Beans Beans Beans!`,
+    "Beans Beans Beans!",
     `Baby Shark, doo-doo, 
  doo-doo, doo-doo`,
-    `Brood int frans`,
-    `CORS >:(`,
-    `Le poisson Steve!`,
+    "Brood int frans",
+    "CORS >:(",
+    "Le poisson Steve!",
     `Il est oraaaange! 
  Il a des bras.. et des jambes`,
-    `Since Nov 14, 2023`,
-    `Over 1000+ commits!`,
+    "Since Nov 14, 2023",
+    "Over 1000+ commits!",
     `Took at least 
  5 hours to make!`,
-    `Sometimes works!`,
-    `Survive, Adapt, Overcome!`,
-    `Rode auto!`,
-    `Cookie clicker`,
-    `Are you serious?`,
-    `Breakout++`,
-    `Ruby chan, haii!!`,
+    "Sometimes works!",
+    "Survive, Adapt, Overcome!",
+    "Rode auto!",
+    "Cookie clicker",
+    "Are you serious?",
+    "Breakout++",
+    "Ruby chan, haii!!",
     `It's so sweet`,
-    `Feeling diskinserted?`,
+    "Feeling diskinserted?",
     `Vampire in the corner.
 Is it scaring you off?`,
-    `Whopper Whopper`,
-    `<s>nginx</s>, <i>Enginks</i>`,
-    `I love ECMAScript`,
-    `bAcK iN My DaY!`,
-    `I forgor \u{1F480}`,
+    "Whopper Whopper",
+    "<s>nginx</s>, <i>Enginks</i>",
+    "I love ECMAScript",
+    "bAcK iN My DaY!",
+    "I forgor \u{1F480}",
     // This is intentional, its a Ye reference
     `Error 418 
  I'm a tea pot...`,
-    `Met 100+ splash texts!`,
-    `Do it`
+    "Met 100+ splash texts!",
+    "Do it",
   ];
   function getSplashText() {
     return splashtexts[Math.floor(Math.random() * splashtexts.length)];
@@ -429,1269 +430,2730 @@ Is it scaring you off?`,
 
   // node_modules/browser-image-compression/dist/browser-image-compression.mjs
   function _mergeNamespaces(e5, t5) {
-    return t5.forEach((function(t6) {
-      t6 && "string" != typeof t6 && !Array.isArray(t6) && Object.keys(t6).forEach((function(r5) {
-        if ("default" !== r5 && !(r5 in e5)) {
-          var i5 = Object.getOwnPropertyDescriptor(t6, r5);
-          Object.defineProperty(e5, r5, i5.get ? i5 : { enumerable: true, get: function() {
-            return t6[r5];
-          } });
-        }
-      }));
-    })), Object.freeze(e5);
+    return (
+      t5.forEach((t6) => {
+        t6 &&
+          typeof t6 != "string" &&
+          !Array.isArray(t6) &&
+          Object.keys(t6).forEach((r5) => {
+            if (r5 !== "default" && !(r5 in e5)) {
+              var i5 = Object.getOwnPropertyDescriptor(t6, r5);
+              Object.defineProperty(
+                e5,
+                r5,
+                i5.get
+                  ? i5
+                  : {
+                      enumerable: true,
+                      get() {
+                        return t6[r5];
+                      },
+                    },
+              );
+            }
+          });
+      }),
+      Object.freeze(e5)
+    );
   }
   function copyExifWithoutOrientation(e5, t5) {
-    return new Promise((function(r5, i5) {
+    return new Promise((r5, i5) => {
       let o5;
-      return getApp1Segment(e5).then((function(e6) {
+      return getApp1Segment(e5).then((e6) => {
         try {
-          return o5 = e6, r5(new Blob([t5.slice(0, 2), o5, t5.slice(2)], { type: "image/jpeg" }));
+          return (o5 = e6), r5(new Blob([t5.slice(0, 2), o5, t5.slice(2)], { type: "image/jpeg" }));
         } catch (e7) {
           return i5(e7);
         }
-      }), i5);
-    }));
+      }, i5);
+    });
   }
-  var getApp1Segment = (e5) => new Promise(((t5, r5) => {
-    const i5 = new FileReader();
-    i5.addEventListener("load", (({ target: { result: e6 } }) => {
-      const i6 = new DataView(e6);
-      let o5 = 0;
-      if (65496 !== i6.getUint16(o5)) return r5("not a valid JPEG");
-      for (o5 += 2; ; ) {
-        const a5 = i6.getUint16(o5);
-        if (65498 === a5) break;
-        const s4 = i6.getUint16(o5 + 2);
-        if (65505 === a5 && 1165519206 === i6.getUint32(o5 + 4)) {
-          const a6 = o5 + 10;
-          let f5;
-          switch (i6.getUint16(a6)) {
-            case 18761:
-              f5 = true;
-              break;
-            case 19789:
-              f5 = false;
-              break;
-            default:
-              return r5("TIFF header contains invalid endian");
+  var getApp1Segment = (e5) =>
+    new Promise((t5, r5) => {
+      const i5 = new FileReader();
+      i5.addEventListener("load", ({ target: { result: e6 } }) => {
+        const i6 = new DataView(e6);
+        let o5 = 0;
+        if (i6.getUint16(o5) !== 65_496) {
+          return r5("not a valid JPEG");
+        }
+        for (o5 += 2; ; ) {
+          const a5 = i6.getUint16(o5);
+          if (a5 === 65_498) {
+            break;
           }
-          if (42 !== i6.getUint16(a6 + 2, f5)) return r5("TIFF header contains invalid version");
-          const l4 = i6.getUint32(a6 + 4, f5), c5 = a6 + l4 + 2 + 12 * i6.getUint16(a6 + l4, f5);
-          for (let e7 = a6 + l4 + 2; e7 < c5; e7 += 12) {
-            if (274 == i6.getUint16(e7, f5)) {
-              if (3 !== i6.getUint16(e7 + 2, f5)) return r5("Orientation data type is invalid");
-              if (1 !== i6.getUint32(e7 + 4, f5)) return r5("Orientation data count is invalid");
-              i6.setUint16(e7 + 8, 1, f5);
-              break;
+          const s4 = i6.getUint16(o5 + 2);
+          if (a5 === 65_505 && i6.getUint32(o5 + 4) === 1_165_519_206) {
+            const a6 = o5 + 10;
+            let f5;
+            switch (i6.getUint16(a6)) {
+              case 18_761:
+                f5 = true;
+                break;
+              case 19_789:
+                f5 = false;
+                break;
+              default:
+                return r5("TIFF header contains invalid endian");
+            }
+            if (i6.getUint16(a6 + 2, f5) !== 42) {
+              return r5("TIFF header contains invalid version");
+            }
+            const l4 = i6.getUint32(a6 + 4, f5),
+              c5 = a6 + l4 + 2 + 12 * i6.getUint16(a6 + l4, f5);
+            for (let e7 = a6 + l4 + 2; e7 < c5; e7 += 12) {
+              if (i6.getUint16(e7, f5) == 274) {
+                if (i6.getUint16(e7 + 2, f5) !== 3) {
+                  return r5("Orientation data type is invalid");
+                }
+                if (i6.getUint32(e7 + 4, f5) !== 1) {
+                  return r5("Orientation data count is invalid");
+                }
+                i6.setUint16(e7 + 8, 1, f5);
+                break;
+              }
+            }
+            return t5(e6.slice(o5, o5 + 2 + s4));
+          }
+          o5 += 2 + s4;
+        }
+        return t5(new Blob());
+      }),
+        i5.readAsArrayBuffer(e5);
+    });
+  var e = {};
+  var t = {
+    get exports() {
+      return e;
+    },
+    set exports(t5) {
+      e = t5;
+    },
+  };
+  !((e5) => {
+    var r5,
+      i5,
+      UZIP2 = {};
+    (t.exports = UZIP2),
+      (UZIP2.parse = (e6, t5) => {
+        for (
+          var r6 = UZIP2.bin.readUshort,
+            i6 = UZIP2.bin.readUint,
+            o5 = 0,
+            a5 = {},
+            s4 = new Uint8Array(e6),
+            f5 = s4.length - 4;
+          i6(s4, f5) != 101_010_256;
+        ) {
+          f5--;
+        }
+        o5 = f5;
+        o5 += 4;
+        var l4 = r6(s4, (o5 += 4));
+        r6(s4, (o5 += 2));
+        var c5 = i6(s4, (o5 += 2)),
+          u4 = i6(s4, (o5 += 4));
+        (o5 += 4), (o5 = u4);
+        for (var h4 = 0; h4 < l4; h4++) {
+          i6(s4, o5), (o5 += 4), (o5 += 4), (o5 += 4), i6(s4, (o5 += 4));
+          c5 = i6(s4, (o5 += 4));
+          var d3 = i6(s4, (o5 += 4)),
+            A = r6(s4, (o5 += 4)),
+            g2 = r6(s4, o5 + 2),
+            p4 = r6(s4, o5 + 4);
+          o5 += 6;
+          var m2 = i6(s4, (o5 += 8));
+          (o5 += 4), (o5 += A + g2 + p4), UZIP2._readLocal(s4, m2, a5, c5, d3, t5);
+        }
+        return a5;
+      }),
+      (UZIP2._readLocal = (e6, t5, r6, i6, o5, a5) => {
+        var s4 = UZIP2.bin.readUshort,
+          f5 = UZIP2.bin.readUint;
+        f5(e6, t5), s4(e6, (t5 += 4)), s4(e6, (t5 += 2));
+        var l4 = s4(e6, (t5 += 2));
+        f5(e6, (t5 += 2)), f5(e6, (t5 += 4)), (t5 += 4);
+        var c5 = s4(e6, (t5 += 8)),
+          u4 = s4(e6, (t5 += 2));
+        t5 += 2;
+        var h4 = UZIP2.bin.readUTF8(e6, t5, c5);
+        if (((t5 += c5), (t5 += u4), a5)) {
+          r6[h4] = { size: o5, csize: i6 };
+        } else {
+          var d3 = new Uint8Array(e6.buffer, t5);
+          if (l4 == 0) {
+            r6[h4] = new Uint8Array(d3.buffer.slice(t5, t5 + i6));
+          } else {
+            if (l4 != 8) {
+              throw "unknown compression method: " + l4;
+            }
+            var A = new Uint8Array(o5);
+            UZIP2.inflateRaw(d3, A), (r6[h4] = A);
+          }
+        }
+      }),
+      (UZIP2.inflateRaw = (e6, t5) => UZIP2.F.inflate(e6, t5)),
+      (UZIP2.inflate = (e6, t5) => (
+        e6[0],
+        e6[1],
+        UZIP2.inflateRaw(new Uint8Array(e6.buffer, e6.byteOffset + 2, e6.length - 6), t5)
+      )),
+      (UZIP2.deflate = (e6, t5) => {
+        t5 == null && (t5 = { level: 6 });
+        var r6 = 0,
+          i6 = new Uint8Array(50 + Math.floor(1.1 * e6.length));
+        (i6[r6] = 120),
+          (i6[r6 + 1] = 156),
+          (r6 += 2),
+          (r6 = UZIP2.F.deflateRaw(e6, i6, r6, t5.level));
+        var o5 = UZIP2.adler(e6, 0, e6.length);
+        return (
+          (i6[r6 + 0] = (o5 >>> 24) & 255),
+          (i6[r6 + 1] = (o5 >>> 16) & 255),
+          (i6[r6 + 2] = (o5 >>> 8) & 255),
+          (i6[r6 + 3] = (o5 >>> 0) & 255),
+          new Uint8Array(i6.buffer, 0, r6 + 4)
+        );
+      }),
+      (UZIP2.deflateRaw = (e6, t5) => {
+        t5 == null && (t5 = { level: 6 });
+        var r6 = new Uint8Array(50 + Math.floor(1.1 * e6.length)),
+          i6 = UZIP2.F.deflateRaw(e6, r6, i6, t5.level);
+        return new Uint8Array(r6.buffer, 0, i6);
+      }),
+      (UZIP2.encode = (e6, t5) => {
+        t5 == null && (t5 = false);
+        var r6 = 0,
+          i6 = UZIP2.bin.writeUint,
+          o5 = UZIP2.bin.writeUshort,
+          a5 = {};
+        for (var s4 in e6) {
+          var f5 = !(UZIP2._noNeed(s4) || t5),
+            l4 = e6[s4],
+            c5 = UZIP2.crc.crc(l4, 0, l4.length);
+          a5[s4] = { cpr: f5, usize: l4.length, crc: c5, file: f5 ? UZIP2.deflateRaw(l4) : l4 };
+        }
+        for (var s4 in a5) {
+          r6 += a5[s4].file.length + 30 + 46 + 2 * UZIP2.bin.sizeUTF8(s4);
+        }
+        r6 += 22;
+        var u4 = new Uint8Array(r6),
+          h4 = 0,
+          d3 = [];
+        for (var s4 in a5) {
+          var A = a5[s4];
+          d3.push(h4), (h4 = UZIP2._writeHeader(u4, h4, s4, A, 0));
+        }
+        var g2 = 0,
+          p4 = h4;
+        for (var s4 in a5) {
+          A = a5[s4];
+          d3.push(h4), (h4 = UZIP2._writeHeader(u4, h4, s4, A, 1, d3[g2++]));
+        }
+        var m2 = h4 - p4;
+        return (
+          i6(u4, h4, 101_010_256),
+          (h4 += 4),
+          o5(u4, (h4 += 4), g2),
+          o5(u4, (h4 += 2), g2),
+          i6(u4, (h4 += 2), m2),
+          i6(u4, (h4 += 4), p4),
+          (h4 += 4),
+          (h4 += 2),
+          u4.buffer
+        );
+      }),
+      (UZIP2._noNeed = (e6) => {
+        var t5 = e6.split(".").pop().toLowerCase();
+        return "png,jpg,jpeg,zip".indexOf(t5) != -1;
+      }),
+      (UZIP2._writeHeader = (e6, t5, r6, i6, o5, a5) => {
+        var s4 = UZIP2.bin.writeUint,
+          f5 = UZIP2.bin.writeUshort,
+          l4 = i6.file;
+        return (
+          s4(e6, t5, o5 == 0 ? 67_324_752 : 33_639_248),
+          (t5 += 4),
+          o5 == 1 && (t5 += 2),
+          f5(e6, t5, 20),
+          f5(e6, (t5 += 2), 0),
+          f5(e6, (t5 += 2), i6.cpr ? 8 : 0),
+          s4(e6, (t5 += 2), 0),
+          s4(e6, (t5 += 4), i6.crc),
+          s4(e6, (t5 += 4), l4.length),
+          s4(e6, (t5 += 4), i6.usize),
+          f5(e6, (t5 += 4), UZIP2.bin.sizeUTF8(r6)),
+          f5(e6, (t5 += 2), 0),
+          (t5 += 2),
+          o5 == 1 && ((t5 += 2), (t5 += 2), s4(e6, (t5 += 6), a5), (t5 += 4)),
+          (t5 += UZIP2.bin.writeUTF8(e6, t5, r6)),
+          o5 == 0 && (e6.set(l4, t5), (t5 += l4.length)),
+          t5
+        );
+      }),
+      (UZIP2.crc = {
+        table: (() => {
+          for (var e6 = new Uint32Array(256), t5 = 0; t5 < 256; t5++) {
+            for (var r6 = t5, i6 = 0; i6 < 8; i6++) {
+              1 & r6 ? (r6 = 3_988_292_384 ^ (r6 >>> 1)) : (r6 >>>= 1);
+            }
+            e6[t5] = r6;
+          }
+          return e6;
+        })(),
+        update(e6, t5, r6, i6) {
+          for (var o5 = 0; o5 < i6; o5++) {
+            e6 = UZIP2.crc.table[255 & (e6 ^ t5[r6 + o5])] ^ (e6 >>> 8);
+          }
+          return e6;
+        },
+        crc(e6, t5, r6) {
+          return 4_294_967_295 ^ UZIP2.crc.update(4_294_967_295, e6, t5, r6);
+        },
+      }),
+      (UZIP2.adler = (e6, t5, r6) => {
+        for (var i6 = 1, o5 = 0, a5 = t5, s4 = t5 + r6; a5 < s4; ) {
+          for (var f5 = Math.min(a5 + 5552, s4); a5 < f5; ) {
+            o5 += i6 += e6[a5++];
+          }
+          (i6 %= 65_521), (o5 %= 65_521);
+        }
+        return (o5 << 16) | i6;
+      }),
+      (UZIP2.bin = {
+        readUshort(e6, t5) {
+          return e6[t5] | (e6[t5 + 1] << 8);
+        },
+        writeUshort(e6, t5, r6) {
+          (e6[t5] = 255 & r6), (e6[t5 + 1] = (r6 >> 8) & 255);
+        },
+        readUint(e6, t5) {
+          return 16_777_216 * e6[t5 + 3] + ((e6[t5 + 2] << 16) | (e6[t5 + 1] << 8) | e6[t5]);
+        },
+        writeUint(e6, t5, r6) {
+          (e6[t5] = 255 & r6),
+            (e6[t5 + 1] = (r6 >> 8) & 255),
+            (e6[t5 + 2] = (r6 >> 16) & 255),
+            (e6[t5 + 3] = (r6 >> 24) & 255);
+        },
+        readASCII(e6, t5, r6) {
+          for (var i6 = "", o5 = 0; o5 < r6; o5++) {
+            i6 += String.fromCharCode(e6[t5 + o5]);
+          }
+          return i6;
+        },
+        writeASCII(e6, t5, r6) {
+          for (var i6 = 0; i6 < r6.length; i6++) {
+            e6[t5 + i6] = r6.charCodeAt(i6);
+          }
+        },
+        pad(e6) {
+          return e6.length < 2 ? "0" + e6 : e6;
+        },
+        readUTF8(e6, t5, r6) {
+          for (var i6, o5 = "", a5 = 0; a5 < r6; a5++) {
+            o5 += "%" + UZIP2.bin.pad(e6[t5 + a5].toString(16));
+          }
+          try {
+            i6 = decodeURIComponent(o5);
+          } catch (i7) {
+            return UZIP2.bin.readASCII(e6, t5, r6);
+          }
+          return i6;
+        },
+        writeUTF8(e6, t5, r6) {
+          for (var i6 = r6.length, o5 = 0, a5 = 0; a5 < i6; a5++) {
+            var s4 = r6.charCodeAt(a5);
+            if ((4_294_967_168 & s4) == 0) {
+              (e6[t5 + o5] = s4), o5++;
+            } else if ((4_294_965_248 & s4) == 0) {
+              (e6[t5 + o5] = 192 | (s4 >> 6)),
+                (e6[t5 + o5 + 1] = 128 | ((s4 >> 0) & 63)),
+                (o5 += 2);
+            } else if ((4_294_901_760 & s4) == 0) {
+              (e6[t5 + o5] = 224 | (s4 >> 12)),
+                (e6[t5 + o5 + 1] = 128 | ((s4 >> 6) & 63)),
+                (e6[t5 + o5 + 2] = 128 | ((s4 >> 0) & 63)),
+                (o5 += 3);
+            } else {
+              if ((4_292_870_144 & s4) != 0) {
+                throw "e";
+              }
+              (e6[t5 + o5] = 240 | (s4 >> 18)),
+                (e6[t5 + o5 + 1] = 128 | ((s4 >> 12) & 63)),
+                (e6[t5 + o5 + 2] = 128 | ((s4 >> 6) & 63)),
+                (e6[t5 + o5 + 3] = 128 | ((s4 >> 0) & 63)),
+                (o5 += 4);
             }
           }
-          return t5(e6.slice(o5, o5 + 2 + s4));
+          return o5;
+        },
+        sizeUTF8(e6) {
+          for (var t5 = e6.length, r6 = 0, i6 = 0; i6 < t5; i6++) {
+            var o5 = e6.charCodeAt(i6);
+            if ((4_294_967_168 & o5) == 0) {
+              r6++;
+            } else if ((4_294_965_248 & o5) == 0) {
+              r6 += 2;
+            } else if ((4_294_901_760 & o5) == 0) {
+              r6 += 3;
+            } else {
+              if ((4_292_870_144 & o5) != 0) {
+                throw "e";
+              }
+              r6 += 4;
+            }
+          }
+          return r6;
+        },
+      }),
+      (UZIP2.F = {}),
+      (UZIP2.F.deflateRaw = (e6, t5, r6, i6) => {
+        var o5 = [
+            [0, 0, 0, 0, 0],
+            [4, 4, 8, 4, 0],
+            [4, 5, 16, 8, 0],
+            [4, 6, 16, 16, 0],
+            [4, 10, 16, 32, 0],
+            [8, 16, 32, 32, 0],
+            [8, 16, 128, 128, 0],
+            [8, 32, 128, 256, 0],
+            [32, 128, 258, 1024, 1],
+            [32, 258, 258, 4096, 1],
+          ][i6],
+          a5 = UZIP2.F.U,
+          s4 = UZIP2.F._goodIndex;
+        UZIP2.F._hash;
+        var f5 = UZIP2.F._putsE,
+          l4 = 0,
+          c5 = r6 << 3,
+          u4 = 0,
+          h4 = e6.length;
+        if (i6 == 0) {
+          while (l4 < h4) {
+            f5(t5, c5, l4 + (_ = Math.min(65_535, h4 - l4)) == h4 ? 1 : 0),
+              (c5 = UZIP2.F._copyExact(e6, l4, _, t5, c5 + 8)),
+              (l4 += _);
+          }
+          return c5 >>> 3;
         }
-        o5 += 2 + s4;
-      }
-      return t5(new Blob());
-    })), i5.readAsArrayBuffer(e5);
-  }));
-  var e = {};
-  var t = { get exports() {
-    return e;
-  }, set exports(t5) {
-    e = t5;
-  } };
-  !(function(e5) {
-    var r5, i5, UZIP2 = {};
-    t.exports = UZIP2, UZIP2.parse = function(e6, t5) {
-      for (var r6 = UZIP2.bin.readUshort, i6 = UZIP2.bin.readUint, o5 = 0, a5 = {}, s4 = new Uint8Array(e6), f5 = s4.length - 4; 101010256 != i6(s4, f5); ) f5--;
-      o5 = f5;
-      o5 += 4;
-      var l4 = r6(s4, o5 += 4);
-      r6(s4, o5 += 2);
-      var c5 = i6(s4, o5 += 2), u4 = i6(s4, o5 += 4);
-      o5 += 4, o5 = u4;
-      for (var h4 = 0; h4 < l4; h4++) {
-        i6(s4, o5), o5 += 4, o5 += 4, o5 += 4, i6(s4, o5 += 4);
-        c5 = i6(s4, o5 += 4);
-        var d3 = i6(s4, o5 += 4), A = r6(s4, o5 += 4), g2 = r6(s4, o5 + 2), p4 = r6(s4, o5 + 4);
-        o5 += 6;
-        var m2 = i6(s4, o5 += 8);
-        o5 += 4, o5 += A + g2 + p4, UZIP2._readLocal(s4, m2, a5, c5, d3, t5);
-      }
-      return a5;
-    }, UZIP2._readLocal = function(e6, t5, r6, i6, o5, a5) {
-      var s4 = UZIP2.bin.readUshort, f5 = UZIP2.bin.readUint;
-      f5(e6, t5), s4(e6, t5 += 4), s4(e6, t5 += 2);
-      var l4 = s4(e6, t5 += 2);
-      f5(e6, t5 += 2), f5(e6, t5 += 4), t5 += 4;
-      var c5 = s4(e6, t5 += 8), u4 = s4(e6, t5 += 2);
-      t5 += 2;
-      var h4 = UZIP2.bin.readUTF8(e6, t5, c5);
-      if (t5 += c5, t5 += u4, a5) r6[h4] = { size: o5, csize: i6 };
-      else {
-        var d3 = new Uint8Array(e6.buffer, t5);
-        if (0 == l4) r6[h4] = new Uint8Array(d3.buffer.slice(t5, t5 + i6));
-        else {
-          if (8 != l4) throw "unknown compression method: " + l4;
-          var A = new Uint8Array(o5);
-          UZIP2.inflateRaw(d3, A), r6[h4] = A;
+        var d3 = a5.lits,
+          A = a5.strt,
+          g2 = a5.prev,
+          p4 = 0,
+          m2 = 0,
+          w2 = 0,
+          v3 = 0,
+          b3 = 0,
+          y3 = 0;
+        for (h4 > 2 && (A[(y3 = UZIP2.F._hash(e6, 0))] = 0), l4 = 0; l4 < h4; l4++) {
+          if (((b3 = y3), l4 + 1 < h4 - 2)) {
+            y3 = UZIP2.F._hash(e6, l4 + 1);
+            var E = (l4 + 1) & 32_767;
+            (g2[E] = A[y3]), (A[y3] = E);
+          }
+          if (u4 <= l4) {
+            (p4 > 14e3 || m2 > 26_697) &&
+              h4 - l4 > 100 &&
+              (u4 < l4 && ((d3[p4] = l4 - u4), (p4 += 2), (u4 = l4)),
+              (c5 = UZIP2.F._writeBlock(
+                l4 == h4 - 1 || u4 == h4 ? 1 : 0,
+                d3,
+                p4,
+                v3,
+                e6,
+                w2,
+                l4 - w2,
+                t5,
+                c5,
+              )),
+              (p4 = m2 = v3 = 0),
+              (w2 = l4));
+            var F = 0;
+            l4 < h4 - 2 &&
+              (F = UZIP2.F._bestMatch(e6, l4, g2, b3, Math.min(o5[2], h4 - l4), o5[3]));
+            var _ = F >>> 16,
+              B = 65_535 & F;
+            if (F != 0) {
+              B = 65_535 & F;
+              var U = s4((_ = F >>> 16), a5.of0);
+              a5.lhst[257 + U]++;
+              var C = s4(B, a5.df0);
+              a5.dhst[C]++,
+                (v3 += a5.exb[U] + a5.dxb[C]),
+                (d3[p4] = (_ << 23) | (l4 - u4)),
+                (d3[p4 + 1] = (B << 16) | (U << 8) | C),
+                (p4 += 2),
+                (u4 = l4 + _);
+            } else {
+              a5.lhst[e6[l4]]++;
+            }
+            m2++;
+          }
         }
-      }
-    }, UZIP2.inflateRaw = function(e6, t5) {
-      return UZIP2.F.inflate(e6, t5);
-    }, UZIP2.inflate = function(e6, t5) {
-      return e6[0], e6[1], UZIP2.inflateRaw(new Uint8Array(e6.buffer, e6.byteOffset + 2, e6.length - 6), t5);
-    }, UZIP2.deflate = function(e6, t5) {
-      null == t5 && (t5 = { level: 6 });
-      var r6 = 0, i6 = new Uint8Array(50 + Math.floor(1.1 * e6.length));
-      i6[r6] = 120, i6[r6 + 1] = 156, r6 += 2, r6 = UZIP2.F.deflateRaw(e6, i6, r6, t5.level);
-      var o5 = UZIP2.adler(e6, 0, e6.length);
-      return i6[r6 + 0] = o5 >>> 24 & 255, i6[r6 + 1] = o5 >>> 16 & 255, i6[r6 + 2] = o5 >>> 8 & 255, i6[r6 + 3] = o5 >>> 0 & 255, new Uint8Array(i6.buffer, 0, r6 + 4);
-    }, UZIP2.deflateRaw = function(e6, t5) {
-      null == t5 && (t5 = { level: 6 });
-      var r6 = new Uint8Array(50 + Math.floor(1.1 * e6.length)), i6 = UZIP2.F.deflateRaw(e6, r6, i6, t5.level);
-      return new Uint8Array(r6.buffer, 0, i6);
-    }, UZIP2.encode = function(e6, t5) {
-      null == t5 && (t5 = false);
-      var r6 = 0, i6 = UZIP2.bin.writeUint, o5 = UZIP2.bin.writeUshort, a5 = {};
-      for (var s4 in e6) {
-        var f5 = !UZIP2._noNeed(s4) && !t5, l4 = e6[s4], c5 = UZIP2.crc.crc(l4, 0, l4.length);
-        a5[s4] = { cpr: f5, usize: l4.length, crc: c5, file: f5 ? UZIP2.deflateRaw(l4) : l4 };
-      }
-      for (var s4 in a5) r6 += a5[s4].file.length + 30 + 46 + 2 * UZIP2.bin.sizeUTF8(s4);
-      r6 += 22;
-      var u4 = new Uint8Array(r6), h4 = 0, d3 = [];
-      for (var s4 in a5) {
-        var A = a5[s4];
-        d3.push(h4), h4 = UZIP2._writeHeader(u4, h4, s4, A, 0);
-      }
-      var g2 = 0, p4 = h4;
-      for (var s4 in a5) {
-        A = a5[s4];
-        d3.push(h4), h4 = UZIP2._writeHeader(u4, h4, s4, A, 1, d3[g2++]);
-      }
-      var m2 = h4 - p4;
-      return i6(u4, h4, 101010256), h4 += 4, o5(u4, h4 += 4, g2), o5(u4, h4 += 2, g2), i6(u4, h4 += 2, m2), i6(u4, h4 += 4, p4), h4 += 4, h4 += 2, u4.buffer;
-    }, UZIP2._noNeed = function(e6) {
-      var t5 = e6.split(".").pop().toLowerCase();
-      return -1 != "png,jpg,jpeg,zip".indexOf(t5);
-    }, UZIP2._writeHeader = function(e6, t5, r6, i6, o5, a5) {
-      var s4 = UZIP2.bin.writeUint, f5 = UZIP2.bin.writeUshort, l4 = i6.file;
-      return s4(e6, t5, 0 == o5 ? 67324752 : 33639248), t5 += 4, 1 == o5 && (t5 += 2), f5(e6, t5, 20), f5(e6, t5 += 2, 0), f5(e6, t5 += 2, i6.cpr ? 8 : 0), s4(e6, t5 += 2, 0), s4(e6, t5 += 4, i6.crc), s4(e6, t5 += 4, l4.length), s4(e6, t5 += 4, i6.usize), f5(e6, t5 += 4, UZIP2.bin.sizeUTF8(r6)), f5(e6, t5 += 2, 0), t5 += 2, 1 == o5 && (t5 += 2, t5 += 2, s4(e6, t5 += 6, a5), t5 += 4), t5 += UZIP2.bin.writeUTF8(e6, t5, r6), 0 == o5 && (e6.set(l4, t5), t5 += l4.length), t5;
-    }, UZIP2.crc = { table: (function() {
-      for (var e6 = new Uint32Array(256), t5 = 0; t5 < 256; t5++) {
-        for (var r6 = t5, i6 = 0; i6 < 8; i6++) 1 & r6 ? r6 = 3988292384 ^ r6 >>> 1 : r6 >>>= 1;
-        e6[t5] = r6;
-      }
-      return e6;
-    })(), update: function(e6, t5, r6, i6) {
-      for (var o5 = 0; o5 < i6; o5++) e6 = UZIP2.crc.table[255 & (e6 ^ t5[r6 + o5])] ^ e6 >>> 8;
-      return e6;
-    }, crc: function(e6, t5, r6) {
-      return 4294967295 ^ UZIP2.crc.update(4294967295, e6, t5, r6);
-    } }, UZIP2.adler = function(e6, t5, r6) {
-      for (var i6 = 1, o5 = 0, a5 = t5, s4 = t5 + r6; a5 < s4; ) {
-        for (var f5 = Math.min(a5 + 5552, s4); a5 < f5; ) o5 += i6 += e6[a5++];
-        i6 %= 65521, o5 %= 65521;
-      }
-      return o5 << 16 | i6;
-    }, UZIP2.bin = { readUshort: function(e6, t5) {
-      return e6[t5] | e6[t5 + 1] << 8;
-    }, writeUshort: function(e6, t5, r6) {
-      e6[t5] = 255 & r6, e6[t5 + 1] = r6 >> 8 & 255;
-    }, readUint: function(e6, t5) {
-      return 16777216 * e6[t5 + 3] + (e6[t5 + 2] << 16 | e6[t5 + 1] << 8 | e6[t5]);
-    }, writeUint: function(e6, t5, r6) {
-      e6[t5] = 255 & r6, e6[t5 + 1] = r6 >> 8 & 255, e6[t5 + 2] = r6 >> 16 & 255, e6[t5 + 3] = r6 >> 24 & 255;
-    }, readASCII: function(e6, t5, r6) {
-      for (var i6 = "", o5 = 0; o5 < r6; o5++) i6 += String.fromCharCode(e6[t5 + o5]);
-      return i6;
-    }, writeASCII: function(e6, t5, r6) {
-      for (var i6 = 0; i6 < r6.length; i6++) e6[t5 + i6] = r6.charCodeAt(i6);
-    }, pad: function(e6) {
-      return e6.length < 2 ? "0" + e6 : e6;
-    }, readUTF8: function(e6, t5, r6) {
-      for (var i6, o5 = "", a5 = 0; a5 < r6; a5++) o5 += "%" + UZIP2.bin.pad(e6[t5 + a5].toString(16));
-      try {
-        i6 = decodeURIComponent(o5);
-      } catch (i7) {
-        return UZIP2.bin.readASCII(e6, t5, r6);
-      }
-      return i6;
-    }, writeUTF8: function(e6, t5, r6) {
-      for (var i6 = r6.length, o5 = 0, a5 = 0; a5 < i6; a5++) {
-        var s4 = r6.charCodeAt(a5);
-        if (0 == (4294967168 & s4)) e6[t5 + o5] = s4, o5++;
-        else if (0 == (4294965248 & s4)) e6[t5 + o5] = 192 | s4 >> 6, e6[t5 + o5 + 1] = 128 | s4 >> 0 & 63, o5 += 2;
-        else if (0 == (4294901760 & s4)) e6[t5 + o5] = 224 | s4 >> 12, e6[t5 + o5 + 1] = 128 | s4 >> 6 & 63, e6[t5 + o5 + 2] = 128 | s4 >> 0 & 63, o5 += 3;
-        else {
-          if (0 != (4292870144 & s4)) throw "e";
-          e6[t5 + o5] = 240 | s4 >> 18, e6[t5 + o5 + 1] = 128 | s4 >> 12 & 63, e6[t5 + o5 + 2] = 128 | s4 >> 6 & 63, e6[t5 + o5 + 3] = 128 | s4 >> 0 & 63, o5 += 4;
-        }
-      }
-      return o5;
-    }, sizeUTF8: function(e6) {
-      for (var t5 = e6.length, r6 = 0, i6 = 0; i6 < t5; i6++) {
-        var o5 = e6.charCodeAt(i6);
-        if (0 == (4294967168 & o5)) r6++;
-        else if (0 == (4294965248 & o5)) r6 += 2;
-        else if (0 == (4294901760 & o5)) r6 += 3;
-        else {
-          if (0 != (4292870144 & o5)) throw "e";
-          r6 += 4;
-        }
-      }
-      return r6;
-    } }, UZIP2.F = {}, UZIP2.F.deflateRaw = function(e6, t5, r6, i6) {
-      var o5 = [[0, 0, 0, 0, 0], [4, 4, 8, 4, 0], [4, 5, 16, 8, 0], [4, 6, 16, 16, 0], [4, 10, 16, 32, 0], [8, 16, 32, 32, 0], [8, 16, 128, 128, 0], [8, 32, 128, 256, 0], [32, 128, 258, 1024, 1], [32, 258, 258, 4096, 1]][i6], a5 = UZIP2.F.U, s4 = UZIP2.F._goodIndex;
-      UZIP2.F._hash;
-      var f5 = UZIP2.F._putsE, l4 = 0, c5 = r6 << 3, u4 = 0, h4 = e6.length;
-      if (0 == i6) {
-        for (; l4 < h4; ) {
-          f5(t5, c5, l4 + (_ = Math.min(65535, h4 - l4)) == h4 ? 1 : 0), c5 = UZIP2.F._copyExact(e6, l4, _, t5, c5 + 8), l4 += _;
+        for (
+          (w2 == l4 && e6.length != 0) ||
+          (u4 < l4 && ((d3[p4] = l4 - u4), (p4 += 2), (u4 = l4)),
+          (c5 = UZIP2.F._writeBlock(1, d3, p4, v3, e6, w2, l4 - w2, t5, c5)),
+          (p4 = 0),
+          (m2 = 0),
+          (p4 = m2 = v3 = 0),
+          (w2 = l4));
+          (7 & c5) != 0;
+        ) {
+          c5++;
         }
         return c5 >>> 3;
-      }
-      var d3 = a5.lits, A = a5.strt, g2 = a5.prev, p4 = 0, m2 = 0, w2 = 0, v3 = 0, b3 = 0, y3 = 0;
-      for (h4 > 2 && (A[y3 = UZIP2.F._hash(e6, 0)] = 0), l4 = 0; l4 < h4; l4++) {
-        if (b3 = y3, l4 + 1 < h4 - 2) {
-          y3 = UZIP2.F._hash(e6, l4 + 1);
-          var E = l4 + 1 & 32767;
-          g2[E] = A[y3], A[y3] = E;
+      }),
+      (UZIP2.F._bestMatch = (e6, t5, r6, i6, o5, a5) => {
+        var s4 = 32_767 & t5,
+          f5 = r6[s4],
+          l4 = (s4 - f5 + 32_768) & 32_767;
+        if (f5 == s4 || i6 != UZIP2.F._hash(e6, t5 - l4)) {
+          return 0;
         }
-        if (u4 <= l4) {
-          (p4 > 14e3 || m2 > 26697) && h4 - l4 > 100 && (u4 < l4 && (d3[p4] = l4 - u4, p4 += 2, u4 = l4), c5 = UZIP2.F._writeBlock(l4 == h4 - 1 || u4 == h4 ? 1 : 0, d3, p4, v3, e6, w2, l4 - w2, t5, c5), p4 = m2 = v3 = 0, w2 = l4);
-          var F = 0;
-          l4 < h4 - 2 && (F = UZIP2.F._bestMatch(e6, l4, g2, b3, Math.min(o5[2], h4 - l4), o5[3]));
-          var _ = F >>> 16, B = 65535 & F;
-          if (0 != F) {
-            B = 65535 & F;
-            var U = s4(_ = F >>> 16, a5.of0);
-            a5.lhst[257 + U]++;
-            var C = s4(B, a5.df0);
-            a5.dhst[C]++, v3 += a5.exb[U] + a5.dxb[C], d3[p4] = _ << 23 | l4 - u4, d3[p4 + 1] = B << 16 | U << 8 | C, p4 += 2, u4 = l4 + _;
-          } else a5.lhst[e6[l4]]++;
-          m2++;
+        for (var c5 = 0, u4 = 0, h4 = Math.min(32_767, t5); l4 <= h4 && --a5 != 0 && f5 != s4; ) {
+          if (c5 == 0 || e6[t5 + c5] == e6[t5 + c5 - l4]) {
+            var d3 = UZIP2.F._howLong(e6, t5, l4);
+            if (d3 > c5) {
+              if (((u4 = l4), (c5 = d3) >= o5)) {
+                break;
+              }
+              l4 + 2 < d3 && (d3 = l4 + 2);
+              for (var A = 0, g2 = 0; g2 < d3 - 2; g2++) {
+                var p4 = (t5 - l4 + g2 + 32_768) & 32_767,
+                  m2 = (p4 - r6[p4] + 32_768) & 32_767;
+                m2 > A && ((A = m2), (f5 = p4));
+              }
+            }
+          }
+          l4 += ((s4 = f5) - (f5 = r6[s4]) + 32_768) & 32_767;
         }
-      }
-      for (w2 == l4 && 0 != e6.length || (u4 < l4 && (d3[p4] = l4 - u4, p4 += 2, u4 = l4), c5 = UZIP2.F._writeBlock(1, d3, p4, v3, e6, w2, l4 - w2, t5, c5), p4 = 0, m2 = 0, p4 = m2 = v3 = 0, w2 = l4); 0 != (7 & c5); ) c5++;
-      return c5 >>> 3;
-    }, UZIP2.F._bestMatch = function(e6, t5, r6, i6, o5, a5) {
-      var s4 = 32767 & t5, f5 = r6[s4], l4 = s4 - f5 + 32768 & 32767;
-      if (f5 == s4 || i6 != UZIP2.F._hash(e6, t5 - l4)) return 0;
-      for (var c5 = 0, u4 = 0, h4 = Math.min(32767, t5); l4 <= h4 && 0 != --a5 && f5 != s4; ) {
-        if (0 == c5 || e6[t5 + c5] == e6[t5 + c5 - l4]) {
-          var d3 = UZIP2.F._howLong(e6, t5, l4);
-          if (d3 > c5) {
-            if (u4 = l4, (c5 = d3) >= o5) break;
-            l4 + 2 < d3 && (d3 = l4 + 2);
-            for (var A = 0, g2 = 0; g2 < d3 - 2; g2++) {
-              var p4 = t5 - l4 + g2 + 32768 & 32767, m2 = p4 - r6[p4] + 32768 & 32767;
-              m2 > A && (A = m2, f5 = p4);
+        return (c5 << 16) | u4;
+      }),
+      (UZIP2.F._howLong = (e6, t5, r6) => {
+        if (
+          e6[t5] != e6[t5 - r6] ||
+          e6[t5 + 1] != e6[t5 + 1 - r6] ||
+          e6[t5 + 2] != e6[t5 + 2 - r6]
+        ) {
+          return 0;
+        }
+        var i6 = t5,
+          o5 = Math.min(e6.length, t5 + 258);
+        for (t5 += 3; t5 < o5 && e6[t5] == e6[t5 - r6]; ) {
+          t5++;
+        }
+        return t5 - i6;
+      }),
+      (UZIP2.F._hash = (e6, t5) => (((e6[t5] << 8) | e6[t5 + 1]) + (e6[t5 + 2] << 4)) & 65_535),
+      (UZIP2.saved = 0),
+      (UZIP2.F._writeBlock = (e6, t5, r6, i6, o5, a5, s4, f5, l4) => {
+        var c5,
+          u4,
+          h4,
+          d3,
+          A,
+          g2,
+          p4,
+          m2,
+          w2,
+          v3 = UZIP2.F.U,
+          b3 = UZIP2.F._putsF,
+          y3 = UZIP2.F._putsE;
+        v3.lhst[256]++,
+          (u4 = (c5 = UZIP2.F.getTrees())[0]),
+          (h4 = c5[1]),
+          (d3 = c5[2]),
+          (A = c5[3]),
+          (g2 = c5[4]),
+          (p4 = c5[5]),
+          (m2 = c5[6]),
+          (w2 = c5[7]);
+        var E = 32 + (((l4 + 3) & 7) == 0 ? 0 : 8 - ((l4 + 3) & 7)) + (s4 << 3),
+          F = i6 + UZIP2.F.contSize(v3.fltree, v3.lhst) + UZIP2.F.contSize(v3.fdtree, v3.dhst),
+          _ = i6 + UZIP2.F.contSize(v3.ltree, v3.lhst) + UZIP2.F.contSize(v3.dtree, v3.dhst);
+        _ +=
+          14 +
+          3 * p4 +
+          UZIP2.F.contSize(v3.itree, v3.ihst) +
+          (2 * v3.ihst[16] + 3 * v3.ihst[17] + 7 * v3.ihst[18]);
+        for (var B = 0; B < 286; B++) {
+          v3.lhst[B] = 0;
+        }
+        for (B = 0; B < 30; B++) {
+          v3.dhst[B] = 0;
+        }
+        for (B = 0; B < 19; B++) {
+          v3.ihst[B] = 0;
+        }
+        var U = E < F && E < _ ? 0 : F < _ ? 1 : 2;
+        if ((b3(f5, l4, e6), b3(f5, l4 + 1, U), (l4 += 3), U == 0)) {
+          while ((7 & l4) != 0) {
+            l4++;
+          }
+          l4 = UZIP2.F._copyExact(o5, a5, s4, f5, l4);
+        } else {
+          var C, I;
+          if ((U == 1 && ((C = v3.fltree), (I = v3.fdtree)), U == 2)) {
+            UZIP2.F.makeCodes(v3.ltree, u4),
+              UZIP2.F.revCodes(v3.ltree, u4),
+              UZIP2.F.makeCodes(v3.dtree, h4),
+              UZIP2.F.revCodes(v3.dtree, h4),
+              UZIP2.F.makeCodes(v3.itree, d3),
+              UZIP2.F.revCodes(v3.itree, d3),
+              (C = v3.ltree),
+              (I = v3.dtree),
+              y3(f5, l4, A - 257),
+              y3(f5, (l4 += 5), g2 - 1),
+              y3(f5, (l4 += 5), p4 - 4),
+              (l4 += 4);
+            for (var Q = 0; Q < p4; Q++) {
+              y3(f5, l4 + 3 * Q, v3.itree[1 + (v3.ordr[Q] << 1)]);
+            }
+            (l4 += 3 * p4),
+              (l4 = UZIP2.F._codeTiny(m2, v3.itree, f5, l4)),
+              (l4 = UZIP2.F._codeTiny(w2, v3.itree, f5, l4));
+          }
+          for (var M3 = a5, x3 = 0; x3 < r6; x3 += 2) {
+            for (var S2 = t5[x3], R = S2 >>> 23, T = M3 + (8_388_607 & S2); M3 < T; ) {
+              l4 = UZIP2.F._writeLit(o5[M3++], C, f5, l4);
+            }
+            if (R != 0) {
+              var O = t5[x3 + 1],
+                P = O >> 16,
+                H2 = (O >> 8) & 255,
+                L = 255 & O;
+              y3(f5, (l4 = UZIP2.F._writeLit(257 + H2, C, f5, l4)), R - v3.of0[H2]),
+                (l4 += v3.exb[H2]),
+                b3(f5, (l4 = UZIP2.F._writeLit(L, I, f5, l4)), P - v3.df0[L]),
+                (l4 += v3.dxb[L]),
+                (M3 += R);
+            }
+          }
+          l4 = UZIP2.F._writeLit(256, C, f5, l4);
+        }
+        return l4;
+      }),
+      (UZIP2.F._copyExact = (e6, t5, r6, i6, o5) => {
+        var a5 = o5 >>> 3;
+        return (
+          (i6[a5] = r6),
+          (i6[a5 + 1] = r6 >>> 8),
+          (i6[a5 + 2] = 255 - i6[a5]),
+          (i6[a5 + 3] = 255 - i6[a5 + 1]),
+          (a5 += 4),
+          i6.set(new Uint8Array(e6.buffer, t5, r6), a5),
+          o5 + ((r6 + 4) << 3)
+        );
+      }),
+      (UZIP2.F.getTrees = () => {
+        for (
+          var e6 = UZIP2.F.U,
+            t5 = UZIP2.F._hufTree(e6.lhst, e6.ltree, 15),
+            r6 = UZIP2.F._hufTree(e6.dhst, e6.dtree, 15),
+            i6 = [],
+            o5 = UZIP2.F._lenCodes(e6.ltree, i6),
+            a5 = [],
+            s4 = UZIP2.F._lenCodes(e6.dtree, a5),
+            f5 = 0;
+          f5 < i6.length;
+          f5 += 2
+        ) {
+          e6.ihst[i6[f5]]++;
+        }
+        for (f5 = 0; f5 < a5.length; f5 += 2) {
+          e6.ihst[a5[f5]]++;
+        }
+        for (
+          var l4 = UZIP2.F._hufTree(e6.ihst, e6.itree, 7), c5 = 19;
+          c5 > 4 && e6.itree[1 + (e6.ordr[c5 - 1] << 1)] == 0;
+        ) {
+          c5--;
+        }
+        return [t5, r6, l4, o5, s4, c5, i6, a5];
+      }),
+      (UZIP2.F.getSecond = (e6) => {
+        for (var t5 = [], r6 = 0; r6 < e6.length; r6 += 2) {
+          t5.push(e6[r6 + 1]);
+        }
+        return t5;
+      }),
+      (UZIP2.F.nonZero = (e6) => {
+        for (var t5 = "", r6 = 0; r6 < e6.length; r6 += 2) {
+          e6[r6 + 1] != 0 && (t5 += (r6 >> 1) + ",");
+        }
+        return t5;
+      }),
+      (UZIP2.F.contSize = (e6, t5) => {
+        for (var r6 = 0, i6 = 0; i6 < t5.length; i6++) {
+          r6 += t5[i6] * e6[1 + (i6 << 1)];
+        }
+        return r6;
+      }),
+      (UZIP2.F._codeTiny = (e6, t5, r6, i6) => {
+        for (var o5 = 0; o5 < e6.length; o5 += 2) {
+          var a5 = e6[o5],
+            s4 = e6[o5 + 1];
+          i6 = UZIP2.F._writeLit(a5, t5, r6, i6);
+          var f5 = a5 == 16 ? 2 : a5 == 17 ? 3 : 7;
+          a5 > 15 && (UZIP2.F._putsE(r6, i6, s4, f5), (i6 += f5));
+        }
+        return i6;
+      }),
+      (UZIP2.F._lenCodes = (e6, t5) => {
+        for (var r6 = e6.length; r6 != 2 && e6[r6 - 1] == 0; ) {
+          r6 -= 2;
+        }
+        for (var i6 = 0; i6 < r6; i6 += 2) {
+          var o5 = e6[i6 + 1],
+            a5 = i6 + 3 < r6 ? e6[i6 + 3] : -1,
+            s4 = i6 + 5 < r6 ? e6[i6 + 5] : -1,
+            f5 = i6 == 0 ? -1 : e6[i6 - 1];
+          if (o5 == 0 && a5 == o5 && s4 == o5) {
+            for (var l4 = i6 + 5; l4 + 2 < r6 && e6[l4 + 2] == o5; ) {
+              l4 += 2;
+            }
+            (c5 = Math.min((l4 + 1 - i6) >>> 1, 138)) < 11
+              ? t5.push(17, c5 - 3)
+              : t5.push(18, c5 - 11),
+              (i6 += 2 * c5 - 2);
+          } else if (o5 == f5 && a5 == o5 && s4 == o5) {
+            for (l4 = i6 + 5; l4 + 2 < r6 && e6[l4 + 2] == o5; ) {
+              l4 += 2;
+            }
+            var c5 = Math.min((l4 + 1 - i6) >>> 1, 6);
+            t5.push(16, c5 - 3), (i6 += 2 * c5 - 2);
+          } else {
+            t5.push(o5, 0);
+          }
+        }
+        return r6 >>> 1;
+      }),
+      (UZIP2.F._hufTree = (e6, t5, r6) => {
+        var i6 = [],
+          o5 = e6.length,
+          a5 = t5.length,
+          s4 = 0;
+        for (s4 = 0; s4 < a5; s4 += 2) {
+          (t5[s4] = 0), (t5[s4 + 1] = 0);
+        }
+        for (s4 = 0; s4 < o5; s4++) {
+          e6[s4] != 0 && i6.push({ lit: s4, f: e6[s4] });
+        }
+        var f5 = i6.length,
+          l4 = i6.slice(0);
+        if (f5 == 0) {
+          return 0;
+        }
+        if (f5 == 1) {
+          var c5 = i6[0].lit;
+          l4 = c5 == 0 ? 1 : 0;
+          return (t5[1 + (c5 << 1)] = 1), (t5[1 + (l4 << 1)] = 1), 1;
+        }
+        i6.sort((e7, t6) => e7.f - t6.f);
+        var u4 = i6[0],
+          h4 = i6[1],
+          d3 = 0,
+          A = 1,
+          g2 = 2;
+        for (i6[0] = { lit: -1, f: u4.f + h4.f, l: u4, r: h4, d: 0 }; A != f5 - 1; ) {
+          (u4 = d3 != A && (g2 == f5 || i6[d3].f < i6[g2].f) ? i6[d3++] : i6[g2++]),
+            (h4 = d3 != A && (g2 == f5 || i6[d3].f < i6[g2].f) ? i6[d3++] : i6[g2++]),
+            (i6[A++] = { lit: -1, f: u4.f + h4.f, l: u4, r: h4 });
+        }
+        var p4 = UZIP2.F.setDepth(i6[A - 1], 0);
+        for (p4 > r6 && (UZIP2.F.restrictDepth(l4, r6, p4), (p4 = r6)), s4 = 0; s4 < f5; s4++) {
+          t5[1 + (l4[s4].lit << 1)] = l4[s4].d;
+        }
+        return p4;
+      }),
+      (UZIP2.F.setDepth = (e6, t5) =>
+        e6.lit != -1
+          ? ((e6.d = t5), t5)
+          : Math.max(UZIP2.F.setDepth(e6.l, t5 + 1), UZIP2.F.setDepth(e6.r, t5 + 1))),
+      (UZIP2.F.restrictDepth = (e6, t5, r6) => {
+        var i6 = 0,
+          o5 = 1 << (r6 - t5),
+          a5 = 0;
+        for (
+          e6.sort((e7, t6) => (t6.d == e7.d ? e7.f - t6.f : t6.d - e7.d)), i6 = 0;
+          i6 < e6.length && e6[i6].d > t5;
+          i6++
+        ) {
+          var s4 = e6[i6].d;
+          (e6[i6].d = t5), (a5 += o5 - (1 << (r6 - s4)));
+        }
+        for (a5 >>>= r6 - t5; a5 > 0; ) {
+          (s4 = e6[i6].d) < t5 ? (e6[i6].d++, (a5 -= 1 << (t5 - s4 - 1))) : i6++;
+        }
+        for (; i6 >= 0; i6--) {
+          e6[i6].d == t5 && a5 < 0 && (e6[i6].d--, a5++);
+        }
+        a5 != 0 && console.log("debt left");
+      }),
+      (UZIP2.F._goodIndex = (e6, t5) => {
+        var r6 = 0;
+        return (
+          t5[16 | r6] <= e6 && (r6 |= 16),
+          t5[8 | r6] <= e6 && (r6 |= 8),
+          t5[4 | r6] <= e6 && (r6 |= 4),
+          t5[2 | r6] <= e6 && (r6 |= 2),
+          t5[1 | r6] <= e6 && (r6 |= 1),
+          r6
+        );
+      }),
+      (UZIP2.F._writeLit = (e6, t5, r6, i6) => (
+        UZIP2.F._putsF(r6, i6, t5[e6 << 1]), i6 + t5[1 + (e6 << 1)]
+      )),
+      (UZIP2.F.inflate = (e6, t5) => {
+        var r6 = Uint8Array;
+        if (e6[0] == 3 && e6[1] == 0) {
+          return t5 || new r6(0);
+        }
+        var i6 = UZIP2.F,
+          o5 = i6._bitsF,
+          a5 = i6._bitsE,
+          s4 = i6._decodeTiny,
+          f5 = i6.makeCodes,
+          l4 = i6.codes2map,
+          c5 = i6._get17,
+          u4 = i6.U,
+          h4 = t5 == null;
+        h4 && (t5 = new r6((e6.length >>> 2) << 3));
+        for (
+          var d3, A, g2 = 0, p4 = 0, m2 = 0, w2 = 0, v3 = 0, b3 = 0, y3 = 0, E = 0, F = 0;
+          g2 == 0;
+        ) {
+          if (((g2 = o5(e6, F, 1)), (p4 = o5(e6, F + 1, 2)), (F += 3), p4 != 0)) {
+            if (
+              (h4 && (t5 = UZIP2.F._check(t5, E + (1 << 17))),
+              p4 == 1 && ((d3 = u4.flmap), (A = u4.fdmap), (b3 = 511), (y3 = 31)),
+              p4 == 2)
+            ) {
+              (m2 = a5(e6, F, 5) + 257),
+                (w2 = a5(e6, F + 5, 5) + 1),
+                (v3 = a5(e6, F + 10, 4) + 4),
+                (F += 14);
+              for (var _ = 0; _ < 38; _ += 2) {
+                (u4.itree[_] = 0), (u4.itree[_ + 1] = 0);
+              }
+              var B = 1;
+              for (_ = 0; _ < v3; _++) {
+                var U = a5(e6, F + 3 * _, 3);
+                (u4.itree[1 + (u4.ordr[_] << 1)] = U), U > B && (B = U);
+              }
+              (F += 3 * v3),
+                f5(u4.itree, B),
+                l4(u4.itree, B, u4.imap),
+                (d3 = u4.lmap),
+                (A = u4.dmap),
+                (F = s4(u4.imap, (1 << B) - 1, m2 + w2, e6, F, u4.ttree));
+              var C = i6._copyOut(u4.ttree, 0, m2, u4.ltree);
+              b3 = (1 << C) - 1;
+              var I = i6._copyOut(u4.ttree, m2, w2, u4.dtree);
+              (y3 = (1 << I) - 1),
+                f5(u4.ltree, C),
+                l4(u4.ltree, C, d3),
+                f5(u4.dtree, I),
+                l4(u4.dtree, I, A);
+            }
+            for (;;) {
+              var Q = d3[c5(e6, F) & b3];
+              F += 15 & Q;
+              var M3 = Q >>> 4;
+              if (M3 >>> 8 == 0) {
+                t5[E++] = M3;
+              } else {
+                if (M3 == 256) {
+                  break;
+                }
+                var x3 = E + M3 - 254;
+                if (M3 > 264) {
+                  var S2 = u4.ldef[M3 - 257];
+                  (x3 = E + (S2 >>> 3) + a5(e6, F, 7 & S2)), (F += 7 & S2);
+                }
+                var R = A[c5(e6, F) & y3];
+                F += 15 & R;
+                var T = R >>> 4,
+                  O = u4.ddef[T],
+                  P = (O >>> 4) + o5(e6, F, 15 & O);
+                for (F += 15 & O, h4 && (t5 = UZIP2.F._check(t5, E + (1 << 17))); E < x3; ) {
+                  (t5[E] = t5[E++ - P]),
+                    (t5[E] = t5[E++ - P]),
+                    (t5[E] = t5[E++ - P]),
+                    (t5[E] = t5[E++ - P]);
+                }
+                E = x3;
+              }
+            }
+          } else {
+            (7 & F) != 0 && (F += 8 - (7 & F));
+            var H2 = 4 + (F >>> 3),
+              L = e6[H2 - 4] | (e6[H2 - 3] << 8);
+            h4 && (t5 = UZIP2.F._check(t5, E + L)),
+              t5.set(new r6(e6.buffer, e6.byteOffset + H2, L), E),
+              (F = (H2 + L) << 3),
+              (E += L);
+          }
+        }
+        return t5.length == E ? t5 : t5.slice(0, E);
+      }),
+      (UZIP2.F._check = (e6, t5) => {
+        var r6 = e6.length;
+        if (t5 <= r6) {
+          return e6;
+        }
+        var i6 = new Uint8Array(Math.max(r6 << 1, t5));
+        return i6.set(e6, 0), i6;
+      }),
+      (UZIP2.F._decodeTiny = (e6, t5, r6, i6, o5, a5) => {
+        for (var s4 = UZIP2.F._bitsE, f5 = UZIP2.F._get17, l4 = 0; l4 < r6; ) {
+          var c5 = e6[f5(i6, o5) & t5];
+          o5 += 15 & c5;
+          var u4 = c5 >>> 4;
+          if (u4 <= 15) {
+            (a5[l4] = u4), l4++;
+          } else {
+            var h4 = 0,
+              d3 = 0;
+            u4 == 16
+              ? ((d3 = 3 + s4(i6, o5, 2)), (o5 += 2), (h4 = a5[l4 - 1]))
+              : u4 == 17
+                ? ((d3 = 3 + s4(i6, o5, 3)), (o5 += 3))
+                : u4 == 18 && ((d3 = 11 + s4(i6, o5, 7)), (o5 += 7));
+            for (var A = l4 + d3; l4 < A; ) {
+              (a5[l4] = h4), l4++;
             }
           }
         }
-        l4 += (s4 = f5) - (f5 = r6[s4]) + 32768 & 32767;
-      }
-      return c5 << 16 | u4;
-    }, UZIP2.F._howLong = function(e6, t5, r6) {
-      if (e6[t5] != e6[t5 - r6] || e6[t5 + 1] != e6[t5 + 1 - r6] || e6[t5 + 2] != e6[t5 + 2 - r6]) return 0;
-      var i6 = t5, o5 = Math.min(e6.length, t5 + 258);
-      for (t5 += 3; t5 < o5 && e6[t5] == e6[t5 - r6]; ) t5++;
-      return t5 - i6;
-    }, UZIP2.F._hash = function(e6, t5) {
-      return (e6[t5] << 8 | e6[t5 + 1]) + (e6[t5 + 2] << 4) & 65535;
-    }, UZIP2.saved = 0, UZIP2.F._writeBlock = function(e6, t5, r6, i6, o5, a5, s4, f5, l4) {
-      var c5, u4, h4, d3, A, g2, p4, m2, w2, v3 = UZIP2.F.U, b3 = UZIP2.F._putsF, y3 = UZIP2.F._putsE;
-      v3.lhst[256]++, u4 = (c5 = UZIP2.F.getTrees())[0], h4 = c5[1], d3 = c5[2], A = c5[3], g2 = c5[4], p4 = c5[5], m2 = c5[6], w2 = c5[7];
-      var E = 32 + (0 == (l4 + 3 & 7) ? 0 : 8 - (l4 + 3 & 7)) + (s4 << 3), F = i6 + UZIP2.F.contSize(v3.fltree, v3.lhst) + UZIP2.F.contSize(v3.fdtree, v3.dhst), _ = i6 + UZIP2.F.contSize(v3.ltree, v3.lhst) + UZIP2.F.contSize(v3.dtree, v3.dhst);
-      _ += 14 + 3 * p4 + UZIP2.F.contSize(v3.itree, v3.ihst) + (2 * v3.ihst[16] + 3 * v3.ihst[17] + 7 * v3.ihst[18]);
-      for (var B = 0; B < 286; B++) v3.lhst[B] = 0;
-      for (B = 0; B < 30; B++) v3.dhst[B] = 0;
-      for (B = 0; B < 19; B++) v3.ihst[B] = 0;
-      var U = E < F && E < _ ? 0 : F < _ ? 1 : 2;
-      if (b3(f5, l4, e6), b3(f5, l4 + 1, U), l4 += 3, 0 == U) {
-        for (; 0 != (7 & l4); ) l4++;
-        l4 = UZIP2.F._copyExact(o5, a5, s4, f5, l4);
-      } else {
-        var C, I;
-        if (1 == U && (C = v3.fltree, I = v3.fdtree), 2 == U) {
-          UZIP2.F.makeCodes(v3.ltree, u4), UZIP2.F.revCodes(v3.ltree, u4), UZIP2.F.makeCodes(v3.dtree, h4), UZIP2.F.revCodes(v3.dtree, h4), UZIP2.F.makeCodes(v3.itree, d3), UZIP2.F.revCodes(v3.itree, d3), C = v3.ltree, I = v3.dtree, y3(f5, l4, A - 257), y3(f5, l4 += 5, g2 - 1), y3(f5, l4 += 5, p4 - 4), l4 += 4;
-          for (var Q = 0; Q < p4; Q++) y3(f5, l4 + 3 * Q, v3.itree[1 + (v3.ordr[Q] << 1)]);
-          l4 += 3 * p4, l4 = UZIP2.F._codeTiny(m2, v3.itree, f5, l4), l4 = UZIP2.F._codeTiny(w2, v3.itree, f5, l4);
+        return o5;
+      }),
+      (UZIP2.F._copyOut = (e6, t5, r6, i6) => {
+        for (var o5 = 0, a5 = 0, s4 = i6.length >>> 1; a5 < r6; ) {
+          var f5 = e6[a5 + t5];
+          (i6[a5 << 1] = 0), (i6[1 + (a5 << 1)] = f5), f5 > o5 && (o5 = f5), a5++;
         }
-        for (var M3 = a5, x3 = 0; x3 < r6; x3 += 2) {
-          for (var S2 = t5[x3], R = S2 >>> 23, T = M3 + (8388607 & S2); M3 < T; ) l4 = UZIP2.F._writeLit(o5[M3++], C, f5, l4);
-          if (0 != R) {
-            var O = t5[x3 + 1], P = O >> 16, H2 = O >> 8 & 255, L = 255 & O;
-            y3(f5, l4 = UZIP2.F._writeLit(257 + H2, C, f5, l4), R - v3.of0[H2]), l4 += v3.exb[H2], b3(f5, l4 = UZIP2.F._writeLit(L, I, f5, l4), P - v3.df0[L]), l4 += v3.dxb[L], M3 += R;
-          }
+        while (a5 < s4) {
+          (i6[a5 << 1] = 0), (i6[1 + (a5 << 1)] = 0), a5++;
         }
-        l4 = UZIP2.F._writeLit(256, C, f5, l4);
-      }
-      return l4;
-    }, UZIP2.F._copyExact = function(e6, t5, r6, i6, o5) {
-      var a5 = o5 >>> 3;
-      return i6[a5] = r6, i6[a5 + 1] = r6 >>> 8, i6[a5 + 2] = 255 - i6[a5], i6[a5 + 3] = 255 - i6[a5 + 1], a5 += 4, i6.set(new Uint8Array(e6.buffer, t5, r6), a5), o5 + (r6 + 4 << 3);
-    }, UZIP2.F.getTrees = function() {
-      for (var e6 = UZIP2.F.U, t5 = UZIP2.F._hufTree(e6.lhst, e6.ltree, 15), r6 = UZIP2.F._hufTree(e6.dhst, e6.dtree, 15), i6 = [], o5 = UZIP2.F._lenCodes(e6.ltree, i6), a5 = [], s4 = UZIP2.F._lenCodes(e6.dtree, a5), f5 = 0; f5 < i6.length; f5 += 2) e6.ihst[i6[f5]]++;
-      for (f5 = 0; f5 < a5.length; f5 += 2) e6.ihst[a5[f5]]++;
-      for (var l4 = UZIP2.F._hufTree(e6.ihst, e6.itree, 7), c5 = 19; c5 > 4 && 0 == e6.itree[1 + (e6.ordr[c5 - 1] << 1)]; ) c5--;
-      return [t5, r6, l4, o5, s4, c5, i6, a5];
-    }, UZIP2.F.getSecond = function(e6) {
-      for (var t5 = [], r6 = 0; r6 < e6.length; r6 += 2) t5.push(e6[r6 + 1]);
-      return t5;
-    }, UZIP2.F.nonZero = function(e6) {
-      for (var t5 = "", r6 = 0; r6 < e6.length; r6 += 2) 0 != e6[r6 + 1] && (t5 += (r6 >> 1) + ",");
-      return t5;
-    }, UZIP2.F.contSize = function(e6, t5) {
-      for (var r6 = 0, i6 = 0; i6 < t5.length; i6++) r6 += t5[i6] * e6[1 + (i6 << 1)];
-      return r6;
-    }, UZIP2.F._codeTiny = function(e6, t5, r6, i6) {
-      for (var o5 = 0; o5 < e6.length; o5 += 2) {
-        var a5 = e6[o5], s4 = e6[o5 + 1];
-        i6 = UZIP2.F._writeLit(a5, t5, r6, i6);
-        var f5 = 16 == a5 ? 2 : 17 == a5 ? 3 : 7;
-        a5 > 15 && (UZIP2.F._putsE(r6, i6, s4, f5), i6 += f5);
-      }
-      return i6;
-    }, UZIP2.F._lenCodes = function(e6, t5) {
-      for (var r6 = e6.length; 2 != r6 && 0 == e6[r6 - 1]; ) r6 -= 2;
-      for (var i6 = 0; i6 < r6; i6 += 2) {
-        var o5 = e6[i6 + 1], a5 = i6 + 3 < r6 ? e6[i6 + 3] : -1, s4 = i6 + 5 < r6 ? e6[i6 + 5] : -1, f5 = 0 == i6 ? -1 : e6[i6 - 1];
-        if (0 == o5 && a5 == o5 && s4 == o5) {
-          for (var l4 = i6 + 5; l4 + 2 < r6 && e6[l4 + 2] == o5; ) l4 += 2;
-          (c5 = Math.min(l4 + 1 - i6 >>> 1, 138)) < 11 ? t5.push(17, c5 - 3) : t5.push(18, c5 - 11), i6 += 2 * c5 - 2;
-        } else if (o5 == f5 && a5 == o5 && s4 == o5) {
-          for (l4 = i6 + 5; l4 + 2 < r6 && e6[l4 + 2] == o5; ) l4 += 2;
-          var c5 = Math.min(l4 + 1 - i6 >>> 1, 6);
-          t5.push(16, c5 - 3), i6 += 2 * c5 - 2;
-        } else t5.push(o5, 0);
-      }
-      return r6 >>> 1;
-    }, UZIP2.F._hufTree = function(e6, t5, r6) {
-      var i6 = [], o5 = e6.length, a5 = t5.length, s4 = 0;
-      for (s4 = 0; s4 < a5; s4 += 2) t5[s4] = 0, t5[s4 + 1] = 0;
-      for (s4 = 0; s4 < o5; s4++) 0 != e6[s4] && i6.push({ lit: s4, f: e6[s4] });
-      var f5 = i6.length, l4 = i6.slice(0);
-      if (0 == f5) return 0;
-      if (1 == f5) {
-        var c5 = i6[0].lit;
-        l4 = 0 == c5 ? 1 : 0;
-        return t5[1 + (c5 << 1)] = 1, t5[1 + (l4 << 1)] = 1, 1;
-      }
-      i6.sort((function(e7, t6) {
-        return e7.f - t6.f;
-      }));
-      var u4 = i6[0], h4 = i6[1], d3 = 0, A = 1, g2 = 2;
-      for (i6[0] = { lit: -1, f: u4.f + h4.f, l: u4, r: h4, d: 0 }; A != f5 - 1; ) u4 = d3 != A && (g2 == f5 || i6[d3].f < i6[g2].f) ? i6[d3++] : i6[g2++], h4 = d3 != A && (g2 == f5 || i6[d3].f < i6[g2].f) ? i6[d3++] : i6[g2++], i6[A++] = { lit: -1, f: u4.f + h4.f, l: u4, r: h4 };
-      var p4 = UZIP2.F.setDepth(i6[A - 1], 0);
-      for (p4 > r6 && (UZIP2.F.restrictDepth(l4, r6, p4), p4 = r6), s4 = 0; s4 < f5; s4++) t5[1 + (l4[s4].lit << 1)] = l4[s4].d;
-      return p4;
-    }, UZIP2.F.setDepth = function(e6, t5) {
-      return -1 != e6.lit ? (e6.d = t5, t5) : Math.max(UZIP2.F.setDepth(e6.l, t5 + 1), UZIP2.F.setDepth(e6.r, t5 + 1));
-    }, UZIP2.F.restrictDepth = function(e6, t5, r6) {
-      var i6 = 0, o5 = 1 << r6 - t5, a5 = 0;
-      for (e6.sort((function(e7, t6) {
-        return t6.d == e7.d ? e7.f - t6.f : t6.d - e7.d;
-      })), i6 = 0; i6 < e6.length && e6[i6].d > t5; i6++) {
-        var s4 = e6[i6].d;
-        e6[i6].d = t5, a5 += o5 - (1 << r6 - s4);
-      }
-      for (a5 >>>= r6 - t5; a5 > 0; ) {
-        (s4 = e6[i6].d) < t5 ? (e6[i6].d++, a5 -= 1 << t5 - s4 - 1) : i6++;
-      }
-      for (; i6 >= 0; i6--) e6[i6].d == t5 && a5 < 0 && (e6[i6].d--, a5++);
-      0 != a5 && console.log("debt left");
-    }, UZIP2.F._goodIndex = function(e6, t5) {
-      var r6 = 0;
-      return t5[16 | r6] <= e6 && (r6 |= 16), t5[8 | r6] <= e6 && (r6 |= 8), t5[4 | r6] <= e6 && (r6 |= 4), t5[2 | r6] <= e6 && (r6 |= 2), t5[1 | r6] <= e6 && (r6 |= 1), r6;
-    }, UZIP2.F._writeLit = function(e6, t5, r6, i6) {
-      return UZIP2.F._putsF(r6, i6, t5[e6 << 1]), i6 + t5[1 + (e6 << 1)];
-    }, UZIP2.F.inflate = function(e6, t5) {
-      var r6 = Uint8Array;
-      if (3 == e6[0] && 0 == e6[1]) return t5 || new r6(0);
-      var i6 = UZIP2.F, o5 = i6._bitsF, a5 = i6._bitsE, s4 = i6._decodeTiny, f5 = i6.makeCodes, l4 = i6.codes2map, c5 = i6._get17, u4 = i6.U, h4 = null == t5;
-      h4 && (t5 = new r6(e6.length >>> 2 << 3));
-      for (var d3, A, g2 = 0, p4 = 0, m2 = 0, w2 = 0, v3 = 0, b3 = 0, y3 = 0, E = 0, F = 0; 0 == g2; ) if (g2 = o5(e6, F, 1), p4 = o5(e6, F + 1, 2), F += 3, 0 != p4) {
-        if (h4 && (t5 = UZIP2.F._check(t5, E + (1 << 17))), 1 == p4 && (d3 = u4.flmap, A = u4.fdmap, b3 = 511, y3 = 31), 2 == p4) {
-          m2 = a5(e6, F, 5) + 257, w2 = a5(e6, F + 5, 5) + 1, v3 = a5(e6, F + 10, 4) + 4, F += 14;
-          for (var _ = 0; _ < 38; _ += 2) u4.itree[_] = 0, u4.itree[_ + 1] = 0;
-          var B = 1;
-          for (_ = 0; _ < v3; _++) {
-            var U = a5(e6, F + 3 * _, 3);
-            u4.itree[1 + (u4.ordr[_] << 1)] = U, U > B && (B = U);
-          }
-          F += 3 * v3, f5(u4.itree, B), l4(u4.itree, B, u4.imap), d3 = u4.lmap, A = u4.dmap, F = s4(u4.imap, (1 << B) - 1, m2 + w2, e6, F, u4.ttree);
-          var C = i6._copyOut(u4.ttree, 0, m2, u4.ltree);
-          b3 = (1 << C) - 1;
-          var I = i6._copyOut(u4.ttree, m2, w2, u4.dtree);
-          y3 = (1 << I) - 1, f5(u4.ltree, C), l4(u4.ltree, C, d3), f5(u4.dtree, I), l4(u4.dtree, I, A);
+        return o5;
+      }),
+      (UZIP2.F.makeCodes = (e6, t5) => {
+        for (
+          var r6, i6, o5, a5, s4 = UZIP2.F.U, f5 = e6.length, l4 = s4.bl_count, c5 = 0;
+          c5 <= t5;
+          c5++
+        ) {
+          l4[c5] = 0;
         }
-        for (; ; ) {
-          var Q = d3[c5(e6, F) & b3];
-          F += 15 & Q;
-          var M3 = Q >>> 4;
-          if (M3 >>> 8 == 0) t5[E++] = M3;
-          else {
-            if (256 == M3) break;
-            var x3 = E + M3 - 254;
-            if (M3 > 264) {
-              var S2 = u4.ldef[M3 - 257];
-              x3 = E + (S2 >>> 3) + a5(e6, F, 7 & S2), F += 7 & S2;
+        for (c5 = 1; c5 < f5; c5 += 2) {
+          l4[e6[c5]]++;
+        }
+        var u4 = s4.next_code;
+        for (r6 = 0, l4[0] = 0, i6 = 1; i6 <= t5; i6++) {
+          (r6 = (r6 + l4[i6 - 1]) << 1), (u4[i6] = r6);
+        }
+        for (o5 = 0; o5 < f5; o5 += 2) {
+          (a5 = e6[o5 + 1]) != 0 && ((e6[o5] = u4[a5]), u4[a5]++);
+        }
+      }),
+      (UZIP2.F.codes2map = (e6, t5, r6) => {
+        for (var i6 = e6.length, o5 = UZIP2.F.U.rev15, a5 = 0; a5 < i6; a5 += 2) {
+          if (e6[a5 + 1] != 0) {
+            for (
+              var s4 = a5 >> 1,
+                f5 = e6[a5 + 1],
+                l4 = (s4 << 4) | f5,
+                c5 = t5 - f5,
+                u4 = e6[a5] << c5,
+                h4 = u4 + (1 << c5);
+              u4 != h4;
+            ) {
+              (r6[o5[u4] >>> (15 - t5)] = l4), u4++;
             }
-            var R = A[c5(e6, F) & y3];
-            F += 15 & R;
-            var T = R >>> 4, O = u4.ddef[T], P = (O >>> 4) + o5(e6, F, 15 & O);
-            for (F += 15 & O, h4 && (t5 = UZIP2.F._check(t5, E + (1 << 17))); E < x3; ) t5[E] = t5[E++ - P], t5[E] = t5[E++ - P], t5[E] = t5[E++ - P], t5[E] = t5[E++ - P];
-            E = x3;
           }
         }
-      } else {
-        0 != (7 & F) && (F += 8 - (7 & F));
-        var H2 = 4 + (F >>> 3), L = e6[H2 - 4] | e6[H2 - 3] << 8;
-        h4 && (t5 = UZIP2.F._check(t5, E + L)), t5.set(new r6(e6.buffer, e6.byteOffset + H2, L), E), F = H2 + L << 3, E += L;
-      }
-      return t5.length == E ? t5 : t5.slice(0, E);
-    }, UZIP2.F._check = function(e6, t5) {
-      var r6 = e6.length;
-      if (t5 <= r6) return e6;
-      var i6 = new Uint8Array(Math.max(r6 << 1, t5));
-      return i6.set(e6, 0), i6;
-    }, UZIP2.F._decodeTiny = function(e6, t5, r6, i6, o5, a5) {
-      for (var s4 = UZIP2.F._bitsE, f5 = UZIP2.F._get17, l4 = 0; l4 < r6; ) {
-        var c5 = e6[f5(i6, o5) & t5];
-        o5 += 15 & c5;
-        var u4 = c5 >>> 4;
-        if (u4 <= 15) a5[l4] = u4, l4++;
-        else {
-          var h4 = 0, d3 = 0;
-          16 == u4 ? (d3 = 3 + s4(i6, o5, 2), o5 += 2, h4 = a5[l4 - 1]) : 17 == u4 ? (d3 = 3 + s4(i6, o5, 3), o5 += 3) : 18 == u4 && (d3 = 11 + s4(i6, o5, 7), o5 += 7);
-          for (var A = l4 + d3; l4 < A; ) a5[l4] = h4, l4++;
+      }),
+      (UZIP2.F.revCodes = (e6, t5) => {
+        for (var r6 = UZIP2.F.U.rev15, i6 = 15 - t5, o5 = 0; o5 < e6.length; o5 += 2) {
+          var a5 = e6[o5] << (t5 - e6[o5 + 1]);
+          e6[o5] = r6[a5] >>> i6;
         }
-      }
-      return o5;
-    }, UZIP2.F._copyOut = function(e6, t5, r6, i6) {
-      for (var o5 = 0, a5 = 0, s4 = i6.length >>> 1; a5 < r6; ) {
-        var f5 = e6[a5 + t5];
-        i6[a5 << 1] = 0, i6[1 + (a5 << 1)] = f5, f5 > o5 && (o5 = f5), a5++;
-      }
-      for (; a5 < s4; ) i6[a5 << 1] = 0, i6[1 + (a5 << 1)] = 0, a5++;
-      return o5;
-    }, UZIP2.F.makeCodes = function(e6, t5) {
-      for (var r6, i6, o5, a5, s4 = UZIP2.F.U, f5 = e6.length, l4 = s4.bl_count, c5 = 0; c5 <= t5; c5++) l4[c5] = 0;
-      for (c5 = 1; c5 < f5; c5 += 2) l4[e6[c5]]++;
-      var u4 = s4.next_code;
-      for (r6 = 0, l4[0] = 0, i6 = 1; i6 <= t5; i6++) r6 = r6 + l4[i6 - 1] << 1, u4[i6] = r6;
-      for (o5 = 0; o5 < f5; o5 += 2) 0 != (a5 = e6[o5 + 1]) && (e6[o5] = u4[a5], u4[a5]++);
-    }, UZIP2.F.codes2map = function(e6, t5, r6) {
-      for (var i6 = e6.length, o5 = UZIP2.F.U.rev15, a5 = 0; a5 < i6; a5 += 2) if (0 != e6[a5 + 1]) for (var s4 = a5 >> 1, f5 = e6[a5 + 1], l4 = s4 << 4 | f5, c5 = t5 - f5, u4 = e6[a5] << c5, h4 = u4 + (1 << c5); u4 != h4; ) {
-        r6[o5[u4] >>> 15 - t5] = l4, u4++;
-      }
-    }, UZIP2.F.revCodes = function(e6, t5) {
-      for (var r6 = UZIP2.F.U.rev15, i6 = 15 - t5, o5 = 0; o5 < e6.length; o5 += 2) {
-        var a5 = e6[o5] << t5 - e6[o5 + 1];
-        e6[o5] = r6[a5] >>> i6;
-      }
-    }, UZIP2.F._putsE = function(e6, t5, r6) {
-      r6 <<= 7 & t5;
-      var i6 = t5 >>> 3;
-      e6[i6] |= r6, e6[i6 + 1] |= r6 >>> 8;
-    }, UZIP2.F._putsF = function(e6, t5, r6) {
-      r6 <<= 7 & t5;
-      var i6 = t5 >>> 3;
-      e6[i6] |= r6, e6[i6 + 1] |= r6 >>> 8, e6[i6 + 2] |= r6 >>> 16;
-    }, UZIP2.F._bitsE = function(e6, t5, r6) {
-      return (e6[t5 >>> 3] | e6[1 + (t5 >>> 3)] << 8) >>> (7 & t5) & (1 << r6) - 1;
-    }, UZIP2.F._bitsF = function(e6, t5, r6) {
-      return (e6[t5 >>> 3] | e6[1 + (t5 >>> 3)] << 8 | e6[2 + (t5 >>> 3)] << 16) >>> (7 & t5) & (1 << r6) - 1;
-    }, UZIP2.F._get17 = function(e6, t5) {
-      return (e6[t5 >>> 3] | e6[1 + (t5 >>> 3)] << 8 | e6[2 + (t5 >>> 3)] << 16) >>> (7 & t5);
-    }, UZIP2.F._get25 = function(e6, t5) {
-      return (e6[t5 >>> 3] | e6[1 + (t5 >>> 3)] << 8 | e6[2 + (t5 >>> 3)] << 16 | e6[3 + (t5 >>> 3)] << 24) >>> (7 & t5);
-    }, UZIP2.F.U = (r5 = Uint16Array, i5 = Uint32Array, { next_code: new r5(16), bl_count: new r5(16), ordr: [16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15], of0: [3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 15, 17, 19, 23, 27, 31, 35, 43, 51, 59, 67, 83, 99, 115, 131, 163, 195, 227, 258, 999, 999, 999], exb: [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 0, 0, 0, 0], ldef: new r5(32), df0: [1, 2, 3, 4, 5, 7, 9, 13, 17, 25, 33, 49, 65, 97, 129, 193, 257, 385, 513, 769, 1025, 1537, 2049, 3073, 4097, 6145, 8193, 12289, 16385, 24577, 65535, 65535], dxb: [0, 0, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 0, 0], ddef: new i5(32), flmap: new r5(512), fltree: [], fdmap: new r5(32), fdtree: [], lmap: new r5(32768), ltree: [], ttree: [], dmap: new r5(32768), dtree: [], imap: new r5(512), itree: [], rev15: new r5(32768), lhst: new i5(286), dhst: new i5(30), ihst: new i5(19), lits: new i5(15e3), strt: new r5(65536), prev: new r5(32768) }), (function() {
-      for (var e6 = UZIP2.F.U, t5 = 0; t5 < 32768; t5++) {
-        var r6 = t5;
-        r6 = (4278255360 & (r6 = (4042322160 & (r6 = (3435973836 & (r6 = (2863311530 & r6) >>> 1 | (1431655765 & r6) << 1)) >>> 2 | (858993459 & r6) << 2)) >>> 4 | (252645135 & r6) << 4)) >>> 8 | (16711935 & r6) << 8, e6.rev15[t5] = (r6 >>> 16 | r6 << 16) >>> 17;
-      }
-      function pushV(e7, t6, r7) {
-        for (; 0 != t6--; ) e7.push(0, r7);
-      }
-      for (t5 = 0; t5 < 32; t5++) e6.ldef[t5] = e6.of0[t5] << 3 | e6.exb[t5], e6.ddef[t5] = e6.df0[t5] << 4 | e6.dxb[t5];
-      pushV(e6.fltree, 144, 8), pushV(e6.fltree, 112, 9), pushV(e6.fltree, 24, 7), pushV(e6.fltree, 8, 8), UZIP2.F.makeCodes(e6.fltree, 9), UZIP2.F.codes2map(e6.fltree, 9, e6.flmap), UZIP2.F.revCodes(e6.fltree, 9), pushV(e6.fdtree, 32, 5), UZIP2.F.makeCodes(e6.fdtree, 5), UZIP2.F.codes2map(e6.fdtree, 5, e6.fdmap), UZIP2.F.revCodes(e6.fdtree, 5), pushV(e6.itree, 19, 0), pushV(e6.ltree, 286, 0), pushV(e6.dtree, 30, 0), pushV(e6.ttree, 320, 0);
-    })();
+      }),
+      (UZIP2.F._putsE = (e6, t5, r6) => {
+        r6 <<= 7 & t5;
+        var i6 = t5 >>> 3;
+        (e6[i6] |= r6), (e6[i6 + 1] |= r6 >>> 8);
+      }),
+      (UZIP2.F._putsF = (e6, t5, r6) => {
+        r6 <<= 7 & t5;
+        var i6 = t5 >>> 3;
+        (e6[i6] |= r6), (e6[i6 + 1] |= r6 >>> 8), (e6[i6 + 2] |= r6 >>> 16);
+      }),
+      (UZIP2.F._bitsE = (e6, t5, r6) =>
+        ((e6[t5 >>> 3] | (e6[1 + (t5 >>> 3)] << 8)) >>> (7 & t5)) & ((1 << r6) - 1)),
+      (UZIP2.F._bitsF = (e6, t5, r6) =>
+        ((e6[t5 >>> 3] | (e6[1 + (t5 >>> 3)] << 8) | (e6[2 + (t5 >>> 3)] << 16)) >>> (7 & t5)) &
+        ((1 << r6) - 1)),
+      (UZIP2.F._get17 = (e6, t5) =>
+        (e6[t5 >>> 3] | (e6[1 + (t5 >>> 3)] << 8) | (e6[2 + (t5 >>> 3)] << 16)) >>> (7 & t5)),
+      (UZIP2.F._get25 = (e6, t5) =>
+        (e6[t5 >>> 3] |
+          (e6[1 + (t5 >>> 3)] << 8) |
+          (e6[2 + (t5 >>> 3)] << 16) |
+          (e6[3 + (t5 >>> 3)] << 24)) >>>
+        (7 & t5)),
+      (UZIP2.F.U =
+        ((r5 = Uint16Array),
+        (i5 = Uint32Array),
+        {
+          next_code: new r5(16),
+          bl_count: new r5(16),
+          ordr: [16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15],
+          of0: [
+            3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 15, 17, 19, 23, 27, 31, 35, 43, 51, 59, 67, 83, 99,
+            115, 131, 163, 195, 227, 258, 999, 999, 999,
+          ],
+          exb: [
+            0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 0,
+            0, 0, 0,
+          ],
+          ldef: new r5(32),
+          df0: [
+            1, 2, 3, 4, 5, 7, 9, 13, 17, 25, 33, 49, 65, 97, 129, 193, 257, 385, 513, 769, 1025,
+            1537, 2049, 3073, 4097, 6145, 8193, 12_289, 16_385, 24_577, 65_535, 65_535,
+          ],
+          dxb: [
+            0, 0, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12,
+            12, 13, 13, 0, 0,
+          ],
+          ddef: new i5(32),
+          flmap: new r5(512),
+          fltree: [],
+          fdmap: new r5(32),
+          fdtree: [],
+          lmap: new r5(32_768),
+          ltree: [],
+          ttree: [],
+          dmap: new r5(32_768),
+          dtree: [],
+          imap: new r5(512),
+          itree: [],
+          rev15: new r5(32_768),
+          lhst: new i5(286),
+          dhst: new i5(30),
+          ihst: new i5(19),
+          lits: new i5(15e3),
+          strt: new r5(65_536),
+          prev: new r5(32_768),
+        })),
+      (() => {
+        for (var e6 = UZIP2.F.U, t5 = 0; t5 < 32_768; t5++) {
+          var r6 = t5;
+          (r6 =
+            ((4_278_255_360 &
+              (r6 =
+                ((4_042_322_160 &
+                  (r6 =
+                    ((3_435_973_836 &
+                      (r6 = ((2_863_311_530 & r6) >>> 1) | ((1_431_655_765 & r6) << 1))) >>>
+                      2) |
+                    ((858_993_459 & r6) << 2))) >>>
+                  4) |
+                ((252_645_135 & r6) << 4))) >>>
+              8) |
+            ((16_711_935 & r6) << 8)),
+            (e6.rev15[t5] = ((r6 >>> 16) | (r6 << 16)) >>> 17);
+        }
+        function pushV(e7, t6, r7) {
+          while (t6-- != 0) {
+            e7.push(0, r7);
+          }
+        }
+        for (t5 = 0; t5 < 32; t5++) {
+          (e6.ldef[t5] = (e6.of0[t5] << 3) | e6.exb[t5]),
+            (e6.ddef[t5] = (e6.df0[t5] << 4) | e6.dxb[t5]);
+        }
+        pushV(e6.fltree, 144, 8),
+          pushV(e6.fltree, 112, 9),
+          pushV(e6.fltree, 24, 7),
+          pushV(e6.fltree, 8, 8),
+          UZIP2.F.makeCodes(e6.fltree, 9),
+          UZIP2.F.codes2map(e6.fltree, 9, e6.flmap),
+          UZIP2.F.revCodes(e6.fltree, 9),
+          pushV(e6.fdtree, 32, 5),
+          UZIP2.F.makeCodes(e6.fdtree, 5),
+          UZIP2.F.codes2map(e6.fdtree, 5, e6.fdmap),
+          UZIP2.F.revCodes(e6.fdtree, 5),
+          pushV(e6.itree, 19, 0),
+          pushV(e6.ltree, 286, 0),
+          pushV(e6.dtree, 30, 0),
+          pushV(e6.ttree, 320, 0);
+      })();
   })();
   var UZIP = _mergeNamespaces({ __proto__: null, default: e }, [e]);
-  var UPNG = (function() {
-    var e5 = { nextZero(e6, t6) {
-      for (; 0 != e6[t6]; ) t6++;
-      return t6;
-    }, readUshort: (e6, t6) => e6[t6] << 8 | e6[t6 + 1], writeUshort(e6, t6, r5) {
-      e6[t6] = r5 >> 8 & 255, e6[t6 + 1] = 255 & r5;
-    }, readUint: (e6, t6) => 16777216 * e6[t6] + (e6[t6 + 1] << 16 | e6[t6 + 2] << 8 | e6[t6 + 3]), writeUint(e6, t6, r5) {
-      e6[t6] = r5 >> 24 & 255, e6[t6 + 1] = r5 >> 16 & 255, e6[t6 + 2] = r5 >> 8 & 255, e6[t6 + 3] = 255 & r5;
-    }, readASCII(e6, t6, r5) {
-      let i5 = "";
-      for (let o5 = 0; o5 < r5; o5++) i5 += String.fromCharCode(e6[t6 + o5]);
-      return i5;
-    }, writeASCII(e6, t6, r5) {
-      for (let i5 = 0; i5 < r5.length; i5++) e6[t6 + i5] = r5.charCodeAt(i5);
-    }, readBytes(e6, t6, r5) {
-      const i5 = [];
-      for (let o5 = 0; o5 < r5; o5++) i5.push(e6[t6 + o5]);
-      return i5;
-    }, pad: (e6) => e6.length < 2 ? `0${e6}` : e6, readUTF8(t6, r5, i5) {
-      let o5, a5 = "";
-      for (let o6 = 0; o6 < i5; o6++) a5 += `%${e5.pad(t6[r5 + o6].toString(16))}`;
-      try {
-        o5 = decodeURIComponent(a5);
-      } catch (o6) {
-        return e5.readASCII(t6, r5, i5);
-      }
-      return o5;
-    } };
+  var UPNG = (() => {
+    var e5 = {
+      nextZero(e6, t6) {
+        while (e6[t6] != 0) {
+          t6++;
+        }
+        return t6;
+      },
+      readUshort: (e6, t6) => (e6[t6] << 8) | e6[t6 + 1],
+      writeUshort(e6, t6, r5) {
+        (e6[t6] = (r5 >> 8) & 255), (e6[t6 + 1] = 255 & r5);
+      },
+      readUint: (e6, t6) =>
+        16_777_216 * e6[t6] + ((e6[t6 + 1] << 16) | (e6[t6 + 2] << 8) | e6[t6 + 3]),
+      writeUint(e6, t6, r5) {
+        (e6[t6] = (r5 >> 24) & 255),
+          (e6[t6 + 1] = (r5 >> 16) & 255),
+          (e6[t6 + 2] = (r5 >> 8) & 255),
+          (e6[t6 + 3] = 255 & r5);
+      },
+      readASCII(e6, t6, r5) {
+        let i5 = "";
+        for (let o5 = 0; o5 < r5; o5++) {
+          i5 += String.fromCharCode(e6[t6 + o5]);
+        }
+        return i5;
+      },
+      writeASCII(e6, t6, r5) {
+        for (let i5 = 0; i5 < r5.length; i5++) {
+          e6[t6 + i5] = r5.charCodeAt(i5);
+        }
+      },
+      readBytes(e6, t6, r5) {
+        const i5 = [];
+        for (let o5 = 0; o5 < r5; o5++) {
+          i5.push(e6[t6 + o5]);
+        }
+        return i5;
+      },
+      pad: (e6) => (e6.length < 2 ? `0${e6}` : e6),
+      readUTF8(t6, r5, i5) {
+        let o5,
+          a5 = "";
+        for (let o6 = 0; o6 < i5; o6++) {
+          a5 += `%${e5.pad(t6[r5 + o6].toString(16))}`;
+        }
+        try {
+          o5 = decodeURIComponent(a5);
+        } catch (o6) {
+          return e5.readASCII(t6, r5, i5);
+        }
+        return o5;
+      },
+    };
     function decodeImage(t6, r5, i5, o5) {
-      const a5 = r5 * i5, s4 = _getBPP(o5), f5 = Math.ceil(r5 * s4 / 8), l4 = new Uint8Array(4 * a5), c5 = new Uint32Array(l4.buffer), { ctype: u4 } = o5, { depth: h4 } = o5, d3 = e5.readUshort;
-      if (6 == u4) {
+      const a5 = r5 * i5,
+        s4 = _getBPP(o5),
+        f5 = Math.ceil((r5 * s4) / 8),
+        l4 = new Uint8Array(4 * a5),
+        c5 = new Uint32Array(l4.buffer),
+        { ctype: u4 } = o5,
+        { depth: h4 } = o5,
+        d3 = e5.readUshort;
+      if (u4 == 6) {
         const e6 = a5 << 2;
-        if (8 == h4) for (var A = 0; A < e6; A += 4) l4[A] = t6[A], l4[A + 1] = t6[A + 1], l4[A + 2] = t6[A + 2], l4[A + 3] = t6[A + 3];
-        if (16 == h4) for (A = 0; A < e6; A++) l4[A] = t6[A << 1];
-      } else if (2 == u4) {
-        const e6 = o5.tabs.tRNS;
-        if (null == e6) {
-          if (8 == h4) for (A = 0; A < a5; A++) {
-            var g2 = 3 * A;
-            c5[A] = 255 << 24 | t6[g2 + 2] << 16 | t6[g2 + 1] << 8 | t6[g2];
+        if (h4 == 8) {
+          for (var A = 0; A < e6; A += 4) {
+            (l4[A] = t6[A]),
+              (l4[A + 1] = t6[A + 1]),
+              (l4[A + 2] = t6[A + 2]),
+              (l4[A + 3] = t6[A + 3]);
           }
-          if (16 == h4) for (A = 0; A < a5; A++) {
-            g2 = 6 * A;
-            c5[A] = 255 << 24 | t6[g2 + 4] << 16 | t6[g2 + 2] << 8 | t6[g2];
+        }
+        if (h4 == 16) {
+          for (A = 0; A < e6; A++) {
+            l4[A] = t6[A << 1];
+          }
+        }
+      } else if (u4 == 2) {
+        const e6 = o5.tabs.tRNS;
+        if (e6 == null) {
+          if (h4 == 8) {
+            for (A = 0; A < a5; A++) {
+              var g2 = 3 * A;
+              c5[A] = (255 << 24) | (t6[g2 + 2] << 16) | (t6[g2 + 1] << 8) | t6[g2];
+            }
+          }
+          if (h4 == 16) {
+            for (A = 0; A < a5; A++) {
+              g2 = 6 * A;
+              c5[A] = (255 << 24) | (t6[g2 + 4] << 16) | (t6[g2 + 2] << 8) | t6[g2];
+            }
           }
         } else {
           var p4 = e6[0];
-          const r6 = e6[1], i6 = e6[2];
-          if (8 == h4) for (A = 0; A < a5; A++) {
-            var m2 = A << 2;
-            g2 = 3 * A;
-            c5[A] = 255 << 24 | t6[g2 + 2] << 16 | t6[g2 + 1] << 8 | t6[g2], t6[g2] == p4 && t6[g2 + 1] == r6 && t6[g2 + 2] == i6 && (l4[m2 + 3] = 0);
+          const r6 = e6[1],
+            i6 = e6[2];
+          if (h4 == 8) {
+            for (A = 0; A < a5; A++) {
+              var m2 = A << 2;
+              g2 = 3 * A;
+              (c5[A] = (255 << 24) | (t6[g2 + 2] << 16) | (t6[g2 + 1] << 8) | t6[g2]),
+                t6[g2] == p4 && t6[g2 + 1] == r6 && t6[g2 + 2] == i6 && (l4[m2 + 3] = 0);
+            }
           }
-          if (16 == h4) for (A = 0; A < a5; A++) {
-            m2 = A << 2, g2 = 6 * A;
-            c5[A] = 255 << 24 | t6[g2 + 4] << 16 | t6[g2 + 2] << 8 | t6[g2], d3(t6, g2) == p4 && d3(t6, g2 + 2) == r6 && d3(t6, g2 + 4) == i6 && (l4[m2 + 3] = 0);
+          if (h4 == 16) {
+            for (A = 0; A < a5; A++) {
+              (m2 = A << 2), (g2 = 6 * A);
+              (c5[A] = (255 << 24) | (t6[g2 + 4] << 16) | (t6[g2 + 2] << 8) | t6[g2]),
+                d3(t6, g2) == p4 &&
+                  d3(t6, g2 + 2) == r6 &&
+                  d3(t6, g2 + 4) == i6 &&
+                  (l4[m2 + 3] = 0);
+            }
           }
         }
-      } else if (3 == u4) {
-        const e6 = o5.tabs.PLTE, s5 = o5.tabs.tRNS, c6 = s5 ? s5.length : 0;
-        if (1 == h4) for (var w2 = 0; w2 < i5; w2++) {
-          var v3 = w2 * f5, b3 = w2 * r5;
-          for (A = 0; A < r5; A++) {
-            m2 = b3 + A << 2;
-            var y3 = 3 * (E = t6[v3 + (A >> 3)] >> 7 - ((7 & A) << 0) & 1);
-            l4[m2] = e6[y3], l4[m2 + 1] = e6[y3 + 1], l4[m2 + 2] = e6[y3 + 2], l4[m2 + 3] = E < c6 ? s5[E] : 255;
+      } else if (u4 == 3) {
+        const e6 = o5.tabs.PLTE,
+          s5 = o5.tabs.tRNS,
+          c6 = s5 ? s5.length : 0;
+        if (h4 == 1) {
+          for (var w2 = 0; w2 < i5; w2++) {
+            var v3 = w2 * f5,
+              b3 = w2 * r5;
+            for (A = 0; A < r5; A++) {
+              m2 = (b3 + A) << 2;
+              var y3 = 3 * (E = (t6[v3 + (A >> 3)] >> (7 - ((7 & A) << 0))) & 1);
+              (l4[m2] = e6[y3]),
+                (l4[m2 + 1] = e6[y3 + 1]),
+                (l4[m2 + 2] = e6[y3 + 2]),
+                (l4[m2 + 3] = E < c6 ? s5[E] : 255);
+            }
           }
         }
-        if (2 == h4) for (w2 = 0; w2 < i5; w2++) for (v3 = w2 * f5, b3 = w2 * r5, A = 0; A < r5; A++) {
-          m2 = b3 + A << 2, y3 = 3 * (E = t6[v3 + (A >> 2)] >> 6 - ((3 & A) << 1) & 3);
-          l4[m2] = e6[y3], l4[m2 + 1] = e6[y3 + 1], l4[m2 + 2] = e6[y3 + 2], l4[m2 + 3] = E < c6 ? s5[E] : 255;
+        if (h4 == 2) {
+          for (w2 = 0; w2 < i5; w2++) {
+            for (v3 = w2 * f5, b3 = w2 * r5, A = 0; A < r5; A++) {
+              (m2 = (b3 + A) << 2),
+                (y3 = 3 * (E = (t6[v3 + (A >> 2)] >> (6 - ((3 & A) << 1))) & 3));
+              (l4[m2] = e6[y3]),
+                (l4[m2 + 1] = e6[y3 + 1]),
+                (l4[m2 + 2] = e6[y3 + 2]),
+                (l4[m2 + 3] = E < c6 ? s5[E] : 255);
+            }
+          }
         }
-        if (4 == h4) for (w2 = 0; w2 < i5; w2++) for (v3 = w2 * f5, b3 = w2 * r5, A = 0; A < r5; A++) {
-          m2 = b3 + A << 2, y3 = 3 * (E = t6[v3 + (A >> 1)] >> 4 - ((1 & A) << 2) & 15);
-          l4[m2] = e6[y3], l4[m2 + 1] = e6[y3 + 1], l4[m2 + 2] = e6[y3 + 2], l4[m2 + 3] = E < c6 ? s5[E] : 255;
+        if (h4 == 4) {
+          for (w2 = 0; w2 < i5; w2++) {
+            for (v3 = w2 * f5, b3 = w2 * r5, A = 0; A < r5; A++) {
+              (m2 = (b3 + A) << 2),
+                (y3 = 3 * (E = (t6[v3 + (A >> 1)] >> (4 - ((1 & A) << 2))) & 15));
+              (l4[m2] = e6[y3]),
+                (l4[m2 + 1] = e6[y3 + 1]),
+                (l4[m2 + 2] = e6[y3 + 2]),
+                (l4[m2 + 3] = E < c6 ? s5[E] : 255);
+            }
+          }
         }
-        if (8 == h4) for (A = 0; A < a5; A++) {
-          var E;
-          m2 = A << 2, y3 = 3 * (E = t6[A]);
-          l4[m2] = e6[y3], l4[m2 + 1] = e6[y3 + 1], l4[m2 + 2] = e6[y3 + 2], l4[m2 + 3] = E < c6 ? s5[E] : 255;
+        if (h4 == 8) {
+          for (A = 0; A < a5; A++) {
+            var E;
+            (m2 = A << 2), (y3 = 3 * (E = t6[A]));
+            (l4[m2] = e6[y3]),
+              (l4[m2 + 1] = e6[y3 + 1]),
+              (l4[m2 + 2] = e6[y3 + 2]),
+              (l4[m2 + 3] = E < c6 ? s5[E] : 255);
+          }
         }
-      } else if (4 == u4) {
-        if (8 == h4) for (A = 0; A < a5; A++) {
-          m2 = A << 2;
-          var F = t6[_ = A << 1];
-          l4[m2] = F, l4[m2 + 1] = F, l4[m2 + 2] = F, l4[m2 + 3] = t6[_ + 1];
+      } else if (u4 == 4) {
+        if (h4 == 8) {
+          for (A = 0; A < a5; A++) {
+            m2 = A << 2;
+            var F = t6[(_ = A << 1)];
+            (l4[m2] = F), (l4[m2 + 1] = F), (l4[m2 + 2] = F), (l4[m2 + 3] = t6[_ + 1]);
+          }
         }
-        if (16 == h4) for (A = 0; A < a5; A++) {
-          var _;
-          m2 = A << 2, F = t6[_ = A << 2];
-          l4[m2] = F, l4[m2 + 1] = F, l4[m2 + 2] = F, l4[m2 + 3] = t6[_ + 2];
+        if (h4 == 16) {
+          for (A = 0; A < a5; A++) {
+            var _;
+            (m2 = A << 2), (F = t6[(_ = A << 2)]);
+            (l4[m2] = F), (l4[m2 + 1] = F), (l4[m2 + 2] = F), (l4[m2 + 3] = t6[_ + 2]);
+          }
         }
-      } else if (0 == u4) for (p4 = o5.tabs.tRNS ? o5.tabs.tRNS : -1, w2 = 0; w2 < i5; w2++) {
-        const e6 = w2 * f5, i6 = w2 * r5;
-        if (1 == h4) for (var B = 0; B < r5; B++) {
-          var U = (F = 255 * (t6[e6 + (B >>> 3)] >>> 7 - (7 & B) & 1)) == 255 * p4 ? 0 : 255;
-          c5[i6 + B] = U << 24 | F << 16 | F << 8 | F;
-        }
-        else if (2 == h4) for (B = 0; B < r5; B++) {
-          U = (F = 85 * (t6[e6 + (B >>> 2)] >>> 6 - ((3 & B) << 1) & 3)) == 85 * p4 ? 0 : 255;
-          c5[i6 + B] = U << 24 | F << 16 | F << 8 | F;
-        }
-        else if (4 == h4) for (B = 0; B < r5; B++) {
-          U = (F = 17 * (t6[e6 + (B >>> 1)] >>> 4 - ((1 & B) << 2) & 15)) == 17 * p4 ? 0 : 255;
-          c5[i6 + B] = U << 24 | F << 16 | F << 8 | F;
-        }
-        else if (8 == h4) for (B = 0; B < r5; B++) {
-          U = (F = t6[e6 + B]) == p4 ? 0 : 255;
-          c5[i6 + B] = U << 24 | F << 16 | F << 8 | F;
-        }
-        else if (16 == h4) for (B = 0; B < r5; B++) {
-          F = t6[e6 + (B << 1)], U = d3(t6, e6 + (B << 1)) == p4 ? 0 : 255;
-          c5[i6 + B] = U << 24 | F << 16 | F << 8 | F;
+      } else if (u4 == 0) {
+        for (p4 = o5.tabs.tRNS ? o5.tabs.tRNS : -1, w2 = 0; w2 < i5; w2++) {
+          const e6 = w2 * f5,
+            i6 = w2 * r5;
+          if (h4 == 1) {
+            for (var B = 0; B < r5; B++) {
+              var U =
+                (F = 255 * ((t6[e6 + (B >>> 3)] >>> (7 - (7 & B))) & 1)) == 255 * p4 ? 0 : 255;
+              c5[i6 + B] = (U << 24) | (F << 16) | (F << 8) | F;
+            }
+          } else if (h4 == 2) {
+            for (B = 0; B < r5; B++) {
+              U =
+                (F = 85 * ((t6[e6 + (B >>> 2)] >>> (6 - ((3 & B) << 1))) & 3)) == 85 * p4 ? 0 : 255;
+              c5[i6 + B] = (U << 24) | (F << 16) | (F << 8) | F;
+            }
+          } else if (h4 == 4) {
+            for (B = 0; B < r5; B++) {
+              U =
+                (F = 17 * ((t6[e6 + (B >>> 1)] >>> (4 - ((1 & B) << 2))) & 15)) == 17 * p4
+                  ? 0
+                  : 255;
+              c5[i6 + B] = (U << 24) | (F << 16) | (F << 8) | F;
+            }
+          } else if (h4 == 8) {
+            for (B = 0; B < r5; B++) {
+              U = (F = t6[e6 + B]) == p4 ? 0 : 255;
+              c5[i6 + B] = (U << 24) | (F << 16) | (F << 8) | F;
+            }
+          } else if (h4 == 16) {
+            for (B = 0; B < r5; B++) {
+              (F = t6[e6 + (B << 1)]), (U = d3(t6, e6 + (B << 1)) == p4 ? 0 : 255);
+              c5[i6 + B] = (U << 24) | (F << 16) | (F << 8) | F;
+            }
+          }
         }
       }
       return l4;
     }
     function _decompress(e6, r5, i5, o5) {
-      const a5 = _getBPP(e6), s4 = Math.ceil(i5 * a5 / 8), f5 = new Uint8Array((s4 + 1 + e6.interlace) * o5);
-      return r5 = e6.tabs.CgBI ? t5(r5, f5) : _inflate(r5, f5), 0 == e6.interlace ? r5 = _filterZero(r5, e6, 0, i5, o5) : 1 == e6.interlace && (r5 = (function _readInterlace(e7, t6) {
-        const r6 = t6.width, i6 = t6.height, o6 = _getBPP(t6), a6 = o6 >> 3, s5 = Math.ceil(r6 * o6 / 8), f6 = new Uint8Array(i6 * s5);
-        let l4 = 0;
-        const c5 = [0, 0, 4, 0, 2, 0, 1], u4 = [0, 4, 0, 2, 0, 1, 0], h4 = [8, 8, 8, 4, 4, 2, 2], d3 = [8, 8, 4, 4, 2, 2, 1];
-        let A = 0;
-        for (; A < 7; ) {
-          const p4 = h4[A], m2 = d3[A];
-          let w2 = 0, v3 = 0, b3 = c5[A];
-          for (; b3 < i6; ) b3 += p4, v3++;
-          let y3 = u4[A];
-          for (; y3 < r6; ) y3 += m2, w2++;
-          const E = Math.ceil(w2 * o6 / 8);
-          _filterZero(e7, t6, l4, w2, v3);
-          let F = 0, _ = c5[A];
-          for (; _ < i6; ) {
-            let t7 = u4[A], i7 = l4 + F * E << 3;
-            for (; t7 < r6; ) {
-              var g2;
-              if (1 == o6) g2 = (g2 = e7[i7 >> 3]) >> 7 - (7 & i7) & 1, f6[_ * s5 + (t7 >> 3)] |= g2 << 7 - ((7 & t7) << 0);
-              if (2 == o6) g2 = (g2 = e7[i7 >> 3]) >> 6 - (7 & i7) & 3, f6[_ * s5 + (t7 >> 2)] |= g2 << 6 - ((3 & t7) << 1);
-              if (4 == o6) g2 = (g2 = e7[i7 >> 3]) >> 4 - (7 & i7) & 15, f6[_ * s5 + (t7 >> 1)] |= g2 << 4 - ((1 & t7) << 2);
-              if (o6 >= 8) {
-                const r7 = _ * s5 + t7 * a6;
-                for (let t8 = 0; t8 < a6; t8++) f6[r7 + t8] = e7[(i7 >> 3) + t8];
+      const a5 = _getBPP(e6),
+        s4 = Math.ceil((i5 * a5) / 8),
+        f5 = new Uint8Array((s4 + 1 + e6.interlace) * o5);
+      return (
+        (r5 = e6.tabs.CgBI ? t5(r5, f5) : _inflate(r5, f5)),
+        e6.interlace == 0
+          ? (r5 = _filterZero(r5, e6, 0, i5, o5))
+          : e6.interlace == 1 &&
+            (r5 = (function _readInterlace(e7, t6) {
+              const r6 = t6.width,
+                i6 = t6.height,
+                o6 = _getBPP(t6),
+                a6 = o6 >> 3,
+                s5 = Math.ceil((r6 * o6) / 8),
+                f6 = new Uint8Array(i6 * s5);
+              let l4 = 0;
+              const c5 = [0, 0, 4, 0, 2, 0, 1],
+                u4 = [0, 4, 0, 2, 0, 1, 0],
+                h4 = [8, 8, 8, 4, 4, 2, 2],
+                d3 = [8, 8, 4, 4, 2, 2, 1];
+              let A = 0;
+              while (A < 7) {
+                const p4 = h4[A],
+                  m2 = d3[A];
+                let w2 = 0,
+                  v3 = 0,
+                  b3 = c5[A];
+                while (b3 < i6) {
+                  (b3 += p4), v3++;
+                }
+                let y3 = u4[A];
+                while (y3 < r6) {
+                  (y3 += m2), w2++;
+                }
+                const E = Math.ceil((w2 * o6) / 8);
+                _filterZero(e7, t6, l4, w2, v3);
+                let F = 0,
+                  _ = c5[A];
+                while (_ < i6) {
+                  let t7 = u4[A],
+                    i7 = (l4 + F * E) << 3;
+                  while (t7 < r6) {
+                    var g2;
+                    if (o6 == 1) {
+                      (g2 = ((g2 = e7[i7 >> 3]) >> (7 - (7 & i7))) & 1),
+                        (f6[_ * s5 + (t7 >> 3)] |= g2 << (7 - ((7 & t7) << 0)));
+                    }
+                    if (o6 == 2) {
+                      (g2 = ((g2 = e7[i7 >> 3]) >> (6 - (7 & i7))) & 3),
+                        (f6[_ * s5 + (t7 >> 2)] |= g2 << (6 - ((3 & t7) << 1)));
+                    }
+                    if (o6 == 4) {
+                      (g2 = ((g2 = e7[i7 >> 3]) >> (4 - (7 & i7))) & 15),
+                        (f6[_ * s5 + (t7 >> 1)] |= g2 << (4 - ((1 & t7) << 2)));
+                    }
+                    if (o6 >= 8) {
+                      const r7 = _ * s5 + t7 * a6;
+                      for (let t8 = 0; t8 < a6; t8++) {
+                        f6[r7 + t8] = e7[(i7 >> 3) + t8];
+                      }
+                    }
+                    (i7 += o6), (t7 += m2);
+                  }
+                  F++, (_ += p4);
+                }
+                w2 * v3 != 0 && (l4 += v3 * (1 + E)), (A += 1);
               }
-              i7 += o6, t7 += m2;
-            }
-            F++, _ += p4;
-          }
-          w2 * v3 != 0 && (l4 += v3 * (1 + E)), A += 1;
-        }
-        return f6;
-      })(r5, e6)), r5;
+              return f6;
+            })(r5, e6)),
+        r5
+      );
     }
     function _inflate(e6, r5) {
       return t5(new Uint8Array(e6.buffer, 2, e6.length - 6), r5);
     }
-    var t5 = (function() {
+    var t5 = (() => {
       const e6 = { H: {} };
-      return e6.H.N = function(t6, r5) {
-        const i5 = Uint8Array;
-        let o5, a5, s4 = 0, f5 = 0, l4 = 0, c5 = 0, u4 = 0, h4 = 0, d3 = 0, A = 0, g2 = 0;
-        if (3 == t6[0] && 0 == t6[1]) return r5 || new i5(0);
-        const p4 = e6.H, m2 = p4.b, w2 = p4.e, v3 = p4.R, b3 = p4.n, y3 = p4.A, E = p4.Z, F = p4.m, _ = null == r5;
-        for (_ && (r5 = new i5(t6.length >>> 2 << 5)); 0 == s4; ) if (s4 = m2(t6, g2, 1), f5 = m2(t6, g2 + 1, 2), g2 += 3, 0 != f5) {
-          if (_ && (r5 = e6.H.W(r5, A + (1 << 17))), 1 == f5 && (o5 = F.J, a5 = F.h, h4 = 511, d3 = 31), 2 == f5) {
-            l4 = w2(t6, g2, 5) + 257, c5 = w2(t6, g2 + 5, 5) + 1, u4 = w2(t6, g2 + 10, 4) + 4, g2 += 14;
-            let e7 = 1;
-            for (var B = 0; B < 38; B += 2) F.Q[B] = 0, F.Q[B + 1] = 0;
-            for (B = 0; B < u4; B++) {
-              const r7 = w2(t6, g2 + 3 * B, 3);
-              F.Q[1 + (F.X[B] << 1)] = r7, r7 > e7 && (e7 = r7);
-            }
-            g2 += 3 * u4, b3(F.Q, e7), y3(F.Q, e7, F.u), o5 = F.w, a5 = F.d, g2 = v3(F.u, (1 << e7) - 1, l4 + c5, t6, g2, F.v);
-            const r6 = p4.V(F.v, 0, l4, F.C);
-            h4 = (1 << r6) - 1;
-            const i6 = p4.V(F.v, l4, c5, F.D);
-            d3 = (1 << i6) - 1, b3(F.C, r6), y3(F.C, r6, o5), b3(F.D, i6), y3(F.D, i6, a5);
+      return (
+        (e6.H.N = (t6, r5) => {
+          const i5 = Uint8Array;
+          let o5,
+            a5,
+            s4 = 0,
+            f5 = 0,
+            l4 = 0,
+            c5 = 0,
+            u4 = 0,
+            h4 = 0,
+            d3 = 0,
+            A = 0,
+            g2 = 0;
+          if (t6[0] == 3 && t6[1] == 0) {
+            return r5 || new i5(0);
           }
-          for (; ; ) {
-            const e7 = o5[E(t6, g2) & h4];
-            g2 += 15 & e7;
-            const i6 = e7 >>> 4;
-            if (i6 >>> 8 == 0) r5[A++] = i6;
-            else {
-              if (256 == i6) break;
-              {
-                let e8 = A + i6 - 254;
-                if (i6 > 264) {
-                  const r6 = F.q[i6 - 257];
-                  e8 = A + (r6 >>> 3) + w2(t6, g2, 7 & r6), g2 += 7 & r6;
+          const p4 = e6.H,
+            m2 = p4.b,
+            w2 = p4.e,
+            v3 = p4.R,
+            b3 = p4.n,
+            y3 = p4.A,
+            E = p4.Z,
+            F = p4.m,
+            _ = r5 == null;
+          for (_ && (r5 = new i5((t6.length >>> 2) << 5)); s4 == 0; ) {
+            if (((s4 = m2(t6, g2, 1)), (f5 = m2(t6, g2 + 1, 2)), (g2 += 3), f5 != 0)) {
+              if (
+                (_ && (r5 = e6.H.W(r5, A + (1 << 17))),
+                f5 == 1 && ((o5 = F.J), (a5 = F.h), (h4 = 511), (d3 = 31)),
+                f5 == 2)
+              ) {
+                (l4 = w2(t6, g2, 5) + 257),
+                  (c5 = w2(t6, g2 + 5, 5) + 1),
+                  (u4 = w2(t6, g2 + 10, 4) + 4),
+                  (g2 += 14);
+                let e7 = 1;
+                for (var B = 0; B < 38; B += 2) {
+                  (F.Q[B] = 0), (F.Q[B + 1] = 0);
                 }
-                const o6 = a5[E(t6, g2) & d3];
-                g2 += 15 & o6;
-                const s5 = o6 >>> 4, f6 = F.c[s5], l5 = (f6 >>> 4) + m2(t6, g2, 15 & f6);
-                for (g2 += 15 & f6; A < e8; ) r5[A] = r5[A++ - l5], r5[A] = r5[A++ - l5], r5[A] = r5[A++ - l5], r5[A] = r5[A++ - l5];
-                A = e8;
+                for (B = 0; B < u4; B++) {
+                  const r7 = w2(t6, g2 + 3 * B, 3);
+                  (F.Q[1 + (F.X[B] << 1)] = r7), r7 > e7 && (e7 = r7);
+                }
+                (g2 += 3 * u4),
+                  b3(F.Q, e7),
+                  y3(F.Q, e7, F.u),
+                  (o5 = F.w),
+                  (a5 = F.d),
+                  (g2 = v3(F.u, (1 << e7) - 1, l4 + c5, t6, g2, F.v));
+                const r6 = p4.V(F.v, 0, l4, F.C);
+                h4 = (1 << r6) - 1;
+                const i6 = p4.V(F.v, l4, c5, F.D);
+                (d3 = (1 << i6) - 1), b3(F.C, r6), y3(F.C, r6, o5), b3(F.D, i6), y3(F.D, i6, a5);
+              }
+              for (;;) {
+                const e7 = o5[E(t6, g2) & h4];
+                g2 += 15 & e7;
+                const i6 = e7 >>> 4;
+                if (i6 >>> 8 == 0) {
+                  r5[A++] = i6;
+                } else {
+                  if (i6 == 256) {
+                    break;
+                  }
+                  {
+                    let e8 = A + i6 - 254;
+                    if (i6 > 264) {
+                      const r6 = F.q[i6 - 257];
+                      (e8 = A + (r6 >>> 3) + w2(t6, g2, 7 & r6)), (g2 += 7 & r6);
+                    }
+                    const o6 = a5[E(t6, g2) & d3];
+                    g2 += 15 & o6;
+                    const s5 = o6 >>> 4,
+                      f6 = F.c[s5],
+                      l5 = (f6 >>> 4) + m2(t6, g2, 15 & f6);
+                    for (g2 += 15 & f6; A < e8; ) {
+                      (r5[A] = r5[A++ - l5]),
+                        (r5[A] = r5[A++ - l5]),
+                        (r5[A] = r5[A++ - l5]),
+                        (r5[A] = r5[A++ - l5]);
+                    }
+                    A = e8;
+                  }
+                }
+              }
+            } else {
+              (7 & g2) != 0 && (g2 += 8 - (7 & g2));
+              const o6 = 4 + (g2 >>> 3),
+                a6 = t6[o6 - 4] | (t6[o6 - 3] << 8);
+              _ && (r5 = e6.H.W(r5, A + a6)),
+                r5.set(new i5(t6.buffer, t6.byteOffset + o6, a6), A),
+                (g2 = (o6 + a6) << 3),
+                (A += a6);
+            }
+          }
+          return r5.length == A ? r5 : r5.slice(0, A);
+        }),
+        (e6.H.W = (e7, t6) => {
+          const r5 = e7.length;
+          if (t6 <= r5) {
+            return e7;
+          }
+          const i5 = new Uint8Array(r5 << 1);
+          return i5.set(e7, 0), i5;
+        }),
+        (e6.H.R = (t6, r5, i5, o5, a5, s4) => {
+          const f5 = e6.H.e,
+            l4 = e6.H.Z;
+          let c5 = 0;
+          while (c5 < i5) {
+            const e7 = t6[l4(o5, a5) & r5];
+            a5 += 15 & e7;
+            const i6 = e7 >>> 4;
+            if (i6 <= 15) {
+              (s4[c5] = i6), c5++;
+            } else {
+              let e8 = 0,
+                t7 = 0;
+              i6 == 16
+                ? ((t7 = 3 + f5(o5, a5, 2)), (a5 += 2), (e8 = s4[c5 - 1]))
+                : i6 == 17
+                  ? ((t7 = 3 + f5(o5, a5, 3)), (a5 += 3))
+                  : i6 == 18 && ((t7 = 11 + f5(o5, a5, 7)), (a5 += 7));
+              const r6 = c5 + t7;
+              while (c5 < r6) {
+                (s4[c5] = e8), c5++;
               }
             }
           }
-        } else {
-          0 != (7 & g2) && (g2 += 8 - (7 & g2));
-          const o6 = 4 + (g2 >>> 3), a6 = t6[o6 - 4] | t6[o6 - 3] << 8;
-          _ && (r5 = e6.H.W(r5, A + a6)), r5.set(new i5(t6.buffer, t6.byteOffset + o6, a6), A), g2 = o6 + a6 << 3, A += a6;
-        }
-        return r5.length == A ? r5 : r5.slice(0, A);
-      }, e6.H.W = function(e7, t6) {
-        const r5 = e7.length;
-        if (t6 <= r5) return e7;
-        const i5 = new Uint8Array(r5 << 1);
-        return i5.set(e7, 0), i5;
-      }, e6.H.R = function(t6, r5, i5, o5, a5, s4) {
-        const f5 = e6.H.e, l4 = e6.H.Z;
-        let c5 = 0;
-        for (; c5 < i5; ) {
-          const e7 = t6[l4(o5, a5) & r5];
-          a5 += 15 & e7;
-          const i6 = e7 >>> 4;
-          if (i6 <= 15) s4[c5] = i6, c5++;
-          else {
-            let e8 = 0, t7 = 0;
-            16 == i6 ? (t7 = 3 + f5(o5, a5, 2), a5 += 2, e8 = s4[c5 - 1]) : 17 == i6 ? (t7 = 3 + f5(o5, a5, 3), a5 += 3) : 18 == i6 && (t7 = 11 + f5(o5, a5, 7), a5 += 7);
-            const r6 = c5 + t7;
-            for (; c5 < r6; ) s4[c5] = e8, c5++;
+          return a5;
+        }),
+        (e6.H.V = (e7, t6, r5, i5) => {
+          let o5 = 0,
+            a5 = 0;
+          const s4 = i5.length >>> 1;
+          while (a5 < r5) {
+            const r6 = e7[a5 + t6];
+            (i5[a5 << 1] = 0), (i5[1 + (a5 << 1)] = r6), r6 > o5 && (o5 = r6), a5++;
           }
-        }
-        return a5;
-      }, e6.H.V = function(e7, t6, r5, i5) {
-        let o5 = 0, a5 = 0;
-        const s4 = i5.length >>> 1;
-        for (; a5 < r5; ) {
-          const r6 = e7[a5 + t6];
-          i5[a5 << 1] = 0, i5[1 + (a5 << 1)] = r6, r6 > o5 && (o5 = r6), a5++;
-        }
-        for (; a5 < s4; ) i5[a5 << 1] = 0, i5[1 + (a5 << 1)] = 0, a5++;
-        return o5;
-      }, e6.H.n = function(t6, r5) {
-        const i5 = e6.H.m, o5 = t6.length;
-        let a5, s4, f5;
-        let l4;
-        const c5 = i5.j;
-        for (var u4 = 0; u4 <= r5; u4++) c5[u4] = 0;
-        for (u4 = 1; u4 < o5; u4 += 2) c5[t6[u4]]++;
-        const h4 = i5.K;
-        for (a5 = 0, c5[0] = 0, s4 = 1; s4 <= r5; s4++) a5 = a5 + c5[s4 - 1] << 1, h4[s4] = a5;
-        for (f5 = 0; f5 < o5; f5 += 2) l4 = t6[f5 + 1], 0 != l4 && (t6[f5] = h4[l4], h4[l4]++);
-      }, e6.H.A = function(t6, r5, i5) {
-        const o5 = t6.length, a5 = e6.H.m.r;
-        for (let e7 = 0; e7 < o5; e7 += 2) if (0 != t6[e7 + 1]) {
-          const o6 = e7 >> 1, s4 = t6[e7 + 1], f5 = o6 << 4 | s4, l4 = r5 - s4;
-          let c5 = t6[e7] << l4;
-          const u4 = c5 + (1 << l4);
-          for (; c5 != u4; ) {
-            i5[a5[c5] >>> 15 - r5] = f5, c5++;
+          while (a5 < s4) {
+            (i5[a5 << 1] = 0), (i5[1 + (a5 << 1)] = 0), a5++;
           }
-        }
-      }, e6.H.l = function(t6, r5) {
-        const i5 = e6.H.m.r, o5 = 15 - r5;
-        for (let e7 = 0; e7 < t6.length; e7 += 2) {
-          const a5 = t6[e7] << r5 - t6[e7 + 1];
-          t6[e7] = i5[a5] >>> o5;
-        }
-      }, e6.H.M = function(e7, t6, r5) {
-        r5 <<= 7 & t6;
-        const i5 = t6 >>> 3;
-        e7[i5] |= r5, e7[i5 + 1] |= r5 >>> 8;
-      }, e6.H.I = function(e7, t6, r5) {
-        r5 <<= 7 & t6;
-        const i5 = t6 >>> 3;
-        e7[i5] |= r5, e7[i5 + 1] |= r5 >>> 8, e7[i5 + 2] |= r5 >>> 16;
-      }, e6.H.e = function(e7, t6, r5) {
-        return (e7[t6 >>> 3] | e7[1 + (t6 >>> 3)] << 8) >>> (7 & t6) & (1 << r5) - 1;
-      }, e6.H.b = function(e7, t6, r5) {
-        return (e7[t6 >>> 3] | e7[1 + (t6 >>> 3)] << 8 | e7[2 + (t6 >>> 3)] << 16) >>> (7 & t6) & (1 << r5) - 1;
-      }, e6.H.Z = function(e7, t6) {
-        return (e7[t6 >>> 3] | e7[1 + (t6 >>> 3)] << 8 | e7[2 + (t6 >>> 3)] << 16) >>> (7 & t6);
-      }, e6.H.i = function(e7, t6) {
-        return (e7[t6 >>> 3] | e7[1 + (t6 >>> 3)] << 8 | e7[2 + (t6 >>> 3)] << 16 | e7[3 + (t6 >>> 3)] << 24) >>> (7 & t6);
-      }, e6.H.m = (function() {
-        const e7 = Uint16Array, t6 = Uint32Array;
-        return { K: new e7(16), j: new e7(16), X: [16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15], S: [3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 15, 17, 19, 23, 27, 31, 35, 43, 51, 59, 67, 83, 99, 115, 131, 163, 195, 227, 258, 999, 999, 999], T: [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 0, 0, 0, 0], q: new e7(32), p: [1, 2, 3, 4, 5, 7, 9, 13, 17, 25, 33, 49, 65, 97, 129, 193, 257, 385, 513, 769, 1025, 1537, 2049, 3073, 4097, 6145, 8193, 12289, 16385, 24577, 65535, 65535], z: [0, 0, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 0, 0], c: new t6(32), J: new e7(512), _: [], h: new e7(32), $: [], w: new e7(32768), C: [], v: [], d: new e7(32768), D: [], u: new e7(512), Q: [], r: new e7(32768), s: new t6(286), Y: new t6(30), a: new t6(19), t: new t6(15e3), k: new e7(65536), g: new e7(32768) };
-      })(), (function() {
-        const t6 = e6.H.m;
-        for (var r5 = 0; r5 < 32768; r5++) {
-          let e7 = r5;
-          e7 = (2863311530 & e7) >>> 1 | (1431655765 & e7) << 1, e7 = (3435973836 & e7) >>> 2 | (858993459 & e7) << 2, e7 = (4042322160 & e7) >>> 4 | (252645135 & e7) << 4, e7 = (4278255360 & e7) >>> 8 | (16711935 & e7) << 8, t6.r[r5] = (e7 >>> 16 | e7 << 16) >>> 17;
-        }
-        function n4(e7, t7, r6) {
-          for (; 0 != t7--; ) e7.push(0, r6);
-        }
-        for (r5 = 0; r5 < 32; r5++) t6.q[r5] = t6.S[r5] << 3 | t6.T[r5], t6.c[r5] = t6.p[r5] << 4 | t6.z[r5];
-        n4(t6._, 144, 8), n4(t6._, 112, 9), n4(t6._, 24, 7), n4(t6._, 8, 8), e6.H.n(t6._, 9), e6.H.A(t6._, 9, t6.J), e6.H.l(t6._, 9), n4(t6.$, 32, 5), e6.H.n(t6.$, 5), e6.H.A(t6.$, 5, t6.h), e6.H.l(t6.$, 5), n4(t6.Q, 19, 0), n4(t6.C, 286, 0), n4(t6.D, 30, 0), n4(t6.v, 320, 0);
-      })(), e6.H.N;
+          return o5;
+        }),
+        (e6.H.n = (t6, r5) => {
+          const i5 = e6.H.m,
+            o5 = t6.length;
+          let a5, s4, f5;
+          let l4;
+          const c5 = i5.j;
+          for (var u4 = 0; u4 <= r5; u4++) {
+            c5[u4] = 0;
+          }
+          for (u4 = 1; u4 < o5; u4 += 2) {
+            c5[t6[u4]]++;
+          }
+          const h4 = i5.K;
+          for (a5 = 0, c5[0] = 0, s4 = 1; s4 <= r5; s4++) {
+            (a5 = (a5 + c5[s4 - 1]) << 1), (h4[s4] = a5);
+          }
+          for (f5 = 0; f5 < o5; f5 += 2) {
+            (l4 = t6[f5 + 1]), l4 != 0 && ((t6[f5] = h4[l4]), h4[l4]++);
+          }
+        }),
+        (e6.H.A = (t6, r5, i5) => {
+          const o5 = t6.length,
+            a5 = e6.H.m.r;
+          for (let e7 = 0; e7 < o5; e7 += 2) {
+            if (t6[e7 + 1] != 0) {
+              const o6 = e7 >> 1,
+                s4 = t6[e7 + 1],
+                f5 = (o6 << 4) | s4,
+                l4 = r5 - s4;
+              let c5 = t6[e7] << l4;
+              const u4 = c5 + (1 << l4);
+              while (c5 != u4) {
+                (i5[a5[c5] >>> (15 - r5)] = f5), c5++;
+              }
+            }
+          }
+        }),
+        (e6.H.l = (t6, r5) => {
+          const i5 = e6.H.m.r,
+            o5 = 15 - r5;
+          for (let e7 = 0; e7 < t6.length; e7 += 2) {
+            const a5 = t6[e7] << (r5 - t6[e7 + 1]);
+            t6[e7] = i5[a5] >>> o5;
+          }
+        }),
+        (e6.H.M = (e7, t6, r5) => {
+          r5 <<= 7 & t6;
+          const i5 = t6 >>> 3;
+          (e7[i5] |= r5), (e7[i5 + 1] |= r5 >>> 8);
+        }),
+        (e6.H.I = (e7, t6, r5) => {
+          r5 <<= 7 & t6;
+          const i5 = t6 >>> 3;
+          (e7[i5] |= r5), (e7[i5 + 1] |= r5 >>> 8), (e7[i5 + 2] |= r5 >>> 16);
+        }),
+        (e6.H.e = (e7, t6, r5) =>
+          ((e7[t6 >>> 3] | (e7[1 + (t6 >>> 3)] << 8)) >>> (7 & t6)) & ((1 << r5) - 1)),
+        (e6.H.b = (e7, t6, r5) =>
+          ((e7[t6 >>> 3] | (e7[1 + (t6 >>> 3)] << 8) | (e7[2 + (t6 >>> 3)] << 16)) >>> (7 & t6)) &
+          ((1 << r5) - 1)),
+        (e6.H.Z = (e7, t6) =>
+          (e7[t6 >>> 3] | (e7[1 + (t6 >>> 3)] << 8) | (e7[2 + (t6 >>> 3)] << 16)) >>> (7 & t6)),
+        (e6.H.i = (e7, t6) =>
+          (e7[t6 >>> 3] |
+            (e7[1 + (t6 >>> 3)] << 8) |
+            (e7[2 + (t6 >>> 3)] << 16) |
+            (e7[3 + (t6 >>> 3)] << 24)) >>>
+          (7 & t6)),
+        (e6.H.m = (() => {
+          const e7 = Uint16Array,
+            t6 = Uint32Array;
+          return {
+            K: new e7(16),
+            j: new e7(16),
+            X: [16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15],
+            S: [
+              3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 15, 17, 19, 23, 27, 31, 35, 43, 51, 59, 67, 83, 99,
+              115, 131, 163, 195, 227, 258, 999, 999, 999,
+            ],
+            T: [
+              0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 0,
+              0, 0, 0,
+            ],
+            q: new e7(32),
+            p: [
+              1, 2, 3, 4, 5, 7, 9, 13, 17, 25, 33, 49, 65, 97, 129, 193, 257, 385, 513, 769, 1025,
+              1537, 2049, 3073, 4097, 6145, 8193, 12_289, 16_385, 24_577, 65_535, 65_535,
+            ],
+            z: [
+              0, 0, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12,
+              12, 13, 13, 0, 0,
+            ],
+            c: new t6(32),
+            J: new e7(512),
+            _: [],
+            h: new e7(32),
+            $: [],
+            w: new e7(32_768),
+            C: [],
+            v: [],
+            d: new e7(32_768),
+            D: [],
+            u: new e7(512),
+            Q: [],
+            r: new e7(32_768),
+            s: new t6(286),
+            Y: new t6(30),
+            a: new t6(19),
+            t: new t6(15e3),
+            k: new e7(65_536),
+            g: new e7(32_768),
+          };
+        })()),
+        (() => {
+          const t6 = e6.H.m;
+          for (var r5 = 0; r5 < 32_768; r5++) {
+            let e7 = r5;
+            (e7 = ((2_863_311_530 & e7) >>> 1) | ((1_431_655_765 & e7) << 1)),
+              (e7 = ((3_435_973_836 & e7) >>> 2) | ((858_993_459 & e7) << 2)),
+              (e7 = ((4_042_322_160 & e7) >>> 4) | ((252_645_135 & e7) << 4)),
+              (e7 = ((4_278_255_360 & e7) >>> 8) | ((16_711_935 & e7) << 8)),
+              (t6.r[r5] = ((e7 >>> 16) | (e7 << 16)) >>> 17);
+          }
+          function n4(e7, t7, r6) {
+            while (t7-- != 0) {
+              e7.push(0, r6);
+            }
+          }
+          for (r5 = 0; r5 < 32; r5++) {
+            (t6.q[r5] = (t6.S[r5] << 3) | t6.T[r5]), (t6.c[r5] = (t6.p[r5] << 4) | t6.z[r5]);
+          }
+          n4(t6._, 144, 8),
+            n4(t6._, 112, 9),
+            n4(t6._, 24, 7),
+            n4(t6._, 8, 8),
+            e6.H.n(t6._, 9),
+            e6.H.A(t6._, 9, t6.J),
+            e6.H.l(t6._, 9),
+            n4(t6.$, 32, 5),
+            e6.H.n(t6.$, 5),
+            e6.H.A(t6.$, 5, t6.h),
+            e6.H.l(t6.$, 5),
+            n4(t6.Q, 19, 0),
+            n4(t6.C, 286, 0),
+            n4(t6.D, 30, 0),
+            n4(t6.v, 320, 0);
+        })(),
+        e6.H.N
+      );
     })();
     function _getBPP(e6) {
       return [1, null, 3, 1, 2, null, 4][e6.ctype] * e6.depth;
     }
     function _filterZero(e6, t6, r5, i5, o5) {
       let a5 = _getBPP(t6);
-      const s4 = Math.ceil(i5 * a5 / 8);
+      const s4 = Math.ceil((i5 * a5) / 8);
       let f5, l4;
       a5 = Math.ceil(a5 / 8);
-      let c5 = e6[r5], u4 = 0;
-      if (c5 > 1 && (e6[r5] = [0, 0, 1][c5 - 2]), 3 == c5) for (u4 = a5; u4 < s4; u4++) e6[u4 + 1] = e6[u4 + 1] + (e6[u4 + 1 - a5] >>> 1) & 255;
-      for (let t7 = 0; t7 < o5; t7++) if (f5 = r5 + t7 * s4, l4 = f5 + t7 + 1, c5 = e6[l4 - 1], u4 = 0, 0 == c5) for (; u4 < s4; u4++) e6[f5 + u4] = e6[l4 + u4];
-      else if (1 == c5) {
-        for (; u4 < a5; u4++) e6[f5 + u4] = e6[l4 + u4];
-        for (; u4 < s4; u4++) e6[f5 + u4] = e6[l4 + u4] + e6[f5 + u4 - a5];
-      } else if (2 == c5) for (; u4 < s4; u4++) e6[f5 + u4] = e6[l4 + u4] + e6[f5 + u4 - s4];
-      else if (3 == c5) {
-        for (; u4 < a5; u4++) e6[f5 + u4] = e6[l4 + u4] + (e6[f5 + u4 - s4] >>> 1);
-        for (; u4 < s4; u4++) e6[f5 + u4] = e6[l4 + u4] + (e6[f5 + u4 - s4] + e6[f5 + u4 - a5] >>> 1);
-      } else {
-        for (; u4 < a5; u4++) e6[f5 + u4] = e6[l4 + u4] + _paeth(0, e6[f5 + u4 - s4], 0);
-        for (; u4 < s4; u4++) e6[f5 + u4] = e6[l4 + u4] + _paeth(e6[f5 + u4 - a5], e6[f5 + u4 - s4], e6[f5 + u4 - a5 - s4]);
+      let c5 = e6[r5],
+        u4 = 0;
+      if ((c5 > 1 && (e6[r5] = [0, 0, 1][c5 - 2]), c5 == 3)) {
+        for (u4 = a5; u4 < s4; u4++) {
+          e6[u4 + 1] = (e6[u4 + 1] + (e6[u4 + 1 - a5] >>> 1)) & 255;
+        }
+      }
+      for (let t7 = 0; t7 < o5; t7++) {
+        if (((f5 = r5 + t7 * s4), (l4 = f5 + t7 + 1), (c5 = e6[l4 - 1]), (u4 = 0), c5 == 0)) {
+          for (; u4 < s4; u4++) {
+            e6[f5 + u4] = e6[l4 + u4];
+          }
+        } else if (c5 == 1) {
+          for (; u4 < a5; u4++) {
+            e6[f5 + u4] = e6[l4 + u4];
+          }
+          for (; u4 < s4; u4++) {
+            e6[f5 + u4] = e6[l4 + u4] + e6[f5 + u4 - a5];
+          }
+        } else if (c5 == 2) {
+          for (; u4 < s4; u4++) {
+            e6[f5 + u4] = e6[l4 + u4] + e6[f5 + u4 - s4];
+          }
+        } else if (c5 == 3) {
+          for (; u4 < a5; u4++) {
+            e6[f5 + u4] = e6[l4 + u4] + (e6[f5 + u4 - s4] >>> 1);
+          }
+          for (; u4 < s4; u4++) {
+            e6[f5 + u4] = e6[l4 + u4] + ((e6[f5 + u4 - s4] + e6[f5 + u4 - a5]) >>> 1);
+          }
+        } else {
+          for (; u4 < a5; u4++) {
+            e6[f5 + u4] = e6[l4 + u4] + _paeth(0, e6[f5 + u4 - s4], 0);
+          }
+          for (; u4 < s4; u4++) {
+            e6[f5 + u4] =
+              e6[l4 + u4] + _paeth(e6[f5 + u4 - a5], e6[f5 + u4 - s4], e6[f5 + u4 - a5 - s4]);
+          }
+        }
       }
       return e6;
     }
     function _paeth(e6, t6, r5) {
-      const i5 = e6 + t6 - r5, o5 = i5 - e6, a5 = i5 - t6, s4 = i5 - r5;
+      const i5 = e6 + t6 - r5,
+        o5 = i5 - e6,
+        a5 = i5 - t6,
+        s4 = i5 - r5;
       return o5 * o5 <= a5 * a5 && o5 * o5 <= s4 * s4 ? e6 : a5 * a5 <= s4 * s4 ? t6 : r5;
     }
     function _IHDR(t6, r5, i5) {
-      i5.width = e5.readUint(t6, r5), r5 += 4, i5.height = e5.readUint(t6, r5), r5 += 4, i5.depth = t6[r5], r5++, i5.ctype = t6[r5], r5++, i5.compress = t6[r5], r5++, i5.filter = t6[r5], r5++, i5.interlace = t6[r5], r5++;
+      (i5.width = e5.readUint(t6, r5)),
+        (r5 += 4),
+        (i5.height = e5.readUint(t6, r5)),
+        (r5 += 4),
+        (i5.depth = t6[r5]),
+        r5++,
+        (i5.ctype = t6[r5]),
+        r5++,
+        (i5.compress = t6[r5]),
+        r5++,
+        (i5.filter = t6[r5]),
+        r5++,
+        (i5.interlace = t6[r5]),
+        r5++;
     }
     function _copyTile(e6, t6, r5, i5, o5, a5, s4, f5, l4) {
-      const c5 = Math.min(t6, o5), u4 = Math.min(r5, a5);
-      let h4 = 0, d3 = 0;
-      for (let r6 = 0; r6 < u4; r6++) for (let a6 = 0; a6 < c5; a6++) if (s4 >= 0 && f5 >= 0 ? (h4 = r6 * t6 + a6 << 2, d3 = (f5 + r6) * o5 + s4 + a6 << 2) : (h4 = (-f5 + r6) * t6 - s4 + a6 << 2, d3 = r6 * o5 + a6 << 2), 0 == l4) i5[d3] = e6[h4], i5[d3 + 1] = e6[h4 + 1], i5[d3 + 2] = e6[h4 + 2], i5[d3 + 3] = e6[h4 + 3];
-      else if (1 == l4) {
-        var A = e6[h4 + 3] * (1 / 255), g2 = e6[h4] * A, p4 = e6[h4 + 1] * A, m2 = e6[h4 + 2] * A, w2 = i5[d3 + 3] * (1 / 255), v3 = i5[d3] * w2, b3 = i5[d3 + 1] * w2, y3 = i5[d3 + 2] * w2;
-        const t7 = 1 - A, r7 = A + w2 * t7, o6 = 0 == r7 ? 0 : 1 / r7;
-        i5[d3 + 3] = 255 * r7, i5[d3 + 0] = (g2 + v3 * t7) * o6, i5[d3 + 1] = (p4 + b3 * t7) * o6, i5[d3 + 2] = (m2 + y3 * t7) * o6;
-      } else if (2 == l4) {
-        A = e6[h4 + 3], g2 = e6[h4], p4 = e6[h4 + 1], m2 = e6[h4 + 2], w2 = i5[d3 + 3], v3 = i5[d3], b3 = i5[d3 + 1], y3 = i5[d3 + 2];
-        A == w2 && g2 == v3 && p4 == b3 && m2 == y3 ? (i5[d3] = 0, i5[d3 + 1] = 0, i5[d3 + 2] = 0, i5[d3 + 3] = 0) : (i5[d3] = g2, i5[d3 + 1] = p4, i5[d3 + 2] = m2, i5[d3 + 3] = A);
-      } else if (3 == l4) {
-        A = e6[h4 + 3], g2 = e6[h4], p4 = e6[h4 + 1], m2 = e6[h4 + 2], w2 = i5[d3 + 3], v3 = i5[d3], b3 = i5[d3 + 1], y3 = i5[d3 + 2];
-        if (A == w2 && g2 == v3 && p4 == b3 && m2 == y3) continue;
-        if (A < 220 && w2 > 20) return false;
+      const c5 = Math.min(t6, o5),
+        u4 = Math.min(r5, a5);
+      let h4 = 0,
+        d3 = 0;
+      for (let r6 = 0; r6 < u4; r6++) {
+        for (let a6 = 0; a6 < c5; a6++) {
+          if (
+            (s4 >= 0 && f5 >= 0
+              ? ((h4 = (r6 * t6 + a6) << 2), (d3 = ((f5 + r6) * o5 + s4 + a6) << 2))
+              : ((h4 = ((-f5 + r6) * t6 - s4 + a6) << 2), (d3 = (r6 * o5 + a6) << 2)),
+            l4 == 0)
+          ) {
+            (i5[d3] = e6[h4]),
+              (i5[d3 + 1] = e6[h4 + 1]),
+              (i5[d3 + 2] = e6[h4 + 2]),
+              (i5[d3 + 3] = e6[h4 + 3]);
+          } else if (l4 == 1) {
+            var A = e6[h4 + 3] * (1 / 255),
+              g2 = e6[h4] * A,
+              p4 = e6[h4 + 1] * A,
+              m2 = e6[h4 + 2] * A,
+              w2 = i5[d3 + 3] * (1 / 255),
+              v3 = i5[d3] * w2,
+              b3 = i5[d3 + 1] * w2,
+              y3 = i5[d3 + 2] * w2;
+            const t7 = 1 - A,
+              r7 = A + w2 * t7,
+              o6 = r7 == 0 ? 0 : 1 / r7;
+            (i5[d3 + 3] = 255 * r7),
+              (i5[d3 + 0] = (g2 + v3 * t7) * o6),
+              (i5[d3 + 1] = (p4 + b3 * t7) * o6),
+              (i5[d3 + 2] = (m2 + y3 * t7) * o6);
+          } else if (l4 == 2) {
+            (A = e6[h4 + 3]),
+              (g2 = e6[h4]),
+              (p4 = e6[h4 + 1]),
+              (m2 = e6[h4 + 2]),
+              (w2 = i5[d3 + 3]),
+              (v3 = i5[d3]),
+              (b3 = i5[d3 + 1]),
+              (y3 = i5[d3 + 2]);
+            A == w2 && g2 == v3 && p4 == b3 && m2 == y3
+              ? ((i5[d3] = 0), (i5[d3 + 1] = 0), (i5[d3 + 2] = 0), (i5[d3 + 3] = 0))
+              : ((i5[d3] = g2), (i5[d3 + 1] = p4), (i5[d3 + 2] = m2), (i5[d3 + 3] = A));
+          } else if (l4 == 3) {
+            (A = e6[h4 + 3]),
+              (g2 = e6[h4]),
+              (p4 = e6[h4 + 1]),
+              (m2 = e6[h4 + 2]),
+              (w2 = i5[d3 + 3]),
+              (v3 = i5[d3]),
+              (b3 = i5[d3 + 1]),
+              (y3 = i5[d3 + 2]);
+            if (A == w2 && g2 == v3 && p4 == b3 && m2 == y3) {
+              continue;
+            }
+            if (A < 220 && w2 > 20) {
+              return false;
+            }
+          }
+        }
       }
       return true;
     }
-    return { decode: function decode(r5) {
-      const i5 = new Uint8Array(r5);
-      let o5 = 8;
-      const a5 = e5, s4 = a5.readUshort, f5 = a5.readUint, l4 = { tabs: {}, frames: [] }, c5 = new Uint8Array(i5.length);
-      let u4, h4 = 0, d3 = 0;
-      const A = [137, 80, 78, 71, 13, 10, 26, 10];
-      for (var g2 = 0; g2 < 8; g2++) if (i5[g2] != A[g2]) throw "The input is not a PNG file!";
-      for (; o5 < i5.length; ) {
-        const e6 = a5.readUint(i5, o5);
-        o5 += 4;
-        const r6 = a5.readASCII(i5, o5, 4);
-        if (o5 += 4, "IHDR" == r6) _IHDR(i5, o5, l4);
-        else if ("iCCP" == r6) {
-          for (var p4 = o5; 0 != i5[p4]; ) p4++;
-          a5.readASCII(i5, o5, p4 - o5), i5[p4 + 1];
-          const s5 = i5.slice(p4 + 2, o5 + e6);
-          let f6 = null;
-          try {
-            f6 = _inflate(s5);
-          } catch (e7) {
-            f6 = t5(s5);
+    return {
+      decode(r5) {
+        const i5 = new Uint8Array(r5);
+        let o5 = 8;
+        const a5 = e5,
+          s4 = a5.readUshort,
+          f5 = a5.readUint,
+          l4 = { tabs: {}, frames: [] },
+          c5 = new Uint8Array(i5.length);
+        let u4,
+          h4 = 0,
+          d3 = 0;
+        const A = [137, 80, 78, 71, 13, 10, 26, 10];
+        for (var g2 = 0; g2 < 8; g2++) {
+          if (i5[g2] != A[g2]) {
+            throw "The input is not a PNG file!";
           }
-          l4.tabs[r6] = f6;
-        } else if ("CgBI" == r6) l4.tabs[r6] = i5.slice(o5, o5 + 4);
-        else if ("IDAT" == r6) {
-          for (g2 = 0; g2 < e6; g2++) c5[h4 + g2] = i5[o5 + g2];
-          h4 += e6;
-        } else if ("acTL" == r6) l4.tabs[r6] = { num_frames: f5(i5, o5), num_plays: f5(i5, o5 + 4) }, u4 = new Uint8Array(i5.length);
-        else if ("fcTL" == r6) {
-          if (0 != d3) (E = l4.frames[l4.frames.length - 1]).data = _decompress(l4, u4.slice(0, d3), E.rect.width, E.rect.height), d3 = 0;
-          const e7 = { x: f5(i5, o5 + 12), y: f5(i5, o5 + 16), width: f5(i5, o5 + 4), height: f5(i5, o5 + 8) };
-          let t6 = s4(i5, o5 + 22);
-          t6 = s4(i5, o5 + 20) / (0 == t6 ? 100 : t6);
-          const r7 = { rect: e7, delay: Math.round(1e3 * t6), dispose: i5[o5 + 24], blend: i5[o5 + 25] };
-          l4.frames.push(r7);
-        } else if ("fdAT" == r6) {
-          for (g2 = 0; g2 < e6 - 4; g2++) u4[d3 + g2] = i5[o5 + g2 + 4];
-          d3 += e6 - 4;
-        } else if ("pHYs" == r6) l4.tabs[r6] = [a5.readUint(i5, o5), a5.readUint(i5, o5 + 4), i5[o5 + 8]];
-        else if ("cHRM" == r6) {
-          l4.tabs[r6] = [];
-          for (g2 = 0; g2 < 8; g2++) l4.tabs[r6].push(a5.readUint(i5, o5 + 4 * g2));
-        } else if ("tEXt" == r6 || "zTXt" == r6) {
-          null == l4.tabs[r6] && (l4.tabs[r6] = {});
-          var m2 = a5.nextZero(i5, o5), w2 = a5.readASCII(i5, o5, m2 - o5), v3 = o5 + e6 - m2 - 1;
-          if ("tEXt" == r6) y3 = a5.readASCII(i5, m2 + 1, v3);
-          else {
-            var b3 = _inflate(i5.slice(m2 + 2, m2 + 2 + v3));
-            y3 = a5.readUTF8(b3, 0, b3.length);
+        }
+        while (o5 < i5.length) {
+          const e6 = a5.readUint(i5, o5);
+          o5 += 4;
+          const r6 = a5.readASCII(i5, o5, 4);
+          if (((o5 += 4), r6 == "IHDR")) {
+            _IHDR(i5, o5, l4);
+          } else if (r6 == "iCCP") {
+            for (var p4 = o5; i5[p4] != 0; ) {
+              p4++;
+            }
+            a5.readASCII(i5, o5, p4 - o5), i5[p4 + 1];
+            const s5 = i5.slice(p4 + 2, o5 + e6);
+            let f6 = null;
+            try {
+              f6 = _inflate(s5);
+            } catch (e7) {
+              f6 = t5(s5);
+            }
+            l4.tabs[r6] = f6;
+          } else if (r6 == "CgBI") {
+            l4.tabs[r6] = i5.slice(o5, o5 + 4);
+          } else if (r6 == "IDAT") {
+            for (g2 = 0; g2 < e6; g2++) {
+              c5[h4 + g2] = i5[o5 + g2];
+            }
+            h4 += e6;
+          } else if (r6 == "acTL") {
+            (l4.tabs[r6] = { num_frames: f5(i5, o5), num_plays: f5(i5, o5 + 4) }),
+              (u4 = new Uint8Array(i5.length));
+          } else if (r6 == "fcTL") {
+            if (d3 != 0) {
+              ((E = l4.frames[l4.frames.length - 1]).data = _decompress(
+                l4,
+                u4.slice(0, d3),
+                E.rect.width,
+                E.rect.height,
+              )),
+                (d3 = 0);
+            }
+            const e7 = {
+              x: f5(i5, o5 + 12),
+              y: f5(i5, o5 + 16),
+              width: f5(i5, o5 + 4),
+              height: f5(i5, o5 + 8),
+            };
+            let t6 = s4(i5, o5 + 22);
+            t6 = s4(i5, o5 + 20) / (t6 == 0 ? 100 : t6);
+            const r7 = {
+              rect: e7,
+              delay: Math.round(1e3 * t6),
+              dispose: i5[o5 + 24],
+              blend: i5[o5 + 25],
+            };
+            l4.frames.push(r7);
+          } else if (r6 == "fdAT") {
+            for (g2 = 0; g2 < e6 - 4; g2++) {
+              u4[d3 + g2] = i5[o5 + g2 + 4];
+            }
+            d3 += e6 - 4;
+          } else if (r6 == "pHYs") {
+            l4.tabs[r6] = [a5.readUint(i5, o5), a5.readUint(i5, o5 + 4), i5[o5 + 8]];
+          } else if (r6 == "cHRM") {
+            l4.tabs[r6] = [];
+            for (g2 = 0; g2 < 8; g2++) {
+              l4.tabs[r6].push(a5.readUint(i5, o5 + 4 * g2));
+            }
+          } else if (r6 == "tEXt" || r6 == "zTXt") {
+            l4.tabs[r6] == null && (l4.tabs[r6] = {});
+            var m2 = a5.nextZero(i5, o5),
+              w2 = a5.readASCII(i5, o5, m2 - o5),
+              v3 = o5 + e6 - m2 - 1;
+            if (r6 == "tEXt") {
+              y3 = a5.readASCII(i5, m2 + 1, v3);
+            } else {
+              var b3 = _inflate(i5.slice(m2 + 2, m2 + 2 + v3));
+              y3 = a5.readUTF8(b3, 0, b3.length);
+            }
+            l4.tabs[r6][w2] = y3;
+          } else if (r6 == "iTXt") {
+            l4.tabs[r6] == null && (l4.tabs[r6] = {});
+            (m2 = 0), (p4 = o5);
+            m2 = a5.nextZero(i5, p4);
+            w2 = a5.readASCII(i5, p4, m2 - p4);
+            const t6 = i5[(p4 = m2 + 1)];
+            var y3;
+            i5[p4 + 1],
+              (p4 += 2),
+              (m2 = a5.nextZero(i5, p4)),
+              a5.readASCII(i5, p4, m2 - p4),
+              (p4 = m2 + 1),
+              (m2 = a5.nextZero(i5, p4)),
+              a5.readUTF8(i5, p4, m2 - p4);
+            v3 = e6 - ((p4 = m2 + 1) - o5);
+            if (t6 == 0) {
+              y3 = a5.readUTF8(i5, p4, v3);
+            } else {
+              b3 = _inflate(i5.slice(p4, p4 + v3));
+              y3 = a5.readUTF8(b3, 0, b3.length);
+            }
+            l4.tabs[r6][w2] = y3;
+          } else if (r6 == "PLTE") {
+            l4.tabs[r6] = a5.readBytes(i5, o5, e6);
+          } else if (r6 == "hIST") {
+            const e7 = l4.tabs.PLTE.length / 3;
+            l4.tabs[r6] = [];
+            for (g2 = 0; g2 < e7; g2++) {
+              l4.tabs[r6].push(s4(i5, o5 + 2 * g2));
+            }
+          } else if (r6 == "tRNS") {
+            l4.ctype == 3
+              ? (l4.tabs[r6] = a5.readBytes(i5, o5, e6))
+              : l4.ctype == 0
+                ? (l4.tabs[r6] = s4(i5, o5))
+                : l4.ctype == 2 && (l4.tabs[r6] = [s4(i5, o5), s4(i5, o5 + 2), s4(i5, o5 + 4)]);
+          } else if (r6 == "gAMA") {
+            l4.tabs[r6] = a5.readUint(i5, o5) / 1e5;
+          } else if (r6 == "sRGB") {
+            l4.tabs[r6] = i5[o5];
+          } else if (r6 == "bKGD") {
+            l4.ctype == 0 || l4.ctype == 4
+              ? (l4.tabs[r6] = [s4(i5, o5)])
+              : l4.ctype == 2 || l4.ctype == 6
+                ? (l4.tabs[r6] = [s4(i5, o5), s4(i5, o5 + 2), s4(i5, o5 + 4)])
+                : l4.ctype == 3 && (l4.tabs[r6] = i5[o5]);
+          } else if (r6 == "IEND") {
+            break;
           }
-          l4.tabs[r6][w2] = y3;
-        } else if ("iTXt" == r6) {
-          null == l4.tabs[r6] && (l4.tabs[r6] = {});
-          m2 = 0, p4 = o5;
-          m2 = a5.nextZero(i5, p4);
-          w2 = a5.readASCII(i5, p4, m2 - p4);
-          const t6 = i5[p4 = m2 + 1];
-          var y3;
-          i5[p4 + 1], p4 += 2, m2 = a5.nextZero(i5, p4), a5.readASCII(i5, p4, m2 - p4), p4 = m2 + 1, m2 = a5.nextZero(i5, p4), a5.readUTF8(i5, p4, m2 - p4);
-          v3 = e6 - ((p4 = m2 + 1) - o5);
-          if (0 == t6) y3 = a5.readUTF8(i5, p4, v3);
-          else {
-            b3 = _inflate(i5.slice(p4, p4 + v3));
-            y3 = a5.readUTF8(b3, 0, b3.length);
+          (o5 += e6), a5.readUint(i5, o5), (o5 += 4);
+        }
+        var E;
+        return (
+          d3 != 0 &&
+            ((E = l4.frames[l4.frames.length - 1]).data = _decompress(
+              l4,
+              u4.slice(0, d3),
+              E.rect.width,
+              E.rect.height,
+            )),
+          (l4.data = _decompress(l4, c5, l4.width, l4.height)),
+          delete l4.compress,
+          delete l4.interlace,
+          delete l4.filter,
+          l4
+        );
+      },
+      toRGBA8(e6) {
+        const t6 = e6.width,
+          r5 = e6.height;
+        if (e6.tabs.acTL == null) {
+          return [decodeImage(e6.data, t6, r5, e6).buffer];
+        }
+        const i5 = [];
+        e6.frames[0].data == null && (e6.frames[0].data = e6.data);
+        const o5 = t6 * r5 * 4,
+          a5 = new Uint8Array(o5),
+          s4 = new Uint8Array(o5),
+          f5 = new Uint8Array(o5);
+        for (let c5 = 0; c5 < e6.frames.length; c5++) {
+          const u4 = e6.frames[c5],
+            h4 = u4.rect.x,
+            d3 = u4.rect.y,
+            A = u4.rect.width,
+            g2 = u4.rect.height,
+            p4 = decodeImage(u4.data, A, g2, e6);
+          if (c5 != 0) {
+            for (var l4 = 0; l4 < o5; l4++) {
+              f5[l4] = a5[l4];
+            }
           }
-          l4.tabs[r6][w2] = y3;
-        } else if ("PLTE" == r6) l4.tabs[r6] = a5.readBytes(i5, o5, e6);
-        else if ("hIST" == r6) {
-          const e7 = l4.tabs.PLTE.length / 3;
-          l4.tabs[r6] = [];
-          for (g2 = 0; g2 < e7; g2++) l4.tabs[r6].push(s4(i5, o5 + 2 * g2));
-        } else if ("tRNS" == r6) 3 == l4.ctype ? l4.tabs[r6] = a5.readBytes(i5, o5, e6) : 0 == l4.ctype ? l4.tabs[r6] = s4(i5, o5) : 2 == l4.ctype && (l4.tabs[r6] = [s4(i5, o5), s4(i5, o5 + 2), s4(i5, o5 + 4)]);
-        else if ("gAMA" == r6) l4.tabs[r6] = a5.readUint(i5, o5) / 1e5;
-        else if ("sRGB" == r6) l4.tabs[r6] = i5[o5];
-        else if ("bKGD" == r6) 0 == l4.ctype || 4 == l4.ctype ? l4.tabs[r6] = [s4(i5, o5)] : 2 == l4.ctype || 6 == l4.ctype ? l4.tabs[r6] = [s4(i5, o5), s4(i5, o5 + 2), s4(i5, o5 + 4)] : 3 == l4.ctype && (l4.tabs[r6] = i5[o5]);
-        else if ("IEND" == r6) break;
-        o5 += e6, a5.readUint(i5, o5), o5 += 4;
-      }
-      var E;
-      return 0 != d3 && ((E = l4.frames[l4.frames.length - 1]).data = _decompress(l4, u4.slice(0, d3), E.rect.width, E.rect.height)), l4.data = _decompress(l4, c5, l4.width, l4.height), delete l4.compress, delete l4.interlace, delete l4.filter, l4;
-    }, toRGBA8: function toRGBA8(e6) {
-      const t6 = e6.width, r5 = e6.height;
-      if (null == e6.tabs.acTL) return [decodeImage(e6.data, t6, r5, e6).buffer];
-      const i5 = [];
-      null == e6.frames[0].data && (e6.frames[0].data = e6.data);
-      const o5 = t6 * r5 * 4, a5 = new Uint8Array(o5), s4 = new Uint8Array(o5), f5 = new Uint8Array(o5);
-      for (let c5 = 0; c5 < e6.frames.length; c5++) {
-        const u4 = e6.frames[c5], h4 = u4.rect.x, d3 = u4.rect.y, A = u4.rect.width, g2 = u4.rect.height, p4 = decodeImage(u4.data, A, g2, e6);
-        if (0 != c5) for (var l4 = 0; l4 < o5; l4++) f5[l4] = a5[l4];
-        if (0 == u4.blend ? _copyTile(p4, A, g2, a5, t6, r5, h4, d3, 0) : 1 == u4.blend && _copyTile(p4, A, g2, a5, t6, r5, h4, d3, 1), i5.push(a5.buffer.slice(0)), 0 == u4.dispose) ;
-        else if (1 == u4.dispose) _copyTile(s4, A, g2, a5, t6, r5, h4, d3, 0);
-        else if (2 == u4.dispose) for (l4 = 0; l4 < o5; l4++) a5[l4] = f5[l4];
-      }
-      return i5;
-    }, _paeth, _copyTile, _bin: e5 };
+          if (
+            (u4.blend == 0
+              ? _copyTile(p4, A, g2, a5, t6, r5, h4, d3, 0)
+              : u4.blend == 1 && _copyTile(p4, A, g2, a5, t6, r5, h4, d3, 1),
+            i5.push(a5.buffer.slice(0)),
+            u4.dispose == 0)
+          ) {
+          } else if (u4.dispose == 1) {
+            _copyTile(s4, A, g2, a5, t6, r5, h4, d3, 0);
+          } else if (u4.dispose == 2) {
+            for (l4 = 0; l4 < o5; l4++) {
+              a5[l4] = f5[l4];
+            }
+          }
+        }
+        return i5;
+      },
+      _paeth,
+      _copyTile,
+      _bin: e5,
+    };
   })();
-  !(function() {
-    const { _copyTile: e5 } = UPNG, { _bin: t5 } = UPNG, r5 = UPNG._paeth;
-    var i5 = { table: (function() {
-      const e6 = new Uint32Array(256);
-      for (let t6 = 0; t6 < 256; t6++) {
-        let r6 = t6;
-        for (let e7 = 0; e7 < 8; e7++) 1 & r6 ? r6 = 3988292384 ^ r6 >>> 1 : r6 >>>= 1;
-        e6[t6] = r6;
-      }
-      return e6;
-    })(), update(e6, t6, r6, o6) {
-      for (let a5 = 0; a5 < o6; a5++) e6 = i5.table[255 & (e6 ^ t6[r6 + a5])] ^ e6 >>> 8;
-      return e6;
-    }, crc: (e6, t6, r6) => 4294967295 ^ i5.update(4294967295, e6, t6, r6) };
+  !(() => {
+    const { _copyTile: e5 } = UPNG,
+      { _bin: t5 } = UPNG,
+      r5 = UPNG._paeth;
+    var i5 = {
+      table: (() => {
+        const e6 = new Uint32Array(256);
+        for (let t6 = 0; t6 < 256; t6++) {
+          let r6 = t6;
+          for (let e7 = 0; e7 < 8; e7++) {
+            1 & r6 ? (r6 = 3_988_292_384 ^ (r6 >>> 1)) : (r6 >>>= 1);
+          }
+          e6[t6] = r6;
+        }
+        return e6;
+      })(),
+      update(e6, t6, r6, o6) {
+        for (let a5 = 0; a5 < o6; a5++) {
+          e6 = i5.table[255 & (e6 ^ t6[r6 + a5])] ^ (e6 >>> 8);
+        }
+        return e6;
+      },
+      crc: (e6, t6, r6) => 4_294_967_295 ^ i5.update(4_294_967_295, e6, t6, r6),
+    };
     function addErr(e6, t6, r6, i6) {
-      t6[r6] += e6[0] * i6 >> 4, t6[r6 + 1] += e6[1] * i6 >> 4, t6[r6 + 2] += e6[2] * i6 >> 4, t6[r6 + 3] += e6[3] * i6 >> 4;
+      (t6[r6] += (e6[0] * i6) >> 4),
+        (t6[r6 + 1] += (e6[1] * i6) >> 4),
+        (t6[r6 + 2] += (e6[2] * i6) >> 4),
+        (t6[r6 + 3] += (e6[3] * i6) >> 4);
     }
     function N2(e6) {
       return Math.max(0, Math.min(255, e6));
     }
     function D(e6, t6) {
-      const r6 = e6[0] - t6[0], i6 = e6[1] - t6[1], o6 = e6[2] - t6[2], a5 = e6[3] - t6[3];
+      const r6 = e6[0] - t6[0],
+        i6 = e6[1] - t6[1],
+        o6 = e6[2] - t6[2],
+        a5 = e6[3] - t6[3];
       return r6 * r6 + i6 * i6 + o6 * o6 + a5 * a5;
     }
     function dither(e6, t6, r6, i6, o6, a5, s4) {
-      null == s4 && (s4 = 1);
-      const f5 = i6.length, l4 = [];
+      s4 == null && (s4 = 1);
+      const f5 = i6.length,
+        l4 = [];
       for (var c5 = 0; c5 < f5; c5++) {
         const e7 = i6[c5];
-        l4.push([e7 >>> 0 & 255, e7 >>> 8 & 255, e7 >>> 16 & 255, e7 >>> 24 & 255]);
+        l4.push([(e7 >>> 0) & 255, (e7 >>> 8) & 255, (e7 >>> 16) & 255, (e7 >>> 24) & 255]);
       }
       for (c5 = 0; c5 < f5; c5++) {
-        let e7 = 4294967295;
+        let e7 = 4_294_967_295;
         for (var u4 = 0, h4 = 0; h4 < f5; h4++) {
           var d3 = D(l4[c5], l4[h4]);
-          h4 != c5 && d3 < e7 && (e7 = d3, u4 = h4);
+          h4 != c5 && d3 < e7 && ((e7 = d3), (u4 = h4));
         }
       }
-      const A = new Uint32Array(o6.buffer), g2 = new Int16Array(t6 * r6 * 4), p4 = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5];
-      for (c5 = 0; c5 < p4.length; c5++) p4[c5] = 255 * ((p4[c5] + 0.5) / 16 - 0.5);
-      for (let o7 = 0; o7 < r6; o7++) for (let w2 = 0; w2 < t6; w2++) {
-        var m2;
-        c5 = 4 * (o7 * t6 + w2);
-        if (2 != s4) m2 = [N2(e6[c5] + g2[c5]), N2(e6[c5 + 1] + g2[c5 + 1]), N2(e6[c5 + 2] + g2[c5 + 2]), N2(e6[c5 + 3] + g2[c5 + 3])];
-        else {
-          d3 = p4[4 * (3 & o7) + (3 & w2)];
-          m2 = [N2(e6[c5] + d3), N2(e6[c5 + 1] + d3), N2(e6[c5 + 2] + d3), N2(e6[c5 + 3] + d3)];
+      const A = new Uint32Array(o6.buffer),
+        g2 = new Int16Array(t6 * r6 * 4),
+        p4 = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5];
+      for (c5 = 0; c5 < p4.length; c5++) {
+        p4[c5] = 255 * ((p4[c5] + 0.5) / 16 - 0.5);
+      }
+      for (let o7 = 0; o7 < r6; o7++) {
+        for (let w2 = 0; w2 < t6; w2++) {
+          var m2;
+          c5 = 4 * (o7 * t6 + w2);
+          if (s4 != 2) {
+            m2 = [
+              N2(e6[c5] + g2[c5]),
+              N2(e6[c5 + 1] + g2[c5 + 1]),
+              N2(e6[c5 + 2] + g2[c5 + 2]),
+              N2(e6[c5 + 3] + g2[c5 + 3]),
+            ];
+          } else {
+            d3 = p4[4 * (3 & o7) + (3 & w2)];
+            m2 = [N2(e6[c5] + d3), N2(e6[c5 + 1] + d3), N2(e6[c5 + 2] + d3), N2(e6[c5 + 3] + d3)];
+          }
+          u4 = 0;
+          let v3 = 16_777_215;
+          for (h4 = 0; h4 < f5; h4++) {
+            const e7 = D(m2, l4[h4]);
+            e7 < v3 && ((v3 = e7), (u4 = h4));
+          }
+          const b3 = l4[u4],
+            y3 = [m2[0] - b3[0], m2[1] - b3[1], m2[2] - b3[2], m2[3] - b3[3]];
+          s4 == 1 &&
+            (w2 != t6 - 1 && addErr(y3, g2, c5 + 4, 7),
+            o7 != r6 - 1 &&
+              (w2 != 0 && addErr(y3, g2, c5 + 4 * t6 - 4, 3),
+              addErr(y3, g2, c5 + 4 * t6, 5),
+              w2 != t6 - 1 && addErr(y3, g2, c5 + 4 * t6 + 4, 1))),
+            (a5[c5 >> 2] = u4),
+            (A[c5 >> 2] = i6[u4]);
         }
-        u4 = 0;
-        let v3 = 16777215;
-        for (h4 = 0; h4 < f5; h4++) {
-          const e7 = D(m2, l4[h4]);
-          e7 < v3 && (v3 = e7, u4 = h4);
-        }
-        const b3 = l4[u4], y3 = [m2[0] - b3[0], m2[1] - b3[1], m2[2] - b3[2], m2[3] - b3[3]];
-        1 == s4 && (w2 != t6 - 1 && addErr(y3, g2, c5 + 4, 7), o7 != r6 - 1 && (0 != w2 && addErr(y3, g2, c5 + 4 * t6 - 4, 3), addErr(y3, g2, c5 + 4 * t6, 5), w2 != t6 - 1 && addErr(y3, g2, c5 + 4 * t6 + 4, 1))), a5[c5 >> 2] = u4, A[c5 >> 2] = i6[u4];
       }
     }
     function _main(e6, r6, o6, a5, s4) {
-      null == s4 && (s4 = {});
-      const { crc: f5 } = i5, l4 = t5.writeUint, c5 = t5.writeUshort, u4 = t5.writeASCII;
+      s4 == null && (s4 = {});
+      const { crc: f5 } = i5,
+        l4 = t5.writeUint,
+        c5 = t5.writeUshort,
+        u4 = t5.writeASCII;
       let h4 = 8;
       const d3 = e6.frames.length > 1;
-      let A, g2 = false, p4 = 33 + (d3 ? 20 : 0);
-      if (null != s4.sRGB && (p4 += 13), null != s4.pHYs && (p4 += 21), null != s4.iCCP && (A = pako.deflate(s4.iCCP), p4 += 21 + A.length + 4), 3 == e6.ctype) {
-        for (var m2 = e6.plte.length, w2 = 0; w2 < m2; w2++) e6.plte[w2] >>> 24 != 255 && (g2 = true);
+      let A,
+        g2 = false,
+        p4 = 33 + (d3 ? 20 : 0);
+      if (
+        (s4.sRGB != null && (p4 += 13),
+        s4.pHYs != null && (p4 += 21),
+        s4.iCCP != null && ((A = pako.deflate(s4.iCCP)), (p4 += 21 + A.length + 4)),
+        e6.ctype == 3)
+      ) {
+        for (var m2 = e6.plte.length, w2 = 0; w2 < m2; w2++) {
+          e6.plte[w2] >>> 24 != 255 && (g2 = true);
+        }
         p4 += 8 + 3 * m2 + 4 + (g2 ? 8 + 1 * m2 + 4 : 0);
       }
       for (var v3 = 0; v3 < e6.frames.length; v3++) {
-        d3 && (p4 += 38), p4 += (F = e6.frames[v3]).cimg.length + 12, 0 != v3 && (p4 += 4);
+        d3 && (p4 += 38), (p4 += (F = e6.frames[v3]).cimg.length + 12), v3 != 0 && (p4 += 4);
       }
       p4 += 12;
-      const b3 = new Uint8Array(p4), y3 = [137, 80, 78, 71, 13, 10, 26, 10];
-      for (w2 = 0; w2 < 8; w2++) b3[w2] = y3[w2];
-      if (l4(b3, h4, 13), h4 += 4, u4(b3, h4, "IHDR"), h4 += 4, l4(b3, h4, r6), h4 += 4, l4(b3, h4, o6), h4 += 4, b3[h4] = e6.depth, h4++, b3[h4] = e6.ctype, h4++, b3[h4] = 0, h4++, b3[h4] = 0, h4++, b3[h4] = 0, h4++, l4(b3, h4, f5(b3, h4 - 17, 17)), h4 += 4, null != s4.sRGB && (l4(b3, h4, 1), h4 += 4, u4(b3, h4, "sRGB"), h4 += 4, b3[h4] = s4.sRGB, h4++, l4(b3, h4, f5(b3, h4 - 5, 5)), h4 += 4), null != s4.iCCP) {
-        const e7 = 13 + A.length;
-        l4(b3, h4, e7), h4 += 4, u4(b3, h4, "iCCP"), h4 += 4, u4(b3, h4, "ICC profile"), h4 += 11, h4 += 2, b3.set(A, h4), h4 += A.length, l4(b3, h4, f5(b3, h4 - (e7 + 4), e7 + 4)), h4 += 4;
+      const b3 = new Uint8Array(p4),
+        y3 = [137, 80, 78, 71, 13, 10, 26, 10];
+      for (w2 = 0; w2 < 8; w2++) {
+        b3[w2] = y3[w2];
       }
-      if (null != s4.pHYs && (l4(b3, h4, 9), h4 += 4, u4(b3, h4, "pHYs"), h4 += 4, l4(b3, h4, s4.pHYs[0]), h4 += 4, l4(b3, h4, s4.pHYs[1]), h4 += 4, b3[h4] = s4.pHYs[2], h4++, l4(b3, h4, f5(b3, h4 - 13, 13)), h4 += 4), d3 && (l4(b3, h4, 8), h4 += 4, u4(b3, h4, "acTL"), h4 += 4, l4(b3, h4, e6.frames.length), h4 += 4, l4(b3, h4, null != s4.loop ? s4.loop : 0), h4 += 4, l4(b3, h4, f5(b3, h4 - 12, 12)), h4 += 4), 3 == e6.ctype) {
-        l4(b3, h4, 3 * (m2 = e6.plte.length)), h4 += 4, u4(b3, h4, "PLTE"), h4 += 4;
+      if (
+        (l4(b3, h4, 13),
+        (h4 += 4),
+        u4(b3, h4, "IHDR"),
+        (h4 += 4),
+        l4(b3, h4, r6),
+        (h4 += 4),
+        l4(b3, h4, o6),
+        (h4 += 4),
+        (b3[h4] = e6.depth),
+        h4++,
+        (b3[h4] = e6.ctype),
+        h4++,
+        (b3[h4] = 0),
+        h4++,
+        (b3[h4] = 0),
+        h4++,
+        (b3[h4] = 0),
+        h4++,
+        l4(b3, h4, f5(b3, h4 - 17, 17)),
+        (h4 += 4),
+        s4.sRGB != null &&
+          (l4(b3, h4, 1),
+          (h4 += 4),
+          u4(b3, h4, "sRGB"),
+          (h4 += 4),
+          (b3[h4] = s4.sRGB),
+          h4++,
+          l4(b3, h4, f5(b3, h4 - 5, 5)),
+          (h4 += 4)),
+        s4.iCCP != null)
+      ) {
+        const e7 = 13 + A.length;
+        l4(b3, h4, e7),
+          (h4 += 4),
+          u4(b3, h4, "iCCP"),
+          (h4 += 4),
+          u4(b3, h4, "ICC profile"),
+          (h4 += 11),
+          (h4 += 2),
+          b3.set(A, h4),
+          (h4 += A.length),
+          l4(b3, h4, f5(b3, h4 - (e7 + 4), e7 + 4)),
+          (h4 += 4);
+      }
+      if (
+        (s4.pHYs != null &&
+          (l4(b3, h4, 9),
+          (h4 += 4),
+          u4(b3, h4, "pHYs"),
+          (h4 += 4),
+          l4(b3, h4, s4.pHYs[0]),
+          (h4 += 4),
+          l4(b3, h4, s4.pHYs[1]),
+          (h4 += 4),
+          (b3[h4] = s4.pHYs[2]),
+          h4++,
+          l4(b3, h4, f5(b3, h4 - 13, 13)),
+          (h4 += 4)),
+        d3 &&
+          (l4(b3, h4, 8),
+          (h4 += 4),
+          u4(b3, h4, "acTL"),
+          (h4 += 4),
+          l4(b3, h4, e6.frames.length),
+          (h4 += 4),
+          l4(b3, h4, s4.loop != null ? s4.loop : 0),
+          (h4 += 4),
+          l4(b3, h4, f5(b3, h4 - 12, 12)),
+          (h4 += 4)),
+        e6.ctype == 3)
+      ) {
+        l4(b3, h4, 3 * (m2 = e6.plte.length)), (h4 += 4), u4(b3, h4, "PLTE"), (h4 += 4);
         for (w2 = 0; w2 < m2; w2++) {
-          const t6 = 3 * w2, r7 = e6.plte[w2], i6 = 255 & r7, o7 = r7 >>> 8 & 255, a6 = r7 >>> 16 & 255;
-          b3[h4 + t6 + 0] = i6, b3[h4 + t6 + 1] = o7, b3[h4 + t6 + 2] = a6;
+          const t6 = 3 * w2,
+            r7 = e6.plte[w2],
+            i6 = 255 & r7,
+            o7 = (r7 >>> 8) & 255,
+            a6 = (r7 >>> 16) & 255;
+          (b3[h4 + t6 + 0] = i6), (b3[h4 + t6 + 1] = o7), (b3[h4 + t6 + 2] = a6);
         }
-        if (h4 += 3 * m2, l4(b3, h4, f5(b3, h4 - 3 * m2 - 4, 3 * m2 + 4)), h4 += 4, g2) {
-          l4(b3, h4, m2), h4 += 4, u4(b3, h4, "tRNS"), h4 += 4;
-          for (w2 = 0; w2 < m2; w2++) b3[h4 + w2] = e6.plte[w2] >>> 24 & 255;
-          h4 += m2, l4(b3, h4, f5(b3, h4 - m2 - 4, m2 + 4)), h4 += 4;
+        if (((h4 += 3 * m2), l4(b3, h4, f5(b3, h4 - 3 * m2 - 4, 3 * m2 + 4)), (h4 += 4), g2)) {
+          l4(b3, h4, m2), (h4 += 4), u4(b3, h4, "tRNS"), (h4 += 4);
+          for (w2 = 0; w2 < m2; w2++) {
+            b3[h4 + w2] = (e6.plte[w2] >>> 24) & 255;
+          }
+          (h4 += m2), l4(b3, h4, f5(b3, h4 - m2 - 4, m2 + 4)), (h4 += 4);
         }
       }
       let E = 0;
       for (v3 = 0; v3 < e6.frames.length; v3++) {
         var F = e6.frames[v3];
-        d3 && (l4(b3, h4, 26), h4 += 4, u4(b3, h4, "fcTL"), h4 += 4, l4(b3, h4, E++), h4 += 4, l4(b3, h4, F.rect.width), h4 += 4, l4(b3, h4, F.rect.height), h4 += 4, l4(b3, h4, F.rect.x), h4 += 4, l4(b3, h4, F.rect.y), h4 += 4, c5(b3, h4, a5[v3]), h4 += 2, c5(b3, h4, 1e3), h4 += 2, b3[h4] = F.dispose, h4++, b3[h4] = F.blend, h4++, l4(b3, h4, f5(b3, h4 - 30, 30)), h4 += 4);
+        d3 &&
+          (l4(b3, h4, 26),
+          (h4 += 4),
+          u4(b3, h4, "fcTL"),
+          (h4 += 4),
+          l4(b3, h4, E++),
+          (h4 += 4),
+          l4(b3, h4, F.rect.width),
+          (h4 += 4),
+          l4(b3, h4, F.rect.height),
+          (h4 += 4),
+          l4(b3, h4, F.rect.x),
+          (h4 += 4),
+          l4(b3, h4, F.rect.y),
+          (h4 += 4),
+          c5(b3, h4, a5[v3]),
+          (h4 += 2),
+          c5(b3, h4, 1e3),
+          (h4 += 2),
+          (b3[h4] = F.dispose),
+          h4++,
+          (b3[h4] = F.blend),
+          h4++,
+          l4(b3, h4, f5(b3, h4 - 30, 30)),
+          (h4 += 4));
         const t6 = F.cimg;
-        l4(b3, h4, (m2 = t6.length) + (0 == v3 ? 0 : 4)), h4 += 4;
+        l4(b3, h4, (m2 = t6.length) + (v3 == 0 ? 0 : 4)), (h4 += 4);
         const r7 = h4;
-        u4(b3, h4, 0 == v3 ? "IDAT" : "fdAT"), h4 += 4, 0 != v3 && (l4(b3, h4, E++), h4 += 4), b3.set(t6, h4), h4 += m2, l4(b3, h4, f5(b3, r7, h4 - r7)), h4 += 4;
+        u4(b3, h4, v3 == 0 ? "IDAT" : "fdAT"),
+          (h4 += 4),
+          v3 != 0 && (l4(b3, h4, E++), (h4 += 4)),
+          b3.set(t6, h4),
+          (h4 += m2),
+          l4(b3, h4, f5(b3, r7, h4 - r7)),
+          (h4 += 4);
       }
-      return l4(b3, h4, 0), h4 += 4, u4(b3, h4, "IEND"), h4 += 4, l4(b3, h4, f5(b3, h4 - 4, 4)), h4 += 4, b3.buffer;
+      return (
+        l4(b3, h4, 0),
+        (h4 += 4),
+        u4(b3, h4, "IEND"),
+        (h4 += 4),
+        l4(b3, h4, f5(b3, h4 - 4, 4)),
+        (h4 += 4),
+        b3.buffer
+      );
     }
     function compressPNG(e6, t6, r6) {
       for (let i6 = 0; i6 < e6.frames.length; i6++) {
         const o6 = e6.frames[i6];
         o6.rect.width;
-        const a5 = o6.rect.height, s4 = new Uint8Array(a5 * o6.bpl + a5);
+        const a5 = o6.rect.height,
+          s4 = new Uint8Array(a5 * o6.bpl + a5);
         o6.cimg = _filterZero(o6.img, a5, o6.bpp, o6.bpl, s4, t6, r6);
       }
     }
     function compress2(t6, r6, i6, o6, a5) {
-      const s4 = a5[0], f5 = a5[1], l4 = a5[2], c5 = a5[3], u4 = a5[4], h4 = a5[5];
-      let d3 = 6, A = 8, g2 = 255;
+      const s4 = a5[0],
+        f5 = a5[1],
+        l4 = a5[2],
+        c5 = a5[3],
+        u4 = a5[4],
+        h4 = a5[5];
+      let d3 = 6,
+        A = 8,
+        g2 = 255;
       for (var p4 = 0; p4 < t6.length; p4++) {
         const e6 = new Uint8Array(t6[p4]);
-        for (var m2 = e6.length, w2 = 0; w2 < m2; w2 += 4) g2 &= e6[w2 + 3];
+        for (var m2 = e6.length, w2 = 0; w2 < m2; w2 += 4) {
+          g2 &= e6[w2 + 3];
+        }
       }
-      const v3 = 255 != g2, b3 = (function framize(t7, r7, i7, o7, a6, s5) {
-        const f6 = [];
-        for (var l5 = 0; l5 < t7.length; l5++) {
-          const h6 = new Uint8Array(t7[l5]), A3 = new Uint32Array(h6.buffer);
-          var c6;
-          let g3 = 0, p5 = 0, m3 = r7, w3 = i7, v4 = o7 ? 1 : 0;
-          if (0 != l5) {
-            const b4 = s5 || o7 || 1 == l5 || 0 != f6[l5 - 2].dispose ? 1 : 2;
-            let y4 = 0, E2 = 1e9;
-            for (let e6 = 0; e6 < b4; e6++) {
-              var u5 = new Uint8Array(t7[l5 - 1 - e6]);
-              const o8 = new Uint32Array(t7[l5 - 1 - e6]);
-              let s6 = r7, f7 = i7, c7 = -1, h7 = -1;
-              for (let e7 = 0; e7 < i7; e7++) for (let t8 = 0; t8 < r7; t8++) {
-                A3[d4 = e7 * r7 + t8] != o8[d4] && (t8 < s6 && (s6 = t8), t8 > c7 && (c7 = t8), e7 < f7 && (f7 = e7), e7 > h7 && (h7 = e7));
+      const v3 = g2 != 255,
+        b3 = (function framize(t7, r7, i7, o7, a6, s5) {
+          const f6 = [];
+          for (var l5 = 0; l5 < t7.length; l5++) {
+            const h6 = new Uint8Array(t7[l5]),
+              A3 = new Uint32Array(h6.buffer);
+            var c6;
+            let g3 = 0,
+              p5 = 0,
+              m3 = r7,
+              w3 = i7,
+              v4 = o7 ? 1 : 0;
+            if (l5 != 0) {
+              const b4 = s5 || o7 || l5 == 1 || f6[l5 - 2].dispose != 0 ? 1 : 2;
+              let y4 = 0,
+                E2 = 1e9;
+              for (let e6 = 0; e6 < b4; e6++) {
+                var u5 = new Uint8Array(t7[l5 - 1 - e6]);
+                const o8 = new Uint32Array(t7[l5 - 1 - e6]);
+                let s6 = r7,
+                  f7 = i7,
+                  c7 = -1,
+                  h7 = -1;
+                for (let e7 = 0; e7 < i7; e7++) {
+                  for (let t8 = 0; t8 < r7; t8++) {
+                    A3[(d4 = e7 * r7 + t8)] != o8[d4] &&
+                      (t8 < s6 && (s6 = t8),
+                      t8 > c7 && (c7 = t8),
+                      e7 < f7 && (f7 = e7),
+                      e7 > h7 && (h7 = e7));
+                  }
+                }
+                c7 == -1 && (s6 = f7 = c7 = h7 = 0),
+                  a6 && ((1 & s6) == 1 && s6--, (1 & f7) == 1 && f7--);
+                const v5 = (c7 - s6 + 1) * (h7 - f7 + 1);
+                v5 < E2 &&
+                  ((E2 = v5),
+                  (y4 = e6),
+                  (g3 = s6),
+                  (p5 = f7),
+                  (m3 = c7 - s6 + 1),
+                  (w3 = h7 - f7 + 1));
               }
-              -1 == c7 && (s6 = f7 = c7 = h7 = 0), a6 && (1 == (1 & s6) && s6--, 1 == (1 & f7) && f7--);
-              const v5 = (c7 - s6 + 1) * (h7 - f7 + 1);
-              v5 < E2 && (E2 = v5, y4 = e6, g3 = s6, p5 = f7, m3 = c7 - s6 + 1, w3 = h7 - f7 + 1);
+              u5 = new Uint8Array(t7[l5 - 1 - y4]);
+              y4 == 1 && (f6[l5 - 1].dispose = 2),
+                (c6 = new Uint8Array(m3 * w3 * 4)),
+                e5(u5, r7, i7, c6, m3, w3, -g3, -p5, 0),
+                (v4 = e5(h6, r7, i7, c6, m3, w3, -g3, -p5, 3) ? 1 : 0),
+                v4 == 1
+                  ? _prepareDiff(h6, r7, i7, c6, { x: g3, y: p5, width: m3, height: w3 })
+                  : e5(h6, r7, i7, c6, m3, w3, -g3, -p5, 0);
+            } else {
+              c6 = h6.slice(0);
             }
-            u5 = new Uint8Array(t7[l5 - 1 - y4]);
-            1 == y4 && (f6[l5 - 1].dispose = 2), c6 = new Uint8Array(m3 * w3 * 4), e5(u5, r7, i7, c6, m3, w3, -g3, -p5, 0), v4 = e5(h6, r7, i7, c6, m3, w3, -g3, -p5, 3) ? 1 : 0, 1 == v4 ? _prepareDiff(h6, r7, i7, c6, { x: g3, y: p5, width: m3, height: w3 }) : e5(h6, r7, i7, c6, m3, w3, -g3, -p5, 0);
-          } else c6 = h6.slice(0);
-          f6.push({ rect: { x: g3, y: p5, width: m3, height: w3 }, img: c6, blend: v4, dispose: 0 });
-        }
-        if (o7) for (l5 = 0; l5 < f6.length; l5++) {
-          if (1 == (A2 = f6[l5]).blend) continue;
-          const e6 = A2.rect, o8 = f6[l5 - 1].rect, s6 = Math.min(e6.x, o8.x), c7 = Math.min(e6.y, o8.y), u6 = { x: s6, y: c7, width: Math.max(e6.x + e6.width, o8.x + o8.width) - s6, height: Math.max(e6.y + e6.height, o8.y + o8.height) - c7 };
-          f6[l5 - 1].dispose = 1, l5 - 1 != 0 && _updateFrame(t7, r7, i7, f6, l5 - 1, u6, a6), _updateFrame(t7, r7, i7, f6, l5, u6, a6);
-        }
-        let h5 = 0;
-        if (1 != t7.length) for (var d4 = 0; d4 < f6.length; d4++) {
-          var A2;
-          h5 += (A2 = f6[d4]).rect.width * A2.rect.height;
-        }
-        return f6;
-      })(t6, r6, i6, s4, f5, l4), y3 = {}, E = [], F = [];
-      if (0 != o6) {
-        const e6 = [];
-        for (w2 = 0; w2 < b3.length; w2++) e6.push(b3[w2].img.buffer);
-        const t7 = (function concatRGBA(e7) {
-          let t8 = 0;
-          for (var r8 = 0; r8 < e7.length; r8++) t8 += e7[r8].byteLength;
-          const i8 = new Uint8Array(t8);
-          let o7 = 0;
-          for (r8 = 0; r8 < e7.length; r8++) {
-            const t9 = new Uint8Array(e7[r8]), a6 = t9.length;
-            for (let e8 = 0; e8 < a6; e8 += 4) {
-              let r9 = t9[e8], a7 = t9[e8 + 1], s5 = t9[e8 + 2];
-              const f6 = t9[e8 + 3];
-              0 == f6 && (r9 = a7 = s5 = 0), i8[o7 + e8] = r9, i8[o7 + e8 + 1] = a7, i8[o7 + e8 + 2] = s5, i8[o7 + e8 + 3] = f6;
-            }
-            o7 += a6;
+            f6.push({
+              rect: { x: g3, y: p5, width: m3, height: w3 },
+              img: c6,
+              blend: v4,
+              dispose: 0,
+            });
           }
-          return i8.buffer;
-        })(e6), r7 = quantize(t7, o6);
-        for (w2 = 0; w2 < r7.plte.length; w2++) E.push(r7.plte[w2].est.rgba);
+          if (o7) {
+            for (l5 = 0; l5 < f6.length; l5++) {
+              if ((A2 = f6[l5]).blend == 1) {
+                continue;
+              }
+              const e6 = A2.rect,
+                o8 = f6[l5 - 1].rect,
+                s6 = Math.min(e6.x, o8.x),
+                c7 = Math.min(e6.y, o8.y),
+                u6 = {
+                  x: s6,
+                  y: c7,
+                  width: Math.max(e6.x + e6.width, o8.x + o8.width) - s6,
+                  height: Math.max(e6.y + e6.height, o8.y + o8.height) - c7,
+                };
+              (f6[l5 - 1].dispose = 1),
+                l5 - 1 != 0 && _updateFrame(t7, r7, i7, f6, l5 - 1, u6, a6),
+                _updateFrame(t7, r7, i7, f6, l5, u6, a6);
+            }
+          }
+          let h5 = 0;
+          if (t7.length != 1) {
+            for (var d4 = 0; d4 < f6.length; d4++) {
+              var A2;
+              h5 += (A2 = f6[d4]).rect.width * A2.rect.height;
+            }
+          }
+          return f6;
+        })(t6, r6, i6, s4, f5, l4),
+        y3 = {},
+        E = [],
+        F = [];
+      if (o6 != 0) {
+        const e6 = [];
+        for (w2 = 0; w2 < b3.length; w2++) {
+          e6.push(b3[w2].img.buffer);
+        }
+        const t7 = (function concatRGBA(e7) {
+            let t8 = 0;
+            for (var r8 = 0; r8 < e7.length; r8++) {
+              t8 += e7[r8].byteLength;
+            }
+            const i8 = new Uint8Array(t8);
+            let o7 = 0;
+            for (r8 = 0; r8 < e7.length; r8++) {
+              const t9 = new Uint8Array(e7[r8]),
+                a6 = t9.length;
+              for (let e8 = 0; e8 < a6; e8 += 4) {
+                let r9 = t9[e8],
+                  a7 = t9[e8 + 1],
+                  s5 = t9[e8 + 2];
+                const f6 = t9[e8 + 3];
+                f6 == 0 && (r9 = a7 = s5 = 0),
+                  (i8[o7 + e8] = r9),
+                  (i8[o7 + e8 + 1] = a7),
+                  (i8[o7 + e8 + 2] = s5),
+                  (i8[o7 + e8 + 3] = f6);
+              }
+              o7 += a6;
+            }
+            return i8.buffer;
+          })(e6),
+          r7 = quantize(t7, o6);
+        for (w2 = 0; w2 < r7.plte.length; w2++) {
+          E.push(r7.plte[w2].est.rgba);
+        }
         let i7 = 0;
         for (w2 = 0; w2 < b3.length; w2++) {
           const e7 = (B = b3[w2]).img.length;
           var _ = new Uint8Array(r7.inds.buffer, i7 >> 2, e7 >> 2);
           F.push(_);
           const t8 = new Uint8Array(r7.abuf, i7, e7);
-          h4 && dither(B.img, B.rect.width, B.rect.height, E, t8, _), B.img.set(t8), i7 += e7;
+          h4 && dither(B.img, B.rect.width, B.rect.height, E, t8, _), B.img.set(t8), (i7 += e7);
         }
-      } else for (p4 = 0; p4 < b3.length; p4++) {
-        var B = b3[p4];
-        const e6 = new Uint32Array(B.img.buffer);
-        var U = B.rect.width;
-        m2 = e6.length, _ = new Uint8Array(m2);
-        F.push(_);
-        for (w2 = 0; w2 < m2; w2++) {
-          const t7 = e6[w2];
-          if (0 != w2 && t7 == e6[w2 - 1]) _[w2] = _[w2 - 1];
-          else if (w2 > U && t7 == e6[w2 - U]) _[w2] = _[w2 - U];
-          else {
-            let e7 = y3[t7];
-            if (null == e7 && (y3[t7] = e7 = E.length, E.push(t7), E.length >= 300)) break;
-            _[w2] = e7;
+      } else {
+        for (p4 = 0; p4 < b3.length; p4++) {
+          var B = b3[p4];
+          const e6 = new Uint32Array(B.img.buffer);
+          var U = B.rect.width;
+          (m2 = e6.length), (_ = new Uint8Array(m2));
+          F.push(_);
+          for (w2 = 0; w2 < m2; w2++) {
+            const t7 = e6[w2];
+            if (w2 != 0 && t7 == e6[w2 - 1]) {
+              _[w2] = _[w2 - 1];
+            } else if (w2 > U && t7 == e6[w2 - U]) {
+              _[w2] = _[w2 - U];
+            } else {
+              let e7 = y3[t7];
+              if (e7 == null && ((y3[t7] = e7 = E.length), E.push(t7), E.length >= 300)) {
+                break;
+              }
+              _[w2] = e7;
+            }
           }
         }
       }
       const C = E.length;
-      C <= 256 && 0 == u4 && (A = C <= 2 ? 1 : C <= 4 ? 2 : C <= 16 ? 4 : 8, A = Math.max(A, c5));
+      C <= 256 &&
+        u4 == 0 &&
+        ((A = C <= 2 ? 1 : C <= 4 ? 2 : C <= 16 ? 4 : 8), (A = Math.max(A, c5)));
       for (p4 = 0; p4 < b3.length; p4++) {
         (B = b3[p4]).rect.x, B.rect.y;
         U = B.rect.width;
         const e6 = B.rect.height;
         let t7 = B.img;
         new Uint32Array(t7.buffer);
-        let r7 = 4 * U, i7 = 4;
-        if (C <= 256 && 0 == u4) {
-          r7 = Math.ceil(A * U / 8);
+        let r7 = 4 * U,
+          i7 = 4;
+        if (C <= 256 && u4 == 0) {
+          r7 = Math.ceil((A * U) / 8);
           var I = new Uint8Array(r7 * e6);
           const o7 = F[p4];
           for (let t8 = 0; t8 < e6; t8++) {
             w2 = t8 * r7;
             const e7 = t8 * U;
-            if (8 == A) for (var Q = 0; Q < U; Q++) I[w2 + Q] = o7[e7 + Q];
-            else if (4 == A) for (Q = 0; Q < U; Q++) I[w2 + (Q >> 1)] |= o7[e7 + Q] << 4 - 4 * (1 & Q);
-            else if (2 == A) for (Q = 0; Q < U; Q++) I[w2 + (Q >> 2)] |= o7[e7 + Q] << 6 - 2 * (3 & Q);
-            else if (1 == A) for (Q = 0; Q < U; Q++) I[w2 + (Q >> 3)] |= o7[e7 + Q] << 7 - 1 * (7 & Q);
+            if (A == 8) {
+              for (var Q = 0; Q < U; Q++) {
+                I[w2 + Q] = o7[e7 + Q];
+              }
+            } else if (A == 4) {
+              for (Q = 0; Q < U; Q++) {
+                I[w2 + (Q >> 1)] |= o7[e7 + Q] << (4 - 4 * (1 & Q));
+              }
+            } else if (A == 2) {
+              for (Q = 0; Q < U; Q++) {
+                I[w2 + (Q >> 2)] |= o7[e7 + Q] << (6 - 2 * (3 & Q));
+              }
+            } else if (A == 1) {
+              for (Q = 0; Q < U; Q++) {
+                I[w2 + (Q >> 3)] |= o7[e7 + Q] << (7 - 1 * (7 & Q));
+              }
+            }
           }
-          t7 = I, d3 = 3, i7 = 1;
-        } else if (0 == v3 && 1 == b3.length) {
+          (t7 = I), (d3 = 3), (i7 = 1);
+        } else if (v3 == 0 && b3.length == 1) {
           I = new Uint8Array(U * e6 * 3);
           const o7 = U * e6;
           for (w2 = 0; w2 < o7; w2++) {
-            const e7 = 3 * w2, r8 = 4 * w2;
-            I[e7] = t7[r8], I[e7 + 1] = t7[r8 + 1], I[e7 + 2] = t7[r8 + 2];
+            const e7 = 3 * w2,
+              r8 = 4 * w2;
+            (I[e7] = t7[r8]), (I[e7 + 1] = t7[r8 + 1]), (I[e7 + 2] = t7[r8 + 2]);
           }
-          t7 = I, d3 = 2, i7 = 3, r7 = 3 * U;
+          (t7 = I), (d3 = 2), (i7 = 3), (r7 = 3 * U);
         }
-        B.img = t7, B.bpl = r7, B.bpp = i7;
+        (B.img = t7), (B.bpl = r7), (B.bpp = i7);
       }
       return { ctype: d3, depth: A, plte: E, frames: b3 };
     }
     function _updateFrame(t6, r6, i6, o6, a5, s4, f5) {
-      const l4 = Uint8Array, c5 = Uint32Array, u4 = new l4(t6[a5 - 1]), h4 = new c5(t6[a5 - 1]), d3 = a5 + 1 < t6.length ? new l4(t6[a5 + 1]) : null, A = new l4(t6[a5]), g2 = new c5(A.buffer);
-      let p4 = r6, m2 = i6, w2 = -1, v3 = -1;
-      for (let e6 = 0; e6 < s4.height; e6++) for (let t7 = 0; t7 < s4.width; t7++) {
-        const i7 = s4.x + t7, f6 = s4.y + e6, l5 = f6 * r6 + i7, c6 = g2[l5];
-        0 == c6 || 0 == o6[a5 - 1].dispose && h4[l5] == c6 && (null == d3 || 0 != d3[4 * l5 + 3]) || (i7 < p4 && (p4 = i7), i7 > w2 && (w2 = i7), f6 < m2 && (m2 = f6), f6 > v3 && (v3 = f6));
+      const l4 = Uint8Array,
+        c5 = Uint32Array,
+        u4 = new l4(t6[a5 - 1]),
+        h4 = new c5(t6[a5 - 1]),
+        d3 = a5 + 1 < t6.length ? new l4(t6[a5 + 1]) : null,
+        A = new l4(t6[a5]),
+        g2 = new c5(A.buffer);
+      let p4 = r6,
+        m2 = i6,
+        w2 = -1,
+        v3 = -1;
+      for (let e6 = 0; e6 < s4.height; e6++) {
+        for (let t7 = 0; t7 < s4.width; t7++) {
+          const i7 = s4.x + t7,
+            f6 = s4.y + e6,
+            l5 = f6 * r6 + i7,
+            c6 = g2[l5];
+          c6 == 0 ||
+            (o6[a5 - 1].dispose == 0 && h4[l5] == c6 && (d3 == null || d3[4 * l5 + 3] != 0)) ||
+            (i7 < p4 && (p4 = i7),
+            i7 > w2 && (w2 = i7),
+            f6 < m2 && (m2 = f6),
+            f6 > v3 && (v3 = f6));
+        }
       }
-      -1 == w2 && (p4 = m2 = w2 = v3 = 0), f5 && (1 == (1 & p4) && p4--, 1 == (1 & m2) && m2--), s4 = { x: p4, y: m2, width: w2 - p4 + 1, height: v3 - m2 + 1 };
+      w2 == -1 && (p4 = m2 = w2 = v3 = 0),
+        f5 && ((1 & p4) == 1 && p4--, (1 & m2) == 1 && m2--),
+        (s4 = { x: p4, y: m2, width: w2 - p4 + 1, height: v3 - m2 + 1 });
       const b3 = o6[a5];
-      b3.rect = s4, b3.blend = 1, b3.img = new Uint8Array(s4.width * s4.height * 4), 0 == o6[a5 - 1].dispose ? (e5(u4, r6, i6, b3.img, s4.width, s4.height, -s4.x, -s4.y, 0), _prepareDiff(A, r6, i6, b3.img, s4)) : e5(A, r6, i6, b3.img, s4.width, s4.height, -s4.x, -s4.y, 0);
+      (b3.rect = s4),
+        (b3.blend = 1),
+        (b3.img = new Uint8Array(s4.width * s4.height * 4)),
+        o6[a5 - 1].dispose == 0
+          ? (e5(u4, r6, i6, b3.img, s4.width, s4.height, -s4.x, -s4.y, 0),
+            _prepareDiff(A, r6, i6, b3.img, s4))
+          : e5(A, r6, i6, b3.img, s4.width, s4.height, -s4.x, -s4.y, 0);
     }
     function _prepareDiff(t6, r6, i6, o6, a5) {
       e5(t6, r6, i6, o6, a5.width, a5.height, -a5.x, -a5.y, 2);
     }
     function _filterZero(e6, t6, r6, i6, o6, a5, s4) {
       const f5 = [];
-      let l4, c5 = [0, 1, 2, 3, 4];
-      -1 != a5 ? c5 = [a5] : (t6 * i6 > 5e5 || 1 == r6) && (c5 = [0]), s4 && (l4 = { level: 0 });
+      let l4,
+        c5 = [0, 1, 2, 3, 4];
+      a5 != -1 ? (c5 = [a5]) : (t6 * i6 > 5e5 || r6 == 1) && (c5 = [0]), s4 && (l4 = { level: 0 });
       const u4 = UZIP;
       for (var h4 = 0; h4 < c5.length; h4++) {
-        for (let a6 = 0; a6 < t6; a6++) _filterLine(o6, e6, a6, i6, r6, c5[h4]);
+        for (let a6 = 0; a6 < t6; a6++) {
+          _filterLine(o6, e6, a6, i6, r6, c5[h4]);
+        }
         f5.push(u4.deflate(o6, l4));
       }
-      let d3, A = 1e9;
-      for (h4 = 0; h4 < f5.length; h4++) f5[h4].length < A && (d3 = h4, A = f5[h4].length);
+      let d3,
+        A = 1e9;
+      for (h4 = 0; h4 < f5.length; h4++) {
+        f5[h4].length < A && ((d3 = h4), (A = f5[h4].length));
+      }
       return f5[d3];
     }
     function _filterLine(e6, t6, i6, o6, a5, s4) {
       const f5 = i6 * o6;
       let l4 = f5 + i6;
-      if (e6[l4] = s4, l4++, 0 == s4) if (o6 < 500) for (var c5 = 0; c5 < o6; c5++) e6[l4 + c5] = t6[f5 + c5];
-      else e6.set(new Uint8Array(t6.buffer, f5, o6), l4);
-      else if (1 == s4) {
-        for (c5 = 0; c5 < a5; c5++) e6[l4 + c5] = t6[f5 + c5];
-        for (c5 = a5; c5 < o6; c5++) e6[l4 + c5] = t6[f5 + c5] - t6[f5 + c5 - a5] + 256 & 255;
-      } else if (0 == i6) {
-        for (c5 = 0; c5 < a5; c5++) e6[l4 + c5] = t6[f5 + c5];
-        if (2 == s4) for (c5 = a5; c5 < o6; c5++) e6[l4 + c5] = t6[f5 + c5];
-        if (3 == s4) for (c5 = a5; c5 < o6; c5++) e6[l4 + c5] = t6[f5 + c5] - (t6[f5 + c5 - a5] >> 1) + 256 & 255;
-        if (4 == s4) for (c5 = a5; c5 < o6; c5++) e6[l4 + c5] = t6[f5 + c5] - r5(t6[f5 + c5 - a5], 0, 0) + 256 & 255;
-      } else {
-        if (2 == s4) for (c5 = 0; c5 < o6; c5++) e6[l4 + c5] = t6[f5 + c5] + 256 - t6[f5 + c5 - o6] & 255;
-        if (3 == s4) {
-          for (c5 = 0; c5 < a5; c5++) e6[l4 + c5] = t6[f5 + c5] + 256 - (t6[f5 + c5 - o6] >> 1) & 255;
-          for (c5 = a5; c5 < o6; c5++) e6[l4 + c5] = t6[f5 + c5] + 256 - (t6[f5 + c5 - o6] + t6[f5 + c5 - a5] >> 1) & 255;
+      if (((e6[l4] = s4), l4++, s4 == 0)) {
+        if (o6 < 500) {
+          for (var c5 = 0; c5 < o6; c5++) {
+            e6[l4 + c5] = t6[f5 + c5];
+          }
+        } else {
+          e6.set(new Uint8Array(t6.buffer, f5, o6), l4);
         }
-        if (4 == s4) {
-          for (c5 = 0; c5 < a5; c5++) e6[l4 + c5] = t6[f5 + c5] + 256 - r5(0, t6[f5 + c5 - o6], 0) & 255;
-          for (c5 = a5; c5 < o6; c5++) e6[l4 + c5] = t6[f5 + c5] + 256 - r5(t6[f5 + c5 - a5], t6[f5 + c5 - o6], t6[f5 + c5 - a5 - o6]) & 255;
+      } else if (s4 == 1) {
+        for (c5 = 0; c5 < a5; c5++) {
+          e6[l4 + c5] = t6[f5 + c5];
+        }
+        for (c5 = a5; c5 < o6; c5++) {
+          e6[l4 + c5] = (t6[f5 + c5] - t6[f5 + c5 - a5] + 256) & 255;
+        }
+      } else if (i6 == 0) {
+        for (c5 = 0; c5 < a5; c5++) {
+          e6[l4 + c5] = t6[f5 + c5];
+        }
+        if (s4 == 2) {
+          for (c5 = a5; c5 < o6; c5++) {
+            e6[l4 + c5] = t6[f5 + c5];
+          }
+        }
+        if (s4 == 3) {
+          for (c5 = a5; c5 < o6; c5++) {
+            e6[l4 + c5] = (t6[f5 + c5] - (t6[f5 + c5 - a5] >> 1) + 256) & 255;
+          }
+        }
+        if (s4 == 4) {
+          for (c5 = a5; c5 < o6; c5++) {
+            e6[l4 + c5] = (t6[f5 + c5] - r5(t6[f5 + c5 - a5], 0, 0) + 256) & 255;
+          }
+        }
+      } else {
+        if (s4 == 2) {
+          for (c5 = 0; c5 < o6; c5++) {
+            e6[l4 + c5] = (t6[f5 + c5] + 256 - t6[f5 + c5 - o6]) & 255;
+          }
+        }
+        if (s4 == 3) {
+          for (c5 = 0; c5 < a5; c5++) {
+            e6[l4 + c5] = (t6[f5 + c5] + 256 - (t6[f5 + c5 - o6] >> 1)) & 255;
+          }
+          for (c5 = a5; c5 < o6; c5++) {
+            e6[l4 + c5] = (t6[f5 + c5] + 256 - ((t6[f5 + c5 - o6] + t6[f5 + c5 - a5]) >> 1)) & 255;
+          }
+        }
+        if (s4 == 4) {
+          for (c5 = 0; c5 < a5; c5++) {
+            e6[l4 + c5] = (t6[f5 + c5] + 256 - r5(0, t6[f5 + c5 - o6], 0)) & 255;
+          }
+          for (c5 = a5; c5 < o6; c5++) {
+            e6[l4 + c5] =
+              (t6[f5 + c5] + 256 - r5(t6[f5 + c5 - a5], t6[f5 + c5 - o6], t6[f5 + c5 - a5 - o6])) &
+              255;
+          }
         }
       }
     }
     function quantize(e6, t6) {
-      const r6 = new Uint8Array(e6), i6 = r6.slice(0), o6 = new Uint32Array(i6.buffer), a5 = getKDtree(i6, t6), s4 = a5[0], f5 = a5[1], l4 = r6.length, c5 = new Uint8Array(l4 >> 2);
+      const r6 = new Uint8Array(e6),
+        i6 = r6.slice(0),
+        o6 = new Uint32Array(i6.buffer),
+        a5 = getKDtree(i6, t6),
+        s4 = a5[0],
+        f5 = a5[1],
+        l4 = r6.length,
+        c5 = new Uint8Array(l4 >> 2);
       let u4;
-      if (r6.length < 2e7) for (var h4 = 0; h4 < l4; h4 += 4) {
-        u4 = getNearest(s4, d3 = r6[h4] * (1 / 255), A = r6[h4 + 1] * (1 / 255), g2 = r6[h4 + 2] * (1 / 255), p4 = r6[h4 + 3] * (1 / 255)), c5[h4 >> 2] = u4.ind, o6[h4 >> 2] = u4.est.rgba;
-      }
-      else for (h4 = 0; h4 < l4; h4 += 4) {
-        var d3 = r6[h4] * (1 / 255), A = r6[h4 + 1] * (1 / 255), g2 = r6[h4 + 2] * (1 / 255), p4 = r6[h4 + 3] * (1 / 255);
-        for (u4 = s4; u4.left; ) u4 = planeDst(u4.est, d3, A, g2, p4) <= 0 ? u4.left : u4.right;
-        c5[h4 >> 2] = u4.ind, o6[h4 >> 2] = u4.est.rgba;
+      if (r6.length < 2e7) {
+        for (var h4 = 0; h4 < l4; h4 += 4) {
+          (u4 = getNearest(
+            s4,
+            (d3 = r6[h4] * (1 / 255)),
+            (A = r6[h4 + 1] * (1 / 255)),
+            (g2 = r6[h4 + 2] * (1 / 255)),
+            (p4 = r6[h4 + 3] * (1 / 255)),
+          )),
+            (c5[h4 >> 2] = u4.ind),
+            (o6[h4 >> 2] = u4.est.rgba);
+        }
+      } else {
+        for (h4 = 0; h4 < l4; h4 += 4) {
+          var d3 = r6[h4] * (1 / 255),
+            A = r6[h4 + 1] * (1 / 255),
+            g2 = r6[h4 + 2] * (1 / 255),
+            p4 = r6[h4 + 3] * (1 / 255);
+          for (u4 = s4; u4.left; ) {
+            u4 = planeDst(u4.est, d3, A, g2, p4) <= 0 ? u4.left : u4.right;
+          }
+          (c5[h4 >> 2] = u4.ind), (o6[h4 >> 2] = u4.est.rgba);
+        }
       }
       return { abuf: i6.buffer, inds: c5, plte: f5 };
     }
     function getKDtree(e6, t6, r6) {
-      null == r6 && (r6 = 1e-4);
-      const i6 = new Uint32Array(e6.buffer), o6 = { i0: 0, i1: e6.length, bst: null, est: null, tdst: 0, left: null, right: null };
-      o6.bst = stats(e6, o6.i0, o6.i1), o6.est = estats(o6.bst);
+      r6 == null && (r6 = 1e-4);
+      const i6 = new Uint32Array(e6.buffer),
+        o6 = { i0: 0, i1: e6.length, bst: null, est: null, tdst: 0, left: null, right: null };
+      (o6.bst = stats(e6, o6.i0, o6.i1)), (o6.est = estats(o6.bst));
       const a5 = [o6];
-      for (; a5.length < t6; ) {
-        let t7 = 0, o7 = 0;
-        for (var s4 = 0; s4 < a5.length; s4++) a5[s4].est.L > t7 && (t7 = a5[s4].est.L, o7 = s4);
-        if (t7 < r6) break;
-        const f5 = a5[o7], l4 = splitPixels(e6, i6, f5.i0, f5.i1, f5.est.e, f5.est.eMq255);
+      while (a5.length < t6) {
+        let t7 = 0,
+          o7 = 0;
+        for (var s4 = 0; s4 < a5.length; s4++) {
+          a5[s4].est.L > t7 && ((t7 = a5[s4].est.L), (o7 = s4));
+        }
+        if (t7 < r6) {
+          break;
+        }
+        const f5 = a5[o7],
+          l4 = splitPixels(e6, i6, f5.i0, f5.i1, f5.est.e, f5.est.eMq255);
         if (f5.i0 >= l4 || f5.i1 <= l4) {
           f5.est.L = 0;
           continue;
         }
         const c5 = { i0: f5.i0, i1: l4, bst: null, est: null, tdst: 0, left: null, right: null };
-        c5.bst = stats(e6, c5.i0, c5.i1), c5.est = estats(c5.bst);
+        (c5.bst = stats(e6, c5.i0, c5.i1)), (c5.est = estats(c5.bst));
         const u4 = { i0: l4, i1: f5.i1, bst: null, est: null, tdst: 0, left: null, right: null };
         u4.bst = { R: [], m: [], N: f5.bst.N - c5.bst.N };
-        for (s4 = 0; s4 < 16; s4++) u4.bst.R[s4] = f5.bst.R[s4] - c5.bst.R[s4];
-        for (s4 = 0; s4 < 4; s4++) u4.bst.m[s4] = f5.bst.m[s4] - c5.bst.m[s4];
-        u4.est = estats(u4.bst), f5.left = c5, f5.right = u4, a5[o7] = c5, a5.push(u4);
+        for (s4 = 0; s4 < 16; s4++) {
+          u4.bst.R[s4] = f5.bst.R[s4] - c5.bst.R[s4];
+        }
+        for (s4 = 0; s4 < 4; s4++) {
+          u4.bst.m[s4] = f5.bst.m[s4] - c5.bst.m[s4];
+        }
+        (u4.est = estats(u4.bst)), (f5.left = c5), (f5.right = u4), (a5[o7] = c5), a5.push(u4);
       }
-      a5.sort(((e7, t7) => t7.bst.N - e7.bst.N));
-      for (s4 = 0; s4 < a5.length; s4++) a5[s4].ind = s4;
+      a5.sort((e7, t7) => t7.bst.N - e7.bst.N);
+      for (s4 = 0; s4 < a5.length; s4++) {
+        a5[s4].ind = s4;
+      }
       return [o6, a5];
     }
     function getNearest(e6, t6, r6, i6, o6) {
-      if (null == e6.left) return e6.tdst = (function dist(e7, t7, r7, i7, o7) {
-        const a6 = t7 - e7[0], s5 = r7 - e7[1], f6 = i7 - e7[2], l5 = o7 - e7[3];
-        return a6 * a6 + s5 * s5 + f6 * f6 + l5 * l5;
-      })(e6.est.q, t6, r6, i6, o6), e6;
+      if (e6.left == null) {
+        return (
+          (e6.tdst = (function dist(e7, t7, r7, i7, o7) {
+            const a6 = t7 - e7[0],
+              s5 = r7 - e7[1],
+              f6 = i7 - e7[2],
+              l5 = o7 - e7[3];
+            return a6 * a6 + s5 * s5 + f6 * f6 + l5 * l5;
+          })(e6.est.q, t6, r6, i6, o6)),
+          e6
+        );
+      }
       const a5 = planeDst(e6.est, t6, r6, i6, o6);
-      let s4 = e6.left, f5 = e6.right;
-      a5 > 0 && (s4 = e6.right, f5 = e6.left);
+      let s4 = e6.left,
+        f5 = e6.right;
+      a5 > 0 && ((s4 = e6.right), (f5 = e6.left));
       const l4 = getNearest(s4, t6, r6, i6, o6);
-      if (l4.tdst <= a5 * a5) return l4;
+      if (l4.tdst <= a5 * a5) {
+        return l4;
+      }
       const c5 = getNearest(f5, t6, r6, i6, o6);
       return c5.tdst < l4.tdst ? c5 : l4;
     }
@@ -1701,304 +3163,619 @@ Is it scaring you off?`,
     }
     function splitPixels(e6, t6, r6, i6, o6, a5) {
       for (i6 -= 4; r6 < i6; ) {
-        for (; vecDot(e6, r6, o6) <= a5; ) r6 += 4;
-        for (; vecDot(e6, i6, o6) > a5; ) i6 -= 4;
-        if (r6 >= i6) break;
+        while (vecDot(e6, r6, o6) <= a5) {
+          r6 += 4;
+        }
+        while (vecDot(e6, i6, o6) > a5) {
+          i6 -= 4;
+        }
+        if (r6 >= i6) {
+          break;
+        }
         const s4 = t6[r6 >> 2];
-        t6[r6 >> 2] = t6[i6 >> 2], t6[i6 >> 2] = s4, r6 += 4, i6 -= 4;
+        (t6[r6 >> 2] = t6[i6 >> 2]), (t6[i6 >> 2] = s4), (r6 += 4), (i6 -= 4);
       }
-      for (; vecDot(e6, r6, o6) > a5; ) r6 -= 4;
+      while (vecDot(e6, r6, o6) > a5) {
+        r6 -= 4;
+      }
       return r6 + 4;
     }
     function vecDot(e6, t6, r6) {
       return e6[t6] * r6[0] + e6[t6 + 1] * r6[1] + e6[t6 + 2] * r6[2] + e6[t6 + 3] * r6[3];
     }
     function stats(e6, t6, r6) {
-      const i6 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], o6 = [0, 0, 0, 0], a5 = r6 - t6 >> 2;
+      const i6 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        o6 = [0, 0, 0, 0],
+        a5 = (r6 - t6) >> 2;
       for (let a6 = t6; a6 < r6; a6 += 4) {
-        const t7 = e6[a6] * (1 / 255), r7 = e6[a6 + 1] * (1 / 255), s4 = e6[a6 + 2] * (1 / 255), f5 = e6[a6 + 3] * (1 / 255);
-        o6[0] += t7, o6[1] += r7, o6[2] += s4, o6[3] += f5, i6[0] += t7 * t7, i6[1] += t7 * r7, i6[2] += t7 * s4, i6[3] += t7 * f5, i6[5] += r7 * r7, i6[6] += r7 * s4, i6[7] += r7 * f5, i6[10] += s4 * s4, i6[11] += s4 * f5, i6[15] += f5 * f5;
+        const t7 = e6[a6] * (1 / 255),
+          r7 = e6[a6 + 1] * (1 / 255),
+          s4 = e6[a6 + 2] * (1 / 255),
+          f5 = e6[a6 + 3] * (1 / 255);
+        (o6[0] += t7),
+          (o6[1] += r7),
+          (o6[2] += s4),
+          (o6[3] += f5),
+          (i6[0] += t7 * t7),
+          (i6[1] += t7 * r7),
+          (i6[2] += t7 * s4),
+          (i6[3] += t7 * f5),
+          (i6[5] += r7 * r7),
+          (i6[6] += r7 * s4),
+          (i6[7] += r7 * f5),
+          (i6[10] += s4 * s4),
+          (i6[11] += s4 * f5),
+          (i6[15] += f5 * f5);
       }
-      return i6[4] = i6[1], i6[8] = i6[2], i6[9] = i6[6], i6[12] = i6[3], i6[13] = i6[7], i6[14] = i6[11], { R: i6, m: o6, N: a5 };
+      return (
+        (i6[4] = i6[1]),
+        (i6[8] = i6[2]),
+        (i6[9] = i6[6]),
+        (i6[12] = i6[3]),
+        (i6[13] = i6[7]),
+        (i6[14] = i6[11]),
+        { R: i6, m: o6, N: a5 }
+      );
     }
     function estats(e6) {
-      const { R: t6 } = e6, { m: r6 } = e6, { N: i6 } = e6, a5 = r6[0], s4 = r6[1], f5 = r6[2], l4 = r6[3], c5 = 0 == i6 ? 0 : 1 / i6, u4 = [t6[0] - a5 * a5 * c5, t6[1] - a5 * s4 * c5, t6[2] - a5 * f5 * c5, t6[3] - a5 * l4 * c5, t6[4] - s4 * a5 * c5, t6[5] - s4 * s4 * c5, t6[6] - s4 * f5 * c5, t6[7] - s4 * l4 * c5, t6[8] - f5 * a5 * c5, t6[9] - f5 * s4 * c5, t6[10] - f5 * f5 * c5, t6[11] - f5 * l4 * c5, t6[12] - l4 * a5 * c5, t6[13] - l4 * s4 * c5, t6[14] - l4 * f5 * c5, t6[15] - l4 * l4 * c5], h4 = u4, d3 = o5;
-      let A = [Math.random(), Math.random(), Math.random(), Math.random()], g2 = 0, p4 = 0;
-      if (0 != i6) for (let e7 = 0; e7 < 16 && (A = d3.multVec(h4, A), p4 = Math.sqrt(d3.dot(A, A)), A = d3.sml(1 / p4, A), !(0 != e7 && Math.abs(p4 - g2) < 1e-9)); e7++) g2 = p4;
+      const { R: t6 } = e6,
+        { m: r6 } = e6,
+        { N: i6 } = e6,
+        a5 = r6[0],
+        s4 = r6[1],
+        f5 = r6[2],
+        l4 = r6[3],
+        c5 = i6 == 0 ? 0 : 1 / i6,
+        u4 = [
+          t6[0] - a5 * a5 * c5,
+          t6[1] - a5 * s4 * c5,
+          t6[2] - a5 * f5 * c5,
+          t6[3] - a5 * l4 * c5,
+          t6[4] - s4 * a5 * c5,
+          t6[5] - s4 * s4 * c5,
+          t6[6] - s4 * f5 * c5,
+          t6[7] - s4 * l4 * c5,
+          t6[8] - f5 * a5 * c5,
+          t6[9] - f5 * s4 * c5,
+          t6[10] - f5 * f5 * c5,
+          t6[11] - f5 * l4 * c5,
+          t6[12] - l4 * a5 * c5,
+          t6[13] - l4 * s4 * c5,
+          t6[14] - l4 * f5 * c5,
+          t6[15] - l4 * l4 * c5,
+        ],
+        h4 = u4,
+        d3 = o5;
+      let A = [Math.random(), Math.random(), Math.random(), Math.random()],
+        g2 = 0,
+        p4 = 0;
+      if (i6 != 0) {
+        for (
+          let e7 = 0;
+          e7 < 16 &&
+          ((A = d3.multVec(h4, A)),
+          (p4 = Math.sqrt(d3.dot(A, A))),
+          (A = d3.sml(1 / p4, A)),
+          !(e7 != 0 && Math.abs(p4 - g2) < 1e-9));
+          e7++
+        ) {
+          g2 = p4;
+        }
+      }
       const m2 = [a5 * c5, s4 * c5, f5 * c5, l4 * c5];
-      return { Cov: u4, q: m2, e: A, L: g2, eMq255: d3.dot(d3.sml(255, m2), A), eMq: d3.dot(A, m2), rgba: (Math.round(255 * m2[3]) << 24 | Math.round(255 * m2[2]) << 16 | Math.round(255 * m2[1]) << 8 | Math.round(255 * m2[0]) << 0) >>> 0 };
+      return {
+        Cov: u4,
+        q: m2,
+        e: A,
+        L: g2,
+        eMq255: d3.dot(d3.sml(255, m2), A),
+        eMq: d3.dot(A, m2),
+        rgba:
+          ((Math.round(255 * m2[3]) << 24) |
+            (Math.round(255 * m2[2]) << 16) |
+            (Math.round(255 * m2[1]) << 8) |
+            (Math.round(255 * m2[0]) << 0)) >>>
+          0,
+      };
     }
-    var o5 = { multVec: (e6, t6) => [e6[0] * t6[0] + e6[1] * t6[1] + e6[2] * t6[2] + e6[3] * t6[3], e6[4] * t6[0] + e6[5] * t6[1] + e6[6] * t6[2] + e6[7] * t6[3], e6[8] * t6[0] + e6[9] * t6[1] + e6[10] * t6[2] + e6[11] * t6[3], e6[12] * t6[0] + e6[13] * t6[1] + e6[14] * t6[2] + e6[15] * t6[3]], dot: (e6, t6) => e6[0] * t6[0] + e6[1] * t6[1] + e6[2] * t6[2] + e6[3] * t6[3], sml: (e6, t6) => [e6 * t6[0], e6 * t6[1], e6 * t6[2], e6 * t6[3]] };
-    UPNG.encode = function encode(e6, t6, r6, i6, o6, a5, s4) {
-      null == i6 && (i6 = 0), null == s4 && (s4 = false);
+    var o5 = {
+      multVec: (e6, t6) => [
+        e6[0] * t6[0] + e6[1] * t6[1] + e6[2] * t6[2] + e6[3] * t6[3],
+        e6[4] * t6[0] + e6[5] * t6[1] + e6[6] * t6[2] + e6[7] * t6[3],
+        e6[8] * t6[0] + e6[9] * t6[1] + e6[10] * t6[2] + e6[11] * t6[3],
+        e6[12] * t6[0] + e6[13] * t6[1] + e6[14] * t6[2] + e6[15] * t6[3],
+      ],
+      dot: (e6, t6) => e6[0] * t6[0] + e6[1] * t6[1] + e6[2] * t6[2] + e6[3] * t6[3],
+      sml: (e6, t6) => [e6 * t6[0], e6 * t6[1], e6 * t6[2], e6 * t6[3]],
+    };
+    (UPNG.encode = function encode(e6, t6, r6, i6, o6, a5, s4) {
+      i6 == null && (i6 = 0), s4 == null && (s4 = false);
       const f5 = compress2(e6, t6, r6, i6, [false, false, false, 0, s4, false]);
       return compressPNG(f5, -1), _main(f5, t6, r6, o6, a5);
-    }, UPNG.encodeLL = function encodeLL(e6, t6, r6, i6, o6, a5, s4, f5) {
-      const l4 = { ctype: 0 + (1 == i6 ? 0 : 2) + (0 == o6 ? 0 : 4), depth: a5, frames: [] }, c5 = (i6 + o6) * a5, u4 = c5 * t6;
-      for (let i7 = 0; i7 < e6.length; i7++) l4.frames.push({ rect: { x: 0, y: 0, width: t6, height: r6 }, img: new Uint8Array(e6[i7]), blend: 0, dispose: 1, bpp: Math.ceil(c5 / 8), bpl: Math.ceil(u4 / 8) });
-      return compressPNG(l4, 0, true), _main(l4, t6, r6, s4, f5);
-    }, UPNG.encode.compress = compress2, UPNG.encode.dither = dither, UPNG.quantize = quantize, UPNG.quantize.getKDtree = getKDtree, UPNG.quantize.getNearest = getNearest;
+    }),
+      (UPNG.encodeLL = function encodeLL(e6, t6, r6, i6, o6, a5, s4, f5) {
+        const l4 = { ctype: 0 + (i6 == 1 ? 0 : 2) + (o6 == 0 ? 0 : 4), depth: a5, frames: [] },
+          c5 = (i6 + o6) * a5,
+          u4 = c5 * t6;
+        for (let i7 = 0; i7 < e6.length; i7++) {
+          l4.frames.push({
+            rect: { x: 0, y: 0, width: t6, height: r6 },
+            img: new Uint8Array(e6[i7]),
+            blend: 0,
+            dispose: 1,
+            bpp: Math.ceil(c5 / 8),
+            bpl: Math.ceil(u4 / 8),
+          });
+        }
+        return compressPNG(l4, 0, true), _main(l4, t6, r6, s4, f5);
+      }),
+      (UPNG.encode.compress = compress2),
+      (UPNG.encode.dither = dither),
+      (UPNG.quantize = quantize),
+      (UPNG.quantize.getKDtree = getKDtree),
+      (UPNG.quantize.getNearest = getNearest);
   })();
-  var r = { toArrayBuffer(e5, t5) {
-    const i5 = e5.width, o5 = e5.height, a5 = i5 << 2, s4 = e5.getContext("2d").getImageData(0, 0, i5, o5), f5 = new Uint32Array(s4.data.buffer), l4 = (32 * i5 + 31) / 32 << 2, c5 = l4 * o5, u4 = 122 + c5, h4 = new ArrayBuffer(u4), d3 = new DataView(h4), A = 1 << 20;
-    let g2, p4, m2, w2, v3 = A, b3 = 0, y3 = 0, E = 0;
-    function set16(e6) {
-      d3.setUint16(y3, e6, true), y3 += 2;
-    }
-    function set32(e6) {
-      d3.setUint32(y3, e6, true), y3 += 4;
-    }
-    function seek(e6) {
-      y3 += e6;
-    }
-    set16(19778), set32(u4), seek(4), set32(122), set32(108), set32(i5), set32(-o5 >>> 0), set16(1), set16(32), set32(3), set32(c5), set32(2835), set32(2835), seek(8), set32(16711680), set32(65280), set32(255), set32(4278190080), set32(1466527264), (function convert() {
-      for (; b3 < o5 && v3 > 0; ) {
-        for (w2 = 122 + b3 * l4, g2 = 0; g2 < a5; ) v3--, p4 = f5[E++], m2 = p4 >>> 24, d3.setUint32(w2 + g2, p4 << 8 | m2), g2 += 4;
-        b3++;
+  var r = {
+    toArrayBuffer(e5, t5) {
+      const i5 = e5.width,
+        o5 = e5.height,
+        a5 = i5 << 2,
+        s4 = e5.getContext("2d").getImageData(0, 0, i5, o5),
+        f5 = new Uint32Array(s4.data.buffer),
+        l4 = ((32 * i5 + 31) / 32) << 2,
+        c5 = l4 * o5,
+        u4 = 122 + c5,
+        h4 = new ArrayBuffer(u4),
+        d3 = new DataView(h4),
+        A = 1 << 20;
+      let g2,
+        p4,
+        m2,
+        w2,
+        v3 = A,
+        b3 = 0,
+        y3 = 0,
+        E = 0;
+      function set16(e6) {
+        d3.setUint16(y3, e6, true), (y3 += 2);
       }
-      E < f5.length ? (v3 = A, setTimeout(convert, r._dly)) : t5(h4);
-    })();
-  }, toBlob(e5, t5) {
-    this.toArrayBuffer(e5, ((e6) => {
-      t5(new Blob([e6], { type: "image/bmp" }));
-    }));
-  }, _dly: 9 };
-  var i = { CHROME: "CHROME", FIREFOX: "FIREFOX", DESKTOP_SAFARI: "DESKTOP_SAFARI", IE: "IE", IOS: "IOS", ETC: "ETC" };
-  var o = { [i.CHROME]: 16384, [i.FIREFOX]: 11180, [i.DESKTOP_SAFARI]: 16384, [i.IE]: 8192, [i.IOS]: 4096, [i.ETC]: 8192 };
-  var a = "undefined" != typeof window;
-  var s = "undefined" != typeof WorkerGlobalScope && self instanceof WorkerGlobalScope;
-  var f = a && window.cordova && window.cordova.require && window.cordova.require("cordova/modulemapper");
-  var CustomFile = (a || s) && (f && f.getOriginalSymbol(window, "File") || "undefined" != typeof File && File);
-  var CustomFileReader = (a || s) && (f && f.getOriginalSymbol(window, "FileReader") || "undefined" != typeof FileReader && FileReader);
+      function set32(e6) {
+        d3.setUint32(y3, e6, true), (y3 += 4);
+      }
+      function seek(e6) {
+        y3 += e6;
+      }
+      set16(19_778),
+        set32(u4),
+        seek(4),
+        set32(122),
+        set32(108),
+        set32(i5),
+        set32(-o5 >>> 0),
+        set16(1),
+        set16(32),
+        set32(3),
+        set32(c5),
+        set32(2835),
+        set32(2835),
+        seek(8),
+        set32(16_711_680),
+        set32(65_280),
+        set32(255),
+        set32(4_278_190_080),
+        set32(1_466_527_264),
+        (function convert() {
+          while (b3 < o5 && v3 > 0) {
+            for (w2 = 122 + b3 * l4, g2 = 0; g2 < a5; ) {
+              v3--,
+                (p4 = f5[E++]),
+                (m2 = p4 >>> 24),
+                d3.setUint32(w2 + g2, (p4 << 8) | m2),
+                (g2 += 4);
+            }
+            b3++;
+          }
+          E < f5.length ? ((v3 = A), setTimeout(convert, r._dly)) : t5(h4);
+        })();
+    },
+    toBlob(e5, t5) {
+      this.toArrayBuffer(e5, (e6) => {
+        t5(new Blob([e6], { type: "image/bmp" }));
+      });
+    },
+    _dly: 9,
+  };
+  var i = {
+    CHROME: "CHROME",
+    FIREFOX: "FIREFOX",
+    DESKTOP_SAFARI: "DESKTOP_SAFARI",
+    IE: "IE",
+    IOS: "IOS",
+    ETC: "ETC",
+  };
+  var o = {
+    [i.CHROME]: 16_384,
+    [i.FIREFOX]: 11_180,
+    [i.DESKTOP_SAFARI]: 16_384,
+    [i.IE]: 8192,
+    [i.IOS]: 4096,
+    [i.ETC]: 8192,
+  };
+  var a = typeof window != "undefined";
+  var s = typeof WorkerGlobalScope != "undefined" && self instanceof WorkerGlobalScope;
+  var f =
+    a && window.cordova && window.cordova.require && window.cordova.require("cordova/modulemapper");
+  var CustomFile =
+    (a || s) &&
+    ((f && f.getOriginalSymbol(window, "File")) || (typeof File != "undefined" && File));
+  var CustomFileReader =
+    (a || s) &&
+    ((f && f.getOriginalSymbol(window, "FileReader")) ||
+      (typeof FileReader != "undefined" && FileReader));
   function getFilefromDataUrl(e5, t5, r5 = Date.now()) {
-    return new Promise(((i5) => {
-      const o5 = e5.split(","), a5 = o5[0].match(/:(.*?);/)[1], s4 = globalThis.atob(o5[1]);
+    return new Promise((i5) => {
+      const o5 = e5.split(","),
+        a5 = o5[0].match(/:(.*?);/)[1],
+        s4 = globalThis.atob(o5[1]);
       let f5 = s4.length;
       const l4 = new Uint8Array(f5);
-      for (; f5--; ) l4[f5] = s4.charCodeAt(f5);
+      while (f5--) {
+        l4[f5] = s4.charCodeAt(f5);
+      }
       const c5 = new Blob([l4], { type: a5 });
-      c5.name = t5, c5.lastModified = r5, i5(c5);
-    }));
+      (c5.name = t5), (c5.lastModified = r5), i5(c5);
+    });
   }
   function getDataUrlFromFile(e5) {
-    return new Promise(((t5, r5) => {
+    return new Promise((t5, r5) => {
       const i5 = new CustomFileReader();
-      i5.onload = () => t5(i5.result), i5.onerror = (e6) => r5(e6), i5.readAsDataURL(e5);
-    }));
+      (i5.onload = () => t5(i5.result)), (i5.onerror = (e6) => r5(e6)), i5.readAsDataURL(e5);
+    });
   }
   function loadImage(e5) {
-    return new Promise(((t5, r5) => {
+    return new Promise((t5, r5) => {
       const i5 = new Image();
-      i5.onload = () => t5(i5), i5.onerror = (e6) => r5(e6), i5.src = e5;
-    }));
+      (i5.onload = () => t5(i5)), (i5.onerror = (e6) => r5(e6)), (i5.src = e5);
+    });
   }
   function getBrowserName() {
-    if (void 0 !== getBrowserName.cachedResult) return getBrowserName.cachedResult;
+    if (void 0 !== getBrowserName.cachedResult) {
+      return getBrowserName.cachedResult;
+    }
     let e5 = i.ETC;
     const { userAgent: t5 } = navigator;
-    return /Chrom(e|ium)/i.test(t5) ? e5 = i.CHROME : /iP(ad|od|hone)/i.test(t5) && /WebKit/i.test(t5) ? e5 = i.IOS : /Safari/i.test(t5) ? e5 = i.DESKTOP_SAFARI : /Firefox/i.test(t5) ? e5 = i.FIREFOX : (/MSIE/i.test(t5) || true == !!document.documentMode) && (e5 = i.IE), getBrowserName.cachedResult = e5, getBrowserName.cachedResult;
+    return (
+      /Chrom(e|ium)/i.test(t5)
+        ? (e5 = i.CHROME)
+        : /iP(ad|od|hone)/i.test(t5) && /WebKit/i.test(t5)
+          ? (e5 = i.IOS)
+          : /Safari/i.test(t5)
+            ? (e5 = i.DESKTOP_SAFARI)
+            : /Firefox/i.test(t5)
+              ? (e5 = i.FIREFOX)
+              : (/MSIE/i.test(t5) || !!document.documentMode == true) && (e5 = i.IE),
+      (getBrowserName.cachedResult = e5),
+      getBrowserName.cachedResult
+    );
   }
   function approximateBelowMaximumCanvasSizeOfBrowser(e5, t5) {
-    const r5 = getBrowserName(), i5 = o[r5];
-    let a5 = e5, s4 = t5, f5 = a5 * s4;
+    const r5 = getBrowserName(),
+      i5 = o[r5];
+    let a5 = e5,
+      s4 = t5,
+      f5 = a5 * s4;
     const l4 = a5 > s4 ? s4 / a5 : a5 / s4;
-    for (; f5 > i5 * i5; ) {
-      const e6 = (i5 + a5) / 2, t6 = (i5 + s4) / 2;
-      e6 < t6 ? (s4 = t6, a5 = t6 * l4) : (s4 = e6 * l4, a5 = e6), f5 = a5 * s4;
+    while (f5 > i5 * i5) {
+      const e6 = (i5 + a5) / 2,
+        t6 = (i5 + s4) / 2;
+      e6 < t6 ? ((s4 = t6), (a5 = t6 * l4)) : ((s4 = e6 * l4), (a5 = e6)), (f5 = a5 * s4);
     }
     return { width: a5, height: s4 };
   }
   function getNewCanvasAndCtx(e5, t5) {
     let r5, i5;
     try {
-      if (r5 = new OffscreenCanvas(e5, t5), i5 = r5.getContext("2d"), null === i5) throw new Error("getContext of OffscreenCanvas returns null");
+      if (((r5 = new OffscreenCanvas(e5, t5)), (i5 = r5.getContext("2d")), i5 === null)) {
+        throw new Error("getContext of OffscreenCanvas returns null");
+      }
     } catch (e6) {
-      r5 = document.createElement("canvas"), i5 = r5.getContext("2d");
+      (r5 = document.createElement("canvas")), (i5 = r5.getContext("2d"));
     }
-    return r5.width = e5, r5.height = t5, [r5, i5];
+    return (r5.width = e5), (r5.height = t5), [r5, i5];
   }
   function drawImageInCanvas(e5, t5) {
-    const { width: r5, height: i5 } = approximateBelowMaximumCanvasSizeOfBrowser(e5.width, e5.height), [o5, a5] = getNewCanvasAndCtx(r5, i5);
-    return t5 && /jpe?g/.test(t5) && (a5.fillStyle = "white", a5.fillRect(0, 0, o5.width, o5.height)), a5.drawImage(e5, 0, 0, o5.width, o5.height), o5;
+    const { width: r5, height: i5 } = approximateBelowMaximumCanvasSizeOfBrowser(
+        e5.width,
+        e5.height,
+      ),
+      [o5, a5] = getNewCanvasAndCtx(r5, i5);
+    return (
+      t5 && /jpe?g/.test(t5) && ((a5.fillStyle = "white"), a5.fillRect(0, 0, o5.width, o5.height)),
+      a5.drawImage(e5, 0, 0, o5.width, o5.height),
+      o5
+    );
   }
   function isIOS() {
-    return void 0 !== isIOS.cachedResult || (isIOS.cachedResult = ["iPad Simulator", "iPhone Simulator", "iPod Simulator", "iPad", "iPhone", "iPod"].includes(navigator.platform) || navigator.userAgent.includes("Mac") && "undefined" != typeof document && "ontouchend" in document), isIOS.cachedResult;
+    return (
+      void 0 !== isIOS.cachedResult ||
+        (isIOS.cachedResult =
+          [
+            "iPad Simulator",
+            "iPhone Simulator",
+            "iPod Simulator",
+            "iPad",
+            "iPhone",
+            "iPod",
+          ].includes(navigator.platform) ||
+          (navigator.userAgent.includes("Mac") &&
+            typeof document != "undefined" &&
+            "ontouchend" in document)),
+      isIOS.cachedResult
+    );
   }
   function drawFileInCanvas(e5, t5 = {}) {
-    return new Promise((function(r5, o5) {
+    return new Promise((r5, o5) => {
       let a5, s4;
-      var $Try_2_Post = function() {
-        try {
-          return s4 = drawImageInCanvas(a5, t5.fileType || e5.type), r5([a5, s4]);
-        } catch (e6) {
-          return o5(e6);
-        }
-      }, $Try_2_Catch = function(t6) {
-        try {
-          0;
-          var $Try_3_Catch = function(e6) {
-            try {
-              throw e6;
-            } catch (e7) {
-              return o5(e7);
-            }
-          };
+      var $Try_2_Post = () => {
           try {
-            let t7;
-            return getDataUrlFromFile(e5).then((function(e6) {
-              try {
-                return t7 = e6, loadImage(t7).then((function(e7) {
-                  try {
-                    return a5 = e7, (function() {
-                      try {
-                        return $Try_2_Post();
-                      } catch (e8) {
-                        return o5(e8);
-                      }
-                    })();
-                  } catch (e8) {
-                    return $Try_3_Catch(e8);
-                  }
-                }), $Try_3_Catch);
-              } catch (e7) {
-                return $Try_3_Catch(e7);
-              }
-            }), $Try_3_Catch);
+            return (s4 = drawImageInCanvas(a5, t5.fileType || e5.type)), r5([a5, s4]);
           } catch (e6) {
-            $Try_3_Catch(e6);
+            return o5(e6);
           }
-        } catch (e6) {
-          return o5(e6);
-        }
-      };
-      try {
-        if (isIOS() || [i.DESKTOP_SAFARI, i.MOBILE_SAFARI].includes(getBrowserName())) throw new Error("Skip createImageBitmap on IOS and Safari");
-        return createImageBitmap(e5).then((function(e6) {
+        },
+        $Try_2_Catch = (t6) => {
           try {
-            return a5 = e6, $Try_2_Post();
+            0;
+            var $Try_3_Catch = (e6) => {
+              try {
+                throw e6;
+              } catch (e7) {
+                return o5(e7);
+              }
+            };
+            try {
+              let t7;
+              return getDataUrlFromFile(e5).then((e6) => {
+                try {
+                  return (
+                    (t7 = e6),
+                    loadImage(t7).then((e7) => {
+                      try {
+                        return (
+                          (a5 = e7),
+                          (() => {
+                            try {
+                              return $Try_2_Post();
+                            } catch (e8) {
+                              return o5(e8);
+                            }
+                          })()
+                        );
+                      } catch (e8) {
+                        return $Try_3_Catch(e8);
+                      }
+                    }, $Try_3_Catch)
+                  );
+                } catch (e7) {
+                  return $Try_3_Catch(e7);
+                }
+              }, $Try_3_Catch);
+            } catch (e6) {
+              $Try_3_Catch(e6);
+            }
+          } catch (e6) {
+            return o5(e6);
+          }
+        };
+      try {
+        if (isIOS() || [i.DESKTOP_SAFARI, i.MOBILE_SAFARI].includes(getBrowserName())) {
+          throw new Error("Skip createImageBitmap on IOS and Safari");
+        }
+        return createImageBitmap(e5).then((e6) => {
+          try {
+            return (a5 = e6), $Try_2_Post();
           } catch (e7) {
             return $Try_2_Catch();
           }
-        }), $Try_2_Catch);
+        }, $Try_2_Catch);
       } catch (e6) {
         $Try_2_Catch();
       }
-    }));
+    });
   }
   function canvasToFile(e5, t5, i5, o5, a5 = 1) {
-    return new Promise((function(s4, f5) {
+    return new Promise(function (s4, f5) {
       let l4;
-      if ("image/png" === t5) {
+      if (t5 === "image/png") {
         let c5, u4, h4;
-        return c5 = e5.getContext("2d"), { data: u4 } = c5.getImageData(0, 0, e5.width, e5.height), h4 = UPNG.encode([u4.buffer], e5.width, e5.height, 4096 * a5), l4 = new Blob([h4], { type: t5 }), l4.name = i5, l4.lastModified = o5, $If_4.call(this);
+        return (
+          (c5 = e5.getContext("2d")),
+          ({ data: u4 } = c5.getImageData(0, 0, e5.width, e5.height)),
+          (h4 = UPNG.encode([u4.buffer], e5.width, e5.height, 4096 * a5)),
+          (l4 = new Blob([h4], { type: t5 })),
+          (l4.name = i5),
+          (l4.lastModified = o5),
+          $If_4.call(this)
+        );
       }
       {
-        let $If_5 = function() {
+        const $If_5 = function () {
           return $If_4.call(this);
         };
-        if ("image/bmp" === t5) return new Promise(((t6) => r.toBlob(e5, t6))).then(function(e6) {
-          try {
-            return l4 = e6, l4.name = i5, l4.lastModified = o5, $If_5.call(this);
-          } catch (e7) {
-            return f5(e7);
-          }
-        }.bind(this), f5);
-        {
-          let $If_6 = function() {
-            return $If_5.call(this);
-          };
-          if ("function" == typeof OffscreenCanvas && e5 instanceof OffscreenCanvas) return e5.convertToBlob({ type: t5, quality: a5 }).then(function(e6) {
-            try {
-              return l4 = e6, l4.name = i5, l4.lastModified = o5, $If_6.call(this);
-            } catch (e7) {
-              return f5(e7);
-            }
-          }.bind(this), f5);
-          {
-            let d3;
-            return d3 = e5.toDataURL(t5, a5), getFilefromDataUrl(d3, i5, o5).then(function(e6) {
+        if (t5 === "image/bmp") {
+          return new Promise((t6) => r.toBlob(e5, t6)).then(
+            function (e6) {
               try {
-                return l4 = e6, $If_6.call(this);
+                return (l4 = e6), (l4.name = i5), (l4.lastModified = o5), $If_5.call(this);
               } catch (e7) {
                 return f5(e7);
               }
-            }.bind(this), f5);
+            }.bind(this),
+            f5,
+          );
+        }
+        {
+          const $If_6 = function () {
+            return $If_5.call(this);
+          };
+          if (typeof OffscreenCanvas == "function" && e5 instanceof OffscreenCanvas) {
+            return e5.convertToBlob({ type: t5, quality: a5 }).then(
+              function (e6) {
+                try {
+                  return (l4 = e6), (l4.name = i5), (l4.lastModified = o5), $If_6.call(this);
+                } catch (e7) {
+                  return f5(e7);
+                }
+              }.bind(this),
+              f5,
+            );
+          }
+          {
+            let d3;
+            return (
+              (d3 = e5.toDataURL(t5, a5)),
+              getFilefromDataUrl(d3, i5, o5).then(
+                function (e6) {
+                  try {
+                    return (l4 = e6), $If_6.call(this);
+                  } catch (e7) {
+                    return f5(e7);
+                  }
+                }.bind(this),
+                f5,
+              )
+            );
           }
         }
       }
       function $If_4() {
         return s4(l4);
       }
-    }));
+    });
   }
   function cleanupCanvasMemory(e5) {
-    e5.width = 0, e5.height = 0;
+    (e5.width = 0), (e5.height = 0);
   }
   function isAutoOrientationInBrowser() {
-    return new Promise((function(e5, t5) {
+    return new Promise((e5, t5) => {
       let r5, i5, o5, a5, s4;
-      return void 0 !== isAutoOrientationInBrowser.cachedResult ? e5(isAutoOrientationInBrowser.cachedResult) : (r5 = "data:image/jpeg;base64,/9j/4QAiRXhpZgAATU0AKgAAAAgAAQESAAMAAAABAAYAAAAAAAD/2wCEAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAf/AABEIAAEAAgMBEQACEQEDEQH/xABKAAEAAAAAAAAAAAAAAAAAAAALEAEAAAAAAAAAAAAAAAAAAAAAAQEAAAAAAAAAAAAAAAAAAAAAEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwA/8H//2Q==", getFilefromDataUrl("data:image/jpeg;base64,/9j/4QAiRXhpZgAATU0AKgAAAAgAAQESAAMAAAABAAYAAAAAAAD/2wCEAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAf/AABEIAAEAAgMBEQACEQEDEQH/xABKAAEAAAAAAAAAAAAAAAAAAAALEAEAAAAAAAAAAAAAAAAAAAAAAQEAAAAAAAAAAAAAAAAAAAAAEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwA/8H//2Q==", "test.jpg", Date.now()).then((function(r6) {
-        try {
-          return i5 = r6, drawFileInCanvas(i5).then((function(r7) {
+      return void 0 !== isAutoOrientationInBrowser.cachedResult
+        ? e5(isAutoOrientationInBrowser.cachedResult)
+        : ((r5 =
+            "data:image/jpeg;base64,/9j/4QAiRXhpZgAATU0AKgAAAAgAAQESAAMAAAABAAYAAAAAAAD/2wCEAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAf/AABEIAAEAAgMBEQACEQEDEQH/xABKAAEAAAAAAAAAAAAAAAAAAAALEAEAAAAAAAAAAAAAAAAAAAAAAQEAAAAAAAAAAAAAAAAAAAAAEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwA/8H//2Q=="),
+          getFilefromDataUrl(
+            "data:image/jpeg;base64,/9j/4QAiRXhpZgAATU0AKgAAAAgAAQESAAMAAAABAAYAAAAAAAD/2wCEAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAf/AABEIAAEAAgMBEQACEQEDEQH/xABKAAEAAAAAAAAAAAAAAAAAAAALEAEAAAAAAAAAAAAAAAAAAAAAAQEAAAAAAAAAAAAAAAAAAAAAEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwA/8H//2Q==",
+            "test.jpg",
+            Date.now(),
+          ).then((r6) => {
             try {
-              return o5 = r7[1], canvasToFile(o5, i5.type, i5.name, i5.lastModified).then((function(r8) {
-                try {
-                  return a5 = r8, cleanupCanvasMemory(o5), drawFileInCanvas(a5).then((function(r9) {
-                    try {
-                      return s4 = r9[0], isAutoOrientationInBrowser.cachedResult = 1 === s4.width && 2 === s4.height, e5(isAutoOrientationInBrowser.cachedResult);
-                    } catch (e6) {
-                      return t5(e6);
-                    }
-                  }), t5);
-                } catch (e6) {
-                  return t5(e6);
-                }
-              }), t5);
+              return (
+                (i5 = r6),
+                drawFileInCanvas(i5).then((r7) => {
+                  try {
+                    return (
+                      (o5 = r7[1]),
+                      canvasToFile(o5, i5.type, i5.name, i5.lastModified).then((r8) => {
+                        try {
+                          return (
+                            (a5 = r8),
+                            cleanupCanvasMemory(o5),
+                            drawFileInCanvas(a5).then((r9) => {
+                              try {
+                                return (
+                                  (s4 = r9[0]),
+                                  (isAutoOrientationInBrowser.cachedResult =
+                                    s4.width === 1 && s4.height === 2),
+                                  e5(isAutoOrientationInBrowser.cachedResult)
+                                );
+                              } catch (e6) {
+                                return t5(e6);
+                              }
+                            }, t5)
+                          );
+                        } catch (e6) {
+                          return t5(e6);
+                        }
+                      }, t5)
+                    );
+                  } catch (e6) {
+                    return t5(e6);
+                  }
+                }, t5)
+              );
             } catch (e6) {
               return t5(e6);
             }
-          }), t5);
-        } catch (e6) {
-          return t5(e6);
-        }
-      }), t5));
-    }));
+          }, t5));
+    });
   }
   function getExifOrientation(e5) {
-    return new Promise(((t5, r5) => {
+    return new Promise((t5, r5) => {
       const i5 = new CustomFileReader();
-      i5.onload = (e6) => {
+      (i5.onload = (e6) => {
         const r6 = new DataView(e6.target.result);
-        if (65496 != r6.getUint16(0, false)) return t5(-2);
+        if (r6.getUint16(0, false) != 65_496) {
+          return t5(-2);
+        }
         const i6 = r6.byteLength;
         let o5 = 2;
-        for (; o5 < i6; ) {
-          if (r6.getUint16(o5 + 2, false) <= 8) return t5(-1);
+        while (o5 < i6) {
+          if (r6.getUint16(o5 + 2, false) <= 8) {
+            return t5(-1);
+          }
           const e7 = r6.getUint16(o5, false);
-          if (o5 += 2, 65505 == e7) {
-            if (1165519206 != r6.getUint32(o5 += 2, false)) return t5(-1);
-            const e8 = 18761 == r6.getUint16(o5 += 6, false);
+          if (((o5 += 2), e7 == 65_505)) {
+            if (r6.getUint32((o5 += 2), false) != 1_165_519_206) {
+              return t5(-1);
+            }
+            const e8 = r6.getUint16((o5 += 6), false) == 18_761;
             o5 += r6.getUint32(o5 + 4, e8);
             const i7 = r6.getUint16(o5, e8);
             o5 += 2;
-            for (let a5 = 0; a5 < i7; a5++) if (274 == r6.getUint16(o5 + 12 * a5, e8)) return t5(r6.getUint16(o5 + 12 * a5 + 8, e8));
+            for (let a5 = 0; a5 < i7; a5++) {
+              if (r6.getUint16(o5 + 12 * a5, e8) == 274) {
+                return t5(r6.getUint16(o5 + 12 * a5 + 8, e8));
+              }
+            }
           } else {
-            if (65280 != (65280 & e7)) break;
+            if ((65_280 & e7) != 65_280) {
+              break;
+            }
             o5 += r6.getUint16(o5, false);
           }
         }
         return t5(-1);
-      }, i5.onerror = (e6) => r5(e6), i5.readAsArrayBuffer(e5);
-    }));
+      }),
+        (i5.onerror = (e6) => r5(e6)),
+        i5.readAsArrayBuffer(e5);
+    });
   }
   function handleMaxWidthOrHeight(e5, t5) {
-    const { width: r5 } = e5, { height: i5 } = e5, { maxWidthOrHeight: o5 } = t5;
-    let a5, s4 = e5;
-    return isFinite(o5) && (r5 > o5 || i5 > o5) && ([s4, a5] = getNewCanvasAndCtx(r5, i5), r5 > i5 ? (s4.width = o5, s4.height = i5 / r5 * o5) : (s4.width = r5 / i5 * o5, s4.height = o5), a5.drawImage(e5, 0, 0, s4.width, s4.height), cleanupCanvasMemory(e5)), s4;
+    const { width: r5 } = e5,
+      { height: i5 } = e5,
+      { maxWidthOrHeight: o5 } = t5;
+    let a5,
+      s4 = e5;
+    return (
+      isFinite(o5) &&
+        (r5 > o5 || i5 > o5) &&
+        (([s4, a5] = getNewCanvasAndCtx(r5, i5)),
+        r5 > i5
+          ? ((s4.width = o5), (s4.height = (i5 / r5) * o5))
+          : ((s4.width = (r5 / i5) * o5), (s4.height = o5)),
+        a5.drawImage(e5, 0, 0, s4.width, s4.height),
+        cleanupCanvasMemory(e5)),
+      s4
+    );
   }
   function followExifOrientation(e5, t5) {
-    const { width: r5 } = e5, { height: i5 } = e5, [o5, a5] = getNewCanvasAndCtx(r5, i5);
-    switch (t5 > 4 && t5 < 9 ? (o5.width = i5, o5.height = r5) : (o5.width = r5, o5.height = i5), t5) {
+    const { width: r5 } = e5,
+      { height: i5 } = e5,
+      [o5, a5] = getNewCanvasAndCtx(r5, i5);
+    switch (
+      (t5 > 4 && t5 < 9 ? ((o5.width = i5), (o5.height = r5)) : ((o5.width = r5), (o5.height = i5)),
+      t5)
+    ) {
       case 2:
         a5.transform(-1, 0, 0, 1, r5, 0);
         break;
@@ -2023,165 +3800,322 @@ Is it scaring you off?`,
     return a5.drawImage(e5, 0, 0, r5, i5), cleanupCanvasMemory(e5), o5;
   }
   function compress(e5, t5, r5 = 0) {
-    return new Promise((function(i5, o5) {
+    return new Promise(function (i5, o5) {
       let a5, s4, f5, l4, c5, u4, h4, d3, A, g2, p4, m2, w2, v3, b3, y3, E, F, _, B;
       function incProgress(e6 = 5) {
-        if (t5.signal && t5.signal.aborted) throw t5.signal.reason;
-        a5 += e6, t5.onProgress(Math.min(a5, 100));
+        if (t5.signal && t5.signal.aborted) {
+          throw t5.signal.reason;
+        }
+        (a5 += e6), t5.onProgress(Math.min(a5, 100));
       }
       function setProgress(e6) {
-        if (t5.signal && t5.signal.aborted) throw t5.signal.reason;
-        a5 = Math.min(Math.max(e6, a5), 100), t5.onProgress(a5);
+        if (t5.signal && t5.signal.aborted) {
+          throw t5.signal.reason;
+        }
+        (a5 = Math.min(Math.max(e6, a5), 100)), t5.onProgress(a5);
       }
-      return a5 = r5, s4 = t5.maxIteration || 10, f5 = 1024 * t5.maxSizeMB * 1024, incProgress(), drawFileInCanvas(e5, t5).then(function(r6) {
-        try {
-          return [, l4] = r6, incProgress(), c5 = handleMaxWidthOrHeight(l4, t5), incProgress(), new Promise((function(r7, i6) {
-            var o6;
-            if (!(o6 = t5.exifOrientation)) return getExifOrientation(e5).then(function(e6) {
-              try {
-                return o6 = e6, $If_2.call(this);
-              } catch (e7) {
-                return i6(e7);
-              }
-            }.bind(this), i6);
-            function $If_2() {
-              return r7(o6);
-            }
-            return $If_2.call(this);
-          })).then(function(r7) {
+      return (
+        (a5 = r5),
+        (s4 = t5.maxIteration || 10),
+        (f5 = 1024 * t5.maxSizeMB * 1024),
+        incProgress(),
+        drawFileInCanvas(e5, t5).then(
+          function (r6) {
             try {
-              return u4 = r7, incProgress(), isAutoOrientationInBrowser().then(function(r8) {
-                try {
-                  return h4 = r8 ? c5 : followExifOrientation(c5, u4), incProgress(), d3 = t5.initialQuality || 1, A = t5.fileType || e5.type, canvasToFile(h4, A, e5.name, e5.lastModified, d3).then(function(r9) {
+              return (
+                ([, l4] = r6),
+                incProgress(),
+                (c5 = handleMaxWidthOrHeight(l4, t5)),
+                incProgress(),
+                new Promise(function (r7, i6) {
+                  var o6;
+                  if (!(o6 = t5.exifOrientation)) {
+                    return getExifOrientation(e5).then(
+                      function (e6) {
+                        try {
+                          return (o6 = e6), $If_2.call(this);
+                        } catch (e7) {
+                          return i6(e7);
+                        }
+                      }.bind(this),
+                      i6,
+                    );
+                  }
+                  function $If_2() {
+                    return r7(o6);
+                  }
+                  return $If_2.call(this);
+                }).then(
+                  function (r7) {
                     try {
-                      {
-                        let $Loop_3 = function() {
-                          if (s4-- && (b3 > f5 || b3 > w2)) {
-                            let t6, r10;
-                            return t6 = B ? 0.95 * _.width : _.width, r10 = B ? 0.95 * _.height : _.height, [E, F] = getNewCanvasAndCtx(t6, r10), F.drawImage(_, 0, 0, t6, r10), d3 *= "image/png" === A ? 0.85 : 0.95, canvasToFile(E, A, e5.name, e5.lastModified, d3).then((function(e6) {
-                              try {
-                                return y3 = e6, cleanupCanvasMemory(_), _ = E, b3 = y3.size, setProgress(Math.min(99, Math.floor((v3 - b3) / (v3 - f5) * 100))), $Loop_3;
-                              } catch (e7) {
-                                return o5(e7);
-                              }
-                            }), o5);
-                          }
-                          return [1];
-                        }, $Loop_3_exit = function() {
-                          return cleanupCanvasMemory(_), cleanupCanvasMemory(E), cleanupCanvasMemory(c5), cleanupCanvasMemory(h4), cleanupCanvasMemory(l4), setProgress(100), i5(y3);
-                        };
-                        if (g2 = r9, incProgress(), p4 = g2.size > f5, m2 = g2.size > e5.size, !p4 && !m2) return setProgress(100), i5(g2);
-                        var a6;
-                        return w2 = e5.size, v3 = g2.size, b3 = v3, _ = h4, B = !t5.alwaysKeepResolution && p4, (a6 = function(e6) {
-                          for (; e6; ) {
-                            if (e6.then) return void e6.then(a6, o5);
+                      return (
+                        (u4 = r7),
+                        incProgress(),
+                        isAutoOrientationInBrowser().then(
+                          function (r8) {
                             try {
-                              if (e6.pop) {
-                                if (e6.length) return e6.pop() ? $Loop_3_exit.call(this) : e6;
-                                e6 = $Loop_3;
-                              } else e6 = e6.call(this);
-                            } catch (e7) {
-                              return o5(e7);
+                              return (
+                                (h4 = r8 ? c5 : followExifOrientation(c5, u4)),
+                                incProgress(),
+                                (d3 = t5.initialQuality || 1),
+                                (A = t5.fileType || e5.type),
+                                canvasToFile(h4, A, e5.name, e5.lastModified, d3).then(
+                                  function (r9) {
+                                    try {
+                                      {
+                                        const $Loop_3 = () => {
+                                            if (s4-- && (b3 > f5 || b3 > w2)) {
+                                              let t6, r10;
+                                              return (
+                                                (t6 = B ? 0.95 * _.width : _.width),
+                                                (r10 = B ? 0.95 * _.height : _.height),
+                                                ([E, F] = getNewCanvasAndCtx(t6, r10)),
+                                                F.drawImage(_, 0, 0, t6, r10),
+                                                (d3 *= A === "image/png" ? 0.85 : 0.95),
+                                                canvasToFile(
+                                                  E,
+                                                  A,
+                                                  e5.name,
+                                                  e5.lastModified,
+                                                  d3,
+                                                ).then((e6) => {
+                                                  try {
+                                                    return (
+                                                      (y3 = e6),
+                                                      cleanupCanvasMemory(_),
+                                                      (_ = E),
+                                                      (b3 = y3.size),
+                                                      setProgress(
+                                                        Math.min(
+                                                          99,
+                                                          Math.floor(((v3 - b3) / (v3 - f5)) * 100),
+                                                        ),
+                                                      ),
+                                                      $Loop_3
+                                                    );
+                                                  } catch (e7) {
+                                                    return o5(e7);
+                                                  }
+                                                }, o5)
+                                              );
+                                            }
+                                            return [1];
+                                          },
+                                          $Loop_3_exit = () => (
+                                            cleanupCanvasMemory(_),
+                                            cleanupCanvasMemory(E),
+                                            cleanupCanvasMemory(c5),
+                                            cleanupCanvasMemory(h4),
+                                            cleanupCanvasMemory(l4),
+                                            setProgress(100),
+                                            i5(y3)
+                                          );
+                                        if (
+                                          ((g2 = r9),
+                                          incProgress(),
+                                          (p4 = g2.size > f5),
+                                          (m2 = g2.size > e5.size),
+                                          !(p4 || m2))
+                                        ) {
+                                          return setProgress(100), i5(g2);
+                                        }
+                                        var a6;
+                                        return (
+                                          (w2 = e5.size),
+                                          (v3 = g2.size),
+                                          (b3 = v3),
+                                          (_ = h4),
+                                          (B = !t5.alwaysKeepResolution && p4),
+                                          (a6 = function (e6) {
+                                            while (e6) {
+                                              if (e6.then) {
+                                                return void e6.then(a6, o5);
+                                              }
+                                              try {
+                                                if (e6.pop) {
+                                                  if (e6.length) {
+                                                    return e6.pop() ? $Loop_3_exit.call(this) : e6;
+                                                  }
+                                                  e6 = $Loop_3;
+                                                } else {
+                                                  e6 = e6.call(this);
+                                                }
+                                              } catch (e7) {
+                                                return o5(e7);
+                                              }
+                                            }
+                                          }.bind(this))($Loop_3)
+                                        );
+                                      }
+                                    } catch (u5) {
+                                      return o5(u5);
+                                    }
+                                  }.bind(this),
+                                  o5,
+                                )
+                              );
+                            } catch (e6) {
+                              return o5(e6);
                             }
-                          }
-                        }.bind(this))($Loop_3);
-                      }
-                    } catch (u5) {
-                      return o5(u5);
+                          }.bind(this),
+                          o5,
+                        )
+                      );
+                    } catch (e6) {
+                      return o5(e6);
                     }
-                  }.bind(this), o5);
-                } catch (e6) {
-                  return o5(e6);
-                }
-              }.bind(this), o5);
+                  }.bind(this),
+                  o5,
+                )
+              );
             } catch (e6) {
               return o5(e6);
             }
-          }.bind(this), o5);
-        } catch (e6) {
-          return o5(e6);
-        }
-      }.bind(this), o5);
-    }));
+          }.bind(this),
+          o5,
+        )
+      );
+    });
   }
-  var l = "\nlet scriptImported = false\nself.addEventListener('message', async (e) => {\n  const { file, id, imageCompressionLibUrl, options } = e.data\n  options.onProgress = (progress) => self.postMessage({ progress, id })\n  try {\n    if (!scriptImported) {\n      // console.log('[worker] importScripts', imageCompressionLibUrl)\n      self.importScripts(imageCompressionLibUrl)\n      scriptImported = true\n    }\n    // console.log('[worker] self', self)\n    const compressedFile = await imageCompression(file, options)\n    self.postMessage({ file: compressedFile, id })\n  } catch (e) {\n    // console.error('[worker] error', e)\n    self.postMessage({ error: e.message + '\\n' + e.stack, id })\n  }\n})\n";
+  var l =
+    "\nlet scriptImported = false\nself.addEventListener('message', async (e) => {\n  const { file, id, imageCompressionLibUrl, options } = e.data\n  options.onProgress = (progress) => self.postMessage({ progress, id })\n  try {\n    if (!scriptImported) {\n      // console.log('[worker] importScripts', imageCompressionLibUrl)\n      self.importScripts(imageCompressionLibUrl)\n      scriptImported = true\n    }\n    // console.log('[worker] self', self)\n    const compressedFile = await imageCompression(file, options)\n    self.postMessage({ file: compressedFile, id })\n  } catch (e) {\n    // console.error('[worker] error', e)\n    self.postMessage({ error: e.message + '\\n' + e.stack, id })\n  }\n})\n";
   var c;
   function compressOnWebWorker(e5, t5) {
-    return new Promise(((r5, i5) => {
-      c || (c = (function createWorkerScriptURL(e6) {
-        const t6 = [];
-        return "function" == typeof e6 ? t6.push(`(${e6})()`) : t6.push(e6), URL.createObjectURL(new Blob(t6));
-      })(l));
+    return new Promise((r5, i5) => {
+      c ||
+        (c = (function createWorkerScriptURL(e6) {
+          const t6 = [];
+          return (
+            typeof e6 == "function" ? t6.push(`(${e6})()`) : t6.push(e6),
+            URL.createObjectURL(new Blob(t6))
+          );
+        })(l));
       const o5 = new Worker(c);
-      o5.addEventListener("message", (function handler(e6) {
-        if (t5.signal && t5.signal.aborted) o5.terminate();
-        else if (void 0 === e6.data.progress) {
-          if (e6.data.error) return i5(new Error(e6.data.error)), void o5.terminate();
+      o5.addEventListener("message", function handler(e6) {
+        if (t5.signal && t5.signal.aborted) {
+          o5.terminate();
+        } else if (void 0 === e6.data.progress) {
+          if (e6.data.error) {
+            return i5(new Error(e6.data.error)), void o5.terminate();
+          }
           r5(e6.data.file), o5.terminate();
-        } else t5.onProgress(e6.data.progress);
-      })), o5.addEventListener("error", i5), t5.signal && t5.signal.addEventListener("abort", (() => {
-        i5(t5.signal.reason), o5.terminate();
-      })), o5.postMessage({ file: e5, imageCompressionLibUrl: t5.libURL, options: { ...t5, onProgress: void 0, signal: void 0 } });
-    }));
+        } else {
+          t5.onProgress(e6.data.progress);
+        }
+      }),
+        o5.addEventListener("error", i5),
+        t5.signal &&
+          t5.signal.addEventListener("abort", () => {
+            i5(t5.signal.reason), o5.terminate();
+          }),
+        o5.postMessage({
+          file: e5,
+          imageCompressionLibUrl: t5.libURL,
+          options: { ...t5, onProgress: void 0, signal: void 0 },
+        });
+    });
   }
   function imageCompression(e5, t5) {
-    return new Promise((function(r5, i5) {
+    return new Promise(function (r5, i5) {
       let o5, a5, s4, f5, l4, c5;
-      if (o5 = { ...t5 }, s4 = 0, { onProgress: f5 } = o5, o5.maxSizeMB = o5.maxSizeMB || Number.POSITIVE_INFINITY, l4 = "boolean" != typeof o5.useWebWorker || o5.useWebWorker, delete o5.useWebWorker, o5.onProgress = (e6) => {
-        s4 = e6, "function" == typeof f5 && f5(s4);
-      }, !(e5 instanceof Blob || e5 instanceof CustomFile)) return i5(new Error("The file given is not an instance of Blob or File"));
-      if (!/^image/.test(e5.type)) return i5(new Error("The file given is not an image"));
-      if (c5 = "undefined" != typeof WorkerGlobalScope && self instanceof WorkerGlobalScope, !l4 || "function" != typeof Worker || c5) return compress(e5, o5).then(function(e6) {
-        try {
-          return a5 = e6, $If_4.call(this);
-        } catch (e7) {
-          return i5(e7);
-        }
-      }.bind(this), i5);
-      var u4 = function() {
-        try {
-          return $If_4.call(this);
-        } catch (e6) {
-          return i5(e6);
-        }
-      }.bind(this), $Try_1_Catch = function(t6) {
-        try {
-          return compress(e5, o5).then((function(e6) {
+      if (
+        ((o5 = { ...t5 }),
+        (s4 = 0),
+        ({ onProgress: f5 } = o5),
+        (o5.maxSizeMB = o5.maxSizeMB || Number.POSITIVE_INFINITY),
+        (l4 = typeof o5.useWebWorker != "boolean" || o5.useWebWorker),
+        delete o5.useWebWorker,
+        (o5.onProgress = (e6) => {
+          (s4 = e6), typeof f5 == "function" && f5(s4);
+        }),
+        !(e5 instanceof Blob || e5 instanceof CustomFile))
+      ) {
+        return i5(new Error("The file given is not an instance of Blob or File"));
+      }
+      if (!/^image/.test(e5.type)) {
+        return i5(new Error("The file given is not an image"));
+      }
+      if (
+        ((c5 = typeof WorkerGlobalScope != "undefined" && self instanceof WorkerGlobalScope),
+        !l4 || typeof Worker != "function" || c5)
+      ) {
+        return compress(e5, o5).then(
+          function (e6) {
             try {
-              return a5 = e6, u4();
+              return (a5 = e6), $If_4.call(this);
             } catch (e7) {
               return i5(e7);
             }
-          }), i5);
-        } catch (e6) {
-          return i5(e6);
-        }
-      };
-      try {
-        return o5.libURL = o5.libURL || "https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.2/dist/browser-image-compression.js", compressOnWebWorker(e5, o5).then((function(e6) {
+          }.bind(this),
+          i5,
+        );
+      }
+      var u4 = function () {
           try {
-            return a5 = e6, u4();
-          } catch (e7) {
-            return $Try_1_Catch();
+            return $If_4.call(this);
+          } catch (e6) {
+            return i5(e6);
           }
-        }), $Try_1_Catch);
+        }.bind(this),
+        $Try_1_Catch = (t6) => {
+          try {
+            return compress(e5, o5).then((e6) => {
+              try {
+                return (a5 = e6), u4();
+              } catch (e7) {
+                return i5(e7);
+              }
+            }, i5);
+          } catch (e6) {
+            return i5(e6);
+          }
+        };
+      try {
+        return (
+          (o5.libURL =
+            o5.libURL ||
+            "https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.2/dist/browser-image-compression.js"),
+          compressOnWebWorker(e5, o5).then((e6) => {
+            try {
+              return (a5 = e6), u4();
+            } catch (e7) {
+              return $Try_1_Catch();
+            }
+          }, $Try_1_Catch)
+        );
       } catch (e6) {
         $Try_1_Catch();
       }
       function $If_4() {
         try {
-          a5.name = e5.name, a5.lastModified = e5.lastModified;
-        } catch (e6) {
-        }
+          (a5.name = e5.name), (a5.lastModified = e5.lastModified);
+        } catch (e6) {}
         try {
-          o5.preserveExif && "image/jpeg" === e5.type && (!o5.fileType || o5.fileType && o5.fileType === e5.type) && (a5 = copyExifWithoutOrientation(e5, a5));
-        } catch (e6) {
-        }
+          o5.preserveExif &&
+            e5.type === "image/jpeg" &&
+            (!o5.fileType || (o5.fileType && o5.fileType === e5.type)) &&
+            (a5 = copyExifWithoutOrientation(e5, a5));
+        } catch (e6) {}
         return r5(a5);
       }
-    }));
+    });
   }
-  imageCompression.getDataUrlFromFile = getDataUrlFromFile, imageCompression.getFilefromDataUrl = getFilefromDataUrl, imageCompression.loadImage = loadImage, imageCompression.drawImageInCanvas = drawImageInCanvas, imageCompression.drawFileInCanvas = drawFileInCanvas, imageCompression.canvasToFile = canvasToFile, imageCompression.getExifOrientation = getExifOrientation, imageCompression.handleMaxWidthOrHeight = handleMaxWidthOrHeight, imageCompression.followExifOrientation = followExifOrientation, imageCompression.cleanupCanvasMemory = cleanupCanvasMemory, imageCompression.isAutoOrientationInBrowser = isAutoOrientationInBrowser, imageCompression.approximateBelowMaximumCanvasSizeOfBrowser = approximateBelowMaximumCanvasSizeOfBrowser, imageCompression.copyExifWithoutOrientation = copyExifWithoutOrientation, imageCompression.getBrowserName = getBrowserName, imageCompression.version = "2.0.2";
+  (imageCompression.getDataUrlFromFile = getDataUrlFromFile),
+    (imageCompression.getFilefromDataUrl = getFilefromDataUrl),
+    (imageCompression.loadImage = loadImage),
+    (imageCompression.drawImageInCanvas = drawImageInCanvas),
+    (imageCompression.drawFileInCanvas = drawFileInCanvas),
+    (imageCompression.canvasToFile = canvasToFile),
+    (imageCompression.getExifOrientation = getExifOrientation),
+    (imageCompression.handleMaxWidthOrHeight = handleMaxWidthOrHeight),
+    (imageCompression.followExifOrientation = followExifOrientation),
+    (imageCompression.cleanupCanvasMemory = cleanupCanvasMemory),
+    (imageCompression.isAutoOrientationInBrowser = isAutoOrientationInBrowser),
+    (imageCompression.approximateBelowMaximumCanvasSizeOfBrowser =
+      approximateBelowMaximumCanvasSizeOfBrowser),
+    (imageCompression.copyExifWithoutOrientation = copyExifWithoutOrientation),
+    (imageCompression.getBrowserName = getBrowserName),
+    (imageCompression.version = "2.0.2");
 
   // src/common/utils.ts
   var DEBUG = false;
@@ -2226,7 +4160,11 @@ Is it scaring you off?`,
       object = {};
     }
     for (const key of Object.keys(defaults)) {
-      if (typeof defaults[key] === "object" && !Array.isArray(defaults[key]) && defaults[key] !== null) {
+      if (
+        typeof defaults[key] === "object" &&
+        !Array.isArray(defaults[key]) &&
+        defaults[key] !== null
+      ) {
         object[key] = fillObjectWithDefaults(object[key], defaults[key]);
       }
       if (object[key] === void 0) {
@@ -2261,14 +4199,18 @@ Is it scaring you off?`,
     return /^#[0-9a-f]{3}(?:[0-9a-f]{3})?(?:[0-9a-f]{2})?$/i.test(color);
   }
   function getCurrentDate() {
-    return (/* @__PURE__ */ new Date()).toISOString().split("T")[0];
+    return /* @__PURE__ */ new Date().toISOString().split("T")[0];
   }
   function getFutureDate(days) {
     return new Date(Date.now() + days * 864e5).toISOString().split("T")[0];
   }
   function randomChance(probability) {
-    if (probability <= 0) return false;
-    if (probability >= 1) return true;
+    if (probability <= 0) {
+      return false;
+    }
+    if (probability >= 1) {
+      return true;
+    }
     return Math.random() < probability;
   }
   function isAbsoluteUrl(url) {
@@ -2277,9 +4219,11 @@ Is it scaring you off?`,
   async function convertLinkToBase64(link) {
     const base64 = await browser.runtime.sendMessage({
       action: "getBase64",
-      link
+      link,
     });
-    if (base64) return base64;
+    if (base64) {
+      return base64;
+    }
     console.error(`Failed to convert link:${link} to base64`);
     return null;
   }
@@ -2287,7 +4231,7 @@ Is it scaring you off?`,
     try {
       const fileData = await browser.runtime.sendMessage({
         action: "getFileData",
-        link
+        link,
       });
       if (!fileData) {
         console.error(`Failed to get file data for link: ${link}`);
@@ -2307,7 +4251,7 @@ Is it scaring you off?`,
       const options = {
         maxSizeMB: 0.01,
         maxWidthOrHeight: 350,
-        useWebWorker: false
+        useWebWorker: false,
       };
       const compressedFile = await imageCompression(file, options);
       const dataUrl = await imageCompression.getDataUrlFromFile(compressedFile);
@@ -2366,20 +4310,21 @@ Is it scaring you off?`,
         sendDebug(`Retrieved plannerUrl from cookies${plannerUrlCookie}`);
         const plannerUrl = plannerUrlCookie.split("=")[1];
         sendDebug("Found plannerUrl in cookies:", plannerUrl);
-        if (plannerUrl) userId = plannerUrl.split("/")[4];
+        if (plannerUrl) {
+          userId = plannerUrl.split("/")[4];
+        }
         sendDebug("Extracted userId from cookie plannerUrl:", userId);
       } else {
         console.error(
-          "UID is fucked, refresh 5 keer en als het dan niet werkt vraag hulp op discord @JJorne"
+          "UID is fucked, refresh 5 keer en als het dan niet werkt vraag hulp op discord @JJorne",
         );
       }
     }
     if (userId) {
       return userId;
-    } else {
-      console.error("No userID? womp womp");
-      return void 0;
     }
+    console.error("No userID? womp womp");
+    return void 0;
   }
   function getSchoolName() {
     try {
@@ -2397,7 +4342,7 @@ Is it scaring you off?`,
   async function clearAllData() {
     localStorage.clear();
     await browser.runtime.sendMessage({
-      action: "clearLocalStorage"
+      action: "clearLocalStorage",
     });
     location.reload();
   }
@@ -2453,14 +4398,18 @@ Is it scaring you off?`,
     }
     async hideToastElement() {
       const toastContainer = document.getElementById("toast-container");
-      if (!toastContainer) return;
+      if (!toastContainer) {
+        return;
+      }
       this.toastElement.classList.add("being-removed");
       await delay(300);
       toastContainer.removeChild(this.toastElement);
     }
     async render() {
       const toastContainer = document.getElementById("toast-container");
-      if (!toastContainer) return;
+      if (!toastContainer) {
+        return;
+      }
       toastContainer.appendChild(this.toastElement);
       await delay(this.time);
       await this.hideToastElement();
@@ -2471,28 +4420,35 @@ Is it scaring you off?`,
   function buisStats() {
     setTimeout(() => {
       const url = `https://${getSchoolName()}.smartschool.be/results/api/v1/evaluations/?itemsOnPage=1000`;
-      fetch(url).then((response) => response.json()).then((data2) => {
-        const categories = {
-          buis: 0,
-          voldoende: 0
-        };
-        data2.forEach((evaluation) => {
-          if (evaluation.graphic && evaluation.graphic.value !== void 0) {
-            const value = evaluation.graphic.value;
-            if (value < 50) {
-              categories.buis++;
-            } else {
-              categories.voldoende++;
+      fetch(url)
+        .then((response) => response.json())
+        .then((data2) => {
+          const categories = {
+            buis: 0,
+            voldoende: 0,
+          };
+          data2.forEach((evaluation) => {
+            if (evaluation.graphic && evaluation.graphic.value !== void 0) {
+              const value = evaluation.graphic.value;
+              if (value < 50) {
+                categories.buis++;
+              } else {
+                categories.voldoende++;
+              }
             }
-          }
-        });
-        const newElement = document.createElement("div");
-        newElement.id = "buis-stats";
-        document.getElementsByClassName("results-evaluations__filters")[0].appendChild(newElement);
-        newElement.innerHTML = `<div class="buis-stats" id="buis_amount"></div><div class="buis-stats" id="voldoende_amount"></div>`;
-        document.getElementById("buis_amount").innerHTML = `<div class="buis-stats-box"><span class="buis-stats-title">Onvoldoendes:</span><span class="buis-stats-value">${categories.buis}</span></div>`;
-        document.getElementById("voldoende_amount").innerHTML = `<div class="buis-stats-box"><span class="buis-stats-title">Voldoendes:</span><span class="buis-stats-value">${categories.voldoende}</span></div>`;
-      }).catch((error) => console.error("Error fetching:", error));
+          });
+          const newElement = document.createElement("div");
+          newElement.id = "buis-stats";
+          document
+            .getElementsByClassName("results-evaluations__filters")[0]
+            .appendChild(newElement);
+          newElement.innerHTML = `<div class="buis-stats" id="buis_amount"></div><div class="buis-stats" id="voldoende_amount"></div>`;
+          document.getElementById("buis_amount").innerHTML =
+            `<div class="buis-stats-box"><span class="buis-stats-title">Onvoldoendes:</span><span class="buis-stats-value">${categories.buis}</span></div>`;
+          document.getElementById("voldoende_amount").innerHTML =
+            `<div class="buis-stats-box"><span class="buis-stats-title">Voldoendes:</span><span class="buis-stats-value">${categories.voldoende}</span></div>`;
+        })
+        .catch((error) => console.error("Error fetching:", error));
     }, 1e3);
   }
 
@@ -2515,7 +4471,9 @@ Is it scaring you off?`,
       this.element.id = this.id;
       this.element.classList.add("base-window");
       this.wrapper.classList.add("window-wrapper");
-      if (this.hidden) this.element.classList.add("hidden");
+      if (this.hidden) {
+        this.element.classList.add("hidden");
+      }
       const controls = document.createElement("div");
       controls.classList.add("window-controls");
       const fullscreenBtn = document.createElement("button");
@@ -2545,14 +4503,19 @@ Is it scaring you off?`,
     }
     // Called every time the window is opened
     // Override this in subclass
-    onOpened() {
-    }
+    onOpened() {}
     show(triggerEvent = null) {
-      if (!this.hidden) return;
+      if (!this.hidden) {
+        return;
+      }
       this.hidden = false;
       this.element.classList.remove("hidden");
-      const isKeyboardEvent = triggerEvent && (typeof KeyboardEvent !== "undefined" ? triggerEvent instanceof KeyboardEvent : String(triggerEvent.type).startsWith("key"));
-      const openEventTarget = isKeyboardEvent ? null : triggerEvent?.target ?? null;
+      const isKeyboardEvent =
+        triggerEvent &&
+        (typeof KeyboardEvent !== "undefined"
+          ? triggerEvent instanceof KeyboardEvent
+          : String(triggerEvent.type).startsWith("key"));
+      const openEventTarget = isKeyboardEvent ? null : (triggerEvent?.target ?? null);
       this._outsideClickHandler = (e5) => {
         const clickedElement = e5.target;
         const isInsideDialog = this.element.contains(clickedElement);
@@ -2571,7 +4534,8 @@ Is it scaring you off?`,
         }
         if (openEventTarget && clickedElement instanceof Node) {
           const isOpenTrigger = clickedElement === openEventTarget;
-          const isInsideOpenTrigger = openEventTarget instanceof Node && openEventTarget.contains(clickedElement);
+          const isInsideOpenTrigger =
+            openEventTarget instanceof Node && openEventTarget.contains(clickedElement);
           if (isOpenTrigger || isInsideOpenTrigger) {
             return;
           }
@@ -2579,7 +4543,7 @@ Is it scaring you off?`,
         this.hide();
       };
       document.addEventListener("mousedown", this._outsideClickHandler, {
-        capture: true
+        capture: true,
       });
       if (!this._keydownHandler) {
         this._keydownHandler = (e5) => {
@@ -2600,12 +4564,14 @@ Is it scaring you off?`,
       this.onOpened();
     }
     hide(realUserIntent = false) {
-      if (this.hidden) return;
+      if (this.hidden) {
+        return;
+      }
       this.hidden = true;
       this.element.classList.add("hidden");
       if (this._outsideClickHandler) {
         document.removeEventListener("mousedown", this._outsideClickHandler, {
-          capture: true
+          capture: true,
         });
         this._outsideClickHandler = null;
       }
@@ -2629,7 +4595,9 @@ Is it scaring you off?`,
       this.element.id = this.id;
       this.element.classList.add("base-window", "base-dialog");
       this.wrapper.classList.add("window-wrapper");
-      if (this.hidden) this.element.classList.add("hidden");
+      if (this.hidden) {
+        this.element.classList.add("hidden");
+      }
       const controls = document.createElement("div");
       controls.classList.add("window-controls");
       const closeBtn = document.createElement("button");
@@ -2719,8 +4687,7 @@ Is it scaring you off?`,
       this.isThemeImage = isThemeImage;
       this._bindEvents();
     }
-    onStore() {
-    }
+    onStore() {}
     createImageFileInputContainer() {
       const fileInputContainer = document.createElement("div");
       fileInputContainer.classList.add("file-input-container");
@@ -2793,7 +4760,7 @@ Is it scaring you off?`,
       try {
         let data2 = await browser.runtime.sendMessage({
           action: "getImage",
-          id: this.id
+          id: this.id,
         });
         if (!data2) {
           data2 = { imageData: "", metaData: { link: "", type: "default" } };
@@ -2801,14 +4768,14 @@ Is it scaring you off?`,
         const compressedId = `compressed-${this.id}`;
         const compressedImage = {
           imageData: data2.imageData,
-          metaData: { link: data2.metaData.link, type: data2.metaData.type }
+          metaData: { link: data2.metaData.link, type: data2.metaData.type },
         };
         const file = this.fileInput.files?.[0];
         if (file) {
           this.fileInputButton.innerHTML = loadingSpinnerSvg;
           const [originalDataUrl, compressedDataUrl] = await Promise.all([
             imageCompression.getDataUrlFromFile(file),
-            getCompressedData(file)
+            getCompressedData(file),
           ]);
           this.fileInputButton.innerHTML = imageInputSvg;
           data2.imageData = originalDataUrl;
@@ -2831,7 +4798,7 @@ Is it scaring you off?`,
             this.fileInputButton.innerHTML = loadingSpinnerSvg;
             const [base64, file2] = await Promise.all([
               await convertLinkToBase64(linkValue),
-              await convertLinkToFile(linkValue)
+              await convertLinkToFile(linkValue),
             ]);
             this.fileInputButton.innerHTML = imageInputSvg;
             if (base64 && file2) {
@@ -2849,7 +4816,7 @@ Is it scaring you off?`,
               await new Toast(
                 "Failed to access image, try to upload it as a file",
                 "error",
-                5e3
+                5e3,
               ).render();
               data2.metaData.type = "default";
               data2.metaData.link = "";
@@ -2872,19 +4839,19 @@ Is it scaring you off?`,
         await browser.runtime.sendMessage({
           action: "setImage",
           id: this.id,
-          data: data2
+          data: data2,
         });
         await browser.runtime.sendMessage({
           action: "setImage",
           id: compressedId,
-          data: compressedImage
+          data: compressedImage,
         });
         await this.loadImageData();
         this.onStore();
         if (this.isThemeImage) {
           await browser.runtime.sendMessage({
             action: "markThemeAsModified",
-            name: this.id
+            name: this.id,
           });
         }
         if (data2.metaData.type === "file") {
@@ -2898,10 +4865,12 @@ Is it scaring you off?`,
     async loadImageData() {
       const data2 = await browser.runtime.sendMessage({
         action: "getImage",
-        id: this.id
+        id: this.id,
       });
       let metaData = data2.metaData;
-      if (!metaData) metaData = { link: "", type: "default" };
+      if (!metaData) {
+        metaData = { link: "", type: "default" };
+      }
       this.linkInput.value = metaData.link || "";
       if (metaData.type === "file") {
         this.fileInputButton.classList.add("active");
@@ -2923,7 +4892,7 @@ Is it scaring you off?`,
     try {
       image = await browser.runtime.sendMessage({
         action: "getImage",
-        id
+        id,
       });
     } catch (err) {
       console.warn("[getImageURL] Failed to get image from background:", err);
@@ -2950,14 +4919,22 @@ Is it scaring you off?`,
   var profilePictureObserver;
   async function displayUsernameTopNav(name2) {
     const originalNameElement = document.querySelector(".js-btn-profile .hlp-vert-box span");
-    if (originalNameElement) originalNameElement.innerHTML = name2;
+    if (originalNameElement) {
+      originalNameElement.innerHTML = name2;
+    }
   }
   async function attachProfilePictureObserver(url) {
     function processImg(img) {
       try {
-        if (!(img instanceof HTMLImageElement) || !img.src) return;
-        if (img.src === url) return;
-        if (!isOriginalPfpUrl(img.src) && !img.classList.contains("personal-profile-picture")) return;
+        if (!(img instanceof HTMLImageElement && img.src)) {
+          return;
+        }
+        if (img.src === url) {
+          return;
+        }
+        if (!(isOriginalPfpUrl(img.src) || img.classList.contains("personal-profile-picture"))) {
+          return;
+        }
         img.src = url;
         img.classList.add("personal-profile-picture");
       } catch (e5) {
@@ -2969,7 +4946,9 @@ Is it scaring you off?`,
     const observer = new MutationObserver((mutations) => {
       for (const mutation of mutations) {
         for (const htmlNode of mutation.addedNodes) {
-          if (htmlNode.nodeType !== Node.ELEMENT_NODE) continue;
+          if (htmlNode.nodeType !== Node.ELEMENT_NODE) {
+            continue;
+          }
           if (htmlNode instanceof HTMLImageElement) {
             processImg(htmlNode);
             continue;
@@ -2977,7 +4956,9 @@ Is it scaring you off?`,
           try {
             const imgs = htmlNode.querySelectorAll?.("img");
             if (imgs?.length) {
-              for (const img of imgs) processImg(img);
+              for (const img of imgs) {
+                processImg(img);
+              }
             }
           } catch (e5) {
             console.error("Error querying imgs inside node:", e5, htmlNode);
@@ -2992,7 +4973,7 @@ Is it scaring you off?`,
       childList: true,
       subtree: true,
       attributes: true,
-      attributeFilter: ["src"]
+      attributeFilter: ["src"],
     });
     return observer;
   }
@@ -3042,299 +5023,602 @@ Is it scaring you off?`,
 
   // node_modules/colord/index.mjs
   var r2 = { grad: 0.9, turn: 360, rad: 360 / (2 * Math.PI) };
-  var t2 = function(r5) {
-    return "string" == typeof r5 ? r5.length > 0 : "number" == typeof r5;
-  };
-  var n = function(r5, t5, n4) {
-    return void 0 === t5 && (t5 = 0), void 0 === n4 && (n4 = Math.pow(10, t5)), Math.round(n4 * r5) / n4 + 0;
-  };
-  var e2 = function(r5, t5, n4) {
-    return void 0 === t5 && (t5 = 0), void 0 === n4 && (n4 = 1), r5 > n4 ? n4 : r5 > t5 ? r5 : t5;
-  };
-  var u = function(r5) {
-    return (r5 = isFinite(r5) ? r5 % 360 : 0) > 0 ? r5 : r5 + 360;
-  };
-  var a2 = function(r5) {
-    return { r: e2(r5.r, 0, 255), g: e2(r5.g, 0, 255), b: e2(r5.b, 0, 255), a: e2(r5.a) };
-  };
-  var o2 = function(r5) {
-    return { r: n(r5.r), g: n(r5.g), b: n(r5.b), a: n(r5.a, 3) };
-  };
+  var t2 = (r5) => (typeof r5 == "string" ? r5.length > 0 : typeof r5 == "number");
+  var n = (r5, t5, n4) => (
+    void 0 === t5 && (t5 = 0), void 0 === n4 && (n4 = 10 ** t5), Math.round(n4 * r5) / n4 + 0
+  );
+  var e2 = (r5, t5, n4) => (
+    void 0 === t5 && (t5 = 0), void 0 === n4 && (n4 = 1), r5 > n4 ? n4 : r5 > t5 ? r5 : t5
+  );
+  var u = (r5) => ((r5 = isFinite(r5) ? r5 % 360 : 0) > 0 ? r5 : r5 + 360);
+  var a2 = (r5) => ({ r: e2(r5.r, 0, 255), g: e2(r5.g, 0, 255), b: e2(r5.b, 0, 255), a: e2(r5.a) });
+  var o2 = (r5) => ({ r: n(r5.r), g: n(r5.g), b: n(r5.b), a: n(r5.a, 3) });
   var i2 = /^#([0-9a-f]{3,8})$/i;
-  var s2 = function(r5) {
+  var s2 = (r5) => {
     var t5 = r5.toString(16);
     return t5.length < 2 ? "0" + t5 : t5;
   };
-  var h = function(r5) {
-    var t5 = r5.r, n4 = r5.g, e5 = r5.b, u4 = r5.a, a5 = Math.max(t5, n4, e5), o5 = a5 - Math.min(t5, n4, e5), i5 = o5 ? a5 === t5 ? (n4 - e5) / o5 : a5 === n4 ? 2 + (e5 - t5) / o5 : 4 + (t5 - n4) / o5 : 0;
-    return { h: 60 * (i5 < 0 ? i5 + 6 : i5), s: a5 ? o5 / a5 * 100 : 0, v: a5 / 255 * 100, a: u4 };
+  var h = (r5) => {
+    var t5 = r5.r,
+      n4 = r5.g,
+      e5 = r5.b,
+      u4 = r5.a,
+      a5 = Math.max(t5, n4, e5),
+      o5 = a5 - Math.min(t5, n4, e5),
+      i5 = o5
+        ? a5 === t5
+          ? (n4 - e5) / o5
+          : a5 === n4
+            ? 2 + (e5 - t5) / o5
+            : 4 + (t5 - n4) / o5
+        : 0;
+    return {
+      h: 60 * (i5 < 0 ? i5 + 6 : i5),
+      s: a5 ? (o5 / a5) * 100 : 0,
+      v: (a5 / 255) * 100,
+      a: u4,
+    };
   };
-  var b = function(r5) {
-    var t5 = r5.h, n4 = r5.s, e5 = r5.v, u4 = r5.a;
-    t5 = t5 / 360 * 6, n4 /= 100, e5 /= 100;
-    var a5 = Math.floor(t5), o5 = e5 * (1 - n4), i5 = e5 * (1 - (t5 - a5) * n4), s4 = e5 * (1 - (1 - t5 + a5) * n4), h4 = a5 % 6;
-    return { r: 255 * [e5, i5, o5, o5, s4, e5][h4], g: 255 * [s4, e5, e5, i5, o5, o5][h4], b: 255 * [o5, o5, s4, e5, e5, i5][h4], a: u4 };
+  var b = (r5) => {
+    var t5 = r5.h,
+      n4 = r5.s,
+      e5 = r5.v,
+      u4 = r5.a;
+    (t5 = (t5 / 360) * 6), (n4 /= 100), (e5 /= 100);
+    var a5 = Math.floor(t5),
+      o5 = e5 * (1 - n4),
+      i5 = e5 * (1 - (t5 - a5) * n4),
+      s4 = e5 * (1 - (1 - t5 + a5) * n4),
+      h4 = a5 % 6;
+    return {
+      r: 255 * [e5, i5, o5, o5, s4, e5][h4],
+      g: 255 * [s4, e5, e5, i5, o5, o5][h4],
+      b: 255 * [o5, o5, s4, e5, e5, i5][h4],
+      a: u4,
+    };
   };
-  var g = function(r5) {
-    return { h: u(r5.h), s: e2(r5.s, 0, 100), l: e2(r5.l, 0, 100), a: e2(r5.a) };
+  var g = (r5) => ({ h: u(r5.h), s: e2(r5.s, 0, 100), l: e2(r5.l, 0, 100), a: e2(r5.a) });
+  var d = (r5) => ({ h: n(r5.h), s: n(r5.s), l: n(r5.l), a: n(r5.a, 3) });
+  var f2 = (r5) =>
+    b(
+      ((n4 = (t5 = r5).s),
+      {
+        h: t5.h,
+        s: (n4 *= ((e5 = t5.l) < 50 ? e5 : 100 - e5) / 100) > 0 ? ((2 * n4) / (e5 + n4)) * 100 : 0,
+        v: e5 + n4,
+        a: t5.a,
+      }),
+    );
+  var c2 = (r5) => ({
+    h: (t5 = h(r5)).h,
+    s:
+      (u4 = ((200 - (n4 = t5.s)) * (e5 = t5.v)) / 100) > 0 && u4 < 200
+        ? ((n4 * e5) / 100 / (u4 <= 100 ? u4 : 200 - u4)) * 100
+        : 0,
+    l: u4 / 2,
+    a: t5.a,
+  });
+  var l2 =
+    /^hsla?\(\s*([+-]?\d*\.?\d+)(deg|rad|grad|turn)?\s*,\s*([+-]?\d*\.?\d+)%\s*,\s*([+-]?\d*\.?\d+)%\s*(?:,\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
+  var p =
+    /^hsla?\(\s*([+-]?\d*\.?\d+)(deg|rad|grad|turn)?\s+([+-]?\d*\.?\d+)%\s+([+-]?\d*\.?\d+)%\s*(?:\/\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
+  var v =
+    /^rgba?\(\s*([+-]?\d*\.?\d+)(%)?\s*,\s*([+-]?\d*\.?\d+)(%)?\s*,\s*([+-]?\d*\.?\d+)(%)?\s*(?:,\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
+  var m =
+    /^rgba?\(\s*([+-]?\d*\.?\d+)(%)?\s+([+-]?\d*\.?\d+)(%)?\s+([+-]?\d*\.?\d+)(%)?\s*(?:\/\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
+  var y = {
+    string: [
+      [
+        (r5) => {
+          var t5 = i2.exec(r5);
+          return t5
+            ? (r5 = t5[1]).length <= 4
+              ? {
+                  r: Number.parseInt(r5[0] + r5[0], 16),
+                  g: Number.parseInt(r5[1] + r5[1], 16),
+                  b: Number.parseInt(r5[2] + r5[2], 16),
+                  a: r5.length === 4 ? n(Number.parseInt(r5[3] + r5[3], 16) / 255, 2) : 1,
+                }
+              : r5.length === 6 || r5.length === 8
+                ? {
+                    r: Number.parseInt(r5.substr(0, 2), 16),
+                    g: Number.parseInt(r5.substr(2, 2), 16),
+                    b: Number.parseInt(r5.substr(4, 2), 16),
+                    a: r5.length === 8 ? n(Number.parseInt(r5.substr(6, 2), 16) / 255, 2) : 1,
+                  }
+                : null
+            : null;
+        },
+        "hex",
+      ],
+      [
+        (r5) => {
+          var t5 = v.exec(r5) || m.exec(r5);
+          return t5
+            ? t5[2] !== t5[4] || t5[4] !== t5[6]
+              ? null
+              : a2({
+                  r: Number(t5[1]) / (t5[2] ? 100 / 255 : 1),
+                  g: Number(t5[3]) / (t5[4] ? 100 / 255 : 1),
+                  b: Number(t5[5]) / (t5[6] ? 100 / 255 : 1),
+                  a: void 0 === t5[7] ? 1 : Number(t5[7]) / (t5[8] ? 100 : 1),
+                })
+            : null;
+        },
+        "rgb",
+      ],
+      [
+        (t5) => {
+          var n4 = l2.exec(t5) || p.exec(t5);
+          if (!n4) {
+            return null;
+          }
+          var e5,
+            u4,
+            a5 = g({
+              h:
+                ((e5 = n4[1]),
+                (u4 = n4[2]),
+                void 0 === u4 && (u4 = "deg"),
+                Number(e5) * (r2[u4] || 1)),
+              s: Number(n4[3]),
+              l: Number(n4[4]),
+              a: void 0 === n4[5] ? 1 : Number(n4[5]) / (n4[6] ? 100 : 1),
+            });
+          return f2(a5);
+        },
+        "hsl",
+      ],
+    ],
+    object: [
+      [
+        (r5) => {
+          var n4 = r5.r,
+            e5 = r5.g,
+            u4 = r5.b,
+            o5 = r5.a,
+            i5 = void 0 === o5 ? 1 : o5;
+          return t2(n4) && t2(e5) && t2(u4)
+            ? a2({ r: Number(n4), g: Number(e5), b: Number(u4), a: Number(i5) })
+            : null;
+        },
+        "rgb",
+      ],
+      [
+        (r5) => {
+          var n4 = r5.h,
+            e5 = r5.s,
+            u4 = r5.l,
+            a5 = r5.a,
+            o5 = void 0 === a5 ? 1 : a5;
+          if (!(t2(n4) && t2(e5) && t2(u4))) {
+            return null;
+          }
+          var i5 = g({ h: Number(n4), s: Number(e5), l: Number(u4), a: Number(o5) });
+          return f2(i5);
+        },
+        "hsl",
+      ],
+      [
+        (r5) => {
+          var n4 = r5.h,
+            a5 = r5.s,
+            o5 = r5.v,
+            i5 = r5.a,
+            s4 = void 0 === i5 ? 1 : i5;
+          if (!(t2(n4) && t2(a5) && t2(o5))) {
+            return null;
+          }
+          var h4 = ((r6) => ({
+            h: u(r6.h),
+            s: e2(r6.s, 0, 100),
+            v: e2(r6.v, 0, 100),
+            a: e2(r6.a),
+          }))({ h: Number(n4), s: Number(a5), v: Number(o5), a: Number(s4) });
+          return b(h4);
+        },
+        "hsv",
+      ],
+    ],
   };
-  var d = function(r5) {
-    return { h: n(r5.h), s: n(r5.s), l: n(r5.l), a: n(r5.a, 3) };
-  };
-  var f2 = function(r5) {
-    return b((n4 = (t5 = r5).s, { h: t5.h, s: (n4 *= ((e5 = t5.l) < 50 ? e5 : 100 - e5) / 100) > 0 ? 2 * n4 / (e5 + n4) * 100 : 0, v: e5 + n4, a: t5.a }));
-    var t5, n4, e5;
-  };
-  var c2 = function(r5) {
-    return { h: (t5 = h(r5)).h, s: (u4 = (200 - (n4 = t5.s)) * (e5 = t5.v) / 100) > 0 && u4 < 200 ? n4 * e5 / 100 / (u4 <= 100 ? u4 : 200 - u4) * 100 : 0, l: u4 / 2, a: t5.a };
-    var t5, n4, e5, u4;
-  };
-  var l2 = /^hsla?\(\s*([+-]?\d*\.?\d+)(deg|rad|grad|turn)?\s*,\s*([+-]?\d*\.?\d+)%\s*,\s*([+-]?\d*\.?\d+)%\s*(?:,\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
-  var p = /^hsla?\(\s*([+-]?\d*\.?\d+)(deg|rad|grad|turn)?\s+([+-]?\d*\.?\d+)%\s+([+-]?\d*\.?\d+)%\s*(?:\/\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
-  var v = /^rgba?\(\s*([+-]?\d*\.?\d+)(%)?\s*,\s*([+-]?\d*\.?\d+)(%)?\s*,\s*([+-]?\d*\.?\d+)(%)?\s*(?:,\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
-  var m = /^rgba?\(\s*([+-]?\d*\.?\d+)(%)?\s+([+-]?\d*\.?\d+)(%)?\s+([+-]?\d*\.?\d+)(%)?\s*(?:\/\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
-  var y = { string: [[function(r5) {
-    var t5 = i2.exec(r5);
-    return t5 ? (r5 = t5[1]).length <= 4 ? { r: parseInt(r5[0] + r5[0], 16), g: parseInt(r5[1] + r5[1], 16), b: parseInt(r5[2] + r5[2], 16), a: 4 === r5.length ? n(parseInt(r5[3] + r5[3], 16) / 255, 2) : 1 } : 6 === r5.length || 8 === r5.length ? { r: parseInt(r5.substr(0, 2), 16), g: parseInt(r5.substr(2, 2), 16), b: parseInt(r5.substr(4, 2), 16), a: 8 === r5.length ? n(parseInt(r5.substr(6, 2), 16) / 255, 2) : 1 } : null : null;
-  }, "hex"], [function(r5) {
-    var t5 = v.exec(r5) || m.exec(r5);
-    return t5 ? t5[2] !== t5[4] || t5[4] !== t5[6] ? null : a2({ r: Number(t5[1]) / (t5[2] ? 100 / 255 : 1), g: Number(t5[3]) / (t5[4] ? 100 / 255 : 1), b: Number(t5[5]) / (t5[6] ? 100 / 255 : 1), a: void 0 === t5[7] ? 1 : Number(t5[7]) / (t5[8] ? 100 : 1) }) : null;
-  }, "rgb"], [function(t5) {
-    var n4 = l2.exec(t5) || p.exec(t5);
-    if (!n4) return null;
-    var e5, u4, a5 = g({ h: (e5 = n4[1], u4 = n4[2], void 0 === u4 && (u4 = "deg"), Number(e5) * (r2[u4] || 1)), s: Number(n4[3]), l: Number(n4[4]), a: void 0 === n4[5] ? 1 : Number(n4[5]) / (n4[6] ? 100 : 1) });
-    return f2(a5);
-  }, "hsl"]], object: [[function(r5) {
-    var n4 = r5.r, e5 = r5.g, u4 = r5.b, o5 = r5.a, i5 = void 0 === o5 ? 1 : o5;
-    return t2(n4) && t2(e5) && t2(u4) ? a2({ r: Number(n4), g: Number(e5), b: Number(u4), a: Number(i5) }) : null;
-  }, "rgb"], [function(r5) {
-    var n4 = r5.h, e5 = r5.s, u4 = r5.l, a5 = r5.a, o5 = void 0 === a5 ? 1 : a5;
-    if (!t2(n4) || !t2(e5) || !t2(u4)) return null;
-    var i5 = g({ h: Number(n4), s: Number(e5), l: Number(u4), a: Number(o5) });
-    return f2(i5);
-  }, "hsl"], [function(r5) {
-    var n4 = r5.h, a5 = r5.s, o5 = r5.v, i5 = r5.a, s4 = void 0 === i5 ? 1 : i5;
-    if (!t2(n4) || !t2(a5) || !t2(o5)) return null;
-    var h4 = (function(r6) {
-      return { h: u(r6.h), s: e2(r6.s, 0, 100), v: e2(r6.v, 0, 100), a: e2(r6.a) };
-    })({ h: Number(n4), s: Number(a5), v: Number(o5), a: Number(s4) });
-    return b(h4);
-  }, "hsv"]] };
-  var N = function(r5, t5) {
+  var N = (r5, t5) => {
     for (var n4 = 0; n4 < t5.length; n4++) {
       var e5 = t5[n4][0](r5);
-      if (e5) return [e5, t5[n4][1]];
+      if (e5) {
+        return [e5, t5[n4][1]];
+      }
     }
     return [null, void 0];
   };
-  var x = function(r5) {
-    return "string" == typeof r5 ? N(r5.trim(), y.string) : "object" == typeof r5 && null !== r5 ? N(r5, y.object) : [null, void 0];
-  };
-  var M = function(r5, t5) {
+  var x = (r5) =>
+    typeof r5 == "string"
+      ? N(r5.trim(), y.string)
+      : typeof r5 == "object" && r5 !== null
+        ? N(r5, y.object)
+        : [null, void 0];
+  var M = (r5, t5) => {
     var n4 = c2(r5);
     return { h: n4.h, s: e2(n4.s + 100 * t5, 0, 100), l: n4.l, a: n4.a };
   };
-  var H = function(r5) {
-    return (299 * r5.r + 587 * r5.g + 114 * r5.b) / 1e3 / 255;
-  };
-  var $ = function(r5, t5) {
+  var H = (r5) => (299 * r5.r + 587 * r5.g + 114 * r5.b) / 1e3 / 255;
+  var $ = (r5, t5) => {
     var n4 = c2(r5);
     return { h: n4.h, s: n4.s, l: e2(n4.l + 100 * t5, 0, 100), a: n4.a };
   };
-  var j = (function() {
+  var j = (() => {
     function r5(r6) {
-      this.parsed = x(r6)[0], this.rgba = this.parsed || { r: 0, g: 0, b: 0, a: 1 };
+      (this.parsed = x(r6)[0]), (this.rgba = this.parsed || { r: 0, g: 0, b: 0, a: 1 });
     }
-    return r5.prototype.isValid = function() {
-      return null !== this.parsed;
-    }, r5.prototype.brightness = function() {
-      return n(H(this.rgba), 2);
-    }, r5.prototype.isDark = function() {
-      return H(this.rgba) < 0.5;
-    }, r5.prototype.isLight = function() {
-      return H(this.rgba) >= 0.5;
-    }, r5.prototype.toHex = function() {
-      return r6 = o2(this.rgba), t5 = r6.r, e5 = r6.g, u4 = r6.b, i5 = (a5 = r6.a) < 1 ? s2(n(255 * a5)) : "", "#" + s2(t5) + s2(e5) + s2(u4) + i5;
-      var r6, t5, e5, u4, a5, i5;
-    }, r5.prototype.toRgb = function() {
-      return o2(this.rgba);
-    }, r5.prototype.toRgbString = function() {
-      return r6 = o2(this.rgba), t5 = r6.r, n4 = r6.g, e5 = r6.b, (u4 = r6.a) < 1 ? "rgba(" + t5 + ", " + n4 + ", " + e5 + ", " + u4 + ")" : "rgb(" + t5 + ", " + n4 + ", " + e5 + ")";
-      var r6, t5, n4, e5, u4;
-    }, r5.prototype.toHsl = function() {
-      return d(c2(this.rgba));
-    }, r5.prototype.toHslString = function() {
-      return r6 = d(c2(this.rgba)), t5 = r6.h, n4 = r6.s, e5 = r6.l, (u4 = r6.a) < 1 ? "hsla(" + t5 + ", " + n4 + "%, " + e5 + "%, " + u4 + ")" : "hsl(" + t5 + ", " + n4 + "%, " + e5 + "%)";
-      var r6, t5, n4, e5, u4;
-    }, r5.prototype.toHsv = function() {
-      return r6 = h(this.rgba), { h: n(r6.h), s: n(r6.s), v: n(r6.v), a: n(r6.a, 3) };
-      var r6;
-    }, r5.prototype.invert = function() {
-      return w({ r: 255 - (r6 = this.rgba).r, g: 255 - r6.g, b: 255 - r6.b, a: r6.a });
-      var r6;
-    }, r5.prototype.saturate = function(r6) {
-      return void 0 === r6 && (r6 = 0.1), w(M(this.rgba, r6));
-    }, r5.prototype.desaturate = function(r6) {
-      return void 0 === r6 && (r6 = 0.1), w(M(this.rgba, -r6));
-    }, r5.prototype.grayscale = function() {
-      return w(M(this.rgba, -1));
-    }, r5.prototype.lighten = function(r6) {
-      return void 0 === r6 && (r6 = 0.1), w($(this.rgba, r6));
-    }, r5.prototype.darken = function(r6) {
-      return void 0 === r6 && (r6 = 0.1), w($(this.rgba, -r6));
-    }, r5.prototype.rotate = function(r6) {
-      return void 0 === r6 && (r6 = 15), this.hue(this.hue() + r6);
-    }, r5.prototype.alpha = function(r6) {
-      return "number" == typeof r6 ? w({ r: (t5 = this.rgba).r, g: t5.g, b: t5.b, a: r6 }) : n(this.rgba.a, 3);
-      var t5;
-    }, r5.prototype.hue = function(r6) {
-      var t5 = c2(this.rgba);
-      return "number" == typeof r6 ? w({ h: r6, s: t5.s, l: t5.l, a: t5.a }) : n(t5.h);
-    }, r5.prototype.isEqual = function(r6) {
-      return this.toHex() === w(r6).toHex();
-    }, r5;
+    return (
+      (r5.prototype.isValid = function () {
+        return this.parsed !== null;
+      }),
+      (r5.prototype.brightness = function () {
+        return n(H(this.rgba), 2);
+      }),
+      (r5.prototype.isDark = function () {
+        return H(this.rgba) < 0.5;
+      }),
+      (r5.prototype.isLight = function () {
+        return H(this.rgba) >= 0.5;
+      }),
+      (r5.prototype.toHex = function () {
+        return (
+          (r6 = o2(this.rgba)),
+          (t5 = r6.r),
+          (e5 = r6.g),
+          (u4 = r6.b),
+          (i5 = (a5 = r6.a) < 1 ? s2(n(255 * a5)) : ""),
+          "#" + s2(t5) + s2(e5) + s2(u4) + i5
+        );
+        var r6, t5, e5, u4, a5, i5;
+      }),
+      (r5.prototype.toRgb = function () {
+        return o2(this.rgba);
+      }),
+      (r5.prototype.toRgbString = function () {
+        return (
+          (r6 = o2(this.rgba)),
+          (t5 = r6.r),
+          (n4 = r6.g),
+          (e5 = r6.b),
+          (u4 = r6.a) < 1
+            ? "rgba(" + t5 + ", " + n4 + ", " + e5 + ", " + u4 + ")"
+            : "rgb(" + t5 + ", " + n4 + ", " + e5 + ")"
+        );
+        var r6, t5, n4, e5, u4;
+      }),
+      (r5.prototype.toHsl = function () {
+        return d(c2(this.rgba));
+      }),
+      (r5.prototype.toHslString = function () {
+        return (
+          (r6 = d(c2(this.rgba))),
+          (t5 = r6.h),
+          (n4 = r6.s),
+          (e5 = r6.l),
+          (u4 = r6.a) < 1
+            ? "hsla(" + t5 + ", " + n4 + "%, " + e5 + "%, " + u4 + ")"
+            : "hsl(" + t5 + ", " + n4 + "%, " + e5 + "%)"
+        );
+        var r6, t5, n4, e5, u4;
+      }),
+      (r5.prototype.toHsv = function () {
+        return (r6 = h(this.rgba)), { h: n(r6.h), s: n(r6.s), v: n(r6.v), a: n(r6.a, 3) };
+        var r6;
+      }),
+      (r5.prototype.invert = function () {
+        return w({ r: 255 - (r6 = this.rgba).r, g: 255 - r6.g, b: 255 - r6.b, a: r6.a });
+        var r6;
+      }),
+      (r5.prototype.saturate = function (r6) {
+        return void 0 === r6 && (r6 = 0.1), w(M(this.rgba, r6));
+      }),
+      (r5.prototype.desaturate = function (r6) {
+        return void 0 === r6 && (r6 = 0.1), w(M(this.rgba, -r6));
+      }),
+      (r5.prototype.grayscale = function () {
+        return w(M(this.rgba, -1));
+      }),
+      (r5.prototype.lighten = function (r6) {
+        return void 0 === r6 && (r6 = 0.1), w($(this.rgba, r6));
+      }),
+      (r5.prototype.darken = function (r6) {
+        return void 0 === r6 && (r6 = 0.1), w($(this.rgba, -r6));
+      }),
+      (r5.prototype.rotate = function (r6) {
+        return void 0 === r6 && (r6 = 15), this.hue(this.hue() + r6);
+      }),
+      (r5.prototype.alpha = function (r6) {
+        return typeof r6 == "number"
+          ? w({ r: (t5 = this.rgba).r, g: t5.g, b: t5.b, a: r6 })
+          : n(this.rgba.a, 3);
+        var t5;
+      }),
+      (r5.prototype.hue = function (r6) {
+        var t5 = c2(this.rgba);
+        return typeof r6 == "number" ? w({ h: r6, s: t5.s, l: t5.l, a: t5.a }) : n(t5.h);
+      }),
+      (r5.prototype.isEqual = function (r6) {
+        return this.toHex() === w(r6).toHex();
+      }),
+      r5
+    );
   })();
-  var w = function(r5) {
-    return r5 instanceof j ? r5 : new j(r5);
-  };
+  var w = (r5) => (r5 instanceof j ? r5 : new j(r5));
   var S = [];
-  var k = function(r5) {
-    r5.forEach(function(r6) {
+  var k = (r5) => {
+    r5.forEach((r6) => {
       S.indexOf(r6) < 0 && (r6(j, y), S.push(r6));
     });
   };
 
   // node_modules/colord/plugins/lch.mjs
   var r3 = { grad: 0.9, turn: 360, rad: 360 / (2 * Math.PI) };
-  var t3 = function(r5) {
-    return "string" == typeof r5 ? r5.length > 0 : "number" == typeof r5;
-  };
-  var a3 = function(r5, t5, a5) {
-    return void 0 === t5 && (t5 = 0), void 0 === a5 && (a5 = Math.pow(10, t5)), Math.round(a5 * r5) / a5 + 0;
-  };
-  var n2 = function(r5, t5, a5) {
-    return void 0 === t5 && (t5 = 0), void 0 === a5 && (a5 = 1), r5 > a5 ? a5 : r5 > t5 ? r5 : t5;
-  };
-  var u2 = function(r5) {
+  var t3 = (r5) => (typeof r5 == "string" ? r5.length > 0 : typeof r5 == "number");
+  var a3 = (r5, t5, a5) => (
+    void 0 === t5 && (t5 = 0), void 0 === a5 && (a5 = 10 ** t5), Math.round(a5 * r5) / a5 + 0
+  );
+  var n2 = (r5, t5, a5) => (
+    void 0 === t5 && (t5 = 0), void 0 === a5 && (a5 = 1), r5 > a5 ? a5 : r5 > t5 ? r5 : t5
+  );
+  var u2 = (r5) => {
     var t5 = r5 / 255;
-    return t5 < 0.04045 ? t5 / 12.92 : Math.pow((t5 + 0.055) / 1.055, 2.4);
+    return t5 < 0.040_45 ? t5 / 12.92 : ((t5 + 0.055) / 1.055) ** 2.4;
   };
-  var h2 = function(r5) {
-    return 255 * (r5 > 31308e-7 ? 1.055 * Math.pow(r5, 1 / 2.4) - 0.055 : 12.92 * r5);
-  };
+  var h2 = (r5) => 255 * (r5 > 31_308e-7 ? 1.055 * r5 ** (1 / 2.4) - 0.055 : 12.92 * r5);
   var o3 = 96.422;
   var e3 = 100;
   var c3 = 82.521;
-  var i3 = function(r5) {
-    var t5, a5, u4 = { x: 0.9555766 * (t5 = r5).x + -0.0230393 * t5.y + 0.0631636 * t5.z, y: -0.0282895 * t5.x + 1.0099416 * t5.y + 0.0210077 * t5.z, z: 0.0122982 * t5.x + -0.020483 * t5.y + 1.3299098 * t5.z };
-    return a5 = { r: h2(0.032404542 * u4.x - 0.015371385 * u4.y - 4985314e-9 * u4.z), g: h2(-969266e-8 * u4.x + 0.018760108 * u4.y + 41556e-8 * u4.z), b: h2(556434e-9 * u4.x - 2040259e-9 * u4.y + 0.010572252 * u4.z), a: r5.a }, { r: n2(a5.r, 0, 255), g: n2(a5.g, 0, 255), b: n2(a5.b, 0, 255), a: n2(a5.a) };
+  var i3 = (r5) => {
+    var t5,
+      a5,
+      u4 = {
+        x: 0.955_576_6 * (t5 = r5).x + -0.023_039_3 * t5.y + 0.063_163_6 * t5.z,
+        y: -0.028_289_5 * t5.x + 1.009_941_6 * t5.y + 0.021_007_7 * t5.z,
+        z: 0.012_298_2 * t5.x + -0.020_483 * t5.y + 1.329_909_8 * t5.z,
+      };
+    return (
+      (a5 = {
+        r: h2(0.032_404_542 * u4.x - 0.015_371_385 * u4.y - 4_985_314e-9 * u4.z),
+        g: h2(-969_266e-8 * u4.x + 0.018_760_108 * u4.y + 41_556e-8 * u4.z),
+        b: h2(556_434e-9 * u4.x - 2_040_259e-9 * u4.y + 0.010_572_252 * u4.z),
+        a: r5.a,
+      }),
+      { r: n2(a5.r, 0, 255), g: n2(a5.g, 0, 255), b: n2(a5.b, 0, 255), a: n2(a5.a) }
+    );
   };
-  var l3 = function(r5) {
-    var t5 = u2(r5.r), a5 = u2(r5.g), h4 = u2(r5.b);
-    return (function(r6) {
-      return { x: n2(r6.x, 0, o3), y: n2(r6.y, 0, e3), z: n2(r6.z, 0, c3), a: n2(r6.a) };
-    })((function(r6) {
-      return { x: 1.0478112 * r6.x + 0.0228866 * r6.y + -0.050127 * r6.z, y: 0.0295424 * r6.x + 0.9904844 * r6.y + -0.0170491 * r6.z, z: -92345e-7 * r6.x + 0.0150436 * r6.y + 0.7521316 * r6.z, a: r6.a };
-    })({ x: 100 * (0.4124564 * t5 + 0.3575761 * a5 + 0.1804375 * h4), y: 100 * (0.2126729 * t5 + 0.7151522 * a5 + 0.072175 * h4), z: 100 * (0.0193339 * t5 + 0.119192 * a5 + 0.9503041 * h4), a: r5.a }));
+  var l3 = (r5) => {
+    var t5 = u2(r5.r),
+      a5 = u2(r5.g),
+      h4 = u2(r5.b);
+    return ((r6) => ({ x: n2(r6.x, 0, o3), y: n2(r6.y, 0, e3), z: n2(r6.z, 0, c3), a: n2(r6.a) }))(
+      ((r6) => ({
+        x: 1.047_811_2 * r6.x + 0.022_886_6 * r6.y + -0.050_127 * r6.z,
+        y: 0.029_542_4 * r6.x + 0.990_484_4 * r6.y + -0.017_049_1 * r6.z,
+        z: -92_345e-7 * r6.x + 0.015_043_6 * r6.y + 0.752_131_6 * r6.z,
+        a: r6.a,
+      }))({
+        x: 100 * (0.412_456_4 * t5 + 0.357_576_1 * a5 + 0.180_437_5 * h4),
+        y: 100 * (0.212_672_9 * t5 + 0.715_152_2 * a5 + 0.072_175 * h4),
+        z: 100 * (0.019_333_9 * t5 + 0.119_192 * a5 + 0.950_304_1 * h4),
+        a: r5.a,
+      }),
+    );
   };
-  var f3 = 216 / 24389;
-  var b2 = 24389 / 27;
-  var d2 = function(r5) {
-    return { l: n2(r5.l, 0, 100), c: r5.c, h: (t5 = r5.h, (t5 = isFinite(t5) ? t5 % 360 : 0) > 0 ? t5 : t5 + 360), a: r5.a };
-    var t5;
-  };
-  var p2 = function(r5) {
-    return { l: a3(r5.l, 2), c: a3(r5.c, 2), h: a3(r5.h, 2), a: a3(r5.a, 3) };
-  };
-  var v2 = function(r5) {
-    var a5 = r5.l, n4 = r5.c, u4 = r5.h, h4 = r5.a, o5 = void 0 === h4 ? 1 : h4;
-    if (!t3(a5) || !t3(n4) || !t3(u4)) return null;
+  var f3 = 216 / 24_389;
+  var b2 = 24_389 / 27;
+  var d2 = (r5) => ({
+    l: n2(r5.l, 0, 100),
+    c: r5.c,
+    h: ((t5 = r5.h), (t5 = isFinite(t5) ? t5 % 360 : 0) > 0 ? t5 : t5 + 360),
+    a: r5.a,
+  });
+  var p2 = (r5) => ({ l: a3(r5.l, 2), c: a3(r5.c, 2), h: a3(r5.h, 2), a: a3(r5.a, 3) });
+  var v2 = (r5) => {
+    var a5 = r5.l,
+      n4 = r5.c,
+      u4 = r5.h,
+      h4 = r5.a,
+      o5 = void 0 === h4 ? 1 : h4;
+    if (!(t3(a5) && t3(n4) && t3(u4))) {
+      return null;
+    }
     var e5 = d2({ l: Number(a5), c: Number(n4), h: Number(u4), a: Number(o5) });
     return M2(e5);
   };
-  var y2 = function(r5) {
-    var t5 = (function(r6) {
-      var t6 = l3(r6), a5 = t6.x / o3, n5 = t6.y / e3, u5 = t6.z / c3;
-      return a5 = a5 > f3 ? Math.cbrt(a5) : (b2 * a5 + 16) / 116, { l: 116 * (n5 = n5 > f3 ? Math.cbrt(n5) : (b2 * n5 + 16) / 116) - 16, a: 500 * (a5 - n5), b: 200 * (n5 - (u5 = u5 > f3 ? Math.cbrt(u5) : (b2 * u5 + 16) / 116)), alpha: t6.a };
-    })(r5), n4 = a3(t5.a, 3), u4 = a3(t5.b, 3), h4 = Math.atan2(u4, n4) / Math.PI * 180;
+  var y2 = (r5) => {
+    var t5 = ((r6) => {
+        var t6 = l3(r6),
+          a5 = t6.x / o3,
+          n5 = t6.y / e3,
+          u5 = t6.z / c3;
+        return (
+          (a5 = a5 > f3 ? Math.cbrt(a5) : (b2 * a5 + 16) / 116),
+          {
+            l: 116 * (n5 = n5 > f3 ? Math.cbrt(n5) : (b2 * n5 + 16) / 116) - 16,
+            a: 500 * (a5 - n5),
+            b: 200 * (n5 - (u5 = u5 > f3 ? Math.cbrt(u5) : (b2 * u5 + 16) / 116)),
+            alpha: t6.a,
+          }
+        );
+      })(r5),
+      n4 = a3(t5.a, 3),
+      u4 = a3(t5.b, 3),
+      h4 = (Math.atan2(u4, n4) / Math.PI) * 180;
     return { l: t5.l, c: Math.sqrt(n4 * n4 + u4 * u4), h: h4 < 0 ? h4 + 360 : h4, a: t5.alpha };
   };
-  var M2 = function(r5) {
-    return t5 = { l: r5.l, a: r5.c * Math.cos(r5.h * Math.PI / 180), b: r5.c * Math.sin(r5.h * Math.PI / 180), alpha: r5.a }, n4 = t5.a / 500 + (a5 = (t5.l + 16) / 116), u4 = a5 - t5.b / 200, i3({ x: (Math.pow(n4, 3) > f3 ? Math.pow(n4, 3) : (116 * n4 - 16) / b2) * o3, y: (t5.l > 8 ? Math.pow((t5.l + 16) / 116, 3) : t5.l / b2) * e3, z: (Math.pow(u4, 3) > f3 ? Math.pow(u4, 3) : (116 * u4 - 16) / b2) * c3, a: t5.alpha });
-    var t5, a5, n4, u4;
-  };
-  var x2 = /^lch\(\s*([+-]?\d*\.?\d+)%\s+([+-]?\d*\.?\d+)\s+([+-]?\d*\.?\d+)(deg|rad|grad|turn)?\s*(?:\/\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
-  var s3 = function(t5) {
+  var M2 = (r5) => (
+    (t5 = {
+      l: r5.l,
+      a: r5.c * Math.cos((r5.h * Math.PI) / 180),
+      b: r5.c * Math.sin((r5.h * Math.PI) / 180),
+      alpha: r5.a,
+    }),
+    (n4 = t5.a / 500 + (a5 = (t5.l + 16) / 116)),
+    (u4 = a5 - t5.b / 200),
+    i3({
+      x: (n4 ** 3 > f3 ? n4 ** 3 : (116 * n4 - 16) / b2) * o3,
+      y: (t5.l > 8 ? ((t5.l + 16) / 116) ** 3 : t5.l / b2) * e3,
+      z: (u4 ** 3 > f3 ? u4 ** 3 : (116 * u4 - 16) / b2) * c3,
+      a: t5.alpha,
+    })
+  );
+  var x2 =
+    /^lch\(\s*([+-]?\d*\.?\d+)%\s+([+-]?\d*\.?\d+)\s+([+-]?\d*\.?\d+)(deg|rad|grad|turn)?\s*(?:\/\s*([+-]?\d*\.?\d+)(%)?\s*)?\)$/i;
+  var s3 = (t5) => {
     var a5 = x2.exec(t5);
-    if (!a5) return null;
-    var n4, u4, h4 = d2({ l: Number(a5[1]), c: Number(a5[2]), h: (n4 = a5[3], u4 = a5[4], void 0 === u4 && (u4 = "deg"), Number(n4) * (r3[u4] || 1)), a: void 0 === a5[5] ? 1 : Number(a5[5]) / (a5[6] ? 100 : 1) });
+    if (!a5) {
+      return null;
+    }
+    var n4,
+      u4,
+      h4 = d2({
+        l: Number(a5[1]),
+        c: Number(a5[2]),
+        h: ((n4 = a5[3]), (u4 = a5[4]), void 0 === u4 && (u4 = "deg"), Number(n4) * (r3[u4] || 1)),
+        a: void 0 === a5[5] ? 1 : Number(a5[5]) / (a5[6] ? 100 : 1),
+      });
     return M2(h4);
   };
   function lch_default(r5, t5) {
-    r5.prototype.toLch = function() {
+    (r5.prototype.toLch = function () {
       return p2(y2(this.rgba));
-    }, r5.prototype.toLchString = function() {
-      return r6 = p2(y2(this.rgba)), t6 = r6.l, a5 = r6.c, n4 = r6.h, (u4 = r6.a) < 1 ? "lch(" + t6 + "% " + a5 + " " + n4 + " / " + u4 + ")" : "lch(" + t6 + "% " + a5 + " " + n4 + ")";
-      var r6, t6, a5, n4, u4;
-    }, t5.string.push([s3, "lch"]), t5.object.push([v2, "lch"]);
+    }),
+      (r5.prototype.toLchString = function () {
+        return (
+          (r6 = p2(y2(this.rgba))),
+          (t6 = r6.l),
+          (a5 = r6.c),
+          (n4 = r6.h),
+          (u4 = r6.a) < 1
+            ? "lch(" + t6 + "% " + a5 + " " + n4 + " / " + u4 + ")"
+            : "lch(" + t6 + "% " + a5 + " " + n4 + ")"
+        );
+        var r6, t6, a5, n4, u4;
+      }),
+      t5.string.push([s3, "lch"]),
+      t5.object.push([v2, "lch"]);
   }
 
   // node_modules/colord/plugins/mix.mjs
-  var t4 = function(t5, a5, n4) {
-    return void 0 === a5 && (a5 = 0), void 0 === n4 && (n4 = 1), t5 > n4 ? n4 : t5 > a5 ? t5 : a5;
-  };
-  var a4 = function(t5) {
+  var t4 = (t5, a5, n4) => (
+    void 0 === a5 && (a5 = 0), void 0 === n4 && (n4 = 1), t5 > n4 ? n4 : t5 > a5 ? t5 : a5
+  );
+  var a4 = (t5) => {
     var a5 = t5 / 255;
-    return a5 < 0.04045 ? a5 / 12.92 : Math.pow((a5 + 0.055) / 1.055, 2.4);
+    return a5 < 0.040_45 ? a5 / 12.92 : ((a5 + 0.055) / 1.055) ** 2.4;
   };
-  var n3 = function(t5) {
-    return 255 * (t5 > 31308e-7 ? 1.055 * Math.pow(t5, 1 / 2.4) - 0.055 : 12.92 * t5);
-  };
+  var n3 = (t5) => 255 * (t5 > 31_308e-7 ? 1.055 * t5 ** (1 / 2.4) - 0.055 : 12.92 * t5);
   var r4 = 96.422;
   var o4 = 100;
   var u3 = 82.521;
-  var e4 = function(a5) {
-    var r5, o5, u4 = { x: 0.9555766 * (r5 = a5).x + -0.0230393 * r5.y + 0.0631636 * r5.z, y: -0.0282895 * r5.x + 1.0099416 * r5.y + 0.0210077 * r5.z, z: 0.0122982 * r5.x + -0.020483 * r5.y + 1.3299098 * r5.z };
-    return o5 = { r: n3(0.032404542 * u4.x - 0.015371385 * u4.y - 4985314e-9 * u4.z), g: n3(-969266e-8 * u4.x + 0.018760108 * u4.y + 41556e-8 * u4.z), b: n3(556434e-9 * u4.x - 2040259e-9 * u4.y + 0.010572252 * u4.z), a: a5.a }, { r: t4(o5.r, 0, 255), g: t4(o5.g, 0, 255), b: t4(o5.b, 0, 255), a: t4(o5.a) };
+  var e4 = (a5) => {
+    var r5,
+      o5,
+      u4 = {
+        x: 0.955_576_6 * (r5 = a5).x + -0.023_039_3 * r5.y + 0.063_163_6 * r5.z,
+        y: -0.028_289_5 * r5.x + 1.009_941_6 * r5.y + 0.021_007_7 * r5.z,
+        z: 0.012_298_2 * r5.x + -0.020_483 * r5.y + 1.329_909_8 * r5.z,
+      };
+    return (
+      (o5 = {
+        r: n3(0.032_404_542 * u4.x - 0.015_371_385 * u4.y - 4_985_314e-9 * u4.z),
+        g: n3(-969_266e-8 * u4.x + 0.018_760_108 * u4.y + 41_556e-8 * u4.z),
+        b: n3(556_434e-9 * u4.x - 2_040_259e-9 * u4.y + 0.010_572_252 * u4.z),
+        a: a5.a,
+      }),
+      { r: t4(o5.r, 0, 255), g: t4(o5.g, 0, 255), b: t4(o5.b, 0, 255), a: t4(o5.a) }
+    );
   };
-  var i4 = function(n4) {
-    var e5 = a4(n4.r), i5 = a4(n4.g), p4 = a4(n4.b);
-    return (function(a5) {
-      return { x: t4(a5.x, 0, r4), y: t4(a5.y, 0, o4), z: t4(a5.z, 0, u3), a: t4(a5.a) };
-    })((function(t5) {
-      return { x: 1.0478112 * t5.x + 0.0228866 * t5.y + -0.050127 * t5.z, y: 0.0295424 * t5.x + 0.9904844 * t5.y + -0.0170491 * t5.z, z: -92345e-7 * t5.x + 0.0150436 * t5.y + 0.7521316 * t5.z, a: t5.a };
-    })({ x: 100 * (0.4124564 * e5 + 0.3575761 * i5 + 0.1804375 * p4), y: 100 * (0.2126729 * e5 + 0.7151522 * i5 + 0.072175 * p4), z: 100 * (0.0193339 * e5 + 0.119192 * i5 + 0.9503041 * p4), a: n4.a }));
+  var i4 = (n4) => {
+    var e5 = a4(n4.r),
+      i5 = a4(n4.g),
+      p4 = a4(n4.b);
+    return ((a5) => ({ x: t4(a5.x, 0, r4), y: t4(a5.y, 0, o4), z: t4(a5.z, 0, u3), a: t4(a5.a) }))(
+      ((t5) => ({
+        x: 1.047_811_2 * t5.x + 0.022_886_6 * t5.y + -0.050_127 * t5.z,
+        y: 0.029_542_4 * t5.x + 0.990_484_4 * t5.y + -0.017_049_1 * t5.z,
+        z: -92_345e-7 * t5.x + 0.015_043_6 * t5.y + 0.752_131_6 * t5.z,
+        a: t5.a,
+      }))({
+        x: 100 * (0.412_456_4 * e5 + 0.357_576_1 * i5 + 0.180_437_5 * p4),
+        y: 100 * (0.212_672_9 * e5 + 0.715_152_2 * i5 + 0.072_175 * p4),
+        z: 100 * (0.019_333_9 * e5 + 0.119_192 * i5 + 0.950_304_1 * p4),
+        a: n4.a,
+      }),
+    );
   };
-  var p3 = 216 / 24389;
-  var h3 = 24389 / 27;
-  var f4 = function(t5) {
-    var a5 = i4(t5), n4 = a5.x / r4, e5 = a5.y / o4, f5 = a5.z / u3;
-    return n4 = n4 > p3 ? Math.cbrt(n4) : (h3 * n4 + 16) / 116, { l: 116 * (e5 = e5 > p3 ? Math.cbrt(e5) : (h3 * e5 + 16) / 116) - 16, a: 500 * (n4 - e5), b: 200 * (e5 - (f5 = f5 > p3 ? Math.cbrt(f5) : (h3 * f5 + 16) / 116)), alpha: a5.a };
+  var p3 = 216 / 24_389;
+  var h3 = 24_389 / 27;
+  var f4 = (t5) => {
+    var a5 = i4(t5),
+      n4 = a5.x / r4,
+      e5 = a5.y / o4,
+      f5 = a5.z / u3;
+    return (
+      (n4 = n4 > p3 ? Math.cbrt(n4) : (h3 * n4 + 16) / 116),
+      {
+        l: 116 * (e5 = e5 > p3 ? Math.cbrt(e5) : (h3 * e5 + 16) / 116) - 16,
+        a: 500 * (n4 - e5),
+        b: 200 * (e5 - (f5 = f5 > p3 ? Math.cbrt(f5) : (h3 * f5 + 16) / 116)),
+        alpha: a5.a,
+      }
+    );
   };
-  var c4 = function(a5, n4, i5) {
-    var c5, y3 = f4(a5), x3 = f4(n4);
-    return (function(t5) {
-      var a6 = (t5.l + 16) / 116, n5 = t5.a / 500 + a6, i6 = a6 - t5.b / 200;
-      return e4({ x: (Math.pow(n5, 3) > p3 ? Math.pow(n5, 3) : (116 * n5 - 16) / h3) * r4, y: (t5.l > 8 ? Math.pow((t5.l + 16) / 116, 3) : t5.l / h3) * o4, z: (Math.pow(i6, 3) > p3 ? Math.pow(i6, 3) : (116 * i6 - 16) / h3) * u3, a: t5.alpha });
-    })({ l: t4((c5 = { l: y3.l * (1 - i5) + x3.l * i5, a: y3.a * (1 - i5) + x3.a * i5, b: y3.b * (1 - i5) + x3.b * i5, alpha: y3.alpha * (1 - i5) + x3.alpha * i5 }).l, 0, 400), a: c5.a, b: c5.b, alpha: t4(c5.alpha) });
+  var c4 = (a5, n4, i5) => {
+    var c5,
+      y3 = f4(a5),
+      x3 = f4(n4);
+    return ((t5) => {
+      var a6 = (t5.l + 16) / 116,
+        n5 = t5.a / 500 + a6,
+        i6 = a6 - t5.b / 200;
+      return e4({
+        x: (n5 ** 3 > p3 ? n5 ** 3 : (116 * n5 - 16) / h3) * r4,
+        y: (t5.l > 8 ? ((t5.l + 16) / 116) ** 3 : t5.l / h3) * o4,
+        z: (i6 ** 3 > p3 ? i6 ** 3 : (116 * i6 - 16) / h3) * u3,
+        a: t5.alpha,
+      });
+    })({
+      l: t4(
+        (c5 = {
+          l: y3.l * (1 - i5) + x3.l * i5,
+          a: y3.a * (1 - i5) + x3.a * i5,
+          b: y3.b * (1 - i5) + x3.b * i5,
+          alpha: y3.alpha * (1 - i5) + x3.alpha * i5,
+        }).l,
+        0,
+        400,
+      ),
+      a: c5.a,
+      b: c5.b,
+      alpha: t4(c5.alpha),
+    });
   };
   function mix_default(t5) {
     function a5(t6, a6, n4) {
       void 0 === n4 && (n4 = 5);
-      for (var r5 = [], o5 = 1 / (n4 - 1), u4 = 0; u4 <= n4 - 1; u4++) r5.push(t6.mix(a6, o5 * u4));
+      for (var r5 = [], o5 = 1 / (n4 - 1), u4 = 0; u4 <= n4 - 1; u4++) {
+        r5.push(t6.mix(a6, o5 * u4));
+      }
       return r5;
     }
-    t5.prototype.mix = function(a6, n4) {
+    (t5.prototype.mix = function (a6, n4) {
       void 0 === n4 && (n4 = 0.5);
-      var r5 = a6 instanceof t5 ? a6 : new t5(a6), o5 = c4(this.toRgb(), r5.toRgb(), n4);
+      var r5 = a6 instanceof t5 ? a6 : new t5(a6),
+        o5 = c4(this.toRgb(), r5.toRgb(), n4);
       return new t5(o5);
-    }, t5.prototype.tints = function(t6) {
-      return a5(this, "#fff", t6);
-    }, t5.prototype.shades = function(t6) {
-      return a5(this, "#000", t6);
-    }, t5.prototype.tones = function(t6) {
-      return a5(this, "#808080", t6);
-    };
+    }),
+      (t5.prototype.tints = function (t6) {
+        return a5(this, "#fff", t6);
+      }),
+      (t5.prototype.shades = function (t6) {
+        return a5(this, "#000", t6);
+      }),
+      (t5.prototype.tones = function (t6) {
+        return a5(this, "#808080", t6);
+      });
   }
 
   // node_modules/@vibrant/image/dist/esm/histogram.js
@@ -3343,10 +5627,10 @@ Is it scaring you off?`,
       this.pixels = pixels;
       this.opts = opts;
       const { sigBits } = opts;
-      const getColorIndex = (r22, g22, b22) => (r22 << 2 * sigBits) + (g22 << sigBits) + b22;
+      const getColorIndex = (r22, g22, b22) => (r22 << (2 * sigBits)) + (g22 << sigBits) + b22;
       this.getColorIndex = getColorIndex;
       const rshift = 8 - sigBits;
-      const hn = 1 << 3 * sigBits;
+      const hn = 1 << (3 * sigBits);
       const hist = new Uint32Array(hn);
       let rmax;
       let rmin;
@@ -3369,24 +5653,37 @@ Is it scaring you off?`,
         g2 = pixels[offset + 1];
         b3 = pixels[offset + 2];
         a5 = pixels[offset + 3];
-        if (a5 === 0) continue;
+        if (a5 === 0) {
+          continue;
+        }
         r5 = r5 >> rshift;
         g2 = g2 >> rshift;
         b3 = b3 >> rshift;
         const index = getColorIndex(r5, g2, b3);
-        if (hist[index] === void 0) hist[index] = 0;
+        if (hist[index] === void 0) {
+          hist[index] = 0;
+        }
         hist[index] += 1;
-        if (r5 > rmax) rmax = r5;
-        if (r5 < rmin) rmin = r5;
-        if (g2 > gmax) gmax = g2;
-        if (g2 < gmin) gmin = g2;
-        if (b3 > bmax) bmax = b3;
-        if (b3 < bmin) bmin = b3;
+        if (r5 > rmax) {
+          rmax = r5;
+        }
+        if (r5 < rmin) {
+          rmin = r5;
+        }
+        if (g2 > gmax) {
+          gmax = g2;
+        }
+        if (g2 < gmin) {
+          gmin = g2;
+        }
+        if (b3 > bmax) {
+          bmax = b3;
+        }
+        if (b3 < bmin) {
+          bmin = b3;
+        }
       }
-      this._colorCount = hist.reduce(
-        (total, c5) => c5 > 0 ? total + 1 : total,
-        0
-      );
+      this._colorCount = hist.reduce((total, c5) => (c5 > 0 ? total + 1 : total), 0);
       this.hist = hist;
       this.rmax = rmax;
       this.rmin = rmin;
@@ -3408,11 +5705,15 @@ Is it scaring you off?`,
       let ratio = 1;
       if (opts.maxDimension > 0) {
         const maxSide = Math.max(width, height);
-        if (maxSide > opts.maxDimension) ratio = opts.maxDimension / maxSide;
+        if (maxSide > opts.maxDimension) {
+          ratio = opts.maxDimension / maxSide;
+        }
       } else {
         ratio = 1 / opts.quality;
       }
-      if (ratio < 1) this.resize(width * ratio, height * ratio, ratio);
+      if (ratio < 1) {
+        this.resize(width * ratio, height * ratio, ratio);
+      }
     }
   };
   function applyFilters(imageData, filters) {
@@ -3444,7 +5745,9 @@ Is it scaring you off?`,
   // node_modules/@vibrant/image-browser/dist/esm/index.js
   function isRelativeUrl(url) {
     const u4 = new URL(url, location.href);
-    return u4.protocol === location.protocol && u4.host === location.host && u4.port === location.port;
+    return (
+      u4.protocol === location.protocol && u4.host === location.host && u4.port === location.port
+    );
   }
   function isSameOrigin(a5, b3) {
     const ua = new URL(a5);
@@ -3481,9 +5784,11 @@ Is it scaring you off?`,
       if (!img) {
         throw new Error("Image is not initialized");
       }
-      const canvas = this._canvas = document.createElement("canvas");
+      const canvas = (this._canvas = document.createElement("canvas"));
       const context = canvas.getContext("2d");
-      if (!context) throw new ReferenceError("Failed to create canvas context");
+      if (!context) {
+        throw new ReferenceError("Failed to create canvas context");
+      }
       this._context = context;
       canvas.className = "@vibrant/canvas";
       canvas.style.display = "none";
@@ -3498,7 +5803,7 @@ Is it scaring you off?`,
       if (typeof image === "string") {
         img = document.createElement("img");
         src = image;
-        if (!isRelativeUrl(src) && !isSameOrigin(window.location.href, src)) {
+        if (!(isRelativeUrl(src) || isSameOrigin(window.location.href, src))) {
           img.crossOrigin = "anonymous";
         }
         img.src = src;
@@ -3506,9 +5811,7 @@ Is it scaring you off?`,
         img = image;
         src = image.src;
       } else {
-        return Promise.reject(
-          new Error(`Cannot load buffer as an image in browser`)
-        );
+        return Promise.reject(new Error("Cannot load buffer as an image in browser"));
       }
       this.image = img;
       return new Promise((resolve, reject) => {
@@ -3549,12 +5852,7 @@ Is it scaring you off?`,
       return this._getWidth() * this._getHeight();
     }
     getImageData() {
-      return this._getContext().getImageData(
-        0,
-        0,
-        this._getWidth(),
-        this._getHeight()
-      );
+      return this._getContext().getImageData(0, 0, this._getWidth(), this._getHeight());
     }
     remove() {
       if (this._canvas && this._canvas.parentNode) {
@@ -3566,14 +5864,18 @@ Is it scaring you off?`,
   // node_modules/@vibrant/core/dist/esm/utils.js
   function assignDeep(target, ...sources) {
     sources.forEach((s4) => {
-      if (!s4) return;
+      if (!s4) {
+        return;
+      }
       for (const key in s4) {
-        if (s4.hasOwnProperty(key)) {
+        if (Object.hasOwn(s4, key)) {
           const v3 = s4[key];
           if (Array.isArray(v3)) {
             target[key] = v3.slice(0);
           } else if (typeof v3 === "object") {
-            if (!target[key]) target[key] = {};
+            if (!target[key]) {
+              target[key] = {};
+            }
             assignDeep(target[key], v3);
           } else {
             target[key] = v3;
@@ -3595,9 +5897,9 @@ Is it scaring you off?`,
       {
         quantizer: q,
         generators,
-        filters
+        filters,
       },
-      override
+      override,
     );
   }
 
@@ -3631,10 +5933,10 @@ Is it scaring you off?`,
      * @returns this `Builder` instance.
      */
     addFilter(name2) {
-      if (!this._opts.filters) {
-        this._opts.filters = [name2];
-      } else {
+      if (this._opts.filters) {
         this._opts.filters.push(name2);
+      } else {
+        this._opts.filters = [name2];
       }
       return this;
     }
@@ -3645,7 +5947,9 @@ Is it scaring you off?`,
     removeFilter(name2) {
       if (this._opts.filters) {
         const i5 = this._opts.filters.indexOf(name2);
-        if (i5 > 0) this._opts.filters.splice(i5);
+        if (i5 > 0) {
+          this._opts.filters.splice(i5);
+        }
       }
       return this;
     }
@@ -3678,10 +5982,10 @@ Is it scaring you off?`,
      * @returns this `Builder` instance.
      */
     useGenerator(generator, options) {
-      if (!this._opts.generators) this._opts.generators = [];
-      this._opts.generators.push(
-        options ? { name: generator, options } : generator
-      );
+      if (!this._opts.generators) {
+        this._opts.generators = [];
+      }
+      this._opts.generators.push(options ? { name: generator, options } : generator);
       return this;
     }
     /**
@@ -3732,18 +6036,14 @@ Is it scaring you off?`,
       this.quantizer = new Stage(this);
       this.generator = new Stage(this);
     }
-    _buildProcessTasks({
-      filters,
-      quantizer,
-      generators
-    }) {
+    _buildProcessTasks({ filters, quantizer, generators }) {
       if (generators.length === 1 && generators[0] === "*") {
         generators = this.generator.names();
       }
       return {
         filters: filters.map((f5) => createTask(this.filter, f5)),
         quantizer: createTask(this.quantizer, quantizer),
-        generators: generators.map((g2) => createTask(this.generator, g2))
+        generators: generators.map((g2) => createTask(this.generator, g2)),
       };
       function createTask(stage, o5) {
         let name2;
@@ -3757,7 +6057,7 @@ Is it scaring you off?`,
         return {
           name: name2,
           fn: stage.get(name2),
-          options
+          options,
         };
       }
     }
@@ -3768,15 +6068,15 @@ Is it scaring you off?`,
       const palettes = await this._generatePalettes(generators, colors);
       return {
         colors,
-        palettes
+        palettes,
       };
     }
     _filterColors(filters, imageData) {
       return Promise.resolve(
         applyFilters(
           imageData,
-          filters.map(({ fn }) => fn)
-        )
+          filters.map(({ fn }) => fn),
+        ),
       );
     }
     _generateColors(quantizer, imageData) {
@@ -3784,16 +6084,13 @@ Is it scaring you off?`,
     }
     async _generatePalettes(generators, colors) {
       const promiseArr = await Promise.all(
-        generators.map(({ fn, options }) => Promise.resolve(fn(colors, options)))
+        generators.map(({ fn, options }) => Promise.resolve(fn(colors, options))),
       );
       return Promise.resolve(
-        promiseArr.reduce(
-          (promises, promiseVal, i5) => {
-            promises[generators[i5].name] = promiseVal;
-            return promises;
-          },
-          {}
-        )
+        promiseArr.reduce((promises, promiseVal, i5) => {
+          promises[generators[i5].name] = promiseVal;
+          return promises;
+        }, {}),
       );
     }
   };
@@ -3834,11 +6131,21 @@ Is it scaring you off?`,
     let g2;
     let b3;
     function hue2rgb(p4, q, t5) {
-      if (t5 < 0) t5 += 1;
-      if (t5 > 1) t5 -= 1;
-      if (t5 < 1 / 6) return p4 + (q - p4) * 6 * t5;
-      if (t5 < 1 / 2) return q;
-      if (t5 < 2 / 3) return p4 + (q - p4) * (2 / 3 - t5) * 6;
+      if (t5 < 0) {
+        t5 += 1;
+      }
+      if (t5 > 1) {
+        t5 -= 1;
+      }
+      if (t5 < 1 / 6) {
+        return p4 + (q - p4) * 6 * t5;
+      }
+      if (t5 < 1 / 2) {
+        return q;
+      }
+      if (t5 < 2 / 3) {
+        return p4 + (q - p4) * (2 / 3 - t5) * 6;
+      }
       return p4;
     }
     if (s4 === 0) {
@@ -3856,12 +6163,16 @@ Is it scaring you off?`,
   // node_modules/@vibrant/color/dist/esm/index.js
   var Swatch = class _Swatch {
     static applyFilters(colors, filters) {
-      return filters.length > 0 ? colors.filter(({ r: r5, g: g2, b: b3 }) => {
-        for (let j2 = 0; j2 < filters.length; j2++) {
-          if (!filters[j2]?.(r5, g2, b3, 255)) return false;
-        }
-        return true;
-      }) : colors;
+      return filters.length > 0
+        ? colors.filter(({ r: r5, g: g2, b: b3 }) => {
+            for (let j2 = 0; j2 < filters.length; j2++) {
+              if (!filters[j2]?.(r5, g2, b3, 255)) {
+                return false;
+              }
+            }
+            return true;
+          })
+        : colors;
     }
     /**
      * Make a value copy of a swatch based on a previous one. Returns a new Swatch instance
@@ -3923,7 +6234,7 @@ Is it scaring you off?`,
     toJSON() {
       return {
         rgb: this.rgb,
-        population: this.population
+        population: this.population,
       };
     }
     getYiq() {
@@ -3974,7 +6285,7 @@ Is it scaring you off?`,
       this.opts = assignDeep({}, _Vibrant2.DefaultOpts, opts);
     }
     static use(pipeline2) {
-      this._pipeline = pipeline2;
+      _Vibrant2._pipeline = pipeline2;
     }
     static from(src) {
       return new Builder(src);
@@ -3992,13 +6303,13 @@ Is it scaring you off?`,
       try {
         const image1 = await image.load(this._src);
         const result1 = await this._process(image1, {
-          generators: ["default"]
+          generators: ["default"],
         });
         this._result = result1;
         const res = result1.palettes["default"];
         if (!res) {
           throw new Error(
-            `Something went wrong and a palette was not found, please file a bug against our GitHub repo: https://github.com/vibrant-Colors/node-vibrant/`
+            "Something went wrong and a palette was not found, please file a bug against our GitHub repo: https://github.com/vibrant-Colors/node-vibrant/",
           );
         }
         image.remove();
@@ -4013,7 +6324,7 @@ Is it scaring you off?`,
       try {
         const image1 = await image.load(this._src);
         const result1 = await this._process(image1, {
-          generators: ["*"]
+          generators: ["*"],
         });
         this._result = result1;
         const res = result1.palettes;
@@ -4028,7 +6339,7 @@ Is it scaring you off?`,
   _Vibrant.DefaultOpts = {
     colorCount: 64,
     quality: 5,
-    filters: []
+    filters: [],
   };
   var Vibrant = _Vibrant;
 
@@ -4097,7 +6408,7 @@ Is it scaring you off?`,
         const { hist, getColorIndex } = this.histogram;
         const { r1, r2: r22, g1, g2, b1, b2: b22 } = this.dimension;
         let ntot = 0;
-        const mult = 1 << 8 - SIGBITS;
+        const mult = 1 << (8 - SIGBITS);
         let rsum;
         let gsum;
         let bsum;
@@ -4107,7 +6418,9 @@ Is it scaring you off?`,
             for (let b3 = b1; b3 <= b22; b3++) {
               const index = getColorIndex(r5, g3, b3);
               const h4 = hist[index];
-              if (!h4) continue;
+              if (!h4) {
+                continue;
+              }
               ntot += h4;
               rsum += h4 * (r5 + 0.5) * mult;
               gsum += h4 * (g3 + 0.5) * mult;
@@ -4119,9 +6432,9 @@ Is it scaring you off?`,
           this._avg = [~~(rsum / ntot), ~~(gsum / ntot), ~~(bsum / ntot)];
         } else {
           this._avg = [
-            ~~(mult * (r1 + r22 + 1) / 2),
-            ~~(mult * (g1 + g2 + 1) / 2),
-            ~~(mult * (b1 + b22 + 1) / 2)
+            ~~((mult * (r1 + r22 + 1)) / 2),
+            ~~((mult * (g1 + g2 + 1)) / 2),
+            ~~((mult * (b1 + b22 + 1)) / 2),
           ];
         }
       }
@@ -4139,8 +6452,12 @@ Is it scaring you off?`,
       const { hist, getColorIndex } = this.histogram;
       const { r1, r2: r22, g1, g2, b1, b2: b22 } = this.dimension;
       const count = this.count();
-      if (!count) return [];
-      if (count === 1) return [this.clone()];
+      if (!count) {
+        return [];
+      }
+      if (count === 1) {
+        return [this.clone()];
+      }
       const rw = r22 - r1 + 1;
       const gw = g2 - g1 + 1;
       const bw = b22 - b1 + 1;
@@ -4158,7 +6475,9 @@ Is it scaring you off?`,
           for (let g3 = g1; g3 <= g2; g3++) {
             for (let b3 = b1; b3 <= b22; b3++) {
               const index = getColorIndex(r5, g3, b3);
-              if (!hist[index]) continue;
+              if (!hist[index]) {
+                continue;
+              }
               sum += hist[index];
             }
           }
@@ -4173,7 +6492,9 @@ Is it scaring you off?`,
           for (let r5 = r1; r5 <= r22; r5++) {
             for (let b3 = b1; b3 <= b22; b3++) {
               const index = getColorIndex(r5, g3, b3);
-              if (!hist[index]) continue;
+              if (!hist[index]) {
+                continue;
+              }
               sum += hist[index];
             }
           }
@@ -4188,7 +6509,9 @@ Is it scaring you off?`,
           for (let r5 = r1; r5 <= r22; r5++) {
             for (let g3 = g1; g3 <= g2; g3++) {
               const index = getColorIndex(r5, g3, b3);
-              if (!hist[index]) continue;
+              if (!hist[index]) {
+                continue;
+              }
               sum += hist[index];
             }
           }
@@ -4200,8 +6523,12 @@ Is it scaring you off?`,
       const reverseSum = new Uint32Array(accSum.length);
       for (let i5 = 0; i5 < accSum.length; i5++) {
         const d3 = accSum[i5];
-        if (!d3) continue;
-        if (splitPoint < 0 && d3 > total / 2) splitPoint = i5;
+        if (!d3) {
+          continue;
+        }
+        if (splitPoint < 0 && d3 > total / 2) {
+          splitPoint = i5;
+        }
         reverseSum[i5] = total - d3;
       }
       const vbox = this;
@@ -4221,9 +6548,13 @@ Is it scaring you off?`,
           d22 = Math.max(d1, ~~(splitPoint - 1 - left / 2));
           d22 = Math.min(vbox.dimension[dim2], d22);
         }
-        while (!accSum[d22]) d22++;
+        while (!accSum[d22]) {
+          d22++;
+        }
         let c22 = reverseSum[d22];
-        while (!c22 && accSum[d22 - 1]) c22 = reverseSum[--d22];
+        while (!c22 && accSum[d22 - 1]) {
+          c22 = reverseSum[--d22];
+        }
         vbox1.dimension[dim2] = d22;
         vbox2.dimension[dim1] = d22 + 1;
         return [vbox1, vbox2];
@@ -4275,14 +6606,17 @@ Is it scaring you off?`,
       const vbox = pq.pop();
       if (vbox && vbox.count() > 0) {
         const [vbox1, vbox2] = vbox.split();
-        if (!vbox1) break;
+        if (!vbox1) {
+          break;
+        }
         pq.push(vbox1);
-        if (vbox2 && vbox2.count() > 0) pq.push(vbox2);
+        if (vbox2 && vbox2.count() > 0) {
+          pq.push(vbox2);
+        }
         if (pq.size() === lastSize) {
           break;
-        } else {
-          lastSize = pq.size();
         }
+        lastSize = pq.size();
       } else {
         break;
       }
@@ -4297,9 +6631,7 @@ Is it scaring you off?`,
     const pq = new PQueue((a5, b3) => a5.count() - b3.count());
     pq.push(vbox);
     _splitBoxes(pq, fractByPopulations * opts.colorCount);
-    const pq2 = new PQueue(
-      (a5, b3) => a5.count() * a5.volume() - b3.count() * b3.volume()
-    );
+    const pq2 = new PQueue((a5, b3) => a5.count() * a5.volume() - b3.count() * b3.volume());
     pq2.contents = pq.contents;
     _splitBoxes(pq2, opts.colorCount - pq2.size());
     return generateSwatches(pq2);
@@ -4330,7 +6662,7 @@ Is it scaring you off?`,
     minVibrantSaturation: 0.35,
     weightSaturation: 3,
     weightLuma: 6.5,
-    weightPopulation: 0.5
+    weightPopulation: 0.5,
   };
   function _findMaxPopulation(swatches) {
     let p4 = 0;
@@ -4340,16 +6672,33 @@ Is it scaring you off?`,
     return p4;
   }
   function _isAlreadySelected(palette, s4) {
-    return palette.Vibrant === s4 || palette.DarkVibrant === s4 || palette.LightVibrant === s4 || palette.Muted === s4 || palette.DarkMuted === s4 || palette.LightMuted === s4;
+    return (
+      palette.Vibrant === s4 ||
+      palette.DarkVibrant === s4 ||
+      palette.LightVibrant === s4 ||
+      palette.Muted === s4 ||
+      palette.DarkMuted === s4 ||
+      palette.LightMuted === s4
+    );
   }
-  function _createComparisonValue(saturation, targetSaturation, luma, targetLuma, population, maxPopulation, opts) {
+  function _createComparisonValue(
+    saturation,
+    targetSaturation,
+    luma,
+    targetLuma,
+    population,
+    maxPopulation,
+    opts,
+  ) {
     function weightedMean(...values) {
       let sum = 0;
       let weightSum = 0;
       for (let i5 = 0; i5 < values.length; i5 += 2) {
         const value = values[i5];
         const weight = values[i5 + 1];
-        if (!value || !weight) continue;
+        if (!(value && weight)) {
+          continue;
+        }
         sum += value * weight;
         weightSum += weight;
       }
@@ -4364,15 +6713,32 @@ Is it scaring you off?`,
       invertDiff(luma, targetLuma),
       opts.weightLuma,
       population / maxPopulation,
-      opts.weightPopulation
+      opts.weightPopulation,
     );
   }
-  function _findColorVariation(palette, swatches, maxPopulation, targetLuma, minLuma, maxLuma, targetSaturation, minSaturation, maxSaturation, opts) {
+  function _findColorVariation(
+    palette,
+    swatches,
+    maxPopulation,
+    targetLuma,
+    minLuma,
+    maxLuma,
+    targetSaturation,
+    minSaturation,
+    maxSaturation,
+    opts,
+  ) {
     let max = null;
     let maxValue = 0;
     swatches.forEach((swatch) => {
       const [, s4, l4] = swatch.hsl;
-      if (s4 >= minSaturation && s4 <= maxSaturation && l4 >= minLuma && l4 <= maxLuma && !_isAlreadySelected(palette, swatch)) {
+      if (
+        s4 >= minSaturation &&
+        s4 <= maxSaturation &&
+        l4 >= minLuma &&
+        l4 <= maxLuma &&
+        !_isAlreadySelected(palette, swatch)
+      ) {
         const value = _createComparisonValue(
           s4,
           targetSaturation,
@@ -4380,7 +6746,7 @@ Is it scaring you off?`,
           targetLuma,
           swatch.population,
           maxPopulation,
-          opts
+          opts,
         );
         if (max === null || value > maxValue) {
           max = swatch;
@@ -4397,7 +6763,7 @@ Is it scaring you off?`,
       LightVibrant: null,
       Muted: null,
       DarkMuted: null,
-      LightMuted: null
+      LightMuted: null,
     };
     palette.Vibrant = _findColorVariation(
       palette,
@@ -4409,7 +6775,7 @@ Is it scaring you off?`,
       opts.targetVibrantSaturation,
       opts.minVibrantSaturation,
       1,
-      opts
+      opts,
     );
     palette.LightVibrant = _findColorVariation(
       palette,
@@ -4421,7 +6787,7 @@ Is it scaring you off?`,
       opts.targetVibrantSaturation,
       opts.minVibrantSaturation,
       1,
-      opts
+      opts,
     );
     palette.DarkVibrant = _findColorVariation(
       palette,
@@ -4433,7 +6799,7 @@ Is it scaring you off?`,
       opts.targetVibrantSaturation,
       opts.minVibrantSaturation,
       1,
-      opts
+      opts,
     );
     palette.Muted = _findColorVariation(
       palette,
@@ -4445,7 +6811,7 @@ Is it scaring you off?`,
       opts.targetMutesSaturation,
       0,
       opts.maxMutesSaturation,
-      opts
+      opts,
     );
     palette.LightMuted = _findColorVariation(
       palette,
@@ -4457,7 +6823,7 @@ Is it scaring you off?`,
       opts.targetMutesSaturation,
       0,
       opts.maxMutesSaturation,
-      opts
+      opts,
     );
     palette.DarkMuted = _findColorVariation(
       palette,
@@ -4469,12 +6835,12 @@ Is it scaring you off?`,
       opts.targetMutesSaturation,
       0,
       opts.maxMutesSaturation,
-      opts
+      opts,
     );
     return palette;
   }
   function _generateEmptySwatches(palette, _maxPopulation, opts) {
-    if (!palette.Vibrant && !palette.DarkVibrant && !palette.LightVibrant) {
+    if (!(palette.Vibrant || palette.DarkVibrant || palette.LightVibrant)) {
       if (!palette.DarkVibrant && palette.DarkMuted) {
         let [h4, s4, l4] = palette.DarkMuted.hsl;
         l4 = opts.targetDarkLuma;
@@ -4521,19 +6887,19 @@ Is it scaring you off?`,
       palette.LightMuted = new Swatch(hslToRgb(h4, s4, l4), 0);
     }
   }
-  var DefaultGenerator = ((swatches, opts) => {
-    opts = Object.assign({}, DefaultOpts, opts);
+  var DefaultGenerator = (swatches, opts) => {
+    opts = { ...DefaultOpts, ...opts };
     const maxPopulation = _findMaxPopulation(swatches);
     const palette = _generateVariationColors(swatches, maxPopulation, opts);
     _generateEmptySwatches(palette, maxPopulation, opts);
     return palette;
-  });
+  };
 
   // node_modules/node-vibrant/dist/esm/pipeline/index.js
-  var pipeline = new BasicPipeline().filter.register(
-    "default",
-    (r5, g2, b3, a5) => a5 >= 125 && !(r5 > 250 && g2 > 250 && b3 > 250)
-  ).quantizer.register("mmcq", MMCQ).generator.register("default", DefaultGenerator);
+  var pipeline = new BasicPipeline().filter
+    .register("default", (r5, g2, b3, a5) => a5 >= 125 && !(r5 > 250 && g2 > 250 && b3 > 250))
+    .quantizer.register("mmcq", MMCQ)
+    .generator.register("default", DefaultGenerator);
 
   // node_modules/node-vibrant/dist/esm/browser.js
   Vibrant.use(pipeline);
@@ -4551,7 +6917,7 @@ Is it scaring you off?`,
       const plantPreviewDiv = document.createElement("div");
       plantPreviewDiv.id = "plantPreviewWidget";
       const plantData = await browser.runtime.sendMessage({
-        action: "getPlantAppData"
+        action: "getPlantAppData",
       });
       const plantTitle = document.createElement("div");
       plantTitle.id = "plant-preview-title";
@@ -4573,7 +6939,7 @@ Is it scaring you off?`,
       await migratePlantData();
     }
     let plantData = await browser.runtime.sendMessage({
-      action: "getPlantAppData"
+      action: "getPlantAppData",
     });
     const outdated = checkIfOutdated(plantData.plantVersion);
     plantDiv.innerHTML = "";
@@ -4586,7 +6952,9 @@ Is it scaring you off?`,
       return plantDiv;
     }
     plantData = calculateGrowth(plantData);
-    if (plantData.birthday != null) plantDiv.appendChild(createPlantStreak(plantData));
+    if (plantData.birthday != null) {
+      plantDiv.appendChild(createPlantStreak(plantData));
+    }
     plantDiv.appendChild(createPlantVisual(plantData));
     plantDiv.appendChild(await createPlantBottomUI(plantData));
     return plantDiv;
@@ -4649,7 +7017,8 @@ Is it scaring you off?`,
     const currentTime = /* @__PURE__ */ new Date();
     const lastWaterTime = new Date(data2.lastWaterTime);
     const timeSinceLastWater = currentTime - lastWaterTime;
-    document.getElementById("glass-fill").style.height = `${calculatePercentile(timeSinceLastWater / 1e3)}%`;
+    document.getElementById("glass-fill").style.height =
+      `${calculatePercentile(timeSinceLastWater / 1e3)}%`;
     document.getElementById("water_time").innerText = getTimeInCorrectFormat(timeSinceLastWater);
   }
   function createPlantStreak(data2) {
@@ -4665,7 +7034,7 @@ Is it scaring you off?`,
     const updatePromptContainer = document.createElement("div");
     updatePromptContainer.id = "update-prompt-container";
     const updatePromptTitle = document.createElement("h1");
-    updatePromptTitle.innerText = `Update Required!`;
+    updatePromptTitle.innerText = "Update Required!";
     const updatePromptDescription = document.createElement("p");
     updatePromptDescription.innerHTML = `You have to reset to be up to date 
 Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
@@ -4681,18 +7050,24 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   async function resetPlant() {
     await browser.runtime.sendMessage({
       action: "setPlantAppData",
-      data: null
+      data: null,
     });
     createPlantWidget(document.getElementById("plantWidget"));
   }
   function calculatePercentile(t5) {
-    const totalTime = 259200;
+    const totalTime = 259_200;
     return Math.max(0, 100 * (1 - t5 / totalTime));
   }
   function getTimeInCorrectFormat(t5) {
-    if (t5 / 60 / 1e3 < 1) return "Now";
-    if (t5 / 60 / 60 / 1e3 < 1) return `${Math.round(t5 / 60 / 1e3)}min ago`;
-    if (t5 / 60 / 60 / 1e3 / 24 < 1) return `${Math.round(t5 / 60 / 60 / 1e3)}h ago`;
+    if (t5 / 60 / 1e3 < 1) {
+      return "Now";
+    }
+    if (t5 / 60 / 60 / 1e3 < 1) {
+      return `${Math.round(t5 / 60 / 1e3)}min ago`;
+    }
+    if (t5 / 60 / 60 / 1e3 / 24 < 1) {
+      return `${Math.round(t5 / 60 / 60 / 1e3)}h ago`;
+    }
     return `${Math.round(t5 / 60 / 60 / 1e3 / 24)}d ago`;
   }
   function createRemoveButton(isAlive) {
@@ -4738,12 +7113,12 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   }
   async function userWateredPlant() {
     const data2 = await browser.runtime.sendMessage({
-      action: "getPlantAppData"
+      action: "getPlantAppData",
     });
     data2.lastWaterTime = /* @__PURE__ */ new Date();
     await browser.runtime.sendMessage({
       action: "setPlantAppData",
-      data: data2
+      data: data2,
     });
     updatePlantBottomUI(data2);
   }
@@ -4758,17 +7133,23 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       data2.age += 1;
       data2.lastGrowTime = currentTime;
     }
-    if (data2.age > 8) data2.age = 8;
-    if (daysSinceLastWater > 3 && data2.age !== 1) data2.isAlive = false;
-    if (data2.age > 1 && data2.birthday == null) data2.birthday = currentTime;
+    if (data2.age > 8) {
+      data2.age = 8;
+    }
+    if (daysSinceLastWater > 3 && data2.age !== 1) {
+      data2.isAlive = false;
+    }
+    if (data2.age > 1 && data2.birthday == null) {
+      data2.birthday = currentTime;
+    }
     if (data2.birthday != null && data2.isAlive) {
       data2.daysSinceBirthday = Math.round(
-        (currentTime - new Date(data2.birthday)) / (1e3 * 60 * 60 * 24) + 1
+        (currentTime - new Date(data2.birthday)) / (1e3 * 60 * 60 * 24) + 1,
       );
     }
     browser.runtime.sendMessage({
       action: "setPlantAppData",
-      data: data2
+      data: data2,
     });
     return data2;
   }
@@ -4783,7 +7164,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       "#6024c9",
       "#de51c1",
       "#d8d475",
-      "#f5cb04"
+      "#f5cb04",
     ];
     const plantData = {
       age: 1,
@@ -4793,11 +7174,11 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       plantVersion,
       birthday: null,
       daysSinceBirthday: 0,
-      isAlive: true
+      isAlive: true,
     };
     browser.runtime.sendMessage({
       action: "setPlantAppData",
-      data: plantData
+      data: plantData,
     });
     createPlantWidget(document.getElementById("plantWidget"));
   }
@@ -5452,7 +7833,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   // src/main-features/globalchat.ts
   var GC_DOMAINS = {
     main: "https://gc.smartschoolplusplus.com",
-    beta: "https://gcbeta.smartschoolplusplus.com"
+    beta: "https://gcbeta.smartschoolplusplus.com",
   };
   var GlobalChatWindow = class extends BaseWindow {
     iframe;
@@ -5478,7 +7859,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     if (gcWindow?.beta !== beta) {
       recreateGlobalChat();
     }
-    if (!gcWindow || !gcWindow.element?.isConnected) {
+    if (!(gcWindow && gcWindow.element?.isConnected)) {
       gcWindow = new GlobalChatWindow();
       gcWindow.beta = beta;
       await gcWindow.create();
@@ -5516,7 +7897,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         break;
       case "plantapi.v1.get_stage_svg":
         response = {
-          svg: getPlantSvg(stageDataToInternalPlantData(e5.data.stageData))
+          svg: getPlantSvg(stageDataToInternalPlantData(e5.data.stageData)),
         };
         break;
     }
@@ -5527,30 +7908,30 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     return {
       uniqueColor: stageData.color,
       isAlive: stageData.isAlive,
-      age: stageData.stage
+      age: stageData.stage,
     };
   }
   async function getPlantV1() {
     const data2 = await browser.runtime.sendMessage({
-      action: "getPlantAppData"
+      action: "getPlantAppData",
     });
     if (!data2) {
       return {
         stageData: {
           color: "#fff",
           isAlive: true,
-          stage: 0
+          stage: 0,
         },
-        age: 0
+        age: 0,
       };
     }
     return {
       stageData: {
         color: data2.uniqueColor,
         isAlive: data2.isAlive,
-        stage: data2.age
+        stage: data2.age,
       },
-      age: data2.daysSinceBirthday
+      age: data2.daysSinceBirthday,
     };
   }
 
@@ -5594,17 +7975,14 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           async () => {
             return await getExtensionImage(`theme-backgrounds/compressed/${this.name}.jpg`);
           },
-          true
+          true,
         );
         this.element.style.setProperty("--background-image-local", `url(${imageURL.url})`);
       }
     }
     updateElement() {
       Object.keys(this.currentTheme.cssProperties).forEach((key) => {
-        this.element.style.setProperty(
-          `${key}-local`,
-          this.currentTheme.cssProperties[key]
-        );
+        this.element.style.setProperty(`${key}-local`, this.currentTheme.cssProperties[key]);
       });
     }
     async click() {
@@ -5612,15 +7990,14 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       await this.onClick();
       this.element.classList.add("is-selected");
     }
-    async onClick() {
-    }
+    async onClick() {}
     async updateSelection() {
       if (this.name === currentThemeName) {
         this.element.classList.add("is-selected");
         this.updateImage(true);
       } else {
         this.element.classList.remove("is-selected");
-        this.element.style.setProperty("--background-image-local", `url()`);
+        this.element.style.setProperty("--background-image-local", "url()");
       }
     }
     async update() {
@@ -5657,18 +8034,22 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     async renderThemeOptions() {
       for (let i5 = 1; i5 <= this.themeOptions.length; i5++) {
         const option = this.themeOptions[i5 - 1];
-        if (!option) break;
+        if (!option) {
+          break;
+        }
         option.render();
         this.selector.style.height = `${this.calculateHeight(i5)}px`;
         this.selector.appendChild(option.element);
-        if (document.body.classList.contains("enableAnimations")) await delay(20);
+        if (document.body.classList.contains("enableAnimations")) {
+          await delay(20);
+        }
       }
     }
     async updateThemeOptions() {
       const themes2 = await browser.runtime.sendMessage({
         action: "getThemes",
         categories: ["quickSettings"],
-        includeHidden: true
+        includeHidden: true,
       });
       const themeOptionNames = this.themeOptions.map((option) => {
         return option.name;
@@ -5707,7 +8088,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     async updateInput() {
       const currentOption = new CompactThemeOption(
         currentThemeName,
-        await getTheme(currentThemeName)
+        await getTheme(currentThemeName),
       );
       currentOption.onClick = async () => {
         this.selectorIsOpen = !this.selectorIsOpen;
@@ -5742,7 +8123,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       const themes2 = await browser.runtime.sendMessage({
         action: "getThemes",
         categories: ["quickSettings"],
-        includeHidden: true
+        includeHidden: true,
       });
       this.themeOptions = [];
       this.createThemeOptions(themes2);
@@ -5750,7 +8131,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       this.createInput();
       document.addEventListener("click", (e5) => {
         if (e5.target instanceof HTMLElement) {
-          if (e5.target === this.input || this.input.contains(e5.target)) return;
+          if (e5.target === this.input || this.input.contains(e5.target)) {
+            return;
+          }
           this.selectorIsOpen = false;
           this.updateSelectorStatus();
         }
@@ -5766,18 +8149,14 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   var quickSettingsBackgroundImageSelector = new ImageSelector("backgroundImage", true);
   async function storeQuickSettings() {
     const oldData = await browser.runtime.sendMessage({
-      action: "getSettingsData"
+      action: "getSettingsData",
     });
     const data2 = structuredClone(oldData);
-    const backgroundBlurAmountSlider = document.getElementById(
-      "background-blur-amount-slider"
-    );
+    const backgroundBlurAmountSlider = document.getElementById("background-blur-amount-slider");
     if (backgroundBlurAmountSlider) {
       data2.appearance.background.blur = Number(backgroundBlurAmountSlider.value);
     }
-    const performanceModeToggle = document.getElementById(
-      "performance-mode-toggle"
-    );
+    const performanceModeToggle = document.getElementById("performance-mode-toggle");
     if (performanceModeToggle) {
       data2.other.performanceMode = performanceModeToggle.checked;
     }
@@ -5791,19 +8170,15 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   }
   async function loadQuickSettings() {
     const data2 = await browser.runtime.sendMessage({
-      action: "getSettingsData"
+      action: "getSettingsData",
     });
     quickSettingsBackgroundImageSelector.id = data2.appearance.theme;
     quickSettingsBackgroundImageSelector.loadImageData();
-    const backgroundBlurAmountSlider = document.getElementById(
-      "background-blur-amount-slider"
-    );
+    const backgroundBlurAmountSlider = document.getElementById("background-blur-amount-slider");
     if (backgroundBlurAmountSlider) {
       backgroundBlurAmountSlider.value = data2.appearance.background.blur;
     }
-    const performanceModeToggle = document.getElementById(
-      "performance-mode-toggle"
-    );
+    const performanceModeToggle = document.getElementById("performance-mode-toggle");
     if (performanceModeToggle) {
       performanceModeToggle.checked = data2.other.performanceMode;
     }
@@ -5824,7 +8199,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   }
   async function openQuickSettings() {
     const win = document.getElementById("quickSettings");
-    if (!win) return;
+    if (!win) {
+      return;
+    }
     win.classList.remove("qs-hidden");
     await loadQuickSettings();
     quickSettingsWindowIsHidden = false;
@@ -5915,14 +8292,22 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       });
     }
     document.addEventListener("click", (e5) => {
-      if (quickSettingsWindowIsHidden) return;
+      if (quickSettingsWindowIsHidden) {
+        return;
+      }
       const target = e5.target;
-      if (!target) return;
+      if (!target) {
+        return;
+      }
       if (target.id === "extraSettingsButton") {
         closeQuickSettings();
         return;
       }
-      if (target.id === "quickSettings" || quickSettingsWindow.contains(target) || target.id === "quickSettingsButton") {
+      if (
+        target.id === "quickSettings" ||
+        quickSettingsWindow.contains(target) ||
+        target.id === "quickSettingsButton"
+      ) {
         return;
       }
       closeQuickSettings();
@@ -5946,8 +8331,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   // src/main-features/appearance/background-image.ts
   async function setBackground(themeName) {
     function displayBackgroundImage(imageSrc) {
-      document.documentElement.style.setProperty("--background-color", `transparent`);
-      const imgContainer = document.getElementById("smpp-background-image-container") || document.createElement("div");
+      document.documentElement.style.setProperty("--background-color", "transparent");
+      const imgContainer =
+        document.getElementById("smpp-background-image-container") || document.createElement("div");
       imgContainer.id = "smpp-background-image-container";
       imgContainer.classList.add("smpp-background-image-container");
       const img = document.getElementById("smpp-background-image") || document.createElement("img");
@@ -5960,7 +8346,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         img.classList.add("image-not-available");
         img.src = "";
       }
-      if (!document.getElementById("smpp-background-image") && !document.getElementById("tinymce")) {
+      if (
+        !(document.getElementById("smpp-background-image") || document.getElementById("tinymce"))
+      ) {
         document.body.appendChild(imgContainer);
         imgContainer.appendChild(img);
       }
@@ -5970,7 +8358,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       async () => {
         return await getExtensionImage(`theme-backgrounds/${themeName}.jpg`);
       },
-      false
+      false,
     );
     if (await isValidImage(imageURL.url)) {
       displayBackgroundImage(imageURL.url);
@@ -5986,7 +8374,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   async function getTheme(name2) {
     const theme = await browser.runtime.sendMessage({
       action: "getTheme",
-      name: name2
+      name: name2,
     });
     return theme;
   }
@@ -6045,16 +8433,19 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       const rect = this.parentContainer.getBoundingClientRect();
       const x3 = e5.clientX - rect.left;
       const y3 = e5.clientY - rect.top;
-      const xPercent = x3 / rect.width * 100;
-      const yPercent = y3 / rect.height * 100;
-      if (this.enableX) this.xPos = Math.max(0, Math.min(100, xPercent));
-      if (this.enableY) this.yPos = Math.max(0, Math.min(100, yPercent));
+      const xPercent = (x3 / rect.width) * 100;
+      const yPercent = (y3 / rect.height) * 100;
+      if (this.enableX) {
+        this.xPos = Math.max(0, Math.min(100, xPercent));
+      }
+      if (this.enableY) {
+        this.yPos = Math.max(0, Math.min(100, yPercent));
+      }
       this.updateCursorPosition();
       this.onDrag();
     }
     // Overwrite this if needed
-    onDrag() {
-    }
+    onDrag() {}
     updateCursorPosition() {
       this.element.style.left = `${this.xPos}%`;
       this.element.style.top = `${this.yPos}%`;
@@ -6128,7 +8519,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     createFieldContainer() {
       this.fieldContainer.classList.add("color-picker-field");
       const horizontalContainer = document.createElement("div");
-      horizontalContainer.style.background = `linear-gradient(to left, var(--max-sat) 0%, rgba(255, 255, 255, 1) 100%)`;
+      horizontalContainer.style.background =
+        "linear-gradient(to left, var(--max-sat) 0%, rgba(255, 255, 255, 1) 100%)";
       const verticalContainer = document.createElement("div");
       verticalContainer.style.background = "linear-gradient(to top, black, transparent)";
       this.fieldContainer.appendChild(horizontalContainer);
@@ -6147,7 +8539,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         button.addEventListener("click", () => {
           this.copyHexToClipBoard();
           const svg = button.querySelector("svg");
-          if (!svg) return;
+          if (!svg) {
+            return;
+          }
           svg.style.fill = "var(--color-text)";
           button.innerHTML = doneSvg;
           setTimeout(() => {
@@ -6196,8 +8590,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       this.updateColorPicker();
       return this.element;
     }
-    async onChange() {
-    }
+    async onChange() {}
   };
   var Tile = class {
     element = document.createElement("div");
@@ -6212,17 +8605,13 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       await this.createContent();
       return this.element;
     }
-    async updateImage(_currentTheme, _forceReload = false) {
-    }
+    async updateImage(_currentTheme, _forceReload = false) {}
     // Overide this in the implementation
-    updateSelection() {
-    }
+    updateSelection() {}
     // Overide in de implementation
-    async onClick(_e) {
-    }
+    async onClick(_e) {}
     // Overide this in the implementation
-    async createContent() {
-    }
+    async createContent() {}
   };
   var ThemeTile = class extends Tile {
     name;
@@ -6275,7 +8664,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       favoriteButton.addEventListener("click", async () => {
         await this.favoriteToggle();
       });
-      if (this.isFavorite) this.element.classList.add("is-favorite");
+      if (this.isFavorite) {
+        this.element.classList.add("is-favorite");
+      }
       const shareButton = document.createElement("button");
       shareButton.classList.add("bottom-container-button");
       shareButton.innerHTML = shareSvg;
@@ -6316,16 +8707,18 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           async () => {
             return await getExtensionImage(`theme-backgrounds/compressed/${this.name}.jpg`);
           },
-          true
+          true,
         );
         if (await isValidImage(await imageURL.url)) {
           this.element.style.setProperty("--background-image-local", `url(${await imageURL.url})`);
         } else {
-          this.element.style.setProperty("--background-image-local", `url()`);
+          this.element.style.setProperty("--background-image-local", "url()");
         }
         if (isFirefox && imageURL.type === "file") {
           const imageContainer = this.element.querySelector(".image-container");
-          if (!imageContainer) return;
+          if (!imageContainer) {
+            return;
+          }
           const stupidImageContainer = document.createElement("img");
           stupidImageContainer.classList.add("image-container", "firefox-container");
           if (await isValidImage(imageURL.url)) {
@@ -6334,7 +8727,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             stupidImageContainer.src = "";
           }
           const bottomContainer = this.element.querySelector(".theme-tile-bottom");
-          if (!bottomContainer) return;
+          if (!bottomContainer) {
+            return;
+          }
           imageContainer.remove();
           this.element.prepend(stupidImageContainer);
         } else if (isFirefox) {
@@ -6350,7 +8745,11 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     async onClick(e5) {
       if (e5.target instanceof HTMLElement) {
         const target = e5.target;
-        if (target.classList.contains("theme-tile-title") || target.classList.contains("image-container") || target.classList.contains("theme-tile")) {
+        if (
+          target.classList.contains("theme-tile-title") ||
+          target.classList.contains("image-container") ||
+          target.classList.contains("theme-tile")
+        ) {
           await updateTheme(this.name);
           await settingsWindow.loadPage(false);
           await loadQuickSettings();
@@ -6360,13 +8759,13 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     async favoriteToggle() {
       this.isFavorite = !this.isFavorite;
       const data2 = await browser.runtime.sendMessage({
-        action: "getSettingsData"
+        action: "getSettingsData",
       });
       const updateFavorite = async () => {
         await browser.runtime.sendMessage({
           action: "setSetting",
           name: "appearance.quickSettingsThemes",
-          data: quickSettingsThemes
+          data: quickSettingsThemes,
         });
         this.element.classList.toggle("is-favorite");
         this.onFavoriteToggle();
@@ -6395,25 +8794,29 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     async duplicate() {
       const newThemeName = await browser.runtime.sendMessage({
         action: "saveCustomTheme",
-        data: await getTheme(this.name)
+        data: await getTheme(this.name),
       });
       const result = await browser.runtime.sendMessage({
         action: "getImage",
-        id: this.name
+        id: this.name,
       });
       const compressedResult = await browser.runtime.sendMessage({
         action: "getImage",
-        id: `compressed-${this.name}`
+        id: `compressed-${this.name}`,
       });
       if (result.metaData.type === "default") {
         const base64 = await convertLinkToBase64(
-          await getExtensionImage(`theme-backgrounds/${this.name}.jpg`)
+          await getExtensionImage(`theme-backgrounds/${this.name}.jpg`),
         );
-        if (base64) result.imageData = base64;
+        if (base64) {
+          result.imageData = base64;
+        }
         const compressedBase64 = await convertLinkToBase64(
-          await getExtensionImage(`theme-backgrounds/compressed/${this.name}.jpg`)
+          await getExtensionImage(`theme-backgrounds/compressed/${this.name}.jpg`),
         );
-        if (compressedBase64) compressedResult.imageData = compressedBase64;
+        if (compressedBase64) {
+          compressedResult.imageData = compressedBase64;
+        }
         if (!this.isCustom) {
           result.metaData.type = "file";
           result.metaData.link = `${this.name}.jpg`;
@@ -6425,14 +8828,14 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         await browser.runtime.sendMessage({
           action: "setImage",
           id: newThemeName,
-          data: result
+          data: result,
         });
       }
       if (await isValidImage(compressedResult.imageData)) {
         await browser.runtime.sendMessage({
           action: "setImage",
           id: `compressed-${newThemeName}`,
-          data: compressedResult
+          data: compressedResult,
         });
       }
       this.onDuplicate(newThemeName);
@@ -6450,7 +8853,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         if (shareUrl) {
           navigator.clipboard.writeText(shareUrl);
           const svg = copyToClipboardButton.querySelector("svg");
-          if (!svg) return;
+          if (!svg) {
+            return;
+          }
           svg.style.fill = "var(--color-text)";
           copyToClipboardButton.innerHTML = doneSvg;
           setTimeout(() => {
@@ -6470,7 +8875,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           const nonEditableValues = [
             "--color-homepage-sidebars-bg",
             "--darken-background",
-            "--color-splashtext"
+            "--color-splashtext",
           ];
           const editableValues = Object.keys(cssProperties).filter((property) => {
             return !nonEditableValues.includes(property);
@@ -6516,7 +8921,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           async () => {
             return await getExtensionImage(`theme-backgrounds/compressed/${this.name}.jpg`);
           },
-          false
+          false,
         );
         const image = document.createElement("img");
         image.classList.add("sharing-image");
@@ -6544,8 +8949,10 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         Object.values(generateColorPreviews(getEditableValues(theme.cssProperties))).forEach(
           (preview) => {
             const actualPreview = Object.values(preview)[0];
-            if (actualPreview) colorPreviewsContainer.appendChild(actualPreview);
-          }
+            if (actualPreview) {
+              colorPreviewsContainer.appendChild(actualPreview);
+            }
+          },
         );
         tile.appendChild(colorPreviewsContainer);
         copyContainer.appendChild(linkOutput);
@@ -6560,7 +8967,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       new Toast("Uploading theme...", "info").render();
       const resp = await browser.runtime.sendMessage({
         action: "shareTheme",
-        name: this.name
+        name: this.name,
       });
       if (resp.error) {
         console.error("Failed to share theme", resp.error);
@@ -6581,20 +8988,17 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       this.onShare();
     }
     // Overide in de implementation
-    async onFavoriteToggle() {
-    }
+    async onFavoriteToggle() {}
     // Overide in de implementation
-    async onShare() {
-    }
+    async onShare() {}
     // Overide in de implementation
-    async onDuplicate(_newThemeName) {
-    }
+    async onDuplicate(_newThemeName) {}
   };
   async function updateTheme(name2) {
     await browser.runtime.sendMessage({
       action: "setSetting",
       name: "appearance.theme",
-      data: name2
+      data: name2,
     });
     Promise.all([setTheme(name2), setBackground(name2)]);
   }
@@ -6608,12 +9012,14 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       const firstThemeInCategory = await browser.runtime.sendMessage({
         action: "getFirstThemeInCategory",
         category: this.category,
-        includeHidden: true
+        includeHidden: true,
       });
-      if (!firstThemeInCategory) return;
+      if (!firstThemeInCategory) {
+        return;
+      }
       const theme = await browser.runtime.sendMessage({
         action: "getTheme",
-        name: firstThemeInCategory
+        name: firstThemeInCategory,
       });
       Object.keys(theme.cssProperties).forEach((key) => {
         this.element.style.setProperty(`${key}-local`, theme.cssProperties[key]);
@@ -6621,7 +9027,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       if (this.category === "custom" || this.category === "quickSettings") {
         this.element.classList.add("use-default-colors");
       }
-      this.element.style.setProperty("--background-image-local", `url()`);
+      this.element.style.setProperty("--background-image-local", "url()");
       this.element.appendChild(this.createImageContainer());
       this.element.appendChild(this.createBottomContainer());
     }
@@ -6689,7 +9095,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     async onClick() {
       const newTheme = await browser.runtime.sendMessage({
         action: "saveCustomTheme",
-        data: await getTheme("defaultCustom")
+        data: await getTheme("defaultCustom"),
       });
       await settingsWindow.themeSelector.updateSelectorContent();
       await settingsWindow.loadPage(false);
@@ -6780,14 +9186,16 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       this.updateImages();
     }
     async updateThemeTiles() {
-      if (this.currentCategory === "all") return;
+      if (this.currentCategory === "all") {
+        return;
+      }
       const themes2 = await browser.runtime.sendMessage({
         action: "getThemes",
         categories: [this.currentCategory],
-        includeHidden: true
+        includeHidden: true,
       });
       const data2 = await browser.runtime.sendMessage({
-        action: "getSettingsData"
+        action: "getSettingsData",
       });
       const visibleThemeTiles = this.content.querySelectorAll(".theme-tile");
       const visibleThemeTilesArray = [];
@@ -6804,7 +9212,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         const customThemes = await browser.runtime.sendMessage({
           action: "getThemes",
           categories: ["custom"],
-          includeHidden: true
+          includeHidden: true,
         });
         correctThemeNames2.forEach(async (themeName) => {
           if (!visibleThemeNames2.includes(themeName)) {
@@ -6812,7 +9220,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             const newTile = this.createThemeTile(
               themeName,
               isFavorite,
-              Object.keys(customThemes).includes(themeName)
+              Object.keys(customThemes).includes(themeName),
             );
             const createThemeButton = this.content.querySelector(".create-theme-button");
             if (createThemeButton) {
@@ -6829,15 +9237,25 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         visibleThemeNames2.forEach(async (themeName) => {
           if (!correctThemeNames2.includes(themeName)) {
             const element = visibleThemeTilesArray.find((element2) => {
-              if (element2.dataset.name === themeName) return element2;
+              if (element2.dataset.name === themeName) {
+                return element2;
+              }
               return false;
             });
-            if (!element) return;
-            if (element.classList.contains("create-theme-button")) return;
+            if (!element) {
+              return;
+            }
+            if (element.classList.contains("create-theme-button")) {
+              return;
+            }
             this.content.removeChild(element);
             this.currentTiles = this.currentTiles.filter((tile) => {
-              if (tile instanceof AddCustomTheme) return true;
-              if (tile instanceof ThemeTile) return tile.name !== themeName;
+              if (tile instanceof AddCustomTheme) {
+                return true;
+              }
+              if (tile instanceof ThemeTile) {
+                return tile.name !== themeName;
+              }
               return false;
             });
           }
@@ -6880,21 +9298,25 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       function getTileDelay(number) {
         if (number < 8) {
           return 20;
-        } else if (number < 12) {
-          return 15;
-        } else {
-          return 7;
         }
+        if (number < 12) {
+          return 15;
+        }
+        return 7;
       }
       this.content.style.height = `${this.calculateContentHeight(tiles.length)}px`;
       const delayAmount = getTileDelay(tiles.length);
       for (let i5 = 1; i5 <= tiles.length; i5++) {
         const tile = tiles[i5 - 1];
-        if (!tile) break;
+        if (!tile) {
+          break;
+        }
         await tile.render();
         await tile.updateImage(currentThemeName, true);
         this.content.appendChild(tile.element);
-        if (document.body.classList.contains("enableAnimations")) await delay(delayAmount);
+        if (document.body.classList.contains("enableAnimations")) {
+          await delay(delayAmount);
+        }
       }
     }
     createContentContainer() {
@@ -6915,7 +9337,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       const categories = await browser.runtime.sendMessage({
         action: "getThemeCategories",
         includeEmpty: true,
-        includeHidden: true
+        includeHidden: true,
       });
       const tiles = Object.keys(categories).map((category) => {
         const tile = new ThemeFolder(category);
@@ -6955,15 +9377,15 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       const themes2 = await browser.runtime.sendMessage({
         action: "getThemes",
         categories: [this.currentCategory],
-        includeHidden: true
+        includeHidden: true,
       });
       const customThemes = await browser.runtime.sendMessage({
         action: "getThemes",
         categories: ["custom"],
-        includeHidden: true
+        includeHidden: true,
       });
       const data2 = await browser.runtime.sendMessage({
-        action: "getSettingsData"
+        action: "getSettingsData",
       });
       const tiles = Object.keys(themes2).map((name2) => {
         const isFavorite = data2.appearance.quickSettingsThemes.includes(name2);
@@ -6992,7 +9414,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   }
   function convertColorPalette(vibrantPalette) {
     function convertSwatchToColord(swatch) {
-      if (!swatch) return w("#000");
+      if (!swatch) {
+        return w("#000");
+      }
       return w(swatch.hex);
     }
     let colordPalette;
@@ -7002,7 +9426,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       LightVibrant: convertSwatchToColord(vibrantPalette.LightVibrant),
       Muted: convertSwatchToColord(vibrantPalette.Muted),
       DarkMuted: convertSwatchToColord(vibrantPalette.DarkMuted),
-      LightMuted: convertSwatchToColord(vibrantPalette.LightMuted)
+      LightMuted: convertSwatchToColord(vibrantPalette.LightMuted),
     };
     return colordPalette;
   }
@@ -7019,7 +9443,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       const nonEditableValues = [
         "--color-homepage-sidebars-bg",
         "--darken-background",
-        "--color-splashtext"
+        "--color-splashtext",
       ];
       const editableValues = Object.keys(cssProperties).filter((property) => {
         return !nonEditableValues.includes(property);
@@ -7046,7 +9470,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         const element = Object.values(preview)[0];
         if (previewName && element) {
           const newValue = this.theme.cssProperties[previewName];
-          if (newValue) element.style.setProperty("--current-color", newValue);
+          if (newValue) {
+            element.style.setProperty("--current-color", newValue);
+          }
         }
       });
     }
@@ -7065,7 +9491,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         "--color-base00": "Background",
         "--color-base01": "Secondary Background",
         "--color-base02": "Tertiary Background",
-        "--color-base03": "Border Color"
+        "--color-base03": "Border Color",
       };
       return propertyNames[name2];
     }
@@ -7091,14 +9517,28 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       colorPicker.element.style.position = "absolute";
       colorPicker.element.classList.add("floating-picker");
       const _docEventHandler = (docEvent) => {
-        if (docEvent === e5) return;
-        if (!(docEvent.target instanceof Node)) return;
-        if (docEvent.target === colorPreview) return;
+        if (docEvent === e5) {
+          return;
+        }
+        if (!(docEvent.target instanceof Node)) {
+          return;
+        }
+        if (docEvent.target === colorPreview) {
+          return;
+        }
         const targetElement = docEvent.target;
         const parentElement = targetElement.parentElement;
-        if (colorPicker.element.contains(targetElement)) return;
-        const isIconClick = targetElement.classList?.contains("copy-svg") || targetElement.classList?.contains("done-icon") || parentElement?.classList?.contains("copy-svg") || parentElement?.classList?.contains("done-icon");
-        if (isIconClick) return;
+        if (colorPicker.element.contains(targetElement)) {
+          return;
+        }
+        const isIconClick =
+          targetElement.classList?.contains("copy-svg") ||
+          targetElement.classList?.contains("done-icon") ||
+          parentElement?.classList?.contains("copy-svg") ||
+          parentElement?.classList?.contains("done-icon");
+        if (isIconClick) {
+          return;
+        }
         colorPicker.element.remove();
         document.removeEventListener("mousedown", _docEventHandler);
       };
@@ -7116,17 +9556,26 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     async saveThemeData() {
       await browser.runtime.sendMessage({
         action: "markThemeAsModified",
-        name: this.name
+        name: this.name,
       });
       this.colorPreviews.forEach((preview) => {
         const colorPreview = Object.values(preview)[0];
-        if (!colorPreview) return;
+        if (!colorPreview) {
+          return;
+        }
         const colorName = colorPreview.dataset.name;
-        if (!colorName) return;
-        this.theme.cssProperties[colorName] = colorPreview.style.getPropertyValue("--current-color");
+        if (!colorName) {
+          return;
+        }
+        this.theme.cssProperties[colorName] =
+          colorPreview.style.getPropertyValue("--current-color");
       });
       this.theme.displayName = this.displayNameInput.value;
-      if (this.theme.cssProperties["--color-base00"] && this.theme.cssProperties["--color-base02"] && this.theme.cssProperties["--color-text"]) {
+      if (
+        this.theme.cssProperties["--color-base00"] &&
+        this.theme.cssProperties["--color-base02"] &&
+        this.theme.cssProperties["--color-text"]
+      ) {
         const base00 = w(this.theme.cssProperties["--color-base00"]);
         let darkenColor;
         const splashColor = w(this.theme.cssProperties["--color-text"]);
@@ -7144,7 +9593,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       await browser.runtime.sendMessage({
         action: "saveCustomTheme",
         data: this.theme,
-        id: this.name
+        id: this.name,
       });
     }
     createRemoveButton() {
@@ -7188,7 +9637,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     async updateBackgroundImagePreview() {
       const result = await browser.runtime.sendMessage({
         action: "getImage",
-        id: this.name
+        id: this.name,
       });
       if (result.metaData.type === "default") {
         result.imageData = await getExtensionImage(`theme-backgrounds/compressed/${this.name}.jpg`);
@@ -7205,7 +9654,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       try {
         const vibrantTester = new Vibrant(this.backgroundImagePreview.src, {
           quality: 1,
-          colorCount: 256
+          colorCount: 256,
         });
         const palette = await vibrantTester.getPalette();
         return palette;
@@ -7217,19 +9666,25 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     readUserChoice() {
       const brightnessButton = document.getElementById("brightness-control");
       const saturationButton = document.getElementById("saturation-control");
-      if (!(brightnessButton && saturationButton)) return;
+      if (!(brightnessButton && saturationButton)) {
+        return;
+      }
       const choice = {
         mode: brightnessButton.checked,
-        saturation: saturationButton.checked
+        saturation: saturationButton.checked,
       };
       return choice;
     }
     async generateTheme() {
       const swatchPalette = await this.getImageColors();
-      if (!swatchPalette) return;
+      if (!swatchPalette) {
+        return;
+      }
       const colordPalette = convertColorPalette(swatchPalette);
       const choice = this.readUserChoice();
-      if (!choice) return;
+      if (!choice) {
+        return;
+      }
       let base00;
       let base01;
       let base02;
@@ -7284,17 +9739,17 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           "--color-base03": base03.toHex(),
           "--darken-background": darkenColor.toHex(),
           "--color-homepage-sidebars-bg": darkenColor.alpha(0.1).toHex(),
-          "--color-splashtext": textcolor.toHex()
-        }
+          "--color-splashtext": textcolor.toHex(),
+        },
       };
       await browser.runtime.sendMessage({
         action: "markThemeAsModified",
-        name: this.name
+        name: this.name,
       });
       await browser.runtime.sendMessage({
         action: "saveCustomTheme",
         data: this.theme,
-        id: this.name
+        id: this.name,
       });
       this.updateColorPreviews();
       await updateTheme(this.name);
@@ -7323,8 +9778,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           });
           return { input, label };
         }
-        updateLogo(_element, _state) {
-        }
+        updateLogo(_element, _state) {}
         load() {
           this.updateLogo(this.label, this.element.checked);
         }
@@ -7396,12 +9850,15 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         const colorPreviewWrapper = document.createElement("div");
         colorPreviewWrapper.classList.add("color-picker-preview-wrapper");
         const colorPreview = Object.values(preview)[0];
-        if (colorPreview) colorPreviewWrapper.appendChild(colorPreview);
+        if (colorPreview) {
+          colorPreviewWrapper.appendChild(colorPreview);
+        }
         const colorName = Object.keys(preview)[0];
-        if (colorName)
+        if (colorName) {
           colorPreviewWrapper.appendChild(
-            createHoverTooltip(this.convertPropertyName(colorName), "vertical")
+            createHoverTooltip(this.convertPropertyName(colorName), "vertical"),
           );
+        }
         colorPickerElement.appendChild(colorPreviewWrapper);
       });
       return colorPickerElement;
@@ -7463,7 +9920,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     }
     onClosed(realUserIntent) {
       document.body.removeChild(this.wrapper);
-      if (!realUserIntent) return;
+      if (!realUserIntent) {
+        return;
+      }
       settingsWindow.themeSelector.updateSelectorContent();
       settingsWindow.loadPage();
       loadQuickSettings();
@@ -7472,7 +9931,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     async onRemoveTheme() {
       await browser.runtime.sendMessage({
         action: "removeCustomTheme",
-        id: this.name
+        id: this.name,
       });
       await updateTheme("default");
       await settingsWindow.loadPage(true);
@@ -7490,7 +9949,10 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     for (let i5 = 0; i5 < amount; i5++) {
       const flake = document.createElement("img");
       flake.classList = "snowflake";
-      flake.src = currentThemeName === "pink" ? getExtensionImage("icons/weather-overlay/blossom.svg") : getExtensionImage("icons/weather-overlay/snowflake.svg");
+      flake.src =
+        currentThemeName === "pink"
+          ? getExtensionImage("icons/weather-overlay/blossom.svg")
+          : getExtensionImage("icons/weather-overlay/snowflake.svg");
       flake.style.left = `${Math.floor(Math.random() * 100)}%`;
       flake.style.animation = `snowflake_fall_${Math.floor(Math.random() * 3)} ${Math.floor(Math.random() * 7) + 10}s ease-in-out infinite`;
       flake.style.animationDelay = `${Math.floor(Math.random() * 40) - 40}s`;
@@ -7521,17 +9983,21 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   async function setOverlayBasedOnConditions(amount, opacity) {
     async function getWeatherDescription(widget) {
       const weatherData = await getWidgetSetting(`${widget}.cache.weatherData`);
-      if (weatherData == null) return null;
-      if (weatherData.cod !== 200) return null;
+      if (weatherData == null) {
+        return null;
+      }
+      if (weatherData.cod !== 200) {
+        return null;
+      }
       return weatherData.weather[0].main;
     }
     const weatherWidgets = widgets.filter(
-      (item) => item.name.toLowerCase().includes("weather") && item.isActive
+      (item) => item.name.toLowerCase().includes("weather") && item.isActive,
     );
     let weathers = await Promise.all(
       weatherWidgets.map(async (widget) => {
         return await getWeatherDescription(widget.name);
-      })
+      }),
     );
     weathers = weathers.filter((description) => description != null);
     if (weathers.includes("Rain") || weathers.includes("Drizzle")) {
@@ -7546,16 +10012,24 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     const snowDiv = document.getElementById("snowflakes");
     switch (weatherOverlay.type) {
       case "snow":
-        if (rainDiv) rainDiv.remove();
+        if (rainDiv) {
+          rainDiv.remove();
+        }
         setSnowLevel(weatherOverlay.amount, weatherOverlay.opacity);
         break;
       case "realtime":
-        if (rainDiv) rainDiv.remove();
-        if (snowDiv) snowDiv.remove();
+        if (rainDiv) {
+          rainDiv.remove();
+        }
+        if (snowDiv) {
+          snowDiv.remove();
+        }
         setOverlayBasedOnConditions(weatherOverlay.amount, weatherOverlay.opacity);
         break;
       case "rain":
-        if (snowDiv) snowDiv.remove();
+        if (snowDiv) {
+          snowDiv.remove();
+        }
         setRainLevel(weatherOverlay.amount, weatherOverlay.opacity);
         break;
       default:
@@ -7570,7 +10044,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       { name: "Appearance", id: "appearance" },
       { name: "Navigation", id: "topNav" },
       { name: "Widgets", id: "widgets" },
-      { name: "Other", id: "other" }
+      { name: "Other", id: "other" },
     ];
     currentPage = "appearance";
     settingsPage = document.createElement("div");
@@ -7599,25 +10073,23 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       this.settingsSideBarCategories.forEach((category) => {
         settingsSideBar.appendChild(this.createSettingsSideBarCategory(category));
       });
-      const currentRadio = settingsSideBar.querySelector(
-        `input[value="${this.currentPage}"]`
-      );
-      if (currentRadio) currentRadio.checked = true;
+      const currentRadio = settingsSideBar.querySelector(`input[value="${this.currentPage}"]`);
+      if (currentRadio) {
+        currentRadio.checked = true;
+      }
       settingsSideBar.addEventListener("change", this.updateSideBar);
       return settingsSideBar;
     }
     updateSideBar = async (event) => {
-      if (event.target instanceof HTMLInputElement) {
-        if (event.target.type === "radio") {
-          this.currentPage = event.target.value;
-          this.displaySettingsPage();
-          await this.loadPage();
-        }
+      if (event.target instanceof HTMLInputElement && event.target.type === "radio") {
+        this.currentPage = event.target.value;
+        this.displaySettingsPage();
+        await this.loadPage();
       }
     };
     async createSettingsSideBarProfileButton() {
       const data2 = await browser.runtime.sendMessage({
-        action: "getSettingsData"
+        action: "getSettingsData",
       });
       const radioInput = document.createElement("input");
       radioInput.type = "radio";
@@ -7642,7 +10114,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       const profileSettingsLabelTitle = document.createElement("h2");
       profileSettingsLabelTitle.id = "profile-settings-label-title";
       const firstName = String(data2.profile.username || originalUsername).split(" ")[0];
-      if (firstName) profileSettingsLabelTitle.innerText = firstName;
+      if (firstName) {
+        profileSettingsLabelTitle.innerText = firstName;
+      }
       const profileSettingsLabelDescription = document.createElement("p");
       profileSettingsLabelDescription.classList.add("profile-settings-label-description");
       profileSettingsLabelDescription.innerText = "view profile";
@@ -7656,7 +10130,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       return container;
     }
     isPastaTime() {
-      return (/* @__PURE__ */ new Date()).getHours() === 12;
+      return /* @__PURE__ */ new Date().getHours() === 12;
     }
     createSettingsSideBarCategory(category) {
       const radioInput = document.createElement("input");
@@ -7692,10 +10166,13 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     clearSettingsPage() {
       this.settingsPage.innerHTML = "";
     }
-    addDisclaimer(element, disclaimerHTML = `
+    addDisclaimer(
+      element,
+      disclaimerHTML = `
     * Changes will only apply after 
     <a class="settings-page-disclaimer-button" href="#" onclick="window.location.href = window.location.href; return false;">reload</a>
-  `) {
+  `,
+    ) {
       if (element.nextElementSibling?.classList.contains("settings-page-disclaimer")) {
         return;
       }
@@ -7712,7 +10189,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       const title = document.createElement("h3");
       title.textContent = "Reset Settings";
       const description = document.createElement("p");
-      description.textContent = "Are you sure you want to reset all settings to defaults? This will delete all your customizations and cannot be undone.";
+      description.textContent =
+        "Are you sure you want to reset all settings to defaults? This will delete all your customizations and cannot be undone.";
       const buttonContainer = document.createElement("div");
       buttonContainer.classList.add("reset-popup-buttons");
       const cancelButton = document.createElement("button");
@@ -7733,12 +10211,14 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     }
     async loadPage(shouldReloadTheme = true) {
       const settings = await browser.runtime.sendMessage({
-        action: "getSettingsData"
+        action: "getSettingsData",
       });
       async function loadWidgetSettingSlider(id, setting) {
         const element = document.getElementById(id);
         const valueDisplay = document.querySelector(`#${id} + .settings-page-live-value`);
-        if (!element || !valueDisplay) return;
+        if (!(element && valueDisplay)) {
+          return;
+        }
         const value = await getWidgetSetting(setting);
         element.value = value;
         valueDisplay.textContent = String(value);
@@ -7746,7 +10226,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       const profileTitleElement = document.getElementById("profile-settings-label-title");
       if (profileTitleElement) {
         const firstName = String(settings.profile.username || originalUsername).split(" ")[0];
-        if (firstName) profileTitleElement.textContent = firstName;
+        if (firstName) {
+          profileTitleElement.textContent = firstName;
+        }
       }
       switch (this.currentPage) {
         case "profile": {
@@ -7778,29 +10260,27 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           if (blurSlider) {
             blurSlider.value = String(settings.appearance.background.blur * 10);
           }
-          document.querySelectorAll(".settings-page-weather-overlay-container input").forEach((input) => {
-            const inputElement = input;
-            if (inputElement.id) {
-              inputElement.checked = inputElement.id.includes(
-                settings.appearance.weatherOverlay.type
-              );
-            }
-          });
+          document
+            .querySelectorAll(".settings-page-weather-overlay-container input")
+            .forEach((input) => {
+              const inputElement = input;
+              if (inputElement.id) {
+                inputElement.checked = inputElement.id.includes(
+                  settings.appearance.weatherOverlay.type,
+                );
+              }
+            });
           const weatherOverlaySlider = document.getElementById(
-            "settings-page-weather-overlay-slider"
+            "settings-page-weather-overlay-slider",
           );
           if (weatherOverlaySlider) {
-            weatherOverlaySlider.value = String(
-              settings.appearance.weatherOverlay.amount
-            );
+            weatherOverlaySlider.value = String(settings.appearance.weatherOverlay.amount);
           }
           const weatherOpacitySlider = document.getElementById(
-            "settings-page-weather-overlay-opacity-slider"
+            "settings-page-weather-overlay-opacity-slider",
           );
           if (weatherOpacitySlider) {
-            weatherOpacitySlider.value = String(
-              settings.appearance.weatherOverlay.opacity * 100
-            );
+            weatherOpacitySlider.value = String(settings.appearance.weatherOverlay.opacity * 100);
           }
           const defaultIconButton = document.getElementById("settings-page-default-icon-button");
           if (defaultIconButton) {
@@ -7850,7 +10330,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             mailIconButton.checked = settings.topNav.icons.mail;
           }
           const notificationsIconButton = document.getElementById(
-            "settings-page-notifications-icon-button"
+            "settings-page-notifications-icon-button",
           );
           if (notificationsIconButton) {
             notificationsIconButton.checked = settings.topNav.icons.notifications;
@@ -7863,19 +10343,22 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         }
         case "widgets": {
           const delijnMonochromeButton = document.getElementById(
-            "settings-page-delijn-monochrome-button"
+            "settings-page-delijn-monochrome-button",
           );
           if (delijnMonochromeButton) {
             delijnMonochromeButton.checked = await getWidgetSetting("DelijnWidget.monochrome");
           }
-          await loadWidgetSettingSlider("settings-page-max-busses-slider", "DelijnWidget.maxBusses");
+          await loadWidgetSettingSlider(
+            "settings-page-max-busses-slider",
+            "DelijnWidget.maxBusses",
+          );
           await loadWidgetSettingSlider(
             "settings-page-max-assignments-slider",
-            "TakenWidget.maxAssignments"
+            "TakenWidget.maxAssignments",
           );
           if (!liteMode) {
             const showSnakeGridButton = document.getElementById(
-              "settings-page-show-snake-grid-button"
+              "settings-page-show-snake-grid-button",
             );
             if (showSnakeGridButton) {
               showSnakeGridButton.checked = await getWidgetSetting("SnakeWidget.enableGrid");
@@ -7884,14 +10367,16 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           break;
         }
         case "other": {
-          let loadKeybind2 = function(id, key) {
+          const loadKeybind2 = (id, key) => {
             const keybindInput = document.getElementById(id);
-            if (!keybindInput) return;
+            if (!keybindInput) {
+              return;
+            }
             keybindInput.value = key;
           };
           var loadKeybind = loadKeybind2;
           const performanceModeButton = document.getElementById(
-            "settings-page-performance-mode-button"
+            "settings-page-performance-mode-button",
           );
           if (performanceModeButton) {
             performanceModeButton.checked = settings.other.performanceMode;
@@ -7905,10 +10390,15 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             discordButton.checked = settings.other.discordButton;
           }
           loadKeybind2("settings-page-quick-menu-keybinding", settings.other.keybinds.dmenu);
-          loadKeybind2("settings-page-widget-edit-keybinding", settings.other.keybinds.widgetEditMode);
+          loadKeybind2(
+            "settings-page-widget-edit-keybinding",
+            settings.other.keybinds.widgetEditMode,
+          );
           loadKeybind2("settings-widget-bag-keybinding", settings.other.keybinds.widgetBag);
           loadKeybind2("settings-page-settings-keybinding", settings.other.keybinds.settings);
-          if (!liteMode) loadKeybind2("settings-page-gc-keybinding", settings.other.keybinds.gc);
+          if (!liteMode) {
+            loadKeybind2("settings-page-gc-keybinding", settings.other.keybinds.gc);
+          }
           break;
         }
         default:
@@ -7917,16 +10407,16 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     }
     async storePage() {
       const settings = await browser.runtime.sendMessage({
-        action: "getSettingsData"
+        action: "getSettingsData",
       });
       const previousSettings = structuredClone(settings);
       const getCheckboxValue = (id) => {
         const element = document.getElementById(id);
-        return element?.checked || false;
+        return element?.checked;
       };
       const getSliderValue = (id) => {
         const element = document.getElementById(id);
-        return element?.value ? parseFloat(element.value) : 0;
+        return element?.value ? Number.parseFloat(element.value) : 0;
       };
       const saveKeybind = (id) => {
         const element = document.getElementById(id);
@@ -7934,9 +10424,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       };
       switch (this.currentPage) {
         case "profile": {
-          const usernameInput = document.getElementById(
-            "settings-page-username-input"
-          );
+          const usernameInput = document.getElementById("settings-page-username-input");
           if (usernameInput) {
             settings.profile.username = usernameInput.value || null;
           }
@@ -7946,14 +10434,14 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         }
         case "appearance": {
           const selectedTheme = document.querySelector(
-            ".settings-page-theme-card:has(input[type='radio']:checked)"
+            ".settings-page-theme-card:has(input[type='radio']:checked)",
           );
           if (selectedTheme?.dataset.theme) {
             settings.appearance.theme = selectedTheme.dataset.theme;
           }
           settings.appearance.background.blur = getSliderValue("settings-page-blur-slider") / 10;
           const chosenWeather = document.querySelector(
-            ".settings-page-weather-overlay-container input:checked"
+            ".settings-page-weather-overlay-container input:checked",
           );
           if (chosenWeather) {
             const weatherContainer = chosenWeather.closest("[data-weather]");
@@ -7965,22 +10453,27 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             }
           }
           settings.appearance.weatherOverlay.amount = getSliderValue(
-            "settings-page-weather-overlay-slider"
+            "settings-page-weather-overlay-slider",
           );
-          settings.appearance.weatherOverlay.opacity = getSliderValue("settings-page-weather-overlay-opacity-slider") / 100;
+          settings.appearance.weatherOverlay.opacity =
+            getSliderValue("settings-page-weather-overlay-opacity-slider") / 100;
           const smppIconChecked = getCheckboxValue("settings-page-smpp-icon-button");
           settings.appearance.tabLogo = smppIconChecked ? "smpp" : "sm";
           settings.appearance.news = getCheckboxValue("settings-page-show-news-button");
           settings.appearance.glass = getCheckboxValue("settings-page-glass-button");
           await applyAppearance(settings.appearance);
-          if (JSON.stringify(settings.appearance.weatherOverlay) !== JSON.stringify(previousSettings.appearance.weatherOverlay) && !liteMode) {
+          if (
+            JSON.stringify(settings.appearance.weatherOverlay) !==
+              JSON.stringify(previousSettings.appearance.weatherOverlay) &&
+            !liteMode
+          ) {
             applyWeatherEffects(settings.appearance.weatherOverlay);
           }
           break;
         }
         case "topNav": {
           settings.topNav.switchCoursesAndLinks = getCheckboxValue(
-            "settings-page-swap-courses-button"
+            "settings-page-swap-courses-button",
           );
           if (isGOSchool) {
             settings.topNav.buttons.GO = getCheckboxValue("settings-page-go-button");
@@ -7993,7 +10486,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           settings.topNav.icons.home = getCheckboxValue("settings-page-home-icon-button");
           settings.topNav.icons.mail = getCheckboxValue("settings-page-mail-icon-button");
           settings.topNav.icons.notifications = getCheckboxValue(
-            "settings-page-notifications-icon-button"
+            "settings-page-notifications-icon-button",
           );
           settings.topNav.icons.settings = getCheckboxValue("settings-page-settings-icon-button");
           applyTopNav(settings.topNav);
@@ -8002,8 +10495,11 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         case "widgets": {
           const updateWidgetSetting = async (id, settingName, type) => {
             const element = document.getElementById(id);
-            if (!element) return;
-            const currentValue = type === "boolean" ? element.checked : parseInt(element.value, 10);
+            if (!element) {
+              return;
+            }
+            const currentValue =
+              type === "boolean" ? element.checked : Number.parseInt(element.value, 10);
             const storedValue = await getWidgetSetting(settingName);
             if (JSON.stringify(currentValue) !== JSON.stringify(storedValue)) {
               await setWidgetSetting(settingName, currentValue);
@@ -8012,34 +10508,36 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           await updateWidgetSetting(
             "settings-page-delijn-monochrome-button",
             "DelijnWidget.monochrome",
-            "boolean"
+            "boolean",
           );
           await updateWidgetSetting(
             "settings-page-max-busses-slider",
             "DelijnWidget.maxBusses",
-            "number"
+            "number",
           );
           await updateWidgetSetting(
             "settings-page-max-assignments-slider",
             "TakenWidget.maxAssignments",
-            "number"
+            "number",
           );
           if (!liteMode) {
             await updateWidgetSetting(
               "settings-page-show-snake-grid-button",
               "SnakeWidget.enableGrid",
-              "boolean"
+              "boolean",
             );
           }
           break;
         }
         case "other": {
-          settings.other.performanceMode = getCheckboxValue("settings-page-performance-mode-button");
+          settings.other.performanceMode = getCheckboxValue(
+            "settings-page-performance-mode-button",
+          );
           settings.other.splashText = getCheckboxValue("settings-page-splash-text-button");
           settings.other.discordButton = getCheckboxValue("settings-page-discord-button");
           settings.other.keybinds.dmenu = saveKeybind("settings-page-quick-menu-keybinding");
           settings.other.keybinds.widgetEditMode = saveKeybind(
-            "settings-page-widget-edit-keybinding"
+            "settings-page-widget-edit-keybinding",
           );
           settings.other.keybinds.widgetBag = saveKeybind("settings-widget-bag-keybinding");
           settings.other.keybinds.settings = saveKeybind("settings-page-settings-keybinding");
@@ -8054,7 +10552,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       }
       await browser.runtime.sendMessage({
         action: "setSettingsData",
-        data: settings
+        data: settings,
       });
       console.log("Successfully stored main settings: \n", settings);
       loadQuickSettings();
@@ -8097,7 +10595,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         unbindButton.setAttribute("aria-label", "Clear keybind");
         let listening = false;
         input.addEventListener("click", () => {
-          if (listening) return;
+          if (listening) {
+            return;
+          }
           listening = true;
           const oldKeybind = input.value;
           input.value = "Press any key...";
@@ -8108,9 +10608,15 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             e5.preventDefault();
             e5.stopPropagation();
             let keyName = e5.key.length === 1 ? e5.key.toUpperCase() : e5.key;
-            if (keyName === " ") keyName = "Space";
-            if (keyName === "Backspace") keyName = "None";
-            if (keyName === "Escape") keyName = oldKeybind;
+            if (keyName === " ") {
+              keyName = "Space";
+            }
+            if (keyName === "Backspace") {
+              keyName = "None";
+            }
+            if (keyName === "Escape") {
+              keyName = oldKeybind;
+            }
             input.value = keyName;
             document.removeEventListener("keydown", keyListener);
             await this.storePage();
@@ -8150,7 +10656,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         const input = document.createElement("input");
         input.type = "radio";
         input.name = name2;
-        if (id) input.id = id;
+        if (id) {
+          input.id = id;
+        }
         const image = document.createElement("img");
         image.classList.add("settings-page-image");
         image.src = getExtensionImage(src);
@@ -8192,19 +10700,22 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         textContainer.innerText = text;
         const slider = createSlider(min, max, id);
         slider.classList.add("settings-page-labeled-slider");
-        if (showValue)
+        if (showValue) {
           slider.addEventListener("input", (_event) => {
-            const liveValueElement = document.querySelector(
-              `#${id} ~ .settings-page-live-value`
-            );
-            if (liveValueElement) liveValueElement.innerText = slider.value;
+            const liveValueElement = document.querySelector(`#${id} ~ .settings-page-live-value`);
+            if (liveValueElement) {
+              liveValueElement.innerText = slider.value;
+            }
           });
+        }
         const currentValue = document.createElement("span");
         currentValue.classList.add("settings-page-live-value");
         currentValue.innerText = min;
         container.appendChild(textContainer);
         container.appendChild(slider);
-        if (showValue) container.appendChild(currentValue);
+        if (showValue) {
+          container.appendChild(currentValue);
+        }
         return container;
       }
       function createImage(src, width, height) {
@@ -8229,21 +10740,25 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           this.settingsPage.appendChild(createMainTitle("Profile"));
           this.settingsPage.appendChild(createSectionTitle("Custom name"));
           this.settingsPage.appendChild(
-            createDescription("Edit your username, displayed at the top left")
+            createDescription("Edit your username, displayed at the top left"),
           );
-          this.settingsPage.appendChild(createTextInput("settings-page-username-input", "Username"));
+          this.settingsPage.appendChild(
+            createTextInput("settings-page-username-input", "Username"),
+          );
           this.settingsPage.appendChild(createSectionTitle("Profile picture"));
           this.settingsPage.appendChild(
             createDescription(
-              isFirefox ? "Upload your own profile picture, large files not recommended on Firefox" : "Upload your own profile picture"
-            )
+              isFirefox
+                ? "Upload your own profile picture, large files not recommended on Firefox"
+                : "Upload your own profile picture",
+            ),
           );
           this.profilePictureInput.id = "profilePicture";
           this.profilePictureInput.loadImageData();
           this.profilePictureInput.onStore = async () => {
             this.storePage();
             const data2 = await browser.runtime.sendMessage({
-              action: "getSettingsData"
+              action: "getSettingsData",
             });
             applyProfilePicture(data2.profile);
           };
@@ -8253,8 +10768,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           this.settingsPage.appendChild(
             createSettingsButtonWithLabel(
               "settings-page-default-sm-pfp-button",
-              "Original profile picture"
-            )
+              "Original profile picture",
+            ),
           );
           break;
         }
@@ -8263,7 +10778,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           this.settingsPage.appendChild(this.themeSelector.render());
           this.settingsPage.appendChild(createSectionTitle("Wallpaper"));
           this.settingsPage.appendChild(
-            createDescription("Personalize your backdrop with a custom image.")
+            createDescription("Personalize your backdrop with a custom image."),
           );
           this.backgroundImageSelector.onStore = () => {
             this.storePage();
@@ -8272,18 +10787,20 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           this.settingsPage.appendChild(createSectionTitle("Glass"));
           this.settingsPage.appendChild(createDescription("Apply a glassy effect to the UI."));
           this.settingsPage.appendChild(
-            createSettingsButtonWithLabel("settings-page-glass-button", "Glass")
+            createSettingsButtonWithLabel("settings-page-glass-button", "Glass"),
           );
           this.settingsPage.appendChild(createSectionTitle("Background blur"));
           this.settingsPage.appendChild(createDescription("Apply a blur to your background."));
           this.settingsPage.appendChild(
-            createSlider("0", "100", "settings-page-blur-slider")
+            createSlider("0", "100", "settings-page-blur-slider"),
             // must be divided by 10
             // for real value
           );
           const blurPreviewContainer = document.createElement("div");
           blurPreviewContainer.classList.add("settings-page-blur-preview-container");
-          blurPreviewContainer.appendChild(createImage("theme-backgrounds/birb.jpg", "6rem", "4rem"));
+          blurPreviewContainer.appendChild(
+            createImage("theme-backgrounds/birb.jpg", "6rem", "4rem"),
+          );
           const blurredImage = createImage("theme-backgrounds/birb.jpg", "100%", "100%");
           blurredImage.style.filter = "blur(2px)";
           const blurredImageContainer = document.createElement("div");
@@ -8296,7 +10813,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           const weatherIconsContainer = document.createElement("div");
           weatherIconsContainer.classList.add(
             "settings-page-icons-container",
-            "settings-page-weather-overlay-container"
+            "settings-page-weather-overlay-container",
           );
           const rainBtn = createImageButtonWithLabel(
             "icons/weather-overlay/raindropfancy.svg",
@@ -8304,7 +10821,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             "5rem",
             "5rem",
             "weather",
-            "settings-page-raindrop-button"
+            "settings-page-raindrop-button",
           );
           rainBtn.dataset.weather = "rain";
           weatherIconsContainer.appendChild(rainBtn);
@@ -8314,7 +10831,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             "5rem",
             "5rem",
             "weather",
-            "settings-page-realtime-button"
+            "settings-page-realtime-button",
           );
           realtimeBtn.dataset.weather = "realtime";
           weatherIconsContainer.appendChild(realtimeBtn);
@@ -8324,13 +10841,19 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             "5rem",
             "5rem",
             "weather",
-            "settings-page-snow-button"
+            "settings-page-snow-button",
           );
           snowBtn.dataset.weather = "snow";
           weatherIconsContainer.appendChild(snowBtn);
           this.settingsPage.appendChild(weatherIconsContainer);
           this.settingsPage.appendChild(
-            createLabeledSlider("0", "500", "settings-page-weather-overlay-slider", "Amount", false)
+            createLabeledSlider(
+              "0",
+              "500",
+              "settings-page-weather-overlay-slider",
+              "Amount",
+              false,
+            ),
           );
           this.settingsPage.appendChild(
             createLabeledSlider(
@@ -8338,12 +10861,12 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
               "100",
               "settings-page-weather-overlay-opacity-slider",
               "Opacity",
-              false
-            )
+              false,
+            ),
           );
           this.settingsPage.appendChild(createSectionTitle("Icon"));
           this.settingsPage.appendChild(
-            createDescription("Choose the icon displayed in your browser tab.")
+            createDescription("Choose the icon displayed in your browser tab."),
           );
           const iconsContainer = document.createElement("div");
           iconsContainer.classList.add("settings-page-icons-container");
@@ -8353,8 +10876,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
               "5rem",
               "5rem",
               "logo",
-              "settings-page-default-icon-button"
-            )
+              "settings-page-default-icon-button",
+            ),
           );
           iconsContainer.appendChild(
             createImageButton(
@@ -8362,14 +10885,16 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
               "5rem",
               "5rem",
               "logo",
-              "settings-page-smpp-icon-button"
-            )
+              "settings-page-smpp-icon-button",
+            ),
           );
           this.settingsPage.appendChild(iconsContainer);
           this.settingsPage.appendChild(createSectionTitle("News"));
-          this.settingsPage.appendChild(createDescription("Change the homepage news configuration."));
           this.settingsPage.appendChild(
-            createSettingsButtonWithLabel("settings-page-show-news-button", "Show news")
+            createDescription("Change the homepage news configuration."),
+          );
+          this.settingsPage.appendChild(
+            createSettingsButtonWithLabel("settings-page-show-news-button", "Show news"),
           );
           break;
         }
@@ -8377,41 +10902,48 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           this.settingsPage.appendChild(createMainTitle("Navigation"));
           this.settingsPage.appendChild(createSectionTitle("Buttons"));
           this.settingsPage.appendChild(
-            createDescription("Choose which buttons you want to see in the top navigation.")
+            createDescription("Choose which buttons you want to see in the top navigation."),
           );
           if (!liteMode) {
             this.settingsPage.appendChild(
-              createSettingsButtonWithLabel("settings-page-global-chat-button", "Global Chat")
+              createSettingsButtonWithLabel("settings-page-global-chat-button", "Global Chat"),
             );
           }
           this.settingsPage.appendChild(
-            createSettingsButtonWithLabel("settings-page-search-button", "Search")
+            createSettingsButtonWithLabel("settings-page-search-button", "Search"),
           );
           this.settingsPage.appendChild(
-            createSettingsButtonWithLabel("settings-page-quick-menu-button", "Quick Menu")
+            createSettingsButtonWithLabel("settings-page-quick-menu-button", "Quick Menu"),
           );
           this.settingsPage.appendChild(
-            createSettingsButtonWithLabel("settings-page-swap-courses-button", "Swap courses/links")
+            createSettingsButtonWithLabel(
+              "settings-page-swap-courses-button",
+              "Swap courses/links",
+            ),
           );
-          if (isGOSchool)
+          if (isGOSchool) {
             this.settingsPage.appendChild(
-              createSettingsButtonWithLabel("settings-page-go-button", "GO")
+              createSettingsButtonWithLabel("settings-page-go-button", "GO"),
             );
+          }
           this.settingsPage.appendChild(createSectionTitle("Icons"));
           this.settingsPage.appendChild(
-            createDescription("Choose which buttons you want to replace with icons.")
+            createDescription("Choose which buttons you want to replace with icons."),
           );
           this.settingsPage.appendChild(
-            createSettingsButtonWithLabel("settings-page-home-icon-button", "Start")
+            createSettingsButtonWithLabel("settings-page-home-icon-button", "Start"),
           );
           this.settingsPage.appendChild(
-            createSettingsButtonWithLabel("settings-page-mail-icon-button", "Mail")
+            createSettingsButtonWithLabel("settings-page-mail-icon-button", "Mail"),
           );
           this.settingsPage.appendChild(
-            createSettingsButtonWithLabel("settings-page-notifications-icon-button", "Notifications")
+            createSettingsButtonWithLabel(
+              "settings-page-notifications-icon-button",
+              "Notifications",
+            ),
           );
           this.settingsPage.appendChild(
-            createSettingsButtonWithLabel("settings-page-settings-icon-button", "Settings")
+            createSettingsButtonWithLabel("settings-page-settings-icon-button", "Settings"),
           );
           break;
         case "widgets":
@@ -8419,24 +10951,29 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           this.settingsPage.appendChild(createSectionTitle("De Lijn"));
           this.settingsPage.appendChild(createDescription("Change the De Lijn app configuration."));
           this.settingsPage.appendChild(
-            createSettingsButtonWithLabel("settings-page-delijn-monochrome-button", "Monochrome")
+            createSettingsButtonWithLabel("settings-page-delijn-monochrome-button", "Monochrome"),
           );
           this.settingsPage.appendChild(
-            createLabeledSlider("1", "10", "settings-page-max-busses-slider", "Max busses")
+            createLabeledSlider("1", "10", "settings-page-max-busses-slider", "Max busses"),
           );
           this.settingsPage.appendChild(createSectionTitle("Assignments"));
           this.settingsPage.appendChild(
-            createDescription("Change the assignments app configuration.")
+            createDescription("Change the assignments app configuration."),
           );
           this.settingsPage.appendChild(
-            createLabeledSlider("1", "10", "settings-page-max-assignments-slider", "Max assignments")
+            createLabeledSlider(
+              "1",
+              "10",
+              "settings-page-max-assignments-slider",
+              "Max assignments",
+            ),
           );
           if (!liteMode) {
             this.settingsPage.appendChild(createMainTitle("Games"));
             this.settingsPage.appendChild(createSectionTitle("Snake"));
             this.settingsPage.appendChild(createDescription("Change configuration of Snake++"));
             this.settingsPage.appendChild(
-              createSettingsButtonWithLabel("settings-page-show-snake-grid-button", "Grid")
+              createSettingsButtonWithLabel("settings-page-show-snake-grid-button", "Grid"),
             );
           }
           break;
@@ -8444,46 +10981,46 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           this.settingsPage.appendChild(createMainTitle("Other"));
           this.settingsPage.appendChild(createSectionTitle("Performance"));
           this.settingsPage.appendChild(
-            createDescription("Disables animations for better performance on low end devices.")
+            createDescription("Disables animations for better performance on low end devices."),
           );
           this.settingsPage.appendChild(
             createSettingsButtonWithLabel(
               "settings-page-performance-mode-button",
-              "Performance mode"
-            )
+              "Performance mode",
+            ),
           );
           this.settingsPage.appendChild(createSectionTitle("Login"));
           this.settingsPage.appendChild(createDescription("Change the login page configuration."));
           this.settingsPage.appendChild(
-            createSettingsButtonWithLabel("settings-page-splash-text-button", "Splash-text")
+            createSettingsButtonWithLabel("settings-page-splash-text-button", "Splash-text"),
           );
           this.settingsPage.appendChild(createSectionTitle("Homepage"));
           this.settingsPage.appendChild(createDescription("Change the home page configuration."));
           this.settingsPage.appendChild(
-            createSettingsButtonWithLabel("settings-page-discord-button", "Discord button")
+            createSettingsButtonWithLabel("settings-page-discord-button", "Discord button"),
           );
           this.settingsPage.appendChild(createSectionTitle("Keybindings"));
           this.settingsPage.appendChild(createDescription("Customize your keybindings"));
           this.settingsPage.appendChild(
-            createKeybindInput("settings-page-quick-menu-keybinding", "Quick Menu")
+            createKeybindInput("settings-page-quick-menu-keybinding", "Quick Menu"),
           );
           this.settingsPage.appendChild(
-            createKeybindInput("settings-page-widget-edit-keybinding", "Widget editing")
+            createKeybindInput("settings-page-widget-edit-keybinding", "Widget editing"),
           );
           this.settingsPage.appendChild(
-            createKeybindInput("settings-widget-bag-keybinding", "Widget bag")
+            createKeybindInput("settings-widget-bag-keybinding", "Widget bag"),
           );
           this.settingsPage.appendChild(
-            createKeybindInput("settings-page-settings-keybinding", "Settings")
+            createKeybindInput("settings-page-settings-keybinding", "Settings"),
           );
           if (!liteMode) {
             this.settingsPage.appendChild(
-              createKeybindInput("settings-page-gc-keybinding", "Global Chat")
+              createKeybindInput("settings-page-gc-keybinding", "Global Chat"),
             );
           }
           this.settingsPage.appendChild(createSectionTitle("Reset"));
           this.settingsPage.appendChild(
-            createDescription("Reset all settings and widgets to their default values.")
+            createDescription("Reset all settings and widgets to their default values."),
           );
           const resetButton = document.createElement("button");
           resetButton.innerText = "Reset to Defaults";
@@ -8567,7 +11104,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     createWidgetErrorContent(name2) {
       const p4 = document.createElement("p");
       p4.classList.add("smpp-error-widget");
-      p4.innerHTML = "<span>Probleem bij het laden van de widget: </span><code class='widgetName'></code><button>Reset widget</button>";
+      p4.innerHTML =
+        "<span>Probleem bij het laden van de widget: </span><code class='widgetName'></code><button>Reset widget</button>";
       p4.querySelector(".widgetName").innerText = name2;
       p4.querySelector("button").addEventListener("click", async () => {
         this.clearWidgetSettings();
@@ -8578,7 +11116,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       await browser.runtime.sendMessage({
         action: "setWidgetData",
         widget: this.constructor.name,
-        data: this.defaultSettings()
+        data: this.defaultSettings(),
       });
       this.#settings = this.defaultSettings();
       console.log("Clearing", this.name, "'s settings");
@@ -8627,7 +11165,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       }
       if (!newContent) {
         console.error(
-          "createContent and createPreview method's needs to return an html object. in widget impl"
+          "createContent and createPreview method's needs to return an html object. in widget impl",
         );
         newContent = this.createWidgetErrorContent(this.name);
       }
@@ -8730,7 +11268,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       }
       curDragInfo = new WidgetDragInfo(this, sourceIp, {
         x: grabX - rect.left,
-        y: grabY - rect.top
+        y: grabY - rect.top,
       });
       document.body.classList.add("smpp-widget-dragging-something");
       el.style.width = `${rect.width}px`;
@@ -8748,7 +11286,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       }
       const settings = await browser.runtime.sendMessage({
         action: "getWidgetData",
-        widget: this.constructor.name
+        widget: this.constructor.name,
       });
       this.#settings = fillObjectWithDefaults(settings, this.defaultSettings());
     }
@@ -8759,7 +11297,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       await browser.runtime.sendMessage({
         action: "setWidgetData",
         widget: this.constructor.name,
-        data: this.#settings
+        data: this.#settings,
       });
       if (this.isActive) {
         await this.onSettingsChange();
@@ -8772,7 +11310,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     get settings() {
       if (this.#settings === void 0) {
         console.error(
-          "Settings were not loaded before access. Don't use .settings outside of the widget. Call await widget.getSetting(path)"
+          "Settings were not loaded before access. Don't use .settings outside of the widget. Call await widget.getSetting(path)",
         );
       }
       return this.#settings;
@@ -8792,8 +11330,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     }
     // (Required): Gets called when the content element of the widget needs to be
     // created (return html element). (Don't do slow tasks in here)
-    async createContent() {
-    }
+    async createContent() {}
     // Gets called when the preview element needs to be created (return html
     // element) NOTE: preview and content never exist at the same time
     async createPreview() {
@@ -8801,12 +11338,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     }
     // Gets called when the settings of the widget change.
     // Use this to update the widget content based on the new settings. (settings object is always valid based on the value returned by defaultSettings())
-    async onSettingsChange() {
-    }
-    async onThemeChange() {
-    }
-    async onRemove() {
-    }
+    async onSettingsChange() {}
+    async onThemeChange() {}
+    async onRemove() {}
   };
   var ErrorWidget = class extends WidgetBase {
     origWidgetName;
@@ -8971,7 +11505,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       await browser.runtime.sendMessage({
         action: "setSetting",
         name: "appearance.news",
-        data: e5.target.checked
+        data: e5.target.checked,
       });
       await settingsWindow.loadPage();
       await loadQuickSettings();
@@ -8996,7 +11530,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       return false;
     }
     let widgetData = await browser.runtime.sendMessage({
-      action: "getWidgetLayout"
+      action: "getWidgetLayout",
     });
     console.log("Applying widgets with data: \n", widgetData);
     let setDefaults = false;
@@ -9004,7 +11538,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       setDefaults = true;
       widgetData = {
         leftPannels: [{ widgets: [] }],
-        rightPannels: [{ widgets: [] }]
+        rightPannels: [{ widgets: [] }],
       };
     }
     for (const smWidget of document.querySelectorAll("#rightcontainer .homepage__block")) {
@@ -9056,7 +11590,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     }
     await browser.runtime.sendMessage({
       action: "setWidgetLayout",
-      layout: widgetData
+      layout: widgetData,
     });
   }
   function bagHoverEnter() {
@@ -9105,7 +11639,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     const innerContent = document.createElement("div");
     innerContent.classList.add("smpp-widget-bag-inner-content");
     await createGroup(innerContent, "other", "Widgets");
-    if (!liteMode) await createGroup(innerContent, "games", "Games");
+    if (!liteMode) {
+      await createGroup(innerContent, "games", "Games");
+    }
     await createGroup(innerContent, "smartschool", "Smartschool Widgets");
     content.appendChild(innerContent);
     bag.appendChild(content);
@@ -9156,10 +11692,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   function toggleBag(_params) {
     if (isBagOpen()) {
       closeBag();
-    } else {
-      if (!curDragInfo) {
-        openBag();
-      }
+    } else if (!curDragInfo) {
+      openBag();
     }
   }
   var setEditModeFalse = () => setEditMode(false);
@@ -9219,7 +11753,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   async function setEditMode(value) {
     if (value && !widgetEditModeInit) {
       console.error(
-        "Widget edit mode has not been initalized. setEditMode(true) has been called. (call initWidgetEditMode first) (This is a bug)"
+        "Widget edit mode has not been initalized. setEditMode(true) has been called. (call initWidgetEditMode first) (This is a bug)",
       );
     }
     if (!doneButton) {
@@ -9247,7 +11781,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       return;
     }
     if (!widgetSystemCreated) {
-      console.error("Widget system has not been created yet. But initWidgetEditMode has been called");
+      console.error(
+        "Widget system has not been created yet. But initWidgetEditMode has been called",
+      );
       return;
     }
     widgetEditModeInit = true;
@@ -9261,7 +11797,11 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       if (curDragInfo) {
         curDragInfo.widget.dragMove(e5.clientX, e5.clientY);
         const handleBounds = widgetBagHandle.getBoundingClientRect();
-        if (e5.clientY < handleBounds.bottom && e5.clientX > handleBounds.left && e5.clientX < handleBounds.right) {
+        if (
+          e5.clientY < handleBounds.bottom &&
+          e5.clientX > handleBounds.left &&
+          e5.clientX < handleBounds.right
+        ) {
           bagHoverEnter();
         } else if (hoveringBag) {
           bagHoverExit();
@@ -9288,7 +11828,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   async function reloadDMenuConfig() {
     dmenuConfig = await browser.runtime.sendMessage({
       action: "getSetting",
-      name: "other.dmenu"
+      name: "other.dmenu",
     });
   }
   var DMenu = class {
@@ -9334,9 +11874,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         this.#accept();
       } else if (e5.key === "Escape") {
         this.close();
-      } else if (e5.key === "Tab" && e5.shiftKey || e5.key === "ArrowUp") {
+      } else if ((e5.key === "Tab" && e5.shiftKey) || e5.key === "ArrowUp") {
         this.#selPrev();
-      } else if (e5.key === "Tab" && !e5.shiftKey || e5.key === "ArrowDown") {
+      } else if ((e5.key === "Tab" && !e5.shiftKey) || e5.key === "ArrowDown") {
         this.#selNext();
       } else {
         return;
@@ -9387,8 +11927,12 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         }
       }
       const sortedItems = items.sort((a5, b3) => {
-        if (a5.score < b3.score) return 1;
-        if (a5.score > b3.score) return -1;
+        if (a5.score < b3.score) {
+          return 1;
+        }
+        if (a5.score > b3.score) {
+          return -1;
+        }
         return 0;
       });
       for (let i5 = 0; i5 < sortedItems.length; i5++) {
@@ -9442,7 +11986,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       }
       const row = document.createElement("div");
       row.classList.add("dmenu-row");
-      row.innerHTML = '<div class="dmenu-content"></div><div class="dmenu-meta"></div><div class="dmenu-score"></div>';
+      row.innerHTML =
+        '<div class="dmenu-content"></div><div class="dmenu-meta"></div><div class="dmenu-score"></div>';
       row.getElementsByClassName("dmenu-content")[0].innerText = cmd;
       row.dataset.content = cmd;
       if (meta !== void 0) {
@@ -9460,7 +12005,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     #mkDmenu(itemList, title) {
       this.menuEl = document.createElement("div");
       this.menuEl.classList.add("dmenu");
-      if (randomChance(1 / 100)) this.menuEl.classList.add("jokeDmenu");
+      if (randomChance(1 / 100)) {
+        this.menuEl.classList.add("jokeDmenu");
+      }
       if (dmenuConfig.centered) {
         this.menuEl.classList.add("dmenu-centered");
       }
@@ -9540,7 +12087,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   }
   async function getDMenuOptionsForSettings(toplevel) {
     const template = await browser.runtime.sendMessage({
-      action: "getSettingsTemplate"
+      action: "getSettingsTemplate",
     });
     let options = [];
     for (const cat of Object.keys(template)) {
@@ -9559,7 +12106,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       }
     }
     console.error(
-      `Was not able to convert the optName '${optName}' to full because it was not found in the template json (returning an option with no category)`
+      `Was not able to convert the optName '${optName}' to full because it was not found in the template json (returning an option with no category)`,
     );
     return optName;
   }
@@ -9567,19 +12114,19 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     await browser.runtime.sendMessage({
       action: "setSetting",
       name: path,
-      data: value
+      data: value,
     });
     await apply();
   }
   async function dmenuEditConfig(path) {
     const templates = await browser.runtime.sendMessage({
-      action: "getSettingsTemplate"
+      action: "getSettingsTemplate",
     });
     const configPath = getFullOptPath(templates, path);
     const template = getByPath(templates, configPath);
     let optionValue = await browser.runtime.sendMessage({
       action: "getSetting",
-      name: configPath
+      name: configPath,
     });
     if (optionValue.error) {
       console.error(`error from service worker: ${optionValue.error}`);
@@ -9596,7 +12143,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             setSettingByPath(configPath, false);
           }
         },
-        label
+        label,
       );
     } else if (template === "number") {
       dmenu(
@@ -9608,7 +12155,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           }
           setSettingByPath(configPath, Number(cmd));
         },
-        label
+        label,
       );
     } else if (Array.isArray(template)) {
       dmenu(
@@ -9616,18 +12163,20 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         (cmd, _shift) => {
           setSettingByPath(configPath, cmd);
         },
-        label
+        label,
       );
     } else {
       if (template !== "string") {
-        console.error(`Invalid template type: '${template}' Falling back to 'string' template type`);
+        console.error(
+          `Invalid template type: '${template}' Falling back to 'string' template type`,
+        );
       }
       dmenu(
         [],
         (cmd, _shift) => {
           setSettingByPath(configPath, cmd);
         },
-        label
+        label,
       );
     }
   }
@@ -9674,7 +12223,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   async function quickLoad() {
     const quicks2 = await browser.runtime.sendMessage({
       action: "getSetting",
-      name: "other.quicks"
+      name: "other.quicks",
     });
     if (!quicks2) {
       return [];
@@ -9685,7 +12234,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     await browser.runtime.sendMessage({
       action: "setSetting",
       name: "other.quicks",
-      data: quicks
+      data: quicks,
     });
   }
   function add_quick_interactive() {
@@ -9708,10 +12257,10 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             }
             add_quick(name2, value);
           },
-          "value:"
+          "value:",
         );
       },
-      "name:"
+      "name:",
     );
   }
   function remove_quick_interactive() {
@@ -9721,7 +12270,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       (name2, _shift) => {
         remove_quick(name2);
       },
-      "name:"
+      "name:",
     );
   }
   async function fetch_links() {
@@ -9734,7 +12283,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         links.push({
           url: response_data[i5].url,
           value: response_data[i5].name.toLowerCase(),
-          meta: "link"
+          meta: "link",
         });
       }
     } else {
@@ -9769,7 +12318,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       goto_items.push({
         url: item.href,
         value: item.innerText.toLowerCase().trim(),
-        meta: "goto"
+        meta: "goto",
       });
     }
   }
@@ -9777,25 +12326,29 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     document.body.innerHTML = "";
   }
   async function do_qm(opener = "") {
-    let cmd_list = quick_cmd_list().concat(goto_items).concat(vakken).concat(links).concat([
-      "home",
-      "quick add",
-      "quick remove",
-      "unbloat",
-      "config",
-      "clearsettings",
-      "discord",
-      "toggle performance mode",
-      "dizzy",
-      "breakdmenu",
-      "glass",
-      "ridge",
-      "reset plant",
-      "remove current theme",
-      "test cats",
-      "posh text",
-      "funny text"
-    ]);
+    let cmd_list = quick_cmd_list()
+      .concat(goto_items)
+      .concat(vakken)
+      .concat(links)
+      .concat([
+        "home",
+        "quick add",
+        "quick remove",
+        "unbloat",
+        "config",
+        "clearsettings",
+        "discord",
+        "toggle performance mode",
+        "dizzy",
+        "breakdmenu",
+        "glass",
+        "ridge",
+        "reset plant",
+        "remove current theme",
+        "test cats",
+        "posh text",
+        "funny text",
+      ]);
     if (dmenuConfig.toplevelConfig) {
       cmd_list = cmd_list.concat(await getDMenuOptionsForSettings(true));
     }
@@ -9811,8 +12364,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
               action: "setSetting",
               name: "other.dmenu",
               data: {
-                itemScore: false
-              }
+                itemScore: false,
+              },
             });
             return;
           case "config":
@@ -9821,7 +12374,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
               (cmd2, _shift) => {
                 dmenuEditConfig(cmd2);
               },
-              "config: "
+              "config: ",
             );
             return;
           case "quick add":
@@ -9863,17 +12416,17 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           case "plant data":
             console.log(
               await browser.runtime.sendMessage({
-                action: "getPlantAppData"
-              })
+                action: "getPlantAppData",
+              }),
             );
             break;
           case "remove current theme": {
             const data2 = await browser.runtime.sendMessage({
-              action: "getSettingsData"
+              action: "getSettingsData",
             });
             await browser.runtime.sendMessage({
               action: "removeCustomTheme",
-              id: data2.appearance.theme
+              id: data2.appearance.theme,
             });
             break;
           }
@@ -9881,7 +12434,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             const themes2 = await browser.runtime.sendMessage({
               action: "getThemes",
               categories: ["quickSettings"],
-              includeHidden: true
+              includeHidden: true,
             });
             console.log(themes2);
             break;
@@ -9889,13 +12442,13 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           case "posh text":
             document.body.style.setProperty(
               "--font-family",
-              `"Monsieur La Doulaise", "Montserrat", "Trebuchet MS", sans-serif`
+              `"Monsieur La Doulaise", "Montserrat", "Trebuchet MS", sans-serif`,
             );
             break;
           case "funny text":
             document.body.style.setProperty(
               "--font-family",
-              `"Comic Neue", "Montserrat", "Trebuchet MS", sans-serif`
+              `"Comic Neue", "Montserrat", "Trebuchet MS", sans-serif`,
             );
             break;
           default:
@@ -9928,17 +12481,26 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         }
       },
       "quick:",
-      opener
+      opener,
     );
   }
 
   // src/main-features/keybinds.ts
   document.addEventListener("keyup", async (e5) => {
-    if (e5.target?.tagName === "INPUT") return;
-    if (e5.target?.tagName === "TEXTAREA") return;
-    if (document.getElementById("tinymce")) return;
+    if (e5.target?.tagName === "INPUT") {
+      return;
+    }
+    if (e5.target?.tagName === "TEXTAREA") {
+      return;
+    }
+    if (document.getElementById("tinymce")) {
+      return;
+    }
     const key = e5.key === " " ? "Space" : e5.key.length === 1 ? e5.key.toUpperCase() : e5.key;
-    if ((typeof keybinds === "undefined" || !keybinds || Object.keys(keybinds).length === 0) && key === ":") {
+    if (
+      (typeof keybinds === "undefined" || !keybinds || Object.keys(keybinds).length === 0) &&
+      key === ":"
+    ) {
       do_qm("dmenu");
       return;
     }
@@ -9953,7 +12515,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         openGlobalChat(e5);
         break;
     }
-    if (!widgetEditModeInit) return;
+    if (!widgetEditModeInit) {
+      return;
+    }
     if (key === "Escape" && widgetEditMode) {
       await setEditMode(false);
       return;
@@ -9963,7 +12527,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         await setEditMode(true);
         break;
       case keybinds.widgetBag:
-        if (widgetEditMode) toggleBag();
+        if (widgetEditMode) {
+          toggleBag();
+        }
         break;
     }
   });
@@ -10012,10 +12578,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         }
         if (this.playing) {
           await this.onKeyDown(e5);
-        } else if (this.hasPlayedAtLeastOnce) {
-          if (e5.code === "Space") {
-            await this.#startGame();
-          }
+        } else if (this.hasPlayedAtLeastOnce && e5.code === "Space") {
+          await this.#startGame();
         }
       });
       document.addEventListener("keyup", async (e5) => {
@@ -10167,10 +12731,11 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         if (window.localStorage.getItem("snakehighscore")) {
           this.settings = await migrateSnake();
         }
-      } else if (this.constructor.name === "FlappyWidget") {
-        if (window.localStorage.getItem("flappyhighscore")) {
-          this.settings = await migrateFlappy();
-        }
+      } else if (
+        this.constructor.name === "FlappyWidget" &&
+        window.localStorage.getItem("flappyhighscore")
+      ) {
+        this.settings = await migrateFlappy();
       }
       for (const opt of this.options) {
         let value = this.settings.options[opt.name];
@@ -10210,21 +12775,15 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     get title() {
       return "Game";
     }
-    async onGameStart() {
-    }
+    async onGameStart() {}
     // Called when the game to update (same on all devices)
-    onGameTick() {
-    }
+    onGameTick() {}
     // Called when the game needs to render a new frame (dt is time since last
     // frame)
-    onGameDraw(_ctx, _deltaTime) {
-    }
-    async onKeyDown(_e) {
-    }
-    async onKeyUp(_e) {
-    }
-    async onMouse(_e) {
-    }
+    onGameDraw(_ctx, _deltaTime) {}
+    async onKeyDown(_e) {}
+    async onKeyUp(_e) {}
+    async onMouse(_e) {}
     get tickSpeed() {
       return 60;
     }
@@ -10264,7 +12823,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         x: w2 / 2,
         y: h4 / 2,
         dx: BALL_SPEED * this.getOpt("speed") * 0.01,
-        dy: -BALL_SPEED * this.getOpt("speed") * 0.01
+        dy: -BALL_SPEED * this.getOpt("speed") * 0.01,
       };
       this.paddleX = (w2 - PADDLE_WIDTH) / 2;
       this.leftPressed = false;
@@ -10276,7 +12835,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           this.bricks.push({
             x: c5 * (BRICK_WIDTH + BRICK_PADDING) + 10,
             y: r5 * (BRICK_HEIGHT + BRICK_PADDING) + 10,
-            status: 1
+            status: 1,
           });
         }
       }
@@ -10301,8 +12860,12 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       ctx.fillStyle = getThemeVar("--color-base01");
       ctx.fillRect(0, 0, w2, h4);
       const speed = PADDLE_SPEED * this.getOpt("speed") * 0.01;
-      if (this.leftPressed) this.paddleX -= speed * dt;
-      if (this.rightPressed) this.paddleX += speed * dt;
+      if (this.leftPressed) {
+        this.paddleX -= speed * dt;
+      }
+      if (this.rightPressed) {
+        this.paddleX += speed * dt;
+      }
       this.paddleX = Math.max(0, Math.min(w2 - PADDLE_WIDTH, this.paddleX));
       const ball = this.ball;
       ball.x += ball.dx * dt;
@@ -10319,7 +12882,11 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         ball.y = BALL_RADIUS;
         ball.dy *= -1;
       }
-      if (ball.y > h4 - PADDLE_HEIGHT - BALL_RADIUS && ball.x > this.paddleX && ball.x < this.paddleX + PADDLE_WIDTH) {
+      if (
+        ball.y > h4 - PADDLE_HEIGHT - BALL_RADIUS &&
+        ball.x > this.paddleX &&
+        ball.x < this.paddleX + PADDLE_WIDTH
+      ) {
         ball.dy *= -1;
         ball.y = h4 - PADDLE_HEIGHT - BALL_RADIUS;
       }
@@ -10327,13 +12894,17 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         this.stopGame();
       }
       for (const b3 of this.bricks) {
-        if (b3.status === 1) {
-          if (ball.x > b3.x && ball.x < b3.x + BRICK_WIDTH && ball.y > b3.y && ball.y < b3.y + BRICK_HEIGHT) {
-            b3.status = 0;
-            ball.dy *= -1;
-            this.score++;
-            break;
-          }
+        if (
+          b3.status === 1 &&
+          ball.x > b3.x &&
+          ball.x < b3.x + BRICK_WIDTH &&
+          ball.y > b3.y &&
+          ball.y < b3.y + BRICK_HEIGHT
+        ) {
+          b3.status = 0;
+          ball.dy *= -1;
+          this.score++;
+          break;
         }
       }
       ctx.fillStyle = getThemeVar("--color-accent");
@@ -10350,12 +12921,18 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       }
     }
     onKeyDown(e5) {
-      if (e5.code === "ArrowLeft") this.leftPressed = true;
-      else if (e5.code === "ArrowRight") this.rightPressed = true;
+      if (e5.code === "ArrowLeft") {
+        this.leftPressed = true;
+      } else if (e5.code === "ArrowRight") {
+        this.rightPressed = true;
+      }
     }
     onKeyUp(e5) {
-      if (e5.code === "ArrowLeft") this.leftPressed = false;
-      else if (e5.code === "ArrowRight") this.rightPressed = false;
+      if (e5.code === "ArrowLeft") {
+        this.leftPressed = false;
+      } else if (e5.code === "ArrowRight") {
+        this.rightPressed = false;
+      }
     }
   };
   registerWidget(new BreakoutWidget());
@@ -10394,7 +12971,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       ctx.strokeStyle = getThemeVar("--color-base01");
       ctx.fillRect(0, h4 - FLOOR_H, w2, FLOOR_H);
       ctx.strokeRect(0, h4 - FLOOR_H, w2, FLOOR_H);
-      for (let i5 = 0; i5 < w2 / 20 * 2; i5++) {
+      for (let i5 = 0; i5 < (w2 / 20) * 2; i5++) {
         ctx.beginPath();
         ctx.moveTo(i5 * 20 + this.bgX, h4 - FLOOR_H);
         ctx.lineTo(i5 * 20 + this.bgX + FLOOR_H, h4);
@@ -10466,7 +13043,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       this.birdY += this.birdVel * dt;
       this.birdVel = Math.min(
         this.birdVel + GRAVITY * this.getOpt("speed") * 0.01 * dt,
-        TERMVEL * this.getOpt("speed") * 0.01
+        TERMVEL * this.getOpt("speed") * 0.01,
       );
       ctx;
       if (this.jump) {
@@ -10529,14 +13106,19 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     get options() {
       return [
         GameOption.slider("speed", "Speed:", 10, 300, 100),
-        GameOption.slider("size", "Size:", 100, 500, 100)
+        GameOption.slider("size", "Size:", 100, 500, 100),
       ];
     }
     #tick() {
       this.#curDir = this.#targetDir;
       const head = this.#snake[this.#snake.length - 1];
       const newHead = head.add(this.#curDir);
-      if (newHead.x < 0 || newHead.y < 0 || newHead.x >= this.#getCellCount() || newHead.y >= this.#getCellCount()) {
+      if (
+        newHead.x < 0 ||
+        newHead.y < 0 ||
+        newHead.x >= this.#getCellCount() ||
+        newHead.y >= this.#getCellCount()
+      ) {
         this.stopGame();
         return;
       }
@@ -10557,7 +13139,10 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     }
     #getRandomFieldPos() {
       const cellCount = this.#getCellCount();
-      return new Point(Math.floor(Math.random() * cellCount), Math.floor(Math.random() * cellCount));
+      return new Point(
+        Math.floor(Math.random() * cellCount),
+        Math.floor(Math.random() * cellCount),
+      );
     }
     #spawnFood() {
       this.#food = this.#getRandomFieldPos();
@@ -10600,7 +13185,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         Math.floor(celRad + dot.y * celRad * 2),
         celRad * 0.9,
         0,
-        Math.PI * 2
+        Math.PI * 2,
       );
       ctx.fill();
     }
@@ -10622,7 +13207,13 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
               ctx.fillStyle = `${getThemeVar("--color-base02")}50`;
             }
             ctx.beginPath();
-            ctx.arc(celRad + x3 * celRad * 2, celRad + y3 * celRad * 2, celRad * 0.7, 0, Math.PI * 2);
+            ctx.arc(
+              celRad + x3 * celRad * 2,
+              celRad + y3 * celRad * 2,
+              celRad * 0.7,
+              0,
+              Math.PI * 2,
+            );
             ctx.fill();
           }
         }
@@ -10696,7 +13287,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         x: w2 / 2,
         y: h4 / 2,
         dx: PONG_BALL_SPEED * this.getOpt("speed") * 0.01 * (Math.random() > 0.5 ? 1 : -1),
-        dy: PONG_BALL_SPEED * this.getOpt("speed") * 0.01 * (Math.random() * 2 - 1)
+        dy: PONG_BALL_SPEED * this.getOpt("speed") * 0.01 * (Math.random() * 2 - 1),
       };
       this.leftY = (h4 - PONG_PADDLE_HEIGHT) / 2;
       this.rightY = (h4 - PONG_PADDLE_HEIGHT) / 2;
@@ -10718,7 +13309,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       ctx.fill();
     }
     onGameDraw(ctx, dt) {
-      if (!this.ball) return;
+      if (!this.ball) {
+        return;
+      }
       const w2 = this.canvas.width;
       const h4 = this.canvas.height;
       const colorBase = getThemeVar("--color-base01");
@@ -10728,8 +13321,12 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       ctx.fillRect(0, 0, w2, h4);
       const speed = PONG_PADDLE_SPEED * this.getOpt("speed") * 0.01;
       const paddleDelta = speed * dt;
-      if (this.leftUp) this.leftY -= paddleDelta;
-      if (this.leftDown) this.leftY += paddleDelta;
+      if (this.leftUp) {
+        this.leftY -= paddleDelta;
+      }
+      if (this.leftDown) {
+        this.leftY += paddleDelta;
+      }
       this.leftY = Math.max(0, Math.min(h4 - PONG_PADDLE_HEIGHT, this.leftY));
       const aiCenter = this.rightY + PONG_PADDLE_HEIGHT / 2;
       const diff = this.ball.y - aiCenter;
@@ -10747,7 +13344,11 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         b3.dy *= -1;
         b3.y = Math.max(PONG_BALL_RADIUS, Math.min(h4 - PONG_BALL_RADIUS, b3.y));
       }
-      if (b3.x < PONG_PADDLE_WIDTH + PONG_BALL_RADIUS && b3.y > this.leftY && b3.y < this.leftY + PONG_PADDLE_HEIGHT) {
+      if (
+        b3.x < PONG_PADDLE_WIDTH + PONG_BALL_RADIUS &&
+        b3.y > this.leftY &&
+        b3.y < this.leftY + PONG_PADDLE_HEIGHT
+      ) {
         b3.dx *= -1;
         b3.x = PONG_PADDLE_WIDTH + PONG_BALL_RADIUS;
         b3.dx *= SPEEDUP_FACTOR;
@@ -10756,7 +13357,11 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         b3.dy = Math.sign(b3.dy) * Math.min(Math.abs(b3.dy), MAX_SPEED);
         this.score++;
       }
-      if (b3.x > w2 - PONG_PADDLE_WIDTH - PONG_BALL_RADIUS && b3.y > this.rightY && b3.y < this.rightY + PONG_PADDLE_HEIGHT) {
+      if (
+        b3.x > w2 - PONG_PADDLE_WIDTH - PONG_BALL_RADIUS &&
+        b3.y > this.rightY &&
+        b3.y < this.rightY + PONG_PADDLE_HEIGHT
+      ) {
         b3.dx *= -1;
         b3.x = w2 - PONG_PADDLE_WIDTH - PONG_BALL_RADIUS;
         b3.dx *= SPEEDUP_FACTOR;
@@ -10782,7 +13387,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         this.rightY,
         PONG_PADDLE_WIDTH,
         PONG_PADDLE_HEIGHT,
-        3
+        3,
       );
       ctx.strokeStyle = colorText;
       ctx.setLineDash([4, 5]);
@@ -10793,12 +13398,20 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       ctx.setLineDash([]);
     }
     onKeyDown(e5) {
-      if (e5.code === "ArrowUp") this.leftUp = true;
-      if (e5.code === "ArrowDown") this.leftDown = true;
+      if (e5.code === "ArrowUp") {
+        this.leftUp = true;
+      }
+      if (e5.code === "ArrowDown") {
+        this.leftDown = true;
+      }
     }
     onKeyUp(e5) {
-      if (e5.code === "ArrowUp") this.leftUp = false;
-      if (e5.code === "ArrowDown") this.leftDown = false;
+      if (e5.code === "ArrowUp") {
+        this.leftUp = false;
+      }
+      if (e5.code === "ArrowDown") {
+        this.leftDown = false;
+      }
     }
   };
   registerWidget(new PongWidget());
@@ -10812,44 +13425,44 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       [0, 0, 0, 0],
       [1, 1, 1, 1],
       [0, 0, 0, 0],
-      [0, 0, 0, 0]
+      [0, 0, 0, 0],
     ],
     O: [
       [0, 1, 1, 0],
       [0, 1, 1, 0],
       [0, 0, 0, 0],
-      [0, 0, 0, 0]
+      [0, 0, 0, 0],
     ],
     T: [
       [0, 1, 0, 0],
       [1, 1, 1, 0],
       [0, 0, 0, 0],
-      [0, 0, 0, 0]
+      [0, 0, 0, 0],
     ],
     S: [
       [0, 1, 1, 0],
       [1, 1, 0, 0],
       [0, 0, 0, 0],
-      [0, 0, 0, 0]
+      [0, 0, 0, 0],
     ],
     Z: [
       [1, 1, 0, 0],
       [0, 1, 1, 0],
       [0, 0, 0, 0],
-      [0, 0, 0, 0]
+      [0, 0, 0, 0],
     ],
     J: [
       [1, 0, 0, 0],
       [1, 1, 1, 0],
       [0, 0, 0, 0],
-      [0, 0, 0, 0]
+      [0, 0, 0, 0],
     ],
     L: [
       [0, 0, 1, 0],
       [1, 1, 1, 0],
       [0, 0, 0, 0],
-      [0, 0, 0, 0]
-    ]
+      [0, 0, 0, 0],
+    ],
   };
   function rotate(matrix) {
     const size = matrix.length;
@@ -10869,11 +13482,13 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         rotations.push(next);
       }
     }
-    while (rotations.length < 4) rotations.push(rotations[0]);
+    while (rotations.length < 4) {
+      rotations.push(rotations[0]);
+    }
     return rotations;
   }
   var PIECES = Object.fromEntries(
-    Object.entries(BASE_PIECES).map(([name2, base]) => [name2, generateRotations(base)])
+    Object.entries(BASE_PIECES).map(([name2, base]) => [name2, generateRotations(base)]),
   );
   var PIECE_TYPES = Object.keys(PIECES);
   var KICKS = {
@@ -10883,57 +13498,57 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         [-1, 0],
         [-1, 1],
         [0, -2],
-        [-1, -2]
+        [-1, -2],
       ],
       "1>0": [
         [0, 0],
         [1, 0],
         [1, -1],
         [0, 2],
-        [1, 2]
+        [1, 2],
       ],
       "1>2": [
         [0, 0],
         [1, 0],
         [1, -1],
         [0, 2],
-        [1, 2]
+        [1, 2],
       ],
       "2>1": [
         [0, 0],
         [-1, 0],
         [-1, 1],
         [0, -2],
-        [-1, -2]
+        [-1, -2],
       ],
       "2>3": [
         [0, 0],
         [1, 0],
         [1, 1],
         [0, -2],
-        [1, -2]
+        [1, -2],
       ],
       "3>2": [
         [0, 0],
         [-1, 0],
         [-1, -1],
         [0, 2],
-        [-1, 2]
+        [-1, 2],
       ],
       "3>0": [
         [0, 0],
         [-1, 0],
         [-1, -1],
         [0, 2],
-        [-1, 2]
+        [-1, 2],
       ],
       "0>3": [
         [0, 0],
         [1, 0],
         [1, 1],
         [0, -2],
-        [1, -2]
-      ]
+        [1, -2],
+      ],
     },
     I: {
       "0>1": [
@@ -10941,57 +13556,57 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         [-2, 0],
         [1, 0],
         [-2, -1],
-        [1, 2]
+        [1, 2],
       ],
       "1>0": [
         [0, 0],
         [2, 0],
         [-1, 0],
         [2, 1],
-        [-1, -2]
+        [-1, -2],
       ],
       "1>2": [
         [0, 0],
         [-1, 0],
         [2, 0],
         [-1, 2],
-        [2, -1]
+        [2, -1],
       ],
       "2>1": [
         [0, 0],
         [1, 0],
         [-2, 0],
         [1, -2],
-        [-2, 1]
+        [-2, 1],
       ],
       "2>3": [
         [0, 0],
         [2, 0],
         [-1, 0],
         [2, 1],
-        [-1, -2]
+        [-1, -2],
       ],
       "3>2": [
         [0, 0],
         [-2, 0],
         [1, 0],
         [-2, -1],
-        [1, 2]
+        [1, 2],
       ],
       "3>0": [
         [0, 0],
         [1, 0],
         [-2, 0],
         [1, -2],
-        [-2, 1]
+        [-2, 1],
       ],
       "0>3": [
         [0, 0],
         [-1, 0],
         [2, 0],
         [-1, 2],
-        [2, -1]
-      ]
+        [2, -1],
+      ],
     },
     O: {
       "0>1": [[0, 0]],
@@ -11001,8 +13616,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       "1>0": [[0, 0]],
       "2>1": [[0, 0]],
       "3>2": [[0, 0]],
-      "0>3": [[0, 0]]
-    }
+      "0>3": [[0, 0]],
+    },
   };
   function drawRoundedRect(ctx, x3, y3, width, height, radius) {
     ctx.beginPath();
@@ -11057,8 +13672,14 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           if (shape[py][px]) {
             const bx = x3 + px;
             const by = y3 + py;
-            if (bx < 0 || bx >= BOARD_WIDTH || by >= BOARD_HEIGHT || by >= 0 && this.#board[by][bx])
+            if (
+              bx < 0 ||
+              bx >= BOARD_WIDTH ||
+              by >= BOARD_HEIGHT ||
+              (by >= 0 && this.#board[by][bx])
+            ) {
               return true;
+            }
           }
         }
       }
@@ -11071,7 +13692,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           if (shape[py][px]) {
             const bx = this.#pieceX + px;
             const by = this.#pieceY + py;
-            if (by >= 0) this.#board[by][bx] = this.#currentPiece;
+            if (by >= 0) {
+              this.#board[by][bx] = this.#currentPiece;
+            }
           }
         }
       }
@@ -11094,8 +13717,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       this.#currentRotation = 0;
       this.#pieceX = Math.floor(BOARD_WIDTH / 2) - 2;
       this.#pieceY = -1;
-      if (this.#collision(this.#currentPiece, this.#currentRotation, this.#pieceX, this.#pieceY))
+      if (this.#collision(this.#currentPiece, this.#currentRotation, this.#pieceX, this.#pieceY)) {
         this.stopGame();
+      }
     }
     async onGameStart() {
       this.#board = Array.from({ length: BOARD_HEIGHT }, () => new Array(BOARD_WIDTH).fill(0));
@@ -11140,7 +13764,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
               y3 * CELL_SIZE,
               CELL_SIZE,
               CELL_SIZE,
-              radius
+              radius,
             );
             ctx.fill();
             ctx.strokeStyle = getThemeVar("--color-base03");
@@ -11171,7 +13795,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         S: "#00FF00",
         Z: "#FF0000",
         J: "#0000FF",
-        L: "#FFA500"
+        L: "#FFA500",
       };
       return colors[type] || "#FFFFFF";
     }
@@ -11347,9 +13971,12 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       switch (stage) {
         case 1: {
           title.textContent = this.lang === "dutch" ? "1. Bewerken\u{1F4DD}" : "1. Edit\u{1F4DD}";
-          description.innerHTML = this.lang === "dutch" ? `Pas je widgets aan door op de <button class="topnav__btn smpp-button" style="display:inline-flex !important; pointer-events: none"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" class="edit_button" height="18px" width="18px" viewBox="0 0 24 24" xml:space="preserve">
+          description.innerHTML =
+            this.lang === "dutch"
+              ? `Pas je widgets aan door op de <button class="topnav__btn smpp-button" style="display:inline-flex !important; pointer-events: none"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" class="edit_button" height="18px" width="18px" viewBox="0 0 24 24" xml:space="preserve">
 <g><g><path xmlns="http://www.w3.org/2000/svg" class="st1" stroke-linecap:round;stroke-linejoin:round;-inkscape-stroke:none"="" d="m 19.792969,1.2089844 c -0.773047,0 -1.546203,0.290977 -2.134766,0.8730469 -6.69e-4,6.478e-4 -0.0013,0.0013 -0.002,0.00195 L 8.4119915,11.389897 c -0.5321594,0.536333 -1.9587661,2.040145 -2.9061791,5.334709 -0.1062793,0.369579 -0.1650107,0.570623 -0.2207032,0.85994 -0.046789,0.243065 -0.1295961,0.724628 0.2070338,1.013107 0.3909805,0.335056 1.0440816,0.133455 1.3847656,0.03125 C 7.387553,18.47571 7.9834625,18.287442 8.5897993,18.031247 11.103423,16.969168 12.593117,15.70399 12.985931,15.188066 l 8.93985,-8.8697066 C 23.11495,5.1606353 23.105005,3.2461646 21.927734,2.0820313 21.339171,1.4999614 20.566016,1.2089844 19.792969,1.2089844 Z" id="path5" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="scccssssscccs"></path><path xmlns="http://www.w3.org/2000/svg" d="M 10.273212,2.8358152 H 5.5822718 c -1.3827164,0 -2.0740869,0 -2.6022128,0.2661137 C 2.5154954,3.3360099 2.1378007,3.709514 1.9011058,4.1689107 1.6320062,4.6911889 1.6320062,5.3748762 1.6320062,6.7422506 V 18.461557 c 0,1.367374 0,2.051122 0.2690996,2.573363 0.2366949,0.459374 0.6143896,0.832926 1.0789532,1.066946 0.5281259,0.266126 1.2194964,0.266126 2.6022128,0.266126 H 17.433068 c 1.382716,0 2.074137,0 2.602237,-0.266126 0.464527,-0.23402 0.842271,-0.607572 1.078917,-1.066946 0.269112,-0.522241 0.269112,-1.205989 0.269112,-2.573363 v -5.249273" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="stroke-width:3.25435;stroke-dasharray:none" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="csccssccssccsccc"></path> </g></g>
-</svg></button> knop <strong><i>linksboven</i></strong> te drukken` : `Edit your widgets using the <button class="topnav__btn smpp-button"  style="display:inline-flex !important; pointer-events: none"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" class="edit_button" height="18px" width="18px" viewBox="0 0 24 24" xml:space="preserve">
+</svg></button> knop <strong><i>linksboven</i></strong> te drukken`
+              : `Edit your widgets using the <button class="topnav__btn smpp-button"  style="display:inline-flex !important; pointer-events: none"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" class="edit_button" height="18px" width="18px" viewBox="0 0 24 24" xml:space="preserve">
 <g><g><path xmlns="http://www.w3.org/2000/svg" class="st1" stroke-linecap:round;stroke-linejoin:round;-inkscape-stroke:none"="" d="m 19.792969,1.2089844 c -0.773047,0 -1.546203,0.290977 -2.134766,0.8730469 -6.69e-4,6.478e-4 -0.0013,0.0013 -0.002,0.00195 L 8.4119915,11.389897 c -0.5321594,0.536333 -1.9587661,2.040145 -2.9061791,5.334709 -0.1062793,0.369579 -0.1650107,0.570623 -0.2207032,0.85994 -0.046789,0.243065 -0.1295961,0.724628 0.2070338,1.013107 0.3909805,0.335056 1.0440816,0.133455 1.3847656,0.03125 C 7.387553,18.47571 7.9834625,18.287442 8.5897993,18.031247 11.103423,16.969168 12.593117,15.70399 12.985931,15.188066 l 8.93985,-8.8697066 C 23.11495,5.1606353 23.105005,3.2461646 21.927734,2.0820313 21.339171,1.4999614 20.566016,1.2089844 19.792969,1.2089844 Z" id="path5" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="scccssssscccs"></path><path xmlns="http://www.w3.org/2000/svg" d="M 10.273212,2.8358152 H 5.5822718 c -1.3827164,0 -2.0740869,0 -2.6022128,0.2661137 C 2.5154954,3.3360099 2.1378007,3.709514 1.9011058,4.1689107 1.6320062,4.6911889 1.6320062,5.3748762 1.6320062,6.7422506 V 18.461557 c 0,1.367374 0,2.051122 0.2690996,2.573363 0.2366949,0.459374 0.6143896,0.832926 1.0789532,1.066946 0.5281259,0.266126 1.2194964,0.266126 2.6022128,0.266126 H 17.433068 c 1.382716,0 2.074137,0 2.602237,-0.266126 0.464527,-0.23402 0.842271,-0.607572 1.078917,-1.066946 0.269112,-0.522241 0.269112,-1.205989 0.269112,-2.573363 v -5.249273" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="stroke-width:3.25435;stroke-dasharray:none" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" sodipodi:nodetypes="csccssccssccsccc"></path> </g></g>
 </svg></button> button in the <strong><i> top left </i></strong> corner`;
           this.container.appendChild(title);
@@ -11362,8 +13989,12 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           break;
         }
         case 2:
-          title.textContent = this.lang === "dutch" ? "2. Verplaatsen\u{1F4CD}" : "2. Move\u{1F4CD}";
-          description.innerHTML = this.lang === "dutch" ? "Sleep <strong><i>deze widget</i></strong> naar de gewenste locatie en laat los om ze te verplaatsen." : "Move <strong><i>this widget</i></strong> by dragging and dropping it";
+          title.textContent =
+            this.lang === "dutch" ? "2. Verplaatsen\u{1F4CD}" : "2. Move\u{1F4CD}";
+          description.innerHTML =
+            this.lang === "dutch"
+              ? "Sleep <strong><i>deze widget</i></strong> naar de gewenste locatie en laat los om ze te verplaatsen."
+              : "Move <strong><i>this widget</i></strong> by dragging and dropping it";
           this.container.appendChild(title);
           this.container.appendChild(description);
           if (this.boundMoveTutorial) {
@@ -11373,9 +14004,15 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           this.element.addEventListener("mousedown", this.boundMoveTutorial);
           break;
         case 3: {
-          title.innerHTML = this.lang === "dutch" ? `3. Widgets toevoegen <svg class="smpp-widget-bag-handle-icon" style="pointer-events: none; height: 1em; width: 1.2em; display:inline" version="1.1" viewBox="0 0 448 448" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-.898 -124.01)"><path d="m26.458 288.48 198.44 119.06 198.44-119.06" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="100px"></path></g></svg>` : `3. Add widgets <svg class="smpp-widget-bag-handle-icon" style="pointer-events: none; height: 1em; width: 1.2em; display:inline" version="1.1" viewBox="0 0 448 448" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-.898 -124.01)"><path d="m26.458 288.48 198.44 119.06 198.44-119.06" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="100px"></path></g></svg>`;
+          title.innerHTML =
+            this.lang === "dutch"
+              ? `3. Widgets toevoegen <svg class="smpp-widget-bag-handle-icon" style="pointer-events: none; height: 1em; width: 1.2em; display:inline" version="1.1" viewBox="0 0 448 448" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-.898 -124.01)"><path d="m26.458 288.48 198.44 119.06 198.44-119.06" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="100px"></path></g></svg>`
+              : `3. Add widgets <svg class="smpp-widget-bag-handle-icon" style="pointer-events: none; height: 1em; width: 1.2em; display:inline" version="1.1" viewBox="0 0 448 448" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-.898 -124.01)"><path d="m26.458 288.48 198.44 119.06 198.44-119.06" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="100px"></path></g></svg>`;
           title.style = "font-size: 1.6rem !important;";
-          description.innerHTML = this.lang === "dutch" ? "Klik bovenaan op de <strong><i>balk met het pijltje</i></strong> om widgets te kiezen en toe te voegen. " : "Click the <strong><i>bar with the arrow</i></strong> at the top to pick and add widgets.";
+          description.innerHTML =
+            this.lang === "dutch"
+              ? "Klik bovenaan op de <strong><i>balk met het pijltje</i></strong> om widgets te kiezen en toe te voegen. "
+              : "Click the <strong><i>bar with the arrow</i></strong> at the top to pick and add widgets.";
           this.container.appendChild(title);
           this.container.appendChild(description);
           const bagHandle = document.querySelector(".smpp-widget-bag-handle");
@@ -11387,7 +14024,10 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         }
         case 4:
           title.textContent = this.lang === "dutch" ? "4. Verwijderen\u274C" : "4. Removing\u274C";
-          description.innerHTML = this.lang === "dutch" ? "Sleep <strong><i>deze widget</i></strong> naar diezelfde balk om hem te verwijderen." : "Drag <strong><i>this widget</i></strong> back to that same bar to remove it.";
+          description.innerHTML =
+            this.lang === "dutch"
+              ? "Sleep <strong><i>deze widget</i></strong> naar diezelfde balk om hem te verwijderen."
+              : "Drag <strong><i>this widget</i></strong> back to that same bar to remove it.";
           this.container.appendChild(title);
           this.container.appendChild(description);
           break;
@@ -11403,7 +14043,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   var TakenWidget = class extends WidgetBase {
     defaultSettings() {
       return {
-        maxAssignments: 5
+        maxAssignments: 5,
       };
     }
     onSettingsChange() {
@@ -11427,7 +14067,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             throw new Error("School name could not be determined.");
           }
           const url = `https://${schoolName}.smartschool.be/planner/api/v1/planned-elements/user/${userId}?from=${getCurrentDate()}&to=${getFutureDate(
-            foresight
+            foresight,
           )}&types=planned-assignments,planned-to-dos`;
           sendDebug("[AS]", "Fetching planner data from:", url);
           const response = await fetch(url);
@@ -11458,7 +14098,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           if (!data2) {
             TasksContainer.innerHTML = "Er is iets ernstig misgegaan :(";
             return console.error("No planner data, Did something go wrong?");
-          } else if (DEBUG) {
+          }
+          if (DEBUG) {
             sendDebug("[AS]", "Planner data fetched successfully.");
           }
           if (!Array.isArray(data2) || data2.length === 0) {
@@ -11474,7 +14115,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             TasksContainer.appendChild(noDataContainer);
             TasksContainer.appendChild(noDataContainerTextContainer);
           }
-          data2.sort((a5, b3) => new Date(a5.period.dateTimeFrom) - new Date(b3.period.dateTimeFrom));
+          data2.sort(
+            (a5, b3) => new Date(a5.period.dateTimeFrom) - new Date(b3.period.dateTimeFrom),
+          );
           let lastDate = "";
           if (data2.length > this.settings.maxAssignments) {
             data2 = data2.slice(0, this.settings.maxAssignments);
@@ -11489,7 +14132,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             let dateText = taskDate.toLocaleDateString("nl-NL", {
               weekday: "long",
               month: "long",
-              day: "numeric"
+              day: "numeric",
             });
             if (taskDate.toDateString() === today.toDateString()) {
               dateText = "Vandaag";
@@ -11513,27 +14156,31 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             const wrapperDiv = document.createElement("div");
             wrapperDiv.classList.add("todo-column__abbreviation-cell__wrapper", "wrapperdiv");
             wrapperDiv.classList.add(
-              `c-${element.color.split("-")[0]}-combo--${element.color.split("-")[1]}`
+              `c-${element.color.split("-")[0]}-combo--${element.color.split("-")[1]}`,
               // LET HIM COOK
             );
             sendDebug("[AS]", "Creating icon for assignment:", element, element.icon);
             if (element.plannedElementType === "planned-to-dos") {
               fetch(
-                `https://${getSchoolName()}.smartschool.be/smsc/svg/${element.icon}/${element.icon}_16x16.svg`
-              ).then((response) => response.blob()).then((blob) => {
-                const iconSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-                iconSvg.setAttribute("width", "16px");
-                iconSvg.setAttribute("height", "16px");
-                const reader = new FileReader();
-                reader.onload = (e5) => {
-                  iconSvg.innerHTML = e5.target.result;
-                };
-                reader.readAsText(blob);
-                wrapperDiv.appendChild(iconSvg);
-              });
+                `https://${getSchoolName()}.smartschool.be/smsc/svg/${element.icon}/${element.icon}_16x16.svg`,
+              )
+                .then((response) => response.blob())
+                .then((blob) => {
+                  const iconSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                  iconSvg.setAttribute("width", "16px");
+                  iconSvg.setAttribute("height", "16px");
+                  const reader = new FileReader();
+                  reader.onload = (e5) => {
+                    iconSvg.innerHTML = e5.target.result;
+                  };
+                  reader.readAsText(blob);
+                  wrapperDiv.appendChild(iconSvg);
+                });
             } else {
               const abbreviationSpan = document.createElement("span");
-              abbreviationSpan.classList.add("todo-column__abbreviation-cell__wrapper__abbreviation");
+              abbreviationSpan.classList.add(
+                "todo-column__abbreviation-cell__wrapper__abbreviation",
+              );
               abbreviationSpan.textContent = element.assignmentType.abbreviation || "?";
               abbreviationSpan.style.cssText = "font-size:14px;font-weight:700;";
               wrapperDiv.appendChild(abbreviationSpan);
@@ -11549,8 +14196,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
               "nl-NL",
               {
                 hour: "2-digit",
-                minute: "2-digit"
-              }
+                minute: "2-digit",
+              },
             )} \u2022 ${element.courses?.[0]?.name || "TODO "}`;
             metadataSpan.classList.add("task-description");
             detailsDiv.append(titleSpan, metadataSpan);
@@ -11592,9 +14239,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   async function markAsFinished(as_ID, name2) {
     const schoolName = getSchoolName();
     const userId = getUserId();
-    if (!schoolName || !userId) {
+    if (!(schoolName && userId)) {
       console.error(
-        "SMPP: Could not retrieve school name or user ID. Cannot mark assignment as finished."
+        "SMPP: Could not retrieve school name or user ID. Cannot mark assignment as finished.",
       );
       return false;
     }
@@ -11604,14 +14251,14 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       const response = await fetch(url, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({})
+        body: JSON.stringify({}),
       });
       if (!response.ok) {
         const errorData = await response.text();
         throw new Error(
-          `Failed to mark assignment ${as_ID} as finished: ${response.status} ${response.statusText}. Response: ${errorData}`
+          `Failed to mark assignment ${as_ID} as finished: ${response.status} ${response.statusText}. Response: ${errorData}`,
         );
       }
       sendDebug("[AS]", `Assignment ${as_ID} marked as finished successfully.`);
@@ -11619,7 +14266,10 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       if (assignmentElement) {
         const parentContainer = assignmentElement.parentElement;
         let dayHeader = assignmentElement.previousElementSibling;
-        while (dayHeader && (!dayHeader.classList.contains("date-header-assignments") || dayHeader.tagName !== "H3")) {
+        while (
+          dayHeader &&
+          (!dayHeader.classList.contains("date-header-assignments") || dayHeader.tagName !== "H3")
+        ) {
           dayHeader = dayHeader.previousElementSibling;
         }
         assignmentElement.remove();
@@ -11631,7 +14281,10 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
               hasMoreAssignmentsForThisDay = true;
               break;
             }
-            if (nextSibling.classList.contains("date-header-assignments") && nextSibling.tagName === "H3") {
+            if (
+              nextSibling.classList.contains("date-header-assignments") &&
+              nextSibling.tagName === "H3"
+            ) {
               break;
             }
             nextSibling = nextSibling.nextElementSibling;
@@ -11692,11 +14345,13 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   async function fetchDelijnData(url) {
     return await browser.runtime.sendMessage({
       action: "fetchDelijnData",
-      url
+      url,
     });
   }
   async function createHalteDoorkomst(doorkomst, container, monochrome, signal) {
-    if (signal?.aborted) return;
+    if (signal?.aborted) {
+      return;
+    }
     const entiteitnummer = doorkomst.entiteitnummer;
     const lijnnummer = doorkomst.lijnnummer;
     const destination = doorkomst.bestemming;
@@ -11728,7 +14383,12 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         ETA = new Date(doorkomst["real-timeTijdstip"]);
       }
       arrivalTimeDeviation = Math.round((ETA - originalETA) / 1e3 / 60);
-      arrivalTimeDeviation = arrivalTimeDeviation === 0 ? "On time" : arrivalTimeDeviation > 0 ? `+${arrivalTimeDeviation}` : arrivalTimeDeviation;
+      arrivalTimeDeviation =
+        arrivalTimeDeviation === 0
+          ? "On time"
+          : arrivalTimeDeviation > 0
+            ? `+${arrivalTimeDeviation}`
+            : arrivalTimeDeviation;
       timeUntilDeparture = calculateTimeUntilDepartureInMins(ETA);
       timeUntilDeparture = timeUntilDeparture < 1 ? "Now" : `${timeUntilDeparture} Min.`;
     }
@@ -11761,7 +14421,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     lijnCard.appendChild(lijnCardTop);
     lijnCard.appendChild(arrivalTimeDeviationElement);
     lijnCard.appendChild(lijnCardBottom);
-    if (signal?.aborted) return;
+    if (signal?.aborted) {
+      return;
+    }
     container.appendChild(lijnCard);
     try {
       await updateLijnCardWithApiData(
@@ -11769,7 +14431,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         entiteitnummer,
         lijnnummer,
         monochrome,
-        cardSignal
+        cardSignal,
       );
     } catch (err) {
       if (err.name === "AbortError") {
@@ -11778,27 +14440,39 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       console.error(err);
     }
   }
-  async function updateLijnCardWithApiData(lijnNumberElement, entiteitnummer, lijnnummer, monochrome, signal) {
-    if (signal?.aborted) return;
+  async function updateLijnCardWithApiData(
+    lijnNumberElement,
+    entiteitnummer,
+    lijnnummer,
+    monochrome,
+    signal,
+  ) {
+    if (signal?.aborted) {
+      return;
+    }
     try {
       const individualLijnData = await fetchDelijnData(
         `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${entiteitnummer}/${lijnnummer}`,
-        { signal }
+        { signal },
       );
-      if (signal?.aborted) return;
+      if (signal?.aborted) {
+        return;
+      }
       const publicLineNumber = individualLijnData.lijnnummerPubliek;
       lijnNumberElement.textContent = publicLineNumber;
       const individualLijnDataColors = await fetchDelijnData(
         `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${entiteitnummer}/${lijnnummer}/lijnkleuren`,
-        { signal }
+        { signal },
       );
-      if (signal?.aborted) return;
+      if (signal?.aborted) {
+        return;
+      }
       if (!monochrome) {
         lijnNumberElement.style.backgroundColor = getHexByCode(
-          individualLijnDataColors.achtergrond.code
+          individualLijnDataColors.achtergrond.code,
         );
         lijnNumberElement.style.borderColor = getHexByCode(
-          individualLijnDataColors.achtergrondRand.code
+          individualLijnDataColors.achtergrondRand.code,
         );
         lijnNumberElement.style.color = getHexByCode(individualLijnDataColors.voorgrond.code);
       }
@@ -11815,7 +14489,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     delijnAttestElement.target = "_blank";
     delijnAttestElement.rel = "noopener noreferrer";
     const specialChance = randomChance(1 / 12);
-    delijnAttestElement.href = specialChance ? "https://www.coolblue.be/nl/koffiezetapparaten/koffiezetapparaten-voor-latte-macchiato" : "https://www.delijn.be/nl/contact/attest-aanvraag/";
+    delijnAttestElement.href = specialChance
+      ? "https://www.coolblue.be/nl/koffiezetapparaten/koffiezetapparaten-voor-latte-macchiato"
+      : "https://www.delijn.be/nl/contact/attest-aanvraag/";
     delijnAttestElement.innerText = specialChance ? "Latte?" : "Late?";
     container.appendChild(delijnAttestElement);
   }
@@ -11830,14 +14506,14 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         searchInput: null,
         searchButton: null,
         bottomContainer: null,
-        infoContainer: null
+        infoContainer: null,
       };
     }
     defaultSettings() {
       return {
         maxBusses: 5,
         monochrome: false,
-        halte: { nummer: null, entiteit: null }
+        halte: { nummer: null, entiteit: null },
       };
     }
     async createContent() {
@@ -11862,7 +14538,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       this.elements.searchInput.classList.add("halteInput");
       this.elements.searchInput.spellcheck = false;
       this.elements.searchInput.addEventListener("keyup", (event) => {
-        if (event.key === "Enter") this.handleHalteSearch();
+        if (event.key === "Enter") {
+          this.handleHalteSearch();
+        }
       });
       this.elements.searchButton = document.createElement("button");
       this.elements.searchButton.classList.add("delijnSearchButton");
@@ -11888,7 +14566,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       try {
         delijnData = await fetchDelijnData(
           `https://api.delijn.be/DLKernOpenData/api/v1/haltes/${this.settings.halte.entiteit}/${this.settings.halte.nummer}/real-time?maxAantalDoorkomsten=${this.settings.maxBusses}`,
-          { signal }
+          { signal },
         );
       } catch (error) {
         if (error.name === "AbortError") {
@@ -11898,11 +14576,14 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         console.error(error);
         return;
       }
-      if (signal.aborted) return;
+      if (signal.aborted) {
+        return;
+      }
       if (!delijnData.halteDoorkomsten[0]) {
         this.displayInfo("Er zijn momenteel geen bussen beschikbaar voor deze halte.");
         return;
-      } else if (delijnData.halteDoorkomsten[0].doorkomsten.length < 1) {
+      }
+      if (delijnData.halteDoorkomsten[0].doorkomsten.length < 1) {
         this.displayInfo("Er zijn momenteel geen vertrekkende bussen");
         return;
       }
@@ -11913,15 +14594,19 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         return timeA - timeB;
       });
       for (const doorkomst of sortedDoorkomsten) {
-        if (signal.aborted) return;
+        if (signal.aborted) {
+          return;
+        }
         await createHalteDoorkomst(
           doorkomst,
           this.elements.bottomContainer,
           this.settings.monochrome,
-          signal
+          signal,
           // Pass signal to createHalteDoorkomst
         );
-        if (signal.aborted) return;
+        if (signal.aborted) {
+          return;
+        }
       }
       if (!signal.aborted) {
         addDelijnAttest(this.elements.bottomContainer);
@@ -11929,7 +14614,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     }
     async initializeData() {
       lijnDataKleuren = await browser.runtime.sendMessage({
-        action: "getDelijnColorData"
+        action: "getDelijnColorData",
       });
       if (this.settings.halte.nummer == null) {
         this.displayInfo("Zoek een halte");
@@ -11970,10 +14655,12 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       try {
         delijnHaltesData = await fetchDelijnData(
           `https://api.delijn.be/DLZoekOpenData/v1/zoek/haltes/${searchQuery}?maxAantalHits=${this.searchResultLimit}`,
-          { signal }
+          { signal },
         );
       } catch (error) {
-        if (error.name === "AbortError") return;
+        if (error.name === "AbortError") {
+          return;
+        }
         this.displayInfo(`Er liep iets mis: ${error}`);
         return;
       }
@@ -11982,15 +14669,19 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         this.displayInfo("Geen zoekresultaten");
         return;
       }
-      const halteSleutels = delijnHaltesData.haltes.map((halte) => `${halte.entiteitnummer}_${halte.haltenummer}`).join("_");
+      const halteSleutels = delijnHaltesData.haltes
+        .map((halte) => `${halte.entiteitnummer}_${halte.haltenummer}`)
+        .join("_");
       let delijnHaltesLijnrichtingenData;
       try {
         delijnHaltesLijnrichtingenData = await fetchDelijnData(
           `https://api.delijn.be/DLKernOpenData/api/v1/haltes/lijst/${halteSleutels}/lijnrichtingen`,
-          { signal }
+          { signal },
         );
       } catch (error) {
-        if (error.name === "AbortError") return;
+        if (error.name === "AbortError") {
+          return;
+        }
         this.displayInfo(`Er liep iets mis: ${error}`);
         return;
       }
@@ -12002,10 +14693,14 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         const startIndex = this.searchResultLimit - 5;
         const results = delijnHaltesLijnrichtingenData.halteLijnrichtingen.slice(startIndex);
         for (let i5 = 0; i5 < results.length; i5++) {
-          if (signal.aborted) return;
+          if (signal.aborted) {
+            return;
+          }
           const halte = results[i5];
           await this.createHalteOption(halte, signal);
-          if (signal.aborted) return;
+          if (signal.aborted) {
+            return;
+          }
         }
         if (delijnHaltesData.aantalHits > this.searchResultLimit) {
           this.addShowMoreHaltesButton();
@@ -12019,7 +14714,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       }
     }
     async createHalteOption(halte, signal) {
-      if (signal.aborted) return;
+      if (signal.aborted) {
+        return;
+      }
       const halteLijnCard = document.createElement("div");
       halteLijnCard.dataset.entiteitnummer = halte.halte.entiteitnummer;
       halteLijnCard.dataset.haltenummer = halte.halte.haltenummer;
@@ -12032,7 +14729,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       const lijnenContainer = halteLijnCard.querySelector(".halteLijnen");
       const lijnenArray = [];
       for (const lijnrichting of halte.lijnrichtingen.slice(0, 5)) {
-        if (signal.aborted) return;
+        if (signal.aborted) {
+          return;
+        }
         const lijn = document.createElement("span");
         lijn.classList.add("lijnNumber", "halteLijnNumber");
         lijn.dataset.entiteitnummer = lijnrichting.entiteitnummer;
@@ -12042,14 +14741,18 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         try {
           individualLijnData = await fetchDelijnData(
             `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${lijnrichting.entiteitnummer}/${lijnrichting.lijnnummer}`,
-            { signal }
+            { signal },
           );
         } catch (error) {
-          if (error.name === "AbortError") return;
+          if (error.name === "AbortError") {
+            return;
+          }
           console.error("Lijn data fetch error:", error);
           continue;
         }
-        if (signal.aborted) return;
+        if (signal.aborted) {
+          return;
+        }
         if (lijnenArray.includes(individualLijnData.lijnnummerPubliek)) {
           lijn.remove();
           continue;
@@ -12060,14 +14763,18 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         try {
           individualLijnDataColors = await fetchDelijnData(
             `https://api.delijn.be/DLKernOpenData/api/v1/lijnen/${lijnrichting.entiteitnummer}/${lijnrichting.lijnnummer}/lijnkleuren`,
-            { signal }
+            { signal },
           );
         } catch (error) {
-          if (error.name === "AbortError") return;
+          if (error.name === "AbortError") {
+            return;
+          }
           console.error("Lijn color fetch error:", error);
           continue;
         }
-        if (signal.aborted) return;
+        if (signal.aborted) {
+          return;
+        }
         if (!this.settings.monochrome) {
           lijn.style.backgroundColor = getHexByCode(individualLijnDataColors.achtergrond.code);
           lijn.style.borderColor = getHexByCode(individualLijnDataColors.achtergrondRand.code);
@@ -12085,7 +14792,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       this.currentHalteOptionsAbortController?.abort();
       this.setSetting("halte", {
         entiteit: halteElement.dataset.entiteitnummer,
-        nummer: halteElement.dataset.haltenummer
+        nummer: halteElement.dataset.haltenummer,
       });
     }
     addShowMoreHaltesButton() {
@@ -12107,7 +14814,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         this.elements.infoContainer = document.createElement("div");
         this.elements.infoContainer.classList.add(
           "delijnInfoContainer",
-          "delijnInfoContainerVisible"
+          "delijnInfoContainerVisible",
         );
         this.elements.bottomContainer.appendChild(this.elements.infoContainer);
       }
@@ -12115,7 +14822,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     }
     displayInfo(info) {
       const infoContainer = this.createInfoElement();
-      if (info) infoContainer.innerText = info;
+      if (info) {
+        infoContainer.innerText = info;
+      }
       infoContainer.classList.add("delijnInfoContainerVisible");
       infoContainer.classList.remove("delijnInfoContainerHidden");
     }
@@ -12154,11 +14863,11 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       const url = `https://${school_name}/planner/api/v1/planned-elements/user/${user}?from=${date}&to=${date}`;
       const response = await fetch(url);
       if (!response.ok) {
-        throw new Error(`Failed to fetch planner data`);
+        throw new Error("Failed to fetch planner data");
       }
       return await response.json();
     } catch (error) {
-      console.error(`Failed to fetch:`, error);
+      console.error("Failed to fetch:", error);
       return null;
     }
   }
@@ -12171,8 +14880,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     const [startTime, endTime] = inputTime.split(" - ");
     function convertTo24HourFormat(time) {
       let [hours, minutes, period] = time.split(":");
-      hours = parseInt(hours, 10);
-      minutes = parseInt(minutes, 10);
+      hours = Number.parseInt(hours, 10);
+      minutes = Number.parseInt(minutes, 10);
       if (period.toLowerCase().includes("pm") && hours !== 12) {
         hours += 12;
       } else if (period.toLowerCase().includes("am") && hours === 12) {
@@ -12255,7 +14964,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       const cssVariableColor = `c-${colorParts[0]}-combo--${colorParts[1]}`;
       plannerElement.classList.add(cssVariableColor);
       const itemName = element.courses?.[0]?.name || element.name;
-      const teachers = element.organisers?.users.map((user) => user.name.startingWithFirstName) || [];
+      const teachers =
+        element.organisers?.users.map((user) => user.name.startingWithFirstName) || [];
       const itemNameElement = document.createElement("h3");
       itemNameElement.textContent = `${itemName} - ${teachers.join(", ")}`;
       itemNameElement.classList.add("no-bottom-margin");
@@ -12264,7 +14974,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       const dateTimeTo = new Date(element.period.dateTimeTo);
       const timeElement = document.createElement("p");
       timeElement.textContent = fancyfyTime(
-        `${dateTimeFrom.toLocaleTimeString()} - ${dateTimeTo.toLocaleTimeString()}`
+        `${dateTimeFrom.toLocaleTimeString()} - ${dateTimeTo.toLocaleTimeString()}`,
       );
       timeElement.classList.add("no-bottom-margin");
       plannerElement.appendChild(timeElement);
@@ -12288,7 +14998,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       }
       const hoverPlannerElement = () => {
         plannerElement.style.width = "100%";
-        if (height < 73) plannerElement.style.height = "73px";
+        if (height < 73) {
+          plannerElement.style.height = "73px";
+        }
         plannerElement.style.left = "0";
         plannerElement.style.zIndex = "100";
       };
@@ -12317,7 +15029,10 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       const data2 = await fetchPlannerData(date, plannerUrl.split("/")[4]);
       this.plannerContainer.innerHTML = "";
       this.planningContainer.innerHTML = "";
-      const dateText = `${await getDateInCorrectFormat(false, addend)}`.split(" ").slice(0, 4).join(" ");
+      const dateText = `${await getDateInCorrectFormat(false, addend)}`
+        .split(" ")
+        .slice(0, 4)
+        .join(" ");
       const title = this.createTitleElement(dateText);
       this.plannerContainer.appendChild(title);
       if (!data2 || data2.length === 0) {
@@ -12326,7 +15041,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         this.planningContainer.style.height = "initial";
       } else {
         const earliestStartTime = Math.min(
-          ...data2.map((element) => new Date(element.period.dateTimeFrom).getTime())
+          ...data2.map((element) => new Date(element.period.dateTimeFrom).getTime()),
         );
         const beginTime = new Date(earliestStartTime);
         const timeSlots = [];
@@ -12339,7 +15054,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             beginTime.setHours(7, 30);
           }
           const overlappingSlot = timeSlots.find(
-            (slot) => slot.from < dateTimeTo && slot.to > dateTimeFrom
+            (slot) => slot.from < dateTimeTo && slot.to > dateTimeFrom,
           );
           if (overlappingSlot) {
             overlappingSlot.elements.push(element);
@@ -12347,7 +15062,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             timeSlots.push({
               from: dateTimeFrom,
               to: dateTimeTo,
-              elements: [element]
+              elements: [element],
             });
           }
         });
@@ -12363,13 +15078,14 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
               numElements,
               elementWidthPercentage,
               beginTime,
-              slot
+              slot,
             );
             this.planningContainer.appendChild(plannerElement);
             allHeights.push(
               Number(
-                parseInt(plannerElement.style.height, 10) + parseInt(plannerElement.style.top, 10)
-              )
+                Number.parseInt(plannerElement.style.height, 10) +
+                  Number.parseInt(plannerElement.style.top, 10),
+              ),
             );
           });
         });
@@ -12419,7 +15135,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     async fetchWeatherData(location2) {
       return await browser.runtime.sendMessage({
         action: "fetchWeatherData",
-        location: location2
+        location: location2,
       });
     }
     async updateCache() {
@@ -12429,7 +15145,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       }
       await this.setSetting("cache", {
         weatherData: newWeatherData,
-        lastUpdateDate: /* @__PURE__ */ new Date()
+        lastUpdateDate: /* @__PURE__ */ new Date(),
       });
     }
     defaultSettings() {
@@ -12437,8 +15153,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         currentLocation: "Locatie",
         cache: {
           weatherData: null,
-          lastUpdateDate: /* @__PURE__ */ new Date()
-        }
+          lastUpdateDate: /* @__PURE__ */ new Date(),
+        },
       };
     }
     async createPreview() {
@@ -12461,7 +15177,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     }
     async updateWeatherEffect() {
       const settings = await browser.runtime.sendMessage({
-        action: "getSettingsData"
+        action: "getSettingsData",
       });
       applyWeatherEffects(settings.appearance.weatherOverlay);
     }
@@ -12472,7 +15188,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       this.updateWeatherEffect();
       const container = document.createElement("div");
       container.classList.add("weather-div");
-      if (this.isCompact) container.classList.add("compact");
+      if (this.isCompact) {
+        container.classList.add("compact");
+      }
       const topContentContainer = document.createElement("div");
       topContentContainer.classList.add("top-weather-content-container");
       const bottomContentContainer = document.createElement("div");
@@ -12514,7 +15232,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       mainIcon.classList.add("weather-icon-container");
       mainIcon.innerHTML = getWeatherIcon(
         weatherData.weather[0].main,
-        weatherData.weather[0].description
+        weatherData.weather[0].description,
       );
       const temperature = document.createElement("span");
       temperature.classList.add("temperature");
@@ -12592,7 +15310,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     const container = document.createElement("div");
     container.classList.add("weather-div");
     container.classList.add("preview");
-    if (isCompact) container.classList.add("compact");
+    if (isCompact) {
+      container.classList.add("compact");
+    }
     const weatherTitle = document.createElement("div");
     weatherTitle.classList.add("weather-preview-title");
     weatherTitle.innerText = isCompact ? "Tiny Weather" : "Weather";
@@ -12750,13 +15470,20 @@ ${code}`;
         }
         const totalSeconds = hours * 3600 + minutes * 60 + seconds + milliseconds / 1e3;
         const totalMinutes = hours * 60 + minutes + seconds / 60 + milliseconds / (1e3 * 60);
-        const totalHours = hours + minutes / 60 + seconds / (60 * 60) + milliseconds / (1e3 * 60 * 60);
+        const totalHours =
+          hours + minutes / 60 + seconds / (60 * 60) + milliseconds / (1e3 * 60 * 60);
         let secondsAngle = totalSeconds * 6;
         let minutesAngle = totalMinutes * 6;
         let hoursAngle = totalHours * 30;
-        if (secondsAngle > 270) secondsAngle -= 360;
-        if (minutesAngle > 270) minutesAngle -= 360;
-        if (hoursAngle > 270) hoursAngle -= 360;
+        if (secondsAngle > 270) {
+          secondsAngle -= 360;
+        }
+        if (minutesAngle > 270) {
+          minutesAngle -= 360;
+        }
+        if (hoursAngle > 270) {
+          hoursAngle -= 360;
+        }
         secondHand.style.transform = `translate(-50%, -100%) rotate(${secondsAngle}deg)`;
         minuteHand.style.transform = `translate(-50%, -100%) rotate(${minutesAngle}deg)`;
         hourHand.style.transform = `translate(-50%, -100%) rotate(${hoursAngle}deg)`;
@@ -12801,8 +15528,7 @@ ${code}`;
       hourHand.style.transform = `translate(-50%, -100%) rotate(${hoursAngle}deg)`;
       return div;
     }
-    async onThemeChange() {
-    }
+    async onThemeChange() {}
   };
   registerWidget(new ClockWidget());
 
@@ -12822,7 +15548,7 @@ ${code}`;
       const year = this.currentDate.getFullYear();
       const month = this.currentDate.getMonth();
       const monthName = new Intl.DateTimeFormat("en-US", {
-        month: "long"
+        month: "long",
       }).format(this.currentDate);
       const firstDay = new Date(year, month, 1).getDay();
       const daysInMonth = new Date(year, month + 1, 0).getDate();
@@ -12871,7 +15597,8 @@ ${code}`;
       const today = /* @__PURE__ */ new Date();
       for (let day = 1; day <= daysInMonth; day++) {
         const dayEl = document.createElement("div");
-        const isToday = day === today.getDate() && month === today.getMonth() && year === today.getFullYear();
+        const isToday =
+          day === today.getDate() && month === today.getMonth() && year === today.getFullYear();
         dayEl.className = isToday ? "calendar-day today" : "calendar-day";
         dayEl.textContent = String(day);
         days.appendChild(dayEl);
@@ -12972,10 +15699,14 @@ ${code}`;
   async function migrate() {
     await removeLegacyData();
     const settingsData = await browser.runtime.sendMessage({
-      action: "getRawSettingsData"
+      action: "getRawSettingsData",
     });
-    if (settingsData === void 0) return;
-    if (settingsData.backgroundBlurAmount === void 0) return;
+    if (settingsData === void 0) {
+      return;
+    }
+    if (settingsData.backgroundBlurAmount === void 0) {
+      return;
+    }
     await migrateV5(settingsData);
   }
   async function migrateV5(settingsData) {
@@ -12986,15 +15717,15 @@ ${code}`;
   }
   async function migrateWidgetSettingsData() {
     const delijnAppData = await browser.runtime.sendMessage({
-      action: "getDelijnAppData"
+      action: "getDelijnAppData",
     });
     const weatherAppData = await browser.runtime.sendMessage({
-      action: "getWeatherAppData"
+      action: "getWeatherAppData",
     });
     if (Object.keys(delijnAppData).length !== 0) {
       await setWidgetSetting("DelijnWidget.halte", {
         entiteit: delijnAppData.delijnAppData.entiteitnummer,
-        nummer: delijnAppData.delijnAppData.haltenummer
+        nummer: delijnAppData.delijnAppData.haltenummer,
       });
     }
     if (Object.keys(weatherAppData).length !== 0) {
@@ -13011,24 +15742,24 @@ ${code}`;
         data2 = {
           imageData: null,
           link: "",
-          type: "default"
+          type: "default",
         };
         break;
       case 1:
         data2 = {
           imageData: oldData.backgroundLink,
           link: oldData.backgroundLink,
-          type: "link"
+          type: "link",
         };
         break;
       case 2: {
         const imageData = await browser.runtime.sendMessage({
-          action: "getBackgroundImage"
+          action: "getBackgroundImage",
         });
         data2 = {
           imageData: imageData.backgroundImage,
           link: oldData.backgroundLink,
-          type: "file"
+          type: "file",
         };
         break;
       }
@@ -13038,7 +15769,7 @@ ${code}`;
     await browser.runtime.sendMessage({
       action: "setImage",
       id: "backgroundImage",
-      data: data2
+      data: data2,
     });
     console.log("MIG V: \n Successfully migrated background image  with data:", data2);
   }
@@ -13061,27 +15792,27 @@ ${code}`;
       username: oldData.customName,
       theme: oldData.theme,
       background: {
-        blur: oldData.backgroundBlurAmount
+        blur: oldData.backgroundBlurAmount,
       },
       weatherOverlay: {
         type: newWeatherOverlayType,
-        amount: oldData.weatherOverlayAmount
+        amount: oldData.weatherOverlayAmount,
       },
       tabLogo: oldData.enableSMPPLogo ? "smpp" : "sm",
       news: oldData.showNews,
       quicks: oldData.quicks,
-      performanceMode: oldData.enablePerfomanceMode
+      performanceMode: oldData.enablePerfomanceMode,
     };
     await browser.runtime.sendMessage({
       action: "setRawSettingsData",
-      data: newSettingsData
+      data: newSettingsData,
     });
     const settings = await browser.runtime.sendMessage({
-      action: "getSettingsData"
+      action: "getSettingsData",
     });
     await browser.runtime.sendMessage({
       action: "setSettingsData",
-      data: settings
+      data: settings,
     });
     console.log("MIG V: \n Succesfully migrated settings data to:", newSettingsData);
   }
@@ -13125,11 +15856,14 @@ ${code}`;
     }
   }
   function title_prefix() {
-    const subdomain = location.host.split(".")[0].charAt(0).toUpperCase() + location.host.split(".")[0].slice(1);
+    const subdomain =
+      location.host.split(".")[0].charAt(0).toUpperCase() + location.host.split(".")[0].slice(1);
     const url = location.pathname;
     const qstr = new URLSearchParams(location.search);
     const module = qstr.get("module");
-    if (!url.split("/")[1]) return;
+    if (!url.split("/")[1]) {
+      return;
+    }
     let page = url.split("/")[1].toLowerCase();
     if (module !== null) {
       page = module.toLowerCase();
@@ -13174,9 +15908,8 @@ ${code}`;
     if (prefix !== void 0) {
       if (topnav_title) {
         return `${prefix} - ${topnav_title}`;
-      } else {
-        return prefix;
       }
+      return prefix;
     }
   }
   function titleFix() {
@@ -13199,7 +15932,8 @@ ${code}`;
   var liteMode;
   function updateDiscordPopup(discordButtonEnabled) {
     if (discordButtonEnabled) {
-      const discordButtonContainer = document.getElementById("discord-link-container") || document.createElement("div");
+      const discordButtonContainer =
+        document.getElementById("discord-link-container") || document.createElement("div");
       discordButtonContainer.id = "discord-link-container";
       discordButtonContainer.innerHTML = discordSvg;
       document.body.appendChild(discordButtonContainer);
@@ -13225,9 +15959,7 @@ ${code}`;
       if (event.key === "Enter") {
         event.preventDefault();
         setTimeout(() => {
-          const firstCourse = document.querySelector(
-            ".course-list.js-courses-list li a"
-          );
+          const firstCourse = document.querySelector(".course-list.js-courses-list li a");
           if (firstCourse) {
             firstCourse.click();
           }
@@ -13246,11 +15978,15 @@ ${code}`;
     if (notifsButton && data2.notifications) {
       const textSpan = notifsButton.querySelector("span");
       notifsButton.innerHTML = notfisSvg;
-      if (textSpan) notifsButton.appendChild(textSpan);
+      if (textSpan) {
+        notifsButton.appendChild(textSpan);
+      }
     } else if (notifsButton && !data2.notifications) {
       const textSpan = notifsButton.querySelector("span");
       notifsButton.innerHTML = "Meldingen";
-      if (textSpan) notifsButton.appendChild(textSpan);
+      if (textSpan) {
+        notifsButton.appendChild(textSpan);
+      }
     }
     const startButton = document.querySelector(".js-btn-home");
     if (startButton && data2.home) {
@@ -13262,11 +15998,15 @@ ${code}`;
     if (messageButton && data2.mail) {
       const textSpan = messageButton.querySelector("span");
       messageButton.innerHTML = messageSvg;
-      if (textSpan) messageButton.appendChild(textSpan);
+      if (textSpan) {
+        messageButton.appendChild(textSpan);
+      }
     } else if (messageButton && !data2.mail) {
       const textSpan = messageButton.querySelector("span");
       messageButton.innerHTML = "Berichten";
-      if (textSpan) messageButton.appendChild(textSpan);
+      if (textSpan) {
+        messageButton.appendChild(textSpan);
+      }
     }
     const settingButton = document.getElementById("quickSettingsButton");
     if (settingButton && data2.settings) {
@@ -13293,22 +16033,24 @@ ${code}`;
   }
   function applyTopNav(data2) {
     const topNav = document.querySelector(".topnav");
-    if (!topNav) return;
+    if (!topNav) {
+      return;
+    }
     updateTopNavIcons(data2.icons);
     updateTopButtons(data2.buttons);
     const linksButton = document.querySelector("[data-links]");
     const coursesButton = document.querySelector("[data-courses]");
     if (linksButton && coursesButton) {
-      data2.switchCoursesAndLinks ? topNav.insertBefore(linksButton, coursesButton) : topNav.insertBefore(coursesButton, linksButton);
+      data2.switchCoursesAndLinks
+        ? topNav.insertBefore(linksButton, coursesButton)
+        : topNav.insertBefore(coursesButton, linksButton);
     }
   }
   async function createStaticGlobals() {
     themes = await browser.runtime.sendMessage({
-      action: "getThemes"
+      action: "getThemes",
     });
-    const originalUsernameElement = document.querySelector(
-      ".js-btn-profile .hlp-vert-box span"
-    );
+    const originalUsernameElement = document.querySelector(".js-btn-profile .hlp-vert-box span");
     originalUsername = originalUsernameElement?.innerText || "Mr Unknown";
     isGOSchool = document.body.classList.contains("go");
     isFirefox = typeof navigator.userAgent === "string" && /firefox/i.test(navigator.userAgent);
@@ -13342,16 +16084,22 @@ ${code}`;
     }
   }
   function applyOther(other) {
-    if (window.location.href.split("/")[3] === "login") updateSplashText(other.splashText);
+    if (window.location.href.split("/")[3] === "login") {
+      updateSplashText(other.splashText);
+    }
     keybinds = other.keybinds;
-    other.performanceMode ? document.body.classList.remove("enableAnimations") : document.body.classList.add("enableAnimations");
-    if (onHomePage) updateDiscordPopup(other.discordButton);
+    other.performanceMode
+      ? document.body.classList.remove("enableAnimations")
+      : document.body.classList.add("enableAnimations");
+    if (onHomePage) {
+      updateDiscordPopup(other.discordButton);
+    }
   }
   function applyProfile(profile) {
     const style = document.documentElement.style;
     style.setProperty(
       "--profile-picture",
-      `url(${getPfpLink(profile.username || originalUsername)})`
+      `url(${getPfpLink(profile.username || originalUsername)})`,
     );
     applyUsername(profile.username);
     applyProfilePicture(profile);
@@ -13362,29 +16110,39 @@ ${code}`;
     titleFix();
     addToastContainer();
     const notifsToggleLabel = document.getElementById("notifsToggleLabel");
-    if (notifsToggleLabel) notifsToggleLabel.innerText = "Toon pop-ups";
+    if (notifsToggleLabel) {
+      notifsToggleLabel.innerText = "Toon pop-ups";
+    }
     if (window.location.pathname.startsWith("/results/main/results")) {
       buisStats();
     }
-    if (document.querySelector(".login-app__left")) updateLoginPanel();
+    if (document.querySelector(".login-app__left")) {
+      updateLoginPanel();
+    }
   }
   async function apply() {
     const data2 = await browser.runtime.sendMessage({
-      action: "getSettingsData"
+      action: "getSettingsData",
     });
     console.log("Applying with settings data: \n", data2);
     updateCurrentThemeName(data2.appearance.theme);
     await reloadDMenuConfig();
-    if (onHomePage) setEditMode(false);
+    if (onHomePage) {
+      setEditMode(false);
+    }
     await applyAppearance(data2.appearance);
-    if (!liteMode) applyWeatherEffects(data2.appearance.weatherOverlay);
+    if (!liteMode) {
+      applyWeatherEffects(data2.appearance.weatherOverlay);
+    }
     applyProfile(data2.profile);
     applyTopNav(data2.topNav);
     applyOther(data2.other);
   }
   function createTopButtons() {
     const topNav = document.querySelector("nav.topnav");
-    if (!topNav) return;
+    if (!topNav) {
+      return;
+    }
     const logoutButton = document.querySelector(".js-btn-logout");
     if (logoutButton) {
       logoutButton.innerHTML = changeLogoutText();
@@ -13396,7 +16154,9 @@ ${code}`;
     }
     createQuickSettings();
     const pushRight = topNav.childNodes[2];
-    if (!pushRight) return;
+    if (!pushRight) {
+      return;
+    }
     if (!liteMode) {
       topNav.insertBefore(createGC(), pushRight);
     }
@@ -13405,17 +16165,20 @@ ${code}`;
       topNav.insertBefore(createWidgetEditModeButton(), pushRight);
     }
     topNav.insertBefore(createQuickMenuButton(), pushRight);
-    document.getElementById("profileMenu")?.querySelector(".topnav__menu")?.appendChild(createProfileSettingButton());
+    document
+      .getElementById("profileMenu")
+      ?.querySelector(".topnav__menu")
+      ?.appendChild(createProfileSettingButton());
   }
   function createProfileSettingButton() {
     const button = document.createElement("a");
     button.addEventListener("click", (e5) => {
       openSettingsWindow(e5);
       const topNavProfileMenu = document.getElementById("profileMenu");
-      const settingsPageProfileButton = document.querySelector(
-        ".profile-settings-button"
-      );
-      if (!topNavProfileMenu || !settingsPageProfileButton) return;
+      const settingsPageProfileButton = document.querySelector(".profile-settings-button");
+      if (!(topNavProfileMenu && settingsPageProfileButton)) {
+        return;
+      }
       topNavProfileMenu.hidden = true;
       settingsPageProfileButton.click();
     });

@@ -54,7 +54,7 @@ const BASE_PIECES = {
 
 function rotate(matrix) {
   const size = matrix.length;
-  const result = Array.from({ length: size }, () => Array(size).fill(0));
+  const result = Array.from({ length: size }, () => new Array(size).fill(0));
   for (let y = 0; y < size; y++) {
     for (let x = 0; x < size; x++) {
       result[x][size - 1 - y] = matrix[y][x];
@@ -71,7 +71,9 @@ function generateRotations(base) {
       rotations.push(next);
     }
   }
-  while (rotations.length < 4) rotations.push(rotations[0]);
+  while (rotations.length < 4) {
+    rotations.push(rotations[0]);
+  }
   return rotations;
 }
 
@@ -268,8 +270,14 @@ class TetrisWidget extends GameBase {
         if (shape[py][px]) {
           const bx = x + px;
           const by = y + py;
-          if (bx < 0 || bx >= BOARD_WIDTH || by >= BOARD_HEIGHT || (by >= 0 && this.#board[by][bx]))
+          if (
+            bx < 0 ||
+            bx >= BOARD_WIDTH ||
+            by >= BOARD_HEIGHT ||
+            (by >= 0 && this.#board[by][bx])
+          ) {
             return true;
+          }
         }
       }
     }
@@ -283,7 +291,9 @@ class TetrisWidget extends GameBase {
         if (shape[py][px]) {
           const bx = this.#pieceX + px;
           const by = this.#pieceY + py;
-          if (by >= 0) this.#board[by][bx] = this.#currentPiece;
+          if (by >= 0) {
+            this.#board[by][bx] = this.#currentPiece;
+          }
         }
       }
     }
@@ -308,8 +318,9 @@ class TetrisWidget extends GameBase {
     this.#currentRotation = 0;
     this.#pieceX = Math.floor(BOARD_WIDTH / 2) - 2;
     this.#pieceY = -1;
-    if (this.#collision(this.#currentPiece, this.#currentRotation, this.#pieceX, this.#pieceY))
+    if (this.#collision(this.#currentPiece, this.#currentRotation, this.#pieceX, this.#pieceY)) {
       this.stopGame();
+    }
   }
 
   async onGameStart() {

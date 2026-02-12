@@ -1,4 +1,6 @@
-#homeAgenda .datepicker__cell.datepicker--current-day .datepicker__cell__content {
+#homeAgenda
+  .datepicker__cell.datepicker--current-day
+  .datepicker__cell__content {
   border: 2px solid var(--color-accent);
   z-index: 10;
 }

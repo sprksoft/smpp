@@ -483,7 +483,9 @@ smsc-inlineeditor.smsc-table__cell--inlineeditor {
   background-color: var(--color-base01);
 }
 
-[listview] .listview__row--selected .listview__cell:not(.listview__cell--select-btn) {
+[listview]
+  .listview__row--selected
+  .listview__cell:not(.listview__cell--select-btn) {
   background-color: var(--color-base02);
 }
 
@@ -603,7 +605,9 @@ smsc-inlineeditor.smsc-table__cell--inlineeditor {
   .smscAdminNav_body_link
   .smscAdminNav_body_linkdivText.disabled
   .smscAdminNav_body_linkdivTitle,
-.smscAdminNav_body .smscAdminNav_body_link .smscAdminNav_body_linkdivText.disabled {
+.smscAdminNav_body
+  .smscAdminNav_body_link
+  .smscAdminNav_body_linkdivText.disabled {
   opacity: 0.6;
   color: var(--color-text);
 }
@@ -833,7 +837,11 @@ input:checked + .slider:before {
   transform: translateX(-50%) translateY(0px);
   max-width: 270px;
   width: 240px;
-  background-color: color-mix(in srgb, var(--color-base00) 40%, var(--color-base01) 60%);
+  background-color: color-mix(
+    in srgb,
+    var(--color-base00) 40%,
+    var(--color-base01) 60%
+  );
   border: 2px solid var(--color-base02);
   align-items: center;
   display: flex;
@@ -1614,8 +1622,14 @@ textarea.form-item__input-field.form-item__input-field--textarea {
   color: var(--color-text);
 }
 
-.smsc-topnav [data-notifs] .notification .notification__btn:focus:not(.focus-ring),
-.smsc-topnav [data-notifs] .notification .notification__close:focus:not(.focus-ring) {
+.smsc-topnav
+  [data-notifs]
+  .notification
+  .notification__btn:focus:not(.focus-ring),
+.smsc-topnav
+  [data-notifs]
+  .notification
+  .notification__close:focus:not(.focus-ring) {
   box-shadow: none;
 }
 
@@ -2128,7 +2142,10 @@ button.wopi_files__button {
   transition: 0.1s ease-in-out;
 }
 
-body.modern-ui .photos__albums .l-albums__header input.l-albums__header__search-input {
+body.modern-ui
+  .photos__albums
+  .l-albums__header
+  input.l-albums__header__search-input {
   margin-left: 10px;
 }
 

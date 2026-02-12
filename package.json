@@ -16,22 +16,24 @@
   "main": "index.js",
   "scripts": {
     "build": "esbuild src/index.ts src/background-scripts/index.ts --bundle --outdir=./extension \"--external:/includes/*\" \"--external:/smsc/*\"",
-    "lint": "biome lint .",
-    "lint:fix": "biome lint . --write",
-    "format": "biome format . --write",
-    "check": "biome check .",
-    "check:fix": "biome check . --write",
+    "lint": "biome lint src",
+    "lint:fix": "biome lint src --write",
+    "format": "biome format src --write",
+    "check": "ultracite check",
+    "check:fix": "biome check src --write",
     "typecheck": "tsc --noEmit",
-    "ci": "biome check .",
-    "prepare": "husky"
+    "ci": "biome check src",
+    "prepare": "husky",
+    "fix": "ultracite fix"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.3.14",
+    "@biomejs/biome": "2.3.13",
     "@types/colorthief": "^2.6.1",
     "@types/node": "^25.2.3",
     "esbuild": "^0.27.3",
     "husky": "^9.1.7",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "ultracite": "7.1.5"
   },
   "dependencies": {
     "browser-image-compression": "^2.0.2",

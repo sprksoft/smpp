@@ -4,7 +4,7 @@ import { getImageURL } from "../modules/images.js";
 
 export async function setBackground(themeName: string) {
   function displayBackgroundImage(imageSrc: string | null) {
-    document.documentElement.style.setProperty("--background-color", `transparent`);
+    document.documentElement.style.setProperty("--background-color", "transparent");
     const imgContainer =
       (document.getElementById("smpp-background-image-container") as HTMLDivElement) ||
       document.createElement("div");
@@ -25,7 +25,7 @@ export async function setBackground(themeName: string) {
       img.src = "";
     }
 
-    if (!document.getElementById("smpp-background-image") && !document.getElementById("tinymce")) {
+    if (!(document.getElementById("smpp-background-image") || document.getElementById("tinymce"))) {
       document.body.appendChild(imgContainer);
       imgContainer.appendChild(img);
     }

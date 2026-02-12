@@ -16,7 +16,7 @@ import {
 } from "./data-background-script.js";
 import { loadJSON } from "./json-loader.js";
 import { getSettingsData, setSettingsData } from "./settings.js";
-import type { ApiThemeInfo } from "./theme_share_api.js";
+import type { ApiThemeInfo } from "./theme-share-api.js";
 
 let nativeThemes: Themes | undefined;
 let categories: ThemeCategories | undefined;
@@ -41,7 +41,9 @@ export async function getThemeCategories(includeEmpty = false, includeHidden = f
   }
   if (!includeEmpty) {
     Object.keys(allCategories).forEach((category) => {
-      if (!allCategories[category] || !allCategories[category][0]) delete allCategories[category];
+      if (!allCategories[category]?.[0]) {
+        delete allCategories[category];
+      }
     });
   }
   return allCategories;
@@ -66,7 +68,9 @@ export async function getFirstThemeInCategory(
   if (!themeNames) {
     return "error";
   }
-  if (!themeNames[0]) return "error";
+  if (!themeNames[0]) {
+    return "error";
+  }
   return themeNames[0];
 }
 
@@ -86,7 +90,9 @@ export async function getThemes(
   mustMatchAllCategories = false,
 ) {
   const themes = await getAllThemes();
-  if (categorynames.includes("all")) return themes;
+  if (categorynames.includes("all")) {
+    return themes;
+  }
 
   const categories = await Promise.all(
     categorynames.map((category) => getThemeCategory(category) as Promise<ThemeCategory>),
@@ -118,10 +124,9 @@ export async function getTheme(name: ThemeId): Promise<Theme> {
   const theme = allThemes[name];
   if (theme !== undefined) {
     return theme;
-  } else {
-    console.error(`Invalid theme requested:"${name}", sent "error" theme`);
-    return allThemes.error as Theme;
   }
+  console.error(`Invalid theme requested:"${name}", sent "error" theme`);
+  return allThemes.error as Theme;
 }
 
 export async function getSharedThemeId(shareId: ShareId): Promise<ThemeId | null> {
@@ -158,7 +163,9 @@ async function getCustomCategory(): Promise<ThemeCategory> {
 }
 
 export async function saveCustomTheme(data: Theme, id: string | undefined = undefined) {
-  if (id === undefined) id = crypto.randomUUID();
+  if (id === undefined) {
+    id = crypto.randomUUID();
+  }
 
   const customThemes = await getAllCustomThemes();
   customThemes[id] = data;
@@ -250,7 +257,9 @@ export function shareUrlFromShareId(id: ShareId): string {
   return `https://theme.smpp.be/${id}`;
 }
 
-type ThemeShareCache = { [themeId: ThemeId]: ShareId };
+interface ThemeShareCache {
+  [themeId: ThemeId]: ShareId;
+}
 
 export async function loadThemeShareCache(): Promise<ThemeShareCache> {
   return await browser.storage.local.get("themeShareCache");

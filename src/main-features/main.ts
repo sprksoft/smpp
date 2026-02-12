@@ -35,16 +35,16 @@ import { quickLoad } from "./quick-menu/quick.js";
 import { createSettingsWindow, type Settings } from "./settings/main-settings.js";
 import { createQuickSettings, createQuickSettingsButton } from "./settings/quick-settings.js";
 
-export var originalUsername: string;
-export var themes: any;
-export var onHomePage: boolean;
-export var onLoginPage: boolean;
-export var isGOSchool: boolean;
-export var isFirefox: boolean;
-export var originalPfpUrl: string;
-export var keybinds: any;
-export var liteMode: boolean;
-export var customTheme: any;
+export let originalUsername: string;
+export let themes: any;
+export let onHomePage: boolean;
+export let onLoginPage: boolean;
+export let isGOSchool: boolean;
+export let isFirefox: boolean;
+export let originalPfpUrl: string;
+export let keybinds: any;
+export let liteMode: boolean;
+export let customTheme: any;
 
 import { updateLoginPanel, updateSplashText } from "../fixes-utils/login.js";
 import { buisStats } from "../fixes-utils/results.js";
@@ -124,11 +124,15 @@ function updateTopNavIcons(data: Settings["topNav"]["icons"]) {
   if (notifsButton && data.notifications) {
     const textSpan = notifsButton.querySelector("span");
     notifsButton.innerHTML = notfisSvg;
-    if (textSpan) notifsButton.appendChild(textSpan);
+    if (textSpan) {
+      notifsButton.appendChild(textSpan);
+    }
   } else if (notifsButton && !data.notifications) {
     const textSpan = notifsButton.querySelector("span");
     notifsButton.innerHTML = "Meldingen";
-    if (textSpan) notifsButton.appendChild(textSpan);
+    if (textSpan) {
+      notifsButton.appendChild(textSpan);
+    }
   }
 
   const startButton = document.querySelector(".js-btn-home");
@@ -142,11 +146,15 @@ function updateTopNavIcons(data: Settings["topNav"]["icons"]) {
   if (messageButton && data.mail) {
     const textSpan = messageButton.querySelector("span");
     messageButton.innerHTML = messageSvg;
-    if (textSpan) messageButton.appendChild(textSpan);
+    if (textSpan) {
+      messageButton.appendChild(textSpan);
+    }
   } else if (messageButton && !data.mail) {
     const textSpan = messageButton.querySelector("span");
     messageButton.innerHTML = "Berichten";
-    if (textSpan) messageButton.appendChild(textSpan);
+    if (textSpan) {
+      messageButton.appendChild(textSpan);
+    }
   }
 
   const settingButton = document.getElementById("quickSettingsButton");
@@ -176,7 +184,9 @@ function updateTabLogo(logo: Settings["appearance"]["tabLogo"]) {
 
 export function applyTopNav(data: Settings["topNav"]) {
   const topNav = document.querySelector(".topnav") as HTMLElement;
-  if (!topNav) return;
+  if (!topNav) {
+    return;
+  }
 
   updateTopNavIcons(data.icons);
   updateTopButtons(data.buttons);
@@ -213,7 +223,7 @@ async function createStaticGlobals() {
 
   onLoginPage = document.querySelector(".login-app") != null;
 
-  var _quicks = await quickLoad();
+  const _quicks = await quickLoad();
   liteMode = browser.runtime.getManifest().name.includes("Lite");
 }
 
@@ -239,7 +249,9 @@ export async function applyAppearance(appearance: Settings["appearance"]) {
 }
 
 export function applyOther(other: Settings["other"]) {
-  if (window.location.href.split("/")[3] === "login") updateSplashText(other.splashText);
+  if (window.location.href.split("/")[3] === "login") {
+    updateSplashText(other.splashText);
+  }
 
   keybinds = other.keybinds;
 
@@ -247,7 +259,9 @@ export function applyOther(other: Settings["other"]) {
     ? document.body.classList.remove("enableAnimations")
     : document.body.classList.add("enableAnimations");
 
-  if (onHomePage) updateDiscordPopup(other.discordButton);
+  if (onHomePage) {
+    updateDiscordPopup(other.discordButton);
+  }
 }
 
 export function applyProfile(profile: Settings["profile"]) {
@@ -267,12 +281,16 @@ function applyFixes() {
   addToastContainer();
 
   const notifsToggleLabel = document.getElementById("notifsToggleLabel") as HTMLLabelElement;
-  if (notifsToggleLabel) notifsToggleLabel.innerText = "Toon pop-ups";
+  if (notifsToggleLabel) {
+    notifsToggleLabel.innerText = "Toon pop-ups";
+  }
 
   if (window.location.pathname.startsWith("/results/main/results")) {
     buisStats();
   }
-  if (document.querySelector(".login-app__left")) updateLoginPanel();
+  if (document.querySelector(".login-app__left")) {
+    updateLoginPanel();
+  }
 }
 
 export async function apply() {
@@ -284,9 +302,13 @@ export async function apply() {
   updateCurrentThemeName(data.appearance.theme);
 
   await reloadDMenuConfig(); // reload the dmenu config. (er is een object voor async raarheid te vermijden en dat wordt herladen door deze functie)
-  if (onHomePage) setEditMode(false);
+  if (onHomePage) {
+    setEditMode(false);
+  }
   await applyAppearance(data.appearance);
-  if (!liteMode) applyWeatherEffects(data.appearance.weatherOverlay);
+  if (!liteMode) {
+    applyWeatherEffects(data.appearance.weatherOverlay);
+  }
   applyProfile(data.profile);
   applyTopNav(data.topNav);
   applyOther(data.other);
@@ -294,7 +316,9 @@ export async function apply() {
 
 function createTopButtons() {
   const topNav = document.querySelector("nav.topnav") as HTMLElement;
-  if (!topNav) return;
+  if (!topNav) {
+    return;
+  }
 
   const logoutButton = document.querySelector(".js-btn-logout");
   if (logoutButton) {
@@ -309,7 +333,9 @@ function createTopButtons() {
   createQuickSettings();
 
   const pushRight = topNav.childNodes[2];
-  if (!pushRight) return;
+  if (!pushRight) {
+    return;
+  }
 
   if (!liteMode) {
     topNav.insertBefore(createGC(), pushRight);
@@ -335,7 +361,9 @@ function createProfileSettingButton() {
     const settingsPageProfileButton = document.querySelector(
       ".profile-settings-button",
     ) as HTMLButtonElement;
-    if (!topNavProfileMenu || !settingsPageProfileButton) return;
+    if (!(topNavProfileMenu && settingsPageProfileButton)) {
+      return;
+    }
     topNavProfileMenu.hidden = true;
     settingsPageProfileButton.click();
   });
@@ -347,7 +375,7 @@ function createProfileSettingButton() {
   textContent.textContent = "Smartschool++ Profile";
 
   const image = document.createElement("img");
-  image.src = getExtensionImage("icons/smpp/" + "128.png");
+  image.src = getExtensionImage("icons/smpp/128.png");
   image.style.borderRadius = "0.5rem";
 
   button.appendChild(image);
@@ -397,7 +425,6 @@ function updateTopButtons(data: Settings["topNav"]["buttons"]) {
 async function main() {
   if (document.body.classList.contains("smpp")) {
     console.error("SMPP is 2x geladen");
-    alert("SMPP is 2x geladen");
   }
 
   document.body.classList.add("smpp"); // For modding

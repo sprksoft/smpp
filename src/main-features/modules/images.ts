@@ -11,21 +11,21 @@ import { Toast } from "../../fixes-utils/utils.js";
 import { createTextInput } from "../appearance/ui.js";
 import { isFirefox } from "../main.js";
 
-export type SMPPImage = {
+export interface SMPPImage {
   metaData: SMPPImageMetaData;
   imageData: string | Base64URLString;
-};
+}
 
-export type SMPPImageMetaData = {
+export interface SMPPImageMetaData {
   type: "file" | "default";
   link: string;
-};
+}
 
 export class ImageSelector {
   name: string;
   isThemeImage: boolean;
 
-  id: string = "";
+  id = "";
   clearButton = document.createElement("button");
   linkInput = createTextInput("", "Link");
   fileInput = document.createElement("input");
@@ -35,7 +35,7 @@ export class ImageSelector {
   fullContainer = this.createFullFileInput();
 
   /* theme: Indicates that this image selector references the background image of a theme. (used for theme share cache invalidation on modify) */
-  constructor(name: string, isThemeImage: boolean = false) {
+  constructor(name: string, isThemeImage = false) {
     this.name = name;
     this.isThemeImage = isThemeImage;
 
@@ -221,7 +221,7 @@ export class ImageSelector {
       await browser.runtime.sendMessage({
         action: "setImage",
         id: this.id,
-        data: data,
+        data,
       });
       await browser.runtime.sendMessage({
         action: "setImage",
@@ -252,7 +252,9 @@ export class ImageSelector {
     })) as SMPPImage;
     let metaData = data.metaData;
 
-    if (!metaData) metaData = { link: "", type: "default" };
+    if (!metaData) {
+      metaData = { link: "", type: "default" };
+    }
 
     this.linkInput.value = metaData.link || "";
     if (metaData.type === "file") {

@@ -1,2 +1,9 @@
-#!/usr/bin/env sh
+#!/bin/sh
+set -e
+
+if [ -z "$(git diff --cached --name-only)" ]; then
+  echo "No staged files to check"
+  exit 0
+fi
+
 bun run ci

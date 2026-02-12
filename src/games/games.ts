@@ -32,7 +32,7 @@ export class GameBase extends WidgetBase {
   #hiScore;
   #requestStopGame;
   #optionValues;
-  #optionElements = {};
+  readonly #optionElements = {};
   #lastTs;
   #ctx;
 
@@ -50,10 +50,8 @@ export class GameBase extends WidgetBase {
       }
       if (this.playing) {
         await this.onKeyDown(e);
-      } else if (this.hasPlayedAtLeastOnce) {
-        if (e.code === "Space") {
-          await this.#startGame();
-        }
+      } else if (this.hasPlayedAtLeastOnce && e.code === "Space") {
+        await this.#startGame();
       }
     });
     document.addEventListener("keyup", async (e) => {
@@ -197,7 +195,7 @@ export class GameBase extends WidgetBase {
 
         const display = document.createElement("span");
         sliderCont.appendChild(display);
-        this.#optionElements[opt.name] = { display: display, input: slider };
+        this.#optionElements[opt.name] = { display, input: slider };
 
         slider.addEventListener("input", (e) => {
           this.#updateOpt(opt.name, e.target.value);
@@ -231,10 +229,11 @@ export class GameBase extends WidgetBase {
       if (window.localStorage.getItem("snakehighscore")) {
         this.settings = await migrateSnake();
       }
-    } else if (this.constructor.name === "FlappyWidget") {
-      if (window.localStorage.getItem("flappyhighscore")) {
-        this.settings = await migrateFlappy();
-      }
+    } else if (
+      this.constructor.name === "FlappyWidget" &&
+      window.localStorage.getItem("flappyhighscore")
+    ) {
+      this.settings = await migrateFlappy();
     }
     for (const opt of this.options) {
       let value = this.settings.options[opt.name];

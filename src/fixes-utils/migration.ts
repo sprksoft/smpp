@@ -10,8 +10,12 @@ export async function migrate() {
   const settingsData = await browser.runtime.sendMessage({
     action: "getRawSettingsData",
   });
-  if (settingsData === undefined) return;
-  if (settingsData.backgroundBlurAmount === undefined) return;
+  if (settingsData === undefined) {
+    return;
+  }
+  if (settingsData.backgroundBlurAmount === undefined) {
+    return;
+  }
   await migrateV5(settingsData);
 }
 
@@ -38,14 +42,18 @@ async function migrateWidgetSettingsData() {
   }
   if (Object.keys(weatherAppData).length !== 0) {
     const weatherWidgets = widgets.filter((item) => item.name.toLowerCase().includes("weather"));
-    weatherWidgets.forEach(async (widget) => {
+    for (const widget of weatherWidgets) {
       await widget.setSetting("currentLocation", weatherAppData.weatherAppData.lastLocation);
-    });
+    }
   }
 }
 
 async function migrateImageV5(oldData) {
-  let data;
+  let data: { imageData: string | null; link: string; type: "default" | "link" | "file" } = {
+    imageData: null,
+    link: "",
+    type: "default",
+  };
   switch (oldData.backgroundSelection) {
     case 0: //default
       data = {
@@ -74,20 +82,25 @@ async function migrateImageV5(oldData) {
       break;
     }
     default:
+      data = {
+        imageData: null,
+        link: "",
+        type: "default",
+      };
       break;
   }
 
   await browser.runtime.sendMessage({
     action: "setImage",
     id: "backgroundImage",
-    data: data,
+    data,
   });
 
   console.log("MIG V: \n Successfully migrated background image  with data:", data);
 }
 
 async function migrateSettingsV5(oldData) {
-  let newWeatherOverlayType;
+  let newWeatherOverlayType: "snow" | "realtime" = "snow";
   switch (oldData.weatherOverlaySelection) {
     case 0:
       newWeatherOverlayType = "snow";
@@ -96,6 +109,9 @@ async function migrateSettingsV5(oldData) {
       newWeatherOverlayType = "realtime";
       break;
     case 2:
+      newWeatherOverlayType = "snow";
+      break;
+    default:
       newWeatherOverlayType = "snow";
       break;
   }

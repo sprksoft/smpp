@@ -697,7 +697,9 @@ async function createWidgetBag() {
   innerContent.classList.add("smpp-widget-bag-inner-content");
 
   await createGroup(innerContent, "other", "Widgets");
-  if (!liteMode) await createGroup(innerContent, "games", "Games");
+  if (!liteMode) {
+    await createGroup(innerContent, "games", "Games");
+  }
   await createGroup(innerContent, "smartschool", "Smartschool Widgets");
   content.appendChild(innerContent);
   bag.appendChild(content);
@@ -753,10 +755,8 @@ function openBag() {
 export function toggleBag(_params) {
   if (isBagOpen()) {
     closeBag();
-  } else {
-    if (!curDragInfo) {
-      openBag();
-    }
+  } else if (!curDragInfo) {
+    openBag();
   }
 }
 

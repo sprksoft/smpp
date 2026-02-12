@@ -52,8 +52,12 @@ function setRainLevel(amount, opacity) {
 async function setOverlayBasedOnConditions(amount, opacity) {
   async function getWeatherDescription(widget) {
     const weatherData = await getWidgetSetting(`${widget}.cache.weatherData`);
-    if (weatherData == null) return null;
-    if (weatherData.cod !== 200) return null;
+    if (weatherData == null) {
+      return null;
+    }
+    if (weatherData.cod !== 200) {
+      return null;
+    }
     return weatherData.weather[0].main;
   }
 
@@ -80,16 +84,24 @@ export function applyWeatherEffects(weatherOverlay) {
   const snowDiv = document.getElementById("snowflakes");
   switch (weatherOverlay.type) {
     case "snow":
-      if (rainDiv) rainDiv.remove();
+      if (rainDiv) {
+        rainDiv.remove();
+      }
       setSnowLevel(weatherOverlay.amount, weatherOverlay.opacity);
       break;
     case "realtime":
-      if (rainDiv) rainDiv.remove();
-      if (snowDiv) snowDiv.remove();
+      if (rainDiv) {
+        rainDiv.remove();
+      }
+      if (snowDiv) {
+        snowDiv.remove();
+      }
       setOverlayBasedOnConditions(weatherOverlay.amount, weatherOverlay.opacity);
       break;
     case "rain":
-      if (snowDiv) snowDiv.remove();
+      if (snowDiv) {
+        snowDiv.remove();
+      }
       setRainLevel(weatherOverlay.amount, weatherOverlay.opacity);
       break;
     default:

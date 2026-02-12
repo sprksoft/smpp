@@ -22,7 +22,7 @@ import { applyProfilePicture } from "../profile.js";
 import type { Quicks } from "../quick-menu/config.js";
 import { loadQuickSettings } from "./quick-settings.js";
 
-export type Settings = {
+export interface Settings {
   profile: {
     username: string | null;
     useSMpfp: boolean;
@@ -73,9 +73,12 @@ export type Settings = {
       gc: Keybind;
     };
   };
-};
+}
 
-type SettingsSideBarCategory = { name: string; id: string };
+interface SettingsSideBarCategory {
+  name: string;
+  id: string;
+}
 type SettingsSideBarCategories = SettingsSideBarCategory[];
 
 export class SettingsWindow extends BaseWindow {
@@ -122,19 +125,20 @@ export class SettingsWindow extends BaseWindow {
     const currentRadio = settingsSideBar.querySelector(
       `input[value="${this.currentPage}"]`,
     ) as HTMLInputElement;
-    if (currentRadio) currentRadio.checked = true;
+    if (currentRadio) {
+      currentRadio.checked = true;
+    }
     settingsSideBar.addEventListener("change", this.updateSideBar);
 
     return settingsSideBar;
   }
 
   updateSideBar = async (event: Event) => {
-    if (event.target instanceof HTMLInputElement)
-      if (event.target.type === "radio") {
-        this.currentPage = event.target.value;
-        this.displaySettingsPage();
-        await this.loadPage();
-      }
+    if (event.target instanceof HTMLInputElement && event.target.type === "radio") {
+      this.currentPage = event.target.value;
+      this.displaySettingsPage();
+      await this.loadPage();
+    }
   };
 
   async createSettingsSideBarProfileButton() {
@@ -171,7 +175,9 @@ export class SettingsWindow extends BaseWindow {
     profileSettingsLabelTitle.id = "profile-settings-label-title";
 
     const firstName = String(data.profile.username || originalUsername).split(" ")[0];
-    if (firstName) profileSettingsLabelTitle.innerText = firstName;
+    if (firstName) {
+      profileSettingsLabelTitle.innerText = firstName;
+    }
 
     const profileSettingsLabelDescription = document.createElement("p");
     profileSettingsLabelDescription.classList.add("profile-settings-label-description");
@@ -299,7 +305,9 @@ export class SettingsWindow extends BaseWindow {
       const element = document.getElementById(id);
       const valueDisplay = document.querySelector(`#${id} + .settings-page-live-value`);
 
-      if (!element || !valueDisplay) return;
+      if (!(element && valueDisplay)) {
+        return;
+      }
 
       const value = await getWidgetSetting(setting);
       (element as HTMLInputElement).value = value;
@@ -309,7 +317,9 @@ export class SettingsWindow extends BaseWindow {
     const profileTitleElement = document.getElementById("profile-settings-label-title");
     if (profileTitleElement) {
       const firstName = String(settings.profile.username || originalUsername).split(" ")[0];
-      if (firstName) profileTitleElement.textContent = firstName;
+      if (firstName) {
+        profileTitleElement.textContent = firstName;
+      }
     }
 
     switch (this.currentPage) {
@@ -514,7 +524,9 @@ export class SettingsWindow extends BaseWindow {
 
         function loadKeybind(id: string, key: Keybind) {
           const keybindInput = document.getElementById(id) as HTMLInputElement;
-          if (!keybindInput) return;
+          if (!keybindInput) {
+            return;
+          }
           keybindInput.value = key as string;
         }
 
@@ -524,7 +536,9 @@ export class SettingsWindow extends BaseWindow {
         loadKeybind("settings-page-widget-edit-keybinding", settings.other.keybinds.widgetEditMode);
         loadKeybind("settings-widget-bag-keybinding", settings.other.keybinds.widgetBag);
         loadKeybind("settings-page-settings-keybinding", settings.other.keybinds.settings);
-        if (!liteMode) loadKeybind("settings-page-gc-keybinding", settings.other.keybinds.gc);
+        if (!liteMode) {
+          loadKeybind("settings-page-gc-keybinding", settings.other.keybinds.gc);
+        }
 
         break;
       }
@@ -543,12 +557,12 @@ export class SettingsWindow extends BaseWindow {
 
     const getCheckboxValue = (id: string): boolean => {
       const element = document.getElementById(id) as HTMLInputElement | null;
-      return element?.checked || false;
+      return element?.checked;
     };
 
     const getSliderValue = (id: string): number => {
       const element = document.getElementById(id) as HTMLInputElement | null;
-      return element?.value ? parseFloat(element.value) : 0;
+      return element?.value ? Number.parseFloat(element.value) : 0;
     };
 
     const saveKeybind = (id: string): Keybind => {
@@ -663,9 +677,12 @@ export class SettingsWindow extends BaseWindow {
         // Helper function for widget setting changes
         const updateWidgetSetting = async (id: string, settingName: string, type: string) => {
           const element = document.getElementById(id) as HTMLInputElement | null;
-          if (!element) return;
+          if (!element) {
+            return;
+          }
 
-          const currentValue = type === "boolean" ? element.checked : parseInt(element.value, 10);
+          const currentValue =
+            type === "boolean" ? element.checked : Number.parseInt(element.value, 10);
           const storedValue = await getWidgetSetting(settingName);
 
           if (JSON.stringify(currentValue) !== JSON.stringify(storedValue)) {
@@ -789,7 +806,9 @@ export class SettingsWindow extends BaseWindow {
       let listening = false;
 
       input.addEventListener("click", () => {
-        if (listening) return;
+        if (listening) {
+          return;
+        }
         listening = true;
         const oldKeybind = input.value;
         input.value = "Press any key...";
@@ -803,9 +822,15 @@ export class SettingsWindow extends BaseWindow {
           e.stopPropagation();
 
           let keyName = e.key.length === 1 ? e.key.toUpperCase() : e.key;
-          if (keyName === " ") keyName = "Space";
-          if (keyName === "Backspace") keyName = "None";
-          if (keyName === "Escape") keyName = oldKeybind;
+          if (keyName === " ") {
+            keyName = "Space";
+          }
+          if (keyName === "Backspace") {
+            keyName = "None";
+          }
+          if (keyName === "Escape") {
+            keyName = oldKeybind;
+          }
 
           input.value = keyName;
           document.removeEventListener("keydown", keyListener);
@@ -866,7 +891,9 @@ export class SettingsWindow extends BaseWindow {
       const input = document.createElement("input");
       input.type = "radio";
       input.name = name;
-      if (id) input.id = id;
+      if (id) {
+        input.id = id;
+      }
 
       const image = document.createElement("img");
       image.classList.add("settings-page-image");
@@ -888,8 +915,8 @@ export class SettingsWindow extends BaseWindow {
     function createImageButtonWithLabel(
       src: string,
       text: string,
-      width = "80px",
-      height = "80px",
+      width,
+      height,
       name: string,
       id: string,
     ) {
@@ -928,20 +955,25 @@ export class SettingsWindow extends BaseWindow {
       textContainer.innerText = text;
       const slider = createSlider(min, max, id);
       slider.classList.add("settings-page-labeled-slider");
-      if (showValue)
+      if (showValue) {
         slider.addEventListener("input", (_event: Event) => {
           const liveValueElement = document.querySelector(
             `#${id} ~ .settings-page-live-value`,
           ) as HTMLSpanElement;
-          if (liveValueElement) liveValueElement.innerText = slider.value;
+          if (liveValueElement) {
+            liveValueElement.innerText = slider.value;
+          }
         });
+      }
       const currentValue = document.createElement("span");
       currentValue.classList.add("settings-page-live-value");
       currentValue.innerText = min;
 
       container.appendChild(textContainer);
       container.appendChild(slider);
-      if (showValue) container.appendChild(currentValue);
+      if (showValue) {
+        container.appendChild(currentValue);
+      }
 
       return container;
     }
@@ -1162,10 +1194,11 @@ export class SettingsWindow extends BaseWindow {
           createSettingsButtonWithLabel("settings-page-swap-courses-button", "Swap courses/links"),
         );
 
-        if (isGOSchool)
+        if (isGOSchool) {
           this.settingsPage.appendChild(
             createSettingsButtonWithLabel("settings-page-go-button", "GO"),
           );
+        }
 
         this.settingsPage.appendChild(createSectionTitle("Icons"));
         this.settingsPage.appendChild(

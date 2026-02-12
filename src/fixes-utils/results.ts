@@ -12,7 +12,7 @@ export function buisStats() {
           voldoende: 0,
         };
 
-        data.forEach((evaluation) => {
+        for (const evaluation of data) {
           if (evaluation.graphic && evaluation.graphic.value !== undefined) {
             const value = evaluation.graphic.value;
             if (value < 50) {
@@ -21,7 +21,7 @@ export function buisStats() {
               categories.voldoende++;
             }
           }
-        });
+        }
         const newElement = document.createElement("div");
         newElement.id = "buis-stats";
         document.getElementsByClassName("results-evaluations__filters")[0].appendChild(newElement);

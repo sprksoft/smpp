@@ -15,7 +15,7 @@ class CalendarWidget extends WidgetBase {
     return {};
   }
 
-  private currentDate = new Date();
+  private readonly currentDate = new Date();
 
   private generateCalendar() {
     const year = this.currentDate.getFullYear();

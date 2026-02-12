@@ -28,7 +28,7 @@ function quick_cmd_list() {
 
 function add_quick(name, url) {
   const normalizedName = name.toLowerCase();
-  const quick = { name: normalizedName, url: url };
+  const quick = { name: normalizedName, url };
   for (let i = 0; i < quicks.length; i++) {
     if (quicks[i].name === normalizedName) {
       quicks[i] = quick;
@@ -137,7 +137,7 @@ async function fetch_vakken() {
       if (vak.descr !== "") {
         meta += `  [ ${vak.descr} ]`;
       }
-      vakken.push({ url: vak.url, value: vak.name.toLowerCase(), meta: meta });
+      vakken.push({ url: vak.url, value: vak.name.toLowerCase(), meta });
     }
   } else {
     console.error(`Fetching vakken failed (${response.status} http code)`);

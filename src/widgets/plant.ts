@@ -52,7 +52,9 @@ async function createPlantWidget(plantDiv) {
     return plantDiv;
   }
   plantData = calculateGrowth(plantData);
-  if (plantData.birthday != null) plantDiv.appendChild(createPlantStreak(plantData));
+  if (plantData.birthday != null) {
+    plantDiv.appendChild(createPlantStreak(plantData));
+  }
   plantDiv.appendChild(createPlantVisual(plantData));
   plantDiv.appendChild(await createPlantBottomUI(plantData));
   return plantDiv;
@@ -147,7 +149,7 @@ function createUpdatePrompt(data) {
   const updatePromptContainer = document.createElement("div");
   updatePromptContainer.id = "update-prompt-container";
   const updatePromptTitle = document.createElement("h1");
-  updatePromptTitle.innerText = `Update Required!`;
+  updatePromptTitle.innerText = "Update Required!";
   const updatePromptDescription = document.createElement("p");
   updatePromptDescription.innerHTML = `You have to reset to be up to date \nYour version: <b>${data.plantVersion}</b> is not the newest available version`;
   const resetButton = document.createElement("button");
@@ -168,17 +170,23 @@ export async function resetPlant() {
   createPlantWidget(document.getElementById("plantWidget"));
 }
 function calculatePercentile(t) {
-  const totalTime = 259200;
+  const totalTime = 259_200;
   // Total seconds in 3 days
   return Math.max(0, 100 * (1 - t / totalTime));
 }
 
 function getTimeInCorrectFormat(t) {
-  if (t / 60 / 1000 < 1) return "Now";
+  if (t / 60 / 1000 < 1) {
+    return "Now";
+  }
   // check if time is less than 1 minute
-  if (t / 60 / 60 / 1000 < 1) return `${Math.round(t / 60 / 1000)}min ago`;
+  if (t / 60 / 60 / 1000 < 1) {
+    return `${Math.round(t / 60 / 1000)}min ago`;
+  }
   // check if time is less than 1 hour
-  if (t / 60 / 60 / 1000 / 24 < 1) return `${Math.round(t / 60 / 60 / 1000)}h ago`;
+  if (t / 60 / 60 / 1000 / 24 < 1) {
+    return `${Math.round(t / 60 / 60 / 1000)}h ago`;
+  }
   // check if time is less than 1 day
   return `${Math.round(t / 60 / 60 / 1000 / 24)}d ago`;
   // time is more than 1 day
@@ -244,7 +252,7 @@ async function userWateredPlant() {
   data.lastWaterTime = new Date();
   await browser.runtime.sendMessage({
     action: "setPlantAppData",
-    data: data,
+    data,
   });
   updatePlantBottomUI(data);
 }
@@ -261,11 +269,17 @@ function calculateGrowth(data) {
     data.age += 1;
     data.lastGrowTime = currentTime;
   }
-  if (data.age > 8) data.age = 8;
+  if (data.age > 8) {
+    data.age = 8;
+  }
   // some bug in previous code
-  if (daysSinceLastWater > 3 && data.age !== 1) data.isAlive = false;
+  if (daysSinceLastWater > 3 && data.age !== 1) {
+    data.isAlive = false;
+  }
   // check if plant should die
-  if (data.age > 1 && data.birthday == null) data.birthday = currentTime;
+  if (data.age > 1 && data.birthday == null) {
+    data.birthday = currentTime;
+  }
   // check if plant is no longer a seed
   if (data.birthday != null && data.isAlive) {
     data.daysSinceBirthday = Math.round(
@@ -274,7 +288,7 @@ function calculateGrowth(data) {
   }
   browser.runtime.sendMessage({
     action: "setPlantAppData",
-    data: data,
+    data,
   });
   return data;
 }
@@ -296,7 +310,7 @@ function plantThePlant() {
     lastWaterTime: new Date(),
     lastGrowTime: new Date(),
     uniqueColor: colorArray[Math.floor(Math.random() * colorArray.length)],
-    plantVersion: plantVersion,
+    plantVersion,
     birthday: null,
     daysSinceBirthday: 0,
     isAlive: true,

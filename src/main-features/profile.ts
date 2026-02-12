@@ -4,10 +4,12 @@ import { getPfpLink } from "../fixes-utils/utils.js";
 import { originalPfpUrl, originalUsername } from "./main.js";
 import { getImageURL } from "./modules/images.js";
 
-var profilePictureObserver;
+let profilePictureObserver;
 async function displayUsernameTopNav(name) {
   const originalNameElement = document.querySelector(".js-btn-profile .hlp-vert-box span");
-  if (originalNameElement) originalNameElement.innerHTML = name;
+  if (originalNameElement) {
+    originalNameElement.innerHTML = name;
+  }
 }
 
 async function attachProfilePictureObserver(url) {
@@ -16,11 +18,17 @@ async function attachProfilePictureObserver(url) {
     try {
       // ignore if:
       // not an img or no src
-      if (!(img instanceof HTMLImageElement) || !img.src) return;
+      if (!(img instanceof HTMLImageElement && img.src)) {
+        return;
+      }
       // img src was already changed
-      if (img.src === url) return;
+      if (img.src === url) {
+        return;
+      }
       // not the original pfp and doesn't already have the class (I know it's confusing... and I made it, so)
-      if (!isOriginalPfpUrl(img.src) && !img.classList.contains("personal-profile-picture")) return;
+      if (!(isOriginalPfpUrl(img.src) || img.classList.contains("personal-profile-picture"))) {
+        return;
+      }
 
       img.src = url;
       img.classList.add("personal-profile-picture");
@@ -35,7 +43,9 @@ async function attachProfilePictureObserver(url) {
   const observer = new MutationObserver((mutations) => {
     for (const mutation of mutations) {
       for (const htmlNode of mutation.addedNodes) {
-        if (htmlNode.nodeType !== Node.ELEMENT_NODE) continue;
+        if (htmlNode.nodeType !== Node.ELEMENT_NODE) {
+          continue;
+        }
 
         if (htmlNode instanceof HTMLImageElement) {
           processImg(htmlNode);
@@ -45,7 +55,9 @@ async function attachProfilePictureObserver(url) {
         try {
           const imgs = htmlNode.querySelectorAll?.("img");
           if (imgs?.length) {
-            for (const img of imgs) processImg(img);
+            for (const img of imgs) {
+              processImg(img);
+            }
           }
         } catch (e) {
           console.error("Error querying imgs inside node:", e, htmlNode);

@@ -279,7 +279,10 @@ li {
   text-align: center;
 }
 
-.pupil_nav_info .pupil_nav_info_pupilData .pupil_nav_pupilinfo .pupil_nav_pupilinfo_item.teachers {
+.pupil_nav_info
+  .pupil_nav_info_pupilData
+  .pupil_nav_pupilinfo
+  .pupil_nav_pupilinfo_item.teachers {
   max-width: none;
 }
 
@@ -288,11 +291,13 @@ li {
 }
 
 .tree-classic li.open {
-  background: url(/includes/jQuery/plugins/jsTree/themes/classic/icons.png) -32px -48px no-repeat;
+  background: url(/includes/jQuery/plugins/jsTree/themes/classic/icons.png)
+    -32px -48px no-repeat;
 }
 
 .tree-classic li.closed {
-  background: url(/includes/jQuery/plugins/jsTree/themes/classic/icons.png) -48px -32px no-repeat;
+  background: url(/includes/jQuery/plugins/jsTree/themes/classic/icons.png)
+    -48px -32px no-repeat;
 }
 
 .tree-classic li {

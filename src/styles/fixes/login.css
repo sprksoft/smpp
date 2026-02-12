@@ -111,7 +111,9 @@ body form.form .float-label .float-label__input {
   border-color: var(--color-base02);
   background-color: var(--color-base01);
 }
-.glass .login-app .smscButton.blue:hover:not(#pushWizardPopupConfirmButton:hover) {
+.glass
+  .login-app
+  .smscButton.blue:hover:not(#pushWizardPopupConfirmButton:hover) {
   background-color: var(--color-base02);
   border-color: var(--color-base03);
 }
@@ -128,8 +130,11 @@ body form.form .float-label .float-label__input {
   justify-self: center;
 }
 
-.enableAnimations .login-app .smscButton.blue:not(#pushWizardPopupConfirmButton) {
-  transition-property: background-color, border-color, box-shadow, width, font-weigt, margin-left;
+.enableAnimations
+  .login-app
+  .smscButton.blue:not(#pushWizardPopupConfirmButton) {
+  transition-property:
+    background-color, border-color, box-shadow, width, font-weigt, margin-left;
   transition: 0.3s;
 }
 

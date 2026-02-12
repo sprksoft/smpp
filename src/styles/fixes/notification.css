@@ -118,8 +118,16 @@ button.tox-tbtn.tox-tbtn--enabled {
   color: var(--color-accent);
 }
 
-.smsc-topnav [data-notifs] .notifs__hdr [role="switch"][aria-checked="false"] :last-child,
-.smsc-topnav [data-notifs] .notifs__hdr [role="switch"][aria-checked="true"] :first-child {
+.smsc-topnav
+  [data-notifs]
+  .notifs__hdr
+  [role="switch"][aria-checked="false"]
+  :last-child,
+.smsc-topnav
+  [data-notifs]
+  .notifs__hdr
+  [role="switch"][aria-checked="true"]
+  :first-child {
   color: var(--color-text);
 }
 

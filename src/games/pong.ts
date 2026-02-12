@@ -62,7 +62,9 @@ class PongWidget extends GameBase {
   }
 
   onGameDraw(ctx, dt) {
-    if (!this.ball) return;
+    if (!this.ball) {
+      return;
+    }
 
     const w = this.canvas.width;
     const h = this.canvas.height;
@@ -77,8 +79,12 @@ class PongWidget extends GameBase {
     const speed = PONG_PADDLE_SPEED * this.getOpt("speed") * 0.01;
     const paddleDelta = speed * dt;
 
-    if (this.leftUp) this.leftY -= paddleDelta;
-    if (this.leftDown) this.leftY += paddleDelta;
+    if (this.leftUp) {
+      this.leftY -= paddleDelta;
+    }
+    if (this.leftDown) {
+      this.leftY += paddleDelta;
+    }
     this.leftY = Math.max(0, Math.min(h - PONG_PADDLE_HEIGHT, this.leftY));
 
     const aiCenter = this.rightY + PONG_PADDLE_HEIGHT / 2;
@@ -168,13 +174,21 @@ class PongWidget extends GameBase {
   }
 
   onKeyDown(e) {
-    if (e.code === "ArrowUp") this.leftUp = true;
-    if (e.code === "ArrowDown") this.leftDown = true;
+    if (e.code === "ArrowUp") {
+      this.leftUp = true;
+    }
+    if (e.code === "ArrowDown") {
+      this.leftDown = true;
+    }
   }
 
   onKeyUp(e) {
-    if (e.code === "ArrowUp") this.leftUp = false;
-    if (e.code === "ArrowDown") this.leftDown = false;
+    if (e.code === "ArrowUp") {
+      this.leftUp = false;
+    }
+    if (e.code === "ArrowDown") {
+      this.leftDown = false;
+    }
   }
 }
 

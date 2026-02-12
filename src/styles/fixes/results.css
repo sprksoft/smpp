@@ -21,7 +21,8 @@
   width: 3.3rem;
 }
 
-.results-evaluations__content.smsc-container.smsc-container--main .listview__rows {
+.results-evaluations__content.smsc-container.smsc-container--main
+  .listview__rows {
   padding-left: 1.5rem;
 }
 
@@ -213,7 +214,10 @@ input.input.bootstrap__input.search-input {
   background-color: var(--color-base01);
 }
 
-.todo-column [listview] .todo-column__row.active-row .todo-column__actions-cell {
+.todo-column
+  [listview]
+  .todo-column__row.active-row
+  .todo-column__actions-cell {
   background-color: var(--color-base02);
 }
 
@@ -294,7 +298,10 @@ button.goals-filter__item.selected {
   background-color: var(--color-base01);
 }
 
-.evaluation-graphic .evaluation-graphic--goal .evaluation-graphic--icon .goals__goal__graphic {
+.evaluation-graphic
+  .evaluation-graphic--goal
+  .evaluation-graphic--icon
+  .goals__goal__graphic {
   display: none;
 }
 
@@ -322,7 +329,9 @@ input[type="search"].input.search-input,
 .c-steel-combo-hover--100,
 [listview]
   .listview__row:hover:not(.listview__row--selected)
-  .listview__cell:not(.listview__cell--select-btn):not(.listview__cell--no-hover) {
+  .listview__cell:not(.listview__cell--select-btn):not(
+    .listview__cell--no-hover
+  ) {
   background-color: transparent;
 }
 
@@ -435,7 +444,8 @@ span.evaluation-graphic__progress-ring__value {
   backdrop-filter: var(--small-blur);
 }
 
-.title-and-schoolyear-selector .title-and-schoolyear-selector__period-container:not(:disabled) {
+.title-and-schoolyear-selector
+  .title-and-schoolyear-selector__period-container:not(:disabled) {
   border-width: 2px;
   border-radius: 15px;
 }
@@ -479,7 +489,8 @@ span.evaluation-graphic__progress-ring__value {
   border-radius: 1rem;
 }
 
-.enableAnimations .listview__row.js-listview-row.leerplannen-overview__list__listview__row {
+.enableAnimations
+  .listview__row.js-listview-row.leerplannen-overview__list__listview__row {
   transition-property: border-color, background-color;
   transition: 0.1s ease-in-out;
 }
@@ -569,7 +580,9 @@ button.button-ZR3rz.bp-c-combo-hover-plain-outline--300,
   background-color: var(--color-base02);
 }
 
-.tabs[role="tablist"] > [role="presentation"] > [role="tab"]:hover:not([aria-selected]) {
+.tabs[role="tablist"]
+  > [role="presentation"]
+  > [role="tab"]:hover:not([aria-selected]) {
   border-bottom-color: var(--color-base03);
 }
 .tabs[role="tablist"] {

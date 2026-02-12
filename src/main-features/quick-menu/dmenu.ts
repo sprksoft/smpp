@@ -24,10 +24,10 @@ class DMenu {
   openerEl;
   menuEl;
 
-  #endFunc;
-  #inputEl;
-  #itemListEl;
-  #selectedIndex;
+  readonly #endFunc;
+  readonly #inputEl;
+  readonly #itemListEl;
+  readonly #selectedIndex;
 
   constructor(itemList, endFunc = undefined, title = "dmenu:", openerEl = undefined) {
     this.endFunc = endFunc;
@@ -126,7 +126,7 @@ class DMenu {
       } else {
         node.classList.remove("hidden");
       }
-      items.push({ score: score, htmlNode: node });
+      items.push({ score, htmlNode: node });
 
       if (dmenuConfig.itemScore) {
         node.getElementsByClassName("dmenu-score")[0].innerText = score;
@@ -134,8 +134,12 @@ class DMenu {
     }
 
     const sortedItems = items.sort((a, b) => {
-      if (a.score < b.score) return 1;
-      if (a.score > b.score) return -1;
+      if (a.score < b.score) {
+        return 1;
+      }
+      if (a.score > b.score) {
+        return -1;
+      }
       return 0;
     });
 
@@ -214,7 +218,9 @@ class DMenu {
   #mkDmenu(itemList, title) {
     this.menuEl = document.createElement("div");
     this.menuEl.classList.add("dmenu");
-    if (randomChance(1 / 100)) this.menuEl.classList.add("jokeDmenu");
+    if (randomChance(1 / 100)) {
+      this.menuEl.classList.add("jokeDmenu");
+    }
     if (dmenuConfig.centered) {
       this.menuEl.classList.add("dmenu-centered");
     }

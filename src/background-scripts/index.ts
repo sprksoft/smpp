@@ -91,7 +91,7 @@ async function handleMessage(message: any, sendResponse: (resp: any) => void) {
     if (message.action === "getSharedTheme") {
       const theme = await getSharedTheme(message.shareId);
       console.log("sending", theme);
-      sendResponse({ theme: theme });
+      sendResponse({ theme });
     }
     if (message.action === "installTheme") {
       await installTheme(message.shareId);

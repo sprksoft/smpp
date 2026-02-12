@@ -32,7 +32,7 @@ class WeatherWidgetBase extends WidgetBase {
   async fetchWeatherData(location) {
     return await browser.runtime.sendMessage({
       action: "fetchWeatherData",
-      location: location,
+      location,
     });
   }
 
@@ -95,7 +95,9 @@ class WeatherWidgetBase extends WidgetBase {
     this.updateWeatherEffect();
     const container = document.createElement("div");
     container.classList.add("weather-div");
-    if (this.isCompact) container.classList.add("compact");
+    if (this.isCompact) {
+      container.classList.add("compact");
+    }
 
     const topContentContainer = document.createElement("div");
     topContentContainer.classList.add("top-weather-content-container");
@@ -239,7 +241,9 @@ function createWeatherPreview(isCompact) {
   const container = document.createElement("div");
   container.classList.add("weather-div");
   container.classList.add("preview");
-  if (isCompact) container.classList.add("compact");
+  if (isCompact) {
+    container.classList.add("compact");
+  }
   const weatherTitle = document.createElement("div");
   weatherTitle.classList.add("weather-preview-title");
   weatherTitle.innerText = isCompact ? "Tiny Weather" : "Weather";
@@ -314,7 +318,7 @@ function createNotFoundContent(code) {
     notFoundContent.appendChild(notFoundIcon);
     notFoundText.innerText = "Location not found";
   } else if (code === 69) {
-    notFoundText.innerText = `Unexpected error:\nUnable to fetch`;
+    notFoundText.innerText = "Unexpected error:\nUnable to fetch";
   } else {
     notFoundText.innerText = `Unexpected error:\n${code}`;
   }

@@ -81,8 +81,12 @@ class BreakoutWidget extends GameBase {
     ctx.fillRect(0, 0, w, h);
 
     const speed = PADDLE_SPEED * this.getOpt("speed") * 0.01;
-    if (this.leftPressed) this.paddleX -= speed * dt;
-    if (this.rightPressed) this.paddleX += speed * dt;
+    if (this.leftPressed) {
+      this.paddleX -= speed * dt;
+    }
+    if (this.rightPressed) {
+      this.paddleX += speed * dt;
+    }
     this.paddleX = Math.max(0, Math.min(w - PADDLE_WIDTH, this.paddleX));
 
     const ball = this.ball;
@@ -116,18 +120,17 @@ class BreakoutWidget extends GameBase {
     }
 
     for (const b of this.bricks) {
-      if (b.status === 1) {
-        if (
-          ball.x > b.x &&
-          ball.x < b.x + BRICK_WIDTH &&
-          ball.y > b.y &&
-          ball.y < b.y + BRICK_HEIGHT
-        ) {
-          b.status = 0;
-          ball.dy *= -1;
-          this.score++;
-          break;
-        }
+      if (
+        b.status === 1 &&
+        ball.x > b.x &&
+        ball.x < b.x + BRICK_WIDTH &&
+        ball.y > b.y &&
+        ball.y < b.y + BRICK_HEIGHT
+      ) {
+        b.status = 0;
+        ball.dy *= -1;
+        this.score++;
+        break;
       }
     }
 
@@ -148,13 +151,19 @@ class BreakoutWidget extends GameBase {
   }
 
   onKeyDown(e) {
-    if (e.code === "ArrowLeft") this.leftPressed = true;
-    else if (e.code === "ArrowRight") this.rightPressed = true;
+    if (e.code === "ArrowLeft") {
+      this.leftPressed = true;
+    } else if (e.code === "ArrowRight") {
+      this.rightPressed = true;
+    }
   }
 
   onKeyUp(e) {
-    if (e.code === "ArrowLeft") this.leftPressed = false;
-    else if (e.code === "ArrowRight") this.rightPressed = false;
+    if (e.code === "ArrowLeft") {
+      this.leftPressed = false;
+    } else if (e.code === "ArrowRight") {
+      this.rightPressed = false;
+    }
   }
 }
 

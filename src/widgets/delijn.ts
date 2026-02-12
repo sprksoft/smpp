@@ -24,7 +24,7 @@ function getHalteDirections(delijnDirectionsData) {
   const delijnDirectionsArray = [];
   delijnDirectionsData.forEach((lijn) => {
     const description = lijn.omschrijving.split("-");
-    let descriptionEndStop = description[description.length - 1];
+    let descriptionEndStop = description.at(-1);
     descriptionEndStop = descriptionEndStop.replace(")", "").replace("(", "");
     if (!delijnDirectionsArray.includes(descriptionEndStop) && delijnDirectionsArray.length < 3) {
       delijnDirectionsArray.push(descriptionEndStop);
@@ -41,13 +41,15 @@ async function _delay(ms) {
 async function fetchDelijnData(url) {
   return await browser.runtime.sendMessage({
     action: "fetchDelijnData",
-    url: url,
+    url,
   });
 }
 
 // Display functions
 async function createHalteDoorkomst(doorkomst, container, monochrome, signal) {
-  if (signal?.aborted) return;
+  if (signal?.aborted) {
+    return;
+  }
 
   const entiteitnummer = doorkomst.entiteitnummer;
   const lijnnummer = doorkomst.lijnnummer;
@@ -133,7 +135,9 @@ async function createHalteDoorkomst(doorkomst, container, monochrome, signal) {
   lijnCard.appendChild(arrivalTimeDeviationElement);
   lijnCard.appendChild(lijnCardBottom);
 
-  if (signal?.aborted) return;
+  if (signal?.aborted) {
+    return;
+  }
 
   container.appendChild(lijnCard);
 
@@ -160,7 +164,9 @@ async function updateLijnCardWithApiData(
   monochrome,
   signal,
 ) {
-  if (signal?.aborted) return;
+  if (signal?.aborted) {
+    return;
+  }
 
   try {
     const individualLijnData = await fetchDelijnData(
@@ -168,7 +174,9 @@ async function updateLijnCardWithApiData(
       { signal },
     );
 
-    if (signal?.aborted) return;
+    if (signal?.aborted) {
+      return;
+    }
 
     const publicLineNumber = individualLijnData.lijnnummerPubliek;
     lijnNumberElement.textContent = publicLineNumber;
@@ -178,7 +186,9 @@ async function updateLijnCardWithApiData(
       { signal },
     );
 
-    if (signal?.aborted) return;
+    if (signal?.aborted) {
+      return;
+    }
 
     if (!monochrome) {
       lijnNumberElement.style.backgroundColor = getHexByCode(
@@ -260,7 +270,9 @@ class DelijnWidget extends WidgetBase {
     this.elements.searchInput.classList.add("halteInput");
     this.elements.searchInput.spellcheck = false;
     this.elements.searchInput.addEventListener("keyup", (event) => {
-      if (event.key === "Enter") this.handleHalteSearch();
+      if (event.key === "Enter") {
+        this.handleHalteSearch();
+      }
     });
 
     this.elements.searchButton = document.createElement("button");
@@ -308,12 +320,15 @@ class DelijnWidget extends WidgetBase {
       return;
     }
 
-    if (signal.aborted) return;
+    if (signal.aborted) {
+      return;
+    }
 
     if (!delijnData.halteDoorkomsten[0]) {
       this.displayInfo("Er zijn momenteel geen bussen beschikbaar voor deze halte.");
       return;
-    } else if (delijnData.halteDoorkomsten[0].doorkomsten.length < 1) {
+    }
+    if (delijnData.halteDoorkomsten[0].doorkomsten.length < 1) {
       this.displayInfo("Er zijn momenteel geen vertrekkende bussen");
       return;
     }
@@ -326,7 +341,9 @@ class DelijnWidget extends WidgetBase {
     });
 
     for (const doorkomst of sortedDoorkomsten) {
-      if (signal.aborted) return; // Check before each card creation
+      if (signal.aborted) {
+        return; // Check before each card creation
+      }
 
       await createHalteDoorkomst(
         doorkomst,
@@ -335,7 +352,9 @@ class DelijnWidget extends WidgetBase {
         signal, // Pass signal to createHalteDoorkomst
       );
 
-      if (signal.aborted) return; // Check after each card creation
+      if (signal.aborted) {
+        return; // Check after each card creation
+      }
     }
 
     if (!signal.aborted) {
@@ -396,7 +415,9 @@ class DelijnWidget extends WidgetBase {
         { signal },
       );
     } catch (error) {
-      if (error.name === "AbortError") return;
+      if (error.name === "AbortError") {
+        return;
+      }
       this.displayInfo(`Er liep iets mis: ${error}`);
       return;
     }
@@ -418,7 +439,9 @@ class DelijnWidget extends WidgetBase {
         { signal },
       );
     } catch (error) {
-      if (error.name === "AbortError") return;
+      if (error.name === "AbortError") {
+        return;
+      }
       this.displayInfo(`Er liep iets mis: ${error}`);
       return;
     }
@@ -434,10 +457,14 @@ class DelijnWidget extends WidgetBase {
       const results = delijnHaltesLijnrichtingenData.halteLijnrichtingen.slice(startIndex);
 
       for (let i = 0; i < results.length; i++) {
-        if (signal.aborted) return; // <--- Early return before running `createHalteOption`
+        if (signal.aborted) {
+          return; // <--- Early return before running `createHalteOption`
+        }
         const halte = results[i];
         await this.createHalteOption(halte, signal); // Pass signal down
-        if (signal.aborted) return; // <--- In case abort happens during async call
+        if (signal.aborted) {
+          return; // <--- In case abort happens during async call
+        }
       }
 
       if (delijnHaltesData.aantalHits > this.searchResultLimit) {
@@ -453,7 +480,9 @@ class DelijnWidget extends WidgetBase {
   }
 
   async createHalteOption(halte, signal) {
-    if (signal.aborted) return;
+    if (signal.aborted) {
+      return;
+    }
 
     const halteLijnCard = document.createElement("div");
     halteLijnCard.dataset.entiteitnummer = halte.halte.entiteitnummer;
@@ -470,7 +499,9 @@ class DelijnWidget extends WidgetBase {
     const lijnenArray = [];
 
     for (const lijnrichting of halte.lijnrichtingen.slice(0, 5)) {
-      if (signal.aborted) return;
+      if (signal.aborted) {
+        return;
+      }
 
       const lijn = document.createElement("span");
       lijn.classList.add("lijnNumber", "halteLijnNumber");
@@ -485,12 +516,16 @@ class DelijnWidget extends WidgetBase {
           { signal },
         );
       } catch (error) {
-        if (error.name === "AbortError") return;
+        if (error.name === "AbortError") {
+          return;
+        }
         console.error("Lijn data fetch error:", error);
         continue;
       }
 
-      if (signal.aborted) return;
+      if (signal.aborted) {
+        return;
+      }
 
       if (lijnenArray.includes(individualLijnData.lijnnummerPubliek)) {
         lijn.remove();
@@ -507,12 +542,16 @@ class DelijnWidget extends WidgetBase {
           { signal },
         );
       } catch (error) {
-        if (error.name === "AbortError") return;
+        if (error.name === "AbortError") {
+          return;
+        }
         console.error("Lijn color fetch error:", error);
         continue;
       }
 
-      if (signal.aborted) return;
+      if (signal.aborted) {
+        return;
+      }
 
       if (!this.settings.monochrome) {
         lijn.style.backgroundColor = getHexByCode(individualLijnDataColors.achtergrond.code);
@@ -567,7 +606,9 @@ class DelijnWidget extends WidgetBase {
 
   displayInfo(info) {
     const infoContainer = this.createInfoElement();
-    if (info) infoContainer.innerText = info;
+    if (info) {
+      infoContainer.innerText = info;
+    }
     infoContainer.classList.add("delijnInfoContainerVisible");
     infoContainer.classList.remove("delijnInfoContainerHidden");
   }

@@ -71,9 +71,15 @@ class ClockWidget extends WidgetBase {
       let minutesAngle = totalMinutes * 6;
       let hoursAngle = totalHours * 30;
 
-      if (secondsAngle > 270) secondsAngle -= 360;
-      if (minutesAngle > 270) minutesAngle -= 360;
-      if (hoursAngle > 270) hoursAngle -= 360;
+      if (secondsAngle > 270) {
+        secondsAngle -= 360;
+      }
+      if (minutesAngle > 270) {
+        minutesAngle -= 360;
+      }
+      if (hoursAngle > 270) {
+        hoursAngle -= 360;
+      }
 
       secondHand.style.transform = `translate(-50%, -100%) rotate(${secondsAngle}deg)`;
       minuteHand.style.transform = `translate(-50%, -100%) rotate(${minutesAngle}deg)`;

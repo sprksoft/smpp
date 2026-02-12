@@ -63,7 +63,9 @@ export function getUserId(): string | undefined {
       sendDebug(`Retrieved plannerUrl from cookies${plannerUrlCookie}`);
       const plannerUrl = plannerUrlCookie.split("=")[1];
       sendDebug("Found plannerUrl in cookies:", plannerUrl);
-      if (plannerUrl) userId = plannerUrl.split("/")[4];
+      if (plannerUrl) {
+        userId = plannerUrl.split("/")[4];
+      }
       sendDebug("Extracted userId from cookie plannerUrl:", userId);
     } else {
       console.error(
@@ -74,10 +76,9 @@ export function getUserId(): string | undefined {
 
   if (userId) {
     return userId;
-  } else {
-    console.error("No userID? womp womp");
-    return undefined;
   }
+  console.error("No userID? womp womp");
+  return undefined;
 }
 
 export function getSchoolName(): string | null {
@@ -110,7 +111,7 @@ export class Toast {
   time: number;
   toastElement: HTMLDivElement;
 
-  constructor(content: string, type: ToastType, time: number = 3000) {
+  constructor(content: string, type: ToastType, time = 3000) {
     this.content = content;
     this.type = type;
     this.time = time;
@@ -161,7 +162,9 @@ export class Toast {
 
   async hideToastElement(): Promise<void> {
     const toastContainer = document.getElementById("toast-container");
-    if (!toastContainer) return;
+    if (!toastContainer) {
+      return;
+    }
     this.toastElement.classList.add("being-removed");
     await delay(300);
     toastContainer.removeChild(this.toastElement);
@@ -170,7 +173,9 @@ export class Toast {
   async render(): Promise<void> {
     const toastContainer = document.getElementById("toast-container");
 
-    if (!toastContainer) return;
+    if (!toastContainer) {
+      return;
+    }
     toastContainer.appendChild(this.toastElement);
     await delay(this.time);
     await this.hideToastElement();

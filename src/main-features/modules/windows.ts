@@ -20,7 +20,9 @@ export class BaseWindow {
     this.element.id = this.id;
     this.element.classList.add("base-window");
     this.wrapper.classList.add("window-wrapper");
-    if (this.hidden) this.element.classList.add("hidden");
+    if (this.hidden) {
+      this.element.classList.add("hidden");
+    }
 
     // Create controls container
     const controls = document.createElement("div");
@@ -46,7 +48,7 @@ export class BaseWindow {
     fullscreenBtn.addEventListener("click", () => {
       this.onScreenSizeUpdate?.();
       this.element.classList.toggle("fullscreen-window");
-      void this.element.offsetWidth;
+      this.element.offsetWidth;
     });
 
     closeBtn.addEventListener("click", () => this.hide(true));
@@ -72,7 +74,9 @@ export class BaseWindow {
   onCreate?(): void;
 
   show(triggerEvent: MouseEvent | KeyboardEvent | null = null): void {
-    if (!this.hidden) return;
+    if (!this.hidden) {
+      return;
+    }
     this.hidden = false;
 
     this.element.classList.remove("hidden");
@@ -149,7 +153,9 @@ export class BaseWindow {
   }
 
   hide(realUserIntent = false): void {
-    if (this.hidden) return;
+    if (this.hidden) {
+      return;
+    }
 
     this.hidden = true;
     this.element.classList.add("hidden");
@@ -183,7 +189,9 @@ export class Dialog extends BaseWindow {
     this.element.id = this.id;
     this.element.classList.add("base-window", "base-dialog");
     this.wrapper.classList.add("window-wrapper");
-    if (this.hidden) this.element.classList.add("hidden");
+    if (this.hidden) {
+      this.element.classList.add("hidden");
+    }
 
     // Create controls container
     const controls = document.createElement("div");
