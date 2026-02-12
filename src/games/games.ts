@@ -12,7 +12,7 @@ export class GameOption {
   def;
 
   static slider(name, title, min = 0, max = 0, def = 0) {
-    let go = new GameOption();
+    const go = new GameOption();
     go.name = name;
     go.title = title;
     go.type = GAME_OPTION_TYPE_SLIDER;
@@ -32,7 +32,7 @@ export class GameBase extends WidgetBase {
   #hiScore;
   #requestStopGame;
   #optionValues;
-  #optionElements = {};
+  readonly #optionElements = {};
   #lastTs;
   #ctx;
 
@@ -50,10 +50,8 @@ export class GameBase extends WidgetBase {
       }
       if (this.playing) {
         await this.onKeyDown(e);
-      } else if (this.hasPlayedAtLeastOnce) {
-        if (e.code === "Space") {
-          await this.#startGame();
-        }
+      } else if (this.hasPlayedAtLeastOnce && e.code === "Space") {
+        await this.#startGame();
       }
     });
     document.addEventListener("keyup", async (e) => {
@@ -84,17 +82,17 @@ export class GameBase extends WidgetBase {
 
     let displayValue = Math.round(value / 10);
     displayValue /= 10;
-    if (displayValue == Math.round(displayValue)) {
+    if (displayValue === Math.round(displayValue)) {
       displayValue += ".0";
     }
-    displayEl.innerText = displayValue + "x";
+    displayEl.innerText = `${displayValue}x`;
     displayEl.classList.add("game-option-value");
 
     this.#optionValues[name] = value * 1;
   }
 
   #updateScore() {
-    this.#scoreEl.innerText = "High Score: " + this.#hiScore;
+    this.#scoreEl.innerText = `High Score: ${this.#hiScore}`;
   }
 
   #draw(ts) {
@@ -124,7 +122,6 @@ export class GameBase extends WidgetBase {
       });
     }
   }
-  #tick() {}
 
   async #startGame() {
     this.canvas.style.display = "block";
@@ -148,7 +145,7 @@ export class GameBase extends WidgetBase {
   async createContent() {
     this.#optionValues = {};
 
-    let div = document.createElement("div");
+    const div = document.createElement("div");
     div.classList.add("game-container");
 
     this.canvas = document.createElement("canvas");
@@ -163,34 +160,32 @@ export class GameBase extends WidgetBase {
     });
     div.appendChild(this.canvas);
 
-    let menuTop = document.createElement("div");
+    const menuTop = document.createElement("div");
     menuTop.classList.add("game-menu-top");
-    let menuBottom = document.createElement("div");
+    const menuBottom = document.createElement("div");
     menuBottom.classList.add("game-menu-bottom");
-    let menu = document.createElement("div");
+    const menu = document.createElement("div");
     menu.classList.add("game-menu");
 
-    let title = document.createElement("h2");
+    const title = document.createElement("h2");
     title.classList.add("game-title");
-    title.innerText = this.title.endsWith("++")
-      ? this.title
-      : this.title + "++";
+    title.innerText = this.title.endsWith("++") ? this.title : `${this.title}++`;
     menuTop.appendChild(title);
 
     this.#scoreEl = document.createElement("span");
     this.#scoreEl.classList.add("game-score");
     menuTop.appendChild(this.#scoreEl);
 
-    for (let opt of this.options) {
-      let label = document.createElement("label");
+    for (const opt of this.options) {
+      const label = document.createElement("label");
       label.classList.add("game-slider-label");
       label.innerText = opt.title;
       menuBottom.appendChild(label);
 
-      if (opt.type == GAME_OPTION_TYPE_SLIDER) {
-        let sliderCont = document.createElement("div");
+      if (opt.type === GAME_OPTION_TYPE_SLIDER) {
+        const sliderCont = document.createElement("div");
         sliderCont.classList.add("game-slide-container");
-        let slider = document.createElement("input");
+        const slider = document.createElement("input");
         slider.type = "range";
         slider.min = opt.min;
         slider.max = opt.max;
@@ -198,14 +193,14 @@ export class GameBase extends WidgetBase {
         slider.classList.add("game-slider");
         sliderCont.appendChild(slider);
 
-        let display = document.createElement("span");
+        const display = document.createElement("span");
         sliderCont.appendChild(display);
-        this.#optionElements[opt.name] = { display: display, input: slider };
+        this.#optionElements[opt.name] = { display, input: slider };
 
         slider.addEventListener("input", (e) => {
           this.#updateOpt(opt.name, e.target.value);
         });
-        slider.addEventListener("change", async (e) => {
+        slider.addEventListener("change", async (_e) => {
           await this.setSetting("options", this.#optionValues);
         });
 
@@ -216,7 +211,7 @@ export class GameBase extends WidgetBase {
     this.#buttonEl = document.createElement("button");
     this.#buttonEl.classList.add("game-button");
     this.#buttonEl.innerText = "Play";
-    this.#buttonEl.addEventListener("click", async (e) => {
+    this.#buttonEl.addEventListener("click", async (_e) => {
       await this.#startGame();
     });
     menuBottom.appendChild(this.#buttonEl);
@@ -230,16 +225,17 @@ export class GameBase extends WidgetBase {
   }
 
   async onSettingsChange() {
-    if (this.constructor.name == "SnakeWidget") {
+    if (this.constructor.name === "SnakeWidget") {
       if (window.localStorage.getItem("snakehighscore")) {
         this.settings = await migrateSnake();
       }
-    } else if (this.constructor.name == "FlappyWidget") {
-      if (window.localStorage.getItem("flappyhighscore")) {
-        this.settings = await migrateFlappy();
-      }
+    } else if (
+      this.constructor.name === "FlappyWidget" &&
+      window.localStorage.getItem("flappyhighscore")
+    ) {
+      this.settings = await migrateFlappy();
     }
-    for (let opt of this.options) {
+    for (const opt of this.options) {
       let value = this.settings.options[opt.name];
       if (!value) {
         value = opt.def;
@@ -251,24 +247,22 @@ export class GameBase extends WidgetBase {
     this.#updateScore();
   }
   async createPreview() {
-    let div = document.createElement("div");
+    const div = document.createElement("div");
     div.classList.add("game-container");
 
-    let menuTop = document.createElement("div");
+    const menuTop = document.createElement("div");
     menuTop.classList.add("game-menu-top");
-    let menuBottom = document.createElement("div");
+    const menuBottom = document.createElement("div");
     menuBottom.classList.add("game-menu-bottom");
-    let menu = document.createElement("div");
+    const menu = document.createElement("div");
     menu.classList.add("game-menu");
 
-    let title = document.createElement("h2");
+    const title = document.createElement("h2");
     title.classList.add("game-title");
-    title.innerText = this.title.endsWith("++")
-      ? this.title
-      : this.title + "++";
+    title.innerText = this.title.endsWith("++") ? this.title : `${this.title}++`;
     menuTop.appendChild(title);
 
-    let buttonEl = document.createElement("button");
+    const buttonEl = document.createElement("button");
     buttonEl.classList.add("game-button");
     buttonEl.innerText = "Play";
 
@@ -285,17 +279,19 @@ export class GameBase extends WidgetBase {
   // Override us
 
   // (required)
-  get title() {}
+  get title() {
+    return "Game";
+  }
 
   async onGameStart() {}
   // Called when the game to update (same on all devices)
   onGameTick() {}
   // Called when the game needs to render a new frame (dt is time since last
   // frame)
-  onGameDraw(ctx, deltaTime) {}
-  async onKeyDown(e) {}
-  async onKeyUp(e) {}
-  async onMouse(e) {}
+  onGameDraw(_ctx, _deltaTime) {}
+  async onKeyDown(_e) {}
+  async onKeyUp(_e) {}
+  async onMouse(_e) {}
 
   get tickSpeed() {
     return 60;

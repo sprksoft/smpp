@@ -46,13 +46,14 @@ function vak_prefix(page) {
 }
 
 function title_prefix() {
-  let subdomain =
-    location.host.split(".")[0].charAt(0).toUpperCase() +
-    location.host.split(".")[0].slice(1);
-  let url = location.pathname;
-  let qstr = new URLSearchParams(location.search);
-  let module = qstr.get("module");
-  if (!url.split("/")[1]) return;
+  const subdomain =
+    location.host.split(".")[0].charAt(0).toUpperCase() + location.host.split(".")[0].slice(1);
+  const url = location.pathname;
+  const qstr = new URLSearchParams(location.search);
+  const module = qstr.get("module");
+  if (!url.split("/")[1]) {
+    return;
+  }
   let page = url.split("/")[1].toLowerCase();
   if (module !== null) {
     page = module.toLowerCase();
@@ -86,7 +87,7 @@ function title_prefix() {
     case "lvs":
       return "Leerlingvolgsysteem";
     case "":
-      return "Start - " + subdomain;
+      return `Start - ${subdomain}`;
     default:
       break;
   }
@@ -95,20 +96,19 @@ function title_prefix() {
   if (topnav_title) {
     topnav_title = topnav_title.innerText;
   }
-  let prefix = vak_prefix(page);
-  if (prefix != undefined) {
+  const prefix = vak_prefix(page);
+  if (prefix !== undefined) {
     if (topnav_title) {
-      return prefix + " - " + topnav_title;
-    } else {
-      return prefix;
+      return `${prefix} - ${topnav_title}`;
     }
+    return prefix;
   }
 }
 
 export function titleFix() {
-  let prepend = title_prefix();
-  if (prepend != undefined) {
-    let title = document.querySelector("head > title");
-    title.innerText = prepend + " - Smartschool";
+  const prepend = title_prefix();
+  if (prepend !== undefined) {
+    const title = document.querySelector("head > title");
+    title.innerText = `${prepend} - Smartschool`;
   }
 }

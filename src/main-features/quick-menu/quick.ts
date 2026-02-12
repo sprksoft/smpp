@@ -1,12 +1,13 @@
 // @ts-nocheck
-import { dmenu, dmenuConfig } from "./dmenu.js";
-import { getDMenuOptionsForSettings, dmenuEditConfig } from "./config.js";
-import { clearAllData } from "../../fixes-utils/utils.js";
-import { openGlobalChat } from "../globalchat.js";
-import { resetPlant } from "../../widgets/plant.js";
-import { openURL, browser } from "../../common/utils.ts";
 
-let quicks = [];
+import { browser, openURL } from "../../common/utils.ts";
+import { clearAllData } from "../../fixes-utils/utils.js";
+import { resetPlant } from "../../widgets/plant.js";
+import { openGlobalChat } from "../globalchat.js";
+import { dmenuEditConfig, getDMenuOptionsForSettings } from "./config.js";
+import { dmenu, dmenuConfig } from "./dmenu.js";
+
+const quicks = [];
 let links = [];
 let vakken = [];
 let goto_items = [];
@@ -18,17 +19,18 @@ if (document.querySelector(".topnav")) {
 }
 
 function quick_cmd_list() {
-  let cmd_list = [];
+  const cmd_list = [];
   for (let i = 0; i < quicks.length; i++) {
-    cmd_list.push({ value: quicks[i].name, meta: "quick: " + quicks[i].url });
+    cmd_list.push({ value: quicks[i].name, meta: `quick: ${quicks[i].url}` });
   }
   return cmd_list;
 }
 
 function add_quick(name, url) {
-  let quick = { name: name.toLowerCase(), url: url };
+  const normalizedName = name.toLowerCase();
+  const quick = { name: normalizedName, url };
   for (let i = 0; i < quicks.length; i++) {
-    if (quicks[i].name == name) {
+    if (quicks[i].name === normalizedName) {
       quicks[i] = quick;
       quick_save();
       return;
@@ -39,7 +41,7 @@ function add_quick(name, url) {
 }
 function remove_quick(name) {
   for (let i = 0; i < quicks.length; i++) {
-    if (quicks[i].name == name) {
+    if (quicks[i].name === name) {
       quicks.splice(i, 1);
       quick_save();
       return;
@@ -67,49 +69,49 @@ async function quick_save() {
 }
 
 function add_quick_interactive() {
-  let cmd_list = quick_cmd_list();
+  const cmd_list = quick_cmd_list();
   dmenu(
     cmd_list,
-    function (name, shift) {
+    (name, _shift) => {
       value_list = [];
       for (let i = 0; i < quicks.length; i++) {
-        if (quicks[i].name == name) {
+        if (quicks[i].name === name) {
           value_list = [{ value: quicks[i].url }];
           break;
         }
       }
       dmenu(
         value_list,
-        function (value, shift) {
+        (value, _shift) => {
           if (!value.startsWith("http")) {
-            value = "https://" + value;
+            value = `https://${value}`;
           }
           add_quick(name, value);
         },
-        "value:"
+        "value:",
       );
     },
-    "name:"
+    "name:",
   );
 }
 
 function remove_quick_interactive() {
-  let cmd_list = quick_cmd_list();
+  const cmd_list = quick_cmd_list();
   dmenu(
     cmd_list,
-    function (name, shift) {
+    (name, _shift) => {
       remove_quick(name);
     },
-    "name:"
+    "name:",
   );
 }
 
 async function fetch_links() {
   links = [];
-  let response = await fetch("/links/api/v1/");
+  const response = await fetch("/links/api/v1/");
   const contentType = response.headers.get("content-type");
   if (response.ok && contentType && contentType.includes("application/json")) {
-    let response_data = await response.json();
+    const response_data = await response.json();
     for (let i = 0; i < response_data.length; i++) {
       links.push({
         url: response_data[i].url,
@@ -118,34 +120,34 @@ async function fetch_links() {
       });
     }
   } else {
-    console.error("Fetching links failed (" + response.status + " http code)");
+    console.error(`Fetching links failed (${response.status} http code)`);
     links = [];
   }
 }
 
 async function fetch_vakken() {
   vakken = [];
-  let response = await fetch("/Topnav/getCourseConfig");
+  const response = await fetch("/Topnav/getCourseConfig");
   const contentType = response.headers.get("content-type");
   if (response.ok && contentType && contentType.includes("application/json")) {
-    let response_data = await response.json();
+    const response_data = await response.json();
     for (let i = 0; i < response_data.own.length; i++) {
-      let vak = response_data.own[i];
+      const vak = response_data.own[i];
       let meta = "vak";
-      if (vak.descr != "") {
-        meta += "  [ " + vak.descr + " ]";
+      if (vak.descr !== "") {
+        meta += `  [ ${vak.descr} ]`;
       }
-      vakken.push({ url: vak.url, value: vak.name.toLowerCase(), meta: meta });
+      vakken.push({ url: vak.url, value: vak.name.toLowerCase(), meta });
     }
   } else {
-    console.error("Fetching vakken failed (" + response.status + " http code)");
+    console.error(`Fetching vakken failed (${response.status} http code)`);
     vakken = [];
   }
 }
 
 function scrape_goto() {
   goto_items = [];
-  let goto_items_html = document.querySelectorAll(".js-shortcuts-container a");
+  const goto_items_html = document.querySelectorAll(".js-shortcuts-container a");
   for (let i = 0; i < goto_items_html.length; i++) {
     const item = goto_items_html[i];
     goto_items.push({
@@ -191,7 +193,7 @@ export async function do_qm(opener = "") {
 
   dmenu(
     cmd_list,
-    async function (cmd) {
+    async (cmd) => {
       switch (cmd) {
         case "unbloat":
           unbloat();
@@ -208,10 +210,10 @@ export async function do_qm(opener = "") {
         case "config":
           dmenu(
             await getDMenuOptionsForSettings(false),
-            function (cmd, shift) {
+            (cmd, _shift) => {
               dmenuEditConfig(cmd);
             },
-            "config: "
+            "config: ",
           );
           return;
         case "quick add":
@@ -235,7 +237,7 @@ export async function do_qm(opener = "") {
         case "gcbeta":
           openGlobalChat(null, true);
           return;
-        case "dizzy":
+        case "dizzy": {
           const styleEl = document.createElement("style");
           styleEl.innerText = `
                               *{
@@ -246,6 +248,7 @@ export async function do_qm(opener = "") {
                               }`;
           document.body.appendChild(styleEl);
           return;
+        }
         case "reset plant":
           resetPlant();
           return;
@@ -253,10 +256,11 @@ export async function do_qm(opener = "") {
           console.log(
             await browser.runtime.sendMessage({
               action: "getPlantAppData",
-            })
+            }),
           );
-        case "remove current theme":
-          let data = await browser.runtime.sendMessage({
+          break;
+        case "remove current theme": {
+          const data = await browser.runtime.sendMessage({
             action: "getSettingsData",
           });
           await browser.runtime.sendMessage({
@@ -264,24 +268,28 @@ export async function do_qm(opener = "") {
             id: data.appearance.theme,
           });
           break;
-        case "test cats":
-          let themes = await browser.runtime.sendMessage({
+        }
+        case "test cats": {
+          const themes = await browser.runtime.sendMessage({
             action: "getThemes",
             categories: ["quickSettings"],
             includeHidden: true,
           });
           console.log(themes);
+          break;
+        }
         case "posh text":
           document.body.style.setProperty(
             "--font-family",
-            `"Monsieur La Doulaise", "Montserrat", "Trebuchet MS", sans-serif`
+            `"Monsieur La Doulaise", "Montserrat", "Trebuchet MS", sans-serif`,
           );
           break;
         case "funny text":
           document.body.style.setProperty(
             "--font-family",
-            `"Comic Neue", "Montserrat", "Trebuchet MS", sans-serif`
+            `"Comic Neue", "Montserrat", "Trebuchet MS", sans-serif`,
           );
+          break;
         default:
           break;
       }
@@ -291,28 +299,28 @@ export async function do_qm(opener = "") {
 
       for (let i = 0; i < quicks.length; i++) {
         const quick = quicks[i];
-        if (quick.name == cmd) {
+        if (quick.name === cmd) {
           openURL(quick.url, true);
           return;
         }
       }
       for (let i = 0; i < links.length; i++) {
-        if (links[i].value == cmd) {
+        if (links[i].value === cmd) {
           openURL(links[i].url, true);
         }
       }
       for (let i = 0; i < goto_items.length; i++) {
-        if (goto_items[i].value == cmd) {
+        if (goto_items[i].value === cmd) {
           openURL(goto_items[i].url);
         }
       }
       for (let i = 0; i < vakken.length; i++) {
-        if (vakken[i].value == cmd) {
+        if (vakken[i].value === cmd) {
           openURL(vakken[i].url);
         }
       }
     },
     "quick:",
-    (opener = opener)
+    opener,
   );
 }

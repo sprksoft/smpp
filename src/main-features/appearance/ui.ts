@@ -1,27 +1,27 @@
 export function createButton(id = "") {
-  let outerSwitch = document.createElement("label");
+  const outerSwitch = document.createElement("label");
   outerSwitch.classList.add("switch");
-  let innerButton = document.createElement("input");
+  const innerButton = document.createElement("input");
   innerButton.classList.add("popupinput");
   innerButton.tabIndex = -1;
   innerButton.type = "checkbox";
   innerButton.id = id;
-  let innerSwitch = document.createElement("span");
+  const innerSwitch = document.createElement("span");
   innerSwitch.classList.add("slider", "round");
   outerSwitch.appendChild(innerButton);
   outerSwitch.appendChild(innerSwitch);
   return outerSwitch;
 }
 
-export function createButtonWithLabel(id = "", text: string) {
-  let container = document.createElement("label");
+export function createButtonWithLabel(id, text: string) {
+  const container = document.createElement("label");
   container.classList.add("smpp-input-with-label");
   container.htmlFor = id;
-  container.dataset["for"] = id;
+  container.dataset.for = id;
 
-  let label = document.createElement("span");
+  const label = document.createElement("span");
   label.innerText = text;
-  let button = createButton(id);
+  const button = createButton(id);
 
   // Add keyboard support
   container.addEventListener("keydown", (e) => {
@@ -38,7 +38,7 @@ export function createButtonWithLabel(id = "", text: string) {
 }
 
 export function createTextInput(id = "", placeholder = "") {
-  let textInput = document.createElement("input");
+  const textInput = document.createElement("input");
   textInput.id = id;
   textInput.type = "text";
   textInput.placeholder = placeholder;
@@ -47,16 +47,13 @@ export function createTextInput(id = "", placeholder = "") {
   return textInput;
 }
 
-export function createHoverTooltip(
-  content: string,
-  position: "vertical" | "horizontal"
-) {
-  let tooltip = document.createElement("div");
+export function createHoverTooltip(content: string, position: "vertical" | "horizontal") {
+  const tooltip = document.createElement("div");
   tooltip.classList.add("smpp-tooltip");
-  if (position == "vertical") {
+  if (position === "vertical") {
     tooltip.classList.add("smpp-tooltip-vertical");
   }
-  if (position == "horizontal") {
+  if (position === "horizontal") {
     tooltip.classList.add("smpp-tooltip-horizontal");
   }
   tooltip.innerText = content;

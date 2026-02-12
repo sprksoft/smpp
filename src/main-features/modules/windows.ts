@@ -1,8 +1,4 @@
-import {
-  contractIconSVG,
-  expandIconSVG,
-  closeIconSVG,
-} from "../../fixes-utils/svgs.js";
+import { closeIconSVG, contractIconSVG, expandIconSVG } from "../../fixes-utils/svgs.js";
 
 export class BaseWindow {
   id: string;
@@ -24,7 +20,9 @@ export class BaseWindow {
     this.element.id = this.id;
     this.element.classList.add("base-window");
     this.wrapper.classList.add("window-wrapper");
-    if (this.hidden) this.element.classList.add("hidden");
+    if (this.hidden) {
+      this.element.classList.add("hidden");
+    }
 
     // Create controls container
     const controls = document.createElement("div");
@@ -50,7 +48,7 @@ export class BaseWindow {
     fullscreenBtn.addEventListener("click", () => {
       this.onScreenSizeUpdate?.();
       this.element.classList.toggle("fullscreen-window");
-      void this.element.offsetWidth;
+      this.element.offsetWidth;
     });
 
     closeBtn.addEventListener("click", () => this.hide(true));
@@ -76,7 +74,9 @@ export class BaseWindow {
   onCreate?(): void;
 
   show(triggerEvent: MouseEvent | KeyboardEvent | null = null): void {
-    if (!this.hidden) return;
+    if (!this.hidden) {
+      return;
+    }
     this.hidden = false;
 
     this.element.classList.remove("hidden");
@@ -99,17 +99,15 @@ export class BaseWindow {
       }
 
       // Check if click is inside a .base-dialog element
-      const isInsideBaseDialog =
-        clickedElement.closest(".base-dialog") !== null;
+      const isInsideBaseDialog = clickedElement.closest(".base-dialog") !== null;
       if (isInsideBaseDialog) {
         return;
       }
 
       // Check if click is inside a .window-wrapper that contains a .base-dialog
       const windowWrapper = clickedElement.closest(".window-wrapper");
-      const isInsideDialogWrapper =
-        windowWrapper?.querySelector(".base-dialog") !== null;
-      const isOwnWrapper = clickedElement == this.wrapper;
+      const isInsideDialogWrapper = windowWrapper?.querySelector(".base-dialog") !== null;
+      const isOwnWrapper = clickedElement === this.wrapper;
       if (isInsideDialogWrapper && !isOwnWrapper) {
         return;
       }
@@ -118,8 +116,7 @@ export class BaseWindow {
       if (openEventTarget && clickedElement instanceof Node) {
         const isOpenTrigger = clickedElement === openEventTarget;
         const isInsideOpenTrigger =
-          openEventTarget instanceof Node &&
-          openEventTarget.contains(clickedElement);
+          openEventTarget instanceof Node && openEventTarget.contains(clickedElement);
 
         if (isOpenTrigger || isInsideOpenTrigger) {
           return;
@@ -145,8 +142,7 @@ export class BaseWindow {
     // Focus the first focusable element inside the window
     if (isKeyboardEvent) {
       requestAnimationFrame(() => {
-        const focusableElements =
-          this.element.querySelectorAll<HTMLLabelElement>("label");
+        const focusableElements = this.element.querySelectorAll<HTMLLabelElement>("label");
         if (focusableElements.length > 0) {
           focusableElements[0]?.focus();
         }
@@ -157,7 +153,9 @@ export class BaseWindow {
   }
 
   hide(realUserIntent = false): void {
-    if (this.hidden) return;
+    if (this.hidden) {
+      return;
+    }
 
     this.hidden = true;
     this.element.classList.add("hidden");
@@ -191,7 +189,9 @@ export class Dialog extends BaseWindow {
     this.element.id = this.id;
     this.element.classList.add("base-window", "base-dialog");
     this.wrapper.classList.add("window-wrapper");
-    if (this.hidden) this.element.classList.add("hidden");
+    if (this.hidden) {
+      this.element.classList.add("hidden");
+    }
 
     // Create controls container
     const controls = document.createElement("div");

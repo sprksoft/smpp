@@ -43,4 +43,27 @@ Voor vragen of feedback, sluit je aan bij onze [Discord server](https://discord.
 # 👨‍💻 Voor Developers
 
 Wil je een pull request maken of helpen?
-Gebruik de "Prettier" code-formatter anders zal je pull request niet aanvaard worden.
+Gebruik Bun en Biome zodat formatting en linting consistent blijven.
+
+## Lokale setup
+
+1. Installeer [Bun](https://bun.sh/docs/installation).
+2. Installeer dependencies:
+   - `bun install`
+3. Build de extensie:
+   - `bun run build`
+4. Laad de extensie als "Load unpacked" van `extension/` in Chrome.
+
+## Snelle Windows test
+
+Gebruik `test-extension-windows.bat` in de projectroot.
+
+Dit script doet automatisch:
+- `bun install --frozen-lockfile`
+- `bun run ci` (Biome check)
+- `bun run build`
+
+## Pre-commit checks
+
+Husky draait een pre-commit hook (`.husky/pre-commit`) die `bun run ci` uitvoert.
+Na `bun install` wordt Husky automatisch geactiveerd via de `prepare` script in `package.json`.

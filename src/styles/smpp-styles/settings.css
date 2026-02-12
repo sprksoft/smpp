@@ -1045,12 +1045,10 @@ button .bottom-container-button:active {
 
 @keyframes theme-tile {
   0% {
-    opacity: 0.2;
-    transform: translateX(-5%) translateY(-20%) scale(0.7);
+    opacity: 0.5;
   }
   100% {
     opacity: 1;
-    transform: translateX(0) translateY(0) scale(1);
   }
 }
 
@@ -1058,7 +1056,7 @@ button .bottom-container-button:active {
   transition-property:
     background-color, border-color, color, transform, outline;
   transition: 0.15s ease-in-out;
-  animation: theme-tile 0.4s cubic-bezier(0.33, 1.31, 0.65, 0.98);
+  animation: theme-tile 0.2s ease-out;
 }
 
 #settings-page .theme-tile:not(.aaaaa) {
@@ -1075,7 +1073,6 @@ button .bottom-container-button:active {
   cursor: pointer;
   height: fit-content;
   position: relative;
-  box-shadow: 0px 0px 5px -2px var(--color-shadow) !important;
 }
 
 #settings-page .theme-tile:not(.aaaaa).is-selected {
@@ -1135,8 +1132,6 @@ button .bottom-container-button:active {
   border-color: var(--color-accent-local);
   background-color: var(--color-base01-local) !important;
   color: var(--color-text-local) !important;
-  scale: 1.03;
-  box-shadow: 0px 0px 15px 2px var(--color-shadow) !important;
 }
 
 #settings-page .theme-tile:not(.aaaaa):hover .bottom-container-button {
@@ -1177,14 +1172,10 @@ button .bottom-container-button:active {
 }
 
 .theme-tiles {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, 168px);
+  display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
-  align-content: start; /* Prevents vertical stretching */
-}
-
-.enableAnimations .theme-tiles {
-  transition: height 0.3s cubic-bezier(0.33, 1.31, 0.65, 0.98) !important;
+  margin-top: 1rem;
 }
 
 .theme-top-container {
@@ -1195,7 +1186,7 @@ button .bottom-container-button:active {
   height: 2.5rem;
   font-weight: 600;
   margin: 0 !important;
-  margin-bottom: 0.5rem !important;
+  margin-bottom: 0.1rem !important;
   margin-top: 2rem !important;
   cursor: default;
 }

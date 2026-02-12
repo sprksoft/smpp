@@ -1,16 +1,21 @@
 // @ts-nocheck
-import { clearAllData } from "./utils.js";
-import { setWidgetSetting, widgets } from "../widgets/widgets.js";
+
 import { browser } from "../common/utils.ts";
+import { setWidgetSetting, widgets } from "../widgets/widgets.js";
+import { clearAllData } from "./utils.js";
 
 export async function migrate() {
   await removeLegacyData(); // will reload the page if legacy data is present
 
-  let settingsData = await browser.runtime.sendMessage({
+  const settingsData = await browser.runtime.sendMessage({
     action: "getRawSettingsData",
   });
-  if (settingsData == undefined) return;
-  if (settingsData.backgroundBlurAmount == undefined) return;
+  if (!settingsData || typeof settingsData !== "object") {
+    return;
+  }
+  if (!("backgroundBlurAmount" in settingsData)) {
+    return;
+  }
   await migrateV5(settingsData);
 }
 
@@ -22,10 +27,10 @@ async function migrateV5(settingsData) {
 }
 
 async function migrateWidgetSettingsData() {
-  let delijnAppData = await browser.runtime.sendMessage({
+  const delijnAppData = await browser.runtime.sendMessage({
     action: "getDelijnAppData",
   });
-  let weatherAppData = await browser.runtime.sendMessage({
+  const weatherAppData = await browser.runtime.sendMessage({
     action: "getWeatherAppData",
   });
 
@@ -36,20 +41,19 @@ async function migrateWidgetSettingsData() {
     });
   }
   if (Object.keys(weatherAppData).length !== 0) {
-    let weatherWidgets = widgets.filter((item) =>
-      item.name.toLowerCase().includes("weather")
-    );
-    weatherWidgets.forEach(async (widget) => {
-      await widget.setSetting(
-        "currentLocation",
-        weatherAppData.weatherAppData.lastLocation
-      );
-    });
+    const weatherWidgets = widgets.filter((item) => item.name.toLowerCase().includes("weather"));
+    for (const widget of weatherWidgets) {
+      await widget.setSetting("currentLocation", weatherAppData.weatherAppData.lastLocation);
+    }
   }
 }
 
 async function migrateImageV5(oldData) {
-  let data;
+  let data: { imageData: string | null; link: string; type: "default" | "link" | "file" } = {
+    imageData: null,
+    link: "",
+    type: "default",
+  };
   switch (oldData.backgroundSelection) {
     case 0: //default
       data = {
@@ -65,8 +69,9 @@ async function migrateImageV5(oldData) {
         type: "link",
       };
       break;
-    case 2: //file
-      let imageData = await browser.runtime.sendMessage({
+    case 2: {
+      //file
+      const imageData = await browser.runtime.sendMessage({
         action: "getBackgroundImage",
       });
       data = {
@@ -75,24 +80,27 @@ async function migrateImageV5(oldData) {
         type: "file",
       };
       break;
+    }
     default:
+      data = {
+        imageData: null,
+        link: "",
+        type: "default",
+      };
       break;
   }
 
   await browser.runtime.sendMessage({
     action: "setImage",
     id: "backgroundImage",
-    data: data,
+    data,
   });
 
-  console.log(
-    "MIG V: \n Successfully migrated background image  with data:",
-    data
-  );
+  console.log("MIG V: \n Successfully migrated background image  with data:", data);
 }
 
 async function migrateSettingsV5(oldData) {
-  let newWeatherOverlayType;
+  let newWeatherOverlayType: "snow" | "realtime" = "snow";
   switch (oldData.weatherOverlaySelection) {
     case 0:
       newWeatherOverlayType = "snow";
@@ -103,10 +111,13 @@ async function migrateSettingsV5(oldData) {
     case 2:
       newWeatherOverlayType = "snow";
       break;
+    default:
+      newWeatherOverlayType = "snow";
+      break;
   }
   console.log(oldData);
   console.log(oldData.customName);
-  let newSettingsData = {
+  const newSettingsData = {
     username: oldData.customName,
     theme: oldData.theme,
     background: {
@@ -136,10 +147,7 @@ async function migrateSettingsV5(oldData) {
     data: settings,
   });
 
-  console.log(
-    "MIG V: \n Succesfully migrated settings data to:",
-    newSettingsData
-  );
+  console.log("MIG V: \n Succesfully migrated settings data to:", newSettingsData);
 }
 
 async function removeLegacyData() {

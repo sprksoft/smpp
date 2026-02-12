@@ -689,8 +689,7 @@ div.stdReplyWrapper {
 }
 
 /* What the fuck was this.... */
-.period__column
-  .period-input
+.period__column .period-input
   .period-input__editable-period
   .period-input__whole-day-checkbox
   input[type="checkbox"] {
@@ -1000,9 +999,6 @@ ul.smsc-column-nav {
     transform: translateY(-10vh);
     /* Start from slightly above the viewport */
     /* Invisible at the start */
-  }
-
-  10% {
   }
 
   100% {
@@ -1875,10 +1871,7 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   border: var(--border-size) solid var(--color-base03);
   position: absolute;
   z-index: 20;
-  box-shadow:
-    0px 0px 150px var(--color-shadow),
-    0px 0px 150px var(--color-shadow),
-    0px 0px 150px var(--color-shadow);
+  box-shadow: 0px 0px 150px black;
   border-radius: 2rem;
   width: 90%;
   height: 85%;
@@ -2427,11 +2420,11 @@ mark {
 .forum-contentbox > input.textfield {
   background-color: var(--color-base03) !important;
   border: 2px solid var(--color-base02) !important;
-  border-radius: 0.5rem !important ;
+  border-radius: 0.5rem !important;
 }
 .forum-attachments {
   border: 2px solid var(--color-base03) !important;
-  border-radius: 0.5rem !important ;
+  border-radius: 0.5rem !important;
 }
 .smsc-topnav [data-notifs] .notification__close:hover .close-icon path {
   stroke: var(--color-red) !important;

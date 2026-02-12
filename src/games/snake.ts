@@ -1,8 +1,8 @@
 // @ts-nocheck
-import { GameBase } from "./games.js";
-import { registerWidget } from "../widgets/widgets.js";
+
 import { getThemeVar } from "../main-features/appearance/themes.js";
-import { GameOption } from "./games.js";
+import { registerWidget } from "../widgets/widgets.js";
+import { GameBase, GameOption } from "./games.js";
 
 class Point {
   x;
@@ -36,10 +36,6 @@ class SnakeWidget extends GameBase {
 
   #backgroundCanvas;
 
-  constructor() {
-    super();
-  }
-
   get title() {
     return "Snake++";
   }
@@ -52,7 +48,7 @@ class SnakeWidget extends GameBase {
 
   #tick() {
     this.#curDir = this.#targetDir;
-    const head = this.#snake[this.#snake.length - 1];
+    const head = this.#snake.at(-1);
     const newHead = head.add(this.#curDir);
 
     // bounds check
@@ -88,10 +84,7 @@ class SnakeWidget extends GameBase {
 
   #getRandomFieldPos() {
     const cellCount = this.#getCellCount();
-    return new Point(
-      Math.floor(Math.random() * cellCount),
-      Math.floor(Math.random() * cellCount)
-    );
+    return new Point(Math.floor(Math.random() * cellCount), Math.floor(Math.random() * cellCount));
   }
 
   #spawnFood() {
@@ -121,9 +114,7 @@ class SnakeWidget extends GameBase {
     this.#counter = 0;
     this.#curDir = DIR_DOWN;
     this.#targetDir = DIR_DOWN;
-    this.#snake = [
-      new Point(Math.floor(cellCount / 2), Math.floor(cellCount / 2)),
-    ];
+    this.#snake = [new Point(Math.floor(cellCount / 2), Math.floor(cellCount / 2))];
     this.#spawnFood();
   }
 
@@ -144,7 +135,7 @@ class SnakeWidget extends GameBase {
       Math.floor(celRad + dot.y * celRad * 2.0),
       celRad * 0.9,
       0,
-      Math.PI * 2
+      Math.PI * 2,
     );
     ctx.fill();
   }
@@ -162,19 +153,13 @@ class SnakeWidget extends GameBase {
     if (this.settings.enableGrid) {
       for (let y = 0; y < cellCount; y++) {
         for (let x = 0; x < cellCount; x++) {
-          if ((x + y) % 2 == 0) {
+          if ((x + y) % 2 === 0) {
             ctx.fillStyle = `${getThemeVar("--color-base03")}50`;
           } else {
             ctx.fillStyle = `${getThemeVar("--color-base02")}50`;
           }
           ctx.beginPath();
-          ctx.arc(
-            celRad + x * celRad * 2,
-            celRad + y * celRad * 2,
-            celRad * 0.7,
-            0,
-            Math.PI * 2
-          );
+          ctx.arc(celRad + x * celRad * 2, celRad + y * celRad * 2, celRad * 0.7, 0, Math.PI * 2);
           ctx.fill();
         }
       }
@@ -190,7 +175,7 @@ class SnakeWidget extends GameBase {
     ctx.drawImage(this.#backgroundCanvas, 0, 0);
 
     ctx.fillStyle = getThemeVar("--color-text");
-    for (let part of this.#snake) {
+    for (const part of this.#snake) {
       this.#drawDot(ctx, part);
     }
     ctx.fillStyle = getThemeVar("--color-accent");

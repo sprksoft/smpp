@@ -1,9 +1,9 @@
 import imageCompression, { type Options } from "browser-image-compression";
 export const DEBUG = false;
 
-export var browser: any;
+export let browser: any;
 declare const chrome: any;
-if (browser == undefined) {
+if (browser === undefined) {
   browser = chrome;
 }
 
@@ -22,7 +22,7 @@ export function getByPath(object: any, path: string): any {
     return object;
   }
   let ob = object;
-  for (let node of path.split(".")) {
+  for (const node of path.split(".")) {
     ob = ob[node];
     if (ob === undefined) {
       throw `getByPath: ${node} did not exist in path ${path}`;
@@ -36,12 +36,20 @@ export function setByPath(object: any, path: string, value: any) {
   let ob = object;
   const pathSplit = path.split(".");
   for (let i = 0; i < pathSplit.length - 1; i++) {
-    ob = ob[pathSplit[i]!];
+    const node = pathSplit[i];
+    if (node === undefined) {
+      throw `setByPath: invalid path ${path}`;
+    }
+    ob = ob[node];
     if (ob === undefined) {
-      throw `setByPath: ${pathSplit[i]} did not exist in path ${path}`;
+      throw `setByPath: ${node} did not exist in path ${path}`;
     }
   }
-  ob[pathSplit[pathSplit.length - 1]!] = value;
+  const leaf = pathSplit.at(-1);
+  if (leaf === undefined) {
+    throw `setByPath: invalid path ${path}`;
+  }
+  ob[leaf] = value;
 }
 
 /// Fills missing fields in an object with values from a default object.
@@ -69,7 +77,7 @@ export function fillObjectWithDefaults(object: any, defaults: any) {
 
 export function openURL(url: string, new_window = false) {
   if (new_window) {
-    let a = document.createElement("a");
+    const a = document.createElement("a");
     a.href = url;
     a.rel = "noopener noreferrer";
     a.target = "_blank";
@@ -102,12 +110,16 @@ export function getCurrentDate() {
 }
 
 export function getFutureDate(days: number) {
-  return new Date(Date.now() + days * 86400000).toISOString().split("T")[0];
+  return new Date(Date.now() + days * 86_400_000).toISOString().split("T")[0];
 }
 
 export function randomChance(probability: number) {
-  if (probability <= 0) return false;
-  if (probability >= 1) return true;
+  if (probability <= 0) {
+    return false;
+  }
+  if (probability >= 1) {
+    return true;
+  }
   return Math.random() < probability;
 }
 
@@ -116,11 +128,13 @@ export function isAbsoluteUrl(url: string) {
 }
 
 export async function convertLinkToBase64(link: string) {
-  let base64 = (await browser.runtime.sendMessage({
+  const base64 = (await browser.runtime.sendMessage({
     action: "getBase64",
-    link: link,
+    link,
   })) as string | null;
-  if (base64) return base64;
+  if (base64) {
+    return base64;
+  }
   console.error(`Failed to convert link:${link} to base64`);
   return null;
 }
@@ -129,7 +143,7 @@ export async function convertLinkToFile(link: string) {
   try {
     const fileData = await browser.runtime.sendMessage({
       action: "getFileData",
-      link: link,
+      link,
     });
 
     if (!fileData) {

@@ -1,10 +1,8 @@
 // @ts-nocheck
-import { WidgetBase, registerWidget } from "./widgets.js";
+import { registerWidget, WidgetBase } from "./widgets.js";
 
 // gemaakt door Lou (Flying_dinonugget) analog clock gestolen van Lukaz.vb
 class ClockWidget extends WidgetBase {
-  #interval;
-
   get category() {
     return "other";
   }
@@ -15,26 +13,26 @@ class ClockWidget extends WidgetBase {
 
   async createContent() {
     this.element.classList.add("smpp-widget-transparent");
-    let clockContainer = document.createElement("div");
+    const clockContainer = document.createElement("div");
     clockContainer.classList.add("clock-widget");
 
-    let container = document.createElement("div");
+    const container = document.createElement("div");
     container.classList.add("clock-container");
     clockContainer.appendChild(container);
 
-    let clockFace = document.createElement("div");
+    const clockFace = document.createElement("div");
     clockFace.classList.add("clock-face");
     container.appendChild(clockFace);
 
-    let minuteHand = document.createElement("div");
+    const minuteHand = document.createElement("div");
     minuteHand.classList.add("clock-hand", "minute-hand");
     clockFace.appendChild(minuteHand);
 
-    let hourHand = document.createElement("div");
+    const hourHand = document.createElement("div");
     hourHand.classList.add("clock-hand", "hour-hand");
     clockFace.appendChild(hourHand);
 
-    let secondHand = document.createElement("div");
+    const secondHand = document.createElement("div");
     secondHand.classList.add("clock-hand", "second-hand");
     clockFace.appendChild(secondHand);
 
@@ -42,11 +40,11 @@ class ClockWidget extends WidgetBase {
     centerCircle.classList.add("clock-center");
     clockFace.appendChild(centerCircle);
 
-    let bottomContainer = document.createElement("div");
+    const bottomContainer = document.createElement("div");
     bottomContainer.classList.add("clock-bottom");
     container.appendChild(bottomContainer);
 
-    let timeEl = document.createElement("div");
+    const timeEl = document.createElement("div");
     timeEl.classList.add("digital-time");
     timeEl.innerText = "00:00";
     bottomContainer.appendChild(timeEl);
@@ -58,34 +56,30 @@ class ClockWidget extends WidgetBase {
       const seconds = now.getSeconds();
       const milliseconds = now.getMilliseconds();
 
-      const timeText =
-        (hours < 10 ? "0" : "") +
-        hours +
-        ":" +
-        (minutes < 10 ? "0" : "") +
-        minutes;
-      if (timeEl.innerText != timeText) {
+      const timeText = `${(hours < 10 ? "0" : "") + hours}:${minutes < 10 ? "0" : ""}${minutes}`;
+      if (timeEl.innerText !== timeText) {
         // only update the time if it has changed. This allows the time text to be selected and has possibly better performance
         timeEl.innerText = timeText;
       }
 
-      const totalSeconds =
-        hours * 3600 + minutes * 60 + seconds + milliseconds / 1000;
-      const totalMinutes =
-        hours * 60 + minutes + seconds / 60 + milliseconds / (1000 * 60);
+      const totalSeconds = hours * 3600 + minutes * 60 + seconds + milliseconds / 1000;
+      const totalMinutes = hours * 60 + minutes + seconds / 60 + milliseconds / (1000 * 60);
       const totalHours =
-        hours +
-        minutes / 60 +
-        seconds / (60 * 60) +
-        milliseconds / (1000 * 60 * 60);
+        hours + minutes / 60 + seconds / (60 * 60) + milliseconds / (1000 * 60 * 60);
 
       let secondsAngle = totalSeconds * 6;
       let minutesAngle = totalMinutes * 6;
       let hoursAngle = totalHours * 30;
 
-      if (secondsAngle > 270) secondsAngle -= 360;
-      if (minutesAngle > 270) minutesAngle -= 360;
-      if (hoursAngle > 270) hoursAngle -= 360;
+      if (secondsAngle > 270) {
+        secondsAngle -= 360;
+      }
+      if (minutesAngle > 270) {
+        minutesAngle -= 360;
+      }
+      if (hoursAngle > 270) {
+        hoursAngle -= 360;
+      }
 
       secondHand.style.transform = `translate(-50%, -100%) rotate(${secondsAngle}deg)`;
       minuteHand.style.transform = `translate(-50%, -100%) rotate(${minutesAngle}deg)`;
@@ -100,33 +94,33 @@ class ClockWidget extends WidgetBase {
   }
 
   async createPreview() {
-    let div = document.createElement("div");
+    const div = document.createElement("div");
     div.classList.add("clock-widget-preview");
 
-    let title = document.createElement("div");
+    const title = document.createElement("div");
     title.classList.add("clock-preview-title");
     title.innerText = "Clock";
     div.appendChild(title);
 
-    let container = document.createElement("div");
+    const container = document.createElement("div");
     container.classList.add("clock-container");
     div.appendChild(container);
 
-    let clockFace = document.createElement("div");
+    const clockFace = document.createElement("div");
     clockFace.classList.add("clock-face");
     container.appendChild(clockFace);
 
-    let minuteHand = document.createElement("div");
+    const minuteHand = document.createElement("div");
     minuteHand.classList.add("clock-hand", "minute-hand");
     minuteHand.style.transform = "rotate(0deg)";
     clockFace.appendChild(minuteHand);
 
-    let hourHand = document.createElement("div");
+    const hourHand = document.createElement("div");
     hourHand.classList.add("clock-hand", "hour-hand");
     hourHand.style.transform = "rotate(0deg)";
     clockFace.appendChild(hourHand);
 
-    let secondHand = document.createElement("div");
+    const secondHand = document.createElement("div");
     secondHand.classList.add("clock-hand", "second-hand");
     secondHand.style.transform = "rotate(0deg)";
     clockFace.appendChild(secondHand);
@@ -135,9 +129,9 @@ class ClockWidget extends WidgetBase {
     centerCircle.classList.add("clock-center");
     clockFace.appendChild(centerCircle);
 
-    let secondsAngle = 50;
-    let minutesAngle = 120;
-    let hoursAngle = 240;
+    const secondsAngle = 50;
+    const minutesAngle = 120;
+    const hoursAngle = 240;
 
     secondHand.style.transform = `translate(-50%, -100%) rotate(${secondsAngle}deg)`;
     minuteHand.style.transform = `translate(-50%, -100%) rotate(${minutesAngle}deg)`;

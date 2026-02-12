@@ -2939,12 +2939,10 @@ button .bottom-container-button:active {
 }
 @keyframes theme-tile {
   0% {
-    opacity: 0.2;
-    transform: translateX(-5%) translateY(-20%) scale(0.7);
+    opacity: 0.5;
   }
   100% {
     opacity: 1;
-    transform: translateX(0) translateY(0) scale(1);
   }
 }
 .enableAnimations .theme-tile {
@@ -2955,7 +2953,7 @@ button .bottom-container-button:active {
     transform,
     outline;
   transition: 0.15s ease-in-out;
-  animation: theme-tile 0.4s cubic-bezier(0.33, 1.31, 0.65, 0.98);
+  animation: theme-tile 0.2s ease-out;
 }
 #settings-page .theme-tile:not(.aaaaa) {
   outline: 2px solid transparent !important;
@@ -2971,7 +2969,6 @@ button .bottom-container-button:active {
   cursor: pointer;
   height: fit-content;
   position: relative;
-  box-shadow: 0px 0px 5px -2px var(--color-shadow) !important;
 }
 #settings-page .theme-tile:not(.aaaaa).is-selected {
   border-color: var(--color-accent-local) !important;
@@ -3001,8 +2998,6 @@ button .bottom-container-button:active {
   border-color: var(--color-accent-local);
   background-color: var(--color-base01-local) !important;
   color: var(--color-text-local) !important;
-  scale: 1.03;
-  box-shadow: 0px 0px 15px 2px var(--color-shadow) !important;
 }
 #settings-page .theme-tile:not(.aaaaa):hover .bottom-container-button {
   opacity: 1;
@@ -3035,13 +3030,10 @@ button .bottom-container-button:active {
   color: var(--text-color) !important;
 }
 .theme-tiles {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, 168px);
+  display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
-  align-content: start;
-}
-.enableAnimations .theme-tiles {
-  transition: height 0.3s cubic-bezier(0.33, 1.31, 0.65, 0.98) !important;
+  margin-top: 1rem;
 }
 .theme-top-container {
   display: flex;
@@ -3051,7 +3043,7 @@ button .bottom-container-button:active {
   height: 2.5rem;
   font-weight: 600;
   margin: 0 !important;
-  margin-bottom: 0.5rem !important;
+  margin-bottom: 0.1rem !important;
   margin-top: 2rem !important;
   cursor: default;
 }
@@ -4550,8 +4542,6 @@ ul.smsc-column-nav {
   0% {
     transform: translateY(-10vh);
   }
-  10% {
-  }
   100% {
     transform: translateY(111vh);
   }
@@ -5277,10 +5267,7 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   border: var(--border-size) solid var(--color-base03);
   position: absolute;
   z-index: 20;
-  box-shadow:
-    0px 0px 150px var(--color-shadow),
-    0px 0px 150px var(--color-shadow),
-    0px 0px 150px var(--color-shadow);
+  box-shadow: 0px 0px 150px black;
   border-radius: 2rem;
   width: 90%;
   height: 85%;
@@ -7239,7 +7226,7 @@ input::placeholder {
     border-radius 0.3s;
 }
 .topnav__menu--shortcuts > .topnav__menuitem {
-  margin-right: 7x !important;
+  margin-right: 7px !important;
 }
 li {
   background: transparent !important;

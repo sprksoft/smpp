@@ -1,9 +1,10 @@
 // @ts-nocheck
-import { BaseWindow } from "./modules/windows.js";
-import { currentTheme, getThemeQueryString } from "./appearance/themes.js";
-import { gcIconSvg } from "../fixes-utils/svgs.js";
+
 import { browser } from "../common/utils.ts";
+import { gcIconSvg } from "../fixes-utils/svgs.js";
 import { getPlantSvg } from "../widgets/plant.js";
+import { currentTheme, getThemeQueryString } from "./appearance/themes.js";
+import { BaseWindow } from "./modules/windows.js";
 
 const GC_DOMAINS = {
   main: "https://gc.smartschoolplusplus.com",
@@ -24,8 +25,7 @@ class GlobalChatWindow extends BaseWindow {
     const queryString = getThemeQueryString(currentTheme);
     this.iframe = document.createElement("iframe");
     this.iframe.style = "width:100%; height:100%; border:none";
-    this.iframe.src =
-      GC_DOMAINS[this.beta ? "beta" : "main"] + "/v1?" + queryString + "&glass=" + gcGlass;
+    this.iframe.src = `${GC_DOMAINS[this.beta ? "beta" : "main"]}/v1?${queryString}&glass=${gcGlass}`;
     this.gcContent.appendChild(this.iframe);
     return this.gcContent;
   }
@@ -35,10 +35,10 @@ let gcWindow: GlobalChatWindow;
 let gcGlass: boolean;
 
 export async function openGlobalChat(event, beta = false) {
-  if (gcWindow?.beta != beta) {
+  if (gcWindow?.beta !== beta) {
     recreateGlobalChat();
   }
-  if (!gcWindow || !gcWindow.element?.isConnected) {
+  if (!gcWindow?.element?.isConnected) {
     gcWindow = new GlobalChatWindow();
     gcWindow.beta = beta;
     await gcWindow.create();
@@ -58,8 +58,7 @@ export function setGlobalGlass(glass: boolean) {
 
 export function createGC() {
   const GlobalChatOpenButton = document.createElement("button");
-  GlobalChatOpenButton.title =
-    "Global chat (chat met iedereen die de extensie gebruikt)";
+  GlobalChatOpenButton.title = "Global chat (chat met iedereen die de extensie gebruikt)";
   GlobalChatOpenButton.id = "global_chat_button";
   GlobalChatOpenButton.className = "topnav__btn";
   GlobalChatOpenButton.innerHTML = gcIconSvg;
@@ -71,9 +70,7 @@ export function createGC() {
 // Versions will change when a breaking change is required (Adding fields is not a breaking change)
 window.addEventListener("message", async (e) => {
   if (!Object.values(GC_DOMAINS).includes(e.origin)) {
-    console.warn(
-      "Got a message but it was not from one of the global chat domains."
-    );
+    console.warn("Got a message but it was not from one of the global chat domains.");
     return;
   }
   let response = { error: "not found" };
@@ -101,7 +98,7 @@ function stageDataToInternalPlantData(stageData) {
 }
 
 async function getPlantV1() {
-  let data = await browser.runtime.sendMessage({
+  const data = await browser.runtime.sendMessage({
     action: "getPlantAppData",
   });
   if (!data) {

@@ -1,31 +1,31 @@
-import { createTextInput } from "../appearance/ui.js";
-import { imageInputSvg, loadingSpinnerSvg } from "../../fixes-utils/svgs.js";
+import imageCompression from "browser-image-compression";
 import {
-  isAbsoluteUrl,
   browser,
   convertLinkToBase64,
-  getCompressedData,
   convertLinkToFile,
+  getCompressedData,
+  isAbsoluteUrl,
 } from "../../common/utils.js";
-import { isFirefox } from "../main.js";
-import imageCompression from "browser-image-compression";
+import { imageInputSvg, loadingSpinnerSvg } from "../../fixes-utils/svgs.js";
 import { Toast } from "../../fixes-utils/utils.js";
+import { createTextInput } from "../appearance/ui.js";
+import { isFirefox } from "../main.js";
 
-export type SMPPImage = {
+export interface SMPPImage {
   metaData: SMPPImageMetaData;
   imageData: string | Base64URLString;
-};
+}
 
-export type SMPPImageMetaData = {
+export interface SMPPImageMetaData {
   type: "file" | "default";
   link: string;
-};
+}
 
 export class ImageSelector {
   name: string;
   isThemeImage: boolean;
 
-  id: string = "";
+  id = "";
   clearButton = document.createElement("button");
   linkInput = createTextInput("", "Link");
   fileInput = document.createElement("input");
@@ -35,7 +35,7 @@ export class ImageSelector {
   fullContainer = this.createFullFileInput();
 
   /* theme: Indicates that this image selector references the background image of a theme. (used for theme share cache invalidation on modify) */
-  constructor(name: string, isThemeImage: boolean = false) {
+  constructor(name: string, isThemeImage = false) {
     this.name = name;
     this.isThemeImage = isThemeImage;
 
@@ -136,7 +136,7 @@ export class ImageSelector {
       }
 
       const compressedId = `compressed-${this.id}`;
-      let compressedImage: SMPPImage = {
+      const compressedImage: SMPPImage = {
         imageData: data.imageData,
         metaData: { link: data.metaData.link, type: data.metaData.type },
       };
@@ -173,7 +173,7 @@ export class ImageSelector {
           compressedImage.imageData = "";
         } else if (isAbsoluteUrl(linkValue)) {
           this.fileInputButton.innerHTML = loadingSpinnerSvg;
-          let [base64, file] = await Promise.all([
+          const [base64, file] = await Promise.all([
             await convertLinkToBase64(linkValue),
             await convertLinkToFile(linkValue),
           ]);
@@ -184,7 +184,7 @@ export class ImageSelector {
             data.imageData = base64;
 
             this.fileInputButton.innerHTML = loadingSpinnerSvg;
-            let compressedBase64 = await getCompressedData(file);
+            const compressedBase64 = await getCompressedData(file);
             this.fileInputButton.innerHTML = imageInputSvg;
 
             compressedImage.metaData.type = "file";
@@ -195,7 +195,7 @@ export class ImageSelector {
             await new Toast(
               "Failed to access image, try to upload it as a file",
               "error",
-              5000
+              5000,
             ).render();
             data.metaData.type = "default";
             data.metaData.link = "";
@@ -221,7 +221,7 @@ export class ImageSelector {
       await browser.runtime.sendMessage({
         action: "setImage",
         id: this.id,
-        data: data,
+        data,
       });
       await browser.runtime.sendMessage({
         action: "setImage",
@@ -236,7 +236,7 @@ export class ImageSelector {
           name: this.id,
         });
       }
-      if (data.metaData.type == "file") {
+      if (data.metaData.type === "file") {
         new Toast("Image succesfully saved", "succes").render();
       }
     } catch (error) {
@@ -246,13 +246,15 @@ export class ImageSelector {
   }
 
   async loadImageData() {
-    let data = (await browser.runtime.sendMessage({
+    const data = (await browser.runtime.sendMessage({
       action: "getImage",
       id: this.id,
     })) as SMPPImage;
     let metaData = data.metaData;
 
-    if (!metaData) metaData = { link: "", type: "default" };
+    if (!metaData) {
+      metaData = { link: "", type: "default" };
+    }
 
     this.linkInput.value = metaData.link || "";
     if (metaData.type === "file") {
@@ -272,11 +274,11 @@ export class ImageSelector {
 export async function getImageURL(
   id: string,
   onDefault: () => Promise<string>,
-  getCompressed: boolean
+  getCompressed: boolean,
 ): Promise<{ url: string; type: "file" | "default" | null }> {
   let image;
   if (getCompressed) {
-    id = "compressed-" + id;
+    id = `compressed-${id}`;
   }
   try {
     image = (await browser.runtime.sendMessage({

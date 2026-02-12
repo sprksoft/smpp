@@ -1,15 +1,15 @@
 // @ts-nocheck
-import { originalUsername } from "./main.js";
-import { getPfpLink } from "../fixes-utils/utils.js";
-import { getImageURL } from "./modules/images.js";
-import { originalPfpUrl } from "./main.js";
 
-var profilePictureObserver;
+import { getPfpLink } from "../fixes-utils/utils.js";
+import { originalPfpUrl, originalUsername } from "./main.js";
+import { getImageURL } from "./modules/images.js";
+
+let profilePictureObserver;
 async function displayUsernameTopNav(name) {
-  let originalNameElement = document.querySelector(
-    ".js-btn-profile .hlp-vert-box span"
-  );
-  if (originalNameElement) originalNameElement.innerHTML = name;
+  const originalNameElement = document.querySelector(".js-btn-profile .hlp-vert-box span");
+  if (originalNameElement) {
+    originalNameElement.innerHTML = name;
+  }
 }
 
 async function attachProfilePictureObserver(url) {
@@ -18,15 +18,17 @@ async function attachProfilePictureObserver(url) {
     try {
       // ignore if:
       // not an img or no src
-      if (!(img instanceof HTMLImageElement) || !img.src) return;
-      // img src was already changed
-      if (img.src == url) return;
-      // not the original pfp and doesn't already have the class (I know it's confusing... and I made it, so)
-      if (
-        !isOriginalPfpUrl(img.src) &&
-        !img.classList.contains("personal-profile-picture")
-      )
+      if (!(img instanceof HTMLImageElement && img.src)) {
         return;
+      }
+      // img src was already changed
+      if (img.src === url) {
+        return;
+      }
+      // not the original pfp and doesn't already have the class (I know it's confusing... and I made it, so)
+      if (!(isOriginalPfpUrl(img.src) || img.classList.contains("personal-profile-picture"))) {
+        return;
+      }
 
       img.src = url;
       img.classList.add("personal-profile-picture");
@@ -41,7 +43,9 @@ async function attachProfilePictureObserver(url) {
   const observer = new MutationObserver((mutations) => {
     for (const mutation of mutations) {
       for (const htmlNode of mutation.addedNodes) {
-        if (htmlNode.nodeType !== Node.ELEMENT_NODE) continue;
+        if (htmlNode.nodeType !== Node.ELEMENT_NODE) {
+          continue;
+        }
 
         if (htmlNode instanceof HTMLImageElement) {
           processImg(htmlNode);
@@ -50,18 +54,17 @@ async function attachProfilePictureObserver(url) {
 
         try {
           const imgs = htmlNode.querySelectorAll?.("img");
-          if (imgs && imgs.length) {
-            for (const img of imgs) processImg(img);
+          if (imgs?.length) {
+            for (const img of imgs) {
+              processImg(img);
+            }
           }
         } catch (e) {
           console.error("Error querying imgs inside node:", e, htmlNode);
         }
       }
 
-      if (
-        mutation.type === "attributes" &&
-        mutation.target instanceof HTMLImageElement
-      ) {
+      if (mutation.type === "attributes" && mutation.target instanceof HTMLImageElement) {
         processImg(mutation.target);
       }
     }
@@ -86,9 +89,9 @@ export async function applyUsername(customName) {
 }
 
 export async function applyProfilePicture(profile: Settings["profile"]) {
-  let style = document.documentElement.style;
+  const style = document.documentElement.style;
   const setPFPstyle = (url) => {
-    style.setProperty("--profile-picture", "url(" + url + ")");
+    style.setProperty("--profile-picture", `url(${url})`);
   };
   const fixObserver = async (url) => {
     if (profilePictureObserver != null) {
@@ -103,14 +106,15 @@ export async function applyProfilePicture(profile: Settings["profile"]) {
     case true:
       profileImageURL = originalPfpUrl;
       break;
-    case false:
+    case false: {
       const onDefault = () => {
         return getPfpLink(profile.username || originalUsername);
       };
-      let result = await getImageURL("profilePicture", onDefault, true);
+      const result = await getImageURL("profilePicture", onDefault, true);
 
       profileImageURL = result.url;
       break;
+    }
   }
 
   setPFPstyle(profileImageURL);
@@ -123,5 +127,5 @@ function isOriginalPfpUrl(url) {
     parts.pop();
     return parts.join("/");
   }
-  return createSimpleUrl(originalPfpUrl) == createSimpleUrl(url);
+  return createSimpleUrl(originalPfpUrl) === createSimpleUrl(url);
 }
