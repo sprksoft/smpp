@@ -24,13 +24,13 @@
 
 #english-tutorial-lang,
 #dutch-tutorial-lang {
-  border-radius: 1000px;
-  border: 2px solid var(--color-base03);
-  background-color: var(--color-base02);
-  font-size: 1.2rem;
-  font-weight: 600;
-  padding: 0.5rem;
-  padding-right: 1rem;
+  border-radius: 1000px !important;
+  border: 2px solid var(--color-base03) !important;
+  background-color: var(--color-base02) !important;
+  font-size: 1.2rem !important;
+  font-weight: 600 !important;
+  padding: 0.5rem !important;
+  padding-right: 1rem !important;
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
@@ -39,18 +39,18 @@
 .enableAnimations #english-tutorial-lang,
 .enableAnimations #dutch-tutorial-lang {
   transition-property: border-color, background-color;
-  transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out !important;
 }
 
 #english-tutorial-lang:hover,
 #dutch-tutorial-lang:hover {
-  background-color: var(--color-base03);
-  border-color: var(--color-accent);
+  background-color: var(--color-base03) !important;
+  border-color: var(--color-accent) !important;
 }
 
 .tutorial-widget-title {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
+  font-size: 2rem !important;
+  margin-bottom: 0.5rem !important;
   color: var(--color-accent);
   text-align: left;
 }
@@ -65,10 +65,14 @@
   font-size: 1.1rem;
   font-weight: 500;
   text-align: left;
-  margin-bottom: 0;
+  margin-bottom: 0 !important;
 }
 
 .smpp-widget:has(#tutorial-widget) {
-  background: linear-gradient(60deg, var(--color-base01), var(--color-base02));
-  border-color: var(--color-accent);
+  background: linear-gradient(
+    60deg,
+    var(--color-base01),
+    var(--color-base02)
+  ) !important;
+  border-color: var(--color-accent) !important;
 }

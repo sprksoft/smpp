@@ -5,43 +5,43 @@
   text-align: center;
 }
 .weather-location-input:hover {
-  background-color: var(--color-base02);
-  border-color: var(--color-base03);
+  background-color: var(--color-base02) !important;
+  border-color: var(--color-base03) !important;
 }
 
 .weather-location-input::placeholder {
-  opacity: 0.5;
+  opacity: 0.5 !important;
 }
 
 input.weather-location-input:focus {
-  color: var(--color-text);
-  border-color: var(--color-accent);
+  color: var(--color-text) !important;
+  border-color: var(--color-accent) !important;
 }
 #container.homepage .smpp-widget-pannel .weather-location-input.inactive {
-  background: transparent;
+  background: transparent !important;
 }
 
 .weather-location-input {
   text-align: center;
-  color: var(--color-accent);
+  color: var(--color-accent) !important;
   font-size: 2.5rem;
   font-weight: 600;
   width: 100%;
-  padding: 0;
+  padding: 0 !important;
   text-wrap: unset;
-  border: 2px solid transparent;
+  border: 2px solid transparent !important;
   border-radius: 1rem;
 }
 
 .weather-div.smpp-widget-content .not-initialized.weather-location-input {
-  border-color: var(--color-accent);
-  color: var(--color-text);
-  background-color: var(--color-base02);
+  border-color: var(--color-accent) !important;
+  color: var(--color-text) !important;
+  background-color: var(--color-base02) !important;
 }
 
 .enableAnimations .weather-location-input {
   transition-property: border-color, background-color, color;
-  transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out !important;
 }
 .weather-icon-container {
   width: 100%;
@@ -184,7 +184,7 @@ input.weather-location-input:focus {
   width: 20%;
 }
 .preview.compact .weather-widget-content {
-  gap: 0;
+  gap: 0 !important;
 }
 .weather-preview-title {
   font-size: 2.5rem;

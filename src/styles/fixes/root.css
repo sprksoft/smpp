@@ -4408,9 +4408,9 @@
   --color--active: #333c47;
   --background-color--active: #8aaedc;
   --border-color--active: transparent;
-  background-color: #b1c9e8;
+  background-color: #b1c9e8 !important;
   border-color: transparent;
-  color: #333c47;
+  color: #333c47 !important;
 }
 
 .c-heaven-combo-hover--500 {
@@ -4669,7 +4669,7 @@
 
 .c-dolphin-combo--500,
 .c-dolphin-combo-hover--500 {
-  --color: #fff;
+  --color: #fff !important;
   --border-color: transparent;
   --background-color: #8c92ac;
   --color--hover: #bfbfbf;
@@ -4679,7 +4679,7 @@
   --color--active: #fff;
   --background-color--active: #6e7697;
   --border-color--active: transparent;
-  background-color: #8c92ac;
+  background-color: #8c92ac !important;
   border-color: transparent;
   color: #fff;
 }

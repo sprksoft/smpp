@@ -1,172 +1,172 @@
 #smscMain div.wide-toolbar.js-wide-toolbar {
-  justify-content: space-between;
+  justify-content: space-between !important;
   max-height: 95%;
-  overflow: auto;
-  background-color: var(--color-base00);
-  color: var(--color-text);
-  background: var(--darken-background);
-  backdrop-filter: var(--small-blur);
-  height: fit-content;
-  padding: 0.75rem;
-  margin-left: 4px;
-  border-radius: 25px;
-  margin-top: 4px;
-  gap: 2rem;
-  width: 120px;
-  min-width: 100px;
+  overflow: auto !important;
+  background-color: var(--color-base00) !important;
+  color: var(--color-text) !important;
+  background: var(--darken-background) !important;
+  backdrop-filter: var(--small-blur) !important;
+  height: fit-content !important;
+  padding: 0.75rem !important;
+  margin-left: 4px !important;
+  border-radius: 25px !important;
+  margin-top: 4px !important;
+  gap: 2rem !important;
+  width: 120px !important;
+  min-width: 100px !important;
 }
 
 .wide-toolbar__item__icon {
-  height: 3.3rem;
-  width: 3.3rem;
+  height: 3.3rem !important;
+  width: 3.3rem !important;
 }
 
 .results-evaluations__content.smsc-container.smsc-container--main
   .listview__rows {
-  padding-left: 1.5rem;
+  padding-left: 1.5rem !important;
 }
 
 [dialog-content] {
-  background-color: var(--color-base01);
-  border: solid 2px var(--color-base02);
-  border-radius: 1rem;
-  box-shadow: 0 4px 16px var(--color-shadow);
+  background-color: var(--color-base01) !important;
+  border: solid 2px var(--color-base02) !important;
+  border-radius: 1rem !important;
+  box-shadow: 0 4px 16px var(--color-shadow) !important;
   padding: 1.5rem;
 }
 
 .glass [dialog-content] {
-  background-color: var(--darken-background);
-  backdrop-filter: var(--surface-blur);
+  background-color: var(--darken-background) !important;
+  backdrop-filter: var(--surface-blur) !important;
 }
 
 .side-panel__panel {
-  max-width: none;
-  width: 50vw;
+  max-width: none !important;
+  width: 50vw !important;
 }
 
 .wide-toolbar__item:after,
 .wide-toolbar__item:before {
-  display: none;
+  display: none !important;
 }
 
 .wide-toolbar__item {
-  background-color: var(--color-base01);
-  color: var(--color-text);
-  border: var(--border-size) solid var(--color-base02);
-  border-radius: 18px;
-  margin: 0px;
-  width: 100%;
-  padding: 0;
-  justify-content: center;
-  aspect-ratio: 1 / 1;
+  background-color: var(--color-base01) !important;
+  color: var(--color-text) !important;
+  border: var(--border-size) solid var(--color-base02) !important;
+  border-radius: 18px !important;
+  margin: 0px !important;
+  width: 100% !important;
+  padding: 0 !important;
+  justify-content: center !important;
+  aspect-ratio: 1/1 !important;
 }
 
 .wide-toolbar__item__icon {
-  z-index: 2;
-  background-size: cover;
-  background-repeat: no-repeat;
+  z-index: 2 !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
 }
 
 .wide-toolbar__item__name {
-  background-color: transparent;
+  background-color: transparent !important;
 }
 
 .wide-toolbar__item--selected {
-  background-color: var(--color-base02);
-  border-color: var(--color-base03);
-  font-weight: 800;
+  background-color: var(--color-base02) !important;
+  border-color: var(--color-base03) !important;
+  font-weight: 800 !important;
 }
 
 .wide-toolbar__item--selected:hover {
-  background-color: var(--color-base02);
+  background-color: var(--color-base02) !important;
 }
 
 .wide-toolbar__item:hover {
-  border-color: var(--color-accent);
-  background-color: var(--color-base02);
+  border-color: var(--color-accent) !important;
+  background-color: var(--color-base02) !important;
 }
 
 .title--1,
 .title--5 {
-  color: var(--color-text);
+  color: var(--color-text) !important;
 }
 
 .title--2,
 .smsc-title--1 {
-  color: var(--color-accent);
-  font-weight: 700;
+  color: var(--color-accent) !important;
+  font-weight: 700 !important;
 }
 
 .js-emptystate {
-  box-shadow: none;
-  color: var(--color-text);
-  padding: 20px;
-  border-radius: 20px;
-  margin-left: 20px;
-  margin-right: 20px;
+  box-shadow: none !important;
+  color: var(--color-text) !important;
+  padding: 20px !important;
+  border-radius: 20px !important;
+  margin-left: 20px !important;
+  margin-right: 20px !important;
 }
 .glass .results-evaluation--small .side-panel__panel {
-  background: var(--darken-background);
-  backdrop-filter: var(--surface-blur);
+  background: var(--darken-background) !important;
+  backdrop-filter: var(--surface-blur) !important;
 }
 
 .results-evaluation--small .side-panel__panel {
-  background-color: var(--color-base00);
+  background-color: var(--color-base00) !important;
 }
 
 .results-evaluations.results-evaluation--wide .side-panel__panel {
-  background-color: transparent;
-  backdrop-filter: none;
-  box-shadow: none;
+  background-color: transparent !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
 }
 
 .side-panel__panel {
-  box-shadow: -10px 0px 20px -10px var(--color-shadow);
+  box-shadow: -10px 0px 20px -10px var(--color-shadow) !important;
 }
 
 .glass .side-panel__panel {
-  background: var(--darken-background);
-  backdrop-filter: var(--surface-blur);
+  background: var(--darken-background) !important;
+  backdrop-filter: var(--surface-blur) !important;
 }
 
 .side-panel__panel {
-  background-color: var(--color-base00);
+  background-color: var(--color-base00) !important;
 }
 
 button.reset-filters-btn.reset-filters-btn--hidden {
-  height: 0px;
+  height: 0px !important;
 }
 
 .evaluation__content:active,
 .evaluation__content[active] {
-  border-color: var(--color-accent);
+  border-color: var(--color-accent) !important;
 }
 
 .table-page .table-page__container__wrapper__table .cell {
-  border: 2px solid var(--color-base02);
+  border: 2px solid var(--color-base02) !important;
 }
 
 .reset-filters-btn-container {
   /*sowwy lukas  (this is the scoll) */
-  margin-bottom: 41px;
+  margin-bottom: 41px !important;
 }
 
 .js-side-panel-next-button,
 .js-side-panel-prev-button {
-  display: none;
+  display: none !important;
 }
 
 .goal-evaluations-details__row {
-  background: var(--darken-background);
-  backdrop-filter: var(--small-blur);
+  background: var(--darken-background) !important;
+  backdrop-filter: var(--small-blur) !important;
 }
 
 button.goal-evaluations-details__row:active {
-  scale: 1;
+  scale: 1 !important;
 }
 
 input.input.bootstrap__input.search-input {
-  border: 2px solid var(--color-base03);
+  border: 2px solid var(--color-base03) !important;
   border-radius: 7px;
 }
 .results-evaluations .results-evaluations__filters {
@@ -177,106 +177,106 @@ input.input.bootstrap__input.search-input {
   display: flex;
   flex-basis: 100%;
   height: 1px;
-  justify-content: flex-end;
+  justify-content: flex-end !important;
   margin-top: 1em;
 }
 
 .contentContainer {
-  background-color: transparent;
+  background-color: transparent !important;
 }
 
 .glass .evaluation-list-item,
 .glass .goals-filter__item,
 .glass .content_container,
 .glass .navigation_container {
-  background-color: var(--darken-background);
-  backdrop-filter: var(--small-blur);
-  color: var(--color-text);
-  border-color: var(--color-base01);
+  background-color: var(--darken-background) !important;
+  backdrop-filter: var(--small-blur) !important;
+  color: var(--color-text) !important;
+  border-color: var(--color-base01) !important;
 }
 
 .evaluation-list-item,
 .goals-filter__item,
 .content_container,
 .navigation_container {
-  background-color: var(--color-base01);
-  color: var(--color-text);
-  border-color: var(--color-base01);
+  background-color: var(--color-base01) !important;
+  color: var(--color-text) !important;
+  border-color: var(--color-base01) !important;
 }
 .dropdown-button {
-  background: var(--color-base01);
-  color: var(--color-text);
-  border-color: var(--color-base02);
+  background: var(--color-base01) !important;
+  color: var(--color-text) !important;
+  border-color: var(--color-base02) !important;
 }
 
 .todo-column [listview] .todo-column__row.active-row {
-  border-radius: 15px;
-  background-color: var(--color-base01);
+  border-radius: 15px !important;
+  background-color: var(--color-base01) !important;
 }
 
 .todo-column
   [listview]
   .todo-column__row.active-row
   .todo-column__actions-cell {
-  background-color: var(--color-base02);
+  background-color: var(--color-base02) !important;
 }
 
 .evaluation-list-item:hover:not(.evaluation-list-item.selected),
 .dropdown-button:hover,
 .smscleftnavcontainer {
-  box-shadow: none;
-  border-color: var(--color-base03);
-  background-color: var(--color-base02);
+  box-shadow: none !important;
+  border-color: var(--color-base03) !important;
+  background-color: var(--color-base02) !important;
 }
 
 button.goals-filter__item.selected {
-  border-color: var(--color-accent);
-  outline: 1px var(--color-accent);
+  border-color: var(--color-accent) !important;
+  outline: 1px var(--color-accent) !important;
 }
 
 .goals-filter__item:hover:not(.selected) {
-  border-color: var(--color-accent);
+  border-color: var(--color-accent) !important;
 }
 
 .enableAnimations .goals-filter__item {
   transition-property: border-color, outline;
-  transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out !important;
 }
 .glass .side-panel__content .side-panel__content__title__name {
-  background: var(--darken-background);
-  backdrop-filter: var(--small-blur);
+  background: var(--darken-background) !important;
+  backdrop-filter: var(--small-blur) !important;
 }
 
 .side-panel__content .side-panel__content__title__name {
-  background: var(--color-base01);
-  width: fit-content;
-  padding: 0rem 1rem;
-  max-width: 100%;
-  flex: unset;
-  border-radius: 1.5rem;
+  background: var(--color-base01) !important;
+  width: fit-content !important;
+  padding: 0rem 1rem !important;
+  max-width: 100% !important;
+  flex: unset !important;
+  border-radius: 1.5rem !important;
 }
 
 .goals-filter__item {
-  border: 2px solid transparent;
+  border: 2px solid transparent !important;
 }
 
 .goals-filter__item {
-  border-radius: 15px;
+  border-radius: 15px !important;
 }
 
 .feedback--white {
-  background-color: var(--color-base00);
-  color: var(--color-text);
+  background-color: var(--color-base00) !important;
+  color: var(--color-text) !important;
 }
 
 .goals__goal__content__title {
-  background-color: var(--color-base00);
-  color: var(--color-text);
-  border: var(--border-size) solid var(--color-base00);
-  border-radius: 7px;
-  padding: 10px;
-  font-weight: 600;
-  display: flex;
+  background-color: var(--color-base00) !important;
+  color: var(--color-text) !important;
+  border: var(--border-size) solid var(--color-base00) !important;
+  border-radius: 7px !important;
+  padding: 10px !important;
+  font-weight: 600 !important;
+  display: flex !important;
 }
 
 .evaluation-graphic.evaluation-graphic--large.evaluation-graphic--percentage.side-panel__content__score__large-ring.c-olive-combo--100,
@@ -287,22 +287,22 @@ button.goals-filter__item.selected {
 .evaluation-graphic.evaluation-graphic--large.evaluation-graphic--image.side-panel__content__score__large-ring.c-orange-combo--100,
 .evaluation-graphic.evaluation-graphic--large.evaluation-graphic--image.side-panel__content__score__large-ring.c-aqua-combo--100,
 .evaluation-graphic.evaluation-graphic--large.evaluation-graphic--image.side-panel__content__score__large-ring.c-red-combo--100 {
-  background-color: var(--color-base00);
+  background-color: var(--color-base00) !important;
 }
 
 .filterlistview.js-filterlistview.evaluations__filterlistview:hover {
-  background-color: transparent;
+  background-color: transparent !important;
 }
 
 .evaluation__content:not(:active):not([active]) {
-  background-color: var(--color-base01);
+  background-color: var(--color-base01) !important;
 }
 
 .evaluation-graphic
   .evaluation-graphic--goal
   .evaluation-graphic--icon
   .goals__goal__graphic {
-  display: none;
+  display: none !important;
 }
 
 /*Doelen*/
@@ -316,13 +316,13 @@ button.goals-filter__item.selected {
 input[type="search"].input.search-input,
 .feedback,
 .feedback--silver {
-  background-color: var(--color-base01);
-  border-color: var(--color-base02);
+  background-color: var(--color-base01) !important;
+  border-color: var(--color-base02) !important;
 }
 
 .cell__content {
-  background-color: var(--color-base01);
-  padding-left: 20px;
+  background-color: var(--color-base01) !important;
+  padding-left: 20px !important;
 }
 
 .c-steel-combo--100,
@@ -332,11 +332,11 @@ input[type="search"].input.search-input,
   .listview__cell:not(.listview__cell--select-btn):not(
     .listview__cell--no-hover
   ) {
-  background-color: transparent;
+  background-color: transparent !important;
 }
 
 .table-page .table-page__container__wrapper__table .cell {
-  border-color: var(--color-base02);
+  border-color: var(--color-base02) !important;
 }
 
 body,
@@ -347,56 +347,56 @@ textarea,
 .modern-message__name,
 .modern-message__subject,
 .msgHeaderVal {
-  color: var(--color-text);
+  color: var(--color-text) !important;
 }
 
 .row--course:not(:last-child) .cell__course-name {
-  border-bottom-color: var(--color-base02);
+  border-bottom-color: var(--color-base02) !important;
 }
 
 .cell {
-  margin: 3px;
+  margin: 3px !important;
 }
 
 .js-course-filters,
 .course-btnbar,
 .js-btn-manual {
-  display: none;
+  display: none !important;
 }
 
 .filterlistview:hover {
-  background-color: transparent;
+  background-color: transparent !important;
 }
 
 .evaluation-graphic--large {
-  border: 8px solid var(--color-base01);
-  box-shadow: none;
+  border: 8px solid var(--color-base01) !important;
+  box-shadow: none !important;
 }
 
 .manual_widgettitle {
-  background-color: var(--color-base01);
-  border: 1px solid var(--color-base02);
+  background-color: var(--color-base01) !important;
+  border: 1px solid var(--color-base02) !important;
 }
 
 .rubrics__row--title {
-  color: var(--color-text);
+  color: var(--color-text) !important;
 }
 
 .token:hover {
-  background-color: var(--color-base02);
-  border-color: var(--color-base03);
+  background-color: var(--color-base02) !important;
+  border-color: var(--color-base03) !important;
 }
 
 .timegrid {
-  background: transparent;
+  background: transparent !important;
 }
 
 .bubble__menu-btn:hover {
-  border-radius: 5px;
+  border-radius: 5px !important;
 }
 
 .separator {
-  background-color: var(--color-base02);
+  background-color: var(--color-base02) !important;
 }
 
 .buis-stats-title {
@@ -406,7 +406,7 @@ textarea,
 .buis-stats-box {
   margin-right: 0.667rem;
   background-color: var(--color-base01);
-  margin-bottom: 0px;
+  margin-bottom: 0px !important;
   border-radius: 50px;
   padding: 4px;
   border: 2px solid var(--color-base02);
@@ -420,68 +420,68 @@ textarea,
   padding: 0px 4px 0px 4px;
   font-size: 17px;
   font-weight: bold;
-  margin-bottom: 0px;
-  color: var(--color-accent);
+  margin-bottom: 0px !important;
+  color: var(--color-accent) !important;
 }
 
 .blob__text,
 span.feedback__text,
 span.evaluation-graphic__progress-ring__description,
 span.evaluation-graphic__progress-ring__value {
-  color: var(--color-text);
+  color: var(--color-text) !important;
 }
 
 .title-and-schoolyear-selector[aria-expanded="true"]
   .title-and-schoolyear-selector__period-container:not(:disabled) {
-  border-color: var(--color-accent);
-  background-color: var(--darken-background);
-  backdrop-filter: var(--small-blur);
+  border-color: var(--color-accent) !important;
+  background-color: var(--darken-background) !important;
+  backdrop-filter: var(--small-blur) !important;
 }
 
 .title-and-schoolyear-selector
   .title-and-schoolyear-selector__period-container:hover:not(:disabled) {
-  border-color: var(--color-accent);
-  backdrop-filter: var(--small-blur);
+  border-color: var(--color-accent) !important;
+  backdrop-filter: var(--small-blur) !important;
 }
 
 .title-and-schoolyear-selector
   .title-and-schoolyear-selector__period-container:not(:disabled) {
-  border-width: 2px;
-  border-radius: 15px;
+  border-width: 2px !important;
+  border-radius: 15px !important;
 }
 
 .enableAnimations
   .title-and-schoolyear-selector
   .title-and-schoolyear-selector__period-container:not(:disabled) {
   transition-property: border-color, background-color;
-  transition: 0.1s;
+  transition: 0.1s !important;
 }
 
 .listview__row.js-listview-row.leerplannen-overview__list__listview__row {
-  background-color: var(--color-base01);
-  border: 2px solid var(--color-base02);
-  max-width: 33%;
-  margin-bottom: 10px;
-  border-radius: 15px;
+  background-color: var(--color-base01) !important;
+  border: 2px solid var(--color-base02) !important;
+  max-width: 33% !important;
+  margin-bottom: 10px !important;
+  border-radius: 15px !important;
 }
 
 .results-goals-overview__content .listview__row.js-listview-row {
-  border-radius: 2rem;
-  backdrop-filter: var(--medium-blur);
-  background-color: var(--darken-background);
-  margin-bottom: 1rem;
+  border-radius: 2rem !important;
+  backdrop-filter: var(--medium-blur) !important;
+  background-color: var(--darken-background) !important;
+  margin-bottom: 1rem !important;
 }
 
 .goal-evaluations-details__row:not(:last-child) {
-  border-color: transparent;
+  border-color: transparent !important;
 }
 
 .results-goals-overview__content .listview__row.js-listview-row:hover {
-  background-color: var(--darken-background);
+  background-color: var(--darken-background) !important;
 }
 
 .filterlistview.leerplan [listview].listview .cell--prefix {
-  min-width: 12rem;
+  min-width: 12rem !important;
 }
 .goal-evaluations-details {
   margin-bottom: 1rem;
@@ -492,174 +492,174 @@ span.evaluation-graphic__progress-ring__value {
 .enableAnimations
   .listview__row.js-listview-row.leerplannen-overview__list__listview__row {
   transition-property: border-color, background-color;
-  transition: 0.1s ease-in-out;
+  transition: 0.1s ease-in-out !important;
 }
 
 .listview__row.js-listview-row.leerplannen-overview__list__listview__row:hover {
-  background-color: var(--color-base02);
-  border-color: var(--color-accent);
+  background-color: var(--color-base02) !important;
+  border-color: var(--color-accent) !important;
 }
 
 .title-and-schoolyear-selector__title {
-  border-right: 1px solid var(--color-accent);
+  border-right: 1px solid var(--color-accent) !important;
 }
 
 .evaluation-list-item__container__title {
-  font-weight: 550;
+  font-weight: 550 !important;
 }
 
 .evaluation-list-item__container__subtitle {
-  font-weight: 450;
+  font-weight: 450 !important;
 }
 
 .evaluation__content {
-  border-radius: 6px;
+  border-radius: 6px !important;
 }
 
 td.cell.cell--evaluation.js-cell-evaluation.evaluation:hover {
-  border-color: var(--color-accent);
+  border-color: var(--color-accent) !important;
 }
 
 .feedback .user-image-label {
-  color: var(--color-text);
-  font-weight: 600;
+  color: var(--color-text) !important;
+  font-weight: 600 !important;
 }
 
 .feedback__text {
-  color: var(--color-text);
+  color: var(--color-text) !important;
 }
 
 .js-routehandler.table-page {
-  width: 89vw;
+  width: 89vw !important;
 }
 
 #smscMain.results {
-  height: 100%;
-  overflow-y: hidden;
-  overflow-x: hidden;
-  align-items: normal;
-  flex-direction: row;
-  justify-content: start;
+  height: 100% !important;
+  overflow-y: hidden !important;
+  overflow-x: hidden !important;
+  align-items: normal !important;
+  flex-direction: row !important;
+  justify-content: start !important;
 }
 
 div.reports-overview__listview__row {
-  background-color: rgb(0 0 0 / 20%);
+  background-color: rgb(0 0 0 / 20%) !important;
   border-radius: 1rem;
   margin-bottom: 1rem;
 }
 
 .listview__rows div.reports-overview__listview__row:hover {
-  background-color: rgb(0 0 0 / 50%);
+  background-color: rgb(0 0 0 / 50%) !important;
   border-radius: 1rem;
   margin-bottom: 1rem;
   transition: background-color 0.3s ease;
 }
 
 .evaluation-graphic__progress-ring__value {
-  margin-top: 1rem;
+  margin-top: 1rem !important;
 }
 
 .progress-ring__content .evaluation-graphic__progress-ring__description {
-  margin-top: 1.5rem;
+  margin-top: 1.5rem !important;
 }
 button.button-ZR3rz.bp-c-combo-hover-plain-outline--300,
 .searchInput-eoZIF.textInput-ACLPH {
-  background-color: var(--color-base01);
-  border: 2px solid var(--color-base03);
+  background-color: var(--color-base01) !important;
+  border: 2px solid var(--color-base03) !important;
 }
 
 .input-arO6v {
-  background-color: var(--color-base01);
-  border-right: 2px solid var(--color-base03);
-  color: var(--color-text);
-  margin-right: 0.6rem;
+  background-color: var(--color-base01) !important;
+  border-right: 2px solid var(--color-base03) !important;
+  color: var(--color-text) !important;
+  margin-right: 0.6rem !important;
 }
 .tabs[role="tablist"] > [role="presentation"] > [role="tab"][aria-selected] {
-  box-shadow: none;
-  border-bottom: 2px solid var(--color-accent);
-  background-color: var(--color-base02);
+  box-shadow: none !important;
+  border-bottom: 2px solid var(--color-accent) !important;
+  background-color: var(--color-base02) !important;
 }
 
 .tabs[role="tablist"]
   > [role="presentation"]
   > [role="tab"]:hover:not([aria-selected]) {
-  border-bottom-color: var(--color-base03);
+  border-bottom-color: var(--color-base03) !important;
 }
 .tabs[role="tablist"] {
-  border-bottom: none;
+  border-bottom: none !important;
 }
 
 .tabs[role="tablist"] {
-  border-bottom: none;
+  border-bottom: none !important;
 }
 .bubble-_lWSE {
-  background-color: var(--color-base01);
-  border: transparent;
-  border-radius: 2rem;
-  box-shadow: none;
-  box-shadow: 0px 5px 20px 5px rgba(0, 0, 0, 0.3);
+  background-color: var(--color-base01) !important;
+  border: transparent !important;
+  border-radius: 2rem !important;
+  box-shadow: none !important;
+  box-shadow: 0px 5px 20px 5px rgba(0, 0, 0, 0.3) !important;
 }
 .reportFilterDropdown-dAkBc > .js-emptystate {
-  background-color: var(--color-base01);
+  background-color: var(--color-base01) !important;
 }
 .textInput-ACLPH:focus-within {
-  outline: none;
+  outline: none !important;
 }
 .graphicRight-r_Pnt.graphic-g55I1.small-Du6aA > svg > path {
-  fill: var(--color-text);
+  fill: var(--color-text) !important;
 }
 .schoolyearLabel-MtXJE {
-  color: var(--color-text);
-  background: none;
+  color: var(--color-text) !important;
+  background: none !important;
 }
 .feedbackSubItem-uK8I1 {
-  background-color: var(--color-base01);
-  color: var(--color-text);
+  background-color: var(--color-base01) !important;
+  color: var(--color-text) !important;
 }
 .evaluationName-bJYm6 {
-  font-weight: 999;
+  font-weight: 999 !important;
 }
 .token-EsU0c {
-  border: var(--border-size) solid var(--color-base03);
-  background-color: var(--color-base02);
-  color: var(--color-text);
-  box-shadow: none;
+  border: var(--border-size) solid var(--color-base03) !important;
+  background-color: var(--color-base02) !important;
+  color: var(--color-text) !important;
+  box-shadow: none !important;
 }
 button.button-ZR3rz.bp-c-combo-hover-plain-outline--300 {
-  border-color: var(--color-base02);
+  border-color: var(--color-base02) !important;
 }
 .groupTitle-r2b_L {
-  color: var(--color-accent);
+  color: var(--color-accent) !important;
 }
 
 .results-evaluations.js-evaluations-page.js-routehandler.results-evaluation--wide {
-  width: 10%;
+  width: 10% !important;
 }
 .glass .title-and-schoolyear-selector.js-title-and-schoolyear-selector {
-  background: var(--darken-background);
-  backdrop-filter: var(--medium-blur);
+  background: var(--darken-background) !important;
+  backdrop-filter: var(--medium-blur) !important;
 }
 
 .title-and-schoolyear-selector.js-title-and-schoolyear-selector {
-  background: var(--color-base01);
-  border-radius: 1.5rem;
-  padding: 0.5rem 1rem;
-  width: fit-content;
-  max-width: 100%;
+  background: var(--color-base01) !important;
+  border-radius: 1.5rem !important;
+  padding: 0.5rem 1rem !important;
+  width: fit-content !important;
+  max-width: 100% !important;
 }
 
 .glass .bubble {
-  background-color: var(--darken-background);
-  backdrop-filter: var(--medium-blur);
+  background-color: var(--darken-background) !important;
+  backdrop-filter: var(--medium-blur) !important;
 }
 
 .bubble.js-bubble.schoolyear-dropdown-bubble.js-schoolyear-dropdown-bubble {
-  padding: 1.5rem;
+  padding: 1.5rem !important;
 }
 
 .table-page .table-page__header {
   gap: 0.5rem;
 }
 .filterlistview.leerplan [listview].listview .cell {
-  border-color: transparent;
+  border-color: transparent !important;
 }

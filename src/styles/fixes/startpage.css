@@ -1,10 +1,10 @@
 body {
-  background-color: var(--base-00);
+  background-color: var(--base-00) !important;
   color: var(--color-text);
 }
 
 #homepage__block--google {
-  border-bottom: none;
+  border-bottom: none !important;
 }
 
 .enableAnimations #homepage__block--google {
@@ -12,23 +12,23 @@ body {
 }
 
 .homepage {
-  display: block;
-  height: 100%;
+  display: block !important;
+  height: 100% !important;
 }
 
 body.modern-ui .homepage__center {
-  min-width: 0px;
+  min-width: 0px !important;
 }
 
 #leftcontainer,
 .homepage__left {
-  padding: 16px 24px;
+  padding: 16px 24px !important;
 }
 
 .toast__content {
-  background-color: var(--color-base01);
+  background-color: var(--color-base01) !important;
 }
 
 .modern-ui .float-label__input + label > span {
-  top: -67px;
+  top: -67px !important;
 }

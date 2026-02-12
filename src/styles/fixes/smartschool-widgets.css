@@ -1,22 +1,22 @@
 #homeAgenda
   .datepicker__cell.datepicker--current-day
   .datepicker__cell__content {
-  border: 2px solid var(--color-accent);
-  z-index: 10;
+  border: 2px solid var(--color-accent) !important;
+  z-index: 10 !important;
 }
 
 #homeAgenda .datepicker__cell__content:not(.datepicker--bold):hover {
-  background-color: var(--color-base02);
+  background-color: var(--color-base02) !important;
 }
 
 #homeAgenda .datepicker__cell__content {
-  aspect-ratio: 1;
+  aspect-ratio: 1 !important;
 }
 
 input#googleQuery {
-  background-color: var(--color-base02);
-  border-radius: 10px;
-  margin-right: 10px;
+  background-color: var(--color-base02) !important;
+  border-radius: 10px !important;
+  margin-right: 10px !important;
 }
 
 .date-header-assignments {
@@ -29,15 +29,15 @@ input#googleQuery {
 }
 
 h2.assignments-title {
-  margin-bottom: 0.5rem;
-  margin-top: 0;
+  margin-bottom: 0.5rem !important;
+  margin-top: 0 !important;
   text-align: center;
   font-size: 2rem;
   font-weight: 800;
 }
 
 .date-header-assignments::first-letter {
-  text-transform: capitalize;
+  text-transform: capitalize !important;
 }
 
 .task-description {

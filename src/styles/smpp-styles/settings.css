@@ -5,7 +5,7 @@
 }
 
 .settings-category-button {
-  border: 2px solid transparent;
+  border: 2px solid transparent !important;
 
   width: 100%;
   background-color: var(--color-base01);
@@ -16,7 +16,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: start;
-  font-size: 1.6rem;
+  font-size: 1.6rem !important;
   gap: 1rem;
 }
 
@@ -26,22 +26,22 @@
 }
 
 .settings-radio:checked + label {
-  border-color: var(--color-base03);
+  border-color: var(--color-base03) !important;
   background-color: var(--color-base02);
-  color: var(--color-accent);
-  font-weight: 600;
+  color: var(--color-accent) !important;
+  font-weight: 600 !important;
 }
 
 .settings-radio:checked + label:focus-visible {
-  border-color: var(--color-accent);
+  border-color: var(--color-accent) !important;
 }
 
 .settings-category-button-js:active {
-  scale: 0.95;
+  scale: 0.95 !important;
 }
 
 .settings-category-button-js:focus-visible {
-  border-color: var(--color-accent);
+  border-color: var(--color-accent) !important;
 }
 
 .settings-category-button-js:hover {
@@ -88,7 +88,7 @@
 }
 
 .profile-settings-button {
-  border: 2px solid transparent;
+  border: 2px solid transparent !important;
   display: flex;
   flex-direction: row;
   gap: 1rem;
@@ -104,7 +104,7 @@
 
 .profile-picture-settings {
   background-image: var(--profile-picture);
-  image-rendering: smooth;
+  image-rendering: smooth !important;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -123,13 +123,13 @@
 }
 
 #profile-settings-label-title {
-  margin: 0;
+  margin: 0 !important;
   font-size: 1.5rem;
-  text-wrap: nowrap;
+  text-wrap: nowrap !important;
 }
 
 .profile-settings-label-description {
-  margin: 0;
+  margin: 0 !important;
 }
 
 #settings-page {
@@ -155,13 +155,13 @@
   background: var(--color-base01);
   outline: none;
   opacity: 1;
-  margin-bottom: 1rem;
+  margin-bottom: 1rem !important;
   width: 18rem;
-  border: 2px solid transparent;
+  border: 2px solid transparent !important;
 }
 
 .settings-page-slider:focus-visible {
-  border-color: var(--color-base03);
+  border-color: var(--color-base03) !important;
 }
 
 .enableAnimations .settings-page-slider {
@@ -171,7 +171,7 @@
 }
 .settings-page-weather-overlay-container
   .settings-page-image-button-wrapper:has(input:checked) {
-  border-color: transparent;
+  border-color: transparent !important;
   background-color: var(--color-base02);
 }
 
@@ -179,7 +179,7 @@
   width: 1.4rem;
   height: 1.4rem;
   border-radius: 50%;
-  background: var(--color-accent);
+  background: var(--color-accent) !important;
   border-color: transparent;
   cursor: pointer;
   transition: opacity 0.2s ease-in-out;
@@ -191,7 +191,7 @@
   width: 1.4rem;
   height: 1.4rem;
   border-radius: 50%;
-  background: var(--color-accent);
+  background: var(--color-accent) !important;
   border-color: transparent;
   cursor: pointer;
   transition: opacity 0.2s ease-in-out;
@@ -201,33 +201,33 @@
 .settings-page-small-title {
   font-size: 1.3rem;
   font-weight: 500;
-  margin: 0;
-  margin-bottom: 0.5rem;
+  margin: 0 !important;
+  margin-bottom: 0.5rem !important;
   cursor: default;
 }
 
 .settings-page-section-title {
   font-size: 1.6rem;
   font-weight: 600;
-  margin: 0;
-  margin-bottom: 0.1rem;
-  margin-top: 2rem;
+  margin: 0 !important;
+  margin-bottom: 0.1rem !important;
+  margin-top: 2rem !important;
   cursor: default;
 }
 
 .settings-page-main-title {
   font-size: 2.25rem;
   font-weight: 700;
-  margin: 0;
+  margin: 0 !important;
   cursor: default;
 }
 
 .settings-page-main-title:not(:first-of-type) {
-  margin-top: 2rem;
+  margin-top: 2rem !important;
 }
 
 .settings-page-image {
-  border-radius: 0.75rem;
+  border-radius: 0.75rem !important;
 }
 
 .enableAnimations .smpp-text-input {
@@ -236,25 +236,25 @@
 }
 
 .smpp-text-input {
-  background-color: var(--color-base01);
-  border-color: var(--color-base02);
-  border-radius: 1rem;
-  padding: 0.6rem 0.8rem;
-  border: 2px solid var(--color-base02);
-  font-size: 1.2rem;
-  width: 20rem;
+  background-color: var(--color-base01) !important;
+  border-color: var(--color-base02) !important;
+  border-radius: 1rem !important;
+  padding: 0.6rem 0.8rem !important;
+  border: 2px solid var(--color-base02) !important;
+  font-size: 1.2rem !important;
+  width: 20rem !important;
 }
 
 #settings-page .full-file-input-container {
-  width: 20rem;
+  width: 20rem !important;
 }
 
 .full-file-input-container .smpp-text-input {
-  width: 100%;
+  width: 100% !important;
 }
 
 .smpp-text-input:focus-visible {
-  border-color: var(--color-base03);
+  border-color: var(--color-base03) !important;
 }
 
 .enableAnimations .settings-page-image-button-wrapper {
@@ -263,7 +263,7 @@
 }
 
 .settings-page-image-button-wrapper:focus-visible {
-  outline: 2px solid var(--color-base03);
+  outline: 2px solid var(--color-base03) !important;
 }
 
 .settings-page-image-button-wrapper:active {
@@ -273,7 +273,7 @@
 .settings-page-image-button-wrapper > img {
   width: 100%;
   height: 100%;
-  border-radius: 0px;
+  border-radius: 0px !important;
   object-fit: cover;
 }
 
@@ -281,13 +281,13 @@
   display: inline-block;
   position: relative;
   cursor: pointer;
-  margin: 0;
+  margin: 0 !important;
   overflow: hidden;
   width: 80px;
   height: 80px;
   border-radius: 1.5rem;
   border: 0.5rem solid transparent;
-  outline: 2px solid transparent;
+  outline: 2px solid transparent !important;
 }
 
 .settings-page-image-button-wrapper input[type="radio"] {
@@ -295,7 +295,7 @@
 }
 
 label.settings-page-image-button-wrapper:has(input:checked) {
-  border-color: var(--color-accent);
+  border-color: var(--color-accent) !important;
 }
 
 .settings-page-image-wrapper img.settings-page-image {
@@ -358,12 +358,12 @@ label.settings-page-image-button-wrapper:has(input:checked) {
   font-weight: 400;
   max-width: 18rem;
   font-size: 1rem;
-  margin-bottom: 0.75rem;
-  margin-top: 0;
+  margin-bottom: 0.75rem !important;
+  margin-top: 0 !important;
 }
 
 .settings-page-icons-container.settings-page-weather-overlay-container {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.5rem !important;
   background-color: var(--color-base01);
   width: fit-content;
   width: 20rem;
@@ -384,7 +384,7 @@ label.settings-page-image-button-wrapper:has(input:checked) {
 .settings-page-slider-label {
   font-size: 1.4rem;
   font-weight: 400;
-  margin: 0rem;
+  margin: 0rem !important;
 }
 
 #settings-page .smpp-file-input-button,
@@ -407,10 +407,10 @@ label.settings-page-image-button-wrapper:has(input:checked) {
   gap: 1rem;
   font-size: 1.4rem;
   font-weight: 400;
-  margin: 0;
-  margin-bottom: 1rem;
-  height: fit-content;
-  background-color: var(--color-base01);
+  margin: 0 !important;
+  margin-bottom: 1rem !important;
+  height: fit-content !important;
+  background-color: var(--color-base01) !important;
   max-width: 30rem;
 }
 
@@ -419,7 +419,7 @@ label.settings-page-image-button-wrapper:has(input:checked) {
 }
 
 .settings-page-button-label-container:first-of-type > span {
-  margin-top: 0rem;
+  margin-top: 0rem !important;
 }
 
 .settings-page-slider.settings-page-labeled-slider::-webkit-slider-thumb {
@@ -450,27 +450,27 @@ label.settings-page-image-button-wrapper:has(input:checked) {
 .settings-page-slider.settings-page-labeled-slider {
   width: 9rem;
   background-color: var(--color-base02);
-  margin: 0;
+  margin: 0 !important;
   height: 1.75rem;
 }
 
 .settings-page-slider-container {
   display: flex;
   flex-direction: row;
-  height: 4rem;
+  height: 4rem !important;
   gap: 0.25rem;
   background-color: var(--color-base01);
   max-width: 30rem;
   align-items: center;
-  margin: 0;
-  margin-bottom: 1rem;
+  margin: 0 !important;
+  margin-bottom: 1rem !important;
   border-radius: 1000px;
 }
 
 .settings-page-slider-container:has(#settings-page-weather-overlay-slider),
 .settings-page-slider-container:has(
-    #settings-page-weather-overlay-opacity-slider
-  ) {
+  #settings-page-weather-overlay-opacity-slider
+) {
   width: 20rem;
   gap: 1rem;
 }
@@ -482,17 +482,17 @@ label.settings-page-image-button-wrapper:has(input:checked) {
 
 .enableAnimations
   input.settings-page-keybinding-input[type="text"]:not(.aaaaaa):read-only {
-  transition: opacity 0.1s ease-in-out;
+  transition: opacity 0.1s ease-in-out !important;
 }
 
 input.settings-page-keybinding-input[type="text"]:not(.aaaaaa):read-only {
-  padding: 0.25rem 0.5rem;
-  font-size: 1.6rem;
-  color: var(--color-accent);
-  border-radius: 10000px;
+  padding: 0.25rem 0.5rem !important;
+  font-size: 1.6rem !important;
+  color: var(--color-accent) !important;
+  border-radius: 10000px !important;
 
-  width: fit-content;
-  max-width: 14rem;
+  width: fit-content !important;
+  max-width: 14rem !important;
   font-weight: 700;
   transform-origin: 100%;
   text-align: right;
@@ -507,22 +507,22 @@ input.settings-page-keybinding-input[type="text"]:not(
 }
 
 .settings-page-key-bind-container:has(
-    input.settings-page-keybinding-input.listening
-  ) {
-  border-color: var(--color-base02);
+  input.settings-page-keybinding-input.listening
+) {
+  border-color: var(--color-base02) !important;
 }
 
 input.settings-page-keybinding-input[type="text"]:not(
     .aaaaaa
   ):read-only.listening {
   font-weight: 500;
-  color: var(--color-text);
+  color: var(--color-text) !important;
   opacity: 1;
 }
 
 .settings-page-keybinding-input {
-  background-color: transparent;
-  caret-color: transparent;
+  background-color: transparent !important;
+  caret-color: transparent !important;
 }
 
 .settings-page-disclaimer-button {
@@ -556,16 +556,16 @@ input.settings-page-keybinding-input[type="text"]:not(
 }
 
 .settings-page-reset-button {
-  background-color: var(--color-base01);
-  border: 2px solid var(--color-base02);
-  border-radius: 1000rem;
-  padding: 1rem 1.5rem;
-  font-size: 1.4rem;
-  font-weight: 500;
-  width: 16.5rem;
-  cursor: pointer;
-  color: var(--color-text);
-  margin-bottom: 1rem;
+  background-color: var(--color-base01) !important;
+  border: 2px solid var(--color-base02) !important;
+  border-radius: 1000rem !important;
+  padding: 1rem 1.5rem !important;
+  font-size: 1.4rem !important;
+  font-weight: 500 !important;
+  width: 16.5rem !important ;
+  cursor: pointer !important;
+  color: var(--color-text) !important;
+  margin-bottom: 1rem !important;
 }
 
 .enableAnimations .settings-page-reset-button {
@@ -574,8 +574,8 @@ input.settings-page-keybinding-input[type="text"]:not(
 }
 
 .settings-page-reset-button:hover {
-  background-color: var(--color-base02);
-  border-color: var(--color-base03);
+  background-color: var(--color-base02) !important;
+  border-color: var(--color-base03) !important;
 }
 
 .settings-page-reset-button:active {
@@ -644,8 +644,8 @@ input.settings-page-keybinding-input[type="text"]:not(
   border: none;
   border-radius: 0.75rem;
   border: 2px solid var(--color-base02);
-  font-size: 1.4rem;
-  font-weight: 500;
+  font-size: 1.4rem !important;
+  font-weight: 500 !important;
   cursor: pointer;
 }
 
@@ -682,22 +682,22 @@ input.settings-page-keybinding-input[type="text"]:not(
 }
 
 #profile-picture-input-container {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.5rem !important;
 }
 
 .settings-radio {
-  display: none;
+  display: none !important;
 }
 .enableAnimations #quickSettings #extraSettingsButton {
   transition:
     scale 0.1s ease-in-out,
     border-color 0.2s ease-in-out,
-    background 0.2s ease-in-out;
+    background 0.2s ease-in-out !important;
 }
 
 #quickSettings #extraSettingsButton {
   margin-top: 0.5rem;
-  color: var(--color-accent);
+  color: var(--color-accent) !important;
   appearance: none;
   padding: 0.5rem 1.5rem;
 
@@ -707,8 +707,8 @@ input.settings-page-keybinding-input[type="text"]:not(
   border: none;
   border-radius: 1.25rem;
   border: 2px solid var(--color-base03);
-  font-size: 1.4rem;
-  font-weight: 700;
+  font-size: 1.4rem !important;
+  font-weight: 700 !important;
   cursor: pointer;
   width: 100%;
   box-shadow: 0px 2px 10px 0px var(--color-shadow);
@@ -720,13 +720,13 @@ input.settings-page-keybinding-input[type="text"]:not(
 }
 
 #quickSettings #extraSettingsButton:focus-visible {
-  border-color: var(--color-accent);
+  border-color: var(--color-accent) !important;
 }
 
 #quickSettings #extraSettingsButton > svg {
   width: 1.75rem;
   height: 1.75rem;
-  fill: var(--color-accent);
+  fill: var(--color-accent) !important;
   overflow: visible;
   align-self: flex-end;
 }
@@ -750,31 +750,31 @@ input.settings-page-keybinding-input[type="text"]:not(
 
 .keybind-unbind-button {
   display: block;
-  background: var(--color-base01);
+  background: var(--color-base01) !important;
   border-radius: 10000px;
-  width: 2.25rem;
-  height: 2.25rem;
-  border: 2px solid var(--color-base02);
-  position: absolute;
+  width: 2.25rem !important;
+  height: 2.25rem !important;
+  border: 2px solid var(--color-base02) !important;
+  position: absolute !important;
   right: -1.2rem;
   top: -1.2rem;
-  padding: 0.2rem;
+  padding: 0.2rem !important;
   opacity: 0;
-  pointer-events: none;
+  pointer-events: none !important;
 }
 
 .listening + .keybind-unbind-button {
   opacity: 1;
-  pointer-events: all;
+  pointer-events: all !important;
 }
 
 .keybind-unbind-button svg {
-  stroke: var(--color-red);
+  stroke: var(--color-red) !important;
 }
 
 .keybind-unbind-button:hover {
-  background: var(--color-base02);
-  border-color: var(--color-red);
+  background: var(--color-base02) !important;
+  border-color: var(--color-red) !important;
 }
 
 .keybind-unbind-button:active {
@@ -788,7 +788,7 @@ input.settings-page-keybinding-input[type="text"]:not(
 .smpp-color-picker {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1rem !important;
   -webkit-user-select: none;
   user-select: none;
 }
@@ -822,7 +822,7 @@ input.settings-page-keybinding-input[type="text"]:not(
 
 .color-picker-field {
   width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 16/9;
   position: relative;
   border-radius: 1rem;
   overflow: hidden;
@@ -837,7 +837,7 @@ input.settings-page-keybinding-input[type="text"]:not(
   height: 100%;
   transform: translate(-50%, -50%);
   pointer-events: none;
-  background-color: var(--current-color);
+  background-color: var(--current-color) !important;
 }
 
 .color-picker-field .color-cursor-wrapper {
@@ -872,13 +872,13 @@ input.settings-page-keybinding-input[type="text"]:not(
 .smpp-color-picker-bottom-container .color-preview {
   width: 25%;
   border-radius: 1rem;
-  background-color: var(--current-color);
+  background-color: var(--current-color) !important;
   height: 100%;
-  border: 2px solid var(--color-base02);
+  border: 2px solid var(--color-base02) !important;
 }
 
 .smpp-color-picker-bottom-container .smpp-text-input {
-  width: 65%;
+  width: 65% !important;
   height: 100%;
 }
 
@@ -908,7 +908,7 @@ input.settings-page-keybinding-input[type="text"]:not(
   height: 100%;
   transform: translate(-50%, -50%);
   pointer-events: none;
-  background-color: var(--max-sat);
+  background-color: var(--max-sat) !important;
 }
 
 .hue-picker .color-cursor-wrapper {
@@ -919,16 +919,16 @@ input.settings-page-keybinding-input[type="text"]:not(
 }
 
 .copy-hex-button {
-  background-color: var(--color-base01);
-  border: 2px solid var(--color-base02);
-  border-radius: 1rem;
-  padding: 0;
-  font-size: 1.4rem;
-  font-weight: 500;
-  width: 20%;
-  cursor: pointer;
-  color: var(--color-text);
-  padding: 0.1rem 0.4rem;
+  background-color: var(--color-base01) !important;
+  border: 2px solid var(--color-base02) !important;
+  border-radius: 1rem !important;
+  padding: 0 !important;
+  font-size: 1.4rem !important;
+  font-weight: 500 !important;
+  width: 20% !important ;
+  cursor: pointer !important;
+  color: var(--color-text) !important;
+  padding: 0.1rem 0.4rem !important;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -937,13 +937,13 @@ input.settings-page-keybinding-input[type="text"]:not(
 .copy-hex-button > svg {
   width: 100%;
   height: 100%;
-  stroke: var(--color-text);
+  stroke: var(--color-text) !important;
 }
 
 .copy-hex-button > .done-icon {
   width: 90%;
   height: 70%;
-  fill: var(--color-green);
+  fill: var(--color-green) !important;
 }
 
 .enableAnimations .copy-hex-button {
@@ -952,11 +952,11 @@ input.settings-page-keybinding-input[type="text"]:not(
 }
 
 .copy-hex-button:hover {
-  background-color: var(--color-base02);
-  border-color: var(--color-base03);
+  background-color: var(--color-base02) !important;
+  border-color: var(--color-base03) !important;
 }
 .copy-hex-button:hover > svg {
-  stroke: var(--color-accent);
+  stroke: var(--color-accent) !important;
 }
 
 .theme-tile-bottom {
@@ -968,23 +968,24 @@ input.settings-page-keybinding-input[type="text"]:not(
 }
 
 .enableAnimations .bottom-container-button {
-  transition-property: opacity, border-color, stroke, background, scale, fill;
-  transition: 0.3s ease-out;
+  transition-property:
+    opacity, border-color, stroke, background, scale, fill !important;
+  transition: 0.3s ease-out !important;
 }
 
 .bottom-container-button {
-  background-color: var(--color-base01-local);
-  border: 2px solid var(--color-base02-local);
-  box-shadow: 0px 0px 10px 2px var(--color-shadow);
-  border-radius: 1rem;
-  padding: 0;
-  font-size: 1.4rem;
-  font-weight: 500;
-  width: 3rem;
+  background-color: var(--color-base01-local) !important;
+  border: 2px solid var(--color-base02-local) !important;
+  box-shadow: 0px 0px 10px 2px var(--color-shadow) !important;
+  border-radius: 1rem !important;
+  padding: 0 !important;
+  font-size: 1.4rem !important;
+  font-weight: 500 !important;
+  width: 3rem !important ;
   height: 100%;
-  cursor: pointer;
-  color: var(--color-text);
-  padding: 0.1rem 0.4rem;
+  cursor: pointer !important;
+  color: var(--color-text) !important;
+  padding: 0.1rem 0.4rem !important;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -994,7 +995,7 @@ input.settings-page-keybinding-input[type="text"]:not(
 .bottom-container-button > svg {
   width: 100%;
   height: 100%;
-  stroke: var(--color-text-local);
+  stroke: var(--color-text-local) !important;
 }
 
 .enableAnimations .bottom-container-button {
@@ -1005,8 +1006,8 @@ input.settings-page-keybinding-input[type="text"]:not(
 }
 
 .bottom-container-button:hover {
-  background-color: var(--color-base02-local);
-  border-color: var(--color-base03-local);
+  background-color: var(--color-base02-local) !important;
+  border-color: var(--color-base03-local) !important;
 }
 
 button .bottom-container-button:active {
@@ -1014,7 +1015,7 @@ button .bottom-container-button:active {
 }
 
 .bottom-container-button:hover > svg {
-  stroke: var(--color-accent-local);
+  stroke: var(--color-accent-local) !important;
 }
 
 .theme-tile-title {
@@ -1044,12 +1045,10 @@ button .bottom-container-button:active {
 
 @keyframes theme-tile {
   0% {
-    opacity: 0.2;
-    transform: translateX(-5%) translateY(-20%) scale(0.7);
+    opacity: 0.5;
   }
   100% {
     opacity: 1;
-    transform: translateX(0) translateY(0) scale(1);
   }
 }
 
@@ -1057,11 +1056,11 @@ button .bottom-container-button:active {
   transition-property:
     background-color, border-color, color, transform, outline;
   transition: 0.15s ease-in-out;
-  animation: theme-tile 0.4s cubic-bezier(0.33, 1.31, 0.65, 0.98);
+  animation: theme-tile 0.2s ease-out;
 }
 
 #settings-page .theme-tile:not(.aaaaa) {
-  outline: 2px solid transparent;
+  outline: 2px solid transparent !important;
   display: flex;
   flex-direction: column;
   border: 0.3rem solid transparent;
@@ -1070,15 +1069,14 @@ button .bottom-container-button:active {
   height: 104px;
   padding: 0.25rem;
   border-radius: 1.5rem;
-  background-color: var(--color-base01);
+  background-color: var(--color-base01) !important;
   cursor: pointer;
   height: fit-content;
   position: relative;
-  box-shadow: 0px 0px 5px -2px var(--color-shadow);
 }
 
 #settings-page .theme-tile:not(.aaaaa).is-selected {
-  border-color: var(--color-accent-local);
+  border-color: var(--color-accent-local) !important;
 }
 
 .theme-tile:active:not(:has(.bottom-container-button:active)) {
@@ -1086,12 +1084,12 @@ button .bottom-container-button:active {
 }
 
 .theme-tile .image-container {
-  border-radius: 1rem;
-  object-fit: cover;
-  object-position: center;
-  background-size: cover;
-  background-position: center;
-  background-color: var(--color-base02-local);
+  border-radius: 1rem !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-color: var(--color-base02-local) !important;
   height: 6rem;
   background:
     var(--background-image-local),
@@ -1132,10 +1130,8 @@ button .bottom-container-button:active {
 
 #settings-page .theme-tile:not(.aaaaa):hover {
   border-color: var(--color-accent-local);
-  background-color: var(--color-base01-local);
-  color: var(--color-text-local);
-  scale: 1.03;
-  box-shadow: 0px 0px 15px 2px var(--color-shadow);
+  background-color: var(--color-base01-local) !important;
+  color: var(--color-text-local) !important;
 }
 
 #settings-page .theme-tile:not(.aaaaa):hover .bottom-container-button {
@@ -1143,11 +1139,11 @@ button .bottom-container-button:active {
 }
 
 #settings-page .use-default-colors.theme-tile:not(.aaaaa).is-selected {
-  border-color: var(--color-accent);
+  border-color: var(--color-accent) !important;
 }
 
 .use-default-colors.theme-tile .image-container {
-  background-color: var(--color-base02);
+  background-color: var(--color-base02) !important;
   background: linear-gradient(
     40deg,
     color-mix(in srgb, var(--color-base03) 70%, var(--color-accent) 30%) 0%,
@@ -1160,30 +1156,26 @@ button .bottom-container-button:active {
 
 #settings-page .use-default-colors.theme-tile:not(.aaaaa):hover {
   border-color: var(--color-accent);
-  background-color: var(--color-base01);
-  color: var(--color-text);
+  background-color: var(--color-base01) !important;
+  color: var(--color-text) !important;
 }
 
 .theme-tile:focus-visible {
-  outline: 2px solid var(--color-base03);
+  outline: 2px solid var(--color-base03) !important;
 }
 
 /* Highlight chosen card */
 .theme-tile:has(input:checked) {
   border-color: var(--hover-border);
-  background-color: var(--hover-color);
-  color: var(--text-color);
+  background-color: var(--hover-color) !important;
+  color: var(--text-color) !important;
 }
 
 .theme-tiles {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, 168px);
+  display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
-  align-content: start; /* Prevents vertical stretching */
-}
-
-.enableAnimations .theme-tiles {
-  transition: height 0.3s cubic-bezier(0.33, 1.31, 0.65, 0.98);
+  margin-top: 1rem;
 }
 
 .theme-top-container {
@@ -1193,24 +1185,24 @@ button .bottom-container-button:active {
   gap: 0.5rem;
   height: 2.5rem;
   font-weight: 600;
-  margin: 0;
-  margin-bottom: 0.5rem;
-  margin-top: 2rem;
+  margin: 0 !important;
+  margin-bottom: 0.1rem !important;
+  margin-top: 2rem !important;
   cursor: default;
 }
 
 .theme-top-container button {
-  background-color: var(--color-base01);
-  border: 2px solid var(--color-base02);
-  border-radius: 100000px;
-  padding: 0;
-  font-size: 1.4rem;
-  font-weight: 500;
+  background-color: var(--color-base01) !important;
+  border: 2px solid var(--color-base02) !important;
+  border-radius: 100000px !important;
+  padding: 0 !important;
+  font-size: 1.4rem !important;
+  font-weight: 500 !important;
   height: 100%;
   aspect-ratio: 1;
-  cursor: pointer;
-  color: var(--color-text);
-  padding: 0.2rem;
+  cursor: pointer !important;
+  color: var(--color-text) !important;
+  padding: 0.2rem !important;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1219,7 +1211,7 @@ button .bottom-container-button:active {
 .theme-top-container button > svg {
   width: 100%;
   height: 100%;
-  stroke: var(--color-text);
+  stroke: var(--color-text) !important;
 }
 
 .enableAnimations .theme-top-container button {
@@ -1228,19 +1220,19 @@ button .bottom-container-button:active {
 }
 
 .theme-top-container button:hover {
-  background-color: var(--color-base02);
-  border-color: var(--color-base03);
+  background-color: var(--color-base02) !important;
+  border-color: var(--color-base03) !important;
 }
 
 .theme-top-container button:hover > svg {
-  stroke: var(--color-accent);
+  stroke: var(--color-accent) !important;
 }
 
 .theme-tile .image-container > svg {
   box-sizing: border-box;
   width: 100%;
   height: calc(100% - 1rem);
-  stroke: var(--color-accent-local);
+  stroke: var(--color-accent-local) !important;
   margin: 0.5rem 0rem;
 }
 
@@ -1248,7 +1240,7 @@ button .bottom-container-button:active {
   box-sizing: border-box;
   width: 100%;
   height: calc(100% - 1rem);
-  stroke: var(--color-accent);
+  stroke: var(--color-accent) !important;
   margin: 0.5rem 0rem;
 }
 
@@ -1257,25 +1249,25 @@ button .bottom-container-button:active {
 }
 
 .theme-tile .image-container svg.heart-icon {
-  fill: var(--color-red);
-  stroke: var(--color-red);
+  fill: var(--color-red) !important;
+  stroke: var(--color-red) !important;
 }
 
 .current-category {
-  margin-bottom: 0;
+  margin-bottom: 0 !important;
   font-size: 1.6rem;
 }
 
 button.remove-custom-theme {
-  background-color: var(--color-base01);
-  border: 2px solid var(--color-base02);
-  border-radius: 100000px;
-  padding: 0.25rem 0.75rem 0.25rem 1rem;
-  font-size: 1.4rem;
-  font-weight: 500;
+  background-color: var(--color-base01) !important;
+  border: 2px solid var(--color-base02) !important;
+  border-radius: 100000px !important;
+  padding: 0.25rem 0.75rem 0.25rem 1rem !important;
+  font-size: 1.4rem !important;
+  font-weight: 500 !important;
   height: 3rem;
-  cursor: pointer;
-  color: var(--color-text);
+  cursor: pointer !important;
+  color: var(--color-text) !important;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1283,7 +1275,7 @@ button.remove-custom-theme {
 
 button.remove-custom-theme > svg {
   height: 100%;
-  stroke: var(--color-red);
+  stroke: var(--color-red) !important;
 }
 
 .enableAnimations button.remove-custom-theme {
@@ -1292,12 +1284,12 @@ button.remove-custom-theme > svg {
 }
 
 button.remove-custom-theme:hover {
-  background-color: var(--color-base02);
-  border-color: var(--color-base03);
+  background-color: var(--color-base02) !important;
+  border-color: var(--color-base03) !important;
 }
 
 button.remove-custom-theme:hover {
-  border-color: var(--color-red);
+  border-color: var(--color-red) !important;
 }
 
 .color-preview-bubble {
@@ -1317,15 +1309,15 @@ button.remove-custom-theme:hover {
 }
 
 button.open-theme-editor-button {
-  background-color: var(--color-base01);
-  border: 2px solid var(--color-base02);
-  border-radius: 100000px;
-  padding: 0.25rem 0.75rem;
-  font-size: 1.4rem;
-  font-weight: 500;
+  background-color: var(--color-base01) !important;
+  border: 2px solid var(--color-base02) !important;
+  border-radius: 100000px !important;
+  padding: 0.25rem 0.75rem !important;
+  font-size: 1.4rem !important;
+  font-weight: 500 !important;
   height: 3rem;
-  cursor: pointer;
-  color: var(--color-text);
+  cursor: pointer !important;
+  color: var(--color-text) !important;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1337,8 +1329,8 @@ button.open-theme-editor-button {
 }
 
 button.open-theme-editor-button:hover {
-  background-color: var(--color-base02);
-  border-color: var(--color-accent);
+  background-color: var(--color-base02) !important;
+  border-color: var(--color-accent) !important;
 }
 
 .custom-theme-maker {
@@ -1384,9 +1376,9 @@ button.open-theme-editor-button:hover {
   box-shadow: 0px 2px 10px 0px var(--color-shadow);
   position: relative;
   z-index: 10;
-  background-size: cover;
-  background-position: center;
-  background-color: var(--color-base02);
+  background-size: cover !important;
+  background-position: center !important;
+  background-color: var(--color-base02) !important;
   background: linear-gradient(
     40deg,
     color-mix(in srgb, var(--color-base03) 70%, var(--color-accent) 30%) 0%,
@@ -1396,7 +1388,7 @@ button.open-theme-editor-button:hover {
     color-mix(in srgb, var(--color-base02) 95%, var(--color-accent) 5%) 100%
   );
   height: 20rem;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 16/9;
   border-radius: 1.5rem;
   overflow: hidden;
 }
@@ -1413,8 +1405,8 @@ button.open-theme-editor-button:hover {
 }
 
 .enableAnimations .generate-theme-control {
-  transition-property: border-color, background-color, transform;
-  transition: 0.15s ease-in-out;
+  transition-property: border-color, background-color, transform !important;
+  transition: 0.15s ease-in-out !important;
 }
 
 .generate-theme-control:active {
@@ -1436,13 +1428,13 @@ button.open-theme-editor-button:hover {
   display: flex;
   flex-direction: row;
   border-radius: 2rem;
-  background-color: transparent;
+  background-color: transparent !important;
   box-shadow: 0px 2px 10px 0px var(--color-shadow);
   padding: 0.5rem;
 }
 
 #customThemeCreator .preview-image-container.open:not(.aaaa) {
-  background-color: var(--color-base01);
+  background-color: var(--color-base01) !important;
 }
 
 .theme-controls-container {
@@ -1491,7 +1483,7 @@ button.open-theme-editor-button:hover {
   background-color: var(--color-base02);
   padding: 0.5rem;
   border: none;
-  margin: 0;
+  margin: 0 !important;
 }
 
 .preview-image-container.open .theme-generation-sub-container {
@@ -1539,14 +1531,14 @@ button.open-theme-editor-button:hover {
 }
 
 .tooltip-TtRmZ {
-  border-radius: 1000rem;
-  background: var(--color-base01);
-  border: 2px solid var(--color-base02);
-  box-shadow: 0px 5px 10px 0px var(--color-shadow);
-  padding: 0.5rem 1rem;
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: var(--color-text);
+  border-radius: 1000rem !important;
+  background: var(--color-base01) !important;
+  border: 2px solid var(--color-base02) !important;
+  box-shadow: 0px 5px 10px 0px var(--color-shadow) !important;
+  padding: 0.5rem 1rem !important;
+  font-size: 1.2rem !important;
+  font-weight: 600 !important;
+  color: var(--color-text) !important;
 }
 
 .smpp-tooltip {
@@ -1601,7 +1593,7 @@ button.open-theme-editor-button:hover {
 
 .theme-name-input {
   text-align: center;
-  font-size: 1.4rem;
+  font-size: 1.4rem !important;
 }
 
 @keyframes removed-theme-tile {
@@ -1622,8 +1614,8 @@ button.open-theme-editor-button:hover {
 }
 
 .theme-tile.is-favorite svg.heart-icon {
-  fill: var(--color-red);
-  stroke: var(--color-red);
+  fill: var(--color-red) !important;
+  stroke: var(--color-red) !important;
 }
 
 .compact-theme-selector {
@@ -1654,7 +1646,7 @@ button.open-theme-editor-button:hover {
   padding: 0.25rem;
   border-radius: 1.5rem;
   border: 2px solid var(--color-base03);
-  box-shadow: 0 0.333rem 1.333rem var(--color-shadow);
+  box-shadow: 0 0.333rem 1.333rem var(--color-shadow) !important;
   position: absolute;
   width: 100%;
 }
@@ -1666,12 +1658,12 @@ button.open-theme-editor-button:hover {
 #quickSettings .compact-theme-option {
   width: 100%;
   height: 3rem;
-  overflow: hidden;
+  overflow: hidden !important;
   cursor: pointer;
   border-radius: 1rem;
-  border: 2px solid var(--color-base02-local);
+  border: 2px solid var(--color-base02-local) !important;
   position: relative;
-  box-shadow: 0 0 10px 0px var(--color-shadow);
+  box-shadow: 0 0 10px 0px var(--color-shadow) !important;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1689,34 +1681,34 @@ button.open-theme-editor-button:hover {
 }
 
 .compact-theme-option:hover .compact-theme-option-text {
-  color: var(--color-accent-local);
-  background: var(--color-base02-local);
-  font-weight: 600;
+  color: var(--color-accent-local) !important;
+  background: var(--color-base02-local) !important;
+  font-weight: 600 !important;
 }
 .compact-theme-option.is-selected .compact-theme-option-text {
-  background: var(--darken-background-local);
-  color: var(--color-text-local);
-  font-weight: 700;
+  background: var(--darken-background-local) !important;
+  color: var(--color-text-local) !important;
+  font-weight: 700 !important;
 }
 #quickSettings .compact-theme-option:hover {
-  border-color: var(--color-base03-local);
+  border-color: var(--color-base03-local) !important;
   scale: 1.02;
 }
 
 #quickSettings .compact-theme-option.is-selected {
-  border-color: var(--color-accent-local);
+  border-color: var(--color-accent-local) !important;
 }
 
 .compact-theme-option .compact-theme-option-text {
   width: 100%;
   padding: 0.5rem 0.75rem;
-  height: 100%;
-  font-size: 1.2rem;
-  font-weight: 500;
-  color: var(--color-text-local);
-  background: var(--color-base01-local);
-  text-wrap-mode: nowrap;
-  overflow: hidden;
+  height: 100% !important;
+  font-size: 1.2rem !important;
+  font-weight: 500 !important;
+  color: var(--color-text-local) !important;
+  background: var(--color-base01-local) !important;
+  text-wrap-mode: nowrap !important;
+  overflow: hidden !important;
   z-index: 1;
   position: relative;
   user-select: none;
@@ -1760,11 +1752,11 @@ button.open-theme-editor-button:hover {
 }
 
 .error-theme-sharing.share-dialog-content .link-output {
-  color: var(--color-red);
+  color: var(--color-red) !important;
 }
 
 .error-theme-sharing.share-dialog-content .copy-link-button svg {
-  stroke: var(--color-red);
+  stroke: var(--color-red) !important;
 }
 
 .share-dialog-content {
@@ -1772,41 +1764,41 @@ button.open-theme-editor-button:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow-y: auto;
-  width: 400px;
+  overflow-y: auto !important;
+  width: 400px !important;
 }
 .share-dialog-content h1 {
-  color: var(--color-accent-local);
+  color: var(--color-accent-local) !important;
   z-index: 1;
-  background: var(--darken-background-local);
+  background: var(--darken-background-local) !important;
   border-radius: 1rem;
   padding: 0.5rem;
   backdrop-filter: blur(2px);
-  box-shadow: 0px 0px 20px var(--color-shadow);
+  box-shadow: 0px 0px 20px var(--color-shadow) !important;
 }
 
 .share-dialog-content h1,
 .share-dialog-content h2 {
   text-align: center;
-  margin-bottom: 0rem;
+  margin-bottom: 0rem !important;
 }
 .share-dialog-content h2 {
-  margin-bottom: 1rem;
-  font-size: 1.8rem;
+  margin-bottom: 1rem !important;
+  font-size: 1.8rem !important;
 }
 
 .link-output {
   display: flex;
-  background-color: var(--color-base01-local);
-  font-size: 1rem;
-  border-radius: 1rem;
-  padding: 0.6rem 0.8rem;
-  border: 2px solid var(--color-base02-local);
+  background-color: var(--color-base01-local) !important;
+  font-size: 1rem !important;
+  border-radius: 1rem !important;
+  padding: 0.6rem 0.8rem !important;
+  border: 2px solid var(--color-base02-local) !important;
   text-wrap-mode: nowrap;
   max-width: 100%;
   width: 20rem;
   overflow-x: hidden;
-  color: var(--color-text-local);
+  color: var(--color-text-local) !important;
 }
 
 .copy-container {
@@ -1819,26 +1811,26 @@ button.open-theme-editor-button:hover {
 }
 
 .copy-hex-button.copy-link-button {
-  width: 3rem;
-  height: 3rem;
+  width: 3rem !important;
+  height: 3rem !important;
 
-  background-color: var(--color-base01-local);
-  color: var(--color-text-local);
-  border: 2px solid var(--color-base02-local);
+  background-color: var(--color-base01-local) !important;
+  color: var(--color-text-local) !important;
+  border: 2px solid var(--color-base02-local) !important;
 }
 
 .copy-hex-button.copy-link-button:hover {
-  background-color: var(--color-base02-local);
-  border: 2px solid var(--color-base03-local);
+  background-color: var(--color-base02-local) !important;
+  border: 2px solid var(--color-base03-local) !important;
 }
 
 .copy-hex-button.copy-link-button > svg {
-  stroke: var(--color-text-local);
+  stroke: var(--color-text-local) !important;
 }
 
 .sharing-tile {
-  width: fit-content;
-  background: var(--color-base01-local);
+  width: fit-content !important;
+  background: var(--color-base01-local) !important;
   box-shadow: 0px 2px 10px 0px var(--color-shadow);
   border-radius: 1.5rem;
   padding: 0.5rem;
@@ -1909,5 +1901,5 @@ button.open-theme-editor-button:hover {
 
 .sharing-color-previews .color-preview-bubble {
   width: 2.5rem;
-  cursor: default;
+  cursor: default !important;
 }

@@ -12,7 +12,7 @@ html {
 }
 
 .dmenu-hidden {
-  display: none;
+  display: none !important;
 }
 
 .dmenu {
@@ -22,18 +22,18 @@ html {
   position: absolute;
   display: flex;
   flex-direction: column;
-  font-size: var(--dmenu-font-size);
+  font-size: var(--dmenu-font-size) !important;
   z-index: 20;
   box-shadow: 0px 0px 150px black;
-  border-radius: 10px;
+  border-radius: 10px !important;
 }
 
 .enableAnimations .dmenu {
-  animation: dmenu 0.2s linear 0ms 1;
+  animation: dmenu 0.2s linear 0ms 1 !important;
 }
 
 .enableAnimations .jokeDmenu.dmenu {
-  animation: dmenu_joke 30s linear 0ms 1;
+  animation: dmenu_joke 30s linear 0ms 1 !important;
 }
 
 @keyframes dmenu {
@@ -145,13 +145,13 @@ html {
 }
 
 .dmenu-input {
-  border: none;
-  background: var(--color-base01);
-  color: var(--color-text);
+  border: none !important;
+  background: var(--color-base01) !important;
+  color: var(--color-text) !important;
   flex-grow: 1;
-  padding: var(--dmenu-padding);
-  font-size: var(--dmenu-font-size);
-  border-top-right-radius: 3px;
+  padding: var(--dmenu-padding) !important;
+  font-size: var(--dmenu-font-size) !important;
+  border-top-right-radius: 3px !important;
 }
 
 .dmenu-input:focus {
@@ -164,14 +164,14 @@ html {
   color: var(--color-accent);
   line-height: inherit;
   padding-left: var(--dmenu-padding);
-  padding: 3px;
-  margin-left: 0px;
+  padding: 3px !important;
+  margin-left: 0px !important;
   border-right: var(--border-size) solid var(--color-base02);
-  border-top-left-radius: 3px;
+  border-top-left-radius: 3px !important;
 }
 
 .dmenu-title:hover {
-  cursor: auto;
+  cursor: auto !important;
 }
 
 .dmenu-itemlist {
@@ -185,7 +185,7 @@ html {
 .dmenu-row {
   padding: var(--dmenu-padding);
   background: var(--color-base00);
-  color: var(--color-text);
+  color: var(--color-text) !important;
   display: flex;
   flex-direction: row;
   border: none;
@@ -202,7 +202,7 @@ html {
 
 .dmenu-content {
   margin-right: 1em;
-  display: inline;
+  display: inline !important;
 }
 
 .dmenu-meta {
@@ -216,10 +216,10 @@ html {
 }
 
 .dmenu-selected .dmenu-score {
-  color: var(--color-base01);
+  color: var(--color-base01) !important;
 }
 
 .dmenu-selected {
-  background: var(--color-accent);
-  color: var(--color-base01);
+  background: var(--color-accent) !important;
+  color: var(--color-base01) !important;
 }

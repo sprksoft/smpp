@@ -55,5 +55,16 @@
       }
     }
   },
+  "overrides": [
+    {
+      "includes": ["src/styles/**/*.css"],
+      "formatter": {
+        "enabled": false
+      },
+      "linter": {
+        "enabled": false
+      }
+    }
+  ],
   "extends": ["ultracite/biome/core"]
 }

@@ -1,22 +1,22 @@
 /* CSS for things that are smpp specific */
 
 #quickSettings .full-file-input-container {
-  color: var(--color-text);
+  color: var(--color-text) !important;
   position: relative;
-  overflow: visible;
+  overflow: visible !important;
   display: flex;
   flex-direction: row;
   justify-content: stretch;
   gap: 0.5rem;
-  transition: none;
+  transition: none !important;
   flex-grow: 1;
-  text-align: center;
+  text-align: center !important;
 }
 
 .smpp-file-input-button,
 #quickSettings .full-file-input-container .smpp-text-input {
-  border: 2px solid var(--color-base02);
-  background-color: var(--color-base01);
+  border: 2px solid var(--color-base02) !important;
+  background-color: var(--color-base01) !important;
   border-radius: 1rem;
   box-shadow: 0px 2px 10px 0px var(--color-shadow);
   height: 3rem;
@@ -24,17 +24,17 @@
 
 #quickSettings .full-file-input-container .smpp-text-input:hover,
 #quickSettings .full-file-input-container .smpp-text-input:focus-visible {
-  border-color: var(--color-base03);
+  border-color: var(--color-base03) !important;
 }
 
 .enableAnimations #quickSettings .full-file-input-container {
   transition-property: opacity, filter;
-  transition: 0.3s;
+  transition: 0.3s !important;
 }
 
 .smpp-file-input-button {
-  margin-right: 0px;
-  background: var(--color-base01);
+  margin-right: 0px !important;
+  background: var(--color-base01) !important;
   opacity: 1;
   display: flex;
   width: fit-content;
@@ -49,20 +49,20 @@
   transition:
     opacity 0.3s,
     filter 0.3s,
-    border-color ease-in-out 0.3s;
+    border-color ease-in-out 0.3s !important;
 }
 
 .smpp-file-input-button:hover,
 .smpp-file-input-button:focus-visible {
-  border-color: var(--color-base03);
+  border-color: var(--color-base03) !important;
 }
 
 .smpp-file-input-button > svg {
-  stroke: var(--color-text);
+  stroke: var(--color-text) !important;
 }
 
 .smpp-link-clear-button:active {
-  scale: 0.9;
+  scale: 0.9 !important;
 }
 
 .smpp-link-clear-button {
@@ -72,7 +72,7 @@
   border: 2px solid var(--color-base03);
   height: 2rem;
   aspect-ratio: 1;
-  padding: 0;
+  padding: 0 !important;
   z-index: -10;
   pointer-events: none;
   stroke: var(--color-text);
@@ -249,13 +249,13 @@
     color-mix(in srgb, var(--color-base01) 93%, var(--color-accent) 7%) 45%,
     color-mix(in srgb, var(--color-base01) 95%, var(--color-accent) 5%) 55%,
     color-mix(in srgb, var(--color-base01) 98%, var(--color-accent) 2%) 100%
-  );
+  ) !important;
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  filter: var(--background-blur);
+  filter: var(--background-blur) !important;
   z-index: -1;
 }
 

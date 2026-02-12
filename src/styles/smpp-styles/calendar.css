@@ -22,7 +22,7 @@
   margin: 0;
   font-size: 18px;
   font-weight: 600;
-  margin-bottom: 0;
+  margin-bottom: 0 !important;
 }
 
 .calendar-prev svg,
@@ -52,7 +52,7 @@
 .enableAnimations .calendar-next {
   transition:
     background-color 0.2s,
-    scale 0.2s ease-in-out;
+    scale 0.2s ease-in-out !important;
 }
 
 .calendar-prev:hover,
