@@ -24,7 +24,7 @@ class TakenWidget extends WidgetBase {
     this.element.appendChild(this.createContent());
   }
   createContent() {
-    const foresight = 28; // dagen in de toekomst dat het zoekt voor taken
+    const foresight = 28;
     let userId = getUserId();
 
     if (DEBUG) {
