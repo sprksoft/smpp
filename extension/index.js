@@ -7634,10 +7634,9 @@ Is it scaring you off?`,
       });
     }
     async updateTitle() {
-      let theme = await getTheme(this.name);
-      this.titleElement.innerText = theme.displayName;
+      this.titleElement.innerText = this.theme.displayName;
       if (this.titleElement.innerText.length > 22) {
-        this.titleElement.innerText = theme.displayName.slice(0, 22) + "\u2026";
+        this.titleElement.innerText = this.theme.displayName.slice(0, 22) + "\u2026";
       }
     }
     async createContent() {
