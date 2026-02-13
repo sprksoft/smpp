@@ -5092,7 +5092,8 @@ Is it scaring you off?`,
         option.render();
         this.selector.style.height = this.calculateHeight(i5) + "px";
         this.selector.appendChild(option.element);
-        if (document.body.classList.contains("enableAnimations")) await delay(20);
+        if (document.body.classList.contains("enableAnimations"))
+          await delay(200 / this.themeOptions.length);
       }
     }
     async updateThemeOptions() {
@@ -7614,19 +7615,21 @@ Is it scaring you off?`,
     isCustom;
     currentCategory;
     titleElement = document.createElement("span");
-    constructor(name2, currentCategory, isFavorite, isCustom = false) {
+    theme;
+    constructor(name2, currentCategory, isFavorite, isCustom = false, theme) {
       super();
       this.name = name2;
       this.currentCategory = currentCategory;
       this.isFavorite = isFavorite;
       this.isCustom = isCustom;
+      this.theme = theme;
     }
-    async updateCSS() {
-      let theme = await getTheme(this.name);
-      Object.keys(theme.cssProperties).forEach((key) => {
+    async updateCSS(theme) {
+      this.theme = theme;
+      Object.keys(this.theme.cssProperties).forEach((key) => {
         this.element.style.setProperty(
           `${key}-local`,
-          theme.cssProperties[key]
+          this.theme.cssProperties[key]
         );
       });
     }
@@ -7641,7 +7644,7 @@ Is it scaring you off?`,
       this.element.appendChild(this.createImageContainer());
       this.element.appendChild(this.getBottomContainer());
       await this.updateTitle();
-      await this.updateCSS();
+      await this.updateCSS(this.theme);
     }
     getBottomContainer() {
       let bottomContainer = document.createElement("div");
@@ -8217,10 +8220,12 @@ Is it scaring you off?`,
         correctThemeNames2.forEach(async (themeName) => {
           if (!visibleThemeNames2.includes(themeName)) {
             let isFavorite = data2.appearance.quickSettingsThemes.includes(themeName);
-            let newTile = this.createThemeTile(
+            if (!themes2[themeName]) return;
+            let newTile = await this.createThemeTile(
               themeName,
               isFavorite,
-              Object.keys(customThemes).includes(themeName)
+              Object.keys(customThemes).includes(themeName),
+              themes2[themeName]
             );
             let createThemeButton = this.content.querySelector(
               ".create-theme-button"
@@ -8260,7 +8265,7 @@ Is it scaring you off?`,
       let updateLocalCSS = async () => {
         this.currentTiles.forEach((tile) => {
           if (tile.name == currentThemeName) {
-            tile.updateCSS();
+            tile.updateCSS(tile.theme);
             tile.updateTitle();
           }
         });
@@ -8291,13 +8296,7 @@ Is it scaring you off?`,
     }
     async renderTiles(tiles) {
       function getTileDelay(number) {
-        if (number < 8) {
-          return 20;
-        } else if (number < 12) {
-          return 15;
-        } else {
-          return 7;
-        }
+        return 200 / number;
       }
       this.content.style.height = this.calculateContentHeight(tiles.length) + "px";
       const delayAmount = getTileDelay(tiles.length);
@@ -8305,8 +8304,8 @@ Is it scaring you off?`,
         const tile = tiles[i5 - 1];
         if (!tile) break;
         await tile.render();
-        await tile.updateImage(currentThemeName, true);
         this.content.appendChild(tile.element);
+        tile.updateImage(currentThemeName, true);
         if (document.body.classList.contains("enableAnimations"))
           await delay(delayAmount);
       }
@@ -8344,8 +8343,14 @@ Is it scaring you off?`,
     updateContentHeight() {
       this.content.style.height = String(this.calculateContentHeight(this.currentTiles.length)) + "px";
     }
-    createThemeTile(name2, isFavorite, isCustom) {
-      let tile = new ThemeTile2(name2, this.currentCategory, isFavorite, isCustom);
+    async createThemeTile(name2, isFavorite, isCustom, theme) {
+      let tile = new ThemeTile2(
+        name2,
+        this.currentCategory,
+        isFavorite,
+        isCustom,
+        theme
+      );
       tile.element.dataset["name"] = name2;
       tile.onDuplicate = async (newThemeName) => {
         if (isCustom) {
@@ -8379,11 +8384,15 @@ Is it scaring you off?`,
       let data2 = await browser.runtime.sendMessage({
         action: "getSettingsData"
       });
-      let tiles = Object.keys(themes2).map((name2) => {
-        let isFavorite = data2.appearance.quickSettingsThemes.includes(name2);
-        let isCustom = Object.keys(customThemes).includes(name2);
-        return this.createThemeTile(name2, isFavorite, isCustom);
-      });
+      let tiles = await Promise.all(
+        Object.keys(themes2).map(async (name2) => {
+          let isFavorite = data2.appearance.quickSettingsThemes.includes(name2);
+          let isCustom = Object.keys(customThemes).includes(name2);
+          if (themes2[name2])
+            return this.createThemeTile(name2, isFavorite, isCustom, themes2[name2]);
+          return;
+        })
+      );
       if (this.currentCategory == "custom") {
         tiles.push(new AddCustomTheme());
       }

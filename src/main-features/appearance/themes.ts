@@ -428,26 +428,29 @@ export class ThemeTile extends Tile {
   isCustom: boolean;
   currentCategory: string;
   titleElement = document.createElement("span");
+  theme: Theme;
 
   constructor(
     name: string,
     currentCategory: string,
     isFavorite: boolean,
-    isCustom = false
+    isCustom = false,
+    theme: Theme
   ) {
     super();
     this.name = name;
     this.currentCategory = currentCategory;
     this.isFavorite = isFavorite;
     this.isCustom = isCustom;
+    this.theme = theme;
   }
 
-  async updateCSS() {
-    let theme = await getTheme(this.name);
-    Object.keys(theme.cssProperties).forEach((key) => {
+  async updateCSS(theme: Theme) {
+    this.theme = theme;
+    Object.keys(this.theme.cssProperties).forEach((key) => {
       this.element.style.setProperty(
         `${key}-local`,
-        theme.cssProperties[key] as string
+        this.theme.cssProperties[key] as string
       );
     });
   }
@@ -464,7 +467,7 @@ export class ThemeTile extends Tile {
     this.element.appendChild(this.createImageContainer());
     this.element.appendChild(this.getBottomContainer());
     await this.updateTitle();
-    await this.updateCSS();
+    await this.updateCSS(this.theme);
   }
 
   getBottomContainer() {
@@ -1155,11 +1158,14 @@ export class ThemeSelector {
         if (!visibleThemeNames.includes(themeName)) {
           let isFavorite =
             data.appearance.quickSettingsThemes.includes(themeName);
-          let newTile = this.createThemeTile(
+          if (!themes[themeName]) return;
+          let newTile = await this.createThemeTile(
             themeName,
             isFavorite,
-            Object.keys(customThemes).includes(themeName)
+            Object.keys(customThemes).includes(themeName),
+            themes[themeName]
           );
+
           let createThemeButton = this.content.querySelector(
             ".create-theme-button"
           );
@@ -1203,7 +1209,7 @@ export class ThemeSelector {
     let updateLocalCSS = async () => {
       this.currentTiles.forEach((tile: ThemeTile) => {
         if (tile.name == currentThemeName) {
-          tile.updateCSS();
+          tile.updateCSS(tile.theme);
           tile.updateTitle();
         }
       });
@@ -1239,24 +1245,20 @@ export class ThemeSelector {
 
   async renderTiles(tiles: Tiles) {
     function getTileDelay(number: number) {
-      if (number < 8) {
-        return 20;
-      } else if (number < 12) {
-        return 15;
-      } else {
-        return 7;
-      }
+      return 200 / number;
     }
+
     this.content.style.height =
       this.calculateContentHeight(tiles.length) + "px";
     const delayAmount = getTileDelay(tiles.length);
+
     for (let i = 1; i <= tiles.length; i++) {
       const tile = tiles[i - 1];
       if (!tile) break;
-      await tile.render();
-      await tile.updateImage(currentThemeName, true);
 
+      await tile.render();
       this.content.appendChild(tile.element);
+      tile.updateImage(currentThemeName, true);
 
       if (document.body.classList.contains("enableAnimations"))
         await delay(delayAmount);
@@ -1304,8 +1306,19 @@ export class ThemeSelector {
       String(this.calculateContentHeight(this.currentTiles.length)) + "px";
   }
 
-  createThemeTile(name: string, isFavorite: boolean, isCustom: boolean) {
-    let tile = new ThemeTile(name, this.currentCategory, isFavorite, isCustom);
+  async createThemeTile(
+    name: string,
+    isFavorite: boolean,
+    isCustom: boolean,
+    theme: Theme
+  ) {
+    let tile = new ThemeTile(
+      name,
+      this.currentCategory,
+      isFavorite,
+      isCustom,
+      theme
+    );
     tile.element.dataset["name"] = name;
 
     tile.onDuplicate = async (newThemeName: string) => {
@@ -1347,11 +1360,15 @@ export class ThemeSelector {
       action: "getSettingsData",
     })) as Settings;
 
-    let tiles = Object.keys(themes).map((name) => {
-      let isFavorite = data.appearance.quickSettingsThemes.includes(name);
-      let isCustom = Object.keys(customThemes).includes(name);
-      return this.createThemeTile(name, isFavorite, isCustom);
-    }) as Tiles;
+    let tiles = (await Promise.all(
+      Object.keys(themes).map(async (name) => {
+        let isFavorite = data.appearance.quickSettingsThemes.includes(name);
+        let isCustom = Object.keys(customThemes).includes(name);
+        if (themes[name])
+          return this.createThemeTile(name, isFavorite, isCustom, themes[name]);
+        return;
+      })
+    )) as Tiles;
     if (this.currentCategory == "custom") {
       tiles.push(new AddCustomTheme());
     }

@@ -2940,7 +2940,7 @@ button .bottom-container-button:active {
 @keyframes theme-tile {
   0% {
     opacity: 0.2;
-    transform: translateX(-5%) translateY(-20%) scale(0.7);
+    transform: translateX(-12.5%) translateY(-25%) scale(0.7);
   }
   100% {
     opacity: 1;
@@ -3041,7 +3041,7 @@ button .bottom-container-button:active {
   align-content: start;
 }
 .enableAnimations .theme-tiles {
-  transition: height 0.3s cubic-bezier(0.33, 1.31, 0.65, 0.98) !important;
+  transition: height 0.5s cubic-bezier(0.33, 1.31, 0.65, 0.98) !important;
 }
 .theme-top-container {
   display: flex;
@@ -6062,14 +6062,14 @@ body form.form .float-label .float-label__input {
   border-color: var(--color-base03) !important;
 }
 .login-app .smscButton.blue:not(#pushWizardPopupConfirmButton) {
-  border-radius: 9999px !important;
+  border-radius: 1000px !important;
   width: 90% !important;
   height: 40px !important;
   color: var(--color-text) !important;
   border-color: var(--color-base03) !important;
   background-color: var(--color-base02) !important;
   box-shadow: 0px 0px 10px -2px var(--color-shadow) !important;
-  font-weight: 450;
+  font-weight: 500 !important;
   justify-self: center;
 }
 .enableAnimations .login-app .smscButton.blue:not(#pushWizardPopupConfirmButton) {
@@ -6079,16 +6079,17 @@ body form.form .float-label .float-label__input {
     box-shadow,
     width,
     font-weigt,
-    margin-left;
+    margin-left,
+    scale;
   transition: 0.3s !important;
 }
 .login-app .smscButton.blue:hover:not(#pushWizardPopupConfirmButton:hover) {
   background-color: var(--color-base03) !important;
   border-color: var(--color-accent) !important;
   box-shadow: 0px 0px 5px 0px var(--color-shadow) !important;
-  width: 100% !important;
   font-weight: 700 !important;
   margin-left: 0% !important;
+  scale: 1.05;
 }
 .modern-ui .float-label__input:focus + label > span,
 .modern-ui .float-label__input:valid + label > span {

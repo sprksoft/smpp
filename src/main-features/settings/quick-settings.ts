@@ -142,7 +142,8 @@ class CompactThemeSelector {
       this.selector.style.height = this.calculateHeight(i) + "px";
       this.selector.appendChild(option.element);
 
-      if (document.body.classList.contains("enableAnimations")) await delay(20);
+      if (document.body.classList.contains("enableAnimations"))
+        await delay(200 / this.themeOptions.length);
     }
   }
 
