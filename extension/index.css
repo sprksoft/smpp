@@ -5615,6 +5615,7 @@ button.button-ZR3rz.filterButton-KvpZ5.bp-c-combo-hover-warning--300 {
 .unpinnedTodoList-hj1eq {
   margin-left: 0.75rem !important;
   margin-right: 0.75rem !important;
+  margin-bottom: 0;
 }
 .todoRow-sOF6J,
 .dateRow-x9CuC {
@@ -7660,6 +7661,7 @@ ul.js-notifs-list.notifs__list {
 .todoColumnContent-vMdwk {
   background-color: var(--color-base00) !important;
   height: fit-content !important;
+  max-height: 100% !important;
   border-radius: 2rem !important;
   margin-right: 1.5rem !important;
   padding: 1.5rem 0.25rem !important;
@@ -8571,6 +8573,10 @@ button.filter-btn.c-red-combo-hover--100:hover {
 }
 .selectAll-nHS8M .label-tLqW4 {
   color: var(--color-accent) !important;
+}
+.divider-tpxhH {
+  width: unset !important;
+  border-bottom: 1px solid var(--color-base02) !important;
 }
 
 /* src/styles/fixes/results.css */
