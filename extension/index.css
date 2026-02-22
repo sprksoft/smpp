@@ -4189,9 +4189,6 @@ smsc-inlineeditor.smsc-table__cell--inlineeditor {
   border: 0px solid var(--color-accent) !important;
   box-shadow: none;
 }
-#smscMainBlockContainer {
-  height: fit-content !important;
-}
 .infoBlock_message,
 .infoBlock_eval,
 .infoBlock_planner,
@@ -4222,9 +4219,6 @@ smsc-inlineeditor.smsc-table__cell--inlineeditor {
 }
 .smscBlockContainer_top {
   margin: 0px !important;
-}
-.smscBlockContainer_top:has(.cf, .smscBlockContainer_mainContentBlock) {
-  margin-top: 5rem !important;
 }
 .enableAnimations .smscAdminNav_body_linkdivTitle:hover {
   transition: ease-in !important;
@@ -4847,6 +4841,7 @@ input[name=email] {
 .nr_recipients_bubble {
   display: none !important;
 }
+.input-FZRHX,
 label.checkbox input[type=checkbox],
 div.smscCheckbox input[type=checkbox],
 .mobile-style input[type=checkbox],
@@ -4869,6 +4864,7 @@ smsc-listview .checkbox-button {
   background-repeat: no-repeat !important;
   background-size: cover !important;
 }
+.input-FZRHX:checked,
 .moveToPostbox__item__icon,
 label.checkbox input[type=checkbox]:checked,
 div.smscCheckbox input[type=checkbox]:checked,
@@ -5584,7 +5580,7 @@ div[style*=background]:not(.manual_widgettitle):not(.base-window) {
 }
 .glass .bubble-s87kI {
   background-color: var(--darken-background) !important;
-  backdrop-filter: var(--small-blur) !important;
+  backdrop-filter: var(--medium-blur) !important;
 }
 .dropdownMenuItem-Vszox[data-selected=true] {
   background-color: var(--color-base03) !important;
@@ -5595,6 +5591,46 @@ div[style*=background]:not(.manual_widgettitle):not(.base-window) {
 }
 .dropdownMenuItem-Vszox[data-selected=false]:hover {
   background-color: var(--color-base02) !important;
+}
+.todoRow-sOF6J .metadata-erpzx {
+  color: var(--color-text) !important;
+  opacity: 0.7 !important;
+}
+.btn.btn:active:not(.btn--nav, .btn--close) {
+  box-shadow: none !important;
+}
+.pinnedTodoListHeader-L0Pj5 .graphic-g55I1.small-Du6aA,
+button[aria-label=Vastpinnen] {
+  color: var(--color-blue) !important;
+}
+button.button-ZR3rz.filterButton-KvpZ5.bp-c-combo-hover-warning--300 {
+  background: var(--color-base02) !important;
+  border: 2px solid var(--color-accent);
+  border-radius: 0.75rem !important;
+}
+.button-ZR3rz:active:not(:disabled) {
+  box-shadow: none !important;
+}
+.pinnedTodoList-lx5BV,
+.unpinnedTodoList-hj1eq {
+  margin-left: 0.75rem !important;
+  margin-right: 0.75rem !important;
+}
+.todoRow-sOF6J,
+.dateRow-x9CuC {
+  border-radius: 1rem !important;
+  padding: 0.25rem !important;
+  margin-top: 1rem !important;
+}
+.dateRow-x9CuC {
+  margin-top: 0 !important;
+  padding-top: 1.25rem !important;
+}
+.todoRow-sOF6J:hover {
+  background: var(--color-base01) !important;
+}
+.todoRow-sOF6J .iconAbbreviationWrapper-Mdj2w {
+  border-radius: 0.75rem !important;
 }
 div:has(.dropdownMenu-NRL0x) {
   top: 10px !important;
@@ -5758,7 +5794,6 @@ mark {
   stroke: var(--color-red) !important;
 }
 .smscMainBlockContainer .smscBlockContainer_top {
-  width: 99rem !important;
   margin-left: 1rem !important;
 }
 body.modern-ui .homepage__block__content {
@@ -5958,6 +5993,19 @@ div#smscMain:has(.live__quick-nav) {
 .smpp-news-container img {
   width: auto !important;
   max-height: 500px !important;
+}
+.input-hhGw_:checked ~ .slider-mZgkK {
+  background-color: var(--color-base03) !important;
+}
+.input-hhGw_:checked ~ .slider-mZgkK:after {
+  background-color: var(--color-accent) !important;
+}
+.slider-mZgkK:after {
+  background-color: var(--color-base01) !important;
+}
+.slider-mZgkK {
+  background-color: var(--color-base02) !important;
+  border-color: transparent !important;
 }
 
 /* src/styles/fixes/login.css */
@@ -6331,7 +6379,6 @@ body.modern-ui .homepage__block {
   height: 100% !important;
   max-height: 100% !important;
   position: relative !important;
-  overflow: auto !important;
   display: flex !important;
   flex-direction: row !important;
   justify-content: center !important;
@@ -6349,23 +6396,22 @@ body.modern-ui .homepage__block {
   display: flex !important;
   flex-direction: row !important;
   gap: 10px !important;
-  justify-content: flex-start;
+  justify-content: space-between !important;
+}
+.smscBlockContainer_mainContentBlock::after,
+.smscBlockContainer_mainContentBlock::before {
+  display: none !important;
 }
 .smscBlockContainer_left {
   position: relative !important;
-  flex-grow: 0.5 !important;
-  height: 100% !important;
+  max-height: 100% !important;
   margin-left: 0px !important;
 }
 .smscBlockContainer_right {
   position: relative !important;
-  flex-grow: 0.5 !important;
-  height: 100% !important;
+  max-height: 100% !important;
   margin-right: 0px !important;
   width: initial !important;
-}
-#smscMain > * {
-  overflow: visible !important;
 }
 .smscleftnavcontainer,
 .composeUsers {
@@ -6789,8 +6835,6 @@ div#submitbtn {
   flex-direction: column !important;
   gap: 10px !important;
   padding: 10px !important;
-  margin: 20px !important;
-  min-height: auto !important;
 }
 .smscSettings {
   border: none !important;
@@ -7584,21 +7628,52 @@ ul.js-notifs-list.notifs__list {
   background-color: var(--color-base02) !important;
   border-radius: 7px !important;
 }
-.todo-column [listview] .todo-column__row:hover .todo-column__actions-cell,
-.todo-column [listview] .todo-column__row--resolved:hover .todo-column__actions-cell {
+.iconButtonBar-yvqd2.dateRowActionButtonbar-ii94H,
+.iconButtonBar-yvqd2.todoRowActionButtonbar-iegvK {
   background-color: var(--color-base02) !important;
   transition: none !important;
   display: flex !important;
   flex-direction: row !important;
-  height: 2.5rem !important;
-  top: 0.5rem !important;
-  right: 0.5rem !important;
   border-radius: 1rem !important;
   padding: 0.25rem !important;
   box-shadow: 0px 2px 10px 0px var(--color-shadow) !important;
+  top: 0.25rem !important;
+  right: 0.25rem !important;
 }
 [listview] .listview__action-btn {
   height: 100% !important;
+}
+.iconButton-D88Yh {
+  border-radius: 0.75rem !important;
+}
+.iconButton-D88Yh:hover {
+  background-color: var(--color-base03) !important;
+}
+.todoColumn-SiOZY {
+  height: fit-content !important;
+  display: block !important;
+}
+.updateRangeButton-tKypS {
+  margin: 0 !important;
+  margin-left: 1.25rem !important;
+}
+.todoColumnContent-vMdwk {
+  background-color: var(--color-base00) !important;
+  height: fit-content !important;
+  border-radius: 2rem !important;
+  margin-right: 1.5rem !important;
+  padding: 1.5rem 0.25rem !important;
+  gap: 0.75rem !important;
+}
+.glass .todoColumnContent-vMdwk {
+  background-color: var(--darken-background) !important;
+  backdrop-filter: var(--medium-blur) !important;
+}
+.dropdownMenuItem-Vszox[data-selected=true] {
+  border-radius: 0.75rem !important;
+}
+.today-and-next-days__bubble .dropdown-menu {
+  gap: 2px !important;
 }
 .todo-column [listview] .todo-column__row:hover .todo-column__date-cell + .todo-column__actions-cell {
   top: 0.25rem !important;
@@ -7799,8 +7874,9 @@ hr.separator.todo-column__pinned__seperator {
 .side-panel__close,
 .smscDialog_header_close {
   border: 2px solid var(--color-base02) !important;
-  border-radius: 5px !important;
-  margin: 5px !important;
+  background-color: var(--color-base01) !important;
+  border-radius: 0.75rem !important;
+  margin: 0.5rem !important;
 }
 .close-btn:hover,
 .close-btn:hover,
@@ -8188,9 +8264,6 @@ h3.card-block__title.fluid-ui-heading.fluid-ui-heading--3 {
   color: var(--color-text) !important;
   opacity: 0.8 !important;
 }
-.dialog__view {
-  border-radius: 25px !important;
-}
 .month-view .element:not(.state--hovered):not(.state--dragging):not(.state--resizing) .element__time-label {
   color: var(--color-text) !important;
   opacity: 0.8 !important;
@@ -8210,10 +8283,6 @@ h3.card-block__title.fluid-ui-heading.fluid-ui-heading--3 {
 }
 .splitdetail.splitdetail-dialog.js-splitdetail {
   gap: 6px !important;
-}
-.splitdetail-top-btn {
-  background-color: var(--color-base01) !important;
-  border-radius: 0.75rem !important;
 }
 .splitdetail-top-btn > svg {
   width: 1.2rem !important;
@@ -8500,6 +8569,9 @@ button.filter-btn.c-red-combo-hover--100:hover {
   background-color: var(--color-base02) !important;
   border: 2px solid var(--color-base03) !important;
 }
+.selectAll-nHS8M .label-tLqW4 {
+  color: var(--color-accent) !important;
+}
 
 /* src/styles/fixes/results.css */
 #smscMain div.wide-toolbar.js-wide-toolbar {
@@ -8709,10 +8781,7 @@ button.goals-filter__item.selected {
 }
 .side-panel__content .side-panel__content__title__name {
   background: var(--color-base01) !important;
-  width: fit-content !important;
   padding: 0rem 1rem !important;
-  max-width: 100% !important;
-  flex: unset !important;
   border-radius: 1.5rem !important;
 }
 .goals-filter__item {
@@ -8960,6 +9029,19 @@ button.button-ZR3rz.bp-c-combo-hover-plain-outline--300,
 .searchInput-eoZIF.textInput-ACLPH {
   background-color: var(--color-base01) !important;
   border: 2px solid var(--color-base03) !important;
+  border-radius: 0.75rem !important;
+}
+.divider-uPhrv {
+  border-bottom: 1px solid var(--color-base02) !important;
+}
+.bullet-aMZIT,
+.abbreviation-P7nf7 {
+  color: var(--color-text) !important;
+  opacity: 0.7 !important;
+}
+.todoColumnHeader-j1QpK {
+  box-shadow: none !important;
+  gap: 0.5rem !important;
 }
 .input-arO6v {
   background-color: var(--color-base01) !important;

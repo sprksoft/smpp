@@ -183,7 +183,6 @@ body.modern-ui .homepage__block {
   height: 100% !important;
   max-height: 100% !important;
   position: relative !important;
-  overflow: auto !important;
   display: flex !important;
   flex-direction: row !important;
   justify-content: center !important;
@@ -205,27 +204,26 @@ body.modern-ui .homepage__block {
   display: flex !important;
   flex-direction: row !important;
   gap: 10px !important;
-  justify-content: flex-start;
+  justify-content: space-between !important;
   /* Ensures no extra space at the edges */
+}
+
+.smscBlockContainer_mainContentBlock::after,
+.smscBlockContainer_mainContentBlock::before {
+  display: none !important;
 }
 
 .smscBlockContainer_left {
   position: relative !important;
-  flex-grow: 0.5 !important;
-  height: 100% !important;
+  max-height: 100% !important;
   margin-left: 0px !important;
 }
 
 .smscBlockContainer_right {
   position: relative !important;
-  flex-grow: 0.5 !important;
-  height: 100% !important;
+  max-height: 100% !important;
   margin-right: 0px !important;
   width: initial !important;
-}
-
-#smscMain > * {
-  overflow: visible !important;
 }
 
 .smscleftnavcontainer,
@@ -734,8 +732,6 @@ div#submitbtn {
   flex-direction: column !important;
   gap: 10px !important;
   padding: 10px !important;
-  margin: 20px !important;
-  min-height: auto !important;
 }
 
 .smscSettings {

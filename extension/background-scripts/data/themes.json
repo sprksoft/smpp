@@ -447,5 +447,19 @@
       "--darken-background": "#0b080f4d"
     },
     "displayName": "Space"
+  },
+  "night": {
+    "cssProperties": {
+      "--color-accent": "#be6237",
+      "--color-base00": "#050709",
+      "--color-base01": "#192228",
+      "--color-base02": "#2c3d48",
+      "--color-base03": "#3f5868",
+      "--color-homepage-sidebars-bg": "#0204041a",
+      "--color-splashtext": "#c2e1e8",
+      "--color-text": "#c2e1e8",
+      "--darken-background": "#0204044d"
+    },
+    "displayName": "Starful Night"
   }
 }

@@ -8262,8 +8262,9 @@ Is it scaring you off?`,
         });
       };
       let updateLocalCSS = async () => {
-        this.currentTiles.forEach((tile) => {
+        this.currentTiles.forEach(async (tile) => {
           if (tile.name == currentThemeName) {
+            tile.theme = await getTheme(currentThemeName);
             tile.updateCSS(tile.theme);
             tile.updateTitle();
           }
@@ -8907,10 +8908,10 @@ Is it scaring you off?`,
     }
     onClosed(realUserIntent) {
       document.body.removeChild(this.wrapper);
-      if (!realUserIntent) return;
       settingsWindow.themeSelector.updateSelectorContent();
       settingsWindow.loadPage();
       loadQuickSettings();
+      if (!realUserIntent) return;
       openSettingsWindow(null);
     }
     async onRemoveTheme() {

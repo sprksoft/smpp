@@ -549,10 +549,6 @@ smsc-inlineeditor.smsc-table__cell--inlineeditor {
   box-shadow: none;
 }
 
-#smscMainBlockContainer {
-  height: fit-content !important;
-}
-
 .infoBlock_message,
 .infoBlock_eval,
 .infoBlock_planner,
@@ -587,9 +583,6 @@ smsc-inlineeditor.smsc-table__cell--inlineeditor {
 
 .smscBlockContainer_top {
   margin: 0px !important;
-}
-.smscBlockContainer_top:has(.cf, .smscBlockContainer_mainContentBlock) {
-  margin-top: 5rem !important;
 }
 
 .enableAnimations .smscAdminNav_body_linkdivTitle:hover {
@@ -1359,7 +1352,7 @@ input[name="email"] {
 .nr_recipients_bubble {
   display: none !important;
 }
-
+.input-FZRHX,
 label.checkbox input[type="checkbox"],
 div.smscCheckbox input[type="checkbox"],
 .mobile-style input[type="checkbox"],
@@ -1385,7 +1378,7 @@ smsc-listview .checkbox-button {
   background-repeat: no-repeat !important;
   background-size: cover !important;
 }
-
+.input-FZRHX:checked,
 .moveToPostbox__item__icon,
 label.checkbox input[type="checkbox"]:checked,
 div.smscCheckbox input[type="checkbox"]:checked,
@@ -2228,7 +2221,7 @@ div[style*="background"]:not(.manual_widgettitle):not(.base-window) {
 
 .glass .bubble-s87kI {
   background-color: var(--darken-background) !important;
-  backdrop-filter: var(--small-blur) !important;
+  backdrop-filter: var(--medium-blur) !important;
 }
 
 .dropdownMenuItem-Vszox[data-selected="true"] {
@@ -2242,6 +2235,53 @@ div[style*="background"]:not(.manual_widgettitle):not(.base-window) {
 
 .dropdownMenuItem-Vszox[data-selected="false"]:hover {
   background-color: var(--color-base02) !important;
+}
+
+.todoRow-sOF6J .metadata-erpzx {
+  color: var(--color-text) !important;
+  opacity: 0.7 !important;
+}
+
+.btn.btn:active:not(.btn--nav, .btn--close) {
+  box-shadow: none !important;
+}
+.pinnedTodoListHeader-L0Pj5 .graphic-g55I1.small-Du6aA,
+button[aria-label="Vastpinnen"] {
+  color: var(--color-blue) !important;
+}
+
+button.button-ZR3rz.filterButton-KvpZ5.bp-c-combo-hover-warning--300 {
+  background: var(--color-base02) !important;
+  border: 2px solid var(--color-accent);
+  border-radius: 0.75rem !important;
+}
+
+.button-ZR3rz:active:not(:disabled) {
+  box-shadow: none !important;
+}
+
+.pinnedTodoList-lx5BV,
+.unpinnedTodoList-hj1eq {
+  margin-left: 0.75rem !important;
+  margin-right: 0.75rem !important;
+}
+
+.todoRow-sOF6J,
+.dateRow-x9CuC {
+  border-radius: 1rem !important;
+  padding: 0.25rem !important;
+  margin-top: 1rem !important;
+}
+.dateRow-x9CuC {
+  margin-top: 0 !important;
+  padding-top: 1.25rem !important;
+}
+.todoRow-sOF6J:hover {
+  background: var(--color-base01) !important;
+}
+
+.todoRow-sOF6J .iconAbbreviationWrapper-Mdj2w {
+  border-radius: 0.75rem !important;
 }
 
 div:has(.dropdownMenu-NRL0x) {
@@ -2438,7 +2478,6 @@ mark {
 }
 
 .smscMainBlockContainer .smscBlockContainer_top {
-  width: 99rem !important;
   margin-left: 1rem !important;
 }
 
@@ -2671,4 +2710,18 @@ div#smscMain:has(.live__quick-nav) {
 .smpp-news-container img {
   width: auto !important;
   max-height: 500px !important;
+}
+
+.input-hhGw_:checked ~ .slider-mZgkK {
+  background-color: var(--color-base03) !important;
+}
+.input-hhGw_:checked ~ .slider-mZgkK:after {
+  background-color: var(--color-accent) !important;
+}
+.slider-mZgkK:after {
+  background-color: var(--color-base01) !important;
+}
+.slider-mZgkK {
+  background-color: var(--color-base02) !important;
+  border-color: transparent !important;
 }

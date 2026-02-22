@@ -93,26 +93,58 @@
   background-color: var(--color-base02) !important;
   border-radius: 7px !important;
 }
-
-.todo-column [listview] .todo-column__row:hover .todo-column__actions-cell,
-.todo-column
-  [listview]
-  .todo-column__row--resolved:hover
-  .todo-column__actions-cell {
+.iconButtonBar-yvqd2.dateRowActionButtonbar-ii94H,
+.iconButtonBar-yvqd2.todoRowActionButtonbar-iegvK {
   background-color: var(--color-base02) !important;
   transition: none !important;
   display: flex !important;
   flex-direction: row !important;
-  height: 2.5rem !important;
-  top: 0.5rem !important;
-  right: 0.5rem !important;
   border-radius: 1rem !important;
   padding: 0.25rem !important;
   box-shadow: 0px 2px 10px 0px var(--color-shadow) !important;
+  top: 0.25rem !important;
+  right: 0.25rem !important;
 }
 
 [listview] .listview__action-btn {
   height: 100% !important;
+}
+.iconButton-D88Yh {
+  border-radius: 0.75rem !important;
+}
+.iconButton-D88Yh:hover {
+  background-color: var(--color-base03) !important;
+}
+
+.todoColumn-SiOZY {
+  height: fit-content !important;
+  display: block !important;
+}
+
+.updateRangeButton-tKypS {
+  margin: 0 !important;
+  margin-left: 1.25rem !important;
+}
+
+.todoColumnContent-vMdwk {
+  background-color: var(--color-base00) !important;
+  height: fit-content !important;
+  border-radius: 2rem !important;
+  margin-right: 1.5rem !important;
+  padding: 1.5rem 0.25rem !important;
+  gap: 0.75rem !important;
+}
+.glass .todoColumnContent-vMdwk {
+  background-color: var(--darken-background) !important;
+  backdrop-filter: var(--medium-blur) !important;
+}
+
+.dropdownMenuItem-Vszox[data-selected="true"] {
+  border-radius: 0.75rem !important;
+}
+
+.today-and-next-days__bubble .dropdown-menu {
+  gap: 2px !important;
 }
 
 .todo-column
@@ -360,8 +392,9 @@ hr.separator.todo-column__pinned__seperator {
 .side-panel__close,
 .smscDialog_header_close {
   border: 2px solid var(--color-base02) !important;
-  border-radius: 5px !important;
-  margin: 5px !important;
+  background-color: var(--color-base01) !important;
+  border-radius: 0.75rem !important;
+  margin: 0.5rem !important;
 }
 
 .close-btn:hover,
@@ -851,10 +884,6 @@ h3.card-block__title.fluid-ui-heading.fluid-ui-heading--3 {
   opacity: 0.8 !important;
 }
 
-.dialog__view {
-  border-radius: 25px !important;
-}
-
 .month-view
   .element:not(.state--hovered):not(.state--dragging):not(.state--resizing)
   .element__time-label {
@@ -881,11 +910,6 @@ h3.card-block__title.fluid-ui-heading.fluid-ui-heading--3 {
 
 .splitdetail.splitdetail-dialog.js-splitdetail {
   gap: 6px !important;
-}
-
-.splitdetail-top-btn {
-  background-color: var(--color-base01) !important;
-  border-radius: 0.75rem !important;
 }
 
 .splitdetail-top-btn > svg {
@@ -1248,4 +1272,8 @@ button.filter-btn.c-red-combo-hover--100:hover {
 .tileItem-ap6ee {
   background-color: var(--color-base02) !important;
   border: 2px solid var(--color-base03) !important;
+}
+
+.selectAll-nHS8M .label-tLqW4 {
+  color: var(--color-accent) !important;
 }

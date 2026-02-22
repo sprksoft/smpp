@@ -1206,8 +1206,9 @@ export class ThemeSelector {
     };
 
     let updateLocalCSS = async () => {
-      this.currentTiles.forEach((tile: ThemeTile) => {
+      this.currentTiles.forEach(async (tile: ThemeTile) => {
         if (tile.name == currentThemeName) {
+          tile.theme = await getTheme(currentThemeName);
           tile.updateCSS(tile.theme);
           tile.updateTitle();
         }
@@ -1998,10 +1999,10 @@ export class CustomThemeCreator extends Dialog {
 
   override onClosed(realUserIntent: boolean): void {
     document.body.removeChild(this.wrapper);
-    if (!realUserIntent) return;
     settingsWindow.themeSelector.updateSelectorContent();
     settingsWindow.loadPage();
     loadQuickSettings();
+    if (!realUserIntent) return;
     openSettingsWindow(null);
   }
 

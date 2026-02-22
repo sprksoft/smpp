@@ -249,10 +249,7 @@ button.goals-filter__item.selected {
 
 .side-panel__content .side-panel__content__title__name {
   background: var(--color-base01) !important;
-  width: fit-content !important;
   padding: 0rem 1rem !important;
-  max-width: 100% !important;
-  flex: unset !important;
   border-radius: 1.5rem !important;
 }
 
@@ -566,6 +563,22 @@ button.button-ZR3rz.bp-c-combo-hover-plain-outline--300,
 .searchInput-eoZIF.textInput-ACLPH {
   background-color: var(--color-base01) !important;
   border: 2px solid var(--color-base03) !important;
+  border-radius: 0.75rem !important;
+}
+
+.divider-uPhrv {
+  border-bottom: 1px solid var(--color-base02) !important;
+}
+
+.bullet-aMZIT,
+.abbreviation-P7nf7 {
+  color: var(--color-text) !important;
+  opacity: 0.7 !important;
+}
+
+.todoColumnHeader-j1QpK {
+  box-shadow: none !important;
+  gap: 0.5rem !important;
 }
 
 .input-arO6v {
