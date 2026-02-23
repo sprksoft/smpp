@@ -221,9 +221,7 @@ body.modern-ui .homepage__block {
 
 .smscBlockContainer_right {
   position: relative !important;
-  max-height: 100% !important;
   margin-right: 0px !important;
-  width: initial !important;
 }
 
 .smscleftnavcontainer,
