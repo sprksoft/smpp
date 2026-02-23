@@ -461,5 +461,19 @@
       "--darken-background": "#0204044d"
     },
     "displayName": "Starful Night"
+  },
+  "lake": {
+    "cssProperties": {
+      "--color-accent": "#b57e4a",
+      "--color-base00": "#dacdb8",
+      "--color-base01": "#d1c1a8",
+      "--color-base02": "#c8b597",
+      "--color-base03": "#c29f65",
+      "--color-homepage-sidebars-bg": "#d7ccbd1a",
+      "--color-splashtext": "#4d3c31",
+      "--color-text": "#4d3c31",
+      "--darken-background": "#d7ccbd66"
+    },
+    "displayName": "Moody Lake"
   }
 }
