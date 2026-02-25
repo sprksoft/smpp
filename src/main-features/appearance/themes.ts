@@ -847,9 +847,13 @@ export class ThemeTile extends Tile {
       name: this.name,
     });
 
-    if (resp.error) {
-      console.error("Failed to share theme", resp.error);
-      linkOutput.innerText = "Failed to share theme";
+    if (resp.error || resp.humanError) {
+      let humanError = "Failed to share theme";
+      if (resp.humanError) {
+        humanError = resp.humanError;
+      }
+      console.error("Failed to share theme", resp.error, resp.humanError);
+      linkOutput.innerText = humanError;
       shareDialog.element.classList.add("error-theme-sharing");
       copyToClipboardButton.innerHTML = errorSvg;
       copyToClipboardButton.style.pointerEvents = "none";

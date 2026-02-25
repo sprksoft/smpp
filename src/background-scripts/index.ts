@@ -27,10 +27,12 @@ import {
   purgeThemeShareCache,
 } from "./themes.js";
 
-browser.runtime.onMessage.addListener((message: any, _sender: any, sendResponse: ((resp: any) => void)) => {
-  handleMessage(message, sendResponse);
-  return true;
-});
+browser.runtime.onMessage.addListener(
+  (message: any, _sender: any, sendResponse: (resp: any) => void) => {
+    handleMessage(message, sendResponse);
+    return true;
+  }
+);
 
 async function handleMessage(message: any, sendResponse: (resp: any) => void) {
   try {
@@ -50,8 +52,10 @@ async function handleMessage(message: any, sendResponse: (resp: any) => void) {
       );
       sendResponse(themes);
       console.log(
-        `Themes for categories: ${message.categories
-        } sent, including hidden themes: ${message.includeHidden ? true : false
+        `Themes for categories: ${
+          message.categories
+        } sent, including hidden themes: ${
+          message.includeHidden ? true : false
         }`
       );
       console.log(themes);
@@ -99,16 +103,20 @@ async function handleMessage(message: any, sendResponse: (resp: any) => void) {
     if (message.action === "getSharedTheme") {
       const theme = await getSharedTheme(message.shareId);
       console.log("sending", theme);
-      sendResponse({ theme: theme })
+      sendResponse({ theme: theme });
     }
     if (message.action === "installTheme") {
       await installTheme(message.shareId);
       sendResponse({ success: true });
     }
     if (message.action === "shareTheme") {
-      const url = await shareTheme(message.name);
-      console.log(`Theme ${message.name} was shared (url: ${url})`);
-      sendResponse({ shareUrl: url })
+      const output = await shareTheme(message.name);
+      if (typeof output == "string") {
+        console.log(`Theme ${message.name} was shared (url: ${output})`);
+        sendResponse({ shareUrl: output });
+      } else {
+        sendResponse({ humanError: output.message });
+      }
     }
 
     // Custom theme OLD

@@ -2109,6 +2109,7 @@
     return id;
   }
   async function removeCustomTheme(id) {
+    await purgeThemeShareCache(id);
     const customThemes = await getAllCustomThemes();
     delete customThemes[id];
     await removeImage(id);
@@ -2127,11 +2128,12 @@
     if (!headerValue) {
       return null;
     }
-    const match = [...headerValue.matchAll(/filename="(.*)"/)];
-    if (match && match[0] && match[0][0]) {
-      return match[0][0];
+    const regex = /filename="(.*)"/g;
+    const match = regex.exec(headerValue);
+    if (match == null || match[1] == null) {
+      return null;
     }
-    return null;
+    return match[1];
   }
   async function installTheme(shareId) {
     const resp = await fetch("https://theme.smpp.be/" + shareId, {
@@ -2152,6 +2154,7 @@
     await setSettingsData(settingsData);
     if (json.img_url) {
       const resp2 = await fetch(json.img_url);
+      console.log("cd", resp2.headers.get("Content-Disposition"));
       const filename = getContentDispositionFileName(resp2.headers.get("Content-Disposition")) ?? "importedFile.webp";
       const base64 = await getBase64FromResponse(resp2);
       if (base64 === null) {
@@ -2182,7 +2185,11 @@
     return "https://theme.smpp.be/" + id;
   }
   async function loadThemeShareCache() {
-    return await browser.storage.local.get("themeShareCache");
+    const cache = await browser.storage.local.get("themeShareCache");
+    if (!cache.themeShareCache) {
+      return {};
+    }
+    return cache.themeShareCache;
   }
   async function purgeThemeShareCache(themeId) {
     const data = await loadThemeShareCache();
@@ -2196,9 +2203,11 @@
   async function updateThemeShareCache(themeId, shareId) {
     const data = await loadThemeShareCache();
     data[themeId] = shareId;
+    console.log("about to write to themeShareCache", data);
     await browser.storage.local.set({ themeShareCache: data });
   }
   async function shareTheme(id) {
+    return new Error("Theme image is too heavy (0.5GB max)");
     const cachedShareId = await getCachedShareId(id);
     if (cachedShareId) {
       return shareUrlFromShareId(cachedShareId);
@@ -2229,16 +2238,25 @@
       },
       body: JSON.stringify(apiTheme)
     });
+    if (!resp.ok) {
+      return new Error(await resp.text());
+    }
     const themeInfo = await resp.json();
     await updateThemeShareCache(id, themeInfo.id);
     if (themeInfo.needs_img && hash && imageData) {
-      await fetch("https://theme.smpp.be/" + themeInfo.id + "/image", {
-        method: "POST",
-        headers: {
-          Authorization: "Bearer " + themeInfo.edit_key
-        },
-        body: imageData.buffer
-      });
+      const resp2 = await fetch(
+        "https://theme.smpp.be/" + themeInfo.id + "/image",
+        {
+          method: "POST",
+          headers: {
+            Authorization: "Bearer " + themeInfo.edit_key
+          },
+          body: imageData.buffer
+        }
+      );
+      if (!resp2.ok) {
+        return new Error(await resp2.text());
+      }
     }
     return shareUrlFromShareId(themeInfo.id);
   }
@@ -2287,10 +2305,12 @@
   }
 
   // src/background-scripts/index.ts
-  browser.runtime.onMessage.addListener((message, _sender, sendResponse) => {
-    handleMessage(message, sendResponse);
-    return true;
-  });
+  browser.runtime.onMessage.addListener(
+    (message, _sender, sendResponse) => {
+      handleMessage(message, sendResponse);
+      return true;
+    }
+  );
   async function handleMessage(message, sendResponse) {
     try {
       if (message.action === "clearLocalStorage") {
@@ -2356,9 +2376,13 @@
         sendResponse({ success: true });
       }
       if (message.action === "shareTheme") {
-        const url = await shareTheme(message.name);
-        console.log(`Theme ${message.name} was shared (url: ${url})`);
-        sendResponse({ shareUrl: url });
+        const output = await shareTheme(message.name);
+        if (typeof output == "string") {
+          console.log(`Theme ${message.name} was shared (url: ${output})`);
+          sendResponse({ shareUrl: output });
+        } else {
+          sendResponse({ humanError: output.message });
+        }
       }
       if (message.action === "getCustomThemeData") {
         const customThemeData = await getCustomThemeData();

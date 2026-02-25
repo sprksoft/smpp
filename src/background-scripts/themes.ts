@@ -187,6 +187,7 @@ export async function saveCustomTheme(
 }
 
 export async function removeCustomTheme(id: ThemeId) {
+  await purgeThemeShareCache(id);
   const customThemes = await getAllCustomThemes();
   delete customThemes[id];
   await removeImage(id);
@@ -208,11 +209,12 @@ function getContentDispositionFileName(
   if (!headerValue) {
     return null;
   }
-  const match = [...headerValue.matchAll(/filename="(.*)"/)];
-  if (match && match[0] && match[0][0]) {
-    return match[0][0];
+  const regex = /filename="(.*)"/g;
+  const match = regex.exec(headerValue);
+  if (match == null || match[1] == null) {
+    return null;
   }
-  return null;
+  return match[1];
 }
 
 export async function installTheme(shareId: ShareId) {
@@ -237,6 +239,7 @@ export async function installTheme(shareId: ShareId) {
 
   if (json.img_url) {
     const resp = await fetch(json.img_url);
+    console.log("cd", resp.headers.get("Content-Disposition"));
     const filename =
       getContentDispositionFileName(resp.headers.get("Content-Disposition")) ??
       "importedFile.webp";
@@ -278,7 +281,11 @@ export function shareUrlFromShareId(id: ShareId): string {
 type ThemeShareCache = { [themeId: ThemeId]: ShareId };
 
 export async function loadThemeShareCache(): Promise<ThemeShareCache> {
-  return await browser.storage.local.get("themeShareCache");
+  const cache = await browser.storage.local.get("themeShareCache");
+  if (!cache.themeShareCache) {
+    return {};
+  }
+  return cache.themeShareCache;
 }
 
 export async function purgeThemeShareCache(themeId: ThemeId) {
@@ -300,10 +307,12 @@ export async function updateThemeShareCache(
 ) {
   const data = await loadThemeShareCache();
   data[themeId] = shareId;
+  console.log("about to write to themeShareCache", data);
   await browser.storage.local.set({ themeShareCache: data });
 }
 
-export async function shareTheme(id: ThemeId): Promise<string> {
+export async function shareTheme(id: ThemeId): Promise<string | Error> {
+  return new Error("Theme image is too heavy (0.5GB max)");
   const cachedShareId = await getCachedShareId(id);
   if (cachedShareId) {
     return shareUrlFromShareId(cachedShareId);
@@ -339,18 +348,27 @@ export async function shareTheme(id: ThemeId): Promise<string> {
     },
     body: JSON.stringify(apiTheme),
   });
+  if (!resp.ok) {
+    return new Error(await resp.text());
+  }
   const themeInfo: ApiThemeInfo = await resp.json();
 
   await updateThemeShareCache(id, themeInfo.id);
 
   if (themeInfo.needs_img && hash && imageData) {
-    await fetch("https://theme.smpp.be/" + themeInfo.id + "/image", {
-      method: "POST",
-      headers: {
-        Authorization: "Bearer " + themeInfo.edit_key,
-      },
-      body: imageData.buffer as ArrayBuffer,
-    });
+    const resp = await fetch(
+      "https://theme.smpp.be/" + themeInfo.id + "/image",
+      {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + themeInfo.edit_key,
+        },
+        body: imageData.buffer as ArrayBuffer,
+      }
+    );
+    if (!resp.ok) {
+      return new Error(await resp.text());
+    }
   }
 
   // TODO: sibe fix it, important: Metadata in SMPPImage really does matter...
