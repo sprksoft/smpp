@@ -27,7 +27,7 @@ export class ImageSelector {
 
   id: string = "";
   clearButton = document.createElement("button");
-  linkInput = createTextInput("", "Link");
+  linkInput = createTextInput("", "Link or paste");
   fileInput = document.createElement("input");
   fileInputButton = document.createElement("button");
   linkInputContainer = this.createLinkImageInputContainer();
@@ -106,6 +106,22 @@ export class ImageSelector {
       await this.storeImage();
     });
 
+    this.linkInput.addEventListener("paste", async (e) => {
+      const items = e.clipboardData?.items;
+      if (!items) return;
+
+      for (const item of items) {
+        if (item.type.startsWith("image/")) {
+          e.preventDefault();
+          const file = item.getAsFile();
+          if (file) {
+            this.linkInput.value = file.name;
+            await this.storeImage(file);
+          }
+        }
+      }
+    });
+
     this.linkInput.addEventListener("change", async () => {
       if ((this.linkInput.value || "").trim() !== "") {
         this.clearButton.classList.add("active");
@@ -124,7 +140,11 @@ export class ImageSelector {
     });
   }
 
-  async storeImage() {
+  async handleFileProcessing(file: File) {
+    await this.storeImage(file);
+  }
+
+  async storeImage(passedFile?: File) {
     try {
       let data = (await browser.runtime.sendMessage({
         action: "getImage",
@@ -142,7 +162,8 @@ export class ImageSelector {
       };
 
       // Handle file upload
-      const file = this.fileInput.files?.[0];
+      const file = passedFile || this.fileInput.files?.[0];
+
       if (file) {
         this.fileInputButton.innerHTML = loadingSpinnerSvg;
         const [originalDataUrl, compressedDataUrl] = await Promise.all([

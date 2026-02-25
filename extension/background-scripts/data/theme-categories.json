@@ -24,7 +24,21 @@
     "lost",
     "mclaren",
     "space",
-    "night"
+    "night",
+    "nightlife",
+    "tokyo",
+    "greenneon",
+    "redsky",
+    "cloudyluna",
+    "morninglake",
+    "luna",
+    "dino",
+    "lonelycat",
+    "hole",
+    "sunset",
+    "aurora",
+    "purpleporsche",
+    "alps"
   ],
   "light": [
     "white",
@@ -34,18 +48,34 @@
     "boringwhite",
     "pizza",
     "lightglass",
-    "lake"
+    "lake",
+    "fuji",
+    "bluemountain",
+    "911",
+    "f40"
   ],
-  "seasonal": ["fall", "smkerst", "winter", "summer", "matcha"],
-  "hidden": [
-    "fairyblue",
-    "vax",
-    "pizza",
-    "error",
-    "smkerst",
-    "japan",
-    "summer",
-    "ocean",
-    "boringwhite"
-  ]
+  "mountain": [
+    "mountain",
+    "lake",
+    "morninglake",
+    "fuji",
+    "bluemountain",
+    "bigsur",
+    "alps"
+  ],
+  "japan": ["japan", "fuji", "nightlife", "tokyo", "greenneon"],
+  "car": ["mclaren", "f40", "911", "purpleporsche"],
+  "space": [
+    "galaxy",
+    "cloudyluna",
+    "luna",
+    "hole",
+    "redsky",
+    "redmoon",
+    "ldev",
+    "space"
+  ],
+  "seasonal": ["fall", "mclaren", "smkerst", "winter", "summer", "matcha"],
+  "extra": [""],
+  "hidden": ["fairyblue", "vax", "pizza", "error", "boringwhite"]
 }

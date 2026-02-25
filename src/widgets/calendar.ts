@@ -1,4 +1,5 @@
 // @ts-nocheck
+import { getExtensionImage } from "../common/utils.js";
 import { chevronLeftSvg } from "../fixes-utils/svgs.js";
 import { WidgetBase, registerWidget } from "./widgets.js";
 
@@ -124,93 +125,11 @@ class CalendarWidget extends WidgetBase {
     label.style.marginBottom = "0.5rem";
     label.textContent = "Calendar";
 
-    // Calendar Icon SVG - colorful style
-    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    svg.setAttribute("viewBox", "0 0 100 120");
-    svg.setAttribute("width", "52");
-    svg.setAttribute("height", "65");
-
-    // Main body background (yellow)
-    const body = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-    body.setAttribute("x", "8");
-    body.setAttribute("y", "28");
-    body.setAttribute("width", "84");
-    body.setAttribute("height", "84");
-    body.setAttribute("rx", "6");
-    body.setAttribute("fill", "#FFE55C");
-    body.setAttribute("stroke", "#000");
-    body.setAttribute("stroke-width", "3");
-
-    // Header (red/pink)
-    const header = document.createElementNS(
-      "http://www.w3.org/2000/svg",
-      "rect"
-    );
-    header.setAttribute("x", "8");
-    header.setAttribute("y", "8");
-    header.setAttribute("width", "84");
-    header.setAttribute("height", "24");
-    header.setAttribute("rx", "6");
-    header.setAttribute("fill", "#FF5C6D");
-    header.setAttribute("stroke", "#000");
-    header.setAttribute("stroke-width", "3");
-
-    // Rings (blue circles at top)
-    const ringPositions = [20, 50, 80];
-    ringPositions.forEach((x) => {
-      const ring = document.createElementNS(
-        "http://www.w3.org/2000/svg",
-        "circle"
-      );
-      ring.setAttribute("cx", String(x));
-      ring.setAttribute("cy", "6");
-      ring.setAttribute("r", "6");
-      ring.setAttribute("fill", "#1E90FF");
-      ring.setAttribute("stroke", "#000");
-      ring.setAttribute("stroke-width", "2");
-      svg.appendChild(ring);
-    });
-
-    // Checkboxes (cyan squares on left)
-    const checkboxes = [45, 65, 85];
-    checkboxes.forEach((y) => {
-      const checkbox = document.createElementNS(
-        "http://www.w3.org/2000/svg",
-        "rect"
-      );
-      checkbox.setAttribute("x", "20");
-      checkbox.setAttribute("y", String(y));
-      checkbox.setAttribute("width", "10");
-      checkbox.setAttribute("height", "10");
-      checkbox.setAttribute("rx", "2");
-      checkbox.setAttribute("fill", "#00D9FF");
-      checkbox.setAttribute("stroke", "#000");
-      checkbox.setAttribute("stroke-width", "2");
-      svg.appendChild(checkbox);
-    });
-
-    // Text lines
-    const lines = [45, 65, 85];
-    lines.forEach((y) => {
-      const line = document.createElementNS(
-        "http://www.w3.org/2000/svg",
-        "line"
-      );
-      line.setAttribute("x1", "35");
-      line.setAttribute("y1", String(y + 5));
-      line.setAttribute("x2", "75");
-      line.setAttribute("y2", String(y + 5));
-      line.setAttribute("stroke", "#000");
-      line.setAttribute("stroke-width", "2");
-      line.setAttribute("stroke-linecap", "round");
-      svg.appendChild(line);
-    });
-
-    svg.appendChild(body);
-    svg.appendChild(header);
-
+    let image = document.createElement("img");
+    image.src = getExtensionImage("icons/widgets/kalender_512x512.png");
+    image.classList = "calendar-image";
     preview.appendChild(label);
-    preview.appendChild(svg);
+    preview.appendChild(image);
 
     return preview;
   }

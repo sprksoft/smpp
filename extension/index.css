@@ -1485,6 +1485,9 @@ input.weather-location-input:focus {
   color: var(--color-base00);
   font-weight: 600;
 }
+.calendar-image {
+  width: 80%;
+}
 
 /* src/styles/smpp-styles/widgets.css */
 html {

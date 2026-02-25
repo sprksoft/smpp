@@ -782,6 +782,9 @@ export class ThemeTile extends Tile {
         );
       });
 
+      // DONT FORGET TO REMOVE THIS
+      // navigator.clipboard.writeText(JSON.stringify(this.theme));
+
       let imageContainer = document.createElement("div");
       imageContainer.classList.add("sharing-image-container");
 

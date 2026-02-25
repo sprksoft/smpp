@@ -1971,7 +1971,6 @@
       const filename = urlParts[urlParts.length - 1] || "image.jpg";
       return {
         arrayBuffer: Array.from(new Uint8Array(arrayBuffer)),
-        // Convert to regular array
         mimeType: blob.type || "image/jpeg",
         filename
       };
