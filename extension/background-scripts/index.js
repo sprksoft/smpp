@@ -2206,7 +2206,6 @@
     await browser.storage.local.set({ themeShareCache: data });
   }
   async function shareTheme(id) {
-    return new Error("Theme image is too heavy (0.5GB max)");
     const cachedShareId = await getCachedShareId(id);
     if (cachedShareId) {
       return shareUrlFromShareId(cachedShareId);

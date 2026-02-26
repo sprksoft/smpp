@@ -38,7 +38,11 @@
     "sunset",
     "aurora",
     "purpleporsche",
-    "alps"
+    "alps",
+    "darkfuji",
+    "e30",
+    "audi",
+    "rallyaudi"
   ],
   "light": [
     "white",
@@ -61,10 +65,11 @@
     "fuji",
     "bluemountain",
     "bigsur",
-    "alps"
+    "alps",
+    "darkfuji"
   ],
-  "japan": ["japan", "fuji", "nightlife", "tokyo", "greenneon"],
-  "car": ["mclaren", "f40", "911", "purpleporsche"],
+  "japan": ["japan", "fuji", "nightlife", "tokyo", "greenneon", "darkfuji"],
+  "car": ["mclaren", "f40", "911", "purpleporsche", "e30", "audi", "rallyaudi"],
   "space": [
     "galaxy",
     "cloudyluna",

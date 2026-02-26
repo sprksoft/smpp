@@ -312,7 +312,6 @@ export async function updateThemeShareCache(
 }
 
 export async function shareTheme(id: ThemeId): Promise<string | Error> {
-  return new Error("Theme image is too heavy (0.5GB max)");
   const cachedShareId = await getCachedShareId(id);
   if (cachedShareId) {
     return shareUrlFromShareId(cachedShareId);

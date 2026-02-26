@@ -363,39 +363,6 @@ export class ColorPicker {
   async onChange() {}
 }
 
-class ThemeSharingTile {
-  name: string;
-  element = document.createElement("div");
-  constructor(name: string) {
-    this.name = name;
-  }
-  async render() {
-    let imageURL = await getImageURL(
-      this.name,
-      async () => {
-        return await getExtensionImage(
-          "theme-backgrounds/compressed/" + this.name + ".jpg"
-        );
-      },
-      false
-    );
-    if (await isValidImage(await imageURL.url)) {
-      this.element.style.setProperty(
-        "--background-image-local",
-        `url(${await imageURL.url})`
-      );
-    } else {
-      this.element.style.setProperty("--background-image-local", `url()`);
-    }
-  }
-
-  createImageContainer() {
-    let imageContainer = document.createElement("div");
-    imageContainer.classList.add("image-container");
-    return imageContainer;
-  }
-}
-
 export class Tile {
   element = document.createElement("div");
 
@@ -783,7 +750,7 @@ export class ThemeTile extends Tile {
       });
 
       // DONT FORGET TO REMOVE THIS
-      // navigator.clipboard.writeText(JSON.stringify(this.theme));
+      navigator.clipboard.writeText(JSON.stringify(this.theme));
 
       let imageContainer = document.createElement("div");
       imageContainer.classList.add("sharing-image-container");

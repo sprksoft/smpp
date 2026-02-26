@@ -308,7 +308,7 @@
     }
   },
   "summer": {
-    "displayName": "Summer",
+    "displayName": "Sunset Beach",
     "cssProperties": {
       "--color-accent": "#268e99",
       "--color-base00": "#efe9d3",
@@ -755,5 +755,61 @@
       "--darken-background": "#0108144d"
     },
     "displayName": "Alps"
+  },
+  "darkfuji": {
+    "cssProperties": {
+      "--color-accent": "#c08b55",
+      "--color-base00": "#110d08",
+      "--color-base01": "#21201f",
+      "--color-base02": "#33312e",
+      "--color-base03": "#5f5c59",
+      "--color-homepage-sidebars-bg": "#0907041a",
+      "--color-splashtext": "#c4bbb2",
+      "--color-text": "#c4bbb2",
+      "--darken-background": "#0907044d"
+    },
+    "displayName": "Dark Fuji"
+  },
+  "audi": {
+    "cssProperties": {
+      "--color-accent": "#5c9ca4",
+      "--color-base00": "#0e0a09",
+      "--color-base01": "#2e221c",
+      "--color-base02": "#4e392f",
+      "--color-base03": "#6e5042",
+      "--color-homepage-sidebars-bg": "#0705041a",
+      "--color-splashtext": "#a4ccd4",
+      "--color-text": "#a4ccd4",
+      "--darken-background": "#0705044d"
+    },
+    "displayName": "Audi"
+  },
+  "rallyaudi": {
+    "cssProperties": {
+      "--color-accent": "#df9a13",
+      "--color-base00": "#1d1201",
+      "--color-base01": "#4f3102",
+      "--color-base02": "#805004",
+      "--color-base03": "#b16f06",
+      "--color-homepage-sidebars-bg": "#120a001a",
+      "--color-splashtext": "#faebcb",
+      "--color-text": "#faebcb",
+      "--darken-background": "#120a004d"
+    },
+    "displayName": "Rally Audi"
+  },
+  "e30": {
+    "cssProperties": {
+      "--color-accent": "#5a90ab",
+      "--color-base00": "#0d1112",
+      "--color-base01": "#232e2f",
+      "--color-base02": "#384a4d",
+      "--color-base03": "#4d666b",
+      "--color-homepage-sidebars-bg": "#07090a1a",
+      "--color-splashtext": "#eccdc5",
+      "--color-text": "#eccdc5",
+      "--darken-background": "#07090a4d"
+    },
+    "displayName": "E30"
   }
 }

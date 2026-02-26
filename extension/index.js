@@ -7931,6 +7931,7 @@ Is it scaring you off?`,
             theme.cssProperties[key]
           );
         });
+        navigator.clipboard.writeText(JSON.stringify(this.theme));
         let imageContainer = document.createElement("div");
         imageContainer.classList.add("sharing-image-container");
         let imageURL = await getImageURL(
