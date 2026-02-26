@@ -2940,17 +2940,44 @@ Is it scaring you off?`,
   };
   async function getImageURL(id, onDefault, getCompressed) {
     let image;
+    let requestedImageId = id;
     if (getCompressed) {
-      id = "compressed-" + id;
+      requestedImageId = "compressed-" + id;
     }
     try {
       image = await browser.runtime.sendMessage({
         action: "getImage",
-        id
+        id: requestedImageId
       });
     } catch (err) {
       console.warn("[getImageURL] Failed to get image from background:", err);
       return { url: await onDefault(), type: null };
+    }
+    if (getCompressed && image.imageData === "") {
+      let origImage = await browser.runtime.sendMessage({
+        action: "getImage",
+        id
+      });
+      if (origImage.imageData != "") {
+        const origImageFile = await imageCompression.getFilefromDataUrl(
+          origImage.imageData,
+          ""
+        );
+        const imageData = await getCompressedData(origImageFile);
+        const compressedImage = {
+          metaData: {
+            type: origImage.metaData.type,
+            link: origImage.metaData.link
+          },
+          imageData
+        };
+        await browser.runtime.sendMessage({
+          action: "setImage",
+          id: requestedImageId,
+          data: compressedImage
+        });
+        image = compressedImage;
+      }
     }
     if (image.metaData.type === "default") {
       return { url: await onDefault(), type: image.metaData.type };
@@ -7955,7 +7982,7 @@ Is it scaring you off?`,
         );
         let image = document.createElement("img");
         image.classList.add("sharing-image");
-        if (await isValidImage(await imageURL.url)) {
+        if (await isValidImage(imageURL.url)) {
           imageContainer.appendChild(image);
         }
         image.src = imageURL.url;
@@ -8011,7 +8038,7 @@ Is it scaring you off?`,
       } else {
         shareUrl = resp.shareUrl;
         console.log(linkOutput);
-        linkOutput.innerText = resp.shareUrl.slice(0, 32) + "\u2026";
+        linkOutput.innerText = resp.shareUrl.toString();
         linkOutput.style.pointerEvents = "all";
         linkOutput.addEventListener("click", copyToClipboard);
         copyToClipboardButton.innerHTML = copySvg;

@@ -772,7 +772,7 @@ export class ThemeTile extends Tile {
       let image = document.createElement("img");
       image.classList.add("sharing-image");
 
-      if (await isValidImage(await imageURL.url)) {
+      if (await isValidImage(imageURL.url)) {
         imageContainer.appendChild(image);
       }
       image.src = imageURL.url;
@@ -836,7 +836,7 @@ export class ThemeTile extends Tile {
     } else {
       shareUrl = resp.shareUrl; // Update the URL variable
       console.log(linkOutput);
-      linkOutput.innerText = (resp.shareUrl as string).slice(0, 32) + "…";
+      linkOutput.innerText = resp.shareUrl.toString();
       linkOutput.style.pointerEvents = "all";
       linkOutput.addEventListener("click", copyToClipboard);
       copyToClipboardButton.innerHTML = copySvg;

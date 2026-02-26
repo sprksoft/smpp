@@ -150,6 +150,7 @@ export async function convertLinkToFile(link: string) {
 
 const FNV_PRIME = 0x0100000001b3n;
 const FNV_OFFSET = 0xcbf29ce484222325n;
+/* Generate 64bit fnv1a hash of a Uint8Array. (used for theme sharing) */
 export function fnv1aHash(byteArray: Uint8Array): string {
   let hash = FNV_OFFSET;
   for (let i = 0; i < byteArray.length; i++) {

@@ -296,17 +296,52 @@ export async function getImageURL(
   getCompressed: boolean
 ): Promise<{ url: string; type: "file" | "default" | null }> {
   let image;
+  let requestedImageId = id;
   if (getCompressed) {
-    id = "compressed-" + id;
+    requestedImageId = "compressed-" + id;
   }
   try {
     image = (await browser.runtime.sendMessage({
       action: "getImage",
-      id,
+      id: requestedImageId,
     })) as SMPPImage;
   } catch (err) {
     console.warn("[getImageURL] Failed to get image from background:", err);
     return { url: await onDefault(), type: null };
+  }
+
+  // Compressed image is empty. Generate a new one if the original exists.
+  // used for lazy compressed image generation for shared themes
+  if (getCompressed && image.imageData === "") {
+    let origImage = (await browser.runtime.sendMessage({
+      action: "getImage",
+      id,
+    })) as SMPPImage;
+
+    // don't generate compressed version if original is empty.
+    if (origImage.imageData != "") {
+      const origImageFile = await imageCompression.getFilefromDataUrl(
+        origImage.imageData,
+        ""
+      );
+      const imageData = await getCompressedData(origImageFile);
+
+      const compressedImage: SMPPImage = {
+        metaData: {
+          type: origImage.metaData.type,
+          link: origImage.metaData.link,
+        },
+        imageData,
+      };
+
+      await browser.runtime.sendMessage({
+        action: "setImage",
+        id: requestedImageId,
+        data: compressedImage,
+      });
+
+      image = compressedImage;
+    }
   }
 
   // Default
