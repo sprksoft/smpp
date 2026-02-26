@@ -318,8 +318,9 @@ export async function getImageURL(
       id,
     })) as SMPPImage;
 
-    // don't generate compressed version if original is empty.
+    // Don't generate compressed version if original is empty.
     if (origImage.imageData != "") {
+      // Compress original image
       const origImageFile = await imageCompression.getFilefromDataUrl(
         origImage.imageData,
         ""
@@ -340,6 +341,7 @@ export async function getImageURL(
         data: compressedImage,
       });
 
+      // Continue code with the compressed image that has just been generated.
       image = compressedImage;
     }
   }
