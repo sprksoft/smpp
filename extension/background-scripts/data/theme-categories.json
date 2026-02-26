@@ -81,7 +81,15 @@
     "space"
   ],
   "seasonal": ["fall", "mclaren", "smkerst", "winter", "summer", "matcha"],
-  "animal": ["otters", "lonelycat", "dino"],
+  "animal": ["otters", "lonelycat", "dino", "keith"],
   "extra": ["lonelycat", "dino", "lost", "minecraft", "otters"],
-  "hidden": ["fairyblue", "vax", "pizza", "error", "boringwhite", "night"]
+  "hidden": [
+    "fairyblue",
+    "vax",
+    "pizza",
+    "error",
+    "boringwhite",
+    "night",
+    "keith"
+  ]
 }

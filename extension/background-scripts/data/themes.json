@@ -265,6 +265,18 @@
       "--darken-background": "#0000014d"
     }
   },
+  "keith": {
+    "displayName": "Keith",
+    "cssProperties": {
+      "--color-accent": "#9f6ca2",
+      "--color-text": "#cdb4d4",
+      "--color-base00": "#060504",
+      "--color-base01": "#271d16",
+      "--color-base02": "#483628",
+      "--color-base03": "#694f3a",
+      "--darken-background": "#0303024d"
+    }
+  },
   "error": {
     "displayName": "Error",
     "cssProperties": {
