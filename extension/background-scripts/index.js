@@ -2240,7 +2240,6 @@
       return new Error(await resp.text());
     }
     const themeInfo = await resp.json();
-    await updateThemeShareCache(id, themeInfo.id);
     if (themeInfo.needs_img && hash && imageData) {
       const resp2 = await fetch(
         "https://theme.smpp.be/" + themeInfo.id + "/image",
@@ -2256,6 +2255,7 @@
         return new Error(await resp2.text());
       }
     }
+    await updateThemeShareCache(id, themeInfo.id);
     return shareUrlFromShareId(themeInfo.id);
   }
 

@@ -352,8 +352,6 @@ export async function shareTheme(id: ThemeId): Promise<string | Error> {
   }
   const themeInfo: ApiThemeInfo = await resp.json();
 
-  await updateThemeShareCache(id, themeInfo.id);
-
   if (themeInfo.needs_img && hash && imageData) {
     const resp = await fetch(
       "https://theme.smpp.be/" + themeInfo.id + "/image",
@@ -370,8 +368,7 @@ export async function shareTheme(id: ThemeId): Promise<string | Error> {
     }
   }
 
-  // TODO: sibe fix it, important: Metadata in SMPPImage really does matter...
-  // No, I don't believe ImportedFile.png it is.
+  await updateThemeShareCache(id, themeInfo.id);
 
   return shareUrlFromShareId(themeInfo.id);
 }
