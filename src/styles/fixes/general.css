@@ -1477,6 +1477,9 @@ span.js-badge-notifs.topnav__badge,
 span.js-badge-msg.topnav__badge {
   position: relative !important;
 }
+.smsc-topnav .topnav__badge.js-badge-msg {
+  margin-left: 0.4rem !important;
+}
 
 .lvs-pupilpresences-wrapper
   .lvs-pupilpresences

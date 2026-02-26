@@ -69,7 +69,7 @@
     "darkfuji"
   ],
   "japan": ["japan", "fuji", "nightlife", "tokyo", "greenneon", "darkfuji"],
-  "car": ["mclaren", "f40", "911", "purpleporsche", "e30", "audi", "rallyaudi"],
+  "car": ["e30", "mclaren", "f40", "911", "purpleporsche", "audi", "rallyaudi"],
   "space": [
     "galaxy",
     "cloudyluna",
@@ -81,6 +81,7 @@
     "space"
   ],
   "seasonal": ["fall", "mclaren", "smkerst", "winter", "summer", "matcha"],
-  "extra": [""],
-  "hidden": ["fairyblue", "vax", "pizza", "error", "boringwhite"]
+  "animal": ["otters", "lonelycat", "dino"],
+  "extra": ["lonelycat", "dino", "lost", "minecraft", "otters"],
+  "hidden": ["fairyblue", "vax", "pizza", "error", "boringwhite", "night"]
 }

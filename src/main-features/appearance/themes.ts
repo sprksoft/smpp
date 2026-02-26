@@ -34,6 +34,11 @@ import {
   brokenHeartSvg,
   shareSvg,
   errorSvg,
+  mountainSvg,
+  carSvg,
+  starSvg,
+  japanSvg,
+  catSvg,
 } from "../../fixes-utils/svgs.js";
 import {
   getImageURL,
@@ -928,6 +933,21 @@ export class ThemeFolder extends Tile {
         break;
       case "seasonal":
         svg = pineSvg;
+        break;
+      case "mountain":
+        svg = mountainSvg;
+        break;
+      case "car":
+        svg = carSvg;
+        break;
+      case "space":
+        svg = starSvg;
+        break;
+      case "japan":
+        svg = japanSvg;
+        break;
+      case "animal":
+        svg = catSvg;
         break;
       case "custom":
         svg = editIconSvg;
