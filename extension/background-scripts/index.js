@@ -1993,21 +1993,12 @@
     let themes = { ...nativeThemes, ...customThemes };
     return themes;
   }
-  async function getThemeCategories(includeEmpty = false, includeHidden = false) {
+  async function getThemeCategories(includeHidden = false) {
     let allCategories = await getAllThemeCategories();
+    console.log(allCategories);
     if (!includeHidden) {
-      let hiddenThemeKeys = await getThemeCategory("hidden");
-      for (let [name, category] of Object.entries(allCategories)) {
-        allCategories[name] = category.filter(
-          (c2) => !hiddenThemeKeys.includes(c2)
-        );
-      }
-    }
-    if (!includeEmpty) {
-      Object.keys(allCategories).forEach((category) => {
-        if (!allCategories[category] || !allCategories[category][0])
-          delete allCategories[category];
-      });
+      const { hidden, ...rest } = allCategories;
+      allCategories = rest;
     }
     return allCategories;
   }
@@ -2025,6 +2016,12 @@
     let themeNames = await getThemeCategory(category);
     if (!themeNames) {
       return "error";
+    }
+    if (!includeHidden) {
+      let hiddenThemeKeys = await getThemeCategory("hidden");
+      themeNames = themeNames.filter(
+        (themeKey) => !hiddenThemeKeys.includes(themeKey)
+      );
     }
     if (!themeNames[0]) return "error";
     return themeNames[0];
@@ -2334,20 +2331,19 @@
         console.log(`Theme ${message.name} sent.`);
       }
       if (message.action == "getThemeCategories") {
-        let categories2 = await getThemeCategories(
-          message.includeEmpty,
-          message.includeHidden
-        );
+        let categories2 = await getThemeCategories(message.includeHidden);
         sendResponse(categories2);
         console.log(`Theme categories sent: ${categories2}`);
       }
       if (message.action == "getFirstThemeInCategory") {
-        let categories2 = await getFirstThemeInCategory(
+        let themeName = await getFirstThemeInCategory(
           message.category,
           message.includeHidden
         );
-        sendResponse(categories2);
-        console.log(`Theme categories sent: ${categories2}`);
+        sendResponse(themeName);
+        console.log(
+          `First theme in category ${message.category} sent: ${themeName}`
+        );
       }
       if (message.action === "saveCustomTheme") {
         let id = await saveCustomTheme(message.data, message.id);

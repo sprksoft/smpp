@@ -33,25 +33,12 @@ async function getAllThemes(): Promise<Themes> {
   return themes;
 }
 
-export async function getThemeCategories(
-  includeEmpty = false,
-  includeHidden = false
-) {
+export async function getThemeCategories(includeHidden = false) {
   let allCategories = await getAllThemeCategories();
+  console.log(allCategories);
   if (!includeHidden) {
-    let hiddenThemeKeys = (await getThemeCategory("hidden")) as ThemeCategory;
-
-    for (let [name, category] of Object.entries(allCategories)) {
-      allCategories[name] = category.filter(
-        (c) => !hiddenThemeKeys.includes(c)
-      ) as ThemeCategory;
-    }
-  }
-  if (!includeEmpty) {
-    Object.keys(allCategories).forEach((category) => {
-      if (!allCategories[category] || !allCategories[category][0])
-        delete allCategories[category];
-    });
+    const { hidden, ...rest } = allCategories;
+    allCategories = rest;
   }
   return allCategories;
 }
@@ -75,6 +62,14 @@ export async function getFirstThemeInCategory(
   if (!themeNames) {
     return "error";
   }
+
+  if (!includeHidden) {
+    let hiddenThemeKeys = (await getThemeCategory("hidden")) as ThemeCategory;
+    themeNames = themeNames.filter(
+      (themeKey) => !hiddenThemeKeys.includes(themeKey)
+    );
+  }
+
   if (!themeNames[0]) return "error";
   return themeNames[0];
 }

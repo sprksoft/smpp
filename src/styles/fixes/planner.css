@@ -131,7 +131,7 @@
   height: fit-content !important;
   max-height: 100% !important;
   border-radius: 2rem !important;
-  margin-right: 1.5rem !important;
+  margin-right: 1rem !important;
   padding: 1.5rem 0.25rem !important;
   gap: 0.75rem !important;
 }
@@ -1174,7 +1174,10 @@ button.filter-btn.c-red-combo-hover--100:hover {
   border-color: transparent !important;
   transition-property: width, background, border-color;
 }
-
+.enableAnimations .button-mJfIq {
+  transition-property: all !important;
+  transition: 0.1s ease-in-out !important;
+}
 .button-mJfIq {
   border-radius: 1rem !important;
   border-width: 2px !important;

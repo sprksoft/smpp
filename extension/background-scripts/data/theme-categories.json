@@ -42,7 +42,8 @@
     "darkfuji",
     "e30",
     "audi",
-    "rallyaudi"
+    "rallyaudi",
+    "keith"
   ],
   "light": [
     "white",
@@ -60,6 +61,7 @@
   ],
   "mountain": [
     "mountain",
+    "japan",
     "lake",
     "morninglake",
     "fuji",
@@ -82,7 +84,28 @@
   ],
   "seasonal": ["fall", "mclaren", "smkerst", "winter", "summer", "matcha"],
   "animal": ["otters", "lonelycat", "dino", "keith"],
-  "extra": ["lonelycat", "dino", "lost", "minecraft", "otters"],
+  "other": [
+    "lightglass",
+    "lonelycat",
+    "dino",
+    "lost",
+    "minecraft",
+    "otters",
+    "aurora",
+    "sunset",
+    "vax",
+    "purple",
+    "stalker",
+    "darkglass",
+    "chocolate",
+    "pink",
+    "white",
+    "default",
+    "birb",
+    "sand",
+    "tech",
+    "ocean"
+  ],
   "hidden": [
     "fairyblue",
     "vax",
@@ -90,6 +113,7 @@
     "error",
     "boringwhite",
     "night",
-    "keith"
+    "keith",
+    "bluemountain"
   ]
 }

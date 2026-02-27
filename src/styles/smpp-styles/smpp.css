@@ -241,6 +241,12 @@
     transform: translateX(100%);
   }
 }
+
+body:has(.login-app) .smpp-background-image-container {
+  top: 0;
+  height: 100%;
+}
+
 .smpp-background-image-container {
   background: linear-gradient(
     45deg,

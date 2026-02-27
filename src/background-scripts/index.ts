@@ -66,20 +66,19 @@ async function handleMessage(message: any, sendResponse: (resp: any) => void) {
       console.log(`Theme ${message.name} sent.`);
     }
     if (message.action == "getThemeCategories") {
-      let categories = await getThemeCategories(
-        message.includeEmpty,
-        message.includeHidden
-      );
+      let categories = await getThemeCategories(message.includeHidden);
       sendResponse(categories);
       console.log(`Theme categories sent: ${categories}`);
     }
     if (message.action == "getFirstThemeInCategory") {
-      let categories = await getFirstThemeInCategory(
+      let themeName = await getFirstThemeInCategory(
         message.category,
         message.includeHidden
       );
-      sendResponse(categories);
-      console.log(`Theme categories sent: ${categories}`);
+      sendResponse(themeName);
+      console.log(
+        `First theme in category ${message.category} sent: ${themeName}`
+      );
     }
 
     if (message.action === "saveCustomTheme") {

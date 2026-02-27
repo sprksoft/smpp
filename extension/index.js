@@ -265,7 +265,7 @@
   var starSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
 <path xmlns="http://www.w3.org/2000/svg" d="M11.2691 4.41115C11.5006 3.89177 11.6164 3.63208 11.7776 3.55211C11.9176 3.48263 12.082 3.48263 12.222 3.55211C12.3832 3.63208 12.499 3.89177 12.7305 4.41115L14.5745 8.54808C14.643 8.70162 14.6772 8.77839 14.7302 8.83718C14.777 8.8892 14.8343 8.93081 14.8982 8.95929C14.9705 8.99149 15.0541 9.00031 15.2213 9.01795L19.7256 9.49336C20.2911 9.55304 20.5738 9.58288 20.6997 9.71147C20.809 9.82316 20.8598 9.97956 20.837 10.1342C20.8108 10.3122 20.5996 10.5025 20.1772 10.8832L16.8125 13.9154C16.6877 14.0279 16.6252 14.0842 16.5857 14.1527C16.5507 14.2134 16.5288 14.2807 16.5215 14.3503C16.5132 14.429 16.5306 14.5112 16.5655 14.6757L17.5053 19.1064C17.6233 19.6627 17.6823 19.9408 17.5989 20.1002C17.5264 20.2388 17.3934 20.3354 17.2393 20.3615C17.0619 20.3915 16.8156 20.2495 16.323 19.9654L12.3995 17.7024C12.2539 17.6184 12.1811 17.5765 12.1037 17.56C12.0352 17.5455 11.9644 17.5455 11.8959 17.56C11.8185 17.5765 11.7457 17.6184 11.6001 17.7024L7.67662 19.9654C7.18404 20.2495 6.93775 20.3915 6.76034 20.3615C6.60623 20.3354 6.47319 20.2388 6.40075 20.1002C6.31736 19.9408 6.37635 19.6627 6.49434 19.1064L7.4341 14.6757C7.46898 14.5112 7.48642 14.429 7.47814 14.3503C7.47081 14.2807 7.44894 14.2134 7.41394 14.1527C7.37439 14.0842 7.31195 14.0279 7.18708 13.9154L3.82246 10.8832C3.40005 10.5025 3.18884 10.3122 3.16258 10.1342C3.13978 9.97956 3.19059 9.82316 3.29993 9.71147C3.42581 9.58288 3.70856 9.55304 4.27406 9.49336L8.77835 9.01795C8.94553 9.00031 9.02911 8.99149 9.10139 8.95929C9.16534 8.93081 9.2226 8.8892 9.26946 8.83718C9.32241 8.77839 9.35663 8.70162 9.42508 8.54808L11.2691 4.41115Z"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
   var mountainSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
-<path d="M13.4126 15L10.5421 10.9335C10.0849 10.2858 9.85636 9.96204 9.57524 9.85289C9.32941 9.75744 9.05583 9.76296 8.81405 9.86825C8.53756 9.98865 8.32224 10.3214 7.89161 10.9869L4.25737 16.6035C4.16197 16.7509 4.11427 16.8247 4.08048 16.9041C4.0505 16.9746 4.02872 17.0483 4.01557 17.1238C4.00075 17.2088 4.00073 17.2967 4.00068 17.4723L4 20H20.0008L20.0008 17.4604C20.0008 17.2891 20.0008 17.2035 19.9867 17.1204C19.9742 17.0467 19.9534 16.9746 19.9249 16.9055C19.8926 16.8276 19.8471 16.7551 19.7561 16.61L18.79 15.0702C17.9362 13.7095 17.5093 13.0291 16.9545 12.7811C16.4695 12.5642 15.9181 12.5492 15.4221 12.7395C14.8547 12.957 14.3915 13.6132 13.4651 14.9256L13.4126 15ZM13.4126 15L16.9545 20M20.0008 6C20.0008 7.10457 19.1054 8 18.0008 8C16.8962 8 16.0008 7.10457 16.0008 6C16.0008 4.89543 16.8962 4 18.0008 4C19.1054 4 20.0008 4.89543 20.0008 6Z" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+<path d="M13.4126 15L10.5421 10.9335C10.0849 10.2858 9.85636 9.96204 9.57524 9.85289C9.32941 9.75744 9.05583 9.76296 8.81405 9.86825C8.53756 9.98865 8.32224 10.3214 7.89161 10.9869L4.25737 16.6035C4.16197 16.7509 4.11427 16.8247 4.08048 16.9041C4.0505 16.9746 4.02872 17.0483 4.01557 17.1238C4.00075 17.2088 4.00073 17.2967 4.00068 17.4723L4 20H20.0008L20.0008 17.4604C20.0008 17.2891 20.0008 17.2035 19.9867 17.1204C19.9742 17.0467 19.9534 16.9746 19.9249 16.9055C19.8926 16.8276 19.8471 16.7551 19.7561 16.61L18.79 15.0702C17.9362 13.7095 17.5093 13.0291 16.9545 12.7811C16.4695 12.5642 15.9181 12.5492 15.4221 12.7395C14.8547 12.957 14.3915 13.6132 13.4651 14.9256L13.4126 15ZM13.4126 15L16.9545 20M20.0008 6C20.0008 7.10457 19.1054 8 18.0008 8C16.8962 8 16.0008 7.10457 16.0008 6C16.0008 4.89543 16.8962 4 18.0008 4C19.1054 4 20.0008 4.89543 20.0008 6Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
   var japanSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
 <path xmlns="http://www.w3.org/2000/svg" d="M3 13H12M12 13H21M12 13V9M5 21V9M19 21V9M3 3.5V8.2C3 8.48003 3 8.62004 3.0545 8.727C3.10243 8.82108 3.17892 8.89757 3.273 8.9455C3.37996 9 3.51997 9 3.8 9H20.2C20.48 9 20.62 9 20.727 8.9455C20.8211 8.89757 20.8976 8.82108 20.9455 8.727C21 8.62004 21 8.48003 21 8.2V3.5C21 3.5 17 5 12 5C7 5 3 3.5 3 3.5Z"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
   var catSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
@@ -5035,6 +5035,30 @@ Is it scaring you off?`,
   }
 
   // src/main-features/settings/quick-settings.ts
+  var NoThemesOption = class {
+    element = document.createElement("div");
+    createText() {
+      let text = document.createElement("div");
+      text.classList.add("compact-theme-option-text");
+      text.innerHTML = brokenHeartSvg;
+      let span = document.createElement("span");
+      span.innerText = "No themes";
+      text.appendChild(span);
+      return text;
+    }
+    createImageContainer() {
+      let imageContainer = document.createElement("div");
+      imageContainer.classList.add("compact-theme-option-image-container");
+      return imageContainer;
+    }
+    render() {
+      this.element.innerHTML = "";
+      this.element.classList.add("compact-theme-option", "no-themes");
+      this.element.appendChild(this.createText());
+      this.element.appendChild(this.createImageContainer());
+      return this.element;
+    }
+  };
   var CompactThemeOption = class {
     element = document.createElement("div");
     name;
@@ -5046,10 +5070,9 @@ Is it scaring you off?`,
     createText() {
       let text = document.createElement("div");
       text.classList.add("compact-theme-option-text");
-      text.innerText = this.currentTheme.displayName;
-      if (text.innerText.length > 22) {
-        text.innerText = this.currentTheme.displayName.slice(0, 22) + "\u2026";
-      }
+      let span = document.createElement("span");
+      span.innerText = this.currentTheme.displayName;
+      text.appendChild(span);
       return text;
     }
     render() {
@@ -5063,25 +5086,32 @@ Is it scaring you off?`,
       return this.element;
     }
     createImageContainer() {
-      let imageContainer = document.createElement("div");
+      const imageContainer = document.createElement("div");
       imageContainer.classList.add("compact-theme-option-image-container");
       return imageContainer;
     }
     async updateImage(forceReload = false) {
-      if (this.name == currentThemeName || forceReload) {
-        let imageURL = await getImageURL(
-          this.name,
-          async () => {
-            return await getExtensionImage(
-              "theme-backgrounds/compressed/" + this.name + ".jpg"
-            );
-          },
-          true
-        );
-        this.element.style.setProperty(
-          "--background-image-local",
-          `url(${imageURL.url})`
-        );
+      if (this.name !== currentThemeName && !forceReload) return;
+      const imageURL = await getImageURL(
+        this.name,
+        async () => {
+          return await getExtensionImage(
+            "theme-backgrounds/compressed/" + this.name + ".jpg"
+          );
+        },
+        true
+      );
+      const oldContainer = this.element.querySelector(
+        ".compact-theme-option-image-container"
+      );
+      if (!oldContainer) return;
+      const newImage = document.createElement("img");
+      newImage.classList.add("compact-theme-option-image-container");
+      if (imageURL?.url) {
+        newImage.src = imageURL.url;
+      }
+      if (oldContainer !== newImage) {
+        oldContainer.replaceWith(newImage);
       }
     }
     updateElement() {
@@ -5100,12 +5130,19 @@ Is it scaring you off?`,
     async onClick() {
     }
     async updateSelection() {
-      if (this.name == currentThemeName) {
+      const container = this.element.querySelector(
+        ".compact-theme-option-image-container"
+      );
+      if (this.name === currentThemeName) {
         this.element.classList.add("is-selected");
-        this.updateImage(true);
+        await this.updateImage(true);
       } else {
         this.element.classList.remove("is-selected");
-        this.element.style.setProperty("--background-image-local", `url()`);
+        if (container instanceof HTMLImageElement) {
+          container.src = "";
+          const placeholder = this.createImageContainer();
+          container.replaceWith(placeholder);
+        }
       }
     }
     async update() {
@@ -5120,6 +5157,7 @@ Is it scaring you off?`,
     selector = document.createElement("div");
     selectorIsOpen = false;
     themeOptions = [];
+    noThemesOption = new NoThemesOption();
     async createThemeOption(name2, theme) {
       let option = new CompactThemeOption(name2, theme);
       option.onClick = async () => {
@@ -5140,6 +5178,13 @@ Is it scaring you off?`,
       });
     }
     async renderThemeOptions() {
+      this.selector.innerHTML = "";
+      if (this.themeOptions.length === 0) {
+        const noThemesElement = this.noThemesOption.render();
+        this.selector.appendChild(noThemesElement);
+        this.selector.style.height = this.calculateHeight(1) + "px";
+        return;
+      }
       for (let i5 = 1; i5 <= this.themeOptions.length; i5++) {
         const option = this.themeOptions[i5 - 1];
         if (!option) break;
@@ -5185,6 +5230,9 @@ Is it scaring you off?`,
       this.themeOptions.forEach((option) => {
         option.updateSelection();
       });
+      if (this.selectorIsOpen) {
+        this.renderThemeOptions();
+      }
     }
     createInput() {
       this.input.classList.add("theme-selector-input");
@@ -5301,7 +5349,6 @@ Is it scaring you off?`,
       performanceModeInfo.innerHTML = `Toggle performance mode ${data2.other.performanceMode ? "<span class='green-underline'>Enabled</span>" : "<span class='red-underline'>Disabled</span>"}`;
     }
     await compactThemeSelector.updateInput();
-    await compactThemeSelector.updateThemeOptions();
   }
   function toggleQuickSettings() {
     let win = document.getElementById("quickSettings");
@@ -7418,7 +7465,7 @@ Is it scaring you off?`,
   // src/main-features/appearance/themes.ts
   k([lch_default, mix_default]);
   var currentThemeName;
-  var currentTheme2;
+  var currentTheme;
   async function getTheme(name2) {
     let theme = await browser.runtime.sendMessage({
       action: "getTheme",
@@ -7429,8 +7476,8 @@ Is it scaring you off?`,
   async function setTheme(themeName) {
     const style = document.documentElement.style;
     currentThemeName = themeName;
-    currentTheme2 = await getTheme(themeName);
-    Object.entries(currentTheme2.cssProperties).forEach(([key, value]) => {
+    currentTheme = await getTheme(themeName);
+    Object.entries(currentTheme.cssProperties).forEach(([key, value]) => {
       style.setProperty(key, value);
     });
     await widgetSystemNotifyThemeChange();
@@ -7447,7 +7494,7 @@ Is it scaring you off?`,
     return query;
   }
   function getThemeVar(varName) {
-    return currentTheme2.cssProperties[varName];
+    return currentTheme.cssProperties[varName];
   }
   var ColorCursor = class {
     element = document.createElement("div");
@@ -7651,7 +7698,7 @@ Is it scaring you off?`,
       await this.createContent();
       return this.element;
     }
-    async updateImage(currentTheme3, forceReload = false) {
+    async updateImage(currentTheme2, forceReload = false) {
     }
     // Overide this in the implementation
     updateSelection() {
@@ -7689,9 +7736,6 @@ Is it scaring you off?`,
     }
     async updateTitle() {
       this.titleElement.innerText = this.theme.displayName;
-      if (this.titleElement.innerText.length > 22) {
-        this.titleElement.innerText = this.theme.displayName.slice(0, 22) + "\u2026";
-      }
     }
     async createContent() {
       this.element.appendChild(this.createImageContainer());
@@ -7752,8 +7796,8 @@ Is it scaring you off?`,
         this.element.classList.remove("is-selected");
       }
     }
-    async updateImage(currentTheme3, forceReload = false) {
-      if (this.name == currentTheme3 || forceReload) {
+    async updateImage(currentTheme2, forceReload = false) {
+      if (this.name == currentTheme2 || forceReload) {
         let imageURL = await getImageURL(
           this.name,
           async () => {
@@ -7771,29 +7815,19 @@ Is it scaring you off?`,
         } else {
           this.element.style.setProperty("--background-image-local", `url()`);
         }
-        if (isFirefox && imageURL.type == "file") {
-          let imageContainer = this.element.querySelector(".image-container");
-          if (!imageContainer) return;
-          let stupidImageContainer = document.createElement("img");
-          stupidImageContainer.classList.add(
-            "image-container",
-            "firefox-container"
-          );
-          if (await isValidImage(imageURL.url)) {
-            stupidImageContainer.src = imageURL.url;
-          } else {
-            stupidImageContainer.src = "";
-          }
-          let bottomContainer = this.element.querySelector(".theme-tile-bottom");
-          if (!bottomContainer) return;
-          imageContainer.remove();
-          this.element.prepend(stupidImageContainer);
+        if (isFirefox && imageURL.type === "file") {
+          let oldImageContainer = this.element.querySelector(".image-container");
+          if (!oldImageContainer) return;
+          let newImageContainer = document.createElement("img");
+          newImageContainer.classList.add("image-container", "firefox-container");
+          newImageContainer.src = await isValidImage(imageURL.url) ? imageURL.url : "";
+          oldImageContainer.replaceWith(newImageContainer);
         } else if (isFirefox) {
           let firefoxImageContainer = this.element.querySelector(".firefox-container");
           if (firefoxImageContainer) {
-            firefoxImageContainer.remove();
-            this.element.prepend(this.createImageContainer());
-            await this.updateImage(currentTheme3, forceReload);
+            let replacement = this.createImageContainer();
+            firefoxImageContainer.replaceWith(replacement);
+            await this.updateImage(currentTheme2, forceReload);
           }
         }
       }
@@ -7844,9 +7878,11 @@ Is it scaring you off?`,
       startCustomThemeCreator(await getTheme(this.name), this.name);
     }
     async duplicate() {
+      let copiedTheme = this.theme;
+      copiedTheme.displayName += " copy";
       let newThemeName = await browser.runtime.sendMessage({
         action: "saveCustomTheme",
-        data: await getTheme(this.name)
+        data: copiedTheme
       });
       let result = await browser.runtime.sendMessage({
         action: "getImage",
@@ -8074,7 +8110,7 @@ Is it scaring you off?`,
       let firstThemeInCategory = await browser.runtime.sendMessage({
         action: "getFirstThemeInCategory",
         category: this.category,
-        includeHidden: true
+        includeHidden: false
       });
       if (!firstThemeInCategory) return;
       let theme = await browser.runtime.sendMessage({
@@ -8268,7 +8304,7 @@ Is it scaring you off?`,
       let themes2 = await browser.runtime.sendMessage({
         action: "getThemes",
         categories: [this.currentCategory],
-        includeHidden: true
+        includeHidden: false
       });
       let data2 = await browser.runtime.sendMessage({
         action: "getSettingsData"
@@ -8287,8 +8323,7 @@ Is it scaring you off?`,
       let addMissingTiles = async (visibleThemeNames2, correctThemeNames2) => {
         let customThemes = await browser.runtime.sendMessage({
           action: "getThemes",
-          categories: ["custom"],
-          includeHidden: true
+          categories: ["custom"]
         });
         correctThemeNames2.forEach(async (themeName) => {
           if (!visibleThemeNames2.includes(themeName)) {
@@ -8401,8 +8436,7 @@ Is it scaring you off?`,
     async renderFolderTiles() {
       let categories = await browser.runtime.sendMessage({
         action: "getThemeCategories",
-        includeEmpty: true,
-        includeHidden: true
+        includeHidden: false
       });
       let tiles = Object.keys(categories).map((category) => {
         let tile = new ThemeFolder(category);
@@ -8448,12 +8482,11 @@ Is it scaring you off?`,
       let themes2 = await browser.runtime.sendMessage({
         action: "getThemes",
         categories: [this.currentCategory],
-        includeHidden: true
+        includeHidden: false
       });
       let customThemes = await browser.runtime.sendMessage({
         action: "getThemes",
-        categories: ["custom"],
-        includeHidden: true
+        categories: ["custom"]
       });
       let data2 = await browser.runtime.sendMessage({
         action: "getSettingsData"
@@ -8578,11 +8611,11 @@ Is it scaring you off?`,
       this.backgroundImageInput = new ImageSelector(this.name, true);
       this.backgroundImageInput.id = this.name;
       this.imagePreviewContainer = document.createElement("div");
+      this.backgroundImagePreview = this.createBackgroundImagePreview();
       this.backgroundImageInput.onStore = async () => {
         updateTheme(this.name);
         this.updateBackgroundImagePreview();
       };
-      this.backgroundImagePreview = this.createBackgroundImagePreview();
     }
     content = document.createElement("div");
     displayNameInput = document.createElement("input");
@@ -8972,13 +9005,13 @@ Is it scaring you off?`,
       return this.element;
     }
     async onCreate() {
+      await this.load(this.theme);
       await this.updateBackgroundImagePreview();
-      this.load(this.theme);
     }
     async load(theme) {
       this.displayNameInput.value = theme.displayName;
-      this.updateColorPreviews();
       await this.backgroundImageInput.loadImageData();
+      this.updateColorPreviews();
     }
     onClosed(realUserIntent) {
       document.body.removeChild(this.wrapper);
@@ -9928,7 +9961,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     }
     async renderContent() {
       this.gcContent = document.createElement("div");
-      const queryString = getThemeQueryString(currentTheme2);
+      const queryString = getThemeQueryString(currentTheme);
       this.iframe = document.createElement("iframe");
       this.iframe.style = "width:100%; height:100%; border:none";
       this.iframe.src = GC_DOMAINS[this.beta ? "beta" : "main"] + "/v1?" + queryString + "&glass=" + gcGlass;

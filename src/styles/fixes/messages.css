@@ -63,11 +63,11 @@
   background-color: var(--color-accent);
 }
 .modern-ui .modern-message__read-status {
-  width: 4px;
-  border-radius: 1rem;
-  margin-right: 5px;
-  height: 34px;
-  flex-shrink: 0;
+  width: 4px !important;
+  border-radius: 1rem !important;
+  margin-right: 5px !important;
+  height: -webkit-fill-available !important;
+  flex-shrink: 0 !important;
 }
 
 .enableAnimations .modern-message {

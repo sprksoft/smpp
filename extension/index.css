@@ -387,6 +387,10 @@ html {
     transform: translateX(100%);
   }
 }
+body:has(.login-app) .smpp-background-image-container {
+  top: 0;
+  height: 100%;
+}
 .smpp-background-image-container {
   background:
     linear-gradient(
@@ -2927,6 +2931,7 @@ button .bottom-container-button:active {
   width: 100%;
   text-wrap-mode: nowrap;
   overflow: hidden;
+  text-overflow: ellipsis;
 }
 .theme-button-container {
   position: absolute;
@@ -3511,16 +3516,19 @@ button.open-theme-editor-button:hover {
 #quickSettings .compact-theme-option.is-selected {
   border-color: var(--color-accent-local) !important;
 }
+.compact-theme-option .compact-theme-option-text span {
+  overflow-x: hidden !important;
+  text-overflow: ellipsis;
+  text-wrap-mode: nowrap !important;
+  font-size: 1.2rem !important;
+  font-weight: 500 !important;
+  color: var(--color-text-local) !important;
+}
 .compact-theme-option .compact-theme-option-text {
   width: 100%;
   padding: 0.5rem 0.75rem;
   height: 100% !important;
-  font-size: 1.2rem !important;
-  font-weight: 500 !important;
-  color: var(--color-text-local) !important;
   background: var(--color-base01-local) !important;
-  text-wrap-mode: nowrap !important;
-  overflow: hidden !important;
   z-index: 1;
   position: relative;
   user-select: none;
@@ -3529,19 +3537,44 @@ button.open-theme-editor-button:hover {
   justify-content: center;
   align-items: center;
 }
+.compact-theme-option .compact-theme-option-text svg {
+  height: 100%;
+  margin-right: 0.5rem;
+  stroke: var(--color-accent);
+}
 .compact-theme-option:active {
   scale: 0.95;
 }
+.compact-theme-option.no-themes .compact-theme-option-image-container,
 .compact-theme-option.is-selected .compact-theme-option-image-container {
   display: block;
+}
+.compact-theme-option.no-themes .compact-theme-option-image-container {
+  background:
+    linear-gradient(
+      40deg,
+      color-mix(in srgb, var(--color-base03) 70%, var(--color-accent) 30%) 0%,
+      color-mix(in srgb, var(--color-base03) 65%, var(--color-accent) 35%) 15%,
+      color-mix(in srgb, var(--color-base02) 70%, var(--color-accent) 30%) 45%,
+      color-mix(in srgb, var(--color-base02) 73%, var(--color-accent) 27%) 55%,
+      color-mix(in srgb, var(--color-base02) 95%, var(--color-accent) 5%) 100%);
 }
 .compact-theme-option .compact-theme-option-image-container {
   width: 100%;
   height: 100%;
   display: none;
+  object-fit: cover;
   filter: blur(2px);
   position: absolute;
-  background: var(--background-image-local);
+  background:
+    var(--background-image-local),
+    linear-gradient(
+      40deg,
+      color-mix(in srgb, var(--color-base03-local) 70%, var(--color-accent-local) 30%) 0%,
+      color-mix(in srgb, var(--color-base03-local) 65%, var(--color-accent-local) 35%) 15%,
+      color-mix(in srgb, var(--color-base02-local) 70%, var(--color-accent-local) 30%) 45%,
+      color-mix(in srgb, var(--color-base02-local) 73%, var(--color-accent-local) 27%) 55%,
+      color-mix(in srgb, var(--color-base02-local) 95%, var(--color-accent-local) 5%) 100%);
   background-size: cover;
   background-position: center;
 }
@@ -6284,11 +6317,11 @@ span.login-app__title.login-app__title--sign-in-with {
   background-color: var(--color-accent);
 }
 .modern-ui .modern-message__read-status {
-  width: 4px;
-  border-radius: 1rem;
-  margin-right: 5px;
-  height: 34px;
-  flex-shrink: 0;
+  width: 4px !important;
+  border-radius: 1rem !important;
+  margin-right: 5px !important;
+  height: -webkit-fill-available !important;
+  flex-shrink: 0 !important;
 }
 .enableAnimations .modern-message {
   transition-property:
@@ -7063,9 +7096,11 @@ button.split-button__dropdown.js-split-button-dropdown.btn.btn--dropdown.js-btn.
 /* src/styles/fixes/navigation.css */
 .smsc-topnav .topnav__badge {
   background-color: var(--color-text) !important;
-  color: var(--color-base02) !important;
-  border: 2px solid var(--color-base03) !important;
-  max-height: 18.6px !important;
+  color: var(--color-base01) !important;
+  border: transparent solid var(--color-base03) !important;
+  min-width: 16px !important;
+  min-height: 16px !important;
+  max-height: 16px !important;
 }
 .topnav__menu-arrow {
   display: none !important;
@@ -7667,7 +7702,7 @@ ul.js-notifs-list.notifs__list {
   height: fit-content !important;
   max-height: 100% !important;
   border-radius: 2rem !important;
-  margin-right: 1.5rem !important;
+  margin-right: 1rem !important;
   padding: 1.5rem 0.25rem !important;
   gap: 0.75rem !important;
 }
@@ -8493,6 +8528,10 @@ button.filter-btn.c-red-combo-hover--100:hover {
     width,
     background,
     border-color;
+}
+.enableAnimations .button-mJfIq {
+  transition-property: all !important;
+  transition: 0.1s ease-in-out !important;
 }
 .button-mJfIq {
   border-radius: 1rem !important;

@@ -1,8 +1,10 @@
 .smsc-topnav .topnav__badge {
   background-color: var(--color-text) !important;
-  color: var(--color-base02) !important;
-  border: 2px solid var(--color-base03) !important;
-  max-height: 18.6px !important;
+  color: var(--color-base01) !important;
+  border: transparent solid var(--color-base03) !important;
+  min-width: 16px !important;
+  min-height: 16px !important;
+  max-height: 16px !important;
 }
 
 .topnav__menu-arrow {
@@ -445,4 +447,3 @@ td[bgcolor*="#"] {
 .smsc-topnav .topnav .favourites-container {
   gap: 0.5rem !important;
 }
-

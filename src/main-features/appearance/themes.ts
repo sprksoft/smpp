@@ -64,7 +64,7 @@ export let currentTheme: Theme;
 export type ShareId = string;
 export type ThemeId = string;
 
-export type ThemeCategory = [ThemeId];
+export type ThemeCategory = ThemeId[];
 
 export type ThemeCategories = {
   [name: string]: ThemeCategory;
@@ -429,9 +429,6 @@ export class ThemeTile extends Tile {
 
   async updateTitle() {
     this.titleElement.innerText = this.theme.displayName;
-    if (this.titleElement.innerText.length > 22) {
-      this.titleElement.innerText = this.theme.displayName.slice(0, 22) + "…";
-    }
   }
 
   override async createContent() {
@@ -525,31 +522,25 @@ export class ThemeTile extends Tile {
         this.element.style.setProperty("--background-image-local", `url()`);
       }
 
-      if (isFirefox && imageURL.type == "file") {
-        let imageContainer = this.element.querySelector(".image-container");
-        if (!imageContainer) return;
+      if (isFirefox && imageURL.type === "file") {
+        let oldImageContainer = this.element.querySelector(".image-container");
+        if (!oldImageContainer) return;
 
-        let stupidImageContainer = document.createElement("img");
-        stupidImageContainer.classList.add(
-          "image-container",
-          "firefox-container"
-        );
-        if (await isValidImage(imageURL.url)) {
-          stupidImageContainer.src = imageURL.url;
-        } else {
-          stupidImageContainer.src = "";
-        }
+        let newImageContainer = document.createElement("img");
+        newImageContainer.classList.add("image-container", "firefox-container");
 
-        let bottomContainer = this.element.querySelector(".theme-tile-bottom");
-        if (!bottomContainer) return;
-        imageContainer.remove();
-        this.element.prepend(stupidImageContainer);
+        newImageContainer.src = (await isValidImage(imageURL.url))
+          ? imageURL.url
+          : "";
+
+        oldImageContainer.replaceWith(newImageContainer);
       } else if (isFirefox) {
         let firefoxImageContainer =
           this.element.querySelector(".firefox-container");
+
         if (firefoxImageContainer) {
-          firefoxImageContainer.remove();
-          this.element.prepend(this.createImageContainer());
+          let replacement = this.createImageContainer();
+          firefoxImageContainer.replaceWith(replacement);
           await this.updateImage(currentTheme, forceReload);
         }
       }
@@ -611,9 +602,11 @@ export class ThemeTile extends Tile {
   }
 
   async duplicate() {
+    let copiedTheme = this.theme;
+    copiedTheme.displayName += " copy";
     let newThemeName = await browser.runtime.sendMessage({
       action: "saveCustomTheme",
-      data: await getTheme(this.name),
+      data: copiedTheme,
     });
     let result = (await browser.runtime.sendMessage({
       action: "getImage",
@@ -876,7 +869,7 @@ export class ThemeFolder extends Tile {
     let firstThemeInCategory = (await browser.runtime.sendMessage({
       action: "getFirstThemeInCategory",
       category: this.category,
-      includeHidden: true,
+      includeHidden: false,
     })) as string;
 
     if (!firstThemeInCategory) return;
@@ -1115,7 +1108,7 @@ export class ThemeSelector {
     let themes = (await browser.runtime.sendMessage({
       action: "getThemes",
       categories: [this.currentCategory],
-      includeHidden: true,
+      includeHidden: false,
     })) as {
       [key: string]: Theme;
     };
@@ -1143,7 +1136,6 @@ export class ThemeSelector {
       let customThemes = (await browser.runtime.sendMessage({
         action: "getThemes",
         categories: ["custom"],
-        includeHidden: true,
       })) as {
         [key: string]: Theme;
       };
@@ -1278,8 +1270,7 @@ export class ThemeSelector {
   async renderFolderTiles() {
     let categories = (await browser.runtime.sendMessage({
       action: "getThemeCategories",
-      includeEmpty: true,
-      includeHidden: true,
+      includeHidden: false,
     })) as {
       [key: string]: string[];
     };
@@ -1339,14 +1330,13 @@ export class ThemeSelector {
     let themes = (await browser.runtime.sendMessage({
       action: "getThemes",
       categories: [this.currentCategory],
-      includeHidden: true,
+      includeHidden: false,
     })) as {
       [key: string]: Theme;
     };
     let customThemes = (await browser.runtime.sendMessage({
       action: "getThemes",
       categories: ["custom"],
-      includeHidden: true,
     })) as {
       [key: string]: Theme;
     };
@@ -1506,11 +1496,11 @@ export class CustomThemeCreator extends Dialog {
     this.backgroundImageInput = new ImageSelector(this.name, true);
     this.backgroundImageInput.id = this.name;
     this.imagePreviewContainer = document.createElement("div");
+    this.backgroundImagePreview = this.createBackgroundImagePreview();
     this.backgroundImageInput.onStore = async () => {
       updateTheme(this.name);
       this.updateBackgroundImagePreview();
     };
-    this.backgroundImagePreview = this.createBackgroundImagePreview();
   }
 
   content = document.createElement("div");
@@ -1981,14 +1971,14 @@ export class CustomThemeCreator extends Dialog {
   }
 
   override async onCreate(): Promise<void> {
+    await this.load(this.theme);
     await this.updateBackgroundImagePreview();
-    this.load(this.theme);
   }
 
   async load(theme: Theme) {
     this.displayNameInput.value = theme.displayName;
-    this.updateColorPreviews();
     await this.backgroundImageInput.loadImageData();
+    this.updateColorPreviews();
   }
 
   override onClosed(realUserIntent: boolean): void {
