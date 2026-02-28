@@ -1990,17 +1990,6 @@
     await setSettingsData(data);
     await browser.storage.local.set({ customThemes });
   }
-  function getContentDispositionFileName(headerValue) {
-    if (!headerValue) {
-      return null;
-    }
-    const regex = /filename="(.*)"/g;
-    const match = regex.exec(headerValue);
-    if (match == null || match[1] == null) {
-      return null;
-    }
-    return match[1];
-  }
   async function installTheme(shareId) {
     const resp = await fetch("https://theme.smpp.be/" + shareId, {
       method: "GET",
@@ -2020,8 +2009,10 @@
     await setSettingsData(settingsData);
     if (json.img_url) {
       const resp2 = await fetch(json.img_url);
-      console.log("cd", resp2.headers.get("Content-Disposition"));
-      const filename = getContentDispositionFileName(resp2.headers.get("Content-Disposition")) ?? "importedFile.webp";
+      let filename = json.img_filename.trim();
+      if (filename == "") {
+        filename = "ImportedFile.webp";
+      }
       const base64 = await getBase64FromResponse(resp2);
       if (base64 === null) {
         throw new Error(
@@ -2094,7 +2085,8 @@
     const apiTheme = {
       name: theme.displayName,
       css: theme.cssProperties,
-      img_upload_chksum: hash
+      img_upload_chksum: hash,
+      img_filename: image.metaData.link
     };
     const resp = await fetch("https://theme.smpp.be", {
       method: "POST",

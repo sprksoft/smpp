@@ -198,20 +198,6 @@ export async function removeCustomTheme(id: ThemeId) {
   await browser.storage.local.set({ customThemes });
 }
 
-function getContentDispositionFileName(
-  headerValue: string | null
-): string | null {
-  if (!headerValue) {
-    return null;
-  }
-  const regex = /filename="(.*)"/g;
-  const match = regex.exec(headerValue);
-  if (match == null || match[1] == null) {
-    return null;
-  }
-  return match[1];
-}
-
 export async function installTheme(shareId: ShareId) {
   const resp = await fetch("https://theme.smpp.be/" + shareId, {
     method: "GET",
@@ -234,10 +220,10 @@ export async function installTheme(shareId: ShareId) {
 
   if (json.img_url) {
     const resp = await fetch(json.img_url);
-    console.log("cd", resp.headers.get("Content-Disposition"));
-    const filename =
-      getContentDispositionFileName(resp.headers.get("Content-Disposition")) ??
-      "importedFile.webp";
+    let filename = json.img_filename.trim();
+    if (filename == "") {
+      filename = "ImportedFile.webp";
+    }
 
     const base64 = await getBase64FromResponse(resp);
     if (base64 === null) {
@@ -333,6 +319,7 @@ export async function shareTheme(id: ThemeId): Promise<string | Error> {
     name: theme.displayName,
     css: theme.cssProperties,
     img_upload_chksum: hash,
+    img_filename: image.metaData.link,
   };
 
   const resp = await fetch("https://theme.smpp.be", {
