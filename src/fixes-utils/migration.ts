@@ -1,7 +1,19 @@
 // @ts-nocheck
-import { clearAllData } from "./utils.js";
+import { clearAllData, Toast } from "./utils.js";
 import { setWidgetSetting, widgets } from "../widgets/widgets.js";
 import { browser } from "../common/utils.ts";
+import type { Theme } from "../main-features/appearance/themes.js";
+
+async function updateSettings() {
+  // Seems pointless, it's not
+  let data = (await browser.runtime.sendMessage({
+    action: "getSettingsData",
+  })) as Settings;
+  (await browser.runtime.sendMessage({
+    action: "setSettingsData",
+    data,
+  })) as Settings;
+}
 
 export async function migrate() {
   await removeLegacyData(); // will reload the page if legacy data is present
@@ -9,141 +21,69 @@ export async function migrate() {
   let settingsData = await browser.runtime.sendMessage({
     action: "getRawSettingsData",
   });
-  if (settingsData == undefined) return;
-  if (settingsData.backgroundBlurAmount == undefined) return;
-  await migrateV5(settingsData);
+  if (settingsData.glass != undefined) return;
+  await migrateV6();
 }
 
-async function migrateV5(settingsData) {
-  console.log("MIG V:\n Started migration with", settingsData);
-  await migrateSettingsV5(settingsData);
-  await migrateImageV5(settingsData);
-  await migrateWidgetSettingsData();
+async function migrateV6() {
+  await migrateCustomThemeV6();
+  await migrateImagesV6();
+  await updateSettings();
+  new Toast(`Updated to 6.0.0`, "info", 10000).render();
 }
 
-async function migrateWidgetSettingsData() {
-  let delijnAppData = await browser.runtime.sendMessage({
-    action: "getDelijnAppData",
+async function migrateCustomThemeV6(customTheme) {
+  let oldCustomThemeData = await browser.runtime.sendMessage({
+    action: "getCustomThemeData",
   });
-  let weatherAppData = await browser.runtime.sendMessage({
-    action: "getWeatherAppData",
-  });
-
-  if (Object.keys(delijnAppData).length !== 0) {
-    await setWidgetSetting("DelijnWidget.halte", {
-      entiteit: delijnAppData.delijnAppData.entiteitnummer,
-      nummer: delijnAppData.delijnAppData.haltenummer,
-    });
-  }
-  if (Object.keys(weatherAppData).length !== 0) {
-    let weatherWidgets = widgets.filter((item) =>
-      item.name.toLowerCase().includes("weather")
-    );
-    weatherWidgets.forEach(async (widget) => {
-      await widget.setSetting(
-        "currentLocation",
-        weatherAppData.weatherAppData.lastLocation
-      );
-    });
-  }
-}
-
-async function migrateImageV5(oldData) {
-  let data;
-  switch (oldData.backgroundSelection) {
-    case 0: //default
-      data = {
-        imageData: null,
-        link: "",
-        type: "default",
-      };
-      break;
-    case 1: //link
-      data = {
-        imageData: oldData.backgroundLink,
-        link: oldData.backgroundLink,
-        type: "link",
-      };
-      break;
-    case 2: //file
-      let imageData = await browser.runtime.sendMessage({
-        action: "getBackgroundImage",
-      });
-      data = {
-        imageData: imageData.backgroundImage,
-        link: oldData.backgroundLink,
-        type: "file",
-      };
-      break;
-    default:
-      break;
-  }
-
-  await browser.runtime.sendMessage({
-    action: "setImage",
-    id: "backgroundImage",
-    data: data,
-  });
-
-  console.log(
-    "MIG V: \n Successfully migrated background image  with data:",
-    data
-  );
-}
-
-async function migrateSettingsV5(oldData) {
-  let newWeatherOverlayType;
-  switch (oldData.weatherOverlaySelection) {
-    case 0:
-      newWeatherOverlayType = "snow";
-      break;
-    case 1:
-      newWeatherOverlayType = "realtime";
-      break;
-    case 2:
-      newWeatherOverlayType = "snow";
-      break;
-  }
-  console.log(oldData);
-  console.log(oldData.customName);
-  let newSettingsData = {
-    username: oldData.customName,
-    theme: oldData.theme,
-    background: {
-      blur: oldData.backgroundBlurAmount,
+  if (!oldCustomThemeData) return;
+  let theme: Theme = {
+    displayName: "Custom Theme",
+    cssProperties: {
+      "--color-accent": oldCustomThemeData.color_accent,
+      "--color-base00": oldCustomThemeData.color_base00,
+      "--color-base01": oldCustomThemeData.color_base01,
+      "--color-base02": oldCustomThemeData.color_base02,
+      "--color-base03": oldCustomThemeData.color_base03,
+      "--color-homepage-sidebars-bg": "#02020585",
+      "--color-splashtext": oldCustomThemeData.color_text,
+      "--color-text": oldCustomThemeData.color_text,
+      "--darken-background": "#00000033",
     },
-    weatherOverlay: {
-      type: newWeatherOverlayType,
-      amount: oldData.weatherOverlayAmount,
-    },
-    tabLogo: oldData.enableSMPPLogo ? "smpp" : "sm",
-    news: oldData.showNews,
-    quicks: oldData.quicks,
-    performanceMode: oldData.enablePerfomanceMode,
   };
-
-  await browser.runtime.sendMessage({
-    action: "setRawSettingsData",
-    data: newSettingsData,
+  let id = await browser.runtime.sendMessage({
+    action: "saveCustomTheme",
+    data: theme,
   });
-
-  // Don't mind this, we don't talk about this, and we never remove it
-  const settings = await browser.runtime.sendMessage({
+  let data = (await browser.runtime.sendMessage({
     action: "getSettingsData",
-  });
-  await browser.runtime.sendMessage({
-    action: "setSettingsData",
-    data: settings,
-  });
+  })) as Settings;
+  if (data.appearance.theme == "custom") {
+    await browser.runtime.sendMessage({
+      action: "setSetting",
+      name: "appearance.theme",
+      data: id,
+    });
+  }
+  data = (await browser.runtime.sendMessage({
+    action: "getSettingsData",
+  })) as Settings;
+}
 
-  console.log(
-    "MIG V: \n Succesfully migrated settings data to:",
-    newSettingsData
-  );
+async function migrateImagesV6() {
+  browser.runtime.sendMessage({
+    action: "migrateImagesV6",
+  });
 }
 
 async function removeLegacyData() {
-  if (window.localStorage.getItem("settingsdata")) {
+  let rawSettingsData = await browser.runtime.sendMessage({
+    action: "getRawSettingsData",
+  });
+  if (
+    window.localStorage.getItem("settingsdata") ||
+    rawSettingsData.backgroundBlurAmount
+  ) {
     await clearAllData();
   }
 }

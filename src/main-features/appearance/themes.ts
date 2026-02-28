@@ -989,16 +989,18 @@ class AddCustomTheme extends Tile {
   }
 
   override async onClick() {
+    let defaultTheme: Theme = await getTheme("defaultCustom");
     let newTheme = await browser.runtime.sendMessage({
       action: "saveCustomTheme",
-      data: await getTheme("defaultCustom"),
+      data: defaultTheme,
     });
 
     await settingsWindow.themeSelector.updateSelectorContent();
     await settingsWindow.loadPage(false);
 
     await updateTheme(newTheme);
-    startCustomThemeCreator(await getTheme("defaultCustom"), newTheme);
+    startCustomThemeCreator(defaultTheme, newTheme);
+    await new Toast(`Created new custom theme`, "succes").render();
   }
 
   override async createContent() {
@@ -1999,5 +2001,7 @@ export class CustomThemeCreator extends Dialog {
     await settingsWindow.loadPage(true);
     await loadQuickSettings();
     this.hide(true);
+
+    await new Toast(`Removed "${this.theme.displayName}"`, "succes").render();
   }
 }

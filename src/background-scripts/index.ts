@@ -7,6 +7,7 @@ import {
   getImage,
   getBase64,
   getFileData,
+  migrateImagesV6,
 } from "./data-background-script.js";
 import {
   setSettingsData,
@@ -116,18 +117,6 @@ async function handleMessage(message: any, sendResponse: (resp: any) => void) {
       } else {
         sendResponse({ humanError: output.message });
       }
-    }
-
-    // Custom theme OLD
-    if (message.action === "getCustomThemeData") {
-      const customThemeData = await getCustomThemeData();
-      sendResponse(customThemeData);
-      console.log("Custom theme data data sent.");
-    }
-    if (message.action === "setCustomThemeData") {
-      await browser.storage.local.set({ customThemeData: message.data });
-      sendResponse({ success: true });
-      console.log("Custom theme data saved.");
     }
 
     // Images
@@ -274,6 +263,18 @@ async function handleMessage(message: any, sendResponse: (resp: any) => void) {
       console.log(message.data);
       await browser.storage.local.set({ settingsData: message.data });
       sendResponse({ success: true });
+    }
+    if (message.action === "migrateImagesV6") {
+      // for migration, NEVER use this!!!
+      console.log("Migrating images to V6...");
+      await migrateImagesV6();
+      sendResponse({ success: true });
+    }
+    if (message.action === "getCustomThemeData") {
+      // for migration, NEVER use this!!!
+      const customThemeData = await getCustomThemeData();
+      sendResponse(customThemeData);
+      console.log("Custom theme data data sent.");
     }
   } catch (err) {
     console.error("Service worker error:", err);

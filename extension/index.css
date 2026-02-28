@@ -3559,6 +3559,14 @@ button.open-theme-editor-button:hover {
       color-mix(in srgb, var(--color-base02) 73%, var(--color-accent) 27%) 55%,
       color-mix(in srgb, var(--color-base02) 95%, var(--color-accent) 5%) 100%);
 }
+.compact-theme-option .compact-theme-option-image-container.no-image img {
+  display: none;
+}
+.compact-theme-option .compact-theme-option-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 .compact-theme-option .compact-theme-option-image-container {
   width: 100%;
   height: 100%;
@@ -3567,7 +3575,6 @@ button.open-theme-editor-button:hover {
   filter: blur(2px);
   position: absolute;
   background:
-    var(--background-image-local),
     linear-gradient(
       40deg,
       color-mix(in srgb, var(--color-base03-local) 70%, var(--color-accent-local) 30%) 0%,

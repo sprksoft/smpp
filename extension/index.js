@@ -2828,6 +2828,11 @@ Is it scaring you off?`,
         };
         const file = passedFile || this.fileInput.files?.[0];
         if (file) {
+          if (!file.type.startsWith("image/")) {
+            this.fileInput.value = "";
+            new Toast("That's not an image!", "error").render();
+            return;
+          }
           this.fileInputButton.innerHTML = loadingSpinnerSvg;
           const [originalDataUrl, compressedDataUrl] = await Promise.all([
             imageCompression.getDataUrlFromFile(file),
@@ -2870,7 +2875,7 @@ Is it scaring you off?`,
             } else {
               await this.loadImageData();
               await new Toast(
-                "Failed to access image, try to upload it as a file",
+                "Failed to access image, try saving and uploading it",
                 "error",
                 5e3
               ).render();
@@ -5101,17 +5106,23 @@ Is it scaring you off?`,
         },
         true
       );
-      const oldContainer = this.element.querySelector(
+      const container = this.element.querySelector(
         ".compact-theme-option-image-container"
       );
-      if (!oldContainer) return;
-      const newImage = document.createElement("img");
-      newImage.classList.add("compact-theme-option-image-container");
-      if (imageURL?.url) {
-        newImage.src = imageURL.url;
+      if (!container) return;
+      if (!await isValidImage(imageURL.url)) {
+        container.classList.add("no-image");
+        container.innerHTML = "";
+        return;
       }
-      if (oldContainer !== newImage) {
-        oldContainer.replaceWith(newImage);
+      container.classList.remove("no-image");
+      const existingImg = container.querySelector("img");
+      const img = existingImg || document.createElement("img");
+      if (imageURL?.url) {
+        img.src = imageURL.url;
+      }
+      if (!existingImg) {
+        container.appendChild(img);
       }
     }
     updateElement() {
@@ -5257,7 +5268,7 @@ Is it scaring you off?`,
         this.selector.innerHTML = "";
         this.selector.classList.add("visible");
         this.selector.style.overflowY = "hidden";
-        await this.renderThemeOptions();
+        await this.updateThemeOptions();
         await delay(500);
         this.selector.style.overflowY = "auto";
       } else {
@@ -8207,14 +8218,16 @@ Is it scaring you off?`,
       return bottomContainer;
     }
     async onClick() {
+      let defaultTheme = await getTheme("defaultCustom");
       let newTheme = await browser.runtime.sendMessage({
         action: "saveCustomTheme",
-        data: await getTheme("defaultCustom")
+        data: defaultTheme
       });
       await settingsWindow.themeSelector.updateSelectorContent();
       await settingsWindow.loadPage(false);
       await updateTheme(newTheme);
-      startCustomThemeCreator(await getTheme("defaultCustom"), newTheme);
+      startCustomThemeCreator(defaultTheme, newTheme);
+      await new Toast(`Created new custom theme`, "succes").render();
     }
     async createContent() {
       this.element.classList.add("use-default-colors");
@@ -9030,6 +9043,7 @@ Is it scaring you off?`,
       await settingsWindow.loadPage(true);
       await loadQuickSettings();
       this.hide(true);
+      await new Toast(`Removed "${this.theme.displayName}"`, "succes").render();
     }
   };
 
@@ -13441,134 +13455,76 @@ ${code}`;
   registerWidget(new CalendarWidget());
 
   // src/fixes-utils/migration.ts
+  async function updateSettings() {
+    let data2 = await browser.runtime.sendMessage({
+      action: "getSettingsData"
+    });
+    await browser.runtime.sendMessage({
+      action: "setSettingsData",
+      data: data2
+    });
+  }
   async function migrate() {
     await removeLegacyData();
     let settingsData = await browser.runtime.sendMessage({
       action: "getRawSettingsData"
     });
-    if (settingsData == void 0) return;
-    if (settingsData.backgroundBlurAmount == void 0) return;
-    await migrateV5(settingsData);
+    if (settingsData.glass != void 0) return;
+    await migrateV6();
   }
-  async function migrateV5(settingsData) {
-    console.log("MIG V:\n Started migration with", settingsData);
-    await migrateSettingsV5(settingsData);
-    await migrateImageV5(settingsData);
-    await migrateWidgetSettingsData();
+  async function migrateV6() {
+    await migrateCustomThemeV6();
+    await migrateImagesV6();
+    await updateSettings();
+    new Toast(`Updated to 6.0.0`, "info", 1e4).render();
   }
-  async function migrateWidgetSettingsData() {
-    let delijnAppData = await browser.runtime.sendMessage({
-      action: "getDelijnAppData"
+  async function migrateCustomThemeV6(customTheme) {
+    let oldCustomThemeData = await browser.runtime.sendMessage({
+      action: "getCustomThemeData"
     });
-    let weatherAppData = await browser.runtime.sendMessage({
-      action: "getWeatherAppData"
-    });
-    if (Object.keys(delijnAppData).length !== 0) {
-      await setWidgetSetting("DelijnWidget.halte", {
-        entiteit: delijnAppData.delijnAppData.entiteitnummer,
-        nummer: delijnAppData.delijnAppData.haltenummer
-      });
-    }
-    if (Object.keys(weatherAppData).length !== 0) {
-      let weatherWidgets = widgets.filter(
-        (item) => item.name.toLowerCase().includes("weather")
-      );
-      weatherWidgets.forEach(async (widget) => {
-        await widget.setSetting(
-          "currentLocation",
-          weatherAppData.weatherAppData.lastLocation
-        );
-      });
-    }
-  }
-  async function migrateImageV5(oldData) {
-    let data2;
-    switch (oldData.backgroundSelection) {
-      case 0:
-        data2 = {
-          imageData: null,
-          link: "",
-          type: "default"
-        };
-        break;
-      case 1:
-        data2 = {
-          imageData: oldData.backgroundLink,
-          link: oldData.backgroundLink,
-          type: "link"
-        };
-        break;
-      case 2:
-        let imageData = await browser.runtime.sendMessage({
-          action: "getBackgroundImage"
-        });
-        data2 = {
-          imageData: imageData.backgroundImage,
-          link: oldData.backgroundLink,
-          type: "file"
-        };
-        break;
-      default:
-        break;
-    }
-    await browser.runtime.sendMessage({
-      action: "setImage",
-      id: "backgroundImage",
-      data: data2
-    });
-    console.log(
-      "MIG V: \n Successfully migrated background image  with data:",
-      data2
-    );
-  }
-  async function migrateSettingsV5(oldData) {
-    let newWeatherOverlayType;
-    switch (oldData.weatherOverlaySelection) {
-      case 0:
-        newWeatherOverlayType = "snow";
-        break;
-      case 1:
-        newWeatherOverlayType = "realtime";
-        break;
-      case 2:
-        newWeatherOverlayType = "snow";
-        break;
-    }
-    console.log(oldData);
-    console.log(oldData.customName);
-    let newSettingsData = {
-      username: oldData.customName,
-      theme: oldData.theme,
-      background: {
-        blur: oldData.backgroundBlurAmount
-      },
-      weatherOverlay: {
-        type: newWeatherOverlayType,
-        amount: oldData.weatherOverlayAmount
-      },
-      tabLogo: oldData.enableSMPPLogo ? "smpp" : "sm",
-      news: oldData.showNews,
-      quicks: oldData.quicks,
-      performanceMode: oldData.enablePerfomanceMode
+    if (!oldCustomThemeData) return;
+    let theme = {
+      displayName: "Custom Theme",
+      cssProperties: {
+        "--color-accent": oldCustomThemeData.color_accent,
+        "--color-base00": oldCustomThemeData.color_base00,
+        "--color-base01": oldCustomThemeData.color_base01,
+        "--color-base02": oldCustomThemeData.color_base02,
+        "--color-base03": oldCustomThemeData.color_base03,
+        "--color-homepage-sidebars-bg": "#02020585",
+        "--color-splashtext": oldCustomThemeData.color_text,
+        "--color-text": oldCustomThemeData.color_text,
+        "--darken-background": "#00000033"
+      }
     };
-    await browser.runtime.sendMessage({
-      action: "setRawSettingsData",
-      data: newSettingsData
+    let id = await browser.runtime.sendMessage({
+      action: "saveCustomTheme",
+      data: theme
     });
-    const settings = await browser.runtime.sendMessage({
+    let data2 = await browser.runtime.sendMessage({
       action: "getSettingsData"
     });
-    await browser.runtime.sendMessage({
-      action: "setSettingsData",
-      data: settings
+    if (data2.appearance.theme == "custom") {
+      await browser.runtime.sendMessage({
+        action: "setSetting",
+        name: "appearance.theme",
+        data: id
+      });
+    }
+    data2 = await browser.runtime.sendMessage({
+      action: "getSettingsData"
     });
-    console.log(
-      "MIG V: \n Succesfully migrated settings data to:",
-      newSettingsData
-    );
+  }
+  async function migrateImagesV6() {
+    browser.runtime.sendMessage({
+      action: "migrateImagesV6"
+    });
   }
   async function removeLegacyData() {
-    if (window.localStorage.getItem("settingsdata")) {
+    let rawSettingsData = await browser.runtime.sendMessage({
+      action: "getRawSettingsData"
+    });
+    if (window.localStorage.getItem("settingsdata") || rawSettingsData.backgroundBlurAmount) {
       await clearAllData();
     }
   }
@@ -13955,8 +13911,8 @@ ${code}`;
       alert("SMPP is 2x geladen");
     }
     document.body.classList.add("smpp");
-    await migrate();
     applyFixes();
+    await migrate();
     await createStaticGlobals();
     await createWidgetSystem();
     if (document.querySelector("nav.topnav")) {

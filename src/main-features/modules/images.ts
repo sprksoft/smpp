@@ -114,6 +114,7 @@ export class ImageSelector {
         if (item.type.startsWith("image/")) {
           e.preventDefault();
           const file = item.getAsFile();
+
           if (file) {
             this.linkInput.value = file.name;
             await this.storeImage(file);
@@ -165,6 +166,11 @@ export class ImageSelector {
       const file = passedFile || this.fileInput.files?.[0];
 
       if (file) {
+        if (!file.type.startsWith("image/")) {
+          this.fileInput.value = "";
+          new Toast("That's not an image!", "error").render();
+          return;
+        }
         this.fileInputButton.innerHTML = loadingSpinnerSvg;
         const [originalDataUrl, compressedDataUrl] = await Promise.all([
           imageCompression.getDataUrlFromFile(file),
@@ -214,7 +220,7 @@ export class ImageSelector {
           } else {
             await this.loadImageData();
             await new Toast(
-              "Failed to access image, try to upload it as a file",
+              "Failed to access image, try saving and uploading it",
               "error",
               5000
             ).render();

@@ -120,7 +120,7 @@ function changeFont() {
 function fixCoursesSearch() {
   document
     .getElementById("courseSearch")
-    ?.addEventListener("keydown", function(event) {
+    ?.addEventListener("keydown", function (event) {
       if (event.key === "Enter") {
         event.preventDefault();
 
@@ -440,9 +440,9 @@ async function main() {
 
   document.body.classList.add("smpp"); // For modding
 
+  applyFixes();
   await migrate();
 
-  applyFixes();
   await createStaticGlobals();
 
   await createWidgetSystem();

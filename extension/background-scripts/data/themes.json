@@ -823,5 +823,61 @@
       "--darken-background": "#07090a4d"
     },
     "displayName": "E30"
+  },
+  "monaco": {
+    "cssProperties": {
+      "--color-accent": "#7cc4d6",
+      "--color-base00": "#0c0c0c",
+      "--color-base01": "#1a1a1a",
+      "--color-base02": "#212122",
+      "--color-base03": "#3a3a3c",
+      "--color-homepage-sidebars-bg": "#0606061a",
+      "--color-splashtext": "#c5c7c8",
+      "--color-text": "#c5c7c8",
+      "--darken-background": "#0606064d"
+    },
+    "displayName": "Monaco Duo"
+  },
+  "smpp": {
+    "cssProperties": {
+      "--color-accent": "#7381ff",
+      "--color-base00": "#22265d",
+      "--color-base01": "#303582",
+      "--color-base02": "#3e44a7",
+      "--color-base03": "#4a4fad",
+      "--color-homepage-sidebars-bg": "#1717301a",
+      "--color-splashtext": "#eeefff",
+      "--color-text": "#eeefff",
+      "--darken-background": "#1717304d"
+    },
+    "displayName": "Smartschool++"
+  },
+  "smpplite": {
+    "cssProperties": {
+      "--color-accent": "#797bc5",
+      "--color-base00": "#fbfcff",
+      "--color-base01": "#e4e8fd",
+      "--color-base02": "#ccd4fb",
+      "--color-base03": "#9dacf7",
+      "--color-homepage-sidebars-bg": "#d8dcf01a",
+      "--color-splashtext": "#28295c",
+      "--color-text": "#28295c",
+      "--darken-background": "#d8dcf066"
+    },
+    "displayName": "Smartschool++ Lite"
+  },
+  "sm": {
+    "cssProperties": {
+      "--color-accent": "#fa7d14",
+      "--color-base00": "#ffffff",
+      "--color-base01": "#ececec",
+      "--color-base02": "#dfdfdf",
+      "--color-base03": "#bfbfbf",
+      "--color-homepage-sidebars-bg": "#e1e1e11a",
+      "--color-splashtext": "#000000",
+      "--color-text": "#000000",
+      "--darken-background": "#e1e1e166"
+    },
+    "displayName": "Smartschool"
   }
 }

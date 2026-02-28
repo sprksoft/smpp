@@ -43,7 +43,9 @@
     "e30",
     "audi",
     "rallyaudi",
-    "keith"
+    "keith",
+    "monaco",
+    "smpp"
   ],
   "light": [
     "white",
@@ -57,7 +59,9 @@
     "fuji",
     "bluemountain",
     "911",
-    "f40"
+    "f40",
+    "smpplite",
+    "sm"
   ],
   "mountain": [
     "mountain",
@@ -71,7 +75,16 @@
     "darkfuji"
   ],
   "japan": ["japan", "fuji", "nightlife", "tokyo", "greenneon", "darkfuji"],
-  "car": ["e30", "mclaren", "f40", "911", "purpleporsche", "audi", "rallyaudi"],
+  "car": [
+    "e30",
+    "mclaren",
+    "f40",
+    "911",
+    "purpleporsche",
+    "audi",
+    "rallyaudi",
+    "monaco"
+  ],
   "space": [
     "galaxy",
     "cloudyluna",
@@ -86,11 +99,8 @@
   "animal": ["otters", "lonelycat", "dino", "keith"],
   "other": [
     "lightglass",
-    "lonelycat",
-    "dino",
     "lost",
     "minecraft",
-    "otters",
     "aurora",
     "sunset",
     "vax",
@@ -104,7 +114,10 @@
     "birb",
     "sand",
     "tech",
-    "ocean"
+    "ocean",
+    "smpplite",
+    "sm",
+    "smpp"
   ],
   "hidden": [
     "fairyblue",
@@ -114,6 +127,9 @@
     "boringwhite",
     "night",
     "keith",
-    "bluemountain"
+    "bluemountain",
+    "smpplite",
+    "sm",
+    "smpp"
   ]
 }

@@ -18,6 +18,7 @@ import {
   type Theme,
   type Themes,
 } from "../appearance/themes.js";
+import { isValidImage } from "../../fixes-utils/utils.js";
 
 class NoThemesOption {
   element = document.createElement("div");
@@ -94,23 +95,28 @@ class CompactThemeOption {
       true
     );
 
-    const oldContainer = this.element.querySelector(
+    const container = this.element.querySelector(
       ".compact-theme-option-image-container"
     );
-    if (!oldContainer) return;
+    if (!container) return;
 
-    // Create the high-performance img element
-    const newImage = document.createElement("img");
-    newImage.classList.add("compact-theme-option-image-container");
-
-    // Type-safe assignment of the src
-    if (imageURL?.url) {
-      newImage.src = imageURL.url;
+    if (!(await isValidImage(imageURL.url))) {
+      container.classList.add("no-image");
+      container.innerHTML = "";
+      return;
     }
 
-    // Use replaceWith to swap the div (or old img) for the new img atomically
-    if (oldContainer !== newImage) {
-      oldContainer.replaceWith(newImage);
+    container.classList.remove("no-image");
+
+    const existingImg = container.querySelector("img");
+    const img = existingImg || document.createElement("img");
+
+    if (imageURL?.url) {
+      img.src = imageURL.url;
+    }
+
+    if (!existingImg) {
+      container.appendChild(img);
     }
   }
   updateElement() {
@@ -278,7 +284,7 @@ class CompactThemeSelector {
       this.selector.classList.add("visible");
       this.selector.style.overflowY = "hidden";
 
-      await this.renderThemeOptions();
+      await this.updateThemeOptions();
       await delay(500);
       this.selector.style.overflowY = "auto";
     } else {

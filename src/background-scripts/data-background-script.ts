@@ -3,8 +3,10 @@ import type {
   SMPPImage,
   SMPPImageMetaData,
 } from "../main-features/modules/images.js";
+import type { Settings } from "../main-features/settings/main-settings.js";
 import { fetchDelijnData } from "./api-background-script.js";
 import { loadJSON } from "./json-loader.js";
+import { getSettingsData } from "./settings.js";
 
 function getDefaultCustomThemeData() {
   return {
@@ -158,5 +160,32 @@ export async function getFileData(link: string) {
   } catch (error) {
     console.error("Error getting file data:", error);
     return null;
+  }
+}
+
+export async function migrateImagesV6() {
+  let settings = (await getSettingsData()) as Settings;
+  const images = (await browser.storage.local.get("images")).images || {};
+
+  if (images["profilePicture"]) {
+    let profileImage = {
+      metaData: {
+        type: images["profilePicture"].type,
+        link: images["profilePicture"].link,
+      },
+      imageData: images["profilePicture"].imageData,
+    };
+    await setImage("profilePicture", profileImage);
+  }
+
+  if (images["backgroundImage"]) {
+    let backgroundImage = {
+      metaData: {
+        type: images["backgroundImage"].type,
+        link: images["backgroundImage"].link,
+      },
+      imageData: images["backgroundImage"].imageData,
+    };
+    await setImage(settings.appearance.theme, backgroundImage);
   }
 }
