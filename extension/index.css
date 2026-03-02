@@ -501,8 +501,7 @@ body:has(.smsc-topnav) .smpp-background-image-container {
 }
 .game-canvas {
   border-radius: 0.75rem;
-  width: 260px;
-  height: 260px;
+  width: 100%;
 }
 .game-button {
   font-size: 1.7rem !important;
