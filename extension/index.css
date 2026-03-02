@@ -8715,6 +8715,12 @@ button.filter-btn.c-red-combo-hover--100:hover {
   width: unset !important;
   border-bottom: 1px solid var(--color-base02) !important;
 }
+.online-session-bar {
+  background-color: var(--color-base02) !important;
+  border: 2px solid var(--color-accent) !important;
+  box-shadow: none !important;
+  border-radius: 1rem !important;
+}
 
 /* src/styles/fixes/results.css */
 #smscMain div.wide-toolbar.js-wide-toolbar {
