@@ -45,7 +45,11 @@
     "rallyaudi",
     "keith",
     "monaco",
-    "smpp"
+    "smpp",
+    "neonmclaren",
+    "dragon",
+    "party",
+    "grassy"
   ],
   "light": [
     "white",
@@ -61,7 +65,10 @@
     "911",
     "f40",
     "smpplite",
-    "sm"
+    "sm",
+    "dunes",
+    "misty",
+    "softwinter"
   ],
   "mountain": [
     "mountain",
@@ -72,7 +79,8 @@
     "bluemountain",
     "bigsur",
     "alps",
-    "darkfuji"
+    "darkfuji",
+    "misty"
   ],
   "japan": ["japan", "fuji", "nightlife", "tokyo", "greenneon", "darkfuji"],
   "car": [
@@ -83,7 +91,8 @@
     "purpleporsche",
     "audi",
     "rallyaudi",
-    "monaco"
+    "monaco",
+    "neonmclaren"
   ],
   "space": [
     "galaxy",
@@ -93,10 +102,21 @@
     "redsky",
     "redmoon",
     "ldev",
-    "space"
+    "space",
+    "dunes"
   ],
-  "seasonal": ["fall", "mclaren", "smkerst", "winter", "summer", "matcha"],
-  "animal": ["otters", "lonelycat", "dino", "keith"],
+  "seasonal": [
+    "fall",
+    "mclaren",
+    "smkerst",
+    "winter",
+    "summer",
+    "matcha",
+    "misty",
+    "softwinter",
+    "grassy"
+  ],
+  "animal": ["otters", "lonelycat", "dino", "keith", "dragon"],
   "other": [
     "lightglass",
     "lost",
@@ -117,7 +137,8 @@
     "ocean",
     "smpplite",
     "sm",
-    "smpp"
+    "smpp",
+    "party"
   ],
   "hidden": [
     "fairyblue",

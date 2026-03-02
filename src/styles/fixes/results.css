@@ -192,7 +192,7 @@ input.input.bootstrap__input.search-input {
   background-color: var(--darken-background) !important;
   backdrop-filter: var(--small-blur) !important;
   color: var(--color-text) !important;
-  border-color: var(--color-base01) !important;
+  border-color: transparent !important;
 }
 
 .evaluation-list-item,

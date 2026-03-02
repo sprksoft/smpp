@@ -1416,6 +1416,7 @@ smsc-listview .checkbox-button[aria-checked="true"] {
   border-bottom-right-radius: 1rem;
 }
 
+.mobile-style input[type="radio"],
 .moveToPostbox__item__icon,
 label.radiobutton input[type="radio"] {
   appearance: none !important;
@@ -1427,6 +1428,7 @@ label.radiobutton input[type="radio"] {
   height: 1.3rem !important;
 }
 
+.mobile-style input[type="radio"]:checked,
 label.radiobutton input[type="radio"]:checked {
   background: var(--color-accent) !important;
 }
@@ -2821,4 +2823,28 @@ input[type="search"].bootstrap__input.input.search-input {
 
 .blockTitle-J37wH.blockTitle-J37wH:after {
   border-color: var(--color-base02) !important;
+}
+
+.glass .js-emptystate.smsc-container__emptyState {
+  backdrop-filter: var(--surface-blur) !important;
+  background-color: var(--darken-background) !important;
+}
+span.empty-state__label.js-emptystate-label,
+span.smsc-emptystate__label,
+input.inline-editor__input,
+h1.heading1-CqfPA.title-HK7bu,
+span.empty-state__label.js-empty-state-label {
+  color: var(--color-text) !important;
+  border-radius: 0.75rem !important;
+  background-color: var(--color-base01) !important;
+  padding: 0.2rem 0.75rem !important;
+}
+
+.glass span.empty-state__label.js-emptystate-label,
+.glass span.smsc-emptystate__label,
+.glass input.inline-editor__input,
+.glass h1.heading1-CqfPA.title-HK7bu,
+.glass span.empty-state__label.js-empty-state-label {
+  backdrop-filter: var(--medium-blur) !important;
+  background-color: var(--darken-background) !important;
 }

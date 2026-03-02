@@ -10237,7 +10237,6 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       "config",
       "clearsettings",
       "discord",
-      "toggle performance mode",
       "dizzy",
       "breakdmenu",
       "glass",

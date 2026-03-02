@@ -626,7 +626,7 @@
       "--color-text": "#d6f1f6",
       "--darken-background": "#13262c4d"
     },
-    "displayName": "Dino"
+    "displayName": "Dyno"
   },
   "lonelycat": {
     "cssProperties": {
@@ -879,5 +879,103 @@
       "--darken-background": "#e1e1e166"
     },
     "displayName": "Smartschool"
+  },
+  "neonmclaren": {
+    "cssProperties": {
+      "--color-accent": "#0bf1f8",
+      "--color-base00": "#1d0222",
+      "--color-base01": "#46154d",
+      "--color-base02": "#57245f",
+      "--color-base03": "#794283",
+      "--color-homepage-sidebars-bg": "#1301151a",
+      "--color-splashtext": "#e4faff",
+      "--color-text": "#e4faff",
+      "--darken-background": "#1301154d"
+    },
+    "displayName": "Neon Mclaren"
+  },
+  "dunes": {
+    "cssProperties": {
+      "--color-accent": "#0481cc",
+      "--color-base00": "#faced5",
+      "--color-base01": "#f0b3bb",
+      "--color-base02": "#f29aa7",
+      "--color-base03": "#fb5a71",
+      "--color-homepage-sidebars-bg": "#eec0c51a",
+      "--color-splashtext": "#08365d",
+      "--color-text": "#08365d",
+      "--darken-background": "#eec0c566"
+    },
+    "displayName": "Dusk Dunes"
+  },
+  "party": {
+    "cssProperties": {
+      "--color-accent": "#df3f9c",
+      "--color-base00": "#190d1c",
+      "--color-base01": "#43204d",
+      "--color-base02": "#5c276b",
+      "--color-base03": "#7b4889",
+      "--color-homepage-sidebars-bg": "#0f07111a",
+      "--color-splashtext": "#f8e0e1",
+      "--color-text": "#f8e0e1",
+      "--darken-background": "#0f07114d"
+    },
+    "displayName": "Fuchsia Party"
+  },
+  "dragon": {
+    "cssProperties": {
+      "--color-accent": "#e29376",
+      "--color-base00": "#261415",
+      "--color-base01": "#6f4244",
+      "--color-base02": "#8e5052",
+      "--color-base03": "#bb6b6e",
+      "--color-homepage-sidebars-bg": "#180c0c1a",
+      "--color-splashtext": "#ecd7ce",
+      "--color-text": "#ecd7ce",
+      "--darken-background": "#180c0c4d"
+    },
+    "displayName": "Knight vs Dragon"
+  },
+  "softwinter": {
+    "cssProperties": {
+      "--color-accent": "#d48c60",
+      "--color-base00": "#e3d6cf",
+      "--color-base01": "#d9c8bf",
+      "--color-base02": "#d0baaf",
+      "--color-base03": "#bc927d",
+      "--color-homepage-sidebars-bg": "#dacfc91a",
+      "--color-splashtext": "#344071",
+      "--color-text": "#344071",
+      "--darken-background": "#dacfc966"
+    },
+    "displayName": "Soft Winter"
+  },
+  "grassy": {
+    "cssProperties": {
+      "--color-accent": "#aac873",
+      "--color-base00": "#151f15",
+      "--color-base01": "#283d27",
+      "--color-base02": "#344f33",
+      "--color-base03": "#447342",
+      "--color-homepage-sidebars-bg": "#0d130c1a",
+      "--color-splashtext": "#d2dde6",
+      "--color-text": "#d2dde6",
+      "--darken-background": "#0d130c4d"
+    },
+    "displayName": "Grassy Forest"
+  },
+  "misty": {
+    "cssProperties": {
+      "--color-accent": "#c4a400",
+      "--color-base00": "#fbe4aa",
+      "--color-base01": "#f9dc92",
+      "--color-base02": "#f8d47a",
+      "--color-base03": "#f5c44a",
+      "--color-homepage-sidebars-bg": "#f1dcb01a",
+      "--color-splashtext": "#4c4d09",
+      "--color-text": "#4c4d09",
+      "--darken-background": "#f1dcb066"
+    },
+    "displayName": "Misty Mountains"
   }
 }

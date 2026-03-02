@@ -1552,6 +1552,7 @@ button.open-theme-editor-button:hover {
 }
 
 .smpp-tooltip {
+  line-height: 1 !important;
   z-index: 10000;
   pointer-events: none;
   height: 2.5rem;

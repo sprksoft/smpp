@@ -173,7 +173,6 @@ export async function do_qm(opener = "") {
       "config",
       "clearsettings",
       "discord",
-      "toggle performance mode",
       "dizzy",
       "breakdmenu",
       "glass",

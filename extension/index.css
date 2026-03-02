@@ -13,6 +13,10 @@ html {
 .dmenu-hidden {
   display: none !important;
 }
+.glass .dmenu {
+  background: var(--darken-background) !important;
+  backdrop-filter: var(--surface-blur) !important;
+}
 .dmenu {
   overflow: clip;
   background: var(--color-base00);
@@ -23,10 +27,10 @@ html {
   font-size: var(--dmenu-font-size) !important;
   z-index: 20;
   box-shadow: 0px 0px 150px black;
-  border-radius: 10px !important;
+  border-radius: 1.5rem !important;
 }
 .enableAnimations .dmenu {
-  animation: dmenu 0.2s linear 0ms 1 !important;
+  animation: dmenu 0.2s cubic-bezier(0.17, 0.67, 0.13, 1.07) 0ms 1 !important;
 }
 .enableAnimations .jokeDmenu.dmenu {
   animation: dmenu_joke 30s linear 0ms 1 !important;
@@ -34,14 +38,11 @@ html {
 @keyframes dmenu {
   0% {
     opacity: 0.1;
-    transform: translateY(25%) scale(0.9);
+    transform: translateY(50%) scale(0.8);
   }
-  40% {
-    transform: translateY(-2%) scale(1);
+  100% {
     opacity: 1;
-  }
-  60% {
-    transform: translateY(0px);
+    transform: translateY(0px) scale(1);
   }
 }
 @keyframes dmenu_joke {
@@ -141,13 +142,19 @@ html {
   cursor: auto !important;
 }
 .dmenu-itemlist {
+  padding: 0.25rem 0.5rem !important;
   overflow-y: auto;
 }
 .dmenu .hidden {
   visibility: hidden;
 }
+.glass .dmenu-row {
+  background-color: var(--darken-background);
+}
 .dmenu-row {
-  padding: var(--dmenu-padding);
+  border-radius: 0.75rem;
+  margin: 0.2rem 0rem;
+  padding: 0.5rem 0.75rem;
   background: var(--color-base00);
   color: var(--color-text) !important;
   display: flex;
@@ -3375,6 +3382,7 @@ button.open-theme-editor-button:hover {
   color: var(--color-text) !important;
 }
 .smpp-tooltip {
+  line-height: 1 !important;
   z-index: 10000;
   pointer-events: none;
   height: 2.5rem;
@@ -4938,6 +4946,7 @@ smsc-listview .checkbox-button[aria-checked=true] {
   border-top-right-radius: 1rem;
   border-bottom-right-radius: 1rem;
 }
+.mobile-style input[type=radio],
 .moveToPostbox__item__icon,
 label.radiobutton input[type=radio] {
   appearance: none !important;
@@ -4948,6 +4957,7 @@ label.radiobutton input[type=radio] {
   width: 1.3rem !important;
   height: 1.3rem !important;
 }
+.mobile-style input[type=radio]:checked,
 label.radiobutton input[type=radio]:checked {
   background: var(--color-accent) !important;
 }
@@ -6128,6 +6138,28 @@ input[type=search].bootstrap__input.input.search-input {
 }
 .blockTitle-J37wH.blockTitle-J37wH:after {
   border-color: var(--color-base02) !important;
+}
+.glass .js-emptystate.smsc-container__emptyState {
+  backdrop-filter: var(--surface-blur) !important;
+  background-color: var(--darken-background) !important;
+}
+span.empty-state__label.js-emptystate-label,
+span.smsc-emptystate__label,
+input.inline-editor__input,
+h1.heading1-CqfPA.title-HK7bu,
+span.empty-state__label.js-empty-state-label {
+  color: var(--color-text) !important;
+  border-radius: 0.75rem !important;
+  background-color: var(--color-base01) !important;
+  padding: 0.2rem 0.75rem !important;
+}
+.glass span.empty-state__label.js-emptystate-label,
+.glass span.smsc-emptystate__label,
+.glass input.inline-editor__input,
+.glass h1.heading1-CqfPA.title-HK7bu,
+.glass span.empty-state__label.js-empty-state-label {
+  backdrop-filter: var(--medium-blur) !important;
+  background-color: var(--darken-background) !important;
 }
 
 /* src/styles/fixes/login.css */
@@ -8884,7 +8916,7 @@ input.input.bootstrap__input.search-input {
   background-color: var(--darken-background) !important;
   backdrop-filter: var(--small-blur) !important;
   color: var(--color-text) !important;
-  border-color: var(--color-base01) !important;
+  border-color: transparent !important;
 }
 .evaluation-list-item,
 .goals-filter__item,
