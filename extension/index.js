@@ -2895,8 +2895,6 @@ Is it scaring you off?`,
       });
       await this.loadImageData();
       this.onStore();
-      console.log(data2);
-      console.log(this.id);
       if (this.isThemeImage) {
         await browser.runtime.sendMessage({
           action: "markThemeAsModified",
@@ -2929,15 +2927,11 @@ Is it scaring you off?`,
           data2 = this.getDefaultImageData();
           compressedImage = this.getDefaultImageData();
         }
-        console.log(data2);
         await this.saveToStorage(data2, compressedImage);
         new Toast("Image successfully saved", "success").render();
       } catch (error) {
         if (error instanceof ImageProcessingError) {
           new Toast(error.message, error.toastType, error.toastDuration).render();
-          data2 = this.getDefaultImageData();
-          compressedImage = this.getDefaultImageData();
-          await this.saveToStorage(data2, compressedImage);
         } else {
           new Toast("Failed to save image", "error", 5e3).render();
           console.error("Failed to store image:", error);

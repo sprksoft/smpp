@@ -254,8 +254,6 @@ export class ImageSelector {
     // 2. Update local state
     await this.loadImageData();
     this.onStore();
-    console.log(data);
-    console.log(this.id);
     // 3. Update theme if applicable
     if (this.isThemeImage) {
       await browser.runtime.sendMessage({
@@ -298,7 +296,6 @@ export class ImageSelector {
         data = this.getDefaultImageData();
         compressedImage = this.getDefaultImageData();
       }
-      console.log(data);
 
       // 3. Save to browser storage and update UI
       await this.saveToStorage(data, compressedImage);
@@ -312,9 +309,6 @@ export class ImageSelector {
         new Toast(error.message, error.toastType, error.toastDuration).render();
 
         // If validation fails (e.g., bad link), wipe the corrupted state and save defaults
-        data = this.getDefaultImageData();
-        compressedImage = this.getDefaultImageData();
-        await this.saveToStorage(data, compressedImage);
       } else {
         // Catch network or system-level crashes
         new Toast("Failed to save image", "error", 5000).render();
