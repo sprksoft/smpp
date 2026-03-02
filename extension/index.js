@@ -5754,29 +5754,31 @@ Is it scaring you off?`,
               settings.appearance.background.blur * 10
             );
           }
-          document.querySelectorAll(".settings-page-weather-overlay-container input").forEach((input) => {
-            const inputElement = input;
-            if (inputElement.id) {
-              inputElement.checked = inputElement.id.includes(
-                settings.appearance.weatherOverlay.type
+          if (!liteMode) {
+            document.querySelectorAll(".settings-page-weather-overlay-container input").forEach((input) => {
+              const inputElement = input;
+              if (inputElement.id) {
+                inputElement.checked = inputElement.id.includes(
+                  settings.appearance.weatherOverlay.type
+                );
+              }
+            });
+            const weatherOverlaySlider = document.getElementById(
+              "settings-page-weather-overlay-slider"
+            );
+            if (weatherOverlaySlider) {
+              weatherOverlaySlider.value = String(
+                settings.appearance.weatherOverlay.amount
               );
             }
-          });
-          const weatherOverlaySlider = document.getElementById(
-            "settings-page-weather-overlay-slider"
-          );
-          if (weatherOverlaySlider) {
-            weatherOverlaySlider.value = String(
-              settings.appearance.weatherOverlay.amount
+            const weatherOpacitySlider = document.getElementById(
+              "settings-page-weather-overlay-opacity-slider"
             );
-          }
-          const weatherOpacitySlider = document.getElementById(
-            "settings-page-weather-overlay-opacity-slider"
-          );
-          if (weatherOpacitySlider) {
-            weatherOpacitySlider.value = String(
-              settings.appearance.weatherOverlay.opacity * 100
-            );
+            if (weatherOpacitySlider) {
+              weatherOpacitySlider.value = String(
+                settings.appearance.weatherOverlay.opacity * 100
+              );
+            }
           }
           const defaultIconButton = document.getElementById(
             "settings-page-default-icon-button"
@@ -5973,24 +5975,26 @@ Is it scaring you off?`,
             settings.appearance.theme = selectedTheme.dataset["theme"];
           }
           settings.appearance.background.blur = getSliderValue("settings-page-blur-slider") / 10;
-          const chosenWeather = document.querySelector(
-            ".settings-page-weather-overlay-container input:checked"
-          );
-          if (chosenWeather) {
-            const weatherContainer = chosenWeather.closest(
-              "[data-weather]"
+          if (!liteMode) {
+            const chosenWeather = document.querySelector(
+              ".settings-page-weather-overlay-container input:checked"
             );
-            if (weatherContainer?.dataset["weather"]) {
-              const weatherType = weatherContainer.dataset["weather"];
-              if (weatherType === "realtime" || weatherType === "rain" || weatherType === "snow") {
-                settings.appearance.weatherOverlay.type = weatherType;
+            if (chosenWeather) {
+              const weatherContainer = chosenWeather.closest(
+                "[data-weather]"
+              );
+              if (weatherContainer?.dataset["weather"]) {
+                const weatherType = weatherContainer.dataset["weather"];
+                if (weatherType === "realtime" || weatherType === "rain" || weatherType === "snow") {
+                  settings.appearance.weatherOverlay.type = weatherType;
+                }
               }
             }
+            settings.appearance.weatherOverlay.amount = getSliderValue(
+              "settings-page-weather-overlay-slider"
+            );
+            settings.appearance.weatherOverlay.opacity = getSliderValue("settings-page-weather-overlay-opacity-slider") / 100;
           }
-          settings.appearance.weatherOverlay.amount = getSliderValue(
-            "settings-page-weather-overlay-slider"
-          );
-          settings.appearance.weatherOverlay.opacity = getSliderValue("settings-page-weather-overlay-opacity-slider") / 100;
           const smppIconChecked = getCheckboxValue(
             "settings-page-smpp-icon-button"
           );
@@ -6365,64 +6369,66 @@ Is it scaring you off?`,
           blurredImageContainer.appendChild(blurredImage);
           blurPreviewContainer.appendChild(blurredImageContainer);
           this.settingsPage.appendChild(blurPreviewContainer);
-          this.settingsPage.appendChild(createSectionTitle("Weather overlay"));
-          this.settingsPage.appendChild(
-            createDescription("Add dynamic weather visuals.")
-          );
-          let weatherIconsContainer = document.createElement("div");
-          weatherIconsContainer.classList.add(
-            "settings-page-icons-container",
-            "settings-page-weather-overlay-container"
-          );
-          let rainBtn = createImageButtonWithLabel(
-            "icons/weather-overlay/raindropfancy.svg",
-            "Rain",
-            "5rem",
-            "5rem",
-            "weather",
-            "settings-page-raindrop-button"
-          );
-          rainBtn.dataset["weather"] = "rain";
-          weatherIconsContainer.appendChild(rainBtn);
-          let realtimeBtn = createImageButtonWithLabel(
-            "icons/weather-overlay/realtimefancy.svg",
-            "Realtime",
-            "5rem",
-            "5rem",
-            "weather",
-            "settings-page-realtime-button"
-          );
-          realtimeBtn.dataset["weather"] = "realtime";
-          weatherIconsContainer.appendChild(realtimeBtn);
-          let snowBtn = createImageButtonWithLabel(
-            "icons/weather-overlay/snowflakefancy.svg",
-            "Snow",
-            "5rem",
-            "5rem",
-            "weather",
-            "settings-page-snow-button"
-          );
-          snowBtn.dataset["weather"] = "snow";
-          weatherIconsContainer.appendChild(snowBtn);
-          this.settingsPage.appendChild(weatherIconsContainer);
-          this.settingsPage.appendChild(
-            createLabeledSlider(
-              "0",
-              "500",
-              "settings-page-weather-overlay-slider",
-              "Amount",
-              false
-            )
-          );
-          this.settingsPage.appendChild(
-            createLabeledSlider(
-              "0",
-              "100",
-              "settings-page-weather-overlay-opacity-slider",
-              "Opacity",
-              false
-            )
-          );
+          if (!liteMode) {
+            this.settingsPage.appendChild(createSectionTitle("Weather overlay"));
+            this.settingsPage.appendChild(
+              createDescription("Add dynamic weather visuals.")
+            );
+            let weatherIconsContainer = document.createElement("div");
+            weatherIconsContainer.classList.add(
+              "settings-page-icons-container",
+              "settings-page-weather-overlay-container"
+            );
+            let rainBtn = createImageButtonWithLabel(
+              "icons/weather-overlay/raindropfancy.svg",
+              "Rain",
+              "5rem",
+              "5rem",
+              "weather",
+              "settings-page-raindrop-button"
+            );
+            rainBtn.dataset["weather"] = "rain";
+            weatherIconsContainer.appendChild(rainBtn);
+            let realtimeBtn = createImageButtonWithLabel(
+              "icons/weather-overlay/realtimefancy.svg",
+              "Realtime",
+              "5rem",
+              "5rem",
+              "weather",
+              "settings-page-realtime-button"
+            );
+            realtimeBtn.dataset["weather"] = "realtime";
+            weatherIconsContainer.appendChild(realtimeBtn);
+            let snowBtn = createImageButtonWithLabel(
+              "icons/weather-overlay/snowflakefancy.svg",
+              "Snow",
+              "5rem",
+              "5rem",
+              "weather",
+              "settings-page-snow-button"
+            );
+            snowBtn.dataset["weather"] = "snow";
+            weatherIconsContainer.appendChild(snowBtn);
+            this.settingsPage.appendChild(weatherIconsContainer);
+            this.settingsPage.appendChild(
+              createLabeledSlider(
+                "0",
+                "500",
+                "settings-page-weather-overlay-slider",
+                "Amount",
+                false
+              )
+            );
+            this.settingsPage.appendChild(
+              createLabeledSlider(
+                "0",
+                "100",
+                "settings-page-weather-overlay-opacity-slider",
+                "Opacity",
+                false
+              )
+            );
+          }
           this.settingsPage.appendChild(createSectionTitle("Icon"));
           this.settingsPage.appendChild(
             createDescription("Choose the icon displayed in your browser tab.")
@@ -7576,7 +7582,7 @@ Is it scaring you off?`,
       this.element.style.top = `${this.yPos}%`;
     }
   };
-  var ColorPicker2 = class {
+  var ColorPicker = class {
     currentColor = w("#72b6c0ff");
     width;
     element = document.createElement("div");
@@ -7743,7 +7749,7 @@ Is it scaring you off?`,
     async createContent() {
     }
   };
-  var ThemeTile2 = class extends Tile {
+  var ThemeTile = class extends Tile {
     name;
     isFavorite;
     isCustom;
@@ -8394,7 +8400,7 @@ Is it scaring you off?`,
             this.content.removeChild(element);
             this.currentTiles = this.currentTiles.filter((tile) => {
               if (tile instanceof AddCustomTheme) return true;
-              if (tile instanceof ThemeTile2) return tile.name != themeName;
+              if (tile instanceof ThemeTile) return tile.name != themeName;
               return false;
             });
           }
@@ -8483,7 +8489,7 @@ Is it scaring you off?`,
       this.content.style.height = String(this.calculateContentHeight(this.currentTiles.length)) + "px";
     }
     async createThemeTile(name2, isFavorite, isCustom, theme) {
-      let tile = new ThemeTile2(
+      let tile = new ThemeTile(
         name2,
         this.currentCategory,
         isFavorite,
@@ -8651,7 +8657,7 @@ Is it scaring you off?`,
     content = document.createElement("div");
     displayNameInput = document.createElement("input");
     openColorPicker(name2, colorPreview, e5) {
-      let colorPicker = new ColorPicker2();
+      let colorPicker = new ColorPicker();
       colorPicker.element.style.position = "absolute";
       colorPicker.element.classList.add("floating-picker");
       let _docEventHandler = (docEvent) => {
