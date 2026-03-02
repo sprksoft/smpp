@@ -46,7 +46,7 @@ document.addEventListener("smppPageScriptMessage", async (e) => {
         });
         if (getResp.theme) {
           sendMessage("setMode", {
-            mode: "installed",
+            mode: "justInstalled",
           });
           return;
         }
@@ -61,7 +61,7 @@ document.addEventListener("smppPageScriptMessage", async (e) => {
           });
         } else {
           sendMessage("setMode", {
-            mode: "installed",
+            mode: "justInstalled",
           });
         }
       }
