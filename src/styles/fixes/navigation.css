@@ -223,11 +223,20 @@ input::placeholder {
   font-weight: 600 !important;
 }
 
+.blueprint .bp-c-combo-primary--300,
+.blueprint .bp-c-combo-hover-primary--300 {
+  border: 2px solid !important;
+  border-radius: 0.75rem !important;
+}
+
+.blueprint .bp-c-combo-primary--300,
+.blueprint .bp-c-combo-hover-primary--300,
 .btn.btn--primary {
   border-color: var(--color-accent) !important;
   background-color: var(--color-base02) !important;
 }
-
+.blueprint .bp-c-combo-primary--300:hover,
+.blueprint .bp-c-combo-hover-primary--300:hover,
 .btn.btn--primary:hover {
   border-color: var(--color-accent) !important;
   background-color: var(--color-base03) !important;

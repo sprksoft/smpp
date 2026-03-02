@@ -6111,6 +6111,24 @@ input[type=search].bootstrap__input.input.search-input {
   border: 1px solid var(--color-base02) !important;
   border-radius: 0.5rem !important;
 }
+.quick-search .search__listitemwrapper[selected=true] {
+  background-color: var(--color-base02) !important;
+}
+.textInput-ACLPH,
+.location-Xu0G5:not(.locationSelected-jcBJO):hover,
+.drilldownFolder-PVSyt:not(:disabled):hover {
+  background-color: var(--color-base02) !important;
+}
+.textInput-ACLPH {
+  border: 2px solid var(--color-base02) !important;
+}
+.location-Xu0G5,
+.drilldownFolder-PVSyt {
+  border-radius: 0.75rem !important;
+}
+.blockTitle-J37wH.blockTitle-J37wH:after {
+  border-color: var(--color-base02) !important;
+}
 
 /* src/styles/fixes/login.css */
 html {
@@ -6662,7 +6680,7 @@ img[src="/modules/Messages/themes/default/images/loading_big.gif"] {
   display: none !important;
 }
 .drag-container {
-  border: 2px solid var(--color-accent) !important;
+  border: 2px solid var(--color-base02) !important;
 }
 .smsc-container__title {
   color: var(--color-accent) !important;
@@ -7008,7 +7026,11 @@ smsc-tabs .smsc-tabslist__item,
 }
 .smsc-table__row.smsc-table__row--nohover.smsc-table__row--noborder:hover,
 smsc-tabs .smsc-tabslist__item:hover {
-  background-color: var(--color-base01) !important;
+  background-color: var(--color-base02) !important;
+}
+.smsc-table__row.smsc-table__row--nohover.smsc-table__row--noborder {
+  border-radius: 0.75rem !important;
+  border-color: var(--color-accent) !important;
 }
 smsc-tabs .smsc-tabslist__item {
   margin-right: 10px !important;
@@ -7354,10 +7376,19 @@ input::placeholder {
   background-color: var(--color-base02) !important;
   font-weight: 600 !important;
 }
+.blueprint .bp-c-combo-primary--300,
+.blueprint .bp-c-combo-hover-primary--300 {
+  border: 2px solid !important;
+  border-radius: 0.75rem !important;
+}
+.blueprint .bp-c-combo-primary--300,
+.blueprint .bp-c-combo-hover-primary--300,
 .btn.btn--primary {
   border-color: var(--color-accent) !important;
   background-color: var(--color-base02) !important;
 }
+.blueprint .bp-c-combo-primary--300:hover,
+.blueprint .bp-c-combo-hover-primary--300:hover,
 .btn.btn--primary:hover {
   border-color: var(--color-accent) !important;
   background-color: var(--color-base03) !important;

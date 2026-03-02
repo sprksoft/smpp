@@ -403,7 +403,7 @@ img[src="/modules/Messages/themes/default/images/loading_big.gif"] {
 }
 
 .drag-container {
-  border: 2px solid var(--color-accent) !important;
+  border: 2px solid var(--color-base02) !important;
 }
 
 .smsc-container__title {
@@ -822,7 +822,12 @@ smsc-tabs .smsc-tabslist__item,
 
 .smsc-table__row.smsc-table__row--nohover.smsc-table__row--noborder:hover,
 smsc-tabs .smsc-tabslist__item:hover {
-  background-color: var(--color-base01) !important;
+  background-color: var(--color-base02) !important;
+}
+
+.smsc-table__row.smsc-table__row--nohover.smsc-table__row--noborder {
+  border-radius: 0.75rem !important;
+  border-color: var(--color-accent) !important;
 }
 
 smsc-tabs .smsc-tabslist__item {

@@ -2801,3 +2801,24 @@ input[type="search"].bootstrap__input.input.search-input {
   border: 1px solid var(--color-base02) !important;
   border-radius: 0.5rem !important;
 }
+.quick-search .search__listitemwrapper[selected="true"] {
+  background-color: var(--color-base02) !important;
+}
+.textInput-ACLPH,
+.location-Xu0G5:not(.locationSelected-jcBJO):hover,
+.drilldownFolder-PVSyt:not(:disabled):hover {
+  background-color: var(--color-base02) !important
+  ;
+}
+.textInput-ACLPH {
+  border: 2px solid var(--color-base02) !important;
+}
+
+.location-Xu0G5,
+.drilldownFolder-PVSyt {
+  border-radius: 0.75rem !important;
+}
+
+.blockTitle-J37wH.blockTitle-J37wH:after {
+  border-color: var(--color-base02) !important;
+}
