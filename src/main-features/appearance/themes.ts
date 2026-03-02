@@ -782,9 +782,7 @@ export class ThemeTile extends Tile {
         title.style.fontSize = "1.2rem";
         title.innerText = title.innerText.slice(0, 30) + "…";
       }
-      console.log(imageContainer);
       imageContainer.appendChild(title);
-      console.log(imageContainer);
       tile.appendChild(imageContainer);
 
       let colorPreviewsContainer = document.createElement("div");
@@ -828,7 +826,6 @@ export class ThemeTile extends Tile {
       new Toast("Failed to share theme", "error").render();
     } else {
       shareUrl = resp.shareUrl; // Update the URL variable
-      console.log(linkOutput);
       linkOutput.innerText = resp.shareUrl.toString();
       linkOutput.style.pointerEvents = "all";
       linkOutput.addEventListener("click", copyToClipboard);

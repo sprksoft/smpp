@@ -180,9 +180,7 @@ class CompactThemeSelector {
       if (settingsWindow) {
         await settingsWindow.loadPage();
       }
-      this.themeOptions.forEach((option) => {
-        option.updateSelection();
-      });
+      await loadQuickSettings();
     };
     this.themeOptions.push(option);
     return option;

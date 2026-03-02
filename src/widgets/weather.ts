@@ -142,8 +142,6 @@ class WeatherWidgetBase extends WidgetBase {
     }
 
     if (weatherData.cod != 200) {
-      console.log(weatherData.cod);
-
       container.appendChild(createNotFoundContent(weatherData.cod));
       return container;
     }

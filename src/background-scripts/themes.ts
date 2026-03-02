@@ -35,7 +35,6 @@ async function getAllThemes(): Promise<Themes> {
 
 export async function getThemeCategories(includeHidden = false) {
   let allCategories = await getAllThemeCategories();
-  console.log(allCategories);
   if (!includeHidden) {
     const { hidden, ...rest } = allCategories;
     allCategories = rest;
@@ -239,7 +238,6 @@ export async function installTheme(shareId: ShareId) {
       },
       imageData: base64,
     };
-    // TODO: generate compressed images (needs to be done on client side)
     await setImage(id, image);
   }
 
@@ -288,7 +286,6 @@ export async function updateThemeShareCache(
 ) {
   const data = await loadThemeShareCache();
   data[themeId] = shareId;
-  console.log("about to write to themeShareCache", data);
   await browser.storage.local.set({ themeShareCache: data });
 }
 

@@ -3,7 +3,6 @@ import { imageInputSvg, loadingSpinnerSvg } from "../../fixes-utils/svgs.js";
 import {
   isAbsoluteUrl,
   browser,
-  convertLinkToBase64,
   getCompressedData,
   convertLinkToFile,
 } from "../../common/utils.js";
@@ -180,7 +179,11 @@ export class ImageSelector {
     this.setButtonLoading(true);
 
     const [originalDataUrl, compressedDataUrl] = await Promise.all([
-      imageCompression.getDataUrlFromFile(file),
+      getCompressedData(file, {
+        maxSizeMB: 3,
+        maxWidthOrHeight: 2560,
+        useWebWorker: false,
+      }),
       getCompressedData(file),
     ]);
 
@@ -207,12 +210,11 @@ export class ImageSelector {
     this.setButtonLoading(true);
 
     // Fetch file and base64 concurrently
-    const [base64, file] = await Promise.all([
-      convertLinkToBase64(url).catch(() => null), // Catch inside so Promise.all doesn't immediately reject
+    const [file] = await Promise.all([
       convertLinkToFile(url).catch(() => null),
     ]);
 
-    if (!base64 || !file) {
+    if (!file) {
       throw new ImageProcessingError(
         "Failed to access image, try saving and uploading it",
         "error",
@@ -225,7 +227,11 @@ export class ImageSelector {
     }
 
     const compressedBase64 = await getCompressedData(file);
-
+    const base64 = await getCompressedData(file, {
+      maxSizeMB: 3,
+      maxWidthOrHeight: 2560,
+      useWebWorker: false,
+    });
     return {
       original: { imageData: base64, metaData: { link: url, type: "file" } },
       compressed: {

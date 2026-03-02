@@ -2306,13 +2306,12 @@ Is it scaring you off?`,
       return null;
     }
   }
-  async function getCompressedData(file) {
+  async function getCompressedData(file, options = {
+    maxSizeMB: 0.01,
+    maxWidthOrHeight: 350,
+    useWebWorker: false
+  }) {
     try {
-      const options = {
-        maxSizeMB: 0.01,
-        maxWidthOrHeight: 350,
-        useWebWorker: false
-      };
       const compressedFile = await imageCompression(file, options);
       const dataUrl = await imageCompression.getDataUrlFromFile(compressedFile);
       return dataUrl;
@@ -2838,7 +2837,11 @@ Is it scaring you off?`,
       }
       this.setButtonLoading(true);
       const [originalDataUrl, compressedDataUrl] = await Promise.all([
-        imageCompression.getDataUrlFromFile(file),
+        getCompressedData(file, {
+          maxSizeMB: 3,
+          maxWidthOrHeight: 2560,
+          useWebWorker: false
+        }),
         getCompressedData(file)
       ]);
       return {
@@ -2857,12 +2860,10 @@ Is it scaring you off?`,
         throw new ImageProcessingError("That's not a valid link!", "warning");
       }
       this.setButtonLoading(true);
-      const [base64, file] = await Promise.all([
-        convertLinkToBase64(url).catch(() => null),
-        // Catch inside so Promise.all doesn't immediately reject
+      const [file] = await Promise.all([
         convertLinkToFile(url).catch(() => null)
       ]);
-      if (!base64 || !file) {
+      if (!file) {
         throw new ImageProcessingError(
           "Failed to access image, try saving and uploading it",
           "error",
@@ -2873,6 +2874,11 @@ Is it scaring you off?`,
         throw new ImageProcessingError("That's not an image!", "error");
       }
       const compressedBase64 = await getCompressedData(file);
+      const base64 = await getCompressedData(file, {
+        maxSizeMB: 3,
+        maxWidthOrHeight: 2560,
+        useWebWorker: false
+      });
       return {
         original: { imageData: base64, metaData: { link: url, type: "file" } },
         compressed: {
@@ -5194,9 +5200,7 @@ Is it scaring you off?`,
         if (settingsWindow) {
           await settingsWindow.loadPage();
         }
-        this.themeOptions.forEach((option2) => {
-          option2.updateSelection();
-        });
+        await loadQuickSettings();
       };
       this.themeOptions.push(option);
       return option;
@@ -8061,9 +8065,7 @@ Is it scaring you off?`,
           title.style.fontSize = "1.2rem";
           title.innerText = title.innerText.slice(0, 30) + "\u2026";
         }
-        console.log(imageContainer);
         imageContainer.appendChild(title);
-        console.log(imageContainer);
         tile.appendChild(imageContainer);
         let colorPreviewsContainer = document.createElement("div");
         colorPreviewsContainer.classList.add("sharing-color-previews");
@@ -8101,7 +8103,6 @@ Is it scaring you off?`,
         new Toast("Failed to share theme", "error").render();
       } else {
         shareUrl = resp.shareUrl;
-        console.log(linkOutput);
         linkOutput.innerText = resp.shareUrl.toString();
         linkOutput.style.pointerEvents = "all";
         linkOutput.addEventListener("click", copyToClipboard);
@@ -10243,7 +10244,6 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       "ridge",
       "reset plant",
       "remove current theme",
-      "test cats",
       "posh text",
       "funny text"
     ]);
@@ -10310,12 +10310,6 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           case "reset plant":
             resetPlant();
             return;
-          case "plant data":
-            console.log(
-              await browser.runtime.sendMessage({
-                action: "getPlantAppData"
-              })
-            );
           case "remove current theme":
             let data2 = await browser.runtime.sendMessage({
               action: "getSettingsData"
@@ -10325,13 +10319,6 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
               id: data2.appearance.theme
             });
             break;
-          case "test cats":
-            let themes = await browser.runtime.sendMessage({
-              action: "getThemes",
-              categories: ["quickSettings"],
-              includeHidden: true
-            });
-            console.log(themes);
           case "posh text":
             document.body.style.setProperty(
               "--font-family",
@@ -13062,7 +13049,6 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         return container;
       }
       if (weatherData.cod != 200) {
-        console.log(weatherData.cod);
         container.appendChild(createNotFoundContent(weatherData.cod));
         return container;
       }

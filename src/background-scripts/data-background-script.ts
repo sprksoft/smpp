@@ -165,7 +165,7 @@ export async function getFileData(link: string) {
 
 export async function migrateImagesV6() {
   let settings = (await getSettingsData()) as Settings;
-  const images = (await browser.storage.local.get("images")).images || {};
+  let images = (await browser.storage.local.get("images")).images || {};
 
   if (images["profilePicture"]) {
     let profileImage = {
@@ -175,7 +175,10 @@ export async function migrateImagesV6() {
       },
       imageData: images["profilePicture"].imageData,
     };
+    delete images["profilePicture"];
+    await browser.storage.local.set({ images: images });
     await setImage("profilePicture", profileImage);
+    images = (await browser.storage.local.get("images")).images || {};
   }
 
   if (images["backgroundImage"]) {
@@ -186,6 +189,20 @@ export async function migrateImagesV6() {
       },
       imageData: images["backgroundImage"].imageData,
     };
+    delete images["backgroundImage"];
+    await browser.storage.local.set({ images: images });
+
+    if (backgroundImage.metaData.type == "link") {
+      backgroundImage.imageData = await getBase64(
+        backgroundImage.metaData.link
+      );
+      if (backgroundImage.imageData != null) {
+        backgroundImage.metaData.type = "file";
+      } else {
+        backgroundImage.imageData = "";
+        backgroundImage.metaData.type = "default";
+      }
+    }
     await setImage(settings.appearance.theme, backgroundImage);
   }
 }

@@ -1865,7 +1865,6 @@
   }
   async function getThemeCategories(includeHidden = false) {
     let allCategories = await getAllThemeCategories();
-    console.log(allCategories);
     if (!includeHidden) {
       const { hidden, ...rest } = allCategories;
       allCategories = rest;
@@ -2060,7 +2059,6 @@
   async function updateThemeShareCache(themeId, shareId) {
     const data = await loadThemeShareCache();
     data[themeId] = shareId;
-    console.log("about to write to themeShareCache", data);
     await browser.storage.local.set({ themeShareCache: data });
   }
   async function shareTheme(id) {
@@ -2292,7 +2290,7 @@
   }
   async function migrateImagesV6() {
     let settings = await getSettingsData();
-    const images = (await browser.storage.local.get("images")).images || {};
+    let images = (await browser.storage.local.get("images")).images || {};
     if (images["profilePicture"]) {
       let profileImage = {
         metaData: {
@@ -2301,7 +2299,10 @@
         },
         imageData: images["profilePicture"].imageData
       };
+      delete images["profilePicture"];
+      await browser.storage.local.set({ images });
       await setImage("profilePicture", profileImage);
+      images = (await browser.storage.local.get("images")).images || {};
     }
     if (images["backgroundImage"]) {
       let backgroundImage = {
@@ -2311,6 +2312,19 @@
         },
         imageData: images["backgroundImage"].imageData
       };
+      delete images["backgroundImage"];
+      await browser.storage.local.set({ images });
+      if (backgroundImage.metaData.type == "link") {
+        backgroundImage.imageData = await getBase642(
+          backgroundImage.metaData.link
+        );
+        if (backgroundImage.imageData != null) {
+          backgroundImage.metaData.type = "file";
+        } else {
+          backgroundImage.imageData = "";
+          backgroundImage.metaData.type = "default";
+        }
+      }
       await setImage(settings.appearance.theme, backgroundImage);
     }
   }

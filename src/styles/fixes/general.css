@@ -2744,3 +2744,60 @@ div#smscMain:has(.live__quick-nav) {
   background-color: var(--color-base02) !important;
   border-color: transparent !important;
 }
+.overview-page__view-toggle-buttons.status-toggle-buttons
+  button.smsc-svg--16.c-blue-combo-hover--100 {
+  color: var(--color-text) !important;
+  background-color: var(--color-base01) !important;
+  border: 2px solid var(--color-base02) !important;
+}
+.overview-page__view-toggle-buttons.status-toggle-buttons
+  button.smsc-svg--16.c-green-combo-hover--100 {
+  color: var(--color-text) !important;
+  background-color: var(--color-base01) !important;
+  border: 2px solid var(--color-base02) !important;
+}
+.overview-page__view-toggle-buttons.status-toggle-buttons
+  button.smsc-svg--16.c-blue-combo-hover--100:hover {
+  background-color: var(--color-base02) !important;
+  border: 2px solid var(--color-base03) !important;
+}
+.overview-page__view-toggle-buttons.status-toggle-buttons
+  button.smsc-svg--16.c-green-combo-hover--100:hover {
+  background-color: var(--color-base02) !important;
+  border: 2px solid var(--color-base03) !important;
+}
+
+.overview-page__view-toggle-buttons.status-toggle-buttons
+  button.smsc-svg--16.c-blue-combo-hover--500 {
+  font-weight: 600;
+  color: var(--color-accent) !important;
+  background-color: var(--color-base01) !important;
+  border: 2px solid var(--color-accent) !important;
+}
+.overview-page__view-toggle-buttons.status-toggle-buttons
+  button.smsc-svg--16.c-green-combo-hover--500 {
+  font-weight: 600;
+  color: var(--color-accent) !important;
+  background-color: var(--color-base01) !important;
+  border: 2px solid var(--color-accent) !important;
+}
+.overview-page__view-toggle-buttons.status-toggle-buttons
+  button.smsc-svg--16.c-blue-combo-hover--500:hover {
+  background-color: var(--color-base02) !important;
+}
+.overview-page__view-toggle-buttons.status-toggle-buttons
+  button.smsc-svg--16.c-green-combo-hover--500:hover {
+  background-color: var(--color-base02) !important;
+}
+
+.status-toggle-buttons button {
+  border-radius: 0.75rem !important;
+}
+.status-toggle-buttons {
+  gap: 0.5rem !important;
+}
+
+input[type="search"].bootstrap__input.input.search-input {
+  border: 1px solid var(--color-base02) !important;
+  border-radius: 0.5rem !important;
+}

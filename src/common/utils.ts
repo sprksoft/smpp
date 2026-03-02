@@ -160,14 +160,15 @@ export function fnv1aHash(byteArray: Uint8Array): string {
   return hash.toString();
 }
 
-export async function getCompressedData(file: File): Promise<string> {
+export async function getCompressedData(
+  file: File,
+  options: Options = {
+    maxSizeMB: 0.01,
+    maxWidthOrHeight: 350,
+    useWebWorker: false,
+  }
+): Promise<string> {
   try {
-    const options: Options = {
-      maxSizeMB: 0.01,
-      maxWidthOrHeight: 350,
-      useWebWorker: false,
-    };
-
     const compressedFile = await imageCompression(file, options);
     const dataUrl = await imageCompression.getDataUrlFromFile(compressedFile);
 

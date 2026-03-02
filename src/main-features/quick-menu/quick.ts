@@ -180,7 +180,6 @@ export async function do_qm(opener = "") {
       "ridge",
       "reset plant",
       "remove current theme",
-      "test cats",
       "posh text",
       "funny text",
     ]);
@@ -249,12 +248,6 @@ export async function do_qm(opener = "") {
         case "reset plant":
           resetPlant();
           return;
-        case "plant data":
-          console.log(
-            await browser.runtime.sendMessage({
-              action: "getPlantAppData",
-            })
-          );
         case "remove current theme":
           let data = await browser.runtime.sendMessage({
             action: "getSettingsData",
@@ -264,13 +257,6 @@ export async function do_qm(opener = "") {
             id: data.appearance.theme,
           });
           break;
-        case "test cats":
-          let themes = await browser.runtime.sendMessage({
-            action: "getThemes",
-            categories: ["quickSettings"],
-            includeHidden: true,
-          });
-          console.log(themes);
         case "posh text":
           document.body.style.setProperty(
             "--font-family",
