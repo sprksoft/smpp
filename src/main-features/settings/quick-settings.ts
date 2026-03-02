@@ -219,7 +219,7 @@ class CompactThemeSelector {
     let themes = (await browser.runtime.sendMessage({
       action: "getThemes",
       categories: ["quickSettings"],
-      includeHidden: true,
+      includeHidden: false,
     })) as Themes;
 
     let themeOptionNames = this.themeOptions.map((option) => {
@@ -305,7 +305,7 @@ class CompactThemeSelector {
     let themes = (await browser.runtime.sendMessage({
       action: "getThemes",
       categories: ["quickSettings"],
-      includeHidden: true,
+      includeHidden: false,
     })) as Themes;
     this.themeOptions = [];
 

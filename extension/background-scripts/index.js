@@ -2490,6 +2490,20 @@
         await browser.storage.local.set(data);
         sendResponse({ success: true });
       }
+      if (message.action === "getDataVersion") {
+        let dataVersion = await browser.storage.local.get("dataVersion");
+        console.log(dataVersion);
+        if (Object.keys(dataVersion).length == 0) {
+          await browser.storage.local.set({ dataVersion: 6 });
+          dataVersion = 6;
+        }
+        sendResponse(dataVersion.dataVersion);
+        console.log(`Data version ${dataVersion.dataVersion} sent.`);
+      }
+      if (message.action === "setDataVersion") {
+        await browser.storage.local.set({ dataVersion: message.version });
+        sendResponse({ success: true });
+      }
       if (message.action === "getDelijnAppData") {
         const delijnAppData = await browser.storage.local.get("delijnAppData");
         await browser.storage.local.remove("delijnAppData");

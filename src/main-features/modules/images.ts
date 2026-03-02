@@ -21,6 +21,17 @@ export type SMPPImageMetaData = {
   link: string;
 };
 
+class ImageProcessingError extends Error {
+  constructor(
+    public override message: string,
+    public toastType: "error" | "warning" | "info" = "error",
+    public toastDuration?: number
+  ) {
+    super(message);
+    this.name = "ImageProcessingError";
+  }
+}
+
 export class ImageSelector {
   name: string;
   isThemeImage: boolean;
@@ -145,130 +156,174 @@ export class ImageSelector {
     await this.storeImage(file);
   }
 
+  private getDefaultImageData(): SMPPImage {
+    return { imageData: "", metaData: { link: "", type: "default" } };
+  }
+
+  private setButtonLoading(isLoading: boolean) {
+    if (isLoading) {
+      this.fileInputButton.innerHTML = loadingSpinnerSvg;
+      new Toast("Loading image...", "info").render();
+    } else {
+      this.fileInputButton.innerHTML = imageInputSvg;
+    }
+  }
+
+  private async processLocalFile(file: File): Promise<{
+    original: SMPPImage;
+    compressed: SMPPImage;
+  }> {
+    if (!file.type.startsWith("image/")) {
+      throw new ImageProcessingError("That's not an image!", "error");
+    }
+
+    this.setButtonLoading(true);
+
+    const [originalDataUrl, compressedDataUrl] = await Promise.all([
+      imageCompression.getDataUrlFromFile(file),
+      getCompressedData(file),
+    ]);
+
+    return {
+      original: {
+        imageData: originalDataUrl,
+        metaData: { link: file.name, type: "file" },
+      },
+      compressed: {
+        imageData: compressedDataUrl,
+        metaData: { link: file.name, type: "file" },
+      },
+    };
+  }
+
+  private async processImageLink(url: string): Promise<{
+    original: SMPPImage;
+    compressed: SMPPImage;
+  }> {
+    if (!isAbsoluteUrl(url)) {
+      throw new ImageProcessingError("That's not a valid link!", "warning");
+    }
+
+    this.setButtonLoading(true);
+
+    // Fetch file and base64 concurrently
+    const [base64, file] = await Promise.all([
+      convertLinkToBase64(url).catch(() => null), // Catch inside so Promise.all doesn't immediately reject
+      convertLinkToFile(url).catch(() => null),
+    ]);
+
+    if (!base64 || !file) {
+      throw new ImageProcessingError(
+        "Failed to access image, try saving and uploading it",
+        "error",
+        5000
+      );
+    }
+
+    if (!file.type.startsWith("image/")) {
+      throw new ImageProcessingError("That's not an image!", "error");
+    }
+
+    const compressedBase64 = await getCompressedData(file);
+
+    return {
+      original: { imageData: base64, metaData: { link: url, type: "file" } },
+      compressed: {
+        imageData: compressedBase64,
+        metaData: { link: url, type: "file" },
+      },
+    };
+  }
+
+  private async saveToStorage(data: SMPPImage, compressedImage: SMPPImage) {
+    const compressedId = `compressed-${this.id}`;
+
+    // 1. Save both images to storage
+
+    await browser.runtime.sendMessage({
+      action: "setImage",
+      id: this.id,
+      data: data,
+    });
+    await browser.runtime.sendMessage({
+      action: "setImage",
+      id: compressedId,
+      data: compressedImage,
+    });
+
+    // 2. Update local state
+    await this.loadImageData();
+    this.onStore();
+    console.log(data);
+    console.log(this.id);
+    // 3. Update theme if applicable
+    if (this.isThemeImage) {
+      await browser.runtime.sendMessage({
+        action: "markThemeAsModified",
+        name: this.id,
+      });
+    }
+  }
+
   async storeImage(passedFile?: File) {
+    // 1. Fetch existing data (or fall back to defaults)
+    let storedData = await browser.runtime.sendMessage({
+      action: "getImage",
+      id: this.id,
+    });
+    let data: SMPPImage = storedData
+      ? (storedData as SMPPImage)
+      : this.getDefaultImageData();
+
+    let compressedImage: SMPPImage = {
+      imageData: data.imageData,
+      metaData: { ...data.metaData },
+    };
+
     try {
-      let data = (await browser.runtime.sendMessage({
-        action: "getImage",
-        id: this.id,
-      })) as SMPPImage;
-
-      if (!data) {
-        data = { imageData: "", metaData: { link: "", type: "default" } };
-      }
-
-      const compressedId = `compressed-${this.id}`;
-      let compressedImage: SMPPImage = {
-        imageData: data.imageData,
-        metaData: { link: data.metaData.link, type: data.metaData.type },
-      };
-
-      // Handle file upload
       const file = passedFile || this.fileInput.files?.[0];
+      const linkValue = this.linkInput.value?.trim() || "";
 
+      // 2. Route the action based on input type
       if (file) {
-        if (!file.type.startsWith("image/")) {
-          this.fileInput.value = "";
-          new Toast("That's not an image!", "error").render();
-          return;
-        }
-        this.fileInputButton.innerHTML = loadingSpinnerSvg;
-        const [originalDataUrl, compressedDataUrl] = await Promise.all([
-          imageCompression.getDataUrlFromFile(file),
-          getCompressedData(file),
-        ]);
-        this.fileInputButton.innerHTML = imageInputSvg;
-
-        data.imageData = originalDataUrl;
-        data.metaData.link = file.name;
-        data.metaData.type = "file";
-
-        compressedImage.imageData = compressedDataUrl;
-        compressedImage.metaData.link = file.name;
-        compressedImage.metaData.type = "file";
-
-        this.fileInput.value = "";
+        const result = await this.processLocalFile(file);
+        data = result.original;
+        compressedImage = result.compressed;
+      } else if (linkValue !== "") {
+        const result = await this.processImageLink(linkValue);
+        data = result.original;
+        compressedImage = result.compressed;
       } else {
-        const linkValue = this.linkInput.value?.trim() || "";
-
-        if (linkValue === "") {
-          data.metaData.type = "default";
-          data.metaData.link = "";
-          data.imageData = "";
-
-          compressedImage.metaData.type = "default";
-          compressedImage.metaData.link = "";
-          compressedImage.imageData = "";
-        } else if (isAbsoluteUrl(linkValue)) {
-          this.fileInputButton.innerHTML = loadingSpinnerSvg;
-          let [base64, file] = await Promise.all([
-            await convertLinkToBase64(linkValue),
-            await convertLinkToFile(linkValue),
-          ]);
-          this.fileInputButton.innerHTML = imageInputSvg;
-          if (base64 && file) {
-            data.metaData.type = "file";
-            data.metaData.link = linkValue;
-            data.imageData = base64;
-
-            this.fileInputButton.innerHTML = loadingSpinnerSvg;
-            let compressedBase64 = await getCompressedData(file);
-            this.fileInputButton.innerHTML = imageInputSvg;
-
-            compressedImage.metaData.type = "file";
-            compressedImage.metaData.link = linkValue;
-            compressedImage.imageData = compressedBase64;
-          } else {
-            await this.loadImageData();
-            await new Toast(
-              "Failed to access image, try saving and uploading it",
-              "error",
-              5000
-            ).render();
-            data.metaData.type = "default";
-            data.metaData.link = "";
-            data.imageData = "";
-
-            compressedImage.metaData.type = "default";
-            compressedImage.metaData.link = "";
-            compressedImage.imageData = "";
-          }
-        } else {
-          await this.loadImageData();
-          await new Toast("That's not a valid link!", "warning").render();
-          data.metaData.type = "default";
-          data.metaData.link = "";
-          data.imageData = "";
-
-          compressedImage.metaData.type = "default";
-          compressedImage.metaData.link = "";
-          compressedImage.imageData = "";
-        }
+        // Clear the image if inputs are empty
+        data = this.getDefaultImageData();
+        compressedImage = this.getDefaultImageData();
       }
+      console.log(data);
 
-      await browser.runtime.sendMessage({
-        action: "setImage",
-        id: this.id,
-        data: data,
-      });
-      await browser.runtime.sendMessage({
-        action: "setImage",
-        id: compressedId,
-        data: compressedImage,
-      });
-      await this.loadImageData();
-      this.onStore();
-      if (this.isThemeImage) {
-        await browser.runtime.sendMessage({
-          action: "markThemeAsModified",
-          name: this.id,
-        });
-      }
-      if (data.metaData.type == "file") {
-        new Toast("Image succesfully saved", "succes").render();
-      }
+      // 3. Save to browser storage and update UI
+      await this.saveToStorage(data, compressedImage);
+
+      // 4. Success notification
+
+      new Toast("Image successfully saved", "success").render();
     } catch (error) {
-      await new Toast("Failed to save image", "error", 5000).render();
-      console.error("Failed to store image:", error);
+      // 5. Centralized Error Handling
+      if (error instanceof ImageProcessingError) {
+        new Toast(error.message, error.toastType, error.toastDuration).render();
+
+        // If validation fails (e.g., bad link), wipe the corrupted state and save defaults
+        data = this.getDefaultImageData();
+        compressedImage = this.getDefaultImageData();
+        await this.saveToStorage(data, compressedImage);
+      } else {
+        // Catch network or system-level crashes
+        new Toast("Failed to save image", "error", 5000).render();
+        console.error("Failed to store image:", error);
+      }
+    } finally {
+      // 6. Universal Cleanup
+      this.fileInput.value = "";
+      this.setButtonLoading(false);
     }
   }
 

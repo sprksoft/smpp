@@ -179,7 +179,7 @@
 }
 
 .smpp-toast.smpp-info-toast {
-  stroke: var(--color-accent);
+  stroke: var(--color-text);
 }
 
 .smpp-toast.smpp-succes-toast {
@@ -242,9 +242,9 @@
   }
 }
 
-body:has(.login-app) .smpp-background-image-container {
-  top: 0;
-  height: 100%;
+body:has(.smsc-topnav) .smpp-background-image-container {
+  height: calc(100% - 41px);
+  top: 41px;
 }
 
 .smpp-background-image-container {
@@ -257,10 +257,10 @@ body:has(.login-app) .smpp-background-image-container {
     color-mix(in srgb, var(--color-base01) 98%, var(--color-accent) 2%) 100%
   ) !important;
   position: absolute;
-  top: 41px;
+  top: 0;
+  height: 100%;
   left: 0;
   width: 100%;
-  height: calc(100% - 41px);
   filter: var(--background-blur) !important;
   z-index: -1;
 }

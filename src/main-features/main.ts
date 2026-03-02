@@ -46,7 +46,6 @@ import {
 import { quickLoad } from "./quick-menu/quick.js";
 
 export var originalUsername: string;
-export var themes: any;
 export var onHomePage: boolean;
 export var onLoginPage: boolean;
 export var isGOSchool: boolean;
@@ -54,7 +53,7 @@ export var isFirefox: boolean;
 export var originalPfpUrl: string;
 export var keybinds: any;
 export var liteMode: boolean;
-export var customTheme: any;
+export const currentDataVersion = 6;
 
 import {
   discordSvg,
@@ -223,11 +222,7 @@ export function applyTopNav(data: Settings["topNav"]) {
   }
 }
 
-async function createStaticGlobals() {
-  themes = await browser.runtime.sendMessage({
-    action: "getThemes",
-  });
-
+async function createGlobals() {
   let originalUsernameElement = document.querySelector(
     ".js-btn-profile .hlp-vert-box span"
   ) as HTMLSpanElement;
@@ -443,7 +438,7 @@ async function main() {
   applyFixes();
   await migrate();
 
-  await createStaticGlobals();
+  await createGlobals();
 
   await createWidgetSystem();
 

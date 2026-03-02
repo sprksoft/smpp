@@ -1130,16 +1130,32 @@ option:hover {
 
 .splashscreen {
   background: transparent !important;
+  margin-top: auto !important;
+  margin-bottom: auto !important;
+}
+.glass .splashscreen__dialog {
+  background-color: var(--darken-background) !important;
+  backdrop-filter: var(--surface-blur) !important;
+}
+.splashscreen__dialog {
+  background-color: var(--color-base01) !important;
+  border-radius: 2rem !important;
+  border: 2px solid var(--color-base02) !important;
+  box-shadow: none !important;
+}
+.oauth__image {
+  background-color: transparent !important;
+  border-radius: 1rem !important;
+  border: 2px solid var(--color-base02) !important;
 }
 
-.splashscreen__dialog,
-.oauth__image {
-  background-color: var(--color-base01) !important;
-  border-radius: 10px !important;
-  border-width: 4px !important;
-  border-style: solid !important;
-  border-color: var(--color-base03) !important;
-  box-shadow: 0 0 30px #000000dc !important;
+.splashscreen__topleft--logo {
+  color: var(--color-text) !important;
+}
+
+.modern-ui .float-label__input + label > span {
+  color: var(--color-text) !important;
+  opacity: 0.7 !important;
 }
 
 .st1,
@@ -1703,8 +1719,7 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
 
 .smscComposeMessage {
   background-color: var(--darken-background) !important;
-  backdrop-filter: var(--small-blur) !important;
-  border: 2px solid var(--color-base02) !important;
+  border: 2px solid transparent !important;
 }
 
 #custom-name-input-container {

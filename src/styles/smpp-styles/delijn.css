@@ -240,7 +240,7 @@
 .showMoreHaltesButton {
   align-self: center;
   text-align: center;
-  font-weight: 560;
+  font-weight: 600;
   background-color: var(--color-base01);
   width: 70%;
   border: 2px solid var(--color-base02);
@@ -252,16 +252,14 @@
 .showMoreHaltesButton:hover {
   background-color: var(--color-base02);
   border-color: var(--color-accent);
-  font-weight: 800;
-  letter-spacing: 0.5px;
-  width: 77%;
+  font-weight: 700;
+  scale: 1.05;
   cursor: pointer;
 }
 
 .enableAnimations .showMoreHaltesButton {
   animation: delijnCardAppear 0.3s ease-in-out 0ms 1;
-  transition-property:
-    background-color, border-color, width, font-weight, letter-spacing;
+  transition-property: background-color, border-color, font-weight, scale;
   transition: 0.2s ease-in-out !important;
 }
 

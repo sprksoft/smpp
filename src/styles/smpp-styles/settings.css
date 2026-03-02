@@ -1915,7 +1915,7 @@ button.open-theme-editor-button:hover {
 .sharing-image-container {
   border-radius: 1rem;
   width: 100%;
-  height: 15rem;
+  height: 18rem;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -1972,6 +1972,6 @@ button.open-theme-editor-button:hover {
 }
 
 .sharing-color-previews .color-preview-bubble {
-  width: 2.5rem;
+  width: 3rem;
   cursor: default !important;
 }

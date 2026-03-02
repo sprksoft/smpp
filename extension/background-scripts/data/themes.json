@@ -142,15 +142,15 @@
   "mountain": {
     "displayName": "Stormy Peaks",
     "cssProperties": {
-      "--color-accent": "#fdfcfe",
-      "--color-base00": "#0d1520",
-      "--color-base01": "#203349",
-      "--color-base02": "#2c3e55",
-      "--color-base03": "#556880",
-      "--color-homepage-sidebars-bg": "#070c141a",
-      "--color-splashtext": "#0d1520",
-      "--color-text": "#d8dde4",
-      "--darken-background": "#070c144d"
+      "--color-accent": "#f1f8ff",
+      "--color-base00": "#090c10",
+      "--color-base01": "#1a2332",
+      "--color-base02": "#2c3b53",
+      "--color-base03": "#3e5374",
+      "--color-homepage-sidebars-bg": "#0406091a",
+      "--color-splashtext": "#c1cadc",
+      "--color-text": "#c1cadc",
+      "--darken-background": "#0406094d"
     }
   },
   "vax": {

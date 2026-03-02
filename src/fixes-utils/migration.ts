@@ -3,6 +3,7 @@ import { clearAllData, Toast } from "./utils.js";
 import { setWidgetSetting, widgets } from "../widgets/widgets.js";
 import { browser } from "../common/utils.ts";
 import type { Theme } from "../main-features/appearance/themes.js";
+import { currentDataVersion } from "../main-features/main.js";
 
 async function updateSettings() {
   // Seems pointless, it's not
@@ -17,10 +18,20 @@ async function updateSettings() {
 
 export async function migrate() {
   await removeLegacyData(); // will reload the page if legacy data is present
-
+  let dataVersion: Number = await browser.runtime.sendMessage({
+    action: "getDataVersion",
+  });
+  if (dataVersion < currentDataVersion) {
+    // Run some mig in the future
+    await browser.runtime.sendMessage({
+      action: "setDataVersion",
+      version: currentDataVersion,
+    });
+  }
   let settingsData = await browser.runtime.sendMessage({
     action: "getRawSettingsData",
   });
+  if (!settingsData) return;
   if (settingsData.glass != undefined) return;
   await migrateV6();
 }
@@ -80,10 +91,7 @@ async function removeLegacyData() {
   let rawSettingsData = await browser.runtime.sendMessage({
     action: "getRawSettingsData",
   });
-  if (
-    window.localStorage.getItem("settingsdata") ||
-    rawSettingsData.backgroundBlurAmount
-  ) {
+  if (window.localStorage.getItem("settingsdata")) {
     await clearAllData();
   }
 }

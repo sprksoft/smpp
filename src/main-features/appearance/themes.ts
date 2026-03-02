@@ -653,7 +653,7 @@ export class ThemeTile extends Tile {
       });
     }
     this.onDuplicate(newThemeName);
-    new Toast("Theme succesfully duplicated", "succes").render();
+    new Toast("Theme succesfully duplicated", "success").render();
   }
 
   async share() {
@@ -679,7 +679,7 @@ export class ThemeTile extends Tile {
           copyToClipboardButton.innerHTML = copySvg;
         }, 1000);
 
-        new Toast("Theme link copied to clipboard", "succes").render();
+        new Toast("Theme link copied to clipboard", "success").render();
       } else {
         new Toast("Theme link is not ready yet", "error").render();
       }
@@ -747,8 +747,8 @@ export class ThemeTile extends Tile {
         );
       });
 
-      // DONT FORGET TO REMOVE THIS
-      navigator.clipboard.writeText(JSON.stringify(this.theme));
+      // For adding themes to the extension:
+      // navigator.clipboard.writeText(JSON.stringify(this.theme));
 
       let imageContainer = document.createElement("div");
       imageContainer.classList.add("sharing-image-container");
@@ -773,11 +773,11 @@ export class ThemeTile extends Tile {
       const displayNameLength = title.innerText.length;
 
       if (displayNameLength < 20) {
-        title.style.fontSize = "2rem";
+        title.style.fontSize = "2.5rem";
       } else if (displayNameLength < 25) {
-        title.style.fontSize = "1.5rem";
+        title.style.fontSize = "2rem";
       } else if (displayNameLength < 30) {
-        title.style.fontSize = "1.2rem";
+        title.style.fontSize = "1.5rem";
       } else {
         title.style.fontSize = "1.2rem";
         title.innerText = title.innerText.slice(0, 30) + "…";
@@ -833,7 +833,7 @@ export class ThemeTile extends Tile {
       linkOutput.style.pointerEvents = "all";
       linkOutput.addEventListener("click", copyToClipboard);
       copyToClipboardButton.innerHTML = copySvg;
-      new Toast("Theme uploaded", "succes").render();
+      new Toast("Theme uploaded", "success").render();
     }
 
     this.onShare();
@@ -1000,7 +1000,7 @@ class AddCustomTheme extends Tile {
 
     await updateTheme(newTheme);
     startCustomThemeCreator(defaultTheme, newTheme);
-    await new Toast(`Created new custom theme`, "succes").render();
+    await new Toast(`Created new custom theme`, "success").render();
   }
 
   override async createContent() {
@@ -2002,6 +2002,6 @@ export class CustomThemeCreator extends Dialog {
     await loadQuickSettings();
     this.hide(true);
 
-    await new Toast(`Removed "${this.theme.displayName}"`, "succes").render();
+    await new Toast(`Removed "${this.theme.displayName}"`, "success").render();
   }
 }

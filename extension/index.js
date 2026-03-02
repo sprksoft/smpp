@@ -2430,7 +2430,7 @@ Is it scaring you off?`,
           icon.innerHTML = infoSvg;
           toast.classList.add("smpp-info-toast");
           break;
-        case "succes":
+        case "success":
           title.innerText = "Succes";
           icon.innerHTML = succesSvg;
           toast.classList.add("smpp-succes-toast");
@@ -2708,6 +2708,15 @@ Is it scaring you off?`,
   }
 
   // src/main-features/modules/images.ts
+  var ImageProcessingError = class extends Error {
+    constructor(message, toastType = "error", toastDuration) {
+      super(message);
+      this.message = message;
+      this.toastType = toastType;
+      this.toastDuration = toastDuration;
+      this.name = "ImageProcessingError";
+    }
+  };
   var ImageSelector = class {
     name;
     isThemeImage;
@@ -2812,115 +2821,130 @@ Is it scaring you off?`,
     async handleFileProcessing(file) {
       await this.storeImage(file);
     }
+    getDefaultImageData() {
+      return { imageData: "", metaData: { link: "", type: "default" } };
+    }
+    setButtonLoading(isLoading) {
+      if (isLoading) {
+        this.fileInputButton.innerHTML = loadingSpinnerSvg;
+        new Toast("Loading image...", "info").render();
+      } else {
+        this.fileInputButton.innerHTML = imageInputSvg;
+      }
+    }
+    async processLocalFile(file) {
+      if (!file.type.startsWith("image/")) {
+        throw new ImageProcessingError("That's not an image!", "error");
+      }
+      this.setButtonLoading(true);
+      const [originalDataUrl, compressedDataUrl] = await Promise.all([
+        imageCompression.getDataUrlFromFile(file),
+        getCompressedData(file)
+      ]);
+      return {
+        original: {
+          imageData: originalDataUrl,
+          metaData: { link: file.name, type: "file" }
+        },
+        compressed: {
+          imageData: compressedDataUrl,
+          metaData: { link: file.name, type: "file" }
+        }
+      };
+    }
+    async processImageLink(url) {
+      if (!isAbsoluteUrl(url)) {
+        throw new ImageProcessingError("That's not a valid link!", "warning");
+      }
+      this.setButtonLoading(true);
+      const [base64, file] = await Promise.all([
+        convertLinkToBase64(url).catch(() => null),
+        // Catch inside so Promise.all doesn't immediately reject
+        convertLinkToFile(url).catch(() => null)
+      ]);
+      if (!base64 || !file) {
+        throw new ImageProcessingError(
+          "Failed to access image, try saving and uploading it",
+          "error",
+          5e3
+        );
+      }
+      if (!file.type.startsWith("image/")) {
+        throw new ImageProcessingError("That's not an image!", "error");
+      }
+      const compressedBase64 = await getCompressedData(file);
+      return {
+        original: { imageData: base64, metaData: { link: url, type: "file" } },
+        compressed: {
+          imageData: compressedBase64,
+          metaData: { link: url, type: "file" }
+        }
+      };
+    }
+    async saveToStorage(data2, compressedImage) {
+      const compressedId = `compressed-${this.id}`;
+      await browser.runtime.sendMessage({
+        action: "setImage",
+        id: this.id,
+        data: data2
+      });
+      await browser.runtime.sendMessage({
+        action: "setImage",
+        id: compressedId,
+        data: compressedImage
+      });
+      await this.loadImageData();
+      this.onStore();
+      console.log(data2);
+      console.log(this.id);
+      if (this.isThemeImage) {
+        await browser.runtime.sendMessage({
+          action: "markThemeAsModified",
+          name: this.id
+        });
+      }
+    }
     async storeImage(passedFile) {
+      let storedData = await browser.runtime.sendMessage({
+        action: "getImage",
+        id: this.id
+      });
+      let data2 = storedData ? storedData : this.getDefaultImageData();
+      let compressedImage = {
+        imageData: data2.imageData,
+        metaData: { ...data2.metaData }
+      };
       try {
-        let data2 = await browser.runtime.sendMessage({
-          action: "getImage",
-          id: this.id
-        });
-        if (!data2) {
-          data2 = { imageData: "", metaData: { link: "", type: "default" } };
-        }
-        const compressedId = `compressed-${this.id}`;
-        let compressedImage = {
-          imageData: data2.imageData,
-          metaData: { link: data2.metaData.link, type: data2.metaData.type }
-        };
         const file = passedFile || this.fileInput.files?.[0];
+        const linkValue = this.linkInput.value?.trim() || "";
         if (file) {
-          if (!file.type.startsWith("image/")) {
-            this.fileInput.value = "";
-            new Toast("That's not an image!", "error").render();
-            return;
-          }
-          this.fileInputButton.innerHTML = loadingSpinnerSvg;
-          const [originalDataUrl, compressedDataUrl] = await Promise.all([
-            imageCompression.getDataUrlFromFile(file),
-            getCompressedData(file)
-          ]);
-          this.fileInputButton.innerHTML = imageInputSvg;
-          data2.imageData = originalDataUrl;
-          data2.metaData.link = file.name;
-          data2.metaData.type = "file";
-          compressedImage.imageData = compressedDataUrl;
-          compressedImage.metaData.link = file.name;
-          compressedImage.metaData.type = "file";
-          this.fileInput.value = "";
+          const result = await this.processLocalFile(file);
+          data2 = result.original;
+          compressedImage = result.compressed;
+        } else if (linkValue !== "") {
+          const result = await this.processImageLink(linkValue);
+          data2 = result.original;
+          compressedImage = result.compressed;
         } else {
-          const linkValue = this.linkInput.value?.trim() || "";
-          if (linkValue === "") {
-            data2.metaData.type = "default";
-            data2.metaData.link = "";
-            data2.imageData = "";
-            compressedImage.metaData.type = "default";
-            compressedImage.metaData.link = "";
-            compressedImage.imageData = "";
-          } else if (isAbsoluteUrl(linkValue)) {
-            this.fileInputButton.innerHTML = loadingSpinnerSvg;
-            let [base64, file2] = await Promise.all([
-              await convertLinkToBase64(linkValue),
-              await convertLinkToFile(linkValue)
-            ]);
-            this.fileInputButton.innerHTML = imageInputSvg;
-            if (base64 && file2) {
-              data2.metaData.type = "file";
-              data2.metaData.link = linkValue;
-              data2.imageData = base64;
-              this.fileInputButton.innerHTML = loadingSpinnerSvg;
-              let compressedBase64 = await getCompressedData(file2);
-              this.fileInputButton.innerHTML = imageInputSvg;
-              compressedImage.metaData.type = "file";
-              compressedImage.metaData.link = linkValue;
-              compressedImage.imageData = compressedBase64;
-            } else {
-              await this.loadImageData();
-              await new Toast(
-                "Failed to access image, try saving and uploading it",
-                "error",
-                5e3
-              ).render();
-              data2.metaData.type = "default";
-              data2.metaData.link = "";
-              data2.imageData = "";
-              compressedImage.metaData.type = "default";
-              compressedImage.metaData.link = "";
-              compressedImage.imageData = "";
-            }
-          } else {
-            await this.loadImageData();
-            await new Toast("That's not a valid link!", "warning").render();
-            data2.metaData.type = "default";
-            data2.metaData.link = "";
-            data2.imageData = "";
-            compressedImage.metaData.type = "default";
-            compressedImage.metaData.link = "";
-            compressedImage.imageData = "";
-          }
+          data2 = this.getDefaultImageData();
+          compressedImage = this.getDefaultImageData();
         }
-        await browser.runtime.sendMessage({
-          action: "setImage",
-          id: this.id,
-          data: data2
-        });
-        await browser.runtime.sendMessage({
-          action: "setImage",
-          id: compressedId,
-          data: compressedImage
-        });
-        await this.loadImageData();
-        this.onStore();
-        if (this.isThemeImage) {
-          await browser.runtime.sendMessage({
-            action: "markThemeAsModified",
-            name: this.id
-          });
-        }
-        if (data2.metaData.type == "file") {
-          new Toast("Image succesfully saved", "succes").render();
-        }
+        console.log(data2);
+        await this.saveToStorage(data2, compressedImage);
+        new Toast("Image successfully saved", "success").render();
       } catch (error) {
-        await new Toast("Failed to save image", "error", 5e3).render();
-        console.error("Failed to store image:", error);
+        if (error instanceof ImageProcessingError) {
+          new Toast(error.message, error.toastType, error.toastDuration).render();
+          data2 = this.getDefaultImageData();
+          compressedImage = this.getDefaultImageData();
+          await this.saveToStorage(data2, compressedImage);
+        } else {
+          new Toast("Failed to save image", "error", 5e3).render();
+          console.error("Failed to store image:", error);
+        }
+      } finally {
+        this.fileInput.value = "";
+        this.setButtonLoading(false);
       }
     }
     async loadImageData() {
@@ -5183,8 +5207,8 @@ Is it scaring you off?`,
       this.themeOptions.push(option);
       return option;
     }
-    async createThemeOptions(themes2) {
-      Object.entries(themes2).forEach((theme) => {
+    async createThemeOptions(themes) {
+      Object.entries(themes).forEach((theme) => {
         this.createThemeOption(theme[0], theme[1]);
       });
     }
@@ -5207,23 +5231,23 @@ Is it scaring you off?`,
       }
     }
     async updateThemeOptions() {
-      let themes2 = await browser.runtime.sendMessage({
+      let themes = await browser.runtime.sendMessage({
         action: "getThemes",
         categories: ["quickSettings"],
-        includeHidden: true
+        includeHidden: false
       });
       let themeOptionNames = this.themeOptions.map((option) => {
         return option.name;
       });
-      let themeNames = Object.keys(themes2);
+      let themeNames = Object.keys(themes);
       let missingThemeOptionNames = themeNames.filter((name2) => {
         return !themeOptionNames.includes(name2);
       });
       missingThemeOptionNames.forEach(async (name2) => {
-        if (!themes2[name2]) {
+        if (!themes[name2]) {
           return;
         }
-        let option = await this.createThemeOption(name2, themes2[name2]);
+        let option = await this.createThemeOption(name2, themes[name2]);
         option.render();
         this.selector.appendChild(option.element);
       });
@@ -5284,13 +5308,13 @@ Is it scaring you off?`,
     }
     async render() {
       this.element.classList.add("compact-theme-selector");
-      let themes2 = await browser.runtime.sendMessage({
+      let themes = await browser.runtime.sendMessage({
         action: "getThemes",
         categories: ["quickSettings"],
-        includeHidden: true
+        includeHidden: false
       });
       this.themeOptions = [];
-      this.createThemeOptions(themes2);
+      this.createThemeOptions(themes);
       this.updateThemeOptions();
       this.createInput();
       document.addEventListener("click", (e5) => {
@@ -7936,7 +7960,7 @@ Is it scaring you off?`,
         });
       }
       this.onDuplicate(newThemeName);
-      new Toast("Theme succesfully duplicated", "succes").render();
+      new Toast("Theme succesfully duplicated", "success").render();
     }
     async share() {
       let shareDialog = new Dialog("themeSharing", true);
@@ -7957,7 +7981,7 @@ Is it scaring you off?`,
             svg.style.fill = "none";
             copyToClipboardButton.innerHTML = copySvg;
           }, 1e3);
-          new Toast("Theme link copied to clipboard", "succes").render();
+          new Toast("Theme link copied to clipboard", "success").render();
         } else {
           new Toast("Theme link is not ready yet", "error").render();
         }
@@ -8015,7 +8039,6 @@ Is it scaring you off?`,
             theme.cssProperties[key]
           );
         });
-        navigator.clipboard.writeText(JSON.stringify(this.theme));
         let imageContainer = document.createElement("div");
         imageContainer.classList.add("sharing-image-container");
         let imageURL = await getImageURL(
@@ -8035,11 +8058,11 @@ Is it scaring you off?`,
         image.src = imageURL.url;
         const displayNameLength = title.innerText.length;
         if (displayNameLength < 20) {
-          title.style.fontSize = "2rem";
+          title.style.fontSize = "2.5rem";
         } else if (displayNameLength < 25) {
-          title.style.fontSize = "1.5rem";
+          title.style.fontSize = "2rem";
         } else if (displayNameLength < 30) {
-          title.style.fontSize = "1.2rem";
+          title.style.fontSize = "1.5rem";
         } else {
           title.style.fontSize = "1.2rem";
           title.innerText = title.innerText.slice(0, 30) + "\u2026";
@@ -8089,7 +8112,7 @@ Is it scaring you off?`,
         linkOutput.style.pointerEvents = "all";
         linkOutput.addEventListener("click", copyToClipboard);
         copyToClipboardButton.innerHTML = copySvg;
-        new Toast("Theme uploaded", "succes").render();
+        new Toast("Theme uploaded", "success").render();
       }
       this.onShare();
     }
@@ -8227,7 +8250,7 @@ Is it scaring you off?`,
       await settingsWindow.loadPage(false);
       await updateTheme(newTheme);
       startCustomThemeCreator(defaultTheme, newTheme);
-      await new Toast(`Created new custom theme`, "succes").render();
+      await new Toast(`Created new custom theme`, "success").render();
     }
     async createContent() {
       this.element.classList.add("use-default-colors");
@@ -8314,7 +8337,7 @@ Is it scaring you off?`,
     }
     async updateThemeTiles() {
       if (this.currentCategory == "all") return;
-      let themes2 = await browser.runtime.sendMessage({
+      let themes = await browser.runtime.sendMessage({
         action: "getThemes",
         categories: [this.currentCategory],
         includeHidden: false
@@ -8330,7 +8353,7 @@ Is it scaring you off?`,
       let visibleThemeNames = visibleThemeTilesArray.map((element) => {
         return element.dataset["name"];
       });
-      let correctThemeNames = Object.keys(themes2).map((themeName) => {
+      let correctThemeNames = Object.keys(themes).map((themeName) => {
         return themeName;
       });
       let addMissingTiles = async (visibleThemeNames2, correctThemeNames2) => {
@@ -8341,12 +8364,12 @@ Is it scaring you off?`,
         correctThemeNames2.forEach(async (themeName) => {
           if (!visibleThemeNames2.includes(themeName)) {
             let isFavorite = data2.appearance.quickSettingsThemes.includes(themeName);
-            if (!themes2[themeName]) return;
+            if (!themes[themeName]) return;
             let newTile = await this.createThemeTile(
               themeName,
               isFavorite,
               Object.keys(customThemes).includes(themeName),
-              themes2[themeName]
+              themes[themeName]
             );
             let createThemeButton = this.content.querySelector(
               ".create-theme-button"
@@ -8392,7 +8415,7 @@ Is it scaring you off?`,
           }
         });
       };
-      if (Object.keys(themes2).length == 0 && this.currentCategory != "custom") {
+      if (Object.keys(themes).length == 0 && this.currentCategory != "custom") {
         this.currentTiles.push(new noThemes());
         await this.renderTiles(this.currentTiles);
       }
@@ -8492,7 +8515,7 @@ Is it scaring you off?`,
       return tile;
     }
     async renderThemeTiles() {
-      let themes2 = await browser.runtime.sendMessage({
+      let themes = await browser.runtime.sendMessage({
         action: "getThemes",
         categories: [this.currentCategory],
         includeHidden: false
@@ -8505,11 +8528,11 @@ Is it scaring you off?`,
         action: "getSettingsData"
       });
       let tiles = await Promise.all(
-        Object.keys(themes2).map(async (name2) => {
+        Object.keys(themes).map(async (name2) => {
           let isFavorite = data2.appearance.quickSettingsThemes.includes(name2);
           let isCustom = Object.keys(customThemes).includes(name2);
-          if (themes2[name2])
-            return this.createThemeTile(name2, isFavorite, isCustom, themes2[name2]);
+          if (themes[name2])
+            return this.createThemeTile(name2, isFavorite, isCustom, themes[name2]);
           return;
         })
       );
@@ -8517,7 +8540,7 @@ Is it scaring you off?`,
         tiles.push(new AddCustomTheme());
       }
       this.currentTiles = tiles;
-      if (Object.keys(themes2).length == 0 && this.currentCategory != "custom") {
+      if (Object.keys(themes).length == 0 && this.currentCategory != "custom") {
         this.currentTiles.push(new noThemes());
       }
       await this.renderTiles(this.currentTiles);
@@ -9043,7 +9066,7 @@ Is it scaring you off?`,
       await settingsWindow.loadPage(true);
       await loadQuickSettings();
       this.hide(true);
-      await new Toast(`Removed "${this.theme.displayName}"`, "succes").render();
+      await new Toast(`Removed "${this.theme.displayName}"`, "success").render();
     }
   };
 
@@ -10309,12 +10332,12 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             });
             break;
           case "test cats":
-            let themes2 = await browser.runtime.sendMessage({
+            let themes = await browser.runtime.sendMessage({
               action: "getThemes",
               categories: ["quickSettings"],
               includeHidden: true
             });
-            console.log(themes2);
+            console.log(themes);
           case "posh text":
             document.body.style.setProperty(
               "--font-family",
@@ -13466,9 +13489,19 @@ ${code}`;
   }
   async function migrate() {
     await removeLegacyData();
+    let dataVersion = await browser.runtime.sendMessage({
+      action: "getDataVersion"
+    });
+    if (dataVersion < currentDataVersion) {
+      await browser.runtime.sendMessage({
+        action: "setDataVersion",
+        version: currentDataVersion
+      });
+    }
     let settingsData = await browser.runtime.sendMessage({
       action: "getRawSettingsData"
     });
+    if (!settingsData) return;
     if (settingsData.glass != void 0) return;
     await migrateV6();
   }
@@ -13524,7 +13557,7 @@ ${code}`;
     let rawSettingsData = await browser.runtime.sendMessage({
       action: "getRawSettingsData"
     });
-    if (window.localStorage.getItem("settingsdata") || rawSettingsData.backgroundBlurAmount) {
+    if (window.localStorage.getItem("settingsdata")) {
       await clearAllData();
     }
   }
@@ -13627,7 +13660,6 @@ ${code}`;
 
   // src/main-features/main.ts
   var originalUsername;
-  var themes;
   var onHomePage;
   var onLoginPage;
   var isGOSchool;
@@ -13635,6 +13667,7 @@ ${code}`;
   var originalPfpUrl;
   var keybinds;
   var liteMode;
+  var currentDataVersion = 6;
   function updateDiscordPopup(discordButtonEnabled) {
     if (discordButtonEnabled) {
       let discordButtonContainer = document.getElementById("discord-link-container") || document.createElement("div");
@@ -13748,10 +13781,7 @@ ${code}`;
       data2.switchCoursesAndLinks ? topNav.insertBefore(linksButton, coursesButton) : topNav.insertBefore(coursesButton, linksButton);
     }
   }
-  async function createStaticGlobals() {
-    themes = await browser.runtime.sendMessage({
-      action: "getThemes"
-    });
+  async function createGlobals() {
     let originalUsernameElement = document.querySelector(
       ".js-btn-profile .hlp-vert-box span"
     );
@@ -13913,7 +13943,7 @@ ${code}`;
     document.body.classList.add("smpp");
     applyFixes();
     await migrate();
-    await createStaticGlobals();
+    await createGlobals();
     await createWidgetSystem();
     if (document.querySelector("nav.topnav")) {
       await createSettingsWindow();
