@@ -3,3 +3,5 @@ web-ext-artifacts/
 build/smpp-lite/
 build/smpp
 node_modules/
+build/smpp-lite.zip
+build/smpp.zip

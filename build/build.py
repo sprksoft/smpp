@@ -2,6 +2,7 @@ import os
 import json
 import shutil
 import sys
+import zipfile
 
 # Files/folders to never include in any build
 ALWAYS_EXCLUDE_DIRS = {
@@ -20,6 +21,15 @@ IMAGE_EXTENSIONS = {
     '.svg', '.ico', '.bmp', '.avif'
 }
 
+def zip_build(build_dir, zip_path):
+    print(f"\n  Zipping {build_dir} -> {zip_path}")
+    with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zf:
+        for root, dirs, files in os.walk(build_dir):
+            for file in files:
+                abs_path = os.path.join(root, file)
+                arc_name = os.path.relpath(abs_path, build_dir)
+                zf.write(abs_path, arc_name)
+    print(f"  [zip]   {os.path.basename(zip_path)}")
 
 def is_image(filename):
     _, ext = os.path.splitext(filename)
@@ -124,5 +134,8 @@ if __name__ == "__main__":
 
     copy_extension(src_dir, main_out, is_lite=False, lite_icon_source_dir=None)
     copy_extension(src_dir, lite_out, is_lite=True,  lite_icon_source_dir=lite_icons)
+
+    zip_build(main_out, os.path.join(script_dir, 'smpp.zip'))
+    zip_build(lite_out, os.path.join(script_dir, 'smpp-lite.zip'))
 
     print("\nBuild process completed successfully!")
