@@ -896,15 +896,15 @@
   },
   "dunes": {
     "cssProperties": {
-      "--color-accent": "#0481cc",
-      "--color-base00": "#faced5",
-      "--color-base01": "#f0b3bb",
-      "--color-base02": "#f29aa7",
-      "--color-base03": "#fb5a71",
-      "--color-homepage-sidebars-bg": "#eec0c51a",
-      "--color-splashtext": "#08365d",
-      "--color-text": "#08365d",
-      "--darken-background": "#eec0c566"
+      "--color-accent": "#9d464b",
+      "--color-base00": "#deb8a4",
+      "--color-base01": "#d2a892",
+      "--color-base02": "#c89a81",
+      "--color-base03": "#d78c64",
+      "--color-homepage-sidebars-bg": "#d8bfb11a",
+      "--color-splashtext": "#3f3333",
+      "--color-text": "#3f3333",
+      "--darken-background": "#d8bfb166"
     },
     "displayName": "Dusk Dunes"
   },

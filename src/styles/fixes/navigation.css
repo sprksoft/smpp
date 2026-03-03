@@ -400,7 +400,8 @@ td[bgcolor*="#"] {
   top: 0px !important;
   margin-top: 37px !important;
   height: 100% !important;
-
+  max-height: calc(100vh - 100px) !important;
+  overflow-y: scroll !important;
   border: 2px solid var(--color-base02) !important;
   border-radius: 1.5rem !important;
   padding: 1rem !important;
@@ -455,4 +456,9 @@ td[bgcolor*="#"] {
 .modern-ui .smsc-topnav .topnav .favourites-container,
 .smsc-topnav .topnav .favourites-container {
   gap: 0.5rem !important;
+}
+
+.classMatesContainer.show {
+  max-height: calc(100vh - 50px) !important;
+  overflow-y: scroll !important;
 }
