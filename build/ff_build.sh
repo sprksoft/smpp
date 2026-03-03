@@ -5,6 +5,7 @@ HELP="Build the extension for firefox"
 OUTDIR="smpp"
 OUTFILE="$OUTDIR/smpp.xpi"
 
+
 cd $(dirname $0)
 
 while [[ $# -gt 1 ]] ; do
@@ -18,9 +19,14 @@ done
 
 echo "=== Building Extension ==="
 python build.py
+
+echo "=== Generating review zip ==="
+./ff_gen_review_zip.sh
+
 echo "=== Packing Extension ==="
 cd $OUTDIR
 zip -r smpp.xpi .
+
 
 echo "=== Done ==="
 echo "Result written at: $OUTFILE"
