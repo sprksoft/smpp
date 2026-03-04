@@ -2618,10 +2618,12 @@ Is it scaring you off?`,
         document.removeEventListener("keydown", this._keydownHandler);
         this._keydownHandler = null;
       }
+      console.log();
       this.onClosed?.(realUserIntent);
     }
     remove() {
       this.element?.remove();
+      this.wrapper?.remove();
       this.hidden = true;
     }
   };
@@ -7968,6 +7970,9 @@ Is it scaring you off?`,
     }
     async share() {
       let shareDialog = new Dialog("themeSharing", true);
+      shareDialog.onClosed = () => {
+        shareDialog.remove();
+      };
       let linkOutput = document.createElement("a");
       linkOutput.classList.add("link-output");
       linkOutput.target = "_blank";

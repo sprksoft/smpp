@@ -658,6 +658,9 @@ export class ThemeTile extends Tile {
 
   async share() {
     let shareDialog = new Dialog("themeSharing", true);
+    shareDialog.onClosed = () => {
+      shareDialog.remove();
+    };
     let linkOutput = document.createElement("a");
     linkOutput.classList.add("link-output");
     linkOutput.target = "_blank";

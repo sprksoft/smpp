@@ -171,12 +171,13 @@ export class BaseWindow {
       document.removeEventListener("keydown", this._keydownHandler);
       this._keydownHandler = null;
     }
-
+    console.log();
     this.onClosed?.(realUserIntent);
   }
 
   remove(): void {
     this.element?.remove();
+    this.wrapper?.remove();
     this.hidden = true;
   }
 }

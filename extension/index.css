@@ -5283,8 +5283,8 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   height: 25px;
   color: var(--color-red);
 }
-.window-wrapper:has(.base-window.hidden) {
-  display: none !important;
+.window-wrapper:has(.base-window:not(.hidden)) {
+  display: flex;
 }
 .window-wrapper {
   position: fixed;
@@ -5294,7 +5294,7 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   top: 0 !important;
   z-index: 1000 !important;
   justify-content: center;
-  display: flex;
+  display: none;
   align-items: center;
 }
 .base-window.fullscreen-window {
