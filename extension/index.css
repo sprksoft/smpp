@@ -5750,12 +5750,19 @@ label.checkbox.js-checkbox.form-page__receive-copy-by-mail-checkbox {
   position: relative !important;
   display: flex;
   height: 100%;
+  background: none !important;
+}
+.glass h1.form-completed-page__banner-text.fluid-ui-heading.fluid-ui-heading--1 {
+  background-color: var(--darken-background) !important;
+  backdrop-filter: var(--medium-blur) !important;
+}
+h1.form-completed-page__banner-text.fluid-ui-heading.fluid-ui-heading--1 {
+  padding: 0.5rem 1rem !important;
+  background-color: var(--color-base01) !important;
+  border-radius: 1rem !important;
 }
 .smsc-container.form-completed-page__content {
-  background-color: var(--darken-background) !important;
-  backdrop-filter: var(--small-blur) !important;
   background-image: none !important;
-  height: fit-content;
 }
 .confirm-dialog .confirm-dialog__button-bar {
   border-color: var(--color-base02) !important;
@@ -6438,7 +6445,7 @@ span.login-app__title.login-app__title--sign-in-with {
   width: 4px !important;
   border-radius: 1rem !important;
   margin-right: 5px !important;
-  height: -webkit-fill-available !important;
+  height: 37px !important;
   flex-shrink: 0 !important;
 }
 .enableAnimations .modern-message {
