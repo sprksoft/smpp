@@ -219,9 +219,10 @@ export async function installTheme(shareId: ShareId) {
 
   if (json.img_url) {
     const resp = await fetch(json.img_url);
-    let filename = json.img_filename.trim();
-    if (filename == "") {
-      filename = "ImportedFile.webp";
+
+    let filename = "ImportedFile.webp";
+    if (json.img_filename && json.img_filename.trim() != "") {
+      filename = json.img_filename.trim();
     }
 
     const base64 = await getBase64FromResponse(resp);
