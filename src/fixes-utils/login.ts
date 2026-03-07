@@ -41,7 +41,7 @@ export function updateSplashText(splashTextEnabled) {
 
 let splashtexts = [
   `"You're The Bay Harbor Pooper Dexter"`,
-  `"AI gaat je j*b stelen!", Een man zonder broek is niet bang voor een zakkenroller`,
+  `"AI is gonna steal your job!", a man without pants doesn't fear a pickpocketer`,
   `negenennegentigduizendnegenhonderdnegenennegentig`,
   `NOT made in china`,
   `Burger, Evan Burger`,
