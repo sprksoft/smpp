@@ -5,3 +5,4 @@ build/smpp
 node_modules/
 build/smpp-lite.zip
 build/smpp.zip
+build/smpp-code.zip
