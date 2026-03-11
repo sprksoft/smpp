@@ -40,6 +40,12 @@ export function updateSplashText(splashTextEnabled) {
 }
 
 let splashtexts = [
+  `"You're The Bay Harbor Pooper Dexter"`,
+  `"AI is gonna steal your job!", a man without pants doesn't fear a pickpocketer`,
+  `negenennegentigduizendnegenhonderdnegenennegentig`,
+  `NOT made in china`,
+  `Burger, Evan Burger`,
+  `no-api`,
   `It even works under water!`,
   `Hoelang is een chinees.`,
   `404 Splashtext not found`,
