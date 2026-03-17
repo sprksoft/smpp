@@ -15,6 +15,8 @@ import {
 } from "../../common/utils.js";
 import {
   brokenHeartSvg,
+  carSvg,
+  catSvg,
   chevronLeftSvg,
   copySvg,
   doneSvg,
@@ -22,13 +24,16 @@ import {
   errorSvg,
   folderSvg,
   heartSvg,
+  japanSvg,
   loadingSpinnerSvg,
   magicWandSvg,
   moonSvg,
+  mountainSvg,
   pineSvg,
   playSvg,
   plusSVG,
   shareSvg,
+  starSvg,
   sunSvg,
   trashSvg,
   wandSvg,
@@ -50,7 +55,7 @@ export let currentTheme: Theme;
 export type ShareId = string;
 export type ThemeId = string;
 
-export type ThemeCategory = [ThemeId];
+export type ThemeCategory = ThemeId[];
 
 export interface ThemeCategories {
   [name: string]: ThemeCategory;
@@ -385,35 +390,39 @@ export class ThemeTile extends Tile {
   isCustom: boolean;
   currentCategory: string;
   titleElement = document.createElement("span");
+  theme: Theme;
 
-  constructor(name: string, currentCategory: string, isFavorite: boolean, isCustom = false) {
+  constructor(
+    name: string,
+    currentCategory: string,
+    isFavorite: boolean,
+    isCustom: boolean,
+    theme: Theme,
+  ) {
     super();
     this.name = name;
     this.currentCategory = currentCategory;
     this.isFavorite = isFavorite;
     this.isCustom = isCustom;
+    this.theme = theme;
   }
 
-  async updateCSS() {
-    const theme = await getTheme(this.name);
-    Object.keys(theme.cssProperties).forEach((key) => {
-      this.element.style.setProperty(`${key}-local`, theme.cssProperties[key] as string);
+  async updateCSS(theme: Theme) {
+    this.theme = theme;
+    Object.keys(this.theme.cssProperties).forEach((key) => {
+      this.element.style.setProperty(`${key}-local`, this.theme.cssProperties[key] as string);
     });
   }
 
   async updateTitle() {
-    const theme = await getTheme(this.name);
-    this.titleElement.innerText = theme.displayName;
-    if (this.titleElement.innerText.length > 22) {
-      this.titleElement.innerText = `${theme.displayName.slice(0, 22)}…`;
-    }
+    this.titleElement.innerText = this.theme.displayName;
   }
 
   override async createContent() {
     this.element.appendChild(this.createImageContainer());
     this.element.appendChild(this.getBottomContainer());
     await this.updateTitle();
-    await this.updateCSS();
+    await this.updateCSS(this.theme);
   }
 
   getBottomContainer() {
@@ -498,30 +507,23 @@ export class ThemeTile extends Tile {
       }
 
       if (isFirefox && imageURL.type === "file") {
-        const imageContainer = this.element.querySelector(".image-container");
-        if (!imageContainer) {
+        const oldImageContainer = this.element.querySelector(".image-container");
+        if (!oldImageContainer) {
           return;
         }
 
-        const stupidImageContainer = document.createElement("img");
-        stupidImageContainer.classList.add("image-container", "firefox-container");
-        if (await isValidImage(imageURL.url)) {
-          stupidImageContainer.src = imageURL.url;
-        } else {
-          stupidImageContainer.src = "";
-        }
+        const newImageContainer = document.createElement("img");
+        newImageContainer.classList.add("image-container", "firefox-container");
 
-        const bottomContainer = this.element.querySelector(".theme-tile-bottom");
-        if (!bottomContainer) {
-          return;
-        }
-        imageContainer.remove();
-        this.element.prepend(stupidImageContainer);
+        newImageContainer.src = (await isValidImage(imageURL.url)) ? imageURL.url : "";
+
+        oldImageContainer.replaceWith(newImageContainer);
       } else if (isFirefox) {
         const firefoxImageContainer = this.element.querySelector(".firefox-container");
+
         if (firefoxImageContainer) {
-          firefoxImageContainer.remove();
-          this.element.prepend(this.createImageContainer());
+          const replacement = this.createImageContainer();
+          firefoxImageContainer.replaceWith(replacement);
           await this.updateImage(currentTheme, forceReload);
         }
       }
@@ -583,9 +585,11 @@ export class ThemeTile extends Tile {
   }
 
   async duplicate() {
+    const copiedTheme = this.theme;
+    copiedTheme.displayName += " copy";
     const newThemeName = await browser.runtime.sendMessage({
       action: "saveCustomTheme",
-      data: await getTheme(this.name),
+      data: copiedTheme,
     });
     const result = (await browser.runtime.sendMessage({
       action: "getImage",
@@ -634,11 +638,14 @@ export class ThemeTile extends Tile {
       });
     }
     this.onDuplicate(newThemeName);
-    new Toast("Theme succesfully duplicated", "succes").render();
+    new Toast("Theme succesfully duplicated", "success").render();
   }
 
   async share() {
     const shareDialog = new Dialog("themeSharing", true);
+    shareDialog.onClosed = () => {
+      shareDialog.remove();
+    };
     const linkOutput = document.createElement("a");
     linkOutput.classList.add("link-output");
     linkOutput.target = "_blank";
@@ -662,7 +669,7 @@ export class ThemeTile extends Tile {
           copyToClipboardButton.innerHTML = copySvg;
         }, 1000);
 
-        new Toast("Theme link copied to clipboard", "succes").render();
+        new Toast("Theme link copied to clipboard", "success").render();
       } else {
         new Toast("Theme link is not ready yet", "error").render();
       }
@@ -724,6 +731,9 @@ export class ThemeTile extends Tile {
         element.style.setProperty(`${key}-local`, theme.cssProperties[key] as string);
       });
 
+      // For adding themes to the extension:
+      // navigator.clipboard.writeText(JSON.stringify(this.theme));
+
       const imageContainer = document.createElement("div");
       imageContainer.classList.add("sharing-image-container");
 
@@ -737,7 +747,7 @@ export class ThemeTile extends Tile {
       const image = document.createElement("img");
       image.classList.add("sharing-image");
 
-      if (await isValidImage(await imageURL.url)) {
+      if (await isValidImage(imageURL.url)) {
         imageContainer.appendChild(image);
       }
       image.src = imageURL.url;
@@ -745,18 +755,16 @@ export class ThemeTile extends Tile {
       const displayNameLength = title.innerText.length;
 
       if (displayNameLength < 20) {
-        title.style.fontSize = "2rem";
+        title.style.fontSize = "2.5rem";
       } else if (displayNameLength < 25) {
-        title.style.fontSize = "1.5rem";
+        title.style.fontSize = "2rem";
       } else if (displayNameLength < 30) {
-        title.style.fontSize = "1.2rem";
+        title.style.fontSize = "1.5rem";
       } else {
         title.style.fontSize = "1.2rem";
         title.innerText = `${title.innerText.slice(0, 30)}…`;
       }
-      console.log(imageContainer);
       imageContainer.appendChild(title);
-      console.log(imageContainer);
       tile.appendChild(imageContainer);
 
       const colorPreviewsContainer = document.createElement("div");
@@ -789,21 +797,24 @@ export class ThemeTile extends Tile {
       name: this.name,
     });
 
-    if (resp.error) {
-      console.error("Failed to share theme", resp.error);
-      linkOutput.innerText = "Failed to share theme";
+    if (resp.error || resp.humanError) {
+      let humanError = "Failed to share theme";
+      if (resp.humanError) {
+        humanError = resp.humanError;
+      }
+      console.error("Failed to share theme", resp.error, resp.humanError);
+      linkOutput.innerText = humanError;
       shareDialog.element.classList.add("error-theme-sharing");
       copyToClipboardButton.innerHTML = errorSvg;
       copyToClipboardButton.style.pointerEvents = "none";
       new Toast("Failed to share theme", "error").render();
     } else {
       shareUrl = resp.shareUrl; // Update the URL variable
-      console.log(linkOutput);
-      linkOutput.innerText = `${(resp.shareUrl as string).slice(0, 32)}…`;
+      linkOutput.innerText = resp.shareUrl.toString();
       linkOutput.style.pointerEvents = "all";
       linkOutput.addEventListener("click", copyToClipboard);
       copyToClipboardButton.innerHTML = copySvg;
-      new Toast("Theme uploaded", "succes").render();
+      new Toast("Theme uploaded", "success").render();
     }
 
     this.onShare();
@@ -839,7 +850,7 @@ export class ThemeFolder extends Tile {
     const firstThemeInCategory = (await browser.runtime.sendMessage({
       action: "getFirstThemeInCategory",
       category: this.category,
-      includeHidden: true,
+      includeHidden: false,
     })) as string;
 
     if (!firstThemeInCategory) {
@@ -896,6 +907,21 @@ export class ThemeFolder extends Tile {
       case "seasonal":
         svg = pineSvg;
         break;
+      case "mountain":
+        svg = mountainSvg;
+        break;
+      case "car":
+        svg = carSvg;
+        break;
+      case "space":
+        svg = starSvg;
+        break;
+      case "japan":
+        svg = japanSvg;
+        break;
+      case "animal":
+        svg = catSvg;
+        break;
       case "custom":
         svg = editIconSvg;
         break;
@@ -939,16 +965,18 @@ class AddCustomTheme extends Tile {
   }
 
   override async onClick() {
+    const defaultTheme: Theme = await getTheme("defaultCustom");
     const newTheme = await browser.runtime.sendMessage({
       action: "saveCustomTheme",
-      data: await getTheme("defaultCustom"),
+      data: defaultTheme,
     });
 
     await settingsWindow.themeSelector.updateSelectorContent();
     await settingsWindow.loadPage(false);
 
     await updateTheme(newTheme);
-    startCustomThemeCreator(await getTheme("defaultCustom"), newTheme);
+    startCustomThemeCreator(defaultTheme, newTheme);
+    await new Toast("Created new custom theme", "success").render();
   }
 
   override async createContent() {
@@ -1060,7 +1088,7 @@ export class ThemeSelector {
     const themes = (await browser.runtime.sendMessage({
       action: "getThemes",
       categories: [this.currentCategory],
-      includeHidden: true,
+      includeHidden: false,
     })) as {
       [key: string]: Theme;
     };
@@ -1074,7 +1102,7 @@ export class ThemeSelector {
       visibleThemeTilesArray.push(element as HTMLDivElement);
     });
     const visibleThemeNames = visibleThemeTilesArray.map((element) => {
-      return element.dataset.name;
+      return element.dataset["name"];
     }) as string[];
 
     const correctThemeNames = Object.keys(themes).map((themeName) => {
@@ -1085,18 +1113,22 @@ export class ThemeSelector {
       const customThemes = (await browser.runtime.sendMessage({
         action: "getThemes",
         categories: ["custom"],
-        includeHidden: true,
       })) as {
         [key: string]: Theme;
       };
       correctThemeNames.forEach(async (themeName) => {
         if (!visibleThemeNames.includes(themeName)) {
           const isFavorite = data.appearance.quickSettingsThemes.includes(themeName);
-          const newTile = this.createThemeTile(
+          if (!themes[themeName]) {
+            return;
+          }
+          const newTile = await this.createThemeTile(
             themeName,
             isFavorite,
             Object.keys(customThemes).includes(themeName),
+            themes[themeName],
           );
+
           const createThemeButton = this.content.querySelector(".create-theme-button");
           if (createThemeButton) {
             createThemeButton.insertAdjacentElement("beforebegin", await newTile.render());
@@ -1116,7 +1148,7 @@ export class ThemeSelector {
       visibleThemeNames.forEach(async (themeName) => {
         if (!correctThemeNames.includes(themeName)) {
           const element = visibleThemeTilesArray.find((element) => {
-            if (element.dataset.name === themeName) {
+            if (element.dataset["name"] === themeName) {
               return element;
             }
             return false;
@@ -1143,9 +1175,10 @@ export class ThemeSelector {
     };
 
     const updateLocalCSS = async () => {
-      this.currentTiles.forEach((tile: ThemeTile) => {
+      this.currentTiles.forEach(async (tile: ThemeTile) => {
         if (tile.name === currentThemeName) {
-          tile.updateCSS();
+          tile.theme = await getTheme(currentThemeName);
+          tile.updateCSS(tile.theme);
           tile.updateTitle();
         }
       });
@@ -1181,25 +1214,21 @@ export class ThemeSelector {
 
   async renderTiles(tiles: Tiles) {
     function getTileDelay(number: number) {
-      if (number < 8) {
-        return 20;
-      }
-      if (number < 12) {
-        return 15;
-      }
-      return 7;
+      return 200 / number;
     }
+
     this.content.style.height = `${this.calculateContentHeight(tiles.length)}px`;
     const delayAmount = getTileDelay(tiles.length);
+
     for (let i = 1; i <= tiles.length; i++) {
       const tile = tiles[i - 1];
       if (!tile) {
         break;
       }
-      await tile.render();
-      await tile.updateImage(currentThemeName, true);
 
+      await tile.render();
       this.content.appendChild(tile.element);
+      tile.updateImage(currentThemeName, true);
 
       if (document.body.classList.contains("enableAnimations")) {
         await delay(delayAmount);
@@ -1226,8 +1255,7 @@ export class ThemeSelector {
   async renderFolderTiles() {
     const categories = (await browser.runtime.sendMessage({
       action: "getThemeCategories",
-      includeEmpty: true,
-      includeHidden: true,
+      includeHidden: false,
     })) as {
       [key: string]: string[];
     };
@@ -1247,9 +1275,9 @@ export class ThemeSelector {
     this.content.style.height = `${String(this.calculateContentHeight(this.currentTiles.length))}px`;
   }
 
-  createThemeTile(name: string, isFavorite: boolean, isCustom: boolean) {
-    const tile = new ThemeTile(name, this.currentCategory, isFavorite, isCustom);
-    tile.element.dataset.name = name;
+  async createThemeTile(name: string, isFavorite: boolean, isCustom: boolean, theme: Theme) {
+    const tile = new ThemeTile(name, this.currentCategory, isFavorite, isCustom, theme);
+    tile.element.dataset["name"] = name;
 
     tile.onDuplicate = async (newThemeName: string) => {
       if (isCustom) {
@@ -1275,14 +1303,13 @@ export class ThemeSelector {
     const themes = (await browser.runtime.sendMessage({
       action: "getThemes",
       categories: [this.currentCategory],
-      includeHidden: true,
+      includeHidden: false,
     })) as {
       [key: string]: Theme;
     };
     const customThemes = (await browser.runtime.sendMessage({
       action: "getThemes",
       categories: ["custom"],
-      includeHidden: true,
     })) as {
       [key: string]: Theme;
     };
@@ -1290,11 +1317,16 @@ export class ThemeSelector {
       action: "getSettingsData",
     })) as Settings;
 
-    const tiles = Object.keys(themes).map((name) => {
-      const isFavorite = data.appearance.quickSettingsThemes.includes(name);
-      const isCustom = Object.keys(customThemes).includes(name);
-      return this.createThemeTile(name, isFavorite, isCustom);
-    }) as Tiles;
+    const tiles = (await Promise.all(
+      Object.keys(themes).map(async (name) => {
+        const isFavorite = data.appearance.quickSettingsThemes.includes(name);
+        const isCustom = Object.keys(customThemes).includes(name);
+        if (themes[name]) {
+          return this.createThemeTile(name, isFavorite, isCustom, themes[name]);
+        }
+        return;
+      }),
+    )) as Tiles;
     if (this.currentCategory === "custom") {
       tiles.push(new AddCustomTheme());
     }
@@ -1386,7 +1418,7 @@ export class CustomThemeCreator extends Dialog {
     if (this.theme.cssProperties[name]) {
       colorPreview.style.setProperty("--current-color", this.theme.cssProperties[name]);
     }
-    colorPreview.dataset.name = name;
+    colorPreview.dataset["name"] = name;
     colorPreview.addEventListener("click", (e: Event) => {
       if (!colorPreview.parentElement?.querySelector(".floating-picker")) {
         this.openColorPicker(name, colorPreview, e);
@@ -1439,11 +1471,11 @@ export class CustomThemeCreator extends Dialog {
     this.backgroundImageInput = new ImageSelector(this.name, true);
     this.backgroundImageInput.id = this.name;
     this.imagePreviewContainer = document.createElement("div");
+    this.backgroundImagePreview = this.createBackgroundImagePreview();
     this.backgroundImageInput.onStore = async () => {
       updateTheme(this.name);
       this.updateBackgroundImagePreview();
     };
-    this.backgroundImagePreview = this.createBackgroundImagePreview();
   }
 
   content = document.createElement("div");
@@ -1511,7 +1543,7 @@ export class CustomThemeCreator extends Dialog {
       if (!colorPreview) {
         return;
       }
-      const colorName = colorPreview.dataset.name;
+      const colorName = colorPreview.dataset["name"];
       if (!colorName) {
         return;
       }
@@ -1907,24 +1939,24 @@ export class CustomThemeCreator extends Dialog {
   }
 
   override async onCreate(): Promise<void> {
+    await this.load(this.theme);
     await this.updateBackgroundImagePreview();
-    this.load(this.theme);
   }
 
   async load(theme: Theme) {
     this.displayNameInput.value = theme.displayName;
-    this.updateColorPreviews();
     await this.backgroundImageInput.loadImageData();
+    this.updateColorPreviews();
   }
 
   override onClosed(realUserIntent: boolean): void {
     document.body.removeChild(this.wrapper);
-    if (!realUserIntent) {
-      return;
-    }
     settingsWindow.themeSelector.updateSelectorContent();
     settingsWindow.loadPage();
     loadQuickSettings();
+    if (!realUserIntent) {
+      return;
+    }
     openSettingsWindow(null);
   }
 
@@ -1937,5 +1969,7 @@ export class CustomThemeCreator extends Dialog {
     await settingsWindow.loadPage(true);
     await loadQuickSettings();
     this.hide(true);
+
+    await new Toast(`Removed "${this.theme.displayName}"`, "success").render();
   }
 }

@@ -7,6 +7,7 @@ import {
   getFileData,
   getImage,
   getPlantAppData,
+  migrateImagesV6,
   setImage,
 } from "./data-background-script.js";
 import { getSettingsData, getSettingsTemplate, setSettingsData } from "./settings.js";
@@ -48,9 +49,7 @@ async function handleMessage(message: any, sendResponse: (resp: any) => void) {
       );
       sendResponse(themes);
       console.log(
-        `Themes for categories: ${
-          message.categories
-        } sent, including hidden themes: ${!!message.includeHidden}`,
+        `Themes for categories: ${message.categories} sent, including hidden themes: ${!!message.includeHidden}`,
       );
       console.log(themes);
     }
@@ -60,14 +59,14 @@ async function handleMessage(message: any, sendResponse: (resp: any) => void) {
       console.log(`Theme ${message.name} sent.`);
     }
     if (message.action === "getThemeCategories") {
-      const categories = await getThemeCategories(message.includeEmpty, message.includeHidden);
+      const categories = await getThemeCategories(message.includeHidden);
       sendResponse(categories);
       console.log(`Theme categories sent: ${categories}`);
     }
     if (message.action === "getFirstThemeInCategory") {
-      const categories = await getFirstThemeInCategory(message.category, message.includeHidden);
-      sendResponse(categories);
-      console.log(`Theme categories sent: ${categories}`);
+      const themeName = await getFirstThemeInCategory(message.category, message.includeHidden);
+      sendResponse(themeName);
+      console.log(`First theme in category ${message.category} sent: ${themeName}`);
     }
 
     if (message.action === "saveCustomTheme") {
@@ -98,21 +97,13 @@ async function handleMessage(message: any, sendResponse: (resp: any) => void) {
       sendResponse({ success: true });
     }
     if (message.action === "shareTheme") {
-      const url = await shareTheme(message.name);
-      console.log(`Theme ${message.name} was shared (url: ${url})`);
-      sendResponse({ shareUrl: url });
-    }
-
-    // Custom theme OLD
-    if (message.action === "getCustomThemeData") {
-      const customThemeData = await getCustomThemeData();
-      sendResponse(customThemeData);
-      console.log("Custom theme data data sent.");
-    }
-    if (message.action === "setCustomThemeData") {
-      await browser.storage.local.set({ customThemeData: message.data });
-      sendResponse({ success: true });
-      console.log("Custom theme data saved.");
+      const output = await shareTheme(message.name);
+      if (typeof output === "string") {
+        console.log(`Theme ${message.name} was shared (url: ${output})`);
+        sendResponse({ shareUrl: output });
+      } else {
+        sendResponse({ humanError: output.message });
+      }
     }
 
     // Images
@@ -222,8 +213,21 @@ async function handleMessage(message: any, sendResponse: (resp: any) => void) {
       await browser.storage.local.set(data);
       sendResponse({ success: true });
     }
-
     // Migration
+    if (message.action === "getDataVersion") {
+      let dataVersion = await browser.storage.local.get("dataVersion");
+      console.log(dataVersion);
+      if (Object.keys(dataVersion).length === 0) {
+        await browser.storage.local.set({ dataVersion: 6 });
+        dataVersion = 6;
+      }
+      sendResponse(dataVersion.dataVersion);
+      console.log(`Data version ${dataVersion.dataVersion} sent.`);
+    }
+    if (message.action === "setDataVersion") {
+      await browser.storage.local.set({ dataVersion: message.version });
+      sendResponse({ success: true });
+    }
     if (message.action === "getDelijnAppData") {
       // for migration, NEVER use this!!!
       const delijnAppData = await browser.storage.local.get("delijnAppData");
@@ -257,6 +261,18 @@ async function handleMessage(message: any, sendResponse: (resp: any) => void) {
       console.log(message.data);
       await browser.storage.local.set({ settingsData: message.data });
       sendResponse({ success: true });
+    }
+    if (message.action === "migrateImagesV6") {
+      // for migration, NEVER use this!!!
+      console.log("Migrating images to V6...");
+      await migrateImagesV6();
+      sendResponse({ success: true });
+    }
+    if (message.action === "getCustomThemeData") {
+      // for migration, NEVER use this!!!
+      const customThemeData = await getCustomThemeData();
+      sendResponse(customThemeData);
+      console.log("Custom theme data data sent.");
     }
   } catch (err) {
     console.error("Service worker error:", err);

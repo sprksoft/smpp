@@ -46,7 +46,7 @@ document.addEventListener("smppPageScriptMessage", async (e) => {
         });
         if (getResp.theme) {
           sendMessage("setMode", {
-            mode: "installed",
+            mode: "justInstalled",
           });
           return;
         }
@@ -57,11 +57,11 @@ document.addEventListener("smppPageScriptMessage", async (e) => {
         });
         if (resp.error) {
           sendMessage("error", {
-            message: resp.error,
+            message: "Internal Extension Error: " + resp.error,
           });
         } else {
           sendMessage("setMode", {
-            mode: "installed",
+            mode: "justInstalled",
           });
         }
       }

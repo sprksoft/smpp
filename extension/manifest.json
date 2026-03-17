@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Smartschool++",
-  "version": "6.0.0",
+  "version": "6.0.1",
   "description": "Enhance your Smartschool experience with themes and more",
   "homepage_url": "https://smartschoolplusplus.com",
   "content_scripts": [
@@ -12,7 +12,8 @@
         "*://status.smartschool.be/*",
         "*://smartschool.be/bb/*",
         "*://*.smartschool.be/online-session/meeting/redirect/*",
-        "*://*.smartschool.be/html5client/*"
+        "*://*.smartschool.be/html5client/*",
+        "*://conference03-gs.smartschool.be/*"
       ],
       "all_frames": true,
       "match_about_blank": true,

@@ -27,10 +27,9 @@ function quick_cmd_list() {
 }
 
 function add_quick(name, url) {
-  const normalizedName = name.toLowerCase();
-  const quick = { name: normalizedName, url };
+  const quick = { name: name.toLowerCase(), url };
   for (let i = 0; i < quicks.length; i++) {
-    if (quicks[i].name === normalizedName) {
+    if (quicks[i].name === name) {
       quicks[i] = quick;
       quick_save();
       return;
@@ -175,14 +174,12 @@ export async function do_qm(opener = "") {
       "config",
       "clearsettings",
       "discord",
-      "toggle performance mode",
       "dizzy",
       "breakdmenu",
       "glass",
       "ridge",
       "reset plant",
       "remove current theme",
-      "test cats",
       "posh text",
       "funny text",
     ]);
@@ -252,13 +249,6 @@ export async function do_qm(opener = "") {
         case "reset plant":
           resetPlant();
           return;
-        case "plant data":
-          console.log(
-            await browser.runtime.sendMessage({
-              action: "getPlantAppData",
-            }),
-          );
-          break;
         case "remove current theme": {
           const data = await browser.runtime.sendMessage({
             action: "getSettingsData",
@@ -267,15 +257,6 @@ export async function do_qm(opener = "") {
             action: "removeCustomTheme",
             id: data.appearance.theme,
           });
-          break;
-        }
-        case "test cats": {
-          const themes = await browser.runtime.sendMessage({
-            action: "getThemes",
-            categories: ["quickSettings"],
-            includeHidden: true,
-          });
-          console.log(themes);
           break;
         }
         case "posh text":

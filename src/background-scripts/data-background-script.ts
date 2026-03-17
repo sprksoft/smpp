@@ -1,7 +1,9 @@
 import { browser } from "../common/utils.js";
 import type { SMPPImage, SMPPImageMetaData } from "../main-features/modules/images.js";
+import type { Settings } from "../main-features/settings/main-settings.js";
 import { fetchDelijnData } from "./api-background-script.js";
 import { loadJSON } from "./json-loader.js";
+import { getSettingsData } from "./settings.js";
 
 function getDefaultCustomThemeData() {
   return {
@@ -139,12 +141,54 @@ export async function getFileData(link: string) {
     const filename = urlParts.at(-1) || "image.jpg";
 
     return {
-      arrayBuffer: Array.from(new Uint8Array(arrayBuffer)), // Convert to regular array
+      arrayBuffer: Array.from(new Uint8Array(arrayBuffer)),
       mimeType: blob.type || "image/jpeg",
       filename,
     };
   } catch (error) {
     console.error("Error getting file data:", error);
     return null;
+  }
+}
+
+export async function migrateImagesV6() {
+  const settings = (await getSettingsData()) as Settings;
+  let images = (await browser.storage.local.get("images")).images || {};
+
+  if (images["profilePicture"]) {
+    const profileImage = {
+      metaData: {
+        type: images["profilePicture"].type,
+        link: images["profilePicture"].link,
+      },
+      imageData: images["profilePicture"].imageData,
+    };
+    images["profilePicture"] = undefined;
+    await browser.storage.local.set({ images });
+    await setImage("profilePicture", profileImage);
+    images = (await browser.storage.local.get("images")).images || {};
+  }
+
+  if (images["backgroundImage"]) {
+    const backgroundImage = {
+      metaData: {
+        type: images["backgroundImage"].type,
+        link: images["backgroundImage"].link,
+      },
+      imageData: images["backgroundImage"].imageData,
+    };
+    images["backgroundImage"] = undefined;
+    await browser.storage.local.set({ images });
+
+    if (backgroundImage.metaData.type === "link") {
+      backgroundImage.imageData = await getBase64(backgroundImage.metaData.link);
+      if (backgroundImage.imageData != null) {
+        backgroundImage.metaData.type = "file";
+      } else {
+        backgroundImage.imageData = "";
+        backgroundImage.metaData.type = "default";
+      }
+    }
+    await setImage(settings.appearance.theme, backgroundImage);
   }
 }

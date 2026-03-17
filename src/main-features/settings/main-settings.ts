@@ -364,33 +364,35 @@ export class SettingsWindow extends BaseWindow {
         }
 
         // Weather overlay
-        document
-          .querySelectorAll(".settings-page-weather-overlay-container input")
-          .forEach((input) => {
-            const inputElement = input as HTMLInputElement;
-            if (inputElement.id) {
-              inputElement.checked = inputElement.id.includes(
-                settings.appearance.weatherOverlay.type,
-              );
-            }
-          });
+        if (!liteMode) {
+          document
+            .querySelectorAll(".settings-page-weather-overlay-container input")
+            .forEach((input) => {
+              const inputElement = input as HTMLInputElement;
+              if (inputElement.id) {
+                inputElement.checked = inputElement.id.includes(
+                  settings.appearance.weatherOverlay.type,
+                );
+              }
+            });
 
-        const weatherOverlaySlider = document.getElementById(
-          "settings-page-weather-overlay-slider",
-        );
-        if (weatherOverlaySlider) {
-          (weatherOverlaySlider as HTMLInputElement).value = String(
-            settings.appearance.weatherOverlay.amount,
+          const weatherOverlaySlider = document.getElementById(
+            "settings-page-weather-overlay-slider",
           );
-        }
+          if (weatherOverlaySlider) {
+            (weatherOverlaySlider as HTMLInputElement).value = String(
+              settings.appearance.weatherOverlay.amount,
+            );
+          }
 
-        const weatherOpacitySlider = document.getElementById(
-          "settings-page-weather-overlay-opacity-slider",
-        );
-        if (weatherOpacitySlider) {
-          (weatherOpacitySlider as HTMLInputElement).value = String(
-            settings.appearance.weatherOverlay.opacity * 100,
+          const weatherOpacitySlider = document.getElementById(
+            "settings-page-weather-overlay-opacity-slider",
           );
+          if (weatherOpacitySlider) {
+            (weatherOpacitySlider as HTMLInputElement).value = String(
+              settings.appearance.weatherOverlay.opacity * 100,
+            );
+          }
         }
 
         // Tab icon
@@ -557,7 +559,7 @@ export class SettingsWindow extends BaseWindow {
 
     const getCheckboxValue = (id: string): boolean => {
       const element = document.getElementById(id) as HTMLInputElement | null;
-      return element?.checked;
+      return Boolean(element?.checked);
     };
 
     const getSliderValue = (id: string): number => {
@@ -592,36 +594,37 @@ export class SettingsWindow extends BaseWindow {
           ".settings-page-theme-card:has(input[type='radio']:checked)",
         ) as HTMLElement | null;
 
-        if (selectedTheme?.dataset.theme) {
-          settings.appearance.theme = selectedTheme.dataset.theme;
+        if (selectedTheme?.dataset["theme"]) {
+          settings.appearance.theme = selectedTheme.dataset["theme"];
         }
 
         // Blur slider
         settings.appearance.background.blur = getSliderValue("settings-page-blur-slider") / 10;
 
         // Weather overlay
-        const chosenWeather = document.querySelector(
-          ".settings-page-weather-overlay-container input:checked",
-        ) as HTMLInputElement | null;
+        if (!liteMode) {
+          const chosenWeather = document.querySelector(
+            ".settings-page-weather-overlay-container input:checked",
+          ) as HTMLInputElement | null;
 
-        if (chosenWeather) {
-          const weatherContainer = chosenWeather.closest("[data-weather]") as HTMLElement | null;
+          if (chosenWeather) {
+            const weatherContainer = chosenWeather.closest("[data-weather]") as HTMLElement | null;
 
-          if (weatherContainer?.dataset.weather) {
-            const weatherType = weatherContainer.dataset.weather;
-            if (weatherType === "realtime" || weatherType === "rain" || weatherType === "snow") {
-              settings.appearance.weatherOverlay.type = weatherType;
+            if (weatherContainer?.dataset["weather"]) {
+              const weatherType = weatherContainer.dataset["weather"];
+              if (weatherType === "realtime" || weatherType === "rain" || weatherType === "snow") {
+                settings.appearance.weatherOverlay.type = weatherType;
+              }
             }
           }
+
+          settings.appearance.weatherOverlay.amount = getSliderValue(
+            "settings-page-weather-overlay-slider",
+          );
+
+          settings.appearance.weatherOverlay.opacity =
+            getSliderValue("settings-page-weather-overlay-opacity-slider") / 100;
         }
-
-        settings.appearance.weatherOverlay.amount = getSliderValue(
-          "settings-page-weather-overlay-slider",
-        );
-
-        settings.appearance.weatherOverlay.opacity =
-          getSliderValue("settings-page-weather-overlay-opacity-slider") / 100;
-
         // Tab icon
         const smppIconChecked = getCheckboxValue("settings-page-smpp-icon-button");
         settings.appearance.tabLogo = smppIconChecked ? "smpp" : "sm";
@@ -915,8 +918,8 @@ export class SettingsWindow extends BaseWindow {
     function createImageButtonWithLabel(
       src: string,
       text: string,
-      width,
-      height,
+      width: string,
+      height: string,
       name: string,
       id: string,
     ) {
@@ -1081,60 +1084,68 @@ export class SettingsWindow extends BaseWindow {
 
         this.settingsPage.appendChild(blurPreviewContainer);
 
-        this.settingsPage.appendChild(createSectionTitle("Weather overlay"));
-        this.settingsPage.appendChild(createDescription("Add dynamic weather visuals."));
-        const weatherIconsContainer = document.createElement("div");
-        weatherIconsContainer.classList.add(
-          "settings-page-icons-container",
-          "settings-page-weather-overlay-container",
-        );
-        const rainBtn = createImageButtonWithLabel(
-          "icons/weather-overlay/raindropfancy.svg",
-          "Rain",
-          "5rem",
-          "5rem",
-          "weather",
-          "settings-page-raindrop-button",
-        );
-        rainBtn.dataset.weather = "rain";
-        weatherIconsContainer.appendChild(rainBtn);
+        if (!liteMode) {
+          this.settingsPage.appendChild(createSectionTitle("Weather overlay"));
+          this.settingsPage.appendChild(createDescription("Add dynamic weather visuals."));
+          const weatherIconsContainer = document.createElement("div");
+          weatherIconsContainer.classList.add(
+            "settings-page-icons-container",
+            "settings-page-weather-overlay-container",
+          );
+          const rainBtn = createImageButtonWithLabel(
+            "icons/weather-overlay/raindropfancy.svg",
+            "Rain",
+            "5rem",
+            "5rem",
+            "weather",
+            "settings-page-raindrop-button",
+          );
+          rainBtn.dataset["weather"] = "rain";
+          weatherIconsContainer.appendChild(rainBtn);
 
-        const realtimeBtn = createImageButtonWithLabel(
-          "icons/weather-overlay/realtimefancy.svg",
-          "Realtime",
-          "5rem",
-          "5rem",
-          "weather",
-          "settings-page-realtime-button",
-        );
-        realtimeBtn.dataset.weather = "realtime";
-        weatherIconsContainer.appendChild(realtimeBtn);
+          const realtimeBtn = createImageButtonWithLabel(
+            "icons/weather-overlay/realtimefancy.svg",
+            "Realtime",
+            "5rem",
+            "5rem",
+            "weather",
+            "settings-page-realtime-button",
+          );
+          realtimeBtn.dataset["weather"] = "realtime";
+          weatherIconsContainer.appendChild(realtimeBtn);
 
-        const snowBtn = createImageButtonWithLabel(
-          "icons/weather-overlay/snowflakefancy.svg",
-          "Snow",
-          "5rem",
-          "5rem",
-          "weather",
-          "settings-page-snow-button",
-        );
-        snowBtn.dataset.weather = "snow";
-        weatherIconsContainer.appendChild(snowBtn);
+          const snowBtn = createImageButtonWithLabel(
+            "icons/weather-overlay/snowflakefancy.svg",
+            "Snow",
+            "5rem",
+            "5rem",
+            "weather",
+            "settings-page-snow-button",
+          );
+          snowBtn.dataset["weather"] = "snow";
+          weatherIconsContainer.appendChild(snowBtn);
 
-        this.settingsPage.appendChild(weatherIconsContainer);
+          this.settingsPage.appendChild(weatherIconsContainer);
 
-        this.settingsPage.appendChild(
-          createLabeledSlider("0", "500", "settings-page-weather-overlay-slider", "Amount", false),
-        );
-        this.settingsPage.appendChild(
-          createLabeledSlider(
-            "0",
-            "100",
-            "settings-page-weather-overlay-opacity-slider",
-            "Opacity",
-            false,
-          ),
-        );
+          this.settingsPage.appendChild(
+            createLabeledSlider(
+              "0",
+              "500",
+              "settings-page-weather-overlay-slider",
+              "Amount",
+              false,
+            ),
+          );
+          this.settingsPage.appendChild(
+            createLabeledSlider(
+              "0",
+              "100",
+              "settings-page-weather-overlay-opacity-slider",
+              "Opacity",
+              false,
+            ),
+          );
+        }
         this.settingsPage.appendChild(createSectionTitle("Icon"));
         this.settingsPage.appendChild(
           createDescription("Choose the icon displayed in your browser tab."),

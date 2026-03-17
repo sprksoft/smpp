@@ -103,7 +103,7 @@ export async function clearAllData(): Promise<void> {
   location.reload();
 }
 
-export type ToastType = "info" | "succes" | "error" | "warning";
+export type ToastType = "info" | "success" | "error" | "warning";
 
 export class Toast {
   content: string;
@@ -130,7 +130,7 @@ export class Toast {
         icon.innerHTML = infoSvg;
         toast.classList.add("smpp-info-toast");
         break;
-      case "succes":
+      case "success":
         title.innerText = "Succes";
         icon.innerHTML = succesSvg;
         toast.classList.add("smpp-succes-toast");

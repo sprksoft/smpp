@@ -8,14 +8,6 @@ import "./profile.ts";
 import "../main-features/keybinds.ts";
 import "./appearance/background-image.ts";
 import "./appearance/weather-effects.ts";
-import {
-  createWidgetEditModeButton,
-  createWidgetSystem,
-  initWidgetEditMode,
-  setEditMode,
-  setWidgetLiteMode,
-  updateNews,
-} from "../widgets/widgets.js";
 // Games
 import "../games/games.ts";
 import "../games/breakout.ts";
@@ -27,6 +19,7 @@ import "../games/tetris.ts";
 import "../widgets/tutorial-widget.ts";
 import "../widgets/assignments.ts";
 import "../widgets/delijn.ts";
+import "../widgets/plant.ts";
 import "../widgets/planner.ts";
 import "../widgets/weather.ts";
 import "../widgets/clock.ts";
@@ -36,14 +29,13 @@ import { browser, getExtensionImage, randomChance } from "../common/utils.js";
 import { migrate } from "../fixes-utils/migration.js";
 import { titleFix } from "../fixes-utils/titlefix.js";
 import { getPfpLink } from "../fixes-utils/utils.js";
-import { registerPlantWidget } from "../widgets/plant.js";
+import { createWidgetEditModeButton, createWidgetSystem } from "../widgets/widgets.js";
 import { createGC, setGlobalGlass } from "./globalchat.js";
 import { quickLoad } from "./quick-menu/quick.js";
 import { createSettingsWindow, type Settings } from "./settings/main-settings.js";
 import { createQuickSettings, createQuickSettingsButton } from "./settings/quick-settings.js";
 
 export let originalUsername: string;
-export let themes: any;
 export let onHomePage: boolean;
 export let onLoginPage: boolean;
 export let isGOSchool: boolean;
@@ -51,7 +43,7 @@ export let isFirefox: boolean;
 export let originalPfpUrl: string;
 export let keybinds: any;
 export let liteMode: boolean;
-export let customTheme: any;
+export const currentDataVersion = 6;
 
 import { updateLoginPanel, updateSplashText } from "../fixes-utils/login.js";
 import { buisStats } from "../fixes-utils/results.js";
@@ -64,6 +56,7 @@ import {
   settingsIconSvg,
 } from "../fixes-utils/svgs.js";
 import { createQuickMenuButton, reloadDMenuConfig } from "../main-features/quick-menu/dmenu.js";
+import { initWidgetEditMode, setEditMode, updateNews } from "../widgets/widgets.js";
 import { setBackground } from "./appearance/background-image.js";
 import { setTheme, updateCurrentThemeName } from "./appearance/themes.js";
 import { applyWeatherEffects } from "./appearance/weather-effects.js";
@@ -206,11 +199,7 @@ export function applyTopNav(data: Settings["topNav"]) {
   }
 }
 
-async function createStaticGlobals() {
-  themes = await browser.runtime.sendMessage({
-    action: "getThemes",
-  });
-
+async function createGlobals() {
   const originalUsernameElement = document.querySelector(
     ".js-btn-profile .hlp-vert-box span",
   ) as HTMLSpanElement;
@@ -231,7 +220,6 @@ async function createStaticGlobals() {
 
   const _quicks = await quickLoad();
   liteMode = browser.runtime.getManifest().name.includes("Lite");
-  setWidgetLiteMode(liteMode);
 }
 
 export async function applyAppearance(appearance: Settings["appearance"]) {
@@ -394,53 +382,41 @@ function createProfileSettingButton() {
 function updateTopButtons(data: Settings["topNav"]["buttons"]) {
   const GOButton = document.querySelector(`[data-go=""]`) as HTMLElement;
   if (GOButton) {
-    if (data.GO) {
-      GOButton.style = "display:flex";
-    } else {
-      GOButton.style = "display:none";
-    }
+    data.GO ? (GOButton.style = "display:flex") : (GOButton.style = "display:none");
   }
 
   const searchButton = document.querySelector(".topnav__btn--icon--search");
   if (searchButton?.parentElement) {
-    if (data.search) {
-      searchButton.parentElement.style = "display:flex";
-    } else {
-      searchButton.parentElement.style = "display:none";
-    }
+    data.search
+      ? (searchButton.parentElement.style = "display:flex")
+      : (searchButton.parentElement.style = "display:none");
   }
 
   const GC = document.getElementById("global_chat_button");
   if (GC) {
-    if (data.GC) {
-      GC.style = "display:flex !important";
-    } else {
-      GC.style = "display:none !important";
-    }
+    data.GC ? (GC.style = "display:flex !important") : (GC.style = "display:none !important");
   }
 
   const quickButton = document.getElementById("quick-menu-button");
   if (quickButton) {
-    if (data.quickMenu) {
-      quickButton.style = "display:flex !important";
-    } else {
-      quickButton.style = "display:none !important";
-    }
+    data.quickMenu
+      ? (quickButton.style = "display:flex !important")
+      : (quickButton.style = "display:none !important");
   }
 }
 
 async function main() {
   if (document.body.classList.contains("smpp")) {
     console.error("SMPP is 2x geladen");
+    return;
   }
 
   document.body.classList.add("smpp"); // For modding
 
+  applyFixes();
   await migrate();
 
-  applyFixes();
-  await createStaticGlobals();
-  await registerPlantWidget();
+  await createGlobals();
 
   await createWidgetSystem();
 

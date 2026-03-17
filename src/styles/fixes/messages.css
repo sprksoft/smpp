@@ -63,11 +63,11 @@
   background-color: var(--color-accent);
 }
 .modern-ui .modern-message__read-status {
-  width: 4px;
-  border-radius: 1rem;
-  margin-right: 5px;
-  height: 34px;
-  flex-shrink: 0;
+  width: 4px !important;
+  border-radius: 1rem !important;
+  margin-right: 5px !important;
+  height: 37px !important;
+  flex-shrink: 0 !important;
 }
 
 .enableAnimations .modern-message {
@@ -183,7 +183,6 @@ body.modern-ui .homepage__block {
   height: 100% !important;
   max-height: 100% !important;
   position: relative !important;
-  overflow: auto !important;
   display: flex !important;
   flex-direction: row !important;
   justify-content: center !important;
@@ -205,27 +204,24 @@ body.modern-ui .homepage__block {
   display: flex !important;
   flex-direction: row !important;
   gap: 10px !important;
-  justify-content: flex-start;
+  justify-content: space-between !important;
   /* Ensures no extra space at the edges */
+}
+
+.smscBlockContainer_mainContentBlock::after,
+.smscBlockContainer_mainContentBlock::before {
+  display: none !important;
 }
 
 .smscBlockContainer_left {
   position: relative !important;
-  flex-grow: 0.5 !important;
-  height: 100% !important;
+  max-height: 100% !important;
   margin-left: 0px !important;
 }
 
 .smscBlockContainer_right {
   position: relative !important;
-  flex-grow: 0.5 !important;
-  height: 100% !important;
   margin-right: 0px !important;
-  width: initial !important;
-}
-
-#smscMain > * {
-  overflow: visible !important;
 }
 
 .smscleftnavcontainer,
@@ -407,7 +403,7 @@ img[src="/modules/Messages/themes/default/images/loading_big.gif"] {
 }
 
 .drag-container {
-  border: 2px solid var(--color-accent) !important;
+  border: 2px solid var(--color-base02) !important;
 }
 
 .smsc-container__title {
@@ -734,8 +730,6 @@ div#submitbtn {
   flex-direction: column !important;
   gap: 10px !important;
   padding: 10px !important;
-  margin: 20px !important;
-  min-height: auto !important;
 }
 
 .smscSettings {
@@ -828,7 +822,12 @@ smsc-tabs .smsc-tabslist__item,
 
 .smsc-table__row.smsc-table__row--nohover.smsc-table__row--noborder:hover,
 smsc-tabs .smsc-tabslist__item:hover {
-  background-color: var(--color-base01) !important;
+  background-color: var(--color-base02) !important;
+}
+
+.smsc-table__row.smsc-table__row--nohover.smsc-table__row--noborder {
+  border-radius: 0.75rem !important;
+  border-color: var(--color-accent) !important;
 }
 
 smsc-tabs .smsc-tabslist__item {

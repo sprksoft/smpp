@@ -30,21 +30,11 @@ async function getAllThemes(): Promise<Themes> {
   return themes;
 }
 
-export async function getThemeCategories(includeEmpty = false, includeHidden = false) {
-  const allCategories = await getAllThemeCategories();
+export async function getThemeCategories(includeHidden = false) {
+  let allCategories = await getAllThemeCategories();
   if (!includeHidden) {
-    const hiddenThemeKeys = (await getThemeCategory("hidden")) as ThemeCategory;
-
-    for (const [name, category] of Object.entries(allCategories)) {
-      allCategories[name] = category.filter((c) => !hiddenThemeKeys.includes(c)) as ThemeCategory;
-    }
-  }
-  if (!includeEmpty) {
-    Object.keys(allCategories).forEach((category) => {
-      if (!allCategories[category]?.[0]) {
-        delete allCategories[category];
-      }
-    });
+    const { hidden, ...rest } = allCategories;
+    allCategories = rest;
   }
   return allCategories;
 }
@@ -55,19 +45,25 @@ export async function getAllThemeCategories(): Promise<ThemeCategories> {
       "background-scripts/data/theme-categories.json",
     )) as ThemeCategories;
   }
-  categories.quickSettings = await getQuickSettingsThemes();
-  categories.custom = await getCustomCategory();
+  categories["quickSettings"] = await getQuickSettingsThemes();
+  categories["custom"] = await getCustomCategory();
   return categories;
 }
 
 export async function getFirstThemeInCategory(
   category: string,
-  _includeHidden: boolean,
+  includeHidden: boolean,
 ): Promise<string> {
-  const themeNames = await getThemeCategory(category);
+  let themeNames = await getThemeCategory(category);
   if (!themeNames) {
     return "error";
   }
+
+  if (!includeHidden) {
+    const hiddenThemeKeys = (await getThemeCategory("hidden")) as ThemeCategory;
+    themeNames = themeNames.filter((themeKey) => !hiddenThemeKeys.includes(themeKey));
+  }
+
   if (!themeNames[0]) {
     return "error";
   }
@@ -126,7 +122,7 @@ export async function getTheme(name: ThemeId): Promise<Theme> {
     return theme;
   }
   console.error(`Invalid theme requested:"${name}", sent "error" theme`);
-  return allThemes.error as Theme;
+  return allThemes["error"] as Theme;
 }
 
 export async function getSharedThemeId(shareId: ShareId): Promise<ThemeId | null> {
@@ -174,6 +170,7 @@ export async function saveCustomTheme(data: Theme, id: string | undefined = unde
 }
 
 export async function removeCustomTheme(id: ThemeId) {
+  await purgeThemeShareCache(id);
   const customThemes = await getAllCustomThemes();
   delete customThemes[id];
   await removeImage(id);
@@ -185,17 +182,6 @@ export async function removeCustomTheme(id: ThemeId) {
   setByPath(data, "appearance.quickSettingsThemes", quickSettingsThemes);
   await setSettingsData(data);
   await browser.storage.local.set({ customThemes });
-}
-
-function getContentDispositionFileName(headerValue: string | null): string | null {
-  if (!headerValue) {
-    return null;
-  }
-  const match = [...headerValue.matchAll(/filename="(.*)"/)];
-  if (match?.[0]?.[0]) {
-    return match[0][0];
-  }
-  return null;
 }
 
 export async function installTheme(shareId: ShareId) {
@@ -220,8 +206,11 @@ export async function installTheme(shareId: ShareId) {
 
   if (json.img_url) {
     const resp = await fetch(json.img_url);
-    const filename =
-      getContentDispositionFileName(resp.headers.get("Content-Disposition")) ?? "importedFile.webp";
+
+    let filename = "ImportedFile.webp";
+    if (json.img_filename && json.img_filename.trim() !== "") {
+      filename = json.img_filename.trim();
+    }
 
     const base64 = await getBase64FromResponse(resp);
     if (base64 === null) {
@@ -237,7 +226,6 @@ export async function installTheme(shareId: ShareId) {
       },
       imageData: base64,
     };
-    // TODO: generate compressed images (needs to be done on client side)
     await setImage(id, image);
   }
 
@@ -262,7 +250,11 @@ interface ThemeShareCache {
 }
 
 export async function loadThemeShareCache(): Promise<ThemeShareCache> {
-  return await browser.storage.local.get("themeShareCache");
+  const cache = await browser.storage.local.get("themeShareCache");
+  if (!cache.themeShareCache) {
+    return {};
+  }
+  return cache.themeShareCache;
 }
 
 export async function purgeThemeShareCache(themeId: ThemeId) {
@@ -282,7 +274,7 @@ export async function updateThemeShareCache(themeId: ThemeId, shareId: ShareId) 
   await browser.storage.local.set({ themeShareCache: data });
 }
 
-export async function shareTheme(id: ThemeId): Promise<string> {
+export async function shareTheme(id: ThemeId): Promise<string | Error> {
   const cachedShareId = await getCachedShareId(id);
   if (cachedShareId) {
     return shareUrlFromShareId(cachedShareId);
@@ -306,6 +298,7 @@ export async function shareTheme(id: ThemeId): Promise<string> {
     name: theme.displayName,
     css: theme.cssProperties,
     img_upload_chksum: hash,
+    img_filename: image.metaData.link,
   };
 
   const resp = await fetch("https://theme.smpp.be", {
@@ -315,22 +308,25 @@ export async function shareTheme(id: ThemeId): Promise<string> {
     },
     body: JSON.stringify(apiTheme),
   });
+  if (!resp.ok) {
+    return new Error(await resp.text());
+  }
   const themeInfo: ApiThemeInfo = await resp.json();
 
-  await updateThemeShareCache(id, themeInfo.id);
-
   if (themeInfo.needs_img && hash && imageData) {
-    await fetch(`https://theme.smpp.be/${themeInfo.id}/image`, {
+    const resp = await fetch(`https://theme.smpp.be/${themeInfo.id}/image`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${themeInfo.edit_key}`,
       },
       body: imageData.buffer as ArrayBuffer,
     });
+    if (!resp.ok) {
+      return new Error(await resp.text());
+    }
   }
 
-  // TODO: sibe fix it, important: Metadata in SMPPImage really does matter...
-  // No, I don't believe ImportedFile.png it is.
+  await updateThemeShareCache(id, themeInfo.id);
 
   return shareUrlFromShareId(themeInfo.id);
 }

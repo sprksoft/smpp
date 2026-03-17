@@ -54,8 +54,7 @@
   color: var(--color-text) !important;
 }
 
-.glass .notification:hover,
-.glass .modern-message:hover {
+.glass .notification:hover {
   background-color: var(--color-base01) !important;
 }
 

@@ -19,12 +19,12 @@
     "lint": "biome lint src",
     "lint:fix": "biome lint src --write",
     "format": "biome format src --write",
-    "check": "ultracite check",
+    "check": "ultracite check src",
     "check:fix": "biome check src --write",
     "typecheck": "tsc --noEmit",
     "ci": "biome check src",
     "prepare": "husky",
-    "fix": "ultracite fix"
+    "fix": "ultracite fix src"
   },
   "devDependencies": {
     "@biomejs/biome": "2.3.13",

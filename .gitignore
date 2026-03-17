@@ -1,5 +1,8 @@
 .vs/
 web-ext-artifacts/
-build/smpp-lite-build/
-build/smpp-build
+build/smpp-lite/
+build/smpp
 node_modules/
+build/smpp-lite.zip
+build/smpp.zip
+build/smpp-code.zip

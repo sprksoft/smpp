@@ -13,11 +13,11 @@ export function createButton(id = "") {
   return outerSwitch;
 }
 
-export function createButtonWithLabel(id, text: string) {
+export function createButtonWithLabel(id: string, text: string) {
   const container = document.createElement("label");
   container.classList.add("smpp-input-with-label");
   container.htmlFor = id;
-  container.dataset.for = id;
+  container.dataset["for"] = id;
 
   const label = document.createElement("span");
   label.innerText = text;

@@ -11,7 +11,7 @@
   };
 
   // src/fixes-utils/svgs.ts
-  var discordSvg, homeiconSvg, notfisSvg, messageSvg, plantThePlantSvg, performanceModeSvg, temperatureSvg, feelsLikeSvg, humiditySvg, windSvg, waterPlantSvg, searchButtonSvg, imageInputSvg, editIconSvg, noLocationSvg, lijnIconSvg, assignmentsSvg, doneSvg, contractIconSVG, expandIconSVG, closeIconSVG, gcIconSvg, settingsIconSvg, loadingSpinnerSvg, trashSvg, copySvg, folderSvg, heartSvg, brokenHeartSvg, pineSvg, moonSvg, sunSvg, chevronLeftSvg, plusSVG, wandSvg, magicWandSvg, playSvg, shareSvg, infoSvg, errorSvg, succesSvg, warnSvg;
+  var discordSvg, homeiconSvg, notfisSvg, messageSvg, plantThePlantSvg, performanceModeSvg, temperatureSvg, feelsLikeSvg, humiditySvg, windSvg, waterPlantSvg, searchButtonSvg, imageInputSvg, editIconSvg, noLocationSvg, lijnIconSvg, assignmentsSvg, doneSvg, contractIconSVG, expandIconSVG, closeIconSVG, gcIconSvg, settingsIconSvg, loadingSpinnerSvg, trashSvg, copySvg, folderSvg, heartSvg, brokenHeartSvg, pineSvg, moonSvg, sunSvg, chevronLeftSvg, plusSVG, wandSvg, magicWandSvg, playSvg, shareSvg, infoSvg, errorSvg, succesSvg, warnSvg, carSvg, starSvg, mountainSvg, japanSvg, catSvg;
   var init_svgs = __esm({
     "src/fixes-utils/svgs.ts"() {
       "use strict";
@@ -274,6 +274,16 @@
 <path xmlns="http://www.w3.org/2000/svg" d="M8 12.3333L10.4615 15L16 9M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
       warnSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
 <path xmlns="http://www.w3.org/2000/svg" d="M12 8V13M12 16H12.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"  stroke-width="2" stroke-linecap="round"/></svg>`;
+      carSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path xmlns="http://www.w3.org/2000/svg" d="M3 8L5.72187 10.2682C5.90158 10.418 6.12811 10.5 6.36205 10.5H17.6379C17.8719 10.5 18.0984 10.418 18.2781 10.2682L21 8M6.5 14H6.51M17.5 14H17.51M8.16065 4.5H15.8394C16.5571 4.5 17.2198 4.88457 17.5758 5.50772L20.473 10.5777C20.8183 11.1821 21 11.8661 21 12.5623V18.5C21 19.0523 20.5523 19.5 20 19.5H19C18.4477 19.5 18 19.0523 18 18.5V17.5H6V18.5C6 19.0523 5.55228 19.5 5 19.5H4C3.44772 19.5 3 19.0523 3 18.5V12.5623C3 11.8661 3.18166 11.1821 3.52703 10.5777L6.42416 5.50772C6.78024 4.88457 7.44293 4.5 8.16065 4.5ZM7 14C7 14.2761 6.77614 14.5 6.5 14.5C6.22386 14.5 6 14.2761 6 14C6 13.7239 6.22386 13.5 6.5 13.5C6.77614 13.5 7 13.7239 7 14ZM18 14C18 14.2761 17.7761 14.5 17.5 14.5C17.2239 14.5 17 14.2761 17 14C17 13.7239 17.2239 13.5 17.5 13.5C17.7761 13.5 18 13.7239 18 14Z"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+      starSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path xmlns="http://www.w3.org/2000/svg" d="M11.2691 4.41115C11.5006 3.89177 11.6164 3.63208 11.7776 3.55211C11.9176 3.48263 12.082 3.48263 12.222 3.55211C12.3832 3.63208 12.499 3.89177 12.7305 4.41115L14.5745 8.54808C14.643 8.70162 14.6772 8.77839 14.7302 8.83718C14.777 8.8892 14.8343 8.93081 14.8982 8.95929C14.9705 8.99149 15.0541 9.00031 15.2213 9.01795L19.7256 9.49336C20.2911 9.55304 20.5738 9.58288 20.6997 9.71147C20.809 9.82316 20.8598 9.97956 20.837 10.1342C20.8108 10.3122 20.5996 10.5025 20.1772 10.8832L16.8125 13.9154C16.6877 14.0279 16.6252 14.0842 16.5857 14.1527C16.5507 14.2134 16.5288 14.2807 16.5215 14.3503C16.5132 14.429 16.5306 14.5112 16.5655 14.6757L17.5053 19.1064C17.6233 19.6627 17.6823 19.9408 17.5989 20.1002C17.5264 20.2388 17.3934 20.3354 17.2393 20.3615C17.0619 20.3915 16.8156 20.2495 16.323 19.9654L12.3995 17.7024C12.2539 17.6184 12.1811 17.5765 12.1037 17.56C12.0352 17.5455 11.9644 17.5455 11.8959 17.56C11.8185 17.5765 11.7457 17.6184 11.6001 17.7024L7.67662 19.9654C7.18404 20.2495 6.93775 20.3915 6.76034 20.3615C6.60623 20.3354 6.47319 20.2388 6.40075 20.1002C6.31736 19.9408 6.37635 19.6627 6.49434 19.1064L7.4341 14.6757C7.46898 14.5112 7.48642 14.429 7.47814 14.3503C7.47081 14.2807 7.44894 14.2134 7.41394 14.1527C7.37439 14.0842 7.31195 14.0279 7.18708 13.9154L3.82246 10.8832C3.40005 10.5025 3.18884 10.3122 3.16258 10.1342C3.13978 9.97956 3.19059 9.82316 3.29993 9.71147C3.42581 9.58288 3.70856 9.55304 4.27406 9.49336L8.77835 9.01795C8.94553 9.00031 9.02911 8.99149 9.10139 8.95929C9.16534 8.93081 9.2226 8.8892 9.26946 8.83718C9.32241 8.77839 9.35663 8.70162 9.42508 8.54808L11.2691 4.41115Z"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+      mountainSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path d="M13.4126 15L10.5421 10.9335C10.0849 10.2858 9.85636 9.96204 9.57524 9.85289C9.32941 9.75744 9.05583 9.76296 8.81405 9.86825C8.53756 9.98865 8.32224 10.3214 7.89161 10.9869L4.25737 16.6035C4.16197 16.7509 4.11427 16.8247 4.08048 16.9041C4.0505 16.9746 4.02872 17.0483 4.01557 17.1238C4.00075 17.2088 4.00073 17.2967 4.00068 17.4723L4 20H20.0008L20.0008 17.4604C20.0008 17.2891 20.0008 17.2035 19.9867 17.1204C19.9742 17.0467 19.9534 16.9746 19.9249 16.9055C19.8926 16.8276 19.8471 16.7551 19.7561 16.61L18.79 15.0702C17.9362 13.7095 17.5093 13.0291 16.9545 12.7811C16.4695 12.5642 15.9181 12.5492 15.4221 12.7395C14.8547 12.957 14.3915 13.6132 13.4651 14.9256L13.4126 15ZM13.4126 15L16.9545 20M20.0008 6C20.0008 7.10457 19.1054 8 18.0008 8C16.8962 8 16.0008 7.10457 16.0008 6C16.0008 4.89543 16.8962 4 18.0008 4C19.1054 4 20.0008 4.89543 20.0008 6Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+      japanSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path xmlns="http://www.w3.org/2000/svg" d="M3 13H12M12 13H21M12 13V9M5 21V9M19 21V9M3 3.5V8.2C3 8.48003 3 8.62004 3.0545 8.727C3.10243 8.82108 3.17892 8.89757 3.273 8.9455C3.37996 9 3.51997 9 3.8 9H20.2C20.48 9 20.62 9 20.727 8.9455C20.8211 8.89757 20.8976 8.82108 20.9455 8.727C21 8.62004 21 8.48003 21 8.2V3.5C21 3.5 17 5 12 5C7 5 3 3.5 3 3.5Z"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+      catSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+<path xmlns="http://www.w3.org/2000/svg" d="M14 9V3L11 4H8L5 3V9L9.5 11L14 9ZM14 9L20 12L22 18L20 21H4L2 19L4 17L2 15L4 13M7 21V9.88889M11 15V21L16.0435 16H18M8 7L8.00707 7.00707M11 7L11.0071 7.00707"  stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
     }
   });
 
@@ -2326,13 +2336,12 @@ didn't you?`,
       return null;
     }
   }
-  async function getCompressedData(file) {
+  async function getCompressedData(file, options = {
+    maxSizeMB: 0.01,
+    maxWidthOrHeight: 350,
+    useWebWorker: false
+  }) {
     try {
-      const options = {
-        maxSizeMB: 0.01,
-        maxWidthOrHeight: 350,
-        useWebWorker: false
-      };
       const compressedFile = await imageCompression(file, options);
       const dataUrl = await imageCompression.getDataUrlFromFile(compressedFile);
       return dataUrl;
@@ -2466,7 +2475,7 @@ didn't you?`,
               icon.innerHTML = infoSvg;
               toast.classList.add("smpp-info-toast");
               break;
-            case "succes":
+            case "success":
               title.innerText = "Succes";
               icon.innerHTML = succesSvg;
               toast.classList.add("smpp-succes-toast");
@@ -2678,10 +2687,12 @@ didn't you?`,
             document.removeEventListener("keydown", this._keydownHandler);
             this._keydownHandler = null;
           }
+          console.log();
           this.onClosed?.(realUserIntent);
         }
         remove() {
           this.element?.remove();
+          this.wrapper?.remove();
           this.hidden = true;
         }
       };
@@ -2733,7 +2744,7 @@ didn't you?`,
     const container = document.createElement("label");
     container.classList.add("smpp-input-with-label");
     container.htmlFor = id;
-    container.dataset.for = id;
+    container.dataset["for"] = id;
     const label = document.createElement("span");
     label.innerText = text;
     const button = createButton(id);
@@ -2778,17 +2789,41 @@ didn't you?`,
   // src/main-features/modules/images.ts
   async function getImageURL(id, onDefault, getCompressed) {
     let image;
+    let requestedImageId = id;
     if (getCompressed) {
-      id = `compressed-${id}`;
+      requestedImageId = `compressed-${id}`;
     }
     try {
       image = await browser.runtime.sendMessage({
         action: "getImage",
-        id
+        id: requestedImageId
       });
     } catch (err) {
       console.warn("[getImageURL] Failed to get image from background:", err);
       return { url: await onDefault(), type: null };
+    }
+    if (getCompressed && image.imageData === "") {
+      const origImage = await browser.runtime.sendMessage({
+        action: "getImage",
+        id
+      });
+      if (origImage.imageData !== "") {
+        const origImageFile = await imageCompression.getFilefromDataUrl(origImage.imageData, "");
+        const imageData = await getCompressedData(origImageFile);
+        const compressedImage = {
+          metaData: {
+            type: origImage.metaData.type,
+            link: origImage.metaData.link
+          },
+          imageData
+        };
+        await browser.runtime.sendMessage({
+          action: "setImage",
+          id: requestedImageId,
+          data: compressedImage
+        });
+        image = compressedImage;
+      }
     }
     if (image.metaData.type === "default") {
       return { url: await onDefault(), type: image.metaData.type };
@@ -2806,7 +2841,7 @@ didn't you?`,
       return { url: await onDefault(), type: image.metaData.type };
     }
   }
-  var ImageSelector;
+  var ImageProcessingError, ImageSelector;
   var init_images = __esm({
     "src/main-features/modules/images.ts"() {
       "use strict";
@@ -2816,12 +2851,24 @@ didn't you?`,
       init_utils2();
       init_ui();
       init_main();
+      ImageProcessingError = class extends Error {
+        message;
+        toastType;
+        toastDuration;
+        constructor(message, toastType = "error", toastDuration) {
+          super(message);
+          this.name = "ImageProcessingError";
+          this.message = message;
+          this.toastType = toastType;
+          this.toastDuration = toastDuration;
+        }
+      };
       ImageSelector = class {
         name;
         isThemeImage;
         id = "";
         clearButton = document.createElement("button");
-        linkInput = createTextInput("", "Link");
+        linkInput = createTextInput("", "Link or paste");
         fileInput = document.createElement("input");
         fileInputButton = document.createElement("button");
         linkInputContainer = this.createLinkImageInputContainer();
@@ -2887,6 +2934,22 @@ didn't you?`,
             }
             await this.storeImage();
           });
+          this.linkInput.addEventListener("paste", async (e5) => {
+            const items = e5.clipboardData?.items;
+            if (!items) {
+              return;
+            }
+            for (const item of items) {
+              if (item.type.startsWith("image/")) {
+                e5.preventDefault();
+                const file = item.getAsFile();
+                if (file) {
+                  this.linkInput.value = file.name;
+                  await this.storeImage(file);
+                }
+              }
+            }
+          });
           this.linkInput.addEventListener("change", async () => {
             if ((this.linkInput.value || "").trim() !== "") {
               this.clearButton.classList.add("active");
@@ -2903,110 +2966,132 @@ didn't you?`,
             await this.storeImage();
           });
         }
-        async storeImage() {
+        async handleFileProcessing(file) {
+          await this.storeImage(file);
+        }
+        getDefaultImageData() {
+          return { imageData: "", metaData: { link: "", type: "default" } };
+        }
+        setButtonLoading(isLoading) {
+          if (isLoading) {
+            this.fileInputButton.innerHTML = loadingSpinnerSvg;
+            new Toast("Loading image...", "info").render();
+          } else {
+            this.fileInputButton.innerHTML = imageInputSvg;
+          }
+        }
+        async processLocalFile(file) {
+          if (!file.type.startsWith("image/")) {
+            throw new ImageProcessingError("That's not an image!", "error");
+          }
+          this.setButtonLoading(true);
+          const [originalDataUrl, compressedDataUrl] = await Promise.all([
+            getCompressedData(file, {
+              maxSizeMB: 3,
+              maxWidthOrHeight: 2560,
+              useWebWorker: false
+            }),
+            getCompressedData(file)
+          ]);
+          return {
+            original: {
+              imageData: originalDataUrl,
+              metaData: { link: file.name, type: "file" }
+            },
+            compressed: {
+              imageData: compressedDataUrl,
+              metaData: { link: file.name, type: "file" }
+            }
+          };
+        }
+        async processImageLink(url) {
+          if (!isAbsoluteUrl(url)) {
+            throw new ImageProcessingError("That's not a valid link!", "warning");
+          }
+          this.setButtonLoading(true);
+          const [file] = await Promise.all([convertLinkToFile(url).catch(() => null)]);
+          if (!file) {
+            throw new ImageProcessingError(
+              "Failed to access image, try saving and uploading it",
+              "error",
+              5e3
+            );
+          }
+          if (!file.type.startsWith("image/")) {
+            throw new ImageProcessingError("That's not an image!", "error");
+          }
+          const compressedBase64 = await getCompressedData(file);
+          const base64 = await getCompressedData(file, {
+            maxSizeMB: 3,
+            maxWidthOrHeight: 2560,
+            useWebWorker: false
+          });
+          return {
+            original: { imageData: base64, metaData: { link: url, type: "file" } },
+            compressed: {
+              imageData: compressedBase64,
+              metaData: { link: url, type: "file" }
+            }
+          };
+        }
+        async saveToStorage(data, compressedImage) {
+          const compressedId = `compressed-${this.id}`;
+          await browser.runtime.sendMessage({
+            action: "setImage",
+            id: this.id,
+            data
+          });
+          await browser.runtime.sendMessage({
+            action: "setImage",
+            id: compressedId,
+            data: compressedImage
+          });
+          await this.loadImageData();
+          this.onStore();
+          if (this.isThemeImage) {
+            await browser.runtime.sendMessage({
+              action: "markThemeAsModified",
+              name: this.id
+            });
+          }
+        }
+        async storeImage(passedFile) {
+          const storedData = await browser.runtime.sendMessage({
+            action: "getImage",
+            id: this.id
+          });
+          let data = storedData ? storedData : this.getDefaultImageData();
+          let compressedImage = {
+            imageData: data.imageData,
+            metaData: { ...data.metaData }
+          };
           try {
-            let data = await browser.runtime.sendMessage({
-              action: "getImage",
-              id: this.id
-            });
-            if (!data) {
-              data = { imageData: "", metaData: { link: "", type: "default" } };
-            }
-            const compressedId = `compressed-${this.id}`;
-            const compressedImage = {
-              imageData: data.imageData,
-              metaData: { link: data.metaData.link, type: data.metaData.type }
-            };
-            const file = this.fileInput.files?.[0];
+            const file = passedFile || this.fileInput.files?.[0];
+            const linkValue = this.linkInput.value?.trim() || "";
             if (file) {
-              this.fileInputButton.innerHTML = loadingSpinnerSvg;
-              const [originalDataUrl, compressedDataUrl] = await Promise.all([
-                imageCompression.getDataUrlFromFile(file),
-                getCompressedData(file)
-              ]);
-              this.fileInputButton.innerHTML = imageInputSvg;
-              data.imageData = originalDataUrl;
-              data.metaData.link = file.name;
-              data.metaData.type = "file";
-              compressedImage.imageData = compressedDataUrl;
-              compressedImage.metaData.link = file.name;
-              compressedImage.metaData.type = "file";
-              this.fileInput.value = "";
+              const result = await this.processLocalFile(file);
+              data = result.original;
+              compressedImage = result.compressed;
+            } else if (linkValue !== "") {
+              const result = await this.processImageLink(linkValue);
+              data = result.original;
+              compressedImage = result.compressed;
             } else {
-              const linkValue = this.linkInput.value?.trim() || "";
-              if (linkValue === "") {
-                data.metaData.type = "default";
-                data.metaData.link = "";
-                data.imageData = "";
-                compressedImage.metaData.type = "default";
-                compressedImage.metaData.link = "";
-                compressedImage.imageData = "";
-              } else if (isAbsoluteUrl(linkValue)) {
-                this.fileInputButton.innerHTML = loadingSpinnerSvg;
-                const [base64, file2] = await Promise.all([
-                  await convertLinkToBase64(linkValue),
-                  await convertLinkToFile(linkValue)
-                ]);
-                this.fileInputButton.innerHTML = imageInputSvg;
-                if (base64 && file2) {
-                  data.metaData.type = "file";
-                  data.metaData.link = linkValue;
-                  data.imageData = base64;
-                  this.fileInputButton.innerHTML = loadingSpinnerSvg;
-                  const compressedBase64 = await getCompressedData(file2);
-                  this.fileInputButton.innerHTML = imageInputSvg;
-                  compressedImage.metaData.type = "file";
-                  compressedImage.metaData.link = linkValue;
-                  compressedImage.imageData = compressedBase64;
-                } else {
-                  await this.loadImageData();
-                  await new Toast(
-                    "Failed to access image, try to upload it as a file",
-                    "error",
-                    5e3
-                  ).render();
-                  data.metaData.type = "default";
-                  data.metaData.link = "";
-                  data.imageData = "";
-                  compressedImage.metaData.type = "default";
-                  compressedImage.metaData.link = "";
-                  compressedImage.imageData = "";
-                }
-              } else {
-                await this.loadImageData();
-                await new Toast("That's not a valid link!", "warning").render();
-                data.metaData.type = "default";
-                data.metaData.link = "";
-                data.imageData = "";
-                compressedImage.metaData.type = "default";
-                compressedImage.metaData.link = "";
-                compressedImage.imageData = "";
-              }
+              data = this.getDefaultImageData();
+              compressedImage = this.getDefaultImageData();
             }
-            await browser.runtime.sendMessage({
-              action: "setImage",
-              id: this.id,
-              data
-            });
-            await browser.runtime.sendMessage({
-              action: "setImage",
-              id: compressedId,
-              data: compressedImage
-            });
-            await this.loadImageData();
-            this.onStore();
-            if (this.isThemeImage) {
-              await browser.runtime.sendMessage({
-                action: "markThemeAsModified",
-                name: this.id
-              });
-            }
-            if (data.metaData.type === "file") {
-              new Toast("Image succesfully saved", "succes").render();
-            }
+            await this.saveToStorage(data, compressedImage);
+            new Toast("Image successfully saved", "success").render();
           } catch (error) {
-            await new Toast("Failed to save image", "error", 5e3).render();
-            console.error("Failed to store image:", error);
+            if (error instanceof ImageProcessingError) {
+              new Toast(error.message, error.toastType, error.toastDuration).render();
+            } else {
+              new Toast("Failed to save image", "error", 5e3).render();
+              console.error("Failed to store image:", error);
+            }
+          } finally {
+            this.fileInput.value = "";
+            this.setButtonLoading(false);
           }
         }
         async loadImageData() {
@@ -4775,41 +4860,6 @@ didn't you?`,
   });
 
   // src/widgets/plant.ts
-  async function registerPlantWidget() {
-    if (isPlantWidgetRegistered) {
-      return;
-    }
-    const { registerWidget: registerWidget2, WidgetBase: WidgetBase2 } = await Promise.resolve().then(() => (init_widgets(), widgets_exports));
-    class PlantWidget extends WidgetBase2 {
-      async createContent() {
-        let plantDiv = document.createElement("div");
-        plantDiv.id = "plantWidget";
-        plantDiv = await createPlantWidget(plantDiv);
-        return plantDiv;
-      }
-      async createPreview() {
-        const plantPreviewDiv = document.createElement("div");
-        plantPreviewDiv.id = "plantPreviewWidget";
-        const plantData = await browser.runtime.sendMessage({
-          action: "getPlantAppData"
-        });
-        const plantTitle = document.createElement("div");
-        plantTitle.id = "plant-preview-title";
-        plantTitle.innerText = "Plant";
-        plantPreviewDiv.appendChild(plantTitle);
-        const plantPreviewImg = document.createElement("div");
-        if (plantData.age == null || plantData.age === 0) {
-          plantPreviewImg.appendChild(createPlantThePlantVisual());
-        } else {
-          plantPreviewImg.innerHTML = getPlantHTML(plantData);
-        }
-        plantPreviewDiv.appendChild(plantPreviewImg);
-        return plantPreviewDiv;
-      }
-    }
-    registerWidget2(new PlantWidget());
-    isPlantWidgetRegistered = true;
-  }
   async function createPlantWidget(plantDiv) {
     if (window.localStorage.getItem("current_plant_conditions")) {
       await migratePlantData();
@@ -5704,14 +5754,13 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
 </svg>`;
     }
   }
-  var plantVersion, isPlantWidgetRegistered;
+  var plantVersion;
   var init_plant = __esm({
     "src/widgets/plant.ts"() {
       "use strict";
       init_utils();
       init_svgs();
       plantVersion = 2;
-      isPlantWidgetRegistered = false;
     }
   });
 
@@ -5884,7 +5933,6 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
       performanceModeInfo.innerHTML = `Toggle performance mode ${data.other.performanceMode ? "<span class='green-underline'>Enabled</span>" : "<span class='red-underline'>Disabled</span>"}`;
     }
     await compactThemeSelector.updateInput();
-    await compactThemeSelector.updateThemeOptions();
   }
   function toggleQuickSettings() {
     const win = document.getElementById("quickSettings");
@@ -6020,16 +6068,41 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
     quickSettingsButtonWrapper.appendChild(quickSettingsButton);
     return quickSettingsButtonWrapper;
   }
-  var CompactThemeOption, CompactThemeSelector, compactThemeSelector, quickSettingsWindowIsHidden, quickSettingsBackgroundImageSelector;
+  var NoThemesOption, CompactThemeOption, CompactThemeSelector, compactThemeSelector, quickSettingsWindowIsHidden, quickSettingsBackgroundImageSelector;
   var init_quick_settings = __esm({
     "src/main-features/settings/quick-settings.ts"() {
       "use strict";
       init_utils();
       init_svgs();
+      init_utils2();
       init_themes();
       init_main();
       init_images();
       init_main_settings();
+      NoThemesOption = class {
+        element = document.createElement("div");
+        createText() {
+          const text = document.createElement("div");
+          text.classList.add("compact-theme-option-text");
+          text.innerHTML = brokenHeartSvg;
+          const span = document.createElement("span");
+          span.innerText = "No themes";
+          text.appendChild(span);
+          return text;
+        }
+        createImageContainer() {
+          const imageContainer = document.createElement("div");
+          imageContainer.classList.add("compact-theme-option-image-container");
+          return imageContainer;
+        }
+        render() {
+          this.element.innerHTML = "";
+          this.element.classList.add("compact-theme-option", "no-themes");
+          this.element.appendChild(this.createText());
+          this.element.appendChild(this.createImageContainer());
+          return this.element;
+        }
+      };
       CompactThemeOption = class {
         element = document.createElement("div");
         name;
@@ -6041,16 +6114,15 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
         createText() {
           const text = document.createElement("div");
           text.classList.add("compact-theme-option-text");
-          text.innerText = this.currentTheme.displayName;
-          if (text.innerText.length > 22) {
-            text.innerText = `${this.currentTheme.displayName.slice(0, 22)}\u2026`;
-          }
+          const span = document.createElement("span");
+          span.innerText = this.currentTheme.displayName;
+          text.appendChild(span);
           return text;
         }
         render() {
           this.element.innerHTML = "";
           this.element.classList.add("compact-theme-option");
-          this.element.dataset.name = this.name;
+          this.element.dataset["name"] = this.name;
           this.element.addEventListener("click", () => this.click());
           this.element.appendChild(this.createText());
           this.element.appendChild(this.createImageContainer());
@@ -6063,15 +6135,33 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
           return imageContainer;
         }
         async updateImage(forceReload = false) {
-          if (this.name === currentThemeName || forceReload) {
-            const imageURL = await getImageURL(
-              this.name,
-              async () => {
-                return await getExtensionImage(`theme-backgrounds/compressed/${this.name}.jpg`);
-              },
-              true
-            );
-            this.element.style.setProperty("--background-image-local", `url(${imageURL.url})`);
+          if (this.name !== currentThemeName && !forceReload) {
+            return;
+          }
+          const imageURL = await getImageURL(
+            this.name,
+            async () => {
+              return await getExtensionImage(`theme-backgrounds/compressed/${this.name}.jpg`);
+            },
+            true
+          );
+          const container = this.element.querySelector(".compact-theme-option-image-container");
+          if (!container) {
+            return;
+          }
+          if (!await isValidImage(imageURL.url)) {
+            container.classList.add("no-image");
+            container.innerHTML = "";
+            return;
+          }
+          container.classList.remove("no-image");
+          const existingImg = container.querySelector("img");
+          const img = existingImg || document.createElement("img");
+          if (imageURL?.url) {
+            img.src = imageURL.url;
+          }
+          if (!existingImg) {
+            container.appendChild(img);
           }
         }
         updateElement() {
@@ -6090,12 +6180,17 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
         async onClick() {
         }
         async updateSelection() {
+          const container = this.element.querySelector(".compact-theme-option-image-container");
           if (this.name === currentThemeName) {
             this.element.classList.add("is-selected");
-            this.updateImage(true);
+            await this.updateImage(true);
           } else {
             this.element.classList.remove("is-selected");
-            this.element.style.setProperty("--background-image-local", "url()");
+            if (container instanceof HTMLImageElement) {
+              container.src = "";
+              const placeholder = this.createImageContainer();
+              container.replaceWith(placeholder);
+            }
           }
         }
         async update() {
@@ -6110,6 +6205,7 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
         selector = document.createElement("div");
         selectorIsOpen = false;
         themeOptions = [];
+        noThemesOption = new NoThemesOption();
         async createThemeOption(name, theme) {
           const option = new CompactThemeOption(name, theme);
           option.onClick = async () => {
@@ -6117,19 +6213,24 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
             if (settingsWindow) {
               await settingsWindow.loadPage();
             }
-            this.themeOptions.forEach((option2) => {
-              option2.updateSelection();
-            });
+            await loadQuickSettings();
           };
           this.themeOptions.push(option);
           return option;
         }
-        async createThemeOptions(themes2) {
-          Object.entries(themes2).forEach((theme) => {
+        async createThemeOptions(themes) {
+          Object.entries(themes).forEach((theme) => {
             this.createThemeOption(theme[0], theme[1]);
           });
         }
         async renderThemeOptions() {
+          this.selector.innerHTML = "";
+          if (this.themeOptions.length === 0) {
+            const noThemesElement = this.noThemesOption.render();
+            this.selector.appendChild(noThemesElement);
+            this.selector.style.height = `${this.calculateHeight(1)}px`;
+            return;
+          }
           for (let i5 = 1; i5 <= this.themeOptions.length; i5++) {
             const option = this.themeOptions[i5 - 1];
             if (!option) {
@@ -6139,28 +6240,28 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
             this.selector.style.height = `${this.calculateHeight(i5)}px`;
             this.selector.appendChild(option.element);
             if (document.body.classList.contains("enableAnimations")) {
-              await delay(20);
+              await delay(200 / this.themeOptions.length);
             }
           }
         }
         async updateThemeOptions() {
-          const themes2 = await browser.runtime.sendMessage({
+          const themes = await browser.runtime.sendMessage({
             action: "getThemes",
             categories: ["quickSettings"],
-            includeHidden: true
+            includeHidden: false
           });
           const themeOptionNames = this.themeOptions.map((option) => {
             return option.name;
           });
-          const themeNames = Object.keys(themes2);
+          const themeNames = Object.keys(themes);
           const missingThemeOptionNames = themeNames.filter((name) => {
             return !themeOptionNames.includes(name);
           });
           missingThemeOptionNames.forEach(async (name) => {
-            if (!themes2[name]) {
+            if (!themes[name]) {
               return;
             }
-            const option = await this.createThemeOption(name, themes2[name]);
+            const option = await this.createThemeOption(name, themes[name]);
             option.render();
             this.selector.appendChild(option.element);
           });
@@ -6178,6 +6279,9 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
           this.themeOptions.forEach((option) => {
             option.updateSelection();
           });
+          if (this.selectorIsOpen) {
+            this.renderThemeOptions();
+          }
         }
         createInput() {
           this.input.classList.add("theme-selector-input");
@@ -6202,7 +6306,7 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
             this.selector.innerHTML = "";
             this.selector.classList.add("visible");
             this.selector.style.overflowY = "hidden";
-            await this.renderThemeOptions();
+            await this.updateThemeOptions();
             await delay(500);
             this.selector.style.overflowY = "auto";
           } else {
@@ -6218,13 +6322,13 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
         }
         async render() {
           this.element.classList.add("compact-theme-selector");
-          const themes2 = await browser.runtime.sendMessage({
+          const themes = await browser.runtime.sendMessage({
             action: "getThemes",
             categories: ["quickSettings"],
-            includeHidden: true
+            includeHidden: false
           });
           this.themeOptions = [];
-          this.createThemeOptions(themes2);
+          this.createThemeOptions(themes);
           this.updateThemeOptions();
           this.createInput();
           document.addEventListener("click", (e5) => {
@@ -6603,31 +6707,29 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
         isCustom;
         currentCategory;
         titleElement = document.createElement("span");
-        constructor(name, currentCategory, isFavorite, isCustom = false) {
+        theme;
+        constructor(name, currentCategory, isFavorite, isCustom, theme) {
           super();
           this.name = name;
           this.currentCategory = currentCategory;
           this.isFavorite = isFavorite;
           this.isCustom = isCustom;
+          this.theme = theme;
         }
-        async updateCSS() {
-          const theme = await getTheme(this.name);
-          Object.keys(theme.cssProperties).forEach((key) => {
-            this.element.style.setProperty(`${key}-local`, theme.cssProperties[key]);
+        async updateCSS(theme) {
+          this.theme = theme;
+          Object.keys(this.theme.cssProperties).forEach((key) => {
+            this.element.style.setProperty(`${key}-local`, this.theme.cssProperties[key]);
           });
         }
         async updateTitle() {
-          const theme = await getTheme(this.name);
-          this.titleElement.innerText = theme.displayName;
-          if (this.titleElement.innerText.length > 22) {
-            this.titleElement.innerText = `${theme.displayName.slice(0, 22)}\u2026`;
-          }
+          this.titleElement.innerText = this.theme.displayName;
         }
         async createContent() {
           this.element.appendChild(this.createImageContainer());
           this.element.appendChild(this.getBottomContainer());
           await this.updateTitle();
-          await this.updateCSS();
+          await this.updateCSS(this.theme);
         }
         getBottomContainer() {
           const bottomContainer = document.createElement("div");
@@ -6699,28 +6801,19 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
               this.element.style.setProperty("--background-image-local", "url()");
             }
             if (isFirefox && imageURL.type === "file") {
-              const imageContainer = this.element.querySelector(".image-container");
-              if (!imageContainer) {
+              const oldImageContainer = this.element.querySelector(".image-container");
+              if (!oldImageContainer) {
                 return;
               }
-              const stupidImageContainer = document.createElement("img");
-              stupidImageContainer.classList.add("image-container", "firefox-container");
-              if (await isValidImage(imageURL.url)) {
-                stupidImageContainer.src = imageURL.url;
-              } else {
-                stupidImageContainer.src = "";
-              }
-              const bottomContainer = this.element.querySelector(".theme-tile-bottom");
-              if (!bottomContainer) {
-                return;
-              }
-              imageContainer.remove();
-              this.element.prepend(stupidImageContainer);
+              const newImageContainer = document.createElement("img");
+              newImageContainer.classList.add("image-container", "firefox-container");
+              newImageContainer.src = await isValidImage(imageURL.url) ? imageURL.url : "";
+              oldImageContainer.replaceWith(newImageContainer);
             } else if (isFirefox) {
               const firefoxImageContainer = this.element.querySelector(".firefox-container");
               if (firefoxImageContainer) {
-                firefoxImageContainer.remove();
-                this.element.prepend(this.createImageContainer());
+                const replacement = this.createImageContainer();
+                firefoxImageContainer.replaceWith(replacement);
                 await this.updateImage(currentTheme2, forceReload);
               }
             }
@@ -6772,9 +6865,11 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
           startCustomThemeCreator(await getTheme(this.name), this.name);
         }
         async duplicate() {
+          const copiedTheme = this.theme;
+          copiedTheme.displayName += " copy";
           const newThemeName = await browser.runtime.sendMessage({
             action: "saveCustomTheme",
-            data: await getTheme(this.name)
+            data: copiedTheme
           });
           const result = await browser.runtime.sendMessage({
             action: "getImage",
@@ -6819,10 +6914,13 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
             });
           }
           this.onDuplicate(newThemeName);
-          new Toast("Theme succesfully duplicated", "succes").render();
+          new Toast("Theme succesfully duplicated", "success").render();
         }
         async share() {
           const shareDialog = new Dialog("themeSharing", true);
+          shareDialog.onClosed = () => {
+            shareDialog.remove();
+          };
           const linkOutput = document.createElement("a");
           linkOutput.classList.add("link-output");
           linkOutput.target = "_blank";
@@ -6842,7 +6940,7 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
                 svg.style.fill = "none";
                 copyToClipboardButton.innerHTML = copySvg;
               }, 1e3);
-              new Toast("Theme link copied to clipboard", "succes").render();
+              new Toast("Theme link copied to clipboard", "success").render();
             } else {
               new Toast("Theme link is not ready yet", "error").render();
             }
@@ -6905,24 +7003,22 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
             );
             const image = document.createElement("img");
             image.classList.add("sharing-image");
-            if (await isValidImage(await imageURL.url)) {
+            if (await isValidImage(imageURL.url)) {
               imageContainer.appendChild(image);
             }
             image.src = imageURL.url;
             const displayNameLength = title.innerText.length;
             if (displayNameLength < 20) {
-              title.style.fontSize = "2rem";
+              title.style.fontSize = "2.5rem";
             } else if (displayNameLength < 25) {
-              title.style.fontSize = "1.5rem";
+              title.style.fontSize = "2rem";
             } else if (displayNameLength < 30) {
-              title.style.fontSize = "1.2rem";
+              title.style.fontSize = "1.5rem";
             } else {
               title.style.fontSize = "1.2rem";
               title.innerText = `${title.innerText.slice(0, 30)}\u2026`;
             }
-            console.log(imageContainer);
             imageContainer.appendChild(title);
-            console.log(imageContainer);
             tile.appendChild(imageContainer);
             const colorPreviewsContainer = document.createElement("div");
             colorPreviewsContainer.classList.add("sharing-color-previews");
@@ -6949,21 +7045,24 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
             action: "shareTheme",
             name: this.name
           });
-          if (resp.error) {
-            console.error("Failed to share theme", resp.error);
-            linkOutput.innerText = "Failed to share theme";
+          if (resp.error || resp.humanError) {
+            let humanError = "Failed to share theme";
+            if (resp.humanError) {
+              humanError = resp.humanError;
+            }
+            console.error("Failed to share theme", resp.error, resp.humanError);
+            linkOutput.innerText = humanError;
             shareDialog.element.classList.add("error-theme-sharing");
             copyToClipboardButton.innerHTML = errorSvg;
             copyToClipboardButton.style.pointerEvents = "none";
             new Toast("Failed to share theme", "error").render();
           } else {
             shareUrl = resp.shareUrl;
-            console.log(linkOutput);
-            linkOutput.innerText = `${resp.shareUrl.slice(0, 32)}\u2026`;
+            linkOutput.innerText = resp.shareUrl.toString();
             linkOutput.style.pointerEvents = "all";
             linkOutput.addEventListener("click", copyToClipboard);
             copyToClipboardButton.innerHTML = copySvg;
-            new Toast("Theme uploaded", "succes").render();
+            new Toast("Theme uploaded", "success").render();
           }
           this.onShare();
         }
@@ -6987,7 +7086,7 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
           const firstThemeInCategory = await browser.runtime.sendMessage({
             action: "getFirstThemeInCategory",
             category: this.category,
-            includeHidden: true
+            includeHidden: false
           });
           if (!firstThemeInCategory) {
             return;
@@ -7034,6 +7133,21 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
             case "seasonal":
               svg = pineSvg;
               break;
+            case "mountain":
+              svg = mountainSvg;
+              break;
+            case "car":
+              svg = carSvg;
+              break;
+            case "space":
+              svg = starSvg;
+              break;
+            case "japan":
+              svg = japanSvg;
+              break;
+            case "animal":
+              svg = catSvg;
+              break;
             case "custom":
               svg = editIconSvg;
               break;
@@ -7064,14 +7178,16 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
           return bottomContainer;
         }
         async onClick() {
+          const defaultTheme = await getTheme("defaultCustom");
           const newTheme = await browser.runtime.sendMessage({
             action: "saveCustomTheme",
-            data: await getTheme("defaultCustom")
+            data: defaultTheme
           });
           await settingsWindow.themeSelector.updateSelectorContent();
           await settingsWindow.loadPage(false);
           await updateTheme(newTheme);
-          startCustomThemeCreator(await getTheme("defaultCustom"), newTheme);
+          startCustomThemeCreator(defaultTheme, newTheme);
+          await new Toast("Created new custom theme", "success").render();
         }
         async createContent() {
           this.element.classList.add("use-default-colors");
@@ -7160,10 +7276,10 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
           if (this.currentCategory === "all") {
             return;
           }
-          const themes2 = await browser.runtime.sendMessage({
+          const themes = await browser.runtime.sendMessage({
             action: "getThemes",
             categories: [this.currentCategory],
-            includeHidden: true
+            includeHidden: false
           });
           const data = await browser.runtime.sendMessage({
             action: "getSettingsData"
@@ -7174,24 +7290,27 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
             visibleThemeTilesArray.push(element);
           });
           const visibleThemeNames = visibleThemeTilesArray.map((element) => {
-            return element.dataset.name;
+            return element.dataset["name"];
           });
-          const correctThemeNames = Object.keys(themes2).map((themeName) => {
+          const correctThemeNames = Object.keys(themes).map((themeName) => {
             return themeName;
           });
           const addMissingTiles = async (visibleThemeNames2, correctThemeNames2) => {
             const customThemes = await browser.runtime.sendMessage({
               action: "getThemes",
-              categories: ["custom"],
-              includeHidden: true
+              categories: ["custom"]
             });
             correctThemeNames2.forEach(async (themeName) => {
               if (!visibleThemeNames2.includes(themeName)) {
                 const isFavorite = data.appearance.quickSettingsThemes.includes(themeName);
-                const newTile = this.createThemeTile(
+                if (!themes[themeName]) {
+                  return;
+                }
+                const newTile = await this.createThemeTile(
                   themeName,
                   isFavorite,
-                  Object.keys(customThemes).includes(themeName)
+                  Object.keys(customThemes).includes(themeName),
+                  themes[themeName]
                 );
                 const createThemeButton = this.content.querySelector(".create-theme-button");
                 if (createThemeButton) {
@@ -7208,7 +7327,7 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
             visibleThemeNames2.forEach(async (themeName) => {
               if (!correctThemeNames2.includes(themeName)) {
                 const element = visibleThemeTilesArray.find((element2) => {
-                  if (element2.dataset.name === themeName) {
+                  if (element2.dataset["name"] === themeName) {
                     return element2;
                   }
                   return false;
@@ -7234,14 +7353,15 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
             });
           };
           const updateLocalCSS = async () => {
-            this.currentTiles.forEach((tile) => {
+            this.currentTiles.forEach(async (tile) => {
               if (tile.name === currentThemeName) {
-                tile.updateCSS();
+                tile.theme = await getTheme(currentThemeName);
+                tile.updateCSS(tile.theme);
                 tile.updateTitle();
               }
             });
           };
-          if (Object.keys(themes2).length === 0 && this.currentCategory !== "custom") {
+          if (Object.keys(themes).length === 0 && this.currentCategory !== "custom") {
             this.currentTiles.push(new noThemes());
             await this.renderTiles(this.currentTiles);
           }
@@ -7267,13 +7387,7 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
         }
         async renderTiles(tiles) {
           function getTileDelay(number) {
-            if (number < 8) {
-              return 20;
-            }
-            if (number < 12) {
-              return 15;
-            }
-            return 7;
+            return 200 / number;
           }
           this.content.style.height = `${this.calculateContentHeight(tiles.length)}px`;
           const delayAmount = getTileDelay(tiles.length);
@@ -7283,8 +7397,8 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
               break;
             }
             await tile.render();
-            await tile.updateImage(currentThemeName, true);
             this.content.appendChild(tile.element);
+            tile.updateImage(currentThemeName, true);
             if (document.body.classList.contains("enableAnimations")) {
               await delay(delayAmount);
             }
@@ -7307,8 +7421,7 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
         async renderFolderTiles() {
           const categories = await browser.runtime.sendMessage({
             action: "getThemeCategories",
-            includeEmpty: true,
-            includeHidden: true
+            includeHidden: false
           });
           const tiles = Object.keys(categories).map((category) => {
             const tile = new ThemeFolder(category);
@@ -7323,9 +7436,9 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
         updateContentHeight() {
           this.content.style.height = `${String(this.calculateContentHeight(this.currentTiles.length))}px`;
         }
-        createThemeTile(name, isFavorite, isCustom) {
-          const tile = new ThemeTile(name, this.currentCategory, isFavorite, isCustom);
-          tile.element.dataset.name = name;
+        async createThemeTile(name, isFavorite, isCustom, theme) {
+          const tile = new ThemeTile(name, this.currentCategory, isFavorite, isCustom, theme);
+          tile.element.dataset["name"] = name;
           tile.onDuplicate = async (newThemeName) => {
             if (isCustom) {
               await this.updateSelectorContent();
@@ -7345,29 +7458,33 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
           return tile;
         }
         async renderThemeTiles() {
-          const themes2 = await browser.runtime.sendMessage({
+          const themes = await browser.runtime.sendMessage({
             action: "getThemes",
             categories: [this.currentCategory],
-            includeHidden: true
+            includeHidden: false
           });
           const customThemes = await browser.runtime.sendMessage({
             action: "getThemes",
-            categories: ["custom"],
-            includeHidden: true
+            categories: ["custom"]
           });
           const data = await browser.runtime.sendMessage({
             action: "getSettingsData"
           });
-          const tiles = Object.keys(themes2).map((name) => {
-            const isFavorite = data.appearance.quickSettingsThemes.includes(name);
-            const isCustom = Object.keys(customThemes).includes(name);
-            return this.createThemeTile(name, isFavorite, isCustom);
-          });
+          const tiles = await Promise.all(
+            Object.keys(themes).map(async (name) => {
+              const isFavorite = data.appearance.quickSettingsThemes.includes(name);
+              const isCustom = Object.keys(customThemes).includes(name);
+              if (themes[name]) {
+                return this.createThemeTile(name, isFavorite, isCustom, themes[name]);
+              }
+              return;
+            })
+          );
           if (this.currentCategory === "custom") {
             tiles.push(new AddCustomTheme());
           }
           this.currentTiles = tiles;
-          if (Object.keys(themes2).length === 0 && this.currentCategory !== "custom") {
+          if (Object.keys(themes).length === 0 && this.currentCategory !== "custom") {
             this.currentTiles.push(new noThemes());
           }
           await this.renderTiles(this.currentTiles);
@@ -7403,7 +7520,7 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
           if (this.theme.cssProperties[name]) {
             colorPreview.style.setProperty("--current-color", this.theme.cssProperties[name]);
           }
-          colorPreview.dataset.name = name;
+          colorPreview.dataset["name"] = name;
           colorPreview.addEventListener("click", (e5) => {
             if (!colorPreview.parentElement?.querySelector(".floating-picker")) {
               this.openColorPicker(name, colorPreview, e5);
@@ -7451,11 +7568,11 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
           this.backgroundImageInput = new ImageSelector(this.name, true);
           this.backgroundImageInput.id = this.name;
           this.imagePreviewContainer = document.createElement("div");
+          this.backgroundImagePreview = this.createBackgroundImagePreview();
           this.backgroundImageInput.onStore = async () => {
             updateTheme(this.name);
             this.updateBackgroundImagePreview();
           };
-          this.backgroundImagePreview = this.createBackgroundImagePreview();
         }
         content = document.createElement("div");
         displayNameInput = document.createElement("input");
@@ -7506,7 +7623,7 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
             if (!colorPreview) {
               return;
             }
-            const colorName = colorPreview.dataset.name;
+            const colorName = colorPreview.dataset["name"];
             if (!colorName) {
               return;
             }
@@ -7849,22 +7966,22 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
           return this.element;
         }
         async onCreate() {
+          await this.load(this.theme);
           await this.updateBackgroundImagePreview();
-          this.load(this.theme);
         }
         async load(theme) {
           this.displayNameInput.value = theme.displayName;
-          this.updateColorPreviews();
           await this.backgroundImageInput.loadImageData();
+          this.updateColorPreviews();
         }
         onClosed(realUserIntent) {
           document.body.removeChild(this.wrapper);
-          if (!realUserIntent) {
-            return;
-          }
           settingsWindow.themeSelector.updateSelectorContent();
           settingsWindow.loadPage();
           loadQuickSettings();
+          if (!realUserIntent) {
+            return;
+          }
           openSettingsWindow(null);
         }
         async onRemoveTheme() {
@@ -7876,6 +7993,7 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
           await settingsWindow.loadPage(true);
           await loadQuickSettings();
           this.hide(true);
+          await new Toast(`Removed "${this.theme.displayName}"`, "success").render();
         }
       };
     }
@@ -8248,29 +8366,31 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
               if (blurSlider) {
                 blurSlider.value = String(settings.appearance.background.blur * 10);
               }
-              document.querySelectorAll(".settings-page-weather-overlay-container input").forEach((input) => {
-                const inputElement = input;
-                if (inputElement.id) {
-                  inputElement.checked = inputElement.id.includes(
-                    settings.appearance.weatherOverlay.type
+              if (!liteMode) {
+                document.querySelectorAll(".settings-page-weather-overlay-container input").forEach((input) => {
+                  const inputElement = input;
+                  if (inputElement.id) {
+                    inputElement.checked = inputElement.id.includes(
+                      settings.appearance.weatherOverlay.type
+                    );
+                  }
+                });
+                const weatherOverlaySlider = document.getElementById(
+                  "settings-page-weather-overlay-slider"
+                );
+                if (weatherOverlaySlider) {
+                  weatherOverlaySlider.value = String(
+                    settings.appearance.weatherOverlay.amount
                   );
                 }
-              });
-              const weatherOverlaySlider = document.getElementById(
-                "settings-page-weather-overlay-slider"
-              );
-              if (weatherOverlaySlider) {
-                weatherOverlaySlider.value = String(
-                  settings.appearance.weatherOverlay.amount
+                const weatherOpacitySlider = document.getElementById(
+                  "settings-page-weather-overlay-opacity-slider"
                 );
-              }
-              const weatherOpacitySlider = document.getElementById(
-                "settings-page-weather-overlay-opacity-slider"
-              );
-              if (weatherOpacitySlider) {
-                weatherOpacitySlider.value = String(
-                  settings.appearance.weatherOverlay.opacity * 100
-                );
+                if (weatherOpacitySlider) {
+                  weatherOpacitySlider.value = String(
+                    settings.appearance.weatherOverlay.opacity * 100
+                  );
+                }
               }
               const defaultIconButton = document.getElementById("settings-page-default-icon-button");
               if (defaultIconButton) {
@@ -8396,7 +8516,7 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
           const previousSettings = structuredClone(settings);
           const getCheckboxValue = (id) => {
             const element = document.getElementById(id);
-            return element?.checked;
+            return Boolean(element?.checked);
           };
           const getSliderValue = (id) => {
             const element = document.getElementById(id);
@@ -8422,26 +8542,28 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
               const selectedTheme = document.querySelector(
                 ".settings-page-theme-card:has(input[type='radio']:checked)"
               );
-              if (selectedTheme?.dataset.theme) {
-                settings.appearance.theme = selectedTheme.dataset.theme;
+              if (selectedTheme?.dataset["theme"]) {
+                settings.appearance.theme = selectedTheme.dataset["theme"];
               }
               settings.appearance.background.blur = getSliderValue("settings-page-blur-slider") / 10;
-              const chosenWeather = document.querySelector(
-                ".settings-page-weather-overlay-container input:checked"
-              );
-              if (chosenWeather) {
-                const weatherContainer = chosenWeather.closest("[data-weather]");
-                if (weatherContainer?.dataset.weather) {
-                  const weatherType = weatherContainer.dataset.weather;
-                  if (weatherType === "realtime" || weatherType === "rain" || weatherType === "snow") {
-                    settings.appearance.weatherOverlay.type = weatherType;
+              if (!liteMode) {
+                const chosenWeather = document.querySelector(
+                  ".settings-page-weather-overlay-container input:checked"
+                );
+                if (chosenWeather) {
+                  const weatherContainer = chosenWeather.closest("[data-weather]");
+                  if (weatherContainer?.dataset["weather"]) {
+                    const weatherType = weatherContainer.dataset["weather"];
+                    if (weatherType === "realtime" || weatherType === "rain" || weatherType === "snow") {
+                      settings.appearance.weatherOverlay.type = weatherType;
+                    }
                   }
                 }
+                settings.appearance.weatherOverlay.amount = getSliderValue(
+                  "settings-page-weather-overlay-slider"
+                );
+                settings.appearance.weatherOverlay.opacity = getSliderValue("settings-page-weather-overlay-opacity-slider") / 100;
               }
-              settings.appearance.weatherOverlay.amount = getSliderValue(
-                "settings-page-weather-overlay-slider"
-              );
-              settings.appearance.weatherOverlay.opacity = getSliderValue("settings-page-weather-overlay-opacity-slider") / 100;
               const smppIconChecked = getCheckboxValue("settings-page-smpp-icon-button");
               settings.appearance.tabLogo = smppIconChecked ? "smpp" : "sm";
               settings.appearance.news = getCheckboxValue("settings-page-show-news-button");
@@ -8782,56 +8904,64 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
               blurredImageContainer.appendChild(blurredImage);
               blurPreviewContainer.appendChild(blurredImageContainer);
               this.settingsPage.appendChild(blurPreviewContainer);
-              this.settingsPage.appendChild(createSectionTitle("Weather overlay"));
-              this.settingsPage.appendChild(createDescription("Add dynamic weather visuals."));
-              const weatherIconsContainer = document.createElement("div");
-              weatherIconsContainer.classList.add(
-                "settings-page-icons-container",
-                "settings-page-weather-overlay-container"
-              );
-              const rainBtn = createImageButtonWithLabel(
-                "icons/weather-overlay/raindropfancy.svg",
-                "Rain",
-                "5rem",
-                "5rem",
-                "weather",
-                "settings-page-raindrop-button"
-              );
-              rainBtn.dataset.weather = "rain";
-              weatherIconsContainer.appendChild(rainBtn);
-              const realtimeBtn = createImageButtonWithLabel(
-                "icons/weather-overlay/realtimefancy.svg",
-                "Realtime",
-                "5rem",
-                "5rem",
-                "weather",
-                "settings-page-realtime-button"
-              );
-              realtimeBtn.dataset.weather = "realtime";
-              weatherIconsContainer.appendChild(realtimeBtn);
-              const snowBtn = createImageButtonWithLabel(
-                "icons/weather-overlay/snowflakefancy.svg",
-                "Snow",
-                "5rem",
-                "5rem",
-                "weather",
-                "settings-page-snow-button"
-              );
-              snowBtn.dataset.weather = "snow";
-              weatherIconsContainer.appendChild(snowBtn);
-              this.settingsPage.appendChild(weatherIconsContainer);
-              this.settingsPage.appendChild(
-                createLabeledSlider("0", "500", "settings-page-weather-overlay-slider", "Amount", false)
-              );
-              this.settingsPage.appendChild(
-                createLabeledSlider(
-                  "0",
-                  "100",
-                  "settings-page-weather-overlay-opacity-slider",
-                  "Opacity",
-                  false
-                )
-              );
+              if (!liteMode) {
+                this.settingsPage.appendChild(createSectionTitle("Weather overlay"));
+                this.settingsPage.appendChild(createDescription("Add dynamic weather visuals."));
+                const weatherIconsContainer = document.createElement("div");
+                weatherIconsContainer.classList.add(
+                  "settings-page-icons-container",
+                  "settings-page-weather-overlay-container"
+                );
+                const rainBtn = createImageButtonWithLabel(
+                  "icons/weather-overlay/raindropfancy.svg",
+                  "Rain",
+                  "5rem",
+                  "5rem",
+                  "weather",
+                  "settings-page-raindrop-button"
+                );
+                rainBtn.dataset["weather"] = "rain";
+                weatherIconsContainer.appendChild(rainBtn);
+                const realtimeBtn = createImageButtonWithLabel(
+                  "icons/weather-overlay/realtimefancy.svg",
+                  "Realtime",
+                  "5rem",
+                  "5rem",
+                  "weather",
+                  "settings-page-realtime-button"
+                );
+                realtimeBtn.dataset["weather"] = "realtime";
+                weatherIconsContainer.appendChild(realtimeBtn);
+                const snowBtn = createImageButtonWithLabel(
+                  "icons/weather-overlay/snowflakefancy.svg",
+                  "Snow",
+                  "5rem",
+                  "5rem",
+                  "weather",
+                  "settings-page-snow-button"
+                );
+                snowBtn.dataset["weather"] = "snow";
+                weatherIconsContainer.appendChild(snowBtn);
+                this.settingsPage.appendChild(weatherIconsContainer);
+                this.settingsPage.appendChild(
+                  createLabeledSlider(
+                    "0",
+                    "500",
+                    "settings-page-weather-overlay-slider",
+                    "Amount",
+                    false
+                  )
+                );
+                this.settingsPage.appendChild(
+                  createLabeledSlider(
+                    "0",
+                    "100",
+                    "settings-page-weather-overlay-opacity-slider",
+                    "Opacity",
+                    false
+                  )
+                );
+              }
               this.settingsPage.appendChild(createSectionTitle("Icon"));
               this.settingsPage.appendChild(
                 createDescription("Choose the icon displayed in your browser tab.")
@@ -8993,27 +9123,6 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
   });
 
   // src/widgets/widgets.ts
-  var widgets_exports = {};
-  __export(widgets_exports, {
-    WidgetBase: () => WidgetBase,
-    createWidgetEditModeButton: () => createWidgetEditModeButton,
-    createWidgetSystem: () => createWidgetSystem,
-    getWidgetSetting: () => getWidgetSetting,
-    initWidgetEditMode: () => initWidgetEditMode,
-    registerWidget: () => registerWidget,
-    setEditMode: () => setEditMode,
-    setWidgetLiteMode: () => setWidgetLiteMode,
-    setWidgetSetting: () => setWidgetSetting,
-    toggleBag: () => toggleBag,
-    updateNews: () => updateNews,
-    widgetEditMode: () => widgetEditMode,
-    widgetEditModeInit: () => widgetEditModeInit,
-    widgetSystemNotifyThemeChange: () => widgetSystemNotifyThemeChange,
-    widgets: () => widgets
-  });
-  function setWidgetLiteMode(value) {
-    liteMode2 = value;
-  }
   function registerWidget(widget) {
     widgets.push(widget);
   }
@@ -10166,10 +10275,9 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
     return cmd_list;
   }
   function add_quick(name, url) {
-    const normalizedName = name.toLowerCase();
-    const quick = { name: normalizedName, url };
+    const quick = { name: name.toLowerCase(), url };
     for (let i5 = 0; i5 < quicks.length; i5++) {
-      if (quicks[i5].name === normalizedName) {
+      if (quicks[i5].name === name) {
         quicks[i5] = quick;
         quick_save();
         return;
@@ -10301,14 +10409,12 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
       "config",
       "clearsettings",
       "discord",
-      "toggle performance mode",
       "dizzy",
       "breakdmenu",
       "glass",
       "ridge",
       "reset plant",
       "remove current theme",
-      "test cats",
       "posh text",
       "funny text"
     ]);
@@ -10376,13 +10482,6 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
           case "reset plant":
             resetPlant();
             return;
-          case "plant data":
-            console.log(
-              await browser.runtime.sendMessage({
-                action: "getPlantAppData"
-              })
-            );
-            break;
           case "remove current theme": {
             const data = await browser.runtime.sendMessage({
               action: "getSettingsData"
@@ -10391,15 +10490,6 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
               action: "removeCustomTheme",
               id: data.appearance.theme
             });
-            break;
-          }
-          case "test cats": {
-            const themes2 = await browser.runtime.sendMessage({
-              action: "getThemes",
-              categories: ["quickSettings"],
-              includeHidden: true
-            });
-            console.log(themes2);
             break;
           }
           case "posh text":
@@ -13339,7 +13429,6 @@ ${code}`;
             return container;
           }
           if (weatherData.cod !== 200) {
-            console.log(weatherData.cod);
             container.appendChild(createNotFoundContent(weatherData.cod));
             return container;
           }
@@ -13550,6 +13639,7 @@ ${code}`;
   var init_calendar = __esm({
     "src/widgets/calendar.ts"() {
       "use strict";
+      init_utils();
       init_svgs();
       init_widgets();
       CalendarWidget = class extends WidgetBase {
@@ -13646,68 +13736,11 @@ ${code}`;
           label.style.color = "var(--color-base05)";
           label.style.marginBottom = "0.5rem";
           label.textContent = "Calendar";
-          const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-          svg.setAttribute("viewBox", "0 0 100 120");
-          svg.setAttribute("width", "52");
-          svg.setAttribute("height", "65");
-          const body = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-          body.setAttribute("x", "8");
-          body.setAttribute("y", "28");
-          body.setAttribute("width", "84");
-          body.setAttribute("height", "84");
-          body.setAttribute("rx", "6");
-          body.setAttribute("fill", "#FFE55C");
-          body.setAttribute("stroke", "#000");
-          body.setAttribute("stroke-width", "3");
-          const header = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-          header.setAttribute("x", "8");
-          header.setAttribute("y", "8");
-          header.setAttribute("width", "84");
-          header.setAttribute("height", "24");
-          header.setAttribute("rx", "6");
-          header.setAttribute("fill", "#FF5C6D");
-          header.setAttribute("stroke", "#000");
-          header.setAttribute("stroke-width", "3");
-          const ringPositions = [20, 50, 80];
-          ringPositions.forEach((x3) => {
-            const ring = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-            ring.setAttribute("cx", String(x3));
-            ring.setAttribute("cy", "6");
-            ring.setAttribute("r", "6");
-            ring.setAttribute("fill", "#1E90FF");
-            ring.setAttribute("stroke", "#000");
-            ring.setAttribute("stroke-width", "2");
-            svg.appendChild(ring);
-          });
-          const checkboxes = [45, 65, 85];
-          checkboxes.forEach((y3) => {
-            const checkbox = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-            checkbox.setAttribute("x", "20");
-            checkbox.setAttribute("y", String(y3));
-            checkbox.setAttribute("width", "10");
-            checkbox.setAttribute("height", "10");
-            checkbox.setAttribute("rx", "2");
-            checkbox.setAttribute("fill", "#00D9FF");
-            checkbox.setAttribute("stroke", "#000");
-            checkbox.setAttribute("stroke-width", "2");
-            svg.appendChild(checkbox);
-          });
-          const lines = [45, 65, 85];
-          lines.forEach((y3) => {
-            const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-            line.setAttribute("x1", "35");
-            line.setAttribute("y1", String(y3 + 5));
-            line.setAttribute("x2", "75");
-            line.setAttribute("y2", String(y3 + 5));
-            line.setAttribute("stroke", "#000");
-            line.setAttribute("stroke-width", "2");
-            line.setAttribute("stroke-linecap", "round");
-            svg.appendChild(line);
-          });
-          svg.appendChild(body);
-          svg.appendChild(header);
+          const image = document.createElement("img");
+          image.src = getExtensionImage("icons/widgets/kalender_512x512.png");
+          image.classList = "calendar-image";
           preview.appendChild(label);
-          preview.appendChild(svg);
+          preview.appendChild(image);
           return preview;
         }
       };
@@ -13716,139 +13749,91 @@ ${code}`;
   });
 
   // src/fixes-utils/migration.ts
-  async function migrate() {
-    await removeLegacyData();
-    const settingsData = await browser.runtime.sendMessage({
-      action: "getRawSettingsData"
-    });
-    if (!settingsData || typeof settingsData !== "object") {
-      return;
-    }
-    if (!("backgroundBlurAmount" in settingsData)) {
-      return;
-    }
-    await migrateV5(settingsData);
-  }
-  async function migrateV5(settingsData) {
-    console.log("MIG V:\n Started migration with", settingsData);
-    await migrateSettingsV5(settingsData);
-    await migrateImageV5(settingsData);
-    await migrateWidgetSettingsData();
-  }
-  async function migrateWidgetSettingsData() {
-    const delijnAppData = await browser.runtime.sendMessage({
-      action: "getDelijnAppData"
-    });
-    const weatherAppData = await browser.runtime.sendMessage({
-      action: "getWeatherAppData"
-    });
-    if (Object.keys(delijnAppData).length !== 0) {
-      await setWidgetSetting("DelijnWidget.halte", {
-        entiteit: delijnAppData.delijnAppData.entiteitnummer,
-        nummer: delijnAppData.delijnAppData.haltenummer
-      });
-    }
-    if (Object.keys(weatherAppData).length !== 0) {
-      const weatherWidgets = widgets.filter((item) => item.name.toLowerCase().includes("weather"));
-      for (const widget of weatherWidgets) {
-        await widget.setSetting("currentLocation", weatherAppData.weatherAppData.lastLocation);
-      }
-    }
-  }
-  async function migrateImageV5(oldData) {
-    let data = {
-      imageData: null,
-      link: "",
-      type: "default"
-    };
-    switch (oldData.backgroundSelection) {
-      case 0:
-        data = {
-          imageData: null,
-          link: "",
-          type: "default"
-        };
-        break;
-      case 1:
-        data = {
-          imageData: oldData.backgroundLink,
-          link: oldData.backgroundLink,
-          type: "link"
-        };
-        break;
-      case 2: {
-        const imageData = await browser.runtime.sendMessage({
-          action: "getBackgroundImage"
-        });
-        data = {
-          imageData: imageData.backgroundImage,
-          link: oldData.backgroundLink,
-          type: "file"
-        };
-        break;
-      }
-      default:
-        data = {
-          imageData: null,
-          link: "",
-          type: "default"
-        };
-        break;
-    }
-    await browser.runtime.sendMessage({
-      action: "setImage",
-      id: "backgroundImage",
-      data
-    });
-    console.log("MIG V: \n Successfully migrated background image  with data:", data);
-  }
-  async function migrateSettingsV5(oldData) {
-    let newWeatherOverlayType = "snow";
-    switch (oldData.weatherOverlaySelection) {
-      case 0:
-        newWeatherOverlayType = "snow";
-        break;
-      case 1:
-        newWeatherOverlayType = "realtime";
-        break;
-      case 2:
-        newWeatherOverlayType = "snow";
-        break;
-      default:
-        newWeatherOverlayType = "snow";
-        break;
-    }
-    console.log(oldData);
-    console.log(oldData.customName);
-    const newSettingsData = {
-      username: oldData.customName,
-      theme: oldData.theme,
-      background: {
-        blur: oldData.backgroundBlurAmount
-      },
-      weatherOverlay: {
-        type: newWeatherOverlayType,
-        amount: oldData.weatherOverlayAmount
-      },
-      tabLogo: oldData.enableSMPPLogo ? "smpp" : "sm",
-      news: oldData.showNews,
-      quicks: oldData.quicks,
-      performanceMode: oldData.enablePerfomanceMode
-    };
-    await browser.runtime.sendMessage({
-      action: "setRawSettingsData",
-      data: newSettingsData
-    });
-    const settings = await browser.runtime.sendMessage({
+  async function updateSettings() {
+    const data = await browser.runtime.sendMessage({
       action: "getSettingsData"
     });
     await browser.runtime.sendMessage({
       action: "setSettingsData",
-      data: settings
+      data
     });
-    console.log("MIG V: \n Succesfully migrated settings data to:", newSettingsData);
+  }
+  async function migrate() {
+    await removeLegacyData();
+    const dataVersion = await browser.runtime.sendMessage({
+      action: "getDataVersion"
+    });
+    if (dataVersion < currentDataVersion) {
+      await browser.runtime.sendMessage({
+        action: "setDataVersion",
+        version: currentDataVersion
+      });
+    }
+    const settingsData = await browser.runtime.sendMessage({
+      action: "getRawSettingsData"
+    });
+    if (!settingsData) {
+      return;
+    }
+    if (settingsData.glass !== void 0) {
+      return;
+    }
+    await migrateV6();
+  }
+  async function migrateV6() {
+    await migrateCustomThemeV6();
+    await migrateImagesV6();
+    await updateSettings();
+    new Toast("Updated to 6.0.0", "info", 1e4).render();
+  }
+  async function migrateCustomThemeV6(_customTheme) {
+    const oldCustomThemeData = await browser.runtime.sendMessage({
+      action: "getCustomThemeData"
+    });
+    if (!oldCustomThemeData) {
+      return;
+    }
+    const theme = {
+      displayName: "Custom Theme",
+      cssProperties: {
+        "--color-accent": oldCustomThemeData.color_accent,
+        "--color-base00": oldCustomThemeData.color_base00,
+        "--color-base01": oldCustomThemeData.color_base01,
+        "--color-base02": oldCustomThemeData.color_base02,
+        "--color-base03": oldCustomThemeData.color_base03,
+        "--color-homepage-sidebars-bg": "#02020585",
+        "--color-splashtext": oldCustomThemeData.color_text,
+        "--color-text": oldCustomThemeData.color_text,
+        "--darken-background": "#00000033"
+      }
+    };
+    const id = await browser.runtime.sendMessage({
+      action: "saveCustomTheme",
+      data: theme
+    });
+    let data = await browser.runtime.sendMessage({
+      action: "getSettingsData"
+    });
+    if (data.appearance.theme === "custom") {
+      await browser.runtime.sendMessage({
+        action: "setSetting",
+        name: "appearance.theme",
+        data: id
+      });
+    }
+    data = await browser.runtime.sendMessage({
+      action: "getSettingsData"
+    });
+  }
+  async function migrateImagesV6() {
+    browser.runtime.sendMessage({
+      action: "migrateImagesV6"
+    });
   }
   async function removeLegacyData() {
+    const _rawSettingsData = await browser.runtime.sendMessage({
+      action: "getRawSettingsData"
+    });
     if (window.localStorage.getItem("settingsdata")) {
       await clearAllData();
     }
@@ -13857,7 +13842,7 @@ ${code}`;
     "src/fixes-utils/migration.ts"() {
       "use strict";
       init_utils();
-      init_widgets();
+      init_main();
       init_utils2();
     }
   });
@@ -14080,10 +14065,7 @@ ${code}`;
       data.switchCoursesAndLinks ? topNav.insertBefore(linksButton, coursesButton) : topNav.insertBefore(coursesButton, linksButton);
     }
   }
-  async function createStaticGlobals() {
-    themes = await browser.runtime.sendMessage({
-      action: "getThemes"
-    });
+  async function createGlobals() {
     const originalUsernameElement = document.querySelector(
       ".js-btn-profile .hlp-vert-box span"
     );
@@ -14100,7 +14082,6 @@ ${code}`;
     onLoginPage = document.querySelector(".login-app") != null;
     const _quicks = await quickLoad();
     liteMode = browser.runtime.getManifest().name.includes("Lite");
-    setWidgetLiteMode(liteMode);
   }
   async function applyAppearance(appearance) {
     const style = document.documentElement.style;
@@ -14230,46 +14211,30 @@ ${code}`;
   function updateTopButtons(data) {
     const GOButton = document.querySelector(`[data-go=""]`);
     if (GOButton) {
-      if (data.GO) {
-        GOButton.style = "display:flex";
-      } else {
-        GOButton.style = "display:none";
-      }
+      data.GO ? GOButton.style = "display:flex" : GOButton.style = "display:none";
     }
     const searchButton = document.querySelector(".topnav__btn--icon--search");
     if (searchButton?.parentElement) {
-      if (data.search) {
-        searchButton.parentElement.style = "display:flex";
-      } else {
-        searchButton.parentElement.style = "display:none";
-      }
+      data.search ? searchButton.parentElement.style = "display:flex" : searchButton.parentElement.style = "display:none";
     }
     const GC = document.getElementById("global_chat_button");
     if (GC) {
-      if (data.GC) {
-        GC.style = "display:flex !important";
-      } else {
-        GC.style = "display:none !important";
-      }
+      data.GC ? GC.style = "display:flex !important" : GC.style = "display:none !important";
     }
     const quickButton = document.getElementById("quick-menu-button");
     if (quickButton) {
-      if (data.quickMenu) {
-        quickButton.style = "display:flex !important";
-      } else {
-        quickButton.style = "display:none !important";
-      }
+      data.quickMenu ? quickButton.style = "display:flex !important" : quickButton.style = "display:none !important";
     }
   }
   async function main() {
     if (document.body.classList.contains("smpp")) {
       console.error("SMPP is 2x geladen");
+      return;
     }
     document.body.classList.add("smpp");
-    await migrate();
     applyFixes();
-    await createStaticGlobals();
-    await registerPlantWidget();
+    await migrate();
+    await createGlobals();
     await createWidgetSystem();
     if (document.querySelector("nav.topnav")) {
       await createSettingsWindow();
@@ -14277,7 +14242,7 @@ ${code}`;
     }
     await apply();
   }
-  var originalUsername, themes, onHomePage, onLoginPage, isGOSchool, isFirefox, originalPfpUrl, keybinds, liteMode;
+  var originalUsername, onHomePage, onLoginPage, isGOSchool, isFirefox, originalPfpUrl, keybinds, liteMode, currentDataVersion;
   var init_main = __esm({
     "src/main-features/main.ts"() {
       "use strict";
@@ -14291,7 +14256,6 @@ ${code}`;
       init_keybinds();
       init_background_image();
       init_weather_effects();
-      init_widgets();
       init_games();
       init_breakout();
       init_flappy();
@@ -14301,6 +14265,7 @@ ${code}`;
       init_tutorial_widget();
       init_assignments();
       init_delijn();
+      init_plant();
       init_planner();
       init_weather();
       init_clock();
@@ -14309,7 +14274,7 @@ ${code}`;
       init_migration();
       init_titlefix();
       init_utils2();
-      init_plant();
+      init_widgets();
       init_globalchat();
       init_quick();
       init_main_settings();
@@ -14318,11 +14283,13 @@ ${code}`;
       init_results();
       init_svgs();
       init_dmenu();
+      init_widgets();
       init_background_image();
       init_themes();
       init_weather_effects();
       init_profile();
       init_main_settings();
+      currentDataVersion = 6;
       main();
     }
   });

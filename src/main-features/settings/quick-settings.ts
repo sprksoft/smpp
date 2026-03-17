@@ -1,5 +1,6 @@
 import { browser, delay, getExtensionImage } from "../../common/utils.js";
-import { performanceModeSvg, settingsIconSvg } from "../../fixes-utils/svgs.js";
+import { brokenHeartSvg, performanceModeSvg, settingsIconSvg } from "../../fixes-utils/svgs.js";
+import { isValidImage } from "../../fixes-utils/utils.js";
 import {
   currentThemeName,
   getTheme,
@@ -10,6 +11,33 @@ import {
 import { apply } from "../main.js";
 import { getImageURL, ImageSelector } from "../modules/images.js";
 import { openSettingsWindow, type Settings, settingsWindow } from "./main-settings.js";
+
+class NoThemesOption {
+  element = document.createElement("div");
+  createText() {
+    const text = document.createElement("div");
+    text.classList.add("compact-theme-option-text");
+    text.innerHTML = brokenHeartSvg;
+    const span = document.createElement("span");
+    span.innerText = "No themes";
+    text.appendChild(span);
+    return text;
+  }
+
+  createImageContainer() {
+    const imageContainer = document.createElement("div");
+    imageContainer.classList.add("compact-theme-option-image-container");
+    return imageContainer;
+  }
+
+  render() {
+    this.element.innerHTML = "";
+    this.element.classList.add("compact-theme-option", "no-themes");
+    this.element.appendChild(this.createText());
+    this.element.appendChild(this.createImageContainer());
+    return this.element;
+  }
+}
 
 class CompactThemeOption {
   element = document.createElement("div");
@@ -23,18 +51,16 @@ class CompactThemeOption {
   createText() {
     const text = document.createElement("div");
     text.classList.add("compact-theme-option-text");
-    text.innerText = this.currentTheme.displayName;
-    if (text.innerText.length > 22) {
-      text.innerText = `${this.currentTheme.displayName.slice(0, 22)}…`;
-    }
-
+    const span = document.createElement("span");
+    span.innerText = this.currentTheme.displayName;
+    text.appendChild(span);
     return text;
   }
 
   render() {
     this.element.innerHTML = "";
     this.element.classList.add("compact-theme-option");
-    this.element.dataset.name = this.name;
+    this.element.dataset["name"] = this.name;
     this.element.addEventListener("click", () => this.click());
     this.element.appendChild(this.createText());
     this.element.appendChild(this.createImageContainer());
@@ -49,19 +75,42 @@ class CompactThemeOption {
   }
 
   async updateImage(forceReload = false) {
-    if (this.name === currentThemeName || forceReload) {
-      const imageURL = await getImageURL(
-        this.name,
-        async () => {
-          return await getExtensionImage(`theme-backgrounds/compressed/${this.name}.jpg`);
-        },
-        true,
-      );
+    if (this.name !== currentThemeName && !forceReload) {
+      return;
+    }
 
-      this.element.style.setProperty("--background-image-local", `url(${imageURL.url})`);
+    const imageURL = await getImageURL(
+      this.name,
+      async () => {
+        return await getExtensionImage(`theme-backgrounds/compressed/${this.name}.jpg`);
+      },
+      true,
+    );
+
+    const container = this.element.querySelector(".compact-theme-option-image-container");
+    if (!container) {
+      return;
+    }
+
+    if (!(await isValidImage(imageURL.url))) {
+      container.classList.add("no-image");
+      container.innerHTML = "";
+      return;
+    }
+
+    container.classList.remove("no-image");
+
+    const existingImg = container.querySelector("img");
+    const img = existingImg || document.createElement("img");
+
+    if (imageURL?.url) {
+      img.src = imageURL.url;
+    }
+
+    if (!existingImg) {
+      container.appendChild(img);
     }
   }
-
   updateElement() {
     Object.keys(this.currentTheme.cssProperties).forEach((key) => {
       this.element.style.setProperty(
@@ -80,12 +129,22 @@ class CompactThemeOption {
   async onClick() {}
 
   async updateSelection() {
+    const container = this.element.querySelector(".compact-theme-option-image-container");
+
     if (this.name === currentThemeName) {
       this.element.classList.add("is-selected");
-      this.updateImage(true);
+      await this.updateImage(true);
     } else {
       this.element.classList.remove("is-selected");
-      this.element.style.setProperty("--background-image-local", "url()");
+
+      // If it's an image, clearing the src or replacing it stops the browser
+      // from keeping that texture in GPU memory
+      if (container instanceof HTMLImageElement) {
+        container.src = "";
+        // Optionally replace back with a div to keep the DOM clean
+        const placeholder = this.createImageContainer();
+        container.replaceWith(placeholder);
+      }
     }
   }
 
@@ -102,6 +161,7 @@ class CompactThemeSelector {
   selector = document.createElement("div");
   selectorIsOpen = false;
   themeOptions: CompactThemeOption[] = [];
+  noThemesOption = new NoThemesOption();
 
   async createThemeOption(name: string, theme: Theme) {
     const option = new CompactThemeOption(name, theme);
@@ -110,9 +170,7 @@ class CompactThemeSelector {
       if (settingsWindow) {
         await settingsWindow.loadPage();
       }
-      this.themeOptions.forEach((option) => {
-        option.updateSelection();
-      });
+      await loadQuickSettings();
     };
     this.themeOptions.push(option);
     return option;
@@ -125,6 +183,14 @@ class CompactThemeSelector {
   }
 
   async renderThemeOptions() {
+    this.selector.innerHTML = "";
+    if (this.themeOptions.length === 0) {
+      const noThemesElement = this.noThemesOption.render();
+      this.selector.appendChild(noThemesElement);
+      this.selector.style.height = `${this.calculateHeight(1)}px`;
+      return;
+    }
+
     for (let i = 1; i <= this.themeOptions.length; i++) {
       const option = this.themeOptions[i - 1];
       if (!option) {
@@ -135,7 +201,7 @@ class CompactThemeSelector {
       this.selector.appendChild(option.element);
 
       if (document.body.classList.contains("enableAnimations")) {
-        await delay(20);
+        await delay(200 / this.themeOptions.length);
       }
     }
   }
@@ -144,7 +210,7 @@ class CompactThemeSelector {
     const themes = (await browser.runtime.sendMessage({
       action: "getThemes",
       categories: ["quickSettings"],
-      includeHidden: true,
+      includeHidden: false,
     })) as Themes;
 
     const themeOptionNames = this.themeOptions.map((option) => {
@@ -181,6 +247,9 @@ class CompactThemeSelector {
     this.themeOptions.forEach((option) => {
       option.updateSelection();
     });
+    if (this.selectorIsOpen) {
+      this.renderThemeOptions();
+    }
   }
   createInput() {
     this.input.classList.add("theme-selector-input");
@@ -206,7 +275,7 @@ class CompactThemeSelector {
       this.selector.classList.add("visible");
       this.selector.style.overflowY = "hidden";
 
-      await this.renderThemeOptions();
+      await this.updateThemeOptions();
       await delay(500);
       this.selector.style.overflowY = "auto";
     } else {
@@ -227,7 +296,7 @@ class CompactThemeSelector {
     const themes = (await browser.runtime.sendMessage({
       action: "getThemes",
       categories: ["quickSettings"],
-      includeHidden: true,
+      includeHidden: false,
     })) as Themes;
     this.themeOptions = [];
 
@@ -316,7 +385,6 @@ export async function loadQuickSettings() {
     }`;
   }
   await compactThemeSelector.updateInput();
-  await compactThemeSelector.updateThemeOptions();
 }
 
 function toggleQuickSettings() {
