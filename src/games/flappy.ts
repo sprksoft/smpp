@@ -1,8 +1,8 @@
 // @ts-nocheck
-import { GameBase } from "./games.js";
-import { registerWidget } from "../widgets/widgets.js";
+
 import { getThemeVar } from "../main-features/appearance/themes.js";
-import { GameOption } from "./games.js";
+import { registerWidget } from "../widgets/widgets.js";
+import { GameBase, GameOption } from "./games.js";
 
 const BIRD_RADIUS = 5;
 const BIRD_X = 50;
@@ -28,8 +28,8 @@ class FlappyWidget extends GameBase {
   }
 
   #drawGround(ctx) {
-    let w = this.canvas.width;
-    let h = this.canvas.height;
+    const w = this.canvas.width;
+    const h = this.canvas.height;
     ctx.beginPath();
     ctx.lineWidth = 1;
     ctx.moveTo(0, h - FLOOR_H);
@@ -50,10 +50,7 @@ class FlappyWidget extends GameBase {
   }
 
   #calcGap() {
-    return Math.max(
-      PIPE_GAP * this.getOpt("speed") * 0.01,
-      BIRD_RADIUS * 2 + 5
-    );
+    return Math.max(PIPE_GAP * this.getOpt("speed") * 0.01, BIRD_RADIUS * 2 + 5);
   }
 
   #drawPipe(ctx, pipe) {
@@ -61,23 +58,11 @@ class FlappyWidget extends GameBase {
     ctx.fillStyle = getThemeVar("--color-accent");
     ctx.lineCap = "round";
     ctx.beginPath();
-    ctx.roundRect(
-      pipe.x,
-      -PIPE_W,
-      PIPE_W,
-      pipe.y + PIPE_W - gap_size / 2,
-      PIPE_W
-    );
+    ctx.roundRect(pipe.x, -PIPE_W, PIPE_W, pipe.y + PIPE_W - gap_size / 2, PIPE_W);
     ctx.fill();
     ctx.beginPath();
     const botStartY = pipe.y + gap_size * 0.5;
-    ctx.roundRect(
-      pipe.x,
-      botStartY,
-      PIPE_W,
-      this.canvas.height - botStartY + PIPE_W,
-      PIPE_W
-    );
+    ctx.roundRect(pipe.x, botStartY, PIPE_W, this.canvas.height - botStartY + PIPE_W, PIPE_W);
     ctx.fill();
   }
   #updatePipe(pipe, dt) {
@@ -86,10 +71,7 @@ class FlappyWidget extends GameBase {
       this.#resetPipe(pipe);
     }
 
-    if (
-      pipe.x <= BIRD_X + BIRD_RADIUS &&
-      pipe.x + PIPE_W > BIRD_X - BIRD_RADIUS
-    ) {
+    if (pipe.x <= BIRD_X + BIRD_RADIUS && pipe.x + PIPE_W > BIRD_X - BIRD_RADIUS) {
       const gap_size = this.#calcGap();
       const gapTop = pipe.y - gap_size * 0.5;
       const gapBot = pipe.y + gap_size * 0.5;
@@ -137,7 +119,7 @@ class FlappyWidget extends GameBase {
     this.birdY += this.birdVel * dt;
     this.birdVel = Math.min(
       this.birdVel + GRAVITY * this.getOpt("speed") * 0.01 * dt,
-      TERMVEL * this.getOpt("speed") * 0.01
+      TERMVEL * this.getOpt("speed") * 0.01,
     );
     ctx;
     if (this.jump) {
@@ -149,9 +131,7 @@ class FlappyWidget extends GameBase {
       this.stopGame();
     }
 
-    this.bgX =
-      (this.bgX - this.getOpt("speed") * 0.01 * PIPE_SPEED * dt) %
-      this.canvas.width;
+    this.bgX = (this.bgX - this.getOpt("speed") * 0.01 * PIPE_SPEED * dt) % this.canvas.width;
     this.#updatePipe(this.pipe, dt);
 
     this.#drawBird(ctx);
@@ -159,7 +139,7 @@ class FlappyWidget extends GameBase {
     this.#drawGround(ctx);
   }
 
-  async onMouse(e) {
+  async onMouse(_e) {
     this.jump = true;
   }
 

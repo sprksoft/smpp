@@ -1,38 +1,34 @@
 import { browser, getByPath, setByPath } from "../common/utils.js";
+import { fetchDelijnData, fetchWeatherData } from "./api-background-script.js";
 import {
-  getDelijnColorData,
-  getPlantAppData,
-  getCustomThemeData,
-  setImage,
-  getImage,
   getBase64,
+  getCustomThemeData,
+  getDelijnColorData,
   getFileData,
+  getImage,
+  getPlantAppData,
   migrateImagesV6,
+  setImage,
 } from "./data-background-script.js";
+import { getSettingsData, getSettingsTemplate, setSettingsData } from "./settings.js";
 import {
-  setSettingsData,
-  getSettingsData,
-  getSettingsTemplate,
-} from "./settings.js";
-import { fetchWeatherData, fetchDelijnData } from "./api-background-script.js";
-import {
-  getTheme,
-  getThemes,
-  getThemeCategories,
-  saveCustomTheme,
-  removeCustomTheme,
   getFirstThemeInCategory,
-  shareTheme,
-  installTheme,
   getSharedTheme,
+  getTheme,
+  getThemeCategories,
+  getThemes,
+  installTheme,
   purgeThemeShareCache,
+  removeCustomTheme,
+  saveCustomTheme,
+  shareTheme,
 } from "./themes.js";
 
 browser.runtime.onMessage.addListener(
   (message: any, _sender: any, sendResponse: (resp: any) => void) => {
     handleMessage(message, sendResponse);
     return true;
-  }
+  },
 );
 
 async function handleMessage(message: any, sendResponse: (resp: any) => void) {
@@ -46,44 +42,35 @@ async function handleMessage(message: any, sendResponse: (resp: any) => void) {
 
     // Themes
     if (message.action === "getThemes") {
-      let themes = await getThemes(
+      const themes = await getThemes(
         message.categories,
         message.includeHidden,
-        message.mustMatchAllCategories
+        message.mustMatchAllCategories,
       );
       sendResponse(themes);
       console.log(
-        `Themes for categories: ${
-          message.categories
-        } sent, including hidden themes: ${
-          message.includeHidden ? true : false
-        }`
+        `Themes for categories: ${message.categories} sent, including hidden themes: ${!!message.includeHidden}`,
       );
       console.log(themes);
     }
     if (message.action === "getTheme") {
-      let theme = await getTheme(message.name);
+      const theme = await getTheme(message.name);
       sendResponse(theme);
       console.log(`Theme ${message.name} sent.`);
     }
-    if (message.action == "getThemeCategories") {
-      let categories = await getThemeCategories(message.includeHidden);
+    if (message.action === "getThemeCategories") {
+      const categories = await getThemeCategories(message.includeHidden);
       sendResponse(categories);
       console.log(`Theme categories sent: ${categories}`);
     }
-    if (message.action == "getFirstThemeInCategory") {
-      let themeName = await getFirstThemeInCategory(
-        message.category,
-        message.includeHidden
-      );
+    if (message.action === "getFirstThemeInCategory") {
+      const themeName = await getFirstThemeInCategory(message.category, message.includeHidden);
       sendResponse(themeName);
-      console.log(
-        `First theme in category ${message.category} sent: ${themeName}`
-      );
+      console.log(`First theme in category ${message.category} sent: ${themeName}`);
     }
 
     if (message.action === "saveCustomTheme") {
-      let id = await saveCustomTheme(message.data, message.id);
+      const id = await saveCustomTheme(message.data, message.id);
       sendResponse(id);
 
       console.log(`Custom theme ${message.id} saved as:`);
@@ -103,7 +90,7 @@ async function handleMessage(message: any, sendResponse: (resp: any) => void) {
     if (message.action === "getSharedTheme") {
       const theme = await getSharedTheme(message.shareId);
       console.log("sending", theme);
-      sendResponse({ theme: theme });
+      sendResponse({ theme });
     }
     if (message.action === "installTheme") {
       await installTheme(message.shareId);
@@ -111,7 +98,7 @@ async function handleMessage(message: any, sendResponse: (resp: any) => void) {
     }
     if (message.action === "shareTheme") {
       const output = await shareTheme(message.name);
-      if (typeof output == "string") {
+      if (typeof output === "string") {
         console.log(`Theme ${message.name} was shared (url: ${output})`);
         sendResponse({ shareUrl: output });
       } else {
@@ -155,7 +142,7 @@ async function handleMessage(message: any, sendResponse: (resp: any) => void) {
       console.log("Delijn appdata fetched and sent.");
     }
     if (message.action === "getDelijnColorData") {
-      let delijnColorData = await getDelijnColorData();
+      const delijnColorData = await getDelijnColorData();
       sendResponse(delijnColorData);
       console.log("Delijn color data fetched and sent.");
     }
@@ -182,7 +169,7 @@ async function handleMessage(message: any, sendResponse: (resp: any) => void) {
     if (message.action === "getSetting") {
       const settingsData = await getSettingsData();
       sendResponse(getByPath(settingsData, message.name));
-      console.log("Setting " + message.name + "sent");
+      console.log(`Setting ${message.name}sent`);
     }
     if (message.action === "setSettingsData") {
       await setSettingsData(message.data);
@@ -190,7 +177,7 @@ async function handleMessage(message: any, sendResponse: (resp: any) => void) {
       console.log("Settings data saved.");
     }
     if (message.action === "getSettingsData") {
-      let settingsData = await getSettingsData();
+      const settingsData = await getSettingsData();
       console.log(settingsData);
       sendResponse(settingsData);
       console.log("Settings data sent.");
@@ -214,15 +201,15 @@ async function handleMessage(message: any, sendResponse: (resp: any) => void) {
     }
     if (message.action === "getWidgetData") {
       console.log("Loading widget data...");
-      const widgetId = "Game." + message.widget;
+      const widgetId = `Game.${message.widget}`;
       let data = await browser.storage.local.get(widgetId);
       data = data[widgetId];
       sendResponse(data);
     }
     if (message.action === "setWidgetData") {
       console.log("Saving widget data...");
-      let data: any = {};
-      data["Game." + message.widget] = message.data;
+      const data: any = {};
+      data[`Game.${message.widget}`] = message.data;
       await browser.storage.local.set(data);
       sendResponse({ success: true });
     }
@@ -230,7 +217,7 @@ async function handleMessage(message: any, sendResponse: (resp: any) => void) {
     if (message.action === "getDataVersion") {
       let dataVersion = await browser.storage.local.get("dataVersion");
       console.log(dataVersion);
-      if (Object.keys(dataVersion).length == 0) {
+      if (Object.keys(dataVersion).length === 0) {
         await browser.storage.local.set({ dataVersion: 6 });
         dataVersion = 6;
       }
@@ -257,16 +244,14 @@ async function handleMessage(message: any, sendResponse: (resp: any) => void) {
     }
     if (message.action === "getBackgroundImage") {
       // for migration, NEVER use this!!!
-      const backgroundImage =
-        await browser.storage.local.get("backgroundImage");
+      const backgroundImage = await browser.storage.local.get("backgroundImage");
       await browser.storage.local.remove("backgroundImage");
       sendResponse(backgroundImage);
       console.log("Background image sent.");
     }
     if (message.action === "getRawSettingsData") {
       // for migration, probably shouldn't use this...
-      let rawSettingsData = (await browser.storage.local.get("settingsData"))
-        .settingsData;
+      const rawSettingsData = (await browser.storage.local.get("settingsData")).settingsData;
       sendResponse(rawSettingsData);
       console.log("Raw settings data sent.");
     }

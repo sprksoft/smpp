@@ -26,35 +26,27 @@ import "../widgets/clock.ts";
 import "../widgets/calendar.ts";
 
 import { browser, getExtensionImage, randomChance } from "../common/utils.js";
-import { getPfpLink } from "../fixes-utils/utils.js";
-
 import { migrate } from "../fixes-utils/migration.js";
 import { titleFix } from "../fixes-utils/titlefix.js";
-import {
-  createWidgetSystem,
-  createWidgetEditModeButton,
-} from "../widgets/widgets.js";
+import { getPfpLink } from "../fixes-utils/utils.js";
+import { createWidgetEditModeButton, createWidgetSystem } from "../widgets/widgets.js";
 import { createGC, setGlobalGlass } from "./globalchat.js";
-import {
-  createQuickSettingsButton,
-  createQuickSettings,
-} from "./settings/quick-settings.js";
-import {
-  createSettingsWindow,
-  type Settings,
-} from "./settings/main-settings.js";
 import { quickLoad } from "./quick-menu/quick.js";
+import { createSettingsWindow, type Settings } from "./settings/main-settings.js";
+import { createQuickSettings, createQuickSettingsButton } from "./settings/quick-settings.js";
 
-export var originalUsername: string;
-export var onHomePage: boolean;
-export var onLoginPage: boolean;
-export var isGOSchool: boolean;
-export var isFirefox: boolean;
-export var originalPfpUrl: string;
-export var keybinds: any;
-export var liteMode: boolean;
+export let originalUsername: string;
+export let onHomePage: boolean;
+export let onLoginPage: boolean;
+export let isGOSchool: boolean;
+export let isFirefox: boolean;
+export let originalPfpUrl: string;
+export let keybinds: any;
+export let liteMode: boolean;
 export const currentDataVersion = 6;
 
+import { updateLoginPanel, updateSplashText } from "../fixes-utils/login.js";
+import { buisStats } from "../fixes-utils/results.js";
 import {
   discordSvg,
   homeiconSvg,
@@ -63,26 +55,13 @@ import {
   searchButtonSvg,
   settingsIconSvg,
 } from "../fixes-utils/svgs.js";
-
-import { setEditMode } from "../widgets/widgets.js";
-import { initWidgetEditMode } from "../widgets/widgets.js";
-import { applyUsername, applyProfilePicture } from "./profile.js";
-import { updateLoginPanel } from "../fixes-utils/login.js";
-import { buisStats } from "../fixes-utils/results.js";
-import {
-  currentThemeName,
-  setTheme,
-  updateCurrentThemeName,
-} from "./appearance/themes.js";
+import { createQuickMenuButton, reloadDMenuConfig } from "../main-features/quick-menu/dmenu.js";
+import { initWidgetEditMode, setEditMode, updateNews } from "../widgets/widgets.js";
 import { setBackground } from "./appearance/background-image.js";
-import { updateNews } from "../widgets/widgets.js";
-import { updateSplashText } from "../fixes-utils/login.js";
+import { setTheme, updateCurrentThemeName } from "./appearance/themes.js";
 import { applyWeatherEffects } from "./appearance/weather-effects.js";
+import { applyProfilePicture, applyUsername } from "./profile.js";
 import { openSettingsWindow } from "./settings/main-settings.js";
-import {
-  reloadDMenuConfig,
-  createQuickMenuButton,
-} from "../main-features/quick-menu/dmenu.js";
 
 //java script komt hier je weet wel
 //ok - ldev
@@ -90,9 +69,8 @@ import {
 
 function updateDiscordPopup(discordButtonEnabled: boolean) {
   if (discordButtonEnabled) {
-    let discordButtonContainer =
-      document.getElementById("discord-link-container") ||
-      document.createElement("div");
+    const discordButtonContainer =
+      document.getElementById("discord-link-container") || document.createElement("div");
     discordButtonContainer.id = "discord-link-container";
     discordButtonContainer.innerHTML = discordSvg;
     document.body.appendChild(discordButtonContainer);
@@ -109,7 +87,7 @@ function changeLogoutText() {
 }
 
 function changeFont() {
-  let fontLinks = document.createElement("div");
+  const fontLinks = document.createElement("div");
   fontLinks.innerHTML = `<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">`;
   fontLinks.innerHTML += `<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">`;
   fontLinks.innerHTML += `<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Monsieur+La+Doulaise&display=swap" rel="stylesheet">`;
@@ -117,43 +95,43 @@ function changeFont() {
 }
 
 function fixCoursesSearch() {
-  document
-    .getElementById("courseSearch")
-    ?.addEventListener("keydown", function (event) {
-      if (event.key === "Enter") {
-        event.preventDefault();
+  document.getElementById("courseSearch")?.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
 
-        setTimeout(() => {
-          const firstCourse = document.querySelector(
-            ".course-list.js-courses-list li a"
-          ) as HTMLElement;
-          if (firstCourse) {
-            firstCourse.click();
-          }
-        }, 100);
-      }
-    });
+      setTimeout(() => {
+        const firstCourse = document.querySelector(
+          ".course-list.js-courses-list li a",
+        ) as HTMLElement;
+        if (firstCourse) {
+          firstCourse.click();
+        }
+      }, 100);
+    }
+  });
 }
 
 function addToastContainer() {
-  let toastContainer = document.createElement("div");
+  const toastContainer = document.createElement("div");
   toastContainer.id = "toast-container";
   toastContainer.classList.add("toast-container");
   document.body.appendChild(toastContainer);
 }
 
 function updateTopNavIcons(data: Settings["topNav"]["icons"]) {
-  const notifsButton = document.querySelector(
-    ".js-btn-notifs"
-  ) as HTMLButtonElement;
+  const notifsButton = document.querySelector(".js-btn-notifs") as HTMLButtonElement;
   if (notifsButton && data.notifications) {
     const textSpan = notifsButton.querySelector("span");
     notifsButton.innerHTML = notfisSvg;
-    if (textSpan) notifsButton.appendChild(textSpan);
+    if (textSpan) {
+      notifsButton.appendChild(textSpan);
+    }
   } else if (notifsButton && !data.notifications) {
     const textSpan = notifsButton.querySelector("span");
     notifsButton.innerHTML = "Meldingen";
-    if (textSpan) notifsButton.appendChild(textSpan);
+    if (textSpan) {
+      notifsButton.appendChild(textSpan);
+    }
   }
 
   const startButton = document.querySelector(".js-btn-home");
@@ -163,17 +141,19 @@ function updateTopNavIcons(data: Settings["topNav"]["icons"]) {
     startButton.innerHTML = "Start";
   }
 
-  const messageButton = document.querySelector(
-    `a.topnav__btn[title="Berichten"]`
-  );
+  const messageButton = document.querySelector(`a.topnav__btn[title="Berichten"]`);
   if (messageButton && data.mail) {
     const textSpan = messageButton.querySelector("span");
     messageButton.innerHTML = messageSvg;
-    if (textSpan) messageButton.appendChild(textSpan);
+    if (textSpan) {
+      messageButton.appendChild(textSpan);
+    }
   } else if (messageButton && !data.mail) {
     const textSpan = messageButton.querySelector("span");
     messageButton.innerHTML = "Berichten";
-    if (textSpan) messageButton.appendChild(textSpan);
+    if (textSpan) {
+      messageButton.appendChild(textSpan);
+    }
   }
 
   const settingButton = document.getElementById("quickSettingsButton");
@@ -185,9 +165,7 @@ function updateTopNavIcons(data: Settings["topNav"]["icons"]) {
 }
 
 function updateTabLogo(logo: Settings["appearance"]["tabLogo"]) {
-  let iconElement = document.querySelector(
-    'link[rel="icon"]'
-  ) as HTMLLinkElement;
+  let iconElement = document.querySelector('link[rel="icon"]') as HTMLLinkElement;
   if (!iconElement) {
     iconElement = document.createElement("link");
     document.head.appendChild(iconElement);
@@ -195,8 +173,7 @@ function updateTabLogo(logo: Settings["appearance"]["tabLogo"]) {
   }
   switch (logo) {
     case "sm":
-      iconElement.href =
-        "https://static4.smart-school.net/smsc/svg/favicon/favicon.svg";
+      iconElement.href = "https://static4.smart-school.net/smsc/svg/favicon/favicon.svg";
       break;
     case "smpp":
       iconElement.href = getExtensionImage("icons/smpp/128.png");
@@ -205,16 +182,16 @@ function updateTabLogo(logo: Settings["appearance"]["tabLogo"]) {
 }
 
 export function applyTopNav(data: Settings["topNav"]) {
-  let topNav = document.querySelector(".topnav") as HTMLElement;
-  if (!topNav) return;
+  const topNav = document.querySelector(".topnav") as HTMLElement;
+  if (!topNav) {
+    return;
+  }
 
   updateTopNavIcons(data.icons);
   updateTopButtons(data.buttons);
 
-  let linksButton = document.querySelector("[data-links]") as HTMLButtonElement;
-  let coursesButton = document.querySelector(
-    "[data-courses]"
-  ) as HTMLButtonElement;
+  const linksButton = document.querySelector("[data-links]") as HTMLButtonElement;
+  const coursesButton = document.querySelector("[data-courses]") as HTMLButtonElement;
   if (linksButton && coursesButton) {
     data.switchCoursesAndLinks
       ? topNav.insertBefore(linksButton, coursesButton)
@@ -223,19 +200,15 @@ export function applyTopNav(data: Settings["topNav"]) {
 }
 
 async function createGlobals() {
-  let originalUsernameElement = document.querySelector(
-    ".js-btn-profile .hlp-vert-box span"
+  const originalUsernameElement = document.querySelector(
+    ".js-btn-profile .hlp-vert-box span",
   ) as HTMLSpanElement;
   originalUsername = originalUsernameElement?.innerText || "Mr Unknown";
 
   isGOSchool = document.body.classList.contains("go");
-  isFirefox =
-    typeof navigator.userAgent === "string" &&
-    /firefox/i.test(navigator.userAgent);
+  isFirefox = typeof navigator.userAgent === "string" && /firefox/i.test(navigator.userAgent);
   if (document.querySelector('img[alt="Profiel afbeelding"]')) {
-    let originalPfp = document.querySelector(
-      'img[alt="Profiel afbeelding"]'
-    ) as HTMLImageElement;
+    const originalPfp = document.querySelector('img[alt="Profiel afbeelding"]') as HTMLImageElement;
     originalPfpUrl = originalPfp?.src;
   } else {
     originalPfpUrl = getPfpLink(originalUsername);
@@ -245,12 +218,12 @@ async function createGlobals() {
 
   onLoginPage = document.querySelector(".login-app") != null;
 
-  var quicks = await quickLoad();
+  const _quicks = await quickLoad();
   liteMode = browser.runtime.getManifest().name.includes("Lite");
 }
 
 export async function applyAppearance(appearance: Settings["appearance"]) {
-  let style = document.documentElement.style;
+  const style = document.documentElement.style;
   if (appearance.glass) {
     document.body.classList.add("glass");
   } else {
@@ -266,16 +239,14 @@ export async function applyAppearance(appearance: Settings["appearance"]) {
   if (onLoginPage) {
     style.setProperty("--background-blur", `blur(${0}px)`);
   } else {
-    style.setProperty(
-      "--background-blur",
-      `blur(${appearance.background.blur}px)`
-    );
+    style.setProperty("--background-blur", `blur(${appearance.background.blur}px)`);
   }
 }
 
 export function applyOther(other: Settings["other"]) {
-  if (window.location.href.split("/")[3] == "login")
+  if (window.location.href.split("/")[3] === "login") {
     updateSplashText(other.splashText);
+  }
 
   keybinds = other.keybinds;
 
@@ -283,14 +254,16 @@ export function applyOther(other: Settings["other"]) {
     ? document.body.classList.remove("enableAnimations")
     : document.body.classList.add("enableAnimations");
 
-  if (onHomePage) updateDiscordPopup(other.discordButton);
+  if (onHomePage) {
+    updateDiscordPopup(other.discordButton);
+  }
 }
 
 export function applyProfile(profile: Settings["profile"]) {
-  let style = document.documentElement.style;
+  const style = document.documentElement.style;
   style.setProperty(
     "--profile-picture",
-    "url(" + getPfpLink(profile.username || originalUsername) + ")"
+    `url(${getPfpLink(profile.username || originalUsername)})`,
   );
   applyUsername(profile.username);
   applyProfilePicture(profile);
@@ -302,15 +275,17 @@ function applyFixes() {
   titleFix();
   addToastContainer();
 
-  let notifsToggleLabel = document.getElementById(
-    "notifsToggleLabel"
-  ) as HTMLLabelElement;
-  if (notifsToggleLabel) notifsToggleLabel.innerText = "Toon pop-ups";
+  const notifsToggleLabel = document.getElementById("notifsToggleLabel") as HTMLLabelElement;
+  if (notifsToggleLabel) {
+    notifsToggleLabel.innerText = "Toon pop-ups";
+  }
 
   if (window.location.pathname.startsWith("/results/main/results")) {
     buisStats();
   }
-  if (document.querySelector(".login-app__left")) updateLoginPanel();
+  if (document.querySelector(".login-app__left")) {
+    updateLoginPanel();
+  }
 }
 
 export async function apply() {
@@ -322,35 +297,40 @@ export async function apply() {
   updateCurrentThemeName(data.appearance.theme);
 
   await reloadDMenuConfig(); // reload the dmenu config. (er is een object voor async raarheid te vermijden en dat wordt herladen door deze functie)
-  if (onHomePage) setEditMode(false);
+  if (onHomePage) {
+    setEditMode(false);
+  }
   await applyAppearance(data.appearance);
-  if (!liteMode) applyWeatherEffects(data.appearance.weatherOverlay);
+  if (!liteMode) {
+    applyWeatherEffects(data.appearance.weatherOverlay);
+  }
   applyProfile(data.profile);
   applyTopNav(data.topNav);
   applyOther(data.other);
 }
 
 function createTopButtons() {
-  let topNav = document.querySelector("nav.topnav") as HTMLElement;
-  if (!topNav) return;
+  const topNav = document.querySelector("nav.topnav") as HTMLElement;
+  if (!topNav) {
+    return;
+  }
 
-  let logoutButton = document.querySelector(".js-btn-logout");
+  const logoutButton = document.querySelector(".js-btn-logout");
   if (logoutButton) {
     logoutButton.innerHTML = changeLogoutText();
   }
 
-  let searchButton = document.querySelector(".topnav__btn--icon--search");
+  const searchButton = document.querySelector(".topnav__btn--icon--search");
   if (searchButton) {
-    topNav.insertBefore(
-      createQuickSettingsButton(),
-      searchButton.parentElement
-    );
+    topNav.insertBefore(createQuickSettingsButton(), searchButton.parentElement);
     searchButton.innerHTML = searchButtonSvg;
   }
   createQuickSettings();
 
-  let pushRight = topNav.childNodes[2];
-  if (!pushRight) return;
+  const pushRight = topNav.childNodes[2];
+  if (!pushRight) {
+    return;
+  }
 
   if (!liteMode) {
     topNav.insertBefore(createGC(), pushRight);
@@ -369,14 +349,16 @@ function createTopButtons() {
 }
 
 function createProfileSettingButton() {
-  let button = document.createElement("a");
+  const button = document.createElement("a");
   button.addEventListener("click", (e) => {
     openSettingsWindow(e);
-    let topNavProfileMenu = document.getElementById("profileMenu");
-    let settingsPageProfileButton = document.querySelector(
-      ".profile-settings-button"
+    const topNavProfileMenu = document.getElementById("profileMenu");
+    const settingsPageProfileButton = document.querySelector(
+      ".profile-settings-button",
     ) as HTMLButtonElement;
-    if (!topNavProfileMenu || !settingsPageProfileButton) return;
+    if (!(topNavProfileMenu && settingsPageProfileButton)) {
+      return;
+    }
     topNavProfileMenu.hidden = true;
     settingsPageProfileButton.click();
   });
@@ -384,11 +366,11 @@ function createProfileSettingButton() {
   button.classList.add("topnav__menuitem");
   button.classList.add("topnav__menuitem--img");
 
-  let textContent = document.createElement("span");
+  const textContent = document.createElement("span");
   textContent.textContent = "Smartschool++ Profile";
 
-  let image = document.createElement("img");
-  image.src = getExtensionImage("icons/smpp/" + "128.png");
+  const image = document.createElement("img");
+  image.src = getExtensionImage("icons/smpp/128.png");
   image.style.borderRadius = "0.5rem";
 
   button.appendChild(image);
@@ -398,28 +380,24 @@ function createProfileSettingButton() {
 }
 
 function updateTopButtons(data: Settings["topNav"]["buttons"]) {
-  let GOButton = document.querySelector(`[data-go=""]`) as HTMLElement;
+  const GOButton = document.querySelector(`[data-go=""]`) as HTMLElement;
   if (GOButton) {
-    data.GO
-      ? (GOButton.style = "display:flex")
-      : (GOButton.style = "display:none");
+    data.GO ? (GOButton.style = "display:flex") : (GOButton.style = "display:none");
   }
 
-  let searchButton = document.querySelector(".topnav__btn--icon--search");
+  const searchButton = document.querySelector(".topnav__btn--icon--search");
   if (searchButton?.parentElement) {
     data.search
       ? (searchButton.parentElement.style = "display:flex")
       : (searchButton.parentElement.style = "display:none");
   }
 
-  let GC = document.getElementById("global_chat_button");
+  const GC = document.getElementById("global_chat_button");
   if (GC) {
-    data.GC
-      ? (GC.style = "display:flex !important")
-      : (GC.style = "display:none !important");
+    data.GC ? (GC.style = "display:flex !important") : (GC.style = "display:none !important");
   }
 
-  let quickButton = document.getElementById("quick-menu-button");
+  const quickButton = document.getElementById("quick-menu-button");
   if (quickButton) {
     data.quickMenu
       ? (quickButton.style = "display:flex !important")
@@ -430,7 +408,7 @@ function updateTopButtons(data: Settings["topNav"]["buttons"]) {
 async function main() {
   if (document.body.classList.contains("smpp")) {
     console.error("SMPP is 2x geladen");
-    alert("SMPP is 2x geladen");
+    return;
   }
 
   document.body.classList.add("smpp"); // For modding

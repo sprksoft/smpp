@@ -1,19 +1,22 @@
 // @ts-nocheck
-import { browser, getByPath } from "../../common/utils.js";
-import { dmenu } from "./dmenu.js";
+import { browser, getByPath, openURL } from "../../common/utils.js";
 import { apply } from "../main.js";
+import { dmenu } from "./dmenu.js";
 
-export type Quick = { name: string; url: URL };
+export interface Quick {
+  name: string;
+  url: URL;
+}
 export type Quicks = Quick[];
 
 function gatherOptions(template, name) {
   let options = [];
-  for (let keyName of Object.keys(template)) {
+  for (const keyName of Object.keys(template)) {
     const key = template[keyName];
-    const newName = (name ? name + "." : "") + keyName;
-    if (typeof key == "object" && !Array.isArray(key)) {
+    const newName = (name ? `${name}.` : "") + keyName;
+    if (typeof key === "object" && !Array.isArray(key)) {
       options = options.concat(gatherOptions(template[keyName], newName));
-    } else if (key == "array") {
+    } else if (key === "array") {
       // we don't support arrays yet so just hide array options from the menu
       //TODO: maybe add array support
     } else {
@@ -29,10 +32,8 @@ export async function getDMenuOptionsForSettings(toplevel) {
     action: "getSettingsTemplate",
   });
   let options = [];
-  for (let cat of Object.keys(template)) {
-    options = options.concat(
-      gatherOptions(template[cat], toplevel ? "config" : null)
-    );
+  for (const cat of Object.keys(template)) {
+    options = options.concat(gatherOptions(template[cat], toplevel ? "config" : null));
   }
   return options;
 }
@@ -45,13 +46,13 @@ function getFullOptPath(template, optName) {
     optName = optName.substring("config.".length);
   }
   const first = optName.split(".")[0];
-  for (let key of Object.keys(template)) {
+  for (const key of Object.keys(template)) {
     if (template[key][first] !== undefined) {
-      return key + "." + optName;
+      return `${key}.${optName}`;
     }
   }
   console.error(
-    `Was not able to convert the optName '${optName}' to full because it was not found in the template json (returning an option with no category)`
+    `Was not able to convert the optName '${optName}' to full because it was not found in the template json (returning an option with no category)`,
   );
   return optName;
 }
@@ -69,7 +70,7 @@ export async function dmenuEditConfig(path) {
   const templates = await browser.runtime.sendMessage({
     action: "getSettingsTemplate",
   });
-  let configPath = getFullOptPath(templates, path);
+  const configPath = getFullOptPath(templates, path);
   const template = getByPath(templates, configPath);
 
   let optionValue = await browser.runtime.sendMessage({
@@ -77,57 +78,53 @@ export async function dmenuEditConfig(path) {
     name: configPath,
   });
   if (optionValue.error) {
-    console.error("error from service worker: " + optionValue.error);
+    console.error(`error from service worker: ${optionValue.error}`);
     optionValue = "worker error";
   }
 
-  const label = path + " (" + optionValue + "): ";
-  if (template == "boolean") {
+  const label = `${path} (${optionValue}): `;
+  if (template === "boolean") {
     dmenu(
       ["true", "false"],
-      function (cmd, shift) {
-        if (cmd == "true") {
+      (cmd, _shift) => {
+        if (cmd === "true") {
           setSettingByPath(configPath, true);
-        } else if (cmd == "false") {
+        } else if (cmd === "false") {
           setSettingByPath(configPath, false);
         }
       },
-      label
+      label,
     );
-  } else if (template == "number") {
+  } else if (template === "number") {
     dmenu(
       [],
-      function (cmd, shift) {
-        if (configPath == "appearance.background.blur" && cmd == "song 2") {
+      (cmd, _shift) => {
+        if (configPath === "appearance.background.blur" && cmd === "song 2") {
           openURL("https://www.youtube.com/watch?v=Bz4l9_bzfZM", true);
           return;
         }
-        setSettingByPath(configPath, new Number(cmd));
+        setSettingByPath(configPath, Number(cmd));
       },
-      label
+      label,
     );
   } else if (Array.isArray(template)) {
     dmenu(
       template,
-      function (cmd, shift) {
+      (cmd, _shift) => {
         setSettingByPath(configPath, cmd);
       },
-      label
+      label,
     );
   } else {
     if (template !== "string") {
-      console.error(
-        "Invalid template type: '" +
-          template +
-          "' Falling back to 'string' template type"
-      );
+      console.error(`Invalid template type: '${template}' Falling back to 'string' template type`);
     }
     dmenu(
       [],
-      function (cmd, shift) {
+      (cmd, _shift) => {
         setSettingByPath(configPath, cmd);
       },
-      label
+      label,
     );
   }
 }

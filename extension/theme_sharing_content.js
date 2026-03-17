@@ -1,5 +1,5 @@
 let browser;
-if (browser == undefined) {
+if (browser === undefined) {
   browser = chrome;
 }
 
@@ -14,8 +14,8 @@ function sendMessage(action, data) {
 
   document.dispatchEvent(
     new CustomEvent("smppContentScriptMessage", {
-      detail: detail,
-    })
+      detail,
+    }),
   );
 }
 
@@ -51,7 +51,7 @@ document.addEventListener("smppPageScriptMessage", async (e) => {
           return;
         }
 
-        let resp = await browser.runtime.sendMessage({
+        const resp = await browser.runtime.sendMessage({
           action: "installTheme",
           shareId: e.detail.themeId,
         });

@@ -1,8 +1,8 @@
 // @ts-nocheck
-import { GameBase } from "./games.js";
-import { registerWidget } from "../widgets/widgets.js";
+
 import { getThemeVar } from "../main-features/appearance/themes.js";
-import { GameOption } from "./games.js";
+import { registerWidget } from "../widgets/widgets.js";
+import { GameBase, GameOption } from "./games.js";
 
 const BOARD_WIDTH = 10;
 const BOARD_HEIGHT = 12;
@@ -54,7 +54,7 @@ const BASE_PIECES = {
 
 function rotate(matrix) {
   const size = matrix.length;
-  const result = Array.from({ length: size }, () => Array(size).fill(0));
+  const result = Array.from({ length: size }, () => new Array(size).fill(0));
   for (let y = 0; y < size; y++) {
     for (let x = 0; x < size; x++) {
       result[x][size - 1 - y] = matrix[y][x];
@@ -71,15 +71,14 @@ function generateRotations(base) {
       rotations.push(next);
     }
   }
-  while (rotations.length < 4) rotations.push(rotations[0]);
+  while (rotations.length < 4) {
+    rotations.push(rotations[0]);
+  }
   return rotations;
 }
 
 const PIECES = Object.fromEntries(
-  Object.entries(BASE_PIECES).map(([name, base]) => [
-    name,
-    generateRotations(base),
-  ])
+  Object.entries(BASE_PIECES).map(([name, base]) => [name, generateRotations(base)]),
 );
 
 const PIECE_TYPES = Object.keys(PIECES);
@@ -276,8 +275,9 @@ class TetrisWidget extends GameBase {
             bx >= BOARD_WIDTH ||
             by >= BOARD_HEIGHT ||
             (by >= 0 && this.#board[by][bx])
-          )
+          ) {
             return true;
+          }
         }
       }
     }
@@ -285,16 +285,15 @@ class TetrisWidget extends GameBase {
   }
 
   #placePiece() {
-    const shape = this.#getPieceShape(
-      this.#currentPiece,
-      this.#currentRotation
-    );
+    const shape = this.#getPieceShape(this.#currentPiece, this.#currentRotation);
     for (let py = 0; py < 4; py++) {
       for (let px = 0; px < 4; px++) {
         if (shape[py][px]) {
           const bx = this.#pieceX + px;
           const by = this.#pieceY + py;
-          if (by >= 0) this.#board[by][bx] = this.#currentPiece;
+          if (by >= 0) {
+            this.#board[by][bx] = this.#currentPiece;
+          }
         }
       }
     }
@@ -319,21 +318,13 @@ class TetrisWidget extends GameBase {
     this.#currentRotation = 0;
     this.#pieceX = Math.floor(BOARD_WIDTH / 2) - 2;
     this.#pieceY = -1;
-    if (
-      this.#collision(
-        this.#currentPiece,
-        this.#currentRotation,
-        this.#pieceX,
-        this.#pieceY
-      )
-    )
+    if (this.#collision(this.#currentPiece, this.#currentRotation, this.#pieceX, this.#pieceY)) {
       this.stopGame();
+    }
   }
 
   async onGameStart() {
-    this.#board = Array.from({ length: BOARD_HEIGHT }, () =>
-      new Array(BOARD_WIDTH).fill(0)
-    );
+    this.#board = Array.from({ length: BOARD_HEIGHT }, () => new Array(BOARD_WIDTH).fill(0));
     this.#dropTime = 0;
     this.#dropInterval = 1000 / (this.getOpt("speed") / 10);
     this.#stopMoveLeft();
@@ -381,7 +372,7 @@ class TetrisWidget extends GameBase {
             y * CELL_SIZE,
             CELL_SIZE,
             CELL_SIZE,
-            radius
+            radius,
           );
           ctx.fill();
           ctx.strokeStyle = getThemeVar("--color-base03");
@@ -390,10 +381,7 @@ class TetrisWidget extends GameBase {
       }
     }
 
-    const shape = this.#getPieceShape(
-      this.#currentPiece,
-      this.#currentRotation
-    );
+    const shape = this.#getPieceShape(this.#currentPiece, this.#currentRotation);
     ctx.fillStyle = this.#getColor(this.#currentPiece);
     for (let py = 0; py < 4; py++) {
       for (let px = 0; px < 4; px++) {
@@ -425,14 +413,7 @@ class TetrisWidget extends GameBase {
   #move(dx, dy) {
     this.#pieceX += dx;
     this.#pieceY += dy;
-    if (
-      this.#collision(
-        this.#currentPiece,
-        this.#currentRotation,
-        this.#pieceX,
-        this.#pieceY
-      )
-    ) {
+    if (this.#collision(this.#currentPiece, this.#currentRotation, this.#pieceX, this.#pieceY)) {
       this.#pieceX -= dx;
       this.#pieceY -= dy;
       if (dy > 0) {
@@ -447,8 +428,7 @@ class TetrisWidget extends GameBase {
     const piece = this.#currentPiece;
     const from = this.#currentRotation;
     const to = (this.#currentRotation + 1) % 4;
-    const kickSet =
-      piece === "I" ? KICKS.I : piece === "O" ? KICKS.O : KICKS.JLTSZ;
+    const kickSet = piece === "I" ? KICKS.I : piece === "O" ? KICKS.O : KICKS.JLTSZ;
     const key = `${from}>${to}`;
     for (const [dx, dy] of kickSet[key]) {
       if (!this.#collision(piece, to, this.#pieceX + dx, this.#pieceY + dy)) {

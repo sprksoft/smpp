@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { randomChance, browser } from "../../common/utils.js";
+import { browser, randomChance } from "../../common/utils.js";
 import { do_qm } from "./quick.js";
 
 let active_dmenu = null;
@@ -24,18 +24,12 @@ class DMenu {
   openerEl;
   menuEl;
 
-  #endFunc;
-  #inputEl;
-  #itemListEl;
-  #userText;
-  #selectedIndex;
+  readonly #endFunc;
+  readonly #inputEl;
+  readonly #itemListEl;
+  readonly #selectedIndex;
 
-  constructor(
-    itemList,
-    endFunc = undefined,
-    title = "dmenu:",
-    openerEl = undefined
-  ) {
+  constructor(itemList, endFunc = undefined, title = "dmenu:", openerEl = undefined) {
     this.endFunc = endFunc;
     this.openerEl = openerEl;
 
@@ -57,28 +51,28 @@ class DMenu {
   }
 
   #accept(row = undefined) {
-    if (row == undefined) {
+    if (row === undefined) {
       row = this.itemListEl.childNodes[this.selectedIndex];
     }
     let content = this.inputEl.value;
-    if (row != undefined && !row.classList.contains("hidden")) {
+    if (row !== undefined && !row.classList.contains("hidden")) {
       content = row.dataset.content;
     }
 
-    if (this.endFunc != undefined && content !== "") {
+    if (this.endFunc !== undefined && content !== "") {
       this.endFunc(content);
     }
     this.close();
   }
 
   #onKeydown(e) {
-    if (e.key == "Enter") {
+    if (e.key === "Enter") {
       this.#accept();
-    } else if (e.key == "Escape") {
+    } else if (e.key === "Escape") {
       this.close();
-    } else if ((e.key == "Tab" && e.shiftKey) || e.key == "ArrowUp") {
+    } else if ((e.key === "Tab" && e.shiftKey) || e.key === "ArrowUp") {
       this.#selPrev();
-    } else if ((e.key == "Tab" && !e.shiftKey) || e.key == "ArrowDown") {
+    } else if ((e.key === "Tab" && !e.shiftKey) || e.key === "ArrowDown") {
       this.#selNext();
     } else {
       return;
@@ -109,45 +103,49 @@ class DMenu {
     if (!this.#validIndex(index)) {
       return;
     }
-    let row = this.itemListEl.childNodes[this.selectedIndex];
+    const row = this.itemListEl.childNodes[this.selectedIndex];
     row.classList.remove("dmenu-selected");
     this.selectedIndex = index;
 
-    let newrow = this.itemListEl.childNodes[this.selectedIndex];
+    const newrow = this.itemListEl.childNodes[this.selectedIndex];
     newrow.classList.add("dmenu-selected");
     newrow.scrollIntoView(false);
   }
 
   #sort() {
     this.selectedIndex = 0;
-    let searchq = this.inputEl.value.trim();
+    const searchq = this.inputEl.value.trim();
 
     // update scores
-    let items = [];
-    for (let node of this.itemListEl.childNodes) {
-      let score = this.#matchScore(node.dataset.content, searchq);
+    const items = [];
+    for (const node of this.itemListEl.childNodes) {
+      const score = this.#matchScore(node.dataset.content, searchq);
 
-      if (score == 0 && searchq != "") {
+      if (score === 0 && searchq !== "") {
         node.classList.add("hidden");
       } else {
         node.classList.remove("hidden");
       }
-      items.push({ score: score, htmlNode: node });
+      items.push({ score, htmlNode: node });
 
       if (dmenuConfig.itemScore) {
         node.getElementsByClassName("dmenu-score")[0].innerText = score;
       }
     }
 
-    let sortedItems = items.sort(function (a, b) {
-      if (a.score < b.score) return 1;
-      if (a.score > b.score) return -1;
+    const sortedItems = items.sort((a, b) => {
+      if (a.score < b.score) {
+        return 1;
+      }
+      if (a.score > b.score) {
+        return -1;
+      }
       return 0;
     });
 
     for (let i = 0; i < sortedItems.length; i++) {
-      let item = sortedItems[i];
-      if (i == 0) {
+      const item = sortedItems[i];
+      if (i === 0) {
         item.htmlNode.classList.add("dmenu-selected");
       } else {
         item.htmlNode.classList.remove("dmenu-selected");
@@ -169,11 +167,8 @@ class DMenu {
       if (i >= str.length || mi >= match.length) {
         break;
       }
-      if (str[i] == match[mi]) {
-        score +=
-          (streak + 1) *
-          (streak + 1) *
-          ((str.length - streakStartI) / str.length);
+      if (str[i] === match[mi]) {
+        score += (streak + 1) * (streak + 1) * ((str.length - streakStartI) / str.length);
         mi += 1;
         streak += 1;
       } else {
@@ -193,30 +188,28 @@ class DMenu {
 
   #mkRow(item, parent) {
     let cmd;
-    let meta = undefined;
-    if (typeof item == "string") {
+    let meta;
+    if (typeof item === "string") {
       cmd = item.toLowerCase();
     } else {
       cmd = item.value;
       meta = item.meta;
     }
-    let row = document.createElement("div");
+    const row = document.createElement("div");
     row.classList.add("dmenu-row");
     row.innerHTML =
       '<div class="dmenu-content"></div><div class="dmenu-meta"></div><div class="dmenu-score"></div>';
     row.getElementsByClassName("dmenu-content")[0].innerText = cmd;
     row.dataset.content = cmd;
-    if (meta != undefined) {
+    if (meta !== undefined) {
       row.getElementsByClassName("dmenu-meta")[0].innerText = meta;
     }
 
     if (dmenuConfig.itemScore) {
       row.getElementsByClassName("dmenu-score")[0].innerText = "0";
     }
-
-    let klass = this;
-    row.addEventListener("click", function (e) {
-      klass.#accept(row);
+    row.addEventListener("click", (_e) => {
+      this.#accept(row);
     });
     parent.appendChild(row);
     return row;
@@ -225,15 +218,17 @@ class DMenu {
   #mkDmenu(itemList, title) {
     this.menuEl = document.createElement("div");
     this.menuEl.classList.add("dmenu");
-    if (randomChance(1 / 100)) this.menuEl.classList.add("jokeDmenu");
+    if (randomChance(1 / 100)) {
+      this.menuEl.classList.add("jokeDmenu");
+    }
     if (dmenuConfig.centered) {
       this.menuEl.classList.add("dmenu-centered");
     }
 
-    let top = document.createElement("div");
+    const top = document.createElement("div");
     top.classList.add("dmenu-top");
 
-    let dtitle = document.createElement("label");
+    const dtitle = document.createElement("label");
     dtitle.innerText = title;
     dtitle.classList.add("dmenu-title");
     top.appendChild(dtitle);
@@ -241,12 +236,11 @@ class DMenu {
     this.inputEl = document.createElement("input");
     this.inputEl.type = "text";
     this.inputEl.classList.add("dmenu-input");
-    let klass = this;
     this.inputEl.addEventListener("keydown", (e) => {
-      klass.#onKeydown(e);
+      this.#onKeydown(e);
     });
-    this.inputEl.addEventListener("input", (e) => {
-      klass.#oninput();
+    this.inputEl.addEventListener("input", (_e) => {
+      this.#oninput();
     });
     top.appendChild(this.inputEl);
 
@@ -257,8 +251,8 @@ class DMenu {
     this.menuEl.appendChild(this.itemListEl);
 
     let first = true;
-    for (let item of itemList) {
-      let row = this.#mkRow(item, this.itemListEl);
+    for (const item of itemList) {
+      const row = this.#mkRow(item, this.itemListEl);
       if (first) {
         row.classList.add("dmenu-selected");
         first = false;
@@ -269,16 +263,11 @@ class DMenu {
   }
 }
 
-export function dmenu(
-  itemList,
-  endFunc = undefined,
-  title = "dmenu:",
-  opener = undefined
-) {
-  if (active_dmenu !== null && active_dmenu.isOpen()) {
+export function dmenu(itemList, endFunc = undefined, title = "dmenu:", opener = undefined) {
+  if (active_dmenu?.isOpen()) {
     active_dmenu.close();
   }
-  let menu = new DMenu(itemList, endFunc, title, opener);
+  const menu = new DMenu(itemList, endFunc, title, opener);
   active_dmenu = menu;
   return menu;
 }
@@ -288,20 +277,17 @@ export function createQuickMenuButton() {
   quickMenuButton.id = "quick-menu-button";
   quickMenuButton.className = "topnav__btn";
   quickMenuButton.innerHTML = "Quick";
-  quickMenuButton.addEventListener("click", function () {
+  quickMenuButton.addEventListener("click", () => {
     do_qm(quickMenuButton);
   });
   return quickMenuButton;
 }
 
-document.addEventListener("click", function (e) {
+document.addEventListener("click", (e) => {
   if (active_dmenu == null || !active_dmenu.isOpen()) {
     return;
   }
-  if (
-    !active_dmenu.menuEl.contains(e.target) &&
-    e.target != active_dmenu.openerEl
-  ) {
+  if (!active_dmenu.menuEl.contains(e.target) && e.target !== active_dmenu.openerEl) {
     active_dmenu.close();
     e.preventDefault();
   }

@@ -1,8 +1,5 @@
 import { browser } from "../common/utils.js";
-import type {
-  SMPPImage,
-  SMPPImageMetaData,
-} from "../main-features/modules/images.js";
+import type { SMPPImage, SMPPImageMetaData } from "../main-features/modules/images.js";
 import type { Settings } from "../main-features/settings/main-settings.js";
 import { fetchDelijnData } from "./api-background-script.js";
 import { loadJSON } from "./json-loader.js";
@@ -21,48 +18,44 @@ function getDefaultCustomThemeData() {
 
 let defaultPlantData = {};
 async function getDefaultPlantData() {
-  if (Object.keys(defaultPlantData).length == 0) {
-    defaultPlantData = await loadJSON(
-      "background-scripts/data/default-plant-data.json"
-    );
+  if (Object.keys(defaultPlantData).length === 0) {
+    defaultPlantData = await loadJSON("background-scripts/data/default-plant-data.json");
   }
   return defaultPlantData;
 }
 
 export async function getPlantAppData() {
-  let data = await browser.storage.local.get("plantAppData");
-  let plantAppData = data.plantAppData || getDefaultPlantData();
+  const data = await browser.storage.local.get("plantAppData");
+  const plantAppData = data.plantAppData || getDefaultPlantData();
   return plantAppData;
 }
 
 export async function getCustomThemeData() {
-  let data = await browser.storage.local.get("customThemeData");
+  const data = await browser.storage.local.get("customThemeData");
   return data.customThemeData || getDefaultCustomThemeData();
 }
 
 let fallBackColorData = {};
 async function getFallbackColorData() {
-  if (Object.keys(fallBackColorData).length == 0) {
-    fallBackColorData = await loadJSON(
-      "background-scripts/data/delijn-kleuren.json"
-    );
+  if (Object.keys(fallBackColorData).length === 0) {
+    fallBackColorData = await loadJSON("background-scripts/data/delijn-kleuren.json");
   }
 }
 
 export async function getDelijnColorData() {
   try {
-    let data = await browser.storage.local.get("delijnColorData");
+    const data = await browser.storage.local.get("delijnColorData");
     let delijnColorData;
-    if (data.delijnColorData?.kleuren != undefined) {
+    if (data.delijnColorData?.kleuren !== undefined) {
       delijnColorData = data.delijnColorData;
     } else {
       delijnColorData = await fetchDelijnData(
-        "https://api.delijn.be/DLKernOpenData/api/v1/kleuren"
+        "https://api.delijn.be/DLKernOpenData/api/v1/kleuren",
       );
     }
 
     await browser.storage.local.set({
-      delijnColorData: delijnColorData,
+      delijnColorData,
     });
     return delijnColorData;
   } catch (error) {
@@ -72,29 +65,27 @@ export async function getDelijnColorData() {
 }
 
 export async function setImage(id: string, data: SMPPImage) {
-  const imagesMetaData =
-    (await browser.storage.local.get("images")).images || {};
+  const imagesMetaData = (await browser.storage.local.get("images")).images || {};
 
   imagesMetaData[id] = data.metaData;
   await browser.storage.local.set({ images: imagesMetaData });
 
-  const customId = "SMPPImage-" + id;
+  const customId = `SMPPImage-${id}`;
   await browser.storage.local.set({ [customId]: data.imageData });
 }
 
 export async function getImage(id: string): Promise<SMPPImage> {
-  const imagesMetaData =
-    (await browser.storage.local.get("images")).images || {};
-  let metaData = imagesMetaData[id] as SMPPImageMetaData;
-  if (!metaData)
+  const imagesMetaData = (await browser.storage.local.get("images")).images || {};
+  const metaData = imagesMetaData[id] as SMPPImageMetaData;
+  if (!metaData) {
     return {
       metaData: { type: "default", link: "" },
       imageData: "",
     } as SMPPImage;
+  }
 
-  const customId = "SMPPImage-" + id;
-  const image: string =
-    (await browser.storage.local.get(customId))[customId] || "";
+  const customId = `SMPPImage-${id}`;
+  const image: string = (await browser.storage.local.get(customId))[customId] || "";
 
   return {
     metaData,
@@ -103,19 +94,16 @@ export async function getImage(id: string): Promise<SMPPImage> {
 }
 
 export async function removeImage(id: string) {
-  const imagesMetaData =
-    (await browser.storage.local.get("images")).images || {};
+  const imagesMetaData = (await browser.storage.local.get("images")).images || {};
   delete imagesMetaData[id];
-  const customId = "SMPPImage-" + id;
+  const customId = `SMPPImage-${id}`;
   await browser.storage.local.remove([customId]);
   await browser.storage.local.set({ images: imagesMetaData });
 }
 
-export async function getBase64FromResponse(
-  response: Response
-): Promise<string> {
-  let blob = await response.blob();
-  let base64 = await new Promise((resolve, reject) => {
+export async function getBase64FromResponse(response: Response): Promise<string> {
+  const blob = await response.blob();
+  const base64 = await new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onloadend = () => resolve(reader.result);
     reader.onerror = reject;
@@ -127,11 +115,9 @@ export async function getBase64FromResponse(
 
 export async function getBase64(link: string): Promise<string | null> {
   try {
-    let response = await fetch(link);
+    const response = await fetch(link);
     if (!response.ok) {
-      console.error(
-        `Failed to fetch image: ${response.status} ${response.statusText}`
-      );
+      console.error(`Failed to fetch image: ${response.status} ${response.statusText}`);
       return null;
     }
     return getBase64FromResponse(response);
@@ -143,19 +129,21 @@ export async function getBase64(link: string): Promise<string | null> {
 
 export async function getFileData(link: string) {
   try {
-    let response = await fetch(link);
-    if (!response.ok) return null;
+    const response = await fetch(link);
+    if (!response.ok) {
+      return null;
+    }
 
-    let blob = await response.blob();
-    let arrayBuffer = await blob.arrayBuffer();
+    const blob = await response.blob();
+    const arrayBuffer = await blob.arrayBuffer();
 
     const urlParts = link.split("/");
-    const filename = urlParts[urlParts.length - 1] || "image.jpg";
+    const filename = urlParts.at(-1) || "image.jpg";
 
     return {
       arrayBuffer: Array.from(new Uint8Array(arrayBuffer)),
       mimeType: blob.type || "image/jpeg",
-      filename: filename,
+      filename,
     };
   } catch (error) {
     console.error("Error getting file data:", error);
@@ -164,38 +152,36 @@ export async function getFileData(link: string) {
 }
 
 export async function migrateImagesV6() {
-  let settings = (await getSettingsData()) as Settings;
+  const settings = (await getSettingsData()) as Settings;
   let images = (await browser.storage.local.get("images")).images || {};
 
   if (images["profilePicture"]) {
-    let profileImage = {
+    const profileImage = {
       metaData: {
         type: images["profilePicture"].type,
         link: images["profilePicture"].link,
       },
       imageData: images["profilePicture"].imageData,
     };
-    delete images["profilePicture"];
-    await browser.storage.local.set({ images: images });
+    images["profilePicture"] = undefined;
+    await browser.storage.local.set({ images });
     await setImage("profilePicture", profileImage);
     images = (await browser.storage.local.get("images")).images || {};
   }
 
   if (images["backgroundImage"]) {
-    let backgroundImage = {
+    const backgroundImage = {
       metaData: {
         type: images["backgroundImage"].type,
         link: images["backgroundImage"].link,
       },
       imageData: images["backgroundImage"].imageData,
     };
-    delete images["backgroundImage"];
-    await browser.storage.local.set({ images: images });
+    images["backgroundImage"] = undefined;
+    await browser.storage.local.set({ images });
 
-    if (backgroundImage.metaData.type == "link") {
-      backgroundImage.imageData = await getBase64(
-        backgroundImage.metaData.link
-      );
+    if (backgroundImage.metaData.type === "link") {
+      backgroundImage.imageData = await getBase64(backgroundImage.metaData.link);
       if (backgroundImage.imageData != null) {
         backgroundImage.metaData.type = "file";
       } else {

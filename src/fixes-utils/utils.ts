@@ -1,4 +1,4 @@
-import { sendDebug, browser, delay } from "../common/utils.js";
+import { browser, delay, sendDebug } from "../common/utils.js";
 import { errorSvg, infoSvg, succesSvg, warnSvg } from "./svgs.js";
 
 export function isValidImage(src: string): Promise<boolean> {
@@ -16,11 +16,8 @@ export function getPfpLink(username: string): string {
 
   if (username) {
     const parts = username.trim().split(/\s+/);
-    firstInitial = parts[0] && parts[0][0] ? parts[0][0].toUpperCase() : "M";
-    secondInitial =
-      parts.length > 1 && parts[1] && parts[1][0]
-        ? parts[1][0].toUpperCase()
-        : "U";
+    firstInitial = parts[0]?.[0] ? parts[0][0].toUpperCase() : "M";
+    secondInitial = parts.length > 1 && parts[1] && parts[1][0] ? parts[1][0].toUpperCase() : "U";
   } else {
     // Mr. Unknown
     firstInitial = "M";
@@ -60,29 +57,28 @@ export function getUserId(): string | undefined {
     sendDebug("Trying to get plannerUrl from cookies...");
 
     const cookies = document.cookie.split(";");
-    const plannerUrlCookie = cookies.find((cookie) =>
-      cookie.trim().startsWith("plannerUrl=")
-    );
+    const plannerUrlCookie = cookies.find((cookie) => cookie.trim().startsWith("plannerUrl="));
 
     if (plannerUrlCookie) {
-      sendDebug("Retrieved plannerUrl from cookies" + plannerUrlCookie);
+      sendDebug(`Retrieved plannerUrl from cookies${plannerUrlCookie}`);
       const plannerUrl = plannerUrlCookie.split("=")[1];
       sendDebug("Found plannerUrl in cookies:", plannerUrl);
-      if (plannerUrl) userId = plannerUrl.split("/")[4];
+      if (plannerUrl) {
+        userId = plannerUrl.split("/")[4];
+      }
       sendDebug("Extracted userId from cookie plannerUrl:", userId);
     } else {
       console.error(
-        "UID is fucked, refresh 5 keer en als het dan niet werkt vraag hulp op discord @JJorne"
+        "UID is fucked, refresh 5 keer en als het dan niet werkt vraag hulp op discord @JJorne",
       );
     }
   }
 
   if (userId) {
     return userId;
-  } else {
-    console.error("No userID? womp womp");
-    return undefined;
   }
+  console.error("No userID? womp womp");
+  return undefined;
 }
 
 export function getSchoolName(): string | null {
@@ -115,7 +111,7 @@ export class Toast {
   time: number;
   toastElement: HTMLDivElement;
 
-  constructor(content: string, type: ToastType, time: number = 3000) {
+  constructor(content: string, type: ToastType, time = 3000) {
     this.content = content;
     this.type = type;
     this.time = time;
@@ -123,11 +119,11 @@ export class Toast {
   }
 
   createToastElement(): HTMLDivElement {
-    let toast = document.createElement("div");
+    const toast = document.createElement("div");
     toast.classList.add("smpp-toast");
-    let icon = document.createElement("div");
+    const icon = document.createElement("div");
     icon.classList.add("smpp-toast-icon");
-    let title = document.createElement("span");
+    const title = document.createElement("span");
     switch (this.type) {
       case "info":
         title.innerText = "Info";
@@ -150,14 +146,14 @@ export class Toast {
         toast.classList.add("smpp-warning-toast");
         break;
     }
-    let topContainer = document.createElement("div");
+    const topContainer = document.createElement("div");
     topContainer.classList.add("smpp-toast-top");
     topContainer.appendChild(icon);
     topContainer.appendChild(title);
 
     toast.appendChild(topContainer);
 
-    let content = document.createElement("span");
+    const content = document.createElement("span");
     content.classList.add("smpp-toast-content");
     content.innerText = this.content;
     toast.appendChild(content);
@@ -165,17 +161,21 @@ export class Toast {
   }
 
   async hideToastElement(): Promise<void> {
-    let toastContainer = document.getElementById("toast-container");
-    if (!toastContainer) return;
+    const toastContainer = document.getElementById("toast-container");
+    if (!toastContainer) {
+      return;
+    }
     this.toastElement.classList.add("being-removed");
     await delay(300);
     toastContainer.removeChild(this.toastElement);
   }
 
   async render(): Promise<void> {
-    let toastContainer = document.getElementById("toast-container");
+    const toastContainer = document.getElementById("toast-container");
 
-    if (!toastContainer) return;
+    if (!toastContainer) {
+      return;
+    }
     toastContainer.appendChild(this.toastElement);
     await delay(this.time);
     await this.hideToastElement();

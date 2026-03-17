@@ -1,20 +1,19 @@
 // @ts-nocheck
 import { getExtensionImage } from "../../common/utils.js";
-import { getWidgetSetting } from "../../widgets/widgets.js";
-import { widgets } from "../../widgets/widgets.js";
+import { getWidgetSetting, widgets } from "../../widgets/widgets.js";
 import { currentThemeName } from "./themes.js";
 
 function setSnowLevel(amount, opacity) {
   document.getElementById("snowflakes")?.remove();
   amount = amount > 3000 ? 3000 : amount;
-  let snowDiv = document.createElement("div");
+  const snowDiv = document.createElement("div");
   snowDiv.id = "snowflakes";
 
   for (let i = 0; i < amount; i++) {
-    let flake = document.createElement("img");
+    const flake = document.createElement("img");
     flake.classList = "snowflake";
     flake.src =
-      currentThemeName == "pink"
+      currentThemeName === "pink"
         ? getExtensionImage("icons/weather-overlay/blossom.svg")
         : getExtensionImage("icons/weather-overlay/snowflake.svg");
 
@@ -33,17 +32,15 @@ function setSnowLevel(amount, opacity) {
 function setRainLevel(amount, opacity) {
   document.getElementById("raindrops")?.remove();
   amount = amount > 3000 ? 3000 : amount;
-  let rainDiv = document.createElement("div");
+  const rainDiv = document.createElement("div");
   rainDiv.id = "raindrops";
 
   for (let i = 0; i < amount; i++) {
-    let raindrop = document.createElement("img");
+    const raindrop = document.createElement("img");
     raindrop.classList.add("raindrop");
     raindrop.src = getExtensionImage("icons/weather-overlay/raindrop.svg");
     raindrop.style.left = `${Math.random() * 100}%`;
-    raindrop.style.animation = `raindrop_fall ${
-      Math.random() * 2 + 2
-    }s linear infinite`;
+    raindrop.style.animation = `raindrop_fall ${Math.random() * 2 + 2}s linear infinite`;
     raindrop.style.animationDelay = `${Math.random() * 5 - 5}s`;
     raindrop.style.width = `${Math.random() * 7.5 + 7.5}px`;
     raindrop.style.opacity = opacity;
@@ -54,19 +51,23 @@ function setRainLevel(amount, opacity) {
 
 async function setOverlayBasedOnConditions(amount, opacity) {
   async function getWeatherDescription(widget) {
-    const weatherData = await getWidgetSetting(widget + ".cache.weatherData");
-    if (weatherData == null) return null;
-    if (weatherData.cod != 200) return null;
+    const weatherData = await getWidgetSetting(`${widget}.cache.weatherData`);
+    if (weatherData == null) {
+      return null;
+    }
+    if (weatherData.cod !== 200) {
+      return null;
+    }
     return weatherData.weather[0].main;
   }
 
-  let weatherWidgets = widgets.filter(
-    (item) => item.name.toLowerCase().includes("weather") && item.isActive
+  const weatherWidgets = widgets.filter(
+    (item) => item.name.toLowerCase().includes("weather") && item.isActive,
   );
   let weathers = await Promise.all(
     weatherWidgets.map(async (widget) => {
       return await getWeatherDescription(widget.name);
-    })
+    }),
   );
   weathers = weathers.filter((description) => description != null);
 
@@ -79,23 +80,28 @@ async function setOverlayBasedOnConditions(amount, opacity) {
 }
 
 export function applyWeatherEffects(weatherOverlay) {
-  let rainDiv = document.getElementById("raindrops");
-  let snowDiv = document.getElementById("snowflakes");
+  const rainDiv = document.getElementById("raindrops");
+  const snowDiv = document.getElementById("snowflakes");
   switch (weatherOverlay.type) {
     case "snow":
-      if (rainDiv) rainDiv.remove();
+      if (rainDiv) {
+        rainDiv.remove();
+      }
       setSnowLevel(weatherOverlay.amount, weatherOverlay.opacity);
       break;
     case "realtime":
-      if (rainDiv) rainDiv.remove();
-      if (snowDiv) snowDiv.remove();
-      setOverlayBasedOnConditions(
-        weatherOverlay.amount,
-        weatherOverlay.opacity
-      );
+      if (rainDiv) {
+        rainDiv.remove();
+      }
+      if (snowDiv) {
+        snowDiv.remove();
+      }
+      setOverlayBasedOnConditions(weatherOverlay.amount, weatherOverlay.opacity);
       break;
     case "rain":
-      if (snowDiv) snowDiv.remove();
+      if (snowDiv) {
+        snowDiv.remove();
+      }
       setRainLevel(weatherOverlay.amount, weatherOverlay.opacity);
       break;
     default:

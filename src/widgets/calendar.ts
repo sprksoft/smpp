@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { getExtensionImage } from "../common/utils.js";
 import { chevronLeftSvg } from "../fixes-utils/svgs.js";
-import { WidgetBase, registerWidget } from "./widgets.js";
+import { registerWidget, WidgetBase } from "./widgets.js";
 
 class CalendarWidget extends WidgetBase {
   get category() {
@@ -16,7 +16,7 @@ class CalendarWidget extends WidgetBase {
     return {};
   }
 
-  private currentDate = new Date();
+  private readonly currentDate = new Date();
 
   private generateCalendar() {
     const year = this.currentDate.getFullYear();
@@ -85,9 +85,7 @@ class CalendarWidget extends WidgetBase {
     for (let day = 1; day <= daysInMonth; day++) {
       const dayEl = document.createElement("div");
       const isToday =
-        day === today.getDate() &&
-        month === today.getMonth() &&
-        year === today.getFullYear();
+        day === today.getDate() && month === today.getMonth() && year === today.getFullYear();
 
       dayEl.className = isToday ? "calendar-day today" : "calendar-day";
       dayEl.textContent = String(day);
@@ -125,7 +123,7 @@ class CalendarWidget extends WidgetBase {
     label.style.marginBottom = "0.5rem";
     label.textContent = "Calendar";
 
-    let image = document.createElement("img");
+    const image = document.createElement("img");
     image.src = getExtensionImage("icons/widgets/kalender_512x512.png");
     image.classList = "calendar-image";
     preview.appendChild(label);

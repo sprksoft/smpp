@@ -1,33 +1,40 @@
-import { createTextInput } from "../appearance/ui.js";
-import { imageInputSvg, loadingSpinnerSvg } from "../../fixes-utils/svgs.js";
-import {
-  isAbsoluteUrl,
-  browser,
-  getCompressedData,
-  convertLinkToFile,
-} from "../../common/utils.js";
-import { isFirefox } from "../main.js";
 import imageCompression from "browser-image-compression";
+import {
+  browser,
+  convertLinkToFile,
+  getCompressedData,
+  isAbsoluteUrl,
+} from "../../common/utils.js";
+import { imageInputSvg, loadingSpinnerSvg } from "../../fixes-utils/svgs.js";
 import { Toast } from "../../fixes-utils/utils.js";
+import { createTextInput } from "../appearance/ui.js";
+import { isFirefox } from "../main.js";
 
-export type SMPPImage = {
+export interface SMPPImage {
   metaData: SMPPImageMetaData;
   imageData: string | Base64URLString;
-};
+}
 
-export type SMPPImageMetaData = {
+export interface SMPPImageMetaData {
   type: "file" | "default";
   link: string;
-};
+}
 
 class ImageProcessingError extends Error {
+  override message: string;
+  toastType: "error" | "warning" | "info";
+  toastDuration: number | undefined;
+
   constructor(
-    public override message: string,
-    public toastType: "error" | "warning" | "info" = "error",
-    public toastDuration?: number
+    message: string,
+    toastType: "error" | "warning" | "info" = "error",
+    toastDuration?: number,
   ) {
     super(message);
     this.name = "ImageProcessingError";
+    this.message = message;
+    this.toastType = toastType;
+    this.toastDuration = toastDuration;
   }
 }
 
@@ -35,7 +42,7 @@ export class ImageSelector {
   name: string;
   isThemeImage: boolean;
 
-  id: string = "";
+  id = "";
   clearButton = document.createElement("button");
   linkInput = createTextInput("", "Link or paste");
   fileInput = document.createElement("input");
@@ -45,7 +52,7 @@ export class ImageSelector {
   fullContainer = this.createFullFileInput();
 
   /* theme: Indicates that this image selector references the background image of a theme. (used for theme share cache invalidation on modify) */
-  constructor(name: string, isThemeImage: boolean = false) {
+  constructor(name: string, isThemeImage = false) {
     this.name = name;
     this.isThemeImage = isThemeImage;
 
@@ -118,7 +125,9 @@ export class ImageSelector {
 
     this.linkInput.addEventListener("paste", async (e) => {
       const items = e.clipboardData?.items;
-      if (!items) return;
+      if (!items) {
+        return;
+      }
 
       for (const item of items) {
         if (item.type.startsWith("image/")) {
@@ -210,15 +219,13 @@ export class ImageSelector {
     this.setButtonLoading(true);
 
     // Fetch file and base64 concurrently
-    const [file] = await Promise.all([
-      convertLinkToFile(url).catch(() => null),
-    ]);
+    const [file] = await Promise.all([convertLinkToFile(url).catch(() => null)]);
 
     if (!file) {
       throw new ImageProcessingError(
         "Failed to access image, try saving and uploading it",
         "error",
-        5000
+        5000,
       );
     }
 
@@ -249,7 +256,7 @@ export class ImageSelector {
     await browser.runtime.sendMessage({
       action: "setImage",
       id: this.id,
-      data: data,
+      data,
     });
     await browser.runtime.sendMessage({
       action: "setImage",
@@ -271,13 +278,11 @@ export class ImageSelector {
 
   async storeImage(passedFile?: File) {
     // 1. Fetch existing data (or fall back to defaults)
-    let storedData = await browser.runtime.sendMessage({
+    const storedData = await browser.runtime.sendMessage({
       action: "getImage",
       id: this.id,
     });
-    let data: SMPPImage = storedData
-      ? (storedData as SMPPImage)
-      : this.getDefaultImageData();
+    let data: SMPPImage = storedData ? (storedData as SMPPImage) : this.getDefaultImageData();
 
     let compressedImage: SMPPImage = {
       imageData: data.imageData,
@@ -328,13 +333,15 @@ export class ImageSelector {
   }
 
   async loadImageData() {
-    let data = (await browser.runtime.sendMessage({
+    const data = (await browser.runtime.sendMessage({
       action: "getImage",
       id: this.id,
     })) as SMPPImage;
     let metaData = data.metaData;
 
-    if (!metaData) metaData = { link: "", type: "default" };
+    if (!metaData) {
+      metaData = { link: "", type: "default" };
+    }
 
     this.linkInput.value = metaData.link || "";
     if (metaData.type === "file") {
@@ -354,12 +361,12 @@ export class ImageSelector {
 export async function getImageURL(
   id: string,
   onDefault: () => Promise<string>,
-  getCompressed: boolean
+  getCompressed: boolean,
 ): Promise<{ url: string; type: "file" | "default" | null }> {
   let image;
   let requestedImageId = id;
   if (getCompressed) {
-    requestedImageId = "compressed-" + id;
+    requestedImageId = `compressed-${id}`;
   }
   try {
     image = (await browser.runtime.sendMessage({
@@ -374,18 +381,15 @@ export async function getImageURL(
   // Compressed image is empty. Generate a new one if the original exists.
   // used for lazy compressed image generation for shared themes
   if (getCompressed && image.imageData === "") {
-    let origImage = (await browser.runtime.sendMessage({
+    const origImage = (await browser.runtime.sendMessage({
       action: "getImage",
       id,
     })) as SMPPImage;
 
     // Don't generate compressed version if original is empty.
-    if (origImage.imageData != "") {
+    if (origImage.imageData !== "") {
       // Compress original image
-      const origImageFile = await imageCompression.getFilefromDataUrl(
-        origImage.imageData,
-        ""
-      );
+      const origImageFile = await imageCompression.getFilefromDataUrl(origImage.imageData, "");
       const imageData = await getCompressedData(origImageFile);
 
       const compressedImage: SMPPImage = {

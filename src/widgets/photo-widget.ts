@@ -1,42 +1,36 @@
 // @ts-nocheck
-import { WidgetBase, registerWidget } from "./widgets.js";
+import { registerWidget, WidgetBase } from "./widgets.js";
 
 class PhotoWidget extends WidgetBase {
-  constructor() {
-    super();
-  }
   displayImage() {
-    browser.runtime
-      .sendMessage({ action: "getPhotoWidgetImage" })
-      .then((result) => {
-        if (result && result.photoWidgetImage) {
-          this.img =
-            document.getElementById("photo_widget_background_image") ||
-            document.createElement("img");
-          if (this.img) {
-            this.img.src = result.photoWidgetImage;
-          } else {
-            this.img = document.createElement("img");
-            this.img.id = "photo_widget_background_image";
-            this.img.style.backgroundColor = "var(--color-base00)";
-            this.img.style.position = "relative";
-            this.img.style.top = "0";
-            this.img.style.left = "0";
-            this.img.style.width = "100%";
-            this.img.style.height = "100%";
-            this.img.style.objectFit = "cover";
-            this.img.style.zIndex = -1;
-            this.img.style.display = "block";
-            this.img.src = result.photoWidgetImage;
-          }
-          this.content.appendChild(this.img);
+    browser.runtime.sendMessage({ action: "getPhotoWidgetImage" }).then((result) => {
+      if (result?.photoWidgetImage) {
+        this.img =
+          document.getElementById("photo_widget_background_image") || document.createElement("img");
+        if (this.img) {
+          this.img.src = result.photoWidgetImage;
         } else {
-          this.noImageDisplay = document.createElement("div");
-          this.noImageDisplay.className = "no-image-display";
-          this.noImageDisplay.textContent = "No image available";
-          this.content.appendChild(this.noImageDisplay);
+          this.img = document.createElement("img");
+          this.img.id = "photo_widget_background_image";
+          this.img.style.backgroundColor = "var(--color-base00)";
+          this.img.style.position = "relative";
+          this.img.style.top = "0";
+          this.img.style.left = "0";
+          this.img.style.width = "100%";
+          this.img.style.height = "100%";
+          this.img.style.objectFit = "cover";
+          this.img.style.zIndex = -1;
+          this.img.style.display = "block";
+          this.img.src = result.photoWidgetImage;
         }
-      });
+        this.content.appendChild(this.img);
+      } else {
+        this.noImageDisplay = document.createElement("div");
+        this.noImageDisplay.className = "no-image-display";
+        this.noImageDisplay.textContent = "No image available";
+        this.content.appendChild(this.noImageDisplay);
+      }
+    });
   }
 
   createContent() {

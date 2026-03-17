@@ -2935,7 +2935,6 @@ button .bottom-container-button:active {
   width: 100%;
   text-wrap-mode: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
 }
 .theme-button-container {
   position: absolute;
@@ -2951,12 +2950,10 @@ button .bottom-container-button:active {
 }
 @keyframes theme-tile {
   0% {
-    opacity: 0.2;
-    transform: translateX(-12.5%) translateY(-25%) scale(0.7);
+    opacity: 0.5;
   }
   100% {
     opacity: 1;
-    transform: translateX(0) translateY(0) scale(1);
   }
 }
 .enableAnimations .theme-tile {
@@ -2967,7 +2964,7 @@ button .bottom-container-button:active {
     transform,
     outline;
   transition: 0.15s ease-in-out;
-  animation: theme-tile 0.4s cubic-bezier(0.33, 1.31, 0.65, 0.98);
+  animation: theme-tile 0.2s ease-out;
 }
 #settings-page .theme-tile:not(.aaaaa) {
   outline: 2px solid transparent !important;
@@ -2983,7 +2980,6 @@ button .bottom-container-button:active {
   cursor: pointer;
   height: fit-content;
   position: relative;
-  box-shadow: 0px 0px 5px -2px var(--color-shadow) !important;
 }
 #settings-page .theme-tile:not(.aaaaa).is-selected {
   border-color: var(--color-accent-local) !important;
@@ -3013,8 +3009,6 @@ button .bottom-container-button:active {
   border-color: var(--color-accent-local);
   background-color: var(--color-base01-local) !important;
   color: var(--color-text-local) !important;
-  scale: 1.03;
-  box-shadow: 0px 0px 15px 2px var(--color-shadow) !important;
 }
 #settings-page .theme-tile:not(.aaaaa):hover .bottom-container-button {
   opacity: 1;
@@ -3047,13 +3041,10 @@ button .bottom-container-button:active {
   color: var(--text-color) !important;
 }
 .theme-tiles {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, 168px);
+  display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
-  align-content: start;
-}
-.enableAnimations .theme-tiles {
-  transition: height 0.5s cubic-bezier(0.33, 1.31, 0.65, 0.98) !important;
+  margin-top: 1rem;
 }
 .theme-top-container {
   display: flex;
@@ -3063,7 +3054,7 @@ button .bottom-container-button:active {
   height: 2.5rem;
   font-weight: 600;
   margin: 0 !important;
-  margin-bottom: 0.5rem !important;
+  margin-bottom: 0.1rem !important;
   margin-top: 2rem !important;
   cursor: default;
 }
@@ -3382,7 +3373,6 @@ button.open-theme-editor-button:hover {
   color: var(--color-text) !important;
 }
 .smpp-tooltip {
-  line-height: 1 !important;
   z-index: 10000;
   pointer-events: none;
   height: 2.5rem;
@@ -3521,19 +3511,16 @@ button.open-theme-editor-button:hover {
 #quickSettings .compact-theme-option.is-selected {
   border-color: var(--color-accent-local) !important;
 }
-.compact-theme-option .compact-theme-option-text span {
-  overflow-x: hidden !important;
-  text-overflow: ellipsis;
-  text-wrap-mode: nowrap !important;
-  font-size: 1.2rem !important;
-  font-weight: 500 !important;
-  color: var(--color-text-local) !important;
-}
 .compact-theme-option .compact-theme-option-text {
   width: 100%;
   padding: 0.5rem 0.75rem;
   height: 100% !important;
+  font-size: 1.2rem !important;
+  font-weight: 500 !important;
+  color: var(--color-text-local) !important;
   background: var(--color-base01-local) !important;
+  text-wrap-mode: nowrap !important;
+  overflow: hidden !important;
   z-index: 1;
   position: relative;
   user-select: none;
@@ -3542,51 +3529,19 @@ button.open-theme-editor-button:hover {
   justify-content: center;
   align-items: center;
 }
-.compact-theme-option .compact-theme-option-text svg {
-  height: 100%;
-  margin-right: 0.5rem;
-  stroke: var(--color-accent);
-}
 .compact-theme-option:active {
   scale: 0.95;
 }
-.compact-theme-option.no-themes .compact-theme-option-image-container,
 .compact-theme-option.is-selected .compact-theme-option-image-container {
   display: block;
-}
-.compact-theme-option.no-themes .compact-theme-option-image-container {
-  background:
-    linear-gradient(
-      40deg,
-      color-mix(in srgb, var(--color-base03) 70%, var(--color-accent) 30%) 0%,
-      color-mix(in srgb, var(--color-base03) 65%, var(--color-accent) 35%) 15%,
-      color-mix(in srgb, var(--color-base02) 70%, var(--color-accent) 30%) 45%,
-      color-mix(in srgb, var(--color-base02) 73%, var(--color-accent) 27%) 55%,
-      color-mix(in srgb, var(--color-base02) 95%, var(--color-accent) 5%) 100%);
-}
-.compact-theme-option .compact-theme-option-image-container.no-image img {
-  display: none;
-}
-.compact-theme-option .compact-theme-option-image-container img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 .compact-theme-option .compact-theme-option-image-container {
   width: 100%;
   height: 100%;
   display: none;
-  object-fit: cover;
   filter: blur(2px);
   position: absolute;
-  background:
-    linear-gradient(
-      40deg,
-      color-mix(in srgb, var(--color-base03-local) 70%, var(--color-accent-local) 30%) 0%,
-      color-mix(in srgb, var(--color-base03-local) 65%, var(--color-accent-local) 35%) 15%,
-      color-mix(in srgb, var(--color-base02-local) 70%, var(--color-accent-local) 30%) 45%,
-      color-mix(in srgb, var(--color-base02-local) 73%, var(--color-accent-local) 27%) 55%,
-      color-mix(in srgb, var(--color-base02-local) 95%, var(--color-accent-local) 5%) 100%);
+  background: var(--background-image-local);
   background-size: cover;
   background-position: center;
 }
@@ -3615,6 +3570,7 @@ button.open-theme-editor-button:hover {
   flex-direction: column;
   align-items: center;
   overflow-y: auto !important;
+  width: 400px !important;
 }
 .share-dialog-content h1 {
   color: var(--color-accent-local) !important;
@@ -3635,7 +3591,7 @@ button.open-theme-editor-button:hover {
   font-size: 1.8rem !important;
 }
 .link-output {
-  display: block;
+  display: flex;
   background-color: var(--color-base01-local) !important;
   font-size: 1rem !important;
   border-radius: 1rem !important;
@@ -3643,8 +3599,7 @@ button.open-theme-editor-button:hover {
   border: 2px solid var(--color-base02-local) !important;
   text-wrap-mode: nowrap;
   max-width: 100%;
-  width: 30rem;
-  text-overflow: ellipsis;
+  width: 20rem;
   overflow-x: hidden;
   color: var(--color-text-local) !important;
 }
@@ -3679,12 +3634,12 @@ button.open-theme-editor-button:hover {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  margin: 0rem 3rem 1rem 3rem;
+  margin-bottom: 1rem;
 }
 .sharing-image-container {
   border-radius: 1rem;
   width: 100%;
-  height: 18rem;
+  height: 10rem;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -3714,7 +3669,7 @@ button.open-theme-editor-button:hover {
   justify-content: space-evenly;
 }
 .sharing-color-previews .color-preview-bubble {
-  width: 3rem;
+  width: 2.5rem;
   cursor: default !important;
 }
 
@@ -4592,8 +4547,6 @@ ul.smsc-column-nav {
   0% {
     transform: translateY(-10vh);
   }
-  10% {
-  }
   100% {
     transform: translateY(111vh);
   }
@@ -5340,10 +5293,7 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   border: var(--border-size) solid var(--color-base03);
   position: absolute;
   z-index: 20;
-  box-shadow:
-    0px 0px 150px var(--color-shadow),
-    0px 0px 150px var(--color-shadow),
-    0px 0px 150px var(--color-shadow);
+  box-shadow: 0px 0px 150px black;
   border-radius: 2rem;
   width: 90%;
   height: 85%;
@@ -7225,11 +7175,9 @@ button.split-button__dropdown.js-split-button-dropdown.btn.btn--dropdown.js-btn.
 /* src/styles/fixes/navigation.css */
 .smsc-topnav .topnav__badge {
   background-color: var(--color-text) !important;
-  color: var(--color-base01) !important;
-  border: transparent solid var(--color-base03) !important;
-  min-width: 16px !important;
-  min-height: 16px !important;
-  max-height: 16px !important;
+  color: var(--color-base02) !important;
+  border: 2px solid var(--color-base03) !important;
+  max-height: 18.6px !important;
 }
 .topnav__menu-arrow {
   display: none !important;
@@ -7419,19 +7367,10 @@ input::placeholder {
   background-color: var(--color-base02) !important;
   font-weight: 600 !important;
 }
-.blueprint .bp-c-combo-primary--300,
-.blueprint .bp-c-combo-hover-primary--300 {
-  border: 2px solid !important;
-  border-radius: 0.75rem !important;
-}
-.blueprint .bp-c-combo-primary--300,
-.blueprint .bp-c-combo-hover-primary--300,
 .btn.btn--primary {
   border-color: var(--color-accent) !important;
   background-color: var(--color-base02) !important;
 }
-.blueprint .bp-c-combo-primary--300:hover,
-.blueprint .bp-c-combo-hover-primary--300:hover,
 .btn.btn--primary:hover {
   border-color: var(--color-accent) !important;
   background-color: var(--color-base03) !important;
@@ -7462,7 +7401,7 @@ input::placeholder {
     border-radius 0.3s;
 }
 .topnav__menu--shortcuts > .topnav__menuitem {
-  margin-right: 7x !important;
+  margin-right: 7px !important;
 }
 li {
   background: transparent !important;
@@ -7562,8 +7501,6 @@ td[bgcolor*="#"] {
   top: 0px !important;
   margin-top: 37px !important;
   height: 100% !important;
-  max-height: calc(100vh - 100px) !important;
-  overflow-y: scroll !important;
   border: 2px solid var(--color-base02) !important;
   border-radius: 1.5rem !important;
   padding: 1rem !important;
@@ -7609,10 +7546,6 @@ td[bgcolor*="#"] {
 .modern-ui .smsc-topnav .topnav .favourites-container,
 .smsc-topnav .topnav .favourites-container {
   gap: 0.5rem !important;
-}
-.classMatesContainer.show {
-  max-height: calc(100vh - 50px) !important;
-  overflow-y: scroll !important;
 }
 
 /* src/styles/fixes/notification.css */

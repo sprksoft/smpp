@@ -1,0 +1,70 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "files": {
+    "includes": ["src/**/*"]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 100,
+    "lineEnding": "lf"
+  },
+  "javascript": {
+    "formatter": {
+      "arrowParentheses": "always",
+      "semicolons": "always",
+      "trailingCommas": "all",
+      "quoteStyle": "double"
+    }
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "style": {
+        "useConst": "error",
+        "noParameterAssign": "off",
+        "useDefaultSwitchClause": "off",
+        "useForOf": "off",
+        "useThrowOnlyError": "off",
+        "noNestedTernary": "off"
+      },
+      "complexity": {
+        "noExcessiveCognitiveComplexity": "off",
+        "noForEach": "off",
+        "useLiteralKeys": "off"
+      },
+      "performance": {
+        "useTopLevelRegex": "off"
+      },
+      "suspicious": {
+        "noDocumentCookie": "off",
+        "noExplicitAny": "off",
+        "noImplicitAnyLet": "off",
+        "noShorthandPropertyOverrides": "off",
+        "noEvolvingTypes": "off",
+        "noBitwiseOperators": "off",
+        "useAwait": "off",
+        "noEmptyBlockStatements": "off",
+        "noAssignInExpressions": "off"
+      },
+      "correctness": {
+        "noUnusedVariables": "warn",
+        "noUndeclaredVariables": "off"
+      }
+    }
+  },
+  "overrides": [
+    {
+      "includes": ["src/styles/**/*.css"],
+      "formatter": {
+        "enabled": false
+      },
+      "linter": {
+        "enabled": false
+      }
+    }
+  ],
+  "extends": ["ultracite/biome/core"]
+}

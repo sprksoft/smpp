@@ -1,39 +1,31 @@
-import { apply } from "../main.js";
-import { getImageURL, ImageSelector } from "../modules/images.js";
-import {
-  brokenHeartSvg,
-  performanceModeSvg,
-  settingsIconSvg,
-} from "../../fixes-utils/svgs.js";
-import {
-  openSettingsWindow,
-  settingsWindow,
-  type Settings,
-} from "./main-settings.js";
 import { browser, delay, getExtensionImage } from "../../common/utils.js";
+import { brokenHeartSvg, performanceModeSvg, settingsIconSvg } from "../../fixes-utils/svgs.js";
+import { isValidImage } from "../../fixes-utils/utils.js";
 import {
   currentThemeName,
   getTheme,
-  updateTheme,
   type Theme,
   type Themes,
+  updateTheme,
 } from "../appearance/themes.js";
-import { isValidImage } from "../../fixes-utils/utils.js";
+import { apply } from "../main.js";
+import { getImageURL, ImageSelector } from "../modules/images.js";
+import { openSettingsWindow, type Settings, settingsWindow } from "./main-settings.js";
 
 class NoThemesOption {
   element = document.createElement("div");
   createText() {
-    let text = document.createElement("div");
+    const text = document.createElement("div");
     text.classList.add("compact-theme-option-text");
     text.innerHTML = brokenHeartSvg;
-    let span = document.createElement("span");
+    const span = document.createElement("span");
     span.innerText = "No themes";
     text.appendChild(span);
     return text;
   }
 
   createImageContainer() {
-    let imageContainer = document.createElement("div");
+    const imageContainer = document.createElement("div");
     imageContainer.classList.add("compact-theme-option-image-container");
     return imageContainer;
   }
@@ -57,9 +49,9 @@ class CompactThemeOption {
     this.currentTheme = theme;
   }
   createText() {
-    let text = document.createElement("div");
+    const text = document.createElement("div");
     text.classList.add("compact-theme-option-text");
-    let span = document.createElement("span");
+    const span = document.createElement("span");
     span.innerText = this.currentTheme.displayName;
     text.appendChild(span);
     return text;
@@ -83,22 +75,22 @@ class CompactThemeOption {
   }
 
   async updateImage(forceReload = false) {
-    if (this.name !== currentThemeName && !forceReload) return;
+    if (this.name !== currentThemeName && !forceReload) {
+      return;
+    }
 
     const imageURL = await getImageURL(
       this.name,
       async () => {
-        return await getExtensionImage(
-          "theme-backgrounds/compressed/" + this.name + ".jpg"
-        );
+        return await getExtensionImage(`theme-backgrounds/compressed/${this.name}.jpg`);
       },
-      true
+      true,
     );
 
-    const container = this.element.querySelector(
-      ".compact-theme-option-image-container"
-    );
-    if (!container) return;
+    const container = this.element.querySelector(".compact-theme-option-image-container");
+    if (!container) {
+      return;
+    }
 
     if (!(await isValidImage(imageURL.url))) {
       container.classList.add("no-image");
@@ -123,7 +115,7 @@ class CompactThemeOption {
     Object.keys(this.currentTheme.cssProperties).forEach((key) => {
       this.element.style.setProperty(
         `${key}-local`,
-        this.currentTheme.cssProperties[key] as string
+        this.currentTheme.cssProperties[key] as string,
       );
     });
   }
@@ -137,9 +129,7 @@ class CompactThemeOption {
   async onClick() {}
 
   async updateSelection() {
-    const container = this.element.querySelector(
-      ".compact-theme-option-image-container"
-    );
+    const container = this.element.querySelector(".compact-theme-option-image-container");
 
     if (this.name === currentThemeName) {
       this.element.classList.add("is-selected");
@@ -169,12 +159,12 @@ class CompactThemeSelector {
   element = document.createElement("div");
   input = document.createElement("div");
   selector = document.createElement("div");
-  selectorIsOpen: boolean = false;
+  selectorIsOpen = false;
   themeOptions: CompactThemeOption[] = [];
   noThemesOption = new NoThemesOption();
 
   async createThemeOption(name: string, theme: Theme) {
-    let option = new CompactThemeOption(name, theme);
+    const option = new CompactThemeOption(name, theme);
     option.onClick = async () => {
       this.updateInput();
       if (settingsWindow) {
@@ -197,48 +187,51 @@ class CompactThemeSelector {
     if (this.themeOptions.length === 0) {
       const noThemesElement = this.noThemesOption.render();
       this.selector.appendChild(noThemesElement);
-      this.selector.style.height = this.calculateHeight(1) + "px";
+      this.selector.style.height = `${this.calculateHeight(1)}px`;
       return;
     }
 
     for (let i = 1; i <= this.themeOptions.length; i++) {
       const option = this.themeOptions[i - 1];
-      if (!option) break;
+      if (!option) {
+        break;
+      }
       option.render();
-      this.selector.style.height = this.calculateHeight(i) + "px";
+      this.selector.style.height = `${this.calculateHeight(i)}px`;
       this.selector.appendChild(option.element);
 
-      if (document.body.classList.contains("enableAnimations"))
+      if (document.body.classList.contains("enableAnimations")) {
         await delay(200 / this.themeOptions.length);
+      }
     }
   }
 
   async updateThemeOptions() {
-    let themes = (await browser.runtime.sendMessage({
+    const themes = (await browser.runtime.sendMessage({
       action: "getThemes",
       categories: ["quickSettings"],
       includeHidden: false,
     })) as Themes;
 
-    let themeOptionNames = this.themeOptions.map((option) => {
+    const themeOptionNames = this.themeOptions.map((option) => {
       return option.name;
     });
 
-    let themeNames = Object.keys(themes);
+    const themeNames = Object.keys(themes);
 
-    let missingThemeOptionNames = themeNames.filter((name: string) => {
+    const missingThemeOptionNames = themeNames.filter((name: string) => {
       return !themeOptionNames.includes(name);
     });
     missingThemeOptionNames.forEach(async (name) => {
       if (!themes[name]) {
         return;
       }
-      let option = await this.createThemeOption(name, themes[name]);
+      const option = await this.createThemeOption(name, themes[name]);
       option.render();
       this.selector.appendChild(option.element);
     });
 
-    let extraThemeOptionNames = themeOptionNames.filter((name: string) => {
+    const extraThemeOptionNames = themeOptionNames.filter((name: string) => {
       return !themeNames.includes(name);
     });
 
@@ -263,9 +256,9 @@ class CompactThemeSelector {
     this.updateInput();
   }
   async updateInput() {
-    let currentOption = new CompactThemeOption(
+    const currentOption = new CompactThemeOption(
       currentThemeName,
-      await getTheme(currentThemeName)
+      await getTheme(currentThemeName),
     );
     currentOption.onClick = async () => {
       this.selectorIsOpen = !this.selectorIsOpen;
@@ -300,7 +293,7 @@ class CompactThemeSelector {
 
   async render() {
     this.element.classList.add("compact-theme-selector");
-    let themes = (await browser.runtime.sendMessage({
+    const themes = (await browser.runtime.sendMessage({
       action: "getThemes",
       categories: ["quickSettings"],
       includeHidden: false,
@@ -314,7 +307,9 @@ class CompactThemeSelector {
 
     document.addEventListener("click", (e: MouseEvent) => {
       if (e.target instanceof HTMLElement) {
-        if (e.target == this.input || this.input.contains(e.target)) return;
+        if (e.target === this.input || this.input.contains(e.target)) {
+          return;
+        }
         this.selectorIsOpen = false;
         this.updateSelectorStatus();
       }
@@ -331,10 +326,7 @@ class CompactThemeSelector {
 const compactThemeSelector = new CompactThemeSelector();
 
 let quickSettingsWindowIsHidden = true;
-let quickSettingsBackgroundImageSelector = new ImageSelector(
-  "backgroundImage",
-  true
-);
+const quickSettingsBackgroundImageSelector = new ImageSelector("backgroundImage", true);
 
 async function storeQuickSettings() {
   const oldData = (await browser.runtime.sendMessage({
@@ -343,13 +335,13 @@ async function storeQuickSettings() {
 
   const data = structuredClone(oldData);
   const backgroundBlurAmountSlider = document.getElementById(
-    "background-blur-amount-slider"
+    "background-blur-amount-slider",
   ) as HTMLInputElement;
   if (backgroundBlurAmountSlider) {
     data.appearance.background.blur = Number(backgroundBlurAmountSlider.value);
   }
   const performanceModeToggle = document.getElementById(
-    "performance-mode-toggle"
+    "performance-mode-toggle",
   ) as HTMLInputElement;
   if (performanceModeToggle) {
     data.other.performanceMode = performanceModeToggle.checked;
@@ -372,13 +364,13 @@ export async function loadQuickSettings() {
   quickSettingsBackgroundImageSelector.id = data.appearance.theme;
   quickSettingsBackgroundImageSelector.loadImageData();
   const backgroundBlurAmountSlider = document.getElementById(
-    "background-blur-amount-slider"
+    "background-blur-amount-slider",
   ) as HTMLInputElement;
   if (backgroundBlurAmountSlider) {
     backgroundBlurAmountSlider.value = data.appearance.background.blur;
   }
   const performanceModeToggle = document.getElementById(
-    "performance-mode-toggle"
+    "performance-mode-toggle",
   ) as HTMLInputElement;
   if (performanceModeToggle) {
     performanceModeToggle.checked = data.other.performanceMode;
@@ -396,7 +388,7 @@ export async function loadQuickSettings() {
 }
 
 function toggleQuickSettings() {
-  let win = document.getElementById("quickSettings");
+  const win = document.getElementById("quickSettings");
   if (win && !quickSettingsWindowIsHidden) {
     closeQuickSettings();
   } else {
@@ -405,15 +397,17 @@ function toggleQuickSettings() {
 }
 
 async function openQuickSettings() {
-  let win = document.getElementById("quickSettings");
-  if (!win) return;
+  const win = document.getElementById("quickSettings");
+  if (!win) {
+    return;
+  }
   win.classList.remove("qs-hidden");
   await loadQuickSettings();
   quickSettingsWindowIsHidden = false;
 }
 
 function closeQuickSettings() {
-  let win = document.getElementById("quickSettings");
+  const win = document.getElementById("quickSettings");
   if (win) {
     win.classList.add("qs-hidden");
   }
@@ -467,9 +461,7 @@ async function createQuickSettingsHTML(parent: HTMLDivElement) {
   blurSliderContainer.appendChild(blurSlider);
   blurSliderContainer.appendChild(backgroundBlurLabel);
 
-  wallpaperContainer.appendChild(
-    quickSettingsBackgroundImageSelector.fullContainer
-  );
+  wallpaperContainer.appendChild(quickSettingsBackgroundImageSelector.fullContainer);
   wallpaperContainer.appendChild(blurSliderContainer);
 
   wallpaperTopContainer.appendChild(wallpaperHeading);
@@ -481,7 +473,7 @@ async function createQuickSettingsHTML(parent: HTMLDivElement) {
   extraSettingsButton.innerHTML += settingsIconSvg;
   extraSettingsButton.addEventListener("click", (e) => openSettingsWindow(e));
 
-  let themeContainer = document.createElement("div");
+  const themeContainer = document.createElement("div");
   themeContainer.classList.add("quick-settings-theme-container");
   await compactThemeSelector.render();
   themeContainer.appendChild(themeHeading);
@@ -524,10 +516,14 @@ export async function createQuickSettings() {
   }
 
   document.addEventListener("click", (e: MouseEvent) => {
-    if (quickSettingsWindowIsHidden) return;
+    if (quickSettingsWindowIsHidden) {
+      return;
+    }
 
     const target = e.target as HTMLElement | null;
-    if (!target) return;
+    if (!target) {
+      return;
+    }
 
     if (target.id === "extraSettingsButton") {
       closeQuickSettings();
@@ -549,12 +545,12 @@ export async function createQuickSettings() {
 }
 
 export function createQuickSettingsButton() {
-  let quickSettingsButtonWrapper = document.createElement("div");
+  const quickSettingsButtonWrapper = document.createElement("div");
   quickSettingsButtonWrapper.id = "quickSettingsButtonWrapper";
   quickSettingsButtonWrapper.classList.add("smpp-button");
   quickSettingsButtonWrapper.classList.add("topnav__btn-wrapper");
 
-  let quickSettingsButton = document.createElement("button");
+  const quickSettingsButton = document.createElement("button");
   quickSettingsButton.id = "quickSettingsButton";
   quickSettingsButton.classList.add("topnav__btn");
   quickSettingsButton.innerText = "Settings";

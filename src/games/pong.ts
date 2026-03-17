@@ -1,8 +1,8 @@
 // @ts-nocheck
-import { GameBase } from "./games.js";
-import { registerWidget } from "../widgets/widgets.js";
+
 import { getThemeVar } from "../main-features/appearance/themes.js";
-import { GameOption } from "./games.js";
+import { registerWidget } from "../widgets/widgets.js";
+import { GameBase, GameOption } from "./games.js";
 
 const PONG_BALL_RADIUS = 4;
 const PONG_PADDLE_WIDTH = 5;
@@ -35,13 +35,8 @@ class PongWidget extends GameBase {
     this.ball = {
       x: w / 2,
       y: h / 2,
-      dx:
-        PONG_BALL_SPEED *
-        this.getOpt("speed") *
-        0.01 *
-        (Math.random() > 0.5 ? 1 : -1),
-      dy:
-        PONG_BALL_SPEED * this.getOpt("speed") * 0.01 * (Math.random() * 2 - 1),
+      dx: PONG_BALL_SPEED * this.getOpt("speed") * 0.01 * (Math.random() > 0.5 ? 1 : -1),
+      dy: PONG_BALL_SPEED * this.getOpt("speed") * 0.01 * (Math.random() * 2 - 1),
     };
 
     this.leftY = (h - PONG_PADDLE_HEIGHT) / 2;
@@ -67,7 +62,9 @@ class PongWidget extends GameBase {
   }
 
   onGameDraw(ctx, dt) {
-    if (!this.ball) return;
+    if (!this.ball) {
+      return;
+    }
 
     const w = this.canvas.width;
     const h = this.canvas.height;
@@ -82,8 +79,12 @@ class PongWidget extends GameBase {
     const speed = PONG_PADDLE_SPEED * this.getOpt("speed") * 0.01;
     const paddleDelta = speed * dt;
 
-    if (this.leftUp) this.leftY -= paddleDelta;
-    if (this.leftDown) this.leftY += paddleDelta;
+    if (this.leftUp) {
+      this.leftY -= paddleDelta;
+    }
+    if (this.leftDown) {
+      this.leftY += paddleDelta;
+    }
     this.leftY = Math.max(0, Math.min(h - PONG_PADDLE_HEIGHT, this.leftY));
 
     const aiCenter = this.rightY + PONG_PADDLE_HEIGHT / 2;
@@ -96,7 +97,7 @@ class PongWidget extends GameBase {
     }
     this.rightY = Math.max(0, Math.min(h - PONG_PADDLE_HEIGHT, this.rightY));
 
-    let b = this.ball;
+    const b = this.ball;
     b.x += b.dx * dt;
     b.y += b.dy * dt;
 
@@ -153,21 +154,14 @@ class PongWidget extends GameBase {
     ctx.fill();
 
     ctx.fillStyle = colorAccent;
-    this.drawRoundedRect(
-      ctx,
-      0,
-      this.leftY,
-      PONG_PADDLE_WIDTH,
-      PONG_PADDLE_HEIGHT,
-      3
-    );
+    this.drawRoundedRect(ctx, 0, this.leftY, PONG_PADDLE_WIDTH, PONG_PADDLE_HEIGHT, 3);
     this.drawRoundedRect(
       ctx,
       w - PONG_PADDLE_WIDTH,
       this.rightY,
       PONG_PADDLE_WIDTH,
       PONG_PADDLE_HEIGHT,
-      3
+      3,
     );
 
     ctx.strokeStyle = colorText;
@@ -180,13 +174,21 @@ class PongWidget extends GameBase {
   }
 
   onKeyDown(e) {
-    if (e.code === "ArrowUp") this.leftUp = true;
-    if (e.code === "ArrowDown") this.leftDown = true;
+    if (e.code === "ArrowUp") {
+      this.leftUp = true;
+    }
+    if (e.code === "ArrowDown") {
+      this.leftDown = true;
+    }
   }
 
   onKeyUp(e) {
-    if (e.code === "ArrowUp") this.leftUp = false;
-    if (e.code === "ArrowDown") this.leftDown = false;
+    if (e.code === "ArrowUp") {
+      this.leftUp = false;
+    }
+    if (e.code === "ArrowDown") {
+      this.leftDown = false;
+    }
   }
 }
 
