@@ -1,10 +1,9 @@
 #!/bin/bash
 set -e
-HELP="Build the extension for firefox"
+HELP="Build the extension and source code zips for firefox"
 
 OUTDIR="smpp"
 OUTFILE="$OUTDIR/smpp.xpi"
-
 
 cd $(dirname $0)
 
@@ -22,11 +21,3 @@ python build.py
 
 echo "=== Generating review zip ==="
 ./ff_gen_review_zip.sh
-
-echo "=== Packing Extension ==="
-cd $OUTDIR
-zip -r smpp.xpi .
-
-
-echo "=== Done ==="
-echo "Result written at: $OUTFILE"
