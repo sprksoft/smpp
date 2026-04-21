@@ -1757,6 +1757,7 @@
   imageCompression.getDataUrlFromFile = getDataUrlFromFile, imageCompression.getFilefromDataUrl = getFilefromDataUrl, imageCompression.loadImage = loadImage, imageCompression.drawImageInCanvas = drawImageInCanvas, imageCompression.drawFileInCanvas = drawFileInCanvas, imageCompression.canvasToFile = canvasToFile, imageCompression.getExifOrientation = getExifOrientation, imageCompression.handleMaxWidthOrHeight = handleMaxWidthOrHeight, imageCompression.followExifOrientation = followExifOrientation, imageCompression.cleanupCanvasMemory = cleanupCanvasMemory, imageCompression.isAutoOrientationInBrowser = isAutoOrientationInBrowser, imageCompression.approximateBelowMaximumCanvasSizeOfBrowser = approximateBelowMaximumCanvasSizeOfBrowser, imageCompression.copyExifWithoutOrientation = copyExifWithoutOrientation, imageCompression.getBrowserName = getBrowserName, imageCompression.version = "2.0.2";
 
   // src/common/utils.ts
+  var DEBUG = false;
   var browser;
   if (browser == void 0) {
     browser = chrome;
@@ -1798,6 +1799,11 @@
       }
     }
     return object;
+  }
+  function sendDebug(...messages) {
+    if (DEBUG) {
+      console.log(...messages);
+    }
   }
   var FNV_PRIME = 0x0100000001b3n;
   var FNV_OFFSET = 0xcbf29ce484222325n;
@@ -2438,7 +2444,7 @@
       });
       return results?.[0]?.result ?? { ok: false, humanError: "Spotify returned no data." };
     } catch (e2) {
-      console.error("[smpp][spotify] executeScript failed", e2);
+      sendDebug("[smpp][spotify] executeScript failed", e2);
       return {
         ok: false,
         humanError: "Couldn't run the Spotify controller. Make sure the Spotify tab is open on open.spotify.com."

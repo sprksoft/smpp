@@ -13687,7 +13687,7 @@ ${code}`;
           playPauseBtn.disabled = false;
           applyState(resp);
         } catch (e5) {
-          console.error("[smpp][spotify-widget] refresh failed", e5);
+          sendDebug("[smpp][spotify-widget] refresh failed", e5);
           setDisconnected("Spotify not reachable");
         }
       };
@@ -13725,7 +13725,7 @@ ${code}`;
           }
           setTimeout(() => this.#els?.refresh?.(), 300);
         } catch (e5) {
-          console.error("[smpp][spotify-widget] command failed", e5);
+          sendDebug("[smpp][spotify-widget] command failed", e5);
           setDisconnected("Spotify not reachable");
         }
       };

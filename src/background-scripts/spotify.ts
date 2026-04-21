@@ -1,4 +1,4 @@
-import { browser } from "../common/utils.js";
+import { browser, sendDebug } from "../common/utils.js";
 
 type SpotifyCommand = "next" | "previous" | "playPause";
 
@@ -154,7 +154,7 @@ async function runOnSpotifyTab(command: SpotifyCommand | null) {
     });
     return results?.[0]?.result ?? { ok: false, humanError: "Spotify returned no data." };
   } catch (e) {
-    console.error("[smpp][spotify] executeScript failed", e);
+    sendDebug("[smpp][spotify] executeScript failed", e);
     return {
       ok: false,
       humanError:
@@ -182,4 +182,3 @@ export async function handleSpotifyMessage(message: any, sendResponse: (resp: an
 
   return false;
 }
-

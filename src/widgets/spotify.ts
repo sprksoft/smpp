@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { browser } from "../common/utils.js";
+import { browser, sendDebug } from "../common/utils.js";
 import { WidgetBase, registerWidget } from "./widgets.js";
 
 const spotifyLogoSvg = `
@@ -271,7 +271,7 @@ class SpotifyWidget extends WidgetBase {
         playPauseBtn.disabled = false;
         applyState(resp);
       } catch (e) {
-        console.error("[smpp][spotify-widget] refresh failed", e);
+        sendDebug("[smpp][spotify-widget] refresh failed", e);
         setDisconnected("Spotify not reachable");
       }
     };
@@ -313,7 +313,7 @@ class SpotifyWidget extends WidgetBase {
         // One extra quick resync, because Spotify UI sometimes updates slightly after the click.
         setTimeout(() => this.#els?.refresh?.(), 300);
       } catch (e) {
-        console.error("[smpp][spotify-widget] command failed", e);
+        sendDebug("[smpp][spotify-widget] command failed", e);
         setDisconnected("Spotify not reachable");
       }
     };
