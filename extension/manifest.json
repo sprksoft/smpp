@@ -50,5 +50,6 @@
     "scripts": ["background-scripts/index.js"],
     "type": "module"
   },
-  "permissions": ["storage", "unlimitedStorage"]
+  "permissions": ["storage", "unlimitedStorage", "tabs", "scripting"],
+  "host_permissions": ["https://open.spotify.com/*"]
 }

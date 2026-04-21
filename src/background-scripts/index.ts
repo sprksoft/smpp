@@ -27,6 +27,7 @@ import {
   getSharedTheme,
   purgeThemeShareCache,
 } from "./themes.js";
+import { handleSpotifyMessage } from "./spotify.js";
 
 browser.runtime.onMessage.addListener(
   (message: any, _sender: any, sendResponse: (resp: any) => void) => {
@@ -226,6 +227,11 @@ async function handleMessage(message: any, sendResponse: (resp: any) => void) {
       await browser.storage.local.set(data);
       sendResponse({ success: true });
     }
+
+    if (await handleSpotifyMessage(message, sendResponse)) {
+      return;
+    }
+
     // Migration
     if (message.action === "getDataVersion") {
       let dataVersion = await browser.storage.local.get("dataVersion");

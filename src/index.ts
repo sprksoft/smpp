@@ -11,6 +11,7 @@ import "./styles/smpp-styles/plant.css";
 import "./styles/smpp-styles/clock.css";
 import "./styles/smpp-styles/calendar.css";
 import "./styles/smpp-styles/widgets.css";
+import "./styles/smpp-styles/spotify-widget.css";
 import "./styles/smpp-styles/tutorial-widget.css";
 import "./styles/smpp-styles/settings.css";
 import "./styles/smpp-styles/assignments.css";

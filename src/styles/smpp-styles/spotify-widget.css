@@ -1,0 +1,232 @@
+.smpp-spotify-widget {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  color: var(--color-text);
+}
+
+.smpp-spotify-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.smpp-spotify-header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.smpp-spotify-title {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.smpp-spotify-icon {
+  display: grid;
+  place-items: center;
+}
+
+.smpp-spotify-logo {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.smpp-spotify-icon-small {
+  width: 28px;
+  height: 28px;
+}
+
+.smpp-spotify-icon-large {
+  width: 128px;
+  height: 128px;
+  margin-bottom: 0.5rem;
+  filter: drop-shadow(0px 2px 10px var(--color-shadow));
+}
+
+.smpp-spotify-body {
+  display: grid;
+  grid-template-columns: 104px 1fr;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.smpp-spotify-widget.smpp-spotify-disconnected .smpp-spotify-body {
+  grid-template-columns: 1fr;
+}
+
+.smpp-spotify-widget.smpp-spotify-disconnected .smpp-spotify-cover {
+  display: none;
+}
+
+.smpp-spotify-widget.smpp-spotify-disconnected .smpp-spotify-time {
+  display: none;
+}
+
+.smpp-spotify-widget.smpp-spotify-disconnected .smpp-spotify-progress-wrap {
+  display: none;
+}
+
+.smpp-spotify-cover {
+  width: 104px;
+  height: 104px;
+  border-radius: 1.25rem;
+  object-fit: cover;
+  background: var(--color-base02);
+  visibility: hidden;
+}
+
+.smpp-spotify-meta {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.smpp-spotify-track {
+  font-weight: 650;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.smpp-spotify-widget.smpp-spotify-disconnected .smpp-spotify-track {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+}
+
+.smpp-spotify-artist,
+.smpp-spotify-time {
+  font-size: 0.9rem;
+  color: var(--color-text-subdued, rgba(255, 255, 255, 0.7));
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.smpp-spotify-help {
+  display: none;
+  margin-top: 0.25rem;
+  padding: 0.65rem 0.8rem;
+  border-radius: 1rem;
+  border: 2px solid var(--color-base02);
+  background: var(--color-base01);
+  color: var(--color-text-subdued, rgba(255, 255, 255, 0.7));
+  font-size: 0.9rem;
+}
+
+.smpp-spotify-help.show {
+  display: block;
+}
+
+.smpp-spotify-help-title {
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 0.25rem;
+}
+
+.smpp-spotify-help-list {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.smpp-spotify-help-mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+}
+
+.smpp-spotify-progress-wrap {
+  margin-top: 0.35rem;
+}
+
+.smpp-spotify-progress {
+  height: 10px;
+  border-radius: 9999px;
+  background: var(--color-base02);
+  border: 2px solid var(--color-base03);
+  overflow: hidden;
+}
+
+.smpp-spotify-progress-fill {
+  height: 100%;
+  width: 100%;
+  background: var(--color-accent);
+  border-radius: 9999px;
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+.smpp-spotify-progress.smpp-spotify-progress-unknown {
+  opacity: 0.5;
+}
+
+.smpp-spotify-controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.smpp-spotify-btn {
+  padding: 0.45rem 0.6rem;
+  border-radius: 0.9rem;
+  border: 3px solid var(--color-base03);
+  background: var(--color-base02);
+  color: var(--color-text);
+  cursor: pointer;
+  font-size: 1.1rem;
+  line-height: 1;
+  box-shadow: 0px 2px 10px 0px var(--color-shadow);
+}
+
+.smpp-spotify-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.enableAnimations .smpp-spotify-btn {
+  transition:
+    transform 0.15s ease,
+    filter 0.15s ease,
+    border-color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.smpp-spotify-btn:hover {
+  filter: brightness(115%);
+  border-color: var(--color-base04);
+}
+
+.smpp-spotify-btn:active {
+  scale: 0.96;
+}
+
+.smpp-spotify-btn-primary {
+  background: var(--color-accent);
+  border-color: var(--color-base03);
+  color: var(--color-black);
+}
+
+.smpp-spotify-open {
+  grid-column: 1 / -1;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.9rem;
+  border: 3px dashed var(--color-base03);
+  background: var(--color-base01);
+  color: var(--color-text);
+  cursor: pointer;
+  box-shadow: 0px 2px 10px 0px var(--color-shadow);
+}
+
+.smpp-spotify-preview {
+  gap: 0.25rem;
+}
+
+.smpp-spotify-preview-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-base05);
+}

@@ -2329,6 +2329,140 @@
     }
   }
 
+  // src/background-scripts/spotify.ts
+  async function spotifyController(command) {
+    const delay = (ms) => new Promise((r2) => setTimeout(r2, ms));
+    const nowPlayingRoot = () => document.querySelector('aside[data-testid="now-playing-bar"]');
+    const getButton = (testId2) => document.querySelector(`button[data-testid="${testId2}"]`);
+    const getText = (testId2) => {
+      const el = document.querySelector(`[data-testid="${testId2}"]`);
+      const t2 = el?.innerText?.trim();
+      return t2 ? t2 : null;
+    };
+    const inferIsPlayingFromLabel = (label) => {
+      if (!label) return null;
+      const l2 = label.toLowerCase();
+      if (l2.includes("pause") || l2.includes("pauze") || l2.includes("pausa")) {
+        return true;
+      }
+      if (l2.includes("play") || l2.includes("afspelen") || l2.includes("lecture")) {
+        return false;
+      }
+      return null;
+    };
+    const getState = () => {
+      const root = nowPlayingRoot();
+      if (!root) {
+        return {
+          ok: false,
+          humanError: "Spotify player not found on this page."
+        };
+      }
+      const title = (root.querySelector('[data-testid="context-item-info-title"]')?.textContent || "").trim() || null;
+      const artist = (root.querySelector('[data-testid="context-item-info-subtitles"]')?.textContent || "").trim() || null;
+      const cover = root.querySelector(
+        'img[data-testid="cover-art-image"]'
+      )?.src || null;
+      const nextBtn = getButton("control-button-skip-forward");
+      const prevBtn = getButton("control-button-skip-back");
+      const playPauseBtn = getButton("control-button-playpause");
+      const playPauseLabel = playPauseBtn?.getAttribute("aria-label") || null;
+      return {
+        ok: true,
+        title,
+        artist,
+        cover,
+        canNext: nextBtn ? !nextBtn.disabled : null,
+        canPrevious: prevBtn ? !prevBtn.disabled : null,
+        playPauseLabel,
+        isPlaying: inferIsPlayingFromLabel(playPauseLabel),
+        positionText: getText("playback-position"),
+        durationText: getText("playback-duration")
+      };
+    };
+    if (!command) {
+      return getState();
+    }
+    const before = getState();
+    if (!before || before.ok === false) {
+      return before;
+    }
+    const testId = command === "next" ? "control-button-skip-forward" : command === "previous" ? "control-button-skip-back" : "control-button-playpause";
+    const button = getButton(testId);
+    if (!button) {
+      return {
+        ok: false,
+        humanError: `Spotify control button not found (${command}).`
+      };
+    }
+    if (button.disabled) {
+      return {
+        ok: false,
+        humanError: `Spotify control button is disabled (${command}).`
+      };
+    }
+    button.click();
+    const changed = (after) => {
+      if (!after || after.ok === false) return false;
+      if (command === "playPause") {
+        if (before.isPlaying !== null && after.isPlaying !== null) {
+          return after.isPlaying !== before.isPlaying;
+        }
+        return after.playPauseLabel !== before.playPauseLabel;
+      }
+      return after.title !== before.title || after.cover !== before.cover;
+    };
+    for (let i2 = 0; i2 < 10; i2++) {
+      await delay(150);
+      const after = getState();
+      if (changed(after)) {
+        return after;
+      }
+    }
+    return getState();
+  }
+  async function runOnSpotifyTab(command) {
+    const tabs = await browser.tabs.query({ url: ["*://open.spotify.com/*"] });
+    if (!tabs || tabs.length === 0) {
+      return {
+        ok: false,
+        humanError: "No Spotify tab found. Open https://open.spotify.com in another tab."
+      };
+    }
+    const targetTab = tabs.find((t2) => t2.audible) || tabs.find((t2) => t2.active) || tabs[0];
+    try {
+      const results = await browser.scripting.executeScript({
+        target: { tabId: targetTab.id },
+        func: spotifyController,
+        args: [command]
+      });
+      return results?.[0]?.result ?? { ok: false, humanError: "Spotify returned no data." };
+    } catch (e2) {
+      console.error("[smpp][spotify] executeScript failed", e2);
+      return {
+        ok: false,
+        humanError: "Couldn't run the Spotify controller. Make sure the Spotify tab is open on open.spotify.com."
+      };
+    }
+  }
+  async function handleSpotifyMessage(message, sendResponse) {
+    if (message.action === "spotifyGetState") {
+      const state = await runOnSpotifyTab(null);
+      sendResponse(state);
+      return true;
+    }
+    if (message.action === "spotifyCommand") {
+      const state = await runOnSpotifyTab(message.command);
+      if (!state || state.ok === false) {
+        sendResponse(state);
+        return true;
+      }
+      sendResponse({ ok: true, state });
+      return true;
+    }
+    return false;
+  }
+
   // src/background-scripts/index.ts
   browser.runtime.onMessage.addListener(
     (message, _sender, sendResponse) => {
@@ -2503,6 +2637,9 @@
         data["Game." + message.widget] = message.data;
         await browser.storage.local.set(data);
         sendResponse({ success: true });
+      }
+      if (await handleSpotifyMessage(message, sendResponse)) {
+        return;
       }
       if (message.action === "getDataVersion") {
         let dataVersion = await browser.storage.local.get("dataVersion");
