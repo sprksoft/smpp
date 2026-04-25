@@ -10,6 +10,75 @@ let quicks = [];
 let links = [];
 let vakken = [];
 let goto_items = [];
+let favoriteKeys = [];
+
+function normalizeQuick(quick) {
+  return {
+    name: quick.name.toLowerCase(),
+    url: quick.url,
+    favorite: quick.favorite ?? false,
+  };
+}
+
+function makeFavoriteKey(kind, value) {
+  return `${kind}:${value.toLowerCase()}`;
+}
+
+function isFavoriteKey(favoriteKey) {
+  return favoriteKeys.includes(favoriteKey);
+}
+
+async function loadFavoriteKeys() {
+  const loadedFavoriteKeys = await browser.runtime.sendMessage({
+    action: "getSetting",
+    name: "other.quickFavorites",
+  });
+  favoriteKeys = Array.isArray(loadedFavoriteKeys)
+    ? loadedFavoriteKeys.map((key) => String(key).toLowerCase())
+    : [];
+}
+
+async function saveFavoriteKeys() {
+  await browser.runtime.sendMessage({
+    action: "setSetting",
+    name: "other.quickFavorites",
+    data: favoriteKeys,
+  });
+}
+
+function setFavoriteKey(favoriteKey, nextFavorite) {
+  const normalizedKey = favoriteKey.toLowerCase();
+  const hasKey = favoriteKeys.includes(normalizedKey);
+
+  if (nextFavorite && !hasKey) {
+    favoriteKeys.push(normalizedKey);
+  }
+
+  if (!nextFavorite && hasKey) {
+    favoriteKeys = favoriteKeys.filter((key) => key != normalizedKey);
+  }
+
+  void saveFavoriteKeys();
+}
+
+function createQuickMenuItem(kind, value, meta, extra = {}) {
+  const favoriteKey = makeFavoriteKey(kind, value);
+  const favorite = isFavoriteKey(favoriteKey);
+  const extraFavoriteToggle = extra.onFavoriteToggle;
+  return {
+    ...extra,
+    value,
+    meta,
+    favorite,
+    favoriteKey,
+    onFavoriteToggle: (nextFavorite) => {
+      setFavoriteKey(favoriteKey, nextFavorite);
+      if (typeof extraFavoriteToggle == "function") {
+        extraFavoriteToggle(nextFavorite);
+      }
+    },
+  };
+}
 
 if (document.querySelector(".topnav")) {
   fetch_links();
@@ -19,16 +88,21 @@ if (document.querySelector(".topnav")) {
 
 function quick_cmd_list() {
   let cmd_list = [];
-  for (let i = 0; i < quicks.length; i++) {
-    cmd_list.push({ value: quicks[i].name, meta: "quick: " + quicks[i].url });
+  for (let quick of quicks) {
+    cmd_list.push(
+      createQuickMenuItem("quick", quick.name, "quick", {
+        url: quick.url,
+      })
+    );
   }
   return cmd_list;
 }
 
-function add_quick(name, url) {
-  let quick = { name: name.toLowerCase(), url: url };
+function add_quick(name, url, favorite = undefined) {
+  let quick = { name: name.toLowerCase(), url: url, favorite: favorite ?? false };
   for (let i = 0; i < quicks.length; i++) {
     if (quicks[i].name == name) {
+      quick.favorite = favorite ?? quicks[i].favorite ?? false;
       quicks[i] = quick;
       quick_save();
       return;
@@ -36,6 +110,15 @@ function add_quick(name, url) {
   }
   quicks.push(quick);
   quick_save();
+}
+function set_quick_favorite(name, favorite) {
+  for (let i = 0; i < quicks.length; i++) {
+    if (quicks[i].name == name) {
+      quicks[i].favorite = favorite;
+      quick_save();
+      return;
+    }
+  }
 }
 function remove_quick(name) {
   for (let i = 0; i < quicks.length; i++) {
@@ -48,13 +131,28 @@ function remove_quick(name) {
 }
 
 export async function quickLoad() {
-  const quicks = await browser.runtime.sendMessage({
+  await loadFavoriteKeys();
+  const loadedQuicks = await browser.runtime.sendMessage({
     action: "getSetting",
     name: "other.quicks",
   });
-  if (!quicks) {
+  if (!loadedQuicks) {
+    quicks = [];
     return [];
   }
+  quicks = loadedQuicks.map(normalizeQuick);
+  const migratedFavoriteKeys = quicks
+    .filter((quick) => quick.favorite)
+    .map((quick) => makeFavoriteKey("quick", quick.name));
+  const mergedFavoriteKeys = [...new Set([...favoriteKeys, ...migratedFavoriteKeys])];
+  if (mergedFavoriteKeys.length !== favoriteKeys.length) {
+    favoriteKeys = mergedFavoriteKeys;
+    await saveFavoriteKeys();
+  }
+  quicks = quicks.map((quick) => ({
+    ...quick,
+    favorite: isFavoriteKey(makeFavoriteKey("quick", quick.name)),
+  }));
   return quicks;
 }
 
@@ -71,7 +169,7 @@ function add_quick_interactive() {
   dmenu(
     cmd_list,
     function (name, shift) {
-      value_list = [];
+      let value_list = [];
       for (let i = 0; i < quicks.length; i++) {
         if (quicks[i].name == name) {
           value_list = [{ value: quicks[i].url }];
@@ -161,26 +259,39 @@ export function unbloat() {
 }
 
 export async function do_qm(opener = "") {
+  await loadFavoriteKeys();
   let cmd_list = quick_cmd_list()
-    .concat(goto_items)
-    .concat(vakken)
-    .concat(links)
+    .concat(
+      goto_items.map((item) =>
+        createQuickMenuItem("goto", item.value, item.meta, { url: item.url })
+      )
+    )
+    .concat(
+      vakken.map((item) =>
+        createQuickMenuItem("vak", item.value, item.meta, { url: item.url })
+      )
+    )
+    .concat(
+      links.map((item) =>
+        createQuickMenuItem("link", item.value, item.meta, { url: item.url })
+      )
+    )
     .concat([
-      "home",
-      "quick add",
-      "quick remove",
-      "unbloat",
-      "config",
-      "clearsettings",
-      "discord",
-      "dizzy",
-      "breakdmenu",
-      "glass",
-      "ridge",
-      "reset plant",
-      "remove current theme",
-      "posh text",
-      "funny text",
+      createQuickMenuItem("cmd", "home", "command"),
+      createQuickMenuItem("cmd", "quick add", "command"),
+      createQuickMenuItem("cmd", "quick remove", "command"),
+      createQuickMenuItem("cmd", "unbloat", "command"),
+      createQuickMenuItem("cmd", "config", "command"),
+      createQuickMenuItem("cmd", "clearsettings", "command"),
+      createQuickMenuItem("cmd", "discord", "command"),
+      createQuickMenuItem("cmd", "dizzy", "command"),
+      createQuickMenuItem("cmd", "breakdmenu", "command"),
+      createQuickMenuItem("cmd", "glass", "command"),
+      createQuickMenuItem("cmd", "ridge", "command"),
+      createQuickMenuItem("cmd", "reset plant", "command"),
+      createQuickMenuItem("cmd", "remove current theme", "command"),
+      createQuickMenuItem("cmd", "posh text", "command"),
+      createQuickMenuItem("cmd", "funny text", "command"),
     ]);
 
   if (dmenuConfig.toplevelConfig) {

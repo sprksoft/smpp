@@ -35,6 +35,7 @@
   },
   "other": {
     "quicks": "array",
+    "quickFavorites": "array",
     "performanceMode": "boolean",
     "splashText": "boolean",
     "discordButton": "boolean",

@@ -3,7 +3,7 @@ import { browser, getByPath } from "../../common/utils.js";
 import { dmenu } from "./dmenu.js";
 import { apply } from "../main.js";
 
-export type Quick = { name: string; url: URL };
+export type Quick = { name: string; url: string; favorite?: boolean };
 export type Quicks = Quick[];
 
 function gatherOptions(template, name) {

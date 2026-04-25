@@ -3162,6 +3162,9 @@ Is it scaring you off?`,
       if (row == void 0) {
         row = this.itemListEl.childNodes[this.selectedIndex];
       }
+      if (row?.dataset?.header == "true") {
+        return;
+      }
       let content = this.inputEl.value;
       if (row != void 0 && !row.classList.contains("hidden")) {
         content = row.dataset.content;
@@ -3216,21 +3219,45 @@ Is it scaring you off?`,
       this.selectedIndex = 0;
       let searchq = this.inputEl.value.trim();
       let items = [];
+      let itemIndex = 0;
       for (let node of this.itemListEl.childNodes) {
+        const isHeader = node.dataset.header == "true";
+        const isFavorite = node.dataset.favorite == "true";
+        if (isHeader) {
+          items.push({
+            score: Number.MAX_SAFE_INTEGER,
+            htmlNode: node,
+            header: true,
+            favorite: true,
+            index: itemIndex
+          });
+          itemIndex += 1;
+          continue;
+        }
         let score = this.#matchScore(node.dataset.content, searchq);
         if (score == 0 && searchq != "") {
           node.classList.add("hidden");
         } else {
           node.classList.remove("hidden");
         }
-        items.push({ score, htmlNode: node });
+        items.push({
+          score,
+          htmlNode: node,
+          favorite: isFavorite,
+          index: itemIndex
+        });
+        itemIndex += 1;
         if (dmenuConfig.itemScore) {
           node.getElementsByClassName("dmenu-score")[0].innerText = score;
         }
       }
       let sortedItems = items.sort(function(a5, b3) {
+        if (a5.header != b3.header) return a5.header ? -1 : 1;
+        if (a5.favorite != b3.favorite) return a5.favorite ? -1 : 1;
         if (a5.score < b3.score) return 1;
         if (a5.score > b3.score) return -1;
+        if (a5.index < b3.index) return -1;
+        if (a5.index > b3.index) return 1;
         return 0;
       });
       for (let i5 = 0; i5 < sortedItems.length; i5++) {
@@ -3284,19 +3311,47 @@ Is it scaring you off?`,
       }
       let row = document.createElement("div");
       row.classList.add("dmenu-row");
-      row.innerHTML = '<div class="dmenu-content"></div><div class="dmenu-meta"></div><div class="dmenu-score"></div>';
+      row.innerHTML = '<div class="dmenu-content"></div><div class="dmenu-meta"></div><div class="dmenu-score"></div><div class="dmenu-favorite"></div>';
       row.getElementsByClassName("dmenu-content")[0].innerText = cmd;
+      if (item.header) {
+        row.classList.add("dmenu-category");
+        row.dataset.header = "true";
+      }
       row.dataset.content = cmd;
+      row.dataset.favorite = item.favorite == true ? "true" : "false";
       if (meta != void 0) {
         row.getElementsByClassName("dmenu-meta")[0].innerText = meta;
+      }
+      const favoriteContainer = row.getElementsByClassName("dmenu-favorite")[0];
+      if (typeof item.onFavoriteToggle == "function") {
+        const favoriteButton = document.createElement("button");
+        favoriteButton.type = "button";
+        favoriteButton.classList.add("dmenu-favorite-button");
+        favoriteButton.innerText = item.favorite == true ? "\u2605" : "\u2606";
+        favoriteButton.addEventListener("click", (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          const nextFavorite = row.dataset.favorite != "true";
+          row.dataset.favorite = nextFavorite ? "true" : "false";
+          favoriteButton.innerText = nextFavorite ? "\u2605" : "\u2606";
+          item.onFavoriteToggle(nextFavorite);
+          klass.#sort();
+        });
+        favoriteContainer.appendChild(favoriteButton);
       }
       if (dmenuConfig.itemScore) {
         row.getElementsByClassName("dmenu-score")[0].innerText = "0";
       }
       let klass = this;
-      row.addEventListener("click", function(e5) {
-        klass.#accept(row);
-      });
+      if (item.header) {
+        row.addEventListener("click", function() {
+          return;
+        });
+      } else {
+        row.addEventListener("click", function(e5) {
+          klass.#accept(row);
+        });
+      }
       parent.appendChild(row);
       return row;
     }
@@ -3331,9 +3386,17 @@ Is it scaring you off?`,
       let first = true;
       for (let item of itemList) {
         let row = this.#mkRow(item, this.itemListEl);
-        if (first) {
+        if (first && row.dataset.header != "true") {
           row.classList.add("dmenu-selected");
           first = false;
+        }
+      }
+      if (first) {
+        const selectable = Array.from(this.itemListEl.childNodes).find(
+          (node) => node.dataset?.header != "true"
+        );
+        if (selectable) {
+          selectable.classList.add("dmenu-selected");
         }
       }
       document.body.appendChild(this.menuEl);
@@ -10101,6 +10164,63 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   var links = [];
   var vakken = [];
   var goto_items = [];
+  var favoriteKeys = [];
+  function normalizeQuick(quick) {
+    return {
+      name: quick.name.toLowerCase(),
+      url: quick.url,
+      favorite: quick.favorite ?? false
+    };
+  }
+  function makeFavoriteKey(kind, value) {
+    return `${kind}:${value.toLowerCase()}`;
+  }
+  function isFavoriteKey(favoriteKey) {
+    return favoriteKeys.includes(favoriteKey);
+  }
+  async function loadFavoriteKeys() {
+    const loadedFavoriteKeys = await browser.runtime.sendMessage({
+      action: "getSetting",
+      name: "other.quickFavorites"
+    });
+    favoriteKeys = Array.isArray(loadedFavoriteKeys) ? loadedFavoriteKeys.map((key) => String(key).toLowerCase()) : [];
+  }
+  async function saveFavoriteKeys() {
+    await browser.runtime.sendMessage({
+      action: "setSetting",
+      name: "other.quickFavorites",
+      data: favoriteKeys
+    });
+  }
+  function setFavoriteKey(favoriteKey, nextFavorite) {
+    const normalizedKey = favoriteKey.toLowerCase();
+    const hasKey = favoriteKeys.includes(normalizedKey);
+    if (nextFavorite && !hasKey) {
+      favoriteKeys.push(normalizedKey);
+    }
+    if (!nextFavorite && hasKey) {
+      favoriteKeys = favoriteKeys.filter((key) => key != normalizedKey);
+    }
+    void saveFavoriteKeys();
+  }
+  function createQuickMenuItem(kind, value, meta, extra = {}) {
+    const favoriteKey = makeFavoriteKey(kind, value);
+    const favorite = isFavoriteKey(favoriteKey);
+    const extraFavoriteToggle = extra.onFavoriteToggle;
+    return {
+      ...extra,
+      value,
+      meta,
+      favorite,
+      favoriteKey,
+      onFavoriteToggle: (nextFavorite) => {
+        setFavoriteKey(favoriteKey, nextFavorite);
+        if (typeof extraFavoriteToggle == "function") {
+          extraFavoriteToggle(nextFavorite);
+        }
+      }
+    };
+  }
   if (document.querySelector(".topnav")) {
     fetch_links();
     fetch_vakken();
@@ -10108,15 +10228,20 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   }
   function quick_cmd_list() {
     let cmd_list = [];
-    for (let i5 = 0; i5 < quicks.length; i5++) {
-      cmd_list.push({ value: quicks[i5].name, meta: "quick: " + quicks[i5].url });
+    for (let quick of quicks) {
+      cmd_list.push(
+        createQuickMenuItem("quick", quick.name, "quick", {
+          url: quick.url
+        })
+      );
     }
     return cmd_list;
   }
-  function add_quick(name2, url) {
-    let quick = { name: name2.toLowerCase(), url };
+  function add_quick(name2, url, favorite = void 0) {
+    let quick = { name: name2.toLowerCase(), url, favorite: favorite ?? false };
     for (let i5 = 0; i5 < quicks.length; i5++) {
       if (quicks[i5].name == name2) {
+        quick.favorite = favorite ?? quicks[i5].favorite ?? false;
         quicks[i5] = quick;
         quick_save();
         return;
@@ -10135,14 +10260,27 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     }
   }
   async function quickLoad() {
-    const quicks2 = await browser.runtime.sendMessage({
+    await loadFavoriteKeys();
+    const loadedQuicks = await browser.runtime.sendMessage({
       action: "getSetting",
       name: "other.quicks"
     });
-    if (!quicks2) {
+    if (!loadedQuicks) {
+      quicks = [];
       return [];
     }
-    return quicks2;
+    quicks = loadedQuicks.map(normalizeQuick);
+    const migratedFavoriteKeys = quicks.filter((quick) => quick.favorite).map((quick) => makeFavoriteKey("quick", quick.name));
+    const mergedFavoriteKeys = [.../* @__PURE__ */ new Set([...favoriteKeys, ...migratedFavoriteKeys])];
+    if (mergedFavoriteKeys.length !== favoriteKeys.length) {
+      favoriteKeys = mergedFavoriteKeys;
+      await saveFavoriteKeys();
+    }
+    quicks = quicks.map((quick) => ({
+      ...quick,
+      favorite: isFavoriteKey(makeFavoriteKey("quick", quick.name))
+    }));
+    return quicks;
   }
   async function quick_save() {
     await browser.runtime.sendMessage({
@@ -10156,7 +10294,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     dmenu(
       cmd_list,
       function(name2, shift) {
-        value_list = [];
+        let value_list = [];
         for (let i5 = 0; i5 < quicks.length; i5++) {
           if (quicks[i5].name == name2) {
             value_list = [{ value: quicks[i5].url }];
@@ -10240,22 +10378,35 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     document.body.innerHTML = "";
   }
   async function do_qm(opener = "") {
-    let cmd_list = quick_cmd_list().concat(goto_items).concat(vakken).concat(links).concat([
-      "home",
-      "quick add",
-      "quick remove",
-      "unbloat",
-      "config",
-      "clearsettings",
-      "discord",
-      "dizzy",
-      "breakdmenu",
-      "glass",
-      "ridge",
-      "reset plant",
-      "remove current theme",
-      "posh text",
-      "funny text"
+    await loadFavoriteKeys();
+    let cmd_list = quick_cmd_list().concat(
+      goto_items.map(
+        (item) => createQuickMenuItem("goto", item.value, item.meta, { url: item.url })
+      )
+    ).concat(
+      vakken.map(
+        (item) => createQuickMenuItem("vak", item.value, item.meta, { url: item.url })
+      )
+    ).concat(
+      links.map(
+        (item) => createQuickMenuItem("link", item.value, item.meta, { url: item.url })
+      )
+    ).concat([
+      createQuickMenuItem("cmd", "home", "command"),
+      createQuickMenuItem("cmd", "quick add", "command"),
+      createQuickMenuItem("cmd", "quick remove", "command"),
+      createQuickMenuItem("cmd", "unbloat", "command"),
+      createQuickMenuItem("cmd", "config", "command"),
+      createQuickMenuItem("cmd", "clearsettings", "command"),
+      createQuickMenuItem("cmd", "discord", "command"),
+      createQuickMenuItem("cmd", "dizzy", "command"),
+      createQuickMenuItem("cmd", "breakdmenu", "command"),
+      createQuickMenuItem("cmd", "glass", "command"),
+      createQuickMenuItem("cmd", "ridge", "command"),
+      createQuickMenuItem("cmd", "reset plant", "command"),
+      createQuickMenuItem("cmd", "remove current theme", "command"),
+      createQuickMenuItem("cmd", "posh text", "command"),
+      createQuickMenuItem("cmd", "funny text", "command")
     ]);
     if (dmenuConfig.toplevelConfig) {
       cmd_list = cmd_list.concat(await getDMenuOptionsForSettings(true));

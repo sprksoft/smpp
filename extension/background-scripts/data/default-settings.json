@@ -44,6 +44,7 @@
     "settings": true
   },
   "quicks": [],
+  "quickFavorites": [],
   "performanceMode": false,
   "splashText": true,
   "discordButton": true,

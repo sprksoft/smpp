@@ -208,6 +208,20 @@ html {
   cursor: pointer;
 }
 
+.dmenu-category {
+  margin-top: 0.75rem;
+  background: transparent !important;
+  color: var(--color-accent) !important;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: default !important;
+}
+
+.dmenu-category:hover {
+  background: transparent !important;
+}
+
 .dmenu-content {
   margin-right: 1em;
   display: inline !important;
@@ -216,6 +230,30 @@ html {
 .dmenu-meta {
   flex-grow: 10;
   color: var(--color-base03);
+}
+
+.dmenu-favorite {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  min-width: 1.75rem;
+  flex: 0 0 auto;
+}
+
+.dmenu-favorite-button {
+  background: transparent;
+  border: none;
+  color: var(--color-accent);
+  font-size: 1.2em;
+  line-height: 1;
+  padding: 0;
+  width: 1.75rem;
+  cursor: pointer;
+}
+
+.dmenu-favorite-button:hover {
+  transform: scale(1.1);
 }
 
 .dmenu-score {

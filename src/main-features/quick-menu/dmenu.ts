@@ -60,6 +60,9 @@ class DMenu {
     if (row == undefined) {
       row = this.itemListEl.childNodes[this.selectedIndex];
     }
+    if (row?.dataset?.header == "true") {
+      return;
+    }
     let content = this.inputEl.value;
     if (row != undefined && !row.classList.contains("hidden")) {
       content = row.dataset.content;
@@ -124,7 +127,22 @@ class DMenu {
 
     // update scores
     let items = [];
+    let itemIndex = 0;
     for (let node of this.itemListEl.childNodes) {
+      const isHeader = node.dataset.header == "true";
+      const isFavorite = node.dataset.favorite == "true";
+      if (isHeader) {
+        items.push({
+          score: Number.MAX_SAFE_INTEGER,
+          htmlNode: node,
+          header: true,
+          favorite: true,
+          index: itemIndex,
+        });
+        itemIndex += 1;
+        continue;
+      }
+
       let score = this.#matchScore(node.dataset.content, searchq);
 
       if (score == 0 && searchq != "") {
@@ -132,7 +150,13 @@ class DMenu {
       } else {
         node.classList.remove("hidden");
       }
-      items.push({ score: score, htmlNode: node });
+      items.push({
+        score: score,
+        htmlNode: node,
+        favorite: isFavorite,
+        index: itemIndex,
+      });
+      itemIndex += 1;
 
       if (dmenuConfig.itemScore) {
         node.getElementsByClassName("dmenu-score")[0].innerText = score;
@@ -140,8 +164,12 @@ class DMenu {
     }
 
     let sortedItems = items.sort(function (a, b) {
+      if (a.header != b.header) return a.header ? -1 : 1;
+      if (a.favorite != b.favorite) return a.favorite ? -1 : 1;
       if (a.score < b.score) return 1;
       if (a.score > b.score) return -1;
+      if (a.index < b.index) return -1;
+      if (a.index > b.index) return 1;
       return 0;
     });
 
@@ -203,11 +231,34 @@ class DMenu {
     let row = document.createElement("div");
     row.classList.add("dmenu-row");
     row.innerHTML =
-      '<div class="dmenu-content"></div><div class="dmenu-meta"></div><div class="dmenu-score"></div>';
+      '<div class="dmenu-content"></div><div class="dmenu-meta"></div><div class="dmenu-score"></div><div class="dmenu-favorite"></div>';
     row.getElementsByClassName("dmenu-content")[0].innerText = cmd;
+    if (item.header) {
+      row.classList.add("dmenu-category");
+      row.dataset.header = "true";
+    }
     row.dataset.content = cmd;
+    row.dataset.favorite = item.favorite == true ? "true" : "false";
     if (meta != undefined) {
       row.getElementsByClassName("dmenu-meta")[0].innerText = meta;
+    }
+
+    const favoriteContainer = row.getElementsByClassName("dmenu-favorite")[0];
+    if (typeof item.onFavoriteToggle == "function") {
+      const favoriteButton = document.createElement("button");
+      favoriteButton.type = "button";
+      favoriteButton.classList.add("dmenu-favorite-button");
+      favoriteButton.innerText = item.favorite == true ? "★" : "☆";
+      favoriteButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        const nextFavorite = row.dataset.favorite != "true";
+        row.dataset.favorite = nextFavorite ? "true" : "false";
+        favoriteButton.innerText = nextFavorite ? "★" : "☆";
+        item.onFavoriteToggle(nextFavorite);
+        klass.#sort();
+      });
+      favoriteContainer.appendChild(favoriteButton);
     }
 
     if (dmenuConfig.itemScore) {
@@ -215,9 +266,15 @@ class DMenu {
     }
 
     let klass = this;
-    row.addEventListener("click", function (e) {
-      klass.#accept(row);
-    });
+    if (item.header) {
+      row.addEventListener("click", function () {
+        return;
+      });
+    } else {
+      row.addEventListener("click", function (e) {
+        klass.#accept(row);
+      });
+    }
     parent.appendChild(row);
     return row;
   }
@@ -259,9 +316,18 @@ class DMenu {
     let first = true;
     for (let item of itemList) {
       let row = this.#mkRow(item, this.itemListEl);
-      if (first) {
+      if (first && row.dataset.header != "true") {
         row.classList.add("dmenu-selected");
         first = false;
+      }
+    }
+
+    if (first) {
+      const selectable = Array.from(this.itemListEl.childNodes).find(
+        (node) => node.dataset?.header != "true"
+      );
+      if (selectable) {
+        selectable.classList.add("dmenu-selected");
       }
     }
 
