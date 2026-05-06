@@ -2717,6 +2717,9 @@ Is it scaring you off?`,
       this.toastDuration = toastDuration;
       this.name = "ImageProcessingError";
     }
+    message;
+    toastType;
+    toastDuration;
   };
   var ImageSelector = class {
     name;
