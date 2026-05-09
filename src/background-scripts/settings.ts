@@ -1,10 +1,9 @@
-//@ts-nocheck
 import { browser, fillObjectWithDefaults } from "../common/utils.js";
 import { loadJSON } from "./json-loader.js";
 import { getThemes } from "./themes.js";
 
-let settingsTemplate;
-let defaultSettings;
+let settingsTemplate: any;
+let defaultSettings: any;
 
 export async function getSettingsTemplate() {
   if (!settingsTemplate) {
@@ -26,11 +25,11 @@ export async function getDefaultSettings() {
   return defaultSettings;
 }
 
-export async function getSettingsData(): any {
+export async function getSettingsData(): Promise<any> {
   let data = (await browser.storage.local.get("settingsData")).settingsData;
   data = fillObjectWithDefaults(data, await getDefaultSettings());
 
-  let categorized = {};
+  let categorized: { [key: string]: { [key: string]: any } } = {};
   const template = await getSettingsTemplate();
   for (const cat of Object.keys(template)) {
     for (const fieldName of Object.keys(template[cat])) {
@@ -43,8 +42,8 @@ export async function getSettingsData(): any {
   return categorized;
 }
 
-export async function setSettingsData(data) {
-  const settings = {};
+export async function setSettingsData(data: { [key: string]: { [key: string]: any } }) {
+  const settings: { [key: string]: any } = {};
   for (const category of Object.keys(data)) {
     Object.assign(settings, data[category]);
   }
