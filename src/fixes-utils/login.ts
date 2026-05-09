@@ -1,37 +1,48 @@
 /* vim:set shiftwidth=4: */
-// @ts-nocheck
 export function updateLoginPanel() {
-  let login_app_left = document.querySelector(".login-app__left");
-  login_app_left.innerHTML = " ";
+  const loginAppLeft = document.querySelector<HTMLElement>(".login-app__left");
+  if (loginAppLeft) {
+    loginAppLeft.innerHTML = " ";
+  }
 
-  document.getElementsByClassName(
-    "login-app__platform-indicator"
-  )[0].innerHTML = '<h1 class="logintitle">Smartschool ++</h1>';
+  const platformIndicator = document.querySelector<HTMLElement>(
+    ".login-app__platform-indicator"
+  );
+  if (platformIndicator) {
+    platformIndicator.innerHTML = '<h1 class="logintitle">Smartschool ++</h1>';
+  }
 
-  let loginSeperator = document.querySelector(".login-app__title--separator");
+  const loginSeperator = document.querySelector(".login-app__title--separator");
   if (loginSeperator) {
     loginSeperator.innerHTML =
       '<button type="button" class="white_text_button" id="showmore">More</button>';
-    document.getElementById("showmore").addEventListener("click", () => {
-      document.documentElement.style.setProperty("--show-options", "flex");
-      document.getElementById("showmore").style.display = "none";
-    });
+    const showMoreButton = document.getElementById("showmore");
+    if (showMoreButton) {
+      showMoreButton.addEventListener("click", () => {
+        document.documentElement.style.setProperty("--show-options", "flex");
+        showMoreButton.style.display = "none";
+      });
+    }
   }
 }
 
 function addSplashText() {
-  var loginApp = document.querySelector(".login-app");
-  var splashTextContainer = document.createElement("div");
+  const loginApp = document.querySelector(".login-app");
+  if (!loginApp) {
+    return;
+  }
+
+  const splashTextContainer = document.createElement("div");
   loginApp.prepend(splashTextContainer);
   splashTextContainer.classList.add("splashtextcontainer");
   splashTextContainer.innerHTML = `<div class='splashtext'>${getSplashText()}</div>`;
 }
 
 function removeSplashText() {
-  document.querySelector("splashtextcontainer")?.remove();
+  document.querySelector(".splashtextcontainer")?.remove();
 }
 
-export function updateSplashText(splashTextEnabled) {
+export function updateSplashText(splashTextEnabled: boolean) {
   if (splashTextEnabled) {
     addSplashText();
   } else {
@@ -39,7 +50,7 @@ export function updateSplashText(splashTextEnabled) {
   }
 }
 
-let splashtexts = [
+const splashtexts: Array<string | undefined> = [
   `It even works under water!`,
   `Hoelang is een chinees.`,
   `404 Splashtext not found`,
@@ -153,6 +164,6 @@ let splashtexts = [
   `Do it`,
 ];
 
-function getSplashText() {
+function getSplashText(): string | undefined {
   return splashtexts[Math.floor(Math.random() * splashtexts.length)];
 }
