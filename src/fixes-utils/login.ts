@@ -5,9 +5,9 @@ export function updateLoginPanel() {
     loginAppLeft.innerHTML = " ";
   }
 
-  const platformIndicator = document
-    .getElementsByClassName("login-app__platform-indicator")
-    .item(0);
+  const platformIndicator = document.querySelector<HTMLElement>(
+    ".login-app__platform-indicator"
+  );
   if (platformIndicator) {
     platformIndicator.innerHTML = '<h1 class="logintitle">Smartschool ++</h1>';
   }
