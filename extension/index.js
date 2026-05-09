@@ -273,29 +273,38 @@
 
   // src/fixes-utils/login.ts
   function updateLoginPanel() {
-    let login_app_left = document.querySelector(".login-app__left");
-    login_app_left.innerHTML = " ";
-    document.getElementsByClassName(
-      "login-app__platform-indicator"
-    )[0].innerHTML = '<h1 class="logintitle">Smartschool ++</h1>';
-    let loginSeperator = document.querySelector(".login-app__title--separator");
+    const loginAppLeft = document.querySelector(".login-app__left");
+    if (loginAppLeft) {
+      loginAppLeft.innerHTML = " ";
+    }
+    const platformIndicator = document.getElementsByClassName("login-app__platform-indicator").item(0);
+    if (platformIndicator) {
+      platformIndicator.innerHTML = '<h1 class="logintitle">Smartschool ++</h1>';
+    }
+    const loginSeperator = document.querySelector(".login-app__title--separator");
     if (loginSeperator) {
       loginSeperator.innerHTML = '<button type="button" class="white_text_button" id="showmore">More</button>';
-      document.getElementById("showmore").addEventListener("click", () => {
-        document.documentElement.style.setProperty("--show-options", "flex");
-        document.getElementById("showmore").style.display = "none";
-      });
+      const showMoreButton = document.getElementById("showmore");
+      if (showMoreButton) {
+        showMoreButton.addEventListener("click", () => {
+          document.documentElement.style.setProperty("--show-options", "flex");
+          showMoreButton.style.display = "none";
+        });
+      }
     }
   }
   function addSplashText() {
-    var loginApp = document.querySelector(".login-app");
-    var splashTextContainer = document.createElement("div");
+    const loginApp = document.querySelector(".login-app");
+    if (!loginApp) {
+      return;
+    }
+    const splashTextContainer = document.createElement("div");
     loginApp.prepend(splashTextContainer);
     splashTextContainer.classList.add("splashtextcontainer");
     splashTextContainer.innerHTML = `<div class='splashtext'>${getSplashText()}</div>`;
   }
   function removeSplashText() {
-    document.querySelector("splashtextcontainer")?.remove();
+    document.querySelector(".splashtextcontainer")?.remove();
   }
   function updateSplashText(splashTextEnabled) {
     if (splashTextEnabled) {
