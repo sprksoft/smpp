@@ -277,7 +277,9 @@
     if (loginAppLeft) {
       loginAppLeft.innerHTML = " ";
     }
-    const platformIndicator = document.getElementsByClassName("login-app__platform-indicator").item(0);
+    const platformIndicator = document.querySelector(
+      ".login-app__platform-indicator"
+    );
     if (platformIndicator) {
       platformIndicator.innerHTML = '<h1 class="logintitle">Smartschool ++</h1>';
     }
@@ -13884,7 +13886,7 @@ ${code}`;
     await updateSettings();
     new Toast(`Updated to 6.0.0`, "info", 1e4).render();
   }
-  async function migrateCustomThemeV6(customTheme) {
+  async function migrateCustomThemeV6() {
     let oldCustomThemeData = await browser.runtime.sendMessage({
       action: "getCustomThemeData"
     });
