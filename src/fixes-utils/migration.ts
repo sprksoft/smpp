@@ -1,8 +1,8 @@
-// @ts-nocheck
 import { clearAllData, Toast } from "./utils.js";
 import { setWidgetSetting, widgets } from "../widgets/widgets.js";
-import { browser } from "../common/utils.ts";
+import { browser } from "../common/utils.js";
 import type { Theme } from "../main-features/appearance/themes.js";
+import type { Settings } from "../main-features/settings/main-settings.js";
 import { currentDataVersion } from "../main-features/main.js";
 
 async function updateSettings() {
@@ -18,7 +18,7 @@ async function updateSettings() {
 
 export async function migrate() {
   await removeLegacyData(); // will reload the page if legacy data is present
-  let dataVersion: Number = await browser.runtime.sendMessage({
+  let dataVersion: number = await browser.runtime.sendMessage({
     action: "getDataVersion",
   });
   if (dataVersion < currentDataVersion) {
@@ -43,7 +43,7 @@ async function migrateV6() {
   new Toast(`Updated to 6.0.0`, "info", 10000).render();
 }
 
-async function migrateCustomThemeV6(customTheme) {
+async function migrateCustomThemeV6() {
   let oldCustomThemeData = await browser.runtime.sendMessage({
     action: "getCustomThemeData",
   });
