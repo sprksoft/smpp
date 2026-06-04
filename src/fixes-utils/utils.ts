@@ -181,3 +181,18 @@ export class Toast {
     await this.hideToastElement();
   }
 }
+
+function GetSCMC() {
+    const script = document.createElement("script");
+    script.src = chrome.runtime.getURL("inject.js");
+    (document.head || document.documentElement).appendChild(script);
+    script.remove();
+    window.addEventListener("message", (event) => {
+      if (event.source !== window) return;
+      if (event.data?.type === "SMSC_VARS") {
+        sendDebug("SMSC.vars:", event.data.payload);
+        return event.data.payload;
+      }
+    });
+  }
+  GetSCMC();
