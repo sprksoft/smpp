@@ -1,5 +1,5 @@
 import imageCompression, { type Options } from "browser-image-compression";
-export const DEBUG = false;
+export const DEBUG = true;
 
 export var browser: any;
 declare const chrome: any;
