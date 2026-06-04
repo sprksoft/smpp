@@ -5,12 +5,21 @@ export function updateLoginPanel() {
     loginAppLeft.innerHTML = " ";
   }
 
+<<<<<<< HEAD:src/fixes-utils/login.ts
   const platformIndicator = document.querySelector<HTMLElement>(
     ".login-app__platform-indicator"
   );
   if (platformIndicator) {
     platformIndicator.innerHTML = '<h1 class="logintitle">Smartschool ++</h1>';
   }
+=======
+function updateLoginPanel() {
+  if(data.features.autoLogin){
+    openURL(window.location.href + "/sso/innit/google", new_window = false)
+  }
+  let login_app_left = document.querySelector(".login-app__left");
+  login_app_left.innerHTML = " ";
+>>>>>>> 0da4949aacf038b564b48085ebc7d253cab83a80:fixes-utils/login.js
 
   const loginSeperator = document.querySelector(".login-app__title--separator");
   if (loginSeperator) {
