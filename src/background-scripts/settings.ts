@@ -42,7 +42,9 @@ export async function getSettingsData(): Promise<any> {
   return categorized;
 }
 
-export async function setSettingsData(data: { [key: string]: { [key: string]: any } }) {
+export async function setSettingsData(data: {
+  [key: string]: { [key: string]: any };
+}) {
   const settings: { [key: string]: any } = {};
   for (const category of Object.keys(data)) {
     Object.assign(settings, data[category]);

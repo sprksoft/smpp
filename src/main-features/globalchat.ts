@@ -25,7 +25,11 @@ class GlobalChatWindow extends BaseWindow {
     this.iframe = document.createElement("iframe");
     this.iframe.style = "width:100%; height:100%; border:none";
     this.iframe.src =
-      GC_DOMAINS[this.beta ? "beta" : "main"] + "/v1?" + queryString + "&glass=" + gcGlass;
+      GC_DOMAINS[this.beta ? "beta" : "main"] +
+      "/v1?" +
+      queryString +
+      "&glass=" +
+      gcGlass;
     this.gcContent.appendChild(this.iframe);
     return this.gcContent;
   }

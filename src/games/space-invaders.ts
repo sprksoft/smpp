@@ -94,12 +94,19 @@ class SpaceInvadersWidget extends GameBase {
   }
 
   #shoot() {
-    if (this.#shotCooldown > 0 || this.#bullets.length >= MAX_BULLETS_ON_SCREEN) {
+    if (
+      this.#shotCooldown > 0 ||
+      this.#bullets.length >= MAX_BULLETS_ON_SCREEN
+    ) {
       return;
     }
     this.#bullets.push({
       x: this.#playerX + PLAYER_WIDTH / 2 - BULLET_WIDTH / 2,
-      y: this.canvas.height - PLAYER_MARGIN_BOTTOM - PLAYER_HEIGHT - BULLET_HEIGHT,
+      y:
+        this.canvas.height -
+        PLAYER_MARGIN_BOTTOM -
+        PLAYER_HEIGHT -
+        BULLET_HEIGHT,
       width: BULLET_WIDTH,
       height: BULLET_HEIGHT,
     });
@@ -143,7 +150,10 @@ class SpaceInvadersWidget extends GameBase {
     const aliveEnemies = this.#aliveEnemies();
 
     for (const enemy of aliveEnemies) {
-      if (enemy.y + ENEMY_HEIGHT >= this.canvas.height - PLAYER_MARGIN_BOTTOM - PLAYER_HEIGHT) {
+      if (
+        enemy.y + ENEMY_HEIGHT >=
+        this.canvas.height - PLAYER_MARGIN_BOTTOM - PLAYER_HEIGHT
+      ) {
         this.stopGame();
         return;
       }
@@ -186,7 +196,10 @@ class SpaceInvadersWidget extends GameBase {
       this.#playerX += 0.22 * speedScale * dt;
     }
 
-    this.#playerX = Math.max(8, Math.min(this.canvas.width - PLAYER_WIDTH - 8, this.#playerX));
+    this.#playerX = Math.max(
+      8,
+      Math.min(this.canvas.width - PLAYER_WIDTH - 8, this.#playerX)
+    );
 
     this.#shotCooldown = Math.max(0, this.#shotCooldown - dt);
     this.#autoShotTimer += dt;
@@ -221,7 +234,13 @@ class SpaceInvadersWidget extends GameBase {
     const playerY = this.canvas.height - PLAYER_MARGIN_BOTTOM - PLAYER_HEIGHT;
     ctx.fillStyle = getThemeVar("--color-text");
     ctx.beginPath();
-    ctx.roundRect(this.#playerX, playerY, PLAYER_WIDTH, PLAYER_HEIGHT, PLAYER_HEIGHT / 2);
+    ctx.roundRect(
+      this.#playerX,
+      playerY,
+      PLAYER_WIDTH,
+      PLAYER_HEIGHT,
+      PLAYER_HEIGHT / 2
+    );
     ctx.fill();
     ctx.beginPath();
     ctx.roundRect(this.#playerX + PLAYER_WIDTH / 2 - 3, playerY - 5, 6, 6, 3);

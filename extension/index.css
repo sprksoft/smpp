@@ -432,14 +432,14 @@ body:has(.smsc-topnav) .smpp-background-image-container {
   top: 41px;
 }
 .smpp-background-image-container {
-  background:
-    linear-gradient(
-      45deg,
-      color-mix(in srgb, var(--color-base00) 95%, var(--color-accent) 5%) 0%,
-      color-mix(in srgb, var(--color-base00) 90%, var(--color-accent) 10%) 15%,
-      color-mix(in srgb, var(--color-base01) 93%, var(--color-accent) 7%) 45%,
-      color-mix(in srgb, var(--color-base01) 95%, var(--color-accent) 5%) 55%,
-      color-mix(in srgb, var(--color-base01) 98%, var(--color-accent) 2%) 100%) !important;
+  background: linear-gradient(
+    45deg,
+    color-mix(in srgb, var(--color-base00) 95%, var(--color-accent) 5%) 0%,
+    color-mix(in srgb, var(--color-base00) 90%, var(--color-accent) 10%) 15%,
+    color-mix(in srgb, var(--color-base01) 93%, var(--color-accent) 7%) 45%,
+    color-mix(in srgb, var(--color-base01) 95%, var(--color-accent) 5%) 55%,
+    color-mix(in srgb, var(--color-base01) 98%, var(--color-accent) 2%) 100%
+  ) !important;
   position: absolute;
   top: 0;
   height: 100%;
@@ -550,13 +550,13 @@ body:has(.smsc-topnav) .smpp-background-image-container {
   margin-top: 1rem;
   padding: 0.5rem 0rem !important;
   align-self: center !important;
-  background:
-    linear-gradient(
-      100deg,
-      color-mix(in srgb, var(--color-base01) 30%, var(--color-base02) 70%),
-      var(--color-base02),
-      var(--color-base02),
-      color-mix(in srgb, var(--color-base01) 30%, var(--color-base02) 70%));
+  background: linear-gradient(
+    100deg,
+    color-mix(in srgb, var(--color-base01) 30%, var(--color-base02) 70%),
+    var(--color-base02),
+    var(--color-base02),
+    color-mix(in srgb, var(--color-base01) 30%, var(--color-base02) 70%)
+  );
   border: 3px solid var(--color-base03);
   border-radius: 1000px !important;
   margin-bottom: 1.8rem;
@@ -659,10 +659,7 @@ input.weather-location-input:focus {
   background-color: var(--color-base02) !important;
 }
 .enableAnimations .weather-location-input {
-  transition-property:
-    border-color,
-    background-color,
-    color;
+  transition-property: border-color, background-color, color;
   transition: 0.2s ease-in-out !important;
 }
 .weather-icon-container {
@@ -888,10 +885,7 @@ input.weather-location-input:focus {
   border-width: 2px;
 }
 .enableAnimations .lijnCardHalte {
-  transition-property:
-    background-color,
-    transform,
-    scale;
+  transition-property: background-color, transform, scale;
   transition: 0.2s ease-in-out;
 }
 .enableAnimations .lijnCardHalte:hover {
@@ -971,11 +965,7 @@ input.weather-location-input:focus {
 }
 .enableAnimations .delijnSearchButton {
   transition-property:
-    background-color,
-    border-color,
-    transform,
-    animation,
-    origin;
+    background-color, border-color, transform, animation, origin;
   transition: 0.2s ease-in-out !important;
 }
 .enableAnimations .delijnSearchButton:hover > .delijnSearchIcon {
@@ -1048,11 +1038,7 @@ input.weather-location-input:focus {
 }
 .enableAnimations .showMoreHaltesButton {
   animation: delijnCardAppear 0.3s ease-in-out 0ms 1;
-  transition-property:
-    background-color,
-    border-color,
-    font-weight,
-    scale;
+  transition-property: background-color, border-color, font-weight, scale;
   transition: 0.2s ease-in-out !important;
 }
 .delijnInfoContainerHidden {
@@ -1148,12 +1134,12 @@ input.weather-location-input:focus {
 }
 #glass-fill {
   width: 100%;
-  background:
-    linear-gradient(
-      0deg,
-      rgba(2, 112, 182, 1) 0%,
-      rgba(56, 146, 219, 1) 40%,
-      rgba(77, 166, 240, 1) 100%);
+  background: linear-gradient(
+    0deg,
+    rgba(2, 112, 182, 1) 0%,
+    rgba(56, 146, 219, 1) 40%,
+    rgba(77, 166, 240, 1) 100%
+  );
   position: absolute;
   bottom: 0;
 }
@@ -1481,7 +1467,9 @@ input.weather-location-input:focus {
 }
 .enableAnimations .calendar-prev,
 .enableAnimations .calendar-next {
-  transition: background-color 0.2s, scale 0.2s ease-in-out !important;
+  transition:
+    background-color 0.2s,
+    scale 0.2s ease-in-out !important;
 }
 .calendar-prev:hover,
 .calendar-next:hover {
@@ -1537,9 +1525,12 @@ html {
   --smpp-widget-bag-margin: 3%;
   --smpp-widget-bag-handle-radius: 40px;
   --smpp-widget-bag-handle-height: 60px;
-  --pannel-width: calc( 300px + 1rem * 2 );
+  --pannel-width: calc(300px + 1rem * 2);
   --preview-width: calc(var(--pannel-width) * 0.7);
-  --bag-close-transformy: calc( -100% - var(--smpp-widget-bag-margin) - 8px + var(--smpp-widget-bag-handle-height) );
+  --bag-close-transformy: calc(
+    -100% - var(--smpp-widget-bag-margin) - 8px +
+      var(--smpp-widget-bag-handle-height)
+  );
 }
 .loading-spinner {
   animation: spin 1s linear infinite;
@@ -1560,7 +1551,9 @@ html {
 }
 .smpp-widget {
   height: min-content;
-  transition: transform 0.4s, padding 0.25s;
+  transition:
+    transform 0.4s,
+    padding 0.25s;
   transform: scale(1) rotate(0deg);
   background-color: var(--color-base01);
   padding: 1.5rem;
@@ -1675,9 +1668,12 @@ html {
   opacity: 0.9;
 }
 .enableAnimations .topnav {
-  transition: opacity 0.3s ease-in-out, filter 0.3s ease-in-out !important;
+  transition:
+    opacity 0.3s ease-in-out,
+    filter 0.3s ease-in-out !important;
 }
-.smpp-widget-edit-mode:not(.smpp-widget-dragging-something) .smpp-widget:not(.smpp-widget-preview):not(.smpp-widget-dragging) {
+.smpp-widget-edit-mode:not(.smpp-widget-dragging-something)
+  .smpp-widget:not(.smpp-widget-preview):not(.smpp-widget-dragging) {
   border-color: transparent;
   outline: 4px dashed var(--color-black);
   box-shadow: 0 0 0 3.5px var(--color-yellow);
@@ -1965,10 +1961,7 @@ div.smpp-widget.smpp-widget-transparent {
   transition: 0.1s ease-out;
 }
 .enableAnimations .widgets-done-button > svg {
-  transition-property:
-    border-color,
-    background-color,
-    fill;
+  transition-property: border-color, background-color, fill;
   transition: 0.1s ease-out;
 }
 .widgets-done-button:hover {
@@ -2058,11 +2051,11 @@ svg .pencil {
   margin-bottom: 0 !important;
 }
 .smpp-widget:has(#tutorial-widget) {
-  background:
-    linear-gradient(
-      60deg,
-      var(--color-base01),
-      var(--color-base02)) !important;
+  background: linear-gradient(
+    60deg,
+    var(--color-base01),
+    var(--color-base02)
+  ) !important;
   border-color: var(--color-accent) !important;
 }
 
@@ -2110,11 +2103,7 @@ svg .pencil {
   cursor: pointer;
 }
 .enableAnimations .settings-category-button-js {
-  transition-property:
-    background-color,
-    border-color,
-    transform,
-    font-weight;
+  transition-property: background-color, border-color, transform, font-weight;
   transition: 0.15s ease-in-out;
 }
 .enableAnimations .settings-category-button-js:hover {
@@ -2214,9 +2203,12 @@ svg .pencil {
   border-color: var(--color-base03) !important;
 }
 .enableAnimations .settings-page-slider {
-  transition: opacity 0.2s, border-color 0.2s ease-in-out;
+  transition:
+    opacity 0.2s,
+    border-color 0.2s ease-in-out;
 }
-.settings-page-weather-overlay-container .settings-page-image-button-wrapper:has(input:checked) {
+.settings-page-weather-overlay-container
+  .settings-page-image-button-wrapper:has(input:checked) {
   border-color: transparent !important;
   background-color: var(--color-base02);
 }
@@ -2291,11 +2283,7 @@ svg .pencil {
   border-color: var(--color-base03) !important;
 }
 .enableAnimations .settings-page-image-button-wrapper {
-  transition-property:
-    transform,
-    box-shadow,
-    border-color,
-    outline;
+  transition-property: transform, box-shadow, border-color, outline;
   transition: 0.2s ease-in-out;
 }
 .settings-page-image-button-wrapper:focus-visible {
@@ -2322,7 +2310,7 @@ svg .pencil {
   border: 0.5rem solid transparent;
   outline: 2px solid transparent !important;
 }
-.settings-page-image-button-wrapper input[type=radio] {
+.settings-page-image-button-wrapper input[type="radio"] {
   display: none;
 }
 label.settings-page-image-button-wrapper:has(input:checked) {
@@ -2345,11 +2333,7 @@ label.settings-page-image-button-wrapper:has(input:checked) {
 }
 .enableAnimations .settings-page-theme-card {
   transition-property:
-    background-color,
-    border-color,
-    color,
-    transform,
-    outline;
+    background-color, border-color, color, transform, outline;
   transition: 0.15s ease-in-out;
 }
 .settings-page-icons-container {
@@ -2481,7 +2465,9 @@ label.settings-page-image-button-wrapper:has(input:checked) {
   border-radius: 1000px;
 }
 .settings-page-slider-container:has(#settings-page-weather-overlay-slider),
-.settings-page-slider-container:has(#settings-page-weather-overlay-opacity-slider) {
+.settings-page-slider-container:has(
+  #settings-page-weather-overlay-opacity-slider
+) {
   width: 20rem;
   gap: 1rem;
 }
@@ -2489,10 +2475,11 @@ label.settings-page-image-button-wrapper:has(input:checked) {
   right: 3.6rem;
   z-index: 1000;
 }
-.enableAnimations input.settings-page-keybinding-input[type=text]:not(.aaaaaa):read-only {
+.enableAnimations
+  input.settings-page-keybinding-input[type="text"]:not(.aaaaaa):read-only {
   transition: opacity 0.1s ease-in-out !important;
 }
-input.settings-page-keybinding-input[type=text]:not(.aaaaaa):read-only {
+input.settings-page-keybinding-input[type="text"]:not(.aaaaaa):read-only {
   padding: 0.25rem 0.5rem !important;
   font-size: 1.6rem !important;
   color: var(--color-accent) !important;
@@ -2504,14 +2491,20 @@ input.settings-page-keybinding-input[type=text]:not(.aaaaaa):read-only {
   text-align: right;
   opacity: 0.6;
 }
-input.settings-page-keybinding-input[type=text]:not(.aaaaaa):read-only:hover:not(.listening) {
+input.settings-page-keybinding-input[type="text"]:not(
+    .aaaaaa
+  ):read-only:hover:not(.listening) {
   cursor: pointer;
   opacity: 1;
 }
-.settings-page-key-bind-container:has(input.settings-page-keybinding-input.listening) {
+.settings-page-key-bind-container:has(
+  input.settings-page-keybinding-input.listening
+) {
   border-color: var(--color-base02) !important;
 }
-input.settings-page-keybinding-input[type=text]:not(.aaaaaa):read-only.listening {
+input.settings-page-keybinding-input[type="text"]:not(
+    .aaaaaa
+  ):read-only.listening {
   font-weight: 500;
   color: var(--color-text) !important;
   opacity: 1;
@@ -2558,10 +2551,7 @@ input.settings-page-keybinding-input[type=text]:not(.aaaaaa):read-only.listening
   margin-bottom: 1rem !important;
 }
 .enableAnimations .settings-page-reset-button {
-  transition-property:
-    border-color,
-    background-color,
-    transform;
+  transition-property: border-color, background-color, transform;
   transition: 0.15s ease-in-out;
 }
 .settings-page-reset-button:hover {
@@ -2636,10 +2626,7 @@ input.settings-page-keybinding-input[type=text]:not(.aaaaaa):read-only.listening
 }
 .enableAnimations .reset-popup-cancel,
 .enableAnimations .reset-popup-confirm {
-  transition-property:
-    color,
-    background-color,
-    transform;
+  transition-property: color, background-color, transform;
   transition: 0.15s ease-in-out;
 }
 .reset-popup-cancel {
@@ -2789,7 +2776,9 @@ input.settings-page-keybinding-input[type=text]:not(.aaaaaa):read-only.listening
 .color-picker-field .color-cursor-wrapper .color-cursor {
   border-radius: 100000px;
   border: 3px solid white;
-  box-shadow: 0px 0px 4px -2px black, inset 0px 0px 4px -2px black;
+  box-shadow:
+    0px 0px 4px -2px black,
+    inset 0px 0px 4px -2px black;
   height: 100%;
   transform: translate(-50%, -50%);
   pointer-events: none;
@@ -2832,16 +2821,16 @@ input.settings-page-keybinding-input[type=text]:not(.aaaaaa):read-only.listening
 }
 .smpp-color-picker .hue-picker {
   width: 100%;
-  background:
-    linear-gradient(
-      to right,
-      #f00 0%,
-      #ff0 17%,
-      #0f0 33%,
-      #0ff 50%,
-      #00f 67%,
-      #f0f 83%,
-      #f00 100%);
+  background: linear-gradient(
+    to right,
+    #f00 0%,
+    #ff0 17%,
+    #0f0 33%,
+    #0ff 50%,
+    #00f 67%,
+    #f0f 83%,
+    #f00 100%
+  );
   height: 1.5rem;
   border-radius: 10000rem;
   position: relative;
@@ -2849,7 +2838,9 @@ input.settings-page-keybinding-input[type=text]:not(.aaaaaa):read-only.listening
 .hue-picker .color-cursor-wrapper .color-cursor {
   border-radius: 100000px;
   border: 3px solid white;
-  box-shadow: 0px 0px 4px -2px black, inset 0px 0px 4px -2px black;
+  box-shadow:
+    0px 0px 4px -2px black,
+    inset 0px 0px 4px -2px black;
   height: 100%;
   transform: translate(-50%, -50%);
   pointer-events: none;
@@ -2887,11 +2878,7 @@ input.settings-page-keybinding-input[type=text]:not(.aaaaaa):read-only.listening
   fill: var(--color-green) !important;
 }
 .enableAnimations .copy-hex-button {
-  transition-property:
-    border-color,
-    background-color,
-    transform,
-    stroke;
+  transition-property: border-color, background-color, transform, stroke;
   transition: 0.15s ease-in-out;
 }
 .copy-hex-button:hover {
@@ -2910,12 +2897,7 @@ input.settings-page-keybinding-input[type=text]:not(.aaaaaa):read-only.listening
 }
 .enableAnimations .bottom-container-button {
   transition-property:
-    opacity,
-    border-color,
-    stroke,
-    background,
-    scale,
-    fill !important;
+    opacity, border-color, stroke, background, scale, fill !important;
   transition: 0.3s ease-out !important;
 }
 .bottom-container-button {
@@ -2942,12 +2924,10 @@ input.settings-page-keybinding-input[type=text]:not(.aaaaaa):read-only.listening
   stroke: var(--color-text-local) !important;
 }
 .enableAnimations .bottom-container-button {
-  transition-property:
-    border-color,
-    background-color,
-    transform,
-    stroke;
-  transition: 0.15s ease-in-out, opacity 0.15s ease-in-out 0.15s;
+  transition-property: border-color, background-color, transform, stroke;
+  transition:
+    0.15s ease-in-out,
+    opacity 0.15s ease-in-out 0.15s;
 }
 .bottom-container-button:hover {
   background-color: var(--color-base02-local) !important;
@@ -2994,11 +2974,7 @@ button .bottom-container-button:active {
 }
 .enableAnimations .theme-tile {
   transition-property:
-    background-color,
-    border-color,
-    color,
-    transform,
-    outline;
+    background-color, border-color, color, transform, outline;
   transition: 0.15s ease-in-out;
   animation: theme-tile 0.4s cubic-bezier(0.33, 1.31, 0.65, 0.98);
 }
@@ -3036,11 +3012,37 @@ button .bottom-container-button:active {
     var(--background-image-local),
     linear-gradient(
       40deg,
-      color-mix(in srgb, var(--color-base03-local) 70%, var(--color-accent-local) 30%) 0%,
-      color-mix(in srgb, var(--color-base03-local) 65%, var(--color-accent-local) 35%) 15%,
-      color-mix(in srgb, var(--color-base02-local) 70%, var(--color-accent-local) 30%) 45%,
-      color-mix(in srgb, var(--color-base02-local) 73%, var(--color-accent-local) 27%) 55%,
-      color-mix(in srgb, var(--color-base02-local) 95%, var(--color-accent-local) 5%) 100%);
+      color-mix(
+          in srgb,
+          var(--color-base03-local) 70%,
+          var(--color-accent-local) 30%
+        )
+        0%,
+      color-mix(
+          in srgb,
+          var(--color-base03-local) 65%,
+          var(--color-accent-local) 35%
+        )
+        15%,
+      color-mix(
+          in srgb,
+          var(--color-base02-local) 70%,
+          var(--color-accent-local) 30%
+        )
+        45%,
+      color-mix(
+          in srgb,
+          var(--color-base02-local) 73%,
+          var(--color-accent-local) 27%
+        )
+        55%,
+      color-mix(
+          in srgb,
+          var(--color-base02-local) 95%,
+          var(--color-accent-local) 5%
+        )
+        100%
+    );
 }
 #settings-page .theme-tile:not(.aaaaa):hover {
   border-color: var(--color-accent-local);
@@ -3057,14 +3059,14 @@ button .bottom-container-button:active {
 }
 .use-default-colors.theme-tile .image-container {
   background-color: var(--color-base02) !important;
-  background:
-    linear-gradient(
-      40deg,
-      color-mix(in srgb, var(--color-base03) 70%, var(--color-accent) 30%) 0%,
-      color-mix(in srgb, var(--color-base03) 65%, var(--color-accent) 35%) 15%,
-      color-mix(in srgb, var(--color-base02) 70%, var(--color-accent) 30%) 45%,
-      color-mix(in srgb, var(--color-base02) 73%, var(--color-accent) 27%) 55%,
-      color-mix(in srgb, var(--color-base02) 95%, var(--color-accent) 5%) 100%);
+  background: linear-gradient(
+    40deg,
+    color-mix(in srgb, var(--color-base03) 70%, var(--color-accent) 30%) 0%,
+    color-mix(in srgb, var(--color-base03) 65%, var(--color-accent) 35%) 15%,
+    color-mix(in srgb, var(--color-base02) 70%, var(--color-accent) 30%) 45%,
+    color-mix(in srgb, var(--color-base02) 73%, var(--color-accent) 27%) 55%,
+    color-mix(in srgb, var(--color-base02) 95%, var(--color-accent) 5%) 100%
+  );
 }
 #settings-page .use-default-colors.theme-tile:not(.aaaaa):hover {
   border-color: var(--color-accent);
@@ -3122,11 +3124,7 @@ button .bottom-container-button:active {
   stroke: var(--color-text) !important;
 }
 .enableAnimations .theme-top-container button {
-  transition-property:
-    border-color,
-    background-color,
-    transform,
-    stroke;
+  transition-property: border-color, background-color, transform, stroke;
   transition: 0.15s ease-in-out;
 }
 .theme-top-container button:hover {
@@ -3180,11 +3178,7 @@ button.remove-custom-theme > svg {
   stroke: var(--color-red) !important;
 }
 .enableAnimations button.remove-custom-theme {
-  transition-property:
-    border-color,
-    background-color,
-    transform,
-    stroke;
+  transition-property: border-color, background-color, transform, stroke;
   transition: 0.15s ease-in-out;
 }
 button.remove-custom-theme:hover {
@@ -3223,11 +3217,7 @@ button.open-theme-editor-button {
   align-items: center;
 }
 .enableAnimations button.open-theme-editor-button {
-  transition-property:
-    border-color,
-    background-color,
-    transform,
-    stroke;
+  transition-property: border-color, background-color, transform, stroke;
   transition: 0.15s ease-in-out;
 }
 button.open-theme-editor-button:hover {
@@ -3275,14 +3265,14 @@ button.open-theme-editor-button:hover {
   background-size: cover !important;
   background-position: center !important;
   background-color: var(--color-base02) !important;
-  background:
-    linear-gradient(
-      40deg,
-      color-mix(in srgb, var(--color-base03) 70%, var(--color-accent) 30%) 0%,
-      color-mix(in srgb, var(--color-base03) 65%, var(--color-accent) 35%) 15%,
-      color-mix(in srgb, var(--color-base02) 70%, var(--color-accent) 30%) 45%,
-      color-mix(in srgb, var(--color-base02) 73%, var(--color-accent) 27%) 55%,
-      color-mix(in srgb, var(--color-base02) 95%, var(--color-accent) 5%) 100%);
+  background: linear-gradient(
+    40deg,
+    color-mix(in srgb, var(--color-base03) 70%, var(--color-accent) 30%) 0%,
+    color-mix(in srgb, var(--color-base03) 65%, var(--color-accent) 35%) 15%,
+    color-mix(in srgb, var(--color-base02) 70%, var(--color-accent) 30%) 45%,
+    color-mix(in srgb, var(--color-base02) 73%, var(--color-accent) 27%) 55%,
+    color-mix(in srgb, var(--color-base02) 95%, var(--color-accent) 5%) 100%
+  );
   height: 20rem;
   aspect-ratio: 16/9;
   border-radius: 1.5rem;
@@ -3298,10 +3288,7 @@ button.open-theme-editor-button:hover {
   display: none;
 }
 .enableAnimations .generate-theme-control {
-  transition-property:
-    border-color,
-    background-color,
-    transform !important;
+  transition-property: border-color, background-color, transform !important;
   transition: 0.15s ease-in-out !important;
 }
 .generate-theme-control:active {
@@ -3375,10 +3362,15 @@ button.open-theme-editor-button:hover {
 .preview-image-container.open .theme-generation-sub-container {
   transform: translateX(0px);
 }
-.enableAnimations .custom-theme-maker:not(.no-image-available) .preview-image-container.open .theme-controls-container {
+.enableAnimations
+  .custom-theme-maker:not(.no-image-available)
+  .preview-image-container.open
+  .theme-controls-container {
   animation: openThemeGenerator 0.3s ease-in-out forwards;
 }
-.custom-theme-maker:not(.no-image-available) .preview-image-container.open .theme-controls-container {
+.custom-theme-maker:not(.no-image-available)
+  .preview-image-container.open
+  .theme-controls-container {
   z-index: 20;
   width: calc(5rem + 4px - 0.2rem);
   padding-left: 0.5rem;
@@ -3445,7 +3437,9 @@ button.open-theme-editor-button:hover {
   top: calc(50% - 1.25rem);
   right: 125%;
 }
-.color-picker-preview-wrapper:not(:has(.floating-picker)) .color-preview-bubble:hover + .smpp-tooltip,
+.color-picker-preview-wrapper:not(:has(.floating-picker))
+  .color-preview-bubble:hover
+  + .smpp-tooltip,
 .generate-theme-control:hover + .smpp-tooltip {
   opacity: 1;
   filter: blur(0px);
@@ -3588,14 +3582,14 @@ button.open-theme-editor-button:hover {
   display: block;
 }
 .compact-theme-option.no-themes .compact-theme-option-image-container {
-  background:
-    linear-gradient(
-      40deg,
-      color-mix(in srgb, var(--color-base03) 70%, var(--color-accent) 30%) 0%,
-      color-mix(in srgb, var(--color-base03) 65%, var(--color-accent) 35%) 15%,
-      color-mix(in srgb, var(--color-base02) 70%, var(--color-accent) 30%) 45%,
-      color-mix(in srgb, var(--color-base02) 73%, var(--color-accent) 27%) 55%,
-      color-mix(in srgb, var(--color-base02) 95%, var(--color-accent) 5%) 100%);
+  background: linear-gradient(
+    40deg,
+    color-mix(in srgb, var(--color-base03) 70%, var(--color-accent) 30%) 0%,
+    color-mix(in srgb, var(--color-base03) 65%, var(--color-accent) 35%) 15%,
+    color-mix(in srgb, var(--color-base02) 70%, var(--color-accent) 30%) 45%,
+    color-mix(in srgb, var(--color-base02) 73%, var(--color-accent) 27%) 55%,
+    color-mix(in srgb, var(--color-base02) 95%, var(--color-accent) 5%) 100%
+  );
 }
 .compact-theme-option .compact-theme-option-image-container.no-image img {
   display: none;
@@ -3612,14 +3606,39 @@ button.open-theme-editor-button:hover {
   object-fit: cover;
   filter: blur(2px);
   position: absolute;
-  background:
-    linear-gradient(
-      40deg,
-      color-mix(in srgb, var(--color-base03-local) 70%, var(--color-accent-local) 30%) 0%,
-      color-mix(in srgb, var(--color-base03-local) 65%, var(--color-accent-local) 35%) 15%,
-      color-mix(in srgb, var(--color-base02-local) 70%, var(--color-accent-local) 30%) 45%,
-      color-mix(in srgb, var(--color-base02-local) 73%, var(--color-accent-local) 27%) 55%,
-      color-mix(in srgb, var(--color-base02-local) 95%, var(--color-accent-local) 5%) 100%);
+  background: linear-gradient(
+    40deg,
+    color-mix(
+        in srgb,
+        var(--color-base03-local) 70%,
+        var(--color-accent-local) 30%
+      )
+      0%,
+    color-mix(
+        in srgb,
+        var(--color-base03-local) 65%,
+        var(--color-accent-local) 35%
+      )
+      15%,
+    color-mix(
+        in srgb,
+        var(--color-base02-local) 70%,
+        var(--color-accent-local) 30%
+      )
+      45%,
+    color-mix(
+        in srgb,
+        var(--color-base02-local) 73%,
+        var(--color-accent-local) 27%
+      )
+      55%,
+    color-mix(
+        in srgb,
+        var(--color-base02-local) 95%,
+        var(--color-accent-local) 5%
+      )
+      100%
+  );
   background-size: cover;
   background-position: center;
 }
@@ -3722,14 +3741,39 @@ button.open-theme-editor-button:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  background:
-    linear-gradient(
-      40deg,
-      color-mix(in srgb, var(--color-base03-local) 70%, var(--color-accent-local) 30%) 0%,
-      color-mix(in srgb, var(--color-base03-local) 65%, var(--color-accent-local) 35%) 15%,
-      color-mix(in srgb, var(--color-base02-local) 70%, var(--color-accent-local) 30%) 45%,
-      color-mix(in srgb, var(--color-base02-local) 73%, var(--color-accent-local) 27%) 55%,
-      color-mix(in srgb, var(--color-base02-local) 95%, var(--color-accent-local) 5%) 100%);
+  background: linear-gradient(
+    40deg,
+    color-mix(
+        in srgb,
+        var(--color-base03-local) 70%,
+        var(--color-accent-local) 30%
+      )
+      0%,
+    color-mix(
+        in srgb,
+        var(--color-base03-local) 65%,
+        var(--color-accent-local) 35%
+      )
+      15%,
+    color-mix(
+        in srgb,
+        var(--color-base02-local) 70%,
+        var(--color-accent-local) 30%
+      )
+      45%,
+    color-mix(
+        in srgb,
+        var(--color-base02-local) 73%,
+        var(--color-accent-local) 27%
+      )
+      55%,
+    color-mix(
+        in srgb,
+        var(--color-base02-local) 95%,
+        var(--color-accent-local) 5%
+      )
+      100%
+  );
   position: relative;
 }
 .sharing-image {
@@ -3753,10 +3797,7 @@ button.open-theme-editor-button:hover {
 
 /* src/styles/smpp-styles/assignments.css */
 .assignment__item {
-  transition-property:
-    background-color,
-    margin-left,
-    padding-left;
+  transition-property: background-color, margin-left, padding-left;
   transition: 0.3s ease;
 }
 .assignment__item {
@@ -3832,10 +3873,7 @@ html {
   --darken-background: rgba(0, 0, 0, 0.2);
   --color-splashtext: var(--color-accent);
   --color-shadow: rgba(0, 0, 0, 0.2);
-  --font-family:
-    "Montserrat",
-    "Trebuchet MS",
-    sans-serif;
+  --font-family: "Montserrat", "Trebuchet MS", sans-serif;
   --small-blur: blur(5px);
   --medium-blur: blur(10px);
   --large-blur: blur(20px);
@@ -4217,7 +4255,9 @@ smsc-inlineeditor.smsc-table__cell--inlineeditor {
 .smsc-templates__linkbutton {
   background-color: var(--color-base01) !important;
 }
-[listview] .listview__row--selected .listview__cell:not(.listview__cell--select-btn) {
+[listview]
+  .listview__row--selected
+  .listview__cell:not(.listview__cell--select-btn) {
   background-color: var(--color-base02) !important;
 }
 .smsc-templates__separator,
@@ -4308,8 +4348,13 @@ smsc-inlineeditor.smsc-table__cell--inlineeditor {
 .smscAdminNav_body_linkdivTitle:hover {
   color: var(--color-text) !important;
 }
-.smscAdminNav_body .smscAdminNav_body_link .smscAdminNav_body_linkdivText.disabled .smscAdminNav_body_linkdivTitle,
-.smscAdminNav_body .smscAdminNav_body_link .smscAdminNav_body_linkdivText.disabled {
+.smscAdminNav_body
+  .smscAdminNav_body_link
+  .smscAdminNav_body_linkdivText.disabled
+  .smscAdminNav_body_linkdivTitle,
+.smscAdminNav_body
+  .smscAdminNav_body_link
+  .smscAdminNav_body_linkdivText.disabled {
   opacity: 0.6 !important;
   color: var(--color-text) !important;
 }
@@ -4377,7 +4422,11 @@ div.stdReplyWrapper {
   background: var(--color-base01) !important;
   color: var(--color-red) !important;
 }
-.period__column .period-input .period-input__editable-period .period-input__whole-day-checkbox input[type=checkbox] {
+.period__column
+  .period-input
+  .period-input__editable-period
+  .period-input__whole-day-checkbox
+  input[type="checkbox"] {
   flex: 0 0 14px !important;
   width: 14px !important;
   height: 14px !important;
@@ -4493,7 +4542,11 @@ input:checked + .slider:before {
   transform: translateX(-50%) translateY(0px);
   max-width: 270px !important;
   width: 240px !important;
-  background-color: color-mix(in srgb, var(--color-base00) 40%, var(--color-base01) 60%) !important;
+  background-color: color-mix(
+    in srgb,
+    var(--color-base00) 40%,
+    var(--color-base01) 60%
+  ) !important;
   border: 2px solid var(--color-base02) !important;
   align-items: center !important;
   display: flex;
@@ -4645,7 +4698,9 @@ ul.smsc-column-nav {
   border-color: var(--color-base03) !important;
 }
 .enableAnimations .main-slider {
-  transition: opacity 0.2s, border-color 0.2s !important;
+  transition:
+    opacity 0.2s,
+    border-color 0.2s !important;
 }
 .main-slider::-webkit-slider-thumb {
   width: 1.6rem;
@@ -4908,7 +4963,7 @@ span.userNotRead {
   background-color: var(--color-base01) !important;
 }
 .personaliaTable > tbody > tr > td > input.readonly,
-input[name=email] {
+input[name="email"] {
   background-color: var(--color-base01) !important;
 }
 .smscDialog {
@@ -4938,9 +4993,9 @@ input[name=email] {
   display: none !important;
 }
 .input-FZRHX,
-label.checkbox input[type=checkbox],
-div.smscCheckbox input[type=checkbox],
-.mobile-style input[type=checkbox],
+label.checkbox input[type="checkbox"],
+div.smscCheckbox input[type="checkbox"],
+.mobile-style input[type="checkbox"],
 .uscMain .usersContainerBlock .usersContainerBlockBack,
 [listview] .listview__select-btn,
 smsc-listview .checkbox-button {
@@ -4952,23 +5007,23 @@ smsc-listview .checkbox-button {
   width: 1.3rem !important;
   height: 1.3rem !important;
 }
-.smsc-topnav input[type=search].input-search {
+.smsc-topnav input[type="search"].input-search {
   background-image: none !important;
 }
-.mobile-style input[type=checkbox],
-.mobile-style input[type=checkbox]:checked {
+.mobile-style input[type="checkbox"],
+.mobile-style input[type="checkbox"]:checked {
   background-repeat: no-repeat !important;
   background-size: cover !important;
 }
 .input-FZRHX:checked,
 .moveToPostbox__item__icon,
-label.checkbox input[type=checkbox]:checked,
-div.smscCheckbox input[type=checkbox]:checked,
-.mobile-style input[type=checkbox]:checked,
+label.checkbox input[type="checkbox"]:checked,
+div.smscCheckbox input[type="checkbox"]:checked,
+.mobile-style input[type="checkbox"]:checked,
 .uscMain .usersContainerBlock .usersContainerBlockBack.selected,
-[listview] .listview__select-btn[aria-checked=true],
+[listview] .listview__select-btn[aria-checked="true"],
 smsc-listview .checkbox-button--checked,
-smsc-listview .checkbox-button[aria-checked=true] {
+smsc-listview .checkbox-button[aria-checked="true"] {
   background: var(--color-accent) !important;
 }
 .listview__cell.js-listview-cell.listview__cell--icon-24.column--icon {
@@ -4979,9 +5034,9 @@ smsc-listview .checkbox-button[aria-checked=true] {
   border-top-right-radius: 1rem;
   border-bottom-right-radius: 1rem;
 }
-.mobile-style input[type=radio],
+.mobile-style input[type="radio"],
 .moveToPostbox__item__icon,
-label.radiobutton input[type=radio] {
+label.radiobutton input[type="radio"] {
   appearance: none !important;
   background: var(--color-base02) !important;
   border: 2px solid var(--color-base03) !important;
@@ -4990,8 +5045,8 @@ label.radiobutton input[type=radio] {
   width: 1.3rem !important;
   height: 1.3rem !important;
 }
-.mobile-style input[type=radio]:checked,
-label.radiobutton input[type=radio]:checked {
+.mobile-style input[type="radio"]:checked,
+label.radiobutton input[type="radio"]:checked {
   background: var(--color-accent) !important;
 }
 .smsc-select {
@@ -5046,7 +5101,10 @@ span.js-badge-msg.topnav__badge {
 .smsc-topnav .topnav__badge.js-badge-msg {
   margin-left: 0.4rem !important;
 }
-.lvs-pupilpresences-wrapper .lvs-pupilpresences .lvs-pupilpresences-row .lvs-pupilpresences-cell.grey {
+.lvs-pupilpresences-wrapper
+  .lvs-pupilpresences
+  .lvs-pupilpresences-row
+  .lvs-pupilpresences-cell.grey {
   color: var(--color-text) !important;
   opacity: 0.7 !important;
 }
@@ -5160,8 +5218,14 @@ textarea.form-item__input-field.form-item__input-field--textarea {
 .msgContentVal div h2 {
   color: var(--color-text) !important;
 }
-.smsc-topnav [data-notifs] .notification .notification__btn:focus:not(.focus-ring),
-.smsc-topnav [data-notifs] .notification .notification__close:focus:not(.focus-ring) {
+.smsc-topnav
+  [data-notifs]
+  .notification
+  .notification__btn:focus:not(.focus-ring),
+.smsc-topnav
+  [data-notifs]
+  .notification
+  .notification__close:focus:not(.focus-ring) {
   box-shadow: none !important;
 }
 .verticaltext-noright {
@@ -5296,10 +5360,7 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   height: 18px;
 }
 .enableAnimations .window-button svg {
-  transition-property:
-    background,
-    transform,
-    border-color;
+  transition-property: background, transform, border-color;
   transition: 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
 }
 .enableAnimations .window-button:hover svg {
@@ -5351,12 +5412,7 @@ smsc-toolbar.hlp-push-left--milli.hlp-revoke-pad-right {
   display: block;
 }
 .enableAnimations .base-window {
-  transition-property:
-    width,
-    height,
-    left,
-    top,
-    border-radius;
+  transition-property: width, height, left, top, border-radius;
   transition: 0.2s cubic-bezier(0.16, 1.13, 0.89, 0.96);
   animation: popIn 0.3s cubic-bezier(0.01, 1.13, 0.32, 0.96) forwards !important;
 }
@@ -5573,10 +5629,7 @@ button.wopi_files__button {
   border-width: 2px !important;
 }
 .enableAnimations button.wopi_files__button {
-  transition-property:
-    background-color,
-    border-color,
-    border-radius;
+  transition-property: background-color, border-color, border-radius;
   transition: 0.05s ease-in-out !important;
 }
 .card__container {
@@ -5585,12 +5638,7 @@ button.wopi_files__button {
   box-shadow: none !important;
 }
 .enableAnimations .card__container {
-  transition-property:
-    background-color,
-    transform,
-    box-shadow,
-    scale,
-    cursor;
+  transition-property: background-color, transform, box-shadow, scale, cursor;
   transition: ease-in-out 0.25s;
 }
 .card__container:hover {
@@ -5617,7 +5665,10 @@ button.wopi_files__button {
   transition-property: background-color, border-color;
   transition: 0.1s ease-in-out !important;
 }
-body.modern-ui .photos__albums .l-albums__header input.l-albums__header__search-input {
+body.modern-ui
+  .photos__albums
+  .l-albums__header
+  input.l-albums__header__search-input {
   margin-left: 10px !important;
 }
 .card:hover {
@@ -5648,7 +5699,7 @@ body.modern-ui .photos__albums .l-albums__header input.l-albums__header__search-
   opacity: 0.8;
   font-weight: 300 !important;
 }
-div.smscCheckbox input[type=checkbox]:not(.loading):focus + label:before {
+div.smscCheckbox input[type="checkbox"]:not(.loading):focus + label:before {
   box-shadow: none !important;
   border: none !important;
 }
@@ -5669,8 +5720,8 @@ div[style*=";color:"] {
 div[style*=";color:#033399;"] {
   opacity: 0.7 !important;
 }
-span[style*=background]:not(.lijnNumber),
-div[style*=background]:not(.manual_widgettitle):not(.base-window) {
+span[style*="background"]:not(.lijnNumber),
+div[style*="background"]:not(.manual_widgettitle):not(.base-window) {
   background-color: transparent !important;
 }
 .bubble-s87kI {
@@ -5684,14 +5735,14 @@ div[style*=background]:not(.manual_widgettitle):not(.base-window) {
   background-color: var(--darken-background) !important;
   backdrop-filter: var(--medium-blur) !important;
 }
-.dropdownMenuItem-Vszox[data-selected=true] {
+.dropdownMenuItem-Vszox[data-selected="true"] {
   background-color: var(--color-base03) !important;
 }
-.dropdownMenuItem-Vszox[data-selected=false] {
+.dropdownMenuItem-Vszox[data-selected="false"] {
   background-color: var(--color-base01) !important;
   border-radius: 0.75rem !important;
 }
-.dropdownMenuItem-Vszox[data-selected=false]:hover {
+.dropdownMenuItem-Vszox[data-selected="false"]:hover {
   background-color: var(--color-base02) !important;
 }
 .todoRow-sOF6J .metadata-erpzx {
@@ -5702,7 +5753,7 @@ div[style*=background]:not(.manual_widgettitle):not(.base-window) {
   box-shadow: none !important;
 }
 .pinnedTodoListHeader-L0Pj5 .graphic-g55I1.small-Du6aA,
-button[aria-label=Vastpinnen] {
+button[aria-label="Vastpinnen"] {
   color: var(--color-blue) !important;
 }
 button.button-ZR3rz.filterButton-KvpZ5.bp-c-combo-hover-warning--300 {
@@ -5785,7 +5836,8 @@ label.checkbox.js-checkbox.form-page__receive-copy-by-mail-checkbox {
   height: 100%;
   background: none !important;
 }
-.glass h1.form-completed-page__banner-text.fluid-ui-heading.fluid-ui-heading--1 {
+.glass
+  h1.form-completed-page__banner-text.fluid-ui-heading.fluid-ui-heading--1 {
   background-color: var(--darken-background) !important;
   backdrop-filter: var(--medium-blur) !important;
 }
@@ -6041,7 +6093,7 @@ body.modern-ui .homepage__block__content {
 #courseSearch:focus-visible {
   border-color: var(--color-accent) !important;
 }
-.modern-ui input[type=search].input-search:not(.loading):not([loading]) {
+.modern-ui input[type="search"].input-search:not(.loading):not([loading]) {
   background-image: none !important;
 }
 hr {
@@ -6093,7 +6145,9 @@ div#smscMain:has(.live__quick-nav) {
   border-radius: 1rem;
 }
 .enableAnimations .online-session__list-page .listview__row a:hover {
-  transition: border 0.3s, background 0.3s;
+  transition:
+    border 0.3s,
+    background 0.3s;
 }
 .online-session__list-page .listview__row a:hover {
   background-color: var(--color-base03) !important;
@@ -6119,40 +6173,48 @@ div#smscMain:has(.live__quick-nav) {
   background-color: var(--color-base02) !important;
   border-color: transparent !important;
 }
-.overview-page__view-toggle-buttons.status-toggle-buttons button.smsc-svg--16.c-blue-combo-hover--100 {
+.overview-page__view-toggle-buttons.status-toggle-buttons
+  button.smsc-svg--16.c-blue-combo-hover--100 {
   color: var(--color-text) !important;
   background-color: var(--color-base01) !important;
   border: 2px solid var(--color-base02) !important;
 }
-.overview-page__view-toggle-buttons.status-toggle-buttons button.smsc-svg--16.c-green-combo-hover--100 {
+.overview-page__view-toggle-buttons.status-toggle-buttons
+  button.smsc-svg--16.c-green-combo-hover--100 {
   color: var(--color-text) !important;
   background-color: var(--color-base01) !important;
   border: 2px solid var(--color-base02) !important;
 }
-.overview-page__view-toggle-buttons.status-toggle-buttons button.smsc-svg--16.c-blue-combo-hover--100:hover {
+.overview-page__view-toggle-buttons.status-toggle-buttons
+  button.smsc-svg--16.c-blue-combo-hover--100:hover {
   background-color: var(--color-base02) !important;
   border: 2px solid var(--color-base03) !important;
 }
-.overview-page__view-toggle-buttons.status-toggle-buttons button.smsc-svg--16.c-green-combo-hover--100:hover {
+.overview-page__view-toggle-buttons.status-toggle-buttons
+  button.smsc-svg--16.c-green-combo-hover--100:hover {
   background-color: var(--color-base02) !important;
   border: 2px solid var(--color-base03) !important;
 }
-.overview-page__view-toggle-buttons.status-toggle-buttons button.smsc-svg--16.c-blue-combo-hover--500 {
+.overview-page__view-toggle-buttons.status-toggle-buttons
+  button.smsc-svg--16.c-blue-combo-hover--500 {
   font-weight: 600;
   color: var(--color-accent) !important;
   background-color: var(--color-base01) !important;
   border: 2px solid var(--color-accent) !important;
 }
-.overview-page__view-toggle-buttons.status-toggle-buttons button.smsc-svg--16.c-green-combo-hover--500 {
+.overview-page__view-toggle-buttons.status-toggle-buttons
+  button.smsc-svg--16.c-green-combo-hover--500 {
   font-weight: 600;
   color: var(--color-accent) !important;
   background-color: var(--color-base01) !important;
   border: 2px solid var(--color-accent) !important;
 }
-.overview-page__view-toggle-buttons.status-toggle-buttons button.smsc-svg--16.c-blue-combo-hover--500:hover {
+.overview-page__view-toggle-buttons.status-toggle-buttons
+  button.smsc-svg--16.c-blue-combo-hover--500:hover {
   background-color: var(--color-base02) !important;
 }
-.overview-page__view-toggle-buttons.status-toggle-buttons button.smsc-svg--16.c-green-combo-hover--500:hover {
+.overview-page__view-toggle-buttons.status-toggle-buttons
+  button.smsc-svg--16.c-green-combo-hover--500:hover {
   background-color: var(--color-base02) !important;
 }
 .status-toggle-buttons button {
@@ -6161,11 +6223,11 @@ div#smscMain:has(.live__quick-nav) {
 .status-toggle-buttons {
   gap: 0.5rem !important;
 }
-input[type=search].bootstrap__input.input.search-input {
+input[type="search"].bootstrap__input.input.search-input {
   border: 1px solid var(--color-base02) !important;
   border-radius: 0.5rem !important;
 }
-.quick-search .search__listitemwrapper[selected=true] {
+.quick-search .search__listitemwrapper[selected="true"] {
   background-color: var(--color-base02) !important;
 }
 .textInput-ACLPH,
@@ -6303,7 +6365,9 @@ body form.form .float-label .float-label__input {
   border-color: var(--color-base02) !important;
   background-color: var(--color-base01) !important;
 }
-.glass .login-app .smscButton.blue:hover:not(#pushWizardPopupConfirmButton:hover) {
+.glass
+  .login-app
+  .smscButton.blue:hover:not(#pushWizardPopupConfirmButton:hover) {
   background-color: var(--color-base02) !important;
   border-color: var(--color-base03) !important;
 }
@@ -6318,14 +6382,11 @@ body form.form .float-label .float-label__input {
   font-weight: 500 !important;
   justify-self: center;
 }
-.enableAnimations .login-app .smscButton.blue:not(#pushWizardPopupConfirmButton) {
+.enableAnimations
+  .login-app
+  .smscButton.blue:not(#pushWizardPopupConfirmButton) {
   transition-property:
-    background-color,
-    border-color,
-    box-shadow,
-    width,
-    font-weigt,
-    margin-left,
+    background-color, border-color, box-shadow, width, font-weigt, margin-left,
     scale;
   transition: 0.3s !important;
 }
@@ -6467,7 +6528,12 @@ span.login-app__title.login-app__title--sign-in-with {
 .helper--height--mega {
   height: 0.5rem !important;
 }
-.bubble.filter-todo-bubble div.filter-todo-form div.checkbox-group label.checkbox div.checkbox-todo-label span.abbreviation {
+.bubble.filter-todo-bubble
+  div.filter-todo-form
+  div.checkbox-group
+  label.checkbox
+  div.checkbox-todo-label
+  span.abbreviation {
   color: var(--color-text) !important;
   opacity: 0.7 !important;
 }
@@ -6482,10 +6548,7 @@ span.login-app__title.login-app__title--sign-in-with {
   flex-shrink: 0 !important;
 }
 .enableAnimations .modern-message {
-  transition-property:
-    background-color,
-    border-color,
-    text-decoration;
+  transition-property: background-color, border-color, text-decoration;
   transition: 0.05s ease-in-out !important;
 }
 .quickReplyMenu quickreply-menu {
@@ -6808,7 +6871,7 @@ button.submit-button.smscButton.blue:hover:not(:disabled),
   background-color: var(--color-base03) !important;
   color: var(--color-text) !important;
 }
-.tox:not([dir=rtl]) .tox-toolbar__group:not(:last-of-type) {
+.tox:not([dir="rtl"]) .tox-toolbar__group:not(:last-of-type) {
   border-right: 1px solid var(--color-base03) !important;
 }
 .tox .tox-menubar + .tox-toolbar {
@@ -6854,7 +6917,7 @@ span.tox-tbtn__select-label,
 .tox-collection__item--enabled {
   background-color: var(--color-base02) !important;
 }
-div.tox-toolbar[role=group][aria-disabled=false] {
+div.tox-toolbar[role="group"][aria-disabled="false"] {
   background: none !important;
 }
 .tox-mbtn:hover,
@@ -6949,7 +7012,7 @@ td.msg_right {
   border: 2px solid var(--color-base01) !important;
   border-radius: 10px !important;
 }
-.modern-ui input[type=text]:not(.smsc-inlineeditor__input) {
+.modern-ui input[type="text"]:not(.smsc-inlineeditor__input) {
   background-color: var(--color-base01) !important;
 }
 button.accswitchco.mbselected,
@@ -7054,7 +7117,11 @@ div#submitbtn {
   border-color: var(--color-base02) !important;
   box-shadow: none !important;
 }
-.infoBlock .infoBlock_content .infoBlock_presence .infoBlock_presenceContent .infoBlock_presenceMotivation {
+.infoBlock
+  .infoBlock_content
+  .infoBlock_presence
+  .infoBlock_presenceContent
+  .infoBlock_presenceMotivation {
   color: var(--color-text) !important;
 }
 .lvs_item_top,
@@ -7362,12 +7429,7 @@ input::placeholder {
   box-shadow: 0px 2px 10px 0px var(--color-shadow);
 }
 .enableAnimations .performanceModeTooltipLabel {
-  transition-property:
-    border-color,
-    opacity,
-    height,
-    width,
-    scale;
+  transition-property: border-color, opacity, height, width, scale;
   transition: 0.2s ease-in-out;
 }
 .performanceModeTooltipLabel input {
@@ -7507,17 +7569,22 @@ li {
 .pupil_nav_pupilinfo {
   text-align: center !important;
 }
-.pupil_nav_info .pupil_nav_info_pupilData .pupil_nav_pupilinfo .pupil_nav_pupilinfo_item.teachers {
+.pupil_nav_info
+  .pupil_nav_info_pupilData
+  .pupil_nav_pupilinfo
+  .pupil_nav_pupilinfo_item.teachers {
   max-width: none !important;
 }
 #lvs_toolbar {
   background-color: var(--color-base01) !important;
 }
 .tree-classic li.open {
-  background: url(/includes/jQuery/plugins/jsTree/themes/classic/icons.png) -32px -48px no-repeat !important;
+  background: url(/includes/jQuery/plugins/jsTree/themes/classic/icons.png) -32px -48px
+    no-repeat !important;
 }
 .tree-classic li.closed {
-  background: url(/includes/jQuery/plugins/jsTree/themes/classic/icons.png) -48px -32px no-repeat !important;
+  background: url(/includes/jQuery/plugins/jsTree/themes/classic/icons.png) -48px -32px
+    no-repeat !important;
 }
 .tree-classic li {
   background-image: none !important;
@@ -7558,10 +7625,7 @@ li {
   background-color: var(--color-base01) !important;
 }
 .enableAnimations .treecollapse {
-  transition-property:
-    border-color,
-    background-color,
-    color;
+  transition-property: border-color, background-color, color;
   transition: 0.1s ease-in-out !important;
 }
 .treecollapse a,
@@ -7583,8 +7647,8 @@ li {
 table {
   background-color: transparent !important;
 }
-td[background*=static6],
-td[background*=images] {
+td[background*="static6"],
+td[background*="images"] {
   display: none !important;
 }
 td[bgcolor*="#"] {
@@ -7656,12 +7720,12 @@ td[bgcolor*="#"] {
 .notification__title {
   color: var(--color-text) !important;
 }
-.smsc-topnav [data-notifs] .notifs__hdr [role=switch] {
+.smsc-topnav [data-notifs] .notifs__hdr [role="switch"] {
   background-color: var(--color-base01) !important;
   border: 2px solid var(--color-base02) !important;
   border-radius: 1rem !important;
 }
-.smsc-topnav [data-notifs] .notifs__hdr [role=switch] .switch-values:after {
+.smsc-topnav [data-notifs] .notifs__hdr [role="switch"] .switch-values:after {
   background-color: var(--color-base03) !important;
 }
 .smsc-topnav [data-notifs] .notifs__hdr button:focus:not(.focus-ring) {
@@ -7744,11 +7808,19 @@ button.tox-tbtn.tox-tbtn--enabled {
 .smsc-topnav [data-notifs] .notification__btn {
   padding: 1rem !important;
 }
-.smsc-topnav [data-notifs] .notifs__hdr [role=switch] .switch-values span {
+.smsc-topnav [data-notifs] .notifs__hdr [role="switch"] .switch-values span {
   color: var(--color-accent) !important;
 }
-.smsc-topnav [data-notifs] .notifs__hdr [role=switch][aria-checked=false] :last-child,
-.smsc-topnav [data-notifs] .notifs__hdr [role=switch][aria-checked=true] :first-child {
+.smsc-topnav
+  [data-notifs]
+  .notifs__hdr
+  [role="switch"][aria-checked="false"]
+  :last-child,
+.smsc-topnav
+  [data-notifs]
+  .notifs__hdr
+  [role="switch"][aria-checked="true"]
+  :first-child {
   color: var(--color-text) !important;
 }
 .notifs__content {
@@ -7886,13 +7958,17 @@ ul.js-notifs-list.notifs__list {
   background-color: var(--darken-background) !important;
   backdrop-filter: var(--medium-blur) !important;
 }
-.dropdownMenuItem-Vszox[data-selected=true] {
+.dropdownMenuItem-Vszox[data-selected="true"] {
   border-radius: 0.75rem !important;
 }
 .today-and-next-days__bubble .dropdown-menu {
   gap: 2px !important;
 }
-.todo-column [listview] .todo-column__row:hover .todo-column__date-cell + .todo-column__actions-cell {
+.todo-column
+  [listview]
+  .todo-column__row:hover
+  .todo-column__date-cell
+  + .todo-column__actions-cell {
   top: 0.25rem !important;
   right: 0.25rem !important;
   border-radius: 1rem !important;
@@ -7947,7 +8023,9 @@ ul.js-notifs-list.notifs__list {
 .todo-column [listview] .todo-column__date-cell {
   padding: 0.75rem !important;
 }
-.listview__row.js-listview-row.todo-column__row:has(.todo-column__date-cell):not(:first-of-type) {
+.listview__row.js-listview-row.todo-column__row:has(
+    .todo-column__date-cell
+  ):not(:first-of-type) {
   margin-top: 0.5rem !important;
 }
 .todo-column__container .todo-column__pinned > * {
@@ -8150,10 +8228,15 @@ hr.separator.todo-column__pinned__seperator {
 .detail-lint.js-detail-lint {
   background-color: transparent !important;
 }
-.course-module-planner__timeline .timeline-row.planned-element-row .action-block__buttons {
+.course-module-planner__timeline
+  .timeline-row.planned-element-row
+  .action-block__buttons {
   background-color: var(--color-base02) !important;
 }
-.enableAnimations .course-module-planner__timeline .timeline-row.planned-element-row .action-block__buttons {
+.enableAnimations
+  .course-module-planner__timeline
+  .timeline-row.planned-element-row
+  .action-block__buttons {
   transition: ease-in-out !important;
   transition-duration: 0.2s !important;
 }
@@ -8256,11 +8339,7 @@ button.detail-todo-icon-and-color__icon {
   transition: none !important;
 }
 .enableAnimations .evaluation-list-item {
-  transition-property:
-    background-color,
-    border-color,
-    box-shadow,
-    color;
+  transition-property: background-color, border-color, box-shadow, color;
   transition: 0.1s ease-in-out !important;
 }
 .glass button.evaluation-list-item {
@@ -8282,7 +8361,8 @@ button.icon-label-btn.js-icon-label-btn.icon-label-btn--linkbutton {
   border-radius: 15px !important;
   border: 2px solid var(--color-accent) !important;
 }
-.enableAnimations button.icon-label-btn.js-icon-label-btn.icon-label-btn--linkbutton {
+.enableAnimations
+  button.icon-label-btn.js-icon-label-btn.icon-label-btn--linkbutton {
   transition: ease-in-out 0.1s all !important;
 }
 button.icon-label-btn.js-icon-label-btn.icon-label-btn--linkbutton:hover {
@@ -8304,7 +8384,11 @@ button.icon-label-btn.js-icon-label-btn.icon-label-btn--linkbutton:hover {
   color: var(--color-text) !important;
 }
 .listview__row.js-listview-row.planner-listview-data-row--selected.js-planner-listview-data-row--selected,
-.month-view .element.show-more-element:not(:hover):not(.state--hovered--forced).state--hovered .element__label-container {
+.month-view
+  .element.show-more-element:not(:hover):not(
+    .state--hovered--forced
+  ).state--hovered
+  .element__label-container {
   background-color: var(--color-base01) !important;
 }
 .month-view .week-day.day--today .day-label {
@@ -8481,7 +8565,9 @@ h3.card-block__title.fluid-ui-heading.fluid-ui-heading--3 {
   color: var(--color-text) !important;
   opacity: 0.8 !important;
 }
-.month-view .element:not(.state--hovered):not(.state--dragging):not(.state--resizing) .element__time-label {
+.month-view
+  .element:not(.state--hovered):not(.state--dragging):not(.state--resizing)
+  .element__time-label {
   color: var(--color-text) !important;
   opacity: 0.8 !important;
 }
@@ -8532,8 +8618,12 @@ h3.card-block__title.fluid-ui-heading.fluid-ui-heading--3 {
 .header__tab__organisers {
   color: var(--color-text) !important;
 }
-.course-module-planner__timeline .timeline-row.planned-element-row:hover .icon-block,
-.course-module-planner__timeline .timeline-row.planned-element-row:hover .card-block {
+.course-module-planner__timeline
+  .timeline-row.planned-element-row:hover
+  .icon-block,
+.course-module-planner__timeline
+  .timeline-row.planned-element-row:hover
+  .card-block {
   box-shadow: 0 6px 32px rgba(0, 0, 0, 0.5) !important;
 }
 .course-module-planner__timeline .timeline-row.planned-element-row .card-block {
@@ -8560,17 +8650,30 @@ h3.detail-description__title.title--3,
 .invite-status {
   color: var(--color-text) !important;
 }
-.glass .side-panel.sidepanel__participants-list .side-panel__panel .participants-list__row:hover,
-.glass .side-panel.sidepanel__participants-list .side-panel__panel .participants-list__row--active {
+.glass
+  .side-panel.sidepanel__participants-list
+  .side-panel__panel
+  .participants-list__row:hover,
+.glass
+  .side-panel.sidepanel__participants-list
+  .side-panel__panel
+  .participants-list__row--active {
   background: var(--darken-background) !important;
   backdrop-filter: var(--surface-blur) !important;
 }
-.side-panel.sidepanel__participants-list .side-panel__panel .participants-list__row:hover,
-.side-panel.sidepanel__participants-list .side-panel__panel .participants-list__row--active {
+.side-panel.sidepanel__participants-list
+  .side-panel__panel
+  .participants-list__row:hover,
+.side-panel.sidepanel__participants-list
+  .side-panel__panel
+  .participants-list__row--active {
   background: var(--color-base01) !important;
   border-radius: 1rem;
 }
-.side-panel.sidepanel__participants-list .side-panel__panel .participants-list__row .description {
+.side-panel.sidepanel__participants-list
+  .side-panel__panel
+  .participants-list__row
+  .description {
   color: var(--color-text) !important;
   opacity: 0.7 !important;
 }
@@ -8615,7 +8718,9 @@ button.filter-btn.c-red-combo-hover--100:hover {
   background: var(--color-base02);
   color: var(--color-red) !important;
 }
-.side-panel.sidepanel__participants-list .side-panel__panel .participants-list__buttonbar {
+.side-panel.sidepanel__participants-list
+  .side-panel__panel
+  .participants-list__buttonbar {
   border-top-color: var(--color-base02) !important;
 }
 .course-link__button:hover {
@@ -8700,10 +8805,7 @@ button.filter-btn.c-red-combo-hover--100:hover {
 .sidebar-PJxvI {
   background: transparent !important;
   border-color: transparent !important;
-  transition-property:
-    width,
-    background,
-    border-color;
+  transition-property: width, background, border-color;
 }
 .enableAnimations .button-mJfIq {
   transition-property: all !important;
@@ -8718,21 +8820,21 @@ button.filter-btn.c-red-combo-hover--100:hover {
   padding-left: 0.2rem !important;
   padding-top: 0.2rem !important;
 }
-.glass .sidebar-PJxvI[data-collapsed=false] {
+.glass .sidebar-PJxvI[data-collapsed="false"] {
   backdrop-filter: var(--medium-blur) !important;
   background: var(--darken-background) !important;
 }
 .glass .button-mJfIq:hover,
-.glass .optionWrapper-IEDUX[data-selected=true] .button-mJfIq:hover {
+.glass .optionWrapper-IEDUX[data-selected="true"] .button-mJfIq:hover {
   background: var(--darken-background) !important;
   backdrop-filter: var(--medium-blur) !important;
 }
 .button-mJfIq:hover,
-.optionWrapper-IEDUX[data-selected=true] .button-mJfIq:hover {
+.optionWrapper-IEDUX[data-selected="true"] .button-mJfIq:hover {
   border-color: var(--color-accent) !important;
   background: var(--color-base02) !important;
 }
-.sidebar-PJxvI[data-collapsed=false] {
+.sidebar-PJxvI[data-collapsed="false"] {
   border-right: 2px solid var(--color-base02) !important;
   background: var(--color-base01) !important;
 }
@@ -8743,28 +8845,28 @@ button.filter-btn.c-red-combo-hover--100:hover {
 .optionWrapper-IEDUX {
   border-width: 2px !important;
 }
-.optionWrapper-IEDUX[data-selected=true] {
+.optionWrapper-IEDUX[data-selected="true"] {
   background: transparent !important;
   border-color: transparent !important;
 }
-.optionWrapper-IEDUX[data-selected=true]:after,
-.optionWrapper-IEDUX[data-selected=true]:before {
+.optionWrapper-IEDUX[data-selected="true"]:after,
+.optionWrapper-IEDUX[data-selected="true"]:before {
   display: none !important;
 }
-.optionWrapper-IEDUX[data-selected=false] .button-mJfIq:focus {
+.optionWrapper-IEDUX[data-selected="false"] .button-mJfIq:focus {
   border-color: transparent !important;
   background: transparent !important;
 }
-.optionWrapper-IEDUX[data-selected=false] .button-mJfIq:focus-visible {
+.optionWrapper-IEDUX[data-selected="false"] .button-mJfIq:focus-visible {
   border-color: var(--color-accent) !important;
   background: var(--darken-background) !important;
   backdrop-filter: var(--medium-blur) !important;
 }
-.optionWrapper-IEDUX[data-selected=true] .button-mJfIq {
+.optionWrapper-IEDUX[data-selected="true"] .button-mJfIq {
   background-color: var(--darken-background) !important;
   border-color: var(--color-base02) !important;
 }
-.optionWrapper-IEDUX[data-selected=false] .button-mJfIq:active {
+.optionWrapper-IEDUX[data-selected="false"] .button-mJfIq:active {
   box-shadow: none !important;
   background: var(--darken-background) !important;
   backdrop-filter: var(--medium-blur) !important;
@@ -8826,7 +8928,8 @@ button.filter-btn.c-red-combo-hover--100:hover {
   height: 3.3rem !important;
   width: 3.3rem !important;
 }
-.results-evaluations__content.smsc-container.smsc-container--main .listview__rows {
+.results-evaluations__content.smsc-container.smsc-container--main
+  .listview__rows {
   padding-left: 1.5rem !important;
 }
 [dialog-content] {
@@ -8985,7 +9088,10 @@ input.input.bootstrap__input.search-input {
   border-radius: 15px !important;
   background-color: var(--color-base01) !important;
 }
-.todo-column [listview] .todo-column__row.active-row .todo-column__actions-cell {
+.todo-column
+  [listview]
+  .todo-column__row.active-row
+  .todo-column__actions-cell {
   background-color: var(--color-base02) !important;
 }
 .evaluation-list-item:hover:not(.evaluation-list-item.selected),
@@ -9050,7 +9156,10 @@ button.goals-filter__item.selected {
 .evaluation__content:not(:active):not([active]) {
   background-color: var(--color-base01) !important;
 }
-.evaluation-graphic .evaluation-graphic--goal .evaluation-graphic--icon .goals__goal__graphic {
+.evaluation-graphic
+  .evaluation-graphic--goal
+  .evaluation-graphic--icon
+  .goals__goal__graphic {
   display: none !important;
 }
 .row--course .cell--spacer,
@@ -9060,7 +9169,7 @@ button.goals-filter__item.selected {
 .smsc-select-bubble,
 .smsc_cm_body,
 .course-session-page__container,
-input[type=search].input.search-input,
+input[type="search"].input.search-input,
 .feedback,
 .feedback--silver {
   background-color: var(--color-base01) !important;
@@ -9072,7 +9181,11 @@ input[type=search].input.search-input,
 }
 .c-steel-combo--100,
 .c-steel-combo-hover--100,
-[listview] .listview__row:hover:not(.listview__row--selected) .listview__cell:not(.listview__cell--select-btn):not(.listview__cell--no-hover) {
+[listview]
+  .listview__row:hover:not(.listview__row--selected)
+  .listview__cell:not(.listview__cell--select-btn):not(
+    .listview__cell--no-hover
+  ) {
   background-color: transparent !important;
 }
 .table-page .table-page__container__wrapper__table .cell {
@@ -9154,20 +9267,25 @@ span.evaluation-graphic__progress-ring__description,
 span.evaluation-graphic__progress-ring__value {
   color: var(--color-text) !important;
 }
-.title-and-schoolyear-selector[aria-expanded=true] .title-and-schoolyear-selector__period-container:not(:disabled) {
+.title-and-schoolyear-selector[aria-expanded="true"]
+  .title-and-schoolyear-selector__period-container:not(:disabled) {
   border-color: var(--color-accent) !important;
   background-color: var(--darken-background) !important;
   backdrop-filter: var(--small-blur) !important;
 }
-.title-and-schoolyear-selector .title-and-schoolyear-selector__period-container:hover:not(:disabled) {
+.title-and-schoolyear-selector
+  .title-and-schoolyear-selector__period-container:hover:not(:disabled) {
   border-color: var(--color-accent) !important;
   backdrop-filter: var(--small-blur) !important;
 }
-.title-and-schoolyear-selector .title-and-schoolyear-selector__period-container:not(:disabled) {
+.title-and-schoolyear-selector
+  .title-and-schoolyear-selector__period-container:not(:disabled) {
   border-width: 2px !important;
   border-radius: 15px !important;
 }
-.enableAnimations .title-and-schoolyear-selector .title-and-schoolyear-selector__period-container:not(:disabled) {
+.enableAnimations
+  .title-and-schoolyear-selector
+  .title-and-schoolyear-selector__period-container:not(:disabled) {
   transition-property: border-color, background-color;
   transition: 0.1s !important;
 }
@@ -9198,7 +9316,8 @@ span.evaluation-graphic__progress-ring__value {
   margin-right: 1rem;
   border-radius: 1rem;
 }
-.enableAnimations .listview__row.js-listview-row.leerplannen-overview__list__listview__row {
+.enableAnimations
+  .listview__row.js-listview-row.leerplannen-overview__list__listview__row {
   transition-property: border-color, background-color;
   transition: 0.1s ease-in-out !important;
 }
@@ -9280,18 +9399,20 @@ button.button-ZR3rz.bp-c-combo-hover-plain-outline--300,
   color: var(--color-text) !important;
   margin-right: 0.6rem !important;
 }
-.tabs[role=tablist] > [role=presentation] > [role=tab][aria-selected] {
+.tabs[role="tablist"] > [role="presentation"] > [role="tab"][aria-selected] {
   box-shadow: none !important;
   border-bottom: 2px solid var(--color-accent) !important;
   background-color: var(--color-base02) !important;
 }
-.tabs[role=tablist] > [role=presentation] > [role=tab]:hover:not([aria-selected]) {
+.tabs[role="tablist"]
+  > [role="presentation"]
+  > [role="tab"]:hover:not([aria-selected]) {
   border-bottom-color: var(--color-base03) !important;
 }
-.tabs[role=tablist] {
+.tabs[role="tablist"] {
   border-bottom: none !important;
 }
-.tabs[role=tablist] {
+.tabs[role="tablist"] {
   border-bottom: none !important;
 }
 .bubble-_lWSE {
@@ -9510,10 +9631,7 @@ body {
 }
 .c-red-combo-hover--100 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-red-combo--200,
 .c-red-combo-hover--100:hover,
@@ -9533,10 +9651,7 @@ body {
 }
 .c-red-combo-hover--200 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-red-combo--300,
 .c-red-combo-hover--200:hover,
@@ -9556,10 +9671,7 @@ body {
 }
 .c-red-combo-hover--300 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-red-combo--500,
 .c-red-combo-hover--300:hover,
@@ -9580,10 +9692,7 @@ body {
 }
 .c-red-combo-hover--500 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-red-combo-hover--500:hover {
   --color: #fff;
@@ -9618,10 +9727,7 @@ body {
 }
 .c-red-combo-hover--600 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-red-combo--700,
 .c-red-combo-hover--600:hover {
@@ -9656,10 +9762,7 @@ body {
 }
 .c-brown-combo-hover--100 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-brown-combo--200,
 .c-brown-combo-hover--100:hover,
@@ -9679,10 +9782,7 @@ body {
 }
 .c-brown-combo-hover--200 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-brown-combo--300,
 .c-brown-combo-hover--200:hover {
@@ -9717,10 +9817,7 @@ body {
 }
 .c-brown-combo-hover--500 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-brown-combo-hover--500:hover {
   --color: #fff;
@@ -9755,10 +9852,7 @@ body {
 }
 .c-brown-combo-hover--600 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-brown-combo--700,
 .c-brown-combo-hover--600:hover {
@@ -9793,10 +9887,7 @@ body {
 }
 .c-orange-combo-hover--100 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-orange-combo--200,
 .c-orange-combo-hover--100:hover,
@@ -9816,10 +9907,7 @@ body {
 }
 .c-orange-combo-hover--200 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-orange-combo--300,
 .c-orange-combo-hover--200:hover {
@@ -9854,10 +9942,7 @@ body {
 }
 .c-orange-combo-hover--500 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-orange-combo-hover--500:hover {
   --color: #fff;
@@ -9892,10 +9977,7 @@ body {
 }
 .c-orange-combo-hover--600 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-orange-combo--700,
 .c-orange-combo-hover--600:hover {
@@ -9930,10 +10012,7 @@ body {
 }
 .c-tangerine-combo-hover--100 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-tangerine-combo--200,
 .c-tangerine-combo-hover--100:hover,
@@ -9953,10 +10032,7 @@ body {
 }
 .c-tangerine-combo-hover--200 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-tangerine-combo--300,
 .c-tangerine-combo-hover--200:hover {
@@ -9991,10 +10067,7 @@ body {
 }
 .c-tangerine-combo-hover--500 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-tangerine-combo-hover--500:hover {
   --color: #fff;
@@ -10029,10 +10102,7 @@ body {
 }
 .c-tangerine-combo-hover--600 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-tangerine-combo--700,
 .c-tangerine-combo-hover--600:hover {
@@ -10067,10 +10137,7 @@ body {
 }
 .c-yellow-combo-hover--100 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-yellow-combo--200,
 .c-yellow-combo-hover--100:hover,
@@ -10090,10 +10157,7 @@ body {
 }
 .c-yellow-combo-hover--200 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-yellow-combo--300,
 .c-yellow-combo-hover--200:hover {
@@ -10127,10 +10191,7 @@ body {
 }
 .c-yellow-combo-hover--500 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-yellow-combo-hover--500:hover {
   --color: #fff;
@@ -10164,10 +10225,7 @@ body {
 }
 .c-yellow-combo-hover--600 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-yellow-combo--700,
 .c-yellow-combo-hover--600:hover {
@@ -10202,10 +10260,7 @@ body {
 }
 .c-grass-combo-hover--100 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-grass-combo--200,
 .c-grass-combo-hover--100:hover,
@@ -10225,10 +10280,7 @@ body {
 }
 .c-grass-combo-hover--200 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-grass-combo--300,
 .c-grass-combo-hover--200:hover {
@@ -10262,10 +10314,7 @@ body {
 }
 .c-grass-combo-hover--500 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-grass-combo-hover--500:hover {
   --color: #fff;
@@ -10299,10 +10348,7 @@ body {
 }
 .c-grass-combo-hover--600 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-grass-combo--700,
 .c-grass-combo-hover--600:hover {
@@ -10337,10 +10383,7 @@ body {
 }
 .c-green-combo-hover--100 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-green-combo--200,
 .c-green-combo-hover--100:hover,
@@ -10360,10 +10403,7 @@ body {
 }
 .c-green-combo-hover--200 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-green-combo--300,
 .c-green-combo-hover--200:hover {
@@ -10397,10 +10437,7 @@ body {
 }
 .c-green-combo-hover--500 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-green-combo-hover--500:hover {
   --color: #fff;
@@ -10434,10 +10471,7 @@ body {
 }
 .c-green-combo-hover--600 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-green-combo--700,
 .c-green-combo-hover--600:hover {
@@ -10472,10 +10506,7 @@ body {
 }
 .c-olive-combo-hover--100 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-olive-combo--200,
 .c-olive-combo-hover--100:hover,
@@ -10495,10 +10526,7 @@ body {
 }
 .c-olive-combo-hover--200 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-olive-combo--300,
 .c-olive-combo-hover--200:hover {
@@ -10533,10 +10561,7 @@ body {
 }
 .c-olive-combo-hover--500 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-olive-combo-hover--500:hover {
   --color: #fff;
@@ -10571,10 +10596,7 @@ body {
 }
 .c-olive-combo-hover--600 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-olive-combo--700,
 .c-olive-combo-hover--600:hover {
@@ -10609,10 +10631,7 @@ body {
 }
 .c-mint-combo-hover--100 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-mint-combo--200,
 .c-mint-combo-hover--100:hover,
@@ -10632,10 +10651,7 @@ body {
 }
 .c-mint-combo-hover--200 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-mint-combo--300,
 .c-mint-combo-hover--200:hover {
@@ -10669,10 +10685,7 @@ body {
 }
 .c-mint-combo-hover--500 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-mint-combo-hover--500:hover {
   --color: #fff;
@@ -10706,10 +10719,7 @@ body {
 }
 .c-mint-combo-hover--600 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-mint-combo--700,
 .c-mint-combo-hover--600:hover {
@@ -10744,10 +10754,7 @@ body {
 }
 .c-aqua-combo-hover--100 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-aqua-combo--200,
 .c-aqua-combo-hover--100:hover,
@@ -10767,10 +10774,7 @@ body {
 }
 .c-aqua-combo-hover--200 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-aqua-combo--300,
 .c-aqua-combo-hover--200:hover {
@@ -10805,10 +10809,7 @@ body {
 }
 .c-aqua-combo-hover--500 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-aqua-combo-hover--500:hover {
   --color: #fff;
@@ -10843,10 +10844,7 @@ body {
 }
 .c-aqua-combo-hover--600 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-aqua-combo--700,
 .c-aqua-combo-hover--600:hover {
@@ -10881,10 +10879,7 @@ body {
 }
 .c-blue-combo-hover--100 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-blue-combo--200,
 .c-blue-combo-hover--100:hover,
@@ -10904,10 +10899,7 @@ body {
 }
 .c-blue-combo-hover--200 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-blue-combo--300,
 .c-blue-combo-hover--200:hover {
@@ -10942,10 +10934,7 @@ body {
 }
 .c-blue-combo-hover--500 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-blue-combo-hover--500:hover {
   --color: #fff;
@@ -10980,10 +10969,7 @@ body {
 }
 .c-blue-combo-hover--600 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-blue-combo--700,
 .c-blue-combo-hover--600:hover {
@@ -11018,10 +11004,7 @@ body {
 }
 .c-violet-combo-hover--100 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-violet-combo--200,
 .c-violet-combo-hover--100:hover,
@@ -11041,10 +11024,7 @@ body {
 }
 .c-violet-combo-hover--200 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-violet-combo--300,
 .c-violet-combo-hover--200:hover {
@@ -11079,10 +11059,7 @@ body {
 }
 .c-violet-combo-hover--500 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-violet-combo-hover--500:hover {
   --color: #fff;
@@ -11117,10 +11094,7 @@ body {
 }
 .c-violet-combo-hover--600 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-violet-combo--700,
 .c-violet-combo-hover--600:hover {
@@ -11155,10 +11129,7 @@ body {
 }
 .c-purple-combo-hover--100 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-purple-combo--200,
 .c-purple-combo-hover--100:hover,
@@ -11178,10 +11149,7 @@ body {
 }
 .c-purple-combo-hover--200 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-purple-combo--300,
 .c-purple-combo-hover--200:hover {
@@ -11216,10 +11184,7 @@ body {
 }
 .c-purple-combo-hover--500 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-purple-combo-hover--500:hover {
   --color: #fff;
@@ -11254,10 +11219,7 @@ body {
 }
 .c-purple-combo-hover--600 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-purple-combo--700,
 .c-purple-combo-hover--600:hover {
@@ -11292,10 +11254,7 @@ body {
 }
 .c-lavender-combo-hover--100 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-lavender-combo--200,
 .c-lavender-combo-hover--100:hover,
@@ -11315,10 +11274,7 @@ body {
 }
 .c-lavender-combo-hover--200 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-lavender-combo--300,
 .c-lavender-combo-hover--200:hover {
@@ -11353,10 +11309,7 @@ body {
 }
 .c-lavender-combo-hover--500 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-lavender-combo-hover--500:hover {
   --color: #fff;
@@ -11391,10 +11344,7 @@ body {
 }
 .c-lavender-combo-hover--600 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-lavender-combo--700,
 .c-lavender-combo-hover--600:hover {
@@ -11429,10 +11379,7 @@ body {
 }
 .c-pink-combo-hover--100 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-pink-combo--200,
 .c-pink-combo-hover--100:hover,
@@ -11452,10 +11399,7 @@ body {
 }
 .c-pink-combo-hover--200 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-pink-combo--300,
 .c-pink-combo-hover--200:hover {
@@ -11490,10 +11434,7 @@ body {
 }
 .c-pink-combo-hover--500 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-pink-combo-hover--500:hover {
   --color: #fff;
@@ -11528,10 +11469,7 @@ body {
 }
 .c-pink-combo-hover--600 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-pink-combo--700,
 .c-pink-combo-hover--600:hover {
@@ -11566,10 +11504,7 @@ body {
 }
 .c-silver-combo-hover--100 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-silver-combo--200,
 .c-silver-combo-hover--100:hover,
@@ -11589,10 +11524,7 @@ body {
 }
 .c-silver-combo-hover--200 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-silver-combo--300,
 .c-silver-combo-hover--200:hover {
@@ -11626,10 +11558,7 @@ body {
 }
 .c-silver-combo-hover--500 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-silver-combo-hover--500:hover {
   --color: #000;
@@ -11662,10 +11591,7 @@ body {
 }
 .c-silver-combo-hover--600 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-silver-combo--700,
 .c-silver-combo-hover--600:hover {
@@ -11699,10 +11625,7 @@ body {
 }
 .c-steel-combo-hover--100 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-steel-combo--200,
 .c-steel-combo-hover--100:hover,
@@ -11722,10 +11645,7 @@ body {
 }
 .c-steel-combo-hover--200 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-steel-combo--300,
 .c-steel-combo-hover--200:hover {
@@ -11760,10 +11680,7 @@ body {
 }
 .c-steel-combo-hover--500 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-steel-combo-hover--500:hover {
   --color: #fff;
@@ -11798,10 +11715,7 @@ body {
 }
 .c-steel-combo-hover--600 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-steel-combo--700,
 .c-steel-combo-hover--600:hover {
@@ -11836,10 +11750,7 @@ body {
 }
 .c-black-combo-hover--100 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-black-combo--200,
 .c-black-combo-hover--100:hover,
@@ -11859,10 +11770,7 @@ body {
 }
 .c-black-combo-hover--200 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-black-combo--300,
 .c-black-combo-hover--200:hover {
@@ -11898,10 +11806,7 @@ body {
 }
 .c-black-combo-hover--500 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-black-combo-hover--500:hover {
   --color: #fff;
@@ -11936,10 +11841,7 @@ body {
 }
 .c-black-combo-hover--600 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-black-combo--700,
 .c-black-combo-hover--600:hover {
@@ -11974,10 +11876,7 @@ body {
 }
 .c-lemon-combo-hover--100 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-lemon-combo--200,
 .c-lemon-combo-hover--100:hover,
@@ -11997,10 +11896,7 @@ body {
 }
 .c-lemon-combo-hover--200 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-lemon-combo--300,
 .c-lemon-combo-hover--200:hover {
@@ -12034,10 +11930,7 @@ body {
 }
 .c-lemon-combo-hover--500 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-lemon-combo-hover--500:hover {
   --color: #fff;
@@ -12071,10 +11964,7 @@ body {
 }
 .c-lemon-combo-hover--600 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-lemon-combo--700,
 .c-lemon-combo-hover--600:hover {
@@ -12109,10 +11999,7 @@ body {
 }
 .c-beach-combo-hover--100 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-beach-combo--200,
 .c-beach-combo-hover--100:hover,
@@ -12132,10 +12019,7 @@ body {
 }
 .c-beach-combo-hover--200 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-beach-combo--300,
 .c-beach-combo-hover--200:hover {
@@ -12169,10 +12053,7 @@ body {
 }
 .c-beach-combo-hover--500 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-beach-combo-hover--500:hover {
   --color: #fff;
@@ -12206,10 +12087,7 @@ body {
 }
 .c-beach-combo-hover--600 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-beach-combo--700,
 .c-beach-combo-hover--600:hover {
@@ -12244,10 +12122,7 @@ body {
 }
 .c-kiwi-combo-hover--100 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-kiwi-combo--200,
 .c-kiwi-combo-hover--100:hover,
@@ -12267,10 +12142,7 @@ body {
 }
 .c-kiwi-combo-hover--200 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-kiwi-combo--300,
 .c-kiwi-combo-hover--200:hover {
@@ -12304,10 +12176,7 @@ body {
 }
 .c-kiwi-combo-hover--500 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-kiwi-combo-hover--500:hover {
   --color: #fff;
@@ -12341,10 +12210,7 @@ body {
 }
 .c-kiwi-combo-hover--600 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-kiwi-combo--700,
 .c-kiwi-combo-hover--600:hover {
@@ -12379,10 +12245,7 @@ body {
 }
 .c-emerald-combo-hover--100 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-emerald-combo--200,
 .c-emerald-combo-hover--100:hover,
@@ -12402,10 +12265,7 @@ body {
 }
 .c-emerald-combo-hover--200 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-emerald-combo--300,
 .c-emerald-combo-hover--200:hover {
@@ -12440,10 +12300,7 @@ body {
 }
 .c-emerald-combo-hover--500 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-emerald-combo-hover--500:hover {
   --color: #fff;
@@ -12478,10 +12335,7 @@ body {
 }
 .c-emerald-combo-hover--600 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-emerald-combo--700,
 .c-emerald-combo-hover--600:hover {
@@ -12516,10 +12370,7 @@ body {
 }
 .c-sage-combo-hover--100 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-sage-combo--200,
 .c-sage-combo-hover--100:hover,
@@ -12539,10 +12390,7 @@ body {
 }
 .c-sage-combo-hover--200 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-sage-combo--300,
 .c-sage-combo-hover--200:hover {
@@ -12577,10 +12425,7 @@ body {
 }
 .c-sage-combo-hover--500 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-sage-combo-hover--500:hover {
   --color: #fff;
@@ -12615,10 +12460,7 @@ body {
 }
 .c-sage-combo-hover--600 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-sage-combo--700,
 .c-sage-combo-hover--600:hover {
@@ -12653,10 +12495,7 @@ body {
 }
 .c-moss-combo-hover--100 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-moss-combo--200,
 .c-moss-combo-hover--100:hover,
@@ -12676,10 +12515,7 @@ body {
 }
 .c-moss-combo-hover--200 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-moss-combo--300,
 .c-moss-combo-hover--200:hover {
@@ -12714,10 +12550,7 @@ body {
 }
 .c-moss-combo-hover--500 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-moss-combo-hover--500:hover {
   --color: #fff;
@@ -12752,10 +12585,7 @@ body {
 }
 .c-moss-combo-hover--600 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-moss-combo--700,
 .c-moss-combo-hover--600:hover {
@@ -12790,10 +12620,7 @@ body {
 }
 .c-ocean-combo-hover--100 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-ocean-combo--200,
 .c-ocean-combo-hover--100:hover,
@@ -12813,10 +12640,7 @@ body {
 }
 .c-ocean-combo-hover--200 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-ocean-combo--300,
 .c-ocean-combo-hover--200:hover {
@@ -12850,10 +12674,7 @@ body {
 }
 .c-ocean-combo-hover--500 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-ocean-combo-hover--500:hover {
   --color: #fff;
@@ -12887,10 +12708,7 @@ body {
 }
 .c-ocean-combo-hover--600 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-ocean-combo--700,
 .c-ocean-combo-hover--600:hover {
@@ -12925,10 +12743,7 @@ body {
 }
 .c-jeans-combo-hover--100 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-jeans-combo--200,
 .c-jeans-combo-hover--100:hover,
@@ -12948,10 +12763,7 @@ body {
 }
 .c-jeans-combo-hover--200 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-jeans-combo--300,
 .c-jeans-combo-hover--200:hover {
@@ -12986,10 +12798,7 @@ body {
 }
 .c-jeans-combo-hover--500 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-jeans-combo-hover--500:hover {
   --color: #fff;
@@ -13024,10 +12833,7 @@ body {
 }
 .c-jeans-combo-hover--600 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-jeans-combo--700,
 .c-jeans-combo-hover--600:hover {
@@ -13062,10 +12868,7 @@ body {
 }
 .c-jazz-combo-hover--100 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-jazz-combo--200,
 .c-jazz-combo-hover--100:hover,
@@ -13085,10 +12888,7 @@ body {
 }
 .c-jazz-combo-hover--200 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-jazz-combo--300,
 .c-jazz-combo-hover--200:hover {
@@ -13123,10 +12923,7 @@ body {
 }
 .c-jazz-combo-hover--500 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-jazz-combo-hover--500:hover {
   --color: #fff;
@@ -13161,10 +12958,7 @@ body {
 }
 .c-jazz-combo-hover--600 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-jazz-combo--700,
 .c-jazz-combo-hover--600:hover {
@@ -13199,10 +12993,7 @@ body {
 }
 .c-candy-combo-hover--100 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-candy-combo--200,
 .c-candy-combo-hover--100:hover,
@@ -13222,10 +13013,7 @@ body {
 }
 .c-candy-combo-hover--200 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-candy-combo--300,
 .c-candy-combo-hover--200:hover {
@@ -13260,10 +13048,7 @@ body {
 }
 .c-candy-combo-hover--500 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-candy-combo-hover--500:hover {
   --color: #fff;
@@ -13298,10 +13083,7 @@ body {
 }
 .c-candy-combo-hover--600 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-candy-combo--700,
 .c-candy-combo-hover--600:hover {
@@ -13336,10 +13118,7 @@ body {
 }
 .c-dynamite-combo-hover--100 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-dynamite-combo--200,
 .c-dynamite-combo-hover--100:hover,
@@ -13359,10 +13138,7 @@ body {
 }
 .c-dynamite-combo-hover--200 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-dynamite-combo--300,
 .c-dynamite-combo-hover--200:hover {
@@ -13397,10 +13173,7 @@ body {
 }
 .c-dynamite-combo-hover--500 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-dynamite-combo-hover--500:hover {
   --color: #fff;
@@ -13435,10 +13208,7 @@ body {
 }
 .c-dynamite-combo-hover--600 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-dynamite-combo--700,
 .c-dynamite-combo-hover--600:hover {
@@ -13473,10 +13243,7 @@ body {
 }
 .c-watermelon-combo-hover--100 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-watermelon-combo--200,
 .c-watermelon-combo-hover--100:hover,
@@ -13496,10 +13263,7 @@ body {
 }
 .c-watermelon-combo-hover--200 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-watermelon-combo--300,
 .c-watermelon-combo-hover--200:hover {
@@ -13534,10 +13298,7 @@ body {
 }
 .c-watermelon-combo-hover--500 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-watermelon-combo-hover--500:hover {
   --color: #fff;
@@ -13572,10 +13333,7 @@ body {
 }
 .c-watermelon-combo-hover--600 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-watermelon-combo--700,
 .c-watermelon-combo-hover--600:hover {
@@ -13610,10 +13368,7 @@ body {
 }
 .c-salmon-combo-hover--100 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-salmon-combo--200,
 .c-salmon-combo-hover--100:hover,
@@ -13633,10 +13388,7 @@ body {
 }
 .c-salmon-combo-hover--200 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-salmon-combo--300,
 .c-salmon-combo-hover--200:hover {
@@ -13671,10 +13423,7 @@ body {
 }
 .c-salmon-combo-hover--500 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-salmon-combo-hover--500:hover {
   --color: #fff;
@@ -13709,10 +13458,7 @@ body {
 }
 .c-salmon-combo-hover--600 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-salmon-combo--700,
 .c-salmon-combo-hover--600:hover {
@@ -13747,10 +13493,7 @@ body {
 }
 .c-hazelnut-combo-hover--100 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-hazelnut-combo--200,
 .c-hazelnut-combo-hover--100:hover,
@@ -13770,10 +13513,7 @@ body {
 }
 .c-hazelnut-combo-hover--200 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-hazelnut-combo--300,
 .c-hazelnut-combo-hover--200:hover {
@@ -13808,10 +13548,7 @@ body {
 }
 .c-hazelnut-combo-hover--500 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-hazelnut-combo-hover--500:hover {
   --color: #fff;
@@ -13846,10 +13583,7 @@ body {
 }
 .c-hazelnut-combo-hover--600 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-hazelnut-combo--700,
 .c-hazelnut-combo-hover--600:hover {
@@ -13884,10 +13618,7 @@ body {
 }
 .c-heaven-combo-hover--100 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-heaven-combo--200,
 .c-heaven-combo-hover--100:hover,
@@ -13907,10 +13638,7 @@ body {
 }
 .c-heaven-combo-hover--200 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-heaven-combo--300,
 .c-heaven-combo-hover--200:hover {
@@ -13944,10 +13672,7 @@ body {
 }
 .c-heaven-combo-hover--500 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-heaven-combo-hover--500:hover {
   --color: #fff;
@@ -13981,10 +13706,7 @@ body {
 }
 .c-heaven-combo-hover--600 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-heaven-combo--700,
 .c-heaven-combo-hover--600:hover {
@@ -14019,10 +13741,7 @@ body {
 }
 .c-night-combo-hover--100 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-night-combo--200,
 .c-night-combo-hover--100:hover,
@@ -14042,10 +13761,7 @@ body {
 }
 .c-night-combo-hover--200 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-night-combo--300,
 .c-night-combo-hover--200:hover {
@@ -14080,10 +13796,7 @@ body {
 }
 .c-night-combo-hover--500 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-night-combo-hover--500:hover {
   --color: #fff;
@@ -14118,10 +13831,7 @@ body {
 }
 .c-night-combo-hover--600 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-night-combo--700,
 .c-night-combo-hover--600:hover {
@@ -14156,10 +13866,7 @@ body {
 }
 .c-dolphin-combo-hover--100 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-dolphin-combo--200,
 .c-dolphin-combo-hover--100:hover,
@@ -14179,10 +13886,7 @@ body {
 }
 .c-dolphin-combo-hover--200 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-dolphin-combo--300,
 .c-dolphin-combo-hover--200:hover {
@@ -14217,10 +13921,7 @@ body {
 }
 .c-dolphin-combo-hover--500 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-dolphin-combo-hover--500:hover {
   --color: #fff;
@@ -14255,10 +13956,7 @@ body {
 }
 .c-dolphin-combo-hover--600 {
   transition: all 0.15s ease-out;
-  transition-property:
-    color,
-    border-color,
-    background-color;
+  transition-property: color, border-color, background-color;
 }
 .c-dolphin-combo--700,
 .c-dolphin-combo-hover--600:hover {
@@ -14633,7 +14331,9 @@ body {
 }
 
 /* src/styles/fixes/smartschool-widgets.css */
-#homeAgenda .datepicker__cell.datepicker--current-day .datepicker__cell__content {
+#homeAgenda
+  .datepicker__cell.datepicker--current-day
+  .datepicker__cell__content {
   border: 2px solid var(--color-accent) !important;
   z-index: 10 !important;
 }

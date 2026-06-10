@@ -22,11 +22,27 @@ import type { ApiThemeInfo } from "./theme_share_api.js";
 let nativeThemes: Themes | undefined;
 let categories: ThemeCategories | undefined;
 
+const terrainTheme: Theme = {
+  displayName: "Terrain",
+  cssProperties: {
+    "--color-accent": "#7f8a6f",
+    "--color-text": "#3c3528",
+    "--color-base00": "#ede6d0",
+    "--color-base01": "#d6c7a8",
+    "--color-base02": "#a48d6d",
+    "--color-base03": "#6d5c42",
+    "--color-homepage-sidebars-bg": "#3c342214",
+    "--color-splashtext": "#a18d6c",
+    "--darken-background": "#3c34224d",
+  },
+};
+
 async function getAllThemes(): Promise<Themes> {
   if (!nativeThemes) {
     nativeThemes = (await loadJSON(
       "background-scripts/data/themes.json"
     )) as Themes;
+    nativeThemes["terrain"] = terrainTheme;
   }
   let customThemes = await getAllCustomThemes();
   let themes = { ...nativeThemes, ...customThemes };

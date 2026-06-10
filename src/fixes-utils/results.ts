@@ -28,7 +28,9 @@ export function buisStats(): void {
           }
         });
 
-        const container = document.getElementsByClassName("results-evaluations__filters")[0] as HTMLElement | undefined;
+        const container = document.getElementsByClassName(
+          "results-evaluations__filters"
+        )[0] as HTMLElement | undefined;
         if (!container) return;
 
         const newElement = document.createElement("div");

@@ -99,7 +99,11 @@ function quick_cmd_list() {
 }
 
 function add_quick(name, url, favorite = undefined) {
-  let quick = { name: name.toLowerCase(), url: url, favorite: favorite ?? false };
+  let quick = {
+    name: name.toLowerCase(),
+    url: url,
+    favorite: favorite ?? false,
+  };
   for (let i = 0; i < quicks.length; i++) {
     if (quicks[i].name == name) {
       quick.favorite = favorite ?? quicks[i].favorite ?? false;
@@ -144,7 +148,9 @@ export async function quickLoad() {
   const migratedFavoriteKeys = quicks
     .filter((quick) => quick.favorite)
     .map((quick) => makeFavoriteKey("quick", quick.name));
-  const mergedFavoriteKeys = [...new Set([...favoriteKeys, ...migratedFavoriteKeys])];
+  const mergedFavoriteKeys = [
+    ...new Set([...favoriteKeys, ...migratedFavoriteKeys]),
+  ];
   if (mergedFavoriteKeys.length !== favoriteKeys.length) {
     favoriteKeys = mergedFavoriteKeys;
     await saveFavoriteKeys();

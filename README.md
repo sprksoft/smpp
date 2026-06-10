@@ -37,8 +37,7 @@ Open Smartschool en klik op "Settings" rechtsboven om de extensie aan te passen.
 
 # 👥 Community & Ondersteuning
 
-Voor vragen of feedback, sluit je aan bij onze [Discord server](https://discord.gg/A77xPC9qdW
-).
+Voor vragen of feedback, sluit je aan bij onze [Discord server](https://discord.gg/A77xPC9qdW).
 
 # 👨‍💻 Voor Developers
 

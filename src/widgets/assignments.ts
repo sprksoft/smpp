@@ -154,16 +154,23 @@ class TakenWidget extends WidgetBase {
             "wrapperdiv"
           );
           wrapperDiv.classList.add(
-            `c-${element.color.split("-")[0]}-combo--${element.color.split("-")[1]
+            `c-${element.color.split("-")[0]}-combo--${
+              element.color.split("-")[1]
             }` // LET HIM COOK
           );
 
           // make the litle icon cubes
-          sendDebug("[AS]", "Creating icon for assignment:", element, element.icon);
+          sendDebug(
+            "[AS]",
+            "Creating icon for assignment:",
+            element,
+            element.icon
+          );
           if (element.plannedElementType === "planned-to-dos") {
             // dont try to understand, i dont either
             fetch(
-              `https://${getSchoolName()}.smartschool.be/smsc/svg/${element.icon
+              `https://${getSchoolName()}.smartschool.be/smsc/svg/${
+                element.icon
               }/${element.icon}_16x16.svg`
             )
               .then((response) => response.blob())
