@@ -1292,3 +1292,11 @@ button.filter-btn.c-red-combo-hover--100:hover {
   box-shadow: none !important;
   border-radius: 1rem !important;
 }
+
+.planner-header-search-input,
+.input-Axuwg,
+.keyIcon-aoeax{
+  color: var(--color-text) !important;
+  background: var(--color-base01) !important;
+  border-color: var(--color-base02) !important;
+}
