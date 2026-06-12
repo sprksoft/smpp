@@ -48,3 +48,11 @@ export function buisStats(): void {
       .catch((error) => console.error("Error fetching:", error));
   }, 1000);
 }
+
+document.querySelectorAll('.details-cell[class*="-combo--100"]').forEach(el => {
+  el.classList.forEach(cls => {
+    if (cls.endsWith('-combo--100')) {
+      el.classList.replace(cls, cls.replace('-combo--100', '-combo--300'));
+    }
+  });
+});
