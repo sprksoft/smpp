@@ -40,13 +40,18 @@ type StopInfo = {
 };
 
 function getSearchableStationName(station: any): string {
-  return [station.standardname, station.name, station.id].join(" ").toLowerCase();
+  return [station.standardname, station.name, station.id]
+    .join(" ")
+    .toLowerCase();
 }
 
 function normalizeStopData(rawStop: any): StopInfo {
   const stop: StopInfo = {
     station:
-      rawStop.stationinfo?.standardname || rawStop.stationinfo?.name || rawStop.station || String(rawStop),
+      rawStop.stationinfo?.standardname ||
+      rawStop.stationinfo?.name ||
+      rawStop.station ||
+      String(rawStop),
   };
 
   if (rawStop.time) {
@@ -117,18 +122,26 @@ function extractOccupancyText(rawOccupancy: any): string | null {
       }
     }
 
-    return Object.values(rawOccupancy)
-      .map(extractOccupancyText)
-      .filter(Boolean)
-      .join(" ")
-      .trim() || null;
+    return (
+      Object.values(rawOccupancy)
+        .map(extractOccupancyText)
+        .filter(Boolean)
+        .join(" ")
+        .trim() || null
+    );
   }
 
   return null;
 }
 
-function getOccupancyLabel(departure: any): { label: string; className: string } | null {
-  const rawOccupancy = departure.occupancy ?? departure.occupancylevel ?? departure.passengerlevel ?? departure.crowdingsummary;
+function getOccupancyLabel(
+  departure: any
+): { label: string; className: string } | null {
+  const rawOccupancy =
+    departure.occupancy ??
+    departure.occupancylevel ??
+    departure.passengerlevel ??
+    departure.crowdingsummary;
   const occupancyText = extractOccupancyText(rawOccupancy);
   if (!occupancyText) {
     return null;
@@ -160,12 +173,18 @@ function getOccupancyLabel(departure: any): { label: string; className: string }
   return null;
 }
 
-async function getVehicleStops(vehicleId: string, timestampSeconds?: number, signal?: AbortSignal): Promise<StopInfo[]> {
+async function getVehicleStops(
+  vehicleId: string,
+  timestampSeconds?: number,
+  signal?: AbortSignal
+): Promise<StopInfo[]> {
   if (!vehicleId) {
     return [];
   }
 
-  const date = timestampSeconds ? new Date(timestampSeconds * 1000) : new Date();
+  const date = timestampSeconds
+    ? new Date(timestampSeconds * 1000)
+    : new Date();
   const dateString = `${date.getDate().toString().padStart(2, "0")}${(
     date.getMonth() + 1
   )
@@ -190,7 +209,9 @@ async function getVehicleStops(vehicleId: string, timestampSeconds?: number, sig
     stops = [stops];
   }
 
-  return stops.map(normalizeStopData).filter((stop: StopInfo) => Boolean(stop.station));
+  return stops
+    .map(normalizeStopData)
+    .filter((stop: StopInfo) => Boolean(stop.station));
 }
 
 async function getStationList(): Promise<any[]> {
@@ -204,7 +225,9 @@ async function getStationList(): Promise<any[]> {
   if (!stationField) {
     return [];
   }
-  stationSearchCache = Array.isArray(stationField) ? stationField : [stationField];
+  stationSearchCache = Array.isArray(stationField)
+    ? stationField
+    : [stationField];
   return stationSearchCache;
 }
 
@@ -220,7 +243,10 @@ async function createDepartureCard(
   const destination = departure.direction?.name || departure.station || "-";
   // platform from iRail (fallbacks)
   const platform =
-    departure.platform || departure.platforminfo?.name || departure.platforminfo || "-";
+    departure.platform ||
+    departure.platforminfo?.name ||
+    departure.platforminfo ||
+    "-";
   const departureTime = formatTime(departure.time || 0);
   const delayText = formatDelay(departure.delay, departure.canceled);
 
@@ -228,7 +254,10 @@ async function createDepartureCard(
   card.classList.add("trainCard");
 
   // Add delay status class for styling
-  const canceledFlag = departure.canceled === "1" || departure.canceled === 1 || departure.canceled === true;
+  const canceledFlag =
+    departure.canceled === "1" ||
+    departure.canceled === 1 ||
+    departure.canceled === true;
   if (canceledFlag) {
     card.classList.add("trainCancelled");
   } else if ((departure.delay || 0) <= 0) {
@@ -251,7 +280,8 @@ async function createDepartureCard(
   const centerBlock = document.createElement("div");
   centerBlock.classList.add("trainCardCenter");
 
-  const trainType = departure.vehicleinfo?.type || String(trainNumber).split(" ")[0] || "?";
+  const trainType =
+    departure.vehicleinfo?.type || String(trainNumber).split(" ")[0] || "?";
   const trainTypeLabel = document.createElement("span");
   trainTypeLabel.classList.add("trainTypeLabel");
   trainTypeLabel.textContent = trainType;
@@ -306,7 +336,8 @@ async function createDepartureCard(
   routeStops.classList.add("routeStops");
 
   let routeLoaded = stops.length > 0;
-  let canFetchVehicleStops = !routeLoaded && Boolean(departure.vehicle || departure.vehicleinfo?.name);
+  let canFetchVehicleStops =
+    !routeLoaded && Boolean(departure.vehicle || departure.vehicleinfo?.name);
   let isLoadingRoute = false;
 
   const renderStopList = (stopItems: StopInfo[]) => {
@@ -358,11 +389,19 @@ async function createDepartureCard(
   };
 
   const loadVehicleStops = async () => {
-    if (!canFetchVehicleStops || routeLoaded || signal?.aborted || isLoadingRoute) {
+    if (
+      !canFetchVehicleStops ||
+      routeLoaded ||
+      signal?.aborted ||
+      isLoadingRoute
+    ) {
       return;
     }
 
-    const vehicleId = departure.vehicle || departure.vehicleinfo?.name || departure.vehicleinfo?.shortname;
+    const vehicleId =
+      departure.vehicle ||
+      departure.vehicleinfo?.name ||
+      departure.vehicleinfo?.shortname;
     if (!vehicleId) {
       canFetchVehicleStops = false;
       return;
@@ -371,7 +410,11 @@ async function createDepartureCard(
     isLoadingRoute = true;
     routePreview.textContent = "Laden...";
 
-    const fetchedStops = await getVehicleStops(vehicleId, Number(departure.time), signal);
+    const fetchedStops = await getVehicleStops(
+      vehicleId,
+      Number(departure.time),
+      signal
+    );
     isLoadingRoute = false;
 
     if (signal?.aborted) {
@@ -497,13 +540,16 @@ class NmbsWidget extends WidgetBase {
     this.elements.searchInput!.classList.add("popupinput", "stationInput");
     this.elements.searchInput!.spellcheck = false;
     this.elements.searchInput!.placeholder = "Zoek station";
-    this.elements.searchInput!.addEventListener("keyup", (event: KeyboardEvent) => {
-      if (event.key === "Enter") {
-        this.handleStationSearch();
-      } else {
-        this.debouncedSearch();
+    this.elements.searchInput!.addEventListener(
+      "keyup",
+      (event: KeyboardEvent) => {
+        if (event.key === "Enter") {
+          this.handleStationSearch();
+        } else {
+          this.debouncedSearch();
+        }
       }
-    });
+    );
 
     this.elements.searchButton = document.createElement("button");
     this.elements.searchButton!.classList.add("nmbsSearchButton");
@@ -565,7 +611,9 @@ class NmbsWidget extends WidgetBase {
     if (signal.aborted) return;
 
     if (liveboardData?.exception) {
-      this.displayInfo("Er liep iets mis: " + (liveboardData.message || "Fout bij liveboard"));
+      this.displayInfo(
+        "Er liep iets mis: " + (liveboardData.message || "Fout bij liveboard")
+      );
       return;
     }
 
@@ -588,9 +636,16 @@ class NmbsWidget extends WidgetBase {
   }
 
   async renderTrains(signal?: AbortSignal) {
-    for (const departure of this.cachedDepartures.slice(0, this.displayedTrainCount)) {
+    for (const departure of this.cachedDepartures.slice(
+      0,
+      this.displayedTrainCount
+    )) {
       if (signal?.aborted) return;
-      await createDepartureCard(departure, this.elements.bottomContainer!, signal);
+      await createDepartureCard(
+        departure,
+        this.elements.bottomContainer!,
+        signal
+      );
       if (signal?.aborted) return;
     }
 
@@ -806,7 +861,8 @@ class NmbsWidget extends WidgetBase {
     const previewElementIcon = document.createElement("div");
     previewElementIcon.classList.add("nmbs-icon-128-container");
     previewElementIcon.style.marginBottom = "1rem";
-    previewElementIcon.innerHTML = "<div style='font-size:5rem;margin:auto;'>🚆</div>";
+    previewElementIcon.innerHTML =
+      "<div style='font-size:5rem;margin:auto;'>🚆</div>";
 
     previewElement.appendChild(previewElementTitle);
     previewElement.appendChild(previewElementIcon);

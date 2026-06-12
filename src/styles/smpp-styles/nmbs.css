@@ -256,7 +256,10 @@
 
 .trainCardExpandable {
   cursor: pointer;
-  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .trainCardExpandable:hover {
@@ -414,7 +417,8 @@
 }
 
 .enableAnimations .nmbsSearchButton {
-  transition-property: background-color, border-color, transform, animation, origin;
+  transition-property:
+    background-color, border-color, transform, animation, origin;
   transition: 0.2s ease-in-out !important;
 }
 

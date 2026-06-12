@@ -14,7 +14,11 @@ import {
   getSettingsData,
   getSettingsTemplate,
 } from "./settings.js";
-import { fetchWeatherData, fetchDelijnData, fetchIRailData } from "./api-background-script.js";
+import {
+  fetchWeatherData,
+  fetchDelijnData,
+  fetchIRailData,
+} from "./api-background-script.js";
 import {
   getTheme,
   getThemes,

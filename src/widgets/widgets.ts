@@ -19,7 +19,7 @@ export let widgetEditMode = false;
 export let widgets = [];
 
 let hoveringBag = false;
-let newsState = false; 
+let newsState = false;
 
 let curDragInfo = null;
 
@@ -202,7 +202,6 @@ export class WidgetBase {
 
     targetIp?.classList.remove("smpp-widget-insertion-point-targeted");
     if (cancel || !targetIp) {
-
       targetIp = sourceIp;
     }
     if (!cancel && this.#aboutToDel) {
@@ -262,7 +261,7 @@ export class WidgetBase {
       this.#bagGroup.insertBefore(this.#bagPlaceHolder, el);
       el.remove();
     } else {
-      el.nextElementSibling.remove(); 
+      el.nextElementSibling.remove();
     }
 
     curDragInfo = new WidgetDragInfo(this, sourceIp, {
@@ -336,7 +335,7 @@ export class WidgetBase {
   defaultSettings() {
     return {};
   }
-// hier geen slow tasks doen aub
+  // hier geen slow tasks doen aub
   async createContent(): Promise<any> {
     return;
   }
