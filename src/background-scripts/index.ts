@@ -14,7 +14,7 @@ import {
   getSettingsData,
   getSettingsTemplate,
 } from "./settings.js";
-import { fetchWeatherData, fetchDelijnData } from "./api-background-script.js";
+import { fetchWeatherData, fetchDelijnData, fetchIRailData } from "./api-background-script.js";
 import {
   getTheme,
   getThemes,
@@ -153,6 +153,11 @@ async function handleMessage(message: any, sendResponse: (resp: any) => void) {
       const delijnData = await fetchDelijnData(message.url);
       sendResponse(delijnData);
       console.log("Delijn appdata fetched and sent.");
+    }
+    if (message.action === "fetchIRailData") {
+      const iRailData = await fetchIRailData(message.url);
+      sendResponse(iRailData);
+      console.log("iRail data fetched and sent.");
     }
     if (message.action === "getDelijnColorData") {
       let delijnColorData = await getDelijnColorData();

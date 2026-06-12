@@ -1076,6 +1076,525 @@ input.weather-location-input:focus {
   width: 128px;
 }
 
+/* src/styles/smpp-styles/nmbs.css */
+.glass .trainCard {
+  background: var(--darken-background) !important;
+  backdrop-filter: var(--medium-blur) !important;
+}
+.trainCard {
+  background-color: var(--color-base01);
+  border: 1px solid var(--color-base03);
+  align-self: stretch;
+  padding: 10px;
+  border-radius: 16px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.enableAnimations .trainCard {
+  animation: delijnCardAppear 0.3s ease-in-out 0ms 1;
+}
+@keyframes delijnCardAppear {
+  0% {
+    transform: translateY(-50%);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(10%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+.stationTitle {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 2px !important;
+}
+.stationDetail {
+  opacity: 0.9;
+  font-size: 14px;
+}
+.trainNumber {
+  border: 3px solid var(--color-base02);
+  font-weight: 700;
+  width: 55px;
+  text-align: center;
+  font-size: 20px;
+  border-radius: 10px;
+  padding: 4px;
+}
+.trainCard.lijnCardCancelled .trainCardBottom .timeUntilDeparture {
+  color: var(--color-red);
+}
+.trainCard.lijnCardNoData .arrivalTimeDeviation {
+  color: var(--color-red);
+}
+.trainCard.lijnCardCancelled .trainCardBottom .time,
+.trainCard.lijnCardCancelled .trainCardTop .trainDestination {
+  text-decoration: line-through;
+  text-decoration-color: var(--color-red);
+  text-decoration-thickness: 3px;
+}
+.trainNumber.trainLijnNumber {
+  font-size: 12px;
+  width: 35px;
+  border-radius: 7.5px;
+  border-width: 2px;
+}
+.enableAnimations .trainCardStation {
+  transition-property:
+    background-color,
+    transform,
+    scale;
+  transition: 0.2s ease-in-out;
+}
+.enableAnimations .trainCardStation:hover {
+  transform: scale(1.05);
+}
+.trainCardStation:hover {
+  background-color: var(--color-base02) !important;
+  cursor: pointer !important;
+}
+.trainDestination {
+  margin-bottom: 0px !important;
+  font-size: 17px;
+  vertical-align: middle;
+  align-self: center;
+  margin-left: auto;
+  font-weight: 700;
+  text-align: right;
+}
+.trainDestination.trainDestinationLong {
+  font-size: 15.5px;
+}
+.trainCardBottom {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.time {
+  font-size: 20px;
+}
+.occupancy-box {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #334155;
+  border-radius: 999px;
+  padding: 8px 12px;
+  margin: 8px 0 0 0;
+  background: #0f172a;
+  color: #e5eefb;
+  font-size: 0.95rem;
+  line-height: 1.3;
+  word-break: break-word;
+  margin-left: auto;
+}
+.occupancy-low {
+  border-color: #22c55e;
+  background: #052e16;
+  color: #dcfce7;
+}
+.occupancy-medium {
+  border-color: #f59e0b;
+  background: #451a03;
+  color: #ffedd5;
+}
+.occupancy-high {
+  border-color: #ef4444;
+  background: #450a0a;
+  color: #fee2e2;
+}
+.arrivalTimeDeviation {
+  font-size: 14px;
+  text-align: right;
+}
+.trainOnTime .arrivalTimeDeviation {
+  color: #4caf50;
+}
+.trainLate .arrivalTimeDeviation {
+  color: #ff3333;
+}
+.trainCancelled .arrivalTimeDeviation {
+  color: #ff3333;
+}
+.timeUntilDeparture {
+  margin-bottom: 5px;
+  font-weight: 450;
+  height: 19px;
+}
+.trainCardTop {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+.trainCardLeft {
+  flex: 0 0 auto;
+}
+.trainCardCenter {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1 1 0;
+  min-width: 0;
+}
+.trainTypeLabel {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-accent);
+  text-transform: uppercase;
+}
+.trainDestination {
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.trainCardRight {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 4px;
+  flex: 0 0 auto;
+}
+.statusLabel {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-accent);
+}
+.trainOnTime .statusLabel {
+  color: #4caf50;
+}
+.trainLate .statusLabel,
+.trainCancelled .statusLabel {
+  color: #ff5252;
+}
+.routePreview {
+  margin-top: 12px;
+  display: none;
+  width: 100%;
+  padding: 10px;
+  background: var(--color-base02);
+  border: 1px solid var(--color-base03);
+  border-radius: 16px;
+}
+.trainCard.expanded .routePreview {
+  display: block;
+}
+.trainCardExpandable {
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+.trainCardExpandable:hover {
+  background-color: var(--color-base02);
+}
+.routeStops {
+  position: relative;
+  padding-left: 18px;
+  border-left: 2px solid var(--color-accent);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.routeStopItem {
+  position: relative;
+  padding: 12px 14px 12px 22px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: flex-start;
+  background: var(--color-base01);
+  border: 1px solid var(--color-base03);
+  border-radius: 16px;
+}
+.routeStopItem::before {
+  content: "";
+  position: absolute;
+  left: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  background: var(--color-base02);
+  border: 2px solid var(--color-accent);
+  border-radius: 50%;
+}
+.routeStopItem.routeStopFirst::before {
+  background: var(--color-accent);
+}
+.routeStopItem.routeStopLast {
+  border-bottom: none;
+}
+.routeStopLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  word-break: break-word;
+}
+.routeStopRight {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: 0;
+  white-space: nowrap;
+}
+.routeStopStation {
+  font-size: clamp(12px, 1.1vw, 13px);
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+.routeStopTime {
+  font-size: 12px;
+  color: var(--color-text);
+  white-space: nowrap;
+}
+.routeStopPlatform {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-accent);
+}
+.routeStopItem + .routeStopItem {
+  margin-top: 4px;
+}
+.expandStopsButton {
+  background: transparent;
+  border: 1px solid var(--color-base03);
+  border-radius: 10px;
+  color: var(--color-accent);
+  font-size: 12px;
+  padding: 4px 8px;
+  cursor: pointer;
+  white-space: nowrap;
+  align-self: center;
+}
+.expandStopsButton:hover {
+  background-color: var(--color-base02);
+}
+.platformLabel {
+  font-size: 13px;
+  margin-left: 10px;
+  color: var(--color-base04);
+  align-self: center;
+  white-space: nowrap;
+}
+.platformNumber {
+  border: 3px solid var(--color-base02);
+  font-weight: 700;
+  width: 55px;
+  text-align: center;
+  font-size: 18px;
+  border-radius: 10px;
+  padding: 4px;
+}
+.timeUntilDeparture {
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--color-accent);
+  text-align: right;
+  flex-grow: 1;
+}
+.glass .nmbsSearchButton {
+  background: var(--darken-background) !important;
+  backdrop-filter: var(--small-blur) !important;
+}
+.glass .nmbsSearchButton:hover {
+  background: var(--darken-background) !important;
+}
+.nmbsSearchButton {
+  height: 40px !important;
+  width: 40px !important;
+  background: var(--color-base01) !important;
+  border-radius: 10px !important;
+  border: 2px solid var(--color-base03) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center;
+  flex-grow: 0 !important;
+}
+.nmbsSearchButton:hover {
+  background-color: var(--color-base02) !important;
+  border-color: var(--color-accent) !important;
+}
+.enableAnimations .nmbsSearchButton {
+  transition-property:
+    background-color,
+    border-color,
+    transform,
+    animation,
+    origin;
+  transition: 0.2s ease-in-out !important;
+}
+.enableAnimations .nmbsSearchButton:hover > .delijnSearchIcon {
+  transform-origin: bottom bottom;
+  animation: searchIconJiggle 0.5s ease-in-out 0ms 1;
+}
+@keyframes searchIconJiggle {
+  33% {
+    rotate: -5deg;
+  }
+  50% {
+    rotate: 6deg;
+  }
+  66% {
+    rotate: -5deg;
+  }
+  100% {
+    rotate: 0deg;
+  }
+}
+.nmbsInfoContainer {
+  justify-content: center;
+  font-size: 16px !important;
+  font-weight: bold;
+  text-align: center;
+}
+#nmbsTopContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75rem !important;
+}
+.glass .popupinput.stationInput {
+  background: var(--darken-background) !important;
+  backdrop-filter: var(--small-blur) !important;
+}
+.popupinput.stationInput {
+  flex-grow: 1;
+  height: 40px !important;
+  margin: 0px !important;
+  font-size: 16px !important;
+}
+#nmbsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 12.5px !important;
+}
+#nmbsBottomContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 12.5px;
+}
+.showMoreStationsButton {
+  align-self: center;
+  text-align: center;
+  font-weight: 600;
+  background-color: var(--color-base01);
+  width: 70%;
+  border: 2px solid var(--color-base02);
+  border-radius: 20px !important;
+  padding: 5px !important;
+  font-size: 18px !important;
+}
+.showMoreStationsButton:hover {
+  background-color: var(--color-base02);
+  border-color: var(--color-accent);
+  font-weight: 700;
+  scale: 1.05;
+  cursor: pointer;
+}
+.enableAnimations .showMoreStationsButton {
+  animation: delijnCardAppear 0.3s ease-in-out 0ms 1;
+  transition-property:
+    background-color,
+    border-color,
+    font-weight,
+    scale;
+  transition: 0.2s ease-in-out !important;
+}
+.showMoreTrainsButton {
+  align-self: center;
+  text-align: center;
+  font-weight: 600;
+  background-color: var(--color-base01);
+  width: 70%;
+  border: 2px solid var(--color-base02);
+  border-radius: 20px !important;
+  padding: 5px !important;
+  font-size: 18px !important;
+}
+.showMoreTrainsButton:hover {
+  background-color: var(--color-base02);
+  border-color: var(--color-accent);
+  font-weight: 700;
+  scale: 1.05;
+  cursor: pointer;
+}
+.enableAnimations .showMoreTrainsButton {
+  animation: delijnCardAppear 0.3s ease-in-out 0ms 1;
+  transition-property:
+    background-color,
+    border-color,
+    font-weight,
+    scale;
+  transition: 0.2s ease-in-out !important;
+}
+.showLessTrainsButton {
+  align-self: center;
+  text-align: center;
+  font-weight: 600;
+  background-color: var(--color-base01);
+  width: 70%;
+  border: 2px solid var(--color-base02);
+  border-radius: 20px !important;
+  padding: 5px !important;
+  font-size: 18px !important;
+}
+.showLessTrainsButton:hover {
+  background-color: var(--color-base02);
+  border-color: var(--color-accent);
+  font-weight: 700;
+  scale: 1.05;
+  cursor: pointer;
+}
+.enableAnimations .showLessTrainsButton {
+  animation: delijnCardAppear 0.3s ease-in-out 0ms 1;
+  transition-property:
+    background-color,
+    border-color,
+    font-weight,
+    scale;
+  transition: 0.2s ease-in-out !important;
+}
+.nmbsInfoContainerHidden {
+  display: none;
+}
+.nmbsInfoContainerVisible {
+  display: flex;
+}
+.nmbs-preview-title {
+  text-align: center;
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+.nmbs-icon-128-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* src/styles/smpp-styles/plant.css */
 #plantWidget {
   text-align: center;
