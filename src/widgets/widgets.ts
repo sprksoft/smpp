@@ -19,8 +19,9 @@ export let widgetEditMode = false;
 export let widgets = [];
 
 let hoveringBag = false;
-let newsState = false; // Used for if the news state is changed before it could be created.
+let newsState = false;// Used for if the news state is changed before it could be created.
 // The widget drag info of the widget currently being dragged.
+
 let curDragInfo = null;
 
 let widgetsContainer;
@@ -120,6 +121,7 @@ export class WidgetBase {
     let newContent;
     try {
       if (preview) {
+        this.element.classList.remove("smpp-widget-transparent");
         this.element.classList.add("smpp-widget-preview");
         newContent = await this.createPreview();
       } else {
@@ -236,10 +238,9 @@ export class WidgetBase {
 
       await this.#setPreview(false);
     }
-
     let sourcePannel = sourceIp?.parentElement;
     if (sourcePannel && sourcePannel.childNodes.length == 1) {
-      // Check if the pannel is empty (1 is because of the insertion point)
+       // Check if the pannel is empty (1 is because of the insertion point)
       sourcePannel.nextElementSibling.remove();
       sourcePannel.remove();
     }
@@ -263,7 +264,7 @@ export class WidgetBase {
       this.#bagGroup.insertBefore(this.#bagPlaceHolder, el);
       el.remove();
     } else {
-      el.nextElementSibling.remove(); // remove insertion point.
+      el.nextElementSibling.remove();
     }
 
     curDragInfo = new WidgetDragInfo(this, sourceIp, {
@@ -325,21 +326,22 @@ export class WidgetBase {
     }
     return this.#settings;
   }
-
-  // Override us
-  // Name of the widget
+    // Override us
+    // Name of the widget
   get name() {
     return this.constructor.name;
   }
-
-  // The category the widget is in
+    // The category the widget is in
   get category() {
     return "other";
   }
-
-  // Returns the default settings. (will be filled in so that you always get a valid settings object inside onSettingsChange )
+    // Returns the default settings. (will be filled in so that you always get a valid settings object inside onSettingsChange )
   defaultSettings() {
     return {};
+  }
+  // hier geen slow tasks doen aub
+  async createContent(): Promise<any> {
+    return;
   }
 
   // (Required): Gets called when the content element of the widget needs to be
@@ -350,7 +352,6 @@ export class WidgetBase {
   async createPreview() {
     return await this.createContent();
   }
-
   // Gets called when the settings of the widget change.
   // Use this to update the widget content based on the new settings. (settings object is always valid based on the value returned by defaultSettings())
   async onSettingsChange() {}
@@ -838,7 +839,6 @@ function getWidgetByName(name) {
   }
   return null;
 }
-
 // Get the value of a widget setting.
 // path is: WidgetName.SettingsPath
 export async function getWidgetSetting(path) {

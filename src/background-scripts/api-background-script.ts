@@ -26,3 +26,13 @@ export async function fetchDelijnData(apiUrl: string) {
     console.error("Error fetching Delijn data:", error);
   }
 }
+export async function fetchIRailData(apiUrl: string) {
+  try {
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching iRail data:", error);
+    return null;
+  }
+}

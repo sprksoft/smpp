@@ -20,6 +20,7 @@ import "../games/space-invaders.ts";
 import "../widgets/tutorial-widget.ts";
 import "../widgets/assignments.ts";
 import "../widgets/delijn.ts";
+import "../widgets/nmbs.ts";
 import "../widgets/plant.ts";
 import "../widgets/planner.ts";
 import "../widgets/weather.ts";
