@@ -7042,12 +7042,16 @@ Is it scaring you off?`,
       }
       return this.#settings;
     }
+    // Override us
+    // Name of the widget
     get name() {
       return this.constructor.name;
     }
+    // The category the widget is in
     get category() {
       return "other";
     }
+    // Returns the default settings. (will be filled in so that you always get a valid settings object inside onSettingsChange )
     defaultSettings() {
       return {};
     }
@@ -7055,9 +7059,17 @@ Is it scaring you off?`,
     async createContent() {
       return;
     }
+    // (Required): Gets called when the content element of the widget needs to be
+    // created (return html element). (Don't do slow tasks in here)
+    async createContent() {
+    }
+    // Gets called when the preview element needs to be created (return html
+    // element) NOTE: preview and content never exist at the same time
     async createPreview() {
       return await this.createContent();
     }
+    // Gets called when the settings of the widget change.
+    // Use this to update the widget content based on the new settings. (settings object is always valid based on the value returned by defaultSettings())
     async onSettingsChange() {
     }
     async onThemeChange() {
@@ -13115,7 +13127,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   }
   function normalizeStopData(rawStop) {
     const stop = {
-      station: rawStop.stationinfo?.standardname || rawStop.stationinfo?.name || rawStop.station || String(rawStop)
+      station: rawStop.stationinfo?.standardname || rawStop.stationinfo?.name || rawStop.station || String(rawStop),
+      delay: 0,
+      canceled: false
     };
     if (rawStop.time) {
       stop.time = Number(rawStop.time);
@@ -13124,6 +13138,10 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     if (platformValue) {
       stop.platform = platformValue;
     }
+    if (rawStop.delay != null) {
+      stop.delay = Number(rawStop.delay) || 0;
+    }
+    stop.canceled = rawStop.canceled === "1" || rawStop.canceled === 1 || rawStop.canceled === true;
     return stop;
   }
   function normalizeDepartureStops(departure) {
@@ -13266,20 +13284,16 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     cardTop.classList.add("trainCardTop");
     const leftBlock = document.createElement("div");
     leftBlock.classList.add("trainCardLeft");
-    const platformElement = document.createElement("span");
-    platformElement.classList.add("platformNumber");
-    platformElement.textContent = platform;
-    leftBlock.appendChild(platformElement);
+    const trainType = departure.vehicleinfo?.type || String(trainNumber).split(" ")[0] || "?";
+    const trainTypeBadge = document.createElement("span");
+    trainTypeBadge.classList.add("trainTypeBadge");
+    trainTypeBadge.textContent = trainType;
+    leftBlock.appendChild(trainTypeBadge);
     const centerBlock = document.createElement("div");
     centerBlock.classList.add("trainCardCenter");
-    const trainType = departure.vehicleinfo?.type || String(trainNumber).split(" ")[0] || "?";
-    const trainTypeLabel = document.createElement("span");
-    trainTypeLabel.classList.add("trainTypeLabel");
-    trainTypeLabel.textContent = trainType;
     const trainDestinationElement = document.createElement("span");
     trainDestinationElement.classList.add("trainDestination");
     trainDestinationElement.textContent = destination;
-    centerBlock.appendChild(trainTypeLabel);
     centerBlock.appendChild(trainDestinationElement);
     const rightBlock = document.createElement("div");
     rightBlock.classList.add("trainCardRight");
@@ -13336,6 +13350,12 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
           const stopTime = document.createElement("span");
           stopTime.classList.add("routeStopTime");
           stopTime.textContent = formatTime(stop.time);
+          if (stop.canceled || stop.delay && stop.delay > 0) {
+            const stopDelay = document.createElement("span");
+            stopDelay.classList.add("routeStopDelay");
+            stopDelay.textContent = formatDelay(stop.delay, stop.canceled);
+            stopTime.appendChild(stopDelay);
+          }
           leftDetails.appendChild(stopTime);
         }
         const rightDetails = document.createElement("div");
@@ -13366,7 +13386,11 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       }
       isLoadingRoute = true;
       routePreview.textContent = "Laden...";
-      const fetchedStops = await getVehicleStops(vehicleId, Number(departure.time), signal);
+      const fetchedStops = await getVehicleStops(
+        vehicleId,
+        Number(departure.time),
+        signal
+      );
       isLoadingRoute = false;
       if (signal?.aborted) {
         return;
@@ -13467,13 +13491,16 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       this.elements.searchInput.classList.add("popupinput", "stationInput");
       this.elements.searchInput.spellcheck = false;
       this.elements.searchInput.placeholder = "Zoek station";
-      this.elements.searchInput.addEventListener("keyup", (event) => {
-        if (event.key === "Enter") {
-          this.handleStationSearch();
-        } else {
-          this.debouncedSearch();
+      this.elements.searchInput.addEventListener(
+        "keyup",
+        (event) => {
+          if (event.key === "Enter") {
+            this.handleStationSearch();
+          } else {
+            this.debouncedSearch();
+          }
         }
-      });
+      );
       this.elements.searchButton = document.createElement("button");
       this.elements.searchButton.classList.add("nmbsSearchButton");
       this.elements.searchButton.innerHTML = searchButtonSvg;
@@ -13524,7 +13551,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       }
       if (signal.aborted) return;
       if (liveboardData?.exception) {
-        this.displayInfo("Er liep iets mis: " + (liveboardData.message || "Fout bij liveboard"));
+        this.displayInfo(
+          "Er liep iets mis: " + (liveboardData.message || "Fout bij liveboard")
+        );
         return;
       }
       let departures = liveboardData?.departures?.departure || [];
@@ -13542,9 +13571,16 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       await this.renderTrains(signal);
     }
     async renderTrains(signal) {
-      for (const departure of this.cachedDepartures.slice(0, this.displayedTrainCount)) {
+      for (const departure of this.cachedDepartures.slice(
+        0,
+        this.displayedTrainCount
+      )) {
         if (signal?.aborted) return;
-        await createDepartureCard(departure, this.elements.bottomContainer, signal);
+        await createDepartureCard(
+          departure,
+          this.elements.bottomContainer,
+          signal
+        );
         if (signal?.aborted) return;
       }
       if (this.displayedTrainCount > 5) {

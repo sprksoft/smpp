@@ -19,7 +19,8 @@ export let widgetEditMode = false;
 export let widgets = [];
 
 let hoveringBag = false;
-let newsState = false;
+let newsState = false;// Used for if the news state is changed before it could be created.
+// The widget drag info of the widget currently being dragged.
 
 let curDragInfo = null;
 
@@ -202,6 +203,8 @@ export class WidgetBase {
 
     targetIp?.classList.remove("smpp-widget-insertion-point-targeted");
     if (cancel || !targetIp) {
+      // Put back were came from if targetInsertionPoint is null or when we
+      // cancel
       targetIp = sourceIp;
     }
     if (!cancel && this.#aboutToDel) {
@@ -235,9 +238,9 @@ export class WidgetBase {
 
       await this.#setPreview(false);
     }
-
     let sourcePannel = sourceIp?.parentElement;
     if (sourcePannel && sourcePannel.childNodes.length == 1) {
+       // Check if the pannel is empty (1 is because of the insertion point)
       sourcePannel.nextElementSibling.remove();
       sourcePannel.remove();
     }
@@ -323,15 +326,16 @@ export class WidgetBase {
     }
     return this.#settings;
   }
-
+    // Override us
+    // Name of the widget
   get name() {
     return this.constructor.name;
   }
-
+    // The category the widget is in
   get category() {
     return "other";
   }
-
+    // Returns the default settings. (will be filled in so that you always get a valid settings object inside onSettingsChange )
   defaultSettings() {
     return {};
   }
@@ -340,10 +344,16 @@ export class WidgetBase {
     return;
   }
 
-  async createPreview(): Promise<any> {
+  // (Required): Gets called when the content element of the widget needs to be
+  // created (return html element). (Don't do slow tasks in here)
+  async createContent() {}
+  // Gets called when the preview element needs to be created (return html
+  // element) NOTE: preview and content never exist at the same time
+  async createPreview() {
     return await this.createContent();
   }
-
+  // Gets called when the settings of the widget change.
+  // Use this to update the widget content based on the new settings. (settings object is always valid based on the value returned by defaultSettings())
   async onSettingsChange() {}
 
   async onThemeChange() {}
@@ -819,7 +829,8 @@ function splitWidgetNameAndSettingPath(path) {
   return [widgetName, settingPath];
 }
 
-// dees pakt een widget bij zijn naam
+// Gets a widget by its name.
+// Use shorthands: setWidgetSetting/getWidgetSetting to set and get settings of a widget
 function getWidgetByName(name) {
   for (let widget of widgets) {
     if (widget.name == name) {
@@ -828,7 +839,8 @@ function getWidgetByName(name) {
   }
   return null;
 }
-
+// Get the value of a widget setting.
+// path is: WidgetName.SettingsPath
 export async function getWidgetSetting(path) {
   const [widgetName, settingPath] = splitWidgetNameAndSettingPath(path);
   const widget = getWidgetByName(widgetName);

@@ -37,6 +37,8 @@ type StopInfo = {
   station: string;
   time?: number;
   platform?: string;
+  delay: number;
+  canceled: boolean;
 };
 
 function getSearchableStationName(station: any): string {
@@ -52,6 +54,8 @@ function normalizeStopData(rawStop: any): StopInfo {
       rawStop.stationinfo?.name ||
       rawStop.station ||
       String(rawStop),
+    delay: 0,
+    canceled: false,
   };
 
   if (rawStop.time) {
@@ -61,6 +65,13 @@ function normalizeStopData(rawStop: any): StopInfo {
   if (platformValue) {
     stop.platform = platformValue;
   }
+  if (rawStop.delay != null) {
+    stop.delay = Number(rawStop.delay) || 0;
+  }
+  stop.canceled =
+    rawStop.canceled === "1" ||
+    rawStop.canceled === 1 ||
+    rawStop.canceled === true;
 
   return stop;
 }
@@ -272,25 +283,18 @@ async function createDepartureCard(
   const leftBlock = document.createElement("div");
   leftBlock.classList.add("trainCardLeft");
 
-  const platformElement = document.createElement("span");
-  platformElement.classList.add("platformNumber");
-  platformElement.textContent = platform;
-  leftBlock.appendChild(platformElement);
+  const trainType =
+    departure.vehicleinfo?.type || String(trainNumber).split(" ")[0] || "?";
+  const trainTypeBadge = document.createElement("span");
+  trainTypeBadge.classList.add("trainTypeBadge");
+  trainTypeBadge.textContent = trainType;
+  leftBlock.appendChild(trainTypeBadge);
 
   const centerBlock = document.createElement("div");
   centerBlock.classList.add("trainCardCenter");
-
-  const trainType =
-    departure.vehicleinfo?.type || String(trainNumber).split(" ")[0] || "?";
-  const trainTypeLabel = document.createElement("span");
-  trainTypeLabel.classList.add("trainTypeLabel");
-  trainTypeLabel.textContent = trainType;
-
   const trainDestinationElement = document.createElement("span");
   trainDestinationElement.classList.add("trainDestination");
   trainDestinationElement.textContent = destination;
-
-  centerBlock.appendChild(trainTypeLabel);
   centerBlock.appendChild(trainDestinationElement);
 
   const rightBlock = document.createElement("div");
@@ -359,11 +363,18 @@ async function createDepartureCard(
       stationName.classList.add("routeStopStation");
       stationName.textContent = stop.station;
       leftDetails.appendChild(stationName);
-
       if (stop.time) {
         const stopTime = document.createElement("span");
         stopTime.classList.add("routeStopTime");
         stopTime.textContent = formatTime(stop.time);
+
+        if (stop.canceled || (stop.delay && stop.delay > 0)) {
+          const stopDelay = document.createElement("span");
+          stopDelay.classList.add("routeStopDelay");
+          stopDelay.textContent = formatDelay(stop.delay, stop.canceled);
+          stopTime.appendChild(stopDelay);
+        }
+
         leftDetails.appendChild(stopTime);
       }
 
@@ -703,11 +714,9 @@ class NmbsWidget extends WidgetBase {
   }
 
   debouncedSearch() {
-    // Clear existing debounce timer
     if (this.searchDebounceTimer) {
       clearTimeout(this.searchDebounceTimer);
     }
-    // Set new debounce timer (500ms delay)
     this.searchDebounceTimer = setTimeout(() => {
       this.handleStationSearch();
     }, 500);
