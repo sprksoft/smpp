@@ -1839,6 +1839,16 @@
       console.error("Error fetching Delijn data:", error);
     }
   }
+  async function fetchIRailData(apiUrl) {
+    try {
+      const response = await fetch(apiUrl);
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Error fetching iRail data:", error);
+      return null;
+    }
+  }
 
   // src/background-scripts/json-loader.ts
   async function loadJSON(path) {
@@ -2437,6 +2447,11 @@
         const delijnData = await fetchDelijnData(message.url);
         sendResponse(delijnData);
         console.log("Delijn appdata fetched and sent.");
+      }
+      if (message.action === "fetchIRailData") {
+        const iRailData = await fetchIRailData(message.url);
+        sendResponse(iRailData);
+        console.log("iRail data fetched and sent.");
       }
       if (message.action === "getDelijnColorData") {
         let delijnColorData = await getDelijnColorData();

@@ -7,6 +7,7 @@ import "./styles/smpp-styles/ui.css";
 import "./styles/smpp-styles/games.css";
 import "./styles/smpp-styles/weather.css";
 import "./styles/smpp-styles/delijn.css";
+import "./styles/smpp-styles/nmbs.css";
 import "./styles/smpp-styles/plant.css";
 import "./styles/smpp-styles/clock.css";
 import "./styles/smpp-styles/calendar.css";
