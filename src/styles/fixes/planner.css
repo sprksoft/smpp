@@ -1300,3 +1300,48 @@ button.filter-btn.c-red-combo-hover--100:hover {
   background: var(--color-base01) !important;
   border-color: var(--color-base02) !important;
 }
+
+
+.savedFiltersPanelContent-zPsJF{
+background-color: var(--color-startpage-bg) !important;
+}
+
+.textInput-MwWBl{
+background-color: var(--color-startpage-bg) !important;
+}
+
+.input-iqFmn{
+background-color: rgba(1,1,1,0) !important;
+}
+
+.button-ZR3rz{
+background-color: var(--color-base01) !important;
+  border: 2px solid var(--color-base03) !important;
+  border-radius: 0.75rem !important;
+}
+
+.tokenGroup-uE9On{
+}
+
+.token-symWI{
+background-color: var(--color-base02) !important;
+}
+
+.textInput-MwWBl{
+border-color: var(--color-accent) !important;
+}
+
+.token-symWI{
+border-color: var(--color-base02) !important;
+}
+
+.selectDropdownPanel-module_infoBarKey__7vVl1,
+.keyIcon-aoeax{
+background-color: var(--color-base02) !important;
+color: var(--color-text) !important;
+}
+
+.frequentlyUsedFilterButtonActive-ZLnDS{
+background-color: var(--color-base00) !important;
+}
+
