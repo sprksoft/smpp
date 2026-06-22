@@ -2264,8 +2264,8 @@ Is it scaring you off?`,
   function delay(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
-  function getExtensionImage(name2) {
-    return browser.runtime.getURL(`media/${name2}`);
+  function getExtensionImage(name) {
+    return browser.runtime.getURL(`media/${name}`);
   }
   function sendDebug(...messages) {
     if (DEBUG) {
@@ -2491,10 +2491,10 @@ Is it scaring you off?`,
       fetch(url).then((response) => {
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         return response.json();
-      }).then((data2) => {
+      }).then((data) => {
         const categories = { buis: 0, voldoende: 0 };
-        if (!Array.isArray(data2)) return;
-        data2.forEach((evaluation) => {
+        if (!Array.isArray(data)) return;
+        data.forEach((evaluation) => {
           const raw = evaluation?.graphic?.value;
           const value = typeof raw === "string" ? parseFloat(raw) : raw;
           if (typeof value === "number" && !Number.isNaN(value)) {
@@ -2750,8 +2750,8 @@ Is it scaring you off?`,
     fileInputContainer = this.createImageFileInputContainer();
     fullContainer = this.createFullFileInput();
     /* theme: Indicates that this image selector references the background image of a theme. (used for theme share cache invalidation on modify) */
-    constructor(name2, isThemeImage = false) {
-      this.name = name2;
+    constructor(name, isThemeImage = false) {
+      this.name = name;
       this.isThemeImage = isThemeImage;
       this._bindEvents();
     }
@@ -2909,12 +2909,12 @@ Is it scaring you off?`,
         }
       };
     }
-    async saveToStorage(data2, compressedImage) {
+    async saveToStorage(data, compressedImage) {
       const compressedId = `compressed-${this.id}`;
       await browser.runtime.sendMessage({
         action: "setImage",
         id: this.id,
-        data: data2
+        data
       });
       await browser.runtime.sendMessage({
         action: "setImage",
@@ -2935,27 +2935,27 @@ Is it scaring you off?`,
         action: "getImage",
         id: this.id
       });
-      let data2 = storedData ? storedData : this.getDefaultImageData();
+      let data = storedData ? storedData : this.getDefaultImageData();
       let compressedImage = {
-        imageData: data2.imageData,
-        metaData: { ...data2.metaData }
+        imageData: data.imageData,
+        metaData: { ...data.metaData }
       };
       try {
         const file = passedFile || this.fileInput.files?.[0];
         const linkValue = this.linkInput.value?.trim() || "";
         if (file) {
           const result = await this.processLocalFile(file);
-          data2 = result.original;
+          data = result.original;
           compressedImage = result.compressed;
         } else if (linkValue !== "") {
           const result = await this.processImageLink(linkValue);
-          data2 = result.original;
+          data = result.original;
           compressedImage = result.compressed;
         } else {
-          data2 = this.getDefaultImageData();
+          data = this.getDefaultImageData();
           compressedImage = this.getDefaultImageData();
         }
-        await this.saveToStorage(data2, compressedImage);
+        await this.saveToStorage(data, compressedImage);
         new Toast("Image successfully saved", "success").render();
       } catch (error) {
         if (error instanceof ImageProcessingError) {
@@ -2970,11 +2970,11 @@ Is it scaring you off?`,
       }
     }
     async loadImageData() {
-      let data2 = await browser.runtime.sendMessage({
+      let data = await browser.runtime.sendMessage({
         action: "getImage",
         id: this.id
       });
-      let metaData = data2.metaData;
+      let metaData = data.metaData;
       if (!metaData) metaData = { link: "", type: "default" };
       this.linkInput.value = metaData.link || "";
       if (metaData.type === "file") {
@@ -3049,11 +3049,11 @@ Is it scaring you off?`,
 
   // src/main-features/profile.ts
   var profilePictureObserver;
-  async function displayUsernameTopNav(name2) {
+  async function displayUsernameTopNav(name) {
     let originalNameElement = document.querySelector(
       ".js-btn-profile .hlp-vert-box span"
     );
-    if (originalNameElement) originalNameElement.innerHTML = name2;
+    if (originalNameElement) originalNameElement.innerHTML = name;
   }
   async function attachProfilePictureObserver(url) {
     function processImg(img) {
@@ -3451,11 +3451,11 @@ Is it scaring you off?`,
   });
 
   // src/main-features/quick-menu/config.ts
-  function gatherOptions(template, name2) {
+  function gatherOptions(template, name) {
     let options = [];
     for (let keyName of Object.keys(template)) {
       const key = template[keyName];
-      const newName = (name2 ? name2 + "." : "") + keyName;
+      const newName = (name ? name + "." : "") + keyName;
       if (typeof key == "object" && !Array.isArray(key)) {
         options = options.concat(gatherOptions(template[keyName], newName));
       } else if (key == "array") {
@@ -3857,11 +3857,11 @@ Is it scaring you off?`,
      * Adds a filter function
      * @returns this `Builder` instance.
      */
-    addFilter(name2) {
+    addFilter(name) {
       if (!this._opts.filters) {
-        this._opts.filters = [name2];
+        this._opts.filters = [name];
       } else {
-        this._opts.filters.push(name2);
+        this._opts.filters.push(name);
       }
       return this;
     }
@@ -3869,9 +3869,9 @@ Is it scaring you off?`,
      * Removes a filter function.
      * @returns this `Builder` instance.
      */
-    removeFilter(name2) {
+    removeFilter(name) {
       if (this._opts.filters) {
-        const i5 = this._opts.filters.indexOf(name2);
+        const i5 = this._opts.filters.indexOf(name);
         if (i5 > 0) this._opts.filters.splice(i5);
       }
       return this;
@@ -3942,14 +3942,14 @@ Is it scaring you off?`,
     names() {
       return Object.keys(this._map);
     }
-    has(name2) {
-      return !!this._map[name2];
+    has(name) {
+      return !!this._map[name];
     }
-    get(name2) {
-      return this._map[name2];
+    get(name) {
+      return this._map[name];
     }
-    register(name2, stageFn) {
-      this._map[name2] = stageFn;
+    register(name, stageFn) {
+      this._map[name] = stageFn;
       return this.pipeline;
     }
   };
@@ -3973,17 +3973,17 @@ Is it scaring you off?`,
         generators: generators.map((g2) => createTask(this.generator, g2))
       };
       function createTask(stage, o5) {
-        let name2;
+        let name;
         let options;
         if (typeof o5 === "string") {
-          name2 = o5;
+          name = o5;
         } else {
-          name2 = o5.name;
+          name = o5.name;
           options = o5.options;
         }
         return {
-          name: name2,
-          fn: stage.get(name2),
+          name,
+          fn: stage.get(name),
           options
         };
       }
@@ -5177,8 +5177,8 @@ Is it scaring you off?`,
     element = document.createElement("div");
     name;
     currentTheme;
-    constructor(name2, theme) {
-      this.name = name2;
+    constructor(name, theme) {
+      this.name = name;
       this.currentTheme = theme;
     }
     createText() {
@@ -5278,8 +5278,8 @@ Is it scaring you off?`,
     selectorIsOpen = false;
     themeOptions = [];
     noThemesOption = new NoThemesOption();
-    async createThemeOption(name2, theme) {
-      let option = new CompactThemeOption(name2, theme);
+    async createThemeOption(name, theme) {
+      let option = new CompactThemeOption(name, theme);
       option.onClick = async () => {
         this.updateInput();
         if (settingsWindow) {
@@ -5323,19 +5323,19 @@ Is it scaring you off?`,
         return option.name;
       });
       let themeNames = Object.keys(themes);
-      let missingThemeOptionNames = themeNames.filter((name2) => {
-        return !themeOptionNames.includes(name2);
+      let missingThemeOptionNames = themeNames.filter((name) => {
+        return !themeOptionNames.includes(name);
       });
-      missingThemeOptionNames.forEach(async (name2) => {
-        if (!themes[name2]) {
+      missingThemeOptionNames.forEach(async (name) => {
+        if (!themes[name]) {
           return;
         }
-        let option = await this.createThemeOption(name2, themes[name2]);
+        let option = await this.createThemeOption(name, themes[name]);
         option.render();
         this.selector.appendChild(option.element);
       });
-      let extraThemeOptionNames = themeOptionNames.filter((name2) => {
-        return !themeNames.includes(name2);
+      let extraThemeOptionNames = themeOptionNames.filter((name) => {
+        return !themeNames.includes(name);
       });
       this.themeOptions.forEach((option) => {
         if (extraThemeOptionNames.includes(option.name)) {
@@ -5423,48 +5423,48 @@ Is it scaring you off?`,
     const oldData = await browser.runtime.sendMessage({
       action: "getSettingsData"
     });
-    const data2 = structuredClone(oldData);
+    const data = structuredClone(oldData);
     const backgroundBlurAmountSlider = document.getElementById(
       "background-blur-amount-slider"
     );
     if (backgroundBlurAmountSlider) {
-      data2.appearance.background.blur = Number(backgroundBlurAmountSlider.value);
+      data.appearance.background.blur = Number(backgroundBlurAmountSlider.value);
     }
     const performanceModeToggle = document.getElementById(
       "performance-mode-toggle"
     );
     if (performanceModeToggle) {
-      data2.other.performanceMode = performanceModeToggle.checked;
+      data.other.performanceMode = performanceModeToggle.checked;
     }
-    await browser.runtime.sendMessage({ action: "setSettingsData", data: data2 });
+    await browser.runtime.sendMessage({ action: "setSettingsData", data });
     await loadQuickSettings();
     if (settingsWindow) {
       await settingsWindow.loadPage();
     }
-    console.log("Successfull stored quick settings:\n", data2);
+    console.log("Successfull stored quick settings:\n", data);
     await apply();
   }
   async function loadQuickSettings() {
-    const data2 = await browser.runtime.sendMessage({
+    const data = await browser.runtime.sendMessage({
       action: "getSettingsData"
     });
-    quickSettingsBackgroundImageSelector.id = data2.appearance.theme;
+    quickSettingsBackgroundImageSelector.id = data.appearance.theme;
     quickSettingsBackgroundImageSelector.loadImageData();
     const backgroundBlurAmountSlider = document.getElementById(
       "background-blur-amount-slider"
     );
     if (backgroundBlurAmountSlider) {
-      backgroundBlurAmountSlider.value = data2.appearance.background.blur;
+      backgroundBlurAmountSlider.value = data.appearance.background.blur;
     }
     const performanceModeToggle = document.getElementById(
       "performance-mode-toggle"
     );
     if (performanceModeToggle) {
-      performanceModeToggle.checked = data2.other.performanceMode;
+      performanceModeToggle.checked = data.other.performanceMode;
     }
     const performanceModeInfo = document.getElementById("performance-mode-info");
     if (performanceModeInfo) {
-      performanceModeInfo.innerHTML = `Toggle performance mode ${data2.other.performanceMode ? "<span class='green-underline'>Enabled</span>" : "<span class='red-underline'>Disabled</span>"}`;
+      performanceModeInfo.innerHTML = `Toggle performance mode ${data.other.performanceMode ? "<span class='green-underline'>Enabled</span>" : "<span class='red-underline'>Disabled</span>"}`;
     }
     await compactThemeSelector.updateInput();
   }
@@ -5651,7 +5651,7 @@ Is it scaring you off?`,
       }
     };
     async createSettingsSideBarProfileButton() {
-      let data2 = await browser.runtime.sendMessage({
+      let data = await browser.runtime.sendMessage({
         action: "getSettingsData"
       });
       let radioInput = document.createElement("input");
@@ -5679,7 +5679,7 @@ Is it scaring you off?`,
       profileTextContainer.classList.add("profile-settings-label");
       let profileSettingsLabelTitle = document.createElement("h2");
       profileSettingsLabelTitle.id = "profile-settings-label-title";
-      let firstName = String(data2.profile.username || originalUsername).split(
+      let firstName = String(data.profile.username || originalUsername).split(
         " "
       )[0];
       if (firstName) profileSettingsLabelTitle.innerText = firstName;
@@ -6289,7 +6289,7 @@ Is it scaring you off?`,
         container.classList.add("settings-page-button-label-container");
         return container;
       }
-      function createImageButton(src, width, height, name2, id) {
+      function createImageButton(src, width, height, name, id) {
         let wrapper = document.createElement("label");
         wrapper.classList.add("settings-page-image-button-wrapper");
         wrapper.tabIndex = 0;
@@ -6297,7 +6297,7 @@ Is it scaring you off?`,
         wrapper.style.height = height;
         let input = document.createElement("input");
         input.type = "radio";
-        input.name = name2;
+        input.name = name;
         if (id) input.id = id;
         let image = document.createElement("img");
         image.classList.add("settings-page-image");
@@ -6312,10 +6312,10 @@ Is it scaring you off?`,
         wrapper.appendChild(image);
         return wrapper;
       }
-      function createImageButtonWithLabel(src, text, width = "80px", height = "80px", name2, id) {
+      function createImageButtonWithLabel(src, text, width = "80px", height = "80px", name, id) {
         let container = document.createElement("label");
         container.classList.add("settings-page-image-button-label");
-        let imageButton = createImageButton(src, width, height, name2, id);
+        let imageButton = createImageButton(src, width, height, name, id);
         let imageButtonLabel = document.createElement("span");
         imageButtonLabel.innerText = text;
         container.appendChild(imageButton);
@@ -6392,10 +6392,10 @@ Is it scaring you off?`,
           this.profilePictureInput.loadImageData();
           this.profilePictureInput.onStore = async () => {
             this.storePage();
-            const data2 = await browser.runtime.sendMessage({
+            const data = await browser.runtime.sendMessage({
               action: "getSettingsData"
             });
-            applyProfilePicture(data2.profile);
+            applyProfilePicture(data.profile);
           };
           let profilePictureInputContainer = this.profilePictureInput.fullContainer;
           profilePictureInputContainer.id = "profile-picture-input-container";
@@ -6807,11 +6807,11 @@ Is it scaring you off?`,
       this.#preview = false;
       this.#aboutToDel = false;
     }
-    createWidgetErrorContent(name2) {
+    createWidgetErrorContent(name) {
       let p4 = document.createElement("p");
       p4.classList.add("smpp-error-widget");
       p4.innerHTML = "<span>Probleem bij het laden van de widget: </span><code class='widgetName'></code><button>Reset widget</button>";
-      p4.querySelector(".widgetName").innerText = name2;
+      p4.querySelector(".widgetName").innerText = name;
       p4.querySelector("button").addEventListener("click", async () => {
         this.clearWidgetSettings();
       });
@@ -7341,11 +7341,11 @@ Is it scaring you off?`,
       curDragInfo.widget.aboutToDel(false);
     }
   }
-  async function createGroup(bag, name2, displayName) {
+  async function createGroup(bag, name, displayName) {
     let group = document.createElement("div");
     group.classList.add("smpp-widget-bag-group");
     for (let widget of widgets) {
-      if (widget.category == name2) {
+      if (widget.category == name) {
         let pl = document.createElement("div");
         pl.classList.add("smpp-widget-bag-placeholder");
         await widget.setBagPlaceHolder(group, pl);
@@ -7459,9 +7459,9 @@ Is it scaring you off?`,
     const settingPath = path.slice(index + 1);
     return [widgetName, settingPath];
   }
-  function getWidgetByName(name2) {
+  function getWidgetByName(name) {
     for (let widget of widgets) {
-      if (widget.name == name2) {
+      if (widget.name == name) {
         return widget;
       }
     }
@@ -7590,10 +7590,10 @@ Is it scaring you off?`,
   k([lch_default, mix_default]);
   var currentThemeName;
   var currentTheme;
-  async function getTheme(name2) {
+  async function getTheme(name) {
     let theme = await browser.runtime.sendMessage({
       action: "getTheme",
-      name: name2
+      name
     });
     return theme;
   }
@@ -7841,9 +7841,9 @@ Is it scaring you off?`,
     currentCategory;
     titleElement = document.createElement("span");
     theme;
-    constructor(name2, currentCategory, isFavorite, isCustom = false, theme) {
+    constructor(name, currentCategory, isFavorite, isCustom = false, theme) {
       super();
-      this.name = name2;
+      this.name = name;
       this.currentCategory = currentCategory;
       this.isFavorite = isFavorite;
       this.isCustom = isCustom;
@@ -7968,7 +7968,7 @@ Is it scaring you off?`,
     }
     async favoriteToggle() {
       this.isFavorite = !this.isFavorite;
-      let data2 = await browser.runtime.sendMessage({
+      let data = await browser.runtime.sendMessage({
         action: "getSettingsData"
       });
       let updateFavorite = async () => {
@@ -7980,13 +7980,13 @@ Is it scaring you off?`,
         this.element.classList.toggle("is-favorite");
         this.onFavoriteToggle();
       };
-      let quickSettingsThemes = data2.appearance.quickSettingsThemes;
+      let quickSettingsThemes = data.appearance.quickSettingsThemes;
       if (this.isFavorite) {
         quickSettingsThemes.push(this.name);
         await updateFavorite();
       } else {
-        quickSettingsThemes = quickSettingsThemes.filter((name2) => {
-          return name2 != this.name;
+        quickSettingsThemes = quickSettingsThemes.filter((name) => {
+          return name != this.name;
         });
         if (this.currentCategory == "quickSettings") {
           this.element.addEventListener("animationend", updateFavorite);
@@ -8093,13 +8093,13 @@ Is it scaring you off?`,
           });
           return editableValues;
         }
-        function createColorPreview(name2) {
+        function createColorPreview(name) {
           let colorPreview = document.createElement("div");
           colorPreview.classList.add("color-preview-bubble");
-          if (theme.cssProperties[name2]) {
+          if (theme.cssProperties[name]) {
             colorPreview.style.setProperty(
               "--current-color",
-              theme.cssProperties[name2]
+              theme.cssProperties[name]
             );
           }
           return colorPreview;
@@ -8215,13 +8215,13 @@ Is it scaring you off?`,
     async onDuplicate(newThemeName) {
     }
   };
-  async function updateTheme(name2) {
+  async function updateTheme(name) {
     await browser.runtime.sendMessage({
       action: "setSetting",
       name: "appearance.theme",
-      data: name2
+      data: name
     });
-    Promise.all([setTheme(name2), setBackground(name2)]);
+    Promise.all([setTheme(name), setBackground(name)]);
   }
   var ThemeFolder = class extends Tile {
     category;
@@ -8308,8 +8308,8 @@ Is it scaring you off?`,
       return imageContainer;
     }
   };
-  function getFancyCategoryName(name2) {
-    let fancyName = name2.charAt(0).toUpperCase() + name2.slice(1);
+  function getFancyCategoryName(name) {
+    let fancyName = name.charAt(0).toUpperCase() + name.slice(1);
     return fancyName;
   }
   var AddCustomTheme = class extends Tile {
@@ -8431,7 +8431,7 @@ Is it scaring you off?`,
         categories: [this.currentCategory],
         includeHidden: false
       });
-      let data2 = await browser.runtime.sendMessage({
+      let data = await browser.runtime.sendMessage({
         action: "getSettingsData"
       });
       let visibleThemeTiles = this.content.querySelectorAll(".theme-tile");
@@ -8452,7 +8452,7 @@ Is it scaring you off?`,
         });
         correctThemeNames2.forEach(async (themeName) => {
           if (!visibleThemeNames2.includes(themeName)) {
-            let isFavorite = data2.appearance.quickSettingsThemes.includes(themeName);
+            let isFavorite = data.appearance.quickSettingsThemes.includes(themeName);
             if (!themes[themeName]) return;
             let newTile = await this.createThemeTile(
               themeName,
@@ -8576,15 +8576,15 @@ Is it scaring you off?`,
     updateContentHeight() {
       this.content.style.height = String(this.calculateContentHeight(this.currentTiles.length)) + "px";
     }
-    async createThemeTile(name2, isFavorite, isCustom, theme) {
+    async createThemeTile(name, isFavorite, isCustom, theme) {
       let tile = new ThemeTile(
-        name2,
+        name,
         this.currentCategory,
         isFavorite,
         isCustom,
         theme
       );
-      tile.element.dataset["name"] = name2;
+      tile.element.dataset["name"] = name;
       tile.onDuplicate = async (newThemeName) => {
         if (isCustom) {
           await this.updateSelectorContent();
@@ -8613,15 +8613,15 @@ Is it scaring you off?`,
         action: "getThemes",
         categories: ["custom"]
       });
-      let data2 = await browser.runtime.sendMessage({
+      let data = await browser.runtime.sendMessage({
         action: "getSettingsData"
       });
       let tiles = await Promise.all(
-        Object.keys(themes).map(async (name2) => {
-          let isFavorite = data2.appearance.quickSettingsThemes.includes(name2);
-          let isCustom = Object.keys(customThemes).includes(name2);
-          if (themes[name2])
-            return this.createThemeTile(name2, isFavorite, isCustom, themes[name2]);
+        Object.keys(themes).map(async (name) => {
+          let isFavorite = data.appearance.quickSettingsThemes.includes(name);
+          let isCustom = Object.keys(customThemes).includes(name);
+          if (themes[name])
+            return this.createThemeTile(name, isFavorite, isCustom, themes[name]);
           return;
         })
       );
@@ -8639,8 +8639,8 @@ Is it scaring you off?`,
       await this.renderSelectorContent();
     }
   };
-  async function startCustomThemeCreator(theme, name2) {
-    let themeEditor = new CustomThemeCreator(theme, name2);
+  async function startCustomThemeCreator(theme, name) {
+    let themeEditor = new CustomThemeCreator(theme, name);
     settingsWindow.hide();
     await themeEditor.create();
     themeEditor.show();
@@ -8681,19 +8681,19 @@ Is it scaring you off?`,
       });
       return editableValues;
     }
-    createColorPreview(name2) {
+    createColorPreview(name) {
       let colorPreview = document.createElement("div");
       colorPreview.classList.add("color-preview-bubble");
-      if (this.theme.cssProperties[name2]) {
+      if (this.theme.cssProperties[name]) {
         colorPreview.style.setProperty(
           "--current-color",
-          this.theme.cssProperties[name2]
+          this.theme.cssProperties[name]
         );
       }
-      colorPreview.dataset["name"] = name2;
+      colorPreview.dataset["name"] = name;
       colorPreview.addEventListener("click", (e5) => {
         if (!colorPreview.parentElement?.querySelector(".floating-picker")) {
-          this.openColorPicker(name2, colorPreview, e5);
+          this.openColorPicker(name, colorPreview, e5);
         }
       });
       return colorPreview;
@@ -8716,7 +8716,7 @@ Is it scaring you off?`,
       });
       return colorPreviews;
     }
-    convertPropertyName(name2) {
+    convertPropertyName(name) {
       const propertyNames = {
         "--color-accent": "Accent Color",
         "--color-text": "Text Color",
@@ -8725,12 +8725,12 @@ Is it scaring you off?`,
         "--color-base02": "Tertiary Background",
         "--color-base03": "Border Color"
       };
-      return propertyNames[name2];
+      return propertyNames[name];
     }
-    constructor(theme, name2) {
+    constructor(theme, name) {
       super("customThemeCreator", true);
       this.theme = theme;
-      this.name = name2;
+      this.name = name;
       this.editableValues = this.getEditableValues(theme.cssProperties);
       this.colorPreviews = this.generateColorPreviews(this.editableValues);
       this.backgroundImageInput = new ImageSelector(this.name, true);
@@ -8744,7 +8744,7 @@ Is it scaring you off?`,
     }
     content = document.createElement("div");
     displayNameInput = document.createElement("input");
-    openColorPicker(name2, colorPreview, e5) {
+    openColorPicker(name, colorPreview, e5) {
       let colorPicker = new ColorPicker();
       colorPicker.element.style.position = "absolute";
       colorPicker.element.classList.add("floating-picker");
@@ -8761,8 +8761,8 @@ Is it scaring you off?`,
         document.removeEventListener("mousedown", _docEventHandler);
       };
       document.addEventListener("mousedown", _docEventHandler);
-      if (this.theme.cssProperties[name2]) {
-        colorPicker.currentColor = w(this.theme.cssProperties[name2]);
+      if (this.theme.cssProperties[name]) {
+        colorPicker.currentColor = w(this.theme.cssProperties[name]);
       }
       colorPicker.onChange = async () => {
         colorPreview.style.setProperty(
@@ -9213,15 +9213,15 @@ Is it scaring you off?`,
     plantDiv.appendChild(await createPlantBottomUI(plantData));
     return plantDiv;
   }
-  function createPlantVisual(data2) {
+  function createPlantVisual(data) {
     let plantVisualContainer = document.createElement("div");
     plantVisualContainer.id = "plant_image_container";
-    plantVisualContainer.innerHTML = getPlantHTML(data2);
+    plantVisualContainer.innerHTML = getPlantHTML(data);
     return plantVisualContainer;
   }
-  async function createPlantBottomUI(data2) {
+  async function createPlantBottomUI(data) {
     let currentTime = /* @__PURE__ */ new Date();
-    let lastWaterTime = new Date(data2.lastWaterTime);
+    let lastWaterTime = new Date(data.lastWaterTime);
     let timeSinceLastWater = currentTime - lastWaterTime;
     let bottomUIContainer = document.createElement("div");
     bottomUIContainer.id = "buttondivforplant";
@@ -9238,7 +9238,7 @@ Is it scaring you off?`,
     let waterButton = document.createElement("button");
     waterButton.id = "watering_button";
     waterButton.innerHTML = waterPlantSvg;
-    if (data2.isAlive) {
+    if (data.isAlive) {
       waterButton.addEventListener("click", userWateredPlant);
     } else {
       waterButton.classList.add("disabled");
@@ -9253,10 +9253,10 @@ Is it scaring you off?`,
     lastWaterTimeElement.innerText = getTimeInCorrectFormat(timeSinceLastWater);
     lastWaterTimeContainer.appendChild(lastWaterTimeTitle);
     lastWaterTimeContainer.appendChild(lastWaterTimeElement);
-    if (!data2.isAlive) {
+    if (!data.isAlive) {
       let removeButton = createRemoveButton(false);
       topUIContainer.appendChild(removeButton);
-    } else if (data2.age == 8) {
+    } else if (data.age == 8) {
       let removeButton = createRemoveButton(true);
       topUIContainer.appendChild(removeButton);
     }
@@ -9267,30 +9267,30 @@ Is it scaring you off?`,
     UIContainer.appendChild(bottomUIContainer);
     return UIContainer;
   }
-  async function updatePlantBottomUI(data2) {
+  async function updatePlantBottomUI(data) {
     let currentTime = /* @__PURE__ */ new Date();
-    let lastWaterTime = new Date(data2.lastWaterTime);
+    let lastWaterTime = new Date(data.lastWaterTime);
     let timeSinceLastWater = currentTime - lastWaterTime;
     document.getElementById("glass-fill").style.height = calculatePercentile(timeSinceLastWater / 1e3) + `%`;
     document.getElementById("water_time").innerText = getTimeInCorrectFormat(timeSinceLastWater);
   }
-  function createPlantStreak(data2) {
+  function createPlantStreak(data) {
     let plantStreak = document.createElement("h2");
     plantStreak.id = "plant_streak";
-    plantStreak.innerText = `${data2.daysSinceBirthday} ${data2.daysSinceBirthday == 1 ? "Day" : "Days"}`;
+    plantStreak.innerText = `${data.daysSinceBirthday} ${data.daysSinceBirthday == 1 ? "Day" : "Days"}`;
     return plantStreak;
   }
   function checkIfOutdated(version) {
     return Boolean(!version || version != plantVersion);
   }
-  function createUpdatePrompt(data2) {
+  function createUpdatePrompt(data) {
     let updatePromptContainer = document.createElement("div");
     updatePromptContainer.id = "update-prompt-container";
     let updatePromptTitle = document.createElement("h1");
     updatePromptTitle.innerText = `Update Required!`;
     let updatePromptDescription = document.createElement("p");
     updatePromptDescription.innerHTML = `You have to reset to be up to date 
-Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
+Your version: <b>${data.plantVersion}</b> is not the newest available version`;
     let resetButton = document.createElement("button");
     resetButton.innerText = "Reset Plant";
     resetButton.id = "removeplantButton";
@@ -9360,40 +9360,40 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     removeplantButton.addEventListener("click", resetPlant);
   }
   async function userWateredPlant() {
-    let data2 = await browser.runtime.sendMessage({
+    let data = await browser.runtime.sendMessage({
       action: "getPlantAppData"
     });
-    data2.lastWaterTime = /* @__PURE__ */ new Date();
+    data.lastWaterTime = /* @__PURE__ */ new Date();
     await browser.runtime.sendMessage({
       action: "setPlantAppData",
-      data: data2
+      data
     });
-    updatePlantBottomUI(data2);
+    updatePlantBottomUI(data);
   }
-  function calculateGrowth(data2) {
+  function calculateGrowth(data) {
     const currentTime = /* @__PURE__ */ new Date();
-    const lastGrowTime = new Date(data2.lastGrowTime);
-    const lastWaterTime = new Date(data2.lastWaterTime);
+    const lastGrowTime = new Date(data.lastGrowTime);
+    const lastWaterTime = new Date(data.lastWaterTime);
     const msIn1Day = 1e3 * 60 * 60 * 24;
     const daysSinceLastGrow = (currentTime - lastGrowTime) / msIn1Day;
     const daysSinceLastWater = (currentTime - lastWaterTime) / msIn1Day;
-    if (daysSinceLastGrow >= 2 && data2.age != 8) {
-      data2.age += 1;
-      data2.lastGrowTime = currentTime;
+    if (daysSinceLastGrow >= 2 && data.age != 8) {
+      data.age += 1;
+      data.lastGrowTime = currentTime;
     }
-    if (data2.age > 8) data2.age = 8;
-    if (daysSinceLastWater > 3 && data2.age != 1) data2.isAlive = false;
-    if (data2.age > 1 && data2.birthday == null) data2.birthday = currentTime;
-    if (data2.birthday != null && data2.isAlive) {
-      data2.daysSinceBirthday = Math.round(
-        (currentTime - new Date(data2.birthday)) / (1e3 * 60 * 60 * 24) + 1
+    if (data.age > 8) data.age = 8;
+    if (daysSinceLastWater > 3 && data.age != 1) data.isAlive = false;
+    if (data.age > 1 && data.birthday == null) data.birthday = currentTime;
+    if (data.birthday != null && data.isAlive) {
+      data.daysSinceBirthday = Math.round(
+        (currentTime - new Date(data.birthday)) / (1e3 * 60 * 60 * 24) + 1
       );
     }
     browser.runtime.sendMessage({
       action: "setPlantAppData",
-      data: data2
+      data
     });
-    return data2;
+    return data;
   }
   function plantThePlant() {
     const colorArray = [
@@ -9431,9 +9431,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     plantThePlantButton.innerHTML = plantThePlantSvg;
     return plantThePlantButton;
   }
-  function getPlantHTML(data2) {
-    if (Number(data2.age) == 0) {
-      if (Boolean(data2.isAlive)) {
+  function getPlantHTML(data) {
+    if (Number(data.age) == 0) {
+      if (Boolean(data.isAlive)) {
         return `<div id="planttheplantbutton">
                 <svg xmlns="http://www.w3.org/2000/svg" id="plant_the_plant_svg" data-name="Laag 2" viewBox="0 0 50.16 37.5">
                     <defs>
@@ -9474,11 +9474,11 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       }
       return `Stage 0 died, how? How have you done this? This is the stage before the plant is planted and you've already managed to kill it????`;
     }
-    return getPlantSvg(data2);
+    return getPlantSvg(data);
   }
-  function getPlantSvg(data2) {
-    let age = Number(data2.age);
-    let isAlive = Boolean(data2.isAlive);
+  function getPlantSvg(data) {
+    let age = Number(data.age);
+    let isAlive = Boolean(data.isAlive);
     switch (age) {
       case 0:
         return "";
@@ -9955,7 +9955,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
   <defs>
     <style>
       .cls-1 {
-        fill: ${data2.uniqueColor} !important;
+        fill: ${data.uniqueColor} !important;
       }
 
       .cls-1, .cls-2, .cls-3, .cls-4 {
@@ -10156,10 +10156,10 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     };
   }
   async function getPlantV1() {
-    let data2 = await browser.runtime.sendMessage({
+    let data = await browser.runtime.sendMessage({
       action: "getPlantAppData"
     });
-    if (!data2) {
+    if (!data) {
       return {
         stageData: {
           color: "#fff",
@@ -10171,11 +10171,11 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     }
     return {
       stageData: {
-        color: data2.uniqueColor,
-        isAlive: data2.isAlive,
-        stage: data2.age
+        color: data.uniqueColor,
+        isAlive: data.isAlive,
+        stage: data.age
       },
-      age: data2.daysSinceBirthday
+      age: data.daysSinceBirthday
     };
   }
 
@@ -10257,10 +10257,10 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     }
     return cmd_list;
   }
-  function add_quick(name2, url, favorite = void 0) {
-    let quick = { name: name2.toLowerCase(), url, favorite: favorite ?? false };
+  function add_quick(name, url, favorite = void 0) {
+    let quick = { name: name.toLowerCase(), url, favorite: favorite ?? false };
     for (let i5 = 0; i5 < quicks.length; i5++) {
-      if (quicks[i5].name == name2) {
+      if (quicks[i5].name == name) {
         quick.favorite = favorite ?? quicks[i5].favorite ?? false;
         quicks[i5] = quick;
         quick_save();
@@ -10270,9 +10270,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     quicks.push(quick);
     quick_save();
   }
-  function remove_quick(name2) {
+  function remove_quick(name) {
     for (let i5 = 0; i5 < quicks.length; i5++) {
-      if (quicks[i5].name == name2) {
+      if (quicks[i5].name == name) {
         quicks.splice(i5, 1);
         quick_save();
         return;
@@ -10313,10 +10313,10 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     let cmd_list = quick_cmd_list();
     dmenu(
       cmd_list,
-      function(name2, shift) {
+      function(name, shift) {
         let value_list = [];
         for (let i5 = 0; i5 < quicks.length; i5++) {
-          if (quicks[i5].name == name2) {
+          if (quicks[i5].name == name) {
             value_list = [{ value: quicks[i5].url }];
             break;
           }
@@ -10327,7 +10327,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             if (!value.startsWith("http")) {
               value = "https://" + value;
             }
-            add_quick(name2, value);
+            add_quick(name, value);
           },
           "value:"
         );
@@ -10339,8 +10339,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     let cmd_list = quick_cmd_list();
     dmenu(
       cmd_list,
-      function(name2, shift) {
-        remove_quick(name2);
+      function(name, shift) {
+        remove_quick(name);
       },
       "name:"
     );
@@ -10492,12 +10492,12 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             resetPlant();
             return;
           case "remove current theme":
-            let data2 = await browser.runtime.sendMessage({
+            let data = await browser.runtime.sendMessage({
               action: "getSettingsData"
             });
             await browser.runtime.sendMessage({
               action: "removeCustomTheme",
-              id: data2.appearance.theme
+              id: data.appearance.theme
             });
             break;
           case "posh text":
@@ -10590,9 +10590,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     min;
     max;
     def;
-    static slider(name2, title, min = 0, max = 0, def = 0) {
+    static slider(name, title, min = 0, max = 0, def = 0) {
       let go = new _GameOption();
-      go.name = name2;
+      go.name = name;
       go.title = title;
       go.type = GAME_OPTION_TYPE_SLIDER;
       go.min = min;
@@ -10639,8 +10639,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       super();
     }
     // Start Protected (Use these functions in sub classes)
-    getOpt(name2) {
-      return this.#optionValues[name2];
+    getOpt(name) {
+      return this.#optionValues[name];
     }
     stopGame() {
       this.#requestStopGame = true;
@@ -10649,9 +10649,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       }
     }
     // End protected
-    #updateOpt(name2, value) {
-      const displayEl = this.#optionElements[name2].display;
-      const inputEl = this.#optionElements[name2].input;
+    #updateOpt(name, value) {
+      const displayEl = this.#optionElements[name].display;
+      const inputEl = this.#optionElements[name].input;
       inputEl.value = value;
       let displayValue = Math.round(value / 10);
       displayValue /= 10;
@@ -10660,7 +10660,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       }
       displayEl.innerText = displayValue + "x";
       displayEl.classList.add("game-option-value");
-      this.#optionValues[name2] = value * 1;
+      this.#optionValues[name] = value * 1;
     }
     #updateScore() {
       this.#scoreEl.innerText = "High Score: " + this.#hiScore;
@@ -11530,8 +11530,8 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     return rotations;
   }
   var PIECES = Object.fromEntries(
-    Object.entries(BASE_PIECES).map(([name2, base]) => [
-      name2,
+    Object.entries(BASE_PIECES).map(([name, base]) => [
+      name,
       generateRotations(base)
     ])
   );
@@ -12327,9 +12327,9 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
               `Failed to fetch planner data (Status: ${response.status})`
             );
           }
-          const data2 = await response.json();
-          sendDebug("[AS]", "Planner data:", data2);
-          return data2;
+          const data = await response.json();
+          sendDebug("[AS]", "Planner data:", data);
+          return data;
         } catch (error) {
           console.error("Fetch error:", error);
           return null;
@@ -12346,15 +12346,15 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
         if (!userId) {
           return sendDebug("[AS]", "User ID not found.");
         }
-        fetchPlannerData2().then(async (data2) => {
-          data2 = data2.filter((element) => element.resolvedStatus !== "resolved");
-          if (!data2) {
+        fetchPlannerData2().then(async (data) => {
+          data = data.filter((element) => element.resolvedStatus !== "resolved");
+          if (!data) {
             TasksContainer.innerHTML = "Er is iets ernstig misgegaan :(";
             return console.error("No planner data, Did something go wrong?");
           } else if (DEBUG) {
             sendDebug("[AS]", "Planner data fetched successfully.");
           }
-          if (!Array.isArray(data2) || data2.length === 0) {
+          if (!Array.isArray(data) || data.length === 0) {
             let noDataContainer = document.createElement("div");
             noDataContainer.classList.add("blue-ghost-96");
             let noDataContainerTextContainer = document.createElement("div");
@@ -12367,15 +12367,15 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
             TasksContainer.appendChild(noDataContainer);
             TasksContainer.appendChild(noDataContainerTextContainer);
           }
-          data2.sort(
+          data.sort(
             (a5, b3) => new Date(a5.period.dateTimeFrom) - new Date(b3.period.dateTimeFrom)
           );
           let lastDate = "";
-          if (data2.length > this.settings.maxAssignments) {
-            data2 = data2.slice(0, this.settings.maxAssignments);
+          if (data.length > this.settings.maxAssignments) {
+            data = data.slice(0, this.settings.maxAssignments);
           }
           const today = /* @__PURE__ */ new Date();
-          data2.forEach((element) => {
+          data.forEach((element) => {
             const taskDate = new Date(element.period.dateTimeFrom);
             const tomorrow = new Date(today);
             tomorrow.setDate(today.getDate() + 1);
@@ -12495,7 +12495,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       this.element.innerHTML = "";
     }
   };
-  async function markAsFinished(as_ID, name2) {
+  async function markAsFinished(as_ID, name) {
     const schoolName = getSchoolName();
     const userId = getUserId();
     if (!schoolName || !userId) {
@@ -12504,7 +12504,7 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
       );
       return false;
     }
-    let as_type = name2 ? "assignment" : "to-do";
+    let as_type = name ? "assignment" : "to-do";
     const url = `https://${schoolName}.smartschool.be/planner/api/v1/planned-${as_type}s/${userId}/${as_ID}/resolve`;
     try {
       const response = await fetch(url, {
@@ -13248,25 +13248,25 @@ Your version: <b>${data2.plantVersion}</b> is not the newest available version`;
     async updatePlanner(addend) {
       const plannerUrl = document.getElementById("datePickerMenu").getAttribute("plannerurl");
       const date = await getDateInCorrectFormat(true, addend);
-      const data2 = await fetchPlannerData(date, plannerUrl.split("/")[4]);
+      const data = await fetchPlannerData(date, plannerUrl.split("/")[4]);
       this.plannerContainer.innerHTML = "";
       this.planningContainer.innerHTML = "";
       const dateText = `${await getDateInCorrectFormat(false, addend)}`.split(" ").slice(0, 4).join(" ");
       const title = this.createTitleElement(dateText);
       this.plannerContainer.appendChild(title);
-      if (!data2 || data2.length === 0) {
+      if (!data || data.length === 0) {
         const message = this.createEmptyPlannerMessage();
         this.plannerContainer.appendChild(message);
         this.planningContainer.style.height = "initial";
       } else {
         const earliestStartTime = Math.min(
-          ...data2.map(
+          ...data.map(
             (element) => new Date(element.period.dateTimeFrom).getTime()
           )
         );
         const beginTime = new Date(earliestStartTime);
         const timeSlots = [];
-        data2.forEach((element) => {
+        data.forEach((element) => {
           const dateTimeFrom = new Date(element.period.dateTimeFrom);
           const dateTimeTo = new Date(element.period.dateTimeTo);
           if (element.period.wholeDay) {
@@ -13854,12 +13854,12 @@ ${code}`;
 
   // src/fixes-utils/migration.ts
   async function updateSettings() {
-    let data2 = await browser.runtime.sendMessage({
+    let data = await browser.runtime.sendMessage({
       action: "getSettingsData"
     });
     await browser.runtime.sendMessage({
       action: "setSettingsData",
-      data: data2
+      data
     });
   }
   async function migrate() {
@@ -13909,17 +13909,17 @@ ${code}`;
       action: "saveCustomTheme",
       data: theme
     });
-    let data2 = await browser.runtime.sendMessage({
+    let data = await browser.runtime.sendMessage({
       action: "getSettingsData"
     });
-    if (data2.appearance.theme == "custom") {
+    if (data.appearance.theme == "custom") {
       await browser.runtime.sendMessage({
         action: "setSetting",
         name: "appearance.theme",
         data: id
       });
     }
-    data2 = await browser.runtime.sendMessage({
+    data = await browser.runtime.sendMessage({
       action: "getSettingsData"
     });
   }
@@ -14087,41 +14087,41 @@ ${code}`;
     toastContainer.classList.add("toast-container");
     document.body.appendChild(toastContainer);
   }
-  function updateTopNavIcons(data2) {
+  function updateTopNavIcons(data) {
     const notifsButton = document.querySelector(
       ".js-btn-notifs"
     );
-    if (notifsButton && data2.notifications) {
+    if (notifsButton && data.notifications) {
       const textSpan = notifsButton.querySelector("span");
       notifsButton.innerHTML = notfisSvg;
       if (textSpan) notifsButton.appendChild(textSpan);
-    } else if (notifsButton && !data2.notifications) {
+    } else if (notifsButton && !data.notifications) {
       const textSpan = notifsButton.querySelector("span");
       notifsButton.innerHTML = "Meldingen";
       if (textSpan) notifsButton.appendChild(textSpan);
     }
     const startButton = document.querySelector(".js-btn-home");
-    if (startButton && data2.home) {
+    if (startButton && data.home) {
       startButton.innerHTML = homeiconSvg;
-    } else if (startButton && !data2.home) {
+    } else if (startButton && !data.home) {
       startButton.innerHTML = "Start";
     }
     const messageButton = document.querySelector(
       `a.topnav__btn[title="Berichten"]`
     );
-    if (messageButton && data2.mail) {
+    if (messageButton && data.mail) {
       const textSpan = messageButton.querySelector("span");
       messageButton.innerHTML = messageSvg;
       if (textSpan) messageButton.appendChild(textSpan);
-    } else if (messageButton && !data2.mail) {
+    } else if (messageButton && !data.mail) {
       const textSpan = messageButton.querySelector("span");
       messageButton.innerHTML = "Berichten";
       if (textSpan) messageButton.appendChild(textSpan);
     }
     const settingButton = document.getElementById("quickSettingsButton");
-    if (settingButton && data2.settings) {
+    if (settingButton && data.settings) {
       settingButton.innerHTML = settingsIconSvg;
-    } else if (settingButton && !data2.settings) {
+    } else if (settingButton && !data.settings) {
       settingButton.innerHTML = "Settings";
     }
   }
@@ -14143,17 +14143,17 @@ ${code}`;
         break;
     }
   }
-  function applyTopNav(data2) {
+  function applyTopNav(data) {
     let topNav = document.querySelector(".topnav");
     if (!topNav) return;
-    updateTopNavIcons(data2.icons);
-    updateTopButtons(data2.buttons);
+    updateTopNavIcons(data.icons);
+    updateTopButtons(data.buttons);
     let linksButton = document.querySelector("[data-links]");
     let coursesButton = document.querySelector(
       "[data-courses]"
     );
     if (linksButton && coursesButton) {
-      data2.switchCoursesAndLinks ? topNav.insertBefore(linksButton, coursesButton) : topNav.insertBefore(coursesButton, linksButton);
+      data.switchCoursesAndLinks ? topNav.insertBefore(linksButton, coursesButton) : topNav.insertBefore(coursesButton, linksButton);
     }
   }
   async function createGlobals() {
@@ -14228,18 +14228,18 @@ ${code}`;
     if (document.querySelector(".login-app__left")) updateLoginPanel();
   }
   async function apply() {
-    const data2 = await browser.runtime.sendMessage({
+    const data = await browser.runtime.sendMessage({
       action: "getSettingsData"
     });
-    console.log("Applying with settings data: \n", data2);
-    updateCurrentThemeName(data2.appearance.theme);
+    console.log("Applying with settings data: \n", data);
+    updateCurrentThemeName(data.appearance.theme);
     await reloadDMenuConfig();
     if (onHomePage) setEditMode(false);
-    await applyAppearance(data2.appearance);
-    if (!liteMode) applyWeatherEffects(data2.appearance.weatherOverlay);
-    applyProfile(data2.profile);
-    applyTopNav(data2.topNav);
-    applyOther(data2.other);
+    await applyAppearance(data.appearance);
+    if (!liteMode) applyWeatherEffects(data.appearance.weatherOverlay);
+    applyProfile(data.profile);
+    applyTopNav(data.topNav);
+    applyOther(data.other);
   }
   function createTopButtons() {
     let topNav = document.querySelector("nav.topnav");
@@ -14292,22 +14292,22 @@ ${code}`;
     button.appendChild(textContent);
     return button;
   }
-  function updateTopButtons(data2) {
+  function updateTopButtons(data) {
     let GOButton = document.querySelector(`[data-go=""]`);
     if (GOButton) {
-      data2.GO ? GOButton.style = "display:flex" : GOButton.style = "display:none";
+      data.GO ? GOButton.style = "display:flex" : GOButton.style = "display:none";
     }
     let searchButton = document.querySelector(".topnav__btn--icon--search");
     if (searchButton?.parentElement) {
-      data2.search ? searchButton.parentElement.style = "display:flex" : searchButton.parentElement.style = "display:none";
+      data.search ? searchButton.parentElement.style = "display:flex" : searchButton.parentElement.style = "display:none";
     }
     let GC = document.getElementById("global_chat_button");
     if (GC) {
-      data2.GC ? GC.style = "display:flex !important" : GC.style = "display:none !important";
+      data.GC ? GC.style = "display:flex !important" : GC.style = "display:none !important";
     }
     let quickButton = document.getElementById("quick-menu-button");
     if (quickButton) {
-      data2.quickMenu ? quickButton.style = "display:flex !important" : quickButton.style = "display:none !important";
+      data.quickMenu ? quickButton.style = "display:flex !important" : quickButton.style = "display:none !important";
     }
   }
   async function main() {
