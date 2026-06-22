@@ -4181,14 +4181,18 @@ tr.selected {
 td.selected {
   background-color: var(--color-base00) !important;
 }
-td:hover {
+td:not(.details-cell),
+hover {
   background-color: transparent !important;
 }
-td:not(.cb-container, [style="height:20px;"], [colspan="3"]),
+td:not(.cb-container, [style="height:20px;"], [colspan="3"], .details-cell),
 .action-button,
 span.smsc-inlineeditor--disabled.smsc-inlineeditor__editor,
 smsc-inlineeditor.smsc-table__cell--inlineeditor {
   background-color: transparent !important;
+}
+#result-table {
+  color: var(--color-text, black);
 }
 .smsc-contextmenu__content {
   background-color: var(--color-base01) !important;
