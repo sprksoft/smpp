@@ -1,6 +1,11 @@
 #!/bin/bash
 set -e
-HELP="Build the extension and source code zips for firefox"
+HELP="Build the extension and source code zips for firefox.
+The resulting files will be:
+  - build/smpp.zip      smpp extension.
+  - build/smpp-lite.zip smpp lite extension.
+  - build/smpp-code.zip which contains source code because firefox reviewers want it.
+"
 
 OUTDIR="smpp"
 OUTFILE="$OUTDIR/smpp.xpi"
