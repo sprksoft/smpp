@@ -136,7 +136,7 @@ export async function quickLoad() {
     action: "getSetting",
     name: "other.quicks",
   });
-  if (!loadedQuicks) {
+  if (!loadedQuicks || Object.keys(loadedQuicks).length === 0) { // migrate older version of '{}' by setting to [] which on save+load does a correct map merge of objects in arr
     quicks = [];
     return [];
   }

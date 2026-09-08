@@ -10335,7 +10335,7 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
       action: "getSetting",
       name: "other.quicks"
     });
-    if (!loadedQuicks) {
+    if (!loadedQuicks || Object.keys(loadedQuicks).length === 0) {
       quicks = [];
       return [];
     }
