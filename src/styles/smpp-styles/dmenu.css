@@ -208,6 +208,10 @@ html {
   cursor: pointer;
 }
 
+.dmenu-row:hover .dmenu-favorite{
+  opacity: 1;
+}
+
 .dmenu-category {
   margin-top: 0.75rem;
   background: transparent !important;
@@ -233,6 +237,7 @@ html {
 }
 
 .dmenu-favorite {
+  opacity: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -250,6 +255,17 @@ html {
   padding: 0;
   width: 1.75rem;
   cursor: pointer;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.dmenu-row[data-favorite="true"] .dmenu-favorite{
+  opacity: 1;
+}
+
+.dmenu-favorite-button svg{
+  height: 100%;
+  width: 100%;
+  stroke: var(--color-text);
 }
 
 .dmenu-favorite-button:hover {

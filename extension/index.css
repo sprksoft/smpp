@@ -168,6 +168,9 @@ html {
   background: var(--color-base02);
   cursor: pointer;
 }
+.dmenu-row:hover .dmenu-favorite {
+  opacity: 1;
+}
 .dmenu-category {
   margin-top: 0.75rem;
   background: transparent !important;
@@ -189,6 +192,7 @@ html {
   color: var(--color-base03);
 }
 .dmenu-favorite {
+  opacity: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -205,6 +209,15 @@ html {
   padding: 0;
   width: 1.75rem;
   cursor: pointer;
+  transition: opacity 0.2s ease-in-out;
+}
+.dmenu-row[data-favorite=true] .dmenu-favorite {
+  opacity: 1;
+}
+.dmenu-favorite-button svg {
+  height: 100%;
+  width: 100%;
+  stroke: var(--color-text);
 }
 .dmenu-favorite-button:hover {
   transform: scale(1.1);
@@ -2187,6 +2200,9 @@ html {
 }
 .enableAnimations .smpp-widget-insertion-point {
   transition: background-color 0.5s;
+}
+body:not(.smpp-news-editmode).glass .smpp-widget-insertion-point.smpp-widget-insertion-point-pannel {
+  background-color: transparent !important;
 }
 .smpp-widget-insertion-point.smpp-widget-insertion-point-pannel {
   background-color: transparent !important;
@@ -10135,6 +10151,43 @@ input.textInput-module_input__QXUhg,
 .headerIconLoading-e6FMT {
   box-shadow: none !important;
   background-color: var(--color-base01) !important;
+}
+.plannerSearchInput-zY7Ue.planner-header-search-input svg path {
+  stroke: var(--color-text) !important;
+}
+.gridDayCell-module_gridDayCell__aSu8m {
+  color: var(--color-text) !important;
+}
+.gridDayCell-module_gridDayCellOutOfPeriod__dZYj1,
+.gridDayCell-module_gridDayCellWeekendOrHoliday__4rQl1 {
+  color: color-mix(in srgb, var(--color-text) 70%, transparent 30%) !important;
+}
+.gridDayCell-module_gridDayCell__aSu8m[aria-selected=true].gridDayCell-module_selectedStart__sQFpa .gridDayCell-module_gridDayCellTextContainer__1ZhK7,
+.gridDayCell-module_gridDayCell__aSu8m[aria-selected=true] .gridDayCell-module_gridDayCellTextContainer__1ZhK7,
+.gridDayCell-module_gridDayCell__aSu8m[aria-selected=true].gridDayCell-module_selectedEnd__JmsIr .gridDayCell-module_gridDayCellTextContainer__1ZhK7 {
+  border-color: var(--color-accent) !important;
+  color: var(--color-text) !important;
+}
+.gridDayCell-module_gridDayCell__aSu8m[aria-selected=true] .gridDayCell-module_gridDayCellTextContainer__1ZhK7 {
+  background-color: var(--color-base02) !important;
+}
+td.gridDayCell-module_gridDayCell__aSu8m:hover .gridDayCell-module_gridDayCellTextContainer__1ZhK7 {
+  background-color: var(--color-base03) !important;
+}
+kbd.hint-BhrXn.bp-c-combo-white--100,
+.gridDayCell-module_gridDayCell__aSu8m:focus:not([aria-disabled=true]) .gridDayCell-module_gridDayCellTextContainer__1ZhK7 {
+  background-color: var(--color-accent) !important;
+  color: var(--color-base00) !important;
+}
+.datepicker-module_navigationButton__t-ffd {
+  border: none !important;
+  background-color: var(--color-base02) !important;
+}
+.datepicker-module_navigationButton__t-ffd:hover {
+  background-color: var(--color-base03) !important;
+}
+kbd.hint-BhrXn.bp-c-combo-white--100 {
+  border: none !important;
 }
 
 /* src/styles/fixes/results.css */
