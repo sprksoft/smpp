@@ -126,7 +126,9 @@ html {
 }
 .glass .smpp-widget-pannel {
   backdrop-filter: none;
+  background-color: transparent;
 }
+
 .smpp-widget-pannel {
   min-width: calc(
     300px + 1rem * 2
@@ -149,6 +151,11 @@ html {
 
 .enableAnimations .smpp-widget-insertion-point {
   transition: background-color 0.5s;
+}
+
+body:not(.smpp-news-editmode).glass
+  .smpp-widget-insertion-point.smpp-widget-insertion-point-pannel {
+  background-color: transparent !important;
 }
 
 .smpp-widget-insertion-point.smpp-widget-insertion-point-pannel {
