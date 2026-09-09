@@ -1,9 +1,45 @@
-// @ts-nocheck
 import { WidgetBase, registerWidget } from "./widgets.js";
 
 const pixelsPerMinute = 1.46;
 
-async function fetchPlannerData(date, user) {
+type PlannerUser = {
+  name: { startingWithFirstName: string };
+};
+
+type PlannerCourse = {
+  name: string;
+};
+
+type PlannerLocation = {
+  title?: string;
+  name?: string;
+};
+
+type PlannerPeriod = {
+  dateTimeFrom: string;
+  dateTimeTo: string;
+  wholeDay?: boolean;
+};
+
+type PlannedElement = {
+  color?: string;
+  name?: string;
+  period: PlannerPeriod;
+  courses?: PlannerCourse[];
+  organisers?: { users: PlannerUser[] };
+  locations?: PlannerLocation[];
+};
+
+type TimeSlot = {
+  from: Date;
+  to: Date;
+  elements: PlannedElement[];
+};
+
+async function fetchPlannerData(
+  date: string,
+  user: string
+): Promise<PlannedElement[] | null> {
   try {
     const currentUrl = window.location.href;
     const school_name = currentUrl.split("/")[2];
@@ -12,83 +48,76 @@ async function fetchPlannerData(date, user) {
     if (!response.ok) {
       throw new Error(`Failed to fetch planner data`);
     }
-    return await response.json();
+    return (await response.json()) as PlannedElement[];
   } catch (error) {
     console.error(`Failed to fetch:`, error);
     return null;
   }
 }
 
-function calculateElementHeight(startTime, endTime) {
-  const durationInSeconds = (endTime - startTime) / 1000;
+function calculateElementHeight(startTime: Date, endTime: Date): number {
+  const durationInSeconds = (endTime.getTime() - startTime.getTime()) / 1000;
   const durationInMinutes = durationInSeconds / 60;
   return durationInMinutes * pixelsPerMinute;
 }
 
-function fancyfyTime(inputTime) {
-  const [startTime, endTime] = inputTime.split(" - ");
-
-  function convertTo24HourFormat(time) {
-    let [hours, minutes, period] = time.split(":");
-    hours = parseInt(hours);
-    minutes = parseInt(minutes);
-    if (period.toLowerCase().includes("pm") && hours !== 12) {
-      hours += 12;
-    } else if (period.toLowerCase().includes("am") && hours === 12) {
-      hours = 0;
-    }
-    return `${hours.toString().padStart(2, "0")}:${minutes
-      .toString()
-      .padStart(2, "0")}`;
+function convertTo24HourFormat(time: string): string {
+  const [hoursPart = "", minutesPart = "", periodPart = ""] = time.split(":");
+  let hours = parseInt(hoursPart, 10);
+  const minutes = parseInt(minutesPart, 10);
+  if (periodPart.toLowerCase().includes("pm") && hours !== 12) {
+    hours += 12;
+  } else if (periodPart.toLowerCase().includes("am") && hours === 12) {
+    hours = 0;
   }
-
-  const formattedStartTime = convertTo24HourFormat(startTime);
-  const formattedEndTime = convertTo24HourFormat(endTime);
-  return `${formattedStartTime} - ${formattedEndTime}`;
+  return `${hours.toString().padStart(2, "0")}:${minutes
+    .toString()
+    .padStart(2, "0")}`;
 }
 
-async function getDateInCorrectFormat(isFancyFormat, addend) {
-  let currentDate = new Date();
-  currentDate.setDate(currentDate.getDate() + addend);
+function fancyfyTime(inputTime: string): string {
+  const [startTime = "", endTime = ""] = inputTime.split(" - ");
+  return `${convertTo24HourFormat(startTime)} - ${convertTo24HourFormat(endTime)}`;
+}
 
-  if (isFancyFormat) {
-    const day = currentDate.getDate().toString().padStart(2, "0");
-    const month = (currentDate.getMonth() + 1).toString().padStart(2, "0");
-    const year = currentDate.getFullYear();
-    return `${year}-${month}-${day}`;
-  }
-  return currentDate;
+function dateWithOffset(addend: number): Date {
+  const date = new Date();
+  date.setDate(date.getDate() + addend);
+  return date;
+}
+
+function formatDateForApi(addend: number): string {
+  const date = dateWithOffset(addend);
+  const day = date.getDate().toString().padStart(2, "0");
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const year = date.getFullYear();
+  return `${year}-${month}-${day}`;
 }
 
 class PlannerWidget extends WidgetBase {
-  constructor() {
-    super();
-    this.daysAddedOnTop = 0;
-    this.plannerContainer = null;
-    this.planningContainer = null;
-    this.forwardButton = null;
-    this.backButton = null;
+  #daysAddedOnTop = 0;
+  #plannerContainer: HTMLDivElement | null = null;
+  #planningContainer: HTMLDivElement | null = null;
+
+  #nextDayPlanner() {
+    this.#daysAddedOnTop += 1;
+    this.#updatePlanner(this.#daysAddedOnTop);
   }
 
-  nextDayPlanner() {
-    this.daysAddedOnTop += 1;
-    this.updatePlanner(this.daysAddedOnTop);
+  #previousDayPlanner() {
+    this.#daysAddedOnTop -= 1;
+    this.#updatePlanner(this.#daysAddedOnTop);
   }
 
-  previousDayPlanner() {
-    this.daysAddedOnTop -= 1;
-    this.updatePlanner(this.daysAddedOnTop);
-  }
-
-  createTitleElement(dateText) {
+  #createTitleElement(dateText: string): HTMLDivElement {
     const titleContainer = document.createElement("div");
     titleContainer.classList.add("planner-title-startpage");
 
-    this.backButton = document.createElement("button");
-    this.backButton.style.width = "15%";
-    this.backButton.title = "back";
-    this.backButton.id = "back_button_planner";
-    this.backButton.addEventListener("click", () => this.previousDayPlanner());
+    const backButton = document.createElement("button");
+    backButton.style.width = "15%";
+    backButton.title = "back";
+    backButton.id = "back_button_planner";
+    backButton.addEventListener("click", () => this.#previousDayPlanner());
 
     const title = document.createElement("h3");
     title.style.width = "70%";
@@ -96,20 +125,20 @@ class PlannerWidget extends WidgetBase {
     title.style.fontSize = "20px";
     title.textContent = dateText;
 
-    this.forwardButton = document.createElement("button");
-    this.forwardButton.style.width = "15%";
-    this.forwardButton.title = "forward";
-    this.forwardButton.id = "forward_button_planner";
-    this.forwardButton.addEventListener("click", () => this.nextDayPlanner());
+    const forwardButton = document.createElement("button");
+    forwardButton.style.width = "15%";
+    forwardButton.title = "forward";
+    forwardButton.id = "forward_button_planner";
+    forwardButton.addEventListener("click", () => this.#nextDayPlanner());
 
-    titleContainer.appendChild(this.backButton);
+    titleContainer.appendChild(backButton);
     titleContainer.appendChild(title);
-    titleContainer.appendChild(this.forwardButton);
+    titleContainer.appendChild(forwardButton);
 
     return titleContainer;
   }
 
-  createEmptyPlannerMessage() {
+  #createEmptyPlannerMessage(): HTMLDivElement {
     const messageContainer = document.createElement("div");
 
     const message = document.createElement("p");
@@ -127,29 +156,37 @@ class PlannerWidget extends WidgetBase {
     return messageContainer;
   }
 
-  createPlannerSubElement(
-    element,
-    index,
-    numElements,
-    elementWidthPercentage,
-    beginTime,
-    slot
-  ) {
+  #createPlannerSubElement(
+    element: PlannedElement,
+    index: number,
+    numElements: number,
+    elementWidthPercentage: number,
+    beginTime: Date,
+    slot: TimeSlot
+  ): HTMLDivElement {
     const plannerElement = document.createElement("div");
     plannerElement.classList.add("planner-element");
 
-    const colorParts = element.color.split("-");
-    const cssVariableColor = `c-${colorParts[0]}-combo--${colorParts[1]}`;
-    plannerElement.classList.add(cssVariableColor);
+    if (element.color) {
+      const [colorName, colorShade] = element.color.split("-");
+      plannerElement.classList.add(`c-${colorName}-combo--${colorShade}`);
+    }
 
-    const itemName = element.courses?.[0]?.name || element.name;
+    const itemName = element.courses?.[0]?.name || element.name || "Les";
     const teachers =
       element.organisers?.users.map(
         (user) => user.name.startingWithFirstName
-      ) || [];
+      ) ?? [];
+    const rooms = (element.locations ?? [])
+      .map((location) => location.title || location.name)
+      .filter((room): room is string => Boolean(room));
 
     const itemNameElement = document.createElement("h3");
-    itemNameElement.textContent = `${itemName} - ${teachers.join(", ")}`;
+    let itemNameText = `${itemName} - ${teachers.join(", ")}`;
+    if (rooms.length > 0) {
+      itemNameText += ` · ${rooms.join(", ")}`;
+    }
+    itemNameElement.textContent = itemNameText;
     itemNameElement.classList.add("no-bottom-margin");
     plannerElement.appendChild(itemNameElement);
 
@@ -179,11 +216,11 @@ class PlannerWidget extends WidgetBase {
     plannerElement.style.left = `${left}%`;
     plannerElement.style.width = `${elementWidthPercentage}%`;
 
-    if (index < numElements - 1) {
-      const nextStartTime = new Date(
-        slot.elements[index + 1].period.dateTimeFrom
-      );
-      const marginBottom = (nextStartTime - dateTimeTo) / 60000;
+    const nextElement = slot.elements[index + 1];
+    if (index < numElements - 1 && nextElement) {
+      const nextStartTime = new Date(nextElement.period.dateTimeFrom);
+      const marginBottom =
+        (nextStartTime.getTime() - dateTimeTo.getTime()) / 60000;
       plannerElement.style.marginBottom = `${marginBottom * pixelsPerMinute}px`;
     }
 
@@ -217,27 +254,36 @@ class PlannerWidget extends WidgetBase {
     return plannerElement;
   }
 
-  async updatePlanner(addend) {
+  async #updatePlanner(addend: number) {
+    const plannerContainer = this.#plannerContainer;
+    const planningContainer = this.#planningContainer;
+    if (!plannerContainer || !planningContainer) {
+      return;
+    }
+
     const plannerUrl = document
       .getElementById("datePickerMenu")
-      .getAttribute("plannerurl");
-    const date = await getDateInCorrectFormat(true, addend);
-    const data = await fetchPlannerData(date, plannerUrl.split("/")[4]);
+      ?.getAttribute("plannerurl");
+    const user = plannerUrl?.split("/")[4];
+    if (!user) {
+      throw new Error("Could not read the planner user from datePickerMenu");
+    }
 
-    this.plannerContainer.innerHTML = "";
-    this.planningContainer.innerHTML = "";
+    const data = await fetchPlannerData(formatDateForApi(addend), user);
 
-    const dateText = `${await getDateInCorrectFormat(false, addend)}`
+    plannerContainer.innerHTML = "";
+    planningContainer.innerHTML = "";
+
+    const dateText = dateWithOffset(addend)
+      .toString()
       .split(" ")
       .slice(0, 4)
       .join(" ");
-    const title = this.createTitleElement(dateText);
-    this.plannerContainer.appendChild(title);
+    plannerContainer.appendChild(this.#createTitleElement(dateText));
 
     if (!data || data.length === 0) {
-      const message = this.createEmptyPlannerMessage();
-      this.plannerContainer.appendChild(message);
-      this.planningContainer.style.height = "initial";
+      plannerContainer.appendChild(this.#createEmptyPlannerMessage());
+      planningContainer.style.height = "initial";
     } else {
       const earliestStartTime = Math.min(
         ...data.map((element) =>
@@ -246,7 +292,7 @@ class PlannerWidget extends WidgetBase {
       );
       const beginTime = new Date(earliestStartTime);
 
-      const timeSlots = [];
+      const timeSlots: TimeSlot[] = [];
       data.forEach((element) => {
         const dateTimeFrom = new Date(element.period.dateTimeFrom);
         const dateTimeTo = new Date(element.period.dateTimeTo);
@@ -272,13 +318,12 @@ class PlannerWidget extends WidgetBase {
         }
       });
 
-      let allHeights = [];
+      const allHeights: number[] = [];
       timeSlots.forEach((slot) => {
         const numElements = slot.elements.length;
         const elementWidthPercentage = 100 / numElements;
-        let plannerElement;
         slot.elements.forEach((element, index) => {
-          plannerElement = this.createPlannerSubElement(
+          const plannerElement = this.#createPlannerSubElement(
             element,
             index,
             numElements,
@@ -286,35 +331,35 @@ class PlannerWidget extends WidgetBase {
             beginTime,
             slot
           );
-          this.planningContainer.appendChild(plannerElement);
+          planningContainer.appendChild(plannerElement);
           allHeights.push(
-            Number(
-              parseInt(plannerElement.style.height) +
-                parseInt(plannerElement.style.top)
-            )
+            parseInt(plannerElement.style.height) +
+              parseInt(plannerElement.style.top)
           );
         });
       });
-      this.planningContainer.style.height = Math.max(...allHeights) + "px";
+      planningContainer.style.height = Math.max(...allHeights) + "px";
     }
 
-    this.plannerContainer.appendChild(this.planningContainer);
+    plannerContainer.appendChild(planningContainer);
   }
 
-  async createContent() {
+  override async createContent() {
     this.element.classList.add("smpp-widget-transparent");
 
-    this.plannerContainer = document.createElement("div");
-    this.plannerContainer.classList.add("planner-container");
+    const plannerContainer = document.createElement("div");
+    plannerContainer.classList.add("planner-container");
+    this.#plannerContainer = plannerContainer;
 
-    this.planningContainer = document.createElement("div");
-    this.planningContainer.classList.add("planning-container");
+    const planningContainer = document.createElement("div");
+    planningContainer.classList.add("planning-container");
+    this.#planningContainer = planningContainer;
 
-    await this.updatePlanner(0); // Show current day by default
-    return this.plannerContainer;
+    await this.#updatePlanner(0); // Show current day by default
+    return plannerContainer;
   }
 
-  async createPreview() {
+  override async createPreview() {
     const previewElement = document.createElement("div");
 
     const previewElementTitle = document.createElement("div");

@@ -125,7 +125,9 @@ html {
   border-radius: 1.5rem;
 }
 .glass .smpp-widget-pannel {
-  backdrop-filter: none;
+  background-color: transparent !important;
+  backdrop-filter: none !important;
+
 }
 .smpp-widget-pannel {
   min-width: calc(
@@ -152,7 +154,7 @@ html {
 }
 
 .smpp-widget-insertion-point.smpp-widget-insertion-point-pannel {
-  background-color: var(--color-base02);
+  background-color: transparent !important; 
   min-width: var(--smpp-widget-insertion-point-size);
   max-width: var(--smpp-widget-insertion-point-size);
   min-height: unset;
@@ -161,7 +163,7 @@ html {
 }
 
 .smpp-widget-dragging-something .smpp-widget-insertion-point-targeted {
-  background-color: var(--color-accent);
+  background-color: transparent !important;
 }
 
 /* EDITMODE */

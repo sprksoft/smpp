@@ -2166,7 +2166,8 @@ html {
   border-radius: 1.5rem;
 }
 .glass .smpp-widget-pannel {
-  backdrop-filter: none;
+  background-color: transparent !important;
+  backdrop-filter: none !important;
 }
 .smpp-widget-pannel {
   min-width: calc(300px + 1rem * 2);
@@ -2188,7 +2189,7 @@ html {
   transition: background-color 0.5s;
 }
 .smpp-widget-insertion-point.smpp-widget-insertion-point-pannel {
-  background-color: var(--color-base02);
+  background-color: transparent !important;
   min-width: var(--smpp-widget-insertion-point-size);
   max-width: var(--smpp-widget-insertion-point-size);
   min-height: unset;
@@ -2196,7 +2197,7 @@ html {
   margin: 0px;
 }
 .smpp-widget-dragging-something .smpp-widget-insertion-point-targeted {
-  background-color: var(--color-accent);
+  background-color: transparent !important;
 }
 .smpp-widget-edit-mode {
   user-select: none;
@@ -4547,8 +4548,7 @@ button.open-theme-editor-button:hover {
   font-weight: 700;
   margin: 0;
 }
-.volgende-vak-time,
-.volgende-vak-teacher {
+.volgende-vak-time {
   font-size: 1rem;
   margin: 0;
   opacity: 0.9;

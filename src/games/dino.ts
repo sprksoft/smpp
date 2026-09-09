@@ -41,7 +41,7 @@ class DinoWidget extends GameBase {
     return "Dino++";
   }
   override get options(): GameOption[] {
-    return [GameOption.slider("speed", "Start speed:", 50, 300, 100)];
+    return [GameOption.slider("speed", "Start speed:", 100, 200, 100)];
   }
 
   #groundY(): number {
@@ -49,8 +49,9 @@ class DinoWidget extends GameBase {
   }
 
   #gameSpeed(): number {
-    return (
-      BASE_SPEED * (this.getOpt("speed") * 0.01) + this.score * SPEEDUP
+    return Math.min(
+      BASE_SPEED * 2,
+      BASE_SPEED * (this.getOpt("speed") * 0.01) + this.score * SPEEDUP,
     );
   }
 

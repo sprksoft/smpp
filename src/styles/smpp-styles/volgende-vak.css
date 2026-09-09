@@ -27,8 +27,7 @@
   margin: 0;
 }
 
-.volgende-vak-time,
-.volgende-vak-teacher {
+.volgende-vak-time {
   font-size: 1rem;
   margin: 0;
   opacity: 0.9;

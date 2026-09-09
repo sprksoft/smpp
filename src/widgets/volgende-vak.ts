@@ -89,26 +89,29 @@ class VolgendeVakWidget extends WidgetBase {
     const from = new Date(lesson.period.dateTimeFrom);
     const to = new Date(lesson.period.dateTimeTo);
 
+    const teachers: string[] =
+      lesson.organisers?.users.map(
+        (user: any) => user.name.startingWithFirstName
+      ) || [];
+    const rooms: string[] = (lesson.locations || [])
+      .map((location: any) => location?.title || location?.name)
+      .filter((title: unknown): title is string => Boolean(title));
+
     const subject = document.createElement("h3");
     subject.classList.add("volgende-vak-subject");
-    subject.innerText = lesson.courses?.[0]?.name || lesson.name || "Les";
+    subject.innerText = [
+      lesson.courses?.[0]?.name || lesson.name || "Les",
+      teachers.join(", "),
+      rooms.join(", "),
+    ]
+      .filter(Boolean)
+      .join(" - ");
     card.appendChild(subject);
 
     const time = document.createElement("p");
     time.classList.add("volgende-vak-time");
     time.innerText = `${formatTime(from)} - ${formatTime(to)}`;
     card.appendChild(time);
-
-    const teachers: string[] =
-      lesson.organisers?.users.map(
-        (user: any) => user.name.startingWithFirstName
-      ) || [];
-    if (teachers.length > 0) {
-      const teacher = document.createElement("p");
-      teacher.classList.add("volgende-vak-teacher");
-      teacher.innerText = teachers.join(", ");
-      card.appendChild(teacher);
-    }
 
     const minutesLeft = Math.ceil((from.getTime() - Date.now()) / 60_000);
     const countdown = document.createElement("p");
