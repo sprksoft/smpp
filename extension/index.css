@@ -8967,6 +8967,32 @@ hr.separator.todo-column__pinned__seperator {
   background: var(--darken-background) !important;
   backdrop-filter: var(--small-blur) !important;
 }
+button[class*=button-module_button__].bp-c-combo-hover-plain-outline--300,
+button[class*=button-module_button__].bp-c-combo-plain-outline--300 {
+  color: var(--color-text) !important;
+  background: var(--color-base01) !important;
+  border: 2px solid var(--color-base02) !important;
+  border-radius: 1rem !important;
+}
+.glass button[class*=button-module_button__].bp-c-combo-hover-plain-outline--300,
+.glass button[class*=button-module_button__].bp-c-combo-plain-outline--300 {
+  background: var(--darken-background) !important;
+  backdrop-filter: var(--small-blur) !important;
+}
+button[class*=button-module_button__].bp-c-combo-hover-plain-outline--300:hover,
+button[class*=button-module_button__].bp-c-combo-plain-outline--300:hover {
+  background: var(--color-base02) !important;
+  border-color: var(--color-accent) !important;
+}
+button[class*=button-module_button__].bp-c-combo-hover-plain-outline--300 [class*=label-],
+button[class*=button-module_button__].bp-c-combo-hover-plain-outline--300 [class*=text-],
+button[class*=button-module_button__].bp-c-combo-hover-plain-outline--300 svg path,
+button[class*=button-module_button__].bp-c-combo-plain-outline--300 [class*=label-],
+button[class*=button-module_button__].bp-c-combo-plain-outline--300 [class*=text-],
+button[class*=button-module_button__].bp-c-combo-plain-outline--300 svg path {
+  color: var(--color-text) !important;
+  fill: currentColor !important;
+}
 .selectview__new-detail-ui,
 [class*=bubble]:has([class*=selectview__hotkey]),
 .dropdown-menu:has([class*=selectview__hotkey]) {

@@ -2759,6 +2759,9 @@ Is it scaring you off?`,
       this.toastDuration = toastDuration;
       this.name = "ImageProcessingError";
     }
+    message;
+    toastType;
+    toastDuration;
   };
   var ImageSelector = class {
     name;
@@ -3664,7 +3667,6 @@ Is it scaring you off?`,
     }
   };
   function applyFilters(imageData, filters) {
-    var _a;
     if (filters.length > 0) {
       const pixels = imageData.data;
       const n4 = pixels.length / 4;
@@ -3680,7 +3682,7 @@ Is it scaring you off?`,
         b3 = pixels[offset + 2];
         a5 = pixels[offset + 3];
         for (let j2 = 0; j2 < filters.length; j2++) {
-          if (!((_a = filters[j2]) == null ? void 0 : _a.call(filters, r5, g2, b3, a5))) {
+          if (!filters[j2]?.(r5, g2, b3, a5)) {
             pixels[offset + 3] = 0;
             break;
           }
@@ -4106,9 +4108,8 @@ Is it scaring you off?`,
   var Swatch = class _Swatch {
     static applyFilters(colors, filters) {
       return filters.length > 0 ? colors.filter(({ r: r5, g: g2, b: b3 }) => {
-        var _a;
         for (let j2 = 0; j2 < filters.length; j2++) {
-          if (!((_a = filters[j2]) == null ? void 0 : _a.call(filters, r5, g2, b3, 255))) return false;
+          if (!filters[j2]?.(r5, g2, b3, 255)) return false;
         }
         return true;
       }) : colors;
@@ -4559,6 +4560,7 @@ Is it scaring you off?`,
     while (pq.size()) {
       const v3 = pq.pop();
       const color = v3.avg();
+      const [r5, g2, b3] = color;
       swatches.push(new Swatch(color, v3.count()));
     }
     return swatches;
@@ -4770,13 +4772,13 @@ Is it scaring you off?`,
       palette.LightMuted = new Swatch(hslToRgb(h4, s4, l4), 0);
     }
   }
-  var DefaultGenerator = (swatches, opts) => {
+  var DefaultGenerator = ((swatches, opts) => {
     opts = Object.assign({}, DefaultOpts, opts);
     const maxPopulation = _findMaxPopulation(swatches);
     const palette = _generateVariationColors(swatches, maxPopulation, opts);
     _generateEmptySwatches(palette, maxPopulation, opts);
     return palette;
-  };
+  });
 
   // node_modules/node-vibrant/dist/esm/pipeline/index.js
   var pipeline = new BasicPipeline().filter.register(

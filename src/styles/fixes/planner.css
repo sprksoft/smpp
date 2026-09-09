@@ -346,6 +346,44 @@ hr.separator.todo-column__pinned__seperator {
   backdrop-filter: var(--small-blur) !important;
 }
 
+/* Planner header controls (Vandaag, ‹ ›, Alles tonen / filter tree,
+   Weekweergave / view select).
+   Smartschool moved these to Blueprint button-module components whose hash rotates
+   on every update (button-module_button__iK0YS, ...), so the older .selectview /
+   .render-on-mode rules above no longer catch them and they render as pale
+   unstyled text over the custom background. Anchor on the stable module prefix +
+   the bp combo outline class. */
+button[class*="button-module_button__"].bp-c-combo-hover-plain-outline--300,
+button[class*="button-module_button__"].bp-c-combo-plain-outline--300 {
+  color: var(--color-text) !important;
+  background: var(--color-base01) !important;
+  border: 2px solid var(--color-base02) !important;
+  border-radius: 1rem !important;
+}
+
+.glass button[class*="button-module_button__"].bp-c-combo-hover-plain-outline--300,
+.glass button[class*="button-module_button__"].bp-c-combo-plain-outline--300 {
+  background: var(--darken-background) !important;
+  backdrop-filter: var(--small-blur) !important;
+}
+
+button[class*="button-module_button__"].bp-c-combo-hover-plain-outline--300:hover,
+button[class*="button-module_button__"].bp-c-combo-plain-outline--300:hover {
+  background: var(--color-base02) !important;
+  border-color: var(--color-accent) !important;
+}
+
+/* label + icons inside the button */
+button[class*="button-module_button__"].bp-c-combo-hover-plain-outline--300 [class*="label-"],
+button[class*="button-module_button__"].bp-c-combo-hover-plain-outline--300 [class*="text-"],
+button[class*="button-module_button__"].bp-c-combo-hover-plain-outline--300 svg path,
+button[class*="button-module_button__"].bp-c-combo-plain-outline--300 [class*="label-"],
+button[class*="button-module_button__"].bp-c-combo-plain-outline--300 [class*="text-"],
+button[class*="button-module_button__"].bp-c-combo-plain-outline--300 svg path {
+  color: var(--color-text) !important;
+  fill: currentColor !important;
+}
+
 .selectview__new-detail-ui,
 [class*="bubble"]:has([class*="selectview__hotkey"]),
 .dropdown-menu:has([class*="selectview__hotkey"]) {
