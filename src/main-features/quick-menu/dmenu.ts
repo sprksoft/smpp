@@ -1,5 +1,6 @@
 // @ts-nocheck
 import { randomChance, browser } from "../../common/utils.js";
+import { filledStarSvg, starSvg } from "../../fixes-utils/svgs.js";
 import { do_qm } from "./quick.js";
 
 let active_dmenu = null;
@@ -43,6 +44,7 @@ class DMenu {
     this.selectedIndex = 0;
 
     this.#mkDmenu(itemList, title);
+    this.#sort();
     this.inputEl.focus();
   }
   isOpen() {
@@ -248,15 +250,15 @@ class DMenu {
       const favoriteButton = document.createElement("button");
       favoriteButton.type = "button";
       favoriteButton.classList.add("dmenu-favorite-button");
-      favoriteButton.innerText = item.favorite == true ? "★" : "☆";
+      favoriteButton.innerHTML =
+        item.favorite == true ? filledStarSvg : starSvg;
       favoriteButton.addEventListener("click", (event) => {
         event.preventDefault();
         event.stopPropagation();
         const nextFavorite = row.dataset.favorite != "true";
         row.dataset.favorite = nextFavorite ? "true" : "false";
-        favoriteButton.innerText = nextFavorite ? "★" : "☆";
+        favoriteButton.innerHTML = nextFavorite ? filledStarSvg : starSvg;
         item.onFavoriteToggle(nextFavorite);
-        klass.#sort();
       });
       favoriteContainer.appendChild(favoriteButton);
     }

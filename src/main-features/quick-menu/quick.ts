@@ -298,6 +298,8 @@ export async function do_qm(opener = "") {
     cmd_list = cmd_list.concat(await getDMenuOptionsForSettings(true));
   }
 
+
+
   dmenu(
     cmd_list,
     async function (cmd) {
