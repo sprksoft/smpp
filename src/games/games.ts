@@ -1,5 +1,9 @@
 // @ts-nocheck
 import { WidgetBase } from "../widgets/widgets.js";
+import {
+  isStudySessionActive,
+  onStudySessionChange,
+} from "../widgets/pomodoro.js";
 
 const GAME_OPTION_TYPE_SLIDER = 0;
 
@@ -24,6 +28,7 @@ export class GameOption {
 }
 
 export class GameBase extends WidgetBase {
+  static lastPlayedGame = null;
   canvas;
   menu;
   score;
@@ -38,6 +43,10 @@ export class GameBase extends WidgetBase {
 
   #scoreEl;
   #buttonEl;
+  #buttonWrapperEl;
+  #buttonOverlayEl;
+  #studyNoticeEl;
+  #unsubscribeStudy;
 
   get category() {
     return "games";
@@ -45,23 +54,74 @@ export class GameBase extends WidgetBase {
 
   constructor() {
     document.addEventListener("keydown", async (e) => {
+      if (!this.isActive) {
+        return;
+      }
       if (e.repeat) {
+        return;
+      }
+      const target = e.target as HTMLElement | null;
+      if (
+        target &&
+        (target.tagName === "INPUT" ||
+          target.tagName === "TEXTAREA" ||
+          target.tagName === "BUTTON" ||
+          target.tagName === "SELECT" ||
+          target.tagName === "A" ||
+          target.isContentEditable)
+      ) {
         return;
       }
       if (this.playing) {
         await this.onKeyDown(e);
       } else if (this.hasPlayedAtLeastOnce) {
         if (e.code === "Space") {
+          if (GameBase.lastPlayedGame && GameBase.lastPlayedGame !== this) {
+            return;
+          }
+          e.preventDefault();
+          if (isStudySessionActive()) {
+            this.#showStudyNotice();
+            return;
+          }
           await this.#startGame();
         }
       }
     });
     document.addEventListener("keyup", async (e) => {
+      if (!this.isActive) {
+        return;
+      }
+      const target = e.target as HTMLElement | null;
+      if (
+        target &&
+        (target.tagName === "INPUT" ||
+          target.tagName === "TEXTAREA" ||
+          target.tagName === "BUTTON" ||
+          target.tagName === "SELECT" ||
+          target.tagName === "A" ||
+          target.isContentEditable)
+      ) {
+        return;
+      }
       if (this.playing) {
         await this.onKeyUp(e);
       }
     });
     super();
+
+    this.#subscribeStudy();
+  }
+
+  #subscribeStudy() {
+    if (!this.#unsubscribeStudy) {
+      this.#unsubscribeStudy = onStudySessionChange((active) => {
+        this.#updateStudyBlockState();
+        if (active && this.playing) {
+          this.stopGame();
+        }
+      });
+    }
   }
 
   // Start Protected (Use these functions in sub classes)
@@ -114,6 +174,7 @@ export class GameBase extends WidgetBase {
         this.#buttonEl.innerText = "Try Again (Space)";
         this.hasPlayedAtLeastOnce = true;
         this.lastTs = undefined;
+        this.#updateStudyBlockState();
       }, 500);
       return;
     }
@@ -127,6 +188,11 @@ export class GameBase extends WidgetBase {
   #tick() {}
 
   async #startGame() {
+    if (isStudySessionActive()) {
+      this.#showStudyNotice();
+      return;
+    }
+    GameBase.lastPlayedGame = this;
     this.canvas.style.display = "block";
     this.menu.style.display = "none";
     this.#requestStopGame = false;
@@ -213,13 +279,56 @@ export class GameBase extends WidgetBase {
       }
     }
 
+    this.#subscribeStudy();
+
+    let buttonWrapper = document.createElement("div");
+    buttonWrapper.classList.add("game-button-wrapper");
+    this.#buttonWrapperEl = buttonWrapper;
+
     this.#buttonEl = document.createElement("button");
     this.#buttonEl.classList.add("game-button");
     this.#buttonEl.innerText = "Play";
     this.#buttonEl.addEventListener("click", async (e) => {
+      if (isStudySessionActive()) {
+        e.preventDefault();
+        e.stopPropagation();
+        this.#showStudyNotice();
+        return;
+      }
       await this.#startGame();
     });
-    menuBottom.appendChild(this.#buttonEl);
+
+    const originalClick = this.#buttonEl.click.bind(this.#buttonEl);
+    this.#buttonEl.click = () => {
+      if (isStudySessionActive()) {
+        this.#showStudyNotice();
+        return;
+      }
+      originalClick();
+    };
+
+    buttonWrapper.appendChild(this.#buttonEl);
+
+    let buttonOverlay = document.createElement("div");
+    buttonOverlay.classList.add("game-button-overlay");
+    buttonOverlay.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      this.#showStudyNotice();
+    });
+    this.#buttonOverlayEl = buttonOverlay;
+    buttonWrapper.appendChild(buttonOverlay);
+
+    menuBottom.appendChild(buttonWrapper);
+
+    this.#studyNoticeEl = document.createElement("div");
+    this.#studyNoticeEl.classList.add("game-study-notice");
+    this.#studyNoticeEl.innerText =
+      "Studiemodus actief - concentreer je eerst op je schoolwerk!";
+    this.#studyNoticeEl.style.display = "none";
+    menuBottom.appendChild(this.#studyNoticeEl);
+
+    this.#updateStudyBlockState();
 
     menu.appendChild(menuTop);
     menu.appendChild(menuBottom);
@@ -305,5 +414,55 @@ export class GameBase extends WidgetBase {
 
   get options(): GameOption[] {
     return [];
+  }
+
+  #updateStudyBlockState() {
+    const isBlocked = isStudySessionActive();
+    if (this.#buttonEl) {
+      this.#buttonEl.disabled = isBlocked;
+      if (isBlocked) {
+        this.#buttonEl.title =
+          "Studiemodus actief - concentreer je eerst op je schoolwerk!";
+        this.#buttonEl.classList.add("game-button-blocked");
+      } else {
+        this.#buttonEl.removeAttribute("title");
+        this.#buttonEl.classList.remove("game-button-blocked");
+      }
+    }
+    if (this.#buttonWrapperEl) {
+      if (isBlocked) {
+        this.#buttonWrapperEl.classList.add("blocked");
+      } else {
+        this.#buttonWrapperEl.classList.remove("blocked");
+      }
+    }
+    if (this.#studyNoticeEl) {
+      this.#studyNoticeEl.style.display = isBlocked ? "block" : "none";
+    }
+  }
+
+  #showStudyNotice() {
+    if (this.#studyNoticeEl) {
+      this.#studyNoticeEl.innerText =
+        "Studiemodus actief - concentreer je eerst op je schoolwerk!";
+      this.#studyNoticeEl.style.display = "block";
+      this.#studyNoticeEl.classList.remove("game-study-notice-flash");
+      void this.#studyNoticeEl.offsetWidth;
+      this.#studyNoticeEl.classList.add("game-study-notice-flash");
+    }
+  }
+
+  async onRemove() {
+    if (this.#unsubscribeStudy) {
+      this.#unsubscribeStudy();
+      this.#unsubscribeStudy = null;
+    }
+    if (this.playing) {
+      this.stopGame();
+    }
+    this.hasPlayedAtLeastOnce = false;
+    if (GameBase.lastPlayedGame === this) {
+      GameBase.lastPlayedGame = null;
+    }
   }
 }
