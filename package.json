@@ -15,7 +15,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "build": "esbuild src/index.ts src/background-scripts/index.ts --bundle --external:*.png --external:*.svg --external:\"\"  --outdir=./extension && tsc"
+    "build": "esbuild src/index.ts src/background-scripts/index.ts --bundle --external:*.png --external:*.svg --external:\"\" --define:process.env.OPENWEATHER_API_KEY=\"\\\"$OPENWEATHER_API_KEY\\\"\" --define:process.env.DELIJN_API_KEY=\"\\\"$DELIJN_API_KEY\\\"\" --outdir=./extension && tsc"
   },
   "devDependencies": {
     "@types/colorthief": "^2.6.0",

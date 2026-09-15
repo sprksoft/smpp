@@ -1,5 +1,5 @@
 export async function fetchWeatherData(location: string) {
-  const apiKey = "2b6f9b6dbe5064dd770f29d4b229a22c";
+  const apiKey = process.env.OPENWEATHER_API_KEY;
   try {
     const response = await fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}&units=metric`
@@ -15,7 +15,7 @@ export async function fetchWeatherData(location: string) {
   }
 }
 export async function fetchDelijnData(apiUrl: string) {
-  const apiKey = "ddb68605719d4bb8b6444b6871cefc7a";
+  const apiKey = process.env.DELIJN_API_KEY;
   try {
     const response = await fetch(apiUrl, {
       headers: { "Ocp-Apim-Subscription-Key": apiKey },
