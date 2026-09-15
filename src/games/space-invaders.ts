@@ -1,8 +1,6 @@
-// @ts-nocheck
-import { GameBase } from "./games.js";
+import { GameBase, GameOption } from "./games.js";
 import { registerWidget } from "../widgets/widgets.js";
 import { getThemeVar } from "../main-features/appearance/themes.js";
-import { GameOption } from "./games.js";
 
 const PLAYER_WIDTH = 36;
 const PLAYER_HEIGHT = 8;
@@ -15,30 +13,37 @@ const ENEMY_PADDING_X = 12;
 const ENEMY_PADDING_Y = 10;
 const MAX_BULLETS_ON_SCREEN = 2;
 
-class SpaceInvadersWidget extends GameBase {
-  #playerX;
-  #leftPressed;
-  #rightPressed;
-  #bullets;
-  #enemies;
-  #enemyDir;
-  #enemyMoveTimer;
-  #enemyMoveDelay;
-  #shotCooldown;
-  #autoShotTimer;
-  #autoShotInterval;
-  #rowCount;
-  #colCount;
+type Enemy = { x: number; y: number; alive: boolean };
+type Bullet = { x: number; y: number; width: number; height: number };
 
-  get title() {
+function themeColor(varName: string): string {
+  return getThemeVar(varName) ?? "#000";
+}
+
+class SpaceInvadersWidget extends GameBase {
+  #playerX = 0;
+  #leftPressed = false;
+  #rightPressed = false;
+  #bullets: Bullet[] = [];
+  #enemies: Enemy[] = [];
+  #enemyDir = 1;
+  #enemyMoveTimer = 0;
+  #enemyMoveDelay = 0;
+  #shotCooldown = 0;
+  #autoShotTimer = 0;
+  #autoShotInterval = 0;
+  #rowCount = 4;
+  #colCount = 7;
+
+  override get title(): string {
     return "Space Invaders++";
   }
 
-  get options() {
+  override get options(): GameOption[] {
     return [GameOption.slider("speed", "Speed:", 10, 300, 100)];
   }
 
-  async onGameStart() {
+  override async onGameStart() {
     this.#leftPressed = false;
     this.#rightPressed = false;
     this.#shotCooldown = 0;
@@ -57,7 +62,7 @@ class SpaceInvadersWidget extends GameBase {
     this.#updateEnemyDelay();
   }
 
-  #getAutoShotInterval() {
+  #getAutoShotInterval(): number {
     const speed = this.getOpt("speed") * 0.01;
     return Math.max(260, Math.min(520, 430 / Math.max(0.5, speed)));
   }
@@ -89,7 +94,7 @@ class SpaceInvadersWidget extends GameBase {
     this.#enemyMoveDelay = Math.max(60, base * (1 - 0.55 * waveProgress));
   }
 
-  #aliveEnemies() {
+  #aliveEnemies(): Enemy[] {
     return this.#enemies.filter((enemy) => enemy.alive);
   }
 
@@ -151,6 +156,7 @@ class SpaceInvadersWidget extends GameBase {
 
     for (let i = this.#bullets.length - 1; i >= 0; i--) {
       const bullet = this.#bullets[i];
+      if (!bullet) continue;
       let hit = false;
       for (const enemy of aliveEnemies) {
         if (!enemy.alive) {
@@ -176,7 +182,7 @@ class SpaceInvadersWidget extends GameBase {
     this.#updateEnemyDelay();
   }
 
-  onGameDraw(ctx, dt) {
+  override onGameDraw(ctx: CanvasRenderingContext2D, dt: number) {
     const speedScale = this.getOpt("speed") * 0.01;
 
     if (this.#leftPressed) {
@@ -198,6 +204,7 @@ class SpaceInvadersWidget extends GameBase {
 
     for (let i = this.#bullets.length - 1; i >= 0; i--) {
       const bullet = this.#bullets[i];
+      if (!bullet) continue;
       bullet.y -= 0.42 * speedScale * dt;
       if (bullet.y + bullet.height < 0) {
         this.#bullets.splice(i, 1);
@@ -212,14 +219,14 @@ class SpaceInvadersWidget extends GameBase {
 
     this.#checkCollisionsAndState();
 
-    ctx.fillStyle = getThemeVar("--color-base01");
+    ctx.fillStyle = themeColor("--color-base01");
     ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
-    ctx.fillStyle = `${getThemeVar("--color-base03")}44`;
+    ctx.fillStyle = `${themeColor("--color-base03")}44`;
     ctx.fillRect(0, this.canvas.height - 40, this.canvas.width, 1);
 
     const playerY = this.canvas.height - PLAYER_MARGIN_BOTTOM - PLAYER_HEIGHT;
-    ctx.fillStyle = getThemeVar("--color-text");
+    ctx.fillStyle = themeColor("--color-text");
     ctx.beginPath();
     ctx.roundRect(this.#playerX, playerY, PLAYER_WIDTH, PLAYER_HEIGHT, PLAYER_HEIGHT / 2);
     ctx.fill();
@@ -227,20 +234,20 @@ class SpaceInvadersWidget extends GameBase {
     ctx.roundRect(this.#playerX + PLAYER_WIDTH / 2 - 3, playerY - 5, 6, 6, 3);
     ctx.fill();
 
-    ctx.fillStyle = getThemeVar("--color-accent");
+    ctx.fillStyle = themeColor("--color-accent");
     for (const enemy of this.#aliveEnemies()) {
       ctx.fillRect(enemy.x, enemy.y, ENEMY_WIDTH, ENEMY_HEIGHT);
       ctx.fillRect(enemy.x + 3, enemy.y + ENEMY_HEIGHT, 3, 3);
       ctx.fillRect(enemy.x + ENEMY_WIDTH - 6, enemy.y + ENEMY_HEIGHT, 3, 3);
     }
 
-    ctx.fillStyle = getThemeVar("--color-text");
+    ctx.fillStyle = themeColor("--color-text");
     for (const bullet of this.#bullets) {
       ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
     }
   }
 
-  onKeyDown(e) {
+  override async onKeyDown(e: KeyboardEvent) {
     if (e.code === "ArrowLeft") {
       this.#leftPressed = true;
     } else if (e.code === "ArrowRight") {
@@ -248,7 +255,7 @@ class SpaceInvadersWidget extends GameBase {
     }
   }
 
-  onKeyUp(e) {
+  override async onKeyUp(e: KeyboardEvent) {
     if (e.code === "ArrowLeft") {
       this.#leftPressed = false;
     } else if (e.code === "ArrowRight") {

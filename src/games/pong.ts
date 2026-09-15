@@ -1,8 +1,6 @@
-// @ts-nocheck
-import { GameBase } from "./games.js";
+import { GameBase, GameOption, drawRoundedRect } from "./games.js";
 import { registerWidget } from "../widgets/widgets.js";
 import { getThemeVar } from "../main-features/appearance/themes.js";
-import { GameOption } from "./games.js";
 
 const PONG_BALL_RADIUS = 4;
 const PONG_PADDLE_WIDTH = 5;
@@ -13,22 +11,28 @@ const PONG_BALL_SPEED = 0.1;
 const SPEEDUP_FACTOR = 1.05;
 const MAX_SPEED = 0.5;
 
+type Ball = { x: number; y: number; dx: number; dy: number };
+
+function themeColor(varName: string): string {
+  return getThemeVar(varName) ?? "#000";
+}
+
 class PongWidget extends GameBase {
-  ball;
-  leftY;
-  rightY;
+  ball: Ball = { x: 0, y: 0, dx: 0, dy: 0 };
+  leftY = 0;
+  rightY = 0;
   leftUp = false;
   leftDown = false;
 
-  get title() {
+  override get title(): string {
     return "Pong++";
   }
 
-  get options() {
+  override get options(): GameOption[] {
     return [GameOption.slider("speed", "Speed:", 10, 300, 100)];
   }
 
-  async onGameStart() {
+  override async onGameStart() {
     const w = this.canvas.width;
     const h = this.canvas.height;
 
@@ -51,30 +55,13 @@ class PongWidget extends GameBase {
     this.leftDown = false;
   }
 
-  drawRoundedRect(ctx, x, y, width, height, radius) {
-    ctx.beginPath();
-    ctx.moveTo(x + radius, y);
-    ctx.lineTo(x + width - radius, y);
-    ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
-    ctx.lineTo(x + width, y + height - radius);
-    ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
-    ctx.lineTo(x + radius, y + height);
-    ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
-    ctx.lineTo(x, y + radius);
-    ctx.quadraticCurveTo(x, y, x + radius, y);
-    ctx.closePath();
-    ctx.fill();
-  }
-
-  onGameDraw(ctx, dt) {
-    if (!this.ball) return;
-
+  override onGameDraw(ctx: CanvasRenderingContext2D, dt: number) {
     const w = this.canvas.width;
     const h = this.canvas.height;
 
-    const colorBase = getThemeVar("--color-base01");
-    const colorText = getThemeVar("--color-text");
-    const colorAccent = getThemeVar("--color-accent");
+    const colorBase = themeColor("--color-base01");
+    const colorText = themeColor("--color-text");
+    const colorAccent = themeColor("--color-accent");
 
     ctx.fillStyle = colorBase;
     ctx.fillRect(0, 0, w, h);
@@ -153,7 +140,7 @@ class PongWidget extends GameBase {
     ctx.fill();
 
     ctx.fillStyle = colorAccent;
-    this.drawRoundedRect(
+    drawRoundedRect(
       ctx,
       0,
       this.leftY,
@@ -161,7 +148,8 @@ class PongWidget extends GameBase {
       PONG_PADDLE_HEIGHT,
       3
     );
-    this.drawRoundedRect(
+    ctx.fill();
+    drawRoundedRect(
       ctx,
       w - PONG_PADDLE_WIDTH,
       this.rightY,
@@ -169,6 +157,7 @@ class PongWidget extends GameBase {
       PONG_PADDLE_HEIGHT,
       3
     );
+    ctx.fill();
 
     ctx.strokeStyle = colorText;
     ctx.setLineDash([4, 5]);
@@ -179,12 +168,12 @@ class PongWidget extends GameBase {
     ctx.setLineDash([]);
   }
 
-  onKeyDown(e) {
+  override async onKeyDown(e: KeyboardEvent) {
     if (e.code === "ArrowUp") this.leftUp = true;
     if (e.code === "ArrowDown") this.leftDown = true;
   }
 
-  onKeyUp(e) {
+  override async onKeyUp(e: KeyboardEvent) {
     if (e.code === "ArrowUp") this.leftUp = false;
     if (e.code === "ArrowDown") this.leftDown = false;
   }

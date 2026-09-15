@@ -10636,12 +10636,12 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
   // src/games/games.ts
   var GAME_OPTION_TYPE_SLIDER = 0;
   var GameOption = class _GameOption {
-    name;
-    title;
-    type;
-    min;
-    max;
-    def;
+    name = "";
+    title = "";
+    type = GAME_OPTION_TYPE_SLIDER;
+    min = 0;
+    max = 0;
+    def = 0;
     static slider(name, title, min = 0, max = 0, def = 0) {
       let go = new _GameOption();
       go.name = name;
@@ -10653,24 +10653,39 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
       return go;
     }
   };
+  function drawRoundedRect(ctx, x3, y3, width, height, radius) {
+    ctx.beginPath();
+    ctx.moveTo(x3 + radius, y3);
+    ctx.lineTo(x3 + width - radius, y3);
+    ctx.quadraticCurveTo(x3 + width, y3, x3 + width, y3 + radius);
+    ctx.lineTo(x3 + width, y3 + height - radius);
+    ctx.quadraticCurveTo(x3 + width, y3 + height, x3 + width - radius, y3 + height);
+    ctx.lineTo(x3 + radius, y3 + height);
+    ctx.quadraticCurveTo(x3, y3 + height, x3, y3 + height - radius);
+    ctx.lineTo(x3, y3 + radius);
+    ctx.quadraticCurveTo(x3, y3, x3 + radius, y3);
+    ctx.closePath();
+  }
   var GameBase = class extends WidgetBase {
+    // canvas and menu are created in createContent(), before a game can start
     canvas;
     menu;
-    score;
-    playing;
-    hasPlayedAtLeastOnce;
-    #hiScore;
-    #requestStopGame;
-    #optionValues;
+    score = 0;
+    playing = false;
+    hasPlayedAtLeastOnce = false;
+    #hiScore = 0;
+    #requestStopGame = false;
+    #optionValues = {};
     #optionElements = {};
     #lastTs;
-    #ctx;
+    #ctx = null;
     #scoreEl;
     #buttonEl;
     get category() {
       return "games";
     }
     constructor() {
+      super();
       document.addEventListener("keydown", async (e5) => {
         if (e5.repeat) {
           return;
@@ -10688,11 +10703,10 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
           await this.onKeyUp(e5);
         }
       });
-      super();
     }
     // Start Protected (Use these functions in sub classes)
     getOpt(name) {
-      return this.#optionValues[name];
+      return this.#optionValues[name] ?? 0;
     }
     stopGame() {
       this.#requestStopGame = true;
@@ -10700,39 +10714,45 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
         this.#hiScore = this.score;
       }
     }
+    get gameSettings() {
+      return this.settings;
+    }
     // End protected
     #updateOpt(name, value) {
-      const displayEl = this.#optionElements[name].display;
-      const inputEl = this.#optionElements[name].input;
-      inputEl.value = value;
-      let displayValue = Math.round(value / 10);
-      displayValue /= 10;
-      if (displayValue == Math.round(displayValue)) {
-        displayValue += ".0";
-      }
-      displayEl.innerText = displayValue + "x";
+      const elements = this.#optionElements[name];
+      if (!elements) return;
+      const { display: displayEl, input: inputEl } = elements;
+      inputEl.value = String(value);
+      let displayValue = Math.round(value / 10) / 10;
+      displayEl.innerText = (Number.isInteger(displayValue) ? displayValue.toFixed(1) : String(displayValue)) + "x";
       displayEl.classList.add("game-option-value");
-      this.#optionValues[name] = value * 1;
+      this.#optionValues[name] = value;
     }
     #updateScore() {
-      this.#scoreEl.innerText = "High Score: " + this.#hiScore;
+      if (this.#scoreEl) {
+        this.#scoreEl.innerText = "High Score: " + this.#hiScore;
+      }
     }
     #draw(ts) {
-      if (!this.#lastTs) {
+      if (this.#lastTs === void 0) {
         this.#lastTs = ts;
       }
       const deltaTime = ts - this.#lastTs;
       this.#lastTs = ts;
-      this.onGameDraw(this.#ctx, deltaTime);
+      if (this.#ctx) {
+        this.onGameDraw(this.#ctx, deltaTime);
+      }
       if (this.#requestStopGame) {
         setTimeout(async () => {
           this.playing = false;
           this.setSetting("score", this.#hiScore);
           this.canvas.style.display = "none";
           this.menu.style.display = "flex";
-          this.#buttonEl.innerText = "Try Again (Space)";
+          if (this.#buttonEl) {
+            this.#buttonEl.innerText = "Try Again (Space)";
+          }
           this.hasPlayedAtLeastOnce = true;
-          this.lastTs = void 0;
+          this.#lastTs = void 0;
         }, 500);
         return;
       }
@@ -10741,8 +10761,6 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
           this.#draw(ts2);
         });
       }
-    }
-    #tick() {
     }
     async #startGame() {
       this.canvas.style.display = "block";
@@ -10758,7 +10776,7 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
       });
     }
     defaultSettings() {
-      return { score: 0, options: [] };
+      return { score: 0, options: {} };
     }
     async createContent() {
       this.#optionValues = {};
@@ -10798,18 +10816,18 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
           sliderCont.classList.add("game-slide-container");
           let slider = document.createElement("input");
           slider.type = "range";
-          slider.min = opt.min;
-          slider.max = opt.max;
-          slider.value = 0;
+          slider.min = String(opt.min);
+          slider.max = String(opt.max);
+          slider.value = "0";
           slider.classList.add("game-slider");
           sliderCont.appendChild(slider);
           let display = document.createElement("span");
           sliderCont.appendChild(display);
           this.#optionElements[opt.name] = { display, input: slider };
-          slider.addEventListener("input", (e5) => {
-            this.#updateOpt(opt.name, e5.target.value);
+          slider.addEventListener("input", () => {
+            this.#updateOpt(opt.name, Number(slider.value));
           });
-          slider.addEventListener("change", async (e5) => {
+          slider.addEventListener("change", async () => {
             await this.setSetting("options", this.#optionValues);
           });
           menuBottom.appendChild(sliderCont);
@@ -10818,7 +10836,7 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
       this.#buttonEl = document.createElement("button");
       this.#buttonEl.classList.add("game-button");
       this.#buttonEl.innerText = "Play";
-      this.#buttonEl.addEventListener("click", async (e5) => {
+      this.#buttonEl.addEventListener("click", async () => {
         await this.#startGame();
       });
       menuBottom.appendChild(this.#buttonEl);
@@ -10829,24 +10847,39 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
       this.onSettingsChange();
       return div;
     }
+    // Moves high scores and speeds saved in localStorage by very old versions
+    // (e.g. "snakehighscore") into the widget settings.
+    async #migrateLegacyStorage(prefix) {
+      const storage = window.localStorage;
+      const legacyScore = storage.getItem(`${prefix}highscore`);
+      if (legacyScore === null) {
+        return;
+      }
+      const legacySpeed = storage.getItem(`${prefix}speed`);
+      storage.removeItem(`${prefix}highscore`);
+      storage.removeItem(`${prefix}speed`);
+      storage.removeItem(`${prefix}speedmultiplier`);
+      const settings = this.gameSettings;
+      settings.score = Math.max(settings.score, Number(legacyScore) || 0);
+      if (legacySpeed !== null && Number(legacySpeed)) {
+        settings.options["speed"] = Number(legacySpeed);
+      }
+      await this.setSetting("score", settings.score);
+    }
     async onSettingsChange() {
       if (this.constructor.name == "SnakeWidget") {
-        if (window.localStorage.getItem("snakehighscore")) {
-          this.settings = await migrateSnake();
-        }
+        await this.#migrateLegacyStorage("snake");
       } else if (this.constructor.name == "FlappyWidget") {
-        if (window.localStorage.getItem("flappyhighscore")) {
-          this.settings = await migrateFlappy();
-        }
+        await this.#migrateLegacyStorage("flappy");
       }
       for (let opt of this.options) {
-        let value = this.settings.options[opt.name];
+        let value = this.gameSettings.options[opt.name];
         if (!value) {
           value = opt.def;
         }
         this.#updateOpt(opt.name, value);
       }
-      this.#hiScore = this.settings.score;
+      this.#hiScore = this.gameSettings.score;
       this.#updateScore();
     }
     async createPreview() {
@@ -10884,13 +10917,13 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
     }
     // Called when the game needs to render a new frame (dt is time since last
     // frame)
-    onGameDraw(ctx, deltaTime) {
+    onGameDraw(_ctx, _deltaTime) {
     }
-    async onKeyDown(e5) {
+    async onKeyDown(_e) {
     }
-    async onKeyUp(e5) {
+    async onKeyUp(_e) {
     }
-    async onMouse(e5) {
+    async onMouse(_e) {
     }
     get tickSpeed() {
       return 60;
@@ -10911,13 +10944,15 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
   var BRICK_PADDING = 4;
   var PADDLE_SPEED = 0.2;
   var BALL_SPEED = 0.1;
+  function themeColor(varName) {
+    return getThemeVar(varName) ?? "#000";
+  }
   var BreakoutWidget = class extends GameBase {
-    ball;
-    paddleX;
+    ball = { x: 0, y: 0, dx: 0, dy: 0 };
+    paddleX = 0;
     leftPressed = false;
     rightPressed = false;
-    bricks;
-    score = 0;
+    bricks = [];
     get title() {
       return "Breakout++";
     }
@@ -10948,24 +10983,10 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
         }
       }
     }
-    drawRoundedRect(ctx, x3, y3, width, height, radius) {
-      ctx.beginPath();
-      ctx.moveTo(x3 + radius, y3);
-      ctx.lineTo(x3 + width - radius, y3);
-      ctx.quadraticCurveTo(x3 + width, y3, x3 + width, y3 + radius);
-      ctx.lineTo(x3 + width, y3 + height - radius);
-      ctx.quadraticCurveTo(x3 + width, y3 + height, x3 + width - radius, y3 + height);
-      ctx.lineTo(x3 + radius, y3 + height);
-      ctx.quadraticCurveTo(x3, y3 + height, x3, y3 + height - radius);
-      ctx.lineTo(x3, y3 + radius);
-      ctx.quadraticCurveTo(x3, y3, x3 + radius, y3);
-      ctx.closePath();
-      ctx.fill();
-    }
     onGameDraw(ctx, dt) {
       const w2 = this.canvas.width;
       const h4 = this.canvas.height;
-      ctx.fillStyle = getThemeVar("--color-base01");
+      ctx.fillStyle = themeColor("--color-base01");
       ctx.fillRect(0, 0, w2, h4);
       const speed = PADDLE_SPEED * this.getOpt("speed") * 0.01;
       if (this.leftPressed) this.paddleX -= speed * dt;
@@ -11003,8 +11024,8 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
           }
         }
       }
-      ctx.fillStyle = getThemeVar("--color-accent");
-      this.drawRoundedRect(
+      ctx.fillStyle = themeColor("--color-accent");
+      drawRoundedRect(
         ctx,
         this.paddleX,
         h4 - PADDLE_HEIGHT,
@@ -11012,22 +11033,24 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
         PADDLE_HEIGHT,
         5
       );
-      ctx.fillStyle = getThemeVar("--color-text");
+      ctx.fill();
+      ctx.fillStyle = themeColor("--color-text");
       ctx.beginPath();
       ctx.arc(ball.x, ball.y, BALL_RADIUS, 0, 2 * Math.PI);
       ctx.fill();
-      ctx.fillStyle = getThemeVar("--color-accent");
+      ctx.fillStyle = themeColor("--color-accent");
       for (let b3 of this.bricks) {
         if (b3.status === 1) {
-          this.drawRoundedRect(ctx, b3.x, b3.y, BRICK_WIDTH, BRICK_HEIGHT, 5);
+          drawRoundedRect(ctx, b3.x, b3.y, BRICK_WIDTH, BRICK_HEIGHT, 5);
+          ctx.fill();
         }
       }
     }
-    onKeyDown(e5) {
+    async onKeyDown(e5) {
       if (e5.code === "ArrowLeft") this.leftPressed = true;
       else if (e5.code === "ArrowRight") this.rightPressed = true;
     }
-    onKeyUp(e5) {
+    async onKeyUp(e5) {
       if (e5.code === "ArrowLeft") this.leftPressed = false;
       else if (e5.code === "ArrowRight") this.rightPressed = false;
     }
@@ -11043,13 +11066,15 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
   var TERMVEL = 0.3;
   var PIPE_W = 10;
   var GRAVITY = 5e-4;
+  function themeColor2(varName) {
+    return getThemeVar(varName) ?? "#000";
+  }
   var FlappyWidget = class extends GameBase {
-    bgX;
-    birdY;
-    birdVel;
-    jump;
-    pipe;
-    color;
+    bgX = 0;
+    birdY = 0;
+    birdVel = 0;
+    jump = false;
+    pipe = { x: 0, y: 0, checked: false };
     get title() {
       return "Flappy++";
     }
@@ -11064,8 +11089,8 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
       ctx.moveTo(0, h4 - FLOOR_H);
       ctx.lineTo(w2, h4 - FLOOR_H);
       ctx.stroke();
-      ctx.fillStyle = getThemeVar("--color-accent");
-      ctx.strokeStyle = getThemeVar("--color-base01");
+      ctx.fillStyle = themeColor2("--color-accent");
+      ctx.strokeStyle = themeColor2("--color-base01");
       ctx.fillRect(0, h4 - FLOOR_H, w2, FLOOR_H);
       ctx.strokeRect(0, h4 - FLOOR_H, w2, FLOOR_H);
       for (let i5 = 0; i5 < w2 / 20 * 2; i5++) {
@@ -11083,7 +11108,7 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
     }
     #drawPipe(ctx, pipe) {
       const gap_size = this.#calcGap();
-      ctx.fillStyle = getThemeVar("--color-accent");
+      ctx.fillStyle = themeColor2("--color-accent");
       ctx.lineCap = "round";
       ctx.beginPath();
       ctx.roundRect(
@@ -11122,7 +11147,7 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
         } else {
           if (pipe.checked) {
             this.score--;
-            this.checked = false;
+            pipe.checked = false;
           }
           this.stopGame();
         }
@@ -11136,7 +11161,7 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
       pipe.checked = false;
     }
     #drawBird(ctx) {
-      ctx.fillStyle = getThemeVar("--color-accent");
+      ctx.fillStyle = themeColor2("--color-accent");
       ctx.beginPath();
       ctx.arc(BIRD_X, this.birdY, BIRD_RADIUS, 0, 2 * Math.PI);
       ctx.fill();
@@ -11146,18 +11171,17 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
       this.jump = false;
       this.birdY = this.canvas.height / 2;
       this.birdVel = 0;
-      this.pipe = { x: 0, y: 0 };
+      this.pipe = { x: 0, y: 0, checked: false };
       this.#resetPipe(this.pipe);
     }
     onGameDraw(ctx, dt) {
-      ctx.fillStyle = getThemeVar("--color-base01");
+      ctx.fillStyle = themeColor2("--color-base01");
       ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
       this.birdY += this.birdVel * dt;
       this.birdVel = Math.min(
         this.birdVel + GRAVITY * this.getOpt("speed") * 0.01 * dt,
         TERMVEL * this.getOpt("speed") * 0.01
       );
-      ctx;
       if (this.jump) {
         this.jump = false;
         this.birdVel = -0.4 * this.getOpt("speed") * 0.01 * 0.4;
@@ -11172,7 +11196,7 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
       this.#drawPipe(ctx, this.pipe);
       this.#drawGround(ctx);
     }
-    async onMouse(e5) {
+    async onMouse(_e) {
       this.jump = true;
     }
     async onKeyDown(e5) {
@@ -11185,6 +11209,9 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
   registerWidget(new FlappyWidget());
 
   // src/games/snake.ts
+  function themeColor3(varName) {
+    return getThemeVar(varName) ?? "#000";
+  }
   var Point = class _Point {
     x;
     y;
@@ -11206,15 +11233,12 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
   var CELL_COUNT = 15;
   var FRAME_TIME = 400;
   var SnakeWidget = class extends GameBase {
-    #targetDir;
-    #curDir;
-    #counter;
-    #snake;
-    #food;
+    #targetDir = DIR_DOWN;
+    #curDir = DIR_DOWN;
+    #counter = 0;
+    #snake = [];
+    #food = new Point(0, 0);
     #backgroundCanvas;
-    constructor() {
-      super();
-    }
     get title() {
       return "Snake++";
     }
@@ -11227,6 +11251,7 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
     #tick() {
       this.#curDir = this.#targetDir;
       const head = this.#snake[this.#snake.length - 1];
+      if (!head) return;
       const newHead = head.add(this.#curDir);
       if (newHead.x < 0 || newHead.y < 0 || newHead.x >= this.#getCellCount() || newHead.y >= this.#getCellCount()) {
         this.stopGame();
@@ -11261,7 +11286,7 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
       }
     }
     defaultSettings() {
-      return { score: 0, options: [], enableGrid: true };
+      return { ...super.defaultSettings(), enableGrid: true };
     }
     async onGameStart() {
       const cellCount = this.#getCellCount();
@@ -11272,7 +11297,7 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
         this.#backgroundCanvas = bg;
       }
       const bgctx = this.#backgroundCanvas.getContext("2d", { alpha: false });
-      this.#drawBg(bgctx);
+      if (bgctx) this.#drawBg(bgctx);
       this.#counter = 0;
       this.#curDir = DIR_DOWN;
       this.#targetDir = DIR_DOWN;
@@ -11286,10 +11311,9 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
         return;
       }
       const bgctx = this.#backgroundCanvas.getContext("2d", { alpha: false });
-      this.#drawBg(bgctx);
+      if (bgctx) this.#drawBg(bgctx);
     }
     #drawDot(ctx, dot) {
-      ctx.strokeWidth = 0;
       ctx.beginPath();
       const celRad = this.#calcCelRad();
       ctx.arc(
@@ -11307,16 +11331,15 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
     #drawBg(ctx) {
       const cellCount = this.#getCellCount();
       const celRad = this.#calcCelRad();
-      ctx.strokeWidth = 0;
-      ctx.fillStyle = getThemeVar("--color-base01");
+      ctx.fillStyle = themeColor3("--color-base01");
       ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
       if (this.settings.enableGrid) {
         for (let y3 = 0; y3 < cellCount; y3++) {
           for (let x3 = 0; x3 < cellCount; x3++) {
             if ((x3 + y3) % 2 == 0) {
-              ctx.fillStyle = `${getThemeVar("--color-base03")}50`;
+              ctx.fillStyle = `${themeColor3("--color-base03")}50`;
             } else {
-              ctx.fillStyle = `${getThemeVar("--color-base02")}50`;
+              ctx.fillStyle = `${themeColor3("--color-base02")}50`;
             }
             ctx.beginPath();
             ctx.arc(
@@ -11337,15 +11360,17 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
         this.#tick();
         this.#counter = 0;
       }
-      ctx.drawImage(this.#backgroundCanvas, 0, 0);
-      ctx.fillStyle = getThemeVar("--color-text");
+      if (this.#backgroundCanvas) {
+        ctx.drawImage(this.#backgroundCanvas, 0, 0);
+      }
+      ctx.fillStyle = themeColor3("--color-text");
       for (let part of this.#snake) {
         this.#drawDot(ctx, part);
       }
-      ctx.fillStyle = getThemeVar("--color-accent");
+      ctx.fillStyle = themeColor3("--color-accent");
       this.#drawDot(ctx, this.#food);
     }
-    onKeyDown(e5) {
+    async onKeyDown(e5) {
       switch (e5.key) {
         case "ArrowUp":
           if (this.#curDir !== DIR_DOWN) {
@@ -11380,10 +11405,13 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
   var PONG_BALL_SPEED = 0.1;
   var SPEEDUP_FACTOR = 1.05;
   var MAX_SPEED = 0.5;
+  function themeColor4(varName) {
+    return getThemeVar(varName) ?? "#000";
+  }
   var PongWidget = class extends GameBase {
-    ball;
-    leftY;
-    rightY;
+    ball = { x: 0, y: 0, dx: 0, dy: 0 };
+    leftY = 0;
+    rightY = 0;
     leftUp = false;
     leftDown = false;
     get title() {
@@ -11406,27 +11434,12 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
       this.leftUp = false;
       this.leftDown = false;
     }
-    drawRoundedRect(ctx, x3, y3, width, height, radius) {
-      ctx.beginPath();
-      ctx.moveTo(x3 + radius, y3);
-      ctx.lineTo(x3 + width - radius, y3);
-      ctx.quadraticCurveTo(x3 + width, y3, x3 + width, y3 + radius);
-      ctx.lineTo(x3 + width, y3 + height - radius);
-      ctx.quadraticCurveTo(x3 + width, y3 + height, x3 + width - radius, y3 + height);
-      ctx.lineTo(x3 + radius, y3 + height);
-      ctx.quadraticCurveTo(x3, y3 + height, x3, y3 + height - radius);
-      ctx.lineTo(x3, y3 + radius);
-      ctx.quadraticCurveTo(x3, y3, x3 + radius, y3);
-      ctx.closePath();
-      ctx.fill();
-    }
     onGameDraw(ctx, dt) {
-      if (!this.ball) return;
       const w2 = this.canvas.width;
       const h4 = this.canvas.height;
-      const colorBase = getThemeVar("--color-base01");
-      const colorText = getThemeVar("--color-text");
-      const colorAccent = getThemeVar("--color-accent");
+      const colorBase = themeColor4("--color-base01");
+      const colorText = themeColor4("--color-text");
+      const colorAccent = themeColor4("--color-accent");
       ctx.fillStyle = colorBase;
       ctx.fillRect(0, 0, w2, h4);
       const speed = PONG_PADDLE_SPEED * this.getOpt("speed") * 0.01;
@@ -11478,7 +11491,7 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
       ctx.arc(b3.x, b3.y, PONG_BALL_RADIUS, 0, Math.PI * 2);
       ctx.fill();
       ctx.fillStyle = colorAccent;
-      this.drawRoundedRect(
+      drawRoundedRect(
         ctx,
         0,
         this.leftY,
@@ -11486,7 +11499,8 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
         PONG_PADDLE_HEIGHT,
         3
       );
-      this.drawRoundedRect(
+      ctx.fill();
+      drawRoundedRect(
         ctx,
         w2 - PONG_PADDLE_WIDTH,
         this.rightY,
@@ -11494,6 +11508,7 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
         PONG_PADDLE_HEIGHT,
         3
       );
+      ctx.fill();
       ctx.strokeStyle = colorText;
       ctx.setLineDash([4, 5]);
       ctx.beginPath();
@@ -11502,11 +11517,11 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
       ctx.stroke();
       ctx.setLineDash([]);
     }
-    onKeyDown(e5) {
+    async onKeyDown(e5) {
       if (e5.code === "ArrowUp") this.leftUp = true;
       if (e5.code === "ArrowDown") this.leftDown = true;
     }
-    onKeyUp(e5) {
+    async onKeyUp(e5) {
       if (e5.code === "ArrowUp") this.leftUp = false;
       if (e5.code === "ArrowDown") this.leftDown = false;
     }
@@ -11561,34 +11576,42 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
       [0, 0, 0, 0]
     ]
   };
+  function themeColor5(varName) {
+    return getThemeVar(varName) ?? "#000";
+  }
   function rotate(matrix) {
     const size = matrix.length;
-    const result = Array.from({ length: size }, () => Array(size).fill(0));
-    for (let y3 = 0; y3 < size; y3++) {
-      for (let x3 = 0; x3 < size; x3++) {
-        result[x3][size - 1 - y3] = matrix[y3][x3];
-      }
-    }
-    return result;
+    return Array.from(
+      { length: size },
+      (_, row) => Array.from({ length: size }, (_2, col) => matrix[size - 1 - col]?.[row] ?? 0)
+    );
   }
   function generateRotations(base) {
     const rotations = [base];
+    let prev = base;
     for (let i5 = 1; i5 < 4; i5++) {
-      const next = rotate(rotations[i5 - 1]);
+      const next = rotate(prev);
+      prev = next;
       if (!rotations.some((r5) => JSON.stringify(r5) === JSON.stringify(next))) {
         rotations.push(next);
       }
     }
-    while (rotations.length < 4) rotations.push(rotations[0]);
+    while (rotations.length < 4) rotations.push(base);
     return rotations;
   }
+  var PIECE_TYPES = Object.keys(BASE_PIECES);
   var PIECES = Object.fromEntries(
-    Object.entries(BASE_PIECES).map(([name, base]) => [
-      name,
-      generateRotations(base)
-    ])
+    PIECE_TYPES.map((name) => [name, generateRotations(BASE_PIECES[name])])
   );
-  var PIECE_TYPES = Object.keys(PIECES);
+  var PIECE_COLORS = {
+    I: "#00FFFF",
+    O: "#FFFF00",
+    T: "#800080",
+    S: "#00FF00",
+    Z: "#FF0000",
+    J: "#0000FF",
+    L: "#FFA500"
+  };
   var KICKS = {
     JLTSZ: {
       "0>1": [
@@ -11717,40 +11740,21 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
       "0>3": [[0, 0]]
     }
   };
-  function drawRoundedRect(ctx, x3, y3, width, height, radius) {
-    ctx.beginPath();
-    ctx.moveTo(x3 + radius, y3);
-    ctx.lineTo(x3 + width - radius, y3);
-    ctx.quadraticCurveTo(x3 + width, y3, x3 + width, y3 + radius);
-    ctx.lineTo(x3 + width, y3 + height - radius);
-    ctx.quadraticCurveTo(x3 + width, y3 + height, x3 + width - radius, y3 + height);
-    ctx.lineTo(x3 + radius, y3 + height);
-    ctx.quadraticCurveTo(x3, y3 + height, x3, y3 + height - radius);
-    ctx.lineTo(x3, y3 + radius);
-    ctx.quadraticCurveTo(x3, y3, x3 + radius, y3);
-    ctx.closePath();
-  }
   var TetrisWidget = class extends GameBase {
-    #board;
-    #currentPiece;
-    #currentRotation;
-    #pieceX;
-    #pieceY;
-    #nextPiece;
-    #dropTime;
-    #dropInterval;
-    #leftHeld;
-    #rightHeld;
-    #downHeld;
+    #board = [];
+    #currentPiece = "I";
+    #currentRotation = 0;
+    #pieceX = 0;
+    #pieceY = 0;
+    #nextPiece = null;
+    #dropTime = 0;
+    #dropInterval = 0;
+    #leftHeld = false;
+    #rightHeld = false;
+    #downHeld = false;
     #leftTimer;
     #rightTimer;
     #downTimer;
-    constructor() {
-      super();
-      this.#leftHeld = false;
-      this.#rightHeld = false;
-      this.#downHeld = false;
-    }
     get title() {
       return "Tetris++";
     }
@@ -11758,19 +11762,19 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
       return [GameOption.slider("speed", "Speed:", 10, 100, 30)];
     }
     #randomPiece() {
-      return PIECE_TYPES[Math.floor(Math.random() * PIECE_TYPES.length)];
+      return PIECE_TYPES[Math.floor(Math.random() * PIECE_TYPES.length)] ?? "I";
     }
     #getPieceShape(type, rotation) {
-      return PIECES[type][rotation % 4];
+      return PIECES[type][rotation % 4] ?? BASE_PIECES[type];
     }
     #collision(pieceType, rotation, x3, y3) {
       const shape = this.#getPieceShape(pieceType, rotation);
       for (let py = 0; py < 4; py++) {
         for (let px = 0; px < 4; px++) {
-          if (shape[py][px]) {
+          if (shape[py]?.[px]) {
             const bx = x3 + px;
             const by = y3 + py;
-            if (bx < 0 || bx >= BOARD_WIDTH || by >= BOARD_HEIGHT || by >= 0 && this.#board[by][bx])
+            if (bx < 0 || bx >= BOARD_WIDTH || by >= BOARD_HEIGHT || by >= 0 && this.#board[by]?.[bx])
               return true;
           }
         }
@@ -11784,10 +11788,10 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
       );
       for (let py = 0; py < 4; py++) {
         for (let px = 0; px < 4; px++) {
-          if (shape[py][px]) {
+          if (shape[py]?.[px]) {
             const bx = this.#pieceX + px;
-            const by = this.#pieceY + py;
-            if (by >= 0) this.#board[by][bx] = this.#currentPiece;
+            const row = this.#board[this.#pieceY + py];
+            if (row) row[bx] = this.#currentPiece;
           }
         }
       }
@@ -11795,7 +11799,7 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
     #clearLines() {
       let linesCleared = 0;
       for (let y3 = BOARD_HEIGHT - 1; y3 >= 0; y3--) {
-        if (this.#board[y3].every((c5) => c5 !== 0)) {
+        if (this.#board[y3]?.every((c5) => c5 !== 0)) {
           this.#board.splice(y3, 1);
           this.#board.unshift(new Array(BOARD_WIDTH).fill(0));
           linesCleared++;
@@ -11836,10 +11840,10 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
         this.#move(0, 1);
         this.#dropTime = 0;
       }
-      ctx.fillStyle = getThemeVar("--color-base01");
+      ctx.fillStyle = themeColor5("--color-base01");
       ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
       const offsetX = (this.canvas.width - BOARD_WIDTH * CELL_SIZE) / 2;
-      ctx.strokeStyle = getThemeVar("--color-base03");
+      ctx.strokeStyle = themeColor5("--color-base03");
       ctx.lineWidth = 1;
       for (let x3 = 0; x3 <= BOARD_WIDTH; x3++) {
         ctx.beginPath();
@@ -11856,8 +11860,9 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
       const radius = 5;
       for (let y3 = 0; y3 < BOARD_HEIGHT; y3++) {
         for (let x3 = 0; x3 < BOARD_WIDTH; x3++) {
-          if (this.#board[y3][x3]) {
-            ctx.fillStyle = this.#getColor(this.#board[y3][x3]);
+          const cell = this.#board[y3]?.[x3];
+          if (cell) {
+            ctx.fillStyle = PIECE_COLORS[cell];
             drawRoundedRect(
               ctx,
               offsetX + x3 * CELL_SIZE,
@@ -11867,7 +11872,7 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
               radius
             );
             ctx.fill();
-            ctx.strokeStyle = getThemeVar("--color-base03");
+            ctx.strokeStyle = themeColor5("--color-base03");
             ctx.stroke();
           }
         }
@@ -11876,31 +11881,19 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
         this.#currentPiece,
         this.#currentRotation
       );
-      ctx.fillStyle = this.#getColor(this.#currentPiece);
+      ctx.fillStyle = PIECE_COLORS[this.#currentPiece];
       for (let py = 0; py < 4; py++) {
         for (let px = 0; px < 4; px++) {
-          if (shape[py][px]) {
+          if (shape[py]?.[px]) {
             const x3 = offsetX + (this.#pieceX + px) * CELL_SIZE;
             const y3 = (this.#pieceY + py) * CELL_SIZE;
             drawRoundedRect(ctx, x3, y3, CELL_SIZE, CELL_SIZE, radius);
             ctx.fill();
-            ctx.strokeStyle = getThemeVar("--color-base03");
+            ctx.strokeStyle = themeColor5("--color-base03");
             ctx.stroke();
           }
         }
       }
-    }
-    #getColor(type) {
-      const colors = {
-        I: "#00FFFF",
-        O: "#FFFF00",
-        T: "#800080",
-        S: "#00FF00",
-        Z: "#FF0000",
-        J: "#0000FF",
-        L: "#FFA500"
-      };
-      return colors[type] || "#FFFFFF";
     }
     #move(dx, dy) {
       this.#pieceX += dx;
@@ -11926,7 +11919,7 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
       const to = (this.#currentRotation + 1) % 4;
       const kickSet = piece === "I" ? KICKS.I : piece === "O" ? KICKS.O : KICKS.JLTSZ;
       const key = `${from}>${to}`;
-      for (const [dx, dy] of kickSet[key]) {
+      for (const [dx, dy] of kickSet[key] ?? []) {
         if (!this.#collision(piece, to, this.#pieceX + dx, this.#pieceY + dy)) {
           this.#currentRotation = to;
           this.#pieceX += dx;
@@ -11934,6 +11927,18 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
           return;
         }
       }
+    }
+    #hardDrop() {
+      while (!this.#collision(
+        this.#currentPiece,
+        this.#currentRotation,
+        this.#pieceX,
+        this.#pieceY + 1
+      )) {
+        this.#pieceY++;
+      }
+      this.#move(0, 1);
+      this.#dropTime = 0;
     }
     #startMoveLeft() {
       if (!this.#leftHeld) {
@@ -11974,7 +11979,7 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
         clearInterval(this.#downTimer);
       }
     }
-    onKeyDown(e5) {
+    async onKeyDown(e5) {
       switch (e5.key) {
         case "ArrowLeft":
           this.#startMoveLeft();
@@ -11986,13 +11991,16 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
           this.#startMoveDown();
           break;
         case "ArrowUp":
-        case " ":
           e5.preventDefault();
           this.#rotate();
           break;
+        case " ":
+          e5.preventDefault();
+          if (!e5.repeat) this.#hardDrop();
+          break;
       }
     }
-    onKeyUp(e5) {
+    async onKeyUp(e5) {
       switch (e5.key) {
         case "ArrowLeft":
           this.#stopMoveLeft();
@@ -12019,20 +12027,23 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
   var ENEMY_PADDING_X = 12;
   var ENEMY_PADDING_Y = 10;
   var MAX_BULLETS_ON_SCREEN = 2;
+  function themeColor6(varName) {
+    return getThemeVar(varName) ?? "#000";
+  }
   var SpaceInvadersWidget = class extends GameBase {
-    #playerX;
-    #leftPressed;
-    #rightPressed;
-    #bullets;
-    #enemies;
-    #enemyDir;
-    #enemyMoveTimer;
-    #enemyMoveDelay;
-    #shotCooldown;
-    #autoShotTimer;
-    #autoShotInterval;
-    #rowCount;
-    #colCount;
+    #playerX = 0;
+    #leftPressed = false;
+    #rightPressed = false;
+    #bullets = [];
+    #enemies = [];
+    #enemyDir = 1;
+    #enemyMoveTimer = 0;
+    #enemyMoveDelay = 0;
+    #shotCooldown = 0;
+    #autoShotTimer = 0;
+    #autoShotInterval = 0;
+    #rowCount = 4;
+    #colCount = 7;
     get title() {
       return "Space Invaders++";
     }
@@ -12135,6 +12146,7 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
       }
       for (let i5 = this.#bullets.length - 1; i5 >= 0; i5--) {
         const bullet = this.#bullets[i5];
+        if (!bullet) continue;
         let hit = false;
         for (const enemy of aliveEnemies) {
           if (!enemy.alive) {
@@ -12171,6 +12183,7 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
       }
       for (let i5 = this.#bullets.length - 1; i5 >= 0; i5--) {
         const bullet = this.#bullets[i5];
+        if (!bullet) continue;
         bullet.y -= 0.42 * speedScale * dt;
         if (bullet.y + bullet.height < 0) {
           this.#bullets.splice(i5, 1);
@@ -12182,37 +12195,37 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
         this.#moveEnemiesOneStep();
       }
       this.#checkCollisionsAndState();
-      ctx.fillStyle = getThemeVar("--color-base01");
+      ctx.fillStyle = themeColor6("--color-base01");
       ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-      ctx.fillStyle = `${getThemeVar("--color-base03")}44`;
+      ctx.fillStyle = `${themeColor6("--color-base03")}44`;
       ctx.fillRect(0, this.canvas.height - 40, this.canvas.width, 1);
       const playerY = this.canvas.height - PLAYER_MARGIN_BOTTOM - PLAYER_HEIGHT;
-      ctx.fillStyle = getThemeVar("--color-text");
+      ctx.fillStyle = themeColor6("--color-text");
       ctx.beginPath();
       ctx.roundRect(this.#playerX, playerY, PLAYER_WIDTH, PLAYER_HEIGHT, PLAYER_HEIGHT / 2);
       ctx.fill();
       ctx.beginPath();
       ctx.roundRect(this.#playerX + PLAYER_WIDTH / 2 - 3, playerY - 5, 6, 6, 3);
       ctx.fill();
-      ctx.fillStyle = getThemeVar("--color-accent");
+      ctx.fillStyle = themeColor6("--color-accent");
       for (const enemy of this.#aliveEnemies()) {
         ctx.fillRect(enemy.x, enemy.y, ENEMY_WIDTH, ENEMY_HEIGHT);
         ctx.fillRect(enemy.x + 3, enemy.y + ENEMY_HEIGHT, 3, 3);
         ctx.fillRect(enemy.x + ENEMY_WIDTH - 6, enemy.y + ENEMY_HEIGHT, 3, 3);
       }
-      ctx.fillStyle = getThemeVar("--color-text");
+      ctx.fillStyle = themeColor6("--color-text");
       for (const bullet of this.#bullets) {
         ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
       }
     }
-    onKeyDown(e5) {
+    async onKeyDown(e5) {
       if (e5.code === "ArrowLeft") {
         this.#leftPressed = true;
       } else if (e5.code === "ArrowRight") {
         this.#rightPressed = true;
       }
     }
-    onKeyUp(e5) {
+    async onKeyUp(e5) {
       if (e5.code === "ArrowLeft") {
         this.#leftPressed = false;
       } else if (e5.code === "ArrowRight") {
@@ -12236,7 +12249,7 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
   var BIRD_W = 21;
   var BIRD_H = 12;
   var SCORE_RATE = 0.01;
-  function themeColor(varName) {
+  function themeColor7(varName) {
     return getThemeVar(varName) ?? "#000";
   }
   var DinoWidget = class extends GameBase {
@@ -12268,8 +12281,8 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
     #drawGround(ctx) {
       let w2 = this.canvas.width;
       let h4 = this.canvas.height;
-      ctx.fillStyle = themeColor("--color-accent");
-      ctx.strokeStyle = themeColor("--color-base01");
+      ctx.fillStyle = themeColor7("--color-accent");
+      ctx.strokeStyle = themeColor7("--color-base01");
       ctx.lineWidth = 1;
       ctx.fillRect(0, h4 - FLOOR_H2, w2, FLOOR_H2);
       ctx.strokeRect(0, h4 - FLOOR_H2, w2, FLOOR_H2);
@@ -12294,12 +12307,12 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
     }
     #drawDino(ctx) {
       const box = this.#dinoHitbox();
-      ctx.fillStyle = themeColor("--color-accent");
+      ctx.fillStyle = themeColor7("--color-accent");
       ctx.fillRect(box.x, box.y, box.w, box.h - 6);
       ctx.fillRect(box.x + box.w - 9, box.y - 6, 12, 9);
-      ctx.fillStyle = themeColor("--color-base01");
+      ctx.fillStyle = themeColor7("--color-base01");
       ctx.fillRect(box.x + box.w - 2, box.y - 4, 3, 3);
-      ctx.fillStyle = themeColor("--color-accent");
+      ctx.fillStyle = themeColor7("--color-accent");
       ctx.fillRect(box.x - 6, box.y + 3, 6, 6);
       if (this.#onGround()) {
         if (this.legUp) {
@@ -12332,7 +12345,7 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
       this.spawnTimer = (180 + Math.random() * 360) / speed;
     }
     #drawObstacle(ctx, ob) {
-      ctx.fillStyle = themeColor("--color-accent");
+      ctx.fillStyle = themeColor7("--color-accent");
       if (ob.type === "cactus") {
         const y3 = this.#groundY() - ob.h;
         for (let x3 = ob.x; x3 < ob.x + ob.w; x3 += CACTUS_W + 3) {
@@ -12372,7 +12385,7 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
       this.legUp = false;
     }
     onGameDraw(ctx, dt) {
-      ctx.fillStyle = themeColor("--color-base01");
+      ctx.fillStyle = themeColor7("--color-base01");
       ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
       const speed = this.#gameSpeed();
       if (this.jumpQueued && this.#onGround()) {

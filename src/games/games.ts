@@ -1,17 +1,32 @@
-// @ts-nocheck
 import { WidgetBase } from "../widgets/widgets.js";
 
 const GAME_OPTION_TYPE_SLIDER = 0;
 
-export class GameOption {
-  name;
-  title;
-  type;
-  min;
-  max;
-  def;
+export type GameSettings = {
+  score: number;
+  options: Record<string, number>;
+};
 
-  static slider(name, title, min = 0, max = 0, def = 0) {
+type OptionElements = {
+  display: HTMLSpanElement;
+  input: HTMLInputElement;
+};
+
+export class GameOption {
+  name = "";
+  title = "";
+  type = GAME_OPTION_TYPE_SLIDER;
+  min = 0;
+  max = 0;
+  def = 0;
+
+  static slider(
+    name: string,
+    title: string,
+    min = 0,
+    max = 0,
+    def = 0
+  ): GameOption {
     let go = new GameOption();
     go.name = name;
     go.title = title;
@@ -23,27 +38,50 @@ export class GameOption {
   }
 }
 
+export function drawRoundedRect(
+  ctx: CanvasRenderingContext2D,
+  x: number,
+  y: number,
+  width: number,
+  height: number,
+  radius: number
+) {
+  ctx.beginPath();
+  ctx.moveTo(x + radius, y);
+  ctx.lineTo(x + width - radius, y);
+  ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+  ctx.lineTo(x + width, y + height - radius);
+  ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+  ctx.lineTo(x + radius, y + height);
+  ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+  ctx.lineTo(x, y + radius);
+  ctx.quadraticCurveTo(x, y, x + radius, y);
+  ctx.closePath();
+}
+
 export class GameBase extends WidgetBase {
-  canvas;
-  menu;
-  score;
-  playing;
-  hasPlayedAtLeastOnce;
-  #hiScore;
-  #requestStopGame;
-  #optionValues;
-  #optionElements = {};
-  #lastTs;
-  #ctx;
+  // canvas and menu are created in createContent(), before a game can start
+  canvas!: HTMLCanvasElement;
+  menu!: HTMLDivElement;
+  score = 0;
+  playing = false;
+  hasPlayedAtLeastOnce = false;
+  #hiScore = 0;
+  #requestStopGame = false;
+  #optionValues: Record<string, number> = {};
+  #optionElements: Record<string, OptionElements> = {};
+  #lastTs: number | undefined;
+  #ctx: CanvasRenderingContext2D | null = null;
 
-  #scoreEl;
-  #buttonEl;
+  #scoreEl: HTMLSpanElement | undefined;
+  #buttonEl: HTMLButtonElement | undefined;
 
-  get category() {
+  override get category(): string {
     return "games";
   }
 
   constructor() {
+    super();
     document.addEventListener("keydown", async (e) => {
       if (e.repeat) {
         return;
@@ -61,12 +99,11 @@ export class GameBase extends WidgetBase {
         await this.onKeyUp(e);
       }
     });
-    super();
   }
 
   // Start Protected (Use these functions in sub classes)
-  getOpt(name) {
-    return this.#optionValues[name];
+  getOpt(name: string): number {
+    return this.#optionValues[name] ?? 0;
   }
 
   stopGame() {
@@ -75,35 +112,43 @@ export class GameBase extends WidgetBase {
       this.#hiScore = this.score;
     }
   }
+
+  get gameSettings(): GameSettings {
+    return this.settings;
+  }
   // End protected
 
-  #updateOpt(name, value) {
-    const displayEl = this.#optionElements[name].display;
-    const inputEl = this.#optionElements[name].input;
-    inputEl.value = value;
+  #updateOpt(name: string, value: number) {
+    const elements = this.#optionElements[name];
+    if (!elements) return;
+    const { display: displayEl, input: inputEl } = elements;
+    inputEl.value = String(value);
 
-    let displayValue = Math.round(value / 10);
-    displayValue /= 10;
-    if (displayValue == Math.round(displayValue)) {
-      displayValue += ".0";
-    }
-    displayEl.innerText = displayValue + "x";
+    let displayValue = Math.round(value / 10) / 10;
+    displayEl.innerText =
+      (Number.isInteger(displayValue)
+        ? displayValue.toFixed(1)
+        : String(displayValue)) + "x";
     displayEl.classList.add("game-option-value");
 
-    this.#optionValues[name] = value * 1;
+    this.#optionValues[name] = value;
   }
 
   #updateScore() {
-    this.#scoreEl.innerText = "High Score: " + this.#hiScore;
+    if (this.#scoreEl) {
+      this.#scoreEl.innerText = "High Score: " + this.#hiScore;
+    }
   }
 
-  #draw(ts) {
-    if (!this.#lastTs) {
+  #draw(ts: number) {
+    if (this.#lastTs === undefined) {
       this.#lastTs = ts;
     }
     const deltaTime = ts - this.#lastTs;
     this.#lastTs = ts;
-    this.onGameDraw(this.#ctx, deltaTime);
+    if (this.#ctx) {
+      this.onGameDraw(this.#ctx, deltaTime);
+    }
     if (this.#requestStopGame) {
       setTimeout(async () => {
         this.playing = false;
@@ -111,9 +156,11 @@ export class GameBase extends WidgetBase {
 
         this.canvas.style.display = "none";
         this.menu.style.display = "flex";
-        this.#buttonEl.innerText = "Try Again (Space)";
+        if (this.#buttonEl) {
+          this.#buttonEl.innerText = "Try Again (Space)";
+        }
         this.hasPlayedAtLeastOnce = true;
-        this.lastTs = undefined;
+        this.#lastTs = undefined;
       }, 500);
       return;
     }
@@ -124,7 +171,6 @@ export class GameBase extends WidgetBase {
       });
     }
   }
-  #tick() {}
 
   async #startGame() {
     this.canvas.style.display = "block";
@@ -141,11 +187,11 @@ export class GameBase extends WidgetBase {
     });
   }
 
-  defaultSettings() {
-    return { score: 0, options: [] };
+  override defaultSettings(): GameSettings {
+    return { score: 0, options: {} };
   }
 
-  async createContent() {
+  override async createContent(): Promise<HTMLDivElement> {
     this.#optionValues = {};
 
     let div = document.createElement("div");
@@ -192,9 +238,9 @@ export class GameBase extends WidgetBase {
         sliderCont.classList.add("game-slide-container");
         let slider = document.createElement("input");
         slider.type = "range";
-        slider.min = opt.min;
-        slider.max = opt.max;
-        slider.value = 0;
+        slider.min = String(opt.min);
+        slider.max = String(opt.max);
+        slider.value = "0";
         slider.classList.add("game-slider");
         sliderCont.appendChild(slider);
 
@@ -202,10 +248,10 @@ export class GameBase extends WidgetBase {
         sliderCont.appendChild(display);
         this.#optionElements[opt.name] = { display: display, input: slider };
 
-        slider.addEventListener("input", (e) => {
-          this.#updateOpt(opt.name, e.target.value);
+        slider.addEventListener("input", () => {
+          this.#updateOpt(opt.name, Number(slider.value));
         });
-        slider.addEventListener("change", async (e) => {
+        slider.addEventListener("change", async () => {
           await this.setSetting("options", this.#optionValues);
         });
 
@@ -216,7 +262,7 @@ export class GameBase extends WidgetBase {
     this.#buttonEl = document.createElement("button");
     this.#buttonEl.classList.add("game-button");
     this.#buttonEl.innerText = "Play";
-    this.#buttonEl.addEventListener("click", async (e) => {
+    this.#buttonEl.addEventListener("click", async () => {
       await this.#startGame();
     });
     menuBottom.appendChild(this.#buttonEl);
@@ -229,28 +275,46 @@ export class GameBase extends WidgetBase {
     return div;
   }
 
-  async onSettingsChange() {
+  // Moves high scores and speeds saved in localStorage by very old versions
+  // (e.g. "snakehighscore") into the widget settings.
+  async #migrateLegacyStorage(prefix: string) {
+    const storage = window.localStorage;
+    const legacyScore = storage.getItem(`${prefix}highscore`);
+    if (legacyScore === null) {
+      return;
+    }
+    const legacySpeed = storage.getItem(`${prefix}speed`);
+    storage.removeItem(`${prefix}highscore`);
+    storage.removeItem(`${prefix}speed`);
+    storage.removeItem(`${prefix}speedmultiplier`);
+
+    const settings = this.gameSettings;
+    settings.score = Math.max(settings.score, Number(legacyScore) || 0);
+    if (legacySpeed !== null && Number(legacySpeed)) {
+      settings.options["speed"] = Number(legacySpeed);
+    }
+    // setSetting saves the whole settings object, including the options above
+    await this.setSetting("score", settings.score);
+  }
+
+  override async onSettingsChange() {
     if (this.constructor.name == "SnakeWidget") {
-      if (window.localStorage.getItem("snakehighscore")) {
-        this.settings = await migrateSnake();
-      }
+      await this.#migrateLegacyStorage("snake");
     } else if (this.constructor.name == "FlappyWidget") {
-      if (window.localStorage.getItem("flappyhighscore")) {
-        this.settings = await migrateFlappy();
-      }
+      await this.#migrateLegacyStorage("flappy");
     }
     for (let opt of this.options) {
-      let value = this.settings.options[opt.name];
+      let value = this.gameSettings.options[opt.name];
       if (!value) {
         value = opt.def;
       }
       this.#updateOpt(opt.name, value);
     }
 
-    this.#hiScore = this.settings.score;
+    this.#hiScore = this.gameSettings.score;
     this.#updateScore();
   }
-  async createPreview() {
+  override async createPreview(): Promise<HTMLDivElement> {
     let div = document.createElement("div");
     div.classList.add("game-container");
 
@@ -294,10 +358,10 @@ export class GameBase extends WidgetBase {
   onGameTick() {}
   // Called when the game needs to render a new frame (dt is time since last
   // frame)
-  onGameDraw(ctx: CanvasRenderingContext2D, deltaTime: number) {}
-  async onKeyDown(e: KeyboardEvent) {}
-  async onKeyUp(e: KeyboardEvent) {}
-  async onMouse(e: MouseEvent) {}
+  onGameDraw(_ctx: CanvasRenderingContext2D, _deltaTime: number) {}
+  async onKeyDown(_e: KeyboardEvent) {}
+  async onKeyUp(_e: KeyboardEvent) {}
+  async onMouse(_e: MouseEvent) {}
 
   get tickSpeed(): number {
     return 60;

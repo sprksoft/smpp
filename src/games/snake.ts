@@ -1,21 +1,25 @@
-// @ts-nocheck
-import { GameBase } from "./games.js";
+import { GameBase, GameOption, type GameSettings } from "./games.js";
 import { registerWidget } from "../widgets/widgets.js";
 import { getThemeVar } from "../main-features/appearance/themes.js";
-import { GameOption } from "./games.js";
+
+type SnakeSettings = GameSettings & { enableGrid: boolean };
+
+function themeColor(varName: string): string {
+  return getThemeVar(varName) ?? "#000";
+}
 
 class Point {
-  x;
-  y;
-  constructor(x, y) {
+  x: number;
+  y: number;
+  constructor(x: number, y: number) {
     this.x = x;
     this.y = y;
   }
 
-  add(other) {
+  add(other: Point): Point {
     return new Point(this.x + other.x, this.y + other.y);
   }
-  equal(other) {
+  equal(other: Point): boolean {
     return this.x === other.x && this.y === other.y;
   }
 }
@@ -28,22 +32,18 @@ const DIR_DOWN = new Point(0, 1);
 const CELL_COUNT = 15;
 const FRAME_TIME = 400;
 class SnakeWidget extends GameBase {
-  #targetDir;
-  #curDir;
-  #counter;
-  #snake;
-  #food;
+  #targetDir = DIR_DOWN;
+  #curDir = DIR_DOWN;
+  #counter = 0;
+  #snake: Point[] = [];
+  #food = new Point(0, 0);
 
-  #backgroundCanvas;
+  #backgroundCanvas: HTMLCanvasElement | undefined;
 
-  constructor() {
-    super();
-  }
-
-  get title() {
+  override get title(): string {
     return "Snake++";
   }
-  get options() {
+  override get options(): GameOption[] {
     return [
       GameOption.slider("speed", "Speed:", 10, 300, 100),
       GameOption.slider("size", "Size:", 100, 500, 100),
@@ -53,6 +53,7 @@ class SnakeWidget extends GameBase {
   #tick() {
     this.#curDir = this.#targetDir;
     const head = this.#snake[this.#snake.length - 1];
+    if (!head) return;
     const newHead = head.add(this.#curDir);
 
     // bounds check
@@ -82,11 +83,11 @@ class SnakeWidget extends GameBase {
     this.#snake.push(newHead);
   }
 
-  #calcCelRad() {
+  #calcCelRad(): number {
     return this.canvas.width / (this.#getCellCount() * 2);
   }
 
-  #getRandomFieldPos() {
+  #getRandomFieldPos(): Point {
     const cellCount = this.#getCellCount();
     return new Point(
       Math.floor(Math.random() * cellCount),
@@ -101,11 +102,11 @@ class SnakeWidget extends GameBase {
     }
   }
 
-  defaultSettings() {
-    return { score: 0, options: [], enableGrid: true };
+  override defaultSettings(): SnakeSettings {
+    return { ...super.defaultSettings(), enableGrid: true };
   }
 
-  async onGameStart() {
+  override async onGameStart() {
     const cellCount = this.#getCellCount();
     if (!this.#backgroundCanvas) {
       const bg = document.createElement("canvas");
@@ -115,8 +116,7 @@ class SnakeWidget extends GameBase {
     }
     // redraw background in case of slider change.
     const bgctx = this.#backgroundCanvas.getContext("2d", { alpha: false });
-
-    this.#drawBg(bgctx);
+    if (bgctx) this.#drawBg(bgctx);
 
     this.#counter = 0;
     this.#curDir = DIR_DOWN;
@@ -127,16 +127,15 @@ class SnakeWidget extends GameBase {
     this.#spawnFood();
   }
 
-  async onThemeChange() {
+  override async onThemeChange() {
     if (!this.#backgroundCanvas) {
       return;
     }
     const bgctx = this.#backgroundCanvas.getContext("2d", { alpha: false });
-    this.#drawBg(bgctx);
+    if (bgctx) this.#drawBg(bgctx);
   }
 
-  #drawDot(ctx, dot) {
-    ctx.strokeWidth = 0;
+  #drawDot(ctx: CanvasRenderingContext2D, dot: Point) {
     ctx.beginPath();
     const celRad = this.#calcCelRad();
     ctx.arc(
@@ -149,23 +148,22 @@ class SnakeWidget extends GameBase {
     ctx.fill();
   }
 
-  #getCellCount() {
+  #getCellCount(): number {
     return Math.round(CELL_COUNT * Math.sqrt(this.getOpt("size") * 0.01));
   }
 
-  #drawBg(ctx) {
+  #drawBg(ctx: CanvasRenderingContext2D) {
     const cellCount = this.#getCellCount();
     const celRad = this.#calcCelRad();
-    ctx.strokeWidth = 0;
-    ctx.fillStyle = getThemeVar("--color-base01");
+    ctx.fillStyle = themeColor("--color-base01");
     ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-    if (this.settings.enableGrid) {
+    if ((this.settings as SnakeSettings).enableGrid) {
       for (let y = 0; y < cellCount; y++) {
         for (let x = 0; x < cellCount; x++) {
           if ((x + y) % 2 == 0) {
-            ctx.fillStyle = `${getThemeVar("--color-base03")}50`;
+            ctx.fillStyle = `${themeColor("--color-base03")}50`;
           } else {
-            ctx.fillStyle = `${getThemeVar("--color-base02")}50`;
+            ctx.fillStyle = `${themeColor("--color-base02")}50`;
           }
           ctx.beginPath();
           ctx.arc(
@@ -181,22 +179,24 @@ class SnakeWidget extends GameBase {
     }
   }
 
-  onGameDraw(ctx, dt) {
+  override onGameDraw(ctx: CanvasRenderingContext2D, dt: number) {
     this.#counter += dt;
     if (this.#counter * this.getOpt("speed") * 0.02 >= FRAME_TIME) {
       this.#tick();
       this.#counter = 0;
     }
-    ctx.drawImage(this.#backgroundCanvas, 0, 0);
+    if (this.#backgroundCanvas) {
+      ctx.drawImage(this.#backgroundCanvas, 0, 0);
+    }
 
-    ctx.fillStyle = getThemeVar("--color-text");
+    ctx.fillStyle = themeColor("--color-text");
     for (let part of this.#snake) {
       this.#drawDot(ctx, part);
     }
-    ctx.fillStyle = getThemeVar("--color-accent");
+    ctx.fillStyle = themeColor("--color-accent");
     this.#drawDot(ctx, this.#food);
   }
-  onKeyDown(e) {
+  override async onKeyDown(e: KeyboardEvent) {
     switch (e.key) {
       case "ArrowUp":
         if (this.#curDir !== DIR_DOWN) {

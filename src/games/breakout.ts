@@ -1,8 +1,7 @@
-// @ts-nocheck
-import { GameBase } from "./games.js";
+import { GameBase, GameOption, drawRoundedRect } from "./games.js";
 import { registerWidget } from "../widgets/widgets.js";
 import { getThemeVar } from "../main-features/appearance/themes.js";
-import { GameOption } from "./games.js";
+
 const BALL_RADIUS = 4;
 const PADDLE_WIDTH = 50;
 const PADDLE_HEIGHT = 5;
@@ -14,23 +13,30 @@ const BRICK_PADDING = 4;
 const PADDLE_SPEED = 0.2;
 const BALL_SPEED = 0.1;
 
+type Ball = { x: number; y: number; dx: number; dy: number };
+// status: 1 = still standing, 0 = destroyed
+type Brick = { x: number; y: number; status: number };
+
+function themeColor(varName: string): string {
+  return getThemeVar(varName) ?? "#000";
+}
+
 class BreakoutWidget extends GameBase {
-  ball;
-  paddleX;
+  ball: Ball = { x: 0, y: 0, dx: 0, dy: 0 };
+  paddleX = 0;
   leftPressed = false;
   rightPressed = false;
-  bricks;
-  score = 0;
+  bricks: Brick[] = [];
 
-  get title() {
+  override get title(): string {
     return "Breakout++";
   }
 
-  get options() {
+  override get options(): GameOption[] {
     return [GameOption.slider("speed", "Speed:", 10, 300, 100)];
   }
 
-  async onGameStart() {
+  override async onGameStart() {
     const w = this.canvas.width;
     const h = this.canvas.height;
 
@@ -57,26 +63,11 @@ class BreakoutWidget extends GameBase {
     }
   }
 
-  drawRoundedRect(ctx, x, y, width, height, radius) {
-    ctx.beginPath();
-    ctx.moveTo(x + radius, y);
-    ctx.lineTo(x + width - radius, y);
-    ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
-    ctx.lineTo(x + width, y + height - radius);
-    ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
-    ctx.lineTo(x + radius, y + height);
-    ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
-    ctx.lineTo(x, y + radius);
-    ctx.quadraticCurveTo(x, y, x + radius, y);
-    ctx.closePath();
-    ctx.fill();
-  }
-
-  onGameDraw(ctx, dt) {
+  override onGameDraw(ctx: CanvasRenderingContext2D, dt: number) {
     const w = this.canvas.width;
     const h = this.canvas.height;
 
-    ctx.fillStyle = getThemeVar("--color-base01");
+    ctx.fillStyle = themeColor("--color-base01");
     ctx.fillRect(0, 0, w, h);
 
     const speed = PADDLE_SPEED * this.getOpt("speed") * 0.01;
@@ -130,8 +121,8 @@ class BreakoutWidget extends GameBase {
       }
     }
 
-    ctx.fillStyle = getThemeVar("--color-accent");
-    this.drawRoundedRect(
+    ctx.fillStyle = themeColor("--color-accent");
+    drawRoundedRect(
       ctx,
       this.paddleX,
       h - PADDLE_HEIGHT,
@@ -139,26 +130,28 @@ class BreakoutWidget extends GameBase {
       PADDLE_HEIGHT,
       5
     );
+    ctx.fill();
 
-    ctx.fillStyle = getThemeVar("--color-text");
+    ctx.fillStyle = themeColor("--color-text");
     ctx.beginPath();
     ctx.arc(ball.x, ball.y, BALL_RADIUS, 0, 2 * Math.PI);
     ctx.fill();
 
-    ctx.fillStyle = getThemeVar("--color-accent");
+    ctx.fillStyle = themeColor("--color-accent");
     for (let b of this.bricks) {
       if (b.status === 1) {
-        this.drawRoundedRect(ctx, b.x, b.y, BRICK_WIDTH, BRICK_HEIGHT, 5); // 5 = corner radius
+        drawRoundedRect(ctx, b.x, b.y, BRICK_WIDTH, BRICK_HEIGHT, 5); // 5 = corner radius
+        ctx.fill();
       }
     }
   }
 
-  onKeyDown(e) {
+  override async onKeyDown(e: KeyboardEvent) {
     if (e.code === "ArrowLeft") this.leftPressed = true;
     else if (e.code === "ArrowRight") this.rightPressed = true;
   }
 
-  onKeyUp(e) {
+  override async onKeyUp(e: KeyboardEvent) {
     if (e.code === "ArrowLeft") this.leftPressed = false;
     else if (e.code === "ArrowRight") this.rightPressed = false;
   }
