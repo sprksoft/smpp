@@ -434,6 +434,72 @@ function updateTopButtons(data: Settings["topNav"]["buttons"]) {
   }
 }
 
+function addLoadingScreen() {
+  if (document.getElementById("loading-smpp")) return;
+
+  const el = document.createElement("div");
+  el.id = "loading-smpp";
+  el.style.cssText = `
+    display:flex;flex-direction:column;gap:20px;z-index:1000;
+    background:rgba(0,0,0,.76)!important;position:fixed;
+    inset:0;align-items:center;justify-content:center;
+  `;
+
+  el.innerHTML = `
+    <img class="rotating" style="max-width:150px" src="${getExtensionImage("icons/smpp/128.png")}" />
+  `;
+
+  const stEl = document.createElement("style");
+  stEl.textContent = `
+  @-webkit-keyframes rotating /* Safari and Chrome */ {
+  from {
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotating {
+  from {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+.rotating {
+  -webkit-animation: rotating 1s linear infinite;
+  -moz-animation: rotating 1s linear infinite;
+  -ms-animation: rotating 1s linear infinite;
+  -o-animation: rotating 1s linear infinite;
+  animation: rotating 1s linear infinite;
+}
+  `;
+
+  (document.body || document.documentElement).appendChild(stEl);
+  (document.body || document.documentElement).appendChild(el);
+}
+
+function removeLoadingScreen() {
+  const el = document.getElementById("loading-smpp");
+  if (!el) return;
+
+  el.style.cssText += "opacity:0;transition:opacity .3s ease-out";
+  setTimeout(() => el.remove(), 300);
+}
+
 async function main() {
   if (document.body.classList.contains("smpp")) {
     console.error("SMPP is 2x geladen");
@@ -442,6 +508,7 @@ async function main() {
 
   document.body.classList.add("smpp"); // For modding
 
+  addLoadingScreen();
   applyFixes();
   await migrate();
 
@@ -455,6 +522,7 @@ async function main() {
   }
 
   await apply();
+  removeLoadingScreen();
 }
 
 main();
