@@ -31,6 +31,8 @@ import "../widgets/punten.ts";
 import "../widgets/notes.ts";
 import "../widgets/volgende-vak.ts";
 import "../widgets/countdown.ts";
+import { initPomodoroBlock } from "../widgets/pomodoro.js";
+import "../widgets/pomodoro.js";
 
 import { browser, getExtensionImage, randomChance } from "../common/utils.js";
 import { getPfpLink } from "../fixes-utils/utils.js";
@@ -440,7 +442,7 @@ async function main() {
     alert("SMPP is 2x geladen");
   }
 
-  document.body.classList.add("smpp"); // For modding
+  document.body.classList.add("smpp");
 
   applyFixes();
   await migrate();
@@ -455,6 +457,8 @@ async function main() {
   }
 
   await apply();
+  initPomodoroBlock();
 }
 
 main();
+
