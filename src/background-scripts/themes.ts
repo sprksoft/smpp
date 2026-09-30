@@ -1,4 +1,5 @@
 import { loadJSON } from "./json-loader.js";
+import { validateThemeFile } from "../common/theme-file.js";
 import { browser, setByPath, fnv1aHash } from "../common/utils.js";
 import {
   getBase64,
@@ -177,6 +178,27 @@ export async function saveCustomTheme(
   const customThemes = await getAllCustomThemes();
   customThemes[id] = data;
   await browser.storage.local.set({ customThemes });
+  return id;
+}
+
+export async function importThemeFile(input: unknown) {
+  const file = validateThemeFile(input);
+  const id = crypto.randomUUID();
+  const customThemes = await getAllCustomThemes();
+
+  customThemes[id] = file.theme;
+
+  const update: Record<string, unknown> = { customThemes };
+
+  if (file.background) {
+    const images = (await browser.storage.local.get("images")).images || {};
+
+    images[id] = file.background.metaData;
+    update["images"] = images;
+    update["SMPPImage-" + id] = file.background.imageData;
+  }
+
+  await browser.storage.local.set(update);
   return id;
 }
 

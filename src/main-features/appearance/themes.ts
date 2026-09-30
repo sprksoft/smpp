@@ -1,4 +1,8 @@
 import { Vibrant } from "node-vibrant/browser";
+import {
+  MAX_THEME_FILE_SIZE,
+  validateThemeFile,
+} from "../../common/theme-file.js";
 import type { Palette, Swatch } from "@vibrant/color";
 import { Colord, colord, extend } from "colord";
 import lchPlugin from "colord/plugins/lch";
@@ -39,6 +43,8 @@ import {
   starSvg,
   japanSvg,
   catSvg,
+  exportThemeSVG,
+  importThemeSVG,
 } from "../../fixes-utils/svgs.js";
 import {
   getImageURL,
@@ -474,6 +480,59 @@ export class ThemeTile extends Tile {
     buttonContainer.appendChild(duplicateButton);
     buttonContainer.appendChild(favoriteButton);
     if (this.isCustom) {
+      const exportButton = document.createElement("button");
+      exportButton.type = "button";
+      exportButton.classList.add("bottom-container-button");
+      exportButton.title = "Export theme";
+      exportButton.setAttribute("aria-label", "Export theme");
+      exportButton.innerHTML = exportThemeSVG;
+
+      exportButton.addEventListener("click", async (event) => {
+        event.stopPropagation();
+        exportButton.disabled = true;
+
+        try {
+          const background = (await browser.runtime.sendMessage({
+            action: "getImage",
+            id: this.name,
+          })) as SMPPImage;
+
+          const file = validateThemeFile({
+            format: "smpp-theme",
+            version: 1,
+            theme: await getTheme(this.name),
+            background: background.imageData ? background : null,
+          });
+
+          const blob = new Blob([JSON.stringify(file, null, 2)], {
+            type: "application/json",
+          });
+
+          if (blob.size > MAX_THEME_FILE_SIZE)
+            throw new Error("Theme files must be smaller than 20 MB.");
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement("a");
+
+          link.href = url;
+          link.download =
+            (file.theme.displayName.replace(/[^a-zA-Z0-9_-]/g, "_") ||
+              "theme") + ".smpp.json";
+          document.body.appendChild(link);
+
+          link.click();
+          link.remove();
+          setTimeout(() => URL.revokeObjectURL(url), 10000);
+        } catch (error) {
+          new Toast(
+            error instanceof Error ? error.message : "Could not export theme.",
+            "error"
+          ).render();
+        } finally {
+          exportButton.disabled = false;
+        }
+      });
+
+      buttonContainer.appendChild(exportButton);
       let editButton = document.createElement("button");
       editButton.classList.add("bottom-container-button");
       editButton.innerHTML = editIconSvg;
@@ -1229,6 +1288,58 @@ export class ThemeSelector {
       title.innerText = "Favorite themes";
     }
     this.topContainer.appendChild(title);
+
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = ".json,application/json";
+    input.hidden = true;
+
+    const importButton = document.createElement("button");
+    importButton.type = "button";
+    importButton.classList.add("theme-import-button");
+    importButton.innerHTML = importThemeSVG;
+    importButton.addEventListener("click", () => input.click());
+    input.addEventListener("change", async () => {
+      const selected = input.files?.[0];
+      if (!selected) return;
+
+      importButton.disabled = true;
+
+      try {
+        if (selected.size > MAX_THEME_FILE_SIZE)
+          throw new Error("Theme files must be smaller than 20 MB.");
+
+        const file = validateThemeFile(JSON.parse(await selected.text()));
+
+        if (
+          file.background &&
+          !(await isValidImage(file.background.imageData))
+        ) {
+          throw new Error("The background image could not be read.");
+        }
+
+        const result = await browser.runtime.sendMessage({
+          action: "importThemeFile",
+          data: file,
+        });
+
+        if (!result?.id)
+          throw new Error(result?.error || "Could not import theme.");
+
+        await this.changeCategory("custom");
+        new Toast("Theme imported. Select it to apply it.", "success").render();
+      } catch (error) {
+        new Toast(
+          error instanceof Error ? error.message : "Could not import theme.",
+          "error"
+        ).render();
+      } finally {
+        input.value = "";
+        importButton.disabled = false;
+      }
+    });
+
+    this.topContainer.append(input, importButton);
   }
 
   async renderTiles(tiles: Tiles) {
