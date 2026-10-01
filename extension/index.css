@@ -3698,22 +3698,15 @@ button .bottom-container-button:active {
   height: 100%;
   stroke: var(--color-text) !important;
 }
-.theme-top-container .theme-import-button {
-  box-sizing: border-box;
-  width: auto;
-  aspect-ratio: auto;
-  gap: 6px;
-  margin-left: 8px;
-  padding: 5px 10px !important;
-  border-radius: 10px !important;
-  font-size: 13px !important;
-  font-weight: 600 !important;
-  white-space: nowrap;
+.theme-import-tile {
+  font: inherit;
+  color: var(--color-text);
+  align-items: stretch;
+  text-align: center;
 }
-.theme-top-container .theme-import-button > svg {
-  width: 16px;
-  height: 16px;
-  flex-shrink: 0;
+.theme-import-tile:disabled {
+  opacity: 0.5;
+  cursor: wait !important;
 }
 .enableAnimations .theme-top-container button {
   transition-property:

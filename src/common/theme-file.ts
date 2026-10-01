@@ -32,7 +32,7 @@ export function validateThemeFile(value: unknown): ThemeFile {
     value["format"] !== "smpp-theme" ||
     value["version"] !== 1
   ) {
-    throw new Error("Unsupported theme file or version.");
+    throw new Error("Bestand of versie wordt niet ondersteund.");
   }
 
   const theme = value["theme"];
@@ -48,7 +48,7 @@ export function validateThemeFile(value: unknown): ThemeFile {
 
   const colors = theme["cssProperties"];
   if (Object.keys(colors).some((key) => !colorKeys.includes(key))) {
-    throw new Error("This theme contains unsupported color settings.");
+    throw new Error("Dit thema bevat kleurinstellingen die niet worden ondersteund.");
   }
 
   const cssProperties: Record<string, string> = {};
@@ -59,7 +59,7 @@ export function validateThemeFile(value: unknown): ThemeFile {
       color.length > 100 ||
       !colord(color).isValid()
     ) {
-      throw new Error("The theme contains missing or invalid colors.");
+      throw new Error("Het thema bevat ontbrekende of ongeldige kleuren.");
     }
 
     cssProperties[key] = color;
@@ -77,7 +77,7 @@ export function validateThemeFile(value: unknown): ThemeFile {
         image["imageData"]
       )
     ) {
-      throw new Error("The background must be an embedded image.");
+      throw new Error("De achtergrond moet een ingesloten afbeelding zijn.");
     }
 
     background = {

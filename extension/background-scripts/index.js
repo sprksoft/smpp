@@ -2042,7 +2042,7 @@
   }
   function validateThemeFile(value) {
     if (!isRecord(value) || value["format"] !== "smpp-theme" || value["version"] !== 1) {
-      throw new Error("Unsupported theme file or version.");
+      throw new Error("Bestand of versie wordt niet ondersteund.");
     }
     const theme = value["theme"];
     if (!isRecord(theme) || typeof theme["displayName"] !== "string" || !theme["displayName"].trim() || theme["displayName"].length > 200 || !isRecord(theme["cssProperties"])) {
@@ -2050,13 +2050,13 @@
     }
     const colors = theme["cssProperties"];
     if (Object.keys(colors).some((key) => !colorKeys.includes(key))) {
-      throw new Error("This theme contains unsupported color settings.");
+      throw new Error("Dit thema bevat kleurinstellingen die niet worden ondersteund.");
     }
     const cssProperties = {};
     for (const key of colorKeys) {
       const color = colors[key];
       if (typeof color !== "string" || color.length > 100 || !w(color).isValid()) {
-        throw new Error("The theme contains missing or invalid colors.");
+        throw new Error("Het thema bevat ontbrekende of ongeldige kleuren.");
       }
       cssProperties[key] = color;
     }
@@ -2066,7 +2066,7 @@
       if (!isRecord(image) || typeof image["imageData"] !== "string" || image["imageData"].length > MAX_THEME_FILE_SIZE || !/^data:image\/(png|jpeg|webp|gif|avif|bmp|x-icon);base64,[A-Za-z0-9+/]+={0,2}$/.test(
         image["imageData"]
       )) {
-        throw new Error("The background must be an embedded image.");
+        throw new Error("De achtergrond moet een ingesloten afbeelding zijn.");
       }
       background = {
         metaData: { type: "file", link: "Imported background" },

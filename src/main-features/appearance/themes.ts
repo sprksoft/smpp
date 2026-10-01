@@ -375,7 +375,7 @@ export class ColorPicker {
 }
 
 export class Tile {
-  element = document.createElement("div");
+  element: HTMLElement = document.createElement("div");
 
   async render() {
     this.element.classList.add("theme-tile");
@@ -509,14 +509,14 @@ export class ThemeTile extends Tile {
           });
 
           if (blob.size > MAX_THEME_FILE_SIZE)
-            throw new Error("Theme files must be smaller than 20 MB.");
+            throw new Error("Thema bestand moet kleiner zijn dan 20 MB.");
           const url = URL.createObjectURL(blob);
           const link = document.createElement("a");
 
           link.href = url;
           link.download =
             (file.theme.displayName.replace(/[^a-zA-Z0-9_-]/g, "_") ||
-              "theme") + ".smpp.json";
+              "theme") + ".smpptheme";
           document.body.appendChild(link);
 
           link.click();
@@ -1288,17 +1288,38 @@ export class ThemeSelector {
       title.innerText = "Favorite themes";
     }
     this.topContainer.appendChild(title);
+  }
 
+  createImportTile(): Tile {
+    const tile = new Tile();
     const input = document.createElement("input");
     input.type = "file";
-    input.accept = ".json,application/json";
+    input.accept = ".smpptheme";
     input.hidden = true;
 
     const importButton = document.createElement("button");
     importButton.type = "button";
-    importButton.classList.add("theme-import-button");
-    importButton.innerHTML = importThemeSVG;
-    importButton.addEventListener("click", () => input.click());
+    importButton.classList.add("use-default-colors", "theme-import-tile");
+    importButton.title = "Import theme";
+    importButton.setAttribute("aria-label", "Import theme");
+
+    tile.element = importButton;
+    tile.onClick = async () => input.click();
+    input.addEventListener("click", (event) => event.stopPropagation());
+
+    tile.createContent = async () => {
+      const imageContainer = document.createElement("div");
+      imageContainer.classList.add("image-container");
+      imageContainer.innerHTML = importThemeSVG;
+      const bottom = document.createElement("div");
+      bottom.classList.add("theme-tile-bottom");
+      const label = document.createElement("span");
+      label.classList.add("theme-tile-title");
+      label.textContent = "Import";
+      bottom.appendChild(label);
+      importButton.append(imageContainer, bottom, input);
+    };
+
     input.addEventListener("change", async () => {
       const selected = input.files?.[0];
       if (!selected) return;
@@ -1306,8 +1327,10 @@ export class ThemeSelector {
       importButton.disabled = true;
 
       try {
+        if (!selected.name.toLowerCase().endsWith(".smpptheme"))
+          throw new Error("Kies een .smpptheme bestand.");
         if (selected.size > MAX_THEME_FILE_SIZE)
-          throw new Error("Theme files must be smaller than 20 MB.");
+          throw new Error("Thema bestand moet kleiner zijn dan 20 MB.");
 
         const file = validateThemeFile(JSON.parse(await selected.text()));
 
@@ -1315,7 +1338,7 @@ export class ThemeSelector {
           file.background &&
           !(await isValidImage(file.background.imageData))
         ) {
-          throw new Error("The background image could not be read.");
+          throw new Error("De achtergrond afbeelding kan niet gelezen worden.");
         }
 
         const result = await browser.runtime.sendMessage({
@@ -1323,23 +1346,19 @@ export class ThemeSelector {
           data: file,
         });
 
-        if (!result?.id)
-          throw new Error(result?.error || "Could not import theme.");
+        if (!result?.id) throw new Error("Kan dit thema niet importeren.");
 
         await this.changeCategory("custom");
-        new Toast("Theme imported. Select it to apply it.", "success").render();
+        new Toast("Thema geïmporteerd.", "success").render();
       } catch (error) {
-        new Toast(
-          error instanceof Error ? error.message : "Could not import theme.",
-          "error"
-        ).render();
+        new Toast("Kan dit thema niet importeren.", "error").render();
       } finally {
         input.value = "";
         importButton.disabled = false;
       }
     });
 
-    this.topContainer.append(input, importButton);
+    return tile;
   }
 
   async renderTiles(tiles: Tiles) {
@@ -1395,6 +1414,7 @@ export class ThemeSelector {
       };
       return tile;
     }) as Tiles;
+    tiles.push(this.createImportTile());
     this.currentTiles = tiles;
     await this.renderTiles(tiles);
   }
