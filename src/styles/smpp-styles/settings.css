@@ -1925,6 +1925,7 @@ button.open-theme-editor-button:hover {
 }
 
 .copy-hex-button.copy-link-button {
+  flex-shrink: 0;
   width: 3rem !important;
   height: 3rem !important;
 
@@ -1940,6 +1941,25 @@ button.open-theme-editor-button:hover {
 
 .copy-hex-button.copy-link-button > svg {
   stroke: var(--color-text-local) !important;
+}
+
+.share-dialog-content .link-output {
+  min-width: 0;
+  flex: 1;
+}
+
+.copy-link-button.theme-download-button:focus-visible {
+  outline: 2px solid var(--color-accent-local);
+  outline-offset: 2px;
+}
+
+.copy-link-button.theme-download-button:hover > svg {
+  stroke: var(--color-accent-local) !important;
+}
+
+.copy-link-button.theme-download-button:disabled {
+  opacity: 0.5;
+  cursor: wait !important;
 }
 
 .sharing-tile {

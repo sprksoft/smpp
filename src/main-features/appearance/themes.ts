@@ -156,7 +156,7 @@ class ColorCursor {
   constructor(
     parentContainer: HTMLElement,
     enableX: boolean = true,
-    enableY: boolean = true
+    enableY: boolean = true,
   ) {
     this.parentContainer = parentContainer;
     this.enableX = enableX;
@@ -254,7 +254,7 @@ export class ColorPicker {
     this.element.style.setProperty("--max-sat", maxSatColor.toHex());
     this.element.style.setProperty(
       "--current-color",
-      this.currentColor.toHex()
+      this.currentColor.toHex(),
     );
     let hexInput = this.element.querySelector("input");
     if (hexInput) {
@@ -413,7 +413,7 @@ export class ThemeTile extends Tile {
     currentCategory: string,
     isFavorite: boolean,
     isCustom = false,
-    theme: Theme
+    theme: Theme,
   ) {
     super();
     this.name = name;
@@ -428,7 +428,7 @@ export class ThemeTile extends Tile {
     Object.keys(this.theme.cssProperties).forEach((key) => {
       this.element.style.setProperty(
         `${key}-local`,
-        this.theme.cssProperties[key] as string
+        this.theme.cssProperties[key] as string,
       );
     });
   }
@@ -480,59 +480,7 @@ export class ThemeTile extends Tile {
     buttonContainer.appendChild(duplicateButton);
     buttonContainer.appendChild(favoriteButton);
     if (this.isCustom) {
-      const exportButton = document.createElement("button");
-      exportButton.type = "button";
-      exportButton.classList.add("bottom-container-button");
-      exportButton.title = "Export theme";
-      exportButton.setAttribute("aria-label", "Export theme");
-      exportButton.innerHTML = exportThemeSVG;
-
-      exportButton.addEventListener("click", async (event) => {
-        event.stopPropagation();
-        exportButton.disabled = true;
-
-        try {
-          const background = (await browser.runtime.sendMessage({
-            action: "getImage",
-            id: this.name,
-          })) as SMPPImage;
-
-          const file = validateThemeFile({
-            format: "smpp-theme",
-            version: 1,
-            theme: await getTheme(this.name),
-            background: background.imageData ? background : null,
-          });
-
-          const blob = new Blob([JSON.stringify(file, null, 2)], {
-            type: "application/json",
-          });
-
-          if (blob.size > MAX_THEME_FILE_SIZE)
-            throw new Error("Thema bestand moet kleiner zijn dan 20 MB.");
-          const url = URL.createObjectURL(blob);
-          const link = document.createElement("a");
-
-          link.href = url;
-          link.download =
-            (file.theme.displayName.replace(/[^a-zA-Z0-9_-]/g, "_") ||
-              "theme") + ".smpptheme";
-          document.body.appendChild(link);
-
-          link.click();
-          link.remove();
-          setTimeout(() => URL.revokeObjectURL(url), 10000);
-        } catch (error) {
-          new Toast(
-            error instanceof Error ? error.message : "Could not export theme.",
-            "error"
-          ).render();
-        } finally {
-          exportButton.disabled = false;
-        }
-      });
-
-      buttonContainer.appendChild(exportButton);
+      buttonContainer.appendChild(this.createExportButton());
       let editButton = document.createElement("button");
       editButton.classList.add("bottom-container-button");
       editButton.innerHTML = editIconSvg;
@@ -567,15 +515,15 @@ export class ThemeTile extends Tile {
         this.name,
         async () => {
           return await getExtensionImage(
-            "theme-backgrounds/compressed/" + this.name + ".jpg"
+            "theme-backgrounds/compressed/" + this.name + ".jpg",
           );
         },
-        true
+        true,
       );
       if (await isValidImage(await imageURL.url)) {
         this.element.style.setProperty(
           "--background-image-local",
-          `url(${await imageURL.url})`
+          `url(${await imageURL.url})`,
         );
       } else {
         this.element.style.setProperty("--background-image-local", `url()`);
@@ -678,13 +626,13 @@ export class ThemeTile extends Tile {
 
     if (result.metaData.type == "default") {
       let base64 = await convertLinkToBase64(
-        await getExtensionImage("theme-backgrounds/" + this.name + ".jpg")
+        await getExtensionImage("theme-backgrounds/" + this.name + ".jpg"),
       );
       if (base64) result.imageData = base64;
       let compressedBase64 = await convertLinkToBase64(
         await getExtensionImage(
-          "theme-backgrounds/compressed/" + this.name + ".jpg"
-        )
+          "theme-backgrounds/compressed/" + this.name + ".jpg",
+        ),
       );
       if (compressedBase64) compressedResult.imageData = compressedBase64;
 
@@ -713,6 +661,73 @@ export class ThemeTile extends Tile {
     }
     this.onDuplicate(newThemeName);
     new Toast("Theme succesfully duplicated", "success").render();
+  }
+
+  createExportButton(classes = ["bottom-container-button"]): HTMLButtonElement {
+    const exportButton = document.createElement("button");
+    exportButton.type = "button";
+    exportButton.classList.add(...classes);
+    exportButton.title = "Export thema";
+    exportButton.setAttribute("aria-label", "Export theme");
+    exportButton.innerHTML = exportThemeSVG;
+
+    exportButton.addEventListener("click", async (event) => {
+      event.stopPropagation();
+      exportButton.disabled = true;
+
+      try {
+        const background = (await browser.runtime.sendMessage({
+          action: "getImage",
+          id: this.name,
+        })) as SMPPImage;
+
+        if (!this.isCustom && background.metaData.type === "default") {
+          const data = await convertLinkToBase64(
+            await getExtensionImage("theme-backgrounds/" + this.name + ".jpg"),
+          );
+
+          if (!data) throw new Error("Kan het achtegrond niet exporteren.");
+          background.imageData = data;
+        }
+
+        const file = validateThemeFile({
+          format: "smpp-theme",
+          version: 1,
+          theme: await getTheme(this.name),
+          background: background.imageData ? background : null,
+        });
+
+        const blob = new Blob([JSON.stringify(file, null, 2)], {
+          type: "application/json",
+        });
+
+        if (blob.size > MAX_THEME_FILE_SIZE)
+          throw new Error("Thema bestand moet kleiner zijn dan 20 MB.");
+
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+
+        link.href = url;
+        link.download =
+          (file.theme.displayName.replace(/[^a-zA-Z0-9_-]/g, "_") || "theme") +
+          ".smpptheme";
+
+        document.body.appendChild(link);
+
+        link.click();
+        link.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 10000);
+      } catch (error) {
+        new Toast(
+          error instanceof Error ? error.message : "Kan het thema niet exporteren.",
+          "error",
+        ).render();
+      } finally {
+        exportButton.disabled = false;
+      }
+    });
+
+    return exportButton;
   }
 
   async share() {
@@ -771,7 +786,7 @@ export class ThemeTile extends Tile {
         if (theme.cssProperties[name]) {
           colorPreview.style.setProperty(
             "--current-color",
-            theme.cssProperties[name]
+            theme.cssProperties[name],
           );
         }
         return colorPreview;
@@ -805,7 +820,7 @@ export class ThemeTile extends Tile {
       Object.keys(theme.cssProperties).forEach((key) => {
         element.style.setProperty(
           `${key}-local`,
-          theme.cssProperties[key] as string
+          theme.cssProperties[key] as string,
         );
       });
 
@@ -819,10 +834,10 @@ export class ThemeTile extends Tile {
         this.name,
         async () => {
           return await getExtensionImage(
-            "theme-backgrounds/compressed/" + this.name + ".jpg"
+            "theme-backgrounds/compressed/" + this.name + ".jpg",
           );
         },
-        false
+        false,
       );
       let image = document.createElement("img");
       image.classList.add("sharing-image");
@@ -850,7 +865,7 @@ export class ThemeTile extends Tile {
       let colorPreviewsContainer = document.createElement("div");
       colorPreviewsContainer.classList.add("sharing-color-previews");
       Object.values(
-        generateColorPreviews(getEditableValues(theme.cssProperties))
+        generateColorPreviews(getEditableValues(theme.cssProperties)),
       ).forEach((preview) => {
         let actualPreview = Object.values(preview)[0];
         if (actualPreview) colorPreviewsContainer.appendChild(actualPreview);
@@ -859,6 +874,13 @@ export class ThemeTile extends Tile {
 
       copyContainer.appendChild(linkOutput);
       copyContainer.appendChild(copyToClipboardButton);
+      copyContainer.appendChild(
+        this.createExportButton([
+          "copy-hex-button",
+          "copy-link-button",
+          "theme-download-button",
+        ]),
+      );
 
       element.appendChild(subTitle);
       tile.appendChild(copyContainer);
@@ -940,7 +962,7 @@ export class ThemeFolder extends Tile {
     Object.keys(theme.cssProperties).forEach((key) => {
       this.element.style.setProperty(
         `${key}-local`,
-        theme.cssProperties[key] as string
+        theme.cssProperties[key] as string,
       );
     });
 
@@ -1192,7 +1214,7 @@ export class ThemeSelector {
 
     let addMissingTiles = async (
       visibleThemeNames: string[],
-      correctThemeNames: string[]
+      correctThemeNames: string[],
     ) => {
       let customThemes = (await browser.runtime.sendMessage({
         action: "getThemes",
@@ -1209,16 +1231,16 @@ export class ThemeSelector {
             themeName,
             isFavorite,
             Object.keys(customThemes).includes(themeName),
-            themes[themeName]
+            themes[themeName],
           );
 
           let createThemeButton = this.content.querySelector(
-            ".create-theme-button"
+            ".create-theme-button",
           );
           if (createThemeButton) {
             createThemeButton.insertAdjacentElement(
               "beforebegin",
-              await newTile.render()
+              await newTile.render(),
             );
           } else {
             this.content.appendChild(await newTile.render());
@@ -1231,7 +1253,7 @@ export class ThemeSelector {
 
     let removeIncorrectTiles = async (
       visibleThemeNames: string[],
-      correctThemeNames: string[]
+      correctThemeNames: string[],
     ) => {
       visibleThemeNames.forEach(async (themeName) => {
         if (!correctThemeNames.includes(themeName)) {
@@ -1428,14 +1450,14 @@ export class ThemeSelector {
     name: string,
     isFavorite: boolean,
     isCustom: boolean,
-    theme: Theme
+    theme: Theme,
   ) {
     let tile = new ThemeTile(
       name,
       this.currentCategory,
       isFavorite,
       isCustom,
-      theme
+      theme,
     );
     tile.element.dataset["name"] = name;
 
@@ -1484,7 +1506,7 @@ export class ThemeSelector {
         if (themes[name])
           return this.createThemeTile(name, isFavorite, isCustom, themes[name]);
         return;
-      })
+      }),
     )) as Tiles;
     if (this.currentCategory == "custom") {
       tiles.push(new AddCustomTheme());
@@ -1575,7 +1597,7 @@ export class CustomThemeCreator extends Dialog {
     if (this.theme.cssProperties[name]) {
       colorPreview.style.setProperty(
         "--current-color",
-        this.theme.cssProperties[name]
+        this.theme.cssProperties[name],
       );
     }
     colorPreview.dataset["name"] = name;
@@ -1675,7 +1697,7 @@ export class CustomThemeCreator extends Dialog {
     colorPicker.onChange = async () => {
       colorPreview.style.setProperty(
         "--current-color",
-        colorPicker.currentColor.toHex()
+        colorPicker.currentColor.toHex(),
       );
       await this.saveThemeData();
       setTheme(this.name);
@@ -1781,7 +1803,7 @@ export class CustomThemeCreator extends Dialog {
 
     if (result.metaData.type == "default") {
       result.imageData = await getExtensionImage(
-        "theme-backgrounds/compressed/" + this.name + ".jpg"
+        "theme-backgrounds/compressed/" + this.name + ".jpg",
       );
     }
     if (await isValidImage(result.imageData)) {
@@ -1811,10 +1833,10 @@ export class CustomThemeCreator extends Dialog {
 
   readUserChoice() {
     let brightnessButton = document.getElementById(
-      "brightness-control"
+      "brightness-control",
     ) as HTMLInputElement;
     let saturationButton = document.getElementById(
-      "saturation-control"
+      "saturation-control",
     ) as HTMLInputElement;
     if (!(brightnessButton && saturationButton)) return;
     let choice = {
@@ -2003,11 +2025,11 @@ export class CustomThemeCreator extends Dialog {
 
     let brightnessButtonWrapper = brightnessButton.createWrapper();
     brightnessButtonWrapper.appendChild(
-      createHoverTooltip("Brightness", "horizontal")
+      createHoverTooltip("Brightness", "horizontal"),
     );
     let saturationButtonWrapper = saturationButton.createWrapper();
     saturationButtonWrapper.appendChild(
-      createHoverTooltip("Saturation", "horizontal")
+      createHoverTooltip("Saturation", "horizontal"),
     );
     firstSubContainer.appendChild(brightnessButtonWrapper);
     firstSubContainer.appendChild(saturationButtonWrapper);
@@ -2035,8 +2057,8 @@ export class CustomThemeCreator extends Dialog {
         colorPreviewWrapper.appendChild(
           createHoverTooltip(
             this.convertPropertyName(colorName as ThemeProperty),
-            "vertical"
-          )
+            "vertical",
+          ),
         );
 
       colorPickerElement.appendChild(colorPreviewWrapper);
@@ -2081,7 +2103,7 @@ export class CustomThemeCreator extends Dialog {
     imageWrapper.appendChild(this.backgroundImagePreview);
     this.imagePreviewContainer.appendChild(imageWrapper);
     this.imagePreviewContainer.appendChild(
-      this.createThemeGenerationControls()
+      this.createThemeGenerationControls(),
     );
 
     return this.imagePreviewContainer;
