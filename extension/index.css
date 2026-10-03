@@ -16108,6 +16108,9 @@ h2.assignments-title {
   line-height: 1;
   letter-spacing: 0.5px;
   color: inherit;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0;
 }
 .smpp-pomo-label {
   font-size: 11px;
@@ -16146,69 +16149,30 @@ h2.assignments-title {
   opacity: 0.5;
   cursor: not-allowed;
 }
-.smpp-pomo-adjust {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1.3fr 1fr 1fr;
-  align-items: center;
-  justify-items: center;
-  width: 100%;
-  max-width: 200px;
-  height: 40px;
-  background: color-mix(in srgb, currentColor 6%, transparent);
-  border: 2px solid color-mix(in srgb, currentColor 16%, transparent);
-  padding: 0 6px;
-  border-radius: 999px;
-  box-sizing: border-box;
-}
-.smpp-pomo-adjust.disabled {
-  opacity: 0.4;
-  pointer-events: none;
-}
-.smpp-pomo-adj {
-  background: transparent;
-  border: none;
-  color: inherit;
-  width: 100%;
-  height: 28px;
-  border-radius: 999px;
+.pomo-seg {
   cursor: pointer;
-  font-family: inherit;
-  font-size: 12px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  transition: background 0.15s;
+  user-select: none;
+  transition: background 0.15s, color 0.15s;
+  border-radius: 4px;
+  padding: 0 2px;
 }
-.smpp-pomo-adj:hover {
-  background: color-mix(in srgb, currentColor 12%, transparent);
+.pomo-seg:hover:not(.disabled) {
+  background: color-mix(in srgb, currentColor 10%, transparent);
 }
-.smpp-pomo-input {
-  width: 100%;
+.pomo-seg.disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+.pomo-seg .pomo-edit-input {
+  width: 2ch;
   background: transparent;
   border: none;
   color: inherit;
-  text-align: center;
-  font-family: inherit;
-  font-size: 15px;
+  font: inherit;
   font-weight: 800;
+  text-align: center;
   outline: none;
   padding: 0;
-  -moz-appearance: textfield;
-  appearance: none;
-}
-.smpp-pomo-input:disabled,
-.smpp-pomo-input[disabled] {
-  background: transparent !important;
-  color: inherit !important;
-  opacity: 0.8;
-  cursor: not-allowed;
-}
-.smpp-pomo-input::-webkit-outer-spin-button,
-.smpp-pomo-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
 }
 body.smpp-pomodoro-active .smpp-widget-bag,
 body.smpp-pomodoro-active .smpp-widget-bag-handle,
