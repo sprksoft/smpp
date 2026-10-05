@@ -52,6 +52,7 @@
   line-height: 1;
   letter-spacing: -0.5px;
   color: inherit;
+<<<<<<< HEAD
   background: transparent;
   border: none;
   border-radius: 12px;
@@ -80,6 +81,11 @@
   cursor: default;
   background: transparent !important;
   opacity: 1;
+=======
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0;
+>>>>>>> 47a40dd4fc15e39ae4a778396bc7316a7ab96279
 }
 
 .smpp-pomo-label {
@@ -131,6 +137,35 @@
   cursor: not-allowed;
 }
 
+<<<<<<< HEAD
+=======
+.pomo-seg {
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.15s, color 0.15s;
+  border-radius: 4px;
+  padding: 0 2px;
+}
+.pomo-seg:hover:not(.disabled) {
+  background: color-mix(in srgb, currentColor 10%, transparent);
+}
+.pomo-seg.disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+.pomo-seg .pomo-edit-input {
+  width: 2ch;
+  background: transparent;
+  border: none;
+  color: inherit;
+  font: inherit;
+  font-weight: 800;
+  text-align: center;
+  outline: none;
+  padding: 0;
+}
+
+>>>>>>> 47a40dd4fc15e39ae4a778396bc7316a7ab96279
 body.smpp-pomodoro-active .smpp-widget-bag,
 body.smpp-pomodoro-active .smpp-widget-bag-handle,
 body.smpp-pomodoro-active #smpp-widget-edit-mode-btn,
