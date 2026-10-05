@@ -3,8 +3,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 16px 14px 14px;
-  gap: 14px;
+  padding: 18px 14px 14px;
+  gap: 16px;
   font-family: inherit;
   color: inherit;
   width: 100%;
@@ -25,7 +25,7 @@
 
 .smpp-pomo-ring-bg {
   fill: none;
-  stroke: color-mix(in srgb, currentColor 12%, transparent);
+  stroke: color-mix(in srgb, currentColor 10%, transparent);
   stroke-width: 5;
 }
 
@@ -46,12 +46,40 @@
   justify-content: center;
 }
 
-.smpp-pomo-timer {
-  font-size: 34px;
+.smpp-pomo-timer-input {
+  font-size: 36px;
   font-weight: 800;
   line-height: 1;
-  letter-spacing: 0.5px;
+  letter-spacing: -0.5px;
   color: inherit;
+  background: transparent;
+  border: none;
+  border-radius: 12px;
+  text-align: center;
+  width: 130px;
+  outline: none;
+  font-family: inherit;
+  cursor: pointer;
+  padding: 2px 0;
+  transition:
+    opacity 0.2s,
+    background 0.2s;
+}
+
+.smpp-pomo-timer-input:hover:not(:disabled) {
+  opacity: 0.8;
+  background: color-mix(in srgb, currentColor 6%, transparent);
+}
+
+.smpp-pomo-timer-input:focus:not(:disabled) {
+  opacity: 1;
+  background: color-mix(in srgb, currentColor 10%, transparent);
+}
+
+.smpp-pomo-timer-input:disabled {
+  cursor: default;
+  background: transparent !important;
+  opacity: 1;
 }
 
 .smpp-pomo-label {
@@ -60,7 +88,7 @@
   text-transform: uppercase;
   letter-spacing: 1.6px;
   margin-top: 6px;
-  opacity: 0.6;
+  opacity: 0.5;
   color: inherit;
 }
 
@@ -72,7 +100,7 @@
 
 .smpp-pomo-btn {
   width: 100%;
-  max-width: 200px;
+  max-width: 190px;
   height: 44px;
   background: color-mix(in srgb, currentColor 6%, transparent);
   border: 2px solid color-mix(in srgb, currentColor 16%, transparent);
@@ -85,88 +113,22 @@
   text-align: center;
   transition:
     background 0.2s,
-    border-color 0.2s;
+    border-color 0.2s,
+    transform 0.1s;
 }
 
-.smpp-pomo-btn:hover {
+.smpp-pomo-btn:hover:not(:disabled) {
   background: color-mix(in srgb, currentColor 12%, transparent);
   border-color: color-mix(in srgb, currentColor 26%, transparent);
+}
+
+.smpp-pomo-btn:active:not(:disabled) {
+  transform: scale(0.98);
 }
 
 .smpp-pomo-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
-}
-
-.smpp-pomo-adjust {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1.3fr 1fr 1fr;
-  align-items: center;
-  justify-items: center;
-  width: 100%;
-  max-width: 200px;
-  height: 40px;
-  background: color-mix(in srgb, currentColor 6%, transparent);
-  border: 2px solid color-mix(in srgb, currentColor 16%, transparent);
-  padding: 0 6px;
-  border-radius: 999px;
-  box-sizing: border-box;
-}
-
-.smpp-pomo-adjust.disabled {
-  opacity: 0.4;
-  pointer-events: none;
-}
-
-.smpp-pomo-adj {
-  background: transparent;
-  border: none;
-  color: inherit;
-  width: 100%;
-  height: 28px;
-  border-radius: 999px;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: 12px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  transition: background 0.15s;
-}
-
-.smpp-pomo-adj:hover {
-  background: color-mix(in srgb, currentColor 12%, transparent);
-}
-
-.smpp-pomo-input {
-  width: 100%;
-  background: transparent;
-  border: none;
-  color: inherit;
-  text-align: center;
-  font-family: inherit;
-  font-size: 15px;
-  font-weight: 800;
-  outline: none;
-  padding: 0;
-  -moz-appearance: textfield;
-  appearance: none;
-}
-
-.smpp-pomo-input:disabled,
-.smpp-pomo-input[disabled] {
-  background: transparent !important;
-  color: inherit !important;
-  opacity: 0.8;
-  cursor: not-allowed;
-}
-
-.smpp-pomo-input::-webkit-outer-spin-button,
-.smpp-pomo-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
 }
 
 body.smpp-pomodoro-active .smpp-widget-bag,

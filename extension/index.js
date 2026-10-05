@@ -15553,6 +15553,29 @@ ${code}`;
   // src/widgets/pomodoro.ts
   var blockInterval = null;
   var keyboardBlockInstalled = false;
+  function parseTimeString(str) {
+    const clean = str.replace(/[^0-9:]/g, "").trim();
+    if (!clean) return 50 * 60;
+    if (clean.includes(":")) {
+      const parts = clean.split(":");
+      const mins = parseInt(parts[0] || "0", 10) || 0;
+      const secs = parseInt(parts[1] || "0", 10) || 0;
+      return Math.max(1, Math.min(7200, mins * 60 + secs));
+    }
+    const val = parseInt(clean, 10);
+    if (isNaN(val) || val <= 0) return 50 * 60;
+    if (clean.length === 3 || clean.length === 4) {
+      const mins = Math.floor(val / 100);
+      const secs = val % 100;
+      return Math.max(1, Math.min(7200, mins * 60 + secs));
+    }
+    return Math.max(1, Math.min(7200, val * 60));
+  }
+  function formatSeconds(totalSecs) {
+    const mins = Math.floor(totalSecs / 60);
+    const secs = totalSecs % 60;
+    return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+  }
   function syncCheckBlock() {
     try {
       const raw = localStorage.getItem("pomoEndTime");
@@ -15625,12 +15648,9 @@ ${code}`;
     timeLeft = 0;
     totalTime = 0;
     isRunning = false;
-    minutes = 50;
-    display;
+    timerInput;
     label;
     startBtn;
-    input;
-    adjust;
     ring;
     circumference = 2 * Math.PI * 54;
     get name() {
@@ -15652,30 +15672,22 @@ ${code}`;
           <circle class="smpp-pomo-ring-fg" id="pomo-ring" cx="60" cy="60" r="54"/>
         </svg>
         <div class="smpp-pomo-center">
-          <div class="smpp-pomo-timer" id="pomo-timer">50:00</div>
+          <input type="text" class="smpp-pomo-timer-input" id="pomo-timer-input" value="50:00" spellcheck="false" autocomplete="off"/>
           <div class="smpp-pomo-label" id="pomo-label">Focus</div>
         </div>
-      </div>
-      <div class="smpp-pomo-adjust" id="pomo-adjust">
-        <button class="smpp-pomo-adj" data-delta="-5">\u22125</button>
-        <button class="smpp-pomo-adj" data-delta="-1">\u22121</button>
-        <input type="number" class="smpp-pomo-input" id="pomo-focus-input" min="1" max="120" value="50"/>
-        <button class="smpp-pomo-adj" data-delta="1">+1</button>
-        <button class="smpp-pomo-adj" data-delta="5">+5</button>
       </div>
       <div class="smpp-pomo-controls">
         <button id="pomo-start-btn" class="smpp-pomo-btn">Start</button>
       </div>`;
-      this.display = el.querySelector("#pomo-timer");
+      this.timerInput = el.querySelector("#pomo-timer-input");
       this.label = el.querySelector("#pomo-label");
       this.startBtn = el.querySelector("#pomo-start-btn");
-      this.input = el.querySelector("#pomo-focus-input");
-      this.adjust = el.querySelector("#pomo-adjust");
       this.ring = el.querySelector("#pomo-ring");
       this.ring.style.strokeDasharray = String(this.circumference);
       this.ring.style.strokeDashoffset = "0";
-      this.minutes = await this.getSetting("focusMinutes");
-      this.input.value = String(this.minutes);
+      const savedMins = await this.getSetting("focusMinutes");
+      this.totalTime = (typeof savedMins === "number" && savedMins > 0 ? savedMins : 50) * 60;
+      this.timeLeft = this.totalTime;
       const { pomoEndTime, pomoTotal } = await chrome.storage.local.get([
         "pomoEndTime",
         "pomoTotal"
@@ -15683,61 +15695,49 @@ ${code}`;
       const now = Date.now();
       if (pomoEndTime && pomoEndTime > now) {
         localStorage.setItem("pomoEndTime", String(pomoEndTime));
-        this.totalTime = pomoTotal || this.minutes * 60;
+        this.totalTime = pomoTotal || this.totalTime;
         this.timeLeft = Math.round((pomoEndTime - now) / 1e3);
         this.lockUI(true);
         this.render();
         this.tick();
       } else {
         localStorage.removeItem("pomoEndTime");
-        this.totalTime = this.minutes * 60;
-        this.timeLeft = this.totalTime;
         this.render();
         document.body.classList.remove("smpp-pomodoro-active");
       }
-      this.adjust.querySelectorAll(".smpp-pomo-adj").forEach((btn) => {
-        btn.addEventListener(
-          "click",
-          () => this.changeMinutes(btn)
-        );
+      const applyTimeInput = () => {
+        if (this.isRunning) return;
+        const parsed = parseTimeString(this.timerInput.value);
+        this.totalTime = parsed;
+        this.timeLeft = parsed;
+        this.setSetting("focusMinutes", Math.round(parsed / 60));
+        this.render();
+      };
+      this.timerInput.addEventListener("focus", () => {
+        if (!this.isRunning) {
+          setTimeout(() => this.timerInput.select(), 10);
+        }
       });
-      this.input.addEventListener("change", () => this.onInputChange());
+      this.timerInput.addEventListener("change", applyTimeInput);
+      this.timerInput.addEventListener("blur", applyTimeInput);
+      this.timerInput.addEventListener("keydown", (e5) => {
+        if (e5.key === "Enter") {
+          applyTimeInput();
+          this.timerInput.blur();
+        }
+      });
       this.startBtn.addEventListener("click", () => this.start());
       return el;
     }
-    async changeMinutes(btn) {
-      if (this.isRunning) return;
-      const delta = parseInt(btn.getAttribute("data-delta") || "0", 10);
-      this.minutes = Math.max(1, Math.min(120, this.minutes + delta));
-      this.input.value = String(this.minutes);
-      await this.setSetting("focusMinutes", this.minutes);
-      this.totalTime = this.minutes * 60;
-      this.timeLeft = this.totalTime;
-      this.render();
-    }
-    async onInputChange() {
-      if (this.isRunning) return;
-      const value = Math.max(
-        1,
-        Math.min(120, parseInt(this.input.value, 10) || 50)
-      );
-      this.minutes = value;
-      this.input.value = String(value);
-      await this.setSetting("focusMinutes", value);
-      this.totalTime = value * 60;
-      this.timeLeft = this.totalTime;
-      this.render();
-    }
     async start() {
       if (this.isRunning) return;
-      const duration = this.minutes * 60;
+      const duration = this.totalTime;
       const endTime = Date.now() + duration * 1e3;
       localStorage.setItem("pomoEndTime", String(endTime));
       await chrome.storage.local.set({
         pomoEndTime: endTime,
         pomoTotal: duration
       });
-      this.totalTime = duration;
       this.timeLeft = duration;
       this.lockUI(true);
       this.render();
@@ -15747,8 +15747,7 @@ ${code}`;
       this.isRunning = on;
       this.startBtn.disabled = on;
       this.startBtn.textContent = on ? "Bezig..." : "Start";
-      this.input.disabled = on;
-      this.adjust.classList.toggle("disabled", on);
+      this.timerInput.disabled = on;
       this.label.textContent = on ? "Focus" : "Klaar";
       document.body.classList.toggle("smpp-pomodoro-active", on);
     }
@@ -15779,9 +15778,10 @@ ${code}`;
       this.lockUI(false);
     }
     render() {
-      const minutes = String(Math.floor(this.timeLeft / 60)).padStart(2, "0");
-      const seconds = String(this.timeLeft % 60).padStart(2, "0");
-      this.display.textContent = `${minutes}:${seconds}`;
+      if (!this.isRunning && document.activeElement === this.timerInput) {
+        return;
+      }
+      this.timerInput.value = formatSeconds(this.timeLeft);
       const progress = this.totalTime > 0 ? this.timeLeft / this.totalTime : 1;
       this.ring.style.strokeDashoffset = String(
         this.circumference * (1 - progress)
