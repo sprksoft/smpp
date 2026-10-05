@@ -16065,8 +16065,8 @@ h2.assignments-title {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 18px 14px 14px;
-  gap: 16px;
+  padding: 16px 14px 14px;
+  gap: 14px;
   font-family: inherit;
   color: inherit;
   width: 100%;
@@ -16084,7 +16084,7 @@ h2.assignments-title {
 }
 .smpp-pomo-ring-bg {
   fill: none;
-  stroke: color-mix(in srgb, currentColor 10%, transparent);
+  stroke: color-mix(in srgb, currentColor 12%, transparent);
   stroke-width: 5;
 }
 .smpp-pomo-ring-fg {
@@ -16102,35 +16102,15 @@ h2.assignments-title {
   align-items: center;
   justify-content: center;
 }
-.smpp-pomo-timer-input {
-  font-size: 36px;
+.smpp-pomo-timer {
+  font-size: 34px;
   font-weight: 800;
   line-height: 1;
-  letter-spacing: -0.5px;
+  letter-spacing: 0.5px;
   color: inherit;
-  background: transparent;
-  border: none;
-  border-radius: 12px;
-  text-align: center;
-  width: 130px;
-  outline: none;
-  font-family: inherit;
-  cursor: pointer;
-  padding: 2px 0;
-  transition: opacity 0.2s, background 0.2s;
-}
-.smpp-pomo-timer-input:hover:not(:disabled) {
-  opacity: 0.8;
-  background: color-mix(in srgb, currentColor 6%, transparent);
-}
-.smpp-pomo-timer-input:focus:not(:disabled) {
-  opacity: 1;
-  background: color-mix(in srgb, currentColor 10%, transparent);
-}
-.smpp-pomo-timer-input:disabled {
-  cursor: default;
-  background: transparent !important;
-  opacity: 1;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0;
 }
 .smpp-pomo-label {
   font-size: 11px;
@@ -16138,7 +16118,7 @@ h2.assignments-title {
   text-transform: uppercase;
   letter-spacing: 1.6px;
   margin-top: 6px;
-  opacity: 0.5;
+  opacity: 0.6;
   color: inherit;
 }
 .smpp-pomo-controls {
@@ -16148,7 +16128,7 @@ h2.assignments-title {
 }
 .smpp-pomo-btn {
   width: 100%;
-  max-width: 190px;
+  max-width: 200px;
   height: 44px;
   background: color-mix(in srgb, currentColor 6%, transparent);
   border: 2px solid color-mix(in srgb, currentColor 16%, transparent);
@@ -16159,21 +16139,40 @@ h2.assignments-title {
   font-weight: 600;
   cursor: pointer;
   text-align: center;
-  transition:
-    background 0.2s,
-    border-color 0.2s,
-    transform 0.1s;
+  transition: background 0.2s, border-color 0.2s;
 }
-.smpp-pomo-btn:hover:not(:disabled) {
+.smpp-pomo-btn:hover {
   background: color-mix(in srgb, currentColor 12%, transparent);
   border-color: color-mix(in srgb, currentColor 26%, transparent);
-}
-.smpp-pomo-btn:active:not(:disabled) {
-  transform: scale(0.98);
 }
 .smpp-pomo-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+.pomo-seg {
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.15s, color 0.15s;
+  border-radius: 4px;
+  padding: 0 2px;
+}
+.pomo-seg:hover:not(.disabled) {
+  background: color-mix(in srgb, currentColor 10%, transparent);
+}
+.pomo-seg.disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+.pomo-seg .pomo-edit-input {
+  width: 2ch;
+  background: transparent;
+  border: none;
+  color: inherit;
+  font: inherit;
+  font-weight: 800;
+  text-align: center;
+  outline: none;
+  padding: 0;
 }
 body.smpp-pomodoro-active .smpp-widget-bag,
 body.smpp-pomodoro-active .smpp-widget-bag-handle,

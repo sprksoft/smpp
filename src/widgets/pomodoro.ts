@@ -5,31 +5,6 @@ import { WidgetBase, registerWidget } from "./widgets.js";
 let blockInterval: number | null = null;
 let keyboardBlockInstalled = false;
 
-function parseTimeString(str: string): number {
-  const clean = str.replace(/[^0-9:]/g, "").trim();
-  if (!clean) return 50 * 60;
-  if (clean.includes(":")) {
-    const parts = clean.split(":");
-    const mins = parseInt(parts[0] || "0", 10) || 0;
-    const secs = parseInt(parts[1] || "0", 10) || 0;
-    return Math.max(1, Math.min(7200, mins * 60 + secs));
-  }
-  const val = parseInt(clean, 10);
-  if (isNaN(val) || val <= 0) return 50 * 60;
-  if (clean.length === 3 || clean.length === 4) {
-    const mins = Math.floor(val / 100);
-    const secs = val % 100;
-    return Math.max(1, Math.min(7200, mins * 60 + secs));
-  }
-  return Math.max(1, Math.min(7200, val * 60));
-}
-
-function formatSeconds(totalSecs: number): string {
-  const mins = Math.floor(totalSecs / 60);
-  const secs = totalSecs % 60;
-  return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
-}
-
 function syncCheckBlock(): boolean {
   try {
     const raw = localStorage.getItem("pomoEndTime");
@@ -112,14 +87,10 @@ export class PomodoroWidget extends WidgetBase {
   private timeLeft = 0;
   private totalTime = 0;
   private isRunning = false;
-<<<<<<< HEAD
-  private timerInput!: HTMLInputElement;
-=======
   private minutes = 50;
   private display!: HTMLElement;
   private hoursSeg!: HTMLElement;
   private minutesSeg!: HTMLElement;
->>>>>>> 47a40dd4fc15e39ae4a778396bc7316a7ab96279
   private label!: HTMLElement;
   private startBtn!: HTMLButtonElement;
   private ring!: SVGCircleElement;
@@ -147,13 +118,9 @@ export class PomodoroWidget extends WidgetBase {
           <circle class="smpp-pomo-ring-fg" id="pomo-ring" cx="60" cy="60" r="54"/>
         </svg>
         <div class="smpp-pomo-center">
-<<<<<<< HEAD
-          <input type="text" class="smpp-pomo-timer-input" id="pomo-timer-input" value="50:00" spellcheck="false" autocomplete="off"/>
-=======
           <div class="smpp-pomo-timer" id="pomo-timer">
             <span class="pomo-seg" data-part="h">00</span>:<span class="pomo-seg" data-part="m">50</span>
           </div>
->>>>>>> 47a40dd4fc15e39ae4a778396bc7316a7ab96279
           <div class="smpp-pomo-label" id="pomo-label">Focus</div>
         </div>
       </div>
@@ -161,13 +128,9 @@ export class PomodoroWidget extends WidgetBase {
         <button id="pomo-start-btn" class="smpp-pomo-btn">Start</button>
       </div>`;
 
-<<<<<<< HEAD
-    this.timerInput = el.querySelector("#pomo-timer-input")!;
-=======
     this.display = el.querySelector("#pomo-timer")!;
     this.hoursSeg = el.querySelector('[data-part="h"]')!;
     this.minutesSeg = el.querySelector('[data-part="m"]')!;
->>>>>>> 47a40dd4fc15e39ae4a778396bc7316a7ab96279
     this.label = el.querySelector("#pomo-label")!;
     this.startBtn = el.querySelector("#pomo-start-btn")!;
     this.ring = el.querySelector("#pomo-ring")!;
@@ -175,15 +138,8 @@ export class PomodoroWidget extends WidgetBase {
     this.ring.style.strokeDasharray = String(this.circumference);
     this.ring.style.strokeDashoffset = "0";
 
-<<<<<<< HEAD
-    const savedMins = await this.getSetting("focusMinutes");
-    this.totalTime =
-      (typeof savedMins === "number" && savedMins > 0 ? savedMins : 50) * 60;
-    this.timeLeft = this.totalTime;
-=======
     this.minutes = await this.getSetting("focusMinutes");
     this.render();
->>>>>>> 47a40dd4fc15e39ae4a778396bc7316a7ab96279
 
     const { pomoEndTime, pomoTotal } = await chrome.storage.local.get([
       "pomoEndTime",
@@ -194,53 +150,26 @@ export class PomodoroWidget extends WidgetBase {
 
     if (pomoEndTime && pomoEndTime > now) {
       localStorage.setItem("pomoEndTime", String(pomoEndTime));
-      this.totalTime = pomoTotal || this.totalTime;
+      this.totalTime = pomoTotal || this.minutes * 60;
       this.timeLeft = Math.round((pomoEndTime - now) / 1000);
       this.lockUI(true);
       this.render();
       this.tick();
     } else {
       localStorage.removeItem("pomoEndTime");
+      this.totalTime = this.minutes * 60;
+      this.timeLeft = this.totalTime;
       this.render();
       document.body.classList.remove("smpp-pomodoro-active");
     }
 
-<<<<<<< HEAD
-    const applyTimeInput = () => {
-      if (this.isRunning) return;
-      const parsed = parseTimeString(this.timerInput.value);
-      this.totalTime = parsed;
-      this.timeLeft = parsed;
-      this.setSetting("focusMinutes", Math.round(parsed / 60));
-      this.render();
-    };
-
-    this.timerInput.addEventListener("focus", () => {
-      if (!this.isRunning) {
-        setTimeout(() => this.timerInput.select(), 10);
-      }
-    });
-
-    this.timerInput.addEventListener("change", applyTimeInput);
-    this.timerInput.addEventListener("blur", applyTimeInput);
-    this.timerInput.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") {
-        applyTimeInput();
-        this.timerInput.blur();
-      }
-    });
-
-=======
     this.hoursSeg.addEventListener("click", () => this.startEdit("h"));
     this.minutesSeg.addEventListener("click", () => this.startEdit("m"));
->>>>>>> 47a40dd4fc15e39ae4a778396bc7316a7ab96279
     this.startBtn.addEventListener("click", () => this.start());
 
     return el;
   }
 
-<<<<<<< HEAD
-=======
   private startEdit(part: "h" | "m"): void {
     if (this.isRunning) return;
 
@@ -308,11 +237,10 @@ export class PomodoroWidget extends WidgetBase {
     input.addEventListener("keydown", onKeydown);
   }
 
->>>>>>> 47a40dd4fc15e39ae4a778396bc7316a7ab96279
   private async start() {
     if (this.isRunning) return;
 
-    const duration = this.totalTime;
+    const duration = this.minutes * 60;
     const endTime = Date.now() + duration * 1000;
 
     localStorage.setItem("pomoEndTime", String(endTime));
@@ -321,6 +249,7 @@ export class PomodoroWidget extends WidgetBase {
       pomoTotal: duration,
     });
 
+    this.totalTime = duration;
     this.timeLeft = duration;
     this.lockUI(true);
     this.render();
@@ -331,12 +260,8 @@ export class PomodoroWidget extends WidgetBase {
     this.isRunning = on;
     this.startBtn.disabled = on;
     this.startBtn.textContent = on ? "Bezig..." : "Start";
-<<<<<<< HEAD
-    this.timerInput.disabled = on;
-=======
     this.hoursSeg.classList.toggle("disabled", on);
     this.minutesSeg.classList.toggle("disabled", on);
->>>>>>> 47a40dd4fc15e39ae4a778396bc7316a7ab96279
     this.label.textContent = on ? "Focus" : "Klaar";
     document.body.classList.toggle("smpp-pomodoro-active", on);
   }
@@ -376,19 +301,11 @@ export class PomodoroWidget extends WidgetBase {
   }
 
   private render() {
-<<<<<<< HEAD
-    if (!this.isRunning && document.activeElement === this.timerInput) {
-      return;
-    }
-
-    this.timerInput.value = formatSeconds(this.timeLeft);
-=======
     const hours = String(Math.floor(this.timeLeft / 3600)).padStart(2, "0");
     const minutes = String(Math.floor((this.timeLeft % 3600) / 60)).padStart(2, "0");
 
     this.hoursSeg.textContent = hours;
     this.minutesSeg.textContent = minutes;
->>>>>>> 47a40dd4fc15e39ae4a778396bc7316a7ab96279
 
     const progress = this.totalTime > 0 ? this.timeLeft / this.totalTime : 1;
     this.ring.style.strokeDashoffset = String(
