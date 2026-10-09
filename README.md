@@ -2,7 +2,7 @@
 
 **Geef Smartschool een upgrade.** Verbeter en personaliseer je Smartschool-ervaring met thema's, widgets, games en meer.
 
-> 📥 [Chrome Web Store](https://chromewebstore.google.com/detail/bdhficnphioomdjhdfbhdepjgggekodf) · ⚡ [Website](https://smartschoolplusplus.com) · 💬 [Discord](https://discord.gg/A77xPC9qdW)
+> 📥 [Chrome Web Store](https://chromewebstore.google.com/detail/bdhficnphioomdjhdfbhdepjgggekodf) · ⚡ [Website](https://smartschoolplusplus.com) · 💬 [Discord](https://discord.gg/A77xPC9qdW) · 📄[Documentation](https://smartschoolplusplus.com/guide)
 
 ---
 
