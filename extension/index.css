@@ -3524,11 +3524,35 @@ button .bottom-container-button:active {
 }
 .theme-button-container {
   position: absolute;
-  top: 0.25rem;
-  right: 0.25rem;
+  top: 6px;
+  right: 6px;
+  max-width: calc(100% - 12px);
   display: flex;
   flex-direction: row;
-  gap: 0.25rem;
+  gap: 3px;
+}
+.theme-button-container .bottom-container-button {
+  box-sizing: border-box;
+  flex: 0 1 28px;
+  min-width: 0;
+  width: 28px !important;
+  height: 28px;
+  padding: 4px !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+}
+.theme-tile:focus-within .bottom-container-button {
+  opacity: 1;
+}
+.bottom-container-button:focus-visible,
+.theme-top-container button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+.bottom-container-button:disabled,
+.theme-top-container button:disabled {
+  cursor: wait !important;
+  opacity: 0.5 !important;
 }
 .theme-tile-bottom svg .pencil {
   fill: var(--color-accent-local);
@@ -3645,7 +3669,8 @@ button .bottom-container-button:active {
   flex-direction: row;
   align-items: center;
   gap: 0.5rem;
-  height: 2.5rem;
+  flex-wrap: wrap;
+  min-height: 32px;
   font-weight: 600;
   margin: 0 !important;
   margin-bottom: 0.5rem !important;
@@ -3659,7 +3684,7 @@ button .bottom-container-button:active {
   padding: 0 !important;
   font-size: 1.4rem !important;
   font-weight: 500 !important;
-  height: 100%;
+  height: 32px;
   aspect-ratio: 1;
   cursor: pointer !important;
   color: var(--color-text) !important;
@@ -3672,6 +3697,16 @@ button .bottom-container-button:active {
   width: 100%;
   height: 100%;
   stroke: var(--color-text) !important;
+}
+.theme-import-tile {
+  font: inherit;
+  color: var(--color-text);
+  align-items: stretch;
+  text-align: center;
+}
+.theme-import-tile:disabled {
+  opacity: 0.5;
+  cursor: wait !important;
 }
 .enableAnimations .theme-top-container button {
   transition-property:
@@ -4242,6 +4277,7 @@ button.open-theme-editor-button:hover {
   gap: 0.5rem;
 }
 .copy-hex-button.copy-link-button {
+  flex-shrink: 0;
   width: 3rem !important;
   height: 3rem !important;
   background-color: var(--color-base01-local) !important;
@@ -4254,6 +4290,21 @@ button.open-theme-editor-button:hover {
 }
 .copy-hex-button.copy-link-button > svg {
   stroke: var(--color-text-local) !important;
+}
+.share-dialog-content .link-output {
+  min-width: 0;
+  flex: 1;
+}
+.copy-link-button.theme-download-button:focus-visible {
+  outline: 2px solid var(--color-accent-local);
+  outline-offset: 2px;
+}
+.copy-link-button.theme-download-button:hover > svg {
+  stroke: var(--color-accent-local) !important;
+}
+.copy-link-button.theme-download-button:disabled {
+  opacity: 0.5;
+  cursor: wait !important;
 }
 .sharing-tile {
   width: fit-content !important;

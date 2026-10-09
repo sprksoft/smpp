@@ -24,6 +24,7 @@ import {
   getThemes,
   getThemeCategories,
   saveCustomTheme,
+  importThemeFile,
   removeCustomTheme,
   getFirstThemeInCategory,
   shareTheme,
@@ -49,6 +50,11 @@ async function handleMessage(message: any, sendResponse: (resp: any) => void) {
     }
 
     // Themes
+    if (message.action === "importThemeFile") {
+      const id = await importThemeFile(message.data);
+      sendResponse({ id });
+      return;
+    }
     if (message.action === "getThemes") {
       let themes = await getThemes(
         message.categories,
