@@ -31,6 +31,7 @@ import "../widgets/punten.ts";
 import "../widgets/notes.ts";
 import "../widgets/volgende-vak.ts";
 import "../widgets/countdown.ts";
+import { initPomodoroBlock } from "../widgets/pomodoro.js";
 
 import { browser, getExtensionImage, randomChance } from "../common/utils.js";
 import { getPfpLink } from "../fixes-utils/utils.js";
@@ -455,6 +456,7 @@ async function main() {
   }
 
   await apply();
+  initPomodoroBlock();
 }
 
 main();

@@ -1,0 +1,192 @@
+.smpp-pomodoro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 14px 14px;
+  gap: 14px;
+  font-family: inherit;
+  color: inherit;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.smpp-pomo-ring-wrap {
+  position: relative;
+  width: 170px;
+  height: 170px;
+}
+
+.smpp-pomo-ring {
+  width: 170px;
+  height: 170px;
+  transform: rotate(-90deg);
+}
+
+.smpp-pomo-ring-bg {
+  fill: none;
+  stroke: color-mix(in srgb, currentColor 12%, transparent);
+  stroke-width: 5;
+}
+
+.smpp-pomo-ring-fg {
+  fill: none;
+  stroke: var(--color-accent, currentColor);
+  stroke-width: 5;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1s linear;
+}
+
+.smpp-pomo-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.smpp-pomo-timer {
+  font-size: 34px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.5px;
+  color: inherit;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0;
+}
+
+.smpp-pomo-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.6px;
+  margin-top: 6px;
+  opacity: 0.6;
+  color: inherit;
+}
+
+.smpp-pomo-controls {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.smpp-pomo-btn {
+  width: 100%;
+  max-width: 200px;
+  height: 44px;
+  background: color-mix(in srgb, currentColor 6%, transparent);
+  border: 2px solid color-mix(in srgb, currentColor 16%, transparent);
+  color: inherit;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
+}
+
+.smpp-pomo-btn:hover {
+  background: color-mix(in srgb, currentColor 12%, transparent);
+  border-color: color-mix(in srgb, currentColor 26%, transparent);
+}
+
+.smpp-pomo-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pomo-seg {
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.15s, color 0.15s;
+  border-radius: 4px;
+  padding: 0 2px;
+}
+.pomo-seg:hover:not(.disabled) {
+  background: color-mix(in srgb, currentColor 10%, transparent);
+}
+.pomo-seg.disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+.pomo-seg .pomo-edit-input {
+  width: 2ch;
+  background: transparent;
+  border: none;
+  color: inherit;
+  font: inherit;
+  font-weight: 800;
+  text-align: center;
+  outline: none;
+  padding: 0;
+}
+
+body.smpp-pomodoro-active .smpp-widget-bag,
+body.smpp-pomodoro-active .smpp-widget-bag-handle,
+body.smpp-pomodoro-active #smpp-widget-edit-mode-btn,
+body.smpp-pomodoro-active .widgets-done-button,
+body.smpp-pomodoro-active .smpp-news-editor,
+body.smpp-pomodoro-active .smpp-button,
+body.smpp-pomodoro-active .smpp-dmenu,
+body.smpp-pomodoro-active .smpp-dmenu-btn,
+body.smpp-pomodoro-active #quick-menu-button,
+body.smpp-pomodoro-active [id*="quick-menu"],
+body.smpp-pomodoro-active [class*="quick-menu"],
+body.smpp-pomodoro-active #smpp-settings-btn,
+body.smpp-pomodoro-active .smpp-user-menu-item,
+body.smpp-pomodoro-active .smpp-profile-menu-item,
+body.smpp-pomodoro-active .js-btn-profile,
+body.smpp-pomodoro-active #js-btn-profile,
+body.smpp-pomodoro-active .topnav__btn--profile,
+body.smpp-pomodoro-active [class*="smpp-game"],
+body.smpp-pomodoro-active [class*="smpp-profile"],
+body.smpp-pomodoro-active [class*="profile-menu"],
+body.smpp-pomodoro-active [id*="profile-menu"],
+body.smpp-pomodoro-active [class*="user-menu"],
+body.smpp-pomodoro-active [id*="user-menu"],
+body.smpp-pomodoro-active [data-menu="profile"],
+body.smpp-pomodoro-active
+  .smpp-widget:not([data-widget-name="PomodoroWidget"]) {
+  opacity: 0.4 !important;
+  filter: blur(2px) !important;
+  pointer-events: none !important;
+  cursor: not-allowed !important;
+  user-select: none !important;
+  transition:
+    filter 0.3s,
+    opacity 0.3s !important;
+}
+
+body.smpp-pomodoro-active .smpp-settings-window,
+body.smpp-pomodoro-active .smpp-settings-modal,
+body.smpp-pomodoro-active .js-profile-menu,
+body.smpp-pomodoro-active #js-profile-menu,
+body.smpp-pomodoro-active .topnav__menu--profile,
+body.smpp-pomodoro-active .smpp-profile-modal,
+body.smpp-pomodoro-active .smpp-profile-window,
+body.smpp-pomodoro-active [id*="smpp-settings"],
+body.smpp-pomodoro-active [class*="smpp-settings"],
+body.smpp-pomodoro-active .smpp-dmenu-container,
+body.smpp-pomodoro-active [id*="dmenu-window"] {
+  display: none !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+}
+
+body.smpp-pomodoro-active .smpp-widget[data-widget-name="PomodoroWidget"] {
+  opacity: 1 !important;
+  filter: none !important;
+  pointer-events: auto !important;
+}
+
+body.smpp-pomodoro-active
+  .smpp-widget[data-widget-name="PomodoroWidget"]
+  .smpp-widget-content {
+  pointer-events: auto !important;
+}
