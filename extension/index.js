@@ -8166,7 +8166,7 @@ Is it scaring you off?`,
       const exportButton = document.createElement("button");
       exportButton.type = "button";
       exportButton.classList.add(...classes);
-      exportButton.title = "Export theme";
+      exportButton.title = "Export thema";
       exportButton.setAttribute("aria-label", "Export theme");
       exportButton.innerHTML = exportThemeSVG;
       exportButton.addEventListener("click", async (event) => {
@@ -8181,7 +8181,7 @@ Is it scaring you off?`,
             const data = await convertLinkToBase64(
               await getExtensionImage("theme-backgrounds/" + this.name + ".jpg")
             );
-            if (!data) throw new Error("Could not export the background image.");
+            if (!data) throw new Error("Kan het achtegrond niet exporteren.");
             background.imageData = data;
           }
           const file = validateThemeFile({
@@ -8205,7 +8205,7 @@ Is it scaring you off?`,
           setTimeout(() => URL.revokeObjectURL(url), 1e4);
         } catch (error) {
           new Toast(
-            error instanceof Error ? error.message : "Could not export theme.",
+            error instanceof Error ? error.message : "Kan het thema niet exporteren.",
             "error"
           ).render();
         } finally {
@@ -8335,7 +8335,13 @@ Is it scaring you off?`,
         tile.appendChild(colorPreviewsContainer);
         copyContainer.appendChild(linkOutput);
         copyContainer.appendChild(copyToClipboardButton);
-        copyContainer.appendChild(this.createExportButton(["copy-hex-button", "copy-link-button", "theme-download-button"]));
+        copyContainer.appendChild(
+          this.createExportButton([
+            "copy-hex-button",
+            "copy-link-button",
+            "theme-download-button"
+          ])
+        );
         element.appendChild(subTitle);
         tile.appendChild(copyContainer);
         element.appendChild(tile);
