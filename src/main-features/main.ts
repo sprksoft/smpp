@@ -265,7 +265,10 @@ export async function applyAppearance(appearance: Settings["appearance"]) {
     document.body.classList.remove("glass");
   }
   setGlobalGlass(appearance.glass);
-
+  document.body.classList.toggle(
+    "smpp-topbar-transparent",
+    appearance.topNavBackgroundHidden
+  );
   await setTheme(appearance.theme);
   setBackground(appearance.theme);
   updateNews(appearance.news);
