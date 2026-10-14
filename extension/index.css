@@ -8211,6 +8211,12 @@ nav.topnav {
   height: auto !important;
   gap: 0.5rem !important;
 }
+body.smpp-topbar-transparent nav.topnav,
+body.smpp-topbar-transparent .smsc-topnav {
+  background: transparent !important;
+  background-color: transparent !important;
+  border-bottom-color: transparent !important;
+}
 .smsc-topnav .topnav__menu {
   overflow: hidden !important;
 }

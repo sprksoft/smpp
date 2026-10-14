@@ -31,6 +31,7 @@ export type Settings = {
   };
   appearance: {
     theme: string;
+    topNavBackgroundHidden: boolean;
     glass: boolean;
     quickSettingsThemes: string[];
     background: { blur: number };
@@ -366,6 +367,12 @@ export class SettingsWindow extends BaseWindow {
           tile.updateSelection();
         });
 
+        const topNavBackgroundButton = document.getElementById(
+          "settings-page-topnav-background-button"
+        ) as HTMLInputElement;
+
+        topNavBackgroundButton.checked =
+          settings.appearance.topNavBackgroundHidden;
         const enableGlassButton = document.getElementById(
           "settings-page-glass-button"
         );
@@ -729,6 +736,12 @@ export class SettingsWindow extends BaseWindow {
         settings.appearance.news = getCheckboxValue(
           "settings-page-show-news-button"
         );
+
+        settings.appearance.topNavBackgroundHidden = (
+          document.getElementById(
+            "settings-page-topnav-background-button"
+          ) as HTMLInputElement
+        ).checked;
 
         settings.appearance.glass = getCheckboxValue(
           "settings-page-glass-button"
@@ -1180,6 +1193,19 @@ export class SettingsWindow extends BaseWindow {
 
         this.settingsPage.appendChild(
           this.backgroundImageSelector.fullContainer
+        );
+
+        this.settingsPage.appendChild(createSectionTitle("Top bar"));
+        this.settingsPage.appendChild(
+          createDescription(
+            "Make the topbar transparant."
+          )
+        );
+        this.settingsPage.appendChild(
+          createSettingsButtonWithLabel(
+            "settings-page-topnav-background-button",
+            "Transparent top bar"
+          )
         );
 
         this.settingsPage.appendChild(createSectionTitle("Glass"));
