@@ -5912,6 +5912,10 @@ Is it scaring you off?`,
           this.themeSelector.currentTiles.forEach((tile) => {
             tile.updateSelection();
           });
+          const topNavBackgroundButton = document.getElementById(
+            "settings-page-topnav-background-button"
+          );
+          topNavBackgroundButton.checked = settings.appearance.topNavBackgroundHidden;
           const enableGlassButton = document.getElementById(
             "settings-page-glass-button"
           );
@@ -6180,6 +6184,9 @@ Is it scaring you off?`,
           settings.appearance.news = getCheckboxValue(
             "settings-page-show-news-button"
           );
+          settings.appearance.topNavBackgroundHidden = document.getElementById(
+            "settings-page-topnav-background-button"
+          ).checked;
           settings.appearance.glass = getCheckboxValue(
             "settings-page-glass-button"
           );
@@ -6517,6 +6524,18 @@ Is it scaring you off?`,
           };
           this.settingsPage.appendChild(
             this.backgroundImageSelector.fullContainer
+          );
+          this.settingsPage.appendChild(createSectionTitle("Top bar"));
+          this.settingsPage.appendChild(
+            createDescription(
+              "Make the topbar transparant."
+            )
+          );
+          this.settingsPage.appendChild(
+            createSettingsButtonWithLabel(
+              "settings-page-topnav-background-button",
+              "Transparent top bar"
+            )
           );
           this.settingsPage.appendChild(createSectionTitle("Glass"));
           this.settingsPage.appendChild(
@@ -7667,6 +7686,11 @@ Is it scaring you off?`,
       ) || document.createElement("div");
       imgContainer.id = "smpp-background-image-container";
       imgContainer.classList.add("smpp-background-image-container");
+      const transparentTopbar = document.body.classList.contains(
+        "smpp-topbar-transparent"
+      );
+      imgContainer.style.top = transparentTopbar ? "0px" : "41px";
+      imgContainer.style.height = transparentTopbar ? "100vh" : "";
       let img = document.getElementById("smpp-background-image") || document.createElement("img");
       img.id = "smpp-background-image";
       img.classList.add("smpp-background-image");
@@ -16355,6 +16379,10 @@ ${code}`;
       document.body.classList.remove("glass");
     }
     setGlobalGlass(appearance.glass);
+    document.body.classList.toggle(
+      "smpp-topbar-transparent",
+      appearance.topNavBackgroundHidden
+    );
     await setTheme(appearance.theme);
     setBackground(appearance.theme);
     updateNews(appearance.news);

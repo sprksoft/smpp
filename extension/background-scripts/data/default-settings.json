@@ -2,6 +2,7 @@
   "username": null,
   "useSMpfp": false,
   "theme": "default",
+  "topNavBackgroundHidden": false,
   "glass": false,
   "quickSettingsThemes": [
     "default",

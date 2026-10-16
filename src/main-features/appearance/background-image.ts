@@ -15,6 +15,13 @@ export async function setBackground(themeName: string) {
     imgContainer.id = "smpp-background-image-container";
     imgContainer.classList.add("smpp-background-image-container");
 
+    const transparentTopbar = document.body.classList.contains(
+      "smpp-topbar-transparent"
+    );
+
+    imgContainer.style.top = transparentTopbar ? "0px" : "41px";
+    imgContainer.style.height = transparentTopbar ? "100vh" : "";
+
     let img =
       (document.getElementById("smpp-background-image") as HTMLImageElement) ||
       document.createElement("img");
