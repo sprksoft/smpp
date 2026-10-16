@@ -4383,6 +4383,44 @@ button.open-theme-editor-button:hover {
   align-items: center;
   padding-right: 7.5px;
 }
+.assignment__item .assignment-countdown {
+  --countdown-color: #c8d0dc;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin: 0.35rem 0 0.15rem 0.3rem;
+  padding: 0.2rem 0.6rem;
+  border: 1px solid var(--countdown-color);
+  border-radius: 0.6rem;
+  background: color-mix(in srgb, var(--countdown-color) 24%, var(--color-base01));
+  color: var(--countdown-color);
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.4;
+  font-variant-numeric: tabular-nums;
+}
+.glass .assignment__item .assignment-countdown {
+  background: color-mix(in srgb, var(--countdown-color) 24%, transparent);
+  backdrop-filter: blur(8px) saturate(150%);
+  -webkit-backdrop-filter: blur(8px) saturate(150%);
+  border-color: var(--countdown-color);
+  box-shadow: 0 2px 6px rgb(0 0 0 / 10%);
+}
+.glass .assignment__item:hover {
+  background-color: color-mix(in srgb, var(--color-base00) 25%, transparent);
+}
+.assignment__item .assignment-countdown[data-urgency=urgent] {
+  --countdown-color: var(--color-red);
+}
+.assignment__item .assignment-countdown[data-urgency=soon] {
+  --countdown-color: var(--color-orange);
+}
+.assignment__item .assignment-countdown[data-urgency=upcoming] {
+  --countdown-color: var(--color-yellow);
+}
 .wrapperdiv {
   display: flex;
   justify-content: center;
