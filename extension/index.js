@@ -12779,7 +12779,8 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
   var TakenWidget = class extends WidgetBase {
     defaultSettings() {
       return {
-        maxAssignments: 5
+        maxAssignments: 5,
+        showCountdown: true
       };
     }
     onSettingsChange() {
@@ -12945,6 +12946,14 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
             })} \u2022 ${element.courses?.[0]?.name || "TODO "}`;
             metadataSpan.classList.add("task-description");
             detailsDiv.append(titleSpan, metadataSpan);
+            if (this.settings.showCountdown !== false) {
+              const countdown = getCountdown(taskDate);
+              const countdownSpan = document.createElement("span");
+              countdownSpan.textContent = countdown.text;
+              countdownSpan.classList.add("assignment-countdown");
+              countdownSpan.dataset.urgency = countdown.urgency;
+              detailsDiv.appendChild(countdownSpan);
+            }
             rowDiv.append(abbreviationDiv, detailsDiv);
             rowDiv.addEventListener("click", () => {
               markAsFinished(element.id, element.courses?.[0]?.name);
@@ -12980,6 +12989,22 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
       this.element.innerHTML = "";
     }
   };
+  function getCountdown(date) {
+    const today = /* @__PURE__ */ new Date();
+    const startToday = Date.UTC(
+      today.getFullYear(),
+      today.getMonth(),
+      today.getDate()
+    );
+    const target = Date.UTC(date.getFullYear(), date.getMonth(), date.getDate());
+    const days = Math.round((target - startToday) / 864e5);
+    if (days < 0) return { text: "Verlopen", urgency: "urgent" };
+    if (days === 0) return { text: "Vandaag", urgency: "urgent" };
+    if (days === 1) return { text: "Morgen", urgency: "soon" };
+    if (days === 2) return { text: "Overmorgen", urgency: "upcoming" };
+    if (days <= 3) return { text: `Nog ${days} dagen`, urgency: "upcoming" };
+    return { text: `Nog ${days} dagen`, urgency: "normal" };
+  }
   async function markAsFinished(as_ID, name) {
     const schoolName = getSchoolName();
     const userId = getUserId();
