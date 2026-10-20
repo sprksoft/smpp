@@ -6050,6 +6050,18 @@ Is it scaring you off?`,
             "settings-page-max-assignments-slider",
             "TakenWidget.maxAssignments"
           );
+          const assignmentsMonochromeButton = document.getElementById(
+            "settings-page-assignments-monochrome-button"
+          );
+          if (assignmentsMonochromeButton) {
+            assignmentsMonochromeButton.checked = await getWidgetSetting("TakenWidget.monochrome");
+          }
+          const assignmentsCountdownButton = document.getElementById(
+            "settings-page-assignments-countdown-button"
+          );
+          if (assignmentsCountdownButton) {
+            assignmentsCountdownButton.checked = await getWidgetSetting("TakenWidget.showCountdown");
+          }
           const puntenMonochromeButton = document.getElementById(
             "settings-page-punten-monochrome-button"
           );
@@ -6257,6 +6269,16 @@ Is it scaring you off?`,
             "settings-page-max-assignments-slider",
             "TakenWidget.maxAssignments",
             "number"
+          );
+          await updateWidgetSetting(
+            "settings-page-assignments-monochrome-button",
+            "TakenWidget.monochrome",
+            "boolean"
+          );
+          await updateWidgetSetting(
+            "settings-page-assignments-countdown-button",
+            "TakenWidget.showCountdown",
+            "boolean"
           );
           await updateWidgetSetting(
             "settings-page-punten-monochrome-button",
@@ -6763,6 +6785,18 @@ Is it scaring you off?`,
               "10",
               "settings-page-max-assignments-slider",
               "Max assignments"
+            )
+          );
+          this.settingsPage.appendChild(
+            createSettingsButtonWithLabel(
+              "settings-page-assignments-monochrome-button",
+              "Monochrome"
+            )
+          );
+          this.settingsPage.appendChild(
+            createSettingsButtonWithLabel(
+              "settings-page-assignments-countdown-button",
+              "Show countdown"
             )
           );
           this.settingsPage.appendChild(createSectionTitle("Punten"));
@@ -12780,7 +12814,8 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
     defaultSettings() {
       return {
         maxAssignments: 5,
-        showCountdown: true
+        showCountdown: false,
+        monochrome: false
       };
     }
     onSettingsChange() {
@@ -12900,11 +12935,20 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
               "todo-column__abbreviation-cell__wrapper",
               "wrapperdiv"
             );
-            wrapperDiv.classList.add(
-              `c-${element.color.split("-")[0]}-combo--${element.color.split("-")[1]}`
-              // LET HIM COOK
+            if (this.settings.monochrome) {
+              wrapperDiv.classList.add("wrapperdiv--monochrome");
+            } else {
+              wrapperDiv.classList.add(
+                `c-${element.color.split("-")[0]}-combo--${element.color.split("-")[1]}`
+                // LET HIM COOK
+              );
+            }
+            sendDebug(
+              "[AS]",
+              "Creating icon for assignment:",
+              element,
+              element.icon
             );
-            sendDebug("[AS]", "Creating icon for assignment:", element, element.icon);
             if (element.plannedElementType === "planned-to-dos") {
               fetch(
                 `https://${getSchoolName()}.smartschool.be/smsc/svg/${element.icon}/${element.icon}_16x16.svg`
@@ -12946,12 +12990,14 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
             })} \u2022 ${element.courses?.[0]?.name || "TODO "}`;
             metadataSpan.classList.add("task-description");
             detailsDiv.append(titleSpan, metadataSpan);
-            if (this.settings.showCountdown !== false) {
+            if (this.settings.showCountdown) {
               const countdown = getCountdown(taskDate);
               const countdownSpan = document.createElement("span");
               countdownSpan.textContent = countdown.text;
               countdownSpan.classList.add("assignment-countdown");
-              countdownSpan.dataset.urgency = countdown.urgency;
+              if (!this.settings.monochrome) {
+                countdownSpan.dataset.urgency = countdown.urgency;
+              }
               detailsDiv.appendChild(countdownSpan);
             }
             rowDiv.append(abbreviationDiv, detailsDiv);

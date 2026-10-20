@@ -4429,6 +4429,10 @@ button.open-theme-editor-button:hover {
   height: 2.667rem;
   border-radius: 0.5rem;
 }
+.wrapperdiv--monochrome {
+  background-color: var(--color-base02);
+  color: var(--color-text);
+}
 .as_all_done {
   text-align: center;
   margin-top: 1rem;

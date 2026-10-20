@@ -18,7 +18,8 @@ class TakenWidget extends WidgetBase {
   override defaultSettings() {
     return {
       maxAssignments: 5,
-      showCountdown: true,
+      showCountdown: false,
+      monochrome: false,
     };
   }
   override onSettingsChange() {
@@ -154,11 +155,15 @@ class TakenWidget extends WidgetBase {
             "todo-column__abbreviation-cell__wrapper",
             "wrapperdiv",
           );
-          wrapperDiv.classList.add(
-            `c-${element.color.split("-")[0]}-combo--${
-              element.color.split("-")[1]
-            }`, // LET HIM COOK
-          );
+          if (this.settings.monochrome) {
+            wrapperDiv.classList.add("wrapperdiv--monochrome");
+          } else {
+            wrapperDiv.classList.add(
+              `c-${element.color.split("-")[0]}-combo--${
+                element.color.split("-")[1]
+              }`, // LET HIM COOK
+            );
+          }
 
           // make the litle icon cubes
           sendDebug(
@@ -219,13 +224,15 @@ class TakenWidget extends WidgetBase {
 
           detailsDiv.append(titleSpan, metadataSpan);
 
-          if (this.settings.showCountdown !== false) {
+          if (this.settings.showCountdown) {
             const countdown = getCountdown(taskDate);
 
             const countdownSpan = document.createElement("span");
             countdownSpan.textContent = countdown.text;
             countdownSpan.classList.add("assignment-countdown");
-            countdownSpan.dataset.urgency = countdown.urgency;
+            if (!this.settings.monochrome) {
+              countdownSpan.dataset.urgency = countdown.urgency;
+            }
 
             detailsDiv.appendChild(countdownSpan);
           }
