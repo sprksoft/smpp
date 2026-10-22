@@ -52,7 +52,7 @@ class TakenWidget extends WidgetBase {
 
         if (!response.ok) {
           throw new Error(
-            `Failed to fetch planner data (Status: ${response.status})`,
+            `planner data kan niet opgehaald worden (Status: ${response.status})`,
           );
         }
         const data = await response.json();
