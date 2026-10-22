@@ -18,6 +18,8 @@ class TakenWidget extends WidgetBase {
   override defaultSettings() {
     return {
       maxAssignments: 5,
+      showCountdown: false,
+      monochrome: false,
     };
   }
   override onSettingsChange() {
@@ -43,14 +45,14 @@ class TakenWidget extends WidgetBase {
         }
 
         const url = `https://${schoolName}.smartschool.be/planner/api/v1/planned-elements/user/${userId}?from=${getCurrentDate()}&to=${getFutureDate(
-          foresight
+          foresight,
         )}&types=planned-assignments,planned-to-dos`;
         sendDebug("[AS]", "Fetching planner data from:", url);
         const response = await fetch(url);
 
         if (!response.ok) {
           throw new Error(
-            `Failed to fetch planner data (Status: ${response.status})`
+            `planner data kan niet opgehaald worden (Status: ${response.status})`,
           );
         }
         const data = await response.json();
@@ -99,7 +101,7 @@ class TakenWidget extends WidgetBase {
         // sort based on day
         data.sort(
           (a, b) =>
-            new Date(a.period.dateTimeFrom) - new Date(b.period.dateTimeFrom)
+            new Date(a.period.dateTimeFrom) - new Date(b.period.dateTimeFrom),
         );
         let lastDate = "";
         if (data.length > this.settings.maxAssignments) {
@@ -141,7 +143,7 @@ class TakenWidget extends WidgetBase {
           rowDiv.classList.add(
             "listview__row",
             "todo__row",
-            "assignment__item"
+            "assignment__item",
           );
           rowDiv.setAttribute("data-id", element.id);
 
@@ -151,26 +153,37 @@ class TakenWidget extends WidgetBase {
           const wrapperDiv = document.createElement("div");
           wrapperDiv.classList.add(
             "todo-column__abbreviation-cell__wrapper",
-            "wrapperdiv"
+            "wrapperdiv",
           );
-          wrapperDiv.classList.add(
-            `c-${element.color.split("-")[0]}-combo--${element.color.split("-")[1]
-            }` // LET HIM COOK
-          );
+          if (this.settings.monochrome) {
+            wrapperDiv.classList.add("wrapperdiv--monochrome");
+          } else {
+            wrapperDiv.classList.add(
+              `c-${element.color.split("-")[0]}-combo--${
+                element.color.split("-")[1]
+              }`, // LET HIM COOK
+            );
+          }
 
           // make the litle icon cubes
-          sendDebug("[AS]", "Creating icon for assignment:", element, element.icon);
+          sendDebug(
+            "[AS]",
+            "Creating icon for assignment:",
+            element,
+            element.icon,
+          );
           if (element.plannedElementType === "planned-to-dos") {
             // dont try to understand, i dont either
             fetch(
-              `https://${getSchoolName()}.smartschool.be/smsc/svg/${element.icon
-              }/${element.icon}_16x16.svg`
+              `https://${getSchoolName()}.smartschool.be/smsc/svg/${
+                element.icon
+              }/${element.icon}_16x16.svg`,
             )
               .then((response) => response.blob())
               .then((blob) => {
                 const iconSvg = document.createElementNS(
                   "http://www.w3.org/2000/svg",
-                  "svg"
+                  "svg",
                 );
                 iconSvg.setAttribute("width", "16px");
                 iconSvg.setAttribute("height", "16px");
@@ -184,7 +197,7 @@ class TakenWidget extends WidgetBase {
           } else {
             const abbreviationSpan = document.createElement("span");
             abbreviationSpan.classList.add(
-              "todo-column__abbreviation-cell__wrapper__abbreviation"
+              "todo-column__abbreviation-cell__wrapper__abbreviation",
             );
             abbreviationSpan.textContent =
               element.assignmentType.abbreviation || "?";
@@ -202,7 +215,7 @@ class TakenWidget extends WidgetBase {
 
           const metadataSpan = document.createElement("span");
           metadataSpan.textContent = `${new Date(
-            element.period.dateTimeFrom
+            element.period.dateTimeFrom,
           ).toLocaleTimeString("nl-NL", {
             hour: "2-digit",
             minute: "2-digit",
@@ -210,6 +223,20 @@ class TakenWidget extends WidgetBase {
           metadataSpan.classList.add("task-description");
 
           detailsDiv.append(titleSpan, metadataSpan);
+
+          if (this.settings.showCountdown) {
+            const countdown = getCountdown(taskDate);
+
+            const countdownSpan = document.createElement("span");
+            countdownSpan.textContent = countdown.text;
+            countdownSpan.classList.add("assignment-countdown");
+            if (!this.settings.monochrome) {
+              countdownSpan.dataset.urgency = countdown.urgency;
+            }
+
+            detailsDiv.appendChild(countdownSpan);
+          }
+
           rowDiv.append(abbreviationDiv, detailsDiv);
 
           rowDiv.addEventListener("click", () => {
@@ -253,13 +280,35 @@ class TakenWidget extends WidgetBase {
   }
 }
 
+function getCountdown(date: Date) {
+  const today = new Date();
+
+  const startToday = Date.UTC(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate(),
+  );
+
+  const target = Date.UTC(date.getFullYear(), date.getMonth(), date.getDate());
+
+  const days = Math.round((target - startToday) / 86400000);
+
+  if (days < 0) return { text: "Verlopen", urgency: "urgent" };
+  if (days === 0) return { text: "Vandaag", urgency: "urgent" };
+  if (days === 1) return { text: "Morgen", urgency: "soon" };
+  if (days === 2) return { text: "Overmorgen", urgency: "upcoming" };
+  if (days <= 3) return { text: `Nog ${days} dagen`, urgency: "upcoming" };
+
+  return { text: `Nog ${days} dagen`, urgency: "normal" };
+}
+
 async function markAsFinished(as_ID, name) {
   const schoolName = getSchoolName();
   const userId = getUserId();
 
   if (!schoolName || !userId) {
     console.error(
-      "SMPP: Could not retrieve school name or user ID. Cannot mark assignment as finished."
+      "SMPP: Could not retrieve school name or user ID. Cannot mark assignment as finished.",
     );
     return false;
   }
@@ -278,7 +327,7 @@ async function markAsFinished(as_ID, name) {
     if (!response.ok) {
       const errorData = await response.text();
       throw new Error(
-        `Failed to mark assignment ${as_ID} as finished: ${response.status} ${response.statusText}. Response: ${errorData}`
+        `Failed to mark assignment ${as_ID} as finished: ${response.status} ${response.statusText}. Response: ${errorData}`,
       );
     }
 
@@ -353,20 +402,20 @@ async function markAsFinished(as_ID, name) {
         // This handles cases where a header might remain if the last assignment was removed
         // and the header wasn't directly adjacent or the logic missed it.
         const allDateHeaders = parentContainer.querySelectorAll(
-          ".date-header-assignments"
+          ".date-header-assignments",
         );
         allDateHeaders.forEach((header) => header.remove());
       }
     } else {
       console.warn(
-        `SMPP: Assignment element with data-id="${as_ID}" not found :/ this is good?`
+        `SMPP: Assignment element with data-id="${as_ID}" not found :/ this is good?`,
       );
     }
     return true;
   } catch (error) {
     console.error(
       `SMPP: Error marking assignment ${as_ID} as finished:`,
-      error
+      error,
     );
     return false;
   }

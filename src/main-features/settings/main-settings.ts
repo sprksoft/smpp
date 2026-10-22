@@ -551,6 +551,20 @@ export class SettingsWindow extends BaseWindow {
           "settings-page-max-assignments-slider",
           "TakenWidget.maxAssignments"
         );
+        const assignmentsMonochromeButton = document.getElementById(
+          "settings-page-assignments-monochrome-button"
+        );
+        if (assignmentsMonochromeButton) {
+          (assignmentsMonochromeButton as HTMLInputElement).checked =
+            await getWidgetSetting("TakenWidget.monochrome");
+        }
+        const assignmentsCountdownButton = document.getElementById(
+          "settings-page-assignments-countdown-button"
+        );
+        if (assignmentsCountdownButton) {
+          (assignmentsCountdownButton as HTMLInputElement).checked =
+            await getWidgetSetting("TakenWidget.showCountdown");
+        }
 
         // Punten
         const puntenMonochromeButton = document.getElementById(
@@ -842,6 +856,17 @@ export class SettingsWindow extends BaseWindow {
           "settings-page-max-assignments-slider",
           "TakenWidget.maxAssignments",
           "number"
+        );
+        await updateWidgetSetting(
+          "settings-page-assignments-monochrome-button",
+          "TakenWidget.monochrome",
+          "boolean"
+        );
+        // voor de countdown widget extra function zodat users niet verplicht zijn de countdown te zien
+        await updateWidgetSetting(
+          "settings-page-assignments-countdown-button",
+          "TakenWidget.showCountdown",
+          "boolean"
         );
 
         // Punten
@@ -1458,6 +1483,18 @@ export class SettingsWindow extends BaseWindow {
             "10",
             "settings-page-max-assignments-slider",
             "Max assignments"
+          )
+        );
+        this.settingsPage.appendChild(
+          createSettingsButtonWithLabel(
+            "settings-page-assignments-monochrome-button",
+            "Monochrome"
+          )
+        );
+        this.settingsPage.appendChild(
+          createSettingsButtonWithLabel(
+            "settings-page-assignments-countdown-button",
+            "Show countdown"
           )
         );
 
