@@ -10361,7 +10361,7 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
     main: "https://gc.smartschoolplusplus.com",
     beta: "https://gcbeta.smartschoolplusplus.com"
   };
-  var globalChatEnabled = false;
+  var globalChatEnabled = true;
   var GlobalChatWindow = class extends BaseWindow {
     iframe;
     gcContent;
@@ -12845,7 +12845,7 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
           const response = await fetch(url);
           if (!response.ok) {
             throw new Error(
-              `Failed to fetch planner data (Status: ${response.status})`
+              `planner data kan niet opgehaald worden (Status: ${response.status})`
             );
           }
           const data = await response.json();

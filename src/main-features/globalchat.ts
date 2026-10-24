@@ -11,7 +11,7 @@ const GC_DOMAINS = {
 };
 
 // With this you can disable or enable the global chat again. But for now the global chat died on 09/2026 :C byeeeee
-export const globalChatEnabled = false;
+export const globalChatEnabled = true;
 
 class GlobalChatWindow extends BaseWindow {
   iframe: HTMLIFrameElement;
