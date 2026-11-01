@@ -256,8 +256,123 @@ async function createGlobals() {
   var quicks = await quickLoad();
   liteMode = browser.runtime.getManifest().name.includes("Lite");
 }
+let dailyBackgroundTimer: ReturnType<typeof setTimeout> | undefined;
 
-export async function applyAppearance(appearance: Settings["appearance"]) {
+const DAILY_UPDATE_HOUR = 0;
+const DAILY_UPDATE_MINUTE = 0;
+
+async function applyDailyRandomBackground(
+  appearance: Settings["appearance"],
+  chooseNew = false
+) {
+  if (dailyBackgroundTimer) {
+    clearTimeout(dailyBackgroundTimer);
+    dailyBackgroundTimer = undefined;
+  }
+
+  if (!appearance.dailyRandomBackground) {
+    localStorage.removeItem("smpp-daily-background-date");
+    localStorage.removeItem("smpp-daily-background-theme");
+    await setBackground(appearance.theme);
+    return;
+  }
+
+  const categories = (await browser.runtime.sendMessage({
+    action: "getThemeCategories",
+    includeHidden: true,
+  })) as Record<string, string[]>;
+
+  const hiddenThemeNames = categories["hidden"] ?? [];
+
+  const themeNames = [
+    ...new Set(
+      Object.entries(categories)
+        .filter(([category]) => category !== "custom" && category !== "hidden")
+        .flatMap(([, names]) => names)
+        .filter((name) => !hiddenThemeNames.includes(name))
+    ),
+  ];
+
+  if (themeNames.length === 0) {
+    await setTheme(appearance.theme);
+    await setBackground(appearance.theme);
+    return;
+  }
+
+  const now = new Date();
+
+  const today = [
+    now.getFullYear(),
+    String(now.getMonth() + 1).padStart(2, "0"),
+    String(now.getDate()).padStart(2, "0"),
+  ].join("-");
+
+  const updateTime = new Date(now);
+  updateTime.setHours(DAILY_UPDATE_HOUR, DAILY_UPDATE_MINUTE, 0, 0);
+
+  const updateTimePassed = now >= updateTime;
+
+  const lastUpdateDate = localStorage.getItem("smpp-daily-background-date");
+
+  let selectedTheme = localStorage.getItem("smpp-daily-background-theme");
+
+  const needsNewTheme =
+    !selectedTheme ||
+    !themeNames.includes(selectedTheme) ||
+    (updateTimePassed && lastUpdateDate !== today) ||
+    (chooseNew && updateTimePassed);
+
+  if (needsNewTheme) {
+    const randomTheme =
+      themeNames[Math.floor(Math.random() * themeNames.length)];
+
+    if (!randomTheme) {
+      await setTheme(appearance.theme);
+      await setBackground(appearance.theme);
+      return;
+    }
+
+    selectedTheme = randomTheme;
+
+    localStorage.setItem("smpp-daily-background-theme", selectedTheme);
+
+    if (updateTimePassed) {
+      localStorage.setItem("smpp-daily-background-date", today);
+    }
+  }
+
+  if (!selectedTheme) {
+    await setTheme(appearance.theme);
+    await setBackground(appearance.theme);
+    return;
+  }
+
+  await setTheme(selectedTheme as typeof appearance.theme);
+  await setBackground(selectedTheme);
+
+  const nextUpdate = new Date(now);
+  nextUpdate.setHours(DAILY_UPDATE_HOUR, DAILY_UPDATE_MINUTE, 0, 0);
+
+  if (nextUpdate <= now) {
+    nextUpdate.setDate(nextUpdate.getDate() + 1);
+  }
+
+  dailyBackgroundTimer = setTimeout(
+    async () => {
+      const latestSettings = (await browser.runtime.sendMessage({
+        action: "getSettingsData",
+      })) as Settings;
+
+      await applyDailyRandomBackground(latestSettings.appearance, true);
+    },
+    Math.max(1000, nextUpdate.getTime() - now.getTime())
+  );
+}
+
+export async function applyAppearance(
+  appearance: Settings["appearance"],
+  forceRandomBackground = false
+) {
   let style = document.documentElement.style;
   if (appearance.glass) {
     document.body.classList.add("glass");
@@ -269,8 +384,11 @@ export async function applyAppearance(appearance: Settings["appearance"]) {
     "smpp-topbar-transparent",
     appearance.topNavBackgroundHidden
   );
-  await setTheme(appearance.theme);
-  setBackground(appearance.theme);
+  if (!appearance.dailyRandomBackground) {
+    await setTheme(appearance.theme);
+  }
+
+  await applyDailyRandomBackground(appearance, forceRandomBackground);
   updateNews(appearance.news);
   updateTabLogo(appearance.tabLogo);
 

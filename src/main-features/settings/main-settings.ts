@@ -31,6 +31,7 @@ export type Settings = {
   };
   appearance: {
     theme: string;
+    dailyRandomBackground: boolean;
     topNavBackgroundHidden: boolean;
     glass: boolean;
     quickSettingsThemes: string[];
@@ -366,6 +367,15 @@ export class SettingsWindow extends BaseWindow {
         this.themeSelector.currentTiles.forEach((tile) => {
           tile.updateSelection();
         });
+
+        const dailyRandomBackgroundButton = document.getElementById(
+          "settings-page-daily-random-background-button"
+        ) as HTMLInputElement | null;
+
+        if (dailyRandomBackgroundButton) {
+          dailyRandomBackgroundButton.checked =
+            settings.appearance.dailyRandomBackground;
+        }
 
         const topNavBackgroundButton = document.getElementById(
           "settings-page-topnav-background-button"
@@ -750,6 +760,13 @@ export class SettingsWindow extends BaseWindow {
         settings.appearance.news = getCheckboxValue(
           "settings-page-show-news-button"
         );
+        const justEnabledDailyRandomBackground =
+          !previousSettings.appearance.dailyRandomBackground &&
+          getCheckboxValue("settings-page-daily-random-background-button");
+
+        settings.appearance.dailyRandomBackground = getCheckboxValue(
+          "settings-page-daily-random-background-button"
+        );
 
         settings.appearance.topNavBackgroundHidden = (
           document.getElementById(
@@ -761,7 +778,10 @@ export class SettingsWindow extends BaseWindow {
           "settings-page-glass-button"
         );
 
-        await applyAppearance(settings.appearance);
+        await applyAppearance(
+          settings.appearance,
+          justEnabledDailyRandomBackground
+        );
 
         // Apply weather effects if they changed
         if (
@@ -1220,11 +1240,22 @@ export class SettingsWindow extends BaseWindow {
           this.backgroundImageSelector.fullContainer
         );
 
+        this.settingsPage.appendChild(
+          createSectionTitle("Daily random background")
+        );
+        this.settingsPage.appendChild(
+          createDescription("Choose a random built-in background every day.")
+        );
+        this.settingsPage.appendChild(
+          createSettingsButtonWithLabel(
+            "settings-page-daily-random-background-button",
+            "Daily random background"
+          )
+        );
+
         this.settingsPage.appendChild(createSectionTitle("Top bar"));
         this.settingsPage.appendChild(
-          createDescription(
-            "Make the topbar transparant."
-          )
+          createDescription("Make the topbar transparant.")
         );
         this.settingsPage.appendChild(
           createSettingsButtonWithLabel(
