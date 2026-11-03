@@ -283,21 +283,19 @@ async function applyDailyRandomBackground(
   })) as Record<string, string[]>;
 
   const hiddenThemeNames = categories["hidden"] ?? [];
+  const customThemeNames = categories["custom"] ?? [];
 
   const themeNames = [
     ...new Set(
       Object.entries(categories)
         .filter(([category]) => category !== "custom" && category !== "hidden")
         .flatMap(([, names]) => names)
-        .filter((name) => !hiddenThemeNames.includes(name))
+        .filter(
+          (name) =>
+            !hiddenThemeNames.includes(name) && !customThemeNames.includes(name)
+        )
     ),
   ];
-
-  if (themeNames.length === 0) {
-    await setTheme(appearance.theme);
-    await setBackground(appearance.theme);
-    return;
-  }
 
   const now = new Date();
 
@@ -363,7 +361,7 @@ async function applyDailyRandomBackground(
         action: "getSettingsData",
       })) as Settings;
 
-      await applyDailyRandomBackground(latestSettings.appearance, true);
+      await applyDailyRandomBackground(latestSettings.appearance);
     },
     Math.max(1000, nextUpdate.getTime() - now.getTime())
   );
