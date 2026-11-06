@@ -8823,8 +8823,11 @@ Is it scaring you off?`,
             data: file
           });
           if (!result?.id) throw new Error("Kan dit thema niet importeren.");
+          await updateTheme(result.id);
           await this.changeCategory("custom");
-          new Toast("Thema ge\xEFmporteerd.", "success").render();
+          await settingsWindow.loadPage(false);
+          await loadQuickSettings();
+          new Toast("Thema geimporteerd.", "success").render();
         } catch (error) {
           new Toast("Kan dit thema niet importeren.", "error").render();
         } finally {
@@ -16459,16 +16462,14 @@ ${code}`;
       includeHidden: true
     });
     const hiddenThemeNames = categories["hidden"] ?? [];
+    const customThemeNames = categories["custom"] ?? [];
     const themeNames = [
       ...new Set(
-        Object.entries(categories).filter(([category]) => category !== "custom" && category !== "hidden").flatMap(([, names]) => names).filter((name) => !hiddenThemeNames.includes(name))
+        Object.entries(categories).filter(([category]) => category !== "custom" && category !== "hidden").flatMap(([, names]) => names).filter(
+          (name) => !hiddenThemeNames.includes(name) && !customThemeNames.includes(name)
+        )
       )
     ];
-    if (themeNames.length === 0) {
-      await setTheme(appearance.theme);
-      await setBackground(appearance.theme);
-      return;
-    }
     const now = /* @__PURE__ */ new Date();
     const today = [
       now.getFullYear(),
@@ -16511,7 +16512,7 @@ ${code}`;
         const latestSettings = await browser.runtime.sendMessage({
           action: "getSettingsData"
         });
-        await applyDailyRandomBackground(latestSettings.appearance, true);
+        await applyDailyRandomBackground(latestSettings.appearance);
       },
       Math.max(1e3, nextUpdate.getTime() - now.getTime())
     );
