@@ -8823,8 +8823,11 @@ Is it scaring you off?`,
             data: file
           });
           if (!result?.id) throw new Error("Kan dit thema niet importeren.");
+          await updateTheme(result.id);
           await this.changeCategory("custom");
-          new Toast("Thema ge\xEFmporteerd.", "success").render();
+          await settingsWindow.loadPage(false);
+          await loadQuickSettings();
+          new Toast("Thema geimporteerd.", "success").render();
         } catch (error) {
           new Toast("Kan dit thema niet importeren.", "error").render();
         } finally {

@@ -1370,8 +1370,11 @@ export class ThemeSelector {
 
         if (!result?.id) throw new Error("Kan dit thema niet importeren.");
 
+        await updateTheme(result.id);
         await this.changeCategory("custom");
-        new Toast("Thema geïmporteerd.", "success").render();
+        await settingsWindow.loadPage(false);
+        await loadQuickSettings();
+        new Toast("Thema geimporteerd.", "success").render();
       } catch (error) {
         new Toast("Kan dit thema niet importeren.", "error").render();
       } finally {
