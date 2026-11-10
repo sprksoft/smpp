@@ -6572,7 +6572,13 @@ Is it scaring you off?`,
               "Daily random background"
             )
           );
-          this.settingsPage.appendChild(createSectionTitle("Top bar"));
+          this.settingsPage.appendChild(createSectionTitle("Glass"));
+          this.settingsPage.appendChild(
+            createDescription("Apply a glassy effect to the UI.")
+          );
+          this.settingsPage.appendChild(
+            createSettingsButtonWithLabel("settings-page-glass-button", "Glass")
+          );
           this.settingsPage.appendChild(
             createDescription("Make the topbar transparant.")
           );
@@ -6581,13 +6587,6 @@ Is it scaring you off?`,
               "settings-page-topnav-background-button",
               "Transparent top bar"
             )
-          );
-          this.settingsPage.appendChild(createSectionTitle("Glass"));
-          this.settingsPage.appendChild(
-            createDescription("Apply a glassy effect to the UI.")
-          );
-          this.settingsPage.appendChild(
-            createSettingsButtonWithLabel("settings-page-glass-button", "Glass")
           );
           this.settingsPage.appendChild(createSectionTitle("Background blur"));
           this.settingsPage.appendChild(

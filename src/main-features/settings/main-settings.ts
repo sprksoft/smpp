@@ -1253,7 +1253,13 @@ export class SettingsWindow extends BaseWindow {
           )
         );
 
-        this.settingsPage.appendChild(createSectionTitle("Top bar"));
+        this.settingsPage.appendChild(createSectionTitle("Glass"));
+        this.settingsPage.appendChild(
+          createDescription("Apply a glassy effect to the UI.")
+        );
+        this.settingsPage.appendChild(
+          createSettingsButtonWithLabel("settings-page-glass-button", "Glass")
+        );
         this.settingsPage.appendChild(
           createDescription("Make the topbar transparant.")
         );
@@ -1262,14 +1268,6 @@ export class SettingsWindow extends BaseWindow {
             "settings-page-topnav-background-button",
             "Transparent top bar"
           )
-        );
-
-        this.settingsPage.appendChild(createSectionTitle("Glass"));
-        this.settingsPage.appendChild(
-          createDescription("Apply a glassy effect to the UI.")
-        );
-        this.settingsPage.appendChild(
-          createSettingsButtonWithLabel("settings-page-glass-button", "Glass")
         );
 
         this.settingsPage.appendChild(createSectionTitle("Background blur"));
