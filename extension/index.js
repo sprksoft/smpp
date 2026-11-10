@@ -15884,7 +15884,7 @@ ${code}`;
       }
       if (document.body.classList.contains("smpp-pomodoro-active")) {
         const elements = document.querySelectorAll(
-          ".smpp-settings-window, .smpp-settings-modal, [class*='settings-window'], [class*='settings-modal']"
+          ".smpp-settings-window, .smpp-settings-modal, [class*='settings-window'], [class*='settings-modal'], #global_chat_window"
         );
         elements.forEach((el) => el.remove());
       }

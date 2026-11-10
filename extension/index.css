@@ -16290,6 +16290,7 @@ body.smpp-pomodoro-active .smpp-button,
 body.smpp-pomodoro-active .smpp-dmenu,
 body.smpp-pomodoro-active .smpp-dmenu-btn,
 body.smpp-pomodoro-active #quick-menu-button,
+body.smpp-pomodoro-active #global_chat_button,
 body.smpp-pomodoro-active [id*=quick-menu],
 body.smpp-pomodoro-active [class*=quick-menu],
 body.smpp-pomodoro-active #smpp-settings-btn,
@@ -16323,7 +16324,8 @@ body.smpp-pomodoro-active .smpp-profile-window,
 body.smpp-pomodoro-active [id*=smpp-settings],
 body.smpp-pomodoro-active [class*=smpp-settings],
 body.smpp-pomodoro-active .smpp-dmenu-container,
-body.smpp-pomodoro-active [id*=dmenu-window] {
+body.smpp-pomodoro-active [id*=dmenu-window],
+body.smpp-pomodoro-active #global_chat_window {
   display: none !important;
   pointer-events: none !important;
   visibility: hidden !important;
