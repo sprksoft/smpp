@@ -152,8 +152,7 @@ body.smpp-pomodoro-active [id*="profile-menu"],
 body.smpp-pomodoro-active [class*="user-menu"],
 body.smpp-pomodoro-active [id*="user-menu"],
 body.smpp-pomodoro-active [data-menu="profile"],
-body.smpp-pomodoro-active
-  .smpp-widget:not([data-widget-name="PomodoroWidget"]) {
+body.smpp-pomodoro-active .smpp-widget.smpp-game-widget {
   opacity: 0.4 !important;
   filter: blur(2px) !important;
   pointer-events: none !important;

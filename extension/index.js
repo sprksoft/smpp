@@ -10943,6 +10943,7 @@ Your version: <b>${data.plantVersion}</b> is not the newest available version`;
     }
     constructor() {
       super();
+      this.element.classList.add("smpp-game-widget");
       document.addEventListener("keydown", async (e5) => {
         if (e5.repeat) {
           return;

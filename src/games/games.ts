@@ -82,6 +82,7 @@ export class GameBase extends WidgetBase {
 
   constructor() {
     super();
+    this.element.classList.add("smpp-game-widget");
     document.addEventListener("keydown", async (e) => {
       if (e.repeat) {
         return;
