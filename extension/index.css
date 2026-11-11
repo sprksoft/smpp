@@ -2186,7 +2186,6 @@ html {
   min-width: calc(300px + 1rem * 2);
   max-width: calc(300px + (1rem) * 2);
   background-color: var(--color-homepage-sidebars-bg);
-  backdrop-filter: blur(4px);
   overflow: auto;
 }
 .smpp-widget-insertion-point {

@@ -135,7 +135,6 @@ html {
   ); /* panelWidth(300px) + widgetMargin(1rem) + widgetBorderSize(3px) * 2  // times 2 because left and right border+margin */
   max-width: calc(300px + (1rem) * 2);
   background-color: var(--color-homepage-sidebars-bg);
-  backdrop-filter: blur(4px);
   overflow: auto; /* Enable scroll because when there are too many widgets in 1 panel the page scrolls weird*/
 }
 
