@@ -32,6 +32,7 @@ export type Settings = {
   appearance: {
     theme: string;
     dailyRandomBackground: boolean;
+    randomBackgroundInterval: "week" | "day" | "afternoon" | "hour";
     topNavBackgroundHidden: boolean;
     glass: boolean;
     quickSettingsThemes: string[];
@@ -375,6 +376,15 @@ export class SettingsWindow extends BaseWindow {
         if (dailyRandomBackgroundButton) {
           dailyRandomBackgroundButton.checked =
             settings.appearance.dailyRandomBackground;
+        }
+
+        const randomBackgroundInterval = settings.appearance
+          .randomBackgroundInterval ?? "day";
+        const randomBackgroundIntervalInput = document.querySelector(
+          `input[name="settings-page-random-background-interval"][value="${randomBackgroundInterval}"]`
+        ) as HTMLInputElement | null;
+        if (randomBackgroundIntervalInput) {
+          randomBackgroundIntervalInput.checked = true;
         }
 
         const topNavBackgroundButton = document.getElementById(
@@ -768,6 +778,21 @@ export class SettingsWindow extends BaseWindow {
           "settings-page-daily-random-background-button"
         );
 
+        const checkedRandomBackgroundInterval = document.querySelector(
+          'input[name="settings-page-random-background-interval"]:checked'
+        ) as HTMLInputElement | null;
+        const newRandomBackgroundInterval =
+          (checkedRandomBackgroundInterval?.value as
+            | "week"
+            | "day"
+            | "afternoon"
+            | "hour") ?? "day";
+        const randomBackgroundIntervalChanged =
+          previousSettings.appearance.randomBackgroundInterval !==
+          newRandomBackgroundInterval;
+        settings.appearance.randomBackgroundInterval =
+          newRandomBackgroundInterval;
+
         settings.appearance.topNavBackgroundHidden = (
           document.getElementById(
             "settings-page-topnav-background-button"
@@ -780,7 +805,7 @@ export class SettingsWindow extends BaseWindow {
 
         await applyAppearance(
           settings.appearance,
-          justEnabledDailyRandomBackground
+          justEnabledDailyRandomBackground || randomBackgroundIntervalChanged
         );
 
         // Apply weather effects if they changed
@@ -1252,6 +1277,53 @@ export class SettingsWindow extends BaseWindow {
             "Daily random background"
           )
         );
+
+        this.settingsPage.appendChild(
+          createSectionTitle("Random background interval")
+        );
+        this.settingsPage.appendChild(
+          createDescription(
+            "Choose how often the random background changes."
+          )
+        );
+
+        let randomBackgroundIntervalContainer = document.createElement("div");
+        randomBackgroundIntervalContainer.classList.add(
+          "settings-page-icons-container",
+          "settings-page-random-background-interval-container"
+        );
+
+        const intervalOptions: Array<{
+          value: "week" | "day" | "afternoon" | "hour";
+          label: string;
+        }> = [
+          { value: "week", label: "Week" },
+          { value: "day", label: "Day" },
+          { value: "afternoon", label: "Afternoon" },
+          { value: "hour", label: "Hour" },
+        ];
+
+        intervalOptions.forEach((option) => {
+          let optionLabel = document.createElement("label");
+          optionLabel.classList.add(
+            "settings-page-random-background-interval-option"
+          );
+
+          let input = document.createElement("input");
+          input.type = "radio";
+          input.name = "settings-page-random-background-interval";
+          input.value = option.value;
+          input.id = `settings-page-random-background-interval-${option.value}`;
+
+          let text = document.createElement("span");
+          text.innerText = option.label;
+
+          optionLabel.appendChild(input);
+          optionLabel.appendChild(text);
+          randomBackgroundIntervalContainer.appendChild(optionLabel);
+        });
+
+        this.settingsPage.appendChild(randomBackgroundIntervalContainer);
 
         this.settingsPage.appendChild(createSectionTitle("Glass"));
         this.settingsPage.appendChild(

@@ -3,6 +3,7 @@
   "useSMpfp": false,
   "theme": "default",
   "dailyRandomBackground": false,
+  "randomBackgroundInterval": "day",
   "topNavBackgroundHidden": false,
   "glass": false,
   "quickSettingsThemes": [

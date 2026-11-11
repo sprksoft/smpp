@@ -5918,6 +5918,13 @@ Is it scaring you off?`,
           if (dailyRandomBackgroundButton) {
             dailyRandomBackgroundButton.checked = settings.appearance.dailyRandomBackground;
           }
+          const randomBackgroundInterval = settings.appearance.randomBackgroundInterval ?? "day";
+          const randomBackgroundIntervalInput = document.querySelector(
+            `input[name="settings-page-random-background-interval"][value="${randomBackgroundInterval}"]`
+          );
+          if (randomBackgroundIntervalInput) {
+            randomBackgroundIntervalInput.checked = true;
+          }
           const topNavBackgroundButton = document.getElementById(
             "settings-page-topnav-background-button"
           );
@@ -6206,6 +6213,12 @@ Is it scaring you off?`,
           settings.appearance.dailyRandomBackground = getCheckboxValue(
             "settings-page-daily-random-background-button"
           );
+          const checkedRandomBackgroundInterval = document.querySelector(
+            'input[name="settings-page-random-background-interval"]:checked'
+          );
+          const newRandomBackgroundInterval = checkedRandomBackgroundInterval?.value ?? "day";
+          const randomBackgroundIntervalChanged = previousSettings.appearance.randomBackgroundInterval !== newRandomBackgroundInterval;
+          settings.appearance.randomBackgroundInterval = newRandomBackgroundInterval;
           settings.appearance.topNavBackgroundHidden = document.getElementById(
             "settings-page-topnav-background-button"
           ).checked;
@@ -6214,7 +6227,7 @@ Is it scaring you off?`,
           );
           await applyAppearance(
             settings.appearance,
-            justEnabledDailyRandomBackground
+            justEnabledDailyRandomBackground || randomBackgroundIntervalChanged
           );
           if (JSON.stringify(settings.appearance.weatherOverlay) !== JSON.stringify(previousSettings.appearance.weatherOverlay) && !liteMode) {
             applyWeatherEffects(settings.appearance.weatherOverlay);
@@ -6572,6 +6585,42 @@ Is it scaring you off?`,
               "Daily random background"
             )
           );
+          this.settingsPage.appendChild(
+            createSectionTitle("Random background interval")
+          );
+          this.settingsPage.appendChild(
+            createDescription(
+              "Choose how often the random background changes."
+            )
+          );
+          let randomBackgroundIntervalContainer = document.createElement("div");
+          randomBackgroundIntervalContainer.classList.add(
+            "settings-page-icons-container",
+            "settings-page-random-background-interval-container"
+          );
+          const intervalOptions = [
+            { value: "week", label: "Week" },
+            { value: "day", label: "Day" },
+            { value: "afternoon", label: "Afternoon" },
+            { value: "hour", label: "Hour" }
+          ];
+          intervalOptions.forEach((option) => {
+            let optionLabel = document.createElement("label");
+            optionLabel.classList.add(
+              "settings-page-random-background-interval-option"
+            );
+            let input = document.createElement("input");
+            input.type = "radio";
+            input.name = "settings-page-random-background-interval";
+            input.value = option.value;
+            input.id = `settings-page-random-background-interval-${option.value}`;
+            let text = document.createElement("span");
+            text.innerText = option.label;
+            optionLabel.appendChild(input);
+            optionLabel.appendChild(text);
+            randomBackgroundIntervalContainer.appendChild(optionLabel);
+          });
+          this.settingsPage.appendChild(randomBackgroundIntervalContainer);
           this.settingsPage.appendChild(createSectionTitle("Glass"));
           this.settingsPage.appendChild(
             createDescription("Apply a glassy effect to the UI.")
@@ -16441,8 +16490,68 @@ ${code}`;
     liteMode = browser.runtime.getManifest().name.includes("Lite");
   }
   var dailyBackgroundTimer;
-  var DAILY_UPDATE_HOUR = 0;
-  var DAILY_UPDATE_MINUTE = 0;
+  function getRandomBackgroundInterval(appearance) {
+    return appearance.randomBackgroundInterval ?? "day";
+  }
+  function getCurrentRandomBackgroundBucket(now, interval) {
+    const bucket = new Date(now);
+    switch (interval) {
+      case "hour":
+        bucket.setSeconds(0, 0);
+        bucket.setMilliseconds(0);
+        bucket.setMinutes(0);
+        break;
+      case "afternoon":
+        bucket.setSeconds(0, 0);
+        bucket.setMinutes(0);
+        bucket.setHours(12, 0, 0, 0);
+        if (bucket.getTime() > now.getTime()) {
+          bucket.setDate(bucket.getDate() - 1);
+        }
+        break;
+      case "day":
+        bucket.setHours(0, 0, 0, 0);
+        break;
+      case "week":
+        bucket.setHours(0, 0, 0, 0);
+        const daysSinceMonday = (bucket.getDay() + 6) % 7;
+        bucket.setDate(bucket.getDate() - daysSinceMonday);
+        break;
+    }
+    return bucket.getTime().toString();
+  }
+  function getNextRandomBackgroundBoundary(now, interval) {
+    const next = new Date(now);
+    switch (interval) {
+      case "hour":
+        next.setSeconds(0, 0);
+        next.setMilliseconds(0);
+        next.setMinutes(0);
+        next.setHours(next.getHours() + 1);
+        break;
+      case "afternoon":
+        next.setHours(12, 0, 0, 0);
+        if (next.getTime() <= now.getTime()) {
+          next.setDate(next.getDate() + 1);
+        }
+        break;
+      case "day":
+        next.setHours(0, 0, 0, 0);
+        if (next.getTime() <= now.getTime()) {
+          next.setDate(next.getDate() + 1);
+        }
+        break;
+      case "week": {
+        next.setHours(0, 0, 0, 0);
+        const daysUntilMonday = (1 - next.getDay() + 7) % 7;
+        next.setDate(
+          next.getDate() + (daysUntilMonday === 0 ? 7 : daysUntilMonday)
+        );
+        break;
+      }
+    }
+    return next;
+  }
   async function applyDailyRandomBackground(appearance, chooseNew = false) {
     if (dailyBackgroundTimer) {
       clearTimeout(dailyBackgroundTimer);
@@ -16451,9 +16560,17 @@ ${code}`;
     if (!appearance.dailyRandomBackground) {
       localStorage.removeItem("smpp-daily-background-date");
       localStorage.removeItem("smpp-daily-background-theme");
+      localStorage.removeItem("smpp-daily-background-interval");
       await setBackground(appearance.theme);
       return;
     }
+    const interval = getRandomBackgroundInterval(appearance);
+    const storedInterval = localStorage.getItem("smpp-daily-background-interval");
+    if (storedInterval !== interval) {
+      localStorage.removeItem("smpp-daily-background-date");
+      localStorage.removeItem("smpp-daily-background-theme");
+    }
+    localStorage.setItem("smpp-daily-background-interval", interval);
     const categories = await browser.runtime.sendMessage({
       action: "getThemeCategories",
       includeHidden: true
@@ -16470,17 +16587,10 @@ ${code}`;
       return;
     }
     const now = /* @__PURE__ */ new Date();
-    const today = [
-      now.getFullYear(),
-      String(now.getMonth() + 1).padStart(2, "0"),
-      String(now.getDate()).padStart(2, "0")
-    ].join("-");
-    const updateTime = new Date(now);
-    updateTime.setHours(DAILY_UPDATE_HOUR, DAILY_UPDATE_MINUTE, 0, 0);
-    const updateTimePassed = now >= updateTime;
-    const lastUpdateDate = localStorage.getItem("smpp-daily-background-date");
+    const currentBucket = getCurrentRandomBackgroundBucket(now, interval);
+    const lastBucket = localStorage.getItem("smpp-daily-background-date");
     let selectedTheme = localStorage.getItem("smpp-daily-background-theme");
-    const needsNewTheme = !selectedTheme || !themeNames.includes(selectedTheme) || updateTimePassed && lastUpdateDate !== today || chooseNew && updateTimePassed;
+    const needsNewTheme = !selectedTheme || !themeNames.includes(selectedTheme) || lastBucket !== currentBucket || chooseNew;
     if (needsNewTheme) {
       const randomTheme = themeNames[Math.floor(Math.random() * themeNames.length)];
       if (!randomTheme) {
@@ -16490,9 +16600,7 @@ ${code}`;
       }
       selectedTheme = randomTheme;
       localStorage.setItem("smpp-daily-background-theme", selectedTheme);
-      if (updateTimePassed) {
-        localStorage.setItem("smpp-daily-background-date", today);
-      }
+      localStorage.setItem("smpp-daily-background-date", currentBucket);
     }
     if (!selectedTheme) {
       await setTheme(appearance.theme);
@@ -16501,11 +16609,7 @@ ${code}`;
     }
     await setTheme(selectedTheme);
     await setBackground(selectedTheme);
-    const nextUpdate = new Date(now);
-    nextUpdate.setHours(DAILY_UPDATE_HOUR, DAILY_UPDATE_MINUTE, 0, 0);
-    if (nextUpdate <= now) {
-      nextUpdate.setDate(nextUpdate.getDate() + 1);
-    }
+    const nextUpdate = getNextRandomBackgroundBoundary(now, interval);
     dailyBackgroundTimer = setTimeout(
       async () => {
         const latestSettings = await browser.runtime.sendMessage({
