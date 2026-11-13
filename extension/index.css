@@ -2186,7 +2186,6 @@ html {
   min-width: calc(300px + 1rem * 2);
   max-width: calc(300px + (1rem) * 2);
   background-color: var(--color-homepage-sidebars-bg);
-  backdrop-filter: blur(4px);
   overflow: auto;
 }
 .smpp-widget-insertion-point {
@@ -3525,18 +3524,18 @@ button .bottom-container-button:active {
 .theme-button-container {
   position: absolute;
   top: 6px;
+  left: 6px;
   right: 6px;
-  max-width: calc(100% - 12px);
   display: flex;
   flex-direction: row;
-  gap: 3px;
+  gap: 4px;
 }
 .theme-button-container .bottom-container-button {
   box-sizing: border-box;
-  flex: 0 1 28px;
+  flex: 1 1 0;
   min-width: 0;
-  width: 28px !important;
-  height: 28px;
+  width: auto !important;
+  height: 32px;
   padding: 4px !important;
   border-radius: 8px !important;
   box-shadow: none !important;
@@ -4352,6 +4351,28 @@ button.open-theme-editor-button:hover {
 .sharing-color-previews .color-preview-bubble {
   width: 3rem;
   cursor: default !important;
+}
+.settings-page-random-background-interval-container {
+  margin-bottom: 1rem;
+  gap: 0.5rem;
+}
+.settings-page-random-background-interval-option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  background-color: var(--color-base01);
+  cursor: pointer;
+  box-shadow: 0px 2px 10px 0px var(--color-shadow);
+}
+.settings-page-random-background-interval-option input {
+  display: none;
+}
+.settings-page-random-background-interval-option:has(input:checked) {
+  background-color: var(--color-accent);
+  color: var(--color-base00);
 }
 
 /* src/styles/smpp-styles/assignments.css */
@@ -9083,28 +9104,34 @@ hr.separator.todo-column__pinned__seperator {
   backdrop-filter: var(--small-blur) !important;
 }
 button[class*=button-module_button__].bp-c-combo-hover-plain-outline--300,
-button[class*=button-module_button__].bp-c-combo-plain-outline--300 {
+button[class*=button-module_button__].bp-c-combo-plain-outline--300,
+button[class*=button-module_button__].bp-color-plain-outline.bp-tint-300 {
   color: var(--color-text) !important;
   background: var(--color-base01) !important;
   border: 2px solid var(--color-base02) !important;
   border-radius: 1rem !important;
 }
 .glass button[class*=button-module_button__].bp-c-combo-hover-plain-outline--300,
-.glass button[class*=button-module_button__].bp-c-combo-plain-outline--300 {
+.glass button[class*=button-module_button__].bp-c-combo-plain-outline--300,
+.glass button[class*=button-module_button__].bp-color-plain-outline.bp-tint-300 {
   background: var(--darken-background) !important;
   backdrop-filter: var(--small-blur) !important;
 }
 button[class*=button-module_button__].bp-c-combo-hover-plain-outline--300:hover,
-button[class*=button-module_button__].bp-c-combo-plain-outline--300:hover {
+button[class*=button-module_button__].bp-c-combo-plain-outline--300:hover,
+button[class*=button-module_button__].bp-color-plain-outline.bp-tint-300:hover {
   background: var(--color-base02) !important;
   border-color: var(--color-accent) !important;
 }
-button[class*=button-module_button__].bp-c-combo-hover-plain-outline--300 [class*=label-],
+button[class*=button-module_button__].bp-c-combo-hover-plain-outline--300 [class*=label],
 button[class*=button-module_button__].bp-c-combo-hover-plain-outline--300 [class*=text-],
 button[class*=button-module_button__].bp-c-combo-hover-plain-outline--300 svg path,
-button[class*=button-module_button__].bp-c-combo-plain-outline--300 [class*=label-],
+button[class*=button-module_button__].bp-c-combo-plain-outline--300 [class*=label],
 button[class*=button-module_button__].bp-c-combo-plain-outline--300 [class*=text-],
-button[class*=button-module_button__].bp-c-combo-plain-outline--300 svg path {
+button[class*=button-module_button__].bp-c-combo-plain-outline--300 svg path,
+button[class*=button-module_button__].bp-color-plain-outline.bp-tint-300 [class*=label],
+button[class*=button-module_button__].bp-color-plain-outline.bp-tint-300 [class*=text-],
+button[class*=button-module_button__].bp-color-plain-outline.bp-tint-300 svg path {
   color: var(--color-text) !important;
   fill: currentColor !important;
 }
@@ -10209,12 +10236,14 @@ input.textInput-module_input__QXUhg,
 }
 .blueprintFallback-module_blueprintFallback__OTQiZ .bp-c-combo-hover-plain-outline--300,
 .blueprintFallback-module_blueprintFallback__OTQiZ .bp-c-combo-plain-outline--300,
+.blueprintFallback-module_blueprintFallback__OTQiZ .bp-color-plain-outline.bp-tint-300,
 .dateButton-jZ2Yb {
   background-color: var(--color-base01) !important;
   border-color: var(--color-base02) !important;
 }
 .blueprintFallback-module_blueprintFallback__OTQiZ .bp-c-combo-hover-plain-outline--300,
 .blueprintFallback-module_blueprintFallback__OTQiZ .bp-c-combo-plain-outline--300:hover,
+.blueprintFallback-module_blueprintFallback__OTQiZ .bp-color-plain-outline.bp-tint-300:hover,
 .dateButton-jZ2Yb:hover {
   background-color: var(--color-base02) !important;
   border-color: var(--color-base03) !important;
@@ -16282,6 +16311,7 @@ body.smpp-pomodoro-active .smpp-button,
 body.smpp-pomodoro-active .smpp-dmenu,
 body.smpp-pomodoro-active .smpp-dmenu-btn,
 body.smpp-pomodoro-active #quick-menu-button,
+body.smpp-pomodoro-active #global_chat_button,
 body.smpp-pomodoro-active [id*=quick-menu],
 body.smpp-pomodoro-active [class*=quick-menu],
 body.smpp-pomodoro-active #smpp-settings-btn,
@@ -16297,7 +16327,7 @@ body.smpp-pomodoro-active [id*=profile-menu],
 body.smpp-pomodoro-active [class*=user-menu],
 body.smpp-pomodoro-active [id*=user-menu],
 body.smpp-pomodoro-active [data-menu=profile],
-body.smpp-pomodoro-active .smpp-widget:not([data-widget-name=PomodoroWidget]) {
+body.smpp-pomodoro-active .smpp-widget.smpp-game-widget {
   opacity: 0.4 !important;
   filter: blur(2px) !important;
   pointer-events: none !important;
@@ -16315,7 +16345,8 @@ body.smpp-pomodoro-active .smpp-profile-window,
 body.smpp-pomodoro-active [id*=smpp-settings],
 body.smpp-pomodoro-active [class*=smpp-settings],
 body.smpp-pomodoro-active .smpp-dmenu-container,
-body.smpp-pomodoro-active [id*=dmenu-window] {
+body.smpp-pomodoro-active [id*=dmenu-window],
+body.smpp-pomodoro-active #global_chat_window {
   display: none !important;
   pointer-events: none !important;
   visibility: hidden !important;

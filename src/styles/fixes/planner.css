@@ -354,7 +354,8 @@ hr.separator.todo-column__pinned__seperator {
    unstyled text over the custom background. Anchor on the stable module prefix +
    the bp combo outline class. */
 button[class*="button-module_button__"].bp-c-combo-hover-plain-outline--300,
-button[class*="button-module_button__"].bp-c-combo-plain-outline--300 {
+button[class*="button-module_button__"].bp-c-combo-plain-outline--300,
+button[class*="button-module_button__"].bp-color-plain-outline.bp-tint-300 {
   color: var(--color-text) !important;
   background: var(--color-base01) !important;
   border: 2px solid var(--color-base02) !important;
@@ -363,30 +364,38 @@ button[class*="button-module_button__"].bp-c-combo-plain-outline--300 {
 
 .glass
   button[class*="button-module_button__"].bp-c-combo-hover-plain-outline--300,
-.glass button[class*="button-module_button__"].bp-c-combo-plain-outline--300 {
+.glass button[class*="button-module_button__"].bp-c-combo-plain-outline--300,
+.glass
+  button[class*="button-module_button__"].bp-color-plain-outline.bp-tint-300 {
   background: var(--darken-background) !important;
   backdrop-filter: var(--small-blur) !important;
 }
 
 button[class*="button-module_button__"].bp-c-combo-hover-plain-outline--300:hover,
-button[class*="button-module_button__"].bp-c-combo-plain-outline--300:hover {
+button[class*="button-module_button__"].bp-c-combo-plain-outline--300:hover,
+button[class*="button-module_button__"].bp-color-plain-outline.bp-tint-300:hover {
   background: var(--color-base02) !important;
   border-color: var(--color-accent) !important;
 }
 
 /* label + icons inside the button */
 button[class*="button-module_button__"].bp-c-combo-hover-plain-outline--300
-  [class*="label-"],
+  [class*="label"],
 button[class*="button-module_button__"].bp-c-combo-hover-plain-outline--300
   [class*="text-"],
 button[class*="button-module_button__"].bp-c-combo-hover-plain-outline--300
   svg
   path,
 button[class*="button-module_button__"].bp-c-combo-plain-outline--300
-  [class*="label-"],
+  [class*="label"],
 button[class*="button-module_button__"].bp-c-combo-plain-outline--300
   [class*="text-"],
-button[class*="button-module_button__"].bp-c-combo-plain-outline--300 svg path {
+button[class*="button-module_button__"].bp-c-combo-plain-outline--300 svg path,
+button[class*="button-module_button__"].bp-color-plain-outline.bp-tint-300
+  [class*="label"],
+button[class*="button-module_button__"].bp-color-plain-outline.bp-tint-300
+  [class*="text-"],
+button[class*="button-module_button__"].bp-color-plain-outline.bp-tint-300 svg path {
   color: var(--color-text) !important;
   fill: currentColor !important;
 }
@@ -1805,6 +1814,8 @@ input.textInput-module_input__QXUhg,
   .bp-c-combo-hover-plain-outline--300,
 .blueprintFallback-module_blueprintFallback__OTQiZ
   .bp-c-combo-plain-outline--300,
+.blueprintFallback-module_blueprintFallback__OTQiZ
+  .bp-color-plain-outline.bp-tint-300,
 .dateButton-jZ2Yb {
   background-color: var(--color-base01) !important;
   border-color: var(--color-base02) !important;
@@ -1814,6 +1825,8 @@ input.textInput-module_input__QXUhg,
   .bp-c-combo-hover-plain-outline--300,
 .blueprintFallback-module_blueprintFallback__OTQiZ
   .bp-c-combo-plain-outline--300:hover,
+.blueprintFallback-module_blueprintFallback__OTQiZ
+  .bp-color-plain-outline.bp-tint-300:hover,
 .dateButton-jZ2Yb:hover {
   background-color: var(--color-base02) !important;
   border-color: var(--color-base03) !important;
