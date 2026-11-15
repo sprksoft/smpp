@@ -31,7 +31,7 @@ export type Settings = {
   };
   appearance: {
     theme: string;
-    RandomTheme: boolean;
+    randomTheme: boolean;
     randomThemeInterval: "week" | "day" | "afternoon" | "hour";
     topNavBackgroundHidden: boolean;
     glass: boolean;
@@ -369,13 +369,13 @@ export class SettingsWindow extends BaseWindow {
           tile.updateSelection();
         });
 
-        const RandomThemeButton = document.getElementById(
+        const randomThemeButton = document.getElementById(
           "settings-page-random-theme-button"
         ) as HTMLInputElement | null;
 
-        if (RandomThemeButton) {
-          RandomThemeButton.checked =
-            settings.appearance.RandomTheme;
+        if (randomThemeButton) {
+          randomThemeButton.checked =
+            settings.appearance.randomTheme;
         }
 
         const randomThemeInterval = settings.appearance
@@ -771,10 +771,10 @@ export class SettingsWindow extends BaseWindow {
           "settings-page-show-news-button"
         );
         const justEnabledRandomTheme =
-          !previousSettings.appearance.RandomTheme &&
+          !previousSettings.appearance.randomTheme &&
           getCheckboxValue("settings-page-random-theme-button");
 
-        settings.appearance.RandomTheme = getCheckboxValue(
+        settings.appearance.randomTheme = getCheckboxValue(
           "settings-page-random-theme-button"
         );
 

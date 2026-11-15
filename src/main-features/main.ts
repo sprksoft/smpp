@@ -256,7 +256,7 @@ async function createGlobals() {
   var quicks = await quickLoad();
   liteMode = browser.runtime.getManifest().name.includes("Lite");
 }
-let ThemeTimer: ReturnType<typeof setTimeout> | undefined;
+let themeTimer: ReturnType<typeof setTimeout> | undefined;
 
 const DAILY_UPDATE_HOUR = 0;
 const DAILY_UPDATE_MINUTE = 0;
@@ -342,12 +342,12 @@ async function applyRandomTheme(
   appearance: Settings["appearance"],
   chooseNew = false
 ) {
-  if (ThemeTimer) {
-    clearTimeout(ThemeTimer);
-    ThemeTimer = undefined;
+  if (themeTimer) {
+    clearTimeout(themeTimer);
+    themeTimer = undefined;
   }
 
-  if (!appearance.RandomTheme) {
+  if (!appearance.randomTheme) {
     localStorage.removeItem("smpp-theme-date");
     localStorage.removeItem("smpp-theme-theme");
     localStorage.removeItem("smpp-theme-interval");
@@ -427,7 +427,7 @@ async function applyRandomTheme(
 
   const nextUpdate = getNextRandomThemeBoundary(now, interval);
 
-  ThemeTimer = setTimeout(
+  themeTimer = setTimeout(
     async () => {
       const latestSettings = (await browser.runtime.sendMessage({
         action: "getSettingsData",
@@ -454,7 +454,7 @@ export async function applyAppearance(
     "smpp-topbar-transparent",
     appearance.topNavBackgroundHidden
   );
-  if (!appearance.RandomTheme) {
+  if (!appearance.randomTheme) {
     await setTheme(appearance.theme);
   }
 
