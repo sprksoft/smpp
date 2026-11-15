@@ -256,18 +256,18 @@ async function createGlobals() {
   var quicks = await quickLoad();
   liteMode = browser.runtime.getManifest().name.includes("Lite");
 }
-let dailyBackgroundTimer: ReturnType<typeof setTimeout> | undefined;
+let ThemeTimer: ReturnType<typeof setTimeout> | undefined;
 
 const DAILY_UPDATE_HOUR = 0;
 const DAILY_UPDATE_MINUTE = 0;
 
-function getRandomBackgroundInterval(
+function getRandomThemeInterval(
   appearance: Settings["appearance"]
 ): "week" | "day" | "afternoon" | "hour" {
-  return appearance.randomBackgroundInterval ?? "day";
+  return appearance.randomThemeInterval ?? "day";
 }
 
-function getCurrentRandomBackgroundBucket(
+function getCurrentRandomThemeBucket(
   now: Date,
   interval: "week" | "day" | "afternoon" | "hour"
 ): string {
@@ -300,7 +300,7 @@ function getCurrentRandomBackgroundBucket(
   return bucket.getTime().toString();
 }
 
-function getNextRandomBackgroundBoundary(
+function getNextRandomThemeBoundary(
   now: Date,
   interval: "week" | "day" | "afternoon" | "hour"
 ): Date {
@@ -338,31 +338,31 @@ function getNextRandomBackgroundBoundary(
   return next;
 }
 
-async function applyDailyRandomBackground(
+async function applyRandomTheme(
   appearance: Settings["appearance"],
   chooseNew = false
 ) {
-  if (dailyBackgroundTimer) {
-    clearTimeout(dailyBackgroundTimer);
-    dailyBackgroundTimer = undefined;
+  if (ThemeTimer) {
+    clearTimeout(ThemeTimer);
+    ThemeTimer = undefined;
   }
 
-  if (!appearance.dailyRandomBackground) {
-    localStorage.removeItem("smpp-daily-background-date");
-    localStorage.removeItem("smpp-daily-background-theme");
-    localStorage.removeItem("smpp-daily-background-interval");
+  if (!appearance.RandomTheme) {
+    localStorage.removeItem("smpp-theme-date");
+    localStorage.removeItem("smpp-theme-theme");
+    localStorage.removeItem("smpp-theme-interval");
     await setBackground(appearance.theme);
     return;
   }
 
-  const interval = getRandomBackgroundInterval(appearance);
+  const interval = getRandomThemeInterval(appearance);
 
-  const storedInterval = localStorage.getItem("smpp-daily-background-interval");
+  const storedInterval = localStorage.getItem("smpp-theme-interval");
   if (storedInterval !== interval) {
-    localStorage.removeItem("smpp-daily-background-date");
-    localStorage.removeItem("smpp-daily-background-theme");
+    localStorage.removeItem("smpp-theme-date");
+    localStorage.removeItem("smpp-theme-theme");
   }
-  localStorage.setItem("smpp-daily-background-interval", interval);
+  localStorage.setItem("smpp-theme-interval", interval);
 
   const categories = (await browser.runtime.sendMessage({
     action: "getThemeCategories",
@@ -388,11 +388,11 @@ async function applyDailyRandomBackground(
 
   const now = new Date();
 
-  const currentBucket = getCurrentRandomBackgroundBucket(now, interval);
+  const currentBucket = getCurrentRandomThemeBucket(now, interval);
 
-  const lastBucket = localStorage.getItem("smpp-daily-background-date");
+  const lastBucket = localStorage.getItem("smpp-theme-date");
 
-  let selectedTheme = localStorage.getItem("smpp-daily-background-theme");
+  let selectedTheme = localStorage.getItem("smpp-theme-theme");
 
   const needsNewTheme =
     !selectedTheme ||
@@ -412,8 +412,8 @@ async function applyDailyRandomBackground(
 
     selectedTheme = randomTheme;
 
-    localStorage.setItem("smpp-daily-background-theme", selectedTheme);
-    localStorage.setItem("smpp-daily-background-date", currentBucket);
+    localStorage.setItem("smpp-theme-theme", selectedTheme);
+    localStorage.setItem("smpp-theme-date", currentBucket);
   }
 
   if (!selectedTheme) {
@@ -425,15 +425,15 @@ async function applyDailyRandomBackground(
   await setTheme(selectedTheme as typeof appearance.theme);
   await setBackground(selectedTheme);
 
-  const nextUpdate = getNextRandomBackgroundBoundary(now, interval);
+  const nextUpdate = getNextRandomThemeBoundary(now, interval);
 
-  dailyBackgroundTimer = setTimeout(
+  ThemeTimer = setTimeout(
     async () => {
       const latestSettings = (await browser.runtime.sendMessage({
         action: "getSettingsData",
       })) as Settings;
 
-      await applyDailyRandomBackground(latestSettings.appearance, true);
+      await applyRandomTheme(latestSettings.appearance, true);
     },
     Math.max(1000, nextUpdate.getTime() - now.getTime())
   );
@@ -441,7 +441,7 @@ async function applyDailyRandomBackground(
 
 export async function applyAppearance(
   appearance: Settings["appearance"],
-  forceRandomBackground = false
+  forceRandomTheme = false
 ) {
   let style = document.documentElement.style;
   if (appearance.glass) {
@@ -454,11 +454,11 @@ export async function applyAppearance(
     "smpp-topbar-transparent",
     appearance.topNavBackgroundHidden
   );
-  if (!appearance.dailyRandomBackground) {
+  if (!appearance.RandomTheme) {
     await setTheme(appearance.theme);
   }
 
-  await applyDailyRandomBackground(appearance, forceRandomBackground);
+  await applyRandomTheme(appearance, forceRandomTheme);
   updateNews(appearance.news);
   updateTabLogo(appearance.tabLogo);
 
