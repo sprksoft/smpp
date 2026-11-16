@@ -5912,11 +5912,11 @@ Is it scaring you off?`,
           this.themeSelector.currentTiles.forEach((tile) => {
             tile.updateSelection();
           });
-          const RandomThemeButton = document.getElementById(
+          const randomThemeButton = document.getElementById(
             "settings-page-random-theme-button"
           );
-          if (RandomThemeButton) {
-            RandomThemeButton.checked = settings.appearance.RandomTheme;
+          if (randomThemeButton) {
+            randomThemeButton.checked = settings.appearance.randomTheme;
           }
           const randomThemeInterval = settings.appearance.randomThemeInterval ?? "day";
           const randomThemeIntervalInput = document.querySelector(
@@ -6209,8 +6209,8 @@ Is it scaring you off?`,
           settings.appearance.news = getCheckboxValue(
             "settings-page-show-news-button"
           );
-          const justEnabledRandomTheme = !previousSettings.appearance.RandomTheme && getCheckboxValue("settings-page-random-theme-button");
-          settings.appearance.RandomTheme = getCheckboxValue(
+          const justEnabledRandomTheme = !previousSettings.appearance.randomTheme && getCheckboxValue("settings-page-random-theme-button");
+          settings.appearance.randomTheme = getCheckboxValue(
             "settings-page-random-theme-button"
           );
           const checkedRandomThemeInterval = document.querySelector(
@@ -16489,7 +16489,7 @@ ${code}`;
     var quicks2 = await quickLoad();
     liteMode = browser.runtime.getManifest().name.includes("Lite");
   }
-  var ThemeTimer;
+  var themeTimer;
   function getRandomThemeInterval(appearance) {
     return appearance.randomThemeInterval ?? "day";
   }
@@ -16553,11 +16553,11 @@ ${code}`;
     return next;
   }
   async function applyRandomTheme(appearance, chooseNew = false) {
-    if (ThemeTimer) {
-      clearTimeout(ThemeTimer);
-      ThemeTimer = void 0;
+    if (themeTimer) {
+      clearTimeout(themeTimer);
+      themeTimer = void 0;
     }
-    if (!appearance.RandomTheme) {
+    if (!appearance.randomTheme) {
       localStorage.removeItem("smpp-theme-date");
       localStorage.removeItem("smpp-theme-theme");
       localStorage.removeItem("smpp-theme-interval");
@@ -16610,7 +16610,7 @@ ${code}`;
     await setTheme(selectedTheme);
     await setBackground(selectedTheme);
     const nextUpdate = getNextRandomThemeBoundary(now, interval);
-    ThemeTimer = setTimeout(
+    themeTimer = setTimeout(
       async () => {
         const latestSettings = await browser.runtime.sendMessage({
           action: "getSettingsData"
@@ -16632,7 +16632,7 @@ ${code}`;
       "smpp-topbar-transparent",
       appearance.topNavBackgroundHidden
     );
-    if (!appearance.RandomTheme) {
+    if (!appearance.randomTheme) {
       await setTheme(appearance.theme);
     }
     await applyRandomTheme(appearance, forceRandomTheme);

@@ -7249,6 +7249,13 @@ span.empty-state__label.js-empty-state-label {
   backdrop-filter: var(--medium-blur) !important;
   background-color: var(--darken-background) !important;
 }
+body:has(.view_lpath_left_parts) .smpp-background-image-container {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: -1 !important;
+}
 
 /* src/styles/fixes/login.css */
 html {
@@ -10909,7 +10916,7 @@ body.modern-ui .homepage__center {
   background-image: none !important;
   background-color: var(--color-base00) !important;
 }
-body {
+body:has(.agenda_grid_main) {
   width: 100%;
   height: 100%;
   margin: 0px;
