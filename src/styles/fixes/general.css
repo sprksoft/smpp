@@ -2570,7 +2570,7 @@ body.modern-ui .homepage__block__content {
   background-position: center;
 }
 
-.results-icon-128{
+.results-icon-128 {
   background-image: url(https://static4.smart-school.net/smsc/svg/results_donut/results_donut_24x24.svg) !important;
   background-size: 128px 128px;
   min-height: 128px;
@@ -2882,4 +2882,12 @@ span.empty-state__label.js-empty-state-label {
 .glass span.empty-state__label.js-empty-state-label {
   backdrop-filter: var(--medium-blur) !important;
   background-color: var(--darken-background) !important;
+}
+
+body:has(.view_lpath_left_parts) .smpp-background-image-container {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: -1 !important;
 }
