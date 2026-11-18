@@ -5,8 +5,8 @@
   },
   "appearance": {
     "theme": null,
-    "dailyRandomBackground": "boolean",
-    "randomBackgroundInterval": ["week", "day", "afternoon", "hour"],
+    "randomTheme": "boolean",
+    "randomThemeInterval": ["week", "day", "afternoon", "hour"],
     "topNavBackgroundHidden": "boolean",
     "glass": "boolean",
     "quickSettingsThemes": "array",
