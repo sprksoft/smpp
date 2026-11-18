@@ -5,6 +5,111 @@ import { WidgetBase, registerWidget } from "./widgets.js";
 let blockInterval: number | null = null;
 let keyboardBlockInstalled = false;
 
+interface PomodoroPopupOptions {
+  title: string;
+  message: string;
+  confirmText: string;
+  cancelText?: string;
+  checkboxLabel?: string;
+}
+
+interface PomodoroPopupResult {
+  confirmed: boolean;
+  dontShowAgain: boolean;
+}
+
+let activePopupClose: ((confirmed: boolean) => void) | null = null;
+
+function showPomodoroPopup(
+  options: PomodoroPopupOptions
+): Promise<PomodoroPopupResult> {
+  return new Promise((resolve) => {
+    activePopupClose?.(false);
+
+    const overlay = document.createElement("div");
+    overlay.className = "smpp-pomo-popup";
+    overlay.setAttribute("role", "dialog");
+    overlay.setAttribute("aria-modal", "true");
+
+    const card = document.createElement("div");
+    card.className = "smpp-pomo-popup-card";
+
+    const title = document.createElement("h3");
+    title.className = "smpp-pomo-popup-title";
+    title.textContent = options.title;
+
+    const message = document.createElement("p");
+    message.className = "smpp-pomo-popup-message";
+    message.textContent = options.message;
+
+    card.append(title, message);
+
+    let checkbox: HTMLInputElement | null = null;
+    if (options.checkboxLabel) {
+      const label = document.createElement("label");
+      label.className = "smpp-pomo-popup-check";
+
+      checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+
+      const checkText = document.createElement("span");
+      checkText.textContent = options.checkboxLabel;
+
+      label.append(checkbox, checkText);
+      card.appendChild(label);
+    }
+
+    const buttons = document.createElement("div");
+    buttons.className = "smpp-pomo-popup-buttons";
+
+    const cancelButton = document.createElement("button");
+    cancelButton.type = "button";
+    cancelButton.className = "smpp-pomo-popup-btn smpp-pomo-popup-cancel";
+    cancelButton.textContent = options.cancelText || "Cancel";
+
+    const confirmButton = document.createElement("button");
+    confirmButton.type = "button";
+    confirmButton.className = "smpp-pomo-popup-btn smpp-pomo-popup-confirm";
+    confirmButton.textContent = options.confirmText;
+
+    buttons.append(cancelButton, confirmButton);
+    card.appendChild(buttons);
+    overlay.appendChild(card);
+    document.body.appendChild(overlay);
+
+    let settled = false;
+    const close = (confirmed: boolean) => {
+      if (settled) return;
+      settled = true;
+      if (activePopupClose === close) activePopupClose = null;
+      document.removeEventListener("keydown", onKeydown, true);
+      overlay.remove();
+      resolve({
+        confirmed,
+        dontShowAgain: confirmed && !!checkbox?.checked,
+      });
+    };
+    activePopupClose = close;
+
+    const onKeydown = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      event.preventDefault();
+      event.stopPropagation();
+      event.stopImmediatePropagation();
+      close(false);
+    };
+
+    cancelButton.addEventListener("click", () => close(false));
+    confirmButton.addEventListener("click", () => close(true));
+    overlay.addEventListener("click", (event) => {
+      if (event.target === overlay) close(false);
+    });
+    document.addEventListener("keydown", onKeydown, true);
+
+    confirmButton.focus();
+  });
+}
+
 function syncCheckBlock(): boolean {
   try {
     const raw = localStorage.getItem("pomoEndTime");
@@ -35,7 +140,12 @@ export function initPomodoroBlock(): void {
         localStorage.removeItem("pomoEndTime");
         await chrome.storage.local.remove(["pomoEndTime", "pomoTotal"]);
         document.body.classList.remove("smpp-pomodoro-active");
-        alert("Klaar! Goed gewerkt.");
+        void showPomodoroPopup({
+          title: "Focus session complete",
+          message:
+            "Great work! Your focus session has ended. All blocked features are available again.",
+          confirmText: "Done",
+        });
       } else {
         localStorage.removeItem("pomoEndTime");
         document.body.classList.remove("smpp-pomodoro-active");
@@ -88,6 +198,7 @@ export class PomodoroWidget extends WidgetBase {
   private totalTime = 0;
   private isRunning = false;
   private minutes = 50;
+  private confirming = false;
   private display!: HTMLElement;
   private hoursSeg!: HTMLElement;
   private minutesSeg!: HTMLElement;
@@ -105,7 +216,7 @@ export class PomodoroWidget extends WidgetBase {
   }
 
   override defaultSettings() {
-    return { focusMinutes: 50 };
+    return { focusMinutes: 50, showStartWarning: true };
   }
 
   override async createContent(): Promise<HTMLElement> {
@@ -238,7 +349,30 @@ export class PomodoroWidget extends WidgetBase {
   }
 
   private async start() {
-    if (this.isRunning) return;
+    if (this.isRunning || this.confirming) return;
+
+    const showWarning = await this.getSetting("showStartWarning");
+    if (showWarning) {
+      this.confirming = true;
+      let result;
+      try {
+        result = await showPomodoroPopup({
+          title: "Start focus session?",
+          message:
+            "Starting the Pomodoro timer will block all games, chat, the quick menu, settings and other distractions until the session ends. You won't be able to open them while the timer is running.",
+          confirmText: "Start",
+          cancelText: "Cancel",
+          checkboxLabel: "Don't show this again",
+        });
+      } finally {
+        this.confirming = false;
+      }
+
+      if (result.dontShowAgain) {
+        await this.setSetting("showStartWarning", false);
+      }
+      if (!result.confirmed) return;
+    }
 
     const duration = this.minutes * 60;
     const endTime = Date.now() + duration * 1000;

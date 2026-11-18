@@ -6081,6 +6081,12 @@ Is it scaring you off?`,
           if (puntenMonochromeButton) {
             puntenMonochromeButton.checked = await getWidgetSetting("PuntenWidget.monochrome");
           }
+          const pomodoroWarningButton = document.getElementById(
+            "settings-page-pomodoro-warning-button"
+          );
+          if (pomodoroWarningButton) {
+            pomodoroWarningButton.checked = await getWidgetSetting("PomodoroWidget.showStartWarning");
+          }
           if (!liteMode) {
             const showSnakeGridButton = document.getElementById(
               "settings-page-show-snake-grid-button"
@@ -6309,6 +6315,11 @@ Is it scaring you off?`,
           await updateWidgetSetting(
             "settings-page-punten-monochrome-button",
             "PuntenWidget.monochrome",
+            "boolean"
+          );
+          await updateWidgetSetting(
+            "settings-page-pomodoro-warning-button",
+            "PomodoroWidget.showStartWarning",
             "boolean"
           );
           if (!liteMode) {
@@ -6878,6 +6889,18 @@ Is it scaring you off?`,
             createSettingsButtonWithLabel(
               "settings-page-punten-monochrome-button",
               "Monochrome"
+            )
+          );
+          this.settingsPage.appendChild(createSectionTitle("Pomodoro"));
+          this.settingsPage.appendChild(
+            createDescription(
+              "Show a warning before starting a focus session."
+            )
+          );
+          this.settingsPage.appendChild(
+            createSettingsButtonWithLabel(
+              "settings-page-pomodoro-warning-button",
+              "Show start warning"
             )
           );
           if (!liteMode) {
@@ -15895,6 +15918,77 @@ ${code}`;
   // src/widgets/pomodoro.ts
   var blockInterval = null;
   var keyboardBlockInstalled = false;
+  var activePopupClose = null;
+  function showPomodoroPopup(options) {
+    return new Promise((resolve) => {
+      activePopupClose?.(false);
+      const overlay = document.createElement("div");
+      overlay.className = "smpp-pomo-popup";
+      overlay.setAttribute("role", "dialog");
+      overlay.setAttribute("aria-modal", "true");
+      const card = document.createElement("div");
+      card.className = "smpp-pomo-popup-card";
+      const title = document.createElement("h3");
+      title.className = "smpp-pomo-popup-title";
+      title.textContent = options.title;
+      const message = document.createElement("p");
+      message.className = "smpp-pomo-popup-message";
+      message.textContent = options.message;
+      card.append(title, message);
+      let checkbox = null;
+      if (options.checkboxLabel) {
+        const label = document.createElement("label");
+        label.className = "smpp-pomo-popup-check";
+        checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        const checkText = document.createElement("span");
+        checkText.textContent = options.checkboxLabel;
+        label.append(checkbox, checkText);
+        card.appendChild(label);
+      }
+      const buttons = document.createElement("div");
+      buttons.className = "smpp-pomo-popup-buttons";
+      const cancelButton = document.createElement("button");
+      cancelButton.type = "button";
+      cancelButton.className = "smpp-pomo-popup-btn smpp-pomo-popup-cancel";
+      cancelButton.textContent = options.cancelText || "Cancel";
+      const confirmButton = document.createElement("button");
+      confirmButton.type = "button";
+      confirmButton.className = "smpp-pomo-popup-btn smpp-pomo-popup-confirm";
+      confirmButton.textContent = options.confirmText;
+      buttons.append(cancelButton, confirmButton);
+      card.appendChild(buttons);
+      overlay.appendChild(card);
+      document.body.appendChild(overlay);
+      let settled = false;
+      const close = (confirmed) => {
+        if (settled) return;
+        settled = true;
+        if (activePopupClose === close) activePopupClose = null;
+        document.removeEventListener("keydown", onKeydown, true);
+        overlay.remove();
+        resolve({
+          confirmed,
+          dontShowAgain: confirmed && !!checkbox?.checked
+        });
+      };
+      activePopupClose = close;
+      const onKeydown = (event) => {
+        if (event.key !== "Escape") return;
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        close(false);
+      };
+      cancelButton.addEventListener("click", () => close(false));
+      confirmButton.addEventListener("click", () => close(true));
+      overlay.addEventListener("click", (event) => {
+        if (event.target === overlay) close(false);
+      });
+      document.addEventListener("keydown", onKeydown, true);
+      confirmButton.focus();
+    });
+  }
   function syncCheckBlock() {
     try {
       const raw = localStorage.getItem("pomoEndTime");
@@ -15924,7 +16018,11 @@ ${code}`;
           localStorage.removeItem("pomoEndTime");
           await chrome.storage.local.remove(["pomoEndTime", "pomoTotal"]);
           document.body.classList.remove("smpp-pomodoro-active");
-          alert("Klaar! Goed gewerkt.");
+          void showPomodoroPopup({
+            title: "Focus session complete",
+            message: "Great work! Your focus session has ended. All blocked features are available again.",
+            confirmText: "Done"
+          });
         } else {
           localStorage.removeItem("pomoEndTime");
           document.body.classList.remove("smpp-pomodoro-active");
@@ -15968,6 +16066,7 @@ ${code}`;
     totalTime = 0;
     isRunning = false;
     minutes = 50;
+    confirming = false;
     display;
     hoursSeg;
     minutesSeg;
@@ -15982,7 +16081,7 @@ ${code}`;
       return "other";
     }
     defaultSettings() {
-      return { focusMinutes: 50 };
+      return { focusMinutes: 50, showStartWarning: true };
     }
     async createContent() {
       const el = document.createElement("div");
@@ -16098,7 +16197,27 @@ ${code}`;
       input.addEventListener("keydown", onKeydown);
     }
     async start() {
-      if (this.isRunning) return;
+      if (this.isRunning || this.confirming) return;
+      const showWarning = await this.getSetting("showStartWarning");
+      if (showWarning) {
+        this.confirming = true;
+        let result;
+        try {
+          result = await showPomodoroPopup({
+            title: "Start focus session?",
+            message: "Starting the Pomodoro timer will block all games, chat, the quick menu, settings and other distractions until the session ends. You won't be able to open them while the timer is running.",
+            confirmText: "Start",
+            cancelText: "Cancel",
+            checkboxLabel: "Don't show this again"
+          });
+        } finally {
+          this.confirming = false;
+        }
+        if (result.dontShowAgain) {
+          await this.setSetting("showStartWarning", false);
+        }
+        if (!result.confirmed) return;
+      }
       const duration = this.minutes * 60;
       const endTime = Date.now() + duration * 1e3;
       localStorage.setItem("pomoEndTime", String(endTime));

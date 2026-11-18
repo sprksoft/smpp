@@ -595,6 +595,15 @@ export class SettingsWindow extends BaseWindow {
             await getWidgetSetting("PuntenWidget.monochrome");
         }
 
+        // Pomodoro
+        const pomodoroWarningButton = document.getElementById(
+          "settings-page-pomodoro-warning-button"
+        );
+        if (pomodoroWarningButton) {
+          (pomodoroWarningButton as HTMLInputElement).checked =
+            await getWidgetSetting("PomodoroWidget.showStartWarning");
+        }
+
         // Snake
         if (!liteMode) {
           const showSnakeGridButton = document.getElementById(
@@ -918,6 +927,13 @@ export class SettingsWindow extends BaseWindow {
         await updateWidgetSetting(
           "settings-page-punten-monochrome-button",
           "PuntenWidget.monochrome",
+          "boolean"
+        );
+
+        // Pomodoro
+        await updateWidgetSetting(
+          "settings-page-pomodoro-warning-button",
+          "PomodoroWidget.showStartWarning",
           "boolean"
         );
 
@@ -1607,6 +1623,19 @@ export class SettingsWindow extends BaseWindow {
           createSettingsButtonWithLabel(
             "settings-page-punten-monochrome-button",
             "Monochrome"
+          )
+        );
+
+        this.settingsPage.appendChild(createSectionTitle("Pomodoro"));
+        this.settingsPage.appendChild(
+          createDescription(
+            "Show a warning before starting a focus session."
+          )
+        );
+        this.settingsPage.appendChild(
+          createSettingsButtonWithLabel(
+            "settings-page-pomodoro-warning-button",
+            "Show start warning"
           )
         );
 
