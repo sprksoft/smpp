@@ -15915,9 +15915,7 @@ ${code}`;
   };
   registerWidget(new CountdownWidget());
 
-  // src/widgets/pomodoro.ts
-  var blockInterval = null;
-  var keyboardBlockInstalled = false;
+  // src/common/popup.ts
   var activePopupClose = null;
   function showPomodoroPopup(options) {
     return new Promise((resolve) => {
@@ -15989,6 +15987,10 @@ ${code}`;
       confirmButton.focus();
     });
   }
+
+  // src/widgets/pomodoro.ts
+  var blockInterval = null;
+  var keyboardBlockInstalled = false;
   function syncCheckBlock() {
     try {
       const raw = localStorage.getItem("pomoEndTime");
@@ -16198,8 +16200,8 @@ ${code}`;
     }
     async start() {
       if (this.isRunning || this.confirming) return;
-      const showWarning = await this.getSetting("showStartWarning");
-      if (showWarning) {
+      const showWarning2 = await this.getSetting("showStartWarning");
+      if (showWarning2) {
         this.confirming = true;
         let result;
         try {
@@ -16278,6 +16280,93 @@ ${code}`;
     }
   };
   registerWidget(new PomodoroWidget());
+
+  // src/main-features/smarter-smartschool.ts
+  var SMARTER_SMARTSCHOOL_ID = "lbpdknjafmmnemenflppkofaakldbfom";
+  var SMARTER_SMARTSCHOOL_RESOURCE = "static/img/icon_128.png";
+  var DISMISSED_KEY = "ssWarningDismissed";
+  var PROBE_TIMEOUT_MS = 3e3;
+  var RETRY_INTERVAL_MS = 2e3;
+  var RETRY_MAX_MS = 12e4;
+  var POPUP_DELAY_MS = 1800;
+  var warned = false;
+  var dismissed = false;
+  function probeExtensionEnabled() {
+    return new Promise((resolve) => {
+      let settled = false;
+      const done = (enabled) => {
+        if (settled) return;
+        settled = true;
+        resolve(enabled);
+      };
+      const img = new Image();
+      const timeout = window.setTimeout(() => {
+        img.src = "";
+        done(false);
+      }, PROBE_TIMEOUT_MS);
+      img.onload = () => {
+        window.clearTimeout(timeout);
+        done(true);
+      };
+      img.onerror = () => {
+        window.clearTimeout(timeout);
+        done(false);
+      };
+      img.src = `chrome-extension://${SMARTER_SMARTSCHOOL_ID}/${SMARTER_SMARTSCHOOL_RESOURCE}?t=${Date.now()}`;
+    });
+  }
+  function canShowPopup() {
+    if (warned || dismissed) return false;
+    if (document.body.classList.contains("smpp-pomodoro-active")) return false;
+    if (document.querySelector(".smpp-pomo-popup")) return false;
+    return true;
+  }
+  async function showWarning() {
+    warned = true;
+    try {
+      const result = await showPomodoroPopup({
+        title: "Smarter Smartschool detected",
+        message: "Turn off the Smarter Smartschool theme to avoid conflicts with Smartschool++.",
+        confirmText: "OK",
+        cancelText: "Dismiss",
+        checkboxLabel: "Don't show this again"
+      });
+      if (result.dontShowAgain) {
+        dismissed = true;
+        await chrome.storage.local.set({ [DISMISSED_KEY]: true });
+      }
+    } catch {
+      warned = false;
+    }
+  }
+  function schedulePopupChecks() {
+    const start = Date.now();
+    const tryShow = () => {
+      if (warned || dismissed) return;
+      if (canShowPopup()) {
+        void showWarning();
+        return;
+      }
+      if (Date.now() - start < RETRY_MAX_MS) {
+        window.setTimeout(tryShow, RETRY_INTERVAL_MS);
+      }
+    };
+    window.setTimeout(tryShow, POPUP_DELAY_MS);
+  }
+  async function initSmarterSmartschoolWarning() {
+    if (window !== window.top) return;
+    try {
+      const { [DISMISSED_KEY]: storedDismissed } = await chrome.storage.local.get(DISMISSED_KEY);
+      if (storedDismissed) {
+        dismissed = true;
+        return;
+      }
+    } catch {
+    }
+    const enabled = await probeExtensionEnabled();
+    if (!enabled) return;
+    schedulePopupChecks();
+  }
 
   // src/fixes-utils/migration.ts
   async function updateSettings() {
@@ -16895,6 +16984,7 @@ ${code}`;
     }
     await apply();
     initPomodoroBlock();
+    void initSmarterSmartschoolWarning();
   }
   main();
 })();
