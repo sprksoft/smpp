@@ -1,0 +1,186 @@
+.smpp-popup {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483646;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  background: color-mix(in srgb, var(--color-shadow, #000) 45%, transparent);
+  backdrop-filter: brightness(70%) blur(1px);
+  animation: popup-fade 0.2s ease-out;
+}
+
+.glass .smpp-popup {
+  backdrop-filter: none;
+}
+
+.smpp-popup-card {
+  background: var(--color-base01);
+  border: 3px solid var(--color-base02);
+  border-radius: 2rem;
+  box-shadow: 0px 10px 20px 10px var(--color-shadow);
+  padding: 2rem;
+  max-width: 34rem;
+  width: 100%;
+  text-align: center;
+  color: var(--color-text);
+  animation: popup-pop 0.3s cubic-bezier(0.01, 1.13, 0.32, 0.96);
+}
+
+.glass .smpp-popup-card {
+  background: var(--darken-background);
+  backdrop-filter: var(--surface-blur);
+}
+
+.smpp-popup-title {
+  margin: 0 0 1rem 0;
+  font-size: 1.8rem;
+}
+
+.smpp-popup-message {
+  margin: 0 0 1.5rem 0;
+  font-size: 1.4rem;
+  line-height: 1.5;
+  opacity: 0.8;
+}
+
+.smpp-popup-check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  margin-bottom: 1.5rem;
+  font-size: 1.3rem;
+  opacity: 0.9;
+  cursor: pointer;
+  user-select: none;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0.3rem 0.6rem;
+  border-radius: 0.75rem;
+  transition: opacity 0.15s ease-in-out;
+}
+
+.smpp-popup-check:hover {
+  opacity: 1;
+}
+
+.smpp-popup-check input {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  position: relative;
+  flex: 0 0 auto;
+  width: 1.8rem !important;
+  height: 1.8rem !important;
+  margin: 0 !important;
+  border: 2px solid var(--color-base03) !important;
+  border-radius: 0.55rem !important;
+  background-color: var(--color-base01) !important;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%20fill='none'%20stroke='white'%20stroke-width='4'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Cpath%20d='M4%2012.5l5.5%205.5L20%206.5'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: 0% 0% !important;
+  cursor: pointer;
+  box-shadow: inset 0 1px 2px
+    color-mix(in srgb, var(--color-shadow) 35%, transparent);
+}
+
+.enableAnimations .smpp-popup-check input {
+  transition:
+    background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out,
+    background-size 0.2s cubic-bezier(0.01, 1.13, 0.32, 0.96);
+}
+
+.smpp-popup-check:hover input {
+  border-color: var(--color-accent, var(--color-green)) !important;
+}
+
+.smpp-popup-check input:focus-visible {
+  outline: 2px solid var(--color-accent, var(--color-green));
+  outline-offset: 2px;
+}
+
+.smpp-popup-check input:active {
+  scale: 0.9;
+}
+
+.smpp-popup-check input:checked {
+  background-color: var(--color-accent, var(--color-green)) !important;
+  border-color: var(--color-accent, var(--color-green)) !important;
+  background-size: 70% 70% !important;
+}
+
+.glass .smpp-popup-check input:not(:checked) {
+  background-color: color-mix(
+    in srgb,
+    var(--color-base01) 55%,
+    transparent
+  ) !important;
+  backdrop-filter: var(--medium-blur);
+}
+
+.smpp-popup-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.smpp-popup-btn {
+  flex: 1;
+  padding: 0.75rem 1.5rem;
+  border: 2px solid var(--color-base02);
+  border-radius: 0.75rem;
+  background-color: var(--color-base01);
+  color: var(--color-text);
+  font-family: inherit;
+  font-size: 1.4rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.enableAnimations .smpp-popup-btn {
+  transition-property: color, background-color, border-color, transform;
+  transition: 0.15s ease-in-out;
+}
+
+.smpp-popup-btn:active {
+  scale: 0.95;
+}
+
+.smpp-popup-cancel:hover {
+  background-color: var(--color-base02);
+  border-color: var(--color-base03);
+}
+
+.smpp-popup-confirm {
+  background-color: var(--color-base02);
+  border-color: var(--color-base03);
+}
+
+.smpp-popup-confirm:hover {
+  background-color: var(--color-base03);
+  border-color: var(--color-accent, var(--color-green));
+}
+
+@keyframes popup-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes popup-pop {
+  0% {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

@@ -32,5 +32,6 @@ import "./styles/fixes/agenda.css";
 import "./styles/fixes/root.css";
 import "./styles/fixes/smartschool-widgets.css";
 import "./styles/smpp-styles/pomodoro.css";
+import "./styles/smpp-styles/popup.css";
 import "./widgets/pomodoro.js";
 import "./main-features/main.js";

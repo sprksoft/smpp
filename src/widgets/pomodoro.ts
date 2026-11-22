@@ -1,7 +1,7 @@
 declare const chrome: any;
 
 import { WidgetBase, registerWidget } from "./widgets.js";
-import { showPomodoroPopup } from "../common/popup.js";
+import { showPopup } from "../common/popup.js";
 
 let blockInterval: number | null = null;
 let keyboardBlockInstalled = false;
@@ -36,7 +36,7 @@ export function initPomodoroBlock(): void {
         localStorage.removeItem("pomoEndTime");
         await chrome.storage.local.remove(["pomoEndTime", "pomoTotal"]);
         document.body.classList.remove("smpp-pomodoro-active");
-        void showPomodoroPopup({
+        void showPopup({
           title: "Focus session complete",
           message:
             "Great work! Your focus session has ended. All blocked features are available again.",
@@ -252,7 +252,7 @@ export class PomodoroWidget extends WidgetBase {
       this.confirming = true;
       let result;
       try {
-        result = await showPomodoroPopup({
+        result = await showPopup({
           title: "Start focus session?",
           message:
             "Starting the Pomodoro timer will block all games, chat, the quick menu, settings and other distractions until the session ends. You won't be able to open them while the timer is running.",

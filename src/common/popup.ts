@@ -1,4 +1,4 @@
-export interface PomodoroPopupOptions {
+export interface PopupOptions {
   title: string;
   message: string;
   confirmText: string;
@@ -6,33 +6,31 @@ export interface PomodoroPopupOptions {
   checkboxLabel?: string;
 }
 
-export interface PomodoroPopupResult {
+export interface PopupResult {
   confirmed: boolean;
   dontShowAgain: boolean;
 }
 
 let activePopupClose: ((confirmed: boolean) => void) | null = null;
 
-export function showPomodoroPopup(
-  options: PomodoroPopupOptions
-): Promise<PomodoroPopupResult> {
+export function showPopup(options: PopupOptions): Promise<PopupResult> {
   return new Promise((resolve) => {
     activePopupClose?.(false);
 
     const overlay = document.createElement("div");
-    overlay.className = "smpp-pomo-popup";
+    overlay.className = "smpp-popup";
     overlay.setAttribute("role", "dialog");
     overlay.setAttribute("aria-modal", "true");
 
     const card = document.createElement("div");
-    card.className = "smpp-pomo-popup-card";
+    card.className = "smpp-popup-card";
 
     const title = document.createElement("h3");
-    title.className = "smpp-pomo-popup-title";
+    title.className = "smpp-popup-title";
     title.textContent = options.title;
 
     const message = document.createElement("p");
-    message.className = "smpp-pomo-popup-message";
+    message.className = "smpp-popup-message";
     message.textContent = options.message;
 
     card.append(title, message);
@@ -40,7 +38,7 @@ export function showPomodoroPopup(
     let checkbox: HTMLInputElement | null = null;
     if (options.checkboxLabel) {
       const label = document.createElement("label");
-      label.className = "smpp-pomo-popup-check";
+      label.className = "smpp-popup-check";
 
       checkbox = document.createElement("input");
       checkbox.type = "checkbox";
@@ -53,16 +51,16 @@ export function showPomodoroPopup(
     }
 
     const buttons = document.createElement("div");
-    buttons.className = "smpp-pomo-popup-buttons";
+    buttons.className = "smpp-popup-buttons";
 
     const cancelButton = document.createElement("button");
     cancelButton.type = "button";
-    cancelButton.className = "smpp-pomo-popup-btn smpp-pomo-popup-cancel";
+    cancelButton.className = "smpp-popup-btn smpp-popup-cancel";
     cancelButton.textContent = options.cancelText || "Cancel";
 
     const confirmButton = document.createElement("button");
     confirmButton.type = "button";
-    confirmButton.className = "smpp-pomo-popup-btn smpp-pomo-popup-confirm";
+    confirmButton.className = "smpp-popup-btn smpp-popup-confirm";
     confirmButton.textContent = options.confirmText;
 
     buttons.append(cancelButton, confirmButton);

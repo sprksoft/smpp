@@ -16366,7 +16366,9 @@ body.smpp-pomodoro-active .smpp-widget[data-widget-name=PomodoroWidget] {
 body.smpp-pomodoro-active .smpp-widget[data-widget-name=PomodoroWidget] .smpp-widget-content {
   pointer-events: auto !important;
 }
-.smpp-pomo-popup {
+
+/* src/styles/smpp-styles/popup.css */
+.smpp-popup {
   position: fixed;
   inset: 0;
   z-index: 2147483646;
@@ -16376,12 +16378,12 @@ body.smpp-pomodoro-active .smpp-widget[data-widget-name=PomodoroWidget] .smpp-wi
   padding: 1rem;
   background: color-mix(in srgb, var(--color-shadow, #000) 45%, transparent);
   backdrop-filter: brightness(70%) blur(1px);
-  animation: pomo-popup-fade 0.2s ease-out;
+  animation: popup-fade 0.2s ease-out;
 }
-.glass .smpp-pomo-popup {
+.glass .smpp-popup {
   backdrop-filter: none;
 }
-.smpp-pomo-popup-card {
+.smpp-popup-card {
   background: var(--color-base01);
   border: 3px solid var(--color-base02);
   border-radius: 2rem;
@@ -16391,23 +16393,23 @@ body.smpp-pomodoro-active .smpp-widget[data-widget-name=PomodoroWidget] .smpp-wi
   width: 100%;
   text-align: center;
   color: var(--color-text);
-  animation: pomo-popup-pop 0.3s cubic-bezier(0.01, 1.13, 0.32, 0.96);
+  animation: popup-pop 0.3s cubic-bezier(0.01, 1.13, 0.32, 0.96);
 }
-.glass .smpp-pomo-popup-card {
+.glass .smpp-popup-card {
   background: var(--darken-background);
   backdrop-filter: var(--surface-blur);
 }
-.smpp-pomo-popup-title {
+.smpp-popup-title {
   margin: 0 0 1rem 0;
   font-size: 1.8rem;
 }
-.smpp-pomo-popup-message {
+.smpp-popup-message {
   margin: 0 0 1.5rem 0;
   font-size: 1.4rem;
   line-height: 1.5;
   opacity: 0.8;
 }
-.smpp-pomo-popup-check {
+.smpp-popup-check {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -16424,10 +16426,10 @@ body.smpp-pomodoro-active .smpp-widget[data-widget-name=PomodoroWidget] .smpp-wi
   border-radius: 0.75rem;
   transition: opacity 0.15s ease-in-out;
 }
-.smpp-pomo-popup-check:hover {
+.smpp-popup-check:hover {
   opacity: 1;
 }
-.smpp-pomo-popup-check input {
+.smpp-popup-check input {
   appearance: none !important;
   -webkit-appearance: none !important;
   position: relative;
@@ -16445,37 +16447,37 @@ body.smpp-pomodoro-active .smpp-widget[data-widget-name=PomodoroWidget] .smpp-wi
   cursor: pointer;
   box-shadow: inset 0 1px 2px color-mix(in srgb, var(--color-shadow) 35%, transparent);
 }
-.enableAnimations .smpp-pomo-popup-check input {
+.enableAnimations .smpp-popup-check input {
   transition:
     background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out,
     background-size 0.2s cubic-bezier(0.01, 1.13, 0.32, 0.96);
 }
-.smpp-pomo-popup-check:hover input {
+.smpp-popup-check:hover input {
   border-color: var(--color-accent, var(--color-green)) !important;
 }
-.smpp-pomo-popup-check input:focus-visible {
+.smpp-popup-check input:focus-visible {
   outline: 2px solid var(--color-accent, var(--color-green));
   outline-offset: 2px;
 }
-.smpp-pomo-popup-check input:active {
+.smpp-popup-check input:active {
   scale: 0.9;
 }
-.smpp-pomo-popup-check input:checked {
+.smpp-popup-check input:checked {
   background-color: var(--color-accent, var(--color-green)) !important;
   border-color: var(--color-accent, var(--color-green)) !important;
   background-size: 70% 70% !important;
 }
-.glass .smpp-pomo-popup-check input:not(:checked) {
+.glass .smpp-popup-check input:not(:checked) {
   background-color: color-mix(in srgb, var(--color-base01) 55%, transparent) !important;
   backdrop-filter: var(--medium-blur);
 }
-.smpp-pomo-popup-buttons {
+.smpp-popup-buttons {
   display: flex;
   gap: 1rem;
   justify-content: center;
 }
-.smpp-pomo-popup-btn {
+.smpp-popup-btn {
   flex: 1;
   padding: 0.75rem 1.5rem;
   border: 2px solid var(--color-base02);
@@ -16487,7 +16489,7 @@ body.smpp-pomodoro-active .smpp-widget[data-widget-name=PomodoroWidget] .smpp-wi
   font-weight: 500;
   cursor: pointer;
 }
-.enableAnimations .smpp-pomo-popup-btn {
+.enableAnimations .smpp-popup-btn {
   transition-property:
     color,
     background-color,
@@ -16495,22 +16497,22 @@ body.smpp-pomodoro-active .smpp-widget[data-widget-name=PomodoroWidget] .smpp-wi
     transform;
   transition: 0.15s ease-in-out;
 }
-.smpp-pomo-popup-btn:active {
+.smpp-popup-btn:active {
   scale: 0.95;
 }
-.smpp-pomo-popup-cancel:hover {
+.smpp-popup-cancel:hover {
   background-color: var(--color-base02);
   border-color: var(--color-base03);
 }
-.smpp-pomo-popup-confirm {
+.smpp-popup-confirm {
   background-color: var(--color-base02);
   border-color: var(--color-base03);
 }
-.smpp-pomo-popup-confirm:hover {
+.smpp-popup-confirm:hover {
   background-color: var(--color-base03);
   border-color: var(--color-accent, var(--color-green));
 }
-@keyframes pomo-popup-fade {
+@keyframes popup-fade {
   from {
     opacity: 0;
   }
@@ -16518,7 +16520,7 @@ body.smpp-pomodoro-active .smpp-widget[data-widget-name=PomodoroWidget] .smpp-wi
     opacity: 1;
   }
 }
-@keyframes pomo-popup-pop {
+@keyframes popup-pop {
   0% {
     transform: scale(0.85);
     opacity: 0;

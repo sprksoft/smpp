@@ -1,51 +1,34 @@
 declare const chrome: any;
 
-import { showPomodoroPopup } from "../common/popup.js";
+import { showPopup } from "../common/popup.js";
 
-const SMARTER_SMARTSCHOOL_ID = "lbpdknjafmmnemenflppkofaakldbfom";
-const SMARTER_SMARTSCHOOL_RESOURCE = "static/img/icon_128.png";
+const SMARTER_SMARTSCHOOL_STYLE_ID = "smarterSmartschoolStyle";
 
-const DISMISSED_KEY = "ssWarningDismissed";
-const PROBE_TIMEOUT_MS = 3000;
-const RETRY_INTERVAL_MS = 2000;
-const RETRY_MAX_MS = 120000;
-const POPUP_DELAY_MS = 1800;
+const DISMISSED_KEY = "ssThemeWarningDismissed";
+const POPUP_DELAY_MS = 1500;
+const SHOW_RETRY_INTERVAL_MS = 2000;
+const SHOW_RETRY_MAX_MS = 120000;
+const POLL_INTERVAL_MS = 1000;
+const POLL_MAX_MS = 120000;
 
 let warned = false;
 let dismissed = false;
+let themeSeen = false;
 
-function probeExtensionEnabled(): Promise<boolean> {
-  return new Promise((resolve) => {
-    let settled = false;
-    const done = (enabled: boolean) => {
-      if (settled) return;
-      settled = true;
-      resolve(enabled);
-    };
+function ssThemeActive(): boolean {
+  return document.getElementById(SMARTER_SMARTSCHOOL_STYLE_ID) !== null;
+}
 
-    const img = new Image();
-    const timeout = window.setTimeout(() => {
-      img.src = "";
-      done(false);
-    }, PROBE_TIMEOUT_MS);
-
-    img.onload = () => {
-      window.clearTimeout(timeout);
-      done(true);
-    };
-    img.onerror = () => {
-      window.clearTimeout(timeout);
-      done(false);
-    };
-
-    img.src = `chrome-extension://${SMARTER_SMARTSCHOOL_ID}/${SMARTER_SMARTSCHOOL_RESOURCE}?t=${Date.now()}`;
-  });
+function markThemeSeen(): void {
+  if (themeSeen) return;
+  themeSeen = true;
+  tryShowWhenPossible();
 }
 
 function canShowPopup(): boolean {
-  if (warned || dismissed) return false;
+  if (warned || dismissed || !themeSeen) return false;
   if (document.body.classList.contains("smpp-pomodoro-active")) return false;
-  if (document.querySelector(".smpp-pomo-popup")) return false;
+  if (document.querySelector(".smpp-popup")) return false;
   return true;
 }
 
@@ -53,10 +36,10 @@ async function showWarning(): Promise<void> {
   warned = true;
 
   try {
-    const result = await showPomodoroPopup({
-      title: "Smarter Smartschool detected",
+    const result = await showPopup({
+      title: "Smarter Smartschool theme",
       message:
-        "Turn off the Smarter Smartschool theme to avoid conflicts with Smartschool++.",
+        "Smarter Smartschool is also applying its own theme on top of Smartschool++, which can make colors clash. You can turn it off in the Smarter Smartschool extension by setting its theme to default.",
       confirmText: "OK",
       cancelText: "Dismiss",
       checkboxLabel: "Don't show this again",
@@ -71,23 +54,56 @@ async function showWarning(): Promise<void> {
   }
 }
 
-function schedulePopupChecks(): void {
+function tryShowWhenPossible(): void {
   const start = Date.now();
 
   const tryShow = () => {
-    if (warned || dismissed) return;
+    if (warned || dismissed || !themeSeen) return;
 
     if (canShowPopup()) {
       void showWarning();
       return;
     }
 
-    if (Date.now() - start < RETRY_MAX_MS) {
-      window.setTimeout(tryShow, RETRY_INTERVAL_MS);
+    if (Date.now() - start < SHOW_RETRY_MAX_MS) {
+      window.setTimeout(tryShow, SHOW_RETRY_INTERVAL_MS);
     }
   };
 
   window.setTimeout(tryShow, POPUP_DELAY_MS);
+}
+
+function watchForTheme(): void {
+  if (ssThemeActive()) {
+    markThemeSeen();
+    return;
+  }
+
+  const observer = new MutationObserver(() => {
+    if (ssThemeActive()) {
+      observer.disconnect();
+      markThemeSeen();
+    }
+  });
+
+  observer.observe(document.documentElement || document, {
+    childList: true,
+    subtree: true,
+  });
+
+  const start = Date.now();
+  const poll = () => {
+    if (themeSeen || dismissed || warned) return;
+    if (ssThemeActive()) {
+      observer.disconnect();
+      markThemeSeen();
+      return;
+    }
+    if (Date.now() - start < POLL_MAX_MS) {
+      window.setTimeout(poll, POLL_INTERVAL_MS);
+    }
+  };
+  window.setTimeout(poll, POLL_INTERVAL_MS);
 }
 
 export async function initSmarterSmartschoolWarning(): Promise<void> {
@@ -100,11 +116,7 @@ export async function initSmarterSmartschoolWarning(): Promise<void> {
       dismissed = true;
       return;
     }
-  } catch {
-  }
+  } catch {}
 
-  const enabled = await probeExtensionEnabled();
-  if (!enabled) return;
-
-  schedulePopupChecks();
+  watchForTheme();
 }

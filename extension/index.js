@@ -15917,26 +15917,26 @@ ${code}`;
 
   // src/common/popup.ts
   var activePopupClose = null;
-  function showPomodoroPopup(options) {
+  function showPopup(options) {
     return new Promise((resolve) => {
       activePopupClose?.(false);
       const overlay = document.createElement("div");
-      overlay.className = "smpp-pomo-popup";
+      overlay.className = "smpp-popup";
       overlay.setAttribute("role", "dialog");
       overlay.setAttribute("aria-modal", "true");
       const card = document.createElement("div");
-      card.className = "smpp-pomo-popup-card";
+      card.className = "smpp-popup-card";
       const title = document.createElement("h3");
-      title.className = "smpp-pomo-popup-title";
+      title.className = "smpp-popup-title";
       title.textContent = options.title;
       const message = document.createElement("p");
-      message.className = "smpp-pomo-popup-message";
+      message.className = "smpp-popup-message";
       message.textContent = options.message;
       card.append(title, message);
       let checkbox = null;
       if (options.checkboxLabel) {
         const label = document.createElement("label");
-        label.className = "smpp-pomo-popup-check";
+        label.className = "smpp-popup-check";
         checkbox = document.createElement("input");
         checkbox.type = "checkbox";
         const checkText = document.createElement("span");
@@ -15945,14 +15945,14 @@ ${code}`;
         card.appendChild(label);
       }
       const buttons = document.createElement("div");
-      buttons.className = "smpp-pomo-popup-buttons";
+      buttons.className = "smpp-popup-buttons";
       const cancelButton = document.createElement("button");
       cancelButton.type = "button";
-      cancelButton.className = "smpp-pomo-popup-btn smpp-pomo-popup-cancel";
+      cancelButton.className = "smpp-popup-btn smpp-popup-cancel";
       cancelButton.textContent = options.cancelText || "Cancel";
       const confirmButton = document.createElement("button");
       confirmButton.type = "button";
-      confirmButton.className = "smpp-pomo-popup-btn smpp-pomo-popup-confirm";
+      confirmButton.className = "smpp-popup-btn smpp-popup-confirm";
       confirmButton.textContent = options.confirmText;
       buttons.append(cancelButton, confirmButton);
       card.appendChild(buttons);
@@ -16020,7 +16020,7 @@ ${code}`;
           localStorage.removeItem("pomoEndTime");
           await chrome.storage.local.remove(["pomoEndTime", "pomoTotal"]);
           document.body.classList.remove("smpp-pomodoro-active");
-          void showPomodoroPopup({
+          void showPopup({
             title: "Focus session complete",
             message: "Great work! Your focus session has ended. All blocked features are available again.",
             confirmText: "Done"
@@ -16205,7 +16205,7 @@ ${code}`;
         this.confirming = true;
         let result;
         try {
-          result = await showPomodoroPopup({
+          result = await showPopup({
             title: "Start focus session?",
             message: "Starting the Pomodoro timer will block all games, chat, the quick menu, settings and other distractions until the session ends. You won't be able to open them while the timer is running.",
             confirmText: "Start",
@@ -16282,51 +16282,36 @@ ${code}`;
   registerWidget(new PomodoroWidget());
 
   // src/main-features/smarter-smartschool.ts
-  var SMARTER_SMARTSCHOOL_ID = "lbpdknjafmmnemenflppkofaakldbfom";
-  var SMARTER_SMARTSCHOOL_RESOURCE = "static/img/icon_128.png";
-  var DISMISSED_KEY = "ssWarningDismissed";
-  var PROBE_TIMEOUT_MS = 3e3;
-  var RETRY_INTERVAL_MS = 2e3;
-  var RETRY_MAX_MS = 12e4;
-  var POPUP_DELAY_MS = 1800;
+  var SMARTER_SMARTSCHOOL_STYLE_ID = "smarterSmartschoolStyle";
+  var DISMISSED_KEY = "ssThemeWarningDismissed";
+  var POPUP_DELAY_MS = 1500;
+  var SHOW_RETRY_INTERVAL_MS = 2e3;
+  var SHOW_RETRY_MAX_MS = 12e4;
+  var POLL_INTERVAL_MS = 1e3;
+  var POLL_MAX_MS = 12e4;
   var warned = false;
   var dismissed = false;
-  function probeExtensionEnabled() {
-    return new Promise((resolve) => {
-      let settled = false;
-      const done = (enabled) => {
-        if (settled) return;
-        settled = true;
-        resolve(enabled);
-      };
-      const img = new Image();
-      const timeout = window.setTimeout(() => {
-        img.src = "";
-        done(false);
-      }, PROBE_TIMEOUT_MS);
-      img.onload = () => {
-        window.clearTimeout(timeout);
-        done(true);
-      };
-      img.onerror = () => {
-        window.clearTimeout(timeout);
-        done(false);
-      };
-      img.src = `chrome-extension://${SMARTER_SMARTSCHOOL_ID}/${SMARTER_SMARTSCHOOL_RESOURCE}?t=${Date.now()}`;
-    });
+  var themeSeen = false;
+  function ssThemeActive() {
+    return document.getElementById(SMARTER_SMARTSCHOOL_STYLE_ID) !== null;
+  }
+  function markThemeSeen() {
+    if (themeSeen) return;
+    themeSeen = true;
+    tryShowWhenPossible();
   }
   function canShowPopup() {
-    if (warned || dismissed) return false;
+    if (warned || dismissed || !themeSeen) return false;
     if (document.body.classList.contains("smpp-pomodoro-active")) return false;
-    if (document.querySelector(".smpp-pomo-popup")) return false;
+    if (document.querySelector(".smpp-popup")) return false;
     return true;
   }
   async function showWarning() {
     warned = true;
     try {
-      const result = await showPomodoroPopup({
-        title: "Smarter Smartschool detected",
-        message: "Turn off the Smarter Smartschool theme to avoid conflicts with Smartschool++.",
+      const result = await showPopup({
+        title: "Smarter Smartschool theme",
+        message: "Smarter Smartschool is also applying its own theme on top of Smartschool++, which can make colors clash. You can turn it off in the Smarter Smartschool extension by setting its theme to default.",
         confirmText: "OK",
         cancelText: "Dismiss",
         checkboxLabel: "Don't show this again"
@@ -16339,19 +16324,48 @@ ${code}`;
       warned = false;
     }
   }
-  function schedulePopupChecks() {
+  function tryShowWhenPossible() {
     const start = Date.now();
     const tryShow = () => {
-      if (warned || dismissed) return;
+      if (warned || dismissed || !themeSeen) return;
       if (canShowPopup()) {
         void showWarning();
         return;
       }
-      if (Date.now() - start < RETRY_MAX_MS) {
-        window.setTimeout(tryShow, RETRY_INTERVAL_MS);
+      if (Date.now() - start < SHOW_RETRY_MAX_MS) {
+        window.setTimeout(tryShow, SHOW_RETRY_INTERVAL_MS);
       }
     };
     window.setTimeout(tryShow, POPUP_DELAY_MS);
+  }
+  function watchForTheme() {
+    if (ssThemeActive()) {
+      markThemeSeen();
+      return;
+    }
+    const observer = new MutationObserver(() => {
+      if (ssThemeActive()) {
+        observer.disconnect();
+        markThemeSeen();
+      }
+    });
+    observer.observe(document.documentElement || document, {
+      childList: true,
+      subtree: true
+    });
+    const start = Date.now();
+    const poll = () => {
+      if (themeSeen || dismissed || warned) return;
+      if (ssThemeActive()) {
+        observer.disconnect();
+        markThemeSeen();
+        return;
+      }
+      if (Date.now() - start < POLL_MAX_MS) {
+        window.setTimeout(poll, POLL_INTERVAL_MS);
+      }
+    };
+    window.setTimeout(poll, POLL_INTERVAL_MS);
   }
   async function initSmarterSmartschoolWarning() {
     if (window !== window.top) return;
@@ -16363,9 +16377,7 @@ ${code}`;
       }
     } catch {
     }
-    const enabled = await probeExtensionEnabled();
-    if (!enabled) return;
-    schedulePopupChecks();
+    watchForTheme();
   }
 
   // src/fixes-utils/migration.ts
