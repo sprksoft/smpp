@@ -15954,7 +15954,8 @@ ${code}`;
       confirmButton.type = "button";
       confirmButton.className = "smpp-popup-btn smpp-popup-confirm";
       confirmButton.textContent = options.confirmText;
-      buttons.append(cancelButton, confirmButton);
+      if (!options.hideCancel) buttons.appendChild(cancelButton);
+      buttons.appendChild(confirmButton);
       card.appendChild(buttons);
       overlay.appendChild(card);
       document.body.appendChild(overlay);
@@ -16023,7 +16024,8 @@ ${code}`;
           void showPopup({
             title: "Focus session complete",
             message: "Great work! Your focus session has ended. All blocked features are available again.",
-            confirmText: "Done"
+            confirmText: "Done",
+            hideCancel: true
           });
         } else {
           localStorage.removeItem("pomoEndTime");

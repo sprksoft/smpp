@@ -150,6 +150,11 @@
   scale: 0.95;
 }
 
+.smpp-popup-btn:only-child {
+  flex: 0 1 auto;
+  min-width: 12rem;
+}
+
 .smpp-popup-cancel:hover {
   background-color: var(--color-base02);
   border-color: var(--color-base03);

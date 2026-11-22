@@ -41,6 +41,7 @@ export function initPomodoroBlock(): void {
           message:
             "Great work! Your focus session has ended. All blocked features are available again.",
           confirmText: "Done",
+          hideCancel: true,
         });
       } else {
         localStorage.removeItem("pomoEndTime");

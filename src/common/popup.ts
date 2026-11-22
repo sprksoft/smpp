@@ -4,6 +4,7 @@ export interface PopupOptions {
   confirmText: string;
   cancelText?: string;
   checkboxLabel?: string;
+  hideCancel?: boolean;
 }
 
 export interface PopupResult {
@@ -63,7 +64,8 @@ export function showPopup(options: PopupOptions): Promise<PopupResult> {
     confirmButton.className = "smpp-popup-btn smpp-popup-confirm";
     confirmButton.textContent = options.confirmText;
 
-    buttons.append(cancelButton, confirmButton);
+    if (!options.hideCancel) buttons.appendChild(cancelButton);
+    buttons.appendChild(confirmButton);
     card.appendChild(buttons);
     overlay.appendChild(card);
     document.body.appendChild(overlay);
