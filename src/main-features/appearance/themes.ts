@@ -480,7 +480,6 @@ export class ThemeTile extends Tile {
     buttonContainer.appendChild(duplicateButton);
     buttonContainer.appendChild(favoriteButton);
     if (this.isCustom) {
-      buttonContainer.appendChild(this.createExportButton());
       let editButton = document.createElement("button");
       editButton.classList.add("bottom-container-button");
       editButton.innerHTML = editIconSvg;
