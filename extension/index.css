@@ -7256,6 +7256,44 @@ body:has(.view_lpath_left_parts) .smpp-background-image-container {
   height: 100% !important;
   z-index: -1 !important;
 }
+#show-grid {
+  width: 100% !important;
+  aspect-ratio: 1 / 1 !important;
+  height: auto !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+  background: var(--color-base01) !important;
+  background-image: none !important;
+  border: 2px solid var(--color-base02) !important;
+  border-radius: 1rem !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+.glass #show-grid {
+  background: var(--color-base01) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+#show-grid:hover {
+  background: var(--color-base02) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+#show-grid-icon {
+  width: 24px !important;
+  height: 24px !important;
+  margin: 0 !important;
+  object-fit: contain;
+}
+#show-grid-label {
+  display: none !important;
+}
 
 /* src/styles/fixes/login.css */
 html {
