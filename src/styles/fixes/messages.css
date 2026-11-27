@@ -188,6 +188,10 @@ body.modern-ui .homepage__block {
   justify-content: center !important;
 }
 
+body:has(> #smscleftnav) > #smscMain.showLeftNav {
+  height: auto !important;
+}
+
 #smscMain:has(.studentInfo) {
   flex-direction: column !important;
 }

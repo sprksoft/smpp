@@ -7249,6 +7249,7 @@ span.empty-state__label.js-empty-state-label {
   backdrop-filter: var(--medium-blur) !important;
   background-color: var(--darken-background) !important;
 }
+body:has(> #smscleftnav):has(> #smscMain.showLeftNav) > .smpp-background-image-container,
 body:has(.view_lpath_left_parts) .smpp-background-image-container {
   position: fixed !important;
   inset: 0 !important;
@@ -7669,6 +7670,9 @@ body.modern-ui .homepage__block {
   display: flex !important;
   flex-direction: row !important;
   justify-content: center !important;
+}
+body:has(> #smscleftnav) > #smscMain.showLeftNav {
+  height: auto !important;
 }
 #smscMain:has(.studentInfo) {
   flex-direction: column !important;

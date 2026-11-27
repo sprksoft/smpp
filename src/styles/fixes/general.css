@@ -2884,6 +2884,7 @@ span.empty-state__label.js-empty-state-label {
   background-color: var(--darken-background) !important;
 }
 
+body:has(> #smscleftnav):has(> #smscMain.showLeftNav) > .smpp-background-image-container,
 body:has(.view_lpath_left_parts) .smpp-background-image-container {
   position: fixed !important;
   inset: 0 !important;
