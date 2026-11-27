@@ -5918,6 +5918,12 @@ Is it scaring you off?`,
           if (randomThemeButton) {
             randomThemeButton.checked = settings.appearance.randomTheme;
           }
+          const randomThemeIntervalSection = document.getElementById(
+            "settings-page-random-theme-interval-section"
+          );
+          if (randomThemeIntervalSection) {
+            randomThemeIntervalSection.style.display = settings.appearance.randomTheme ? "" : "none";
+          }
           const randomThemeInterval = settings.appearance.randomThemeInterval ?? "day";
           const randomThemeIntervalInput = document.querySelector(
             `input[name="settings-page-random-background-interval"][value="${randomThemeInterval}"]`
@@ -6590,20 +6596,26 @@ Is it scaring you off?`,
           this.settingsPage.appendChild(
             createDescription("Choose a random built-in theme.")
           );
-          this.settingsPage.appendChild(
-            createSettingsButtonWithLabel(
-              "settings-page-random-theme-button",
-              "Random theme"
-            )
+          const randomThemeButton = createSettingsButtonWithLabel(
+            "settings-page-random-theme-button",
+            "Random theme"
           );
-          this.settingsPage.appendChild(
+          this.settingsPage.appendChild(randomThemeButton);
+          let randomThemeIntervalSection = document.createElement("div");
+          randomThemeIntervalSection.id = "settings-page-random-theme-interval-section";
+          randomThemeIntervalSection.style.display = "none";
+          randomThemeIntervalSection.appendChild(
             createSectionTitle("Random theme interval")
           );
-          this.settingsPage.appendChild(
-            createDescription(
-              "Choose how often the random theme changes."
-            )
+          randomThemeIntervalSection.appendChild(
+            createDescription("Choose how often the random theme changes.")
           );
+          const randomThemeInput = randomThemeButton.querySelector(
+            "input"
+          );
+          randomThemeInput?.addEventListener("change", () => {
+            randomThemeIntervalSection.style.display = randomThemeInput.checked ? "" : "none";
+          });
           let randomThemeIntervalContainer = document.createElement("div");
           randomThemeIntervalContainer.classList.add(
             "settings-page-icons-container",
@@ -6631,7 +6643,8 @@ Is it scaring you off?`,
             optionLabel.appendChild(text);
             randomThemeIntervalContainer.appendChild(optionLabel);
           });
-          this.settingsPage.appendChild(randomThemeIntervalContainer);
+          randomThemeIntervalSection.appendChild(randomThemeIntervalContainer);
+          this.settingsPage.appendChild(randomThemeIntervalSection);
           this.settingsPage.appendChild(createSectionTitle("Glass"));
           this.settingsPage.appendChild(
             createDescription("Apply a glassy effect to the UI.")
